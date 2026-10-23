@@ -213,3 +213,58 @@ def test_a_closed_form_no_route_here_certifies_is_refused() -> None:
     assert bound is not None
     with pytest.raises(exact.ExactSideError):
         exact.of_bound(bound)
+
+
+def test_an_algebraic_side_is_written_as_its_root_form_and_read_back_exactly() -> None:
+    """think-ot5c (#660 review A1): the house writer states an algebraic house in both lanes
+    as `form` writes it, its minimal polynomial in `s` as the register writes one and an
+    interval cut at forty places in which it is the one root; `read_form`, the selection's
+    `parse_case` and the layer's `verified_bound` read it back as that side."""
+    assert exact.polynomial_text((9, -96, 206)) == "9s^2-96s+206"
+    assert exact.polynomial_text((1, 0, -2)) == "s^2-2"
+    assert exact.polynomial_text((-1, 0, 2)) == "-s^2+2"
+    long = (4775, -190430, *([0] * 9), 1, -1)
+    assert exact.polynomial_text(long) == "4775s^{12}-190430s^{11}+s-1"
+    assert exact.read_polynomial("4775s^{12}-190430s^{11}+s-1=0") == long
+    assert exact.read_polynomial("s^8 - 20s^7 + 178s^6") == (1, -20, 178, 0, 0, 0, 0, 0, 0)
+    root = exact.algebraic([9, -96, 206], (Fraction(7), Fraction(8)))  # (16 + 5 sqrt 2)/3
+    assert isinstance(root, exact.Algebraic)
+    form = exact.form(root)
+    assert form == (
+        "root(9s^2-96s+206, 7.6903559372884917480028145403494967976161, "
+        "7.6903559372884917480028145403494967976162)"
+    )
+    assert exact.read_form(form) == root
+    bound = regularize_evand.verified_bound(
+        {"verified_upper_bound": exact.ceiling(root, 16), "exact_form": form}
+    )
+    assert bound is not None
+    assert bound.unread is None
+    assert bound.polynomial == (9, -96, 206)
+    assert exact.of_bound(bound) == root
+    assert bound.compare(Fraction(769, 100)) == -1
+    assert bound.compare(Fraction(77, 10)) == 1
+    # Another `root(` form, as n = 11's names its polynomial, is not this one, and stays
+    # unread as before.
+    assert exact.read_form("root(P_trump11, 3.877)") is None
+    assert exact.read_form("3 + 4 sqrt(2)") is None
+
+
+def test_a_root_form_that_states_no_isolated_irreducible_root_is_refused() -> None:
+    """A written form whose polynomial is reducible, whose interval holds no root or two,
+    or that states a rational, is no exact side: the reader refuses it and the layer reads
+    the bound as unread, so no comparison rests on it."""
+    for form in (
+        "root(s^2-4, 1, 3)",  # (s - 2)(s + 2)
+        "root(s^2-2, 2, 3)",  # no root there
+        "root(s^2-3s+1, 0, 3)",  # two
+        "root(2s-3, 1, 2)",  # the rational 3/2
+    ):
+        with pytest.raises(exact.ExactSideError):
+            exact.read_form(form)
+        bound = regularize_evand.verified_bound(
+            {"verified_upper_bound": "1.5", "exact_form": form}
+        )
+        assert bound is not None
+        assert bound.unread is not None, form
+        assert exact.of_bound(bound) is None

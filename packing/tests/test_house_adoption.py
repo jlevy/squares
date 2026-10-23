@@ -185,6 +185,14 @@ T193_BELOW_T186 = (175, 204, 232, 302)
 #: Daniel's view of that packing (T-225), 1.39e-9 lower still, and that of 23 October 2026
 #: to Mykhailo Polkovskyi's re-solve of that view (T-229), 1.01e-8 lower again.
 OVERTAKEN = {204: "T-229"}
+#: The algebraic houses the pass of 23 October 2026 adopted once the writer wrote an
+#: algebraic side (think-ot5c): PR #574's at 70, 153 and 207 (T-174), and issue 639's exact
+#: forms at the six counts whose forms the packet retains and that owe no correction
+#: (T-193). T-193's other eight wait for think-8ido, and 267 for its pinned-only form.
+ALGEBRAIC_ADOPTED = {
+    70: "T-174", 153: "T-174", 207: "T-174",
+    102: "T-193", 123: "T-193", 258: "T-193", 259: "T-193", 295: "T-193", 302: "T-193",
+}  # fmt: skip
 
 
 def test_the_records_of_the_lifted_hold_keep_their_next_candidates_until_adopted(
@@ -222,11 +230,13 @@ def test_the_records_of_the_lifted_hold_keep_their_next_candidates_until_adopted
     # certificates (T-197, T-218), below T-174's, so the hold decides neither; 47 since
     # the adoption of 20 October 2026 moved 308 to his issue-689 certificate (T-221), and
     # 46 since the adoption of 21 October 2026 moved 270 to his issue-703 one (T-224), and
-    # 45 since the adoption of 23 October 2026 moved 105 to issue 719's re-solve (T-229).
-    assert len(held_counts) == 45
+    # 45 since the adoption of 23 October 2026 moved 105 to issue 719's re-solve (T-229);
+    # 40 since the same pass moved 102, 123, 258, 259 and 295 to issue 639's exact forms
+    # (T-193), below T-174's sides there, once the writer wrote an algebraic side.
+    assert len(held_counts) == 40
     previous_t174 = {n for n in previous if houses.ADOPTED[n] == "T-174"}
     assert held_counts | {70, 153, 207} | set(T193_BELOW_T186) == (
-        set(select.PENDING_ADOPTION) | previous_t174 | set(OVERTAKEN)
+        set(select.PENDING_ADOPTION) | previous_t174 | set(OVERTAKEN) | set(ALGEBRAIC_ADOPTED)
     )
     assert {n: houses.ADOPTED[n] for n in OVERTAKEN} == OVERTAKEN
     assert {n: houses.ADOPTED[n] for n in previous if n not in previous_t174} == {
@@ -266,8 +276,10 @@ def test_regularizations_leave_the_packing_with_its_finder(
     }
     # T-188's 211 is another arrangement of Ostashev's design, no refinement (RT-1 of the
     # 16 October review), so it regularizes nothing.
+    # T-174's algebraic certificate at 70, adopted on 23 October 2026, tightens T-146's
+    # regularization of Ryan Xu's packing, which itself regularized T-125's.
     assert {n: house.regularizes for n, house in houses_at.items()} == {
-        70: "T-125",
+        70: "T-146",
         103: "T-146",
         211: None,
         241: "T-181",
@@ -496,23 +508,34 @@ def test_an_algebraic_certificate_is_a_candidate_ordered_exactly(
 ) -> None:
     """PR #574's sides at 70, 153, 207 and 302 are roots of integer polynomials, decided on
     one exact route, which is what stage 4 asks. Each is a candidate, held by its minimal
-    polynomial and ordered exactly: below its case at 70, 153 and 207, where it is the
-    house, staged, and above it at 302. The records of 15 October left them out (RP-3)."""
+    polynomial and ordered exactly: the house at 70, 153 and 207, adopted on 23 October
+    2026, and above issue 639's exact form (T-193) at 302. The records of 15 October left
+    them out (RP-3), and the rule of 15 October replays them so from those records."""
     key = "[PingYou PR 574 certificates 2026-10-13]"
     counts = select.algebraic_counts(key)
     assert {70, 153, 207, 302} <= counts
     assert not {68, 105, 211, 304} & counts
     assert select.algebraic_counts("[Couzo certificates 2026-10-13]") == frozenset()
     found = select.candidates(select.load_results(), select.load_evidence())
+    archive = adopt.read_pass("2026-10-23")
+    counts = (70, 153, 207, 302)
+    replayed = select.select(
+        cases={m: s.case for m, s in recorded.items()}
+        | {n: select.parse_case(n, archive[n]) for n in counts},
+        recorded=dict.fromkeys(counts, "2026-10-15"),
+    )
     for n, degree in ((70, 5), (153, 7), (207, 5), (302, 3)):
         (t174,) = [c for c in found[n] if c.result == "T-174"]
         assert t174.algebraic
         assert isinstance(t174.side, select.exact_sides.Algebraic)
         assert t174.side.degree == degree
-        below = t174.side < select.load_case(n).verified
-        assert below == (n != 302), n
-        assert recorded[n].algebraic == (("T-174", key),)
-        assert all(not c.algebraic for c in recorded[n].candidates)
+        assert (houses.ADOPTED[n] == "T-174") == (n != 302), n
+        assert (houses.side(n) == t174.side) == (n != 302), n
+        assert t174.side >= select.load_case(n).verified, n
+        # The record each was adopted from, as the rule of 15 October wrote it.
+        assert replayed[n].algebraic == (("T-174", key),), n
+        assert all(not c.algebraic for c in replayed[n].candidates), n
+        assert recorded[n].algebraic == (), n
 
 
 def test_a_staged_count_passes_the_check_and_a_stale_or_unstaged_one_fails(
@@ -669,9 +692,14 @@ def test_sizes_measure_a_staged_witness_as_git_stores_it(
     assert 0 < row.stored < row.checkout
     assert row.now_checkout == len(data) == row.checkout
     assert row.now_stored == houses.stored_size(data)
-    assert houses.staged_sizes([70]) == (
+    assert houses.staged_sizes([267]) == (
         [],
-        ["n=70: T-174's side is algebraic; no writer takes it yet"],
+        [
+            (
+                "n=267: T-193's side is algebraic, and no derived number-field fact and "
+                "receipt hold it here, so no writer takes it yet"
+            )
+        ],
     )
     with pytest.raises(houses.HouseError, match="only counts staged"):
         houses.staged_sizes([5])
@@ -682,6 +710,108 @@ def test_sizes_measure_a_staged_witness_as_git_stores_it(
     stored = houses.stored_size(data)
     assert f"{row.stored / 1e6:.2f} MB as Git stores them, which history keeps" in total
     assert f"the tree's blobs by {(row.stored - stored) / 1e6:.2f} MB" in total
+
+
+def test_an_algebraic_house_is_written_exactly_in_both_lanes_and_read_back_as_its_side(
+    selections: dict[int, select.Selection],
+) -> None:
+    """think-ot5c (review A1 of #660): the writer states an algebraic house in both lanes as
+    the one root of its minimal polynomial in an interval (`exact_sides.form`), with its
+    degree and polynomial in the reported lane as the register writes them, and the value
+    the side rounded up. `select_houses.parse_case` and the layer's `verified_bound` read
+    each record back as the house's own side, so the selection moves nothing there and
+    `adopt_houses --check` holds the lanes to the side the witness rebuilds."""
+    for n, result in ALGEBRAIC_ADOPTED.items():
+        side = houses.side(n)
+        assert isinstance(side, select.exact_sides.Algebraic), n
+        packing = _front(select.case_path(n).read_text(encoding="utf-8"))
+        reported, verified = packing["reported_upper_bound"], packing["verified_upper_bound"]
+        assert reported["exact_form"] == verified["exact_form"] == adopt.exact_form(side), n
+        assert reported["exact_form"].startswith("root("), n
+        assert reported["algebraic_degree"] == side.degree, n
+        assert reported["minimal_polynomial"] == (
+            select.exact_sides.polynomial_text(side.polynomial) + "=0"
+        ), n
+        assert adopt.form_side(verified["exact_form"]) == side, n
+        assert adopt.printed_at(verified["value"], side), n
+        assert Fraction(verified["value"]) > side, n
+        case = select.load_case(n)
+        assert case.exact, n
+        assert case.verified == side, n
+        from devtools import regularize_evand  # noqa: PLC0415 -- the layer's driver
+
+        held = regularize_evand.verified_bound(
+            {"verified_upper_bound": verified["value"], "exact_form": verified["exact_form"]}
+        )
+        assert held is not None, n
+        assert held.unread is None, n
+        assert select.exact_sides.of_bound(held) == side, n
+        assert selections[n].house is None, n
+        assert reported["source_key"] == houses.source_for(n).key, n
+        assert houses.ADOPTED[n] == result, n
+    assert all(not problem.startswith(f"n={n}:") for problem in adopt.check()
+               for n in ALGEBRAIC_ADOPTED)  # fmt: skip
+
+
+def test_an_algebraic_house_is_its_number_field_fact_with_its_jobs_over_the_field() -> None:
+    """Each algebraic house's witness is its packet's derived number-field fact under the
+    house's id, with the native result of its positive job over the field as an
+    `exact-number-field-sat` certificate, as n = 51's is; the jobs' receipt is held to the
+    fact, and a late change to either is refused (`upper_bound_houses.worker_custody`).
+    Issue 639's facts are what `algebraic_witness_reports derive-forms` writes from the
+    retained forms, whose squares' bases it computes in the field."""
+    from devtools import algebraic_witness_reports as fields  # noqa: PLC0415
+
+    for n in ALGEBRAIC_ADOPTED:
+        witness = houses.expected_house(n)
+        assert witness["scalar"]["kind"] == "algebraic-number-field", n
+        assert witness["certificate"]["kind"] == "exact-number-field-sat", n
+        assert witness["certificate"]["result"]["verification_passed"] is True, n
+        assert witness["certificate"]["result"]["id"] == f"W-known-best-n{n:03d}", n
+        assert witness["claim"]["coordinate_provenance"] == "verified", n
+        assert select.exact_sides.of_field_element(fields.side_of(witness)) == houses.side(n)
+    houses.check_houses(sorted(ALGEBRAIC_ADOPTED))
+    packet = houses.sources()["T-193"].packet
+    rows = fields.derive_forms(packet, check=True)
+    assert [row.stored for row in rows] == [
+        f"facts/alg-n-{n:03d}.yaml.gz" for n in houses.FIELD_COUNTS["T-193"]
+    ]
+    assert set(houses.FIELD_COUNTS["T-193"]) == {
+        n for n, result in ALGEBRAIC_ADOPTED.items() if result == "T-193"
+    }
+    assert set(houses.FIELD_COUNTS["T-174"]) == {
+        n for n, result in ALGEBRAIC_ADOPTED.items() if result == "T-174"
+    }
+    inputs = set(houses.private_input_paths())
+    assert set(controls.COPY_SEPARATELY) >= inputs
+    for n in ALGEBRAIC_ADOPTED:
+        source = houses.source_for(n)
+        assert source.stored(n) in inputs, n
+        assert source.receipt(n) in inputs, n
+
+
+def test_a_form_of_another_count_field_or_roster_is_refused() -> None:
+    """The form reader refuses a form of another count, of another field degree or with a
+    square too few, and reads the retained one, bound to the digest its manifest pins."""
+    from devtools import algebraic_witness_reports as fields  # noqa: PLC0415
+
+    packet = houses.sources()["T-193"].packet
+    declaration = fields.load_declaration(packet)
+    row = next(row for row in declaration["witnesses"] if row["n"] == 102)
+    raw = fields._retained_form(packet, fields.reports.acquisition(packet), row)  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+    geometry = fields.evand_minpoly_geometry(raw, row)
+    assert len(geometry["squares"]) == 102
+    data = json.loads(gzip.decompress(raw))
+    for mutate, message in (
+        (lambda form: form.update(n=103), "not this count's"),
+        (lambda form: form["field"]["f"].append(1), "not of degree"),
+        (lambda form: form["squares"].pop(), "lists 101 squares"),
+    ):
+        changed = json.loads(json.dumps(data))
+        mutate(changed)
+        with pytest.raises(fields.ReportError, match=message):
+            fields.evand_minpoly_geometry(gzip.compress(json.dumps(changed).encode()), row)
+    assert hashlib.sha256(raw).hexdigest() == fields._pinned_digest(packet, row["path"])  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
 
 
 #: Words the records wrote while an adoption waited for the owner, and the 15 October
@@ -969,8 +1099,10 @@ def test_unread_pending_reports_every_improvement_whatever_would_defer_it(
         for deferral in citations.load_deferrals()
         for result in cast("list[object]", deferral["results"])
     }
-    # Entries the real deferral file names are among them, as T-193 would be on #658.
-    assert "T-174" in deferred & set(identifiers)
+    # The real deferral file named T-174's algebraic evidence until the adoption of 23
+    # October 2026 cited it (think-ot5c), and names no eligible entry now; every eligible
+    # entry is reported all the same, whatever a deferral would exempt.
+    assert not deferred & set(identifiers)
     assert select.unread_pending(identifiers) == {
         identifier: [69] for identifier in identifiers
     }
@@ -1054,8 +1186,9 @@ def test_t193_is_read_exactly_and_staged_as_the_house_at_all_sixteen_counts(
     which the house rule allows no more. Its source now has a reader, so T-193 is a
     candidate, read exactly at each count to the 40 places its claim prints, the smallest
     at all sixteen until issue 678's certificate (T-223), validated on 20 October 2026, took
-    204 below it, and staged for the writer at the other fifteen, which cannot write an
-    algebraic side yet."""
+    204 below it. The pass of 23 October 2026 adopted it at the six counts whose forms the
+    packet derives as number-field facts, once the writer wrote an algebraic side, and the
+    other nine stay staged for the writer, which has no fact of them to write."""
     key = "[Daniel exact current records 2026-10-16]"
     assert select.ALGEBRAIC_READERS[key] is select.evand_exact_side
     entry = next(entry for entry in select.load_results() if entry["id"] == "T-193")
@@ -1077,6 +1210,13 @@ def test_t193_is_read_exactly_and_staged_as_the_house_at_all_sixteen_counts(
             assert selections[n].house is None, n
             assert houses.ADOPTED[n] == OVERTAKEN[n], n
             assert houses.side(n) < side, n
+            assert n not in select.PENDING_ADOPTION, n
+            continue
+        if n in ALGEBRAIC_ADOPTED:
+            assert selections[n].house is None, n
+            assert (houses.ADOPTED[n], houses.adopted_on(n)) == ("T-193", "2026-10-23"), n
+            assert houses.algebraic(n), n
+            assert houses.side(n) == side, n
             assert n not in select.PENDING_ADOPTION, n
             continue
         house = selections[n].house
@@ -1112,16 +1252,18 @@ def test_a_held_count_restaged_for_a_smaller_house_names_it_and_becomes_history(
         "to T-193’s side, below T-174’s, once the writer takes an algebraic side."
     )
     assert adopt._keeps_until(88, "T-174", "its house") == sentence  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
-    # A count staged for its own held house names that house's adoption: 70, under the
-    # writer's bead, since the adoption of 19 October 2026 took 236, the last rational
-    # count staged for T-174, to issue 659's certificate (T-218).
+    # A count no adoption is staged at names its held house's own adoption: 70, since the
+    # pass of 23 October 2026 adopted T-174's algebraic side there.
     assert adopt._keeps_until(70, "T-174", "its house") == (  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
-        "The case keeps its house until T-174’s adoption, staged under think-ot5c, moves it "
-        "to T-174’s side."
+        "The case keeps its house until T-174’s adoption moves it to T-174’s side."
     )
     tail = sentence.split(" until ", 1)[1]
-    for n in sorted(set(T193_COUNTS) - set(T193_BELOW_T186)):
+    staged = set(T193_COUNTS) - set(T193_BELOW_T186) - set(ALGEBRAIC_ADOPTED)
+    for n in sorted(staged):
         assert tail in _flat(select.case_path(n).read_text(encoding="utf-8")), n
+    # Where the pass of 23 October 2026 adopted T-193, the sentence is history.
+    for n in sorted(set(T193_COUNTS) & set(ALGEBRAIC_ADOPTED)):
+        assert tail not in _flat(select.case_path(n).read_text(encoding="utf-8")), n
     lead = "T-174 at $1$, `1e-19` below this house, is confirmed here"
     history = f"{lead}. {adopt.lifted_sentence('T-174')}"
     wrapped = f"{history} {sentence.replace('its house', 'this house')}".replace(
@@ -1146,6 +1288,12 @@ def test_every_staged_count_names_its_house_and_bead_in_its_record() -> None:
     review = "../../docs/project/reviews/review-2026-10-16-evand-exact-sides-639.md"
     for n in T193_COUNTS:
         text = _flat(select.case_path(n).read_text(encoding="utf-8"))
+        if n in ALGEBRAIC_ADOPTED:
+            # Adopted: the section of the house says what T-193 is and who accepted it.
+            assert "## Evan Daniel’s certificate (T-193)" in text, n
+            assert "at an exact algebraic side, the one root of a degree-" in text, n
+            assert f"The [review of 16 October 2026]({review}) accepted" in text, n
+            continue
         assert "T-193’s exact algebraic side at this count, a root of a degree-" in text, n
         assert f"accepted by the [review of 16 October 2026]({review})" in text, n
 
@@ -1158,7 +1306,13 @@ def test_an_algebraic_sentence_at_a_count_restaged_for_a_smaller_house_names_it(
     staged for another house, the sentence names that house's adoption and its bead."""
     staged = select.Pending(house="T-900", bead="think-test", why=select.NO_WRITER)
     monkeypatch.setitem(select.PENDING_ADOPTION, 70, staged)
-    (sentence,) = adopt.algebraic_sentences(recorded[70], houses.side(70))
+    # 70's record as the rule of 15 October wrote it, before the pass of 23 October 2026
+    # adopted T-174's algebraic side there.
+    before = select.parse_case(70, adopt.read_pass("2026-10-23")[70])
+    cases = {n: s.case for n, s in recorded.items()} | {70: before}
+    replayed = select.select(cases=cases, recorded={70: "2026-10-15"})
+    assert isinstance(before.verified, Fraction)
+    (sentence,) = adopt.algebraic_sentences(replayed[70], before.verified)
     assert sentence.startswith("T-174’s algebraic certificate at this count")
     assert "house rule of 16 October 2026 ended that wait." in sentence
     assert sentence.endswith(
@@ -1201,9 +1355,10 @@ def test_the_writer_never_writes_the_uncorrected_of(
     """Review B1 of #658: the writer takes a house's credit from its regularization item,
     so it must refuse T-193 where the item names the refuted `of`, even once the pull
     request that adopts T-193 has taken its counts off `PENDING_ADOPTION`. This fails if
-    the writer would write the uncorrected `of` at any of the nine counts; where the item
-    stands (102) the writer's only refusal is its algebraic one, and once the item is
-    corrected the correction no longer refuses and `--check` asks for its removal."""
+    the writer would write the uncorrected `of` at any of the nine counts; where no
+    correction is owed (267) the writer's only refusal is that no number-field fact holds
+    the house, and once the item is corrected the correction no longer refuses and
+    `--check` asks for its removal."""
     monkeypatch.setattr(
         select,
         "PENDING_ADOPTION",
@@ -1212,8 +1367,8 @@ def test_the_writer_never_writes_the_uncorrected_of(
     for n, owed in select.CORRECTIONS_OWED.items():
         with pytest.raises(adopt.AdoptionError, match=f"names {owed.named} .*think-8ido"):
             adopt.plan({n: selections[n]})
-    with pytest.raises(adopt.AdoptionError, match="algebraic side"):
-        adopt.plan({102: selections[102]})
+    with pytest.raises(adopt.AdoptionError, match="no derived number-field fact"):
+        adopt.plan({267: selections[267]})
     house = selections[88].house
     assert house is not None
     corrected = dataclasses.replace(
@@ -1300,7 +1455,7 @@ def test_a_reader_makes_an_unread_source_a_candidate_and_the_writer_waits_for_it
     monkeypatch.setattr(select, "PENDING_ADOPTION", {69: staged})
     assert select.check(selected) == []
     assert adopt.plan(selected) == []
-    with pytest.raises(adopt.AdoptionError, match="states rational sides"):
+    with pytest.raises(adopt.AdoptionError, match="quoted rational sides"):
         adopt.rational(side)
     assert adopt.rational(Fraction(5, 2)) == Fraction(5, 2)
     shown = adopt.display(side)
@@ -1338,19 +1493,26 @@ def test_the_staged_adoptions_name_their_beads_and_reasons() -> None:
     October 2026 took 105 to issue 719's."""
     for n, pending in select.PENDING_ADOPTION.items():
         assert pending.why in select.STAGING_REASONS, n
-        algebraic = n in (70, 153, 207) or pending.house == "T-193"
+        algebraic = pending.house == "T-193"
         assert (pending.bead, pending.why) == (
             (select.WRITER_BEAD, select.NO_WRITER)
             if algebraic
             else (select.ADOPTION_BEAD, select.NEXT_PULL_REQUEST)
         ), n
     assert "think-sa5r" not in {pending.bead for pending in select.PENDING_ADOPTION.values()}
-    adopted = set(houses.numbers_of("T-174"))
+    adopted = set(houses.numbers_of("T-174")) - set(ALGEBRAIC_ADOPTED)
     assert adopted == {
         n for n in houses.LATER_PASSES["2026-10-17"] if houses.ADOPTED[n] == "T-174"
     }
     assert len(adopted) == 33
     assert not adopted & set(select.PENDING_ADOPTION)
+    # The pass of 23 October 2026 took the writer's twelve off once it wrote an algebraic
+    # side, at the nine counts a derived number-field fact holds (think-ot5c).
+    assert {n: houses.ADOPTED[n] for n in ALGEBRAIC_ADOPTED} == ALGEBRAIC_ADOPTED
+    assert all(houses.algebraic(n) for n in ALGEBRAIC_ADOPTED)
+    assert set(ALGEBRAIC_ADOPTED) <= houses.LATER_PASSES["2026-10-23"]
+    assert not set(ALGEBRAIC_ADOPTED) & set(select.PENDING_ADOPTION)
+    assert sorted(select.PENDING_ADOPTION) == [88, 126, 175, 199, 232, 266, 267, 292, 301]
 
 
 def test_the_retained_integration_diagnostic_keeps_its_executed_bytes() -> None:

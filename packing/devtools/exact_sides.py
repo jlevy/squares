@@ -20,6 +20,15 @@ rational point:
 - two with different polynomials are different numbers, irreducible polynomials sharing no
   root, and bisecting one interval until the other side falls outside it orders them.
 
+A case record writes an algebraic side as `form` gives it, `root(p, low, high)`: `p` its
+minimal polynomial in `s`, highest degree first, as the register writes a
+`minimal_polynomial` (`polynomial_text`), and `low` and `high` the side cut and rounded up
+at forty places, a rational interval in which it is `p`'s one root. `read_form` reads it
+back exactly, holding it to that as `algebraic` does, so the house writer's exact form of
+an algebraic house is what `select_houses` and the regularized layer order it by
+(`regularize_evand.verified_bound`). A `root(` form that names its polynomial instead, as n
+= 11's `root(P_trump11, ...)` does, is not this form, and `read_form` leaves it unread.
+
 `of_field_element` reads an element of a number field, as an algebraic witness states its
 side, by its minimal polynomial: the square-free part of its characteristic polynomial.
 That polynomial is irreducible by construction, the field's own having been decided so, and
@@ -40,8 +49,10 @@ from __future__ import annotations
 import copy
 import itertools
 import math
+import re
 from collections.abc import Sequence
 from dataclasses import dataclass
+from decimal import Decimal
 from fractions import Fraction
 from functools import cache
 from typing import TYPE_CHECKING
@@ -318,6 +329,104 @@ def literal(side: Side) -> str:
         return str(side)
     coefficients = ", ".join(str(value) for value in side.polynomial)
     return f"root of [{coefficients}] in ({side.low}, {side.high})"
+
+
+#: The places an algebraic side's written interval is cut at: forty, as the register prints
+#: such a side (T-193's claim), doubled wherever forty do not isolate the root.
+FORM_PLACES = 40
+#: One monomial of a polynomial in `s` as the register writes it: `4775s^{18}`, `-96s`,
+#: `+206` (`devtools.intake_ledger.polynomial` reads the same).
+_MONOMIAL = re.compile(r"([+-]?)([0-9]*)(s(?:\^\{?([0-9]+)\}?)?)?")
+_DECIMAL = r"[0-9]+(?:\.[0-9]+)?"
+#: `form`'s text: the polynomial, then the interval's two ends as decimals.
+_ROOT_FORM = re.compile(
+    rf"root\((?P<polynomial>[0-9s^{{}}+\- ]+),\s*(?P<low>{_DECIMAL}),\s*(?P<high>{_DECIMAL})\)"
+)
+
+
+def polynomial_text(polynomial: Sequence[int]) -> str:
+    """An integer polynomial, highest degree first, as the register writes a minimal
+    polynomial in `s`: ``9s^2-96s+206``, an exponent of two digits or more in braces,
+    ``4775s^{18}``."""
+    degree = len(polynomial) - 1
+    terms = []
+    for index, coefficient in enumerate(polynomial):
+        if coefficient == 0:
+            continue
+        power = degree - index
+        sign = "-" if coefficient < 0 else ("+" if terms else "")
+        magnitude = "" if abs(coefficient) == 1 and power else str(abs(coefficient))
+        variable = "" if power == 0 else "s" if power == 1 else f"s^{power}"
+        if power >= 10:
+            variable = f"s^{{{power}}}"
+        terms.append(f"{sign}{magnitude}{variable}")
+    if not terms:
+        raise ExactSideError("the zero polynomial has no written form")
+    return "".join(terms)
+
+
+def read_polynomial(text: str) -> tuple[int, ...]:
+    """The integer coefficients, highest degree first, of a polynomial `polynomial_text`
+    writes, with or without spaces and a closing ``=0``."""
+    written = text.split("=", 1)[0].replace(" ", "")
+    coefficients: dict[int, int] = {}
+    position = 0
+    while position < len(written):
+        match = _MONOMIAL.match(written, position)
+        if match is None or match.end() == position:
+            raise ExactSideError(f"not a polynomial in s: {text!r}")
+        sign = -1 if match.group(1) == "-" else 1
+        if match.group(3):
+            power, coefficient = int(match.group(4) or 1), int(match.group(2) or 1)
+        elif match.group(2):
+            power, coefficient = 0, int(match.group(2))
+        else:
+            raise ExactSideError(f"not a polynomial in s: {text!r}")
+        coefficients[power] = coefficients.get(power, 0) + sign * coefficient
+        position = match.end()
+    if not coefficients:
+        raise ExactSideError(f"not a polynomial in s: {text!r}")
+    return tuple(coefficients.get(power, 0) for power in range(max(coefficients), -1, -1))
+
+
+def _cut(value: Fraction, places: int, *, up: bool) -> str:
+    """A rational cut down, or rounded up, at `places` decimals."""
+    scaled = value * 10**places
+    whole = -(-scaled.numerator // scaled.denominator) if up else math.floor(scaled)
+    text = str(whole).rjust(places + 1, "0")
+    return f"{text[:-places]}.{text[-places:]}"
+
+
+def form(side: Algebraic) -> str:
+    """The side as a case record writes it exactly: ``root(p, low, high)``, its minimal
+    polynomial in `s` and the side cut and rounded up at `FORM_PLACES` decimals, an interval
+    in which it is the polynomial's one root, with more places where forty do not isolate
+    it. `read_form` reads it back as this side."""
+    places = FORM_PLACES
+    for _step in range(8):
+        low, high = enclosure(side, Fraction(1, 10 ** (places + 2)))
+        below, above = _cut(low, places, up=False), _cut(high, places, up=True)
+        ends = Fraction(Decimal(below)), Fraction(Decimal(above))
+        if ends[0] < ends[1] and _isolated(side.polynomial, *ends):
+            return f"root({polynomial_text(side.polynomial)}, {below}, {above})"
+        places *= 2
+    raise ExactSideError(f"no decimal interval isolates {literal(side)}")
+
+
+def read_form(text: str) -> Side | None:
+    """The side a `form` text states, held as `algebraic` holds one: an irreducible
+    polynomial with exactly one root in the interval. None where the text is not that form,
+    such as a closed form or a `root(` form that names its polynomial; a text of the form
+    that does not state such a root is refused (`ExactSideError`)."""
+    match = _ROOT_FORM.fullmatch(text.strip())
+    if match is None:
+        return None
+    polynomial = read_polynomial(match.group("polynomial"))
+    low, high = (Fraction(Decimal(match.group(end))) for end in ("low", "high"))
+    side = algebraic(polynomial, (low, high))
+    if not isinstance(side, Algebraic):
+        raise ExactSideError(f"{text!r} states a rational side, which is written as a fraction")
+    return side
 
 
 def _polynomial_divmod(
