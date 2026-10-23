@@ -7,7 +7,7 @@ from collections.abc import Iterable, Mapping
 from functools import cache
 
 from devtools.profile_records import RecordIndex, current_record_ids, load_record_index
-from devtools.site_tallies import render_tally, tally_results
+from devtools.site_tallies import TALLY_SEPARATOR, render_tally, tally_results
 
 
 @cache
@@ -54,5 +54,5 @@ def record_tally(
             f'<span class="site-record-pending" title="{html.escape(reasons, quote=True)}">'
             f"{label}</span>"
         )
-        rendered += (" · " if rendered else "") + pending_note
+        rendered += (TALLY_SEPARATOR if rendered else "") + pending_note
     return rendered
