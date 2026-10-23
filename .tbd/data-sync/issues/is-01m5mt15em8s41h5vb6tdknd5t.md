@@ -5,7 +5,7 @@ title: "Flip regularization: canonical pose stage for drawn packings (quadrant-w
 kind: feature
 status: in_progress
 priority: 2
-version: 11
+version: 12
 spec_path: docs/project/specs/active/plan-2026-10-23-flip-regularization.md
 delegate: claude-orientation-coordinator-u2p5tx
 labels: []
@@ -16,10 +16,11 @@ child_order_hints:
   - is-01m5mtn1m7bgjm1mmf7aw94q12
   - is-01m5mzk6r2extagk7j1b2vveve
   - is-01m5mzk7gtthm3xbdy8b1hggbn
+  - is-01m5n2rhapespk8a2y6yjtnq4s
 hold: null
 hold_until: null
 created_at: 2026-10-23T16:38:14.228Z
-updated_at: 2026-10-23T18:19:04.549Z
+updated_at: 2026-10-23T19:10:48.662Z
 started_at: 2026-10-23T16:38:17.920Z
 ---
 Owner request 2026-10-23: add a display-only stage to the regularization process that rotates/reflects each drawn (default) picture by one of the container's 8 symmetries so the heaviest quadrant (filled area) is upper-left and the heavier of its neighbours upper-right; deterministic tie-breaks; floating point is fine. Run it across n = 1..324, re-render the default-picture surfaces, document it in the regularization policy and process guide, PR with before/after screenshots. Workflow W7 pipeline-improvement.
