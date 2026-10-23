@@ -278,7 +278,7 @@ def inventory(directory: Path) -> tuple[list[Script], list[str]]:
         parsed.feed(page.read_text(encoding="utf-8"))
         for index, (attributes, text) in enumerate(parsed.items):
             # Data a browser reads, not a program: page data, structured data, and the
-            # speculation rules every head carries (`render_overview.SPECULATION_RULES`).
+            # speculation rules every site page carries (`render_overview.SPECULATION_RULES`).
             if attributes.get("type") in {
                 "application/json",
                 "application/ld+json",

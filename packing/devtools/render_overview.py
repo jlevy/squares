@@ -637,21 +637,21 @@ PageKind = Literal["website", "article"]
 _ISO_DATE = re.compile(r"\d{4}-\d{2}-\d{2}")
 
 #: Chromium's speculation rules, which every site page's head carries
-#: (`speculation_rules_tag`): a link to
-#: another page of the site is prerendered once a reader holds the pointer on it for about
-#: 200 ms or presses it ("moderate"), so the click swaps in a page whose layout is already
-#: done. Measured on 2026-10-22 from a click on the overview's Results link to the new page
-#: going idle: about 800 ms without it, about 110 ms with it (`think-gr4c`). Other browsers
-#: ignore the element. The site is static, so a prerender that is never used costs only
-#: the fetch and the layout; PDFs and downloads are left alone, since a prerender of a
-#: file only fetches it.
+#: (`speculation_rules_tag`): another page of the site is prerendered once a reader holds
+#: the pointer on its link for about 200 ms or presses it ("moderate"), so the click swaps
+#: in a page whose layout is already done. On a phone Chrome reads "moderate" from the
+#: viewport instead, prerendering a large link near the last tap once scrolling stops.
+#: Other browsers ignore the element, and Chromium keeps at most two such prerenders
+#: alive. Only pages are matched: the root, a directory index and `.html`, so a linked
+#: file (a PDF, the multi-megabyte poster SVGs News links) is never fetched on a hover.
+#: The site is static, so an unused prerender costs its fetch and its layout. What it
+#: saves is measured in `think-gr4c`, provisionally until `think-15b4` builds the tool.
 SPECULATION_RULES: Mapping[str, Any] = {
     "prerender": [
         {
             "where": {
                 "and": [
-                    {"href_matches": "/*"},
-                    {"not": {"href_matches": "/*.pdf"}},
+                    {"href_matches": ["/", "/*/", "/*.html"]},
                     {"not": {"selector_matches": "[download]"}},
                 ]
             },
@@ -844,7 +844,7 @@ def speculation_rules_tag() -> str:
     """
     return (
         '<script type="speculationrules">'
-        + json.dumps(SPECULATION_RULES, separators=(",", ":"))
+        + json.dumps(SPECULATION_RULES, separators=(",", ":")).replace("<", "\\u003c")
         + "</script>"
     )
 

@@ -215,15 +215,15 @@ _SPECULATION_RULES = re.compile(r'<script type="speculationrules">(.*?)</script>
 def test_every_page_prerenders_a_hovered_site_link(pages: dict[str, str]) -> None:
     """Each site page's head carries the speculation rules once (think-gr4c): Chromium
     prerenders another page of the site when a reader rests on or presses its link
-    ("moderate"), and leaves PDFs, downloads and other sites alone. The rules are read
+    ("moderate"), and leaves files, downloads and other sites alone. The rules are read
     back from the rendered head, so a page whose head is not written by `head_tags`, or an
     escape that breaks the JSON, fails here."""
     rules = render_overview.SPECULATION_RULES
     (prerender,) = rules["prerender"]
     assert prerender["eagerness"] == "moderate"
+    # Pages only, so a hover never fetches a linked file such as the 8 MB poster SVG.
     assert prerender["where"]["and"] == [
-        {"href_matches": "/*"},
-        {"not": {"href_matches": "/*.pdf"}},
+        {"href_matches": ["/", "/*/", "/*.html"]},
         {"not": {"selector_matches": "[download]"}},
     ]
     assert set(rules) == {"prerender"}, "prefetch-only or immediate rules are a new choice"
