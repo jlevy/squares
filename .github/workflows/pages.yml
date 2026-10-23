@@ -209,6 +209,7 @@ name: Certificate page
       - packing/site-changelog.schema.yaml
       - packing/devtools/render_changelog.py
       - packing/devtools/news_highlights.py
+      - packing/devtools/upper_bound_houses.py
       - packing/devtools/site_math.py
       - packing/devtools/node/render-site-math.mjs
       - packing/devtools/site_assets.py
