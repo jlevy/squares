@@ -130,6 +130,7 @@ def test_a_complete_right_aligned_triangle_has_no_problem(last: int, per: int) -
     assert atlas.layout_problems(report) == []
     found = atlas.summary(report)
     assert (found["view"], found["shown"], found["per_line"]) == ("triangle", last, per)
+    assert found["share"] is None  # this layout reports no pan
     assert found["wrapped"] == [
         k for k in range(1, atlas.row_of(last) + 1) if len(atlas.row_lines(k, per)) > 1
     ]
@@ -210,23 +211,28 @@ def test_the_views_and_their_controls_are_named_one_way() -> None:
         atlas.query_for("grid", "huge")
     # Every change `move` times is one a reader makes, and each is named once; a change
     # of size is timed in both views, and the page is put back at Medium after each.
-    named = [change for change, _, _ in atlas.CHANGES if change is not None]
-    assert len({(change, shown) for change, shown, _ in atlas.CHANGES if change}) == len(named)
-    assert {shown for _, shown, _ in atlas.CHANGES} == {100, 324}
-    sized = [change for change, _, press in atlas.CHANGES if change and "size-tab" in press]
+    # Every case shows throughout: the expander's changes went on 2026-10-23.
+    named = [change for change, _ in atlas.CHANGES if change is not None]
+    assert len(set(named)) == len(named)
+    assert not any("324" in change or "100" in change for change in named)
+    assert {press for _, press in atlas.CHANGES} == {
+        *(atlas.tab(view) for view in atlas.VIEWS),
+        *(atlas.size_tab(size) for size in atlas.SIZES),
+    }
+    sized = [change for change, press in atlas.CHANGES if change and "size-tab" in press]
     assert sized == [
         "grid, medium to large",
         "grid, large to small",
         "triangle, medium to large",
         "triangle, large to small",
     ]
-    for index, (change, _, _) in enumerate(atlas.CHANGES):
+    for index, (change, _) in enumerate(atlas.CHANGES):
         if change is not None and change.endswith("large to small"):
-            assert atlas.CHANGES[index + 1] == (
-                None,
-                atlas.CHANGES[index][1],
-                atlas.size_tab("medium"),
-            )
+            assert atlas.CHANGES[index + 1] == (None, atlas.size_tab("medium"))
+    assert atlas.automatic_query("triangle") == ""
+    assert atlas.automatic_query("grid") == "?atlas=grid"
+    with pytest.raises(ValueError, match="no view"):
+        atlas.automatic_query("pyramid")
 
 
 def test_runs_are_reported_as_their_median_and_their_most_long_tasks() -> None:
@@ -406,3 +412,15 @@ def test_ink_clearances_measure_actual_outlines_and_caption_ink_without_separato
     report["tiles"][-1]["outline"]["left"] += 20
     assert atlas.ink_clearances(report) == measured
     assert atlas.ink_clearances(_grid(4, 2)) == {}
+
+
+def test_the_share_is_how_much_of_the_widest_row_the_triangle_shows() -> None:
+    """The triangle's frame over the width it pans: the measure of the owner's rule for
+    an untouched size (`overview/atlas-view.js`, `automaticSize`). The grid has none."""
+    report = {**_triangle(324, 8), "pan": {"left": 0, "width": 2032, "viewport": 358}}
+    assert atlas.share(report) == 0.176
+    assert atlas.summary(report)["share"] == 0.176
+    whole = {**report, "pan": {"left": 0, "width": 358, "viewport": 358}}
+    assert atlas.share(whole) == 1.0
+    assert atlas.share({**report, "pan": {"left": 0, "width": 0, "viewport": 358}}) is None
+    assert atlas.share({**_grid(100, 10), "pan": report["pan"]}) is None

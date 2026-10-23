@@ -75,8 +75,7 @@ def test_original_round_trip_preserves_tiles_and_uses_current_house_drawings(
             page.request.get(f"{site}/{image.get_attribute('src')}").body()
             == (render_frontier_page.drawing_files()["atlas/house/n-88.svg"])
         )
-        # The hidden suffix must already have the chosen source when it is expanded.
-        page.locator("[data-atlas-toggle]").click()
+        # A tile far down the atlas has the chosen source too, as every case shows.
         later = page.locator('[data-atlas-n="180"] img')
         later.scroll_into_view_if_needed()
         assert later.get_attribute("src") == "atlas/house/n-180.svg"

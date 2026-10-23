@@ -33,15 +33,13 @@ def test_frontier_is_a_results_destination_and_not_an_atlas_forwarder() -> None:
     )
 
 
-def test_full_atlas_arrives_expanded_and_homepage_preview_stays_short() -> None:
+def test_both_atlases_arrive_with_every_case_and_no_expander() -> None:
     complete = overview_sections.atlas_grid()
     preview = overview_sections.atlas_preview()
     for markup in (complete, preview):
         assert markup.count('class="site-atlas-cell"') == 324
-    assert "data-atlas-rest>" in complete
-    assert 'data-atlas-toggle aria-expanded="true"' in complete
-    assert "data-atlas-rest hidden>" in preview
-    assert 'data-homepage-atlas-toggle aria-expanded="false"' in preview
+        assert "data-atlas-rest" not in markup
+        assert "data-atlas-toggle" not in markup
 
 
 def test_all_results_is_the_only_complete_result_collection() -> None:

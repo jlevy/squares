@@ -1,8 +1,8 @@
-// Completed previews and persistent anchors, including focus after a boundary moves.
+// Every case shown as the nodes the page shipped, where the focus is, and how many
+// expanders stand in the block (none since 2026-10-23).
 (/** @type {{install?: boolean}} */ options) => {
   const block = document.querySelector("[data-atlas-grid]");
   const cells = block?.querySelector(".site-atlas-cells");
-  const toggle = block?.querySelector("[data-atlas-toggle]");
   if (!(block instanceof HTMLElement) || !(cells instanceof HTMLElement)) {
     throw new Error("Missing dedicated Atlas");
   }
@@ -23,7 +23,6 @@
   cells.dispatchEvent(new Event("atlas-test-identity"));
   const tiles = [...cells.querySelectorAll("a.site-atlas-cell")];
   const shown = tiles.filter((tile) => tile.getClientRects().length > 0);
-  const box = toggle?.getBoundingClientRect();
   const focus = document.activeElement;
   const frame = cells?.getBoundingClientRect();
   const occupied = shown.map((tile) => tile.getBoundingClientRect());
@@ -47,17 +46,13 @@
     total: tiles.length,
     shown: shown.map((tile) => Number(tile.getAttribute("data-atlas-n"))),
     direct: shown.length,
-    expanded: toggle?.getAttribute("aria-expanded"),
-    collapsed: toggle?.getAttribute("aria-expanded") === "false",
-    name: toggle?.getAttribute("aria-label"),
-    collapse_name: toggle?.getAttribute("data-name-less"),
+    toggles: block.querySelectorAll("[data-atlas-toggle], [aria-expanded]").length,
     same_nodes: block.dataset.testIdentity === "true",
     selected: block
       .querySelector('[data-atlas-tab][aria-selected="true"]')
       ?.getAttribute("data-atlas-tab"),
     focus: focus?.getAttribute("data-case"),
     focus_visible: focus instanceof HTMLElement && focus.getClientRects().length > 0,
-    toggle_visible: Boolean(box && box.top >= 0 && box.bottom <= window.innerHeight),
     popover_open: document.querySelector("#pop-case:popover-open") !== null,
     search: location.search,
     hash: location.hash,

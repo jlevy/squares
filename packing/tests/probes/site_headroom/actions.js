@@ -10,7 +10,7 @@ async (labelOffset = 0) => {
     .filter((action) => action.getClientRects().length > 0)
     .map((action) => {
       const original = action.getBoundingClientRect();
-      const existing = action.querySelector("[data-atlas-label]");
+      const existing = action.querySelector("[data-recent-label]");
       const label = existing ?? document.createElement("span");
       const text = existing
         ? null

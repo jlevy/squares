@@ -60,11 +60,9 @@ PRESSED = probe(PROBES, "site_atlas_views/pressed")
 INTERRUPTED = probe(PROBES, "site_atlas_views/interrupted")
 WATCH = probe(PROBES, "site_atlas_views/watch")
 SEEN = probe(PROBES, "site_atlas_views/seen")
-ACTIONS = probe(PROBES, "site_atlas_views/actions")
 DRAWING = probe(PROBES, "site_atlas_views/drawing")
 INITIAL = probe(PROBES, "site_atlas_views/initial")
 ROWS = probe(PROBES, "site_atlas_views/rows")
-RESIZE_SETTLED = probe(PROBES, "site_atlas_views/resize-settled")
 REDUCED_GEOMETRY = probe(PROBES, "site_atlas_views/reduced-geometry")
 SUBSET = probe(PROBES, "site_atlas_views/subset")
 REFERENCE = probe(PROBES, "site_atlas_views/reference")
@@ -104,11 +102,8 @@ LAYOUTS = {
     "triangle": "triangle",
     "grid again": "grid",
     "grid after a second press": "grid",
-    "triangle, every case": "triangle",
-    "triangle, collapsed": "triangle",
     "resized to a phone": "triangle",
     "phone": "triangle",
-    "phone, every case": "triangle",
     "phone, grid": "grid",
     "reduced motion": "triangle",
     "linked": "triangle",
@@ -117,11 +112,10 @@ LAYOUTS = {
     "grid, small": "grid",
     "triangle, small": "triangle",
     "triangle, large": "triangle",
-    "triangle, large, every case": "triangle",
-    "triangle, medium, every case": "triangle",
+    "triangle, medium again": "triangle",
     "phone, large": "triangle",
     "phone, small grid": "grid",
-    "phone, small, every case": "triangle",
+    "phone, small": "triangle",
     "wide, small": "triangle",
     "wide, small grid": "grid",
 }
@@ -181,57 +175,6 @@ def atlas_files(tmp_path_factory: pytest.TempPathFactory) -> Path:
     return root
 
 
-def _graphics_only(source: str) -> str:
-    """Start the legacy control matrix collapsed; defaults have a separate direct test."""
-    assert 'id="frontier-table"' not in source
-    graphics = source.replace("data-atlas-rest>", "data-atlas-rest hidden>").replace(
-        'data-atlas-toggle aria-expanded="true"', 'data-atlas-toggle aria-expanded="false"'
-    )
-    for marker in (
-        'id="the-atlas-of-square-packings"',
-        "data-atlas-grid>",
-        "data-atlas-controls>",
-        "data-atlas-legend>",
-        'class="kpress-site-header',
-        'id="pop-case"',
-    ):
-        assert marker in source, marker
-        assert marker in graphics, marker
-    assert graphics.count('class="site-atlas-cell"') == 324
-    return graphics
-
-
-@pytest.fixture(scope="module")
-def graphics_files(atlas_files: Path) -> Path:
-    """The legacy graphics matrix shares one derivative; canonical files stay intact."""
-    root = atlas_files / "graphics"
-    root.mkdir()
-    source = (atlas_files / "atlas.html").read_text(encoding="utf-8")
-    # Keep /atlas.html so the actual pathname-sensitive query bootstrap still runs.
-    (root / "atlas.html").write_text(_graphics_only(source), encoding="utf-8")
-    for name in ("assets", "atlas"):
-        (root / name).symlink_to(atlas_files / name, target_is_directory=True)
-    (root / "index.html").symlink_to(atlas_files / "index.html")
-    assert (atlas_files / "atlas.html").read_text(encoding="utf-8") == source
-    return root
-
-
-def test_graphics_fixture_keeps_every_case_and_the_canonical_atlas_stays_complete(
-    atlas_files: Path, graphics_files: Path
-) -> None:
-    source = (atlas_files / "atlas.html").read_text(encoding="utf-8")
-    graphics = (graphics_files / "atlas.html").read_text(encoding="utf-8")
-    assert 'id="frontier-table"' not in source
-    assert 'id="frontier-table"' not in graphics
-    assert graphics.count('class="site-atlas-cell"') == 324
-    assert "data-atlas-rest>" in source
-    assert "data-atlas-rest hidden>" in graphics
-    extra = '<span class="kpress-math"><math><mi>x</mi></math></span>'
-    assert source.count("</body>") == 1
-    changed = source.replace("</body>", extra + "</body>")
-    assert _graphics_only(changed) == graphics.replace("</body>", extra + "</body>")
-
-
 @pytest.fixture(scope="module")
 def row_site(request: pytest.FixtureRequest) -> Iterator[str]:
     """Serve real assets once, retaining normal browser request and font loading."""
@@ -239,17 +182,7 @@ def row_site(request: pytest.FixtureRequest) -> Iterator[str]:
     if address:
         yield address.rstrip("/") + "/"
         return
-    from devtools import site_assets  # noqa: PLC0415
-
     atlas_files: Path = request.getfixturevalue("atlas_files")
-    records = site_renders.case_records((99, 100))
-    for n in (99, 100):
-        target = atlas_files / f"cases/{n}.html"
-        target.parent.mkdir(exist_ok=True)
-        target.write_text(records[f"cases/{n}.html"], encoding="utf-8")
-    site_assets.write_assets(
-        atlas_files, site_assets.shared().assets.referenced(records.values())
-    )
     server = preview_site.serve(atlas_files, 0)
     try:
         yield f"http://127.0.0.1:{server.server_port}/"
@@ -258,25 +191,20 @@ def row_site(request: pytest.FixtureRequest) -> Iterator[str]:
         server.server_close()
 
 
-def _completed(page: Any, *, expanded: bool = False) -> dict[str, Any]:
+def _completed(page: Any) -> dict[str, Any]:
+    """Every case shows, in order, as the same nodes the page shipped, centred where the
+    layout fits, and no expander stands under them (think-rk91)."""
     check_site_rendering.wait_for_fonts(page)
     atlas.settle(page)
     state = page.evaluate(ROWS, {})
-    count = len(state["shown"])
     assert state["total"] == 324
-    assert state["shown"] == list(range(1, count + 1))
+    assert state["shown"] == list(range(1, 325))
     assert state["same_nodes"]
+    assert state["toggles"] == 0
     center = state["centering"]
     assert center["page_overflow"] == 0
     if center["fits"]:
         assert abs(center["offset"]) <= 0.5, center
-    if expanded:
-        assert count == 324
-    elif state["view"] == "triangle":
-        assert count == 100
-    else:
-        assert count % state["columns"] == 0
-        assert abs(count - 100) <= state["columns"] / 2
     assert atlas.layout_problems(atlas.layout(page)) == []
     return state
 
@@ -308,7 +236,13 @@ def test_viewport_size_prepaints_without_motion_and_keeps_explicit_choices(
             assert mounted["moving"] == 0
             readings[f"{name}, before programs"] = before
             readings[f"{name}, mounted"] = mounted
-            for width, expected in ((1024, "small"), (390, "small"), (1280, "medium")):
+            for width, expected in (
+                (1024, "small"),
+                (390, "small"),
+                (1280, "medium"),
+                (768, "small"),
+                (1920, "medium"),
+            ):
                 page.set_viewport_size({"width": width, "height": 900})
                 page.wait_for_function(SIZE_STATE, arg={"size": expected})
                 state = page.evaluate(SIZE_STATE)
@@ -346,6 +280,108 @@ def test_viewport_size_prepaints_without_motion_and_keeps_explicit_choices(
         finally:
             page.close()
     (tmp_path / "responsive-size.json").write_text(json.dumps(readings, indent=2))
+
+
+#: The size each width takes when the address names none, by the owner's rule of
+#: 2026-10-23 (think-rk91, `overview/atlas-view.js`, `automaticSize`): "on a wide screen,
+#: we should never go all the way to small, but on a narrow screen, if less than half of
+#: the screen is fitting in, we should go to smaller." Under 75rem less than half of the
+#: triangle's 35-tile row ever fits at Medium, so a narrow window takes Small.
+DEFAULT_SIZES = {390: "small", 768: "small", 1280: "medium", 1920: "medium"}
+WIDE = 1200
+
+
+def _shot_dir(tmp_path: Path) -> Path:
+    """Where a test keeps its pictures: `SQPACK_ATLAS_SCREENSHOT_DIR` when set, for a
+    pull request's review, else the test's own directory."""
+    named = os.environ.get("SQPACK_ATLAS_SCREENSHOT_DIR")
+    root = Path(named) if named else tmp_path
+    root.mkdir(parents=True, exist_ok=True)
+    return root
+
+
+@pytest.mark.parametrize("name", ["index.html", "atlas.html"])
+@pytest.mark.parametrize("width", sorted(DEFAULT_SIZES))
+def test_every_case_shows_with_no_expander_at_the_owners_default_size(
+    row_browser: Any, row_site: str, tmp_path: Path, name: str, width: int
+) -> None:
+    """With no size in the address both atlases show all 324 tiles and no expander, at
+    the owner's size for the width, which the stylesheet paints before the atlas
+    programs run and the programs keep. A narrow window shows less than half of the
+    triangle's widest row at Medium, and so takes Small; a wide one keeps Medium however
+    little fits. The triangle first lays out at its right edge: the window shows the
+    right-hand end of every row, the last tiles of row 18 through n = 324, and pans left
+    to the rest."""
+    programs = re.compile(r"/assets/js/atlas-(view|grid)\.")
+    shots = _shot_dir(tmp_path)
+    stem = name.removesuffix(".html")
+    page = row_browser.new_page(viewport={"width": width, "height": 900})
+    try:
+        page.route(programs, lambda route: route.abort())
+        page.goto(row_site + name, wait_until="load")
+        check_site_rendering.wait_for_fonts(page)
+        painted = page.evaluate(SIZE_STATE)
+        unscripted = atlas.layout(page)
+        page.unroute(programs)
+        medium = {}
+        if width < WIDE:
+            page.goto(row_site + name + "?size=medium", wait_until="load")
+            atlas.settle(page)
+            medium = atlas.layout(page)
+            assert medium["size"] == "medium"
+            at_medium = atlas.share(medium)
+            assert at_medium is not None
+            assert at_medium < 0.5, at_medium
+        page.goto(row_site + name, wait_until="load")
+        check_site_rendering.wait_for_fonts(page)
+        atlas.settle(page)
+        report = atlas.layout(page)
+        mounted = page.evaluate(SIZE_STATE)
+        expected = DEFAULT_SIZES[width]
+        assert (report["view"], report["size"], report["search"]) == ("triangle", expected, "")
+        assert painted["scale"] == mounted["scale"] == (1 if expected == "medium" else 0.667)
+        assert not mounted["explicit"]
+        assert mounted["moving"] == 0
+        for found in (report, unscripted):
+            assert len(found["tiles"]) == 324
+            assert atlas.layout_problems(found) == []
+        assert page.locator(".site-atlas-grid .site-atlas-cell:visible").count() == 324
+        assert page.locator("[data-atlas-toggle]").count() == 0
+        assert report["pan"]["left"] == 0
+        cells = report["cells"]
+        bottom = sorted(
+            tile["n"]
+            for tile in report["tiles"]
+            if atlas.row_of(tile["n"]) == 18
+            and tile["left"] >= cells["left"] - atlas.EDGE
+            and tile["right"] <= cells["right"] + atlas.EDGE
+        )
+        assert bottom == list(range(325 - len(bottom), 325)), bottom
+        share = atlas.share(report)
+        assert share is not None
+        assert abs(len(bottom) / 35 - share) <= 1 / 35 + 0.02, (bottom, share)
+        assert page.evaluate(PREPARE_SHOT) == []
+        target = shots / f"{stem}-{width}-default-{expected}-light.png"
+        page.locator(atlas.BLOCK).screenshot(path=target, animations="disabled")
+        if width in (390, 1280):
+            page.emulate_media(color_scheme="dark")
+            dark = shots / f"{stem}-{width}-default-{expected}-dark.png"
+            page.locator(atlas.BLOCK).screenshot(path=dark, animations="disabled")
+        (shots / f"{stem}-{width}-default.json").write_text(
+            json.dumps(
+                {
+                    "size": report["size"],
+                    "share": share,
+                    "share_at_medium": atlas.share(medium) if medium else None,
+                    "bottom_row_shown": bottom,
+                    "painted": painted,
+                    "mounted": mounted,
+                },
+                indent=2,
+            )
+        )
+    finally:
+        page.close()
 
 
 @pytest.mark.parametrize("name", ["index.html", "atlas.html"])
@@ -412,18 +448,13 @@ def test_default_triangle_explicit_grid_and_complete_rows_keep_all_case_nodes(
     try:
         page.goto(address + "atlas.html", wait_until="load")
         page.evaluate(ROWS, {"install": True})
-        state = _completed(page, expanded=True)
+        state = _completed(page)
         assert state["selected"] == state["root_view"] == state["view"] == "triangle"
         assert state["search"] == ""
-        assert page.locator(atlas.EXPANDER).get_attribute("aria-expanded") == "true"
-        page.locator(atlas.EXPANDER).click()
-        _completed(page)
         page.locator(GRID).click()
         assert _completed(page)["search"] == "?atlas=grid"
         page.reload(wait_until="load")
         page.evaluate(ROWS, {"install": True})
-        _completed(page, expanded=True)
-        page.locator(atlas.EXPANDER).click()
         assert _completed(page)["selected"] == "grid"
         for size in atlas.SIZES:
             page.locator(atlas.size_tab(size)).click()
@@ -434,24 +465,16 @@ def test_default_triangle_explicit_grid_and_complete_rows_keep_all_case_nodes(
             _completed(page)
         page.locator(TRIANGLE).click()
         assert _completed(page)["search"] == "?size=medium"
-        page.locator(atlas.EXPANDER).click()
-        _completed(page, expanded=True)
         page.locator(GRID).click()
-        _completed(page, expanded=True)
+        _completed(page)
         page.set_viewport_size({"width": 1120, "height": 900})
-        _completed(page, expanded=True)
-        page.locator(atlas.EXPANDER).click()
-        state = _completed(page)
-        assert state["toggle_visible"]
-        assert str(len(state["shown"])) in state["collapse_name"]
+        _completed(page)
         page.emulate_media(reduced_motion="reduce")
         pressed = page.evaluate(PRESSED, {"press": TRIANGLE})
         assert pressed["moving"] == 0
         _completed(page)
         page.goto(address + "atlas.html?age=180&size=large&atlas=grid#the-atlas")
         page.evaluate(ROWS, {"install": True})
-        _completed(page, expanded=True)
-        page.locator(atlas.EXPANDER).click()
         _completed(page)
         page.locator(TRIANGLE).click()
         state = _completed(page)
@@ -459,82 +482,14 @@ def test_default_triangle_explicit_grid_and_complete_rows_keep_all_case_nodes(
         assert state["hash"] == "#the-atlas"
         page.goto(address + "atlas.html#atlas-n-324", wait_until="load")
         page.evaluate(ROWS, {"install": True})
-        assert _completed(page, expanded=True)["focus"] == "324"
+        assert _completed(page)["focus"] == "324"
         page.goto(address, wait_until="load")
-        check_site_rendering.wait_for_fonts(page)
-        site_browser.api().expect(
-            page.locator("#homepage-atlas-cells a.site-atlas-cell")
-        ).to_have_count(324)
-        assert (
-            page.locator("[data-atlas-preview]").get_attribute("data-atlas-view") == "triangle"
-        )
-        assert page.locator("#homepage-atlas-cells a.site-atlas-cell:visible").count() == 100
-        assert page.locator("html").get_attribute("data-site-atlas-view") is None
-    finally:
-        page.close()
-
-
-def _resize_grid(page: Any, width: int) -> None:
-    """Wait for the observer's next-frame arrangement, not just existing animations."""
-    page.set_viewport_size({"width": width, "height": 900})
-    try:
-        page.wait_for_function(RESIZE_SETTLED, arg={"width": width}, timeout=5000)
-    except site_browser.api().TimeoutError as error:
-        state = page.evaluate(ROWS, {})
-        raise AssertionError(f"Atlas Grid did not settle at width {width}: {state}") from error
-
-
-def test_grid_boundary_focus_and_stepped_popover_return_remain_visible(
-    row_browser: Any, row_site: str
-) -> None:
-    page = row_browser.new_page(viewport=DESKTOP)
-    address = row_site
-    try:
-        page.goto(address + "atlas.html?atlas=grid", wait_until="load")
         page.evaluate(ROWS, {"install": True})
-        _completed(page, expanded=True)
-        page.locator(atlas.EXPANDER).click()
-        _completed(page)
-        # Find actual nearby capacities, independent of retained CSS tile sizes.
-        widths = {}
-        for width in range(680, 1281, 20):
-            _resize_grid(page, width)
-            state = _completed(page)
-            widths.setdefault(state["columns"], width)
-            if {9, 10} <= widths.keys():
-                break
-        assert {9, 10} <= widths.keys()
-        _resize_grid(page, widths[10])
-        _completed(page)
-        tile = page.locator("#atlas-n-100")
-        tile.focus()
-        _resize_grid(page, widths[9])
         state = _completed(page)
-        assert state["columns"] == 9
-        assert state["shown"][-1] == 99
-        assert state["focus"] == "99"
-        assert state["focus_visible"]
-        _resize_grid(page, widths[10])
-        _completed(page)
-        tile.click()
-        site_browser.api().expect(
-            page.locator('#pop-case article[data-case="100"]')
-        ).to_be_visible()
-        page.locator('#pop-case a[data-case-step][rel~="prev"]').click()
-        site_browser.api().expect(
-            page.locator('#pop-case article[data-case="99"]')
-        ).to_be_visible()
-        _resize_grid(page, widths[9])
-        atlas.settle(page)
-        state = page.evaluate(ROWS, {})
-        assert len(state["shown"]) == 108
-        assert state["same_nodes"]
-        assert state["popover_open"]
-        page.keyboard.press("Escape")
-        state = page.evaluate(ROWS, {})
-        assert state["focus"] == "100"
-        assert state["focus_visible"]
-        assert not state["popover_open"]
+        assert state["view"] == "triangle"
+        assert page.locator("[data-atlas-preview]").count() == 1
+        assert page.locator("#homepage-atlas-cells a.site-atlas-cell:visible").count() == 324
+        assert page.locator("html").get_attribute("data-site-atlas-view") is None
     finally:
         page.close()
 
@@ -555,20 +510,8 @@ def test_no_javascript_triangle_remains_a_usable_static_full_atlas(
         assert report["view"] == "triangle"
         assert len(report["tiles"]) == 324
         assert atlas.layout_problems(report) == []
-        assert not page.locator(atlas.EXPANDER).is_visible()
+        assert page.locator("[data-atlas-toggle]").count() == 0
         assert page.locator("#atlas-n-324").get_attribute("href") == "cases/324.html"
-    finally:
-        page.close()
-
-
-def _results_action(browser: Any, address: str, viewport: Window) -> dict[str, Any]:
-    """Read the homepage Results action against the dedicated Atlas toggle's design."""
-    page = browser.new_page(viewport=viewport)
-    try:
-        homepage = address.rsplit("/", 1)[0] + "/index.html"
-        page.goto(homepage, wait_until="load")
-        atlas.settle(page)
-        return page.evaluate(ACTIONS)["see_all"]
     finally:
         page.close()
 
@@ -591,7 +534,7 @@ def _save_artifact(page: Any, address: str, name: str) -> None:
 
 def _desktop(browser: Any, address: str) -> Readings:
     """A desktop reader's session: to the triangle and back, a change of mind mid-move,
-    the keyboard, a tile hovered and pressed, the expander, and a window made narrow."""
+    the keyboard, a tile hovered and pressed, and a window made narrow."""
     seen: Readings = {}
     page = atlas.open_atlas(browser, address, init_script=applied(WATCH), **DESKTOP)
     atlas.top(page)
@@ -605,8 +548,6 @@ def _desktop(browser: Any, address: str) -> Readings:
     atlas.settle(page)
     atlas.top(page)
     seen["grid"] = atlas.layout(page)
-    seen["actions"] = page.evaluate(ACTIONS)
-    seen["actions"]["see_all"] = _results_action(browser, address, DESKTOP)
     seen["press triangle"] = page.evaluate(PRESSED, {"press": TRIANGLE})
     atlas.settle(page)
     seen["triangle"] = atlas.layout(page)
@@ -645,17 +586,6 @@ def _desktop(browser: Any, address: str) -> Readings:
         "case": cell.get_attribute("data-case"),
     }
 
-    # The expander is under the triangle, below the window: brought into it, as a reader
-    # who presses it has it, so what follows the tiles is seen to move with them.
-    page.locator(atlas.EXPANDER).scroll_into_view_if_needed()
-    seen["press expander"] = page.evaluate(PRESSED, {"press": atlas.EXPANDER})
-    atlas.settle(page)
-    seen["triangle, every case"] = atlas.layout(page)
-    seen["actions, expanded"] = page.evaluate(ACTIONS)
-    seen["actions, expanded"]["see_all"] = seen["actions"]["see_all"]
-    atlas.expand(page)
-    seen["triangle, collapsed"] = atlas.layout(page)
-
     page.set_viewport_size(PHONE)
     page.wait_for_function(
         probe(PROBES, "site_atlas_views/arranged"), arg={"per_line": 4}, timeout=5000
@@ -666,7 +596,7 @@ def _desktop(browser: Any, address: str) -> Readings:
 
 
 def _phone(browser: Any, address: str) -> Readings:
-    """A phone opened on the triangle's own address, then every case, then the grid."""
+    """A phone opened on the triangle's own address, then the grid."""
     seen: Readings = {}
     page = atlas.open_atlas(
         browser, address, view="triangle", size="medium", init_script=applied(WATCH), **PHONE
@@ -675,10 +605,6 @@ def _phone(browser: Any, address: str) -> Readings:
     seen["phone"] = atlas.layout(page)
     seen["phone, panned start"] = page.evaluate(LAYOUT, {"pan": "start"})
     seen["phone, panned end"] = page.evaluate(LAYOUT, {"pan": "end"})
-    seen["phone actions"] = page.evaluate(ACTIONS)
-    seen["phone actions"]["see_all"] = _results_action(browser, address, PHONE)
-    atlas.expand(page)
-    seen["phone, every case"] = atlas.layout(page)
     page.locator(GRID).click()
     atlas.settle(page)
     seen["phone, grid"] = atlas.layout(page)
@@ -718,8 +644,7 @@ def _linked(browser: Any, address: str) -> Readings:
 
 def _sizes(browser: Any, address: str) -> Readings:
     """A desktop reader who changes the size: to Large and to Small in the grid, to the
-    triangle at Small, to Large there, every case shown, by the keyboard, and back to
-    Medium."""
+    triangle at Small, to Large there, by the keyboard, and back to Medium."""
     seen: Readings = {}
     page = atlas.open_atlas(browser, address, size="medium", **DESKTOP)
     page.locator(GRID).click()
@@ -739,9 +664,6 @@ def _sizes(browser: Any, address: str) -> Readings:
     seen["press large, triangle"] = page.evaluate(PRESSED, {"press": LARGE})
     atlas.settle(page)
     seen["triangle, large"] = atlas.layout(page)
-    page.locator(atlas.EXPANDER).scroll_into_view_if_needed()
-    atlas.expand(page)
-    seen["triangle, large, every case"] = atlas.layout(page)
 
     page.locator(LARGE).focus()
     for key in ("ArrowLeft", "ArrowRight", "Home", "End", "ArrowRight"):
@@ -750,7 +672,7 @@ def _sizes(browser: Any, address: str) -> Readings:
         seen.setdefault("size keys", []).append((key, atlas.layout(page)))
     page.locator(MEDIUM).click()
     atlas.settle(page)
-    seen["triangle, medium, every case"] = atlas.layout(page)
+    seen["triangle, medium again"] = atlas.layout(page)
     page.close()
     return seen
 
@@ -771,15 +693,15 @@ def _phone_sizes(browser: Any, address: str) -> Readings:
     seen["phone, small grid"] = atlas.layout(page)
     page.locator(TRIANGLE).click()
     atlas.settle(page)
-    atlas.expand(page)
-    seen["phone, small, every case"] = atlas.layout(page)
+    seen["phone, small"] = atlas.layout(page)
     _save_artifact(page, address, "phone-small-all324")
     page.close()
     return seen
 
 
 def _scales(browser: Any, address: str) -> Readings:
-    """Scale changes, shown-set references, keyboard control and a real smaller instance."""
+    """Scale changes, the reference of every case shown, keyboard control and a real
+    smaller instance."""
     found: Readings = {}
     page = atlas.open_atlas(browser, address, scale="fixed", **DESKTOP)
     found["scale, triangle, fixed"] = atlas.layout(page)
@@ -790,11 +712,6 @@ def _scales(browser: Any, address: str) -> Readings:
         found[f"scale, triangle, {mode}"] = atlas.layout(page)
         found[f"reference, triangle, {mode}"] = page.evaluate(REFERENCE)
         _save_artifact(page, address, f"desktop-small-scale-{mode}")
-    atlas.expand(page)
-    found["scale, global, expanded"] = atlas.layout(page)
-    _save_artifact(page, address, "desktop-small-scale-global-all324")
-    atlas.expand(page)
-    found["scale, global, collapsed"] = atlas.layout(page)
     page.locator(GRID).click()
     atlas.settle(page)
     found["scale, grid, global"] = atlas.layout(page)
@@ -833,9 +750,9 @@ def _scales(browser: Any, address: str) -> Readings:
 
 
 @pytest.fixture(scope="module")
-def seen(graphics_files: Path, row_browser: Any) -> Readings:
+def seen(atlas_files: Path, row_browser: Any) -> Readings:
     """Everything the sessions read, by name."""
-    root = graphics_files
+    root = atlas_files
     path = root / "atlas.html"
     from devtools import render_overview, site_assets  # noqa: PLC0415
 
@@ -943,9 +860,9 @@ def seen(graphics_files: Path, row_browser: Any) -> Readings:
 
 
 @pytest.fixture(scope="module")
-def control_readings(graphics_files: Path, row_browser: Any) -> Readings:
+def control_readings(atlas_files: Path, row_browser: Any) -> Readings:
     """Read the dedicated Atlas across chooser wrap points, with and without scripts."""
-    root = graphics_files
+    root = atlas_files
     address = (root / "atlas.html").as_uri()
     found: Readings = {}
     browser = row_browser
@@ -1027,22 +944,20 @@ def test_an_explicit_small_address_opens_triangle_under_its_two_tabs(seen: Readi
         assert tab["font_px"] < nav_size
     assert tabs["grid"]["box"]["top"] == tabs["triangle"]["box"]["top"]
     assert tabs["grid"]["box"]["right"] <= tabs["triangle"]["box"]["left"] + 1
-    assert len(triangle["tiles"]) == 100
+    assert len(triangle["tiles"]) == 324
 
 
 def test_pressing_triangle_moves_every_tile_on_its_transform_alone(seen: Readings) -> None:
     """A press starts one move a tile that is in the window, each an animation of
     `transform` and nothing else, for the duration and with the easing the tokens name.
-    Nothing is animated that lays the page out. What follows the tiles moves with them
-    where it is in the window, as the expander's row is when it is pressed."""
+    Nothing is animated that lays the page out."""
     for press, view in (("press triangle", "triangle"), ("press grid", "grid")):
         started = seen[press]
         assert started["view"] == view
-        assert 0 < started["moving"] <= 100, press
+        assert 0 < started["moving"] <= 324, press
         assert started["properties"] == ["transform"], press
         assert started["duration"] == 360
         assert started["easing"] == "cubic-bezier(0.2, 0, 0, 1)"
-    assert seen["press expander"]["followers"] > 0
 
 
 def test_the_triangle_sets_complete_rows_at_a_common_right_edge(
@@ -1057,9 +972,9 @@ def test_the_triangle_sets_complete_rows_at_a_common_right_edge(
         _drawing_slot_width(seen["grid"]), abs=0.5
     )
     tiles = {tile["n"]: tile for tile in triangle["tiles"]}
-    assert sorted(tiles) == list(range(1, 101))
+    assert sorted(tiles) == list(range(1, 325))
     left = triangle["canvas"]["left"]
-    for k in range(1, 11):
+    for k in range(1, 19):
         row = [tiles[n] for n in range((k - 1) ** 2 + 1, k * k + 1)]
         tops = sorted({tile["top"] for tile in row})
         sizes = tuple(sum(tile["top"] == top for tile in row) for top in tops)
@@ -1184,7 +1099,7 @@ def test_a_linked_triangle_is_the_triangle_before_a_tile_is_drawn(seen: Readings
             "size": "small",
             "scale": "row",
             "per_line": "16",
-            "tiles": 100,
+            "tiles": 324,
             "moving": 0,
         }
     ]
@@ -1194,7 +1109,7 @@ def test_a_linked_triangle_is_the_triangle_before_a_tile_is_drawn(seen: Readings
             "size": "medium",
             "scale": "row",
             "per_line": "4",
-            "tiles": 100,
+            "tiles": 324,
             "moving": 0,
         }
     ]
@@ -1262,7 +1177,7 @@ def test_a_phone_pans_complete_readable_rows_at_the_right_edge(
     for tile in tiles.values():
         assert tile["left"] >= cells["left"] - atlas.EDGE, tile["n"]
         assert tile["right"] <= cells["right"] + atlas.EDGE, tile["n"]
-    for k in range(1, 11):
+    for k in range(1, 19):
         row = [tiles[n] for n in range((k - 1) ** 2 + 1, k * k + 1)]
         tops = sorted({tile["top"] for tile in row})
         sizes = tuple(sum(tile["top"] == top for tile in row) for top in tops)
@@ -1274,7 +1189,7 @@ def test_a_phone_pans_complete_readable_rows_at_the_right_edge(
         assert [tile["n"] for tile in sorted(row, key=lambda t: (t["top"], t["left"]))] == [
             tile["n"] for tile in row
         ]
-    assert atlas.row_lines(10, 4, FIRST_GRIDS[10]) == (19,)
+    assert atlas.row_lines(18, 4, FIRST_GRIDS[18]) == (35,)
     start, end = seen["phone, panned start"], seen["phone, panned end"]
     assert start["pan"]["left"] < end["pan"]["left"] == 0
     assert start["canvas"]["left"] == pytest.approx(start["cells"]["left"], abs=atlas.EDGE)
@@ -1352,20 +1267,17 @@ def test_every_triangle_line_has_uniform_height_and_vertical_pitch(
     _assert_frame_extent(report)
 
 
-def test_the_expander_works_in_the_triangle(seen: Readings) -> None:
-    """Showing every case keeps the hundred at their readable size and extends the
-    complete triangle through row 18; collapsing restores the hundred. A phone keeps
-    four tiles to a line even when all 324 show."""
-    assert seen["press expander"]["moving"] > 0
-    every = seen["triangle, every case"]
-    assert (every["view"], every["expanded"], every["per_line"]) == ("triangle", "true", 10)
-    assert sorted(tile["n"] for tile in every["tiles"]) == list(range(1, 325))
-    collapsed = seen["triangle, collapsed"]
-    assert (collapsed["expanded"], collapsed["per_line"]) == ("false", 10)
-    assert _same_places(collapsed, seen["triangle"])
-    phone = seen["phone, every case"]
-    assert (phone["per_line"], len(phone["tiles"])) == (4, 324)
-    assert len(seen["phone, grid"]["tiles"]) == 324
+def test_every_case_shows_in_either_view_at_its_readable_size(seen: Readings) -> None:
+    """Every case shows from the start, with no expander under the tiles (the owner,
+    2026-10-23, think-rk91): the triangle runs through row 18 at ten tiles to a Grid line
+    at 1280 pixels and four on a phone, and the grid holds all 324 too."""
+    for name, per in (("triangle", 10), ("phone", 4)):
+        report = seen[name]
+        assert (report["view"], report["per_line"]) == ("triangle", per), name
+        assert sorted(tile["n"] for tile in report["tiles"]) == list(range(1, 325)), name
+        assert atlas.summary(report)["lines"] == 18, name
+    for name in ("grid", "phone, grid"):
+        assert len(seen[name]["tiles"]) == 324, name
 
 
 def test_a_narrower_window_rearranges_the_triangle_without_a_move(seen: Readings) -> None:
@@ -1400,54 +1312,6 @@ def test_a_triangle_tile_keeps_its_ink_under_the_pointer(seen: Readings) -> None
     assert hovered["filter"] == rest["filter"] == "none"
     assert hovered["opacity"] == rest["opacity"] == "1"
     assert hovered["natural_width"] == rest["natural_width"] > 0
-
-
-@pytest.mark.parametrize("name", ["actions", "phone actions"])
-def test_see_all_results_and_the_expander_are_one_button(seen: Readings, name: str) -> None:
-    """The link under the recent table and the button under the atlas are the site's one
-    action under a table or grid: the same colours, type, padding, corners and height,
-    results links separated by the shared gap, with icons after their labels at the same
-    size, the arrow right on the link and the double chevron on the button; at a desktop
-    width and on a phone."""
-    see_all, expander = seen[name]["see_all"], seen[name]["expander"]
-    assert see_all is not None
-    assert expander is not None
-    for key in ("color", "background", "font_px", "weight", "family", "padding", "radius"):
-        assert see_all[key] == expander[key], (name, key)
-    assert see_all["box"]["height"] == pytest.approx(expander["box"]["height"], abs=0.5)
-    assert see_all["row_gap"] is not None
-    assert float(see_all["row_gap"].removesuffix("px")) > 0
-    assert abs(expander["centred"]) <= 1, (name, expander["centred"])
-    assert "site-action" in see_all["classes"]
-    assert "site-action" in expander["classes"]
-    assert see_all["icon"]["arrow"] == "right"
-    assert expander["icon"]["arrow"] == "double-down"
-    assert see_all["icon"]["width"] == pytest.approx(expander["icon"]["width"], abs=0.5)
-    assert see_all["icon"]["after_text"]
-    assert expander["icon"]["after_text"]
-    assert see_all["label"] == "View All Results"
-
-
-def test_the_expander_reads_show_more_then_show_less_with_the_chevron_turned(
-    seen: Readings,
-) -> None:
-    """Collapsed, the button reads Show More with the chevron down and is named for all
-    the cases it shows; expanded, Show Less with the chevron up, named for the hundred it
-    keeps; it says which it is and what it controls either way."""
-    closed, opened = seen["actions"]["expander"], seen["actions, expanded"]["expander"]
-    assert (closed["label"], closed["expanded"], closed["icon"]["arrow"]) == (
-        "Show More",
-        "false",
-        "double-down",
-    )
-    assert closed["name"] == "Show more: all 324 cases"
-    assert (opened["label"], opened["expanded"], opened["icon"]["arrow"]) == (
-        "Show Less",
-        "true",
-        "double-up",
-    )
-    assert opened["name"] == "Show less: the first 100"
-    assert closed["controls"] == opened["controls"] == "atlas-cells"
 
 
 def test_a_triangle_tile_is_the_link_to_its_case_record(seen: Readings) -> None:
@@ -1527,8 +1391,9 @@ def test_the_size_tabs_stand_beside_the_view_tabs_and_honor_explicit_small(
 
 
 def test_a_change_of_size_moves_the_tiles_as_a_change_of_view_does(seen: Readings) -> None:
-    """Size changes transform shared tiles, fade new arrivals, and preserve the view.
-    Both motions use the same duration and easing without animating layout."""
+    """Size changes transform the tiles and preserve the view, with the same duration and
+    easing as a change of view and without animating layout. Every case shows at each
+    size, so no tile arrives or leaves."""
     for press, view, size, before, after in (
         ("press large", "grid", "large", "sizes, medium", "grid, large"),
         ("press small", "grid", "small", "grid, large", "grid, small"),
@@ -1542,19 +1407,14 @@ def test_a_change_of_size_moves_the_tiles_as_a_change_of_view_does(seen: Reading
     ):
         started = seen[press]
         assert (started["view"], started["size"]) == (view, size), press
-        # Grid completes physical rows at each size; Small may therefore show 105
-        # rather than 100. Moves can cover only the recorded old/new case prefixes.
-        prefixes = [{tile["n"] for tile in seen[state]["tiles"]} for state in (before, after)]
-        for prefix in prefixes:
-            assert prefix == set(range(1, len(prefix) + 1)), press
-        assert 0 < started["moving"] <= len(set.union(*prefixes)), press
+        for state in (before, after):
+            assert [tile["n"] for tile in seen[state]["tiles"]] == list(range(1, 325)), press
+        assert 0 < started["moving"] <= 324, press
         motions = started["tile_moves"]
         moving_cases = {motion["n"] for motion in motions}
         assert len(motions) == len(moving_cases) == started["moving"], press
-        assert moving_cases <= prefixes[1], press
         for motion in motions:
-            expected = ["transform"] if motion["n"] in prefixes[0] else ["opacity"]
-            assert motion["properties"] == expected, (press, motion["n"])
+            assert motion["properties"] == ["transform"], (press, motion["n"])
             assert motion["duration"] == 360, press
             assert motion["easing"] == "cubic-bezier(0.2, 0, 0, 1)", press
         assert "transform" in started["properties"], press
@@ -1586,7 +1446,7 @@ def test_the_grid_holds_more_and_smaller_tiles_at_small_and_fewer_and_larger_at_
 
 def test_the_triangle_matches_grid_sizes_and_keeps_complete_rows(seen: Readings) -> None:
     """At each size Triangle uses Grid's readable width and fits the same number of
-    tiles. Expanding preserves that width; returning to Medium restores its layout."""
+    tiles, with every case shown; returning to Medium restores its layout."""
     small, medium, large = seen["triangle, small"], seen["triangle"], seen["triangle, large"]
     assert (small["per_line"], medium["per_line"], large["per_line"]) == (15, 10, 7)
     assert _width(small) < _width(medium) < _width(large)
@@ -1602,12 +1462,10 @@ def test_the_triangle_matches_grid_sizes_and_keeps_complete_rows(seen: Readings)
     assert atlas.summary(large)["wrapped"] == []
     assert small["search"] == "?size=small"
     assert large["search"] == "?size=large"
-    every = seen["triangle, large, every case"]
-    assert (every["per_line"], len(every["tiles"])) == (7, 324)
-    assert _width(every) == pytest.approx(_width(large), abs=0.5)
-    back = seen["triangle, medium, every case"]
+    assert (large["per_line"], len(large["tiles"])) == (7, 324)
+    back = seen["triangle, medium again"]
     assert (back["size"], back["search"], back["per_line"]) == ("medium", "?size=medium", 10)
-    assert _same_places(back, seen["triangle, every case"])
+    assert _same_places(back, seen["triangle"])
 
 
 def test_the_arrow_keys_move_between_the_size_tabs_and_select_the_one_focused(
@@ -1648,7 +1506,7 @@ def test_a_linked_size_is_that_size_before_a_tile_is_drawn(seen: Readings) -> No
             "size": "large",
             "scale": "row",
             "per_line": "3",
-            "tiles": 100,
+            "tiles": 324,
             "moving": 0,
         }
     ]
@@ -1674,10 +1532,10 @@ def test_a_linked_size_is_that_size_before_a_tile_is_drawn(seen: Readings) -> No
 @pytest.mark.parametrize(
     "name",
     [
-        "triangle, large, every case",
-        "triangle, medium, every case",
+        "triangle, large",
+        "triangle, medium again",
         "phone, large",
-        "phone, small, every case",
+        "phone, small",
     ],
 )
 def test_atlas_tiles_show_only_counts_and_omit_layer_indicators(
@@ -1697,7 +1555,7 @@ def test_atlas_tiles_show_only_counts_and_omit_layer_indicators(
         assert tile["grid_label"] is None, n
 
 
-@pytest.mark.parametrize("name", ["default", "grid", "phone", "phone, small, every case"])
+@pytest.mark.parametrize("name", ["default", "grid", "phone", "phone, small"])
 def test_actual_box_and_caption_gaps_reduce_without_changing_drawing_scale(
     seen: Readings, name: str
 ) -> None:
@@ -1743,7 +1601,7 @@ def test_direct_mobile_queries_fit_before_atlas_programs_run(
     assert (report["view"], report["size"], report["columns"]) == (view, size, columns)
     assert report["page_overflow"] == 0
     assert (report["overflow"] > 0) == (view == "triangle")
-    assert [tile["n"] for tile in report["tiles"]] == list(range(1, 101))
+    assert [tile["n"] for tile in report["tiles"]] == list(range(1, 325))
     for tile in report["tiles"]:
         assert tile["left"] >= report["canvas"]["left"] - 0.5, tile["n"]
         assert tile["right"] <= report["canvas"]["right"] + 0.5, tile["n"]
@@ -1766,8 +1624,8 @@ def test_direct_mobile_queries_fit_before_atlas_programs_run(
         "triangle",
         "phone",
         "triangle, small",
-        "triangle, large, every case",
-        "phone, small, every case",
+        "triangle, large",
+        "phone, small",
     ],
 )
 def test_extra_gaps_follow_the_retained_suffix_without_web_captions(
@@ -1829,7 +1687,7 @@ def test_first_grid_spacing_is_present_without_captions_before_atlas_scripts(
         report["canvas"]["bottom"],
     )
     _assert_frame_extent(report)
-    for k in range(1, 11):
+    for k in range(1, 19):
         row = [tiles[n] for n in range((k - 1) ** 2 + 1, k * k + 1)]
         tops = sorted({tile["top"] for tile in row})
         assert tuple(
@@ -1934,11 +1792,11 @@ def test_atlas_fills_available_width_with_and_without_scripts(
 
 def test_wide_triangle_uses_grid_capacity_without_a_row_length_cap(seen: Readings) -> None:
     report = seen["wide, small"]
-    assert report["per_line"] > 19
+    assert report["per_line"] > 35
     assert _drawing_slot_width(report) == pytest.approx(
         _drawing_slot_width(seen["wide, small grid"]), abs=0.5
     )
-    assert atlas.summary(report)["lines"] == 10
+    assert atlas.summary(report)["lines"] == 18
     assert atlas.summary(report)["wrapped"] == []
     initial = seen["initial CSS, wide"]
     _assert_uniform_lines(
@@ -1949,7 +1807,7 @@ def test_wide_triangle_uses_grid_capacity_without_a_row_length_cap(seen: Reading
     )
     _assert_frame_extent(initial)
     assert initial["columns"] == report["per_line"]
-    assert len({tile["top"] for tile in initial["tiles"]}) == 10
+    assert len({tile["top"] for tile in initial["tiles"]}) == 18
     assert initial["overflow"] == 0
 
 
@@ -2026,13 +1884,12 @@ def test_scale_changes_real_drawings_without_moving_slots_or_resizing_numbers(
         ] == pytest.approx(5 / 6, abs=0.002)
 
 
-def test_global_reference_follows_expansion_collapse_and_an_actual_case_subset(
+def test_global_reference_is_the_largest_side_shown_in_every_case_and_a_real_subset(
     seen: Readings,
 ) -> None:
-    expanded, collapsed = seen["scale, global, expanded"], seen["scale, global, collapsed"]
-    assert (len(expanded["tiles"]), expanded["largest_side"]) == (324, 18)
-    assert (len(collapsed["tiles"]), collapsed["largest_side"]) == (100, 10)
-    for report in (expanded, collapsed, seen["scale, actual subset"]):
+    every = seen["scale, triangle, global"]
+    assert (len(every["tiles"]), every["largest_side"]) == (324, 18)
+    for report in (every, seen["scale, grid, global"], seen["scale, actual subset"]):
         largest = max(tile["side"] for tile in report["tiles"])
         assert report["largest_side"] == largest
         for tile in report["tiles"]:
@@ -2042,8 +1899,7 @@ def test_global_reference_follows_expansion_collapse_and_an_actual_case_subset(
     subset = seen["scale, actual subset"]
     assert [tile["n"] for tile in subset["tiles"]] == [1, 5, 11]
     assert subset["largest_side"] == pytest.approx(3.877083590022814)
-    assert _same_places(collapsed, seen["scale, triangle, fixed"])
-    assert atlas.layout_problems(expanded) == []
+    assert atlas.layout_problems(every) == []
 
 
 def test_scale_tabs_have_one_tab_stop_descriptions_and_keyboard_url_state(
@@ -2088,19 +1944,13 @@ def test_scale_query_has_correct_actual_ratios_before_mount_without_layout_shift
     assert initial["width"] == mounted["cells"]["width"]
     initial_tiles = {tile["n"]: tile for tile in initial["tiles"]}
     mounted_tiles = {tile["n"]: tile for tile in mounted["tiles"]}
-    assert list(initial_tiles) == list(range(1, 101))
-    assert list(mounted_tiles) == list(range(1, len(mounted_tiles) + 1))
-    if view == "triangle":
-        assert len(mounted_tiles) == 100
-    else:
-        columns = mounted["per_line"]
-        assert initial["columns"] == columns
-        assert len(mounted_tiles) % columns == 0
-        assert abs(len(mounted_tiles) - 100) <= columns / 2
+    assert list(initial_tiles) == list(range(1, 325))
+    assert list(mounted_tiles) == list(range(1, 325))
+    if view == "grid":
+        assert initial["columns"] == mounted["per_line"]
     initial_max = max(tile["side"] for tile in initial_tiles.values())
     mounted_max = max(tile["side"] for tile in mounted_tiles.values())
-    # Completing the last Grid row may reveal larger packings. Global normalizes
-    # against each state's visible maximum without changing the reserved slots.
+    assert initial_max == mounted_max
     for n in initial_tiles.keys() & mounted_tiles.keys():
         before, after = initial_tiles[n], mounted_tiles[n]
         before_reference = atlas.row_of(n) if scale == "row" else initial_max

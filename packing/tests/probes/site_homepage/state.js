@@ -2,8 +2,6 @@
 async () => {
   await document.fonts.ready;
   const cells = document.getElementById("homepage-atlas-cells");
-  const toggle = document.querySelector("[data-homepage-atlas-toggle]");
-  const chevron = toggle?.querySelector(".site-icon-arrow");
   const status = document.querySelector("[data-homepage-atlas-status]");
   const scope = document.querySelector(".site-recent-scope");
   const allTiles = [...(cells?.querySelectorAll("a.site-atlas-cell") ?? [])];
@@ -87,18 +85,18 @@ async () => {
       (list) => list.getAttribute("aria-label"),
     ),
     atlas_legend: document.querySelector("[data-atlas-legend]") !== null,
-    control_type: [
-      ...document.querySelectorAll("[data-atlas-controls] [role=tab], [data-atlas-toggle]"),
-    ].map((button) => {
-      const style = getComputedStyle(button);
-      const reference = button.matches('[role="tab"]')
-        ? document.querySelector(".site-nav")
-        : status;
-      return {
-        size: Number.parseFloat(style.fontSize),
-        base: reference ? Number.parseFloat(getComputedStyle(reference).fontSize) : null,
-      };
-    }),
+    control_type: [...document.querySelectorAll("[data-atlas-controls] [role=tab]")].map(
+      (button) => {
+        const style = getComputedStyle(button);
+        const reference = button.matches('[role="tab"]')
+          ? document.querySelector(".site-nav")
+          : status;
+        return {
+          size: Number.parseFloat(style.fontSize),
+          base: reference ? Number.parseFloat(getComputedStyle(reference).fontSize) : null,
+        };
+      },
+    ),
     case_names: Object.fromEntries(
       tiles.map((tile) => [tile.getAttribute("data-case"), tile.getAttribute("aria-label")]),
     ),
@@ -144,7 +142,6 @@ async () => {
         : [n];
     }),
     view: cells?.parentElement?.getAttribute("data-atlas-view"),
-    stage: Number(cells?.parentElement?.getAttribute("data-atlas-count")),
     cells_role: cells?.getAttribute("role"),
     visible_cases: tiles.filter((tile) => tile.getClientRects().length > 0).length,
     drawings: {
@@ -156,21 +153,10 @@ async () => {
       scale: cells?.parentElement?.getAttribute("data-atlas-scale"),
     },
     busy: cells?.getAttribute("aria-busy"),
-    toggle:
-      toggle instanceof HTMLButtonElement
-        ? {
-            disabled: toggle.disabled,
-            expanded: toggle.getAttribute("aria-expanded"),
-            controls: toggle.getAttribute("aria-controls"),
-            label: toggle.textContent?.trim(),
-            name: toggle.getAttribute("aria-label"),
-            arrow: chevron?.getAttribute("data-arrow"),
-            arrow_hidden: chevron?.getAttribute("aria-hidden"),
-            arrow_mask: chevron ? getComputedStyle(chevron).maskImage : null,
-            arrow_width: chevron?.getBoundingClientRect().width,
-            focused: document.activeElement === toggle,
-          }
-        : null,
+    // The expander went on 2026-10-23 (think-rk91); nothing in the block expands.
+    toggles: document.querySelectorAll(
+      "[data-atlas-toggle], [data-atlas-preview] [aria-expanded], [data-atlas-rest]",
+    ).length,
     status:
       status instanceof HTMLElement
         ? {

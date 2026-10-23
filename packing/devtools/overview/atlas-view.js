@@ -427,7 +427,7 @@
       const n = Number(tile.getAttribute("data-atlas-n"));
       starts[row(n)] = n;
     }
-    /** The tiles a line holds and the largest side shown, as last arranged. */
+    /** The tiles a line holds and the cases shown, as last arranged. */
     let arranged = "";
     /** The border-box width consumed by the latest arrangement. */
     let priorWidth = 0;
@@ -448,20 +448,18 @@
     const drawingScale = () => asScale(block.dataset.atlasScale);
 
     // Dedicated and homepage row containers share the same placement and FLIP, and
-    // every case shows on both.
-    const tiles = [...cells.querySelectorAll(".site-atlas-cell")].filter(
-      (tile) => tile instanceof HTMLElement,
-    );
-    const last = Number(tiles.at(-1)?.dataset.atlasN);
+    // every case the block holds shows, without clones.
+    const shown = () =>
+      [...cells.querySelectorAll(".site-atlas-cell")].filter((tile) => tile instanceof HTMLElement);
 
     // Write each tile's line and column for the tiles a line now holds. Only the
     // triangle reads them, but they are kept current in the grid too, so a change of
     // view writes nothing: a tile's properties are inherited by every line of its
     // drawing, and writing them restyles all of those. Nothing is written while
-    // neither the tiles a line holds nor the largest side shown has changed. An
-    // untouched size is held to the owner's rule here, from the width just read and
-    // before anything is placed. The size's scale is the stylesheet's
-    // (`--site-atlas-scale`), read after that.
+    // neither the tiles a line holds nor the cases shown have changed. An untouched
+    // size is held to the owner's rule here, from the width just read and before
+    // anything is placed. The size's scale is the stylesheet's (`--site-atlas-scale`),
+    // read after that.
     const arrange = () => {
       const root = Number.parseFloat(getComputedStyle(document.documentElement).fontSize);
       const style = getComputedStyle(cells);
@@ -469,6 +467,8 @@
       const gap = lengthPx(style.getPropertyValue("--site-atlas-reference-gap"), root);
       const width = cells.getBoundingClientRect().width;
       priorWidth = width;
+      const tiles = shown();
+      const last = Number(tiles.at(-1)?.dataset.atlasN);
       if (!(last >= 1)) {
         return;
       }
@@ -483,7 +483,7 @@
       const capacity = perLineAt(width, least, Number.POSITIVE_INFINITY, scale, gap);
       const per = Number.isFinite(capacity) ? capacity : widest(last) + 1;
       const largest = largestSide(tiles.map((tile) => Number(tile.dataset.atlasSide)));
-      const key = `${per}:${largest}`;
+      const key = `${per}:${tiles.map((tile) => tile.dataset.atlasN).join(":")}:${largest}`;
       if (key === arranged) {
         return;
       }
@@ -528,10 +528,11 @@
      */
     const measure = () => {
       /** @type {Map<HTMLElement, { tile: DOMRect, drawing: AtlasBox }>} */
-      const boxes = new Map();
-      const largest = largestSide(tiles.map((tile) => Number(tile.dataset.atlasSide)));
+      const tiles = new Map();
+      const visible = shown();
+      const largest = largestSide(visible.map((tile) => Number(tile.dataset.atlasSide)));
       const mode = drawingScale();
-      for (const tile of tiles) {
+      for (const tile of visible) {
         const drawing = tile.firstElementChild;
         if (drawing !== null) {
           const drawn = drawing.getBoundingClientRect();
@@ -548,7 +549,7 @@
             .map(Number.parseFloat);
           // FLIP moves the reserved slot, not the scaled square inside it. A scale
           // choice therefore never scales the tile's number or changes its position.
-          boxes.set(tile, {
+          tiles.set(tile, {
             tile: tile.getBoundingClientRect(),
             drawing: {
               left: drawn.left - (origin[0] ?? width / 2) * (1 - ratio),
@@ -563,12 +564,7 @@
       for (const follower of followers()) {
         rest.set(follower, follower.getBoundingClientRect());
       }
-      return {
-        tiles: boxes,
-        rest,
-        height: cells.getBoundingClientRect().height,
-        scroll: window.scrollY,
-      };
+      return { tiles, rest, height: cells.getBoundingClientRect().height, scroll: window.scrollY };
     };
 
     const stop = () => {
