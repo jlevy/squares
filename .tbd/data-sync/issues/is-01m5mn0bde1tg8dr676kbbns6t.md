@@ -3,20 +3,26 @@ type: is
 id: is-01m5mn0bde1tg8dr676kbbns6t
 title: "PR #748 (merge): senior review, address, gate"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 4
+version: 7
 delegate: c-rev-748-1023
 labels: []
 dependencies: []
 parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 child_order_hints:
   - is-01m5mpx469084wmghw63k1vasv
+  - is-01m5mpxzn5s2yfe80c0ad9tt5s
+  - is-01m5mpy19jth8vb1y5vmkya74t
 hold: null
 hold_until: null
 created_at: 2026-10-23T15:10:24.686Z
-updated_at: 2026-10-23T15:43:36.136Z
+updated_at: 2026-10-23T17:22:44.220Z
 started_at: 2026-10-23T15:10:25.857Z
+closed_at: 2026-10-23T17:22:44.220Z
+close_reason: "#748 merged at 769e441e1 (head 9373a529d): review A approved, dispositions 6370073707, CI green (Packing validation 39992663415, Certificate page 39992663884, Branch mergeability 39992656979). Deferrals A8 think-kfi4 and A9 think-hc8m moved under think-ezt8."
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes

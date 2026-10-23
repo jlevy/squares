@@ -3,9 +3,9 @@ type: is
 id: is-01m5mn0ct9k37pvwdy4dgs11e6
 title: "PR #751 (merge): senior review, address, gate"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 3
+version: 4
 delegate: c-rev-751-1023
 labels: []
 dependencies: []
@@ -13,8 +13,12 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-23T15:10:26.121Z
-updated_at: 2026-10-23T15:35:58.212Z
+updated_at: 2026-10-23T17:06:11.210Z
 started_at: 2026-10-23T15:10:27.170Z
+closed_at: 2026-10-23T17:06:11.209Z
+close_reason: "PR #751 merged 2026-10-23 as 05e95db36 after review A (https://github.com/jlevy/squares/pull/751#issuecomment-6368595518), dispositions (issuecomment-6369458790), a merge of main and one re-run of two jobs failed outside the PR (bead store; slow runner)."
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes

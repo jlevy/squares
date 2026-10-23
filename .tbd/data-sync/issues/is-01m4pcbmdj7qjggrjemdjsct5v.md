@@ -5,7 +5,7 @@ title: "Import wand125: s(31) >= 2391/400 = 5.9775 by the mixed_n31_L59775 fine-
 kind: task
 status: in_progress
 priority: 2
-version: 5
+version: 6
 delegate: c-lower-1023
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-11T21:02:04.210Z
-updated_at: 2026-10-23T15:48:50.037Z
+updated_at: 2026-10-23T16:54:41.744Z
 started_at: 2026-10-23T06:18:58.210Z
 ---
 Found in the 2026-10-11 intake read of wand125/square-packing (think-q655); nothing on GitHub asked. Commit 23e3186 (2026-10-11T00:51:18Z, before the head 04fbef0) adds problems/square-lower-bounds/certificates/mixed_n31_L59775/: a fine-net measure certificate reporting s(31) >= 2391/400 = 5.9775 (31 unit squares do not fit in the closed square of side 2391/400), mass 3099999/100000 < 31, core B = 4999/5000, declared net proof_net {step 1/5002, last 2072}, 2,073 directions; candidate digest 2d8d9d59...; the candidate and check2 receipts sit in the repository's data release, not the commit. The author's pre-publication check ran sqverify_fast (jlevy/squares crate with proof_net support, wand125 branch fe12e036c, source digest ab6e33e164db) from the bundle's check2/src on a fresh Ubuntu 24.04 machine: 2073/2073 directions VERIFIED in 7,277 s, mass x 0.985 control refused in 32 directions.
@@ -37,3 +37,4 @@ Against the record: n = 31's reported and verified lower bound is 2381/400 = 5.9
 - Stage 4 review (c-review-t232-math, think-oc25) accepted, no blocking or major finding; mapped in 2d32050e4 with its programs and outputs in the packet's review/review-2026-10-23/: external_review on the report, replay evidence E-wand125-fine-net-n31-59775-sqverify-fast-replay, the review's sample E-wand125-fine-net-n31-59775-review-sample (122 of 2,073, clean room), three verifiers. T-232 at V3/C3 (check_results derives it), S3 confirmed; n-031's lower lanes moved from 2381/400 to 2391/400.
 - Release: explainer v0.4.22 for 232 results and a no-change record for the other three papers (c985abb44). #753 also cuts v0.4.22; after it merges, merge main and take the next patch.
 - For the author (owner's call, no issue asked): the review's M-1 to M-3 and its five questions.
+2026-10-23 c-lower-1023, CI follow-up on PR #745: hosted run 39981272835 at c985abb44 found five consumers of n31's bound still on T-074. c2f4ff5eb fixes them: the curated print credits (credit-attributions.json, refreshed the way 9bc7c94f6 refreshed n68, n84 and n85), the bound citations, the composite figure record, the piercing survey, and frontier/README.md's Smallest Open Gaps table, where n31 enters second at 0.0225. main 7335d0098 (#752) is merged (1d0fba96f) and re-pinned (3c7f9d11e), and the no-change record was re-measured (b3c9f2da0). Pushed at b3c9f2da0.

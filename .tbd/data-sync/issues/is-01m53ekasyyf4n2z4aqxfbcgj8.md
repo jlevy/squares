@@ -5,7 +5,7 @@ title: "Algebraic house writer: adopt T-174 at 70, 153 and 207 (and T-193's 16 o
 kind: task
 status: in_progress
 priority: 2
-version: 6
+version: 7
 delegate: c-houses-1023
 labels:
   - regularization
@@ -16,7 +16,7 @@ parent_id: is-01m51hyxstsa9ptekd2ss26ksn
 hold: null
 hold_until: null
 created_at: 2026-10-16T22:51:21.278Z
-updated_at: 2026-10-23T06:18:54.005Z
+updated_at: 2026-10-23T17:03:21.095Z
 started_at: 2026-10-21T17:42:18.505Z
 ---
 The writer gap the house rule names, and its one code-gap staging (packing/campaign/result-import.md, "The House Rule"): `adopt_houses` writes rational houses only and refuses an algebraic one (`plan`, `rational`). PR #660 stages T-174's algebraic houses at 70, 153 and 207 under this bead as `no writer`. After #658 lands with a T-193 reader, T-193's 16 algebraic houses join them (88, 102, 123, 126, 175, 199, 204, 232, 258, 259, 266, 267, 292, 295, 301, 302). Opened by #660's addressing pass for its review A1.
@@ -37,3 +37,12 @@ The writer gap the house rule names, and its one code-gap staging (packing/campa
 
 2026-10-21 c-triage-sweep-1021b (read-only triage of the 21 October sweep): #658 merged on 19 October and main now stages T-193's 16 algebraic houses under this bead (select_houses.PENDING_ADOPTION, NO_WRITER) beside T-174's 70, 153 and 207; open PR #706 takes 204 off (T-223 is below T-193 there), leaving 18 counts. Nothing outside this bead blocks the writer slice. At eight counts (88, 126, 175, 199, 232, 266, 292, 301) adopt_houses.plan also refuses the house until think-8ido corrects T-193's regularization item (select_houses.CORRECTIONS_OWED); that gate is in code, not a sweep wait. Price: the writer slice (adopt_houses exact algebraic form and witness, upper_bound_houses algebraic source, the prose and coverage writers, --check), then about 0.2 CPU-h a count: 2.0 CPU-h for the ten counts free now (70, 153, 207, 102, 123, 258, 259, 267, 295, 302), 1.6 CPU-h for the eight after think-8ido, all under the 40 CPU-h item cap.
 blocked_on: none
+
+2026-10-23 c-houses-1023 (branch claude/intake-2026-10-23-algebraic-houses, draft PR #756 https://github.com/jlevy/squares/pull/756, head bf603b446, main 7335d0098 merged; labels S2, intake):
+- Writer: `exact_sides.form`/`read_form` write and read an algebraic side as root(<minimal polynomial in s>, <low>, <high>) at 40 places, in both lanes; rational houses byte-identical. Number-field houses come from derived facts and receipts (`algebraic_witness_reports derive-forms`; `upper_bound_houses.FIELD_COUNTS`).
+- Adopted: T-174 at 70, 153 and 207; T-193 at 102, 123, 258, 259, 295 and 302. Each is off PENDING_ADOPTION. Custody passed: 70 houses, 197 inputs, 42 mutations refused.
+- Still staged here: 267, priced at about 6 CPU-h for its three field jobs plus about 2 CPU-h per atlas rebuild and not run (coordinator's decision), and 88, 126, 175, 199, 232, 266, 292 and 301, waiting on think-8ido and the owner's Q2.
+- Regularized: grid-slack at 0.5, 1 and 5 degrees (no frame on a number-field witness) and Evan Daniel's driver, twice; the 258/259/302 rerun used --timeout 2400. At 102, 123, 153, 207, 258, 259 and 302 every view is a rational side 1.06e-19 to 1.79e-19 above U, and none is drawn. Per the owner's Q13 answer (think-r8cn), each count draws its exact house, as SETTLED decided-no-better with owed = think-mbdw. 70 and 295 read regular as published. Evidence is under packing/cases/regularized_drawings/think-ot5c-2026-10-23/. Compute about 1.5 CPU-h in all.
+- Release: DATA_REVISION re-pinned. A no-public-change record for the four papers, from renders at fb0889e2 against main 7335d0098, twice each, with 69 files byte-identical.
+- Blocker: the nine atlas/regularized/n-*.svg URLs the builder no longer declares fail `site_urls --check --history-ref origin/main`, in the records tier and test_site_urls. Every disposition is site code, so the decision went to think-yezl (decision, under think-ezt8) for the site lane.
+- Not done: stamp_landed (#736 not merging), and the second exact route for number-field views (think-mbdw).

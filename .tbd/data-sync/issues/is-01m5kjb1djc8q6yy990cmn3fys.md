@@ -5,7 +5,7 @@ title: "Apply the owner's sub-print answer: rerun the history, #719 and #732 wal
 kind: task
 status: closed
 priority: 1
-version: 5
+version: 6
 delegate: c-answers-1023
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-23T05:04:34.738Z
-updated_at: 2026-10-23T15:52:33.471Z
+updated_at: 2026-10-23T17:01:14.014Z
 started_at: 2026-10-23T07:54:15.406Z
 closed_at: 2026-10-23T15:52:33.470Z
 close_reason: "Applied in PR #754 (https://github.com/jlevy/squares/pull/754), head 41c43051c, CI green (runs 39979866593, 39979866417, 39979860680): the restatement ruling in the history, #719 and #732 walks; every SUB_PRINT hold settled, no row changed; #719's 631 left to think-oqjd; follow-ups for #715, #719 and #732 drafted in the notes, not posted."
@@ -56,10 +56,12 @@ ruling to it would remove that superseded row; no current row would change.
   question the earlier replies left open: a side below an earlier report at its count by
   less than the 12-place print, with both rounding up to the same 12-place print, restates
   that report, and the earlier report stays the row. Your 30 certificates first committed
-  at 5a299b4 are 2.37e-23 to 3.18e-23 below your 4e4c8ce certificates and round up to the
-  same print, so they restate them: the 4e4c8ce certificates stay the rows there, and no
-  row changes. The same rule covers 44 more of your publications in 5a299b4, 23aff0c and
-  4e4c8ce. Your 743 and 985 equal the bounds your 4e4c8ce index states there by deleting a
+  at 5a299b4 are 2.37e-23 to 3.18e-23 below your 4e4c8ce sides at the same counts and
+  round up to the same print, so they restate them. At 28 counts that side is a
+  certificate, which stays the row; at 798 and 855 it is the bound your 4e4c8ce index
+  states by deleting a square from the next count's certificate, an earlier report too (see
+  below). No row changes. The same rule covers 44 more of your publications in 5a299b4,
+  23aff0c and 4e4c8ce. Your 743 and 985 equal the bounds your 4e4c8ce index states there by deleting a
   square from the next count's certificate; such a bound is an earlier report, so they are
   not recorded either. The runbook states both rules (Several Reports at One Count) since
   https://github.com/jlevy/squares/pull/754. Still open here: the exact check at 335, and
@@ -86,3 +88,9 @@ ruling to it would remove that superseded row; no current row would change.
 **Validation.** See the PR's Validation section. Closed by c-answers-1023 at CI green with
 the head commit, or by the coordinator after merge. Addendum (D6, 23 October): the
 owner also answered D6 (think-f2io); the #715 and #732 drafts above carry it.
+
+Addendum (review A of #754, A1 and A5, 23 October): the #715 draft now says that at 798
+and 855 the 4e4c8ce side is an index deletion bound, not a certificate row. All three
+drafts state D6 in the answer's words (a square deleted from the next count's
+certificate). No draft says the bounds have no row, which is the decision's
+recommendation (think-kzme).

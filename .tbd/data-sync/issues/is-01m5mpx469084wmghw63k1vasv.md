@@ -3,9 +3,9 @@ type: is
 id: is-01m5mpx469084wmghw63k1vasv
 title: "Address PR #748 review A: record-integrity gates"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 11
+version: 12
 delegate: c-gates-1023
 labels: []
 dependencies: []
@@ -23,7 +23,11 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-23T15:43:36.136Z
-updated_at: 2026-10-23T15:44:45.830Z
+updated_at: 2026-10-23T16:50:33.580Z
 started_at: 2026-10-23T15:44:45.830Z
+closed_at: 2026-10-23T16:50:33.575Z
+close_reason: "Review A of #748 addressed: A1-A7 fixed, A8 (think-kfi4) and A9 (think-hc8m) deferred under think-6q2h. Disposition https://github.com/jlevy/squares/pull/748#issuecomment-6370073707."
+resolution: null
+duplicate_of: null
 ---
 Review A of #748 (https://github.com/jlevy/squares/pull/748#issuecomment-6368647934), nine items A1-A9; addressed by c-gates-1023.

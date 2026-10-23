@@ -5,14 +5,14 @@ title: "census --control: the axis tolerance is a constant (AXIS_ROUNDING 1e-9);
 kind: task
 status: open
 priority: 2
-version: 1
+version: 2
 labels:
   - validation
   - result-import
 dependencies: []
 parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 created_at: 2026-10-23T13:43:00.366Z
-updated_at: 2026-10-23T13:43:00.366Z
+updated_at: 2026-10-23T16:09:34.169Z
 ---
 The census control's axis check (`packing/devtools/sqverify_fast_census.py`, `AXIS_ROUNDING = 1/10^9` and the axis branch of `refusal_record`) requires the 99/100 mutant's exact capture at the vertex sweep's least vertex to lie within a constant 1e-9 of the sweep's certified lower bound. The gap is half the sweep's enclosure width, which varies by certificate, so a sound refusal can fail closed.
 
@@ -22,3 +22,7 @@ The same constant holds T-142 (n28, gap 2.15e-9; think-i85v, owner question on j
 
 Done when: the control logic is fixed and reviewed, the n26, n28 and n39 controls rerun or re-judged from their retained receipts end CONTROLS_REFUSED, and the n26 count of T-233 can take its replay evidence.
 blocked_on: none
+
+## Notes
+
+2026-10-23 (c-lower-1023): the n26 receipt named above was renamed to keep it outside the receipts the census tests hold to CONTROLS_REFUSED, following mixed_n96_L997.control-failed-v1.json. Its path is now packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-446-release-2026-10-08/mixed_n26_L5555.control-failed-v2.json (content unchanged; branch claude/intake-2026-10-23-lower-bounds, PR #745). When the fixed control re-judges or reruns n26 and ends CONTROLS_REFUSED, write the new receipt as mixed_n26_L5555.control.json beside it.
