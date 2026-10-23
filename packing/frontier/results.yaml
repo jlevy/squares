@@ -31825,7 +31825,7 @@ results:
   - id: T-230
     kind: upper-bound
     registered: '2026-10-22'
-    landed: '2026-10-22'
+    landed: '2026-10-23'
     headline: >-
       Daniel's smaller n303 packing, started from Ostashev's packing, certified exactly
     claim: >-
