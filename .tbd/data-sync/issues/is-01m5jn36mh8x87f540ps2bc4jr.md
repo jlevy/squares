@@ -3,15 +3,19 @@ type: is
 id: is-01m5jn36mh8x87f540ps2bc4jr
 title: "Gate: every registered result at S4 or S5 has a News item (records tier + CI), and the runbook makes it a same-PR step"
 kind: task
-status: open
+status: closed
 priority: 0
-version: 6
+version: 8
 labels:
   - process
 dependencies: []
 parent_id: is-01m5jn336nm6erpp0ygedhgpva
 created_at: 2026-10-22T20:33:29.233Z
-updated_at: 2026-10-23T00:44:34.658Z
+updated_at: 2026-10-23T00:45:36.745Z
+closed_at: 2026-10-23T00:45:36.744Z
+close_reason: "#735 + #738 merged (690e21857)"
+resolution: null
+duplicate_of: null
 ---
 c-lane-announce-1022, branch claude/news-gate-s4-s5. Includes T-194's News item and the decision on the 13 September S4/S5 results. Epic think-s38d.
 
@@ -38,3 +42,5 @@ OTHER PRs: #725 at 3d43e15da (T-226/T-227 S2->S3) and #731 at ef005f489 (T-230 S
 2026-10-22T22:05Z, c-lane-announce-1022: jlevy merged #735 at 21:31:58Z (bfc04b659) at head 652a06b43, before Review A's fixes; this lane did not merge it. The fixes are on follow-up draft PR #738 (claude/news-gate-review-a, cherry-picked onto bfc04b659), head 7907ec361, labelled S2. A1 option (b): an owed S4/S5 item fails only a change that edits results.yaml or site-changelog.yaml, and warns elsewhere; option (a) is think-n51k. A2: 10 gate tests, 26 of 26 mutants killed. A3: the exemption is frozen and may only shrink, and any score mismatch is stale. A5: a fresh release record (#735's record kept as history). A6: the C toolchain. A7 and the nit. Dispositions are posted on #735: https://github.com/jlevy/squares/pull/735#issuecomment-6352159306. Hosted CI on #738 was 29 pass and 1 pending at posting.
 
 2026-10-23T01:20Z, c-lane-announce-1022: #738's own review A is addressed in 8d29be1dc, and the branch merges main e929137a8 (#725): head 633662a2a, hosted CI 31 pass / 28 skip / 0 fail (packing-required and pages-required pass). A1: on main (--announcement-base HEAD^1, MAIN_DELIVERY_BASE) an owed item only warns, even after a raced records merge; PR CI enforces. A2: the committed-edit test; 40 of 40 mutants killed. A3: the postmortem credits #738. Nits: reflow and re-render; release wording. Dispositions: https://github.com/jlevy/squares/pull/738#issuecomment-6354618978
+
+2026-10-23 00:46Z coord-intake-1021b: done. #735 merged by the owner (bfc04b659: the gate, T-194 News item, postmortem docs/project/postmortems/postmortem-2026-10-22-results-without-news.md); #738 merged as 690e21857 with #735 review A fixes and #738 review A fixes (gate fails only a PR that edits results.yaml or site-changelog.yaml; warns on unrelated PRs and always on main; frozen 15 exemptions; 40 mutants killed). T-194 News item is live on squaremath.org (home box leads with it since the 22:06Z deploy). Follow-ups: think-n51k (same-PR items), think-mh7q, think-r118, think-mubh, think-yelx, think-2252, think-gq0l.
