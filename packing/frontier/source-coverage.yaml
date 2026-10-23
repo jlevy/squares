@@ -5,8 +5,10 @@ softschema:
 last_reviewed: '2026-10-16'
 coverage_scope: 'Current public upper-bound catalogues and first-party result releases known to this
   project, the Schadt n=29 witness-contract regression source, and the September 2026 external executable
-  lower-bound certificate releases. Their proof obligations and assurance are tracked by evidence.yaml;
-  paper availability remains in source-availability.yaml. This is a dated named-source claim, not
+  lower-bound certificate releases, and every other source dated from 22 August 2026 that a registered
+  result or its evidence cites, papers and tools included, which check_source_coverage requires. Their
+  proof obligations and assurance are tracked by evidence.yaml; the availability of papers not
+  retained here remains in source-availability.yaml. This is a dated named-source claim, not
   a claim that a web search has exhausted every possible source.
 
   '
@@ -1171,6 +1173,32 @@ sources:
   notes: Complete v1.0.2 tree pinned at 6a733f339395c3514f2ab63d8c4aa64cf63c0b5a, with offline R038
     checker dependency, supplied and fetched social text, and separate mathematical review and replay
     receipts in the source packet.
+- id: esummins-packing-2026-10-12
+  title: 'E. Summins'' simple-square stratification series, with a replay of Kleddamag''s n = 11 certificate'
+  role: source-repository
+  url: https://github.com/Esummins/packing/tree/651a9a54688341880e9c0dc9fcfc19f2c04cd3cb
+  local: resources/web/esummins-packing-2026-10-12/
+  source_key: '[Summins stratification series 2026-10-12]'
+  scope:
+    n_min: 11
+    n_max: 11
+  reviewed: '2026-10-12'
+  source_date: '2026-10-12'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/evidence.yaml
+  evidence:
+  - E-n011-kleddamag-3875-esummins-replay-report
+  notes: >-
+    Revision 651a9a54688341880e9c0dc9fcfc19f2c04cd3cb, committed 2026-10-12T04:11:54Z, the
+    commit jlevy/squares#521 to #527 name; the packet retains the series' manifest scope. The
+    series claims no bound. Its one entry here is a third party's re-run of Overbeck's v1.0.2
+    certificate for s(11) > 31/8 (#521), recorded as a reported entry on T-037. The lab says its
+    campaigns, programs, certificates, Lean files and notes were produced by AI agents (Claude,
+    Anthropic) under the PI's direction. Added on 2026-10-23, when check_source_coverage began
+    to require a coverage source for every source dated from 22 August 2026 that a registered
+    result or its evidence cites (think-g6d5).
 - id: guzhou-n17-r052-continuation-2026
   title: N17 square packing, R052 continuation to 4.62003
   role: source-repository
@@ -1195,6 +1223,37 @@ sources:
     and new C++ full modes. Marc Leonard Overbeck''s public 4.640020 of 2026-09-26 supersedes it, so it carries
     no bound here and was not reviewed; the C++ kernel runs the same exact event-cell sweep as the
     source''s Python and Node/BigInt checkers, so it adds no method-distinct decision.'
+- id: n17-weighted-certificates-2026-09-20
+  title: 'Weighted certificates for s(17) above 459/100: Guzhou0806''s R012 and Mira''s 1620-atom measure'
+  role: source-repository
+  url: https://github.com/Guzhou0806/n17-square-packing/tree/931a0dfd64302e277057006e99388fe5c00b7f53
+  local: resources/web/n17-weighted-certificates-2026-09-20/
+  source_key: '[n17 weighted certificates 2026-09-20]'
+  scope:
+    n_min: 17
+    n_max: 19
+  reviewed: '2026-09-20'
+  source_date: '2026-09-20'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/n-017.md
+  - frontier/n-018.md
+  evidence:
+  - E-n017-guzhou-r012-source-replay
+  - E-n017-guzhou-r012-interval-decision
+  - E-n017-mira-4613-exact-replay
+  - E-n017-mira-4613-interval-decision
+  notes: >-
+    Two repositories under one key, each a selected tree retrieved 2026-09-20:
+    Guzhou0806/n17-square-packing at 931a0dfd64302e277057006e99388fe5c00b7f53 (R012, the
+    parent-angle certificate of s(17) >= 461300/99999), and Mira-acc/17squares at
+    0266c9936a303817ac7da0802364034a34fb2558 (the 1620-atom weighted certificate of s(17) >
+    4.613028635886, 7 September 2026), on which R012 builds. Both descend from this repository's
+    T-019 certificate and credit it. T-032 registers both, replayed here. R012's ATTRIBUTION.md
+    names it as research by "Guzhou0806 / N17 project, with AI assistance". Added on 2026-10-23,
+    when check_source_coverage began to require a coverage source for every source dated from 22
+    August 2026 that a registered result or its evidence cites (think-g6d5).
 - id: tokoharu-density-2026
   title: Rectangle-density lower-bound certificates
   role: source-repository
@@ -1348,6 +1407,77 @@ sources:
     complete coverage replay is in the packet's receipts. At n45 the 1391/200 was the case's reported
     bound until Daniel's s(45) = 7 (evand-square-packing-2026-09-28) superseded it on 2026-09-29;
     the case keeps E-wand125-rectangle-report as reported evidence.
+- id: wand125-rectangles-2026-09-28
+  title: 'Rectangle-density certificates added or raised on 27 and 28 September 2026'
+  role: source-repository
+  url: https://github.com/wand125/square-packing-bounds/tree/39d8ecc74d651b54ec977c331c8f2015b442a6c4
+  local: resources/web/wand125-rectangle-certificates-2026-09-28/
+  source_key: '[wand125 rectangle bounds 2026-09-28]'
+  scope:
+    n_values:
+    - 21
+    - 28
+    - 29
+    - 31
+    - 37
+    - 38
+    - 39
+    - 41
+    - 42
+    - 43
+    - 44
+    - 51
+    - 52
+    - 53
+    - 54
+    - 55
+    - 56
+    - 57
+    - 58
+    - 59
+    - 60
+    - 66
+    - 67
+    - 68
+    - 69
+    - 70
+    - 71
+    - 72
+    - 73
+    - 74
+    - 76
+    - 77
+    - 86
+    - 88
+    - 89
+    - 90
+    - 91
+    - 94
+    - 95
+  reviewed: '2026-09-28'
+  source_date: '2026-09-28'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/evidence.yaml
+  evidence:
+  - E-wand125-rectangle-2026-09-28-report
+  - E-wand125-rectangle-2026-09-28-monotone-report
+  - E-wand125-rectangle-2026-09-28-source-replay
+  notes: >-
+    Revision 39d8ecc74d651b54ec977c331c8f2015b442a6c4 of the same repository as
+    wand125-rectangles-2026, retrieved 2026-09-28T23:46Z. It raised 32 of the 44 standing
+    certificates that revision ad43d29 pinned and added six counts from n = 86 to 95, in
+    Tokoharu's format and accepted by his unchanged checker; the packet retains what is new at
+    39d8ecc and reads the rest from the 27 September packet. T-046 registers the reported
+    values, and T-070 the 25 counts whose complete replay passed here
+    (E-wand125-rectangle-2026-09-28-source-replay); n = 77 and 90 take the n = 76 and 89
+    certificates, whose masses lie below them (E-wand125-rectangle-2026-09-28-monotone-report).
+    The point-only and mixed bundles of the same revision are
+    wand125-point-and-mixed-2026-09-28. The source README says parts of the work were produced
+    with AI assistance under human direction. Added on 2026-10-23, when check_source_coverage
+    began to require a coverage source for every source dated from 22 August 2026 that a
+    registered result or its evidence cites (think-g6d5).
 - id: wand125-point-and-mixed-2026-09-28
   title: Point-only and mixed-rectangle certificates for s(21), s(45) and s(50)
   role: source-repository
@@ -1388,6 +1518,38 @@ sources:
     which put s(50) >= 37/5 and, by its mass, s(51) >= 37/5 in the verified lane and gave s(21) =
     5 a second, point-only route there. The source claims no priority for s(21) or s(45). The superseded
     n = 50 rungs 147/20 and 3659/500 are retained and not registered.
+- id: wand125-tools-2026-09-29
+  title: 'square-packing-tools: certificate tools and an exact point and threshold-charge row checker'
+  role: source-repository
+  url: https://github.com/wand125/square-packing-tools/tree/0d33ab61726c2ab03e3eb8f457dabaf22db8571f
+  local: resources/web/wand125-tools-2026-09-29/
+  source_key: '[wand125 tools 2026]'
+  scope:
+    n_min: 1
+    n_max: 100
+  reviewed: '2026-10-02'
+  source_date: '2026-09-29'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/evidence.yaml
+  - frontier/n-011.md
+  evidence:
+  - E-wand125-tools-ceiling-report
+  - E-wand125-tools-ceiling-certificates
+  - E-wand125-tools-n11-row-report
+  - E-wand125-tools-n11-row-replay
+  notes: >-
+    Revision 0d33ab61726c2ab03e3eb8f457dabaf22db8571f, committed 2026-09-29T02:04Z and retained
+    whole as upstream.tar.gz; the later 3eb08e6 is pinned separately in the packet's
+    update-3eb08e6/. The source supplies tools rather than a new bound. T-058 registers the
+    ceiling it states for rectangle-density certificates, proved here for n = 1 to 100 by exact
+    certificates (E-wand125-tools-ceiling-certificates, 2 October 2026), and T-059 its reported
+    agreement with all 12,028 row minima of Overbeck's n = 11 certificate, replayed here in full
+    (E-wand125-tools-n11-row-replay); neither is a case bound. Its README says it was developed
+    by wand125 with OpenAI Codex and Anthropic Claude. Added on 2026-10-23, when
+    check_source_coverage began to require a coverage source for every source dated from 22
+    August 2026 that a registered result or its evidence cites (think-g6d5).
 - id: wand125-rectangles-2026-10-01
   title: Rectangle-density certificates raised or added since 28 September
   role: source-repository
@@ -2672,6 +2834,395 @@ sources:
     so none holds a field and none was replayed. By the authors' clocks Casson published before Couzo's
     first packing at 36 of the 39 counts and after it at 103, 152 and 180; each case record states
     both sources' dates and values.
+- id: karakus-2026
+  title: 'A counterexample to Nagamochi''s scoring lemma and a new rectangle packing bound'
+  role: first-party-release
+  url: https://arxiv.org/abs/2609.37410
+  local: resources/papers/karakus-2026-counterexample-nagamochi-scoring-lemma.pdf
+  source_key: '[Karakuş 2026]'
+  scope:
+    n_values:
+    - 8
+    - 10
+    - 11
+    - 12
+    - 13
+    - 14
+    - 15
+    - 16
+    - 17
+    - 18
+    - 19
+    - 20
+    - 21
+    - 22
+    - 23
+    - 24
+    - 25
+    - 26
+    - 27
+    - 28
+    - 29
+    - 30
+    - 31
+    - 32
+    - 33
+    - 34
+    - 35
+    - 36
+    - 37
+    - 38
+    - 39
+    - 40
+    - 41
+    - 42
+    - 43
+    - 44
+    - 45
+    - 46
+    - 47
+    - 48
+    - 49
+    - 50
+    - 51
+    - 52
+    - 53
+    - 54
+    - 55
+    - 56
+    - 57
+    - 58
+    - 59
+    - 60
+    - 61
+    - 62
+    - 63
+    - 64
+    - 65
+    - 66
+    - 67
+    - 68
+    - 69
+    - 70
+    - 71
+    - 72
+    - 73
+    - 74
+    - 75
+    - 76
+    - 77
+    - 78
+    - 79
+    - 80
+    - 81
+    - 82
+    - 83
+    - 84
+    - 85
+    - 86
+    - 87
+    - 88
+    - 89
+    - 90
+    - 91
+    - 92
+    - 93
+    - 94
+    - 95
+    - 96
+    - 97
+    - 98
+    - 99
+    - 100
+    - 101
+    - 102
+    - 103
+    - 104
+    - 105
+    - 106
+    - 107
+    - 108
+    - 109
+    - 110
+    - 111
+    - 112
+    - 113
+    - 114
+    - 115
+    - 116
+    - 117
+    - 118
+    - 119
+    - 120
+    - 121
+    - 122
+    - 123
+    - 124
+    - 125
+    - 126
+    - 127
+    - 128
+    - 129
+    - 130
+    - 131
+    - 132
+    - 133
+    - 134
+    - 135
+    - 136
+    - 137
+    - 138
+    - 139
+    - 140
+    - 141
+    - 142
+    - 143
+    - 144
+    - 145
+    - 146
+    - 147
+    - 148
+    - 149
+    - 150
+    - 151
+    - 152
+    - 153
+    - 154
+    - 155
+    - 156
+    - 157
+    - 158
+    - 159
+    - 160
+    - 161
+    - 162
+    - 163
+    - 164
+    - 165
+    - 166
+    - 167
+    - 168
+    - 169
+    - 170
+    - 171
+    - 172
+    - 173
+    - 174
+    - 175
+    - 176
+    - 177
+    - 178
+    - 179
+    - 180
+    - 181
+    - 182
+    - 183
+    - 184
+    - 185
+    - 186
+    - 187
+    - 188
+    - 189
+    - 190
+    - 191
+    - 192
+    - 193
+    - 194
+    - 195
+    - 196
+    - 197
+    - 198
+    - 199
+    - 200
+    - 201
+    - 202
+    - 203
+    - 204
+    - 205
+    - 206
+    - 207
+    - 208
+    - 209
+    - 210
+    - 211
+    - 212
+    - 213
+    - 214
+    - 215
+    - 216
+    - 217
+    - 218
+    - 219
+    - 220
+    - 221
+    - 222
+    - 223
+    - 224
+    - 225
+    - 226
+    - 227
+    - 228
+    - 229
+    - 230
+    - 231
+    - 232
+    - 233
+    - 234
+    - 235
+    - 236
+    - 237
+    - 238
+    - 239
+    - 240
+    - 241
+    - 242
+    - 243
+    - 244
+    - 245
+    - 246
+    - 247
+    - 248
+    - 249
+    - 250
+    - 251
+    - 252
+    - 253
+    - 254
+    - 255
+    - 256
+    - 257
+    - 258
+    - 259
+    - 260
+    - 261
+    - 262
+    - 263
+    - 264
+    - 265
+    - 266
+    - 267
+    - 268
+    - 269
+    - 270
+    - 271
+    - 272
+    - 273
+    - 274
+    - 275
+    - 276
+    - 277
+    - 278
+    - 279
+    - 280
+    - 281
+    - 282
+    - 283
+    - 284
+    - 285
+    - 286
+    - 287
+    - 288
+    - 289
+    - 290
+    - 291
+    - 292
+    - 293
+    - 294
+    - 295
+    - 296
+    - 297
+    - 298
+    - 299
+    - 300
+    - 301
+    - 302
+    - 303
+    - 304
+    - 305
+    - 306
+    - 307
+    - 308
+    - 309
+    - 310
+    - 311
+    - 312
+    - 313
+    - 314
+    - 315
+    - 316
+    - 317
+    - 318
+    - 319
+    - 320
+    - 321
+    - 322
+    - 323
+    - 324
+  reviewed: '2026-10-06'
+  source_date: '2026-09-29'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/evidence.yaml
+  evidence:
+  - E-karakus-strip-lower
+  - E-karakus-strip-measure-interval
+  - E-nagamochi-lemma1-counterexample
+  notes: >-
+    Hakan Karakuş's arXiv preprint 2609.37410v1, submitted 2026-09-29, CC BY 4.0, archived on
+    2026-10-02 as the PDF with a cleaned transcription beside it. It refutes Lemma 1 of
+    Nagamochi 2005 (T-085, with chelokot's square) and proves a weaker rectangle bound by a
+    strip measure: s(N) >= 1/2 + sqrt(N - floor(sqrt(N)) + 1/4) for every nonsquare N >= 8
+    (T-083) and s(k^2 - 1) = k (T-084). Read and re-derived here
+    (docs/project/reviews/review-2026-10-02-nagamochi-lemma1-karakus.md); Proposition 5.1 is
+    machine-checked here since 2026-10-06 (E-karakus-strip-measure-interval). The scope is the
+    union of the cited evidence's. A paper rather than a repository; it is here because the
+    register cites it. Added on 2026-10-23, when check_source_coverage began to require a
+    coverage source for every source dated from 22 August 2026 that a registered result or its
+    evidence cites (think-g6d5).
+- id: chelokot-nagamochi-counterexample-2026-09-05
+  title: 'chelokot''s counterexample to Nagamochi''s Lemma 1 and Lean proof of s(k^2 - 2) = k'
+  role: source-repository
+  url: https://github.com/chelokot/square-packing-archive/tree/753079eb37d8d16225a5dc1f56e493a3c3b243f4
+  local: resources/web/chelokot-nagamochi-counterexample-2026-09-05/
+  source_key: '[chelokot Nagamochi counterexample 2026]'
+  scope:
+    n_values:
+    - 7
+    - 14
+    - 23
+    - 34
+    - 47
+    - 62
+    - 79
+    - 98
+    - 119
+    - 142
+    - 167
+    - 194
+    - 223
+    - 254
+    - 287
+    - 322
+  reviewed: '2026-10-04'
+  source_date: '2026-09-05'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/evidence.yaml
+  evidence:
+  - E-chelokot-square-minus-two-lean
+  notes: >-
+    chelokot/square-packing-archive at head 753079eb, committed 2026-09-05T21:42Z, reported to
+    this project on jlevy/squares#295. The packet retains the counterexample note, a square of
+    side 10001/10000 in the 4 x 4 container scoring below 1 under Nagamochi 2005's weights (with
+    Karakuş's family, T-085), and pins the rest by digest. The Lean development, whose
+    Records.NearSquare.squareMinusTwo_isMinimumSide proves s(k^2 - 2) = k, was built here at the
+    pin on 2026-10-02 (E-chelokot-square-minus-two-lean, T-086; the packet's update of 4 October
+    2026). Its ATTRIBUTION.md credits AI-produced research and Lean formalizations to an AI
+    system. Added on 2026-10-23, when check_source_coverage began to require a coverage source
+    for every source dated from 22 August 2026 that a registered result or its evidence cites
+    (think-g6d5).
 - id: kingbird-current
   title: Squares in Squares
   role: current-catalogue
@@ -3893,6 +4444,97 @@ sources:
     into the CI run's binaries and replayed in full, every output equal to both release receipts apart
     from timing, and the mathematics was reviewed with no blocking defect. Both lanes of n-040.md move
     to 3359/500 (T-157); T-145's 1340000/199529 stays as history.
+- id: evand-regularizer-2026-10-11
+  title: 'Evan Daniel''s exact solver, exact checkers and display regularizer, vendored'
+  role: source-repository
+  url: https://github.com/evand/square-packing/tree/675a5eaa8712542daac8b4515b0f69ad7044df44
+  local: ../vendor/evand-regularize/
+  source_key: '[Daniel regularizer 2026-10-11]'
+  scope:
+    n_values:
+    - 28
+    - 29
+    - 37
+    - 39
+    - 41
+    - 50
+    - 53
+    - 54
+    - 55
+    - 69
+    - 71
+    - 83
+    - 87
+    - 101
+    - 104
+    - 107
+    - 109
+    - 122
+    - 124
+    - 125
+    - 128
+    - 145
+    - 147
+    - 148
+    - 149
+    - 151
+    - 170
+    - 171
+    - 173
+    - 174
+    - 178
+    - 197
+    - 198
+    - 200
+    - 201
+    - 202
+    - 203
+    - 204
+    - 205
+    - 226
+    - 227
+    - 229
+    - 230
+    - 231
+    - 233
+    - 234
+    - 235
+    - 257
+    - 260
+    - 262
+    - 264
+    - 265
+    - 290
+    - 291
+    - 293
+    - 294
+    - 296
+    - 298
+    - 299
+    - 300
+  reviewed: '2026-10-11'
+  source_date: '2026-10-11'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/evidence.yaml
+  evidence:
+  - E-regularized-bounds-2026-10-12-exact-decision
+  - E-regularized-bounds-2026-10-13-grid-slack-exact-decision
+  notes: >-
+    evand/square-packing at 675a5eaa8712542daac8b4515b0f69ad7044df44, committed
+    2026-10-11T16:34Z, under the MIT licence: the exact solver and its two exact checkers under
+    search/exact/ and the display regularizer under search/regularize/, vendored under
+    vendor/evand-regularize/ with its manifest vendored.yaml, which records each reviewed local
+    change and which devtools.check_vendored_evand holds the copy to. A tool rather than a
+    report: this project runs it through devtools.regularize_evand on its own known-best
+    witnesses, and T-155 and T-156 register the exact sides it made, each decided here over Q by
+    two checkers that share no geometry or verification code
+    (E-regularized-bounds-2026-10-12-exact-decision and
+    E-regularized-bounds-2026-10-13-grid-slack-exact-decision). Its CREDITS.md says the work was
+    produced by Claude (Anthropic) under his direction. Added on 2026-10-23, when
+    check_source_coverage began to require a coverage source for every source dated from 22
+    August 2026 that a registered result or its evidence cites (think-g6d5).
 - id: evand-regularized-2026-10-10
   title: Evan Daniel's regularized record lists at ea1a2f2, no issue
   role: source-repository

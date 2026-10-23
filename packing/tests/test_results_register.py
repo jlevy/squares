@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import re
 from pathlib import Path
+from typing import Any
 
 import pytest
 import yaml
@@ -2053,3 +2054,240 @@ def test_registration_backfill_preserves_second_proof_dates_and_is_idempotent() 
     )
     assert backfill_result_registration.insert_dates(text, dates) == wanted
     assert backfill_result_registration.insert_dates(wanted, dates) == wanted
+
+
+def test_a_significance_by_of_one_word_is_refused() -> None:
+    """An unquoted ``by: issue #227 intake ...`` reads as ``issue``: YAML takes the rest
+    for a comment, and the scorer of T-056, T-057 and T-061 was lost that way until they
+    were rescored (think-nr59). A bare path is one word as well and names no scorer."""
+    cut = yaml.safe_load("significance:\n  by: issue #227 intake, draft\n")["significance"]
+    assert cut["by"] == "issue"
+    (problem,) = check_results.significance_by_problems({"id": "T-001", "significance": cut})
+    assert problem.startswith("T-001: significance.by is one word, 'issue'")
+    path = {"by": "docs/project/reviews/review-2026-10-07-squish-update-mathematics.md"}
+    assert check_results.significance_by_problems({"id": "T-002", "significance": path})
+    quoted = yaml.safe_load("significance:\n  by: 'issue #227 intake, draft'\n")
+    assert check_results.significance_by_problems({"id": "T-003", **quoted}) == []
+    live = safe_load(check_results.RESULTS.read_text(encoding="utf-8"))["results"]
+    assert [found for r in live for found in check_results.significance_by_problems(r)] == []
+
+
+def test_a_scope_its_evidence_does_not_cover_is_refused() -> None:
+    """T-045 once claimed s(32) >= 119/20 and cited one entry whose scope was 27, 28 and 31
+    (think-506q); the scope is covered by the union of the cited scopes."""
+    record = {"id": "T-999", "scope": {"n_values": [27, 28, 31, 32]}}
+    cited: list[dict[str, Any]] = [{"scope": {"n_values": [27, 28, 31]}}]
+    assert check_results.scope_problems(record, cited) == [
+        "T-999: scope holds n = 32, which no evidence it cites covers"
+    ]
+    cited.append({"scope": {"n_min": 32, "n_max": 40}})
+    assert check_results.scope_problems(record, cited) == []
+    live, evidence = _live_register_and_evidence()
+    assert [
+        problem
+        for record in live
+        for problem in check_results.scope_problems(
+            record, [evidence[ref] for ref in record["evidence"] if ref in evidence]
+        )
+    ] == []
+
+
+def test_a_recent_case_upper_bound_is_covered_as_a_lower_bound_is() -> None:
+    """The coverage gate read lower bounds only, so T-056, T-057 and T-065 were registered
+    by convention (think-506q). Take out the entries that cite the evidence of n = 211's
+    upper bound, Couzo's certificate of 14 October 2026 since T-057's was beaten, and that
+    bound is refused."""
+    live, evidence = _live_register_and_evidence()
+    sources = {
+        source["key"]: source
+        for source in safe_load(check_results.BIBLIOGRAPHY.read_text(encoding="utf-8"))[
+            "sources"
+        ]
+    }
+    upper = check_results.case_bound_evidence(fields=check_results.UPPER_BOUND_FIELDS)
+    assert check_results.coverage_problems(live, evidence, sources, upper, "upper") == []
+    cited = upper[211]
+    assert cited
+    assert all(check_results.recent_evidence(evidence[ref], sources) for ref in cited)
+    without = [record for record in live if not cited & set(record["evidence"])]
+    found = check_results.coverage_problems(without, evidence, sources, upper, "upper")
+    assert {problem for problem in found if problem.startswith("n-211:")} == {
+        f"n-211: its upper bound cites {ref}, and no registered result citing it covers n = 211"
+        for ref in cited
+    }
+    lower = check_results.case_bound_evidence()
+    assert not [
+        problem
+        for problem in check_results.coverage_problems(without, evidence, sources, lower)
+        if problem.startswith("n-211:")
+    ], "the lower-bound gate alone would not have seen it"
+
+
+def _live_register_and_evidence() -> tuple[list[dict], dict[str, dict]]:
+    register = safe_load(check_results.RESULTS.read_text(encoding="utf-8"))["results"]
+    evidence = {
+        entry["id"]: entry
+        for entry in safe_load(check_results.EVIDENCE.read_text(encoding="utf-8"))["evidence"]
+    }
+    return register, evidence
+
+
+#: A source by others dated after the project began, which the register's rule holds.
+SEEDED_SOURCES = {"[others 2026]": {"dated": "2026-09-30"}}
+MAPPED_REVIEW = "docs/project/reviews/review-2026-10-02-nagamochi-lemma1-karakus.md"
+
+
+def _seeded_lane(**entry: object) -> tuple[dict[str, dict], dict[str, dict]]:
+    """One verified lower bound at n = 40 resting on one evidence entry by others."""
+    evidence = {
+        "E-seed": {
+            "id": "E-seed",
+            "claim": "lower-bound",
+            "scope": {"n_values": [40]},
+            "assurance": "verified",
+            "novelty": "previously-published",
+            "source_key": "[others 2026]",
+            **entry,
+        }
+    }
+    case = {"n": 40, "verified_lower_bound": {"value": "6.5", "evidence": ["E-seed"]}}
+    return evidence, case
+
+
+#: The producer's own exact run, a published proof nobody here read, and a replay here
+#: with no review: T-056 and T-057 reached the verified lane in the last shape.
+PRODUCER_RUN = {
+    "method": "exact-algebraic",
+    "origin": "external",
+    "performed_by": "source-author",
+    "certificate": "c.json",
+    "replay": "run",
+    "replay_status": "passed",
+}
+UNREAD_PROOF = {
+    "method": "published-proof",
+    "origin": "external",
+    "performed_by": "source-author",
+}
+UNREVIEWED_REPLAY = {**PRODUCER_RUN, "origin": "replayed-here", "performed_by": "repository"}
+
+
+def _lane_review_problems(
+    evidence: dict[str, dict], results: list[dict] | None = None
+) -> list[str]:
+    document_map = safe_load(check_results.DOCUMENT_MAP.read_text(encoding="utf-8"))
+    register = (
+        [{"id": "T-999", "scope": {"n_values": [40]}, "evidence": ["E-seed"]}]
+        if results is None
+        else results
+    )
+    return check_results.verified_lane_review_problems(
+        register, evidence, SEEDED_SOURCES, document_map, {"lower": {40: {"E-seed"}}}
+    )
+
+
+@pytest.mark.parametrize(
+    ("entry", "lane_gate"),
+    [(PRODUCER_RUN, "refused"), (UNREAD_PROOF, "passed"), (UNREVIEWED_REPLAY, "passed")],
+    ids=["producer-run", "unread-proof", "unreviewed-replay"],
+)
+def test_a_verified_bound_by_others_with_no_mapped_review_is_refused(
+    entry: dict, lane_gate: str
+) -> None:
+    """think-mt6e's negative control, written before the gate.
+
+    The verified lane takes a result by others only after a complete replay here and a
+    review of its mathematics. The case-lane check (`sqpack.assurance`) already refused
+    the producer's own machine run, the replay half; it passed a published proof nobody
+    here read and a replay with no review, so the review half needed a gate of its own.
+    `verified_lane_review_problems` refuses all three.
+    """
+    from sqpack.assurance import check_case_semantics  # noqa: PLC0415
+
+    evidence, case = _seeded_lane(**entry)
+    lane = [
+        error
+        for error in check_case_semantics(case, evidence)
+        if error.startswith("n=40 verified_lower_bound")
+    ]
+    assert ("refused" if lane else "passed") == lane_gate, lane
+    assert _lane_review_problems(evidence) == [
+        (
+            "n-040: its verified lower bound rests on E-seed, a result by others, and no "
+            "register entry covering it lists a review nor does the evidence record a read "
+            "in a mapped review document"
+        )
+    ]
+
+
+def test_a_mapped_review_on_the_entry_or_a_read_naming_one_lets_the_value_stand() -> None:
+    evidence, _ = _seeded_lane(**UNREVIEWED_REPLAY)
+    reviewed = [
+        {
+            "id": "T-999",
+            "scope": {"n_values": [40]},
+            "evidence": ["E-seed"],
+            "reviews": [{"path": MAPPED_REVIEW, "kind": "adversarial", "verdict": "accepted"}],
+        }
+    ]
+    assert _lane_review_problems(evidence, reviewed) == []
+    elsewhere = [{**reviewed[0], "scope": {"n_values": [41]}}]
+    assert _lane_review_problems(evidence, elsewhere), "a review of another count"
+    read = {
+        "state": "informally-verified",
+        "date": "2026-10-02",
+        "reviewed_by": f"a review lane ({MAPPED_REVIEW})",
+        "note": "Read and re-derived.",
+    }
+    evidence["E-seed"]["external_review"] = read
+    assert _lane_review_problems(evidence) == []
+    evidence["E-seed"]["external_review"] = {**read, "reviewed_by": "a review lane"}
+    assert _lane_review_problems(evidence), "a read that names no mapped document"
+    evidence["E-seed"]["external_review"] = {**read, "state": "not-reviewed"}
+    assert _lane_review_problems(evidence), "a read that was not made"
+    SEEDED = {"[others 2026]": {"dated": "2026-08-21"}}  # noqa: N806
+    document_map = safe_load(check_results.DOCUMENT_MAP.read_text(encoding="utf-8"))
+    assert (
+        check_results.verified_lane_review_problems(
+            [{"id": "T-999", "scope": {"n_values": [40]}, "evidence": ["E-seed"]}],
+            evidence,
+            SEEDED,
+            document_map,
+            {"lower": {40: {"E-seed"}}},
+        )
+        == []
+    ), "a source from before the project began is not the register's to hold"
+
+
+@pytest.mark.parametrize(
+    ("review", "read_state"),
+    [
+        ({"verdict": "refuted", "kind": "adversarial"}, None),
+        ({"verdict": "defect-open", "kind": "adversarial"}, None),
+        ({"verdict": "accepted", "kind": "oversight"}, None),
+        (None, "defect-found"),
+    ],
+    ids=["refuted", "defect-open", "oversight", "defect-found-read"],
+)
+def test_a_review_that_does_not_accept_the_mathematics_does_not_count(
+    review: dict | None, read_state: str | None
+) -> None:
+    """Review A3 of #748: the verified lane's review half counts a review that accepts
+    the result, by a kind that reads its mathematics, or a read that found no defect.
+    A refuted or open-defect verdict, an oversight record, or a read that found a defect
+    leaves the value unreviewed."""
+    evidence, _ = _seeded_lane(**UNREVIEWED_REPLAY)
+    register = [{"id": "T-999", "scope": {"n_values": [40]}, "evidence": ["E-seed"]}]
+    if review is not None:
+        register[0]["reviews"] = [{"path": MAPPED_REVIEW, **review}]
+    if read_state is not None:
+        evidence["E-seed"]["external_review"] = {
+            "state": read_state,
+            "date": "2026-10-02",
+            "reviewed_by": f"a review lane ({MAPPED_REVIEW})",
+            "note": "A defect in the argument.",
+        }
+    assert _lane_review_problems(evidence, register)
+    accepted = {"path": MAPPED_REVIEW, "verdict": "defects-resolved", "kind": "confirming"}
+    register[0]["reviews"] = [*register[0].get("reviews", []), accepted]
+    assert _lane_review_problems(evidence, register) == []

@@ -801,3 +801,84 @@ def test_the_schema_names_a_construction_exactly_when_a_row_is_above_one() -> No
         {key: value for key, value in above.items() if key != "construction"}
     ]
     assert not validator.is_valid(document)
+
+
+def _live_register() -> tuple[
+    dict[str, Any], list[dict[str, Any]], dict[str, Any], dict[str, Any]
+]:
+    """The live coverage record, register, evidence index and bibliography."""
+    coverage = safe_load(coverage_check.COVERAGE.read_text(encoding="utf-8"))
+    results = safe_load(coverage_check.RESULTS.read_text(encoding="utf-8"))["results"]
+    evidence = {
+        entry["id"]: entry
+        for entry in safe_load(coverage_check.EVIDENCE.read_text(encoding="utf-8"))["evidence"]
+    }
+    bibliography = {
+        source["key"]: source
+        for source in safe_load(coverage_check.BIBLIOGRAPHY.read_text(encoding="utf-8"))[
+            "sources"
+        ]
+    }
+    return coverage, results, evidence, bibliography
+
+
+def test_every_recent_source_the_register_cites_has_a_coverage_source() -> None:
+    """Stage 3 records a reported claim with a coverage entry that cites it; the import
+    review of 2026-10-01 found two wand125 keys without one, and the gate passed."""
+    coverage, results, evidence, bibliography = _live_register()
+    assert (
+        coverage_check.register_source_errors(coverage, results, evidence, bibliography) == []
+    )
+
+
+def test_a_cited_recent_source_with_no_coverage_source_is_refused() -> None:
+    """The negative control: the live record with the tools' coverage source taken out."""
+    coverage, results, evidence, bibliography = _live_register()
+    coverage["sources"] = [
+        source
+        for source in coverage["sources"]
+        if source["source_key"] != "[wand125 tools 2026]"
+    ]
+    assert coverage_check.register_source_errors(coverage, results, evidence, bibliography) == [
+        (
+            "[wand125 tools 2026], dated 2026-09-29 and cited by T-058, T-059, has no coverage "
+            "source: none carries the key or cites evidence that does"
+        )
+    ]
+
+
+def test_a_coverage_source_that_cites_a_keys_evidence_holds_the_key() -> None:
+    """The Kingbird catalogue's entry holds each finder's own key by citing its evidence:
+    without those citations, Chang's n = 83 key is unheld."""
+    coverage, results, evidence, bibliography = _live_register()
+    (kingbird,) = [s for s in coverage["sources"] if s["id"] == "kingbird-current"]
+    kingbird["evidence"] = [
+        ref for ref in kingbird["evidence"] if not ref.startswith("E-n083-")
+    ]
+    (problem,) = coverage_check.register_source_errors(
+        coverage, results, evidence, bibliography
+    )
+    assert problem.startswith("[Chang n83 2026-09-24], dated 2026-09-24 and cited by T-089,")
+
+
+#: The key of Burns's and Massaccesi's August 2026 posts, spelled with its en dash.
+BURNS_MASSACCESI = "[Burns\N{EN DASH}Massaccesi n17]"
+
+
+def test_a_source_dated_before_the_project_began_needs_no_coverage_source() -> None:
+    """The register's rule for results by others starts on 22 August 2026; Nagamochi 2005
+    and the Burns and Massaccesi posts of August are cited and are not coverage sources."""
+    coverage, results, evidence, bibliography = _live_register()
+    keys = {
+        key
+        for record in results
+        for key in coverage_check.register_source_keys(record, evidence)
+    }
+    held = {source["source_key"] for source in coverage["sources"]}
+    assert {"[Nagamochi 2005]", BURNS_MASSACCESI} <= keys - held
+    assert bibliography[BURNS_MASSACCESI]["dated"] == "2026-08-21"
+    bibliography[BURNS_MASSACCESI]["dated"] = "2026-08-22"
+    (problem,) = coverage_check.register_source_errors(
+        coverage, results, evidence, bibliography
+    )
+    assert problem.startswith(f"{BURNS_MASSACCESI}, dated 2026-08-22")

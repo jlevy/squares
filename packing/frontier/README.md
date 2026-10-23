@@ -184,7 +184,10 @@ verification.
 [`source-coverage.yaml`](source-coverage.yaml) is a dated claim about a named source
 set, not a claim that a web search exhausted every publication.
 It records each source’s scope, review date, retained first-party material, evidence,
-replay disposition, in-horizon overrides, and relevant claims beyond $n = 324$.
+replay disposition, in-horizon overrides, and relevant claims beyond $n = 324$. Every
+source dated from 22 August 2026 that a registered result or the evidence it cites names
+has an entry here, which carries its key or cites that evidence, papers and tools
+included; `devtools.check_source_coverage` refuses one without.
 
 The current baseline reparses the retained Kingbird catalogue through $n = 324$, applies
 Francisco Couzo’s certified packings at 49 counts from $n = 68$ to $307$ (T-056), seven
@@ -323,16 +326,21 @@ The process relies on these rules of the records:
   For a result by others, that is a complete replay here and a review of its mathematics
   under [`docs/project/reviews/`](../../docs/project/reviews/). External evidence and a
   local replay are recorded as separate entries.
-  An upper bound that passes them below the case’s house best packing replaces it
-  ([the house rule](../campaign/result-import.md#the-house-rule)).
+  The case-lane check refuses a machine run not made here, and
+  [`devtools.check_results`](../devtools/check_results.py) a verified bound on a result
+  by others dated from 22 August 2026 that no register entry covering it lists an
+  accepting review of the mathematics for (`accepted` or `defects-resolved`, by a kind
+  other than `oversight`), and whose evidence records no defect-free read in a mapped
+  review document. An upper bound that passes them below the case’s house best packing
+  replaces it ([the house rule](../campaign/result-import.md#the-house-rule)).
 - **Beyond the corpus, the report-order ledger decides the rows**
   ([several reports at one count](../campaign/result-import.md#several-reports-at-one-count)),
   with the owner’s answers of 23 October 2026. A side below an earlier report by less
   than the 12-place print, at the same print, restates it and is no row; a side at or
   above Göbel’s classical construction at its count is above an earlier report; a
-  certificate its author withdrew from an issue is not a report; and a side one square
-  below the next count’s published certificate is an earlier report, which on the D6
-  decision’s recommendation, not yet confirmed, has no row of its own.
+  certificate its author withdrew from an issue is not a report; and a side obtained by
+  deleting one square from the next count’s published certificate is an earlier report,
+  which on the D6 decision’s recommendation, not yet confirmed, has no row of its own.
 
 ## Registering a First-Party Result
 

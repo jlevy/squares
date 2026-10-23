@@ -17,6 +17,7 @@ import pytest
 
 from devtools import check_bead_tree
 from devtools.check_bead_tree import (
+    NO_BEAD,
     check,
     deferral_problems,
     deferrals,
@@ -140,6 +141,33 @@ def test_every_deferral_a_record_declares_is_collected_with_its_bead(tmp_path: P
     assert named[3][0] == "result-requests.yaml open issue #282 queued result later"
     assert named[0][0] == "source-coverage.yaml pending_catalogue_intake n=69"
     assert deferrals(tmp_path / "absent", tmp_path / "absent", tmp_path / "absent") == []
+
+
+def test_a_queued_item_that_names_no_bead_is_collected_as_unowned_and_fails(
+    tmp_path: Path,
+) -> None:
+    """The schema requires a queued result's and ask's bead (think-du1e); a record the
+    schema check did not see still fails here rather than only in the sweep's report."""
+    requests = _write(
+        tmp_path / "requests.yaml",
+        "issues:\n"
+        "  - number: 282\n"
+        "    state: open\n"
+        "    answer_bead: think-cccc\n"
+        "    results: [{key: later, queued: true}]\n"
+        "    asks: [{what: a fix, state: queued}, {what: done, state: done}]\n",
+    )
+    named = deferrals(tmp_path / "absent", requests, tmp_path / "absent")
+    assert named[1:] == [
+        ("result-requests.yaml open issue #282 queued result later", NO_BEAD),
+        ("result-requests.yaml open issue #282 queued ask", NO_BEAD),
+    ]
+    beads = [_bead("is-01cccc", "open", "the answer bead")]
+    problems = deferral_problems(beads, {"cccc": "01cccc"}, named)
+    assert [(p["parent"][-12:], p["status"]) for p in problems] == [
+        ("result later", "unowned"),
+        ("2 queued ask", "unowned"),
+    ]
 
 
 def test_a_deferral_whose_bead_is_closed_or_missing_fails_and_a_live_one_passes() -> None:
