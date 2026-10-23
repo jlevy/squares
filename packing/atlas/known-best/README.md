@@ -750,6 +750,27 @@ The evidence is retained in
 [`cases/regularized_drawings/think-icp1-2026-10-23/`](../../cases/regularized_drawings/think-icp1-2026-10-23/README.md).
 The index still draws 95 views.
 
+The same pass of 23 October 2026, once the house writer took an algebraic side
+(think-ot5c), adopted PR #574’s algebraic certificates (T-174) at 70, 153 and 207 and
+Evan Daniel’s exact forms of issue 639 (T-193) at 102, 123, 258, 259, 295 and 302. Each
+new witness states its squares in a real number field, which the axis tool refuses
+(`unsupported-scalar-kind`), so its views of the nine earlier houses leave the index,
+and the strong views at 153, 207 and 259 (Evan Daniel’s regularizer) and 302
+(grid-slack) lapse. At 70 and 295 the new house drawings read regular as published.
+At the other seven both generators ran on the new witness: grid-slack at 0.5, 1 and 5
+degrees has no exact frame on a number-field witness and draws no view, and Evan
+Daniel’s regularizer solves each to a rational side $1.06 \times 10^{-19}$ to
+$1.79 \times 10^{-19}$ above the algebraic $U$, held at row 4, since no rational view is
+`same` or `bound` at an irrational side.
+`SETTLED` records the seven decided on their new witnesses, and the house drawing is
+drawn at each. At 153, 207, 259 and 302 whether to keep a rational view just above the
+algebraic $U$ is the owner’s question 13 (think-r8cn); until it is answered the house
+drawings are the default there.
+The evidence is retained in
+[`cases/regularized_drawings/think-ot5c-2026-10-23/`](../../cases/regularized_drawings/think-ot5c-2026-10-23/README.md).
+After it the index draws 86 views: 30 by the axis tool, 37 by Evan Daniel’s regularizer
+and 19 by the grid-slack generator’s version 1.
+
 ### The default picture
 
 On 13 October 2026 the owner made the regularized view the default picture, with the

@@ -1122,8 +1122,10 @@ def linked_house_problem(path: str, *, repository: Path) -> str | None:
 #: Where the custody run's receipt is kept: one record for every adopted packet.
 CUSTODY_RECEIPT = ROOT / "devtools/house-custody-2026-10-11.json"
 CUSTODY_FORMAT = "AdoptedHouseCustody/v1"
-#: The worker's deadline: it admits all 70 house best packings and refuses 44 mutations,
-#: two for each of the twenty-two results (22.8 s in the worker on 21 October 2026, with
+#: The worker's deadline: it admits all 70 house best packings and refuses 42 mutations,
+#: two for each of the twenty-one results (44.95 s in the worker on 23 October 2026, after
+#: the algebraic houses joined, with T-193's number-field facts and receipts among the 197
+#: inputs, on a host shared with other lanes; 22.8 s on 21 October 2026, with
 #: 9.78 s of setup at a load average of about six, after the merge of main 970e89de8 and
 #: the adoption at 260 that day; 23.84 s for 69 on this branch after the merge of main
 #: 51ac9d7ee, at a load average of about six; 23.33 s for 70 on #704's branch after the

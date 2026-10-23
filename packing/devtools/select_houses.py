@@ -209,7 +209,11 @@ class Pending:
 #: 302, whose exact forms the packet retains and derives as number-field facts. T-193's
 #: other eight wait for think-8ido to correct their regularization items
 #: (`CORRECTIONS_OWED`), and 267 for its form, which the packet pins only; none of the nine
-#: has a derived fact, so the writer cannot write them yet.
+#: has a derived fact, so the writer cannot write them yet. At 267 the form, fetched from
+#: the pin and equal to its digest, makes a degree-41 field witness of 4.53 MB in a checkout
+#: and 1.88 MB as Git stores it, and its jobs are priced at about 2 CPU-hours each from a
+#: 66-pair sample (14.6 CPU s), about 6 for the three and about 2 more at each atlas rebuild
+#: of the witness: over the lanes' 2 CPU-hour limit on one run, so 267 waits, not run.
 PENDING_ADOPTION: dict[int, Pending] = {
     n: Pending(house="T-193", bead=WRITER_BEAD, why=NO_WRITER)
     for n in (88, 126, 175, 199, 232, 266, 267, 292, 301)

@@ -414,6 +414,64 @@ _README_ICP1 = (
     "packing/cases/regularized_drawings/think-icp1-2026-10-23/README.md, the selection of 23 "
     "October 2026 (think-icp1), beside the runs' receipt, blocks and reports"
 )
+#: Both generators on the algebraic houses the pass of 23 October 2026 adopted once the
+#: house writer wrote an algebraic side (think-ot5c): grid-slack at 0.5, 1 and 5 degrees,
+#: which has no exact frame on a number-field witness and draws no view, and Evan Daniel's
+#: regularizer, whose solves are rational sides above the algebraic `U`, held at row 4:
+#: no rational view is `same` or `bound` at an irrational side (result-import.md, "The
+#: House Rule"). Its first run timed out at 258, 259 and 302 on a host at a load of about
+#: 25, and a second ran them at 2,400 seconds. Each count is settled on its house drawing.
+#: At 153, 207, 259 and 302 a strong view of the earlier rational house lapsed just above
+#: the new `U`; keeping such a view is the owner's question 13 (think-r8cn), and until it
+#: is answered the house drawing is drawn. The runs' receipts, blocks, reports and the
+#: selection's report are in packing/cases/regularized_drawings/think-ot5c-2026-10-23/.
+_RUNOT5C = (
+    ("evand-regularize", "evand-regularize-adopt-2026-10-23-n70-302-evand"),
+    ("regularize_grid_slack/1", "grid-slack-adopt-2026-10-23-n70-302-grid-deg05"),
+    ("regularize_grid_slack/1", "grid-slack-adopt-2026-10-23-n70-302-grid-deg1"),
+    ("regularize_grid_slack/1", "grid-slack-adopt-2026-10-23-n70-302-grid-deg5"),
+)
+_RUNOT5C_B = (
+    *_RUNOT5C,
+    ("evand-regularize", "evand-regularize-adopt-2026-10-23-n258-302-evand"),
+)
+_README_OT5C = (
+    "packing/cases/regularized_drawings/think-ot5c-2026-10-23/README.md, the selection of 23 "
+    "October 2026 (think-ot5c), beside the runs' receipts, blocks and reports"
+)
+_OWED_R8CN = (
+    "think-r8cn: the owner's question 13, whether a rational strong view just above the "
+    "algebraic U is drawn; until it is answered, the house drawing is drawn"
+)
+_DANIEL_639 = "[Daniel exact current records 2026-10-16]"
+_DANIEL_639_REVISION = "7d1407a0b66c46e32cdbcbd5619586fe2bdd52a1"
+_PINGYOU_574 = "[PingYou PR 574 certificates 2026-10-13]"
+_PINGYOU_574_REVISION = "4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde"
+_NO_FRAME = (
+    "grid-slack has no exact frame on the number-field witness and draws no view at 0.5, 1 "
+    "and 5 degrees"
+)
+
+
+def _held_again(margin: str) -> str:
+    """`_held`, where the regularizer's first run timed out and its second solved it."""
+    return (
+        f"{_NO_FRAME}; Evan Daniel's regularizer timed out at 600 seconds in its first run, "
+        f"on a host at a load of about 25, and in its second solves it to a rational side "
+        f"{margin} above U, held at row 4: no rational view is same or bound at an "
+        "irrational side"
+    )
+
+
+def _held(margin: str) -> str:
+    """An algebraic house's outcome where Evan Daniel's regularizer solved it to a rational
+    side `margin` above `U`, held at row 4."""
+    return (
+        f"{_NO_FRAME}, and Evan Daniel's regularizer solves it to a rational side {margin} "
+        "above U, held at row 4: no rational view is same or bound at an irrational side"
+    )
+
+
 _T225 = "[Daniel regularized lists 2026-10-20]"
 _T225_CERTS = "resources/web/evand-regularized-2026-10-20/source/search/regularize/lists/certs/"
 _T225_REVISION = "0075967bace18a3deabcc0baa64c2fb294fc80a0"
@@ -525,13 +583,13 @@ SETTLED: dict[int, Settled] = {
     ),
     102: Settled(
         DECIDED,
-        _DANIEL,
-        _daniel(102),
-        _DANIEL_REVISION,
-        "10605828696431578360490734944053/1000000000000000000000000000000",
-        _LEFTOVERS,
-        _T146,
-        _README_LEFTOVERS,
+        _DANIEL_639,
+        "resources/web/evand-exact-cur-2026-10-16/facts/alg-n-102.yaml.gz",
+        _DANIEL_639_REVISION,
+        "['67/4', '25/4', '-105/4', '-27/4']",
+        _RUNOT5C,
+        _held("1.06e-19"),
+        _README_OT5C,
     ),
     108: Settled(
         DECIDED,
@@ -582,15 +640,13 @@ SETTLED: dict[int, Settled] = {
     ),
     123: Settled(
         DECIDED,
-        _DANIEL,
-        _daniel(123),
-        _DANIEL_REVISION,
-        "2897844536374424539887715795867/250000000000000000000000000000",
-        _LEFTOVERS,
-        "Evan Daniel's view is refused at row 7 (house sides fall from 329 to 314, uneven "
-        "squares rise from 16 to 30), and grid-slack's view ties the axis tool's on every "
-        "goal at 0.5, 1 and 5 degrees",
-        _README_LEFTOVERS,
+        _DANIEL_639,
+        "resources/web/evand-exact-cur-2026-10-16/facts/alg-n-123.yaml.gz",
+        _DANIEL_639_REVISION,
+        "['33/4', '10', '-6', '23/2', '-33/4', '1/2']",
+        _RUNOT5C,
+        _held("1.16e-19"),
+        _README_OT5C,
     ),
     127: Settled(
         DECIDED,
@@ -660,6 +716,17 @@ SETTLED: dict[int, Settled] = {
         "Evan Daniel's solved view is held at row 4 (solved about 1e-19 above U, no "
         "change), and grid-slack's views at 0.5, 1 and 5 degrees draw no change",
         _README_3MRY,
+    ),
+    153: Settled(
+        DECIDED,
+        _PINGYOU_574,
+        "resources/web/pingyou-pr574-certificates-2026-10-13/facts/alg-n-153.yaml.gz",
+        _PINGYOU_574_REVISION,
+        "['2043/164', '155/164', '27/82', '87/82', '-243/164', '355/164', '-19/82']",
+        _RUNOT5C,
+        _held("1.29e-19"),
+        _README_OT5C,
+        _OWED_R8CN,
     ),
     176: Settled(
         DECIDED,
@@ -735,6 +802,17 @@ SETTLED: dict[int, Settled] = {
         "Evan Daniel's solved view is held at row 4 (solved about 1e-19 above U, no "
         "change), and grid-slack's views at 0.5, 1 and 5 degrees draw no change",
         _README_3MRY,
+    ),
+    207: Settled(
+        DECIDED,
+        _PINGYOU_574,
+        "resources/web/pingyou-pr574-certificates-2026-10-13/facts/alg-n-207.yaml.gz",
+        _PINGYOU_574_REVISION,
+        "['1288/89', '209/178', '-78/89', '335/178', '-12/89']",
+        _RUNOT5C,
+        _held("1.49e-19"),
+        _README_OT5C,
+        _OWED_R8CN,
     ),
     208: Settled(
         DECIDED,
@@ -874,13 +952,25 @@ SETTLED: dict[int, Settled] = {
     ),
     258: Settled(
         DECIDED,
-        _DANIEL,
-        _daniel(258),
-        _DANIEL_REVISION,
-        "16563448002133789379765816191273/1000000000000000000000000000000",
-        _LEFTOVERS,
-        _T146,
-        _README_LEFTOVERS,
+        _DANIEL_639,
+        "resources/web/evand-exact-cur-2026-10-16/facts/alg-n-258.yaml.gz",
+        _DANIEL_639_REVISION,
+        "['8681/544', '2003/136', '-26795/544', '-10137/272', '163247/544', '-25131/68', "
+        "'87875/544', '-6877/272']",
+        _RUNOT5C_B,
+        _held_again("1.66e-19"),
+        _README_OT5C,
+    ),
+    259: Settled(
+        DECIDED,
+        _DANIEL_639,
+        "resources/web/evand-exact-cur-2026-10-16/facts/alg-n-259.yaml.gz",
+        _DANIEL_639_REVISION,
+        "['53/4', '-10', '-6', '-23/2', '-33/4', '-1/2']",
+        _RUNOT5C_B,
+        _held_again("1.66e-19"),
+        _README_OT5C,
+        _OWED_R8CN,
     ),
     260: Settled(
         DECIDED,
@@ -1051,6 +1141,17 @@ SETTLED: dict[int, Settled] = {
         "certificate), and grid-slack finds no view at 0.5, 1 or 5 degrees (relaxed "
         "rows overlap at this side)",
         _README_3MRY,
+    ),
+    302: Settled(
+        DECIDED,
+        _DANIEL_639,
+        "resources/web/evand-exact-cur-2026-10-16/facts/alg-n-302.yaml.gz",
+        _DANIEL_639_REVISION,
+        "['2863/164', '155/164', '27/82', '87/82', '-243/164', '355/164', '-19/82']",
+        _RUNOT5C_B,
+        _held_again("1.79e-19"),
+        _README_OT5C,
+        _OWED_R8CN,
     ),
     303: Settled(
         DECIDED,
