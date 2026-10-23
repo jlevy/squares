@@ -4580,6 +4580,7 @@ def test_the_site_layout_tests_run_only_where_chromium_is_installed() -> None:
         assert not _installs_chromium(document["jobs"][job_name], pull_request=True), job_name
     assert set(validate.SITE_LAYOUT_TESTS) == {
         "tests/test_site_navigation.py",
+        "tests/test_site_tutorial_design.py",
         "tests/test_site_popover_controls.py",
         "tests/test_site_headroom.py",
         "tests/test_site_homepage.py",
