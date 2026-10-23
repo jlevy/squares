@@ -5,7 +5,7 @@ title: "W2 #674: replay opening and updated n229 dilation certificates with sour
 kind: task
 status: in_progress
 priority: 2
-version: 15
+version: 16
 delegate: c-stage7-747-1023
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m5kcx4ampkzwwy5h447fcb2e
 hold: null
 hold_until: null
 created_at: 2026-10-18T16:33:54.872Z
-updated_at: 2026-10-23T22:18:46.042Z
+updated_at: 2026-10-23T22:40:04.471Z
 started_at: 2026-10-18T16:34:05.831Z
 closed_at: 2026-10-23T07:11:34.217Z
 close_reason: "Source checkers re-run on the four certificates of #669 and #674 (8 accepted, 24 controls refused); receipts committed in the three packets and the request notes edited on PR #747 (77872bd02, c4f86cbca, e4ea7beb4); no rung change."
@@ -37,4 +37,7 @@ Owned follow-up source replay lane: Codex de_winter_668_replay, after #668 lane 
 blocked_on: none
 
 2026-10-23 c-close-1023: the 18 October receipt (cab73c96...) was never committed; re-run instead. devtools.evand_source_checkers run (2026-10-23T06:33Z, CPython 3.14.7, 2 workers): the packets' own verify_cert.py and verify_cert2.py, unchanged, python -I, on s155_ex2.cert, s155_ex2_regularized.cert, s229.cert and s229_v2.cert and three controls each (duplicate square, square outside, sharp wall at 1e-30): 8 accepted, 24 refused with INVALID, 32 invocations, 6.5 CPU-s. Receipts receipts/source-checker-replay.json in the three packets (77872bd02, check reworked for OR-16 in e4ea7beb4); #669 and #674 request notes edited (c4f86cbca); no rung change. https://github.com/jlevy/squares/pull/747. Closed: the record names this bead as owning nothing.
+blocked_on: none
+
+2026-10-23 22:40Z c-stage7-747-1023 (runbook stage 7 for #747, merged 7cd0a94bf): deploy verified. Pages deployment 7288113551 of main 77aba4c02 (run 40018711060, verify-deployment: check_published_site 5710 of 5710 passed); squaremath.org serves v0.9.2-79926e, and DATA_REVISION 79926ea52 contains #747's pin 777577956 and its merge; a local check_published_site --commit 77aba4c02 also passed 5710 of 5710. #470: final comment https://github.com/jlevy/squares/issues/470#issuecomment-6376106671 (22:36:26Z), closed as completed 22:36:27Z. #670: not posted on. GitHub closed it at 18:32:53Z through #747's closing keyword ("the coordinator closes #670" in its description), with no final comment, and franciscouzo answered both review questions after the close (https://github.com/jlevy/squares/issues/670#issuecomment-6375905012, 22:22:03Z, unread in the record; it gives the 204 lineage as T-186's, after Ostashev and PingYou Ltd); left for the coordinator. Records patch for the next records PR: /tmp/claude-0/-home-user-squares/f8504540-2b5a-5f78-8968-eb4ffa4c4b64/scratchpad/stage7-747/requests.patch (#470 only: state closed, closed 2026-10-23, the final reply, notes); check_requests passes on it in a scratch copy of origin/main 77aba4c02.
 blocked_on: none
