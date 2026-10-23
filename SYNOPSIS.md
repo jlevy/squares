@@ -699,6 +699,7 @@ case or experiment separately.
 | [CI and Release Latency Audit, 22 October 2026](docs/project/reviews/review-2026-10-22-ci-release-latency.md) | dated review record | record | retained | — |
 | [Contributor Credit Link Audit, 22 October 2026](packing/contributors/reviews/2026-10-22-credit-link-audit.md) | dated review record | record | retained | — |
 | [Feature: Site Navigation and Page Hierarchy](docs/project/specs/active/plan-2026-10-22-site-navigation.md) | implementation plan | current | transient | — |
+| [Feature: Flip Regularization](docs/project/specs/active/plan-2026-10-23-flip-regularization.md) | implementation plan | current | transient | — |
 | [Review: Mykhailo Polkovskyi’s Certificates at 105 and 204 from Issue #719 (T-229)](docs/project/reviews/review-2026-10-22-mishapolk-719.md) | dated review record | record | retained | — |
 | [Review: Francisco Couzo’s Certificates at 204, 227 and 229 from Issues #670, #672 and #675 (T-226, T-227, T-228)](docs/project/reviews/review-2026-10-22-couzo-670-672-675.md) | dated review record | record | retained | — |
 | [Profile Coverage and Result-Intake Boundaries, 21 October 2026](docs/project/reviews/review-2026-10-21-profile-coverage.md) | dated review record | record | retained | — |
@@ -4742,7 +4743,8 @@ Elsewhere *house* has the same modifier sense of “the project’s own”: the 
 A **house drawing** is that renderer’s picture of the house best packing as published;
 the count’s **default picture** is its regularized view where the
 [regularization policy](docs/project/policies/regularization-policy.md#12-the-default-picture)
-draws one, and the house drawing everywhere else.
+draws one, and the house drawing everywhere else, turned into its canonical pose by
+[flip regularization](docs/project/policies/regularization-policy.md#13-flip-regularization).
 The regularization policy’s contact-shading *house rule* (gap $2 \times 10^{-6}$, beside
 the workbench’s stage rule) belongs to that renderer and is unrelated to the adoption
 rule.

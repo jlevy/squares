@@ -41,7 +41,15 @@ from collections.abc import Callable, Mapping, Sequence
 from concurrent.futures import ProcessPoolExecutor
 from dataclasses import dataclass, replace
 from datetime import date
-from decimal import ROUND_CEILING, ROUND_HALF_EVEN, Decimal
+from decimal import (
+    MAX_EMAX,
+    MAX_PREC,
+    MIN_EMIN,
+    ROUND_CEILING,
+    ROUND_HALF_EVEN,
+    Decimal,
+    localcontext,
+)
 from fractions import Fraction
 from functools import cache
 from io import BytesIO
@@ -64,6 +72,7 @@ from devtools import (
 )
 from devtools import evand_arrangement_houses as evand_houses
 from devtools import evand_arrangement_reports as evand_reports
+from devtools import flip_regularization as flip
 from devtools import gupta_house_links as gupta_houses
 from devtools import pictured_source as pictured
 from devtools import refinement_house_links as refinement_houses
@@ -78,6 +87,7 @@ from devtools import upper_bound_packets as packets
 from devtools.atlas_legend import AtlasLegendCounts, LegendItem, atlas_legend
 from devtools.atlas_orientation import orient_atlas_witness
 from devtools.build_composite_figure_data import load_record as load_figure_record
+from devtools.flip_regularization import IDENTITY, Pose, orient_polygon
 from devtools.result_status import RecentContributions, recent_contributions_by_case
 from devtools.rigidity_status import load_context as load_rigidity_context
 from sqpack import release, retained_json
@@ -1613,8 +1623,10 @@ def _scalar(value: str, *, rational: bool):
     return scalar_from_fraction(Fraction(value)) if rational else scalar_from_decimal(value)
 
 
-def _exact_frame_geometry(witness: dict):
+def _exact_frame_geometry(witness: dict, pose: Pose = IDENTITY):
     corners, side = materialize_exact_witness(witness)
+    if not pose.identity:
+        corners = [orient_polygon(pose, square, side) for square in corners]
 
     def scalar(value):
         if isinstance(value, Fraction):
@@ -1633,31 +1645,77 @@ def _exact_frame_geometry(witness: dict):
     return scalar(side), [[(scalar(x), scalar(y)) for x, y in square] for square in corners]
 
 
-def frame_from_witness(witness: dict) -> PackingFrame:
-    if witness["scalar"]["kind"] in {"rational", "algebraic-number-field"}:
-        side, source_squares = _exact_frame_geometry(witness)
+@dataclass(frozen=True, slots=True)
+class _DecimalText:
+    """A decimal coordinate as its frame spells it, for `Pose.point`. `side - v` is exact
+    and spelled as `_projection_text` spells a projection; a coordinate a pose only moves
+    comes back as the same object, so it keeps the spelling an unposed frame gives it."""
+
+    text: str
+
+    def __sub__(self, other: _DecimalText) -> _DecimalText:
+        # A difference of two decimals is a decimal, so this precision never rounds it;
+        # it is the decimal module's documented setting for unrounded arithmetic.
+        with localcontext(prec=MAX_PREC, Emax=MAX_EMAX, Emin=MIN_EMIN):
+            difference = Decimal(self.text) - Decimal(other.text)
+        return _DecimalText(_fixed_point_text(difference))
+
+
+def _fixed_point_text(value: Decimal) -> str:
+    """Fixed point with trailing zeros dropped and at least one fractional digit, the
+    spelling `_projection_text` gives a projection."""
+    if value.is_zero():
+        return "0.0"
+    text = format(value, "f")
+    if "." not in text:
+        return f"{text}.0"
+    text = text.rstrip("0")
+    return f"{text}0" if text.endswith(".") else text
+
+
+def _decimal_frame_texts(witness: dict, pose: Pose) -> tuple[str, list[list[tuple[str, str]]]]:
+    """A decimal witness's side and corners as the frame spells them: a corners witness's
+    own decimals, else the 80-digit projection of its representation. A pose maps them
+    exactly (`_DecimalText`)."""
+    side = str(witness["side"])
+    if witness["representation"] == "corners":
+        squares = [
+            [(str(x), str(y)) for x, y in square["corners"]] for square in witness["squares"]
+        ]
     else:
-        side = scalar_from_decimal(str(witness["side"]))
-        if witness["representation"] == "corners":
-            source_squares = [
-                [
-                    (scalar_from_decimal(str(x)), scalar_from_decimal(str(y)))
-                    for x, y in square["corners"]
-                ]
-                for square in witness["squares"]
-            ]
-        else:
-            projected, _projected_side = materialize_witness(witness, digits=80)
-            source_squares = [
-                [
-                    (
-                        scalar_from_decimal(_projection_text(x)),
-                        scalar_from_decimal(_projection_text(y)),
-                    )
-                    for x, y in square
-                ]
-                for square in projected
-            ]
+        projected, _projected_side = materialize_witness(witness, digits=80)
+        squares = [
+            [(_projection_text(x), _projection_text(y)) for x, y in square]
+            for square in projected
+        ]
+    if pose.identity:
+        return side, squares
+    bound = _DecimalText(side)
+    return side, [
+        [
+            (x.text, y.text)
+            for x, y in orient_polygon(
+                pose, [(_DecimalText(x), _DecimalText(y)) for x, y in square], bound
+            )
+        ]
+        for square in squares
+    ]
+
+
+def frame_from_witness(witness: dict, *, pose: Pose = IDENTITY) -> PackingFrame:
+    """A witness's house frame. `pose`, a composite card's flip regularization
+    (`tile_frame`), maps the corners exactly, each in its own arithmetic, before any
+    scalar is made; every other reader keeps the witness in its source's pose, the
+    default, `IDENTITY`."""
+    if witness["scalar"]["kind"] in {"rational", "algebraic-number-field"}:
+        side, source_squares = _exact_frame_geometry(witness, pose)
+    else:
+        side_text, texts = _decimal_frame_texts(witness, pose)
+        side = scalar_from_decimal(side_text)
+        source_squares = [
+            [(scalar_from_decimal(x), scalar_from_decimal(y)) for x, y in square]
+            for square in texts
+        ]
     squares = tuple(
         SquareGeometry(
             square_id=f"square-{index:03d}",
@@ -1934,18 +1992,25 @@ def _regularized_tiles() -> dict[int, dict[str, Any]]:
 
 
 def tile_frame(built: BuiltCase) -> PackingFrame:
-    """The frame a composite's card draws: the case's default picture. That is its
-    regularized view where the view improves on the house drawing, read as the homepage's
-    regularized drawings read it (`render_regularized_atlas.regularized_frame`: the
-    view's squares and certified side under the record's own evidence tier and check,
-    with the view's source id), and its retained witness everywhere else. The card's
+    """The frame a composite's card draws: the case's default picture in its canonical
+    pose. The picture is its regularized view where the view improves on the house
+    drawing, read as the homepage's regularized drawings read it
+    (`render_regularized_atlas.regularized_frame`: the view's squares and certified side
+    under the record's own evidence tier and check, with the view's source id), and its
+    retained witness everywhere else. The pose is the case's flip regularization, from
+    its own record (`flip_regularization.poses`), mapped onto the exact corners as the
+    frame is built (`frame_from_witness(pose=)`) and only for the card, so the card's
+    colours and square data are the oriented picture's while every other reader of
+    `frame_from_witness` and `regularized_frame` keeps the source's pose. The card's
     labels and badges are the record's either way."""
-    entry = _regularized_tiles().get(built.frontier.n)
+    n = built.frontier.n
+    pose = flip.poses()[n]
+    entry = _regularized_tiles().get(n)
     if entry is None:
-        return frame_from_witness(built.witness)
+        return frame_from_witness(built.witness, pose=pose)
     from devtools.render_regularized_atlas import regularized_frame  # noqa: PLC0415
 
-    return regularized_frame(entry)
+    return regularized_frame(entry, pose=pose)
 
 
 def _append_summary_card(

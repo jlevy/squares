@@ -1871,14 +1871,15 @@ HERO_CASES = (HERO_CASE,)
 
 
 def hero() -> str:
-    """The representative native packing with its shared case popover."""
+    """The representative native packing with its shared case popover, drawn as its
+    default picture in its canonical pose (`render_frontier_page.default_svg`)."""
     from devtools.render_case_pages import case_url  # noqa: PLC0415
-    from devtools.render_frontier_page import default_root, packing_svg  # noqa: PLC0415
+    from devtools.render_frontier_page import default_svg  # noqa: PLC0415
 
     links = "".join(
         f'<a href="{case_url(n)}" data-case="{n}" '
         f'aria-label="The best packing known for {n} squares: packing and bounds">'
-        f"{packing_svg(n, units=1000, root=default_root(n))}</a>"
+        f"{default_svg(n, units=1000)}</a>"
         for n in HERO_CASES
     )
     return (
@@ -2821,7 +2822,15 @@ def atlas_frame_ink_inset() -> float:
 
 
 def _atlas_drawing(n: int, *, regularized: bool, side: float) -> str:
-    """One lazy image, with current-source credit and the approved comparison pair."""
+    """One lazy image, with current-source credit and the approved comparison pair.
+
+    Every tile starts in Regularized mode, drawing its default picture in its canonical
+    pose (`render_frontier_page.default_svg`; regularization policy, sections 12 and 13),
+    and carries both drawings, so Original switches every tile to its house drawing as
+    published, in its source's pose. `regularized` says whether the default picture is
+    the case's regularized view, whose generator's credit the Regularized title adds;
+    `side` is the default picture's. Where the pose turns the default picture, the
+    Regularized title says so, since the tile then does not draw it as published."""
     from devtools import render_frontier_page as frontier  # noqa: PLC0415
     from devtools.build_bound_citations import load_case  # noqa: PLC0415
     from devtools.default_drawings import credit_line  # noqa: PLC0415
@@ -2830,25 +2839,23 @@ def _atlas_drawing(n: int, *, regularized: bool, side: float) -> str:
     upper = load_case(n)["reported_upper_bound"]
     credit = html.unescape(frontier.credit(upper.get("found_by"), upper.get("found_year")))
     source = pictured_source_key(n, str(upper.get("source_key") or ""))
-    original_credit = ", ".join(
-        part for part in ("Packing as published", credit, source) if part
+    attribution = [part for part in (credit, source) if part]
+    original_credit = ", ".join(["Packing as published", *attribution])
+    turned = [] if frontier.default_pose(n).identity else ["turned to its canonical pose"]
+    shown = ", ".join(["Packing as published", *turned, *attribution])
+    title = f"{shown}. {credit_line(n)}" if regularized else shown
+    choices = (
+        f' data-atlas-original-src="{frontier.drawing_path(n)}"'
+        f' data-atlas-regularized-src="{frontier.drawing_path(n, regularized=True)}"'
+        f' data-atlas-original-side="{atlas_enclosing_sides(original=True)[n]}"'
+        f' data-atlas-regularized-side="{side}"'
+        f' data-atlas-original-credit="{_esc(original_credit)}"'
+        f' data-atlas-regularized-credit="{_esc(title)}"'
     )
-    mode = "Regularized" if regularized else "Original"
-    title = f"{original_credit}. {credit_line(n)}" if regularized else original_credit
-    choices = ""
-    if regularized:
-        choices = (
-            f' data-atlas-original-src="{frontier.drawing_path(n)}"'
-            f' data-atlas-regularized-src="{frontier.drawing_path(n, regularized=True)}"'
-            f' data-atlas-original-side="{atlas_enclosing_sides(original=True)[n]}"'
-            f' data-atlas-regularized-side="{side}"'
-            f' data-atlas-original-credit="{_esc(original_credit)}"'
-            f' data-atlas-regularized-credit="{_esc(title)}"'
-        )
     return (
-        f'<img src="{frontier.drawing_path(n, regularized=regularized)}" width="{ATLAS_UNITS}" '
+        f'<img src="{frontier.drawing_path(n, regularized=True)}" width="{ATLAS_UNITS}" '
         f'height="{ATLAS_UNITS}" loading="lazy" decoding="async" '
-        f'alt="{mode} packing of {n} unit squares" title="{_esc(title)}"{choices}>'
+        f'alt="Regularized packing of {n} unit squares" title="{_esc(title)}"{choices}>'
     )
 
 
@@ -3158,10 +3165,12 @@ def atlas_grid(*, homepage: bool = False) -> str:
     the case popover took its place.
 
     A case whose default picture is its regularized view (`atlas_regularized`) is drawn
-    from it directly, and every other case from its house rendering: one tile a case.
+    from it directly, and every other case from its house rendering: one tile a case,
+    each in its canonical pose (flip regularization, section 13).
     Regularized is the initial drawing choice on each page, using only views that
     improve on their house drawings (regularization policy, sections 11 and 12).
-    Original switches these images to the current house packings as published.
+    Original switches every tile to the current house packing as published, in its
+    source's pose.
     The drawing choice stays local to the page. Drawing, Layout, Size and Scale strips and
     the key (`atlas_legend`) share the controls box (`.site-atlas-controls`) above the
     tiles.

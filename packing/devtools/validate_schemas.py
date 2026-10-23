@@ -90,6 +90,9 @@ CONTACT_STRUCTURES = FRONTIER.parent / "atlas" / "known-best" / "contact-structu
 #: view's regularization in the register's terms (think-k35c, 12 October 2026).
 REGULARIZED_INDEX = FRONTIER.parent / "atlas" / "known-best" / "regularized" / "index.json"
 DEFAULT_DRAWINGS = FRONTIER.parent / "atlas" / "known-best" / "default-drawings.json"
+#: Each count's flip regularization, the pose its default picture is drawn in (policy
+#: section 13).
+FLIP_REGULARIZATION = FRONTIER.parent / "atlas" / "known-best" / "flip-regularization.json"
 #: Hosted-data manifests (OR-18): one per release that holds bulk data outside Git.
 HOSTED = FRONTIER.parent / "hosted"
 #: The person records and their reviewed credit joins (`sqpack.contributors.PEOPLE_DIR`).
@@ -405,6 +408,7 @@ def corpus_paths() -> tuple[list[pathlib.Path], list[pathlib.Path]]:
     datasets.append(CONTACT_STRUCTURES)
     datasets.append(REGULARIZED_INDEX)
     datasets.append(DEFAULT_DRAWINGS)
+    datasets.append(FLIP_REGULARIZATION)
     # One record per harness session log. The logs themselves are not retained, so
     # these are the durable artifact rather than a pointer to one and are enforced like
     # any other dataset.

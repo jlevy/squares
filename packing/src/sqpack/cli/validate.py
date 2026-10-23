@@ -3982,6 +3982,18 @@ def _regularization_state(context: Context) -> str:
     return output
 
 
+def _flip_regularization(context: Context) -> str:
+    # About 1.4 s of wall and 1.3 cpu-seconds, serial (2026-10-23, 324 counts on a
+    # four-core host): every count's default picture read from its retained rendering,
+    # the view's where `default-drawings.json` makes the view the default, and its
+    # canonical pose decided again in binary64 (regularization policy, section 13), then
+    # compared with the record the renderers read each pose from. A row the rule no longer
+    # gives fails it, naming the count; no frame is built, which is what keeps it fast.
+    output = _module(context, "devtools.flip_regularization", "--check")
+    _require_text(output, "flip regularization check passed")
+    return output
+
+
 def _vendored_evand(context: Context) -> str:
     # About 0.2s: `vendor/evand-regularize`, Evan Daniel's regularizer copied at a pin, is
     # held to its manifest -- each file's size, SHA-256 and mode at the upstream commit,
@@ -5845,6 +5857,24 @@ STEPS: tuple[Step, ...] = (
             "packing/cases/regularized_drawings/*",
             "packing/witnesses/known-best/*",
             "packing/devtools/select_houses.py",
+            *_RENDERER_HUB,
+        ),
+    ),
+    Step(
+        "flip regularization record is current",
+        _flip_regularization,
+        fast=True,
+        records=True,
+        # It reads `default-drawings.json` through `default_drawings.regularized_defaults`,
+        # which holds it to the layer's index, so it claims what that module imports.
+        touches=(
+            *_CORE,
+            "packing/atlas/known-best/flip-regularization.json",
+            "packing/atlas/known-best/flip-regularization.schema.yaml",
+            "packing/atlas/known-best/default-drawings.json",
+            "packing/atlas/known-best/rendering/*",
+            "packing/atlas/known-best/regularized/*",
+            "packing/devtools/flip_regularization.py",
             *_RENDERER_HUB,
         ),
     ),

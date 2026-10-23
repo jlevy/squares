@@ -362,7 +362,9 @@ def test_the_site_icons_have_stable_same_origin_addresses(page: str) -> None:
 
 
 def test_the_hero_draws_case_53_and_keeps_its_ordinary_record_link() -> None:
-    from devtools.render_frontier_page import packing_svg  # noqa: PLC0415
+    """The hero draws its case's default picture in its canonical pose (regularization
+    policy, section 13), as a Regularized tile does."""
+    from devtools.render_frontier_page import default_svg  # noqa: PLC0415
 
     hero = overview_sections.hero()
     assert overview_sections.HERO_CASE == 53
@@ -370,10 +372,28 @@ def test_the_hero_draws_case_53_and_keeps_its_ordinary_record_link() -> None:
     assert re.findall(r'data-case="(\d+)"', hero) == ["53"]
     for n in overview_sections.HERO_CASES:
         assert f'href="cases/{n}.html" data-case="{n}"' in hero
-        assert packing_svg(n, units=1000) in hero
+        assert default_svg(n, units=1000) in hero
     assert hero.count("<svg ") == 1
     assert hero.count("<figcaption>") == 1
     assert "Best known packing for 53 identical squares</figcaption>" in hero
+
+
+def test_the_hero_is_turned_by_its_cases_recorded_pose(monkeypatch: pytest.MonkeyPatch) -> None:
+    """The hero applies the pose the flip regularization record states for its case
+    (`flip_regularization.poses`), set here rather than read, since the record leaves the
+    hero's case in its source's pose, and never draws the house drawing as published
+    beside it."""
+    from devtools import flip_regularization  # noqa: PLC0415
+    from devtools.flip_regularization import Pose  # noqa: PLC0415
+    from devtools.render_frontier_page import packing_svg  # noqa: PLC0415
+
+    turned = Pose(rotate=90, flip=True)
+    poses = dict.fromkeys(range(1, 325), turned)
+    monkeypatch.setattr(flip_regularization, "poses", poses.copy)
+    hero = overview_sections.hero()
+    n = overview_sections.HERO_CASE
+    assert packing_svg(n, units=1000, pose=turned) in hero
+    assert packing_svg(n, units=1000) not in hero
 
 
 def test_the_homepage_keeps_the_original_packing_graphic_above_its_intro(page: str) -> None:
@@ -1071,8 +1091,16 @@ def test_one_tile_a_case_is_drawn_from_its_regularized_view_where_it_has_one() -
     resolution, subpixel moves can round to the same drawing. The website shows the
     selected drawing without layer labels or badges. Every other case is drawn from its
     house rendering. Read from the generator's own markup, before the page's renderer
-    normalizes it."""
+    normalizes it.
+
+    All 324 tiles start in Regularized mode on their canonical drawing
+    (`atlas/regularized/`, the default picture in its flip regularization, section 13)
+    and carry both drawings, so Original switches every tile to its house drawing as
+    published; only a view's tile adds its generator's credit. Where the pose turns the
+    default picture, the Regularized title says it is turned to its canonical pose, and
+    the Original credit stays the packing as published."""
     from devtools import render_frontier_page as frontier  # noqa: PLC0415
+    from devtools.default_drawings import credit_line  # noqa: PLC0415
 
     page = overview_sections.atlas_grid()
     regularized = overview_sections.atlas_regularized()
@@ -1087,22 +1115,48 @@ def test_one_tile_a_case_is_drawn_from_its_regularized_view_where_it_has_one() -
         for a, d, reference, n in tile.findall(tiles)
     }
     assert list(drawn) == list(range(1, 325))
+    titles: dict[int, tuple[str, str]] = {}
     for n, (open_tag, drawing, reference, number) in drawn.items():
         assert bool(reference) == (" data-atlas-row-smaller" in open_tag), n
         assert number == f'<span class="site-atlas-n">{n}</span>', n
         is_regularized = n in regularized
-        assert f'src="{frontier.drawing_path(n, regularized=is_regularized)}"' in drawing
-        mode = "Regularized" if is_regularized else "Original"
-        assert f'alt="{mode} packing of {n} unit squares"' in drawing
+        canonical = frontier.drawing_path(n, regularized=True)
+        assert f'src="{canonical}"' in drawing
+        assert f'alt="Regularized packing of {n} unit squares"' in drawing
         assert 'loading="lazy"' in drawing
-        assert ("data-atlas-original-src=" in drawing) is is_regularized
-        if is_regularized:
-            assert f'data-atlas-original-src="{frontier.drawing_path(n)}"' in drawing
-            assert "Regularized by the Squares Project" in html.unescape(drawing)
+        assert f'data-atlas-original-src="{frontier.drawing_path(n)}"' in drawing
+        assert f'data-atlas-regularized-src="{canonical}"' in drawing
+        for name in ("original-side", "regularized-side", "original-credit"):
+            assert f" data-atlas-{name}=" in drawing, (n, name)
+        shown = re.findall(r' data-atlas-regularized-credit="([^"]*)"', drawing)[0]
+        assert f' title="{shown}"' in drawing, n
+        credit = html.unescape(shown)
+        assert ("Regularized by the Squares Project" in credit) is is_regularized
+        original = html.unescape(
+            re.findall(r' data-atlas-original-credit="([^"]*)"', drawing)[0]
+        )
+        assert original.startswith("Packing as published, "), n
+        assert "canonical pose" not in original, n
+        drawn_as = (
+            original
+            if frontier.default_pose(n).identity
+            else original.replace(
+                "as published", "as published, turned to its canonical pose", 1
+            )
+        )
+        assert credit == (f"{drawn_as}. {credit_line(n)}" if is_regularized else drawn_as), n
+        titles[n] = (original, credit)
         assert "regularized" not in open_tag
         assert "site-atlas-layer-mark" not in number
         assert 'width="400" height="400"' in drawing
-        assert frontier.drawing_path(n, regularized=is_regularized) in frontier.drawing_paths()
+        assert {frontier.drawing_path(n), canonical} <= set(frontier.drawing_paths())
+    # Each tile's Original credit, then its Regularized title: 11's house drawing is its
+    # default picture in its source's pose, and 17's is turned by its pose.
+    assert titles[11] == ("Packing as published, Walter Trump 1979, [Kingbird]",) * 2
+    assert titles[17] == (
+        "Packing as published, John Bidwell 1998, [Kingbird]",
+        "Packing as published, turned to its canonical pose, John Bidwell 1998, [Kingbird]",
+    )
 
     identical_thumbnails: set[int] = set()
     for n in regularized:

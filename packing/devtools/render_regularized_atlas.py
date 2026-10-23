@@ -58,6 +58,7 @@ from typing import Any
 from strif import atomic_output_file
 
 from devtools.build_known_best_atlas import frame_from_witness
+from devtools.flip_regularization import IDENTITY, Pose
 from devtools.regularize_axis_components import (
     ALGORITHM,
     ATLAS_CONTRACT,
@@ -185,17 +186,21 @@ def view_witness(entry: dict[str, Any], layout: Layout = LAYOUT) -> dict[str, An
     return view
 
 
-def regularized_frame(entry: dict[str, Any], layout: Layout = LAYOUT) -> PackingFrame:
+def regularized_frame(
+    entry: dict[str, Any], layout: Layout = LAYOUT, *, pose: Pose = IDENTITY
+) -> PackingFrame:
     """The view's squares and side under the record's own evidence tier and check.
 
     `frame_from_witness` is the house atlas's reading of a witness. The view's frame
     would state a certified upper bound, which is what its exact verification shows of
     the view; the drawing states the record's tier instead, so it promotes nothing.
+    `pose` turns the view's squares (`frame_from_witness(pose=)`); the source's frame
+    gives only its tier, check and address, so it is read in its own pose.
     """
     view = view_witness(entry, layout)
     source = frame_from_witness(source_witness(entry, layout))
     return replace(
-        frame_from_witness(view),
+        frame_from_witness(view, pose=pose),
         evidence=source.evidence,
         check=source.check,
         label=f"n={entry['n']} {DRAWING_LABEL}",
