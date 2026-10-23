@@ -5,13 +5,13 @@ title: Beyond-horizon rows above Göbel's classical constructions
 kind: task
 status: open
 priority: 2
-version: 6
+version: 7
 labels:
   - result-import
 dependencies: []
 parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 created_at: 2026-10-15T03:46:28.067Z
-updated_at: 2026-10-23T06:38:13.146Z
+updated_at: 2026-10-23T07:49:54.125Z
 ---
 **Owner question:** do Frits Göbel's classical constructions count as earlier reports, and so as the baseline beyond n = 324, so that a beyond-horizon row above one is not recorded? The record holds no Göbel construction beyond the corpus; its standing side there is the beyond-horizon row or the grid. Until the owner answers, draft register plans mark the affected rows `undecided-goebel` rather than recorded.
 
@@ -71,3 +71,10 @@ Whether a classical construction counts as an earlier report is #613's question,
 **An answer that leaves a hold out reruns the walk.** 66 history verdicts rest only on Göbel holds (`HISTORY_RESTING`). A rerun without the Göbel holds would record each of those steps, but every one of them is itself above Göbel's construction, so this decision holds it again (`refusal_flips`). If 23aff0c's classical constructions are left out under #613, the D2/D6 consequences recorded on think-f2io apply: 56 new records, which need a rerun of the history walk and new rows.
 
 2026-10-23 coord-intake-1023: OWNER DECISION (in conversation, 23 October): YES, Goebel's classical constructions count as earlier reports beyond n = 324 (the baseline): a rational row above Goebel's exact side is not recorded. Applies below 1024 (331, 369, 376 holds) and above (467 publications per the think-llit triage). Implementation: the walks' Goebel holds become 'not recorded' verdicts; rerun with think-temp's sub-print change after #742.
+
+2026-10-23 c-addr-742-1023 (PR #742 review A, A6): in the #732 walk, leaving the
+publications above Göbel's construction out decides 17 of the author's 1851c2c files (416,
+445, 488, 489, 493, 538, 585, 586, 634, 635, 636, 686, 687, 688, 739, 740, 795) and #732's
+331, 369 and 376 again, and each is itself above Göbel's construction, so the same answer
+holds it in turn (refusal_flips marks them goebel, not new records). Packet README, Held Back
+and Not Recorded.

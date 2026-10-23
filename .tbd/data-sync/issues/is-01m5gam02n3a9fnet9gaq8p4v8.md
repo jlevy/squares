@@ -5,7 +5,7 @@ title: "Owner decisions for #715 (and #666): counts above 1024, recipe-only rows
 kind: task
 status: in_progress
 priority: 1
-version: 8
+version: 9
 delegate: coord-intake-1021b
 labels:
   - result-import
@@ -14,7 +14,7 @@ dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-10-21T22:51:56.373Z
-updated_at: 2026-10-23T06:38:14.309Z
+updated_at: 2026-10-23T07:49:45.293Z
 started_at: 2026-10-21T22:51:57.158Z
 ---
 From the read-only triage of #715 (c-triage-715; full text: policy.md in the coordinator scratchpad triage-715/). No rule sets a ceiling above the n <= 324 horizon or mentions 1024, but the record holds nothing above 998, and #666's eight counts above 1024 wait on the same question.
@@ -103,3 +103,12 @@ Either D2 or D6 answered "no rows" therefore means rerunning the history walk an
 2026-10-23 coord-intake-1023: OWNER DECISION on D1 (in conversation, 23 October): YES, track counts above 1024 with no ceiling; rows recorded as reported, as below 1024. D4 follows as recommended (a hosted-data manifest, not Git blobs; OR-18) unless the owner says otherwise. Still open: D2, D3, D5, D6. Covers #666 (eight counts), #715, #719 (eight rows 1061-1568, think-9vr8) and #732 (5,078 files). Implementation owed: new bead(s) under think-ezt8.
 
 2026-10-23 coord-intake-1023: OWNER DECISION on D2 (in conversation, 23 October): YES, recipe-only (L-border/tiling) rows become rows, decided exactly from the recipe by a checker this project maintains; the rule goes into the frontier README. Needs a recipe-checker PR (W7) before any recipe row is recorded. Still open: D3, D5, D6.
+
+2026-10-23 c-addr-742-1023 (PR #742 review A, A6): what each answer would record in the
+#732 walk beside #732's own claims. Leaving deletion bounds out (D6) records #732's 985,
+eight of the author's 1851c2c files (367, 406, 541, 542, 588, 589, 638, 847), 8a488a1's file
+at 848, and Couzo's 5a299b4 index at 8 counts. Leaving constructions with no certificate file
+out (D2) records 24 of the 1851c2c files (368, 407, 448, 457, 533, 534, 543, 581, 590, 626,
+630, 639, 677, 690, 730, 733, 734, 741, 785, 788, 789, 796, 845, 846), 8a488a1's at 849, and
+5a299b4 at 37 counts. The author's files would need rows under a release that no walk
+declares yet. Packet README, Held Back and Not Recorded.
