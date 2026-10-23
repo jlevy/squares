@@ -2443,6 +2443,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "packing/campaign/result-requests.yaml",
             "packing/devtools/adopt_houses.py",
             "packing/devtools/site_resources.py",
+            "packing/devtools/site_urls.py",
             "packing/devtools/upper_bound_houses.py",
             "packing/devtools/upper_bound_reports.py",
             "packing/frontier/results.yaml",
@@ -2465,8 +2466,9 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "main's (69 files each), render_n11_optimality_review, "
             "render_n11_threshold_bound_review and render_packing_methods write every file "
             "byte-identical across all four. The n204 source's card in site_resources "
-            "(#753's CI) changes none of the 69 files: rendered again at 6f317a6b, every "
-            "file equals the 8386d394 render. The explainer counts the register and takes "
+            "and the 204 page's budget in site_urls (#753's CI) change none of the 69 "
+            "files: rendered again at 6f317a6b and at ba0cb64e, every file equals the "
+            "8386d394 render. The explainer counts the register and takes "
             "v0.4.22. No PDF was printed; each prints from that HTML. Retain v0.1.11, "
             "v0.1.4 and v0.2.7."
         ),
