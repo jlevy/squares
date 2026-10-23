@@ -697,16 +697,18 @@ one shows its bead’s runs or what the count draws before and after.
 
 ## 13. Flip Regularization
 
-**Owner decision, 23 October 2026.** Packings arrive in their sources’ poses, rotated or
-mirrored against one another, “so they look a little chaotic”.
-The owner asked that each drawing be rotated and flipped so that the heaviest quadrant
-is upper left, the second upper right, the third lower left and the fourth lower right:
-“first rotate to put the heaviest quadrant, and then flip if necessary”, with ties
-broken in “some other arbitrary way to make it deterministic”, in floating point, “since
-this is only for the purposes of regularization”.
+**Owner decisions, 23 October 2026.** Packings arrive in their sources’ poses, rotated
+or mirrored against one another, “so they look a little chaotic”.
+The owner asked that each drawing be rotated and flipped by quadrant weight, “first
+rotate to put the heaviest quadrant, and then flip if necessary”, with ties broken in
+“some other arbitrary way to make it deterministic”, in floating point, “since this is
+only for the purposes of regularization”.
 The original source is not adjusted, the regularized picture is “fully canonical pose”,
 and the pose is kept as “a separate piece of metadata” rather than as a second copy of
-the packing.
+the packing. The owner then put the heaviest quadrant at the lower right, so that “the
+really well-known ones should not change, like n = 11”, and the rule matches “what the
+conventions are for the common ones as much as possible”; and asked that the stage be
+“completely separate from the other regularization” and fast.
 
 The owner named the stage **flip regularization**; it is the last of the regularization
 process. It turns every count’s default picture ([section 12](#12-the-default-picture))
@@ -715,43 +717,47 @@ squares lie.
 
 1. Split the container down the middle into four quadrants, and weigh each by the area
    of the squares inside it over its own area, in binary64.
-2. Rotate the heaviest quadrant to the upper left.
-   Then, if the lower left is heavier than the upper right, mirror across the diagonal
-   through the upper-left corner, the one flip that keeps that quadrant in place.
-   The quadrant opposite the heaviest ends lower right whatever its weight, so a packing
-   heavy at two opposite corners lies along that diagonal.
-   Equivalently, of the eight poses keep those whose weights, read upper left, upper
-   right, lower left, lower right, are lexicographically greatest, weights within
+2. Rotate the heaviest quadrant to the lower right.
+   Then, if the upper right is heavier than the lower left, mirror across the diagonal
+   through the lower-right corner, the one flip that keeps that quadrant in place.
+   The quadrant opposite the heaviest ends upper left, and the upper right takes what is
+   left, so empty space gathers at the upper right, as the catalogues draw the integer
+   grids: rows filled from the bottom, the empty cells at the top right.
+   Equivalently, of the eight poses keep those whose weights, read lower right, lower
+   left, upper left, upper right, are lexicographically greatest, weights within
    $10^{-9}$ counting as equal.
-3. Where poses tie, compare the same weights on finer grids, 4×4, 8×8 and 16×16 cells
-   read row by row from the top; then the squares themselves, each as its centre and its
-   tilt, sorted from the top row and the left, the least list kept.
+3. Where poses tie, compare the same weights inside each quadrant, and inside each of
+   those, on grids of 4×4, 8×8 and 16×16 cells taken quadrant by quadrant in the same
+   order; then the squares themselves, each as its centre and its tilt, sorted from the
+   bottom row and the right, the least list kept.
 4. Poses still tied draw the same picture, since the packing has that symmetry, which is
    checked square for square.
-   The first of them without a rotation or a flip is kept, so a symmetric packing keeps
-   its source’s pose where it can.
+   The first in a fixed order is kept, the identity first and the rotations before the
+   flips, so a symmetric packing keeps its source’s pose.
 
-The pose is kept as metadata: each state of `default-drawings.json` records it as
-`flip_regularization`: `rotate`, 0, 90, 180 or 270 degrees counter-clockwise, and
-`flip`, whether the mirror follows; the stage that decided it; and the oriented
-picture’s four quadrant weights.
-It maps the stored coordinates of the picture drawn, the view where a view is drawn and
-the house witness elsewhere; the index’s `measured.symmetry` relates a view to its
-house. Every surface that draws the default picture applies it when it draws: both
+On the 324 default pictures of 23 October 2026 the rule keeps the published pose at 252
+counts, n = 11 among them, and turns 72; no rule that puts the heaviest quadrant lower
+left keeps more than 195. No packing catalogue states an orientation convention, as the
+[plan](../specs/active/plan-2026-10-23-flip-regularization.md#prior-practice) records,
+and the turned counts are mostly larger tilted packings whose sources publish them in no
+common pose.
+
+The pose is kept as metadata, in its own record,
+`packing/atlas/known-best/flip-regularization.json`: for each count, the picture drawn
+(the view where a view is drawn, the house elsewhere) and its retained rendering;
+`rotate`, 0, 90, 180 or 270 degrees counter-clockwise, and `flip`, whether the mirror
+across the upper-left to lower-right diagonal follows; the stage that decided it; and
+the turned picture’s quadrant weights.
+`python -m devtools.flip_regularization --update` decides every count from that
+rendering’s coordinates in a few seconds, and `--check`, the records-tier step
+`flip regularization record is current`, decides them again.
+Every surface that draws the default picture applies the pose when it draws: both
 composites, the homepage and atlas tiles in Regularized mode, the frontier survey’s
-thumbnails and the drawing that heads a case page.
+thumbnails, the drawing that heads a case page, and the social card.
 No witness, view, certificate, side, tier or credit changes, and no turned copy of a
 packing is stored. The house drawing as published, in Original mode and under a case
 page’s *As published*, keeps its source’s pose; the recorded pose, or its inverse, can
 be applied to it later with nothing new stored.
-`devtools.flip_regularization` decides the pose, `devtools.default_drawings --update`
-records it, and that tool’s check in the records tier decides every count’s pose again.
-
-No packing catalogue states an orientation convention, as the
-[plan](../specs/active/plan-2026-10-23-flip-regularization.md#prior-practice) records.
-The habit this changes most is the integer grids’: their rows were filled from the
-bottom, leaving the empty cells at the top right, and the rule puts them at the bottom
-right.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

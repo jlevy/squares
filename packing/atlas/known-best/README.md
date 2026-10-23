@@ -769,12 +769,14 @@ source’s credit; everywhere else the house drawing is the picture.
 Every default picture is drawn in its canonical pose, which
 [flip regularization](../../../docs/project/policies/regularization-policy.md#13-flip-regularization)
 chooses: turned by one of the container’s eight symmetries so that its heaviest quadrant
-is upper left and the heavier of that quadrant’s neighbours upper right.
-The pose is a state’s `flip_regularization` in
-[`default-drawings.json`](default-drawings.json), `rotate` and `flip`, applied to the
-picture’s stored coordinates when the composites and the site draw it; the witnesses,
-the views and their renderings under `rendering/` and `regularized/rendering/` keep
-their sources’ frames, and the house drawing as published keeps its source’s pose.
+is lower right and the heavier of that quadrant’s neighbours lower left, which keeps the
+published pose of 252 counts, n = 11 and the integer grids among them.
+The pose is kept in its own record,
+[`flip-regularization.json`](flip-regularization.json), as `rotate` and `flip`, and is
+applied to the drawn picture’s coordinates when the composites and the site draw it; the
+witnesses, the views and their renderings under `rendering/` and
+`regularized/rendering/` keep their sources’ frames, and the house drawing as published
+keeps its source’s pose.
 
 [`default-drawings.json`](default-drawings.json)
 ([schema](default-drawings.schema.yaml)), written by
