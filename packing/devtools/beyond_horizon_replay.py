@@ -285,18 +285,21 @@ WITHDRAWN_ANSWER = (
     "keeps it out of the record"
 )
 #: The owner's answer that settles an index bound deleting one square from the next
-#: count's published certificate (`Held.answer`; D6 on think-f2io). The question was a
-#: side obtained by deleting a square from a neighbour's certificate, Couzo's 985 from his
-#: 986, and the answer "Yes, an earlier report", whose option read "A published deletion
-#: bound counts like any stated bound; a later equal or higher side is not recorded". The
-#: walk records it and the chain passes over it; that it has no row of its own is the
-#: decision's recommendation, which the owner has not confirmed (think-kzme). A bound
-#: deleting more squares, or from a farther count, is outside those words and stays held.
+#: count's published certificate (`Held.answer`; D6 on think-f2io). The owner selected
+#: the option labelled "Yes, an earlier report (Recommended)". The rest is the question
+#: the coordinator asked, not the owner's words: whether a side obtained by deleting a
+#: square from a neighbour's certificate, Couzo's 985 from his 986, is an earlier report,
+#: with that option described as "A published deletion bound counts like any stated
+#: bound; a later equal or higher side is not recorded". The walk records it and the chain
+#: passes over it; that it has no row of its own is the decision's recommendation, which
+#: the owner has not confirmed (think-kzme). A bound deleting more squares, or from a
+#: farther count, is outside the question's words and stays held.
 DELETION_ANSWER = (
-    "the owner's answer of 23 October 2026 on D6 (think-f2io), that a side obtained by "
-    "deleting a square from the next count's published certificate is an earlier report: "
-    "a later equal or higher side is not recorded, and on the decision's recommendation, "
-    "which the owner has not confirmed (think-kzme), it has no row of its own"
+    "the owner's answer of 23 October 2026 on D6 (think-f2io), the option labelled "
+    '"Yes, an earlier report (Recommended)" in the question the coordinator asked, whether '
+    "a side obtained by deleting a square from a neighbour's certificate is an earlier "
+    "report; so a later equal or higher side is not recorded, and on the decision's "
+    "recommendation, which the owner has not confirmed (think-kzme), it has no row of its own"
 )
 #: What a hold's class is called where a sentence counts holds (`held_sentence`).
 HELD_NAMES = {

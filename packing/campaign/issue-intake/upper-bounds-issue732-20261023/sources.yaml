@@ -3967,10 +3967,11 @@ reports:
     at each count #732 claims where it states a side strictly below the start, at the least side the commit
     states there. Its 16 index deletion bounds, each deleting one square from the next count''s 4e4c8ce
     certificate, at 533, 580, 583, 589, 629, 632, 638, 680, 683, 733, 788, 845, 855, 904, 965 and 985,
-    have no row by the owner''s answer of 23 October 2026 on D6 (think-f2io), that a side obtained by
-    deleting a square from the next count''s published certificate is an earlier report: a later equal
-    or higher side is not recorded, and on the decision''s recommendation, which the owner has not confirmed
-    (think-kzme), it has no row of its own (beyond_horizon_replay.WALKS[''upper-bounds-issue732-20261023''].held).'
+    have no row by the owner''s answer of 23 October 2026 on D6 (think-f2io), the option labelled "Yes,
+    an earlier report (Recommended)" in the question the coordinator asked, whether a side obtained by
+    deleting a square from a neighbour''s certificate is an earlier report; so a later equal or higher
+    side is not recorded, and on the decision''s recommendation, which the owner has not confirmed (think-kzme),
+    it has no row of its own (beyond_horizon_replay.WALKS[''upper-bounds-issue732-20261023''].held).'
 - report: franciscouzo/square-packing@58a7833
   url: https://github.com/franciscouzo/square-packing/tree/58a783368d4b7e70bb800f0009ea9ca03e578739
   reported_at: '2026-10-15T01:25:11Z'

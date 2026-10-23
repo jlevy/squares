@@ -508,10 +508,12 @@ record’s statement of the rule:
   his later release claims a lower side at that count, stays among the walk’s
   publications. The walk keeps it out of the record
   (`beyond_horizon_replay.Held.answer`), and no verdict rests on it.
-- **A deletion bound is an earlier report** (D6 on think-f2io). The question was a side
-  obtained by deleting a square from a neighbour’s certificate, as Couzo’s 985 from his
-  986, and the answer “Yes, an earlier report”, whose option read “A published deletion
-  bound counts like any stated bound; a later equal or higher side is not recorded”.
+- **A deletion bound is an earlier report** (D6 on think-f2io). The owner selected the
+  option labelled “Yes, an earlier report (Recommended)”. The rest is the question the
+  coordinator asked, not the owner’s words: whether a side obtained by deleting a square
+  from a neighbour’s certificate, as Couzo’s 985 from his 986, is an earlier report,
+  with that option described as “A published deletion bound counts like any stated
+  bound; a later equal or higher side is not recorded”.
   So a bound one square below the next count’s published certificate is a report from
   the publication that states it, and #732’s 985, which ties Couzo’s `4e4c8ce` bound
   there, is not recorded.
