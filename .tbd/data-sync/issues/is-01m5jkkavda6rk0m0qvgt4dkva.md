@@ -3,14 +3,18 @@ type: is
 id: is-01m5jkkavda6rk0m0qvgt4dkva
 title: "Import Mishapolk: 5,468 certificates 328–10000 at 814fbe9, '#715 resolution' and a boundary-saturation proof claim (#732)"
 kind: task
-status: open
+status: in_progress
 priority: 1
-version: 4
+version: 6
+delegate: c-lane-732-import-1023
 labels:
   - result-import
 dependencies: []
+hold: null
+hold_until: null
 created_at: 2026-10-22T20:07:20.685Z
-updated_at: 2026-10-23T01:20:01.559Z
+updated_at: 2026-10-23T02:12:17.764Z
+started_at: 2026-10-23T02:12:17.764Z
 ---
 Issue #732 (https://github.com/jlevy/squares/issues/732), opened 2026-10-22T19:55:03Z by Mishapolk (Mykhailo Polkovskyi): "328–10000: Registration Request (5,468 Exact Rational Certificates), Complete Resolution of Couzo #715, and Algebraic Boundary Saturation Proof". Source Mishapolk/square-packing-records@814fbe9129b7abb301923cc50de621697a53940f (upper_bounds.json, certified_bounds.json, certificates/manifest.json, certificates/census.json with digests in the issue).
 From the stage 7 lane after #722 (repo moved past dc440a88): 8a488a1 (19:08:59Z) and 3285fac (19:29:30Z) reorganize certificates/ into thousands folders holding files at 5,594 counts up to 9,913 (126 in the corpus, 390 at 325–1024, 5,078 above 1024); 814fbe9 (19:37:33Z) changes four index JSONs; at 31 of #719's 122 counts the new file states a lower side (7.5e-13 to 8.19e-2, largest at 366); the three failing files and the lower n204.cert are gone; BOUND_VERIFIER_LICENSE.txt is an MIT licence naming Evan Daniel (verifier licence, not the certificates').
@@ -125,3 +129,5 @@ holds decide 369, 376, 985 and 499)
 - The drafted acknowledgement (triage-732/acknowledgement.md) needs three edits before posting: its Licence paragraph ("does not cover your certificates ... derived exact facts") and question 2 (a licence) are answered by 17cc220; the "#719's other questions ... stay open" line should say the withdrawn rows are now claimed here; and it should name this PR as the one carrying the triage.
 
 2026-10-23 01:25Z coord-intake-1021b: #739 merged (4ad09803c) with #732 triage entry. Stage 1 acknowledgement posted: https://github.com/jlevy/squares/issues/732#issuecomment-6355073019 (edited for 17cc220 MIT licence, ten re-claimed rows, #719 answers). Record this reply under #732 replies (kind acknowledgement, 2026-10-23) in the next records PR. Import of the 77 rows waits on #730; pin 17cc220.
+
+2026-10-23 02:12Z coord-intake-1021b: blocker resolved: #730 merged as fcf2f96a5. The 77-row import of #732 at 325-1024 can start (redo the report-order walk against main with #730 rows; pin 17cc220 under the MIT licence; rows above 1024 stay held on think-f2io).

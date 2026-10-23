@@ -5,7 +5,7 @@ title: Integrate and validate navigation across all site page families
 kind: task
 status: in_progress
 priority: 2
-version: 5
+version: 6
 spec_path: docs/project/specs/active/plan-2026-10-22-site-navigation.md
 delegate: navigation-integration
 labels: []
@@ -14,11 +14,11 @@ parent_id: is-01m5jnsqdwj3t8m7hkbx6mr1m2
 hold: null
 hold_until: null
 created_at: 2026-10-22T21:16:24.523Z
-updated_at: 2026-10-23T00:44:58.233Z
+updated_at: 2026-10-23T01:45:58.029Z
 started_at: 2026-10-22T21:28:25.411Z
 ---
 After PR733 merges, apply shared parent/breadcrumb metadata to articles, records, profiles, papers, chapters and workbench; reconcile registry/build/freshness inputs; verify links, keyboard/mobile/no-JS, theme and browser layouts; build the complete site and review the standalone navigation PR. Include the five focused profile/popover/footer follow-up beads.
 
 ## Notes
 
-Final pushed head73326707d5dbe047cb1dfedd6cbd2cbbe9c31d80 includes merged main e929137a8 and final reduced-motion menu dismissal fix. Merged all-site plus Workbench preview80759 completed exit0; earlier12968/33154/3296 were superseded/cancelled, not passes. Earlier complete96314 included allfourpaperHTML/PDF. Root browser reloaded Results Archive: S1-S5 inline,229results,newT229 present. Mobile dropdown passed; two Archive and six Project focused browser cases passed. Senior review has no blocking findings: A1fixed and independently verified37Node checks, A2 unused Recent renderers deferred think-31fw. Retained receipts: URL1157rows0failures, width105artifact records0errors plus17current-source families×5widths, header-logo trails; menu keyboard/mobile1passed5.30s; profile navigation3passed35.11s. OR9 PR body updated/published exact73326707d; draft retained. Current-head hostedCI actively monitored by Sol, no failure yet; earlier head success is not final certification. KEEP OPEN until final current-head hosted gates pass.
+Latest pushed test checkpoint64ab5603cc3b4fe02541019f7322b6b62ff62d3e, PR737 draft. Root9f446 source/docs/components checkpoint preceded it. Final local published-site recheck after fourpaperHTML refresh:7608checks0failures, scratch/final-site-checks.log. Full web/Workbench refresh45123 still underway to propagate Learn order across663pages. IAB Tutorials confirms Read Papers and Tutorials-first. Canonical/Frontier tests: result_overview66pass101.05s, site_documents71pass77.45s, native math3pass27.91s, screen/print negative controls2pass11.02s. All Results overview40pass116.64s, shared71pass+repaired exact fragment1pass4.18s; types0/0. Completed geometry/profile/menu receipts retained in closed beads. Remaining: alias same-document initialization fix plus regression and latest All Results topic-style request, final senior review/current-source preview, exact-head Packing/Pages terminal success, final PR body and ready state. Related active scopes mdrd/6ts0/dq6a, closed5fdy, deferred31fw. Current64ab workflows Packing39885601620 and Pages39885601611 exist pending concurrency; draft is not preventing them. KEEP OPEN; earlier successes are not current-head certification.
