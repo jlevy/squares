@@ -177,11 +177,15 @@ MIXED_PACKETS = (
     "wand125-mixed-bounds-finer-net-2026-10-06",
     "wand125-mixed-bounds-check2-2026-10-06",
     "wand125-fine-net-lower-bounds-2026-10-16",
+    "wand125-fine-net-n31-2026-10-11",
 )
 #: A packet that keeps its certificates elsewhere than `square-packing-bounds/certificates`:
-#: the 16 October fine-net packet keeps its release assets' members at the assets' own
-#: paths (`devtools.fine_net_followup retain`).
-MIXED_ROOTS = {"wand125-fine-net-lower-bounds-2026-10-16": "release/certificates"}
+#: the 16 October fine-net packet and the n31 packet of 11 October keep their release
+#: assets' members at the assets' own paths (`devtools.fine_net_followup retain`).
+MIXED_ROOTS = {
+    "wand125-fine-net-lower-bounds-2026-10-16": "release/certificates",
+    "wand125-fine-net-n31-2026-10-11": "release/certificates",
+}
 #: The standard net's direction count; a format M file may declare another.
 STANDARD_DIRECTIONS = 201
 CENSUS_ROOT = PROJECT / "benchmarks/measure-verifier"
@@ -1338,6 +1342,7 @@ SHARED_CRATE_PACKETS = frozenset(
     {
         "wand125-mixed-bounds-check2-2026-10-06",
         "wand125-fine-net-lower-bounds-2026-10-16",
+        "wand125-fine-net-n31-2026-10-11",
     }
 )
 INDEPENDENT_MIXED_PACKETS = frozenset(

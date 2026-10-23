@@ -1186,3 +1186,18 @@ def test_the_16_october_fine_net_packet_is_read_from_its_retained_release_member
     for name, case in found.items():
         assert case.candidate == root / name / "candidate.json.gz"
         assert census.net_directions(case) == (2073 if case.n <= 51 else 201)
+
+
+def test_the_n31_fine_net_packet_is_read_from_its_retained_release_members() -> None:
+    """The 11 October n31 packet keeps its asset's members as the 16 October one does, and
+    is classified as sharing the producer's crate, as that packet is."""
+    packet = "wand125-fine-net-n31-2026-10-11"
+    found = {name: case for name, case in cases().items() if case.packet == packet}
+    assert list(found) == ["mixed_n31_L59775"]
+    case = found["mixed_n31_L59775"]
+    root = census.WEB / packet / "release/certificates"
+    assert case.candidate == root / "mixed_n31_L59775" / "candidate.json.gz"
+    assert (case.n, case.side) == (31, "2391/400")
+    assert census.net_directions(case) == 2073
+    assert packet in census.SHARED_CRATE_PACKETS
+    assert packet not in census.INDEPENDENT_MIXED_PACKETS
