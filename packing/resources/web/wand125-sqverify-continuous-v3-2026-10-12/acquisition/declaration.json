@@ -1,0 +1,142 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "wand125-square-packing",
+  "source_url": "https://github.com/wand125/square-packing",
+  "source_ref": "refs/heads/main",
+  "source_commit": "f30cc2cf345a3a3f6af778925f354d9ec979868b",
+  "retrieved_at_utc": "2026-10-23T06:52:05Z",
+  "git_scope": "A blobless clone of the single public branch with its history (head e48de243 on 2026-10-23), sparsely checked out at this commit, v3 of sqverify_continuous, the first published version and the one the source's n = 40 examples ran: the directory tools/sqverify_continuous, the tools licence and third-party notices, and the repository's licence index. Every file in that scope is digested; the seven files its child d4a1981 (v4) changes are retained here, and every other file is pinned by digest to the byte-identical copy the v4 packet retains.",
+  "archived_dir": "square-packing",
+  "license": "MIT, Copyright (c) 2026 wand125 (tools/LICENSE), for the code; the copies of this repository's sqverify_fast documentation under CC BY 4.0 to Joshua Levy, the squares project, and its code under MIT, as tools/THIRD_PARTY_NOTICES.md and PROVENANCE.md state",
+  "claims": [
+    "sqverify-fast --continuous v3 (source_sha256 1266a8b90f9a355d74772e211a7b9a52d0236b0d33cc4113d2f897d8a1044f33): the same statement as v4; README.md reports s(40) > 1340000/199529 (T-145's density, B = 199529/200000, tau = 4999/5000) and s(40) > 3359/500 (T-157's density, B = 3350/3359) VERIFIED at all 86 root ranges, and their controls REFUSED, with no receipt published"
+  ],
+  "scope": [
+    "LICENSE.md",
+    "tools/LICENSE",
+    "tools/THIRD_PARTY_NOTICES.md",
+    "tools/sqverify_continuous"
+  ],
+  "pinned_only": [
+    {
+      "match": "LICENSE.md",
+      "reason": "the repository's licence index, retained byte-identical by the closed-form cfcheck packet",
+      "identical_to": "packing/resources/web/wand125-closed-form-cfcheck-2026-10-14/square-packing/LICENSE.md"
+    },
+    {
+      "match": "tools/LICENSE",
+      "reason": "wand125's MIT licence, retained byte-identical by the closed-form cfcheck packet",
+      "identical_to": "packing/resources/web/wand125-closed-form-cfcheck-2026-10-14/square-packing/problems/closed-form/LICENSE"
+    },
+    {
+      "match": "tools/THIRD_PARTY_NOTICES.md",
+      "reason": "unchanged at the child d4a1981 and retained byte-identical by the v4 packet",
+      "identical_to": "packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/THIRD_PARTY_NOTICES.md"
+    },
+    {
+      "match": "tools/sqverify_continuous/examples/n40/prepare.py",
+      "reason": "unchanged at the child d4a1981 and retained byte-identical by the v4 packet",
+      "identical_to": "packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/examples/n40/prepare.py"
+    },
+    {
+      "match": "tools/sqverify_continuous/examples/n40/run.sh",
+      "reason": "unchanged at the child d4a1981 and retained byte-identical by the v4 packet",
+      "identical_to": "packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/examples/n40/run.sh"
+    },
+    {
+      "match": "tools/sqverify_continuous/sqverify_fast/.gitignore",
+      "reason": "unchanged at the child d4a1981 and retained byte-identical by the v4 packet",
+      "identical_to": "packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/.gitignore"
+    },
+    {
+      "match": "tools/sqverify_continuous/sqverify_fast/Cargo.lock",
+      "reason": "unchanged at the child d4a1981 and retained byte-identical by the v4 packet",
+      "identical_to": "packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/Cargo.lock"
+    },
+    {
+      "match": "tools/sqverify_continuous/sqverify_fast/Cargo.toml",
+      "reason": "unchanged at the child d4a1981 and retained byte-identical by the v4 packet",
+      "identical_to": "packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/Cargo.toml"
+    },
+    {
+      "match": "tools/sqverify_continuous/sqverify_fast/INDEPENDENCE.md",
+      "reason": "unchanged at the child d4a1981 and retained byte-identical by the v4 packet",
+      "identical_to": "packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/INDEPENDENCE.md"
+    },
+    {
+      "match": "tools/sqverify_continuous/sqverify_fast/README.md",
+      "reason": "unchanged at the child d4a1981 and retained byte-identical by the v4 packet",
+      "identical_to": "packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/README.md"
+    },
+    {
+      "match": "tools/sqverify_continuous/sqverify_fast/SOUNDNESS.md",
+      "reason": "unchanged at the child d4a1981 and retained byte-identical by the v4 packet",
+      "identical_to": "packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/SOUNDNESS.md"
+    },
+    {
+      "match": "tools/sqverify_continuous/sqverify_fast/build.rs",
+      "reason": "unchanged at the child d4a1981 and retained byte-identical by the v4 packet",
+      "identical_to": "packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/build.rs"
+    },
+    {
+      "match": "tools/sqverify_continuous/sqverify_fast/clippy.toml",
+      "reason": "unchanged at the child d4a1981 and retained byte-identical by the v4 packet",
+      "identical_to": "packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/clippy.toml"
+    },
+    {
+      "match": "tools/sqverify_continuous/sqverify_fast/independence-record.yaml",
+      "reason": "unchanged at the child d4a1981 and retained byte-identical by the v4 packet",
+      "identical_to": "packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/independence-record.yaml"
+    },
+    {
+      "match": "tools/sqverify_continuous/sqverify_fast/rust-toolchain.toml",
+      "reason": "unchanged at the child d4a1981 and retained byte-identical by the v4 packet",
+      "identical_to": "packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/rust-toolchain.toml"
+    },
+    {
+      "match": "tools/sqverify_continuous/sqverify_fast/src/axis.rs",
+      "reason": "unchanged at the child d4a1981 and retained byte-identical by the v4 packet",
+      "identical_to": "packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/src/axis.rs"
+    },
+    {
+      "match": "tools/sqverify_continuous/sqverify_fast/src/certificate.rs",
+      "reason": "unchanged at the child d4a1981 and retained byte-identical by the v4 packet",
+      "identical_to": "packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/src/certificate.rs"
+    },
+    {
+      "match": "tools/sqverify_continuous/sqverify_fast/src/exact.rs",
+      "reason": "unchanged at the child d4a1981 and retained byte-identical by the v4 packet",
+      "identical_to": "packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/src/exact.rs"
+    },
+    {
+      "match": "tools/sqverify_continuous/sqverify_fast/src/interval.rs",
+      "reason": "unchanged at the child d4a1981 and retained byte-identical by the v4 packet",
+      "identical_to": "packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/src/interval.rs"
+    },
+    {
+      "match": "tools/sqverify_continuous/sqverify_fast/src/lib.rs",
+      "reason": "unchanged at the child d4a1981 and retained byte-identical by the v4 packet",
+      "identical_to": "packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/src/lib.rs"
+    },
+    {
+      "match": "tools/sqverify_continuous/sqverify_fast/src/oracle.rs",
+      "reason": "unchanged at the child d4a1981 and retained byte-identical by the v4 packet",
+      "identical_to": "packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/src/oracle.rs"
+    },
+    {
+      "match": "tools/sqverify_continuous/sqverify_fast/src/rotated.rs",
+      "reason": "unchanged at the child d4a1981 and retained byte-identical by the v4 packet",
+      "identical_to": "packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/src/rotated.rs"
+    },
+    {
+      "match": "tools/sqverify_continuous/sqverify_fast/src/rotated_tests.rs",
+      "reason": "unchanged at the child d4a1981 and retained byte-identical by the v4 packet",
+      "identical_to": "packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/src/rotated_tests.rs"
+    },
+    {
+      "match": "tools/sqverify_continuous/sqverify_fast/tests/adversarial.rs",
+      "reason": "unchanged at the child d4a1981 and retained byte-identical by the v4 packet",
+      "identical_to": "packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/tests/adversarial.rs"
+    }
+  ]
+}

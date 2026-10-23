@@ -790,7 +790,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "f590f81f45c9f11b0cedf765b9ba3d920db072ec"
+DATA_REVISION = "db78616c1b4c39e2ec76c076ac524628d96b0072"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -2453,6 +2453,44 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "file byte-identical. Measured again at f590f81f4, after the D6 answer's "
             "records and notes, with the same outcome. No PDF was printed; each prints "
             "from that HTML. Retain v0.4.21, v0.1.11, v0.1.4 and v0.2.7."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The 23 October soundness review of wand125's sqverify_continuous (think-xzob, "
+            "#533), after review A of #752: its accepted adversarial review item on T-192 "
+            "only, T-192 from C0 to C1, next steps and notes on T-145, T-157 and T-192, "
+            "#533's ask, and a coverage source for the new key, against main c1115c095 "
+            "(#749): rendered at link revision 6c4747f7 into empty site directories, twice "
+            "from this tree at 6c4747f7 and twice from the same tree with main's register, "
+            "requests record and coverage record swapped in (69 files each), "
+            "render_n11_lower_bounds_explainer, with its pinned Chromium math pass, "
+            "render_n11_optimality_review, render_n11_threshold_bound_review and "
+            "render_packing_methods write every file byte-identical across all four. "
+            "Measured before at 8625f55e against the same main, for the register alone, "
+            "with the same outcome. The register stays at 230 results. No PDF was printed; "
+            "each prints from that HTML. Retain v0.4.21, v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
     ReleaseNoPublicChange(

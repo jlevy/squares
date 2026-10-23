@@ -1,0 +1,160 @@
+{
+  "clean_runs": [
+    {
+      "seed": 11,
+      "mutation": null,
+      "boxes": 1020,
+      "checks": {
+        "C2 angle enclosures": 5760,
+        "C2 E(t) enclosure": 5760,
+        "C2 centre ranges": 5760,
+        "C5 dx, dy": 5760,
+        "C4 inside": 40080,
+        "C3 area at the path centre": 103017,
+        "C5 gradient along x": 165776,
+        "C5 gradient along y": 165316,
+        "C4 outside": 628032,
+        "whole box bound": 5760
+      },
+      "failures": {},
+      "violation_examples": {},
+      "failure_count": 0,
+      "seconds": 424.6
+    },
+    {
+      "seed": 12,
+      "mutation": null,
+      "boxes": 1020,
+      "checks": {
+        "C2 angle enclosures": 5760,
+        "C2 E(t) enclosure": 5760,
+        "C2 centre ranges": 5760,
+        "C5 dx, dy": 5760,
+        "C3 area at the path centre": 99819,
+        "C5 gradient along x": 162841,
+        "C5 gradient along y": 162618,
+        "C4 inside": 43584,
+        "C4 outside": 662865,
+        "whole box bound": 5760
+      },
+      "failures": {},
+      "violation_examples": {},
+      "failure_count": 0,
+      "seconds": 599.7
+    },
+    {
+      "seed": 13,
+      "mutation": null,
+      "boxes": 1020,
+      "checks": {
+        "C2 angle enclosures": 5760,
+        "C2 E(t) enclosure": 5760,
+        "C2 centre ranges": 5760,
+        "C5 dx, dy": 5760,
+        "C4 outside": 597468,
+        "C3 area at the path centre": 101565,
+        "C5 gradient along x": 165008,
+        "C5 gradient along y": 164714,
+        "whole box bound": 5760,
+        "C4 inside": 36951
+      },
+      "failures": {},
+      "violation_examples": {},
+      "failure_count": 0,
+      "seconds": 612.8
+    }
+  ],
+  "clean_checks_total": {
+    "C2 angle enclosures": 17280,
+    "C2 E(t) enclosure": 17280,
+    "C2 centre ranges": 17280,
+    "C5 dx, dy": 17280,
+    "C4 inside": 120615,
+    "C3 area at the path centre": 304401,
+    "C5 gradient along x": 493625,
+    "C5 gradient along y": 492648,
+    "C4 outside": 1888365,
+    "whole box bound": 17280
+  },
+  "clean_failures_total": 0,
+  "mutations": {
+    "area x 1.0005": {
+      "detected": true,
+      "failures": {
+        "C3 area at the path centre": 5209,
+        "whole box bound": 462
+      },
+      "boxes": 150
+    },
+    "section term x 1.001": {
+      "detected": true,
+      "failures": {
+        "C3 area at the path centre": 1920,
+        "whole box bound": 188
+      },
+      "boxes": 150
+    },
+    "gradient halved": {
+      "detected": true,
+      "failures": {
+        "C5 gradient along x": 5853,
+        "C5 gradient along y": 5764,
+        "whole box bound": 132
+      },
+      "boxes": 150
+    },
+    "dx halved": {
+      "detected": true,
+      "failures": {
+        "C5 dx, dy": 828,
+        "whole box bound": 132
+      },
+      "boxes": 150
+    },
+    "inside test loosened 1%": {
+      "detected": true,
+      "failures": {
+        "C4 inside": 216,
+        "whole box bound": 6
+      },
+      "boxes": 150
+    },
+    "outside test loosened 2%": {
+      "detected": true,
+      "failures": {
+        "C4 outside": 417
+      },
+      "boxes": 150
+    },
+    "W upper bound at tb only": {
+      "detected": true,
+      "failures": {
+        "C2 angle enclosures": 153,
+        "C2 E(t) enclosure": 151,
+        "C2 centre ranges": 146
+      },
+      "boxes": 150
+    },
+    "midpoint rule for the trapezoid": {
+      "detected": false,
+      "failures": {},
+      "boxes": 150
+    },
+    "inner rectangle from the wrong end": {
+      "detected": true,
+      "failures": {
+        "C3 area at the path centre": 37
+      },
+      "boxes": 150
+    },
+    "wrong branch of kx_up": {
+      "detected": true,
+      "failures": {
+        "C3 area at the path centre": 18
+      },
+      "boxes": 150
+    }
+  },
+  "mutations_detected": 9,
+  "mutations_total": 10
+}
