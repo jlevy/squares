@@ -434,12 +434,12 @@ def test_the_homepage_sections_run_in_the_requested_order(page: str, atlas_page:
         "the-atlas-of-square-packings",
         "news",
         "recent-results",
+        "papers",
         "profiles",
         "report-your-results",
-        "papers",
         "visuals",
-        "squares-project-documentation",
         "more-resources",
+        "squares-project-documentation",
     ]
     positions = [page.index(f'id="{identifier}"') for identifier in landings]
     assert positions == sorted(positions)
@@ -3764,9 +3764,7 @@ def test_recent_results_is_one_table_not_cards_or_a_list(
     result pages; status links name superseding results. Rows contain no lists or
     cards. Its only popovers are its rows' own. What a row's popover
     holds is the popover's own business, so the section is read without them."""
-    section = page.split('id="recent-results"', 1)[1].split('<h2 id="report-your-results"', 1)[
-        0
-    ]
+    section = page.split('id="recent-results"', 1)[1].split("<h2", 1)[0]
     recent = _recent_table(page)
     assert recent in section
     assert set(re.findall(r'<div class="(site-popover(?: [^"]*)?)"', section)) == {
@@ -3825,9 +3823,7 @@ def test_the_recent_table_contains_the_advertised_static_subset(
     expected = _recent_entries(overview)
     assert listed == [result.id.lower() for result in expected]
     assert 0 < len(listed) < len(overview.results)
-    section = page.split('id="recent-results"', 1)[1].split('<h2 id="report-your-results"', 1)[
-        0
-    ]
+    section = page.split('id="recent-results"', 1)[1].split("<h2", 1)[0]
     assert "data-filter=" not in section
     assert 'href="results.html#all-results" data-all-results' in section
     assert "site-recent-scope" not in section
@@ -4094,9 +4090,7 @@ def test_the_overview_opens_with_the_owners_two_paragraphs(page: str) -> None:
 def test_recent_major_results_opens_with_preview_then_recent_and_archive_actions(
     page: str,
 ) -> None:
-    section = page.split('id="recent-results"', 1)[1].split('<h2 id="report-your-results"', 1)[
-        0
-    ]
+    section = page.split('id="recent-results"', 1)[1].split("<h2", 1)[0]
     assert '<h2 id="recent-results" class="site-title">Results</h2>' in page
     assert _recent_prose(page) == ""
     assert "Recent progress, with each result linked to its complete record." not in page
@@ -4158,7 +4152,7 @@ def test_home_invitation_leads_to_the_complete_contribution_instructions(
     assert "what name you wish to be used for credits" in _rendered_text(about_section)
     assert "what name you wish to be used for credits" not in _rendered_text(home_section)
     assert page.index('id="recent-results"') < page.index('id="report-your-results"')
-    assert page.index('id="report-your-results"') < page.index('id="papers"')
+    assert page.index('id="papers"') < page.index('id="report-your-results"')
 
 
 def test_the_sites_own_statement_follows_readmes_introduction(

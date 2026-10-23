@@ -2082,10 +2082,10 @@ PROFILES_DIRECTORY = "profiles/index.html"
 def documentation_block() -> str:
     """The repository introduction and complete reader-document cards on About."""
     lead = (
-        '<p class="site-navigation-copy">The code, the certificates, the literature '
-        "archive and the documents that "
-        "record all of this live in the Squares Project\u2019s "
-        f'<a href="{repo_links.REPO_URL}">repository</a>.</p>'
+        '<p class="site-navigation-copy">Everything for this site, the full archive of '
+        "all historic and current research, and an extensive set of tools and research "
+        f'workflows are in <a href="{repo_links.REPO_URL}">'
+        "the Squares Project repository</a>.</p>"
     )
     return f"{lead}\n\n{document_cards()}"
 
