@@ -317,10 +317,11 @@ The process relies on these rules of the records:
   local replay are recorded as separate entries.
   The case-lane check refuses a machine run not made here, and
   [`devtools.check_results`](../devtools/check_results.py) a verified bound on a result
-  by others dated from 22 August 2026 that no register entry covering it lists a review
-  for and whose evidence records no read in a mapped review document.
-  An upper bound that passes them below the case’s house best packing replaces it
-  ([the house rule](../campaign/result-import.md#the-house-rule)).
+  by others dated from 22 August 2026 that no register entry covering it lists an
+  accepting review of the mathematics for (`accepted` or `defects-resolved`, by a kind
+  other than `oversight`), and whose evidence records no defect-free read in a mapped
+  review document. An upper bound that passes them below the case’s house best packing
+  replaces it ([the house rule](../campaign/result-import.md#the-house-rule)).
 
 ## Registering a First-Party Result
 

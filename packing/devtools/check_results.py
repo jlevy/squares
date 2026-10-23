@@ -1527,13 +1527,29 @@ def coverage_problems(
 _REVIEW_PATH = re.compile(r"docs/project/reviews/[A-Za-z0-9._/-]+\.md")
 
 
+#: The review kinds that read a result's mathematics. An oversight record reviews the
+#: AI reviews and the trust boundary, not the argument (epistemics.md, Review Records).
+MATHEMATICS_REVIEW_KINDS = frozenset({"adversarial", "confirming", "formalization"})
+
+
+def accepting_review(review: Mapping[str, Any]) -> bool:
+    """A register review that reads the mathematics and accepts it: a kind in
+    `MATHEMATICS_REVIEW_KINDS` with a verdict of `accepted` or `defects-resolved`. A
+    refuted or open-defect verdict reviews the result without letting it stand."""
+    return (
+        review.get("kind") in MATHEMATICS_REVIEW_KINDS
+        and review.get("verdict") in ACCEPTING_VERDICTS
+    )
+
+
 def mapped_review_reads(entry: Mapping[str, Any], document_map: Mapping[str, Any]) -> set[str]:
-    """The mapped review documents an evidence entry's own record of a read names: a
-    qualifying `external_review` or a `proof.audit_record` that names a review the
-    document map holds as one, not superseded."""
+    """The mapped review documents an evidence entry's own record of a read names: an
+    `external_review` that read the argument and found no defect (`informally-verified`,
+    with its date, reviewer and note), or a `proof.audit_record`, naming by its full
+    path a review the document map holds as one, not superseded."""
     texts: list[str] = []
     read = entry.get("external_review") or {}
-    if _qualifying_read(read):
+    if read.get("state") == "informally-verified" and _qualifying_read(read):
         texts.extend((str(read.get("reviewed_by") or ""), str(read.get("note") or "")))
     if audit := (entry.get("proof") or {}).get("audit_record"):
         texts.append(str(audit))
@@ -1564,11 +1580,13 @@ def verified_lane_review_problems(
     every verified bound; nothing held the review half (think-mt6e, the import review of
     2026-10-01, W7), so a published proof by others nobody here read, or a replay with no
     review, could carry a verified bound. A value is reviewed when a register entry that
-    cites one of its others' evidence entries and covers the count lists a review (held
-    mapped by `review_problems`), or when one of those entries records a read naming a
-    mapped review document (`mapped_review_reads`). `lanes` maps a lane's name to its
-    verified field's evidence by count; the rule is the register's for results by others,
-    a source dated from 22 August 2026 (`recent_evidence`).
+    cites one of its others' evidence entries and covers the count lists a review of its
+    mathematics that accepts it (`accepting_review`; held mapped by `review_problems`),
+    or when one of those entries records a read that found no defect naming a mapped
+    review document (`mapped_review_reads`). A verdict is read, not judged: whether the
+    review read the mathematics stays the pull-request reviewer's question. `lanes` maps
+    a lane's name to its verified field's evidence by count; the rule is the register's
+    for results by others, a source dated from 22 August 2026 (`recent_evidence`).
     """
     holders: dict[str, list[Mapping[str, Any]]] = {}
     for record in results:
@@ -1589,7 +1607,8 @@ def verified_lane_review_problems(
             reviewed = any(
                 mapped_review_reads(evidence_index[ref], document_map)
                 or any(
-                    record.get("reviews") and n in scope_values(record["scope"])
+                    n in scope_values(record["scope"])
+                    and any(accepting_review(review) for review in record.get("reviews") or ())
                     for record in holders.get(ref, ())
                 )
                 for ref in others

@@ -2227,7 +2227,7 @@ def test_a_mapped_review_on_the_entry_or_a_read_naming_one_lets_the_value_stand(
             "id": "T-999",
             "scope": {"n_values": [40]},
             "evidence": ["E-seed"],
-            "reviews": [{"path": MAPPED_REVIEW, "kind": "adversarial"}],
+            "reviews": [{"path": MAPPED_REVIEW, "kind": "adversarial", "verdict": "accepted"}],
         }
     ]
     assert _lane_review_problems(evidence, reviewed) == []
@@ -2257,3 +2257,37 @@ def test_a_mapped_review_on_the_entry_or_a_read_naming_one_lets_the_value_stand(
         )
         == []
     ), "a source from before the project began is not the register's to hold"
+
+
+@pytest.mark.parametrize(
+    ("review", "read_state"),
+    [
+        ({"verdict": "refuted", "kind": "adversarial"}, None),
+        ({"verdict": "defect-open", "kind": "adversarial"}, None),
+        ({"verdict": "accepted", "kind": "oversight"}, None),
+        (None, "defect-found"),
+    ],
+    ids=["refuted", "defect-open", "oversight", "defect-found-read"],
+)
+def test_a_review_that_does_not_accept_the_mathematics_does_not_count(
+    review: dict | None, read_state: str | None
+) -> None:
+    """Review A3 of #748: the verified lane's review half counts a review that accepts
+    the result, by a kind that reads its mathematics, or a read that found no defect.
+    A refuted or open-defect verdict, an oversight record, or a read that found a defect
+    leaves the value unreviewed."""
+    evidence, _ = _seeded_lane(**UNREVIEWED_REPLAY)
+    register = [{"id": "T-999", "scope": {"n_values": [40]}, "evidence": ["E-seed"]}]
+    if review is not None:
+        register[0]["reviews"] = [{"path": MAPPED_REVIEW, **review}]
+    if read_state is not None:
+        evidence["E-seed"]["external_review"] = {
+            "state": read_state,
+            "date": "2026-10-02",
+            "reviewed_by": f"a review lane ({MAPPED_REVIEW})",
+            "note": "A defect in the argument.",
+        }
+    assert _lane_review_problems(evidence, register)
+    accepted = {"path": MAPPED_REVIEW, "verdict": "defects-resolved", "kind": "confirming"}
+    register[0]["reviews"] = [*register[0].get("reviews", []), accepted]
+    assert _lane_review_problems(evidence, register) == []
