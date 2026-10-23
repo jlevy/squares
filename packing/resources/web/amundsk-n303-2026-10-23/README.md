@@ -239,6 +239,43 @@ the geometry again. `derive --checkout GIST_CHECKOUT --check` compares the fact 
 certificate in a checkout at the pin, and `certify --jobs-dir SCRATCH --workers 2` writes
 a new receipt from a fresh job directory.
 
+## Stage 4 Review
+
+The [review of 23 October 2026](../../../../docs/project/reviews/review-2026-10-23-amundsk-n303.md)
+accepted the certificate for finite feasibility, with nine findings, none blocking.
+Its programs and outputs are kept in
+[review/review-2026-10-23/](review/review-2026-10-23/README.md), equal to the digests
+its `outputs/program-digests.sha256` records.
+
+- **Its own checker.** `review_t238_check.py` decides the certificate on two exact routes
+  that share only a reader of its own: integers alone (route Z) and `Fraction` with exact
+  edge and vertex tests (route E). Both accept it, and agree with both maintained routes,
+  this packet’s receipt and its derived fact at 116 shared numbers. Its author read
+  neither maintained route nor Daniel’s checkers before it decided, so it is a clean-room
+  re-implementation (`E-amundsk-755-n303-review-exact-feasibility`).
+- **Controls.** 21 mutants, at exact contact and $10^{-30}$ past it at three walls and
+  five pairs, and gross ones, are accepted and refused as expected by all four deciders.
+- **RF-1, the wall clearance.** The issue’s least wall clearance, $8.2 \times 10^{-13}$,
+  is not this file’s: `verify_cert.py` computes $6.020 \times 10^{-13}$ on it, at square
+  3 and the top wall, as measured here. Its pair figure and its 724 close pairs are this
+  file’s.
+- **RF-2, the long decimal.** “17.909762327475256427…” is the binary64 print of the
+  side, not the side; the record quotes the exact side or its ceiling.
+- **RF-3, the method.** `dilate_cert.py`’s formulas reproduce the side and all 606 centre
+  coordinates from the input, and each tangent to within one unit in the last place of
+  the platform’s `tan`; the factor is $1 + \mathrm{fl}(10^{-12})$.
+- **RF-4, identity.** Another arrangement of T-230’s packing, found from it, not a
+  refinement of it: one to one with it, 12 squares beyond a tenth, five newly tilted and
+  47 of about 860 contacts changed.
+- **RF-5, significance.** S2, at T-188’s scale and kind, replacing the draft S3.
+- **RF-6.** Not rigid: five squares touch nothing and keep at least
+  $4.67 \times 10^{-3}$; no local-minimum claim follows.
+- **RF-7.** The maintained replay shares the adapter’s two transcribed expressions with
+  Daniel’s checkers, so it is `shared-components`, as T-230’s is
+  (`E-amundsk-755-n303-exact-feasibility`).
+- **RF-8 and RF-9.** Custody as recorded above, and the review’s programs retained and
+  registered (`V-amundsk-755-review-check`, `V-amundsk-755-review-controls`).
+
 ## Compressed Files
 
 | Stored File | Origin | Git Blob of Original | SHA-256 of Original |

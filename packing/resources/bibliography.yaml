@@ -3246,15 +3246,14 @@ sources:
     dated: '2026-10-23'
     lineage: builds-on-project
     credit: Kristiansen after Daniel, Ostashev, Levy
-    note: 'One complete exact dilation certificate in the gist amundsk/78f9f0e7b4669f2f509a281845081768
-      at 511f56bf6e6afb4eb22f12d31371c2a2fe7b4767, s(303) <= 223872029093440709529093216833/(125*10^26),
-      found by a perturb-and-polish search from Evan Daniel''s #728 packing (W-known-best-n303, found from
-      Daniil Ostashev''s packing), which the issue names as the start, with Daniel''s fq quench, dilate_cert.py
-      and checkers; the issue calls it a new packing, not a refinement. Measured pose by pose in the packet
-      (measure/identity.json), it pairs one to one with T-230''s packing, with 12 squares beyond a tenth
-      and 96 tilted squares against 91: a new arrangement near T-230''s, not a refinement of it. No licence
-      stated: derived exact fact only, no upstream byte retained. Claude assistance disclosed. No local
-      or global optimality claim.'
+    note: 'One complete exact dilation certificate in the gist amundsk/78f9f0e7b4669f2f509a281845081768 at
+      511f56bf6e6afb4eb22f12d31371c2a2fe7b4767, s(303) <= 223872029093440709529093216833/(125*10^26), found by
+      a perturb-and-polish search from Evan Daniel''s #728 packing (W-known-best-n303, found from Daniil
+      Ostashev''s packing), which the issue names as the start, with Daniel''s fq quench, dilate_cert.py and
+      checkers. Measured pose by pose in the packet (measure/identity.json), it is another arrangement of
+      T-230''s packing, found from it, not a refinement of it: one to one under the identity, 12 squares
+      beyond a tenth, 96 tilted squares against 91. No licence stated: derived exact fact only, no upstream
+      byte retained. Claude assistance disclosed. No local or global optimality claim.'
   - key: '[Muglich issue 686 2026-10-19]'
     authors:
     - Muglich

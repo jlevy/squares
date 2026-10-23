@@ -18851,6 +18851,8 @@ urls:
     builds_on: null
     evidence:
     - E-amundsk-755-n303-report
+    - E-amundsk-755-n303-exact-feasibility
+    - E-amundsk-755-n303-review-exact-feasibility
     artifacts:
     - packing/resources/web/amundsk-n303-2026-10-23/README.md
     - packing/resources/web/amundsk-n303-2026-10-23/acquisition/claims.json
@@ -18859,6 +18861,8 @@ urls:
     - packing/resources/web/amundsk-n303-2026-10-23/replay/sharp-controls.json
     - packing/resources/web/amundsk-n303-2026-10-23/measure/identity.json
     - packing/devtools/upper_bound_reports.py
+    - docs/project/reviews/review-2026-10-23-amundsk-n303.md
+    - packing/resources/web/amundsk-n303-2026-10-23/review/review-2026-10-23/README.md
 - path: results.html
   canonical: results.html
   kind: page

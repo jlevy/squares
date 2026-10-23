@@ -2802,6 +2802,89 @@ verifiers:
       outputs/sharp-controls.json and outputs/maintained-*.json in the packet's
       review/review-2026-10-22/ (RF-2, RF-6).
 
+  - id: V-amundsk-755-review-check
+    program: review_t238_check.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      The 23 October review's standard-library exact checker of the certificate T-238
+      cites, with a reader of its own that admits only integer and p/q literals, deciding
+      the certificate on two routes that share only that reader: route Z in integers
+      alone, never loading fractions (a Pythagorean triple per row, containment by
+      half-extents and every pair, with no distance filter, by four separating-axis
+      inequalities cleared of denominators, giving each pair's exact gap), and route E in
+      Fraction (unit edges, right angles, orientation and corner mean, corner containment,
+      pairs whose centres lie more than sqrt(2) apart by their circumscribed discs, every
+      other pair by exact edge intersection and vertex containment with its exact squared
+      Euclidean distance and the region one square's closed half-planes clip from the
+      other as a check, and every pair's separating-axis gap again from corner
+      projections, as a comparison).
+    source:
+      - packing/resources/web/amundsk-n303-2026-10-23/review/review-2026-10-23/programs/review_t238_check.py
+    independence_record: docs/project/reviews/review-2026-10-23-amundsk-n303.md
+    independence:
+      read: [mathematics, specification, certificate-format]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of #755 (c-review-t238-math,
+            think-jdz0), strong sub-agent tier, maximum reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          Issue 755 says the search, the certificate and the report were done by Claude
+          (Anthropic) at Amund Kristiansen's direction. Written in a file of its own that
+          imports nothing from this repository or the source, from the issue, the gist
+          README and the certificate, after its author had read the 23 October review of
+          the second 204 certificate's account of its own checker's design; it had decided
+          the certificate, and its digest was recorded, before its author read any
+          maintained route or Evan Daniel's verify_cert.py, verify_cert2.py or
+          dilate_cert.py, and it did not change after. Its disc test and its edge and
+          vertex tests are the mathematics of verify_cert.py's filter and verify_cert2.py,
+          read only after it decided.
+    note: >-
+      Written and run on 23 October 2026 by the review; kept in the amundsk-n303-2026-10-23
+      packet's review/review-2026-10-23/ with its README and receipts (RF-9).
+
+  - id: V-amundsk-755-review-controls
+    program: sharp_controls_t238.py, with maintained_routes_t238.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: premises
+    summary: >-
+      The 23 October review's controls of T-238's certificate: 21 mutants (the side
+      lowered by the least top-or-right clearance, every square moved by the least left
+      and the least bottom clearance, and five pairs closed along the normal or the corner
+      vector that separates them: the least-gap pair, a tilted and an aligned square, two
+      squares tilted alike, two tilted 0.5 degree or more apart, and a corner-to-corner
+      pair whose centres lie more than sqrt(2) apart, each at exact contact and 1e-30 past
+      it; a duplicated square; a square moved outside; every tangent negated; a row
+      dropped; a decimal literal), each decided by the review's checker on both routes and
+      by both maintained routes through the evand-cert adapter and the kernel's run_case;
+      and maintained_routes_t238.py, which runs the kernel's three jobs on the
+      certificate's bytes as certify's child does (run_case and validate_job) and the
+      kernel's run_sharp. It adds the mutants and the expectations; the routes decide.
+    source:
+      - packing/resources/web/amundsk-n303-2026-10-23/review/review-2026-10-23/programs/sharp_controls_t238.py
+      - packing/resources/web/amundsk-n303-2026-10-23/review/review-2026-10-23/programs/maintained_routes_t238.py
+    independence_record: docs/project/reviews/review-2026-10-23-amundsk-n303.md
+    note: >-
+      Written and run on 23 October 2026 by the review (c-review-t238-math); it imports
+      devtools.evand_arrangement_reports and devtools.upper_bound_reports to reach the
+      maintained routes, and loads the review's checker by path. Kept with its receipts
+      outputs/sharp-controls.json and outputs/maintained/ in the packet's
+      review/review-2026-10-23/ (RF-9).
+
   - id: V-overbeck-review3-spec-lemmas
     program: spec_lemmas_numeric.py
     author: Squares Project (Levy)
