@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-23 (resumed): land #736 and #742, #719 records (204 
 kind: epic
 status: in_progress
 priority: 1
-version: 35
+version: 36
 delegate: coord-intake-1023
 labels:
   - result-import
@@ -41,10 +41,11 @@ child_order_hints:
   - is-01m5mn0e22mrs2pvww2608y821
   - is-01m5mp0zc3m66a3bqmdjpaq000
   - is-01m5mpc70ng0dmtj9rxfvs8w3p
+  - is-01m5mptmenett1834vw564w2kx
 hold: null
 hold_until: null
 created_at: 2026-10-23T04:56:08.269Z
-updated_at: 2026-10-23T15:34:21.973Z
+updated_at: 2026-10-23T15:42:14.485Z
 started_at: 2026-10-23T04:56:10.325Z
 ---
 

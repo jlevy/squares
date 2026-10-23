@@ -5,7 +5,7 @@ title: "Owner decisions for #715 (and #666): counts above 1024, recipe-only rows
 kind: task
 status: in_progress
 priority: 1
-version: 10
+version: 11
 delegate: coord-intake-1021b
 labels:
   - result-import
@@ -14,7 +14,7 @@ dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-10-21T22:51:56.373Z
-updated_at: 2026-10-23T15:10:29.488Z
+updated_at: 2026-10-23T15:42:09.569Z
 started_at: 2026-10-21T22:51:57.158Z
 ---
 From the read-only triage of #715 (c-triage-715; full text: policy.md in the coordinator scratchpad triage-715/). No rule sets a ceiling above the n <= 324 horizon or mentions 1024, but the record holds nothing above 998, and #666's eight counts above 1024 wait on the same question.
@@ -114,3 +114,10 @@ out (D2) records 24 of the 1851c2c files (368, 407, 448, 457, 533, 534, 543, 581
 declares yet. Packet README, Held Back and Not Recorded.
 
 2026-10-23 coord-intake-1023: OWNER DECISION on D6 (in conversation, 23 October): YES, a deletion bound (a side obtained by deleting a square from a published certificate at the next count) is an earlier report in report order; #732's 985 stays unrecorded. Applied by c-answers-1023 (PR #754) with the sub-print, withdrawn and Goebel answers. Still open: D3, D5.
+
+2026-10-23 c-answers-1023 (PR https://github.com/jlevy/squares/pull/754, commit f590f81f4): OWNER DECISION on D6, relayed by coord-intake-1023 (23 October): a deletion bound, a side obtained by deleting squares from a published certificate at a larger count, IS an earlier report in report order. Applied on this bead's recommended terms ("no rows, except where an issue claims the count"), through 1024:
+- 4e4c8ce's 39 index deletion bounds (each from a 4e4c8ce certificate) are a settled hold in the history, #719 and #732 walks (`beyond_horizon_replay.DELETION_ANSWER`, `Held.answer`): recorded in the walk, passed over by the chain, no row of their own, and no verdict rests on them. #732's 985 ties the bound and stays unrecorded; #715's restatements at 743 and 985 likewise. No row changes.
+- 23aff0c's 15 deletions from Friedman's off-centre constructions are not deletions from a certificate, so they stay held with D2 (their parent constructions, which wait on the recipe checker) and think-zkxy.
+- `held-dependents` now: leaving 23aff0c's deletions out would record 9 of 5a299b4's certificates (history walk) and, in #732's walk, 8 of the author's 1851c2c files, 8a488a1's 848 and 5a299b4 at 8 counts; nothing of #732's own.
+- The exception is not applied: whether an issue's claim gives a deletion bound a row (743, superseded by #719's; 985, where the current row is couzo-verified-bounds-2026-10-14's of 14 October, 2.2e-10 above the bound, the one count to 1024 where a settled bound is the best side) is think-kzme. Rule text: result-import.md, Several Reports at One Count; frontier README. Rows above 1024 (#715's 158 deletions, #732's) are think-llit's.
+- Still open here: D3, D5; D2's checker (W7).
