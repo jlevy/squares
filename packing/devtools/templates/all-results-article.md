@@ -13,7 +13,7 @@ records.
 
 </div>
 
-<p class="site-action-row site-more"><a class="site-action" href="recent-results.html">Recent Results{{ARROW_RIGHT}}</a><a class="site-action" href="atlas.html">Visual Atlas{{ARROW_RIGHT}}</a><a class="site-action" href="atlas.html#best-known-results">Best Known Bounds{{ARROW_RIGHT}}</a></p>
+<p class="site-action-row site-more"><a class="site-action" href="recent-results.html">Recent Results{{ARROW_RIGHT}}</a><a class="site-action" href="atlas.html">Visual Atlas{{ARROW_RIGHT}}</a><a class="site-action" href="frontier.html">The Frontier Survey{{ARROW_RIGHT}}</a></p>
 
 <a id="all-results"></a>
 

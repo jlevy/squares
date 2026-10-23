@@ -10,8 +10,9 @@ adds the front door and the pages around it, as the plan in
 - `recent-results.html`, recent arrivals by day and earlier publications by week;
 - `results.html`, every registered result in one table, which the overview's cards
   and recent list point into by row (`#t-018`);
-- `atlas.html`, the graphical Atlas followed by the Frontier Survey: one row for every
-  case from its `SquarePackingCase/v2` record; `frontier.html` forwards here;
+- `atlas.html`, the graphical Atlas with every tracked packing;
+- `frontier.html`, the Frontier Survey: one row for every case from its
+  `SquarePackingCase/v2` record;
 - `cases/N.html`, each complete canonical case record (`case_records`). Atlas tiles
   and survey rows open the same pages in their case popover (`render_case_pages`).
   The old `cases/` and `cases.html` directories forward to Atlas;
@@ -463,6 +464,7 @@ SITE_PAGES: tuple[str, ...] = (
     "index.html",
     "news.html",
     "atlas.html",
+    "frontier.html",
     "about.html",
     RESULTS_PAGE,
     RECENT_RESULTS_PAGE,
@@ -502,7 +504,6 @@ MOVED_PAGES: tuple[tuple[str, str], ...] = (
     ("downloads.html", "posters.html"),
     ("all-results.html", RESULTS_PAGE),
     ("status.html", "atlas.html"),
-    ("frontier.html", "atlas.html"),
     ("defects.html", repo_url(repo_links.DEFECTS, kind="blob")),
     ("explainer.html", paper_path(N11_LOWER_BOUNDS_EXPLAINER)),
     ("n11-optimality/t-060-explainer.html", paper_path(N11_OPTIMALITY_REVIEW)),
@@ -705,13 +706,18 @@ ATLAS_META = PageMeta(
     "Visual Atlas",
     ATLAS_DESCRIPTION,
     "atlas.html",
+)
+FRONTIER_META = PageMeta(
+    "The Frontier Survey",
+    FRONTIER_DESCRIPTION,
+    "frontier.html",
     structured_data=(
         {
             "@context": "https://schema.org",
             "@type": "Dataset",
             "name": "Square packing frontier register",
             "description": FRONTIER_DESCRIPTION,
-            "url": canonical_url("atlas.html") + "#the-frontier-survey",
+            "url": canonical_url("frontier.html"),
             "license": repo_url("LICENSE"),
             "creator": {"@type": "Organization", "name": PROJECT_NAME},
         },
@@ -1474,15 +1480,13 @@ def overview_page() -> Page:
 
 
 def atlas_page() -> Page:
-    """Atlas graphics followed by the complete Frontier Survey and case records."""
+    """Every tracked packing, with controls and links to its case record."""
     from devtools import overview_sections  # noqa: PLC0415
-    from devtools.render_frontier_page import frontier_markdown  # noqa: PLC0415
 
     markdown = _template_markdown(
         ATLAS_ARTICLE,
         {
             "ATLAS_GRID": overview_sections.atlas_grid(),
-            "FRONTIER_SURVEY": frontier_markdown(fill, embedded=True),
         },
     )
     return kpress_page(
@@ -1495,6 +1499,7 @@ def atlas_page() -> Page:
         toc=False,
         rewrite_body=lambda page: _case_links(_authored_profile_links(page)),
         page_scripts=(
+            FORWARD_SCRIPT,
             POPOVER_SCRIPT,
             ATLAS_VIEW_SCRIPT,
             ATLAS_GRID_SCRIPT,
@@ -1762,8 +1767,20 @@ def tutorial_page() -> Page:
 
 
 def frontier_page() -> Page:
-    """The legacy Frontier address, forwarding its query and fragments to Atlas."""
-    return next(page for page in forwarder_pages() if page.name == "frontier.html")
+    """The reported and verified bounds, with one row per tracked case."""
+    from devtools.render_frontier_page import frontier_markdown  # noqa: PLC0415
+
+    return kpress_page(
+        frontier_markdown(fill),
+        name=FRONTIER_META.path,
+        current="frontier",
+        title=FRONTIER_META.name,
+        description=FRONTIER_META.description,
+        structured_data=FRONTIER_META.structured_data,
+        toc=False,
+        rewrite_body=lambda page: _case_links(_authored_profile_links(page)),
+        page_scripts=(POPOVER_SCRIPT, CASE_POPOVER_SCRIPT, TABLE_SCRIPT),
+    )
 
 
 def static_content_page(
@@ -1895,6 +1912,7 @@ PAGES: dict[str, Callable[[], Page]] = {
     "index.html": overview_page,
     "news.html": news_page,
     "atlas.html": atlas_page,
+    "frontier.html": frontier_page,
     "about.html": about_page,
     RESULTS_PAGE: results_page,
     VERIFICATION_PAGE: verification_page,
@@ -2019,6 +2037,7 @@ def forwarded_metas() -> dict[str, PageMeta]:
         RESULTS_META,
         POSTERS_META,
         ATLAS_META,
+        FRONTIER_META,
         explainer.published_page_meta(),
         render_n11_optimality_review.page_meta(),
         *render_contributors.page_metas().values(),

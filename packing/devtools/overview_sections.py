@@ -3555,11 +3555,10 @@ def atlas_grid(*, homepage: bool = False) -> str:
     grid side; Global uses the largest currently shown actual enclosing side.
     Slots, number type and the grid separator stay fixed.
 
-    The first `ATLAS_FIRST` cells arrive as static markup with reserved, lazy-loaded
-    SVG images; the rest are already present in a hidden container. The script shows
-    them only when the reader presses the button under the grid, "Show More" with the
-    double chevron down. The button then reads "Show Less" with the chevron up and
-    collapses the grid again; its name for assistive
+    Every case arrives as static markup with reserved, lazy-loaded SVG images.
+    The dedicated Atlas shows them all; the homepage starts with `ATLAS_FIRST`.
+    "Show More" expands the homepage preview and "Show Less" collapses either view;
+    the double chevron follows the action. Its name for assistive
     technology says what each does and how many cases that is (`data-name-more`,
     `data-name-less`), it controls the box of tiles (`ATLAS_PANEL`), and it is the site's
     one action under a table or grid (`.site-action`, with "See all results"). Ordinary
@@ -3584,6 +3583,8 @@ def atlas_grid(*, homepage: bool = False) -> str:
     toggle_hook = " data-homepage-atlas-toggle" if homepage else ""
     label_hook = " data-homepage-atlas-label" if homepage else ""
     hidden = " hidden" if homepage else ""
+    rest_hidden = " hidden" if homepage else ""
+    expanded = "false" if homepage else "true"
     rows, positions = _atlas_rows(ATLAS_FIRST)
     first_rows = math.isqrt(ATLAS_FIRST)
     more, less = "Show More", "Show Less"
@@ -3600,7 +3601,7 @@ def atlas_grid(*, homepage: bool = False) -> str:
         f"{atlas_legend()}</div>"
         f'<div class="site-atlas-cells" id="{panel}" style="{positions}">'
         f"{''.join(rows[:first_rows])}"
-        '<div class="site-atlas-rest" data-atlas-rest hidden>'
+        f'<div class="site-atlas-rest" data-atlas-rest{rest_hidden}>'
         f"{''.join(rows[first_rows:])}</div></div>"
         + (
             '<p class="site-homepage-atlas-status" data-homepage-atlas-status '
@@ -3612,7 +3613,7 @@ def atlas_grid(*, homepage: bool = False) -> str:
             "--site-atlas-global-side:var(--site-atlas-last-side)}"
             "[data-atlas-grid] .site-atlas-toggle-row{display:none}</style>"
             "<p>"
-            '<a href="atlas.html#the-frontier-survey">Every packing and bound in the frontier '
+            '<a href="frontier.html">Every packing and bound in the frontier '
             "survey</a></p></noscript>"
         )
         +
@@ -3623,11 +3624,12 @@ def atlas_grid(*, homepage: bool = False) -> str:
         # page card. The expander's row ends the block.
         '<p class="site-action-row site-atlas-toggle-row">'
         '<button type="button" class="site-action site-atlas-toggle" '
-        f'data-atlas-toggle{toggle_hook} aria-expanded="false" aria-controls="{panel}" '
-        f'aria-label="{name_more}" data-label-more="{more}" data-label-less="{less}" '
+        f'data-atlas-toggle{toggle_hook} aria-expanded="{expanded}" aria-controls="{panel}" '
+        f'aria-label="{name_more if homepage else name_less}" '
+        f'data-label-more="{more}" data-label-less="{less}" '
         f'data-name-more="{name_more}" data-name-less="{name_less}"{hidden}>'
-        f"<span data-atlas-label{label_hook}>{more}</span>"
-        f"{arrow_icon('double-down')}</button></p>"
+        f"<span data-atlas-label{label_hook}>{more if homepage else less}</span>"
+        f"{arrow_icon('double-down' if homepage else 'double-up')}</button></p>"
         f"</div>{case_popover()}"
     )
 

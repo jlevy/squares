@@ -30,6 +30,7 @@ NAVIGATION = (
         "",
         (
             NavigationItem("atlas", "Visual Atlas", "atlas.html"),
+            NavigationItem("frontier", "The Frontier Survey", "frontier.html"),
             NavigationItem("recent-results", "Recent Results", "recent-results.html"),
             NavigationItem("all-results", "Results Archive", "results.html"),
             NavigationItem("verification", "Verification", "verification.html"),
@@ -74,6 +75,7 @@ _LEGACY_PATHS = {
     "verification": "verification.html",
     "epistemics": "epistemics.html",
     "atlas": "atlas.html",
+    "frontier": "frontier.html",
     "papers": "papers.html",
     "explanations": "papers.html",
     "learn": "papers.html",
@@ -91,6 +93,7 @@ _PARENTS = {
     "recent-results.html": ("results",),
     "results.html": ("results",),
     "atlas.html": ("results",),
+    "frontier.html": ("results",),
     "verification.html": ("results",),
     "epistemics.html": ("results", "verification"),
     "papers.html": ("learn",),

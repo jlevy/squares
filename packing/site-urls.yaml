@@ -6496,14 +6496,13 @@ urls:
   lastmod: '2026-10-22'
   status: live
 - path: frontier.html
-  canonical: atlas.html
-  kind: forwarder
-  generator: devtools.render_overview:forwarder_pages
+  canonical: frontier.html
+  kind: page
+  generator: devtools.render_overview:render_all
   producer: overview
   first_published: '2026-09-29'
   lastmod: '2026-10-22'
-  status: forwarded
-  target: atlas.html
+  status: live
 - path: index.html
   canonical: ''
   kind: page

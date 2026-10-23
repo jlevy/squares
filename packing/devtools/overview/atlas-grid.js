@@ -30,7 +30,7 @@
   }
   const tiles = [...cells.querySelectorAll("a.site-atlas-cell")];
   const first = Number(grid.dataset.atlasFirst) || 100;
-  let expanded = false;
+  let expanded = toggle.getAttribute("aria-expanded") === "true";
 
   // The button reads Show More with the double chevron down, and once the rest show,
   // Show Less with the chevron up; its name for assistive technology says what each

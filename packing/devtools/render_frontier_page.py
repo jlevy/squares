@@ -29,7 +29,7 @@ from devtools import render_research_tables as tables
 from devtools.build_bound_citations import RECENT_SINCE, corrects_tag
 from devtools.build_bound_citations import RECORD as BOUND_CITATIONS
 from devtools.contributor_credit import case_credit
-from devtools.render_recent_results import RecentCounts, recent_counts, recent_rows
+from devtools.render_recent_results import RecentCounts
 from devtools.repo_links import repo_url
 from devtools.validate_schemas import check as check_record
 from sqpack.assurance import bounds_agree_at_declared_precision
@@ -813,36 +813,15 @@ def table_html(cases: list[dict[str, Any]], *, include_popover: bool = True) -> 
     )
 
 
-def frontier_markdown(fill: Callable[..., str], *, embedded: bool = False) -> str:
-    """The article with every count and link filled from the record: the case counts
-    from the case records, the survey's four counts from `render_recent_results`, and
-    the two documents the prose links at their addresses on `main`. The recency
-    count over every case is not written: the prose counts recent verified cases among the
-    first hundred, and the bar's "recent only" counts them all. Embedded after the Atlas
-    graphics, the survey is a section and uses the Atlas's shared case popover."""
+def frontier_markdown(fill: Callable[..., str]) -> str:
+    """The survey's definitions and complete table, filled from the case records."""
     cases = frontier_cases()
     values = {
         "COUNT": str(len(cases)),
-        # The page carried a subtitle naming its range, `n = 1, …, 324`, set as sans
-        # math (`math_html`), until 2026-10-02 (the owner, think-wz9d).
         "PROVED": str(sum(case["status"] == "proved" for case in cases)),
         "OPEN": str(sum(case["status"] == "open" for case in cases)),
         "RECENT_SINCE": since_prose(),
-        "SURVEY_COUNTS": survey_counts(recent_counts(recent_rows())),
-        "CORRECTIONS": corrections_prose(),
-        "ARCHIVE_URL": repo_url(ARCHIVE_README),
-        "INVENTORY_URL": repo_url(EVIDENCE_INVENTORY),
-        "TABLE": table_html(cases, include_popover=not embedded),
+        "TABLE": table_html(cases),
     }
     template = FRONTIER_ARTICLE.read_text(encoding="utf-8")
-    if embedded:
-        title = '<div class="site-hero">\n\n# The Frontier Survey\n\n</div>'
-        if not template.startswith(title):
-            raise SystemExit("frontier-article.md: the survey title block is missing")
-        template = template.replace(
-            title,
-            '<h1 id="the-frontier-survey" class="site-title">'
-            'The Frontier Survey<a id="the-survey"></a></h1>',
-            1,
-        )
     return fill(template, values, where=FRONTIER_ARTICLE.name)

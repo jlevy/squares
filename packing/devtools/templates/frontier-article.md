@@ -1,86 +1,26 @@
-<div class="site-hero">
+<h1 id="the-frontier-survey" class="site-title">The Frontier Survey<a id="the-survey"></a></h1>
 
-# The Frontier Survey
-
-</div>
-
-<!-- The title stood over a subtitle, "A survey of everything known for cases n = 1,
-     …, 324", until 2026-10-02 (the owner, think-wz9d). -->
-
-<!-- What the survey records, how a bound comes to count, the audit of its sources, the
-     recent counts and the seventeen-square history stood on the homepage, in The
-     Frontier Survey, until 2026-10-02; they are this page's own prose now. The
-     homepage's section went the same day (think-ec5k), and one of its page cards leads
-     here. Every count is filled from the record (render_frontier_page.frontier_markdown).
-     The survey's account comes first, and the key to the table's columns last, beside
-     the table. -->
-
-For each number $n$ of unit squares, $s(n)$ is the side of the smallest square that
-holds them without overlap.
-The frontier survey records the best-known packing and the strongest verified lower
-bound for each of the {{COUNT}} cases the project tracks, with its provenance:
+For $n$ unit squares, $s(n)$ is the side of the smallest square that holds them without
+overlap. The table compares reported and verified bounds for all {{COUNT}} cases:
 {{PROVED}} have a proved optimum and {{OPEN}} are open.
-Every row is read from the case’s record, `packing/frontier/n-NNN.md`, when the page is
-built; nothing on it is typed by hand.
 
-**Audited sources.** The survey audits what it records.
-The earliest published proof of $s(7) = 3$ carries four recorded defects in its printed
-route, so the [record for seven squares](cases/7.html) rests the case on independent
-later proofs. The [literature archive]({{ARCHIVE_URL}}) keeps each primary source, a
-cleaned transcription and the unedited extraction it was checked against, and the
-[evidence inventory]({{INVENTORY_URL}}) shows what each claim rests on and who did the
-work.
+The *best known packing* and *reported lower* bound are the published values.
+The *verified* columns require an exact proof, algebraic replay, or rigorous
+certificate; external certificates must be replayed in full with their assumptions
+discharged. Finite-precision numerical checks do not count as verified bounds.
+*✓ same* means the verified and reported values agree.
+*Published proof, not read here* and *defect recorded* identify limits of the
+verification.
 
-**Recent results.** Red indicates a recent result, since {{RECENT_SINCE}}.
-{{SURVEY_COUNTS}}
-{{CORRECTIONS}}
+The *gap* is the verified upper bound minus the verified lower bound.
+Polynomial roots appear as decimals, cut rather than rounded.
+Red marks bounds published or proved since {{RECENT_SINCE}}; *Recent* sorts recent
+verified bounds first.
+*Records* opens the case file.
+Open a row for its packing, sources, and verification evidence; click a column heading
+to sort or use the filters to narrow the rows.
 
-<div class="site-profile-prose">
-
-**Seventeen squares.** Before this project’s work began, seven authors had published
-lower bounds for seventeen squares, some also for eighteen, all independently:
-Brandwijk’s $89/20$ (18 July), Burns’s $4.4811$ (6 August), MacIver’s $4.4502\ldots$ (8
-August), Mira’s and Fort’s sixteen-point sets (10 and 11 August), anabologyco-maker’s
-$4.57$ and $9141/2000$ (13 and 16 August), and Massaccesi’s $4.5058$ (21 August),
-replayed here as [T-015](results.html#t-015) and [T-016](results.html#t-016). The
-[seventeen-square record](cases/17.html) lists them all; each has since been superseded.
-On 12 October 2026 two proofs that Bidwell’s 1998 packing is optimal were published by
-separate routes: Marc Leonard Overbeck’s candidate proof ([T-153](results.html#t-153))
-and Oscar Fitzharding’s Lean 4 proof ([T-154](results.html#t-154)). The case is reported
-proved; neither proof has yet been replayed in full here, so its verified bounds are
-unchanged.
-
-</div>
-
-**Reported and verified.** The *best known packing* and the *reported lower* bound are
-what the published sources say, credited to whoever found or proved them.
-The *verified* columns hold only exact formal bounds: a complete proof, an exact
-algebraic replay, or a rigorous certificate.
-An external certificate counts once it is replayed here in full and its mathematical
-assumptions are discharged, and each record says who ran the checks and how independent
-they were. Where the verified bound equals the reported value, the cell says *✓ same*,
-which says nothing about who checked it.
-A published proof counts whether or not anyone here has read it, so where every argument
-behind a verified bound is a published proof nobody here has read, the cell says
-*published proof, not read here*. A reported bound that stands on a proof whose reading
-here found a defect, and that no verified bound reaches, says *defect recorded* under
-its credit. A finite-precision result is numerically checked and never enters a verified
-column.
-
-**The other columns.** *Recent* sorts recent verified bounds first.
-The *gap* is the verified upper bound minus the verified lower bound, exact where both
-are closed forms and zero where the case is solved.
-*Records* links each case file.
-Values that are roots of a polynomial are shown as decimals, cut rather than rounded.
-
-**A row’s details.** Open a row for its case record: the best packing known drawn large,
-the number line of its bounds, then how its packing was built, the polynomial behind a
-decimal, the sources, how its bounds were verified and the evidence entries behind them.
-The same record opens from the overview’s atlas, and has an address of its own to share.
-
-Click a column heading to sort; the filters narrow the rows.
-
-<h1 id="best-known-results" class="site-title">Best Known Results for <i>n</i> ≤ 324</h1>
+<a id="best-known-results"></a>
 
 {{TABLE}}
 
