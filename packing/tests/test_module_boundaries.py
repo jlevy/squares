@@ -1619,6 +1619,13 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
             "test_each_574_side_is_below_its_case_and_smallest_but_at_211_237_241_and_304",
             "test_the_574_register_plan_states_each_bound_as_check_standing_reads_it",
         },
+        # 46.9s of call time across its four cases on 2026-10-23 (think-tqb5, the #755
+        # lane's sharp controls), locally under `nice` on a shared four-core host at a load
+        # average of about 8: each case admits #755's 303 fact and runs both maintained exact
+        # routes on it over 45,753 pairs, 10.44s to 13.55s.
+        "test_upper_bound_reports_755.py": {
+            "test_both_routes_meet_contact_and_refuse_1e30_past_it_at_755s_303",
+        },
         # 101.9s of call time across its sixteen cases on 2026-10-22 (think-ql4v, RF-3 of the
         # 21 October review, A9 of #718's review A), locally under `nice` on a shared
         # four-core host: each case runs both maintained exact routes on one of the four
