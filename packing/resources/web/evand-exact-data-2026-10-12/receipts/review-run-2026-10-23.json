@@ -1,0 +1,98 @@
+{
+ "bead": "think-7scz",
+ "beyond_side_end_dropped": {
+  "127": 6,
+  "150": 16,
+  "175": 8,
+  "66": 12
+ },
+ "by_field_degree": {
+  "1": 175,
+  "2": 51,
+  "4": 7
+ },
+ "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 nice -n 10 python3 -I check_theorem_c.py --minpoly-dir DATA --archive gradec-233.tar.zst --dropzero 230,261 --out run-X.jsonl COUNTS",
+ "counts": 233,
+ "counts_with_dim_W_positive": 47,
+ "counts_with_flat_family": 214,
+ "counts_with_side_end_rows": 231,
+ "counts_with_slipping_side_end_rows": 206,
+ "counts_without_side_end_rows": [
+  1,
+  5
+ ],
+ "cpu_seconds_max": 369.02,
+ "cpu_seconds_max_at": 294,
+ "cpu_seconds_median": 0.94,
+ "cpu_seconds_total": 1462.59,
+ "dim_F_max": 212,
+ "dim_W_max": 11,
+ "dropped_zero_rows": {
+  "230": 24,
+  "261": 24
+ },
+ "environment": {
+  "numpy": "2.5.2",
+  "program_sha256": "01b1a3e1d5ccff3f8f820401a0d76155c3cfc7be66a8562b23c00ff9e8f65cfd",
+  "python": "3.14.7",
+  "scipy": "1.17.1"
+ },
+ "finished_utc": "2026-10-23T08:26:13Z",
+ "format": "evand-gradec-review-run-v1",
+ "host": "four cores shared with other lanes; load average about 17 to 38 during the run",
+ "inputs": {
+  "archive": {
+   "path": "acquisition/release/gradec-233.tar.zst",
+   "sha256": "c71633f3850eb8b06c40ba04f824e9b6262b27b7996f62f69c6ad014a4ea9fa3"
+  },
+  "exact_forms": "233 files n-N.minpoly.json.gz, fetched by Git blob from evand/square-packing at 31523f87316bdfda00f5459dd9077928e264f133 with each blob hash checked against the commit's tree, byte-identical to the copies the packet now retains under source/search/exact/minpoly/data/"
+ },
+ "least_lambda_min": 0.0015092894631710168,
+ "least_margin": 7.183548137268174e-17,
+ "least_margin_at": 175,
+ "lifts_solved_total": 1066,
+ "lone_side_end_dropped": {
+  "230": 36,
+  "261": 40
+ },
+ "not_valid": [],
+ "processes": [
+  {
+   "counts": "alternate counts from the first (117)",
+   "label": "A",
+   "note": "ran to the end"
+  },
+  {
+   "counts": "alternate counts from the second, through n = 291 (109)",
+   "label": "B",
+   "note": "stopped after n = 291 so that its remaining counts could run in two processes"
+  },
+  {
+   "counts": "n = 294",
+   "label": "C",
+   "note": "the heaviest count, run beside B and D"
+  },
+  {
+   "counts": "n = 313, 315, 317, 319, 321, 323",
+   "label": "D",
+   "note": "batch B's tail"
+  }
+ ],
+ "program_sha256": [
+  "01b1a3e1d5ccff3f8f820401a0d76155c3cfc7be66a8562b23c00ff9e8f65cfd"
+ ],
+ "programs_sha256": {
+  "check_theorem_c.py": "01b1a3e1d5ccff3f8f820401a0d76155c3cfc7be66a8562b23c00ff9e8f65cfd",
+  "compare_certificates.py": "3d25ee67875fbfc760cc0244cdc8d999610d285c4190efc68f36cddd64038cda",
+  "summarize_run.py": "b2a10299d494d9cfdc87e6271eda0d8564cc27332a66bcae74b2441658724142",
+  "test_derivatives.py": "f62834e90aa1211b82b1fdf5ed4c367502222430cbe54feccf47fd63d85f2fb7"
+ },
+ "review": "docs/project/reviews/review-2026-10-23-evand-grade-c-theorem-c.md",
+ "rows_total": 202010,
+ "side_end_rows_total": 184412,
+ "slipping_side_end_rows_total": 58988,
+ "started_utc": "2026-10-23T07:29:39Z",
+ "svd_agrees_everywhere": true,
+ "svd_smallest_gap_ratio": 21412050947261.688,
+ "valid": 233
+}

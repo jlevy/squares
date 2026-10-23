@@ -1434,9 +1434,24 @@ T-160 records the side at V3/C3 on the
 and the case at 154 holds it as the house since 12 October 2026, its start credited to
 Francisco Couzo’s 5 October packing of 155 squares as the author asks.
 Claude assistance disclosed.
+
+## Evan Daniel’s s(29) polynomial and grade-C local minima, 12 October 2026
+
+**[Daniel exact and local reports 2026-10-12]**: two exact reports that Evan Daniel’s
+evand/square-packing carried at `ad86d42d0f743076d735036702ba04a41ce24a8c` on no issue,
+tracked on #545: the minimal polynomial, of degree 7213, of the s(29) record side, and
+Theorem C with `gradec.py`, a certificate of local minimality modulo exact flat motions,
+reported VALID at 233 configurations of field degree at most 4;
+[packet](web/evand-exact-and-local-reports-2026-10-12/README.md).
 The data release `exact-data-2026-10-12` that #545 asked for is the sibling
 [packet](web/evand-exact-data-2026-10-12/README.md): the s(29) polynomial archive pinned
-by digest and the grade-C certificates retained as published; it registers nothing.
+by digest, the grade-C certificates retained as published, and the 233 exact forms those
+certificates read. The
+[review of 23 October](../../docs/project/reviews/review-2026-10-23-evand-grade-c-theorem-c.md)
+found Theorem C true under its hypotheses, repaired a gap in its proof, and decided all
+233 configurations again with a checker written here.
+Neither report bounds anything, and neither is registered.
+MIT; Claude assistance disclosed.
 
 ## E. Summins’ stratification series, 12 October 2026
 
@@ -1746,6 +1761,24 @@ keeps the exact source, JSON output, README and local review of the prospective 
 T-174 adoption. It is an unregistered integration diagnostic cited by no evidence entry;
 it adds no result, rung or geometric replay.
 Its historical custody observation leaves the fresh 66-house custody gate open.
+
+## wand125’s Continuous-Angle Verifier, 12 October 2026
+
+**[wand125 sqverify continuous 2026-10-12]**: Hiroaki Hosono’s (wand125’s)
+`sqverify_continuous`, this repository’s `sqverify_fast` crate with a continuous-angle
+mode that checks a rectangle-density certificate at every angle and every centre and
+concludes $s(n) > L/B$, pinned at `f30cc2cf` (v3, the version the source’s n = 40
+examples ran) and its child `d4a19815` (v4, the first program of
+**[wand125 continuous n28 2026-10-15]**), both of 12 October 2026, in
+[wand125/square-packing](https://github.com/wand125/square-packing/tree/d4a19815e2b0cca5faa562f00c7a80b93d3402ef/tools/sqverify_continuous);
+packets [v4](web/wand125-sqverify-continuous-v4-2026-10-12/README.md) and
+[v3](web/wand125-sqverify-continuous-v3-2026-10-12/README.md).
+It is independent code with the same method as Guzhou0806’s T-145 kernel, whose author
+read that kernel before writing it, and it keeps this repository’s interval, exact, axis
+and oracle modules byte for byte.
+The
+[soundness review of 23 October 2026](../../docs/project/reviews/review-2026-10-23-wand125-sqverify-continuous-soundness.md)
+found no blocking defect; no complete run of it has been replayed here.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

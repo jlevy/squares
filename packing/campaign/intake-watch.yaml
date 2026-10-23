@@ -596,7 +596,7 @@ repositories:
   - url: https://github.com/wand125/square-packing
     read_through: f30cc2cf345a3a3f6af778925f354d9ec979868b
     read_on: '2026-10-12'
-    bead: think-xzob
+    bead: think-flxm
     note: >-
       One commit of 12 October (01:00 UTC) past the 04fbef0 read: f30cc2c adds
       tools/sqverify_continuous/, this repository's sqverify-fast with a continuous-angle mode
@@ -647,7 +647,7 @@ repositories:
   - url: https://github.com/wand125/square-packing
     read_through: d4a19815e2b0cca5faa562f00c7a80b93d3402ef
     read_on: '2026-10-12'
-    bead: think-xzob
+    bead: think-flxm
     note: >-
       One commit of 12 October (01:29 UTC) past the f30cc2c read: d4a1981 makes
       tools/sqverify_continuous v4 (source_sha256 619b3c00...), adding --resume, which takes
@@ -732,7 +732,7 @@ repositories:
   - url: https://github.com/wand125/square-packing
     read_through: 9a28a84bd55dc124bfa2919bb6c4fb504dda3149
     read_on: '2026-10-14'
-    bead: think-xzob
+    bead: think-flxm
     note: >-
       The 21 commits of 12 to 14 October (UTC) from d4a1981 to 9a28a84 past the f30cc2c read.
       d4a1981 makes tools/sqverify_continuous v4, with --resume, the continuous-angle route for

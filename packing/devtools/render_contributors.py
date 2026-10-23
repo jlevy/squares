@@ -41,6 +41,7 @@ from devtools.site_icons import account_icon
 from devtools.site_resources import Resource, profile_resources
 from devtools.site_resources import resources as resource_records
 from devtools.site_tallies import (
+    join_tally,
     person_activity_years,
     person_credit_stats,
     render_tally,
@@ -653,7 +654,7 @@ def profile_summary(
     people = f"{len(contributors)} " + ("person" if len(contributors) == 1 else "people")
     return (
         '<p class="site-profile-summary">'
-        + " · ".join(
+        + join_tally(
             (
                 people,
                 _plural(len(current_record_ids(result_ids, record_index())), "record"),
@@ -788,7 +789,7 @@ def profile_preview() -> str:
         '<p class="site-navigation-copy">We track contributors and the authors cited '
         "in the square-packing record. Browse their profiles and credited work.</p>\n\n"
         '<p class="site-action-row site-more">'
-        '<a class="site-action" href="profiles/index.html">View All Profiles'
+        '<a class="site-action" href="profiles/index.html">All Profiles'
         + arrow_icon()
         + "</a></p>"
     )
@@ -992,7 +993,13 @@ def contributor_pages() -> list[Page]:
     directory = (
         '<article class="site-contributor-directory">'
         "<h1>Contributor Profiles</h1>"
-        "<p>People whose work is cited or credited in the square-packing record.</p>"
+        "<p>Below are people whose work is cited or credited in the square-packing "
+        "record.</p>"
+        "<p>This list includes people with notable historic results on square packing "
+        "and all known current work, including everyone who has built on results in "
+        "the Squares Project.</p>"
+        "<p>All original sources and all known repositories or publications of each "
+        "person are listed on their profile page.</p>"
         + profile_summary(contributors, occurrences)
         + profile_table(contributors, occurrences)
         + "</article>"

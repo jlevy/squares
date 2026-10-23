@@ -36,6 +36,9 @@ This project now independently tabulates all known new results and does
 certificates behind them, to encourage open collaboration on open questions and
 formalizations of current proofs.
 
+We also have a group chat.
+Contact [ojoshe on X](https://x.com/ojoshe) if you wish to join.
+
 </div>
 
 <div class="site-navigation-copy">

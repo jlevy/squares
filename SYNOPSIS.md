@@ -326,12 +326,12 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 | [T-179](packing/frontier/RESULTS.md) | 145, 146, 147, 148, 149 | `V0` | `C1` | `S3` | `previously-published` | A measure of points, segments and rectangles that wand125/square-packing published on 13 October 2026, reported on no issue, is reported to prove s(145) >= 306/25 = 12.24. |
 | [T-184](packing/frontier/RESULTS.md) | 76 | `V3` | `C1` | `S3` | `previously-published` | Benjamin Greff reports s(76) = 9: the lower half by a mixed cover, the upper half by the 9 x 9 grid. |
 | [T-191](packing/frontier/RESULTS.md) | 95 | `V3` | `C1` | `S3` | `previously-published` | Benjamin Greff reports s(95) = 10: the lower half by a mixed cover, the upper half by the 10 x 10 grid. |
+| [T-192](packing/frontier/RESULTS.md) | 28 | `V0` | `C1` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 15 October 2026 and reported on no issue, is reported to prove s(28) > 1149/200 = 5.745. |
 | [T-046](packing/frontier/RESULTS.md) | 18, 19, 20, 26, 27, 28, 29, 30, 31, 37, 38, 39, 40, 41, 42, 43, 44, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 86, 88, 89, 90, 91, 94, 95 | `V0` | `C0` | `S3` | `previously-published` | wand125/square-packing-bounds reports one standing rectangle-density certificate for each of 48 counts from n = 18 to n = 95, added or raised between 26 and 28 September 2026. |
 | [T-132](packing/frontier/RESULTS.md) | 29 | `V0` | `C0` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 10 October 2026 and reported on jlevy/squares#446, is reported to prove s(29) >= 291/50 = 5.82. |
 | [T-142](packing/frontier/RESULTS.md) | 28 | `V0` | `C0` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 10 October 2026 and reported on no issue, is reported to prove s(28) >= 2297/400 = 5.7425. |
 | [T-143](packing/frontier/RESULTS.md) | 30 | `V0` | `C0` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 10 October 2026 and reported on no issue, is reported to prove s(30) >= 2357/400 = 5.8925. |
 | [T-144](packing/frontier/RESULTS.md) | 122, 123, 124, 125, 126 | `V0` | `C0` | `S3` | `previously-published` | A measure of points, segments and rectangles that wand125/square-packing published on 10 October 2026, reported on no issue, is reported to prove s(122) >= 563/50 = 11.26. |
-| [T-192](packing/frontier/RESULTS.md) | 28 | `V0` | `C0` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 15 October 2026 and reported on no issue, is reported to prove s(28) > 1149/200 = 5.745. |
 | [T-200](packing/frontier/RESULTS.md) | 38 | `V0` | `C0` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 16 October 2026 and reported in jlevy/squares#446, is reported to prove s(38) >= 2631/400 = 6.5775. |
 | [T-201](packing/frontier/RESULTS.md) | 40 | `V0` | `C0` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 16 October 2026 and reported in jlevy/squares#446, is reported to prove s(40) >= 1347/200 = 6.735. |
 | [T-202](packing/frontier/RESULTS.md) | 41 | `V0` | `C0` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 16 October 2026 and reported in jlevy/squares#446, is reported to prove s(41) >= 2721/400 = 6.8025. |
@@ -696,9 +696,12 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [Soundness Review: wand125’s `sqverify_continuous`, v3 and v4](docs/project/reviews/review-2026-10-23-wand125-sqverify-continuous-soundness.md) | dated review record | record | retained | — |
+| [Evan Daniel’s Grade-C Local Minima (Theorem C): Mathematical Review](docs/project/reviews/review-2026-10-23-evand-grade-c-theorem-c.md) | dated review record | record | retained | — |
 | [CI and Release Latency Audit, 22 October 2026](docs/project/reviews/review-2026-10-22-ci-release-latency.md) | dated review record | record | retained | — |
 | [Contributor Credit Link Audit, 22 October 2026](packing/contributors/reviews/2026-10-22-credit-link-audit.md) | dated review record | record | retained | — |
 | [Feature: Site Navigation and Page Hierarchy](docs/project/specs/active/plan-2026-10-22-site-navigation.md) | implementation plan | current | transient | — |
+| [Feature: Flip Regularization](docs/project/specs/active/plan-2026-10-23-flip-regularization.md) | implementation plan | current | transient | — |
 | [Review: Mykhailo Polkovskyi’s Certificates at 105 and 204 from Issue #719 (T-229)](docs/project/reviews/review-2026-10-22-mishapolk-719.md) | dated review record | record | retained | — |
 | [Review: Francisco Couzo’s Certificates at 204, 227 and 229 from Issues #670, #672 and #675 (T-226, T-227, T-228)](docs/project/reviews/review-2026-10-22-couzo-670-672-675.md) | dated review record | record | retained | — |
 | [Profile Coverage and Result-Intake Boundaries, 21 October 2026](docs/project/reviews/review-2026-10-21-profile-coverage.md) | dated review record | record | retained | — |
@@ -4740,7 +4743,8 @@ Elsewhere *house* has the same modifier sense of “the project’s own”: the 
 A **house drawing** is that renderer’s picture of the house best packing as published;
 the count’s **default picture** is its regularized view where the
 [regularization policy](docs/project/policies/regularization-policy.md#12-the-default-picture)
-draws one, and the house drawing everywhere else.
+draws one, and the house drawing everywhere else, turned into its canonical pose by
+[flip regularization](docs/project/policies/regularization-policy.md#13-flip-regularization).
 The regularization policy’s contact-shading *house rule* (gap $2 \times 10^{-6}$, beside
 the workbench’s stage rule) belongs to that renderer and is unrelated to the adoption
 rule.

@@ -258,14 +258,17 @@ def test_a_single_case_shows_the_films_panel_and_the_packing(
     """The case is its visual summary, as its record opens (`render_case_pages.
     visual_summary`): the atlas drawing of the case first, then the number line, the
     chained bound, the badges and the citation, from the film's own facts; the case
-    record's verified and reported bounds and the gap follow."""
-    from devtools.render_frontier_page import packing_svg  # noqa: PLC0415
+    record's verified and reported bounds and the gap follow. The drawing is the case's
+    default picture in its canonical pose (regularization policy, section 13)."""
+    from devtools.render_frontier_page import default_svg  # noqa: PLC0415
 
     body = bodies[result_id]
     fact = result_overview.film_facts()[11]
     assert body.count('class="site-atlas-pop site-result-film" data-overview-case="11"') == 1
-    assert packing_svg(11, units=overview_sections.ATLAS_UNITS) in body
-    assert body.index("<svg") < body.index('<div class="site-atlas-gap">')
+    drawing = default_svg(11, units=overview_sections.ATLAS_UNITS)
+    assert (
+        body.index("<svg") == body.index(drawing) < body.index('<div class="site-atlas-gap">')
+    )
     # The gap bar: the scale's integers, sqrt(n) and sqrt(n) + 1, and the best known side.
     bar = body.split('<div class="site-atlas-gap">', 1)[1].split("site-atlas-pop-head", 1)[0]
     for label in ("3", "4", "5", "3.317", "4.317"):

@@ -17,8 +17,8 @@ import pytest
 
 from devtools import state_ai_assistance as assistance
 
-WAND125 = assistance.STATEMENTS[0]
-TOKOHARU = assistance.STATEMENTS[1]
+WAND125 = assistance.statement_of("[wand125 rectangle bounds 2026]")
+TOKOHARU = assistance.statement_of("[Tokoharu density 2026]")
 
 #: Records still owing a statement. Empty since the n = 68 to 95 records took their
 #: Hosono sentence on 2026-09-29, and it may only stay empty: a record added here is a
@@ -133,7 +133,21 @@ def test_each_statement_a_committed_record_makes_is_missed_when_its_marker_is_dr
     drop that also takes another statement's marker cannot stand in for this one.
     """
     dropped: set[str] = set()
-    for path in assistance.records(None):
+    citing = [
+        path
+        for path in assistance.records(None)
+        if any(
+            key in assistance.split_record(path.read_text(encoding="utf-8"))[0]
+            for key in statement.keys
+        )
+    ]
+    if not citing:
+        # A statement no record's front matter calls for, such as the tools' (T-058 and
+        # T-059 are register entries only): it is owed nowhere, and nothing is missing.
+        missing, _ = assistance.report(assistance.records(None), catalogue={})
+        assert not [label for label in missing if any(key in label for key in statement.keys)]
+        return
+    for path in citing:
         text = path.read_text(encoding="utf-8")
         front, lines = assistance.split_record(text)
         if not any(
@@ -229,3 +243,81 @@ def test_the_catalogue_records_quote_their_statements_and_the_check_sees_a_drop(
             assert owed.startswith("In the catalogue’s words: “")
         else:
             assert missing == ()
+
+
+def test_the_statements_are_the_bibliography_s_and_keys_that_agree_share_one() -> None:
+    """think-j5so: the four keys a hard-coded list lacked are read with the rest, and
+    Hosono's seven releases share his README's sentence."""
+    assert "[wand125 rectangle bounds 2026-10-01]" in WAND125.keys
+    assert len(WAND125.keys) == 7
+    for key in (
+        "[evand square-packing 2026-10-01]",
+        "[franciscouzo square-packing 2026-09-27]",
+        "[wand125 tools 2026]",
+        "[Ahmed n11 optimality 2026]",
+    ):
+        statement = assistance.statement_of(key)
+        assert statement.marker in statement.sentence
+    assert assistance.statement_of("[franciscouzo square-packing 2026-09-27]").counts == {
+        102,
+        103,
+    }
+    assert assistance.statement_problems() == []
+
+
+def test_a_statement_whose_sentence_lacks_its_marker_is_refused(tmp_path: Path) -> None:
+    """`--apply` would write it into every record that owes it, and `--check` would still
+    call each missing."""
+    bibliography = tmp_path / "bibliography.yaml"
+    bibliography.write_text(
+        "sources:\n"
+        "  - key: '[a 2026]'\n"
+        "    ai_assistance: {sentence: It says so., marker: AI assistance, anchor: 'A('}\n"
+        "  - key: '[b 2026]'\n"
+        "    ai_assistance:\n"
+        "      {sentence: B used AI assistance., marker: AI assistance, anchor: B}\n",
+        encoding="utf-8",
+    )
+    problems = assistance.statement_problems(bibliography)
+    assert [problem.split(":")[0] for problem in problems] == ["[a 2026]", "[a 2026]"]
+    assert "lacks its own marker" in problems[1]
+    (only,) = [s for s in assistance.load_statements(bibliography) if "[b 2026]" in s.keys]
+    assert only.counts is None
+
+
+def test_a_statement_of_some_counts_is_owed_only_at_them() -> None:
+    """Couzo's statement concerns his n = 102 and 103 packings alone: a record of another
+    count that describes his packing owes nothing."""
+    couzo = assistance.statement_of("[franciscouzo square-packing 2026-09-27]")
+    front = "packing:\n  n: {n}\nsources:\n  - key: '[franciscouzo square-packing 2026-09-27]'"
+    body = "Francisco Couzo found the earlier packing.\n"
+    for n, owes in ((130, False), (102, True)):
+        _, lines = assistance.split_record(_record(front.format(n=n), body))
+        found = [s for s, _, _ in assistance.owed(front.format(n=n), lines) if s is couzo]
+        assert bool(found) is owes, n
+
+
+def test_a_bad_anchor_is_reported_by_check_and_breaks_no_import(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """Review A4 of #748: a bibliography whose Hosono anchor is no pattern is a problem
+    `--check` names, not an import that fails before it can say so. Hosono's statement,
+    which `devtools.apply_wand125_rectangles` writes, is resolved only when asked for."""
+    import importlib  # noqa: PLC0415
+
+    from devtools import apply_wand125_rectangles  # noqa: PLC0415
+
+    text = assistance.BIBLIOGRAPHY.read_text(encoding="utf-8")
+    bad = tmp_path / "bibliography.yaml"
+    bad.write_text(
+        text.replace("      anchor: 'Hosono'\n", "      anchor: 'Hosono('\n"), "utf-8"
+    )
+    assert bad.read_text(encoding="utf-8") != text
+    monkeypatch.setattr(assistance, "BIBLIOGRAPHY", bad)
+    monkeypatch.setattr(assistance, "STATEMENTS", assistance.load_statements(bad))
+    importlib.reload(apply_wand125_rectangles)
+    with pytest.raises(LookupError, match="wand125 rectangle bounds 2026"):
+        assistance.wand125()
+    assert assistance.main(["--check", "--below", "2"]) == 1
+    err = capsys.readouterr().err
+    assert "[wand125 point bounds 2026]: ai_assistance.anchor is not a pattern" in err

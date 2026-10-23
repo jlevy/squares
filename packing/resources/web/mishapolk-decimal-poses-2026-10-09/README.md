@@ -304,8 +304,57 @@ $4.0 \times 10^{-17}$ below Gupta’s; at 208, 238 and 239, under $10^{-15}$ abo
 The replaced `4e1a601` pose at 199 printed `14.6175721735928068`, the case’s Gupta side cut
 at 16 places. The issue’s lineage leaves credit with Stenlund, Friedman, Ellsworth,
 SQUISH, Couzo and Ryan Xu where a packing started from the literature, and does not name
-Siddharth Gupta or say which count started from which packing. This packet compares sides
-only; it has not compared poses, and no priority finding is made.
+Siddharth Gupta or say which count started from which packing. This table compares sides
+only; the poses are compared in the next section, and no priority finding is made.
+
+## Whose Packings These Are
+
+Added on 23 October 2026 (review A3 of #747), so that the confirmation’s question of 12
+October, which count started from which packing, is settled here rather than held open,
+and extended the same day (review B2) to every earlier entry the first run left out.
+[measure/identity.py](measure/identity.py) measures each of T-138’s sixteen witnesses
+against every upper-bound entry of the register published before 9 October 2026 at that
+count whose packing the third route reads: T-056, T-092, T-098, T-101, T-113, T-115,
+T-116, T-117, T-119, T-125, T-127, T-128 and T-130. One earlier entry at these counts is
+not compared: T-129 at 105, recorded at V0/C0, whose packing the route has no reader for.
+For each pair it matches every square to the nearest centre of the other packing under
+each of the box’s eight symmetries, kept only where one to one, exactly over the
+rationals, and records the best symmetry’s largest move, the squares moved beyond each of
+$10^{-9}$ to $10^{-1}$, the squares turned by a sine above $10^{-6}$ and the exact side
+difference. The 56 pairs are in [measure/identity.json](measure/identity.json), in about
+two CPU minutes, most of it promoting T-056’s and T-092’s decimal facts to the
+certificates their receipts decided.
+
+| n | Pairs with | Squares moved beyond $10^{-9}$ | Largest move | Squares turned | Witness side against it |
+| --- | --- | --- | --- | --- | --- |
+| 84 | T-130, Couzo’s refinement of Ryan Xu’s | 15 of 84, none beyond $10^{-3}$ | $1.41 \times 10^{-4}$ | 12 | $2.1 \times 10^{-12}$ above |
+| 86 | T-130, Couzo’s refinement of Ryan Xu’s | 3 of 86 | $6.26 \times 10^{-9}$ | 0 | $2.3 \times 10^{-12}$ above |
+| 103 | T-125, Ryan Xu’s | 0 of 103 | $2.10 \times 10^{-10}$ | 0 | $1.5 \times 10^{-10}$ below |
+| 105 | T-130, Couzo’s refinement of Ryan Xu’s | 0 of 105 | $4.87 \times 10^{-10}$ | 0 | $2.8 \times 10^{-12}$ above |
+| 108 | T-128, Couzo’s refinement of Ryan Xu’s | 0 of 108 | $4.90 \times 10^{-12}$ | 0 | $3.6 \times 10^{-12}$ above |
+| 127 | T-128, Couzo’s refinement of Ryan Xu’s | 0 of 127 | $1.11 \times 10^{-12}$ | 0 | $8.2 \times 10^{-13}$ above |
+| 131 | T-128, Couzo’s refinement of Ryan Xu’s | 0 of 131 | $4.69 \times 10^{-12}$ | 0 | $3.3 \times 10^{-12}$ above |
+| 132 | none: T-056 and T-098 move 123 squares beyond $10^{-3}$ | | | | |
+| 175 | T-130, Couzo’s refinement of Ryan Xu’s | 0 of 175 | $3.62 \times 10^{-11}$ | 0 | $8.5 \times 10^{-12}$ above |
+| 180 | T-128, Couzo’s refinement of SQUISH’s through Gupta’s | 2 of 180, none beyond $10^{-3}$ | $1.41 \times 10^{-4}$ | 1 | $4.2 \times 10^{-12}$ above |
+| 258 | T-115, SQUISH’s | 0 of 258 | $4.29 \times 10^{-10}$ | 0 | $1.2 \times 10^{-12}$ below |
+| 267 | T-125, Ryan Xu’s arrangement, every square moved | 267 of 267, 208 beyond $10^{-3}$ | $8.40 \times 10^{-2}$ | 176 | $3.4 \times 10^{-6}$ below |
+| 270 | T-130, Couzo’s refinement of Evan Daniel’s | 218 of 270, 7 beyond $10^{-3}$ | $2.63 \times 10^{-3}$ | 21 | $1.3 \times 10^{-7}$ above |
+| 302 | T-116, SQUISH’s second update | 198 of 302, none beyond $10^{-3}$ | $1.64 \times 10^{-5}$ | 28 | $4.8 \times 10^{-12}$ below |
+| 303 | T-113, SQUISH’s ten packings | 123 of 303, none beyond $10^{-3}$ | $7.18 \times 10^{-6}$ | 0 | $1.4 \times 10^{-12}$ below |
+| 306 | T-128, Couzo’s own | 0 of 306 | $7.63 \times 10^{-12}$ | 0 | $5.6 \times 10^{-12}$ above |
+
+Every pair in the table is under the identity. So fourteen witnesses are earlier
+packings: at 103, 258, 302 and 303 refined to a smaller side, and at the other ten
+Couzo’s packings at a side $8.2 \times 10^{-13}$ to $1.3 \times 10^{-7}$ above his,
+which T-138’s claim already says are smaller. Against Gupta’s own 180 (T-127) the
+witness moves 72 squares beyond $10^{-3}$, by up to 0.217, so his credit at 180 reaches
+the witness through T-128, whose credit runs “180 through Siddharth Gupta”, not directly;
+against Daniel’s 270 (T-119) it moves 215 beyond $10^{-3}$, and his credit reaches it
+through T-130. The source’s credit (`[Mishapolk decimal poses 2026-10-09]` in
+[bibliography.yaml](../../bibliography.yaml)) names both since this measurement, and
+T-138 states it. At 132 none of the thirteen entries pairs with the witness, and the
+credit there is the issue’s. A measurement for credit; it decides nothing.
 
 ## What Is Not Established
 
@@ -341,6 +390,8 @@ uv run --frozen --all-extras --group dev python -m devtools.decimal_pose_margins
 uv run --frozen --all-extras --group dev python -m devtools.upper_bound_reports mishapolk-decimal-poses-2026-10-09 check-claims
 uv run --frozen --all-extras --group dev python -m devtools.upper_bound_reports mishapolk-decimal-poses-2026-10-09 check --replay
 uv run --frozen --all-extras --group dev python -m devtools.upper_bound_reports mishapolk-decimal-poses-2026-10-09 derive --checkout CHECKOUT --check
+uv run --frozen --all-extras --group dev python resources/web/mishapolk-decimal-poses-2026-10-09/measure/identity.py \
+    --out resources/web/mishapolk-decimal-poses-2026-10-09/measure/identity.json
 ```
 
 `CHECKOUT` is a clone of the source at the pin; `check` refuses any pose whose bytes

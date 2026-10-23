@@ -7,7 +7,6 @@
   const first = (family) => (family.split(",")[0] ?? "").trim().replace(/^["']|["']$/g, "");
   /** @type {[string, string][]} */
   const surfaces = [
-    [".site-case-steps > a", "case navigation"],
     [".site-card-value", "card headline"],
     [".site-card-note", "card note"],
     [".site-popover-value", "popover headline"],
@@ -28,8 +27,7 @@
     [".kpress-footnotes", "footnote"],
     ["li", "list item"],
   ];
-  const headlines =
-    "h1, h2, h3, h4, h5, h6, .site-card-value, .site-popover-value, .site-case-steps > a";
+  const headlines = "h1, h2, h3, h4, h5, h6, .site-card-value, .site-popover-value";
   /** @param {Element} block */
   const allMath = (block) =>
     [...block.childNodes].every(

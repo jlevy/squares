@@ -730,8 +730,9 @@ to credit it as carefully as this project’s own.
 - **Upper bounds count too.** A parallel packing that improves a best-known side enters
   its case’s reported upper lane from a retained source, with the same credit.
   It reaches the verified upper lane only after an exact or interval witness replay.
-  The coverage gate below checks lower bounds only, so the register entry for an upper
-  bound by others is kept by hand.
+  The register’s coverage gate holds it as it holds a lower bound: a case bound from a
+  source dated from 22 August 2026 needs a register entry that cites its evidence and
+  covers its count (`devtools.check_results`).
 
 ### Import, Integration, and Reply
 
@@ -748,7 +749,9 @@ Its three end points are fixed here.
 3. **Answered.** An author who asked for the registration, on an issue here or
    otherwise, has been told what was registered, at which rung, what was replayed, and
    what remains. The answer goes on their issue, which stays open while work they asked
-   for is still queued.
+   for is still queued, while a question put to them awaits an answer that could falsify
+   what the record asserts and that no measurement here can settle, or while the issue
+   is held for the owner, and closes with a final comment once none of these holds.
    Every issue an intake pass touches is answered, and every later change of its state
    gets a follow-up until the issue closes with a final comment (stage 7 of
    [result-import.md](packing/campaign/result-import.md#stage-7-answer) says what
