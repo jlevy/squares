@@ -20702,7 +20702,7 @@ issues:
       23 October for issue 732 records 77 of the 390 rows at or below 1024 as current rows of
       the mishapolk-issue732-2026-10-22 source, retained at 17cc220 and replayed on both exact
       routes, holds 499 (think-fwa9), and leaves 985 to the deletion-bound decision (think-f2io).
-    read_through: '2026-10-23T01:52:47Z'
+    read_through: '2026-10-23T01:53:19Z'
     results:
     - key: rows-325-1024
       claim: >-
@@ -20862,17 +20862,17 @@ issues:
       It gave the plan and asked for per-row parents and whether s(N) = ceil(sqrt N) is claimed
       as a lower bound. It states no T-NNN.
 
-      The author's comment of 2026-10-23T01:52:47Z (issuecomment-6355486108) answers both. 7b6366f
-      (01:50:22Z) withdraws 3426's certificate and restores the grid side there, so the index
-      lists 5,467 certificates and 5,620 sub-ceiling counts; the horizon table's sides were from
-      an earlier run, and the files govern. No unconditional lower bound is claimed at the 4,292
-      counts that are not squares: Theorem 1 is restated as saturation of the block tilings five
-      rectangles generate, and those counts stay at the grid's upper bound. Lineage: counts never
-      below the ceiling before, and the margins above 1e-3 (417, 447, 6811, 9913 named), are new
-      arrangements; 645, 752 and 931 refine Couzo's #715 certificates (credit "Francisco Couzo
-      (seed topology), refined via continuous SQP by Mishapolk"), 499 refines his own #719
-      packing, and he supports joint credit wherever a row pairs with a #715 certificate within
-      1e-6. It suggests publishing the review checkers.
+      The author's comment of 2026-10-23T01:52:47Z (issuecomment-6355486108), read as edited at
+      01:53:19Z, answers both. 7b6366f (01:50:22Z) withdraws 3426's certificate and restores the
+      grid side there, so the index lists 5,467 certificates and 5,620 sub-ceiling counts; the
+      horizon table's sides were from an earlier run, and the files govern. No unconditional
+      lower bound is claimed at the 4,292 counts that are not squares: Theorem 1 is restated as
+      saturation of the block tilings five rectangles generate, and those counts stay at the
+      grid's upper bound. Lineage: counts never below the ceiling before, and the margins above
+      1e-3 (417, 447, 6811, 9913 named), are new arrangements; 645, 752 and 931 refine Couzo's
+      #715 certificates (credit "Francisco Couzo (seed topology), refined via continuous SQP by
+      Mishapolk"), 499 refines his own #719 packing, and he supports joint credit wherever a row
+      pairs with a #715 certificate within 1e-6. It suggests publishing the review checkers.
 
       The import of 23 October (think-0gp6, c-lane-732-import-1023; PR on branch
       claude/intake-732-mishapolk-rows) pins 17cc220, which adds only the licence to 814fbe9;
