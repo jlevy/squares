@@ -148,7 +148,7 @@ walks them in report order from starts frozen at `main` `0281e7763`. It records 
 import’s: Couzo’s `4e4c8ce` certificates at 19 (think-yfoo), issue 715’s
 re-certifications at 19 (think-fwa9), and `5a299b4`’s certificates at 12 and `23aff0c`’s
 at 447 (think-tmwt). Each enters below #719’s row when it lands.
-Since 22 October 2026 the [history walk of Couzo’s watched publications](../../../campaign/issue-intake/upper-bounds-couzo-history-20261022/README.md)
+The [history walk of Couzo’s watched publications](../../../campaign/issue-intake/upper-bounds-couzo-history-20261022/README.md)
 records them where they were first: at 49 of the 111 the row just before #719’s is
 Couzo’s own, his `4e4c8ce` index at 38 (couzo-index-2026-10-15) and his `5a299b4`
 reconciliation at 11 (couzo-reconcile-2026-10-20).

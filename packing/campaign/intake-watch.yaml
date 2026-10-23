@@ -305,8 +305,8 @@ repositories:
   # The intake pass of 2026-10-10 (think-apri) read these heads. Each commit holds a
   # result an open import bead owns, so each read names it until a packet pins the commit.
   # The franciscouzo read through 9bf90e7, which held the outside-corpus updates of 02f9690
-  # and 3ef7634 for think-1545, was removed on 22 October 2026, when the history walk of
-  # Couzo's watched publications recorded them; the read through 7b6c87e covers it.
+  # and 3ef7634 for think-1545, was removed when the history walk of Couzo's watched
+  # publications recorded them; the read through 7b6c87e covers it.
   - url: https://github.com/wand125/square-packing
     read_through: 22a23c8a99aa4e9616d596bc2f28555bacbee3dd
     read_on: '2026-10-10'
@@ -392,33 +392,31 @@ repositories:
       One commit of 10 October past the 9bf90e7 read: 3ef7634, the pin of #488 and of the
       couzo-certificates-2026-10-10 packet, which retains the nine certificates it adds or
       changes and pins the other 54. It rewrites certificates/n132, n175, n237, n270 and
-      n305.cert and adds n209.cert, the six values #488 reports (T-140), and rewrites n303,
-      n338 and n340.cert, which #488 does not name; the packet's claim record compares those
-      three, and each is an import of its own; the outside-corpus updates at 338 and 340 are
-      rows of couzo-3ef7634-2026-10-10 since 22 October 2026. The commit's pose files, SVGs and both README tables
-      follow the same certificates; the standing table now marks 131, 259, 263, 269, 292, 303
-      and 307 as superseded by #481, and the certificates README marks n = 375, whose
-      certificate is unchanged, as tied with Evan Daniel's big1_n375. This read stays although
-      a packet pins the head, which the sweep notes as removable: it is the read that covers
-      the changed paths no packet retains in 3ef7634 and the two commits before it. Read on
-      2026-10-10 with devtools.intake_sweep.read_history, the sweep reports all three as
-      commits a pin contains whose paths no packet retains when no read covers them, and
-      3ef7634 alone with only the 9bf90e7 read; with this one, none. Those paths are
-      drawings and removed files: the nine SVGs 3ef7634 adds or rewrites (132, 175, 209, 237,
-      270, 303, 305, 338, 340), the 56 SVGs 02f9690 adds or rewrites, and the pose files and
-      SVGs of 102, 103 and 272 that 9bf90e7 deletes as superseded in this record (Ryan Xu's
-      #432 packings at 102 and 103, Evan Daniel's #399 packing at 272), which the history
-      keeps. Each drawing shows a pose file or certificate a packet retains or pins; the
-      source states no licence, so the record keeps the drawings outside Git under the
-      retention policy. No record entry changes, and nothing else to import.
-
-  # The closing sweep of 2026-10-10 (about 19:50 UTC) found evand/square-packing four
-  # commits past the 76a529b read, and seven more followed by 20:37 UTC. 346c6ed's
-  # certificates hold new upper-bound values at 15 counts, which think-8k76 owned until the
-  # evand-regularized-2026-10-10 packet pinned ea1a2f2, the head at 21:42 UTC, and T-146
-  # registered them. The read stays although a packet pins the head: without it,
-  # devtools.intake_sweep.read_history reports all eleven as commits a pin contains whose
-  # changed paths no packet retains, and with it none.
+      n305.cert and adds n209.cert, the six values #488 reports (T-140), and rewrites n303, n338
+      and n340.cert, which #488 does not name; the packet's claim record compares those three,
+      and each is an import of its own; the outside-corpus updates at 338 and 340 are rows of
+      couzo-3ef7634-2026-10-10. The commit's pose files, SVGs and both README tables follow the
+      same certificates; the standing table now marks 131, 259, 263, 269, 292, 303 and 307 as
+      superseded by #481, and the certificates README marks n = 375, whose certificate is
+      unchanged, as tied with Evan Daniel's big1_n375. This read stays although a packet pins
+      the head, which the sweep notes as removable: it is the read that covers the changed paths
+      no packet retains in 3ef7634 and the two commits before it. Read on 2026-10-10 with
+      devtools.intake_sweep.read_history, the sweep reports all three as commits a pin contains
+      whose paths no packet retains when no read covers them, and 3ef7634 alone with only the
+      9bf90e7 read; with this one, none. Those paths are drawings and removed files: the nine
+      SVGs 3ef7634 adds or rewrites (132, 175, 209, 237, 270, 303, 305, 338, 340), the 56 SVGs
+      02f9690 adds or rewrites, and the pose files and SVGs of 102, 103 and 272 that 9bf90e7
+      deletes as superseded in this record (Ryan Xu's #432 packings at 102 and 103, Evan
+      Daniel's #399 packing at 272), which the history keeps. Each drawing shows a pose file or
+      certificate a packet retains or pins; the source states no licence, so the record keeps
+      the drawings outside Git under the retention policy. No record entry changes, and nothing
+      else to import.  # The closing sweep of 2026-10-10 (about 19:50 UTC) found
+      evand/square-packing four # commits past the 76a529b read, and seven more followed by
+      20:37 UTC. 346c6ed's # certificates hold new upper-bound values at 15 counts, which
+      think-8k76 owned until the # evand-regularized-2026-10-10 packet pinned ea1a2f2, the head
+      at 21:42 UTC, and T-146 # registered them. The read stays although a packet pins the head:
+      without it, # devtools.intake_sweep.read_history reports all eleven as commits a pin
+      contains whose # changed paths no packet retains, and with it none.
   - url: https://github.com/evand/square-packing
     read_through: ea1a2f23678a13bd1d252f9f4c95ca5dd2ffd2b7
     read_on: '2026-10-10'
@@ -829,14 +827,14 @@ repositories:
       The head. 43ac7d2 is #607's pin (T-189). 4e4c8ce rewrites the index for n < 1024: its
       certificates/n237.cert is T-190, retained by the couzo-n237-2026-10-15 packet at this
       head, and its 341 rows beyond 324, below 487b058's and #607's, were think-yfoo's import;
-      the other in-corpus files are copies of certificates the record holds, or larger.
-      58a7833 adds Göbel's square and strip bounds (gobel_bounds.json, GOBEL_COMPARISON.md,
-      gobel_comparison.csv), classical closed forms with no discovery claimed, which #613
-      asks the owner about. Since 22 October 2026 the couzo-index-2026-10-15 packet pins
-      4e4c8ce and retains the 253 certificates its rows record, and the history walk of
-      Couzo's watched publications holds the rest: the rows above Göbel's construction, which
-      wait with 58a7833's bounds on #613 (think-8krd), the sub-print re-certifications
-      (think-fwa9) and the index deletion bounds (think-f2io). This read now names think-8krd.
+      the other in-corpus files are copies of certificates the record holds, or larger. 58a7833
+      adds Göbel's square and strip bounds (gobel_bounds.json, GOBEL_COMPARISON.md,
+      gobel_comparison.csv), classical closed forms with no discovery claimed, which #613 asks
+      the owner about. The couzo-index-2026-10-15 packet pins 4e4c8ce and retains the 253
+      certificates its rows record, and the history walk of Couzo's watched publications holds
+      the rest: the rows above Göbel's construction, which wait with 58a7833's bounds on #613
+      (think-8krd), the sub-print re-certifications (think-fwa9) and the index deletion bounds
+      (think-f2io). This read now names think-8krd.
   - url: https://github.com/wand125/square-packing
     read_through: b57e66712b5f722b39fcb703692006062c7d9eb7
     read_on: '2026-10-15'

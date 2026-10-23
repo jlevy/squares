@@ -1645,9 +1645,9 @@ author’s later `4e4c8ce` index, not yet recorded (think-yfoo), is smaller at t
 them still current; 812 and 930 are not recorded, and the 42 above Göbel’s classical
 constructions wait on the owner’s answer on #613. The pinned files state nothing about
 AI assistance; the author’s issues of 13 and 14 October disclose OpenAI Codex and Claude
-Code assistance. Since 22 October 2026 the `4e4c8ce` index is recorded
-([packet](web/couzo-index-2026-10-15/README.md)), and 199 of the 252 rows name it as the
-report that beat them first, 64 of them current until then.
+Code assistance. The history walk of Couzo’s watched publications records the `4e4c8ce`
+index ([packet](web/couzo-index-2026-10-15/README.md)), and 199 of the 252 rows name it
+as the report that beat them first, 64 of them current before that walk.
 
 **[Couzo certificates 2026-10-14]**: Francisco Couzo’s exact rational certificates for n
 = 237, 339, 342, 382, 409, 419, 450, 461, 542, 552, 599, 648, 649, 651, 703, 757, 804,

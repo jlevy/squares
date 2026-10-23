@@ -54,8 +54,8 @@ retain, 302, 375, 376 and 381 among them in the b85dee2 packet; 344, an intermed
 certificate that no report names and that `b85dee2` replaced, is pinned by digest only.
 The two READMEs and the per-certificate metadata files are pinned by digest only. No
 prose or program is copied.
-Since 22 October 2026 the packet also retains the commit’s `certificates/n378.cert`
-(46,595 bytes), added from the same pin at 19:10Z: no issue names it, and the history
+The packet also retains the commit’s `certificates/n378.cert` (46,595 bytes), added from
+the same pin on 22 October at 19:10Z: no issue names it, and the history
 walk of Couzo’s watched publications records it as a report from the commit
 ([Rows Beyond the Corpus from the Commit](#rows-beyond-the-corpus-from-the-commit)).
 The packet now retains 8 files, 349,962 bytes.
@@ -100,7 +100,7 @@ smaller at every count; at 339 Evan Daniel’s #584 is also smaller.
 
 ## Rows Beyond the Corpus from the Commit
 
-Since 22 October 2026 the commit’s `certificates/n378.cert`, which neither #570 nor #583 names, is a row of its own, as the source `couzo-4596670-2026-10-13`: a publication in a watched repository is a report from its first commit (the owner, 14 October 2026), and the [history walk of Couzo’s watched publications](../../../campaign/issue-intake/upper-bounds-couzo-history-20261022/README.md) records it in report order.
+The commit’s `certificates/n378.cert`, which neither #570 nor #583 names, is a row of its own, as the source `couzo-4596670-2026-10-13`: a publication in a watched repository is a report from its first commit (the owner, 14 October 2026), and the [history walk of Couzo’s watched publications](../../../campaign/issue-intake/upper-bounds-couzo-history-20261022/README.md) records it in report order.
 
 [`devtools.beyond_horizon_replay`](../../../devtools/beyond_horizon_replay.py) declares this publication a release with no issue, `franciscouzo/square-packing@4596670`, and reads the rows the history walk records from [acquisition/watched-release.json](acquisition/watched-release.json), which `declare-rows` writes from the walk.
 

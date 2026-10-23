@@ -3126,13 +3126,13 @@ sources:
     On 21 October 2026 issue 686's rows superseded one of this source's (muglich-issue686-2026-10-19).
     On 22 October 2026 issue 719's row at 372 superseded this source's there
     (mishapolk-issue719-2026-10-22).
-    On 22 October 2026 the history walk of Couzo's watched publications
+    The history walk of Couzo's watched publications
     (campaign/issue-intake/upper-bounds-couzo-history-20261022), which walks every count from
-    325 to 1024 from starts frozen at main a97b712b9, recorded earlier reports that no row held,
-    so 12 of these rows now name the report that beat each first: Couzo's 02f9690 of 9 October
+    325 to 1024 from starts frozen at main a97b712b9, records earlier reports that no row held,
+    so 12 of these rows name the report that beat each first: Couzo's 02f9690 of 9 October
     (couzo-02f9690-2026-10-09) at 11 counts: 332, 336, 337, 338, 339, 340, 341, 373, 374, 377
-    and 379; Couzo's 4e4c8ce index of 15 October (couzo-index-2026-10-15) at 372. 7 of them were
-    current until then: 332, 336, 337, 340, 341, 373 and 374.
+    and 379; Couzo's 4e4c8ce index of 15 October (couzo-index-2026-10-15) at 372. 7 of them had
+    been current before it: 332, 336, 337, 340, 341, 373 and 374.
 - id: couzo-extended-range-updates-2026-10-08
   title: Francisco Couzo's later decimal reports at n=375 and n=378
   role: source-repository
@@ -3160,10 +3160,10 @@ sources:
     same commit. Each side is strictly below the same count's ffd900d report by exact comparison, so
     those two rows are superseded dated rows. No upstream byte is retained; both claims are tracked outside
     the 1..324 case corpus, with no geometry, native replay, selected case or result row.
-    On 22 October 2026 the history walk of Couzo's watched publications
+    The history walk of Couzo's watched publications
     (campaign/issue-intake/upper-bounds-couzo-history-20261022), which walks every count from
-    325 to 1024 from starts frozen at main a97b712b9, recorded earlier reports that no row held,
-    so one of these rows now names the report that beat it first: Couzo's 02f9690 of 9 October
+    325 to 1024 from starts frozen at main a97b712b9, records earlier reports that no row held,
+    so one of these rows names the report that beat it first: Couzo's 02f9690 of 9 October
     (couzo-02f9690-2026-10-09) at 378.
 - id: couzo-followup-refinements-2026-10-08
   title: Francisco Couzo's five follow-up rational refinements at 2d32a6e
@@ -3321,10 +3321,10 @@ sources:
     by issue 489's smaller sides there (evand-record-hunt3-2026-10-10). No case selects it; on 11
     October 2026 the case at 308 adopted issue 489's smaller side (T-141), and this certificate stays
     verified.
-    On 22 October 2026 the history walk of Couzo's watched publications
+    The history walk of Couzo's watched publications
     (campaign/issue-intake/upper-bounds-couzo-history-20261022), which walks every count from
-    325 to 1024 from starts frozen at main a97b712b9, recorded earlier reports that no row held,
-    so one of these rows now names the report that beat it first: Evan Daniel's f7a2325 of 10
+    325 to 1024 from starts frozen at main a97b712b9, records earlier reports that no row held,
+    so one of these rows names the report that beat it first: Evan Daniel's f7a2325 of 10
     October (evand-hunt3-first-hour-2026-10-10) at 343.
   claims_record: resources/web/fang-two-wedge-certificates-2026-10-10/acquisition/beyond-horizon-claims.json
 - id: squish-481-third-request-2026-10-09
@@ -3893,10 +3893,10 @@ sources:
     side known at its count until issue 528 (T-158), 2.94e-03 below it; the author asked on issue
     506 on 14 October for it to be imported, and T-185 records it, superseded by T-158, in
     couzo-certificates-2026-10-11-n175. 308, 340 and 343 are registered by no entry.
-    On 22 October 2026 the history walk of Couzo's watched publications
+    The history walk of Couzo's watched publications
     (campaign/issue-intake/upper-bounds-couzo-history-20261022), which walks every count from
-    325 to 1024 from starts frozen at main a97b712b9, recorded earlier reports that no row held,
-    so one of these rows now names the report that beat it first: Couzo's a7067d7 of 12 October
+    325 to 1024 from starts frozen at main a97b712b9, records earlier reports that no row held,
+    so one of these rows names the report that beat it first: Couzo's a7067d7 of 12 October
     (couzo-updates-2026-10-12) at 344.
   claims_record: resources/web/couzo-certificates-2026-10-11/acquisition/beyond-horizon-claims.json
 - id: overbeck-n17-candidate-2026
@@ -4116,10 +4116,10 @@ sources:
     record; the in-corpus certificates at 156, 176, 237 and 271 are an entry of their own
     (couzo-certificates-2026-10-12-in-corpus), since that record holds the claims beyond the
     corpus only.
-    On 22 October 2026 the history walk of Couzo's watched publications
+    The history walk of Couzo's watched publications
     (campaign/issue-intake/upper-bounds-couzo-history-20261022), which walks every count from
-    325 to 1024 from starts frozen at main a97b712b9, recorded earlier reports that no row held,
-    so 2 of these rows now name the report that beat each first: Couzo's 93570ef of 12 October
+    325 to 1024 from starts frozen at main a97b712b9, records earlier reports that no row held,
+    so 2 of these rows name the report that beat each first: Couzo's 93570ef of 12 October
     (couzo-retained-certificates-2026-10-12) at 2 counts: 344 and 378.
   claims_record: resources/web/couzo-certificates-2026-10-12/acquisition/beyond-horizon-claims.json
 - id: dostashev-compositions-2026-10-12
@@ -4252,10 +4252,10 @@ sources:
     are an entry of their own (couzo-certificates-2026-10-13-in-corpus), since that record
     holds the claims beyond the corpus only.
     On 21 October 2026 issue 686's rows superseded one of this source's (muglich-issue686-2026-10-19).
-    On 22 October 2026 the history walk of Couzo's watched publications
+    The history walk of Couzo's watched publications
     (campaign/issue-intake/upper-bounds-couzo-history-20261022), which walks every count from
-    325 to 1024 from starts frozen at main a97b712b9, recorded earlier reports that no row held,
-    so one of these rows now names the report that beat it first: Couzo's 4e4c8ce index of 15
+    325 to 1024 from starts frozen at main a97b712b9, records earlier reports that no row held,
+    so one of these rows names the report that beat it first: Couzo's 4e4c8ce index of 15
     October (couzo-index-2026-10-15) at 344.
   claims_record: resources/web/couzo-certificates-2026-10-13/acquisition/beyond-horizon-claims.json
 - id: pingyou-n153-refinement-2026-10-12
@@ -4738,10 +4738,10 @@ sources:
     On 22 October 2026 issue 672's row at 932, reported before issue 686's, became the first in
     report order to beat this source's row there (couzo-issue672-2026-10-17), which now names it as
     its successor instead of issue 686's.
-    On 22 October 2026 the history walk of Couzo's watched publications
+    The history walk of Couzo's watched publications
     (campaign/issue-intake/upper-bounds-couzo-history-20261022), which walks every count from
-    325 to 1024 from starts frozen at main a97b712b9, recorded earlier reports that no row held,
-    so one of these rows now names the report that beat it first: Couzo's 4e4c8ce index of 15
+    325 to 1024 from starts frozen at main a97b712b9, records earlier reports that no row held,
+    so one of these rows names the report that beat it first: Couzo's 4e4c8ce index of 15
     October (couzo-index-2026-10-15) at 932.
   claims_record: resources/web/fang-excess-theorem-2026-10-13/acquisition/beyond-horizon-claims.json
 - id: wand125-linear-n145-1224-2026-10-13
@@ -5237,10 +5237,10 @@ sources:
     On 22 October 2026 issue 670's row at 460, reported before issue 686's, became the first in
     report order to beat this source's row there (couzo-issue670-2026-10-17), which now names it as
     its successor instead of issue 686's.
-    On 22 October 2026 the history walk of Couzo's watched publications
+    The history walk of Couzo's watched publications
     (campaign/issue-intake/upper-bounds-couzo-history-20261022), which walks every count from
-    325 to 1024 from starts frozen at main a97b712b9, recorded earlier reports that no row held,
-    so one of these rows now names the report that beat it first: Couzo's 4e4c8ce index of 15
+    325 to 1024 from starts frozen at main a97b712b9, records earlier reports that no row held,
+    so one of these rows names the report that beat it first: Couzo's 4e4c8ce index of 15
     October (couzo-index-2026-10-15) at 460.
   claims_record: resources/web/evand-fresh-compositions-2026-10-14/acquisition/beyond-horizon-claims.json
 - id: fang-direct-certificates-2026-10-13
@@ -5957,11 +5957,11 @@ sources:
     report order.
     On 22 October 2026 issue 719's rows superseded 39 of this source's
     (mishapolk-issue719-2026-10-22).
-    On 22 October 2026 the history walk of Couzo's watched publications
+    The history walk of Couzo's watched publications
     (campaign/issue-intake/upper-bounds-couzo-history-20261022), which walks every count from
-    325 to 1024 from starts frozen at main a97b712b9, recorded earlier reports that no row held,
-    so 199 of these rows now name the report that beat each first: Couzo's 4e4c8ce index of 15
-    October (couzo-index-2026-10-15) at 199 counts. 64 of them were current until then.
+    325 to 1024 from starts frozen at main a97b712b9, records earlier reports that no row held,
+    so 199 of these rows name the report that beat each first: Couzo's 4e4c8ce index of 15
+    October (couzo-index-2026-10-15) at 199 counts. 64 of them had been current before it.
   claims_record: resources/web/couzo-verified-bounds-2026-10-14/review/beyond-horizon-claims.json
 - id: couzo-certificates-2026-10-14
   title: Francisco Couzo's registration witnesses at 43ac7d2, issue 607
@@ -6021,12 +6021,12 @@ sources:
     name issue 670's.
     On 22 October 2026 issue 719's rows superseded three of this source's
     (mishapolk-issue719-2026-10-22).
-    On 22 October 2026 the history walk of Couzo's watched publications
+    The history walk of Couzo's watched publications
     (campaign/issue-intake/upper-bounds-couzo-history-20261022), which walks every count from
-    325 to 1024 from starts frozen at main a97b712b9, recorded earlier reports that no row held,
-    so 8 of these rows now name the report that beat each first: Couzo's 4e4c8ce index of 15
-    October (couzo-index-2026-10-15) at 7 counts: 339, 382, 450, 552, 599, 648 and 757; Couzo's
-    5a299b4 of 20 October, public on 21 October (couzo-reconcile-2026-10-20) at 409.
+    325 to 1024 from starts frozen at main a97b712b9, records earlier reports that no row held,
+    so 8 of these rows name the report that beat each first: Couzo's 4e4c8ce index of 15 October
+    (couzo-index-2026-10-15) at 7 counts: 339, 382, 450, 552, 599, 648 and 757; Couzo's 5a299b4
+    of 20 October, public on 21 October (couzo-reconcile-2026-10-20) at 409.
   claims_record: resources/web/couzo-certificates-2026-10-14/acquisition/beyond-horizon-claims.json
 - id: couzo-n237-2026-10-15
   title: Francisco Couzo's exact certificate at 237, 4e4c8ce, no issue
@@ -7547,10 +7547,10 @@ sources:
     (couzo-issue715-2026-10-21).
     On 22 October 2026 issue 719's rows superseded 42 of this source's
     (mishapolk-issue719-2026-10-22).
-    On 22 October 2026 the history walk of Couzo's watched publications
+    The history walk of Couzo's watched publications
     (campaign/issue-intake/upper-bounds-couzo-history-20261022), which walks every count from
-    325 to 1024 from starts frozen at main a97b712b9, recorded earlier reports that no row held,
-    so 9 of these rows now name the report that beat each first: Couzo's 5a299b4 of 20 October,
+    325 to 1024 from starts frozen at main a97b712b9, records earlier reports that no row held,
+    so 9 of these rows name the report that beat each first: Couzo's 5a299b4 of 20 October,
     public on 21 October (couzo-reconcile-2026-10-20) at 9 counts: 453, 649, 810, 812, 933, 934,
     990, 991 and 997.
   claims_record: resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
@@ -7894,12 +7894,12 @@ sources:
     by digest and wait on the owner (think-9vr8, think-f2io). Per-row lineage is not stated
     by the source; the issue credits Mishapolk (Mykhailo Polkovskyi) and names the earlier finders
     its packings build on, and discloses Gemini assistance.
-    Since 22 October 2026, at 49 of the 111 the row just before this source's is Francisco
-    Couzo's own certificate, which the history walk of his watched publications
-    (campaign/issue-intake/upper-bounds-couzo-history-20261022) records: his 4e4c8ce index at 38
-    (couzo-index-2026-10-15) and his 5a299b4 reconciliation at 11 (couzo-reconcile-2026-10-20);
-    the re-certifications below the 12-place print of issue 715 and of 5a299b4 stay held
-    (think-fwa9), and the chain passes over them.
+    The history walk of Francisco Couzo's watched publications
+    (campaign/issue-intake/upper-bounds-couzo-history-20261022) records his own certificates
+    there: at 49 of the 111 the row just before this source's is his 4e4c8ce index's, at 38
+    (couzo-index-2026-10-15), or his 5a299b4 reconciliation's, at 11
+    (couzo-reconcile-2026-10-20); the re-certifications below the 12-place print of issue 715
+    and of 5a299b4 stay held (think-fwa9), and the chain passes over them.
   claims_record: resources/web/mishapolk-issue719-2026-10-22/acquisition/beyond-horizon-rows.json
 
 - id: couzo-02f9690-2026-10-09
@@ -8168,7 +8168,7 @@ sources:
   notes: >-
     Francisco Couzo's commit 4596670 of 13 October, issue 583's pin, also publishes a
     certificate at 378 that issue 583 does not report; the couzo-issue583-2026-10-13 packet
-    retains it since 22 October. The history walk of 22 October
+    retains it. The history walk of 22 October
     (campaign/issue-intake/upper-bounds-couzo-history-20261022), every count from 325 to 1024 in
     report order from starts frozen at main a97b712b9, records 1 of them as reports, each dated
     by the commit, which first holds its certificate (receipts/first-commits.json). The packet's

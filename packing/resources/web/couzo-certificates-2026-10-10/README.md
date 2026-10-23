@@ -167,7 +167,7 @@ them:
 
 ## The History Walk’s Rows
 
-Since 22 October 2026 the commit’s certificates at 338 and 340, which #488 does not name, are rows of their own, as the source `couzo-3ef7634-2026-10-10`: a publication in a watched repository is a report from its first commit (the owner, 14 October 2026), and the [history walk of Couzo’s watched publications](../../../campaign/issue-intake/upper-bounds-couzo-history-20261022/README.md) records them in report order.
+The commit’s certificates at 338 and 340, which #488 does not name, are rows of their own, as the source `couzo-3ef7634-2026-10-10`: a publication in a watched repository is a report from its first commit (the owner, 14 October 2026), and the [history walk of Couzo’s watched publications](../../../campaign/issue-intake/upper-bounds-couzo-history-20261022/README.md) records them in report order.
 
 [`devtools.beyond_horizon_replay`](../../../devtools/beyond_horizon_replay.py) declares this publication a release with no issue, `franciscouzo/square-packing@3ef7634`, and reads the rows the history walk records from [acquisition/watched-release.json](acquisition/watched-release.json), which `declare-rows` writes from the walk.
 

@@ -10007,8 +10007,8 @@ issues:
       not_registered: 'An earlier report is smaller. franciscouzo/square-packing at 4e4c8ce, first committed
         2026-10-15T00:31:53Z, before this issue at 20:02:39Z, publishes certificates/best/n366.cert (SHA-256
         bfd83f90...) at 14 + 4√2 scaled by 1 + 1e-24, 19.656854249493 rounded up, 8.19e-2 below; its index
-        credits PingYou Ltd (BuddenPing), and its 341 rows beyond 324 were think-yfoo''s import; since 22 October
-        2026 that certificate is the count''s current row (couzo-index-2026-10-15). Göbel''s strip
+        credits PingYou Ltd (BuddenPing), and its 341 rows beyond 324 were think-yfoo''s import, and that certificate
+        is the count''s current row (couzo-index-2026-10-15). Göbel''s strip
         construction for 369, 19 + √2/2, is 3.17e-2 below as well (#613). Not imported.'
       queued: false
     beads:
@@ -16902,8 +16902,8 @@ issues:
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus: the certificate first published at 02f9690 on 2026-10-09, at the
-        same exact side, an earlier report. Since 22 October 2026 that report is recorded as a row
-        of couzo-02f9690-2026-10-09 by the history walk of Couzo's watched publications
+        same exact side, an earlier report. That report is recorded as a row of
+        couzo-02f9690-2026-10-09 by the history walk of Couzo's watched publications
         (upper-bounds-couzo-history-20261022); this restatement is not recorded.
       queued: false
     - key: n337
@@ -16911,8 +16911,8 @@ issues:
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus: the certificate first published at 02f9690 on 2026-10-09, at the
-        same exact side, an earlier report. Since 22 October 2026 that report is recorded as a row
-        of couzo-02f9690-2026-10-09 by the history walk of Couzo's watched publications
+        same exact side, an earlier report. That report is recorded as a row of
+        couzo-02f9690-2026-10-09 by the history walk of Couzo's watched publications
         (upper-bounds-couzo-history-20261022); this restatement is not recorded.
       queued: false
     - key: n338
@@ -16928,17 +16928,17 @@ issues:
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus: the certificate first published at f311f08 on 2026-10-11, at the
-        same exact side, an earlier report. Since 22 October 2026 that report is recorded as a row
-        of couzo-extended-certificates-2026-10-11 by the history walk of Couzo's watched
-        publications (upper-bounds-couzo-history-20261022); this restatement is not recorded.
+        same exact side, an earlier report. That report is recorded as a row of
+        couzo-extended-certificates-2026-10-11 by the history walk of Couzo's watched publications
+        (upper-bounds-couzo-history-20261022); this restatement is not recorded.
       queued: false
     - key: n341
       claim: s(341) <= 18.951882408720, rounded upward; exact certificate side is authoritative.
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus: the certificate first published at 02f9690 on 2026-10-09, at the
-        same exact side, an earlier report. Since 22 October 2026 that report is recorded as a row
-        of couzo-02f9690-2026-10-09 by the history walk of Couzo's watched publications
+        same exact side, an earlier report. That report is recorded as a row of
+        couzo-02f9690-2026-10-09 by the history walk of Couzo's watched publications
         (upper-bounds-couzo-history-20261022); this restatement is not recorded.
       queued: false
     - key: n343
@@ -16966,8 +16966,8 @@ issues:
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus: the certificate first published at 02f9690 on 2026-10-09, at the
-        same exact side, an earlier report. Since 22 October 2026 that report is recorded as a row
-        of couzo-02f9690-2026-10-09 by the history walk of Couzo's watched publications
+        same exact side, an earlier report. That report is recorded as a row of
+        couzo-02f9690-2026-10-09 by the history walk of Couzo's watched publications
         (upper-bounds-couzo-history-20261022); this restatement is not recorded.
       queued: false
     - key: n374
@@ -16975,8 +16975,8 @@ issues:
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus: the certificate first published at 02f9690 on 2026-10-09, at the
-        same exact side, an earlier report. Since 22 October 2026 that report is recorded as a row
-        of couzo-02f9690-2026-10-09 by the history walk of Couzo's watched publications
+        same exact side, an earlier report. That report is recorded as a row of
+        couzo-02f9690-2026-10-09 by the history walk of Couzo's watched publications
         (upper-bounds-couzo-history-20261022); this restatement is not recorded.
       queued: false
     - key: n404
@@ -16994,8 +16994,8 @@ issues:
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at the
-        same exact side, an earlier report. Since 22 October 2026 that report is recorded as a row
-        of couzo-index-2026-10-15 by the history walk of Couzo's watched publications
+        same exact side, an earlier report. That report is recorded as a row of
+        couzo-index-2026-10-15 by the history walk of Couzo's watched publications
         (upper-bounds-couzo-history-20261022); this restatement is not recorded.
       queued: false
     - key: n413
@@ -17003,8 +17003,8 @@ issues:
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at the
-        same exact side, an earlier report. Since 22 October 2026 that report is recorded as a row
-        of couzo-index-2026-10-15 by the history walk of Couzo's watched publications
+        same exact side, an earlier report. That report is recorded as a row of
+        couzo-index-2026-10-15 by the history walk of Couzo's watched publications
         (upper-bounds-couzo-history-20261022); this restatement is not recorded.
       queued: false
     - key: n417
@@ -17022,8 +17022,8 @@ issues:
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at the
-        same exact side, an earlier report. Since 22 October 2026 that report is recorded as a row
-        of couzo-index-2026-10-15 by the history walk of Couzo's watched publications
+        same exact side, an earlier report. That report is recorded as a row of
+        couzo-index-2026-10-15 by the history walk of Couzo's watched publications
         (upper-bounds-couzo-history-20261022); this restatement is not recorded.
       queued: false
     - key: n455
@@ -17091,8 +17091,8 @@ issues:
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at the
-        same exact side, an earlier report. Since 22 October 2026 that report is recorded as a row
-        of couzo-index-2026-10-15 by the history walk of Couzo's watched publications
+        same exact side, an earlier report. That report is recorded as a row of
+        couzo-index-2026-10-15 by the history walk of Couzo's watched publications
         (upper-bounds-couzo-history-20261022); this restatement is not recorded.
       queued: false
     - key: n496
@@ -17120,8 +17120,8 @@ issues:
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at the
-        same exact side, an earlier report. Since 22 October 2026 that report is recorded as a row
-        of couzo-index-2026-10-15 by the history walk of Couzo's watched publications
+        same exact side, an earlier report. That report is recorded as a row of
+        couzo-index-2026-10-15 by the history walk of Couzo's watched publications
         (upper-bounds-couzo-history-20261022); this restatement is not recorded.
       queued: false
     - key: n499
@@ -17229,8 +17229,8 @@ issues:
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at the
-        same exact side, an earlier report. Since 22 October 2026 that report is recorded as a row
-        of couzo-index-2026-10-15 by the history walk of Couzo's watched publications
+        same exact side, an earlier report. That report is recorded as a row of
+        couzo-index-2026-10-15 by the history walk of Couzo's watched publications
         (upper-bounds-couzo-history-20261022); this restatement is not recorded.
       queued: false
     - key: n545
@@ -17328,8 +17328,8 @@ issues:
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at the
-        same exact side, an earlier report. Since 22 October 2026 that report is recorded as a row
-        of couzo-index-2026-10-15 by the history walk of Couzo's watched publications
+        same exact side, an earlier report. That report is recorded as a row of
+        couzo-index-2026-10-15 by the history walk of Couzo's watched publications
         (upper-bounds-couzo-history-20261022); this restatement is not recorded.
       queued: false
     - key: n591
@@ -17387,8 +17387,8 @@ issues:
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at the
-        same exact side, an earlier report. Since 22 October 2026 that report is recorded as a row
-        of couzo-index-2026-10-15 by the history walk of Couzo's watched publications
+        same exact side, an earlier report. That report is recorded as a row of
+        couzo-index-2026-10-15 by the history walk of Couzo's watched publications
         (upper-bounds-couzo-history-20261022); this restatement is not recorded.
       queued: false
     - key: n597
@@ -17476,8 +17476,8 @@ issues:
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at the
-        same exact side, an earlier report. Since 22 October 2026 that report is recorded as a row
-        of couzo-index-2026-10-15 by the history walk of Couzo's watched publications
+        same exact side, an earlier report. That report is recorded as a row of
+        couzo-index-2026-10-15 by the history walk of Couzo's watched publications
         (upper-bounds-couzo-history-20261022); this restatement is not recorded.
       queued: false
     - key: n640
@@ -17505,8 +17505,8 @@ issues:
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at the
-        same exact side, an earlier report. Since 22 October 2026 that report is recorded as a row
-        of couzo-index-2026-10-15 by the history walk of Couzo's watched publications
+        same exact side, an earlier report. That report is recorded as a row of
+        couzo-index-2026-10-15 by the history walk of Couzo's watched publications
         (upper-bounds-couzo-history-20261022); this restatement is not recorded.
       queued: false
     - key: n645
@@ -17614,8 +17614,8 @@ issues:
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at the
-        same exact side, an earlier report. Since 22 October 2026 that report is recorded as a row
-        of couzo-index-2026-10-15 by the history walk of Couzo's watched publications
+        same exact side, an earlier report. That report is recorded as a row of
+        couzo-index-2026-10-15 by the history walk of Couzo's watched publications
         (upper-bounds-couzo-history-20261022); this restatement is not recorded.
       queued: false
     - key: n691
@@ -17633,8 +17633,8 @@ issues:
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at the
-        same exact side, an earlier report. Since 22 October 2026 that report is recorded as a row
-        of couzo-index-2026-10-15 by the history walk of Couzo's watched publications
+        same exact side, an earlier report. That report is recorded as a row of
+        couzo-index-2026-10-15 by the history walk of Couzo's watched publications
         (upper-bounds-couzo-history-20261022); this restatement is not recorded.
       queued: false
     - key: n694
@@ -17692,8 +17692,8 @@ issues:
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at the
-        same exact side, an earlier report. Since 22 October 2026 that report is recorded as a row
-        of couzo-index-2026-10-15 by the history walk of Couzo's watched publications
+        same exact side, an earlier report. That report is recorded as a row of
+        couzo-index-2026-10-15 by the history walk of Couzo's watched publications
         (upper-bounds-couzo-history-20261022); this restatement is not recorded.
       queued: false
     - key: n700
@@ -17741,8 +17741,8 @@ issues:
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at the
-        same exact side, an earlier report. Since 22 October 2026 that report is recorded as a row
-        of couzo-index-2026-10-15 by the history walk of Couzo's watched publications
+        same exact side, an earlier report. That report is recorded as a row of
+        couzo-index-2026-10-15 by the history walk of Couzo's watched publications
         (upper-bounds-couzo-history-20261022); this restatement is not recorded.
       queued: false
     - key: n737
@@ -17779,8 +17779,8 @@ issues:
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at the
-        same exact side, an earlier report. Since 22 October 2026 that report is recorded as a row
-        of couzo-index-2026-10-15 by the history walk of Couzo's watched publications
+        same exact side, an earlier report. That report is recorded as a row of
+        couzo-index-2026-10-15 by the history walk of Couzo's watched publications
         (upper-bounds-couzo-history-20261022); this restatement is not recorded.
       queued: false
     - key: n745
@@ -17798,8 +17798,8 @@ issues:
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at the
-        same exact side, an earlier report. Since 22 October 2026 that report is recorded as a row
-        of couzo-index-2026-10-15 by the history walk of Couzo's watched publications
+        same exact side, an earlier report. That report is recorded as a row of
+        couzo-index-2026-10-15 by the history walk of Couzo's watched publications
         (upper-bounds-couzo-history-20261022); this restatement is not recorded.
       queued: false
     - key: n747
@@ -17907,8 +17907,8 @@ issues:
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at the
-        same exact side, an earlier report. Since 22 October 2026 that report is recorded as a row
-        of couzo-index-2026-10-15 by the history walk of Couzo's watched publications
+        same exact side, an earlier report. That report is recorded as a row of
+        couzo-index-2026-10-15 by the history walk of Couzo's watched publications
         (upper-bounds-couzo-history-20261022); this restatement is not recorded.
       queued: false
     - key: n797
@@ -17946,8 +17946,8 @@ issues:
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at the
-        same exact side, an earlier report. Since 22 October 2026 that report is recorded as a row
-        of couzo-index-2026-10-15 by the history walk of Couzo's watched publications
+        same exact side, an earlier report. That report is recorded as a row of
+        couzo-index-2026-10-15 by the history walk of Couzo's watched publications
         (upper-bounds-couzo-history-20261022); this restatement is not recorded.
       queued: false
     - key: n801
@@ -18075,8 +18075,8 @@ issues:
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at the
-        same exact side, an earlier report. Since 22 October 2026 that report is recorded as a row
-        of couzo-index-2026-10-15 by the history walk of Couzo's watched publications
+        same exact side, an earlier report. That report is recorded as a row of
+        couzo-index-2026-10-15 by the history walk of Couzo's watched publications
         (upper-bounds-couzo-history-20261022); this restatement is not recorded.
       queued: false
     - key: n854
@@ -18154,8 +18154,8 @@ issues:
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at the
-        same exact side, an earlier report. Since 22 October 2026 that report is recorded as a row
-        of couzo-index-2026-10-15 by the history walk of Couzo's watched publications
+        same exact side, an earlier report. That report is recorded as a row of
+        couzo-index-2026-10-15 by the history walk of Couzo's watched publications
         (upper-bounds-couzo-history-20261022); this restatement is not recorded.
       queued: false
     - key: n863
@@ -18293,8 +18293,8 @@ issues:
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at the
-        same exact side, an earlier report. Since 22 October 2026 that report is recorded as a row
-        of couzo-index-2026-10-15 by the history walk of Couzo's watched publications
+        same exact side, an earlier report. That report is recorded as a row of
+        couzo-index-2026-10-15 by the history walk of Couzo's watched publications
         (upper-bounds-couzo-history-20261022); this restatement is not recorded.
       queued: false
     - key: n915
@@ -18452,8 +18452,8 @@ issues:
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at the
-        same exact side, an earlier report. Since 22 October 2026 that report is recorded as a row
-        of couzo-index-2026-10-15 by the history walk of Couzo's watched publications
+        same exact side, an earlier report. That report is recorded as a row of
+        couzo-index-2026-10-15 by the history walk of Couzo's watched publications
         (upper-bounds-couzo-history-20261022); this restatement is not recorded.
       queued: false
     - key: n977
@@ -18510,8 +18510,8 @@ issues:
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at the
-        same exact side, an earlier report. Since 22 October 2026 that report is recorded as a row
-        of couzo-index-2026-10-15 by the history walk of Couzo's watched publications
+        same exact side, an earlier report. That report is recorded as a row of
+        couzo-index-2026-10-15 by the history walk of Couzo's watched publications
         (upper-bounds-couzo-history-20261022); this restatement is not recorded.
       queued: false
     - key: n987
@@ -18529,8 +18529,8 @@ issues:
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus: the certificate first published at 4e4c8ce on 2026-10-15, at the
-        same exact side, an earlier report. Since 22 October 2026 that report is recorded as a row
-        of couzo-index-2026-10-15 by the history walk of Couzo's watched publications
+        same exact side, an earlier report. That report is recorded as a row of
+        couzo-index-2026-10-15 by the history walk of Couzo's watched publications
         (upper-bounds-couzo-history-20261022); this restatement is not recorded.
       queued: false
     - key: n989

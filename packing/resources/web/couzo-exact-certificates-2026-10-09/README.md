@@ -126,7 +126,7 @@ import:
 
 ## The History Walk’s Rows
 
-Since 22 October 2026, 12 of the certificates above are rows of their own, as the source `couzo-02f9690-2026-10-09`: a publication in a watched repository is a report from its first commit (the owner, 14 October 2026), and the [history walk of Couzo’s watched publications](../../../campaign/issue-intake/upper-bounds-couzo-history-20261022/README.md) records them in report order (think-a4wq).
+Twelve of the certificates above are rows of their own, as the source `couzo-02f9690-2026-10-09`: a publication in a watched repository is a report from its first commit (the owner, 14 October 2026), and the [history walk of Couzo’s watched publications](../../../campaign/issue-intake/upper-bounds-couzo-history-20261022/README.md) records them in report order (think-a4wq).
 
 [`devtools.beyond_horizon_replay`](../../../devtools/beyond_horizon_replay.py) declares this publication a release with no issue, `franciscouzo/square-packing@02f9690`, and reads the rows the history walk records from [acquisition/watched-release.json](acquisition/watched-release.json), which `declare-rows` writes from the walk.
 
