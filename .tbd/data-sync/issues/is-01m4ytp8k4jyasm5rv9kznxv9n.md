@@ -5,13 +5,13 @@ title: Beyond-horizon rows above Göbel's classical constructions
 kind: task
 status: open
 priority: 2
-version: 4
+version: 5
 labels:
   - result-import
 dependencies: []
 parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 created_at: 2026-10-15T03:46:28.067Z
-updated_at: 2026-10-22T13:13:10.971Z
+updated_at: 2026-10-23T00:44:57.806Z
 ---
 **Owner question:** do Frits Göbel's classical constructions count as earlier reports, and so as the baseline beyond n = 324, so that a beyond-horizon row above one is not recorded? The record holds no Göbel construction beyond the corpus; its standing side there is the beyond-horizon row or the grid. Until the owner answers, draft register plans mark the affected rows `undecided-goebel` rather than recorded.
 
@@ -58,3 +58,14 @@ records PR would hold 101 of them for #613:
 Göbel's side at 375 (the 8 October, `2d32a6e`, 11 and 12 October rows) and at 376 (8, 11,
 12 and 13 October). Should held history rows above Göbel be recorded likewise, or should
 those rows be marked?
+
+2026-10-23 (c-lane-couzo-residue-1022, review A of #730, A1 and A2): two additions to #613's question.
+
+**23aff0c's 61 classical constructions now wait on #613 too.** The #730 history walk holds 23aff0c's 46 D2 constructions and 15 proposed-D6 deletion bounds (think-f2io). All 61 are classical constructions that `upper_bounds.json` states with no certificate file:
+- Göbel's squares: 27.
+- Friedman's off-centre family: 19. 41 of the 46 constructions are L-border extensions, and 368, 543, 626, 752 and 849 are bare Friedman.
+- 15 deletions of one or two squares from Friedman's constructions.
+
+Whether a classical construction counts as an earlier report is #613's question, so `HISTORY_HELD` names think-8krd beside think-f2io on both holds. A "yes" to D2 or D6 alone would credit the 23aff0c commit with Göbel's and Friedman's constructions, with no certificate file to replay.
+
+**An answer that leaves a hold out reruns the walk.** 66 history verdicts rest only on Göbel holds (`HISTORY_RESTING`). A rerun without the Göbel holds would record each of those steps, but every one of them is itself above Göbel's construction, so this decision holds it again (`refusal_flips`). If 23aff0c's classical constructions are left out under #613, the D2/D6 consequences recorded on think-f2io apply: 56 new records, which need a rerun of the history walk and new rows.

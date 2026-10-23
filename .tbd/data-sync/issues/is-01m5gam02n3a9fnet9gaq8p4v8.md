@@ -5,7 +5,7 @@ title: "Owner decisions for #715 (and #666): counts above 1024, recipe-only rows
 kind: task
 status: in_progress
 priority: 1
-version: 5
+version: 6
 delegate: coord-intake-1021b
 labels:
   - result-import
@@ -14,7 +14,7 @@ dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-10-21T22:51:56.373Z
-updated_at: 2026-10-23T00:36:27.033Z
+updated_at: 2026-10-23T00:44:57.065Z
 started_at: 2026-10-21T22:51:57.158Z
 ---
 From the read-only triage of #715 (c-triage-715; full text: policy.md in the coordinator scratchpad triage-715/). No rule sets a ceiling above the n <= 324 horizon or mentions 1024, but the record holds nothing above 998, and #666's eight counts above 1024 wait on the same question.
@@ -73,3 +73,29 @@ certificates at `Mishapolk/square-packing-records@814fbe9`.
 - D4 premise for #732: the triage priced "about 1.6 GB of derived facts, since there is no licence". At 17cc220 (2026-10-22T20:15:36Z) Mishapolk added an MIT LICENSE, and his #719 comment 6350348588 says it covers every certificate, catalogue, manifest and tool. If A, the 5,078 certificates above 1024 (5.21 GB at 814fbe9) can be hosted as the files themselves in a data release (OR-18), not as derived facts.
 - D5 evidence: the same comment says the 69 rows of #719 below the preceding report by less than 1e-9 are "precision continuous Newton/SQP quenches of the predecessor reported topologies", i.e. refinements of the reports before them, and that 447 is a new arrangement. No per-row parent list yet.
 - #732's requests entry (claude/intake-bookkeeping-2026-10-23) queues its ask to cap tracking at N = 10,000 on this bead, with D1.
+
+2026-10-23 (c-lane-couzo-residue-1022, review A of #730, A1 and A2): corrections to D2 and proposed D6, and what an answer that leaves holds out reopens.
+
+**D2 and D6 describe 23aff0c's 61 holds wrongly.** The #730 history walk holds them, and `upper_bounds.json` at 23aff0c (pinned by digest in the couzo-issue670-2026-10-17 packet) states each one's construction. All 61 are classical constructions, not L-border/tiling recipes or deletions from a certificate:
+- The 46 D2 holds are Göbel's squares (27, credited "Frits Göbel; family formulas generalized by David Ellsworth") and Friedman's off-centre family (19, citing this repository's `packing/cases/gobel_offcentre/packing.py`). 41 of the 46 are L-border extensions; 368, 543, 626, 752 and 849 are bare Friedman constructions.
+- The 15 proposed-D6 holds (367, 406, 447, 541, 542, 588, 589, 638, 751, 847, 848, 906, 907, 967, 968) each delete one or two squares from Friedman's constructions at 368, 407, 448, 543, 590, 639, 752, 849, 908 and 969, not from a certificate.
+
+So these 61 also wait on #613 (think-8krd): does a classical construction count as an earlier report? `beyond_horizon_replay.HISTORY_HELD` now names think-8krd beside think-f2io on both holds (`Held.also`) and says what each is (`Held.note`). `HELD_CLASSES` now reads:
+- recipe: "a construction an index or table states with no certificate file of its own: an L-border, tiling or composite bound, or a classical construction (Göbel's squares, Friedman's off-centre family) or an L-border extension of one";
+- consequence: "an index bound that deletes squares from a larger count's certificate or from a construction the index states".
+
+The other D2/D6 holds fit as written:
+- 4e4c8ce's 39 deletion bounds each delete from a 4e4c8ce certificate; for example, 743 deletes from best/n744.cert.
+- bef5c42's 17 are composites.
+- 487b058's 327 is an L-border extension.
+
+**What an answer reopens (A2).** 131 history verdicts (126 not recorded, 5 undecided) and 2 of #719's were decided only against held publications. `beyond_horizon_replay` declares them (`HISTORY_RESTING`, `Resting`), and `check` holds them to the ledger (`resting_problems`). An answer that leaves a hold out of the record takes it out of the walk, so the walk is run again. `held-dependents` / `refusal_flips` reruns it by intake_ledger's rule from the frozen starts:
+- **If D6 leaves deletion bounds out:** 9 of 5a299b4's certificates become records, at 406, 447, 588, 589, 638, 906, 907, 967 and 968. They are below everything else standing, and none has a row or a hold. (447 is also #719's walk.)
+- **If D2 leaves recipes out:** 47 more become records:
+  - 5a299b4 at 37 counts (407, 448, 457, 491, 533, 534, 580, 581, 590, 629, 630, 639, 677, 680, 681, 690, 730, 733, 734, 741, 785, 788, 789, 796, 842, 845, 846, 901, 904, 905, 908, 962, 965, 966, 969, 981, 982);
+  - 5f3bdbf at 757, 813 and 871;
+  - 487b058 at 812 and 930;
+  - 43ac7d2's five undecideds at 812, 930, 931, 992 and 993.
+- **Göbel and sub-print holds:** every step a rerun would record is above Göbel or a re-certification, so the same decision holds it again.
+
+Either D2 or D6 answered "no rows" therefore means rerunning the history walk and writing those rows (with their replay), not only dropping the holds.
