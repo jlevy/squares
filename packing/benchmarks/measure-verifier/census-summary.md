@@ -52,6 +52,7 @@ the platform supplies no direction CPU.
 | `mixed_n30_L58835` | M | 30 | 11767/2000 | VERIFIED | 3890.8 | 3890.6 | 1.0000000000570795 | none | yes |
 | `rect_n30_L5865` | T | 30 | 1173/200 | VERIFIED | 98.3 | unavailable | 1.000100002112256 | complete | no |
 | `rect_n30_L5875` | T | 30 | 47/8 | VERIFIED | 252.4 | 252.2 | 1.0001000004862441 | complete | no |
+| `mixed_n31_L59775` | M | 31 | 2391/400 | VERIFIED | 14607.6 | 14607.3 | 1.000000000022577 | none | yes |
 | `rect_n31_L592` | T | 31 | 148/25 | VERIFIED | 50.7 | unavailable | 1.0001000019260526 | complete | no |
 | `rect_n31_L5935` | T | 31 | 1187/200 | VERIFIED | 113.1 | 113.0 | 1.000100001602695 | none | yes |
 | `rect_n31_L59525` | T | 31 | 2381/400 | VERIFIED | 167.4 | 167.3 | 1.0001000003283942 | complete | no |
@@ -238,7 +239,7 @@ the platform supplies no direction CPU.
 | `mixed_n101_L1028` | L | 101 | 257/25 | VERIFIED | 128.4 | 128.0 | 1.000000000300333 | complete | no |
 | `mixed_n108_L1062` | M | 108 | 531/50 | VERIFIED | 2086.8 | 2086.5 | 1.0000000001765084 | none | yes |
 
-219 of 219 certificates verified; 133 of them are the first complete check of their
+220 of 220 certificates verified; 134 of them are the first complete check of their
 certificate in this repository.
 
 <!-- This document follows common-doc-guidelines.md.
