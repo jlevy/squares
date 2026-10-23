@@ -5244,3 +5244,155 @@ verifiers:
       Written and run on 23 October 2026 by the stage 4 review of T-233; kept in the
       release packet's review/review-2026-10-23/ with its README, which records each
       program's SHA-256 as it ran, and receipts.
+
+  - id: V-review-1023-n31-premises
+    program: premises.py and net.py, with n31_exact.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: premises
+    summary: >-
+      Recomputes, apart from the crate, the source and the tools, every exact premise of
+      mixed_n31_L59775 (identity, claim, the 536 rows inside the container with positive
+      masses summing exactly to 3099999/100000, the merged D4 expansion's 4,244 rows, its
+      exact integral and invariance under all eight symmetries, lemma N0's (a) to (e),
+      the last bin, the per-bin domains), and re-derives the reduction from a packing to
+      the capture condition node by node: the core strictly inside at both ends of all
+      2,073 bins with exact z, the monotonicity of r at every a_j, and the quadrant's four
+      quarter-turn images tiling every node's domain.
+    source:
+      - packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/programs/n31_exact.py
+      - packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/programs/premises.py
+      - packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/programs/net.py
+    independence_record: docs/project/reviews/review-2026-10-23-wand125-n31-fine-net.md
+    independence:
+      read: [mathematics, specification, certificate-format, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of think-wop1 (think-oc25),
+            tbd-strong-max tier, maximum reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The source's commit names Claude as co-author. Written by a Claude agent
+          prompted separately from the source and from the records lane, in files of
+          its own that import nothing of the source, the crate or devtools.
+      note: >-
+        Written from the source's SPEC.md (sections 2 to 4) and the mathematics, before
+        its authors read any of the producer's code: the source's adapted crate was
+        pinned and never opened, and this repository's sqverify_fast source,
+        SOUNDNESS.md and devtools were not read. The declared-net soundness review and
+        its fix check (6 October) and the n68 and n84/n85 reviews (19 October) were read
+        first; they describe the crate in words, not code.
+    note: >-
+      Written and run on 23 October 2026 by the stage 4 review of T-232; kept in the n31
+      packet's review/review-2026-10-23/ with its README and outputs, whose
+      program-digests.sha256 records each program's SHA-256 as it ran.
+
+  - id: V-review-1023-n31-capture
+    program: capture.py, with n31_geometry.py, n31_exact.py and n31_brute.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      Decides the capture condition of a format M measure on a declared net at the
+      directions it is given, over the whole quadrant [L/2, L - r(a_j)]^2 of centres:
+      a branch and bound on the kernel-and-slab cell bound (exact to first order in the
+      cell's size), chosen by a float64 pass and decided leaf by leaf in exact integers
+      (densities rounded down to 2^-64, the domain's upper end rounded up), with the
+      leaves checked to partition the quadrant. Refuses with an exact witness, by
+      Sutherland-Hodgman clipping in Fractions, when the measure fails. Ran at the
+      review's stratified sample of 122 directions of mixed_n31_L59775 and on
+      its mutants.
+    source:
+      - packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/programs/capture.py
+      - packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/programs/n31_geometry.py
+      - packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/programs/n31_exact.py
+      - packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/programs/n31_brute.py
+      - packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/programs/geometry_selftest.py
+      - packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/programs/sample_plan.py
+      - packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/programs/bound_selftest.py
+      - packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/programs/run_after_sample.sh
+    independence_record: docs/project/reviews/review-2026-10-23-wand125-n31-fine-net.md
+    independence:
+      read: [mathematics, specification, certificate-format, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of think-wop1 (think-oc25),
+            tbd-strong-max tier, maximum reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The source's commit names Claude as co-author. Written by a Claude agent
+          prompted separately from the source and from the records lane, in files of
+          its own that import nothing of the source, the crate or devtools.
+      note: >-
+        Clean-room with respect to the producer's checker (this repository's crate
+        adapted) and to the source's other code: written from the mathematics and the
+        certificate format before its authors read any of it; the source's logs were
+        read to choose named directions and to compare, never to decide. Its method
+        (the slab bound, the sixteen-term integer area) is its own and differs from the
+        crate's interval bound, so its node counts differ from the source's.
+    note: >-
+      Written and run on 23 October 2026 by the stage 4 review of T-232; kept in the n31
+      packet's review/review-2026-10-23/ with its README and outputs, whose
+      program-digests.sha256 records each program's SHA-256 as it ran.
+
+  - id: V-review-1023-n31-poses
+    program: source_log_points.py, with n31_brute.py and n31_exact.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      Decides the exact capture at single poses the source's logs name: the axis row's
+      argmin, two points of each of the twelve tightest rows' least-bound boxes, and
+      every control witness of the 197/200 mutant, against the logged bounds and exact
+      rationals. Decides those poses only, and no coverage.
+    source:
+      - packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/programs/source_log_points.py
+      - packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/programs/n31_brute.py
+      - packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/programs/n31_exact.py
+    independence_record: docs/project/reviews/review-2026-10-23-wand125-n31-fine-net.md
+    independence:
+      read: [mathematics, specification, certificate-format, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of think-wop1 (think-oc25),
+            tbd-strong-max tier, maximum reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The source's commit names Claude as co-author. Written by a Claude agent
+          prompted separately from the source and from the records lane, in files of
+          its own that import nothing of the source, the crate or devtools.
+      note: >-
+        As V-review-1023-n31-capture: written from the mathematics and the format; the
+        source's logs name the poses it evaluates and are compared, never used to
+        decide.
+    note: >-
+      Written and run on 23 October 2026 by the stage 4 review of T-232; kept in the n31
+      packet's review/review-2026-10-23/ with its README and outputs, whose
+      program-digests.sha256 records each program's SHA-256 as it ran.

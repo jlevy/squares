@@ -32011,62 +32011,72 @@ results:
     registered: '2026-10-23'
     landed: '2026-10-23'
     headline: >-
-      Mixed rectangle-measure lower bound `s(31) ≥ 2391/400` reported, on a
+      Mixed rectangle-measure lower bound `s(31) ≥ 2391/400` verified, on a
       2,073-direction declared net
     claim: >-
       A rectangle measure of wand125/square-packing, published on 11 October 2026 and
-      reported on no issue, is reported to prove s(31) >= 2391/400 = 5.9775.
+      reported on no issue, proves s(31) >= 2391/400 = 5.9775.
 
       The certificate, mixed_n31_L59775, is a density of 536 uniform rectangles in D4
-      orbits, and no point mass, of total mass 3099999/100000, on a net its candidate
-      declares: core side 4999/5000 and 2,073 half-angle tangents of step 1/5002, the
-      net of T-132, T-142 and T-143. Since 4999/5000 (1 + 1/5002) = 25009997/25010000
-      < 1, and the last tangent 1036/2501 is past tan(pi/8), every unit square
-      contains a concentric core at a net angle strictly in its interior.
+      orbits, 4,244 distinct rectangles after expansion, and no point mass, of total mass
+      3099999/100000 < 31, on a net its candidate declares: core side 4999/5000 and 2,073
+      half-angle tangents of step 1/5002, the net of T-132, T-142 and T-143. Since
+      4999/5000 (1 + 1/5002) = 25009997/25010000 < 1, and the last tangent 1036/2501 is
+      past tan(pi/8), every unit square contains a concentric core at a net angle strictly
+      in its interior.
 
-      The source reports every such core capturing mass at least one at all 2,073
-      directions, by sqverify-proof-net, its copy of this repository's sqverify_fast
-      changed to read the declared net, in two complete runs, and a control with every
-      mass scaled by 197/200 refused at 32 sampled directions.
+      The retained maintained sqverify-fast capture verifies all 2,073 directions at
+      threshold one, every core centred in its per-bin domain capturing mass at least one,
+      with the source's node total. Its whole-net controls record 2,073 coverage refusals
+      of the 99/100 mutant and no verified mutant direction, and the near-threshold mutant
+      is refused. The mathematical review accepts the argument and the exact premises, and
+      decided the capture again at 122 of the 2,073 directions with a clean-room exact
+      checker of its own, all verified: sampled, 122 of 2,073 net directions,
+      independently re-implemented.
 
-      The value is above 2381/400 = 5.9525, the reported (T-068) and verified (T-074)
-      lower bound at n = 31, by 1/40, and above the 597/100 that jlevy/squares#446
-      reported on 8 October, never adopted, by 3/400.
-
-      Here the maintained readers accepted its exact mass, declared-net and check2
-      premises from the retained release asset, and sqverify-fast, this repository's
-      measure verifier, verified it at eight sampled directions with the source's node
-      counts and least certified bounds: a diagnostic, not a replay. No complete replay
-      has run here, so the value stands as reported.
+      This raises the verified and reported lower lanes at n = 31 from 2381/400 (T-068,
+      T-074) to 2391/400, by 1/40, above the 597/100 that jlevy/squares#446 reported on 8
+      October and never adopted, by 3/400. The bound is confirmed by a re-implementation
+      sharing components with the producer's checker, sqverify-proof-net, which is
+      Hosono's adaptation of this repository's sqverify_fast crate: the two share the
+      crate apart from their declared-net readers. No independent full implementation,
+      second method, proof-assistant check or optimality theorem is claimed.
 
       Hiroaki Hosono after Tokoharu and Levy,
       [square-packing](https://github.com/wand125/square-packing/tree/23e31862345c532d17ad2c896677a3a8d8821aa4/problems/square-lower-bounds/certificates/mixed_n31_L59775).
       The source says parts of the work were produced with AI assistance under human
       direction.
     scope: {n_values: [31]}
-    verification: V0
-    confirmation: C0
+    verification: V3
+    confirmation: C3
     significance:
       score: 3
       rationale: >-
-        Scored as a claim: if a complete replay passes, it is the strongest lower
-        bound on record at n = 31, 1/40 above the standing lanes, by the certificate
-        kind and declared net of T-132, T-142 and T-143, with no new technique, at S3
-        as T-142, T-143 and T-200 are.
+        Scored as a claim: the strongest lower bound on record at n = 31, 1/40 above the
+        prior lanes, and it more than halves the gap to the upper bound 6 (from 19/400 to
+        9/400), by the certificate kind and declared net of T-132, T-142 and T-143, with
+        no new technique, at S3 as T-142, T-143 and T-200 are. Not S4: no reusable
+        technique, bound family or resolved disputed value. Not S5: n = 31 is not a
+        central open case.
       scored: '2026-10-23'
       by: >-
-        the registering lane of the 23 October intake pass (think-wop1; draft); the
-        stage 4 review confirms or changes it
+        docs/project/reviews/review-2026-10-23-wand125-n31-fine-net.md (repository;
+        confirms the registering lane's draft)
     novelty: previously-published
     attribution:
       source_keys: ['[wand125 fine-net n31 2026-10-11]']
       published: '2026-10-11'
     composition: >-
-      One reported certificate on its reported entry. The source's check is a copy of
-      this repository's sqverify_fast crate with one change, so a sqverify-fast replay
-      here would be re-implemented sharing the producer's components, as T-104's is,
-      and no second implementation stands beside it.
-    evidence: [E-wand125-fine-net-n31-59775-report]
+      One source certificate and one complete maintained native replay, C3. The replay
+      shares components with the producer's checker, Hosono's adaptation of this
+      repository's sqverify_fast crate, apart from the declared-net readers. Beside it
+      stands a sample, not a second implementation of the whole: 122 of the 2,073
+      directions decided by the review's clean-room exact checker
+      (E-wand125-fine-net-n31-59775-review-sample, cited by the case record), which sets
+      no rung.
+    evidence:
+      - E-wand125-fine-net-n31-59775-report
+      - E-wand125-fine-net-n31-59775-sqverify-fast-replay
     artifacts:
       - packing/resources/web/wand125-fine-net-n31-2026-10-11/README.md
       - packing/resources/web/wand125-fine-net-n31-2026-10-11/acquisition/sources.json
@@ -32077,44 +32087,55 @@ results:
         packing/resources/web/wand125-fine-net-n31-2026-10-11/release/certificates/mixed_n31_L59775/check2/receipt.json
       - packing/resources/web/wand125-fine-net-n31-2026-10-11/receipts/premises-n31.json
       - packing/resources/web/wand125-fine-net-n31-2026-10-11/receipts/sample-diagnostic-n31.json
+      - packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/README.md
+      - docs/project/reviews/review-2026-10-23-wand125-n31-fine-net.md
+      - packing/benchmarks/measure-verifier/census-mixed/census.json
+      - >-
+        packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-n31-2026-10-11/mixed_n31_L59775.jsonl.gz
       - packing/devtools/fine_net_followup.py
     next_rung: >-
-      C3 needs a complete sqverify-fast census at all 2,073 directions of the retained
-      candidate, with its whole-net control receipt (the 99/100 mutant at every
-      direction, FC-1) and a review that reads this certificate, by the checklist of
-      the 6 October declared-net soundness review. The census runs in think-wop1,
-      priced at about 8.3 to 12.0 CPU-hours from an eight-direction sample here and the
-      source's receipt.
-    unfinished_confirmations:
-      - what: >-
-          a complete sqverify-fast census at all 2,073 directions of the retained
-          candidate, with its whole-net control receipt (the 99/100 mutant at
-          every direction, FC-1) and a review that reads this certificate, by the
-          checklist of the 6 October declared-net soundness review
-        rung: C3
-        link: think-wop1
-        estimated_cost:
-          cpu_hours: 8.29
-          cpu_hours_high: 12.01
-          basis: >-
-            The eight-direction sqverify-fast sample of 23 October (directions 0, 296,
-            ..., 2072; 53.24 CPU-s here against the source's 77.24, ratio 0.689)
-            applied to the source's 21,625 direction CPU-s over the net: a complete
-            capture 14,907 CPU-s and the whole-net controls 14,926
-            (packing/resources/web/wand125-fine-net-n31-2026-10-11/receipts/sample-diagnostic-n31.json
-            and release/certificates/mixed_n31_L59775/check2/receipt.json); the upper
-            end is the source's own CPU, twice over the net.
-          priced: '2026-10-23'
+      None for the bound. V4 and C4 need a second qualifying adversarial AI review by a
+      distinct reviewer and an explicit human oversight record; one AI review, of 23
+      October, is retained. An independent full implementation would add implementation
+      diversity; the review's sample of 122 directions does not supply it.
     notes: >-
-      V0 because the cited entry is the source's public claim: assurance reported,
-      replay not attempted. C0 because no review has read this certificate yet. The
-      case records' lanes are unchanged, so the entry is pending adoption at n = 31
-      while T-068 and T-074 hold its lanes; the issue-446 report of 597/100 stays where
-      it is. The pre-publication receipt is a second complete run of the same source on
-      a fresh machine (7,277 s), not the run the check2 receipt embeds, so two complete
-      author runs are reported. The release asset's data members are retained in Git
-      under OR-18; the adapted verifier archive inside it is pinned by digest and not
-      opened.
+      From the complete maintained capture of 23 October (two threads, 14,607.6 CPU
+      seconds), its whole-net control receipt and the mapped mathematical review. The case
+      records' lower lanes move to 2391/400; T-068 and T-074 keep their claims at n = 31,
+      now superseded there, and the issue-446 report of 597/100 stays where it is. The
+      pre-publication receipt is a second complete run of the same source on a fresh
+      machine (7,277 s), not the run the check2 receipt embeds. The release asset's data
+      members are retained in Git under OR-18; the adapted verifier archive inside it is
+      pinned by digest and not opened.
+    reviews:
+      - path: docs/project/reviews/review-2026-10-23-wand125-n31-fine-net.md
+        kind: adversarial
+        reviewer: >-
+          Claude (Anthropic), the tbd-strong-max sub-agent at maximum reasoning, the
+          stage 4 mathematical review lane of think-wop1 (think-oc25), prompted
+          separately from the records lane that retained and registered the entry and
+          sharing none of its context beyond the brief and the committed record, running
+          only programs of its own at one process, and barred from the source's adapted
+          crate and this repository's sqverify_fast source
+        reviewer_kind: ai
+        relation: project
+        date: '2026-10-23'
+        scope: >-
+          wand125's mixed_n31_L59775 at 23e3186 and its release asset: the argument
+          from certificate to bound re-derived (the D4 fold, lemma N0 on the 1/5002
+          net, the per-bin domains, the quarter-turn quadrant, the count); every exact
+          premise; the declared net node by node; the capture at a stratified sample of
+          122 of the 2,073 directions by a clean-room exact checker of its own, with
+          its mutants refused; the source's run and control logs at single poses;
+          custody against the upstream commit and release asset; the entry, its
+          evidence entry and n-031.md on the records branch at 7b90d47d2; and the
+          drafted significance
+        verdict: accepted
+        covers: [T-232]
+    controls:
+      - >-
+        packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-n31-2026-10-11/mixed_n31_L59775.control.json
+      - packing/tests/test_sqverify_fast_census.py
   - id: T-233
     kind: lower-bound
     registered: '2026-10-23'

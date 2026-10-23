@@ -3564,9 +3564,9 @@ sources:
   notes: The reported 2391/400 at n31 is above both lower lanes' 2381/400 (T-068, T-074) and the
     issue-446 report of 597/100, which are unchanged. Complete release-asset and document custody and
     the exact mass, declared-net and check2 premises are accepted, and the asset's data members are
-    retained for the census. An eight-direction maintained sample is diagnostic, and the author's full
-    positives and 32-direction controls do not supply a maintained capture or whole-net controls. T-232
-    registers it; replay and adoption remain under think-wop1.
+    retained for the census. T-232 registers it; the complete maintained capture, its whole-net
+    controls and the mathematical review of 23 October 2026 confirm it, and n31's lower lanes adopt
+    2391/400.
 - id: wand125-linear-n122-1126-2026-10-10
   title: Linear point, segment and rectangle certificate for n = 122, no issue
   role: source-repository

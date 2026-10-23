@@ -981,8 +981,8 @@ The [packet](web/wand125-fine-net-n31-2026-10-11/README.md) retains the director
 documents at revision `23e3186` and, under OR-18, the release asset’s candidate,
 receipts and logs, with the maintained premise check and a diagnostic eight-direction
 sample; the nested verifier archive is pinned by digest.
-T-232 records the bound; a complete replay, whole-net controls and a review remain
-pending under think-wop1.
+T-232 records the bound at V3/C3 after the complete maintained replay, its whole-net
+controls and the mathematical review of 23 October, and n31’s lower lanes hold it.
 
 **[wand125 fine-net n37 n39 n44 2026-10-13]**: Hosono’s n37, n39 and n44 certificates,
 `mixed_n37_L64975`, `mixed_n39_L66625` and `mixed_n44_L69975`, report

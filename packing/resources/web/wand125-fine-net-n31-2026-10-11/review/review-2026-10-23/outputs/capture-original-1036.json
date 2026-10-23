@@ -1,0 +1,63 @@
+{
+ "j": 1036,
+ "C": 5986677,
+ "S": 2591036,
+ "E": 6523325,
+ "t_j": "518/2501",
+ "a_j": "2071/10004",
+ "r_a_j": "137227543/208738114",
+ "domain_quadrant_exact": [
+  "2391/800",
+  "222100906687/41747622800"
+ ],
+ "domain_quadrant_decided": [
+  "2391/800",
+  "17432854908135310640969/3276800000000000000000"
+ ],
+ "mass_scale": "1",
+ "float_nodes": 16539,
+ "float_leaves": 8270,
+ "float_status": "complete",
+ "float_least_accepted_bound": 1.0000011426928979,
+ "float_failures": 0,
+ "cpu_setup": 0.069,
+ "cpu_float": 4.229,
+ "exact_leaves": 8270,
+ "exact_retried_leaves": 0,
+ "exact_least_bound": "80541420510558722109533437533893681007814532693920164936564204227614331255947517/80541328476552057784050236223916260078190067712000000000000000000000000000000000",
+ "exact_least_bound_float": 1.0000011426929305,
+ "exact_least_leaf": [
+  511,
+  9,
+  83,
+  9
+ ],
+ "partition_holds": true,
+ "cpu_partition": 0.004,
+ "cpu_exact": 7.712,
+ "verdict": "VERIFIED",
+ "least_leaf_centre": [
+  "17843604107022422785711287/3355443200000000000000000",
+  "11304347121658596877041823/3355443200000000000000000"
+ ],
+ "least_leaf_centre_capture_float": 1.007681773325932,
+ "least_leaf_centre_capture_at_least_bound": true,
+ "least_capture_found_centre": [
+  "47150136170392621100332449/13421772800000000000000000",
+  "58013247657761032831790367/13421772800000000000000000"
+ ],
+ "least_capture_found_float": 1.001012266726459,
+ "least_capture_found_float_pass": 1.0010122667265973,
+ "least_capture_found_at_least_one": true,
+ "cpu_total": 12.132,
+ "kind": "review-2026-10-23-n31-capture/v1",
+ "candidate_sha256": "4a7df269037a6449ba2d4bee2b6a76962df097c1515025545d4ca4cfcc39be3b",
+ "dropped_row": null,
+ "programs_sha256": {
+  "n31_brute.py": "9d836e14c22f996b2e13805e53b9041a89d694047aa99e1a3a79a41a070d70ae",
+  "n31_exact.py": "ddb9655ed8cd95a74dc5c32b51844ce2f91671f631d88fc16efdbfa01b1c11dc",
+  "n31_geometry.py": "c30893c2ad0389d910533f2f1a345aeec9c64897ba5a917ddedfc2448b628b8e",
+  "capture.py": "783429185f890015440b3d937ad79a0ad353da1e4d9912e3e764aad648798ce9"
+ },
+ "max_rss_kb": 158876
+}

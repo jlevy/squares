@@ -1,0 +1,44 @@
+scaled-99-100 0 REFUTED float 489 88 exact None None cpu 0.216
+scaled-99-100 1 REFUTED float 491 89 exact None None cpu 0.283
+scaled-99-100 676 REFUTED float 503 52 exact None None cpu 0.34
+scaled-99-100 1036 REFUTED float 503 42 exact None None cpu 0.439
+scaled-99-100 2072 REFUTED float 501 27 exact None None cpu 0.344
+
+real	0m2.783s
+user	0m1.667s
+sys	0m0.272s
+drop-row-33 1 REFUTED float 497 65 exact None None cpu 0.249
+drop-row-33 1036 REFUTED float 511 35 exact None None cpu 0.367
+drop-row-33 2072 REFUTED float 507 19 exact None None cpu 0.282
+
+real	0m1.635s
+user	0m0.918s
+sys	0m0.267s
+sharp control at direction 1841, scale 499891977421/500000000000
+sharp 1841 REFUTED float 21337 10478 exact None None cpu 7.266
+
+real	0m9.489s
+user	0m4.972s
+sys	0m2.540s
+CONSISTENT axis 1.001298750503704 tightest 12 control witnesses 31 cpu 3.146 s
+
+real	0m3.960s
+user	0m3.181s
+sys	0m0.012s
+PASS 24 cells least gap 6.796443483983797e-22 cpu 10.353 s
+
+real	0m13.376s
+user	0m10.542s
+sys	0m0.047s
+planned 122 decided 122 verified 122 not verified [] missing []
+cpu sample 1909.7 s, controls 9.8 s; nodes 2842868 here against 46696377 at the source
+control capture-drop-row-33-0001.json REFUTED 0.6628629122502617
+control capture-drop-row-33-1036.json REFUTED 0.7792201236515192
+control capture-drop-row-33-2072.json REFUTED 0.7433255182137848
+control capture-scaled-99-100-0000.json REFUTED 0.9948577872526713
+control capture-scaled-99-100-0001.json REFUTED 0.9948749699451019
+control capture-scaled-99-100-0676.json REFUTED 0.998225597309189
+control capture-scaled-99-100-1036.json REFUTED 0.9948268309708354
+control capture-scaled-99-100-2072.json REFUTED 0.9934155212093154
+control capture-sharp-1841.json REFUTED 0.9999947478910264
+sha256sum: programs/__pycache__: Is a directory

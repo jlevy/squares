@@ -126,8 +126,30 @@ direction, and the original and the near-threshold mutant at the least-bound dir
 The host’s load average was 1.5 to 1.9 on four cores during the sample.
 The tracker’s earlier estimate of about 2 CPU-hours read the pre-publication run’s 7,277
 seconds of wall as CPU; the check2 receipt’s direction CPU is the price.
-The census reads the candidate from `release/`, and its receipts are to be kept under
-`benchmarks/measure-verifier/census-mixed/wand125-fine-net-n31-2026-10-11/`.
+
+## The Complete Replay and the Review, 23 October
+
+The census read the candidate from `release/` and keeps its receipts under
+[`benchmarks/measure-verifier/census-mixed/wand125-fine-net-n31-2026-10-11/`](../../../benchmarks/measure-verifier/census-mixed/wand125-fine-net-n31-2026-10-11/README.md).
+The capture verified all 2,073 directions with 787,004,724 nodes, the source’s total, in
+14,607.6 CPU-seconds at two threads, on price. The whole-net controls are
+`CONTROLS_REFUSED`: the 99/100 mutant was refused at every direction.
+
+The
+[mathematical review of 23 October](../../../../docs/project/reviews/review-2026-10-23-wand125-n31-fine-net.md)
+accepts the certificate, with no blocking or major finding. Its programs, README and
+outputs are in [`review/review-2026-10-23/`](review/review-2026-10-23/README.md): every
+exact premise recomputed, the net checked node by node, and the capture decided again at
+122 of the 2,073 directions by a clean-room exact checker of its own, all verified, with
+its mutants refused. With both, T-232 stands at V3/C3, and the case’s lower lanes move
+to $2391/400$.
+
+**Control-log filename (M-1).** The directory’s `README.md` lists
+`check2/control.jsonl.gz`; the asset holds `check2/control-197_200.jsonl.gz`, which
+`release/` retains. This affects discovery only, and the archived README and its digest
+are unchanged. The review’s M-2 (the manifest gives the sealed README’s digest, as the
+premises receipt records) and M-3 (the receipt’s word “independent”) are notes for the
+author.
 
 ## Sources and Notices
 

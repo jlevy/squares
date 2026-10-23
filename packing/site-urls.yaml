@@ -18729,6 +18729,7 @@ urls:
     builds_on: null
     evidence:
     - E-wand125-fine-net-n31-59775-report
+    - E-wand125-fine-net-n31-59775-sqverify-fast-replay
     artifacts:
     - packing/resources/web/wand125-fine-net-n31-2026-10-11/README.md
     - packing/resources/web/wand125-fine-net-n31-2026-10-11/acquisition/sources.json
@@ -18737,6 +18738,10 @@ urls:
     - packing/resources/web/wand125-fine-net-n31-2026-10-11/release/certificates/mixed_n31_L59775/check2/receipt.json
     - packing/resources/web/wand125-fine-net-n31-2026-10-11/receipts/premises-n31.json
     - packing/resources/web/wand125-fine-net-n31-2026-10-11/receipts/sample-diagnostic-n31.json
+    - packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/README.md
+    - docs/project/reviews/review-2026-10-23-wand125-n31-fine-net.md
+    - packing/benchmarks/measure-verifier/census-mixed/census.json
+    - packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-n31-2026-10-11/mixed_n31_L59775.jsonl.gz
     - packing/devtools/fine_net_followup.py
 - path: result/t-233.html
   canonical: result/t-233.html
