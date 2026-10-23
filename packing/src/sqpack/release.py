@@ -2425,9 +2425,9 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         reason=(
             "The 23 October closing pass's request entries (questions awaiting the authors "
             "of #470, #670 and #672, queued asks on #317, #529 and #573, and #669's and "
-            "#674's source-checker notes), against main 44df28b07 (#743): rendered at link "
-            "revision 868925d6 into empty site directories, twice from this tree at "
-            "c4f86cbc and twice with main's result-requests.yaml in its place (43 files "
+            "#674's source-checker notes), against main 598d23289 (#742): rendered at link "
+            "revision a224bea9 into empty site directories, twice from this tree at "
+            "a1754bd2 and twice with main's result-requests.yaml in its place (43 files "
             "each), render_packing_methods writes every file byte-identical across all "
             "four. No PDF was printed; it prints from that HTML. Retain v0.2.7."
         ),
