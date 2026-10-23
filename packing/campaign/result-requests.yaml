@@ -3487,9 +3487,12 @@ issues:
       changed. The post-deployment follow-up of 19 October records the n108 state and requests
       the upstream control filename correction. On 23 October the original n19, n20 and n26
       values and the n27 follow-up's 1131/200 are registered together as one reported entry,
-      T-233 at V0/C0, pending their replays under think-ndvg; the issue's n27 2261/400 is
-      superseded in the same release and stays unregistered, and its n31 597/100 is passed by
-      the source's later 2391/400 (T-232, not reported here).
+      T-233, at V0/C1 after the stage 4 review accepted all four certificates. Their complete
+      sqverify-fast captures passed here the same day, with whole-net controls refused at n19,
+      n20 and n27 and failed closed at n26 on the census's axis allowance, so their replay
+      evidence is held until think-tcsl. The issue's n27 2261/400 is superseded in the same
+      release and stays unregistered, and its n31 597/100 is passed by the source's later
+      2391/400 (T-232, not reported here).
     read_through: '2026-10-16T09:00:31Z'
     results:
     - key: fine-net-n19

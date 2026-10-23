@@ -29141,8 +29141,11 @@ evidence:
     verifiers: []
     limitations: The author reports 1131/200 at all 2073 directions; complete original byte custody and
       conditional maintained mass/net premises are accepted. The 32-direction 197/200 control remains
-      sampled. Fresh full native capture, whole-net controls, restored positives, private-worker binding
-      and independent result review remain pending. The copied project kernel establishes no independent
+      sampled. Restored positives and private-worker binding remain pending. A complete sqverify-fast
+      capture here passed at all 2,073 directions on 23 October and its whole-net controls were refused
+      (packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-446-release-2026-10-08/mixed_n27_L5655.control.json);
+      its replay evidence is held with T-233's other counts until think-tcsl fixes the census's axis
+      allowance, which failed n = 26's control closed. The copied project kernel establishes no independent
       implementation. No standing bound or rating changes; the original seven-case report is preserved.
       The candidate, receipts and logs are retained since 23 October in
       packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/release/certificates/mixed_n27_L5655/,
@@ -43472,8 +43475,13 @@ evidence:
       4999/5000) by sqverify-proof-net, the source's copy of this repository's
       sqverify_fast, in a check2 run and a pre-publication run on a fresh machine. The
       release members are retained in the release packet, with exact premises receipts
-      (EXACT_PREMISES_HOLD). The 32-direction 197/200 controls remain sampled. A complete
-      capture and whole-net controls at each count remain pending under think-ndvg. The
+      (EXACT_PREMISES_HOLD). The 32-direction 197/200 controls remain sampled. Complete
+      sqverify-fast captures here passed at all 2,073 directions of each count on 23
+      October, and the whole-net controls were refused at n = 19 and 20; at n = 26 the
+      control failed closed on the census's constant axis allowance (receipts in
+      packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-446-release-2026-10-08/,
+      n = 26's as mixed_n26_L5555.control-failed-v2.json). The replays' evidence is held
+      until think-tcsl fixes that allowance, so this entry stays the source's report. The
       shared crate establishes no independent implementation. No standing bound or rating
       changes; the seven-count entry stands for the issue's report.
     external_review:

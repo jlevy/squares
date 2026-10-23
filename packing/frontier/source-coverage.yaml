@@ -3784,10 +3784,13 @@ sources:
   - E-wand125-fine-net-lower-bounds-446-report
   - E-wand125-fine-net-446-n19-n20-n26-report
   notes: All seven original archives and sealed source/log/member identities retained outside live Git.
-    Conditional maintained input/kernel review accepted; no native replay, numeric claims_record or
-    standing-bound selection. Whole-net controls/custody adapter and explicit reviewed hosted budget
-    remain pending under think-ndvg. T-233 registers the n19, n20 and n26 values with the n27
-    follow-up's, as reported.
+    Conditional maintained input/kernel review accepted; no numeric claims_record or standing-bound
+    selection. T-233 registers the n19, n20 and n26 values with the n27 follow-up's, as reported.
+    Complete sqverify-fast captures of those four passed here on 23 October from the release packet,
+    with whole-net controls refused at n19, n20 and n27 and failed closed at n26 on the census's axis
+    allowance, so their replay evidence is held until think-tcsl. The n28, n29 and n31 originals have
+    no native replay here; their whole-net controls/custody adapter and reviewed hosted budget remain
+    pending under think-ndvg.
 - id: couzo-451-exact-refinements
   title: Francisco Couzo's eight rational refinements, issue451
   role: source-repository
@@ -3839,8 +3842,9 @@ sources:
   notes: The later reported 1131/200 supersedes the original reported n27 value only. Original seven-case
     catalogue and all standing claims remain unchanged. Complete archive/candidate/source custody and
     exact conditional mass/net premises accepted; author full positives and sampled controls over 32 directions
-    do not supply maintained capture or whole-net controls. Source-only work remains under think-ndvg.
-    T-233 registers it with the n19, n20 and n26 values, as reported.
+    do not supply maintained capture or whole-net controls. A complete sqverify-fast capture here
+    passed on 23 October with its whole-net controls refused; its replay evidence is held with T-233's
+    other counts until think-tcsl. T-233 registers it with the n19, n20 and n26 values, as reported.
 - id: evand-batch-105-130-2026-10-07
   title: "Evan Daniel's dated certificate reports at 105 and 130, issue #375"
   role: source-repository

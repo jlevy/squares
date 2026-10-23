@@ -109,8 +109,8 @@ accepts all four certificates, with no blocking or major finding. Its programs, 
 and receipts are in [`review/review-2026-10-23/`](review/review-2026-10-23/README.md):
 every exact premise recomputed apart from the crate, each axis direction decided
 completely, the source’s logs read exactly and 32 sampled directions per count evaluated
-exactly. It decides no other direction; coverage there rests on the source’s runs until
-the census.
+exactly. It decides no other direction; coverage there rested on the source’s runs until
+the complete replays below.
 
 **Control-log filename (F-6).** Each directory’s `README.md` lists
 `check2/control.jsonl.gz`; the asset holds `check2/control-197_200.jsonl.gz`, which
@@ -118,18 +118,29 @@ the census.
 are unchanged; the correction was asked of the author for the 16 October bundles on 19
 October, and the same note goes to the author for these four.
 
-## The Price of a Complete Replay
+## The Complete Replays
 
 The census route of the 6 October soundness review is a capture at every direction and
-the whole-net controls. The review prices the four at 10.5 to 19.2 CPU-hours: 1.4 to
-2.7 at n = 19, 2.3 to 4.6 at n = 20, 3.1 to 4.8 at n = 26 and 3.7 to 7.0 at n = 27.
-Each capture is priced by the ratio of 0.689 to the source that the n31 sample measured
-on this host on 23 October
+the whole-net controls. The census read each candidate from `release/` and ran on 23
+October, one count at a time at two threads: each capture passed at all 2,073
+directions with the source’s node total, and the whole-net controls were refused at n =
+19, 20 and 27. At n = 26 the control failed closed on the census’s constant axis
+allowance, not on a refusal: the 99/100 mutant was refused at every direction, but its
+exact capture at the axis sits 3.28e-9 above the sweep’s certified bound, beyond the
+allowance of 1e-9. The receipts, and the account of n = 26, are in
+[the census folder](../../../benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-446-release-2026-10-08/README.md).
+The replays’ evidence is held until think-tcsl fixes that allowance and n = 26 is
+re-judged, so T-233 stays at V0/C1 and the case records keep their lower bounds.
+
+The four cost about 7.8 CPU-hours: 23,900 CPU-seconds of capture and about 2,055 seconds
+of control wall at two threads. The review had priced them at 10.5 to 19.2 CPU-hours:
+1.4 to 2.7 at n = 19, 2.3 to 4.6 at n = 20, 3.1 to 4.8 at n = 26 and 3.7 to 7.0 at n =
+27. Each capture was priced by the ratio of 0.689 to the source that the n31 sample
+measured on this host on 23 October
 ([`wand125-fine-net-n31-2026-10-11`](../wand125-fine-net-n31-2026-10-11/README.md)) and
 by node count at that sample’s 18.6 microseconds per node, since the source’s n = 19 run
 used 6 threads and the others 12; the controls at 10 to 40 percent of the capture, as at
-n = 84, 85 and 68. The census reads each candidate from `release/`; the replays are
-owned by think-ndvg.
+n = 84, 85 and 68.
 
 ## Sources and Notices
 
