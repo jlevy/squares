@@ -10,6 +10,7 @@ import argparse
 import json
 import math
 import os
+import re
 import signal
 import subprocess
 import sys
@@ -54,6 +55,31 @@ def privileged(argv: Sequence[str], *, text: str | None = None) -> None:
         check=True,
         timeout=CONTROL_TIMEOUT_SECONDS,
     )
+
+
+def normalize_ubuntu_mirror(
+    mirror_list: Path = Path("/etc/apt/apt-mirrors.txt"),
+) -> None:
+    """Promote the runner's existing canonical archive alternative over slow Azure HTTP."""
+    if not mirror_list.exists():
+        print("apt mirror normalization: runner mirror list absent; unchanged", flush=True)
+        return
+    original = mirror_list.read_text()
+    pattern = r"(?m)^([ \t]*)https?://azure\.archive\.ubuntu\.com/ubuntu(/?)(?=[ \t\r\n]|$)"
+    updated, count = re.subn(
+        pattern,
+        r"\1https://archive.ubuntu.com/ubuntu\2",
+        original,
+    )
+    if not count:
+        print("apt mirror normalization: no known Azure archive entry; unchanged", flush=True)
+        return
+    # Only these fixed, public endpoints are logged; other mirror entries can
+    # contain credentials. Preserve their bytes, priorities, and the security mirror.
+    before_urls = [match.group(0).lstrip() for match in re.finditer(pattern, original)]
+    print(f"apt mirror before: {', '.join(before_urls)}", flush=True)
+    privileged(["tee", str(mirror_list)], text=updated)
+    print("apt mirror after: https://archive.ubuntu.com/ubuntu", flush=True)
 
 
 def configure_archives(
@@ -103,15 +129,20 @@ def run_install(command: Command, *, max_seconds: float, artifacts: Path) -> Res
                 returncode = process.wait(timeout=max_seconds)
             except subprocess.TimeoutExpired:
                 timed_out = True
-                kill_install_group(process.pid)
-                returncode = process.wait(timeout=CONTROL_TIMEOUT_SECONDS)
     except (OSError, subprocess.SubprocessError) as failure:
         error = str(failure)
     finally:
-        if process is not None and process.poll() is None:
+        if process is not None:
             try:
+                # A successful leader can leave children behind, including privileged
+                # installers. Completion requires the whole owned group to be gone.
                 kill_install_group(process.pid)
-                process.wait(timeout=CONTROL_TIMEOUT_SECONDS)
+                returncode = process.wait(timeout=CONTROL_TIMEOUT_SECONDS)
+                cleanup_deadline = time.monotonic() + CONTROL_TIMEOUT_SECONDS
+                while process_group_rss(process.pid):
+                    if time.monotonic() >= cleanup_deadline:
+                        raise TimeoutError(f"process group {process.pid} survived cleanup")
+                    time.sleep(0.01)
             except (OSError, subprocess.SubprocessError) as failure:
                 error = f"{error or ''} process cleanup failed: {failure}".strip()
     return Result(
@@ -199,6 +230,7 @@ def main(argv: list[str] | None = None) -> int:
         flush=True,
     )
     try:
+        normalize_ubuntu_mirror()
         configure_archives(archives)
         results = run_installs(
             install_commands(include_npm=args.npm),

@@ -6,6 +6,7 @@ import json
 import os
 import signal
 import sys
+from contextlib import suppress
 from pathlib import Path
 
 import pytest
@@ -154,6 +155,7 @@ def test_main_refuses_failed_install_and_retains_receipt(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
+    monkeypatch.setattr(tool, "normalize_ubuntu_mirror", lambda: None)
     monkeypatch.setattr(tool, "configure_archives", lambda _archives: None)
     monkeypatch.setattr(tool, "clean_archives", lambda _archives: None)
     commands = [tool.Command("npm", (sys.executable, "-c", "raise SystemExit(9)"), tmp_path)]
@@ -162,3 +164,66 @@ def test_main_refuses_failed_install_and_retains_receipt(
     receipt = json.loads((tmp_path / "browser-setup/setup.json").read_text())
     assert receipt["results"][0]["returncode"] == 9
     assert (tmp_path / "browser-setup/npm.log").is_file()
+
+
+@pytest.mark.pool_heavy
+@pytest.mark.skipif(os.name != "posix", reason="hosted browser setup requires POSIX groups")
+def test_successful_leader_exit_cleans_its_surviving_child(tmp_path: Path) -> None:
+    command = tool.Command(
+        "playwright",
+        (
+            sys.executable,
+            "-c",
+            (
+                "import os,subprocess,sys; "
+                "subprocess.Popen([sys.executable,'-c','import time; time.sleep(30)']); "
+                "print(os.getpid(),flush=True)"
+            ),
+        ),
+        tmp_path,
+    )
+    result = tool.run_install(command, max_seconds=5, artifacts=tmp_path)
+    group = int((tmp_path / "playwright.log").read_text().strip())
+    try:
+        assert tool.successful([result])
+        assert tool.process_group_rss(group) == {}
+    finally:
+        # A failing regression must not leave the deliberately orphaned child running.
+        with suppress(ProcessLookupError):
+            os.killpg(group, signal.SIGKILL)
+
+
+def test_mirror_normalization_changes_only_known_azure_archive_urls(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    monkeypatch.setattr(tool, "SUDO", ())
+    mirror_list = tmp_path / "apt-mirrors.txt"
+    original = (
+        "# runner mirror priority list\n"
+        "  http://azure.archive.ubuntu.com/ubuntu/\tpriority:1\n"
+        "https://archive.ubuntu.com/ubuntu/\tpriority:2\n"
+        "https://security.ubuntu.com/ubuntu/\tpriority:3\n"
+        "https://azure.archive.ubuntu.com/ubuntu priority:4\n"
+        "https://user:secret@private.example/ubuntu/ priority:5\n"
+        "http://azure.archive.ubuntu.com/other/ priority:6\n"
+        "http://azure.archive.ubuntu.com.attacker.example/ubuntu/ priority:7\n"
+    )
+    mirror_list.write_text(original)
+    tool.normalize_ubuntu_mirror(mirror_list)
+    expected = original.replace(
+        "http://azure.archive.ubuntu.com/ubuntu/\tpriority:1",
+        "https://archive.ubuntu.com/ubuntu/\tpriority:1",
+    ).replace(
+        "https://azure.archive.ubuntu.com/ubuntu priority:4",
+        "https://archive.ubuntu.com/ubuntu priority:4",
+    )
+    assert mirror_list.read_text() == expected
+    output = capsys.readouterr().out
+    assert "apt mirror before:" in output
+    assert "apt mirror after: https://archive.ubuntu.com/ubuntu" in output
+    assert "secret" not in output
+    tool.normalize_ubuntu_mirror(mirror_list)
+    assert mirror_list.read_text() == expected
+    absent = tmp_path / "absent-list"
+    tool.normalize_ubuntu_mirror(absent)
+    assert not absent.exists()
