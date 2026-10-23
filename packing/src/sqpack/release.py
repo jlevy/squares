@@ -2500,8 +2500,10 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "records and notes, and after review A of #754, A2 included, against main "
             "7cd0a94bf (#747), with main's seven candidate inputs swapped in, "
             "intake_ledger.py and upper_bound_reports.py among them, with the same "
-            "outcome. No PDF was printed; each prints "
-            "from that HTML. Retain v0.4.21, v0.1.11, v0.1.4 and v0.2.7."
+            "outcome; and at bb1cd1338, after review B of #754, against main 64b316b6c "
+            "(#762), with the same seven swapped in, with the same outcome. No PDF was "
+            "printed; each prints from that HTML. Retain v0.4.21, v0.1.11, v0.1.4 and "
+            "v0.2.7."
         ),
     ),
     ReleaseNoPublicChange(
