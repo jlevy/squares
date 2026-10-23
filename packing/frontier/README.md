@@ -205,8 +205,18 @@ Claims beyond $n = 324$ are listed by count and source.
 A count has at most one current row; an earlier dated report that a later one beats
 stays listed as its source printed it, marked superseded and naming the source of the
 row that beats it, which must be dated no earlier and strictly better by exact
-comparison. The check is local and deterministic; refreshing a public source is a dated
-W1 research survey, not a network operation hidden inside ordinary validation.
+comparison. Göbel’s classical constructions are earlier reports beyond $n = 324$ (the
+owner, 23 October 2026, [#613](https://github.com/jlevy/squares/issues/613)), so a row
+above Göbel’s construction at its count also stays listed as its source printed it.
+It is marked `above-classical-construction`, states the construction $p + q\sqrt 2$ it
+is above, and holds no count; the standing side there is the construction, which has no
+row, as the grid has none.
+`devtools.beyond_horizon_replay` holds every row from $n = 325$ to $1024$ to Göbel’s
+construction exactly.
+Nine rows of 8 to 13 October at $n = 369, 375$ and $376$ are so marked, and 369 and 376
+have no current row.
+The check is local and deterministic; refreshing a public source is a dated W1 research
+survey, not a network operation hidden inside ordinary validation.
 
 SQUISH’s ten-packing release and its later $n = 153$ supplement, published on 7 October
 2026, carry the upper bounds at eleven counts (T-113 and T-114). Nate Chaoweeraprasit
@@ -314,6 +324,12 @@ The process relies on these rules of the records:
   local replay are recorded as separate entries.
   An upper bound that passes them below the case’s house best packing replaces it
   ([the house rule](../campaign/result-import.md#the-house-rule)).
+- **Beyond the corpus, the report-order ledger decides the rows**
+  ([several reports at one count](../campaign/result-import.md#several-reports-at-one-count)),
+  with the owner’s answers of 23 October 2026. A side below an earlier report by less
+  than the 12-place print, at the same print, restates it and is no row; a side at or
+  above Göbel’s classical construction at its count is above an earlier report; and a
+  certificate its author withdrew from an issue is not a report.
 
 ## Registering a First-Party Result
 

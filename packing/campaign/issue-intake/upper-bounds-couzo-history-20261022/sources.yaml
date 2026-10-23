@@ -2803,10 +2803,10 @@ reports:
     first_committed: '2026-10-21T22:56:37Z'
   note: 'Issue 715''s rows, at the exact sides its source''s claims record states, and its 30 re-certifications
     of the 4e4c8ce certificates below the 12-place print, at the exact sides of the certificates its packet''s
-    filtered receipt states, which wait on a decision (think-fwa9). Its other restatements of earlier
-    certificates tie them exactly and are not walked. The walk holds its publications at 30 counts back
-    from a row, each waiting on an owner decision (beyond_horizon_replay.HISTORY_HELD): 30 re-certifications
-    below the 12-place print (think-fwa9).'
+    filtered receipt states, which restate those certificates by the owner''s answer of 23 October 2026
+    (think-fwa9). Its other restatements of earlier certificates tie them exactly and are not walked.
+    Its verdicts at 2 counts are decided only against held publications (beyond_horizon_replay.HISTORY_RESTING):
+    2 against index deletion bounds. An answer that leaves a hold out reruns this walk.'
   issue: 715
 - report: couzo-verified-bounds-2026-10-14
   holders: Francisco Couzo
@@ -5488,7 +5488,7 @@ reports:
   url: https://github.com/evand/square-packing/tree/49907ec3bfb26f7589c63c465d0a202e463a6a7b
   reported_at: '2026-10-08T06:49:02Z'
   holders: Evan Daniel
-  bead: think-8krd
+  bead: ''
   claims:
   - n: 964
     printed: '31.859493881560'
@@ -5496,12 +5496,10 @@ reports:
     exact: 13758246984533944841354281437/431841354281437000000000000
     exact_from: search/tilings/n964.cert at evand/square-packing@49907ec3bfb26f7589c63c465d0a202e463a6a7b
       (its header)
-  note: 'A publication in a watched repository that no issue reports, dated by its commit, or by the later
+  note: A publication in a watched repository that no issue reports, dated by its commit, or by the later
     push that made it public; transcribed from the history scan (resources/web/couzo-index-2026-10-15/receipts/history-publications.json)
     at each count where it states a side strictly below the frozen start that no row holds, at the least
-    side the commit states there. The walk holds its publications at 1 count back from a row, each waiting
-    on an owner decision (beyond_horizon_replay.HISTORY_HELD): 1 publication above Göbel''s construction
-    (think-8krd).'
+    side the commit states there.
 - report: franciscouzo/square-packing@02f9690
   url: https://github.com/franciscouzo/square-packing/tree/02f969075f79d5e13fa21e09e381a44e8647b452
   reported_at: '2026-10-09T20:28:52Z'
@@ -5598,12 +5596,10 @@ reports:
     exact: 9978769441051669867759279639817/500000000000000000000000000000
     exact_from: certificates/n379.cert at franciscouzo/square-packing@02f969075f79d5e13fa21e09e381a44e8647b452
       (its header)
-  note: 'A publication in a watched repository that no issue reports, dated by its commit, or by the later
+  note: A publication in a watched repository that no issue reports, dated by its commit, or by the later
     push that made it public; transcribed from the history scan (resources/web/couzo-index-2026-10-15/receipts/history-publications.json)
     at each count where it states a side strictly below the frozen start that no row holds, at the least
-    side the commit states there. The walk holds its publications at 3 counts back from a row, each waiting
-    on an owner decision (beyond_horizon_replay.HISTORY_HELD): 3 publications above Göbel''s construction
-    (think-8krd).'
+    side the commit states there.
 - report: evand/square-packing@41fc9ec
   url: https://github.com/evand/square-packing/tree/41fc9ec5ba316d35bc937e8fe33454708cf3cfc8
   reported_at: '2026-10-10T01:59:48Z'
@@ -5616,11 +5612,10 @@ reports:
     exact: 2488378025267104541683494603819/125000000000000000000000000000
     exact_from: search/packer/candidates/polish_n375.cert at evand/square-packing@41fc9ec5ba316d35bc937e8fe33454708cf3cfc8
       (its header)
-  note: 'A publication in a watched repository that no issue reports, dated by its commit, or by the later
+  note: A publication in a watched repository that no issue reports, dated by its commit, or by the later
     push that made it public; transcribed from the history scan (resources/web/couzo-index-2026-10-15/receipts/history-publications.json)
     at each count where it states a side strictly below the frozen start that no row holds, at the least
-    side the commit states there. Its verdicts at 1 count are decided only against held publications (beyond_horizon_replay.HISTORY_RESTING):
-    1 against publications above Göbel''s construction. An answer that leaves a hold out reruns this walk.'
+    side the commit states there.
 - report: evand/square-packing@f7a2325
   url: https://github.com/evand/square-packing/tree/f7a2325df1e396f46ee373c6d00a880795b749b7
   reported_at: '2026-10-10T09:15:50Z'
@@ -5701,12 +5696,10 @@ reports:
     exact: 86745201862150664068380352613/4339813107931500000000000000
     exact_from: certificates/n380.cert at franciscouzo/square-packing@f311f08901c24b2a6c5f720710a45adec23e926a
       (its header)
-  note: 'A publication in a watched repository that no issue reports, dated by its commit, or by the later
+  note: A publication in a watched repository that no issue reports, dated by its commit, or by the later
     push that made it public; transcribed from the history scan (resources/web/couzo-index-2026-10-15/receipts/history-publications.json)
     at each count where it states a side strictly below the frozen start that no row holds, at the least
-    side the commit states there. The walk holds its publications at 1 count back from a row, each waiting
-    on an owner decision (beyond_horizon_replay.HISTORY_HELD): 1 publication above Göbel''s construction
-    (think-8krd).'
+    side the commit states there.
 - report: franciscouzo/square-packing@a7067d7
   url: https://github.com/franciscouzo/square-packing/tree/a7067d7b92b1e0208499b26d93e898648f0e8667
   reported_at: '2026-10-12T17:55:52Z'
@@ -5725,12 +5718,10 @@ reports:
     exact: 44456996585380578546663254283/2233755789641500000000000000
     exact_from: certificates/n375.cert at franciscouzo/square-packing@a7067d7b92b1e0208499b26d93e898648f0e8667
       (its header); the least of the 2 sides the commit states at this count, beside found/web/9e4e754664eb7647c771ef4daf66d760.cert
-  note: 'A publication in a watched repository that no issue reports, dated by its commit, or by the later
+  note: A publication in a watched repository that no issue reports, dated by its commit, or by the later
     push that made it public; transcribed from the history scan (resources/web/couzo-index-2026-10-15/receipts/history-publications.json)
     at each count where it states a side strictly below the frozen start that no row holds, at the least
-    side the commit states there. The walk holds its publications at 1 count back from a row, each waiting
-    on an owner decision (beyond_horizon_replay.HISTORY_HELD): 1 publication above Göbel''s construction
-    (think-8krd).'
+    side the commit states there.
 - report: TheSnakeFang/squarepack-certs@bef5c42
   url: https://github.com/TheSnakeFang/squarepack-certs/tree/bef5c42d58257fe38ed010a5d1ff9b8fc608df57
   reported_at: '2026-10-12T19:13:41Z'
@@ -5895,12 +5886,10 @@ reports:
     exact: 19942536155946027401235663744303/1000000000000000000000000000000
     exact_from: certificates/n378.cert at franciscouzo/square-packing@93570ef79474fd8c35d1293addf095f9eee6a658
       (its header)
-  note: 'A publication in a watched repository that no issue reports, dated by its commit, or by the later
+  note: A publication in a watched repository that no issue reports, dated by its commit, or by the later
     push that made it public; transcribed from the history scan (resources/web/couzo-index-2026-10-15/receipts/history-publications.json)
     at each count where it states a side strictly below the frozen start that no row holds, at the least
-    side the commit states there. The walk holds its publications at 1 count back from a row, each waiting
-    on an owner decision (beyond_horizon_replay.HISTORY_HELD): 1 publication above Göbel''s construction
-    (think-8krd).'
+    side the commit states there.
 - report: TheSnakeFang/squarepack-certs@5f3bdbf
   url: https://github.com/TheSnakeFang/squarepack-certs/tree/5f3bdbfa476060c2594dce42b7cb9fb7ac7d5a38
   reported_at: '2026-10-13T05:54:24Z'
@@ -6053,7 +6042,7 @@ reports:
   url: https://github.com/franciscouzo/square-packing/tree/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d
   reported_at: '2026-10-14T17:45:39Z'
   holders: Francisco Couzo
-  bead: think-8krd
+  bead: think-f2io
   claims:
   - n: 327
     printed: '18.591378145498'
@@ -6340,11 +6329,10 @@ reports:
   note: 'A publication in a watched repository that no issue reports, dated by its commit, or by the later
     push that made it public; transcribed from the history scan (resources/web/couzo-index-2026-10-15/receipts/history-publications.json)
     at each count where it states a side strictly below the frozen start that no row holds, at the least
-    side the commit states there. The walk holds its publications at 45 counts back from a row, each waiting
-    on an owner decision (beyond_horizon_replay.HISTORY_HELD): 44 publications above Göbel''s construction
-    (think-8krd) and 1 construction with no certificate file (think-f2io). Its verdicts at 2 counts are
-    decided only against held publications (beyond_horizon_replay.HISTORY_RESTING): 2 against constructions
-    with no certificate file. An answer that leaves a hold out reruns this walk.'
+    side the commit states there. The walk holds its publications at 1 count back from a row, each waiting
+    on an owner decision (beyond_horizon_replay.HISTORY_HELD): 1 construction with no certificate file
+    (think-f2io). Its verdicts at 2 counts are decided only against held publications (beyond_horizon_replay.HISTORY_RESTING):
+    2 against constructions with no certificate file. An answer that leaves a hold out reruns this walk.'
 - report: franciscouzo/square-packing@43ac7d2
   url: https://github.com/franciscouzo/square-packing/tree/43ac7d29cfeb7b71ea1eb09939cb30b9f71850f2
   reported_at: '2026-10-14T19:15:09Z'
@@ -8553,16 +8541,15 @@ reports:
   note: 'A publication in a watched repository that no issue reports, dated by its commit, or by the later
     push that made it public; transcribed from the history scan (resources/web/couzo-index-2026-10-15/receipts/history-publications.json)
     at each count where it states a side strictly below the frozen start that no row holds, at the least
-    side the commit states there. The walk holds its publications at 89 counts back from a row, each waiting
-    on an owner decision (beyond_horizon_replay.HISTORY_HELD): 47 publications above Göbel''s construction
-    (think-8krd), 3 re-certifications below the 12-place print (think-fwa9) and 39 index deletion bounds
-    (think-f2io). Its verdicts at 2 counts are decided only against held publications (beyond_horizon_replay.HISTORY_RESTING):
-    2 against publications above Göbel''s construction. An answer that leaves a hold out reruns this walk.'
+    side the commit states there. The walk holds its publications at 39 counts back from a row, each waiting
+    on an owner decision (beyond_horizon_replay.HISTORY_HELD): 39 index deletion bounds (think-f2io).
+    Its verdicts at 1 count are decided only against held publications (beyond_horizon_replay.HISTORY_RESTING):
+    1 against constructions with no certificate file. An answer that leaves a hold out reruns this walk.'
 - report: franciscouzo/square-packing@58a7833
   url: https://github.com/franciscouzo/square-packing/tree/58a783368d4b7e70bb800f0009ea9ca03e578739
   reported_at: '2026-10-15T01:25:11Z'
   holders: Francisco Couzo
-  bead: think-8krd
+  bead: ''
   claims:
   - n: 331
     printed: '18.707106781187'
@@ -8858,12 +8845,10 @@ reports:
     exact: 396338834764831844055010554526310612991060449221105925457354248362442077990388169/12500000000000000000000000000000000000000000000000000000000000000000000000000000
     exact_from: upper_bounds.json at franciscouzo/square-packing@58a783368d4b7e70bb800f0009ea9ca03e578739
       (the bound it states)
-  note: 'A publication in a watched repository that no issue reports, dated by its commit, or by the later
+  note: A publication in a watched repository that no issue reports, dated by its commit, or by the later
     push that made it public; transcribed from the history scan (resources/web/couzo-index-2026-10-15/receipts/history-publications.json)
     at each count where it states a side strictly below the frozen start that no row holds, at the least
-    side the commit states there. The walk holds its publications at 49 counts back from a row, each waiting
-    on an owner decision (beyond_horizon_replay.HISTORY_HELD): 49 publications above Göbel''s construction
-    (think-8krd).'
+    side the commit states there.
 - report: franciscouzo/square-packing@23aff0c
   url: https://github.com/franciscouzo/square-packing/tree/23aff0c6f992271e1ad13a148d44f392c4b386c0
   reported_at: '2026-10-17T18:00:09Z'
@@ -9655,14 +9640,12 @@ reports:
   note: 'A publication in a watched repository that no issue reports, dated by its commit, or by the later
     push that made it public; transcribed from the history scan (resources/web/couzo-index-2026-10-15/receipts/history-publications.json)
     at each count where it states a side strictly below the frozen start that no row holds, at the least
-    side the commit states there. The walk holds its publications at 71 counts back from a row, each waiting
-    on an owner decision (beyond_horizon_replay.HISTORY_HELD): 10 re-certifications below the 12-place
-    print (think-fwa9), 15 index deletion bounds, deletions from Friedman''s off-centre constructions
-    (think-f2io, think-8krd) and 46 constructions with no certificate file, Göbel''s squares and Friedman''s
-    off-centre family, 41 of them as L-border extensions (think-f2io, think-8krd). Its verdicts at 37
-    counts are decided only against held publications (beyond_horizon_replay.HISTORY_RESTING): 36 against
-    publications above Göbel''s construction and 1 against re-certifications below the 12-place print.
-    An answer that leaves a hold out reruns this walk.'
+    side the commit states there. The walk holds its publications at 61 counts back from a row, each waiting
+    on an owner decision (beyond_horizon_replay.HISTORY_HELD): 15 index deletion bounds, deletions from
+    Friedman''s off-centre constructions (think-f2io, think-zkxy) and 46 constructions with no certificate
+    file, Göbel''s squares and Friedman''s off-centre family, 41 of them as L-border extensions (think-f2io,
+    think-zkxy). Its verdicts at 1 count are decided only against held publications (beyond_horizon_replay.HISTORY_RESTING):
+    1 against constructions with no certificate file. An answer that leaves a hold out reruns this walk.'
 - report: franciscouzo/square-packing@5a299b4
   url: https://github.com/franciscouzo/square-packing/tree/5a299b4708ab1ae4870d0fc1ab155738144f6ab8
   reported_at: '2026-10-21T22:56:37Z'
@@ -10766,10 +10749,21 @@ reports:
   note: 'A publication in a watched repository that no issue reports, dated by its commit, or by the later
     push that made it public; transcribed from the history scan (resources/web/couzo-index-2026-10-15/receipts/history-publications.json)
     at each count where it states a side strictly below the frozen start that no row holds, at the least
-    side the commit states there. The walk holds its publications at 32 counts back from a row, each waiting
-    on an owner decision (beyond_horizon_replay.HISTORY_HELD): 1 publication above Göbel''s construction
-    (think-8krd) and 31 re-certifications below the 12-place print (think-fwa9). Its verdicts at 81 counts
-    are decided only against held publications (beyond_horizon_replay.HISTORY_RESTING): 9 against index
-    deletion bounds, 27 against publications above Göbel''s construction, 37 against constructions with
-    no certificate file and 8 against re-certifications below the 12-place print. An answer that leaves
-    a hold out reruns this walk.'
+    side the commit states there. Its verdicts at 49 counts are decided only against held publications
+    (beyond_horizon_replay.HISTORY_RESTING): 11 against index deletion bounds and 38 against constructions
+    with no certificate file. An answer that leaves a hold out reruns this walk.'
+rulings:
+- ruling: restatement
+  decided: '2026-10-23'
+  bead: think-fwa9
+  through: 1024
+  awaiting_owner:
+  - n: 631
+    report: '#719'
+    bead: think-oqjd
+    reason: 'Another holder''s re-certification of Couzo''s 4e4c8ce certificate, 2.73e-13 below it at
+      the same 12-place print, which #722 recorded and the owner''s answer did not name'
+- ruling: classical-constructions
+  decided: '2026-10-23'
+  bead: think-8krd
+  through: 1024

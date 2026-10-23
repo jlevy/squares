@@ -544,18 +544,26 @@ def test_719_leaves_366_unrecorded_and_supersedes_the_row_at_each_other_count() 
     assert dict(Counter(earlier for _, earlier, _ in flips)) == SUPERSEDED_BY_719
 
 
-def test_a_re_certification_held_for_a_decision_is_passed_over_in_the_chain() -> None:
-    """At 631 the #719 walk records Couzo's 4e4c8ce certificate, #715's re-certification of
-    it and #719. 4e4c8ce's row is the history walk's; #715's is held for a decision
-    (think-fwa9), not awaiting an import, so the chain passes over it and 4e4c8ce's row
-    names #719."""
+def test_a_re_certification_below_the_print_restates_the_report_it_beats() -> None:
+    """At 631 the #719 walk records Couzo's 4e4c8ce certificate and #719. #715's
+    re-certification of it and 5a299b4's, below it by 2.57e-23 at the same 12-place print,
+    restate it by the owner's answer of 23 October 2026 (think-fwa9), so the chain is
+    4e4c8ce's row, then #719's. #719's own side is in the answer's words too, 2.73e-13 below
+    at the same print, and waits on the owner (think-oqjd), recorded as #722 recorded it."""
     walk = replay.WALKS[replay.ISSUE_719]
     (count,) = [item for item in _read(walk.ledger)["counts"] if item["n"] == 631]
-    assert [step["report"] for step in count["steps"] if step["verdict"] == "recorded"] == [
-        "franciscouzo/square-packing@4e4c8ce",
-        "#715",
-        "#719",
-    ]
+    steps = {step["report"]: step for step in count["steps"]}
+    assert {report: (step["verdict"], step["reason"]) for report, step in steps.items()} == {
+        "franciscouzo/square-packing@4e4c8ce": ("recorded", "below"),
+        "#715": ("not recorded", "restates"),
+        "franciscouzo/square-packing@5a299b4": ("not recorded", "restates"),
+        "#719": ("recorded", "below"),
+    }
+    assert steps["#715"]["decided_against"] == ["franciscouzo/square-packing@4e4c8ce"]
+    assert steps["#715"]["difference"] == (
+        "restates, below by 2.57e-23 at the same 12-place print"
+    )
+    assert steps["#719"]["awaiting_owner"] == "think-oqjd"
     assert replay.recorded_reports(walk, count) == [
         "franciscouzo/square-packing@4e4c8ce",
         "#719",
@@ -566,10 +574,7 @@ def test_a_re_certification_held_for_a_decision_is_passed_over_in_the_chain() ->
     assert rows[631, "couzo-index-2026-10-15"]["superseded_by"] == MISHAPOLK
     assert (631, "couzo-issue715-2026-10-21") not in rows
     assert walk.awaiting == {}
-    held = walk.holds("#715", 631)
-    assert held is not None
-    assert (held.kind, held.bead) == (replay.SUB_PRINT, "think-fwa9")
-    assert walk.holds("#715", 417) is None
+    assert walk.holds("#715", 631) is None
 
 
 #: The 19 counts at which the #719 walk records #715's held re-certifications, below 1024.
@@ -577,30 +582,43 @@ HELD_715_IN_719 = {535, 582, 591, 631, 633, 640, 682, 684, 691, 695}
 HELD_715_IN_719 |= {735, 737, 742, 745, 790, 791, 797, 798, 799}
 
 
-def test_the_719_walk_holds_715_s_re_certifications_and_names_what_rests_on_them() -> None:
-    """Review A of #730, A6: #715's re-certifications wait on think-fwa9's decision, so the
-    #719 walk holds them as the history walk does, and 5a299b4's verdicts at those 19 counts
-    rest on them; left out, the walk records each again as a re-certification."""
+def test_the_719_walk_decides_715_s_re_certifications_as_restatements() -> None:
+    """The owner's answer of 23 October 2026 (think-fwa9): #715's re-certifications at the
+    19 counts the #719 walk reaches restate the 4e4c8ce certificates, and so do 5a299b4's
+    there and at 366 and 372, so none is held and no verdict rests on them; what rests on
+    holds rests on deletion bounds (D6)."""
     walk = replay.WALKS[replay.ISSUE_719]
-    (held,) = walk.held["#715"]
-    assert held.counts == HELD_715_IN_719
-    assert held.counts <= replay.HISTORY_HELD["#715"][0].counts
-    resting = {(item.report, item.kinds): item.counts for item in walk.resting}
-    assert resting[("franciscouzo/square-packing@5a299b4", (replay.SUB_PRINT,))] == (
-        HELD_715_IN_719
+    assert "#715" not in walk.held
+    assert "franciscouzo/square-packing@5a299b4" not in walk.held
+    restatement, classical = _read(walk.ledger)["rulings"]
+    assert (restatement["ruling"], classical["ruling"]) == (
+        "restatement",
+        "classical-constructions",
     )
+    assert restatement["through"] == classical["through"] == replay.LIMIT
+    restated = {(item["n"], item["report"]) for item in restatement["not_recorded"]}
+    assert {n for n, report in restated if report == "#715"} == HELD_715_IN_719
+    assert {n for n, report in restated if report.endswith("@5a299b4")} == (
+        HELD_715_IN_719 | {366, 372}
+    )
+    assert restatement["awaiting_owner"] == [{"n": 631, "report": "#719", "bead": "think-oqjd"}]
+    assert {item.kinds for item in walk.resting} == {(replay.CONSEQUENCE,)}
     assert replay.resting_problems() == []
-    flips = replay.refusal_flips(walk, (replay.SUB_PRINT,))
-    assert {n for n, _, _ in flips} == HELD_715_IN_719
-    assert {falls for _, _, falls in flips} == {replay.SUB_PRINT}
+    assert (
+        replay.WALK_RULINGS[replay.ISSUE_719]
+        == safe_load((LEDGER_719 / "sources.yaml").read_text(encoding="utf-8"))["rulings"]
+    )
 
 
 def test_a_single_hold_or_resting_verdict_is_counted_in_the_singular() -> None:
     """Review A of #730, A7: "at 1 count", not "at 1 counts"."""
     walk = replay.WALKS[replay.HISTORY]
-    text = replay.held_sentence(walk, "evand/square-packing@41fc9ec")
+    text = replay.held_sentence(walk, "franciscouzo/square-packing@4e4c8ce")
     assert "verdicts at 1 count are decided" in text
     assert "1 counts" not in text
+    text = replay.held_sentence(walk, "franciscouzo/square-packing@487b058")
+    assert "at 1 count back from a row" in text
+    assert "1 construction with no certificate file" in text
     sources = (HISTORY_LEDGER / "sources.yaml").read_text(encoding="utf-8")
     assert "at 1 counts" not in sources
 
@@ -707,8 +725,7 @@ def test_a_publication_reads_the_rows_its_packet_declares() -> None:
 
 
 def _holding(monkeypatch: pytest.MonkeyPatch, **held: tuple[replay.Held, ...]) -> replay.Walk:
-    """#719's walk with Couzo's 5a299b4 held where ``held`` says, in place of awaiting its
-    import, as the only walk the checks read."""
+    """#719's walk holding only what ``held`` says, as the only walk the checks read."""
     walk = replay.WALKS[replay.ISSUE_719]
     awaiting = {
         report: item
@@ -723,50 +740,51 @@ def _holding(monkeypatch: pytest.MonkeyPatch, **held: tuple[replay.Held, ...]) -
 def test_a_held_publication_is_passed_over_and_held_to_the_walk(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    """At 366 and 372 the walk records Couzo's 5a299b4 below 4e4c8ce by 2e-23, the same
-    12-place print: held for the owner's answer (think-fwa9), it has no row, so the chain
-    passes over it, and the hold names a class, a decision's bead and a publication the
-    walk records there."""
+    """At 743 and 798 the #719 walk records bounds Couzo's 4e4c8ce index states by deleting
+    a square from the next count's certificate: held for the owner's answer (D6,
+    think-f2io), they have no row, so the chain passes over them, and the hold names a
+    class, a decision's bead and a publication the walk records there."""
     coverage = safe_load(replay.COVERAGE.read_text(encoding="utf-8"))
-    label = "franciscouzo/square-packing@5a299b4"
+    label = "franciscouzo/square-packing@4e4c8ce"
     walk = _holding(
         monkeypatch,
-        **{label: (replay.Held(replay.SUB_PRINT, "think-fwa9", frozenset({366, 372})),)},
+        **{label: (replay.Held(replay.CONSEQUENCE, "think-f2io", frozenset({743, 798})),)},
     )
     assert replay.held_problems(coverage) == []
-    assert walk.holds(label, 372) is not None
+    assert walk.holds(label, 798) is not None
     counts = {count["n"]: count for count in _read(walk.ledger)["counts"]}
-    assert label not in replay.recorded_reports(walk, counts[372])
-    assert label in replay.recorded_reports(walk, counts[409])
+    assert label not in replay.recorded_reports(walk, counts[798])
+    assert label in replay.recorded_reports(walk, counts[410])
     assert replay.held_plan() == [
         {
             "walk": replay.ISSUE_719,
             "report": label,
             "n": n,
-            "class": "sub-print",
-            "bead": "think-fwa9",
+            "class": "consequence",
+            "bead": "think-f2io",
         }
-        for n in (366, 372)
+        for n in (743, 798)
     ]
     _holding(
-        monkeypatch, **{label: (replay.Held(replay.SUB_PRINT, "think-fwa9", frozenset({371})),)}
+        monkeypatch,
+        **{label: (replay.Held(replay.CONSEQUENCE, "think-f2io", frozenset({373})),)},
     )
     assert replay.held_problems(coverage) == [
-        f"{replay.ISSUE_719}: {label} n=371: the walk does not record it, so it holds nothing"
+        f"{replay.ISSUE_719}: {label} n=373: the walk does not record it, so it holds nothing"
     ]
     _holding(
         monkeypatch,
         **{
             label: (
-                replay.Held("rounding", "fwa9", frozenset({366})),
-                replay.Held(replay.SUB_PRINT, "think-fwa9", frozenset({366})),
+                replay.Held("rounding", "fwa9", frozenset({743})),
+                replay.Held(replay.CONSEQUENCE, "think-f2io", frozenset({743})),
             )
         },
     )
     assert replay.held_problems(coverage) == [
         f"{replay.ISSUE_719}: {label}: no such class of hold, 'rounding'",
         f"{replay.ISSUE_719}: {label}: 'fwa9' is not a decision's bead",
-        f"{replay.ISSUE_719}: {label}: holds n=[366] twice",
+        f"{replay.ISSUE_719}: {label}: holds n=[743] twice",
     ]
 
 
@@ -775,11 +793,11 @@ def test_a_hold_on_a_count_a_row_holds_is_refused(monkeypatch: pytest.MonkeyPatc
     coverage = safe_load(replay.COVERAGE.read_text(encoding="utf-8"))
     _holding(
         monkeypatch,
-        **{"#719": (replay.Held(replay.SUB_PRINT, "think-fwa9", frozenset({372})),)},
+        **{"#719": (replay.Held(replay.CONSEQUENCE, "think-f2io", frozenset({372})),)},
     )
     assert replay.held_problems(coverage) == [
         (
-            f"{replay.ISSUE_719}: #719 n=372: held for think-fwa9, yet "
+            f"{replay.ISSUE_719}: #719 n=372: held for think-f2io, yet "
             "mishapolk-issue719-2026-10-22 has a row there"
         ),
         f"{replay.ISSUE_719}: #719 n=372: held and declared as a row",
@@ -933,8 +951,6 @@ HISTORY_ROWS = {
 }
 #: What the history walk holds back, by class: (publications, decision's bead).
 HISTORY_HOLDS = {
-    "goebel": (148, "think-8krd"),
-    "sub-print": (74, "think-fwa9"),
     "consequence": (54, "think-f2io"),
     "recipe": (64, "think-f2io"),
 }
@@ -968,39 +984,41 @@ def test_each_publication_declares_the_rows_its_walk_records() -> None:
 
 
 def test_the_history_walk_holds_back_what_waits_on_a_decision() -> None:
-    """Göbel-above, sub-print, deletion-bound and recipe publications have no row; each is
-    held with its decision's bead, and the plan lists every hold."""
+    """Deletion-bound and recipe publications have no row; each is held with its decision's
+    bead, and the plan lists every hold. Since the owner's answers of 23 October 2026 the
+    walk decides the sub-print re-certifications and the publications above Göbel's
+    construction itself, so it holds neither."""
     held = [item for item in replay.held_plan() if item["walk"] == replay.HISTORY]
     by_class = Counter(item["class"] for item in held)
     beads = {item["class"]: item["bead"] for item in held}
     assert {kind: (by_class[kind], beads[kind]) for kind in by_class} == HISTORY_HOLDS
-    assert sum(by_class.values()) == 340
+    assert sum(by_class.values()) == 118
     coverage = safe_load(replay.COVERAGE.read_text(encoding="utf-8"))
     assert replay.held_problems(coverage) == []
 
 
-#: 23aff0c's held constructions and deletions from them, all classical (#722's review of
-#: #730, A1): they wait on #613 (think-8krd) as well as on D2 and D6 (think-f2io).
+#: 23aff0c's held constructions and deletions from them (#722's review of #730, A1): each
+#: is below Göbel's construction at its count, so #613's answer leaves them to D2 and D6
+#: (think-f2io) and to whether Friedman's constructions count as Göbel's do (think-zkxy).
 CLASSICAL_23AFF0C = {"consequence": 15, "recipe": 46}
 #: The steps a rerun history walk would record if an answer left a class of hold out
-#: (review A of #730, A2): new records at deletion bounds and recipes, and at Göbel and
-#: sub-print holds only publications the same decision holds again.
+#: (review A of #730, A2): new records at deletion bounds and recipes. The rerun applies
+#: the walk's rulings, so a restatement or a side above Göbel's construction is none.
 LEFT_OUT = {
-    "consequence": {"record": 9},
-    "recipe": {"record": 47},
-    "goebel": {"goebel": 66},
-    "sub-print": {"sub-print": 8},
+    "consequence": {"record": 13},
+    "recipe": {"record": 48},
 }
 
 
-def test_23aff0c_s_classical_holds_wait_on_613_too() -> None:
-    """Its 15 deletion bounds and 46 constructions are Göbel's and Friedman's, so each hold
-    names think-8krd beside think-f2io, says what it is, and the class says it too."""
+def test_23aff0c_s_classical_holds_wait_on_d2_d6_and_friedman() -> None:
+    """Its 15 deletion bounds and 46 constructions extend Göbel's and Friedman's, each below
+    Göbel's construction at its count, so each hold names think-zkxy beside think-f2io,
+    says what it is, and the class says it too."""
     held = replay.HISTORY_HELD["franciscouzo/square-packing@23aff0c"]
     classical = {item.kind: item for item in held if item.also}
     assert {kind: len(item.counts) for kind, item in classical.items()} == CLASSICAL_23AFF0C
     assert all(
-        item.bead == "think-f2io" and item.also == ("think-8krd",) for item in held if item.also
+        item.bead == "think-f2io" and item.also == ("think-zkxy",) for item in held if item.also
     )
     assert "Friedman" in classical["consequence"].note
     assert "Göbel's squares" in classical["recipe"].note
@@ -1011,17 +1029,17 @@ def test_23aff0c_s_classical_holds_wait_on_613_too() -> None:
         for item in replay.held_plan()
         if item["walk"] == replay.HISTORY and item["report"].endswith("@23aff0c")
     ]
-    assert sum(1 for item in plan if item.get("also") == ["think-8krd"]) == 61
+    assert sum(1 for item in plan if item.get("also") == ["think-zkxy"]) == 61
 
 
 def test_a_hold_s_further_decision_is_a_bead(monkeypatch: pytest.MonkeyPatch) -> None:
     coverage = safe_load(replay.COVERAGE.read_text(encoding="utf-8"))
-    label = "franciscouzo/square-packing@5a299b4"
+    label = "franciscouzo/square-packing@4e4c8ce"
     _holding(
         monkeypatch,
         **{
             label: (
-                replay.Held(replay.SUB_PRINT, "think-fwa9", frozenset({366, 372}), ("613",)),
+                replay.Held(replay.CONSEQUENCE, "think-f2io", frozenset({743, 798}), ("613",)),
             )
         },
     )
@@ -1031,17 +1049,18 @@ def test_a_hold_s_further_decision_is_a_bead(monkeypatch: pytest.MonkeyPatch) ->
 
 
 def test_each_verdict_resting_on_a_hold_is_declared(monkeypatch: pytest.MonkeyPatch) -> None:
-    """131 history verdicts and 2 of #719's are decided only against held publications;
+    """63 history verdicts and 3 of #719's are decided only against held publications;
     each is declared (`Resting`), and one the ledger rests or does not rest is named."""
     assert replay.resting_problems() == []
     history = replay.WALKS[replay.HISTORY]
-    assert sum(len(item.counts) for item in history.resting) == 131
+    assert sum(len(item.counts) for item in history.resting) == 63
+    assert sum(len(item.counts) for item in replay.WALKS[replay.ISSUE_719].resting) == 3
     assert replay.resting_on_holds(history) == history.resting
     first, *rest = history.resting
     dropped = dataclasses.replace(
         history,
         resting=(
-            dataclasses.replace(first, counts=first.counts - {757}),
+            dataclasses.replace(first, counts=first.counts - {798}),
             dataclasses.replace(rest[0], counts=rest[0].counts | {376}),
             *rest[1:],
         ),
@@ -1049,22 +1068,22 @@ def test_each_verdict_resting_on_a_hold_is_declared(monkeypatch: pytest.MonkeyPa
     monkeypatch.setattr(replay, "WALKS", {replay.HISTORY: dropped})
     assert replay.resting_problems() == [
         (
-            f"{replay.HISTORY}: {first.report} not recorded on recipe holds: rests at "
-            "n=[757], undeclared"
+            f"{replay.HISTORY}: {first.report} not recorded on consequence holds: rests at "
+            "n=[798], undeclared"
         ),
         (
-            f"{replay.HISTORY}: {rest[0].report} not recorded on goebel holds: declared at "
+            f"{replay.HISTORY}: {rest[0].report} not recorded on recipe holds: declared at "
             "n=[376], not in the ledger"
         ),
     ]
 
 
 def test_an_answer_leaving_a_hold_out_reopens_the_verdicts_resting_on_it() -> None:
-    """Run again without each class of hold, the history walk records 9 of 5a299b4's
-    certificates at the deletion bounds' counts and 47 publications at the recipes', each
-    a new record with no row and no hold; at Göbel and sub-print holds every step it would
-    record is held again by the same decision. Each step it would record rests on that
-    class alone; a verdict also resting on another standing hold stays."""
+    """Run again without each class of hold, the history walk records 11 of 5a299b4's
+    certificates and 2 of #715's re-certifications at the deletion bounds' counts and 48
+    publications at the recipes', each a new record with no row and no hold. Each step it
+    would record rests on that class alone; a verdict also resting on another standing
+    hold stays."""
     history = replay.WALKS[replay.HISTORY]
     found = {}
     for kind in LEFT_OUT:
@@ -1079,8 +1098,25 @@ def test_an_answer_leaving_a_hold_out_reopens_the_verdicts_resting_on_it() -> No
         assert {(n, report) for n, report, _ in flips} <= resting
     assert found == LEFT_OUT
     deletions = replay.refusal_flips(history, (replay.CONSEQUENCE,))
-    assert [n for n, _, _ in deletions] == [406, 447, 588, 589, 638, 906, 907, 967, 968]
-    assert {report for _, report, _ in deletions} == {"franciscouzo/square-packing@5a299b4"}
+    assert [n for n, _, _ in deletions] == [
+        406,
+        447,
+        588,
+        589,
+        632,
+        638,
+        683,
+        798,
+        855,
+        906,
+        907,
+        967,
+        968,
+    ]
+    assert {report for _, report, _ in deletions} == {
+        "franciscouzo/square-packing@5a299b4",
+        "#715",
+    }
 
 
 def test_the_history_ledger_transcribes_the_scan_and_the_register() -> None:
@@ -1109,7 +1145,7 @@ SUPERSEDED_BY_732 = {
     "couzo-verified-bounds-2026-10-14": 4,
 }
 #: #732's verdicts that rest on held publications, by the class of hold.
-RESTING_732 = {"consequence": 14, "goebel": 43, "recipe": 41, "sub-print": 31}
+RESTING_732 = {"consequence": 14, "recipe": 41}
 
 
 def test_a_count_named_outside_the_band_is_never_read() -> None:
@@ -1352,10 +1388,10 @@ def test_the_replay_reads_a_row_s_exact_side_as_the_ledger_s_starts_do(
         replay.exact_row_side(printed, 400)
 
 
-def test_732_declares_the_77_rows_its_walk_records_and_holds_499() -> None:
+def test_732_declares_the_77_rows_its_walk_records_and_restates_499() -> None:
     """The issue has no table: the packet declares the rows the walk records and does not
     hold, each the certificate the source holds at the pin, printed rounded up at 12 places.
-    499, 8.66e-13 below #719's row at the same print, is recorded and held (think-fwa9)."""
+    499, 8.66e-13 below #719's row at the same print, restates it (think-fwa9)."""
     chosen = replay.release(732)
     assert replay.declares_rows(chosen)
     assert chosen.issue == 732
@@ -1369,10 +1405,15 @@ def test_732_declares_the_77_rows_its_walk_records_and_holds_499() -> None:
         for step in count["steps"]
         if step["report"] == "#732" and step["verdict"] == replay.RECORDED
     }
-    assert recorded == {row.n for row in rows} | {499}
-    held = walk.holds("#732", 499)
-    assert held is not None
-    assert (held.kind, held.bead) == (replay.SUB_PRINT, "think-fwa9")
+    assert recorded == {row.n for row in rows}
+    assert "#732" not in walk.held
+    (count,) = [count for count in ledger["counts"] if count["n"] == 499]
+    (step,) = [step for step in count["steps"] if step["report"] == "#732"]
+    assert (step["verdict"], step["reason"], step["decided_against"]) == (
+        "not recorded",
+        "restates",
+        ["beyond-horizon row mishapolk-issue719-2026-10-22"],
+    )
     history = {row["n"]: row for row in _read(chosen.path(replay.SOURCE_HISTORY))["at_commit"]}
     for row in rows:
         assert row.path == history[row.n]["certificate"]
@@ -1394,20 +1435,40 @@ def test_732_s_rows_are_current_and_supersede_the_rows_they_beat() -> None:
     assert beaten == SUPERSEDED_BY_732
 
 
-def test_the_732_walk_holds_the_withdrawn_files_and_names_what_rests_on_holds() -> None:
+def test_the_732_walk_keeps_out_the_withdrawn_files_and_names_what_rests_on_holds() -> None:
     """The author's 1851c2c files at the nine counts #719's edit withdrew are below every
-    earlier report, and #732's later files below them: held for think-8m4k. 369 and 376 are
-    above 58a7833's held bound, itself above Göbel's construction; 985 equals 4e4c8ce's
+    earlier report, and #732's later files below them: not reports, by the owner's answer of
+    23 October 2026 (think-8m4k), a settled hold on which nothing rests. 331, 369 and 376
+    are above Göbel's construction, an earlier report (think-8krd); 985 equals 4e4c8ce's
     deletion bound. Only a deletion-bound answer would make one of #732's a new record."""
     walk = replay.WALKS[replay.ISSUE_732]
     (withdrawn,) = walk.held["Mishapolk/square-packing-records@1851c2c"]
     assert (withdrawn.kind, withdrawn.bead) == (replay.WITHDRAWN, "think-8m4k")
+    assert withdrawn.answer == replay.WITHDRAWN_ANSWER
+    assert "not a report" in replay.HELD_CLASSES[replay.WITHDRAWN]
     assert sorted(withdrawn.counts) == [411, 451, 494, 495, 540, 583, 587, 632, 683]
-    assert withdrawn.kind in replay.HELD_CLASSES
+    settled = replay.held_dependents()[replay.ISSUE_732]
+    assert settled["settled"] == [
+        {
+            "report": "Mishapolk/square-packing-records@1851c2c",
+            "class": replay.WITHDRAWN,
+            "counts": sorted(withdrawn.counts),
+            "answer": replay.WITHDRAWN_ANSWER,
+        }
+    ]
+    assert replay.WITHDRAWN not in settled["recorded_if_left_out"]
     mine = {item.kinds: item.counts for item in walk.resting if item.report == "#732"}
     assert {kinds[0]: len(counts) for kinds, counts in mine.items()} == RESTING_732
-    assert {369, 376} <= mine[(replay.GOEBEL_ABOVE,)]
     assert 985 in mine[(replay.CONSEQUENCE,)]
+    steps = {
+        count["n"]: step
+        for count in _read(ISSUE_732 / "ledger.json")["counts"]
+        for step in count["steps"]
+        if step["report"] == "#732"
+    }
+    for n in (331, 369, 376):
+        assert (steps[n]["verdict"], steps[n]["reason"]) == ("not recorded", "above")
+        assert steps[n]["decided_against"] == ["Göbel's construction"]
     flips = replay.refusal_flips(walk, (replay.CONSEQUENCE,))
     assert [(n, falls) for n, report, falls in flips if report == "#732"] == [
         (985, replay.NEW_RECORD)
@@ -1428,3 +1489,76 @@ def test_the_732_ledger_transcribes_the_source_history_and_the_scan() -> None:
     )
     assert set(models) == {"exact", "print"}
     assert models["print"] < 5
+
+
+#: The register's rows above Göbel's construction at their count, each marked so with it.
+ABOVE_GOEBEL = {
+    (369, "couzo-extended-range-reports-2026-10-08"): "19 + 1/2*sqrt(2)",
+    (375, "couzo-extended-range-reports-2026-10-08"): "10 + 7*sqrt(2)",
+    (375, "couzo-extended-range-updates-2026-10-08"): "10 + 7*sqrt(2)",
+    (375, "couzo-certificates-2026-10-11"): "10 + 7*sqrt(2)",
+    (375, "couzo-certificates-2026-10-12"): "10 + 7*sqrt(2)",
+    (376, "couzo-extended-range-reports-2026-10-08"): "10 + 7*sqrt(2)",
+    (376, "couzo-certificates-2026-10-11"): "10 + 7*sqrt(2)",
+    (376, "couzo-certificates-2026-10-12"): "10 + 7*sqrt(2)",
+    (376, "couzo-certificates-2026-10-13"): "10 + 7*sqrt(2)",
+}
+
+
+def test_each_row_above_goebel_s_construction_is_marked() -> None:
+    """The owner's answer on #613 (think-8krd): Göbel's construction is an earlier report,
+    so the nine rows of 8 to 13 October above it at 369, 375 and 376 are marked with it and
+    hold no count. 369 and 376 have no current row; at 375 the 13 October row, below it,
+    leads to Evan Daniel's. A row left unmarked, or marked and not above, is named."""
+    coverage = safe_load(replay.COVERAGE.read_text(encoding="utf-8"))
+    marked = {
+        (row["n"], row["source_id"]): row["construction"]
+        for row in coverage["beyond_horizon_claims"]
+        if row["disposition"] == coverage_check.ABOVE_CONSTRUCTION
+    }
+    assert marked == ABOVE_GOEBEL
+    assert replay.construction_problems(coverage) == []
+    current = coverage_check.current_beyond_horizon(coverage)
+    assert 369 not in current
+    assert 376 not in current
+    assert current[375]["source_id"] == "evand-compositions-2026-10-13"
+    for row in coverage["beyond_horizon_claims"]:
+        if (row["n"], row["source_id"]) == (376, "couzo-certificates-2026-10-13"):
+            row["disposition"] = "tracked-outside-case-corpus"
+            del row["construction"]
+        if (row["n"], row["source_id"]) == (375, "evand-compositions-2026-10-13"):
+            row |= {"disposition": coverage_check.ABOVE_CONSTRUCTION, "construction": "x"}
+    assert replay.construction_problems(coverage) == [
+        (
+            "n=375 from evand-compositions-2026-10-13: marked, and not above Göbel's "
+            "10 + 7*sqrt(2)"
+        ),
+        (
+            "n=376 from couzo-certificates-2026-10-13: above Göbel's construction "
+            "10 + 7*sqrt(2), and not marked above-classical-construction"
+        ),
+    ]
+
+
+def test_the_rulings_hold_goebel_s_construction_as_an_earlier_report() -> None:
+    """In the history walk Göbel's construction joins the start wherever it is below the
+    record on the frozen main, and every publication the walk held for #613 is not recorded
+    against it: 02f9690's, 487b058's and 58a7833's at 369, all above 19 + sqrt(2)/2."""
+    verdicts = _read(HISTORY_LEDGER / "ledger.json")
+    (count,) = [count for count in verdicts["counts"] if count["n"] == 369]
+    (start,) = count["start"]
+    assert start["label"] == "Göbel's construction"
+    assert "Göbel strip 19 + 1/2*sqrt(2) of n = 369" in start["holders"]
+    assert all(step["verdict"] == "not recorded" for step in count["steps"])
+    _, classical = verdicts["rulings"]
+    above = {(item["n"], item["report"]) for item in classical["not_recorded"]}
+    assert {
+        (369, "franciscouzo/square-packing@02f9690"),
+        (369, "franciscouzo/square-packing@487b058"),
+        (369, "franciscouzo/square-packing@58a7833"),
+        (376, "couzo-certificates-2026-10-13"),
+    } <= above
+    readme = (HISTORY_LEDGER / "README.md").read_text(encoding="utf-8")
+    assert "## The Owner's Rulings" in readme
+    earlier = replay.ROOT / "campaign/issue-intake/upper-bounds-20261022/README.md"
+    assert "## The Owner's Rulings" not in earlier.read_text(encoding="utf-8")

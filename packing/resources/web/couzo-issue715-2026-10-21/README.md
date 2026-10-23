@@ -53,13 +53,12 @@ Each count falls in one of three sets:
   (90), and its side is below every earlier public side by at least 2.90e-07 (at 931,
   against a `c6da0fc` certificate), so the print alone decides it. These are the issue’s
   own reports.
-- **30 held.** The certificate was first committed at `5a299b4`, and its side is below
-  the `4e4c8ce` certificate of the same count, published on 15 October, by 2.37e-23 to
-  3.18e-23: both round up to the issue’s print. Each is one of the index’s L-border
-  constructions, written out in full. Whether such a re-certification of the author’s
-  own earlier publication is a
-  new report depends on reading below the print, and it is left to a decision
-  (think-fwa9); nothing is recorded for these counts.
+- **30 re-certified.** The certificate was first committed at `5a299b4`, and its side is
+  below the `4e4c8ce` certificate of the same count, published on 15 October, by 2.37e-23
+  to 3.18e-23: both round up to the issue’s print. Each is one of the index’s L-border
+  constructions, written out in full. By the owner’s answer of 23 October 2026
+  (think-fwa9) such a re-certification of the author’s own earlier publication restates
+  it, so nothing is recorded for these counts.
 - **34 restated.** The side equals that of a certificate first published at `02f9690`
   (6), `a7067d7` (1), `f311f08` (1) or `4e4c8ce` (26, two of them the index’s deletion
   bounds), 32 of them byte for byte. Each is an earlier report, owned by its own import,
@@ -347,8 +346,9 @@ publication. Recording them would add 30 rows to the claims record, superseding 
 `487b058` rows that stand at those counts, and `4e4c8ce`’s rows when that import
 (think-yfoo) lands.
 `4e4c8ce`’s rows are recorded (couzo-index-2026-10-15), by the
-[history walk of Couzo’s watched publications](../../../campaign/issue-intake/upper-bounds-couzo-history-20261022/README.md), which holds
-these 30 for think-fwa9 too.
+[history walk of Couzo’s watched publications](../../../campaign/issue-intake/upper-bounds-couzo-history-20261022/README.md), which
+decides these 30 as restatements of them, by the owner’s answer of 23 October 2026
+(think-fwa9).
 
 | n | Printed, up | 4e4c8ce side, up at 16 | This certificate below it by | Index |
 | ---: | --- | --- | --- | --- |

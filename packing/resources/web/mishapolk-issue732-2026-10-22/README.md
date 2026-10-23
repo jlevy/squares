@@ -113,27 +113,23 @@ Every side is below Göbel’s classical construction at its count
 
 ## Held Back and Not Recorded
 
-- **499 is recorded and held.** It is 8.66 × 10⁻¹³ below #719’s row, and both round up to
-  22.881306218113 at 12 places: a re-certification below the print, which waits on the
-  owner’s answer (think-fwa9).
-  On 23 October the owner answered that such re-certifications are restatements;
-  think-temp applies the answer to this walk after this import merges.
+- **499 restates #719’s row.** It is 8.66 × 10⁻¹³ below it, and both round up to
+  22.881306218113 at 12 places: by the owner’s answer of 23 October 2026 a
+  re-certification below the print restates the report it beats, which stays the row
+  (think-fwa9), so the walk does not record it.
 - **The author’s own `1851c2c` files at the nine other withdrawn counts** (411, 451, 494,
   495, 540, 583, 587, 632 and 683) are below every earlier report, and the issue’s files are
   below them.
-  The walk records them and holds them for the owner’s question whether a file its author
-  withdrew from an issue is a report (think-8m4k).
-  No verdict rests on them.
-  On 23 October the owner answered that such a file is not a report, so nothing here
-  changes; the walk’s text names the answer in the next records change (think-8m4k).
-- **The other 312 are not recorded.** 81 restate #719’s rows exactly, and the rest equal or
-  lie above an earlier report.
-  129 of these verdicts are decided only against publications the walk holds for an owner
-  decision (`beyond_horizon_replay.WALKS`):
-  - 43 against publications above Göbel’s construction, 369 and 376 among them, above
-    Couzo’s `58a7833` bound; each is above Göbel’s construction itself;
+  By the owner’s answer of 23 October 2026 a file its author withdrew from an issue,
+  claiming a lower one later, is not a report (think-8m4k): the walk keeps them out of the
+  record, a settled disposition, and no verdict rests on them.
+- **The other 313 are not recorded.** 131 equal an earlier report, 81 of them #719’s rows
+  exactly, 181 lie above one, and 499 restates #719’s row.
+  43 of them, 331, 369 and 376 among them, are above Göbel’s construction at their count,
+  which the owner counts as an earlier report since 23 October 2026 (think-8krd).
+  55 are decided only against publications the walk holds for an owner decision
+  (`beyond_horizon_replay.WALKS`):
   - 41 against constructions with no certificate file;
-  - 31 against re-certifications below the print;
   - 14 against index deletion bounds, 985 among them, equal to Couzo’s `4e4c8ce` bound.
 - **What each answer would record.** `beyond_horizon_replay held-dependents` reruns the
   walk without each class of hold. Beside #732’s own claims, each answer also reaches the
@@ -143,11 +139,8 @@ Every side is below Göbel’s classical construction at its count
     and Couzo’s `5a299b4` index at 8 counts;
   - leaving constructions with no certificate file out (D2, think-f2io) records 24 of the
     `1851c2c` files, `8a488a1`’s at 849, and `5a299b4` at 37 counts;
-  - leaving the publications above Göbel’s construction out (think-8krd) decides 17
-    `1851c2c` files and #732’s 331, 369 and 376 again, and each is held in turn as above
-    Göbel’s construction itself;
-  - leaving the re-certifications below the print or the withdrawn files out records
-    nothing of the author’s.
+  - the withdrawn files are out of the record already, and leaving them out of the walk
+    records nothing of the author’s.
 - **The 5,078 above 1024** wait on the owner (D1, think-f2io).
   On 23 October the owner answered that rows above 1024 are tracked; think-llit applies
   the answer.

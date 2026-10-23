@@ -24,7 +24,7 @@ The [history walk of 22 October](../../../campaign/issue-intake/upper-bounds-cou
 
 ## Held Back
 
-The walk records the commit’s publications at 89 more counts and holds each back from a row for its decision: 47 certificates above Göbel’s classical construction at their count (#613, think-8krd), pinned by digest here; 39 bounds `upper_bounds.json` states by deleting squares from the next count’s certificate, with no certificate file at their own count (D6, proposed on think-f2io), 743 and 985 among them, which #715 restates; and 3 re-certifications below the side they beat by less than 10⁻¹² with the same 12-place print, at 327, 332 and 542 (think-fwa9).
+The walk records the commit’s 39 bounds `upper_bounds.json` states by deleting squares from the next count’s certificate, with no certificate file at their own count, and holds each back from a row for the owner (D6, proposed on think-f2io), 743 and 985 among them, which #715 restates. By the owner’s answers of 23 October 2026 it does not record the commit’s publications at 50 more counts: 47 certificates above Göbel’s classical construction at their count, an earlier report (#613, think-8krd), pinned by digest here, and 3 re-certifications below the side they beat by less than 10⁻¹² with the same 12-place print, at 327, 332 and 542, which restate those reports (think-fwa9).
 
 ## Credit
 

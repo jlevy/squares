@@ -26091,9 +26091,9 @@ results:
       known side at its count.
 
       At 42 counts from 408 to 974 the certificate is above Göbel's classical constructions,
-      which the record holds nowhere beyond 324 (review/goebel-beyond-horizon.md); those
-      rows wait on the owner's answer on jlevy/squares#613 (think-8krd) and are not
-      recorded. A replay of the 296 makes 456,922,338 pair decisions, priced at 38 to 48
+      which the record held nowhere beyond 324 (review/goebel-beyond-horizon.md); those
+      rows are not recorded, since the owner answered jlevy/squares#613 on 23 October 2026
+      that Göbel's constructions are earlier reports (think-8krd). A replay of the 296 makes 456,922,338 pair decisions, priced at 38 to 48
       CPU-hours and held (think-2d7f).
 
       V3 and C3 rest on the 16 October review

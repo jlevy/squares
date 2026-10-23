@@ -2748,13 +2748,9 @@ reports:
     which its manifest (certificates/manifest.json, pinned by the SHA-256 the issue states)
     lists as the issue''s claims there, each at its header''s exact side and dated by the
     issue; first_committed is the first commit of the source''s history that published the
-    side. The walk holds its publications at 1 count back from a row, each waiting on an owner
-    decision (beyond_horizon_replay.WALKS[''upper-bounds-issue732-20261023''].held): 1 re-certification
-    below the 12-place print (think-fwa9). Its verdicts at 129 counts are decided only against
-    held publications (beyond_horizon_replay.WALKS[''upper-bounds-issue732-20261023''].resting):
-    14 against index deletion bounds, 43 against publications above Göbel''s construction,
-    41 against constructions with no certificate file and 31 against re-certifications below
-    the 12-place print. An answer that leaves a hold out reruns this walk.'
+    side. Its verdicts at 55 counts are decided only against held publications (beyond_horizon_replay.WALKS[''upper-bounds-issue732-20261023''].resting):
+    14 against index deletion bounds and 41 against constructions with no certificate file.
+    An answer that leaves a hold out reruns this walk.'
 - report: Mishapolk/square-packing-records@1851c2c
   url: https://github.com/Mishapolk/square-packing-records/tree/1851c2c70a77085f2deb87978f10d40e0f0e86a6
   kind: publication
@@ -3174,13 +3170,13 @@ reports:
     so each certificate there is a report from the first commit that holds its side. Transcribed
     from the mishapolk-issue732-2026-10-22 packet''s receipts/source-history.json at each
     count #732 claims where the commit states a side other than the one the issue claims,
-    strictly below the start. The walk holds its publications at 9 counts back from a row,
-    each waiting on an owner decision (beyond_horizon_replay.WALKS[''upper-bounds-issue732-20261023''].held):
-    9 certificates their author withdrew from an issue (think-8m4k). Its verdicts at 59 counts
-    are decided only against held publications (beyond_horizon_replay.WALKS[''upper-bounds-issue732-20261023''].resting):
-    8 against index deletion bounds, 21 against publications above Göbel''s construction and
-    30 against constructions with no certificate file. An answer that leaves a hold out reruns
-    this walk.'
+    strictly below the start. The walk keeps its 9 certificates their author withdrew from
+    an issue, at 411, 451, 494, 495, 540, 583, 587, 632 and 683, out of the record by the
+    owner''s answer of 23 October 2026 (think-8m4k): a watched certificate its author withdrew
+    from an issue, claiming a lower file later, is not a report (beyond_horizon_replay.WALKS[''upper-bounds-issue732-20261023''].held).
+    Its verdicts at 38 counts are decided only against held publications (beyond_horizon_replay.WALKS[''upper-bounds-issue732-20261023''].resting):
+    8 against index deletion bounds and 30 against constructions with no certificate file.
+    An answer that leaves a hold out reruns this walk.'
 - report: Mishapolk/square-packing-records@8a488a1
   url: https://github.com/Mishapolk/square-packing-records/tree/8a488a10e994f13c706b651ddaaa9727600c96e5
   kind: publication
@@ -3283,15 +3279,16 @@ reports:
       retained and replayed in the couzo-issue715-2026-10-21 packet
   note: 'Issue 715''s re-certifications of the 4e4c8ce certificates below the 12-place print
     at the counts #732 claims, strictly below the start, at the exact sides its packet''s
-    filtered receipt states; they wait on a decision (think-fwa9). The walk holds its publications
-    at 11 counts back from a row, each waiting on an owner decision (beyond_horizon_replay.WALKS[''upper-bounds-issue732-20261023''].held):
-    11 re-certifications below the 12-place print (think-fwa9).'
+    filtered receipt states; each restates the certificate it re-certifies, by the owner''s
+    answer of 23 October 2026 (think-fwa9). Its verdicts at 1 count are decided only against
+    held publications (beyond_horizon_replay.WALKS[''upper-bounds-issue732-20261023''].resting):
+    1 against index deletion bounds. An answer that leaves a hold out reruns this walk.'
 - report: evand/square-packing@49907ec
   url: https://github.com/evand/square-packing/tree/49907ec3bfb26f7589c63c465d0a202e463a6a7b
   kind: publication
   holders: Evan Daniel
   reported_at: '2026-10-08T06:49:02Z'
-  bead: think-8krd
+  bead: ''
   claims:
   - n: 964
     printed: '31.859493881560'
@@ -3302,9 +3299,7 @@ reports:
   note: 'A publication in a watched repository that no issue reports, dated by its commit,
     or by the later push that made it public; transcribed from the history scan (resources/web/couzo-index-2026-10-15/receipts/history-publications.json)
     at each count #732 claims where it states a side strictly below the start, at the least
-    side the commit states there. The walk holds its publications at 1 count back from a row,
-    each waiting on an owner decision (beyond_horizon_replay.WALKS[''upper-bounds-issue732-20261023''].held):
-    1 publication above Göbel''s construction (think-8krd).'
+    side the commit states there.'
 - report: franciscouzo/square-packing@02f9690
   url: https://github.com/franciscouzo/square-packing/tree/02f969075f79d5e13fa21e09e381a44e8647b452
   kind: publication
@@ -3321,15 +3316,13 @@ reports:
   note: 'A publication in a watched repository that no issue reports, dated by its commit,
     or by the later push that made it public; transcribed from the history scan (resources/web/couzo-index-2026-10-15/receipts/history-publications.json)
     at each count #732 claims where it states a side strictly below the start, at the least
-    side the commit states there. The walk holds its publications at 1 count back from a row,
-    each waiting on an owner decision (beyond_horizon_replay.WALKS[''upper-bounds-issue732-20261023''].held):
-    1 publication above Göbel''s construction (think-8krd).'
+    side the commit states there.'
 - report: franciscouzo/square-packing@487b058
   url: https://github.com/franciscouzo/square-packing/tree/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d
   kind: publication
   holders: Francisco Couzo
   reported_at: '2026-10-14T17:45:39Z'
-  bead: think-8krd
+  bead: think-f2io
   claims:
   - n: 369
     printed: '19.707106781187'
@@ -3586,9 +3579,7 @@ reports:
   note: 'A publication in a watched repository that no issue reports, dated by its commit,
     or by the later push that made it public; transcribed from the history scan (resources/web/couzo-index-2026-10-15/receipts/history-publications.json)
     at each count #732 claims where it states a side strictly below the start, at the least
-    side the commit states there. The walk holds its publications at 42 counts back from a
-    row, each waiting on an owner decision (beyond_horizon_replay.WALKS[''upper-bounds-issue732-20261023''].held):
-    42 publications above Göbel''s construction (think-8krd).'
+    side the commit states there.'
 - report: franciscouzo/square-packing@4e4c8ce
   url: https://github.com/franciscouzo/square-packing/tree/4e4c8ce23cb5e87f033021687010992c40575480
   kind: publication
@@ -4010,19 +4001,15 @@ reports:
   note: 'A publication in a watched repository that no issue reports, dated by its commit,
     or by the later push that made it public; transcribed from the history scan (resources/web/couzo-index-2026-10-15/receipts/history-publications.json)
     at each count #732 claims where it states a side strictly below the start, at the least
-    side the commit states there. The walk holds its publications at 63 counts back from a
+    side the commit states there. The walk holds its publications at 16 counts back from a
     row, each waiting on an owner decision (beyond_horizon_replay.WALKS[''upper-bounds-issue732-20261023''].held):
-    45 publications above Göbel''s construction (think-8krd), 2 re-certifications below the
-    12-place print (think-fwa9) and 16 index deletion bounds (think-f2io). Its verdicts at
-    2 counts are decided only against held publications (beyond_horizon_replay.WALKS[''upper-bounds-issue732-20261023''].resting):
-    2 against publications above Göbel''s construction. An answer that leaves a hold out reruns
-    this walk.'
+    16 index deletion bounds (think-f2io).'
 - report: franciscouzo/square-packing@58a7833
   url: https://github.com/franciscouzo/square-packing/tree/58a783368d4b7e70bb800f0009ea9ca03e578739
   kind: publication
   holders: Francisco Couzo
   reported_at: '2026-10-15T01:25:11Z'
-  bead: think-8krd
+  bead: ''
   claims:
   - n: 331
     printed: '18.707106781187'
@@ -4309,9 +4296,7 @@ reports:
   note: 'A publication in a watched repository that no issue reports, dated by its commit,
     or by the later push that made it public; transcribed from the history scan (resources/web/couzo-index-2026-10-15/receipts/history-publications.json)
     at each count #732 claims where it states a side strictly below the start, at the least
-    side the commit states there. The walk holds its publications at 47 counts back from a
-    row, each waiting on an owner decision (beyond_horizon_replay.WALKS[''upper-bounds-issue732-20261023''].held):
-    47 publications above Göbel''s construction (think-8krd).'
+    side the commit states there.'
 - report: franciscouzo/square-packing@23aff0c
   url: https://github.com/franciscouzo/square-packing/tree/23aff0c6f992271e1ad13a148d44f392c4b386c0
   kind: publication
@@ -4929,15 +4914,11 @@ reports:
   note: 'A publication in a watched repository that no issue reports, dated by its commit,
     or by the later push that made it public; transcribed from the history scan (resources/web/couzo-index-2026-10-15/receipts/history-publications.json)
     at each count #732 claims where it states a side strictly below the start, at the least
-    side the commit states there. The walk holds its publications at 61 counts back from a
+    side the commit states there. The walk holds its publications at 54 counts back from a
     row, each waiting on an owner decision (beyond_horizon_replay.WALKS[''upper-bounds-issue732-20261023''].held):
-    7 re-certifications below the 12-place print (think-fwa9), 13 index deletion bounds, deletions
-    from Friedman''s off-centre constructions (think-f2io, think-8krd) and 41 constructions
-    with no certificate file, Göbel''s squares and Friedman''s off-centre family, 41 of them
-    as L-border extensions (think-f2io, think-8krd). Its verdicts at 35 counts are decided
-    only against held publications (beyond_horizon_replay.WALKS[''upper-bounds-issue732-20261023''].resting):
-    35 against publications above Göbel''s construction. An answer that leaves a hold out
-    reruns this walk.'
+    13 index deletion bounds, deletions from Friedman''s off-centre constructions (think-f2io,
+    think-zkxy) and 41 constructions with no certificate file, Göbel''s squares and Friedman''s
+    off-centre family, 41 of them as L-border extensions (think-f2io, think-zkxy).'
 - report: franciscouzo/square-packing@5a299b4
   url: https://github.com/franciscouzo/square-packing/tree/5a299b4708ab1ae4870d0fc1ab155738144f6ab8
   kind: publication
@@ -5596,15 +5577,20 @@ reports:
   note: 'A publication in a watched repository that no issue reports, dated by its commit,
     or by the later push that made it public; transcribed from the history scan (resources/web/couzo-index-2026-10-15/receipts/history-publications.json)
     at each count #732 claims where it states a side strictly below the start, at the least
-    side the commit states there. The walk holds its publications at 29 counts back from a
-    row, each waiting on an owner decision (beyond_horizon_replay.WALKS[''upper-bounds-issue732-20261023''].held):
-    1 publication above Göbel''s construction (think-8krd) and 28 re-certifications below
-    the 12-place print (think-fwa9). Its verdicts at 79 counts are decided only against held
+    side the commit states there. Its verdicts at 47 counts are decided only against held
     publications (beyond_horizon_replay.WALKS[''upper-bounds-issue732-20261023''].resting):
-    8 against index deletion bounds, 27 against publications above Göbel''s construction,
-    37 against constructions with no certificate file and 7 against re-certifications below
-    the 12-place print. An answer that leaves a hold out reruns this walk.'
+    10 against index deletion bounds and 37 against constructions with no certificate file.
+    An answer that leaves a hold out reruns this walk.'
 exceptions: []
 key_reason_candidates: []
 other_items: []
+rulings:
+- ruling: restatement
+  decided: '2026-10-23'
+  bead: think-fwa9
+  through: 1024
+- ruling: classical-constructions
+  decided: '2026-10-23'
+  bead: think-8krd
+  through: 1024
 cross_check: []

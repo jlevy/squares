@@ -446,7 +446,33 @@ the inputs and the comparison:
   cannot decide is undecided, never guessed.
 - **A refinement** of a standing packing is recorded like a new packing and credited to
   its finder after the finder of the packing it refines, as a regularization
-  ([stage 3](#stage-3-record)).
+  ([stage 3](#stage-3-record)), unless it restates the report below the print.
+
+Beyond the corpus the owner’s answers of 23 October 2026 are rules of the walk.
+The ledger’s `rulings` list names each one it applies, and the module docstring of
+`devtools.intake_ledger` owns them:
+
+- **A restatement is not recorded** (think-fwa9): “A side below an earlier report at its
+  count by less than the 12-place print, with both rounding up to the same 12-place
+  print, restates that report: the earlier report stays the row.”
+  The walk measures the distance to the member of the standing side the claim is closest
+  below, a report and not a construction.
+  A claim in the ruling’s words that an earlier ledger recorded and the answer did not
+  name waits on the owner (`awaiting_owner`). #719’s 631 is the one such claim to 1024:
+  another holder’s re-certification of Couzo’s `4e4c8ce` certificate, which #722
+  recorded (think-oqjd).
+- **Göbel’s classical constructions are earlier reports** (think-8krd,
+  [#613](https://github.com/jlevy/squares/issues/613)). At each count the least side of
+  the three families the Kingbird catalogue states, at that count or by deleting squares
+  from a larger one, joins the start, so a rational side at or above it is not recorded.
+  The 15 October packet’s retained program computes it exactly.
+  A register row above it stays listed and is marked
+  ([frontier README](../frontier/README.md#source-coverage-and-freshness)).
+- **A certificate its author withdrew from an issue is not a report** (think-8m4k). A
+  file in the author’s watched repository that his issue withdrew, where his later
+  release claims a lower side at that count, stays among the walk’s publications.
+  The walk keeps it out of the record (`beyond_horizon_replay.Held.answer`), and no
+  verdict rests on it.
 
 Transcribe each report’s claims into the directory’s `sources.yaml`, then, from
 `packing/`, run `python -m devtools.intake_ledger gather DIR` (`--snapshot` reuses the

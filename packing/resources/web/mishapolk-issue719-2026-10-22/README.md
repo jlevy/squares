@@ -152,15 +152,19 @@ The [history walk of Couzo’s watched publications](../../../campaign/issue-int
 records them where they were first: at 49 of the 111 the row just before #719’s is
 Couzo’s own, his `4e4c8ce` index at 38 (couzo-index-2026-10-15) and his `5a299b4`
 reconciliation at 11 (couzo-reconcile-2026-10-20).
-The re-certifications below the 12-place print, issue 715’s and `5a299b4`’s, stay held
-(think-fwa9), as does `23aff0c`’s bound at 447, which deletes a square from Friedman’s
-classical construction at 448 (think-f2io, think-8krd), and the chain
-passes over them.
+The re-certifications below the 12-place print, issue 715’s and `5a299b4`’s, restate
+the `4e4c8ce` certificates by the owner’s answer of 23 October 2026 (think-fwa9), so the
+walk does not record them. `23aff0c`’s bound at 447, which deletes a square from
+Friedman’s classical construction at 448, stays held (think-f2io, think-zkxy), and the
+chain passes over it.
 
 At 631 #719 is $2.73 \times 10^{-13}$ below Couzo’s `4e4c8ce` certificate and issue 715’s
 re-certification of it, and all three round up to the same 12 places, 25.656854249519.
-The rule compares exact sides, so the row is recorded, and every row of this source
+The rule compares exact sides, so #722 recorded the row, and every row of this source
 records its side rounded up at 16 places, where all 111 differ from every earlier side.
+The owner’s answer of 23 October on re-certifications below the print reaches it in
+words, as another holder’s re-certification of Couzo’s certificate; the walks keep it
+recorded until the owner says (think-oqjd).
 
 ## Exact Replay
 
@@ -229,7 +233,9 @@ Each is pinned by digest in the manifest, and the reply asks the author about it
   146, 152, 154, 155, 156, 176, 177, 183, 205, 211, 235, 236, 241, 264, 271, 300, 304, 305
   and 308: in triage 17 measured below the house by $1.1 \times 10^{-70}$ to
   $1.8 \times 10^{-19}$, and 17 undecided against an algebraic or catalogue lane. The issue
-  does not request them; the owner’s question think-fwa9 is the same at a larger scale.
+  does not request them. The owner’s answer on think-fwa9 (23 October 2026: a
+  re-certification below the print restates the report it beats) was given for rows
+  beyond the corpus; these stay pinned, unclaimed.
 - **Three files that failed both exact routes in triage:**
   `certificates/n-133_breakthrough.cert` (squares cross the walls),
   `certificates/n266_fresh.cert` (33 overlapping pairs) and `certificates/n275.cert`.

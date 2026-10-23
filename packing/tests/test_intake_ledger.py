@@ -342,6 +342,103 @@ def test_an_exception_is_applied_and_shown() -> None:
     assert [item.label for item in walk.standing] == ["#1"]
 
 
+#: Both of the owner's rulings of 23 October 2026, at every count beyond the horizon.
+RULED = ledger.Rulings(restatement=ledger.NO_LIMIT, classical=ledger.NO_LIMIT)
+
+
+def test_a_side_within_the_print_below_a_report_restates_it() -> None:
+    """The owner's answer of 23 October 2026 (think-fwa9): beyond the horizon a side below
+    an earlier report by less than one unit in the 12th place, both rounding up to one
+    12-place print, restates it and is not recorded; a full unit below is recorded. The
+    corpus and a ledger without the ruling walk as before."""
+    earlier = side("#1", "39/2", when="2026-10-12T01:00:00Z")
+    close = side("#2", "19.49999999999999999999", when="2026-10-12T02:00:00Z")
+    far = side("#3", "19.499999999999", when="2026-10-12T03:00:00Z")
+    walk = ledger.walk(400, GRID_10, [earlier, close, far], rulings=RULED)
+    assert verdicts(walk) == [
+        ("#1", "recorded", "the grid"),
+        ("#2", "not recorded", "#1"),
+        ("#3", "recorded", "#1"),
+    ]
+    assert walk.steps[1].reason == ledger.RESTATES
+    assert ledger.step_record(walk.steps[1])["difference"] == (
+        "restates, below by 1.00e-20 at the same 12-place print"
+    )
+    for plain in (
+        ledger.walk(400, GRID_10, [earlier, close], rulings=ledger.Rulings()),
+        ledger.walk(324, GRID_10, [earlier, close], rulings=RULED),
+        ledger.walk(400, GRID_10, [earlier, close], rulings=ledger.Rulings(restatement=399)),
+    ):
+        assert [step.verdict for step in plain.steps] == ["recorded", "recorded"]
+
+
+def test_a_claim_in_the_ruling_s_words_may_wait_on_the_owner() -> None:
+    earlier = side("#1", "39/2", when="2026-10-12T01:00:00Z")
+    close = side("#2", "19.49999999999999999999", when="2026-10-12T02:00:00Z")
+    rulings = ledger.Rulings(restatement=ledger.NO_LIMIT, awaiting={(400, "#2"): "think-oqjd"})
+    walk = ledger.walk(400, GRID_10, [earlier, close], rulings=rulings)
+    assert [step.verdict for step in walk.steps] == ["recorded", "recorded"]
+    assert ledger.step_record(walk.steps[1])["awaiting_owner"] == "think-oqjd"
+
+
+def test_goebel_s_construction_is_an_earlier_report_beyond_the_horizon() -> None:
+    """The owner's answer on #613 (think-8krd): at 369 Göbel's strip 19 + sqrt(2)/2 joins
+    the start below the grid, so a side above it is not recorded and one below is. A side
+    just below the construction at its 12-place print is a new side, not a restatement:
+    the ruling restates reports, never a construction."""
+    construction = ledger.construction_side(369)
+    assert construction is not None
+    assert construction.kind == ledger.CONSTRUCTION
+    assert construction.shown == "19.707106781187"
+    grid = ledger.beyond_side(369, {})
+    above = side("#1", "19.71", when="2026-10-12T01:00:00Z")
+    under = side("#2", "19.7071067811865", when="2026-10-12T02:00:00Z")
+    walk = ledger.walk(369, grid, [above, under], rulings=RULED)
+    assert [member.label for member in walk.start] == [ledger.GOEBEL_LABEL]
+    assert verdicts(walk) == [
+        ("#1", "not recorded", ledger.GOEBEL_LABEL),
+        ("#2", "recorded", ledger.GOEBEL_LABEL),
+    ]
+    plain = ledger.walk(369, grid, [above, under])
+    assert [step.verdict for step in plain.steps] == ["recorded", "recorded"]
+    assert ledger.construction_side(324) is None
+    with pytest.raises(ledger.LedgerError, match="stops at 1100"):
+        ledger.construction_side(1101)
+
+
+def test_a_ruling_names_a_known_answer_its_day_and_its_bead() -> None:
+    data = _minimal()
+    data["rulings"] = [
+        {"ruling": "restatement", "decided": "2026-10-23", "bead": "think-fwa9"},
+        {"ruling": "classical-constructions", "decided": "2026-10-23", "bead": "think-8krd"},
+    ]
+    assert ledger.problems(data) == []
+    assert ledger.rulings_of(data) == RULED
+    data["rulings"] = [
+        {"ruling": "other", "decided": "23 October", "bead": "8krd", "through": 300},
+        {
+            "ruling": "classical-constructions",
+            "decided": "2026-10-23",
+            "bead": "think-8krd",
+            "awaiting_owner": [{"n": 101, "report": "#1", "bead": "think-oqjd", "reason": ""}],
+        },
+        {"ruling": "classical-constructions", "decided": "2026-10-23", "bead": "think-8krd"},
+    ]
+    assert ledger.problems(data) == [
+        "ruling other: no such ruling",
+        "ruling other: decided is not a date",
+        "ruling other: bead is not a think-xxxx id",
+        "ruling other: through is not a count beyond the horizon",
+        (
+            "ruling classical-constructions: only the restatement ruling keeps claims for "
+            "the owner"
+        ),
+        "ruling classical-constructions awaiting ('#1', 101): names no claim of the ledger",
+        "ruling classical-constructions awaiting ('#1', 101): states no reason",
+        "ruling classical-constructions: listed twice",
+    ]
+
+
 def test_a_closed_form_of_integers_is_a_rational_record() -> None:
     assert ledger.record_side(
         50, {"value": "7.57142857142857", "exact_form": "7 + (4/7)"}, []
