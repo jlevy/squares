@@ -290,14 +290,15 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
     # states its side cut where its root interval's ends agree. T-120's lies above the
     # ceiling T-125 holds at n = 102, so it is superseded; T-121..T-123's lie below the
     # outward-rounded rationals of the same configurations that T-098 holds, by about
-    # 1e-19, so they are pending adoption and not superseded (think-h0d1). Since the house
-    # adoption of 11 October 2026 the ceiling at n = 102 is T-146's.
+    # 1e-19, so they are pending adoption and not superseded (think-h0d1). The ceiling at
+    # n = 102 was T-146's from the house adoption of 11 October 2026, and is T-193's since
+    # that of 23 October 2026 (think-ot5c).
     assert "T-120" in derived
     for entry in ("T-121", "T-122", "T-123"):
         assert entry not in marked
         assert view.standing(records.results[entry], records) == view.PENDING_ADOPTION
     assert view.position_marks(records.results["T-120"], view.SUPERSEDED, records) == [
-        "superseded by T-146"
+        "superseded by T-193"
     ]
     # Gupta's confirmed fourteen-case refinement supersedes T-114's final ceiling.
     expected = {
@@ -404,6 +405,8 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
         "T-226",
         "T-227",
         "T-228",
+        "T-136",
+        "T-173",
     }
     # The house adoption of 11 October 2026 moved 42 case records to the smallest
     # confirmed and reviewed side the register held (think-fvz4): SQUISH's earlier packets
@@ -445,6 +448,9 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
     # T-228), registered the same day, are superseded from registration.
     # The adoption of 23 October 2026 took 105 and 204 to Mykhailo Polkovskyi's re-solves
     # (T-229); T-174 and T-225 keep their other houses, so it supersedes no more entries.
+    # The same pass's adoption of the nine algebraic houses (think-ot5c) took 259 from
+    # SQUISH's third request (T-136) and 153 and 207 from Mishapolk's exact certificates
+    # (T-173), the last houses of both; T-146 keeps 292 and T-186 its other houses.
     for entry in ("T-128", "T-130"):
         assert view.position_marks(
             records.results[entry], view.standing(records.results[entry], records), records

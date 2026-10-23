@@ -455,26 +455,31 @@ def test_an_entry_may_not_state_more_than_its_case_record_carries(
 def test_an_entry_that_holds_some_counts_may_be_staged_at_others(
     records: view.Records, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    """Since the adoption of 17 October 2026, T-174 holds 37 counts, and its claim states
-    algebraic sides at 70, 153 and 207 below their case records, whose adoption is staged
-    for the writer (`select_houses.PENDING_ADOPTION`). A staged count is pending adoption
-    and no excess; unstaged, the same statement is refused."""
+    """Since the adoption of 23 October 2026 (think-ot5c), T-193 holds six counts, and its
+    claim states exact sides below their case records at seven more, whose adoption is
+    staged (`select_houses.PENDING_ADOPTION`): 267's form waits for its price, and the
+    others for think-8ido. T-174 was the example until the same adoption took its last
+    three staged counts, 70, 153 and 207. A staged count is pending adoption and no
+    excess; unstaged, the same statement is refused."""
     from devtools import select_houses  # noqa: PLC0415
 
-    record = records.results["T-174"]
+    record = records.results["T-193"]
     assert view.standing(record, records) == view.HOLDS
-    assert {70, 153, 207} <= check_standing.staged("T-174")
+    assert {88, 126, 199, 266, 267, 292, 301} <= check_standing.staged("T-193")
     assert check_standing.problems(record, view.HOLDS, records) == []
     line = check_standing.summary(record, view.HOLDS, records)
-    assert "better than the case record at n = 70, 153, 207 (staged for adoption)" in line
+    assert (
+        "better than the case record at n = 88, 126, 199, 266, 267, 292, 301 "
+        "(staged for adoption)"
+    ) in line
     monkeypatch.setattr(
         select_houses,
         "PENDING_ADOPTION",
-        {n: p for n, p in select_houses.PENDING_ADOPTION.items() if n != 153},
+        {n: p for n, p in select_houses.PENDING_ADOPTION.items() if n != 267},
     )
     (problem,) = check_standing.problems(record, view.HOLDS, records)
-    assert "T-174 states more than the verified bound" in problem
-    assert problem.endswith("n = 153")
+    assert "T-193 states more than the verified bound" in problem
+    assert problem.endswith("n = 267")
 
 
 def test_an_entry_with_no_standing_states_no_bound(records: view.Records) -> None:

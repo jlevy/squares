@@ -185,11 +185,19 @@ def test_a_tilt_near_but_not_at_a_class_angle_is_refused() -> None:
 
 
 def test_the_refused_records_split_by_their_witness_tilts() -> None:
-    result = compare.refused_tilts(compare.load_index())
+    index = compare.load_index()
+    # n = 259's house since 23 October 2026, issue 639's exact form (T-193, think-ot5c),
+    # holds square 229 5.21e-7 degrees from the axis, which the module will not round
+    # either way: the whole index is refused, and the split is of the other records.
+    with pytest.raises(
+        compare.InputRefusedError, match=r"n = 259, square 229: a tilt 5\.21e-7 degrees from 0"
+    ):
+        compare.refused_tilts(index)
+    result = compare.refused_tilts({n: entry for n, entry in index.items() if n != 259})
     counts, records = result["counts"], result["records"]
     assert set(counts) == {"all-45", "other-tilt", "axis-only"}
     assert {kind: len(members) for kind, members in records.items()} == counts
-    assert sum(counts.values()) == result["refused"] == _axis_refused()
+    assert sum(counts.values()) == result["refused"] == _axis_refused() - 1
     # Every refused record holds a tilted square.
     assert counts["axis-only"] == 0
     # n = 51's witness is exact over Q(sqrt 2), with 17 squares at 45 degrees.
