@@ -1,0 +1,48 @@
+{
+  "command": [
+    "nice",
+    "-n",
+    "10",
+    "cargo",
+    "test",
+    "--release",
+    "--locked",
+    "-j",
+    "2",
+    "--",
+    "--test-threads",
+    "2"
+  ],
+  "cwd": "/tmp/claude-0/-home-user-squares/f8504540-2b5a-5f78-8968-eb4ffa4c4b64/scratchpad/sqvc/build-v4/tools/sqverify_continuous/sqverify_fast",
+  "started_utc": "2026-10-23T07:12:15Z",
+  "exit_status": 0,
+  "wall_seconds": 171.987,
+  "cpu_user_seconds": 85.307,
+  "cpu_system_seconds": 2.454,
+  "max_rss_kib": 366240,
+  "load_average": [
+    17.962890625,
+    20.2080078125,
+    18.50048828125
+  ],
+  "digests": {},
+  "stdout_lines": 56,
+  "stdout_head": [
+    "",
+    "running 17 tests",
+    "test certificate::tests::images_preserve_area_and_cover_the_orbit ... ok"
+  ],
+  "stdout_tail": [
+    "",
+    "test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+    ""
+  ],
+  "stderr_lines": 28,
+  "stderr_tail": [
+    "    Finished `release` profile [optimized] target(s) in 2m 06s",
+    "     Running unittests src/lib.rs (/tmp/claude-0/-home-user-squares/f8504540-2b5a-5f78-8968-eb4ffa4c4b64/scratchpad/sqvc/build-v4/target/release/deps/sqverify_fast-b643a1bd6dd619a5)",
+    "     Running unittests src/main.rs (/tmp/claude-0/-home-user-squares/f8504540-2b5a-5f78-8968-eb4ffa4c4b64/scratchpad/sqvc/build-v4/target/release/deps/sqverify_fast-614f57d653205267)",
+    "     Running tests/adversarial.rs (/tmp/claude-0/-home-user-squares/f8504540-2b5a-5f78-8968-eb4ffa4c4b64/scratchpad/sqvc/build-v4/target/release/deps/adversarial-880a38ac8caa3408)",
+    "   Doc-tests sqverify_fast"
+  ]
+}

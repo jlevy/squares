@@ -1,0 +1,97 @@
+# The independence record of spec section 2.4, written by hand by lane W2 from its own
+# session transcript; INDEPENDENCE.md beside it is the prose record. The audit tool that
+# section 2.4 asks for (slice 4, think-3ok2) has not run over this file.
+kind: independence-record/v1
+implementation:
+  path: packing/sqverify_fast
+  commits: {first: d86714e0b, last: 61acc9dcb}
+spec:
+  path: docs/project/specs/active/plan-2026-10-02-independent-measure-verifier.md
+  # Checked out from lane W1's branch at the coordinator's instruction; the blob
+  # 367535922d14 is the file at W1's commit 6c5ff1430. No other version was read.
+  versions_read: [6c5ff1430]
+lanes:
+  - lane: W2
+    role: implementer
+    sessions:
+      - session_01HbQD6XX8UwXyhUcQ7fCG46 (coordinating session; the trailer on every commit)
+      - agent-aa94fd5d83acb36af (this lane's sub-agent context, isolated in its own worktree)
+    harness: Claude Code 2.1.288, Agent SDK sub-agent in a git worktree
+    period: {from: "2026-10-02T17:06:34Z", to: "2026-10-03T06:20:00Z"}
+    reads:
+      # Instructions and specification
+      - {path: AGENTS.md, at: d86714e0b}
+      - {path: operating-rules.md, at: d86714e0b}
+      - {path: development.md, at: d86714e0b}
+      - {path: docs/project/specs/active/plan-2026-10-02-independent-measure-verifier.md, at: 6c5ff1430}
+      - {path: packing/benchmarks/results/author-checker-profile-2026-10-02/timings.json, at: 6c5ff1430}
+      # Reviews: line ranges as displayed
+      - {path: docs/project/reviews/review-2026-09-27-wand125-rectangle-scaling.md, at: d86714e0b, lines: all}
+      - {path: docs/project/reviews/review-2026-09-22-tokoharu-density-mathematics.md, at: d86714e0b, lines: "1-200, 225-318"}
+      - {path: docs/project/reviews/review-2026-10-02-wand125-linear-certificates-and-n76.md, at: 234db5e82, lines: "headings, 86-161"}
+      - {path: docs/project/reviews/review-2026-10-02-wand125-mixed-rectangle-bounds.md, at: 234db5e82, lines: "headings, 1-126"}
+      - {path: docs/project/reviews/review-2026-10-02-wand125-s59-s77-mixed-covers.md, at: b5306f8f8, lines: "headings, 86-233"}
+      - {path: docs/project/reviews/review-2026-10-03-sqverify-fast-soundness.md, at: 0e38246a9, lines: all}
+      - {path: docs/project/reviews/review-2026-10-03-sqverify-fast-testing-and-independence.md, at: 299ce0681, lines: "1-200, 243-334"}
+      # First-party code
+      - {path: packing/src/sqpack/rectangle_density.py, at: d86714e0b}
+      - {path: packing/sqverify_exact/Cargo.toml, at: d86714e0b}
+      - {path: packing/sqverify_exact/rust-toolchain.toml, at: d86714e0b}
+      - {path: packing/sqverify_exact/clippy.toml, at: d86714e0b}
+      - {path: packing/src/sqpack/cli/validate.py, at: d86714e0b, lines: "_rust_quality, _rust_exact_geometry, the step registry"}
+      - {path: .github/workflows/packing-validation.yml, at: d86714e0b, lines: "cache steps"}
+      - {path: packing/benchmarks/bench_rectangle_rust_verifier_ab.py, at: d86714e0b, lines: header}
+      - {path: packing/benchmarks/math-startup/, at: d86714e0b, lines: "README, ledger head, one hypothesis"}
+      # Certificate data and its summaries
+      - {path: "packing/resources/web/wand125-rectangle-certificates-*/wand125-rectangles/certificates/*/certified_candidate.json.gz", at: 8a0e1ddff}
+      - {path: "packing/resources/web/wand125-rectangle-certificates-2026-09-27/wand125-rectangles/certificates/{rect_n32_L595,rect_n78_L8955}/{certificate_metadata.json,verification_summary.json,verified_angles.jsonl}", at: d86714e0b}
+      - {path: "packing/resources/web/external-square-certificates-2026-09-22/tokoharu-density/certificates/*/certified_candidate.json", at: d86714e0b}
+      - {path: "packing/resources/web/wand125-*/square-packing-bounds/certificates/mixed_n*/candidate.json.gz", at: 8a0e1ddff}
+      - {path: "packing/resources/web/wand125-point-and-mixed-2026-09-28/square-packing-bounds/certificates/mixed_n50_*/certificate.json.gz", at: 8a0e1ddff, lines: "digest only"}
+      - {path: "packing/resources/web/wand125-rectangle-certificates-2026-09-27/README.md", at: d86714e0b, lines: "1-150"}
+      - {path: "packing/resources/web/wand125-rectangle-certificates-2026-10-01/README.md", at: d86714e0b, lines: "1-80"}
+      - {path: "packing/resources/web/wand125-point-and-mixed-2026-09-28/README.md", at: 8a0e1ddff, lines: "grep for the n50 certificates"}
+      # Replay receipts: summary fields only (departure 3)
+      - {path: "packing/resources/web/external-square-certificates-2026-09-22/receipts/density/audit.json", at: d86714e0b}
+      - {path: "packing/resources/web/wand125-rectangle-certificates-{2026-09-27,2026-09-28}/receipts/replay/audit.json", at: d86714e0b}
+      - {path: "packing/resources/web/wand125-rectangle-certificates-2026-10-01/receipts/replay/audit.json.gz", at: 8a0e1ddff}
+      - {path: "packing/resources/web/wand125-rectangle-certificates-2026-10-01/receipts/controls/rect_n41_L676.json", at: d86714e0b}
+      - {path: "packing/resources/web/wand125-*/receipts/n*/{merged.json,range-*/summary.json,range-*/directions.jsonl,control.json}", at: 234db5e82}
+      - {path: "packing/resources/web/wand125-*/receipts/{mixed-audit.json,linear-audit.json,exact-audit.json}", at: 8a0e1ddff}
+      - {path: "packing/resources/web/wand125-point-and-mixed-2026-09-28/receipts/n50/{full/compare.json,inputs.json}", at: 8a0e1ddff}
+    fetched: []  # no web source; git fetch of this repository's branches only
+    forbidden_hits:
+      # Section 2.3 forbids replay receipts; their summary fields above were read for the
+      # census and the controls. Section 2.2 limits review sections; the ranges above go
+      # beyond it as INDEPENDENCE.md's "Departures" lists. No author's program, design
+      # note or checker-specific wrapper was opened: code/ folders and the profile's dirty
+      # side were listed by name at most.
+      - {path: "packing/resources/web/**/receipts/ (summary fields)", reason: census replay status and control mutations}
+      - {path: docs/project/reviews/review-2026-09-27-wand125-rectangle-scaling.md, reason: read in full before the allowance was known}
+      - {path: docs/project/reviews/review-2026-09-22-tokoharu-density-mathematics.md, reason: "scope, replay results, and lines 195-200 of the area routine's section"}
+      - {path: docs/project/reviews/review-2026-10-02-wand125-mixed-rectangle-bounds.md, reason: opening, scope and verdict}
+      - {path: docs/project/reviews/review-2026-10-02-wand125-s59-s77-mixed-covers.md, reason: "section 4, at the coordinator's direction, for the Milestone C plan"}
+    declaration: >-
+      Lane W2 wrote sqverify-fast from the specification's mathematics, its own proofs in
+      SOUNDNESS.md, the repository's first-party code and the certificate data. It never
+      opened an author's checker, design note or checker-specific wrapper, and ran the
+      authors' checkers only as black boxes, through the repository's replay command, for
+      timing. It read the review sections and receipt summaries listed above, more than
+      section 2.2 allows, and has disclosed each; nothing in the crate comes from them
+      beyond the mathematics the specification also states.
+  - lane: W1
+    role: spec-author
+    dirty_inputs: [the authors' checkers, built and profiled, as the specification's section 3.1 describes]
+    clean_outputs:
+      - docs/project/specs/active/plan-2026-10-02-independent-measure-verifier.md
+      - packing/benchmarks/results/author-checker-profile-2026-10-02/timings.json
+  - lane: RA
+    role: adversarial-reviewer
+    review: docs/project/reviews/review-2026-10-03-sqverify-fast-soundness.md
+  - lane: RB
+    role: adversarial-reviewer
+    review: docs/project/reviews/review-2026-10-03-sqverify-fast-testing-and-independence.md
+shared_components:
+  - {path: packing/src/sqpack/rectangle_density.py, use: exact reference oracle in devtools/check_sqverify_fast.py, written here}
+  - {path: "crates.io: flate2, num-bigint, num-integer, num-rational, num-traits, serde, serde_json, sha2", use: decompression, exact rationals, JSON, digests}
+audit: {tool: none yet (slice 4), ran_at: null, result: NOT RUN}

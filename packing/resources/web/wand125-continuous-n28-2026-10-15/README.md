@@ -145,9 +145,12 @@ $1 + 2.4 \times 10^{-12}$, are where each search stopped splitting, not the
 certificate’s slack: the 9999/10000 mutant passes root 7, and the 999/1000 mutant leaves
 a pose there whose exact capture is $1.0000089$, so the slack at that pose is about
 $10^{-3}$. Neither mutant is a counted control: the first was not refused, and the
-second was stopped by its budget rather than by an exact capture below
-1. The source’s own control, every mass × 985/1000, is refused at the axis patch alone
-   (minimum 0.98599) and never reaches the oblique search.
+second was stopped by its budget rather than by an exact capture below $1$. The source’s
+own control, every mass × 985/1000, fails everywhere: check1 refuses it at the axis
+patch and at all 86 roots, each at a legal pose whose exact capture is below $1$ (least
+0.98599, each re-evaluated by the
+[soundness review of 23 October](../../../../docs/project/reviews/review-2026-10-23-wand125-sqverify-continuous-soundness.md)),
+and check2 refuses it at the axis, as its receipt shows.
 
 ## The Price of a Complete Replay
 
@@ -172,8 +175,11 @@ known, and the 999/1000 mutant shows that a budget stop is what a weak mutant ge
 ## Review and Remaining Work
 
 A replay counts toward `C3` only with a review that reads this certificate.
-For route A that is the soundness review of `sqverify_continuous`’s continuous mode,
-open as think-xzob (jlevy/squares#533), whose subject is now three claims.
+For route A that is the
+[soundness review of `sqverify_continuous`’s continuous mode](../../../../docs/project/reviews/review-2026-10-23-wand125-sqverify-continuous-soundness.md)
+of 23 October (think-xzob, jlevy/squares#533), which read this certificate and found no
+blocking defect; route A’s next step is its 86-root replay with a control whose refusal
+counts, think-0arj.
 Route B rests on the 10 October review of T-145’s kernel and needs a preparation slice:
 a replay command that runs the 43 slabs at two workers and judges them as
 `devtools.audit_continuous_pose` does for T-145, and the near-axis patch decided by
