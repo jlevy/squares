@@ -77,14 +77,15 @@ from devtools.site_resources import (
     resources,
 )
 from devtools.site_tallies import (
-    ResultTally as ProjectTally,
-)
-from devtools.site_tallies import (
+    TALLY_SEPARATOR,
     project_credit_associations,
     project_primary_results,
     render_tally,
     tally_credits,
     tally_results,
+)
+from devtools.site_tallies import (
+    ResultTally as ProjectTally,
 )
 from devtools.site_topics import topic_chip, topic_label
 from sqpack import release
@@ -2279,7 +2280,7 @@ def project_tally(url: str, tally: ProjectTally) -> str:
         authors, project_source_keys().get(url, ()), occurrence_registry().occurrences, records
     )
     credit_markup = (
-        " · "
+        TALLY_SEPARATOR
         + render_tally(
             tally_credits(associations, measures, significance_levels()), noun="credit"
         )
@@ -2289,7 +2290,7 @@ def project_tally(url: str, tally: ProjectTally) -> str:
     records_markup = record_tally(tally.results, measures, blank_zero=True)
     return (
         '<span class="site-credit-tally">'
-        + (records_markup + " · " if records_markup else "")
+        + (records_markup + TALLY_SEPARATOR if records_markup else "")
         + render_tally(
             tally,
             total_href=results_filter_url(slug) if tally.results else None,
@@ -2497,10 +2498,6 @@ def pdf_note() -> str:
 #: rounding shows there as uneven gaps, and 400 costs about 26 kB more gzipped.
 ATLAS_UNITS = 400
 
-#: How many cases the atlas grid shows until the reader asks for the rest: the first
-#: hundred, the cases of the smaller poster.
-ATLAS_FIRST = 100
-
 #: The film's panel labels, keyed by the composite record's badge (glyph, style): the
 #: words `packages/workbench/src/view/facts.ts` draws under each badge (`BADGE_LABELS`).
 FILM_BADGES: dict[tuple[str, str], str] = {
@@ -2630,16 +2627,26 @@ ATLAS_VIEWS: tuple[tuple[str, str], ...] = (("grid", "Grid"), ("triangle", "Tria
 ATLAS_DEFAULT = "triangle"
 ATLAS_VIEW = ATLAS_DEFAULT
 
-#: The atlas's three sizes of tile, in tab order: the key the block's `data-atlas-size`
-#: and the address's `?size=` take, and the tab's label. Medium is the size the atlas had
-#: before it offered a choice; Small is now the rendered default. site.css
-#: scales a tile by each (`--site-atlas-scale`), and `overview/atlas-view.js` rearranges
-#: the tiles for it (think-ht8t).
+#: The atlas's four sizes of tile, in tab order: the key the block's `data-atlas-size`
+#: and the address's `?size=` take, and the tab's short label, S, M, L and XL, each
+#: named in full (`ATLAS_SIZE_NAMES`) by its tab's title and in its accessible name,
+#: "Small (S)", which keeps the letter it shows (WCAG 2.5.3). Medium is the size the
+#: atlas had before it offered a choice; Small is the rendered default, and a Triangle
+#: that follows the scroll opens at XL. site.css scales a tile by each
+#: (`--site-atlas-scale`), and `overview/atlas-view.js` rearranges the tiles for it
+#: (think-ht8t, think-apqd).
 ATLAS_SIZES: tuple[tuple[str, str], ...] = (
-    ("small", "Small"),
-    ("medium", "Medium"),
-    ("large", "Large"),
+    ("small", "S"),
+    ("medium", "M"),
+    ("large", "L"),
+    ("xlarge", "XL"),
 )
+ATLAS_SIZE_NAMES: dict[str, str] = {
+    "small": "Small",
+    "medium": "Medium",
+    "large": "Large",
+    "xlarge": "Extra large",
+}
 
 #: The size the page is rendered in.
 ATLAS_SIZE = "small"
@@ -2896,22 +2903,28 @@ def _atlas_tablist(
     name: str,
     extra: str = "",
     descriptions: Mapping[str, str] | None = None,
+    names: Mapping[str, str] | None = None,
     panel: str = ATLAS_PANEL,
 ) -> str:
     """One strip of the atlas's tabs: a tablist of buttons, `default` selected and the
-    strip's one stop in the tab order, each controlling the static box of tiles."""
+    strip's one stop in the tab order, each controlling the static box of tiles. A tab
+    with a description carries it as its `aria-description` and title; a tab whose label
+    abbreviates a name (`names`) is named in full, its accessible name the name with the
+    label it shows, "Small (S)", and its title the name."""
 
-    def description(key: str) -> str:
-        return (
-            f' aria-description="{_esc(descriptions[key])}" title="{_esc(descriptions[key])}"'
-            if descriptions is not None
-            else ""
-        )
+    def described(key: str, label: str) -> str:
+        if names is not None:
+            full = f"{names[key]} ({label})"
+            return f' aria-label="{_esc(full)}" title="{_esc(names[key])}"'
+        if descriptions is not None:
+            text = _esc(descriptions[key])
+            return f' aria-description="{text}" title="{text}"'
+        return ""
 
     tabs = "".join(
         f'<button type="button" role="tab" id="{ids}-{key}" {data}="{key}" '
         f'aria-selected="{"true" if key == default else "false"}" '
-        f'aria-controls="{panel}"{description(key)}'
+        f'aria-controls="{panel}"{described(key, label)}'
         f"{'' if key == default else ' tabindex="-1"'}>"
         f"{_esc(label)}</button>"
         for key, label in choices
@@ -2963,11 +2976,12 @@ def atlas_drawing_tabs(panel: str = ATLAS_PANEL) -> str:
 
 
 def atlas_size_tabs(panel: str = ATLAS_PANEL) -> str:
-    """The tabs beside the view tabs that choose the size of the tiles, Small, Medium
-    or Large (think-ht8t): the view tabs' strip, a tablist of three buttons that resize
-    the one set of tiles in place, in either view. Small is selected and is the strip's
-    one stop in the tab order; the arrow keys move between the three
-    (`overview/atlas-view.js`). The strip is present in the first response."""
+    """The tabs beside the view tabs that choose the size of the tiles, S, M, L and XL
+    (think-ht8t, think-apqd): the view tabs' strip, a tablist of four buttons that resize
+    the one set of tiles in place, in either view, each named in full by its title and
+    its accessible name, "Small (S)", which keeps the letter it shows (WCAG 2.5.3). Small
+    is selected and is the strip's one stop in the tab order; the arrow keys move between
+    the four (`overview/atlas-view.js`). The strip is present in the first response."""
     return _atlas_tablist(
         ATLAS_SIZES,
         default=ATLAS_SIZE,
@@ -2976,6 +2990,7 @@ def atlas_size_tabs(panel: str = ATLAS_PANEL) -> str:
         classes="site-atlas-sizes",
         name="Atlas tile size",
         extra="data-atlas-sizes ",
+        names=ATLAS_SIZE_NAMES,
         panel=panel,
     )
 
@@ -3049,8 +3064,12 @@ def atlas_legend() -> str:
     )
 
 
-def _atlas_rows(first: int) -> tuple[list[str], str]:
-    """Canonical split rows and their drawing geometry for either Atlas surface."""
+def _atlas_rows() -> tuple[list[str], str]:
+    """Canonical split rows and their drawing geometry for either Atlas surface. The
+    geometry is the box of tiles' own style: whether the triangle's widest row, the
+    last, keeps the extra gap before its grid suffix (`--site-atlas-extra`), the largest
+    enclosing side of all, which Global scale draws against until the script counts the
+    tiles shown (`--site-atlas-global-side`), and the drawing frame's fractions."""
     from devtools import render_frontier_page as frontier  # noqa: PLC0415
 
     cases = frontier.frontier_cases()
@@ -3093,12 +3112,9 @@ def _atlas_rows(first: int) -> tuple[list[str], str]:
             f"{''.join(groups)}</div>"
         )
     frame_inset, frame_span = atlas_frame_fractions()
-    first_rows = math.isqrt(first)
     positions = (
-        f"--site-atlas-first-extra:{int(transitions[first_rows - 1].has_irregular_prefix)};"
-        f"--site-atlas-last-extra:{int(transitions[-1].has_irregular_prefix)};"
-        f"--site-atlas-first-side:{max(sides[n] for n in tracked if n <= first)};"
-        f"--site-atlas-last-side:{max(sides[n] for n in tracked)};"
+        f"--site-atlas-extra:{int(transitions[-1].has_irregular_prefix)};"
+        f"--site-atlas-global-side:{max(sides[n] for n in tracked)};"
         f"--site-atlas-frame-inset:{frame_inset};--site-atlas-frame-span:{frame_span};"
         f"--site-atlas-ink-inset:{atlas_frame_ink_inset()}"
     )
@@ -3117,7 +3133,7 @@ def atlas_grid(*, homepage: bool = False) -> str:
     uses positions supplied by the static markup and stylesheet, so a tile's markup is
     the same in both.
     A perfect square's tile is marked `data-atlas-square`: it ends its row of the
-    triangle, and the triangle numbers it in bold gray. The
+    triangle, and is numbered at the same weight as every other tile. The
     block is rendered at the small size (`data-atlas-size`), under tabs beside the view
     tabs that make every tile smaller or larger (`atlas_size_tabs`), in either view.
     Scale changes only the drawing within each tile: Fixed gives every frame the
@@ -3125,16 +3141,14 @@ def atlas_grid(*, homepage: bool = False) -> str:
     grid side; Global uses the largest currently shown actual enclosing side.
     Slots, number type and the grid separator stay fixed.
 
-    Every case arrives as static markup with reserved, lazy-loaded SVG images.
-    The dedicated Atlas shows them all; the homepage starts with `ATLAS_FIRST`.
-    "Show More" expands the homepage preview and "Show Less" collapses either view;
-    the double chevron follows the action. Its name for assistive
-    technology says what each does and how many cases that is (`data-name-more`,
-    `data-name-less`), it controls the box of tiles (`ATLAS_PANEL`), and it is the site's
-    one action under a table or grid (`.site-action`, with "See all results"). Ordinary
-    links give readers without scripting all case records and the frontier survey. The atlas
-    popover, filled by the script from a JSON of the film's facts, stood after the block until
-    2026-10-03; the case popover took its place.
+    Every case arrives as static markup with reserved, lazy-loaded SVG images, and both
+    surfaces show all of them, with scripts or without. The homepage's copy is marked
+    `data-atlas-preview`, which keeps its controls out of the address. An expander, "Show
+    More" and "Show Less" under the tiles with the cases after the first hundred in a
+    hidden box, stood here until 2026-10-22 (the owner). Ordinary links give readers
+    without scripting all case records and the frontier survey. The atlas popover, filled
+    by the script from a JSON of the film's facts, stood after the block until 2026-10-03;
+    the case popover took its place.
 
     A case whose default picture is its regularized view (`atlas_regularized`) is drawn
     from it directly, and every other case from its house rendering: one tile a case.
@@ -3148,59 +3162,30 @@ def atlas_grid(*, homepage: bool = False) -> str:
     from devtools.render_case_pages import case_popover  # noqa: PLC0415
 
     panel = "homepage-atlas-cells" if homepage else ATLAS_PANEL
-    preview = ' data-atlas-preview data-atlas-count="100"' if homepage else ""
+    preview = " data-atlas-preview" if homepage else ""
     home_class = " site-homepage-atlas" if homepage else ""
-    toggle_hook = " data-homepage-atlas-toggle" if homepage else ""
-    label_hook = " data-homepage-atlas-label" if homepage else ""
-    hidden = " hidden" if homepage else ""
-    rest_hidden = " hidden" if homepage else ""
-    expanded = "false" if homepage else "true"
-    rows, positions = _atlas_rows(ATLAS_FIRST)
-    first_rows = math.isqrt(ATLAS_FIRST)
-    more, less = "Show More", "Show Less"
-    name_more = f"Show more: all {len(rows) ** 2} cases"
-    name_less = f"Show less: the first {ATLAS_FIRST}"
+    rows, positions = _atlas_rows()
+    # The triangle's one-line key ("Each row ends at a perfect square…") stood after the
+    # tiles, and the line under the expander ("Every case from n = 1 to 324 is also in
+    # the frontier survey, and each has a case record.") after that, until 2026-10-02
+    # (the owner, think-l38m): each tile opens its case record, and the Frontier page is
+    # a page card. The tiles end the block.
+    fallback = (
+        ""
+        if homepage
+        else '<noscript><p><a href="frontier.html">Every packing and bound in the frontier '
+        "survey</a></p></noscript>"
+    )
     return (
         f'<div class="site-wide site-atlas-grid{home_class}" data-atlas-view="{ATLAS_VIEW}" '
         f'data-atlas-size="{ATLAS_SIZE}" data-atlas-scale="{ATLAS_SCALE}" '
-        'data-atlas-drawing="regularized" '
-        f'data-atlas-first="{ATLAS_FIRST}" data-atlas-grid{preview}>'
+        f'data-atlas-drawing="regularized" data-atlas-grid{preview}>'
         '<div class="site-atlas-controls" data-atlas-controls>'
         f"{atlas_view_tabs(panel)}{atlas_size_tabs(panel)}{atlas_scale_tabs(panel)}"
         f"{atlas_drawing_tabs(panel)}"
         f"{atlas_legend()}</div>"
         f'<div class="site-atlas-cells" id="{panel}" style="{positions}">'
-        f"{''.join(rows[:first_rows])}"
-        f'<div class="site-atlas-rest" data-atlas-rest{rest_hidden}>'
-        f"{''.join(rows[first_rows:])}</div></div>"
-        + (
-            '<p class="site-homepage-atlas-status" data-homepage-atlas-status '
-            'role="status" hidden></p>'
-            if homepage
-            else "<noscript><style>[data-atlas-grid] .site-atlas-rest[hidden]{display:contents}"
-            ".kpress .site-page [data-atlas-grid] .site-atlas-cells{--site-atlas-widest:35;"
-            "--site-atlas-extra:var(--site-atlas-last-extra);"
-            "--site-atlas-global-side:var(--site-atlas-last-side)}"
-            "[data-atlas-grid] .site-atlas-toggle-row{display:none}</style>"
-            "<p>"
-            '<a href="frontier.html">Every packing and bound in the frontier '
-            "survey</a></p></noscript>"
-        )
-        +
-        # The triangle's one-line key ("Each row ends at a perfect square…") stood here
-        # and the line under the expander ("Every case from n = 1 to 324 is also in the
-        # frontier survey, and each has a case record.") after it, until 2026-10-02 (the
-        # owner, think-l38m): each tile opens its case record, and the Frontier page is a
-        # page card. The expander's row ends the block.
-        '<p class="site-action-row site-atlas-toggle-row">'
-        '<button type="button" class="site-action site-atlas-toggle" '
-        f'data-atlas-toggle{toggle_hook} aria-expanded="{expanded}" aria-controls="{panel}" '
-        f'aria-label="{name_more if homepage else name_less}" '
-        f'data-label-more="{more}" data-label-less="{less}" '
-        f'data-name-more="{name_more}" data-name-less="{name_less}"{hidden}>'
-        f"<span data-atlas-label{label_hook}>{more if homepage else less}</span>"
-        f"{arrow_icon('double-down' if homepage else 'double-up')}</button></p>"
-        f"</div>{case_popover()}"
+        f"{''.join(rows)}</div>{fallback}</div>{case_popover()}"
     )
 
 

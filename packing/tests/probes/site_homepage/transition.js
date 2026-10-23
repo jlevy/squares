@@ -1,5 +1,6 @@
-// Capture the synchronous input response, shared animation, and persistent nodes.
-/** @param {{install: boolean, settle: boolean, rapid?: boolean, position?: boolean}} options */
+// Capture the synchronous input response to a press of the atlas's controls, the shared
+// animation, and persistent nodes. `rapid` presses the controls named, one after another.
+/** @param {{install: boolean, settle: boolean, rapid?: string[], position?: boolean}} options */
 async (options) => {
   const atlas =
     /** @type {typeof globalThis & {SiteAtlasView: {milliseconds(value: string): number}}} */ (
@@ -7,12 +8,12 @@ async (options) => {
     ).SiteAtlasView;
   const grid = document.querySelector("[data-atlas-preview]");
   const cells = grid?.querySelector(".site-atlas-cells");
-  const toggle = document.querySelector("[data-homepage-atlas-toggle]");
-  if (!(grid instanceof HTMLElement) || !(cells instanceof HTMLElement) || !toggle) {
+  const controls = grid?.querySelector("[data-atlas-controls]");
+  if (!(grid instanceof HTMLElement) || !(cells instanceof HTMLElement) || !controls) {
     throw new Error("Missing homepage Atlas controls");
   }
   if (options.position) {
-    toggle.scrollIntoView({ block: "center", behavior: "instant" });
+    controls.scrollIntoView({ block: "center", behavior: "instant" });
   }
   if (options.install) {
     const links = [...cells.querySelectorAll(".site-atlas-cell")];
@@ -27,7 +28,7 @@ async (options) => {
       link.offsetWidth,
       link.offsetHeight,
     ];
-    toggle.addEventListener(
+    controls.addEventListener(
       "click",
       () => {
         beforeScroll = window.scrollY;
@@ -47,7 +48,7 @@ async (options) => {
       },
       true,
     );
-    toggle.addEventListener("click", () => {
+    controls.addEventListener("click", () => {
       const current = [...cells.querySelectorAll(".site-atlas-cell")];
       const count = current.filter((link) => link.getClientRects().length > 0).length;
       const history = JSON.parse(grid.dataset.testCounts ?? "[]");
@@ -84,11 +85,12 @@ async (options) => {
       });
     });
   }
-  if (options.rapid && toggle instanceof HTMLButtonElement) {
-    toggle.click();
-    toggle.click();
-    toggle.click();
-    toggle.click();
+  for (const selector of options.rapid ?? []) {
+    const control = controls.querySelector(selector);
+    if (!(control instanceof HTMLButtonElement)) {
+      throw new Error(`Missing homepage Atlas control ${selector}`);
+    }
+    control.click();
   }
   if (options.settle) {
     await Promise.allSettled(document.getAnimations().map((animation) => animation.finished));
@@ -149,8 +151,5 @@ async (options) => {
     root_size: document.documentElement.dataset.siteAtlasSize ?? null,
     panel_id: cells.id,
     panel_role: cells.getAttribute("role"),
-    toggle_in_view:
-      toggle.getBoundingClientRect().top >= 0 &&
-      toggle.getBoundingClientRect().bottom <= window.innerHeight,
   };
 };
