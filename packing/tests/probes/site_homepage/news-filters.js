@@ -219,6 +219,14 @@ async (options) => {
         button.getAttribute("data-site-tooltip") || button.getAttribute("title"),
       ]),
     ),
+    news_topic_palette: [
+      ...document.querySelectorAll(".site-news-topics .site-chip, button[data-news-topic]"),
+    ].map((chip) => ({
+      topic: chip.getAttribute("data-news-topic"),
+      background: getComputedStyle(chip).backgroundColor,
+      color: getComputedStyle(chip).color,
+      contrast: contrast(getComputedStyle(chip).color, getComputedStyle(chip).backgroundColor),
+    })),
     topic_palette: Object.fromEntries(
       [...document.querySelectorAll(".site-news-topics .site-chip, .site-chip[data-kind]")].map(
         (chip) => [

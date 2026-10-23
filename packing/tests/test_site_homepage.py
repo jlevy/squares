@@ -730,7 +730,7 @@ def test_homepage_order_chrome_and_single_card_rows_keep_the_shared_design(
     assert all(heading["title"] for heading in home["paper_headings"])
     assert home["other_lower_headings"] == []
     assert all(style == home["main_title_style"] for style in home["section_title_styles"])
-    assert home["recent_title"] == "Recent Major Results"
+    assert home["recent_title"] == "Results"
     assert home["media"] == {
         "visuals": ["square-packings-324-20261008.pdf"],
     }
@@ -1256,11 +1256,8 @@ def test_news_facets_history_bookmarks_and_shared_meters(
         return seen
 
     def pressed_under_pointer(button: Any, topic: str, scheme: str) -> None:
-        """A press on a topic shows at once, with the pointer still on it: pale turns
-        full and full turns pale, or on a touch screen gray turns full and back. The
-        selected state carries a visible check against its fill, so selection never
-        rests on hue alone, and holding the check's place keeps the button where it was
-        (`think-slt2`)."""
+        """A topic retains its neutral surface and colored ink when pressed. The
+        visible check carries selection without moving the button (`think-slt2`)."""
         choice = {
             "chooser": '[aria-labelledby="news-topics-label"]',
             "choice": f'[data-news-topic="{topic}"]',
@@ -1274,22 +1271,15 @@ def test_news_facets_history_bookmarks_and_shared_meters(
             states.append(page.evaluate(NEWS_FILTERS, choice)["chooser"])
             assert button.bounding_box() == box, (scheme, topic)
         fills = [state["appearance"]["background-color"] for state in states]
-        assert fills[0] != fills[1] != fills[2], (scheme, topic, fills)
-        assert fills[0] == fills[2], (scheme, topic, fills)
+        assert len(set(fills)) == 1, (scheme, topic, fills)
         for state in states:
             pressed = state["pressed"] == "true"
             assert state["check_visible"] is pressed, (scheme, topic, state["pressed"])
+            assert (
+                state["appearance"]["background-color"] == state["chip"]["background-color"]
+            ), (scheme, topic)
             if pressed:
-                assert (
-                    state["appearance"]["background-color"]
-                    == (state["chip"]["background-color"])
-                ), (scheme, topic)
                 assert state["check_contrast"] >= 4.5, (scheme, topic, state["check_contrast"])
-            elif width == 390:
-                assert (
-                    state["appearance"]["background-color"]
-                    == (state["neutral"]["background-color"])
-                ), (scheme, topic)
 
     def open_topics() -> None:
         trigger = page.locator("[data-site-filter-trigger]")
@@ -1449,8 +1439,11 @@ def test_news_facets_history_bookmarks_and_shared_meters(
             page.keyboard.press("Tab")
             sync_api.expect(panel).to_be_hidden()
             sync_api.expect(page.locator("[data-news-reset]")).to_be_focused()
-            palette = state()["topic_palette"]
-            assert len(set(palette.values())) == len(palette)
+            palette = state()["news_topic_palette"]
+            assert palette
+            assert len({chip["background"] for chip in palette}) == 1
+            assert all(chip["contrast"] >= 4.5 for chip in palette), palette
+            assert len({chip["color"] for chip in palette}) > 1
             page.goto(f"{ORIGIN}news.html?news-topics=verification", wait_until="load")
             assert page.locator("[data-site-filter-summary]").text_content() == "Verification"
             open_topics()
@@ -1492,8 +1485,8 @@ def test_news_facets_history_bookmarks_and_shared_meters(
                 )
             page.goto(f"{ORIGIN}results.html", wait_until="load")
             results_state = state()
-            for topic in set(palette) & set(results_state["topic_palette"]):
-                assert palette[topic] == results_state["topic_palette"][topic]
+            # Results kind chips retain their own palette; News topics share one surface.
+            assert len(set(results_state["topic_palette"].values())) > 1
             for key in ("font-family", "font-size", "font-weight", "line-height", "color"):
                 assert news_count[key] == results_state["count_style"][key], (scheme, key)
         page.emulate_media(color_scheme="light")
@@ -1529,6 +1522,8 @@ def test_news_facets_history_bookmarks_and_shared_meters(
         check({3, 4, 5}, {"optimality"})
         page.locator('button[data-news-topic="verification"]').click()
         check({3, 4, 5}, {"optimality", "verification"})
+        page.keyboard.press("Escape")
+        sync_api.expect(page.locator("[data-site-filter-options]")).to_be_hidden()
         page.locator("[data-news-reset]").click()
         check({4, 5})
         open_topics()
