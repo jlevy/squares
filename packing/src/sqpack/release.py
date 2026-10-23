@@ -2488,9 +2488,11 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "swapped in (69 files each), render_n11_optimality_review, "
             "render_n11_threshold_bound_review and render_packing_methods write every file "
             "byte-identical across all four. Measured before at 2d32050e4 against main "
-            "c1115c095, without the README, with the same outcome. Only the explainer's "
-            "register count differs (230 to 232), and it took v0.4.22. No PDF was printed; "
-            "each prints from that HTML. Retain v0.1.11, v0.1.4 and v0.2.7."
+            "c1115c095, without the README, with the same outcome, and once more after "
+            "merging main 769e441e1 (#751, #748), at link revision b33d7f7d with that "
+            "main's six inputs swapped in: the same outcome. Only the explainer's register "
+            "count differs (230 to 232), and it took v0.4.22. No PDF was printed; each "
+            "prints from that HTML. Retain v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
     ReleaseNoPublicChange(
