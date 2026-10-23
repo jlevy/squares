@@ -62,7 +62,7 @@ def browser() -> Iterator[Any]:
 def _stand_ins(root: Path) -> None:
     """A stand-in page at each address of the site a forwarder sends a reader to."""
     for _, new in render_overview.MOVED_PAGES:
-        if not new.startswith("https://") and new != "atlas.html":
+        if not new.startswith("https://") and new not in {"atlas.html", "results.html"}:
             (root / new).parent.mkdir(parents=True, exist_ok=True)
             (root / new).write_text(STAND_IN, encoding="utf-8")
     # A registered individual-case target exercises selector forwarding separately
@@ -80,6 +80,7 @@ def site(tmp_path_factory: pytest.TempPathFactory) -> Path:
             *render_overview.forwarder_pages(),
             site_renders.page("atlas.html"),
             site_renders.page("frontier.html"),
+            site_renders.page("results.html"),
         ],
     )
     _stand_ins(root)
@@ -109,6 +110,7 @@ def served(tmp_path_factory: pytest.TempPathFactory) -> Iterator[str]:
         site_renders.page("index.html"),
         site_renders.page("atlas.html"),
         site_renders.page("frontier.html"),
+        site_renders.page("results.html"),
     ]
     render_overview.write_site(root, files)
     _stand_ins(root)
@@ -144,8 +146,7 @@ def _arrives(
             survey = "frontier.html" in expected
             if survey:
                 assert (
-                    page.locator("h1#the-frontier-survey").text_content()
-                    == "Frontier Survey"
+                    page.locator("h1#the-frontier-survey").text_content() == "Frontier Survey"
                 )
                 assert page.locator('tr#n-17 a[data-case="17"]').first.get_attribute(
                     "href"
@@ -188,6 +189,7 @@ def _arrivals(root: str, *, canonical: bool = False) -> dict[str, str]:
         **profiles,
         "downloads.html": f"{root}/posters.html",
         "all-results.html": f"{root}/results.html",
+        "recent-results.html": f"{root}/results.html",
         "status.html": f"{root}/atlas.html",
         "defects.html": DEFECTS,
         "explainer.html": f"{root}/{LOWER_BOUNDS_PAPER}",
@@ -259,6 +261,32 @@ def test_legacy_atlas_survey_links_arrive_on_the_separate_frontier(
     assert (
         _arrives(browser, f"{served}{old}{suffix}", arrival, scripts=True, atlas=True)
         == arrival
+    )
+
+
+@pytest.mark.parametrize(
+    "suffix",
+    [
+        "",
+        "?s-min=4&current=true#t-018",
+        "?added-age=7#recent-results",
+        "?search=certificate#recent-arrivals",
+        "#added-in-the-last-seven-days",
+        "#earlier-results-by-week-published",
+        "#recent-results-older",
+    ],
+)
+def test_recent_results_compatibility_reaches_the_one_complete_table(
+    browser: Any, served: str, suffix: str
+) -> None:
+    fragment = suffix.partition("#")[2]
+    current = suffix
+    if fragment and not fragment.startswith("t-"):
+        current = suffix.partition("#")[0] + "#all-results"
+    expected = f"{served}results.html{current}"
+    assert (
+        _arrives(browser, f"{served}recent-results.html{suffix}", expected, scripts=True)
+        == expected
     )
 
 

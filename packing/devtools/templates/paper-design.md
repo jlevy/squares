@@ -121,7 +121,7 @@ The retained `site-navigation-copy` class controls those introductions without m
 their narrative into chrome.
 `site-navigation-heading` remains the sans collection-heading role.
 Navigation, buttons, filters, table contents and metadata retain their sans roles.
-Results Archive opens with its title and actions directly above the table, without an
+All Results opens with its title and actions directly above the table, without an
 introductory explanation of the register.
 
 Secondary metadata such as dates, breadcrumbs, captions and provenance may use KPress’s
@@ -913,14 +913,15 @@ contributor articles use their component sheets and the same text tokens.
   Overview and News link directly to their pages.
   Results, Learn, and About each use one button containing the label and chevron.
   The whole button opens its list.
-  Its first entry leads to substantive content: Visual Atlas, Papers, or The Squares
+  Its first entry leads to substantive content: Visual Atlas, Tutorials, or The Squares
   Project. Results, Learn and About have no category page or URL. Results contains Visual
-  Atlas (`atlas.html`), Frontier Survey (`frontier.html`), Recent Results
-  (`recent-results.html`), Results Archive (`results.html`), Verification
-  (`verification.html`), and Report a Result (`report.html`), in that order.
-  About contains The Squares Project, Contributor Profiles, and Project Documentation.
-  The hierarchy and destination paths live in `site_navigation.py`; `site-nav.html`
-  supplies the shared shell.
+  Atlas (`atlas.html`), Frontier Survey (`frontier.html`), All Results (`results.html`),
+  Verification (`verification.html`), and Report a Result (`report.html`), in that
+  order. About contains The Squares Project, Contributor Profiles, and Project
+  Documentation. The hierarchy and destination paths live in `site_navigation.py`;
+  `site-nav.html` supplies the shared shell.
+  Learn puts Tutorials first, followed by Papers.
+  The Tutorials page ends with a shared **Read Papers** action to `papers.html`.
 
   Each unified trigger uses the navigation face, line, medium weight, and muted text,
   with a Lucide chevron at `--site-icon-size`, aligned on the capital height.
@@ -972,7 +973,7 @@ contributor articles use their component sheets and the same text tokens.
   Tables and figures keep their wider tracks.
   `site_navigation.py` supplies the same ancestry for the visible trail and structured
   BreadcrumbList data.
-  Cases belong to Results → Visual Atlas, result articles to Results → Results Archive,
+  Cases belong to Results → Visual Atlas, result articles to Results → All Results,
   profiles to About → Contributor Profiles, chapters to About → Research Synopsis, and
   verification guidance to Results.
   Paper details link their Papers catalogue; the tutorial articles link their Tutorials
@@ -2243,6 +2244,10 @@ contributor articles use their component sheets and the same text tokens.
     Pages and Overlays**, above).
     The close control, Escape, outside click, and focus return remain shared behavior.
     Previous and next controls and left/right arrow keys change the case in place.
+    Pager counts use prepared serif math.
+    In the fetched popover, the packing figure uses the panel’s full content width while
+    mathematical prose retains the shared reading measure.
+    The standalone page keeps its compact drawing width.
     There is no **All cases** control.
     The sticky footer offers **Case Record**, **Frontier Survey Row**, and **Atlas
     Diagram** destinations, all with the same right-arrow design.
@@ -2808,46 +2813,27 @@ pointer and by keyboard, and measures its label at 1280, 768 and 390 pixels.
   The table shares the full Results page’s columns, sorting, result popovers and mobile
   row cards. Filtering and older results remain on `results.html`, whose defaults are
   unchanged. A result’s ordinary link opens its canonical article without scripts.
-  **About Result Verification** and **All Results** follow the table, linking to
-  `verification.html` and `results.html#all-results` respectively.
-  The homepage omits the verification legend; the full explanation is on Verification.
+  One **View All Results** action follows the table and links to
+  `results.html#all-results`. The homepage omits the verification legend; the full
+  explanation is on Verification.
 
-- **Recent Results and Results Archive.** Results is a menu container with no landing
-  page. Recent Results (`recent-results.html`) opens directly on one complete table,
-  ordered by arrival date, below its title and breadcrumb.
-  Its first row group contains the newest seven calendar dates; an Earlier results
-  button reveals the older row group within the same table.
-  The native button updates its label, chevron and `aria-expanded`, with `aria-controls`
-  naming the older `tbody`. A bookmark to an older row or the legacy earlier-results
-  boundary opens that group.
-  Without scripts, all rows remain visible and the inactive button is omitted.
-  The head bootstrap reserves the collapsed geometry before paint.
-  Narrow screens retain the shared row cards, and the table is never nested or sorted
-  out of its arrival order.
-  Results Archive (`results.html`) holds the complete filterable table.
+- **All Results.** Results is a menu container with no landing page.
+  All Results (`results.html`) is the one complete sortable, filterable result table.
+  Its menu label, H1, browser title, breadcrumbs, and result-record ancestry agree.
+  Filters start with significance at All, no maximum age and Hide superseded clear, so
+  every registered result shows once, newest first.
+  Each row keeps its own ID (`#t-018`), shared result popover, and ordinary canonical
+  article link. The homepage retains its bounded recent preview with one **View All
+  Results** action. `recent-results.html` and `all-results.html` are compatibility
+  forwarders to `results.html`, preserving queries and result-row fragments.
+  Old recent section fragments map to `#all-results` on the complete table.
   Visual Atlas (`atlas.html`) provides the graphical case directory; Frontier Survey
   (`frontier.html`) provides the complete bounds table and its reading key.
   Verification (`verification.html`) contains verification, evidence, credit and status
-  guidance and links to Project Epistemics (`epistemics.html`). The detailed article’s
-  trail links its actual Verification parent under the plain Results category.
-  Each destination has its own page and a plain current breadcrumb item under Results.
-
-  Existing archive filters, query URLs, row IDs, `#every-result`, `#all-results`, and
-  verification/evidence/credit/status anchors retain their destinations.
-  The legacy `all-results.html` address still forwards to `results.html` with its query
-  and fragment. The removed archive sections `#recent-arrivals`,
-  `#added-in-the-last-seven-days`, and `#earlier-results-by-week-published` forward to
-  the same fragments on Recent Results, preserving queries both on direct load and when
-  a reader follows a fragment after the archive has loaded.
-  No-script links at the former anchors reach the complete page.
-
-  Archive table filters (**Result filters**, above) start with significance at All, no
-  maximum age and Hide superseded clear, so every result shows, newest first, in one
-  flat list. Each row keeps the result’s own ID (`#t-018`). Its trigger opens the shared
-  result popover; the ordinary article link remains usable without scripts.
-  Recent Results keeps those row IDs on its own page; its ordinary record links reach
-  the canonical result articles.
-  Result article trails link the actual Results Archive parent; cases link Visual Atlas.
+  guidance and links to Project Epistemics (`epistemics.html`). Legacy verification
+  fragments retain their Verification targets.
+  Each substantive destination has its own page and a plain current breadcrumb item
+  under Results. Result article trails link All Results; cases link Visual Atlas.
   `site_navigation.py` supplies the same ancestry for visible and structured trails.
 
 - **Document cards and moved pages.** The overview’s documentation section has one card
@@ -2935,8 +2921,8 @@ pointer and by keyboard, and measures its label at 1280, 768 and 390 pixels.
 
 ## Result Overview
 
-A result’s row, in Recent Results and in the results table, opens a popover with the
-full overview of that result.
+A result’s row, in the homepage preview and All Results, opens a popover with the full
+overview of that result.
 `devtools/result_overview.py` writes the popover’s body, `result_popover_html`, and
 [site-result.css](site-result.css) holds its styles, apart from `site.css` and linked
 after it on every page.

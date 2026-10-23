@@ -23,9 +23,8 @@ publication remain in progress.
 Use the confirmed top-level order **Overview**, **News**, **Results**, **Learn**, and
 **About**. Overview and the site name link home; News links directly to its page.
 Results, Learn, and About have dropdowns.
-Results groups Visual Atlas, Frontier Survey, Recent Results, the Results Archive,
-Verification, and Report a Result.
-Learn groups Papers, Tutorials, Videos, Workbench, Posters, and Resources.
+Results groups Visual Atlas, Frontier Survey, All Results, Verification, and Report a
+Result. Learn groups Tutorials, Papers, Videos, Workbench, Posters, and Resources.
 About groups The Squares Project, Contributor Profiles, and Project Documentation.
 
 Use a small dropdown for each group, a consistent parent for each nested page, and short
@@ -84,7 +83,7 @@ that host.
 | Reader’s task | First destination | Next step |
 | --- | --- | --- |
 | Find the best known packing or bounds for a particular n | Results → Visual Atlas | One case record, its sources, and relevant results |
-| Check a new theorem, certificate, or improvement | Results → Results Archive | One result record, its affected cases, evidence, and authors |
+| Check a new theorem, certificate, or improvement | Results → All Results | One result record, its affected cases, evidence, and authors |
 | Learn the problem and its methods | Learn → Tutorials | Advanced tutorial, paper, or interactive workbench |
 | Read a particular proof | Learn → Papers | The paper’s HTML, PDF, and source; linked result records |
 | See or manipulate packings | Learn → Videos or Workbench | Atlas and individual cases when evidence is needed |
@@ -274,18 +273,17 @@ Site name → / [Home; selected previews and actions]
 │   ├── Visual Atlas → atlas.html [menu; page; first Results item]
 │   │   └── cases/N.html [324 case pages]
 │   ├── Frontier Survey → frontier.html [menu; page; 324-row bounds table]
-│   ├── Recent Results → recent-results.html [menu; one complete arrival-ordered table]
-│   ├── Results Archive → results.html [menu; complete result register]
+│   ├── All Results → results.html [menu; complete sortable and filterable register]
 │   │   └── result/t-NNN.html [229 record pages]
 │   ├── Verification → verification.html [menu; result ratings and evidence guide]
 │   │   └── Project Epistemics → epistemics.html [page; full policy, reached by button]
 │   └── Report a Result → report.html [menu; contribution instructions]
 ├── Learn [menu container; no category page]
-│   ├── Papers → papers.html [menu; complete paper catalogue]
-│   │   └── Four paper HTML pages, each with its PDF and Markdown editions
 │   ├── Tutorials → tutorials.html [menu; complete tutorial catalogue]
 │   │   ├── tutorial.html
 │   │   └── tutorial-advanced.html
+│   ├── Papers → papers.html [menu; complete paper catalogue]
+│   │   └── Four paper HTML pages, each with its PDF and Markdown editions
 │   ├── Videos → visualize.html [menu; page]
 │   ├── Workbench → workbench/ [menu; page]
 │   ├── Posters → posters.html [menu; packing poster PDFs]
@@ -314,7 +312,7 @@ Project Documentation, and Workbench use their exact menu labels.
 Preserve scientific source-document titles and legacy anchors; the rendered reader page
 supplies its canonical navigation heading.
 The next homepage section is **Visual Atlas**; the result-preview section is titled
-**Results**, retaining `#recent-results` and both collection actions.
+**Results**, retaining `#recent-results` and one **View All Results** action.
 Preserve its existing `#the-atlas-of-square-packings` and `#the-atlas` anchors without
 adding a duplicate problem subtitle.
 Project Epistemics remains cross-linked from Project Documentation, tutorials, and
@@ -323,40 +321,25 @@ result explanations; its canonical parent is Verification under Results.
 ### Landing pages and content ownership
 
 **Results.** Results is a menu container with no landing page.
-`recent-results.html` is one long semantic table containing every registered result
-exactly once, ordered by arrival date newest first, with result ID as the stable tie
-breaker. Arrival is `landed`, falling back to `registered`; publication date does not
-control this view. The newest arrival date and six preceding calendar dates start
-expanded. All older rows remain in the same table, behind an **Earlier results** control
-row; expansion changes the button to **Hide earlier results**. Without JavaScript every
-row remains visible.
-Keep one table with separate current/older `tbody` elements, never nested or duplicated
-tables. Only the H1 and ancestry breadcrumb precede the table; omit introductory prose,
-extra section headings, local contents links, filter bars, and repeated archive actions.
-The table reuses the shared result-row renderer, retaining claims, cases, credits,
-ratings, status, and links to full result records.
-At 229 unique results it measured 1,295,301 bytes; its explicit 1,400,000-byte ceiling
-matches the Results Archive.
-The renderer/budget work is tracked in `think-vasz`, and the shared interaction in
-`think-oala`; integrated timing and browser checks remain part of the final validation.
-Legacy `#recent-arrivals`, `#added-in-the-last-seven-days`, and
-`#earlier-results-by-week-published` anchors land on the table or its older-row
-boundary; the older fragment expands its target on enhancement.
+`results.html` is **All Results**, the one complete sortable, filterable result
+register. The menu, H1, browser title, breadcrumb, and result-record parent use that
+exact label. Keep every registered result once, with claims, cases, credits, ratings,
+status, and canonical result-record links.
+Preserve existing filters and result-row addresses.
+The homepage retains its bounded recent preview and one **View All Results** action.
+`recent-results.html` becomes a compatibility forwarder to All Results; there is no
+second complete result-table page.
+Old recent section fragments map to `results.html#all-results`, while `#t-NNN` rows and
+queries keep their canonical targets and filter state.
 
-Keep `results.html` as the **Results Archive**, with the complete sortable, filterable
-register. Preserve archive query parameters and canonical result-row addresses.
-Move all of its former rating, evidence, credit, and status prose to the substantive
-**Verification** page at `verification.html`, including the visual rating guide and
-unique exactness examples.
-The archive links to that page after the table.
-Verification links by one action to **Project Epistemics** at `epistemics.html`, the
+**Verification**, at `verification.html`, contains the complete rating, evidence,
+credit, and status guide, including its visual rating guide and exactness examples.
+All Results links to it after the table.
+Verification links by one action to **Project Epistemics**, at `epistemics.html`, the
 separate detailed policy document.
-Its scientific source content stays unchanged.
-Legacy archive verification/evidence/credit/status fragments forward to the matching
+Legacy verification/evidence/credit/status fragments forward to the matching
 Verification anchors with queries preserved and useful no-script links.
-Legacy recent fragments still forward to Recent Results.
-Do not copy Atlas graphics or the 324-case bounds table onto either result register
-page.
+Do not copy Atlas graphics or the 324-case bounds table onto All Results.
 
 **Visual Atlas and Frontier Survey.** Give each its own substantive Results page.
 `atlas.html` opens with all 324 packings visible; the homepage keeps its shorter
@@ -371,12 +354,13 @@ Historical Atlas survey headings, table fragments, and `#n-N` rows forward to th
 with their queries and fragments preserved; `#atlas-n-N` continues to select an Atlas
 tile. Both pages and the menu use the same canonical title for each destination.
 
-**Learn.** Use the menu as a container for complete content pages, with Papers first.
+**Learn.** Use the menu as a container for complete content pages, with Tutorials first.
 `papers.html` contains the four research papers and their series narrative;
 `tutorials.html` contains both complete tutorial cards and reading guidance;
 `posters.html` contains the two Atlas packing poster PDFs and their source links.
-There is no generic Downloads catalogue or paper-editions table; each paper keeps its
-own PDF and Markdown editions on its detail page.
+The Tutorials page ends with a **Read Papers** action to `papers.html`. There is no
+generic Downloads catalogue or paper-editions table; each paper keeps its own PDF and
+Markdown editions on its detail page.
 Videos, Workbench, and Resources retain their substantive pages.
 No Learn page or visible single-button subsection duplicates these destinations.
 Legacy `papers.html#tutorial`, `#pdfs`, `#visuals`, and `#resources` links forward to
@@ -408,14 +392,14 @@ links. The directory has the breadcrumb Learn → Resources, with no competing f
 directory on About.
 
 **News.** Keep dated announcements and the full changelog together.
-The arrival-ordered Recent Results table is separate from News; News entries can cover
-papers, downloads, and site changes as well as mathematical results.
+The result register is separate from News; News entries can cover papers, downloads, and
+site changes as well as mathematical results.
 Topics/Tags uses the shared dropdown multiselect.
 Significance remains the inline segmented S-buttons, using the same component as the
 Atlas Grid/Triangle controls; the default selection remains S4/S5. Preserve
 `news-topics` and `news-s` query state, history and fragments, plus complete no-script
-news access. Results Archive uses its separately requested S1–S5 multiselect segments
-under think-p39d; Verification and Confirmation retain their floor selects.
+news access. All Results uses its separately requested S1–S5 multiselect segments under
+think-p39d; Verification and Confirmation retain their floor selects.
 
 ### Homepage composition
 
@@ -430,7 +414,7 @@ catalogue content on the page.
 | Problem and n = 53 hero | Retain concise introduction and case link | Tutorial; case 53 |
 | Atlas preview and controls | Retain a bounded preview, existing expand behavior, and View Visual Atlas action | Visual Atlas; Best Known Bounds; complete PDF |
 | News cards | Selected recent entries and View All News button | `news.html` |
-| Results (`#recent-results`) | Bounded selected rows with View Recent Results and View Results Archive actions | `recent-results.html`, `results.html#all-results` |
+| Results (`#recent-results`) | Bounded selected rows with one View All Results action | `results.html#all-results` |
 | Profiles section | Short statement and View All Profiles button; no names or table | `profiles/` |
 | Report a Result | One invitation and Report a Result button | `report.html` |
 | All tutorial/paper cards | Selected starting points with View All Tutorials and View All Papers actions | `tutorials.html`, `papers.html` |
@@ -448,10 +432,11 @@ result significance or contributor status.
 ### Route disposition and page parents
 
 All 666 content pages keep their addresses.
-Seven new substantive pages are registered: `resources.html`, `tutorials.html`, and
-`posters.html` under Learn, `documentation.html` under About, and `recent-results.html`,
-`report.html`, and `verification.html` under Results.
-The superseded `downloads.html` is retained as a compatibility forwarder.
+Six new substantive pages are registered: `resources.html`, `tutorials.html`, and
+`posters.html` under Learn, `documentation.html` under About, and `report.html` and
+`verification.html` under Results.
+The added `recent-results.html` address is retained as a compatibility forwarder to All
+Results. The superseded `downloads.html` is retained as a compatibility forwarder.
 The route CSV marks them as `added`, separately from the 1,149 baseline registrations.
 The CSV expands the generated families and technical registrations; this table specifies
 the reader-facing parent for every named page or family.
@@ -459,9 +444,9 @@ the reader-facing parent for every named page or family.
 | Path or page family | Proposed label or role | Parent and disposition |
 | --- | --- | --- |
 | `/` (`index.html`) | Overview / Home | Overview and site-name destination; selected previews |
-| `recent-results.html` | Recent Results | Results; all results once by arrival, newest seven calendar dates expanded |
-| `results.html` | Results Archive | Results; complete table remains at `#all-results` with query filters |
-| `result/t-NNN.html` (229) | Result identifier and title | Results → Results Archive; retain record contents and evidence links |
+| `recent-results.html` | Compatibility forwarder | All Results; preserve queries and row fragments; map old section fragments to `#all-results` |
+| `results.html` | All Results | Results; complete table remains at `#all-results` with query filters |
+| `result/t-NNN.html` (229) | Result identifier and title | Results → All Results; retain record contents and evidence links |
 | `atlas.html` | Visual Atlas | Results; all 324 packings visible by default |
 | `frontier.html` | Frontier Survey | Results; concise bounds key and complete table |
 | `atlas.html#the-frontier-survey`, `#the-survey`, `#best-known-results`, `#frontier-table`, `#n-N` | Historical survey links | Forward to the corresponding Frontier Survey fragment with query preserved |
@@ -516,12 +501,11 @@ The final breadcrumb item is always plain text, never a link.
 | --- | --- |
 | Overview | None |
 | News | None |
-| Recent Results | Results → Recent Results |
-| Results register | Results → Results Archive |
+| Results register | Results → All Results |
 | The Squares Project | About → The Squares Project |
 | Visual Atlas | Results → Visual Atlas |
 | Case 11 | Results → Visual Atlas → n = 11 |
-| Result T-060 | Results → Results Archive → T-060 |
+| Result T-060 | Results → All Results → T-060 |
 | Verification | Results → Verification |
 | Project Epistemics | Results → Verification → Project Epistemics |
 | Papers, Tutorials, Posters, Tutorial, Advanced Tutorial, or a paper | Learn → Current title |
@@ -541,7 +525,7 @@ The final item is text with `aria-current="page"`. Ancestors with a substantive
 destination are links; Results, Learn, and About are plain container text with no
 invented category URL. A Visual Atlas table section does not create a second breadcrumb
 trail for the same case.
-A result opened from a profile still belongs to Results → Results Archive.
+A result opened from a profile still belongs to Results → All Results.
 Browser Back and contextual related links handle the path the reader actually took.
 
 Mark the active top-level group by its descendant relationship.
@@ -610,9 +594,8 @@ add a shared token only for a role the current system does not express.
 Collection links use **View All … →**: View All Profiles, View All Resources, View All
 News, View All Papers, View All Tutorials, and View All Posters.
 The homepage’s Atlas action is **View Visual Atlas →**, matching the first Results menu
-destination. The homepage’s result actions name the two distinct collections explicitly:
-**View Recent Results →** and **View Results Archive →**. Each action leads to its
-complete collection.
+destination. The homepage’s result preview has one **View All Results →** action to the
+complete register. Tutorials ends with **Read Papers →**, using the same action style.
 Render the existing shared right-arrow component after the label; keep the decorative
 icon out of the accessible name.
 Use the existing action-link component, with consistent size, padding, alignment, icon
@@ -683,8 +666,8 @@ Document their shared components and states in the existing
 | `think-5yys` | In progress: apply the shared 35em reading measure and prose-aligned card groups, cap columns to actual cards, use sans navigation chrome, remove footer GitHub icons, and preserve corrected chevron endpoints/motion. |
 | `think-j4jk` | Remove repeated Recent Results introductions, contents links and per-day filter navigation; this first cleanup is superseded by the single-table view under `think-vasz`. |
 | `think-0xj7` | Use each menu destination’s canonical label for its H1, browser metadata and current breadcrumb; rename Project Documentation and Contributor Profiles consistently; put Report a Result last under Results, outside About; preserve the explicit homepage Problem/Visual Atlas/Results preview labels and no-trail Overview/News rule. |
-| `think-vasz` | Consolidate Recent Results into one complete arrival-ordered table; expand seven calendar dates, collapse all older rows in the same table, retain shared metadata and no-script access. |
-| `think-oala` | In progress: shared JavaScript/CSS disclosure for older rows in the same Recent Results table, including keyboard, legacy-fragment and no-script behavior. |
+| `think-vasz` | Completed predecessor: the arrival-ordered Recent Results table; superseded by the canonical All Results consolidation under `think-6ts0`. |
+| `think-oala` | Completed predecessor: disclosure for older Recent Results rows; the duplicate page is retired under `think-6ts0`. |
 | `think-6rnk` | Closed: migrate Verification guide assertions to its dedicated page without restoring duplicated archive prose. |
 | `think-z3lz` | In progress: current-head CI integration repairs and final artifact validation. |
 | `think-7r1w` | Extract archive explanation into Verification and keep Project Epistemics as the separate detailed policy reached by its action; preserve legacy fragments. |
@@ -695,7 +678,10 @@ Document their shared components and states in the existing
 | `think-ximb` | Audit every page family for the shared 35em prose measure and card-edge alignment; retain only deliberate wide data/visual surfaces. |
 | `think-1k0j` | Align every displayed breadcrumb below the header logo text using shared responsive geometry, superseding prose-column alignment. |
 | `think-dows` | Remove the obsolete secondary-film paragraph from Videos, preserving the primary video and other content. |
-| `think-3qn4` | Put Visual Atlas first in Results, then Recent Results, Results Archive, Verification, and Report a Result; use View Visual Atlas for the homepage action. |
+| `think-3qn4` | Put Visual Atlas first in Results; final collection/menu consolidation is tracked by `think-6ts0`. |
+| `think-mdrd` | Separate Frontier Survey into its own substantive page, show all 324 Atlas packings by default, retain incoming survey links, and keep canonical survey labels. |
+| `think-6ts0` | Consolidate complete result collections into All Results at `results.html`; keep the bounded homepage preview and retain Recent Results as a compatibility route. |
+| `think-dq6a` | Put Tutorials first in Learn and add the shared Read Papers action at the bottom of Tutorials. |
 | `think-aefa` | Set the numeric total in each profile-table tally in bold, never italic; keep its result, record, or credit label in regular weight. Preserve muted significance parentheticals and blank zero cells through the shared tally component. |
 | `think-mpxs` | Give shared profile, result, and case popovers roughly 60% more width on wide screens where space permits. Base the shared responsive rule on `--kpress-measure`, panel padding, and viewport gutters. Audit the current 36rem general and 46rem framed-page ceilings rather than multiplying every variant. Cap prose measure while preserving room for case visualizations, narrow-screen fit, focus, controls, scrolling, and freedom from horizontal overflow. |
 | `think-klec` | Use diagonal outward arrows for the shared expand action. Prefer Lucide `maximize-2` if available in the existing pinned icon set; otherwise use a coherent shared equivalent. Preserve shared icon sizing, the accessible Open full page label, and identical header/footer destinations wherever an overlay opens a full page. |
@@ -809,9 +795,9 @@ These checks cover the full tutorial, paper, poster, document, and contribution 
 on the new pages, plus preserved profile credits and legacy destination links.
 
 The `think-qxq2` follow-up makes Results a container and moves the complete daily
-arrivals and weekly publication lists to `recent-results.html`. Results Archive keeps
-the table, filters, row addresses, rating guide, and explanatory anchors; the Visual
-Atlas keeps its existing page and section addresses with its new title.
+arrivals and weekly publication lists to `recent-results.html`. All Results keeps the
+table, filters, row addresses, rating guide, and explanatory anchors; the Visual Atlas
+keeps its existing page and section addresses with its new title.
 Overview links both result collections.
 Eight focused checks passed, including the page split, retained row links and filters,
 four migrated paper/video expectations, and the archive runway at its unchanged byte

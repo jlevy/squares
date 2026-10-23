@@ -351,6 +351,9 @@ def test_rendered_news_topics_share_neutral_surfaces_and_reset_sits_above_count(
                         assert sample["contrast"] >= 4.5, (theme, width, sample)
                     assert abs(found["reset"]["right"] - found["count"]["right"]) < 0.5
                     assert found["reset"]["bottom"] <= found["count"]["top"]
+                    if width == 1280:
+                        assert found["reset"]["top"] < found["topics"]["bottom"]
+                        assert found["reset"]["bottom"] > found["topics"]["top"]
                     assert found["titleBottom"] == "32px"
                     assert found["overflow"] == 0
             browser.close()

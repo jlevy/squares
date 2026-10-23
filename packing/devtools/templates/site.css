@@ -3327,10 +3327,6 @@ html[data-site-atlas-view="triangle"]
   font-family: var(--kpress-font-sans);
   font-weight: var(--site-font-weight-sans-light);
 }
-.site-case-pop .site-case-data {
-  margin-inline: auto;
-  max-inline-size: var(--kpress-measure);
-}
 /* A long formula in a case file's prose scrolls in the prose, not the case popover's
    panel or the page, so the drawing, the head and the foot never pan sideways on a
    phone. */
@@ -3338,6 +3334,10 @@ html[data-site-atlas-view="triangle"]
   border-block-start: 1px solid var(--kpress-doc-border);
   margin-block-start: 2rem;
   overflow-x: auto;
+}
+.site-case-pop :is(.site-case-data, .site-case-prose) {
+  margin-inline: auto;
+  max-inline-size: var(--kpress-measure);
 }
 .kpress .site-case-heading {
   font-family: var(--kpress-font-sans);

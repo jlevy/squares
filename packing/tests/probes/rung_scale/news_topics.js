@@ -46,6 +46,7 @@
     samples,
     reset: box("[data-news-reset]"),
     count: box("[data-news-count]"),
+    topics: box("[data-site-filter-trigger]"),
     titleBottom: document.querySelector("h1")
       ? getComputedStyle(document.querySelector("h1")).marginBottom
       : null,

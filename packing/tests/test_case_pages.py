@@ -952,8 +952,17 @@ def test_each_record_steps_to_its_neighbours_with_the_sites_arrows(
         steps = steps[: steps.index("</nav>")]
         assert "←" not in steps
         assert "→" not in steps
-        assert (f'data-case-step="{n - 1}">{left}n = {n - 1}</a>' in steps) == (n != numbers[0])
-        assert (f"n = {n + 1}{right}</a>" in steps) == (n != numbers[-1])
+        assert 'data-math-face="serif"' in steps
+        for neighbor, direction, arrow in ((n - 1, "prev", left), (n + 1, "next", right)):
+            match = re.search(
+                rf'<a\b[^>]*rel="{direction}"[^>]*>(.*?)</a>', steps, re.DOTALL
+            )
+            expected = numbers[0] <= neighbor <= numbers[-1]
+            assert (match is not None) == expected
+            if match is not None:
+                assert arrow in match[1]
+                assert f"<mi>n</mi><mo>=</mo><mn>{neighbor}</mn>" in match[1]
+                assert 'data-kpress-math-prepared="true"' in match[1]
         assert "data-case-index" not in steps
         assert "All cases" not in steps
 
