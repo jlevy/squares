@@ -696,7 +696,15 @@ def test_menu_destinations_supply_canonical_titles_and_categories_have_no_urls()
         for item in (group, *group.children):
             if not item.path:
                 continue
-            assert navigation_title(item.path, "Stale page title") == item.label
+            if item.path == "./":
+                # The homepage keeps the name its renderer gives it, the project's
+                # (the owner, 2026-10-23), and is Overview only when it is given none.
+                assert navigation_title(item.path, "The Squares Project") == (
+                    "The Squares Project"
+                )
+                assert navigation_title(item.path) == item.label == "Overview"
+            else:
+                assert navigation_title(item.path, "Stale page title") == item.label
             trail = breadcrumbs_html(item.path, "Stale page title")
             data = breadcrumb_data(item.path, "Stale page title", "https://squaremath.org/")
             if not group.children:

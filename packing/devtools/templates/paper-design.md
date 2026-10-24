@@ -755,11 +755,11 @@ one of them changes.
 
 A page’s title, or the picture that opens the homepage, starts `--site-page-top` under
 the bar’s rule on every page, the explainer and the optimality paper included.
-The film’s page has section tabs under that rule, and its film starts the same space
-under the tabs. Every section heading on the site pages and the explainer takes the two
-section tokens; print reads its own values of both (2.8 of the base and 1.3rem), which
-are the paper’s. On the explainer the credits start 2.25rem under the title on screen
-and 2rem in print.
+The Videos page and the Workbench carry no section tabs under that rule since
+2026-10-22; like every page with a trail, theirs starts 1rem under the rule.
+Every section heading on the site pages and the explainer takes the two section tokens;
+print reads its own values of both (2.8 of the base and 1.3rem), which are the paper’s.
+On the explainer the credits start 2.25rem under the title on screen and 2rem in print.
 
 `--site-table-space` is the space above and below every table, and above and below the
 rating ladders. A site table (`.site-table`) takes it above its filter bar, which keeps
@@ -1100,9 +1100,10 @@ contributor articles use their component sheets and the same text tokens.
   without removing or rewriting the anchors.
   The Workbench application has no footer; its stage carries the publication version.
 
-- **Homepage.** Its browser and menu title are **Overview**; its opening H1 remains
-  **The Square Packing Problem**. Two readable introductory paragraphs define the
-  problem and explain upper and lower bounds.
+- **Homepage.** Its menu label is **Overview**; its browser title and link preview are
+  the project’s name, **The Squares Project** (the owner, 2026-10-23); its opening H1
+  remains **The Square Packing Problem**. Two readable introductory paragraphs define
+  the problem and explain upper and lower bounds.
   The sections continue with Visual Atlas, News, Results, Profiles, Report a Result,
   Learn, Visuals, About the Squares Project, and More Resources.
   Learning cards preview the Papers and Tutorials catalogues.
@@ -1247,10 +1248,10 @@ contributor articles use their component sheets and the same text tokens.
 
 - **Page headings.** The homepage opens with “The Square Packing Problem” as its `h1`,
   followed by visible section `h1`s in the same title style.
-  The Visualize page shows no title: the bar, the section tabs and the film are the
-  page, and its `h1`, “Visualize”, is for a screen reader alone
-  (`.site-visually-hidden`, in `site.css`: out of the flow, one pixel, clipped, the
-  class for any block a reader does not see and a screen reader should).
+  The Videos page shows no title: the bar, its trail and the film are the page, and its
+  `h1`, “Videos”, is for a screen reader alone (`.site-visually-hidden`, in `site.css`:
+  out of the flow, one pixel, clipped, the class for any block a reader does not see and
+  a screen reader should).
   The film after the hidden title is the page’s first block, so on screen it brings no
   margin above and starts `--site-page-top` under the header.
   A page that has a title (the Frontier page, the Results page, the Papers page, the
@@ -2007,7 +2008,11 @@ contributor articles use their component sheets and the same text tokens.
     diagonal gesture moves both ways.
     That pan holds while the reader pauses and eases back onto the path as they scroll
     on, by a factor of e a window, and eases away back at the top.
-    The last of the motion slides to the triangle’s left edge whatever the pan.
+    The last of the motion slides to the triangle’s left edge, and the reader’s pan
+    holds on top of it there too, so the triangle at rest at the bottom still pans by
+    hand, from its left edge to its right end.
+    Until 2026-10-23 the slide overrode the pan, and on a phone a finger could no longer
+    move the triangle at the end (the owner).
     A swipe down wobbles a little sideways, most as it starts, and the pan once counted
     the wobble, so the triangle sometimes went left and then right (the owner,
     2026-10-23). Sideways travel now pans only past 16 pixels and a quarter of the

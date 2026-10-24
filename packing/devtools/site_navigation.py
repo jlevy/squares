@@ -66,6 +66,10 @@ _PAGE_TITLES = {
     for item in (group, *group.children)
     if item.path
 }
+#: Menu destinations whose page keeps the name its renderer gives it rather than its menu
+#: label. The homepage is Overview in the bar, while its `<title>` and link preview are
+#: the project's name, The Squares Project (the owner, 2026-10-23).
+_SELF_NAMED = frozenset({"./"})
 _LEGACY_PATHS = {
     "overview": "./",
     "news": "news.html",
@@ -142,10 +146,14 @@ def _path(value: str) -> str:
 
 
 def navigation_title(path: str, fallback: str = "") -> str:
-    """Return a menu destination's canonical title, leaving detail titles to the caller."""
-    return _PAGE_TITLES.get(
-        _path(path), {"epistemics.html": "Project Epistemics"}.get(_path(path), fallback)
-    )
+    """Return a menu destination's canonical title, leaving detail titles to the caller.
+
+    A page in `_SELF_NAMED` keeps `fallback`, the name its renderer gives it, and takes
+    its menu label only when it is given none."""
+    key = _path(path)
+    if key in _SELF_NAMED and fallback:
+        return fallback
+    return _PAGE_TITLES.get(key, {"epistemics.html": "Project Epistemics"}.get(key, fallback))
 
 
 def _parents(path: str) -> tuple[str, ...]:

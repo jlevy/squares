@@ -917,17 +917,18 @@ RESULTS: dict[str, Prose] = {
                 "re-solved to a smaller side, a refinement that is not padding (T-229)."
             ),
             204: (
-                "The issue names the house it improves and no parent packing. Measured by the "
-                "import and again by the 22 October review, the nearest centres pair it one to "
-                "one with T-225’s packing, the house best packing here before this adoption, "
-                "under a half turn, and with Couzo’s #678 packing (T-223) under the identity, "
-                "keeping that certificate’s frame and tilt pattern: 117 of the 204 squares "
-                "lie within $10^{-6}$ of T-225’s, 67 move beyond $10^{-3}$ and 6 beyond a "
-                "tenth, at most 0.273. Every square turns by less than 1° but square 38, which "
-                "T-225 holds within $10^{-20}$ by four neighbours and which this packing "
-                "releases and turns by 25.64°, so that nothing lies within "
-                "$1.25 \\times 10^{-2}$ of it (T-229). The reply on the issue asks how that "
-                "came about."
+                "The author’s comment of 23 October on the issue says his continuous SQP "
+                "optimization started from Francisco Couzo’s #678 certificate (T-223), in "
+                "Couzo’s own frame, and not from Evan Daniel’s regularized view of it "
+                "(T-225). Measured by the import and again by the 22 October review, the "
+                "nearest centres pair it one to one with #678’s packing under the identity, "
+                "keeping that certificate’s frame and tilt pattern: 60 squares move beyond "
+                "$10^{-3}$ of T-223’s and 7 beyond a tenth, at most 0.237. It pairs with "
+                "T-225’s packing, the house best packing here before this adoption, only under "
+                "a half turn. Every square turns by less than 1° but square 38, which T-223 "
+                "and T-225 hold by four neighbours and which this packing releases and turns "
+                "by 25.64°, so that nothing lies within $1.25 \\times 10^{-2}$ of it (T-229): "
+                "a release the author says his relaxation made."
             ),
         },
         third_route=(
@@ -975,6 +976,42 @@ RESULTS: dict[str, Prose] = {
             "of its own, in integers alone and in rationals with the exact clipped area of "
             "every pair; its sharp controls at $10^{-30}$ found both maintained routes exact "
             "at a wall and at the least-gap pair"
+        ),
+    ),
+    "T-231": Prose(
+        author="Mykhailo Polkovskyi",
+        reported=(
+            "on [jlevy/squares#719](https://github.com/jlevy/squares/issues/719), the "
+            "release’s second 204 file, which he claimed after T-229 was registered"
+        ),
+        producer_route=True,
+        ai=(
+            "The issue says Gemini assisted with solver scripting, precision checks and "
+            "formatting."
+        ),
+        routes=(
+            "One maintained route, `sqpack`’s exact verifier, is this repository’s "
+            "`sqpack/verify.py`, which the author says he imported as a module in his batch "
+            "harness, so the replay shares the producer’s components. The review’s checker "
+            "shares no code with either maintained route or the source."
+        ),
+        lineage=(
+            "The release published it in the same commit as T-229’s certificate, and the "
+            "author’s comment of 23 October says his continuous SQP optimization at 204 "
+            "started from Francisco Couzo’s #678 certificate (T-223), in Couzo’s own frame. "
+            "Measured by the 23 October review, it is T-229’s packing at its solved side: "
+            "nearest centres pair the two one to one under the identity, no square moving "
+            "beyond $2.02 \\times 10^{-11}$, and T-229’s certificate is this one dilated by "
+            "$1 + 10^{-12}$. Its side and the rows that Evan Daniel’s exact solver "
+            "determines equal that solver’s output for T-229’s arrangement, row for row, a "
+            "method the source does not name (T-231). The packing is not rigid: its 21 free "
+            "squares keep clearances of $5.774 \\times 10^{-9}$ to $1.25 \\times 10^{-2}$."
+        ),
+        third_route=(
+            ", and the 23 October review’s clean-room checker decided it again on two routes "
+            "of its own, in integers alone and in rationals with exact clipping area and "
+            "Euclidean distance on every pair; its sharp controls at $10^{-30}$ found both "
+            "maintained routes exact at every wall and at three kinds of least-gap pair"
         ),
     ),
 }
@@ -1260,19 +1297,23 @@ CREDITS: dict[int, Credit] = {
         (),
         "Evan Daniel’s basin-explorer packing after Francisco Couzo’s n = 182 packing",
     ),
-    # Mykhailo Polkovskyi's re-solve (T-229, adopted on 23 October 2026) of Evan Daniel's
-    # display regularization (T-225) of Francisco Couzo's packing, which Couzo first reported
-    # in issue 670 and refined in 675 and 678 (T-226, T-228, T-223): one to one with T-225's
-    # under a half turn and with #678's under the identity, one square released and turned
-    # by 25.64 degrees (the import's measurement and the 22 October review's, its RF-3 and
-    # RF-4). T-229's item names T-225, so the packing stays with Couzo, whose source's
-    # manifest credits Polkovskyi's own construction as its seed (A11 of #716).
+    # Mykhailo Polkovskyi's re-solve (T-229, adopted on 23 October 2026) of Francisco
+    # Couzo's packing, which Couzo first reported in issue 670 and refined in 675 and 678
+    # (T-226, T-228, T-223): one to one with #678's under the identity and with T-225's under
+    # a half turn, one square released and turned by 25.64 degrees (the import's measurement
+    # and the 22 October review's, its RF-3 and RF-4). The author's comment of 23 October on
+    # issue 719 says the solve started from Couzo's #678 certificate, not from Evan Daniel's
+    # view (T-225), so T-229's item names T-223 and Daniel is no antecedent here (think-xyhn).
+    # The packing stays with Couzo, whose source's manifest credits Polkovskyi's own
+    # construction as its seed (A11 of #716). The pass of 24 October 2026 adopted the
+    # release's other 204 file (T-231), T-229's packing at its solved side, which T-231's
+    # item names, so the credit is the same; Evan Daniel's exact solver, measured as its
+    # method by the 23 October review, is a method credit and no antecedent of the packing.
     204: Credit(
         (COUZO,),
-        (DANIEL, POLKOVSKYI),
-        "Mykhailo Polkovskyi’s re-solve of Evan Daniel’s display regularization of "
-        "Francisco Couzo’s packing from a search Couzo’s source seeded with Polkovskyi’s own "
-        "n = 204 construction",
+        (POLKOVSKYI,),
+        "Mykhailo Polkovskyi’s re-solve of Francisco Couzo’s packing from a search Couzo’s "
+        "source seeded with Polkovskyi’s own n = 204 construction",
     ),
     # T-174's regularization of T-098's packing, measured one to one, no square moved
     # beyond 1e-12 (the 14 October review of PR 574).
