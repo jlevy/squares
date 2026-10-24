@@ -799,7 +799,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "4cfe20f2d9a5bcfe892b3057e2a3507f5f9ac04b"
+DATA_REVISION = "76d398b3138394b068c61592a0b5850f04d3494d"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -8283,18 +8283,21 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         reason=(
             "T-163's family assessment and the owner's answer “Credit both "
             "(Recommended)” (think-rh4j, think-cwfi): the record index reads the stored "
-            "record_scope assessment, which the gate recomputes, and credits every entry of one report registered "
-            "twice; T-163's rationale, notes, next_rung and composition name Ryu's "
-            "Theorem 1.3 window and the published note; four entries name the beads that "
-            "own their unfinished confirmations; and the requests record gains the nine "
-            "tracking issues #772 to #780. Measured against main 5664ac1e8, 14b14f2d1 and "
-            "last 2c58b6373 (#750): rendered into empty site directories with source "
-            "links pinned to 2c58b637, twice from this tree and once from it with that "
+            "record_scope assessment, which the gate recomputes, and credits every entry "
+            "of one report registered twice; T-163's rationale, notes, next_rung and "
+            "composition name Ryu's Theorem 1.3 window, the published note and why V2 is "
+            "held; four entries name the beads that own their unfinished confirmations; "
+            "and the requests record gains the fourteen tracking issues #772 to #780 and "
+            "#782 to #786. Measured against main 5664ac1e8, 14b14f2d1 and 2c58b6373 "
+            "(#750), and last, after review A's fixes (think-q5sr) and the merges of main "
+            "c5697c2f2 (#757) and 5f8f005a3 (#766), at link revision 5f8f005a: rendered "
+            "into empty site directories, twice from this tree and once from it with that "
             "main's profile_records.py, results.yaml and result-requests.yaml swapped in, "
             "render_n11_lower_bounds_explainer, render_n11_optimality_review, "
             "render_n11_threshold_bound_review and render_packing_methods write all 69 "
             "files byte-identical across the three. No PDF was printed; each prints from "
-            "that HTML. Retain v0.4.24, v0.1.11, v0.1.4 and v0.2.7."
+            "that HTML. Retain v0.4.25, main's explainer after T-239, v0.1.11, v0.1.4 and "
+            "v0.2.7."
         ),
     ),
 )
