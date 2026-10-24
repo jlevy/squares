@@ -5,15 +5,17 @@ title: "PR #766 (merge): senior review"
 kind: task
 status: in_progress
 priority: 2
-version: 3
+version: 4
 delegate: c-rev-766-1024
 labels: []
 dependencies: []
 parent_id: is-01m5nq1f8n1jcjddbfz2zx2x97
+child_order_hints:
+  - is-01m5nxqvt6ga8v5hqr0akqjk44
 hold: null
 hold_until: null
 created_at: 2026-10-24T02:40:30.259Z
-updated_at: 2026-10-24T03:01:16.588Z
+updated_at: 2026-10-24T03:02:18.182Z
 started_at: 2026-10-24T02:40:36.971Z
 ---
 
