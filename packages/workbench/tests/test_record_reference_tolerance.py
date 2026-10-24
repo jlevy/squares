@@ -65,7 +65,9 @@ def test_record_decodes_exact_rational_scalars(
     assert poses[0, 2] == expected_angle
 
 
-@pytest.mark.parametrize("n", [51, 70])
+# 51 is exact over Q(sqrt 2); 84 is rational (T-174), as 70 was until the adoption of 23
+# October 2026 took 70 to a degree-5 field (think-ot5c).
+@pytest.mark.parametrize("n", [51, 84])
 def test_record_projects_complete_exact_bases_without_geometry_decisions(
     n: int, monkeypatch: pytest.MonkeyPatch
 ) -> None:
@@ -87,7 +89,7 @@ def test_record_projects_complete_exact_bases_without_geometry_decisions(
         context.prec = 80
 
         def scalar(value: Any) -> float:
-            if n == 70:
+            if n == 84:
                 return float(Fraction(str(value)))
             rational, root = (Fraction(str(part)) for part in value)
             return float(
@@ -153,9 +155,15 @@ def test_the_tolerance_sits_between_float_conversion_and_catalogue_rounding() ->
     This re-measures a spread of them, both representations included, to stay quick.
     """
     worst = 0.0
+    decimal = 0
     for n in SAMPLED_WITNESSES:
         payload = safe_load((WITNESSES / f"n-{n:03d}.yaml").read_text(encoding="utf-8"))
         witness = payload["witness"]
+        # A number-field house (259 and 295 since 23 October 2026) states no decimal to
+        # convert; the radical house's centres are the test above's.
+        if witness["scalar"]["kind"] == "algebraic-number-field":
+            continue
+        decimal += 1
         poses, side = record(n)
         worst = max(worst, float(abs(Fraction(str(witness["side"])) - Fraction(side))))
         for index, square in enumerate(witness["squares"]):
@@ -171,6 +179,7 @@ def test_the_tolerance_sits_between_float_conversion_and_catalogue_rounding() ->
                 *(float(abs(exact[axis] - Fraction(poses[index, axis]))) for axis in (0, 1)),
             )
     assert worst < CONVERSION_SCALE
+    assert decimal >= len(SAMPLED_WITNESSES) - 4
 
 
 def test_a_copy_off_by_float_conversion_is_the_record() -> None:

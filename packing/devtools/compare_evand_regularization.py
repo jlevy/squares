@@ -19,7 +19,8 @@ can be re-derived rather than trusted. Three subcommands, from ``packing/``:
 ``refused-tilts [--index PATH] [--json]``
     Classify each record the project layer refuses by the tilts its known-best witness
     holds: every tilted square at exactly 45 degrees, some other tilt, or axis-aligned
-    only. Reads only committed records.
+    only. Reads only committed records. A record whose ambiguous tilt `KNOWN_TILTS`
+    records, with the bead that owns it, is reported as held and left out of the split.
 
 ``angles CERT [CERT ...] [--json]``
     Each square's rotation ``2 atan(t)`` in degrees, and the same folded into (-45, 45],
@@ -31,7 +32,10 @@ can be re-derived rather than trusted. Three subcommands, from ``packing/``:
 recount to its own ``totals``, a list or index that misses or repeats a count, two inputs
 that do not cover the same counts, and a tilt that lies within ``AMBIGUOUS_DEGREES`` of 0
 or 45 without being within ``TOLERANCE_DEGREES`` of it are each refused with exit status
-2 rather than counted one way or the other. A tilt is measured at ``DIGITS`` significant
+2 rather than counted one way or the other, unless `KNOWN_TILTS` records that very tilt:
+then its record is reported as held, with the bead that owns it, and counted in no class,
+and a recorded tilt the records no longer hold is refused, so the list cannot outlive
+what it excuses. A tilt is measured at ``DIGITS`` significant
 digits from the witness's own scalars through `sqpack.witness.materialize_witness`, which
 reads every scalar kind the record holds, the number-field witness included.
 """
@@ -47,7 +51,7 @@ from collections import Counter
 from collections.abc import Iterable, Mapping, Sequence
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any
+from typing import Any, NamedTuple
 
 import mpmath as mp
 
@@ -76,6 +80,34 @@ _GROUPS = re.compile(r"([1-9]\d*) -> ([1-9]\d*)")
 
 class InputRefusedError(ValueError):
     """An input this module will not count from."""
+
+
+class KnownTilt(NamedTuple):
+    """An ambiguous tilt recorded as known: the angle it is near (0 or 45 degrees), its
+    distance from that angle as the refusal prints it, at three significant digits, and
+    the open bead that owns it, first."""
+
+    near: int
+    distance: str
+    owner: str
+
+
+#: The ambiguous tilts `refused_tilts` reports as known rather than refusing, by (count,
+#: square numbered from 1, as the refusal names it). Each names the open bead that owns
+#: it; a tilt at another distance, at another square or count, is refused as before
+#: (review A6 of #756).
+KNOWN_TILTS: dict[tuple[int, int], KnownTilt] = {
+    # n = 259's house since 23 October 2026 is issue 639's exact form (T-193,
+    # think-ot5c), an exact solve of T-174's packing that is not regularized: square 229
+    # lies 5.21e-7 degrees off the axis, one of its 26 near-axis squares. Its
+    # regularization is owed to think-mbdw, which would straighten it.
+    (259, 229): KnownTilt(
+        0,
+        "5.21e-7",
+        "think-mbdw: the regularization of n = 259's exact house, owed since its "
+        "adoption on 23 October 2026",
+    ),
+}
 
 
 @dataclass(frozen=True, slots=True)
@@ -247,18 +279,32 @@ def fold_degrees(degrees: Any) -> Any:
     return folded - 45
 
 
-def tilt_class(tilt: Any, where: str) -> str:
-    """``axis``, ``45`` or ``other`` for a tilt in [0, 45], refusing an ambiguous one."""
-    for target, name in ((0, "axis"), (45, "45")):
+def ambiguity(tilt: Any) -> tuple[int, str] | None:
+    """The angle an ambiguous tilt in [0, 45] is near and its distance from it, printed
+    at three significant digits; None where the tilt is that angle within the tolerance or
+    clear of both angles."""
+    for target in (0, 45):
         distance = abs(tilt - target)
         if distance <= TOLERANCE_DEGREES:
-            return name
+            return None
         if distance <= AMBIGUOUS_DEGREES:
-            raise InputRefusedError(
-                f"{where}: a tilt {mp.nstr(distance, 3)} degrees from {target} is neither "
-                f"that angle within {mp.nstr(TOLERANCE_DEGREES, 3)} nor clear of it by "
-                f"{mp.nstr(AMBIGUOUS_DEGREES, 3)}"
-            )
+            return target, str(mp.nstr(distance, 3))
+    return None
+
+
+def tilt_class(tilt: Any, where: str) -> str:
+    """``axis``, ``45`` or ``other`` for a tilt in [0, 45], refusing an ambiguous one."""
+    found = ambiguity(tilt)
+    if found is not None:
+        target, distance = found
+        raise InputRefusedError(
+            f"{where}: a tilt {distance} degrees from {target} is neither "
+            f"that angle within {mp.nstr(TOLERANCE_DEGREES, 3)} nor clear of it by "
+            f"{mp.nstr(AMBIGUOUS_DEGREES, 3)}"
+        )
+    for target, name in ((0, "axis"), (45, "45")):
+        if abs(tilt - target) <= TOLERANCE_DEGREES:
+            return name
     return "other"
 
 
@@ -287,15 +333,49 @@ def record_class(classes: Iterable[str]) -> str:
     return "all-45" if "other" not in present else "other-tilt"
 
 
-def refused_tilts(index: Mapping[int, Mapping[str, Any]], root: Path = REPO) -> dict[str, Any]:
-    """The refused records by the tilts their witnesses hold."""
+def refused_tilts(
+    index: Mapping[int, Mapping[str, Any]],
+    root: Path = REPO,
+    known: Mapping[tuple[int, int], KnownTilt] | None = None,
+) -> dict[str, Any]:
+    """The refused records by the tilts their witnesses hold, with each record whose
+    ambiguous tilt `known` records held apart under the bead that owns it. A recorded
+    tilt at a count the index refuses that its witness no longer holds is refused."""
+    known = KNOWN_TILTS if known is None else known
     by_class: dict[str, list[int]] = {"all-45": [], "other-tilt": [], "axis-only": []}
     other_tilts: dict[str, list[str]] = {}
+    held: dict[str, dict[str, Any]] = {}
     for n in sorted(index):
         entry = index[n]
         if entry["status"] != "refused":
             continue
         tilts = witness_tilts(root / entry["source"]["witness"])
+        excused = {
+            square: excuse
+            for (count, square), excuse in known.items()
+            if count == n
+            and 1 <= square <= len(tilts)
+            and ambiguity(tilts[square - 1]) == (excuse.near, excuse.distance)
+        }
+        stale = sorted(square for (count, square) in known if count == n) != sorted(excused)
+        if stale:
+            raise InputRefusedError(
+                f"n = {n}: KNOWN_TILTS records a tilt its witness no longer holds; take it "
+                "off the list or record the tilt the witness holds"
+            )
+        if excused:
+            held[str(n)] = {
+                str(square): {
+                    "near_degrees": excuse.near,
+                    "distance_degrees": excuse.distance,
+                    "owner": excuse.owner,
+                }
+                for square, excuse in sorted(excused.items())
+            }
+            for k, tilt in enumerate(tilts):
+                if k + 1 not in excused:
+                    tilt_class(tilt, f"n = {n}, square {k + 1}")
+            continue
         classes = [tilt_class(tilt, f"n = {n}, square {k + 1}") for k, tilt in enumerate(tilts)]
         kind = record_class(classes)
         by_class[kind].append(n)
@@ -304,10 +384,17 @@ def refused_tilts(index: Mapping[int, Mapping[str, Any]], root: Path = REPO) -> 
                 str(mp.nstr(t, 6)) for t, c in zip(tilts, classes, strict=True) if c == "other"
             }
             other_tilts[str(n)] = sorted(distinct, key=mp.mpf)
+    for count, square in sorted(known):
+        if count in index and index[count]["status"] != "refused":
+            raise InputRefusedError(
+                f"n = {count}: KNOWN_TILTS records square {square}'s tilt, and the index "
+                "no longer refuses the count; take it off the list"
+            )
     return {
-        "refused": sum(len(counts) for counts in by_class.values()),
+        "refused": sum(len(counts) for counts in by_class.values()) + len(held),
         "counts": {kind: len(counts) for kind, counts in by_class.items()},
         "records": by_class,
+        "held": held,
         "other_tilts_degrees": other_tilts,
         "tolerance_degrees": mp.nstr(TOLERANCE_DEGREES, 3),
         "ambiguous_degrees": mp.nstr(AMBIGUOUS_DEGREES, 3),
@@ -387,6 +474,12 @@ def _tilts_table(result: Mapping[str, Any]) -> str:
         f"axis-aligned only: {counts['axis-only']} {records['axis-only']}",
         "other tilts, degrees: "
         + "; ".join(f"{n}: {', '.join(t)}" for n, t in result["other_tilts_degrees"].items()),
+    ]
+    lines += [
+        f"held, a known ambiguous tilt: n = {n}, square {square}, "
+        f"{tilt['distance_degrees']} degrees from {tilt['near_degrees']} ({tilt['owner']})"
+        for n, squares in result["held"].items()
+        for square, tilt in squares.items()
     ]
     return "\n".join(lines)
 

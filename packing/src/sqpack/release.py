@@ -799,7 +799,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "6d4cc24cb35da513f12dc2ba29421ffb3a9524a4"
+DATA_REVISION = "67f5799ccf8ee06d180e3367b32c47804c16ae45"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -2511,6 +2511,73 @@ class ReleaseNoPublicChange(NamedTuple):
 
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/atlas/known-best/bound-citations.json",
+            "packing/atlas/known-best/composite-figure.json",
+            "packing/devtools/adopt_houses.py",
+            "packing/devtools/algebraic_witness_reports.py",
+            "packing/devtools/build_known_best_atlas.py",
+            "packing/devtools/check_standing.py",
+            "packing/devtools/default_drawings.py",
+            "packing/devtools/exact_sides.py",
+            "packing/devtools/regularize_evand.py",
+            "packing/devtools/regularized_drawings.py",
+            "packing/devtools/render_case_pages.py",
+            "packing/devtools/render_recent_results.py",
+            "packing/devtools/render_research_tables.py",
+            "packing/devtools/select_houses.py",
+            "packing/devtools/upper_bound_houses.py",
+            "packing/frontier/README.md",
+            "packing/frontier/n-070.md",
+            "packing/frontier/n-102.md",
+            "packing/frontier/n-123.md",
+            "packing/frontier/n-153.md",
+            "packing/frontier/n-207.md",
+            "packing/frontier/n-295.md",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+            "packing/frontier/square-packing-case.schema.yaml",
+            "packing/src/sqpack/cli/validate.py",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The house writer's algebraic side and the adoption of the nine algebraic "
+            "houses of 23 October 2026 (think-ot5c: T-174 at 70, 153 and 207, T-193 at "
+            "102, 123, 258, 259, 295 and 302), their regularization runs, settlements and "
+            "re-renders, against main cc91ee1b8 (#746), after merging it: rendered at link "
+            "revision 52d23673 into empty site directories, twice from this tree at "
+            "52d23673 and twice from main's (69 files each), "
+            "render_n11_lower_bounds_explainer, with its pinned Chromium math pass, "
+            "render_n11_optimality_review, render_n11_threshold_bound_review and "
+            "render_packing_methods write every file byte-identical across all four. "
+            "Measured before at 63c12e35 against main 769e441e1 (#748), at fb0889e2 "
+            "against 7335d0098 (#752), and at e0c2bf25 and 1a2a7d47 against c1115c095 "
+            "(#749), with the same outcome. Measured again after review A of #756 "
+            "(the merge of main 0bbb0a2c4, #753 and #754; check_standing's exact order at "
+            "an algebraic house; the regularization-owed state; T-193's exact solve in the "
+            "case records and case pages; the strict readers; 295's closed form): rendered "
+            "at link revision 618cd1f4 into empty site directories, twice from this tree "
+            "at 618cd1f4 and twice from main 0bbb0a2c4's (69 files each), every file "
+            "byte-identical across all four. No PDF was printed; each prints from that "
+            "HTML. Retain v0.4.22, v0.1.11, v0.1.4 and v0.2.7."
+        ),
+    ),
     ReleaseNoPublicChange(
         components=("paper:square-packing-methods-survey",),
         paths=(
@@ -8281,6 +8348,49 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "with main c5697c2f2's four candidate inputs swapped in: all 69 files "
             "byte-identical across the three. No PDF was printed; each prints from that "
             "HTML. Retain v0.4.25, main's explainer after T-239, v0.1.11, v0.1.4 and "
+            "v0.2.7."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/devtools/profile_records.py",
+            "packing/frontier/results.yaml",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "T-163's family assessment and the owner's answer “Credit both "
+            "(Recommended)” (think-rh4j, think-cwfi): the record index reads the stored "
+            "record_scope assessment, which the gate recomputes, and credits every entry "
+            "of one report registered twice; T-163's rationale, notes, next_rung and "
+            "composition name Ryu's Theorem 1.3 window, the published note and why V2 is "
+            "held; four entries name the beads that own their unfinished confirmations; "
+            "and the requests record gains the fourteen tracking issues #772 to #780 and "
+            "#782 to #786. Measured against main 5664ac1e8, 14b14f2d1 and 2c58b6373 "
+            "(#750), and last, after review A's fixes (think-q5sr) and the merges of main "
+            "c5697c2f2 (#757), 5f8f005a3 (#766) and 34eb8bb75 (#769), at link revisions "
+            "5f8f005a and then 34eb8bb7: each time rendered "
+            "into empty site directories, twice from this tree and once from it with that "
+            "main's profile_records.py, results.yaml and result-requests.yaml swapped in, "
+            "render_n11_lower_bounds_explainer, render_n11_optimality_review, "
+            "render_n11_threshold_bound_review and render_packing_methods write all 69 "
+            "files byte-identical across the three. No PDF was printed; each prints from "
+            "that HTML. Retain v0.4.25, main's explainer after T-239, v0.1.11, v0.1.4 and "
             "v0.2.7."
         ),
     ),

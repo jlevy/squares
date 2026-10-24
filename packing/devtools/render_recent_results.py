@@ -78,6 +78,7 @@ from decimal import Decimal
 from fractions import Fraction
 from typing import Any, NamedTuple
 
+from devtools import exact_sides
 from devtools.build_bound_citations import (
     BIBLIOGRAPHY,
     PROJECT_NAME,
@@ -255,6 +256,34 @@ class Held(NamedTuple):
     """Entries an upper bound, verified or reported, rests on."""
 
 
+#: How narrow the enclosure of an algebraic house's written side is (`span`). The enclosure
+#: is for reading a bound as numbers, and it decides no order: `check_standing.relation`
+#: holds a stated bound to the root itself (`root_side`), since register entries state
+#: rationals within 1e-87 of these roots (review A2 of #756).
+ROOT_WIDTH = Fraction(1, 10**60)
+
+
+def _root_side(text: object) -> exact_sides.Algebraic | None:
+    """An algebraic house's side as the house writer writes it (`exact_sides.form`): its
+    root form, or at degree two the quadratic closed form `exact_sides.quadratic_text`
+    writes, held exactly; None for any other form."""
+    try:
+        side = exact_sides.read_form(str(text or ""))
+    except exact_sides.ExactSideError:
+        return None
+    return side if isinstance(side, exact_sides.Algebraic) else None
+
+
+def root_side(bound: Mapping[str, Any]) -> exact_sides.Algebraic | None:
+    """A case record's bound as the algebraic number its exact form states, where that form
+    is one the house writer writes (`exact_sides.form`), held exactly: its root form, or the
+    quadratic closed form `exact_sides.quadratic_text` writes, ``(a+b*sqrt(d))/c``, as at
+    51 and 295 (review A14 of #756). None for a fraction, a closed form other than
+    `exact_sides.quadratic_text`'s, or no exact form. An order against it is decided by
+    `exact_sides.compare`, never read from `span`'s enclosure."""
+    return _root_side(bound.get("exact_form"))
+
+
 def _rational(text: object) -> Fraction | None:
     """An exact form as a number, or None where it is a closed form such as a root."""
     if text is None:
@@ -292,10 +321,18 @@ def span(bound: Mapping[str, Any]) -> tuple[Fraction, Fraction]:
     the printed value is a display that may be cut or rounded either way, so it stands for
     every number within one unit of its last printed place, as
     `bounds_agree_at_declared_precision` reads a display: n = 5's verified ceiling prints
-    `2 + (1/2)sqrt(2)` rounded up in its 32nd place."""
+    `2 + (1/2)sqrt(2)` rounded up in its 32nd place. An algebraic house's side, written as
+    the one root of its minimal polynomial in an interval or, at degree two, as the
+    quadratic closed form `exact_sides.quadratic_text` writes (`exact_sides.form`), is read
+    exactly by `root_side`; its span here is only an enclosure `ROOT_WIDTH` wide, which
+    holds rationals that are not the root, so a comparison that decides anything holds a
+    number to `root_side` instead."""
     rational = _rational(bound.get("exact_form"))
     if rational is not None:
         return rational, rational
+    rooted = _root_side(bound.get("exact_form"))
+    if rooted is not None:
+        return exact_sides.enclosure(rooted, ROOT_WIDTH)
     value = Fraction(str(bound["value"]))
     exponent = Decimal(str(bound["value"])).as_tuple().exponent
     if not bound.get("exact_form") or not isinstance(exponent, int):

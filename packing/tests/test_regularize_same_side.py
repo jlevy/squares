@@ -368,7 +368,11 @@ def test_n26_reaches_the_printed_side_with_a_rattler_moved_off_its_contacts() ->
 
 
 def test_n70_reaches_its_rational_side_with_tilted_squares() -> None:
-    witness = record(70)
+    # T-146's certificate at 70, the house until the adoption of 23 October 2026 moved the
+    # count to T-174's algebraic side (think-ot5c), built as the house writer builds it.
+    from devtools import upper_bound_houses as houses  # noqa: PLC0415
+
+    witness = houses._house_witness(70, houses.sources()["T-146"])  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
     assert witness["scalar"]["kind"] == "rational"
     assert witness["representation"] == "center-basis"
     poses = perturbed(witness_poses(witness), 1e-12, seed=70)

@@ -96,6 +96,34 @@ configuration passes the checks `verify_exact.py` makes, and its soundness is th
 program’s. The checker does not itself check that a file lists exactly $n$ squares; the
 16 October ledger’s `exact_sides.py` does, at every count.
 
+## Witnesses for the House Best Packings
+
+On 23 October 2026 the house rule adopted T-193 at the six counts whose forms the
+packet retains and whose regularization items owe no correction: 102, 123, 258, 259,
+295 and 302 (think-ot5c).
+A house best packing’s witness is a Witness/v2, so
+[acquisition/algebraic.json](acquisition/algebraic.json) declares each of the six as a
+retained exact form, and `devtools.algebraic_witness_reports derive-forms` writes it as a
+derived fact, `facts/alg-n-NNN.yaml.gz`: the form’s field, side and centres exactly, and
+each square’s basis $R^m((1 - u^2)/(1 + u^2), 2u/(1 + u^2))$ computed exactly in the
+field from its half-angle tangent $u$ and quarter turns $m$, as `verify_exact.py` reads
+them.
+No upstream byte is copied into a fact; `derive-forms --check` derives them again from
+the retained forms, each held to its pinned digest.
+
+`certify` then decided each fact on `sqpack`’s exact verifier over its field, a positive
+with its duplicate-square and outside-container controls, each job in its own process,
+two at a time on a shared 4-core host: 18 jobs, 504,102 pair decisions, 684.99 route CPU
+seconds, the longest job 230.72 s wall (302).
+The six positives pass and the twelve controls are refused, and
+`receipts/algebraic-route1-nNNN.json.xz` keep them.
+This is a second decision of the six configurations, by the one route over a number
+field this repository maintains, beside the source’s own checker; no evidence entry
+registers it yet, and the house’s witness carries its positive’s native result.
+The other ten of T-193’s counts have no fact: eight wait for think-8ido to correct their
+regularization items, and 204 and 267 are pinned only, 204 now housed by a smaller
+packing.
+
 ## Credit and Licence
 
 Evan Daniel wrote the source under the MIT licence (`LICENSE`), with credits in
@@ -105,6 +133,17 @@ register’s credits in the table). Method and code as in #419.”
 On AI assistance the issue says: “The solver, checkers and this batch were written and
 run with Claude (Anthropic) as a coding and research agent, directed and reviewed by
 me.” Both commits carry a Claude co-author trailer.
+
+## Compressed Files
+
+| Stored File | Origin | Git Blob of Original | SHA-256 of Original |
+| --- | --- | --- | --- |
+| `facts/alg-n-102.yaml.gz` | receipt | `009e7dccc3589739a733cf38b47cc67ade1d88dc` | `2697e89a0a5f1a4698ee973f7af45b3b005303594988a7de14b3b35a6596c14b` |
+| `facts/alg-n-123.yaml.gz` | receipt | `a07ee718e938c73bf5760dc7ecdc097966eb7aff` | `12edcc1f6014122eb241c2f105dd9e6656a2c871f86f889b026b2d0381afa197` |
+| `facts/alg-n-258.yaml.gz` | receipt | `5ed766fc9b5c5e1e5a5d20bcfd63b9d0dff94bea` | `f55d0c95ca55912ec957751a3c3e7931966fd2e3fc03e60969d469f1fd7c59d8` |
+| `facts/alg-n-259.yaml.gz` | receipt | `5331176ce8cf5ed030881362c13b53724e090847` | `e0a345be4ffe32b10b8b50de9f2d88d9e961504d401e069a57be8d111b4574cb` |
+| `facts/alg-n-295.yaml.gz` | receipt | `6c3547e2c0134c84f7bfae018132e1137dd99f6c` | `93cc8c4d1f36f9f4b22cbc43321e608c1265c4cb7e79ef5fbad9f0b93712a1aa` |
+| `facts/alg-n-302.yaml.gz` | receipt | `3b6e20fbc097097972521adfe28896cb722a0fcb` | `e7510f0f604ec641d1c285694af2b950555ba92ad1f4844c7b182ed527a0e612` |
 
 ## Original Gzip Files
 
@@ -136,7 +175,11 @@ From `packing/`:
 
 ```sh
 uv run --frozen --all-extras --group dev python -m devtools.acquire_source evand-exact-cur-2026-10-16 --check
+uv run --frozen --all-extras --group dev python -m devtools.algebraic_witness_reports evand-exact-cur-2026-10-16 derive-forms --check
+uv run --frozen --all-extras --group dev python -m devtools.algebraic_witness_reports evand-exact-cur-2026-10-16 check
 ```
+
+`check --replay` decides the 18 jobs again, about 11 CPU minutes.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

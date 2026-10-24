@@ -1388,7 +1388,10 @@ PRUNE |= REGULARIZED_WITNESSES | HISTORICAL_SNAPSHOT_OUTPUTS | UNREAD_WORKER_OUT
 # only when called; `check_results` and `validate_schemas` reach such calls through
 # `upper_bound_houses` and `default_drawings` and never make them. The list is the
 # guard's, not this note's: `test_no_control_loads_a_pruned_tool` holds that no control
-# loads one, and a call is caught only by its control failing in a worker.
+# loads one, and a call is caught only by its control failing in a worker. On 23 October
+# 2026 (think-ot5c) `algebraic_witness_reports` stopped loading the driver at import, and
+# `select_houses` and `adopt_houses` with it, since the house check reads its number-field
+# facts and receipts in a worker; it loads the driver where a comparison needs it.
 # The one control that runs the whole suite points `testpaths` at a missing
 # directory and expects pytest to stop at configuration, before any test is collected,
 # so the consumer contract's declarations of the driver and the gallery are never read

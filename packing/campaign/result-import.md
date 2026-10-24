@@ -457,6 +457,16 @@ the inputs and the comparison:
   its finder after the finder of the packing it refines, as a regularization
   ([stage 3](#stage-3-record)), unless it restates the report below the print.
 
+**One report registered as two entries is credited in both.** A tie stays with the
+earlier report, but two register entries can carry one report: T-073 and T-080 register
+one certificate of wand125’s 2 October release, and T-083 and T-084 one paper of
+Karakuş’s. When every tied entry carries the identical attribution, the same source keys
+at the same date, each is credited as current: the owner’s answer of 24 October 2026,
+“Credit both (Recommended)” (think-33u4).
+[`devtools.profile_records`](../devtools/profile_records.py) applies it to the profiles’
+Records, and a tie between attributions that differ in any way is still ordered by
+publication date, or left unassessed.
+
 Beyond the corpus the owner’s answers of 23 October 2026 are rules of the walk.
 The ledger’s `rulings` list names each one it applies, and the module docstring of
 `devtools.intake_ledger` owns them.
@@ -921,12 +931,15 @@ No adoption waits for the owner’s word, and each case that once did is decided
     [section 5](../../docs/project/policies/regularization-policy.md#5-manual-review-and-adjustment),
     and a view the owner admits is drawn on its review record, as at n = 211 on 16
     October 2026: “Admit it.”
-  - Where the house best packing has an algebraic side, the runs settle the count: no
-    rational view is `same` or `bound` at an irrational side, and no number-field view
-    is decided on two exact routes yet (the policy’s obligation 1; think-mbdw is that
-    second route). Keeping a rational view just above an algebraic U is a question 13
-    decision, put to the owner once with the counts it concerns, and it holds no
-    adoption.
+  - Where the house best packing has an algebraic side, the count draws its exact house
+    and its regularization stays owed under think-mbdw: its `SETTLED` entry’s state is
+    `regularization-owed`, not decided, and its `owed` names the bead: no rational view
+    is `same` or `bound` at an irrational side, and no number-field view is decided on
+    two exact routes yet (the policy’s obligation 1; think-mbdw is that second route).
+    A rational view just above an algebraic U is not drawn.
+    The owner answered question 13 so on 23 October 2026 (think-r8cn): the best record
+    is always the record, and a regularized drawing may change the side only as a strict
+    improvement.
 - **A conjectured optimum** that the new house best packing is below, wherever its print
   rounds, is withdrawn, and any other stays; the adoption goes ahead either way.
 
@@ -938,8 +951,12 @@ the open bead that adopts it and one of three reasons (`STAGING_REASONS`): the p
 next pull request; regularization runs over the item cap, which split the adoption
 ([stage 5’s adoption steps](#adopt-a-house-then-regularize-it)); or no writer, where
 `adopt_houses` cannot yet write the new house best packing.
-A house best packing with an algebraic side is the one such gap the rule names, and the
-writer’s bead, think-ot5c, owns its counts.
+A house best packing with an algebraic side was the one such gap the rule names until 23
+October 2026, when the writer took an algebraic side, written in both lanes as the one
+root of its minimal polynomial in an interval, or of degree two as its closed form
+(`exact_sides.form`). The gap now is an algebraic house that no derived number-field
+fact and receipt hold (`upper_bound_houses.FIELD_COUNTS`), and the writer’s bead,
+think-ot5c, owns its counts.
 `bead tree` holds each bead open, and the adopting pull request takes the count off.
 `--check` fails on a staged count where the selection no longer changes the house best
 packing, or would change it to a packing other than the one staged, and on a count
@@ -1052,7 +1069,7 @@ and holds this one to the base record ([The House Rule](#the-house-rule)). It ru
 reason, then the guide’s render step, and lists the drawings as above.
 
 The records tier’s
-`every drawn picture is regularized, regular as published, decided or exempt`
+`every drawn picture is regularized, regular as published, decided, owed to an open bead or exempt`
 (`default_drawings --check-state`) fails on a pending count that the list does not name,
 so an adoption cannot pass until its runs have decided every count it re-houses.
 It also fails on a listed count that is no longer pending and on a `SETTLED` entry
@@ -1286,6 +1303,27 @@ What lets an agent post is the `github-workflows` grant, which covers issues.
   ([After the Merge](#after-the-merge)).
 - The reply that reports a confirmation names the programs that ran, and says whether
   they were the author’s own code re-run or a re-implementation.
+- **Every pending review is tracked on a GitHub issue**, and its state is posted there
+  at each change (the owner, 24 October 2026: “This state of all reviews should be
+  tracked in the GitHub issues.”). A review is pending while its result stands below
+  `V3` or `C3`, names an unfinished confirmation or an activity, or has a comparison the
+  record index leaves unassessed, which its author’s profile shows as Review pending.
+  The tracking issue is the one that reported the result, or, where none did, one the
+  project opens, as it does for every S4 or S5 result (#603 for T-163). Each change of
+  that state gets a follow-up there: the review or replay queued with its bead, run,
+  landed or held, a rung moved, a comparison settled.
+  `check_requests --pending` lists every pending review with its beads, its issues and
+  whether one of them states its present state; a comparison is a state no reply field
+  holds, so it stays listed until it is settled.
+  The pass answers every issue the view marks stale, and reports to the owner, before
+  opening any, the results it lists with no tracking issue.
+  The view lists apart a result whose owing issues are all held for the owner, since no
+  pass posts on a held issue until the owner lifts the hold, and marks one tracked only
+  on closed issues, which still count as tracking it.
+  Two follow-ups it cannot see are the pass’s to post by hand: the one a comparison owes
+  once settled, since it leaves the view as it settles (#603 for T-163), and those owed
+  where an issue names a result only in an ask, not in its `results` (#532 for T-142 to
+  T-144).
 - **A settled issue is closed with its final comment**, after the verified deploy, once
   nothing the author asked for is queued and no question to the author would change the
   record: [Close a Settled Issue](#close-a-settled-issue).
@@ -1500,6 +1538,7 @@ Run each command from `packing/` as
 | none | The gate step: the schema holds and every id resolves; one line per issue |
 | `--report` | A table per issue: each result’s entries, rungs, state, how it was confirmed and whether its id is on `main`; the replies due; whether it is closeable |
 | `--backlog` | Every register entry below `V3` or `C3`, with its `next_rung`, its `activity`, the beads it names and the issues it serves |
+| `--pending` | Every pending review (stage 7): the backlog’s entries, any entry naming an unfinished confirmation or activity, and the record index’s unassessed comparisons, each with its beads, its tracking issues and whether one states its present state; then the count with no tracking issue, the stale, those held for the owner and those tracked only on closed issues. It does not see the follow-up a settled comparison owes, nor a result an issue names only in an ask |
 | `--draft N` | The status comment for issue N, ending in the Claude Code footer; it refuses unless `HEAD` is on `origin/main` |
 | `--github` | Read-only: the issues the record lacks, the replies missing from it, the comments created or edited after an entry’s `read_through`, and the `result-report` entries and entries marked `intake: true` whose issues lack the `intake` label |
 

@@ -3270,6 +3270,7 @@ results:
           BC-240's audited prose steps, which the composition note judges load-bearing,
           mechanised or reviewed again by a distinct reviewer
         rung: C3
+        link: think-o9kd
     notes: >-
       2026-10-03: T-060, which confirms that s(11) is Trump's exact side U (its T), implies
       this result's first clause and not its equality clause (superseded_by), so this
@@ -4169,11 +4170,13 @@ results:
           the 2026-09-27 checker-scaling review recorded as an external_review on the
           report entries this result cites
         rung: C1
+        link: think-wcex
       - what: >-
           sqverify-fast's census of 3 October, which verified all 48 standing certificates
           at all 201 directions, recorded with its control receipts and a review of the
           census route that reads them
         rung: C3
+        link: think-sb7a
     notes: >-
       V0 because every cited entry is the source's public claim or a reported-lane transfer
       from it: assurance reported, replay not attempted. The source reports each standing
@@ -8774,6 +8777,7 @@ results:
           every unit square in the square of side x, or a formalization of the three-case
           reduction in Theorem 3's proof
         rung: C2
+        link: think-gtjq
     notes: >-
       Superseded as the verified lower bound at both of its cases when this line of the
       register merged with the replays recorded in parallel, on 2026-10-03: at n = 37 by
@@ -12088,6 +12092,7 @@ results:
           the step at S = T mechanised, or reviewed again by a distinct reviewer with the
           oversight record the ladder asks for
         rung: C3
+        link: think-ysr9
     notes: >-
       Registered on 6 October 2026 by the owner's decision, to state separately what
       the record had held only as a conditional corollary: the paper stated it from
@@ -20671,8 +20676,9 @@ results:
       rationale: >-
         A bound family for every n >= 15 with an explicit construction: the deficiency bound
         c*(k) <= k - 1 - F(k) improves Arslanov, Mustafin and Shangitbayev's k - 1 at every
-        k >= 15 and Ryu's at 15 <= k <= 78 and at k = 86; it settles no case n <= 324, and
-        its four in-corpus finite bounds trail the cases.
+        k >= 15 and Ryu's Theorem 1.4 at 15 <= k <= 78 and at k = 86, his Theorem 1.3 at its
+        best b at 15 <= k <= 68 and 70 <= k <= 75; it settles no case n <= 324, and its four
+        in-corpus finite bounds trail the cases.
       scored: '2026-10-14'
       by: >-
         the 14 October review
@@ -20705,9 +20711,11 @@ results:
     notes: >-
       V2 because the theorem rests on the 14 October review's reading of its proof, which no
       evidence entry records as a proof audit; the four finite bounds have the two-route
-      replay. The report is dated by the first commit of the theorem it states, Theorem 1's,
-      on 12 October 2026 (19:16Z), between issues 562 and 564; Theorem 2 took its present
-      form on 13 October. Issue 603, which the project opened on 14 October to track this
+      replay. It is held at V2 until think-494l lands, as the composition says. The note that holds the author's proof has been public since 18 October 2026
+      (v0.9, DOI 10.5281/zenodo.23463481, issue 603) and is not yet retained here. The
+      report is dated by the first commit of the theorem it states, Theorem 1's, on 12
+      October 2026 (19:16Z), between issues 562 and 564; Theorem 2 took its present form on
+      13 October. Issue 603, which the project opened on 14 October to track this
       result, as the owner asks for results at S4 and above, holds its intake, review and
       validation.
 
@@ -20737,19 +20745,32 @@ results:
       certificates (evand/square-packing, 18 October 2026), are T-236, a formalization
       reported and not built here (think-57ei).
     next_rung: >-
-      C4 needs a second accepted adversarial review by a distinct reviewer and a retained
-      human oversight record; the note, draft v0.6, is asked of the author, and its own text
-      has not been read. The 70 inventory certificates pinned by digest wait for a
-      hosted-data release or a W7 route; they move no rung of this entry.
+      V3 needs an evidence entry the V3 predicate reads for the theorem: the published note
+      retained, bound to this claim and recorded as a published proof (think-494l), or a
+      build here of Evan Daniel's Lean proof of both theorems with its axiom receipt
+      (think-dgrc: about 1.5 to 3 CPU-hours, at most about 8 GB per chunk, and 10 GB of
+      disk, as T-236 prices it), which would also replay the theorem here for C3. C4 needs a second accepted adversarial review by
+      a distinct reviewer and a retained human oversight record. The 70 inventory
+      certificates pinned by digest wait for a hosted-data release or a W7 route; they move
+      no rung of this entry.
     composition: >-
       Compound. The finite bounds at 211, 241, 273 and 307 rest on the two-route replay of
       the retained certificates (E-fang-excess-theorem-exact-feasibility). The theorem for
       every n >= 15 rests on Lemma 3, the scaling lemma and the induction, which no machine
       replays, and on the 14 October review's reading of them, which sets the minimum: C1.
       The entry declares V2, the minimum over its parts: no evidence entry records that
-      reading as a proof audit. The review reads the proof as recoverable from the public
+      reading as a proof audit.
+
+      The review read the proof as recoverable from the public
       repository, which would support V3, and the import plan read it as not publicly
-      recoverable; the owner decides between the two readings.
+      recoverable. The author has since published the note itself (v0.9, 18 October
+      2026), so V2's premise, a proof not publicly recoverable, no longer holds; the rung
+      moves when an entry for the theorem that the V3 predicate reads is cited (next_rung).
+      Until then V2 is held as the rung nearest what the record holds, not as a finding
+      that the proof cannot be recovered: V3 is derived from cited evidence, and nothing
+      cited yet is evidence the predicate reads, while V0, claimed or recorded only, would
+      drop the review's reading of the proof. think-494l, which retains the note and binds
+      it to this claim as a published proof with a stage 4 review, is the route to V3.
     reviews:
       - path: >-
           docs/project/reviews/review-2026-10-14-fang-excess-theorem-and-direct-certificates.md
@@ -33570,19 +33591,6 @@ regularized_drawings:
         max_move: 0.06244515
         max_turn_deg: 0.0
       view: packing/atlas/known-best/regularized/n-068-regularized.yaml.gz
-    - n: 70
-      of: T-146
-      by: project
-      method: regularize_axis_components/2
-      side: same
-      identity:
-        basis: measured
-        measured_in: packing/atlas/known-best/regularized/index.json
-        one_to_one: true
-        moved: 0
-        max_move: 7.516648e-20
-        max_turn_deg: 0.0
-      view: packing/atlas/known-best/regularized/n-070-regularized.yaml.gz
     - n: 71
       of: T-155
       by: project
@@ -33668,19 +33676,6 @@ regularized_drawings:
         max_move: 0.1504462
         max_turn_deg: 2.36147
       view: packing/atlas/known-best/regularized/n-088-regularized.yaml.gz
-    - n: 102
-      of: T-146
-      by: project
-      method: regularize_axis_components/2
-      side: same
-      identity:
-        basis: measured
-        measured_in: packing/atlas/known-best/regularized/index.json
-        one_to_one: true
-        moved: 1
-        max_move: 0.02188279
-        max_turn_deg: 0.0
-      view: packing/atlas/known-best/regularized/n-102-regularized.yaml.gz
     - n: 103
       of: T-174
       by: project
@@ -33763,19 +33758,6 @@ regularized_drawings:
         max_move: 0.01405415
         max_turn_deg: 0.0
       view: packing/atlas/known-best/regularized/n-110-regularized.yaml.gz
-    - n: 123
-      of: T-146
-      by: project
-      method: regularize_axis_components/2
-      side: same
-      identity:
-        basis: measured
-        measured_in: packing/atlas/known-best/regularized/index.json
-        one_to_one: true
-        moved: 8
-        max_move: 0.202407
-        max_turn_deg: 0.0
-      view: packing/atlas/known-best/regularized/n-123-regularized.yaml.gz
     - n: 126
       of: T-139
       by: project
@@ -33889,21 +33871,6 @@ regularized_drawings:
         max_move: 0.2626856
         max_turn_deg: 10.8334
       view: packing/atlas/known-best/regularized/n-152-regularized.yaml.gz
-    - n: 153
-      of: T-173
-      by: project
-      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
-      modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
-      side: same
-      changes: {straightened: 21, re_angled: 5}
-      identity:
-        basis: measured
-        measured_in: packing/atlas/known-best/regularized/index.json
-        one_to_one: true
-        moved: 99
-        max_move: 0.08395274
-        max_turn_deg: 2.16769
-      view: packing/atlas/known-best/regularized/n-153-regularized.yaml.gz
     - n: 154
       of: T-222
       by: project
@@ -34158,21 +34125,6 @@ regularized_drawings:
         max_move: 0.3654251
         max_turn_deg: 0.392072
       view: packing/atlas/known-best/regularized/n-206-regularized.yaml.gz
-    - n: 207
-      of: T-173
-      by: project
-      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
-      modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
-      side: same
-      changes: {straightened: 2, re_angled: 6}
-      identity:
-        basis: measured
-        measured_in: packing/atlas/known-best/regularized/index.json
-        one_to_one: true
-        moved: 6
-        max_move: 0.01762341
-        max_turn_deg: 0.0114592
-      view: packing/atlas/known-best/regularized/n-207-regularized.yaml.gz
     - n: 208
       of: T-174
       by: project
@@ -34380,34 +34332,6 @@ regularized_drawings:
         max_move: 1.652168e-94
         max_turn_deg: 0.0
       view: packing/atlas/known-best/regularized/n-240-regularized.yaml.gz
-    - n: 258
-      of: T-146
-      by: project
-      method: regularize_axis_components/2
-      side: same
-      identity:
-        basis: measured
-        measured_in: packing/atlas/known-best/regularized/index.json
-        one_to_one: true
-        moved: 0
-        max_move: 1.350926e-19
-        max_turn_deg: 0.0
-      view: packing/atlas/known-best/regularized/n-258-regularized.yaml.gz
-    - n: 259
-      of: T-136
-      by: project
-      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
-      modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
-      side: same
-      changes: {straightened: 2, re_angled: 27}
-      identity:
-        basis: measured
-        measured_in: packing/atlas/known-best/regularized/index.json
-        one_to_one: true
-        moved: 151
-        max_move: 0.1315596
-        max_turn_deg: 0.403258
-      view: packing/atlas/known-best/regularized/n-259-regularized.yaml.gz
     - n: 260
       of: T-225
       by: project
@@ -34601,19 +34525,6 @@ regularized_drawings:
         max_move: 0.03448276
         max_turn_deg: 0.0
       view: packing/atlas/known-best/regularized/n-293-regularized.yaml.gz
-    - n: 295
-      of: T-146
-      by: project
-      method: regularize_axis_components/2
-      side: same
-      identity:
-        basis: measured
-        measured_in: packing/atlas/known-best/regularized/index.json
-        one_to_one: true
-        moved: 0
-        max_move: 1.05119e-19
-        max_turn_deg: 0.0
-      view: packing/atlas/known-best/regularized/n-295-regularized.yaml.gz
     - n: 297
       of: T-174
       by: project
@@ -34642,20 +34553,6 @@ regularized_drawings:
         max_move: 0.4403689
         max_turn_deg: 1.34112
       view: packing/atlas/known-best/regularized/n-301-regularized.yaml.gz
-    - n: 302
-      of: T-186
-      by: project
-      method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
-      modifications: ["port of his coincidence placement (regularize_grid_slack/1) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
-      side: same
-      identity:
-        basis: measured
-        measured_in: packing/atlas/known-best/regularized/index.json
-        one_to_one: true
-        moved: 136
-        max_move: 0.05055404
-        max_turn_deg: 2.2217
-      view: packing/atlas/known-best/regularized/n-302-regularized.yaml.gz
     - n: 303
       of: T-239
       by: project

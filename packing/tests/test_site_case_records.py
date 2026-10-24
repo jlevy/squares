@@ -93,8 +93,11 @@ def test_a_case_page_prints_its_regularization_note_and_nothing_without_one() ->
     assert "retry rung force-kkt" in drawn
     assert "a pure regularization, which proves no new bound, so not a result" in drawn
 
-    housed = regularization(cases[70])
-    drawn_here = 70 in render_frontier_page.drawn_regularized()
+    # 84, T-174's rational certificate, whose view is held; 70 was the example until
+    # the adoption of 23 October 2026 gave it an algebraic house no view is held of
+    # (think-ot5c).
+    housed = regularization(cases[84])
+    drawn_here = 84 in render_frontier_page.drawn_regularized()
     assert ("Regularized drawing" in housed) == drawn_here
     assert ('<span class="site-card-label">Regularization</span>' in housed) != drawn_here
     assert "The house is itself its source" in housed
@@ -123,6 +126,25 @@ def test_a_case_page_prints_its_regularization_note_and_nothing_without_one() ->
     )
     assert "(T-101), so it proves no new bound" in earlier
     assert "the upper bound it proves" not in earlier
+
+    # A source's exact solve of the house is labelled an exact solve, not a
+    # regularization: issue 639's exact form at 259 (T-193), whose regularization is owed
+    # (review A5 of #756).
+    solved = regularization(cases[259])
+    assert solved.startswith(
+        '<div class="site-case-note"><span class="site-card-label">Exact solve</span>'
+    )
+    assert "is not a regularization" in solved
+    assert "its regularization is owed (think-mbdw)" in solved
+    # So is PR 574's exact solve of PingYou's own packing at 153 (T-174): the page no
+    # longer calls the house a regularization and then says the drawing is not
+    # regularized (review B1 of #756).
+    refined = regularization(cases[153])
+    assert refined.startswith(
+        '<div class="site-case-note"><span class="site-card-label">Exact solve</span>'
+    )
+    assert "regularization of T-148" not in refined
+    assert "its regularization is owed (think-mbdw)" in refined
 
     assert "regularization" not in cases[1]
     assert regularization(cases[1]) == ""

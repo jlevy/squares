@@ -68,11 +68,14 @@ Do not extract a year from a biography, archive path, repository name or capture
 [`site_tallies.py`](../devtools/site_tallies.py) computes the shared summaries.
 [`profile_records.py`](../devtools/profile_records.py) derives current record IDs from
 the register and case evidence, including unresolved priority and family scope.
-Its `load_record_index()` result is shared by a render; intersect with primary-authored
-IDs through `current_record_ids()`. Use `record_input_paths()` in build dependencies.
-`python -m devtools.profile_records --json` reports the complete index for review.
-A result with an unassessed facet can still count once through another current facet;
-only unassessed IDs without any current facet can increase the tally.
+A theorem-wide family scope counts as current only where its `record_scope.assessment`
+says so, and the gate holds that assessment to the family’s maintained comparison
+([`deficiency_family.py`](../cases/asymptotic/deficiency_family.py)); without one it is
+unassessed. Its `load_record_index()` result is shared by a render; intersect with
+primary-authored IDs through `current_record_ids()`. Use `record_input_paths()` in build
+dependencies. `python -m devtools.profile_records --json` reports the complete index for
+review. A result with an unassessed facet can still count once through another current
+facet; only unassessed IDs without any current facet can increase the tally.
 Do not add stored `result_count`, `record_count`, `credit_count` or activity-range
 fields to person records: these would duplicate data and drift after intake.
 
@@ -84,6 +87,8 @@ fields to person records: these would duplicate data and drift after intake.
 - **Records:** the current subset of primary Results across all result kinds.
   Family-specific currentness and unresolved priority come from the shared record
   classifier, not profile fields or profile-specific supersession rules.
+  Tied entries that carry one identical attribution are each current
+  ([Several Reports at One Count](../campaign/result-import.md#several-reports-at-one-count)).
   Count each result once even when it retains several cases or kinds of contribution.
 - **Credits:** distinct results explicitly crediting the person in a non-primary role.
   Repeated mentions count once; someone primary on a result cannot also receive a
