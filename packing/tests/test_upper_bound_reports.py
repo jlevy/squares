@@ -128,6 +128,9 @@ COUZO_675 = "couzo-issue675-2026-10-18"
 #: Evan Daniel's issue #728, retained under MIT by the #728 lane of 22 October
 #: (`test_upper_bound_reports_728`).
 DANIEL_728 = "evand-n303-2026-10-22"
+#: Mykhailo Polkovskyi's second 204 file of issue #719's release, retained under his
+#: written grant by the #719 records lane of 23 October (`test_upper_bound_reports_n204`).
+MISHAPOLK_N204 = "mishapolk-n204-2026-10-22"
 #: How a declaration cites a beyond-horizon row of the source register.
 COVERAGE_URL = "packing/frontier/source-coverage.yaml"
 EVERY = (
@@ -172,6 +175,7 @@ EVERY = (
     COUZO_672,
     COUZO_675,
     DANIEL_728,
+    MISHAPOLK_N204,
 )
 
 
@@ -1467,6 +1471,7 @@ def test_the_register_plan_states_each_bound_as_check_standing_reads_it(name: st
         COUZO_672: "2026-10-17",
         COUZO_675: "2026-10-18",
         DANIEL_728: "2026-10-22",
+        MISHAPOLK_N204: "2026-10-22",
     }
     assert result["attribution"]["published"] == published.get(name, "2026-10-10")
     evidence = plan["evidence.yaml"]
@@ -1929,3 +1934,80 @@ def test_both_routes_meet_contact_and_refuse_1e30_past_it_at_719s_105(
     for route in kernel.ROUTES:
         assert verdicts[route]["passed"] is not past, route
         assert verdicts[route][margin] == (-kernel.SHARP_EPSILON if past else 0), route
+
+
+@pytest.mark.slow
+@pytest.mark.parametrize("where", ["at-contact", "past-contact"])
+@pytest.mark.parametrize("control", kernel.SHARP_CONTROLS)
+def test_both_routes_meet_contact_and_refuse_1e30_past_it_at_the_lower_204(
+    control: str, where: str
+) -> None:
+    """The release's second 204 file (T-231, packet mishapolk-n204-2026-10-22): the
+    receipt's two controls are gross (a duplicated square, gap -1, and a square moved
+    outside), while this certificate clears every wall by exactly 5e-21 and every pair by
+    about 1e-20, below the binary64 spacing of its coordinates. The kernel's two sharp
+    controls, the side lowered by its least far-wall clearance or its tightest pair closed
+    along its best separating axis, are accepted by both maintained routes at exact contact
+    with the margin exactly 0 and refused by both 1e-30 past it at exactly -1e-30, as the
+    packet's receipts/sharp-controls.json records. Each case runs both routes over 20,706
+    pairs, a few seconds, above the quick lane's per-test ceiling, so it runs in the deep
+    surface."""
+    certificate = reports.read_facts(_packet(MISHAPOLK_N204), numbers=[204])[204]
+    margin = "wall" if control == "side-lowered-past-wall-contact" else "gap"
+    past = where == "past-contact"
+    verdicts = kernel.run_sharp(certificate, control, past=past)
+    for route in kernel.ROUTES:
+        assert verdicts[route]["passed"] is not past, route
+        assert verdicts[route][margin] == (-kernel.SHARP_EPSILON if past else 0), route
+
+
+def _beyond_row(n: int, side: Fraction, read_on: str) -> tuple[Any, legacy.Certificate, Any]:
+    """One certificate beyond the horizon, in a declaration read on ``read_on``."""
+    row = {
+        "n": n,
+        "path": f"certificates/n{n}.cert",
+        "format": "rational",
+        "offered": str(side),
+        "first_committed": f"{read_on}T00:00:00Z",
+    }
+    declaration = {
+        "issue": "#999",
+        "read_on": read_on,
+        "houses": [],
+        "pending": [],
+        "requested": [n],
+        "replayed": [n],
+    }
+    return row, legacy.Certificate(n, side, ()), declaration
+
+
+def _unread(reader: str, n: int) -> Fraction:
+    raise AssertionError(f"n = {n}: no case is read beyond the horizon ({reader})")
+
+
+def test_a_declaration_read_from_23_october_stands_beyond_324_on_goebel_s_construction() -> (
+    None
+):
+    """Review A of #754, A2 (think-v022), on the owner's answer on #613 (think-8krd):
+    Göbel's constructions are the baseline beyond n = 324. A declaration read on or after
+    23 October 2026 compares each certificate beyond the horizon with Göbel's construction
+    at its count as well as the grid, so a side above it is not the smallest. One read
+    before keeps the grid alone, as the 15 frozen claim records do; beyond 1073, where the
+    retained program gives no construction, the newer reading refuses."""
+    above = Fraction("19.71")  # 369: Göbel's 19 + 1/2*sqrt(2) is 19.7071..., the grid 20
+    row, certificate, declaration = _beyond_row(369, above, "2026-10-23")
+    later = cast("dict[str, Any]", reports.claim_row(row, certificate, declaration, _unread))
+    assert later["smallest"] == "Göbel's construction"
+    assert later["construction"]["form"] == "19 + 1/2*sqrt(2)"
+    assert later["construction"]["relation"] == "above"
+    assert "above Göbel's construction 19 + 1/2*sqrt(2)" in reports.comparison(later)
+    row, certificate, declaration = _beyond_row(369, above, "2026-10-22")
+    earlier = cast("dict[str, Any]", reports.claim_row(row, certificate, declaration, _unread))
+    assert earlier["smallest"] == reports.THIS
+    assert "construction" not in earlier
+    row, certificate, declaration = _beyond_row(369, Fraction("19.7"), "2026-10-23")
+    below = cast("dict[str, Any]", reports.claim_row(row, certificate, declaration, _unread))
+    assert (below["smallest"], below["construction"]["relation"]) == (reports.THIS, "below")
+    row, certificate, declaration = _beyond_row(1074, Fraction("32.9"), "2026-10-23")
+    with pytest.raises(reports.ReportError, match="no side above 1073"):
+        reports.claim_row(row, certificate, declaration, _unread)

@@ -72,6 +72,14 @@ PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
         350_000,
         "Complete n=18 certificate record; prepared HTML measures 326,548 bytes.",
     ),
+    "cases/204.html": (
+        350_000,
+        (
+            "Ten verified certificates and a section for each of the six that have been "
+            "the house, each listing every other side; prepared HTML measures 320,903 "
+            "bytes on 23 October 2026 after T-231's adoption."
+        ),
+    ),
     "result/t-007.html": (
         800_000,
         "Complete broad scope history and prepared exact bounds measure 711,115 bytes.",

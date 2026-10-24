@@ -20995,24 +20995,6 @@ occurrences:
     path: packing/frontier/n-204.md
     record_key: '204'
     field: /reported_upper_bound/improved_by/0
-  expected_text: Evan Daniel
-  start: 0
-  end: 11
-  label: Evan Daniel
-  role: construction-improver
-  disposition: resolved
-  evidence: &id001
-  - repository-license
-  - regularized-lists
-  - bibliography
-  note: Reviewed the case reported_upper_bound improved_by field against T-225 and
-    its retained regularized certificate lineage. The existing named profile matches
-    this construction-improver role; original found_by credit is unchanged.
-  contributor_id: evan-daniel
-- origin:
-    path: packing/frontier/n-204.md
-    record_key: '204'
-    field: /reported_upper_bound/improved_by/1
   expected_text: Mishapolk
   start: 0
   end: 9
@@ -21027,7 +21009,9 @@ occurrences:
     Reviewed source credit: issue 719's re-solve at 204 (T-229), the case's house since
     the adoption of 23 October 2026. Mishapolk is Mykhailo Polkovskyi, the name the record
     gives him since issue 593 and the issue's credit since its edit of 22 October; the
-    construction-improver role is retained.
+    construction-improver role is retained. Evan Daniel's improver span left this field
+    on 23 October: the author's comment of that day on issue 719 says the solve started
+    from Couzo's #678 certificate, not from Daniel's regularized view (T-225).
 - origin:
     path: packing/frontier/n-205.md
     record_key: '205'
@@ -21694,7 +21678,10 @@ occurrences:
   label: Evan Daniel
   role: construction-improver
   disposition: resolved
-  evidence: *id001
+  evidence: &id001
+  - repository-license
+  - regularized-lists
+  - bibliography
   note: Reviewed the case reported_upper_bound improved_by field against T-225 and
     its retained regularized certificate lineage. The existing named profile matches
     this construction-improver role; original found_by credit is unchanged.
@@ -25484,6 +25471,102 @@ occurrences:
   contributor_id: joshua-levy
 - origin:
     path: packing/resources/bibliography.yaml
+    record_key: '[Mishapolk n204 2026-10-22]'
+    field: /authors/0
+  expected_text: Polkovskyi
+  start: 0
+  end: 10
+  label: Polkovskyi
+  role: source-author
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: mykhailo-polkovskyi
+  note: >-
+    Reviewed author byline: the release's second 204 file, which Mishapolk claimed on issue
+    719; the record credits Mishapolk as Mykhailo Polkovskyi since issue 593, and the
+    licence he added at 17cc220 names Mykhailo Polkovskyi (Mishapolk).
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Mishapolk n204 2026-10-22]'
+    field: /credit
+  expected_text: Polkovskyi after Couzo, Daniel, Levy
+  start: 0
+  end: 10
+  label: Polkovskyi
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: mykhailo-polkovskyi
+  note: >-
+    Reviewed source credit matches the evidenced person and printed name; the original
+    credit role is retained.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Mishapolk n204 2026-10-22]'
+    field: /credit
+  expected_text: Polkovskyi after Couzo, Daniel, Levy
+  start: 17
+  end: 22
+  label: Couzo
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - bibliography
+  contributor_id: francisco-couzo
+  note: >-
+    Reviewed /credit span 17:22: the author's comment of 23 October on issue 719 says the
+    204 solve started from Francisco Couzo's #678 certificate (T-223), whose packing this
+    re-solves. Keep packing finder and refinement roles distinct.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Mishapolk n204 2026-10-22]'
+    field: /credit
+  expected_text: Polkovskyi after Couzo, Daniel, Levy
+  start: 24
+  end: 30
+  label: Daniel
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - repository-license
+  - bibliography
+  contributor_id: evan-daniel
+  note: >-
+    Reviewed /credit span 24:30: method credit only. The issue names Evan Daniel among
+    those its packings build on and runs his verify_cert.py over certificates/n*.cert, the
+    certificate's first line names verify_cert.py, and the 23 October review measured its
+    side and determined rows as Daniel's exact solver's output (RF-1); the author's comment
+    of 23 October on the checkers was given of the 122 claimed files. The packing did not
+    start from Daniel's regularized view (T-225), so Daniel is no antecedent of the
+    packing.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Mishapolk n204 2026-10-22]'
+    field: /credit
+  expected_text: Polkovskyi after Couzo, Daniel, Levy
+  start: 32
+  end: 36
+  label: Levy
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - announcement-account
+  contributor_id: joshua-levy
+  note: >-
+    Reviewed /credit span 32:36: the issue names Joshua Levy among those its packings build
+    on and runs this repository's sqpack/verify.py over certificates/n*.cert; the author's
+    comment of 23 October that he imported it as a module was given of the 122 claimed
+    files. The first-party jlevy/squares record is the Joshua
+    Levy identity established by LICENSE and the retained ojoshe receipt; project credit
+    does not imply sole personal authorship.
+- origin:
+    path: packing/resources/bibliography.yaml
     record_key: '[Mishapolk issue 719 2026-10-22]'
     field: /authors/0
   expected_text: Polkovskyi
@@ -25569,8 +25652,11 @@ occurrences:
   - bibliography
   contributor_id: evan-daniel
   note: >-
-    Reviewed /credit span 33:39: at 204 issue 719 re-solves the packing Evan Daniel
-    regularized (T-225).
+    Reviewed /credit span 33:39: issue 719's closing paragraph names Evan Daniel among the
+    finders its packings build on, and the author ran Daniel's verify_cert.py and
+    verify_cert2.py. At 204 the solve started from Couzo's #678 certificate, not from
+    Daniel's regularized view (T-225), as the author's comment of 23 October says, so
+    Daniel is no antecedent of that packing.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Mishapolk issue 719 2026-10-22]'

@@ -755,11 +755,11 @@ one of them changes.
 
 A page’s title, or the picture that opens the homepage, starts `--site-page-top` under
 the bar’s rule on every page, the explainer and the optimality paper included.
-The film’s page has section tabs under that rule, and its film starts the same space
-under the tabs. Every section heading on the site pages and the explainer takes the two
-section tokens; print reads its own values of both (2.8 of the base and 1.3rem), which
-are the paper’s. On the explainer the credits start 2.25rem under the title on screen
-and 2rem in print.
+The Videos page and the Workbench carry no section tabs under that rule since
+2026-10-22; like every page with a trail, theirs starts 1rem under the rule.
+Every section heading on the site pages and the explainer takes the two section tokens;
+print reads its own values of both (2.8 of the base and 1.3rem), which are the paper’s.
+On the explainer the credits start 2.25rem under the title on screen and 2rem in print.
 
 `--site-table-space` is the space above and below every table, and above and below the
 rating ladders. A site table (`.site-table`) takes it above its filter bar, which keeps
@@ -1247,10 +1247,10 @@ contributor articles use their component sheets and the same text tokens.
 
 - **Page headings.** The homepage opens with “The Square Packing Problem” as its `h1`,
   followed by visible section `h1`s in the same title style.
-  The Visualize page shows no title: the bar, the section tabs and the film are the
-  page, and its `h1`, “Visualize”, is for a screen reader alone
-  (`.site-visually-hidden`, in `site.css`: out of the flow, one pixel, clipped, the
-  class for any block a reader does not see and a screen reader should).
+  The Videos page shows no title: the bar, its trail and the film are the page, and its
+  `h1`, “Videos”, is for a screen reader alone (`.site-visually-hidden`, in `site.css`:
+  out of the flow, one pixel, clipped, the class for any block a reader does not see and
+  a screen reader should).
   The film after the hidden title is the page’s first block, so on screen it brings no
   margin above and starts `--site-page-top` under the header.
   A page that has a title (the Frontier page, the Results page, the Papers page, the
