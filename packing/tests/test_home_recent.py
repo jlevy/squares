@@ -1,0 +1,372 @@
+"""The home page's Recently Added, read from the record at render time.
+
+The owner, 22 October 2026: "It should be clear if you come to the site and see all the
+things that have recently merged now." The section covers the newest day anything reached
+`main` and the seven before it, one disclosure a day: every result that reached the site,
+at any significance, by its `landed`; each count whose house best packing changed, and
+each source's dated beyond-horizon rows, by the day `main` first held them
+(`frontier/landings.yaml`, which `devtools.stamp_landed` writes from the merge; #736's
+review A, findings A2 and A3). Every check reads the rendered page against those records,
+never against a list kept beside them.
+"""
+
+from __future__ import annotations
+
+import re
+from collections import Counter
+from datetime import date, timedelta
+
+import pytest
+
+from devtools import (
+    news_highlights,
+    overview_data,
+    overview_sections,
+    render_changelog,
+    stamp_landed,
+)
+from devtools import render_recent_results as standing
+from devtools.overview_data import EN_DASH
+from devtools.overview_sections import (
+    RECENT_OPEN,
+    BeyondRows,
+    HouseMove,
+    RecentDay,
+    arrival_reference,
+    beyond_rows,
+    house_landings,
+    house_moves,
+    landed_day,
+    recent_tally,
+    source_landings,
+)
+from tests import site_renders
+
+#: One day's disclosure: its date, whether it starts open, the rest.
+DAY = re.compile(r'<details data-day="(\d{4}-\d{2}-\d{2})"( open)?>(.*?)</details>', re.DOTALL)
+#: One result in a day (`added_entry`), linked to its row in All Results: its id, its V,
+#: C and S rungs.
+ENTRY = re.compile(
+    r'<li(?: class="site-rollup-superseded")?><a href="results\.html#(t-\d{3})"'
+    r'(?: title="Superseded")?>(T-\d{3})</a> .*?<small>[^<]* · (V\d) (C\d) (?:<b>)?(S\d)'
+)
+#: One house move: the result and the rest of the line, its counts' case links.
+HOUSE = re.compile(
+    r'<li><a href="results\.html#(t-\d{3})">(T-\d{3})</a> is now the house best packing at '
+    r"(.*?)</li>"
+)
+#: One source's rows: the packet's address, the claims, the counts' span and the credit.
+ROWS = re.compile(
+    r'<li><a href="([^"]+)" target="_blank" rel="noopener noreferrer">([^<]+)</a> '
+    rf"beyond n = (\d+)<small>n = ([0-9{EN_DASH}]+) · (.*?)</small></li>"
+)
+#: The most bytes the section may weigh. On 22 October 2026, over 15-22 October, it
+#: measured 23,651 bytes: 45 results, 61 counts' house best packings on seven days and 11
+#: sources' 876 rows. The results page's seven days, retired with #737, had held 71
+#: results, about 22,000 bytes alone. Past this the section is becoming a second results
+#: table; the remedy is a shorter entry, not a higher number.
+RECENT_BYTES = 40_000
+#: The most bytes the News box may weigh: the newest three News articles of each level,
+#: nine cards, three shown and six behind the filter. It measured 42,550 bytes on 22
+#: October 2026 and 55,692 on 24 October, after #787's two S3 stories, when the three S3
+#: cards were the heaviest yet (13,029, 9,598 and 8,406 bytes) and the worst case over
+#: that day's stories was 59,874. Two more S3 stories of that size reach the limit; the
+#: remedy is a shorter card, not a higher number.
+NEWS_BOX_BYTES = 64_000
+
+
+@pytest.fixture(scope="module")
+def home() -> str:
+    return site_renders.html("index.html")
+
+
+@pytest.fixture(scope="module")
+def overview() -> overview_data.Overview:
+    return site_renders.overview()
+
+
+@pytest.fixture(scope="module")
+def section(home: str) -> str:
+    """The section, from its heading to the end of its last disclosure."""
+    begin = home.index('id="recently-added"')
+    end = home.index("</details></div>", begin) + len("</details></div>")
+    return home[begin:end]
+
+
+@pytest.fixture(scope="module")
+def days(section: str) -> dict[str, tuple[bool, str]]:
+    return {day: (bool(state), body) for day, state, body in DAY.findall(section)}
+
+
+def _window(overview: overview_data.Overview) -> tuple[date, date]:
+    """The section's window: the newest arrival of any kind and the seven days before."""
+    until = arrival_reference(overview)
+    return until - timedelta(days=overview_sections.ADDED_DAYS), until
+
+
+def test_every_result_of_the_seven_days_is_listed_on_its_day_with_its_rungs(
+    overview: overview_data.Overview, days: dict[str, tuple[bool, str]]
+) -> None:
+    since, until = _window(overview)
+    expected = {r.id: r for r in overview.results if since <= landed_day(r) <= until}
+    seen: Counter[str] = Counter()
+    for day, (_, body) in days.items():
+        for anchor, result_id, verification, confirmation, score in ENTRY.findall(body):
+            result = expected[result_id]
+            assert anchor == result_id.lower()
+            assert landed_day(result).isoformat() == day
+            assert verification == result.record["verification"]
+            assert confirmation == result.record["confirmation"]
+            assert score == f"S{overview_sections.significance(result)}"
+            seen[result_id] += 1
+    assert seen == Counter(set(expected))
+
+
+def test_house_moves_are_listed_on_the_day_main_took_them_in(
+    overview: overview_data.Overview, days: dict[str, tuple[bool, str]]
+) -> None:
+    """Each count whose house best packing reached `main` inside the window is listed
+    once, on that day (`landings.yaml`), under the result that holds it now; that result
+    is the one the adoption record names and the one the case record's verified upper
+    bound rests on, as the case page says."""
+    since, until = _window(overview)
+    expected = {
+        n: (day.isoformat(), result)
+        for n, (result, day) in house_landings().items()
+        if since <= day <= until
+    }
+    adopted, _ = stamp_landed.current_landings()
+    records = standing.load_records()
+    seen: dict[int, tuple[str, str]] = {}
+    for day, (_, body) in days.items():
+        for anchor, result_id, counts in HOUSE.findall(body):
+            assert anchor == result_id.lower()
+            for n in map(int, re.findall(r'href="cases/(\d+)\.html" data-case="\1"', counts)):
+                assert n not in seen
+                seen[n] = (day, result_id)
+                assert adopted[n] == result_id
+                held = standing.lane_holders(n, records, "upper", ["verified"])
+                assert result_id in held, (n, result_id, held)
+    assert seen == expected
+
+
+def test_the_examples_review_a_cited_are_dated_by_their_merges() -> None:
+    """The pass of 17 October 2026 reached `main` on the 19th (d167d4b86, f3d5da7bd), so
+    its houses land on the 19th, not the day it ran; #631's rows reached `main` with
+    #631's results on 16 October; #701's couzo-issue678 rows with T-223 on the 21st. Each
+    holds while its house or source is the record's (#736's review A, finding A2)."""
+    houses = house_landings()
+    for n, result in ((29, "T-195"), (68, "T-174"), (172, "T-174")):
+        if houses[n][0] == result:
+            assert houses[n][1] == date(2026, 10, 19), n
+    rows = source_landings()
+    register = {r.id: r for r in site_renders.overview().results}
+    for source, result in (
+        ("couzo-verified-bounds-2026-10-14", "T-188"),
+        ("couzo-certificates-2026-10-14", "T-188"),
+        ("couzo-issue678-2026-10-18", "T-223"),
+    ):
+        assert rows[source] == landed_day(register[result]), source
+
+
+def test_each_source_of_beyond_horizon_rows_in_the_window_has_one_line_on_its_day(
+    overview: overview_data.Overview, days: dict[str, tuple[bool, str]]
+) -> None:
+    """One line a source, on the day `main` first held its rows: its packet's address,
+    what its rows claim, their span of counts, all beyond the corpus. Two sources may
+    share a packet, so lines are matched day by day as a whole."""
+    since, until = _window(overview)
+    landed = source_landings()
+    corpus = overview_sections.corpus_end()
+    expected: dict[str, list[tuple[str, str, str, str]]] = {}
+    for found in beyond_rows(since, until):
+        counts = [int(row["n"]) for row in found.rows]
+        span = (
+            f"{min(counts)}{EN_DASH}{max(counts)}" if len(set(counts)) > 1 else str(counts[0])
+        )
+        assert found.day == landed[found.source["id"]]
+        assert all(count > corpus for count in counts)
+        href = overview_sections.source_readme(found.source)
+        # The packet's README where the register names it, else the packet itself.
+        assert re.fullmatch(
+            rf"https://github\.com/jlevy/squares/(blob/main/packing/.*/README\.md|"
+            rf"tree/main/packing/{re.escape(str(found.source['local']).rstrip('/'))})",
+            href,
+        ), href
+        line = (href, overview_sections.claims_phrase(found.rows), str(corpus), span)
+        expected.setdefault(found.day.isoformat(), []).append(line)
+    shown = {
+        day: [(href.replace("&amp;", "&"), *rest[:3]) for href, *rest in ROWS.findall(body)]
+        for day, (_, body) in days.items()
+    }
+    assert {day: sorted(lines) for day, lines in shown.items() if lines} == {
+        day: sorted(lines) for day, lines in expected.items()
+    }
+
+
+def test_an_unstamped_house_or_source_is_left_out_and_the_render_carries_on(
+    overview: overview_data.Overview, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """A row source or a house with no landing yet, as `main` would hold after a records
+    pull request merged without its stamp, is left out of Recently Added and never breaks
+    the render: the landing test turns CI red instead (#736's review A, finding A10)."""
+    since, until = _window(overview)
+    found, moves = beyond_rows(since, until), house_moves(since, until)
+    assert found
+    assert moves
+    source, n = found[0].source["id"], moves[0].counts[0]
+    record = dict(
+        stamp_landed.read_landings(stamp_landed.LANDINGS.read_text("utf-8"))._asdict()
+    )
+    trimmed = {
+        "houses": [
+            {"n": count, "result": result, "landed": day}
+            for count, (result, day) in record["houses"].items()
+            if count != n
+        ],
+        "sources": [
+            {"id": key, "landed": day}
+            for key, day in record["sources"].items()
+            if key != source
+        ],
+    }
+    monkeypatch.setattr(overview_sections, "_landings", lambda: trimmed)
+    rendered = overview_sections.recently_added(overview)
+    assert rendered.startswith('<div class="site-rollup site-added">')
+    assert source not in {kept.source["id"] for kept in beyond_rows(since, until)}
+    assert all(n not in move.counts for move in house_moves(since, until))
+    assert all(
+        n not in move.counts
+        for day in overview_sections.recent_days(overview)
+        for move in day.houses
+    )
+
+
+def test_a_stale_house_landing_is_left_out_and_the_render_carries_on(
+    overview: overview_data.Overview, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """A landing that names a result the count's verified upper bound no longer rests on,
+    as `main` would hold after a pull request moved the house without stamping it, is
+    left out as an unstamped one is: the page never says a superseded result "is now the
+    house best packing" (#736's review B, finding B2)."""
+    since, until = _window(overview)
+    moves = house_moves(since, until)
+    assert moves
+    n, current = moves[0].counts[0], moves[0].result
+    held = standing.lane_holders(n, standing.load_records(), "upper", ["verified"])
+    assert current in held
+    stale = "T-001"
+    assert stale not in held
+    record = stamp_landed.read_landings(stamp_landed.LANDINGS.read_text("utf-8"))
+    moved = {
+        "houses": [
+            {"n": count, "result": stale if count == n else result, "landed": day}
+            for count, (result, day) in record.houses.items()
+        ],
+        "sources": [{"id": key, "landed": day} for key, day in record.sources.items()],
+    }
+    monkeypatch.setattr(overview_sections, "_landings", lambda: moved)
+    assert all(n not in move.counts for move in house_moves(since, until))
+    assert stale not in {move.result for move in house_moves(since, until)}
+    rendered = overview_sections.recently_added(overview)
+    assert rendered.startswith('<div class="site-rollup site-added">')
+    assert f">{stale}</a> is now the house best packing" not in rendered
+
+
+def test_one_window_bounds_every_kind_and_the_introduction_names_what_is_shown(
+    overview: overview_data.Overview, section: str, days: dict[str, tuple[bool, str]]
+) -> None:
+    """Results, houses and rows share one window, from seven days before the newest
+    arrival of any kind to it, read from the record and never the clock; the
+    introduction's span runs from the oldest day shown to the newest, so no block sits
+    outside it (#736's review A, finding A3)."""
+    since, until = _window(overview)
+    shown = sorted(date.fromisoformat(day) for day in days)
+    assert shown
+    assert since <= shown[0]
+    assert shown[-1] == until
+    assert f"over {overview_sections.span_label(shown[0], shown[-1])}," in section
+    assert overview_sections.recent_span(overview) == overview_sections.span_label(
+        shown[0], shown[-1]
+    )
+    # Bounded at both ends: a move or a source outside the window is left out.
+    early = until - timedelta(days=1)
+    assert all(move.day <= early for move in house_moves(since, early))
+    assert all(found.day <= early for found in beyond_rows(since, early))
+
+
+def test_the_newest_day_starts_open_and_each_day_tallies_what_it_holds(
+    overview: overview_data.Overview, days: dict[str, tuple[bool, str]]
+) -> None:
+    ordered = list(days)
+    assert ordered == sorted(ordered, reverse=True)
+    assert [opened for opened, _ in days.values()] == [
+        index < RECENT_OPEN for index in range(len(days))
+    ]
+    for recent in overview_sections.recent_days(overview):
+        _, body = days[recent.day.isoformat()]
+        counts = " ".join(
+            f'<span class="site-rollup-count">· {part}</span>' for part in recent_tally(recent)
+        )
+        assert f"{counts}</span></summary>" in body
+
+
+def test_a_tally_counts_results_house_best_packings_and_rows_where_a_day_has_them() -> None:
+    day = date(2026, 10, 22)
+    move = HouseMove(day, "T-225", (204, 227, 229, 260))
+    rows = BeyondRows(day, {"id": "s"}, tuple({"n": 330 + i} for i in range(111)))
+    corpus = overview_sections.corpus_end()
+    assert recent_tally(RecentDay(day, (), (move,), (rows,))) == (
+        "4 house best packings",
+        f"111 bounds beyond {corpus}",
+    )
+    assert recent_tally(RecentDay(day, (), (HouseMove(day, "T-1", (5,)),), ())) == (
+        "1 house best packing",
+    )
+
+
+def test_house_moves_list_each_count_once_under_its_house() -> None:
+    moves = house_moves(date(2026, 10, 1), date(2027, 1, 1))
+    counts = [n for move in moves for n in move.counts]
+    assert len(counts) == len(set(counts))
+    houses = house_landings()
+    for move in moves:
+        for n in move.counts:
+            assert houses[n] == (move.result, move.day)
+
+
+def test_the_section_links_all_results_and_news(
+    section: str, days: dict[str, tuple[bool, str]]
+) -> None:
+    """The introduction links All Results and News, never the results page's seven days,
+    which #737 retired; each day with results opens All Results on that day alone, a day
+    its Added on preset offers."""
+    assert 'href="results.html#all-results"' in section
+    assert 'href="news.html"' in section
+    assert "added-in-the-last-seven-days" not in section
+    results = site_renders.html("results.html")
+    assert 'id="all-results"' in results
+    preset = re.search(
+        r'<select data-filter="added" data-preset>(.*?)</select>', results, re.DOTALL
+    )
+    assert preset
+    offered = set(re.findall(r'<option value="(\d{4}-\d{2}-\d{2})"', preset[1]))
+    linked = 0
+    for day, (_, body) in days.items():
+        if ENTRY.search(body):
+            assert f'href="results.html?added={day}#all-results"' in body, day
+            assert day in offered, day
+            linked += 1
+        else:
+            assert "?added=" not in body, day
+    assert linked
+
+
+def test_the_home_page_additions_stay_brief(section: str) -> None:
+    news = news_highlights.render(render_changelog.load())
+    weight, box = len(section.encode("utf-8")), len(news.encode("utf-8"))
+    print(
+        f"recently added: {weight:,} / {RECENT_BYTES:,}; news box: {box:,} / {NEWS_BOX_BYTES:,}"
+    )
+    assert weight < RECENT_BYTES
+    assert box < NEWS_BOX_BYTES
