@@ -1,0 +1,14 @@
+{
+  "format": "beyond-horizon-first-commits-v1",
+  "history_commits": 44,
+  "retained_commit": "964ee2bdf301d0c8912d956d4010f478dcbbd5ea",
+  "rows": [
+    {"blob":"e5dd35af25a31e99fb45443b9d2547b4e0615df9","certificate":"certificates/best/n653.cert","committed":"2026-10-23T22:38:09Z","first_commit":"964ee2bdf301d0c8912d956d4010f478dcbbd5ea","n":653},
+    {"blob":"22ffee6817fd5720bbd8069ab6abe7b606180360","certificate":"certificates/best/n746.cert","committed":"2026-10-23T22:38:09Z","first_commit":"964ee2bdf301d0c8912d956d4010f478dcbbd5ea","n":746},
+    {"blob":"5d79a8201984791f19a7314cedd2d152c82923d6","certificate":"certificates/best/n748.cert","committed":"2026-10-23T22:38:09Z","first_commit":"964ee2bdf301d0c8912d956d4010f478dcbbd5ea","n":748},
+    {"blob":"3527a32f8e1a6615e6d367c7e28a021b5dd9573f","certificate":"certificates/best/n802.cert","committed":"2026-10-23T22:38:09Z","first_commit":"964ee2bdf301d0c8912d956d4010f478dcbbd5ea","n":802},
+    {"blob":"6dc13f122276bdd4ad25a220e92388e970d64410","certificate":"certificates/best/n919.cert","committed":"2026-10-23T22:38:09Z","first_commit":"964ee2bdf301d0c8912d956d4010f478dcbbd5ea","n":919},
+    {"blob":"77703acba1684d08c7b8f6c0f34eee5cc4a925dc","certificate":"certificates/best/n923.cert","committed":"2026-10-23T22:38:09Z","first_commit":"964ee2bdf301d0c8912d956d4010f478dcbbd5ea","n":923}
+  ],
+  "source": "https://github.com/franciscouzo/square-packing"
+}

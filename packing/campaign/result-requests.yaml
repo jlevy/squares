@@ -22834,6 +22834,48 @@ issues:
         every control refused; 490, 535, 792 and 800 restate f1ceee4's rows (think-fwa9); 204
         is above T-231. The author is asked whether he claims them.
       queued: false
+    - key: notebook-rows-325-1024
+      claim: >-
+        87 upper bounds at n = 325 to 1024 that certified_bounds.json states at 964ee2b, each a
+        certificate certificates/best/nN.cert credited to the author of a Kaggle notebook, not
+        to Couzo: 26 from Kirill Tymchishin's "CPU Alternating Reclosure" v3 and 2 from
+        Vladislav Lavrentev's "CUDA Packing Search" v11, first committed at fa6237e, and 15
+        from Tymchishin's "22-3662-cpu-cuda-mps-eda-union", 18 from kyleluecke's, 11 from
+        alexchilton's, 9 from aqibrazadev's and 6 from a later run of Lavrentev's notebook,
+        first committed at 964ee2b.
+      source: https://github.com/franciscouzo/square-packing/blob/964ee2bdf301d0c8912d956d4010f478dcbbd5ea/certified_bounds.json
+      not_registered: >-
+        The push's unrequested third-party rows: the issue says the index's notebook packings
+        by other authors are not part of its request, so they are an import of their own,
+        the watched repository's publication from its first commits, dated by the push of
+        2026-10-23T23:38:42Z (think-lyf9). devtools.couzo_763_claims selects them
+        (receipts/claim-map.json, others), and the ledger of 24 October for the notebook rows
+        (upper-bounds-couzo-964ee2b-notebooks-20261024), walked from starts frozen at main
+        2ec489d1e with Göbel's construction beside each row, records all 87 below the record,
+        by 1.46e-4 (875) to 6.60e-2 (923). They are dated beyond-horizon rows, not register
+        entries, one coverage source a notebook run, each current; they supersede 77 rows
+        (f1ceee4's 30, #719's 12, couzo-index-2026-10-15's 12, #732's 8 and 15 other rows
+        of Couzo and Muglich), and at 10 counts no row stood before them. Both project exact
+        routes accept all 87 with every control refused. The packet retains them as factual
+        data; the notebooks' licences are followed up on think-m8f4. 46 of the 99 sides,
+        rows and recipes, are followed at their counts by Couzo's 43f666c (think-gn29).
+      queued: false
+    - key: notebook-recipes-325-1024
+      claim: >-
+        12 upper bounds by square tiling and L-border recipes the index states at 964ee2b from
+        notebook certificates at other counts: 445, 488, 580, 679, 732, 787, 844, 903, 913,
+        964 and 967 from Tymchishin's "CPU Alternating Reclosure" v3, and 859 from the later
+        run of Lavrentev's notebook.
+      source: https://github.com/franciscouzo/square-packing/blob/964ee2bdf301d0c8912d956d4010f478dcbbd5ea/certified_bounds.json
+      not_registered: >-
+        The walk records each below its frozen start and holds it from a row: a construction
+        with no certificate file of its own waits on a maintained construction checker (D2,
+        think-f2io; think-llit's W7 slice), as #763's 13 recipes do. The packet retains every
+        certificate the 12 read.
+      queued: true
+      bead: think-ww95
+      blocked_on:
+      - think-f2io
     beads:
     - think-ptkk
     - think-cnn7
@@ -22841,6 +22883,8 @@ issues:
     - think-2z2n
     - think-llit
     - think-m8f4
+    - think-lyf9
+    - think-ww95
     answer_bead: think-ptkk
     replies: []
     close_when: >-

@@ -359,20 +359,20 @@ def test_the_coverage_register_reads_each_source_claims_record() -> None:
         assert set(rows) <= set(source["scope"]["n_values"])
 
 
-def _successor_at_330(
+def _successor_at_342(
     successor: str,
     added: tuple[str, str] | None = None,
     *,
     kind: str = "upper-bound",
     **changed: str,
 ) -> tuple[list[str], list[str]]:
-    """#719's row at 330, still current, held superseded by ``successor``, with ``added`` (a
+    """#719's row at 342, still current, held superseded by ``successor``, with ``added`` (a
     value and a date) as that source's row claiming ``kind``, and what the plan and
     `check_source_coverage` say there. 682, where the test once held it, is f1ceee4's since
-    24 October."""
+    24 October, and the next count it held it at, the notebook rows' (think-lyf9)."""
     coverage = safe_load(replay.COVERAGE.read_text(encoding="utf-8"))
     rows = {(row["n"], row["source_id"]): row for row in coverage["beyond_horizon_claims"]}
-    held = rows[330, MISHAPOLK]
+    held = rows[342, MISHAPOLK]
     held.update(disposition="superseded", superseded_by=successor, **changed)
     claims = {
         source["id"]: coverage_check.load_claims(coverage_check.ROOT / source["claims_record"])
@@ -383,11 +383,11 @@ def _successor_at_330(
         value, dated = added
         mine = next(source for source in coverage["sources"] if source["id"] == MISHAPOLK)
         coverage["sources"].append(
-            {**mine, "id": successor, "source_date": dated, "scope": {"n_values": [330]}}
+            {**mine, "id": successor, "source_date": dated, "scope": {"n_values": [342]}}
         )
         coverage["beyond_horizon_claims"].append(
             {
-                "n": 330,
+                "n": 342,
                 "source_id": successor,
                 "claim": kind,
                 "value": value,
@@ -396,12 +396,12 @@ def _successor_at_330(
                 "bead": "think-xyhn",
             }
         )
-        claims[successor] = {330: value}
-    plan = [problem for problem in replay.coverage_problems(coverage) if "n=330 " in problem]
+        claims[successor] = {342: value}
+    plan = [problem for problem in replay.coverage_problems(coverage) if "n=342 " in problem]
     gate = [
         error
         for error in coverage_check.beyond_horizon_errors(coverage, claims)[0]
-        if "330" in error
+        if "342" in error
     ]
     return plan, gate
 
@@ -418,13 +418,13 @@ def test_a_successor_outside_the_walk_holds_the_plan_only_with_a_later_smaller_r
     for n in (370, 452, 536):
         assert rows[n, "couzo-issue670-2026-10-17"]["superseded_by"] == MISHAPOLK
     assert replay.coverage_problems(coverage) == []
-    refused = "n=330 from mishapolk-issue719-2026-10-22: the register's row is not the plan's"
-    smaller, larger = "18.6926724444000000", "18.6926724445000000"
-    equal = rows[330, MISHAPOLK]["value"]
+    refused = "n=342 from mishapolk-issue719-2026-10-22: the register's row is not the plan's"
+    smaller, larger = "18.9647067231000000", "18.9647067232000000"
+    equal = rows[342, MISHAPOLK]["value"]
     assert Fraction(smaller) < Fraction(equal) < Fraction(larger)
-    later = _successor_at_330("x-later-2026-10-23", (smaller, "2026-10-23"))
+    later = _successor_at_342("x-later-2026-10-23", (smaller, "2026-10-23"))
     assert later == ([], [])
-    same_day = _successor_at_330("x-same-2026-10-22", (smaller, "2026-10-22"))
+    same_day = _successor_at_342("x-same-2026-10-22", (smaller, "2026-10-22"))
     assert same_day == ([], [])
     for successor, added, kind in (
         ("couzo-issue715-2026-10-21", None, "upper-bound"),
@@ -434,10 +434,10 @@ def test_a_successor_outside_the_walk_holds_the_plan_only_with_a_later_smaller_r
         ("x-equal-2026-10-23", (equal, "2026-10-23"), "upper-bound"),
         ("x-lower-2026-10-23", (smaller, "2026-10-23"), "lower-bound"),
     ):
-        plan, gate = _successor_at_330(successor, added, kind=kind)
+        plan, gate = _successor_at_342(successor, added, kind=kind)
         assert plan == [refused], successor
         assert gate, successor
-    changed, _ = _successor_at_330(
+    changed, _ = _successor_at_342(
         "x-later-2026-10-23", (smaller, "2026-10-23"), assurance="verified"
     )
     assert changed == [refused]
@@ -1469,8 +1469,8 @@ def test_732_declares_the_77_rows_its_walk_records_and_restates_499() -> None:
 def test_732_s_rows_are_current_and_supersede_the_rows_they_beat() -> None:
     """#732's 77 rows supersede the rows they beat, and its walk plans each current. Since
     24 October f1ceee4's rows, which a later walk records, supersede 47 of them in the
-    register, as a later import may (`_superseded_after`), and #763's rows 20 more; the
-    other 10 are current."""
+    register, as a later import may (`_superseded_after`), #763's rows 20 more and the
+    notebook rows 8 (think-lyf9); the other 2 are current."""
     rows = [row for row in replay.planned_rows() if row["bead"] == "think-0gp6"]
     assert len(rows) == 77
     assert all("superseded_by" not in row for row in rows)
@@ -1480,7 +1480,16 @@ def test_732_s_rows_are_current_and_supersede_the_rows_they_beat() -> None:
         for row in coverage["beyond_horizon_claims"]
         if row["source_id"] == "mishapolk-issue732-2026-10-22"
     )
-    assert held == {None: 10, F1_SOURCE: 47, SOURCE_763: 20}
+    assert held == {
+        None: 2,
+        F1_SOURCE: 47,
+        SOURCE_763: 20,
+        "kyleluecke-inos-2026-10-23": 3,
+        "aqibrazadev-blending-2026-10-23": 2,
+        "tymchishin-reclosure-v3-2026-10-23": 1,
+        "alexchilton-fault-line-2026-10-23": 1,
+        "tymchishin-22-3662-2026-10-23": 1,
+    }
     beaten = Counter(
         start
         for _, start, source in replay.planned_supersessions()
@@ -1871,9 +1880,10 @@ ABOVE_GOEBEL = {
 def test_each_row_above_goebel_s_construction_is_marked() -> None:
     """The owner's answer on #613 (think-8krd): Göbel's construction is an earlier report,
     so the nine rows of 8 to 13 October above it at 369, 375 and 376 are marked with it and
-    hold no count. 369 and 376 have no current row; at 375 the 13 October row, below it,
-    leads to Evan Daniel's, which #763's row supersedes. A row left unmarked, or marked and
-    not above, is named."""
+    hold no count. 369 has no current row; at 375 the 13 October row, below it, leads to
+    Evan Daniel's, which #763's row supersedes; at 376 the notebook rows' row (think-lyf9),
+    below Göbel's, is the first to hold the count. A row left unmarked, or marked and not
+    above, is named."""
     coverage = safe_load(replay.COVERAGE.read_text(encoding="utf-8"))
     marked = {
         (row["n"], row["source_id"]): row["construction"]
@@ -1884,7 +1894,7 @@ def test_each_row_above_goebel_s_construction_is_marked() -> None:
     assert replay.construction_problems(coverage) == []
     current = coverage_check.current_beyond_horizon(coverage)
     assert 369 not in current
-    assert 376 not in current
+    assert current[376]["source_id"] == "tymchishin-22-3662-2026-10-23"
     assert current[375]["source_id"] == SOURCE_763
     for row in coverage["beyond_horizon_claims"]:
         if (row["n"], row["source_id"]) == (376, "couzo-certificates-2026-10-13"):
@@ -2307,3 +2317,108 @@ def test_releases_sharing_a_claim_map_claim_disjoint_counts(
     )
     with pytest.raises(replay.ReplayError, match=r"both claim \[335\]"):
         replay.claim_map_walk_sources(763, "2026-10-24")
+
+
+#: The notebook rows' walk (think-lyf9) and its two reports, one a commit.
+NOTEBOOKS = replay.ROOT / f"campaign/issue-intake/{replay.NOTEBOOKS_964}"
+#: The notebook rows' 12 recipes the walk records and holds (think-ww95).
+RECIPES_NOTEBOOKS = [445, 488, 580, 679, 732, 787, 844, 859, 903, 913, 964, 967]
+#: The rows the notebook rows' 87 certificates supersede, by the source that held each
+#: count; at 10 counts no row stood before them (Göbel's construction or the grid).
+SUPERSEDED_BY_NOTEBOOKS = {
+    "mishapolk-issue732-f1ceee4-2026-10-23": 30,
+    "mishapolk-issue719-2026-10-22": 12,
+    "couzo-index-2026-10-15": 12,
+    "mishapolk-issue732-2026-10-22": 8,
+    "couzo-reconcile-2026-10-20": 3,
+    "couzo-verified-bounds-2026-10-14": 3,
+    "muglich-issue686-2026-10-19": 3,
+    "couzo-extended-range-reports-2026-10-08": 1,
+    "couzo-certificates-2026-10-12": 1,
+    "couzo-extended-certificates-2026-10-11": 1,
+    "couzo-issue670-2026-10-17": 1,
+    "couzo-issue715-2026-10-21": 1,
+    "couzo-issue678-2026-10-18": 1,
+}
+
+
+def _notebook_steps() -> dict[str, dict[int, dict[str, Any]]]:
+    steps: dict[str, dict[int, dict[str, Any]]] = {}
+    for count in _read(NOTEBOOKS / "ledger.json")["counts"]:
+        for step in count["steps"]:
+            steps.setdefault(step["report"], {})[count["n"]] = step
+    return steps
+
+
+def test_the_notebook_rows_are_two_reports_of_seven_sources() -> None:
+    """The 99 notebook sides of the claim map's ``others`` (think-lyf9) are two reports of the
+    walk, one a commit, both dated by the push of 23:38:42Z: 39 first committed at fa6237e
+    and 60 at 964ee2b. Every one is recorded; the 12 recipes are held, and the 87
+    certificates are declared rows of seven releases, one a notebook run, each its own
+    coverage source."""
+    steps = _notebook_steps()
+    fa, nb = steps[replay.NOTEBOOKS_FA6237E], steps[replay.NOTEBOOKS_964EE2B]
+    assert (len(fa), len(nb)) == (39, 60)
+    assert all(step["verdict"] == "recorded" for step in [*fa.values(), *nb.values()])
+    assert {step["reported_at"] for step in [*fa.values(), *nb.values()]} == {
+        replay.COUZO_763_PUSHED
+    }
+    walk = replay.WALKS[replay.NOTEBOOKS_964]
+    held = {
+        n
+        for report, mine in ((replay.NOTEBOOKS_FA6237E, fa), (replay.NOTEBOOKS_964EE2B, nb))
+        for n in mine
+        if walk.holds(report, n) is not None
+    }
+    assert sorted(held) == RECIPES_NOTEBOOKS
+    releases = [item for item in replay.RELEASES.values() if item.walk == replay.NOTEBOOKS_964]
+    assert len(releases) == len({item.source for item in releases}) == 7
+    assert {item.label for item in releases} == {
+        replay.NOTEBOOKS_FA6237E,
+        replay.NOTEBOOKS_964EE2B,
+    }
+    declared = {row.n: item for item in releases for row in replay.decided_claims(item)}
+    assert len(declared) == sum(item.decided for item in releases) == 87
+    assert set(declared) == (set(fa) | set(nb)) - set(RECIPES_NOTEBOOKS)
+    for n, item in declared.items():
+        assert item.first_commit == (replay.COUZO_FA6237E if n in fa else replay.COUZO_763_PIN)
+
+
+def _source_at(walk: replay.Walk, report: str, n: int) -> str | None:
+    found = replay.release_at(walk, report, n)
+    return found.source if found is not None else None
+
+
+def test_a_count_s_source_is_the_release_of_its_label_that_claims_it() -> None:
+    """Where several releases share a report label, the release at a count is the one whose
+    claim map claims it (`release_at`); a label of one release is that release anywhere, and
+    a report no release of the walk is resolves to none."""
+    walk = replay.WALKS[replay.NOTEBOOKS_964]
+    assert _source_at(walk, replay.NOTEBOOKS_964EE2B, 994) == "aqibrazadev-blending-2026-10-23"
+    assert _source_at(walk, replay.NOTEBOOKS_964EE2B, 859) == (
+        "lavrentev-cuda-run-361589987-2026-10-23"
+    )
+    assert _source_at(walk, replay.NOTEBOOKS_FA6237E, 509) == "lavrentev-cuda-v11-2026-10-23"
+    assert _source_at(walk, "franciscouzo/square-packing@23aff0c", 406) is None
+    with pytest.raises(replay.ReplayError, match="0 of its releases claim it"):
+        replay.release_at(walk, replay.NOTEBOOKS_964EE2B, 509)
+    assert _source_at(replay.WALKS[replay.ISSUE_763], PUBLICATION_964, 1) == SOURCE_964
+
+
+def test_the_notebook_rows_are_current_and_supersede_the_rows_they_beat() -> None:
+    sources = {item.source for item in replay.RELEASES.values() if item.notebook_run}
+    rows = [row for row in replay.planned_rows() if row["source_id"] in sources]
+    assert len(rows) == 87
+    assert all("superseded_by" not in row for row in rows)
+    beaten = Counter(
+        start for _, start, source in replay.planned_supersessions() if source in sources
+    )
+    assert beaten == SUPERSEDED_BY_NOTEBOOKS
+    assert sum(beaten.values()) == 77
+
+
+def test_the_notebook_ledger_transcribes_its_sources_from_the_claim_map() -> None:
+    """The walk's ``sources.yaml`` is what `claim_map_walk_sources` writes from the claim map,
+    the frozen starts and the earlier publications, cut at the push."""
+    document = replay.claim_map_walk_sources("tymchishin-reclosure-v3-2026-10-23", "2026-10-24")
+    assert document == safe_load((NOTEBOOKS / "sources.yaml").read_text(encoding="utf-8"))

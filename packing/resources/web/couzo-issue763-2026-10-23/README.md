@@ -284,6 +284,109 @@ Drafted in think-ptkk’s notes for the reply after the merge:
 9. Is Tymchishin the finder of the packing at 304 (`certificates/best/n304.cert`, first
    committed at `fa6237e`), which #763 does not claim?
 
+## The Notebook Rows
+
+Added on 24 October 2026 by the import of think-lyf9. The sections above describe #763’s
+import as it landed; where their counts of the retained files differ from this section’s,
+this section’s are current.
+
+The push of 2026-10-23T23:38:42Z that made `964ee2b` public also published, in its
+`certified_bounds.json`, sides credited to the authors of seven Kaggle notebooks, not to
+Couzo. #763 says the index’s notebook packings by other authors are not part of its
+request, and no other issue reports them. By the owner’s rule of 14 October 2026 a
+certificate in a watched repository is a report from its first commit, so they are the
+push’s publication, and an import of their own.
+
+**The selection.** [`devtools.couzo_763_claims`](../../../devtools/couzo_763_claims.py)
+lists them in [receipts/claim-map.json](receipts/claim-map.json) as `others`: each
+certificate or construction at 325 to 1024 whose credit does not name Couzo, strictly below
+Göbel’s construction at its count (decided exactly as p + q√2), and not an earlier
+publication, a count and side the history scan or f1ceee4’s receipts already hold.
+Of the 169 such entries, 70 are earlier publications. The other **99** are the stage 1
+triage’s set exactly: **87 certificates and 12 L-border recipes** (445, 488, 580, 679,
+732, 787, 844, 859, 903, 913, 964 and 967, each built on a certificate among the 87), the
+derivation’s controls. The walk below finds every one strictly below the record on `main`,
+the rest of the triage’s rule.
+
+**Retained.** The 87 certificates `certificates/best/nN.cert`, 9,780,397 bytes, were added
+to this packet’s scope from a checkout of the same commit, each bound to its Git blob there,
+with the SHA-256 the index and the manifest state. The packet now retains 304 of its 310
+files (95,765,140 bytes) and pins 793 certificates under `certificates/best/` by the commit
+alone. `check_added_blobs --base origin/main --staged` passed before the first commit, at
+2.1 MB as a thin pack.
+
+**Licence.** The 87 are the packings of other authors’ notebooks, so the presumption of
+permission from Couzo’s submission does not cover them. They are retained as factual data
+under the [owner decision of 2026-10-09](../known-best-packings/README.md#retained-factual-data),
+as the 268 parent is. The manifest states Apache-2.0 for the notebooks of 28 of them
+(Tymchishin’s “CPU Alternating Reclosure” v3 and Lavrentev’s “CUDA Packing Search” v11) and
+“per the notebook” for the other 59, and the source notices it cites,
+`submissions/kaggle-public-portfolio-20261022/SOURCE_NOTICES.md`, are not in the tree at
+`964ee2b`. think-m8f4 follows up those licences and notices, and holds nothing.
+
+**The notebooks.** Each notebook run is a coverage source with its own bibliography key,
+credited by name where the source states one and by handle where it gives only a handle:
+
+| Notebook, as the manifest names it | Run | First committed | Rows | Held recipes | Source |
+| --- | --- | --- | --- | --- | --- |
+| Kirill Tymchishin (kirilltym), “CPU Alternating Reclosure” v3, Apache-2.0 | 361239073 | `fa6237e` | 26 | 11 | `tymchishin-reclosure-v3-2026-10-23` |
+| Vladislav Lavrentev (lightningv08), “CUDA Packing Search” v11, Apache-2.0 | 361263594 | `fa6237e` | 2 | - | `lavrentev-cuda-v11-2026-10-23` |
+| Kirill Tymchishin, “22-3662-cpu-cuda-mps-eda-union” | 361576574 | `964ee2b` | 15 | - | `tymchishin-22-3662-2026-10-23` |
+| kyleluecke, “inos-v0-6-k-mosh-squares-in-squares-22-366222” | 361592092 | `964ee2b` | 18 | - | `kyleluecke-inos-2026-10-23` |
+| alexchilton, “fault-line-dp-basin-hopping-lb-22-3747” | 361412241 | `964ee2b` | 11 | - | `alexchilton-fault-line-2026-10-23` |
+| aqibrazadev, “squares-in-squares-top-lb-blending-visualization” | 361516058 | `964ee2b` | 9 | - | `aqibrazadev-blending-2026-10-23` |
+| Vladislav Lavrentev, “squares-in-squares-cuda-packing-search”, a later run | 361589987 | `964ee2b` | 6 | 1 (859) | `lavrentev-cuda-run-361589987-2026-10-23` |
+
+The five notebooks after the first two give a run and no version, and their licence is “per
+the notebook”. Kaggle’s public profile pages of the three handles, read on 24 October 2026,
+are titled “Kyle Luecke”, “alex chilton” and “Aqib Raza”; their profiles record those as
+the names the pages state, and whether each account is that person is asked of the
+publisher. Every entry says its earlier construction credits are kept in the notebook, or in
+its source notices; neither is published here. The manifest records each certificate as the
+publisher’s certificate of the notebook’s packing, dilated by 1+1e-12 (1+1e-11 at 340 and
+1+1e-10 at 409 and 509).
+
+**Exact replay.**
+[`devtools.beyond_horizon_replay`](../../../devtools/beyond_horizon_replay.py) declares a
+release a notebook run on this packet, each with its declaration
+(`acquisition/watched-release-notebook-RUN.json`), record
+(`acquisition/beyond-horizon-rows-notebook-RUN.json`) and receipts under
+[receipts/notebooks/](receipts/notebooks/). The filtered two-route decision, reused
+unchanged with its six controls, **verified all 87**, every print the header side rounded
+up at 12 places: 130,641 candidate pairs of 21,659,742 and every corner against every
+wall, in 89.2 positive CPU seconds. **All 522 controls are refused by both routes.** Every
+square clears the box by at least `1e-15`, and no pair the filter decides touches, the
+least pair gap 7.64e-12 (at 340). With the controls, two workers took 697 s of wall from
+14:21:45Z on 24 October, 1,389 s summed over the rows, about 23 CPU-minutes, at `nice` on
+a four-core machine shared with other lanes. The all-pairs kernel, with no filter, decided
+every pair at 975 and 994 (968,346 pairs, 225.2 CPU seconds): both routes accept both, and
+their least pair gaps and wall clearances equal the filtered decision’s exactly
+([receipts/notebooks/361239073/exhaustive-sample.json](receipts/notebooks/361239073/exhaustive-sample.json),
+[receipts/notebooks/361516058/exhaustive-sample.json](receipts/notebooks/361516058/exhaustive-sample.json)).
+Every side is below Göbel’s construction at its count (each release’s
+`goebel-comparison.json`). The first commits are 28 at `fa6237e` and 59 at `964ee2b`, each
+the commit the release declares (`first-commits.json`). The source’s own checker was not
+run here.
+
+**In report order.** The
+[ledger of 24 October for the notebook rows](../../../campaign/issue-intake/upper-bounds-couzo-964ee2b-notebooks-20261024/README.md)
+walks the 99 counts from starts frozen at `main` `2ec489d1e` (#789’s merge), with Göbel’s
+construction beside each row, as two reports, `franciscouzo/square-packing@fa6237e` (39)
+and `@964ee2b` (60), both dated by the push. **Every one is recorded**, below the record
+by 1.46e-4 (875, against Muglich’s #686 row) to 6.60e-2 (923, against f1ceee4’s), median
+2.3e-2; Göbel’s construction is the least member of the start at 11 counts. The 87
+certificates are the count’s current row and supersede 77 rows: f1ceee4’s (30), #719’s
+(12), `couzo-index-2026-10-15`’s (12), #732’s `17cc220` rows (8), Muglich’s #686 rows (3)
+and 12 more of Couzo’s; at 10 counts (376, 537, 604, 685, 738, 761, 793, 861, 920 and 971)
+no row stood before them. The 12 recipes are recorded and held for the D2 construction
+checker (think-ww95), as #763’s are on think-g2qy. At 16 counts the walk also records
+Couzo’s own `487b058`, `4e4c8ce` and `23aff0c` publications that the history walk holds,
+below the start, and the notebook rows are recorded below them at all 16.
+
+**Later.** Couzo’s `43f666c`, pushed at 2026-10-24T06:10:44Z, is below the notebook side at
+46 of the 99 counts. think-gn29 walks it after this import, from these rows. The questions
+for the publisher are drafted in think-lyf9’s notes for the next reply on #763.
+
 ## Compressed Files
 
 | Stored File | Origin | Git Blob of Original | SHA-256 of Original |

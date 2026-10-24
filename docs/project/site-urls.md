@@ -1052,11 +1052,13 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | papers/square-packing-methods-survey.pdf | papers/square-packing-methods-survey.pdf | paper-file | paper:square-packing-methods-survey | 2026-10-08 | 2026-10-17 | live |
 | posters.html | posters.html | page | overview | 2026-10-08 | 2026-10-22 | live |
 | profiles/ahyangyi.html | profiles/ahyangyi.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/alexchilton.html | profiles/alexchilton.html | page | overview | 2026-10-13 | 2026-10-22 | live |
 | profiles/allen-chang.html | profiles/allen-chang.html | page | overview | 2026-10-13 | 2026-10-22 | live |
 | profiles/amund-kristiansen.html | profiles/amund-kristiansen.html | page | overview | 2026-10-13 | 2026-10-22 | live |
 | profiles/anabologyco-maker.html | profiles/anabologyco-maker.html | page | overview | 2026-10-13 | 2026-10-22 | live |
 | profiles/andrey-vlasenko.html | profiles/andrey-vlasenko.html | page | overview | 2026-10-13 | 2026-10-22 | live |
 | profiles/anna-slivkova.html | profiles/anna-slivkova.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/aqibrazadev.html | profiles/aqibrazadev.html | page | overview | 2026-10-13 | 2026-10-22 | live |
 | profiles/benjamin-greff.html | profiles/benjamin-greff.html | page | overview | 2026-10-13 | 2026-10-22 | live |
 | profiles/benjamin-gurevitch.html | profiles/benjamin-gurevitch.html | page | overview | 2026-10-13 | 2026-10-22 | live |
 | profiles/bojan-basic.html | profiles/bojan-basic.html | page | overview | 2026-10-13 | 2026-10-22 | live |
@@ -1091,6 +1093,8 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | profiles/ke-wang.html | profiles/ke-wang.html | page | overview | 2026-10-13 | 2026-10-22 | live |
 | profiles/kevin-fang.html | profiles/kevin-fang.html | page | overview | 2026-10-13 | 2026-10-22 | live |
 | profiles/kf-roth.html | profiles/kf-roth.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/kirill-tymchishin.html | profiles/kirill-tymchishin.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/kyleluecke.html | profiles/kyleluecke.html | page | overview | 2026-10-13 | 2026-10-22 | live |
 | profiles/magnus-thulin.html | profiles/magnus-thulin.html | page | overview | 2026-10-13 | 2026-10-22 | live |
 | profiles/manasseh-ahmed.html | profiles/manasseh-ahmed.html | page | overview | 2026-10-13 | 2026-10-22 | live |
 | profiles/marc-leonard-overbeck.html | profiles/marc-leonard-overbeck.html | page | overview | 2026-10-13 | 2026-10-22 | live |
@@ -1123,6 +1127,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | profiles/thomas-schadt.html | profiles/thomas-schadt.html | page | overview | 2026-10-13 | 2026-10-22 | live |
 | profiles/tokoharu.html | profiles/tokoharu.html | page | overview | 2026-10-13 | 2026-10-22 | live |
 | profiles/trevor-green.html | profiles/trevor-green.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/vladislav-lavrentev.html | profiles/vladislav-lavrentev.html | page | overview | 2026-10-13 | 2026-10-22 | live |
 | profiles/walter-stromquist.html | profiles/walter-stromquist.html | page | overview | 2026-10-13 | 2026-10-22 | live |
 | profiles/walter-trump.html | profiles/walter-trump.html | page | overview | 2026-10-13 | 2026-10-22 | live |
 | profiles/wolfram-bentz.html | profiles/wolfram-bentz.html | page | overview | 2026-10-13 | 2026-10-22 | live |

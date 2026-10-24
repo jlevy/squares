@@ -27882,14 +27882,18 @@ occurrences:
   end: 21
   label: Lavrentev
   role: prerequisite
-  disposition: unresolved
-  evidence: []
+  disposition: resolved
+  evidence:
+  - source-credit
+  - bibliography
+  contributor_id: vladislav-lavrentev
   note: >-
     Reviewed packing/resources/bibliography.yaml [[Couzo issue 763 2026-10-23]] /credit span
     12:21: the source's certified_bounds.json and manifest credit 253 of the 436 rows as
     refinements of the packing of Vladislav Lavrentev (lightningv08), Kaggle notebook "CUDA
-    Packing Search" v11, and the issue's legend names him. No person record exists yet;
-    identity review pending (a profile by name, think-ptkk).
+    Packing Search" v11, and the issue's legend names him. Joined on 24 October 2026 to the
+    profile the notebook rows' import made (think-lyf9), which the same manifest's credits of
+    his own rows evidence by name.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo issue 763 2026-10-23]'
@@ -27899,15 +27903,19 @@ occurrences:
   end: 33
   label: Tymchishin
   role: prerequisite
-  disposition: unresolved
-  evidence: []
+  disposition: resolved
+  evidence:
+  - source-credit
+  - bibliography
+  contributor_id: kirill-tymchishin
   note: >-
     Reviewed packing/resources/bibliography.yaml [[Couzo issue 763 2026-10-23]] /credit span
     23:33: the source credits 97 rows as refinements of packings of Kirill Tymchishin
     (kirilltym), from his Kaggle notebooks "CPU Alternating Reclosure" v3, "CPU/GPU/MPS
     EDA+Seam LP" v4 (at 268, whose parent the packet retains) and "22-3662-cpu-cuda-mps-eda-
-    union", and the issue's legend names him. No person record exists yet; identity review
-    pending (a profile by name, think-ptkk).
+    union", and the issue's legend names him. Joined on 24 October 2026 to the profile the
+    notebook rows' import made (think-lyf9), which the same manifest's credits of his own
+    rows evidence by name.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo issue 763 2026-10-23]'
@@ -28023,6 +28031,139 @@ occurrences:
     as its first checker and compares with this project's register. The first-party
     jlevy/squares record is the Joshua Levy identity established by LICENSE and the retained
     ojoshe receipt; project credit does not imply sole personal authorship.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Tymchishin CPU Alternating Reclosure v3 2026-10-23]'
+    field: /authors/0
+  expected_text: Tymchishin
+  start: 0
+  end: 10
+  label: Tymchishin
+  role: source-author
+  disposition: resolved
+  evidence:
+  - source-credit
+  - bibliography
+  contributor_id: kirill-tymchishin
+  note: >-
+    Reviewed packing/resources/bibliography.yaml [[Tymchishin CPU Alternating Reclosure v3
+    2026-10-23]] /authors/0 span 0:10: the source's manifest and certified_bounds.json
+    credit these rows to Kirill Tymchishin (kirilltym), Kaggle "CPU Alternating Reclosure"
+    v3, by name.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Tymchishin 22-3662 2026-10-23]'
+    field: /authors/0
+  expected_text: Tymchishin
+  start: 0
+  end: 10
+  label: Tymchishin
+  role: source-author
+  disposition: resolved
+  evidence:
+  - source-credit
+  - bibliography
+  contributor_id: kirill-tymchishin
+  note: >-
+    Reviewed packing/resources/bibliography.yaml [[Tymchishin 22-3662 2026-10-23]]
+    /authors/0 span 0:10: the source's manifest and certified_bounds.json credit these rows
+    to Kirill Tymchishin (kirilltym), Kaggle notebook "22-3662-cpu-cuda-mps-eda-union" run
+    361576574, by name.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[kyleluecke inos 2026-10-23]'
+    field: /authors/0
+  expected_text: kyleluecke
+  start: 0
+  end: 10
+  label: kyleluecke
+  role: source-author
+  disposition: resolved
+  evidence:
+  - source-credit
+  - bibliography
+  contributor_id: kyleluecke
+  note: >-
+    Reviewed packing/resources/bibliography.yaml [[kyleluecke inos 2026-10-23]] /authors/0
+    span 0:10: the source credits these rows to the Kaggle account kyleluecke by its handle
+    alone, which the credit keeps; the profile records the name its public Kaggle page
+    states and asks the publisher whether the account is that person (think-lyf9).
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[alexchilton fault-line 2026-10-23]'
+    field: /authors/0
+  expected_text: alexchilton
+  start: 0
+  end: 11
+  label: alexchilton
+  role: source-author
+  disposition: resolved
+  evidence:
+  - source-credit
+  - bibliography
+  contributor_id: alexchilton
+  note: >-
+    Reviewed packing/resources/bibliography.yaml [[alexchilton fault-line 2026-10-23]]
+    /authors/0 span 0:11: the source credits these rows to the Kaggle account alexchilton by
+    its handle alone, which the credit keeps; the profile records the name its public Kaggle
+    page states and asks the publisher whether the account is that person (think-lyf9).
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[aqibrazadev blending 2026-10-23]'
+    field: /authors/0
+  expected_text: aqibrazadev
+  start: 0
+  end: 11
+  label: aqibrazadev
+  role: source-author
+  disposition: resolved
+  evidence:
+  - source-credit
+  - bibliography
+  contributor_id: aqibrazadev
+  note: >-
+    Reviewed packing/resources/bibliography.yaml [[aqibrazadev blending 2026-10-23]]
+    /authors/0 span 0:11: the source credits these rows to the Kaggle account aqibrazadev by
+    its handle alone, which the credit keeps; the profile records the name its public Kaggle
+    page states and asks the publisher whether the account is that person (think-lyf9).
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Lavrentev CUDA Packing Search v11 2026-10-23]'
+    field: /authors/0
+  expected_text: Lavrentev
+  start: 0
+  end: 9
+  label: Lavrentev
+  role: source-author
+  disposition: resolved
+  evidence:
+  - source-credit
+  - bibliography
+  contributor_id: vladislav-lavrentev
+  note: >-
+    Reviewed packing/resources/bibliography.yaml [[Lavrentev CUDA Packing Search v11
+    2026-10-23]] /authors/0 span 0:9: the source's manifest and certified_bounds.json credit
+    these rows to Vladislav Lavrentev (lightningv08), Kaggle "CUDA Packing Search" v11, by
+    name.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Lavrentev CUDA Packing Search run 361589987 2026-10-23]'
+    field: /authors/0
+  expected_text: Lavrentev
+  start: 0
+  end: 9
+  label: Lavrentev
+  role: source-author
+  disposition: resolved
+  evidence:
+  - source-credit
+  - bibliography
+  contributor_id: vladislav-lavrentev
+  note: >-
+    Reviewed packing/resources/bibliography.yaml [[Lavrentev CUDA Packing Search run
+    361589987 2026-10-23]] /authors/0 span 0:9: the source's manifest and
+    certified_bounds.json credit these rows to Vladislav Lavrentev (lightningv08), Kaggle
+    notebook "squares-in-squares-cuda-packing-search" run 361589987, by name.
 inspections:
 - path: packing/resources/papers/addis-locatelli-schoen-2008-disk-packing-square.pdf
   status: pending

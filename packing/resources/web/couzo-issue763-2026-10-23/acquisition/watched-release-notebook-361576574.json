@@ -1,0 +1,85 @@
+{
+ "format": "beyond-horizon-watched-release-v1",
+ "publication": "https://github.com/franciscouzo/square-packing/tree/964ee2bdf301d0c8912d956d4010f478dcbbd5ea",
+ "commit": "964ee2bdf301d0c8912d956d4010f478dcbbd5ea",
+ "committed": "2026-10-23T22:38:09Z",
+ "published": "2026-10-23T23:38:42Z",
+ "walk": "upper-bounds-couzo-964ee2b-notebooks-20261024",
+ "rows": [
+  {
+   "n": 376,
+   "certificate": "certificates/best/n376.cert",
+   "printed": "19.897064162577"
+  },
+  {
+   "n": 419,
+   "certificate": "certificates/best/n419.cert",
+   "printed": "20.949984998042"
+  },
+  {
+   "n": 540,
+   "certificate": "certificates/best/n540.cert",
+   "printed": "23.756097566212"
+  },
+  {
+   "n": 543,
+   "certificate": "certificates/best/n543.cert",
+   "printed": "23.803053261145"
+  },
+  {
+   "n": 639,
+   "certificate": "certificates/best/n639.cert",
+   "printed": "25.799684810945"
+  },
+  {
+   "n": 640,
+   "certificate": "certificates/best/n640.cert",
+   "printed": "25.803053261947"
+  },
+  {
+   "n": 691,
+   "certificate": "certificates/best/n691.cert",
+   "printed": "26.799999051183"
+  },
+  {
+   "n": 755,
+   "certificate": "certificates/best/n755.cert",
+   "printed": "27.933868760801"
+  },
+  {
+   "n": 761,
+   "certificate": "certificates/best/n761.cert",
+   "printed": "27.998784458427"
+  },
+  {
+   "n": 861,
+   "certificate": "certificates/best/n861.cert",
+   "printed": "29.832000576669"
+  },
+  {
+   "n": 873,
+   "certificate": "certificates/best/n873.cert",
+   "printed": "29.985475579740"
+  },
+  {
+   "n": 920,
+   "certificate": "certificates/best/n920.cert",
+   "printed": "30.821593354959"
+  },
+  {
+   "n": 980,
+   "certificate": "certificates/best/n980.cert",
+   "printed": "31.800000616031"
+  },
+  {
+   "n": 982,
+   "certificate": "certificates/best/n982.cert",
+   "printed": "31.828000616591"
+  },
+  {
+   "n": 984,
+   "certificate": "certificates/best/n984.cert",
+   "printed": "31.851684895372"
+  }
+ ]
+}

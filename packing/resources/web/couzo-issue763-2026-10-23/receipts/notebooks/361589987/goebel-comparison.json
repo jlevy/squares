@@ -1,0 +1,19 @@
+{
+  "comparison": {
+    "above": [],
+    "detail": [
+      {"goebel":"14 + 17/2*sqrt(2)","goebel_family":"G\u00f6bel square","goebel_from_count":653,"margin":-0.02968652472533957,"n":653,"note":"certificates/best/n653.cert","relation":"below","side":"103000662585149636233399984874252559342165386133/3962916099346694229343548005366500000000000000"},
+      {"goebel":"15 + 19/2*sqrt(2)","goebel_family":"G\u00f6bel square","goebel_from_count":781,"margin":-0.6319755744356659,"n":746,"note":"certificates/best/n746.cert","relation":"below","side":"468067440628431266001547079/16835109299500000000000000"},
+      {"goebel":"15 + 19/2*sqrt(2)","goebel_family":"G\u00f6bel square","goebel_from_count":781,"margin":-0.5910286407798643,"n":748,"note":"certificates/best/n748.cert","relation":"below","side":"53621108200101949190889465313/1925768848281500000000000000"},
+      {"goebel":"15 + 10*sqrt(2)","goebel_family":"G\u00f6bel square","goebel_from_count":820,"margin":-0.33297602757937633,"n":802,"note":"certificates/best/n802.cert","relation":"below","side":"5875585674416822045044095391/203948527370500000000000000"},
+      {"goebel":"16 + 21/2*sqrt(2)","goebel_family":"G\u00f6bel square","goebel_from_count":921,"margin":-0.0400828079639167,"n":919,"note":"certificates/best/n919.cert","relation":"below","side":"113438018743151013425077173809/3681957581029500000000000000"},
+      {"goebel":"16 + 11*sqrt(2)","goebel_family":"G\u00f6bel square","goebel_from_count":964,"margin":-0.6976114831305814,"n":923,"note":"certificates/best/n923.cert","relation":"below","side":"3187836587274397239015856611/103304179774250000000000000"}
+    ],
+    "rows": 6,
+    "set": "franciscouzo/square-packing@964ee2b, the lavrentev-cuda-run-361589987-2026-10-23 rows at 964ee2bd",
+    "tally": {"above":0,"below":6,"equal":0}
+  },
+  "families": "G\u00f6bel squares, G\u00f6bel strips and corner-touching strips, with deletion",
+  "format": "beyond-horizon-goebel-comparison-v1",
+  "program": "packing/resources/web/couzo-verified-bounds-2026-10-14/review/goebel_beyond_horizon.py"
+}

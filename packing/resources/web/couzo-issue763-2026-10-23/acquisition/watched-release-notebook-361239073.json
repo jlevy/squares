@@ -1,0 +1,140 @@
+{
+ "format": "beyond-horizon-watched-release-v1",
+ "publication": "https://github.com/franciscouzo/square-packing/tree/fa6237e288cf3fc53b53fc43438c91f3f59c40e9",
+ "commit": "fa6237e288cf3fc53b53fc43438c91f3f59c40e9",
+ "committed": "2026-10-23T18:59:39Z",
+ "published": "2026-10-23T23:38:42Z",
+ "walk": "upper-bounds-couzo-964ee2b-notebooks-20261024",
+ "rows": [
+  {
+   "n": 327,
+   "certificate": "certificates/best/n327.cert",
+   "printed": "18.583782194361"
+  },
+  {
+   "n": 340,
+   "certificate": "certificates/best/n340.cert",
+   "printed": "18.926898901624"
+  },
+  {
+   "n": 404,
+   "certificate": "certificates/best/n404.cert",
+   "printed": "20.591378149728"
+  },
+  {
+   "n": 406,
+   "certificate": "certificates/best/n406.cert",
+   "printed": "20.656854250299"
+  },
+  {
+   "n": 409,
+   "certificate": "certificates/best/n409.cert",
+   "printed": "20.740417290708"
+  },
+  {
+   "n": 446,
+   "certificate": "certificates/best/n446.cert",
+   "printed": "21.645753254767"
+  },
+  {
+   "n": 454,
+   "certificate": "certificates/best/n454.cert",
+   "printed": "21.823102658532"
+  },
+  {
+   "n": 533,
+   "certificate": "certificates/best/n533.cert",
+   "printed": "23.583782194417"
+  },
+  {
+   "n": 537,
+   "certificate": "certificates/best/n537.cert",
+   "printed": "23.692388159698"
+  },
+  {
+   "n": 541,
+   "certificate": "certificates/best/n541.cert",
+   "printed": "23.778174597323"
+  },
+  {
+   "n": 579,
+   "certificate": "certificates/best/n579.cert",
+   "printed": "24.563448006414"
+  },
+  {
+   "n": 589,
+   "certificate": "certificates/best/n589.cert",
+   "printed": "24.778174594028"
+  },
+  {
+   "n": 628,
+   "certificate": "certificates/best/n628.cert",
+   "printed": "25.535533911216"
+  },
+  {
+   "n": 633,
+   "certificate": "certificates/best/n633.cert",
+   "printed": "25.656854253781"
+  },
+  {
+   "n": 685,
+   "certificate": "certificates/best/n685.cert",
+   "printed": "26.692388159732"
+  },
+  {
+   "n": 735,
+   "certificate": "certificates/best/n735.cert",
+   "printed": "27.617572177905"
+  },
+  {
+   "n": 790,
+   "certificate": "certificates/best/n790.cert",
+   "printed": "28.614368942839"
+  },
+  {
+   "n": 791,
+   "certificate": "certificates/best/n791.cert",
+   "printed": "28.642135624899"
+  },
+  {
+   "n": 793,
+   "certificate": "certificates/best/n793.cert",
+   "printed": "28.678779879669"
+  },
+  {
+   "n": 846,
+   "certificate": "certificates/best/n846.cert",
+   "printed": "29.583782195484"
+  },
+  {
+   "n": 854,
+   "certificate": "certificates/best/n854.cert",
+   "printed": "29.727922065706"
+  },
+  {
+   "n": 856,
+   "certificate": "certificates/best/n856.cert",
+   "printed": "29.778174594233"
+  },
+  {
+   "n": 906,
+   "certificate": "certificates/best/n906.cert",
+   "printed": "30.591378150840"
+  },
+  {
+   "n": 965,
+   "certificate": "certificates/best/n965.cert",
+   "printed": "31.563625656683"
+  },
+  {
+   "n": 971,
+   "certificate": "certificates/best/n971.cert",
+   "printed": "31.678779879703"
+  },
+  {
+   "n": 975,
+   "certificate": "certificates/best/n975.cert",
+   "printed": "31.727922066728"
+  }
+ ]
+}

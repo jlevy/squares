@@ -44762,3 +44762,252 @@ evidence:
       own checker was not run here. Review and confirmation remain pending; no stage 4
       review is owed for a beyond-horizon row. No arrangement identity, local minimum,
       optimum or credit statement of the source is established.
+  - id: E-tymchishin-reclosure-v3-beyond-horizon-report
+    claim: upper-bound
+    scope:
+      n_values: [327, 340, 404, 406, 409, 446, 454, 533, 537, 541, 579, 589, 628, 633, 685, 735, 790, 791, 793, 846, 854, 856, 906, 965, 971, 975]
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Tymchishin CPU Alternating Reclosure v3 2026-10-23]'
+    certificate: packing/resources/web/couzo-issue763-2026-10-23/source/certificates/best/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-24'
+    limitations: >-
+      This atom records franciscouzo/square-packing@fa6237e, a watched repository's
+      publication that no issue reports, of the 26 upper bounds beyond the n <= 324 corpus
+      at or below 1024 that certified_bounds.json at 964ee2bd credits to Kirill Tymchishin's
+      (kirilltym) Kaggle notebook "CPU Alternating Reclosure" v3, run 361239073, and that
+      the ledger of 24 October for the notebook rows records as rows, dated by the push of
+      2026-10-23T23:38:42Z: exact rational certificates certificates/best/nN.cert at
+      964ee2bd, each of n squares with its exact side in its header, recorded at that side
+      rounded up at 12 places. The manifest records each as the publisher's certificate of
+      the notebook's packing, dilated by 1+1e-12 (1+1e-11 at 340 and 1+1e-10 at 409). A
+      separate complete repository replay is retained (devtools.beyond_horizon_replay,
+      receipts/notebooks/361239073/filtered-exact-replay.json): the filtered two-route
+      decision of devtools.couzo_678_replay, over every wall and the pairs whose centres are
+      closer than sqrt 2, accepted all 26 and refused all 156 controls, in 22.7 positive CPU
+      seconds; every square clears the box by at least 1e-15, and no pair the filter decides
+      touches, each clearing by at least 7.64e-12 (at 340). The all-pairs kernel at 975
+      (474,825 pairs, 105.4 CPU seconds) agreed exactly with it on the least gap and
+      clearance. The two routes share certificate parsing, half-angle conversion, the pair
+      filter and Fraction arithmetic. The source's own checker was not run here. Review and
+      confirmation remain pending; no stage 4 review is owed for a beyond-horizon row. No
+      arrangement identity, local minimum, optimum or credit statement of the source is
+      established.
+  - id: E-lavrentev-cuda-v11-beyond-horizon-report
+    claim: upper-bound
+    scope:
+      n_values: [330, 509]
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Lavrentev CUDA Packing Search v11 2026-10-23]'
+    certificate: packing/resources/web/couzo-issue763-2026-10-23/source/certificates/best/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-24'
+    limitations: >-
+      This atom records franciscouzo/square-packing@fa6237e, a watched repository's
+      publication that no issue reports, of the 2 upper bounds beyond the n <= 324 corpus at
+      or below 1024 that certified_bounds.json at 964ee2bd credits to Vladislav Lavrentev's
+      (lightningv08) Kaggle notebook "CUDA Packing Search" v11, run 361263594, and that the
+      ledger of 24 October for the notebook rows records as rows, dated by the push of
+      2026-10-23T23:38:42Z: exact rational certificates certificates/best/nN.cert at
+      964ee2bd, each of n squares with its exact side in its header, recorded at that side
+      rounded up at 12 places. The manifest records each as the publisher's certificate of
+      the notebook's packing, dilated by 1+1e-12 (1+1e-10 at 509). A separate complete
+      repository replay is retained (devtools.beyond_horizon_replay,
+      receipts/notebooks/361263594/filtered-exact-replay.json): the filtered two-route
+      decision of devtools.couzo_678_replay, over every wall and the pairs whose centres are
+      closer than sqrt 2, accepted all 2 and refused all 12 controls, in 1.5 positive CPU
+      seconds; every square clears the box by at least 1e-15, and no pair the filter decides
+      touches, each clearing by at least 4.56e-11 (at 509). The two routes share certificate
+      parsing, half-angle conversion, the pair filter and Fraction arithmetic. The source's
+      own checker was not run here. Review and confirmation remain pending; no stage 4
+      review is owed for a beyond-horizon row. No arrangement identity, local minimum,
+      optimum or credit statement of the source is established.
+  - id: E-tymchishin-22-3662-beyond-horizon-report
+    claim: upper-bound
+    scope:
+      n_values: [376, 419, 540, 543, 639, 640, 691, 755, 761, 861, 873, 920, 980, 982, 984]
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Tymchishin 22-3662 2026-10-23]'
+    certificate: packing/resources/web/couzo-issue763-2026-10-23/source/certificates/best/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-24'
+    limitations: >-
+      This atom records franciscouzo/square-packing@964ee2b, a watched repository's
+      publication that no issue reports, of the 15 upper bounds beyond the n <= 324 corpus
+      at or below 1024 that certified_bounds.json at 964ee2bd credits to Kirill Tymchishin's
+      (kirilltym) Kaggle notebook "22-3662-cpu-cuda-mps-eda-union", run 361576574, and that
+      the ledger of 24 October for the notebook rows records as rows, dated by the push of
+      2026-10-23T23:38:42Z: exact rational certificates certificates/best/nN.cert at
+      964ee2bd, each of n squares with its exact side in its header, recorded at that side
+      rounded up at 12 places. The manifest records each as the publisher's certificate of
+      the notebook's packing, dilated by 1+1e-12. A separate complete repository replay is
+      retained (devtools.beyond_horizon_replay,
+      receipts/notebooks/361576574/filtered-exact-replay.json): the filtered two-route
+      decision of devtools.couzo_678_replay, over every wall and the pairs whose centres are
+      closer than sqrt 2, accepted all 15 and refused all 90 controls, in 16.1 positive CPU
+      seconds; every square clears the box by at least 1e-15, and no pair the filter decides
+      touches, each clearing by at least 2.01e-10 (at 376). The two routes share certificate
+      parsing, half-angle conversion, the pair filter and Fraction arithmetic. The source's
+      own checker was not run here. Review and confirmation remain pending; no stage 4
+      review is owed for a beyond-horizon row. No arrangement identity, local minimum,
+      optimum or credit statement of the source is established.
+  - id: E-kyleluecke-inos-beyond-horizon-report
+    claim: upper-bound
+    scope:
+      n_values: [377, 378, 405, 450, 451, 532, 551, 697, 706, 745, 858, 867, 874, 907, 918, 929, 968, 981]
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[kyleluecke inos 2026-10-23]'
+    certificate: packing/resources/web/couzo-issue763-2026-10-23/source/certificates/best/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-24'
+    limitations: >-
+      This atom records franciscouzo/square-packing@964ee2b, a watched repository's
+      publication that no issue reports, of the 18 upper bounds beyond the n <= 324 corpus
+      at or below 1024 that certified_bounds.json at 964ee2bd credits to the Kaggle notebook
+      "inos-v0-6-k-mosh-squares-in-squares-22-366222" of the account kyleluecke, run
+      361592092, and that the ledger of 24 October for the notebook rows records as rows,
+      dated by the push of 2026-10-23T23:38:42Z: exact rational certificates
+      certificates/best/nN.cert at 964ee2bd, each of n squares with its exact side in its
+      header, recorded at that side rounded up at 12 places. The manifest records each as
+      the publisher's certificate of the notebook's packing, dilated by 1+1e-12. A separate
+      complete repository replay is retained (devtools.beyond_horizon_replay,
+      receipts/notebooks/361592092/filtered-exact-replay.json): the filtered two-route
+      decision of devtools.couzo_678_replay, over every wall and the pairs whose centres are
+      closer than sqrt 2, accepted all 18 and refused all 108 controls, in 21.6 positive CPU
+      seconds; every square clears the box by at least 1e-15, and no pair the filter decides
+      touches, each clearing by at least 1.46e-10 (at 378). The two routes share certificate
+      parsing, half-angle conversion, the pair filter and Fraction arithmetic. The source's
+      own checker was not run here. Review and confirmation remain pending; no stage 4
+      review is owed for a beyond-horizon row. No arrangement identity, local minimum,
+      optimum or credit statement of the source is established.
+  - id: E-alexchilton-fault-line-beyond-horizon-report
+    claim: upper-bound
+    scope:
+      n_values: [338, 411, 418, 460, 504, 508, 594, 604, 816, 817, 875]
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[alexchilton fault-line 2026-10-23]'
+    certificate: packing/resources/web/couzo-issue763-2026-10-23/source/certificates/best/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-24'
+    limitations: >-
+      This atom records franciscouzo/square-packing@964ee2b, a watched repository's
+      publication that no issue reports, of the 11 upper bounds beyond the n <= 324 corpus
+      at or below 1024 that certified_bounds.json at 964ee2bd credits to the Kaggle notebook
+      "fault-line-dp-basin-hopping-lb-22-3747" of the account alexchilton, run 361412241,
+      and that the ledger of 24 October for the notebook rows records as rows, dated by the
+      push of 2026-10-23T23:38:42Z: exact rational certificates certificates/best/nN.cert at
+      964ee2bd, each of n squares with its exact side in its header, recorded at that side
+      rounded up at 12 places. The manifest records each as the publisher's certificate of
+      the notebook's packing, dilated by 1+1e-12. A separate complete repository replay is
+      retained (devtools.beyond_horizon_replay,
+      receipts/notebooks/361412241/filtered-exact-replay.json): the filtered two-route
+      decision of devtools.couzo_678_replay, over every wall and the pairs whose centres are
+      closer than sqrt 2, accepted all 11 and refused all 66 controls, in 10.0 positive CPU
+      seconds; every square clears the box by at least 1e-15, and no pair the filter decides
+      touches, each clearing by at least 2.01e-10 (at 817). The two routes share certificate
+      parsing, half-angle conversion, the pair filter and Fraction arithmetic. The source's
+      own checker was not run here. Review and confirmation remain pending; no stage 4
+      review is owed for a beyond-horizon row. No arrangement identity, local minimum,
+      optimum or credit statement of the source is established.
+  - id: E-aqibrazadev-blending-beyond-horizon-report
+    claim: upper-bound
+    scope:
+      n_values: [364, 455, 596, 637, 738, 751, 807, 924, 994]
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[aqibrazadev blending 2026-10-23]'
+    certificate: packing/resources/web/couzo-issue763-2026-10-23/source/certificates/best/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-24'
+    limitations: >-
+      This atom records franciscouzo/square-packing@964ee2b, a watched repository's
+      publication that no issue reports, of the 9 upper bounds beyond the n <= 324 corpus at
+      or below 1024 that certified_bounds.json at 964ee2bd credits to the Kaggle notebook
+      "squares-in-squares-top-lb-blending-visualization" of the account aqibrazadev, run
+      361516058, and that the ledger of 24 October for the notebook rows records as rows,
+      dated by the push of 2026-10-23T23:38:42Z: exact rational certificates
+      certificates/best/nN.cert at 964ee2bd, each of n squares with its exact side in its
+      header, recorded at that side rounded up at 12 places. The manifest records each as
+      the publisher's certificate of the notebook's packing, dilated by 1+1e-12. A separate
+      complete repository replay is retained (devtools.beyond_horizon_replay,
+      receipts/notebooks/361516058/filtered-exact-replay.json): the filtered two-route
+      decision of devtools.couzo_678_replay, over every wall and the pairs whose centres are
+      closer than sqrt 2, accepted all 9 and refused all 54 controls, in 9.4 positive CPU
+      seconds; every square clears the box by at least 1e-15, and no pair the filter decides
+      touches, each clearing by at least 2.01e-10 (at 807). The all-pairs kernel at 994
+      (493,521 pairs, 119.8 CPU seconds) agreed exactly with it on the least gap and
+      clearance. The two routes share certificate parsing, half-angle conversion, the pair
+      filter and Fraction arithmetic. The source's own checker was not run here. Review and
+      confirmation remain pending; no stage 4 review is owed for a beyond-horizon row. No
+      arrangement identity, local minimum, optimum or credit statement of the source is
+      established.
+  - id: E-lavrentev-cuda-run-361589987-beyond-horizon-report
+    claim: upper-bound
+    scope:
+      n_values: [653, 746, 748, 802, 919, 923]
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Lavrentev CUDA Packing Search run 361589987 2026-10-23]'
+    certificate: packing/resources/web/couzo-issue763-2026-10-23/source/certificates/best/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-24'
+    limitations: >-
+      This atom records franciscouzo/square-packing@964ee2b, a watched repository's
+      publication that no issue reports, of the 6 upper bounds beyond the n <= 324 corpus at
+      or below 1024 that certified_bounds.json at 964ee2bd credits to Vladislav Lavrentev's
+      (lightningv08) Kaggle notebook "squares-in-squares-cuda-packing-search", run
+      361589987, and that the ledger of 24 October for the notebook rows records as rows,
+      dated by the push of 2026-10-23T23:38:42Z: exact rational certificates
+      certificates/best/nN.cert at 964ee2bd, each of n squares with its exact side in its
+      header, recorded at that side rounded up at 12 places. The manifest records each as
+      the publisher's certificate of the notebook's packing, dilated by 1+1e-12. A separate
+      complete repository replay is retained (devtools.beyond_horizon_replay,
+      receipts/notebooks/361589987/filtered-exact-replay.json): the filtered two-route
+      decision of devtools.couzo_678_replay, over every wall and the pairs whose centres are
+      closer than sqrt 2, accepted all 6 and refused all 36 controls, in 7.9 positive CPU
+      seconds; every square clears the box by at least 1e-15, and no pair the filter decides
+      touches, each clearing by at least 4.01e-10 (at 923). The two routes share certificate
+      parsing, half-angle conversion, the pair filter and Fraction arithmetic. The source's
+      own checker was not run here. Review and confirmation remain pending; no stage 4
+      review is owed for a beyond-horizon row. No arrangement identity, local minimum,
+      optimum or credit statement of the source is established.
