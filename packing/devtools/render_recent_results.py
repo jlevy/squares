@@ -264,8 +264,9 @@ ROOT_WIDTH = Fraction(1, 10**60)
 
 
 def _root_side(text: object) -> exact_sides.Algebraic | None:
-    """An algebraic house's side as the house writer writes it (`exact_sides.form`), held
-    exactly, or None for any other form."""
+    """An algebraic house's side as the house writer writes it (`exact_sides.form`): its
+    root form, or at degree two the quadratic closed form `exact_sides.quadratic_text`
+    writes, held exactly; None for any other form."""
     try:
         side = exact_sides.read_form(str(text or ""))
     except exact_sides.ExactSideError:
@@ -275,8 +276,10 @@ def _root_side(text: object) -> exact_sides.Algebraic | None:
 
 def root_side(bound: Mapping[str, Any]) -> exact_sides.Algebraic | None:
     """A case record's bound as the algebraic number its exact form states, where that form
-    is the house writer's root form (`exact_sides.form`), held exactly; None for a fraction,
-    a closed form or no exact form. An order against it is decided by
+    is one the house writer writes (`exact_sides.form`), held exactly: its root form, or the
+    quadratic closed form `exact_sides.quadratic_text` writes, ``(a+b*sqrt(d))/c``, as at
+    51 and 295 (review A14 of #756). None for a fraction, a closed form other than
+    `exact_sides.quadratic_text`'s, or no exact form. An order against it is decided by
     `exact_sides.compare`, never read from `span`'s enclosure."""
     return _root_side(bound.get("exact_form"))
 
@@ -319,7 +322,8 @@ def span(bound: Mapping[str, Any]) -> tuple[Fraction, Fraction]:
     every number within one unit of its last printed place, as
     `bounds_agree_at_declared_precision` reads a display: n = 5's verified ceiling prints
     `2 + (1/2)sqrt(2)` rounded up in its 32nd place. An algebraic house's side, written as
-    the one root of its minimal polynomial in an interval (`exact_sides.form`), is read
+    the one root of its minimal polynomial in an interval or, at degree two, as the
+    quadratic closed form `exact_sides.quadratic_text` writes (`exact_sides.form`), is read
     exactly by `root_side`; its span here is only an enclosure `ROOT_WIDTH` wide, which
     holds rationals that are not the root, so a comparison that decides anything holds a
     number to `root_side` instead."""

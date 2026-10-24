@@ -5845,7 +5845,8 @@ STEPS: tuple[Step, ...] = (
         ),
     ),
     Step(
-        "every drawn picture is regularized, regular as published, decided or exempt",
+        "every drawn picture is regularized, regular as published, decided, owed to an open "
+        "bead or exempt",
         _regularization_state,
         fast=True,
         records=True,

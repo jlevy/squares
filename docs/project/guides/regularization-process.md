@@ -285,13 +285,13 @@ python -m devtools.release_pin --check
 drawings, checks the register, and measures every drawn view against its house drawing
 again (`default pictures improve on their house drawings`), listing the counts that keep
 the house picture and why.
-`every drawn picture is regularized, regular as published, decided or exempt` reads each
-count’s state back without measuring, holds it to the index, and fails on a pending
-count that `PENDING_ALLOWED` does not name, on a named count that is no longer pending,
-on a `SETTLED` entry made on another witness or no longer needed, and on one naming a
-run the retained evidence does not hold, under another generator, or whose record shows
-it did not run that count, and on a copy in `settled-runs/` that no entry names; it
-prints the list’s size.
+`every drawn picture is regularized, regular as published, decided, owed to an open bead or exempt`
+reads each count’s state back without measuring, holds it to the index, and fails on a
+pending count that `PENDING_ALLOWED` does not name, on a named count that is no longer
+pending, on a `SETTLED` entry made on another witness or no longer needed, and on one
+naming a run the retained evidence does not hold, under another generator, or whose
+record shows it did not run that count, and on a copy in `settled-runs/` that no entry
+names; it prints the list’s size.
 `bead tree` fails a change to `default_drawings.py` whose list, exemptions or owed runs
 name a bead that is not open.
 Run it alone with `python -m devtools.default_drawings --check-state`. `--verify-atlas`

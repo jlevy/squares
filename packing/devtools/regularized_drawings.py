@@ -230,11 +230,29 @@ IDENTITY_FIELDS = ("basis", "measured_in", "one_to_one", "moved", "max_move", "m
 #: separately" (review A5 of #756). The register's `regularizations` item keeps the
 #: lineage; the case record says which it is, and the case page labels it so.
 EXACT_SOLVE = "exact-solve"
-#: The sources whose register items are exact solves (`EXACT_SOLVE`): issue 639's exact
-#: forms (T-193), each the contact system of T-174's or T-186's packing solved to its
-#: algebraic side (`exactsolve.py`, then `minpoly.py`). At 259 and 302 the house so solved
-#: holds 163 and 204 uneven squares, and its regularization is owed (think-mbdw).
-EXACT_SOLVES = frozenset({"[Daniel exact current records 2026-10-16]"})
+#: The sources whose register items are exact solves (`EXACT_SOLVE`), with the counts
+#: where they are, or None where every item of the source is one:
+#: - issue 639's exact forms (T-193), each the contact system of T-174's or T-186's
+#:   packing solved to its algebraic side (`exactsolve.py`, then `minpoly.py`). At 259 and
+#:   302 the house so solved holds 163 and 204 uneven squares, and its regularization is
+#:   owed (think-mbdw);
+#: - PR 574's algebraic certificates at 153 and 207 (T-174), which attain PingYou's own
+#:   packings, T-148's and T-147's, exactly, in a degree-7 and a degree-5 field (the packet
+#:   README, "The 60 algebraic certificates"); their regularization is owed too (review
+#:   B1 of #756). PR 574's other items mix smaller padding, an exact crop and exact
+#:   re-solves, and keep the register's word until think-xqpq decides their vocabulary.
+EXACT_SOLVES: Mapping[str, frozenset[int] | None] = {
+    "[Daniel exact current records 2026-10-16]": None,
+    "[PingYou PR 574 certificates 2026-10-13]": frozenset({153, 207}),
+}
+
+
+def exact_solve(by: str, n: int) -> bool:
+    """Whether a source's register item at a count is an exact solve (`EXACT_SOLVES`)."""
+    if by not in EXACT_SOLVES:
+        return False
+    counts = EXACT_SOLVES[by]
+    return counts is None or n in counts
 
 
 class RegularizedDrawingsError(ValueError):
@@ -861,7 +879,7 @@ def source_regularizations(
                 "method": str(record["method"]),
                 "side": str(record["side"]),
             }
-            if by in EXACT_SOLVES:
+            if exact_solve(by, n):
                 found[n]["kind"] = EXACT_SOLVE
     return found
 
@@ -1112,10 +1130,21 @@ def case_note(
     A source's exact solve of the house (`EXACT_SOLVE`) is called that, a conversion to an
     exact packing, and not a regularization. Where the count's regularization is owed
     (`owed`, the bead `default_drawings.owed_beads` names), the note ends by saying the
-    drawing is not regularized and which bead owes it (review A5 of #756)."""
+    drawing is not regularized and which bead owes it (review A5 of #756). A house its
+    source regularized owes no regularization, so a source item that is no exact solve at
+    an owed count is refused: the note would call the house a regularization and then say
+    the drawing is not regularized (review B1 of #756)."""
     certificates = certificates or {}
     implied = implied or {}
     held = held or {}
+    if owed:
+        for found in items:
+            if found["by"] != PROJECT_REGULARIZER and found.get("kind") != EXACT_SOLVE:
+                raise RegularizedDrawingsError(
+                    f"{found['by']}'s item of {found['of']}'s packing is its source's "
+                    f"regularization, yet the count's regularization is owed ({owed}): name "
+                    "the source's exact solve in EXACT_SOLVES, or settle what is owed"
+                )
     sentences: list[str] = []
     for found in items:
         if found["by"] != PROJECT_REGULARIZER or "view" not in found:

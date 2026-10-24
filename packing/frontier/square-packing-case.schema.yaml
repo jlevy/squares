@@ -113,7 +113,8 @@ $defs:
       `registered_in` the result whose `regularizations` records it, its `method` and
       `side`, and `kind: exact-solve` where the source's certificate is an exact solve of
       that packing, a conversion to an exact packing and not a regularization, as issue
-      639's exact forms are, T-193's), then this project's (`by: project`): the layer's
+      639's exact forms are, T-193's, and PR 574's algebraic certificates at 153 and 207,
+      T-174's), then this project's (`by: project`): the layer's
       generator, its credit line, this project's `modifications` to Evan Daniel's
       regularizer where his method
       made the view (empty where none applied; absent for the project's own axis tool),

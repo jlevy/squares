@@ -1059,7 +1059,7 @@ and holds this one to the base record ([The House Rule](#the-house-rule)). It ru
 reason, then the guide’s render step, and lists the drawings as above.
 
 The records tier’s
-`every drawn picture is regularized, regular as published, decided or exempt`
+`every drawn picture is regularized, regular as published, decided, owed to an open bead or exempt`
 (`default_drawings --check-state`) fails on a pending count that the list does not name,
 so an adoption cannot pass until its runs have decided every count it re-houses.
 It also fails on a listed count that is no longer pending and on a `SETTLED` entry

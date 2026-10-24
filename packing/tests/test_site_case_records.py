@@ -136,6 +136,15 @@ def test_a_case_page_prints_its_regularization_note_and_nothing_without_one() ->
     )
     assert "is not a regularization" in solved
     assert "its regularization is owed (think-mbdw)" in solved
+    # So is PR 574's exact solve of PingYou's own packing at 153 (T-174): the page no
+    # longer calls the house a regularization and then says the drawing is not
+    # regularized (review B1 of #756).
+    refined = regularization(cases[153])
+    assert refined.startswith(
+        '<div class="site-case-note"><span class="site-card-label">Exact solve</span>'
+    )
+    assert "regularization of T-148" not in refined
+    assert "its regularization is owed (think-mbdw)" in refined
 
     assert "regularization" not in cases[1]
     assert regularization(cases[1]) == ""

@@ -223,12 +223,13 @@ def relation(stated: Stated, bound: Mapping[str, Any] | None, direction: str) ->
 
     Both sides are sets of numbers, compared exactly: cut decimals are every number from
     `low` up to, and not including, `high`, and the case record's bound is its `span`, a
-    single number where it is exact and a unit either side of a closed form's printed
-    value. Where the two sets meet, nothing tells them apart and they are equal; beaten
-    and more mean every number of one is better than every number of the other. An
-    algebraic house's side is a single number too, the root its exact form states
-    (`render_recent_results.root_side`), and is held to by sign tests (`against_root`),
-    never by an enclosure of it."""
+    single number where it is exact and a unit either side of the printed value of a
+    closed form `root_side` does not read. Where the two sets meet, nothing tells them
+    apart and they are equal; beaten and more mean every number of one is better than
+    every number of the other. An algebraic house's side is a single number too, the root
+    its exact form states or the quadratic closed form `exact_sides.quadratic_text`
+    writes, as at 51 and 295 (`render_recent_results.root_side`, review A14 of #756), and
+    is held to by sign tests (`against_root`), never by an enclosure of it."""
     if not bound:
         return None
     root = view.root_side(bound)

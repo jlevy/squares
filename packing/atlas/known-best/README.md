@@ -850,10 +850,10 @@ held the axis tool’s view while the raw house was drawn.
 A view that lapses with its witness is now recorded on the axis tool’s record (`lapsed`)
 rather than only printed.
 The records-tier step
-`every drawn picture is regularized, regular as published, decided or exempt` fails on a
-pending count that `devtools.default_drawings.PENDING_ALLOWED` does not name with its
-bead, and on a named count that is no longer pending; `bead tree` holds each bead the
-list names open.
+`every drawn picture is regularized, regular as published, decided, owed to an open bead or exempt`
+fails on a pending count that `devtools.default_drawings.PENDING_ALLOWED` does not name
+with its bead, and on a named count that is no longer pending; `bead tree` holds each
+bead the list names open.
 
 `--check-atlas` runs in the records tier on every pull request: it holds the index to
 the manifest, the witnesses and the views by digest, and reads each other generator’s
