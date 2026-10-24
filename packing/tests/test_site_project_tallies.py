@@ -353,6 +353,15 @@ def project_inputs() -> _ProjectInputs:
     )
 
 
+def _project_address(url: str) -> str:
+    """A source's address as its project's, derived here and not by the page's
+    `source_repository`: a repository's `/tree/…` names the repository, and a gist's
+    pinned revision, its last path segment, names the gist."""
+    address = re.sub(r"/tree/.*", "", url).rstrip("/")
+    gist = re.fullmatch(r"(https://gist\.github\.com/[^/]+/[0-9a-f]+)/[0-9a-f]{40}", address)
+    return gist[1] if gist else address
+
+
 def _attributed(
     overview: overview_data.Overview, url: str, inputs: _ProjectInputs
 ) -> list[overview_data.Result]:
@@ -365,7 +374,7 @@ def _attributed(
         {
             source["source_key"]
             for source in inputs.coverage
-            if re.sub(r"/tree/.*", "", source["url"]).rstrip("/") == url.rstrip("/")
+            if _project_address(source["url"]) == url.rstrip("/")
         }
         | set(overview_sections.PROJECT_EXTRA_KEYS.get(url, ()))
         | {

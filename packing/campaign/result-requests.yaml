@@ -21749,3 +21749,51 @@ issues:
       path to Level 3; the form's structured credit, lineage, method and AI-assistance fields
       and the issue number in place of a bead; and api/v1/ on squaremath.org with lower bounds
       from the start. The questions stay the owner's, on think-lnzm.
+  - number: 755
+    title: 's(303) ≤ 17.909762327476: registration request'
+    author: amundsk
+    opened: '2026-10-23'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Amund Kristiansen reports s(303) <= 17.909762327476, the exact rational side
+      223872029093440709529093216833/12500000000000000000000000000 =
+      17.90976232747525676232745734664 of s303_amund.cert in the gist
+      amundsk/78f9f0e7b4669f2f509a281845081768 at 511f56b, rounded up at 12 places: a
+      dilation certificate of a binary64 packing made with Evan Daniel's dilate_cert.py,
+      9.89e-6 below T-230, the house at 303 (Daniel, #728). The source calls it a new packing
+      found from Daniel's registered packing by a perturb-and-polish search with Daniel's fq
+      quench, not a refinement, and claims the upper bound only. Triaged on 23 October 2026
+      (think-tqb5): no licence stated, so retained as a derived exact fact in
+      amundsk-n303-2026-10-23, replayed on this repository's two exact routes with the gross
+      and sharp controls refused, and registered as T-239 at V0/C0; measured pose by pose, it
+      pairs one to one with T-230's packing with 12 squares moved beyond a tenth and five more
+      tilted, another arrangement of T-230's packing, not a refinement. The stage 4 review of
+      23 October (think-jdz0) accepted it with nine findings, none blocking, so T-239 is at
+      V3/C3, scored S2; the adoption at 303 and its regularization follow in the same pull
+      request. Registered as T-238 on the records branch and renumbered T-239 on 24 October,
+      before any reply named it, when the owner gave T-237 and T-238 to #750 (think-4o9c).
+      Claude assistance disclosed.
+    read_through: '2026-10-23T11:12:48Z'
+    results:
+    - key: n303
+      claim: >-
+        s(303) <= 223872029093440709529093216833/12500000000000000000000000000 =
+        17.90976232747525676232745734664, the side of s303_amund.cert (SHA-256
+        9ec01059...511b) at 511f56b, by a packing the source calls new, found from Evan
+        Daniel's #728 packing, not a refinement of it.
+      source: body
+      bead: think-tqb5
+      register:
+      - T-239
+      evidence:
+      - E-amundsk-755-n303-report
+    beads:
+    - think-tqb5
+    - think-jdz0
+    answer_bead: think-tqb5
+    replies: []
+    close_when: >-
+      The result is registered, reviewed and adopted at 303 with its drawing regularized, and
+      the reply on main says so; nothing the author asked for is queued.

@@ -1,0 +1,1896 @@
+{
+  "program": "sharp_controls_t238.py",
+  "program_sha256": "d1d40d79d0b1bbb85dc9eea19b86513f7833634a2adb0970f67ff9718abfe4c9",
+  "checker_sha256": "ba967921422bbc56363e83e03f1ef9593303c72d0b1683553a73f6c011bb8480",
+  "input_sha256": "9ec01059b35cc983cb28a1bb33bd215a2717228f7efd182e1724de6b22dc511b",
+  "python": "3.14.7",
+  "epsilon": "1/10^30",
+  "pairs": {
+    "least_clearances": {
+      "left": "60300000000010299/100000000000000000000000000000",
+      "right": "120500000000020477499999999979462300000000010299/199999999999999800000000000000100000000000000000000000000000",
+      "bottom": "60300000000010299/100000000000000000000000000000",
+      "top": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000"
+    },
+    "P": {
+      "pair": [
+        2,
+        13
+      ],
+      "gap": "60250000000010249/50000000000000000000000000000",
+      "axis": "v_i",
+      "kind": "the least gap",
+      "tilts": [
+        "0",
+        "0"
+      ],
+      "tilt_degrees": [
+        0.0,
+        0.0
+      ]
+    },
+    "Q": {
+      "pair": [
+        165,
+        177
+      ],
+      "gap": "941511713159991802966500740657536075571930895553/703157934411217043194495428338500000000000000000000000000000",
+      "axis": "u_j",
+      "kind": "one tilted beyond 1 degree, one exactly aligned",
+      "tilts": [
+        "728348246099839/935855064219734",
+        "0"
+      ],
+      "tilt_degrees": [
+        -14.2149,
+        0.0
+      ]
+    },
+    "T": {
+      "pair": [
+        21,
+        36
+      ],
+      "gap": "1022361290212261208011183163606554615845752358507/847338175557560992844438102585000000000000000000000000000000",
+      "axis": "u_i",
+      "kind": "two tilted beyond 1 degree, at one angle",
+      "tilts": [
+        "506298428890712/768765293480629",
+        "506298428890712/768765293480629"
+      ],
+      "tilt_degrees": [
+        -23.2633,
+        -23.2633
+      ]
+    },
+    "U": {
+      "pair": [
+        92,
+        116
+      ],
+      "gap": "5638510393508232876382618950812684095638185080026902043366661797177623589141/4654715261953047974309921464835821904071018718508794171024500000000000000000000000000000",
+      "axis": "v_i",
+      "kind": "two tilted beyond 1 degree, at angles more than 0.5 degree apart",
+      "tilts": [
+        "476297595217437/749209479432500",
+        "131312225361982/204484794988659"
+      ],
+      "tilt_degrees": [
+        -25.109,
+        -24.586
+      ]
+    },
+    "D": {
+      "pair": [
+        191,
+        202
+      ],
+      "gap": "60350000000010349/50000000000000000000000000000",
+      "axis": "u_i",
+      "centre_distance_squared_minus_2": "6035000000004677022500001249124300000107101801/1250000000000000000000000000000000000000000000000000000000",
+      "corner_distance_squared": "3642122500001249124300000107101801/1250000000000000000000000000000000000000000000000000000000",
+      "corner_vector": [
+        "-60350000000010349/50000000000000000000000000000",
+        "60350000000010349/50000000000000000000000000000"
+      ],
+      "tilts": [
+        "0",
+        "0"
+      ]
+    }
+  },
+  "mutants": [
+    {
+      "name": "F0",
+      "note": "side lowered by the least top-or-right clearance",
+      "expect": "accept",
+      "text_sha256": "86480b0883ddd577e2c3c478a18cfc1b82d23d1b269dc7de177672689f0a918f",
+      "verdicts": {
+        "Z": "accept",
+        "E": "accept",
+        "exact_verify": "accept",
+        "independent": "accept"
+      },
+      "as_expected": true,
+      "review_routes": {
+        "Z": {
+          "verdict": "accept",
+          "least_wall": "0",
+          "walls_at_zero": {
+            "top": [
+              3
+            ]
+          },
+          "walls_failing": [],
+          "touching": [],
+          "touching_count": 0,
+          "overlapping": [],
+          "overlapping_count": 0,
+          "least_gap": "60250000000010249/50000000000000000000000000000",
+          "least_gap_pairs": [
+            [
+              2,
+              13
+            ],
+            [
+              270,
+              282
+            ],
+            [
+              273,
+              285
+            ],
+            [
+              275,
+              287
+            ],
+            [
+              281,
+              293
+            ],
+            [
+              283,
+              295
+            ]
+          ]
+        },
+        "E": {
+          "verdict": "accept",
+          "least_wall": "0",
+          "walls_at_zero": {
+            "top": [
+              3
+            ]
+          },
+          "walls_failing": [],
+          "touching": [],
+          "touching_count": 0,
+          "overlapping": [],
+          "overlapping_count": 0
+        }
+      },
+      "maintained_routes": {
+        "exact_verify": {
+          "verdict": "accept",
+          "least_wall": "0",
+          "least_gap": "60250000000010249/50000000000000000000000000000",
+          "failures": 0
+        },
+        "independent": {
+          "verdict": "accept",
+          "least_wall": "0",
+          "least_gap": "60250000000010249/50000000000000000000000000000",
+          "failures": 0
+        }
+      },
+      "wall_seconds": 18.54
+    },
+    {
+      "name": "F1",
+      "note": "and by 1e-30 more",
+      "expect": "refuse",
+      "text_sha256": "cd2a68e28db57a3ca51fdf1fb91167ca515424e262d3bec2cd1b06ae8e54092f",
+      "verdicts": {
+        "Z": "refuse",
+        "E": "refuse",
+        "exact_verify": "refuse",
+        "independent": "refuse"
+      },
+      "as_expected": true,
+      "review_routes": {
+        "Z": {
+          "verdict": "refuse",
+          "least_wall": "-1/1000000000000000000000000000000",
+          "walls_at_zero": {},
+          "walls_failing": [
+            [
+              3,
+              "top"
+            ]
+          ],
+          "touching": [],
+          "touching_count": 0,
+          "overlapping": [],
+          "overlapping_count": 0,
+          "least_gap": "60250000000010249/50000000000000000000000000000",
+          "least_gap_pairs": [
+            [
+              2,
+              13
+            ],
+            [
+              270,
+              282
+            ],
+            [
+              273,
+              285
+            ],
+            [
+              275,
+              287
+            ],
+            [
+              281,
+              293
+            ],
+            [
+              283,
+              295
+            ]
+          ]
+        },
+        "E": {
+          "verdict": "refuse",
+          "least_wall": "-1/1000000000000000000000000000000",
+          "walls_at_zero": {},
+          "walls_failing": [
+            [
+              3,
+              "top"
+            ]
+          ],
+          "touching": [],
+          "touching_count": 0,
+          "overlapping": [],
+          "overlapping_count": 0
+        }
+      },
+      "maintained_routes": {
+        "exact_verify": {
+          "verdict": "refuse",
+          "least_wall": "-1/1000000000000000000000000000000",
+          "least_gap": "60250000000010249/50000000000000000000000000000",
+          "failures": 1
+        },
+        "independent": {
+          "verdict": "refuse",
+          "least_wall": "-1/1000000000000000000000000000000",
+          "least_gap": "60250000000010249/50000000000000000000000000000",
+          "failures": 1
+        }
+      },
+      "wall_seconds": 38.57
+    },
+    {
+      "name": "N0",
+      "note": "every square left by the least left clearance",
+      "expect": "accept",
+      "text_sha256": "fd82a1bb42eabc9a535559e1ac058b2aae35ac15981b20d96b69520faa931d65",
+      "verdicts": {
+        "Z": "accept",
+        "E": "accept",
+        "exact_verify": "accept",
+        "independent": "accept"
+      },
+      "as_expected": true,
+      "review_routes": {
+        "Z": {
+          "verdict": "accept",
+          "least_wall": "0",
+          "walls_at_zero": {
+            "left": [
+              0,
+              1,
+              2,
+              13,
+              15,
+              124,
+              125,
+              126,
+              127,
+              128,
+              129
+            ]
+          },
+          "walls_failing": [],
+          "touching": [],
+          "touching_count": 0,
+          "overlapping": [],
+          "overlapping_count": 0,
+          "least_gap": "60250000000010249/50000000000000000000000000000",
+          "least_gap_pairs": [
+            [
+              2,
+              13
+            ],
+            [
+              270,
+              282
+            ],
+            [
+              273,
+              285
+            ],
+            [
+              275,
+              287
+            ],
+            [
+              281,
+              293
+            ],
+            [
+              283,
+              295
+            ]
+          ]
+        },
+        "E": {
+          "verdict": "accept",
+          "least_wall": "0",
+          "walls_at_zero": {
+            "left": [
+              0,
+              1,
+              2,
+              13,
+              15,
+              124,
+              125,
+              126,
+              127,
+              128,
+              129
+            ]
+          },
+          "walls_failing": [],
+          "touching": [],
+          "touching_count": 0,
+          "overlapping": [],
+          "overlapping_count": 0
+        }
+      },
+      "maintained_routes": {
+        "exact_verify": {
+          "verdict": "accept",
+          "least_wall": "0",
+          "least_gap": "60250000000010249/50000000000000000000000000000",
+          "failures": 0
+        },
+        "independent": {
+          "verdict": "accept",
+          "least_wall": "0",
+          "least_gap": "60250000000010249/50000000000000000000000000000",
+          "failures": 0
+        }
+      },
+      "wall_seconds": 51.65
+    },
+    {
+      "name": "N1",
+      "note": "and by 1e-30 more",
+      "expect": "refuse",
+      "text_sha256": "c91f384f456c86ec6d798ab7a5da8c36aedcd11549892e51f1665c5618335e8a",
+      "verdicts": {
+        "Z": "refuse",
+        "E": "refuse",
+        "exact_verify": "refuse",
+        "independent": "refuse"
+      },
+      "as_expected": true,
+      "review_routes": {
+        "Z": {
+          "verdict": "refuse",
+          "least_wall": "-1/1000000000000000000000000000000",
+          "walls_at_zero": {},
+          "walls_failing": [
+            [
+              0,
+              "left"
+            ],
+            [
+              1,
+              "left"
+            ],
+            [
+              2,
+              "left"
+            ],
+            [
+              13,
+              "left"
+            ],
+            [
+              15,
+              "left"
+            ],
+            [
+              124,
+              "left"
+            ],
+            [
+              125,
+              "left"
+            ],
+            [
+              126,
+              "left"
+            ],
+            [
+              127,
+              "left"
+            ],
+            [
+              128,
+              "left"
+            ]
+          ],
+          "touching": [],
+          "touching_count": 0,
+          "overlapping": [],
+          "overlapping_count": 0,
+          "least_gap": "60250000000010249/50000000000000000000000000000",
+          "least_gap_pairs": [
+            [
+              2,
+              13
+            ],
+            [
+              270,
+              282
+            ],
+            [
+              273,
+              285
+            ],
+            [
+              275,
+              287
+            ],
+            [
+              281,
+              293
+            ],
+            [
+              283,
+              295
+            ]
+          ]
+        },
+        "E": {
+          "verdict": "refuse",
+          "least_wall": "-1/1000000000000000000000000000000",
+          "walls_at_zero": {},
+          "walls_failing": [
+            [
+              0,
+              "left"
+            ],
+            [
+              1,
+              "left"
+            ],
+            [
+              2,
+              "left"
+            ],
+            [
+              13,
+              "left"
+            ],
+            [
+              15,
+              "left"
+            ],
+            [
+              124,
+              "left"
+            ],
+            [
+              125,
+              "left"
+            ],
+            [
+              126,
+              "left"
+            ],
+            [
+              127,
+              "left"
+            ],
+            [
+              128,
+              "left"
+            ]
+          ],
+          "touching": [],
+          "touching_count": 0,
+          "overlapping": [],
+          "overlapping_count": 0
+        }
+      },
+      "maintained_routes": {
+        "exact_verify": {
+          "verdict": "refuse",
+          "least_wall": "-1/1000000000000000000000000000000",
+          "least_gap": "60250000000010249/50000000000000000000000000000",
+          "failures": 22
+        },
+        "independent": {
+          "verdict": "refuse",
+          "least_wall": "-1/1000000000000000000000000000000",
+          "least_gap": "60250000000010249/50000000000000000000000000000",
+          "failures": 1
+        }
+      },
+      "wall_seconds": 47.67
+    },
+    {
+      "name": "B0",
+      "note": "every square down by the least bottom clearance",
+      "expect": "accept",
+      "text_sha256": "605bf89b3b853190555e6b4411074c6af7df2e9477cac206b789829b934297ff",
+      "verdicts": {
+        "Z": "accept",
+        "E": "accept",
+        "exact_verify": "accept",
+        "independent": "accept"
+      },
+      "as_expected": true,
+      "review_routes": {
+        "Z": {
+          "verdict": "accept",
+          "least_wall": "0",
+          "walls_at_zero": {
+            "bottom": [
+              62,
+              63,
+              64,
+              75,
+              77,
+              124,
+              136,
+              142,
+              148,
+              154
+            ]
+          },
+          "walls_failing": [],
+          "touching": [],
+          "touching_count": 0,
+          "overlapping": [],
+          "overlapping_count": 0,
+          "least_gap": "60250000000010249/50000000000000000000000000000",
+          "least_gap_pairs": [
+            [
+              2,
+              13
+            ],
+            [
+              270,
+              282
+            ],
+            [
+              273,
+              285
+            ],
+            [
+              275,
+              287
+            ],
+            [
+              281,
+              293
+            ],
+            [
+              283,
+              295
+            ]
+          ]
+        },
+        "E": {
+          "verdict": "accept",
+          "least_wall": "0",
+          "walls_at_zero": {
+            "bottom": [
+              62,
+              63,
+              64,
+              75,
+              77,
+              124,
+              136,
+              142,
+              148,
+              154
+            ]
+          },
+          "walls_failing": [],
+          "touching": [],
+          "touching_count": 0,
+          "overlapping": [],
+          "overlapping_count": 0
+        }
+      },
+      "maintained_routes": {
+        "exact_verify": {
+          "verdict": "accept",
+          "least_wall": "0",
+          "least_gap": "60250000000010249/50000000000000000000000000000",
+          "failures": 0
+        },
+        "independent": {
+          "verdict": "accept",
+          "least_wall": "0",
+          "least_gap": "60250000000010249/50000000000000000000000000000",
+          "failures": 0
+        }
+      },
+      "wall_seconds": 46.53
+    },
+    {
+      "name": "B1",
+      "note": "and by 1e-30 more",
+      "expect": "refuse",
+      "text_sha256": "0bebaad361954bbbb71103401230b025aae2586bc152596a993d2579484cd5ce",
+      "verdicts": {
+        "Z": "refuse",
+        "E": "refuse",
+        "exact_verify": "refuse",
+        "independent": "refuse"
+      },
+      "as_expected": true,
+      "review_routes": {
+        "Z": {
+          "verdict": "refuse",
+          "least_wall": "-1/1000000000000000000000000000000",
+          "walls_at_zero": {},
+          "walls_failing": [
+            [
+              62,
+              "bottom"
+            ],
+            [
+              63,
+              "bottom"
+            ],
+            [
+              64,
+              "bottom"
+            ],
+            [
+              75,
+              "bottom"
+            ],
+            [
+              77,
+              "bottom"
+            ],
+            [
+              124,
+              "bottom"
+            ],
+            [
+              136,
+              "bottom"
+            ],
+            [
+              142,
+              "bottom"
+            ],
+            [
+              148,
+              "bottom"
+            ],
+            [
+              154,
+              "bottom"
+            ]
+          ],
+          "touching": [],
+          "touching_count": 0,
+          "overlapping": [],
+          "overlapping_count": 0,
+          "least_gap": "60250000000010249/50000000000000000000000000000",
+          "least_gap_pairs": [
+            [
+              2,
+              13
+            ],
+            [
+              270,
+              282
+            ],
+            [
+              273,
+              285
+            ],
+            [
+              275,
+              287
+            ],
+            [
+              281,
+              293
+            ],
+            [
+              283,
+              295
+            ]
+          ]
+        },
+        "E": {
+          "verdict": "refuse",
+          "least_wall": "-1/1000000000000000000000000000000",
+          "walls_at_zero": {},
+          "walls_failing": [
+            [
+              62,
+              "bottom"
+            ],
+            [
+              63,
+              "bottom"
+            ],
+            [
+              64,
+              "bottom"
+            ],
+            [
+              75,
+              "bottom"
+            ],
+            [
+              77,
+              "bottom"
+            ],
+            [
+              124,
+              "bottom"
+            ],
+            [
+              136,
+              "bottom"
+            ],
+            [
+              142,
+              "bottom"
+            ],
+            [
+              148,
+              "bottom"
+            ],
+            [
+              154,
+              "bottom"
+            ]
+          ],
+          "touching": [],
+          "touching_count": 0,
+          "overlapping": [],
+          "overlapping_count": 0
+        }
+      },
+      "maintained_routes": {
+        "exact_verify": {
+          "verdict": "refuse",
+          "least_wall": "-1/1000000000000000000000000000000",
+          "least_gap": "60250000000010249/50000000000000000000000000000",
+          "failures": 20
+        },
+        "independent": {
+          "verdict": "refuse",
+          "least_wall": "-1/1000000000000000000000000000000",
+          "least_gap": "60250000000010249/50000000000000000000000000000",
+          "failures": 1
+        }
+      },
+      "wall_seconds": 45.12
+    },
+    {
+      "name": "P0",
+      "note": "square 13 moved toward square 2 along v_i by the gap",
+      "expect": "accept",
+      "text_sha256": "7ad0b27b1109dc1e80c4dafb2ff8643e210e76a44f8099032480b8fa741bf9d8",
+      "verdicts": {
+        "Z": "accept",
+        "E": "accept",
+        "exact_verify": "accept",
+        "independent": "accept"
+      },
+      "as_expected": true,
+      "review_routes": {
+        "Z": {
+          "verdict": "accept",
+          "least_wall": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+          "walls_at_zero": {},
+          "walls_failing": [],
+          "touching": [
+            [
+              2,
+              13
+            ]
+          ],
+          "touching_count": 1,
+          "overlapping": [],
+          "overlapping_count": 0,
+          "least_gap": "0/1",
+          "least_gap_pairs": [
+            [
+              2,
+              13
+            ]
+          ]
+        },
+        "E": {
+          "verdict": "accept",
+          "least_wall": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+          "walls_at_zero": {},
+          "walls_failing": [],
+          "touching": [
+            [
+              2,
+              13
+            ]
+          ],
+          "touching_count": 1,
+          "overlapping": [],
+          "overlapping_count": 0
+        }
+      },
+      "maintained_routes": {
+        "exact_verify": {
+          "verdict": "accept",
+          "least_wall": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+          "least_gap": "0",
+          "failures": 0
+        },
+        "independent": {
+          "verdict": "accept",
+          "least_wall": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+          "least_gap": "0",
+          "failures": 0
+        }
+      },
+      "wall_seconds": 45.34
+    },
+    {
+      "name": "P1",
+      "note": "square 13 moved toward square 2 along v_i by the gap + 1e-30",
+      "expect": "refuse",
+      "text_sha256": "d3e8bc0ca0cf3d91a9f753c1e214a38d762b8e4ff00f5769b03cdac0f3fc6720",
+      "verdicts": {
+        "Z": "refuse",
+        "E": "refuse",
+        "exact_verify": "refuse",
+        "independent": "refuse"
+      },
+      "as_expected": true,
+      "review_routes": {
+        "Z": {
+          "verdict": "refuse",
+          "least_wall": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+          "walls_at_zero": {},
+          "walls_failing": [],
+          "touching": [],
+          "touching_count": 0,
+          "overlapping": [
+            [
+              2,
+              13,
+              "-1/1000000000000000000000000000000"
+            ]
+          ],
+          "overlapping_count": 1,
+          "least_gap": "-1/1000000000000000000000000000000",
+          "least_gap_pairs": [
+            [
+              2,
+              13
+            ]
+          ]
+        },
+        "E": {
+          "verdict": "refuse",
+          "least_wall": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+          "walls_at_zero": {},
+          "walls_failing": [],
+          "touching": [],
+          "touching_count": 0,
+          "overlapping": [
+            [
+              2,
+              13,
+              "1/1000000000000000000000000000000"
+            ]
+          ],
+          "overlapping_count": 1
+        }
+      },
+      "maintained_routes": {
+        "exact_verify": {
+          "verdict": "refuse",
+          "least_wall": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+          "least_gap": "-1/1000000000000000000000000000000",
+          "failures": 1
+        },
+        "independent": {
+          "verdict": "refuse",
+          "least_wall": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+          "least_gap": "-1/1000000000000000000000000000000",
+          "failures": 1
+        }
+      },
+      "wall_seconds": 46.16
+    },
+    {
+      "name": "Q0",
+      "note": "square 177 moved toward square 165 along u_j by the gap",
+      "expect": "accept",
+      "text_sha256": "e38dbe1beae95c5dd81592185b53325266b46ae9e32283603ed22f06ce0dd6a1",
+      "verdicts": {
+        "Z": "accept",
+        "E": "accept",
+        "exact_verify": "accept",
+        "independent": "accept"
+      },
+      "as_expected": true,
+      "review_routes": {
+        "Z": {
+          "verdict": "accept",
+          "least_wall": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+          "walls_at_zero": {},
+          "walls_failing": [],
+          "touching": [
+            [
+              165,
+              177
+            ]
+          ],
+          "touching_count": 1,
+          "overlapping": [],
+          "overlapping_count": 0,
+          "least_gap": "0/1",
+          "least_gap_pairs": [
+            [
+              165,
+              177
+            ]
+          ]
+        },
+        "E": {
+          "verdict": "accept",
+          "least_wall": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+          "walls_at_zero": {},
+          "walls_failing": [],
+          "touching": [
+            [
+              165,
+              177
+            ]
+          ],
+          "touching_count": 1,
+          "overlapping": [],
+          "overlapping_count": 0
+        }
+      },
+      "maintained_routes": {
+        "exact_verify": {
+          "verdict": "accept",
+          "least_wall": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+          "least_gap": "0",
+          "failures": 0
+        },
+        "independent": {
+          "verdict": "accept",
+          "least_wall": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+          "least_gap": "0",
+          "failures": 0
+        }
+      },
+      "wall_seconds": 55.56
+    },
+    {
+      "name": "Q1",
+      "note": "square 177 moved toward square 165 along u_j by the gap + 1e-30",
+      "expect": "refuse",
+      "text_sha256": "3f7136d089834f455c6639fa4a387cf266e003be11b2768401d3d3f5110d88e3",
+      "verdicts": {
+        "Z": "refuse",
+        "E": "refuse",
+        "exact_verify": "refuse",
+        "independent": "refuse"
+      },
+      "as_expected": true,
+      "review_routes": {
+        "Z": {
+          "verdict": "refuse",
+          "least_wall": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+          "walls_at_zero": {},
+          "walls_failing": [],
+          "touching": [],
+          "touching_count": 0,
+          "overlapping": [
+            [
+              165,
+              177,
+              "-1/1000000000000000000000000000000"
+            ]
+          ],
+          "overlapping_count": 1,
+          "least_gap": "-1/1000000000000000000000000000000",
+          "least_gap_pairs": [
+            [
+              165,
+              177
+            ]
+          ]
+        },
+        "E": {
+          "verdict": "refuse",
+          "least_wall": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+          "walls_at_zero": {},
+          "walls_failing": [],
+          "touching": [],
+          "touching_count": 0,
+          "overlapping": [
+            [
+              165,
+              177,
+              "1977724322901797636822239150958051776770324871022306355482329/941556568555160213558213596718406025147113477683258638254840000000000000000000000000000000000000000000000000000000000000"
+            ]
+          ],
+          "overlapping_count": 1
+        }
+      },
+      "maintained_routes": {
+        "exact_verify": {
+          "verdict": "refuse",
+          "least_wall": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+          "least_gap": "-1/1000000000000000000000000000000",
+          "failures": 1
+        },
+        "independent": {
+          "verdict": "refuse",
+          "least_wall": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+          "least_gap": "-1/1000000000000000000000000000000",
+          "failures": 1
+        }
+      },
+      "wall_seconds": 47.2
+    },
+    {
+      "name": "T0",
+      "note": "square 36 moved toward square 21 along u_i by the gap",
+      "expect": "accept",
+      "text_sha256": "ddc44d9a4691300326986d182936b168268cc10dcd8ba41eac4f8db895f870c2",
+      "verdicts": {
+        "Z": "accept",
+        "E": "accept",
+        "exact_verify": "accept",
+        "independent": "accept"
+      },
+      "as_expected": true,
+      "review_routes": {
+        "Z": {
+          "verdict": "accept",
+          "least_wall": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+          "walls_at_zero": {},
+          "walls_failing": [],
+          "touching": [
+            [
+              21,
+              36
+            ]
+          ],
+          "touching_count": 1,
+          "overlapping": [],
+          "overlapping_count": 0,
+          "least_gap": "0/1",
+          "least_gap_pairs": [
+            [
+              21,
+              36
+            ]
+          ]
+        },
+        "E": {
+          "verdict": "accept",
+          "least_wall": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+          "walls_at_zero": {},
+          "walls_failing": [],
+          "touching": [
+            [
+              21,
+              36
+            ]
+          ],
+          "touching_count": 1,
+          "overlapping": [],
+          "overlapping_count": 0
+        }
+      },
+      "maintained_routes": {
+        "exact_verify": {
+          "verdict": "accept",
+          "least_wall": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+          "least_gap": "0",
+          "failures": 0
+        },
+        "independent": {
+          "verdict": "accept",
+          "least_wall": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+          "least_gap": "0",
+          "failures": 0
+        }
+      },
+      "wall_seconds": 49.51
+    },
+    {
+      "name": "T1",
+      "note": "square 36 moved toward square 21 along u_i by the gap + 1e-30",
+      "expect": "refuse",
+      "text_sha256": "6db39417051b128498d8dfd5121ef4f478f510af846c7995c863ef37cbaeee1a",
+      "verdicts": {
+        "Z": "refuse",
+        "E": "refuse",
+        "exact_verify": "refuse",
+        "independent": "refuse"
+      },
+      "as_expected": true,
+      "review_routes": {
+        "Z": {
+          "verdict": "refuse",
+          "least_wall": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+          "walls_at_zero": {},
+          "walls_failing": [],
+          "touching": [],
+          "touching_count": 0,
+          "overlapping": [
+            [
+              21,
+              36,
+              "-1/1000000000000000000000000000000"
+            ]
+          ],
+          "overlapping_count": 1,
+          "least_gap": "-1/1000000000000000000000000000000",
+          "least_gap_pairs": [
+            [
+              21,
+              36
+            ]
+          ]
+        },
+        "E": {
+          "verdict": "refuse",
+          "least_wall": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+          "walls_at_zero": {},
+          "walls_failing": [],
+          "touching": [],
+          "touching_count": 0,
+          "overlapping": [
+            [
+              21,
+              36,
+              "201775416185287646611777931265552646217793760352145238502637/423669087778780496422219051292500000000000000000000000000000000000000000000000000000000000"
+            ]
+          ],
+          "overlapping_count": 1
+        }
+      },
+      "maintained_routes": {
+        "exact_verify": {
+          "verdict": "refuse",
+          "least_wall": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+          "least_gap": "-1/1000000000000000000000000000000",
+          "failures": 1
+        },
+        "independent": {
+          "verdict": "refuse",
+          "least_wall": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+          "least_gap": "-1/1000000000000000000000000000000",
+          "failures": 1
+        }
+      },
+      "wall_seconds": 38.23
+    },
+    {
+      "name": "U0",
+      "note": "square 116 moved toward square 92 along v_i by the gap",
+      "expect": "accept",
+      "text_sha256": "0c1b55076822caf680daefdff37641fb7477ece4246c39eb9820379647346e70",
+      "verdicts": {
+        "Z": "accept",
+        "E": "accept",
+        "exact_verify": "accept",
+        "independent": "accept"
+      },
+      "as_expected": true,
+      "review_routes": {
+        "Z": {
+          "verdict": "accept",
+          "least_wall": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+          "walls_at_zero": {},
+          "walls_failing": [],
+          "touching": [
+            [
+              92,
+              116
+            ]
+          ],
+          "touching_count": 1,
+          "overlapping": [],
+          "overlapping_count": 0,
+          "least_gap": "0/1",
+          "least_gap_pairs": [
+            [
+              92,
+              116
+            ]
+          ]
+        },
+        "E": {
+          "verdict": "accept",
+          "least_wall": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+          "walls_at_zero": {},
+          "walls_failing": [],
+          "touching": [
+            [
+              92,
+              116
+            ]
+          ],
+          "touching_count": 1,
+          "overlapping": [],
+          "overlapping_count": 0
+        }
+      },
+      "maintained_routes": {
+        "exact_verify": {
+          "verdict": "accept",
+          "least_wall": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+          "least_gap": "0",
+          "failures": 0
+        },
+        "independent": {
+          "verdict": "accept",
+          "least_wall": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+          "least_gap": "0",
+          "failures": 0
+        }
+      },
+      "wall_seconds": 28.63
+    },
+    {
+      "name": "U1",
+      "note": "square 116 moved toward square 92 along v_i by the gap + 1e-30",
+      "expect": "refuse",
+      "text_sha256": "8ca428611c3607f0751379418146e7416eba2d06c741f808ec8bc97328662369",
+      "verdicts": {
+        "Z": "refuse",
+        "E": "refuse",
+        "exact_verify": "refuse",
+        "independent": "refuse"
+      },
+      "as_expected": true,
+      "review_routes": {
+        "Z": {
+          "verdict": "refuse",
+          "least_wall": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+          "walls_at_zero": {},
+          "walls_failing": [],
+          "touching": [],
+          "touching_count": 0,
+          "overlapping": [
+            [
+              92,
+              116,
+              "-1/1000000000000000000000000000000"
+            ]
+          ],
+          "overlapping_count": 1,
+          "least_gap": "-1/1000000000000000000000000000000",
+          "least_gap_pairs": [
+            [
+              92,
+              116
+            ]
+          ]
+        },
+        "E": {
+          "verdict": "refuse",
+          "least_wall": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+          "walls_at_zero": {},
+          "walls_failing": [],
+          "touching": [],
+          "touching_count": 0,
+          "overlapping": [
+            [
+              92,
+              116,
+              "86665496679434528091517420854007179508530934578737959430949788397172081793982093070616919140235747926602032621518401/1582202633926281856632631018760656560592657888861897745592285865828394043920996322686584820495543514623518300496948160000000000000000000000000000000000000000000000000000000000"
+            ]
+          ],
+          "overlapping_count": 1
+        }
+      },
+      "maintained_routes": {
+        "exact_verify": {
+          "verdict": "refuse",
+          "least_wall": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+          "least_gap": "-1/1000000000000000000000000000000",
+          "failures": 1
+        },
+        "independent": {
+          "verdict": "refuse",
+          "least_wall": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+          "least_gap": "-1/1000000000000000000000000000000",
+          "failures": 1
+        }
+      },
+      "wall_seconds": 29.53
+    },
+    {
+      "name": "D0",
+      "note": "square 202 moved onto square 191's nearest corner",
+      "expect": "accept",
+      "text_sha256": "8c66f6d08317f6bbb25272b00b20986b5561a7239f82c83002b97deb1bb230aa",
+      "verdicts": {
+        "Z": "accept",
+        "E": "accept",
+        "exact_verify": "accept",
+        "independent": "accept"
+      },
+      "as_expected": true,
+      "review_routes": {
+        "Z": {
+          "verdict": "accept",
+          "least_wall": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+          "walls_at_zero": {},
+          "walls_failing": [],
+          "touching": [
+            [
+              191,
+              202
+            ],
+            [
+              202,
+              203
+            ]
+          ],
+          "touching_count": 2,
+          "overlapping": [],
+          "overlapping_count": 0,
+          "least_gap": "0/1",
+          "least_gap_pairs": [
+            [
+              191,
+              202
+            ],
+            [
+              202,
+              203
+            ]
+          ]
+        },
+        "E": {
+          "verdict": "accept",
+          "least_wall": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+          "walls_at_zero": {},
+          "walls_failing": [],
+          "touching": [
+            [
+              191,
+              202
+            ],
+            [
+              202,
+              203
+            ]
+          ],
+          "touching_count": 2,
+          "overlapping": [],
+          "overlapping_count": 0
+        }
+      },
+      "maintained_routes": {
+        "exact_verify": {
+          "verdict": "accept",
+          "least_wall": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+          "least_gap": "0",
+          "failures": 0
+        },
+        "independent": {
+          "verdict": "accept",
+          "least_wall": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+          "least_gap": "0",
+          "failures": 0
+        }
+      },
+      "wall_seconds": 39.19
+    },
+    {
+      "name": "D1",
+      "note": "and 1e-30 further on each axis",
+      "expect": "refuse",
+      "text_sha256": "ee2f503a212ed58282bf016b12649b6d73a8d916b8c806d6c7f9fb27ac38ee6b",
+      "verdicts": {
+        "Z": "refuse",
+        "E": "refuse",
+        "exact_verify": "refuse",
+        "independent": "refuse"
+      },
+      "as_expected": true,
+      "review_routes": {
+        "Z": {
+          "verdict": "refuse",
+          "least_wall": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+          "walls_at_zero": {},
+          "walls_failing": [],
+          "touching": [],
+          "touching_count": 0,
+          "overlapping": [
+            [
+              191,
+              202,
+              "-1/1000000000000000000000000000000"
+            ],
+            [
+              202,
+              203,
+              "-1/1000000000000000000000000000000"
+            ]
+          ],
+          "overlapping_count": 2,
+          "least_gap": "-1/1000000000000000000000000000000",
+          "least_gap_pairs": [
+            [
+              191,
+              202
+            ],
+            [
+              202,
+              203
+            ]
+          ]
+        },
+        "E": {
+          "verdict": "refuse",
+          "least_wall": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+          "walls_at_zero": {},
+          "walls_failing": [],
+          "touching": [],
+          "touching_count": 0,
+          "overlapping": [
+            [
+              191,
+              202,
+              "1/1000000000000000000000000000000000000000000000000000000000000"
+            ],
+            [
+              202,
+              203,
+              "999999999998792999999999793019/1000000000000000000000000000000000000000000000000000000000000"
+            ]
+          ],
+          "overlapping_count": 2
+        }
+      },
+      "maintained_routes": {
+        "exact_verify": {
+          "verdict": "refuse",
+          "least_wall": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+          "least_gap": "-1/1000000000000000000000000000000",
+          "failures": 2
+        },
+        "independent": {
+          "verdict": "refuse",
+          "least_wall": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+          "least_gap": "-1/1000000000000000000000000000000",
+          "failures": 1
+        }
+      },
+      "wall_seconds": 22.9
+    },
+    {
+      "name": "G1",
+      "note": "square 1 replaced by a copy of square 0",
+      "expect": "refuse",
+      "text_sha256": "3ce678f3420cfe403dd70fbe2250277b1738ca5bef5149fc3dc45bb4f3a4a099",
+      "verdicts": {
+        "Z": "refuse",
+        "E": "refuse",
+        "exact_verify": "refuse",
+        "independent": "refuse"
+      },
+      "as_expected": true,
+      "review_routes": {
+        "Z": {
+          "verdict": "refuse",
+          "least_wall": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+          "walls_at_zero": {},
+          "walls_failing": [],
+          "touching": [],
+          "touching_count": 0,
+          "overlapping": [
+            [
+              0,
+              1,
+              "-1/1"
+            ]
+          ],
+          "overlapping_count": 1,
+          "least_gap": "-1/1",
+          "least_gap_pairs": [
+            [
+              0,
+              1
+            ]
+          ]
+        },
+        "E": {
+          "verdict": "refuse",
+          "least_wall": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+          "walls_at_zero": {},
+          "walls_failing": [],
+          "touching": [],
+          "touching_count": 0,
+          "overlapping": [
+            [
+              0,
+              1,
+              "1"
+            ]
+          ],
+          "overlapping_count": 1
+        }
+      },
+      "maintained_routes": {
+        "exact_verify": {
+          "verdict": "refuse",
+          "least_wall": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+          "least_gap": "-1",
+          "failures": 1
+        },
+        "independent": {
+          "verdict": "refuse",
+          "least_wall": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+          "least_gap": "-1",
+          "failures": 1
+        }
+      },
+      "wall_seconds": 19.39
+    },
+    {
+      "name": "G2",
+      "note": "square 0 moved right by S + 2",
+      "expect": "refuse",
+      "text_sha256": "3cf845c8adf655d71e2c3b2a6aafa4dd179e82168c3f70c680ea78b32be36be8",
+      "verdicts": {
+        "Z": "refuse",
+        "E": "refuse",
+        "exact_verify": "refuse",
+        "independent": "refuse"
+      },
+      "as_expected": true,
+      "review_routes": {
+        "Z": {
+          "verdict": "refuse",
+          "least_wall": "-300000000000060300000000010299/100000000000000000000000000000",
+          "walls_at_zero": {},
+          "walls_failing": [
+            [
+              0,
+              "right"
+            ]
+          ],
+          "touching": [],
+          "touching_count": 0,
+          "overlapping": [],
+          "overlapping_count": 0,
+          "least_gap": "60250000000010249/50000000000000000000000000000",
+          "least_gap_pairs": [
+            [
+              2,
+              13
+            ],
+            [
+              270,
+              282
+            ],
+            [
+              273,
+              285
+            ],
+            [
+              275,
+              287
+            ],
+            [
+              281,
+              293
+            ],
+            [
+              283,
+              295
+            ]
+          ]
+        },
+        "E": {
+          "verdict": "refuse",
+          "least_wall": "-300000000000060300000000010299/100000000000000000000000000000",
+          "walls_at_zero": {},
+          "walls_failing": [
+            [
+              0,
+              "right"
+            ]
+          ],
+          "touching": [],
+          "touching_count": 0,
+          "overlapping": [],
+          "overlapping_count": 0
+        }
+      },
+      "maintained_routes": {
+        "exact_verify": {
+          "verdict": "refuse",
+          "least_wall": "-300000000000060300000000010299/100000000000000000000000000000",
+          "least_gap": "60250000000010249/50000000000000000000000000000",
+          "failures": 4
+        },
+        "independent": {
+          "verdict": "refuse",
+          "least_wall": "-300000000000060300000000010299/100000000000000000000000000000",
+          "least_gap": "60250000000010249/50000000000000000000000000000",
+          "failures": 1
+        }
+      },
+      "wall_seconds": 21.28
+    },
+    {
+      "name": "M1",
+      "note": "every tangent negated: the mirrored reading",
+      "expect": "refuse",
+      "text_sha256": "3b0db334fb17ed1efffc3b9bae88fe1787dbeec9904d3650709b9606425338e1",
+      "verdicts": {
+        "Z": "refuse",
+        "E": "refuse",
+        "exact_verify": "refuse",
+        "independent": "refuse"
+      },
+      "as_expected": true,
+      "review_routes": {
+        "Z": {
+          "verdict": "refuse",
+          "least_wall": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+          "walls_at_zero": {},
+          "walls_failing": [],
+          "touching": [],
+          "touching_count": 0,
+          "overlapping": [
+            [
+              3,
+              17,
+              "-78906555569594451241869113648709777619654519584962197006738033178733424136925498884853/2090304547778007265357446486502090304547778007265357446486500000000000000000000000000000"
+            ],
+            [
+              11,
+              51,
+              "-15425114944039238721931395863113189469548055363399792435291/423669087778780496422219051292500000000000000000000000000000"
+            ],
+            [
+              13,
+              16,
+              "-4507285807517180354645266670496079527729412320423554724621/33491858372323612579760000082050000000000000000000000000000"
+            ],
+            [
+              14,
+              20,
+              "-21888679342333341944495913413292935049706975289842347430857/169467635111512198568887620517000000000000000000000000000000"
+            ],
+            [
+              16,
+              35,
+              "-3800751920105359359961215370870089262527682995229972075484356652956990843971880864886771/13792816652289488428025638961198543722841097841671095314021000000000000000000000000000000"
+            ],
+            [
+              17,
+              41,
+              "-2940398976926786686777401088235002503757403713002189915120701722145394957602545770301561/11762869463154100726504813041658010970169527046315716983816500000000000000000000000000000"
+            ],
+            [
+              18,
+              39,
+              "-535716322414852716061211052441294822918605068905659700110459305698690538172835362102591/2567781551448633511400457021968378870875388919683982845836250000000000000000000000000000"
+            ],
+            [
+              18,
+              42,
+              "-1440654902872660770998001397240054039516663947872353406497221279316335737357720641679/116817543332671993985010380628134135232376575224591989086933789062500000000000000000000"
+            ],
+            [
+              18,
+              48,
+              "-160379881764678221430191946402372156756885781201312045986189692066772773176737658668200197/599970712895989574882437822905518437150796662916636599957777000000000000000000000000000000"
+            ],
+            [
+              19,
+              37,
+              "-8196160544891367421534747657030150550158210672822113609541011941849112532721297211423809/29743624952328166917068226221737905068420906942151080685637000000000000000000000000000000"
+            ]
+          ],
+          "overlapping_count": 106,
+          "least_gap": "-22519510320195266599301747543869935569783252642326077693206803024360321667356199043531221/77547333159292808489107856674940510630050251852454262199749000000000000000000000000000000",
+          "least_gap_pairs": [
+            [
+              95,
+              98
+            ]
+          ]
+        },
+        "E": {
+          "verdict": "refuse",
+          "least_wall": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+          "walls_at_zero": {},
+          "walls_failing": [],
+          "touching": [],
+          "touching_count": 0,
+          "overlapping": [
+            [
+              3,
+              17,
+              "2075414837285832371220188641124116185751216760556561920935718835695394472532595538862260351575706732816828164732530976091497986481386589282435981414169699403293382184277203/1003991809146796612206534825693560555946609406595437831630673778619222604756829661069749547373656012546771105033540000000000000000000000000000000000000000000000000000000000000"
+            ],
+            [
+              11,
+              51,
+              "237934171036822646728096409419072883907152286944090809337561968657408214936631478964538888846613960022581908422254681/130258694446116593006198402990947101670694680989204574504056000000000000000000000000000000000000000000000000000000000000"
+            ],
+            [
+              13,
+              16,
+              "366758812442298559323819049212509037215375461067855544577604405742113692048547454048993/15549565780236167660580108759775000000000000000000000000000000000000000000000000000000000"
+            ],
+            [
+              14,
+              20,
+              "2112481146849442507641372881549253816112732150230062372618812574968514355801362279793537/97306165068737395809482504462000000000000000000000000000000000000000000000000000000000000"
+            ],
+            [
+              16,
+              35,
+              "590374373930510273195389205358769495015275111109686122020417502575103993198096137892019215767604808090982915776161059/6896408326144744214012819480598552661552143823475209703889500000000000000000000000000000000000000000000000000000000000"
+            ],
+            [
+              17,
+              41,
+              "2481344770880634272130903530493925164674714206009432151687748565899501002582646440081405866110648234117361221935978797/29407173657885251816262032604139575406040919838532677740499250000000000000000000000000000000000000000000000000000000000"
+            ],
+            [
+              18,
+              39,
+              "55454427419819715219264860970563399769124857686965380781010700945741696387236951965672713662041230709519653001146063/821606629513745054760317769900857199922443964112337261113420800000000000000000000000000000000000000000000000000000000"
+            ],
+            [
+              18,
+              42,
+              "265811117851366590083158135833306555029866490489027315556019506331611430098623633650750261231192592885170170347431/46007345807680777929541591933573599613399582967582666488377000000000000000000000000000000000000000000000000000000000"
+            ],
+            [
+              18,
+              48,
+              "60287757248884626516484304762001906260139964814996183730012102346086784212544567844688566886806018019224994753170471/721092708284898551728027021093172085805305304027196102453828125000000000000000000000000000000000000000000000000000000"
+            ],
+            [
+              19,
+              37,
+              "15913966670404958847499785423366847571120659578896818549389668624893283557827895464017014587263123879549411174528819/185897655952051043231676413885646500558685672863653455774620000000000000000000000000000000000000000000000000000000000"
+            ]
+          ],
+          "overlapping_count": 106
+        }
+      },
+      "maintained_routes": {
+        "exact_verify": {
+          "verdict": "refuse",
+          "least_wall": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+          "least_gap": "-22519510320195266599301747543869935569783252642326077693206803024360321667356199043531221/77547333159292808489107856674940510630050251852454262199749000000000000000000000000000000",
+          "failures": 106
+        },
+        "independent": {
+          "verdict": "refuse",
+          "least_wall": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+          "least_gap": "-22519510320195266599301747543869935569783252642326077693206803024360321667356199043531221/77547333159292808489107856674940510630050251852454262199749000000000000000000000000000000",
+          "failures": 1
+        }
+      },
+      "wall_seconds": 20.89
+    },
+    {
+      "name": "R1",
+      "note": "the last row dropped",
+      "expect": "unreadable",
+      "text_sha256": "2399adfcd92963297fc6a3352eae7f1501c479445430165e26fc2317c4bdaedf",
+      "verdicts": {
+        "Z": "unreadable",
+        "E": "unreadable",
+        "exact_verify": "unreadable",
+        "independent": "unreadable"
+      },
+      "as_expected": true,
+      "review_routes": {
+        "Z": {
+          "verdict": "unreadable",
+          "reason": "302 square rows for n = 303"
+        },
+        "E": {
+          "verdict": "unreadable",
+          "reason": "302 square rows for n = 303"
+        }
+      },
+      "maintained_routes": {
+        "exact_verify": {
+          "verdict": "unreadable",
+          "reason": "n=303: 302 square rows for n = 303"
+        },
+        "independent": {
+          "verdict": "unreadable",
+          "reason": "n=303: 302 square rows for n = 303"
+        }
+      },
+      "wall_seconds": 0.0
+    },
+    {
+      "name": "R2",
+      "note": "square 0's x as its exact decimal",
+      "expect": "reader difference",
+      "text_sha256": "4c64eca5646c8b145bd52cc41e3c2ca0488c3a3af724ce6e40b3632f8209ba8b",
+      "verdicts": {
+        "Z": "unreadable",
+        "E": "unreadable",
+        "exact_verify": "accept",
+        "independent": "accept"
+      },
+      "as_expected": true,
+      "review_routes": {
+        "Z": {
+          "verdict": "unreadable",
+          "reason": "not a rational literal: '0.50000000000060300000000010299'"
+        },
+        "E": {
+          "verdict": "unreadable",
+          "reason": "not a rational literal: '0.50000000000060300000000010299'"
+        }
+      },
+      "maintained_routes": {
+        "exact_verify": {
+          "verdict": "accept",
+          "least_wall": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+          "least_gap": "60250000000010249/50000000000000000000000000000",
+          "failures": 0
+        },
+        "independent": {
+          "verdict": "accept",
+          "least_wall": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+          "least_gap": "60250000000010249/50000000000000000000000000000",
+          "failures": 0
+        }
+      },
+      "wall_seconds": 11.76
+    }
+  ],
+  "all_as_expected": true
+}

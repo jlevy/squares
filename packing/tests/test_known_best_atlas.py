@@ -2370,8 +2370,9 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     # source asks; Kevin Fang's two-wedge construction, which no other count credits,
     # is named in that case's credit sentence and leaves this list. On 20 October 2026 the
     # adoption at 227 and 260 (T-196) drew the poster's first de Winter packings, and his
-    # name joined it.
-    assert len(expected_names) == 26
+    # name joined it. On 24 October 2026 the adoption at 303 (T-239) drew the poster's first
+    # Kristiansen packing, and his name joined it.
+    assert len(expected_names) == 27
     # The adoption of 19 October draws from five more, Evan Daniel's packets at 155, 183
     # (T-220, think-jh4w), 229, 236 and 271, with no new name, and every source it
     # re-housed still holds another count. The adoption of 20 October draws from three
@@ -2393,7 +2394,9 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     # same pass draws 303 from one more, Evan Daniel's issue 728 packet (T-230), with no new
     # name: Mishapolk's KKT refinements still hold other counts. The adoption of 24 October
     # draws 204 from one more, Polkovskyi's n204 packet (T-231), with no new name: his issue
-    # 719 packet still holds 105.
+    # 719 packet still holds 105. The same pass draws 303 from Amund Kristiansen's issue 755
+    # packet (T-239) instead, and no longer from Daniel's issue 728 packet, which held
+    # nothing else, so that move leaves the number of sources as it was.
     assert len(expected_sources) == 28
     assert set(json.loads(credit_block.attrib["data-credited-names"])) == expected_names
     assert set(json.loads(credit_block.attrib["data-source-keys"])) == expected_sources
@@ -2424,6 +2427,7 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
         "Daniel",
         "de Winter",
         "Gupta",
+        "Kristiansen",
         "Ostashev",
         "PingYou Ltd",
         "Xu",
@@ -4587,10 +4591,10 @@ def test_print_information_shares_content_style_and_measured_block_gaps(data_dat
         for block in blocks
     ]
     assert credit_text[0] == credit_text[1]
-    # 26 since the adoption at 227 and 260 of 20 October 2026 (see the credits test above).
+    # 27 since the adoption at 303 of 24 October 2026 (see the credits test above).
     assert (
         len(credit_text[0].removeprefix("Best packings due to ").removesuffix(".").split(", "))
-        == 26
+        == 27
     )
 
 
