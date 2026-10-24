@@ -5,14 +5,14 @@ title: "Deep gate: the four whole fine-net sweeps put deferred-slow-lane over it
 kind: task
 status: open
 priority: 1
-version: 3
+version: 4
 labels:
   - decision
   - validation
 dependencies: []
 parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 created_at: 2026-10-23T23:41:11.291Z
-updated_at: 2026-10-23T23:41:39.107Z
+updated_at: 2026-10-24T01:05:10.745Z
 ---
 Owner or coordinator decision, raised by A2 of PR #745's review A (https://github.com/jlevy/squares/pull/745#issuecomment-6372288301) and escalated by lane c-fix-745-1023 on 23 October.
 
@@ -33,3 +33,7 @@ Options:
 Never skip or sample away the whole sweeps (OR-13; review A's "Sampling is not skipping").
 
 Done when one option is chosen and landed, and a deep-gate run reads `deferred-slow-lane` inside its declared ceiling, or over it with the selection recorded.
+
+## Notes
+
+2026-10-24 coord-intake-1023 DECISION: option (a). Raise the recorded band of deep-gate deferred-slow-lane to cover the four whole fine-net sweeps, set from the measured hosted run (dispatch 40033801674: 1477 s against 1250 s, the sweeps 953 s in all), as an OR-17 selection made on purpose and recorded in gate-budgets.yaml with the run id. Reason: the deep gate is the deferred lane, not the PR cycle that OR-14 keeps quick; (b) and (c) are larger changes that would hold #745 back. Follow-up: split the four sweeps into their own deep-gate job, or speed up exact_intersection_area about 3.4x, as efficiency work (bead under think-ezt8).

@@ -5,8 +5,8 @@ title: "Address PR #745 review A (A1-A8)"
 kind: task
 status: in_progress
 priority: 2
-version: 5
-delegate: c-fix-745-1023
+version: 6
+delegate: c-land-745-1024
 labels: []
 dependencies: []
 parent_id: is-01m5mzwrp4a8f1drb54we5z1tq
@@ -15,7 +15,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-23T22:18:21.615Z
-updated_at: 2026-10-23T23:43:24.650Z
+updated_at: 2026-10-24T01:05:27.306Z
 started_at: 2026-10-23T22:18:43.416Z
 ---
 

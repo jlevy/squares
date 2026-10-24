@@ -5,7 +5,7 @@ title: "W2 #674: replay opening and updated n229 dilation certificates with sour
 kind: task
 status: in_progress
 priority: 2
-version: 16
+version: 17
 delegate: c-stage7-747-1023
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m5kcx4ampkzwwy5h447fcb2e
 hold: null
 hold_until: null
 created_at: 2026-10-18T16:33:54.872Z
-updated_at: 2026-10-23T22:40:04.471Z
+updated_at: 2026-10-24T01:05:12.763Z
 started_at: 2026-10-18T16:34:05.831Z
 closed_at: 2026-10-23T07:11:34.217Z
 close_reason: "Source checkers re-run on the four certificates of #669 and #674 (8 accepted, 24 controls refused); receipts committed in the three packets and the request notes edited on PR #747 (77872bd02, c4f86cbca, e4ea7beb4); no rung change."
@@ -41,3 +41,6 @@ blocked_on: none
 
 2026-10-23 22:40Z c-stage7-747-1023 (runbook stage 7 for #747, merged 7cd0a94bf): deploy verified. Pages deployment 7288113551 of main 77aba4c02 (run 40018711060, verify-deployment: check_published_site 5710 of 5710 passed); squaremath.org serves v0.9.2-79926e, and DATA_REVISION 79926ea52 contains #747's pin 777577956 and its merge; a local check_published_site --commit 77aba4c02 also passed 5710 of 5710. #470: final comment https://github.com/jlevy/squares/issues/470#issuecomment-6376106671 (22:36:26Z), closed as completed 22:36:27Z. #670: not posted on. GitHub closed it at 18:32:53Z through #747's closing keyword ("the coordinator closes #670" in its description), with no final comment, and franciscouzo answered both review questions after the close (https://github.com/jlevy/squares/issues/670#issuecomment-6375905012, 22:22:03Z, unread in the record; it gives the 204 lineage as T-186's, after Ostashev and PingYou Ltd); left for the coordinator. Records patch for the next records PR: /tmp/claude-0/-home-user-squares/f8504540-2b5a-5f78-8968-eb4ffa4c4b64/scratchpad/stage7-747/requests.patch (#470 only: state closed, closed 2026-10-23, the final reply, notes); check_requests passes on it in a scratch copy of origin/main 77aba4c02.
 blocked_on: none
+
+
+2026-10-24 coord-intake-1023 DECISION on #670: option (A). It stays closed (GitHub closed it at 18:32:54Z through #747's 'closes #670'), and the final comment (triage draft scratchpad/triage-1023b/reply-670.md) is posted there after PR A (the authors' answers and T-226's chain credit) merges. The runbook's no-post rule for closed issues assumes a final comment already exists; here none was posted. #670 is not reopened.

@@ -3,9 +3,9 @@ type: is
 id: is-01m5mrzp4cfj4fr5bkvacmp4zr
 title: "Site URLs: disposition for the nine atlas/regularized SVGs the algebraic adoption removes (70, 102, 123, 153, 207, 258, 259, 295, 302)"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 4
+version: 6
 delegate: c-fix-756-1023
 labels:
   - decision
@@ -15,8 +15,12 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-23T16:19:57.196Z
-updated_at: 2026-10-23T23:29:10.413Z
+updated_at: 2026-10-24T01:05:11.946Z
 started_at: 2026-10-23T22:18:45.109Z
+closed_at: 2026-10-24T01:05:11.946Z
+close_reason: "Superseded by #761's 324-address regularized view; #756 green at 7bc4cae11 with no URL change"
+resolution: null
+duplicate_of: null
 ---
 The adoption of the nine algebraic houses on 23 October 2026 (think-ot5c, branch claude/intake-2026-10-23-algebraic-houses) leaves the regularized layer's index with no view at 70, 102, 123, 153, 207, 258, 259, 295 and 302. The axis tool refuses a number-field witness (`unsupported-scalar-kind`), the lapsed strong views are not kept (the owner's answer to question 13, think-r8cn), and no regularizer yet draws an exact view of a number-field witness (think-mbdw). So `render_overview.support_file_paths` no longer declares `atlas/regularized/n-{70,102,123,153,207,258,259,295,302}.svg`. These nine are live rows in packing/site-urls.yaml, first published 2026-10-07.
 
@@ -42,3 +46,6 @@ Recommended: (a), or (b) if the site lane prefers a withdrawn asset to a stand-i
 - Open question for the coordinator, the site lane or the owner: the rationale for (b) was that a house drawing served at a "regularized" address misstates which drawing it is. That concern now applies to main's own design at every count without a drawn view (the 229 addresses #761 added, plus these nine). It is not resolved here.
 - Outcome: the PR's URL-registry blocker is cleared by the merge alone. There is no registry code, test or register change. The bead is left in_progress, for the coordinator to close or re-decide.
 - CI at 7bc4cae11 (after handback): green. Packing validation 40038308777, Pages 40038308826 and Branch mergeability 40038303699 succeed; 31 checks pass, none fail.
+
+
+2026-10-24 coord-intake-1023: SUPERSEDED, no change needed. #761 (the flip-regularization session) redefined atlas/regularized/n-N.svg as every count's Regularized-mode picture: its default picture in its canonical pose, for all 324 counts. After #756 merged main, the nine addresses are declared again and serve the adopted house in canonical pose, and CI is green at 7bc4cae11. Option (b) is not applied. Closing.
