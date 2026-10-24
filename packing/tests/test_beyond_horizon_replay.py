@@ -25,6 +25,7 @@ import dataclasses
 import hashlib
 import json
 import os
+import re
 import subprocess
 from collections import Counter
 from fractions import Fraction
@@ -145,8 +146,22 @@ def test_a_table_that_links_another_commit_or_folder_is_refused() -> None:
         de_winter.read(text.replace(de_winter.pin, de_winter.retained), de_winter)
 
 
-def test_the_receipts_records_and_coverage_rows_hold() -> None:
-    assert replay.check(replay=False) == []
+@pytest.mark.parametrize(
+    "label",
+    [
+        pytest.param(label, id="-".join(re.findall(r"[0-9A-Za-z]+", label)))
+        for label in replay.RELEASES
+    ],
+)
+def test_each_release_s_receipts_and_record_hold(label: str) -> None:
+    """`check` without the replay, one release a call: the whole of it ran 38.8 s on a
+    hosted runner once #763's rows joined, and 53.6 s on a slower draw, past the 45 s
+    per-test guard; the largest release alone is under 10 s here."""
+    assert replay.release_problems(replay.release(label), replay=False, workers=1) == []
+
+
+def test_the_coverage_rows_hold() -> None:
+    assert replay.coverage_problems() == []
 
 
 def test_every_certificate_was_first_committed_at_the_commit_the_record_states() -> None:
