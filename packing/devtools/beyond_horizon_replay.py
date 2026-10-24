@@ -178,6 +178,21 @@ retained ledgers. The walk holds the issue's 13 recipes and its deletion bound a
 (`_HELD_763`) and the history walk's holds it records (`_HELD_IN_763`). A count in the
 corpus is the register's: no declared row holds 268 or 303 (`declared_rows`).
 
+**Above 1024.** The owner tracks every count, with no ceiling (D1, think-f2io), and a
+records slice lifts a release's window in the same pull request as the receipts it
+needs (think-llit). Its rows above 1024 are planned by the walk above 1024 it names
+(`Release.walk_above`, `walk_of`), which lists both rulings with no top. Göbel's
+construction there comes from the maintained module (`devtools.goebel_construction`), so
+a window above 1024 writes the v2 Göbel receipt (`goebel_receipt`). A recipe row is
+decided by the construction checker (`devtools.construction_checker`, D2), not the
+filtered replay: ``recipe-decisions`` replays the parents that are not rows and decides
+each recipe (`RECIPES`). An index's one-square deletion from the next count is an earlier
+report by D6, and any other deletion, or one an issue claims, waits on think-kzme
+(`deletion_holds`); the Kingbird catalogue's sides wait on N1 (`CATALOGUE`). A certificate
+the packet pins and does not retain is read from hosted shards (`Release.hosted`,
+`devtools.hosted_shards`), and the fast check reads its side and blob from the source
+history without opening one.
+
 **Earlier publications.** ``earlier`` reads clones of the watched repositories and writes
 ``receipts/earlier-publications.json`` for a release: at each of its counts, every
 certificate and index bound published before the release's row, strictly below the record's
@@ -197,8 +212,10 @@ From ``packing/``, with the project interpreter::
         --start-coverage CHECKOUT/packing/frontier/source-coverage.yaml \
         --clone franciscouzo/square-packing=CLONE evand/square-packing=CLONE ...
     python -m devtools.beyond_horizon_replay history-sources --read-on DATE
-    python -m devtools.beyond_horizon_replay source-history --issue 732 --clone CLONE
-    python -m devtools.beyond_horizon_replay release-sources --issue 732 --read-on DATE
+    python -m devtools.beyond_horizon_replay source-history --issue 732 --clone CLONE [--walk W]
+    python -m devtools.beyond_horizon_replay release-sources --issue 732 --read-on DATE \
+        [--walk W]
+    python -m devtools.beyond_horizon_replay recipe-decisions --issue 715 [--workers 2]
     python -m devtools.beyond_horizon_replay later-commits --issue LABEL --clone CLONE
     python -m devtools.beyond_horizon_replay decide-later --issue LABEL
     python -m devtools.beyond_horizon_replay pose-identity --issue LABEL

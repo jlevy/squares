@@ -532,21 +532,30 @@ W7 starts once #789 has merged, from the `main` that holds it.
 It goes as one pull request or a stack of three ([Approach](#approach)), and it records
 nothing.
 
-- [ ] `goebel_construction` and its tests.
+- [x] `goebel_construction` and its tests.
   The readers that must reach past 1073 move to it; frozen receipts keep the retained
   program; the reach tests change.
-- [ ] The ceiling: every site in the tables above, #789’s included, `FROZEN_THROUGH` for
+- [x] The ceiling: every site in the tables above, #789’s included, `FROZEN_THROUGH` for
   the frozen walks and releases, `Release.decided_above` and `decided_through`, and
   `walk_of` by count.
-- [ ] The regression control: every existing receipt, frozen walk (`ledger.json`,
+- [x] The regression control: every existing receipt, frozen walk (`ledger.json`,
   `sources.yaml`, `README.md`) and claims record is rebuilt by its writer, with no
-  replay, and compared byte for byte before and after W7.
-- [ ] The construction checker, its controls, and the settled `RECIPE` hold.
-- [ ] Deletions: declared `deleted`, and `DELETION_ANSWER` above 1024.
-- [ ] The hosted reader, and `source-history` above 1024 reading shard headers.
-- [ ] Gate cost: header-only sides, the cached Göbel table, and the summary README;
+  replay, and compared byte for byte before and after W7. The writers that read clones
+  (first commits, source history, earlier publications, later commits) are not rerun;
+  #678’s Göbel receipt already differs from its writer at the base, by one word of its
+  `families` sentence, and is left as committed.
+- [x] The construction checker and its controls.
+  The settled `RECIPE` hold is not built as `Held.answer`: in the code an answered hold
+  has no row, and D2 makes a decided recipe a row.
+  A recipe the walk records and does not hold is a declared row the checker decides
+  (`recipe-decisions`), and the class holds only the recipes it refuses (think-llit’s
+  note of 24 October).
+- [x] Deletions: declared `deleted`, and `DELETION_ANSWER` above 1024.
+- [x] The hosted reader, and `source-history` above 1024 reading shard headers.
+- [x] Gate cost: header-only sides, the cached Göbel table, and the summary README;
   measured before and after.
-- [ ] The rule text in the frontier README and the runbook.
+  The summary starts above 400 walked counts, over every retained walk’s.
+- [x] The rule text in the frontier README and the runbook.
 - **Price:** under 0.1 CPU-hours (tests, the gate measurements, and the build to 10,500,
   which takes 0.01 CPU-seconds).
 

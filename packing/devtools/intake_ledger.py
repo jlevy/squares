@@ -203,6 +203,12 @@ GOEBEL_FROM = "2026-10-23"
 GOEBEL_PROGRAM = ROOT / (
     "resources/web/couzo-verified-bounds-2026-10-14/review/goebel_beyond_horizon.py"
 )
+#: A walk of more counts than this renders a summary README (`readme`): its per-count table
+#: stays in ``ledger.json`` alone. Every walk retained to date walks fewer (the history
+#: walk's 392 is the most, in a README of 339 kB), so each renders as it did; the walk above
+#: 1024, about 5,000 counts, would otherwise write one of about 2.5 MB (think-llit, Gate
+#: Cost).
+SUMMARY_FROM = 400
 #: The common-doc footer every durable document carries (`check_documentation`).
 FOOTER = (
     "<!-- This document follows common-doc-guidelines.md.",
@@ -2476,7 +2482,9 @@ def _report_link(label: str, url: str) -> str:
 
 def readme(ledger: Ledger, verdicts: Mapping[str, Any], *, retained: bool = True) -> str:
     """The human tables: the rule, per report, per count, owner decisions, other items.
-    ``retained`` says the intake directory holds a `LANE_CLAIMS` copy to link to."""
+    ``retained`` says the intake directory holds a `LANE_CLAIMS` copy to link to. A walk of
+    more than `SUMMARY_FROM` counts is summarized: the tallies, each report, the rulings and
+    the owner's lists stay, and the per-count table is ``ledger.json``'s alone."""
     lines = [
         "# Upper-Bound Reports, Count by Count, in Report Order",
         "",
@@ -2583,19 +2591,33 @@ def readme(ledger: Ledger, verdicts: Mapping[str, Any], *, retained: bool = True
             f"| {_cell(refined)} | {unclassified} "
             f"| {_cell(not_recorded)} | {undecided} | {summary['bead'] or '-'} |"
         )
-    lines += [
-        "",
-        "## Per Count",
-        "",
-        (
-            "Each report at the count in report order, with its side and verdict; a verdict "
-            "names what decided it and by how much."
-        ),
-        "",
-        "| n | Record on main | Reports in order | Best now |",
-        "| ---: | --- | --- | --- |",
-    ]
-    for count in verdicts["counts"]:
+    counts = verdicts["counts"]
+    if len(counts) > SUMMARY_FROM:
+        lines += [
+            "",
+            "## Per Count",
+            "",
+            (
+                f"This walk reaches {len(counts)} counts, more than {SUMMARY_FROM}, so this "
+                "README is a summary: each count's start, reports in order, verdicts and best "
+                "side are in [ledger.json](ledger.json) (`counts`), which `render --check` "
+                "holds to the rule like the rest."
+            ),
+        ]
+    else:
+        lines += [
+            "",
+            "## Per Count",
+            "",
+            (
+                "Each report at the count in report order, with its side and verdict; a "
+                "verdict names what decided it and by how much."
+            ),
+            "",
+            "| n | Record on main | Reports in order | Best now |",
+            "| ---: | --- | --- | --- |",
+        ]
+    for count in counts if len(counts) <= SUMMARY_FROM else []:
         record = "; ".join(
             f"{member['side']} ({_cell(member['label'])}; {_cell(member['holders'])})"
             for member in count["start"]

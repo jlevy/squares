@@ -1674,3 +1674,27 @@ def test_a_source_edited_without_a_regather_is_refused(tmp_path: Path) -> None:
     )
     ledger.gather(copy_of, snapshot=True)
     assert (copy_of / "ledger.yaml").read_bytes() != (directory / "ledger.yaml").read_bytes()
+
+
+def test_a_walk_past_the_summary_threshold_renders_a_summary_readme(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """A walk of more than `SUMMARY_FROM` counts keeps its per-count table in ledger.json
+    alone (think-llit, Gate Cost): its README keeps the tallies, each report, the rulings
+    and the owner's lists. Every retained walk walks fewer counts, so each renders as it
+    did; with the threshold under a walk's 23 counts, its README is the summary and its
+    ledger.json is unchanged."""
+    walks = sorted((ledger.ROOT / "campaign/issue-intake").glob("upper-bounds-*/ledger.json"))
+    walked = [len(json.loads(path.read_text(encoding="utf-8"))["counts"]) for path in walks]
+    assert max(walked) == 392 <= ledger.SUMMARY_FROM
+    directory = ledger.ROOT / "campaign/issue-intake/upper-bounds-20261016"
+    full = ledger.rendered(directory)
+    monkeypatch.setattr(ledger, "SUMMARY_FROM", 22)
+    summary = ledger.rendered(directory)
+    assert summary[ledger.VERDICTS] == full[ledger.VERDICTS]
+    text = summary[ledger.README]
+    assert "| n | Record on main | Reports in order | Best now |" not in text
+    assert "This walk reaches 23 counts, more than 22, so this README is a summary" in text
+    for kept in ("## Counts", "## Per Report", "## Owner Decisions"):
+        assert kept in text
+    assert len(text) < len(full[ledger.README])

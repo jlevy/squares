@@ -228,8 +228,18 @@ is above, and holds no count.
 The standing side there is the construction, which has no row: in the walks, and from 23
 October 2026 in every start, claim record and replay reading beyond the horizon
 ([several reports at one count](../campaign/result-import.md#several-reports-at-one-count)).
-`devtools.beyond_horizon_replay` holds every row from $n = 325$ to $1024$ to Göbel’s
-construction exactly.
+Rows are tracked beyond $n = 324$ with no ceiling, each recorded as its source reported
+it (the owner, 23 October 2026, D1). `devtools.beyond_horizon_replay` holds every row
+beyond $n = 324$ to Göbel’s construction exactly, from the maintained module
+`devtools.goebel_construction`, which proves each side final by the area bound: a member
+at count $k$ packs $k$ unit squares, so its side is at least $\sqrt k$. A construction
+an index or table states with no certificate file of its own (a tiling, L-border or
+deletion recipe on a certificate) is a row once the maintained construction checker,
+`devtools.construction_checker`, decides it exactly from the recipe and its parent
+certificate has been replayed on both routes (D2). A certificate kept as hosted data is
+read through its hosted-data manifest (`devtools.hosted_shards`), while its receipts and
+rows stay in Git
+([OR-18](../../operating-rules.md#or-18-keep-bulk-data-out-of-git-and-never-bind-code-or-verdicts-to-a-git-commit-or-blob)).
 Nine rows of 8 to 13 October at $n = 369, 375$ and $376$ are so marked, and 369 and 376
 have no current row.
 The check is local and deterministic; refreshing a public source is a dated W1 research
@@ -354,6 +364,10 @@ The process relies on these rules of the records:
   certificate its author withdrew from an issue is not a report; and a side obtained by
   deleting one square from the next count’s published certificate is an earlier report,
   which on the D6 decision’s recommendation, not yet confirmed, has no row of its own.
+  Rows are tracked with no ceiling: Göbel’s construction comes from the maintained
+  module at every count, a recipe with no certificate file is a row once the maintained
+  construction checker decides it from a replayed parent, and a hosted certificate is
+  read through its manifest.
 
 ## Registering a First-Party Result
 
