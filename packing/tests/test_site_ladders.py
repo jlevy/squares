@@ -4,9 +4,9 @@ Verification Ladders is one diagram of three ladders (`templates/paper-design.md
 Rating ladders): every rung is the same height, a chip and a description that is a box of
 exactly two lines its words never run past, with no tally of results and no rule between
 the rows. Whether a text takes two lines is the browser's to say, from the face and the
-cell's width, so this opens the rendered results page in Chromium (the diagram was the
-overview's until 2026-10-02) and measures the diagram
-with the probe `devtools.measure_site_pages ladders` reports from, at the widths the
+cell's width, so this opens the rendered Verification page in Chromium (the diagram was
+the overview's until 2026-10-02 and the Results page's until 2026-10-22) and measures the
+diagram with the probe `devtools.measure_site_pages ladders` reports from, at the widths the
 design is shot at and at the ones where a description is narrowest: 716 pixels, the least
 window that sets three columns, and 715, where the ladders stack; 768, where the page's
 margin widens and the wide track is 4 pixels more than at 716; 1100, the least that sets
@@ -32,6 +32,7 @@ import pytest
 from devtools import overview_sections
 from devtools.measure_site_pages import LADDERS
 from devtools.render_n11_lower_bounds_explainer_pdf import BROWSER_OVERRIDE
+from devtools.render_overview import VERIFICATION_PAGE
 from tests import site_renders
 
 #: Each width measured, and how many columns the rungs stand in there.
@@ -74,12 +75,12 @@ GUTTER = 8
 
 
 @pytest.fixture(scope="module")
-def results_page(tmp_path_factory: pytest.TempPathFactory) -> Iterator[Any]:
-    """The rendered results page, loaded once in Chromium at 1280 pixels."""
+def verification_page(tmp_path_factory: pytest.TempPathFactory) -> Iterator[Any]:
+    """The rendered Verification page, loaded once in Chromium at 1280 pixels."""
     sync_api = pytest.importorskip("playwright.sync_api")
-    # The diagram is the results page's since 2026-10-02, under its table.
+    # The diagram is the Verification page's since 2026-10-22, under its first heading.
     root = Path(tmp_path_factory.mktemp("site"))
-    path = site_renders.write(root, "results.html")["results.html"]
+    path = site_renders.write(root, VERIFICATION_PAGE)[VERIFICATION_PAGE]
     with sync_api.sync_playwright() as driver:
         try:
             browser = driver.chromium.launch(executable_path=os.environ.get(BROWSER_OVERRIDE))
@@ -93,28 +94,28 @@ def results_page(tmp_path_factory: pytest.TempPathFactory) -> Iterator[Any]:
 
 
 @pytest.fixture(scope="module")
-def diagrams(results_page: Any) -> dict[int, dict[str, Any]]:
-    """The overview's one ladder diagram as laid out at each of `WIDTHS`."""
+def diagrams(verification_page: Any) -> dict[int, dict[str, Any]]:
+    """The Verification page's one ladder diagram as laid out at each of `WIDTHS`."""
     found: dict[int, dict[str, Any]] = {}
     for width in WIDTHS:
-        results_page.set_viewport_size({"width": width, "height": 900})
-        results_page.wait_for_timeout(100)
-        (found[width],) = results_page.evaluate(LADDERS)
+        verification_page.set_viewport_size({"width": width, "height": 900})
+        verification_page.wait_for_timeout(100)
+        (found[width],) = verification_page.evaluate(LADDERS)
     return found
 
 
 @pytest.fixture(scope="module")
-def widened(results_page: Any, diagrams: dict[int, dict[str, Any]]) -> dict[str, Any]:
+def widened(verification_page: Any, diagrams: dict[int, dict[str, Any]]) -> dict[str, Any]:
     """Enlarge the shared fixed-width meters by 20%, as a reader's font override can.
     The rail must grow with the meter while keeping the words clear and on two lines.
     """
     assert diagrams
-    results_page.set_viewport_size({"width": 1280, "height": 900})
-    results_page.add_style_tag(
+    verification_page.set_viewport_size({"width": 1280, "height": 900})
+    verification_page.add_style_tag(
         content=".site-significance { font-size: calc(var(--site-font-size-note) * 1.2); }"
     )
-    results_page.wait_for_timeout(100)
-    (found,) = results_page.evaluate(LADDERS)
+    verification_page.wait_for_timeout(100)
+    (found,) = verification_page.evaluate(LADDERS)
     return found
 
 

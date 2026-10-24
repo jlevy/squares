@@ -94,6 +94,29 @@ house at 303.
 
 PRs and supporting records: [\#731](https://github.com/jlevy/squares/pull/731) · [The case record at 303](packing/frontier/n-303.md) · [Retained certificate and verification limits](packing/resources/web/evand-n303-2026-10-22/README.md) · [Mathematical review of 22 October](docs/project/reviews/review-2026-10-22-daniel-728.md) · [Daniel’s registration request](https://github.com/jlevy/squares/issues/728).
 
+<a id="changelog-entry-visual-atlas-follows-the-scroll"></a>
+
+#### The Visual Atlas Follows the Scroll
+
+Significance S2: A modest refinement of the Visual Atlas and the shared choosers: the triangle follows the scroll from XL, the Show More and Show Less expander is gone, the small choosers are smaller with centred labels, a case record’s steps stand beside its count, and the reference outline is lighter. The same change brings the All collection labels, the group-chat invitation on About, the profiles directory introduction and tally spacing. It adds no mathematical result and changes no paper’s content.
+
+Scrolled from the top, the Visual Atlas opens at XL and follows the page: it zooms out
+to Small along the rows and comes to rest at its left edge, and a sideways swipe pans
+it. Both Atlas pages show all 324 cases without a Show More / Show Less expander, and
+the shared small choosers are smaller.
+
+- A case record’s previous and next steps stand at the two ends of its count’s line,
+  at one height for every case.
+- The gray reference square drawn around a smaller packing is lighter, one shade in
+  every tile and both themes, and perfect squares’ numbers are no longer bold.
+- Every compact chooser centres its capitals, and the size tabs read S, M, L and XL.
+- Collection links read “All News”, “All Results” and so on, without “View”.
+- About, the homepage’s Report a Result section and the report page again invite
+  readers to the project’s group chat; the profiles directory opens with an
+  introduction; and every tally is spaced the same way.
+
+PRs and supporting records: [\#746](https://github.com/jlevy/squares/pull/746) · [The site design record](packing/devtools/templates/paper-design.md).
+
 <a id="changelog-date-2026-10-22"></a>
 
 ### 2026-10-22

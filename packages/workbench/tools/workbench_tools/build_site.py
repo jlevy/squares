@@ -192,13 +192,13 @@ def with_nav(page: str) -> str:
 
     The bar is the site's own, rendered from its one partial by `render_overview.nav_shell`
     rather than written again here, with Learn marked as its parent and its links reaching
-    the site's root, and under it the visual section's tabs with Workbench current, so
-    this page and the film's (`visualize.html`) read as one section and every existing
-    `workbench/` link lands on its tab. Its stylesheet and kpress's theme bootstrap open
-    the head, so the reader's stored theme is on the root before anything is drawn; the
-    page's own stylesheet follows them. The bar opens the body, above `#viewport`, which
-    `assets/workbench.css` then lays out below it, and the gear's program closes the body.
-    Like the note, it is a property of the published page: `body.capture` hides it.
+    the site's root, and under it the page's breadcrumb trail; no Film/Workbench tabs, which
+    went on 2026-10-22 (paper-design.md, Videos and Workbench). Its stylesheet and kpress's
+    theme bootstrap open the head after the charset (`head_start`), so the reader's stored
+    theme is on the root before anything is drawn; the page's own stylesheet follows them.
+    The bar opens the body, above `#viewport`, which `assets/workbench.css` then lays out
+    below it, and the gear's program closes the body. Like the note, it is a property of
+    the published page: `body.capture` hides it.
     """
     shell = nav_shell(NAV_PAGE, root=NAV_ROOT)
     shell = shell._replace(head=shell.head.replace(favicon_html(), favicon_html(inline=True)))
@@ -207,13 +207,13 @@ def with_nav(page: str) -> str:
             "</header>", "</header>" + breadcrumbs_html(PAGE.path, PAGE.name, root=NAV_ROOT), 1
         )
     )
-    head = HEAD.search(page)
+    head = head_start(page)
     body = BODY.search(page)
     if head is None or body is None or "</body>" not in page:
         msg = "could not place the site's navigation bar; the page has no head or body"
         raise ValueError(msg)
     page = (
-        f"{page[: head.end()]}\n{shell.head}{page[head.end() : body.end()]}\n"
+        f"{page[:head]}\n{shell.head}{page[head : body.end()]}\n"
         f"{shell.header}{page[body.end() :]}"
     )
     return page.replace("</body>", f"{shell.script}\n</body>", 1)
@@ -236,20 +236,37 @@ CONTENT_SECURITY_POLICY = (
 POLICY_META = f'<meta http-equiv="Content-Security-Policy" content="{CONTENT_SECURITY_POLICY}">'
 HEAD = re.compile(r"<head(?:\s[^>]*)?>", re.IGNORECASE)
 BODY = re.compile(r"<body(?:\s[^>]*)?>", re.IGNORECASE)
+CHARSET = re.compile(r"\s*<meta charset=[^>]*>", re.IGNORECASE)
 
 REVISION = re.compile(r"[0-9a-f]{40}")
 
 
-def with_policy(page: str) -> str:
-    """Put the page's Content-Security-Policy first in `<head>`.
+def head_start(page: str) -> int | None:
+    """Where the build's own head tags go: after `<head>` and the charset that opens it.
 
-    A policy delivered by `<meta>` governs only what follows it, so it opens the head,
-    before the inline style and script it has to cover.
+    The HTML standard wants the encoding declared within a document's first 1024 bytes,
+    and the bar's stylesheet and theme bootstrap alone run to several thousand, so the
+    template's `<meta charset>` stays first and the policy and the bar follow it. Put
+    before it, they left it at byte 6,840 of the published page. None without a head.
     """
     head = HEAD.search(page)
     if head is None:
+        return None
+    charset = CHARSET.match(page, head.end())
+    return head.end() if charset is None else charset.end()
+
+
+def with_policy(page: str) -> str:
+    """Put the page's Content-Security-Policy first in `<head>`, after only its charset.
+
+    A policy delivered by `<meta>` governs only what follows it, so it opens the head,
+    before the inline style and script it has to cover. The charset before it loads
+    nothing for the policy to govern.
+    """
+    head = head_start(page)
+    if head is None:
         raise ValueError("could not place the page's security policy; the page has no <head>")
-    return f"{page[: head.end()]}\n{POLICY_META}{page[head.end() :]}"
+    return f"{page[:head]}\n{POLICY_META}{page[head:]}"
 
 
 def source_revision() -> str:

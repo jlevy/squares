@@ -6,6 +6,39 @@ softschema:
   status: enforced
 repository: https://github.com/jlevy/squares
 entries:
+  - id: visual-atlas-follows-the-scroll
+    date: '2026-10-23'
+    title: The Visual Atlas Follows the Scroll
+    significance:
+      score: 2
+      rationale: >-
+        A modest refinement of the Visual Atlas and the shared choosers: the triangle follows
+        the scroll from XL, the Show More and Show Less expander is gone, the small choosers
+        are smaller with centred labels, a case record’s steps stand beside its count, and
+        the reference outline is lighter. The same change brings the All collection labels,
+        the group-chat invitation on About, the profiles directory introduction and tally
+        spacing. It adds no mathematical result and changes no paper’s content.
+    pull_requests: [746]
+    categories: [site]
+    topics: [project]
+    summary: |-
+      Scrolled from the top, the Visual Atlas opens at XL and follows the page: it zooms out
+      to Small along the rows and comes to rest at its left edge, and a sideways swipe pans
+      it. Both Atlas pages show all 324 cases without a Show More / Show Less expander, and
+      the shared small choosers are smaller.
+    details: |-
+      - A case record’s previous and next steps stand at the two ends of its count’s line,
+        at one height for every case.
+      - The gray reference square drawn around a smaller packing is lighter, one shade in
+        every tile and both themes, and perfect squares’ numbers are no longer bold.
+      - Every compact chooser centres its capitals, and the size tabs read S, M, L and XL.
+      - Collection links read “All News”, “All Results” and so on, without “View”.
+      - About, the homepage’s Report a Result section and the report page again invite
+        readers to the project’s group chat; the profiles directory opens with an
+        introduction; and every tally is spaced the same way.
+    references:
+      - label: The site design record
+        target: packing/devtools/templates/paper-design.md
   - id: daniel-three-hundred-three-adopted
     date: '2026-10-23'
     title: Daniel’s Smaller Packing of 303 Squares Adopted
@@ -2438,6 +2471,21 @@ entries:
       - label: Revised verification and confirmation ladder
         target: https://github.com/jlevy/squares/pull/262
 deliveries:
+- number: 764
+  title: 'fix(site): pan the Atlas by hand at the end; title the homepage The Squares Project'
+  merged_at: '2026-10-24T02:12:47Z'
+  base_ref: main
+  merge_commit: da117ad0b8e17164a8296f2fc4d30646446660ac
+- number: 760
+  title: 'test(site): bring main''s integration site tests to the 22 October design'
+  merged_at: '2026-10-24T01:02:21Z'
+  base_ref: main
+  merge_commit: 74f0edb9bf2cadb10dc2ea2fab1b876e75aa1176
+- number: 746
+  title: 'feat(site): atlas follows the scroll; case steps beside the count; drop Show More/Less; smaller choosers'
+  merged_at: '2026-10-23T17:56:05Z'
+  base_ref: main
+  merge_commit: cc91ee1b81cd590fc9318b2ec6e594edfc8095fc
 - number: 731
   title: 'records(#728): Evan Daniel''s s(303) as T-230, reviewed, adopted at 303 and regularized'
   merged_at: '2026-10-23T03:21:15Z'
@@ -3168,6 +3216,9 @@ stacks:
   evidence: https://github.com/jlevy/squares/pull/518
 coverage:
   pull_requests:
+  - 764
+  - 760
+  - 746
   - 731
   - 725
   - 578
@@ -3403,6 +3454,12 @@ coverage:
     reason: 'S2: Registers Daniel’s regularized views at 204, 227, 229 and 260 as T-225 at V0/C0 with
       their replay, records the #668, #678 and #702 replies, and carries T-196’s and T-223’s News.
       It confirms and adopts nothing; T-225’s review and adoption follow in a later PR.'
+  - pull_request: 760
+    reason: 'S1: Test maintenance: brings three of main’s integration site test files to the 22 October
+      design and corrects two sentences of the design record. No reader-visible change.'
+  - pull_request: 764
+    reason: 'S1: A fix to a just-shipped interaction and a page title: the following Atlas pans by hand
+      again at the end of its journey, and the homepage is titled The Squares Project. No new capability.'
 frozen_entries:
 - id: october-fourteen-reviewed-packing-adoptions
   date: '2026-10-15'
