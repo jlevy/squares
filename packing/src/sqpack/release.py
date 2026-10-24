@@ -8877,8 +8877,12 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "After the merge of main 3480b5fd3 (#792), which cut the explainer at v0.4.27, "
             "at link revision 180587e4 with that main's nine candidate inputs swapped in: "
             "twice from this tree and once swapped, 69 files each, all byte-identical "
-            "across the three, by the same browser; both sides count 242 results. Retain "
-            "v0.4.27, v0.1.11, v0.1.4 and v0.2.7."
+            "across the three, by the same browser; both sides count 242 results. After the "
+            "merge of main 2ed0ea740 (#793, #796, #795), at link revision 5adbe808 with "
+            "that main's nine candidate inputs swapped in: twice from this tree and once "
+            "swapped, 69 files each, all byte-identical across the three, by the same "
+            "browser; both sides count 242 results. Retain v0.4.27, v0.1.11, v0.1.4 and "
+            "v0.2.7."
         ),
     ),
 )
