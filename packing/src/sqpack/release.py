@@ -799,7 +799,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "2a29cf8ae7aeed76df542db37e7575e85ea27f88"
+DATA_REVISION = "d45eda7fbcc1d0e72e77b35b1730fec8f80b4874"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -2742,8 +2742,12 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "with main's version of each of the 16 files the branch modifies swapped in, "
             "release.py and tests aside (69 files each), the three write every file "
             "byte-identical, and the explainer differs only in counting 236 results "
-            "against main's 231, so it takes v0.4.23 over main's v0.4.22. No PDF was "
-            "printed; each prints from that HTML. Retain v0.1.11, v0.1.4 and v0.2.7."
+            "against main's 231, so it takes v0.4.23 over main's v0.4.22. Measured "
+            "again at 6b739f337, after review A's wording and credit fixes to T-234 to "
+            "T-238 and their keys: from that tree, and with d8d5c6774's register, "
+            "bibliography and credit manifest swapped in, all four papers write their 69 "
+            "files byte-identical, so the explainer keeps v0.4.23. No PDF was printed; "
+            "each prints from that HTML. Retain v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
     ReleaseNoPublicChange(
