@@ -637,7 +637,9 @@ def test_retained_outside_horizon_packet_has_twenty_complete_source_reports(
     # 364, reported on 13 October, issue 607's precision refinement at 342, reported on 14
     # October, and Couzo's 4e4c8ce certificate at 372, of 15 October. The rows at 369, 375
     # and 376 are above Göbel's classical construction there, an earlier report by the
-    # owner's answer of 23 October 2026 (#613), so they hold no count. Two are current.
+    # owner's answer of 23 October 2026 (#613), so they hold no count. Since 24 October
+    # Polkovskyi's f1ceee4 row supersedes the one at 335, whose poses pack at their print
+    # with the near-axis angles read as 0 (think-rx26). One is current.
     superseded = {row["n"]: row["superseded_by"] for row in own if "superseded_by" in row}
     above = {
         row["n"]: row["construction"]
@@ -653,6 +655,7 @@ def test_retained_outside_horizon_packet_has_twenty_complete_source_reports(
         364: "evand-compositions-2026-10-13",
         342: "couzo-certificates-2026-10-14",
         372: "couzo-index-2026-10-15",
+        335: "mishapolk-issue732-f1ceee4-2026-10-23",
     }
     assert all(
         row["disposition"]
