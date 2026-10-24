@@ -3158,7 +3158,7 @@ sources:
     - 322
     - 323
     - 324
-  reviewed: '2026-10-06'
+  reviewed: '2026-10-24'
   source_date: '2026-09-29'
   disposition: current-report
   replay_disposition: case-specific
@@ -3179,7 +3179,9 @@ sources:
     union of the cited evidence's. A paper rather than a repository; it is here because the
     register cites it. Added on 2026-10-23, when check_source_coverage began to require a
     coverage source for every source dated from 22 August 2026 that a registered result or its
-    evidence cites (think-g6d5).
+    evidence cites (think-g6d5). Read again on 2026-10-24 (think-mdfr): the abstract page's
+    submission history and the arXiv API both list only v1, submitted 2026-09-29T12:44:05Z, so
+    there is no later version.
 - id: chelokot-nagamochi-counterexample-2026-09-05
   title: 'chelokot''s counterexample to Nagamochi''s Lemma 1 and Lean proof of s(k^2 - 2) = k'
   role: source-repository
@@ -3293,7 +3295,7 @@ sources:
     - 105
     - 110
     - 131
-  reviewed: '2026-10-18'
+  reviewed: '2026-10-24'
   source_date: '2026-07-29'
   disposition: superseded-covered
   replay_disposition: public-certificate-missing
@@ -3321,6 +3323,9 @@ sources:
     2026-10-17 (the intake pass, think-e2sz): the page and data/results.json are still byte-identical to
     the retained copies, so nothing changed. Read again on 2026-10-18 (think-xmxb): both files remain byte-identical;
     campaign/issue-intake/intake-20261018/manual-source-receipt.json retains the measured source digests.
+    Read again on 2026-10-24 (think-mdfr): the page, still "Release 1 · 29 July 2026" with
+    datePublished 2026-07-29, and data/results.json are byte-identical to the retained copies
+    (SHA-256 4cc4d80d... and dd7c1c62...), so there is no later release.
 
     '
 - id: schadt-n29-2025
@@ -3403,7 +3408,7 @@ sources:
   scope:
     n_values:
     - 153
-  reviewed: '2026-10-18'
+  reviewed: '2026-10-24'
   source_date: '2026-10-07'
   disposition: current-report
   replay_disposition: case-specific
@@ -3438,7 +3443,10 @@ sources:
     (the intake pass, think-e2sz): the same edit, the same last comment, and the issue still closed
     with only its intake label, so nothing changed. Read again on 2026-10-18 (think-xmxb): same
     edit and final comment, still closed; the read receipt is in
-    campaign/issue-intake/intake-20261018/manual-source-receipt.json.'
+    campaign/issue-intake/intake-20261018/manual-source-receipt.json. Read again on 2026-10-24
+    (think-mdfr): the comment still carries its 2026-10-07T18:33:04Z edit, issue 401 is still
+    closed with its six comments, the last of 2026-10-07T22:54:51Z, and its only events since
+    are other issues referencing it, so nothing changed.'
 - id: squish-update-2026-10-07
   title: 'SQUISH update: seven additional and five tighter rational packings'
   role: source-repository

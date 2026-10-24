@@ -42430,7 +42430,15 @@ evidence:
       (RF-1). The two maintained routes, the sqpack rational witness verifier and the
       independent rational corner checker, share certificate parsing, half-angle conversion,
       Fraction arithmetic and the separating-axis method. No two independent methods, human
-      oversight or optimality is claimed.
+      oversight or optimality is claimed. The author's answer of 24 October 2026 on the issue
+      (issuecomment-6380747582), retained in the packet's declaration, adds two statements of
+      his own: he made the 227 CT105 submission himself, seeded from the source's retained
+      witness cdd08485, and he calls sqpack/verify.py's verify_packing with bucket=True on
+      exact corners in the closed box, which counts 58 boundary corner coordinates at 229 and
+      none at 227, with no touching pair. The packet's measure/answers-2026-10-24.json holds
+      both to the retained files: the digests, the witness, which is de Winter's packing
+      7.26e-5 below T-196 and not his certificate, and the same call's counts. It decides
+      nothing about the bound.
   - id: E-couzo-675-certificate-report
     claim: upper-bound
     scope:

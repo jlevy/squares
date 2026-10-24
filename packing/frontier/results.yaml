@@ -31072,9 +31072,10 @@ results:
       began at Mykhailo Polkovskyi's T-186 packing, his refinement of Daniil Ostashev's as
       PingYou Ltd refined it) and 260 (#678, T-223, his arrangement from a search seeded with Evan
       Daniel's exact-form certificate of Joost de Winter's #668 packing); Joost de Winter's
-      at 227 (#668, T-196) as refined in Francisco Couzo's #672 report (T-227, which the
-      source's manifest credits to Couzo, retaining de Winter's seed credit, from a CT105
-      web submission that names no submitter); and Evan Daniel's own at 229 (#674, T-199,
+      at 227 (#668, T-196) as refined in Francisco Couzo's #672 report (T-227, credited by the
+      source's manifest to Couzo after de Winter, from a CT105 web submission he made
+      himself, by his answer of 24 October 2026); and Evan Daniel's
+      own at 229 (#674, T-199,
       from
       Couzo's #672 packing, which refines de Winter's).
 
@@ -31553,11 +31554,12 @@ results:
 
       Credit Francisco Couzo (https://github.com/franciscouzo/square-packing) with
       refinements of Joost de Winter's #668 packings (T-196), as the author's comment of 17
-      October says: at 227 a CT105 web submission (method fq) seeded from de Winter's #668
-      certificate by way of Evan Daniel's exact form of it, which the source's manifest
-      credits to Couzo, retaining de Winter's seed credit, and whose provenance names no
-      submitter; and at 229 an slp refinement (search job 106640) of de Winter's #668
-      certificate.
+      October says: at 227 a CT105 web submission (method fq), which the source's manifest
+      credits to Couzo, retaining de Winter's seed credit, and which he made himself, by his
+      answer of 24 October 2026, seeded from de Winter's #668 certificate by way of Evan
+      Daniel's exact form of it and a witness the source first published with this report,
+      de Winter's packing 7.26e-5 below T-196, measured in the #672 packet; and at 229 an
+      slp refinement (search job 106640) of de Winter's #668 certificate.
     scope:
       n_values: [227, 229]
     verification: V3
@@ -31587,8 +31589,9 @@ results:
         of: T-196
         by: '[Couzo issue 672 2026-10-17]'
         method: >-
-          fq refinement, a CT105 web submission (f0ca7a65) seeded from de Winter's #668
-          certificate by way of Evan Daniel's exact form
+          fq refinement, Couzo's own CT105 web submission (f0ca7a65), seeded from de
+          Winter's #668 certificate by way of Evan Daniel's exact form and an intermediate
+          witness
         side: solved
         identity:
           basis: measured
@@ -31621,6 +31624,7 @@ results:
       - packing/resources/web/couzo-issue672-2026-10-17/source/certificates/n229.cert
       - packing/resources/web/couzo-issue672-2026-10-17/receipts/exact-certification.json.xz
       - packing/resources/web/couzo-issue672-2026-10-17/measure/identity.json
+      - packing/resources/web/couzo-issue672-2026-10-17/measure/answers-2026-10-24.json
       - packing/resources/web/evand-regularized-2026-10-20/measure/identity.json
       - packing/campaign/issue-intake/upper-bounds-20261018/README.md
       - packing/devtools/upper_bound_reports.py
@@ -31693,6 +31697,20 @@ results:
       (docs/project/reviews/review-2026-10-22-couzo-670-672-675.md) and the replay it
       reproduced (E-couzo-672-exact-feasibility), with the review's own checker
       (E-couzo-672-review-exact-feasibility).
+
+      The author's answers of 24 October 2026 on #672 (issuecomment-6380747582), to the
+      review's two questions, are read in with think-mdfr and measured in the packet
+      (measure/answers-2026-10-24.json). He made the 227 CT105 submission himself, so the
+      credit stands as the manifest gives it. The witness he names as its seed, retained from
+      the pin, is not de Winter's certificate, as the comment calls it, but de Winter's
+      packing first published with this report: one to one with T-196's under a reflection,
+      no square beyond a tenth, 7.26e-5 below T-196. This entry's 227 is one to one with it
+      under the identity, 9.84e-5 below.
+
+      His call of sqpack/verify.py, verify_packing(..., bucket=True) on exact corners in the
+      closed box, counts the 58 boundary corner coordinates he reports at 229 and none at
+      227, with no touching pair at either, as the replay's least wall clearances of 0 and
+      1e-15 say.
     next_rung: >-
       None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
       reviewer and a retained human oversight record; one AI review, of 22 October, is

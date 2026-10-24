@@ -7620,7 +7620,8 @@ issues:
     title: Import wand125's s(31) ≥ 2391/400 (mixed_n31_L59775)
     author: jlevy
     opened: '2026-10-12'
-    state: open
+    state: closed
+    closed: '2026-10-24'
     kind: other
     intake: true
     triage: done
@@ -7654,6 +7655,22 @@ issues:
       kind: follow-up
       reported:
       - result: s31-mixed-fine-net
+    - url: https://github.com/jlevy/squares/issues/534#issuecomment-6382429358
+      date: '2026-10-24'
+      by: jlevy
+      kind: final
+      reported:
+      - result: s31-mixed-fine-net
+        id: T-232
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: s31-mixed-fine-net
+        id: E-wand125-fine-net-n31-59775-report
+        status: reviewed
+      - result: s31-mixed-fine-net
+        id: E-wand125-fine-net-n31-59775-sqverify-fast-replay
+        status: confirmed
     close_when: >-
       The result is registered on main and its replay is recorded, or priced and queued in
       #532's lane.
@@ -7665,6 +7682,17 @@ issues:
       with a visible note, to say they were priced at 3.3 to 6.1 CPU-hours from the T-142 and
       T-143 smoke runs and that none has run yet, so the reply as it stands states nothing
       outdated (PR #625's review, A1).
+
+      The final comment, posted at 2026-10-24T09:16:27Z (issuecomment-6382429358) after #787
+      merged (6808d293a) and its Pages deployment was checked (run 40080362391, its deploy and
+      verify-deployment jobs included; result/t-232.html and cases/31.html read against it),
+      is check_requests --draft 534 from main 6808d293a. It reported T-232 at V3/C3,
+      confirmed, and E-wand125-fine-net-n31-59775-sqverify-fast-replay confirmed, each
+      re-verified with sqverify-fast, a checker that shares components with the generator,
+      and that nothing asked for is queued. Its record also lists
+      E-wand125-fine-net-n31-59775-report, the report entry beside T-232, which the draft
+      leaves out by design, as the record does for such entries. The issue was closed with
+      it at 09:16:28Z, as completed.
   - number: 535
     title: Take Evan Daniel's Lean proof of s(12) ≥ 15680/3951 (S12HLower) as evidence for T-049
     author: jlevy
@@ -7701,7 +7729,8 @@ issues:
     title: Take wand125's Lean proof of s(59) = 8 (k2m5_n59_L8) as evidence for T-066
     author: jlevy
     opened: '2026-10-12'
-    state: open
+    state: closed
+    closed: '2026-10-24'
     kind: other
     intake: true
     triage: done
@@ -7740,7 +7769,24 @@ issues:
       by: jlevy
       kind: follow-up
       reported: []
+    - url: https://github.com/jlevy/squares/issues/536#issuecomment-6382429802
+      date: '2026-10-24'
+      by: jlevy
+      kind: final
+      reported: []
     close_when: The packet and the evidence entry are on main and the rebuild has a recorded price.
+    notes: >-
+      The final comment, posted at 2026-10-24T09:16:29Z (issuecomment-6382429802) after #787
+      merged (6808d293a) and its Pages deployment was checked (run 40080362391, its deploy and
+      verify-deployment jobs included; result/t-235.html and cases/59.html read against it),
+      was written by hand from main's record. It said that #750 did each part of the ask: the
+      packet wand125-n59-lean-kernel-2026-10-11 retains lean/ at f9a77b7 with Evan Daniel's
+      library closure and its README reads the statement binding; the proof is registered as
+      T-235, a formalization of its own, with E-n059-wand125-lean-kernel-report, rather than
+      as evidence on T-066, whose claim names T-235, at V0/C0 until it is built here, its
+      review tracked on #783; and the kernel rebuild is priced at about 862 CPU-hours and
+      held above the owner's 40 CPU-hour item cap. Nothing it asked for is queued, and the
+      issue was closed with it at 09:16:30Z, as completed.
   - number: 537
     title: Take Valid7 in the Lean kernel (evand/square-packing 060c1a1) as evidence for T-064
     author: jlevy
@@ -10078,6 +10124,35 @@ issues:
         verification: V2
         confirmation: C1
         status: reviewed
+    - url: https://github.com/jlevy/squares/issues/603#issuecomment-6383665237
+      date: '2026-10-24'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: excess-theorem
+        id: T-163
+        verification: V3
+        confirmation: C1
+        status: reviewed
+      - result: excess-theorem
+        id: E-fang-excess-pieces-exact-replay
+        status: confirmed
+      - result: note-v08-lean-2026-10-18
+        id: T-163
+        verification: V3
+        confirmation: C1
+        status: reviewed
+      - result: note-v08-lean-2026-10-18
+        id: E-fang-excess-lean-report
+        status: recorded
+      - result: note-v09-doi-2026-10-19
+        id: T-163
+        verification: V3
+        confirmation: C1
+        status: reviewed
+      - result: note-v09-doi-2026-10-19
+        id: E-fang-excess-note-proof
+        status: recorded
     close_when: The import and its disposition are on main, the owner has posted the resulting state with
       the entry's id, and the review and replay that would raise its rungs are owned by its bead; optimality
       is outside this request.
@@ -10085,6 +10160,19 @@ issues:
       Fang's comment of 2026-10-24T01:23:05Z (issuecomment-6378113855) answers the owner's
       question of 19 October with his X handle: it is social and carries no result content, so
       nothing is read into the record from it.
+
+      The follow-up posted at 2026-10-24T11:29:46Z (issuecomment-6383665237), after #781 merged
+      (830dfb470) and its Pages deployment was checked (run 40089385626, its deploy and
+      verify-deployment jobs included; result/t-163.html read against it), reported T-163 at
+      V3/C1, reviewed: the note, draft v0.9 (DOI 10.5281/zenodo.23463481), retained and
+      recorded as a published proof (E-fang-excess-note-proof), and its 18 pieces replayed here
+      on the 14 October review's exact checker, all strict-valid, the least squeeze 0.000690...
+      at 308 (E-fang-excess-pieces-exact-replay); the Lean proof at squarepack-lean 947bdae
+      retained and not built (E-fang-excess-lean-report); that the note's theorems match
+      T-163's statements; the gap between jExc and F(n) from n = 52; and two editorial points
+      for the author. It said C3 waits on a build of Evan Daniel's Lean proof (T-236, about
+      1.5 to 3 CPU-hours) and C4 on a stage 4 review of the note's proofs with that build and
+      a human oversight record, and that nothing is needed from him. The issue stays open.
   - number: 643
     title: 's(k² − 4) = k for every k ≥ 8 in the Lean kernel: ValidTilt9 (Hosono, after Daniel): tracking
       an unreported result'
@@ -12767,8 +12855,10 @@ issues:
       October 2026: the couzo-issue672-2026-10-17 packet retains the 44 certificates beyond the
       corpus, whose filtered exact replay decided each on two routes with every control refused,
       and the backlog ledger records each in report order as a beyond-horizon row, superseded on
-      entry by a later report.
-    read_through: '2026-10-17T22:16:17Z'
+      entry by a later report. The author's answers of 24 October 2026 say he made the CT105
+      submission behind the 227 certificate himself, and how the source calls
+      sqpack/verify.py.
+    read_through: '2026-10-24T06:10:57Z'
     results:
     - key: n227
       claim: s(227) <= 15.563625652343, rounded upward; exact certificate side is authoritative.
@@ -13271,13 +13361,18 @@ issues:
         a web or browser computation, or another person whose credit should be kept?
       changes: credit
       asked: https://github.com/jlevy/squares/issues/672#issuecomment-6354654824
-      state: awaiting
+      state: answered
+      answer: https://github.com/jlevy/squares/issues/672#issuecomment-6380747582
       note: >-
         Question 1 of the follow-up of 23 October, from RF-3 of the review of 22 October:
         the answer bears on the credit of T-227, of T-225's view and of the house at 227,
         which reach the packing through T-227. Its question 2, how sqpack/verify.py was
         called and whether the strict false at 229 reflects only squares touching the
-        walls, would change nothing in the record, so it is not recorded here.
+        walls, would change nothing in the record, so it is not recorded here. Answered on
+        24 October 2026 at 06:10:57Z: the author made the submission himself, on CT105, the
+        server behind his search web app, which only he runs, so the credit is his, after
+        de Winter, as the manifest says. The answer is read into T-227's and T-225's credit
+        and the #672 packet (think-mdfr); the credit line is unchanged.
     beads:
     - think-2vjc
     answer_bead: think-2vjc
@@ -13512,6 +13607,44 @@ issues:
       reported T-227 at V3/C3, confirmed, independently re-implemented, raised by the review to
       S3 for 227. It asked who made the CT105 web submission behind the 227 certificate and how
       sqpack/verify.py was called.
+
+      The author's comment of 2026-10-24T06:10:57Z (issuecomment-6380747582), retained in the
+      packet's declaration, answers both questions; it says Claude Code assisted with it, and
+      it reports no new result. Question 1: he made the CT105 submission himself, CT105 being
+      the server behind his search web app, which only he runs, so no one else contributed to
+      the computation and the credit is his, after de Winter (#668), as the manifest says. The
+      task, he says, was seeded from his retained 227 witness cdd08485..., "which is de
+      Winter's #668 certificate", and his record lists Evan Daniel's alt/n-227.cert.gz as that
+      certificate's seed. Question 2: the source's verify.py is byte-identical to
+      packing/src/sqpack/verify.py at 37e6757 (which main still holds, the same Git blob); it
+      reads each certificate's lines as exact rationals, builds each square's four corners
+      from c = (1 - t^2)/(1 + t^2) and s = 2t/(1 + t^2), and calls verify_packing(corners, S,
+      sign, bucket=True) in the closed box; the strict verdict, from
+      verify_bound_certificate.py --strict, is false at 229 only because squares touch the
+      walls (58 corner coordinates on the boundary, no touching pair) and true at 227. The
+      records change of think-mdfr retains the witness cdd08485 from the same pin and
+      measures the answers (measure/answers-2026-10-24.json): every digest prefix the comment
+      prints is a manifest's SHA-256, and the same call counts 58 boundary corner coordinates
+      at 229 and none at 227, with no touching pair at either. The witness is not de Winter's
+      certificate (7d386887...), and was first committed at af8cb795 with the issue's
+      certificates: it is de Winter's packing, one to one with T-196's under a reflection, no
+      square beyond a tenth (82 beyond 1e-3, at most 0.0887), at a side 7.26e-5 below
+      T-196's and 7.26e-5 below Daniel's exact form, and #672's 227 is one to one with it
+      under the identity (91 beyond 1e-3, at most 0.0793), 9.84e-5 below. The per-count JSON
+      names de Winter's certificate as the witness's source and Daniel's alt/n-227.cert.gz as
+      its seed, which the 22 October review measured as Daniel's exact form of de Winter's
+      certificate. So T-227's credit, Couzo after de Winter, Daniel, Levy, stands, and its
+      claim, T-225's and the packet README now say the submission was his and name the
+      intermediate witness. The source's certificates/parents/manifest.json at af8cb795,
+      pinned in the packet since review A5 of #790, credits the witness to Joost de Winter
+      and notes "Prior locally retained witness; seed/construction provenance is preserved
+      without asserting an independently established browser trajectory", so the source
+      keeps no record of how it was made; the final comment says so and asks, as an
+      informational question that holds nothing open, whether he recalls. The call itself
+      is in the source, exact_finish.py lines 68 to 70 at 1c17153, which the packet README
+      cites. Nothing the author asked for is queued
+      and no question awaits him, so the final comment, owed after that change merges and its
+      deploy is verified, closes the issue.
   - number: 673
     title: 'Credit correction request: s(146) and s(308) found_by'
     author: evand
@@ -15056,7 +15189,9 @@ issues:
       V3/C3 since the stage 4 review of 20 October; the case at 204 adopted it as its house
       best packing that day, and the case at 260 on 21 October, from T-196, which #704 had
       adopted there on 20 October. The 83 beyond the corpus are dated beyond-horizon rows.
-    read_through: '2026-10-21T23:26:00Z'
+      The author's comment of 24 October 2026 reports the promised source correction complete,
+      which the record checks against the packet.
+    read_through: '2026-10-24T06:11:30Z'
     results:
     - key: n204
       claim: s(204) <= 14.808642841982, rounded upward; exact certificate side is authoritative.
@@ -15751,7 +15886,7 @@ issues:
     asks:
     - what: Review the promised source-pin, hash-kind and certificate-credit correction when the author
         links it (https://github.com/jlevy/squares/issues/678#issuecomment-6269517369).
-      state: queued
+      state: done
       bead: think-xu4d
       note: >-
         The author's comment identifies the exact n260 seed bytes and promises a follow-up that
@@ -15764,7 +15899,25 @@ issues:
         14a9af8, with the gzip and decompressed hashes our correction confirmed; he credits the
         construction to Joost de Winter and the exact-form certificate to Evan Daniel, as T-223 does.
         The ask stays queued until a commit completes the correction. Coordinate the follow-up with
-        think-pvav for issue 675.
+        think-pvav for issue 675. Done on 24 October 2026 (think-mdfr): the author's comment of
+        06:11:30Z (https://github.com/jlevy/squares/issues/678#issuecomment-6380752551) links
+        efef7d1, pushed at 2026-10-23T23:38:42Z, and 43f666c, 73eac5b and 1c17153, pushed
+        together at 06:10:44Z, and each part was read at 1c17153 against this record. bound_sources.json pins evand/square-packing at
+        7982d7a in place of 0f37f49 (since efef7d1, the same blob at 1c17153); the two per-file
+        pins still at 0f37f49, tt2_n146_regularized.cert and comp2_n375.cert, are there the same
+        Git blobs as at the pins of the evand-n146-2026-10-14 and evand-compositions-2026-10-13
+        packets, whose manifests record the SHA-256 the source's manifest gives (3b19e89d... and
+        06438617...). Its source_hash_corrections_20261021.n260_seed names evand 14a9af8's
+        search/regularize/lists/certs/n-260.cert.gz with gzip_sha256 e90993b1... and
+        decompressed_sha256 34b203dd..., the bytes the custody receipt beside the issue body
+        holds, crediting the construction to Joost de Winter and the certificate to Evan
+        Daniel. The manifest's entries at 227, 229 and 260 label original_source_sha256 as
+        "gzip bytes" (dcfaa52b..., e613256d..., 098be6c5... at evand 1d2bb82, the same Git
+        blobs the evand-regularized-2026-10-20 packet retains from 0075967) with decompressed
+        digests that match the retained files; the count of 49 labelled fields is the
+        author's. Its 227 and 260 entries are T-225's certificates, credited "Evan Daniel;
+        start: Francisco Couzo" with Couzo's #672 and #678 packings and de Winter's #668
+        construction credited, as T-225 credits them. The correction changes no field here.
     - what: Review the author's n260 float-conversion, search-chain, packing-identity and analytic-optimum
         assertions (https://github.com/jlevy/squares/issues/678#issuecomment-6269517369) separately from
         seed custody.
@@ -16291,6 +16444,18 @@ issues:
       beyond-horizon rows, which the reply said. It corrects the follow-up of 03:08Z
       (issuecomment-6331709679), whose statement that eight rows were current is marked
       outdated. The issue stays open.
+
+      The author's comment of 2026-10-24T06:11:30Z (issuecomment-6380752551) says the source
+      correction promised on 19 October is complete and public; it says Claude Code assisted
+      with it, and it reports no new result. The records change of think-mdfr read each part
+      at 1c17153 against this record and the packets, as ask 1's note says: the evand pin at
+      7982d7a, the two per-file pins at 0f37f49 the bytes this record retains, the n260 seed's
+      path and both digests the custody receipt holds, the gzip-bytes labels at 227, 229 and
+      260 matching the retained gzip and text bytes, and T-225's certificates at 227 and 260
+      credited as T-225 credits them. Ask 1 is done, and no field changes. Nothing the author
+      asked for is queued and no question awaits him, so the final comment, owed after that
+      change merges and its deploy is verified, closes the issue; the held full-kernel replay
+      (think-fpnd) is the record's own work and holds nothing open.
   - number: 680
     title: 's(183) ≤ 13.999580178737: registration request (first 183 below the grid)'
     author: evand
@@ -17717,7 +17882,7 @@ issues:
       resolution and restate them (the owner's answer of 23 October, think-fwa9); 34 restate earlier
       publications; the 1112 above 1024
       wait on the owner.
-    read_through: '2026-10-23T22:16:52Z'
+    read_through: '2026-10-24T06:12:05Z'
     results:
     - key: n328
       claim: s(328) <= 18.614368938513, rounded upward; exact certificate side is authoritative.
@@ -20047,6 +20212,28 @@ issues:
       1568 as refinements of de Winter's packings and 1061, 1413 and 1489 as the author's
       assemblies, worded as he asks, and cites this comment for that credit until his manifest
       restores it.
+
+      The author's comment of 2026-10-24T06:12:05Z (issuecomment-6380757758), read into this
+      entry by think-mdfr, says the restoration promised there is done, in 43f666c and
+      73eac5b, pushed with 1c17153 at 06:10:44Z; it says Claude Code assisted with it, and it
+      reports no new result. He says 662 assembly pieces in certificates/best/manifest.json
+      now carry the construction credits of the source certificates they were built from, and
+      that the other 208 are credited to their only author. At 1061, 1413 and 1489 his index's
+      current rows are Mykhailo Polkovskyi's certificates at 17cc220 (#732), whose manifest
+      entries keep his staircase assemblies as the previous source. Read at 1c17153: each of
+      those three entries' previous source is credited "Francisco Couzo (assembly/refinement)",
+      and its recursive-staircase component credits "Arslanov, Mustafin and Shangitbayev
+      (2021)" and "Joost de Winter staircase/four-block constructions", as at 43f666c and
+      73eac5b; at 6b7391de no entry at those counts named either. Those are the record's
+      [Arslanov et al.] (Electron. J. Combin. 28(4), 2021) and de Winter's staircase-rectangle
+      and four-block packings ([de Winter issue 666 2026-10-17], credited after Arslanov,
+      Mustafin and Shangitbayev), so the credit he asked for on 23 October is the credit his
+      manifest now states. The count of 662 pieces is the author's. No row above 1024 is
+      recorded, so no credit line changes here; the import of those rows (think-llit) cites
+      the manifest at 1c17153 for that credit, not the comment. The follow-up of 07:02Z
+      (issuecomment-6381214428) thanked him for the restoration and said this comment would
+      be read into the record in a change of its own; the follow-up after that change merges
+      says it has been. The issue stays open while the rows above 1024 wait (think-f2io).
   - number: 719
     title: 'New packings: 122 verified upper bounds for square packing (N in [105, 1568]): registration request'
     author: Mishapolk

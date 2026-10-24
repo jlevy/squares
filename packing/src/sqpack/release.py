@@ -799,7 +799,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "2cded21a28e80cb44744e08f60cc831a2c8dae8f"
+DATA_REVISION = "cf9b53cbfdb3ec0d59239f47ae7c904df43ca0a3"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -8533,6 +8533,53 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "tree and once with that main's five files swapped in, 69 files each, all "
             "byte-identical across the three, by the same browser. No PDF was printed; each "
             "prints from that HTML. Every paper keeps its version."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "Couzo's answers of 24 October on #672, #678 and #715 (think-mdfr): T-227's "
+            "and T-225's credit sentences and T-227's notes, the request entries for "
+            "#672, #678, #715, #534 and #536, and three sources' review dates, against "
+            "main b2ea7b09c (#788): rendered at link revision ba711683 into empty site "
+            "directories, twice from this tree and once from it with main's three "
+            "candidate inputs swapped in (69 files each), "
+            "render_n11_lower_bounds_explainer with its math pass, "
+            "render_n11_optimality_review, render_n11_threshold_bound_review and "
+            "render_packing_methods write every file byte-identical across all three. "
+            "No result is registered, so the explainer's count is unchanged. Measured "
+            "again after #534's final reply record listed its report entry: "
+            "render_packing_methods at the same link revision writes all 43 files "
+            "byte-identical to that render. After review A's fixes and the merge of main "
+            "f354a34f5 (#736), at link revision 92c52f36, and after the merge of main "
+            "830dfb470 (#781) and the two TheSnakeFang reads, at link revision bb3d4913: "
+            "each time twice from this tree and once with that main's three candidate "
+            "inputs swapped in, 69 files each, all byte-identical across the three, the "
+            "explainer's math prepared by the same headless shell every time. After "
+            "#603's follow-up of 11:29:46Z was recorded, render_packing_methods at link "
+            "revision bb3d4913 writes all 43 files byte-identical to that render. No PDF "
+            "was printed; each prints from that HTML. Retain v0.4.25, v0.1.11, v0.1.4 and "
+            "v0.2.7."
         ),
     ),
 )

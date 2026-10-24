@@ -3430,8 +3430,10 @@ sources:
     credit: Couzo after de Winter, Daniel, Levy
     short_credit: Couzo after de Winter et al.
     note: 'Issue 672''s two in-corpus certificates at af8cb7959aead318c0cf5e9f873de3caa763f77a: refinements
-      of Joost de Winter''s #668 packings at 227 (a CT105 web submission seeded from his certificate by
-      way of Evan Daniel''s exact form) and 229 (an slp refinement). Retained as factual data with their
+      of Joost de Winter''s #668 packings at 227 (a CT105 web submission, which Couzo made himself by his
+      answer of 24 October 2026, seeded from de Winter''s certificate by way of Evan Daniel''s exact form
+      and an intermediate witness the source published with it) and 229 (an slp refinement). Retained as
+      factual data with their
       per-count JSON; the source''s checker, Evan Daniel''s MIT verifier as Couzo modified it with Codex,
       is pinned by digest. OpenAI Codex assistance disclosed. No optimizer, local or global claim.'
   - key: '[Couzo issue 675 2026-10-18]'
