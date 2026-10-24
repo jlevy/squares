@@ -2466,13 +2466,17 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "packing/devtools/adopt_houses.py",
             "packing/devtools/algebraic_witness_reports.py",
             "packing/devtools/build_known_best_atlas.py",
+            "packing/devtools/check_standing.py",
             "packing/devtools/default_drawings.py",
             "packing/devtools/exact_sides.py",
             "packing/devtools/regularize_evand.py",
+            "packing/devtools/regularized_drawings.py",
+            "packing/devtools/render_case_pages.py",
             "packing/devtools/render_recent_results.py",
             "packing/devtools/render_research_tables.py",
             "packing/devtools/select_houses.py",
             "packing/devtools/upper_bound_houses.py",
+            "packing/frontier/README.md",
             "packing/frontier/n-070.md",
             "packing/frontier/n-102.md",
             "packing/frontier/n-123.md",
@@ -2481,6 +2485,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "packing/frontier/n-295.md",
             "packing/frontier/results.yaml",
             "packing/frontier/source-coverage.yaml",
+            "packing/frontier/square-packing-case.schema.yaml",
             "packing/src/sqpack/cli/validate.py",
         ),
         outputs=(
@@ -2505,8 +2510,14 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "render_packing_methods write every file byte-identical across all four. "
             "Measured before at 63c12e35 against main 769e441e1 (#748), at fb0889e2 "
             "against 7335d0098 (#752), and at e0c2bf25 and 1a2a7d47 against c1115c095 "
-            "(#749), with the same outcome. No PDF was printed; each prints from that "
-            "HTML. Retain v0.4.21, v0.1.11, v0.1.4 and v0.2.7."
+            "(#749), with the same outcome. Measured again after review A of #756 "
+            "(the merge of main 0bbb0a2c4, #753 and #754; check_standing's exact order at "
+            "an algebraic house; the regularization-owed state; T-193's exact solve in the "
+            "case records and case pages; the strict readers; 295's closed form): rendered "
+            "at link revision 618cd1f4 into empty site directories, twice from this tree "
+            "at 618cd1f4 and twice from main 0bbb0a2c4's (69 files each), every file "
+            "byte-identical across all four. No PDF was printed; each prints from that "
+            "HTML. Retain v0.4.22, v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
     ReleaseNoPublicChange(
