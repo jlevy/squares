@@ -500,8 +500,11 @@ record’s statement of the rule:
   At each count the least side of the three families the Kingbird catalogue states, at
   that count or by deleting squares from a larger one, joins the start, so a rational
   side at or above it is not recorded.
-  The 15 October packet’s retained program computes it exactly to 1073, where its reach
-  ends, and a count beyond that is refused.
+  The maintained module `devtools.goebel_construction` computes it exactly at every
+  count, and proves each side final by the area bound: a member at count k packs k unit
+  squares, so its side is at least √k. A count no build proves is refused.
+  The 15 October packet’s retained program agrees with it at every count to 1073, where
+  its own reach ends, and stays the program every frozen receipt names.
   A register row above it stays listed and is marked
   ([frontier README](../frontier/README.md#source-coverage-and-freshness)). From the day
   of the answer (`intake_ledger.GOEBEL_FROM`) every reading takes it beyond 324: a start
@@ -540,8 +543,25 @@ record’s statement of the rule:
   word; think-kzme asks that, whether an issue claiming the count (743, 798, 855, 985)
   gives it a row, and about the three bounds that delete two or three squares (751, 752
   and 927), which stay held.
+  Above 1024 the walk applies the answer the same way
+  (`beyond_horizon_replay.deletion_holds`): a bound one square below the next count’s
+  certificate is settled, and one deleting two or more squares, or one an issue claims,
+  waits on think-kzme.
   A deletion from a construction no certificate file states, as 23aff0c’s from
   Friedman’s, waits with that construction (D2, think-zkxy).
+- **A recipe is a row once the maintained checker decides it** (D2 on think-f2io):
+  “decided exactly from the recipe by a checker this project maintains”.
+  A construction an index or table states with no certificate file of its own, a tiling
+  or L-border recipe on a certificate, is decided by `devtools.construction_checker`
+  from the recipe and its parent certificate.
+  The parent must be the one the index names by path and SHA-256, and must have passed
+  both routes with its six controls refused; the bound must be tS + L and the count the
+  construction’s capacity less the stated deletions, exactly.
+  Each records slice replays the parents that are not rows and writes
+  `receipts/recipe-decisions.json` (`beyond_horizon_replay recipe-decisions`), which
+  `check` derives again.
+  The checker refuses a classical parent, as Friedman’s (think-zkxy), and Kevin Fang’s
+  composites, so those stay held.
 
 Transcribe each report’s claims into the directory’s `sources.yaml`, then, from
 `packing/`, run `python -m devtools.intake_ledger gather DIR` (`--snapshot` reuses the

@@ -22,7 +22,7 @@ import pytest
 import yaml
 
 from devtools import check_source_coverage as coverage_check
-from devtools import check_standing
+from devtools import check_standing, goebel_construction
 from devtools import evand_arrangement_reports as kernel
 from devtools import evand_exact_certificates as legacy
 from devtools import upper_bound_reports as reports
@@ -1999,15 +1999,17 @@ def _unread(reader: str, n: int) -> Fraction:
     raise AssertionError(f"n = {n}: no case is read beyond the horizon ({reader})")
 
 
-def test_a_declaration_read_from_23_october_stands_beyond_324_on_goebel_s_construction() -> (
-    None
-):
+def test_a_declaration_read_from_23_october_stands_beyond_324_on_goebel_s_construction(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
     """Review A of #754, A2 (think-v022), on the owner's answer on #613 (think-8krd):
     Göbel's constructions are the baseline beyond n = 324. A declaration read on or after
     23 October 2026 compares each certificate beyond the horizon with Göbel's construction
     at its count as well as the grid, so a side above it is not the smallest. One read
-    before keeps the grid alone, as the 15 frozen claim records do; beyond 1073, where the
-    retained program gives no construction, the newer reading refuses."""
+    before keeps the grid alone, as the 15 frozen claim records do. At 1074, past the
+    retained program's largest member, the maintained module gives the construction; with
+    every build capped at that program's limit of 1100, no build proves the side final
+    there and the newer reading refuses (think-llit)."""
     above = Fraction("19.71")  # 369: Göbel's 19 + 1/2*sqrt(2) is 19.7071..., the grid 20
     row, certificate, declaration = _beyond_row(369, above, "2026-10-23")
     later = cast("dict[str, Any]", reports.claim_row(row, certificate, declaration, _unread))
@@ -2023,5 +2025,9 @@ def test_a_declaration_read_from_23_october_stands_beyond_324_on_goebel_s_constr
     below = cast("dict[str, Any]", reports.claim_row(row, certificate, declaration, _unread))
     assert (below["smallest"], below["construction"]["relation"]) == (reports.THIS, "below")
     row, certificate, declaration = _beyond_row(1074, Fraction("32.9"), "2026-10-23")
-    with pytest.raises(reports.ReportError, match="no side above 1073"):
+    far = cast("dict[str, Any]", reports.claim_row(row, certificate, declaration, _unread))
+    assert (far["smallest"], far["construction"]["relation"]) == (reports.THIS, "below")
+    assert far["construction"]["form"] == "33 + 1/2*sqrt(2)"
+    monkeypatch.setattr(goebel_construction, "MAX_BUILD", 1100)
+    with pytest.raises(reports.ReportError, match="n = 1074: no build to 1100 proves"):
         reports.claim_row(row, certificate, declaration, _unread)

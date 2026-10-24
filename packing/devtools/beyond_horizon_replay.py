@@ -5,10 +5,11 @@ source, at assurance ``reported``, once its certificates are retained and replay
 Issues #678 and #715 each had a module of their own (`devtools.couzo_678_replay`,
 `devtools.couzo_715_replay`); this one takes the same filtered decision and declares each
 report it decides as a `Release`, so a further report of the same kind is a declaration and
-not a module. `RELEASES` holds 20, each decided at or below ``LIMIT = 1024``: the seven
-issues below, #732's later release, the publication #763's index makes beside it, and 11
-publications in watched repositories that no issue reports (**Publications no issue
-reports**, `WATCHED`):
+not a module. `RELEASES` holds 20, each decided within a window of counts
+(`Release.decided_above`, `Release.decided_through`), every one of them today from the
+corpus to ``FROZEN_THROUGH = 1024``: the seven issues below, #732's later release, the
+publication #763's index makes beside it, and 11 publications in watched repositories that
+no issue reports (**Publications no issue reports**, `WATCHED`):
 
 - **#666**, Joost de Winter: 19 certificates ``square-packing-above-324/nNNNN.cert`` in
   JoostdeWinter/joostdewinter.github.io. The issue pins ``b3152f52``, which no branch
@@ -91,7 +92,8 @@ walk now names their sources. #715's re-certifications of them below the 12-plac
 restate them, by the owner's answer of 23 October (think-fwa9), so neither walk records
 them. ``check`` holds
 ``frontier/source-coverage.yaml`` to that plan, and holds every count a walk reaches beyond
-the corpus to ``LIMIT`` to one chain in report order (`chain_problems`): the start, then
+the corpus, each walk to its own reach (`Walk.reaches`), to one chain in report order
+(`chain_problems`): the start, then
 each recorded report's row, each superseded by the next, the last current or superseded by
 a report the walk does not reach. A planned current row the register shows superseded by
 such a later report holds the plan too (`coverage_problems`).
@@ -176,6 +178,21 @@ retained ledgers. The walk holds the issue's 13 recipes and its deletion bound a
 (`_HELD_763`) and the history walk's holds it records (`_HELD_IN_763`). A count in the
 corpus is the register's: no declared row holds 268 or 303 (`declared_rows`).
 
+**Above 1024.** The owner tracks every count, with no ceiling (D1, think-f2io), and a
+records slice lifts a release's window in the same pull request as the receipts it
+needs (think-llit). Its rows above 1024 are planned by the walk above 1024 it names
+(`Release.walk_above`, `walk_of`), which lists both rulings with no top. Göbel's
+construction there comes from the maintained module (`devtools.goebel_construction`), so
+a window above 1024 writes the v2 Göbel receipt (`goebel_receipt`). A recipe row is
+decided by the construction checker (`devtools.construction_checker`, D2), not the
+filtered replay: ``recipe-decisions`` replays the parents that are not rows and decides
+each recipe (`RECIPES`). An index's one-square deletion from the next count is an earlier
+report by D6, and any other deletion, or one an issue claims, waits on think-kzme
+(`deletion_holds`); the Kingbird catalogue's sides wait on N1 (`CATALOGUE`). A certificate
+the packet pins and does not retain is read from hosted shards (`Release.hosted`,
+`devtools.hosted_shards`), and the fast check reads its side and blob from the source
+history without opening one.
+
 **Earlier publications.** ``earlier`` reads clones of the watched repositories and writes
 ``receipts/earlier-publications.json`` for a release: at each of its counts, every
 certificate and index bound published before the release's row, strictly below the record's
@@ -195,8 +212,10 @@ From ``packing/``, with the project interpreter::
         --start-coverage CHECKOUT/packing/frontier/source-coverage.yaml \
         --clone franciscouzo/square-packing=CLONE evand/square-packing=CLONE ...
     python -m devtools.beyond_horizon_replay history-sources --read-on DATE
-    python -m devtools.beyond_horizon_replay source-history --issue 732 --clone CLONE
-    python -m devtools.beyond_horizon_replay release-sources --issue 732 --read-on DATE
+    python -m devtools.beyond_horizon_replay source-history --issue 732 --clone CLONE [--walk W]
+    python -m devtools.beyond_horizon_replay release-sources --issue 732 --read-on DATE \
+        [--walk W]
+    python -m devtools.beyond_horizon_replay recipe-decisions --issue 715 [--workers 2]
     python -m devtools.beyond_horizon_replay later-commits --issue LABEL --clone CLONE
     python -m devtools.beyond_horizon_replay decide-later --issue LABEL
     python -m devtools.beyond_horizon_replay pose-identity --issue LABEL
@@ -235,21 +254,26 @@ from typing import Any, NamedTuple, cast
 
 from strif import atomic_output_file
 
-from devtools import acquire_source
+from devtools import acquire_source, goebel_construction, hosted_shards
+from devtools import construction_checker as checker
 from devtools import couzo_678_replay as base
 from devtools import couzo_715_replay as couzo_715
 from devtools import evand_arrangement_reports as kernel
 from devtools import evand_exact_certificates as legacy
 from devtools import upper_bound_reports as reports
-from devtools.retained_data import read_retained_bytes, read_retained_text
+from devtools.retained_data import read_retained_bytes, read_retained_text, retained_exists
 from sqpack.retained_json import dumps as retained_dumps
 from sqpack.yamlio import safe_load
 
 ROOT = Path(__file__).resolve().parents[1]
 REPO = ROOT.parent
 WEB = ROOT / "resources/web"
-#: The largest count this module decides; above it every row waits on the owner (D1).
-LIMIT = 1024
+#: The reach of the walks and releases frozen at 1024: the five walks and 20 releases on
+#: ``main`` before the work above 1024 (think-llit), which keep it. It is no longer a
+#: ceiling: a release decides the rows in its own window (`Release.decided_above`,
+#: `Release.decided_through`) and a walk reaches the counts in its own (`Walk.reaches`), so
+#: a release whose window a records slice lifts decides its rows above 1024 (D1, think-f2io).
+FROZEN_THROUGH = 1024
 PLACES = 12
 ISSUE = Path("acquisition/issue.json")
 RECORD = Path("acquisition/beyond-horizon-rows.json")
@@ -265,6 +289,13 @@ FILTERED_FORMAT = "beyond-horizon-filtered-exact-replay-v1"
 FIRST_COMMITS_FORMAT = "beyond-horizon-first-commits-v1"
 EXHAUSTIVE_FORMAT = "beyond-horizon-exhaustive-sample-v1"
 GOEBEL_FORMAT = "beyond-horizon-goebel-comparison-v1"
+#: The Göbel receipt of a window above 1024, from the maintained module (`goebel_receipt`).
+GOEBEL_FORMAT_V2 = "beyond-horizon-goebel-comparison-v2"
+GOEBEL_MODULE = "packing/devtools/goebel_construction.py"
+#: Each recipe row's decision by the construction checker, and the recipe parents the
+#: release replays that are not rows (`write_recipe_decisions`).
+RECIPES = Path("receipts/recipe-decisions.json")
+RECIPES_FORMAT = "beyond-horizon-recipe-decisions-v1"
 EARLIER = Path("receipts/earlier-publications.json")
 EARLIER_FORMAT = "beyond-horizon-earlier-publications-v1"
 INTAKE = ROOT / "campaign/issue-intake"
@@ -300,6 +331,11 @@ class Awaiting:
 #: (think-fwa9), and a side above Göbel's classical construction is above an earlier
 #: report (think-8krd).
 CONSEQUENCE, RECIPE, WITHDRAWN = "consequence", "recipe", "withdrawn"
+#: The Kingbird catalogue's sides beyond the corpus (N1): the walk above 1024 records them
+#: and the chain passes over them, so only the verdicts that rest on them wait.
+CATALOGUE = "catalogue"
+#: Where the owner's open questions on the work above 1024 are kept, N1 among them.
+N1_BEAD = "think-llit"
 HELD_CLASSES = {
     CONSEQUENCE: (
         "an index bound that deletes squares from a larger count's certificate or from a "
@@ -316,6 +352,12 @@ HELD_CLASSES = {
         "a certificate in the reporter's own watched repository that his issue withdrew, at a "
         "count where his later release claims a lower side: not a report, as the owner "
         "answered on 23 October 2026 (think-8m4k)"
+    ),
+    CATALOGUE: (
+        "a side the Kingbird catalogue states beyond the corpus with its minimal polynomial, "
+        "which is no issue, comment, pull request or watched commit: whether the catalogue "
+        "is an earlier report there waits on the owner (N1, think-llit), so no row may hold "
+        "it until the owner answers"
     ),
 }
 #: The owner's answer that settles the withdrawn class (`Held.answer`).
@@ -346,11 +388,13 @@ HELD_NAMES = {
     CONSEQUENCE: "index deletion bounds",
     RECIPE: "constructions with no certificate file",
     WITHDRAWN: "certificates their author withdrew from an issue",
+    CATALOGUE: "catalogue sides",
 }
 HELD_NAME = {
     CONSEQUENCE: "index deletion bound",
     RECIPE: "construction with no certificate file",
     WITHDRAWN: "certificate its author withdrew from an issue",
+    CATALOGUE: "catalogue side",
 }
 
 
@@ -409,6 +453,12 @@ class Walk:
     ``held`` the publications it records that wait on an owner decision (`Held`), and
     ``resting`` the verdicts it decided only against those (`Resting`), which ``check``
     holds to the ledger (`resting_problems`).
+
+    ``above`` and ``through`` are the counts the walk plans rows for (`reaches`): every
+    walk frozen at 1024 reaches every count it walks to `FROZEN_THROUGH`, the corpus
+    counts a release claims included, and the walk above 1024 every count above 1024, with
+    no top (``through`` None). A count it walks outside them, as the #719 walk's claims
+    above 1024, plans no row there.
     """
 
     name: str
@@ -416,6 +466,19 @@ class Walk:
     awaiting: Mapping[str, Awaiting]
     held: Mapping[str, tuple[Held, ...]] = field(default_factory=dict)
     resting: tuple[Resting, ...] = ()
+    above: int = 0
+    through: int | None = FROZEN_THROUGH
+
+    def reaches(self, n: int) -> bool:
+        """Whether the walk plans rows at ``n``: above ``above`` and at most ``through``."""
+        return self.above < n and (self.through is None or n <= self.through)
+
+    @property
+    def reach(self) -> str:
+        """The counts the walk reaches beyond the corpus, as its sources' notes say them."""
+        if self.through is None:
+            return f"above {self.above}"
+        return f"at or below {self.through}"
 
     @property
     def directory(self) -> Path:
@@ -445,8 +508,8 @@ HISTORY = "upper-bounds-couzo-history-20261022"
 #: The history walk's starts: ``main`` at #479's merge, 2026-10-10T00:28:19Z, the last
 #: ``main`` whose only beyond-horizon rows are the two 8 October sources.
 HISTORY_READ_AT_MAIN = "a97b712b94a138ebe9998070dd08d0ba0f320e09"
-#: The counts the history walk reaches: beyond the corpus to ``LIMIT``.
-HISTORY_COUNTS = range(reports.HORIZON + 1, LIMIT + 1)
+#: The counts the history walk reaches: beyond the corpus to `FROZEN_THROUGH`.
+HISTORY_COUNTS = range(reports.HORIZON + 1, FROZEN_THROUGH + 1)
 #: The sources whose rows are the history walk's starts, and so are not walked.
 HISTORY_START_SOURCES = (
     "couzo-extended-range-reports-2026-10-08",
@@ -479,7 +542,7 @@ ISSUE_732_READ_AT_MAIN = "fcf2f96a5213bb6cc076bcba90e353a661db773a"
 #: (`ISSUE_732_F1_READ_AT_MAIN`).
 ISSUE_732_F1 = "upper-bounds-issue732-f1ceee4-20261024"
 ISSUE_732_F1_READ_AT_MAIN = "0bbb0a2c4bae92393e26e7272c73a8de4cda1793"
-#: The walk of issue #763's claims at or below ``LIMIT``, Couzo's 964ee2b, with the
+#: The walk of issue #763's claims at or below `FROZEN_THROUGH`, Couzo's 964ee2b, with the
 #: index's unrequested rows there, from starts frozen at ``main`` at #756's merge, the first
 #: ``main`` that holds f1ceee4's rows (#769) and T-239 at 303 (#757)
 #: (`ISSUE_763_READ_AT_MAIN`).
@@ -541,6 +604,73 @@ def _held(
 ) -> Held:
     """A `Held` whose counts are written out, separated by spaces."""
     return Held(kind, bead, frozenset(int(n) for n in counts.split()), also, note, answer)
+
+
+def deletion_holds(
+    bounds: Iterable[tuple[int, int, int]], *, claimed_by: str = ""
+) -> tuple[Held, ...]:
+    """How a walk holds a report's deletion bounds, each ``(n, parent, deleted)``: the
+    certificate at ``parent`` less its last ``deleted`` squares, so ``parent - deleted`` is
+    ``n``.
+
+    A bound a publication states that deletes one square from the next count's certificate
+    is an earlier report by the owner's D6 answer, settled with no row of its own
+    (`DELETION_ANSWER`, think-f2io). A bound deleting two or more squares is outside that
+    question's words and waits on think-kzme, as the history walk's 751, 752 and 927 do.
+    Every bound an issue claims waits on think-kzme too, whatever it deletes, with the bead
+    of the issue's import (``claimed_by``), as #763's 683 does: whether an issue's deletion
+    bound gets a row is that question (think-llit's plan, Deletion Rows).
+    """
+    settled: set[int] = set()
+    waiting: set[int] = set()
+    for n, parent, deleted in bounds:
+        _require(
+            deleted > 0 and parent - deleted == n,
+            f"n={n}: {parent} less {deleted} squares is not {n}",
+        )
+        (settled if deleted == 1 and not claimed_by else waiting).add(n)
+    holds: list[Held] = []
+    if settled:
+        holds.append(
+            Held(
+                CONSEQUENCE,
+                "think-f2io",
+                frozenset(settled),
+                note="each deleting one square from the next count's certificate",
+                answer=DELETION_ANSWER,
+            )
+        )
+    if waiting and claimed_by:
+        holds.append(
+            Held(
+                CONSEQUENCE,
+                claimed_by,
+                frozenset(waiting),
+                also=("think-kzme",),
+                note="deletion bounds the issue claims",
+            )
+        )
+    elif waiting:
+        holds.append(
+            Held(
+                CONSEQUENCE,
+                "think-kzme",
+                frozenset(waiting),
+                note="each deleting two or more squares, beyond the D6 answer's words",
+            )
+        )
+    return tuple(holds)
+
+
+def catalogue_hold(counts: Iterable[int]) -> Held:
+    """The walk above 1024's hold of the Kingbird catalogue's sides there (`CATALOGUE`),
+    until the owner answers N1: recorded, passed over by the chain, and no row."""
+    return Held(
+        CATALOGUE,
+        N1_BEAD,
+        frozenset(counts),
+        note="the capture of 2026-08-22, each side with its minimal polynomial (N1)",
+    )
 
 
 def _resting(report: str, verdict: str, kinds: str, counts: str) -> Resting:
@@ -892,15 +1022,20 @@ _AWAITING_719_631 = {
 }
 
 
-def _rulings(*awaiting: Mapping[str, Any]) -> list[dict[str, Any]]:
+def ruling_entries(
+    *awaiting: Mapping[str, Any], through: int | None = FROZEN_THROUGH
+) -> list[dict[str, Any]]:
     """The owner's rulings of 23 October 2026 as a walk's ``sources.yaml`` names them
     (`devtools.intake_ledger.Ruling`), with the claims the restatement ruling leaves to the
-    owner."""
+    owner. A walk frozen at 1024 lists both through `FROZEN_THROUGH`; the walk above 1024
+    lists them with no ``through`` (``through`` None, `devtools.intake_ledger.NO_LIMIT`), so
+    they reach its top count, as `devtools.intake_ledger.answer_problems` requires."""
+    reach = {} if through is None else {"through": through}
     restatement: dict[str, Any] = {
         "ruling": "restatement",
         "decided": "2026-10-23",
         "bead": "think-fwa9",
-        "through": LIMIT,
+        **reach,
     }
     if awaiting:
         restatement["awaiting_owner"] = [dict(item) for item in awaiting]
@@ -908,21 +1043,21 @@ def _rulings(*awaiting: Mapping[str, Any]) -> list[dict[str, Any]]:
         "ruling": "classical-constructions",
         "decided": "2026-10-23",
         "bead": "think-8krd",
-        "through": LIMIT,
+        **reach,
     }
     return [restatement, classical]
 
 
-#: The owner's rulings each walk applies (`devtools.intake_ledger.RULINGS`), through
-#: ``LIMIT``: the counts above it wait on their own work (D1, think-llit), which applies the
-#: same answers there. The backlog walk applies none: it was read on 22 October, and no
-#: step of it is in either's words.
+#: The owner's rulings each walk applies (`devtools.intake_ledger.RULINGS`). The walks
+#: frozen at 1024 apply them through `FROZEN_THROUGH`; the walk above 1024 applies the same
+#: answers with no top (`ruling_entries`, ``through`` None). The backlog walk applies none:
+#: it was read on 22 October, and no step of it is in either's words.
 WALK_RULINGS: dict[str, list[dict[str, Any]]] = {
-    ISSUE_719: _rulings(_AWAITING_719_631),
-    HISTORY: _rulings(_AWAITING_719_631),
-    ISSUE_732: _rulings(),
-    ISSUE_732_F1: _rulings(),
-    ISSUE_763: _rulings(),
+    ISSUE_719: ruling_entries(_AWAITING_719_631),
+    HISTORY: ruling_entries(_AWAITING_719_631),
+    ISSUE_732: ruling_entries(),
+    ISSUE_732_F1: ruling_entries(),
+    ISSUE_763: ruling_entries(),
 }
 #: A Couzo row: the count, the prior and new prints, the deletion and the link.
 _COUZO_ROW = re.compile(
@@ -960,7 +1095,13 @@ def _require(condition: object, message: str) -> None:
 
 @dataclass(frozen=True, slots=True)
 class Claim:
-    """One row of an issue's table: the count, the print, and the certificate it reads."""
+    """One row of an issue's table: the count, the print, and the certificate it reads.
+
+    A deletion row reads its parent's certificate, ``certificate_n``, less ``deleted``
+    squares. A recipe row (``recipe``, as its packet declares it) has no certificate file
+    of its own: ``path`` is its parent's, and the construction checker decides it
+    (`write_recipe_decisions`, D2).
+    """
 
     n: int
     prior: str
@@ -968,6 +1109,7 @@ class Claim:
     path: str
     certificate_n: int
     deleted: int
+    recipe: Mapping[str, Any] | None = None
 
 
 @dataclass(frozen=True, slots=True)
@@ -998,7 +1140,7 @@ class Release:
     every certificate a row reads, committed at ``committed``, but for the counts
     ``later_commits`` names with their own commit and time: what ``first-commits`` measures
     and the claims record states. ``rows`` counts the issue's table and ``decided`` the rows
-    beyond the corpus at or below ``LIMIT``; ``sampled`` names the counts the all-pairs
+    in the release's window (`decided_claims`); ``sampled`` names the counts the all-pairs
     sample decides, which the packet README and the atom state. ``walk`` names the ledger
     that plans its rows, ``rounding`` how the issue prints a side (`UP`, `BINARY64`), and
     ``derived`` that the packet keeps derived facts and no upstream byte. ``claimed_at``
@@ -1024,8 +1166,8 @@ class Release:
     ``index_key`` maps each count to its certificate path, SHA-256 and exact bound), and
     with ``changed_only`` its walk's claims are the certificates the pinned commit adds or
     changes, not every certificate the commit holds. ``later_reads`` names the commits past
-    the pin, each with the time a push made it public, whose publications at any count to
-    ``LIMIT`` the walk takes as reports of their own (`later_commits`).
+    the pin, each with the time a push made it public, whose publications at any count the
+    walk reaches the walk takes as reports of their own (`later_commits`).
 
     **An issue whose claims are re-derived** from its source's indexes, as #763's, names the
     list of its packet's claim map (`CLAIM_MAP`, written by `devtools.couzo_763_claims`) its
@@ -1033,6 +1175,15 @@ class Release:
     index publishes that its selection rule leaves out, a publication of their own. Its walk's
     sources are transcribed from that map (`claim_map_walk_sources`), and its declared rows
     read each certificate from it (`declared_rows`).
+
+    **The window.** A release decides its rows from ``decided_above`` (exclusive, the
+    corpus by default) to ``decided_through`` (inclusive; None for no top): every release
+    on ``main`` before the work above 1024 decides to `FROZEN_THROUGH`, and its rows above
+    wait (`held_claims`) until the records slice that lifts its window, in the same pull
+    request as the receipts that window needs (think-llit). Its rows to 1024 are planned by
+    ``walk``, and those above 1024 by ``walk_above``, the walk above 1024 that records them
+    (`walk_of`). ``hosted`` names the hosted-data manifest of the certificates the packet
+    pins and does not retain, read through `sqpack.hosted_data.require` (`hosted_bytes`).
     """
 
     issue: int | None
@@ -1065,6 +1216,22 @@ class Release:
     changed_only: bool = False
     later_reads: tuple[tuple[str, str], ...] = ()
     claim_map: str = ""
+    decided_above: int = reports.HORIZON
+    decided_through: int | None = FROZEN_THROUGH
+    walk_above: str = ""
+    hosted: Path | None = None
+
+    def decides(self, n: int) -> bool:
+        """Whether ``n`` is in the release's window (`decided_claims`)."""
+        return self.decided_above < n and (
+            self.decided_through is None or n <= self.decided_through
+        )
+
+    @property
+    def frozen(self) -> bool:
+        """Whether the release's window ends at or below `FROZEN_THROUGH`, so its Göbel
+        receipt keeps the retained program (`goebel_receipt`)."""
+        return self.decided_through is not None and self.decided_through <= FROZEN_THROUGH
 
     @property
     def directory(self) -> Path:
@@ -1126,7 +1293,13 @@ class Release:
         return self.directory / kind
 
     def first_commit_of(self, n: int) -> tuple[str, str]:
-        """The commit that first holds the certificate a row at ``n`` reads, and its time."""
+        """The commit that first holds the certificate a row at ``n`` reads, and its time.
+
+        A recipe row has no file of its own, and its parent's file may be older than the
+        recipe: it is dated by the first commit whose index states its recipe (#793's review
+        A, A8). `first_commits` does not read index history yet, so it refuses a recipe row
+        until the records slice that declares one dates it so (R1, think-llit).
+        """
         later = self.later_commits or {}
         return later.get(n, (self.first_commit, self.committed))
 
@@ -1204,7 +1377,11 @@ def _mishapolk_rows(body: str, release: Release) -> list[Claim]:
 def read_declared_rows(body: str, release: Release) -> list[Claim]:
     """The rows a publication no issue reports declares in its packet (`WATCHED_FORMAT`):
     each count, the certificate the walk records there and its exact header side rounded
-    up at 12 places, all of the publication's commit; `declare_rows` writes them."""
+    up at 12 places, all of the publication's commit, and for a deletion the squares it
+    deletes from that certificate (``deleted``), and for a recipe its parent's certificate
+    and the recipe (``recipe``); `declare_rows` writes them. A row's ``certificate_n`` is
+    the count its certificate's header states: n plus the squares a deletion deletes, and
+    a recipe's parent count, ``source_n`` (#793's review A, A8)."""
     declared = json.loads(body)
     _require(declared.get("format") == WATCHED_FORMAT, f"{release.label}: not {WATCHED_FORMAT}")
     _require(
@@ -1214,7 +1391,17 @@ def read_declared_rows(body: str, release: Release) -> list[Claim]:
         f"{release.label}: the declaration names another commit or walk",
     )
     return [
-        Claim(int(row["n"]), "", str(row["printed"]), str(row["certificate"]), int(row["n"]), 0)
+        Claim(
+            int(row["n"]),
+            "",
+            str(row["printed"]),
+            str(row["certificate"]),
+            int(row["recipe"]["source_n"])
+            if row.get("recipe")
+            else int(row["n"]) + int(row.get("deleted", 0)),
+            int(row.get("deleted", 0)),
+            row.get("recipe"),
+        )
         for row in declared["rows"]
     ]
 
@@ -1540,7 +1727,8 @@ RELEASES: dict[str, Release] = {
         ),
         # Issue #763 (2026-10-23T23:35:51Z) names 964ee2b and carries no table: its claims
         # are re-derived from the source's indexes by the README's rule (`CLAIM_MAP`), and
-        # its rows are those its walk records at or below ``LIMIT`` (`declared_rows`).
+        # its rows are those its walk records in its window, to `FROZEN_THROUGH`
+        # (`declared_rows`).
         Release(
             issue=763,
             packet=COUZO_763_PACKET,
@@ -1562,7 +1750,7 @@ RELEASES: dict[str, Release] = {
             index_key="entries",
             claim_map="claims",
         ),
-        # The rows certified_bounds.json publishes at 964ee2b at or below ``LIMIT`` that the
+        # The rows certified_bounds.json publishes at 964ee2b to `FROZEN_THROUGH` that the
         # issue's selection rule leaves out (`CLAIM_MAP`'s ``unrequested``): a publication
         # of the watched repository from the push that made it public, 2 min 51 s after the
         # issue, and an import of its own in the same packet (result-import.md, stage 1).
@@ -1649,24 +1837,164 @@ def declares_rows(chosen: Release) -> bool:
     return chosen.read is read_declared_rows
 
 
+def window(chosen: Release) -> str:
+    """A release's window in words, as a refusal names it."""
+    top = "" if chosen.decided_through is None else f" to {chosen.decided_through}"
+    return f"above {chosen.decided_above}{top}"
+
+
 def decided_claims(chosen: Release) -> list[Claim]:
-    """The rows beyond the corpus at or below ``LIMIT``, which this module decides."""
-    rows = [row for row in claims(chosen) if reports.HORIZON < row.n <= LIMIT]
+    """The rows in the release's window (`Release.decides`), which this module decides,
+    refused unless they are as many as the release declares: a release asked to decide a
+    claim outside the window it was recorded with no longer matches its count."""
+    rows = [row for row in claims(chosen) if chosen.decides(row.n)]
     _require(
         len(rows) == chosen.decided,
-        f"{chosen.label}: {len(rows)} rows beyond the corpus to {LIMIT}, not {chosen.decided}",
+        f"{chosen.label}: {len(rows)} rows {window(chosen)}, not {chosen.decided}",
     )
     return rows
 
 
 def held_claims(chosen: Release) -> list[Claim]:
-    """The rows above ``LIMIT``, retained and not decided: they wait on the owner."""
-    return [row for row in claims(chosen) if row.n > LIMIT]
+    """The rows above the release's window, retained or pinned and not decided: they wait
+    on the records slice that lifts it (think-llit)."""
+    top = chosen.decided_through
+    return [] if top is None else [row for row in claims(chosen) if row.n > top]
+
+
+def replayed_claims(chosen: Release) -> list[Claim]:
+    """The decided rows the filtered replay decides: every one but a recipe row."""
+    return [row for row in decided_claims(chosen) if row.recipe is None]
+
+
+def recipe_claims(chosen: Release) -> list[Claim]:
+    """The decided rows the construction checker decides (`write_recipe_decisions`)."""
+    return [row for row in decided_claims(chosen) if row.recipe is not None]
 
 
 def manifest(chosen: Release) -> dict[str, str]:
     """The packet's upstream digests, by upstream path."""
     return acquire_source.read_manifest(chosen.directory / acquire_source.MANIFEST)
+
+
+def hosted_pins(chosen: Release, root: Path | None = None) -> dict[str, str]:
+    """The certificates a release's hosted shards hold: every file the packet pins and
+    does not retain under ``root`` (its `archive`), whose path names a count above
+    `FROZEN_THROUGH` (`named_count`), with the SHA-256 the packet pins for it."""
+    root = root or archive(chosen)
+    return {
+        path: digest
+        for path, digest in manifest(chosen).items()
+        if (n := named_count(path)) is not None
+        and n > FROZEN_THROUGH
+        and not retained_exists(root / path)
+    }
+
+
+class Hosting:
+    """A release's hosted certificates as one call reads them (#793's reviews A, A3, and
+    B, B3): the packet's pins for the files its shards hold (`hosted_pins`), read once; the
+    source-history receipts' entries for them (`index_entries`), read once when first
+    asked; one reader of the shards (`devtools.hosted_shards.Hosted`); and the packet's
+    retained root (`archive`), read once. A call that reads many rows builds one and passes
+    it to each, so a check over thousands of rows parses the acquisition record, the
+    manifest and each receipt once. A release with no hosted manifest hosts nothing, and
+    reads neither the manifest nor a receipt."""
+
+    def __init__(self, chosen: Release) -> None:
+        self.chosen = chosen
+        self.archive = archive(chosen)
+        self.pins: Mapping[str, str] = (
+            hosted_pins(chosen, self.archive) if chosen.hosted else {}
+        )
+        self._entries: Mapping[str, Mapping[str, Any]] | None = None
+        self._reader: hosted_shards.Hosted | None = None
+
+    def hosts(self, path: str) -> bool:
+        """Whether ``path`` is read from the shards: one of `hosted_pins`."""
+        return path in self.pins
+
+    @property
+    def entries(self) -> Mapping[str, Mapping[str, Any]]:
+        """The source-history entries (`index_entries`), read on first use."""
+        if self._entries is None:
+            self._entries = index_entries(self.chosen)
+        return self._entries
+
+    def entry(self, path: str, n: int, where: str) -> Mapping[str, Any]:
+        """A hosted certificate's source-history entry, held to the packet's pin and to
+        the count ``n``: the one place the fast check reads a hosted side or blob from."""
+        found = self.entries.get(path)
+        _require(found is not None, f"{where}: hosted, and no source-history receipt lists it")
+        assert found is not None
+        _require(
+            found["sha256"] == self.pins[path] and found["n"] == n,
+            f"{where}: the source history's digest or count is not the packet's",
+        )
+        return found
+
+    def read(self, path: str) -> bytes:
+        """A hosted certificate's bytes from the shards, held to its pin."""
+        chosen = self.chosen
+        assert chosen.hosted is not None
+        try:
+            if self._reader is None:
+                self._reader = hosted_shards.hosted(REPO / chosen.hosted, self.pins, REPO)
+            return self._reader.read(path)
+        except hosted_shards.ShardError as error:
+            raise ReplayError(f"{chosen.label}: {error}") from error
+
+
+def is_hosted(chosen: Release, path: str, hosting: Hosting | None = None) -> bool:
+    """Whether a certificate is read from the release's hosted shards, not its packet: it
+    is one of `hosted_pins`, the same predicate (#793's review B, B3)."""
+    return (hosting or Hosting(chosen)).hosts(path)
+
+
+def certificate_bytes(chosen: Release, path: str, hosting: Hosting | None = None) -> bytes:
+    """A certificate's bytes: retained in the packet, or, for one it pins and does not
+    retain, read from the release's hosted shards through `sqpack.hosted_data.require`
+    and held to the packet's pin (`devtools.hosted_shards`)."""
+    hosting = hosting or Hosting(chosen)
+    if not hosting.hosts(path):
+        return read_retained_bytes(hosting.archive / path)
+    return hosting.read(path)
+
+
+def index_entries(chosen: Release) -> dict[str, Mapping[str, Any]]:
+    """Each certificate the release's source-history receipts list at the retained
+    commit, by path: its Git blob, SHA-256 and exact side, each held to the release's index
+    when the receipt was written (`source_history`). The fast check reads a hosted row's
+    side and blob from here, so it opens no shard."""
+    found: dict[str, Mapping[str, Any]] = {}
+    for walk in walks_of(chosen):
+        path = source_history_path(chosen, walk)
+        if path.is_file():
+            found |= {row["certificate"]: row for row in _read(path)["at_commit"]}
+    return found
+
+
+def certificate_side(
+    chosen: Release, path: str, n: int, where: str, hosting: Hosting | None = None
+) -> Fraction:
+    """A certificate's exact side: its header line (`header_side`), or for a hosted one
+    the side its source-history receipt states, held to the digest the packet pins
+    (`Hosting.entry`)."""
+    hosting = hosting or Hosting(chosen)
+    if not hosting.hosts(path):
+        return header_side(read_retained_bytes(hosting.archive / path), n, where)
+    return Fraction(str(hosting.entry(path, n, where)["side"]))
+
+
+def blob_of(chosen: Release, path: str, n: int, hosting: Hosting | None = None) -> str:
+    """A certificate's Git blob: from its retained bytes, or for a hosted one from its
+    source-history receipt, which held it to the clone's tree, the entry held to the
+    packet's pin and the count ``n`` as for its side (`Hosting.entry`, #793's review B,
+    B3)."""
+    hosting = hosting or Hosting(chosen)
+    if not hosting.hosts(path):
+        return git_blob(read_retained_bytes(hosting.archive / path))
+    return str(hosting.entry(path, n, f"{chosen.label} {path}")["blob"])
 
 
 def archive(chosen: Release) -> Path:
@@ -1701,22 +2029,57 @@ def certificate(chosen: Release, row: Claim) -> legacy.Certificate:
         )
         parsed = facts[row.certificate_n]
     else:
-        raw = read_retained_bytes(archive(chosen) / row.path)
+        raw = certificate_bytes(chosen, row.path)
         parsed = legacy.parse(raw.decode("utf-8"), expected_n=row.certificate_n)
     if row.deleted:
         parsed = legacy.Certificate(row.n, parsed.side, parsed.poses[: row.n])
     return parsed
 
 
+def header_side(raw: bytes, expected_n: int, where: str) -> Fraction:
+    """A certificate's side from its header line alone, ``n S``, the first line that is
+    neither blank nor a comment, read by the rule `devtools.evand_exact_certificates.parse`
+    applies to it (`devtools.evand_exact_certificates.header`, #793's review A, A12); the
+    count must be ``expected_n``. The squares are not read: their parse is what the replay
+    decides, and the receipts hold."""
+    start = 0
+    while start <= len(raw):
+        end = raw.find(b"\n", start)
+        end = len(raw) if end < 0 else end
+        line = raw[start:end].decode("utf-8").strip()
+        start = end + 1
+        if not line or line.startswith("#"):
+            continue
+        try:
+            return legacy.header(line.split(), expected_n=expected_n)[1]
+        except legacy.CertificateError as error:
+            raise ReplayError(f"{where}: {error}") from error
+    raise ReplayError(f"{where}: no header")
+
+
 def decided_sides(chosen: Release) -> dict[int, Fraction]:
-    """Each decided row's exact side: a retained certificate's header, or, for a derived
-    packet, the side its frozen claim record states (`devtools.upper_bound_reports`), which
-    that importer's ``check`` holds to the facts and ``check --replay`` here decides again
-    from them. Admitting a fact validates the whole witness, a fraction of a second each, so
-    the sides alone are read from the record."""
+    """Each decided row's exact side: a retained certificate's header line alone
+    (`header_side`), or, for a derived packet, the side its frozen claim record states
+    (`devtools.upper_bound_reports`), which that importer's ``check`` holds to the facts and
+    ``check --replay`` here decides again from them. The fast check reads it once a release
+    (`release_problems`): parsing every square, as the replay does, was three quarters of
+    that check's time (think-llit, Gate Cost)."""
     rows = decided_claims(chosen)
     if not chosen.derived:
-        return {row.n: certificate(chosen, row).side for row in rows}
+        hosting = Hosting(chosen)
+        return {
+            row.n: claim_side(
+                row,
+                certificate_side(
+                    chosen,
+                    row.path,
+                    row.certificate_n,
+                    f"{chosen.label} n={row.n} {row.path}",
+                    hosting,
+                ),
+            )
+            for row in rows
+        }
     stated = {
         item["n"]: Fraction(item["exact_side"])
         for item in _read(chosen.directory / reports.CLAIMS)["results"]
@@ -1726,6 +2089,16 @@ def decided_sides(chosen: Release) -> dict[int, Fraction]:
         f"{chosen.label}: the claim record does not state every decided side",
     )
     return {row.n: stated[row.certificate_n] for row in rows}
+
+
+def claim_side(row: Claim, parent: Fraction) -> Fraction:
+    """A row's exact side from its certificate's: a recipe row's is the parent's times
+    the tiles, plus the layers (the construction checker holds the recipe's stated bound
+    to it); any other row's is its certificate's, a deletion's too. `decided_sides` and
+    `release_sides` both read a row's side by this rule (#793's review B, B2)."""
+    if row.recipe is None:
+        return parent
+    return int(row.recipe["tiles_per_side"]) * parent + int(row.recipe["layers"])
 
 
 def ceiling(side: Fraction, places: int = PLACES) -> str:
@@ -1793,7 +2166,7 @@ def _environment() -> dict[str, str]:
 def decide_row(job: tuple[str, int]) -> dict[str, Any]:
     """One row: the side against the print, both routes, and the certificate's controls."""
     chosen = release(job[0])
-    row = next(row for row in decided_claims(chosen) if row.n == job[1])
+    row = next(row for row in replayed_claims(chosen) if row.n == job[1])
     cert = certificate(chosen, row)
     started = time.monotonic()
     result = base.decide(base.geometry(cert))
@@ -1832,7 +2205,7 @@ def _jobs(chosen: Sequence[Release]) -> list[tuple[str, int]]:
     jobs = [
         (row.certificate_n, item.label, row.n)
         for item in chosen
-        for row in decided_claims(item)
+        for row in replayed_claims(item)
     ]
     return [(issue, n) for _, issue, n in sorted(jobs, key=lambda job: -job[0])]
 
@@ -1849,7 +2222,7 @@ def filtered(issues: Sequence[int | str], workers: int) -> dict[str, dict[str, A
     elapsed = round(time.monotonic() - wall, 1)
     receipts: dict[str, dict[str, Any]] = {}
     for item in chosen:
-        results = [decided[item.label, row.n] for row in decided_claims(item)]
+        results = [decided[item.label, row.n] for row in replayed_claims(item)]
         receipt: dict[str, Any] = {
             "format": FILTERED_FORMAT,
             item.report_key: item.issue_url,
@@ -1873,6 +2246,202 @@ def filtered(issues: Sequence[int | str], workers: int) -> dict[str, dict[str, A
     return receipts
 
 
+# --------------------------------------------------------------------------- recipe rows
+
+
+def recipe_of(chosen: Release, row: Claim) -> checker.Recipe:
+    """A recipe row as the construction checker reads it: the recipe its packet declares
+    (``kind``, ``source_n``, ``tiles_per_side``, ``layers``, the ``capacity`` and exact
+    ``bound`` the index states and the parent's ``sha256``), on the parent ``row.path``."""
+    recipe = row.recipe
+    _require(recipe is not None, f"{chosen.label} n={row.n}: not a recipe row")
+    assert recipe is not None
+    return checker.Recipe(
+        n=row.n,
+        kind=str(recipe["kind"]),
+        source_n=int(recipe["source_n"]),
+        parent=row.path,
+        parent_sha256=str(recipe["sha256"]),
+        bound=Fraction(str(recipe["bound"])),
+        tiles_per_side=int(recipe["tiles_per_side"]),
+        layers=int(recipe["layers"]),
+        deleted=row.deleted,
+        capacity=None if recipe.get("capacity") is None else int(recipe["capacity"]),
+        parts=tuple(str(part) for part in recipe.get("parts") or ()),
+    )
+
+
+def decide_parent(job: tuple[str, str, int]) -> dict[str, Any]:
+    """A recipe parent that is not a row, ``(release, path, count)``, decided as
+    `decide_row` decides a row: both routes, and its six controls."""
+    chosen = release(job[0])
+    path, n = job[1], job[2]
+    raw = certificate_bytes(chosen, path)
+    cert = legacy.parse(raw.decode("utf-8"), expected_n=n)
+    started = time.monotonic()
+    result = base.decide(base.geometry(cert))
+    return {
+        "n": n,
+        "certificate": path,
+        "certificate_sha256": hashlib.sha256(raw).hexdigest(),
+        "exact_side": legacy.literal(cert.side),
+        "verified": result["passed"],
+        "decision": result,
+        "controls": base.decide_controls(cert),
+        "wall_seconds": round(time.monotonic() - started, 3),
+    }
+
+
+def _replayed_parents(chosen: Release) -> dict[str, Mapping[str, Any]]:
+    """The release's filtered receipt's rows that read a certificate whole, by path: the
+    parents a recipe row may build on without a replay of their own."""
+    path = chosen.path(FILTERED)
+    if not path.is_file():
+        return {}
+    return {
+        row["certificate"]: row for row in _read(path)["rows"] if not row["deleted_squares"]
+    }
+
+
+def recipe_decisions(
+    chosen: Release, parents: Mapping[str, Mapping[str, Any]]
+) -> list[dict[str, Any]]:
+    """Each recipe row decided by the construction checker against its parent's replay
+    (``parents``, by path), with the recipe's controls; a row it refuses keeps the reason."""
+    found = []
+    for row in recipe_claims(chosen):
+        recipe = recipe_of(chosen, row)
+        replayed = parents.get(row.path)
+        # A parent with no replay is refused as not replayed, whatever its side.
+        parent = (
+            checker.parent_from_replay(replayed)
+            if replayed is not None
+            else checker.Parent(recipe.source_n, Fraction(0), row.path, recipe.parent_sha256)
+        )
+        try:
+            decision = checker.decide(recipe, parent)
+        except checker.RecipeRefusedError as error:
+            found.append({"n": row.n, "verdict": "refused", "reason": str(error)})
+            continue
+        found.append(decision | {"controls": checker.controls(recipe, parent)})
+    return found
+
+
+def write_recipe_decisions(issues: Sequence[int | str], workers: int) -> dict[str, int]:
+    """Write each chosen release's recipe decisions (`RECIPES`): every recipe parent that
+    is not a replayed row of the release decided on both routes with its six controls
+    (`decide_parent`), then every recipe row decided from its recipe (`recipe_decisions`).
+    Returns each release's decided rows."""
+    written: dict[str, int] = {}
+    for chosen in [release(issue) for issue in issues]:
+        custody(chosen)
+        rows = recipe_claims(chosen)
+        _require(rows, f"{chosen.label}: no recipe row in its window")
+        replayed = _replayed_parents(chosen)
+        needed = sorted(
+            {(row.path, int((row.recipe or {})["source_n"])) for row in rows}
+            - {(path, int(row["n"])) for path, row in replayed.items()}
+        )
+        with ProcessPoolExecutor(max_workers=workers) as pool:
+            parents = list(pool.map(decide_parent, [(chosen.label, *job) for job in needed]))
+        decisions = recipe_decisions(
+            chosen, {**replayed, **{item["certificate"]: item for item in parents}}
+        )
+        _write(
+            chosen.path(RECIPES),
+            {
+                "format": RECIPES_FORMAT,
+                chosen.report_key: chosen.issue_url,
+                "checker": "packing/devtools/construction_checker.py",
+                "lemma": checker.LEMMA,
+                "controls": list(checker.CONTROLS),
+                "parents": parents,
+                "rows": decisions,
+            },
+        )
+        written[chosen.label] = sum(1 for item in decisions if item["verdict"] == "decided")
+    return written
+
+
+def recipe_problems(chosen: Release, *, replay: bool, workers: int) -> list[str]:
+    """Where a release's recipe rows are not decided as its receipt says (`RECIPES`):
+    each derived again from the stored parent replays, each decided with every control
+    refused, and each parent replayed on both routes with its six controls refused; with
+    ``replay`` the parents that are not rows are decided again."""
+    rows = recipe_claims(chosen)
+    path = chosen.path(RECIPES)
+    if not rows:
+        return (
+            [f"{chosen.label}: recipe decisions with no recipe row"] if path.is_file() else []
+        )
+    if not path.is_file():
+        return [f"{chosen.label}: {len(rows)} recipe rows and no recipe decisions"]
+    receipt = _read(path)
+    parents = {item["certificate"]: item for item in receipt["parents"]}
+    problems = [
+        f"{chosen.label}: the recipe parent {item['certificate']} is not verified with its "
+        "six controls refused by both routes"
+        for item in receipt["parents"]
+        if not item["verified"]
+        or len(item["controls"]) != len(base.CONTROLS)
+        or not all(
+            c["refused_by_sqpack"] and c["refused_by_independent"] for c in item["controls"]
+        )
+    ]
+    problems += recipe_pin_problems(chosen, rows, receipt["parents"])
+    if receipt["rows"] != recipe_decisions(chosen, {**_replayed_parents(chosen), **parents}):
+        problems.append(f"{chosen.label}: the recipe decisions differ from their derivation")
+    problems.extend(
+        f"{chosen.label} n={item['n']}: the recipe is {item['verdict']}"
+        + (f", {item['reason']}" if item.get("reason") else "")
+        for item in receipt["rows"]
+        if item["verdict"] != checker.DECIDED
+        or not all(control["refused"] for control in item["controls"])
+    )
+    if replay and receipt["parents"]:
+        jobs = [
+            (chosen.label, item["certificate"], int(item["n"])) for item in receipt["parents"]
+        ]
+        with ProcessPoolExecutor(max_workers=workers) as pool:
+            again = list(pool.map(decide_parent, jobs))
+        problems.extend(
+            f"{chosen.label}: the replay of the recipe parent {kept['certificate']} differs"
+            for kept, fresh in zip(receipt["parents"], again, strict=True)
+            if _stable(fresh) != _stable(kept)
+        )
+    return problems
+
+
+def recipe_pin_problems(
+    chosen: Release, rows: Sequence[Claim], parents: Sequence[Mapping[str, Any]]
+) -> list[str]:
+    """Where a recipe is not bound to the bytes the packet pins (#793's review A, A6): each
+    declared recipe's parent digest must be the packet's pin for its parent, and each stored
+    parent replay must have that pin and its certificate's header side (`certificate_side`),
+    so a stale parent that agrees with its recipe is refused without ``--replay``."""
+    pins = manifest(chosen)
+    hosting = Hosting(chosen)
+    problems = [
+        f"{chosen.label} n={row.n}: the recipe's parent digest is not the packet's pin for "
+        f"{row.path}"
+        for row in rows
+        if (row.recipe or {}).get("sha256") != pins.get(row.path)
+    ]
+    for item in parents:
+        where = f"{chosen.label}: the recipe parent {item['certificate']}"
+        if item["certificate_sha256"] != pins.get(item["certificate"]):
+            problems.append(f"{where} is not the certificate the packet pins")
+            continue
+        try:
+            side = certificate_side(chosen, item["certificate"], int(item["n"]), where, hosting)
+        except ReplayError as error:
+            problems.append(str(error))
+            continue
+        if Fraction(str(item["exact_side"])) != side:
+            problems.append(f"{where}: its side is not its certificate's header's")
+    return problems
+
+
 # --------------------------------------------------------------------------- first commits
 
 
@@ -1893,6 +2462,13 @@ def first_commits(issue: int | str, clone: Path) -> dict[str, Any]:
     """
     chosen = release(issue)
     custody(chosen)
+    listed = [*decided_claims(chosen), *held_claims(chosen)]
+    for row in listed:
+        _require(
+            row.recipe is None,
+            f"{chosen.label} n={row.n}: a recipe row is dated by the first commit whose index "
+            "states its recipe, which this module does not read yet (think-llit)",
+        )
     chain = _git(clone, "rev-list", "--reverse", chosen.retained).split()
     _require(chain and chain[-1] == chosen.retained, "the clone does not hold the commit")
     dates = dict(
@@ -1905,11 +2481,13 @@ def first_commits(issue: int | str, clone: Path) -> dict[str, Any]:
             meta, _, _path = line.partition("\t")
             first.setdefault(meta.split()[2], commit)
     rows = []
-    for row in [*decided_claims(chosen), *held_claims(chosen)]:
-        if chosen.derived:
-            blob = _pinned_blob(chosen, row, clone)
-        else:
-            blob = git_blob(read_retained_bytes(archive(chosen) / row.path))
+    hosting = Hosting(chosen)
+    for row in listed:
+        blob = (
+            _pinned_blob(chosen, row, clone)
+            if chosen.derived
+            else blob_of(chosen, row.path, row.certificate_n, hosting)
+        )
         commit = first[blob]
         item = {
             "n": row.n,
@@ -1957,7 +2535,7 @@ def _utc(stamp: str) -> str:
 def exhaustive_row(job: tuple[str, int]) -> dict[str, Any]:
     """The maintained all-pairs kernel on one row, beside the filtered decision of it."""
     chosen = release(job[0])
-    row = next(row for row in decided_claims(chosen) if row.n == job[1])
+    row = next(row for row in replayed_claims(chosen) if row.n == job[1])
     cert = certificate(chosen, row)
     wall = time.monotonic()
     case = kernel.run_case(cert, "positive")
@@ -1986,7 +2564,7 @@ def exhaustive(issue: int | str, counts: Sequence[int], workers: int) -> dict[st
     """The all-pairs kernel on chosen rows of one release, each against the filtered one."""
     chosen = release(issue)
     custody(chosen)
-    decided = {row.n for row in decided_claims(chosen)}
+    decided = {row.n for row in replayed_claims(chosen)}
     for n in counts:
         _require(n in decided, f"{chosen.label} n={n}: not a decided row")
     started = datetime.now(UTC)
@@ -2008,6 +2586,7 @@ def exhaustive(issue: int | str, counts: Sequence[int], workers: int) -> dict[st
     return receipt
 
 
+@functools.cache
 def _goebel_program() -> Any:
     """The 15 October packet's exact Göbel comparison, loaded from its retained path."""
     spec = importlib.util.spec_from_file_location("goebel_beyond_horizon", base.GOEBEL_PROGRAM)
@@ -2018,33 +2597,55 @@ def _goebel_program() -> Any:
     return module
 
 
-def goebel() -> dict[str, dict[str, Any]]:
-    """Every decided side against Göbel's classical constructions, exactly.
+def goebel_receipt(chosen: Release, sides: Mapping[int, Fraction]) -> dict[str, Any]:
+    """A release's decided sides against Göbel's classical constructions, exactly.
 
-    The families, their deletion to smaller counts and the sign test are those of the 15
-    October packet's retained ``goebel_beyond_horizon.py``, read from its path unchanged;
-    its ``LIMIT`` of 1100 covers every count decided here.
+    A window frozen at 1024 (`Release.frozen`) keeps the 15 October packet's retained
+    ``goebel_beyond_horizon.py``, read from its path unchanged, whose ``LIMIT`` of 1100
+    covers it, so its receipt and its ``program`` field stay as written (#791's review A,
+    A11). A window above reads the maintained module (`devtools.goebel_construction`),
+    which proves every side it gives final, and writes `GOEBEL_FORMAT_V2`, naming it.
     """
-    program = _goebel_program()
-    _require(program.LIMIT >= LIMIT, "the Göbel program stops below the decided counts")
-    forms = program.families(program.LIMIT)
+    rows = [(row.n, sides[row.n], row.path) for row in decided_claims(chosen)]
+    label = f"{chosen.described} at {chosen.pin[:8]}"
+    if chosen.frozen:
+        program = _goebel_program()
+        _require(
+            (chosen.decided_through or 0) <= program.LIMIT,
+            "the Göbel program stops below the decided counts",
+        )
+        return {
+            "format": GOEBEL_FORMAT,
+            "program": base.GOEBEL_PROGRAM.relative_to(REPO).as_posix(),
+            "families": (
+                "Göbel squares, Göbel strips and corner-touching strips, with deletion"
+            ),
+            "comparison": program.compare(label, rows, program.families(program.LIMIT)),
+        }
+    try:
+        comparison = goebel_construction.compare(label, rows)
+    except goebel_construction.GoebelError as error:
+        raise ReplayError(f"{chosen.label}: {error}") from error
+    return {
+        "format": GOEBEL_FORMAT_V2,
+        "program": GOEBEL_MODULE,
+        "families": goebel_construction.FAMILIES,
+        "proof": (
+            "each side is the least member at the count or above of a build the module "
+            "proves final by the area bound, S^2 < B + 1 for a build to B"
+        ),
+        "comparison": comparison,
+    }
+
+
+def goebel() -> dict[str, dict[str, Any]]:
+    """Write every release's Göbel receipt (`goebel_receipt`); return its tallies."""
     tallies: dict[str, dict[str, Any]] = {}
     for chosen in RELEASES.values():
         custody(chosen)
-        sides = decided_sides(chosen)
-        rows = [(row.n, sides[row.n], row.path) for row in decided_claims(chosen)]
-        result = program.compare(f"{chosen.described} at {chosen.pin[:8]}", rows, forms)
-        _write(
-            chosen.path(GOEBEL),
-            {
-                "format": GOEBEL_FORMAT,
-                "program": base.GOEBEL_PROGRAM.relative_to(REPO).as_posix(),
-                "families": (
-                    "Göbel squares, Göbel strips and corner-touching strips, with deletion"
-                ),
-                "comparison": result,
-            },
-        )
+        receipt = goebel_receipt(chosen, decided_sides(chosen))
+        _write(chosen.path(GOEBEL), receipt)
+        result = receipt["comparison"]
         tallies[chosen.label] = {"rows": result["rows"], "tally": result["tally"]}
     return tallies
 
@@ -2052,19 +2653,25 @@ def goebel() -> dict[str, dict[str, Any]]:
 # --------------------------------------------------------------------------- claims record
 
 
-def beyond_horizon_rows(chosen: Release) -> dict[str, Any]:
-    """The decided rows as the coverage register reads them, rebuilt.
+def beyond_horizon_rows(
+    chosen: Release, sides: Mapping[int, Fraction] | None = None
+) -> dict[str, Any]:
+    """The decided rows as the coverage register reads them, rebuilt; ``sides`` are the
+    decided sides where the caller has read them (`decided_sides`).
 
     Each keeps the side the row records as ``offered_side``, the value a dated
     beyond-horizon row holds byte for byte: an `UP` release's print; for a `BINARY64`
     release, the side rounded up at 16 places, with the issue's print beside it
     (`recorded_side`). Each also keeps its certificate's exact header side and when the
     certificate was first committed. A decided row the walk does not record, as #719's 366,
-    is no row, so the record leaves it out; the filtered receipt keeps its decision.
+    is no row, so the record leaves it out; the filtered receipt keeps its decision. The
+    record's ``limit`` is the release's window's top, None where it has none, and a window
+    that starts above the corpus says where (``decided_above``).
     """
-    custody(chosen)
+    if sides is None:
+        custody(chosen)
+        sides = decided_sides(chosen)
     results = []
-    sides = decided_sides(chosen)
     unrecorded = {n for n, source in unrecorded_rows() if source == chosen.source}
     for row in decided_claims(chosen):
         if row.n in unrecorded:
@@ -2083,6 +2690,8 @@ def beyond_horizon_rows(chosen: Release) -> dict[str, Any]:
             "deleted": row.deleted,
             "first_committed": chosen.first_commit_of(row.n)[1],
         }
+        if row.recipe is not None:
+            result["recipe"] = dict(row.recipe)
         if chosen.rounding != UP:
             result["issue_print"] = row.printed
         results.append(result)
@@ -2093,9 +2702,11 @@ def beyond_horizon_rows(chosen: Release) -> dict[str, Any]:
         "revision": chosen.retained,
         "issue_pin": chosen.pin,
         "horizon": reports.HORIZON,
-        "limit": LIMIT,
+        "limit": chosen.decided_through,
         "results": results,
     }
+    if chosen.decided_above != reports.HORIZON:
+        record["decided_above"] = chosen.decided_above
     if chosen.rounding != UP:
         record["issue_rounding"] = chosen.rounding
     if chosen.issue is None:
@@ -2289,10 +2900,10 @@ def standing_sides(
     """Each claimed count's standing side as the frozen claim ``record`` read the record:
     the case's exact side in the corpus, else the exact side of the row that stood there,
     read from its source's claims record (``sources``, by id), or the grid; a count of
-    ``counts`` the record has no result for, one above ``LIMIT`` that no record holds yet,
-    stands at the grid. Beyond the horizon a record read from
-    `devtools.intake_ledger.GOEBEL_FROM` takes Göbel's construction too, and refuses a
-    count above the retained program's reach of 1073."""
+    ``counts`` the record has no result for, one above the window that no record holds
+    yet, stands at the grid. Beyond the horizon a record read from
+    `devtools.intake_ledger.GOEBEL_FROM` takes Göbel's construction too, from the
+    maintained module, and refuses only a count whose side no build proves final."""
     read_on = str(record.get("read_on", ""))
 
     def beyond(n: int, side: Fraction) -> Standing:
@@ -2331,22 +2942,29 @@ def _standing(chosen: Release) -> dict[int, Standing]:
 
 def release_sides(chosen: Release, clone: Path | None) -> dict[int, Fraction]:
     """Each claimed row's exact side: from the packet's frozen claim record, and for a row
-    the packet does not derive (above ``LIMIT``), from the header of the file a clone of the
-    source holds at the retained commit, refused unless it has the digest the packet pins."""
+    the packet does not derive (above its window), from the release's hosted shard where it
+    is hosted, else from the header of the file a clone of the source holds at the retained
+    commit, refused unless it has the digest the packet pins."""
     record = _read(chosen.directory / reports.CLAIMS)
     stated = {item["n"]: Fraction(item["exact_side"]) for item in record["results"]}
     sides: dict[int, Fraction] = {}
+    hosting = Hosting(chosen)
     for row in claims(chosen):
         if row.n in stated:
             sides[row.n] = stated[row.n]
             continue
-        _require(clone is not None, f"{chosen.label} n={row.n}: no clone to read it from")
-        assert clone is not None
-        blob = _pinned_blob(chosen, row, clone)
-        header = _header(_blobs(clone, [blob])[blob])
-        _require(header is not None and header[0] == row.n, f"n={row.n}: no header")
-        assert header is not None
-        sides[row.n] = header[1]
+        # Both branches read the certificate's header at its own count by one rule
+        # (`header_side`, #793's review D, D6), and take the row's side from it as
+        # `decided_sides` does (`claim_side`, review B, B2).
+        where = f"{chosen.label} n={row.n}"
+        if hosting.hosts(row.path):
+            raw = hosting.read(row.path)
+        else:
+            _require(clone is not None, f"{where}: no clone to read it from")
+            assert clone is not None
+            blob = _pinned_blob(chosen, row, clone)
+            raw = _blobs(clone, [blob])[blob]
+        sides[row.n] = claim_side(row, header_side(raw, row.certificate_n, where))
     return sides
 
 
@@ -2562,9 +3180,10 @@ def ledger_sources(issue: int | str, read_at_main: str, read_on: str) -> dict[st
     The reports are the release's own rows, at their exact sides, and every earlier report
     at its counts no row holds: each publication the release's earlier-publications receipt
     lists, at its exact side; #715's rows at the counts it re-certified below the print,
-    which the walk decides as restatements (think-fwa9), and above ``LIMIT``, and #666's
-    above ``LIMIT``, which wait on the owner (D1). A claim the start already holds is not
-    walked again. The walk's rulings are `WALK_RULINGS`'.
+    which the walk decides as restatements (think-fwa9), and above `FROZEN_THROUGH`, and
+    #666's above it, which wait on their own walk (D1). A claim the start already holds is
+    not walked again. The walk's rulings are `WALK_RULINGS`'. It transcribes the #719
+    walk, frozen at 1024 (`tests/test_beyond_horizon_replay.py` holds the file to it).
     """
     chosen = release(issue)
     walk = walk_of(chosen)
@@ -2607,8 +3226,10 @@ def ledger_sources(issue: int | str, read_at_main: str, read_on: str) -> dict[st
             f"{row.path} (its header), retained in the {de_winter.packet} packet",
         )
         | {"printed": row.printed}
-        for row in held_claims(de_winter)
-        if row.n in counts
+        # By the constant, not #666's window, which a records slice lifts (#793's review
+        # B, B1): this frozen walk read #666's claims above 1024.
+        for row in claims(de_winter)
+        if row.n > FROZEN_THROUGH and row.n in counts
     ]
     own = []
     for row in claims(chosen):
@@ -2616,7 +3237,7 @@ def ledger_sources(issue: int | str, read_at_main: str, read_on: str) -> dict[st
         where = (
             f"facts/n-{row.n:03d}.yaml.gz in the {chosen.packet} packet, derived from "
             f"{row.path} at {chosen.retained[:8]} (its header)"
-            if row.n <= LIMIT
+            if row.n <= FROZEN_THROUGH
             else f"{row.path} at {chosen.retained[:8]} (its header), pinned by digest in the "
             f"{chosen.packet} packet and read from a clone; not derived until the owner's D1"
         )
@@ -2706,8 +3327,9 @@ def release_715_claims(
     counts: set[int], by_n: Mapping[int, Mapping[str, Any]]
 ) -> list[dict[str, Any]]:
     """#715's claims at ``counts`` that no row holds: its held re-certifications, at the
-    exact sides its packet's filtered receipt states, and its rows above ``LIMIT``, at the
-    side of the publication the earlier-publications receipt found its print to round up."""
+    exact sides its packet's filtered receipt states, and its rows above `FROZEN_THROUGH`,
+    at the side of the publication the earlier-publications receipt found its print to round
+    up."""
     packet = WEB / "couzo-issue715-2026-10-21"
     held = _held_715()
     replayed = {
@@ -2728,7 +3350,7 @@ def release_715_claims(
                 )
                 | {"printed": row["printed"]}
             )
-        elif n > LIMIT and n in printed:
+        elif n > FROZEN_THROUGH and n in printed:
             sides = [
                 Fraction(item["side"])
                 for item in by_n[n]["publications"]
@@ -3261,20 +3883,34 @@ def named_count(path: str) -> int | None:
     return None if match is None else int(match[1])
 
 
-def source_history(issue: int | str, clone: Path) -> dict[str, Any]:
-    """Every side a release's own repository published in a certificate file at
-    `HISTORY_COUNTS`, from a clone.
+def source_history_path(chosen: Release, walk: Walk | None = None) -> Path:
+    """Where a release's source-history receipt for ``walk`` is kept: `SOURCE_HISTORY` for
+    its own walk, and ``receipts/source-history-WALK.json`` for the walk above 1024."""
+    if walk is None or walk.name == chosen.walk:
+        return chosen.path(SOURCE_HISTORY)
+    return chosen.path(SOURCE_HISTORY.with_name(f"source-history-{walk.name}.json"))
+
+
+def source_history(issue: int | str, clone: Path, walk: Walk | None = None) -> dict[str, Any]:
+    """Every side a release's own repository published in a certificate file at the counts
+    beyond the corpus a walk reaches, from a clone: its own walk by default, which reaches
+    `HISTORY_COUNTS`.
 
     The repository is watched, so each certificate there is a publication from the first
     commit of the retained commit's history that holds its side. Only certificate files
-    whose paths name a count in `HISTORY_COUNTS` are read (`_COUNT_NAMED`), so a blobless
-    clone fetches no certificate above ``LIMIT``, and each file's header must state the
+    whose paths name a count the walk reaches are read (`_COUNT_NAMED`), so a blobless clone
+    fetches no certificate outside it, and each file's header must state the
     count its path names. At the retained commit each count's certificate is listed with
     its Git blob, SHA-256 and exact side, the first commit that holds its side and the first
     that holds its blob, and is held to the release's index (``Release.index``, by default the
     source's manifest, `SOURCE_MANIFEST`): the path, digest and exact bound the index states
     for the count must be the file's. f1ceee4 left the manifest as the commit before it wrote
     it, so its release is held to ``certified_bounds.json``, the index it rewrote.
+
+    Above 1024, where a release's certificates are hosted (`Release.hosted`), the files at
+    the retained commit are read from the shards, each held to the Git blob the clone's tree
+    names, so a blobless clone fetches only the earlier blobs at those paths; the first
+    commits come from the clone's trees.
 
     The source's decimal poses and its own indexes are not read. At #732's source no
     ``verified`` or certified bound either index states at 325 to 1024, the lanes the history
@@ -3283,6 +3919,11 @@ def source_history(issue: int | str, clone: Path) -> dict[str, Any]:
     Kingbird catalogue's 14-place prints (the packet README).
     """
     chosen = release(issue)
+    walk = walk or walk_of(chosen)
+
+    def wanted(n: int | None) -> bool:
+        return n is not None and n > reports.HORIZON and walk.reaches(n)
+
     chain = _git(clone, "rev-list", "--reverse", "--topo-order", chosen.retained).split()
     _require(chain and chain[-1] == chosen.retained, "the clone does not hold the commit")
     times = {
@@ -3299,13 +3940,21 @@ def source_history(issue: int | str, clone: Path) -> dict[str, Any]:
         for line in _git(clone, "ls-tree", "-r", commit).splitlines():
             meta, _, path = line.partition("\t")
             n = named_count(path)
-            if n is None or n not in HISTORY_COUNTS:
+            if n is None or not wanted(n):
                 continue
             blob = meta.split()[2]
             first.setdefault((blob, path), commit)
             if commit == chosen.retained:
                 at_pin.setdefault(n, []).append((path, blob))
-    texts = _blobs(clone, sorted({blob for blob, _ in first}))
+    hosting = Hosting(chosen)
+    hosted = {
+        blob: path for items in at_pin.values() for path, blob in items if hosting.hosts(path)
+    }
+    texts = _blobs(clone, sorted({blob for blob, _ in first} - set(hosted)))
+    for blob, path in hosted.items():
+        raw = hosting.read(path)
+        _require(git_blob(raw) == blob, f"{path}: the hosted bytes are not the clone's blob")
+        texts[blob] = raw
     sides: dict[str, Fraction] = {}
     for (blob, path), _commit in sorted(first.items()):
         header = _header(texts[blob])
@@ -3366,17 +4015,17 @@ def source_history(issue: int | str, clone: Path) -> dict[str, Any]:
                 "blob_first_published": times[blob_first[blob]],
             }
         )
-    in_range = sorted(int(key) for key in stated if int(key) in HISTORY_COUNTS)
+    in_range = sorted(int(key) for key in stated if wanted(int(key)))
     _require(
         in_range == sorted(at_pin),
-        f"{chosen.index} states other counts at or below {LIMIT} than the commit holds",
+        f"{chosen.index} states other counts {walk.reach} than the commit holds",
     )
     return {
         "format": SOURCE_HISTORY_FORMAT,
         "source": chosen.source_url,
         "retained_commit": chosen.retained,
         "history_commits": len(chain),
-        "counts": [HISTORY_COUNTS.start, HISTORY_COUNTS.stop - 1],
+        "counts": [max(walk.above, reports.HORIZON) + 1, walk.through],
         "manifest": chosen.index,
         "manifest_sha256": hashlib.sha256(manifest_raw).hexdigest(),
         "at_commit": pin_rows,
@@ -3389,11 +4038,13 @@ def source_history(issue: int | str, clone: Path) -> dict[str, Any]:
     }
 
 
-def write_source_history(issue: int | str, clone: Path) -> dict[str, int]:
-    """Write a release's source-history receipt; return its counts at the commit and its
-    publications."""
-    record = source_history(issue, clone)
-    _write(release(issue).path(SOURCE_HISTORY), record)
+def write_source_history(
+    issue: int | str, clone: Path, walk: Walk | None = None
+) -> dict[str, int]:
+    """Write a release's source-history receipt for a walk (`source_history_path`); return
+    its counts at the commit and its publications."""
+    record = source_history(issue, clone, walk)
+    _write(source_history_path(release(issue), walk), record)
     return {"at_commit": len(record["at_commit"]), "publications": len(record["publications"])}
 
 
@@ -3431,10 +4082,13 @@ def _start_sides(
 MISHAPOLK_HOLDER = "Mykhailo Polkovskyi"
 
 
-def release_walk_sources(issue: int | str, read_on: str) -> dict[str, Any]:
+def release_walk_sources(
+    issue: int | str, read_on: str, walk: Walk | None = None
+) -> dict[str, Any]:
     """The ``sources.yaml`` of a release whose walk reads its own source's history (#732).
 
-    The reports, at each count the release claims at or below ``LIMIT``:
+    ``walk`` is the release's own walk by default (`walk_of`). The reports, at each count the
+    release claims that the walk reaches (`Walk.reaches`):
 
     - the release's claims, every certificate its source holds at the retained commit, at
       the exact sides the source-history receipt states (`source_history`), dated by the
@@ -3460,16 +4114,16 @@ def release_walk_sources(issue: int | str, read_on: str) -> dict[str, Any]:
     strictly below the start (`ledger_reports`).
     """
     chosen = release(issue)
-    walk = walk_of(chosen)
+    walk = walk or walk_of(chosen)
     read_at_main = WALK_READ_AT_MAIN[walk.name]
-    history = _read(chosen.path(SOURCE_HISTORY))
+    history = _read(source_history_path(chosen, walk))
     own = {
         row["n"]: row
         for row in history["at_commit"]
-        if row["n"] <= LIMIT
+        if walk.reaches(row["n"])
         and (not chosen.changed_only or row["blob_first_commit"] == chosen.retained)
     }
-    later = later_publications(chosen)
+    later = later_publications(chosen, walk)
     starts = _start_sides(walk, read_at_main, [*own, *later], read_on)
     highs = _least_highs(starts)
     claims = []
@@ -3486,7 +4140,7 @@ def release_walk_sources(issue: int | str, read_on: str) -> dict[str, Any]:
     if chosen.comment is None:
         what = (
             f"The {len(claims)} certificates the source holds at "
-            f"{chosen.retained[:8]} beyond the corpus at or below {LIMIT}, which its "
+            f"{chosen.retained[:8]} beyond the corpus {walk.reach}, which its "
             f"manifest ({SOURCE_MANIFEST}, pinned by the SHA-256 the issue states) lists "
             "as the issue's claims there, each at its header's exact side and dated by "
             "the issue; first_committed is the first commit of the source's history "
@@ -3495,7 +4149,7 @@ def release_walk_sources(issue: int | str, read_on: str) -> dict[str, Any]:
     else:
         what = (
             f"The {len(claims)} certificates {chosen.retained[:8]} adds or changes beyond "
-            f"the corpus at or below {LIMIT}, which the comment reports, each held to the "
+            f"the corpus {walk.reach}, which the comment reports, each held to the "
             f"path, SHA-256 and exact bound the release's index ({chosen.index}) states and "
             "read at its header's exact side, dated by the comment; first_committed is the "
             "first commit of the source's history that published the side."
@@ -3652,7 +4306,9 @@ LATER_COMMITS_FORMAT = "beyond-horizon-later-commits-v1"
 
 def later_commits(issue: int | str, clone: Path) -> dict[str, Any]:
     """Every side the commits a release names past its pin (``later_reads``) publish at a
-    count to ``LIMIT``, from a clone: each certificate file whose path names a count
+    count its walk reaches (`Walk.reaches`; to 1024 for every walk frozen there, so
+    f1ceee4's receipt keeps its ``"limit": 1024``), from a clone: each certificate file whose
+    path names a count
     (`_COUNT_NAMED`) that the commit adds or changes, at its header's side, and each bound an
     index (`INDEXES`) states at a count where the commit changes it.
 
@@ -3662,6 +4318,7 @@ def later_commits(issue: int | str, clone: Path) -> dict[str, Any]:
     """
     chosen = release(issue)
     _require(chosen.later_reads, f"{chosen.label}: declares no later commits")
+    walk = walk_of(chosen)
     parent = chosen.retained
     commits = []
     for commit, pushed in chosen.later_reads:
@@ -3675,7 +4332,7 @@ def later_commits(issue: int | str, clone: Path) -> dict[str, Any]:
             meta, _, path = entry.partition("\t")
             _old_mode, _new_mode, old, new, status = meta.lstrip(":").split()
             n = named_count(path)
-            if n is not None and n <= LIMIT and status in ("A", "M"):
+            if n is not None and walk.reaches(n) and status in ("A", "M"):
                 wanted.append((n, path, new, "certificate"))
             elif path in INDEXES and status == "M":
                 indexes[path] = (old, new)
@@ -3715,7 +4372,7 @@ def later_commits(issue: int | str, clone: Path) -> dict[str, Any]:
                 return value
 
             for key in sorted(after, key=lambda item: int(item) if item.isdigit() else 0):
-                if not key.isdigit() or int(key) > LIMIT:
+                if not key.isdigit() or not walk.reaches(int(key)):
                     continue
                 stated = bound(after, key, INDEXES[path])
                 if stated is None or stated == bound(before, key, INDEXES[path]):
@@ -3745,7 +4402,7 @@ def later_commits(issue: int | str, clone: Path) -> dict[str, Any]:
         "format": LATER_COMMITS_FORMAT,
         "source": chosen.source_url,
         "retained_commit": chosen.retained,
-        "limit": LIMIT,
+        "limit": walk.through,
         "indexes": {path: ".".join(keys) for path, keys in INDEXES.items()},
         "commits": commits,
     }
@@ -3758,16 +4415,29 @@ def write_later_commits(issue: int | str, clone: Path) -> dict[str, int]:
     return {item["commit"][:7]: len(item["publications"]) for item in record["commits"]}
 
 
-def later_publications(chosen: Release) -> dict[int, list[dict[str, Any]]]:
+def later_publications(
+    chosen: Release, walk: Walk | None = None
+) -> dict[int, list[dict[str, Any]]]:
     """A release's later commits' publications (`later_commits`), by count, each with its
-    commit and push; none for a release that names no later commits."""
+    commit and push; none for a release that names no later commits. The receipt must
+    cover every count ``walk`` reaches (its own walk by default): one written to 1024 is
+    refused for a walk above it, rather than passing over every later publication there
+    (#793's review B, B4)."""
     if not chosen.later_reads:
         return {}
+    walk = walk or walk_of(chosen)
     record = _read(chosen.path(LATER_COMMITS))
     _require(
         [(item["commit"], item["pushed"]) for item in record["commits"]]
         == list(chosen.later_reads),
         f"{chosen.label}: the later-commits receipt names other commits",
+    )
+    _require("limit" in record, f"{chosen.label}: the later-commits receipt states no limit")
+    limit = record["limit"]
+    _require(
+        limit is None or (walk.through is not None and limit >= walk.through),
+        f"{chosen.label}: the later-commits receipt reads to {limit}, and {walk.name} "
+        f"reaches {walk.reach}",
     )
     repository = repository_of(chosen.source_url)
     found: dict[int, list[dict[str, Any]]] = {}
@@ -3819,13 +4489,18 @@ def later_reports(
                     "reports, which no issue reports: the repository is watched, so it is a "
                     "report from the push that made it public, which the repository's "
                     "activity log dates. Transcribed from the "
-                    f"{chosen.packet} packet's {LATER_COMMITS.as_posix()} at every count to "
-                    f"{LIMIT} where it adds or changes a certificate or an index's bound, at "
-                    "the least side it states there." + held_sentence(walk, label)
+                    f"{chosen.packet} packet's {LATER_COMMITS.as_posix()} at every count "
+                    f"{_to(walk)} where it adds or changes a certificate or an index's bound, "
+                    "at the least side it states there." + held_sentence(walk, label)
                 ),
             }
         )
     return found
+
+
+def _to(walk: Walk) -> str:
+    """The counts a walk reaches as a later commit's note says them: ``to 1024``."""
+    return f"above {walk.above}" if walk.through is None else f"to {walk.through}"
 
 
 def _open_against(
@@ -4240,11 +4915,14 @@ def _grouped_publications(
     return found
 
 
-def claim_map_walk_sources(issue: int | str, read_on: str) -> dict[str, Any]:
+def claim_map_walk_sources(
+    issue: int | str, read_on: str, walk: Walk | None = None
+) -> dict[str, Any]:
     """The ``sources.yaml`` of a release whose claims are re-derived from its source's
     indexes (#763, `Release.claim_map`), with every other release of its walk.
 
-    The reports, at each count those releases claim at or below ``LIMIT``:
+    ``walk`` is the release's own walk by default (`walk_of`). The reports, at each count
+    those releases claim that the walk reaches (`Walk.reaches`):
 
     - the issue's claims, dated by the issue, each at the exact bound the index states:
       a certificate's header, a deletion's or a recipe's bound; and the index's
@@ -4259,11 +4937,11 @@ def claim_map_walk_sources(issue: int | str, read_on: str) -> dict[str, Any]:
     - in the corpus, every earlier report a retained ledger walked strictly below the start
       before the issue (`ledger_reports`).
 
-    Every earlier publication is cut at the issue (`CLAIM_MAP_WALKS`). The claims above
-    ``LIMIT`` are not walked: they are think-llit's (D1).
+    Every earlier publication is cut at the issue (`CLAIM_MAP_WALKS`). The claims a walk
+    frozen at 1024 does not reach are the walk above 1024's (D1, think-llit).
     """
     chosen = release(issue)
-    walk = walk_of(chosen)
+    walk = walk or walk_of(chosen)
     _require(
         walk.name in CLAIM_MAP_WALKS,
         f"{walk.name}: no claim-map walk declared (CLAIM_MAP_WALKS)",
@@ -4273,7 +4951,7 @@ def claim_map_walk_sources(issue: int | str, read_on: str) -> dict[str, Any]:
     read_at_main = WALK_READ_AT_MAIN[walk.name]
     ours = [item for item in _releases(walk).values() if item.claim_map]
     own = {
-        item.label: [claim for claim in mapped_claims(item) if int(claim["n"]) <= LIMIT]
+        item.label: [claim for claim in mapped_claims(item) if walk.reaches(int(claim["n"]))]
         for item in ours
     }
     claimed = Counter(int(claim["n"]) for claims in own.values() for claim in claims)
@@ -4295,13 +4973,17 @@ def claim_map_walk_sources(issue: int | str, read_on: str) -> dict[str, Any]:
         if item.issue is not None:
             head: dict[str, Any] = {"report": item.label, "issue": item.issue}
             what = (
-                f"The issue's {len(claims)} claims at or below {LIMIT} ({described}), "
+                f"The issue's {len(claims)} claims {walk.reach} ({described}), "
                 f"re-derived from the source's indexes at {item.retained[:8]} by its README's "
                 f"rule ({item.packet} packet, {CLAIM_MAP.as_posix()}), since the issue carries "
                 "no table; each at the exact bound certified_bounds.json states, dated by the "
                 "issue. first_committed is the committer time of the commit that first holds "
-                f"the certificate; {declared.pushed}. Its claims above 1024 are not walked "
-                "here (think-llit)."
+                f"the certificate; {declared.pushed}."
+                + (
+                    f" Its claims above {walk.through} are not walked here (think-llit)."
+                    if walk.through is not None
+                    else f" Its claims at or below {walk.above} are walked by {item.walk}."
+                )
             )
         else:
             head = {
@@ -4311,7 +4993,7 @@ def claim_map_walk_sources(issue: int | str, read_on: str) -> dict[str, Any]:
             }
             what = (
                 f"The {len(claims)} rows certified_bounds.json publishes at "
-                f"{item.retained[:8]} at or below {LIMIT} ({described}) that the issue's "
+                f"{item.retained[:8]} {walk.reach} ({described}) that the issue's "
                 "selection rule leaves out: each is below the comparison's 12-place print, "
                 "but by 1e-10 or less where the comparison is another author's. No issue "
                 "reports them, so they are the watched repository's publication, dated by the "
@@ -4437,17 +5119,17 @@ def claim_map_walk_sources(issue: int | str, read_on: str) -> dict[str, Any]:
     }
 
 
-def write_release_walk_sources(issue: int | str, read_on: str) -> int:
+def write_release_walk_sources(issue: int | str, read_on: str, walk: Walk | None = None) -> int:
     """Write a release walk's ``sources.yaml`` (`release_walk_sources`, or
-    `claim_map_walk_sources` for a release whose claims are re-derived); return how many
-    reports it holds."""
+    `claim_map_walk_sources` for a release whose claims are re-derived), for its own walk
+    or ``walk``; return how many reports it holds."""
     import yaml  # noqa: PLC0415
 
     chosen = release(issue)
     document = (claim_map_walk_sources if chosen.claim_map else release_walk_sources)(
-        issue, read_on
+        issue, read_on, walk
     )
-    target = walk_of(release(issue)).directory / "sources.yaml"
+    target = (walk or walk_of(chosen)).directory / "sources.yaml"
     target.parent.mkdir(parents=True, exist_ok=True)
     with atomic_output_file(target) as temporary:
         temporary.write_text(
@@ -4464,8 +5146,14 @@ def declared_rows(chosen: Release) -> dict[str, Any]:
     (#732), the certificate its source holds at the retained commit (`source_history`), or,
     for one whose claims are re-derived from its source's indexes (#763), the certificate
     its packet's claim map names (`Release.claim_map`), with that side rounded up at 12
-    places. A count in the corpus is the register's, not a row's."""
-    walk = walk_of(chosen)
+    places. A count in the corpus is the register's, not a row's. Each walk of the release
+    (`walks_of`) declares the counts it reaches. A deletion the walk records and does not
+    hold is a row at its parent's side, declaring the parent's certificate and the squares
+    it deletes (``deleted``), which the replay decides as the parent's first ``n`` poses;
+    whether an issue's deletion bound gets a row is think-kzme's, so a walk holds it until
+    the owner answers. A recipe the walk records and does not hold is a row by the owner's
+    D2 answer, declaring its parent's certificate and the recipe the construction checker
+    decides (`write_recipe_decisions`)."""
     commit = chosen.pin
     if chosen.claim_map:
         found = {
@@ -4473,13 +5161,17 @@ def declared_rows(chosen: Release) -> dict[str, Any]:
                 "kind": item["kind"],
                 "path": item["certificate"],
                 "side": item["exact"],
+                "deleted": int(item.get("deleted_squares") or 0),
+                **({"recipe": declared_recipe(item)} if item.get("construction") else {}),
             }
             for item in mapped_claims(chosen)
         }
     elif chosen.issue is not None:
         found = {
             row["n"]: {"kind": "certificate", "path": row["certificate"], "side": row["side"]}
-            for row in _read(chosen.path(SOURCE_HISTORY))["at_commit"]
+            for walk in walks_of(chosen)
+            if source_history_path(chosen, walk).is_file()
+            for row in _read(source_history_path(chosen, walk))["at_commit"]
         }
     else:
         found = {
@@ -4495,7 +5187,13 @@ def declared_rows(chosen: Release) -> dict[str, Any]:
             )
         }
     rows = []
-    for n, count in sorted(_walked(walk).items()):
+    walked = {
+        n: (walk, count)
+        for walk in walks_of(chosen)
+        for n, count in _walked(walk).items()
+        if walk.reaches(n)
+    }
+    for n, (walk, count) in sorted(walked.items()):
         if n <= reports.HORIZON or walk.holds(chosen.label, n) is not None:
             continue
         if not any(
@@ -4504,10 +5202,16 @@ def declared_rows(chosen: Release) -> dict[str, Any]:
         ):
             continue
         item = found[n]
-        _require(item["kind"] == "certificate", f"{chosen.label} n={n}: no certificate file")
-        rows.append(
-            {"n": n, "certificate": item["path"], "printed": ceiling(Fraction(item["side"]))}
+        deleted = int(item.get("deleted") or 0)
+        _require(
+            item["kind"] == "certificate"
+            or (item["kind"] == "deletion" and deleted > 0)
+            or "recipe" in item,
+            f"{chosen.label} n={n}: no certificate file and no recipe",
         )
+        row = {"n": n, "certificate": item["path"], "printed": ceiling(Fraction(item["side"]))}
+        row |= {"deleted": deleted} if deleted else {}
+        rows.append(row | ({"recipe": item["recipe"]} if "recipe" in item else {}))
     declared: dict[str, Any] = {
         "format": WATCHED_FORMAT,
         "publication": chosen.issue_url,
@@ -4517,6 +5221,21 @@ def declared_rows(chosen: Release) -> dict[str, Any]:
     if chosen.issue is None:
         declared["published"] = chosen.reported
     return declared | {"walk": chosen.walk, "rows": rows}
+
+
+def declared_recipe(item: Mapping[str, Any]) -> dict[str, Any]:
+    """A claim map's recipe as a declared row carries it (`recipe_of` reads it back): the
+    construction, the exact bound the index states and the parent's SHA-256."""
+    recipe = checker.recipe_from_index(item)
+    return {
+        "kind": recipe.kind,
+        "source_n": recipe.source_n,
+        "tiles_per_side": recipe.tiles_per_side,
+        "layers": recipe.layers,
+        "capacity": recipe.capacity,
+        "bound": legacy.literal(recipe.bound),
+        "sha256": recipe.parent_sha256,
+    }
 
 
 def declare_rows() -> dict[str, int]:
@@ -4693,14 +5412,36 @@ def write_pose_identity(issue: int | str) -> dict[int, list[str]]:
 # --------------------------------------------------------------------------- coverage plan
 
 
-def walk_of(chosen: Release) -> Walk:
-    """The ledger walk that plans a release's rows."""
-    return WALKS[chosen.walk]
+def walk_of(chosen: Release, n: int | None = None) -> Walk:
+    """The ledger walk that plans a release's row at ``n``: its own walk where that walk
+    reaches ``n``, as every row to 1024 and every count by default; above it, the walk
+    above 1024 that records the release there (`Release.walk_above`), which must reach it."""
+    own = WALKS[chosen.walk]
+    if n is None or own.reaches(n):
+        return own
+    _require(
+        bool(chosen.walk_above) and chosen.walk_above in WALKS,
+        f"{chosen.label} n={n}: no walk reaches it ({own.name} reaches {own.reach})",
+    )
+    above = WALKS[chosen.walk_above]
+    _require(above.reaches(n), f"{chosen.label} n={n}: {above.name} does not reach it")
+    return above
+
+
+def walks_of(chosen: Release) -> list[Walk]:
+    """Every walk that plans a release's rows: its own, then the walk above 1024."""
+    own = [WALKS[chosen.walk]]
+    return own + ([WALKS[chosen.walk_above]] if chosen.walk_above else [])
 
 
 def _releases(walk: Walk) -> dict[str, Release]:
-    """The releases a walk plans, by the report label the ledger gives each."""
-    return {item.label: item for item in RELEASES.values() if item.walk == walk.name}
+    """The releases a walk plans, by the report label the ledger gives each: those it is
+    the own walk of, and those whose rows above 1024 it records (`Release.walk_above`)."""
+    return {
+        item.label: item
+        for item in RELEASES.values()
+        if walk.name in (item.walk, item.walk_above)
+    }
 
 
 def _awaits(walk: Walk, report: str, n: int) -> bool:
@@ -4765,12 +5506,12 @@ def planned_rows() -> list[dict[str, Any]]:
     """
     rows: list[dict[str, Any]] = []
     for chosen in RELEASES.values():
-        walk = walk_of(chosen)
-        walked = {count["n"]: count for count in _counts(walk)}
         printed = {
             row["n"]: row["offered_side"] for row in _read(chosen.path(RECORD))["results"]
         }
         for row in decided_claims(chosen):
+            walk = walk_of(chosen, row.n)
+            walked = _walked(walk)
             _require(row.n in walked, f"{chosen.label} n={row.n}: the ledger does not walk it")
             steps = walked[row.n]["steps"]
             (mine,) = [i for i, step in enumerate(steps) if step["report"] == chosen.label]
@@ -4804,9 +5545,8 @@ def unrecorded_rows() -> list[tuple[int, str]]:
     """The decided rows each walk does not record, ``(n, source)``: no row may hold them."""
     found: list[tuple[int, str]] = []
     for chosen in RELEASES.values():
-        walked = {count["n"]: count for count in _counts(walk_of(chosen))}
         for row in decided_claims(chosen):
-            steps = walked.get(row.n, {"steps": []})["steps"]
+            steps = _walked(walk_of(chosen, row.n)).get(row.n, {"steps": []})["steps"]
             if any(
                 step["report"] == chosen.label and step["verdict"] == NOT_RECORDED
                 for step in steps
@@ -5080,10 +5820,11 @@ def declaration_problems() -> list[str]:
     for chosen in RELEASES.values():
         if not declares_rows(chosen):
             continue
-        walk = walk_of(chosen)
         walked = {
             n
+            for walk in walks_of(chosen)
             for n, count in _walked(walk).items()
+            if walk.reaches(n)
             for step in count["steps"]
             if step["report"] == chosen.label
             and step["verdict"] == RECORDED
@@ -5116,8 +5857,9 @@ def chain_problems(coverage: Mapping[str, Any]) -> list[str]:
     The chain is the count's start, where it is a beyond-horizon row, then the row of each
     report the walk records, in report order, passing over a report whose import is pending
     (`Awaiting`). Each must be in the register and superseded by the next; the last is
-    current, or superseded by a report the walk does not reach. Counts above ``LIMIT``
-    have no rows yet (the owner's D1) and are not held. Where two walks reach a count, a
+    current, or superseded by a report the walk does not reach. Each walk is held at the
+    counts it reaches (`Walk.reaches`): a count it walks beyond them, as the #719 walk's
+    claims above 1024, is another walk's. Where two walks reach a count, a
     later walk may insert between two of an earlier walk's reports a report the earlier
     walk does not reach, as the history walk inserts Couzo's 4e4c8ce between a start and
     #670; the register may then lead from one to the other through it (`bridged`), and
@@ -5129,7 +5871,7 @@ def chain_problems(coverage: Mapping[str, Any]) -> list[str]:
     for walk in WALKS.values():
         for count in _counts(walk):
             n = count["n"]
-            if not reports.HORIZON < n <= LIMIT:
+            if n <= reports.HORIZON or not walk.reaches(n):
                 continue
             start = _start_source(count)
             chain = ([start] if start is not None else []) + [
@@ -5239,10 +5981,10 @@ def _superseded_after(
 
 
 def construction_problems(register: Mapping[str, Any]) -> list[str]:
-    """Where a register row beyond the corpus to ``LIMIT`` is not marked as the owner's
-    answer of 23 October 2026 on #613 requires (think-8krd): a row at or above Göbel's
-    construction at its count, as `devtools.intake_ledger.goebel_form` reads the retained
-    program, is marked ``above-classical-construction`` with that construction, and a row
+    """Where a register row beyond the corpus is not marked as the owner's answer of 23
+    October 2026 on #613 requires (think-8krd): a row at or above Göbel's construction at its
+    count, as `devtools.intake_ledger.goebel_form` reads the maintained module at any count,
+    is marked ``above-classical-construction`` with that construction, and a row
     so marked is above it. A row is read at its exact side where its source's claims
     record states one, else as low as its print allows."""
     from devtools import check_source_coverage as coverage_check  # noqa: PLC0415
@@ -5252,11 +5994,16 @@ def construction_problems(register: Mapping[str, Any]) -> list[str]:
     problems: list[str] = []
     for row in register["beyond_horizon_claims"]:
         n, value = int(row["n"]), str(row["value"])
-        if not reports.HORIZON < n <= LIMIT:
+        if n <= reports.HORIZON:
             continue
         where = f"n={n} from {row['source_id']}"
         marked = row.get("disposition") == coverage_check.ABOVE_CONSTRUCTION
-        form = intake_ledger.goebel_form(n)
+        try:
+            form = intake_ledger.goebel_form(n)
+        except intake_ledger.LedgerError as error:
+            problems.append(f"{where}: {error}")
+            continue
+        assert form is not None
         exact = _stated_side(sources[str(row["source_id"])], n)
         low = exact if exact is not None else Fraction(value) - intake_ledger.unit(value)
         above = coverage_check.construction_sign(low, form.text()) == 1
@@ -5288,12 +6035,13 @@ def coverage_problems(coverage: Mapping[str, Any] | None = None) -> list[str]:
         safe_load(COVERAGE.read_text(encoding="utf-8")) if coverage is None else coverage
     )
     rows = {(row["n"], row["source_id"]): row for row in register["beyond_horizon_claims"]}
-    walks = {item.source: walk_of(item) for item in RELEASES.values()}
+    releases = {item.source: item for item in RELEASES.values()}
     problems = []
     for row in planned_rows():
         held = rows.get((row["n"], row["source_id"]))
+        walk = walk_of(releases[row["source_id"]], row["n"])
         if held != row and not (
-            held is not None and _superseded_after(row, held, walks[row["source_id"]], register)
+            held is not None and _superseded_after(row, held, walk, register)
         ):
             problems.append(
                 f"n={row['n']} from {row['source_id']}: the register's row is not the plan's"
@@ -5405,7 +6153,8 @@ def sample_problems(
 def release_problems(chosen: Release, *, replay: bool, workers: int) -> list[str]:
     """Problems with one packet's receipts and record; empty when they hold."""
     custody(chosen)
-    rows = decided_claims(chosen)
+    decided = decided_claims(chosen)
+    rows = [row for row in decided if row.recipe is None]
     receipt = _read(chosen.path(FILTERED))
     stored = receipt["rows"]
     if [row["n"] for row in stored] != [row.n for row in rows]:
@@ -5426,14 +6175,19 @@ def release_problems(chosen: Release, *, replay: bool, workers: int) -> list[str
             for row, kept, fresh in zip(rows, stored, again, strict=True)
             if _stable(fresh) != _stable(kept)
         )
+    problems += recipe_problems(chosen, replay=replay, workers=workers)
     record = chosen.path(RECORD)
-    if not record.is_file() or _read(record) != beyond_horizon_rows(chosen):
+    rebuilt = retained_dumps(beyond_horizon_rows(chosen, sides), sort_keys=True)
+    if not record.is_file() or record.read_text(encoding="utf-8") != rebuilt:
         problems.append(f"{chosen.label}: the beyond-horizon record differs from its rebuild")
-    return problems + _cross_check_problems(chosen, rows)
+    return problems + _cross_check_problems(chosen, decided, sides)
 
 
-def _cross_check_problems(chosen: Release, rows: Sequence[Claim]) -> list[str]:
-    """The first commits', the all-pairs sample's and the Göbel receipt's outcomes.
+def _cross_check_problems(
+    chosen: Release, rows: Sequence[Claim], decided: Mapping[int, Fraction]
+) -> list[str]:
+    """The first commits', the all-pairs sample's and the Göbel receipt's outcomes; the
+    Göbel receipt must also be its rebuild byte for byte (`goebel_receipt`).
 
     A retained certificate's Git blob is rebuilt from its bytes; a derived packet keeps
     none, so its receipt's SHA-256 must be the one the packet pins. Every side the walk
@@ -5448,10 +6202,7 @@ def _cross_check_problems(chosen: Release, rows: Sequence[Claim]) -> list[str]:
         expected = [(row.n, row.path, pinned[row.path]) for row in held]
         found = [(item["n"], item["certificate"], item["sha256"]) for item in commits["rows"]]
     else:
-        expected = [
-            (row.n, row.path, git_blob(read_retained_bytes(archive(chosen) / row.path)))
-            for row in held
-        ]
+        expected = retained_blobs(chosen, held)
         found = [(item["n"], item["certificate"], item["blob"]) for item in commits["rows"]]
     if found != expected:
         problems.append(f"{chosen.label}: the first commits are not the retained certificates'")
@@ -5469,13 +6220,24 @@ def _cross_check_problems(chosen: Release, rows: Sequence[Claim]) -> list[str]:
         (item["n"], Fraction(item["side"]), item["relation"]) for item in comparison["detail"]
     ]
     unrecorded = {n for n, source in unrecorded_rows() if source == chosen.source}
-    decided = decided_sides(chosen)
     sides = [(row.n, decided[row.n]) for row in rows]
     if [(n, side) for n, side, _ in compared] != sides or any(
         relation != "below" for n, _, relation in compared if n not in unrecorded
     ):
         problems.append(f"{chosen.label}: a decided side is not below Göbel's construction")
+    rebuilt = retained_dumps(goebel_receipt(chosen, decided), sort_keys=True)
+    if chosen.path(GOEBEL).read_text(encoding="utf-8") != rebuilt:
+        problems.append(f"{chosen.label}: the Göbel receipt differs from its rebuild")
     return problems
+
+
+def retained_blobs(chosen: Release, rows: Sequence[Claim]) -> list[tuple[int, str, str]]:
+    """Each row's count, certificate and Git blob, as the first-commits receipt lists
+    them, from one `Hosting` for the whole list (#793's review A, A3)."""
+    hosting = Hosting(chosen)
+    return [
+        (row.n, row.path, blob_of(chosen, row.path, row.certificate_n, hosting)) for row in rows
+    ]
 
 
 def check(*, replay: bool, workers: int = 1, issues: Sequence[int | str] = ()) -> list[str]:
@@ -5547,6 +6309,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     own_history = commands.add_parser("source-history")
     own_history.add_argument("--issue", required=True, help=KEY_HELP)
     own_history.add_argument("--clone", type=Path, required=True)
+    own_history.add_argument("--walk", default="", help="a walk of WALKS; the release's own")
     after_pin = commands.add_parser("later-commits")
     after_pin.add_argument("--issue", required=True, help=KEY_HELP)
     after_pin.add_argument("--clone", type=Path, required=True)
@@ -5557,6 +6320,10 @@ def main(argv: Sequence[str] | None = None) -> int:
     transcribe_release = commands.add_parser("release-sources")
     transcribe_release.add_argument("--issue", required=True, help=KEY_HELP)
     transcribe_release.add_argument("--read-on", required=True)
+    transcribe_release.add_argument("--walk", default="", help="a walk of WALKS")
+    decide_recipes = commands.add_parser("recipe-decisions")
+    decide_recipes.add_argument("--issue", nargs="+", required=True, help=KEY_HELP)
+    decide_recipes.add_argument("--workers", type=int, default=2)
     commands.add_parser("declare-rows")
     commands.add_parser("coverage-plan")
     commands.add_parser("held-dependents")
@@ -5586,11 +6353,16 @@ def main(argv: Sequence[str] | None = None) -> int:
             dict(_clone(item) for item in args.clone), args.start_coverage
         ),
         "history-sources": lambda: write_history_sources(args.read_on),
-        "source-history": lambda: write_source_history(args.issue, args.clone),
+        "source-history": lambda: write_source_history(
+            args.issue, args.clone, WALKS[args.walk] if args.walk else None
+        ),
         "later-commits": lambda: write_later_commits(args.issue, args.clone),
         "decide-later": lambda: write_decide_later(args.issue),
         "pose-identity": lambda: write_pose_identity(args.issue),
-        "release-sources": lambda: write_release_walk_sources(args.issue, args.read_on),
+        "release-sources": lambda: write_release_walk_sources(
+            args.issue, args.read_on, WALKS[args.walk] if args.walk else None
+        ),
+        "recipe-decisions": lambda: write_recipe_decisions(args.issue, args.workers),
         "declare-rows": declare_rows,
         "coverage-plan": lambda: {
             "rows": planned_rows(),
