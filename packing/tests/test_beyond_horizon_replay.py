@@ -1453,7 +1453,8 @@ def test_732_declares_the_77_rows_its_walk_records_and_restates_499() -> None:
 def test_732_s_rows_are_current_and_supersede_the_rows_they_beat() -> None:
     """#732's 77 rows supersede the rows they beat, and its walk plans each current. Since
     24 October f1ceee4's rows, which a later walk records, supersede 47 of them in the
-    register, as a later import may (`_superseded_after`); the other 30 are current."""
+    register, as a later import may (`_superseded_after`), and #763's rows 20 more; the
+    other 10 are current."""
     rows = [row for row in replay.planned_rows() if row["bead"] == "think-0gp6"]
     assert len(rows) == 77
     assert all("superseded_by" not in row for row in rows)
@@ -1463,7 +1464,7 @@ def test_732_s_rows_are_current_and_supersede_the_rows_they_beat() -> None:
         for row in coverage["beyond_horizon_claims"]
         if row["source_id"] == "mishapolk-issue732-2026-10-22"
     )
-    assert held == {None: 30, F1_SOURCE: 47}
+    assert held == {None: 10, F1_SOURCE: 47, SOURCE_763: 20}
     beaten = Counter(
         start
         for _, start, source in replay.planned_supersessions()
@@ -1855,7 +1856,8 @@ def test_each_row_above_goebel_s_construction_is_marked() -> None:
     """The owner's answer on #613 (think-8krd): Göbel's construction is an earlier report,
     so the nine rows of 8 to 13 October above it at 369, 375 and 376 are marked with it and
     hold no count. 369 and 376 have no current row; at 375 the 13 October row, below it,
-    leads to Evan Daniel's. A row left unmarked, or marked and not above, is named."""
+    leads to Evan Daniel's, which #763's row supersedes. A row left unmarked, or marked and
+    not above, is named."""
     coverage = safe_load(replay.COVERAGE.read_text(encoding="utf-8"))
     marked = {
         (row["n"], row["source_id"]): row["construction"]
@@ -1867,7 +1869,7 @@ def test_each_row_above_goebel_s_construction_is_marked() -> None:
     current = coverage_check.current_beyond_horizon(coverage)
     assert 369 not in current
     assert 376 not in current
-    assert current[375]["source_id"] == "evand-compositions-2026-10-13"
+    assert current[375]["source_id"] == SOURCE_763
     for row in coverage["beyond_horizon_claims"]:
         if (row["n"], row["source_id"]) == (376, "couzo-certificates-2026-10-13"):
             row["disposition"] = "tracked-outside-case-corpus"
