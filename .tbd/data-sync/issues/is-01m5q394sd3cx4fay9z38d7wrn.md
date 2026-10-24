@@ -5,7 +5,7 @@ title: "PR B of #763: map T-240's stage 4 review (V3/C3), adopt and regularize a
 kind: task
 status: in_progress
 priority: 1
-version: 3
+version: 4
 delegate: c-prb-763-1024
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-24T13:58:21.741Z
-updated_at: 2026-10-24T16:01:47.403Z
+updated_at: 2026-10-24T16:34:48.226Z
 started_at: 2026-10-24T13:58:27.438Z
 ---
 
@@ -43,3 +43,5 @@ REMAINS / FOR THE COORDINATOR
 - News: S3 story drafted in the PR body; lands after merge (import_changelog).
 - The backlog bead's T-240 row can go (T-240 is V3/C3).
 - The #763 acknowledgement's requests-record entry (posted 13:37:28Z) is not recorded here.
+
+STATUS 2026-10-24 16:40Z (c-prb-763-1024): head 7b6410d83 (DATA_REVISION ff9e896e1). Hosted: Packing validation 40110977552 and Certificate page 40110977525 succeeded; packing-required and pages-required pass, 31 checks pass, none fail. Later fixes after the first notes: 95dca0137 (rigidity blocks), 5b663df70 (CI sweeps slice), 1c6be595f (tests), ff9e896e1 (composite figure record); papers re-measured at ff9e896e (69 files x3 identical). Not merged; main unchanged at 2ec489d1e. Not synced (the coordinator syncs).
