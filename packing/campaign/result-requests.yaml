@@ -21201,6 +21201,20 @@ issues:
       - result: n1413
       - result: n1489
       - result: n1568
+    - url: https://github.com/jlevy/squares/issues/719#issuecomment-6378136960
+      date: '2026-10-24'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n105
+        id: T-229
+      - result: n204
+        id: T-229
+      - result: n204-lower
+        id: T-231
+        verification: V3
+        confirmation: C3
+        status: confirmed
     close_when: >-
       T-229 is reviewed and adopted at 105 and 204 (think-4h23), T-231 is reviewed and adopted
       at 204 (think-tetq, think-h01y), the owner has answered whether counts above 1024 are
@@ -21344,6 +21358,30 @@ issues:
       edit withdrew, the nine where #732 claims a lower side are not reports, by the owner's answer
       of the same day (think-8m4k), and #732's rows there stand; at 539 the file is #732's own row.
       The follow-up that says so is drafted on think-temp.
+
+      The follow-up posted at 2026-10-24T01:25:17Z (issuecomment-6378136960), after #753
+      merged (5f5294d82) and its Pages deployment was checked (run 40047992794, its
+      verify-deployment job included; squaremath.org serving v0.9.2-527ba8), takes up the
+      author's comment of 01:52:40Z. It said that T-229's credit at 204 now follows his
+      solve from Couzo's #678 certificate and no longer names Daniel's regularization as an
+      antecedent, that its regularization item at 204 names T-223 (60 squares beyond 1e-3, 7
+      beyond a tenth, at most 0.237), that the author's lineage at 105 and 204 replaces the
+      sentence that the source states none, and that his account of the verifier runs is
+      recorded in T-229's notes and evidence and in both packets. It reported T-231 for
+      n204-lower at V3/C3, confirmed, independently re-implemented, at S2, 1.4809e-11 below
+      T-229 and the house best packing at 204 since the pass of 24 October, T-229 retained
+      as history and 105 unchanged: the packet's custody under his grant of 22 October, the
+      two maintained routes (sqpack.verify, sharing his named checker's components, and
+      check_rational_witness_independent) and the review's checker (review_t231_check.py,
+      sharp_controls_t231.py) by name, and both strong generators' outcomes. It said the
+      ledger walks #719's claim at 204 at n204.cert's side, and gave the review's
+      measurement of the two 204 files as one solved packing at two paddings, with Evan
+      Daniel's exact solver stated as a measured method, not an antecedent. It put the
+      review's three questions to the author: asks 1 and 2 above, and question 3, which of
+      the two 204 files he wrote first and why n-204.cert carries the larger padding. It
+      answered his recommendation to publish the checkers by #732's import reply, with this
+      result's commands and the review's programs in the packet. It states the 204 lineage
+      only back to Couzo's #678 certificate, and the issue stays open.
   - number: 728
     title: 's(303) ≤ 17.909772217275: registration request'
     author: evand
