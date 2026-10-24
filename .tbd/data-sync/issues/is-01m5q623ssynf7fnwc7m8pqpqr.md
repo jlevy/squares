@@ -3,17 +3,21 @@ type: is
 id: is-01m5q623ssynf7fnwc7m8pqpqr
 title: "OR-1: move the pose-by-pose identity measurement and the sharp controls into devtools"
 kind: task
-status: open
+status: in_progress
 priority: 3
-version: 1
+version: 2
+delegate: c-or1-jv2s-1024
 labels:
   - tooling
   - packing
   - result-import
 dependencies: []
 parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
+hold: null
+hold_until: null
 created_at: 2026-10-24T14:46:57.081Z
-updated_at: 2026-10-24T14:46:57.081Z
+updated_at: 2026-10-24T16:05:09.620Z
+started_at: 2026-10-24T16:05:09.620Z
 ---
 Five upper-bound packets now carry their own copy of the same two measurements: measure/identity.py (evand-regularized-2026-10-20 holds the measures; mishapolk-n204-2026-10-22, amundsk-n303-2026-10-23 and evand-kaggle-descents-2026-10-24 load them by file path, and the T-240 review wrote a clean-room one) and receipts/sharp_controls.py (mishapolk-n204-2026-10-22, amundsk-n303-2026-10-23/replay, and evand-kaggle-descents-2026-10-24, which takes --packet and --n). OR-1: build the tool once.
 
