@@ -249,7 +249,7 @@ Two further tables below hold method analogues from adjacent problems:
 | **[Stromquist Memo II]** | Packing Unit Squares Inside Squares, II (Ten Unit Squares) | W. Stromquist | 1984 | Daniel H. Wagner, Associates internal memorandum, October 15 | `stromquist-1984-packing-unit-squares-inside-squares-ii-ten-unit-squares` |
 | **[Stromquist Memo III]** | Packing Unit Squares Inside Squares, III (Cases with n ≤ 65 and Martin Gardner’s Conjecture for n = 11) | W. Stromquist | 1984 | Daniel H. Wagner, Associates internal memorandum, November 15 | `stromquist-1984-packing-unit-squares-inside-squares-iii-cases-through-65-and-gardner-conjecture` |
 | **[Stromquist 2003]** | Packing 10 or 11 Unit Squares in a Square | W. Stromquist | 2003 | Electron. J. Combin. 10, #R8 | `stromquist-2003-packing-10-or-11-unit-squares` |
-| **[Friedman DS7]** | Packing Unit Squares in Squares: A Survey and New Results | E. Friedman | 1998– | Electron. J. Combin., Dynamic Survey DS7 | `friedman-ds7-packing-unit-squares-in-squares` |
+| **[Friedman DS7]** | Packing Unit Squares in Squares: A Survey and New Results | E. Friedman | 2009 | Electron. J. Combin., Dynamic Survey DS7 (first published 1998; the retained copy is the 2009 revision) | `friedman-ds7-packing-unit-squares-in-squares` |
 | **[Kearney–Shiu 2002]** | Efficient packing of unit squares in a square | M. J. Kearney, P. Shiu | 2002 | Electron. J. Combin. 9, #R14 | `kearney-shiu-2002-efficient-packing-unit-squares` |
 | **[Göbel 1979]** | Geometrical Packing and Covering Problems | F. Göbel | 1979 | *Packing and Covering in Combinatorics*, Math. Centre Tracts 106, 179–199 | `gobel-1979-geometrical-packing-and-covering-problems` |
 | **[Bentz 2010]** | Optimal Packings of 13 and 46 Unit Squares in a Square | W. Bentz | 2010 | Electron. J. Combin. 17, #R126 | `bentz-2010-optimal-packings-13-and-46` |
@@ -564,6 +564,11 @@ key remain bound to the bytes they originally named.
 
 | Repository | Role in this record | Pinned record |
 | --- | --- | --- |
+| [wand125/square-packing-bounds, n21 zero-margin Lean](https://github.com/wand125/square-packing-bounds/tree/77636c63f45a90d9a829417a1722a3bf9bfef37d/point_n21_L5/lean/zero-margin) | Hiroaki Hosono’s hypothesis-free Lean proof `n21pts_eq_5 : minSide 21 = 5` of 29 September 2026, registered as T-234, a formalization of the point-only route of T-055 on Evan Daniel’s zero-margin box tree; reported, not built here | **[wand125 n21 zero-margin Lean 2026-09-29]**; [29 September packet](web/wand125-n21-zero-margin-lean-2026-09-29/README.md), MIT-licensed pin `77636c63f45a90d9a829417a1722a3bf9bfef37d`; the library it builds on at evand `6aa82ba4` is retained byte for byte in earlier evand packets |
+| [wand125/square-packing, n59 Lean kernel proof](https://github.com/wand125/square-packing/tree/f9a77b7d38fd60144b78fe290c94f841ab626156/problems/square-lower-bounds/certificates/k2m5_n59_L8/lean) | Hiroaki Hosono’s Lean kernel proof `s59_eq_8 : minSide 59 = 8` of 11 October 2026, registered as T-235, a formalization of T-066 on Evan Daniel’s mixed-measure checker; 43,444 generated files not stored, 862 CPU-hours by the source’s receipt; reported, not built here | **[wand125 n59 Lean kernel 2026-10-11]**; [11 October packet](web/wand125-n59-lean-kernel-2026-10-11/README.md), MIT-licensed pin `f9a77b7d38fd60144b78fe290c94f841ab626156`; the library at evand `1718a580` is retained byte for byte in the 7 October evand packet |
+| [evand/square-packing, Fang and Ryu in Lean](https://github.com/evand/square-packing/tree/8475bdf41571c59c8c240aedaddc48e19e0e4707/lean/Sqpack) | Evan Daniel’s Lean proofs, 18 October 2026, of Kevin Fang’s Theorems 1 and 2 (T-163), unconditional, on 18 exact piece certificates, registered as T-236, and of Sungjoon Ryu’s $c^*(k) \le 8\lceil\sqrt{k-4}\rceil - 1$ for every $k \ge 6$ (the asymptotic register’s row from #471); reported, not built here | **[Daniel Fang and Ryu Lean 2026-10-18]**; [18 October packet](web/evand-fang-ryu-lean-2026-10-18/README.md), MIT-licensed pin `8475bdf41571c59c8c240aedaddc48e19e0e4707` |
+| [evand/square-packing, small-n rectangles in Lean](https://github.com/evand/square-packing/tree/7051f4eabf7f9b2509ad1e7cc296f57d19482027/lean/Sqpack) | Evan Daniel’s Lean proofs, 21 October 2026, of which rectangles hold two to four unit squares and of the four-point bound for five, which at equal sides give $s(2) = s(3) = s(4) = 2$ and $s(5) = 2 + 1/\sqrt{2}$; a second machine route after chelokot’s, registered with it as T-238, a formalization of T-237; reported, not built here | **[Daniel small-n rectangles Lean 2026-10-22]**; [22 October packet](web/evand-rect-small-n-lean-2026-10-22/README.md), MIT-licensed pin `7051f4eabf7f9b2509ad1e7cc296f57d19482027` |
+| [chelokot/square-packing-archive, small n in Lean](https://github.com/chelokot/square-packing-archive/tree/753079eb37d8d16225a5dc1f56e493a3c3b243f4/formal/SquarePackingArchive/Records) | chelokot’s Lean proofs, August 2026, of $s(2) = s(3) = s(4) = 2$ and `s5_eq_goebel`, $s(5) = 2 + \sqrt{2}/2$, by Friedman’s four unavoidable points, registered with Daniel’s route as T-238, a formalization of T-237; the archive at this commit was built here on 2 October 2026 for T-086, and its log prints these theorems’ axioms | **[chelokot small-n Lean 2026-09-05]**; [5 September packet](web/chelokot-small-n-lean-2026-09-05/README.md), Apache-2.0 pin `753079eb37d8d16225a5dc1f56e493a3c3b243f4`, the pin of **[chelokot Nagamochi counterexample 2026]** |
 | [evand/square-packing, n229 opening](https://github.com/evand/square-packing/tree/e0338c7becf95dbc7584b48d8868c0a1cd21079c/search/packer/candidates) | Daniel’s opening upper-bound report in #674, `15.650163254859`, preserving Daniel after Couzo #672 after de Winter #668 | **[Daniel n229 dilation 2026-10-17]**; [17 October packet](web/evand-n229-dilation-2026-10-17/README.md), MIT-licensed pin `e0338c7becf95dbc7584b48d8868c0a1cd21079c`; [T-198](../frontier/RESULTS.md), V3/C3 after the [review of 19 October 2026](../../docs/project/reviews/review-2026-10-19-upper-bound-imports-659-664-669-674.md); superseded at 229 by the update, T-199 |
 | [evand/square-packing, n229 update](https://github.com/evand/square-packing/tree/00e68dfbe1d29ab5dbab1cddfb8f6ca19d5470db/search/packer/candidates) | Daniel’s current requested upper bound in #674, `15.650161513896`, after its retained opening report and with the same lineage | **[Daniel n229 dilation update 2026-10-18]**; [18 October packet](web/evand-n229-dilation-update-2026-10-18/README.md), MIT-licensed pin `00e68dfbe1d29ab5dbab1cddfb8f6ca19d5470db`; [T-199](../frontier/RESULTS.md), V3/C3 after the [review of 19 October 2026](../../docs/project/reviews/review-2026-10-19-upper-bound-imports-659-664-669-674.md); the house at 229 from 19 October 2026 |
 | [JoostdeWinter/square-packing](https://github.com/JoostdeWinter/square-packing) | Joost de Winter’s reported upper bounds at 227, 229 and 260, issue #668; [T-196](../frontier/RESULTS.md), V3/C3 on both project exact routes, which accept all 3 certificates and refuse all 6 controls, and accepted by the [20 October review](../../docs/project/reviews/review-2026-10-20-de-winter-668-upper-bounds.md); the house best packing at 227 from 20 October 2026 until Evan Daniel’s solved view of Couzo’s #672 refinement (T-225) replaced it on 22 October, and at 260 from 20 October until T-223 replaced it on 21 October (#706); T-199 was kept at 229 until T-225 replaced it there on 22 October | **[de Winter upper bounds 2026-10-17]**; [17 October packet](web/de-winter-upper-bounds-227-229-260-2026-10-17/README.md), retained at MIT-licensed `9bf5d9be4d0ca13a1dbef7d7953032fe87d4e81d`; the three witness directories are unchanged from original claim pin `c95c4938f068ed44a1819ef973e770ec241aa567` |
@@ -953,6 +958,10 @@ n28, n29 and n31. The
 [authored factual packet](web/wand125-fine-net-lower-bounds-2026-10-08/README.md)
 records the reported bounds and complete source references.
 Independent whole-net replay and controls remain pending.
+The [release packet](web/wand125-fine-net-lower-bounds-446-release-2026-10-08/README.md)
+retains, at revision `bf85d6b` and under OR-18, the candidates, receipts and logs of the
+four certificates T-233 registers (n19, n20, n26 and the n27 follow-up), with their
+maintained premise checks.
 
 **[wand125 fine-net n29 2026-10-10]**: Hosono’s later n29 certificate, `mixed_n29_L582`,
 reports $s(29) \ge 291/50 = 5.82$ on the same 2,073-direction net, superseding the
@@ -970,6 +979,16 @@ revisions `36b85b9` and `ff9f269` and their release assets by digest, with the
 maintained premise checks and diagnostic eight-direction samples.
 T-142 and T-143 record them at V0/C0; a complete replay and whole-net controls remain
 pending.
+
+**[wand125 fine-net n31 2026-10-11]**: Hosono’s n31 certificate, `mixed_n31_L59775`,
+reports $s(31) \ge 2391/400 = 5.9775$ on the same 2,073-direction net, above both lower
+lanes’ $2381/400$ and #446’s unadopted $597/100$; no issue reports it.
+The [packet](web/wand125-fine-net-n31-2026-10-11/README.md) retains the directory’s MIT
+documents at revision `23e3186` and, under OR-18, the release asset’s candidate,
+receipts and logs, with the maintained premise check and a diagnostic eight-direction
+sample; the nested verifier archive is pinned by digest.
+T-232 records the bound at V3/C3 after the complete maintained replay, its whole-net
+controls and the mathematical review of 23 October, and n31’s lower lanes hold it.
 
 **[wand125 fine-net n37 n39 n44 2026-10-13]**: Hosono’s n37, n39 and n44 certificates,
 `mixed_n37_L64975`, `mixed_n39_L66625` and `mixed_n44_L69975`, report

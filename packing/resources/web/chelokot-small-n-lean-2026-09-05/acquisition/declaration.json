@@ -1,0 +1,45 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "chelokot-square-packing-archive",
+  "source_url": "https://github.com/chelokot/square-packing-archive",
+  "source_ref": "753079eb37d8d16225a5dc1f56e493a3c3b243f4",
+  "source_commit": "753079eb37d8d16225a5dc1f56e493a3c3b243f4",
+  "retrieved_at_utc": "2026-10-23T06:23Z",
+  "git_scope": "A blobless clone of chelokot/square-packing-archive, whose head is e1e9ef5d (7 October 2026), with a sparse checkout of 753079eb, the commit the 5 September Nagamochi-counterexample packet pins and this repository built in full on 2 October 2026 for T-086. The scope is the import closure, read by devtools.lean_closure, of Records.Square5 (s5_eq_goebel), Records.NearSquare (s2_eq_two, s3_eq_two) and Records.SquareNumbers (s4_eq_two); the three build pins; the root module and the archive's own axiom probe Audit.lean, which imports the whole library; the two formalization notes for these results; and the root LICENSE, NOTICE, ATTRIBUTION.md and README.md. Square5.lean is unchanged at the head; s(1) to s(4) and s(6) to s(9) moved from Lean to Bend after the pin. Nothing in the tree was executed for this packet.",
+  "archived_dir": "square-packing-archive",
+  "license": "Apache-2.0 for code and Lean sources (LICENSE, with NOTICE); CC BY 4.0 for archive data (LICENSE-DATA, retained by the 5 September packet). ATTRIBUTION.md credits chelokot as project creator, concept and product direction, and 'GPT 6 Astra' for AI-produced research, packing optimizations and Lean formalizations, and says that formalizing a published result does not transfer its discovery credit. Square5.lean's lower bound uses Friedman's four-point unavoidable set (DS7); the value is Goebel's (1979).",
+  "claims": [
+    "formal/SquarePackingArchive/Records/Square5.lean states theorem SquarePackingArchive.Records.Square5.s5_le_goebel : HasPacking 5 (2 + Real.sqrt 2 / 2), s5_ge_goebel : IsLowerBound 5 (2 + Real.sqrt 2 / 2), by the four unavoidable points (1, 1), (1, 1 + d), (1 + d, 1), (1 + d, 1 + d) with d = sqrt 2 / 2 (unavoidable_points and lowerBound_succ_of_unavoidable), and s5_eq_goebel : IsMinimumSide 5 (2 + Real.sqrt 2 / 2), first committed at 4f4ece12 (2026-08-29T18:39:38Z); the construction s5_le_goebel is from 07573293 (2026-08-29T14:27:23Z).",
+    "formal/SquarePackingArchive/Records/NearSquare.lean states s2_eq_two : IsMinimumSide 2 2 and s3_eq_two : IsMinimumSide 3 2 (74ce49f, 2026-08-16T19:40:17Z), and formal/SquarePackingArchive/Records/SquareNumbers.lean s4_eq_two : IsMinimumSide 4 2 (32e110f, 2026-08-16T19:29:10Z).",
+    "Geometry.lean defines Packing n side as n placed squares (a centre and a frame with cosine^2 + sine^2 = 1), each fitting in the closed square [0, side]^2 and pairwise interior-disjoint; HasPacking n s is Nonempty (Packing n s), IsLowerBound n s is s <= every side with a packing, and IsMinimumSide n s is both.",
+    "formal/SquarePackingArchive/Audit.lean prints the axioms of every headline theorem, s2_eq_two, s3_eq_two, s4_eq_two and the four Square5 theorems among them. The build of this commit retained here (2 October 2026, devtools.replay_chelokot_lean, for T-086) logged each of the seven with propext, Classical.choice and Quot.sound."
+  ],
+  "scope": [
+    "LICENSE",
+    "NOTICE",
+    "ATTRIBUTION.md",
+    "README.md",
+    "docs/friedman-unavoidable-formalization.md",
+    "docs/small-records-formalization.md",
+    "formal/lean-toolchain",
+    "formal/lakefile.toml",
+    "formal/lake-manifest.json",
+    "formal/SquarePackingArchive.lean",
+    "formal/SquarePackingArchive/Audit.lean",
+    "formal/SquarePackingArchive/Geometry.lean",
+    "formal/SquarePackingArchive/Area.lean",
+    "formal/SquarePackingArchive/Triangle.lean",
+    "formal/SquarePackingArchive/Unavoidable.lean",
+    "formal/SquarePackingArchive/Friedman.lean",
+    "formal/SquarePackingArchive/Records/Square5.lean",
+    "formal/SquarePackingArchive/Records/NearSquare.lean",
+    "formal/SquarePackingArchive/Records/SquareNumbers.lean"
+  ],
+  "pinned_only": [
+    {
+      "match": "NOTICE",
+      "reason": "Retained byte-identical by the 5 September Nagamochi-counterexample packet of the same commit",
+      "identical_to": "packing/resources/web/chelokot-nagamochi-counterexample-2026-09-05/upstream/NOTICE"
+    }
+  ]
+}

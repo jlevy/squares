@@ -1589,6 +1589,16 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
             "test_mutations_actually_break_something",  # 10.4s
             "test_validators_agree_on_mutations",  # 7.4s
         },
+        # 665.97s of call time across its four marked cases on 2026-10-23 (review A of PR
+        # #745, A1), locally under `nice` at load 2 to 4: each re-derives the exact capture
+        # at every refused direction of a 2,073-direction declared net, mixed_n19_L48275
+        # 142.99s, mixed_n20_L49125 180.41s, mixed_n27_L5655 191.05s and mixed_n31_L59775
+        # 151.52s (415.68s at load 15 to 22 when the split was made, 9a92c2370). The marker
+        # is set in `sweep_cases()`; each of the four keeps a `-sampled` case in the pull
+        # request at 0.54s to 0.68s, and the standard-net sweeps stay quick.
+        "test_sqverify_fast_census.py": {
+            "test_each_scaled_sweep_refuses_its_mutant_somewhere_with_an_exact_witness",
+        },
         # 2s of call time across 1.
         "test_trump_isolation_radius.py": {
             "test_gap_and_symmetry_certificates_hold",  # 2.5s
@@ -1647,15 +1657,76 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
 
 def _slow_marked(tree: ast.Module) -> set[str]:
     """The functions in a test module that carry the slow marker, on themselves or on a
-    case, and `<module-level assignment>` if the module marks all of its tests."""
+    case, and `<module-level assignment>` if the module marks all of its tests.
+
+    A marker built in a module-level helper, such as a function returning the
+    `pytest.param` cases a decorator reads, is charged to every function whose decorators
+    call that helper, directly or through another helper, and to the module when a
+    module-level assignment calls it. A marker the registry cannot charge (in a test's
+    body, a class or any other statement, or in a helper nothing charged calls) fails
+    here rather than slipping past the registry (A1 of PR #745's review A)."""
+
+    def slow(*nodes: ast.AST) -> bool:
+        """Whether any node holds `mark.slow` as code; text in a string does not count."""
+        return any(
+            isinstance(child, ast.Attribute)
+            and child.attr == "slow"
+            and ast.unparse(child.value).endswith("mark")
+            for node in nodes
+            for child in ast.walk(node)
+        )
+
+    def names(node: ast.AST) -> set[str]:
+        return {child.id for child in ast.walk(node) if isinstance(child, ast.Name)}
+
+    functions = {
+        node.name: node
+        for node in tree.body
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef))
+    }
+    helpers = {
+        name
+        for name, node in functions.items()
+        if not name.startswith("test_") and slow(*node.body)
+    }
+    while more := {
+        name
+        for name, node in functions.items()
+        if not name.startswith("test_")
+        and name not in helpers
+        and any(names(statement) & helpers for statement in node.body)
+    }:
+        helpers |= more
     marked: set[str] = set()
+    charged: set[str] = set()
+    uncharged: list[str] = []
     for node in tree.body:
-        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and any(
-            "mark.slow" in ast.unparse(decorator) for decorator in node.decorator_list
-        ):
-            marked.add(node.name)
-        if isinstance(node, (ast.Assign, ast.AnnAssign)) and "mark.slow" in ast.unparse(node):
-            marked.add("<module-level assignment>")
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
+            for decorator in node.decorator_list:
+                called = names(decorator) & helpers
+                if called or slow(decorator):
+                    marked.add(node.name)
+                    charged |= called
+            if node.name.startswith("test_") and slow(*node.body):
+                uncharged.append(f"the body of {node.name}")
+        elif isinstance(node, (ast.Assign, ast.AnnAssign)):
+            called = names(node) & helpers
+            if called or slow(node):
+                marked.add("<module-level assignment>")
+                charged |= called
+        elif slow(node):
+            uncharged.append(f"a {type(node).__name__} at line {node.lineno}")
+    while more := {
+        name
+        for helper in charged
+        for name in names(functions[helper]) & helpers
+        if name not in charged
+    }:
+        charged |= more
+    uncharged.extend(
+        f"the helper {name}, which nothing charged calls" for name in sorted(helpers - charged)
+    )
+    assert not uncharged, f"slow markers the registry cannot charge to a test: {uncharged}"
     return marked
 
 
@@ -1703,6 +1774,22 @@ def test_the_slow_registry_sees_a_marker_on_a_function_a_case_or_a_module() -> N
 
         @pytest.mark.parametrize("n", [1, pytest.param(2, id="two")])
         def test_quick(n: int) -> None: ...
+
+        def cases() -> list[object]:
+            return [1, pytest.param(2, marks=pytest.mark.slow)]
+
+        def more_cases() -> list[object]:
+            return [*cases(), 3]
+
+        @pytest.mark.parametrize("n", cases())
+        def test_built_by_a_helper(n: int) -> None: ...
+
+        @pytest.mark.parametrize("n", more_cases())
+        def test_built_through_a_second_helper(n: int) -> None: ...
+
+        @pytest.mark.parametrize("lane", ["quick", "slow"])
+        def test_a_string_names_no_marker(lane: str) -> None:
+            source = "@pytest.mark.slow\\ndef test_inner(): ..."
         """
     )
     assert _slow_marked(ast.parse(source)) == {
@@ -1710,7 +1797,74 @@ def test_the_slow_registry_sees_a_marker_on_a_function_a_case_or_a_module() -> N
         "test_whole",
         "test_one_case",
         "test_a_listed_case",
+        "test_built_by_a_helper",
+        "test_built_through_a_second_helper",
     }
+    # A module-level assignment built by a helper is the module's, as a marked one is.
+    assigned = textwrap.dedent(
+        """
+        import pytest
+
+        def cases() -> list[object]:
+            return [pytest.param(1, marks=pytest.mark.slow)]
+
+        CASES = cases()
+
+        @pytest.mark.parametrize("n", CASES)
+        def test_read_from_an_assignment(n: int) -> None: ...
+        """
+    )
+    assert _slow_marked(ast.parse(assigned)) == {"<module-level assignment>"}
+
+
+@pytest.mark.parametrize(
+    ("source", "where"),
+    [
+        pytest.param(
+            """
+            import pytest
+
+            def test_marks_itself(request) -> None:
+                request.applymarker(pytest.mark.slow)
+            """,
+            "the body of test_marks_itself",
+            id="a-test-body",
+        ),
+        pytest.param(
+            """
+            import pytest
+
+            def cases() -> list[object]:
+                return [pytest.param(1, marks=pytest.mark.slow)]
+
+            def test_calls_it_in_its_body() -> None:
+                assert cases()
+            """,
+            "the helper cases, which nothing charged calls",
+            id="an-uncharged-helper",
+        ),
+        pytest.param(
+            """
+            import pytest
+
+            class TestGroup:
+                @pytest.mark.slow
+                def test_in_a_class(self) -> None: ...
+            """,
+            "a ClassDef at line 4",
+            id="a-class",
+        ),
+    ],
+)
+def test_the_slow_registry_refuses_a_marker_it_cannot_charge_to_a_test(
+    source: str, where: str
+) -> None:
+    """A marker the registry cannot charge to a function fails the registry rather than
+    deferring a test nothing measured, as `sweep_cases()` once did (A1 of PR #745's
+    review A)."""
+    with pytest.raises(AssertionError, match="cannot charge") as refused:
+        _slow_marked(ast.parse(textwrap.dedent(source)))
+    assert where in str(refused.value)
 
 
 def test_devtools_use_public_package_interfaces() -> None:

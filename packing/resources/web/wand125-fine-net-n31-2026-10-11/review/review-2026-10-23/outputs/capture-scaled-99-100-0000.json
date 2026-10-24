@@ -1,0 +1,51 @@
+{
+ "j": 0,
+ "C": 1,
+ "S": 0,
+ "E": 1,
+ "t_j": "0",
+ "a_j": "0",
+ "r_a_j": "1/2",
+ "domain_quadrant_exact": [
+  "2391/800",
+  "2191/400"
+ ],
+ "domain_quadrant_decided": [
+  "2391/800",
+  "2191/400"
+ ],
+ "mass_scale": "99/100",
+ "float_nodes": 489,
+ "float_leaves": 88,
+ "float_status": "counterexample",
+ "float_least_accepted_bound": 1.0012450036640308,
+ "float_failures": 1,
+ "cpu_setup": 0.08,
+ "cpu_float": 0.088,
+ "verdict": "REFUTED",
+ "worst_cell": [
+  9,
+  4,
+  9,
+  4
+ ],
+ "worst_cell_float_bound": 0.9948577872526431,
+ "worst_centre": [
+  "114341/25600",
+  "114341/25600"
+ ],
+ "worst_centre_capture_exact": "3400182503376614378266153468432590731392711693337897095180615794821766787330554916259/3417757338731113779975980912138163745489438075731691115598701180589106482803660000000",
+ "worst_centre_capture_float": 0.9948577872526713,
+ "worst_centre_in_exact_domain": true,
+ "cpu_total": 0.216,
+ "kind": "review-2026-10-23-n31-capture/v1",
+ "candidate_sha256": "4a7df269037a6449ba2d4bee2b6a76962df097c1515025545d4ca4cfcc39be3b",
+ "dropped_row": null,
+ "programs_sha256": {
+  "n31_brute.py": "9d836e14c22f996b2e13805e53b9041a89d694047aa99e1a3a79a41a070d70ae",
+  "n31_exact.py": "ddb9655ed8cd95a74dc5c32b51844ce2f91671f631d88fc16efdbfa01b1c11dc",
+  "n31_geometry.py": "c30893c2ad0389d910533f2f1a345aeec9c64897ba5a917ddedfc2448b628b8e",
+  "capture.py": "783429185f890015440b3d937ad79a0ad353da1e4d9912e3e764aad648798ce9"
+ },
+ "max_rss_kb": 65480
+}

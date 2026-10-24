@@ -627,17 +627,17 @@ most 2.
 ### Smallest Open Gaps
 
 Ranked by gap—the best-known packing minus the verified lower bound, which is what
-`devtools.gap_ranking` computes—the six smallest open cases at $n \le 100$, $76$ and
-$95$ tied, are:
+`devtools.gap_ranking` computes—the six smallest open cases at $n \le 100$ are below;
+$n = 95$ ties $n = 76$ at $0.0350$ and follows it in the tool’s order:
 
 | $n$ | gap | record | note |
 | --- | --- | --- | --- |
 | 17 | 0.0151 | Bidwell | carried to $\frac{18641771}{4000000}$ by Guzhou0806 after Overbeck |
+| 31 | 0.0225 | grid | $6^2 - 5$, carried to $\frac{2391}{400}$ by Hosono after Tokoharu and Levy (T-232) |
 | 44 | 0.0275 | grid | $7^2 - 5$, carried to $\frac{2789}{400}$ by Hosono after Tokoharu |
 | 12 | 0.0285 | grid | $4^2 - 4$, carried to $\frac{7943}{2000}$ by squarepacker after Daniel |
 | 96 | 0.0300 | grid | $10^2 - 4$, carried to $\frac{997}{100}$ by Hosono after Tokoharu; reported proved by Evan Daniel (T-081) |
 | 76 | 0.0350 | grid | $9^2 - 5$, carried to $\frac{1793}{200}$ by Hosono after Tokoharu |
-| 95 | 0.0350 | grid | $10^2 - 5$, carried to $\frac{1993}{200}$ by Hosono after Tokoharu |
 
 The $n = 17$ bound is Guzhou0806 / N17 project’s R071, continuing Overbeck’s charge
 (Overbeck building on Squares Project (Joshua Levy), Mira and Guzhou0806): an exact
@@ -659,6 +659,8 @@ later that day, when another proved $s(77) = 9$ and with it $s(78) = 9$. $n = 97
 $0.0557$, left it on 2026-10-03, when Evan Daniel’s family $s(m^2 - 3) = m$ was proved
 here for every $m \ge 6$ (T-064): his exact checker of the finite premise `Valid7` was
 replayed in full and his Lean reduction from it was built.
+$n = 31$ entered it second, at $0.0225$, when T-232 landed and raised its verified floor
+to $2391/400$, and moved $n = 95$ to seventh.
 With Bentz’s $s(6)$, $s(13)$ and $s(22)$ the family is now **proved exactly for every
 $m \ge 3$**.
 

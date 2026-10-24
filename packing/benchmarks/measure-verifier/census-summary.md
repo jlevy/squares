@@ -25,9 +25,11 @@ the platform supplies no direction CPU.
 | `rect_n18_L4695` | T | 18 | 939/200 | VERIFIED | 213.2 | unavailable | 1.0001000024649946 | complete | no |
 | `mixed_n19_L48229` | M | 19 | 48229/10000 | VERIFIED | 512.1 | 511.9 | 1.000000000833015 | none | yes |
 | `mixed_n19_L4825` | M | 19 | 193/40 | VERIFIED | 2841.2 | 2840.9 | 1.0000000001230112 | none | yes |
+| `mixed_n19_L48275` | M | 19 | 1931/400 | VERIFIED | 2539.7 | 2539.4 | 1.0000000001405505 | none | yes |
 | `rect_n19_L4815` | T | 19 | 963/200 | VERIFIED | 138.2 | unavailable | 1.000100001265513 | complete | no |
 | `rect_n19_L48175` | T | 19 | 1927/400 | VERIFIED | 255.4 | 255.2 | 1.0001000003934286 | complete | no |
 | `mixed_n20_L4905` | M | 20 | 981/200 | VERIFIED | 1420.5 | 1420.2 | 1.000000000154736 | none | yes |
+| `mixed_n20_L49125` | M | 20 | 393/80 | VERIFIED | 5987.4 | 5987.1 | 1.0000000001231197 | none | yes |
 | `rect_n20_L4895` | T | 20 | 979/200 | VERIFIED | 103.7 | unavailable | 1.0001000055866192 | complete | no |
 | `rect_n20_L48975` | T | 20 | 1959/400 | VERIFIED | 106.9 | 106.7 | 1.0001000001810014 | complete | no |
 | `rect_n20_L49` | T | 20 | 49/10 | VERIFIED | 214.1 | 213.9 | 1.0001000010273078 | complete | no |
@@ -35,9 +37,11 @@ the platform supplies no direction CPU.
 | `rect_n21_L49875` | T | 21 | 399/80 | VERIFIED | 349.1 | 349.0 | 1.0001000007714431 | none | yes |
 | `cert_n26_L5508` | T | 26 | 1377/250 | VERIFIED | 40.4 | unavailable | 1.0001000057290834 | complete | no |
 | `mixed_n26_L5545` | M | 26 | 1109/200 | VERIFIED | 2235.6 | 2235.3 | 1.0000000003495713 | none | yes |
+| `mixed_n26_L5555` | M | 26 | 1111/200 | VERIFIED | 6115.2 | 6114.8 | 1.0000000000340534 | none | yes |
 | `rect_n26_L553` | T | 26 | 553/100 | VERIFIED | 116.4 | unavailable | 1.0001000010935819 | complete | no |
 | `rect_n26_L55325` | T | 26 | 2213/400 | VERIFIED | 129.9 | 129.8 | 1.0001000000788831 | complete | no |
 | `mixed_n27_L56435` | M | 27 | 11287/2000 | VERIFIED | 2824.1 | 2823.9 | 1.0000000000168654 | none | yes |
+| `mixed_n27_L5655` | M | 27 | 1131/200 | VERIFIED | 9257.6 | 9257.2 | 1.0000000000149065 | none | yes |
 | `rect_n27_L56` | T | 27 | 28/5 | VERIFIED | 80.6 | unavailable | 1.000100000125862 | complete | no |
 | `rect_n27_L5635` | T | 27 | 1127/200 | VERIFIED | 171.3 | 171.2 | 1.0001000006538547 | complete | no |
 | `mixed_n28_L5735` | M | 28 | 1147/200 | VERIFIED | 1540.9 | 1540.6 | 1.0000000000381999 | none | yes |
@@ -52,6 +56,7 @@ the platform supplies no direction CPU.
 | `mixed_n30_L58835` | M | 30 | 11767/2000 | VERIFIED | 3890.8 | 3890.6 | 1.0000000000570795 | none | yes |
 | `rect_n30_L5865` | T | 30 | 1173/200 | VERIFIED | 98.3 | unavailable | 1.000100002112256 | complete | no |
 | `rect_n30_L5875` | T | 30 | 47/8 | VERIFIED | 252.4 | 252.2 | 1.0001000004862441 | complete | no |
+| `mixed_n31_L59775` | M | 31 | 2391/400 | VERIFIED | 14607.6 | 14607.3 | 1.000000000022577 | none | yes |
 | `rect_n31_L592` | T | 31 | 148/25 | VERIFIED | 50.7 | unavailable | 1.0001000019260526 | complete | no |
 | `rect_n31_L5935` | T | 31 | 1187/200 | VERIFIED | 113.1 | 113.0 | 1.000100001602695 | none | yes |
 | `rect_n31_L59525` | T | 31 | 2381/400 | VERIFIED | 167.4 | 167.3 | 1.0001000003283942 | complete | no |
@@ -238,7 +243,7 @@ the platform supplies no direction CPU.
 | `mixed_n101_L1028` | L | 101 | 257/25 | VERIFIED | 128.4 | 128.0 | 1.000000000300333 | complete | no |
 | `mixed_n108_L1062` | M | 108 | 531/50 | VERIFIED | 2086.8 | 2086.5 | 1.0000000001765084 | none | yes |
 
-219 of 219 certificates verified; 133 of them are the first complete check of their
+224 of 224 certificates verified; 138 of them are the first complete check of their
 certificate in this repository.
 
 <!-- This document follows common-doc-guidelines.md.

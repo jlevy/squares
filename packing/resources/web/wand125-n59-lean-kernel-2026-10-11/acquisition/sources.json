@@ -1,0 +1,94 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-23T06:23Z",
+  "git_scope": "A blobless clone of the single public branch, whose head is e48de243 (22 October 2026), with a sparse checkout of the pin f9a77b7, the commit that adds problems/square-lower-bounds/certificates/k2m5_n59_L8/lean/. The scope is the certificate directory problems/square-lower-bounds/certificates/k2m5_n59_L8 at the pin, the folder licence problems/square-lower-bounds/LICENSE, the root LICENSE.md and the root INDEX.json, which the commit changed. The cover itself is not in the tree at the pin: the directory's ASSET.json names it as a release asset, and the 1 October packet retains it. Nothing in the tree was executed.",
+  "sources": [
+    {
+      "id": "wand125-square-packing",
+      "source_url": "https://github.com/wand125/square-packing",
+      "source_ref": "f9a77b7d38fd60144b78fe290c94f841ab626156",
+      "source_commit": "f9a77b7d38fd60144b78fe290c94f841ab626156",
+      "committed_utc": "2026-10-11T01:42:37Z",
+      "git_tree": "cda8dd92993281faea93fa69fdc17e297924b630",
+      "archived_path": "packing/resources/web/wand125-n59-lean-kernel-2026-10-11/square-packing",
+      "subtree_manifest": "packing/resources/web/wand125-n59-lean-kernel-2026-10-11/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "LICENSE.md",
+        "INDEX.json",
+        "problems/square-lower-bounds/LICENSE",
+        "problems/square-lower-bounds/certificates/k2m5_n59_L8"
+      ],
+      "subtree_file_count": 21,
+      "subtree_total_bytes": 6988274,
+      "retained_file_count": 13,
+      "retained_total_bytes": 2618860,
+      "compressed": [],
+      "pinned_only": [
+        {
+          "path": "INDEX.json",
+          "bytes": 244978,
+          "sha256": "809d96787c1b50ca8df42785bb409a9513620df85edf5d58c91f97ed85677c4c",
+          "reason": "The repository's index of every certificate, 244,978 bytes; this commit only adds lean/README.md to the k2m5_n59_L8 entry's documents, as the retained ASSET.json does"
+        },
+        {
+          "path": "LICENSE.md",
+          "bytes": 603,
+          "sha256": "5dbc1f8b773b0a66c3d8b4ebf034a8cd795df418652ce8bf2020cb21b1597960",
+          "reason": "Retained byte-identical by the 14 October closed-form packet",
+          "identical_to": "packing/resources/web/wand125-closed-form-2026-10-14/square-packing/LICENSE.md"
+        },
+        {
+          "path": "problems/square-lower-bounds/LICENSE",
+          "bytes": 1064,
+          "sha256": "c0dd43e7892932c81335f74a2fdbf1a98f5977bab14c0c4c30e3abcc97c34904",
+          "reason": "Retained byte-identical by the 7 October FN1 input-bindings packet",
+          "identical_to": "packing/resources/web/wand125-fn1-input-bindings-2026-10-07/square-packing-bounds/LICENSE"
+        },
+        {
+          "path": "problems/square-lower-bounds/certificates/k2m5_n59_L8/check_records.py",
+          "bytes": 4441,
+          "sha256": "da537e20e47a6e7cddcf3a34138474af54b9c93f88e8dfdb33e1cbffc1c74e87",
+          "reason": "Retained byte-identical by the 4 October record-updates packet",
+          "identical_to": "packing/resources/web/wand125-record-updates-2026-10-04/square-packing-bounds/certificates/k2m5_n59_L8/check_records.py"
+        },
+        {
+          "path": "problems/square-lower-bounds/certificates/k2m5_n59_L8/lean/SOURCES.sha256",
+          "bytes": 4108305,
+          "sha256": "2741de6a733cfac186809f3176e80d03a025f39234719ba755c934fe75d1ec5b",
+          "reason": "The SHA-256 of the 43,444 generated files the source does not store, 4,108,305 bytes; it is needed only to compare a rebuild's generated tree file by file, and is fetched at the pin for that"
+        },
+        {
+          "path": "problems/square-lower-bounds/certificates/k2m5_n59_L8/verify.sh",
+          "bytes": 5936,
+          "sha256": "628dbd6cdcd6d5bc42175fc7093eaf6b4f5ca8eb113822d24151b4b2d4b587a5",
+          "reason": "Retained byte-identical by the 4 October record-updates packet",
+          "identical_to": "packing/resources/web/wand125-record-updates-2026-10-04/square-packing-bounds/certificates/k2m5_n59_L8/verify.sh"
+        },
+        {
+          "path": "problems/square-lower-bounds/certificates/k2m5_n59_L8/zm_mixed_d4/manifest.json",
+          "bytes": 1977,
+          "sha256": "e8813bc353ff58b337e3107b34ad778387d6a6a3aae47cd66a768ab48fb96851",
+          "reason": "Retained byte-identical by the 1 October point-and-mixed packet",
+          "identical_to": "packing/resources/web/wand125-point-and-mixed-2026-10-01/square-packing-bounds/certificates/k2m5_n59_L8/zm_mixed_d4/manifest.json"
+        },
+        {
+          "path": "problems/square-lower-bounds/certificates/k2m5_n59_L8/zm_mixed_root/manifest.json",
+          "bytes": 2110,
+          "sha256": "4f0d312a7b3db5733abcf6b1dde96ec8bd0d43ab13067d6841fe661949b8ea67",
+          "reason": "Retained byte-identical by the 1 October point-and-mixed packet",
+          "identical_to": "packing/resources/web/wand125-point-and-mixed-2026-10-01/square-packing-bounds/certificates/k2m5_n59_L8/zm_mixed_root/manifest.json"
+        }
+      ],
+      "license": "MIT, Copyright (c) 2026 wand125 (problems/square-lower-bounds/LICENSE; the root LICENSE.md says each folder keeps the licence it was published under). The Lean library the proof builds on is Evan Daniel's, MIT, at evand/square-packing 1718a580. The root README says the work is computer-assisted; the commit names Claude as co-author.",
+      "claims": [
+        "problems/square-lower-bounds/certificates/k2m5_n59_L8/lean/Sqpack/S59Lower.lean states theorem SquarePacking.s59_ge_8 : (8 : \u211d) \u2264 minSide 59 and theorem SquarePacking.s59_eq_8 : minSide 59 = 8, with no hypothesis; lean/README.md reports both depending on axioms [propext, Classical.choice, Quot.sound], with no sorry and no native_decide.",
+        "The certificate is the mixed cover n59_mixed_cover_8.txt (SHA-256 6f4d2b64f9a88ae49546f05fa28752382f9ebfa8b7f8b6e6c6f1a8e693177e19): 26,308 points and 5,240 segments of [0,8]^2, masses w/10^8, total < 59. Sqpack/S59T/Pts.lean holds it as Lean data, with its D4 invariance and total checked by decide +kernel.",
+        "The Lean side is Evan Daniel's mixed-measure checker at evand/square-packing 1718a580e5de2fac7e1a5535e98f11ba447d312e, used unchanged: ZMTreeM.checkM (ZMTreeM.soundM), CovM and le_minSide_mixed (Attain.lean). The D4 fundamental region is cut into 80 x 80 root cells in 290 batches (batches.json); the 43,154 Part files and 290 Roots files are generated by scripts/gen_zmmtree_s59.py and not stored, and SOURCES.sha256 lists the SHA-256 of all 43,444 generated files; Sqpack/S59T/Cov.lean and S59Lower.lean are the built files.",
+        "The source reports Lean v4.33.1 on Arm64 Linux: generation 94 CPU-hours, the 43,154 Part files 768 CPU-hours at most 9.8 GB resident each, the Roots files 0.5 CPU-hours, Cov.lean 13 s and S59Lower.lean 8 s at 35 GB resident each; receipts/kernel_tasks.jsonl.gz has one line per task with its CPU seconds and peak memory, every task returning 0. lean/README.md also names receipts/final_build.log, which is not in the tree at the pin."
+      ],
+      "original_gzip": [
+        "square-packing/problems/square-lower-bounds/certificates/k2m5_n59_L8/lean/receipts/kernel_tasks.jsonl.gz"
+      ]
+    }
+  ]
+}
