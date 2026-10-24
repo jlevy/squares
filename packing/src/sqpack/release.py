@@ -8575,8 +8575,10 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "830dfb470 (#781) and the two TheSnakeFang reads, at link revision bb3d4913: "
             "each time twice from this tree and once with that main's three candidate "
             "inputs swapped in, 69 files each, all byte-identical across the three, the "
-            "explainer's math prepared by the same headless shell every time. No PDF was "
-            "printed; each prints from that HTML. Retain v0.4.25, v0.1.11, v0.1.4 and "
+            "explainer's math prepared by the same headless shell every time. After "
+            "#603's follow-up of 11:29:46Z was recorded, render_packing_methods at link "
+            "revision bb3d4913 writes all 43 files byte-identical to that render. No PDF "
+            "was printed; each prints from that HTML. Retain v0.4.25, v0.1.11, v0.1.4 and "
             "v0.2.7."
         ),
     ),
