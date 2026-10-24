@@ -1,0 +1,4 @@
+n-110, n-132, n-156, n-182, n-241, n-273 are Evan Daniel's exact certificates, copied unchanged
+from https://github.com/evand/square-packing, commit 29d0cee87c1d717f7b4497b8fb0ee17ac9d0087d,
+path search/exact/batch/certs/ (via squarepack-certs/third_party/daniel, same bytes), MIT License
+(LICENSE here, Copyright (c) 2026 Evan Daniel).

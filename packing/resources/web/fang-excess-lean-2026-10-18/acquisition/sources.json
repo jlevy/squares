@@ -1,0 +1,120 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-24T04:57Z",
+  "git_scope": "A blobless clone of TheSnakeFang/squarepack-lean, whose head is the pin 947bdae (2026-10-18T20:41:46Z, 'MIT licence; README points at the public certificate bundle'), checked out in full. The pin changes only LICENSE and one line of README.md from 837eca1 (2026-10-13T12:49:17Z), whose proof sources the note v0.9 names. The scope is the whole tree, 141 files: the Lean project (the root module, the eight hand-written modules, the vendored specification, the 17 generated piece modules and the 82 generated data and chunk modules), the build pins, the README, STATUS and licences, the 17 certificates the data modules are generated from, and the generator scripts. Sqlean/Data/N211.lean and its chunks and Sqlean/Pieces/N211.lean, de Winter's 211 piece, are gitignored and not in the tree. Nothing in the tree was executed.",
+  "sources": [
+    {
+      "id": "thesnakefang-squarepack-lean",
+      "source_url": "https://github.com/TheSnakeFang/squarepack-lean",
+      "source_ref": "main",
+      "source_commit": "947bdaec40ead1105cfb00c2968e2484b7d1b40b",
+      "committed_utc": "2026-10-18T20:41:46Z",
+      "git_tree": "d4c36ad80b4f40557e479a5e6e4a2635116d31fb",
+      "archived_path": "packing/resources/web/fang-excess-lean-2026-10-18/source",
+      "subtree_manifest": "packing/resources/web/fang-excess-lean-2026-10-18/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        ".gitignore",
+        "LICENSE",
+        "README.md",
+        "STATUS.md",
+        "Sqlean.lean",
+        "Sqlean",
+        "certs",
+        "lake-manifest.json",
+        "lakefile.toml",
+        "lean-toolchain",
+        "scripts"
+      ],
+      "subtree_file_count": 141,
+      "subtree_total_bytes": 2379100,
+      "retained_file_count": 130,
+      "retained_total_bytes": 2181052,
+      "compressed": [],
+      "pinned_only": [
+        {
+          "path": "Sqlean/Vendor/LICENSE-evand",
+          "bytes": 1068,
+          "sha256": "c51886c0f7e6724a7d89fc22cb237a1688ba1bbff04cb21a13b8e1a01fb15578",
+          "reason": "Evan Daniel's MIT licence; the 7 October batch packet retains the same bytes",
+          "identical_to": "packing/resources/web/evand-batch-105-130-2026-10-07/source/LICENSE"
+        },
+        {
+          "path": "Sqlean/Vendor/Spec.lean",
+          "bytes": 4812,
+          "sha256": "e0d7e50626b1ad7559a0823030fca6559a072e211d90e7079e95b498cfd564a0",
+          "reason": "Evan Daniel's specification, vendored unchanged; the 7 October Daniel packet retains the same bytes",
+          "identical_to": "packing/resources/web/evand-exact-and-local-reports-2026-10-07/source/s12/lean/Sqpack/Spec.lean"
+        },
+        {
+          "path": "certs/daniel/LICENSE",
+          "bytes": 1068,
+          "sha256": "c51886c0f7e6724a7d89fc22cb237a1688ba1bbff04cb21a13b8e1a01fb15578",
+          "reason": "Evan Daniel's MIT licence; the 7 October batch packet retains the same bytes",
+          "identical_to": "packing/resources/web/evand-batch-105-130-2026-10-07/source/LICENSE"
+        },
+        {
+          "path": "certs/daniel/n-110.cert",
+          "bytes": 18734,
+          "sha256": "fc6c309bd060e629a9d38287dc27b82a7a197ed84463879540df39986e4a5b8d",
+          "reason": "Evan Daniel's exact certificates at 29d0cee; the 5 October Daniel packet retains the same bytes",
+          "identical_to": "packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/batch/certs/n-110.cert"
+        },
+        {
+          "path": "certs/daniel/n-132.cert",
+          "bytes": 22758,
+          "sha256": "c08e34825e7112dfab3d8af87f473219bdb417ff9d8bc2b172cb272013d91fdb",
+          "reason": "Evan Daniel's exact certificates at 29d0cee; the 5 October Daniel packet retains the same bytes",
+          "identical_to": "packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/batch/certs/n-132.cert"
+        },
+        {
+          "path": "certs/daniel/n-156.cert",
+          "bytes": 26041,
+          "sha256": "f35bc8982fa5a96f4ffbb6d4d9170c6d21b2a9b0177bac1acc10cf887398e1ae",
+          "reason": "Evan Daniel's exact certificates at 29d0cee; the 5 October Daniel packet retains the same bytes",
+          "identical_to": "packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/batch/certs/n-156.cert"
+        },
+        {
+          "path": "certs/daniel/n-182.cert",
+          "bytes": 29844,
+          "sha256": "ad5c8eeac0c358fce1b9c4a65c6b4c9fc5767f44bf64be81bb4fee719580bd17",
+          "reason": "Evan Daniel's exact certificates at 29d0cee; the 5 October Daniel packet retains the same bytes",
+          "identical_to": "packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/batch/certs/n-182.cert"
+        },
+        {
+          "path": "certs/daniel/n-241.cert",
+          "bytes": 39797,
+          "sha256": "9fe9370c0cd7a93096aa6c41877eb1675b46de432f8ab31381e724ef44de584e",
+          "reason": "Evan Daniel's exact certificates at 29d0cee; the 5 October Daniel packet retains the same bytes",
+          "identical_to": "packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/batch/certs/n-241.cert"
+        },
+        {
+          "path": "certs/daniel/n-273.cert",
+          "bytes": 45126,
+          "sha256": "4555cd31a62f243ecf74105ea370f62fff622d12a7b33a32ef29d95980b7c025",
+          "reason": "Evan Daniel's exact certificates at 29d0cee; the 5 October Daniel packet retains the same bytes",
+          "identical_to": "packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/batch/certs/n-273.cert"
+        },
+        {
+          "path": "lean-toolchain",
+          "bytes": 25,
+          "sha256": "3aac669c7a910ec2389f4e4f921b605adf6ebf2d1e0c9b9cd0be4d33f3f5db71",
+          "reason": "leanprover/lean4:v4.33.1; the 7 October Daniel packet retains the same bytes",
+          "identical_to": "packing/resources/web/evand-exact-and-local-reports-2026-10-07/source/s12/lean/lean-toolchain"
+        },
+        {
+          "path": "scripts/gen_cert.py",
+          "bytes": 8775,
+          "sha256": "a47c2a46ec93209598df7371ad96a9a8476a27f1b85300ac2b1a1876de99a420",
+          "reason": "The certificate-to-Lean generator, 8,775 bytes of Python whose Lean strings (fun i hi => by) this repository's embedded-JavaScript gate reads as arrow functions and admits no exception for; the data modules it wrote are retained, and it is fetched at the pin to regenerate them, as the 18 October Daniel Lean packet does lean_cert.py"
+        }
+      ],
+      "license": "MIT, Copyright (c) 2026 Kevin Fang (LICENSE). Sqlean/Vendor/Spec.lean and ExactPack.lean and certs/daniel/ are Evan Daniel's, MIT (Sqlean/Vendor/LICENSE-evand, NOTICE; certs/daniel/LICENSE, NOTICE); the NOTICE says only ExactPack.lean's import line was changed. De Winter's 211 packing carries no licence and is fetched by scripts/fetch_211.sh, not committed. The pin's commit carries a Claude (Anthropic) co-author trailer; Kevin Fang's comment 6255103888 on jlevy/squares issue 603 (2026-10-18T21:02:13Z) says 'The search, checkers, bundle and Lean project were written with Claude as a coding and research agent, directed and reviewed by me.'; the note's acknowledgements say the same of the search software, the verifiers, the gluing program and the bundle, and of the Lean only that it reuses Evan Daniel's specification and certificate lemmas.",
+      "claims": [
+        "Sqlean/Main.lean: theorem UnitSquarePacking.theorem1 (n : \u2115) (h : 15 \u2264 n) : minSide (n ^ 2 - n + 1) < n, Fang's Theorem 1, and theorem UnitSquarePacking.main (n : \u2115) (h : 15 \u2264 n) : Packs (n ^ 2 - n + 1) ((n : \u211d) - 1 / 10000), by strong induction on n from base (15 <= n <= 26), small (m^2 - m squares for 11 <= m <= 14) and step, Lemma 3 with the rectangle R of 257 squares.",
+        "Sqlean/Theorem2.lean: theorem UnitSquarePacking.theorem2 (n : \u2115) (h : 15 \u2264 n) : minSide (n ^ 2 - n + jExc n) < n with jExc n = max ((n + 1) / 16) (1 + 2 * ((n - 15) / 21)), the maximum of the two single-step bounds of Fang's Theorem 2 (packs_j16 with R, packs_j21 with R' of 443 squares in 22 x 21), and main2, the same count at side n - 1/10000; the mixed-step form is not stated.",
+        "Sqlean/Glue.lean: theorem glue, Fang's Lemma 3 on rectangular containers PacksR for real d with 0 <= d <= b, b' and the integer conditions a, a' <= n and n - a' <= a - d; the 18 pieces are PacksR facts in Sqlean/Pieces/, each from check_sound and decide +kernel chunks over the integer-encoded certificate in Sqlean/Data/.",
+        "README.md and Sqlean/Axioms.lean: #print axioms for theorem1, main and theorem2 lists [propext, Classical.choice, Quot.sound]; no sorry, no native_decide, no new axioms. The README reports a clean build of 34 minutes wall, 373 s user and 392 s sys, on a shared 10-core machine, and about 3.2 CPU-minutes of kernel checking for the 18 certificates; it publishes no build log or axiom output. Its first line says 'Kernel-checked Lean 4 proof of Theorems 1 and 2'."
+      ]
+    }
+  ]
+}

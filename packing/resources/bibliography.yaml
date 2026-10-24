@@ -1888,6 +1888,54 @@ sources:
       certificates at side n - 1/20000 (50 F(n), 26 best-excess) six are retained and 70
       pinned by digest. No issue. MIT code; CC0 certificates outside theorem/, which
       names no licence; Claude assistance disclosed. No optimality claim.
+  - key: '[Fang excess note 2026-10-19]'
+    authors: [Fang]
+    year: 2026
+    venue: Zenodo
+    dated: '2026-10-19'
+    lineage: independent
+    credit: Fang after Arslanov, Mustafin, Shangitbayev, Ellsworth, Stead, de Winter, Daniel, Couzo
+    short_credit: Fang after Arslanov et al.
+    note: >-
+      Kevin Fang, "Packing n^2 - n + 1 unit squares in a square of side less than n, for
+      every n >= 15", draft v0.9 of 18 October 2026, DOI 10.5281/zenodo.23463481 (Zenodo
+      record created 2026-10-19T03:28Z, CC BY 4.0, PDF and LaTeX source), and the same text
+      as note/fang-2026-n2-n-1.md in TheSnakeFang/squarepack-certs at
+      9ffba0f3a84b38f0c92790c1d3089f979ef53f0b (2026-10-19T03:29:59Z), in
+      web/fang-excess-note-2026-10-19/. The proof of Theorems 1 and 2, which the 13 October
+      key states from the README: Lemma 3, Propositions 4 and 5 by the bundle's exact
+      certificates, and the induction. Issue 603. The note credits the decomposition and
+      the packings at 16 to 18 to Arslanov, Mustafin and Shangitbayev, 211 to de Winter,
+      the seeds to Ellsworth, Stead and Couzo, the format, a checker and the pieces'
+      certificates to Daniel, and the project's replays to it without building on them. It
+      states: "The search software, the verifiers, the gluing program and the certificate
+      bundle were written and run with Claude (Anthropic) as a coding and research agent,
+      directed and reviewed by the author; two language-model reviews of earlier drafts
+      (GPT-6 Astra; OpenAI Codex) found errors that were corrected, which is not an
+      external mathematical review."
+  - key: '[Fang excess Lean 2026-10-18]'
+    authors: [Fang]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-18'
+    lineage: independent
+    credit: Fang after Daniel, Arslanov, Mustafin, Shangitbayev, Ellsworth, Stead, de Winter, Couzo
+    short_credit: Fang after Daniel et al.
+    note: >-
+      Kevin Fang's Lean 4 proof of his Theorem 1, theorem1 and its side n - 1/10000 form
+      main, and of the larger of the two single-step bounds of his Theorem 2, theorem2 with
+      jExc, in TheSnakeFang/squarepack-lean at 947bdaec40ead1105cfb00c2968e2484b7d1b40b
+      (2026-10-18T20:41:46Z; proof sources of 837eca1, 2026-10-13), in
+      web/fang-excess-lean-2026-10-18/; the mixed-step Theorem 2 is not stated. It vendors
+      Evan Daniel's Spec.lean and ExactPack.lean unchanged but for an import, and checks
+      18 piece certificates by decide +kernel: de Winter's 211 (fetched, unlicensed),
+      Daniel's certificates of 241, 273 and the m^2 - m bases after Arslanov, Mustafin and
+      Shangitbayev and Ellsworth and Stead, and the author's rectangles and direct packings.
+      MIT. The pin's commit carries a Claude (Anthropic) co-author trailer, and Fang's
+      comment of 18 October on issue 603
+      (https://github.com/jlevy/squares/issues/603#issuecomment-6255103888) says "The
+      search, checkers, bundle and Lean project were written with Claude as a coding and
+      research agent, directed and reviewed by me." Not built here.
   - key: '[SQUISH third request 2026-10-09]'
     authors: [Chaoweeraprasit]
     year: 2026
