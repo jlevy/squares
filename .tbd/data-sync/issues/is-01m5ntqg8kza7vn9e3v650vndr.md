@@ -5,15 +5,17 @@ title: Catch up every 'Review pending' result on the profiles (T-073/T-080, T-08
 kind: task
 status: in_progress
 priority: 2
-version: 5
+version: 6
 delegate: c-review-pending-1024
 labels: []
 dependencies: []
 parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
+child_order_hints:
+  - is-01m5p3z3ggh42qy2bntrevxwmc
 hold: null
 hold_until: null
 created_at: 2026-10-24T02:09:40.627Z
-updated_at: 2026-10-24T04:50:55.532Z
+updated_at: 2026-10-24T04:51:06.895Z
 started_at: 2026-10-24T02:09:50.200Z
 ---
 

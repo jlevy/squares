@@ -5,15 +5,17 @@ title: "Import Polkovskyi's f1ceee4 (#732): 138 certificates at 328-989 in repor
 kind: task
 status: in_progress
 priority: 2
-version: 4
+version: 5
 delegate: c-import-732c-1024
 labels: []
 dependencies: []
 parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
+child_order_hints:
+  - is-01m5p3zeaxgseqzx8vxfcbtfbj
 hold: null
 hold_until: null
 created_at: 2026-10-24T01:28:09.635Z
-updated_at: 2026-10-24T04:14:02.394Z
+updated_at: 2026-10-24T04:51:17.981Z
 started_at: 2026-10-24T01:28:14.516Z
 ---
 

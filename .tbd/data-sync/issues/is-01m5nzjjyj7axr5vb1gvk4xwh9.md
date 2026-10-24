@@ -5,15 +5,17 @@ title: "PR #756 follow-up review B with a correctness review of merge commit 474
 kind: task
 status: in_progress
 priority: 2
-version: 3
+version: 4
 delegate: c-rev-756b-1024
 labels: []
 dependencies: []
 parent_id: is-01m5ndgfnpr93ktyy1ayc60vtb
+child_order_hints:
+  - is-01m5p3zjerf8hxzpna33svfv71
 hold: null
 hold_until: null
 created_at: 2026-10-24T03:34:22.415Z
-updated_at: 2026-10-24T04:19:09.373Z
+updated_at: 2026-10-24T04:51:22.200Z
 started_at: 2026-10-24T03:34:32.874Z
 ---
 
