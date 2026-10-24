@@ -419,6 +419,14 @@ def _ratio(value: object, where: str) -> Fraction:
         raise ReportError(f"{where}: not a rational literal: {error}") from error
 
 
+def _integer(value: object, where: str) -> int:
+    """An integer literal, refused where it is a fraction rather than cut to one:
+    `int(Fraction("1/2"))` is 0 (review A8 of #756)."""
+    ratio = _ratio(value, where)
+    _require(ratio.denominator == 1, f"{where}: {value!r} is not an integer")
+    return ratio.numerator
+
+
 def _coefficients(value: object, degree: int, where: str) -> list[Fraction]:
     """A field element's coefficients in the power basis, low degree first."""
     _require(
@@ -458,7 +466,7 @@ def evand_minpoly_geometry(raw: bytes, row: Witness) -> dict[str, Any]:
     field_spec = cast("dict[str, Any]", form["field"])
     side_spec = cast("dict[str, Any]", form["S"])
     squares = cast("list[Any]", form["squares"])
-    low_to_high = [int(_ratio(value, f"n={n} f")) for value in field_spec.get("f", [])]
+    low_to_high = [_integer(value, f"n={n} f") for value in field_spec.get("f", [])]
     degree = len(low_to_high) - 1
     _require(
         degree == row["degree"], f"n={n}: the form's field is not of degree {row['degree']}"

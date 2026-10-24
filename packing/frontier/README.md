@@ -132,12 +132,22 @@ The ones that carry the most weight:
   `bounds_agree_at_declared_precision` accepts a ceiling within one unit of the printed
   side’s last place as the same displayed bound.
   An `exact_form` on the ceiling is the exact form of the ceiling; $s(n)$ is known
-  exactly only when `status` is `proved`.
+  exactly only when `status` is `proved`. An algebraic ceiling the house writer writes
+  is `root(p, low, high)`: `p` its minimal polynomial in `s`, highest degree first, as
+  `minimal_polynomial` writes it, and `low` and `high` the side cut down and rounded up
+  at forty places, an interval in which it is `p`’s one root
+  ([`exact_sides.form`](../devtools/exact_sides.py), which `exact_sides.read_form` reads
+  back exactly). n = 11’s `root(P_trump11, …)`, which names its polynomial, is not this
+  form.
 - Both upper lanes hold the certificate of the case’s **house best packing**, as the
   [synopsis](../../SYNOPSIS.md#the-measurements) defines it.
   By the import runbook’s [house rule](../campaign/result-import.md#the-house-rule), the
   pass that validates a smaller packing, whoever found it, adopts it as the house best
   packing and regularizes it in the same pull request.
+  Where the house has an algebraic side and does not read regular as published, its
+  count draws its exact house and its regularization stays owed to a bead
+  (`regularization-owed`), since no regularizer yet draws an exact view of a
+  number-field witness (the house rule’s algebraic bullet).
   `devtools.select_houses` derives it from the register and `devtools.adopt_houses`
   writes it.
 - `reported_status` is the source-set view; `status` is `proved` only when the verified

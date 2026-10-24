@@ -925,12 +925,13 @@ def _house_witness(n: int, source: Source) -> dict[str, Any]:
 
 def build_witness(n: int) -> dict[str, Any]:
     """The house, decided again by `sqpack`'s exact verifier and held to the native result:
-    over Q for a rational certificate, over the witness's field for an algebraic one."""
+    over Q for a rational certificate, over the witness's field for an algebraic one. The
+    two are compared as they are, with no encoding between them that could make unequal
+    values equal (review A9 of #756)."""
     witness = expected_house(n)
     native, verification = legacy.exact_verify(witness)
     _require(
-        verification.valid
-        and json.loads(json.dumps(native, default=str)) == witness["certificate"]["result"],
+        verification.valid and native == witness["certificate"]["result"],
         f"n={n}: the house's exact decision differs from its retained native job",
     )
     return witness

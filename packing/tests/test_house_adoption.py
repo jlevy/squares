@@ -795,9 +795,37 @@ def test_an_algebraic_house_is_its_number_field_fact_with_its_jobs_over_the_fiel
         assert source.receipt(n) in inputs, n
 
 
+@pytest.mark.parametrize(
+    ("decided", "retained"),
+    [
+        ({"rows": (1, 2)}, {"rows": [1, 2]}),  # a tuple the round trip made a list
+        ({"side": Fraction(1, 2)}, {"side": "1/2"}),  # a value `default=str` stringified
+        ({1: "a"}, {"1": "a"}),  # an integer key the round trip made a string
+    ],
+)
+def test_a_house_is_held_to_its_native_result_exactly(
+    monkeypatch: pytest.MonkeyPatch, decided: dict[Any, Any], retained: dict[str, Any]
+) -> None:
+    """Review A9 of #756: `build_witness` compared the verifier's result with the retained
+    one through `json.dumps(default=str)`, which makes a tuple a list, a fraction its text
+    and an integer key a string, for every house. It compares them as they are: each of
+    these differs from its retained result and is refused. Every algebraic house rebuilds
+    under the exact comparison (`upper_bound_houses.build_witness` at the nine counts)."""
+    witness = {"certificate": {"result": retained}}
+    verified = type("Verified", (), {"valid": True})()
+    monkeypatch.setattr(houses, "expected_house", lambda _n: witness)
+    monkeypatch.setattr(houses.legacy, "exact_verify", lambda _witness: (decided, verified))
+    with pytest.raises(houses.HouseError, match="differs from its retained native job"):
+        houses.build_witness(70)
+    monkeypatch.setattr(houses.legacy, "exact_verify", lambda _witness: (retained, verified))
+    assert houses.build_witness(70) is witness
+
+
 def test_a_form_of_another_count_field_or_roster_is_refused() -> None:
-    """The form reader refuses a form of another count, of another field degree or with a
-    square too few, and reads the retained one, whose custody the acquisition check holds."""
+    """The form reader refuses a form of another count, of another field degree, with a
+    field coefficient that is a fraction rather than cut to an integer (review A8 of
+    #756), or with a square too few, and reads the retained one, whose custody the
+    acquisition check holds."""
     from devtools import algebraic_witness_reports as fields  # noqa: PLC0415
 
     packet = houses.sources()["T-193"].packet
@@ -810,6 +838,7 @@ def test_a_form_of_another_count_field_or_roster_is_refused() -> None:
     for mutate, message in (
         (lambda form: form.update(n=103), "not this count's"),
         (lambda form: form["field"]["f"].append(1), "not of degree"),
+        (lambda form: form["field"]["f"].__setitem__(0, "1/2"), "'1/2' is not an integer"),
         (lambda form: form["squares"].pop(), "lists 101 squares"),
     ):
         changed = json.loads(json.dumps(data))
@@ -1081,7 +1110,7 @@ def test_a_side_the_register_cannot_hold_turns_the_register_check_red(
 
 
 def test_unread_pending_reports_every_improvement_whatever_would_defer_it(
-    monkeypatch: pytest.MonkeyPatch,
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
 ) -> None:
     """Review C10 of #660: the A6 guard caught #658's exemption because it patched the
     deferral reader that exemption used, so one built on another reading would pass it.
@@ -1099,15 +1128,30 @@ def test_unread_pending_reports_every_improvement_whatever_would_defer_it(
     identifiers = [
         str(entry["id"]) for entry in select.load_results() if select.eligible(entry)
     ]
+    # The real deferral file named T-174's algebraic evidence until the adoption of 23
+    # October 2026 cited it (think-ot5c), and names no eligible entry now. So a deferral
+    # naming one, T-193 as #658's exemption would have, is added to the file as read,
+    # and every eligible entry is reported all the same (review A11 of #756).
+    real = citations.load_deferrals()
+    assert "T-193" in identifiers
+    named = {
+        "evidence": "E-evand-639-verify-exact-replay",
+        "results": ["T-193"],
+        "bead": "think-ot5c",
+        "blocked_on": "think-8ido",
+        "recorded": "2026-10-23",
+        "reason": "a deferral naming an eligible entry, for this test",
+    }
+    written = tmp_path / citations.DEFERRALS.name
+    written.write_text(yaml.safe_dump({"deferrals": [*real, named]}), encoding="utf-8")
+    monkeypatch.setattr(citations, "DEFERRALS", written)
+    monkeypatch.setattr(citations, "load_deferrals", lambda *_args, **_kw: [*real, named])
     deferred = {
         str(result)
         for deferral in citations.load_deferrals()
         for result in cast("list[object]", deferral["results"])
     }
-    # The real deferral file named T-174's algebraic evidence until the adoption of 23
-    # October 2026 cited it (think-ot5c), and names no eligible entry now; every eligible
-    # entry is reported all the same, whatever a deferral would exempt.
-    assert not deferred & set(identifiers)
+    assert "T-193" in deferred & set(identifiers)
     assert select.unread_pending(identifiers) == {
         identifier: [69] for identifier in identifiers
     }

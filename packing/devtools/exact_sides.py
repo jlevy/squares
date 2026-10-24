@@ -335,8 +335,11 @@ def literal(side: Side) -> str:
 #: such a side (T-193's claim), doubled wherever forty do not isolate the root.
 FORM_PLACES = 40
 #: One monomial of a polynomial in `s` as the register writes it: `4775s^{18}`, `-96s`,
-#: `+206` (`devtools.intake_ledger.polynomial` reads the same).
-_MONOMIAL = re.compile(r"([+-]?)([0-9]*)(s(?:\^\{?([0-9]+)\}?)?)?")
+#: `+206` (`devtools.intake_ledger.polynomial` reads the same), its exponent in braces or
+#: bare, never half-braced.
+_MONOMIAL = re.compile(r"([+-]?)([0-9]*)(s(?:\^(?:\{([0-9]+)\}|([0-9]+)))?)?")
+#: Spaces a written polynomial may hold: about the signs between its terms, and at its ends.
+_SIGN_SPACES = re.compile(r"\s*([+-])\s*")
 _DECIMAL = r"[0-9]+(?:\.[0-9]+)?"
 #: `form`'s text: the polynomial, then the interval's two ends as decimals.
 _ROOT_FORM = re.compile(
@@ -367,22 +370,35 @@ def polynomial_text(polynomial: Sequence[int]) -> str:
 
 def read_polynomial(text: str) -> tuple[int, ...]:
     """The integer coefficients, highest degree first, of a polynomial `polynomial_text`
-    writes, with or without spaces and a closing ``=0``."""
-    written = text.split("=", 1)[0].replace(" ", "")
+    writes, with or without spaces about the signs between its terms and a closing ``=0``.
+
+    Read strictly (review A8 of #756): every term but the first opens with its sign, so
+    ``5s3`` and ``s^2s`` are refused rather than read as ``5s+3`` and ``s^2+s``; a space
+    inside a term, as in ``2 3s``, is refused rather than read as ``23s``; so are a
+    right-hand side other than ``0``, a half-braced exponent and a degree written twice."""
+    left, equals, right = text.partition("=")
+    if equals and right.strip() != "0":
+        raise ExactSideError(f"not a polynomial in s equated to 0: {text!r}")
+    written = _SIGN_SPACES.sub(r"\1", left.strip())
+    if any(character.isspace() for character in written):
+        raise ExactSideError(f"a space inside a term of {text!r}")
     coefficients: dict[int, int] = {}
     position = 0
     while position < len(written):
         match = _MONOMIAL.match(written, position)
-        if match is None or match.end() == position:
+        if match is None or match.end() == position or (position and not match.group(1)):
             raise ExactSideError(f"not a polynomial in s: {text!r}")
         sign = -1 if match.group(1) == "-" else 1
         if match.group(3):
-            power, coefficient = int(match.group(4) or 1), int(match.group(2) or 1)
+            exponent = match.group(4) or match.group(5)
+            power, coefficient = int(exponent or 1), int(match.group(2) or 1)
         elif match.group(2):
             power, coefficient = 0, int(match.group(2))
         else:
             raise ExactSideError(f"not a polynomial in s: {text!r}")
-        coefficients[power] = coefficients.get(power, 0) + sign * coefficient
+        if power in coefficients:
+            raise ExactSideError(f"s^{power} is written twice in {text!r}")
+        coefficients[power] = sign * coefficient
         position = match.end()
     if not coefficients:
         raise ExactSideError(f"not a polynomial in s: {text!r}")

@@ -268,3 +268,31 @@ def test_a_root_form_that_states_no_isolated_irreducible_root_is_refused() -> No
         assert bound is not None
         assert bound.unread is not None, form
         assert exact.of_bound(bound) is None
+
+
+@pytest.mark.parametrize(
+    ("written", "message"),
+    [
+        ("5s3", "not a polynomial in s"),  # read as 5s+3 before review A8 of #756
+        ("s^2s", "not a polynomial in s"),  # as s^2+s
+        ("2 3s", "a space inside a term"),  # as 23s
+        ("9 s^2-96s+206", "a space inside a term"),
+        ("s^{12-1", "not a polynomial in s"),  # a half-braced exponent
+        ("s^2+s^2-2", "written twice"),
+        ("9s^2-96s+206=1", "equated to 0"),
+    ],
+)
+def test_a_polynomial_written_otherwise_than_the_register_writes_one_is_refused(
+    written: str, message: str
+) -> None:
+    """The reader is strict (review A8 of #756): every term after the first opens with its
+    sign, no space sits inside a term, an exponent is braced whole or bare, no degree is
+    written twice, and a closing equation is `=0`. Spaces about the signs stay allowed, as
+    n = 11's register entry writes its polynomial."""
+    with pytest.raises(exact.ExactSideError, match=message):
+        exact.read_polynomial(written)
+    if "=" not in written:
+        # A root form names no equation, so its reader refuses the same polynomials.
+        with pytest.raises(exact.ExactSideError):
+            exact.read_form(f"root({written}, 7, 8)")
+    assert exact.read_polynomial(" 9s^2 - 96s + 206 = 0 ") == (9, -96, 206)
