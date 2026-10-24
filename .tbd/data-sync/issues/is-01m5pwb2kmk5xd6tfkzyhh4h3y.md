@@ -5,7 +5,7 @@ title: "Import the 99 Kaggle-credited sides franciscouzo/square-packing publishe
 kind: task
 status: in_progress
 priority: 1
-version: 10
+version: 11
 delegate: c-import-lyf9-1024
 labels:
   - result-import
@@ -16,7 +16,7 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-24T11:57:05.011Z
-updated_at: 2026-10-24T18:23:43.288Z
+updated_at: 2026-10-24T18:43:53.814Z
 started_at: 2026-10-24T13:38:16.607Z
 ---
 
@@ -150,3 +150,5 @@ LEFT
 - Owner question added: credit at 364, 450 and 874 (the measurement does not pair the row with the push's earlier side one to one).
 
 2026-10-24 coord-intake-1024: credit at 364, 450 and 874 (pairing not one to one: 116, 200, 234 squares beyond 1e-3) is decided by the runbook, not the owner: only a refinement is credited 'after' the packing it refines ('Several Reports at One Count', 'A refinement'), so each row is credited to its finder as the source's manifest states, with the measurement recorded. The addressing round after review B applies it.
+
+2026-10-24 coord-intake-1024: REVISED credit decision at 364, 450 and 874 (supersedes the note above): the chain rule credits every link the source's own files state; 964ee2b's manifest names a previous_source at each, so the row is credited '<finder> after <previous_source's finder>' (seeded from), with the measured non-one-to-one pairing recorded. Unlike #792's 304, the measurement does not contradict the stated link. Applied in #795's review-B round.
