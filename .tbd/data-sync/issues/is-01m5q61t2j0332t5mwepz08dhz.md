@@ -5,15 +5,17 @@ title: "Stage 4: review T-241 (Couzo's 304) and T-242 (Daniel's 268 and 304), th
 kind: task
 status: open
 priority: 2
-version: 1
+version: 2
 labels:
   - result-import
   - validation
   - packing
 dependencies: []
 parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
+child_order_hints:
+  - is-01m5qsbkgnvjscxj2cv8bny4mz
 created_at: 2026-10-24T14:46:47.122Z
-updated_at: 2026-10-24T14:46:47.122Z
+updated_at: 2026-10-24T20:24:11.028Z
 ---
 Stage 4 of the think-l49q import (PR #792, records lane c-import-l49q-1024). T-241 registers Francisco Couzo's certificates/best/n304.cert at franciscouzo/square-packing@fa6237e (Kirill Tymchishin's Kaggle packing, 2.53e-3 below T-186) and T-242 Evan Daniel's exact descents at evand/square-packing@8a8879a (268, 4.48e-12 below T-240, another placement of #763's arrangement; 304, 3.04e-9 below T-241, T-241's packing descended), both at V0/C0, drafts S3 and S2.
 
