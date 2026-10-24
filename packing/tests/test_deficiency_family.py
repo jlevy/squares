@@ -15,6 +15,8 @@ def fang_row(ledger: dict) -> dict:
 
 
 def test_the_recorded_assessment_is_what_the_family_recomputes() -> None:
+    """The gate's freshness check: `devtools.profile_records` reads the recorded
+    assessment, so this is what holds it to every statement of the family."""
     assert family.main([]) == 0
     ledger, dated = family.load()
     ((result, recorded, recomputed),) = family.recorded_assessments(ledger, dated)
@@ -50,6 +52,17 @@ def test_a_statement_the_comparison_does_not_name_refuses_the_assessment() -> No
     explicit["upper_bounds"][0]["constant"] = "W(x) <= 9 x^{7/11} for x >= 2"
     with pytest.raises(family.FamilyError, match="states a constant"):
         family.assess(explicit, fang_row(explicit), dated)
+
+
+def test_a_stale_assessment_fails_the_comparison() -> None:
+    ledger, dated = family.load()
+    fang_row(ledger)["record_scope"]["assessment"]["smallest"] = [[15, 78]]
+    ((_, recorded, recomputed),) = family.recorded_assessments(ledger, dated)
+    assert family.stale(recorded, recomputed) == ["smallest"]
+    for row in ledger[family.SECTION]:
+        if row.get("record_scope"):
+            del row["record_scope"]["assessment"]
+    assert family.recorded_assessments(ledger, dated) == []
 
 
 def test_a_tie_stays_with_the_earlier_report() -> None:

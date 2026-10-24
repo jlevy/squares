@@ -158,14 +158,9 @@ def test_partial_currentness_and_independent_exact_value_proof_family() -> None:
     assert index.facets["proof"][0].family == "optimality"
 
 
-def context(
-    raw: dict[str, dict[str, Any]], sources: dict[str, dict[str, Any]] | None = None
-) -> standing.Records:
+def context(raw: dict[str, dict[str, Any]]) -> standing.Records:
     return standing.Records(
-        Register(evidence={}, results=list(raw.values()), sources={}, names={}),
-        raw,
-        sources or {},
-        {},
+        Register(evidence={}, results=list(raw.values()), sources={}, names={}), raw, {}, {}
     )
 
 
@@ -290,30 +285,24 @@ def test_proof_derivation_requires_own_lower_holder_and_the_correct_lane_status(
     )
 
 
-def test_an_assessed_family_scope_is_current_only_as_its_recomputation_says() -> None:
-    ledger, dated = family.load()
+def test_an_assessed_family_scope_is_current_only_as_its_assessment_says() -> None:
+    ledger, _ = family.load()
     raw = {"T-163": result("T-163")}
     raw["T-163"]["attribution"]["source_keys"] = ["[Fang excess theorem 2026-10-13]"]
-    sources = {key: {"key": key, "dated": day} for key, day in dated.items()}
-    facets = records.family_record_facets(ledger, context(raw, sources))
+    facets = records.family_record_facets(ledger, context(raw))
     assert [(facet.result, facet.current) for facet in facets] == [("T-163", True)]
     index = records.classify_records(raw, [], family_facets=facets)
     assert index.current_results == ("T-163",)
     assert index.unresolved == {}
     row = next(item for item in ledger[family.SECTION] if item.get("record_scope"))
-    assessment = row["record_scope"]["assessment"]
-    assessment["smallest"] = [[15, 78]]
-    with pytest.raises(ValueError, match="smallest differ"):
-        records.family_record_facets(ledger, context(raw, sources))
-    assessment.update(family.assess(ledger, row, dated), current=False, smallest=[])
-    with pytest.raises(ValueError, match="current, smallest differ"):
-        records.family_record_facets(ledger, context(raw, sources))
+    row["record_scope"]["assessment"]["current"] = False
     stopped = records.classify_records(
-        raw,
-        [],
-        family_facets=[
-            records.FamilyFacet("T-163", "f", "k >= 15", "think-kqi1", current=False)
-        ],
+        raw, [], family_facets=records.family_record_facets(ledger, context(raw))
     )
     assert stopped.current_results == ()
     assert stopped.unresolved == {}
+    del row["record_scope"]["assessment"]
+    unassessed = records.classify_records(
+        raw, [], family_facets=records.family_record_facets(ledger, context(raw))
+    )
+    assert "think-kqi1" in unassessed.unresolved["T-163"][0]

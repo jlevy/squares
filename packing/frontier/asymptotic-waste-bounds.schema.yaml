@@ -126,10 +126,10 @@ properties:
             case projection. Without an assessment it exposes unassessed family
             currentness under its review bead. An assessment records whether the scope
             is current, and cases/asymptotic/deficiency_family.py recomputes it from
-            every statement of the family on each read (devtools.profile_records): an
-            assessment the recomputation does not reproduce is refused, so no current
-            window rests on a frozen comparison. The linked result must attribute this
-            row's source_key.
+            every statement of the family; the gate refuses an assessment the
+            recomputation does not reproduce (tests/test_deficiency_family.py), so no
+            current window rests on a frozen comparison. The linked result must
+            attribute this row's source_key.
           properties:
             result: {type: string, pattern: '^T-[0-9]{3}$'}
             review_bead: {type: string, pattern: '^think-[a-z0-9]{4}$'}

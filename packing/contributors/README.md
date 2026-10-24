@@ -69,7 +69,7 @@ Do not extract a year from a biography, archive path, repository name or capture
 [`profile_records.py`](../devtools/profile_records.py) derives current record IDs from
 the register and case evidence, including unresolved priority and family scope.
 A theorem-wide family scope counts as current only where its `record_scope.assessment`
-is what the family’s maintained comparison recomputes
+says so, and the gate holds that assessment to the family’s maintained comparison
 ([`deficiency_family.py`](../cases/asymptotic/deficiency_family.py)); without one it is
 unassessed. Its `load_record_index()` result is shared by a render; intersect with
 primary-authored IDs through `current_record_ids()`. Use `record_input_paths()` in build
