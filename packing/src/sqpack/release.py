@@ -2538,8 +2538,11 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "from main's tree and from this tree at ea4a21c61 (69 files each): the three "
             "papers' files are byte-identical, and only the explainer's HTML and Markdown "
             "differ, in its register count (231 to 233), so the explainer takes v0.4.23. "
-            "No PDF was printed; each prints from that HTML. Retain v0.1.11, v0.1.4 and "
-            "v0.2.7."
+            "Measured once more after merging main 0bbb0a2c4 (#754), at link revision "
+            "0bbb0a2c from main's tree and from this tree at 9bbd14ca0: the three papers' "
+            "files are again byte-identical, and the explainer differs only in that count "
+            "and its v0.4.23 history line. No PDF was printed; each prints from that HTML. "
+            "Retain v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
     ReleaseNoPublicChange(
