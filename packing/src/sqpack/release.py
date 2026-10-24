@@ -8661,6 +8661,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         ),
         paths=(
             "packing/campaign/result-requests.yaml",
+            "packing/devtools/acquire_source.py",
             "packing/devtools/upper_bound_reports.py",
             "packing/frontier/results.yaml",
             "packing/frontier/source-coverage.yaml",
@@ -8677,10 +8678,12 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "The think-l49q import: T-241's and T-242's registration of Francisco Couzo's "
             "304 and Evan Daniel's exact descents at 268 and 304 as reported, their two "
             "coverage sources, the importer's read of a certificate another packet "
-            "retains, and #763's import reply, against main 2ec489d1e (#789): rendered at "
-            "link revision 2ec489d1 into empty site directories, twice from this tree and "
-            "once from it with main's result-requests.yaml, upper_bound_reports.py, "
-            "results.yaml and source-coverage.yaml swapped in, "
+            "retains, #763's import reply, and review A's credit, push-dating and "
+            "twin-reader fixes (acquire_source.twin_bytes), against main 2ec489d1e (#789): "
+            "rendered at link revision 2ec489d1 into empty site directories, twice from "
+            "this tree at 705ba44e and once from it with main's result-requests.yaml, "
+            "acquire_source.py, upper_bound_reports.py, results.yaml and "
+            "source-coverage.yaml swapped in, "
             "render_n11_optimality_review, render_n11_threshold_bound_review and "
             "render_packing_methods write all 51 files byte-identical across the three. "
             "The explainer, counting 240 to 242 results, takes v0.4.27 over main's "
