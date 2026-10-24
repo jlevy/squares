@@ -7938,6 +7938,40 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "bootstrap. Every paper keeps its version."
         ),
     ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/devtools/probes/preview_site/header.js",
+            "packing/devtools/render_contributors.py",
+            "packing/devtools/source_supersession.py",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "Three small cleanups no paper reads: the non-stacked profile tally joins its "
+            "counts with the shared tally separator, a form only the tests call; the "
+            "header probe's opening comment no longer describes the Film and Workbench "
+            "tabs removed on 22 October; and the coverage register's YAML node tree is "
+            "composed once per text, which changes no output. Rendered on 23 October from "
+            "this tree and from main da117ad0b into empty site directories with source "
+            "links pinned to da117ad0b (69 files each): every file, each paper's Markdown "
+            "and HTML among them, is byte-identical. No PDF was printed; each prints from "
+            "that HTML. Every paper keeps its version."
+        ),
+    ),
 )
 
 

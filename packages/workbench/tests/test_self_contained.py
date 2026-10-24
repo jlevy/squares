@@ -94,7 +94,12 @@ def test_the_published_policy_allows_only_its_own_origin_for_resources() -> None
     """The second layer (#125 F21): whatever the scan misses, the browser refuses."""
     page = with_policy('<!DOCTYPE html>\n<html lang="en">\n<head>\n<meta charset="utf-8">')
     head = page.index("<head>") + len("<head>")
-    assert page[head:].lstrip().startswith(POLICY_META), "the policy must precede everything"
+    # Only the charset, which the standard wants in the first 1024 bytes, goes before it.
+    assert page[head:].lstrip().startswith(f'<meta charset="utf-8">\n{POLICY_META}'), (
+        "the policy must precede everything but the charset"
+    )
+    bare = with_policy("<html><head><title>t</title>")
+    assert bare.startswith(f"<html><head>\n{POLICY_META}<title>"), "no charset, policy first"
     directives = {
         part.split()[0]: part.split()[1:]
         for part in CONTENT_SECURITY_POLICY.split(";")
