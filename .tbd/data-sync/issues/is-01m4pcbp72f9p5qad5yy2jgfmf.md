@@ -5,7 +5,7 @@ title: "Import wand125: the Lean kernel proof of s(59) = 8 (f9a77b7), a proof-as
 kind: task
 status: open
 priority: 3
-version: 7
+version: 8
 delegate: null
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-11T21:02:06.049Z
-updated_at: 2026-10-24T08:27:08.454Z
+updated_at: 2026-10-24T09:16:49.611Z
 started_at: 2026-10-23T06:19:00.079Z
 ---
 Found in the 2026-10-11 intake read of wand125/square-packing (think-q655); nothing on GitHub asked. Commit f9a77b7 (2026-10-11T01:42:37Z) adds problems/square-lower-bounds/certificates/k2m5_n59_L8/lean/: a generated Lean proof, theorem s59_eq_8 : minSide 59 = 8 and s59_ge_8, axioms [propext, Classical.choice, Quot.sound], no sorry and no native_decide, on Evan Daniel's mixed-measure checker (ZMTreeM.checkM, CovM, le_minSide_mixed) used unchanged at evand/square-packing 1718a580e5de2fac7e1a5535e98f11ba447d312e, over the cover n59_mixed_cover_8.txt (SHA-256 6f4d2b64...): 6,400 root cells in 290 batches, 43,154 generated files not stored (SOURCES.sha256 lists them; receipts/kernel_tasks.jsonl.gz the kernel tasks).
@@ -35,3 +35,5 @@ Stage 4 review: owed, from the packet.
 2026-10-24 c-stage7-1024 (think-9i18, PR https://github.com/jlevy/squares/pull/787): #536's ask is marked done, with a note: the packet wand125-n59-lean-kernel-2026-10-11 (lean/ at f9a77b7, on main since #750, 2c58b6373), its README's read of the statement binding (s59_eq_8 : minSide 59 = 8, minSide and Packs from S32.lean at 1718a580), the evidence entry E-n059-wand125-lean-kernel-report under T-235 rather than T-066 (T-066's claim names T-235), and the rebuild priced at about 862 CPU-hours, held (think-cs9x). results stays [] because mapping a result to T-235 (V0/C0) would make the issue unsettled against a close_when that asks only for the packet, the entry and a price. check_requests --report: #536 closeable. Closing reply drafted for the coordinator: /tmp/claude-0/-home-user-squares/f8504540-2b5a-5f78-8968-eb4ffa4c4b64/scratchpad/stage7-1024/reply-536.md. After it is posted and recorded with the close, the record names this bead on no open issue. This bead still holds T-235's stage 4 review (C1, per its next_rung): a search finds no other bead for it (PR #770 proposes tracking issue #783), so it should not close on #536's close alone; the full build stays with think-cs9x.
 
 2026-10-24 coord-intake-1024: released. #536's closing reply (the lost scratch draft reply-536.md) is re-drafted from main with check_requests --draft 536 after #787 merges (think-9i18's stage 7). This bead keeps T-235's stage 4 review.
+
+2026-10-24 coord-intake-1024: #536 closed 2026-10-24T09:16:30Z with its final reply https://github.com/jlevy/squares/issues/536#issuecomment-6382429802 (posted after Pages run 40080362391 verified 6808d293a's deploy); the record rides think-mdfr's records PR. This bead keeps T-235's stage 4 review (tracked on #783).

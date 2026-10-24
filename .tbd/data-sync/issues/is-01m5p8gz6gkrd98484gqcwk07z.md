@@ -3,9 +3,9 @@ type: is
 id: is-01m5p8gz6gkrd98484gqcwk07z
 title: "Records PR 'stage 7 of 24 Oct': News for #745 and #750 with delivery rows, the #446 and #755 reply records, #534 and #536 mapped to T-232 and T-235 and closed, #603 read_through"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 6
+version: 7
 delegate: coord-intake-1024
 labels: []
 dependencies: []
@@ -13,8 +13,12 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-24T06:10:46.607Z
-updated_at: 2026-10-24T09:02:38.158Z
+updated_at: 2026-10-24T09:16:50.715Z
 started_at: 2026-10-24T06:10:52.599Z
+closed_at: 2026-10-24T09:16:50.715Z
+close_reason: "PR #787 merged 2026-10-24T09:02:12Z (6808d293a); deploy verified (Pages run 40080362391: deploy 120833982896, verify-deployment 120834039180); #534 and #536 closing replies posted 09:16:27Z and 09:16:29Z and both issues closed; their records ride think-mdfr's PR."
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes
