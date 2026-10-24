@@ -7666,6 +7666,9 @@ issues:
         confirmation: C3
         status: confirmed
       - result: s31-mixed-fine-net
+        id: E-wand125-fine-net-n31-59775-report
+        status: reviewed
+      - result: s31-mixed-fine-net
         id: E-wand125-fine-net-n31-59775-sqverify-fast-replay
         status: confirmed
     close_when: >-
@@ -7686,8 +7689,10 @@ issues:
       is check_requests --draft 534 from main 6808d293a. It reported T-232 at V3/C3,
       confirmed, and E-wand125-fine-net-n31-59775-sqverify-fast-replay confirmed, each
       re-verified with sqverify-fast, a checker that shares components with the generator,
-      and that nothing asked for is queued. The issue was closed with it at 09:16:28Z, as
-      completed.
+      and that nothing asked for is queued. Its record also lists
+      E-wand125-fine-net-n31-59775-report, the report entry beside T-232, which the draft
+      leaves out by design, as the record does for such entries. The issue was closed with
+      it at 09:16:28Z, as completed.
   - number: 535
     title: Take Evan Daniel's Lean proof of s(12) ≥ 15680/3951 (S12HLower) as evidence for T-049
     author: jlevy
