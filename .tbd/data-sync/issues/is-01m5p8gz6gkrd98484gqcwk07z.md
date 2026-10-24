@@ -5,15 +5,15 @@ title: "Records PR 'stage 7 of 24 Oct': News for #745 and #750 with delivery row
 kind: task
 status: in_progress
 priority: 1
-version: 3
-delegate: c-stage7-1024
+version: 5
+delegate: coord-intake-1024
 labels: []
 dependencies: []
 parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-24T06:10:46.607Z
-updated_at: 2026-10-24T06:56:15.829Z
+updated_at: 2026-10-24T08:46:08.557Z
 started_at: 2026-10-24T06:10:52.599Z
 ---
 
@@ -27,3 +27,5 @@ started_at: 2026-10-24T06:10:52.599Z
 - 126c64b51 #670 final (6380974872), #719 follow-up (6380975041), #734 final (6380975210), #734 closed 2026-10-24 (not planned).
 - e1c8e942c, a2b5fa091 the survey's no-change record for result-requests.yaml (43 files byte-identical, three render sets).
 - Owner's call moved off think-wop1: think-nq5g (decision) under think-ezt8 holds the n31 review's M-1 to M-3 and its five questions.
+
+2026-10-24 coord-intake-1024: review A (c-rev-787-1024, https://github.com/jlevy/squares/pull/787#issuecomment-6382094138) approve after A1; addressed inline at 40c86f10f (A1 think-nq5g in #446's note, A2 optimality topic on the #750 story, A3 think-lnzm closed, A4 body), dispositions https://github.com/jlevy/squares/pull/787#issuecomment-6382151214. 202 tests passed, render_changelog --check 0 owed, check_requests 0, release_pin and check_release_impact pass. Hosted CI at 40c86f10f running; merge on green. The #534/#536 closing replies (the lost scratch drafts) are rendered from main with check_requests --draft after the merge.
