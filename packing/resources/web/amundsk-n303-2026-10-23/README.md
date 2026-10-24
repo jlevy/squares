@@ -160,13 +160,27 @@ The margin below the case ceiling is exactly the difference `claims.json` record
 
 ## Report Order
 
-#755 is the only report below T-230 at 303.
-The open issues that mention 303 are #375, #470, #573 and #593, each registered or read
-and above T-230, and none has a comment since #728. Of the issues and pull requests
-opened since #728, #732’s rows start at 328, and the open records pull requests add no
-claim at 303. Of the watched repositories, evand/square-packing’s head is still
-`7982d7a`, and Mishapolk/square-packing-records’ five commits since #728 concern 328 to
-10,000. With one report open at the count, no report-order ledger is needed.
+When read at 16:11Z on 23 October 2026, #755 was the only report below T-230 at 303.
+The open issues that mention 303 were #375, #470, #573 and #593, each registered or read
+and above T-230, and none had a comment since #728. Of the issues and pull requests
+opened since #728, #732’s rows start at 328, and the open records pull requests added no
+claim at 303. Of the watched repositories, evand/square-packing’s head was still
+`7982d7a`, and Mishapolk/square-packing-records’ five commits since #728 concerned 328 to
+10,000. With one report open at the count, no report-order ledger was needed.
+
+Two later reports reach 303, and each is its own pull request’s to import:
+
+- **Mykhailo Polkovskyi’s commit**
+  [`Mishapolk/square-packing-records@7e82c64`](https://github.com/Mishapolk/square-packing-records/commit/7e82c6408937c9a6fe2e11054ed716bba67922f0),
+  committed at 21:42:16Z on 23 October. The header side of its
+  `certificates/0000-0999/n303.cert` is $1.81 \times 10^{-11}$ below T-230 and
+  $9.89 \times 10^{-6}$ above this certificate.
+- **Francisco Couzo’s #763**, opened at 23:35:51Z on 23 October. Its bound index,
+  `upper_bounds.json` at `franciscouzo/square-packing@964ee2b`, holds 303 at
+  17.906978233799 rounded up, $2.784 \times 10^{-3}$ below this certificate.
+
+Neither changes this import. #755’s report of 11:12:48Z comes first in report order, and
+the house rule adopts a smaller packing only once its certificate is validated.
 
 ## Pose by Pose
 
@@ -191,9 +205,10 @@ A measurement, which decides nothing:
   packing does. Against T-146’s it moves 120 beyond a tenth.
 
 The record keeps the word refinement for a pairing in which no square moves beyond a
-tenth, so this is not a refinement of T-230’s packing, as the issue says: it is a new
-arrangement of the same one-way design, with 291 of 303 squares within a tenth of
-T-230’s and five more squares tilted. That it was found from T-230’s packing is the
+tenth, and 12 squares move further here. So it is another arrangement of T-230’s
+packing, found from it, not a refinement, as the issue says and RF-4 of the
+[stage 4 review](#stage-4-review) words it: 291 of 303 squares lie within a tenth of
+T-230’s, and five more squares are tilted. That it was found from T-230’s packing is the
 source’s account, which the measurement supports: it is far nearer T-230’s packing than
 any other the record holds.
 
@@ -256,9 +271,9 @@ its `outputs/program-digests.sha256` records.
 - **Controls.** 21 mutants, at exact contact and $10^{-30}$ past it at three walls and
   five pairs, and gross ones, are accepted and refused as expected by all four deciders.
 - **RF-1, the wall clearance.** The issue’s least wall clearance, $8.2 \times 10^{-13}$,
-  is not this file’s: `verify_cert.py` computes $6.020 \times 10^{-13}$ on it, at square
-  3 and the top wall, as measured here. Its pair figure and its 724 close pairs are this
-  file’s.
+  is not this file’s: by its code at `7982d7a` (read, not run), `verify_cert.py` gives
+  $6.020 \times 10^{-13}$ on it, at square 3 and the top wall, as measured here. Its pair
+  figure and its 724 close pairs are this file’s.
 - **RF-2, the long decimal.** “17.909762327475256427…” is the binary64 print of the
   side, not the side; the record quotes the exact side or its ceiling.
 - **RF-3, the method.** `dilate_cert.py`’s formulas reproduce the side and all 606 centre

@@ -32449,9 +32449,9 @@ results:
       least 60250000000010249/(5*10^28), about 1.2050e-12, at six pairs, as a 1e-12 dilation
       gives; no square touches a wall or another.
 
-      The issue reports a least wall clearance
-      of 8.2e-13 from verify_cert.py, which is not this file's: on this file that checker
-      computes the 6.020e-13 measured here (RF-1). The kernel's two sharp controls
+      The issue reports a least wall clearance of 8.2e-13 from verify_cert.py, which is not
+      this file's: that checker, by its code at 7982d7a (read, not run), gives the
+      6.020e-13 measured here (RF-1). The kernel's two sharp controls
       (replay/sharp-controls.json) and the review's 21 mutants are accepted at exact
       contact and refused 1e-30 past it by both maintained routes.
 

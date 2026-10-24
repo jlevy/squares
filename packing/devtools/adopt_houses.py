@@ -197,6 +197,14 @@ class Prose:
     #: reads it (`verifier_registry.LABELS`). T-223's two routes share the corner verifier
     #: its source reports running, so its replay shares the producer's components.
     confirmation: str = "independently re-implemented"
+    #: Whose re-implementation it is, where its author's system family is also the
+    #: producer's: epistemics.md's confidence order states that diversity after the level
+    #: (rule 4). T-239's review checker is by a Claude agent, as its search was (review A4
+    #: of #757).
+    diversity: str = ""
+    #: What the retained packet holds of the certificate: the certificate, or, where the
+    #: packet is derived-only, the exact fact derived from it (T-239, review A5 of #757).
+    retained: str = "it"
     #: How the certificate states each square. T-196's states a rational centre and the
     #: rotation's cosine and sine, which the adapter turns into a half-angle tangent.
     squares: str = "a rational centre and the tangent of its half-angle"
@@ -1050,6 +1058,8 @@ RESULTS: dict[str, Prose] = {
             "its controls at $10^{-30}$ found both maintained routes exact at three walls and "
             "five pairs"
         ),
+        diversity="by a Claude agent, a system family the producer also used",
+        retained="its derived exact fact",
     ),
 }
 
@@ -2364,8 +2374,8 @@ def section(move: Move) -> str:
             f"{credit.phrase[0].upper()}{credit.phrase[1:]}, {verb} {prose.reported}, "
             f"{side} ({house.result}). The certificate gives a rational side and, for each "
             f"of the {n} unit squares, {prose.squares}; "
-            f"the [retained packet](../resources/web/{packet}/README.md) holds it with the "
-            "complete native jobs that decided it."
+            f"the [retained packet](../resources/web/{packet}/README.md) holds "
+            f"{prose.retained} with the complete native jobs that decided it."
         ),
         (
             "Both maintained exact routes decided it here, `sqpack`’s exact separating-axis "
@@ -2373,7 +2383,8 @@ def section(move: Move) -> str:
             f"and outside-container controls{third}. {routes} The {reviews} "
             "accepted the replay for finite feasibility. "
             f"That proves $s({n}) \\le {ceiling}$, the verified upper bound: confirmed, "
-            f"{prose.confirmation}. It says nothing about "
+            f"{prose.confirmation}{f', {prose.diversity}' if prose.diversity else ''}. "
+            "It says nothing about "
             "optimality, rigidity or a local minimum."
         ),
     ]
