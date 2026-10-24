@@ -212,7 +212,8 @@ and the deployed site were read the same day.
 The pace, budget, bytes-sent and timing rows were re-taken at 64b316b6c, with GitHub and
 the deployed site read at about 23:00Z. Rows marked **24 October** were re-taken after
 #758 merged: the record counts at da117ad0b, and the deployed News page as review A of
-#759 measured it.
+#759 measured it. The changelog’s counts were taken again at 14b14f2d1, after #765 added
+three deliveries.
 
 | Fact | Value | How measured |
 | --- | --- | --- |
@@ -224,10 +225,11 @@ the deployed site read at about 23:00Z. Rows marked **24 October** were re-taken
 | Bases other than `main` | 73 | the same listing |
 | Merge pace | August 61, September 162, October to the 23rd 314; 95 in the last 7 days | the same listing |
 | S3+ merge pace | 56 in October to the 23rd, 2.4 a day, and 1 before; 14 in the 7 days to 23 October 23:00Z, 2.0 a day | the same listing, re-read at 23:00Z, when it held 541 merged pull requests |
-| Changelog entries, **24 October** | 62: S5 4, S4 8, S3 38, S2 12; News shows 50 (48 entries and 36 on News on 23 October) | `site-changelog.yaml` |
-| Deliveries, coverage, omissions, **24 October** | 117, 117, 40; 3 formal stacks (103, 103 and 42 on 23 October) | `site-changelog.yaml` |
+| Changelog entries, **24 October** | 63 at 14b14f2d1: S5 4, S4 8, S3 38, S2 13; News shows 50 (62 at da117ad0b; 48 entries and 36 on News on 23 October) | `site-changelog.yaml` |
+| Deliveries, coverage, omissions, **24 October** | 120, 120, 42 at 14b14f2d1 (117, 117 and 40 at da117ad0b); 3 formal stacks (103, 103 and 42 on 23 October) | `site-changelog.yaml` |
 | S3+ pull requests with a story, **24 October** | all 57; on 23 October 41, and the 16 without were #731, #725, #708, #699, #692, #688, #676, #671, #657, #645, #644, #621, #620, #578, #469, #460, all S3 and all merged in October, which #758 gave stories | labels from a fresh listing of 546 merged pull requests joined to entries’ `pull_requests`; the story gate as specified below fails none |
-| Shared merge commits, **24 October** | 28 commits are GitHub’s `mergeCommit` for more than one pull request, 89 pull requests in all; 16 of the 28 register or raise a result | review A of #759, and a scratch read of the same listing with each pull request’s `headRefName` and `headRefOid` |
+| Shared merge commits, **24 October** | 28 commits are GitHub’s `mergeCommit` for more than one pull request, 89 pull requests in all; 16 of the 28 register or raise a result, and one of them, d167d4b86, adopts | review A of #759, and a scratch read of the same listing with each pull request’s `headRefName` and `headRefOid` |
+| Carried pull requests, **24 October** | 16, by the shape of their merge commit: 13 merge into their base; for 2 (#258, #298) it is their own head, their base branch fast-forwarded to it; for 1 (#336) it merges `main` into their branch | review B of #759, from a listing of 549 merged pull requests that adds `baseRefOid` |
 | Register-changing merges, **24 October** | 125 first-parent commits of `main` change `frontier/results.yaml` | `git rev-list --first-parent origin/main -- packing/frontier/results.yaml` at da117ad0b |
 | Register | 230 results; 177 at S3+ (S5 10, S4 11, S3 156) | `frontier/results.yaml` |
 | S3+ results with no story at their own score | 124: the 15 exempt S4 and S5 results and 109 S3 results | the gate’s rule, `news_announced_scores` |
@@ -247,8 +249,7 @@ the deployed site read at about 23:00Z. Rows marked **24 October** were re-taken
 **A separate file, which absorbs `deliveries` and `stacks`.** The record is
 `packing/pull-requests.yaml`, schema `packing/pull-requests.schema.yaml`, contract
 `packing.squares:PullRequests/v1`, status `enforced`. It becomes the one home of every
-merge fact.
-Every `deliveries` row (117 on 24 October) and the 3 `stacks` move into it in
+merge fact. Every `deliveries` row (120 at 14b14f2d1) and the 3 `stacks` move into it in
 Phase 1, and `site-changelog.yaml` keeps only editorial content: `entries`, `coverage`,
 `frozen_entries` and the optional feed summaries, under contract `SiteChangelog/v2`. An
 entry’s pull requests are looked up in the new record, where the old rule looked them up
@@ -271,12 +272,12 @@ v2:
 - an omission does not excuse an S3+ row, which the story gate holds to its story
   ([Gates](#gates)).
 
-The 117 covered pull requests and 40 omissions carry over unchanged.
-The runbook’s S1/S2 sentence changes to match in Phase 1 ([Process](#process)), and
-`test_changelog.py` holds the rule: a coverage number the record lacks fails, a coverage
-list that differs from the represented and omitted pull requests fails, an S2 row with
-neither an entry nor an omission passes, and an S3 row with only an omission fails the
-story gate.
+Every covered pull request and omission carries over unchanged (120 and 42 at
+14b14f2d1). The runbook’s S1/S2 sentence changes to match in Phase 1
+([Process](#process)), and `test_changelog.py` holds the rule: a coverage number the
+record lacks fails, a coverage list that differs from the represented and omitted pull
+requests fails, an S2 row with neither an entry nor an omission passes, and an S3 row
+with only an omission fails the story gate.
 
 Extending `deliveries` in place to all 537 pull requests was the alternative.
 It loses on four counts:
@@ -285,9 +286,9 @@ It loses on four counts:
   about 430 new deliveries would need as many written omissions, or the rule would have
   to change anyway.
 - **Authorship.** `site-changelog.yaml` is hand-edited prose under review; the record is
-  written by a tool and can be regenerated from GitHub.
-  Mixing them puts several thousand machine-written lines in the file editors work in,
-  and a tool rewriting part of it on every merge.
+  written by a tool, apart from the curated stacks it keeps, and can be rewritten from
+  GitHub and Git. Mixing them puts several thousand machine-written lines in the file
+  editors work in, and a tool rewriting part of it on every merge.
 - **Shape.** `deliveries` cannot say that a pull request reached `main` inside another
   merge: `validate` requires `delivery_to_main.commit` to equal the merge commit, and
   `import_changelog` refuses a merge commit off the first-parent line.
@@ -327,10 +328,15 @@ stacks: []          # moved unchanged from site-changelog.yaml
 | `author` | yes | the GitHub login that opened the pull request; provenance, not credit |
 | `labels` | yes, may be empty | every GitHub label; the significance label is the one `S1`–`S5` label, at most one |
 | `delivery_to_main` | when the base is not `main` or the merge commit is off `main`’s first-parent line | `{commit, evidence}`: the first-parent commit of `main` whose history first holds the merge, and its commit URL; `via` names the carrying pull request when there is one |
-| `stack_id` | no | formal stack membership, as today |
-| `results` | no | each result this pull request’s own change delivered ([the tool](#the-tool-devtoolsrecord_pull_requests) says how a shared merge is split): `registered` (a new id), `raised` (a higher verification or confirmation rung, or a higher significance), or `adopted` with the counts `n` it became the house best packing at; a `registered` or `raised` item carries `score`, the result’s significance at the pull request’s own head |
+| `stack_id` | no | formal stack membership, as today; curated, and kept by the tool |
+| `results` | no | each result this pull request’s own change delivered ([the tool](#the-tool-devtoolsrecord_pull_requests) says how a shared or carried merge is split): `registered` (a new id), `raised` (a higher verification or confirmation rung, or a higher significance), or `adopted` with the counts `n` it became the house best packing at; a `registered` or `raised` item carries `score`, the result’s significance at the pull request’s own head |
 
-Everything in the record is written by the tool.
+Everything in the record but the formal stacks is written by the tool.
+The `stacks` list and each row’s `stack_id` are curated, as they are in
+`site-changelog.yaml` today: the fetch reads no stack field, and two of the three stacks
+give a pull request page as their evidence.
+The tool keeps both as it finds them on every rewrite, and `test_pull_requests.py` holds
+that a rewrite keeps them.
 The two hand-edited fields the first draft put here live with the other editorial
 content instead:
 
@@ -342,8 +348,8 @@ content instead:
   `pull_request_summaries` mapping in `site-changelog.yaml`, keyed by number, each
   number a row of the record.
 
-So the tool’s rewrite carries no hand-written field, and the record can be regenerated
-from GitHub and Git without losing an edit.
+So the tool’s rewrite carries over the curated stacks and no other hand-edited field,
+and rewriting the rows from GitHub and Git loses no edit.
 
 **Why each item keeps its score.** `score` on a `registered` or `raised` item is the
 result’s significance when this pull request delivered it, a fact of that delivery.
@@ -403,11 +409,10 @@ derives from it for every renderer and gate, as `render_changelog` and
 `import_changelog` divide the same work today.
 
 - **Fetch.** One call:
-  `gh pr list --repo jlevy/squares --state merged --limit 2000 --json number,title,mergedAt,mergeCommit,baseRefName,headRefName,headRefOid,labels,author`.
-  On 23 October it returned 537 rows in 3.6 s, and with the two head fields 546 rows in
-  3.9 s on 24 October.
-  The tool refuses a result whose length equals the limit, which could be a truncated
-  list.
+  `gh pr list --repo jlevy/squares --state merged --limit 2000 --json number,title,mergedAt,mergeCommit,baseRefName,baseRefOid,headRefName,headRefOid,labels,author`.
+  On 23 October it returned 537 rows in 3.6 s, and on 24 October, with the two head
+  fields and `baseRefOid`, which rules 3 and 4 below read, 549 rows in 3.9 s. The tool
+  refuses a result whose length equals the limit, which could be a truncated list.
 - **Verify.** Each merge commit must reach local `origin/main` (fetch it first), the
   check `import_changelog.verify_main_delivery` makes today.
   For a merge commit off the first-parent line, the tool finds the first first-parent
@@ -443,9 +448,11 @@ derives from it for every renderer and gate, as `render_changelog` and
   Its evidence lists each shared-merge group and carried pull request with the results
   each row took, and any group it refused.
   Its cost is estimated, not measured, at under five CPU-minutes: one GitHub call, two
-  `git show` reads of the register for each register-changing merge and one for each
-  layer head of a shared group, about 340 in all, and as many of
-  `upper_bound_houses.py`. The scratch read of the 28 shared groups took 9 s.
+  `git show` reads of the register for each register-changing merge, one for each layer
+  head of a shared group and two for each carried pull request, about 370 in all, and as
+  many of `upper_bound_houses.py`. The scratch read of the 28 shared groups took 9 s,
+  and the re-run of the corrected rule over all 39 delivering commits that more than one
+  pull request reaches took 20 s on the shared host.
 - **Its standing under OR-18.** The tool reads `git show REV:path` at historical
   commits, which OR-18 rules out for a program that produces an answer.
   It is an authoring-time acquisition: it reads history once, writes the facts into a
@@ -467,25 +474,54 @@ commit when that is on the first-parent line, otherwise its `delivery_to_main.co
 
 1. **The group’s change.** The register at *D*’s first parent against the register at
    *D*: new ids are registered, and an id whose rung or significance rose is raised.
-   The house table `upper_bound_houses.ADOPTED` at the same two commits gives `adopted`.
+   The house table `upper_bound_houses.ADOPTED` at the same two commits gives the
+   adoptions: each count whose entry is new or names another id.
+
 2. **One pull request.** When *D* delivers one pull request, as for most merges, that
-   row takes the whole change.
+   row takes the whole change, less what a pull request carried into *D* takes (rule 4).
+
 3. **Layers that share *D* as their `mergeCommit`.** The tool orders them into one chain
-   by their refs: exactly one is based on `main`, each other’s `baseRefName` is another
-   layer’s `headRefName`, and each layer’s `headRefOid` is an ancestor of *D* and of the
-   head of every layer above it.
-   A layer’s own change is the register at the head of the layer below it (for the layer
-   based on `main`, *D*’s first parent) against the register at its own head, kept only
-   where it is part of the group’s change.
-4. **A pull request carried into *D*** by a merge into another branch (one whose merge
-   commit is off the first-parent line) takes its own merge’s change, its merge commit’s
-   first parent against that commit, kept only where it is part of the group’s change.
-   The pull request that carried it does not take those ids.
-5. **Everything accounted for once.** Every id the group registers goes to exactly one
-   row, and every rise it makes to at least one.
-   A group whose layers cannot be ordered, a head that is not an ancestor of *D*, or a
-   change no row accounts for is refused by name, and is recorded only when the reviewed
-   backfill says which pull request delivered each id.
+   by their refs: exactly one is based on `main`; each other’s `baseRefName` is another
+   layer’s `headRefName`, and its `baseRefOid` that layer’s `headRefOid`; and each
+   layer’s `headRefOid` is an ancestor of *D* and of the head of every layer above it.
+   On 24 October each of the 61 layers not based on `main` had the head of the layer
+   below as its `baseRefOid`. A layer’s own change is the register and `ADOPTED` at the
+   head of the layer below it (for the layer based on `main`, *D*’s first parent)
+   against both at its own head.
+
+4. **A pull request carried into *D*** by a merge into another branch, one whose merge
+   commit *M* is off the first-parent line, has its own change measured from the base
+   side of *M*, by *M*’s shape:
+   - when *M*’s second parent is the pull request’s head, *M* merged it into its base,
+     and its change is *M*’s first parent against *M*, as for 13 of the 16 carried pull
+     requests on 24 October;
+   - when *M* is its head, because the base branch was fast-forwarded to it (#258,
+     #298), or *M*’s first parent is its head, because *M* merges the base into its
+     branch (#336), its change is GitHub’s `baseRefOid` against its head;
+   - any other shape is refused by name.
+
+   The row whose own change holds *M*, the pull request that carried it, takes none of
+   its registrations, raises or adoptions.
+
+5. **What a row keeps.** A row keeps only what is part of the group’s change: an id the
+   group registers, an adoption the group makes, and a raise of an id the group raises
+   or registers. So a later layer’s raise of an id an earlier layer registered is kept,
+   though the id is new against *D*’s first parent: #459 raises T-127, which #448
+   registered. An id that a layer’s branch took from `main`, merging it in after `main`
+   registered the id, is not part of the group’s change and is dropped.
+
+6. **Everything accounted for once.** Every id the group registers, and every adoption
+   it makes, goes to exactly one row.
+   Every rise it makes goes to at least one, and a rise of an id the group registers
+   goes to the row that raised it, while the row that registered the id keeps the
+   registration. The tool refuses these by name, and records such a group only when the
+   reviewed backfill says which pull request delivered each id:
+   - a group whose layers cannot be ordered;
+   - a head that is not an ancestor of *D*;
+   - two rows with the same head, whose changes overlap, as #249 and #258 do
+     (b2f622f17);
+   - a carried merge commit of another shape;
+   - a change no row accounts for.
 
 The review’s example is d3860c97a, “Merge pull request #469”, GitHub’s `mergeCommit` for
 11 pull requests. Its first-parent change registers T-125 to T-130. By the rule above,
@@ -499,10 +535,40 @@ read from the 11 layer heads on 24 October:
 The first-parent diff alone would have given all six ids to all 11 rows.
 The same read ordered all 28 shared groups by their refs, and in each one the layers’
 own changes added up to the merge’s change, every registered id claimed once.
-Of the 16 pull requests carried by a later merge, only #336’s own merge registers ids
-(T-094 to T-100). Its GitHub merge commit is a merge of `main` into its branch, and
-those ids were already on `main` from #362, so rule 4 gives #336 none of them.
-These figures come from a scratch read of the GitHub listing and local Git; the tool and
+One of the 28 adopts: d167d4b86, which delivers #661 and #676 and carries #662, sets
+`ADOPTED[29]` to T-195. #661’s head already holds that entry, so #661 takes T-195 and
+its adoption at 29, #676 takes T-196 to T-199, and #662 takes nothing.
+
+Of the 16 pull requests carried by a later merge, three have a merge commit that does
+not merge them into their base, and rule 4 measures them from their `baseRefOid`:
+
+- **#298**, carried into #292’s merge 47569ad50. GitHub’s `mergeCommit` for it is its
+  own head, 944d2d39f, which merges #292’s branch at c307f646f, its `baseRefOid`. From
+  there #298 registered T-070 to T-079 and raised T-048, T-055, T-058, T-059, T-062,
+  T-063 and T-064, and also T-066 to T-069, which #292 registered.
+  #292 takes T-066 to T-069 and no raise.
+  Measured from its merge commit’s first parent, #298 would have taken nothing, and #292
+  all 14 ids, the 7 raises and the people credited for #298’s results.
+- **#336**, carried into #383’s merge 00f320296. Its merge commit, 0d4442a0e, merges
+  `main` into its branch, and from its `baseRefOid`, 62f81e3a6, to its head it
+  registered nothing. The seven ids that merge commit’s first-parent diff shows were
+  `main`’s: T-094 from #362, T-095 to T-098 from #369, and T-099 and T-100 from #381.
+- **#258**, carried into #249’s merge 306ae9fab. Its merge commit is its head,
+  b2f622f17, which is also #249’s head, so rule 6 refuses the group.
+  T-061 comes from #258’s first commit, 818d6cf3f, a merge of `main` that renumbers the
+  result #249 registered as T-058 (73d5a98af), and the reviewed backfill names the row
+  that takes it.
+
+The other 13 carried pull requests, measured from their merge commit’s first parent,
+registered, raised and adopted nothing.
+Review B of #759 checked the rule with its own script, which reads the register as YAML
+and `ADOPTED` at the same commits.
+Adapted to the rule as corrected here and re-run read-only on its 549-row listing and
+local Git at 14b14f2d1, the script covers the 39 delivering commits that more than one
+pull request reaches, 18 of which register, raise or adopt.
+38 pass: each of the 75 ids they register is claimed by exactly one row, every rise by
+at least one, and the one adoption by #661. 306ae9fab is refused for its equal heads.
+These figures come from scratch reads of the GitHub listing and local Git; the tool and
 its backfill evidence re-derive them.
 Because each row holds only its own results, the credited people derived from it and the
 story it owes follow the pull request that delivered them.
@@ -536,10 +602,16 @@ Once the deploy of a merge is verified, the intake pass’s runner:
 
 **The page’s room.** Once the budget raise has landed, the follow-up that lands a story
 runs `python -m devtools.measure_news_page bytes` on the rendered page; from Phase 1 on
-that is step 3. When fewer than 30 days of room remain before the trip point, the
-coordinator opens a `decision` bead for the owner then, before the check fails.
-The bead says that at the trip point no S3+ merge can be recorded, and asks the owner to
-choose the next step before the page gets there ([The page budget](#the-page-budget)).
+that is step 3. When the page it reports comes within 432,000 bytes of the trip point,
+past about 718,000 bytes at the proposed trip point of 1,150,000, the coordinator opens
+a `decision` bead for the owner in that follow-up, before the check fails.
+At this plan’s pace of 14,400 bytes a day, 432,000 bytes is about 30 days of stories;
+the report prints its own count of days left as a figure, not as the trigger.
+The bead says that at the trip point no S3+ merge can be recorded, and that once
+`main`’s page is at or over the point no change in the trip check’s failing scope can
+merge, S1 and S2 recording included.
+It asks the owner to choose the next step before the page gets there
+([The page budget](#the-page-budget)).
 
 **Who runs it.** The intake pass’s runner, its coordinator, which merges under the
 `github-merge: autonomous` grant ([Decision 5](#decisions)). When the owner merges by
@@ -551,7 +623,7 @@ it. The sweep tells that tail apart from a gap (below).
 
 **The runbook and the comments change to the 23 October rule** in Phase 1. Each passage
 below stops being true then, and Phase 1’s checklist item rewrites every one.
-Line numbers are `main`’s at da117ad0b.
+Line numbers are `main`’s at 14b14f2d1.
 
 - [Label the PR and Prepare News](../../../../packing/campaign/result-import.md#label-the-pr-and-prepare-news):
   - `result-import.md:1128-1131`, “For other S3–S5 work, S3 results included, News stays
@@ -559,12 +631,13 @@ Line numbers are `main`’s at da117ad0b.
     omission when the PR is an intermediate research checkpoint without a distinct
     reader-facing development.”
     It becomes: every pull request labelled S3, S4 or S5 has a story naming each S3+
-    result it registers or raises, drafted under **News** in its description as a fenced
-    `yaml` entry and landed in the first change after its merge (the owner, 23 October
-    2026, point 1 above and [Decision 1](#decisions)). The omission clause goes: an S3+
-    pull request cannot be omitted, since `STORY_EXEMPT` may only shrink, so a pull
-    request that is an intermediate checkpoint with no reader-facing development is
-    labelled S1 or S2 by the rubric instead.
+    result it registers or raises (the owner, 23 October 2026, point 1 above and
+    [Decision 1](#decisions)). This plan adds the form and the landing step: the story
+    is drafted under **News** in the pull request’s description as a fenced `yaml` entry
+    and landed in the first change after its merge.
+    The omission clause goes: an S3+ pull request cannot be omitted, since
+    `STORY_EXEMPT` may only shrink, so a pull request that is an intermediate checkpoint
+    with no reader-facing development is labelled S1 or S2 by the rubric instead.
   - `:1142-1143`, “For S1/S2, record a coverage omission or retain an entry in the full
     changelog; these scores stay out of News.”
     It becomes the v2 coverage rule: an S1 or S2 pull request’s row is its record, and
@@ -575,7 +648,7 @@ Line numbers are `main`’s at da117ad0b.
     once Record the merge has written the row, `import_changelog` reads the merge facts
     from `pull-requests.yaml`, takes the drafted `## News` block from the description,
     and the candidate carries the entry and its coverage number, with no delivery row.
-- [Stage 7](../../../../packing/campaign/result-import.md#stage-7-answer): `:1290-1292`,
+- [Stage 7](../../../../packing/campaign/result-import.md#stage-7-answer): `:1292-1294`,
   “Every S4 or S5 result gets a News item in the first change after the merge that
   registered or raised it”.
   It gains the pull-request rule (every S3+ pull request gets its story in that change)
@@ -876,9 +949,12 @@ Phase 2 makes two small changes:
   “All changes by PR” on the archive page, the strip `--site-tabs-space` under the rule,
   and the title `--site-page-top` under the strip.
 
-**How this fits with #736.** #736 (open) makes the changes below.
-On the owner’s word, another lane is taking #736 over from the site agent, to bring it
-up to current `main` with its design unchanged; Phase 2 still waits for it to merge.
+**How this fits with #736.** #736 is open.
+Asked whether to take it over, the owner selected “Take it over (Recommended)” and
+added: “Review carefully and make sure it’s a strict improvement that we can land.
+And that it’s compatible with the other design choices we’ve made”.
+On that answer another lane is taking #736 over from the site agent and bringing it up
+to current `main`; Phase 2 still waits for it to merge.
 #736 makes these changes:
 
 - it adds `NEWS_FLOOR` and `NEWS_LEVELS`;
@@ -1079,15 +1155,26 @@ record saying who selected it.
 
 - **Where it runs, and its scope.** It runs inside `render_changelog --check`, in the
   records-tier step that runs the announcement gate, and takes that gate’s
-  `--announcement-base` and scopes.
-  It fails a change that edits `site-changelog.yaml`, `pull-requests.yaml` (once Phase 1
-  adds it) or the News renderer (`render_changelog.py`, `render_overview.news_page` and
-  the News templates), measured against the merge base.
-  It warns on any other change, and only warns on `main` (`--announcement-base
+  `--announcement-base`. Its scope is decided by file path, as that gate’s is:
+  `edits_announcement_records` runs `git diff --name-only BASE -- PATHS` against the
+  merge base (`render_changelog.py:973-975`), and the trip check runs the same diff over
+  its own list. It fails a change that edits one of these files:
+  - `packing/site-changelog.yaml`;
+  - `packing/pull-requests.yaml`, once Phase 1 adds it;
+  - `packing/devtools/render_changelog.py`, which renders the stories;
+  - `packing/devtools/templates/news-article.md`, the News page’s template;
+  - `packing/devtools/render_pr_feed.py`, the feed renderer, once Phase 2 adds it.
+
+  `packing/devtools/render_overview.py` is outside the failing scope.
+  `news_page` is one function in it, and the module renders every other page as well, so
+  a scope that held it would fail every change to an overview page once `main` is past
+  the point. A change to `news_page` gets the warning, as a header change does.
+  The check warns on any other change, and only warns on `main` (`--announcement-base
   HEAD^1`), where a merged change can no longer act.
   A pull request that cannot change the page’s stories does not go red because `main`
   crossed. Its fail, warn and main-only-warn cases are tested in the quick lane on
   fixture pages.
+
 - **It holds against `main` plus the change.** For a pull request, CI checks out
   GitHub’s merge of the branch onto `main` (`refs/pull/N/merge`), so the page it
   measures is `main`’s stories with the change’s added.
@@ -1098,6 +1185,7 @@ record saying who selected it.
   check runs again before the merge.
   The coordinator, who merges every follow-up, applies this at Record the merge and at
   the merge step, and the runbook says so.
+
 - **Anything else that grows the page.** A change outside the scope can still add bytes,
   a header change on every page for example.
   It gets the warning, and the hard limit stays where it is: `check_published_site`
@@ -1108,12 +1196,25 @@ check conflict. The follow-up that records an S3+ merge must carry its story, an
 story is what carries the page past the trip point, so the check refuses it;
 `STORY_EXEMPT` may only shrink, so it offers no way round.
 No S3+ row can be recorded, and the sweep lists each such merge as needing action.
-S1 and S2 merges are still recorded, since their rows enter a feed whose cap is fixed.
+
+**Past the trip point, every change in the failing scope fails.** While `main`’s page is
+under the point, an S1 or S2 merge is still recorded, since its row enters a feed whose
+cap is fixed. But the check fails a change in its scope whenever the page it renders is
+at or over the point, whatever the change did to the page, and `main` can pass the point
+without the check refusing anything: through a change outside the scope, which only
+warns, or through a hand merge, which the re-run rule does not reach.
+From then on every follow-up fails, since from Phase 1 on each one edits
+`pull-requests.yaml`. Recording S1 and S2 merges stops too, and so does a story edit
+that shrinks the page but leaves it over the point.
+A change in the scope passes again only when the page it renders is under the point, as
+after a raise of the budget or a smaller feed cap.
 
 **The owner chooses what happens before the page gets there.** The plan builds nothing
-for that day. When fewer than 30 days of room remain, the coordinator’s `decision` bead
-([Process](#process)) states that recording S3+ merges stops at the trip point, and puts
-these options to the owner; none of them runs automatically:
+for the trip point itself.
+When the page comes within 432,000 bytes of the trip point, the coordinator’s `decision`
+bead ([Process](#process)) states that recording S3+ merges stops at the trip point and
+that past it every change in the failing scope fails, S1 and S2 recording included.
+It puts these options to the owner; none of them runs automatically:
 
 - raise the budget again, after the same measurement at the new size, up to the
   2,000,000-byte hard limit;
@@ -1175,7 +1276,8 @@ review, so the raise does not wait for it.
 - **Who watches it.** Until the raise merges, the coordinator reads the rendered page’s
   bytes in each follow-up that lands a story.
   If `main`’s page passes 450,000 bytes with the raise unmerged, the coordinator opens a
-  `decision` bead for the owner that day, ahead of the 600,000-byte failure.
+  `decision` bead for the owner in the follow-up that reads it, ahead of the
+  600,000-byte failure.
 - **What it carries.** `devtools.measure_news_page` with its `bytes`, `project` and
   `load` modes; the measurement at today’s size and at the projected size, stories only;
   the exception and its reason; `NEWS_CEILING`, `NEWS_TRIP_BYTES` and the trip check;
@@ -1224,12 +1326,14 @@ pull request then had a story, so `STORY_EXEMPT` starts empty.
   `devtools.pull_request_record`: load, validate, and the derivations the gates need,
   scores from results among them.
 - [ ] `devtools.record_pull_requests`, with its listing, `--apply`, `--pr` and `--audit`
-  modes, and its per-pull-request split of a shared or carried merge’s results.
+  modes, and its per-pull-request split of a shared or carried merge’s registrations,
+  raises and adoptions, a carried pull request measured from the base side.
 - [ ] Run the backfill: `--apply` over every merged pull request.
   Move every `deliveries` row and the 3 `stacks` out of `site-changelog.yaml` and check
   that they agree with their rows.
   List each shared-merge group and carried pull request in the evidence, with the
-  results each row took.
+  results each row took, and for each refused group, 306ae9fab among them, the reviewed
+  owner of each id.
 - [ ] `render_changelog`: `SiteChangelog/v2`, with its coverage rule and the optional
   `pull_request_summaries`; entries checked against the record; `STORY_EXEMPT`; the
   story gate, with its `result_ids` rule for rows numbered above this pull request; the
@@ -1247,7 +1351,14 @@ pull request then had a story, so `STORY_EXEMPT` starts empty.
 ### Phase 2: The Toggle, the Feed, the Archives and the Profile Lists
 
 One pull request, after #736 and Phase 1 merge.
-The intake session builds it, as the owner said (point 4, [Decision 4](#decisions)).
+The intake session builds it, as the coordinator reads the owner’s answer
+([Decision 4](#decisions)). Phase 2 changes templates, styles and browser scripts, work
+the owner’s 23 October scope rule kept out of that intake pass: “The scope of all of
+your work is intake only.
+Don’t change things on the site that are unrelated visuals.
+Those are handled by the other agent.”
+The owner’s answer to who builds the page part, “Me, with the records (Recommended)”
+(point 4), is what places Phase 2 with the intake session despite that rule.
 
 - [ ] `site_tallies.result_people(record)`, public, shared by the feed and the profiles.
 - [ ] The feed view and its cap in `render_news`, through a feed renderer
@@ -1255,6 +1366,7 @@ The intake session builds it, as the owner said (point 4, [Decision 4](#decision
   `render_overview`’s page table and `site-urls.yaml`; the archive links; and
   `news/anchors.json`, with its own `site-urls.yaml` row, since `check_published_site`
   fails a file it does not expect.
+  The trip check’s failing scope gains `render_pr_feed.py`.
 - [ ] The switch measurement, as [The page budget](#the-page-budget) says:
   `measure_news_page switch` and its probe, and the `load` and `switch` report on this
   pull request’s page with the feed at its cap, at launch size and at the projected
@@ -1292,8 +1404,12 @@ The intake session builds it, as the owner said (point 4, [Decision 4](#decision
 - `PAGE_BUDGET_EXCEPTIONS["news.html"]` equals `NEWS_CEILING`, and `NEWS_TRIP_BYTES` is
   below it;
 - the trip check on fixture pages: a page at the trip point fails a change that edits
-  `site-changelog.yaml` or the News renderer, warns a change to another file, and only
-  warns on `main`; a page under it passes all three;
+  `site-changelog.yaml`, `render_changelog.py` or `news-article.md`, warns a change to
+  `render_overview.py` or another file, and only warns on `main`; a page under it passes
+  in every case;
+- past the trip point: a change that edits `site-changelog.yaml` without adding a story
+  fails, and so does one that shortens a story but leaves the page over the point; one
+  that brings the page under it passes;
 - `measure_news_page bytes` on a fixture page reports the gzip and brotli sizes the
   libraries give, and the days of room that follow from a fixture pace;
 - `measure_news_page project` reaches its target within one story’s bytes, from the
@@ -1312,18 +1428,35 @@ The intake session builds it, as the owner said (point 4, [Decision 4](#decision
     `score`, and a two-commit `ADOPTED` table yields `adopted` with its counts;
   - **no row shows another layer’s results**, in
     `test_a_shared_merge_commit_gives_each_layer_only_its_own_results`: a fixture
-    repository in which layer 1, based on `main`, registers T-001, and layer 2, based on
-    layer 1’s branch, registers T-002 and raises T-001; one merge commit on `main`
-    delivers both, and the GitHub fixture gives both pull requests that commit as their
-    `mergeCommit`, as GitHub gave d3860c97a to 11. Layer 1’s row holds only T-001
-    registered, and layer 2’s only T-002 registered and T-001 raised;
-  - a pull request merged into another branch keeps the id its own merge registered, and
+    repository in which layer 1, based on `main`, registers T-001 and adopts it at a
+    count in `ADOPTED`, and layer 2, based on layer 1’s branch, registers T-002 and
+    raises T-001; one merge commit on `main` delivers both, and the GitHub fixture gives
+    both pull requests that commit as their `mergeCommit`, as GitHub gave d3860c97a to
+    11\. Layer 1’s row holds only T-001 registered and adopted, and layer 2’s only T-002
+    registered and T-001 raised, a raise kept although T-001 is new against the merge’s
+    first parent;
+  - an upper layer that merges `main` after `main` registered an id does not take that
+    id, which is not part of the group’s change (rule 5);
+  - a pull request merged into its base branch by a merge commit, the shape of 13 of the
+    16 carried pull requests on 24 October, keeps the id its own merge registered, and
     the pull request that carried it to `main` does not take that id;
-  - two pull requests based on `main` that share one merge commit, which cannot be
-    ordered, are refused by name, and so is a group whose layers’ changes leave an id of
-    the merge’s change unclaimed;
-  - `pull_request_record.validate` fails a record in which two rows register the same
-    id, the invariant that holds the property on the real record after the backfill;
+  - #298’s shape: a pull request whose head merges its base branch, which is then
+    fast-forwarded to that head, so that GitHub gives the head as its `mergeCommit`, and
+    which registered one id and raised another before that merge.
+    Its row takes both, measured from its `baseRefOid`, and the pull request that
+    carried it takes neither;
+  - #336’s shape: a `mergeCommit` that merges the base into the pull request’s branch,
+    on a branch that registered an id.
+    The row takes that id and none of the ids the merged base brought;
+  - a layer that carries a merged pull request, as #661’s branch carries #662 into
+    d167d4b86: the carried pull request’s id is its own, and the layer does not take it;
+  - refused by name: two pull requests based on `main` that share one merge commit,
+    which cannot be ordered; two rows with the same head, as #249 and #258 have; a
+    carried merge commit of another shape; and a group whose rows leave an id or an
+    adoption of the merge’s change unclaimed;
+  - `pull_request_record.validate` fails a record in which two rows register the same id
+    or make the same adoption, the invariant that holds the property on the real record
+    after the backfill;
   - an unlabelled row takes the highest `score` among its registered or raised results;
   - a listing as long as the limit is refused.
 - `test_changelog.py`, extended:
@@ -1343,6 +1476,7 @@ The intake session builds it, as the owner said (point 4, [Decision 4](#decision
     an entry nor an omission passes, and an S3 row with only an omission fails the story
     gate;
   - a `pull_request_summaries` key the record lacks fails;
+  - past the trip point, a change that records only an S2 row fails;
   - the freeze check: a v1 document from the base and a v2 document from the base each
     still freeze entries, the v2 one dated from the base’s `pull-requests.yaml`;
   - the migrated `CHANGELOG.md` renders identically.
@@ -1354,7 +1488,11 @@ The intake session builds it, as the owner said (point 4, [Decision 4](#decision
   row matches, and each shared-merge group and carried pull request is listed with the
   results each row took.
   For d3860c97a that is #442 T-125 and T-126, #448 T-127, #459 a raise of T-127, #460
-  T-128, #463 T-129 and #469 T-130.
+  T-128, #463 T-129 and #469 T-130. For 47569ad50 it is #292 T-066 to T-069, and #298
+  T-070 to T-079 with its raises of T-048, T-055, T-058, T-059, T-062, T-063, T-064 and
+  T-066 to T-069. For d167d4b86 it is #661 T-195 and its adoption at 29, and #676 T-196
+  to T-199. 306ae9fab is refused for its equal heads, and the evidence names the row
+  that takes T-061.
 
 **Phase 2**:
 
