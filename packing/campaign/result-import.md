@@ -943,9 +943,10 @@ next pull request; regularization runs over the item cap, which split the adopti
 `adopt_houses` cannot yet write the new house best packing.
 A house best packing with an algebraic side was the one such gap the rule names until 23
 October 2026, when the writer took an algebraic side, written in both lanes as the one
-root of its minimal polynomial in an interval (`exact_sides.form`). The gap now is an
-algebraic house that no derived number-field fact and receipt hold
-(`upper_bound_houses.FIELD_COUNTS`), and the writer’s bead, think-ot5c, owns its counts.
+root of its minimal polynomial in an interval, or of degree two as its closed form
+(`exact_sides.form`). The gap now is an algebraic house that no derived number-field
+fact and receipt hold (`upper_bound_houses.FIELD_COUNTS`), and the writer’s bead,
+think-ot5c, owns its counts.
 `bead tree` holds each bead open, and the adopting pull request takes the count off.
 `--check` fails on a staged count where the selection no longer changes the house best
 packing, or would change it to a packing other than the one staged, and on a count

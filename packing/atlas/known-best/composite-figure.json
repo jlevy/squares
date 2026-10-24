@@ -7841,7 +7841,7 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":2,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"root(9s^2-132s-484, 17.7042327907360303578790506442044525761775, 17.7042327907360303578790506442044525761776)","minimal_polynomial":"9s^2-132s-484=0","state":"minimal-polynomial"},
+        "exactness": {"degree":2,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"(22+22*sqrt(2))/3","minimal_polynomial":"9s^2-132s-484=0","state":"minimal-polynomial"},
         "lower": {"correction":true,"display":"s(295) ≥ 17.180827","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"17.1808273176"},
         "n": 295,
         "optimality": {"provenance":"frontier","status":"open"},

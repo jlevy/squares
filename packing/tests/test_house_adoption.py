@@ -717,11 +717,44 @@ def test_sizes_measure_a_staged_witness_as_git_stores_it(
     assert f"the tree's blobs by {(row.stored - stored) / 1e6:.2f} MB" in total
 
 
+def test_a_refresh_brings_a_lane_to_the_writers_text_of_the_same_side() -> None:
+    """Review A14 of #756: the writer writes a side of degree two in its closed form, so
+    n = 295's lanes, written as the root of `9s^2-132s-484` on 23 October 2026, took
+    `(22+22*sqrt(2))/3` by `--refresh --n 295`. The refresh replaces a lane's exact form
+    only where the lane states the same side and differs in nothing else, so the
+    committed record is what it writes, and a record with the earlier root form is
+    brought to the closed form."""
+    (move,) = [move for move in adopt.replay_plan() if move.n == 295]
+    path = select.case_path(295)
+    committed = path.read_text(encoding="utf-8")
+    assert committed.count("exact_form: (22+22*sqrt(2))/3\n") == 2
+    assert adopt.refreshed(move, committed) == committed
+    side = houses.side(295)
+    assert isinstance(side, select.exact_sides.Algebraic)
+    rooted = committed.replace(
+        "exact_form: (22+22*sqrt(2))/3\n",
+        "exact_form: root(9s^2-132s-484, 17.7042327907360303578790506442044525761775, "
+        "17.7042327907360303578790506442044525761776)\n",
+    )
+    assert (
+        adopt.form_side(
+            "root(9s^2-132s-484, 17.7042327907360303578790506442044525761775, "
+            "17.7042327907360303578790506442044525761776)"
+        )
+        == side
+    )
+    assert adopt.refreshed(move, rooted) == committed
+    # A lane that differs in more than its form is not this refresh's to rewrite.
+    moved = rooted.replace("    - E-evand-639-verify-exact-replay\n", "    - E-elsewhere\n", 1)
+    assert "exact_form: root(9s^2-132s-484" in adopt.refreshed(move, moved)
+
+
 def test_an_algebraic_house_is_written_exactly_in_both_lanes_and_read_back_as_its_side(
     selections: dict[int, select.Selection],
 ) -> None:
     """think-ot5c (review A1 of #660): the writer states an algebraic house in both lanes as
-    the one root of its minimal polynomial in an interval (`exact_sides.form`), with its
+    the one root of its minimal polynomial in an interval, or a side of degree two in its
+    closed form (`exact_sides.form`), with its
     degree and polynomial in the reported lane as the register writes them, and the value
     the side rounded up. `select_houses.parse_case` and the layer's `verified_bound` read
     each record back as the house's own side, so the selection moves nothing there and
@@ -732,7 +765,12 @@ def test_an_algebraic_house_is_written_exactly_in_both_lanes_and_read_back_as_it
         packing = _front(select.case_path(n).read_text(encoding="utf-8"))
         reported, verified = packing["reported_upper_bound"], packing["verified_upper_bound"]
         assert reported["exact_form"] == verified["exact_form"] == adopt.exact_form(side), n
-        assert reported["exact_form"].startswith("root("), n
+        # A side of degree two is written in its closed form, as n = 51's is (review A14
+        # of #756): 295's is 22(1 + sqrt 2)/3. Every other is its root form.
+        if side.degree == 2:
+            assert reported["exact_form"] == select.exact_sides.quadratic_text(side), n
+        else:
+            assert reported["exact_form"].startswith("root("), n
         assert reported["algebraic_degree"] == side.degree, n
         assert reported["minimal_polynomial"] == (
             select.exact_sides.polynomial_text(side.polynomial) + "=0"

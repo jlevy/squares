@@ -232,7 +232,9 @@ $defs:
           polynomial in s, highest degree first, as minimal_polynomial writes it, and
           low and high the side cut down and rounded up at forty places, an interval in
           which it is p's one root (`devtools.exact_sides.form`, read back exactly by
-          `exact_sides.read_form`). It is evidence about s(n) only when status is
+          `exact_sides.read_form`); a side of degree two as its closed form,
+          `(a+b*sqrt(d))/c`, d square-free and in lowest terms, as n = 295's
+          `(22+22*sqrt(2))/3`. It is evidence about s(n) only when status is
           proved, which requires this identity and verified_lower_bound.exact_form to
           coincide.
       evidence: {$ref: '#/$defs/evidenceRefs'}
@@ -292,8 +294,8 @@ $defs:
         type: [string, 'null']
         description: >-
           The reported side's exact form, written as verified_upper_bound.exact_form is:
-          an algebraic house's side as `root(p, low, high)` (`devtools.exact_sides.form`),
-          the same text in both lanes.
+          an algebraic house's side as `root(p, low, high)`, or of degree two as
+          `(a+b*sqrt(d))/c` (`devtools.exact_sides.form`), the same text in both lanes.
       algebraic_degree: {type: [integer, 'null'], minimum: 1}
       minimal_polynomial: {type: [string, 'null']}
       analytically_optimized: {type: [boolean, 'null']}

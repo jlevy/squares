@@ -23,11 +23,15 @@ rational point:
 A case record writes an algebraic side as `form` gives it, `root(p, low, high)`: `p` its
 minimal polynomial in `s`, highest degree first, as the register writes a
 `minimal_polynomial` (`polynomial_text`), and `low` and `high` the side cut and rounded up
-at forty places, a rational interval in which it is `p`'s one root. `read_form` reads it
-back exactly, holding it to that as `algebraic` does, so the house writer's exact form of
-an algebraic house is what `select_houses` and the regularized layer order it by
-(`regularize_evand.verified_bound`). A `root(` form that names its polynomial instead, as n
-= 11's `root(P_trump11, ...)` does, is not this form, and `read_form` leaves it unread.
+at forty places, a rational interval in which it is `p`'s one root. A side of degree two
+is written in its closed form instead, `(a+b*sqrt(d))/c` with `d` square-free and the
+fraction in lowest terms, as n = 51's lanes write `(16+5*sqrt(2))/3` (`quadratic_text`,
+review A14 of #756). `read_form` reads either back exactly, holding it to that as
+`algebraic` does, so the house writer's exact form of an algebraic house is what
+`select_houses` and the regularized layer order it by (`regularize_evand.verified_bound`).
+A `root(` form that names its polynomial instead, as n = 11's `root(P_trump11, ...)` does,
+is not this form, and `read_form` leaves it unread, as it does a closed form written
+otherwise, such as n = 5's `2 + (1/2)sqrt(2)`.
 
 `of_field_element` reads an element of a number field, as an algebraic witness states its
 side, by its minimal polynomial: the square-free part of its characteristic polynomial.
@@ -345,6 +349,12 @@ _DECIMAL = r"[0-9]+(?:\.[0-9]+)?"
 _ROOT_FORM = re.compile(
     rf"root\((?P<polynomial>[0-9s^{{}}+\- ]+),\s*(?P<low>{_DECIMAL}),\s*(?P<high>{_DECIMAL})\)"
 )
+#: `quadratic_text`'s text: `(a+b*sqrt(d))/c`, `b*` left out where `b` is one.
+_QUADRATIC = re.compile(
+    r"\((?P<a>-?[0-9]+)(?P<sign>[+-])(?:(?P<b>[0-9]+)\*)?sqrt\((?P<d>[0-9]+)\)\)/(?P<c>[0-9]+)"
+)
+#: How many decimal places a quadratic side's square root is enclosed to when it is read.
+QUADRATIC_PLACES = 60
 
 
 def polynomial_text(polynomial: Sequence[int]) -> str:
@@ -413,11 +423,68 @@ def _cut(value: Fraction, places: int, *, up: bool) -> str:
     return f"{text[:-places]}.{text[-places:]}"
 
 
+def _square_free(value: int) -> tuple[int, int]:
+    """`value` as `k * k * d` with `d` square-free, returned as (`k`, `d`)."""
+    k, d, factor = 1, value, 2
+    while factor * factor <= d:
+        while d % (factor * factor) == 0:
+            d //= factor * factor
+            k *= factor
+        factor += 1
+    return k, d
+
+
+def quadratic_text(side: Algebraic) -> str:
+    """A side of degree two in its closed form, ``(a+b*sqrt(d))/c``: the root of
+    `A s^2 + B s + C` is `(-B ± k sqrt(d)) / (2A)` with `B^2 - 4AC = k^2 d`, `d` square-free,
+    reduced to lowest terms, and the sign the side's own: `+` where it lies above `-B/(2A)`,
+    the two roots' midpoint. n = 51's side is ``(16+5*sqrt(2))/3`` (review A14 of #756)."""
+    if side.degree != 2:
+        raise ExactSideError(f"{literal(side)} is not of degree two")
+    first, middle, last = side.polynomial
+    k, d = _square_free(middle * middle - 4 * first * last)
+    if d == 1:
+        raise ExactSideError(f"{literal(side)} is rational, not of degree two")
+    common = math.gcd(math.gcd(-middle, k), 2 * first)
+    a, b, c = -middle // common, k // common, 2 * first // common
+    sign = "+" if compare(side, Fraction(a, c)) > 0 else "-"
+    return f"({a}{sign}{'' if b == 1 else f'{b}*'}sqrt({d}))/{c}"
+
+
+def _read_quadratic(match: re.Match[str]) -> Side:
+    """The side `quadratic_text` writes, held as `algebraic` holds one: its minimal
+    polynomial `(c s - a)^2 - b^2 d`, in an interval about the root narrow enough to hold
+    it alone, from `sqrt(d)` enclosed to `QUADRATIC_PLACES` places."""
+    a, b, c, d = (int(match.group(key) or 1) for key in ("a", "b", "c", "d"))
+    if c == 0 or b == 0:
+        raise ExactSideError(f"{match.group(0)!r} divides by zero or has no square root")
+    unit = 10**QUADRATIC_PLACES
+    floor = math.isqrt(d * unit * unit)
+    if floor * floor == d * unit * unit:
+        raise ExactSideError(f"{match.group(0)!r} states a rational side")
+    roots = (Fraction(floor, unit), Fraction(floor + 1, unit))
+    sign = 1 if match.group("sign") == "+" else -1
+    ends = sorted(Fraction(a + sign * b * root, c) for root in roots)
+    polynomial = (c * c, -2 * a * c, a * a - b * b * d)
+    side = algebraic(polynomial, (ends[0], ends[1]))
+    if not isinstance(side, Algebraic):
+        raise ExactSideError(f"{match.group(0)!r} states a rational side")
+    if quadratic_text(side) != match.group(0):
+        raise ExactSideError(
+            f"{match.group(0)!r} is not written as its closed form is, "
+            f"{quadratic_text(side)!r}: square-free under the root and in lowest terms"
+        )
+    return side
+
+
 def form(side: Algebraic) -> str:
-    """The side as a case record writes it exactly: ``root(p, low, high)``, its minimal
-    polynomial in `s` and the side cut and rounded up at `FORM_PLACES` decimals, an interval
-    in which it is the polynomial's one root, with more places where forty do not isolate
-    it. `read_form` reads it back as this side."""
+    """The side as a case record writes it exactly: of degree two, its closed form
+    (`quadratic_text`); otherwise ``root(p, low, high)``, its minimal polynomial in `s` and
+    the side cut and rounded up at `FORM_PLACES` decimals, an interval in which it is the
+    polynomial's one root, with more places where forty do not isolate it. `read_form`
+    reads either back as this side."""
+    if side.degree == 2:
+        return quadratic_text(side)
     places = FORM_PLACES
     for _step in range(8):
         low, high = enclosure(side, Fraction(1, 10 ** (places + 2)))
@@ -431,9 +498,13 @@ def form(side: Algebraic) -> str:
 
 def read_form(text: str) -> Side | None:
     """The side a `form` text states, held as `algebraic` holds one: an irreducible
-    polynomial with exactly one root in the interval. None where the text is not that form,
-    such as a closed form or a `root(` form that names its polynomial; a text of the form
-    that does not state such a root is refused (`ExactSideError`)."""
+    polynomial with exactly one root in the interval, or a quadratic closed form
+    (`quadratic_text`). None where the text is neither, such as another closed form or a
+    `root(` form that names its polynomial; a text of either form that does not state such
+    a root is refused (`ExactSideError`)."""
+    quadratic = _QUADRATIC.fullmatch(text.strip())
+    if quadratic is not None:
+        return _read_quadratic(quadratic)
     match = _ROOT_FORM.fullmatch(text.strip())
     if match is None:
         return None

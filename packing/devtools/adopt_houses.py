@@ -1841,8 +1841,9 @@ def rational(side: exact_sides.Side) -> Fraction:
 
 def exact_form(side: exact_sides.Side) -> str:
     """A house's side as its two lanes write it exactly: the fraction, or an algebraic side
-    as `exact_sides.form` writes it, `root(p, low, high)`, which `select_houses.parse_case`
-    and `regularize_evand.verified_bound` read back as that side."""
+    as `exact_sides.form` writes it, `root(p, low, high)` or, of degree two, its closed
+    form `(a+b*sqrt(d))/c`, which `select_houses.parse_case` and
+    `regularize_evand.verified_bound` read back as that side."""
     if isinstance(side, exact_sides.Algebraic):
         return exact_sides.form(side)
     return houses.legacy.literal(side)
@@ -3532,6 +3533,8 @@ def retain_history(day: str, texts: Mapping[int, str]) -> None:
 # ------------------------------------------------------------------------- redrafting
 
 LOWER_LANES = ("reported_lower_bound", "verified_lower_bound", "reported_status", "status")
+#: The lanes a house writes, which a refresh brings to the writer's text of the same side.
+UPPER_LANES = ("reported_upper_bound", "verified_upper_bound")
 LOWER_SECTION = r"\n## The lower bound\n.*?(?=\n<!-- BEGIN verification code)"
 
 
@@ -3722,6 +3725,19 @@ def refreshed(move: Move, committed: str) -> str:
     for key in ("evidence", "priority_notes"):
         if _packing(front).get(key) != packing.get(key):
             front = _replace(front, key, packing[key])
+    for key in UPPER_LANES:
+        # How the writer writes a side's exact form: a lane that states the same side,
+        # and differs from what the writer writes now in nothing but that text, takes the
+        # writer's text, as 295's root form became its closed form (review A14 of #756).
+        held, wanted = current.get(key) or {}, packing.get(key) or {}
+        same = form_side(held.get("exact_form"))
+        if (
+            held.get("exact_form") != wanted.get("exact_form")
+            and {**held, "exact_form": wanted.get("exact_form")} == wanted
+            and same is not None
+            and form_side(wanted.get("exact_form")) == same
+        ):
+            front = _replace(front, key, wanted)
     if move.n not in HAND_MARKED:
         rest = _with_history(rest, _split(written)[2])
     text = fence + front + rest
