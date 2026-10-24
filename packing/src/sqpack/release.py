@@ -8007,9 +8007,12 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "render_n11_lower_bounds_explainer with its math pass, "
             "render_n11_optimality_review, render_n11_threshold_bound_review and "
             "render_packing_methods write every file byte-identical across all three. "
-            "No result is registered, so the explainer's count is unchanged. No PDF was "
-            "printed; each prints from that HTML. Retain v0.4.22, v0.1.11, v0.1.4 and "
-            "v0.2.7."
+            "No result is registered, so the explainer's count is unchanged. Re-measured "
+            "after review A's fixes (19867ffe7) and the merge of main 14b14f2d1: rendered "
+            "at link revision 59614d78, twice from this tree and once with main "
+            "14b14f2d1's four candidate inputs swapped in, all 69 files byte-identical "
+            "again. No PDF was printed; each prints from that HTML. Retain v0.4.22, "
+            "v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
 )
