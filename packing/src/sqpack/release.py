@@ -3265,8 +3265,11 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "when the branch was taken over (think-xae5), at e1f1adc4, and last after main "
             "14b14f2d1 (#765, #767, #768) at 95ac0de5: rendered from the merge and from the "
             "merge with these five paths at main's, all 69 files byte-identical each time. "
-            "No PDF was printed; each prints from that HTML. Retain main's v0.4.22, "
-            "v0.1.11, v0.1.4 and v0.2.7."
+            "Last after main e5c1c64e3 (#745 to #771) and review B's fixes (B1, B2, B5 in "
+            "news_highlights.py, overview_sections.py and render_overview.py), at link "
+            "revision c0ce843f: rendered from the tree and from the tree with these five "
+            "paths at main's, all 69 files byte-identical. No PDF was printed; each prints "
+            "from that HTML. Retain main's v0.4.25, v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
     ReleaseNoPublicChange(
