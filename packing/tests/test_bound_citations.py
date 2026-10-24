@@ -845,8 +845,10 @@ RECORDED: dict[int, tuple[tuple[str, str, str] | None, tuple[str, str, str] | No
     1: (None, None),
     # Center counting below, the grid above.
     2: (None, None),
+    # Göbel's packing, checked exactly here, is T-237's upper half since 2026-10-24, so the
+    # catalogue's line names it; the lower line, Göbel's published proof, is unread here.
     5: (
-        ("Göbel 1979, Squares in Squares", "external", "verified"),
+        ("Göbel 1979, Squares in Squares (confirmed T-237)", "external", "verified"),
         ("Göbel 1979, Math. Centre Tracts 106", "external", "verified"),
     ),
     # The grid ceiling is derived whoever the catalogue credits (think-dlof).

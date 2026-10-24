@@ -1,0 +1,33 @@
+{
+ "schema": "asset/v1",
+ "id": "square-lower-bounds-v1:certificates/mixed_n26_L5555",
+ "claim": "No packing of 26 closed unit squares fits in the closed square of side 1111/200 (= 5.555).",
+ "release_tag": "square-lower-bounds-v1",
+ "release_url": "https://github.com/wand125/square-packing/releases/tag/square-lower-bounds-v1",
+ "assets": [
+  {
+   "asset": "certificates__mixed_n26_L5555.tar.gz",
+   "size": 635440,
+   "sha256": "ae4dc5e8054207b1c01a3f2cd1cdb818af313b8fd97adfabddc8862279ab1074"
+  }
+ ],
+ "unpack": "tar xzf certificates__mixed_n26_L5555.tar.gz -C problems/square-lower-bounds",
+ "unpack_note": "run from the repository root; restores the data files in place next to the documents",
+ "check": "tar xzf check2/src/sqverify-proof-net-fe12e036c.tar.gz\n(cd sqverify_fast && cargo build --release --locked)\nbash check2/src/fine_net_check.sh sqverify_fast/target/release/sqverify-fast candidate.json out/",
+ "check_cwd": "problems/square-lower-bounds/certificates/mixed_n26_L5555",
+ "check_note": "build steps from the README prose (check2/src/REPRODUCE.md)",
+ "check_extended": null,
+ "documents": [
+  "problems/square-lower-bounds/certificates/mixed_n26_L5555/README.md",
+  "problems/square-lower-bounds/certificates/mixed_n26_L5555/check2/src/INDEPENDENCE.md",
+  "problems/square-lower-bounds/certificates/mixed_n26_L5555/check2/src/REPRODUCE.md",
+  "problems/square-lower-bounds/certificates/mixed_n26_L5555/check2/src/SOUNDNESS.md",
+  "problems/square-lower-bounds/certificates/mixed_n26_L5555/check2/src/SPEC.md",
+  "problems/square-lower-bounds/certificates/mixed_n26_L5555/provenance/search-notes.md"
+ ],
+ "source": {
+  "repository": "wand125/square-packing-bounds",
+  "commit": "678aa1d029423177792f51d3e7e42895b749241e",
+  "path": "certificates/mixed_n26_L5555"
+ }
+}

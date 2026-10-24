@@ -432,7 +432,12 @@ deficiency_upper_bounds:
       Theorem 1.4 and Corollary 5.1 for 2 <= b <= k <= 2000 in integers (receipt in the
       2026-10-09 packet). Not refereed; the source states extensive Claude (Anthropic)
       assistance and no human review. It settles no count n <= 324, so it is not in the
-      result register.
+      result register. REPORTED IN LEAN: Evan Daniel's packs_sub_8sqrt (k : ℕ) (hk : 6 ≤ k) :
+      ∃ s < (k : ℝ), Packs (k * k - 8 * (Nat.sqrt (k - 5) + 1)) s, with packs_sub_8b for
+      2 <= b, b + 4 <= k <= b^2 + 4, at evand/square-packing 8475bdf4 (18 October 2026):
+      Theorem 1.4 for every k >= 6, with an explicit tilt in place of Lemma 4.2's mean-value
+      step, standard axioms and no certificates by the source's account; retained in
+      web/evand-fang-ryu-lean-2026-10-18/, not built here (think-ahr2, think-dgrc).
   - bound: >-
       REPORTED: c*(k) < (20/3)(3/2)^{2/5} 5.03^{3/5} k^{2/5} + (8/3) 5.03 10^{-4/3}
       < 20.668 k^{2/5} + 0.623 for every integer k >= 1.6*10^7 (Theorem 1.2), and

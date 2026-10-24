@@ -1,0 +1,63 @@
+{
+ "j": 133,
+ "C": 25002315,
+ "S": 1330532,
+ "E": 25037693,
+ "t_j": "133/5002",
+ "a_j": "265/10004",
+ "r_a_j": "105311911/200300482",
+ "domain_quadrant_exact": [
+  "2391/800",
+  "218396844031/40060096400"
+ ],
+ "domain_quadrant_decided": [
+  "2391/800",
+  "57165536208407590352179/10485760000000000000000"
+ ],
+ "mass_scale": "1",
+ "float_nodes": 17469,
+ "float_leaves": 8735,
+ "float_status": "complete",
+ "float_least_accepted_bound": 1.000002351060242,
+ "float_failures": 0,
+ "cpu_setup": 0.063,
+ "cpu_float": 3.058,
+ "exact_leaves": 8735,
+ "exact_retried_leaves": 0,
+ "exact_least_bound": "2210935390818034834028340727769454193600259070418385881133346299169302082353416417/2210930192789031458533738665792106760092992405504000000000000000000000000000000000",
+ "exact_least_bound_float": 1.0000023510597578,
+ "exact_least_leaf": [
+  155,
+  8,
+  229,
+  8
+ ],
+ "partition_holds": true,
+ "cpu_partition": 0.004,
+ "cpu_exact": 6.604,
+ "verdict": "VERIFIED",
+ "least_leaf_centre": [
+  "24077684116014760599527669/5368709120000000000000000",
+  "27899964825259083971650161/5368709120000000000000000"
+ ],
+ "least_leaf_centre_capture_float": 1.183185770815988,
+ "least_leaf_centre_capture_at_least_bound": true,
+ "least_capture_found_centre": [
+  "191201030772655667326851507/42949672960000000000000000",
+  "117049191933810337450910413/21474836480000000000000000"
+ ],
+ "least_capture_found_float": 1.0021481699204686,
+ "least_capture_found_float_pass": 1.0021481699204722,
+ "least_capture_found_at_least_one": true,
+ "cpu_total": 9.855,
+ "kind": "review-2026-10-23-n31-capture/v1",
+ "candidate_sha256": "4a7df269037a6449ba2d4bee2b6a76962df097c1515025545d4ca4cfcc39be3b",
+ "dropped_row": null,
+ "programs_sha256": {
+  "n31_brute.py": "9d836e14c22f996b2e13805e53b9041a89d694047aa99e1a3a79a41a070d70ae",
+  "n31_exact.py": "ddb9655ed8cd95a74dc5c32b51844ce2f91671f631d88fc16efdbfa01b1c11dc",
+  "n31_geometry.py": "c30893c2ad0389d910533f2f1a345aeec9c64897ba5a917ddedfc2448b628b8e",
+  "capture.py": "783429185f890015440b3d937ad79a0ad353da1e4d9912e3e764aad648798ce9"
+ },
+ "max_rss_kb": 548424
+}

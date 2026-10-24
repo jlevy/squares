@@ -478,11 +478,24 @@ def _coverage_line_end(text: str, node: Node) -> int:
     return len(text) if newline < 0 else newline + 1
 
 
+@lru_cache(maxsize=4)
+def _composed(text: str) -> Node | None:
+    """The coverage register's YAML node tree, composed once per text and only read.
+
+    `preserve_other_coverage` locates both of its lists in the register before and after
+    each replacement, and a replacement that changes nothing leaves the text as it was:
+    `apply_upper_bound_packets --check` composed 13 times on 23 October, 4 distinct texts,
+    and caching them took its CPU time from 2.6-2.7 s to 2.0 s. Four entries hold those
+    four, at about 14 MB each. Keyed by the text, as `_parsed_coverage` is, so a changed
+    register is composed anew."""
+    return yaml.compose(text, Loader=FastSafeLoader)
+
+
 def coverage_list_span(
     text: str, name: str, *, identifier: str | None = None
 ) -> tuple[int, int] | None:
     """Locate a block coverage list or an id-keyed row from YAML marks, keeping comments."""
-    document = yaml.compose(text, Loader=FastSafeLoader)
+    document = _composed(text)
     if not isinstance(document, MappingNode):
         raise TypeError("coverage record must be a YAML mapping")
     for key, value in document.value:

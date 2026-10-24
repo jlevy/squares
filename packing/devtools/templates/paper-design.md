@@ -1100,9 +1100,10 @@ contributor articles use their component sheets and the same text tokens.
   without removing or rewriting the anchors.
   The Workbench application has no footer; its stage carries the publication version.
 
-- **Homepage.** Its browser and menu title are **Overview**; its opening H1 remains
-  **The Square Packing Problem**. Two readable introductory paragraphs define the
-  problem and explain upper and lower bounds.
+- **Homepage.** Its menu label is **Overview**; its browser title and link preview are
+  the project’s name, **The Squares Project** (the owner, 2026-10-23); its opening H1
+  remains **The Square Packing Problem**. Two readable introductory paragraphs define
+  the problem and explain upper and lower bounds.
   The sections continue with Visual Atlas, News, Results, Profiles, Report a Result,
   Learn, Visuals, About the Squares Project, and More Resources.
   Learning cards preview the Papers and Tutorials catalogues.
@@ -1756,10 +1757,13 @@ contributor articles use their component sheets and the same text tokens.
   - Under `prefers-reduced-motion: reduce` the duration is 0ms and the token `none`, so
     colours and disclosure state change at once, with no animated arrow travel.
 
-- **Rating ladders.** Verification Ladders is a section of the Results page, under its
-  table, since 2026-10-02 (the owner, `think-hqb3`); it was the homepage’s section
-  between Recent Results and the atlas before that (**Results page**, below, for its
-  place and its lead).
+- **Rating ladders.** Verification Ladders is the first section of the Verification page
+  (`verification.html`) since 2026-10-22, when the site navigation plan
+  (`docs/project/specs/active/plan-2026-10-22-site-navigation.md`) took the rating,
+  evidence, credit and status guide off All Results; it was a section of the Results
+  page, under its table, from 2026-10-02 (the owner, `think-hqb3`), and the homepage’s
+  section between Recent Results and the atlas before that (**All Results**, below, for
+  the Verification page’s place).
   A table of results carries a legend of every rung’s mark right above it, which links
   this section (**Recent results**, below; `think-42dx`, in place of the key of the same
   grid the homepage kept under its table from 2026-10-02). Its diagram, `.site-ladders`,
@@ -1775,7 +1779,8 @@ contributor articles use their component sheets and the same text tokens.
   The section was Verification at a Glance until 2026-10-01; an empty anchor in its
   heading keeps the old fragment, `#verification-at-a-glance`, landing on it, and the
   homepage’s `overview/forward.js` sends both that fragment and `#verification-ladders`
-  to the Results page, fragment kept.
+  to the Results page, whose `overview/navigation.js` sends them on to the Verification
+  page, fragment kept.
   - **Rules.** One rule, in the text’s colour, stands under the column heads.
     No rule stands between the rows: 0.8rem between one rung’s description and the next
     rung (`--site-ladders-row-space`, 0.4rem, either side of a row) keeps them apart and
@@ -2007,7 +2012,11 @@ contributor articles use their component sheets and the same text tokens.
     diagonal gesture moves both ways.
     That pan holds while the reader pauses and eases back onto the path as they scroll
     on, by a factor of e a window, and eases away back at the top.
-    The last of the motion slides to the triangle’s left edge whatever the pan.
+    The last of the motion slides to the triangle’s left edge, and the reader’s pan
+    holds on top of it there too, so the triangle at rest at the bottom still pans by
+    hand, from its left edge to its right end.
+    Until 2026-10-23 the slide overrode the pan, and on a phone a finger could no longer
+    move the triangle at the end (the owner).
     A swipe down wobbles a little sideways, most as it starts, and the pan once counted
     the wobble, so the triangle sometimes went left and then right (the owner,
     2026-10-23). Sideways travel now pans only past 16 pixels and a quarter of the
@@ -2944,12 +2953,12 @@ pointer and by keyboard, and measures its label at 1280, 768 and 390 pixels.
   one (the recent table, the atlas grid), and one way onward to the page that holds the
   full account. A fact has one home.
   What a page defines is stated on that page and nowhere else, and the overview names it
-  and links it: the Results page’s ratings, with the rating ladders that define every
-  rung (**Rating ladders**, above, the homepage’s own section until 2026-10-02), its
-  kinds, statuses and dating rule, with how many results stand at each status; the
-  Frontier page’s counts, its audit of its sources, the seventeen-square history before
-  this project, and when a bound by others counts as verified, which is the rule its
-  verified columns apply.
+  and links it: the Verification page’s ratings, with the rating ladders that define
+  every rung (**Rating ladders**, above, the homepage’s own section until 2026-10-02 and
+  the Results page’s until 2026-10-22), its kinds, statuses and dating rule, with how
+  many results stand at each status; the Frontier page’s counts, its audit of its
+  sources, the seventeen-square history before this project, and when a bound by others
+  counts as verified, which is the rule its verified columns apply.
   The Frontier page opens with the survey’s account, its audit, its recent counts and
   the seventeen-square history, and ends its prose with the key to its columns, beside
   the table. The way onward follows the section’s shape: a section whose key element is a
@@ -3882,8 +3891,8 @@ end. `devtools.measure_site_pages ladders` reports the rating ladders as laid ou
 rung’s height, each description’s box and the lines its words take, the room between the
 diagram and whatever clips it sideways, and with `--shots DIR` a picture of the diagram
 at each width, light and dark.
-`tests/test_site_ladders.py` holds those rows and that room in a browser at nine widths,
-the narrowest of each layout among them.
+`tests/test_site_ladders.py` holds those rows and that room in a browser at fourteen
+widths, the narrowest of each layout among them.
 `devtools.measure_site_pages math` reports every formula’s face beside its text’s,
 counted by surface. `devtools.measure_site_pages glyphs` reports how every run of text
 and every formula is drawn, and `--view problems` fails on a page set off the rules of

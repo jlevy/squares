@@ -1,0 +1,299 @@
+{
+ "cases": {
+  "mixed_n19_L48275": {
+   "asset": {
+    "bytes": 597835,
+    "sha256": "9d1aea51ce0c1cb91aa0bf1e6c69398296ca201e087e76e2f75f720577598ccb"
+   },
+   "documents": [
+    {
+     "matches_subtree_manifest": true,
+     "path": "README.md"
+    },
+    {
+     "matches_subtree_manifest": true,
+     "path": "ASSET.json"
+    },
+    {
+     "matches_subtree_manifest": true,
+     "path": "bundle.json"
+    },
+    {
+     "matches_subtree_manifest": true,
+     "path": "files-sha256.json"
+    }
+   ],
+   "members": [
+    {
+     "form": "gzip",
+     "matches": true,
+     "path": "certificates/mixed_n19_L48275/candidate.json"
+    },
+    {
+     "form": "original-gzip",
+     "matches": true,
+     "path": "certificates/mixed_n19_L48275/check2/control-197_200.jsonl.gz"
+    },
+    {
+     "form": "plain",
+     "matches": true,
+     "path": "certificates/mixed_n19_L48275/check2/control.json"
+    },
+    {
+     "form": "plain",
+     "matches": true,
+     "path": "certificates/mixed_n19_L48275/check2/receipt.json"
+    },
+    {
+     "form": "original-gzip",
+     "matches": true,
+     "path": "certificates/mixed_n19_L48275/check2/run.jsonl.gz"
+    },
+    {
+     "path": "certificates/mixed_n19_L48275/check2/src/sqverify-proof-net-fe12e036c.tar.gz",
+     "pinned_only": true
+    },
+    {
+     "path": "certificates/mixed_n19_L48275/n19-L4.8275-check2-bundle.tar.gz",
+     "pinned_only": true
+    },
+    {
+     "form": "plain",
+     "matches": true,
+     "path": "certificates/mixed_n19_L48275/verification/prepublication-receipt.json"
+    }
+   ],
+   "problems": [],
+   "source_inventory_differences": [
+    {
+     "inventory": "a5764f0092b8ead25b2b521b01e5729790467db9c33abc644fd00c04d473cb4f",
+     "path": "README.md",
+     "retained_or_member": "7bf2940e51906bb4dbba1c0b2a24c26febf6c815b47e1088487f59d86abc2c6f"
+    }
+   ],
+   "verdict": "CUSTODY_HOLDS"
+  },
+  "mixed_n20_L49125": {
+   "asset": {
+    "bytes": 614741,
+    "sha256": "0ccc62a01c26f62d833f6b1551d8acfacffdbc2434274d45f9636a0174ccfb76"
+   },
+   "documents": [
+    {
+     "matches_subtree_manifest": true,
+     "path": "README.md"
+    },
+    {
+     "matches_subtree_manifest": true,
+     "path": "ASSET.json"
+    },
+    {
+     "matches_subtree_manifest": true,
+     "path": "bundle.json"
+    },
+    {
+     "matches_subtree_manifest": true,
+     "path": "files-sha256.json"
+    }
+   ],
+   "members": [
+    {
+     "form": "gzip",
+     "matches": true,
+     "path": "certificates/mixed_n20_L49125/candidate.json"
+    },
+    {
+     "form": "original-gzip",
+     "matches": true,
+     "path": "certificates/mixed_n20_L49125/check2/control-197_200.jsonl.gz"
+    },
+    {
+     "form": "plain",
+     "matches": true,
+     "path": "certificates/mixed_n20_L49125/check2/control.json"
+    },
+    {
+     "form": "plain",
+     "matches": true,
+     "path": "certificates/mixed_n20_L49125/check2/receipt.json"
+    },
+    {
+     "form": "original-gzip",
+     "matches": true,
+     "path": "certificates/mixed_n20_L49125/check2/run.jsonl.gz"
+    },
+    {
+     "path": "certificates/mixed_n20_L49125/check2/src/sqverify-proof-net-fe12e036c.tar.gz",
+     "pinned_only": true
+    },
+    {
+     "path": "certificates/mixed_n20_L49125/n20-L4.9125-check2-bundle.tar.gz",
+     "pinned_only": true
+    },
+    {
+     "form": "plain",
+     "matches": true,
+     "path": "certificates/mixed_n20_L49125/verification/prepublication-receipt.json"
+    }
+   ],
+   "problems": [],
+   "source_inventory_differences": [
+    {
+     "inventory": "98625c26f06fa2e3757d6cf07a5c73e24f12dee7358bb025f3effa936f712dca",
+     "path": "README.md",
+     "retained_or_member": "f7d5c080f39c5f98c4e5ce550ec837074c05b0fdcc9589aa9c6fcf72e5625501"
+    }
+   ],
+   "verdict": "CUSTODY_HOLDS"
+  },
+  "mixed_n26_L5555": {
+   "asset": {
+    "bytes": 635440,
+    "sha256": "ae4dc5e8054207b1c01a3f2cd1cdb818af313b8fd97adfabddc8862279ab1074"
+   },
+   "documents": [
+    {
+     "matches_subtree_manifest": true,
+     "path": "README.md"
+    },
+    {
+     "matches_subtree_manifest": true,
+     "path": "ASSET.json"
+    },
+    {
+     "matches_subtree_manifest": true,
+     "path": "bundle.json"
+    },
+    {
+     "matches_subtree_manifest": true,
+     "path": "files-sha256.json"
+    }
+   ],
+   "members": [
+    {
+     "form": "gzip",
+     "matches": true,
+     "path": "certificates/mixed_n26_L5555/candidate.json"
+    },
+    {
+     "form": "original-gzip",
+     "matches": true,
+     "path": "certificates/mixed_n26_L5555/check2/control-197_200.jsonl.gz"
+    },
+    {
+     "form": "plain",
+     "matches": true,
+     "path": "certificates/mixed_n26_L5555/check2/control.json"
+    },
+    {
+     "form": "plain",
+     "matches": true,
+     "path": "certificates/mixed_n26_L5555/check2/receipt.json"
+    },
+    {
+     "form": "original-gzip",
+     "matches": true,
+     "path": "certificates/mixed_n26_L5555/check2/run.jsonl.gz"
+    },
+    {
+     "path": "certificates/mixed_n26_L5555/check2/src/sqverify-proof-net-fe12e036c.tar.gz",
+     "pinned_only": true
+    },
+    {
+     "path": "certificates/mixed_n26_L5555/n26-L5.555-check2-bundle.tar.gz",
+     "pinned_only": true
+    },
+    {
+     "form": "plain",
+     "matches": true,
+     "path": "certificates/mixed_n26_L5555/verification/prepublication-receipt.json"
+    }
+   ],
+   "problems": [],
+   "source_inventory_differences": [
+    {
+     "inventory": "35a30966d0583453149cc445fc23d2c6cb0d902a51c6dfc575c2a26d1e056913",
+     "path": "README.md",
+     "retained_or_member": "ee4a8ab61fb5718b188d9e5b14819aaebdd87802c3d2e46690ef3267b9366702"
+    }
+   ],
+   "verdict": "CUSTODY_HOLDS"
+  },
+  "mixed_n27_L5655": {
+   "asset": {
+    "bytes": 642635,
+    "sha256": "4f1b449af9de93f0384c7c67f52a3848717c996ddc1ea22f90185cbd1da859cf"
+   },
+   "documents": [
+    {
+     "matches_subtree_manifest": true,
+     "path": "README.md"
+    },
+    {
+     "matches_subtree_manifest": true,
+     "path": "ASSET.json"
+    },
+    {
+     "matches_subtree_manifest": true,
+     "path": "bundle.json"
+    },
+    {
+     "matches_subtree_manifest": true,
+     "path": "files-sha256.json"
+    }
+   ],
+   "members": [
+    {
+     "form": "gzip",
+     "matches": true,
+     "path": "certificates/mixed_n27_L5655/candidate.json"
+    },
+    {
+     "form": "original-gzip",
+     "matches": true,
+     "path": "certificates/mixed_n27_L5655/check2/control-197_200.jsonl.gz"
+    },
+    {
+     "form": "plain",
+     "matches": true,
+     "path": "certificates/mixed_n27_L5655/check2/control.json"
+    },
+    {
+     "form": "plain",
+     "matches": true,
+     "path": "certificates/mixed_n27_L5655/check2/receipt.json"
+    },
+    {
+     "form": "original-gzip",
+     "matches": true,
+     "path": "certificates/mixed_n27_L5655/check2/run.jsonl.gz"
+    },
+    {
+     "path": "certificates/mixed_n27_L5655/check2/src/sqverify-proof-net-fe12e036c.tar.gz",
+     "pinned_only": true
+    },
+    {
+     "path": "certificates/mixed_n27_L5655/n27-L5.655-check2-bundle.tar.gz",
+     "pinned_only": true
+    },
+    {
+     "form": "plain",
+     "matches": true,
+     "path": "certificates/mixed_n27_L5655/verification/prepublication-receipt.json"
+    }
+   ],
+   "problems": [],
+   "source_inventory_differences": [
+    {
+     "inventory": "5b642c8c39bedb6b010b8ddac3916719921d7c95500953f0f2193706896ef928",
+     "path": "README.md",
+     "retained_or_member": "3db8bea74db000d088074a2e0c028bf12a928f0c4f5c486e1ca8fa87db6c1129"
+    }
+   ],
+   "verdict": "CUSTODY_HOLDS"
+  }
+ },
+ "cpu_seconds": 0.134,
+ "kind": "t233-review-custody/v1",
+ "verdict": "ALL_CUSTODY_HOLDS"
+}

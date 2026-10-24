@@ -391,3 +391,43 @@ def test_the_committed_census_views_carry_every_census_row() -> None:
     assert {row["certificate"] for row in summary["certificates"]} == names
     view = (root / "census-summary.md").read_text(encoding="utf-8")
     assert _view_rows(view) == names
+
+
+@pytest.mark.parametrize(
+    ("receipts", "mark"),
+    [
+        ({}, "-"),
+        ({"control-failed-v2": "CONTROL_FAILED"}, "CONTROL_FAILED (kept)"),
+        (
+            {"control-failed-v1": "CONTROL_FAILED", "control": "CONTROLS_REFUSED"},
+            "CONTROLS_REFUSED",
+        ),
+    ],
+    ids=["no-control", "failed-only", "failed-then-refused"],
+)
+def test_the_mixed_report_tells_a_failed_control_from_none(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    receipts: dict[str, str],
+    mark: str,
+) -> None:
+    """A certificate whose only control receipt failed closed reads `CONTROL_FAILED
+    (kept)`, not the `-` of a certificate with no control, and a passing receipt kept
+    beside a failed one is the one read (A6 of PR #745's review A)."""
+    case, entry, out = retained_case(tmp_path, monkeypatch)
+    monkeypatch.setattr(census, "mixed_cases", lambda: [case])
+    monkeypatch.setattr(
+        census,
+        "mixed_reference",
+        lambda _: {"directions": [], "cpu_seconds": 0, "per_direction_cpu": True},
+    )
+    folder = out / case.packet
+    (folder / f"{case.certificate}.control.json").unlink()
+    for suffix, status in receipts.items():
+        (folder / f"{case.certificate}.{suffix}.json").write_text(
+            json.dumps({"status": status})
+        )
+    text = census.render_mixed_report({"cases": {case.certificate: entry}}, out)
+    (row,) = [line for line in text.splitlines() if line.startswith(f"| `{case.certificate}`")]
+    cells = [cell.strip() for cell in row.strip("|").split("|")]
+    assert cells[-1] == mark
