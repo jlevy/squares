@@ -699,6 +699,7 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [Feature: News Feed of Every Merged Pull Request](docs/project/specs/active/plan-2026-10-23-news-pr-feed.md) | implementation plan | current | transient | — |
 | [Soundness Review: wand125’s `sqverify_continuous`, v3 and v4](docs/project/reviews/review-2026-10-23-wand125-sqverify-continuous-soundness.md) | dated review record | record | retained | — |
 | [Evan Daniel’s Grade-C Local Minima (Theorem C): Mathematical Review](docs/project/reviews/review-2026-10-23-evand-grade-c-theorem-c.md) | dated review record | record | retained | — |
 | [CI and Release Latency Audit, 22 October 2026](docs/project/reviews/review-2026-10-22-ci-release-latency.md) | dated review record | record | retained | — |
