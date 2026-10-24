@@ -736,6 +736,16 @@ def test_a_release_is_named_by_its_issue_or_by_its_publication() -> None:
         replay.repository_of("https://example.org/a/b")
 
 
+def test_a_worker_job_finds_its_release_again_by_its_key() -> None:
+    """A recipe parent's job names its release by `Release.key` (#795's review C, C1): a
+    label several pushes share finds at most one of them, so a job named by its label
+    would decide another release's parent."""
+    assert all(replay.release(chosen.key) is chosen for chosen in replay.RELEASES.values())
+    assert any(
+        replay.RELEASES.get(chosen.label) is not chosen for chosen in replay.RELEASES.values()
+    )
+
+
 def test_a_second_report_in_one_packet_has_its_own_source_record_and_receipts() -> None:
     """A packet may retain two reports of one commit, as Couzo's 23aff0c holds #670's
     certificates and others no issue claims: each has its own coverage source, claims

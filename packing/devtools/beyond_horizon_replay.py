@@ -2550,7 +2550,7 @@ def recipe_of(chosen: Release, row: Claim) -> checker.Recipe:
 
 
 def decide_parent(job: tuple[str, str, int]) -> dict[str, Any]:
-    """A recipe parent that is not a row, ``(release, path, count)``, decided as
+    """A recipe parent that is not a row, ``(release key, path, count)``, decided as
     `decide_row` decides a row: both routes, and its six controls."""
     chosen = release(job[0])
     path, n = job[1], job[2]
@@ -2621,7 +2621,7 @@ def write_recipe_decisions(issues: Sequence[int | str], workers: int) -> dict[st
             - {(path, int(row["n"])) for path, row in replayed.items()}
         )
         with ProcessPoolExecutor(max_workers=workers) as pool:
-            parents = list(pool.map(decide_parent, [(chosen.label, *job) for job in needed]))
+            parents = list(pool.map(decide_parent, [(chosen.key, *job) for job in needed]))
         decisions = recipe_decisions(
             chosen, {**replayed, **{item["certificate"]: item for item in parents}}
         )
@@ -2637,7 +2637,7 @@ def write_recipe_decisions(issues: Sequence[int | str], workers: int) -> dict[st
                 "rows": decisions,
             },
         )
-        written[chosen.label] = sum(1 for item in decisions if item["verdict"] == "decided")
+        written[chosen.key] = sum(1 for item in decisions if item["verdict"] == "decided")
     return written
 
 
@@ -2678,7 +2678,7 @@ def recipe_problems(chosen: Release, *, replay: bool, workers: int) -> list[str]
     )
     if replay and receipt["parents"]:
         jobs = [
-            (chosen.label, item["certificate"], int(item["n"])) for item in receipt["parents"]
+            (chosen.key, item["certificate"], int(item["n"])) for item in receipt["parents"]
         ]
         with ProcessPoolExecutor(max_workers=workers) as pool:
             again = list(pool.map(decide_parent, jobs))
