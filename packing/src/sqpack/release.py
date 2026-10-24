@@ -8272,8 +8272,11 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "5f8f005a3 (#766): rendered at link revision 5f8f005a into empty site "
             "directories, twice from this tree and once from it with main's "
             "result-requests.yaml swapped in (43 files each), render_packing_methods "
-            "writes every file byte-identical across all three. No PDF was printed; it "
-            "prints from that HTML. Retain v0.2.7."
+            "writes every file byte-identical across all three. Measured again after the "
+            "#670 and #734 final replies and the #719 follow-up were recorded, #734 "
+            "closed: twice from this tree, 43 files each, byte-identical to each other "
+            "and to the render with main's file. No PDF was printed; it prints from that "
+            "HTML. Retain v0.2.7."
         ),
     ),
 )

@@ -12625,6 +12625,24 @@ issues:
         verification: V3
         confirmation: C3
         status: confirmed
+    - url: https://github.com/jlevy/squares/issues/670#issuecomment-6380974872
+      date: '2026-10-24'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n204
+        id: T-226
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: n364
+      - result: n382
+      - result: n403
+      - result: n444
+      - result: n922
+      - result: n370
+      - result: n452
+      - result: n536
     close_when: Every claim or correction has a reviewed disposition on main, pending validation has a priced
       owner, any changed house is regularized in its adoption, and the author has received a reply verified
       against main and the deployed site.
@@ -12706,7 +12724,9 @@ issues:
       PingYou Ltd, Daniel, Levy, and the same lineage reaches T-228, T-223, T-225, T-229 and
       T-231; T-226's short credit, S3, V3/C3 and first-report standing are unchanged. The final
       comment, which says so, follows that change's merge and verified deploy, and its record
-      follows it.
+      follows it. It was posted at 2026-10-24T06:35:42Z (issuecomment-6380974872), after #766
+      merged (5f8f005a3) and its deploy was verified (run 40070014484); GitHub had closed the
+      issue on 23 October, when #747 merged, so it is the final comment on a closed issue.
   - number: 672
     title: '227, 229, 330-996: registration request'
     author: franciscouzo
@@ -21512,6 +21532,15 @@ issues:
         verification: V3
         confirmation: C3
         status: confirmed
+    - url: https://github.com/jlevy/squares/issues/719#issuecomment-6380975041
+      date: '2026-10-24'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n204
+        id: T-229
+      - result: n204-lower
+        id: T-231
     close_when: >-
       T-229 is reviewed and adopted at 105 and 204 (think-4h23), T-231 is reviewed and adopted
       at 204 (think-tetq, think-h01y), the owner has answered whether counts above 1024 are
@@ -21678,7 +21707,11 @@ issues:
       the two 204 files he wrote first and why n-204.cert carries the larger padding. It
       answered his recommendation to publish the checkers by #732's import reply, with this
       result's commands and the review's programs in the packet. It states the 204 lineage
-      only back to Couzo's #678 certificate, and the issue stays open.
+      only back to Couzo's #678 certificate, and the issue stays open. The follow-up of
+      2026-10-24T06:35:43Z (issuecomment-6380975041), after #766 merged (5f8f005a3) and its
+      deploy was verified (run 40070014484), takes the lineage at 204 back through Couzo's
+      #670 certificate to T-186, as his answer on #670 names it, and quotes T-229's and
+      T-231's credit lines, which now name Ostashev; the issue stays open.
   - number: 728
     title: 's(303) ≤ 17.909772217275: registration request'
     author: evand
@@ -22029,7 +22062,8 @@ issues:
     title: 'Proposal: submit and fetch upper bounds by API (automated intake, reported the same day)'
     author: wand125
     opened: '2026-10-22'
-    state: open
+    state: closed
+    closed: '2026-10-24'
     kind: other
     triage: done
     summary: >-
@@ -22064,7 +22098,12 @@ issues:
     beads:
     - think-lnzm
     answer_bead: think-lnzm
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/734#issuecomment-6380975210
+      date: '2026-10-24'
+      by: jlevy
+      kind: final
+      reported: []
     close_when: >-
       The owner has answered the three questions (think-lnzm), which the decision of 24 October
       2026 to put the proposal on hold does, and the reply that says so is posted.
@@ -22092,7 +22131,9 @@ issues:
       endpoint listing the counts with the most room, an in-browser inspector) are recorded
       beside it. On 24 October 2026, asked how far a submission bot should go, the owner
       answered "Not now" (think-lnzm), so the proposal is on hold and nothing is built; the
-      reply that says so is owed after this change merges.
+      reply that says so is owed after this change merges. It was posted at
+      2026-10-24T06:35:44Z (issuecomment-6380975210), after #766 merged (5f8f005a3), as the
+      final comment, and the issue was closed with it at 06:35:45Z, as not planned.
   - number: 755
     title: 's(303) ≤ 17.909762327476: registration request'
     author: amundsk
