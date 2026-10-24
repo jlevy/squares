@@ -585,6 +585,15 @@ credit.
   [`devtools.acquire_source`](../devtools/acquire_source.py) writes a packet from a
   declaration kept in its `acquisition/` directory, and its `--check` re-derives the
   packet from its manifest.
+- **A source its author submitted is presumed retainable.** Where the author submitted
+  the source to this repository, in an issue, a comment or a pull request, the
+  presumption is permission to retain and import it, and its exact licence is followed
+  up on a bead of its own that does not hold the import.
+  The packet’s declaration and README say which files rest on that presumption and name
+  the bead. The owner, on Francisco Couzo’s #763, 24 October 2026: “so Couzo’s has
+  submitted so the presumtion is permission from that.
+  We should track a bead to follow up on the exact license, but it should not impair our
+  ability to import things” (think-cnn7; the licence follow-up is think-m8f4).
 - **Bulk goes to hosted data, decided before the first commit.** Size what the packet
   and the pass retain as
   [OR-18](../../operating-rules.md#or-18-keep-bulk-data-out-of-git-and-never-bind-code-or-verdicts-to-a-git-commit-or-blob)

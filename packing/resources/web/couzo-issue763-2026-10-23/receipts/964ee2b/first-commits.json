@@ -1,0 +1,18 @@
+{
+  "format": "beyond-horizon-first-commits-v1",
+  "history_commits": 44,
+  "retained_commit": "964ee2bdf301d0c8912d956d4010f478dcbbd5ea",
+  "rows": [
+    {"blob":"e9c1ecc172d741da1cdd07575b3e898d805e68ad","certificate":"certificates/best/n335.cert","committed":"2026-10-23T22:38:09Z","first_commit":"964ee2bdf301d0c8912d956d4010f478dcbbd5ea","n":335},
+    {"blob":"69fafd8511b3f5f48e023d7e21a682ae8b921099","certificate":"certificates/best/n339.cert","committed":"2026-10-23T22:38:09Z","first_commit":"964ee2bdf301d0c8912d956d4010f478dcbbd5ea","n":339},
+    {"blob":"d64cc4aa53817aa9358c78068b8d8309c2cc9c79","certificate":"certificates/best/n344.cert","committed":"2026-10-23T18:16:49Z","first_commit":"efef7d1418d0cb629debc962c077740125ba7901","n":344},
+    {"blob":"cf3fd1c6edb2f6fbea23348f1071279920185b9c","certificate":"certificates/best/n379.cert","committed":"2026-10-23T22:38:09Z","first_commit":"964ee2bdf301d0c8912d956d4010f478dcbbd5ea","n":379},
+    {"blob":"af2161d2d052a2f1e0d49650a244855a2b4d741d","certificate":"certificates/best/n380.cert","committed":"2026-10-23T22:38:09Z","first_commit":"964ee2bdf301d0c8912d956d4010f478dcbbd5ea","n":380},
+    {"blob":"d8734f7fc9ad1037af8f1212660692afc9c98c48","certificate":"certificates/best/n421.cert","committed":"2026-10-23T22:38:09Z","first_commit":"964ee2bdf301d0c8912d956d4010f478dcbbd5ea","n":421},
+    {"blob":"b5a4deb77c2e0a88c1103d9dc276a842ed3ffcd1","certificate":"certificates/best/n452.cert","committed":"2026-10-23T18:16:49Z","first_commit":"efef7d1418d0cb629debc962c077740125ba7901","n":452},
+    {"blob":"554bac2a0a20e9b9e6cc7fc4fe66ac5e8b8acbfb","certificate":"certificates/best/n507.cert","committed":"2026-10-23T22:38:09Z","first_commit":"964ee2bdf301d0c8912d956d4010f478dcbbd5ea","n":507},
+    {"blob":"ce0e6484dc3b54049f6183c85f6a1be6f882dbb4","certificate":"certificates/best/n935.cert","committed":"2026-10-23T18:16:49Z","first_commit":"efef7d1418d0cb629debc962c077740125ba7901","n":935},
+    {"blob":"6e082bde4755b9859dfd14202ff636fb6099f7fc","certificate":"certificates/best/n998.cert","committed":"2026-10-23T22:38:09Z","first_commit":"964ee2bdf301d0c8912d956d4010f478dcbbd5ea","n":998}
+  ],
+  "source": "https://github.com/franciscouzo/square-packing"
+}
