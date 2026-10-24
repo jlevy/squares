@@ -1100,9 +1100,10 @@ contributor articles use their component sheets and the same text tokens.
   without removing or rewriting the anchors.
   The Workbench application has no footer; its stage carries the publication version.
 
-- **Homepage.** Its browser and menu title are **Overview**; its opening H1 remains
-  **The Square Packing Problem**. Two readable introductory paragraphs define the
-  problem and explain upper and lower bounds.
+- **Homepage.** Its menu label is **Overview**; its browser title and link preview are
+  the project’s name, **The Squares Project** (the owner, 2026-10-23); its opening H1
+  remains **The Square Packing Problem**. Two readable introductory paragraphs define
+  the problem and explain upper and lower bounds.
   The sections continue with Visual Atlas, News, Results, Profiles, Report a Result,
   Learn, Visuals, About the Squares Project, and More Resources.
   Learning cards preview the Papers and Tutorials catalogues.
