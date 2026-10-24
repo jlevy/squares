@@ -5,6 +5,7 @@ from __future__ import annotations
 import copy
 import gzip
 import json
+import shutil
 from fractions import Fraction
 from pathlib import Path
 from typing import Any, cast
@@ -1601,3 +1602,62 @@ def test_tree_drift_reports_goebel_s_member_only_from_23_october(
     assert ledger.main(["check", str(tmp_path)]) == 0
     assert ledger.main(["check", "--tree", str(tmp_path)]) == 1
     assert "gives no side above 1073" in capsys.readouterr().err
+
+
+#: The walks whose ``ledger.yaml`` an offline gather does not reproduce, with the bead
+#: that decides each: 14 October's read the pr574 packet's algebraic claims at a branch
+#: commit whose later revision of that file gives other relations.
+REGATHER_EXCEPTED = {"upper-bounds-20261014": "think-299t"}
+WALK_DIRECTORIES = sorted(
+    directory
+    for directory in (ledger.ROOT / "campaign/issue-intake").iterdir()
+    if (directory / "sources.yaml").is_file() and (directory / "github-issues.json").is_file()
+)
+
+
+@pytest.mark.parametrize(
+    "directory",
+    [
+        pytest.param(
+            directory,
+            id=directory.name,
+            marks=[pytest.mark.skip(reason=REGATHER_EXCEPTED[directory.name])]
+            if directory.name in REGATHER_EXCEPTED
+            else [],
+        )
+        for directory in WALK_DIRECTORIES
+    ],
+)
+def test_each_walk_s_ledger_is_its_sources_gathered_offline(
+    directory: Path, tmp_path: Path
+) -> None:
+    """``ledger.yaml`` is what ``gather --snapshot`` writes from the walk's ``sources.yaml``,
+    ``starts.yaml`` and ``github-issues.json``, so an edit to a source without a regather,
+    or to the ledger by hand, is refused (#789's review B, B7)."""
+    copy_of = tmp_path / directory.name
+    shutil.copytree(directory, copy_of)
+    ledger.gather(copy_of, snapshot=True)
+    assert (copy_of / "ledger.yaml").read_bytes() == (directory / "ledger.yaml").read_bytes()
+
+
+def test_a_source_edited_without_a_regather_is_refused(tmp_path: Path) -> None:
+    """Review B's B7 control: #763's side at 343 raised to 19, with its print, in
+    ``sources.yaml`` gathers a ledger that differs from the retained one."""
+    directory = ledger.ROOT / "campaign/issue-intake/upper-bounds-issue763-20261024"
+    copy_of = tmp_path / directory.name
+    shutil.copytree(directory, copy_of)
+    sources = yaml.safe_load((copy_of / "sources.yaml").read_text(encoding="utf-8"))
+    (claim,) = [
+        claim
+        for report in sources["reports"]
+        if report["report"] == "#763"
+        for claim in report["claims"]
+        if claim["n"] == 343
+    ]
+    claim |= {"exact": "19", "printed": "19.000000000000"}
+    (copy_of / "sources.yaml").write_text(
+        yaml.safe_dump(sources, sort_keys=False, allow_unicode=True, width=100),
+        encoding="utf-8",
+    )
+    ledger.gather(copy_of, snapshot=True)
+    assert (copy_of / "ledger.yaml").read_bytes() != (directory / "ledger.yaml").read_bytes()
