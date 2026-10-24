@@ -28960,6 +28960,10 @@ evidence:
       receipts and logs are retained since 23 October in
       packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/release/, at the
       stored digests this packet records, with exact premises receipts (EXACT_PREMISES_HOLD).
+      Since 23 October its n = 19, 20 and 26 claims are carried by
+      E-wand125-fine-net-446-n19-n20-n26-report, whose limitations state that day's complete
+      captures, whole-net controls and stage 4 review; what this entry leaves pending stands
+      for its n = 27, 28, 29 and 31 certificates, none of which was captured here.
     source_reviewed: '2026-10-08'
   - id: E-gupta-438-exact-feasibility
     claim: upper-bound
