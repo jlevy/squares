@@ -33729,14 +33729,18 @@ results:
       certified by Francisco Couzo (https://github.com/franciscouzo/square-packing), who
       claims no refinement of it.
 
-      The provenance that line defers to is the source's witness manifest: its 304 entry gives the notebook's previous source as Mykhailo
-      Polkovskyi's #593 certificate, T-186's packing, credited to Polkovskyi with
-      construction credit to Nate Chaoweeraprasit, and its seed credit as Polkovskyi's. So
-      the chain the source states is Tymchishin's notebook after Polkovskyi's packing, built
-      on Chaoweeraprasit's construction. The notebook's own source notices are not
-      published. Evan Daniel's later certificate of the same packing (T-242) calls its
-      finder unknown and its earliest public copy kozykappa's notebook; both authors are
-      asked.
+      The provenance that line defers to is the source's witness manifest: its 304 entry
+      gives the notebook's previous source and seed as Mykhailo Polkovskyi's #593
+      certificate, T-186's packing, which this record measures as Daniil Ostashev's T-175
+      packing re-solved. So the credit runs Tymchishin's notebook after Polkovskyi's packing
+      and then T-186's recorded chain: Polkovskyi after Ostashev, Couzo and PingYou Ltd.
+
+      The manifest also gives that certificate a construction credit, "Nate Chaoweeraprasit
+      (itsnaka)". That is the source's statement, and the record's measurement does not
+      support it, so the credit does not carry it; Couzo is asked why the manifest names
+      him. The notebook's own source notices are not published. Evan Daniel's later
+      certificate of the same packing (T-242) calls its finder unknown and its earliest
+      public copy kozykappa's notebook; both authors are asked.
     scope: {n_values: [304]}
     verification: V0
     confirmation: C0
@@ -33796,8 +33800,8 @@ results:
       recorded after it (T-242).
 
       Measured pose by pose (measure/identity.json in the evand-kaggle-descents-2026-10-24
-      packet; a measurement, which decides nothing): nearest centres pair it with T-186's
-      packing one to one under no symmetry, and the optimal assignment, best under the
+      packet; a measurement, which decides nothing): no symmetry pairs it one to one with
+      T-186's packing by nearest centres, and the optimal assignment, best under the
       diagonal reflection, keeps 250 of the 304 squares within a tenth of T-186's and moves
       54 beyond it, the largest 1.13, turning squares by up to 26.0 degrees. That fits the
       lineage the source's manifest states, a re-closure of the house's packing; with 54
@@ -33856,9 +33860,9 @@ results:
       At 304 credit the packing T-241 certifies, which the source calls "the public Kaggle
       packing at 17.9268989004 (finder unknown; earliest public copy: kozykappa's notebook)"
       and Francisco Couzo's index credits to Kirill Tymchishin's Kaggle notebook "CPU
-      Alternating Reclosure" v3, after Mykhailo Polkovskyi's packing and Nate
-      Chaoweeraprasit's construction, as T-241 records; measured here, the source's input is
-      that packing to 2.05e-9. Evan Daniel descended each exactly to the side stated and wrote the
+      Alternating Reclosure" v3, after Mykhailo Polkovskyi's packing, T-186's, and T-186's
+      recorded chain (Ostashev, Couzo, PingYou Ltd), as T-241 records; measured here, the
+      source's input is that packing to 2.05e-9. Evan Daniel descended each exactly to the side stated and wrote the
       certificate. The source's credits say its work was produced by Claude (Anthropic) under
       human direction.
     scope: {n_values: [268, 304]}

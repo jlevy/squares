@@ -56,7 +56,12 @@ manifest.
   `previous_reference.seed_credit` as “Mykhailo Polkovskyi (Mishapolk)”. That certificate’s
   SHA-256, `72fa0c89…`, is the one the
   [mishapolk-kkt-refinements-2026-10-14 packet](../mishapolk-kkt-refinements-2026-10-14/README.md)
-  pins: T-186’s packing, the house at 304. The manifest’s first checker is this project’s
+  pins: T-186’s packing, the house at 304. This record measures that certificate as Daniil
+  Ostashev’s T-175 packing re-solved: all 304 centres lie within 9.4e-16 of #575’s
+  ([compare_lineage-output.txt](../mishapolk-kkt-refinements-2026-10-14/review/compare_lineage-output.txt),
+  line 32). The `construction_credit` to Chaoweeraprasit is the manifest’s statement, which
+  that measurement does not support; it is quoted here and not carried into the credit.
+  The manifest’s first checker is this project’s
   `sqpack/verify.py`. The notebook’s own source notices
   (`submissions/kaggle-public-portfolio-20261022/SOURCE_NOTICES.md`) are in no commit of
   the source.
@@ -97,8 +102,8 @@ Measured by the evand-kaggle-descents packet’s
 [measure/identity.json](../evand-kaggle-descents-2026-10-24/measure/identity.json), a
 measurement for credit that decides nothing:
 
-- **Against T-186.** Nearest centres pair this packing with the house’s one to one under
-  no symmetry. The optimal assignment, best under the diagonal reflection
+- **Against T-186.** No symmetry pairs this packing one to one with the house’s by
+  nearest centres. The optimal assignment, best under the diagonal reflection
   $(x, y) \mapsto (y, x)$, keeps 250 of the 304 squares within 0.1 of the house’s and
   moves the other 54 beyond it (largest 1.13), turning squares by up to 26.0°. The 250
   within and the 54 beyond are one assignment, read from either side. That fits the
@@ -121,9 +126,11 @@ measurement above fits but does not decide.
 ## Credit and Licence
 
 Credit Kirill Tymchishin’s packing, as the source credits it, after Mykhailo Polkovskyi’s
-packing (the notebook’s previous source and seed) and Nate Chaoweeraprasit’s construction
-(the construction credit of Polkovskyi’s certificate), as the source’s manifest states the
-chain; certified by Francisco Couzo, who claims no refinement of it. Evan Daniel’s later
+packing (the notebook’s previous source and seed, as the manifest states), and after that
+packing’s own chain as the record holds it for T-186: Polkovskyi after Daniil Ostashev,
+Francisco Couzo and PingYou Ltd. Certified by Francisco Couzo, who claims no refinement
+of it. The manifest’s construction credit to Nate Chaoweeraprasit is not carried, since
+the record measures Polkovskyi’s 304 as Ostashev’s packing. Evan Daniel’s later
 certificate of the same packing says its finder is unknown and its earliest public copy is
 kozykappa’s notebook; both authors are asked.
 The repository states no licence for its data or prose. The certificate is retained by
@@ -131,16 +138,22 @@ the issue-763 packet, on the presumption of permission that Couzo’s submission
 source carries (the owner, 24 October 2026, think-cnn7; licence follow-up think-m8f4), and
 certificates are factual data under the owner decision of 2026-10-09.
 The bibliography key is **[Couzo n304 2026-10-23]**, credited *Couzo after Tymchishin,
-Polkovskyi, Chaoweeraprasit, Levy*; Levy because the manifest’s first checker is this
-project’s `sqpack/verify.py`, as for #763.
+Polkovskyi, Ostashev, Couzo, PingYou Ltd, Levy*: Tymchishin and Polkovskyi from the
+manifest, then T-186’s recorded chain exactly (*Polkovskyi after Ostashev, Couzo, PingYou
+Ltd, Levy*), so Couzo appears again as a link of that chain. Levy is also supported
+directly: the manifest’s first checker is this project’s `sqpack/verify.py`, as for #763.
 
 ## Questions for the Author
 
 Drafted in think-l49q for Francisco Couzo, on #763 or wherever the coordinator posts:
 
 1. Did Tymchishin’s notebook start from Polkovskyi’s `70a033f` packing, as your manifest’s
-   `previous_source` and `seed_credit` say, and what does Chaoweeraprasit’s construction
-   credit cover in it?
+   `previous_source` and `seed_credit` say? Why does the manifest give that certificate a
+   construction credit to Nate Chaoweeraprasit, when this record measures it as Daniil
+   Ostashev’s #575 packing re-solved (all 304 centres within 9.4e-16)? The manifest at
+   `fa6237e` also names ry-xu at 129 and Chaoweeraprasit at 176, 302 and 303 as the
+   construction credit of Polkovskyi’s certificates, where the Mishapolk packet’s lineage
+   table names other finders (review B of #792).
 2. Is Kirill Tymchishin the finder of the packing at 304, which Evan Daniel’s source calls
    of unknown finder, with kozykappa’s notebook its earliest public copy?
 

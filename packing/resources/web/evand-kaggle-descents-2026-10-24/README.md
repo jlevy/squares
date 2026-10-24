@@ -190,20 +190,25 @@ before #763, and who found the packing at 304, are the authors’ to say.
 - **304:** the packing T-241 certifies. The source says its finder is unknown and its
   earliest public copy is kozykappa’s notebook. Couzo’s index credits it to Kirill
   Tymchishin’s Kaggle notebook “CPU Alternating Reclosure” v3, and his manifest gives that
-  notebook’s previous source and seed as Mykhailo Polkovskyi’s packing, with construction
-  credit to Nate Chaoweeraprasit ([T-241’s packet](../couzo-n304-2026-10-23/README.md)).
-  A regularization leaves the packing with its finder through the result that holds it,
-  so the line names that chain. Evan Daniel descended it exactly.
+  notebook’s previous source and seed as Mykhailo Polkovskyi’s packing, T-186’s, which
+  the record measures as Daniil Ostashev’s T-175 packing re-solved
+  ([T-241’s packet](../couzo-n304-2026-10-23/README.md)). A regularization leaves the
+  packing with its finder through the result that holds it, so the line names T-241’s
+  chain: Tymchishin after Polkovskyi, then T-186’s recorded chain (Ostashev, Couzo,
+  PingYou Ltd). Evan Daniel descended it exactly.
 - **Licence and assistance:** MIT, copyright (c) 2026 Evan Daniel ([LICENSE](source/LICENSE)).
   [CREDITS.md](source/CREDITS.md) says the repository’s work was “Produced by Claude
   (Anthropic) in a single session under human direction”, and the commit carries a
   Co-Authored-By trailer naming Claude.
 
 The bibliography key is **[Daniel Kaggle descents 2026-10-24]**, credited *Daniel after
-Lavrentev, Tymchishin, Polkovskyi, Chaoweeraprasit, Levy*. Levy because the source builds
-on this project’s data: its `s268_lightning_prior.json` and `s304_pub_prior.json` take the
-store’s prior best from this project’s register and its pending issues (#375, #476, #501,
-#575, #593, #624), and the commit calls the certificates posts beyond the register.
+Lavrentev, Tymchishin, Polkovskyi, Ostashev, Couzo, PingYou Ltd, Levy*. At 268 the link is
+Lavrentev alone. The rest is the 304 chain T-241 records, and Levy enters through it:
+the manifest of T-241’s source names this project’s `sqpack/verify.py` as its first
+checker, and T-186’s recorded chain ends in Levy. At 268 the source does not state that it
+builds on this project. Its `s268_lightning_prior.json` and `s304_pub_prior.json` take the
+store’s prior best from this project’s register and pending issues (#375, #476, #501,
+#575, #593, #624), which is context, a comparison, and not the basis.
 
 ## Questions for the Author
 

@@ -23,16 +23,17 @@ reports:
     first_committed: '2026-10-23T18:59:39Z'
     measured:
       against: T-186
-      finding: nearest centres match one to one under no symmetry; an optimal assignment,
+      finding: no symmetry pairs it one to one by nearest centres; an optimal assignment,
         best under the diagonal reflection, keeps 250 of 304 squares within 0.1 and moves
         54 beyond it (largest 1.13), turning squares by up to 26.0 degrees
       source: packing/resources/web/evand-kaggle-descents-2026-10-24/measure/identity.json
     note: 'The source''s index credits the packing to Kirill Tymchishin''s Kaggle notebook
       "CPU Alternating Reclosure" v3 and claims no refinement of it; #763 does not claim the
       count. Its manifest (certificates/best/manifest.json, witnesses/304) gives the notebook''s
-      previous source as Mykhailo Polkovskyi''s 70a033f n304.cert (#593, T-186''s packing),
-      credited to Polkovskyi with construction credit to Nate Chaoweeraprasit, and the seed
-      credit as Polkovskyi''s.'
+      previous source and seed as Mykhailo Polkovskyi''s 70a033f n304.cert (#593), T-186''s
+      packing, which this record measures as Daniil Ostashev''s T-175 packing re-solved; it
+      also gives that certificate a construction credit to Nate Chaoweeraprasit, which that
+      measurement does not support.'
   note: A publication in a watched repository with no issue (the owner, 2026-10-14), dated
     by the push that made it public, 6b7391d..964ee2b at 2026-10-23T23:38:42Z in GitHub's
     activity log; committed at 18:59:39Z.

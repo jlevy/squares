@@ -3861,7 +3861,7 @@ sources:
     venue: GitHub
     dated: '2026-10-23'
     lineage: builds-on-project
-    credit: Couzo after Tymchishin, Polkovskyi, Chaoweeraprasit, Levy
+    credit: Couzo after Tymchishin, Polkovskyi, Ostashev, Couzo, PingYou Ltd, Levy
     short_credit: Couzo after Tymchishin et al.
     note: >-
       certificates/best/n304.cert at franciscouzo/square-packing@fa6237e288cf3fc53b53fc43438c91f3f59c40e9,
@@ -3869,10 +3869,12 @@ sources:
       which issue 763 does not claim: Francisco Couzo's exact certificate, s(304) <=
       17.926898903393 rounded up, of the packing his index credits to Kirill Tymchishin's
       Kaggle notebook "CPU Alternating Reclosure" v3, claiming no refinement of it. The
-      source's manifest gives the notebook's previous source as Mykhailo Polkovskyi's
-      70a033f certificate (#593, T-186's packing), with seed credit to Polkovskyi and
-      construction credit to Nate Chaoweeraprasit; its first checker is this project's
-      sqpack/verify.py. Retained byte-identical by the couzo-issue763-2026-10-23 packet and
+      source's manifest gives the notebook's previous source and seed as Mykhailo
+      Polkovskyi's 70a033f certificate (#593), T-186's packing, which this record measures as
+      Daniil Ostashev's T-175 packing re-solved, so the chain after Polkovskyi is T-186's as
+      recorded. The manifest's construction credit to Nate Chaoweeraprasit is quoted in the
+      packet and not carried into the credit, since that measurement does not support it.
+      Its first checker is this project's sqpack/verify.py. Retained byte-identical by the couzo-issue763-2026-10-23 packet and
       pinned against it in web/couzo-n304-2026-10-23/. Upper bound only; no optimality claim.
   - key: '[Daniel Kaggle descents 2026-10-24]'
     authors: [Daniel]
@@ -3880,7 +3882,7 @@ sources:
     venue: GitHub
     dated: '2026-10-24'
     lineage: builds-on-project
-    credit: Daniel after Lavrentev, Tymchishin, Polkovskyi, Chaoweeraprasit, Levy
+    credit: Daniel after Lavrentev, Tymchishin, Polkovskyi, Ostashev, Couzo, PingYou Ltd, Levy
     short_credit: Daniel after Lavrentev et al.
     note: >-
       Two complete exact certificates at evand/square-packing@8a8879a2972c32cbd2d906049228cc9f0762b02a,
@@ -3888,10 +3890,11 @@ sources:
       the exact descent of Vladislav Lavrentev's public Kaggle packing (lightningv08), and
       s(304) <= 1792689890035674158972360842897/10^29, the exact descent of a public Kaggle
       packing whose finder the source does not know, which Francisco Couzo's fa6237e
-      certificate credits to Kirill Tymchishin's notebook after Mykhailo Polkovskyi's
-      packing, built on Nate Chaoweeraprasit's construction. The source did not post them,
-      since issue 763 already held the counts; its prior-best files read this project's
-      register and pending issues. A third, of Chris Deotte's packing at 303, is above #763's and
+      certificate (T-241) credits to Kirill Tymchishin's notebook after Mykhailo Polkovskyi's
+      packing, T-186's, whose recorded chain the line carries. The source did not post them,
+      since issue 763 already held the counts. Levy enters through 304, T-241's chain (the
+      manifest's first checker is this project's sqpack/verify.py); at 268 the source does
+      not state it. A third, of Chris Deotte's packing at 303, is above #763's and
       retained as credit evidence only. MIT-licensed; Claude assistance disclosed. The KKT
       statements are the author's; no local or global optimality claim. Retained in
       web/evand-kaggle-descents-2026-10-24/.

@@ -67,6 +67,7 @@ from devtools.retained_data import (
     DATA_SUFFIXES,
     GZIP_SUFFIX,
     LINE_THRESHOLD,
+    MAX_DECOMPRESSED,
     ORIGINAL_GZIP_HEADING,
     candidates,
     check_packet,
@@ -322,13 +323,18 @@ def _original_gzip_twin(twin: str, root: Path) -> bool:
     )
 
 
-def twin_bytes(twin: str, root: Path) -> bytes:
+def twin_bytes(twin: str, root: Path, *, limit: int = MAX_DECOMPRESSED) -> bytes:
     """The upstream bytes of the retained file ``twin``: as stored for an original gzip,
-    and otherwise plain or decompressed from ``X.gz`` (`read_retained_bytes`)."""
+    and otherwise plain or decompressed from ``X.gz`` (`read_retained_bytes`), refused past
+    ``limit`` bytes. A reader with a tighter bound passes it, as
+    `upper_bound_reports._upstream` passes its ``MAX_SOURCE_BYTES``."""
     path = root / twin
     if _original_gzip_twin(twin, root):
-        return read_original_gzip_bytes(path)
-    return read_retained_bytes(path)
+        data = read_original_gzip_bytes(path)
+        if len(data) > limit:
+            raise ValueError(f"{path} exceeds {limit} bytes")
+        return data
+    return read_retained_bytes(path, limit=limit)
 
 
 def load_declaration(packet: Path) -> Declaration:

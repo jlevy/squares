@@ -450,8 +450,11 @@ the inputs and the comparison:
   pull request that made it, or the update comment or commit that added it later.
   A certificate published in a watched repository with no issue is a report from its
   first commit (the owner, 2026-10-14), dated by the push that made that commit public
-  where the push came later (`devtools.beyond_horizon_replay.PUSHED_LATER`, from
-  GitHub’s activity log; the ledger keeps the commit time as `first_committed`).
+  where the push came later.
+  GitHub’s activity log for the repository is the evidence; a ledger gives the push time
+  as `reported_at` and keeps the commit time as `first_committed`, and the
+  beyond-horizon replay keeps the pushes its walks read in
+  `devtools.beyond_horizon_replay.PUSHED_LATER`.
 - **The comparison** reads each printed side as the span its rounding allows (`up`,
   `nearest`, `unstated`, `cut` or `binary64`), or as its exact side where a lane or the
   certificate gives one.

@@ -119,6 +119,20 @@ def test_an_original_gzip_twin_is_read_as_custody_reads_it() -> None:
         reports._upstream(source, {GZ_PATH: wrong}, GZ_PATH)  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
 
 
+def test_a_twin_past_the_source_bound_is_refused(monkeypatch: pytest.MonkeyPatch) -> None:
+    """A twin is read within the bound `_read` applies to a retained file,
+    ``MAX_SOURCE_BYTES``, not the retained-data default (review B2 of #792)."""
+    packet = reports.packet_path(COUZO)
+    source = reports.REPO / reports.acquisition(packet)["archived_path"]
+    twins = reports._twins(reports.acquisition(packet))  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+    size = len((reports.packet_path(COUZO_763) / "source" / CERT).read_bytes())
+    monkeypatch.setattr(reports, "MAX_SOURCE_BYTES", size - 1)
+    with pytest.raises(reports.ReportError, match="exceeds"):
+        reports._upstream(source, twins, CERT)  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+    monkeypatch.setattr(reports, "MAX_SOURCE_BYTES", size)
+    assert hashlib.sha256(reports._upstream(source, twins, CERT)).hexdigest() == DIGEST  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+
+
 def test_a_changed_copy_in_the_issue_763_packet_fails_custody(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
