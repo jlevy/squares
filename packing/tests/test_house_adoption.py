@@ -2162,6 +2162,25 @@ def _fine_net_lower_projection(
 #: October 2026 (#706), so none is pending now.
 LATER_PENDING_REPORTS: dict[tuple[int, str], tuple[str, str, str]] = {}
 
+#: Evidence a change after an adopted count's last pass cites in its case record, keyed by
+#: the count and the result that pass adopted. A citation writes none of the adoption
+#: writer's lanes, so it is checked present once and projected out, and once a later pass
+#: adopts at the count the key no longer matches and that replay reads it as prior state.
+#: Review A of pull request 781 (think-ist2) cites the replay of Kevin Fang's 18 pieces
+#: (E-fang-excess-pieces-exact-replay) at 241 and 273, beside the sibling replay of his
+#: inventory that those records already cite, so that a case record cites it.
+LATER_CITATIONS: dict[tuple[int, str], tuple[str, ...]] = {
+    (241, "T-182"): ("E-fang-excess-pieces-exact-replay",),
+    (273, "T-174"): ("E-fang-excess-pieces-exact-replay",),
+}
+
+
+def _later_citation_projection(key: tuple[int, str], held: dict[str, Any]) -> None:
+    """Check each later citation appears once in the record's evidence, then drop it."""
+    for evidence in LATER_CITATIONS[key]:
+        assert held["evidence"].count(evidence) == 1, f"n={key[0]}: {evidence} cited once"
+        held["evidence"].remove(evidence)
+
 
 def _later_pending_projection(
     key: tuple[int, str], held: dict[str, Any], committed: str
@@ -2198,7 +2217,8 @@ def test_the_writer_rebuilds_every_adopted_record_from_its_prior_state(
     `source_reviewed` no earlier. The later fine-net lower adoptions, n108's of 18 October
     and n68's and n84's of 19 October, are checked explicitly and projected out before
     this historical upper-layer comparison, as is a registration pending adoption entered
-    after the count's last pass (`LATER_PENDING_REPORTS`).
+    after the count's last pass (`LATER_PENDING_REPORTS`) and a citation added after it
+    (`LATER_CITATIONS`).
     """
     assert [move.n for move in replayed] == sorted(houses.ADOPTED)
     body_mismatches = []
@@ -2214,6 +2234,8 @@ def test_the_writer_rebuilds_every_adopted_record_from_its_prior_state(
         held, wrote = _front(committed), _front(written)
         if (move.n, move.house.result) in LATER_PENDING_REPORTS:
             committed = _later_pending_projection((move.n, move.house.result), held, committed)
+        if (move.n, move.house.result) in LATER_CITATIONS:
+            _later_citation_projection((move.n, move.house.result), held)
         historical_body = _body(committed)
         if move.n == 108:
             historical_body = _n108_later_lower_projection(held, wrote, historical_body)

@@ -799,7 +799,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "67f5799ccf8ee06d180e3367b32c47804c16ae45"
+DATA_REVISION = "2cded21a28e80cb44744e08f60cc831a2c8dae8f"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -3220,6 +3220,56 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "except one span's style attribute in the explainer's HTML, whose place varies "
             "between renders (the record below). No PDF was printed; each prints from that "
             "HTML. Retain v0.4.19, v0.1.10, v0.1.3 and v0.2.6."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/devtools/news_highlights.py",
+            "packing/devtools/overview_sections.py",
+            "packing/devtools/probes/check_site_rendering/report.js",
+            "packing/devtools/render_changelog.py",
+            "packing/devtools/render_overview.py",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "#736, the home page's News box filter and Recently Added (think-aqv8, "
+            "think-rqen), against main cddc5843f (#733): rendered at link revision "
+            "6610be93 into empty site directories, twice from this tree at 031619415 and "
+            "twice from main's (68 files each). render_n11_lower_bounds_explainer, "
+            "render_n11_optimality_review, render_n11_threshold_bound_review and "
+            "render_packing_methods write every file byte-identical across the two trees; "
+            "the explainer's HTML differs between two renders of main's own tree in one "
+            "span's attributes, and this tree's second render equals main's second in all "
+            "68 files. Re-measured once from each tree after merging main bfc04b659 "
+            "(#735), after main e929137a8 (#725) at its link revision 40a71b16, and after "
+            "review A's fixes and main 0b2c8293c (#406) at f73d8d4a8: the same, the "
+            "explainer's one span aside. Re-measured after review A's second round and "
+            "main 6c70d843f (#731), both trees at link revision 01e2ca3e: all 68 files "
+            "byte-identical. After main 31584003e (#737) at link revision 947d2863, "
+            "after main 44df28b07 (#743) at d449eacc, after main da117ad0b (#742 to #764), "
+            "when the branch was taken over (think-xae5), at e1f1adc4, and last after main "
+            "14b14f2d1 (#765, #767, #768) at 95ac0de5: rendered from the merge and from the "
+            "merge with these five paths at main's, all 69 files byte-identical each time. "
+            "Last after main e5c1c64e3 (#745 to #771) and review B's fixes (B1, B2, B5 in "
+            "news_highlights.py, overview_sections.py and render_overview.py), at link "
+            "revision c0ce843f: rendered from the tree and from the tree with these five "
+            "paths at main's, all 69 files byte-identical. No PDF was printed; each prints "
+            "from that HTML. Retain main's v0.4.25, v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
     ReleaseNoPublicChange(
@@ -8422,6 +8472,67 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "revision e5c1c64e: each time twice from this tree and once with that main's "
             "result-requests.yaml swapped in, all 43 files byte-identical across the "
             "three. No PDF was printed; it prints from that HTML. Retain v0.2.7."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/devtools/check_results.py",
+            "packing/devtools/site_resources.py",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The retention of Kevin Fang's note v0.9 and Lean proof (think-494l): T-163 "
+            "from V2 to V3 with two new evidence entries, its claim, notes, composition, "
+            "next steps and unfinished confirmations rewritten, two coverage sources and "
+            "issue 603's requests entry, against main af9c9e850 (#745): rendered at link "
+            "revision 46effd32 into empty site directories, twice from this tree at "
+            "46effd32 and twice from the same tree with main's register, requests record "
+            "and coverage record swapped in (69 files each), "
+            "render_n11_lower_bounds_explainer, render_n11_optimality_review, "
+            "render_n11_threshold_bound_review and render_packing_methods write every file "
+            "byte-identical across all four. Measured once more after merging main "
+            "2c58b6373 (#750), at link revision 2d39f5ca with that main's three files "
+            "swapped in: the same outcome, and the register stays at 238 results. After "
+            "the two resource cards (site_resources.py), measured again at link revision "
+            "2821d8a6 with that main's four files swapped in: the same outcome. Measured "
+            "once more after merging main c5697c2f2 (#757), at link revision 0ffac35f "
+            "with that main's four files swapped in: the same outcome, the register at 239 "
+            "results. Measured once more after merging main 5f8f005a3 (#766), at link "
+            "revision bba0bfff with that main's four files swapped in: the same outcome. "
+            "And after merging main 34eb8bb75 (#769), at link revision d63381d5, and main "
+            "11d0ab06b (#770), at link revision 8753d8dc, and main e5c1c64e3 (#756), at "
+            "link revision b133025b, each with that main's four files swapped in: the same "
+            "outcome. After review A's fixes (a third evidence entry, the replay of the "
+            "note's 18 pieces, and T-163's claim, notes, next steps and composition) and "
+            "the merge of main 6808d293a (#787), at link revision 98ce1995: twice from this "
+            "tree and once with that main's four files swapped in, 69 files each, all "
+            "byte-identical across the three; the explainer's math was prepared by the "
+            "host's Chrome for Testing 153 headless shell through SQPACK_CHROMIUM, the same "
+            "browser for every render. Main b2ea7b09c (#788), merged after, changes none "
+            "of the four files, so that measurement stands for it. After review B's fixes, "
+            "which add check_results.py (verification_level, a refactor of one atom), and "
+            "the merge of main f354a34f5 (#736), at link revision 3d96fba0: twice from this "
+            "tree and once with that main's five files swapped in, 69 files each, all "
+            "byte-identical across the three, by the same browser. No PDF was printed; each "
+            "prints from that HTML. Every paper keeps its version."
         ),
     ),
 )

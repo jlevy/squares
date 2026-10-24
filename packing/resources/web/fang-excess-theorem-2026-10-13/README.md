@@ -179,6 +179,22 @@ base pieces at a larger side, and 932, the first count at which the inventory’
 certificate is the smallest report and the first instance of Lemma 3 in the sample: R
 glued onto the 211 piece.
 
+### The Theorem’s 18 Pieces
+
+The [mathematical review’s](review/README.md) exact checker, `rectangle_check.py`, which
+reads a rectangular container in both dimensions, was run again on 24 October 2026 on the
+18 pieces `theorem/PIECES.md` gives the role `theorem`: R and R′ from `source/rectangles/`,
+Daniel’s certificates of 110, 132, 156, 182, 211, 241 and 273 from the Daniel packet,
+`n0308` and `n0343` from the two-wedge packet, and `n0381` to `n0651` from the
+direct-certificates packet. All 18 are strict-valid, every squeeze above $d_0 = 1/10000$,
+the least $0.000690144837$ for `n0308`, and each output equals the review’s retained one
+apart from CPU times; 4.9 CPU seconds.
+[receipts/pieces-exact-check.log](receipts/pieces-exact-check.log) is the
+`devtools.replay_receipt` receipt, and `tests/test_fang_excess_theorem.py` holds it to
+`PIECES.md`. The record’s `E-fang-excess-pieces-exact-replay` cites it, and it discharges
+the finite premise of the published note’s proof
+([`E-fang-excess-note-proof`](../fang-excess-note-2026-10-19/README.md)).
+
 ### What Was Not Run
 
 - **The other 70 inventory certificates**, 343 to 4038 squares: 99.2 CPU-hours with this
@@ -191,10 +207,11 @@ glued onto the 211 piece.
   so is a receipt that keeps verdicts and digests in place of every input.
   The certificates are pinned here, so that slice begins by retaining them, in a
   hosted-data release or its own packet, from the digests the frozen list carries.
-- **The six rectangles in both dimensions:** no first-party checker reads an `n W H`
-  container, and Daniel’s checker reads only the width, so it checks the square of side
-  $W$. A rectangle route is a W7 slice, priced at under a minute for all six once
-  written.
+- **The six rectangles in both dimensions, by a maintained route:** neither maintained
+  exact route reads an `n W H` container, and Daniel’s checker reads only the width, so
+  it checks the square of side $W$. The mathematical review’s own checker decides all six
+  in both dimensions ([above](#the-theorems-18-pieces)); a maintained rectangle route is
+  a W7 slice, priced at under a minute for all six once written.
 - **Lemma 3 and the induction:** the mathematical review, from the retained README and
   `tools/glue.py`, runs in its own lane.
 
@@ -410,9 +427,11 @@ which `think-7bw3` retains.
 ## What Is Not Established
 
 The certificates establish finite upper bounds at side $n - 1/20000$ and nothing more.
-The theorems for every $n \ge 15$ rest on Lemma 3 and an induction stated in a note that
-is not public, and no review of them has been made here.
-The rectangles are checked here by their headers only.
+The theorems for every $n \ge 15$ rest on Lemma 3 and an induction, which the
+[mathematical review](../../../../docs/project/reviews/review-2026-10-14-fang-excess-theorem-and-direct-certificates.md)
+re-derived on 14 October and the note, public since 18 October, states with its proofs
+([note packet](../fang-excess-note-2026-10-19/README.md)); no machine replays them.
+The rectangles are decided by the review’s checker, not by a maintained route.
 No exact form, local minimality or optimality is claimed by the source or established
 here. `best.tsv` is, in the source’s words, a lower-bound inventory of these pieces, not
 a claim that no other packing does better.

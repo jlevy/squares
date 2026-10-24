@@ -17,6 +17,7 @@ import json
 import math
 import re
 import textwrap
+from collections import Counter
 from collections.abc import Collection, Iterable, Mapping, Sequence
 from datetime import date, timedelta
 from functools import cache
@@ -59,7 +60,15 @@ from devtools.render_overview import (
     paper_path,
 )
 from devtools.render_overview import PAPERS as PAPER_RECORDS
-from devtools.render_recent_results import REPORTED_MARK, SUPERSEDED, listed, superseded
+from devtools.render_recent_results import (
+    REPORTED_MARK,
+    SUPERSEDED,
+    Records,
+    lane_holders,
+    listed,
+    load_records,
+    superseded,
+)
 from devtools.repo_links import branch_file
 from devtools.result_status import CONFIRMED, STATUSES, recent_contributions_by_case
 from devtools.site_icons import account_icon, github_reference_icon
@@ -1258,6 +1267,460 @@ def day_label(day: date) -> str:
     return f"{day.day} {day:%B %Y}"
 
 
+# ---------- Recently Added: the home page's last seven days of arrivals ----------
+#
+# The owner, 22 October 2026: "It should be clear if you come to the site and see all
+# the things that have recently merged now." The home page's Recently Added lists what
+# reached `main`, and with it the site, over the newest arrival day and the seven before
+# it (`arrival_reference`, `recent_days`), one disclosure a day, newest first: every
+# result at any significance, by its `landed` (`added_entry`), linked to its row in All
+# Results; each count whose house best packing changed, by the day `main` first held its
+# current house (`house_moves`); and each source's dated beyond-horizon rows, by the day
+# `main` first held them (`beyond_rows`). All three are merge days stamped into the
+# record (`devtools.stamp_landed`, `frontier/landings.yaml`; #736's review A, finding
+# A2), so nothing here reads Git (OR-18) and one window bounds them all (finding A3).
+# The helpers below are the ones the results page's retired day and week blocks shared
+# with this section; #743 removed the rest with those blocks.
+
+#: The longest list of cases an entry writes whole (`added_cases`). A longer one, T-124's
+#: 178 counts among them, is written as how many and its first and last.
+ADDED_CASES = 40
+#: The anchor All Results' table opens on, where a filter link lands (`added_link`).
+ALL_RESULTS = "all-results"
+#: The lowest S rung an entry's score is set in the significance ink for: S4 and S5
+#: (`added_entry`); S3 and below stay plain.
+INKED_SIGNIFICANCE = 4
+
+
+class AddedDay(NamedTuple):
+    """One day results reached the site, and every result that arrived that day, the
+    most significant first and then by id (`added_order`)."""
+
+    day: date
+    results: tuple[Result, ...]
+
+
+def added_order(result: Result) -> tuple[int, str]:
+    """A day's results in the order its block lists them: the highest S rung first, then
+    by id."""
+    return (-significance(result), result.id)
+
+
+def added_days(results: Iterable[Result], since: date) -> list[AddedDay]:
+    """The days from `since` on that any result reached the site, newest first, each with
+    every result that arrived that day (`landed_day`) at every significance. A day
+    nothing arrived on has no block."""
+    taken: dict[date, list[Result]] = {}
+    for result in results:
+        day = landed_day(result)
+        if day >= since:
+            taken.setdefault(day, []).append(result)
+    return [
+        AddedDay(day, tuple(sorted(taken[day], key=added_order)))
+        for day in sorted(taken, reverse=True)
+    ]
+
+
+def span_label(first: date, last: date) -> str:
+    """A run of days as a summary names it, joined by an en dash, closed up within a
+    month and spaced across two: `5-11 October 2026`, `28 September - 4 October 2026`
+    (each `-` an en dash on the page), across a new year both years, and one day alone,
+    `5 October 2026`."""
+    if first == last:
+        return day_label(first)
+    if first.year != last.year:
+        return f"{first.day} {first:%B %Y} {EN_DASH} {last.day} {last:%B %Y}"
+    if first.month != last.month:
+        return f"{first.day} {first:%B} {EN_DASH} {last.day} {last:%B %Y}"
+    return f"{first.day}{EN_DASH}{last.day} {last:%B %Y}"
+
+
+def counted(count: int) -> str:
+    """A block's count as its summary ends: `1 result`, `14 results`, `no results`."""
+    return f"{count} result{'' if count == 1 else 's'}" if count else "no results"
+
+
+def tallied_summary(label: str, tally: Sequence[str]) -> str:
+    """A day's summary with its tally (`recent_tally`), each part a count of its own
+    (`.site-rollup-count`): a summary that wraps breaks between parts, never inside
+    one."""
+    counts = " ".join(f'<span class="site-rollup-count">· {part}</span>' for part in tally)
+    return f"<summary><span>{_esc(label)} {counts}</span></summary>"
+
+
+def credit_finder(credit: str) -> str:
+    """Whose a result is, as a credit line names it: the finder, before any "after …",
+    which names the work it rests on (`credit_cell` sets the two apart the same way)."""
+    return credit.partition(" after ")[0]
+
+
+def finder_projects(results: Iterable[Result]) -> tuple[str, ...]:
+    """The listed projects the record attributes any of `results` to (`result_projects`),
+    by address, the one holding most of them first and the list's order breaking a tie."""
+    held = Counter(slug for result in results for slug in result_projects(result))
+    addresses = {project_slug(url): url for url in project_urls()}
+    # `sorted` is stable, so projects holding as many stay in the list's order.
+    ranked = sorted((slug for slug in addresses if slug in held), key=lambda slug: -held[slug])
+    return tuple(addresses[slug] for slug in ranked)
+
+
+def external_link(url: str, text: str) -> str:
+    """A link to a place off the site, opened in a new tab as a project's card opens
+    it (`link_card`). `text` is markup already escaped."""
+    return f'<a href="{_esc(url)}" target="_blank" rel="noopener noreferrer">{text}</a>'
+
+
+def credit_link(finder: str, projects: Sequence[str], *, results: Sequence[Result] = ()) -> str:
+    """Prefer the reviewed finder joins, otherwise an exact identity or cited project."""
+    if results:
+        reviewed = {
+            credit_finder(result.credit_html or _esc(result.credit)) for result in results
+        }
+        # Identical words do not authorize choosing between different reviewed joins.
+        if len(reviewed) != 1:
+            return _esc(finder)
+        linked = next(iter(reviewed))
+        if '<a href="profiles/' in linked:
+            return f"<span data-contributor-plain>{linked}</span>"
+        # A source-addressed unresolved credit stays unresolved in its summary too.
+        name = _esc(finder)
+        return external_link(projects[0], name) if projects else name
+    linked = project_author(finder).removeprefix("By ")
+    if '<a href="profiles/' in linked:
+        return f"<span data-contributor-plain>{linked}</span>"
+    name = _esc(finder)
+    return external_link(projects[0], name) if projects else name
+
+
+def added_link(query: str) -> str:
+    """All Results opened by a filter link (`overview/table.js`, `presetFilters`), landing
+    on its table: `results.html?added=2026-10-23#all-results`."""
+    return f"{RESULTS_PAGE}?{query}#{ALL_RESULTS}"
+
+
+def added_day_link(day: date, count: int) -> str:
+    """A day's link to All Results on that day alone (`?added=`), closing its block."""
+    query = f"added={day.isoformat()}"
+    return (
+        f'<p><a href="{_esc(added_link(query))}">'
+        f"Show {'it' if count == 1 else f'these {count}'} in the table</a></p>"
+    )
+
+
+def added_cases(result: Result) -> str:
+    """An entry's cases: the row's own list (`Result.scope`) after `n =`, or, where that
+    runs past `ADDED_CASES` characters, how many and the first and last, `178 counts
+    from 1 to 324`."""
+    if len(result.scope) <= ADDED_CASES:
+        return f"n = {result.scope}"
+    scope = result.record["scope"]
+    values = scope.get("n_values") or range(scope["n_min"], scope["n_max"] + 1)
+    return f"{len(values)} counts from {min(values)} to {max(values)}"
+
+
+def added_entry(result: Result) -> str:
+    """One result in a day's block: its id, linking to its row in All Results
+    (`result_url`); its headline as plain text (`plain_text`), the math as written; then,
+    on a quieter line, its cases (`added_cases`), its V and C rungs and its S score, and
+    its credit
+    (`credit_link`). An S4 or S5 score is set in the significance ink. A result since
+    superseded (`is_superseded`) is muted, its id titled so, and its quiet line ends
+    "superseded", where touch screens and screen readers see it too; its links keep their
+    colour (#514's review A, finding A4)."""
+    record = result.record
+    level = significance(result)
+    score = f"<b>S{level}</b>" if level >= INKED_SIGNIFICANCE else f"S{level}"
+    superseded = is_superseded(result)
+    mark = ' class="site-rollup-superseded"' if superseded else ""
+    title = ' title="Superseded"' if superseded else ""
+    headline = link_prose(html.escape(plain_text(result.summary), quote=False))
+    rungs = f"{_esc(record['verification'])} {_esc(record['confirmation'])} {score}"
+    who = credit_link(
+        credit_finder(result.credit), finder_projects((result,)), results=(result,)
+    )
+    note = " · superseded" if superseded else ""
+    return (
+        f'<li{mark}><a href="{_esc(result_url(result.id))}"{title}>{_esc(result.id)}</a> '
+        f"{headline}<small>{_esc(added_cases(result))} · {rungs} · {who}{note}</small></li>"
+    )
+
+
+#: How many of the newest days start open on the home page: the newest alone, so the
+#: section stays a few lines long.
+RECENT_OPEN = 1
+#: The day each house best packing and each source's rows reached `main`, as `landed` is
+#: for a register entry (`devtools.stamp_landed`).
+LANDINGS = FRONTIER / "landings.yaml"
+#: A beyond-horizon row's claim as a line counts it.
+_CLAIM_NOUNS = {
+    "upper-bound": "upper bound",
+    "lower-bound": "lower bound",
+    "exact-value": "exact value",
+}
+
+
+class HouseMove(NamedTuple):
+    """The counts whose house best packing became one result on one day: the day `main`
+    first held it, the result, and those counts."""
+
+    day: date
+    result: str
+    counts: tuple[int, ...]
+
+
+class BeyondRows(NamedTuple):
+    """One source's dated rows beyond the case corpus: the day `main` first held them,
+    the source's entry, and its rows."""
+
+    day: date
+    source: Mapping[str, Any]
+    rows: tuple[Mapping[str, Any], ...]
+
+
+class RecentDay(NamedTuple):
+    """One day of Recently Added: the results, house best packings and rows that
+    reached `main` that day."""
+
+    day: date
+    results: tuple[Result, ...]
+    houses: tuple[HouseMove, ...]
+    rows: tuple[BeyondRows, ...]
+
+
+@cache
+def _coverage() -> Mapping[str, Any]:
+    return safe_load(SOURCE_COVERAGE.read_text(encoding="utf-8"))
+
+
+@cache
+def _landings() -> Mapping[str, Any]:
+    return safe_load(LANDINGS.read_text(encoding="utf-8"))
+
+
+def house_landings() -> dict[int, tuple[str, date]]:
+    """Each adopted count's house result and the day `main` first held it."""
+    return {
+        int(entry["n"]): (str(entry["result"]), date.fromisoformat(str(entry["landed"])))
+        for entry in _landings()["houses"]
+    }
+
+
+def source_landings() -> dict[str, date]:
+    """Each row source and the day `main` first held its rows."""
+    return {
+        str(entry["id"]): date.fromisoformat(str(entry["landed"]))
+        for entry in _landings()["sources"]
+    }
+
+
+def arrival_reference(overview: Overview) -> date:
+    """The newest day anything reached `main` by the record: a result's `landed`, a house
+    best packing's or a source's rows' landing. It is the newest merge the build's
+    records were stamped by, never the clock's or Git's, so two renders of one tree are
+    the same bytes. Recently Added's window ends on it."""
+    return max(
+        added_reference(overview),
+        *(day for _, day in house_landings().values()),
+        *source_landings().values(),
+    )
+
+
+@cache
+def _house_records() -> Records:
+    """The register and the case records, read once, for `house_moves` to ask which
+    results a count's verified upper bound rests on."""
+    return load_records()
+
+
+def house_moves(since: date, until: date) -> list[HouseMove]:
+    """The counts whose house best packing reached `main` from `since` to `until`, newest
+    first and then by result: each under the result that houses it now, on the day `main`
+    first held that house (`landings.yaml`). A count whose house changed again is listed
+    on the later day alone.
+
+    A landing whose result no longer holds the count's verified upper bound is left out,
+    as a count with no landing is: `main` holds one when a pull request moved a house
+    without stamping it. The landing test turns CI red, and the page never says a
+    superseded result "is now the house best packing" (#736's review B, finding B2)."""
+    records = _house_records()
+    moved: dict[tuple[date, str], list[int]] = {}
+    for n, (result, day) in house_landings().items():
+        if (
+            since <= day <= until
+            and n in records.cases
+            and result in lane_holders(n, records, "upper", ["verified"])
+        ):
+            moved.setdefault((day, result), []).append(n)
+    ordered = sorted(moved, key=lambda key: (-key[0].toordinal(), int(key[1].split("-")[1])))
+    return [
+        HouseMove(day, result, tuple(sorted(moved[day, result]))) for day, result in ordered
+    ]
+
+
+def beyond_rows(since: date, until: date) -> list[BeyondRows]:
+    """The dated beyond-horizon rows that reached `main` from `since` to `until`, one
+    entry a source, newest first, then the source with more rows first, then by id. A row
+    carries no date of its own; its source's landing is the day `main` first held its
+    rows, which so far have always come in one merge. A source with no landing yet is
+    left out, as `house_moves` leaves out a count with none."""
+    coverage = _coverage()
+    landed = source_landings()
+    held: dict[str, list[Mapping[str, Any]]] = {}
+    for row in coverage["beyond_horizon_claims"]:
+        held.setdefault(str(row["source_id"]), []).append(row)
+    # A source the merge step has not stamped yet is left out, as an unstamped house is:
+    # `test_every_house_and_row_source_carries_the_day_it_landed` turns CI red, and a
+    # render never fails on it (#736's review A, finding A10).
+    found = [
+        BeyondRows(landed[source["id"]], source, tuple(held[source["id"]]))
+        for source in coverage["sources"]
+        if source["id"] in held
+        and source["id"] in landed
+        and since <= landed[source["id"]] <= until
+    ]
+    return sorted(
+        found, key=lambda found: (-found.day.toordinal(), -len(found.rows), found.source["id"])
+    )
+
+
+def recent_days(overview: Overview, *, days: int = ADDED_DAYS) -> list[RecentDay]:
+    """Every day from `days` before the newest arrival (`arrival_reference`) to it on
+    which a result, a house best packing or rows reached `main`, newest first."""
+    until = arrival_reference(overview)
+    since = until - timedelta(days=days)
+    results = {added.day: added.results for added in added_days(overview.results, since)}
+    houses: dict[date, list[HouseMove]] = {}
+    for move in house_moves(since, until):
+        houses.setdefault(move.day, []).append(move)
+    rows: dict[date, list[BeyondRows]] = {}
+    for found in beyond_rows(since, until):
+        rows.setdefault(found.day, []).append(found)
+    return [
+        RecentDay(
+            day, results.get(day, ()), tuple(houses.get(day, ())), tuple(rows.get(day, ()))
+        )
+        for day in sorted({*results, *houses, *rows}, reverse=True)
+    ]
+
+
+def recent_span(overview: Overview, *, days: int = ADDED_DAYS) -> str:
+    """The days Recently Added shows, as its introduction names them: its oldest shown day
+    to its newest (`span_label`), so no block can sit outside the span."""
+    shown = [recent.day for recent in recent_days(overview, days=days)]
+    if not shown:
+        return day_label(arrival_reference(overview))
+    return span_label(min(shown), max(shown))
+
+
+def corpus_end() -> int:
+    """The largest count the case corpus holds, past which a row is beyond the horizon."""
+    return int(_coverage()["case_corpus"]["n_max"])
+
+
+def recent_tally(recent: RecentDay) -> tuple[str, ...]:
+    """A day's summary counts: its results, its counts with a new house best packing and
+    its rows beyond the corpus, each where it has any: `5 results`, `4 house best
+    packings`, `425 bounds beyond 324`. A summary is set in capitals, so no count names
+    a variable."""
+    moved = sum(len(move.counts) for move in recent.houses)
+    rows = sum(len(found.rows) for found in recent.rows)
+    parts = (
+        counted(len(recent.results)) if recent.results else "",
+        f"{moved} house best packing{'' if moved == 1 else 's'}" if moved else "",
+        f"{rows} bound{'' if rows == 1 else 's'} beyond {corpus_end()}" if rows else "",
+    )
+    return tuple(part for part in parts if part)
+
+
+def house_entry(move: HouseMove) -> str:
+    """A day's house move: the result, linking to its row on the results page, and the
+    counts whose house best packing it now is, each linking to its case."""
+    from devtools.render_case_pages import case_link  # noqa: PLC0415
+
+    counts = listed([case_link(n, str(n)) for n in move.counts])
+    return (
+        f'<li><a href="{_esc(result_url(move.result))}">{_esc(move.result)}</a> '
+        f"is now the house best packing at {counts}</li>"
+    )
+
+
+def claims_phrase(rows: Sequence[Mapping[str, Any]]) -> str:
+    """What a source's rows claim, counted by claim: `111 upper bounds`."""
+    held = Counter(str(row["claim"]) for row in rows)
+    return listed(
+        [
+            f"{held[claim]} {noun}{'' if held[claim] == 1 else 's'}"
+            for claim, noun in _CLAIM_NOUNS.items()
+            if held[claim]
+        ]
+    )
+
+
+def source_readme(source: Mapping[str, Any]) -> str:
+    """Where a reader sees a source's rows: its packet's README on GitHub, the first
+    README the register says represents it, or else its packet's directory."""
+    readme = next(
+        (path for path in source["represented_by"] if str(path).endswith("README.md")),
+        None,
+    )
+    if readme is not None:
+        return branch_file(f"packing/{readme}")
+    return repo_links.repo_url(f"packing/{source['local']}", kind="tree")
+
+
+def beyond_entry(found: BeyondRows, sources: Mapping[str, Mapping[str, Any]]) -> str:
+    """A source's rows on their day: how many and of what, linking to the source's
+    packet on GitHub, which lists them; then, on the quieter line, their counts, the
+    source's credit (`credit_link`) and how many a later row has since superseded."""
+    from devtools.result_credit import credit_line  # noqa: PLC0415
+
+    counts = [int(row["n"]) for row in found.rows]
+    span = f"{min(counts)}{EN_DASH}{max(counts)}" if len(set(counts)) > 1 else f"{counts[0]}"
+    finder = credit_finder(
+        credit_line({"attribution": {"source_keys": [found.source["source_key"]]}}, sources)
+    )
+    superseded = sum(row["disposition"] == "superseded" for row in found.rows)
+    note = ""
+    if superseded:
+        note = (
+            " · all since superseded"
+            if superseded == len(counts)
+            else (f" · {superseded} since superseded")
+        )
+    link = external_link(source_readme(found.source), _esc(claims_phrase(found.rows)))
+    return (
+        f"<li>{link} beyond n = {corpus_end()}"
+        f"<small>n = {span} · {credit_link(finder, ())}{note}</small></li>"
+    )
+
+
+def recently_added(overview: Overview, *, days: int = ADDED_DAYS) -> str:
+    """The home page's Recently Added (`recent_days`): one disclosure a day, newest
+    first, the `RECENT_OPEN` newest open, its summary the date and its tally
+    (`recent_tally`), its body the day's results (`added_entry`, each linked to its row
+    in All Results), then its house moves (`house_entry`) and its sources' rows
+    (`beyond_entry`), and, for a day with results, the link that opens All Results on
+    that day (`added_day_link`). It draws with `results.css`'s rollup classes."""
+    from devtools.render_results import load_sources  # noqa: PLC0415
+
+    sources = load_sources()
+    blocks = []
+    for index, recent in enumerate(recent_days(overview, days=days)):
+        state = " open" if index < RECENT_OPEN else ""
+        entries = [
+            *(added_entry(result) for result in recent.results),
+            *(house_entry(move) for move in recent.houses),
+            *(beyond_entry(found, sources) for found in recent.rows),
+        ]
+        shown = added_day_link(recent.day, len(recent.results)) if recent.results else ""
+        blocks.append(
+            f'<details data-day="{recent.day.isoformat()}"{state}>'
+            f"{tallied_summary(day_label(recent.day), recent_tally(recent))}"
+            f"<ul>{''.join(entries)}</ul>{shown}</details>"
+        )
+    return f'<div class="site-rollup site-added">{"".join(blocks)}</div>'
+
+
 #: The rubric's three scored dimensions, in the site's order, significance first: the
 #: scale, its name, the `epistemics.md` section that defines it, and the question it
 #: answers, each a short plain question in the same form (the owner's wording,
@@ -2058,7 +2521,8 @@ PROJECT_EXTRA_KEYS: dict[str, tuple[str, ...]] = {
 SOURCE_VENUES: dict[str, str] = {KINGBIRD: "Squares in Squares"}
 
 #: The source-coverage register: each source repository the record reviews, with the
-#: bibliography key its results are attributed under.
+#: bibliography key its results are attributed under, and the dated rows beyond the case
+#: corpus (`beyond_horizon_claims`) that Recently Added lists.
 SOURCE_COVERAGE = FRONTIER / "source-coverage.yaml"
 
 

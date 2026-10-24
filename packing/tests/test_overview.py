@@ -22,9 +22,11 @@ import pytest
 
 from devtools import (
     check_results,
+    news_highlights,
     overview_data,
     overview_sections,
     render_case_pages,
+    render_changelog,
     render_contributors,
     render_overview,
     render_recent_results,
@@ -278,7 +280,8 @@ def test_every_link_to_a_result_goes_to_its_row(
     rows = {row_id for row_id, _, _ in ROW.findall(results)}
     linked = re.findall(r'href="results\.html#([^"]+)"', page)
     assert linked
-    # The archive action is the only non-row destination on results.html.
+    # The archive action and Recently Added's introduction lead to the archive, the only
+    # non-row destination on results.html.
     assert set(linked) - rows == {"all-results"}
     assert 'id="verification-ladders"' in verification
     assert 'class="site-ladders"' not in results
@@ -453,6 +456,7 @@ def test_the_homepage_sections_run_in_the_requested_order(page: str, atlas_page:
     landings = [
         "the-problem",
         "the-atlas-of-square-packings",
+        "recently-added",
         "news",
         "recent-results",
         "papers",
@@ -466,7 +470,7 @@ def test_the_homepage_sections_run_in_the_requested_order(page: str, atlas_page:
     assert positions == sorted(positions)
     # The owner dropped "View" from these action labels on 2026-10-23.
     assert 'href="atlas.html">Visual Atlas' in page
-    assert 'href="news.html">All News' in page
+    assert 'href="news.html" data-news-carry>All News' in page
     assert 'href="papers.html">All Papers' in page
     assert ">View " not in page
     assert '<a class="site-action" href="results.html#all-results" data-all-results' in page
@@ -477,6 +481,13 @@ def test_the_homepage_sections_run_in_the_requested_order(page: str, atlas_page:
     for markup in (page, atlas_page):
         assert "data-atlas-toggle" not in markup
         assert "data-atlas-rest" not in markup
+    # The News box carries the newest three of each level for its filter
+    # (`news_highlights.carried`) and shows three.
+    news = page.split('id="news"', 1)[1].split('<h2 id="recent-results"', 1)[0]
+    carried = len(news_highlights.carried(render_changelog.load()))
+    assert len(re.findall(r"<h3\b.*?</h3>", news, re.DOTALL)) == carried
+    shown = news.split("<section ")[1:]
+    assert sum(not card.startswith("hidden ") for card in shown) == news_highlights.LIMIT
 
 
 def test_papers_groups_every_reading_and_the_resources_keep_detail_reachable(
