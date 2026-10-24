@@ -4,9 +4,20 @@
 
 ## Retained Here
 
-`devtools.acquire_source` wrote the packet from a sparse checkout of the pin, from the declaration in [acquisition/declaration.json](acquisition/declaration.json); every file is bound to its Git blob at the pin. [acquisition/sources.json](acquisition/sources.json) is the acquisition record and [acquisition/upstream-subtree.sha256](acquisition/upstream-subtree.sha256) the manifest: 304 files, 56,851,346 bytes, of which 253 are retained (42,694,658 bytes) under `source/` and the rest pinned by digest with the reason the declaration gives.
+`devtools.acquire_source` wrote the packet from a sparse checkout of the pin, from the declaration in [acquisition/declaration.json](acquisition/declaration.json); every file is bound to its Git blob at the pin. [acquisition/sources.json](acquisition/sources.json) is the acquisition record and [acquisition/upstream-subtree.sha256](acquisition/upstream-subtree.sha256) the manifest: 306 files, 56,973,231 bytes, of which 254 are retained (42,709,428 bytes) under `source/` and the rest pinned by digest with the reason the declaration gives. Two of them joined on 24 October, from the same pin ([The 204 Seed](#the-204-seed)).
 
 The repository states no licence for its data or prose: the tree has no LICENSE, and no README states reuse terms. The 253 certificates are retained as factual data under the owner decision of 2026-10-09 recorded in resources/web/known-best-packings/README.md (Retained Factual Data). verify_bound_certificate.py states that it is Evan Daniel’s MIT-licensed verifier with modifications by Francisco Couzo with Codex, under the MIT licence in BOUND_VERIFIER_LICENSE.txt (Copyright (c) 2026 Evan Daniel); both are pinned against the byte-identical copies the couzo-issue678-2026-10-18 packet retains. Prose, the indexes and the manifest are hash-pinned and not copied.
+
+## The 204 Seed
+
+Francisco Couzo’s [answer of 23 October on #670](https://github.com/jlevy/squares/issues/670#issuecomment-6375905012) names where the search behind #670’s 204 certificate began: Mykhailo Polkovskyi’s `certificates/square-204.cert` at `Mishapolk/square-packing-records@70a033f`, T-186’s certificate, whose decimal form this commit publishes as `n204.txt`.
+Two files of this commit were added on 24 October for that answer (think-t5hc), each first committed here:
+
+- `n204.txt`, retained under `source/`: 204 decimal poses, `x y theta` in radians, at `s = 14.808663234389741`, SHA-256 `3e7c2456…`, the digest the answer prints.
+- `certificates/best/n204.cert`, pinned by digest only: the same Git blob, `301c930`, as `certificates/square-204.cert` at `70a033f`, with the SHA-256 `f0885fa8…` that the [T-186 packet](../mishapolk-kkt-refinements-2026-10-14/README.md) records for it. Its bytes are Polkovskyi’s, held there under derived-only custody, so they are pinned here as there.
+
+The [#670 packet’s seed measurement](../couzo-issue670-2026-10-17/measure/seed-identity.json) reads `n204.txt` from here and pairs it with T-186’s packing.
+Neither file is a row: `n204.txt` states no bound below T-186’s, and the walk holds rows beyond the corpus only.
 
 ## Rows Beyond the Corpus
 
