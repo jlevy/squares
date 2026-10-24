@@ -1,0 +1,1615 @@
+format: intake-ledger-sources-v1
+read_at_main: 0bbb0a2c4bae92393e26e7272c73a8de4cda1793
+read_on: '2026-10-24'
+rule: If they are reported in order, then each one should be recorded as a result, as long as each one
+  is stronger than the last. If a stronger result is reported first, then the other one should not be
+  recorded since it is weaker after that, unless there is some key reason it should be recorded.
+lanes: []
+reports:
+- report: '#732 comment 6374211504'
+  issue: 732
+  comment: 6374211504
+  holders: Mykhailo Polkovskyi
+  bead: think-e3im
+  claims:
+  - n: 328
+    printed: '18.614368938495'
+    rounding: up
+    exact: 170040864467535808225753655762229453314701567/9134925015689769789839453085000000000000000
+    exact_from: certificates/0000-0999/n328.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 335
+    printed: '18.822875655542'
+    rounding: up
+    exact: 8606479219878431181248097487312869687009947/457235088696155529799505235000000000000000
+    exact_from: certificates/0000-0999/n335.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 343
+    printed: '18.977575126249'
+    rounding: up
+    exact: 153920310982506456653672068143772457294098699/8110641636697316009307013120000000000000000
+    exact_from: certificates/0000-0999/n343.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 365
+    printed: '19.614368938496'
+    rounding: up
+    exact: 579508389607135781605587516902131360255625744605390074757222261406097/29545094793734856428714584359875965735604879475343360000000000000000
+    exact_from: certificates/0000-0999/n365.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 404
+    printed: '20.614368938496'
+    rounding: up
+    exact: 2911888829316175713173970227572176151885771291325676102010299696421/141255298088632116904866508398265662152564441364105000000000000000
+    exact_from: certificates/0000-0999/n404.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 410
+    printed: '20.778174593057'
+    rounding: up
+    exact: 525815998275067443699986910822558280318601463/25306169024625691543294634065000000000000000
+    exact_from: certificates/0000-0999/n410.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 413
+    printed: '20.831663365359'
+    rounding: up
+    exact: 21932660709195990700144330158364071587135081/1052852109048025800335911595000000000000000
+    exact_from: certificates/0000-0999/n413.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 454
+    printed: '21.828427124751'
+    rounding: up
+    exact: 16791317629971948035220746369004371092594339/769240840579515023974923363750000000000000
+    exact_from: certificates/0000-0999/n454.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 455
+    printed: '21.848427413738'
+    rounding: up
+    exact: 239456755798101712158192478092249513928988347/10959908064025714333000638485000000000000000
+    exact_from: certificates/0000-0999/n455.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 456
+    printed: '21.881306218098'
+    rounding: up
+    exact: 2712948274500808060072799633478504976899893/123984749697303278612643840000000000000000
+    exact_from: certificates/0000-0999/n456.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 458
+    printed: '21.903616795094'
+    rounding: up
+    exact: 355304772745089322301242758414388438496411073/16221283273394632018614026240000000000000000
+    exact_from: certificates/0000-0999/n458.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 459
+    printed: '21.937022304130'
+    rounding: up
+    exact: 628581504531537518503906619948792358435603287/28653911903677688021790204435000000000000000
+    exact_from: certificates/0000-0999/n459.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 463
+    printed: '21.971212864946'
+    rounding: up
+    exact: 119860194414684130694230975330181807336955967/5455328986681344258956328960000000000000000
+    exact_from: certificates/0000-0999/n463.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 490
+    printed: '22.656854249498'
+    rounding: up
+    exact: 123600593734295998065546910748481480564348967/5455328986681344258956328960000000000000000
+    exact_from: certificates/0000-0999/n490.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 496
+    printed: '22.822875655538'
+    rounding: up
+    exact: 185108165560964335118709845289438322214024399/8110641636697316009307013120000000000000000
+    exact_from: certificates/0000-0999/n496.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 497
+    printed: '22.823102656263'
+    rounding: up
+    exact: 145761845893963729163971117247668541053785399/6386592046194456408172297745000000000000000
+    exact_from: certificates/0000-0999/n497.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 498
+    printed: '22.828427124751'
+    rounding: up
+    exact: 111985875377711703917147988305684899202485793/4905544949099656778382105915000000000000000
+    exact_from: certificates/0000-0999/n498.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 500
+    printed: '22.887841512251'
+    rounding: up
+    exact: 20726372263497324152328018649094778178062829/905562556102261515612884895000000000000000
+    exact_from: certificates/0000-0999/n500.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 501
+    printed: '22.887841512251'
+    rounding: up
+    exact: 685713865798464089167975691092724736863870723/29959743710713523633795596365000000000000000
+    exact_from: certificates/0000-0999/n501.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 502
+    printed: '22.933269925449'
+    rounding: up
+    exact: 186003533922964315972327129554157321550667049/8110641636697316009307013120000000000000000
+    exact_from: certificates/0000-0999/n502.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 504
+    printed: '22.961828398648'
+    rounding: up
+    exact: 351140939050493287735966614948579537000049/15292377111884364437819276250000000000000
+    exact_from: certificates/0000-0999/n504.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 505
+    printed: '22.964182800891'
+    rounding: up
+    exact: 337764750510999178424075023044932166096110809/14708328767436175205696145795000000000000000
+    exact_from: certificates/0000-0999/n505.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 509
+    printed: '22.993588501400'
+    rounding: up
+    exact: 381650008758571777861743773847743345084790437/16598105543001377233246969935000000000000000
+    exact_from: certificates/0000-0999/n509.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 535
+    printed: '23.656854249498'
+    rounding: up
+    exact: 678294819461696557254592389547434544623074231/28672232254891134530419962405000000000000000
+    exact_from: certificates/0000-0999/n535.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 544
+    printed: '23.828427124754'
+    rounding: up
+    exact: 13881488946318227806684534923537082641654551/582560018487235706754170880000000000000000
+    exact_from: certificates/0000-0999/n544.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 545
+    printed: '23.883414759605'
+    rounding: up
+    exact: 1505111246888610772841529105277230872064167/63019097647388806145014485000000000000000
+    exact_from: certificates/0000-0999/n545.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 546
+    printed: '23.887841512252'
+    rounding: up
+    exact: 193745721980089759462755401327818007027672249/8110641636697316009307013120000000000000000
+    exact_from: certificates/0000-0999/n546.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 547
+    printed: '23.898819144772'
+    rounding: up
+    exact: 867208369567810715262822787738884816303582917950169574744542707330789/36286661877079940585869633909457325976792407561971445000000000000000
+    exact_from: certificates/0000-0999/n547.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 548
+    printed: '23.943933771539'
+    rounding: up
+    exact: 414144300813898235186096417269868427165018963/17296418573717554987143182315000000000000000
+    exact_from: certificates/0000-0999/n548.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 549
+    printed: '23.955501804732'
+    rounding: up
+    exact: 245091204311449931391107552652818256382902877/10231102913613060120647654385000000000000000
+    exact_from: certificates/0000-0999/n549.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 550
+    printed: '23.960681444780'
+    rounding: up
+    exact: 170932907726759189492524058035224484705103271/7133891751814058803179028480000000000000000
+    exact_from: certificates/0000-0999/n550.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 554
+    printed: '23.986307325878'
+    rounding: up
+    exact: 85341181619399728168573962144031332540505119/3557912456467648659523365595000000000000000
+    exact_from: certificates/0000-0999/n554.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 582
+    printed: '24.656854249499'
+    rounding: up
+    exact: 134511251707664067382399730743083583295212117/5455328986681344258956328960000000000000000
+    exact_from: certificates/0000-0999/n582.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 584
+    printed: '24.677669529669'
+    rounding: up
+    exact: 277904011089644133118451668215234436562888923/11261355565019327546907163365000000000000000
+    exact_from: certificates/0000-0999/n584.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 591
+    printed: '24.828427124755'
+    rounding: up
+    exact: 2092520578924965880826643427209881802480133/84279224310535503445922865000000000000000
+    exact_from: certificates/0000-0999/n591.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 592
+    printed: '24.883414759605'
+    rounding: up
+    exact: 26686195355029643454735969338430751881023321648865311880916080380371/1072449083569969829094822388529920763460531498516480000000000000000
+    exact_from: certificates/0000-0999/n592.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 593
+    printed: '24.887841512256'
+    rounding: up
+    exact: 501888958463585368919599916541712208149420123/20166029995668241261524792115000000000000000
+    exact_from: certificates/0000-0999/n593.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 594
+    printed: '24.898819144772'
+    rounding: up
+    exact: 20910074152883998367450504514170733329157889050852993129943749564797/839801840854563253909915588882101583263498093199360000000000000000
+    exact_from: certificates/0000-0999/n594.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 596
+    printed: '24.949747468312'
+    rounding: up
+    exact: 35663537522390508724328040353130823766768857/1429414769335325142694774542812500000000000
+    exact_from: certificates/0000-0999/n596.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 597
+    printed: '24.950690418604'
+    rounding: up
+    exact: 244678082300181259901344953112356705447532189/9806465400161784238100122132500000000000000
+    exact_from: certificates/0000-0999/n597.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 598
+    printed: '24.954250129235'
+    rounding: up
+    exact: 65403526486562475730119727693830843544846879/2620937361285065607843385695000000000000000
+    exact_from: certificates/0000-0999/n598.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 599
+    printed: '24.959619754596'
+    rounding: up
+    exact: 174103839237693081465699039198072534883161461/6975420336907884217283314117500000000000000
+    exact_from: certificates/0000-0999/n599.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 600
+    printed: '24.978172747041'
+    rounding: up
+    exact: 2166634425729819161959010478562553249150451/86741109835048227312762880000000000000000
+    exact_from: certificates/0000-0999/n600.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 602
+    printed: '24.988237878176'
+    rounding: up
+    exact: 112184140504547340657188215796278626175951321304440651813334175731771/4489477851598738384919342157795597357016282541588480000000000000000
+    exact_from: certificates/0000-0999/n602.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 631
+    printed: '25.656854249498'
+    rounding: up
+    exact: 402314197329126343048021583700479234855894187/15680573830948138420598210560000000000000000
+    exact_from: certificates/0000-0999/n631.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 633
+    printed: '25.677669529670'
+    rounding: up
+    exact: 40776364450056768890174378141364806020405307/1588008771704996386136530363125000000000000
+    exact_from: certificates/0000-0999/n633.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 637
+    printed: '25.778174593058'
+    rounding: up
+    exact: 140628423081238763142277747029429464938017517/5455328986681344258956328960000000000000000
+    exact_from: certificates/0000-0999/n637.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 640
+    printed: '25.828427124757'
+    rounding: up
+    exact: 5770041459918772878263185031872939737202249/223398871020996885901838393437500000000000
+    exact_from: certificates/0000-0999/n640.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 643
+    printed: '25.898819144773'
+    rounding: up
+    exact: 1652875719081212967949148806264792979175057668097276357694558453777/63820505091053598689385657867329604953823454985947500000000000000
+    exact_from: certificates/0000-0999/n643.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 644
+    printed: '25.899494936618'
+    rounding: up
+    exact: 584256664989628827653180568386511118090246051/22558612298018168417471600130000000000000000
+    exact_from: certificates/0000-0999/n644.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 645
+    printed: '25.946513932851'
+    rounding: up
+    exact: 100012429931359341875698165164656664477071379/3854561356110881489441259520000000000000000
+    exact_from: certificates/0000-0999/n645.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 646
+    printed: '25.946569059464'
+    rounding: up
+    exact: 111835688496209611724375950491767466662005779/4310230313684549858246797895000000000000000
+    exact_from: certificates/0000-0999/n646.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 647
+    printed: '25.946936319308'
+    rounding: up
+    exact: 1514709436791515298458733044902708497781289936338583824914192808657/58377197914667620471101099225083832184099475292160000000000000000
+    exact_from: certificates/0000-0999/n647.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 648
+    printed: '25.959619754592'
+    rounding: up
+    exact: 7794626434028654888704709451769458370028353/300259653558676468518337965000000000000000
+    exact_from: certificates/0000-0999/n648.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 651
+    printed: '25.981693875364'
+    rounding: up
+    exact: 407407869065737863421415287370173601619269737/15680573830948138420598210560000000000000000
+    exact_from: certificates/0000-0999/n651.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 653
+    printed: '25.992652660227'
+    rounding: up
+    exact: 580411361847839550799952715593593663512891547/22329824102023067502305252985000000000000000
+    exact_from: certificates/0000-0999/n653.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 654
+    printed: '25.994801642473'
+    rounding: up
+    exact: 1041231587794472560403047005505376699721141703/40055377306407656081525050515000000000000000
+    exact_from: certificates/0000-0999/n654.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 682
+    printed: '26.656854249498'
+    rounding: up
+    exact: 216204191979349867314253252401650675006256999/8110641636697316009307013120000000000000000
+    exact_from: certificates/0000-0999/n682.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 684
+    printed: '26.677669529670'
+    rounding: up
+    exact: 216624561726944449962080777093301965323231408120163717747503508113349/8120070663819705934445205082314946270152961818032045000000000000000
+    exact_from: certificates/0000-0999/n684.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 689
+    printed: '26.778174593058'
+    rounding: up
+    exact: 1100850241129654867412798867136513435824470331/41109980715976643310832796155000000000000000
+    exact_from: certificates/0000-0999/n689.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 691
+    printed: '26.828427124753'
+    rounding: up
+    exact: 292715792321166981972119073389265220911602718226281481803272121125317/10910657973351777859939300686811074023424258956328960000000000000000
+    exact_from: certificates/0000-0999/n691.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 692
+    printed: '26.828427124752'
+    rounding: up
+    exact: 10516023928186225586476714051544299391137019/391973181256091671056627345000000000000000
+    exact_from: certificates/0000-0999/n692.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 694
+    printed: '26.898819144773'
+    rounding: up
+    exact: 293483815575953176911498966806642502369414959/10910657973362688517912657920000000000000000
+    exact_from: certificates/0000-0999/n694.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 695
+    printed: '26.899494936618'
+    rounding: up
+    exact: 436344327278113600778781005009069258425574673/16221283273394632018614026240000000000000000
+    exact_from: certificates/0000-0999/n695.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 696
+    printed: '26.946544919148'
+    rounding: up
+    exact: 321743294282091582422285301231178258139833/11940057445118774141683755000000000000000
+    exact_from: certificates/0000-0999/n696.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 698
+    printed: '26.946936319309'
+    rounding: up
+    exact: 40933524572068023483240280490743649926442821/1519041871291988183277810401875000000000000
+    exact_from: certificates/0000-0999/n698.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 699
+    printed: '26.949747468312'
+    rounding: up
+    exact: 294039477095244092375998787510741581215692909/10910657973362688517912657920000000000000000
+    exact_from: certificates/0000-0999/n699.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 700
+    printed: '26.963723854102'
+    rounding: up
+    exact: 196993613314781136617843182634638763243103811/7305875641684208574456135680000000000000000
+    exact_from: certificates/0000-0999/n700.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 702
+    printed: '26.976006198468'
+    rounding: up
+    exact: 823196119759123505437836951442762221475502759/30515863382545200316278529545000000000000000
+    exact_from: certificates/0000-0999/n702.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 735
+    printed: '27.656854249499'
+    rounding: up
+    exact: 448629667232097986634451650236699281136628523/16221283273394632018614026240000000000000000
+    exact_from: certificates/0000-0999/n735.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 736
+    printed: '27.656854249499'
+    rounding: up
+    exact: 75438619333854364484232119110281422622141221/2727664493340672129478164480000000000000000
+    exact_from: certificates/0000-0999/n736.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 737
+    printed: '27.677669529670'
+    rounding: up
+    exact: 193195348321547896730709484965391159655613847/6980188419203769456231853385000000000000000
+    exact_from: certificates/0000-0999/n737.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 742
+    printed: '27.778174593058'
+    rounding: up
+    exact: 85491305480521410837706275604257121749005399/3077643032090622829977841170000000000000000
+    exact_from: certificates/0000-0999/n742.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 743
+    printed: '27.798989873230'
+    rounding: up
+    exact: 108976028283237837736664489172424807409810403/3920143457737034605149552640000000000000000
+    exact_from: certificates/0000-0999/n743.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 744
+    printed: '27.798989873230'
+    rounding: up
+    exact: 13979685600555901789171617121457510397379243/502884661072470581168930765000000000000000
+    exact_from: certificates/0000-0999/n744.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 745
+    printed: '27.828427124753'
+    rounding: up
+    exact: 1191649500663744024076566550140359805099990563/42821302667293868622261278815000000000000000
+    exact_from: certificates/0000-0999/n745.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 746
+    printed: '27.828427124753'
+    rounding: up
+    exact: 747071336314110612277562962013785897742845331/26845618437760230674985945405000000000000000
+    exact_from: certificates/0000-0999/n746.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 747
+    printed: '27.883160154733'
+    rounding: up
+    exact: 536278525753374806848426233743711945415506087/19233061201721533131943830435000000000000000
+    exact_from: certificates/0000-0999/n747.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 748
+    printed: '27.884019388634'
+    rounding: up
+    exact: 20559753513811393231635547372139853388854909/737331057881574182664273920000000000000000
+    exact_from: certificates/0000-0999/n748.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 749
+    printed: '27.884019388634'
+    rounding: up
+    exact: 216074572778403888664531493762619502986923/7749046856081454913290240000000000000000
+    exact_from: certificates/0000-0999/n749.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 750
+    printed: '27.911195491084'
+    rounding: up
+    exact: 152264753815437908137934523824715788432365567/5455328986681344258956328960000000000000000
+    exact_from: certificates/0000-0999/n750.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 752
+    printed: '27.931658926825'
+    rounding: up
+    exact: 152376388589600203354625145372656791861164817/5455328986681344258956328960000000000000000
+    exact_from: certificates/0000-0999/n752.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 756
+    printed: '27.976777716758'
+    rounding: up
+    exact: 459518678865864864451176523936370849700683481/16425003748399053430895229905000000000000000
+    exact_from: certificates/0000-0999/n756.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 790
+    printed: '28.656854249499'
+    rounding: up
+    exact: 39083141913597764519840568577077105331493773/1363832246670336064739082240000000000000000
+    exact_from: certificates/0000-0999/n790.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 791
+    printed: '28.656854249499'
+    rounding: up
+    exact: 185651962168133647010764921419072023244995357/6478448770118695691445599722500000000000000
+    exact_from: certificates/0000-0999/n791.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 792
+    printed: '28.656854249499'
+    rounding: up
+    exact: 1089696468526715036428075325785613248814910553/38025683455670357949190238015000000000000000
+    exact_from: certificates/0000-0999/n792.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 797
+    printed: '28.778174593059'
+    rounding: up
+    exact: 313988820082572896397921471056786866143795509/10910657973362688517912657920000000000000000
+    exact_from: certificates/0000-0999/n797.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 798
+    printed: '28.798989873230'
+    rounding: up
+    exact: 426196589513492181181185521571901584367330379/14799011749702677639968164020000000000000000
+    exact_from: certificates/0000-0999/n798.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 799
+    printed: '28.798989873230'
+    rounding: up
+    exact: 59363995181943954222328335782849498626520943/2061322131201787840276275543125000000000000
+    exact_from: certificates/0000-0999/n799.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 800
+    printed: '28.798989873230'
+    rounding: up
+    exact: 499018811161423351474626467041910023501497589/17327649801540142954217100195000000000000000
+    exact_from: certificates/0000-0999/n800.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 801
+    printed: '28.825777526126'
+    rounding: up
+    exact: 61495033718143804688610458433212979732609919/2133334778651119573939124595000000000000000
+    exact_from: certificates/0000-0999/n801.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 802
+    printed: '28.827439468623'
+    rounding: up
+    exact: 581416302997856018194637953249967116579002359/20168850016342985337837986795000000000000000
+    exact_from: certificates/0000-0999/n802.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 803
+    printed: '28.827585222382'
+    rounding: up
+    exact: 113008269611875140411626360091178215116797403/3920143457737034605149552640000000000000000
+    exact_from: certificates/0000-0999/n803.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 804
+    printed: '28.884019388632'
+    rounding: up
+    exact: 315143656445333260197441142120309377704230109/10910657973362688517912657920000000000000000
+    exact_from: certificates/0000-0999/n804.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 805
+    printed: '28.902673974150'
+    rounding: up
+    exact: 98793421759641544891944601301883072365135019/3418141236620614437014908445000000000000000
+    exact_from: certificates/0000-0999/n805.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 806
+    printed: '28.902673974145'
+    rounding: up
+    exact: 468838461893171711844722917426930504383193073/16221283273394632018614026240000000000000000
+    exact_from: certificates/0000-0999/n806.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 807
+    printed: '28.924694338675'
+    rounding: up
+    exact: 83948632309237472891967460527151671825923341/2902317007270608858335150080000000000000000
+    exact_from: certificates/0000-0999/n807.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 808
+    printed: '28.931498747905'
+    rounding: up
+    exact: 1254828975170112470913515753764995921376802988681866180043904699127/43372415169504363686133803372415169504363686133760000000000000000
+    exact_from: certificates/0000-0999/n808.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 809
+    printed: '28.933951500687'
+    rounding: up
+    exact: 76188281990561047074286429777569512352282563/2633179294185004127947325440000000000000000
+    exact_from: certificates/0000-0999/n809.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 813
+    printed: '28.979106074255'
+    rounding: up
+    exact: 7856927453958300806103868407641695645987050991345909821754361/271123872276328160398562556390201923509764855000000000000000
+    exact_from: certificates/0000-0999/n813.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 814
+    printed: '28.981388046068'
+    rounding: up
+    exact: 62304320850740000579792574490460502573990887/2149804583262317657562840794375000000000000
+    exact_from: certificates/0000-0999/n814.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 850
+    printed: '29.656854249499'
+    rounding: up
+    exact: 56700118814721533457260789127378021358995791/1911872322590654224781126251875000000000000
+    exact_from: certificates/0000-0999/n850.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 854
+    printed: '29.778174593059'
+    rounding: up
+    exact: 122949308557473336633195926758301682303705155782571803906827539119991/4128839669914977762712241076918627768202529195246205000000000000000
+    exact_from: certificates/0000-0999/n854.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 855
+    printed: '29.798989873230'
+    rounding: up
+    exact: 804458270592184341008114894223690930788336917/26996159064937950912947933835000000000000000
+    exact_from: certificates/0000-0999/n855.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 856
+    printed: '29.798989873230'
+    rounding: up
+    exact: 4086646698286049614705617771749592313110036040634961957807244830641/137140443876500123790505122748360761653566982062080000000000000000
+    exact_from: certificates/0000-0999/n856.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 857
+    printed: '29.798989873230'
+    rounding: up
+    exact: 152383608019183635243505345535921956487573257/5113717232277047781842115003750000000000000
+    exact_from: certificates/0000-0999/n857.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 858
+    printed: '29.825571499874'
+    rounding: up
+    exact: 1906475317326769688610444413921954010710899408867195980178866260799/63920831067221578037032004684879450418660581048320000000000000000
+    exact_from: certificates/0000-0999/n858.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 859
+    printed: '29.825571499869'
+    rounding: up
+    exact: 35277882048926316838759599887020896796474271/1182806574186932205881520645000000000000000
+    exact_from: certificates/0000-0999/n859.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 860
+    printed: '29.827585222354'
+    rounding: up
+    exact: 124840862074082822154976793342493874206052252556602890968474744766089/4185416323294012157553808535134284544458786938552320000000000000000
+    exact_from: certificates/0000-0999/n860.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 862
+    printed: '29.899494936619'
+    rounding: up
+    exact: 299294835528068701035829034062880869077191917/10010029806942365406998104335000000000000000
+    exact_from: certificates/0000-0999/n862.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 863
+    printed: '29.902673974145'
+    rounding: up
+    exact: 41122647003950059054984543687505919141265077/1375216378291337462980494835000000000000000
+    exact_from: certificates/0000-0999/n863.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 864
+    printed: '29.924694560082'
+    rounding: up
+    exact: 56586434318680103297073000238168494249981357608956974256629254918852347255605202514529836703/1890961132621354283079571117715843365754991042444038891319028894924212797440000000000000000
+    exact_from: certificates/0000-0999/n864.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 865
+    printed: '29.931498747931'
+    rounding: up
+    exact: 100415794856380331191651646477822240444133577/3354853550837409238982842885000000000000000
+    exact_from: certificates/0000-0999/n865.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 871
+    printed: '29.981222179337'
+    rounding: up
+    exact: 96223958347251183112119583209403602055703501/3209474175925063229772922880000000000000000
+    exact_from: certificates/0000-0999/n871.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 873
+    printed: '29.992265777010'
+    rounding: up
+    exact: 743956942124299908668598314084459399219212947204836661053824722075401/24804959640447385407212281278440596605340626697311255000000000000000
+    exact_from: certificates/0000-0999/n873.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 909
+    printed: '30.656854249499'
+    rounding: up
+    exact: 497293517052292973170586978886698257507895573/16221283273394632018614026240000000000000000
+    exact_from: certificates/0000-0999/n909.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 913
+    printed: '30.778174593059'
+    rounding: up
+    exact: 57511659169674557391229996189768384196715587/1868585773200636477917556385000000000000000
+    exact_from: certificates/0000-0999/n913.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 914
+    printed: '30.778174593059'
+    rounding: up
+    exact: 5888173693586893156114673388928367349175817/191310036135634119878749049062500000000000
+    exact_from: certificates/0000-0999/n914.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 915
+    printed: '30.798989873231'
+    rounding: up
+    exact: 170381638659234105363212837825864714291651893/5532052816034943152565997402500000000000000
+    exact_from: certificates/0000-0999/n915.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 916
+    printed: '30.798989873231'
+    rounding: up
+    exact: 482945834625807155509139084445540682301233637/15680573830948138420598210560000000000000000
+    exact_from: certificates/0000-0999/n916.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 917
+    printed: '30.825571499869'
+    rounding: up
+    exact: 133035591683773076838312707098519969850750156307478236780714682253017/4315754265394259295124765502827742537367524695080960000000000000000
+    exact_from: certificates/0000-0999/n917.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 918
+    printed: '30.825571499869'
+    rounding: up
+    exact: 3024407147538573335203157560068803063206972477575460983853423068607/98113579096222265406811032880586794858065334108160000000000000000
+    exact_from: certificates/0000-0999/n918.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 919
+    printed: '30.827585222354'
+    rounding: up
+    exact: 1075481217250748868177287453971494210212027954015283359642315090089/34886975722992895796633926272787316706097358116945000000000000000
+    exact_from: certificates/0000-0999/n919.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 923
+    printed: '30.924694629713'
+    rounding: up
+    exact: 2720164906463268839631948456041/87960930222080000000000000000
+    exact_from: certificates/0000-0999/n923.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 924
+    printed: '30.931498747932'
+    rounding: up
+    exact: 1140919169598939086787676729804817638039715503/36885350396260262826332302515000000000000000
+    exact_from: certificates/0000-0999/n924.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 926
+    printed: '30.942070418062'
+    rounding: up
+    exact: 1373681230453699817332604986285216252271800757/44395259008002544865930150785000000000000000
+    exact_from: certificates/0000-0999/n926.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 970
+    printed: '31.656854249500'
+    rounding: up
+    exact: 141861172626075952821631741059097207889388877/4481215079300580005126855685000000000000000
+    exact_from: certificates/0000-0999/n970.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 975
+    printed: '31.778174593059'
+    rounding: up
+    exact: 346720794002668111461512141335664304658488809/10910657973362688517912657920000000000000000
+    exact_from: certificates/0000-0999/n975.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 976
+    printed: '31.778174593059'
+    rounding: up
+    exact: 346720794002668731660613368211866295670757509/10910657973362688517912657920000000000000000
+    exact_from: certificates/0000-0999/n976.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 977
+    printed: '31.798989873231'
+    rounding: up
+    exact: 14376377059122388341666501428840150877277317088783487128054919269609/452101689910127747074213316643889578318954548626545000000000000000
+    exact_from: certificates/0000-0999/n977.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 978
+    printed: '31.825090165848'
+    rounding: up
+    exact: 246639995759877140152502194052059877530734955904309619796676318976791/7749860078151587127519501704860078151587127519493955000000000000000
+    exact_from: certificates/0000-0999/n978.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 979
+    printed: '31.825090165819'
+    rounding: up
+    exact: 127946905752716383808431781047090805114319771/4020315577617358700154868855000000000000000
+    exact_from: certificates/0000-0999/n979.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 980
+    printed: '31.827585222355'
+    rounding: up
+    exact: 347259896479157384516914516808340948434594609/10910657973362688517912657920000000000000000
+    exact_from: certificates/0000-0999/n980.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 985
+    printed: '31.920310216790'
+    rounding: up
+    exact: 348271587179028036878106615419763391285593659/10910657973362688517912657920000000000000000
+    exact_from: certificates/0000-0999/n985.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 986
+    printed: '31.920310216790'
+    rounding: up
+    exact: 905328859473489016479838021586491087108031321/28362157301256216358851057105000000000000000
+    exact_from: certificates/0000-0999/n986.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 987
+    printed: '31.941797078293'
+    rounding: up
+    exact: 116681398612959320638003004851774213240130393/3652937820842104287228067840000000000000000
+    exact_from: certificates/0000-0999/n987.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 988
+    printed: '31.949747468313'
+    rounding: up
+    exact: 500990374057025852742819206625708565159333587/15680573830948138420598210560000000000000000
+    exact_from: certificates/0000-0999/n988.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  - n: 989
+    printed: '31.974117146000'
+    rounding: up
+    exact: 20589537350408626478852970719721679566193127/643943889252453802217308160000000000000000
+    exact_from: certificates/0000-0999/n989.cert at f1ceee4c (its header), pinned by digest in the mishapolk-issue732-f1ceee4-2026-10-23
+      packet (receipts/source-history.json)
+    first_committed: '2026-10-23T20:34:13Z'
+  note: The 138 certificates f1ceee4c adds or changes beyond the corpus at or below 1024, which the comment
+    reports, each held to the path, SHA-256 and exact bound the release's index (certified_bounds.json)
+    states and read at its header's exact side, dated by the comment; first_committed is the first commit
+    of the source's history that published the side.
+- report: Mishapolk/square-packing-records@8a488a1
+  url: https://github.com/Mishapolk/square-packing-records/tree/8a488a10e994f13c706b651ddaaa9727600c96e5
+  reported_at: '2026-10-22T19:08:59Z'
+  holders: Mykhailo Polkovskyi
+  bead: think-e3im
+  claims:
+  - n: 985
+    printed: '31.920310216821'
+    rounding: up
+    exact: 151772453123382777232691846593/4754729891171500000000000000
+    exact_from: certificates/n-985.cert at Mishapolk/square-packing-records@8a488a10e994f13c706b651ddaaa9727600c96e5
+      (its header)
+  note: 'The #732 comment 6374211504 source''s own publications, dated by the commit: the repository is
+    watched, so each certificate there is a report from the first commit that holds its side. Transcribed
+    from the mishapolk-issue732-f1ceee4-2026-10-23 packet''s receipts/source-history.json at each count
+    #732 comment 6374211504 claims where the commit states a side other than the one the issue claims,
+    strictly below the start.'
+- report: '#715'
+  issue: 715
+  holders: Francisco Couzo
+  bead: think-cyal
+  claims:
+  - n: 909
+    printed: '30.656854249528'
+    rounding: up
+    exact: 84221466330132482498402752441/2747231194845500000000000000
+    exact_from: certificates/n909.cert (its header) at franciscouzo/square-packing@6b7391de, retained
+      and replayed in the couzo-issue715-2026-10-21 packet
+  - n: 970
+    printed: '31.656854249528'
+    rounding: up
+    exact: 86968697524977982498402752441/2747231194845500000000000000
+    exact_from: certificates/n970.cert (its header) at franciscouzo/square-packing@6b7391de, retained
+      and replayed in the couzo-issue715-2026-10-21 packet
+  - n: 975
+    printed: '31.778174593089'
+    rounding: up
+    exact: 131602895932809578582211376877/4141298158813500000000000000
+    exact_from: certificates/n975.cert (its header) at franciscouzo/square-packing@6b7391de, retained
+      and replayed in the couzo-issue715-2026-10-21 packet
+  note: 'Issue 715''s re-certifications of the 4e4c8ce certificates below the 12-place print at the counts
+    #732 comment 6374211504 claims, strictly below the start, at the exact sides its packet''s filtered
+    receipt states; each restates the certificate it re-certifies, by the owner''s answer of 23 October
+    2026 (think-fwa9).'
+- report: Mishapolk/square-packing-records@34e59f3
+  url: https://github.com/Mishapolk/square-packing-records/tree/34e59f349318ce55ad611fec577f89048c83c769
+  reported_at: '2026-10-23T21:28:42Z'
+  holders: Mykhailo Polkovskyi
+  bead: think-e3im
+  claims:
+  - n: 105
+    printed: '10.789303783743'
+    rounding: up
+    exact: 674331486483935962030285457609/62500000000000000000000000000
+    exact_from: certified_bounds.json at Mishapolk/square-packing-records@34e59f349318ce55ad611fec577f89048c83c769
+      (the bound it states)
+  - n: 204
+    printed: '14.808642830528'
+    rounding: up
+    exact: 882663895519250432/59604644775390625
+    exact_from: certified_bounds.json at Mishapolk/square-packing-records@34e59f349318ce55ad611fec577f89048c83c769
+      (the bound it states)
+  note: 'A commit of the #732 comment 6374211504 source after the commit the comment reports, which no
+    issue reports: the repository is watched, so it is a report from the push that made it public, which
+    the repository''s activity log dates. Transcribed from the mishapolk-issue732-f1ceee4-2026-10-23 packet''s
+    receipts/later-commits.json at every count to 1024 where it adds or changes a certificate or an index''s
+    bound, at the least side it states there.'
+- report: Mishapolk/square-packing-records@c0bf150
+  url: https://github.com/Mishapolk/square-packing-records/tree/c0bf1501d031f2c802cec3eec0846e63ee548021
+  reported_at: '2026-10-23T21:28:42Z'
+  holders: Mykhailo Polkovskyi
+  bead: think-e3im
+  claims:
+  - n: 17
+    printed: '4.675530093605'
+    rounding: up
+    exact: 3540220902681927241684894350528076918424094735906640935460118296815560112172278329927444986201717715828453674456896190049083579636321858276710672082106756181356498700623760628222870932984938265761045119635679701616176830285511409145716041396083600753086195340543483705670987901326913740758520127585696378408237726218403304960436498023847296132284892177625723334433480188650909342028313719955489642680662088242265112008681285762872479695998341780945334474169619454039384201981381813293583341719551957381017223700724140273688952123322396199167294141729547333251618900328665485168996088149310212542692854808494548030834953681159326886304673292420865062997443015783387985371827508753228482263/757180647286269741224195203473130435318467873228351656010899339176748847211161601504045437657743296006725793940382557863501007392370190896767761341480502274594249348960437380292743276214054662688358662308631407223141795567915860368145033323560669931478134229137751072964572437373996320591982068195548430606928736517299177344977367168297681619139806859080633943523817306065447292290394718802495935022970983337440616286991676708086911043370855724132940915984692006844867535541463018413482901877674366427049581439755853248564781314250383404831199912594893398453405169179336562368277466991433261443481198630158557391143754493028334891122843954862953928998935231897462500000000000000000000000
+    exact_from: certificates/0000-0999/n17.cert at Mishapolk/square-packing-records@c0bf1501d031f2c802cec3eec0846e63ee548021
+      (its header); the least of the 3 sides the commit states at this count, beside certified_bounds.json,
+      upper_bounds.json
+    record_relations:
+    - lane: reported
+      relation: above
+      value: '4.67553009360455'
+      exact_form: ''
+      read_from: packing/campaign/issue-intake/upper-bounds-issue732-f1ceee4-20261024/undecided-resolved.json
+        rows[n = 17], by devtools.beyond_horizon_replay decide-later
+      margin: '3.88e-25'
+  - n: 28
+    printed: '5.824444616675'
+    rounding: up
+    exact: 9251232215876588795974206035456430125617173083714956595048449397820054857105959699108554498914524957708663316260519862191170461514560101706441081694909366790502063725331028761463487397150021111349058480489311600686741315176538667149678127711847254586117603048878379327362213819766487710874077255135115103957623/1588345812301556879360158327055632051832238909169547957677380204251229655928524369921222711212639953736188080526536354155052947977622055252122137279836949198615396342922113847251509163358900523304619710425681819696930849084144458636041733773230272903228430328043703862756755755197881150000000000000000000000000
+    exact_from: certificates/0000-0999/n28.cert at Mishapolk/square-packing-records@c0bf1501d031f2c802cec3eec0846e63ee548021
+      (its header); the least of the 3 sides the commit states at this count, beside certified_bounds.json,
+      upper_bounds.json
+    record_relations:
+    - lane: reported
+      relation: above
+      value: '5.82444461667405'
+      exact_form: ''
+      read_from: packing/campaign/issue-intake/upper-bounds-issue732-f1ceee4-20261024/undecided-resolved.json
+        rows[n = 28], by devtools.beyond_horizon_replay decide-later
+      margin: '5.02e-25'
+  - n: 39
+    printed: '6.810722083069'
+    rounding: up
+    exact: 250392004148215027817729461130041484728542496514343974361535786228901818285204315223107767198806377023275955072314383803135937382152432119144375804359976153446243676611884632906223379071961532413134020895164198179962410407888818740610026375422637184399475421344199704913280137272914546445270086254959403839773364197610749034648172097368487303771708025679821072816918497399188441332907336018867044280097370754242934933673692965413426130704849831601899359846396496675245456102297046162829538349321595650394688866228167498441103828981731375908927137183670625709650231349506498373668609466817931372840124628924200492640310959667532076621975846328624129403274729124085984837114640726626154727883/36764384318468335165936727311516146888851315546298880974690574519254694633021937562125403771441158460015289968256033520432402597416404869024930190541106994656538053858720197710475453762862789905308721491221538058079701048093139278332198080952606435666155760753790767996552855044303590254634203925670492301257560248506194703503136974320718855826676387471500914067486876140845111914780413729138081279175852177061171037033957345223823457050096829825825278815074263997785758381895447777571097702440903969181083368401213785087399887664416821200114846296738175348658965335410278673319563164945110954849855376250023631826969690664481327637441706142179833260457779669065900000000000000000000000000
+    exact_from: certificates/0000-0999/n39.cert at Mishapolk/square-packing-records@c0bf1501d031f2c802cec3eec0846e63ee548021
+      (its header); the least of the 3 sides the commit states at this count, beside certified_bounds.json,
+      upper_bounds.json
+    record_relations:
+    - lane: reported
+      relation: above
+      value: '6.81072208306864'
+      exact_form: ''
+      read_from: packing/campaign/issue-intake/upper-bounds-issue732-f1ceee4-20261024/undecided-resolved.json
+        rows[n = 39], by devtools.beyond_horizon_replay decide-later
+      margin: '6.01e-25'
+  - n: 51
+    printed: '7.690355937289'
+    rounding: up
+    exact: 28155663803669645223312226803385268904724481623188272594684611014528604153179274080083657031218169461671365517968875678222455415696288430252129776833460708612612499280010869205792827207380215668242398744211797890776412344757354370839969531159517046614358103949930551034243578286464820914058270493027813898116629/3661165235168155944989445473689387008939550778894074542645751637557922009611831043796730262133756298781521756688032040047794314373324831763484905555515931325052945702709988980551838500332313580115980474994805398083186753595436075465057500569721354950660878086569552587269210607278883450000000000000000000000000
+    exact_from: certificates/0000-0999/n51.cert at Mishapolk/square-packing-records@c0bf1501d031f2c802cec3eec0846e63ee548021
+      (its header); the least of the 3 sides the commit states at this count, beside certified_bounds.json,
+      upper_bounds.json
+  - n: 55
+    printed: '7.945771007504'
+    rounding: up
+    exact: 48685510424153244791545541315023507116438323118190028655578362684735713350278287020702888079717979782563372729636381503312389594089466794574997009802873956077854488818484232509620440181190266738483773290381783449328763103875433871876502694819113125511656453515910015561057002706383095813525876534935523866393736731979625834100884320706778746917927821158297025467430243218803171772552102495139428905503528637801518629116336438022173247899224610344105618568373837212923707504910529573155459895176493990182241069973204200753444540200184100154699803069804700086128786042232080675325977054123658536053864957042190693934699989013338001759568268189233078024587497680901313129562112944313166689476236777765053633371401260509460966322201913778785102756777931934873402648199718030152344014351136668695232114093987093688993777731273860960830568460504534674412097917130380136156886447191359/6127222943899981136864523848577665891626949858346352175553300867587920421115752463965037843828333811593346790973563914792890058687161054073364523673104837015001580356758293592832188479005646101486650851056570924820675599064724762797920419163141599666822954056493615082059618772346625269944720765003355107209969685917406996407746185104746212223359885548618399932500761854217751927651121314993214927952423292959820413656186645037513121825137333733476449862710222943662616044628242683625432203479212140352234048255662809882689361954279585378903680319082046886635027218657464920459104393629055745051862155268130398837947240164081074229605564612538207012191030659128643057581992660160540358398095384009156880277509058217244238308285584167341008944299378165808922847143000138783523273075418244370115000412116935100592920220715498419529203628893118540994147825000000000000000000000000
+    exact_from: certificates/0000-0999/n55.cert at Mishapolk/square-packing-records@c0bf1501d031f2c802cec3eec0846e63ee548021
+      (its header); the least of the 3 sides the commit states at this count, beside certified_bounds.json,
+      upper_bounds.json
+  - n: 69
+    printed: '8.827194655730'
+    rounding: up
+    exact: 13192416338341372792808145198424003178601071222153544160419380535868117363278023165577256886729698617354307611226506328075176367194003086231750254809511794309143855077711957682799377062072971872240858366514750955938820557345076354874956507300923114211293360027061076949568428641206764545054643651880851104290329806559709694838694485659749474326481990425194102427232709328865313370853897665175992426300651803496185657895625782828486768976334562118399961605617895236773575035573833670201623541841973462485409749114587277913129710781525086779234710674746914531435675501487446612964214031132795761315040698724212293409895023455000021004400744305805328932880064995329937320612835598012599131257436153671321731527037495421887755381061116944943768224471555512012557138082919567957325118899235123747010055517567882078181996861239990632410755440816994322320572428478129346675989758797/1494519703355376341379422109159657790746477457040529948995955820076329949791557859226564040824004646509498107142094850755121459297451890007978965598673283231657199648391008996164211981906025124317562387486358831283304285943506122416460430800685272218960942582452749571209178002954957484693957061209092095667308485115668132449647898023717644645970051440032176024090041689614294467787363553915304218286437286390198119440510354137384960375771905150495947236074796531223556485176518033668810084767899556977690044401278778144386835028971328044790526666718979074197303444965883654715436017938336686646199864185192220280914422875644493508710644742526676716681462831357394181140154543050302948632768780186825650394785512783880579609485803432470208895526099418546314694886628265387538906669387855774534047140357256973127232373310701582872882915029558585606537500000000000000000000000
+    exact_from: certificates/0000-0999/n69.cert at Mishapolk/square-packing-records@c0bf1501d031f2c802cec3eec0846e63ee548021
+      (its header); the least of the 3 sides the commit states at this count, beside certified_bounds.json,
+      upper_bounds.json
+    record_relations:
+    - lane: reported
+      relation: above
+      value: '8.82719465572973'
+      exact_form: ''
+      read_from: packing/campaign/issue-intake/upper-bounds-issue732-f1ceee4-20261024/undecided-resolved.json
+        rows[n = 69], by devtools.beyond_horizon_replay decide-later
+      margin: '8.03e-25'
+  - n: 70
+    printed: '8.880960371556'
+    rounding: up
+    exact: 30366991816692036757513965879875294454631128948135014555467163653557051088632340559734573385909613439577939676710359184064152860157731731678290673587146959348524472132880549059829892718818132331589312273244308000055445437995504675591033822349575000522161537730501431591376336086824185850726397598285616522525280757019981789388858945751359787356484054095224739522977413801493847105783464265158345338419708706394712273679296804947743603465169765400045384199085693988070322478239181105893168132810792515064553744222376726632565248632854131862154546185227901000416264664593650859167802960733646614062499999999999999999999995917032444801808752259471293123711568213584198508054762309429370467/3419336484593837535014005602240896358543417366946778711484593837535014005602240930551908251433249080882352941176470588235294117647058823529411764705882352941176470588235294117647126814029996129311099439775910364145658263305322128851540616246498599439775910364825563268912902443373471679687500000000000000000000000000000000000000000000000000000000000000000000356030648518349818080493916316526610644257703081232492997198879551820728291316530170950741650426760416285059676619829963235294117647058823529411764705882352941176470588235294117647467120285073346097409129525493697478991596638655462184873949579831932773109243701561959151836846709925402738115471468523350000000000000000000000000
+    exact_from: certificates/0000-0999/n70.cert at Mishapolk/square-packing-records@c0bf1501d031f2c802cec3eec0846e63ee548021
+      (its header); the least of the 3 sides the commit states at this count, beside certified_bounds.json,
+      upper_bounds.json
+  - n: 83
+    printed: '9.634757648632'
+    rounding: up
+    exact: 9826184083551379392506234583298453045014757790084076243492073339393316553425655843331456663081042730363062144480810568470853151998488891556830181088779822918870965944154465637173162043193787211748577542486580665656027309460530186282038205464602451317374137850939667171274105039583864810458451517206290880675381848675058273381406134000534821863367829997008326246182002918122822803784899677394798468638137484751202482910079195907285716834834456482347249443745638070848223806875380481402885749509117310319843393241311665873070899774160366163278607517900300843377640926939492686561317338082777790898459182947011044508092523575511362738938403834382196189901713492370058022382741941452966706645229422779421931623214735517654800299765013441336610274525756383711026150795652939114919424607405154435928142140763308299245252449956247502757218666705628194066074427504712455260197/1019868318633577198661768150655203344431404328448061346330875837000693817068580627527263972480594760775309823031637462701417548751830691807453977741660112465173135211658073229551444841939652457247151400579342468829273235907626813247662513585562072782885392237538702183492438487221780167736176576187009616224980123057699921291600687250532449082950905882548153561619358494138968317436211769711178571166224873961187403792076545021659354255773882203760784114319975085834925499322245519370416006877296057666821355943829099372672656172233502694177251866769999131024514875288375168993953818829891898153349081457885390871669734017778937261975613243866323665758837127515896304480602311894260234825277767929358348206284577462276590618963739590979878426747686723178529410307462676818533463267693952828489979186229087735355931253897356059058645213837921100000000000000000000000000
+    exact_from: certificates/0000-0999/n83.cert at Mishapolk/square-packing-records@c0bf1501d031f2c802cec3eec0846e63ee548021
+      (its header); the least of the 3 sides the commit states at this count, beside certified_bounds.json,
+      upper_bounds.json
+  - n: 87
+    printed: '9.838815269949'
+    rounding: up
+    exact: 50133166076699705095095685175782768451070781828771379311457822691779062436150990837414761642244009355544933366153175335051013316104642476014633662856353753734496653223275425664381375889825044184158932744505381441093427838728115573336387450967631051867086698929321019106774476604349951946670652015156710289046382776479190432769489755928682225121440350242776555615103556240776920250812816058316241114328859014329268874585016136144029505387241643866194908352820774767648541220345047839334831019655025928364666076539047404372446415864817837653087595692726491837146715556663858535269706103302598459753126795659935687228259051148992158124979067809427046213346511838764703804476876227501741185777/5095447439675664530345168471155636726390602439093914048334040912934456847847677830390967623311835479974995806425544289294595297562677301955834188669631004193217385276273848000752730917882746767738820769082008723726060169833061467281047793605493373046983809520182072537457210373513171358073952280776833642804109040863754437640928746117922237542700647724074996220915881530828096563019232687420158431115030181387291000392622517332282920777400474676750524169046882413686654605737242634969318054374250897016403856863909552093231475193936802777187126433279099600562035266229607605814294727344323094141080688577882503538798286517399982493425191274382552247015869131931842187500000000000000000000
+    exact_from: certificates/0000-0999/n87.cert at Mishapolk/square-packing-records@c0bf1501d031f2c802cec3eec0846e63ee548021
+      (its header); the least of the 3 sides the commit states at this count, beside certified_bounds.json,
+      upper_bounds.json
+    record_relations:
+    - lane: reported
+      relation: above
+      value: '9.83881526994826'
+      exact_form: ''
+      read_from: packing/campaign/issue-intake/upper-bounds-issue732-f1ceee4-20261024/undecided-resolved.json
+        rows[n = 87], by devtools.beyond_horizon_replay decide-later
+      margin: '9.04e-25'
+  - n: 88
+    printed: '9.882451030482'
+    rounding: up
+    exact: 70382991715777168092066007126303207719210126663668430974210675136388029429006990345668337341953648814823357944731717422584168575291513547031552919745913993389969134375501061924088529491746838951282724568332180671680362593721317991504018326601568990646323433940854543957241664750136720536322802949270218335136297/7122017756393549232654362111458744383519098791721672496577164290392871609083468580564920480459203617257286389233770339997196700818330494119360479805906448787494543615905655018101533315287224733932808995908491838214732431459964619588169404091908151993614567143791351887986361382835802475000000000000000000000000
+    exact_from: certificates/0000-0999/n88.cert at Mishapolk/square-packing-records@c0bf1501d031f2c802cec3eec0846e63ee548021
+      (its header); the least of the 3 sides the commit states at this count, beside certified_bounds.json,
+      upper_bounds.json
+  - n: 102
+    printed: '10.605828696432'
+    rounding: up
+    exact: 1010078923469674129560445489301988505723782969608704506496629011196598402342751195241824810324358359929328666852830551090586220263046642255168885647003420458715560717246841522514480483153685502327937856873252309159920573068605064631333273540840617331060637106996814920584187507037279518531504121463903731946473918579472862538981716827185855866802561263365670530158487378524950236954547407992904212772599201456286566799162631844187875349635003560371013674601223544737795393977338397101679424050385765978212439218670922975883779158474804340662335568161191036025245932479588502660370644649995070783310522128056210555189619305598030595020367744832773414236996746204867851827566603581056837288691906006464901398621452433490927956771795000589276271865737175905775000428965386714847142258946435979366570319196657852842053878406791050641657756495407321063632361900840164949749/95238095238095238095238095238095238095238095238095238095238095238095238095238096190476188342345168777666469461386899692045704483698549686914627082930420991328244669628417728185279188340051685714285714285714285714285714285714285714285714285714285714285714286022532992333122859787305337192008269893114537121398507411049325780876136056968824953191000837283692755693835416988601112453333333333333333333333333333333333333333333333333333333351188172944524569543824212328669303637258007522936792654267750646964012899452794491657196055890475045836916703742552295573411523745371428571428571428571428571428571428571428571428613815060871283721571337611212834835306273416952215840493938515473827151876601672923474131749106357168071102378867244240663971462369285714285714285714285714285714285714285714285713567206600449476864257039424551719797640198825200000000000000000000000000
+    exact_from: certificates/0000-0999/n102.cert at Mishapolk/square-packing-records@c0bf1501d031f2c802cec3eec0846e63ee548021
+      (its header); the least of the 3 sides the commit states at this count, beside certified_bounds.json,
+      upper_bounds.json
+  - n: 104
+    printed: '10.707106781187'
+    rounding: up
+    exact: 612507611195521929770265902523829843015786568938267041176003062724851521114184342091426798980529806377459961102828149289232530819/57205706799502436641032142594391696072554200782452304849859972856912457776509691234994663758884593364762500000000000000000000000
+    exact_from: certificates/0000-0999/n104.cert at Mishapolk/square-packing-records@c0bf1501d031f2c802cec3eec0846e63ee548021
+      (its header); the least of the 3 sides the commit states at this count, beside certified_bounds.json,
+      upper_bounds.json
+  - n: 106
+    printed: '10.822908044133'
+    rounding: up
+    exact: 14175596385813219674187541737425503227447396069439261529474366243209509392014631605393659432196739644098947297938485835714991727898902683562326448678024998342057117266176717108452415774763218236781011017610304920464677505781956075741114851819711685676001886657568202555750730531562736859228838684529954995163/1309777032938747104599677621373340690483934559686300999179696452641091184829502954492969100976683973187616174821165489893791767314000141890736735350548976478294445588875919868620904039855978955014633693197002727662634134998005682771860938696798917847996174946051789908884013815295150000000000000000000000000
+    exact_from: certificates/0000-0999/n106.cert at Mishapolk/square-packing-records@c0bf1501d031f2c802cec3eec0846e63ee548021
+      (its header); the least of the 3 sides the commit states at this count, beside certified_bounds.json,
+      upper_bounds.json
+  - n: 107
+    printed: '10.846667192844'
+    rounding: up
+    exact: 595382824758482360077417891921803537238768573784656929647129099396275964423324738558252808302253152292514721488926813005171777556402507995011693888097222959921232322214809969014074661060438009146723261629499160717107198731188501442243762071058502763298548666347198919656986987782159212796980489716322384264296193/54890853952936743298861053638371548994340015193315239842432653023407854134083795116086124218156337099813036943489188113285797134932246170568755293861313318396848914599814489862827296580474887658858601053586284796568141850793827016858542751546346038455451747686875490337695285747956764900000000000000000000000000
+    exact_from: certificates/0000-0999/n107.cert at Mishapolk/square-packing-records@c0bf1501d031f2c802cec3eec0846e63ee548021
+      (its header); the least of the 3 sides the commit states at this count, beside certified_bounds.json,
+      upper_bounds.json
+  - n: 109
+    printed: '10.949747468306'
+    rounding: up
+    exact: 2505552172801990253463215411871824319513017789618786606584044261900434147294537314060988682940742228512689945764810906814252584381/228822827198009746564128570377566784290216803129809219399439891427649831106038764939978655035538373459050000000000000000000000000
+    exact_from: certificates/0000-0999/n109.cert at Mishapolk/square-packing-records@c0bf1501d031f2c802cec3eec0846e63ee548021
+      (its header); the least of the 3 sides the commit states at this count, beside certified_bounds.json,
+      upper_bounds.json
+  - n: 123
+    printed: '11.591378145498'
+    rounding: up
+    exact: 8806342685558228035603900866800470604103695238586014154342811122116358407021554234892148271505731086730569505127575729826189683438869475563030362970126954186023327671187580800989462598139573693674709438971428844248486000292687878872399529632457680132288995867830863105935703590600218079602649635344917231469499/759732153935360266941470020607459610342960653171165263449366226666210095064006223579357122218706067380916154344457038505298255801396099472488334628666864995284502219572811512726234943753928925025497108318704852866019554843118979975646261978655756373312401945388777721878461495056330280000000000000000000000000
+    exact_from: certificates/0000-0999/n123.cert at Mishapolk/square-packing-records@c0bf1501d031f2c802cec3eec0846e63ee548021
+      (its header); the least of the 3 sides the commit states at this count, beside certified_bounds.json,
+      upper_bounds.json
+  - n: 125
+    printed: '11.707106781187'
+    rounding: up
+    exact: 95673331142146338058756864405541745629281837773273800944782826066998231664355822696797356638260877950720236663934199898461790117/8172243828500348091576020370627385153222028683207472121408567550987493968072813033570666251269227623537500000000000000000000000
+    exact_from: certificates/0000-0999/n125.cert at Mishapolk/square-packing-records@c0bf1501d031f2c802cec3eec0846e63ee548021
+      (its header); the least of the 3 sides the commit states at this count, beside certified_bounds.json,
+      upper_bounds.json
+  - n: 126
+    printed: '11.742640687120'
+    rounding: up
+    exact: 2686984240797014619869630605958948083916353963432478195760721800972663254721275568770734288161552598859464493237729939724268432879/228822827198009746564128570377566784160463108348906597955331877508656802380474158950317956503347298588700000000000000000000000000
+    exact_from: certificates/0000-0999/n126.cert at Mishapolk/square-packing-records@c0bf1501d031f2c802cec3eec0846e63ee548021
+      (its header); the least of the 3 sides the commit states at this count, beside certified_bounds.json,
+      upper_bounds.json
+  - n: 149
+    printed: '12.707106781187'
+    rounding: up
+    exact: 726919024794526803052330199153754595794159159887566172050956502213123722186797175663736193955122484932623352192250649289232530819/57205706799502436641032142594391696072554200782452304849859972856912457776509691234994663758884593364762500000000000000000000000
+    exact_from: certificates/0000-0999/n149.cert at Mishapolk/square-packing-records@c0bf1501d031f2c802cec3eec0846e63ee548021
+      (its header); the least of the 3 sides the commit states at this count, beside certified_bounds.json,
+      upper_bounds.json
+  - n: 150
+    printed: '12.778174593053'
+    rounding: up
+    exact: 2923938036811941520658197601822576793740840768693596004087243734195360192761780056432207657535133159031801316965218113252467558451/228822827198009746564128570377566784290216803129809219399439891427649831106038764939978655035538373459050000000000000000000000000
+    exact_from: certificates/0000-0999/n150.cert at Mishapolk/square-packing-records@c0bf1501d031f2c802cec3eec0846e63ee548021
+      (its header); the least of the 3 sides the commit states at this count, beside certified_bounds.json,
+      upper_bounds.json
+  - n: 151
+    printed: '12.822875655533'
+    rounding: up
+    exact: 20964054305846308809574544048426922215319744513248054609387611051852840384021417382113345833711666466026268880072898357624237143381/1634894922871812089945782453645898369117055733666341326998586883173687618083145472632642150760050465997425000000000000000000000000
+    exact_from: certificates/0000-0999/n151.cert at Mishapolk/square-packing-records@c0bf1501d031f2c802cec3eec0846e63ee548021
+      (its header); the least of the 3 sides the commit states at this count, beside certified_bounds.json,
+      upper_bounds.json
+  - n: 152
+    printed: '12.830718800977'
+    rounding: up
+    exact: 834356770264674051274855879398310783744731417789672902784461496494968004343268966638734298407137784123627520726495708163715169340279073451141664229359004712971186903668895009524247884366368175606195671790304974472336212561009449911604334191849628185254091953618568900483539800763102344307473177467293902976313/65028061420936681984298712579736083985530161271206539730068974349526660993833728850097084583433106268095217153598176245680380444394216626282216107611442211890000549683775200694854017068086463265527723654732626051465645866247824979779763805141480311822732928475349360450019616061655650000000000000000000000000
+    exact_from: certificates/0000-0999/n152.cert at Mishapolk/square-packing-records@c0bf1501d031f2c802cec3eec0846e63ee548021
+      (its header); the least of the 3 sides the commit states at this count, beside certified_bounds.json,
+      upper_bounds.json
+  - n: 153
+    printed: '12.870013850405'
+    rounding: up
+    exact: 128700138504044643444601546077819790394135167702945555210593998967082324279215443/10000000000000000000000000000000000000000000000000000000000000000000000000000000
+    exact_from: certificates/0000-0999/n153.cert at Mishapolk/square-packing-records@c0bf1501d031f2c802cec3eec0846e63ee548021
+      (its header); the least of the 3 sides the commit states at this count, beside certified_bounds.json,
+      upper_bounds.json
+  - n: 170
+    printed: '13.535533905933'
+    rounding: up
+    exact: 1548619567995024366420087196652960675923857218363237911978559301085438266034602888940772480232847756569638998895282401797572548673/114411413599004873282064285188783392145108401564904609699719945713824915553019382469989327517769186729525000000000000000000000000
+    exact_from: certificates/0000-0999/n170.cert at Mishapolk/square-packing-records@c0bf1501d031f2c802cec3eec0846e63ee548021
+      (its header); the least of the 3 sides the commit states at this count, beside certified_bounds.json,
+      upper_bounds.json
+  - n: 171
+    printed: '13.571428571429'
+    rounding: up
+    exact: 4750000000000000000000000447/350000000000000000000000000
+    exact_from: certificates/0000-0999/n171.cert at Mishapolk/square-packing-records@c0bf1501d031f2c802cec3eec0846e63ee548021
+      (its header); the least of the 3 sides the commit states at this count, beside certified_bounds.json,
+      upper_bounds.json
+  - n: 174
+    printed: '13.707106781187'
+    rounding: up
+    exact: 784124731594029239693362347468716972183345455362215737488433221957259822723103592449890891442418824210205047736961899289232530819/57205706799502436641032142594391696072554200782452304849859972856912457776509691234994663758884593364762500000000000000000000000
+    exact_from: certificates/0000-0999/n174.cert at Mishapolk/square-packing-records@c0bf1501d031f2c802cec3eec0846e63ee548021
+      (its header); the least of the 3 sides the commit states at this count, beside certified_bounds.json,
+      upper_bounds.json
+  - n: 177
+    printed: '13.822979734170'
+    rounding: up
+    exact: 45314432246671441959361729980199755693068170228347364323224220414477378342769315935527372011765904774990518686792522586933621431835442973636047556957817314521292187436685174778280331830298717017715418388991887113463228119/3278195665342495125807898273263123810799908684932987059243781673042926699098732962868808104024571157522044618983686316706142464537386858337804852429885902728904114128413835219423689252531289907450000000000000000000000000
+    exact_from: certificates/0000-0999/n177.cert at Mishapolk/square-packing-records@c0bf1501d031f2c802cec3eec0846e63ee548021
+      (its header); the least of the 3 sides the commit states at this count, beside certified_bounds.json,
+      upper_bounds.json
+    record_relations:
+    - lane: T-123
+      relation: above
+      value: 276459594683388972001873/20000000000000000000000
+      exact_form: ''
+      read_from: packing/campaign/issue-intake/upper-bounds-issue732-f1ceee4-20261024/undecided-resolved.json
+        rows[n = 177], by devtools.beyond_horizon_replay decide-later
+      margin: '1.30e-24'
+  - n: 198
+    printed: '14.571428571429'
+    rounding: up
+    exact: 73593073593073593074329011284271284090259740329292929291364342122655123367171717030750360756904111787878787806637807317012987012987/5050505050505050505101010101010100980591630591630591630397546897546897544660894660894660894349927849927850000000000000000000000000
+    exact_from: certificates/0000-0999/n198.cert at Mishapolk/square-packing-records@c0bf1501d031f2c802cec3eec0846e63ee548021
+      (its header); the least of the 3 sides the commit states at this count, beside certified_bounds.json,
+      upper_bounds.json
+  - n: 199
+    printed: '14.617572173593'
+    rounding: up
+    exact: 45596704195431373614576333538759428083705967807349646638922338376672383216702164360704567441866178009326745809774456306856132114278710177040017559280281303099928506507748495204056556506914852296793119677953400932126828516388592268933286687952037303444441006695501445693944702674280253349521227966785963955279536408711146080621497576395058751333820394839772884459576218920373885667166723786897371892068423138775415492555289246404513250703893087246357425398411783097687442679696406360756228751519284182078080510950826328801436751110241140750901230666496118135149426093265774894286189245487011764960511616271811173485931971852232002368473510516653487216316081794446497281708174818995569748935336682255243413704084682569833624052463823458584442047663250124880343321979947524892685126109830086781452995300592148302064927776112244364856131161530829631394884654711904912514091594607559243/3119307615104752642919365280016632316766510276673788221480068192034995075645587181404868197026534676158986256147073210152104580970192908301179957526232294431264524228111937064042482080095591457972117236577767257704547720621582865851027490605045335368158625461917126788129450928966410519430893415718481167644433772779640915227181592211778632817336498411736839016038711961692123973338109074897461312330812877394823823066344889205050186539513636058153841571427493498926865607509518763596911240165935442451098400476956120538249445711095293722055617008836552411257148003410780396970468900825841643661195387079324182839167654550861015220833216440898088186501104392058626678889913225323235902925436822236525617027154177999238764373154423248665214070357857320356210936159021583205511132673406112861740511156208271025508502520217269940229571051718238573867783516775000000000000000000000000
+    exact_from: certificates/0000-0999/n199.cert at Mishapolk/square-packing-records@c0bf1501d031f2c802cec3eec0846e63ee548021
+      (its header); the least of the 3 sides the commit states at this count, beside certified_bounds.json,
+      upper_bounds.json
+  - n: 201
+    printed: '14.707106781187'
+    rounding: up
+    exact: 841330438393531676334394495783679348572531750836865302925909941701395923259410009236045588929715163487786743281673149289232530819/57205706799502436641032142594391696072554200782452304849859972856912457776509691234994663758884593364762500000000000000000000000
+    exact_from: certificates/0000-0999/n201.cert at Mishapolk/square-packing-records@c0bf1501d031f2c802cec3eec0846e63ee548021
+      (its header); the least of the 3 sides the commit states at this count, beside certified_bounds.json,
+      upper_bounds.json
+  - n: 202
+    printed: '14.727922061358'
+    rounding: up
+    exact: 3370084764831844055044255692661581740549485368711215889721257387051453229192288880407469537293857535082051706499695919355952673651/228822827198009746564128570377566784290216803129809219399439891427649831106038764939978655035538373459050000000000000000000000000
+    exact_from: certificates/0000-0999/n202.cert at Mishapolk/square-packing-records@c0bf1501d031f2c802cec3eec0846e63ee548021
+      (its header); the least of the 3 sides the commit states at this count, beside certified_bounds.json,
+      upper_bounds.json
+  - n: 203
+    printed: '14.778174593053'
+    rounding: up
+    exact: 3381583691207961013786454788342275804574970170650352698126584138269140296845693573658540813557849881132930324254158952575173075157/228822827198009746564128570377566784010855841289369389938966543135560367708297537086541197001673649294350000000000000000000000000
+    exact_from: certificates/0000-0999/n203.cert at Mishapolk/square-packing-records@c0bf1501d031f2c802cec3eec0846e63ee548021
+      (its header); the least of the 3 sides the commit states at this count, beside certified_bounds.json,
+      upper_bounds.json
+  - n: 205
+    printed: '14.824451146125'
+    rounding: up
+    exact: 765354776295247755499687923048888256596732591842592173793451976514431175307965404028690735858374687035680184027757122336176153447087944890856449218548019066278964473173398863138568684462513034339871225898095695313264952328895765426124426018955155879577430529570091497544446786098793916333046937300119117097887/51627865932517360621630552802079374144801466339047706264100235615278732514090629198798198762593282887213263453361904326857650440416848132811442221689767995056206428162815644561050413073579390859197837337703095563074920551095650986950025468465731029728204422503293451486217441312375850000000000000000000000000
+    exact_from: certificates/0000-0999/n205.cert at Mishapolk/square-packing-records@c0bf1501d031f2c802cec3eec0846e63ee548021
+      (its header); the least of the 3 sides the commit states at this count, beside certified_bounds.json,
+      upper_bounds.json
+    record_relations:
+    - lane: reported
+      relation: above
+      value: '14.82445114612408'
+      exact_form: ''
+      read_from: packing/campaign/issue-intake/upper-bounds-issue732-f1ceee4-20261024/undecided-resolved.json
+        rows[n = 205], by devtools.beyond_horizon_replay decide-later
+      margin: '1.40e-24'
+  - n: 207
+    printed: '14.880960371556'
+    rounding: up
+    exact: 744048018577778979734834649150970065727623701892472840040520803300141762094765894509161753689740279769416717960410263284816044248150404431817/50000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+    exact_from: certificates/0000-0999/n207.cert at Mishapolk/square-packing-records@c0bf1501d031f2c802cec3eec0846e63ee548021
+      (its header); the least of the 3 sides the commit states at this count, beside certified_bounds.json,
+      upper_bounds.json
+  - n: 230
+    printed: '15.682926829269'
+    rounding: up
+    exact: 32150000000000000000000003051/2050000000000000000000000000
+    exact_from: certificates/0000-0999/n230.cert at Mishapolk/square-packing-records@c0bf1501d031f2c802cec3eec0846e63ee548021
+      (its header); the least of the 3 sides the commit states at this count, beside certified_bounds.json,
+      upper_bounds.json
+  - n: 231
+    printed: '15.707106781187'
+    rounding: up
+    exact: 19168771097451394409950747363129842849039852763528356289010458242005978758248010322682128415443388909897939908313916512543002608467203461675786496658929328179827873981704228421226007131498246679109449309416752027957341242665672207028226817587092110518275375250442706972187386087855148232775866539890176118519233/1220388411722718648329815157896462336313183592964691514215250545852640669870610347932243420711254775151908978439669537031045686947559379320072806573739421527799784856148058193317130181541078541305106612486999797031706452616310870150505434924919836487316421444453163474187892893270184150000000000000000000000000
+    exact_from: certificates/0000-0999/n231.cert at Mishapolk/square-packing-records@c0bf1501d031f2c802cec3eec0846e63ee548021
+      (its header); the least of the 3 sides the commit states at this count, beside certified_bounds.json,
+      upper_bounds.json
+  - n: 233
+    printed: '15.778174593053'
+    rounding: up
+    exact: 3610406518405970760350583381602125310411076314389390789336964371124993399197457057866064027382689230362781663501753113252467558451/228822827198009746564128570377566784290216803129809219399439891427649831106038764939978655035538373459050000000000000000000000000
+    exact_from: certificates/0000-0999/n233.cert at Mishapolk/square-packing-records@c0bf1501d031f2c802cec3eec0846e63ee548021
+      (its header); the least of the 3 sides the commit states at this count, beside certified_bounds.json,
+      upper_bounds.json
+  - n: 234
+    printed: '15.822875655533'
+    rounding: up
+    exact: 12819171036881968635005387062567948466082783613006916194061071421463127183451891359178560449405449616305581864875752831257146353258216675083056389525271137486752095168312066208612027327725400013860917156706426153056037338013946145096907727910112475644822188813965879521677136736544519871510845742040798715594733/810166958014353464555914611919835650157835374018322262304074324266904182940063036492867999360094156508731405713918786876334796225510755754355550899385699180608541442281695312351645581100290907598685347380713160552419186040239197482644516861728754840038239161075542287102039935779736650000000000000000000000000
+    exact_from: certificates/0000-0999/n234.cert at Mishapolk/square-packing-records@c0bf1501d031f2c802cec3eec0846e63ee548021
+      (its header); the least of the 3 sides the commit states at this count, beside certified_bounds.json,
+      upper_bounds.json
+  - n: 257
+    printed: '16.535533905933'
+    rounding: up
+    exact: 1891853808792038986266280086542734934258974991211135304603419619550254869252441389657700665156625792235129172163549901797572548673/114411413599004873282064285188783392145108401564904609699719945713824915553019382469989327517769186729525000000000000000000000000
+    exact_from: certificates/0000-0999/n257.cert at Mishapolk/square-packing-records@c0bf1501d031f2c802cec3eec0846e63ee548021
+      (its header); the least of the 3 sides the commit states at this count, beside certified_bounds.json,
+      upper_bounds.json
+  - n: 258
+    printed: '16.563448002134'
+    rounding: up
+    exact: 67308328775928709960569066727145903963810058543639283334435498585253087061694446725345488625755658369336949929774270179947554378540504217990137473821448640719848012745235368446875114291705613687623684695769022085494616772819353726151600051058972343456504138886877961947895217302946560678766329072835684607/4063666500311873562797223501495980079877912348847619995799840436099560352940099990843274500970670352169473358739703927515958874131588515622686881445447086076639948724190804358637324922688956243364916612323199172599007262867020096518038145293973279038733662157791200074816409837487500000000000000000000000
+    exact_from: certificates/0000-0999/n258.cert at Mishapolk/square-packing-records@c0bf1501d031f2c802cec3eec0846e63ee548021
+      (its header); the least of the 3 sides the commit states at this count, beside certified_bounds.json,
+      upper_bounds.json
+  - n: 262
+    printed: '16.707106781187'
+    rounding: up
+    exact: 955741851992536549616458792413604101350904341786164433800863381189668124332022842808354983904307842042950134371095649289232530819/57205706799502436641032142594391696072554200782452304849859972856912457776509691234994663758884593364762500000000000000000000000
+    exact_from: certificates/0000-0999/n262.cert at Mishapolk/square-packing-records@c0bf1501d031f2c802cec3eec0846e63ee548021
+      (its header); the least of the 3 sides the commit states at this count, beside certified_bounds.json,
+      upper_bounds.json
+  - n: 265
+    printed: '16.778174593053'
+    rounding: up
+    exact: 3839229345603980506914711974861974815967821496287989051086871250101537801342682725010682817331874587473108445680598113252467558451/228822827198009746564128570377566784290216803129809219399439891427649831106038764939978655035538373459050000000000000000000000000
+    exact_from: certificates/0000-0999/n265.cert at Mishapolk/square-packing-records@c0bf1501d031f2c802cec3eec0846e63ee548021
+      (its header); the least of the 3 sides the commit states at this count, beside certified_bounds.json,
+      upper_bounds.json
+  - n: 266
+    printed: '16.823028750757'
+    rounding: up
+    exact: 147146453330618569615518038795836379489908386347891022471909949720385369244581532303309196033902430646536134929790764701259399120775001851905141537204967031930729920715408665620911134395128011258090476481027768737421448105839067267833213649814361964079776423118471920566747295547638525313176560799759921849620141/8746727804528175713337797690237225249346795607876593418661513471345311630807790291683996031960285431814260549502865889808496614620765616642508988058265567550796617042762444921495424546974719599390035228118101539741590100710580622687092768804033953034727395709835846256452667091623999800000000000000000000000000
+    exact_from: certificates/0000-0999/n266.cert at Mishapolk/square-packing-records@c0bf1501d031f2c802cec3eec0846e63ee548021
+      (its header); the least of the 3 sides the commit states at this count, beside certified_bounds.json,
+      upper_bounds.json
+  - n: 267
+    printed: '16.838815269949'
+    rounding: up
+    exact: 120291587061921391778791520628394707879987766279117546097465987759061452911202658171501850337859811007102787059382043843395082093637359639435843440229248089870506570753208581075455550313218317906281689876932005377309951441/7143708457720433862073715700438155559528895576457134801010076483071223322186960064936885071512514800217462597032739320436250097518414446486824849829080447502217641016711584493846600268865497572050000000000000000000000000
+    exact_from: certificates/0000-0999/n267.cert at Mishapolk/square-packing-records@c0bf1501d031f2c802cec3eec0846e63ee548021
+      (its header); the least of the 3 sides the commit states at this count, beside certified_bounds.json,
+      upper_bounds.json
+  - n: 292
+    printed: '17.591378145498'
+    rounding: up
+    exact: 175913781454976981594349510811508353584694134613200159424112030200664464553551473807406279196694672847573269828412909/10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+    exact_from: certificates/0000-0999/n292.cert at Mishapolk/square-packing-records@c0bf1501d031f2c802cec3eec0846e63ee548021
+      (its header); the least of the 3 sides the commit states at this count, beside certified_bounds.json,
+      upper_bounds.json
+  - n: 293
+    printed: '17.634146341464'
+    rounding: up
+    exact: 511390243902439024390243951258048780487804878048780487804878048780487804878048785601707317073170453902439512580487804878037/29000000000000000000000000000000000000000000000000000000000000000000000000000000289999999999999800000000000000000000000000
+    exact_from: certificates/0000-0999/n293.cert at Mishapolk/square-packing-records@c0bf1501d031f2c802cec3eec0846e63ee548021
+      (its header); the least of the 3 sides the commit states at this count, beside certified_bounds.json,
+      upper_bounds.json
+  - n: 295
+    printed: '17.704232790737'
+    rounding: up
+    exact: 32409060804383428201705369690931718665504896181680567376614860360203635881166305955139656431954390992138362969679234187162877854240771974233180182621998267096746103560153899192491032963373642900760203287814792033343106501416224712714533969169842352755277119230755411378355596609511037951401741999812613471596837/1830582617584077972494722736844693504469775389447037271322875818778961004805915521898365131066877247930945198187903974828376430314392396257756085982165089646243829550708144451122160524132221031540141240301529626666519380396760837357882648699001615837342238935674431928346533432747097600000000000000000000000000
+    exact_from: certificates/0000-0999/n295.cert at Mishapolk/square-packing-records@c0bf1501d031f2c802cec3eec0846e63ee548021
+      (its header); the least of the 3 sides the commit states at this count, beside certified_bounds.json,
+      upper_bounds.json
+  - n: 296
+    printed: '17.707106781187'
+    rounding: up
+    exact: 38210495850132165267377793430466977508695069793920670263236149335801529303759305507040510041954279152600126989193606918753446723350667598368881747557101966624276644087810246136491266315998096292897530375972667382205557474330197216705298122820049525021946788394077383423446686665615635490573619857579440438618539951574230729475657078198472095300217683799780892656791594946776692986639656882112077087168171164760402218331708763799927829448558622639575741972201109312616692918516153520005392588253088428264438524648441762319901396061464149462111694301721918791129798694136671657046585435799200746696843546623667254034325357840279046386121283249869089390961566367121234583448978313346767415303222446478631415404388898243784252854320795731923059643773079664552753045523701722301343108868061669625802116450310388604154970527653142283851387748422603963066374819895147607447262032913911/2157918643757774427492811163650051999770617485621563832361877041611835446872111592090641957528825112875124269462222140196006291805122253419367507416619444505029607222907974346877653303173295246503753870613359730835288570454948648827072454118770000914440666171632412809126274985247246973571209788086335108183408510341818921621700891837293046810630771888355404257464003640546223069533421907902798511389018248953031365354910774674279201817952588438183993531547888217011342799654365451497234357050115072110638240122653595226061421610519476660762077700581102715684080921218745144513257116886362413781881594403354157358287322430294338841260601440648246783666367168605664030579894060308702434898894352161468905719612331793495136905167922847706532875727576328245969683787689440464899011633128019857034061253155603329422243039105622295020580613276161759952485175000000000000000000000000
+    exact_from: certificates/0000-0999/n296.cert at Mishapolk/square-packing-records@c0bf1501d031f2c802cec3eec0846e63ee548021
+      (its header); the least of the 3 sides the commit states at this count, beside certified_bounds.json,
+      upper_bounds.json
+  - n: 298
+    printed: '17.778174593053'
+    rounding: up
+    exact: 581150310400284321925548652588832045932080954026655330405254018439726029069701198879328801040151420654776461122777587607495365493/32688975314001392366304081482509540612888114732829888485634270203949975872291252134282665005076910494150000000000000000000000000
+    exact_from: certificates/0000-0999/n298.cert at Mishapolk/square-packing-records@c0bf1501d031f2c802cec3eec0846e63ee548021
+      (its header); the least of the 3 sides the commit states at this count, beside certified_bounds.json,
+      upper_bounds.json
+  - n: 299
+    printed: '17.822875655533'
+    rounding: up
+    exact: 7459463403572574530307090392294866388408318573282293808181254334869851521056318496844058647982731199863976780689376409878595010732463318323781465587037103263835625018708563554368758840883151925141339218462598409235800708916629071429781683268672258556710166943447239578264299845696552980365619930190011692138413/418533100255183895021934977130798146540398367452008856823407207253143320314616248139038933845249753296577966595749943440780403533023989433212347121836167644311611276548856962953443760870027901406903810612283179459586785200791366750559518564944318588680835944066881033167237694401610750000000000000000000000000
+    exact_from: certificates/0000-0999/n299.cert at Mishapolk/square-packing-records@c0bf1501d031f2c802cec3eec0846e63ee548021
+      (its header); the least of the 3 sides the commit states at this count, beside certified_bounds.json,
+      upper_bounds.json
+  - n: 301
+    printed: '17.846667192844'
+    rounding: up
+    exact: 979618802429039563169445305814002147254868989340601155404241966598141578682579194073712794214849989476212651542739329020105743030989062567119696992399854977826811195060399915752857193933389367151051554543719451291928708524499357907138015681679921198277313573546185270057384389479695374008371808231322384264296193/54890853952936743298861053638371548994340015193315239842432653023407854134083795116086124218156337099813036943489188113285797134932246170568755293861313318396848914599814489862827296580474887658858601053586284796568141850793827016858542751546346038455451747686875490337695285747956764900000000000000000000000000
+    exact_from: certificates/0000-0999/n301.cert at Mishapolk/square-packing-records@c0bf1501d031f2c802cec3eec0846e63ee548021
+      (its header); the least of the 3 sides the commit states at this count, beside certified_bounds.json,
+      upper_bounds.json
+  note: 'A commit of the #732 comment 6374211504 source after the commit the comment reports, which no
+    issue reports: the repository is watched, so it is a report from the push that made it public, which
+    the repository''s activity log dates. Transcribed from the mishapolk-issue732-f1ceee4-2026-10-23 packet''s
+    receipts/later-commits.json at every count to 1024 where it adds or changes a certificate or an index''s
+    bound, at the least side it states there.'
+- report: Mishapolk/square-packing-records@7e82c64
+  url: https://github.com/Mishapolk/square-packing-records/tree/7e82c6408937c9a6fe2e11054ed716bba67922f0
+  reported_at: '2026-10-23T21:42:38Z'
+  holders: Mykhailo Polkovskyi
+  bead: think-e3im
+  claims:
+  - n: 303
+    printed: '17.909772217257'
+    rounding: up
+    exact: 322891854238658113908197448495564809659442304656476373543906871997038053/18028808536579224568667370014525000000000000000000000000000000000000000
+    exact_from: certificates/0000-0999/n303.cert at Mishapolk/square-packing-records@7e82c6408937c9a6fe2e11054ed716bba67922f0
+      (its header); the least of the 2 sides the commit states at this count, beside certified_bounds.json
+  note: 'A commit of the #732 comment 6374211504 source after the commit the comment reports, which no
+    issue reports: the repository is watched, so it is a report from the push that made it public, which
+    the repository''s activity log dates. Transcribed from the mishapolk-issue732-f1ceee4-2026-10-23 packet''s
+    receipts/later-commits.json at every count to 1024 where it adds or changes a certificate or an index''s
+    bound, at the least side it states there.'
+- report: 'PR #574'
+  pull: 574
+  holders: PingYou Ltd (BuddenPing)
+  bead: think-9v2k
+  claims:
+  - n: 55
+    printed: '7.9457710075039129789580095385274780713966'
+    rounding: up
+    exact: 1947420416966129791661821477466012008524493396511929715070464508146328429526486935552227484837221586224249238650827878376382493811603256892208666738917107901584745709283926230511616786692297978339327189168590488880751632488637513499164140048381180513915591073487577372362862962922183641677745214392836247384916027180392306333568951414754694196696893353152626844996944424369027715904946542440307954413254461917429244424741190480774111196766128016517256038191420518189611160814302856102853663360459498579534865787390149744951547036617214921034400489058470044302313306060149332802088896538706902601205192214173247781095857088019371004648723880979630747689419665045203061742970150867720825811364627296458944171919598325904646180756084795884017298316432180071174630493372079219716505481467751124200696431197224838777065712629309340549450377867593064611157448/245088917755999245474580953943106635665077994333854087022132034703516816844630098558601513753133352463733871638942556591715602347486442162934580946924193480600063214270331743713287539160225844059466034042262836992827023962588990511916816766525663986672918162259744603282384750893865010797788830600134204288398787436696279856309847404189848488934395421944735997300030474168710077106044852599728597118096931718392816546247465801500524873005493349339057994508408917746504641785129707345017288139168485614089361930226512395307574478171183415156147212763281875465401088746298596818364175745162229802074486210725215953517889606563242969184222584501528280487641226365145722303279706406421614335923815360366275211100362328689769532331423366693640357771975126632356913885720005551340930923016729774804600016484677404023716808828619936781168145155724741639765913
+    exact_from: packing/resources/web/pingyou-pr574-certificates-2026-10-13/acquisition/claims.json at
+      claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37
+    first_committed: '2026-10-13T00:24:05Z'
+    reported_at: '2026-10-13T00:24:05Z'
+  - n: 70
+    printed: '8.8809603715555795946966915749233641589945'
+    rounding: unstated
+    first_committed: '2026-10-13T01:58:06Z'
+    reported_at: '2026-10-13T01:58:06Z'
+    record_relations:
+    - lane: reported
+      relation: below
+      value: '8.8809603715555796'
+      exact_form: 8880960371555579594785501178639/1000000000000000000000000000000
+      read_from: packing/resources/web/pingyou-pr574-certificates-2026-10-13/acquisition/algebraic-claims.json
+        at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37
+    - lane: verified
+      relation: below
+      value: '8.8809603715555796'
+      exact_form: 8880960371555579594785501178639/1000000000000000000000000000000
+      read_from: packing/resources/web/pingyou-pr574-certificates-2026-10-13/acquisition/algebraic-claims.json
+        at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37
+  - n: 83
+    printed: '9.6347576486310820292600837937953139319641'
+    rounding: up
+    exact: 196523681671027587850124673645390203611259888648043201379146456752124391781091133081384797250291783807876938794758842792016358900279732596326542625594151754048703752036393719947706533138983755855957407318699784914870407577446831330511168550281873985863943415065615412184875757772939626971965828036155961608439059162723310454695972018601239721644825436010762221306435530073900746463845756454877108991963402932387838145396370769301420144657926058646215868490429695737877288673561617849636258542197170473904441374015344660570350741039837139977598523452840393669898966089716771532135183028310684770795683461393385341084543003019514798029657267347994774305353993382050993323619300887059642173718253246535620660189406388612591507125752223699248808363362474920444774362617640594959985819200082089044078982336372403511209356215276669468093457358941933/20397366372671543973235363013104066888628086568961226926617516740013876341371612550545279449611895215506196460632749254028350975036613836149079554833202249303462704233161464591028896838793049144943028011586849376585464718152536264953250271711241455657707844750774043669848769744435603354723531523740192324499602461153998425832013745010648981659018117650963071232387169882779366348724235394223571423324497479223748075841530900433187085115477644075215682286399501716698509986444910387408320137545921153336427118876581987453453123444670053883545037335399982620490297505767503379879076376597837963066981629157707817433394680355578745239512264877326473315176742550317926089612046237885204696505555358587166964125691549245531812379274791819597568534953734463570588206149253536370669265353879056569799583724581754707118625077947121181172904276758422
+    exact_from: packing/resources/web/pingyou-pr574-certificates-2026-10-13/acquisition/claims.json at
+      claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37
+    first_committed: '2026-10-13T00:24:05Z'
+    reported_at: '2026-10-13T00:24:05Z'
+  - n: 153
+    printed: '12.8700138504044643444601534007805939989658'
+    rounding: unstated
+    first_committed: '2026-10-13T01:29:11Z'
+    reported_at: '2026-10-13T01:29:11Z'
+  - n: 207
+    printed: '14.8809603715555795946966915749233641589945'
+    rounding: unstated
+    first_committed: '2026-10-13T01:58:06Z'
+    reported_at: '2026-10-13T01:58:06Z'
+  note: 'An earlier report at counts in the corpus where a later commit of the source publishes a side,
+    transcribed from the report-order ledger campaign/issue-intake/upper-bounds-20261014 at each count
+    where its claim is strictly below the start, with its print, rounding, exact side and times, and those
+    of the record relations that ledger froze that still read a lane of the start as the case records
+    print it. It is walked here only to order the later commit''s claims: its own verdicts and records
+    stand as its own import made them.'
+- report: '#639'
+  issue: 639
+  holders: Evan Daniel (evand)
+  bead: think-phyb
+  claims:
+  - n: 70
+    printed: '8.880960371555579594696691574923364158994514568180299308474000166551378423865387042783218418656963207461534043730805407211'
+    rounding: cut
+    first_committed: '2026-10-16T03:30:10Z'
+  - n: 153
+    printed: '12.870013850404464344460153400780593998965895322894174996588127386511274528808030333484525787462535674605047938786347847412'
+    rounding: cut
+    first_committed: '2026-10-16T03:30:10Z'
+  - n: 207
+    printed: '14.880960371555579594696691574923364158994514568180299308474000166551378423865387042783218418656963207461534043730805407211'
+    rounding: cut
+    first_committed: '2026-10-16T03:30:10Z'
+  note: 'An earlier report at counts in the corpus where a later commit of the source publishes a side,
+    transcribed from the report-order ledger campaign/issue-intake/upper-bounds-20261016 at each count
+    where its claim is strictly below the start, with its print, rounding, exact side and times, and those
+    of the record relations that ledger froze that still read a lane of the start as the case records
+    print it. It is walked here only to order the later commit''s claims: its own verdicts and records
+    stand as its own import made them.'
+- report: '#755'
+  issue: 755
+  holders: Amund Kristiansen
+  bead: think-tqb5
+  claims:
+  - n: 303
+    printed: '17.909762327476'
+    rounding: up
+    exact: 223872029093440709529093216833/12500000000000000000000000000
+    exact_from: the certificate side issue 755's table states for s303_amund.cert (gist amundsk/78f9f0e7b4669f2f509a281845081768
+      at 511f56bf, SHA-256 9ec01059b35cc983cb28a1bb33bd215a2717228f7efd182e1724de6b22dc511b), whose import,
+      pull request 757 (think-tqb5), is not on main
+  note: 'Issue 755''s one claim, transcribed from the issue''s table: its import has not reached main,
+    so no retained ledger walks it, and it was reported before the later commit''s 303.'
+- report: franciscouzo/square-packing@4e4c8ce
+  url: https://github.com/franciscouzo/square-packing/tree/4e4c8ce23cb5e87f033021687010992c40575480
+  reported_at: '2026-10-15T00:31:53Z'
+  holders: Francisco Couzo
+  bead: think-yfoo
+  claims:
+  - n: 985
+    printed: '31.920310216821'
+    rounding: up
+    exact: 151772453123382777232691846593/4754729891171500000000000000
+    exact_from: certified_bounds.json at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (the bound it states); the least of the 3 sides the commit states at this count, beside certificates/n985.cert,
+      certificates/best/n985.cert
+  note: 'A publication in a watched repository that no issue reports, dated by its commit, or by the later
+    push that made it public; transcribed from the history scan (resources/web/couzo-index-2026-10-15/receipts/history-publications.json)
+    at each count #732 comment 6374211504 claims where it states a side strictly below the start, at the
+    least side the commit states there. Its 1 index deletion bound, each deleting one square from the
+    next count''s 4e4c8ce certificate, at 985, have no row by the owner''s answer of 23 October 2026 on
+    D6 (think-f2io), the option labelled "Yes, an earlier report (Recommended)" in the question the coordinator
+    asked, whether a side obtained by deleting a square from a neighbour''s certificate is an earlier
+    report; so a later equal or higher side is not recorded, and on the decision''s recommendation, which
+    the owner has not confirmed (think-kzme), it has no row of its own (beyond_horizon_replay.WALKS[''upper-bounds-issue732-f1ceee4-20261024''].held).'
+rulings:
+- ruling: restatement
+  decided: '2026-10-23'
+  bead: think-fwa9
+  through: 1024
+- ruling: classical-constructions
+  decided: '2026-10-23'
+  bead: think-8krd
+  through: 1024

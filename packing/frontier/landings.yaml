@@ -16,8 +16,8 @@ houses:
     result: T-174
     landed: '2026-10-19'
   - n: 70
-    result: T-146
-    landed: '2026-10-12'
+    result: T-174
+    landed: '2026-10-24'
   - n: 84
     result: T-174
     landed: '2026-10-19'
@@ -25,8 +25,8 @@ houses:
     result: T-174
     landed: '2026-10-19'
   - n: 102
-    result: T-146
-    landed: '2026-10-12'
+    result: T-193
+    landed: '2026-10-24'
   - n: 103
     result: T-174
     landed: '2026-10-19'
@@ -40,8 +40,8 @@ houses:
     result: T-174
     landed: '2026-10-19'
   - n: 123
-    result: T-146
-    landed: '2026-10-12'
+    result: T-193
+    landed: '2026-10-24'
   - n: 126
     result: T-139
     landed: '2026-10-12'
@@ -64,8 +64,8 @@ houses:
     result: T-187
     landed: '2026-10-17'
   - n: 153
-    result: T-173
-    landed: '2026-10-15'
+    result: T-174
+    landed: '2026-10-24'
   - n: 154
     result: T-222
     landed: '2026-10-20'
@@ -106,8 +106,8 @@ houses:
     result: T-174
     landed: '2026-10-19'
   - n: 207
-    result: T-173
-    landed: '2026-10-15'
+    result: T-174
+    landed: '2026-10-24'
   - n: 208
     result: T-174
     landed: '2026-10-19'
@@ -151,11 +151,11 @@ houses:
     result: T-182
     landed: '2026-10-15'
   - n: 258
-    result: T-146
-    landed: '2026-10-12'
+    result: T-193
+    landed: '2026-10-24'
   - n: 259
-    result: T-136
-    landed: '2026-10-12'
+    result: T-193
+    landed: '2026-10-24'
   - n: 260
     result: T-225
     landed: '2026-10-22'
@@ -193,17 +193,17 @@ houses:
     result: T-146
     landed: '2026-10-12'
   - n: 295
-    result: T-146
-    landed: '2026-10-12'
+    result: T-193
+    landed: '2026-10-24'
   - n: 297
     result: T-174
     landed: '2026-10-19'
   - n: 302
-    result: T-186
-    landed: '2026-10-17'
+    result: T-193
+    landed: '2026-10-24'
   - n: 303
-    result: T-230
-    landed: '2026-10-23'
+    result: T-239
+    landed: '2026-10-24'
   - n: 304
     result: T-186
     landed: '2026-10-17'
@@ -288,5 +288,7 @@ sources:
     landed: '2026-10-22'
   - id: mishapolk-issue732-2026-10-22
     landed: '2026-10-23'
+  - id: mishapolk-issue732-f1ceee4-2026-10-23
+    landed: '2026-10-24'
   - id: muglich-issue686-2026-10-19
     landed: '2026-10-21'

@@ -119,8 +119,9 @@ WRITER_BEAD = "think-ot5c"
 NEXT_PULL_REQUEST = "next pull request"
 #: its regularization runs pass the item cap, and the counts they do not cover wait:
 OVER_CAP = "over the item cap"
-#: or the writer cannot write the house yet, an algebraic side (`adopt_houses.plan`), the
-#: one code gap the rule names.
+#: or the writer cannot write the house yet, the one code gap the rule names: since 23
+#: October 2026 it writes an algebraic side, and the gap is one whose packet holds no derived
+#: number-field fact and receipt for the count (`upper_bound_houses.FIELD_COUNTS`, `writable`).
 NO_WRITER = "no writer"
 STAGING_REASONS = (NEXT_PULL_REQUEST, OVER_CAP, NO_WRITER)
 
@@ -202,18 +203,20 @@ class Pending:
 #: adopted Evan Daniel's original certificate there (T-220). A smaller validated packing
 #: takes a staged count off too: the adoption of 20 October 2026 (think-xu4d) took 204
 #: from T-193 to Francisco Couzo's issue 678 (T-223), below T-193's algebraic side there by
-#: 2.04e-5, which leaves T-193 three houses below T-186, at 175, 232 and 302.
+#: 2.04e-5, which leaves T-193 three houses below T-186, at 175, 232 and 302. The adoption
+#: of 23 October 2026 (think-ot5c), once the writer wrote an algebraic side, took T-174's
+#: three algebraic houses off at 70, 153 and 207, and T-193's at 102, 123, 258, 259, 295 and
+#: 302, whose exact forms the packet retains and derives as number-field facts. T-193's
+#: other eight wait for think-8ido to correct their regularization items
+#: (`CORRECTIONS_OWED`), and 267 for its form, which the packet pins only; none of the nine
+#: has a derived fact, so the writer cannot write them yet. At 267 the form, fetched from
+#: the pin and equal to its digest, makes a degree-41 field witness of 4.53 MB in a checkout
+#: and 1.88 MB as Git stores it, and its jobs are priced at about 2 CPU-hours each from a
+#: 66-pair sample (14.6 CPU s), about 6 for the three and about 2 more at each atlas rebuild
+#: of the witness: over the lanes' 2 CPU-hour limit on one run, so 267 waits, not run.
 PENDING_ADOPTION: dict[int, Pending] = {
-    **{
-        n: Pending(house="T-174", bead=WRITER_BEAD, why=NO_WRITER)
-        for n in (70, 153, 207)
-    },
-    **{
-        n: Pending(house="T-193", bead=WRITER_BEAD, why=NO_WRITER)
-        for n in (
-            88, 102, 123, 126, 175, 199, 232, 258, 259, 266, 267, 292, 295, 301, 302,
-        )
-    },
+    n: Pending(house="T-193", bead=WRITER_BEAD, why=NO_WRITER)
+    for n in (88, 126, 175, 199, 232, 266, 267, 292, 301)
 }  # fmt: skip
 
 
@@ -773,13 +776,15 @@ def algebraic_side(key: str, n: int) -> tuple[Any, int]:
     return algebraic_reports.side_of(witness), degree
 
 
-def algebraic_below(key: str, n: int, side: Fraction) -> bool:
+def algebraic_below(key: str, n: int, side: Side) -> bool:
     """Whether the algebraic side at `n` is below `side`, decided exactly."""
     return exact_sides.compare(algebraic_house_side(key, n), side) < 0
 
 
-def algebraic_margin(key: str, n: int, side: Fraction) -> Fraction:
+def algebraic_margin(key: str, n: int, side: Side) -> Fraction:
     """How far the algebraic side at `n` is below `side`, from a tight enclosure."""
+    if isinstance(side, exact_sides.Algebraic):
+        return exact_sides.lower_gap(side, algebraic_house_side(key, n))
     value, _degree = algebraic_side(key, n)
     _low, high = algebraic_reports.enclosure(value, 60)
     return side - high
@@ -958,6 +963,17 @@ def table(selections: Mapping[int, Selection], *, everything: bool) -> str:
     return "\n".join(lines)
 
 
+def writable(house: Candidate) -> bool:
+    """Whether `adopt_houses` can write the house: a rational side, or an algebraic one whose
+    derived number-field fact and receipt `upper_bound_houses` reads (`FIELD_COUNTS`)."""
+    from devtools import upper_bound_houses as houses  # noqa: PLC0415 -- the writer's half
+
+    found = houses.writable_source(
+        house.result, house.n, house.source_key, algebraic=house.algebraic
+    )
+    return found is not None or not house.algebraic
+
+
 def check(selections: Mapping[int, Selection]) -> list[str]:
     """Why the record breaks the house rule: one line a failure, empty where it holds."""
     moving = {n: selection for n, selection in selections.items() if selection.moves}
@@ -980,17 +996,18 @@ def check(selections: Mapping[int, Selection]) -> list[str]:
                 f"FAIL: n={n} is staged for {pending.house}, but the house is "
                 f"{selection.house.result}; stage that, or adopt it"
             )
-        elif selection.house is not None and selection.house.algebraic != (
+        elif selection.house is not None and writable(selection.house) == (
             pending.why == NO_WRITER
         ):
-            # The writer's gap stages an algebraic house and nothing else (review A1).
+            # The writer's gap stages a house the writer cannot write and nothing else
+            # (review A1 of #660): an algebraic side no derived number-field fact holds.
             problems.append(
-                f"FAIL: n={n} is staged as {pending.why!r} under {pending.bead}, but its "
-                f"house is {'algebraic' if selection.house.algebraic else 'rational'}: "
+                f"FAIL: n={n} is staged as {pending.why!r} under {pending.bead}, but "
                 + (
-                    f"stage it as {NO_WRITER!r} under the writer's bead"
-                    if selection.house.algebraic
-                    else "the writer writes it, so stage it for the next pull request"
+                    "the writer writes it, so stage it for the next pull request"
+                    if writable(selection.house)
+                    else f"the writer cannot write it: stage it as {NO_WRITER!r} under the "
+                    "writer's bead"
                 )
             )
     unordered = sorted(n for n, selection in selections.items() if selection.unordered)

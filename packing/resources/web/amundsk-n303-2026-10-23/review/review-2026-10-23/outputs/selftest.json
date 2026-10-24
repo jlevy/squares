@@ -1,0 +1,16 @@
+{
+  "hand_built_cases": 15,
+  "malformed_texts": 13,
+  "random_pairs": 2000,
+  "random_built_contacts": 1600,
+  "tallies": {
+    "mode0:clear": 292,
+    "mode0:overlap": 108,
+    "mode1:touch": 400,
+    "mode2:overlap": 400,
+    "mode3:touch": 400,
+    "mode4:overlap": 399,
+    "mode4:touch": 1
+  },
+  "failures": []
+}

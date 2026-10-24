@@ -3779,12 +3779,18 @@ sources:
   replay_disposition: case-specific
   represented_by:
   - resources/web/wand125-fine-net-lower-bounds-2026-10-08/README.md
+  - resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/README.md
   evidence:
   - E-wand125-fine-net-lower-bounds-446-report
+  - E-wand125-fine-net-446-n19-n20-n26-report
   notes: All seven original archives and sealed source/log/member identities retained outside live Git.
-    Conditional maintained input/kernel review accepted; no native replay, numeric claims_record or
-    standing-bound selection. Whole-net controls/custody adapter and explicit reviewed hosted budget
-    remain pending under think-ndvg.
+    Conditional maintained input/kernel review accepted; no numeric claims_record or standing-bound
+    selection. T-233 registers the n19, n20 and n26 values with the n27 follow-up's, as reported.
+    Complete sqverify-fast captures of those four passed here on 23 October from the release packet,
+    with whole-net controls refused at n19, n20 and n27 and failed closed at n26 on the census's axis
+    allowance, so their replay evidence is held until think-tcsl. The n28, n29 and n31 originals have
+    no native replay here; their whole-net controls/custody adapter and reviewed hosted budget remain
+    pending under think-ndvg.
 - id: couzo-451-exact-refinements
   title: Francisco Couzo's eight rational refinements, issue451
   role: source-repository
@@ -3830,12 +3836,15 @@ sources:
   replay_disposition: case-specific
   represented_by:
   - resources/web/wand125-fine-net-lower-bounds-2026-10-08/README.md
+  - resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/README.md
   evidence:
   - E-wand125-fine-net-n27-5655-followup-report
   notes: The later reported 1131/200 supersedes the original reported n27 value only. Original seven-case
     catalogue and all standing claims remain unchanged. Complete archive/candidate/source custody and
     exact conditional mass/net premises accepted; author full positives and sampled controls over 32 directions
-    do not supply maintained capture or whole-net controls. Source-only work remains under think-ndvg.
+    do not supply maintained capture or whole-net controls. A complete sqverify-fast capture here
+    passed on 23 October with its whole-net controls refused; its replay evidence is held with T-233's
+    other counts until think-tcsl. T-233 registers it with the n19, n20 and n26 values, as reported.
 - id: evand-batch-105-130-2026-10-07
   title: "Evan Daniel's dated certificate reports at 105 and 130, issue #375"
   role: source-repository
@@ -3945,6 +3954,22 @@ sources:
     2026) and the square 10 + 7 sqrt(2) of 376 (less one square at 375), which the owner counts as
     an earlier report beyond 324 (jlevy/squares#613, think-8krd), so each stays listed as printed,
     marked above-classical-construction, and holds no count.
+    On 24 October 2026 its row at 335, 18.822875655543559, was decided exactly
+    (devtools.couzo_decimal_decisions, think-rx26; receipts/couzo-8-october-decisions.json in
+    the mishapolk-issue732-f1ceee4-2026-10-23 packet). Read literally, every printed centre and
+    angle, the poses are not a packing at the printed side: 21 squares cross a wall, the worst by
+    7.77e-16. With the 196 angles below 1e-10 read as 0, as the author's 9 October certificate
+    reads them, they pack exactly at it, so the row reports a packing that exists at its print
+    and stays listed as printed. The author's answer of 23 October on issue 715
+    (issuecomment-6375833547) says the same: the 9 October certificate is this report's packing
+    in exact form, its centres dilated by exactly 1 + 1e-12 and the three near-axis angles set
+    to 0, the print read literally overshoots a wall by up to 7.8e-16, and "the bound we stand
+    behind is the certificate's". Mykhailo Polkovskyi's f1ceee4 row there, 1.607e-12 below the
+    print and 1.94e-11 below the certificate, supersedes it on either reading
+    (mishapolk-issue732-f1ceee4-2026-10-23). At 336 and 337 neither reading packs at the
+    print, and at 341, 373 and 374 the poses pack with the angles below 1e-10 read as 0, the
+    decision's reading, since the 9 October certificates at those five are other packings;
+    02f9690's rows had superseded all five.
 - id: couzo-extended-range-updates-2026-10-08
   title: Francisco Couzo's later decimal reports at n=375 and n=378
   role: source-repository
@@ -4355,6 +4380,29 @@ sources:
     release-asset and document custody and the exact mass, declared-net and check2 premises are accepted. An eight-direction
     maintained sample is diagnostic, and the author's full positives and 32-direction controls do not
     supply a maintained capture or whole-net controls. Replay and adoption remain under think-i85v.
+- id: wand125-fine-net-n31-59775-2026-10-11
+  title: Hosono reported n31 fine-net lower bound, no issue
+  role: source-repository
+  url: https://github.com/wand125/square-packing/tree/23e31862345c532d17ad2c896677a3a8d8821aa4/problems/square-lower-bounds/certificates/mixed_n31_L59775
+  local: resources/web/wand125-fine-net-n31-2026-10-11/
+  source_key: '[wand125 fine-net n31 2026-10-11]'
+  scope:
+    n_values:
+    - 31
+  reviewed: '2026-10-23'
+  source_date: '2026-10-11'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/wand125-fine-net-n31-2026-10-11/README.md
+  evidence:
+  - E-wand125-fine-net-n31-59775-report
+  notes: The reported 2391/400 at n31 is above both lower lanes' 2381/400 (T-068, T-074) and the
+    issue-446 report of 597/100, which are unchanged. Complete release-asset and document custody and
+    the exact mass, declared-net and check2 premises are accepted, and the asset's data members are
+    retained for the census. T-232 registers it; the complete maintained capture, its whole-net
+    controls and the mathematical review of 23 October 2026 confirm it, and n31's lower lanes adopt
+    2391/400.
 - id: wand125-linear-n122-1126-2026-10-10
   title: Linear point, segment and rectangle certificate for n = 122, no issue
   role: source-repository
@@ -5429,6 +5477,7 @@ sources:
     - 55
     - 68
     - 69
+    - 70
     - 71
     - 83
     - 84
@@ -5451,6 +5500,7 @@ sources:
     - 132
     - 146
     - 152
+    - 153
     - 155
     - 156
     - 171
@@ -5467,6 +5517,7 @@ sources:
     - 204
     - 205
     - 206
+    - 207
     - 208
     - 209
     - 210
@@ -5513,8 +5564,10 @@ sources:
   represented_by:
   - frontier/results.yaml
   - resources/web/pingyou-pr574-certificates-2026-10-13/acquisition/claims.json
+  - resources/web/pingyou-pr574-certificates-2026-10-13/acquisition/algebraic-claims.json
   evidence:
   - E-pingyou-574-certificate-report
+  - E-pingyou-574-algebraic-report
   - E-pingyou-574-exact-feasibility
   - E-pingyou-574-algebraic-feasibility
   notes: >-
@@ -5526,10 +5579,11 @@ sources:
     have full outcomes. The house rule of 16 October 2026 makes T-174 the house at the 41
     counts where it is smallest, which ended the hold of 15 October and RP-3's wait: the
     adoption of 17 October 2026 (think-3mry) moved 37 rational counts to it, the selected
-    overrides below. At 236 Evan Daniel's issue 659 reports a smaller side, whose import
-    adopts it; T-174 stays staged there under think-3mry. The algebraic certificates at
-    70, 153 and 207 wait under think-ot5c. These four counts are staged in
-    devtools.select_houses.PENDING_ADOPTION. It was the smallest at 63 counts until the
+    overrides below. At 236 Evan Daniel's issue 659 reports a smaller side, which the
+    adoption of 19 October 2026 took the count to. The adoption of 23 October 2026
+    (think-ot5c), once the writer took an algebraic side, moved the algebraic certificates
+    at 70, 153 and 207 to it under E-pingyou-574-algebraic-report, and the scope holds
+    those three of the algebraic report's counts. It was the smallest at 63 counts until the
     adoption of 16 October 2026 (PR #657) took ten of them below it and T-193's exact
     sides (PR #658), staged under think-ot5c, twelve more.
 - id: dostashev-merged-bands-2026-10-13
@@ -7567,6 +7621,29 @@ sources:
     side equals, or rounds up to, the side its source prints. T-230 records the in-horizon report. All
     3 native jobs have full outcomes. No selected override or superseded claim is created at this source-only
     stage; current cases and earlier source ownership remain unchanged.
+
+- id: amundsk-n303-2026-10-23
+  title: Amund Kristiansen's n303 dilation certificate at 511f56b, issue755
+  role: source-repository
+  url: https://gist.github.com/amundsk/78f9f0e7b4669f2f509a281845081768/511f56bf6e6afb4eb22f12d31371c2a2fe7b4767
+  local: resources/web/amundsk-n303-2026-10-23/
+  source_key: '[Kristiansen n303 2026-10-23]'
+  scope:
+    n_values:
+    - 303
+  reviewed: '2026-10-23'
+  source_date: '2026-10-23'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/amundsk-n303-2026-10-23/acquisition/claims.json
+  evidence:
+  - E-amundsk-755-n303-report
+  notes: The 1 complete certificate is kept as a derived exact fact, no upstream byte retained, admitted
+    only where its exact side equals, or rounds up to, the side its source prints. T-239 records the
+    in-horizon report. All 3 native jobs have full outcomes. No selected override or superseded claim
+    is created at this source-only stage; current cases and earlier source ownership remain unchanged.
 
 - id: evand-n343-sweep-2026-10-20
   title: Evan Daniel's n343 certificate at 88385ab, issue702
@@ -9716,6 +9793,311 @@ sources:
     constructions with no certificate file and deletions from Friedman's constructions
     (beyond_horizon_replay.WALKS). The 5,078 rows above 1024 wait on the owner (think-f2io).
   claims_record: resources/web/mishapolk-issue732-2026-10-22/acquisition/beyond-horizon-rows.json
+- id: wand125-n21-zero-margin-lean-2026-09-29
+  title: Hosono's hypothesis-free Lean proof of the point-only s(21) = 5
+  role: source-repository
+  url: https://github.com/wand125/square-packing-bounds/tree/77636c63f45a90d9a829417a1722a3bf9bfef37d/point_n21_L5/lean/zero-margin
+  local: resources/web/wand125-n21-zero-margin-lean-2026-09-29/
+  source_key: '[wand125 n21 zero-margin Lean 2026-09-29]'
+  scope:
+    n_values: [21]
+  reviewed: '2026-10-23'
+  source_date: '2026-09-29'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  evidence:
+  - E-n021-wand125-zero-margin-lean-report
+  notes: >-
+    wand125/square-packing-bounds at 77636c63, 29 September 2026: SquarePacking.n21pts_eq_5 :
+    minSide 21 = 5 with no hypothesis, on Evan Daniel's zero-margin box tree over the
+    capture-one normalisation of T-055's point-only cover; the 66 generated files are not
+    published, and data-sha256.txt lists them. MIT. The packet retains the zero-margin
+    directory and the three READMEs the commit changed, and pins the certificate and the two
+    licences as byte-identical to earlier packets; the library at evand 6aa82ba4 is retained
+    byte for byte in earlier evand packets. T-234 records it as a formalization of T-055. Not
+    built here (think-tpbd); the case record is unchanged.
+- id: wand125-n59-lean-kernel-2026-10-11
+  title: Hosono's Lean kernel proof of s(59) = 8
+  role: source-repository
+  url: https://github.com/wand125/square-packing/tree/f9a77b7d38fd60144b78fe290c94f841ab626156/problems/square-lower-bounds/certificates/k2m5_n59_L8/lean
+  local: resources/web/wand125-n59-lean-kernel-2026-10-11/
+  source_key: '[wand125 n59 Lean kernel 2026-10-11]'
+  scope:
+    n_values: [59]
+  reviewed: '2026-10-23'
+  source_date: '2026-10-11'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  evidence:
+  - E-n059-wand125-lean-kernel-report
+  notes: >-
+    wand125/square-packing at f9a77b7, 11 October 2026: SquarePacking.s59_eq_8 : minSide 59 = 8
+    on T-066's mixed cover and Evan Daniel's mixed-measure checker at evand 1718a580, used
+    unchanged, over 43,444 generated files the source does not publish. MIT. The packet
+    retains the Lean directory's built files, scripts, batch list and the source's per-task
+    receipt (862 CPU-hours), and pins SOURCES.sha256 and INDEX.json by digest; the library's
+    19 closure modules are retained byte for byte in the 7 October evand packet. T-235 records
+    it as a formalization of T-066. Not built here (think-cs9x, held); the case record is
+    unchanged.
+- id: evand-fang-ryu-lean-2026-10-18
+  title: Daniel's Lean proofs of Fang's Theorems 1 and 2 and of Ryu's Theorem 1.4
+  role: source-repository
+  url: https://github.com/evand/square-packing/tree/8475bdf41571c59c8c240aedaddc48e19e0e4707/lean/Sqpack
+  local: resources/web/evand-fang-ryu-lean-2026-10-18/
+  source_key: '[Daniel Fang and Ryu Lean 2026-10-18]'
+  scope:
+    n_values: [211, 241, 273, 307]
+  reviewed: '2026-10-23'
+  source_date: '2026-10-18'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - frontier/asymptotic-waste-bounds.yaml
+  evidence:
+  - E-fang-theorems-daniel-lean-report
+  notes: >-
+    evand/square-packing at 8475bdf, 18 October 2026, with its parent f4883b41: unconditional
+    Lean proofs of Kevin Fang's Theorems 1 and 2 (T-163) on 18 exact piece certificates, and
+    of Sungjoon Ryu's c*(k) <= 8 ceil(sqrt(k - 4)) - 1 for every k >= 6 with no certificates.
+    MIT. The 18 generated piece modules are gitignored upstream; the packet retains the
+    theorem modules, the rest of their closure not retained elsewhere, the generator and the
+    seven certificates of Daniel's, and pins the others as byte-identical to earlier packets.
+    T-236 records Fang's as a formalization of T-163; Ryu's settles no count n <= 324 and is
+    noted on the asymptotic register's row. Not built here (think-dgrc).
+- id: evand-rect-small-n-lean-2026-10-22
+  title: Daniel's Lean proofs for two to five unit squares in a rectangle
+  role: source-repository
+  url: https://github.com/evand/square-packing/tree/7051f4eabf7f9b2509ad1e7cc296f57d19482027/lean/Sqpack
+  local: resources/web/evand-rect-small-n-lean-2026-10-22/
+  source_key: '[Daniel small-n rectangles Lean 2026-10-22]'
+  scope:
+    n_values: [2, 3, 4, 5]
+  reviewed: '2026-10-23'
+  source_date: '2026-10-21'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/evand-rect-small-n-lean-2026-10-22/README.md
+  evidence:
+  - E-small-n-daniel-rect-lean-report
+  notes: >-
+    evand/square-packing at 7051f4e, the theorems of 21 October 2026: rect2_iff, rect3_iff,
+    rect4_iff, rect5_pts_lower and rect5_upper in Lean, which at equal sides give s(2) =
+    s(3) = s(4) = 2 and s(5) = 2 + 1/sqrt 2; no theorem states s(n). MIT. The packet retains
+    the closure of the five modules and the notes that derive them. A second machine route
+    after chelokot's, registered with it as T-238, a formalization of T-237, by the owner's
+    decision of 24 October (think-4o9c). Not built here (think-tq3g); the case records are
+    unchanged.
+- id: chelokot-small-n-lean-2026-09-05
+  title: chelokot's Lean proofs that s(2) = s(3) = s(4) = 2 and s(5) = 2 + sqrt 2 / 2
+  role: source-repository
+  url: https://github.com/chelokot/square-packing-archive/tree/753079eb37d8d16225a5dc1f56e493a3c3b243f4/formal/SquarePackingArchive/Records
+  local: resources/web/chelokot-small-n-lean-2026-09-05/
+  source_key: '[chelokot small-n Lean 2026-09-05]'
+  scope:
+    n_values: [2, 3, 4, 5]
+  reviewed: '2026-10-24'
+  source_date: '2026-09-05'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/chelokot-small-n-lean-2026-09-05/README.md
+  evidence:
+  - E-small-n-chelokot-lean-report
+  notes: >-
+    chelokot/square-packing-archive at 753079eb, the commit the Nagamochi counterexample's
+    coverage entry pins: Records.Square5.s5_eq_goebel (29 August 2026), by Friedman's four
+    unavoidable points, and s2_eq_two, s3_eq_two and s4_eq_two (16 August) in Lean.
+    Apache-2.0. The packet retains Square5.lean, NearSquare.lean, SquareNumbers.lean and
+    their closure with the licence. The first machine route to these values, registered
+    with Daniel's as T-238, a formalization of T-237, by the owner's decision of 24 October
+    (think-4o9c). This repository built the archive at the pin on 2 October for T-086, and
+    that build's log prints these theorems' axioms; no receipt names them yet
+    (think-tq3g). The case records are unchanged.
+- id: mishapolk-issue732-f1ceee4-2026-10-23
+  title: Mykhailo Polkovskyi's 138 beyond-horizon certificates of issue 732's comment at f1ceee4
+  role: source-repository
+  url: https://github.com/Mishapolk/square-packing-records/tree/f1ceee4c1dd69f97d8e50e6ddaf1a14084dceda7/certificates/0000-0999
+  local: resources/web/mishapolk-issue732-f1ceee4-2026-10-23/
+  source_key: '[Mishapolk issue 732 f1ceee4 2026-10-23]'
+  scope:
+    n_values:
+    - 328
+    - 335
+    - 343
+    - 365
+    - 404
+    - 410
+    - 413
+    - 454
+    - 455
+    - 456
+    - 458
+    - 459
+    - 463
+    - 490
+    - 496
+    - 497
+    - 498
+    - 500
+    - 501
+    - 502
+    - 504
+    - 505
+    - 509
+    - 535
+    - 544
+    - 545
+    - 546
+    - 547
+    - 548
+    - 549
+    - 550
+    - 554
+    - 582
+    - 584
+    - 591
+    - 592
+    - 593
+    - 594
+    - 596
+    - 597
+    - 598
+    - 599
+    - 600
+    - 602
+    - 631
+    - 633
+    - 637
+    - 640
+    - 643
+    - 644
+    - 645
+    - 646
+    - 647
+    - 648
+    - 651
+    - 653
+    - 654
+    - 682
+    - 684
+    - 689
+    - 691
+    - 692
+    - 694
+    - 695
+    - 696
+    - 698
+    - 699
+    - 700
+    - 702
+    - 735
+    - 736
+    - 737
+    - 742
+    - 743
+    - 744
+    - 745
+    - 746
+    - 747
+    - 748
+    - 749
+    - 750
+    - 752
+    - 756
+    - 790
+    - 791
+    - 792
+    - 797
+    - 798
+    - 799
+    - 800
+    - 801
+    - 802
+    - 803
+    - 804
+    - 805
+    - 806
+    - 807
+    - 808
+    - 809
+    - 813
+    - 814
+    - 850
+    - 854
+    - 855
+    - 856
+    - 857
+    - 858
+    - 859
+    - 860
+    - 862
+    - 863
+    - 864
+    - 865
+    - 871
+    - 873
+    - 909
+    - 913
+    - 914
+    - 915
+    - 916
+    - 917
+    - 918
+    - 919
+    - 923
+    - 924
+    - 926
+    - 970
+    - 975
+    - 976
+    - 977
+    - 978
+    - 979
+    - 980
+    - 985
+    - 986
+    - 987
+    - 988
+    - 989
+  reviewed: '2026-10-24'
+  source_date: '2026-10-23'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/mishapolk-issue732-f1ceee4-2026-10-23/README.md
+  - resources/web/mishapolk-issue732-f1ceee4-2026-10-23/acquisition/beyond-horizon-rows.json
+  evidence:
+  - E-mishapolk-732-f1ceee4-beyond-horizon-report
+  notes: >-
+    The release the author's comment on issue 732 of 2026-10-23T20:35:12Z reports
+    (issuecomment-6374211504): the 138 certificates f1ceee4 rewrites at 328 to 989,
+    certificates/0000-0999/nN.cert, retained under the MIT licence of 17cc220 and held to
+    certified_bounds.json, the index the commit keeps current (it leaves manifest.json as
+    7b6366f wrote it). The ledger of 24 October for f1ceee4
+    (campaign/issue-intake/upper-bounds-issue732-f1ceee4-20261024), every count walked in
+    report order from starts frozen at main 0bbb0a2c4 with Göbel's construction beside each
+    row, records all 138, each the count's current row at its certificate's exact side
+    rounded up at 12 places, never the index's print, which rounds to the nearest place and
+    lies one unit below at 70 of them. They supersede issue 715's (59), issue 732's own
+    17cc220 rows (47), issue 719's (21), couzo-index-2026-10-15's (9),
+    couzo-verified-bounds-2026-10-14's (1) and couzo-extended-range-reports-2026-10-08's at 335 (whose decimal poses pack
+    exactly at their print with the near-axis angles read as 0,
+    receipts/couzo-8-october-decisions.json), by 8.09e-13 (924, at another 12-place print) to 8.59e-4 (747). The packet's filtered exact
+    replay decided every one on two routes with all six controls refused
+    (receipts/filtered-exact-replay.json, devtools.beyond_horizon_replay), and every side is
+    below Göbel's construction at its count. At 985 the walk
+    passes over Couzo's 4e4c8ce deletion bound, an earlier report with no row by the D6 answer
+    (think-f2io). The three later commits, 34e59f3, c0bf150 and 7e82c64, change only counts in
+    the corpus and are not recorded (receipts/later-commits.json).
+  claims_record: resources/web/mishapolk-issue732-f1ceee4-2026-10-23/acquisition/beyond-horizon-rows.json
 
 selected_overrides:
 - n: 29
@@ -9736,11 +10118,11 @@ selected_overrides:
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
     a replay here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 70
-  source_id: evand-regularized-2026-10-10
-  value: '8.8809603715555796'
-  evidence: E-evand-regularized-certificate-report
+  source_id: pingyou-pr574-certificates-2026-10-13
+  value: '8.880960371555579595'
+  evidence: E-pingyou-574-algebraic-report
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
-    a replay here and an accepted review, adopted on 2026-10-11 (T-146).
+    a replay here and an accepted review, adopted on 2026-10-23 (T-174).
 - n: 84
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '9.69793479901492131'
@@ -9760,11 +10142,11 @@ selected_overrides:
   reason: The complete rational precision refinement is strictly smaller than both previous exact
     upper lanes.
 - n: 102
-  source_id: evand-regularized-2026-10-10
-  value: '10.6058286964315784'
-  evidence: E-evand-regularized-certificate-report
+  source_id: evand-exact-cur-2026-10-16
+  value: '10.60582869643157837'
+  evidence: E-evand-639-exact-sides-report
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
-    a replay here and an accepted review, adopted on 2026-10-11 (T-146).
+    a replay here and an accepted review, adopted on 2026-10-23 (T-193).
 - n: 103
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '10.67923204736130645'
@@ -9796,11 +10178,11 @@ selected_overrides:
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
     a replay here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 123
-  source_id: evand-regularized-2026-10-10
-  value: '11.5913781454976982'
-  evidence: E-evand-regularized-certificate-report
+  source_id: evand-exact-cur-2026-10-16
+  value: '11.59137814549769816'
+  evidence: E-evand-639-exact-sides-report
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
-    a replay here and an accepted review, adopted on 2026-10-11 (T-146).
+    a replay here and an accepted review, adopted on 2026-10-23 (T-193).
 - n: 126
   source_id: evand-trio126-2026-10-09
   value: '11.7426406871192852'
@@ -9850,11 +10232,11 @@ selected_overrides:
   reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's printed
     side (T-056).
 - n: 153
-  source_id: mishapolk-exact-certificates-2026-10-12
-  value: '12.8700138504044800'
-  evidence: E-mishapolk-573-certificate-report
+  source_id: pingyou-pr574-certificates-2026-10-13
+  value: '12.8700138504044644'
+  evidence: E-pingyou-574-algebraic-report
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
-    a replay here and an accepted review, adopted on 2026-10-15 (T-173).
+    a replay here and an accepted review, adopted on 2026-10-23 (T-174).
 - n: 154
   source_id: evand-n154-sweep-2026-10-20
   value: '12.9211009407616806'
@@ -9946,11 +10328,11 @@ selected_overrides:
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
     a replay here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 207
-  source_id: mishapolk-exact-certificates-2026-10-12
-  value: '14.8809603715580000'
-  evidence: E-mishapolk-573-certificate-report
+  source_id: pingyou-pr574-certificates-2026-10-13
+  value: '14.8809603715555796'
+  evidence: E-pingyou-574-algebraic-report
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
-    a replay here and an accepted review, adopted on 2026-10-15 (T-173).
+    a replay here and an accepted review, adopted on 2026-10-23 (T-174).
 - n: 208
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '14.92451877202935589'
@@ -10036,17 +10418,17 @@ selected_overrides:
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
     a replay here and an accepted review, adopted on 2026-10-15 (T-182).
 - n: 258
-  source_id: evand-regularized-2026-10-10
-  value: '16.5634480021337894'
-  evidence: E-evand-regularized-certificate-report
+  source_id: evand-exact-cur-2026-10-16
+  value: '16.56344800213378938'
+  evidence: E-evand-639-exact-sides-report
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
-    a replay here and an accepted review, adopted on 2026-10-11 (T-146).
+    a replay here and an accepted review, adopted on 2026-10-23 (T-193).
 - n: 259
-  source_id: squish-481-third-request-2026-10-09
-  value: '16.5913781454976982'
-  evidence: E-squish-481-certificate-report
+  source_id: evand-exact-cur-2026-10-16
+  value: '16.59137814549769816'
+  evidence: E-evand-639-exact-sides-report
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
-    a replay here and an accepted review, adopted on 2026-10-11 (T-136).
+    a replay here and an accepted review, adopted on 2026-10-23 (T-193).
 - n: 260
   source_id: evand-regularized-2026-10-20
   value: '16.6457532505198122'
@@ -10126,11 +10508,11 @@ selected_overrides:
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
     a replay here and an accepted review, adopted on 2026-10-11 (T-146).
 - n: 295
-  source_id: evand-regularized-2026-10-10
-  value: '17.7042327907360304'
-  evidence: E-evand-regularized-certificate-report
+  source_id: evand-exact-cur-2026-10-16
+  value: '17.70423279073603036'
+  evidence: E-evand-639-exact-sides-report
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
-    a replay here and an accepted review, adopted on 2026-10-11 (T-146).
+    a replay here and an accepted review, adopted on 2026-10-23 (T-193).
 - n: 297
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '17.740417287543801851'
@@ -10144,17 +10526,17 @@ selected_overrides:
   reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's printed
     side (T-056).
 - n: 302
-  source_id: mishapolk-kkt-refinements-2026-10-14
-  value: '17.87001385040446435'
-  evidence: E-mishapolk-70a033f-certificate-report
+  source_id: evand-exact-cur-2026-10-16
+  value: '17.870013850404464345'
+  evidence: E-evand-639-exact-sides-report
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
-    a replay here and an accepted review, adopted on 2026-10-16 (T-186).
+    a replay here and an accepted review, adopted on 2026-10-23 (T-193).
 - n: 303
-  source_id: evand-n303-2026-10-22
-  value: '17.9097722172743278'
-  evidence: E-evand-728-n303-report
+  source_id: amundsk-n303-2026-10-23
+  value: '17.9097623274752568'
+  evidence: E-amundsk-755-n303-report
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
-    a replay here and an accepted review, adopted on 2026-10-23 (T-230).
+    a replay here and an accepted review, adopted on 2026-10-24 (T-239).
 - n: 304
   source_id: mishapolk-kkt-refinements-2026-10-14
   value: '17.92942775807517497'
@@ -10191,7 +10573,7 @@ superseded_reports:
   value: '11.601384658375975564388544443024'
   reason: The newer SQUISH update reports a smaller exact rational side; earlier source geometry and
     verification remain retained.
-  superseded_by: evand-regularized-2026-10-10
+  superseded_by: evand-exact-cur-2026-10-16
 - n: 208
   source_id: evand-square-packing-2026-10-05
   value: '14.926534459699423246906428356506'
@@ -10337,7 +10719,7 @@ superseded_reports:
 - n: 70
   source_id: evand-square-packing-2026-10-05
   value: '8.88166675700900462491232881648'
-  superseded_by: evand-regularized-2026-10-10
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Certifies the catalogue's packing at a side 4.6e-15 above the one it prints, which stays
     the report; since 2026-10-06 it is the verified upper bound, rounded up at the printed precision
     (T-101).
@@ -10379,7 +10761,7 @@ superseded_reports:
 - n: 102
   source_id: franciscouzo-square-packing-2026
   value: '10.607174680178947'
-  superseded_by: evand-regularized-2026-10-10
+  superseded_by: evand-exact-cur-2026-10-16
   reason: Superseded on 2026-10-05 by Evan Daniel's exact optimum of the same packing, certified here
     (T-098).
 - n: 103
@@ -10473,14 +10855,14 @@ superseded_reports:
 - n: 123
   source_id: casson-square-packing-2026
   value: '11.60138465962087828'
-  superseded_by: evand-regularized-2026-10-10
+  superseded_by: evand-exact-cur-2026-10-16
   reason: Larger than Francisco Couzo's side at this count; the case record states both sources' dates
     and values; since 2026-10-05 the selected report is Evan Daniel's exact optimum of that packing
     (T-098).
 - n: 123
   source_id: franciscouzo-square-packing-2026
   value: '11.601384658385687'
-  superseded_by: evand-regularized-2026-10-10
+  superseded_by: evand-exact-cur-2026-10-16
   reason: Superseded on 2026-10-05 by Evan Daniel's exact optimum of the same packing, certified here
     (T-098).
 - n: 124
@@ -10613,7 +10995,7 @@ superseded_reports:
 - n: 153
   source_id: evand-square-packing-2026-10-05
   value: '12.88166675700900462495232881648'
-  superseded_by: mishapolk-exact-certificates-2026-10-12
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: The SQUISH reported new packing is smaller than this retained earlier claim.
 - n: 154
   source_id: casson-square-packing-2026
@@ -10823,14 +11205,14 @@ superseded_reports:
 - n: 207
   source_id: casson-square-packing-2026
   value: '14.89395465342147418'
-  superseded_by: mishapolk-exact-certificates-2026-10-12
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Larger than Francisco Couzo's side at this count; the case record states both sources' dates
     and values; since 2026-10-05 the selected report is Evan Daniel's exact optimum of that packing
     (T-098).
 - n: 207
   source_id: franciscouzo-square-packing-2026
   value: '14.893954634242480'
-  superseded_by: mishapolk-exact-certificates-2026-10-12
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Superseded on 2026-10-05 by Evan Daniel's exact optimum of the same packing, certified here
     (T-098).
 - n: 208
@@ -11053,21 +11435,21 @@ superseded_reports:
 - n: 258
   source_id: evand-square-packing-2026-10-05
   value: '16.571067811865475244174154299168'
-  superseded_by: evand-regularized-2026-10-10
+  superseded_by: evand-exact-cur-2026-10-16
   reason: Certifies the catalogue's packing at a side 5.2e-15 above the one it prints, which stays
     the report; since 2026-10-06 it is the verified upper bound, rounded up at the printed precision
     (T-101).
 - n: 259
   source_id: casson-square-packing-2026
   value: '16.60256850594295841'
-  superseded_by: squish-481-third-request-2026-10-09
+  superseded_by: evand-exact-cur-2026-10-16
   reason: Larger than Francisco Couzo's side at this count; the case record states both sources' dates
     and values; since 2026-10-05 the selected report is Evan Daniel's exact optimum of that packing
     (T-098).
 - n: 259
   source_id: franciscouzo-square-packing-2026
   value: '16.602568490497649'
-  superseded_by: squish-481-third-request-2026-10-09
+  superseded_by: evand-exact-cur-2026-10-16
   reason: Superseded on 2026-10-05 by Evan Daniel's exact optimum of the same packing, certified here
     (T-098).
 - n: 260
@@ -11253,7 +11635,7 @@ superseded_reports:
 - n: 295
   source_id: evand-square-packing-2026-10-05
   value: '17.707106781186547524577915429917'
-  superseded_by: evand-regularized-2026-10-10
+  superseded_by: evand-exact-cur-2026-10-16
   reason: Certifies the catalogue's packing at a side 7.5e-15 above the one it prints, which stays
     the report; since 2026-10-06 it is the verified upper bound, rounded up at the printed precision
     (T-101).
@@ -11314,23 +11696,23 @@ superseded_reports:
 - n: 302
   source_id: franciscouzo-square-packing-2026
   value: '17.885993892536710'
-  superseded_by: mishapolk-kkt-refinements-2026-10-14
+  superseded_by: evand-exact-cur-2026-10-16
   reason: Superseded on 2026-10-05 by Evan Daniel's exact optimum of the same packing, certified here
     (T-098).
 - n: 303
   source_id: casson-square-packing-2026
   value: '17.93105636462953001'
-  superseded_by: evand-n303-2026-10-22
+  superseded_by: amundsk-n303-2026-10-23
   reason: The SQUISH reported new packing is smaller than this retained earlier claim.
 - n: 303
   source_id: franciscouzo-square-packing-2026
   value: '17.924349265547932'
-  superseded_by: evand-n303-2026-10-22
+  superseded_by: amundsk-n303-2026-10-23
   reason: The SQUISH reported new packing is smaller than this retained earlier claim.
 - n: 303
   source_id: franciscouzo-square-packing-2026-10-03
   value: '17.924341009860250'
-  superseded_by: evand-n303-2026-10-22
+  superseded_by: amundsk-n303-2026-10-23
   reason: The SQUISH reported new packing is smaller than this retained earlier claim.
 - n: 304
   source_id: casson-square-packing-2026
@@ -11428,7 +11810,7 @@ superseded_reports:
 - n: 303
   source_id: evand-square-packing-2026-10-05
   value: '17.924341009851128373110514612828'
-  superseded_by: evand-n303-2026-10-22
+  superseded_by: amundsk-n303-2026-10-23
   reason: The SQUISH reported new packing is smaller than this retained earlier claim.
 - n: 88
   source_id: kingbird-current
@@ -11463,7 +11845,7 @@ superseded_reports:
 - n: 207
   source_id: evand-square-packing-2026-10-05
   value: '14.893954634237227388391298332204'
-  superseded_by: mishapolk-exact-certificates-2026-10-12
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: The second SQUISH update reports a smaller geometry. Earlier certificates, exact sides,
     finder credits and accepted evidence remain retained for their own bounds.
 - n: 236
@@ -11481,7 +11863,7 @@ superseded_reports:
 - n: 302
   source_id: evand-square-packing-2026-10-05
   value: '17.885993892530410666666041882586'
-  superseded_by: mishapolk-kkt-refinements-2026-10-14
+  superseded_by: evand-exact-cur-2026-10-16
   reason: The second SQUISH update reports a smaller geometry. Earlier certificates, exact sides,
     finder credits and accepted evidence remain retained for their own bounds.
 - n: 105
@@ -11502,7 +11884,7 @@ superseded_reports:
 - n: 102
   source_id: evand-square-packing-2026-10-05
   value: '10.607174680176051125448595024891'
-  superseded_by: evand-regularized-2026-10-10
+  superseded_by: evand-exact-cur-2026-10-16
   reason: Historical source ceiling superseded by a smaller exact Xu construction.
 - n: 103
   source_id: evand-square-packing-2026-10-05
@@ -11522,7 +11904,7 @@ superseded_reports:
 - n: 123
   source_id: squish-update-2026-10-07
   value: '11.6009077785163406'
-  superseded_by: evand-regularized-2026-10-10
+  superseded_by: evand-exact-cur-2026-10-16
   reason: Historical source ceiling superseded by a smaller exact Xu construction.
 - n: 126
   source_id: squish-update-2026-10-07
@@ -11557,7 +11939,7 @@ superseded_reports:
 - n: 153
   source_id: ry-xu-new-packings-2026-10-08
   value: '12.8813062182128814'
-  superseded_by: mishapolk-exact-certificates-2026-10-12
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Complete rational certificate retained; the current exact construction is smaller.
 - n: 179
   source_id: ry-xu-new-packings-2026-10-08
@@ -11572,7 +11954,7 @@ superseded_reports:
 - n: 258
   source_id: ry-xu-new-packings-2026-10-08
   value: '16.5639734753165640'
-  superseded_by: evand-regularized-2026-10-10
+  superseded_by: evand-exact-cur-2026-10-16
   reason: Complete rational certificate retained; the current exact construction is smaller.
 - n: 263
   source_id: ry-xu-new-packings-2026-10-08
@@ -11599,7 +11981,7 @@ superseded_reports:
 - n: 207
   source_id: squish-second-update-2026-10-07
   value: '14.8879922583077482'
-  superseded_by: mishapolk-exact-certificates-2026-10-12
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Complete Gupta source certificate is strictly smaller.
 - n: 236
   source_id: squish-second-update-2026-10-07
@@ -11614,7 +11996,7 @@ superseded_reports:
 - n: 153
   source_id: squish-n153-2026-10-07
   value: '12.8796793733329640'
-  superseded_by: mishapolk-exact-certificates-2026-10-12
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Complete Gupta source certificate is strictly smaller.
 - n: 180
   source_id: squish-second-update-2026-10-07
@@ -11670,7 +12052,7 @@ superseded_reports:
 - n: 123
   source_id: gupta-square-packing-refinements-2026-10-08
   value: '11.6009077785130183'
-  superseded_by: evand-regularized-2026-10-10
+  superseded_by: evand-exact-cur-2026-10-16
   reason: The withdrawn Gupta rational certificate is larger than the selected Xu construction; its
     complete source and replay remain retained.
 - n: 129
@@ -11703,9 +12085,9 @@ superseded_reports:
 - n: 70
   source_id: ry-xu-new-packings-2026-10-08
   value: '8.8809603717088810'
-  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-146's exact
+  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-174's exact
     side is smaller.
-  superseded_by: evand-regularized-2026-10-10
+  superseded_by: pingyou-pr574-certificates-2026-10-13
 - n: 84
   source_id: ry-xu-new-packings-2026-10-08
   value: '9.6980520605096981'
@@ -11721,9 +12103,9 @@ superseded_reports:
 - n: 102
   source_id: ry-xu-new-packings-2026-10-08
   value: '10.6058286965106059'
-  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-146's exact
+  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-193's exact
     side is smaller.
-  superseded_by: evand-regularized-2026-10-10
+  superseded_by: evand-exact-cur-2026-10-16
 - n: 103
   source_id: ry-xu-new-packings-2026-10-08
   value: '10.6792320475106793'
@@ -11745,9 +12127,9 @@ superseded_reports:
 - n: 123
   source_id: ry-xu-new-packings-2026-10-08
   value: '11.5913781457115914'
-  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-146's exact
+  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-193's exact
     side is smaller.
-  superseded_by: evand-regularized-2026-10-10
+  superseded_by: evand-exact-cur-2026-10-16
 - n: 126
   source_id: ry-xu-new-packings-2026-10-08
   value: '11.7426406872117427'
@@ -11787,9 +12169,9 @@ superseded_reports:
 - n: 153
   source_id: gupta-square-packing-refinements-2026-10-08
   value: '12.8796793733293146'
-  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-173's exact
+  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-174's exact
     side is smaller.
-  superseded_by: mishapolk-exact-certificates-2026-10-12
+  superseded_by: pingyou-pr574-certificates-2026-10-13
 - n: 154
   source_id: gupta-square-packing-refinements-2026-10-08
   value: '12.9265622458523470'
@@ -11817,9 +12199,9 @@ superseded_reports:
 - n: 207
   source_id: gupta-square-packing-refinements-2026-10-08
   value: '14.8879922583026574'
-  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-173's exact
+  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-174's exact
     side is smaller.
-  superseded_by: mishapolk-exact-certificates-2026-10-12
+  superseded_by: pingyou-pr574-certificates-2026-10-13
 - n: 209
   source_id: gupta-square-packing-refinements-2026-10-08
   value: '14.9496179522003981'
@@ -11847,15 +12229,15 @@ superseded_reports:
 - n: 258
   source_id: squish-update-2026-10-07
   value: '16.5634480021391540'
-  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-146's exact
+  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-193's exact
     side is smaller.
-  superseded_by: evand-regularized-2026-10-10
+  superseded_by: evand-exact-cur-2026-10-16
 - n: 259
   source_id: evand-square-packing-2026-10-05
   value: '16.602568490493364515381155942934'
-  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-136's exact
+  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-193's exact
     side is smaller.
-  superseded_by: squish-481-third-request-2026-10-09
+  superseded_by: evand-exact-cur-2026-10-16
 - n: 267
   source_id: ry-xu-new-packings-2026-10-08
   value: '16.8388319611168389'
@@ -11883,15 +12265,15 @@ superseded_reports:
 - n: 295
   source_id: ry-xu-new-packings-2026-10-08
   value: '17.7042327915177043'
-  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-146's exact
+  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-193's exact
     side is smaller.
-  superseded_by: evand-regularized-2026-10-10
+  superseded_by: evand-exact-cur-2026-10-16
 - n: 303
   source_id: squish-ten-packings-2026-10-07
   value: '17.9203123729203498'
-  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-230's exact
+  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-239's exact
     side is smaller.
-  superseded_by: evand-n303-2026-10-22
+  superseded_by: amundsk-n303-2026-10-23
 - n: 305
   source_id: evand-square-packing-2026-10-05
   value: '17.952959459015527962875662582531'
@@ -12004,8 +12386,8 @@ superseded_reports:
   source_id: pingyou-n153-certificate-2026-10-11
   value: '12.8700138504070441'
   reason: The house from 2026-10-11 until 2026-10-15; its certificate stays retained and verified,
-    and T-173's exact side is smaller.
-  superseded_by: mishapolk-exact-certificates-2026-10-12
+    and T-174's exact side is smaller.
+  superseded_by: pingyou-pr574-certificates-2026-10-13
 - n: 154
   source_id: evand-n154-2026-10-12
   value: '12.9225664019340596'
@@ -12016,8 +12398,8 @@ superseded_reports:
   source_id: pingyou-n207-certificate-2026-10-11
   value: '14.8809603730436757'
   reason: The house from 2026-10-11 until 2026-10-15; its certificate stays retained and verified,
-    and T-173's exact side is smaller.
-  superseded_by: mishapolk-exact-certificates-2026-10-12
+    and T-174's exact side is smaller.
+  superseded_by: pingyou-pr574-certificates-2026-10-13
 - n: 211
   source_id: dostashev-records-2026-10-11
   value: '14.9963367213363157'
@@ -12040,8 +12422,8 @@ superseded_reports:
   source_id: evand-regularized-2026-10-10
   value: '17.8720298490811800'
   reason: The house from 2026-10-11 until 2026-10-15; its certificate stays retained and verified,
-    and T-186's exact side is smaller.
-  superseded_by: mishapolk-kkt-refinements-2026-10-14
+    and T-193's exact side is smaller.
+  superseded_by: evand-exact-cur-2026-10-16
 - n: 304
   source_id: couzo-certificates-2026-10-11-in-corpus
   value: '17.9295659468485010'
@@ -12100,8 +12482,8 @@ superseded_reports:
   source_id: evand-regularized-2026-10-10
   value: '17.9130654627385324'
   reason: The house from 2026-10-11 until 2026-10-15; its certificate stays retained and verified,
-    and T-230's exact side is smaller.
-  superseded_by: evand-n303-2026-10-22
+    and T-239's exact side is smaller.
+  superseded_by: amundsk-n303-2026-10-23
 - n: 129
   source_id: dostashev-compositions-2026-10-12
   value: '11.8700138504044644'
@@ -12178,14 +12560,14 @@ superseded_reports:
   source_id: couzo-certificates-2026-10-13-in-corpus
   value: '17.8700138504044644'
   reason: The house from 2026-10-15 until 2026-10-16; its certificate stays retained and verified,
-    and T-186's exact side is smaller.
-  superseded_by: mishapolk-kkt-refinements-2026-10-14
+    and T-193's exact side is smaller.
+  superseded_by: evand-exact-cur-2026-10-16
 - n: 303
   source_id: dostashev-compositions-2026-10-12
   value: '17.9099582910699080'
   reason: The house from 2026-10-15 until 2026-10-16; its certificate stays retained and verified,
-    and T-230's exact side is smaller.
-  superseded_by: evand-n303-2026-10-22
+    and T-239's exact side is smaller.
+  superseded_by: amundsk-n303-2026-10-23
 - n: 304
   source_id: dostashev-merged-bands-2026-10-13
   value: '17.9294277580751750'
@@ -12502,14 +12884,74 @@ superseded_reports:
   source_id: mishapolk-kkt-refinements-2026-10-14
   value: '17.90995829106990799'
   reason: The house from 2026-10-16 until 2026-10-23; its certificate stays retained and verified,
-    and T-230's exact side is smaller.
-  superseded_by: evand-n303-2026-10-22
+    and T-239's exact side is smaller.
+  superseded_by: amundsk-n303-2026-10-23
+- n: 70
+  source_id: evand-regularized-2026-10-10
+  value: '8.8809603715555796'
+  reason: The house from 2026-10-11 until 2026-10-23; its certificate stays retained and verified,
+    and T-174's exact side is smaller.
+  superseded_by: pingyou-pr574-certificates-2026-10-13
+- n: 102
+  source_id: evand-regularized-2026-10-10
+  value: '10.6058286964315784'
+  reason: The house from 2026-10-11 until 2026-10-23; its certificate stays retained and verified,
+    and T-193's exact side is smaller.
+  superseded_by: evand-exact-cur-2026-10-16
+- n: 123
+  source_id: evand-regularized-2026-10-10
+  value: '11.5913781454976982'
+  reason: The house from 2026-10-11 until 2026-10-23; its certificate stays retained and verified,
+    and T-193's exact side is smaller.
+  superseded_by: evand-exact-cur-2026-10-16
+- n: 153
+  source_id: mishapolk-exact-certificates-2026-10-12
+  value: '12.8700138504044800'
+  reason: The house from 2026-10-15 until 2026-10-23; its certificate stays retained and verified,
+    and T-174's exact side is smaller.
+  superseded_by: pingyou-pr574-certificates-2026-10-13
+- n: 207
+  source_id: mishapolk-exact-certificates-2026-10-12
+  value: '14.8809603715580000'
+  reason: The house from 2026-10-15 until 2026-10-23; its certificate stays retained and verified,
+    and T-174's exact side is smaller.
+  superseded_by: pingyou-pr574-certificates-2026-10-13
+- n: 258
+  source_id: evand-regularized-2026-10-10
+  value: '16.5634480021337894'
+  reason: The house from 2026-10-11 until 2026-10-23; its certificate stays retained and verified,
+    and T-193's exact side is smaller.
+  superseded_by: evand-exact-cur-2026-10-16
+- n: 259
+  source_id: squish-481-third-request-2026-10-09
+  value: '16.5913781454976982'
+  reason: The house from 2026-10-11 until 2026-10-23; its certificate stays retained and verified,
+    and T-193's exact side is smaller.
+  superseded_by: evand-exact-cur-2026-10-16
+- n: 295
+  source_id: evand-regularized-2026-10-10
+  value: '17.7042327907360304'
+  reason: The house from 2026-10-11 until 2026-10-23; its certificate stays retained and verified,
+    and T-193's exact side is smaller.
+  superseded_by: evand-exact-cur-2026-10-16
+- n: 302
+  source_id: mishapolk-kkt-refinements-2026-10-14
+  value: '17.87001385040446435'
+  reason: The house from 2026-10-16 until 2026-10-23; its certificate stays retained and verified,
+    and T-193's exact side is smaller.
+  superseded_by: evand-exact-cur-2026-10-16
 - n: 204
   source_id: mishapolk-issue719-2026-10-22-in-corpus
   value: '14.8086428305278967'
   reason: The house from 2026-10-23 until 2026-10-24; its certificate stays retained and verified,
     and T-231's exact side is smaller.
   superseded_by: mishapolk-n204-2026-10-22
+- n: 303
+  source_id: evand-n303-2026-10-22
+  value: '17.9097722172743278'
+  reason: The house from 2026-10-23 until 2026-10-24; its certificate stays retained and verified,
+    and T-239's exact side is smaller.
+  superseded_by: amundsk-n303-2026-10-23
 beyond_horizon_claims:
 - n: 327
   source_id: couzo-extended-range-reports-2026-10-08
@@ -12531,7 +12973,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '18.822875655543559'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-1545
 - n: 336
   source_id: couzo-extended-range-reports-2026-10-08
@@ -15172,7 +15615,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '31.920310217041'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-nj7h
 - n: 986
   source_id: couzo-verified-bounds-2026-10-14
@@ -16590,28 +17034,32 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '18.614368938513'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 343
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '18.977575126267'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 365
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '19.614368938513'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 404
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '20.614368938513'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 417
   source_id: couzo-issue715-2026-10-21
@@ -16626,7 +17074,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '21.848427413955'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 456
   source_id: couzo-issue715-2026-10-21
@@ -16641,14 +17090,16 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '21.903616797192'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 459
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '21.937022304151'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 461
   source_id: couzo-issue715-2026-10-21
@@ -16663,21 +17114,24 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '21.971254044975'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 496
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '22.822875655559'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 497
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '22.823102656285'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 499
   source_id: couzo-issue715-2026-10-21
@@ -16692,21 +17146,24 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '22.887841512273'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 501
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '22.887841512273'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 502
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '22.933269925480'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 503
   source_id: couzo-issue715-2026-10-21
@@ -16720,14 +17177,16 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '22.961828398888'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 505
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '22.964182800913'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 506
   source_id: couzo-issue715-2026-10-21
@@ -16742,49 +17201,56 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '22.993588501431'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 545
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '23.883414761903'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 546
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '23.887841512273'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 547
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '23.898819144794'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 548
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '23.943933771540'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 549
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '23.955501804754'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 550
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '23.960681444798'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 553
   source_id: couzo-issue715-2026-10-21
@@ -16799,28 +17265,32 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '23.986307325908'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 592
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '24.883414761903'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 593
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '24.887841512273'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 594
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '24.898819144794'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 595
   source_id: couzo-issue715-2026-10-21
@@ -16834,14 +17304,16 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '24.950690418637'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 598
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '24.954250129268'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 599
   source_id: couzo-issue715-2026-10-21
@@ -16856,7 +17328,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '24.978172747238'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 601
   source_id: couzo-issue715-2026-10-21
@@ -16871,14 +17344,16 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '24.988237878425'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 643
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '25.898819144794'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 645
   source_id: couzo-issue715-2026-10-21
@@ -16941,14 +17416,16 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '25.994801642508'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 694
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '26.898819144794'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 696
   source_id: couzo-issue715-2026-10-21
@@ -16979,7 +17456,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '26.963723854128'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 702
   source_id: couzo-issue715-2026-10-21
@@ -17002,21 +17480,24 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '27.884019388658'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 748
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '27.884019388658'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 749
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '27.884019388658'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 750
   source_id: couzo-issue715-2026-10-21
@@ -17063,42 +17544,48 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '28.825777528963'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 802
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '28.827439471389'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 803
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '28.827585222385'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 804
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '28.884019388658'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 805
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '28.902673974184'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 806
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '28.902673974184'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 807
   source_id: couzo-issue715-2026-10-21
@@ -17113,7 +17600,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '28.931498747933'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 809
   source_id: couzo-issue715-2026-10-21
@@ -17151,28 +17639,32 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '29.825571500168'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 859
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '29.825571500168'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 860
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '29.827585222385'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 863
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '29.902673974184'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 864
   source_id: couzo-issue715-2026-10-21
@@ -17187,7 +17679,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '29.931498747933'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 866
   source_id: couzo-issue715-2026-10-21
@@ -17249,28 +17742,32 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '29.992265777039'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 917
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '30.825571499902'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 918
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '30.825571499902'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 919
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '30.827585222385'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 923
   source_id: couzo-issue715-2026-10-21
@@ -17285,7 +17782,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '30.931498747933'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 925
   source_id: couzo-issue715-2026-10-21
@@ -17300,7 +17798,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '30.942070418091'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 927
   source_id: couzo-issue715-2026-10-21
@@ -17339,28 +17838,32 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '31.825090165859'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 979
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '31.825090165859'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 980
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '31.827585222385'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 987
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '31.941797078452'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 989
   source_id: couzo-issue715-2026-10-21
@@ -19120,7 +19623,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '20.7781745930728796'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-xyhn
 - n: 412
   source_id: mishapolk-issue719-2026-10-22
@@ -19134,7 +19638,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '20.8316633653748782'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-xyhn
 - n: 417
   source_id: mishapolk-issue719-2026-10-22
@@ -19213,14 +19718,16 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '21.8284271247681022'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-xyhn
 - n: 456
   source_id: mishapolk-issue719-2026-10-22
   claim: upper-bound
   value: '21.8813062181121204'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-xyhn
 - n: 460
   source_id: mishapolk-issue719-2026-10-22
@@ -19241,14 +19748,16 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '22.6568542495151204'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-xyhn
 - n: 498
   source_id: mishapolk-issue719-2026-10-22
   claim: upper-bound
   value: '22.8284271247691329'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-xyhn
 - n: 499
   source_id: mishapolk-issue719-2026-10-22
@@ -19291,7 +19800,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '23.8284271247704797'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-xyhn
 - n: 551
   source_id: mishapolk-issue719-2026-10-22
@@ -19334,7 +19844,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '24.6776695296884534'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-xyhn
 - n: 591
   source_id: mishapolk-issue719-2026-10-22
@@ -19349,7 +19860,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '24.9497474683309116'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-xyhn
 - n: 601
   source_id: mishapolk-issue719-2026-10-22
@@ -19379,7 +19891,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '25.7781745930779883'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-xyhn
 - n: 640
   source_id: mishapolk-issue719-2026-10-22
@@ -19408,7 +19921,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '25.8994949366377160'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-xyhn
 - n: 649
   source_id: mishapolk-issue719-2026-10-22
@@ -19437,7 +19951,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '26.6568542495058909'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-xyhn
 - n: 684
   source_id: mishapolk-issue719-2026-10-22
@@ -19452,7 +19967,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '26.7781745930789777'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-xyhn
 - n: 691
   source_id: mishapolk-issue719-2026-10-22
@@ -19467,7 +19983,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '26.8284271247731456'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-xyhn
 - n: 693
   source_id: mishapolk-issue719-2026-10-22
@@ -19490,7 +20007,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '26.9497474683329111'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-xyhn
 - n: 701
   source_id: mishapolk-issue719-2026-10-22
@@ -19533,7 +20051,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '27.6568542495202669'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-xyhn
 - n: 737
   source_id: mishapolk-issue719-2026-10-22
@@ -19556,14 +20075,16 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '27.7989898732512834'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-xyhn
 - n: 744
   source_id: mishapolk-issue719-2026-10-22
   claim: upper-bound
   value: '27.7989898732513590'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-xyhn
 - n: 745
   source_id: mishapolk-issue719-2026-10-22
@@ -19578,7 +20099,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '27.8284271247742003'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-xyhn
 - n: 753
   source_id: mishapolk-issue719-2026-10-22
@@ -19643,7 +20165,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '28.6568542495212151'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-xyhn
 - n: 797
   source_id: mishapolk-issue719-2026-10-22
@@ -19674,7 +20197,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '28.7989898732523347'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-xyhn
 - n: 810
   source_id: mishapolk-issue719-2026-10-22
@@ -21532,7 +22056,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '29.656854249528'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-yfoo
 - n: 854
   source_id: couzo-index-2026-10-15
@@ -21579,7 +22104,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '29.899494936647'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-yfoo
 - n: 863
   source_id: couzo-index-2026-10-15
@@ -21692,7 +22218,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '30.656854249528'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-yfoo
 - n: 913
   source_id: couzo-index-2026-10-15
@@ -21707,7 +22234,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '30.778174593089'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-yfoo
 - n: 915
   source_id: couzo-index-2026-10-15
@@ -21844,21 +22372,24 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '31.656854249528'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-yfoo
 - n: 975
   source_id: couzo-index-2026-10-15
   claim: upper-bound
   value: '31.778174593089'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-yfoo
 - n: 976
   source_id: couzo-index-2026-10-15
   claim: upper-bound
   value: '31.778174593090'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-yfoo
 - n: 977
   source_id: couzo-index-2026-10-15
@@ -21918,7 +22449,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '31.920310216821'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-yfoo
 - n: 987
   source_id: couzo-index-2026-10-15
@@ -21933,7 +22465,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '31.949747468406'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-yfoo
 - n: 990
   source_id: couzo-index-2026-10-15
@@ -22369,7 +22902,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '23.656854249516'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 539
   source_id: mishapolk-issue732-2026-10-22
@@ -22390,7 +22924,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '24.656854249516'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 583
   source_id: mishapolk-issue732-2026-10-22
@@ -22411,21 +22946,24 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '24.828427124771'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 599
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '24.959619792263'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 631
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '25.656854249516'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 632
   source_id: mishapolk-issue732-2026-10-22
@@ -22439,42 +22977,48 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '25.677669529689'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 640
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '25.828427124771'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 645
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '25.946623458826'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 646
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '25.946653181671'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 647
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '25.946936912812'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 648
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '25.959619775225'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 649
   source_id: mishapolk-issue732-2026-10-22
@@ -22488,14 +23032,16 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '25.981703321304'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 653
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '25.992652674145'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 683
   source_id: mishapolk-issue732-2026-10-22
@@ -22509,14 +23055,16 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '26.677669529689'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 691
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '26.828427124771'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 693
   source_id: mishapolk-issue732-2026-10-22
@@ -22530,14 +23078,16 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '26.899494936638'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 696
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '26.946623458826'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 697
   source_id: mishapolk-issue732-2026-10-22
@@ -22551,49 +23101,56 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '26.946936912812'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 702
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '26.976011322963'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 735
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '27.656854249506'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 737
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '27.677669529689'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 742
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '27.778174593079'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 745
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '27.828427124774'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 750
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '27.911195756382'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 751
   source_id: mishapolk-issue732-2026-10-22
@@ -22607,63 +23164,72 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '27.931659253271'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 756
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '27.976780205512'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 790
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '28.656854249506'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 791
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '28.656854249521'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 797
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '28.778174593079'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 798
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '28.798989873252'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 799
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '28.798989873252'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 807
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '28.924694845693'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 809
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '28.933954128802'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 810
   source_id: mishapolk-issue732-2026-10-22
@@ -22677,49 +23243,56 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '28.979118512495'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 814
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '28.981388113792'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 854
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '29.778174593079'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 855
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '29.798989873252'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 856
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '29.798989873252'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 857
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '29.798989873253'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 864
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '29.924694842541'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 866
   source_id: mishapolk-issue732-2026-10-22
@@ -22747,35 +23320,40 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '29.981222446775'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 913
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '30.778174593079'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 915
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '30.798989873252'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 916
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '30.798989873253'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 923
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '30.924694841577'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 925
   source_id: mishapolk-issue732-2026-10-22
@@ -22803,14 +23381,16 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '31.798989873253'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 989
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '31.974133837950'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 990
   source_id: mishapolk-issue732-2026-10-22
@@ -22833,4 +23413,970 @@ beyond_horizon_claims:
   assurance: reported
   disposition: tracked-outside-case-corpus
   bead: think-0gp6
+- n: 328
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '18.614368938495'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 335
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '18.822875655542'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 343
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '18.977575126249'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 365
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '19.614368938496'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 404
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '20.614368938496'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 410
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '20.778174593057'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 413
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '20.831663365359'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 454
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '21.828427124751'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 455
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '21.848427413738'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 456
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '21.881306218098'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 458
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '21.903616795094'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 459
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '21.937022304130'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 463
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '21.971212864946'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 490
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '22.656854249498'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 496
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '22.822875655538'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 497
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '22.823102656263'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 498
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '22.828427124751'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 500
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '22.887841512251'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 501
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '22.887841512251'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 502
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '22.933269925449'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 504
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '22.961828398648'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 505
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '22.964182800891'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 509
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '22.993588501400'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 535
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '23.656854249498'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 544
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '23.828427124754'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 545
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '23.883414759605'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 546
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '23.887841512252'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 547
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '23.898819144772'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 548
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '23.943933771539'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 549
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '23.955501804732'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 550
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '23.960681444780'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 554
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '23.986307325878'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 582
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '24.656854249499'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 584
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '24.677669529669'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 591
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '24.828427124755'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 592
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '24.883414759605'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 593
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '24.887841512256'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 594
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '24.898819144772'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 596
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '24.949747468312'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 597
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '24.950690418604'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 598
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '24.954250129235'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 599
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '24.959619754596'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 600
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '24.978172747041'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 602
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '24.988237878176'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 631
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '25.656854249498'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 633
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '25.677669529670'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 637
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '25.778174593058'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 640
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '25.828427124757'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 643
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '25.898819144773'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 644
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '25.899494936618'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 645
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '25.946513932851'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 646
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '25.946569059464'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 647
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '25.946936319308'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 648
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '25.959619754592'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 651
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '25.981693875364'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 653
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '25.992652660227'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 654
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '25.994801642473'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 682
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '26.656854249498'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 684
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '26.677669529670'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 689
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '26.778174593058'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 691
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '26.828427124753'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 692
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '26.828427124752'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 694
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '26.898819144773'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 695
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '26.899494936618'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 696
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '26.946544919148'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 698
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '26.946936319309'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 699
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '26.949747468312'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 700
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '26.963723854102'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 702
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '26.976006198468'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 735
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '27.656854249499'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 736
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '27.656854249499'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 737
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '27.677669529670'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 742
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '27.778174593058'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 743
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '27.798989873230'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 744
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '27.798989873230'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 745
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '27.828427124753'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 746
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '27.828427124753'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 747
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '27.883160154733'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 748
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '27.884019388634'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 749
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '27.884019388634'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 750
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '27.911195491084'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 752
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '27.931658926825'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 756
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '27.976777716758'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 790
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '28.656854249499'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 791
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '28.656854249499'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 792
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '28.656854249499'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 797
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '28.778174593059'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 798
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '28.798989873230'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 799
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '28.798989873230'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 800
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '28.798989873230'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 801
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '28.825777526126'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 802
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '28.827439468623'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 803
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '28.827585222382'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 804
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '28.884019388632'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 805
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '28.902673974150'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 806
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '28.902673974145'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 807
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '28.924694338675'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 808
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '28.931498747905'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 809
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '28.933951500687'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 813
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '28.979106074255'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 814
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '28.981388046068'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 850
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '29.656854249499'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 854
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '29.778174593059'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 855
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '29.798989873230'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 856
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '29.798989873230'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 857
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '29.798989873230'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 858
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '29.825571499874'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 859
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '29.825571499869'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 860
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '29.827585222354'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 862
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '29.899494936619'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 863
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '29.902673974145'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 864
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '29.924694560082'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 865
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '29.931498747931'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 871
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '29.981222179337'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 873
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '29.992265777010'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 909
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '30.656854249499'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 913
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '30.778174593059'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 914
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '30.778174593059'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 915
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '30.798989873231'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 916
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '30.798989873231'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 917
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '30.825571499869'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 918
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '30.825571499869'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 919
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '30.827585222354'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 923
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '30.924694629713'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 924
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '30.931498747932'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 926
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '30.942070418062'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 970
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '31.656854249500'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 975
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '31.778174593059'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 976
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '31.778174593059'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 977
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '31.798989873231'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 978
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '31.825090165848'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 979
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '31.825090165819'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 980
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '31.827585222355'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 985
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '31.920310216790'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 986
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '31.920310216790'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 987
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '31.941797078293'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 988
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '31.949747468313'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 989
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '31.974117146000'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
 pending_catalogue_intake: []

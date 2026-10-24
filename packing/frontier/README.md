@@ -132,12 +132,24 @@ The ones that carry the most weight:
   `bounds_agree_at_declared_precision` accepts a ceiling within one unit of the printed
   side’s last place as the same displayed bound.
   An `exact_form` on the ceiling is the exact form of the ceiling; $s(n)$ is known
-  exactly only when `status` is `proved`.
+  exactly only when `status` is `proved`. An algebraic ceiling the house writer writes
+  is `root(p, low, high)`: $p$ its minimal polynomial in $s$, highest degree first, as
+  `minimal_polynomial` writes it, and `low` and `high` the side cut down and rounded up
+  at forty places, an interval in which it is $p$’s one root
+  ([`exact_sides.form`](../devtools/exact_sides.py), which `exact_sides.read_form` reads
+  back exactly). A side of degree two is written in its closed form instead,
+  `(a+b*sqrt(d))/c` with $d$ square-free and the fraction in lowest terms, as n = 51’s
+  `(16+5*sqrt(2))/3` and n = 295’s `(22+22*sqrt(2))/3` are.
+  n = 11’s `root(P_trump11, …)`, which names its polynomial, is not this form.
 - Both upper lanes hold the certificate of the case’s **house best packing**, as the
   [synopsis](../../SYNOPSIS.md#the-measurements) defines it.
   By the import runbook’s [house rule](../campaign/result-import.md#the-house-rule), the
   pass that validates a smaller packing, whoever found it, adopts it as the house best
   packing and regularizes it in the same pull request.
+  Where the house has an algebraic side and does not read regular as published, its
+  count draws its exact house and its regularization stays owed to a bead
+  (`regularization-owed`), since no regularizer yet draws an exact view of a
+  number-field witness (the house rule’s algebraic bullet).
   `devtools.select_houses` derives it from the register and `devtools.adopt_houses`
   writes it.
 - `reported_status` is the source-set view; `status` is `proved` only when the verified
@@ -615,17 +627,17 @@ most 2.
 ### Smallest Open Gaps
 
 Ranked by gap—the best-known packing minus the verified lower bound, which is what
-`devtools.gap_ranking` computes—the six smallest open cases at $n \le 100$, $76$ and
-$95$ tied, are:
+`devtools.gap_ranking` computes—the six smallest open cases at $n \le 100$ are below;
+$n = 95$ ties $n = 76$ at $0.0350$ and follows it in the tool’s order:
 
 | $n$ | gap | record | note |
 | --- | --- | --- | --- |
 | 17 | 0.0151 | Bidwell | carried to $\frac{18641771}{4000000}$ by Guzhou0806 after Overbeck |
+| 31 | 0.0225 | grid | $6^2 - 5$, carried to $\frac{2391}{400}$ by Hosono after Tokoharu and Levy (T-232) |
 | 44 | 0.0275 | grid | $7^2 - 5$, carried to $\frac{2789}{400}$ by Hosono after Tokoharu |
 | 12 | 0.0285 | grid | $4^2 - 4$, carried to $\frac{7943}{2000}$ by squarepacker after Daniel |
 | 96 | 0.0300 | grid | $10^2 - 4$, carried to $\frac{997}{100}$ by Hosono after Tokoharu; reported proved by Evan Daniel (T-081) |
 | 76 | 0.0350 | grid | $9^2 - 5$, carried to $\frac{1793}{200}$ by Hosono after Tokoharu |
-| 95 | 0.0350 | grid | $10^2 - 5$, carried to $\frac{1993}{200}$ by Hosono after Tokoharu |
 
 The $n = 17$ bound is Guzhou0806 / N17 project’s R071, continuing Overbeck’s charge
 (Overbeck building on Squares Project (Joshua Levy), Mira and Guzhou0806): an exact
@@ -647,6 +659,8 @@ later that day, when another proved $s(77) = 9$ and with it $s(78) = 9$. $n = 97
 $0.0557$, left it on 2026-10-03, when Evan Daniel’s family $s(m^2 - 3) = m$ was proved
 here for every $m \ge 6$ (T-064): his exact checker of the finite premise `Valid7` was
 replayed in full and his Lean reduction from it was built.
+$n = 31$ entered it second, at $0.0225$, when T-232 landed and raised its verified floor
+to $2391/400$, and moved $n = 95$ to seventh.
 With Bentz’s $s(6)$, $s(13)$ and $s(22)$ the family is now **proved exactly for every
 $m \ge 3$**.
 

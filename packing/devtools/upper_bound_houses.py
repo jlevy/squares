@@ -27,6 +27,16 @@ adoption of 22 October 2026 moved both of its counts, and the last counts of `T-
 for a pass that houses issue 678 again, and a test of the house adoption holds it to the
 packet at both counts.
 
+**Algebraic houses.** A house whose side is algebraic is built from the packet's derived
+number-field fact (`devtools.algebraic_witness_reports`) and the receipt of its three jobs
+on `sqpack`'s exact route over the witness's field, a positive and the same two controls,
+and its witness states that field and an `exact-number-field-sat` certificate, as n = 51's
+does (`ryxu_house_links`). A source's `fields` are the counts it houses so: PR #574's
+algebraic certificates at 70, 153 and 207 (T-174), whose facts and receipts that packet
+already kept, and issue 639's exact forms (T-193), which `algebraic_witness_reports
+derive-forms` writes as facts from the forms the packet retains. A count whose form the
+packet pins only, as 267's, has no fact and is no house here.
+
 **No geometry runs in a check.** `check_houses` admits the inputs and compares the
 retained witness with the one they rebuild; `build_witness`, which writes a house, also
 decides it again with `sqpack`'s exact verifier and holds the result to the retained
@@ -57,14 +67,14 @@ import json
 import sys
 from collections.abc import Callable, Mapping, Sequence
 from dataclasses import dataclass
-from fractions import Fraction
 from functools import cache
 from pathlib import Path, PurePosixPath
 from typing import Any, NamedTuple, cast
 
+from devtools import algebraic_witness_reports as fields
 from devtools import couzo_678_replay as couzo_678
 from devtools import evand_arrangement_reports as kernel
-from devtools import retained_data
+from devtools import exact_sides, retained_data
 from devtools import squish_second_update_house_links as house
 from devtools import upper_bound_reports as reports
 from devtools.git_storage import stored_size
@@ -138,6 +148,9 @@ class Source:
     #: three jobs, which the custody check mutates (`_mutants`).
     stored: Callable[[int], Path]
     receipt: Callable[[int], Path]
+    #: The counts whose house is the packet's algebraic witness, read from its derived
+    #: number-field fact and the receipt of its jobs over the field (`_field_house`).
+    fields: frozenset[int] = frozenset()
 
 
 # --------------------------------------------------------------------- generic packets
@@ -292,22 +305,183 @@ def _packet_inputs(packet: Path, numbers: Sequence[int]) -> tuple[Path, ...]:
     return tuple(paths)
 
 
-def packet_source(result: str, name: str) -> Source:
+def packet_source(result: str, name: str, field_counts: Sequence[int] = ()) -> Source:
+    """A packet's rational certificates, and at `field_counts` its algebraic witnesses."""
     packet = reports.packet_path(name)
     declaration = _declaration(packet)
+    algebraic = frozenset(field_counts)
+
+    def inputs(numbers: Sequence[int]) -> tuple[Path, ...]:
+        rational = [n for n in numbers if n not in algebraic]
+        found = list(_packet_inputs(packet, rational)) if rational else []
+        found.extend(_field_inputs(packet, [n for n in numbers if n in algebraic]))
+        return tuple(dict.fromkeys(found))
+
     return Source(
         result=result,
         key=declaration["source_key"],
         packet=packet,
         certificate=lambda n: _packet_certificate(packet, n),
         jobs=lambda n, certificate: _packet_jobs(packet, n, certificate),
-        origin=lambda n: _packet_origin(packet, n),
-        inputs=lambda numbers: _packet_inputs(packet, numbers),
+        origin=lambda n: (
+            _field_origin(packet, n) if n in algebraic else _packet_origin(packet, n)
+        ),
+        inputs=inputs,
         witness_prefix=declaration["witness_prefix"],
         claim_limitations=declaration["claim_limitations"],
-        stored=lambda n: _stored(packet, n),
-        receipt=lambda n: _receipt(packet, n),
+        stored=lambda n: _field_stored(packet, n) if n in algebraic else _stored(packet, n),
+        receipt=lambda n: (
+            fields.receipt_path(packet, n) if n in algebraic else _receipt(packet, n)
+        ),
+        fields=algebraic,
     )
+
+
+def _no_rational(packet: Path) -> Callable[..., Any]:
+    def refuse(n: int, *_args: object) -> Any:
+        raise HouseError(f"n={n}: {packet.name} states no rational certificate")
+
+    return refuse
+
+
+def field_source(result: str, name: str, field_counts: Sequence[int]) -> Source:
+    """A packet whose houses are all algebraic witnesses, as issue 639's exact forms are."""
+    packet = reports.packet_path(name)
+    declaration = _fields(packet)
+    algebraic = frozenset(field_counts)
+    return Source(
+        result=result,
+        key=declaration["source_key"],
+        packet=packet,
+        certificate=_no_rational(packet),
+        jobs=_no_rational(packet),
+        origin=lambda n: _field_origin(packet, n),
+        inputs=lambda numbers: _field_inputs(packet, numbers),
+        witness_prefix=declaration["witness_prefix"],
+        claim_limitations=declaration["claim_limitations"],
+        stored=lambda n: _field_stored(packet, n),
+        receipt=lambda n: fields.receipt_path(packet, n),
+        fields=algebraic,
+    )
+
+
+# ------------------------------------------------------------------- algebraic houses
+
+
+@cache
+def _fields(packet: Path) -> fields.Declaration:
+    return fields.load_declaration(packet)
+
+
+def _field_row(packet: Path, n: int) -> fields.Witness:
+    declaration = _fields(packet)
+    rows = [row for row in declaration["witnesses"] if row["n"] == n]
+    _require(
+        len(rows) == 1 and n in declaration["replayed"],
+        f"n={n}: {packet.name} declares no replayed algebraic witness at this count",
+    )
+    return rows[0]
+
+
+def _field_stored(packet: Path, n: int) -> Path:
+    """The derived number-field fact the count's house is read from."""
+    return retained_data.compressed_path(packet / _field_row(packet, n)["fact"])
+
+
+@cache
+def _field_fact(packet: Path, n: int) -> Mapping[str, Any]:
+    """The count's derived number-field fact, admitted as `algebraic_witness_reports` admits
+    one: a valid witness of the declared field that rebuilds itself."""
+    return fields.read_fact(packet, _fields(packet), _field_row(packet, n))
+
+
+def field_witness(packet: Path, n: int) -> dict[str, Any]:
+    """A copy of the count's admitted number-field fact."""
+    return copy.deepcopy(dict(_field_fact(packet, n)))
+
+
+def _field_jobs(packet: Path, n: int, witness: Mapping[str, Any]) -> dict[str, Any]:
+    """The count's three jobs over the field, each held to the witness it decided."""
+    declaration = _fields(packet)
+    path = fields.receipt_path(packet, n)
+    reports.ensure_private(path)
+    record = cast("dict[str, Any]", kernel.read_xz(path))
+    cases: Any = record.get("cases") if type(record) is dict else None
+    _require(
+        type(record) is dict
+        and record.get("format") == declaration["receipt_format"]
+        and record.get("routes") == [fields.ROUTE]
+        and type(cases) is list
+        and len(cases) == len(fields.JOBS),
+        f"n={n}: {path.name} is not this packet's receipt of three jobs over the field",
+    )
+    side = fields.side_of(dict(witness))
+    found = {}
+    for row, control in zip(cases, fields.JOBS, strict=True):
+        try:
+            fields.validate_job(row, dict(witness), control, side=side)
+        except fields.ReportError as error:
+            raise HouseError(str(error)) from error
+        found[control] = row
+    return found
+
+
+def _field_origin(packet: Path, n: int) -> Origin:
+    record = _record(packet)
+    source = record["sources"][0]
+    declaration = _fields(packet)
+    url, _digest = fields.source_url(packet, _field_row(packet, n))
+    return Origin(
+        key=declaration["source_key"],
+        path=_field_stored(packet, n),
+        url=url,
+        revision=source["source_commit"],
+        retrieved=str(record["retrieved_at_utc"])[:10],
+        author=declaration["author"],
+        licence_status="MIT" if str(source["license"]).startswith("MIT") else NO_LICENCE,
+        raw_asset_retained=False,
+        retention_policy=DERIVED_RETENTION,
+    )
+
+
+def _field_inputs(packet: Path, numbers: Sequence[int]) -> tuple[Path, ...]:
+    """The files a check of the counts' algebraic houses reads: the declaration and the
+    acquisition record, the manifest a retained form's digest is read from, each fact
+    and each receipt."""
+    if not numbers:
+        return ()
+    paths = [packet / fields.DECLARATION, packet / reports.acquire_source.RECORD]
+    if any("form" in _field_row(packet, n) for n in numbers):
+        paths.append(REPO / _record(packet)["sources"][0]["subtree_manifest"])
+    paths.extend(_field_stored(packet, n) for n in numbers)
+    paths.extend(fields.receipt_path(packet, n) for n in numbers)
+    return tuple(paths)
+
+
+def _field_house(n: int, source: Source) -> dict[str, Any]:
+    """The algebraic house at `n`: the packet's number-field fact as a known-best witness,
+    with the native result of its positive job over the field."""
+    witness = field_witness(source.packet, n)
+    positive = _field_jobs(source.packet, n, witness)["positive"]
+    identifier = f"W-known-best-n{n:03d}"
+    witness["id"] = identifier
+    witness["claim"]["coordinate_provenance"] = "verified"
+    origin = source.origin(n)
+    witness["source"] = {
+        "key": origin.key,
+        "path": origin.path.relative_to(ROOT).as_posix(),
+        "url": origin.url,
+        "revision": origin.revision,
+        "retrieved": origin.retrieved,
+    }
+    native = copy.deepcopy(positive[fields.ROUTE])
+    native["id"] = identifier
+    witness["certificate"] = {
+        "kind": "exact-number-field-sat",
+        "replay": f"uv run --frozen packing-witness verify witnesses/known-best/n-{n:03d}.yaml",
+        "result": native,
+    }
+    return witness
 
 
 def _couzo_678_path(n: int) -> Path:
@@ -373,19 +547,29 @@ def couzo_678_source() -> Source:
     )
 
 
+#: The counts each result houses by its algebraic witness, whose side is irrational: PR
+#: #574's three algebraic certificates the house rule adopts (T-174), and the exact forms of
+#: issue 639 whose facts its packet derives (T-193). Issue 639's other staged counts wait:
+#: eight for the correction of T-193's regularization items (think-8ido), and 267, whose
+#: form the packet pins only (select_houses.PENDING_ADOPTION).
+FIELD_COUNTS: dict[str, tuple[int, ...]] = {
+    "T-174": (70, 153, 207),
+    "T-193": (102, 123, 258, 259, 295, 302),
+}
+
+
 def _sources() -> dict[str, Source]:
     sources = [
         packet_source("T-134", "couzo-exact-certificates-2026-10-09"),
-        packet_source("T-136", "squish-481-third-request-2026-10-09"),
         packet_source("T-139", "evand-trio126-2026-10-09"),
         packet_source("T-146", "evand-regularized-2026-10-10"),
-        packet_source("T-173", "mishapolk-exact-certificates-2026-10-12"),
-        packet_source("T-174", "pingyou-pr574-certificates-2026-10-13"),
+        packet_source("T-174", "pingyou-pr574-certificates-2026-10-13", FIELD_COUNTS["T-174"]),
         packet_source("T-182", "couzo-certificates-2026-10-13"),
         packet_source("T-186", "mishapolk-kkt-refinements-2026-10-14"),
         packet_source("T-187", "evand-n146-2026-10-14"),
         packet_source("T-188", "couzo-verified-bounds-2026-10-14"),
         packet_source("T-190", "couzo-n237-2026-10-15"),
+        field_source("T-193", "evand-exact-cur-2026-10-16", FIELD_COUNTS["T-193"]),
         packet_source("T-195", "pingyou-pr622-certificate-2026-10-15"),
         packet_source("T-197", "evand-n155-explorer-2026-10-17"),
         packet_source("T-218", "evand-n236-2026-10-16"),
@@ -396,8 +580,10 @@ def _sources() -> dict[str, Source]:
         packet_source("T-224", "evand-n270-sweep-2026-10-20"),
         packet_source("T-225", "evand-regularized-2026-10-20"),
         packet_source("T-229", "mishapolk-issue719-2026-10-22"),
-        packet_source("T-230", "evand-n303-2026-10-22"),
         packet_source("T-231", "mishapolk-n204-2026-10-22"),
+        # The adoption of 24 October 2026 moved 303, T-230's only count, to T-239, so
+        # T-230 is no source here now, as T-196 and T-199 left on 22 October.
+        packet_source("T-239", "amundsk-n303-2026-10-23"),
     ]
     found = {source.result: source for source in sources}
     # Two results may read one packet (T-181 and T-182 both read issue 586's), so the
@@ -433,20 +619,24 @@ def _sources() -> dict[str, Source]:
 #: as T-227 and T-225's item there named it, and at 229 from T-199. The pass of 23 October
 #: 2026 adopted Mykhailo Polkovskyi's certificates of issue 719 (T-229) at 105 from T-174
 #: and at 204 from T-225, and Evan Daniel's certificate of issue 728 (T-230) at 303 from
-#: T-186. The pass of 24 October 2026 adopted Polkovskyi's lower 204 file (T-231) at 204
-#: from T-229.
+#: T-186. The same pass, once the writer wrote an algebraic side (think-ot5c), adopted PR
+#: 574's algebraic certificates (T-174) at 70 from T-146 and at 153 and 207 from T-173,
+#: and Evan Daniel's exact forms of issue 639 (T-193) at 102, 123, 258 and 295 from T-146,
+#: at 259 from T-136 and at 302 from T-186, which leaves T-136 and T-173 no house here.
+#: The pass of 24 October 2026 adopted Polkovskyi's lower 204 file (T-231) at 204 from
+#: T-229, and Amund Kristiansen's certificate of issue 755 (T-239) at 303 from T-230.
 ADOPTED: dict[int, str] = {
     29: "T-195",
     68: "T-174",
-    70: "T-146",
+    70: "T-174",
     84: "T-174",
     86: "T-174",
-    102: "T-146",
+    102: "T-193",
     103: "T-174",
     105: "T-229",
     108: "T-174",
     110: "T-174",
-    123: "T-146",
+    123: "T-193",
     126: "T-139",
     127: "T-174",
     129: "T-186",
@@ -454,7 +644,7 @@ ADOPTED: dict[int, str] = {
     131: "T-174",
     132: "T-174",
     146: "T-187",
-    153: "T-173",
+    153: "T-174",
     154: "T-222",
     155: "T-197",
     156: "T-186",
@@ -468,7 +658,7 @@ ADOPTED: dict[int, str] = {
     183: "T-220",
     204: "T-231",
     206: "T-174",
-    207: "T-173",
+    207: "T-174",
     208: "T-174",
     209: "T-174",
     210: "T-174",
@@ -483,8 +673,8 @@ ADOPTED: dict[int, str] = {
     239: "T-174",
     240: "T-174",
     241: "T-182",
-    258: "T-146",
-    259: "T-136",
+    258: "T-193",
+    259: "T-193",
     260: "T-225",
     261: "T-174",
     263: "T-174",
@@ -497,10 +687,10 @@ ADOPTED: dict[int, str] = {
     272: "T-174",
     273: "T-174",
     292: "T-146",
-    295: "T-146",
+    295: "T-193",
     297: "T-174",
-    302: "T-186",
-    303: "T-230",
+    302: "T-193",
+    303: "T-239",
     304: "T-186",
     305: "T-174",
     306: "T-174",
@@ -567,11 +757,21 @@ NUMBERS = tuple(sorted(ADOPTED))
 #: The same pass adopted Evan Daniel's certificate of issue 728 (T-230) after the 22 October
 #: review of it, at 303 from T-186, 1.86e-04 below it: another arrangement of Daniil
 #: Ostashev's two-band design, found from his packing. Its pull request merged after
-#: T-229's, and 303 joined that day's pass, whose archive takes a row for each count.
+#: T-229's, and 303 joined that day's pass, whose archive takes a row for each count. The
+#: house rule's algebraic houses joined it the same way, once the writer wrote an algebraic
+#: side: PR 574's (T-174) at 70, 8.88e-20 below T-146, and at 153 and 207, 1.57e-14 and
+#: 2.42e-12 below T-173; and issue 639's exact forms (T-193) at 102, 123, 258 and 295,
+#: 1.06e-19 to 1.77e-19 below T-146, at 259, 1.56e-31 below T-136, and at 302, 1.79e-39
+#: below T-186.
 #: The pass of 24 October 2026 adopted the release's other 204 file, which the author
 #: claimed after T-229 was registered (T-231), after the 23 October review of it, at 204
 #: from T-229, 1.48e-11 below it: the same packing at the solved side. It is dated by the
 #: day its pull request merges, since the pass of 23 October had already moved 204.
+#: The same pass adopted Amund Kristiansen's certificate of issue 755 (T-239) after the 23
+#: October review of it, at 303 from T-230, 9.89e-06 below it: another arrangement of
+#: T-230's packing, found from it. The pass of 23 October had already moved 303 too, and one
+#: day's archive holds one prior state a count; its pull request merged after T-231's, and
+#: 303 joined that day's pass, whose archive takes a row for each count.
 #: A count a pass names keeps its place in the earlier passes' sets, which their archives
 #: hold; it was adopted on the latest day that names it.
 LATER_PASSES: dict[str, frozenset[int]] = {
@@ -647,8 +847,8 @@ LATER_PASSES: dict[str, frozenset[int]] = {
     "2026-10-20": frozenset({154, 204, 227, 260, 308}),
     "2026-10-21": frozenset({260, 270}),
     "2026-10-22": frozenset({204, 227, 229, 260}),
-    "2026-10-23": frozenset({105, 204, 303}),
-    "2026-10-24": frozenset({204}),
+    "2026-10-23": frozenset({70, 102, 105, 123, 153, 204, 207, 258, 259, 295, 302, 303}),
+    "2026-10-24": frozenset({204, 303}),
 }
 
 
@@ -700,6 +900,8 @@ def expected_house(n: int) -> dict[str, Any]:
 
 def _house_witness(n: int, source: Source) -> dict[str, Any]:
     """The witness `source` makes the house at `n`: its certificate, with its native result."""
+    if n in source.fields:
+        return _field_house(n, source)
     exact = source.certificate(n)
     positive = source.jobs(n, exact)["positive"]
     witness = kernel.to_witness(
@@ -729,7 +931,10 @@ def _house_witness(n: int, source: Source) -> dict[str, Any]:
 
 
 def build_witness(n: int) -> dict[str, Any]:
-    """The house, decided again by `sqpack`'s exact verifier and held to the native result."""
+    """The house, decided again by `sqpack`'s exact verifier and held to the native result:
+    over Q for a rational certificate, over the witness's field for an algebraic one. The
+    two are compared as they are, with no encoding between them that could make unequal
+    values equal (review A9 of #756)."""
     witness = expected_house(n)
     native, verification = legacy.exact_verify(witness)
     _require(
@@ -739,7 +944,17 @@ def build_witness(n: int) -> dict[str, Any]:
     return witness
 
 
-def side(n: int) -> Fraction:
+def algebraic(n: int) -> bool:
+    """Whether the count's house is an algebraic witness, its side irrational."""
+    return n in source_for(n).fields
+
+
+def side(n: int) -> exact_sides.Side:
+    """The house's exact side: its certificate's fraction, or the algebraic witness's side
+    as the one root of its minimal polynomial (`exact_sides.of_field_element`)."""
+    source = source_for(n)
+    if n in source.fields:
+        return exact_sides.of_field_element(fields.side_of(field_witness(source.packet, n)))
     return certificate(n).side
 
 
@@ -780,11 +995,14 @@ def staged_sizes(numbers: Sequence[int] | None = None) -> tuple[list[Sizes], lis
         house = next((c for c in found.get(n, ()) if c.result == staged[n].house), None)
         _require(house is not None, f"n={n}: {staged[n].house} is no candidate there")
         assert house is not None
-        packet = reports.import_packet(house.source_key)
-        if house.algebraic or packet is None:
-            skipped.append(f"n={n}: {house.result}'s side is algebraic; no writer takes it yet")
+        source = writable_source(house.result, n, house.source_key, algebraic=house.algebraic)
+        if source is None:
+            skipped.append(
+                f"n={n}: {house.result}'s side is algebraic, and no derived number-field fact "
+                "and receipt hold it here, so no writer takes it yet"
+            )
             continue
-        witness = _house_witness(n, packet_source(house.result, packet.name))
+        witness = _house_witness(n, source)
         data = witness_document(witness, schema=WITNESS_SCHEMA_REFERENCE).encode("utf-8")
         current = (WITNESSES / f"n-{n:03d}.yaml").read_bytes()
         measured.append(
@@ -798,6 +1016,22 @@ def staged_sizes(numbers: Sequence[int] | None = None) -> tuple[list[Sizes], lis
             )
         )
     return measured, skipped
+
+
+def writable_source(result: str, n: int, key: str, *, algebraic: bool) -> Source | None:
+    """The source a house of `result` at `n` would be written from, or None where nothing
+    here can write it: an algebraic side whose packet holds no derived number-field fact
+    and receipt for the count (`FIELD_COUNTS`), such as the eight T-193 counts that wait
+    for think-8ido's correction and 267, whose form the packet pins only. A rational house
+    of a result no pass has housed yet is read from its import packet, as its adoption
+    would add it."""
+    found = sources().get(result)
+    if found is not None:
+        return found if not algebraic or n in found.fields else None
+    packet = reports.import_packet(key)
+    if algebraic or packet is None:
+        return None
+    return packet_source(result, packet.name)
 
 
 def _megabytes(size: int) -> str:
@@ -904,8 +1138,10 @@ def linked_house_problem(path: str, *, repository: Path) -> str | None:
 #: Where the custody run's receipt is kept: one record for every adopted packet.
 CUSTODY_RECEIPT = ROOT / "devtools/house-custody-2026-10-11.json"
 CUSTODY_FORMAT = "AdoptedHouseCustody/v1"
-#: The worker's deadline: it admits all 70 house best packings and refuses 44 mutations,
-#: two for each of the twenty-two results (22.8 s in the worker on 21 October 2026, with
+#: The worker's deadline: it admits all 70 house best packings and refuses 42 mutations,
+#: two for each of the twenty-one results (44.95 s in the worker on 23 October 2026, after
+#: the algebraic houses joined, with T-193's number-field facts and receipts among the 197
+#: inputs, on a host shared with other lanes; 22.8 s on 21 October 2026, with
 #: 9.78 s of setup at a load average of about six, after the merge of main 970e89de8 and
 #: the adoption at 260 that day; 23.84 s for 69 on this branch after the merge of main
 #: 51ac9d7ee, at a load average of about six; 23.33 s for 70 on #704's branch after the
@@ -922,7 +1158,15 @@ CUSTODY_TIMEOUT = 120
 
 def clear_caches() -> None:
     """Forget every input read, so a check reads the files as they are now."""
-    for function in (_declaration, _record, _manifest, receipt_cases, sources):
+    for function in (
+        _declaration,
+        _record,
+        _manifest,
+        receipt_cases,
+        sources,
+        _fields,
+        _field_fact,
+    ):
         function.cache_clear()
 
 

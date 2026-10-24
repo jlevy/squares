@@ -1,0 +1,123 @@
+{
+ "archive": {
+  "archive_path": "check2/src/sqverify-proof-net-fe12e036c.tar.gz",
+  "declared_commit": "fe12e036c",
+  "sha256": "e495f9bf14dc5ca20d8890aa0601183b8b955b94580c4e99ddffa64254371e81"
+ },
+ "commits": {
+  "910b6b12c": {
+   "differ": [
+    {
+     "archive_bytes": 12283,
+     "here_bytes": 16142,
+     "identical": false,
+     "path": "INDEPENDENCE.md"
+    },
+    {
+     "archive_bytes": 5096,
+     "here_bytes": 6064,
+     "identical": false,
+     "path": "README.md"
+    },
+    {
+     "archive_bytes": 34095,
+     "here_bytes": 38614,
+     "identical": false,
+     "path": "SOUNDNESS.md"
+    },
+    {
+     "archive_bytes": 8144,
+     "here_bytes": 11849,
+     "identical": false,
+     "path": "independence-record.yaml"
+    },
+    {
+     "archive_bytes": 31964,
+     "here_bytes": 34387,
+     "identical": false,
+     "path": "src/certificate.rs"
+    },
+    {
+     "archive_bytes": 7777,
+     "here_bytes": 8028,
+     "identical": false,
+     "path": "src/lib.rs"
+    },
+    {
+     "archive_bytes": 13209,
+     "here_bytes": 13241,
+     "identical": false,
+     "path": "src/rotated_tests.rs"
+    },
+    {
+     "archive_bytes": 27664,
+     "here_bytes": 25201,
+     "identical": false,
+     "path": "tests/adversarial.rs"
+    }
+   ],
+   "identical": [
+    ".gitignore",
+    "Cargo.lock",
+    "Cargo.toml",
+    "build.rs",
+    "clippy.toml",
+    "rust-toolchain.toml",
+    "src/axis.rs",
+    "src/exact.rs",
+    "src/interval.rs",
+    "src/main.rs",
+    "src/oracle.rs",
+    "src/rotated.rs"
+   ]
+  },
+  "e020eb1e2": {
+   "differ": [
+    {
+     "archive_bytes": 5096,
+     "here_bytes": 4915,
+     "identical": false,
+     "path": "README.md"
+    },
+    {
+     "archive_bytes": 34095,
+     "here_bytes": 33225,
+     "identical": false,
+     "path": "SOUNDNESS.md"
+    },
+    {
+     "archive_bytes": 31964,
+     "here_bytes": 30446,
+     "identical": false,
+     "path": "src/certificate.rs"
+    },
+    {
+     "archive_bytes": 27664,
+     "here_bytes": 25201,
+     "identical": false,
+     "path": "tests/adversarial.rs"
+    }
+   ],
+   "identical": [
+    ".gitignore",
+    "Cargo.lock",
+    "Cargo.toml",
+    "INDEPENDENCE.md",
+    "build.rs",
+    "clippy.toml",
+    "independence-record.yaml",
+    "rust-toolchain.toml",
+    "src/axis.rs",
+    "src/exact.rs",
+    "src/interval.rs",
+    "src/lib.rs",
+    "src/main.rs",
+    "src/oracle.rs",
+    "src/rotated.rs",
+    "src/rotated_tests.rs"
+   ]
+  }
+ },
+ "kind": "t233-review-crate-identity/v1",
+ "upstream_commit_text": "42534d959d668c5e03839dc87f9e628fa4fc2d83"
+}

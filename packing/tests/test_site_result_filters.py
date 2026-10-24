@@ -157,7 +157,10 @@ def test_the_checkbox_starts_at_its_pages_default_and_the_table_with_it(
     # only in part, stays. T-154, Fitzharding's Lean proof of the value T-153 holds in
     # n = 17's reported lane, a formalization, stands as a reported second certificate
     # since 13 October 2026, as T-055 did until its replay of 2 October. A bound pending
-    # adoption stays too: nothing has replaced it (think-h0d1).
+    # adoption stays too: nothing has replaced it (think-h0d1). T-236, Evan Daniel's Lean
+    # proof of Fang's theorems (T-163), is a formalization, so no bound mark, and its
+    # evidence's bounds at 211 to 307, s < n, trail the cases as T-163's do: it stays,
+    # superseded in standing, since 23 October 2026.
     kept = [result for result in overview.results if result.id.lower() in current]
     assert {result.standing for result in kept} == {
         render_recent_results.HOLDS,
@@ -168,7 +171,10 @@ def test_the_checkbox_starts_at_its_pages_default_and_the_table_with_it(
         render_recent_results.NO_STANDING,
         render_recent_results.SUPERSEDED,
     }
-    assert [result.id for result in kept if result.standing == "superseded"] == ["T-003"]
+    assert [result.id for result in kept if result.standing == "superseded"] == [
+        "T-003",
+        "T-236",
+    ]
     pending = render_recent_results.PENDING_ADOPTION
     # T-128 holds its cases since the house adoption of 11 October 2026 (think-fvz4);
     # T-122 is still a bound pending adoption.

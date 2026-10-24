@@ -21,7 +21,7 @@ softschema:
   status: enforced
 repository: jlevy/squares
 owner: jlevy
-last_reviewed: '2026-10-23'
+last_reviewed: '2026-10-24'
 issues:
   - number: 420
     title: 'Lean proofs that 178 best-known packings are local minima (n ≤ 324): registration request'
@@ -3485,22 +3485,35 @@ issues:
       their lower lanes are 853/100, 3769/400 and 379/40. The other fourteen remain
       V0/C0 under think-f40c; the n86 capture has no check or control run. No upper-bound house
       changed. The post-deployment follow-up of 19 October records the n108 state and requests
-      the upstream control filename correction.
+      the upstream control filename correction. On 23 October the original n19, n20 and n26
+      values and the n27 follow-up's 1131/200 are registered together as one reported entry,
+      T-233, at V0/C1 after the stage 4 review accepted all four certificates. Their complete
+      sqverify-fast captures passed here the same day, with whole-net controls refused at n19,
+      n20 and n27 and failed closed at n26 on the census's axis allowance, so their replay
+      evidence is held until think-tcsl. The issue's n27 2261/400 is superseded in the same
+      release and stays unregistered, and its n31 597/100 is passed by the source's later
+      2391/400 (T-232, not reported here).
     read_through: '2026-10-16T09:00:31Z'
     results:
     - key: fine-net-n19
       claim: Author reports lower bound 1931/400 for n=19 using all 2073 declared net directions.
       source: https://github.com/wand125/square-packing/blob/61e37d583ad690266da2188ad027ef3f697bf162/problems/square-lower-bounds/certificates/mixed_n19_L48275/README.md
+      register:
+      - T-233
       evidence:
       - E-wand125-fine-net-lower-bounds-446-report
     - key: fine-net-n20
       claim: Author reports lower bound 393/80 for n=20 using all 2073 declared net directions.
       source: https://github.com/wand125/square-packing/blob/61e37d583ad690266da2188ad027ef3f697bf162/problems/square-lower-bounds/certificates/mixed_n20_L49125/README.md
+      register:
+      - T-233
       evidence:
       - E-wand125-fine-net-lower-bounds-446-report
     - key: fine-net-n26
       claim: Author reports lower bound 1111/200 for n=26 using all 2073 declared net directions.
       source: https://github.com/wand125/square-packing/blob/61e37d583ad690266da2188ad027ef3f697bf162/problems/square-lower-bounds/certificates/mixed_n26_L5555/README.md
+      register:
+      - T-233
       evidence:
       - E-wand125-fine-net-lower-bounds-446-report
     - key: fine-net-n27
@@ -3528,6 +3541,8 @@ issues:
         original reported 2261/400 by 1/400. Complete source custody and conditional maintained input
         premises are accepted; project native capture remains pending.
       source: https://github.com/jlevy/squares/issues/446#issuecomment-6064831911
+      register:
+      - T-233
       evidence:
       - E-wand125-fine-net-n27-5655-followup-report
     - key: fine-net-n29-582-followup
@@ -11316,7 +11331,8 @@ issues:
     title: '204-993: registration request'
     author: franciscouzo
     opened: '2026-10-17'
-    state: open
+    state: closed
+    closed: '2026-10-23'
     kind: result-report
     triage: done
     summary: >-
@@ -11325,9 +11341,12 @@ issues:
       registers 204 (#718). Imported on 22 October 2026: the couzo-issue670-2026-10-17 packet
       retains the 72 certificates beyond the corpus, whose filtered exact replay decided each on
       two routes with every control refused, and the backlog ledger records each in report order
-      as a beyond-horizon row: 64 superseded on entry by later reports and 8 current, at 364, 370,
-      382, 403, 444, 452, 536 and 922.
-    read_through: '2026-10-17T18:05:06Z'
+      as a beyond-horizon row: 64 superseded on entry by later reports and 8 current then, at 364,
+      370, 382, 403, 444, 452, 536 and 922, of which issue 719's rows (#722) supersede 370, 452 and
+      536, so 5 are current. The author's answer of 23 October 2026 traces T-226's seed to T-186's
+      packing, and the credit of T-226 and of the entries continuing its arrangement names that
+      lineage.
+    read_through: '2026-10-23T22:22:03Z'
     results:
     - key: n204
       claim: s(204) <= 14.808644417690, rounded upward; exact certificate side is authoritative.
@@ -11372,9 +11391,11 @@ issues:
       not_registered: >-
         Beyond the n <= 324 corpus: a dated row of the couzo-issue670-2026-10-17 source, recorded in
         report order by the backlog ledger of 22 October (upper-bounds-backlog-20261022), below
-        every earlier report at its count, and the count's current row. Its retained certificate's
-        exact header side rounds up to this print, and both project exact routes accept the packing
-        with every control refused (receipts/filtered-exact-replay.json).
+        every earlier report at its count, and the count's current row until #722 merged that day:
+        issue 719's row (mishapolk-issue719-2026-10-22), which the ledger of 22 October for issue
+        719 (upper-bounds-issue719-20261022) records next at the count, supersedes it. Its retained
+        certificate's exact header side rounds up to this print, and both project exact routes
+        accept the packing with every control refused (receipts/filtered-exact-replay.json).
       queued: false
     - key: n378
       claim: s(378) <= 19.942505611659, rounded upward; exact certificate side is authoritative.
@@ -11489,9 +11510,11 @@ issues:
       not_registered: >-
         Beyond the n <= 324 corpus: a dated row of the couzo-issue670-2026-10-17 source, recorded in
         report order by the backlog ledger of 22 October (upper-bounds-backlog-20261022), below
-        every earlier report at its count, and the count's current row. Its retained certificate's
-        exact header side rounds up to this print, and both project exact routes accept the packing
-        with every control refused (receipts/filtered-exact-replay.json).
+        every earlier report at its count, and the count's current row until #722 merged that day:
+        issue 719's row (mishapolk-issue719-2026-10-22), which the ledger of 22 October for issue
+        719 (upper-bounds-issue719-20261022) records next at the count, supersedes it. Its retained
+        certificate's exact header side rounds up to this print, and both project exact routes
+        accept the packing with every control refused (receipts/filtered-exact-replay.json).
       queued: false
     - key: n458
       claim: s(458) <= 21.942505611689, rounded upward; exact certificate side is authoritative.
@@ -11598,9 +11621,11 @@ issues:
       not_registered: >-
         Beyond the n <= 324 corpus: a dated row of the couzo-issue670-2026-10-17 source, recorded in
         report order by the backlog ledger of 22 October (upper-bounds-backlog-20261022), below
-        every earlier report at its count, and the count's current row. Its retained certificate's
-        exact header side rounds up to this print, and both project exact routes accept the packing
-        with every control refused (receipts/filtered-exact-replay.json).
+        every earlier report at its count, and the count's current row until #722 merged that day:
+        issue 719's row (mishapolk-issue719-2026-10-22), which the ledger of 22 October for issue
+        719 (upper-bounds-issue719-20261022) records next at the count, supersedes it. Its retained
+        certificate's exact header side rounds up to this print, and both project exact routes
+        accept the packing with every control refused (receipts/filtered-exact-replay.json).
       queued: false
     - key: n546
       claim: s(546) <= 23.933763683699, rounded upward; exact certificate side is authoritative.
@@ -12126,9 +12151,15 @@ issues:
         34 squares sit within 1e-6 of T-186's.
       changes: lineage
       asked: https://github.com/jlevy/squares/issues/670#issuecomment-6354654599
-      state: withdrawn
+      state: answered
+      answer: https://github.com/jlevy/squares/issues/670#issuecomment-6375905012
       note: >-
-        Withdrawn on 23 October 2026 (review A3 of #747): the record already answers what
+        Answered on 23 October 2026 at 22:22:03Z, after the withdrawal below: yes at the root,
+        three hop jobs apart (101216, 103222 and 105412), from Polkovskyi's square-204.cert at
+        70a033f, T-186's certificate, through its decimal form n204.txt at 4e4c8ce. The answer
+        is read into T-226's credit, claim and notes (think-t5hc) and measured in the packet's
+        measure/seed-identity.json; it also answers question 1, how sqpack/verify.py was
+        called. Withdrawn on 23 October 2026 (review A3 of #747): the record already answers what
         it asserts. T-226 states the source's own claim, that the per-count JSON seeds job
         105412 with Polkovskyi's construction, and the measured fact that #670's packing
         is an arrangement other than T-186's; the 22 October review's RF-5 says the
@@ -12472,6 +12503,31 @@ issues:
       to S3 as the first report of the 204 arrangement, still superseded at 204, where T-229 is
       the house since 23 October. It asked how sqpack/verify.py was called and whether the hop
       job's seed was T-186's packing.
+
+      GitHub closed the issue at 2026-10-23T18:32:53Z, when #747 merged, because #747's
+      description said "the coordinator closes #670", which GitHub reads as a closing keyword.
+      No final comment was posted then; the coordinator decided to leave the issue closed and
+      post its final comment there after the change that reads the author's answers merges
+      (think-0lu6), and not to reopen it.
+
+      The author's answer of 2026-10-23T22:22:03Z (issuecomment-6375905012), retained in the
+      packet's declaration, answers both questions; it says Claude Code assisted with it. The
+      seed: three rounds of basin hopping (jobs 101216, 103222 and 105412) and a quarter turn
+      separate the certificate from Polkovskyi's certificates/square-204.cert at
+      Mishapolk/square-packing-records@70a033f, T-186's certificate, which the source published
+      in decimals as n204.txt at 4e4c8ce; the construction lineage is therefore T-186's,
+      Polkovskyi's refinement of Daniil Ostashev's packing as PingYou Ltd refined it. The
+      checker: exact rational corners passed to verify_packing(..., bucket=True) in the closed
+      box, the strict verdict false only because squares touch the walls, 32 corner coordinates
+      on the boundary and no touching pairs. The records change of think-t5hc retains n204.txt
+      in couzo-index-2026-10-15 and measures both in the #670 packet (measure/seed-identity.json:
+      every digest the answer prints is a packet's SHA-256; n204.txt is T-186's packing under
+      the identity, every centre within 3.94e-12; the same call counts the same 32). By
+      attribution.md's chain rule T-226's credit becomes Couzo after Polkovskyi, Ostashev,
+      PingYou Ltd, Daniel, Levy, and the same lineage reaches T-228, T-223, T-225, T-229 and
+      T-231; T-226's short credit, S3, V3/C3 and first-report standing are unchanged. The final
+      comment, which says so, follows that change's merge and verified deploy, and its record
+      follows it.
   - number: 672
     title: '227, 229, 330-996: registration request'
     author: franciscouzo
@@ -13474,7 +13530,7 @@ issues:
       993 and 996 certificates, whose filtered exact replay decided each row on two routes with
       every control refused; the backlog ledger records each in report order as a beyond-horizon
       row, superseded on entry by a later report.
-    read_through: '2026-10-18T06:02:11Z'
+    read_through: '2026-10-23T22:22:34Z'
     results:
     - key: n204
       claim: s(204) <= 14.808644367227, rounded upward; exact certificate side is authoritative.
@@ -14748,6 +14804,15 @@ issues:
       entry by a later report. Nothing asked for is queued; the follow-up's question, how
       sqpack/verify.py was called, is still welcome but holds nothing open. The issue was closed
       with it at 03:54:39Z.
+
+      The author's answer of 2026-10-23T22:22:34Z (issuecomment-6375912099), retained in the
+      packet's declaration, says the source calls sqpack/verify.py as described on #672: at 204
+      the strict verdict is false only because squares touch the walls, 88 corner coordinates
+      lie on the boundary and no pair touches. It is read into T-228's notes and the packet's
+      README (think-t5hc), and the #670 packet's measure/seed-identity.py makes the same call and
+      counts the same 88, as the replay's least wall clearance of 0 and least pair gap of
+      1.20e-12 say. It changes no field. Nothing is posted here: the issue is closed with its
+      final comment, and #670's final comment covers the answer.
   - number: 678
     title: '204-998: registration request'
     author: franciscouzo
@@ -17427,7 +17492,7 @@ issues:
       resolution and restate them (the owner's answer of 23 October, think-fwa9); 34 restate earlier
       publications; the 1112 above 1024
       wait on the owner.
-    read_through: '2026-10-21T20:55:57Z'
+    read_through: '2026-10-23T22:16:52Z'
     results:
     - key: n328
       claim: s(328) <= 18.614368938513, rounded upward; exact certificate side is authoritative.
@@ -17445,8 +17510,17 @@ issues:
       not_registered: >-
         Beyond the n <= 324 corpus: the certificate first published at 02f9690 on 2026-10-09,
         1.78e-11 or more above the 8 October decimal report the record holds at 335, so neither
-        it nor this restatement is recorded; the exact check of that report's poses is
-        think-rx26.
+        it nor this restatement is recorded. The author's answer of 23 October 2026
+        (issuecomment-6375833547) says the certificate is that report's packing in exact form,
+        its centres dilated by exactly 1 + 1e-12 about (1/2, 1/2) and the three near-axis angles
+        (4.73e-11, 9.02e-12 and 1.10e-12 rad) set to 0, that the print read literally overshoots
+        a wall by up to 7.8e-16, and that "the bound we stand behind is the certificate's". The
+        record's exact check (think-rx26, 24 October, devtools.couzo_decimal_decisions) agrees:
+        read literally the poses are not a packing at the printed side, a wall failing by
+        7.77e-16; with the 196 angles below 1e-10 read as 0, the angles the certificate sets to
+        0, they pack exactly at it. The row stays listed as printed, and Polkovskyi's f1ceee4
+        row (#732's comment of 23 October), 1.607e-12 below the print and 1.94e-11 below the
+        certificate, supersedes it on either reading.
       queued: false
     - key: n336
       claim: s(336) <= 18.825571499862, rounded upward; exact certificate side is authoritative.
@@ -19619,6 +19693,47 @@ issues:
       recommendation (think-kzme asks the owner, and whether an issue's claim gives one a row). The
       follow-up that says so is drafted on think-temp for after that change
       merges (think-cyal).
+
+      The author's comment of 2026-10-23T22:16:52Z (issuecomment-6375833547), read into this
+      entry by think-t5hc, answers the acknowledgement's two open questions; it says Claude Code
+      assisted with it and its measurements.
+
+      335: the 9 October certificate at 02f9690 (SHA-256 d500b46c...) is the 8 October decimal
+      packing of n335.txt at b10ad36 in exact form, the same packing and not an exact solve: its
+      centres are the decimal centres dilated by exactly 1 + 1e-12 about (1/2, 1/2), to within
+      3.6e-15 of the printed decimals, and its rotations agree within 3.1e-15 rad but at three
+      near-axis squares, whose printed angles of 4.73e-11, 9.02e-12 and 1.10e-12 rad are exactly
+      0 in the certificate; the dilation accounts for the 1.7825e-11 between the two sides. His
+      exact checks of the 8 October poses at the printed side 18822875655543559/10^15, with
+      verify_bound_certificate.py: with the certificate's rational rotations the printed
+      centres pack in the closed box, touching the walls, every pair strictly separated; with t =
+      tan(theta/2) of the printed binary64 angles they overshoot a wall by up to 7.8e-16. He
+      concludes: "So the printed side holds exactly only when the near-zero angles are read as 0.
+      How the record reads them is your decision; the bound we stand behind is the
+      certificate's." Those are his statements. The record's exact check of the 8 October poses
+      (think-rx26, 24 October, devtools.couzo_decimal_decisions), made in #769's import of
+      Mykhailo Polkovskyi's #732 rows at f1ceee4, agrees: read literally the poses are not a
+      packing at the printed side, a wall failing by 7.77e-16; with the 196 angles below 1e-10
+      read as 0, the angles the certificate sets to 0, they pack exactly at it. The row stays
+      listed as printed, and Polkovskyi's f1ceee4 row, 1.607e-12 below the print and 1.94e-11
+      below the certificate, supersedes it on either reading (#715's n335 entry). The test
+      certificates Couzo offers are not needed.
+
+      Above 1024: measured by the author against Joost de Winter's certificates at
+      JoostdeWinter/joostdewinter.github.io@19f7412, by the best of the box's eight symmetries
+      and nearest centres, 1266, 1339 and 1568 refine de Winter's packings, one to one (1339 a
+      precision refinement, every square within 1.8e-9), and 1061, 1413 and 1489 are not one to
+      one (434, 279 and 383 squares more than 0.1 away): they are the author's own
+      recursive-staircase assemblies in de Winter's construction family, whose source records
+      credit Arslanov, Mustafin and Shangitbayev (2021) and de Winter's staircase and four-block
+      constructions, a credit the 6b7391de manifest's entries at those counts dropped. He asks
+      that those three rows be carried as "Couzo after de Winter's staircase/four-block
+      constructions and Arslanov, Mustafin and Shangitbayev (2021)" and says he will restore
+      the credit in his manifest. These are his measurements and his request, for the import
+      of the rows above 1024 (think-llit): it measures each pairing here, credits 1266, 1339 and
+      1568 as refinements of de Winter's packings and 1061, 1413 and 1489 as the author's
+      assemblies, worded as he asks, and cites this comment for that credit until his manifest
+      restores it.
   - number: 719
     title: 'New packings: 122 verified upper bounds for square packing (N in [105, 1568]): registration request'
     author: Mishapolk
@@ -21201,6 +21316,20 @@ issues:
       - result: n1413
       - result: n1489
       - result: n1568
+    - url: https://github.com/jlevy/squares/issues/719#issuecomment-6378136960
+      date: '2026-10-24'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n105
+        id: T-229
+      - result: n204
+        id: T-229
+      - result: n204-lower
+        id: T-231
+        verification: V3
+        confirmation: C3
+        status: confirmed
     close_when: >-
       T-229 is reviewed and adopted at 105 and 204 (think-4h23), T-231 is reviewed and adopted
       at 204 (think-tetq, think-h01y), the owner has answered whether counts above 1024 are
@@ -21344,6 +21473,30 @@ issues:
       edit withdrew, the nine where #732 claims a lower side are not reports, by the owner's answer
       of the same day (think-8m4k), and #732's rows there stand; at 539 the file is #732's own row.
       The follow-up that says so is drafted on think-temp.
+
+      The follow-up posted at 2026-10-24T01:25:17Z (issuecomment-6378136960), after #753
+      merged (5f5294d82) and its Pages deployment was checked (run 40047992794, its
+      verify-deployment job included; squaremath.org serving v0.9.2-527ba8), takes up the
+      author's comment of 01:52:40Z. It said that T-229's credit at 204 now follows his
+      solve from Couzo's #678 certificate and no longer names Daniel's regularization as an
+      antecedent, that its regularization item at 204 names T-223 (60 squares beyond 1e-3, 7
+      beyond a tenth, at most 0.237), that the author's lineage at 105 and 204 replaces the
+      sentence that the source states none, and that his account of the verifier runs is
+      recorded in T-229's notes and evidence and in both packets. It reported T-231 for
+      n204-lower at V3/C3, confirmed, independently re-implemented, at S2, 1.4809e-11 below
+      T-229 and the house best packing at 204 since the pass of 24 October, T-229 retained
+      as history and 105 unchanged: the packet's custody under his grant of 22 October, the
+      two maintained routes (sqpack.verify, sharing his named checker's components, and
+      check_rational_witness_independent) and the review's checker (review_t231_check.py,
+      sharp_controls_t231.py) by name, and both strong generators' outcomes. It said the
+      ledger walks #719's claim at 204 at n204.cert's side, and gave the review's
+      measurement of the two 204 files as one solved packing at two paddings, with Evan
+      Daniel's exact solver stated as a measured method, not an antecedent. It put the
+      review's three questions to the author: asks 1 and 2 above, and question 3, which of
+      the two 204 files he wrote first and why n-204.cert carries the larger padding. It
+      answered his recommendation to publish the checkers by #732's import reply, with this
+      result's commands and the review's programs in the packet. It states the 204 lineage
+      only back to Couzo's #678 certificate, and the issue stays open.
   - number: 728
     title: 's(303) ≤ 17.909772217275: registration request'
     author: evand
@@ -21446,7 +21599,12 @@ issues:
       the mishapolk-issue732-2026-10-22 source, retained at 17cc220 and replayed on both exact
       routes, finds that 499 restates #719's row (think-fwa9, answered 23 October), and that 985
       ties Couzo's 4e4c8ce deletion bound, an earlier report (D6, think-f2io, answered 23 October).
-    read_through: '2026-10-23T01:53:19Z'
+      His comment of 23 October at 20:35:12Z (issuecomment-6374211504) reports f1ceee4, which
+      rewrites 138 certificates at 328 to 989; imported on 24 October (think-e3im,
+      c-import-732c-1024): the walk of 24 October records all 138 as current rows of the
+      mishapolk-issue732-f1ceee4-2026-10-23 source, and none of the three later commits' sides
+      in the corpus.
+    read_through: '2026-10-23T20:35:12Z'
     results:
     - key: rows-325-1024
       claim: >-
@@ -21510,6 +21668,44 @@ issues:
       bead: think-0gp6
       blocked_on:
       - think-f2io
+    - key: rows-f1ceee4
+      claim: >-
+        138 upper bounds at n = 328 to 989, each the exact side of
+        certificates/0000-0999/nN.cert at f1ceee4c1dd69f97d8e50e6ddaf1a14084dceda7, the files
+        that commit rewrites, which certified_bounds.json indexes; "138 standing records ...
+        strictly beaten".
+      source: https://github.com/jlevy/squares/issues/732#issuecomment-6374211504
+      not_registered: >-
+        Beyond the n <= 324 corpus: rows of source-coverage.yaml, not register entries. The
+        ledger of 24 October for f1ceee4 (upper-bounds-issue732-f1ceee4-20261024), every count
+        walked in report order from starts frozen at main 0bbb0a2c4 with Göbel's construction
+        beside each row, records all 138 as dated rows of the
+        mishapolk-issue732-f1ceee4-2026-10-23 source, each the count's current row, at its
+        certificate's exact side rounded up at 12 places (the index prints 70 of them one unit
+        lower, rounding to the nearest place). They supersede 59 of #715's rows, 47 of this
+        issue's 17cc220 rows, 21 of #719's, 9 of couzo-index-2026-10-15's, 1 of
+        couzo-verified-bounds-2026-10-14's and Couzo's 8 October row at 335, by 8.09e-13 (924, at
+        another 12-place print) to 8.59e-4 (747). The packet retains the 138 certificates, and both project exact routes
+        accept all 138 with all six controls refused at each
+        (receipts/filtered-exact-replay.json). Read literally, the 8 October decimal poses at
+        335 are not a packing at their printed side; with the 196 angles below 1e-10 read as 0,
+        as his 9 October certificate reads them, they pack exactly at it
+        (receipts/couzo-8-october-decisions.json).
+      queued: false
+    - key: rigidity-theorems
+      claim: >-
+        Theorem 1 (algebraic incompressibility of diagonal chains: a chain of edge-to-edge
+        contacts across opposite corners at angles 0 and pi/4 fixes S in Q(sqrt 2) with no
+        first-order descent) with a corollary that 33 diagonal counts (10, 11, 14, 18, 23, 27,
+        32, ...) have no continuous slack; and Theorem 2 (packings at general angles from a
+        solver with a feasibility tolerance admit a descent direction and an exact dilation).
+      source: https://github.com/jlevy/squares/issues/732#issuecomment-6374211504
+      not_registered: >-
+        Prose with no proof, and bounding no s(n). The corollary's own examples contradict its
+        hypothesis: the record's best packings at 11 and 18 tilt squares by about 40.18 and
+        24.3 degrees, angles neither 0 nor pi/4. Theorem 2 describes the author's method. No
+        entry is registered.
+      queued: false
     - key: issue-715-resolution
       claim: >-
         The release strictly improves all 1,285 rows of #715: 0 tied, 0 worse, 0 missing.
@@ -21548,6 +21744,22 @@ issues:
       state: queued
       note: A policy proposal; it joins the owner's decision whether counts above 1024 are tracked.
       bead: think-f2io
+    - what: >-
+        Credit 11 counts (463, 645, 646, 651, 696, 702, 747, 756, 809, 813 and 989) to
+        Mishapolk alone, as significant structural compressions, and the other 127 as
+        continuous refinements of Francisco Couzo's topologies with joint credit.
+      state: queued
+      note: >-
+        From the comment of 2026-10-23T20:35:12Z. The source's certified_bounds.json credits all
+        138, the 11 included, as refinements of Couzo topology, and the bibliography key keeps
+        that, with the antecedents Couzo's manifests name ("Polkovskyi after Couzo, Muglich,
+        Daniel, Fang, PingYou Ltd, Levy"). Measured here (receipts/pose-identity.json), each
+        of the 11 pairs one to one with Couzo's #715 certificate at its count under the box's
+        identity, every square within 0.23 of its counterpart, with 85 to 558 squares moved by
+        more than 1e-3 and rotations changed by up to 9 degrees; against the row it supersedes
+        it pairs the same way but at 696, where one square moves 0.96. The measurement decides
+        nothing; per-row credit beyond the corpus is the owner's open question (D5).
+      bead: think-f2io
     - what: Publish the review checkers and verification scripts, so that authors can test
         certificates before submitting them.
       state: done
@@ -21564,6 +21776,7 @@ issues:
     - think-f2io
     - think-fwa9
     - think-8m4k
+    - think-e3im
     answer_bead: think-0gp6
     replies:
     - url: https://github.com/jlevy/squares/issues/732#issuecomment-6355073019
@@ -21690,13 +21903,31 @@ issues:
       equal to Couzo's 4e4c8ce bound, stays unrecorded.
       No row of this source changes: the 77 stay current. The follow-up that says so is drafted on
       think-temp.
+
+      The author's comment of 2026-10-23T20:35:12Z (issuecomment-6374211504) reports f1ceee4
+      (committed 20:34:13Z, pushed 20:34:22Z), which rewrites 138 certificates at 328 to 989 by
+      "continuous SLP quench" and centres each in an open container, with certified_bounds.json
+      as the index it keeps current (it leaves manifest.json as 7b6366f wrote it). It credits 11
+      counts to Mishapolk alone and the rest jointly with Couzo, states two theorems on rigidity
+      and slack, and recommends one pre-flight checker. The import of 24 October (think-e3im,
+      c-import-732c-1024) pins f1ceee4 in the mishapolk-issue732-f1ceee4-2026-10-23 packet,
+      walks the 138 in report order from main 0bbb0a2c4 (upper-bounds-issue732-f1ceee4-20261024)
+      and records all 138, superseding 47 of this issue's own 77 rows among others; the other 30
+      stay current. The three commits after it change only counts in the corpus and are not
+      recorded (intake-watch.yaml). #763 (Couzo, 2026-10-23T23:35:51Z) is a later report at
+      overlapping counts. Couzo's efef7d1 and fa6237e were committed at 18:16Z and 18:59Z,
+      before f1ceee4, but reached GitHub only in his push of 23:38:42Z (6b7391d to 964ee2b, as
+      GitHub's activity API records it), so they follow f1ceee4 by the push rule, which dates a
+      commit by the push that made it public, not by its commit time
+      (beyond_horizon_replay.PUSHED_LATER, which now holds that push); they are the next
+      import's (think-cnn7). The import reply is drafted for after the merge.
   - number: 734
     title: 'Proposal: submit and fetch upper bounds by API (automated intake, reported the same day)'
     author: wand125
     opened: '2026-10-22'
     state: open
     kind: other
-    triage: pending
+    triage: done
     summary: >-
       A proposal for discussion, not a result: submit an upper bound as a Witness/v2 by issue
       or API, have a workflow verify it exactly and compare it with the house (Level 1),
@@ -21708,24 +21939,31 @@ issues:
     results: []
     asks:
     - what: How far to automate the intake of upper bounds, Level 1, 2 or 3.
-      state: queued
-      bead: think-lnzm
+      state: done
+      note: >-
+        The owner's decision of 24 October 2026 (think-lnzm): asked how far a submission bot
+        should go, the owner answered "Not now". The proposal is on hold, and intake stays as
+        the runbook describes it.
     - what: >-
         Whether Level 3's substitutions are accepted (the form's credit fields, the issue
         number for an import bead, one approval for the review), and whether the bot or the
         maintainer merges an approved Level 3 pull request.
-      state: queued
-      bead: think-lnzm
+      state: declined
+      note: >-
+        Not taken up while the proposal is on hold by the owner's decision of 24 October 2026
+        ("Not now").
     - what: Whether api/v1/ on squaremath.org is the place for the API, and whether lower bounds join it from the start.
-      state: queued
-      bead: think-lnzm
+      state: declined
+      note: >-
+        Not taken up while the proposal is on hold by the owner's decision of 24 October 2026
+        ("Not now").
     beads:
     - think-lnzm
     answer_bead: think-lnzm
     replies: []
     close_when: >-
-      The owner has answered the three questions (think-lnzm) and the reply that says so is
-      posted.
+      The owner has answered the three questions (think-lnzm), which the decision of 24 October
+      2026 to put the proposal on hold does, and the reply that says so is posted.
     notes: >-
       Mykhailo Polkovskyi's comment of 2026-10-23T02:17:06Z (issuecomment-6355791263),
       read on 23 October (c-lane-719-records-1023), reports no result. It supports the
@@ -21736,3 +21974,548 @@ issues:
       path to Level 3; the form's structured credit, lineage, method and AI-assistance fields
       and the issue number in place of a bead; and api/v1/ on squaremath.org with lower bounds
       from the start. The questions stay the owner's, on think-lnzm.
+
+      Triaged read-only on 23 October 2026 (think-rtob) and set done by think-t5hc: a proposal
+      for project work, not a result; it registers nothing and nothing in it waits on
+      validation. What it proposes: Level 1, a workflow that verifies a submitted Witness/v2
+      exactly and compares it with the house, using what main already has (packing-witness
+      verify, devtools.exact_sides, sqpack.verify and
+      devtools.check_rational_witness_independent, with devtools.beyond_horizon_replay for a
+      batch); Level 2, a same-day bot pull request recording a smaller packing as reported;
+      Level 3, adoption and regularization on one maintainer approval; and the current best
+      packings as static JSON under squaremath.org/api/v1/. Polkovskyi's additions (sharded
+      bundles verified in parallel, a pre-flight command-line tool and GitHub Action, an
+      endpoint listing the counts with the most room, an in-browser inspector) are recorded
+      beside it. On 24 October 2026, asked how far a submission bot should go, the owner
+      answered "Not now" (think-lnzm), so the proposal is on hold and nothing is built; the
+      reply that says so is owed after this change merges.
+  - number: 755
+    title: 's(303) ≤ 17.909762327476: registration request'
+    author: amundsk
+    opened: '2026-10-23'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Amund Kristiansen reports s(303) <= 17.909762327476, the exact rational side
+      223872029093440709529093216833/12500000000000000000000000000 =
+      17.90976232747525676232745734664 of s303_amund.cert in the gist
+      amundsk/78f9f0e7b4669f2f509a281845081768 at 511f56b, rounded up at 12 places: a
+      dilation certificate of a binary64 packing made with Evan Daniel's dilate_cert.py,
+      9.89e-6 below T-230, the house at 303 (Daniel, #728). The source calls it a new packing
+      found from Daniel's registered packing by a perturb-and-polish search with Daniel's fq
+      quench, not a refinement, and claims the upper bound only. Triaged on 23 October 2026
+      (think-tqb5): no licence stated, so retained as a derived exact fact in
+      amundsk-n303-2026-10-23, replayed on this repository's two exact routes with the gross
+      and sharp controls refused, and registered as T-239 at V0/C0; measured pose by pose, it
+      pairs one to one with T-230's packing with 12 squares moved beyond a tenth and five more
+      tilted, another arrangement of T-230's packing, not a refinement. The stage 4 review of
+      23 October (think-jdz0) accepted it with nine findings, none blocking, so T-239 is at
+      V3/C3, scored S2; the adoption at 303 and its regularization follow in the same pull
+      request. Registered as T-238 on the records branch and renumbered T-239 on 24 October,
+      before any reply named it, when the owner gave T-237 and T-238 to #750 (think-4o9c).
+      Claude assistance disclosed.
+    read_through: '2026-10-23T11:12:48Z'
+    results:
+    - key: n303
+      claim: >-
+        s(303) <= 223872029093440709529093216833/12500000000000000000000000000 =
+        17.90976232747525676232745734664, the side of s303_amund.cert (SHA-256
+        9ec01059...511b) at 511f56b, by a packing the source calls new, found from Evan
+        Daniel's #728 packing, not a refinement of it.
+      source: body
+      bead: think-tqb5
+      register:
+      - T-239
+      evidence:
+      - E-amundsk-755-n303-report
+    beads:
+    - think-tqb5
+    - think-jdz0
+    answer_bead: think-tqb5
+    replies: []
+    close_when: >-
+      The result is registered, reviewed and adopted at 303 with its drawing regularized, and
+      the reply on main says so; nothing the author asked for is queued.
+  - number: 772
+    title: "T-036: Trump's pose is optimal among six-plus-five packings near its tilt, unique up to symmetry
+      — review tracking"
+    author: jlevy
+    opened: '2026-10-24'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      The project opened this issue on 24 October 2026 to track the pending review of T-036,
+      which reached the register from this project's own research rather than an issue, by
+      the owner's answer of that day, "Open all nine (Recommended)": one issue for each
+      pending review that had none. The result maps to T-036 at V3/C2, confirmed; C3 needs
+      BC-240's audited prose steps mechanised or reviewed again by a distinct reviewer, owned
+      by think-o9kd.
+    read_through: '2026-10-24T05:13:12Z'
+    results:
+    - key: six-plus-five-restricted-optimality
+      claim: >-
+        Every packing of eleven unit squares, six at orientation 0 and five sharing one
+        orientation near Trump's tilt, has side at least Trump's U, and attains it only as a
+        quarter-turn image of Trump's pose with the squares relabelled within the two classes.
+      source: body
+      register:
+      - T-036
+      evidence:
+      - E-n011-h236-rung0-reduction
+      - E-n011-trump-local-theorem-first-clause
+      - E-n011-trump-isolation-radius
+    beads:
+    - think-o9kd
+    answer_bead: think-o9kd
+    replies: []
+    close_when: >-
+      The review that its C3 needs has landed on main, by a distinct reviewer or a
+      mechanisation of BC-240's prose steps, and the reply that reports the resulting rungs is
+      posted.
+  - number: 773
+    title: 'T-046: Rectangle-density lower bounds reported for 48 counts in `n = 18…95` — review tracking'
+    author: jlevy
+    opened: '2026-10-24'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      The project opened this issue on 24 October 2026 to track the pending review of T-046,
+      wand125's rectangle-density lower bounds of 27 and 28 September at 48 counts, which
+      reached the project through his watched repository rather than an issue, by the owner's
+      answer of that day, "Open all nine (Recommended)": one issue for each pending review
+      that had none. The result maps to T-046 at V0/C0, recorded; C1 is think-wcex's record
+      change and C3, the 3 October census recorded with its controls and a review, is
+      think-sb7a's.
+    read_through: '2026-10-24T05:13:13Z'
+    results:
+    - key: rectangle-density-48
+      claim: >-
+        One standing rectangle-density certificate for each of 48 counts from n = 18 to 95,
+        from s(18) >= 939/200 to s(95) >= 49209/5000, each reported accepted at every net
+        direction by Tokoharu's unchanged verify.cpp.
+      source: body
+      register:
+      - T-046
+      evidence:
+      - E-wand125-rectangle-report
+      - E-wand125-rectangle-2026-09-28-report
+      - E-wand125-rectangle-2026-09-28-monotone-report
+    beads:
+    - think-sb7a
+    - think-wcex
+    answer_bead: think-sb7a
+    replies: []
+    close_when: >-
+      The confirmations its C1 and C3 need have landed on main, or the record says why they
+      will not, and the reply that reports the resulting rungs is posted.
+  - number: 774
+    title: 'T-087: `s(37) ≥ 5√3/2 + 2√2 − 1` and `s(61) ≥ 7√3/2 + 2√2 − 1`, by optimal piercing — review tracking'
+    author: jlevy
+    opened: '2026-10-24'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      The project opened this issue on 24 October 2026 to track the pending review of T-087,
+      Bašić and Slivková's 2018 piercing bound at n = 37 and 61, which reached the register
+      from the literature rather than an issue, by the owner's answer of that day, "Open all
+      nine (Recommended)": one issue for each pending review that had none. The result maps
+      to T-087 at V3/C1, reviewed; C2 needs a replay of the geometry, owned by think-gtjq.
+    read_through: '2026-10-24T05:13:14Z'
+    results:
+    - key: piercing-lower-37-61
+      claim: >-
+        s(37) >= 5 sqrt(3)/2 + 2 sqrt(2) - 1 and s(61) >= 7 sqrt(3)/2 + 2 sqrt(2) - 1, by
+        Theorem 7 and Proposition 8 of Bašić and Slivková 2018.
+      source: body
+      register:
+      - T-087
+      evidence:
+      - E-basic-slivkova-piercing-lower
+    beads:
+    - think-gtjq
+    answer_bead: think-gtjq
+    replies: []
+    close_when: >-
+      The replay of the geometry its C2 needs has landed on main, or the record says why it
+      will not, and the reply that reports the resulting rungs is posted.
+  - number: 775
+    title: "T-112: Trump's packing is the only optimal packing of eleven squares, up to symmetry — review
+      tracking"
+    author: jlevy
+    opened: '2026-10-24'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      The project opened this issue on 24 October 2026 to track the pending review of T-112,
+      which reached the register from this project's reading of T-060 rather than an issue,
+      by the owner's answer of that day, "Open all nine (Recommended)": one issue for each
+      pending review that had none. The result maps to T-112 at V3/C2, confirmed; C3 needs
+      the step at S = T mechanised or reviewed again by a distinct reviewer, owned by
+      think-ysr9.
+    read_through: '2026-10-24T05:13:15Z'
+    results:
+    - key: n11-uniqueness
+      claim: >-
+        Every packing of eleven unit squares in a square of side T, the least side T-060 proves
+        possible, is Trump's packing after a symmetry of the container and a relabelling.
+      source: body
+      register:
+      - T-112
+      evidence:
+      - E-n011-optimum-uniqueness
+    beads:
+    - think-ysr9
+    answer_bead: think-ysr9
+    replies: []
+    close_when: >-
+      The review that its C3 needs has landed on main, by a distinct reviewer with the
+      oversight record or a mechanisation of the step at S = T, and the reply that reports the
+      resulting rungs is posted.
+  - number: 776
+    title: 'T-142: Mixed rectangle-measure lower bound `s(28) ≥ 2297/400` reported, on a 2,073-direction
+      declared net — review tracking'
+    author: jlevy
+    opened: '2026-10-24'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      The project opened this issue on 24 October 2026 to track the pending review of T-142,
+      wand125's mixed_n28_L57425, which reached the project through his watched repository
+      rather than an issue, by the owner's answer of that day, "Open all nine
+      (Recommended)": one issue for each pending review that had none. The result maps to
+      T-142 at V0/C0, recorded; the complete census, its whole-net control and a review are
+      queued in think-i85v after think-ux1v, and are an ask on #532.
+    read_through: '2026-10-24T05:13:16Z'
+    results:
+    - key: mixed-n28-57425
+      claim: s(28) >= 2297/400 = 5.7425, by the rectangle measure mixed_n28_L57425 on a 2,073-direction declared net.
+      source: body
+      register:
+      - T-142
+      evidence:
+      - E-wand125-fine-net-n28-57425-report
+    beads:
+    - think-i85v
+    - think-ux1v
+    answer_bead: think-i85v
+    replies: []
+    close_when: >-
+      The census, its control and the review its C3 needs have landed on main, and the reply
+      that reports the resulting rungs is posted.
+  - number: 777
+    title: 'T-143: Mixed rectangle-measure lower bound `s(30) ≥ 2357/400` reported, on a 2,073-direction
+      declared net — review tracking'
+    author: jlevy
+    opened: '2026-10-24'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      The project opened this issue on 24 October 2026 to track the pending review of T-143,
+      wand125's mixed_n30_L58925, which reached the project through his watched repository
+      rather than an issue, by the owner's answer of that day, "Open all nine
+      (Recommended)": one issue for each pending review that had none. The result maps to
+      T-143 at V0/C0, recorded; the complete census, its whole-net control and a review are
+      queued in think-i85v after think-ux1v, and are an ask on #532.
+    read_through: '2026-10-24T05:13:18Z'
+    results:
+    - key: mixed-n30-58925
+      claim: s(30) >= 2357/400 = 5.8925, by the rectangle measure mixed_n30_L58925 on a 2,073-direction declared net.
+      source: body
+      register:
+      - T-143
+      evidence:
+      - E-wand125-fine-net-n30-58925-report
+    beads:
+    - think-i85v
+    - think-ux1v
+    answer_bead: think-i85v
+    replies: []
+    close_when: >-
+      The census, its control and the review its C3 needs have landed on main, and the reply
+      that reports the resulting rungs is posted.
+  - number: 778
+    title: 'T-144: Linear-measure lower bound `s(n) ≥ 563/50 = 11.26` for `n = 122…126`, reported — review
+      tracking'
+    author: jlevy
+    opened: '2026-10-24'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      The project opened this issue on 24 October 2026 to track the pending review of T-144,
+      wand125's mixed_n122_L1126, which reached the project through his watched repository
+      rather than an issue, by the owner's answer of that day, "Open all nine
+      (Recommended)": one issue for each pending review that had none. The result maps to
+      T-144 at V0/C0, recorded; the complete replay, its control and a review are queued in
+      think-nd7g after think-ux1v, and are an ask on #532.
+    read_through: '2026-10-24T05:13:19Z'
+    results:
+    - key: linear-n122-1126
+      claim: s(n) >= 563/50 = 11.26 for n = 122 to 126, by the linear measure mixed_n122_L1126.
+      source: body
+      register:
+      - T-144
+      evidence:
+      - E-wand125-linear-n122-1126-report
+    beads:
+    - think-nd7g
+    - think-ux1v
+    answer_bead: think-nd7g
+    replies: []
+    close_when: >-
+      The replay, its control and the review its C3 needs have landed on main, and the reply
+      that reports the resulting rungs is posted.
+  - number: 779
+    title: 'T-179: Linear-measure lower bound `s(n) ≥ 306/25 = 12.24` for `n = 145…149`, reported — review
+      tracking'
+    author: jlevy
+    opened: '2026-10-24'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      The project opened this issue on 24 October 2026 to track the pending review of T-179,
+      wand125's mixed_n145_L1224, which reached the project through his watched repository
+      rather than an issue, by the owner's answer of that day, "Open all nine
+      (Recommended)": one issue for each pending review that had none. The result maps to
+      T-179 at V0/C1, reviewed; the complete replay, its control and a review wait for an
+      owner budget in think-u0av.
+    read_through: '2026-10-24T05:13:20Z'
+    results:
+    - key: linear-n145-1224
+      claim: s(n) >= 306/25 = 12.24 for n = 145 to 149, by the linear measure mixed_n145_L1224.
+      source: body
+      register:
+      - T-179
+      evidence:
+      - E-wand125-linear-n145-1224-report
+    beads:
+    - think-u0av
+    answer_bead: think-u0av
+    replies: []
+    close_when: >-
+      The replay, its control and the review its C3 needs have landed on main, and the reply
+      that reports the resulting rungs is posted.
+  - number: 780
+    title: "T-192: Continuous-pose lower bound `s(28) > 1149/200` reported, by two of the source's programs
+      — review tracking"
+    author: jlevy
+    opened: '2026-10-24'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      The project opened this issue on 24 October 2026 to track the pending review of T-192,
+      wand125's continuous_n28_L5745, which reached the project through his watched
+      repository rather than an issue, by the owner's answer of that day, "Open all nine
+      (Recommended)": one issue for each pending review that had none. The result maps to
+      T-192 at V0/C1, reviewed; its two replay routes, think-8eo1 and think-0arj, wait for an
+      owner budget under think-zb5w.
+    read_through: '2026-10-24T05:13:21Z'
+    results:
+    - key: continuous-n28-5745
+      claim: s(28) > 1149/200 = 5.745, by the continuous-pose rectangle measure continuous_n28_L5745.
+      source: body
+      register:
+      - T-192
+      evidence:
+      - E-wand125-continuous-n28-5745-report
+    beads:
+    - think-zb5w
+    - think-8eo1
+    - think-0arj
+    answer_bead: think-zb5w
+    replies: []
+    close_when: >-
+      A replay route, its controls and the review its C3 needs have landed on main, and the
+      reply that reports the resulting rungs is posted.
+  - number: 782
+    title: 'T-234: Hosono reports a hypothesis-free Lean proof that `s(21) = 5`, by the point-only route — review
+      tracking'
+    author: jlevy
+    opened: '2026-10-24'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      The project opened this issue on 24 October 2026 to track the pending review of T-234,
+      Hosono's zero-margin Lean proof of s(21) = 5, which reached the register from the
+      triage of his watched repository rather than an issue, by the owner's instruction of
+      that day, "This state of all reviews should be tracked in the GitHub issues.", as
+      #772 to #780 were: one issue for each pending review that had none. The result maps to
+      T-234 at V0/C0, recorded; C1, the stage 4 review, is think-f2bm's, and C3, a build here
+      with its axiom receipt, is think-tpbd's.
+    read_through: '2026-10-24T06:12:37Z'
+    results:
+    - key: n21-zero-margin-lean
+      claim: >-
+        s(21) = 5 in Lean 4 with no hypothesis, SquarePacking.n21pts_eq_5, by the point-only
+        cover at capture threshold 1 through a zero-margin box tree on Evan Daniel's library.
+      source: body
+      register:
+      - T-234
+      evidence:
+      - E-n021-wand125-zero-margin-lean-report
+    beads:
+    - think-f2bm
+    - think-tpbd
+    answer_bead: think-f2bm
+    replies: []
+    close_when: >-
+      The review its C1 needs and the build its C3 needs have landed on main, or the record
+      says why they will not, and the reply that reports the resulting rungs is posted.
+  - number: 783
+    title: "T-235: Hosono reports a Lean kernel proof that `s(59) = 8`, on Daniel's mixed-measure checker —
+      review tracking"
+    author: jlevy
+    opened: '2026-10-24'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      The project opened this issue on 24 October 2026 to track the pending review of T-235,
+      Hosono's Lean kernel proof of s(59) = 8, which reached the register from the intake
+      read of his watched repository rather than an issue, by the owner's instruction of
+      that day, "This state of all reviews should be tracked in the GitHub issues.", as
+      #772 to #780 were: one issue for each pending review that had none. The result maps to
+      T-235 at V0/C0, recorded; C1, the stage 4 review, is think-xk3f's, and C3, a complete
+      build of about 862 CPU-hours held above the item cap, is think-cs9x's.
+    read_through: '2026-10-24T06:12:39Z'
+    results:
+    - key: n59-lean-kernel
+      claim: >-
+        s(59) = 8 in Lean 4 with no hypothesis, SquarePacking.s59_eq_8, by T-066's mixed
+        cover through a box tree checked by decide +kernel on Evan Daniel's library.
+      source: body
+      register:
+      - T-235
+      evidence:
+      - E-n059-wand125-lean-kernel-report
+    beads:
+    - think-xk3f
+    - think-cs9x
+    answer_bead: think-xk3f
+    replies: []
+    close_when: >-
+      The review its C1 needs has landed on main, the build its C3 needs has landed or the
+      record says why it will not, and the reply that reports the resulting rungs is posted.
+  - number: 784
+    title: "T-236: Daniel reports Lean proofs of Fang's Theorems 1 and 2, `s(n² − n + 1) < n` for `n ≥ 15` —
+      review tracking"
+    author: jlevy
+    opened: '2026-10-24'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      The project opened this issue on 24 October 2026 to track the pending review of T-236,
+      Evan Daniel's Lean proofs of Kevin Fang's Theorems 1 and 2, which reached the register
+      from the intake read of his repository rather than an issue, by the owner's
+      instruction of that day, "This state of all reviews should be tracked in the GitHub
+      issues.", as #772 to #780 were: one issue for each pending review that had none. #603
+      tracks T-163, the result it formalizes. The result maps to T-236 at V0/C0, recorded;
+      C1, the stage 4 review, is think-57ei's, and C3, a build here with its axiom receipt,
+      is think-dgrc's.
+    read_through: '2026-10-24T06:12:41Z'
+    results:
+    - key: fang-theorems-daniel-lean
+      claim: >-
+        Fang's Theorems 1 and 2 in Lean 4 with no hypothesis: s(n^2 - n + 1) < n for every n
+        >= 15, and n^2 - n + 1 + p + 2q squares in a side below n whenever 16p + 21q <= n -
+        15.
+      source: body
+      register:
+      - T-236
+      evidence:
+      - E-fang-theorems-daniel-lean-report
+    beads:
+    - think-57ei
+    - think-dgrc
+    answer_bead: think-57ei
+    replies: []
+    close_when: >-
+      The review its C1 needs and the build its C3 needs have landed on main, or the record
+      says why they will not, and the reply that reports the resulting rungs is posted.
+  - number: 785
+    title: 'T-237: `s(2), s(3), s(4) = 2` and `s(5) = 2 + 1/√2 = 2.70710678…`, the classical first cases — review
+      tracking'
+    author: jlevy
+    opened: '2026-10-24'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      The project opened this issue on 24 October 2026 to track the pending review of T-237,
+      the classical values s(2) to s(5) by Göbel and Friedman, which the record registered
+      that day by the owner's decision on think-4o9c rather than from an issue, by the
+      owner's instruction of that day, "This state of all reviews should be tracked in the
+      GitHub issues.", as #772 to #780 were: one issue for each pending review that had
+      none. The result maps to T-237 at V3/C0, recorded; C1, a review of the lower half at
+      n = 5, is think-wuo4's, and C3, an exact audit of Friedman's four unavoidable points,
+      is think-vvjk's.
+    read_through: '2026-10-24T06:12:43Z'
+    results:
+    - key: classical-s2-to-s5
+      claim: >-
+        s(2) = s(3) = s(4) = 2 and s(5) = 2 + 1/sqrt 2, by Göbel's Proposition 1 and
+        Friedman's Theorems 1 and 2, with the area bound and the grid.
+      source: body
+      register:
+      - T-237
+      evidence:
+      - E-n005-gobel-proof
+      - E-n005-gobel-upper
+      - E-side2-center-lower
+      - E-basic-area-lower
+      - E-basic-grid-upper
+    beads:
+    - think-wuo4
+    - think-vvjk
+    answer_bead: think-wuo4
+    replies: []
+    close_when: >-
+      The review its C1 needs and the audit its C3 needs have landed on main, or the record
+      says why they will not, and the reply that reports the resulting rungs is posted.
+  - number: 786
+    title: "T-238: chelokot reports Lean proofs of `s(2), s(3), s(4) = 2`, `s(5) = 2.707…`; Daniel, rectangle
+      theorems — review tracking"
+    author: jlevy
+    opened: '2026-10-24'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      The project opened this issue on 24 October 2026 to track the pending review of T-238,
+      chelokot's Lean proofs of s(2) to s(5) and Evan Daniel's rectangle theorems, which
+      reached the register from the triage of their repositories rather than an issue, by
+      the owner's instruction of that day, "This state of all reviews should be tracked in
+      the GitHub issues.", as #772 to #780 were: one issue for each pending review that had
+      none. The result maps to T-238 at V0/C0, recorded; C1, the stage 4 review of both
+      routes, is think-7l2j's, and C3, receipt-bound builds of both, is think-tq3g's.
+    read_through: '2026-10-24T06:12:45Z'
+    results:
+    - key: small-n-lean
+      claim: >-
+        s(2) = s(3) = s(4) = 2 and s(5) = 2 + 1/sqrt 2 in Lean 4: chelokot's s2_eq_two to
+        s5_eq_goebel, and Evan Daniel's rectangle theorems read at equal sides.
+      source: body
+      register:
+      - T-238
+      evidence:
+      - E-small-n-chelokot-lean-report
+      - E-small-n-daniel-rect-lean-report
+    beads:
+    - think-7l2j
+    - think-tq3g
+    answer_bead: think-7l2j
+    replies: []
+    close_when: >-
+      The review its C1 needs and the builds its C3 needs have landed on main, or the record
+      says why they will not, and the reply that reports the resulting rungs is posted.

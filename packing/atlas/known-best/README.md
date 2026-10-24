@@ -752,6 +752,30 @@ The evidence is retained in
 [`cases/regularized_drawings/think-icp1-2026-10-23/`](../../cases/regularized_drawings/think-icp1-2026-10-23/README.md).
 The index still draws 95 views.
 
+The same pass of 23 October 2026, once the house writer took an algebraic side
+(think-ot5c), adopted PR #574’s algebraic certificates (T-174) at 70, 153 and 207 and
+Evan Daniel’s exact forms of issue 639 (T-193) at 102, 123, 258, 259, 295 and 302. Each
+new witness states its squares in a real number field, which the axis tool refuses
+(`unsupported-scalar-kind`), so its views of the nine earlier houses leave the index,
+and the strong views at 153, 207 and 259 (Evan Daniel’s regularizer) and 302
+(grid-slack) lapse. At 70 and 295 the new house drawings read regular as published.
+At the other seven both generators ran on the new witness: grid-slack at 0.5, 1 and 5
+degrees has no exact frame on a number-field witness and draws no view, and Evan
+Daniel’s regularizer solves each to a rational side $1.06 \times 10^{-19}$ to
+$1.79 \times 10^{-19}$ above the algebraic $U$, which is not drawn.
+The owner answered question 13 (think-r8cn) the same day: the best record is always the
+record, and a regularized drawing may change the side only as a strict improvement.
+So no view above $U$ is kept, the lapsed views at 153, 207, 259 and 302 among them, and
+each of the seven draws its exact house.
+`SETTLED` records the seven on their new witnesses as `regularization-owed`, not as
+decided: no view was judged no better, and the exact house drawn is not regularized.
+Its regularization is owed under think-mbdw, which needs a regularizer that draws an
+exact view of a number-field witness at or below the record’s side, and a second exact
+route to admit it. The evidence is retained in
+[`cases/regularized_drawings/think-ot5c-2026-10-23/`](../../cases/regularized_drawings/think-ot5c-2026-10-23/README.md).
+After it the index draws 86 views: 30 by the axis tool, 37 by Evan Daniel’s regularizer
+and 19 by the grid-slack generator’s version 1.
+
 The pass of 24 October 2026 adopted that other 204 file, which the author claimed on
 #719 and the record registers as T-231 (think-h01y), at 204, moving the house best
 packing from T-229 by $1.48 \times 10^{-11}$ to the same packing at its solved side.
@@ -765,6 +789,21 @@ on T-229’s: 6 light, 34 uneven and 6 near-axis squares and 505 / 543 sides, ag
 The half-degree view is admitted at row 10 and drawn.
 The evidence is retained in
 [`cases/regularized_drawings/think-h01y-2026-10-24/`](../../cases/regularized_drawings/think-h01y-2026-10-24/README.md).
+The index still draws 86 views.
+
+The same pass adopted Amund Kristiansen’s #755 certificate (T-239, think-tqb5) at 303,
+moving the house best packing from T-230 by $9.89 \times 10^{-6}$. Both generators ran
+on the new witness: grid-slack at 0.5, 1 and 5 degrees
+(`grid-slack-adopt-2026-10-24-n303-grid-deg05`, `-grid-deg1` and `-grid-deg5`, 77
+CPU-seconds) draws one view at the witness’s side, with the axis tool’s light, uneven
+and near-axis counts (9, 37 and 0) and 760 / 776 sides against 756 / 774, worse on no
+goal, so the selection admits the 0.5 degree view (row 10) and it is drawn.
+Evan Daniel’s regularizer (`evand-regularize-adopt-2026-10-24-n303-evand`, 240
+CPU-seconds) solves the witness to a certified KKT local minimum and gives a view
+$2.17 \times 10^{-11}$ below its side, which waits to be registered (row 3, think-8r5w).
+`SETTLED`’s entry at 303, made on T-230’s witness, is removed.
+The evidence is retained in
+[`cases/regularized_drawings/think-tqb5-2026-10-23/`](../../cases/regularized_drawings/think-tqb5-2026-10-23/README.md).
 The index still draws 95 views.
 
 ### The default picture
@@ -814,8 +853,11 @@ The same file’s `states` says, for every count n = 1..324, whether the picture
 is regularized: `regularized` where a view of Evan Daniel’s regularizer or the
 grid-slack generator is drawn, `regular-as-published` where the house drawing has no
 uneven and no near-axis square, `decided-no-better` where the strong generators ran on
-that very witness and drew nothing better, `exempt` with the bead that owns it, and
-`pending` otherwise.
+that very witness and drew nothing better, `regularization-owed` where they ran and drew
+no view the improvement rule could judge, so the drawing is not regularized and its
+`SETTLED` entry names the bead that owes it (the exact algebraic houses, under
+think-mbdw), `exempt` with the bead that owns it, and `pending` otherwise.
+The totals count each state apart.
 Each state carries the drawn picture’s measures, the witness’s id, its source’s key,
 path and revision, and its side, and the runs that decided it.
 The index’s `status: regularized` means only that the layer holds a view: at n = 176 it
@@ -823,10 +865,10 @@ held the axis tool’s view while the raw house was drawn.
 A view that lapses with its witness is now recorded on the axis tool’s record (`lapsed`)
 rather than only printed.
 The records-tier step
-`every drawn picture is regularized, regular as published, decided or exempt` fails on a
-pending count that `devtools.default_drawings.PENDING_ALLOWED` does not name with its
-bead, and on a named count that is no longer pending; `bead tree` holds each bead the
-list names open.
+`every drawn picture is regularized, regular as published, decided, owed to an open bead or exempt`
+fails on a pending count that `devtools.default_drawings.PENDING_ALLOWED` does not name
+with its bead, and on a named count that is no longer pending; `bead tree` holds each
+bead the list names open.
 
 `--check-atlas` runs in the records tier on every pull request: it holds the index to
 the manifest, the witnesses and the views by digest, and reads each other generator’s

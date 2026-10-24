@@ -76,8 +76,10 @@ def pretty(expr: str) -> str:
     return re.sub(r"sqrt\((\d+)\)", r"√\1", expr)
 
 
-#: A `root(P_name, decimal)` exact form: a root of a named minimal polynomial.
-ROOT_FORM = re.compile(r"root\((\w+),\s*([0-9.]+)\)")
+#: A polynomial-root exact form, which has no closed form to show: `root(P_name, decimal)`,
+#: a root of a named minimal polynomial, or `root(<polynomial in s>, <low>, <high>)`, the
+#: one root in an interval, as `exact_sides.form` writes an algebraic house's side.
+ROOT_FORM = re.compile(r"root\((?:\w+,\s*[0-9.]+|[0-9s^{}+\- ]+,\s*[0-9.]+,\s*[0-9.]+)\)")
 
 
 def _latex_node(node: ast.expr) -> str:

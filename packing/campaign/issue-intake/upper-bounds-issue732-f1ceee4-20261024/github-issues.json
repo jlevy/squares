@@ -1,0 +1,10 @@
+{
+  "format": "intake-ledger-github-v1",
+  "items": [
+    {"report":"#732 comment 6374211504","kind":"comment","number":732,"comment_id":6374211504,"url":"https://github.com/jlevy/squares/issues/732#issuecomment-6374211504","author":"Mishapolk","created_at":"2026-10-23T20:35:12Z","issue_state":"open","issue_closed_at":null,"issue_title":"328–10000: Registration Request (5,468 Exact Rational Certificates), Complete Resolution of Couzo #715, and Algebraic Boundary Saturation Proof"},
+    {"report":"#715","kind":"issue","number":715,"url":"https://github.com/jlevy/squares/issues/715","author":"franciscouzo","created_at":"2026-10-21T20:55:57Z","state":"open","closed_at":null,"title":"328-9913: registration request"},
+    {"report":"PR #574","kind":"pull-request","number":574,"url":"https://github.com/jlevy/squares/pull/574","author":"BuddenPing","created_at":"2026-10-13T00:13:11Z","state":"open","closed_at":null,"title":"research: submit 148 square-packing certificate refinements with exact endpoints"},
+    {"report":"#639","kind":"issue","number":639,"url":"https://github.com/jlevy/squares/issues/639","author":"evand","created_at":"2026-10-16T03:37:13Z","state":"closed","closed_at":"2026-10-19T22:44:05Z","title":"Exact algebraic sides for 22 current best-known packings (minimal polynomial, isolating interval, exact configuration): registration request"},
+    {"report":"#755","kind":"issue","number":755,"url":"https://github.com/jlevy/squares/issues/755","author":"amundsk","created_at":"2026-10-23T11:12:48Z","state":"open","closed_at":null,"title":"s(303) ≤ 17.909762327476: registration request"}
+  ]
+}

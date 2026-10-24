@@ -4,13 +4,14 @@
   "source_url": "https://github.com/franciscouzo/square-packing",
   "source_ref": "master",
   "source_commit": "4e4c8ce23cb5e87f033021687010992c40575480",
-  "retrieved_at_utc": "2026-10-22T19:10Z",
-  "git_scope": "Bare clone of franciscouzo/square-packing (history to 6b7391de, fetched 22 October), checked out sparsely at 4e4c8ce (committed 2026-10-15T00:31:53Z, 'Update all verified bounds for n < 1024'), a commit no issue reports. Retained: the 253 certificates/best/nN.cert at 325 to 1023 that the report-order walk of Couzo's history (campaign/issue-intake/upper-bounds-couzo-history-20261022) records as reports with a row. Pinned by digest only: the 42 certificates it holds for a decision, the root README.md and index files, the certificate directory's README, manifest.json and SHA256SUMS, and the exact checker with its MIT licence against the issue-678 packet's identical copies. The rest of the tree is pinned by the commit alone; no source file was executed.",
+  "retrieved_at_utc": "2026-10-24T01:45Z",
+  "git_scope": "Bare clone of franciscouzo/square-packing (history to 6b7391de, fetched 22 October), checked out sparsely at 4e4c8ce (committed 2026-10-15T00:31:53Z, 'Update all verified bounds for n < 1024'), a commit no issue reports. Retained: the 253 certificates/best/nN.cert at 325 to 1023 that the report-order walk of Couzo's history (campaign/issue-intake/upper-bounds-couzo-history-20261022) records as reports with a row. Pinned by digest only: the 42 certificates it holds for a decision, the root README.md and index files, the certificate directory's README, manifest.json and SHA256SUMS, and the exact checker with its MIT licence against the issue-678 packet's identical copies. Added from the same pin on 24 October at 01:45Z (think-t5hc), from a blobless clone with a sparse checkout of the scope: n204.txt at the root, retained, the decimal 204 packing Couzo's comment of 2026-10-23T22:22:03Z on issue #670 names as the start of #670's 204 search, first committed here; and certificates/best/n204.cert, pinned by digest only, the same Git blob (301c930) as Mykhailo Polkovskyi's certificates/square-204.cert at Mishapolk/square-packing-records@70a033f, which the mishapolk-kkt-refinements-2026-10-14 packet pins by the same SHA-256. The rest of the tree is pinned by the commit alone; no source file was executed.",
   "archived_dir": "source",
   "license": "The repository states no licence for its data or prose: the tree has no LICENSE, and no README states reuse terms. The 253 certificates are retained as factual data under the owner decision of 2026-10-09 recorded in resources/web/known-best-packings/README.md (Retained Factual Data). verify_bound_certificate.py states that it is Evan Daniel's MIT-licensed verifier with modifications by Francisco Couzo with Codex, under the MIT licence in BOUND_VERIFIER_LICENSE.txt (Copyright (c) 2026 Evan Daniel); both are pinned against the byte-identical copies the couzo-issue678-2026-10-18 packet retains. Prose, the indexes and the manifest are hash-pinned and not copied.",
   "claims": [
     "franciscouzo/square-packing@4e4c8ce publishes certificates/best/nN.cert for n = 1 to 1023, each the exact rational side in its header, with manifest.json naming each count's credit and the author's two checker outcomes. Beyond the n <= 324 corpus, 253 of them are reports by the order they reached the repository; they are retained here as dated beyond-horizon rows, 91 current and 162 superseded on entry.",
-    "The manifest's credit and checker statements are the author's; no source program ran here."
+    "The manifest's credit and checker statements are the author's; no source program ran here.",
+    "n204.txt at 4e4c8ce, first committed there, gives 204 decimal poses (x, y and theta in radians) at s = 14.808663234389741. Francisco Couzo's comment on issue #670 of 2026-10-23T22:22:03Z (issuecomment-6375905012) says it is the decimal form of Mykhailo Polkovskyi's certificates/square-204.cert at Mishapolk/square-packing-records@70a033f, T-186's 204 certificate, and the seed of hop job 101216, the first of the three hop jobs (101216, 103222 and 105412) that led to #670's 204 certificate. Those statements are the author's; the #670 packet's measure/seed-identity.json measures the pairing."
   ],
   "scope": [
     "BOUND_VERIFIER_LICENSE.txt",
@@ -19,6 +20,7 @@
     "certificates/best/README.md",
     "certificates/best/SHA256SUMS",
     "certificates/best/manifest.json",
+    "certificates/best/n204.cert",
     "certificates/best/n325.cert",
     "certificates/best/n326.cert",
     "certificates/best/n327.cert",
@@ -315,6 +317,7 @@
     "certificates/best/n993.cert",
     "certificates/best/n994.cert",
     "certified_bounds.json",
+    "n204.txt",
     "upper_bounds.json",
     "verify_bound_certificate.py"
   ],
@@ -520,6 +523,10 @@
     {
       "match": "certificates/best/n974.cert",
       "reason": "Published at 4e4c8ce, above Göbel's classical construction at its count, held for the owner's answer on #613 (think-8krd); pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/best/n204.cert",
+      "reason": "Mykhailo Polkovskyi's 204 certificate, the same Git blob (301c930) as certificates/square-204.cert at Mishapolk/square-packing-records@70a033f, T-186's certificate, which the mishapolk-kkt-refinements-2026-10-14 packet pins by the same SHA-256 under derived-only custody; pinned by digest only here, as there."
     }
   ]
 }

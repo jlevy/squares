@@ -13,6 +13,7 @@ to refusing each kind of mismatch.
 from __future__ import annotations
 
 import dataclasses
+import math
 from collections.abc import Mapping
 from decimal import Decimal
 from fractions import Fraction
@@ -20,7 +21,7 @@ from typing import Any
 
 import pytest
 
-from devtools import check_standing
+from devtools import check_standing, exact_sides
 from devtools import render_recent_results as view
 from devtools.check_results import BOUND_KINDS, SECOND_PROOF_KINDS
 from devtools.check_standing import BEATEN, EQUAL, EXCEEDS, LOWER, UPPER, Stated
@@ -455,26 +456,31 @@ def test_an_entry_may_not_state_more_than_its_case_record_carries(
 def test_an_entry_that_holds_some_counts_may_be_staged_at_others(
     records: view.Records, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    """Since the adoption of 17 October 2026, T-174 holds 37 counts, and its claim states
-    algebraic sides at 70, 153 and 207 below their case records, whose adoption is staged
-    for the writer (`select_houses.PENDING_ADOPTION`). A staged count is pending adoption
-    and no excess; unstaged, the same statement is refused."""
+    """Since the adoption of 23 October 2026 (think-ot5c), T-193 holds six counts, and its
+    claim states exact sides below their case records at seven more, whose adoption is
+    staged (`select_houses.PENDING_ADOPTION`): 267's form waits for its price, and the
+    others for think-8ido. T-174 was the example until the same adoption took its last
+    three staged counts, 70, 153 and 207. A staged count is pending adoption and no
+    excess; unstaged, the same statement is refused."""
     from devtools import select_houses  # noqa: PLC0415
 
-    record = records.results["T-174"]
+    record = records.results["T-193"]
     assert view.standing(record, records) == view.HOLDS
-    assert {70, 153, 207} <= check_standing.staged("T-174")
+    assert {88, 126, 199, 266, 267, 292, 301} <= check_standing.staged("T-193")
     assert check_standing.problems(record, view.HOLDS, records) == []
     line = check_standing.summary(record, view.HOLDS, records)
-    assert "better than the case record at n = 70, 153, 207 (staged for adoption)" in line
+    assert (
+        "better than the case record at n = 88, 126, 199, 266, 267, 292, 301 "
+        "(staged for adoption)"
+    ) in line
     monkeypatch.setattr(
         select_houses,
         "PENDING_ADOPTION",
-        {n: p for n, p in select_houses.PENDING_ADOPTION.items() if n != 153},
+        {n: p for n, p in select_houses.PENDING_ADOPTION.items() if n != 267},
     )
     (problem,) = check_standing.problems(record, view.HOLDS, records)
-    assert "T-174 states more than the verified bound" in problem
-    assert problem.endswith("n = 153")
+    assert "T-193 states more than the verified bound" in problem
+    assert problem.endswith("n = 267")
 
 
 def test_an_entry_with_no_standing_states_no_bound(records: view.Records) -> None:
@@ -662,3 +668,43 @@ def test_an_entry_pending_adoption_is_cited_by_no_case_bound(records: view.Recor
     assert (
         "T-122 is pending adoption, yet a case bound at n = 152 cites its evidence" in problem
     )
+
+
+def test_a_stated_bound_is_held_to_an_algebraic_house_exactly(records: view.Records) -> None:
+    """An algebraic house's side is the one root of its minimal polynomial in its written
+    interval (`exact_sides.form`), and a stated bound is held to that root by sign tests,
+    never by an enclosure of it (review A2 of #756). T-174's rational certificate at 102
+    states a side 3.69e-88 above T-193's root there, the house: inside any enclosure of the
+    root 1e-60 wide, and still strictly above it, so it is beaten and not equal. A rational
+    1e-80 either side of the root is beaten or exceeds the house; cut decimals that start
+    as the root does equal it, and cut decimals that start just above it are beaten."""
+    from devtools import select_houses  # noqa: PLC0415
+
+    bound = records.cases[102]["verified_upper_bound"]
+    house = exact_sides.read_form(bound["exact_form"])
+    assert isinstance(house, exact_sides.Algebraic)
+    (key,) = records.results["T-174"]["attribution"]["source_keys"]
+    rational = select_houses.exact_side(str(key), 102)
+    assert isinstance(rational, Fraction)
+    assert exact_sides.compare(rational, house) == 1
+    gap = exact_sides.lower_gap(rational, house)
+    assert Fraction(1, 10**89) < gap < Fraction(1, 10**87)
+    low, high = exact_sides.enclosure(house, Fraction(1, 10**60))
+    assert low < rational < high
+    assert check_standing.relation(Stated(rational, EXACT), bound, UPPER) == BEATEN
+    assert check_standing.relation(Stated(rational, EXACT), bound, LOWER) == EXCEEDS
+
+    near_low, near_high = exact_sides.enclosure(house, Fraction(1, 10**100))
+    above = near_high + Fraction(1, 10**80)
+    below = near_low - Fraction(1, 10**80)
+    assert check_standing.relation(Stated(above, EXACT), bound, UPPER) == BEATEN
+    assert check_standing.relation(Stated(below, EXACT), bound, UPPER) == EXCEEDS
+    assert check_standing.relation(Stated(below, EXACT), bound, LOWER) == BEATEN
+
+    places = 30
+    unit = Fraction(1, 10**places)
+    start = Fraction(math.floor(near_low / unit)) * unit
+    assert start < house < start + unit
+    assert check_standing.relation(Stated(start, unit), bound, UPPER) == EQUAL
+    assert check_standing.relation(Stated(start + unit, unit), bound, UPPER) == BEATEN
+    assert check_standing.relation(Stated(start - unit, unit), bound, UPPER) == EXCEEDS

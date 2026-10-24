@@ -1853,7 +1853,7 @@ def test_a_pose_maps_each_kind_of_witness_exactly_as_its_frame_is_built() -> Non
     For a witness of each kind, under each of the eight poses, every corner is exactly
     the identity frame's corner under the reference map (`_mapped_corners`), read back
     from the scalars' sources: rational corners (n = 3 and 62), rational centres and bases
-    (n = 70), decimal centres and angles (n = 5 and 11), the same decimals given as
+    (n = 68), decimal centres and angles (n = 5 and 11), the same decimals given as
     corners, the number field (n = 51), and a regularized view, which `regularized_frame`
     turns while its source frame gives only the tier and check. The side, square ids,
     labels and order and every other field are the identity frame's, and `IDENTITY` is
@@ -1863,7 +1863,7 @@ def test_a_pose_maps_each_kind_of_witness_exactly_as_its_frame_is_built() -> Non
 
     witnesses = {
         case.frontier.n: case.witness
-        for case in known_best_builder.retained_cases((3, 5, 11, 51, 62, 70))
+        for case in known_best_builder.retained_cases((3, 5, 11, 51, 62, 68))
     }
     kinds = {
         n: (witness["scalar"]["kind"], witness["representation"])
@@ -1875,7 +1875,9 @@ def test_a_pose_maps_each_kind_of_witness_exactly_as_its_frame_is_built() -> Non
         11: ("decimal", "center-angle"),
         51: ("algebraic-number-field", "center-basis"),
         62: ("rational", "corners"),
-        70: ("rational", "center-basis"),
+        # 68, not 70: the adoption of 23 October 2026 took 70 to PR #574's algebraic
+        # certificate (T-174, think-ot5c), a kind n = 51 already covers.
+        68: ("rational", "center-basis"),
     }
     # The decimal corners branch, which no retained witness takes: n = 11's projection
     # given as corners, one coordinate spelled with a trailing zero.
@@ -2370,8 +2372,9 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     # source asks; Kevin Fang's two-wedge construction, which no other count credits,
     # is named in that case's credit sentence and leaves this list. On 20 October 2026 the
     # adoption at 227 and 260 (T-196) drew the poster's first de Winter packings, and his
-    # name joined it.
-    assert len(expected_names) == 26
+    # name joined it. On 24 October 2026 the adoption at 303 (T-239) drew the poster's first
+    # Kristiansen packing, and his name joined it.
+    assert len(expected_names) == 27
     # The adoption of 19 October draws from five more, Evan Daniel's packets at 155, 183
     # (T-220, think-jh4w), 229, 236 and 271, with no new name, and every source it
     # re-housed still holds another count. The adoption of 20 October draws from three
@@ -2391,10 +2394,17 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     # (T-229), with no new name: PingYou Ltd's PR 574 certificates and Daniel's regularized
     # lists still hold other counts, and Polkovskyi's name is already on the poster. The
     # same pass draws 303 from one more, Evan Daniel's issue 728 packet (T-230), with no new
-    # name: Mishapolk's KKT refinements still hold other counts. The adoption of 24 October
-    # draws 204 from one more, Polkovskyi's n204 packet (T-231), with no new name: his issue
-    # 719 packet still holds 105.
-    assert len(expected_sources) == 28
+    # name: Mishapolk's KKT refinements still hold other counts. The adoption of the nine
+    # algebraic houses the same day (think-ot5c) draws 102, 123, 258, 259, 295 and 302 from
+    # one more, Evan Daniel's issue 639 packet (T-193), and 70, 153 and 207 from PingYou
+    # Ltd's PR 574 certificates, already on the poster. It no longer draws from Mishapolk's
+    # 12 October certificates (153, 207) or SQUISH's third request (259), which held nothing
+    # else: one source fewer, and no new name. The adoption of 24 October draws 204 from one
+    # more, Polkovskyi's n204 packet (T-231), with no new name: his issue 719 packet still
+    # holds 105. The same pass draws 303 from Amund Kristiansen's issue 755 packet (T-239)
+    # instead, and no longer from Daniel's issue 728 packet, which held nothing else, so
+    # that move leaves the number of sources as it was.
+    assert len(expected_sources) == 27
     assert set(json.loads(credit_block.attrib["data-credited-names"])) == expected_names
     assert set(json.loads(credit_block.attrib["data-source-keys"])) == expected_sources
     assert credit_block.find("svg:text[@data-feature='packing-credits-heading']", SVG) is None
@@ -2424,6 +2434,7 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
         "Daniel",
         "de Winter",
         "Gupta",
+        "Kristiansen",
         "Ostashev",
         "PingYou Ltd",
         "Xu",
@@ -2687,6 +2698,9 @@ def test_primary_composite_routes_contributions_to_cards_and_legend(
         66,
         67,
         69,
+        # Degree 5 since the adoption of 23 October 2026 took 70 to PR #574's algebraic
+        # certificate (T-174, think-ot5c).
+        70,
         82,
         83,
         85,
@@ -4587,10 +4601,10 @@ def test_print_information_shares_content_style_and_measured_block_gaps(data_dat
         for block in blocks
     ]
     assert credit_text[0] == credit_text[1]
-    # 26 since the adoption at 227 and 260 of 20 October 2026 (see the credits test above).
+    # 27 since the adoption at 303 of 24 October 2026 (see the credits test above).
     assert (
         len(credit_text[0].removeprefix("Best packings due to ").removesuffix(".").split(", "))
-        == 26
+        == 27
     )
 
 

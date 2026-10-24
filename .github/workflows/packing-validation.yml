@@ -1542,11 +1542,13 @@ jobs:
             /packing/resources/web/evand-n308-2026-10-19/
             /packing/resources/web/evand-n154-sweep-2026-10-20/
             /packing/resources/web/evand-n303-2026-10-22/
+            /packing/resources/web/amundsk-n303-2026-10-23/
             /packing/resources/web/de-winter-upper-bounds-227-229-260-2026-10-17/
             /packing/resources/web/evand-n270-sweep-2026-10-20/
             /packing/resources/web/couzo-issue678-2026-10-18/
             /packing/resources/web/evand-regularized-2026-10-20/
             /packing/resources/web/mishapolk-issue719-2026-10-22/
+            /packing/resources/web/evand-exact-cur-2026-10-16/
             /packing/resources/web/mishapolk-n204-2026-10-22/
             /packing/resources/papers/
             !/packing/resources/papers/*

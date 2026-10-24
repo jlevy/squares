@@ -232,8 +232,10 @@ padding.
 ## Credit
 
 The packing is Francisco Couzo’s. He first reported it in #670 and refined it in #675
-and #678 (T-226, T-228, T-223), and his source credits Polkovskyi’s own construction as
-the seed of its search.
+and #678 (T-226, T-228, T-223), and his answer of 23 October on #670 traces the seed of
+that search to Polkovskyi’s own T-186 packing, his refinement of Daniil Ostashev’s packing
+as PingYou Ltd refined it, three rounds of basin hopping before #670’s certificate; so the
+credit line is *Polkovskyi after Couzo, Ostashev, PingYou Ltd, Daniel, Levy*.
 Mykhailo Polkovskyi re-solved it to this side, starting from Couzo’s #678 certificate,
 as his comment of 23 October says. Measured here, the side and the determined rows are
 Evan Daniel’s exact solver’s for T-229’s arrangement: a method credit to Daniel, not an

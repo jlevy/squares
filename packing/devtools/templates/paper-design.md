@@ -2966,12 +2966,12 @@ pointer and by keyboard, and measures its label at 1280, 768 and 390 pixels.
   one (the recent table, the atlas grid), and one way onward to the page that holds the
   full account. A fact has one home.
   What a page defines is stated on that page and nowhere else, and the overview names it
-  and links it: the Results page’s ratings, with the rating ladders that define every
-  rung (**Rating ladders**, above, the homepage’s own section until 2026-10-02), its
-  kinds, statuses and dating rule, with how many results stand at each status; the
-  Frontier page’s counts, its audit of its sources, the seventeen-square history before
-  this project, and when a bound by others counts as verified, which is the rule its
-  verified columns apply.
+  and links it: the Verification page’s ratings, with the rating ladders that define
+  every rung (**Rating ladders**, above, the homepage’s own section until 2026-10-02 and
+  the Results page’s until 2026-10-22), its kinds, statuses and dating rule, with how
+  many results stand at each status; the Frontier page’s counts, its audit of its
+  sources, the seventeen-square history before this project, and when a bound by others
+  counts as verified, which is the rule its verified columns apply.
   The Frontier page opens with the survey’s account, its audit, its recent counts and
   the seventeen-square history, and ends its prose with the key to its columns, beside
   the table. The way onward follows the section’s shape: a section whose key element is a
@@ -3924,8 +3924,8 @@ end. `devtools.measure_site_pages ladders` reports the rating ladders as laid ou
 rung’s height, each description’s box and the lines its words take, the room between the
 diagram and whatever clips it sideways, and with `--shots DIR` a picture of the diagram
 at each width, light and dark.
-`tests/test_site_ladders.py` holds those rows and that room in a browser at nine widths,
-the narrowest of each layout among them.
+`tests/test_site_ladders.py` holds those rows and that room in a browser at fourteen
+widths, the narrowest of each layout among them.
 `devtools.measure_site_pages math` reports every formula’s face beside its text’s,
 counted by surface. `devtools.measure_site_pages glyphs` reports how every run of text
 and every formula is drawn, and `--view problems` fails on a page set off the rules of

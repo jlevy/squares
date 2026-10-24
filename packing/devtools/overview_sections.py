@@ -2542,9 +2542,16 @@ def project_slug(url: str) -> str:
     return re.sub(r"[^a-z0-9]+", "-", project_name(url).lower()).strip("-")
 
 
+#: A gist's address at a pinned revision, `https://gist.github.com/<owner>/<id>/<sha>`:
+#: the gist itself is the part before the revision.
+_GIST_REVISION = re.compile(r"(https://gist\.github\.com/[\w.-]+/[0-9a-f]+)/[0-9a-f]{40}/?")
+
+
 def source_repository(url: str) -> str:
     """A source's address as its repository's: a revision or a directory under it,
-    `/tree/…`, names the same project."""
+    `/tree/…`, names the same project, and a gist's revision names the gist."""
+    if gist := _GIST_REVISION.fullmatch(url):
+        return gist[1]
     return re.sub(r"/tree/.*", "", url).rstrip("/")
 
 

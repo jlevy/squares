@@ -1185,10 +1185,11 @@ def test_every_pending_count_is_owned_by_the_bead_its_allowlist_entry_names(
 
 def test_each_decision_and_exemption_is_owned_by_the_bead_it_names() -> None:
     """Review A2 of #650: the sweep exists to catch a bead that closes while it still owns
-    a count. Each decision whose `SETTLED` entry still owes runs or an outcome, and each
-    exemption, is listed once with the bead its entry names (`owed` first, the exemption's
-    evidence anywhere, as `default_drawings.deferrals` reads them), owned while that bead
-    is open; closing those beads leaves exactly their items needing an owner."""
+    a count. Each decision whose `SETTLED` entry still owes runs or an outcome, each count
+    whose regularization is owed (review A4 of #756), and each exemption, is listed once
+    with the bead its entry names (`owed` first, the exemption's evidence anywhere, as
+    `default_drawings.deferrals` reads them), owned while that bead is open; closing those
+    beads leaves exactly their items needing an owner."""
     from devtools import default_drawings as defaults  # noqa: PLC0415
 
     rows = {
@@ -1196,22 +1197,27 @@ def test_each_decision_and_exemption_is_owned_by_the_bead_it_names() -> None:
         for row in json.loads(defaults.RECORD.read_text(encoding="utf-8"))["states"]
     }
     owes: dict[int, str] = {}
+    unregularized: dict[int, str] = {}
     exempt: dict[int, str] = {}
     what: dict[int, str] = {}
     for n, held in defaults.SETTLED.items():
-        if held.owed and rows[n]["state"] == defaults.DECIDED:
+        if held.owed and rows[n]["state"] in (defaults.DECIDED, defaults.OWED):
             bead = defaults.BEAD.match(held.owed)
             assert bead is not None, n
-            owes[n] = bead[0]
             owed = held.owed[bead.end() :].lstrip(":; ").strip()
-            what[n] = f"n = {n} decided no better on its witness, still owed: {owed}"
+            if rows[n]["state"] == defaults.DECIDED:
+                owes[n] = bead[0]
+                what[n] = f"n = {n} decided no better on its witness, still owed: {owed}"
+            else:
+                unregularized[n] = bead[0]
+                what[n] = f"n = {n} not regularized on its witness, regularization owed: {owed}"
         if held.state == defaults.EXEMPT and rows[n]["state"] == defaults.EXEMPT:
             bead = defaults.BEAD.search(held.evidence)
             assert bead is not None, n
             exempt[n] = bead[0]
             what[n] = f"n = {n} exempt: {held.outcome}"
-    if not owes or not exempt:
-        pytest.skip("the data holds no decision that owes runs, or no exemption")
+    if not owes or not unregularized or not exempt:
+        pytest.skip("the data holds no decision that owes runs, no owed one, or no exemption")
     states = _deferral_beads()
 
     def listed(section: sweep.Section, words: str) -> dict[int, sweep.Item]:
@@ -1222,14 +1228,16 @@ def test_each_decision_and_exemption_is_owned_by_the_bead_it_names() -> None:
 
     section = sweep.regularization_section(_beads(**states))
     decided = listed(section, " decided no better on its witness, still owed: ")
+    owing = listed(section, " not regularized on its witness, regularization owed: ")
     exempted = listed(section, " exempt: ")
     assert {n: item.bead for n, item in decided.items()} == owes
+    assert {n: item.bead for n, item in owing.items()} == unregularized
     assert {n: item.bead for n, item in exempted.items()} == exempt
-    for n, item in [*decided.items(), *exempted.items()]:
+    for n, item in [*decided.items(), *owing.items(), *exempted.items()]:
         assert (item.what, item.state, item.bead_state) == (what[n], sweep.OWNED, "in_progress")
     assert sweep.needing_action([section]) == []
 
-    closing = {*owes.values(), *exempt.values()}
+    closing = {*owes.values(), *unregularized.values(), *exempt.values()}
     assert not closing & {
         found[0]
         for entry in defaults.PENDING_ALLOWED.values()
@@ -1240,7 +1248,7 @@ def test_each_decision_and_exemption_is_owned_by_the_bead_it_names() -> None:
     )
     orphaned = sweep.needing_action([closed])
     assert sorted(item.what for item in orphaned) == sorted(
-        item.what for item in [*decided.values(), *exempted.values()]
+        item.what for item in [*decided.values(), *owing.values(), *exempted.values()]
     )
     assert {item.bead_state for item in orphaned} == {"closed"}
 
