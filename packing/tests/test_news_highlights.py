@@ -5,15 +5,14 @@ from __future__ import annotations
 
 import copy
 import html
+import inspect
 import re
-from datetime import date, timedelta
 
 import pytest
 
 from devtools import (
     check_results,
     news_highlights,
-    overview_sections,
     render_changelog,
     site_topics,
 )
@@ -34,14 +33,17 @@ def _entry(identifier: str, day: str, score: int) -> render_changelog.Document:
     }
 
 
-def test_the_box_opens_on_s5_alone_only_while_the_newest_s5_articles_are_recent() -> None:
-    """The opening levels (`default_levels`; the owner, 22 October 2026, and #736's review
-    A, finding A4): S5 alone where the `LIMIT` newest S5 articles all fall within
-    `FRESH_DAYS` of the reference day, and S4 and S5 where there are fewer of them or one
-    is older. An article outside News, below S3 or excluded, never counts."""
-    limit, fresh = news_highlights.LIMIT, news_highlights.FRESH_DAYS
-    assert (limit, fresh) == (3, 30)
-    fives = [_entry(f"five-{index}", f"2026-10-0{index + 1}", 5) for index in range(limit)]
+def test_the_box_opens_on_s5_alone_whenever_news_holds_enough_s5_articles() -> None:
+    """The opening levels (`default_levels`; the owner, 22 October 2026: "preselected to
+    S5 when there are enough S5 items for the box, else S4+S5"): S5 alone where News holds
+    `LIMIT` S5 articles, however old, and S4 and S5 where it holds fewer. An article
+    outside News, below S3 or excluded, never counts. No age rule applies (#736's review
+    B, finding B1)."""
+    limit = news_highlights.LIMIT
+    assert limit == 3
+    assert not hasattr(news_highlights, "FRESH_DAYS")
+    # The S5 articles are a year older than the rest, which does not matter.
+    fives = [_entry(f"five-{index}", f"2025-10-0{index + 1}", 5) for index in range(limit)]
     others = [
         _entry("four", "2026-10-20", 4),
         _entry("three", "2026-10-21", 3),
@@ -49,46 +51,46 @@ def test_the_box_opens_on_s5_alone_only_while_the_newest_s5_articles_are_recent(
         {**_entry("excluded", "2026-10-22", 5), "news_exclusion": "Retained history only."},
     ]
     full = {"entries": [*fives, *others]}
-    reference = date(2026, 10, 22)
-    assert news_highlights.default_levels(full, reference) == (5,)
-    assert [entry["id"] for entry in news_highlights.highlights(full, reference)] == [
+    assert news_highlights.default_levels(full) == (5,)
+    assert [entry["id"] for entry in news_highlights.highlights(full)] == [
         f"five-{index}" for index in reversed(range(limit))
     ]
-    # The oldest of the three, 1 October, is 30 days old on the 31st and 31 on 1 November.
-    assert news_highlights.default_levels(full, date(2026, 10, 31)) == (5,)
-    assert news_highlights.default_levels(full, date(2026, 11, 1)) == (4, 5)
-    assert [entry["id"] for entry in news_highlights.highlights(full, date(2026, 11, 1))] == [
+    # Two S5 articles and an excluded one are not enough.
+    short = {"entries": [*fives[1:], *others]}
+    assert news_highlights.default_levels(short) == render_changelog.NEWS_LEVELS
+    assert render_changelog.NEWS_LEVELS == (4, 5)
+    assert [entry["id"] for entry in news_highlights.highlights(short)] == [
         "four",
         *(f"five-{index}" for index in reversed(range(1, limit))),
     ]
-    short = {"entries": [*fives[1:], *others]}
-    assert news_highlights.default_levels(short, reference) == render_changelog.NEWS_LEVELS
-    assert render_changelog.NEWS_LEVELS == (4, 5)
-    assert news_highlights.default_levels({"entries": others}, reference) == (4, 5)
-    assert not news_highlights.highlights({"entries": []}, reference)
+    assert news_highlights.default_levels({"entries": others}) == (4, 5)
+    assert not news_highlights.highlights({"entries": []})
 
 
-def test_the_box_switches_to_s4_and_s5_as_the_record_s_s5_articles_age(
+def test_on_the_record_the_box_opens_on_s5_while_news_holds_enough_of_them(
     document: render_changelog.Document,
 ) -> None:
-    """On the record: the box opens on S5 while the third newest S5 article is at most
-    `FRESH_DAYS` old on the reference day, and on S4 and S5 the day after. With no day
-    given it measures from the build's own (`record_reference`), never the clock."""
+    """On the record: News holds at least `LIMIT` S5 articles, so the box opens on S5 and
+    shows the newest `LIMIT` of them. With all but `LIMIT - 1` of them rescored S4 it opens
+    on S4 and S5. The rule takes no day, so the render is the same on any day."""
     fives = [
         entry
         for entry in render_changelog.news_entries(document)
         if render_changelog.entry_significance(entry)["score"] == 5
     ]
-    third = date.fromisoformat(fives[news_highlights.LIMIT - 1]["date"])
-    last = third + timedelta(days=news_highlights.FRESH_DAYS)
-    assert news_highlights.default_levels(document, last) == (5,)
-    assert news_highlights.default_levels(document, last + timedelta(days=1)) == (4, 5)
-    shown = news_highlights.highlights(document, last + timedelta(days=1))
+    assert len(fives) >= news_highlights.LIMIT
+    assert news_highlights.default_levels(document) == (5,)
+    assert list(news_highlights.highlights(document)) == fives[: news_highlights.LIMIT]
+    assert list(inspect.signature(news_highlights.default_levels).parameters) == ["document"]
+    fewer = copy.deepcopy(document)
+    kept = {entry["id"] for entry in fives[: news_highlights.LIMIT - 1]}
+    for entry in fewer["entries"]:
+        if entry["id"] not in kept and entry["significance"]["score"] == 5:
+            entry["significance"]["score"] = 4
+    assert news_highlights.default_levels(fewer) == (4, 5)
+    shown = news_highlights.highlights(fewer)
+    assert len(shown) == news_highlights.LIMIT
     assert all(entry["significance"]["score"] in (4, 5) for entry in shown)
-    reference = overview_sections.record_reference()
-    assert news_highlights.default_levels(document) == news_highlights.default_levels(
-        document, reference
-    )
 
 
 def test_the_box_carries_the_newest_of_each_level_in_frozen_date_and_id_order() -> None:
@@ -144,10 +146,9 @@ def test_the_box_follows_new_s5_articles_with_and_without_t194(
             for entry in render_changelog.news_entries(data)
             if render_changelog.entry_significance(entry)["score"] == 5
         ]
-        reference = date(2026, 10, 23)
-        levels = news_highlights.default_levels(data, reference)
+        levels = news_highlights.default_levels(data)
         assert levels == ((5,) if len(fives) >= news_highlights.LIMIT else (4, 5))
-        shown = news_highlights.highlights(data, reference)
+        shown = news_highlights.highlights(data)
         assert len(shown) == news_highlights.LIMIT
         if levels == (5,):
             assert list(shown) == fives[: news_highlights.LIMIT]
@@ -272,7 +273,7 @@ def test_a_box_with_no_news_says_so_and_draws_no_filter() -> None:
     for entry in empty["entries"]:
         entry["significance"]["score"] = 2
     assert not render_changelog.news_entries(empty)
-    rendered = news_highlights.render(empty, date(2026, 10, 23))
+    rendered = news_highlights.render(empty)
     assert rendered == (
         '<div class="site-news" data-news data-news-limit="3" data-contributor-plain>'
         "<p>No news yet.</p></div>"

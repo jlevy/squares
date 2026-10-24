@@ -60,7 +60,15 @@ from devtools.render_overview import (
     paper_path,
 )
 from devtools.render_overview import PAPERS as PAPER_RECORDS
-from devtools.render_recent_results import REPORTED_MARK, SUPERSEDED, listed, superseded
+from devtools.render_recent_results import (
+    REPORTED_MARK,
+    SUPERSEDED,
+    Records,
+    lane_holders,
+    listed,
+    load_records,
+    superseded,
+)
 from devtools.repo_links import branch_file
 from devtools.result_status import CONFIRMED, STATUSES, recent_contributions_by_case
 from devtools.site_icons import account_icon, github_reference_icon
@@ -1440,9 +1448,6 @@ def added_entry(result: Result) -> str:
 #: How many of the newest days start open on the home page: the newest alone, so the
 #: section stays a few lines long.
 RECENT_OPEN = 1
-#: The register of named sources, whose `beyond_horizon_claims` are the dated rows
-#: beyond the case corpus.
-SOURCE_COVERAGE = FRONTIER / "source-coverage.yaml"
 #: The day each house best packing and each source's rows reached `main`, as `landed` is
 #: for a register entry (`devtools.stamp_landed`).
 LANDINGS = FRONTIER / "landings.yaml"
@@ -1512,7 +1517,7 @@ def arrival_reference(overview: Overview) -> date:
     """The newest day anything reached `main` by the record: a result's `landed`, a house
     best packing's or a source's rows' landing. It is the newest merge the build's
     records were stamped by, never the clock's or Git's, so two renders of one tree are
-    the same bytes. Recently Added's window and the News box's age rule end on it."""
+    the same bytes. Recently Added's window ends on it."""
     return max(
         added_reference(overview),
         *(day for _, day in house_landings().values()),
@@ -1521,29 +1526,30 @@ def arrival_reference(overview: Overview) -> date:
 
 
 @cache
-def record_reference() -> date:
-    """`arrival_reference` read from the records alone, without loading the overview:
-    the newest `landed` in the register and the newest landing. The News box's age rule
-    takes it where no overview is at hand (`news_highlights.default_levels`)."""
-    register = safe_load((FRONTIER / "results.yaml").read_text(encoding="utf-8"))
-    return max(
-        *(
-            date.fromisoformat(str(entry.get("landed") or entry["registered"]))
-            for entry in register["results"]
-        ),
-        *(day for _, day in house_landings().values()),
-        *source_landings().values(),
-    )
+def _house_records() -> Records:
+    """The register and the case records, read once, for `house_moves` to ask which
+    results a count's verified upper bound rests on."""
+    return load_records()
 
 
 def house_moves(since: date, until: date) -> list[HouseMove]:
     """The counts whose house best packing reached `main` from `since` to `until`, newest
     first and then by result: each under the result that houses it now, on the day `main`
     first held that house (`landings.yaml`). A count whose house changed again is listed
-    on the later day alone."""
+    on the later day alone.
+
+    A landing whose result no longer holds the count's verified upper bound is left out,
+    as a count with no landing is: `main` holds one when a pull request moved a house
+    without stamping it. The landing test turns CI red, and the page never says a
+    superseded result "is now the house best packing" (#736's review B, finding B2)."""
+    records = _house_records()
     moved: dict[tuple[date, str], list[int]] = {}
     for n, (result, day) in house_landings().items():
-        if since <= day <= until:
+        if (
+            since <= day <= until
+            and n in records.cases
+            and result in lane_holders(n, records, "upper", ["verified"])
+        ):
             moved.setdefault((day, result), []).append(n)
     ordered = sorted(moved, key=lambda key: (-key[0].toordinal(), int(key[1].split("-")[1])))
     return [
@@ -2515,7 +2521,8 @@ PROJECT_EXTRA_KEYS: dict[str, tuple[str, ...]] = {
 SOURCE_VENUES: dict[str, str] = {KINGBIRD: "Squares in Squares"}
 
 #: The source-coverage register: each source repository the record reviews, with the
-#: bibliography key its results are attributed under.
+#: bibliography key its results are attributed under, and the dated rows beyond the case
+#: corpus (`beyond_horizon_claims`) that Recently Added lists.
 SOURCE_COVERAGE = FRONTIER / "source-coverage.yaml"
 
 

@@ -238,6 +238,37 @@ def test_an_unstamped_house_or_source_is_left_out_and_the_render_carries_on(
     )
 
 
+def test_a_stale_house_landing_is_left_out_and_the_render_carries_on(
+    overview: overview_data.Overview, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """A landing that names a result the count's verified upper bound no longer rests on,
+    as `main` would hold after a pull request moved the house without stamping it, is
+    left out as an unstamped one is: the page never says a superseded result "is now the
+    house best packing" (#736's review B, finding B2)."""
+    since, until = _window(overview)
+    moves = house_moves(since, until)
+    assert moves
+    n, current = moves[0].counts[0], moves[0].result
+    held = standing.lane_holders(n, standing.load_records(), "upper", ["verified"])
+    assert current in held
+    stale = "T-001"
+    assert stale not in held
+    record = stamp_landed.read_landings(stamp_landed.LANDINGS.read_text("utf-8"))
+    moved = {
+        "houses": [
+            {"n": count, "result": stale if count == n else result, "landed": day}
+            for count, (result, day) in record.houses.items()
+        ],
+        "sources": [{"id": key, "landed": day} for key, day in record.sources.items()],
+    }
+    monkeypatch.setattr(overview_sections, "_landings", lambda: moved)
+    assert all(n not in move.counts for move in house_moves(since, until))
+    assert stale not in {move.result for move in house_moves(since, until)}
+    rendered = overview_sections.recently_added(overview)
+    assert rendered.startswith('<div class="site-rollup site-added">')
+    assert f">{stale}</a> is now the house best packing" not in rendered
+
+
 def test_one_window_bounds_every_kind_and_the_introduction_names_what_is_shown(
     overview: overview_data.Overview, section: str, days: dict[str, tuple[bool, str]]
 ) -> None:
@@ -258,7 +289,6 @@ def test_one_window_bounds_every_kind_and_the_introduction_names_what_is_shown(
     early = until - timedelta(days=1)
     assert all(move.day <= early for move in house_moves(since, early))
     assert all(found.day <= early for found in beyond_rows(since, early))
-    assert overview_sections.record_reference() == until
 
 
 def test_the_newest_day_starts_open_and_each_day_tallies_what_it_holds(

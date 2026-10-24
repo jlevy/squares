@@ -1237,15 +1237,17 @@ contributor articles use their component sheets and the same text tokens.
   Full result records retain the result’s real kind, status, claim and credit.
   The homepage’s News box shows the three newest News articles at the levels it opens
   on, ordered by the announcement’s frozen date and stable ID, followed by **All News**.
-  It opens on S5 alone where the three newest S5 articles all fall within 30 days of the
-  build’s reference day, the newest day its records say anything reached `main`, and
-  otherwise on S4 and S5, decided at render time and never from the clock
-  (`news_highlights.default_levels`; the owner, 22 October 2026, and #736’s review A).
+  It opens on S5 alone where News holds at least three S5 articles, and otherwise on S4
+  and S5, decided at render time from the archive and from no date
+  (`news_highlights.default_levels`; the owner, 22 October 2026: “preselected to S5 when
+  there are enough S5 items for the box, else S4+S5”). An earlier reading that also
+  required the three to fall within 30 days was a coordinator’s answer to #736’s review
+  A, never the owner’s; review B retired it.
   Above the cards, at the right, sits the archive’s own significance filter in its
   compact form (`render_changelog.news_filters(compact=True)`): the same buttons, at the
   shared small chooser’s size and height (Small choosers, below) and a lighter weight,
-  with no topics or reset, and the archive’s live count kept out of sight for screen
-  readers. With no article to show, the box says “No news yet.”
+  with no topics or reset, and the archive’s live count, hidden from sight but read by
+  screen readers. With no article to show, the box says “No news yet.”
   and draws no filter.
   A press shows the newest three at the chosen levels; the box carries the newest three
   of each level for that, hidden until chosen, and keeps its opening levels without

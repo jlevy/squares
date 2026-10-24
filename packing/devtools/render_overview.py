@@ -1465,10 +1465,7 @@ def overview_page() -> Page:
     overview = overview_data.load()
     values = {
         "HERO": overview_sections.hero(),
-        # The box's age rule ends on the same day as Recently Added's window.
-        "NEWS_PREVIEW": news_highlights.render(
-            render_changelog.load(), overview_sections.arrival_reference(overview)
-        ),
+        "NEWS_PREVIEW": news_highlights.render(render_changelog.load()),
         # What reached the site over the seven days to its newest arrival, from the records
         # (the owner, 22 October 2026): results, house best packings, dated rows.
         "RECENTLY_ADDED": overview_sections.recently_added(overview),
