@@ -128,6 +128,12 @@ def _historical_body(plan: apply.Plan) -> str:
 
 
 def _later_counts() -> set[int]:
+    """The counts a later selection took from these registrations.
+
+    It parses the whole coverage register, so a test asks once and not once per plan:
+    asked per plan, it was 50 parses and nearly all of the 14 to 20 seconds of call wall
+    time the trailing test took in CI on 23 October.
+    """
     coverage = safe_load(apply.COVERAGE.read_text())
     return superseded_counts(
         coverage,
@@ -143,13 +149,14 @@ def test_a_case_trails_its_report_exactly_where_the_certificate_does() -> None:
     printed side it was about."""
     exact = set(exact_optima.certificates.IMPROVING)
     assert exact >= TRAILING
+    later = _later_counts()
     for plan in apply.plans():
         case = safe_load(
             (apply.FRONTIER / f"n-{plan.n:03d}.md")
             .read_text(encoding="utf-8")
             .split("---\n")[1]
         )["packing"]
-        if plan.n in _later_counts():
+        if plan.n in later:
             # The newer report is separately reviewed; retain this packet's receipts
             # and evidence without pretending its geometry is still the best known.
             assert plan.registration.report in case["evidence"], plan.n
@@ -275,6 +282,7 @@ def test_a_later_registration_takes_a_count_and_keeps_the_earlier_packing() -> N
     still cites the September evidence, and states the packing it replaced."""
     taken = [plan for plan in apply.plans() if plan.previous is not None]
     assert sorted(plan.n for plan in taken) == [208, 209, 228, 263, 272, 303, 306]
+    later = _later_counts()
     for plan in taken:
         earlier = plan.previous
         assert earlier is not None
@@ -285,7 +293,7 @@ def test_a_later_registration_takes_a_count_and_keeps_the_earlier_packing() -> N
         case = safe_load(front)["packing"]
         # All seven are among Evan Daniel's exact optima (T-098), so both lanes hold
         # that side; the October packing stays the one the body describes.
-        if plan.n not in _later_counts():
+        if plan.n not in later:
             assert case["reported_upper_bound"]["value"] == exact_optima.side_text(plan.n)
             assert case["verified_upper_bound"]["value"] == exact_optima.side_text(plan.n)
         assert plan.registration.replay in case["evidence"], plan.n

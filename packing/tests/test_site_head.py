@@ -204,7 +204,11 @@ def test_every_page_of_the_site_carries_the_set_once_at_its_own_address(
         assert "Square Packing Project" not in title, name
         # kpress's own four tags are gone, not added to.
         assert len(head.meta("og:type")) == len(head.meta("twitter:card")) == 1, name
-    assert read_head(pages["index.html"]).titles == ("Overview · The Squares Project",)
+    # The homepage is Overview in the bar and the project's name everywhere it is
+    # previewed (the owner, 2026-10-23): the tab, Open Graph and X's card.
+    home = read_head(pages["index.html"])
+    assert home.titles == ("The Squares Project",)
+    assert home.meta("og:title") == home.meta("twitter:title") == ["The Squares Project"]
     assert read_head(pages["tutorial.html"]).meta("og:type") == ["article"]
     kinds = {name: read_head(page).meta("og:type") for name, page in pages.items()}
     assert [name for name, kind in kinds.items() if kind != ["website"]] == [
