@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-23 (resumed): land #736 and #742, #719 records (204 
 kind: epic
 status: in_progress
 priority: 1
-version: 143
+version: 144
 delegate: coord-intake-1024
 labels:
   - result-import
@@ -150,7 +150,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-23T04:56:08.269Z
-updated_at: 2026-10-24T19:58:28.611Z
+updated_at: 2026-10-24T19:59:10.101Z
 started_at: 2026-10-23T04:56:10.325Z
 ---
 
@@ -162,3 +162,5 @@ Resumes coord-intake-1021b's pass of 21-23 October (no epic of its own). Lanes a
 2026-10-23 15:20Z coord-intake-1023 status. Merged: #742 (598d23289), #749 (c1115c095). Posted: #732 verdict + import reply, #715 and #719 follow-ups (recorded in #753). Open intake PRs: #753 (T-231, T-229 lineage, reply records; CI red on page budget 204.html, a missing source card, a slow-marker test; lane fixing), #745 (T-232 n31 replay clean, review accepted, to map; T-233 four captures verified, n26 control failed closed on AXIS_ROUNDING, think-tcsl; T-233 stays V0/C1), #750 (Lean sources T-234..T-236 reported; waits on #753/#745 ids; stage 4 reviews owed), #747 (close step; review A changes requested; addressing), #748/#751/#752 (green; senior reviews running), #754 (owner answers into walks incl. D6; resumed), algebraic houses branch (9 adoptions; driver rerun of 258/259/302; no PR yet). Owner questions open: think-r8cn (Q13 drawings), think-4o9c (register kind for s(2)-s(5) Lean routes), T-157 human oversight for V4/C4, compute cap for the pass (think-lh7d's 40 CPU-h item rule applied), above-1024 D3/D5/N1/N4/N5/N6, owner-reserved issues #557/#565/#570/#574, T-154 S5 confirmation. Answered today: fwa9, 8m4k, f2io D1/D2/D6, 8krd, 7hq0, llit N2/N3, qh3s (no preference: S1 line kept). Session usage limit hit at 10:30Z stopped four lanes; resumed 15:10Z.
 
 2026-10-24 ~08:20Z coord-intake-1024 (Claude Code remote session, claude/gracious-babbage-szx392): HANDOFF. coord-intake-1023's session (session_014X1vTGQSoQHeyW8Lt5ps7K) was interrupted; the owner asked this session to resume the pass and land everything in flight without further confirmation (OR-10 continuation). State at takeover, main e5c1c64e3 (#756): open drafts #781 (think-494l, Fang note; green, no review), #787 (think-9i18, stage 7 records; green, no review), #788 (think-3oxz, measure_news_page; green, review A at 463f78d3f unaddressed), #736 (think-xae5; review B approves, final-sync decisions B1/B3/B4/B5 pending). Not ours: #744 (owner: another agent's), #599/#574/#435/#403. Lanes of coord-intake-1023 still marked in_progress with no live worker: c-import-763-1024 (think-ptkk, no branch pushed), c-couzo-answers-1024 (think-mdfr, no branch), c-post-770-1024 (think-dxmr; the 16 posts were made, records ride #787). Plan: review/address/merge #788, #787, #781, #736; stage 7 posts after deploy; resume think-ptkk and think-mdfr; sweep; close stale lane beads.
+
+2026-10-24 ~19:20Z coord-intake-1024 status. MERGED this session (each reviewed, dispositions posted, hosted CI green, merge commit): #787 09:02Z (stage 7 records), #788 09:26Z (measure_news_page), #736 10:47Z (home News box, owner's take-over; follow-up review C), #781 11:18Z (Fang note; T-163 V3/C1), #791 11:51Z (plan: rows above 1024), #790 12:07Z (Couzo's 24 Oct answers, watch reads), #789 13:22Z (#763 PR A: T-240 reported, 194 rows), #792 17:34Z (T-241 Couzo 304, T-242 Daniel 268/304), #793 18:32Z (W7 code: windows, Göbel module, construction checker, hosted shards), #796 19:06Z (OR-1 tools: measure_identity, sharp-controls). POSTED (after verified deploys): #534 and #536 finals + closed; #603 status; #672, #678 finals + closed; #715 follow-up; #763 acknowledgement; #446 reopened (closed by a commit message; think-ulc1). IN FLIGHT: #794 (#763 PR B: T-240 V3/C3, adopted and regularized at 268 and 303) dated 25 Oct, merges at 00:10Z via scheduled check-in trig_01DhTFUTDPGkUQQYuVtXQfPv; #795 (the 99 Kaggle-credited sides and the push's 86 intermediate sides, 185 rows) in follow-up review C. NEXT: think-hx0e (T-241/T-242 stage 4 and re-housing at 268/304, pass day after 25 Oct), think-gn29 (43f666c), think-20oj (regularizer views), R1 (owner publishes data/couzo-715-certificates-v1), R2 (owner publishes #732 shards), think-g2qy (recipes with best/ certificates). OWNER QUESTIONS: think-lsam (News budget; tool landed), think-kzme (D6 sub-question), think-zkxy (Friedman), think-nq5g (send wand125 M-1..M-3), D5/N1/N5 (plan #791), #789 A7 (stage 2 presumption rule's generality), row-7 view at 268 (#794), Daniel's acknowledgement (no issue; draft in think-l49q).
