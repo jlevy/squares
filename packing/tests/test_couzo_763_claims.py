@@ -157,3 +157,81 @@ def test_a_derivation_that_misses_the_issue_s_counts_is_refused() -> None:
     record = json.loads(claims.RECEIPT.read_text(encoding="utf-8"))
     record["summary"] = {**record["summary"], "rows": 435}
     assert claims.control_problems(record) == ["the derivation gives rows = 435, the issue 436"]
+
+
+def _notebook(n: int, run: int = 361592092) -> dict[str, Any]:
+    """A manifest witness naming the certificate `_entry` reads, from a notebook run."""
+    return {
+        "certificate": f"certificates/best/n{n}.cert",
+        "certificate_sha256": "0" * 64,
+        "provenance": {
+            "source_provenance": {
+                "notebook": "https://www.kaggle.com/code/someone/a-notebook",
+                "run": run,
+                "license": "per the notebook",
+            }
+        },
+    }
+
+
+def test_a_notebook_row_is_below_goebel_and_no_earlier_publication() -> None:
+    """The notebook rows (think-lyf9): another author's certificate beyond the corpus is taken
+    strictly below Göbel's construction at its count, and not where it is at or above it, where
+    the same count and side was published earlier, or where the credit is Couzo's."""
+    from devtools import intake_ledger  # noqa: PLC0415
+
+    n = 400
+    form = intake_ledger.goebel_form(n)
+    goebel = claims.Bound(Fraction(form.p), Fraction(form.q))
+    below = Fraction(goebel.ceiling()) - Fraction(1, 10**6)
+    above = Fraction(goebel.ceiling())
+    witnesses = {str(n): _notebook(n)}
+    other = 'kyleluecke, Kaggle notebook "inos"'
+
+    def taken(
+        side: Fraction,
+        credit: str = other,
+        earlier: frozenset[tuple[int, Fraction]] = frozenset(),
+    ) -> bool:
+        found = claims.others({str(n): _entry(n, side, credit)}, witnesses, earlier)
+        return [item["n"] for item in found] == [n]
+
+    assert taken(below)
+    assert not taken(above)
+    assert not taken(below, earlier=frozenset({(n, below)}))
+    assert not taken(below, credit="Francisco Couzo")
+    (item,) = claims.others({str(n): _entry(n, below, other)}, witnesses, frozenset())
+    assert item["notebook"] == witnesses[str(n)]["provenance"]["source_provenance"]
+    assert item["goebel"]["bound"] == goebel.literal()
+
+
+def test_a_notebook_row_needs_the_manifest_to_name_its_certificate() -> None:
+    """The notebook is read from the witness of the certificate the row reads; a witness
+    naming another file, or no notebook, is refused, not guessed."""
+    from devtools import intake_ledger  # noqa: PLC0415
+
+    n = 400
+    form = intake_ledger.goebel_form(n)
+    side = Fraction(claims.Bound(Fraction(form.p), Fraction(form.q)).ceiling()) - 1
+    entry = _entry(n, side, "alexchilton")
+    wrong = _notebook(n) | {"certificate": "certificates/best/n401.cert"}
+    with pytest.raises(claims.ClaimError, match="names another certificate"):
+        claims.others({str(n): entry}, {str(n): wrong}, frozenset())
+    bare = _notebook(n) | {"provenance": {"source_provenance": {}}}
+    with pytest.raises(claims.ClaimError, match="no notebook and run"):
+        claims.others({str(n): entry}, {str(n): bare}, frozenset())
+
+
+def test_the_notebook_rows_are_the_triage_s_99() -> None:
+    """The receipt's notebook rows give the stage 1 triage's counts: 99 sides at 325 to 1024,
+    87 certificates and 12 L-border recipes, across seven notebook runs, none a deletion."""
+    record = json.loads(claims.RECEIPT.read_text(encoding="utf-8"))
+    assert claims.others_problems(record) == []
+    found = record["summary"]["others"]
+    assert found["deletions"] == []
+    assert sum(found["by_run"].values()) == 99
+    assert len(found["by_run"]) == 7
+    assert all(325 <= item["n"] <= 1024 for item in record["others"])
+    assert {item["n"] for item in record["others"]}.isdisjoint(
+        {item["n"] for item in record["claims"]} | set(record["summary"]["unrequested"])
+    )
