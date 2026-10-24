@@ -3,9 +3,9 @@ type: is
 id: is-01m5nfdzaazqwvp864r9ahqy8q
 title: "Triage the authors' new comments on #670, #675, #715, #719, #732 and #734 (23 October, after our replies)"
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 4
+version: 5
 delegate: c-triage-1023b
 labels: []
 dependencies: []
@@ -13,8 +13,12 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-23T22:52:14.026Z
-updated_at: 2026-10-24T01:14:45.364Z
+updated_at: 2026-10-24T08:26:48.584Z
 started_at: 2026-10-23T22:52:20.825Z
+closed_at: 2026-10-24T08:26:48.584Z
+close_reason: "Triage complete; the authors' answers were taken into the record by #766 (5f8f005a3) and #769 (34eb8bb75); Couzo's 24 October comments are think-mdfr's."
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes

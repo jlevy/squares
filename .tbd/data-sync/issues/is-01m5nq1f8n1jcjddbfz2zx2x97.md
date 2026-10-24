@@ -3,9 +3,9 @@ type: is
 id: is-01m5nq1f8n1jcjddbfz2zx2x97
 title: "Records PR A: the authors' answers on #670, #675, #715 and #734, and T-226's lineage through T-186 (chain credit on T-223, T-225, T-228, T-229, T-231)"
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 6
+version: 7
 delegate: c-records-a-1024
 labels: []
 dependencies: []
@@ -16,8 +16,12 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-24T01:05:12.981Z
-updated_at: 2026-10-24T02:40:30.259Z
+updated_at: 2026-10-24T08:25:43.592Z
 started_at: 2026-10-24T01:05:24.492Z
+closed_at: 2026-10-24T08:25:43.592Z
+close_reason: "Records PR A landed as PR #766 (5f8f005a3, 2026-10-24T06:23:22Z)."
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes

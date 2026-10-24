@@ -5,8 +5,8 @@ title: "Owner decisions for #715 (and #666): counts above 1024, recipe-only rows
 kind: task
 status: in_progress
 priority: 1
-version: 14
-delegate: coord-intake-1021b
+version: 15
+delegate: coord-intake-1024
 labels:
   - result-import
   - decision
@@ -14,7 +14,7 @@ dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-10-21T22:51:56.373Z
-updated_at: 2026-10-24T05:27:49.036Z
+updated_at: 2026-10-24T08:27:00.174Z
 started_at: 2026-10-21T22:51:57.158Z
 ---
 From the read-only triage of #715 (c-triage-715; full text: policy.md in the coordinator scratchpad triage-715/). No rule sets a ceiling above the n <= 324 horizon or mentions 1024, but the record holds nothing above 998, and #666's eight counts above 1024 wait on the same question.

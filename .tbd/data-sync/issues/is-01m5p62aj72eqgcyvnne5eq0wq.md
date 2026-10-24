@@ -3,9 +3,9 @@ type: is
 id: is-01m5p62aj72eqgcyvnne5eq0wq
 title: "Address PR #769 review A (A1-A10)"
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 4
+version: 5
 delegate: c-fix-769-1024
 labels: []
 dependencies: []
@@ -13,8 +13,12 @@ parent_id: is-01m5p3zeaxgseqzx8vxfcbtfbj
 hold: null
 hold_until: null
 created_at: 2026-10-24T05:27:49.575Z
-updated_at: 2026-10-24T06:47:59.918Z
+updated_at: 2026-10-24T08:25:39.357Z
 started_at: 2026-10-24T05:27:56.045Z
+closed_at: 2026-10-24T08:25:39.357Z
+close_reason: "PR #769 merged 2026-10-24T06:48:50Z (34eb8bb75); A1-A10 fixed, dispositions https://github.com/jlevy/squares/pull/769#issuecomment-6381085096."
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes

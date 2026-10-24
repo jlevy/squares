@@ -3,10 +3,10 @@ type: is
 id: is-01m5kjb20ed6wb6c1zbp2my2xc
 title: "Apply the owner's D1 answer: track beyond-horizon rows above 1024 (#666, #715, #719, #732), with a hosted-data manifest for the bulk certificates (think-f2io, 2026-10-23)"
 kind: task
-status: in_progress
+status: open
 priority: 1
-version: 5
-delegate: c-triage-1024-1023
+version: 7
+delegate: null
 labels:
   - result-import
 dependencies: []
@@ -14,7 +14,7 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-23T05:04:35.342Z
-updated_at: 2026-10-23T23:07:37.271Z
+updated_at: 2026-10-24T08:27:05.217Z
 started_at: 2026-10-23T05:05:14.273Z
 ---
 Owner decision of 23 October (think-f2io note): yes, no ceiling. Needs a plan: the rows' walks above 1024 (report order), custody without Git blobs (D4 hosted-data manifest; OR-18), the replay price at thousands of certificates (compute cap), and the frontier README rule. Stage 1 triage and pricing first, read-only.
@@ -40,3 +40,5 @@ Owner decision of 23 October (think-f2io note): yes, no ceiling. Needs a plan: t
 #715 and #732 claim counts up to 9913, so the above-1024 work must handle this before any import, receipt or gather above 1073: extend the program's reach and re-verify it against a larger build (review A of #754 matched it against a 5000 build to 1073), or split every input at 1073.
 
 Two more obligations from review B1 (`intake_ledger.answer_problems`, #754): a ledger read from 23 October lists the `restatement` ruling through its top count, so the 66 counts above 1024 where #732 is below #715's print by less than 1e-12 (think-f2io) are walked under it; and it applies Göbel's baseline at every count it walks beyond 324, through its `classical-constructions` ruling or a frozen start member. A ruling it does not apply at some count, as Göbel's above 1073, is named under `rulings_not_applied` with the reason, or `check`, `render` and `gather` fail.
+
+2026-10-24 coord-intake-1024: released (no live lane after the interruption of coord-intake-1023's session); open for the next lane. #763's 233 rows above 1024 join this walk (think-cnn7's plan).

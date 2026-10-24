@@ -3,9 +3,9 @@ type: is
 id: is-01m5kjy9a0vx64b2dfjqjd7fz4
 title: "Tracker audit 2026-10-23 part b: open and in-progress result-import beads (scratchpad audit/part-b.txt)"
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 3
+version: 4
 delegate: c-audit-b-1023
 labels:
   - audit
@@ -14,8 +14,12 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-23T05:15:05.407Z
-updated_at: 2026-10-23T05:33:08.973Z
+updated_at: 2026-10-24T08:26:54.242Z
 started_at: 2026-10-23T05:15:06.439Z
+closed_at: 2026-10-24T08:26:54.241Z
+close_reason: Audit part b delivered in this bead's notes (the scratchpad copy was lost with the interrupted session); its findings name their owning beads.
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes

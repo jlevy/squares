@@ -3,9 +3,9 @@ type: is
 id: is-01m5ntqg8kza7vn9e3v650vndr
 title: Catch up every 'Review pending' result on the profiles (T-073/T-080, T-083/T-084, T-163) and track each pending review's state in its GitHub issue (owner, 24 October)
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 7
+version: 8
 delegate: c-review-pending-1024
 labels: []
 dependencies: []
@@ -16,8 +16,12 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-24T02:09:40.627Z
-updated_at: 2026-10-24T05:40:14.239Z
+updated_at: 2026-10-24T08:26:51.457Z
 started_at: 2026-10-24T02:09:50.200Z
+closed_at: 2026-10-24T08:26:51.457Z
+close_reason: "Landed as PR #770 (11d0ab06b, 2026-10-24T07:14:46Z): every pending review tracked on an issue; the 16 acknowledgements were posted 07:31Z."
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes

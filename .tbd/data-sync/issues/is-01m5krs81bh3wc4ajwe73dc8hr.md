@@ -3,9 +3,9 @@ type: is
 id: is-01m5krs81bh3wc4ajwe73dc8hr
 title: "Stage 4 mathematical review of T-232: wand125's s(31) >= 2391/400 fine-net certificate (no issue)"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 3
+version: 4
 delegate: c-review-t232-math
 labels:
   - result-import
@@ -15,8 +15,12 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-23T06:57:11.722Z
-updated_at: 2026-10-23T09:35:50.341Z
+updated_at: 2026-10-24T08:26:43.151Z
 started_at: 2026-10-23T06:57:22.296Z
+closed_at: 2026-10-24T08:26:43.151Z
+close_reason: "T-232's stage 4 review landed on main with #745 (af9c9e850): docs/project/reviews/review-2026-10-23-wand125-n31-fine-net.md and the packet's review/review-2026-10-23/; T-232 V3/C3. M-1 to M-3 and the questions moved to think-nq5g."
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes

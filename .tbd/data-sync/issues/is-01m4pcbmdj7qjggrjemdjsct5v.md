@@ -5,8 +5,8 @@ title: "Import wand125: s(31) >= 2391/400 = 5.9775 by the mixed_n31_L59775 fine-
 kind: task
 status: in_progress
 priority: 2
-version: 9
-delegate: c-lower-1023
+version: 10
+delegate: coord-intake-1024
 labels:
   - result-import
 dependencies: []
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-11T21:02:04.210Z
-updated_at: 2026-10-24T06:56:18.557Z
+updated_at: 2026-10-24T08:27:01.803Z
 started_at: 2026-10-23T06:18:58.210Z
 ---
 Found in the 2026-10-11 intake read of wand125/square-packing (think-q655); nothing on GitHub asked. Commit 23e3186 (2026-10-11T00:51:18Z, before the head 04fbef0) adds problems/square-lower-bounds/certificates/mixed_n31_L59775/: a fine-net measure certificate reporting s(31) >= 2391/400 = 5.9775 (31 unit squares do not fit in the closed square of side 2391/400), mass 3099999/100000 < 31, core B = 4999/5000, declared net proof_net {step 1/5002, last 2072}, 2,073 directions; candidate digest 2d8d9d59...; the candidate and check2 receipts sit in the repository's data release, not the commit. The author's pre-publication check ran sqverify_fast (jlevy/squares crate with proof_net support, wand125 branch fe12e036c, source digest ab6e33e164db) from the bundle's check2/src on a fresh Ubuntu 24.04 machine: 2073/2073 directions VERIFIED in 7,277 s, mass x 0.985 control refused in 32 directions.

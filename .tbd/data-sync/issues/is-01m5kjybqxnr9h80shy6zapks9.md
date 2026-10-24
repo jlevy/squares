@@ -3,9 +3,9 @@ type: is
 id: is-01m5kjybqxnr9h80shy6zapks9
 title: "Stage 7 drafts after #742: #732 import reply, #715 and #719 follow-ups, report-order verdict comments"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 5
+version: 6
 delegate: c-stage7-753-1024
 labels:
   - result-import
@@ -14,8 +14,12 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-23T05:15:07.900Z
-updated_at: 2026-10-24T01:28:01.596Z
+updated_at: 2026-10-24T08:26:47.317Z
 started_at: 2026-10-23T05:15:09.045Z
+closed_at: 2026-10-24T08:26:47.317Z
+close_reason: "The #732 import reply, #715 and #719 follow-ups were posted 07:02:07Z-07:02:09Z after #769; their records ride PR #787 (think-9i18)."
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes

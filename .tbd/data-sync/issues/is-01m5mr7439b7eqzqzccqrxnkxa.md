@@ -3,9 +3,9 @@ type: is
 id: is-01m5mr7439b7eqzqzccqrxnkxa
 title: "Import Amund Kristiansen: s(303) <= 17.909762327476, 9.89e-6 below T-230 (#755)"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 14
+version: 15
 delegate: c-stage7-757-1024
 labels:
   - result-import
@@ -18,8 +18,12 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-23T16:06:32.296Z
-updated_at: 2026-10-24T06:15:35.492Z
+updated_at: 2026-10-24T08:25:47.183Z
 started_at: 2026-10-23T16:06:37.444Z
+closed_at: 2026-10-24T08:25:47.183Z
+close_reason: "#755 imported: T-239 registered, reviewed V3/C3 and adopted at 303 in PR #757 (c5697c2f2, 2026-10-24T05:56:09Z); #755's final reply posted and the issue closed 06:17Z; its reply/close record rides PR #787 (think-9i18)."
+resolution: null
+duplicate_of: null
 ---
 Issue #755 (https://github.com/jlevy/squares/issues/755), opened 2026-10-23T11:12:48Z by amundsk (Amund Kristiansen): one upper bound at 303, a dilation certificate made with Evan Daniel's dilate_cert.py (evand 7982d7a), gist 78f9f0e7b4669f2f509a281845081768 at 511f56bf6e6afb4eb22f12d31371c2a2fe7b4767, s303_amund.cert SHA-256 9ec01059b35cc983cb28a1bb33bd215a2717228f7efd182e1724de6b22dc511b, side 223872029093440709529093216833/12500000000000000000000000000. Below the house T-230 (Daniel, #728) by 9.89e-6 if verified. Stages 1-3 then stage 4 (separate review lane), then adoption and regularization at 303 (think-ykgh owns 303's open row-7 review).
 
