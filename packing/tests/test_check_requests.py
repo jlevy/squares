@@ -1427,6 +1427,55 @@ def test_pending_reviews_name_each_result_its_issue_and_whether_the_issue_is_cur
     )
 
 
+def test_held_and_closed_trackers_are_listed_apart_from_the_stale() -> None:
+    """Review A6 on #770: no pass posts on an issue held for the owner, so a result such an
+    issue owes a reply is listed as held, not among the stale the pass answers; and a
+    result tracked only on a closed issue is marked so rather than shown plainly current."""
+    said = [
+        {
+            "result": "bound",
+            "id": "T-005",
+            "verification": "V0",
+            "confirmation": "C0",
+            "status": "recorded",
+        }
+    ]
+    held = issue(held=HOLD, results=[{"key": "lower", "claim": "c", "register": ["T-002"]}])
+    closed = issue(
+        number=8,
+        state="closed",
+        results=[{"key": "bound", "claim": "c", "register": ["T-005"]}],
+        replies=[reply(1, reported=said)],
+    )
+    rows = {
+        row.id: row for row in check_requests.pending_rows(record(held, closed), REGISTER, {})
+    }
+    assert rows["T-002"].held()
+    assert not rows["T-002"].tracked()
+    assert not rows["T-002"].closed_only()
+    assert rows["T-005"].tracked()
+    assert rows["T-005"].closed_only()
+    assert not rows["T-005"].held()
+    lines = check_requests.pending(record(held, closed), REGISTER, {})
+    cells = {line.split(" | ")[0][2:]: line for line in lines if line.startswith("| T-")}
+    assert cells["T-002"].endswith(
+        "| #7 (open, held for the owner since 2026-10-23, pending the owner's confirmation) "
+        "| held for the owner: an acknowledgement: nothing has been posted on this issue "
+        "(and 1 more) |"
+    )
+    assert cells["T-005"].endswith("| #8 (closed) | yes, on a closed issue |")
+    assert lines[-1] == (
+        "3 results with a pending review; 1 with no tracking issue, 0 of them at S4 or "
+        "above; 0 whose tracking issue does not state its present state; 1 held for the "
+        "owner, whose issues no pass posts on (T-002); 1 tracked only on a closed issue "
+        "(T-005)."
+    )
+    unheld = issue(results=[{"key": "lower", "claim": "c", "register": ["T-002"]}])
+    assert not {
+        row.id: row for row in check_requests.pending_rows(record(unheld), REGISTER, {})
+    }["T-002"].held()
+
+
 def test_the_live_backlog_and_report_render() -> None:
     live = check_requests.load_record()
     register = check_requests.load_register()

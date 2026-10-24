@@ -1310,6 +1310,13 @@ What lets an agent post is the `github-workflows` grant, which covers issues.
   holds, so it stays listed until it is settled.
   The pass answers every issue the view marks stale, and reports to the owner, before
   opening any, the results it lists with no tracking issue.
+  The view lists apart a result whose owing issues are all held for the owner, since no
+  pass posts on a held issue until the owner lifts the hold, and marks one tracked only
+  on closed issues, which still count as tracking it.
+  Two follow-ups it cannot see are the pass’s to post by hand: the one a comparison owes
+  once settled, since it leaves the view as it settles (#603 for T-163), and those owed
+  where an issue names a result only in an ask, not in its `results` (#532 for T-142 to
+  T-144).
 - **A settled issue is closed with its final comment**, after the verified deploy, once
   nothing the author asked for is queued and no question to the author would change the
   record: [Close a Settled Issue](#close-a-settled-issue).
@@ -1524,7 +1531,7 @@ Run each command from `packing/` as
 | none | The gate step: the schema holds and every id resolves; one line per issue |
 | `--report` | A table per issue: each result’s entries, rungs, state, how it was confirmed and whether its id is on `main`; the replies due; whether it is closeable |
 | `--backlog` | Every register entry below `V3` or `C3`, with its `next_rung`, its `activity`, the beads it names and the issues it serves |
-| `--pending` | Every pending review (stage 7): the backlog’s entries, any entry naming an unfinished confirmation or activity, and the record index’s unassessed comparisons, each with its beads, its tracking issues and whether one states its present state; then the count with no tracking issue |
+| `--pending` | Every pending review (stage 7): the backlog’s entries, any entry naming an unfinished confirmation or activity, and the record index’s unassessed comparisons, each with its beads, its tracking issues and whether one states its present state; then the count with no tracking issue, the stale, those held for the owner and those tracked only on closed issues. It does not see the follow-up a settled comparison owes, nor a result an issue names only in an ask |
 | `--draft N` | The status comment for issue N, ending in the Claude Code footer; it refuses unless `HEAD` is on `origin/main` |
 | `--github` | Read-only: the issues the record lacks, the replies missing from it, the comments created or edited after an entry’s `read_through`, and the `result-report` entries and entries marked `intake: true` whose issues lack the `intake` label |
 

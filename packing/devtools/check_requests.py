@@ -1223,6 +1223,22 @@ class PendingRow:
         owed has been posted, and no comparison is left that no reply can state."""
         return any(not issue.due for issue in self.issues) and not self.comparisons
 
+    def held(self) -> bool:
+        """Whether every issue that owes it a reply is held for the owner, where no pass
+        posts: it is listed as held, not among the stale a pass answers."""
+        owing = [issue for issue in self.issues if issue.due]
+        return (
+            bool(owing)
+            and not self.tracked()
+            and not self.comparisons
+            and all(issue.held for issue in owing)
+        )
+
+    def closed_only(self) -> bool:
+        """Whether every issue that tracks it is closed: it still counts as tracked, and
+        the view says so."""
+        return bool(self.issues) and all(issue.state == "closed" for issue in self.issues)
+
 
 def pending_rows(
     record: Mapped, register: Register, unresolved: Mapping[str, Sequence[str]]
@@ -1298,7 +1314,8 @@ def pending_rows(
 def pending(
     record: Mapped, register: Register, unresolved: Mapping[str, Sequence[str]]
 ) -> list[str]:
-    """The pending reviews as a table, then what lacks a current tracking issue."""
+    """The pending reviews as a table, then what lacks a current tracking issue, apart
+    from what is held for the owner, and what is tracked only on closed issues."""
     rows = pending_rows(record, register, unresolved)
     lines = [
         "# Pending Reviews",
@@ -1316,11 +1333,11 @@ def pending(
         elif row.comparisons:
             current = "no: no reply states the comparison"
         elif row.tracked():
-            current = "yes"
+            current = "yes, on a closed issue" if row.closed_only() else "yes"
         else:
             due = [reason for issue in row.issues for reason in issue.due]
             more = f" (and {len(due) - 1} more)" if len(due) > 1 else ""
-            current = f"no: {due[0]}{more}"
+            current = f"{'held for the owner' if row.held() else 'no'}: {due[0]}{more}"
         what = [
             *row.pending,
             *(f"comparison: {line}" for line in comparison_lines(row.id, row.comparisons)),
@@ -1331,7 +1348,9 @@ def pending(
         )
     untracked = [row for row in rows if not row.issues]
     major = [row.id for row in untracked if row.significance >= TRACKED_FROM]
-    stale = [row.id for row in rows if row.issues and not row.tracked()]
+    stale = [row.id for row in rows if row.issues and not row.tracked() and not row.held()]
+    held_rows = [row.id for row in rows if row.held()]
+    closed = [row.id for row in rows if row.tracked() and row.closed_only()]
     lines += [
         "",
         f"{len(rows)} results with a pending review; {len(untracked)} with no tracking "
@@ -1339,6 +1358,17 @@ def pending(
         + (f" ({', '.join(major)})" if major else "")
         + f"; {len(stale)} whose tracking issue does not state its present state"
         + (f" ({', '.join(stale)})" if stale else "")
+        + (
+            f"; {len(held_rows)} held for the owner, whose issues no pass posts on "
+            f"({', '.join(held_rows)})"
+            if held_rows
+            else ""
+        )
+        + (
+            f"; {len(closed)} tracked only on a closed issue ({', '.join(closed)})"
+            if closed
+            else ""
+        )
         + ".",
     ]
     return lines
