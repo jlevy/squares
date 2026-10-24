@@ -897,6 +897,16 @@ FIRST_PUBLISHED = PUBLICATION_HISTORY[-1].first_published
 #: The leading entry is proposed for the next publication; confirm its date at first deployment.
 EXPLAINER_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.4.23",
+        first_published="October 24, 2026",
+        result_scope=(
+            "Update the registered result count after the registrations of the Lean "
+            "formalization reports of Hosono at 21 (T-234) and 59 (T-235) and of Daniel "
+            "for Fang's theorems (T-236), of the classical values at 2 to 5 (T-237) and "
+            "of chelokot's and Daniel's Lean proofs of them (T-238)."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.4.22",
         first_published="October 24, 2026",
         result_scope=(
@@ -1430,6 +1440,18 @@ class ReleaseImpactDecision(NamedTuple):
 # New component cuts append decisions here, newest first, alongside their own histories.
 # No impact is invented retrospectively for the published baseline editions.
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
+    ReleaseImpactDecision(
+        component="paper:n11-lower-bounds-explainer",
+        previous_version="v0.4.22",
+        version="v0.4.23",
+        impact="patch",
+        reason=(
+            "Update the registered result count after the registrations of the Lean "
+            "formalization reports of Hosono at 21 (T-234) and 59 (T-235) and of Daniel "
+            "for Fang's theorems (T-236), of the classical values at 2 to 5 (T-237) and "
+            "of chelokot's and Daniel's Lean proofs of them (T-238)."
+        ),
+    ),
     ReleaseImpactDecision(
         component="paper:n11-lower-bounds-explainer",
         previous_version="v0.4.21",
@@ -2713,8 +2735,15 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "render_n11_optimality_review, render_n11_threshold_bound_review and "
             "render_packing_methods write every file byte-identical across all four. The "
             "explainer counts the register (233 entries here, 230 on main) and differs "
-            "only there; it takes its successor, v0.4.22, after merging main 77aba4c02. No "
-            "PDF was printed; each prints from that HTML. Retain v0.1.11, v0.1.4 and v0.2.7."
+            "only there; it takes its successor, v0.4.22, after merging main 77aba4c02. "
+            "Measured again at 2b064e103, after T-237, T-238, chelokot's coverage entry and "
+            "the [Friedman DS7] bibliography entry, against main 0bbb0a2c4 (#754): at link "
+            "revision 0bbb0a2c, twice from this tree and twice with main's version of each "
+            "of the 16 files the branch modifies swapped in, release.py and tests aside (69 "
+            "files each), the three write every file byte-identical, and the explainer "
+            "differs only in counting 236 results against main's 231, so it takes v0.4.23 "
+            "over main's v0.4.22. No PDF was printed; each prints from that HTML. Retain "
+            "v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
     ReleaseNoPublicChange(
