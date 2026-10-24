@@ -5,7 +5,7 @@ title: "Import the 99 Kaggle-credited sides franciscouzo/square-packing publishe
 kind: task
 status: in_progress
 priority: 1
-version: 13
+version: 14
 delegate: c-import-lyf9-1024
 labels:
   - result-import
@@ -16,7 +16,7 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-24T11:57:05.011Z
-updated_at: 2026-10-24T19:57:46.397Z
+updated_at: 2026-10-24T20:19:03.827Z
 started_at: 2026-10-24T13:38:16.607Z
 ---
 
@@ -159,3 +159,5 @@ LEFT
 - B2 fixed: intake_ledger refuses a tie in reported_at unless every tied claim has a distinct first_committed (_tie_problem); the reviewer's red control is test_a_tie_in_time_with_one_unknown_commit_time_is_refused.
 - B3 fixed: push claims are held by the index's credit (_push_holder): notebook run, publisher only where is_own, else OTHER_AUTHOR with no release; 994 at efef7d1 is Polkovskyi's, still a restatement, and the efef7d1 note reads Couzo's own (39) and 1 credited to Polkovskyi. Control: test_a_push_side_another_author_is_credited_with_has_no_release.
 - Review B round, pushes: bdf789c9b (main 84d4a75af, #796, merged; hosted typecheck failed on the Göbel form #793 made optional, unnarrowed in couzo_763_claims), then 439861d40 (narrowed); hosted CI green at 439861d40 (runs 40126801264, 40126801302).
+
+2026-10-24T20:25Z coordinator: review C (issuecomment-6389018390) approves. C1 fixed in a65b63819 (recipe jobs by Release.key, plus test); C2 deferred to think-yeol. Dispositions issuecomment-6389064041. Waiting for CI on a65b63819, then merge gate.
