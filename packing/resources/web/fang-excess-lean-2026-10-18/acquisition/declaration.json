@@ -1,0 +1,61 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "thesnakefang-squarepack-lean",
+  "source_url": "https://github.com/TheSnakeFang/squarepack-lean",
+  "source_ref": "main",
+  "source_commit": "947bdaec40ead1105cfb00c2968e2484b7d1b40b",
+  "retrieved_at_utc": "2026-10-24T04:57Z",
+  "git_scope": "A blobless clone of TheSnakeFang/squarepack-lean, whose head is the pin 947bdae (2026-10-18T20:41:46Z, 'MIT licence; README points at the public certificate bundle'), checked out in full. The pin changes only LICENSE and one line of README.md from 837eca1 (2026-10-13T12:49:17Z), whose proof sources the note v0.9 names. The scope is the whole tree, 141 files: the Lean project (the root module, the eight hand-written modules, the vendored specification, the 17 generated piece modules and the 82 generated data and chunk modules), the build pins, the README, STATUS and licences, the 17 certificates the data modules are generated from, and the generator scripts. Sqlean/Data/N211.lean and its chunks and Sqlean/Pieces/N211.lean, de Winter's 211 piece, are gitignored and not in the tree. Nothing in the tree was executed.",
+  "archived_dir": "source",
+  "license": "MIT, Copyright (c) 2026 Kevin Fang (LICENSE). Sqlean/Vendor/Spec.lean and ExactPack.lean and certs/daniel/ are Evan Daniel's, MIT (Sqlean/Vendor/LICENSE-evand, NOTICE; certs/daniel/LICENSE, NOTICE); the NOTICE says only ExactPack.lean's import line was changed. De Winter's 211 packing carries no licence and is fetched by scripts/fetch_211.sh, not committed. The pin's commit carries a Claude (Anthropic) co-author trailer; Kevin Fang's comment 6255103888 on jlevy/squares issue 603 (2026-10-18T21:02:13Z) says 'The search, checkers, bundle and Lean project were written with Claude as a coding and research agent, directed and reviewed by me.'; the note's acknowledgements say the same of the search software, the verifiers, the gluing program and the bundle, and of the Lean only that it reuses Evan Daniel's specification and certificate lemmas.",
+  "claims": [
+    "Sqlean/Main.lean: theorem UnitSquarePacking.theorem1 (n : ℕ) (h : 15 ≤ n) : minSide (n ^ 2 - n + 1) < n, Fang's Theorem 1, and theorem UnitSquarePacking.main (n : ℕ) (h : 15 ≤ n) : Packs (n ^ 2 - n + 1) ((n : ℝ) - 1 / 10000), by strong induction on n from base (15 <= n <= 26), small (m^2 - m squares for 11 <= m <= 14) and step, Lemma 3 with the rectangle R of 257 squares.",
+    "Sqlean/Theorem2.lean: theorem UnitSquarePacking.theorem2 (n : ℕ) (h : 15 ≤ n) : minSide (n ^ 2 - n + jExc n) < n with jExc n = max ((n + 1) / 16) (1 + 2 * ((n - 15) / 21)), the maximum of the two single-step bounds of Fang's Theorem 2 (packs_j16 with R, packs_j21 with R' of 443 squares in 22 x 21), and main2, the same count at side n - 1/10000; the mixed-step form is not stated.",
+    "Sqlean/Glue.lean: theorem glue, Fang's Lemma 3 on rectangular containers PacksR for real d with 0 <= d <= b, b' and the integer conditions a, a' <= n and n - a' <= a - d; the 18 pieces are PacksR facts in Sqlean/Pieces/, each from check_sound and decide +kernel chunks over the integer-encoded certificate in Sqlean/Data/.",
+    "README.md and Sqlean/Axioms.lean: #print axioms for theorem1, main and theorem2 lists [propext, Classical.choice, Quot.sound]; no sorry, no native_decide, no new axioms. The README reports a clean build of 34 minutes wall, 373 s user and 392 s sys, on a shared 10-core machine, and about 3.2 CPU-minutes of kernel checking for the 18 certificates; it publishes no build log or axiom output. Its first line says 'Kernel-checked Lean 4 proof of Theorems 1 and 2'."
+  ],
+  "scope": [
+    ".gitignore",
+    "LICENSE",
+    "README.md",
+    "STATUS.md",
+    "Sqlean.lean",
+    "Sqlean",
+    "certs",
+    "lake-manifest.json",
+    "lakefile.toml",
+    "lean-toolchain",
+    "scripts"
+  ],
+  "pinned_only": [
+    {
+      "match": "scripts/gen_cert.py",
+      "reason": "The certificate-to-Lean generator, 8,775 bytes of Python whose Lean strings (fun i hi => by) this repository's embedded-JavaScript gate reads as arrow functions and admits no exception for; the data modules it wrote are retained, and it is fetched at the pin to regenerate them, as the 18 October Daniel Lean packet does lean_cert.py"
+    },
+    {
+      "match": "Sqlean/Vendor/Spec.lean",
+      "reason": "Evan Daniel's specification, vendored unchanged; the 7 October Daniel packet retains the same bytes",
+      "identical_to": "packing/resources/web/evand-exact-and-local-reports-2026-10-07/source/s12/lean/Sqpack/Spec.lean"
+    },
+    {
+      "match": "Sqlean/Vendor/LICENSE-evand",
+      "reason": "Evan Daniel's MIT licence; the 7 October batch packet retains the same bytes",
+      "identical_to": "packing/resources/web/evand-batch-105-130-2026-10-07/source/LICENSE"
+    },
+    {
+      "match": "certs/daniel/LICENSE",
+      "reason": "Evan Daniel's MIT licence; the 7 October batch packet retains the same bytes",
+      "identical_to": "packing/resources/web/evand-batch-105-130-2026-10-07/source/LICENSE"
+    },
+    {
+      "match": "certs/daniel/n-*.cert",
+      "reason": "Evan Daniel's exact certificates at 29d0cee; the 5 October Daniel packet retains the same bytes",
+      "identical_to": "packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/batch/certs"
+    },
+    {
+      "match": "lean-toolchain",
+      "reason": "leanprover/lean4:v4.33.1; the 7 October Daniel packet retains the same bytes",
+      "identical_to": "packing/resources/web/evand-exact-and-local-reports-2026-10-07/source/s12/lean/lean-toolchain"
+    }
+  ]
+}

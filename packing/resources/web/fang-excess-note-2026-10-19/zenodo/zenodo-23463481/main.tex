@@ -1,0 +1,225 @@
+% Packing n^2 - n + 1 unit squares in a square of side less than n, for every n >= 15
+% Kevin Fang, 2026-10-18. LaTeX source converted from docs/note-draft.md (v0.9).
+% Build: tectonic main.tex   (or: pdflatex main.tex; pdflatex main.tex)
+\documentclass[11pt,letterpaper]{amsart}
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{alltt}
+\usepackage[margin=1in]{geometry}
+\usepackage{xurl}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,linkcolor=blue!60!black,citecolor=blue!60!black,urlcolor=blue!60!black]{hyperref}
+
+% A command for plain (non-monospace) commit hashes that may break across lines.
+\DeclareUrlCommand\hash{\urlstyle{rm}}
+\hypersetup{pdftitle={Packing n\textasciicircum 2 - n + 1 unit squares in a square of side less than n, for every n >= 15},pdfauthor={Kevin Fang}}
+\emergencystretch=1.5em
+
+% One shared counter so the numbering matches the Markdown:
+% Theorem 1, Theorem 2, Lemma 3, Proposition 4, Proposition 5.
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+
+\begin{document}
+
+\title[Packing $n^2 - n + 1$ unit squares in a square of side less than $n$]{Packing $n^2 - n + 1$ unit squares in a square of side less than $n$, for every $n \ge 15$}
+\author{Kevin Fang}
+\email{me@kevinfang.tech}
+\date{2026-10-18}
+\thanks{Draft v0.9, 2026-10-18. Certificate bundle \cite{Fan26} at commit \hash{078789a4cfd36f915f1bfbe76d742413d79b2965}; Lean formalisation \cite{FanL26} at \url{https://github.com/TheSnakeFang/squarepack-lean}, commit 947bdae.}
+
+\begin{abstract}
+Let $s(N)$ be the smallest side of a square containing $N$ unit squares with disjoint interiors, rotations allowed. We prove $s(n^2-n+1)<n$ for every integer $n\ge15$. More generally, $n^2-n+1+p+2q$ unit squares fit below side $n$ whenever $p,q\ge0$ are integers and $16p+21q\le n-15$. The proof iterates the four-piece construction of Arslanov, Mustafin and Shangitbayev, using known and new base packings and exact rational packings of 257 squares in $17\times16$ and 443 squares in $22\times21$. Independently written exact programs check the finite inputs, and we supply generated certificates for $15\le n\le64$. Lean 4 formalises the first theorem and the two unmixed bounds, including kernel checks of all 18 input pieces. The contribution is an explicit threshold and construction, rather than a new asymptotic waste bound.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+Let $s(N)$ denote the side of the smallest square that contains $N$ unit squares with pairwise disjoint interiors, rotations allowed, and let $N(x) = \max\{N : s(N) \le x\}$ be the number of unit squares that fit in a square of side $x$. Trivially $s(N) \le \lceil \sqrt N \rceil$ and $N(k) = k^2$ for integers $k$. Erd\H{o}s and Graham \cite{EG75} asked about the waste $W(x) = x^2 - N(x)$ and proved $W(x) = O(x^{7/11})$. Chung and Graham obtained $O(x^{(3+\sqrt 2)/7}\log x)$ in 2009 \cite{CG09}; their later claim of $O(x^{3/5})$ \cite{CG20} has a calculation error identified by Arslanov and Bui \cite{AB26}, and Bui \cite{Bui25} and McClenagan \cite{McC26} give constructions achieving exponent $3/5$. Roth and Vaughan \cite{RV78} proved a lower bound of order $(x\lVert x \rVert)^{1/2}$ when $x\lVert x\rVert > 1/6$, where $\lVert x \rVert$ is the distance from $x$ to the nearest integer. The quoted asymptotic upper bounds do not give the small threshold established here.
+
+Throughout, $n$ denotes an integer side and $N$ a number of squares. For $N$ just below $n^2$: Nagamochi \cite{Nag05} stated $s(n^2 - 1) = s(n^2 - 2) = n$ for $n \ge 2$ (Karaku\c{s} \cite{Kar26} has since exhibited a counterexample to a lemma in that proof and independently recovered the $n^2 - 1$ case); Daniel \cite{Dan26} has announced, unrefereed, $s(n^2 - 3) = n$ for $n \ge 6$ and $s(n^2 - 4) = n$ for $n \ge 5$. In the other direction, Friedman's survey \cite{Fri09} records $s(n^2 - n - 1) < n$ for $3 < n < 11$ and, due to Cleemann, $s(17^2 - 17) < 17$. Arslanov, Mustafin and Shangitbayev \cite{AMS21} proved
+\begin{equation}\label{eq:ams}
+s(n^2 - n) < n \quad \text{for all } n \ge 12,
+\end{equation}
+by a decomposition of the square into two integer blocks, one fixed squeezable rectangle and one squeezable rectangle from a parametric family (their Lemma 1). They showed moreover $s(16^2 - 15) < 16$, $s(17^2 - 16) < 17$ and $s(18^2 - 17) < 18$ by the same decomposition with two fixed pieces, i.e. $s(n^2 - n + 1) < n$ for $n = 16, 17, 18$, and claimed nothing for $n \ge 19$. Their three packings, refined by Ellsworth and Stead, are the entries $241, 273, 307$ of Ellsworth's table \cite{Ell26}, which continues Friedman's survey. One further case is on record: de Winter \cite{dW26} found a packing of $211 = 15^2 - 15 + 1$ unit squares in a square of side $14.99796\ldots$ on 16 September 2026, registered and independently verified by the Squares Project \cite{Lev26} and later improved by Ostashev to approximately $14.99634$; the record has since moved further. Before the constructions reported here (October 2026) we are not aware of any packing of $n^2 - n + 1$ squares below side $n$ for $n \ge 19$, nor of an explicit statement of the general bound; the Squares Project has since replayed our first three certificates ($N = 308, 343, 344$, Section 3) with its own exact implementations \cite[issue 484]{Lev26}, and Daniel improved all three by local search from them, crediting the construction \cite[issue 489]{Dan26}: $s(308) \le 17.99827$, $s(343) \le 18.97824$, $s(344) \le 18.99446$. Since 14 October 2026 the Squares Project has tracked a theorem-level review of Theorems 1 and 2 at bundle commit \texttt{078789a} \cite[issue 603]{Lev26}; this is not a peer review.
+
+\begin{theorem}
+$s(n^2 - n + 1) < n$ for every integer $n \ge 15$.
+\end{theorem}
+
+\begin{theorem}
+Let $n \ge 15$ and let $p, q \ge 0$ be integers with $16p + 21q \le n - 15$. Then $n^2 - n + 1 + p + 2q$ unit squares pack in a square of side less than $n$. In particular $s\big(n^2 - n + F(n)\big) < n$ with $F(n) = 1 + \max\{p + 2q : p, q \in \mathbb{Z}_{\ge 0},\ 16p + 21q \le n - 15\}$, so $F(n) \ge 1 + 2\lfloor (n - 15)/21 \rfloor$ and $F(n) = 2n/21 + O(1)$.
+\end{theorem}
+
+Theorem 1 is the case $p = q = 0$. The cases $n = 15$ (de Winter) and $16, 17, 18$ \cite{AMS21} were known; the explicit construction for every $n \ge 15$, from the two certified rectangles below, is new. Writing $J(n) = \max\{j \in \mathbb{Z} : n^2 - n + j > 0,\ s(n^2 - n + j) < n\}$ for the optimal excess, one has $J(n) < n$ trivially (area), and by \cite{EG75} $J(n) = n - o(n)$: apply the waste bound at $x = n - 1/n$, where $N(x) = x^2 - W(x) = n^2 - 2 + n^{-2} - W(x)$. So the eventual existence of such packings is a consequence of the sublinear-waste theorems; those bounds, however, do not by themselves certify the threshold $n = 15$ or a case such as $n = 30$. As in \cite{AMS21}, what is proved here is an explicit threshold with checkable packings. We do not prove optimality or that $15$ is the smallest possible threshold.
+
+The proof (Section 2) is a gluing lemma applied inductively, with two kinds of step: a $17 \times 16$ rectangle adds $16$ to the side and $1$ to the excess; a $22 \times 21$ rectangle adds $21$ and $2$. The base cases are finitely many exact certificates (Propositions 4--5; Section 3 gives the new direct square cases). Section 5 reports the certificates we generated for $n \le 64$; Section 6 describes certificates, checkers and the search; Appendix A has the search details.
+
+\section{The gluing lemma and the proof}
+
+\textbf{Definitions.} A \emph{packing} of $N$ unit squares in a $W \times H$ rectangle is a family of $N$ closed unit squares contained in $[0, W] \times [0, H]$ with pairwise disjoint interiors; its \emph{waste} is $WH - N$ (an integer when $W, H$ are). For $N$ unit squares and an integer side $n$, the \emph{excess} is $j = N - (n^2 - n)$, and $n^2 - N = n - j$ is the waste in the nominal integer box $n \times n$. Following \cite{AMS21}, a packing in a $W \times H$ rectangle is \emph{$\delta$-squeezable} ($\delta > 0$) if the same $N$ squares fit, as a packing, in $(W - \delta) \times (H - \delta)$; a $\delta$-squeezable packing is $\delta'$-squeezable for $0 < \delta' \le \delta$. The \emph{integer block} $p \times q$ is the packing of $pq$ unit squares at the half-integer centres of a $p \times q$ rectangle. A \emph{strict certificate} (Section 6) is a packing given by rational data in which the closed squares are pairwise disjoint and lie in the open box; it is a stronger, machine-checkable witness of the packing claim.
+
+\begin{lemma}[gluing]
+Let $a > b \ge 1$ and $a' \ge b' \ge 1$ be integers. Let $A$ be a $d$-squeezable packing of $ab - w_A$ unit squares in an $a \times b$ rectangle and $B$ a $d$-squeezable packing of $a'b' - w_B$ unit squares in an $a' \times b'$ rectangle, where $0 < d \le 1/2$. Put $n = b + b'$ and $c = n - a'$, and assume $n \ge a$ and $0 \le c \le a - d$. Then $n^2 - w_A - w_B$ unit squares pack in a square of side $n - d$.
+\end{lemma}
+
+\begin{proof}
+Put $L = n - d$. Place the four pieces in $[0, L]^2$:
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+piece & box & size \\
+\midrule
+$A$ (squeezed) & $[0, a - d] \times [b', L]$ & $(a - d) \times (b - d)$ \\
+$D$, integer block $(n - a) \times b$ & $[a - d, L] \times [b' - d, L]$ & $(n - a) \times b$ \\
+$C$, integer block $c \times b'$ & $[0, c] \times [0, b']$ & $c \times b'$ \\
+$B$ (squeezed) & $[c, L] \times [0, b' - d]$ & $(a' - d) \times (b' - d)$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+(using $n - b = b'$, $n - c = a'$; $D$ is empty if $n = a$ and $C$ if $c = 0$). The boxes lie in $[0, L]^2$: $a - d \le L$ since $a \le n$, $c \le a - d \le L$, $b' \le L$ since $b \ge 1 > d$, and $b' - d \ge 0$. Their interiors are pairwise disjoint: $A$ and $D$ are separated by $x = a - d$; $C$ and $B$ by $x = c$; $A$ and $C$ by $y = b'$; $D$ and $B$ by $y = b' - d$; $A$ and $B$ by the strip $b' - d < y < b'$; and $C$ lies left of $x = c$ while $D$ lies right of $x = a - d \ge c$. Squares in different pieces therefore have disjoint interiors, and within a piece they do by hypothesis. The count is $(ab - w_A) + (n-a)b + c\,b' + (a'b' - w_B) = nb + (c + a')b' - w_A - w_B = n(b + b') - w_A - w_B = n^2 - w_A - w_B$.
+\end{proof}
+
+The four-piece arrangement follows \cite[Figure 1]{AMS21}. Their infinite family uses a nonsquare rectangle from Lemma 1. Here $B$ is a square packing, and the output of the lemma is itself a $d$-squeezable square packing with waste $n - j$, so the lemma can be iterated; the two rectangles below are the other input.
+
+\begin{proposition}[the rectangles $R$ and $R'$]
+There is a packing $R$ of $257$ unit squares in a rectangle $(17 - \delta_R) \times (16 - \delta_R)$ with $\delta_R \ge 0.0007436$ (certificate \texttt{r17x16\_n0257.cert}: rational width $W \le 16.999256308447$, height $H = W - 1$, every square in the open box); its waste in $17 \times 16$ is $15 = b - 1$. There is a packing $R'$ of $443$ unit squares in $(22 - \delta_{R'}) \times (21 - \delta_{R'})$ with $\delta_{R'} \ge 0.0094396$ (certificate \texttt{r22x21\_n0443.cert}, $W \le 21.990560384076$, $H = W - 1$); its waste in $22 \times 21$ is $19 = b - 2$. (Rounded down from the exact values.)
+\end{proposition}
+
+\begin{proposition}[base cases]
+\begin{sloppypar}
+For $15 \le n \le 26$ there is a packing of $n^2 - n + 1$ unit squares in a square of side $< n$: $n = 15$ from \cite{dW26} (exact certificate by Daniel, side $\frac{7498980352483680782590502239189}{5 \cdot 10^{29}} < 15$), $n = 16, 17$ from \cite{AMS21}/\cite{Ell26} (exact certificates in \cite{Dan26}), $n = 18$ by deleting one square from our packing of $308$ squares in side $< 18$, and $19 \le n \le 26$ from Section 3. For $11 \le m \le 14$ there is a packing of $m^2 - m$ unit squares in a square of side $< m$: the packing of $110$ squares in side $10.99678\ldots$ recorded in \cite{Ell26} and the packings of \eqref{eq:ams} for $m = 12, 13, 14$, all with exact certificates in \cite{Dan26}. Every piece named in this proposition and in Proposition 4 is $d_0$-squeezable with $d_0 = 1/10000$ (the smallest squeeze among them, $0.000690\ldots$ for $N = 308$, exceeds $d_0$; all are tabulated in the bundle's \texttt{theorem/PIECES.md}).
+\end{sloppypar}
+\end{proposition}
+
+\begin{proof}[Proof of Theorems 1 and 2]
+Call $j$ \emph{attainable at $n$} if some packing of $n^2 - n + j$ unit squares in a square of side $n - d_0$ exists. By Proposition 5, $1$ is attainable at $15 \le n \le 26$. For $27 \le n \le 30$ apply Lemma 3 with $A = R$ ($a = 17$, $b = 16$, $w_A = 15$), $B$ the packing of $m^2 - m$ squares with $m = n - 16 \in \{11, \ldots, 14\}$ ($a' = b' = m$, $w_B = m$, $c = 16 \le 17 - d_0$, $n \ge 17$), and $d = d_0$: the composite has $n^2 - 15 - m = n^2 - n + 1$ squares in side $n - d_0$, so $1$ is attainable at $27 \le n \le 30$. Now let $n \ge 31$ and suppose $j$ is attainable at $m = n - 16 \ge 15$, by a $d_0$-squeezable packing $B$ whose waste in the nominal $m \times m$ box is $m - j$. Lemma 3 with $A = R$ gives $n^2 - 15 - (m - j) = n^2 - n + 1 + j$ squares in side $n - d_0$, so $j + 1$ is attainable at $n$. Likewise for $n \ge 36$ with $A = R'$ ($a = 22$, $b = 21$, $w_A = 19$, $c = 21 \le 22 - d_0$): if $j$ is attainable at $m = n - 21 \ge 15$ then $n^2 - 19 - (m - j) = n^2 - n + 2 + j$, so $j + 2$ is attainable at $n$. Given $p, q$ with $16p + 21q \le n - 15$, the side $r = n - 16p - 21q \ge 15$ is reached from $n$ by $p$ steps of $16$ and $q$ steps of $21$; if $r \ge 31$, reduce $r$ further by steps of $16$ (each only adds to the excess) until $15 \le r \le 30$, where $1$ is attainable; climbing back up gives attainability of $1 + p + 2q$ at $n$ (at least). Packings of side $n - d_0 < n$ give $s < n$ by definition, and deleting squares keeps a packing, so every integer $j'$ with $0 \le j' \le 1 + p + 2q$ is attainable too.
+\end{proof}
+
+The construction is explicit and rational: every gluing is performed at the same $d = d_0$, so each intermediate composite is a closed certificate of side exactly $m - d_0$ (squares may touch), and a strict certificate of the final packing is obtained by scaling all centres and the side by $1 + \varepsilon_n$ with $\varepsilon_n = d_0/(2(n - d_0))$, giving side $n - d_0/2 < n$: a scaling by $\lambda > 1$ about the origin with the squares' sizes and orientations fixed turns every closed separation (a separating unit normal $u$ with $u\cdot(p_j - p_i) \ge r_i + r_j$) into a strict one by $(\lambda - 1)(r_i + r_j) > 0$, and every wall margin $\mu \ge 0$ into $\lambda\mu + (\lambda - 1) r_i > 0$, where $r_i$ is the half-width of square $i$ projected on the axis in question. We have carried this out for every $15 \le n \le 64$ (Section 5).
+
+\section{Direct packings for \texorpdfstring{$19 \le n \le 26$}{19 <= n <= 26}}
+
+\begin{center}
+\begin{tabular}{rrll}
+\toprule
+$n$ & $n^2 - n + 1$ & $S_n$, rounded up to 15 decimals & $n - S_n$, rounded down \\
+\midrule
+19 & 343 & 18.994903529220497 & 0.005096 \\
+20 & 381 & 19.976969740405508 & 0.023030 \\
+21 & 421 & 20.986150316947159 & 0.013849 \\
+22 & 463 & 21.986880406196935 & 0.013119 \\
+23 & 507 & 22.997807183348823 & 0.002192 \\
+24 & 553 & 23.998811020144984 & 0.001188 \\
+25 & 601 & 24.998914572427130 & 0.001085 \\
+26 & 651 & 25.991547815274380 & 0.008452 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The exact sides are rationals in the files \texttt{n0343.cert}, \ldots, \texttt{n0651.cert} of \cite{Fan26}; their denominators have up to $251$ bits and are not dyadic in general (they are extents of the packings). For comparison, the exact certificates of the $N = 241, 273, 307$ packings in \cite{Dan26} (refinements by Ellsworth and Stead of \cite{AMS21}'s) have sides below $15.9882$, $16.9840$ and $17.9828$. We also hold packings of $n^2 - n + 2$ squares below side $n$ for $n = 18, 19, 20, 21, 22, 23, 28, 29$, with sides rounded up: $s(308) \le 17.999309855162748$, $s(344) \le 18.995489275430816$, $s(382) \le 19.989479729399675$, $s(422) \le 20.988436524095744$, $s(464) \le 21.991709536768996$, $s(508) \le 22.994733849702143$, $s(758) \le 27.996346242823117$, $s(814) \le 28.999873603982716$; and $s(380) \le 19.976775433974195$ for $380 = 20^2 - 20$. Together with Theorem 2 (which gives $j \ge 2$ for $n \ge 31$), among the results established or cited here $s(n^2 - n + 2) < n$ is known for $n \ge 18$ except $n \in \{24, 25, 26, 27, 30\}$; our best attempts there are packings in boxes between $3.7 \cdot 10^{-8}$ and $1.3 \cdot 10^{-2}$ above $n$ (Appendix A), which decide nothing.
+
+\section{Further rectangles}
+
+Besides $R$ and $R'$ we hold squeezable packings with waste $b - 1$ in $(b+1) \times b$ for $b = 17, 18, 20, 21$: $290$ squares in $18 \times 17$ (squeeze $\ge 0.0024491$), $325$ in $19 \times 18$ ($\ge 0.0059513$), $401$ in $21 \times 20$ ($\ge 0.0117127$) and $442$ in $22 \times 21$ ($\ge 0.0027796$). They are not needed for Theorems 1--2 but improve the inventory of Section 5: Lemma 3 with two rectangles ($A$ of waste $b - 1$, $B$ of waste $b' - 1$; $c = b - 1 \le b + 1 - d$) gives $n^2 - n + 2$ squares directly at $n = b + b'$. A further rectangle with short side $b$ and waste $b - t$ adds the step ``$+b$ to the side, $+t$ to the excess'' to the induction; the explicit rate of Theorem 2 is $\max t/b$ over the rectangles one holds, $2/21$ here. With the zero-excess bases ($11 \le m \le 14$ from Proposition 5, and every $m \ge 15$ from Theorem 1 after deleting a square) a squeezable $(b+1) \times b$ rectangle of waste $b - 2$ gives $s(n^2 - n + 2) < n$ for all $n \ge b + 11$; a short side $b \le 13$ would cover the five open cases above, and $b = 19$ only $n = 30$.
+
+\section{Certificates generated for \texorpdfstring{$15 \le n \le 64$}{15 <= n <= 64}}
+
+The \emph{theorem inventory} of \cite{Fan26} (\texttt{theorem/}) contains, for each $15 \le n \le 64$, the strict certificate produced by the proof of Theorem 2 with $(p, q)$ maximising $p + 2q$: a packing of $n^2 - n + F(n)$ unit squares in a square of side exactly $n - 1/20000$. Its values are $F(n) = 1$ for $15 \le n \le 30$, $2$ for $31$--$35$, $3$ for $36$--$51$, $4$ for $52$--$56$ and $5$ for $57$--$64$; counts run from $211$ at $n = 15$ to $4037$ at $n = 64$. A second table (\texttt{theorem/best.tsv}) ranges over a precisely defined larger inventory, every square packing obtainable from one base piece (a square piece, or two rectangle pieces glued) by a sequence of Lemma 3 steps at squeeze $d_0$ using the pieces listed in \texttt{theorem/PIECES.md} (which adds the $n^2 - n + 2$ squares of Section 3 and the rectangles of Section 4); its maximum excess exceeds $F(n)$ at $n = 18$--$23$, $28$, $29$ ($2$), $34$, $35$ ($3$), $39$--$44$, $49$--$51$ ($4$), $55$, $56$ ($5$) and $60$--$64$ ($6$). The second table maximises the excess over the stated construction family. Both tables give lower bounds on $J(n)$. All $76$ certificates pass the three checkers of Section 6.
+
+\section{Certificates, checking and search}
+
+\textbf{Format.} A certificate is a text file with header \texttt{N S} (square container) or \texttt{N W H} (rectangle) and one line \texttt{x y t} per square, all rationals: centre $(x, y)$ and rotation $\theta = 2\arctan t$, so $(\cos\theta, \sin\theta) = ((1 - t^2)/(1 + t^2),\ 2t/(1 + t^2))$ exactly and the four vertices are rational. \emph{Strict validity}: every vertex lies in the open box, and for every pair of squares some edge normal of one of them strictly separates the projections of the two (separating axis theorem; for convex polygons this is equivalent to disjointness of the closed squares). \emph{Closed validity} allows equality in both conditions and is exactly the packing definition.
+
+\textbf{Checkers.} Three exact programs were used, all in rational arithmetic with Python's \texttt{fractions}. (i) \texttt{verify.py} in \cite{Fan26} and the package verifier \texttt{squarepack.verify} behind it (separating axes over the four edge normals; pairs whose centres are more than $\sqrt 2$ apart are skipped by a lemma; the public \texttt{verify.py} reads square headers only, the package verifier also rectangles). (ii) \texttt{verify\_cert.py} of Daniel \cite{Dan26} (commit \texttt{29d0cee}), unchanged, independently written, same representation and test; on a rectangle certificate it reads only the first two header fields, so it checks the width only. (iii) \texttt{tools/rectcheck.py} in \cite{Fan26}, a short program importing nothing from the package, checking both dimensions of the box and every pair (with the same $\sqrt 2$ shortcut). Every square certificate cited here passes (i), (ii) and (iii); every rectangle certificate passes \texttt{squarepack.verify} and (iii) in both dimensions and (ii) as a width check; Ellsworth's decimal checker \cite{Ell26b} accepts the direct square packings in his format. The two reviews of this draft re-verified all certificates with their own freshly written exact checkers (395 and 254 files respectively, no failures). The checkers use the same separating-axis test but have separate implementations. These computations are not an external human review.
+
+\textbf{Formal verification.} Lean 4 (v4.33.1, Mathlib v4.33.1) formalises Theorem 1 and the maximum of the two unmixed bounds in Theorem 2, including kernel checks of all 18 input pieces; the mixed-step bound is proved here \cite{FanL26}. With Daniel's formal specification of unit-square packings and $s(N)$ \cite[\texttt{Spec.lean}, vendored unchanged]{Dan26}, the Lean statements are
+
+\begin{footnotesize}
+\begin{alltt}
+theorem theorem1 (n : \(\mathbb{N}\)) (h : 15 \(\le\) n) : minSide (n ^ 2 - n + 1) < n
+theorem main     (n : \(\mathbb{N}\)) (h : 15 \(\le\) n) : Packs (n ^ 2 - n + 1) ((n : \(\mathbb{R}\)) - 1 / 10000)
+theorem theorem2 (n : \(\mathbb{N}\)) (h : 15 \(\le\) n) : minSide (n ^ 2 - n + jExc n) < n
+\end{alltt}
+\end{footnotesize}
+
+\noindent where \texttt{jExc n = max ((n + 1) / 16) (1 + 2 * ((n - 15) / 21))} (the maximum of the two single-step bounds; the mixed-step form of Theorem 2 is not formalised). Lemma 3 is the Lean theorem \texttt{glue} (rectangular containers \texttt{PacksR}), and the $18$ certificates of Propositions 4 and 5 are checked by \texttt{decide +kernel} through an integer-encoded checker whose soundness (\texttt{check\_sound}) is proved from Daniel's \texttt{packs\_of\_cert}; the $\sqrt 2$ far-pair shortcut is the lemma \texttt{disjoint\_of\_far}. \texttt{\#print axioms} for all three theorems lists only \texttt{propext}, \texttt{Classical.choice} and \texttt{Quot.sound}; there is no \texttt{sorry}, \texttt{native\_decide} or added axiom. Kernel time for the certificates is about three CPU-minutes in total; the README of \cite{FanL26} reports a clean build at 34 minutes of wall time on a loaded machine. Repository \cite{FanL26}, public, commit \texttt{947bdae}; the proof sources are those of commit \texttt{837eca1}.
+
+\textbf{Rounding.} Displayed certificate side bounds are rounded up; certified squeezes and margins are rounded down.
+
+\textbf{Search (summary; details in Appendix A).} The square packings and the rectangles were found by a penalty method with basin hopping from ``two-wedge'' seeds, the structure of \cite{AMS21}'s packings: two groups of squares tilted by about $\mp 15$--$20^\circ$ along the bottom and left walls in opposite corners, the rest axis-parallel. Float solutions were turned into certificates by rounding to rationals, scaling centres apart by the smallest factor clearing every overlap, taking the exact extent as the side, and adding $2^{-64}$ so all margins are positive. The searches are time-budgeted and not bit-reproducible; the certificates are checked independently of how they were found.
+
+\textbf{Availability.} All author-produced certificates (the $17$ direct square packings, the $6$ rectangles, the theorem inventory and the best-excess inventory of Section 5), Daniel's exact certificates of the known packings used as pieces (MIT), the three checkers, a standard-library implementation of Lemma 3 (\texttt{tools/glue.py}, with the \texttt{--d} option for the uniform squeeze), the tables, \texttt{VERIFICATION.md} and a SHA-256 manifest are in \cite{Fan26} at commit \hash{078789a4cfd36f915f1bfbe76d742413d79b2965}. De Winter's $211$ carries no licence and is fetched by script from his repository at a pinned commit and checked by hash; the certificates built on it in the earlier composite table are regenerated by the supplied recipe rather than shipped.
+
+\section{Remarks}
+
+\begin{enumerate}
+\item The proof uses only the base certificates and $R$ and $R'$. A squeezable $(b+1) \times b$ rectangle of waste $b - 3$, or of waste $b - 2$ with $b \le 13$, would strengthen the bound. An analytic family could replace the finite search inputs.
+\item We prove no optimality result. The five remaining cases of the excess-two question are unresolved by these constructions.
+\end{enumerate}
+
+\section*{Acknowledgements and credit}
+
+The decomposition and the $n^2 - n + 1$ packings for $n = 16, 17, 18$ are due to Arslanov, Mustafin and Shangitbayev; the $n = 15$ packing to Joost de Winter. The seed packings are David Ellsworth's and Tej Stead's ($241, 273, 307$) and Francisco Couzo's ($342$). The certificate format, one of the checkers and the exact certificates of the known packings used as pieces are Evan Daniel's, who also improved three of our packings. The Squares Project (Joshua Levy) independently replayed all three initial certificates, registered the 308 result, and recorded 343 and 344 as verified beyond-horizon bounds. The search software, the verifiers, the gluing program and the certificate bundle were written and run with Claude (Anthropic) as a coding and research agent, directed and reviewed by the author; two language-model reviews of earlier drafts (GPT-6 Astra; OpenAI Codex) found errors that were corrected, which is not an external mathematical review. The Lean formalisation reuses Evan Daniel's specification and certificate lemmas (MIT).
+
+\appendix
+
+\section{Search details}
+
+For $343$ and $344$, we inserted one line through each wedge of Ellsworth's $307$ packing. For $381, 421$, Couzo's $342$ (eight lines per wedge at about $-18^\circ/+15^\circ$) grown the same way; for $463$--$651$ and the $n^2 - n + 2$ packings at $n \ge 21$, wedges built from parameters (eight lines, lengths $(5, k-11, k-10, k-10, k-10, k-11, k-14, 1)$ and $(k-12, k-11, k-10, k-10, k-10, k-10, k-12, 3)$, rows at pitch $\cos\theta$ offset by $\sin\theta$, starting angles $18.2^\circ/15.3^\circ$, except $n = 24$ at $20.5^\circ/16^\circ$); $382$ from Daniel's improved $343$. The waste-$(b-1)$ rectangles: a square two-wedge packing with one more square inserted into every row crossed by a vertical cut through the lower wedge, then both sides of the box shrunk by a common amount. $R'$: a rectangle seed built from parameters (eight-line wedges, lower rows one longer than the square schedule, $17.2^\circ/14.3^\circ$).
+
+Penalty: sum of squared penetration depths (separating-axis overlap on the best edge normal, plus wall penetration), minimised by L-BFGS at fixed side; the side is shrunk while the penalty stays below $10^{-14}$; Gaussian kicks of the best state for a fixed budget of $10$--$60$ minutes on a $10$-core machine.
+
+Best attempts at the open $n^2 - n + 2$ cases (sides above $n$ by): $24$: $3.7 \cdot 10^{-8}$; $25$: $1.2 \cdot 10^{-2}$; $26$: $7.5 \cdot 10^{-3}$; $27$: $1.9 \cdot 10^{-3}$; $30$: $3.5 \cdot 10^{-3}$. The wedge heuristic: a wedge of $w$ tilted lines at angle $\theta$ has projected width $w\cos\theta + \sin\theta$, so it saves space on that line only if $w(1 - \cos\theta) > \sin\theta$; this guided the seeds and is not part of any proof.
+
+\begin{thebibliography}{FanL26}
+
+\bibitem[AB26]{AB26} M. Z. Arslanov, H. D. Bui, Note on ``Efficient packings of unit squares in a large square'', Discrete Comput. Geom. 76 (2026), 805--812, doi:10.1007/s00454-025-00767-w.
+
+\bibitem[AMS21]{AMS21} M. Z. Arslanov, S. A. Mustafin, Z. K. Shangitbayev, Improved packings of $n(n-1)$ unit squares in a square, Electron. J. Combin. 28(4) (2021), P4.22, doi:10.37236/8586.
+
+\bibitem[Bui25]{Bui25} H. D. Bui, Square packing with $O(x^{0.6})$ wasted area, arXiv:2508.04603 (preprint, 2025; v2, 15 March 2026).
+
+\bibitem[CG09]{CG09} F. Chung, R. Graham, Packing equal squares into a large square, J. Combin. Theory Ser. A 116(6) (2009), 1167--1175, doi:10.1016/j.jcta.2009.02.005.
+
+\bibitem[CG20]{CG20} F. Chung, R. Graham, Efficient packings of unit squares in a large square, Discrete Comput. Geom. 64 (2020), 690--699, doi:10.1007/s00454-019-00088-9.
+
+\bibitem[Cou26]{Cou26} F. Couzo, \url{https://github.com/franciscouzo/square-packing}, \texttt{certificates/n342.cert}, commit \texttt{4e4c8ce23cb5e87f033021687010992c40575480} (2026).
+
+\bibitem[Dan26]{Dan26} E. Daniel, \url{https://github.com/evand/square-packing}: \texttt{search/exact/verify\_cert.py} and the exact certificates in \texttt{search/exact/batch/certs/} at commit \texttt{29d0cee87c1d717f7b4497b8fb0ee17ac9d0087d}; the improvements of 308, 343, 344 at commit \texttt{c013f43cefd006f007a6f37bc3a56aadead815d6} (jlevy/squares issue 489); the announced results on $n^2 - 3$ and $n^2 - 4$ at \url{https://evand.github.io/square-packing/k2m3/} and \url{https://evand.github.io/square-packing/k2m4/}.
+
+\bibitem[dW26]{dW26} J. de Winter, \url{https://github.com/JoostdeWinter/square-packing-211}, commit \texttt{702df9bb3b1e7fe13279a61a1fa89722aa2d496a} (16 September 2026).
+
+\bibitem[EG75]{EG75} P. Erd\H{o}s, R. L. Graham, On packing squares with equal squares, J. Combin. Theory Ser. A 19 (1975), 119--123, doi:10.1016/0097-3165(75)90099-0.
+
+\bibitem[Ell26]{Ell26} D. Ellsworth, Squares in squares, \url{https://kingbird.myphotos.cc/packing/squares_in_squares.html} (retrieved 2026-10-12).
+
+\bibitem[Ell26b]{Ell26b} D. Ellsworth, \url{https://github.com/Davidebyzero/packing_squares_in_squares__tools}, \texttt{check\_packing.py}, commit \texttt{d659a373a7df058f10d3a5ff0dd58c4b583c2720}.
+
+\bibitem[FanL26]{FanL26} K. Fang, squarepack-lean (Lean 4 formalisation of Theorem 1 and the unmixed bounds of Theorem 2, with kernel checks of the 18 input pieces), \url{https://github.com/TheSnakeFang/squarepack-lean}, commit \texttt{947bdae}.
+
+\bibitem[Fan26]{Fan26} K. Fang, squarepack-certs, \url{https://github.com/TheSnakeFang/squarepack-certs}, commit \hash{078789a4cfd36f915f1bfbe76d742413d79b2965}.
+
+\bibitem[Fri09]{Fri09} E. Friedman, Packing unit squares in squares: a survey and new results, Electron. J. Combin. Dynamic Survey DS7 (version of 14 August 2009), doi:10.37236/28.
+
+\bibitem[Kar26]{Kar26} H. Karaku\c{s}, A counterexample to Nagamochi's scoring lemma and a new rectangle packing bound, arXiv:2609.37410 (preprint, 2026).
+
+\bibitem[Lev26]{Lev26} J. Levy et al., The Squares Project, \url{https://github.com/jlevy/squares}; issues 484 and 603, \url{https://github.com/jlevy/squares/issues/484} and \url{https://github.com/jlevy/squares/issues/603} (verification of 308, 343, 344; registration of 308; issue 603, theorem-level review); case 211, \url{https://jlevy.github.io/squares/cases/211.html}.
+
+\bibitem[McC26]{McC26} R. McClenagan, Optimally packing a large square by unit squares, arXiv:2602.01484 (preprint, 2026).
+
+\bibitem[Nag05]{Nag05} H. Nagamochi, Packing unit squares in a rectangle, Electron. J. Combin. 12 (2005), R37, doi:10.37236/1934.
+
+\bibitem[RV78]{RV78} K. F. Roth, R. C. Vaughan, Inefficiency in packing squares with unit squares, J. Combin. Theory Ser. A 24 (1978), 170--186, doi:10.1016/0097-3165(78)90005-5.
+
+\end{thebibliography}
+
+\end{document}

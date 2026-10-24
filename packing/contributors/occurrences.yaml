@@ -27481,6 +27481,364 @@ occurrences:
     credit does not imply sole personal authorship.
 - origin:
     path: packing/resources/bibliography.yaml
+    record_key: '[Fang excess note 2026-10-19]'
+    field: /authors/0
+  expected_text: Fang
+  start: 0
+  end: 4
+  label: Fang
+  role: source-author
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: kevin-fang
+  note: 'Reviewed 2026-10-24 (think-494l) against the [Fang excess theorem 2026-10-13] span
+    of the same person: the note and the Lean source name the same people in the same roles;
+    the printed source text and credit role are retained.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Fang excess note 2026-10-19]'
+    field: /credit
+  expected_text: Fang after Arslanov, Mustafin, Shangitbayev, Ellsworth, Stead, de Winter,
+    Daniel, Couzo
+  start: 0
+  end: 4
+  label: Fang
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: kevin-fang
+  note: 'Reviewed 2026-10-24 (think-494l) against the [Fang excess theorem 2026-10-13] span
+    of the same person: the note and the Lean source name the same people in the same roles;
+    the printed source text and credit role are retained.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Fang excess note 2026-10-19]'
+    field: /credit
+  expected_text: Fang after Arslanov, Mustafin, Shangitbayev, Ellsworth, Stead, de Winter,
+    Daniel, Couzo
+  start: 11
+  end: 19
+  label: Arslanov
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - paper-byline
+  - bibliography
+  contributor_id: mz-arslanov
+  note: 'Reviewed 2026-10-24 (think-494l) against the [Fang excess theorem 2026-10-13] span
+    of the same person: the note and the Lean source name the same people in the same roles;
+    the printed source text and credit role are retained.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Fang excess note 2026-10-19]'
+    field: /credit
+  expected_text: Fang after Arslanov, Mustafin, Shangitbayev, Ellsworth, Stead, de Winter,
+    Daniel, Couzo
+  start: 21
+  end: 29
+  label: Mustafin
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - paper-byline
+  - bibliography
+  contributor_id: sa-mustafin
+  note: 'Reviewed 2026-10-24 (think-494l) against the [Fang excess theorem 2026-10-13] span
+    of the same person: the note and the Lean source name the same people in the same roles;
+    the printed source text and credit role are retained.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Fang excess note 2026-10-19]'
+    field: /credit
+  expected_text: Fang after Arslanov, Mustafin, Shangitbayev, Ellsworth, Stead, de Winter,
+    Daniel, Couzo
+  start: 31
+  end: 43
+  label: Shangitbayev
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - paper-byline
+  - bibliography
+  contributor_id: zk-shangitbayev
+  note: 'Reviewed 2026-10-24 (think-494l) against the [Fang excess theorem 2026-10-13] span
+    of the same person: the note and the Lean source name the same people in the same roles;
+    the printed source text and credit role are retained.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Fang excess note 2026-10-19]'
+    field: /credit
+  expected_text: Fang after Arslanov, Mustafin, Shangitbayev, Ellsworth, Stead, de Winter,
+    Daniel, Couzo
+  start: 45
+  end: 54
+  label: Ellsworth
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - catalogue-byline
+  - catalogue-credits
+  contributor_id: david-ellsworth
+  note: 'Reviewed 2026-10-24 (think-494l) against the [Fang excess theorem 2026-10-13] span
+    of the same person: the note and the Lean source name the same people in the same roles;
+    the printed source text and credit role are retained.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Fang excess note 2026-10-19]'
+    field: /credit
+  expected_text: Fang after Arslanov, Mustafin, Shangitbayev, Ellsworth, Stead, de Winter,
+    Daniel, Couzo
+  start: 56
+  end: 61
+  label: Stead
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - catalogue-credit
+  - bibliography
+  contributor_id: tej-stead
+  note: 'Reviewed 2026-10-24 (think-494l) against the [Fang excess theorem 2026-10-13] span
+    of the same person: the note and the Lean source name the same people in the same roles;
+    the printed source text and credit role are retained.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Fang excess note 2026-10-19]'
+    field: /credit
+  expected_text: Fang after Arslanov, Mustafin, Shangitbayev, Ellsworth, Stead, de Winter,
+    Daniel, Couzo
+  start: 63
+  end: 72
+  label: de Winter
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: joost-de-winter
+  note: 'Reviewed 2026-10-24 (think-494l) against the [Fang excess theorem 2026-10-13] span
+    of the same person: the note and the Lean source name the same people in the same roles;
+    the printed source text and credit role are retained.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Fang excess note 2026-10-19]'
+    field: /credit
+  expected_text: Fang after Arslanov, Mustafin, Shangitbayev, Ellsworth, Stead, de Winter,
+    Daniel, Couzo
+  start: 74
+  end: 80
+  label: Daniel
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - repository-license
+  - bibliography
+  contributor_id: evan-daniel
+  note: 'Reviewed 2026-10-24 (think-494l) against the [Fang excess theorem 2026-10-13] span
+    of the same person: the note and the Lean source name the same people in the same roles;
+    the printed source text and credit role are retained.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Fang excess note 2026-10-19]'
+    field: /credit
+  expected_text: Fang after Arslanov, Mustafin, Shangitbayev, Ellsworth, Stead, de Winter,
+    Daniel, Couzo
+  start: 82
+  end: 87
+  label: Couzo
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - bibliography
+  contributor_id: francisco-couzo
+  note: 'Reviewed 2026-10-24 (think-494l) against the [Fang excess theorem 2026-10-13] span
+    of the same person: the note and the Lean source name the same people in the same roles;
+    the printed source text and credit role are retained.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Fang excess Lean 2026-10-18]'
+    field: /authors/0
+  expected_text: Fang
+  start: 0
+  end: 4
+  label: Fang
+  role: source-author
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: kevin-fang
+  note: 'Reviewed 2026-10-24 (think-494l) against the [Fang excess theorem 2026-10-13] span
+    of the same person: the note and the Lean source name the same people in the same roles;
+    the printed source text and credit role are retained.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Fang excess Lean 2026-10-18]'
+    field: /credit
+  expected_text: Fang after Daniel, Arslanov, Mustafin, Shangitbayev, Ellsworth, Stead, de
+    Winter, Couzo
+  start: 0
+  end: 4
+  label: Fang
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: kevin-fang
+  note: 'Reviewed 2026-10-24 (think-494l) against the [Fang excess theorem 2026-10-13] span
+    of the same person: the note and the Lean source name the same people in the same roles;
+    the printed source text and credit role are retained.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Fang excess Lean 2026-10-18]'
+    field: /credit
+  expected_text: Fang after Daniel, Arslanov, Mustafin, Shangitbayev, Ellsworth, Stead, de
+    Winter, Couzo
+  start: 11
+  end: 17
+  label: Daniel
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - repository-license
+  - bibliography
+  contributor_id: evan-daniel
+  note: 'Reviewed 2026-10-24 (think-494l) against the [Fang excess theorem 2026-10-13] span
+    of the same person: the note and the Lean source name the same people in the same roles;
+    the printed source text and credit role are retained.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Fang excess Lean 2026-10-18]'
+    field: /credit
+  expected_text: Fang after Daniel, Arslanov, Mustafin, Shangitbayev, Ellsworth, Stead, de
+    Winter, Couzo
+  start: 19
+  end: 27
+  label: Arslanov
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - paper-byline
+  - bibliography
+  contributor_id: mz-arslanov
+  note: 'Reviewed 2026-10-24 (think-494l) against the [Fang excess theorem 2026-10-13] span
+    of the same person: the note and the Lean source name the same people in the same roles;
+    the printed source text and credit role are retained.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Fang excess Lean 2026-10-18]'
+    field: /credit
+  expected_text: Fang after Daniel, Arslanov, Mustafin, Shangitbayev, Ellsworth, Stead, de
+    Winter, Couzo
+  start: 29
+  end: 37
+  label: Mustafin
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - paper-byline
+  - bibliography
+  contributor_id: sa-mustafin
+  note: 'Reviewed 2026-10-24 (think-494l) against the [Fang excess theorem 2026-10-13] span
+    of the same person: the note and the Lean source name the same people in the same roles;
+    the printed source text and credit role are retained.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Fang excess Lean 2026-10-18]'
+    field: /credit
+  expected_text: Fang after Daniel, Arslanov, Mustafin, Shangitbayev, Ellsworth, Stead, de
+    Winter, Couzo
+  start: 39
+  end: 51
+  label: Shangitbayev
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - paper-byline
+  - bibliography
+  contributor_id: zk-shangitbayev
+  note: 'Reviewed 2026-10-24 (think-494l) against the [Fang excess theorem 2026-10-13] span
+    of the same person: the note and the Lean source name the same people in the same roles;
+    the printed source text and credit role are retained.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Fang excess Lean 2026-10-18]'
+    field: /credit
+  expected_text: Fang after Daniel, Arslanov, Mustafin, Shangitbayev, Ellsworth, Stead, de
+    Winter, Couzo
+  start: 53
+  end: 62
+  label: Ellsworth
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - catalogue-byline
+  - catalogue-credits
+  contributor_id: david-ellsworth
+  note: 'Reviewed 2026-10-24 (think-494l) against the [Fang excess theorem 2026-10-13] span
+    of the same person: the note and the Lean source name the same people in the same roles;
+    the printed source text and credit role are retained.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Fang excess Lean 2026-10-18]'
+    field: /credit
+  expected_text: Fang after Daniel, Arslanov, Mustafin, Shangitbayev, Ellsworth, Stead, de
+    Winter, Couzo
+  start: 64
+  end: 69
+  label: Stead
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - catalogue-credit
+  - bibliography
+  contributor_id: tej-stead
+  note: 'Reviewed 2026-10-24 (think-494l) against the [Fang excess theorem 2026-10-13] span
+    of the same person: the note and the Lean source name the same people in the same roles;
+    the printed source text and credit role are retained.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Fang excess Lean 2026-10-18]'
+    field: /credit
+  expected_text: Fang after Daniel, Arslanov, Mustafin, Shangitbayev, Ellsworth, Stead, de
+    Winter, Couzo
+  start: 71
+  end: 80
+  label: de Winter
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: joost-de-winter
+  note: 'Reviewed 2026-10-24 (think-494l) against the [Fang excess theorem 2026-10-13] span
+    of the same person: the note and the Lean source name the same people in the same roles;
+    the printed source text and credit role are retained.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Fang excess Lean 2026-10-18]'
+    field: /credit
+  expected_text: Fang after Daniel, Arslanov, Mustafin, Shangitbayev, Ellsworth, Stead, de
+    Winter, Couzo
+  start: 82
+  end: 87
+  label: Couzo
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - bibliography
+  contributor_id: francisco-couzo
+  note: 'Reviewed 2026-10-24 (think-494l) against the [Fang excess theorem 2026-10-13] span
+    of the same person: the note and the Lean source name the same people in the same roles;
+    the printed source text and credit role are retained.'
+- origin:
+    path: packing/resources/bibliography.yaml
     record_key: '[Couzo issue 763 2026-10-23]'
     field: /authors/0
   expected_text: Couzo

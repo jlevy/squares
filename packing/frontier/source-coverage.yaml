@@ -5718,6 +5718,57 @@ sources:
     so one of these rows names the report that beat it first: Couzo's 4e4c8ce index of 15
     October (couzo-index-2026-10-15) at 932.
   claims_record: resources/web/fang-excess-theorem-2026-10-13/acquisition/beyond-horizon-claims.json
+- id: fang-excess-note-2026-10-19
+  title: Kevin Fang's note v0.9, the proof of his n^2 - n + F(n) theorem (issue 603)
+  role: source-repository
+  url: https://doi.org/10.5281/zenodo.23463481
+  local: resources/web/fang-excess-note-2026-10-19/
+  source_key: '[Fang excess note 2026-10-19]'
+  scope:
+    n_values: [211, 241, 273, 307]
+  reviewed: '2026-10-24'
+  source_date: '2026-10-19'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/fang-excess-note-2026-10-19/README.md
+  evidence:
+  - E-fang-excess-note-proof
+  notes: >-
+    Draft v0.9 of 18 October 2026, DOI 10.5281/zenodo.23463481 (Zenodo record created 19
+    October, CC BY 4.0), with the same text in Markdown at TheSnakeFang/squarepack-certs
+    9ffba0f. The published proof of Theorems 1 and 2, whose statements equal T-163's; its 18
+    finite pieces rest on the exact certificates the 13 October packet retains. It states no
+    new finite bound: at 211, 241, 273 and 307 it gives s < n, and its Section 5 certificates
+    are the 13 October packet's, so the case records are unchanged. Recorded as a published
+    proof (E-fang-excess-note-proof); no stage 4 review has read it yet.
+- id: fang-excess-lean-2026-10-18
+  title: Kevin Fang's Lean proof of his Theorem 1 and the unmixed bounds of Theorem 2
+  role: source-repository
+  url: https://github.com/TheSnakeFang/squarepack-lean/tree/947bdaec40ead1105cfb00c2968e2484b7d1b40b
+  local: resources/web/fang-excess-lean-2026-10-18/
+  source_key: '[Fang excess Lean 2026-10-18]'
+  scope:
+    n_values: [211, 241, 273, 307]
+  reviewed: '2026-10-24'
+  source_date: '2026-10-18'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/fang-excess-lean-2026-10-18/README.md
+  evidence:
+  - E-fang-excess-lean-report
+  notes: >-
+    TheSnakeFang/squarepack-lean at 947bdae, 18 October 2026, MIT, over Evan Daniel's
+    Spec.lean vendored unchanged: theorem1, Fang's Theorem 1; main, the same count at side
+    n - 1/10000; and theorem2, the larger of the two single-step bounds of Theorem 2, which
+    is Theorem 2 for 15 <= n <= 51, then one short of it wherever n - 15 leaves 16 to 20 on
+    division by 21 (n = 52-56, 73-77, 94-98, ...), and equal otherwise. Reported on T-163 as
+    the author's own formal route, not a result of its own; at the four counts in scope it
+    gives s <= n - 1/10000, above every case bound, so the case records are unchanged. Not
+    built here: about 0.25 CPU-hours and 9 GB of disk.
 - id: wand125-linear-n145-1224-2026-10-13
   title: Linear point, segment and rectangle certificate for n = 145, no issue
   role: source-repository

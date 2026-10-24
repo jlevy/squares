@@ -1,0 +1,16 @@
+{
+  "format": "zenodo-capture-v1",
+  "record": 23463481,
+  "doi": "10.5281/zenodo.23463481",
+  "conceptdoi": "10.5281/zenodo.23463480",
+  "title": "Packing n² − n + 1 unit squares in a square of side less than n, for every n ≥ 15",
+  "version": "0.9",
+  "publication_date": "2026-10-18",
+  "created": "2026-10-19T03:28:26.405473+00:00",
+  "updated": "2026-10-19T03:28:26.841749+00:00",
+  "api": "https://zenodo.org/api/records/23463481",
+  "retrieved_utc": "2026-10-24T05:08:03Z",
+  "files": [{"key":"fang-2026-n2-n-1-tex.zip","bytes":12388,"checksum_stated":"md5:653bd4d351120ef4c11862f30af1d7f4","md5":"653bd4d351120ef4c11862f30af1d7f4","sha256":"3ba5e8696f3ca49ec482719cc5012a6bd6774cd451f483fe16d7ca934ea7818f","top_directory":null,"members":1,"member_bytes":31726,"member_manifest":"zenodo-23463481.sha256"},{"key":"fang-2026-n2-n-1.pdf","bytes":125257,"checksum_stated":"md5:beadf4508e65444d956a475e31f0e99e","md5":"beadf4508e65444d956a475e31f0e99e","sha256":"a44402f8da2523c2fdda79f6a639ecb3b03dfbe92fb7400ba2c75e8d46ef95d5","same_bytes_as":{"packing/resources/web/fang-excess-note-2026-10-19/acquisition/upstream-subtree.sha256":[]}}],
+  "extracted": [{"member":"main.tex","path":"zenodo-23463481/main.tex","bytes":31726,"sha256":"532b233f74464fed4ce072b732189944c609f9eee74bf105345ff29899415e86"}],
+  "comparisons": [{"archive":"fang-2026-n2-n-1-tex.zip","against":"packing/resources/web/fang-excess-note-2026-10-19/acquisition/upstream-subtree.sha256","same":0,"differs":[],"only_in_archive":["main.tex"],"only_in_manifest":["ATTRIBUTION.md","CHANGELOG.md","LICENSE","MANIFEST.sha256","README.md","VERIFICATION.md","note/fang-2026-n2-n-1.md"]}]
+}

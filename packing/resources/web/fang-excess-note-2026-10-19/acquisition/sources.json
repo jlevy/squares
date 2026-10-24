@@ -1,0 +1,76 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-24T04:57Z",
+  "git_scope": "A blobless clone of TheSnakeFang/squarepack-certs, whose head is the pin 9ffba0f (2026-10-19T03:29:59Z, 'README: scope the Lean formalisation statement'), with a sparse checkout of the root files and note/. Since the 13 October packet's pin 078789a only README.md and note/fang-2026-n2-n-1.md changed: note v0.8 at 0e9be79, v0.9 with its DOI at 6e26525, and the README's Lean scope at the pin. The scope is the note, the README, and the five root files that 078789a already held, each byte-identical to the 13 October packet's copy; every other path is unchanged since 078789a and is pinned by the commit alone. Nothing in the tree was executed.",
+  "sources": [
+    {
+      "id": "thesnakefang-squarepack-certs",
+      "source_url": "https://github.com/TheSnakeFang/squarepack-certs",
+      "source_ref": "main",
+      "source_commit": "9ffba0f3a84b38f0c92790c1d3089f979ef53f0b",
+      "committed_utc": "2026-10-19T03:29:59Z",
+      "git_tree": "33f93a883895ed672329b2d9d4568da34d4a9092",
+      "archived_path": "packing/resources/web/fang-excess-note-2026-10-19/source",
+      "subtree_manifest": "packing/resources/web/fang-excess-note-2026-10-19/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "README.md",
+        "note",
+        "ATTRIBUTION.md",
+        "CHANGELOG.md",
+        "LICENSE",
+        "VERIFICATION.md",
+        "MANIFEST.sha256"
+      ],
+      "subtree_file_count": 7,
+      "subtree_total_bytes": 80609,
+      "retained_file_count": 2,
+      "retained_total_bytes": 39081,
+      "compressed": [],
+      "pinned_only": [
+        {
+          "path": "ATTRIBUTION.md",
+          "bytes": 3108,
+          "sha256": "9296e0e13ab2558026a8ef95f0796d3d64e4189d91ffbee0fb64b41102941ccc",
+          "reason": "Unchanged since 078789a; the 13 October excess-theorem packet retains the same bytes",
+          "identical_to": "packing/resources/web/fang-excess-theorem-2026-10-13/source/ATTRIBUTION.md"
+        },
+        {
+          "path": "CHANGELOG.md",
+          "bytes": 2529,
+          "sha256": "86ec5968e9aa9a696ab8815b1156f45677c3f38cfdd18d80415194ee9af75178",
+          "reason": "Unchanged since 078789a; the 13 October excess-theorem packet retains the same bytes",
+          "identical_to": "packing/resources/web/fang-excess-theorem-2026-10-13/source/CHANGELOG.md"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "sha256": "5cab86dc08f20ec45f059a2b953fc815801354697896a3da4d6c626f1d5889e7",
+          "reason": "Unchanged since 078789a; the 13 October excess-theorem packet retains the same bytes",
+          "identical_to": "packing/resources/web/fang-excess-theorem-2026-10-13/source/LICENSE"
+        },
+        {
+          "path": "MANIFEST.sha256",
+          "bytes": 30492,
+          "sha256": "0a557ee22a6117add737a7177e77e8f4155e1ac93ad8e10e0ee86afb5df24c13",
+          "reason": "Unchanged since 078789a; the 13 October excess-theorem packet retains the same bytes",
+          "identical_to": "packing/resources/web/fang-excess-theorem-2026-10-13/source/MANIFEST.sha256"
+        },
+        {
+          "path": "VERIFICATION.md",
+          "bytes": 4332,
+          "sha256": "dc372c26ed4a75530a5ef5a65ec41013cb5066014c28da0f5ec960b456f2ac51",
+          "reason": "Unchanged since 078789a; the 13 October excess-theorem packet retains the same bytes",
+          "identical_to": "packing/resources/web/fang-excess-theorem-2026-10-13/source/VERIFICATION.md"
+        }
+      ],
+      "license": "The note's PDF and LaTeX source are CC BY 4.0 on its Zenodo record (10.5281/zenodo.23463481); the repository's README names no licence for note/. MIT, copyright 2026 Kevin Fang (LICENSE), for the code; the README releases the certificates, text files, tables and drawings in nNNNN/, rectangles/ and composites/ under CC0 1.0. The README and the note disclose Claude assistance directed and reviewed by Kevin Fang.",
+      "claims": [
+        "note/fang-2026-n2-n-1.md, draft v0.9 of 2026-10-18, the text of DOI 10.5281/zenodo.23463481 by the author's comment of 19 October on jlevy/squares#603: Theorem 1, s(n^2 - n + 1) < n for every integer n >= 15.",
+        "Theorem 2: let n >= 15 and p, q >= 0 integers with 16p + 21q <= n - 15; then n^2 - n + 1 + p + 2q unit squares pack in a square of side less than n; in particular s(n^2 - n + F(n)) < n with F(n) = 1 + max{p + 2q : p, q in Z>=0, 16p + 21q <= n - 15}.",
+        "The proof (Section 2): Lemma 3, the four-piece gluing of Arslanov, Mustafin and Shangitbayev, at a common squeeze d; Proposition 4, the rectangles R (257 squares in 17 x 16) and R' (443 in 22 x 21); Proposition 5, the base packings of n^2 - n + 1 squares for 15 <= n <= 26 and of m^2 - m squares for 11 <= m <= 14, every piece 1/10000-squeezable; and an induction on n by steps of 16 and 21, every composite of side n - 1/10000, scaled to a strict certificate of side n - 1/20000.",
+        "Section 6, Formal verification: Lean 4 (TheSnakeFang/squarepack-lean at 947bdae, proof sources of 837eca1) formalises Theorem 1 and the maximum of the two unmixed bounds of Theorem 2, jExc n = max ((n + 1) / 16) (1 + 2 * ((n - 15) / 21)); the mixed-step form of Theorem 2 is not formalised; #print axioms lists propext, Classical.choice and Quot.sound only.",
+        "README.md at the pin: 'Lean 4 formalisation of Theorem 1 and the unmixed bounds of Theorem 2'."
+      ]
+    }
+  ]
+}

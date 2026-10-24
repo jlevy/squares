@@ -8494,6 +8494,67 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
     ),
     ReleaseNoPublicChange(
         components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/devtools/check_results.py",
+            "packing/devtools/site_resources.py",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The retention of Kevin Fang's note v0.9 and Lean proof (think-494l): T-163 "
+            "from V2 to V3 with two new evidence entries, its claim, notes, composition, "
+            "next steps and unfinished confirmations rewritten, two coverage sources and "
+            "issue 603's requests entry, against main af9c9e850 (#745): rendered at link "
+            "revision 46effd32 into empty site directories, twice from this tree at "
+            "46effd32 and twice from the same tree with main's register, requests record "
+            "and coverage record swapped in (69 files each), "
+            "render_n11_lower_bounds_explainer, render_n11_optimality_review, "
+            "render_n11_threshold_bound_review and render_packing_methods write every file "
+            "byte-identical across all four. Measured once more after merging main "
+            "2c58b6373 (#750), at link revision 2d39f5ca with that main's three files "
+            "swapped in: the same outcome, and the register stays at 238 results. After "
+            "the two resource cards (site_resources.py), measured again at link revision "
+            "2821d8a6 with that main's four files swapped in: the same outcome. Measured "
+            "once more after merging main c5697c2f2 (#757), at link revision 0ffac35f "
+            "with that main's four files swapped in: the same outcome, the register at 239 "
+            "results. Measured once more after merging main 5f8f005a3 (#766), at link "
+            "revision bba0bfff with that main's four files swapped in: the same outcome. "
+            "And after merging main 34eb8bb75 (#769), at link revision d63381d5, and main "
+            "11d0ab06b (#770), at link revision 8753d8dc, and main e5c1c64e3 (#756), at "
+            "link revision b133025b, each with that main's four files swapped in: the same "
+            "outcome. After review A's fixes (a third evidence entry, the replay of the "
+            "note's 18 pieces, and T-163's claim, notes, next steps and composition) and "
+            "the merge of main 6808d293a (#787), at link revision 98ce1995: twice from this "
+            "tree and once with that main's four files swapped in, 69 files each, all "
+            "byte-identical across the three; the explainer's math was prepared by the "
+            "host's Chrome for Testing 153 headless shell through SQPACK_CHROMIUM, the same "
+            "browser for every render. Main b2ea7b09c (#788), merged after, changes none "
+            "of the four files, so that measurement stands for it. After review B's fixes, "
+            "which add check_results.py (verification_level, a refactor of one atom), and "
+            "the merge of main f354a34f5 (#736), at link revision 3d96fba0: twice from this "
+            "tree and once with that main's five files swapped in, 69 files each, all "
+            "byte-identical across the three, by the same browser. No PDF was printed; each "
+            "prints from that HTML. Every paper keeps its version."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
             "paper:n11-optimality-review",
             "paper:n11-threshold-bound-review",
             "paper:square-packing-methods-survey",
