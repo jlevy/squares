@@ -799,7 +799,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "a8920888f99624385e4197144f30199cfd216526"
+DATA_REVISION = "3a9c5b6060fb87ae08fed0364a8862d53e703dea"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -896,6 +896,15 @@ FIRST_PUBLISHED = PUBLICATION_HISTORY[-1].first_published
 #:                                            day is the one recorded
 #: The leading entry is proposed for the next publication; confirm its date at first deployment.
 EXPLAINER_HISTORY = (
+    PublicationHistoryEntry(
+        version="v0.4.27",
+        first_published="October 24, 2026",
+        result_scope=(
+            "Update the registered result count after the registration of Francisco "
+            "Couzo's certificate at 304 (T-241) and Evan Daniel's exact descents at 268 "
+            "and 304 (T-242)."
+        ),
+    ),
     PublicationHistoryEntry(
         version="v0.4.26",
         first_published="October 24, 2026",
@@ -1464,6 +1473,17 @@ class ReleaseImpactDecision(NamedTuple):
 # New component cuts append decisions here, newest first, alongside their own histories.
 # No impact is invented retrospectively for the published baseline editions.
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
+    ReleaseImpactDecision(
+        component="paper:n11-lower-bounds-explainer",
+        previous_version="v0.4.26",
+        version="v0.4.27",
+        impact="patch",
+        reason=(
+            "Update the registered result count after the registration of Francisco "
+            "Couzo's certificate at 304 (T-241) and Evan Daniel's exact descents at 268 "
+            "and 304 (T-242)."
+        ),
+    ),
     ReleaseImpactDecision(
         component="paper:n11-lower-bounds-explainer",
         previous_version="v0.4.25",
@@ -8665,6 +8685,44 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "files byte-identical across the three. The explainer, counting 239 to 240 "
             "results, takes v0.4.26 over main's v0.4.25. No PDF was printed for these "
             "three; each prints from that HTML. Retain v0.1.11, v0.1.4 and v0.2.7."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/devtools/acquire_source.py",
+            "packing/devtools/upper_bound_reports.py",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The think-l49q import: T-241's and T-242's registration of Francisco Couzo's "
+            "304 and Evan Daniel's exact descents at 268 and 304 as reported, their two "
+            "coverage sources, the importer's read of a certificate another packet "
+            "retains, #763's import reply, and reviews A's and B's credit, push-dating "
+            "and twin-reader fixes (acquire_source.twin_bytes), against main 2ec489d1e "
+            "(#789): rendered at link revision 2ec489d1 into empty site directories, twice "
+            "from this tree at 3a9c5b60 and once from it with main's result-requests.yaml, "
+            "acquire_source.py, upper_bound_reports.py, results.yaml and "
+            "source-coverage.yaml swapped in, "
+            "render_n11_optimality_review, render_n11_threshold_bound_review and "
+            "render_packing_methods write all 51 files byte-identical across the three. "
+            "The explainer, counting 240 to 242 results, takes v0.4.27 over main's "
+            "v0.4.26. No PDF was printed for these three; each prints from that HTML. "
+            "Retain v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
 )

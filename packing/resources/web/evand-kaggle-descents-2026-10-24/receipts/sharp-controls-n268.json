@@ -1,0 +1,141 @@
+{
+ "format": "think-l49q-sharp-controls-v1",
+ "packet": "evand-kaggle-descents-2026-10-24",
+ "n": 268,
+ "certificate": "search/packer/candidates/s268_lightning.cert",
+ "side": "8437180857934672912242411148233/500000000000000000000000000000",
+ "epsilon": "1/1000000000000000000000000000000",
+ "routes": [
+  "exact_verify",
+  "independent"
+ ],
+ "controls": [
+  {
+   "control": "side-lowered-past-wall-contact",
+   "where": "at-contact",
+   "margin": "wall",
+   "expected_margin": "0",
+   "expected": "accepted",
+   "routes": {
+    "exact_verify": {
+     "passed": true,
+     "wall": "0",
+     "gap": "1276624599720051885611359074429252307559637925698214397588029219613785774977701053/127662459972005330738974187176695601669954814177609570759673077080450000000000000000000000000000000000"
+    },
+    "independent": {
+     "passed": true,
+     "wall": "0",
+     "gap": "1276624599720051885611359074429252307559637925698214397588029219613785774977701053/127662459972005330738974187176695601669954814177609570759673077080450000000000000000000000000000000000"
+    }
+   },
+   "as_expected": true,
+   "cpu_seconds": 11.951
+  },
+  {
+   "control": "side-lowered-past-wall-contact",
+   "where": "past-contact",
+   "margin": "wall",
+   "expected_margin": "-1/1000000000000000000000000000000",
+   "expected": "refused",
+   "routes": {
+    "exact_verify": {
+     "passed": false,
+     "wall": "-1/1000000000000000000000000000000",
+     "gap": "1276624599720051885611359074429252307559637925698214397588029219613785774977701053/127662459972005330738974187176695601669954814177609570759673077080450000000000000000000000000000000000"
+    },
+    "independent": {
+     "passed": false,
+     "wall": "-1/1000000000000000000000000000000",
+     "gap": "1276624599720051885611359074429252307559637925698214397588029219613785774977701053/127662459972005330738974187176695601669954814177609570759673077080450000000000000000000000000000000000"
+    }
+   },
+   "as_expected": true,
+   "cpu_seconds": 11.382
+  },
+  {
+   "control": "tightest-pair-closed-past-contact",
+   "where": "at-contact",
+   "margin": "gap",
+   "expected_margin": "0",
+   "expected": "accepted",
+   "routes": {
+    "exact_verify": {
+     "passed": true,
+     "wall": "1/200000000000000000000",
+     "gap": "0"
+    },
+    "independent": {
+     "passed": true,
+     "wall": "1/200000000000000000000",
+     "gap": "0"
+    }
+   },
+   "as_expected": true,
+   "cpu_seconds": 11.989
+  },
+  {
+   "control": "tightest-pair-closed-past-contact",
+   "where": "past-contact",
+   "margin": "gap",
+   "expected_margin": "-1/1000000000000000000000000000000",
+   "expected": "refused",
+   "routes": {
+    "exact_verify": {
+     "passed": false,
+     "wall": "1/200000000000000000000",
+     "gap": "-1/1000000000000000000000000000000"
+    },
+    "independent": {
+     "passed": false,
+     "wall": "1/200000000000000000000",
+     "gap": "-1/1000000000000000000000000000000"
+    }
+   },
+   "as_expected": true,
+   "cpu_seconds": 11.095
+  },
+  {
+   "control": "squares-moved-past-near-wall-contact",
+   "where": "at-contact",
+   "margin": "wall",
+   "expected_margin": "0",
+   "expected": "accepted",
+   "routes": {
+    "exact_verify": {
+     "passed": true,
+     "wall": "0",
+     "gap": "1276624599720051885611359074429252307559637925698214397588029219613785774977701053/127662459972005330738974187176695601669954814177609570759673077080450000000000000000000000000000000000"
+    },
+    "independent": {
+     "passed": true,
+     "wall": "0",
+     "gap": "1276624599720051885611359074429252307559637925698214397588029219613785774977701053/127662459972005330738974187176695601669954814177609570759673077080450000000000000000000000000000000000"
+    }
+   },
+   "as_expected": true,
+   "cpu_seconds": 11.987
+  },
+  {
+   "control": "squares-moved-past-near-wall-contact",
+   "where": "past-contact",
+   "margin": "wall",
+   "expected_margin": "-1/1000000000000000000000000000000",
+   "expected": "refused",
+   "routes": {
+    "exact_verify": {
+     "passed": false,
+     "wall": "-1/1000000000000000000000000000000",
+     "gap": "1276624599720051885611359074429252307559637925698214397588029219613785774977701053/127662459972005330738974187176695601669954814177609570759673077080450000000000000000000000000000000000"
+    },
+    "independent": {
+     "passed": false,
+     "wall": "-1/1000000000000000000000000000000",
+     "gap": "1276624599720051885611359074429252307559637925698214397588029219613785774977701053/127662459972005330738974187176695601669954814177609570759673077080450000000000000000000000000000000000"
+    }
+   },
+   "as_expected": true,
+   "cpu_seconds": 11.07
+  }
+ ],
+ "all_as_expected": true
+}
