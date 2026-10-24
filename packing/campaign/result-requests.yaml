@@ -4152,6 +4152,11 @@ issues:
         verification: V0
         confirmation: C0
         status: recorded
+    - url: https://github.com/jlevy/squares/issues/446#issuecomment-6384155203
+      date: '2026-10-24'
+      by: jlevy
+      kind: follow-up
+      reported: []
     close_when: Accurate source-only disposition reaches main and the remaining independent native/review
       obligations have explicit dispositions. Source-byte custody alone does not close this request.
     notes: >-
@@ -4171,6 +4176,12 @@ issues:
       four's notes F-6 to F-8 and its four questions to the author; the n31 review's M-1 to
       M-3 and its questions are the owner’s call (think-nq5g) and were not sent. The issue
       stays open.
+
+      GitHub closed the issue at 2026-10-24T09:02:17Z when #787 merged, reading a commit
+      message that named it beside a closing word as a closing reference. The owner reopened
+      it, and the follow-up of 12:22:29Z (issuecomment-6384155203) says the close was
+      mechanical, not a decision, and that the issue stays open while T-233's replays wait on
+      the census control fix (think-tcsl), as the follow-up of that morning said.
   - number: 451
     title: '105, 108, 127, 131, 155, 180, 228, 306: registration request'
     author: franciscouzo
@@ -12845,7 +12856,8 @@ issues:
     title: '227, 229, 330-996: registration request'
     author: franciscouzo
     opened: '2026-10-17'
-    state: open
+    state: closed
+    closed: '2026-10-24'
     kind: result-report
     triage: done
     summary: >-
@@ -13555,6 +13567,21 @@ issues:
         verification: V3
         confirmation: C3
         status: confirmed
+    - url: https://github.com/jlevy/squares/issues/672#issuecomment-6384130738
+      date: '2026-10-24'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n227
+        id: T-227
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: n229
+        id: T-227
+        verification: V3
+        confirmation: C3
+        status: confirmed
     close_when: Every claim or correction has a reviewed disposition on main, pending validation has a priced
       owner, any changed house is regularized in its adoption, and the author has received a reply verified
       against main and the deployed site.
@@ -13645,6 +13672,22 @@ issues:
       cites. Nothing the author asked for is queued
       and no question awaits him, so the final comment, owed after that change merges and its
       deploy is verified, closes the issue.
+
+      The final comment, posted at 2026-10-24T12:19:54Z (issuecomment-6384130738) after #790
+      merged (90a543771) and its Pages deployment was checked (run 40092660372, its deploy and
+      verify-deployment jobs included; result/t-227.html, result/t-225.html and cases/227.html
+      read against it), thanked the author for both answers of 24 October. It said the CT105
+      submission at 227 was his own, so T-227's credit stands as his manifest gives it, Couzo
+      after de Winter, Daniel, Levy, and that T-227 and T-225 now say so. It gave the
+      measurement of the retained parent cdd08485 (de Winter's packing one to one under a
+      reflection, 82 squares beyond 1e-3 and at most 0.0887 away, 7.26e-5 below his side and
+      9.84e-5 above the #672 certificate, which is one to one with it under the identity),
+      which changes no credit, and reproduced the author's call of sqpack/verify.py (58 corner
+      coordinates on the boundary at 229, none at 227, no touching pair). It reported T-227 at
+      V3/C3, confirmed, and superseded by T-225, Evan Daniel's view, the house at 227 and 229,
+      and the 44 rows beyond the corpus as dated rows each superseded by a later report.
+      Nothing asked for is queued, and the issue was closed with it at 12:19:58Z, as
+      completed.
   - number: 673
     title: 'Credit correction request: s(146) and s(308) found_by'
     author: evand
@@ -15175,7 +15218,8 @@ issues:
     title: '204-998: registration request'
     author: franciscouzo
     opened: '2026-10-18'
-    state: open
+    state: closed
+    closed: '2026-10-24'
     kind: result-report
     triage: done
     summary: >-
@@ -16326,6 +16370,21 @@ issues:
         status: confirmed
       corrects:
       - https://github.com/jlevy/squares/issues/678#issuecomment-6331709679
+    - url: https://github.com/jlevy/squares/issues/678#issuecomment-6384130934
+      date: '2026-10-24'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n204
+        id: T-223
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: n260
+        id: T-223
+        verification: V3
+        confirmation: C3
+        status: confirmed
     close_when: Every claim or correction has a reviewed disposition on main, pending validation has a priced
       owner, any changed house is regularized in its adoption, and the author has received a reply verified
       against main and the deployed site.
@@ -16456,6 +16515,20 @@ issues:
       asked for is queued and no question awaits him, so the final comment, owed after that
       change merges and its deploy is verified, closes the issue; the held full-kernel replay
       (think-fpnd) is the record's own work and holds nothing open.
+
+      The final comment, posted at 2026-10-24T12:19:55Z (issuecomment-6384130934) after #790
+      merged (90a543771) and its Pages deployment was checked (run 40092660372;
+      result/t-225.html, cases/260.html and cases/204.html read against it), thanked the
+      author for completing the source correction and reported each part as read at 1c17153:
+      the evand pin at 7982d7a, the two per-file pins still at 0f37f49 the same blobs as the
+      record's, the n260 seed's gzip and decompressed digests, the hash kinds at 227, 229 and
+      260, and the credit at 227 and 260 as T-225 gives it, so the correction changes nothing
+      in the record. It reported T-223 at V3/C3, confirmed, and superseded by T-225, the house
+      at 260 since 22 October; at 204 Mykhailo Polkovskyi's T-231, his re-solve of the #678
+      packing, the house since 24 October; and of the 83 rows beyond the corpus the row at 984
+      current and the other 82 superseded by issue 686 (48), issue 715 (26), issue 719 (7) and
+      Evan Daniel's n343 sweep (1). Nothing asked for is queued, and the issue was closed with
+      it at 12:19:59Z, as completed.
   - number: 680
     title: 's(183) ≤ 13.999580178737: registration request (first 183 below the grid)'
     author: evand
@@ -20027,6 +20100,12 @@ issues:
       - result: n986
       - result: n988
       - result: above-1024
+    - url: https://github.com/jlevy/squares/issues/715#issuecomment-6384131133
+      date: '2026-10-24'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: above-1024
     close_when: >-
       Every claim has a reviewed disposition on main, pending validation has a priced owner,
       any changed house is regularized in its adoption, and the author has received a reply
@@ -20234,6 +20313,16 @@ issues:
       (issuecomment-6381214428) thanked him for the restoration and said this comment would
       be read into the record in a change of its own; the follow-up after that change merges
       says it has been. The issue stays open while the rows above 1024 wait (think-f2io).
+
+      The follow-up posted at 2026-10-24T12:19:56Z (issuecomment-6384131133), after #790
+      merged (90a543771), thanked the author for restoring the construction credits his
+      comment of 24 October names (issuecomment-6380757758). Read at 1c17153, the manifest's
+      entries for Mykhailo Polkovskyi's certificates at 1061, 1413 and 1489 keep the author's
+      staircase assembly as their previous source, crediting Arslanov, Mustafin and
+      Shangitbayev (2021) and Joost de Winter's staircase and four-block constructions, which
+      none of the three named at 6b7391d. No row above 1024 is recorded yet, so no credit line
+      changes; the rows above 1024 will cite the manifest for that credit when they are
+      imported, and the issue stays open.
   - number: 719
     title: 'New packings: 122 verified upper bounds for square packing (N in [105, 1568]): registration request'
     author: Mishapolk
