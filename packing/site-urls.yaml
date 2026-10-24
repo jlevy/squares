@@ -20549,7 +20549,7 @@ urls:
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-22'
-  lastmod: '2026-10-23'
+  lastmod: '2026-10-24'
   status: live
   identity:
     kind: upper-bound
@@ -20574,6 +20574,7 @@ urls:
     - packing/resources/web/couzo-issue672-2026-10-17/source/certificates/n229.cert
     - packing/resources/web/couzo-issue672-2026-10-17/receipts/exact-certification.json.xz
     - packing/resources/web/couzo-issue672-2026-10-17/measure/identity.json
+    - packing/resources/web/couzo-issue672-2026-10-17/measure/answers-2026-10-24.json
     - packing/resources/web/evand-regularized-2026-10-20/measure/identity.json
     - packing/campaign/issue-intake/upper-bounds-20261018/README.md
     - packing/devtools/upper_bound_reports.py
@@ -20609,6 +20610,40 @@ urls:
       - packing/resources/web/evand-regularized-2026-10-20/measure/identity.json
       - packing/campaign/issue-intake/upper-bounds-20261018/README.md
       - packing/devtools/upper_bound_reports.py
+  - date: '2026-10-24'
+    reason: 'Francisco Couzo''s answers of 24 October 2026 on #672 say he made the 227 CT105 submission
+      himself and how he calls sqpack/verify.py: the result cites the packet''s measurement of the
+      answers among its artifacts, which holds the seed witness the source published with the report
+      to de Winter''s packing and reproduces his checker call, and its credit text says the submission
+      was his; the bound, scope, source, credit line and evidence are unchanged.'
+    previous:
+      kind: upper-bound
+      scope:
+        n_values:
+        - 227
+        - 229
+      established: null
+      attribution:
+        source_keys:
+        - '[Couzo issue 672 2026-10-17]'
+        published: '2026-10-17'
+      builds_on: null
+      evidence:
+      - E-couzo-672-certificate-report
+      - E-couzo-672-exact-feasibility
+      - E-couzo-672-review-exact-feasibility
+      artifacts:
+      - packing/resources/web/couzo-issue672-2026-10-17/README.md
+      - packing/resources/web/couzo-issue672-2026-10-17/acquisition/claims.json
+      - packing/resources/web/couzo-issue672-2026-10-17/source/certificates/n227.cert
+      - packing/resources/web/couzo-issue672-2026-10-17/source/certificates/n229.cert
+      - packing/resources/web/couzo-issue672-2026-10-17/receipts/exact-certification.json.xz
+      - packing/resources/web/couzo-issue672-2026-10-17/measure/identity.json
+      - packing/resources/web/evand-regularized-2026-10-20/measure/identity.json
+      - packing/campaign/issue-intake/upper-bounds-20261018/README.md
+      - packing/devtools/upper_bound_reports.py
+      - docs/project/reviews/review-2026-10-22-couzo-670-672-675.md
+      - packing/resources/web/couzo-issue672-2026-10-17/review/review-2026-10-22/README.md
 - path: result/t-228.html
   canonical: result/t-228.html
   kind: result

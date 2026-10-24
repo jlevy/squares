@@ -223,6 +223,44 @@ def test_the_seed_identity_receipt_rebuilds_from_the_retained_files(tmp_path: Pa
         assert call["container_contacts"] == call["reported_container_contacts"]
 
 
+def test_the_672_answers_receipt_rebuilds_from_the_retained_files(tmp_path: Path) -> None:
+    """Couzo's answers of 24 October on #672 (think-mdfr), held to the packets. Every
+    digest prefix the comment prints is the SHA-256 the #672 packet's manifest records; the
+    227 seed it names, cdd08485, retained from af8cb79, is not de Winter's certificate but
+    a packing one to one with it, no square beyond a tenth, 7.26e-5 below T-196 and 9.84e-5
+    above #672's 227, which pairs with it one to one under the identity; and the author's
+    call, verify_packing(..., bucket=True) on exact corners in the closed box, counts the 58
+    boundary corner coordinates at 229 his answer reports and none at 227, with no touching
+    pair at either. The packet's program rebuilds the committed receipt from the retained
+    files, byte for byte, in a few seconds."""
+    program = _packet("couzo-issue672-2026-10-17") / "measure/answers-2026-10-24.py"
+    spec = importlib.util.spec_from_file_location("couzo_672_answers", program)
+    assert spec is not None
+    assert spec.loader is not None
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    out = tmp_path / "answers-2026-10-24.json"
+    assert module.main(["--out", str(out)]) == 0
+    committed = program.with_name("answers-2026-10-24.json")
+    assert out.read_bytes() == committed.read_bytes()
+    receipt = _json(committed)
+    assert all(row["matches"] for row in receipt["digests"])
+    seed = receipt["seed"]
+    assert not seed["is_de_winter_certificate"]
+    assert Fraction(7, 10**5) < Fraction(seed["below_t196"]["exact"]) < Fraction(8, 10**5)
+    assert Fraction(9, 10**5) < Fraction(seed["above_issue_672"]["exact"]) < Fraction(1, 10**4)
+    for pair in receipt["pairs"]:
+        nearest = pair["nearest_centre"]
+        assert nearest["one_to_one"]
+        assert nearest["moved_beyond"]["1e-1"] == 0
+    for count, call in receipt["checker_call"].items():
+        assert call["valid"]
+        assert call["failures"] == 0
+        assert call["touching_pairs"] == 0
+        assert (call["container_contacts"] == 0) is call["reported"]["strict_verdict"], count
+    assert receipt["checker_call"]["229"]["container_contacts"] == 58
+
+
 @pytest.mark.slow
 @pytest.mark.parametrize("where", ["at-contact", "past-contact"])
 @pytest.mark.parametrize("control", kernel.SHARP_CONTROLS)

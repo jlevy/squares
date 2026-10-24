@@ -518,15 +518,17 @@ repositories:
   - url: https://github.com/wand125/square-packing
     read_through: 23e31862345c532d17ad2c896677a3a8d8821aa4
     read_on: '2026-10-11'
-    bead: think-wop1
     note: >-
       The commits of 10 and 11 October (UTC) from b4743cf to 23e3186 past the 27ed168 read. 23e3186
       adds problems/square-lower-bounds/certificates/mixed_n31_L59775/, a fine-net check2 bundle
       reporting s(31) >= 2391/400 = 5.9775 on the 2,073-direction net (candidate and receipts in the
-      data release), above n = 31's registered 2381/400 and #446's reported 597/100, which
-      think-wop1 owns. 24ccf8e adds certified constructions of squares in rectangles
+      data release), above n = 31's registered 2381/400 and #446's reported 597/100. Since #745
+      merged on 24 October the wand125-fine-net-n31-2026-10-11 packet pins 23e3186 and retains
+      that directory with the problem's LICENSE, and T-232 registers the bound, confirmed at
+      V3/C3 (think-wop1); #534, which tracked it, closed that day. So this read holds nothing
+      back. 24ccf8e adds certified constructions of squares in rectangles
       (problems/rectangles), outside this record's square container; b4743cf, c269dd6, 334f360,
-      69499e8 and 2067e5f are site and editorial data.
+      69499e8 and 2067e5f are site and editorial data. Nothing else to import.
   - url: https://github.com/wand125/square-packing
     read_through: 04fbef0d4e8fc33d628c7fe626605e7fbbbf3250
     read_on: '2026-10-11'
@@ -1433,3 +1435,50 @@ repositories:
       push and records none: 105 ties T-229, 204 is above T-231, each of the 51 is above the
       case's reported lane (31), a register entry pending adoption (14), PR #574's row (5) or
       T-126 (1), and 303 is above #755's, reported at 11:12:48Z. Nothing else to import.
+  # The intake pass of 2026-10-24, records lane c-couzo-answers-1024b (think-mdfr): the two
+  # heads the sweep listed past their reads, from the read-only triage of think-6r5p and
+  # think-cncq.
+  - url: https://github.com/evand/square-packing
+    read_through: 659ee62e4a9d39542a1146e8b011cc3ab6407ede
+    read_on: '2026-10-24'
+    bead: think-l49q
+    note: >-
+      The 15 commits past the 7982d7a read, c1572fc to 659ee62, pushed on 24 October at
+      03:58:45Z, 04:53:53Z and 05:02:45Z. 8a8879a (pushed 04:53:53Z) adds
+      search/packer/candidates/ certificates for three public Kaggle packings, which the
+      source did not post because #763 already held the counts: s268_lightning.cert,
+      s(268) <= 8437180857934672912242411148233/(5*10^29), the exact descent of Vladislav
+      Lavrentev's packing, 4.48e-12 below #763's side and the same packing;
+      s304_pub.cert, s(304) <= 1792689890035674158972360842897/10^29, a public packing
+      whose finder the source does not know, 3.04e-9 below the same packing's certificate
+      at franciscouzo@fa6237e; and s303_cdeotte.cert, Chris Deotte's packing at
+      17.907238274539, above #763's 303, so not recorded. The 268 and 304 certificates
+      are later reports the record takes, held for think-l49q until a packet pins
+      8a8879a. c1572fc, d47d17a, f3ea419, d28be37 and 6bc50ea prove in Lean
+      (strip_odd_iff, standard axioms) that for odd n >= 3 and 1.87 <= H < 2, n unit
+      squares fit in an L x H strip iff L >= n or L >= (n - 2)(2 sqrt 2 - H) + 4 - H;
+      strips are rectangles, outside this record, and bound no s(n). c185697 adds the
+      source's register-check and Kaggle import tools and its "Beyond the register" posting
+      policy; f5fbf7b, 9a8d502, a9cdd63, 5e862ac, fd90f09, 2aae1b6 and 659ee62 are packer
+      framework, TODO, CLAUDE.md and submission checklist edits. Nothing else to import.
+  - url: https://github.com/franciscouzo/square-packing
+    read_through: 1c1715399709bc955e9b402947ab8b52bbacdfc3
+    read_on: '2026-10-24'
+    bead: think-gn29
+    note: >-
+      The six commits past the 6b7391d read. efef7d1, fa6237e and 964ee2b, pushed together
+      at 2026-10-23T23:38:42Z, are #763's, whose import (think-ptkk) pins 964ee2b.
+      43f666c, 73eac5b and 1c17153 were pushed together at 2026-10-24T06:10:44Z. 43f666c
+      lowers certified_bounds.json at 957 counts, each below #763's side and every bound
+      this record held: at or below 1024, 108 own-count certificates at 330 to 997, a
+      deletion at 690 and 17 L-border recipes; above 1024, 831 L-border recipes on 14 of
+      those certificates. No issue or comment claims them; they are held for think-gn29.
+      43f666c also adds the Kaggle per-puzzle leaderboard of 24 October to its public
+      comparison, after which its README cedes 303 to pjmathematician's side-only entry,
+      3.47e-11 above #763's side, and holds 340, 679, 732, 787, 844 and 903. It and
+      73eac5b replace 227 and 260 by T-225's certificates, credited "Evan Daniel; start:
+      Francisco Couzo", and restore the construction credits of Couzo's assemblies at 1061,
+      1413 and 1489; the three commits state the kind of every external gzip hash; and
+      73eac5b and 1c17153 change no bound. Couzo's comments of 24 October on #678 and #715
+      report these corrections, which the records change of think-mdfr reads. Nothing else
+      to import.

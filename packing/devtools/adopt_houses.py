@@ -1481,8 +1481,8 @@ CREDITS: dict[int, Credit] = {
     # started from this repository's catalogue.
     # #672 reports the refinement; the source's manifest credits it to Couzo, retaining de
     # Winter's seed credit, and the CT105 web submission it names as provenance names no
-    # submitter (RF-3 of the 22 October review of T-226 to T-228); the #672 reply asks who
-    # made it (review A4 of #718).
+    # submitter (RF-3 of the 22 October review of T-226 to T-228). Couzo's answer of 24
+    # October 2026 on #672 says he made it himself (think-mdfr), so the credit stands.
     227: _regularized(
         DE_WINTER,
         "Joost de Winter’s",

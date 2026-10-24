@@ -1,7 +1,7 @@
 {
   "format": "external-source-acquisition-v1",
-  "retrieved_at_utc": "2026-10-22T04:41Z",
-  "git_scope": "Blobless clone of franciscouzo/square-packing with a sparse checkout at the pin of issue #672, af8cb795 (committed 2026-10-17T20:44:59Z); its parent 23aff0c6 is the pin of issue #670, and the history is linear to the head 6b7391de on 22 October. Retained: every certificate the issue links, root certificates/nN.cert at its 46 counts, the two in the n <= 324 corpus (n227 and n229, with their per-count JSON, retrieved at 01:24Z for T-227) and the 44 beyond it with their per-count JSON, which name each seed's credit (added from the same pin at 04:41Z for their beyond-horizon rows, think-2vjc). Pinned by digest only: the root README.md and upper_bounds.json, the certificate directory's README, manifest.json and SHA256SUMS, and the exact checker verify_bound_certificate.py with its MIT licence, against the issue-678 packet's identical copies. The rest of the tree is pinned by the commit alone; no source file was executed.",
+  "retrieved_at_utc": "2026-10-24T09:40Z",
+  "git_scope": "Blobless clone of franciscouzo/square-packing with a sparse checkout at the pin of issue #672, af8cb795 (committed 2026-10-17T20:44:59Z); its parent 23aff0c6 is the pin of issue #670, and the history is linear to the head 6b7391de on 22 October. Retained: every certificate the issue links, root certificates/nN.cert at its 46 counts, the two in the n <= 324 corpus (n227 and n229, with their per-count JSON, retrieved at 01:24Z for T-227) and the 44 beyond it with their per-count JSON, which name each seed's credit (added from the same pin at 04:41Z for their beyond-horizon rows, think-2vjc). Pinned by digest only: the root README.md and upper_bounds.json, the certificate directory's README, manifest.json and SHA256SUMS, and the exact checker verify_bound_certificate.py with its MIT licence, against the issue-678 packet's identical copies. Added from the same pin on 24 October at 09:40Z (think-mdfr), from a blobless clone with a sparse checkout of the scope: certificates/parents/cdd08485c2b7e97c59cae33f8a70923bf8eb95c878f0f998640b88c0eae1bcc0.cert, retained, the 227 certificate the per-count JSON names as the CT105 submission's prior retained witness and Couzo's comment of 2026-10-24T06:10:57Z on issue #672 names as the task's seed, first committed here. The rest of the tree is pinned by the commit alone; no source file was executed.",
   "sources": [
     {
       "id": "franciscouzo-square-packing",
@@ -110,13 +110,14 @@
         "certificates/n995.json",
         "certificates/n996.cert",
         "certificates/n996.json",
+        "certificates/parents/cdd08485c2b7e97c59cae33f8a70923bf8eb95c878f0f998640b88c0eae1bcc0.cert",
         "upper_bounds.json",
         "verify_bound_certificate.py"
       ],
-      "subtree_file_count": 99,
-      "subtree_total_bytes": 7864917,
-      "retained_file_count": 92,
-      "retained_total_bytes": 5631984,
+      "subtree_file_count": 100,
+      "subtree_total_bytes": 7889374,
+      "retained_file_count": 93,
+      "retained_total_bytes": 5656441,
       "compressed": [],
       "pinned_only": [
         {
@@ -167,7 +168,8 @@
       "license": "The repository states no licence for its data or prose: the tree has no LICENSE, and neither README.md nor certificates/best/README.md states reuse terms. The in-corpus certificates and their per-count JSON are retained as factual data under the owner decision of 2026-10-09 recorded in resources/web/known-best-packings/README.md (Retained Factual Data). verify_bound_certificate.py states that it is Evan Daniel's MIT-licensed verifier with modifications by Francisco Couzo with Codex, distributed under the MIT licence in BOUND_VERIFIER_LICENSE.txt; both are pinned by digest against the identical copies the issue-678 packet retains, and were not run. Prose, the index and the manifest are hash-pinned and not copied.",
       "claims": [
         "Issue #672 reports 46 improved upper bounds for n = 227, 229 and 330 to 996, each the exact rational side in its linked certificate's header rounded upward at 12 decimal places, with the header authoritative. In the n <= 324 corpus it reports s(227) <= 15.563625652343 (certificates/n227.cert) and s(229) <= 15.650174740273 (certificates/n229.cert).",
-        "The author's comment of 17 October (issuecomment-6242081759) says the 227 and 229 bounds are based on Joost de Winter's recent #668 findings. The per-count JSON names a CT105 web submission (f0ca7a65, method fq, received 2026-10-17T20:28:22Z) seeded from de Winter's #668 certificate at 227, and an slp refinement (search job 106640) of de Winter's #668 certificate at 229. Those statements are the author's; no source program ran here."
+        "The author's comment of 17 October (issuecomment-6242081759) says the 227 and 229 bounds are based on Joost de Winter's recent #668 findings. The per-count JSON names a CT105 web submission (f0ca7a65, method fq, received 2026-10-17T20:28:22Z) seeded from de Winter's #668 certificate at 227, and an slp refinement (search job 106640) of de Winter's #668 certificate at 229. Those statements are the author's; no source program ran here.",
+        "certificates/parents/cdd08485c2b7e97c59cae33f8a70923bf8eb95c878f0f998640b88c0eae1bcc0.cert at af8cb795, first committed there, is a 227 certificate at the exact side 8556247787153006491973257/549755813888000000000000. certificates/n227.json names it as the prior retained witness of the CT105 web submission f0ca7a65, with Joost de Winter's seed credit, de Winter's n227_record.cert (SHA-256 7d386887...) as its source certificate and Evan Daniel's search/regularize/lists/certs/alt/n-227.cert.gz as its seed certificate. Francisco Couzo's comment on issue #672 of 2026-10-24T06:10:57Z (issuecomment-6380747582) says he made the submission himself, on CT105, the server behind his search web app, and that it was seeded from this witness, which it calls de Winter's #668 certificate. Those statements are the author's; measure/answers-2026-10-24.json measures the file against de Winter's certificate and the 227 certificate."
       ]
     }
   ]

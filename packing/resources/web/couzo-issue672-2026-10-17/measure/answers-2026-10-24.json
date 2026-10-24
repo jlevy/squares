@@ -1,0 +1,146 @@
+{
+ "format": "couzo-672-answers-v1",
+ "comment": "https://github.com/jlevy/squares/issues/672#issuecomment-6380747582",
+ "digests": [
+  {
+   "file": "the retained 227 witness",
+   "packet": "couzo-issue672-2026-10-17",
+   "path": "certificates/parents/cdd08485c2b7e97c59cae33f8a70923bf8eb95c878f0f998640b88c0eae1bcc0.cert",
+   "printed_prefix": "cdd08485",
+   "recorded_sha256": "cdd08485c2b7e97c59cae33f8a70923bf8eb95c878f0f998640b88c0eae1bcc0",
+   "matches": true
+  },
+  {
+   "file": "#672 certificates/n227.cert",
+   "packet": "couzo-issue672-2026-10-17",
+   "path": "certificates/n227.cert",
+   "printed_prefix": "65b03df8",
+   "recorded_sha256": "65b03df883e75f890eca985232252a6340b9b5da3437c41275c9201df03d8c17",
+   "matches": true
+  },
+  {
+   "file": "#672 certificates/n229.cert",
+   "packet": "couzo-issue672-2026-10-17",
+   "path": "certificates/n229.cert",
+   "printed_prefix": "9ab667ec",
+   "recorded_sha256": "9ab667ec73e55b4570fdc427b9f9930831a3e3f07b6953a2e05c6aee0a07609f",
+   "matches": true
+  }
+ ],
+ "seed": {
+  "source": "franciscouzo/square-packing@af8cb79:certificates/parents/cdd08485c2b7e97c59cae33f8a70923bf8eb95c878f0f998640b88c0eae1bcc0.cert",
+  "sha256": "cdd08485c2b7e97c59cae33f8a70923bf8eb95c878f0f998640b88c0eae1bcc0",
+  "squares": 227,
+  "exact_side": "8556247787153006491973257/549755813888000000000000",
+  "is_de_winter_certificate": false,
+  "de_winter_certificate_sha256": "7d386887c4acdfe2472c0b83fff54e76eae76d414fef9ddc45478d0e03011d1f",
+  "below_t196": {
+   "float": "7.264473e-05",
+   "exact": "60938812352665643684080672311474128369154922661276692493819165930404728261434690830266061278676242753339129504247053556565466181273807330334929777665671511/838860800000000000000000000000085376217762728705788964391273839928985330322887136018550144734439421580812496979081344501160556573491200000000000000000000000000"
+  },
+  "below_daniel_alt": {
+   "float": "7.262812e-05",
+   "exact": "152312199885182021749593571431647/2097152000000000000000000000000000000"
+  },
+  "above_issue_672": {
+   "float": "9.840660e-05",
+   "exact": "62071286739223098338725746361073821/630763444069838096433152000000000000000"
+  }
+ },
+ "pairs": [
+  {
+   "n": 227,
+   "view": "the seed (af8cb79 cdd08485)",
+   "against": "T-196 (de Winter's #668 n227_record.cert)",
+   "side_difference": "-7.264473e-05",
+   "side_difference_exact": "-60938812352665643684080672311474128369154922661276692493819165930404728261434690830266061278676242753339129504247053556565466181273807330334929777665671511/838860800000000000000000000000085376217762728705788964391273839928985330322887136018550144734439421580812496979081344501160556573491200000000000000000000000000",
+   "nearest_centre": {
+    "one_to_one": true,
+    "symmetry": 7,
+    "largest_displacement": "8.871618e-2",
+    "largest_turn_degrees": "4.824",
+    "moved_beyond": {
+     "1e-9": 227,
+     "1e-6": 226,
+     "1e-3": 82,
+     "1e-2": 54,
+     "1e-1": 0
+    },
+    "turned_beyond_1e-6": 57
+   },
+   "assignment": {
+    "symmetry": 7,
+    "largest_move": "0.0887162",
+    "moved_beyond": {
+     "1e-9": 227,
+     "1e-6": 226,
+     "1e-3": 82,
+     "1e-2": 54,
+     "1e-1": 0
+    },
+    "largest_turn_degrees": "4.824",
+    "turned_beyond_1e-6": 57
+   }
+  },
+  {
+   "n": 227,
+   "view": "#672 certificates/n227.cert (T-227)",
+   "against": "the seed (af8cb79 cdd08485)",
+   "side_difference": "-9.840660e-05",
+   "side_difference_exact": "-62071286739223098338725746361073821/630763444069838096433152000000000000000",
+   "nearest_centre": {
+    "one_to_one": true,
+    "symmetry": 0,
+    "largest_displacement": "7.930145e-2",
+    "largest_turn_degrees": "5.885",
+    "moved_beyond": {
+     "1e-9": 226,
+     "1e-6": 226,
+     "1e-3": 91,
+     "1e-2": 73,
+     "1e-1": 0
+    },
+    "turned_beyond_1e-6": 57
+   },
+   "assignment": {
+    "symmetry": 0,
+    "largest_move": "0.0793015",
+    "moved_beyond": {
+     "1e-9": 226,
+     "1e-6": 226,
+     "1e-3": 91,
+     "1e-2": 73,
+     "1e-1": 0
+    },
+    "largest_turn_degrees": "5.885",
+    "turned_beyond_1e-6": 57
+   }
+  }
+ ],
+ "checker_call": {
+  "227": {
+   "valid": true,
+   "container_contacts": 0,
+   "touching_pairs": 0,
+   "strict_pairs": 2942,
+   "pairs_tested": 2942,
+   "failures": 0,
+   "reported": {
+    "strict_verdict": true
+   }
+  },
+  "229": {
+   "valid": true,
+   "container_contacts": 58,
+   "touching_pairs": 0,
+   "strict_pairs": 3022,
+   "pairs_tested": 3022,
+   "failures": 0,
+   "reported": {
+    "strict_verdict": false,
+    "container_contacts": 58,
+    "touching_pairs": 0
+   }
+  }
+ }
+}
