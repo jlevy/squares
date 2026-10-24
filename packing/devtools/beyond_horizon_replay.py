@@ -4701,8 +4701,12 @@ def write_later_commits(issue: int | str, clone: Path) -> dict[str, int]:
 #: and each commit's least new side at each count below the frozen start, its claim there.
 PUSH_PUBLICATIONS = Path("receipts/push/push-publications.json")
 PUSH_FORMAT = "beyond-horizon-push-publications-v1"
-#: The holder of a push claim credited to no notebook run: the publisher's own side.
+#: The holder of a push claim the index credits to the publisher: his own side.
 PUBLISHER = "publisher"
+#: The holder of a push claim the index credits to neither the publisher nor a notebook
+#: run: another author's side, which no release of the push holds, so the walk refuses to
+#: record it (`release_at`, `chain_problems`) and may only rule it out (#795's review B, B3).
+OTHER_AUTHOR = "other"
 #: The claims of the push's commits at the notebook rows' counts, as #795's review A counted
 #: them (A1): its 99 rows, the 86 sides of efef7d1 and fa6237e the walk records before them,
 #: and 5 of efef7d1's that restate earlier publications.
@@ -4757,6 +4761,15 @@ def _notebook_runs(chosen: Release) -> dict[str, dict[str, Any]]:
     return found
 
 
+def _push_holder(credit: str, notebook: Mapping[str, Any] | None) -> str:
+    """Whose a push claim is, by the credit the index states at its commit: the notebook
+    run it names, the publisher where it names him (`couzo_763_claims.is_own`), else
+    another author (`OTHER_AUTHOR`)."""
+    if notebook:
+        return str(notebook["run"])
+    return PUBLISHER if claims_763.is_own(credit) else OTHER_AUTHOR
+
+
 def push_publications(issue: int | str, clone: Path) -> dict[str, Any]:
     """Every side the push that made a release's retained commit public states at its walk's
     counts, commit by commit, and each commit's claim at each count (#795's review A, A1).
@@ -4771,9 +4784,11 @@ def push_publications(issue: int | str, clone: Path) -> dict[str, Any]:
     one claim a report (#722's review A, A2), read from a certificate the retained commit
     holds at exactly that blob, under the same path or another (``parents/`` keeps every
     certificate a later commit replaced). Its credit is the one ``certified_bounds.json``
-    states there at that commit, and its holder the notebook run that credit names in the
-    claim map's ``others``, else the publisher. The push's commits must be a chain, each the
-    child of the one before; the clone must hold their blobs (a blobless clone fetches each).
+    states there at that commit, and its holder by that credit (`_push_holder`): the notebook
+    run it names in the claim map's ``others``, the publisher where it names him, else
+    another author, whom no release holds (#795's review B, B3). The push's commits must be
+    a chain, each the child of the one before; the clone must hold their blobs (a blobless
+    clone fetches each).
     """
     chosen = release(issue)
     walk = walk_of(chosen)
@@ -4903,7 +4918,7 @@ def push_publications(issue: int | str, clone: Path) -> dict[str, Any]:
                     "deleted_squares": 0,
                     "index_kind": str(stated["index_kind"]) if stated else "",
                     "credit": credit,
-                    "holder": str(notebook["run"]) if notebook else PUBLISHER,
+                    "holder": _push_holder(credit, notebook),
                 }
                 | ({"notebook": notebook} if notebook else {})
             )
@@ -5416,9 +5431,13 @@ def _claim_map_claim(chosen: Release, item: Mapping[str, Any]) -> dict[str, Any]
 
 def _push_identity_parts(chosen: Release, n: int) -> dict[str, Any]:
     """What a push release's claim at a count of `PUSH_IDENTITY` carries into its walk: the
-    measurement against the push's earlier side there (``measured``), and, where its squares
-    pair one to one with none beyond `PUSH_SAME_PACKING`, that it refines that packing
-    (``refines``), which the manifest names as the row's ``previous_source``."""
+    measurement against the push's earlier side there (``measured``), which the manifest of
+    ``certificates/best/`` names as the row's ``previous_source``, and the link the record's
+    chain rule credits (#795's review B, B1). Where the squares pair one to one with none
+    beyond `PUSH_SAME_PACKING`, the row refines that packing (``refines``); otherwise the
+    search moved the arrangement, and the row is a new packing seeded from it
+    (``new_packing``, ``continues``). Either way it is credited after that packing's finder,
+    and after every finder the index names for it."""
     if n not in PUSH_IDENTITY:
         return {}
     receipt = _read(chosen.directory / PUSH_IDENTITY_RECEIPT)
@@ -5433,6 +5452,22 @@ def _push_identity_parts(chosen: Release, n: int) -> dict[str, Any]:
     nearest = min(row["against"], key=lambda item: abs(float(item["side_difference"])))
     other = _push_release(chosen, nearest["commit"], nearest["holder"])
     source = PUSH_IDENTITY_RECEIPT.as_posix()
+    witness = claims_763.read_witnesses().get(str(n)) or {}
+    previous = (witness.get("provenance") or {}).get("previous_source") or {}
+    _require(
+        previous.get("certificate") == nearest["certificate"],
+        f"n={n}: the manifest's previous_source is not the push's earlier side measured",
+    )
+    stated = (
+        f"964ee2b's manifest names {other.holders}'s {other.pin[:7]} certificate "
+        f"({nearest['certificate']}) as the row's previous_source"
+    )
+    refined = _REFINES_NAMED.search(str(nearest["credit"]))
+    after = (
+        f", which the index credits as a refinement of {refined[1].strip()}'s packing"
+        if refined
+        else ""
+    )
     parts: dict[str, Any] = {
         "measured": {
             "against": other.label,
@@ -5445,11 +5480,18 @@ def _push_identity_parts(chosen: Release, n: int) -> dict[str, Any]:
             "packing_of": other.holders,
             "entry": other.label,
             "source": (
-                f"964ee2b's manifest names {other.holders}'s {other.pin[:7]} certificate "
-                f"({nearest['certificate']}) as the row's previous_source, and the "
-                f"measurement pairs every square one to one within {PUSH_SAME_PACKING} "
-                f"({source})"
+                f"{stated}, and the measurement pairs every square one to one within "
+                f"{PUSH_SAME_PACKING} ({source})"
             ),
+        }
+    else:
+        parts["new_packing"] = {
+            "source": (
+                f"{stated}; the measurement does not pair them one to one "
+                f"({nearest['beyond'][PUSH_SAME_PACKING]} squares beyond {PUSH_SAME_PACKING}"
+                f", {source}): the search moved the arrangement it was seeded from"
+            ),
+            "continues": (f"{other.holders}'s {other.pin[:7]} packing ({other.label}){after}"),
         }
     return parts
 
@@ -5549,6 +5591,30 @@ def _notebook_phrase(chosen: Release, count: int) -> str:
     return f'{chosen.holders}\'s "{slug}"{version}, run {stated["run"]} ({count})'
 
 
+def _other_authors(item: Release, walk: Walk) -> list[dict[str, Any]]:
+    """The claims of a push release's commit that the index credits to another author
+    (`OTHER_AUTHOR`), which no release holds: the walk takes them as the commit's report
+    and may only rule them out (`release_at`)."""
+    if item.claim_map != PUSH:
+        return []
+    return [
+        claim
+        for claim in _read(mapped_path(item))["claims"]
+        if claim["commit"] == item.pin
+        and claim["holder"] == OTHER_AUTHOR
+        and walk.reaches(int(claim["n"]))
+    ]
+
+
+def _other_phrase(claims: Sequence[Mapping[str, Any]]) -> list[str]:
+    """Another author's sides of a push commit in the walk's note, by the credit's name."""
+    names = Counter(str(claim["credit"]).split(";", 1)[0].strip() for claim in claims)
+    return [
+        f"{count} credited to {name}, which no release of the push holds"
+        for name, count in sorted(names.items())
+    ]
+
+
 def claim_map_walk_sources(
     issue: int | str, read_on: str, walk: Walk | None = None
 ) -> dict[str, Any]:
@@ -5597,11 +5663,14 @@ def claim_map_walk_sources(
     }
     # A count is one release's among the releases sharing a claim map; a push read commit
     # by commit (`PUSH`) claims it at most once a commit.
+    others = {label: _other_authors(items[0], walk) for label, items in groups.items()}
     claimed = Counter(
         (label if item.claim_map == PUSH else "", int(claim["n"]))
         for label, items in groups.items()
         for item in items
         for claim in own[item.key]
+    ) + Counter(
+        (label, int(claim["n"])) for label, claims in others.items() for claim in claims
     )
     twice = sorted(n for (_, n), times in claimed.items() if times > 1)
     _require(not twice, f"{walk.name}: the releases sharing a claim map both claim {twice}")
@@ -5612,7 +5681,10 @@ def claim_map_walk_sources(
     for label, items in groups.items():
         item = items[0]
         pairs = sorted(
-            ((part, claim) for part in items for claim in own[part.key]),
+            [
+                *((part, claim) for part in items for claim in own[part.key]),
+                *((item, claim) for claim in others[label]),
+            ],
             key=lambda pair: int(pair[1]["n"]),
         )
         claims = [_claim_map_claim(part, claim) for part, claim in pairs]
@@ -5634,7 +5706,10 @@ def claim_map_walk_sources(
                 f"notebook rows ({described}), each its least new side there below the start, "
                 "commit by commit through the push (devtools.beyond_horizon_replay "
                 f"push-publications, {item.packet} packet, {PUSH_PUBLICATIONS.as_posix()}): "
-                + _listing([_notebook_phrase(part, len(own[part.key])) for part in items])
+                + _listing(
+                    [_notebook_phrase(part, len(own[part.key])) for part in items]
+                    + _other_phrase(others[label])
+                )
                 + ". No issue reports them. The push of 23:38:42Z made efef7d1, fa6237e and "
                 f"964ee2b public together (PUSHED_LATER), so each commit is a report from it, "
                 "taken in commit order, and an import of their own (think-lyf9; #795's review "
@@ -6082,6 +6157,8 @@ def write_pose_identity(issue: int | str) -> dict[int, list[str]]:
     }
 
 
+#: How the index states that a side refines another author's packing.
+_REFINES_NAMED = re.compile(r"refines the packing of ([^,;(]+)")
 #: The counts where a notebook row is within 1.1e-7 of a side an earlier commit of the same
 #: push states (#795's review A, A1): measured to settle refinement and credit.
 PUSH_IDENTITY = (364, 378, 405, 450, 874)
@@ -6192,10 +6269,12 @@ def _mapped_counts(key: str, _modified: int) -> frozenset[int]:
 
 def release_at(walk: Walk, report: str, n: int) -> Release | None:
     """The release of ``walk`` whose rows record ``report`` at ``n``: the label's one release,
-    or, where several share it, the one whose claim map claims ``n``; None for a report no
-    release of the walk is."""
+    or, where several share it or it is a push's (`PUSH`), the one whose claims hold ``n``;
+    None for a report no release of the walk is, and for another author's side of a push
+    (`OTHER_AUTHOR`), which no release holds, so the walk may not record it
+    (`chain_problems`)."""
     group = _walk_groups(walk).get(report, ())
-    if len(group) <= 1:
+    if len(group) <= 1 and not any(item.claim_map == PUSH for item in group):
         return group[0] if group else None
     found = [
         item
@@ -6203,6 +6282,8 @@ def release_at(walk: Walk, report: str, n: int) -> Release | None:
         if item.claim_map
         and n in _mapped_counts(item.key, mapped_path(item).stat().st_mtime_ns)
     ]
+    if not found and all(item.claim_map == PUSH for item in group):
+        return None
     _require(len(found) == 1, f"{report} n={n}: {len(found)} of its releases claim it")
     return found[0]
 

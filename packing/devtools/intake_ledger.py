@@ -485,6 +485,29 @@ CLAIM_PARTS: Mapping[str, tuple[str, ...]] = {
 }
 
 
+def _tie_problem(n: int, arrived: str, tied: Sequence[tuple[str, str]]) -> str:
+    """Why claims at one count that arrive at one instant cannot be ordered, or "": the
+    commits of one push are walked in commit order (`walk`), so a tie is ordered only where
+    every claim states its first commit and no two state the same one; otherwise only the
+    labels would order them."""
+    if len(tied) < 2:
+        return ""
+    labels = " and ".join(sorted(label for label, _ in tied))
+    times = [committed for _, committed in tied]
+    if not all(times):
+        return (
+            f"n={n}: {labels} arrive at {arrived}, so only their labels would order them; "
+            "give each claim its own reported_at"
+        )
+    shared = sorted({time for time in times if times.count(time) > 1})
+    if shared:
+        return (
+            f"n={n}: {labels} arrive at {arrived}, two first committed at {shared[0]}, so "
+            "only their labels would order them; give each claim its own reported_at"
+        )
+    return ""
+
+
 def _problems_of_claim(where: str, claim: Mapping[str, Any], reported_at: str) -> list[str]:
     problems: list[str] = []
     allowed = set(Claim.__annotations__)
@@ -612,7 +635,7 @@ def problems(ledger: Mapping[str, Any]) -> list[str]:
     )
     labels: set[str] = set()
     claimed: set[tuple[str, int]] = set()
-    arrivals: dict[int, dict[tuple[str, str], list[str]]] = {}
+    arrivals: dict[int, dict[str, list[tuple[str, str]]]] = {}
     for report in _mappings(found, ledger["reports"], "reports"):
         label = str(report.get("report"))
         absent = [key for key in (*REPORT_KEYS, "claims") if key not in report]
@@ -648,16 +671,15 @@ def problems(ledger: Mapping[str, Any]) -> list[str]:
             claimed.add(key)
             arrived = str(claim.get("reported_at") or when)
             if arrived != UNKNOWN:
-                # Reports of one instant go in commit order (`walk`).
-                order = (arrived, str(claim.get("first_committed") or ""))
-                arrivals.setdefault(key[1], {}).setdefault(order, []).append(label)
+                committed = str(claim.get("first_committed") or "")
+                arrivals.setdefault(key[1], {}).setdefault(arrived, []).append(
+                    (label, committed)
+                )
     found.extend(
-        f"n={n}: {' and '.join(sorted(tied))} arrive at {arrived}"
-        + (f", first committed at {committed}" if committed else "")
-        + ", so only their labels would order them; give each claim its own reported_at"
+        problem
         for n, times in sorted(arrivals.items())
-        for (arrived, committed), tied in times.items()
-        if len(tied) > 1
+        for arrived, tied in times.items()
+        if (problem := _tie_problem(n, arrived, tied))
     )
     for exception in _mappings(found, ledger["exceptions"], "exceptions"):
         key = _named(exception)
@@ -2237,6 +2259,13 @@ def key_reasons(ledger: Ledger, walks: Sequence[Walk]) -> list[dict[str, Any]]:
     return found
 
 
+def _new_packing_says(packing: NewPacking) -> str:
+    """What a source says of a new packing: that, and the arrangement that seeded the search
+    where it names one (``continues``)."""
+    seeded = packing.get("continues")
+    return f"a new packing seeded from {seeded}" if seeded else "a new packing"
+
+
 def measured_identity(walks: Sequence[Walk]) -> list[dict[str, Any]]:
     """Each claim whose certificate a measurement compares with another packing, beside
     what its source says it is; the measurement decides nothing."""
@@ -2250,7 +2279,7 @@ def measured_identity(walks: Sequence[Walk]) -> list[dict[str, Any]]:
                 f"a refinement of {step.side.refines['packing_of']}'s packing "
                 f"({step.side.refines['entry']})"
                 if step.side.refines is not None
-                else "a new packing"
+                else _new_packing_says(step.side.new_packing)
                 if step.side.new_packing is not None
                 else "nothing stated"
             )

@@ -804,7 +804,22 @@ def test_claims_of_one_instant_with_their_own_commit_times_are_ordered_by_them()
     data["reports"].append(second)
     assert ledger.problems(data) == []
     second["claims"][0]["first_committed"] = "2026-10-11T23:00:00Z"
-    assert "first committed at 2026-10-11T23:00:00Z" in " ".join(ledger.problems(data))
+    assert "two first committed at 2026-10-11T23:00:00Z" in " ".join(ledger.problems(data))
+
+
+def test_a_tie_in_time_with_one_unknown_commit_time_is_refused() -> None:
+    """A tie in report time is ordered by commit only where every tied claim states its
+    first commit: with one unknown, only the labels would order them, so the gate refuses
+    it as before (#795's review B, B2)."""
+    data = _minimal()
+    data["reports"][0]["claims"][0]["first_committed"] = "2026-10-11T23:00:00Z"
+    second = copy.deepcopy(data["reports"][0])
+    second.update(report="#0", url="https://github.com/jlevy/squares/issues/0")
+    del second["claims"][0]["first_committed"]
+    data["reports"].append(second)
+    assert "#0 and #1 arrive at 2026-10-12T00:00:00Z, so only their labels" in " ".join(
+        ledger.problems(data)
+    )
 
 
 def test_one_instant_is_walked_in_commit_order_and_not_by_label() -> None:

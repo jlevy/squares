@@ -37,6 +37,7 @@ import pytest
 
 from devtools import beyond_horizon_replay as replay
 from devtools import check_source_coverage as coverage_check
+from devtools import couzo_763_claims as claims_763
 from devtools import goebel_construction
 from devtools.retained_data import read_retained_bytes
 from sqpack.yamlio import safe_load
@@ -2443,8 +2444,9 @@ def test_each_notebook_recipe_is_a_certificate_row_of_its_own() -> None:
 def test_the_push_s_identity_measurements_settle_refinement_at_378_and_405() -> None:
     """At 378 and 405 kyleluecke's row is Lavrentev's v11 packing, every square within
     5e-8: the walk records it as a refinement of it. At 364, 450 and 874 the pairing moves
-    over fifty squares beyond 0.1, so the measurement stands beside the source's word for the
-    owner (#795's review A, A1)."""
+    over fifty squares beyond 0.1, so the search moved the arrangement the manifest's
+    ``previous_source`` seeded, and the walk records a new packing seeded from it, which the
+    chain rule credits after that side's finders (#795's reviews A, A1, and B, B1)."""
     ledger = _read(NOTEBOOKS / "ledger.json")
     measured = {item["n"]: item for item in ledger["owner_decisions"]["measured_identity"]}
     assert sorted(measured) == list(replay.PUSH_IDENTITY)
@@ -2457,7 +2459,38 @@ def test_the_push_s_identity_measurements_settle_refinement_at_378_and_405() -> 
         378: f"a refinement of Vladislav Lavrentev's packing ({replay.NOTEBOOKS_FA6237E})",
         405: f"a refinement of Vladislav Lavrentev's packing ({replay.NOTEBOOKS_FA6237E})",
     }
+    seeded = f"a new packing seeded from {{}}'s fa6237e packing ({replay.NOTEBOOKS_FA6237E})"
+    assert {n: item["source_says"] for n, item in measured.items() if n not in refined} == {
+        364: seeded.format("Kirill Tymchishin"),
+        450: seeded.format("Kirill Tymchishin"),
+        874: seeded.format("Francisco Couzo")
+        + ", which the index credits as a refinement of Vladislav Lavrentev's packing",
+    }
     assert {item["report"] for item in measured.values()} == {replay.NOTEBOOKS_964EE2B}
+
+
+def test_a_push_side_another_author_is_credited_with_has_no_release() -> None:
+    """The push's receipt files a claim under the publisher only where the index credits
+    Couzo, and one the index credits to neither him nor a notebook run under another
+    author, which no release holds: at efef7d1 that is the 994 side credited to Mykhailo
+    Polkovskyi, which the walk rules a restatement and records nowhere (#795's review B,
+    B3)."""
+    receipt = _read(replay.release(763).directory / replay.PUSH_PUBLICATIONS)
+    holders = {(item["commit"][:7], item["n"]): item for item in receipt["claims"]}
+    assert all(
+        claims_763.is_own(item["credit"])
+        for item in receipt["claims"]
+        if item["holder"] == replay.PUBLISHER
+    )
+    others = sorted(
+        key for key, item in holders.items() if item["holder"] == replay.OTHER_AUTHOR
+    )
+    assert others == [("efef7d1", 994)]
+    walk = replay.WALKS[replay.NOTEBOOKS_964]
+    assert replay.release_at(walk, replay.NOTEBOOKS_EFEF7D1, 994) is None
+    step = _notebook_steps()[replay.NOTEBOOKS_EFEF7D1][994]
+    assert step["verdict"] == "not recorded"
+    assert step["reason"] == "restates"
 
 
 def _source_at(walk: replay.Walk, report: str, n: int) -> str | None:
@@ -2478,8 +2511,10 @@ def test_a_count_s_source_is_the_release_of_its_label_that_claims_it() -> None:
     assert _source_at(walk, replay.NOTEBOOKS_FA6237E, 377) == "couzo-fa6237e-2026-10-23"
     assert _source_at(walk, replay.NOTEBOOKS_EFEF7D1, 377) == "couzo-efef7d1-2026-10-23"
     assert _source_at(walk, "franciscouzo/square-packing@23aff0c", 406) is None
-    with pytest.raises(replay.ReplayError, match="0 of its releases claim it"):
-        replay.release_at(walk, replay.NOTEBOOKS_964EE2B, 509)
+    # A push's commit resolves by the release that claims the count, even where one release
+    # holds the commit, and to none where none does.
+    assert _source_at(walk, replay.NOTEBOOKS_964EE2B, 509) is None
+    assert _source_at(walk, replay.NOTEBOOKS_EFEF7D1, 330) is None
     assert _source_at(replay.WALKS[replay.ISSUE_763], PUBLICATION_964, 1) == SOURCE_964
 
 
