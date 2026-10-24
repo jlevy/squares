@@ -21,7 +21,7 @@ softschema:
   status: enforced
 repository: jlevy/squares
 owner: jlevy
-last_reviewed: '2026-10-23'
+last_reviewed: '2026-10-24'
 issues:
   - number: 420
     title: 'Lean proofs that 178 best-known packings are local minima (n ≤ 324): registration request'
@@ -21751,3 +21751,302 @@ issues:
       path to Level 3; the form's structured credit, lineage, method and AI-assistance fields
       and the issue number in place of a bead; and api/v1/ on squaremath.org with lower bounds
       from the start. The questions stay the owner's, on think-lnzm.
+  - number: 772
+    title: "T-036: Trump's pose is optimal among six-plus-five packings near its tilt, unique up to symmetry
+      — review tracking"
+    author: jlevy
+    opened: '2026-10-24'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      The project opened this issue on 24 October 2026 to track the pending review of T-036,
+      which reached the register from this project's own research rather than an issue, by
+      the owner's answer of that day, "Open all nine (Recommended)": one issue for each
+      pending review that had none. The result maps to T-036 at V3/C2, confirmed; C3 needs
+      BC-240's audited prose steps mechanised or reviewed again by a distinct reviewer, owned
+      by think-o9kd.
+    read_through: '2026-10-24T05:13:12Z'
+    results:
+    - key: six-plus-five-restricted-optimality
+      claim: >-
+        Every packing of eleven unit squares, six at orientation 0 and five sharing one
+        orientation near Trump's tilt, has side at least Trump's U, and attains it only as a
+        quarter-turn image of Trump's pose with the squares relabelled within the two classes.
+      source: body
+      register:
+      - T-036
+      evidence:
+      - E-n011-h236-rung0-reduction
+      - E-n011-trump-local-theorem-first-clause
+      - E-n011-trump-isolation-radius
+    beads:
+    - think-o9kd
+    answer_bead: think-o9kd
+    replies: []
+    close_when: >-
+      The review that its C3 needs has landed on main, by a distinct reviewer or a
+      mechanisation of BC-240's prose steps, and the reply that reports the resulting rungs is
+      posted.
+  - number: 773
+    title: 'T-046: Rectangle-density lower bounds reported for 48 counts in `n = 18…95` — review tracking'
+    author: jlevy
+    opened: '2026-10-24'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      The project opened this issue on 24 October 2026 to track the pending review of T-046,
+      wand125's rectangle-density lower bounds of 27 and 28 September at 48 counts, which
+      reached the project through his watched repository rather than an issue, by the owner's
+      answer of that day, "Open all nine (Recommended)": one issue for each pending review
+      that had none. The result maps to T-046 at V0/C0, recorded; C1 is think-wcex's record
+      change and C3, the 3 October census recorded with its controls and a review, is
+      think-sb7a's.
+    read_through: '2026-10-24T05:13:13Z'
+    results:
+    - key: rectangle-density-48
+      claim: >-
+        One standing rectangle-density certificate for each of 48 counts from n = 18 to 95,
+        from s(18) >= 939/200 to s(95) >= 49209/5000, each reported accepted at every net
+        direction by Tokoharu's unchanged verify.cpp.
+      source: body
+      register:
+      - T-046
+      evidence:
+      - E-wand125-rectangle-report
+      - E-wand125-rectangle-2026-09-28-report
+      - E-wand125-rectangle-2026-09-28-monotone-report
+    beads:
+    - think-sb7a
+    - think-wcex
+    answer_bead: think-sb7a
+    replies: []
+    close_when: >-
+      The confirmations its C1 and C3 need have landed on main, or the record says why they
+      will not, and the reply that reports the resulting rungs is posted.
+  - number: 774
+    title: 'T-087: `s(37) ≥ 5√3/2 + 2√2 − 1` and `s(61) ≥ 7√3/2 + 2√2 − 1`, by optimal piercing — review tracking'
+    author: jlevy
+    opened: '2026-10-24'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      The project opened this issue on 24 October 2026 to track the pending review of T-087,
+      Bašić and Slivková's 2018 piercing bound at n = 37 and 61, which reached the register
+      from the literature rather than an issue, by the owner's answer of that day, "Open all
+      nine (Recommended)": one issue for each pending review that had none. The result maps
+      to T-087 at V3/C1, reviewed; C2 needs a replay of the geometry, owned by think-gtjq.
+    read_through: '2026-10-24T05:13:14Z'
+    results:
+    - key: piercing-lower-37-61
+      claim: >-
+        s(37) >= 5 sqrt(3)/2 + 2 sqrt(2) - 1 and s(61) >= 7 sqrt(3)/2 + 2 sqrt(2) - 1, by
+        Theorem 7 and Proposition 8 of Bašić and Slivková 2018.
+      source: body
+      register:
+      - T-087
+      evidence:
+      - E-basic-slivkova-piercing-lower
+    beads:
+    - think-gtjq
+    answer_bead: think-gtjq
+    replies: []
+    close_when: >-
+      The replay of the geometry its C2 needs has landed on main, or the record says why it
+      will not, and the reply that reports the resulting rungs is posted.
+  - number: 775
+    title: "T-112: Trump's packing is the only optimal packing of eleven squares, up to symmetry — review
+      tracking"
+    author: jlevy
+    opened: '2026-10-24'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      The project opened this issue on 24 October 2026 to track the pending review of T-112,
+      which reached the register from this project's reading of T-060 rather than an issue,
+      by the owner's answer of that day, "Open all nine (Recommended)": one issue for each
+      pending review that had none. The result maps to T-112 at V3/C2, confirmed; C3 needs
+      the step at S = T mechanised or reviewed again by a distinct reviewer, owned by
+      think-ysr9.
+    read_through: '2026-10-24T05:13:15Z'
+    results:
+    - key: n11-uniqueness
+      claim: >-
+        Every packing of eleven unit squares in a square of side T, the least side T-060 proves
+        possible, is Trump's packing after a symmetry of the container and a relabelling.
+      source: body
+      register:
+      - T-112
+      evidence:
+      - E-n011-optimum-uniqueness
+    beads:
+    - think-ysr9
+    answer_bead: think-ysr9
+    replies: []
+    close_when: >-
+      The review that its C3 needs has landed on main, by a distinct reviewer with the
+      oversight record or a mechanisation of the step at S = T, and the reply that reports the
+      resulting rungs is posted.
+  - number: 776
+    title: 'T-142: Mixed rectangle-measure lower bound `s(28) ≥ 2297/400` reported, on a 2,073-direction
+      declared net — review tracking'
+    author: jlevy
+    opened: '2026-10-24'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      The project opened this issue on 24 October 2026 to track the pending review of T-142,
+      wand125's mixed_n28_L57425, which reached the project through his watched repository
+      rather than an issue, by the owner's answer of that day, "Open all nine
+      (Recommended)": one issue for each pending review that had none. The result maps to
+      T-142 at V0/C0, recorded; the complete census, its whole-net control and a review are
+      queued in think-i85v after think-ux1v, and are an ask on #532.
+    read_through: '2026-10-24T05:13:16Z'
+    results:
+    - key: mixed-n28-57425
+      claim: s(28) >= 2297/400 = 5.7425, by the rectangle measure mixed_n28_L57425 on a 2,073-direction declared net.
+      source: body
+      register:
+      - T-142
+      evidence:
+      - E-wand125-fine-net-n28-57425-report
+    beads:
+    - think-i85v
+    - think-ux1v
+    answer_bead: think-i85v
+    replies: []
+    close_when: >-
+      The census, its control and the review its C3 needs have landed on main, and the reply
+      that reports the resulting rungs is posted.
+  - number: 777
+    title: 'T-143: Mixed rectangle-measure lower bound `s(30) ≥ 2357/400` reported, on a 2,073-direction
+      declared net — review tracking'
+    author: jlevy
+    opened: '2026-10-24'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      The project opened this issue on 24 October 2026 to track the pending review of T-143,
+      wand125's mixed_n30_L58925, which reached the project through his watched repository
+      rather than an issue, by the owner's answer of that day, "Open all nine
+      (Recommended)": one issue for each pending review that had none. The result maps to
+      T-143 at V0/C0, recorded; the complete census, its whole-net control and a review are
+      queued in think-i85v after think-ux1v, and are an ask on #532.
+    read_through: '2026-10-24T05:13:18Z'
+    results:
+    - key: mixed-n30-58925
+      claim: s(30) >= 2357/400 = 5.8925, by the rectangle measure mixed_n30_L58925 on a 2,073-direction declared net.
+      source: body
+      register:
+      - T-143
+      evidence:
+      - E-wand125-fine-net-n30-58925-report
+    beads:
+    - think-i85v
+    - think-ux1v
+    answer_bead: think-i85v
+    replies: []
+    close_when: >-
+      The census, its control and the review its C3 needs have landed on main, and the reply
+      that reports the resulting rungs is posted.
+  - number: 778
+    title: 'T-144: Linear-measure lower bound `s(n) ≥ 563/50 = 11.26` for `n = 122…126`, reported — review
+      tracking'
+    author: jlevy
+    opened: '2026-10-24'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      The project opened this issue on 24 October 2026 to track the pending review of T-144,
+      wand125's mixed_n122_L1126, which reached the project through his watched repository
+      rather than an issue, by the owner's answer of that day, "Open all nine
+      (Recommended)": one issue for each pending review that had none. The result maps to
+      T-144 at V0/C0, recorded; the complete replay, its control and a review are queued in
+      think-nd7g after think-ux1v, and are an ask on #532.
+    read_through: '2026-10-24T05:13:19Z'
+    results:
+    - key: linear-n122-1126
+      claim: s(n) >= 563/50 = 11.26 for n = 122 to 126, by the linear measure mixed_n122_L1126.
+      source: body
+      register:
+      - T-144
+      evidence:
+      - E-wand125-linear-n122-1126-report
+    beads:
+    - think-nd7g
+    - think-ux1v
+    answer_bead: think-nd7g
+    replies: []
+    close_when: >-
+      The replay, its control and the review its C3 needs have landed on main, and the reply
+      that reports the resulting rungs is posted.
+  - number: 779
+    title: 'T-179: Linear-measure lower bound `s(n) ≥ 306/25 = 12.24` for `n = 145…149`, reported — review
+      tracking'
+    author: jlevy
+    opened: '2026-10-24'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      The project opened this issue on 24 October 2026 to track the pending review of T-179,
+      wand125's mixed_n145_L1224, which reached the project through his watched repository
+      rather than an issue, by the owner's answer of that day, "Open all nine
+      (Recommended)": one issue for each pending review that had none. The result maps to
+      T-179 at V0/C1, reviewed; the complete replay, its control and a review wait for an
+      owner budget in think-u0av.
+    read_through: '2026-10-24T05:13:20Z'
+    results:
+    - key: linear-n145-1224
+      claim: s(n) >= 306/25 = 12.24 for n = 145 to 149, by the linear measure mixed_n145_L1224.
+      source: body
+      register:
+      - T-179
+      evidence:
+      - E-wand125-linear-n145-1224-report
+    beads:
+    - think-u0av
+    answer_bead: think-u0av
+    replies: []
+    close_when: >-
+      The replay, its control and the review its C3 needs have landed on main, and the reply
+      that reports the resulting rungs is posted.
+  - number: 780
+    title: "T-192: Continuous-pose lower bound `s(28) > 1149/200` reported, by two of the source's programs
+      — review tracking"
+    author: jlevy
+    opened: '2026-10-24'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      The project opened this issue on 24 October 2026 to track the pending review of T-192,
+      wand125's continuous_n28_L5745, which reached the project through his watched
+      repository rather than an issue, by the owner's answer of that day, "Open all nine
+      (Recommended)": one issue for each pending review that had none. The result maps to
+      T-192 at V0/C1, reviewed; its two replay routes, think-8eo1 and think-0arj, wait for an
+      owner budget under think-zb5w.
+    read_through: '2026-10-24T05:13:21Z'
+    results:
+    - key: continuous-n28-5745
+      claim: s(28) > 1149/200 = 5.745, by the continuous-pose rectangle measure continuous_n28_L5745.
+      source: body
+      register:
+      - T-192
+      evidence:
+      - E-wand125-continuous-n28-5745-report
+    beads:
+    - think-zb5w
+    - think-8eo1
+    - think-0arj
+    answer_bead: think-zb5w
+    replies: []
+    close_when: >-
+      A replay route, its controls and the review its C3 needs have landed on main, and the
+      reply that reports the resulting rungs is posted.
