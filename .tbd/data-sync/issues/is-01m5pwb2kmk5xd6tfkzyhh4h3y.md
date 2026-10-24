@@ -5,7 +5,7 @@ title: "Import the 99 Kaggle-credited sides franciscouzo/square-packing publishe
 kind: task
 status: in_progress
 priority: 1
-version: 8
+version: 9
 delegate: c-import-lyf9-1024
 labels:
   - result-import
@@ -16,7 +16,7 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-24T11:57:05.011Z
-updated_at: 2026-10-24T16:20:09.553Z
+updated_at: 2026-10-24T18:11:05.533Z
 started_at: 2026-10-24T13:38:16.607Z
 ---
 
@@ -138,3 +138,13 @@ LEFT
 - think-gn29: walks 43f666c (46 of the 99 counts; 39 certificate rows superseded, 488/679 after held recipes, 5 recipe counts both held) from these rows; needs the PUSHED_LATER entry for 06:10:44Z and pose identity at the 18 sub-1e-10 counts.
 - Licence follow-up: think-m8f4 (the notebooks' licences and SOURCE_NOTICES.md), holding nothing.
 - Not done here: tbd sync (coordinator), posting on #763.
+
+2026-10-24 c-import-lyf9-1024, review A round on #795 (https://github.com/jlevy/squares/pull/795#issuecomment-6386978876; coordinator's decision: address A1, A2 and A3 in one push as sole committer). Tracking beads under think-ezt8: think-5suz (parent), think-gy8u (A1), think-npba (A2), think-zksv (A3), A1 to A3 closed as fixed; dispositions https://github.com/jlevy/squares/pull/795#issuecomment-6387748905; head 28508bdb9. Base: main 3480b5fd3 (#792), merged with a merge commit; devtools.measure_identity (think-jv2s, #796) had not landed, so identity used the packet's existing measure (beyond_horizon_replay.measured_identity).
+
+- A1 fixed: devtools.beyond_horizon_replay push-publications reads the push of 23:38:42Z commit by commit (receipts/push/push-publications.json): each commit's certificate headers and index bounds at the 99 counts, each commit's least new side below the frozen start, held by a certificate 964ee2b keeps at the same blob. Controls: efef7d1 40, fa6237e 90, 964ee2b 60 claims; the last at each count equals the claim map's row. Nine releases (PUSH_RELEASES): couzo-efef7d1-2026-10-23 (35 rows), couzo-fa6237e-2026-10-23 (37), v3 42, v11 11, 361576574 15, 361592092 18, 361412241 11, 361516058 9, 361589987 7. The walk (intake_ledger: a tie in report time now goes by first_committed, commit order; every other ledger renders unchanged) records 185: efef7d1's 5 at 633, 791, 856, 919 and 994 restate earlier publications (think-fwa9). 86 intermediate rows, each superseded within the push; 86 of main's rows superseded by the push's first row; 13 counts had no row. push-identity (receipts/push/pose-identity.json): 378 and 405, kyleluecke's row is Lavrentev's v11 packing refined (one to one, largest 4.4e-8 and 2.5e-8), recorded as refinement, credit kyleluecke after Lavrentev; 364 (aqibrazadev vs Tymchishin v3, 116 squares beyond 1e-3), 450 (kyleluecke vs v3, 200) and 874 (kyleluecke vs Couzo's fa6237e, 234) not one to one: listed under the ledger's Measured Identity for the owner.
+- A2 fixed: the 12 recipes are certificate rows from their certificates/parents/ expansions at exactly their sides (the claim map's recipe_certificate, OTHERS_CONTROLS recipe_certificates 12); _HELD_NOTEBOOKS removed. think-ww95 closed (its "no certificate file" premise was wrong). result-requests.yaml: notebook-recipes-325-1024 corrected and no longer queued; new entry push-earlier-sides-325-1024.
+- A3 fixed: 149 entries below Goebel, 50 earlier, in couzo_763_claims's docstring, the packet README and the PR body.
+- Packet: 103 more certificates retained (69 parents, 34 root; 12,720,179 bytes), the parents' README and manifest pinned; acquire_source --check matches; check_added_blobs PASS (7.7 MB thin pack against main).
+- Replay: 185 of 185 verified on both routes, 1,110 controls refused by both (213.8 positive CPU s; the five changed releases 731 s of wall on two workers from 17:22:00Z).
+- For the coordinator (outside this diff, from the review): think-g2qy's "no certificate file" premise for #763's held recipes needs the same check (best/nN.cert new in this push at 444, 487, 632, 683, 733, 734, 737, 788, 789, 845, 909, 910, 966, 970).
+- Owner question added: credit at 364, 450 and 874 (the measurement does not pair the row with the push's earlier side one to one).
