@@ -1,4 +1,4 @@
-"""The homepage's bounded previews, shared expansion and card geometry in Chromium.
+"""The homepage's bounded previews, its complete atlas and card geometry in Chromium.
 
 Real rendered pages and their assets are served through request routes in memory, so
 the fixture writes no site output. One desktop and one mobile session exercise the
@@ -23,8 +23,10 @@ from urllib.parse import parse_qs, urlsplit
 import pytest
 
 from devtools import (
+    check_site_rendering,
     news_highlights,
     overview_sections,
+    preview_site,
     render_changelog,
     render_overview,
     site_assets,
@@ -49,12 +51,12 @@ NEWS_FILTERS = probe(PROBES, "site_homepage/news-filters")
 TOOLTIP_WATCH = probe(PROBES, "site_homepage/tooltip-watch")
 TOOLTIP_CLEAR = probe(PROBES, "site_homepage/tooltip-clear")
 SCROLL_FILTERS = probe(PROBES, "site_homepage/scroll-filters")
+CHOOSER_LABELS = probe(PROBES, "site_homepage/chooser-labels")
 ORIGIN = "http://homepage.test/"
-TOGGLE = "[data-homepage-atlas-toggle]"
 CELLS = "#homepage-atlas-cells"
 TILES = f"{CELLS} .site-atlas-cell:visible"
+GRID_TAB, TRIANGLE_TAB = '[data-atlas-tab="grid"]', '[data-atlas-tab="triangle"]'
 GRAPHIC = "known-best-1-324.svg"
-STATUS = "[data-homepage-atlas-status]"
 EXPLORE = '.site-homepage-atlas-actions a[href="atlas.html"]'
 WIDTHS = (1280, 390)
 NAV_WIDTHS = (*WIDTHS, 320)
@@ -86,11 +88,17 @@ def payloads() -> dict[str, bytes]:
 
 
 @pytest.fixture(scope="module")
-def browser() -> Iterator[Any]:
-    with site_browser.api().sync_playwright() as driver:
-        launched = site_browser.launch(driver)
-        yield launched
-        launched.close()
+def driver() -> Iterator[Any]:
+    """The module's one Playwright session, which every Chromium it launches shares."""
+    with site_browser.api().sync_playwright() as started:
+        yield started
+
+
+@pytest.fixture(scope="module")
+def browser(driver: Any) -> Iterator[Any]:
+    launched = site_browser.launch(driver)
+    yield launched
+    launched.close()
 
 
 def _serve(page: Any, payloads: dict[str, bytes]) -> None:
@@ -147,7 +155,9 @@ def test_homepage_links_to_native_videos_and_reduced_motion_waits_for_click(
     try:
         page.goto(f"{origin}index.html", wait_until="load")
         assert page.locator("video").count() == 0
-        videos = page.locator('a[href="visualize.html"]').filter(has_text="View Videos")
+        videos = page.locator('a.site-action[href="visualize.html"]').filter(
+            has_text=re.compile("^Videos$")
+        )
         assert videos.count() == 1
         videos.click()
         film = page.locator(".site-film-frame video")
@@ -229,14 +239,13 @@ def _pointer_cases(page: Any, cases: tuple[int, ...]) -> list[dict[str, Any]]:
 
 
 def _themes(page: Any) -> list[dict[str, Any]]:
-    """Switch the actual theme controls and OS scheme through all three SVG states."""
+    """Switch the actual theme controls and OS scheme in each view of every case."""
     sync_api = site_browser.api()
     readings = []
-    for phase, count in (("preview", 100), ("expanded", 324), ("collapsed", 100)):
-        while page.locator(TILES).count() != count:
-            page.locator(TOGGLE).click()
-            page.evaluate(TRANSITION, {"install": False, "settle": True})
-        sync_api.expect(page.locator(TILES)).to_have_count(count)
+    for phase, tab in (("triangle", TRIANGLE_TAB), ("grid", GRID_TAB)):
+        page.locator(tab).click()
+        page.evaluate(TRANSITION, {"install": False, "settle": True})
+        sync_api.expect(page.locator(TILES)).to_have_count(324)
         for mode, scheme in (
             ("system", "light"),
             ("system", "dark"),
@@ -258,20 +267,26 @@ def _themes(page: Any) -> list[dict[str, Any]]:
                     **page.evaluate(THEME, {"scroll_top": False}),
                 }
             )
+    page.locator(TRIANGLE_TAB).click()
+    page.evaluate(TRANSITION, {"install": False, "settle": True})
     return readings
 
 
 @pytest.fixture(scope="module")
-def seen(toggle_seen: dict[int, dict[str, Any]]) -> dict[int, dict[str, Any]]:
+def seen(atlas_seen: dict[int, dict[str, Any]]) -> dict[int, dict[str, Any]]:
     """Share the retained interaction session with the geometry and content checks."""
-    return toggle_seen
+    return atlas_seen
 
 
 @pytest.mark.parametrize("width", WIDTHS)
-def test_keyboard_expansion_uses_the_shared_triangle_without_click_time_preparation(
-    toggle_seen: dict[int, dict[str, Any]], width: int
+def test_the_homepage_atlas_shows_every_case_in_the_shared_triangle(
+    atlas_seen: dict[int, dict[str, Any]], width: int
 ) -> None:
-    report = toggle_seen[width]
+    """The homepage's atlas shows all 324 cases from the first response, as the Atlas
+    page does, and its controls move the same tiles with the shared layout and motion
+    and no click-time preparation. Its Show More button, which revealed the cases after
+    the first hundred, went on 2026-10-22 (the owner)."""
+    report = atlas_seen[width]
     initial = report["initial"]
     assert initial["h1_spacing"]
     assert report["about"]["h1_spacing"]
@@ -304,15 +319,15 @@ def test_keyboard_expansion_uses_the_shared_triangle_without_click_time_preparat
         "atlas.html#atlas-n-53",
     ]
     assert report["static_hero"]["drawings"][0]["href"] == "cases/53.html"
-    assert initial["cases"] == list(range(1, 101))
-    assert initial["visible_cases"] == 100
-    assert initial["drawings"]["cards"] == 100
-    assert initial["drawings"]["rows"] == list(range(1, 11))
-    assert initial["drawings"]["size"] == ("medium" if width >= 1200 else "small")
+    assert initial["cases"] == list(range(1, 325))
+    assert initial["visible_cases"] == 324
+    assert initial["drawings"]["cards"] == 324
+    assert initial["drawings"]["rows"] == list(range(1, 19))
+    # Opened from the top, the homepage's triangle follows the scroll from XL
+    # (`tests/test_site_atlas_follow.py`).
+    assert initial["drawings"]["size"] == "xlarge"
     assert initial["drawings"]["scale"] == "row"
-    assert initial["stage"] == 100
     assert initial["view"] == "triangle"
-    assert initial["toggle"]["name"] == "Show more: all 324 cases"
     assert initial["prepared_cases"] == 324
     assert initial["images"] == {"decoded": 324, "loaded": 324, "failed": 0}
     assert initial["control_groups"] == [
@@ -325,38 +340,21 @@ def test_keyboard_expansion_uses_the_shared_triangle_without_click_time_preparat
     for control in initial["control_type"]:
         assert 0.75 <= control["size"] / control["base"] <= 0.9
     assert initial["cells_role"] == "tabpanel"
-    assert initial["toggle"]["expanded"] == "false"
-    assert initial["toggle"]["label"] == "Show More"
-    assert initial["toggle"]["arrow"] == "double-down"
-    assert initial["toggle"]["controls"] == "homepage-atlas-cells"
-    for name in ("expanded", "cached"):
+    for name, view in (("grid", "grid"), ("triangle", "triangle")):
         state = report[name]
         assert state["cases"] == list(range(1, 325)), name
         assert state["visible_cases"] == 324, name
-        assert state["toggle"]["expanded"] == "true", name
-        assert state["toggle"]["label"] == "Show Less", name
-        assert state["toggle"]["name"] == "Show less: the first 100"
-        assert state["toggle"]["arrow"] == "double-up", name
-        assert not state["toggle"]["disabled"], name
         assert state["busy"] is None, name
         assert state["drawings"]["cards"] == 324
-        assert state["drawings"]["rows"] == list(range(1, 19))
-        assert state["view"] == "triangle"
-    collapsed = report["collapsed"]
-    assert collapsed["cases"] == initial["cases"]
-    assert collapsed["drawings"] == initial["drawings"]
-    assert collapsed["toggle"]["expanded"] == "false"
-    assert collapsed["toggle"]["label"] == "Show More"
-    assert collapsed["toggle"]["arrow"] == "double-down"
-    assert collapsed["toggle"]["focused"]
-    assert collapsed["prepared_cases"] == 324
-    assert collapsed["view"] == "triangle"
-    for name in ("initial", "expanded", "collapsed", "cached", "static_labels"):
+        assert state["view"] == view
+    assert report["triangle"]["drawings"] == initial["drawings"]
+    assert report["triangle"]["prepared_cases"] == 324
+    for name in ("initial", "grid", "triangle", "static_labels"):
         center = report[name]["centering"]
         assert center["page_overflow"] == 0, name
         if center["fits"]:
             assert abs(center["offset"]) <= 0.5, (name, center)
-    for name in ("initial", "expanded", "collapsed", "cached"):
+    for name in ("initial", "grid", "triangle"):
         state = report[name]
         assert state["label_errors"] == [], name
         assert state["mark_errors"] == [], name
@@ -367,33 +365,19 @@ def test_keyboard_expansion_uses_the_shared_triangle_without_click_time_preparat
         assert report[name]["raw_markup"] == 0, name
         assert state["star_cases"] == [], name
     assert report["atlas_requests"] == 0
-    for name in ("initial", "expanded", "collapsed", "cached"):
-        assert report[name]["toggle"]["arrow_hidden"] == "true"
-        assert report[name]["toggle"]["arrow_mask"] != "none"
-        assert report[name]["toggle"]["arrow_width"] > 0
-    for name, count in (
-        ("expanded_move", 324),
-        ("cached_move", 324),
-    ):
+    for name, view in (("grid_move", "grid"), ("triangle_move", "triangle")):
         transition = report[name]
         response = transition["input"]
-        assert response["view"] == "triangle"
-        assert response["count"] == count
+        assert response["view"] == view
+        assert response["count"] == 324
         assert response["same_nodes"]
         assert response["scroll_delta"] == 0
         assert transition["placement_errors"] == []
         assert transition["drawing_errors"] == []
         assert transition["row_alignment_errors"] == []
         assert transition["duration"] == 360
-        if name == "expanded_move" and initial["centering"]["fits"]:
-            # Growing the centered visible canvas moves retained tiles horizontally.
-            assert any(
-                abs(float(animation["first_transform"].split("(", 1)[1].split("px", 1)[0]))
-                > 0.5
-                for animation in response["animations"]
-            )
-        if response["layout_changed"]:
-            assert response["animations"]
+        assert response["layout_changed"]
+        assert response["animations"]
         for animation in response["animations"]:
             assert animation["duration"] == transition["duration"]
             assert animation["delay"] == 0
@@ -404,28 +388,23 @@ def test_keyboard_expansion_uses_the_shared_triangle_without_click_time_preparat
         assert transition["panel_id"] == "homepage-atlas-cells"
         assert transition["panel_role"] == "tabpanel"
         assert all(aspect == pytest.approx(1, abs=0.002) for aspect in transition["aspects"])
-    assert report["collapsed_move"]["input"]["same_nodes"]
-    assert report["collapsed_move"]["toggle_in_view"]
-    reduced = report["reduced_move"]
-    assert reduced["input"]["count"] == 324
-    assert reduced["input"]["same_nodes"]
-    assert reduced["input"]["animations"] == []
-    assert reduced["duration"] == 0
-    assert reduced["placement_errors"] == []
-    assert report["reduced_collapsed"]["input"]["count"] == 100
-    assert report["reduced_collapsed"]["input"]["same_nodes"]
-    assert report["reduced_collapsed"]["input"]["animations"] == []
-    assert report["reduced_collapsed"]["toggle_in_view"]
-    assert report["rapid"]["counts"][-4:] == [324, 100, 324, 100]
+    for name in ("reduced_move", "reduced_back"):
+        reduced = report[name]
+        assert reduced["input"]["count"] == 324, name
+        assert reduced["input"]["same_nodes"], name
+        assert reduced["input"]["animations"] == [], name
+        assert reduced["duration"] == 0, name
+        assert reduced["placement_errors"] == [], name
+    assert report["rapid"]["counts"][-4:] == [324] * 4
+    assert report["rapid"]["input"]["view"] == "triangle"
     assert report["rapid"]["input"]["same_nodes"]
     assert report["rapid"]["placement_errors"] == []
-    assert report["rapid"]["toggle_in_view"]
     assert report["static"]["page_overflow"] == 0
     static = report["static"]["tiles"]
     assert report["static_labels"]["raw_markup"] == 0
     assert report["static_labels"]["label_errors"] == []
     assert report["static_labels"]["star_cases"] == []
-    assert [tile["n"] for tile in static] == list(range(1, 101))
+    assert [tile["n"] for tile in static] == list(range(1, 325))
     for index, tile in enumerate(static):
         assert tile["left"] >= report["static"]["canvas"]["left"] - 0.5
         assert tile["right"] <= report["static"]["canvas"]["right"] + 0.5
@@ -436,8 +415,13 @@ def test_keyboard_expansion_uses_the_shared_triangle_without_click_time_preparat
                 or tile["top"] + tile["height"] <= other["top"] + 0.5
                 or other["top"] + other["height"] <= tile["top"] + 0.5
             ), (tile["n"], other["n"])
-    assert [themed["cases"] for themed in report["staged_themes"]] == [100, 324, 100]
+    assert [themed["view"] for themed in report["staged_themes"]] == [
+        "triangle",
+        "grid",
+        "triangle",
+    ]
     for themed in report["staged_themes"]:
+        assert themed["cases"] == 324
         assert themed["resolved"] == themed["expected"]
         assert themed["background"] == themed["page_background"]
         assert themed["palette_unchanged"]
@@ -459,7 +443,7 @@ def test_keyboard_expansion_uses_the_shared_triangle_without_click_time_preparat
 
 
 @pytest.fixture(scope="module")
-def toggle_seen(browser: Any, request: pytest.FixtureRequest) -> dict[int, dict[str, Any]]:
+def atlas_seen(browser: Any, request: pytest.FixtureRequest) -> dict[int, dict[str, Any]]:
     """One shared session keeps every keyboard, pointer, theme and fallback reading."""
     sync_api = site_browser.api()
     reports = {}
@@ -473,8 +457,8 @@ def toggle_seen(browser: Any, request: pytest.FixtureRequest) -> dict[int, dict[
         requests = _requests(page)
         try:
             page.goto(f"{origin}index.html", wait_until="load")
-            sync_api.expect(page.locator(TOGGLE)).to_be_visible()
-            # The ordinary reader expansion reuses already decoded, authored images.
+            sync_api.expect(page.locator(TILES)).to_have_count(324)
+            # Every row's authored images are decoded after first paint.
             sync_api.expect(page.locator("[data-atlas-preview]")).to_have_attribute(
                 "data-atlas-images-ready", "324", timeout=15000
             )
@@ -518,7 +502,15 @@ def toggle_seen(browser: Any, request: pytest.FixtureRequest) -> dict[int, dict[
                         "height": video["y"] + video["height"] - pdfs["y"] + 80,
                     },
                 )
-            report["preview_pointer"] = _pointer_cases(page, (18, 36))
+            # A reader who chooses a view ends the following, and the triangle takes its
+            # own layout, where a tile is clicked where its layout puts it. The homepage
+            # writes no view to its address.
+            page.locator(GRID_TAB).click()
+            page.locator(TRIANGLE_TAB).click()
+            sync_api.expect(page.locator("[data-atlas-preview]")).to_have_attribute(
+                "data-atlas-follow", "held"
+            )
+            report["pointer"] = _pointer_cases(page, (18, 36, 306, 324))
             report["hero"] = page.evaluate(HERO)
             hero = page.locator('.site-hero-figure a[data-case="53"]')
             hero.click()
@@ -539,64 +531,58 @@ def toggle_seen(browser: Any, request: pytest.FixtureRequest) -> dict[int, dict[
                     path=str(Path(screenshot_dir) / f"homepage-hero-53-{width}.png")
                 )
                 page.locator("[data-atlas-preview]").screenshot(
-                    path=str(Path(screenshot_dir) / f"homepage-triangle-100-{width}.png")
+                    path=str(Path(screenshot_dir) / f"homepage-triangle-324-{width}.png")
                 )
             baseline = page.evaluate(TRANSITION, {"install": True, "settle": False})
             report["root_view"] = baseline["root_view"]
             report["root_size"] = baseline["root_size"]
-            toggle = page.locator(TOGGLE)
-            toggle.focus()
+            # The keyboard presses the layout tabs, as a reader does.
+            page.locator(GRID_TAB).focus()
             page.evaluate(TRANSITION, {"install": False, "settle": True, "position": True})
             page.keyboard.press("Enter")
-            report["expanded_move"] = page.evaluate(
-                TRANSITION, {"install": False, "settle": True}
-            )
+            report["grid_move"] = page.evaluate(TRANSITION, {"install": False, "settle": True})
             sync_api.expect(page.locator(TILES)).to_have_count(324)
-            sync_api.expect(toggle).to_be_enabled()
-            report["expanded"] = page.evaluate(STATE)
+            report["grid"] = page.evaluate(STATE)
             if screenshot_dir:
                 page.locator("[data-atlas-preview]").screenshot(
-                    path=str(Path(screenshot_dir) / f"homepage-triangle-324-{width}.png")
+                    path=str(Path(screenshot_dir) / f"homepage-grid-324-{width}.png")
                 )
-            toggle.focus()
-            page.keyboard.press("Space")
-            report["collapsed_move"] = page.evaluate(
-                TRANSITION, {"install": False, "settle": True}
-            )
-            sync_api.expect(page.locator(TILES)).to_have_count(100)
-            report["collapsed"] = page.evaluate(STATE)
+            page.locator(TRIANGLE_TAB).focus()
             page.evaluate(TRANSITION, {"install": False, "settle": True, "position": True})
-            page.keyboard.press("Enter")
-            report["cached_move"] = page.evaluate(
+            page.keyboard.press("Space")
+            report["triangle_move"] = page.evaluate(
                 TRANSITION, {"install": False, "settle": True}
             )
             sync_api.expect(page.locator(TILES)).to_have_count(324)
-            report["cached"] = page.evaluate(STATE)
+            report["triangle"] = page.evaluate(STATE)
             page.emulate_media(reduced_motion="reduce")
-            page.keyboard.press("Space")
-            page.evaluate(TRANSITION, {"install": False, "settle": True})
+            page.locator(GRID_TAB).focus()
             page.keyboard.press("Enter")
             report["reduced_move"] = page.evaluate(
                 TRANSITION, {"install": False, "settle": True}
             )
-            page.keyboard.press("Space")
-            report["reduced_collapsed"] = page.evaluate(
+            page.locator(TRIANGLE_TAB).focus()
+            page.keyboard.press("Enter")
+            report["reduced_back"] = page.evaluate(
                 TRANSITION, {"install": False, "settle": True}
             )
             page.emulate_media(reduced_motion="no-preference")
             report["rapid"] = page.evaluate(
-                TRANSITION, {"install": False, "settle": True, "rapid": True}
+                TRANSITION,
+                {
+                    "install": False,
+                    "settle": True,
+                    "rapid": [GRID_TAB, TRIANGLE_TAB, GRID_TAB, TRIANGLE_TAB],
+                },
             )
             report["staged_themes"] = []
-            for stage, mode, scheme in (
-                (100, "system", "dark"),
-                (324, "light", "dark"),
-                (100, "dark", "light"),
+            for view, mode, scheme in (
+                ("triangle", "system", "dark"),
+                ("grid", "light", "dark"),
+                ("triangle", "dark", "light"),
             ):
-                if page.locator(TILES).count() != stage:
-                    toggle.click()
-                    page.evaluate(TRANSITION, {"install": False, "settle": True})
-                sync_api.expect(page.locator(TILES)).to_have_count(stage)
+                page.locator(f'[data-atlas-tab="{view}"]').click()
+                page.evaluate(TRANSITION, {"install": False, "settle": True})
                 page.emulate_media(color_scheme=scheme)
                 page.evaluate(THEME, {"scroll_top": True})
                 page.locator(".site-theme-button").click()
@@ -604,12 +590,10 @@ def toggle_seen(browser: Any, request: pytest.FixtureRequest) -> dict[int, dict[
                 report["staged_themes"].append(
                     {
                         **page.evaluate(THEME, {"scroll_top": False}),
+                        "view": view,
                         "expected": scheme if mode == "system" else mode,
                     }
                 )
-            toggle.click()
-            page.evaluate(TRANSITION, {"install": False, "settle": True})
-            report["expanded_pointer"] = _pointer_cases(page, (306, 324))
             late = page.locator(f'{TILES}[data-case="291"]')
             late.focus()
             page.keyboard.press("Enter")
@@ -639,8 +623,7 @@ def toggle_seen(browser: Any, request: pytest.FixtureRequest) -> dict[int, dict[
                 _serve(static_page, files)
             try:
                 static_page.goto(f"{origin}index.html", wait_until="load")
-                sync_api.expect(static_page.locator(TOGGLE)).to_be_hidden()
-                sync_api.expect(static_page.locator(TILES)).to_have_count(100)
+                sync_api.expect(static_page.locator(TILES)).to_have_count(324)
                 sync_api.expect(static_page.locator(EXPLORE)).to_be_visible()
                 report["static"] = static_page.evaluate(INITIAL_LAYOUT)
                 report["static_labels"] = static_page.evaluate(STATE)
@@ -671,19 +654,18 @@ def toggle_seen(browser: Any, request: pytest.FixtureRequest) -> dict[int, dict[
 def test_native_svg_case_links_align_with_drawings_and_open_by_pointer_after_scroll(
     seen: dict[int, dict[str, Any]], width: int
 ) -> None:
-    for phase, cases in (("preview_pointer", (18, 36)), ("expanded_pointer", (306, 324))):
-        readings = seen[width][phase]
-        assert [reading["n"] for reading in readings] == list(cases)
-        for reading in readings:
-            assert reading["opened"] == str(reading["n"])
-            assert reading["drawing_width"] > 0
-            assert reading["drawing_width"] == pytest.approx(reading["drawing_height"], abs=0.1)
-            assert reading["row"] == int((reading["n"] - 1) ** 0.5) + 1
-            assert reading["segment"] in ("grid", "non-grid")
-            assert reading["source"].endswith(f"/n-{reading['n']}.svg")
-            assert 0 <= reading["center_x"] <= reading["viewport_width"]
-            assert reading["contained"]
-            assert reading["page_overflow"] == 0, (phase, reading)
+    readings = seen[width]["pointer"]
+    assert [reading["n"] for reading in readings] == [18, 36, 306, 324]
+    for reading in readings:
+        assert reading["opened"] == str(reading["n"])
+        assert reading["drawing_width"] > 0
+        assert reading["drawing_width"] == pytest.approx(reading["drawing_height"], abs=0.1)
+        assert reading["row"] == int((reading["n"] - 1) ** 0.5) + 1
+        assert reading["segment"] in ("grid", "non-grid")
+        assert reading["source"].endswith(f"/n-{reading['n']}.svg")
+        assert 0 <= reading["center_x"] <= reading["viewport_width"]
+        assert reading["contained"]
+        assert reading["page_overflow"] == 0, reading
 
 
 @pytest.mark.parametrize("width", WIDTHS)
@@ -741,7 +723,7 @@ def test_homepage_order_chrome_and_single_card_rows_keep_the_shared_design(
     for action in home["actions"]:
         assert action["transform"] == "uppercase", action
     download = seen[width]["download"]
-    assert download["order"] == ["Download PDF", "View Visual Atlas"]
+    assert download["order"] == ["Download PDF", "Visual Atlas"]
     assert download["href"] == overview_sections.PDF_CARD_SPECS[1][0]
     assert download["download"]
     assert download["uppercase"] == "uppercase"
@@ -784,7 +766,7 @@ def results_navigation_seen(browser: Any) -> dict[int, dict[str, Any]]:
             initial = page.evaluate(STATE)
             all_results = page.locator("a[data-all-results]")
             sync_api.expect(all_results).to_have_text(
-                re.compile("^View All Results$", re.IGNORECASE)
+                re.compile("^All Results$", re.IGNORECASE)
             )
             bounds = all_results.bounding_box()
             assert bounds is not None
@@ -836,14 +818,14 @@ def test_results_action_reaches_complete_archive_by_keyboard_and_pointer(
 
 
 @pytest.mark.parametrize("width", WIDTHS)
-def test_native_svg_follows_live_system_light_dark_choices_in_all_cached_states(
+def test_native_svg_follows_live_system_light_dark_choices_in_both_views(
     seen: dict[int, dict[str, Any]], width: int
 ) -> None:
     readings = seen[width]["themes"]
-    assert len(readings) == 12
+    assert len(readings) == 8
     for state in readings:
         assert state["resolved"] == state["expected"]
-        assert state["cases"] == (324 if state["phase"] == "expanded" else 100)
+        assert state["cases"] == 324
         assert state["background"] == state["page_background"]
         assert state["white_samples"] > 0, state
         assert state["colored_samples"] > 0, state
@@ -851,7 +833,7 @@ def test_native_svg_follows_live_system_light_dark_choices_in_all_cached_states(
         assert state["palette_samples"] >= 5
         assert state["palette_unchanged"]
         assert state["filter"] == "none"
-    for phase in ("preview", "expanded", "collapsed"):
+    for phase in ("triangle", "grid"):
         colors = {tuple(state["background"]) for state in readings if state["phase"] == phase}
         assert len(colors) == 2, phase
         pixels = {state["palette_signature"] for state in readings if state["phase"] == phase}
@@ -859,9 +841,13 @@ def test_native_svg_follows_live_system_light_dark_choices_in_all_cached_states(
 
 
 @pytest.mark.parametrize("width", WIDTHS)
-def test_missing_shared_engine_keeps_native_preview_and_explore_usable(
+def test_missing_shared_engine_keeps_every_case_and_the_atlas_link_usable(
     browser: Any, payloads: dict[str, bytes], width: int
 ) -> None:
+    """Without the views' script the homepage keeps its static atlas, every case shown
+    and each a link, with no error; Visual Atlas still opens the Atlas page. The
+    status line that pointed a reader there, because the cases after the first hundred
+    could not be shown, went with the expander on 2026-10-22."""
     sync_api = site_browser.api()
     page = browser.new_page(viewport={"width": width, "height": 900})
     _serve(page, payloads)
@@ -875,15 +861,11 @@ def test_missing_shared_engine_keeps_native_preview_and_explore_usable(
     page.on("pageerror", record_error)
     try:
         page.goto(f"{ORIGIN}index.html", wait_until="load")
-        sync_api.expect(page.locator(STATUS)).to_be_visible()
-        sync_api.expect(page.locator(TOGGLE)).to_be_hidden()
+        sync_api.expect(page.locator(TILES)).to_have_count(324)
         failed = page.evaluate(STATE)
-        assert failed["visible_cases"] == 100
-        assert failed["toggle"]["expanded"] == "false"
+        assert failed["visible_cases"] == 324
         assert failed["prepared_cases"] == 324
         assert failed["busy"] is None
-        assert failed["status"]["role"] == "status"
-        assert "Explore the atlas" in failed["status"]["text"]
         assert page.url == f"{ORIGIN}index.html"
 
         assert errors == []
@@ -895,7 +877,7 @@ def test_missing_shared_engine_keeps_native_preview_and_explore_usable(
 
 
 @pytest.mark.parametrize("width", WIDTHS)
-def test_explore_stays_usable_without_javascript_and_the_expander_stays_hidden(
+def test_every_case_and_the_atlas_link_stay_usable_without_javascript(
     browser: Any, payloads: dict[str, bytes], width: int
 ) -> None:
     sync_api = site_browser.api()
@@ -903,8 +885,7 @@ def test_explore_stays_usable_without_javascript_and_the_expander_stays_hidden(
     _serve(page, payloads)
     try:
         page.goto(f"{ORIGIN}index.html", wait_until="load")
-        sync_api.expect(page.locator(TOGGLE)).to_be_hidden()
-        sync_api.expect(page.locator(TILES)).to_have_count(100)
+        sync_api.expect(page.locator(TILES)).to_have_count(324)
         sync_api.expect(page.locator(EXPLORE)).to_be_visible()
         page.locator(EXPLORE).click()
         sync_api.expect(page).to_have_url(f"{ORIGIN}atlas.html")
@@ -1193,7 +1174,7 @@ def test_home_news_box_opens_on_its_levels_and_its_compact_filter_widens_it(
     """The box opens on `news_highlights.default_levels`, the newest `LIMIT` there. Its
     filter is the archive's significance widget, smaller, at the right and above the
     cards. A keyboard press changes the levels and the box shows the newest `LIMIT` at
-    them, or says nothing matches; its "View All News" link carries the choice to the archive,
+    them, or says nothing matches; its "All News" link carries the choice to the archive,
     which opens on it. In both schemes a pressed level reads apart from the others.
     Without scripts the box shows its opening levels and no filter."""
     document = render_changelog.load()
@@ -1826,5 +1807,71 @@ def test_significance_meter_spacing_rejects_oversized_boxes(
             or item["side_space"] < 2 * (item["border"] + item["padding"]) - 0.5
             for item in crowded
         ), ("the spacing probe must reject a meter its label and bars overflow", crowded)
+    finally:
+        page.close()
+
+
+#: Every page that sets a compact chooser, and the kinds of control each must show. The
+#: atlases are opened at a named size, which keeps the scroll from resizing their tiles.
+CHOOSER_SURFACES = {
+    "atlas.html?size=medium": {"tab"},
+    "index.html?size=medium": {"tab"},
+    "news.html": {"tab", "trigger", "reset"},
+    "results.html": {"tab"},
+}
+
+
+@pytest.fixture(scope="module")
+def doubled(driver: Any) -> Iterator[Any]:
+    """The same Chromium laid out for a 2x screen. `--force-device-scale-factor` lays a
+    page out in device pixels, as a Retina display does, so a font's ascent and the
+    leading round there as they do for a reader on one; a context's
+    `device_scale_factor` draws the 1x layout larger and rounds nothing differently.
+    It is launched as `site_browser.launch` launches the 1x one, with that one switch
+    more: where none can be launched the test skips, or fails where the run requires a
+    Chromium."""
+    sync_api = site_browser.api()
+    try:
+        launched = preview_site.launch_chromium(driver, args=["--force-device-scale-factor=2"])
+    except sync_api.Error as error:
+        site_browser.unavailable(
+            f"no Chromium to launch at 2x: {error.message.splitlines()[0]}"
+        )
+    yield launched
+    launched.close()
+
+
+@pytest.mark.parametrize("scale", [1, 2])
+def test_every_compact_chooser_centers_its_capitals(
+    browser: Any, payloads: dict[str, bytes], scale: int, request: pytest.FixtureRequest
+) -> None:
+    """Every compact chooser's words stand in the middle of their control, on the Atlas,
+    the homepage, News and Results, at both widths and at 1x and 2x. The labels are set
+    in capitals, so the middle of the capitals is what reads as the text's middle, and
+    it is held to a quarter pixel.
+
+    Set by the leading and the padding, the capitals sat 0.35px high at 1x and 0.86px
+    high on a 2x screen, where the browser rounds the font's ascent and the half leading
+    in device pixels (the owner, 2026-10-23). Each line is now trimmed to its capitals
+    (`text-box`) and centered in a control 24px tall, the floor a tap target needs."""
+    chromium = browser if scale == 1 else request.getfixturevalue("doubled")
+    page = chromium.new_page(viewport={"width": WIDTHS[0], "height": 900})
+    _serve(page, payloads)
+    try:
+        for path, kinds in CHOOSER_SURFACES.items():
+            page.goto(f"{ORIGIN}{path}", wait_until="load")
+            check_site_rendering.wait_for_fonts(page)
+            for width in WIDTHS:
+                page.set_viewport_size({"width": width, "height": 900})
+                controls = page.evaluate(CHOOSER_LABELS)
+                where = (path, width, scale)
+                assert {control["kind"] for control in controls} == kinds, where
+                for control in controls:
+                    assert control["fontSize"] == pytest.approx(15.2 * 0.875, abs=0.01), where
+                    assert control["height"] >= 24 - 0.01, (where, control)
+                    assert control["words"], (where, control)
+                    for word in control["words"]:
+                        assert word["transform"] == "uppercase", (where, control)
+                        assert abs(word["offset"]) <= 0.25, (where, control)
     finally:
         page.close()

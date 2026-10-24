@@ -184,7 +184,10 @@ verification.
 [`source-coverage.yaml`](source-coverage.yaml) is a dated claim about a named source
 set, not a claim that a web search exhausted every publication.
 It records each source’s scope, review date, retained first-party material, evidence,
-replay disposition, in-horizon overrides, and relevant claims beyond $n = 324$.
+replay disposition, in-horizon overrides, and relevant claims beyond $n = 324$. Every
+source dated from 22 August 2026 that a registered result or the evidence it cites names
+has an entry here, which carries its key or cites that evidence, papers and tools
+included; `devtools.check_source_coverage` refuses one without.
 
 The current baseline reparses the retained Kingbird catalogue through $n = 324$, applies
 Francisco Couzo’s certified packings at 49 counts from $n = 68$ to $307$ (T-056), seven
@@ -205,8 +208,20 @@ Claims beyond $n = 324$ are listed by count and source.
 A count has at most one current row; an earlier dated report that a later one beats
 stays listed as its source printed it, marked superseded and naming the source of the
 row that beats it, which must be dated no earlier and strictly better by exact
-comparison. The check is local and deterministic; refreshing a public source is a dated
-W1 research survey, not a network operation hidden inside ordinary validation.
+comparison. Göbel’s classical constructions are earlier reports beyond $n = 324$ (the
+owner, 23 October 2026, [#613](https://github.com/jlevy/squares/issues/613)), so a row
+above Göbel’s construction at its count also stays listed as its source printed it.
+It is marked `above-classical-construction`, states the construction $p + q\sqrt 2$ it
+is above, and holds no count.
+The standing side there is the construction, which has no row: in the walks, and from 23
+October 2026 in every start, claim record and replay reading beyond the horizon
+([several reports at one count](../campaign/result-import.md#several-reports-at-one-count)).
+`devtools.beyond_horizon_replay` holds every row from $n = 325$ to $1024$ to Göbel’s
+construction exactly.
+Nine rows of 8 to 13 October at $n = 369, 375$ and $376$ are so marked, and 369 and 376
+have no current row.
+The check is local and deterministic; refreshing a public source is a dated W1 research
+survey, not a network operation hidden inside ordinary validation.
 
 SQUISH’s ten-packing release and its later $n = 153$ supplement, published on 7 October
 2026, carry the upper bounds at eleven counts (T-113 and T-114). Nate Chaoweeraprasit
@@ -312,8 +327,21 @@ The process relies on these rules of the records:
   For a result by others, that is a complete replay here and a review of its mathematics
   under [`docs/project/reviews/`](../../docs/project/reviews/). External evidence and a
   local replay are recorded as separate entries.
-  An upper bound that passes them below the case’s house best packing replaces it
-  ([the house rule](../campaign/result-import.md#the-house-rule)).
+  The case-lane check refuses a machine run not made here, and
+  [`devtools.check_results`](../devtools/check_results.py) a verified bound on a result
+  by others dated from 22 August 2026 that no register entry covering it lists an
+  accepting review of the mathematics for (`accepted` or `defects-resolved`, by a kind
+  other than `oversight`), and whose evidence records no defect-free read in a mapped
+  review document. An upper bound that passes them below the case’s house best packing
+  replaces it ([the house rule](../campaign/result-import.md#the-house-rule)).
+- **Beyond the corpus, the report-order ledger decides the rows**
+  ([several reports at one count](../campaign/result-import.md#several-reports-at-one-count)),
+  with the owner’s answers of 23 October 2026. A side below an earlier report by less
+  than the 12-place print, at the same print, restates it and is no row; a side at or
+  above Göbel’s classical construction at its count is above an earlier report; a
+  certificate its author withdrew from an issue is not a report; and a side obtained by
+  deleting one square from the next count’s published certificate is an earlier report,
+  which on the D6 decision’s recommendation, not yet confirmed, has no row of its own.
 
 ## Registering a First-Party Result
 

@@ -2,7 +2,7 @@
 // its address; without scripts no article is filtered out there. A preview, the home
 // page's News box (`data-news-limit`), shows the newest articles that match, up to its
 // limit, says how many in its live count, keeps no address and carries the choice on
-// its "View All News" link (`data-news-carry`). Either opens on the levels its markup
+// its "All News" link (`data-news-carry`). Either opens on the levels its markup
 // presses.
 (() => {
   const controls = document.querySelector("[data-news-filters]");
@@ -53,7 +53,7 @@
     const card = document.getElementById(id)?.closest("[data-news-day]");
     return card instanceof HTMLElement && news.contains(card) ? card : null;
   };
-  // A preview's "View All News" link opens the archive on the reader's choice, once
+  // A preview's "All News" link opens the archive on the reader's choice, once
   // they have made one; the archive reads it as its own address.
   const carry = () => {
     const levels = allScores.filter((value) => scores.has(value)).join(",");

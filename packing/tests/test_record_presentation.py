@@ -2,6 +2,7 @@
 
 from devtools.profile_records import RecordFacet, RecordIndex
 from devtools.record_presentation import record_tally
+from devtools.site_tallies import TALLY_SEPARATOR
 
 
 def test_supported_current_records_and_pending_facets_are_both_visible() -> None:
@@ -19,6 +20,9 @@ def test_supported_current_records_and_pending_facets_are_both_visible() -> None
     )
     assert '>1 record</a> <span class="site-tally-levels">(at S5)</span>' in rendered
     assert "Review pending" in rendered
+    # The pending note follows the count after the shared tally dot, never a bare one.
+    assert TALLY_SEPARATOR + '<span class="site-record-pending"' in rendered
+    assert rendered.count("·") == 1
     assert "unknown: date tie" in rendered
     assert "one comparison pending" not in rendered
     assert 'href="person.html#records"' in rendered

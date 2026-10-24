@@ -69,10 +69,11 @@ def test_the_retained_packet_rebuilds_both_later_reports_byte_for_byte() -> None
 def test_the_ffd900d_reports_stay_pinned_and_become_dated_rows() -> None:
     """The earlier packet still prints its sides; the register supersedes, never rewrites.
 
-    Each report keeps its own row at its own print when a later one beats it: ffd900d's by
-    2d32a6e's on 8 October, 2d32a6e's by issue 506's certificates on 12 October (at 378 by
-    Couzo's 02f9690 certificate of 9 October first), and issue 506's by issue 561's in the
-    intake of 14 October.
+    Each report keeps its own row at its own print when a later one beats it: at 378
+    ffd900d's by 2d32a6e's on 8 October, 2d32a6e's by Couzo's 02f9690 certificate of 9
+    October, and issue 506's by issue 561's in the intake of 14 October. At 375 all three
+    are above Göbel's construction, which the owner counts as an earlier report since 23
+    October 2026, so they are marked so and hold no count.
     """
     claims = earlier.read_json(earlier.PACKET / "acquisition/sources.json")
     printed = {row["n"]: row["side"] for row in claims["sources"][0]["cases"]}
@@ -91,20 +92,31 @@ def test_the_ffd900d_reports_stay_pinned_and_become_dated_rows() -> None:
     }
     for n in updates.COUNTS:
         first, later = rows[n, earlier.SOURCE_ID], rows[n, updates.SOURCE_ID]
-        assert first["value"] == FFD900D[n]
+        current = rows[n, ISSUE_506]
+        assert (first["value"], later["value"], current["value"]) == (
+            FFD900D[n],
+            LATER[n],
+            CERTIFIED[n],
+        )
+        assert Fraction(CERTIFIED[n]) < Fraction(LATER[n]) < Fraction(FFD900D[n])
+        if n == 375:
+            # All three are above Göbel's square 10 + 7 sqrt(2) of 376 less one square, an
+            # earlier report by the owner's answer of 23 October 2026 (#613): each stays
+            # listed as printed and holds no count.
+            for row in (first, later, current):
+                assert row["disposition"] == check_source_coverage.ABOVE_CONSTRUCTION
+                assert row["construction"] == "10 + 7*sqrt(2)"
+                assert "superseded_by" not in row
+            continue
         assert first["disposition"] == "superseded"
         assert first["superseded_by"] == updates.SOURCE_ID
-        assert later["value"] == LATER[n]
         assert later["disposition"] == "superseded"
         # At 378 Couzo's 02f9690 certificate of 9 October came first, a dated row since the
         # history walk of 22 October, and issue 506's certificate beat it in turn.
-        assert later["superseded_by"] == (ISSUE_506 if n == 375 else "couzo-02f9690-2026-10-09")
-        current = rows[n, ISSUE_506]
-        assert current["value"] == CERTIFIED[n]
+        assert later["superseded_by"] == "couzo-02f9690-2026-10-09"
         # Issue 561's certificates, reported on 12 October, are the next in report order.
         assert current["disposition"] == "superseded"
         assert current["superseded_by"] == "couzo-certificates-2026-10-12"
-        assert Fraction(CERTIFIED[n]) < Fraction(LATER[n]) < Fraction(FFD900D[n])
     # The last reports stand: evand's composition at 375, which beats Couzo's certificate
     # of 13 October, and at 378 issue 719's certificate of 22 October, which beats issue
     # 686's of 19 October, which beat Couzo's 487b058 of 14 October (T-188's source), which

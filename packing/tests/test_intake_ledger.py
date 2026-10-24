@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import copy
+import gzip
 import json
 from fractions import Fraction
 from pathlib import Path
@@ -339,6 +340,108 @@ def test_an_exception_is_applied_and_shown() -> None:
     assert ledger.step_record(walk.steps[1])["exception"] == "first committed"
     # The exception moves nothing: the stronger report still holds the count.
     assert [item.label for item in walk.standing] == ["#1"]
+
+
+#: Both of the owner's rulings of 23 October 2026, at every count beyond the horizon.
+RULED = ledger.Rulings(restatement=ledger.NO_LIMIT, classical=ledger.NO_LIMIT)
+
+
+def test_a_side_within_the_print_below_a_report_restates_it() -> None:
+    """The owner's answer of 23 October 2026 (think-fwa9): beyond the horizon a side below
+    an earlier report by less than one unit in the 12th place, both rounding up to one
+    12-place print, restates it and is not recorded; a full unit below is recorded. The
+    corpus and a ledger without the ruling walk as before."""
+    earlier = side("#1", "39/2", when="2026-10-12T01:00:00Z")
+    close = side("#2", "19.49999999999999999999", when="2026-10-12T02:00:00Z")
+    far = side("#3", "19.499999999999", when="2026-10-12T03:00:00Z")
+    walk = ledger.walk(400, GRID_10, [earlier, close, far], rulings=RULED)
+    assert verdicts(walk) == [
+        ("#1", "recorded", "the grid"),
+        ("#2", "not recorded", "#1"),
+        ("#3", "recorded", "#1"),
+    ]
+    assert walk.steps[1].reason == ledger.RESTATES
+    assert ledger.step_record(walk.steps[1])["difference"] == (
+        "restates, below by 1.00e-20 at the same 12-place print"
+    )
+    for plain in (
+        ledger.walk(400, GRID_10, [earlier, close], rulings=ledger.Rulings()),
+        ledger.walk(324, GRID_10, [earlier, close], rulings=RULED),
+        ledger.walk(400, GRID_10, [earlier, close], rulings=ledger.Rulings(restatement=399)),
+    ):
+        assert [step.verdict for step in plain.steps] == ["recorded", "recorded"]
+
+
+def test_a_claim_in_the_ruling_s_words_may_wait_on_the_owner() -> None:
+    earlier = side("#1", "39/2", when="2026-10-12T01:00:00Z")
+    close = side("#2", "19.49999999999999999999", when="2026-10-12T02:00:00Z")
+    rulings = ledger.Rulings(restatement=ledger.NO_LIMIT, awaiting={(400, "#2"): "think-oqjd"})
+    walk = ledger.walk(400, GRID_10, [earlier, close], rulings=rulings)
+    assert [step.verdict for step in walk.steps] == ["recorded", "recorded"]
+    assert ledger.step_record(walk.steps[1])["awaiting_owner"] == "think-oqjd"
+
+
+def test_goebel_s_construction_is_an_earlier_report_beyond_the_horizon() -> None:
+    """The owner's answer on #613 (think-8krd): at 369 Göbel's strip 19 + sqrt(2)/2 joins
+    the start below the grid, so a side above it is not recorded and one below is. A side
+    just below the construction at its 12-place print is recorded: the restatement ruling
+    as written restates reports, and whether it also reaches a construction is an open
+    question (think-oqjd); no case of it exists to 1024. Above the retained program's
+    reach, 1073, the construction is refused rather than read as absent."""
+    construction = ledger.construction_side(369)
+    assert construction is not None
+    assert construction.kind == ledger.CONSTRUCTION
+    assert construction.shown == "19.707106781187"
+    grid = ledger.beyond_side(369, {})
+    above = side("#1", "19.71", when="2026-10-12T01:00:00Z")
+    under = side("#2", "19.7071067811865", when="2026-10-12T02:00:00Z")
+    walk = ledger.walk(369, grid, [above, under], rulings=RULED)
+    assert [member.label for member in walk.start] == [ledger.GOEBEL_LABEL]
+    assert verdicts(walk) == [
+        ("#1", "not recorded", ledger.GOEBEL_LABEL),
+        ("#2", "recorded", ledger.GOEBEL_LABEL),
+    ]
+    plain = ledger.walk(369, grid, [above, under])
+    assert [step.verdict for step in plain.steps] == ["recorded", "recorded"]
+    assert ledger.construction_side(324) is None
+    assert ledger.goebel_reach() == 1073
+    assert ledger.construction_side(1073) is not None
+    for n in (1074, 1100, 1101):
+        with pytest.raises(ledger.LedgerError, match="gives no side above 1073"):
+            ledger.construction_side(n)
+
+
+def test_a_ruling_names_a_known_answer_its_day_and_its_bead() -> None:
+    data = _minimal()
+    data["rulings"] = [
+        {"ruling": "restatement", "decided": "2026-10-23", "bead": "think-fwa9"},
+        {"ruling": "classical-constructions", "decided": "2026-10-23", "bead": "think-8krd"},
+    ]
+    assert ledger.problems(data) == []
+    assert ledger.rulings_of(data) == RULED
+    data["rulings"] = [
+        {"ruling": "other", "decided": "23 October", "bead": "8krd", "through": 300},
+        {
+            "ruling": "classical-constructions",
+            "decided": "2026-10-23",
+            "bead": "think-8krd",
+            "awaiting_owner": [{"n": 101, "report": "#1", "bead": "think-oqjd", "reason": ""}],
+        },
+        {"ruling": "classical-constructions", "decided": "2026-10-23", "bead": "think-8krd"},
+    ]
+    assert ledger.problems(data) == [
+        "ruling other: no such ruling",
+        "ruling other: decided is not a date",
+        "ruling other: bead is not a think-xxxx id",
+        "ruling other: through is not a count beyond the horizon",
+        (
+            "ruling classical-constructions: only the restatement ruling keeps claims for "
+            "the owner"
+        ),
+        "ruling classical-constructions awaiting ('#1', 101): names no claim of the ledger",
+        "ruling classical-constructions awaiting ('#1', 101): states no reason",
+        "ruling classical-constructions: listed twice",
+    ]
 
 
 def test_a_closed_form_of_integers_is_a_rational_record() -> None:
@@ -898,6 +1001,110 @@ def test_check_recomputes_every_start_span_and_refuses_one_edited_by_hand() -> N
     assert "its stored inputs give" in " ".join(ledger.starts_problems(moved, FROZEN_AT))
 
 
+def test_a_beyond_horizon_start_reads_its_row_at_the_exact_side_its_source_states(
+    tmp_path: Path,
+) -> None:
+    """A row whose source's claims record states the exact side is read at that side, kept
+    as a lane the check recomputes, so a claim equal to it ties and one a fraction of the
+    print's unit below it is recorded; a source that states none leaves the print."""
+    side = Fraction(1999999999999993, 10**14)
+    row = {"n": 400, "source_id": "row-2026-10-11", "value": "19.999999999999930"}
+    record = tmp_path / "claims.json"
+    record.write_text(json.dumps({"results": [{"n": 400, "exact_side": str(side)}]}), "utf-8")
+    printed_only = tmp_path / "sources.json"
+    printed_only.write_text(json.dumps({"sources": []}), "utf-8")
+    coverage = {
+        "sources": [
+            {"id": "row-2026-10-11", "claims_record": str(record)},
+            {"id": "row-2026-10-08", "claims_record": str(printed_only)},
+        ]
+    }
+    rows = {400: row, 401: {"n": 401, "source_id": "row-2026-10-08", "value": "19.99"}}
+    exact = ledger.beyond_exact_sides(coverage, rows)
+    assert exact == {400: side}
+    member = ledger.beyond_member(400, rows, exact)
+    assert (member["model"], member["label"]) == ("exact", "beyond-horizon row row-2026-10-11")
+    assert member["lanes"] == [[member["label"], row["value"], str(side), ""]]
+    assert ledger.beyond_member(401, rows, exact)["model"] == "print"
+    starts = ledger.starts_document(FROZEN_AT, {400: [member]})
+    assert ledger.starts_problems(starts, FROZEN_AT) == []
+    start = ledger.side_of(member)
+    tie = ledger.Side("tie", "B", exact_span(side), "", side, "issue", exact=True)
+    below = side - Fraction(1, 10**16)
+    under = ledger.Side("under", "C", exact_span(below), "", below, "issue", exact=True)
+    assert ledger.compare(tie, start) == ledger.EQUAL
+    assert ledger.compare(under, start) == ledger.BELOW
+    printed = ledger.side_of(ledger.beyond_member(400, rows))
+    assert ledger.compare(tie, printed) == ledger.compare(under, printed) == ledger.UNDECIDED
+    with pytest.raises(ledger.LedgerError, match="lies outside its print"):
+        ledger.beyond_member(400, rows, {400: side + Fraction(1, 10**10)})
+
+
+def test_a_row_s_exact_side_is_read_one_way_and_refused_where_its_record_is_unclear(
+    tmp_path: Path,
+) -> None:
+    """The ledger's starts and the replay's rows read a row's exact side through one
+    reader, `stated_exact_side`. A record kept as ``.gz`` reads the same, and a record
+    that states no exact side at any count leaves the row to its print. A declared record
+    that is missing, or that states exact sides but not exactly one at the count, is
+    refused rather than read as the print (#742's review A, A3)."""
+    side = Fraction(1999999999999993, 10**14)
+    results = [{"n": 400, "exact_side": str(side)}, {"n": 402, "offered_side": "20"}]
+    plain = tmp_path / "plain.json"
+    plain.write_text(json.dumps({"results": results}), "utf-8")
+    packed = gzip.compress(json.dumps({"results": results}).encode(), mtime=0)
+    (tmp_path / "packed.json.gz").write_bytes(packed)
+    printed_only = tmp_path / "sources.json"
+    printed_only.write_text(json.dumps({"sources": []}), "utf-8")
+    twice = tmp_path / "twice.json"
+    twice.write_text(json.dumps({"results": [*results, results[0]]}), "utf-8")
+
+    def source(name: str, path: Path | None) -> dict[str, str]:
+        return {"id": name} if path is None else {"id": name, "claims_record": str(path)}
+
+    assert ledger.stated_exact_side(source("plain", plain), 400) == side
+    assert ledger.stated_exact_side(source("packed", tmp_path / "packed.json"), 400) == side
+    assert ledger.stated_exact_side(source("printed", printed_only), 400) is None
+    refused = {
+        ("absent", tmp_path / "absent.json", 400): "its claims record .* does not exist",
+        ("directory", tmp_path, 400): "is a directory",
+        ("undeclared", None, 400): "declares no claims record",
+        ("twice", twice, 400): "n=400: its claims record states no one exact side",
+        ("plain", plain, 401): "n=401: its claims record states no one exact side",
+        ("plain", plain, 402): "n=402: its claims record states no one exact side",
+    }
+    for (name, path, n), message in refused.items():
+        with pytest.raises(ledger.LedgerError, match=message):
+            ledger.stated_exact_side(source(name, path), n)
+    coverage = {"sources": [source("plain", plain)]}
+    with pytest.raises(ledger.LedgerError, match="unknown source"):
+        ledger.beyond_exact_sides(coverage, {400: {"n": 400, "source_id": "gone"}})
+
+
+def test_check_refuses_an_exact_beyond_horizon_start_moved_outside_its_print() -> None:
+    """A start read at its row's exact side keeps that side as its lane. One whose side is
+    edited to lie outside the row's print, with its span edited to match, is refused by
+    ``check``, not only when ``gather`` freezes it (#742's review A, A3)."""
+    side = Fraction(1999999999999993, 10**14)
+    row = {"n": 400, "source_id": "row-2026-10-11", "value": "19.999999999999930"}
+    member = ledger.beyond_member(400, {400: row}, {400: side})
+    starts = ledger.starts_document(FROZEN_AT, {400: [member]})
+    assert ledger.starts_problems(starts, FROZEN_AT) == []
+    for moved_by in (Fraction(1, 10**10), -Fraction(1, 10**10)):
+        moved = copy.deepcopy(starts)
+        edited = moved["counts"][0]["members"][0]
+        outside = side + moved_by
+        edited["lanes"][0][2] = str(outside)
+        edited["low"] = edited["high"] = str(outside)
+        (problem,) = ledger.starts_problems(moved, FROZEN_AT)
+        assert f"n = 400 {member['label']}" in problem
+        assert "lies outside its print 19.999999999999930" in problem
+    unreadable = copy.deepcopy(starts)
+    unreadable["counts"][0]["members"][0]["lanes"][0][2] = "about 20"
+    (problem,) = ledger.starts_problems(unreadable, FROZEN_AT)
+    assert "not a number: 'about 20'" in problem
+
+
 def test_gather_keeps_the_frozen_starts_and_reads_the_tree_only_to_refresh_them(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
@@ -1137,3 +1344,252 @@ def test_refinements_render_with_their_packing_and_form_a_chain() -> None:
     both = copy.deepcopy(data)
     both["reports"][0]["claims"][0]["new_packing"] = {"source": "x"}
     assert "not both" in " ".join(ledger.problems(both))
+
+
+#: The span a frozen start member stores, which `recomputed` gives again.
+SPAN_KEYS = ("model", "low", "high", "open_low", "open_high")
+
+
+def test_a_start_frozen_from_23_october_holds_goebel_s_construction_beyond_324() -> None:
+    """Review A of #754, A2 (think-v022): a start `gather` freezes for a ledger read on or
+    after 23 October 2026 holds Göbel's construction beside the beyond-horizon row or the
+    grid, from 325 to 1073, and refuses beyond 1073 (think-llit). The member recomputes
+    from the retained program, reads as the walk's construction, and a classical ruling
+    does not seed it twice. A start frozen earlier stays the grid alone."""
+    (grid,) = ledger.tree_members([369], read_on="2026-10-22")[369]
+    assert grid["label"] == "the grid"
+    members = ledger.tree_members([369], read_on="2026-10-23")[369]
+    assert [member["label"] for member in members] == ["the grid", ledger.GOEBEL_LABEL]
+    goebel = members[1]
+    assert goebel["kind"] == ledger.CONSTRUCTION
+    assert ledger.recomputed(369, goebel) == [{key: goebel[key] for key in SPAN_KEYS}]
+    assert (
+        ledger.starts_problems(
+            {
+                "format": ledger.STARTS_FORMAT,
+                "read_at_main": "x",
+                "counts": [{"n": 369, "members": members}],
+            },
+            "x",
+        )
+        == []
+    )
+    edited = {**goebel, "high": str(Fraction(goebel["high"]) + 1)}
+    assert (
+        ledger.starts_problems(
+            {
+                "format": ledger.STARTS_FORMAT,
+                "read_at_main": "x",
+                "counts": [{"n": 369, "members": [grid, edited]}],
+            },
+            "x",
+        )
+        != []
+    )
+    side, expected = ledger.side_of(goebel), ledger.construction_side(369)
+    assert expected is not None
+    fields = ("label", "holders", "span", "shown", "value", "kind")
+    assert [getattr(side, key) for key in fields] == [getattr(expected, key) for key in fields]
+    start = [ledger.side_of(member) for member in members]
+    assert [member.label for member in ledger.walk(369, start, [], rulings=RULED).start] == [
+        ledger.GOEBEL_LABEL
+    ]
+    with pytest.raises(ledger.LedgerError, match="gives no side above 1073"):
+        ledger.tree_members([1074], read_on="2026-10-23")
+
+
+def test_older_frozen_starts_recompute_their_grid_members_exactly() -> None:
+    """Review A of #754, A2: every ledger read before 23 October 2026 keeps its frozen
+    starts. Each grid member recomputes to its frozen span exactly, and none holds Göbel's
+    construction; the history walk is the one read here."""
+    directory = ledger.ROOT / "campaign/issue-intake/upper-bounds-couzo-history-20261022"
+    assert str(yaml.safe_load((directory / "sources.yaml").read_text())["read_on"]) < (
+        ledger.GOEBEL_FROM
+    )
+    starts = yaml.safe_load((directory / "starts.yaml").read_text(encoding="utf-8"))
+    members = [
+        (count["n"], member) for count in starts["counts"] for member in count["members"]
+    ]
+    grids = [(n, member) for n, member in members if member["label"] == "the grid"]
+    assert len(grids) > 100
+    for n, member in grids:
+        assert ledger.recomputed(n, member) == [{key: member[key] for key in SPAN_KEYS}]
+    assert not any(member["kind"] == ledger.CONSTRUCTION for _, member in members)
+
+
+#: The owner's two rulings of 23 October 2026 as a ledger lists them (`Ruling`).
+RESTATEMENT_RULING = {"ruling": "restatement", "decided": "2026-10-23", "bead": "think-fwa9"}
+CLASSICAL_RULING = {
+    "ruling": "classical-constructions",
+    "decided": "2026-10-23",
+    "bead": "think-8krd",
+}
+#: What a ledger that applies neither answer says instead (`NotApplied`).
+NOT_APPLIED = [
+    {"ruling": "restatement", "reason": "a test that walks the rule before the answer"},
+    {"ruling": "classical-constructions", "reason": "a test that walks the grid alone"},
+]
+
+
+def _read_from_23_october() -> dict[str, Any]:
+    """`_minimal`, read on the day of the owner's answers, with its claim at 369."""
+    data = _minimal()
+    data["read_on"] = ledger.GOEBEL_FROM
+    data["reports"][0]["claims"] = [{"n": 369, "printed": "19.71", "rounding": "up"}]
+    return data
+
+
+def test_a_ledger_read_from_23_october_applies_both_answers_or_says_why() -> None:
+    """Review B of #754, B1: from `GOEBEL_FROM` a ledger with claims beyond the horizon
+    applies the restatement answer through its ruling, and Göbel's baseline through its
+    ruling or a start member `gather` froze, at every such count. An answer it does not
+    apply there is named under ``rulings_not_applied`` with the reason, or the check fails.
+    A ledger read earlier, or with no claim beyond the horizon, is checked as before."""
+    bare = _read_from_23_october()
+    (restates,) = ledger.problems(bare)
+    assert restates.startswith("read on 2026-10-23: the restatement answer is not applied")
+    assert "at n = 369" in restates
+    both = ledger.answer_problems(bare, [369], set())
+    assert both[0] == restates
+    assert both[1].startswith("read on 2026-10-23: Göbel's baseline is not applied")
+    assert "no frozen start member" in both[1]
+    # A start that holds Göbel's construction applies the baseline without the ruling.
+    assert ledger.answer_problems(bare, [369], {369}) == [restates]
+    ruled = {**bare, "rulings": [RESTATEMENT_RULING, CLASSICAL_RULING]}
+    assert ledger.problems(ruled) == []
+    assert ledger.answer_problems(ruled, [369], set()) == []
+    short = {**bare, "rulings": [{**RESTATEMENT_RULING, "through": 368}, CLASSICAL_RULING]}
+    (stops,) = ledger.answer_problems(short, [369], set())
+    assert "restatement answer is not applied at n = 369" in stops
+    said = {**bare, "rulings_not_applied": NOT_APPLIED}
+    assert ledger.problems(said) == []
+    assert ledger.answer_problems(said, [369], set()) == []
+    malformed = {
+        **bare,
+        "rulings_not_applied": [
+            {"ruling": "other", "reason": "why"},
+            {"ruling": "restatement", "reason": " "},
+            {"ruling": "restatement", "reason": "why"},
+        ],
+    }
+    assert ledger.problems(malformed) == [
+        "rulings_not_applied other: no such ruling",
+        "rulings_not_applied restatement: states no reason",
+        "rulings_not_applied restatement: listed twice",
+    ]
+    earlier = {**bare, "read_on": "2026-10-22"}
+    assert ledger.answer_problems(earlier, [369], set()) == []
+    inside = {**_minimal(), "read_on": ledger.GOEBEL_FROM}
+    assert ledger.answer_problems(inside, [100], set()) == []
+
+
+def test_check_refuses_a_ledger_read_from_23_october_that_applies_neither_answer(
+    tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """Review B of #754, B1, the negative control: a ledger read on 23 October 2026 that
+    lists neither ruling, over a start frozen without Göbel's construction, passed `check`
+    and would have recorded a restatement and a side above Göbel's. It now fails until it
+    applies both answers, its start holds the construction, or it says why not; the reasons
+    then render in its README."""
+    data = _read_from_23_october()
+    grid = ledger.beyond_member(369, {})
+    starts = ledger.starts_document(data["read_at_main"], {369: [grid]})
+
+    def write(ledger_data: dict[str, Any], start: dict[str, Any]) -> None:
+        (tmp_path / ledger.LEDGER).write_text(yaml.safe_dump(ledger_data), encoding="utf-8")
+        (tmp_path / ledger.STARTS).write_text(yaml.safe_dump(start), encoding="utf-8")
+
+    write(data, starts)
+    assert ledger.main(["check", str(tmp_path)]) == 1
+    assert "the restatement answer is not applied" in capsys.readouterr().err
+    data["rulings"] = [RESTATEMENT_RULING]
+    write(data, starts)
+    assert ledger.main(["check", str(tmp_path)]) == 1
+    assert "Göbel's baseline is not applied at n = 369" in capsys.readouterr().err
+    with pytest.raises(ledger.LedgerError, match="Göbel's baseline is not applied"):
+        ledger.rendered(tmp_path)
+    held = ledger.starts_document(
+        data["read_at_main"], {369: [grid, ledger.construction_member(369)]}
+    )
+    write(data, held)
+    assert ledger.main(["check", str(tmp_path)]) == 0
+    data["rulings"] = [RESTATEMENT_RULING, CLASSICAL_RULING]
+    write(data, starts)
+    assert ledger.main(["check", str(tmp_path)]) == 0
+    data.pop("rulings")
+    data["rulings_not_applied"] = NOT_APPLIED
+    write(data, starts)
+    assert ledger.main(["check", str(tmp_path)]) == 0
+    readme = ledger.rendered(tmp_path)[ledger.README]
+    for item in NOT_APPLIED:
+        assert f"- **{item['ruling']}** is not applied here: {item['reason']}." in readme
+
+
+def test_the_issue_732_walk_applies_goebel_s_baseline_through_its_ruling() -> None:
+    """Review B of #754, B1: #732's walk, read on 23 October 2026, froze its starts before
+    the rule, so none holds Göbel's construction. Its ``classical-constructions`` ruling
+    through 1024 applies the baseline at every count it walks; without that ruling the
+    check would fail. Every other walk was read earlier."""
+    directory = ledger.ROOT / "campaign/issue-intake/upper-bounds-issue732-20261023"
+    data, starts = ledger.load_walk(directory)
+    assert str(data["read_on"]) == ledger.GOEBEL_FROM
+    counts = ledger.counts_of(data)
+    held = ledger.construction_counts(starts)
+    assert not held
+    assert ledger.answer_problems(data, counts, held) == []
+    without = {
+        **data,
+        "rulings": [
+            item for item in data.get("rulings", []) if item["ruling"] != ledger.CLASSICAL
+        ],
+    }
+    (found,) = ledger.answer_problems(without, counts, held)
+    assert found.startswith("read on 2026-10-23: Göbel's baseline is not applied")
+    others = [
+        path
+        for path in (ledger.ROOT / "campaign/issue-intake").glob("upper-bounds-*")
+        if path != directory and (path / ledger.LEDGER).is_file()
+    ]
+    assert others
+    for path in others:
+        read_on = str(ledger.load_yaml(path / ledger.LEDGER)["read_on"])
+        assert read_on < ledger.GOEBEL_FROM, path.name
+
+
+def test_tree_drift_reports_goebel_s_member_only_from_23_october(
+    tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """Review B of #754, B2 and B3: `tree_drift` compares a frozen start with the one the
+    tree gives on the ledger's day. At 369, where the tree's start is the grid, a start
+    frozen as the grid has no drift for a ledger read on 22 October, and for one read on
+    23 October the tree adds Göbel's construction. `check --tree` reports drift without
+    failing, but fails where the tree gives no start, as above 1073 from 23 October."""
+    grid = ledger.beyond_member(369, {})
+    starts = ledger.starts_document(FROZEN_AT, {369: [grid]})
+    (tmp_path / ledger.STARTS).write_text(yaml.safe_dump(starts), encoding="utf-8")
+
+    def read_on(day: str) -> None:
+        sources = {"format": ledger.SOURCES_FORMAT, "read_at_main": FROZEN_AT, "read_on": day}
+        (tmp_path / ledger.SOURCES).write_text(yaml.safe_dump(sources), encoding="utf-8")
+
+    read_on("2026-10-22")
+    assert ledger.tree_drift(tmp_path) == []
+    read_on(ledger.GOEBEL_FROM)
+    (drift,) = ledger.tree_drift(tmp_path)
+    assert drift == (
+        "n = 369: frozen the grid 20; on the tree the grid 20; "
+        f"{ledger.GOEBEL_LABEL} 19.707106781187"
+    )
+    data = _read_from_23_october()
+    data["read_at_main"] = FROZEN_AT
+    data["rulings"] = [RESTATEMENT_RULING, CLASSICAL_RULING]
+    (tmp_path / ledger.LEDGER).write_text(yaml.safe_dump(data), encoding="utf-8")
+    assert ledger.main(["check", "--tree", str(tmp_path)]) == 0
+    assert "1 counts where today's records give another start" in capsys.readouterr().out
+    data["reports"][0]["claims"][0]["n"] = 1074
+    (tmp_path / ledger.LEDGER).write_text(yaml.safe_dump(data), encoding="utf-8")
+    beyond = ledger.starts_document(FROZEN_AT, {1074: [ledger.beyond_member(1074, {})]})
+    (tmp_path / ledger.STARTS).write_text(yaml.safe_dump(beyond), encoding="utf-8")
+    assert ledger.main(["check", str(tmp_path)]) == 0
+    assert ledger.main(["check", "--tree", str(tmp_path)]) == 1
+    assert "gives no side above 1073" in capsys.readouterr().err

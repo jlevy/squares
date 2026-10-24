@@ -82,6 +82,18 @@ def case_link(n: int, content: str, *, classes: str = "", label: str = "") -> st
     return f'<a{attributes} href="{case_url(n)}" data-case="{n}">{content}</a>'
 
 
+def case_step(n: int, *, rel: str, arrow: str) -> str:
+    """A record's step to its neighbouring case `n`: the arrow alone beside the record's
+    count, which names the case it loads in its accessible name and its tooltip, so the
+    title line reads as the count between two arrows (the owner, 2026-10-23). `rel` is
+    `prev` or `next`; `case-popover.js` follows it on a press and on the arrow keys."""
+    label = f"{'Previous' if rel == 'prev' else 'Next'} case, n = {n}"
+    return (
+        f'<a href="{case_url(n)}" rel="{rel}" data-case-step="{n}" '
+        f'aria-label="{label}" title="n = {n}">{arrow}</a>'
+    )
+
+
 #: A link to a case's record file, from the site's root, as a page's prose writes one.
 _CASE_LINK = re.compile(r'<a\b[^>]*?\shref="cases/(\d+)\.html(?:#[^"]*)?"[^>]*>')
 
@@ -847,15 +859,19 @@ def _sources(case: dict[str, Any]) -> str:
 
 
 def packing_figure(n: int, *, units: int = 1000, upper: dict[str, Any] | None = None) -> str:
-    """The case's default picture and optional best-known side/source caption.
+    """The case's default picture in its canonical pose and optional best-known
+    side/source caption.
 
     Where the default picture is the case's regularized view (regularization policy,
     section 12), the figure draws the view and its caption carries the regularization's
-    credit line (section 7), and the house drawing follows one click away, in a
-    disclosure named "As published", with its source's credit (`as_published`).
+    credit line (section 7). The figure is drawn in the case's flip regularization
+    (section 13, `render_frontier_page.default_svg`). Wherever it differs from the house
+    drawing as published, because it draws the view or because the pose turns it, the
+    house drawing follows one click away, in a disclosure named "As published", with its
+    source's credit (`as_published`).
     """
     regularized = n in frontier.drawn_regularized()
-    root = frontier.REGULARIZED_RENDERINGS if regularized else frontier.RENDERINGS
+    published = regularized or not frontier.default_pose(n).identity
     caption = []
     if upper is not None:
         caption.append(
@@ -871,16 +887,16 @@ def packing_figure(n: int, *, units: int = 1000, upper: dict[str, Any] | None = 
         )
     figcaption = f"<figcaption>{'. '.join(caption)}</figcaption>" if caption else ""
     return (
-        f'<figure class="site-case-figure">{frontier.packing_svg(n, units=units, root=root)}'
-        f"{figcaption}</figure>{as_published(n, units=units) if regularized else ''}"
+        f'<figure class="site-case-figure">{frontier.default_svg(n, units=units)}'
+        f"{figcaption}</figure>{as_published(n, units=units) if published else ''}"
     )
 
 
 def as_published(n: int, *, units: int = 1000) -> str:
-    """The house drawing of a case drawn by default from its regularized view, as
-    published: a disclosure under the figure, closed until it is pressed, holding the
-    house rendering of the record's witness and its credit. Without scripts it opens as
-    any `details` does.
+    """The house drawing of a case whose figure is its regularized view or is turned by
+    its flip regularization, as published: a disclosure under the figure, closed until
+    it is pressed, holding the house rendering of the record's witness in its source's
+    pose and its credit. Without scripts it opens as any `details` does.
 
     The credit is the finders' and the source whose packing the house drawing pictures
     (`devtools.pictured_source`, the rule the atlas builder reads the witness by), which
@@ -899,7 +915,8 @@ def as_published(n: int, *, units: int = 1000) -> str:
         '<details class="site-case-published"><summary>As published</summary>'
         '<figure class="site-case-figure site-case-published-figure">'
         f"{frontier.packing_svg(n, units=units)}"
-        f"<figcaption>The packing as published{finders}{source}</figcaption></figure>"
+        "<figcaption>The packing as published, in its source\u2019s pose"
+        f"{finders}{source}</figcaption></figure>"
         "</details>"
     )
 
@@ -958,17 +975,10 @@ def record_head(
         reported = f' <span class="site-credit">reported {_esc(case["reported_status"])}</span>'
     count = _math(f"n = {n}")
     correction = corrects_tag(corrects)
-    previous = (
-        f'<a href="{case_url(n - 1)}" rel="prev" data-case-step="{n - 1}">'
-        f"{arrow_icon('left')}{_math(f'n = {n - 1}')}</a>"
-        if n > first
-        else ""
-    )
-    following = (
-        f'<a href="{case_url(n + 1)}" rel="next" data-case-step="{n + 1}">'
-        f"{_math(f'n = {n + 1}')}{arrow_icon('right')}</a>"
-        if n < last
-        else ""
+    steps = "".join(
+        case_step(neighbour, rel=rel, arrow=arrow_icon(direction))
+        for neighbour, rel, direction in ((n - 1, "prev", "left"), (n + 1, "next", "right"))
+        if first <= neighbour <= last
     )
     upper, lower = case["reported_upper_bound"], case["reported_lower_bound"]
     evidence = list(dict.fromkeys(case["evidence"]))
@@ -978,11 +988,10 @@ def record_head(
     )
     return (
         f'<header class="site-case-head" data-kpress-prose-font="sans">'
-        f'<nav class="site-case-steps" aria-label="Cases" {SERIF_MATH}>'
-        f"{previous}{following}</nav>"
         '<span class="site-card-label site-case-eyebrow">Case record</span>'
+        f'<div class="site-case-title-line"><p class="site-case-title" {SERIF_MATH}>{count}</p>'
+        f'<nav class="site-case-steps" aria-label="Cases">{steps}</nav></div>'
         f"{packing_figure(n, upper=upper)}"
-        f'<p class="site-case-title" {SERIF_MATH}>{count}</p>'
         f'<p class="site-case-status">{case_badges(n)}{correction}{reported}{chip}</p>'
         f'<p class="site-case-interval" {SERIF_MATH}>{_math(interval_tex(case))}</p></header>'
         f"{visual_summary(n, drawing=False)}"

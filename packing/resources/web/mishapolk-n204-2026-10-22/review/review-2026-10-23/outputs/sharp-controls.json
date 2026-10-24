@@ -1,0 +1,1203 @@
+{
+ "program": "sharp_controls_t231.py",
+ "program_sha256": "4d00610020f83050ec65f5bb6cd2a1bf49585e060c5267e0fd37807a5faf3093",
+ "checker_sha256": "2c8053b16a28c42b1f6bac5f921aa66a00cd782c99bd8c7ccd383febe9128dd6",
+ "python": "3.14.7 (main, Sep 29 2026, 15:01:40) [Clang 22.1.3 ]",
+ "certificate_sha256": "9c5dabc8f2456b0c90650eac5794918c5e52ff90d9e817bd215c9816a88f3e7d",
+ "epsilon": "1/1000000000000000000000000000000",
+ "all_as_expected": true,
+ "mutants": [
+  {
+   "id": "F0",
+   "what": "the side lowered by the least top-or-right clearance",
+   "expected": true,
+   "sha256": "16aa4b9f7182a66902ae7a0ed5f192f904d70d6738a7891e4c6f3bb8a5e79929",
+   "verdicts": {
+    "Z": true,
+    "C": true,
+    "exact_verify": true,
+    "independent": true
+   },
+   "as_expected": true,
+   "own": {
+    "Z": {
+     "accepted": true,
+     "least_wall": "0",
+     "least_gap": "82541895235790714182044220504141977834799093428446189704607867361866276872708954451/8254189523579081975837371701336187856304747589645757681624187247640050000000000000000000000000000000000",
+     "wall_contacts": {
+      "left": 0,
+      "right": 13,
+      "bottom": 0,
+      "top": 10
+     },
+     "wall_violations": {
+      "left": 0,
+      "right": 0,
+      "bottom": 0,
+      "top": 0
+     },
+     "touching_pairs": [],
+     "overlapping_pairs": []
+    },
+    "C": {
+     "accepted": true,
+     "least_wall": "0",
+     "least_gap": "82541895235790714182044220504141977834799093428446189704607867361866276872708954451/8254189523579081975837371701336187856304747589645757681624187247640050000000000000000000000000000000000",
+     "wall_contacts": {
+      "left": 0,
+      "right": 13,
+      "bottom": 0,
+      "top": 10
+     },
+     "wall_violations": {
+      "left": 0,
+      "right": 0,
+      "bottom": 0,
+      "top": 0
+     },
+     "positive_area_pairs": [],
+     "nonempty_clip_pairs": []
+    }
+   },
+   "maintained": {
+    "exact_verify": {
+     "accepted": true,
+     "least_wall": "0",
+     "least_gap": "82541895235790714182044220504141977834799093428446189704607867361866276872708954451/8254189523579081975837371701336187856304747589645757681624187247640050000000000000000000000000000000000",
+     "failures": []
+    },
+    "independent": {
+     "accepted": true,
+     "least_wall": "0",
+     "least_gap": "82541895235790714182044220504141977834799093428446189704607867361866276872708954451/8254189523579081975837371701336187856304747589645757681624187247640050000000000000000000000000000000000",
+     "failures": []
+    }
+   }
+  },
+  {
+   "id": "F1",
+   "what": "the side lowered by the least top-or-right clearance and 1e-30 more",
+   "expected": false,
+   "sha256": "8f426d277f394ce40ebf01df6e56e6c59327cf1ce8963eceacb75b144564afe7",
+   "verdicts": {
+    "Z": false,
+    "C": false,
+    "exact_verify": false,
+    "independent": false
+   },
+   "as_expected": true,
+   "own": {
+    "Z": {
+     "accepted": false,
+     "least_wall": "-1/1000000000000000000000000000000",
+     "least_gap": "82541895235790714182044220504141977834799093428446189704607867361866276872708954451/8254189523579081975837371701336187856304747589645757681624187247640050000000000000000000000000000000000",
+     "wall_contacts": {
+      "left": 0,
+      "right": 0,
+      "bottom": 0,
+      "top": 0
+     },
+     "wall_violations": {
+      "left": 0,
+      "right": 13,
+      "bottom": 0,
+      "top": 10
+     },
+     "touching_pairs": [],
+     "overlapping_pairs": []
+    },
+    "C": {
+     "accepted": false,
+     "least_wall": "-1/1000000000000000000000000000000",
+     "least_gap": "82541895235790714182044220504141977834799093428446189704607867361866276872708954451/8254189523579081975837371701336187856304747589645757681624187247640050000000000000000000000000000000000",
+     "wall_contacts": {
+      "left": 0,
+      "right": 0,
+      "bottom": 0,
+      "top": 0
+     },
+     "wall_violations": {
+      "left": 0,
+      "right": 13,
+      "bottom": 0,
+      "top": 10
+     },
+     "positive_area_pairs": [],
+     "nonempty_clip_pairs": []
+    }
+   },
+   "maintained": {
+    "exact_verify": {
+     "accepted": false,
+     "least_wall": "-1/1000000000000000000000000000000",
+     "least_gap": "82541895235790714182044220504141977834799093428446189704607867361866276872708954451/8254189523579081975837371701336187856304747589645757681624187247640050000000000000000000000000000000000",
+     "failures": [
+      "('container', 'square 0 violates x<=s')",
+      "('container', 'square 0 violates x<=s')",
+      "('container', 'square 4 violates x<=s')",
+      "('container', 'square 4 violates x<=s')",
+      "('container', 'square 11 violates x<=s')",
+      "('container', 'square 11 violates x<=s')"
+     ]
+    },
+    "independent": {
+     "accepted": false,
+     "least_wall": "-1/1000000000000000000000000000000",
+     "least_gap": "82541895235790714182044220504141977834799093428446189704607867361866276872708954451/8254189523579081975837371701336187856304747589645757681624187247640050000000000000000000000000000000000",
+     "failures": [
+      "container penetration -1/1000000000000000000000000000000"
+     ]
+    }
+   }
+  },
+  {
+   "id": "N0",
+   "what": "every square moved toward the left wall by its least clearance",
+   "expected": true,
+   "sha256": "cd622cb99e37d1a93beb7b642a01e622f25feade6b78bb4decf5a617a8aaea97",
+   "verdicts": {
+    "Z": true,
+    "C": true,
+    "exact_verify": true,
+    "independent": true
+   },
+   "as_expected": true,
+   "own": {
+    "Z": {
+     "accepted": true,
+     "least_wall": "0",
+     "least_gap": "82541895235790714182044220504141977834799093428446189704607867361866276872708954451/8254189523579081975837371701336187856304747589645757681624187247640050000000000000000000000000000000000",
+     "wall_contacts": {
+      "left": 10,
+      "right": 0,
+      "bottom": 0,
+      "top": 0
+     },
+     "wall_violations": {
+      "left": 0,
+      "right": 0,
+      "bottom": 0,
+      "top": 0
+     },
+     "touching_pairs": [],
+     "overlapping_pairs": []
+    },
+    "C": {
+     "accepted": true,
+     "least_wall": "0",
+     "least_gap": "82541895235790714182044220504141977834799093428446189704607867361866276872708954451/8254189523579081975837371701336187856304747589645757681624187247640050000000000000000000000000000000000",
+     "wall_contacts": {
+      "left": 10,
+      "right": 0,
+      "bottom": 0,
+      "top": 0
+     },
+     "wall_violations": {
+      "left": 0,
+      "right": 0,
+      "bottom": 0,
+      "top": 0
+     },
+     "positive_area_pairs": [],
+     "nonempty_clip_pairs": []
+    }
+   },
+   "maintained": {
+    "exact_verify": {
+     "accepted": true,
+     "least_wall": "0",
+     "least_gap": "82541895235790714182044220504141977834799093428446189704607867361866276872708954451/8254189523579081975837371701336187856304747589645757681624187247640050000000000000000000000000000000000",
+     "failures": []
+    },
+    "independent": {
+     "accepted": true,
+     "least_wall": "0",
+     "least_gap": "82541895235790714182044220504141977834799093428446189704607867361866276872708954451/8254189523579081975837371701336187856304747589645757681624187247640050000000000000000000000000000000000",
+     "failures": []
+    }
+   }
+  },
+  {
+   "id": "N1",
+   "what": "every square moved toward the left wall by its least clearance + 1e-30",
+   "expected": false,
+   "sha256": "293161debf70552cf5e1dea4c849e603b7c168910e04d3b536b9e05e873f4cc5",
+   "verdicts": {
+    "Z": false,
+    "C": false,
+    "exact_verify": false,
+    "independent": false
+   },
+   "as_expected": true,
+   "own": {
+    "Z": {
+     "accepted": false,
+     "least_wall": "-1/1000000000000000000000000000000",
+     "least_gap": "82541895235790714182044220504141977834799093428446189704607867361866276872708954451/8254189523579081975837371701336187856304747589645757681624187247640050000000000000000000000000000000000",
+     "wall_contacts": {
+      "left": 0,
+      "right": 0,
+      "bottom": 0,
+      "top": 0
+     },
+     "wall_violations": {
+      "left": 10,
+      "right": 0,
+      "bottom": 0,
+      "top": 0
+     },
+     "touching_pairs": [],
+     "overlapping_pairs": []
+    },
+    "C": {
+     "accepted": false,
+     "least_wall": "-1/1000000000000000000000000000000",
+     "least_gap": "82541895235790714182044220504141977834799093428446189704607867361866276872708954451/8254189523579081975837371701336187856304747589645757681624187247640050000000000000000000000000000000000",
+     "wall_contacts": {
+      "left": 0,
+      "right": 0,
+      "bottom": 0,
+      "top": 0
+     },
+     "wall_violations": {
+      "left": 10,
+      "right": 0,
+      "bottom": 0,
+      "top": 0
+     },
+     "positive_area_pairs": [],
+     "nonempty_clip_pairs": []
+    }
+   },
+   "maintained": {
+    "exact_verify": {
+     "accepted": false,
+     "least_wall": "-1/1000000000000000000000000000000",
+     "least_gap": "82541895235790714182044220504141977834799093428446189704607867361866276872708954451/8254189523579081975837371701336187856304747589645757681624187247640050000000000000000000000000000000000",
+     "failures": [
+      "('container', 'square 48 violates x>=0')",
+      "('container', 'square 48 violates x>=0')",
+      "('container', 'square 49 violates x>=0')",
+      "('container', 'square 49 violates x>=0')",
+      "('container', 'square 50 violates x>=0')",
+      "('container', 'square 50 violates x>=0')"
+     ]
+    },
+    "independent": {
+     "accepted": false,
+     "least_wall": "-1/1000000000000000000000000000000",
+     "least_gap": "82541895235790714182044220504141977834799093428446189704607867361866276872708954451/8254189523579081975837371701336187856304747589645757681624187247640050000000000000000000000000000000000",
+     "failures": [
+      "container penetration -1/1000000000000000000000000000000"
+     ]
+    }
+   }
+  },
+  {
+   "id": "B0",
+   "what": "every square moved toward the bottom wall by its least clearance",
+   "expected": true,
+   "sha256": "2488905cafbe4540cde986785113583dbab658522f82910760fb8476500d035a",
+   "verdicts": {
+    "Z": true,
+    "C": true,
+    "exact_verify": true,
+    "independent": true
+   },
+   "as_expected": true,
+   "own": {
+    "Z": {
+     "accepted": true,
+     "least_wall": "0",
+     "least_gap": "82541895235790714182044220504141977834799093428446189704607867361866276872708954451/8254189523579081975837371701336187856304747589645757681624187247640050000000000000000000000000000000000",
+     "wall_contacts": {
+      "left": 0,
+      "right": 0,
+      "bottom": 9,
+      "top": 0
+     },
+     "wall_violations": {
+      "left": 0,
+      "right": 0,
+      "bottom": 0,
+      "top": 0
+     },
+     "touching_pairs": [],
+     "overlapping_pairs": []
+    },
+    "C": {
+     "accepted": true,
+     "least_wall": "0",
+     "least_gap": "82541895235790714182044220504141977834799093428446189704607867361866276872708954451/8254189523579081975837371701336187856304747589645757681624187247640050000000000000000000000000000000000",
+     "wall_contacts": {
+      "left": 0,
+      "right": 0,
+      "bottom": 9,
+      "top": 0
+     },
+     "wall_violations": {
+      "left": 0,
+      "right": 0,
+      "bottom": 0,
+      "top": 0
+     },
+     "positive_area_pairs": [],
+     "nonempty_clip_pairs": []
+    }
+   },
+   "maintained": {
+    "exact_verify": {
+     "accepted": true,
+     "least_wall": "0",
+     "least_gap": "82541895235790714182044220504141977834799093428446189704607867361866276872708954451/8254189523579081975837371701336187856304747589645757681624187247640050000000000000000000000000000000000",
+     "failures": []
+    },
+    "independent": {
+     "accepted": true,
+     "least_wall": "0",
+     "least_gap": "82541895235790714182044220504141977834799093428446189704607867361866276872708954451/8254189523579081975837371701336187856304747589645757681624187247640050000000000000000000000000000000000",
+     "failures": []
+    }
+   }
+  },
+  {
+   "id": "B1",
+   "what": "every square moved toward the bottom wall by its least clearance + 1e-30",
+   "expected": false,
+   "sha256": "a6306d50c2d169b59e7649cfca5b4de597ec9cf3987071b2d154c57fee3d3c78",
+   "verdicts": {
+    "Z": false,
+    "C": false,
+    "exact_verify": false,
+    "independent": false
+   },
+   "as_expected": true,
+   "own": {
+    "Z": {
+     "accepted": false,
+     "least_wall": "-1/1000000000000000000000000000000",
+     "least_gap": "82541895235790714182044220504141977834799093428446189704607867361866276872708954451/8254189523579081975837371701336187856304747589645757681624187247640050000000000000000000000000000000000",
+     "wall_contacts": {
+      "left": 0,
+      "right": 0,
+      "bottom": 0,
+      "top": 0
+     },
+     "wall_violations": {
+      "left": 0,
+      "right": 0,
+      "bottom": 9,
+      "top": 0
+     },
+     "touching_pairs": [],
+     "overlapping_pairs": []
+    },
+    "C": {
+     "accepted": false,
+     "least_wall": "-1/1000000000000000000000000000000",
+     "least_gap": "82541895235790714182044220504141977834799093428446189704607867361866276872708954451/8254189523579081975837371701336187856304747589645757681624187247640050000000000000000000000000000000000",
+     "wall_contacts": {
+      "left": 0,
+      "right": 0,
+      "bottom": 0,
+      "top": 0
+     },
+     "wall_violations": {
+      "left": 0,
+      "right": 0,
+      "bottom": 9,
+      "top": 0
+     },
+     "positive_area_pairs": [],
+     "nonempty_clip_pairs": []
+    }
+   },
+   "maintained": {
+    "exact_verify": {
+     "accepted": false,
+     "least_wall": "-1/1000000000000000000000000000000",
+     "least_gap": "82541895235790714182044220504141977834799093428446189704607867361866276872708954451/8254189523579081975837371701336187856304747589645757681624187247640050000000000000000000000000000000000",
+     "failures": [
+      "('container', 'square 4 violates y>=0')",
+      "('container', 'square 4 violates y>=0')",
+      "('container', 'square 5 violates y>=0')",
+      "('container', 'square 5 violates y>=0')",
+      "('container', 'square 6 violates y>=0')",
+      "('container', 'square 6 violates y>=0')"
+     ]
+    },
+    "independent": {
+     "accepted": false,
+     "least_wall": "-1/1000000000000000000000000000000",
+     "least_gap": "82541895235790714182044220504141977834799093428446189704607867361866276872708954451/8254189523579081975837371701336187856304747589645757681624187247640050000000000000000000000000000000000",
+     "failures": [
+      "container penetration -1/1000000000000000000000000000000"
+     ]
+    }
+   }
+  },
+  {
+   "id": "P0",
+   "what": "square 84 moved toward square 63 along edge normal 1 by the least gap (two squares tilted alike)",
+   "pair": [
+    63,
+    84
+   ],
+   "normal": 1,
+   "gap": "82541895235790714182044220504141977834799093428446189704607867361866276872708954451/8254189523579081975837371701336187856304747589645757681624187247640050000000000000000000000000000000000",
+   "expected": true,
+   "sha256": "aa1e11e6626e1f354bac8f3ce4edd55c4eba88fa527b85e6ed8a89093e420825",
+   "verdicts": {
+    "Z": true,
+    "C": true,
+    "exact_verify": true,
+    "independent": true
+   },
+   "as_expected": true,
+   "own": {
+    "Z": {
+     "accepted": true,
+     "least_wall": "1/200000000000000000000",
+     "least_gap": "0",
+     "wall_contacts": {
+      "left": 0,
+      "right": 0,
+      "bottom": 0,
+      "top": 0
+     },
+     "wall_violations": {
+      "left": 0,
+      "right": 0,
+      "bottom": 0,
+      "top": 0
+     },
+     "touching_pairs": [
+      [
+       63,
+       84
+      ]
+     ],
+     "overlapping_pairs": []
+    },
+    "C": {
+     "accepted": true,
+     "least_wall": "1/200000000000000000000",
+     "least_gap": "0",
+     "wall_contacts": {
+      "left": 0,
+      "right": 0,
+      "bottom": 0,
+      "top": 0
+     },
+     "wall_violations": {
+      "left": 0,
+      "right": 0,
+      "bottom": 0,
+      "top": 0
+     },
+     "positive_area_pairs": [],
+     "nonempty_clip_pairs": [
+      [
+       63,
+       84
+      ]
+     ]
+    }
+   },
+   "maintained": {
+    "exact_verify": {
+     "accepted": true,
+     "least_wall": "1/200000000000000000000",
+     "least_gap": "0",
+     "failures": []
+    },
+    "independent": {
+     "accepted": true,
+     "least_wall": "1/200000000000000000000",
+     "least_gap": "0",
+     "failures": []
+    }
+   }
+  },
+  {
+   "id": "P1",
+   "what": "square 84 moved toward square 63 along edge normal 1 by the least gap (two squares tilted alike) + 1e-30",
+   "pair": [
+    63,
+    84
+   ],
+   "normal": 1,
+   "gap": "82541895235790714182044220504141977834799093428446189704607867361866276872708954451/8254189523579081975837371701336187856304747589645757681624187247640050000000000000000000000000000000000",
+   "expected": false,
+   "sha256": "e70e78c37e31d0c5900b5ec36c4676bbfef4a3aae337c52c60ce90b94831268e",
+   "verdicts": {
+    "Z": false,
+    "C": false,
+    "exact_verify": false,
+    "independent": false
+   },
+   "as_expected": true,
+   "own": {
+    "Z": {
+     "accepted": false,
+     "least_wall": "1/200000000000000000000",
+     "least_gap": "-1/1000000000000000000000000000000",
+     "wall_contacts": {
+      "left": 0,
+      "right": 0,
+      "bottom": 0,
+      "top": 0
+     },
+     "wall_violations": {
+      "left": 0,
+      "right": 0,
+      "bottom": 0,
+      "top": 0
+     },
+     "touching_pairs": [],
+     "overlapping_pairs": [
+      [
+       63,
+       84
+      ],
+      [
+       80,
+       84
+      ]
+     ]
+    },
+    "C": {
+     "accepted": false,
+     "least_wall": "1/200000000000000000000",
+     "least_gap": "-1/1000000000000000000000000000000",
+     "wall_contacts": {
+      "left": 0,
+      "right": 0,
+      "bottom": 0,
+      "top": 0
+     },
+     "wall_violations": {
+      "left": 0,
+      "right": 0,
+      "bottom": 0,
+      "top": 0
+     },
+     "positive_area_pairs": [
+      [
+       63,
+       84
+      ],
+      [
+       80,
+       84
+      ]
+     ],
+     "nonempty_clip_pairs": [
+      [
+       63,
+       84
+      ],
+      [
+       80,
+       84
+      ]
+     ]
+    }
+   },
+   "maintained": {
+    "exact_verify": {
+     "accepted": false,
+     "least_wall": "1/200000000000000000000",
+     "least_gap": "-1/1000000000000000000000000000000",
+     "failures": [
+      "('overlap', 'squares 63 and 84 overlap')",
+      "('overlap', 'squares 80 and 84 overlap')"
+     ]
+    },
+    "independent": {
+     "accepted": false,
+     "least_wall": "1/200000000000000000000",
+     "least_gap": "-1/1000000000000000000000000000000",
+     "failures": [
+      "2 overlapping pairs; worst exact gap -1/1000000000000000000000000000000"
+     ]
+    }
+   }
+  },
+  {
+   "id": "Q0",
+   "what": "square 130 moved toward square 121 along edge normal 0 by the least gap between a tilted and an axis-aligned square",
+   "pair": [
+    121,
+    130
+   ],
+   "normal": 0,
+   "gap": "25051718532696833973438152594510529518622669708675510922524181295071109139955279387/2500010699226497251852373610496433828724896051447381466460592823844769000000000000000000000000000000000",
+   "expected": true,
+   "sha256": "9abdef359179ac0994d62454d7c29001f7d8332500f6f2191a17111bf04a3016",
+   "verdicts": {
+    "Z": true,
+    "C": true,
+    "exact_verify": true,
+    "independent": true
+   },
+   "as_expected": true,
+   "own": {
+    "Z": {
+     "accepted": true,
+     "least_wall": "1/200000000000000000000",
+     "least_gap": "0",
+     "wall_contacts": {
+      "left": 0,
+      "right": 0,
+      "bottom": 0,
+      "top": 0
+     },
+     "wall_violations": {
+      "left": 0,
+      "right": 0,
+      "bottom": 0,
+      "top": 0
+     },
+     "touching_pairs": [
+      [
+       121,
+       130
+      ]
+     ],
+     "overlapping_pairs": []
+    },
+    "C": {
+     "accepted": true,
+     "least_wall": "1/200000000000000000000",
+     "least_gap": "0",
+     "wall_contacts": {
+      "left": 0,
+      "right": 0,
+      "bottom": 0,
+      "top": 0
+     },
+     "wall_violations": {
+      "left": 0,
+      "right": 0,
+      "bottom": 0,
+      "top": 0
+     },
+     "positive_area_pairs": [],
+     "nonempty_clip_pairs": [
+      [
+       121,
+       130
+      ]
+     ]
+    }
+   },
+   "maintained": {
+    "exact_verify": {
+     "accepted": true,
+     "least_wall": "1/200000000000000000000",
+     "least_gap": "0",
+     "failures": []
+    },
+    "independent": {
+     "accepted": true,
+     "least_wall": "1/200000000000000000000",
+     "least_gap": "0",
+     "failures": []
+    }
+   }
+  },
+  {
+   "id": "Q1",
+   "what": "square 130 moved toward square 121 along edge normal 0 by the least gap between a tilted and an axis-aligned square + 1e-30",
+   "pair": [
+    121,
+    130
+   ],
+   "normal": 0,
+   "gap": "25051718532696833973438152594510529518622669708675510922524181295071109139955279387/2500010699226497251852373610496433828724896051447381466460592823844769000000000000000000000000000000000",
+   "expected": false,
+   "sha256": "8bf56999b3e01da2896b6ee91d4718eed17d9329e164294f6b078f3210e26dc2",
+   "verdicts": {
+    "Z": false,
+    "C": false,
+    "exact_verify": false,
+    "independent": false
+   },
+   "as_expected": true,
+   "own": {
+    "Z": {
+     "accepted": false,
+     "least_wall": "1/200000000000000000000",
+     "least_gap": "-1/1000000000000000000000000000000",
+     "wall_contacts": {
+      "left": 0,
+      "right": 0,
+      "bottom": 0,
+      "top": 0
+     },
+     "wall_violations": {
+      "left": 0,
+      "right": 0,
+      "bottom": 0,
+      "top": 0
+     },
+     "touching_pairs": [],
+     "overlapping_pairs": [
+      [
+       121,
+       130
+      ]
+     ]
+    },
+    "C": {
+     "accepted": false,
+     "least_wall": "1/200000000000000000000",
+     "least_gap": "-1/1000000000000000000000000000000",
+     "wall_contacts": {
+      "left": 0,
+      "right": 0,
+      "bottom": 0,
+      "top": 0
+     },
+     "wall_violations": {
+      "left": 0,
+      "right": 0,
+      "bottom": 0,
+      "top": 0
+     },
+     "positive_area_pairs": [
+      [
+       121,
+       130
+      ]
+     ],
+     "nonempty_clip_pairs": [
+      [
+       121,
+       130
+      ]
+     ]
+    }
+   },
+   "maintained": {
+    "exact_verify": {
+     "accepted": false,
+     "least_wall": "1/200000000000000000000",
+     "least_gap": "-1/1000000000000000000000000000000",
+     "failures": [
+      "('overlap', 'squares 121 and 130 overlap')"
+     ]
+    },
+    "independent": {
+     "accepted": false,
+     "least_wall": "1/200000000000000000000",
+     "least_gap": "-1/1000000000000000000000000000000",
+     "failures": [
+      "1 overlapping pairs; worst exact gap -1/1000000000000000000000000000000"
+     ]
+    }
+   }
+  },
+  {
+   "id": "A0",
+   "what": "square 41 moved toward square 0 along edge normal 1 by the least gap between two axis-aligned squares",
+   "pair": [
+    0,
+    41
+   ],
+   "normal": 1,
+   "gap": "1/100000000000000000000",
+   "expected": true,
+   "sha256": "46ae369deb3f513082e857ac868653b3521c390c1c0bad3d9aed0eb7ca118925",
+   "verdicts": {
+    "Z": true,
+    "C": true,
+    "exact_verify": true,
+    "independent": true
+   },
+   "as_expected": true,
+   "own": {
+    "Z": {
+     "accepted": true,
+     "least_wall": "1/200000000000000000000",
+     "least_gap": "0",
+     "wall_contacts": {
+      "left": 0,
+      "right": 0,
+      "bottom": 0,
+      "top": 0
+     },
+     "wall_violations": {
+      "left": 0,
+      "right": 0,
+      "bottom": 0,
+      "top": 0
+     },
+     "touching_pairs": [
+      [
+       0,
+       41
+      ]
+     ],
+     "overlapping_pairs": []
+    },
+    "C": {
+     "accepted": true,
+     "least_wall": "1/200000000000000000000",
+     "least_gap": "0",
+     "wall_contacts": {
+      "left": 0,
+      "right": 0,
+      "bottom": 0,
+      "top": 0
+     },
+     "wall_violations": {
+      "left": 0,
+      "right": 0,
+      "bottom": 0,
+      "top": 0
+     },
+     "positive_area_pairs": [],
+     "nonempty_clip_pairs": [
+      [
+       0,
+       41
+      ]
+     ]
+    }
+   },
+   "maintained": {
+    "exact_verify": {
+     "accepted": true,
+     "least_wall": "1/200000000000000000000",
+     "least_gap": "0",
+     "failures": []
+    },
+    "independent": {
+     "accepted": true,
+     "least_wall": "1/200000000000000000000",
+     "least_gap": "0",
+     "failures": []
+    }
+   }
+  },
+  {
+   "id": "A1",
+   "what": "square 41 moved toward square 0 along edge normal 1 by the least gap between two axis-aligned squares + 1e-30",
+   "pair": [
+    0,
+    41
+   ],
+   "normal": 1,
+   "gap": "1/100000000000000000000",
+   "expected": false,
+   "sha256": "da75717737052b4a8da3514f05f42fe56a6bac6c02be93bfc8619406dc845b70",
+   "verdicts": {
+    "Z": false,
+    "C": false,
+    "exact_verify": false,
+    "independent": false
+   },
+   "as_expected": true,
+   "own": {
+    "Z": {
+     "accepted": false,
+     "least_wall": "1/200000000000000000000",
+     "least_gap": "-1/1000000000000000000000000000000",
+     "wall_contacts": {
+      "left": 0,
+      "right": 0,
+      "bottom": 0,
+      "top": 0
+     },
+     "wall_violations": {
+      "left": 0,
+      "right": 0,
+      "bottom": 0,
+      "top": 0
+     },
+     "touching_pairs": [],
+     "overlapping_pairs": [
+      [
+       0,
+       41
+      ]
+     ]
+    },
+    "C": {
+     "accepted": false,
+     "least_wall": "1/200000000000000000000",
+     "least_gap": "-1/1000000000000000000000000000000",
+     "wall_contacts": {
+      "left": 0,
+      "right": 0,
+      "bottom": 0,
+      "top": 0
+     },
+     "wall_violations": {
+      "left": 0,
+      "right": 0,
+      "bottom": 0,
+      "top": 0
+     },
+     "positive_area_pairs": [
+      [
+       0,
+       41
+      ]
+     ],
+     "nonempty_clip_pairs": [
+      [
+       0,
+       41
+      ]
+     ]
+    }
+   },
+   "maintained": {
+    "exact_verify": {
+     "accepted": false,
+     "least_wall": "1/200000000000000000000",
+     "least_gap": "-1/1000000000000000000000000000000",
+     "failures": [
+      "('overlap', 'squares 0 and 41 overlap')"
+     ]
+    },
+    "independent": {
+     "accepted": false,
+     "least_wall": "1/200000000000000000000",
+     "least_gap": "-1/1000000000000000000000000000000",
+     "failures": [
+      "1 overlapping pairs; worst exact gap -1/1000000000000000000000000000000"
+     ]
+    }
+   }
+  },
+  {
+   "id": "G1",
+   "what": "square 1 replaced by a copy of square 0",
+   "expected": false,
+   "sha256": "86d5517beebe938eee790bba4a9b889edfc47a6530bc8dd9691b708772fd450f",
+   "verdicts": {
+    "Z": false,
+    "C": false,
+    "exact_verify": false,
+    "independent": false
+   },
+   "as_expected": true,
+   "own": {
+    "Z": {
+     "accepted": false,
+     "least_wall": "1/200000000000000000000",
+     "least_gap": "-1",
+     "wall_contacts": {
+      "left": 0,
+      "right": 0,
+      "bottom": 0,
+      "top": 0
+     },
+     "wall_violations": {
+      "left": 0,
+      "right": 0,
+      "bottom": 0,
+      "top": 0
+     },
+     "touching_pairs": [],
+     "overlapping_pairs": [
+      [
+       0,
+       1
+      ]
+     ]
+    },
+    "C": {
+     "accepted": false,
+     "least_wall": "1/200000000000000000000",
+     "least_gap": "-1",
+     "wall_contacts": {
+      "left": 0,
+      "right": 0,
+      "bottom": 0,
+      "top": 0
+     },
+     "wall_violations": {
+      "left": 0,
+      "right": 0,
+      "bottom": 0,
+      "top": 0
+     },
+     "positive_area_pairs": [
+      [
+       0,
+       1
+      ]
+     ],
+     "nonempty_clip_pairs": [
+      [
+       0,
+       1
+      ]
+     ]
+    }
+   },
+   "maintained": {
+    "exact_verify": {
+     "accepted": false,
+     "least_wall": "1/200000000000000000000",
+     "least_gap": "-1",
+     "failures": [
+      "('overlap', 'squares 0 and 1 overlap')"
+     ]
+    },
+    "independent": {
+     "accepted": false,
+     "least_wall": "1/200000000000000000000",
+     "least_gap": "-1",
+     "failures": [
+      "1 overlapping pairs; worst exact gap -1"
+     ]
+    }
+   }
+  },
+  {
+   "id": "G2",
+   "what": "square 0 moved right by the side and 2",
+   "expected": false,
+   "sha256": "d551cccc54426285524df5742a0ab34557d29ff2df677b2f2601a02c524a7dee",
+   "verdicts": {
+    "Z": false,
+    "C": false,
+    "exact_verify": false,
+    "independent": false
+   },
+   "as_expected": true,
+   "own": {
+    "Z": {
+     "accepted": false,
+     "least_wall": "-1680864283051308719779741570870231173/100000000000000000000000000000000000",
+     "least_gap": "82541895235790714182044220504141977834799093428446189704607867361866276872708954451/8254189523579081975837371701336187856304747589645757681624187247640050000000000000000000000000000000000",
+     "wall_contacts": {
+      "left": 0,
+      "right": 0,
+      "bottom": 0,
+      "top": 0
+     },
+     "wall_violations": {
+      "left": 0,
+      "right": 1,
+      "bottom": 0,
+      "top": 0
+     },
+     "touching_pairs": [],
+     "overlapping_pairs": []
+    },
+    "C": {
+     "accepted": false,
+     "least_wall": "-1680864283051308719779741570870231173/100000000000000000000000000000000000",
+     "least_gap": "82541895235790714182044220504141977834799093428446189704607867361866276872708954451/8254189523579081975837371701336187856304747589645757681624187247640050000000000000000000000000000000000",
+     "wall_contacts": {
+      "left": 0,
+      "right": 0,
+      "bottom": 0,
+      "top": 0
+     },
+     "wall_violations": {
+      "left": 0,
+      "right": 1,
+      "bottom": 0,
+      "top": 0
+     },
+     "positive_area_pairs": [],
+     "nonempty_clip_pairs": []
+    }
+   },
+   "maintained": {
+    "exact_verify": {
+     "accepted": false,
+     "least_wall": "-1680864283051308719779741570870231173/100000000000000000000000000000000000",
+     "least_gap": "82541895235790714182044220504141977834799093428446189704607867361866276872708954451/8254189523579081975837371701336187856304747589645757681624187247640050000000000000000000000000000000000",
+     "failures": [
+      "('container', 'square 0 violates x<=s')",
+      "('container', 'square 0 violates x<=s')",
+      "('container', 'square 0 violates x<=s')",
+      "('container', 'square 0 violates x<=s')"
+     ]
+    },
+    "independent": {
+     "accepted": false,
+     "least_wall": "-1680864283051308719779741570870231173/100000000000000000000000000000000000",
+     "least_gap": "82541895235790714182044220504141977834799093428446189704607867361866276872708954451/8254189523579081975837371701336187856304747589645757681624187247640050000000000000000000000000000000000",
+     "failures": [
+      "container penetration -1680864283051308719779741570870231173/100000000000000000000000000000000000"
+     ]
+    }
+   }
+  },
+  {
+   "id": "R1",
+   "what": "the last row dropped, the header unchanged",
+   "expected": false,
+   "sha256": "4d8b4833b0c1f6286a8437b0b03dc6840ab7f90ff43c665856430d4264364626",
+   "verdicts": {
+    "Z": false,
+    "C": false,
+    "exact_verify": false,
+    "independent": false
+   },
+   "as_expected": true,
+   "own": {
+    "Z": {
+     "refused_by_reader": "203 square rows for n = 204"
+    },
+    "C": {
+     "refused_by_reader": "203 square rows for n = 204"
+    }
+   },
+   "maintained": {
+    "exact_verify": {
+     "refused_by_reader": "n=204: 203 square rows for n = 204"
+    },
+    "independent": {
+     "refused_by_reader": "n=204: 203 square rows for n = 204"
+    }
+   }
+  },
+  {
+   "id": "R2",
+   "what": "square 0's x written as its exact decimal (a reader difference)",
+   "expected": null,
+   "sha256": "8a019202edbd4deb937731aca721370414a26a3dc04ea96966156bb70bb2d555",
+   "verdicts": {
+    "Z": false,
+    "C": false,
+    "exact_verify": true,
+    "independent": true
+   },
+   "as_expected": true,
+   "own": {
+    "Z": {
+     "refused_by_reader": "not an integer or p/q literal: '14.30864283051308719779741570870231173'"
+    },
+    "C": {
+     "refused_by_reader": "not an integer or p/q literal: '14.30864283051308719779741570870231173'"
+    }
+   },
+   "maintained": {
+    "exact_verify": {
+     "accepted": true,
+     "least_wall": "1/200000000000000000000",
+     "least_gap": "82541895235790714182044220504141977834799093428446189704607867361866276872708954451/8254189523579081975837371701336187856304747589645757681624187247640050000000000000000000000000000000000",
+     "failures": []
+    },
+    "independent": {
+     "accepted": true,
+     "least_wall": "1/200000000000000000000",
+     "least_gap": "82541895235790714182044220504141977834799093428446189704607867361866276872708954451/8254189523579081975837371701336187856304747589645757681624187247640050000000000000000000000000000000000",
+     "failures": []
+    }
+   }
+  }
+ ],
+ "cpu_seconds": 180.996
+}

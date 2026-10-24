@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:FrontierEvidenceSet/v1
   schema: frontier-evidence.schema.yaml
   status: enforced
-last_reviewed: '2026-10-22'
+last_reviewed: '2026-10-23'
 evidence:
   - id: E-n017-kleddamag-rational-upper
     claim: upper-bound
@@ -30883,6 +30883,63 @@ evidence:
       continuous cover between net directions is the kernel's (GC-4).
     source_reviewed: '2026-10-10'
 
+  - id: E-n040-wand125-sqverify-continuous-6715-report
+    claim: lower-bound
+    scope: {n_values: [40]}
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: independent-external
+    relationship_to_generator: independent-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[wand125 sqverify continuous 2026-10-12]'
+    certificate: packing/resources/web/wand125-rectangle-certificates-2026-10-01/wand125-rectangles/certificates/rect_n40_L67/certified_candidate.json.gz
+    replay_status: not-attempted
+    verifiers: [V-wand125-sqverify-continuous]
+    independence:
+      coverage: {extent: full, unit: root ranges of t and the near-axis patch}
+    limitations: >-
+      wand125/square-packing at f30cc2cf345a3a3f6af778925f354d9ec979868b (committed
+      2026-10-12T01:00:19Z), tools/sqverify_continuous/README.md, reports Hiroaki Hosono's
+      continuous-angle mode of this repository's sqverify_fast, v3 (source 1266a8b9...), run on
+      Ubuntu 24.04 at six threads, on T-145's certificate, Hosono's rect_n40_L67 density (480
+      positive orbits, mass 3999/100; examples/n40/prepare.py fetches it from
+      Guzhou0806/n40-square-packing at 71c97d0 with SHA-256 71011d03..., byte for byte this
+      record's copy), at core 199529/200000 and tau 4999/5000: VERIFIED at all 86 root ranges of
+      t in [10^-7, 83/200] and the near-axis patch at side 77941/78125 (least 0.99988),
+      110,877,174 nodes, least certified bound 0.9998000000016, 1,167 s; and its control, every
+      weight times 985/1000, REFUSED at every root and at the patch. No run output, receipt or
+      binary digest is published, so this is a third party's report. The mode shares no code
+      with the producer's kernel and has the same method, its author having read that kernel; it
+      shares this repository's interval, exact, axis and oracle modules, and its near-axis
+      decision is the axis sweep that E-n040-guzhou-continuous-pose-crate-axis also runs. Not a
+      second method and no rung rests on it; a complete replay here is think-flxm.
+    external_review:
+      state: informally-verified
+      date: '2026-10-23'
+      reviewed_by: >-
+        AI agent (Claude, Anthropic; tier tbd-strong-max, maximum reasoning), the stage 4
+        validation lane c-review-sqvc-1023 of the 23 October 2026 intake pass (think-xzob),
+        prompted separately from the imports of T-145, T-157 and T-192 and from every review of
+        them (docs/project/reviews/review-2026-10-23-wand125-sqverify-continuous-soundness.md)
+      note: >-
+        No blocking or major defect in the reported program, sqverify_continuous v3, whose
+        search is v4's text. Re-derived: the counting and the strict endpoint; the D4 reduction
+        to the north-east quadrant and t in [0, tan(pi/8)]; the angle enclosures, W unimodal at
+        sqrt 2 - 1; interval-only inside and outside classification; the concave-section
+        trapezoid bound at the path centre for every angle of a box; the translation-derivative
+        extension along an L-shaped path, both gradient components; the closed cover of the 86
+        root ranges by outward ends and midpoint splits, with acceptance against the upward
+        enclosure of tau; and the near-axis patch, the side-A axis square inside every side-B
+        square at t <= 10^-7. At this claim's parameters: X = 1340000/199529, 40 tau - M =
+        1/500, A = 77941/78125 with margin 235529976449/500000000000005000000; the density's
+        facts decided again (480 positive orbits, mass 3999/100, 3,792 distinct images). Run
+        here on candidates this repository builds from its copy in the source's row order, v4
+        reproduced the source's control row (7,714 nodes, patch minimum 0.98488, least refuting
+        capture 0.98711), every witness a legal pose computed exactly here. Unchecked: the
+        claim's own run, which no receipt shows and a replay here would decide (think-flxm).
+    source_reviewed: '2026-10-23'
+
   - id: E-evand-regularized-certificate-report
     claim: upper-bound
     scope:
@@ -33179,6 +33236,64 @@ evidence:
       check-replay, a necessary condition of the claim and not the
       claim. This decides the near-axis lemma a second way; nothing it decides covers the slabs.
     source_reviewed: '2026-10-12'
+
+  - id: E-n040-wand125-sqverify-continuous-6718-report
+    claim: lower-bound
+    scope: {n_values: [40]}
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: independent-external
+    relationship_to_generator: independent-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[wand125 sqverify continuous 2026-10-12]'
+    certificate: packing/resources/web/guzhou-n40-new-supports-2026-10-11/source/certificate/certified_candidate.json.gz
+    replay_status: not-attempted
+    verifiers: [V-wand125-sqverify-continuous]
+    independence:
+      coverage: {extent: full, unit: root ranges of t and the near-axis patch}
+    limitations: >-
+      wand125/square-packing at f30cc2cf345a3a3f6af778925f354d9ec979868b (committed
+      2026-10-12T01:00:19Z), tools/sqverify_continuous/README.md, reports Hiroaki Hosono's
+      continuous-angle mode of this repository's sqverify_fast, v3 (source 1266a8b9...), run on
+      Ubuntu 24.04 at six threads, on T-157's certificate, Guzhou0806's density at 6a65957e (685
+      positive orbits, mass 3999/100, SHA-256 984fcd3a..., which prepare.py fetches and this
+      record retains), at core 3350/3359 and tau 4999/5000: VERIFIED at all 86 root ranges and
+      the near-axis patch at side 997320431/10^9 (least 1.00150), 118,717,888 nodes, least
+      certified bound 0.9998000000076, 1,355 s; its control, every weight times 985/1000, and
+      the same density at core 3348/3359, both REFUSED. No run output, receipt or binary digest
+      is published, so this is a third party's report. The mode shares no code with the
+      producer's kernel and has the same method, its author having read that kernel; it shares
+      this repository's interval, exact, axis and oracle modules, and its near-axis decision is
+      the axis sweep that E-n040-guzhou-continuous-pose-crate-axis also runs. Not a second
+      method and no rung rests on it; a complete replay here is think-flxm.
+    external_review:
+      state: informally-verified
+      date: '2026-10-23'
+      reviewed_by: >-
+        AI agent (Claude, Anthropic; tier tbd-strong-max, maximum reasoning), the stage 4
+        validation lane c-review-sqvc-1023 of the 23 October 2026 intake pass (think-xzob),
+        prompted separately from the imports of T-145, T-157 and T-192 and from every review of
+        them (docs/project/reviews/review-2026-10-23-wand125-sqverify-continuous-soundness.md)
+      note: >-
+        No blocking or major defect in the reported program, sqverify_continuous v3, whose
+        search is v4's text. Re-derived: the counting and the strict endpoint; the D4 reduction
+        to the north-east quadrant and t in [0, tan(pi/8)]; the angle enclosures, W unimodal at
+        sqrt 2 - 1; interval-only inside and outside classification; the concave-section
+        trapezoid bound at the path centre for every angle of a box; the translation-derivative
+        extension along an L-shaped path, both gradient components; the closed cover of the 86
+        root ranges by outward ends and midpoint splits, with acceptance against the upward
+        enclosure of tau; and the near-axis patch, the side-A axis square inside every side-B
+        square at t <= 10^-7. At this claim's parameters: X = 3359/500, 40 tau - M = 1/500, A =
+        997320431/10^9 with margin 227120145419327729/335900000000003359000000000; the density's
+        facts decided again (685 orbits, 522 inherited rows equal to their pool rows with no
+        index twice, 163 generated in no pool orbit, mass 3999/100, 5,424 distinct images). Run
+        here on candidates this repository builds, v4 reproduced both of the source's control
+        rows node for node (5,979 nodes, patch minimum 0.98648; and at core 3348/3359 12,364,148
+        nodes, patch 0.98421, least refuting capture 0.99856, with 84 of its 86 refusals
+        stopping above tau, SC-9). Unchecked: the claim's own run, which no receipt shows and a
+        replay here would decide (think-flxm).
+    source_reviewed: '2026-10-23'
 
   - id: E-ostashev-528-certificate-report
     claim: upper-bound
@@ -37694,13 +37809,44 @@ evidence:
       regenerated here. A diagnostic sample matched the source's logs at three roots,
       two slabs on the reviewed T-145 kernel and the axis patch
       (receipts/sample-diagnostic-n28.json); that is not a replay. The source's 985/1000
-      control is refused at the axis patch alone; no control here yet refuses at an
-      oblique root by an exact capture below 1. The least certified bounds of 1 +
-      4.7e-12 and 1 + 2.4e-12 are search stops, not slack. A complete replay and a
-      review that reads this certificate remain pending, priced at about 13 CPU-hours a
-      route. The two programs share no code with each other, but each shares code with
-      routes this record already counts. No standing bound or rating changes; T-107 and
-      T-142 stand.
+      control fails everywhere: run here on 23 October, the first program refused it at
+      the axis patch and at all 86 roots, each at a legal pose whose exact capture,
+      computed apart from the crate, is below 1 (least 0.98599). No control yet keeps
+      the axis patch and fails only at an oblique root. The least certified bounds of 1 +
+      4.7e-12 and 1 + 2.4e-12 are search stops, not slack. A complete replay remains
+      pending, priced at about 13 CPU-hours a route; the 23 October review of the first
+      program read this certificate (external_review). The two programs share no code
+      with each other, but each shares code with routes this record already counts. No
+      standing bound or rating changes; T-107 and T-142 stand.
+    external_review:
+      state: informally-verified
+      date: '2026-10-23'
+      reviewed_by: >-
+        AI agent (Claude, Anthropic; tier tbd-strong-max, maximum reasoning), the stage 4
+        validation lane c-review-sqvc-1023 of the 23 October 2026 intake pass (think-xzob),
+        prompted separately from the imports of T-145, T-157 and T-192 and from every review of
+        them (docs/project/reviews/review-2026-10-23-wand125-sqverify-continuous-soundness.md)
+      note: >-
+        No blocking or major defect in the first program, sqverify_continuous v4 (source
+        619b3c00...), against this certificate. Re-derived: the counting and the strict
+        endpoint; the D4 reduction to the north-east quadrant and t in [0, tan(pi/8)]; the angle
+        enclosures, W unimodal at sqrt 2 - 1; interval-only inside and outside classification;
+        the concave-section trapezoid bound at the path centre for every angle of a box; the
+        translation-derivative extension along an L-shaped path, both gradient components; the
+        closed cover of the 86 root ranges by outward ends and midpoint splits, with acceptance
+        against the upward enclosure of tau; and the near-axis patch, the side-A axis square
+        inside every side-B square at t <= 10^-7. Here the margin B - A W(10^-7) is
+        200029979999/500000000000005000000. This certificate's facts were decided again with the
+        review's own code: format M with the standard net declared as proof_net, which sends
+        admission through the source's proof_net branch, inert for this mode (SC-8); 884
+        positive rows inside K; mass 2799999/100000; 7,068 distinct images; the control is it
+        with every mass times 985/1000. The source's run_key was recomputed from the parameters,
+        and the published control, run here on the binary 31936c4d..., equals the source's
+        control log at every root, every witness a legal pose whose capture the review computed
+        exactly. Minor findings SC-1 (--resume trusts any file carrying the public key; the
+        source's summary inherited nothing) and SC-2 (the y-derivative enclosure is untested).
+        Unchecked: the 86-root search itself, which a complete replay decides (think-0arj), and
+        the second program, contpose_check3.
     source_reviewed: '2026-10-15'
   - id: E-evand-639-exact-sides-report
     claim: upper-bound
@@ -38454,8 +38600,10 @@ evidence:
       route CPU seconds and 86.75 job wall seconds, the longest job 29.99 seconds. Every
       positive clears every wall by at least 5.00e-21 and every pair by at least 9.99e-21.
       The 19 October review accepted it; the confirming replay is
-      E-evand-669-n155-exact-feasibility. The source's own checkers were not run here. The
-      two maintained routes, the sqpack rational witness verifier and the independent
+      E-evand-669-n155-exact-feasibility. The source's own checkers ran here separately on
+      23 October 2026 and accepted both certificates
+      (E-evand-669-n155-source-checker-replay), which moves no rung. The two maintained
+      routes, the sqpack rational witness verifier and the independent
       rational corner checker, share certificate parsing, half-angle conversion, Fraction
       arithmetic and the separating-axis method. No two independent methods, human
       oversight or optimality is claimed.
@@ -38534,11 +38682,59 @@ evidence:
       certificate parsing, half-angle conversion, Fraction arithmetic and the
       separating-axis method. The receipt's 3 jobs hold 71610 pair decisions, 43.29 route
       CPU seconds and 86.75 job wall seconds, the longest job 29.99 seconds. The positive
-      clears every wall by at least 5.00e-21 and every pair by at least 9.99e-21. The
-      source's own checkers were not run here, and the source's numerical statements of a
-      local minimum are not decided. Finite feasibility only: no lower bound, optimum,
+      clears every wall by at least 5.00e-21 and every pair by at least 9.99e-21. This
+      replay runs none of the source's own checkers, which ran separately
+      (E-evand-669-n155-source-checker-replay), and the source's numerical statements of a local minimum are
+      not decided. Finite feasibility only: no lower bound, optimum,
       local minimum, rigidity, novelty or human oversight.
     source_reviewed: '2026-10-19'
+  - id: E-evand-669-n155-source-checker-replay
+    claim: upper-bound
+    scope: {n_values: [155]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: same-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Daniel n155 explorer 2026-10-17]'
+    certificate: packing/resources/web/evand-n155-explorer-2026-10-17/source/search/packer/candidates/
+    replay: >-
+      From packing/: python -m devtools.evand_source_checkers run --scratch SCRATCH
+      --workers 2 ran the source's search/exact/verify_cert.py and verify_cert2.py
+      unchanged from this packet's retained copies (SHA-256
+      3299ca0c0f02f7c221deeea69a9a85b5a90db6bc410b20727fdff211c92bed52 and
+      55140a35d95d9eaa64a14c3b044641efbcda94ebfc3b12b7dec9fa52692e31d3, the versions
+      V-evand-verify-cert-py and V-evand-verify-cert2-py register, read in full before
+      they ran), each in its own python -I child process with an empty environment, no
+      standard input and a scratch working directory, on 23 October 2026, on s155_ex2.cert
+      and its same-side display view s155_ex2_regularized.cert and on four controls of
+      each: square 2 replaced by square 1, square 1 moved outside the box, and two sharp
+      controls that cross the right or top wall and the left or bottom wall by exactly
+      1e-30. Both checkers accepted both certificates and refused all eight controls, 20
+      runs in 3.0 CPU seconds (receipts/source-checker-replay.json); check holds the
+      packet to its acquisition manifest and reads the receipt back.
+    replay_status: passed
+    verifiers:
+      - V-evand-verify-cert-py
+      - V-evand-verify-cert2-py
+      - V-acquire-source
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificate at n = 155 that T-197 cites and its same-side display view, each
+          with its four controls
+        checked: 2
+        of: 2
+    limitations: >-
+      The producer's own checkers re-run: they establish reproducibility, not
+      independence, and move no rung; T-197's rungs rest on the independent routes. The
+      two checkers share their author, their parse and their certificate format, so
+      neither is independent of the other. Both decide squares strictly inside the open
+      box and disjoint closed squares. A run of the same checkers on 18 October 2026 was
+      not kept; this one replaces it. Finite feasibility only.
+    source_reviewed: '2026-10-23'
   - id: E-evand-674-n229-opening-report
     claim: upper-bound
     scope: {n_values: [229]}
@@ -38575,8 +38771,10 @@ evidence:
       records 92.75 route CPU seconds and 140.22 job wall seconds, the longest job 47.78
       seconds. Every positive clears every wall by at least 5.01e-13 and every pair by at
       least 9.99e-13. The 19 October review accepted it; the confirming replay is
-      E-evand-674-n229-opening-exact-feasibility. The source's own checkers were not run
-      here. The two maintained routes, the sqpack rational witness verifier and the
+      E-evand-674-n229-opening-exact-feasibility. The source's own checkers ran here
+      separately on 23 October 2026 and accepted the certificate
+      (E-evand-674-n229-opening-source-checker-replay), which moves no rung. The two
+      maintained routes, the sqpack rational witness verifier and the
       independent rational corner checker, share certificate parsing, half-angle
       conversion, Fraction arithmetic and the separating-axis method. No two independent
       methods, human oversight or optimality is claimed.
@@ -38655,11 +38853,57 @@ evidence:
       certificate parsing, half-angle conversion, Fraction arithmetic and the
       separating-axis method. The receipt's 3 jobs hold 156636 pair decisions, 92.75 route
       CPU seconds and 140.22 job wall seconds, the longest job 47.78 seconds. The positive
-      clears every wall by at least 5.01e-13 and every pair by at least 9.99e-13. The
-      source's own checkers were not run here, and the source's numerical statements of a
-      local minimum are not decided. Finite feasibility only: no lower bound, optimum,
+      clears every wall by at least 5.01e-13 and every pair by at least 9.99e-13. This
+      replay runs none of the source's own checkers, which ran separately
+      (E-evand-674-n229-opening-source-checker-replay), and the source's numerical statements of a local minimum are
+      not decided. Finite feasibility only: no lower bound, optimum,
       local minimum, rigidity, novelty or human oversight.
     source_reviewed: '2026-10-19'
+  - id: E-evand-674-n229-opening-source-checker-replay
+    claim: upper-bound
+    scope: {n_values: [229]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: same-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Daniel n229 dilation 2026-10-17]'
+    certificate: packing/resources/web/evand-n229-dilation-2026-10-17/source/search/packer/candidates/
+    replay: >-
+      From packing/: python -m devtools.evand_source_checkers run --scratch SCRATCH
+      --workers 2 ran the source's search/exact/verify_cert.py and verify_cert2.py
+      unchanged from this packet's retained copies (SHA-256
+      3299ca0c0f02f7c221deeea69a9a85b5a90db6bc410b20727fdff211c92bed52 and
+      55140a35d95d9eaa64a14c3b044641efbcda94ebfc3b12b7dec9fa52692e31d3, the versions
+      V-evand-verify-cert-py and V-evand-verify-cert2-py register, read in full before
+      they ran), each in its own python -I child process with an empty environment, no
+      standard input and a scratch working directory, on 23 October 2026, on s229.cert and
+      on four controls of each: square 2 replaced by square 1, square 1 moved outside the
+      box, and two sharp controls that cross the right or top wall and the left or bottom
+      wall by exactly 1e-30. Both checkers accepted the certificate and refused all four
+      controls, 10 runs in 2.6 CPU seconds (receipts/source-checker-replay.json); check
+      holds the packet to its acquisition manifest and reads the receipt back.
+    replay_status: passed
+    verifiers:
+      - V-evand-verify-cert-py
+      - V-evand-verify-cert2-py
+      - V-acquire-source
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificate at n = 229 that T-198 cites, with its four controls
+        checked: 1
+        of: 1
+    limitations: >-
+      The producer's own checkers re-run: they establish reproducibility, not
+      independence, and move no rung; T-198's rungs rest on the independent routes. The
+      two checkers share their author, their parse and their certificate format, so
+      neither is independent of the other. Both decide squares strictly inside the open
+      box and disjoint closed squares. A run of the same checkers on 18 October 2026 was
+      not kept; this one replaces it. Finite feasibility only.
+    source_reviewed: '2026-10-23'
   - id: E-evand-674-n229-update-report
     claim: upper-bound
     scope: {n_values: [229]}
@@ -38696,8 +38940,10 @@ evidence:
       88.93 route CPU seconds and 157.25 job wall seconds, the longest job 63.42 seconds.
       Every positive clears every wall by at least 6.00e-13 and every pair by at least
       1.20e-12. The 19 October review accepted it; the confirming replay is
-      E-evand-674-n229-update-exact-feasibility. The source's own checkers were not run
-      here. The two maintained routes, the sqpack rational witness verifier and the
+      E-evand-674-n229-update-exact-feasibility. The source's own checkers ran here
+      separately on 23 October 2026 and accepted the certificate
+      (E-evand-674-n229-update-source-checker-replay), which moves no rung. The two
+      maintained routes, the sqpack rational witness verifier and the
       independent rational corner checker, share certificate parsing, half-angle
       conversion, Fraction arithmetic and the separating-axis method. No two independent
       methods, human oversight or optimality is claimed.
@@ -38776,11 +39022,57 @@ evidence:
       certificate parsing, half-angle conversion, Fraction arithmetic and the
       separating-axis method. The receipt's 3 jobs hold 156636 pair decisions, 88.93 route
       CPU seconds and 157.25 job wall seconds, the longest job 63.42 seconds. The positive
-      clears every wall by at least 6.00e-13 and every pair by at least 1.20e-12. The
-      source's own checkers were not run here, and the source's numerical statements of a
-      local minimum are not decided. Finite feasibility only: no lower bound, optimum,
+      clears every wall by at least 6.00e-13 and every pair by at least 1.20e-12. This
+      replay runs none of the source's own checkers, which ran separately
+      (E-evand-674-n229-update-source-checker-replay), and the source's numerical statements of a local minimum are
+      not decided. Finite feasibility only: no lower bound, optimum,
       local minimum, rigidity, novelty or human oversight.
     source_reviewed: '2026-10-19'
+  - id: E-evand-674-n229-update-source-checker-replay
+    claim: upper-bound
+    scope: {n_values: [229]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: same-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Daniel n229 dilation update 2026-10-18]'
+    certificate: packing/resources/web/evand-n229-dilation-update-2026-10-18/source/search/packer/candidates/
+    replay: >-
+      From packing/: python -m devtools.evand_source_checkers run --scratch SCRATCH
+      --workers 2 ran the source's search/exact/verify_cert.py and verify_cert2.py
+      unchanged from this packet's retained copies (SHA-256
+      3299ca0c0f02f7c221deeea69a9a85b5a90db6bc410b20727fdff211c92bed52 and
+      55140a35d95d9eaa64a14c3b044641efbcda94ebfc3b12b7dec9fa52692e31d3, the versions
+      V-evand-verify-cert-py and V-evand-verify-cert2-py register, read in full before
+      they ran), each in its own python -I child process with an empty environment, no
+      standard input and a scratch working directory, on 23 October 2026, on s229_v2.cert
+      and on four controls of each: square 2 replaced by square 1, square 1 moved outside
+      the box, and two sharp controls that cross the right or top wall and the left or
+      bottom wall by exactly 1e-30. Both checkers accepted the certificate and refused all
+      four controls, 10 runs in 2.6 CPU seconds (receipts/source-checker-replay.json);
+      check holds the packet to its acquisition manifest and reads the receipt back.
+    replay_status: passed
+    verifiers:
+      - V-evand-verify-cert-py
+      - V-evand-verify-cert2-py
+      - V-acquire-source
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificate at n = 229 that T-199 cites, with its four controls
+        checked: 1
+        of: 1
+    limitations: >-
+      The producer's own checkers re-run: they establish reproducibility, not
+      independence, and move no rung; T-199's rungs rest on the independent routes. The
+      two checkers share their author, their parse and their certificate format, so
+      neither is independent of the other. Both decide squares strictly inside the open
+      box and disjoint closed squares. A run of the same checkers on 18 October 2026 was
+      not kept; this one replaces it. Finite feasibility only.
+    source_reviewed: '2026-10-23'
   - id: E-evand-659-n236-report
     claim: upper-bound
     scope: {n_values: [236]}
@@ -42400,10 +42692,15 @@ evidence:
       E-mishapolk-719-review-exact-feasibility. The source's own scripts were not run here.
       The issue names this repository's sqpack/verify.py as a checker, and the exact_verify
       route decides through that file (RF-1); as the issue runs it, that file reads no
-      certificate (RF-2). The two maintained routes, the sqpack rational witness verifier
-      and the independent rational corner checker, share certificate parsing, half-angle
-      conversion, Fraction arithmetic and the separating-axis method. No two independent
-      methods, human oversight or optimality is claimed.
+      certificate (RF-2). The author's comment of 23 October (issuecomment-6355484781,
+      answer 1) says his batch harness imported sqpack.verify as a module and called its
+      pair-overlap and containment routines on each certificate, and that he ran Evan
+      Daniel's verify_cert.py and verify_cert2.py as archived in Francisco Couzo's
+      repository at 6b7391d; none of that ran here. The two maintained routes, the sqpack
+      rational witness verifier and the independent rational corner checker, share
+      certificate parsing, half-angle conversion, Fraction arithmetic and the
+      separating-axis method. No two independent methods, human oversight or optimality is
+      claimed.
   - id: E-mishapolk-719-exact-feasibility
     claim: upper-bound
     scope:
@@ -42599,6 +42896,210 @@ evidence:
       source's own checkers were not run here. Review and confirmation remain pending; no stage
       4 review is owed for a beyond-horizon row. No arrangement identity, local minimum or
       optimum is established.
+  - id: E-mishapolk-n204-certificate-report
+    claim: upper-bound
+    scope:
+      n_values: [204]
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Mishapolk n204 2026-10-22]'
+    certificate: packing/resources/web/mishapolk-n204-2026-10-22/source/certificates/
+    replay_status: not-attempted
+    verifiers: []
+    external_review:
+      state: informally-verified
+      date: '2026-10-23'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 mathematical review lane of T-231
+        (c-review-t231-math, think-tetq), strong sub-agent tier, maximum reasoning,
+        prompted separately from the records lane (c-lane-719-records-1023)
+      note: >-
+        docs/project/reviews/review-2026-10-23-mishapolk-n204.md accepted
+        certificates/n204.cert at 12fc4667 for finite feasibility only, with seven
+        non-blocking findings (RF-1 to RF-7); the replay is
+        E-mishapolk-n204-exact-feasibility, and the review checker's run is
+        E-mishapolk-n204-review-exact-feasibility.
+    source_reviewed: '2026-10-23'
+    limitations: >-
+      This atom records the source author's report of 1 exact rational certificate at
+      12fc466, certificates/n204.cert, the release's second 204 file, which the author
+      claimed on issue 719 on 22 October after T-229 registered certificates/n-204.cert.
+      A separate complete repository replay is retained for n = 204: 1 positive and 2
+      duplicate-square and outside-container controls passed their required outcomes on
+      both routes, 124236 pair decisions; summed over the 3 jobs, the receipt records 16.11
+      route CPU seconds and 16.77 job wall seconds, the longest job 5.82 seconds. Every
+      positive clears every wall by at least 5.00e-21 and every pair by at least 9.99e-21,
+      and the packet's sharp controls are accepted at exact contact and refused 1e-30 past
+      it on both routes. The 23 October stage 4 review accepted the replay; the confirming
+      entries are E-mishapolk-n204-exact-feasibility and
+      E-mishapolk-n204-review-exact-feasibility. The source's own checkers were not run
+      here. The author says he imported this repository's sqpack/verify.py as a module, and
+      the exact_verify route decides through that file. The two maintained routes, the
+      sqpack rational witness verifier and the independent rational corner checker, share
+      certificate parsing, half-angle conversion, Fraction arithmetic and the
+      separating-axis method. No two independent methods, human oversight or optimality is
+      claimed.
+  - id: E-mishapolk-n204-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values: [204]
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: shared-components
+    shared_components:
+      - >-
+        sqpack.verify's unit-shape and separating-axis predicates (verify_packing, which
+        sqpack.witness.exact_verify calls), the jlevy/squares checker the issue names as one
+        of its two checkers and the author says he imported as a module
+      - >-
+        the evand-cert reader of devtools.upper_bound_reports and the half-angle map and
+        witness basis of devtools.evand_exact_certificates, through which both maintained
+        routes read the certificate
+      - CPython's fractions.Fraction arithmetic
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Mishapolk n204 2026-10-22]'
+    certificate: packing/resources/web/mishapolk-n204-2026-10-22/source/certificates/n204.cert
+    replay: >-
+      From packing/ with the project interpreter (Python 3.14.7) on a shared four-core host:
+      python -m devtools.upper_bound_reports mishapolk-n204-2026-10-22 certify --workers 2
+      wrote the receipt on 23 October 2026 from the packet's retained certificate, and check
+      --replay decides all 3 retained jobs, the certificate and its duplicate-square and
+      outside-container controls, again through both maintained routes and holds each to
+      its retained row (17 s of wall); check-claims rebuilds the frozen comparison. python
+      resources/web/mishapolk-n204-2026-10-22/receipts/sharp_controls.py writes the
+      packet's sharp controls. The 23 October stage 4 review ran the three jobs again one
+      a process, as certify's child does, and the kernel's run_sharp
+      (docs/project/reviews/review-2026-10-23-mishapolk-n204.md).
+    replay_status: passed
+    verifiers:
+      - V-sqpack-verify
+      - V-check-rational-witness-independent
+      - V-evand-arrangement-receipts
+      - V-upper-bound-reports
+      - V-evand-exact-certificates
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificate at n = 204 that T-231 cites, every wall and every pair decided by
+          both maintained routes; the kernel's controls are retained in the packet's receipt
+        checked: 1
+        of: 1
+    independence_record: docs/project/reviews/review-2026-10-23-mishapolk-n204.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-23'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 mathematical review lane of T-231
+        (c-review-t231-math, think-tetq), strong sub-agent tier, maximum reasoning,
+        prompted separately from the records lane (c-lane-719-records-1023)
+      note: >-
+        Accepted for finite feasibility only. The three jobs reproduced on both maintained
+        routes, and every side, pose, pair count, least wall clearance and least pair gap of
+        the receipt equals the review's own checker's on both of its routes, 63 of 63 checks
+        (E-mishapolk-n204-review-exact-feasibility); the review's sixteen mutants were
+        refused or accepted as required by both maintained routes. Findings RF-1 to RF-7,
+        none blocking.
+    limitations: >-
+      A replay of the retained certificate at n = 204 by two maintained exact routes that
+      share certificate reading, half-angle conversion, Fraction arithmetic and the
+      separating-axis method, and with the source a named checker: the exact_verify route
+      decides through sqpack/verify.py, which the issue names and the author says he
+      imported as a module, so the replay shares the producer's components. Every wall
+      clears by exactly 5e-21 and every pair by 9.99999999999999e-21, below the binary64
+      spacing of the coordinates, so the receipt's two gross controls, a duplicated square
+      and a square moved outside, cannot tell an exact route from one that rounds. The
+      packet's sharp controls (receipts/sharp-controls.json) lowered the side by the least
+      far-wall clearance, closed the least-gap pair and moved every square toward the
+      nearer near wall, each accepted at exact contact and refused 1e-30 past it on both
+      routes; this review's sixteen mutants (outputs/sharp-controls.json in
+      review/review-2026-10-23/) were refused or accepted as required by both maintained
+      routes: walls at the top-and-right, left and bottom, and pairs tilted-tilted,
+      tilted-aligned and aligned-aligned, at exact contact and 1e-30 past it.
+      test_upper_bound_reports.py runs the kernel's two sharp controls at contact and 1e-30
+      past it on both routes. The source's own scripts were not run here. Finite
+      feasibility only: no lower bound, optimum, local minimum, rigidity, novelty or human
+      oversight.
+    source_reviewed: '2026-10-23'
+  - id: E-mishapolk-n204-review-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values: [204]
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Mishapolk n204 2026-10-22]'
+    certificate: packing/resources/web/mishapolk-n204-2026-10-22/source/certificates/n204.cert
+    replay: >-
+      From the packet's review/review-2026-10-23/, with any CPython 3.12 or later: python -I
+      programs/review_t231_check.py --route Z CERT and --route C CERT, one process a route,
+      as the 23 October review ran them (0.25 s and 6.8 s): accepted on both routes, every
+      wall cleared by at least exactly 1/(2*10^20) (left and bottom) and
+      500000000068827/10^35 (right and top), and every one of the 20,706 pairs separated,
+      none touching, the least gap 9.99999999999998720936e-21 (squares 63 and 84, numbered
+      from 0) and equal to that pair's exact Euclidean distance; the two routes' per-pair
+      gaps and per-square wall clearances equal. agree_t231.py found the side, all 204
+      poses, the pair count, the least clearance and the least gap equal to both maintained
+      routes' and the records lane's receipt (63 of 63 checks). Its sharp controls
+      (sharp_controls_t231.py) accepted exact contact and refused 1e-30 past it on both of
+      its routes and both maintained routes.
+    replay_status: passed
+    verifiers:
+      - V-mishapolk-n204-review-check
+      - V-mishapolk-n204-review-controls
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificate at n = 204 that T-231 cites, every wall and every pair, on each of
+          the checker's two routes
+        checked: 1
+        of: 1
+      read: [mathematics, certificate-format, specification]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of T-231 (c-review-t231-math, think-tetq),
+            strong sub-agent tier, maximum reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The author discloses Gemini assistance. The certificate's determined rows equal
+          Evan Daniel's exact solver's output for T-229's arrangement (the review's RF-1),
+          and that solver's author says it was written with Claude. The issue names this
+          repository's sqpack/verify.py, whose first revisions are Claude-authored commits,
+          among the author's checkers. The review's checker is Claude's too. It was written
+          from a prompt of its own in a file that imports nothing from this repository or
+          the source, from the certificate's format line, the mathematics and the #728
+          review's account of its checker (specification). It decided the certificate
+          before its author read any maintained or source code, and has not changed since.
+          Its author never read sqpack/verify.py, sqpack/witness.py or
+          check_rational_witness_independent. Afterwards the author read the source's
+          check_packing.py, which cannot read this certificate, and the module statement of
+          the vendored exactsolve.py.
+    independence_record: docs/project/reviews/review-2026-10-23-mishapolk-n204.md
+    limitations: >-
+      The review's own checker, with a reader of its own and no code of the packet's routes
+      or the source's; route C shares CPython's Fraction with the maintained routes, and
+      route Z uses integers alone. Its author read the #728 review's account of its checker
+      before writing it. The gross controls and the sharp mutants were decided by this
+      checker and the maintained routes alike (outputs/sharp-controls.json). Finite
+      feasibility only.
+    source_reviewed: '2026-10-23'
   - id: E-couzo-02f9690-beyond-horizon-report
     claim: upper-bound
     scope:
@@ -42979,3 +43480,109 @@ evidence:
       here. Review and confirmation remain pending; no stage 4 review is owed for a
       beyond-horizon row. No arrangement identity, local minimum, optimum or credit statement of
       the source is established.
+  - id: E-mishapolk-732-beyond-horizon-report
+    claim: upper-bound
+    scope:
+      n_values: [372, 409, 411, 450, 451, 453, 461, 494, 495, 506, 535, 539, 540, 582, 583,
+        587, 591, 599, 631, 632, 633, 640, 645, 646, 647, 648, 649, 651, 653, 683, 684, 691,
+        693, 695, 696, 697, 698, 702, 735, 737, 742, 745, 750, 751, 752, 756, 790, 791, 797,
+        798, 799, 807, 809, 810, 813, 814, 854, 855, 856, 857, 864, 866, 869, 870, 871, 913,
+        915, 916, 923, 925, 931, 932, 977, 989, 990, 994, 995]
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Mishapolk issue 732 2026-10-22]'
+    certificate: packing/resources/web/mishapolk-issue732-2026-10-22/source/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-23'
+    limitations: >-
+      This atom records the source author's report, issue 732, of the 77 upper bounds beyond the
+      n <= 324 corpus at or below 1024 that the ledger of 23 October for issue 732
+      (campaign/issue-intake/upper-bounds-issue732-20261023) records in report order: exact
+      rational certificates certificates/0000-0999/nN.cert at 17cc2201, retained under the
+      author's MIT licence, each of n squares with its exact side in its header, recorded at
+      that side rounded up at 12 places. A separate complete repository replay is retained
+      (devtools.beyond_horizon_replay, receipts/filtered-exact-replay.json): the filtered
+      two-route decision of devtools.couzo_678_replay, the sqpack.verify predicates and the
+      independent rational corner checker's, over every wall and the pairs whose centres are
+      closer than sqrt 2, an exactly justified filter, accepted all 77 and refused all 462
+      controls, in 82.0 positive CPU seconds; no square touches the box and no pair touches,
+      every wall clearing by at least 2.71e-20 and every pair by at least 5.42e-20. The
+      all-pairs kernel at 645, 752 and 995 (984,581 pairs, 322.5 CPU seconds) agreed exactly
+      with it on each least gap and clearance. The two routes share certificate parsing,
+      half-angle conversion, the pair filter and Fraction arithmetic. The source's own checker
+      was not run here. Review and confirmation remain pending; no stage 4 review is owed for a
+      beyond-horizon row. No arrangement identity, local minimum or optimum is established.
+
+  - id: E-evand-gradec-local-minima-233-report
+    claim: derived-structure
+    scope: {n_values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 30, 31, 32, 33, 34, 35, 36, 38, 40, 42, 43, 44, 45, 46, 47, 48, 49, 50, 52, 53, 54, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 70, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 84, 85, 86, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 104, 107, 109, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 124, 125, 127, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 147, 148, 149, 150, 151, 153, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 173, 175, 176, 178, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 200, 202, 203, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224, 225, 226, 227, 229, 230, 232, 233, 242, 243, 244, 245, 246, 247, 248, 249, 250, 251, 252, 253, 254, 255, 256, 258, 260, 261, 264, 265, 267, 276, 277, 278, 279, 280, 281, 282, 283, 284, 285, 286, 287, 288, 289, 290, 291, 293, 294, 298, 313, 314, 315, 316, 317, 318, 319, 320, 321, 322, 323, 324]}
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Daniel exact and local reports 2026-10-12]'
+    certificate: packing/resources/web/evand-exact-data-2026-10-12/acquisition/release/gradec-233.tar.zst
+    replay_status: not-attempted
+    verifiers: [V-evand-gradec-py, V-evand-verify-exact]
+    limitations: >-
+      evand/square-packing at ad86d42d0f743076d735036702ba04a41ce24a8c
+      (tasks/exact-minpoly/grade-C.md, search/exact/gradec.py) and its release
+      exact-data-2026-10-12 (tag commit 31523f87316bdfda00f5459dd9077928e264f133,
+      gradec-233.tar.zst) report that 233 of the 250 roster configurations of field degree
+      at most 4 are local minima of the side in the sense of IsLocalMinPacking (a pose ball,
+      squares matched by index, angles modulo 90 degrees, non-strict), by Theorem C, a
+      second-order sufficient condition that allows exact flat motions, checked by gradec.py
+      exactly in each configuration's number field with signs by interval arithmetic: 231
+      with every load-bearing incidence as a row, and 230 and 261 with GRADEC_DROPZERO=1
+      after the 24 rows at each that carry no force in any multiplier vector are dropped; 17 runs
+      timed out at 30 minutes and are outside the claim. That each record is a packing is
+      verify_exact.py's decision (the roster's VALID), not gradec.py's. The certificates are
+      summaries (rows, ranks, dimensions, least multiplier, margin, float minors), not the
+      exact multipliers, flat basis or affine null vectors. When read on 12 October, at 11
+      counts (70, 84, 86, 127, 153, 175, 176, 232, 258, 261, 267) the configuration's side
+      was above its case's record, and at 230 the side is the case's ceiling 643/41. No
+      global bound, rigidity or strict minimality is claimed. This is the public-claim
+      entry. The 23 October review's checker decided all 233 again (receipts
+      review-theorem-c-233.jsonl and review-compare-233.json in the evand-exact-data-2026-10-12
+      packet), and gradec.py recomputed n = 10 byte-identical on 12 October
+      (receipts/gradec-n10-recompute.json there). The review's checker is that lane's own,
+      so its run is a second route beside the rung; C3 waits on gradec.py's replay of all
+      233 (think-mtah). The evidence entries for both runs are drafted in think-7scz for the
+      registration: check_certificate_citations needs a case record to cite each, or a
+      deferral naming the register entry that cites it, which lapses after 30 days, and no
+      case record has a block for local minimality (think-8xy2).
+    external_review:
+      state: defect-found
+      date: '2026-10-23'
+      reviewed_by: >-
+        AI agent (Claude, Anthropic), the stage 4 mathematical review lane (W2) of the #545
+        import (c-review-thmc-1023, think-7scz), strong sub-agent tier at maximum reasoning,
+        prompted separately from the import and records lanes
+      note: >-
+        docs/project/reviews/review-2026-10-23-evand-grade-c-theorem-c.md re-derived Theorem
+        C from grade-C.md and read gradec.py, the three modules it imports and run.sh as
+        data. Defect (C-1, major): the proof's last two steps do not control rows whose
+        corner sits at a side end. The relaxation gives h_r >= -K' delta^2 measured from the
+        record, the same order as the coercive term the last step needs, and first order in
+        |Delta| measured from the family point where the flat family slides an aligned pair,
+        which it does at 16 of the 24 side-end rows at n = 19. Repaired in the review by the
+        pair form of the relaxation (one row of a side-end pair is at least -C epsilon times
+        the other) and a bootstrap that makes every row O(|Delta|^2), with gradec.py's
+        checks unchanged, so the theorem holds. Minor: the record's packing
+        property is outside gradec.py (C-2), the t interval's bracket is not checked (C-3),
+        the certificates are summaries (C-4), hypothesis 1 should name its row classes
+        exactly (C-5), and hypothesis 2 should state that the multipliers tend to lambda*
+        along the family, which the proof uses and the affine null vectors supply (C-6);
+        seven notes. The review's checker, written here and sharing no code with the source,
+        decided all 233 again and agrees with every certificate
+        (receipts/review-theorem-c-233.jsonl in the evand-exact-data-2026-10-12 packet).
+        Unchecked: T-124's Lean route, the 17 timeouts, and whether each configuration is its
+        case's current packing.
+    source_reviewed: '2026-10-23'

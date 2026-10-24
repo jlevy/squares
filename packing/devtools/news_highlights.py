@@ -15,7 +15,7 @@ A reader widens or narrows the choice, and `news-filters.js` then shows the newe
 `LIMIT` that match and says how many in a visually hidden live count; the box carries,
 for that, the newest `LIMIT` articles at each level News has (`carried`), the ones
 outside the opening choice hidden. Without scripts the box shows the opening choice and
-no filter. The choice is not kept in the home page's address; its "View All News" link
+no filter. The choice is not kept in the home page's address; its "All News" link
 carries it to the archive as `news-s` (`data-news-carry`) when the reader has changed it.
 With no article to show, the box says "No news yet." and draws no filter.
 """

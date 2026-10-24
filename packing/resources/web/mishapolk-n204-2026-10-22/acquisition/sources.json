@@ -1,0 +1,55 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-23T05:09Z",
+  "git_scope": "Blobless clone of Mishapolk/square-packing-records and a sparse checkout of the commit issue #719 pins, 12fc466, where certificates/n204.cert is the source's second 204 file: the same blob 4117e9d as at 1851c2c (2026-10-22T05:29:48Z), the first commit to hold these bytes, which also first published certificates/n-204.cert, the file T-229 cites. Only certificates/n204.cert is retained. certificates/n-204.cert, the README and LEGAL_VICTORIES.jsonl, which names n-204.cert at 204 and not n204.cert, are pinned by digest. The path held other bytes at 8bb41af5 (13 October) and 70a033f0 (14 October), and is gone from 3285fac (2026-10-22T19:29:30Z) on: the sharded certificates/0000-0999/n204.cert there and at every later commit through the head read, 7b6366f (2026-10-23T01:50:22Z), holds n-204.cert's bytes (blob 17e243a). The rest of the tree is pinned by the commit; no source program was executed.",
+  "sources": [
+    {
+      "id": "mishapolk-n204-2026-10-22",
+      "source_url": "https://github.com/Mishapolk/square-packing-records",
+      "source_ref": "12fc46678fa8eefa3f156ff37dfffd84c8f3a580",
+      "source_commit": "12fc46678fa8eefa3f156ff37dfffd84c8f3a580",
+      "committed_utc": "2026-10-22T06:05:07Z",
+      "git_tree": "b88810bbf32ad09996ef8432424c6d7927932cc0",
+      "archived_path": "packing/resources/web/mishapolk-n204-2026-10-22/source",
+      "subtree_manifest": "packing/resources/web/mishapolk-n204-2026-10-22/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "README.md",
+        "LEGAL_VICTORIES.jsonl",
+        "certificates/n204.cert",
+        "certificates/n-204.cert"
+      ],
+      "subtree_file_count": 4,
+      "subtree_total_bytes": 323071,
+      "retained_file_count": 1,
+      "retained_total_bytes": 33336,
+      "compressed": [],
+      "pinned_only": [
+        {
+          "path": "LEGAL_VICTORIES.jsonl",
+          "bytes": 252436,
+          "sha256": "a89026eea1c199c5cf635b76e50e2e69cc5bb0c990bedd2f5021e4e276fd373b",
+          "reason": "The source's victory index at the pin, which names certificates/n-204.cert at 204 and not this file; pinned by digest only."
+        },
+        {
+          "path": "README.md",
+          "bytes": 15182,
+          "sha256": "d1b8a7da7c0e61e38ce558bedc54ca0429bdce7ef9bf1778890852b8e13c6378",
+          "reason": "The source's README at the pin, which names its verifiers and states no reuse terms; pinned by digest only."
+        },
+        {
+          "path": "certificates/n-204.cert",
+          "bytes": 22117,
+          "sha256": "7c77ad00e36fdceedadeef0d6e256a6682a6974877ded0f97aa110cad918f4a3",
+          "reason": "The 204 file issue #719 names, T-229's certificate, which the mishapolk-issue719-2026-10-22 packet keeps as a derived fact; pinned by digest here."
+        }
+      ],
+      "license": "The pinned tree has no licence file and its README states no reuse terms. These bytes are retained under the author's written grant on issue #719 (https://github.com/jlevy/squares/issues/719#issuecomment-6350348588, 2026-10-22T20:15:57Z, answer 5): the MIT licence he added at 17cc220 (LICENSE, Git blob d81c9578741244f8da9f3602674a8d0516d26478, SHA-256 4761eb7dc9e50c13cd9a876e0a56dbe3db7b97064a354c0ac235c93293e4de0c, copyright (c) 2026 Mykhailo Polkovskyi (Mishapolk)) is stated there to cover all certificates, catalogs, manifests and tooling and to let jlevy/squares retain and redistribute the raw certificate files in its packets. 17cc220's tree does not hold this file, so its custody rests on that comment, not on a licence file beside it. The issue credits Mishapolk (Mykhailo Polkovskyi) and discloses Gemini assistance; the tree names no credit or AI-assistance terms.",
+      "claims": [
+        "The author's comment on issue #719 of 2026-10-22T20:15:57Z (issuecomment-6350348588), answer 3, claims the lower of the release's two 204 files: \"We claim the lower certified bound (1.48 x 10^-11 lower), which passed both of your exact routes.\"",
+        "certificates/n204.cert states s(204) <= 14808642830513087197802415708703/10^30 = 14.808642830513087197802415708703 in its header (SHA-256 9c5dabc8f2456b0c90650eac5794918c5e52ff90d9e817bd215c9816a88f3e7d), first committed at 1851c2c (2026-10-22T05:29:48Z), 1.48e-11 below certificates/n-204.cert's 882663895519250432/59604644775390625 (T-229).",
+        "The author's comment of 2026-10-23T01:52:40Z (issuecomment-6355484781), answer 2: the continuous SQP optimization at 204 was initialized directly from Francisco Couzo's #678 certificate (n204.cert in Couzo's repository) in Couzo's native unrotated frame, not from Evan Daniel's regularized T-225 view.",
+        "The same comment, answer 1: sqpack/verify.py was imported as a module in a batch harness that parsed each certificate and called its pair-overlap and containment routines, not run from the command line; Evan Daniel's verify_cert.py and verify_cert2.py were run as archived in Francisco Couzo's repository at 6b7391d. These statements are the author's; no source program ran here."
+      ]
+    }
+  ]
+}

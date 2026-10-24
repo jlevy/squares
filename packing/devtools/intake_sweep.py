@@ -39,7 +39,11 @@ The sources, one section of the report each:
   command reads, with the day each was last reviewed.
 - **Record-side queues**: counts pending catalogue intake, deferred conflicts, the
   results and asks queued on open issues (each needs its own bead; the answer bead owns
-  the reply, not the import), triage and replies owed, and the validation backlog.
+  the reply, not the import), triage and replies owed, the questions awaiting an author
+  that hold an issue open (the answer bead owns them; one awaited longer than
+  `AWAITED_DAYS` is listed for a decision), every closeable issue still open, each issue
+  held for the owner (listed for the owner: no pass posts on it or closes it), and the
+  validation backlog.
 - **Regularization owed**: from `atlas/known-best/default-drawings.json`, each count
   whose drawing is `pending` regularization, with the bead its
   `default_drawings.PENDING_ALLOWED` entry names; each decision that still owes runs or
@@ -57,9 +61,15 @@ The sources, one section of the report each:
   labelled `result-import` first, so the open ones are listed as the bead queue.
 
 An item **needs action** when the record is behind a source and no open bead owns the
-difference, when the bead a deferral names is no longer open, or when a wait's blocker
-has resolved. The command then exits 1. Items an open bead owns, the backlog and the bead
-queue are listed and do not fail it. A source this run could not read is listed under
+difference, when the bead a deferral names is no longer open, when a wait's blocker
+has resolved, or when an open issue is closeable: settled, with nothing its author asked
+for queued and no question awaiting the author's answer, so its final comment and close
+are owed (`campaign/result-import.md`, stage 7). The owner's instruction of 23 October
+2026 put that last one here, after twelve closeable issues were found open with nothing
+listing them; where GitHub already shows such an issue closed, the step is to record the
+close, not to post it again. The command then exits 1. Items an open bead owns, an issue
+held for the owner, a question awaited for a decision, the backlog and the bead queue are
+listed and do not fail it. A source this run could not read is listed under
 **Not Checked**, so a quiet report is not mistaken for a clean one.
 
 Usage, from `packing/`, or `make intake` at the root, which captures the catalogue first::
@@ -108,11 +118,20 @@ WATCH = ROOT / "campaign" / "intake-watch.yaml"
 PACKETS = ROOT / "resources" / "web"
 
 NEEDS_OWNER = "needs an owner"
+#: An open issue `check_requests` derives closeable: its final comment and close are owed.
+CLOSEABLE = "closeable, still open"
 RESOLVED = "blocker resolved"
 OWNED = "owned"
 LISTED = "listed"
-#: The states that make the sweep exit 1: work nobody owns, or a wait that is over.
-ACTION = frozenset({NEEDS_OWNER, RESOLVED})
+#: A question to an author awaited longer than `AWAITED_DAYS`: listed for a decision to
+#: chase it, withdraw it with a note, or keep waiting. It does not fail the sweep.
+STALE = "awaited, for a decision"
+#: How long a question may await its author before the sweep lists it for a decision
+#: (review A9 of #747: #470's question had waited since 12 October, listed as owned).
+AWAITED_DAYS = 14
+#: The states that make the sweep exit 1: work nobody owns, a wait that is over, or an
+#: issue owed its close.
+ACTION = frozenset({NEEDS_OWNER, RESOLVED, CLOSEABLE})
 
 #: The register's roles for a source that publishes many results and is read as a whole.
 CATALOGUE_ROLES = frozenset({"current-catalogue", "first-party-release"})
@@ -421,7 +440,25 @@ def _github_step(difference: str) -> str:
         return "read it: map any result it reports, then move the entry's read_through"
     if "reply missing" in difference:
         return "record the reply under the issue's replies"
+    if _CLOSED_THERE.match(difference):
+        return (
+            "record the close: the final comment under replies as final, and the entry's "
+            "state and closed; post nothing"
+        )
     return "reconcile result-requests.yaml with the issue"
+
+
+#: How `check_requests.compare_github` says an issue open in the record is closed there.
+_CLOSED_THERE = re.compile(r"#(\d+) is closed there and open here$")
+
+
+def closed_on_github(section: Section) -> frozenset[int]:
+    """The issues the GitHub section found closed there and open in the record."""
+    return frozenset(
+        int(match.group(1))
+        for item in section.items
+        if (match := _CLOSED_THERE.match(item.what)) is not None
+    )
 
 
 # -- Watched repositories -------------------------------------------------------------
@@ -922,7 +959,9 @@ def queues_section(
     *,
     today: date,
     blockers: Blockers,
+    closed_there: frozenset[int] = frozenset(),
 ) -> Section:
+    """The record's own queues. `closed_there` is the open issues GitHub shows closed."""
     section = Section("Record-side queues")
     for entry in coverage.get("pending_catalogue_intake") or ():
         section.items.append(
@@ -975,12 +1014,19 @@ def queues_section(
                         since=str(issue["opened"]),
                     )
                 )
+        section.items.extend(
+            _awaited(issue, question, beads, today)
+            for question in check_requests.awaited(issue)
+        )
         state = check_requests.issue_state(issue, register)
         owed = [
             *(["triage"] if issue["triage"] == "pending" else []),
             *(["a reply"] if state.replies_due else []),
         ]
-        if owed:
+        hold = check_requests.held(issue)
+        if hold is not None:
+            section.items.append(_held(issue, hold, owed, state, beads))
+        elif owed:
             section.items.append(
                 owned(
                     f"#{number} owes {' and '.join(owed)}",
@@ -990,7 +1036,101 @@ def queues_section(
                     step="triage by stage 1; draft the reply with check_requests --draft",
                 )
             )
+        if state.closeable:
+            section.items.append(_closeable(issue, beads, closed_there=number in closed_there))
     return section
+
+
+def _asked_on(issue: Mapped, url: str) -> str:
+    """The date of the recorded reply at `url`, or the issue's own when none is."""
+    dates = [str(reply["date"]) for reply in issue.get("replies") or () if reply["url"] == url]
+    return dates[0] if dates else str(issue["opened"])
+
+
+def _awaited(issue: Mapped, question: Mapped, beads: Beads | None, today: date) -> Item:
+    """A question awaiting the author, owned by the answer bead; one awaited longer than
+    `AWAITED_DAYS` is listed for a decision instead, so it does not wait indefinitely."""
+    asked = _asked_on(issue, str(question["asked"]))
+    item = owned(
+        f"#{issue['number']} awaits the author ({question['changes']}): {question['question']}",
+        str(issue["answer_bead"]),
+        beads,
+        since=asked,
+        step="read the answer into the record, or withdraw the question with a note",
+    )
+    try:
+        days = (today - date.fromisoformat(asked[:10])).days
+    except ValueError:
+        return item
+    if item.state != OWNED or days <= AWAITED_DAYS:
+        return item
+    return replace(
+        item,
+        what=f"{item.what} (awaited {days} days)",
+        state=STALE,
+        step=(
+            "decide: chase the author, withdraw the question with a note (a measurement "
+            "here may settle it), or keep waiting"
+        ),
+    )
+
+
+def _held(
+    issue: Mapped,
+    hold: Mapped,
+    owed: Sequence[str],
+    state: check_requests.IssueState,
+    beads: Beads | None,
+) -> Item:
+    """An issue held for the owner: listed for the owner, never as a reply or close owed.
+
+    What a pass would otherwise owe it is named, for the owner to decide; nothing is
+    posted on it or closed while the hold stands (review A1 of #747).
+    """
+    unheld = {key: value for key, value in issue.items() if key != "held"}
+    settled, _ = check_requests.closeable(unheld, state.results)
+    would = [*owed, *(["its close"] if settled else [])]
+    alias = str(issue["answer_bead"])
+    return Item(
+        f"#{issue['number']} is {check_requests.hold_text(hold)}"
+        + (f" ({' and '.join(would)} otherwise owed)" if would else "")
+        + ": listed for the owner, nothing posted or closed",
+        LISTED,
+        alias,
+        beads.state(alias) if beads is not None else "unconfirmed: no bead store",
+        since=str(hold["since"]),
+        step=f"for the owner: {hold['note']}",
+    )
+
+
+def _closeable(issue: Mapped, beads: Beads | None, *, closed_there: bool = False) -> Item:
+    """An open issue that is closeable, owed its final comment and close (stage 7).
+
+    It needs action whoever owns it: every result is settled, nothing its author asked for
+    is queued and no question awaits the author, so nothing but the close is left. Where
+    GitHub already shows the issue closed (`closed_there`), the close was posted and the
+    record lacks it, so the step is to record it, not to post a second final comment.
+    """
+    alias = str(issue["answer_bead"])
+    replies = issue.get("replies") or ()
+    number = issue["number"]
+    return Item(
+        f"#{number} is closed on GitHub and open in the record"
+        if closed_there
+        else f"#{number} is closeable and still open",
+        CLOSEABLE,
+        alias,
+        beads.state(alias) if beads is not None else "unconfirmed: no bead store",
+        since=str(replies[-1]["date"]) if replies else str(issue["opened"]),
+        step=(
+            "post nothing: record the final comment under replies as final, and the "
+            "entry's state and closed"
+            if closed_there
+            else "check GitHub, main and the deployed site; if the issue is still open "
+            "there, post the final comment from check_requests --draft N and close it; "
+            "then record the reply and the close"
+        ),
+    )
 
 
 def _queued(
@@ -1299,14 +1439,23 @@ def sweep(
     register = check_requests.load_register()
     blockers = Blockers(beads, None if offline else fetch)
     repository = str(record["repository"])
+    github = github_section(record, offline=offline, compare_github=compare_github)
     return [
-        github_section(record, offline=offline, compare_github=compare_github),
+        github,
         repositories_section(
             coverage, watch, beads, offline=offline, heads=heads, history=history
         ),
         kingbird_section(coverage, beads, today, capture=capture),
         catalogues_section(coverage, today),
-        queues_section(coverage, record, register, beads, today=today, blockers=blockers),
+        queues_section(
+            coverage,
+            record,
+            register,
+            beads,
+            today=today,
+            blockers=blockers,
+            closed_there=closed_on_github(github),
+        ),
         regularization_section(beads),
         blocked_section(beads, blockers, repository),
         backlog_section(record, register, beads),
@@ -1330,11 +1479,14 @@ def markdown(sections: Sequence[Section], today: date) -> str:
     """The report: what needs action and what was not checked first, then each source."""
     action = [(s.title, i) for s in sections for i in s.items if i.state in ACTION]
     orphans = sum(item.state == NEEDS_OWNER for _, item in action)
+    resolved = sum(item.state == RESOLVED for _, item in action)
+    closeable = sum(item.state == CLOSEABLE for _, item in action)
     owned_count = sum(item.state == OWNED for s in sections for item in s.items)
     unchecked = [line for section in sections for line in section.unchecked]
     summary = (
         f"{_count(orphans, 'item')} without an open bead to own it, "
-        f"{_count(len(action) - orphans, 'item')} whose blocker has resolved, "
+        f"{_count(resolved, 'item')} whose blocker has resolved, "
+        f"{_count(closeable, 'closeable issue')} still open, "
         f"{_count(owned_count, 'item')} owned by an open bead, and "
         f"{_count(len(unchecked), 'source')} not checked."
     )

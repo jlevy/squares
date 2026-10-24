@@ -86,6 +86,8 @@ WARN_DEAD_DEFERRALS = "--warn-dead-deferrals"
 # The agenda schema's `bead` pattern is `^think-[a-z0-9]+$`; the part after the prefix
 # is the alias table's key.
 ALIAS_PREFIX = "think-"
+#: What a queued result or ask that names no bead is collected with: it defers to no one.
+NO_BEAD = "no bead"
 IN_PROGRESS = "in_progress"
 TERMINAL_STATES = frozenset({"complete", "stopped"})
 
@@ -266,8 +268,9 @@ def deferrals(
 
     This check asks whether what is named still owns the work; whether one is named is
     the records' own business. Their schemas require a bead of a pending intake, a
-    deferred conflict and an issue's `answer_bead`. A queued result or ask may still
-    name none, which `devtools.intake_sweep` reports as unowned, and a read in
+    deferred conflict, an issue's `answer_bead` and, since think-du1e, each queued
+    result and ask. A queued item that names none anyway is collected with `NO_BEAD`,
+    so a record the schema check did not see still fails here; a read in
     `intake-watch.yaml` without a bead found nothing to import, so it defers nothing.
     """
     named: list[tuple[str, str]] = []
@@ -292,14 +295,14 @@ def deferrals(
         if issue.get("answer_bead"):
             named.append((where, str(issue["answer_bead"])))
         named.extend(
-            (f"{where} queued result {result.get('key')}", str(result["bead"]))
+            (f"{where} queued result {result.get('key')}", str(result.get("bead") or NO_BEAD))
             for result in issue.get("results") or ()
-            if result.get("queued") and result.get("bead")
+            if result.get("queued")
         )
         named.extend(
-            (f"{where} queued ask", str(ask["bead"]))
+            (f"{where} queued ask", str(ask.get("bead") or NO_BEAD))
             for ask in issue.get("asks") or ()
-            if ask.get("state") == "queued" and ask.get("bead")
+            if ask.get("state") == "queued"
         )
     named.extend(
         (
@@ -349,7 +352,7 @@ def deferral_problems(
                 "kind": "dead_deferral",
                 "bead": alias,
                 "parent": where,
-                "status": found or "no such bead",
+                "status": "unowned" if alias == NO_BEAD else found or "no such bead",
             }
         )
     return problems

@@ -595,7 +595,7 @@ repositories:
   - url: https://github.com/wand125/square-packing
     read_through: f30cc2cf345a3a3f6af778925f354d9ec979868b
     read_on: '2026-10-12'
-    bead: think-xzob
+    bead: think-flxm
     note: >-
       One commit of 12 October (01:00 UTC) past the 04fbef0 read: f30cc2c adds
       tools/sqverify_continuous/, this repository's sqverify-fast with a continuous-angle mode
@@ -646,7 +646,7 @@ repositories:
   - url: https://github.com/wand125/square-packing
     read_through: d4a19815e2b0cca5faa562f00c7a80b93d3402ef
     read_on: '2026-10-12'
-    bead: think-xzob
+    bead: think-flxm
     note: >-
       One commit of 12 October (01:29 UTC) past the f30cc2c read: d4a1981 makes
       tools/sqverify_continuous v4 (source_sha256 619b3c00...), adding --resume, which takes
@@ -731,7 +731,7 @@ repositories:
   - url: https://github.com/wand125/square-packing
     read_through: 9a28a84bd55dc124bfa2919bb6c4fb504dda3149
     read_on: '2026-10-14'
-    bead: think-xzob
+    bead: think-flxm
     note: >-
       The 21 commits of 12 to 14 October (UTC) from d4a1981 to 9a28a84 past the f30cc2c read.
       d4a1981 makes tools/sqverify_continuous v4, with --resume, the continuous-angle route for
@@ -822,7 +822,7 @@ repositories:
   - url: https://github.com/franciscouzo/square-packing
     read_through: 58a783368d4b7e70bb800f0009ea9ca03e578739
     read_on: '2026-10-15'
-    bead: think-8krd
+    bead: think-kzme
     note: >-
       The head. 43ac7d2 is #607's pin (T-189). 4e4c8ce rewrites the index for n < 1024: its
       certificates/n237.cert is T-190, retained by the couzo-n237-2026-10-15 packet at this
@@ -831,10 +831,16 @@ repositories:
       adds Göbel's square and strip bounds (gobel_bounds.json, GOBEL_COMPARISON.md,
       gobel_comparison.csv), classical closed forms with no discovery claimed, which #613 asks
       the owner about. The couzo-index-2026-10-15 packet pins 4e4c8ce and retains the 253
-      certificates its rows record, and the history walk of Couzo's watched publications holds
-      the rest: the rows above Göbel's construction, which wait with 58a7833's bounds on #613
+      certificates its rows record, and the history walk of Couzo's watched publications holds the
+      rest: the rows above Göbel's construction, which waited with 58a7833's bounds on #613
       (think-8krd), the sub-print re-certifications (think-fwa9) and the index deletion bounds
-      (think-f2io). This read now names think-8krd.
+      (think-f2io). The owner answered all three on 23 October 2026: Göbel's constructions are
+      earlier reports, so neither those rows nor 58a7833's bounds, rational enclosures of Göbel's
+      sides, are recorded; the re-certifications restate the reports they beat; and a bound one
+      square below the next count's certificate is an earlier report (D6). Whether such a bound has
+      a row of its own, whether an issue's claim at 743, 798, 855 or 985 gives it one, and the three
+      bounds at 751, 752 and 927 that delete two or three squares wait, so this read now names
+      think-kzme.
   - url: https://github.com/wand125/square-packing
     read_through: b57e66712b5f722b39fcb703692006062c7d9eb7
     read_on: '2026-10-15'
@@ -1350,3 +1356,18 @@ repositories:
       copyright Mykhailo Polkovskyi (Mishapolk), which the author's comment on #719
       (issuecomment-6350348588) says covers every certificate, catalogue, manifest and tool, so
       a packet pinned at 17cc220 holds the same certificates with their licence.
+  # The #732 import (think-0gp6, c-lane-732-import-1023): the head past the 17cc220 read.
+  - url: https://github.com/Mishapolk/square-packing-records
+    read_through: 7b6366fb5e7643772541da21329cda4705be57d5
+    read_on: '2026-10-23'
+    bead: think-0gp6
+    note: >-
+      The mishapolk-issue732-2026-10-22 packet pins 17cc220 and retains the 77 certificates
+      the walk of issue 732 records as rows, pinning the other 313 at 325 to 1024 by digest.
+      7b6366f (2026-10-23T01:50:22Z), the head, removes certificates/3000-3999/n3426.cert,
+      whose side was above its grid side, and sets 3426 to the grid in upper_bounds.json,
+      certified_bounds.json, manifest.json and census.json, with its SHA256SUMS line and the
+      README's counts (5,467), as the author's comment on #732 (issuecomment-6355486108)
+      says. It changes nothing at or below 1024, so the packet stays at 17cc220, whose
+      indexes have the SHA-256 the issue states. 3426 is among the rows above 1024 that wait
+      on the owner (think-f2io). Nothing else to import.

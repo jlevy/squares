@@ -33,7 +33,7 @@ FAMILIES = {
     ),
     "homepage-atlas": (
         "input-response",
-        "Prepare inert tiles and expand the existing static Atlas preview on input.",
+        "Prepare inert tiles; change view, size or zoom on input and scroll.",
     ),
     "news-cards": (
         "input-response",

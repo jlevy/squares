@@ -326,12 +326,12 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 | [T-179](packing/frontier/RESULTS.md) | 145, 146, 147, 148, 149 | `V0` | `C1` | `S3` | `previously-published` | A measure of points, segments and rectangles that wand125/square-packing published on 13 October 2026, reported on no issue, is reported to prove s(145) >= 306/25 = 12.24. |
 | [T-184](packing/frontier/RESULTS.md) | 76 | `V3` | `C1` | `S3` | `previously-published` | Benjamin Greff reports s(76) = 9: the lower half by a mixed cover, the upper half by the 9 x 9 grid. |
 | [T-191](packing/frontier/RESULTS.md) | 95 | `V3` | `C1` | `S3` | `previously-published` | Benjamin Greff reports s(95) = 10: the lower half by a mixed cover, the upper half by the 10 x 10 grid. |
+| [T-192](packing/frontier/RESULTS.md) | 28 | `V0` | `C1` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 15 October 2026 and reported on no issue, is reported to prove s(28) > 1149/200 = 5.745. |
 | [T-046](packing/frontier/RESULTS.md) | 18, 19, 20, 26, 27, 28, 29, 30, 31, 37, 38, 39, 40, 41, 42, 43, 44, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 86, 88, 89, 90, 91, 94, 95 | `V0` | `C0` | `S3` | `previously-published` | wand125/square-packing-bounds reports one standing rectangle-density certificate for each of 48 counts from n = 18 to n = 95, added or raised between 26 and 28 September 2026. |
 | [T-132](packing/frontier/RESULTS.md) | 29 | `V0` | `C0` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 10 October 2026 and reported on jlevy/squares#446, is reported to prove s(29) >= 291/50 = 5.82. |
 | [T-142](packing/frontier/RESULTS.md) | 28 | `V0` | `C0` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 10 October 2026 and reported on no issue, is reported to prove s(28) >= 2297/400 = 5.7425. |
 | [T-143](packing/frontier/RESULTS.md) | 30 | `V0` | `C0` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 10 October 2026 and reported on no issue, is reported to prove s(30) >= 2357/400 = 5.8925. |
 | [T-144](packing/frontier/RESULTS.md) | 122, 123, 124, 125, 126 | `V0` | `C0` | `S3` | `previously-published` | A measure of points, segments and rectangles that wand125/square-packing published on 10 October 2026, reported on no issue, is reported to prove s(122) >= 563/50 = 11.26. |
-| [T-192](packing/frontier/RESULTS.md) | 28 | `V0` | `C0` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 15 October 2026 and reported on no issue, is reported to prove s(28) > 1149/200 = 5.745. |
 | [T-200](packing/frontier/RESULTS.md) | 38 | `V0` | `C0` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 16 October 2026 and reported in jlevy/squares#446, is reported to prove s(38) >= 2631/400 = 6.5775. |
 | [T-201](packing/frontier/RESULTS.md) | 40 | `V0` | `C0` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 16 October 2026 and reported in jlevy/squares#446, is reported to prove s(40) >= 1347/200 = 6.735. |
 | [T-202](packing/frontier/RESULTS.md) | 41 | `V0` | `C0` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 16 October 2026 and reported in jlevy/squares#446, is reported to prove s(41) >= 2721/400 = 6.8025. |
@@ -385,6 +385,7 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 | [T-225](packing/frontier/RESULTS.md) | 204, 227, 229, 260 | `V3` | `C3` | `S2` | `previously-published` | Four complete rational source certificates report finite upper-bound improvements at the exact sides they state: s(204) <= 14.808642840591493923068442871459, s(227) <= 15.563625652325149084792443723702, s(229) <= 15.650161513876431064009548865321 and s(260) <= 16.645753250519812194746296653316. |
 | [T-228](packing/frontier/RESULTS.md) | 204 | `V3` | `C3` | `S2` | `previously-published` | One complete rational source certificate of issue #675 reports a finite upper-bound improvement at the exact side it states: s(204) <= 101859759444979981360793459/6878398651426000000000000, below his #670 (T-226). |
 | [T-229](packing/frontier/RESULTS.md) | 105, 204 | `V3` | `C3` | `S2` | `previously-published` | Two complete rational source certificates of issue 719 report finite upper-bound improvements at the exact sides they state: s(105) <= 674331486483935962030285457609/62500000000000000000000000000 and s(204) <= 882663895519250432/59604644775390625, below the case’s house best packing at each when it was reported, T-174 at 105 by 5.18e-12 and T-225 at 204 by 1.006e-8. |
+| [T-231](packing/frontier/RESULTS.md) | 204 | `V3` | `C3` | `S2` | `previously-published` | One complete rational source certificate of issue 719 reports a finite upper-bound improvement at the exact side it states: s(204) <= 14.808642830513087197802415708703, below T-229, the case’s house best packing when it was registered here, by 1.48e-11, and below T-225, the house when the author claimed it, by 1.01e-8. |
 | [T-120](packing/frontier/RESULTS.md) | 102 | `V0` | `C0` | `S2` | `previously-published` | Evan Daniel reports s(102) <= alpha_102, where alpha_102 is the feasible side of the source configuration and the selected root of the degree-8 integer polynomial in reported-catalogue.json, new_form_claims.102, with its retained rational root interval, whose ends agree to 24 places, so s(102) <= 10.607174680176051125342523… The same source asserts that this polynomial is minimal; that additional algebraic assertion has not been independently established here. |
 | [T-121](packing/frontier/RESULTS.md) | 106 | `V0` | `C0` | `S2` | `previously-published` | Evan Daniel reports s(106) <= alpha_106, where alpha_106 is the feasible side of the source configuration and the selected root of the degree-32 integer polynomial in reported-catalogue.json, new_form_claims.106, with its retained rational root interval, whose ends agree to 24 places, so s(106) <= 10.822908044132847555086207… The same source asserts that this polynomial is minimal; that additional algebraic assertion has not been independently established here. |
 | [T-122](packing/frontier/RESULTS.md) | 152 | `V0` | `C0` | `S2` | `previously-published` | Evan Daniel reports s(152) <= alpha_152, where alpha_152 is the feasible side of the source configuration and the selected root of the degree-40 integer polynomial in reported-catalogue.json, new_form_claims.152, with its retained rational root interval, whose ends agree to 24 places, so s(152) <= 12.830718800976609954865516… The same source asserts that this polynomial is minimal; that additional algebraic assertion has not been independently established here. |
@@ -433,7 +434,7 @@ hypothesis status and summarizes experiment verdicts, and the
 | Explorations | 50 | 30 linked to proposed hypotheses; 20 uncodified |
 | Hypotheses | 283 | 74 confirmed; 48 refuted; 75 blocked; 24 unresolved; 20 open; 37 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
 | Experiments | 246 | 94 accepted; 53 rejected; 63 unresolved; 12 baseline; 18 blocked; 5 abandoned; 0 in progress; 1 exhausted |
-| Frontier results | 230 | 230 registered, 198 by others |
+| Frontier results | 231 | 231 registered, 199 by others |
 
 <!-- END CURRENT-RESEARCH-STATUS -->
 
@@ -693,9 +694,13 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [Soundness Review: wand125’s `sqverify_continuous`, v3 and v4](docs/project/reviews/review-2026-10-23-wand125-sqverify-continuous-soundness.md) | dated review record | record | retained | — |
+| [Evan Daniel’s Grade-C Local Minima (Theorem C): Mathematical Review](docs/project/reviews/review-2026-10-23-evand-grade-c-theorem-c.md) | dated review record | record | retained | — |
 | [CI and Release Latency Audit, 22 October 2026](docs/project/reviews/review-2026-10-22-ci-release-latency.md) | dated review record | record | retained | — |
 | [Contributor Credit Link Audit, 22 October 2026](packing/contributors/reviews/2026-10-22-credit-link-audit.md) | dated review record | record | retained | — |
 | [Feature: Site Navigation and Page Hierarchy](docs/project/specs/active/plan-2026-10-22-site-navigation.md) | implementation plan | current | transient | — |
+| [Review: Mykhailo Polkovskyi’s Second Certificate at 204, from Issue #719](docs/project/reviews/review-2026-10-23-mishapolk-n204.md) | dated review record | record | retained | — |
+| [Feature: Flip Regularization](docs/project/specs/active/plan-2026-10-23-flip-regularization.md) | implementation plan | current | transient | — |
 | [Review: Mykhailo Polkovskyi’s Certificates at 105 and 204 from Issue #719 (T-229)](docs/project/reviews/review-2026-10-22-mishapolk-719.md) | dated review record | record | retained | — |
 | [Review: Francisco Couzo’s Certificates at 204, 227 and 229 from Issues #670, #672 and #675 (T-226, T-227, T-228)](docs/project/reviews/review-2026-10-22-couzo-670-672-675.md) | dated review record | record | retained | — |
 | [Profile Coverage and Result-Intake Boundaries, 21 October 2026](docs/project/reviews/review-2026-10-21-profile-coverage.md) | dated review record | record | retained | — |
@@ -741,6 +746,7 @@ case or experiment separately.
 | [Lane Records for the Backlog Ledger of 22 October](packing/campaign/issue-intake/upper-bounds-backlog-20261022/lane-claims/README.md) | source retention and archive policy | record | retained | — |
 | [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/upper-bounds-issue719-20261022/README.md) | generated status view | generated | generated | — |
 | [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/upper-bounds-couzo-history-20261022/README.md) | generated status view | generated | generated | — |
+| [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/upper-bounds-issue732-20261023/README.md) | generated status view | generated | generated | — |
 | [Mathematical Review of the n = 108 Fine-Net Certificate](docs/project/reviews/review-2026-10-18-n108-fine-net-mathematics-max.md) | dated review record | record | retained | — |
 | [Mathematical Review of wand125’s n108 Measure Certificate](docs/project/reviews/review-2026-10-18-wand125-n108-certificate-mathematics.md) | dated review record | record | retained | — |
 | [Review: The Rational Upper-Bound Imports of 11 to 15 October (#506 to #607)](docs/project/reviews/review-2026-10-16-upper-bound-imports-506-607.md) | dated review record | record | retained | — |
@@ -874,6 +880,7 @@ case or experiment separately.
 | [Regularization Runs After the 22 October Adoption of T-225 (think-ql4v)](packing/cases/regularized_drawings/think-ql4v-2026-10-22/README.md) | source retention and archive policy | record | retained | — |
 | [Regularization Runs After the 23 October Adoption of T-229 (think-4h23)](packing/cases/regularized_drawings/think-4h23-2026-10-23/README.md) | source retention and archive policy | record | retained | — |
 | [Regularization Runs After the 23 October Adoption of T-230 (think-icp1)](packing/cases/regularized_drawings/think-icp1-2026-10-23/README.md) | source retention and archive policy | record | retained | — |
+| [Regularization Runs After the 24 October Adoption of T-231 (think-h01y)](packing/cases/regularized_drawings/think-h01y-2026-10-24/README.md) | source retention and archive policy | record | retained | — |
 | [Issue 422 Exact Feasibility Review](docs/project/reviews/review-2026-10-07-squish-second-update-mathematics.md) | dated review record | record | retained | — |
 | [Second SQUISH Update: Complete Semantic Binding Review](docs/project/reviews/review-2026-10-07-squish-second-update-semantic-binding.md) | dated review record | record | retained | — |
 | [Mathematical review of the SQUISH October 7 follow-up](docs/project/reviews/review-2026-10-07-squish-update-mathematics.md) | dated review record | record | retained | — |
@@ -4736,7 +4743,8 @@ Elsewhere *house* has the same modifier sense of “the project’s own”: the 
 A **house drawing** is that renderer’s picture of the house best packing as published;
 the count’s **default picture** is its regularized view where the
 [regularization policy](docs/project/policies/regularization-policy.md#12-the-default-picture)
-draws one, and the house drawing everywhere else.
+draws one, and the house drawing everywhere else, turned into its canonical pose by
+[flip regularization](docs/project/policies/regularization-policy.md#13-flip-regularization).
 The regularization policy’s contact-shading *house rule* (gap $2 \times 10^{-6}$, beside
 the workbench’s stage rule) belongs to that renderer and is unrelated to the adoption
 rule.

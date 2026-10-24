@@ -259,6 +259,18 @@ def tally_credits(
     return CreditTally(pairs, counts, latest)
 
 
+#: The dot between two counts of a tally ("75 people · 114 records"), on every surface
+#: that sets counts in a line. Site.css widens its two word spaces by `--site-tally-gap`
+#: (paper-design.md, Tallies; the owner, 2026-10-23). The spaces stay in the text, so
+#: a long tally still wraps either side of a dot and reads as it did without styles.
+TALLY_SEPARATOR = '<span class="site-tally-sep"> · </span>'
+
+
+def join_tally(parts: Iterable[str]) -> str:
+    """A tally's counts in one line, each two set apart by `TALLY_SEPARATOR`."""
+    return TALLY_SEPARATOR.join(parts)
+
+
 def _link(text: str, href: str | None) -> str:
     shown = html.escape(text)
     return shown if href is None else f'<a href="{html.escape(href, quote=True)}">{shown}</a>'

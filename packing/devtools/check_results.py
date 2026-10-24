@@ -10,17 +10,23 @@ each conditional claim's weakest premise chain on each axis
 and V2, and refuses unsupported promotion, unexplained understatement and a
 confirmation above the verification. It also resolves evidence, repository-file and
 `produced_by` references -- the campaign records a result came out of, which must
-exist -- requires retained controls at C3 and above, holds every review in `reviews`
+exist -- holds each entry's `scope` to the scopes of the evidence it cites
+(`scope_problems`) and each case bound from a recent source, upper and lower, to an
+entry that cites it and covers its count (`coverage_problems`), and each verified case
+bound on a recent result by others to a mapped review (`verified_lane_review_problems`),
+requires retained controls at C3 and above, holds every review in `reviews`
 to a mapped, non-superseded, dated document (two adversarial AI reviews by distinct
 reviewers and a human oversight record at rung 4; human formalization reviews, an
 axiom receipt and an open-review pointer at rung 5), and rejects unknown result ids
 in the reader tier. It holds every `headline` to one table cell that states no
 number its claim does not, dates every result of this project by `established`
 and every result by others by `attribution.published`, never both, and requires
-each entry's `registered` date. It requires each entry's `kind`, one of `KINDS`,
-and cross-checks it against the relations the headline and the claim state and
-the claims of the cited evidence (`kind_problems`). It holds a `superseded_by`, the
-later results a result of a kind that is no bound declares imply it in whole or in part,
+each entry's `registered` date and a `significance.by` of more than one word, which a
+YAML comment cut short on three entries (`significance_by_problems`). It requires
+each entry's `kind`, one of `KINDS`, and cross-checks it against the relations the
+headline and the claim state and the claims of the cited evidence (`kind_problems`).
+It holds a `superseded_by`, the later results a result of a kind that is no bound
+declares imply it in whole or in part,
 to registered results dated no earlier, on a case it shares, and refuses one on a bound,
 whose supersession is derived (`superseded_by_problems`). It holds a `builds_on`, which
 puts `after …` in the credit of a result of this project, to the sources the
@@ -716,17 +722,25 @@ LOWER_BOUND_FIELDS = ("reported_lower_bound", "verified_lower_bound")
 BOUND_FIELDS = (*LOWER_BOUND_FIELDS, "reported_upper_bound", "verified_upper_bound")
 
 
+def case_packings(frontier: Path = FRONTIER) -> list[Mapping[str, Any]]:
+    """Each case record's `packing` front matter, in `n` order."""
+    return [_frontmatter(path).get("packing") or {} for path in sorted(frontier.glob("n-*.md"))]
+
+
 def case_bound_evidence(
-    frontier: Path = FRONTIER, fields: tuple[str, ...] = LOWER_BOUND_FIELDS
+    frontier: Path = FRONTIER,
+    fields: tuple[str, ...] = LOWER_BOUND_FIELDS,
+    packings: Sequence[Mapping[str, Any]] | None = None,
 ) -> dict[int, set[str]]:
     """The evidence each case's bound fields cite, by `n`; the lower bounds by default.
 
     Both lanes, because a reported bound is a result the record acts on as surely as a
     verified one: it is registered when the source is taken in and waits on a replay.
+    `packings`, from `case_packings`, spares a caller that asks for several fields
+    reading every record again for each.
     """
     cited: dict[int, set[str]] = {}
-    for path in sorted(frontier.glob("n-*.md")):
-        case = _frontmatter(path).get("packing") or {}
+    for case in case_packings(frontier) if packings is None else packings:
         ids: set[str] = set()
         for field in fields:
             ids.update((case.get(field) or {}).get("evidence") or [])
@@ -1473,19 +1487,25 @@ def regularized_drawings_problems(
     return problems
 
 
+UPPER_BOUND_FIELDS = ("reported_upper_bound", "verified_upper_bound")
+
+
 def coverage_problems(
     results: list[dict],
     evidence_index: dict[str, dict],
     sources: dict[str, dict],
     cases: dict[int, set[str]],
+    bound: str = "lower",
 ) -> list[str]:
-    """Case lower bounds from recent sources that no register entry covers.
+    """Case bounds from recent sources that no register entry covers.
 
     The rule the register keeps (plan-2026-09-29-third-party-results-register): every
     result of this project, and every result by others published since the project
-    began that the record acts on. A case's lower bound, reported or verified, is the
-    record acting on it; the entry that covers it must cite the same evidence and name
-    that `n` in its scope.
+    began that the record acts on. A case's bound, reported or verified, is the record
+    acting on it; the entry that covers it must cite the same evidence and name that `n`
+    in its scope. `cases` holds one side's bound evidence, which `bound` names; the
+    register checks both, since the upper bounds by others T-056, T-057 and T-065 were
+    once registered by convention alone (think-506q).
     """
     covered: dict[str, set[int]] = {}
     for record in results:
@@ -1497,10 +1517,126 @@ def coverage_problems(
             recent = recent_evidence(evidence_index.get(ref) or {}, sources)
             if recent and n not in covered.get(ref, set()):
                 problems.append(
-                    f"n-{n:03d}: its lower bound cites {ref}, and no registered result "
+                    f"n-{n:03d}: its {bound} bound cites {ref}, and no registered result "
                     f"citing it covers n = {n}"
                 )
     return problems
+
+
+#: A review document's path, wherever a recorded read names one in its prose.
+_REVIEW_PATH = re.compile(r"docs/project/reviews/[A-Za-z0-9._/-]+\.md")
+
+
+#: The review kinds that read a result's mathematics. An oversight record reviews the
+#: AI reviews and the trust boundary, not the argument (epistemics.md, Review Records).
+MATHEMATICS_REVIEW_KINDS = frozenset({"adversarial", "confirming", "formalization"})
+
+
+def accepting_review(review: Mapping[str, Any]) -> bool:
+    """A register review that reads the mathematics and accepts it: a kind in
+    `MATHEMATICS_REVIEW_KINDS` with a verdict of `accepted` or `defects-resolved`. A
+    refuted or open-defect verdict reviews the result without letting it stand."""
+    return (
+        review.get("kind") in MATHEMATICS_REVIEW_KINDS
+        and review.get("verdict") in ACCEPTING_VERDICTS
+    )
+
+
+def mapped_review_reads(entry: Mapping[str, Any], document_map: Mapping[str, Any]) -> set[str]:
+    """The mapped review documents an evidence entry's own record of a read names: an
+    `external_review` that read the argument and found no defect (`informally-verified`,
+    with its date, reviewer and note), or a `proof.audit_record`, naming by its full
+    path a review the document map holds as one, not superseded."""
+    texts: list[str] = []
+    read = entry.get("external_review") or {}
+    if read.get("state") == "informally-verified" and _qualifying_read(read):
+        texts.extend((str(read.get("reviewed_by") or ""), str(read.get("note") or "")))
+    if audit := (entry.get("proof") or {}).get("audit_record"):
+        texts.append(str(audit))
+    found: set[str] = set()
+    for path in (path for text in texts for path in _REVIEW_PATH.findall(text)):
+        mapped = _document_map_entry(path, dict(document_map))
+        if (
+            mapped
+            and mapped.get("role") == "review"
+            and mapped.get("lifecycle") != "superseded"
+        ):
+            found.add(path)
+    return found
+
+
+def verified_lane_review_problems(
+    results: Sequence[Mapping[str, Any]],
+    evidence_index: Mapping[str, Mapping[str, Any]],
+    sources: Mapping[str, Mapping[str, Any]],
+    document_map: Mapping[str, Any],
+    lanes: Mapping[str, Mapping[int, set[str]]],
+) -> list[str]:
+    """Verified case bounds resting on a result by others that no mapped review covers.
+
+    The verified lane takes a result by others only after a complete replay here and a
+    review of its mathematics (frontier/README.md; epistemics.md's *Integrated*). The
+    replay half is `sqpack.assurance.verified_here`, which the case-lane check applies to
+    every verified bound; nothing held the review half (think-mt6e, the import review of
+    2026-10-01, W7), so a published proof by others nobody here read, or a replay with no
+    review, could carry a verified bound. A value is reviewed when a register entry that
+    cites one of its others' evidence entries and covers the count lists a review of its
+    mathematics that accepts it (`accepting_review`; held mapped by `review_problems`),
+    or when one of those entries records a read that found no defect naming a mapped
+    review document (`mapped_review_reads`). A verdict is read, not judged: whether the
+    review read the mathematics stays the pull-request reviewer's question. `lanes` maps
+    a lane's name to its verified field's evidence by count; the rule is the register's
+    for results by others, a source dated from 22 August 2026 (`recent_evidence`).
+    """
+    holders: dict[str, list[Mapping[str, Any]]] = {}
+    for record in results:
+        for ref in record["evidence"]:
+            holders.setdefault(ref, []).append(record)
+    problems: list[str] = []
+    for lane, cases in lanes.items():
+        for n, ids in sorted(cases.items()):
+            others = sorted(
+                ref
+                for ref in ids
+                if (entry := evidence_index.get(ref)) is not None
+                and entry.get("novelty") == ATTRIBUTED_NOVELTY
+                and recent_evidence(entry, sources)
+            )
+            if not others:
+                continue
+            reviewed = any(
+                mapped_review_reads(evidence_index[ref], document_map)
+                or any(
+                    n in scope_values(record["scope"])
+                    and any(accepting_review(review) for review in record.get("reviews") or ())
+                    for record in holders.get(ref, ())
+                )
+                for ref in others
+            )
+            if not reviewed:
+                problems.append(
+                    f"n-{n:03d}: its verified {lane} bound rests on {', '.join(others)}, a "
+                    "result by others, and no register entry covering it lists a review nor "
+                    "does the evidence record a read in a mapped review document"
+                )
+    return problems
+
+
+def scope_problems(record: Mapping[str, Any], cited: Sequence[Mapping[str, Any]]) -> list[str]:
+    """The counts of a result's `scope` that none of its cited evidence covers.
+
+    Stage 3's record rule: the entry's scope is covered by the scopes of the evidence it
+    cites. T-045 once claimed s(32) >= 119/20 and cited one entry whose scope was 27, 28
+    and 31 (the import review of 2026-10-01, W7; think-506q).
+    """
+    held: set[int] = set()
+    for entry in cited:
+        held |= scope_values(entry["scope"])
+    missing = sorted(scope_values(record["scope"]) - held)
+    if not missing:
+        return []
+    shown = ", ".join(map(str, missing[:12])) + (", ..." if len(missing) > 12 else "")
+    return [f"{record['id']}: scope holds n = {shown}, which no evidence it cites covers"]
 
 
 def _iso_date(value: object) -> date | None:
@@ -1508,6 +1644,26 @@ def _iso_date(value: object) -> date | None:
         return date.fromisoformat(str(value))
     except ValueError:
         return None
+
+
+def significance_by_problems(record: Mapping[str, Any]) -> list[str]:
+    """A `significance.by` of one word, which says nothing of who scored the result.
+
+    YAML reads `` #`` after a space as the start of a comment, so an unquoted
+    `by: issue #227 intake ...` records `issue`: the scorer and the issue were lost from
+    T-056, T-057 and T-061 until they were rescored (the import review of 2026-10-01,
+    W9). A path alone is one word too, and it names a document rather than who scored
+    the result or in which role (think-nr59).
+    """
+    by = str((record.get("significance") or {}).get("by") or "")
+    if len(by.split()) >= 2:
+        return []
+    return [
+        (
+            f"{record['id']}: significance.by is one word, {by!r}: name who scored the "
+            "result, and quote a value that holds ' #', which YAML would read as a comment"
+        )
+    ]
 
 
 def registered_problems(record: dict, last_reviewed: str) -> list[str]:
@@ -1706,10 +1862,12 @@ def main() -> int:
                 if (problem := artifact_problems[path])
             )
 
+        problems.extend(scope_problems(record, cited))
         problems.extend(attribution_problems(record, sources))
         problems.extend(builds_on_problems(record, sources, cited))
         problems.extend(corrects_problems(record, sources, by_id))
         problems.extend(registered_problems(record, str(register["last_reviewed"])))
+        problems.extend(significance_by_problems(record))
         problems.extend(headline_problems(record))
         problems.extend(kind_problems(record, cited, scopes, evidence_of, by_id))
         problems.extend(superseded_by_problems(record, dated, scopes, holding))
@@ -1779,8 +1937,38 @@ def main() -> int:
             problems.append(f"{rid}: a {declared_c} rung names at least one control file")
         standings[rid] = Standing(declared_v, declared_c, derived_v, derived_c)
 
-    problems.extend(coverage_problems(results, evidence_index, sources, case_bound_evidence()))
+    packings = case_packings()
+    problems.extend(
+        coverage_problems(
+            results, evidence_index, sources, case_bound_evidence(packings=packings)
+        )
+    )
+    problems.extend(
+        coverage_problems(
+            results,
+            evidence_index,
+            sources,
+            case_bound_evidence(fields=UPPER_BOUND_FIELDS, packings=packings),
+            bound="upper",
+        )
+    )
     problems.extend(regularized_drawings_problems(register, scopes))
+    problems.extend(
+        verified_lane_review_problems(
+            results,
+            evidence_index,
+            sources,
+            document_map,
+            {
+                "lower": case_bound_evidence(
+                    fields=("verified_lower_bound",), packings=packings
+                ),
+                "upper": case_bound_evidence(
+                    fields=("verified_upper_bound",), packings=packings
+                ),
+            },
+        )
+    )
     problems.extend(rung_label_problems(results, standings))
 
     known = set(actual_ids)
@@ -1808,7 +1996,9 @@ def main() -> int:
         "supersedes all of a result a case bound rests on and never leads back, every "
         "unfinished confirmation lies above its result's rung, every regularization names "
         "a registered packing no later on the count it regularizes, by a source of its "
-        "own, every recent case lower bound is covered, every reader-tier mention exists; "
+        "own, every scope is covered by its evidence, every recent case bound is covered, "
+        "every verified bound on a recent result by others has a mapped review, "
+        "every reader-tier mention exists; "
         "by status, " + ", ".join(f"{held.count(name)} {name}" for name in STATUSES)
     )
     return 0
