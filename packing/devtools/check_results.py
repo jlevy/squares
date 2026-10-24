@@ -318,12 +318,9 @@ def _supported_rung(
     evidence_by_id = {entry["id"]: entry for entry in entries if "id" in entry}
 
     def atom_level(entry: Mapping[str, object]) -> int:
-        atom = dict(entry)
-        return _rank(
-            _derive_confirmation([atom], reviews, open_review=open_review)
-            if confirming
-            else _derive_verification([atom], reviews)
-        )
+        if not confirming:
+            return verification_level(entry, reviews)
+        return _rank(_derive_confirmation([dict(entry)], reviews, open_review=open_review))
 
     def supported_level(entry: dict) -> int:
         level = claim_support_level(entry, evidence_by_id, atom_level, confirming=confirming)
@@ -1698,6 +1695,12 @@ def derive_verification(
     reviews support (epistemics.md, Verification)."""
     entries = [entry for entry in entries if not sampled(entry)]
     return _supported_rung(entries, reviews, confirming=False, record=record)
+
+
+def verification_level(entry: Mapping[str, object], reviews: list[dict] | None = None) -> int:
+    """One evidence entry's own verification rank, before its premises: the atom
+    `derive_verification` takes along a conditional chain (`claim_support_level`)."""
+    return _rank(_derive_verification([dict(entry)], reviews))
 
 
 def _derive_verification(entries: list[dict], reviews: list[dict] | None = None) -> str:

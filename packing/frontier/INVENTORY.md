@@ -8,8 +8,8 @@ ours, which rest on someone else's argument, and how far each has been checked.
 
 ## The short version
 
-- **741** evidence records. **414** are formal; **406** of those were established here. **12** are samples, counted separately.
-- **308** rest on an argument made elsewhere, of which **7** have been read by nobody here.
+- **744** evidence records. **416** are formal; **407** of those were established here. **12** are samples, counted separately.
+- **310** rest on an argument made elsewhere, of which **8** have been read by nobody here.
 - **1** formal record proves a theorem only under a hypothesis nothing here has replayed, and is verified as that implication alone: `E-k2m4-evand-bentz4-lean-build` (ValidTilt9).
 - **43** claim to be first established here. **14** make no novelty statement at all - not assessed, which is not the same as not novel.
 
@@ -610,6 +610,9 @@ results, it is a statement about what this repository has itself examined.
 | `E-wand125-fine-net-n37-64975-report` | 0 | lower-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | `V-wand125-sqverify-proof-net` |
 | `E-fang-excess-theorem-report` | 0 | upper-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | *none held* |
 | `E-fang-excess-theorem-exact-feasibility` | 0 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | independent | full, 6 of 6: the six retained inventory certificates at 211, 241, 273, 307, 308 and 932, every wall and every pair decided by both maintained routes; the twelve kernel controls are retained separately | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-evand-arrangement-receipts`, `V-upper-bound-reports`, `V-evand-exact-certificates` |
+| `E-fang-excess-pieces-exact-replay` | 0 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | full, 18 of 18: the 18 pieces of the note's Propositions 4 and 5, theorem/PIECES.md's role theorem: the rectangles R and R', the twelve bases of n^2 - n + 1 squares for n = 15 to 26 and the four of m^2 - m squares for m = 11 to 14, every corner and every pair decided exactly in its open box | `V-fang-review-exact-checker` |
+| `E-fang-excess-note-proof` | 0 | upper-bound, conditional on Propositions 4 and 5 (the 18 pieces, each 1/10000-squeezable), discharged by `E-fang-excess-pieces-exact-replay` | verified | whatever its theorem states | elsewhere | not-reviewed | previously-published | no code | not recorded | - |
+| `E-fang-excess-lean-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
 | `E-wand125-linear-n145-1224-report` | 0 | lower-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | `V-wand125-unified-linear-verify-cpp` |
 | `E-wand125-closed-form-report` | 153 | lower-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | `V-wand125-replay4d` |
 | `E-mishapolk-593-certificate-report` | 0 | upper-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | *none held* |
@@ -767,10 +770,10 @@ results, it is a statement about what this repository has itself examined.
 
 ## What the register rests on
 
-- **assurance**: numerically-checked 5, reported 311, verified 425
-- **method**: exact-algebraic 233, interval-certified 175, numerical-multiprecision 5, proof-assistant-checked 6, proof-audited 4, published-proof 7, reported 311
-- **novelty**: apparently-novel 43, common-knowledge 4, not assessed 14, previously-published 680
-- **relationship to the producer's code**: generator 5, independent-implementation 258, not-applicable 33, same-implementation 405, shared-components 34, unknown-historical 6
+- **assurance**: numerically-checked 5, reported 312, verified 427
+- **method**: exact-algebraic 234, interval-certified 175, numerical-multiprecision 5, proof-assistant-checked 6, proof-audited 4, published-proof 8, reported 312
+- **novelty**: apparently-novel 43, common-knowledge 4, not assessed 14, previously-published 683
+- **relationship to the producer's code**: generator 5, independent-implementation 259, not-applicable 34, same-implementation 406, shared-components 34, unknown-historical 6
 
 The `cases` column is how many frontier records cite each piece of evidence, and it is the reason to read this table rather than count records. Ranked below are the *formal* records only: a `reported` record cited across the frontier may be a shared catalogue and is labelled as such, which is the register working rather than risk. The risk is a verified claim resting on an argument nobody has examined.
 

@@ -51,8 +51,11 @@ The kept output stands for what it read.
 
 ## What They Decide
 
-Nothing here is registered yet; the review proposes the `verifiers.yaml` entries and the
-records lane registers them with the evidence entries it writes.
+The review proposed the `verifiers.yaml` entries, which the records lane has since
+registered. Its `rectangle_check.py` run on the 18 pieces of the theorem’s chains was
+repeated on 24 October 2026 with the same outputs
+([`../receipts/pieces-exact-check.log`](../receipts/pieces-exact-check.log)), and the
+record holds it as `E-fang-excess-pieces-exact-replay`.
 
 | Program | Role | Decided in this run | Coverage |
 | --- | --- | --- | --- |
