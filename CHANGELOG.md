@@ -24,19 +24,20 @@ of 204 squares (issues 670 and 675) and of 227 and 229 squares (issue 672), and
 [Mykhailo Polkovskyi](packing/contributors/people/mykhailo-polkovskyi.md)’s
 re-solves of the house packings at 105 and 204 (issue 719), are confirmed at V3/C3.
 Polkovskyi’s re-solves, $5.18 \times 10^{-12}$ below the earlier house at 105 and
-$1.006 \times 10^{-8}$ below it at 204, are now the houses at both counts. The
-packings stay credited to their finders:
+$1.006 \times 10^{-8}$ below it at 204, became the houses at both counts on 23
+October. The packings stay credited to their finders:
 [Ryan Xu](packing/contributors/people/ryan-xu.md)’s at 105, as Couzo and PingYou
-Ltd refined it, and Couzo’s at 204, as
-[Evan Daniel](packing/contributors/people/evan-daniel.md) regularized it. Couzo’s
-own certificates are confirmed but no longer the smallest at their counts.
+Ltd refined it, and Couzo’s at 204, from whose issue 678 certificate Polkovskyi’s
+solve started. Couzo’s own certificates are confirmed but no longer the smallest at
+their counts.
 
 - Couzo’s issue 670 (T-226) first reported the 204-square arrangement that his
   issues 675 and 678 refine one to one: no symmetry pairs it with the house packing
   when it was reported, and 15 squares lie beyond a tenth of it. His source credits
   the 204 seed to Polkovskyi. At 227 his issue 672 (T-227) refines
   [Joost de Winter](packing/contributors/people/joost-de-winter.md)’s packing, by
-  way of Daniel’s exact form of it, to a side $1.71 \times 10^{-4}$ below it;
+  way of [Evan Daniel](packing/contributors/people/evan-daniel.md)’s exact form of
+  it, to a side $1.71 \times 10^{-4}$ below it;
   Daniel’s solved view of it (T-225) is smaller still, and at 229 Daniel’s later
   certificates (T-198, T-199) are smaller.
 - Each certificate passed this project’s maintained replay, which shares components
@@ -46,11 +47,13 @@ own certificates are confirmed but no longer the smallest at their counts.
   checkers share no code with either maintained route or the sources and decided
   every certificate again; sharp controls $10^{-30}$ past contact behaved as
   required on all four exact checkers. No source program ran here.
-- Both counts draw grid-slack’s view of the new packing; at 105 it has one more
-  uneven square than the earlier view, and the house rule keeps the smaller packing.
-  Polkovskyi’s release also holds a 204-square certificate about
-  $1.48 \times 10^{-11}$ smaller, published in the same commit; it is his, and it is
-  not yet imported or drawn. No optimality, rigidity or priority is claimed.
+- Both counts drew grid-slack’s view of the new packing, as 105 still does; there it
+  has one more uneven square than the earlier view, and the house rule keeps the
+  smaller packing. Polkovskyi’s release also held a 204-square certificate about
+  $1.48 \times 10^{-11}$ smaller, published in the same commit; it is his, and it was
+  not yet imported. No optimality, rigidity or priority is claimed.
+- That second 204 file, the same packing at its solved side, was registered as T-231
+  and has been the house at 204 since 24 October; 204 draws grid-slack’s view of it.
 
 PRs and supporting records: [\#725](https://github.com/jlevy/squares/pull/725) · [The case record at 105](packing/frontier/n-105.md) · [The case record at 204](packing/frontier/n-204.md) · [Mathematical review of Couzo’s three reports](docs/project/reviews/review-2026-10-22-couzo-670-672-675.md) · [Mathematical review of Polkovskyi’s re-solves](docs/project/reviews/review-2026-10-22-mishapolk-719.md) · [Polkovskyi’s registration request](https://github.com/jlevy/squares/issues/719).
 
@@ -377,8 +380,8 @@ houses: [Mykhailo Polkovskyi](packing/contributors/people/mykhailo-polkovskyi.md
 exact re-solves at 12 counts (T-186),
 [Evan Daniel](packing/contributors/people/evan-daniel.md)’s packing at 146 (T-187),
 and [Francisco Couzo](packing/contributors/people/francisco-couzo.md)’s at 211 and
-237 (T-188, T-190). Each re-housed count draws a regularized view of its new packing,
-or keeps the axis tool’s view where no regularized view improves on it.
+237 (T-188, T-190). Each re-housed count drew a regularized view of its new packing,
+or kept the axis tool’s view where no regularized view improved on it.
 
 - At 237 Couzo’s refinement of Polkovskyi’s packing (T-189) lies
   $1.01 \times 10^{-4}$ below the earlier ceiling, and his later certificate
@@ -389,16 +392,19 @@ or keeps the axis tool’s view where no regularized view improves on it.
   design, with five squares beyond a tenth, lies $9.29 \times 10^{-6}$ below it.
   Polkovskyi’s re-solves tighten packings the record already credits, by
   $1.25 \times 10^{-94}$ to $1.79 \times 10^{-19}$.
-- Daniel’s regularizer draws the new houses at 129, 146, 175 and 204, and at 211 by
-  the owner’s review; the grid-slack generator draws 154, 156, 232, 264, 271 and 302.
-  At 176, 237, 303 and 304 no view improves on the axis tool’s drawing, which stays.
-  Where a new drawing reads worse than the old view of the earlier packing, the
-  owner’s rule decides: “We should always be adopting the smallest packing and then
+- Daniel’s regularizer drew the new houses at 129, 146, 175 and 204, and at 211 by
+  the owner’s review; the grid-slack generator drew 154, 156, 232, 264, 271 and 302.
+  At 176, 237, 303 and 304 no view improved on the axis tool’s drawing, which stayed.
+  Where a new drawing read worse than the old view of the earlier packing, the
+  owner’s rule decided: “We should always be adopting the smallest packing and then
   regularizing it.”
 - The review reproduced every retained replay at the counts the entries cite and
   decided the certificates again on a third exact route; where a source ran this
   project’s verifier, the independence rests on the separate rational corner
   checker. No optimality, rigidity or priority is claimed.
+- Since then 271 (19 October, T-219), 154 (20 October, T-222), 303 (23 October,
+  T-230) and 204 (from 20 October; T-231 since 24 October) have been re-housed and
+  redrawn.
 
 PRs and supporting records: [\#657](https://github.com/jlevy/squares/pull/657) · [Mathematical review of 16 October](docs/project/reviews/review-2026-10-16-upper-bound-imports-506-607.md) · [The case record at 237](packing/frontier/n-237.md) · [Regularization selection at 211 to 304](packing/cases/regularized_drawings/think-z7wn-2026-10-16/selection-r3cl.md).
 
@@ -488,21 +494,24 @@ PRs and supporting records: [\#627](https://github.com/jlevy/squares/pull/627) �
 
 Significance S3: A meaningful artifact delivery: the Atlas draws regularized views at six counts whose packings were replaced on 15 October, including 176, which had shown its raw packing. No bound, witness or result changes.
 
-The Atlas now draws regularized views at 105, 129, 146, 156, 176 and 271, whose
-packings were replaced on 15 October. At 176, which had shown its raw packing, the
-light, uneven and near-axis squares fall from 70, 71 and 52 to 11, 24 and 0, and the
-full shared sides rise from 33 to 457. At 204, 272 and 303 neither generator draws a
-better view, and the drawings stay.
+From 16 October the Atlas drew regularized views at 105, 129, 146, 156, 176 and 271,
+whose packings were replaced on 15 October. At 176, which had shown its raw packing,
+the light, uneven and near-axis squares fell from 70, 71 and 52 to 11, 24 and 0, and
+the full shared sides rose from 33 to 457. At 204, 272 and 303 neither generator
+drew a better view, and the drawings stayed.
 
-- [Evan Daniel](packing/contributors/people/evan-daniel.md)’s regularizer draws five
-  of the views and the grid-slack generator draws the one at 105. Each view is
+- [Evan Daniel](packing/contributors/people/evan-daniel.md)’s regularizer drew five
+  of the views and the grid-slack generator drew the one at 105. Each view was
   exactly verified at its packing’s side, and each was reproduced byte for byte from
-  the current witnesses, since the original runs never left their host.
-- The drawings change no bound and no witness. The downloadable posters were left
+  the witnesses then current, since the original runs never left their host.
+- The drawings changed no bound and no witness. The downloadable posters were left
   to their next edition.
 - None of the six views is drawn now. #657, merged early on 17 October, re-housed
   129, 146, 156, 176 and 271 and redrew each from its new packing; 176 draws the axis
-  tool’s view of its new house (T-186). 105 was re-housed on 23 October (T-229).
+  tool’s view of its new house (T-186). 105 was re-housed on 17 October (T-174) and
+  23 October (T-229). The drawings kept at 204, 272 and 303 have been replaced too:
+  #657 re-housed 204 and 303, 272 was re-housed on 17 October (T-174), and each now
+  draws a view of a later house.
 
 PRs and supporting records: [\#644](https://github.com/jlevy/squares/pull/644) · [Regularization selection at 105, 129 and 146](packing/cases/regularized_drawings/think-la7h-2026-10-16/selection-3a.md) · [Regularization selection at 156, 176 and 271](packing/cases/regularized_drawings/think-la7h-2026-10-16/selection-3a-d1.md) · [Regularization process](docs/project/guides/regularization-process.md).
 
