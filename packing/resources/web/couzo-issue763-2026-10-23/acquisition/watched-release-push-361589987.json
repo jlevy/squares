@@ -27,6 +27,11 @@
    "printed": "28.809159596152"
   },
   {
+   "n": 859,
+   "certificate": "certificates/parents/fd3b49f57ca5ffe4d1629d670fbfd3265e38ac15f52292b193d251038e7dad08.cert",
+   "printed": "29.809159596152"
+  },
+  {
    "n": 919,
    "certificate": "certificates/best/n919.cert",
    "printed": "30.809159596954"

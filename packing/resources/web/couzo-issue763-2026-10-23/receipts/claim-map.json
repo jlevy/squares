@@ -5848,6 +5848,7 @@
       "kind": "construction",
       "n": 445,
       "notebook": {"kaggle_submission":"submissions/kaggle-push-20261022-q","license":"Apache-2.0","notebook":"https://www.kaggle.com/code/kirilltym/22-408512-cpu-alternating-reclosure","notebook_version":3,"original_credits":"Earlier construction credits retained in the notebook and its source notices.","run":361239073,"source_notices":"submissions/kaggle-public-portfolio-20261022/SOURCE_NOTICES.md"},
+      "recipe_certificate": "certificates/parents/c635120ea1972ac3904f244a8d2d0f4c7063838f13ec11bbd1b4905217abbbfe.cert",
       "source_n": 445
     },
     {
@@ -5895,6 +5896,7 @@
       "kind": "construction",
       "n": 488,
       "notebook": {"kaggle_submission":"submissions/kaggle-push-20261022-q","license":"Apache-2.0","notebook":"https://www.kaggle.com/code/kirilltym/22-408512-cpu-alternating-reclosure","notebook_version":3,"original_credits":"Earlier construction credits retained in the notebook and its source notices.","run":361239073,"source_notices":"submissions/kaggle-public-portfolio-20261022/SOURCE_NOTICES.md"},
+      "recipe_certificate": "certificates/parents/67df4acb584e77b56acb9aefb7d54ce6d55a697b03b37c725900dd931ebf043f.cert",
       "source_n": 488
     },
     {"ceiling_12":"22.925987278335","certificate":"certificates/best/n504.cert","certificate_sha256":"530def80809b8f50cdaa85147aa836291450574f9127b805808cb930528c79af","credit":"alexchilton, Kaggle notebook \"fault-line-dp-basin-hopping-lb-22-3747\" run 361412241; earlier construction credits in the notebook; earlier seed and construction credits retained in provenance","deleted_squares":0,"exact":"49864463835214077397865404736136876359542539992566945250339/2175019257833092308274720786111889544137982000000000000000","goebel":{"bound":"12 + 8*sqrt(2)","margin":"3.88e-1"},"index_print":"22.925987278335","kind":"certificate","n":504,"notebook":{"kaggle_submission":"kaggle-push-20261022-u","license":"per the notebook","notebook":"https://www.kaggle.com/code/alexchilton/fault-line-dp-basin-hopping-lb-22-3747","original_credits":"Earlier construction credits retained in the notebook.","run":361412241},"source_n":504},
@@ -5986,6 +5988,7 @@
       "kind": "construction",
       "n": 580,
       "notebook": {"kaggle_submission":"submissions/kaggle-push-20261022-q","license":"Apache-2.0","notebook":"https://www.kaggle.com/code/kirilltym/22-408512-cpu-alternating-reclosure","notebook_version":3,"original_credits":"Earlier construction credits retained in the notebook and its source notices.","run":361239073,"source_notices":"submissions/kaggle-public-portfolio-20261022/SOURCE_NOTICES.md"},
+      "recipe_certificate": "certificates/parents/95042f46efa5092e76ec4faf783b2ac127cc946175353e19d8d9ef25d6a823a0.cert",
       "source_n": 580
     },
     {
@@ -6050,6 +6053,7 @@
       "kind": "construction",
       "n": 679,
       "notebook": {"kaggle_submission":"submissions/kaggle-push-20261022-q","license":"Apache-2.0","notebook":"https://www.kaggle.com/code/kirilltym/22-408512-cpu-alternating-reclosure","notebook_version":3,"original_credits":"Earlier construction credits retained in the notebook and its source notices.","run":361239073,"source_notices":"submissions/kaggle-public-portfolio-20261022/SOURCE_NOTICES.md"},
+      "recipe_certificate": "certificates/parents/ae4c7fc59f5f1d489b21e8c35978fa86ebffc4c474d0f9721e53dfb6adc34f5a.cert",
       "source_n": 679
     },
     {
@@ -6082,6 +6086,7 @@
       "kind": "construction",
       "n": 732,
       "notebook": {"kaggle_submission":"submissions/kaggle-push-20261022-q","license":"Apache-2.0","notebook":"https://www.kaggle.com/code/kirilltym/22-408512-cpu-alternating-reclosure","notebook_version":3,"original_credits":"Earlier construction credits retained in the notebook and its source notices.","run":361239073,"source_notices":"submissions/kaggle-public-portfolio-20261022/SOURCE_NOTICES.md"},
+      "recipe_certificate": "certificates/parents/5bb844e20c41fc85f1ab880de0db3a4f094cbe94a24e30f1f9302867da1855a8.cert",
       "source_n": 732
     },
     {
@@ -6118,6 +6123,7 @@
       "kind": "construction",
       "n": 787,
       "notebook": {"kaggle_submission":"submissions/kaggle-push-20261022-q","license":"Apache-2.0","notebook":"https://www.kaggle.com/code/kirilltym/22-408512-cpu-alternating-reclosure","notebook_version":3,"original_credits":"Earlier construction credits retained in the notebook and its source notices.","run":361239073,"source_notices":"submissions/kaggle-public-portfolio-20261022/SOURCE_NOTICES.md"},
+      "recipe_certificate": "certificates/parents/d2b03e09b63cd8d8635b849c5cea45181d07b2dfb5f4d457814b2a7804acabfb.cert",
       "source_n": 787
     },
     {
@@ -6179,6 +6185,7 @@
       "kind": "construction",
       "n": 844,
       "notebook": {"kaggle_submission":"submissions/kaggle-push-20261022-q","license":"Apache-2.0","notebook":"https://www.kaggle.com/code/kirilltym/22-408512-cpu-alternating-reclosure","notebook_version":3,"original_credits":"Earlier construction credits retained in the notebook and its source notices.","run":361239073,"source_notices":"submissions/kaggle-public-portfolio-20261022/SOURCE_NOTICES.md"},
+      "recipe_certificate": "certificates/parents/409be52c47ae715e3ba0c7b283300db5f2fea1c48dcb926febd202a9adfb4afd.cert",
       "source_n": 844
     },
     {
@@ -6237,6 +6244,7 @@
       "kind": "construction",
       "n": 859,
       "notebook": {"kaggle_submission":"kaggle-push-20261022-u","license":"per the notebook","notebook":"https://www.kaggle.com/code/lightningv08/squares-in-squares-cuda-packing-search","original_credits":"Earlier construction credits retained in the notebook.","run":361589987},
+      "recipe_certificate": "certificates/parents/fd3b49f57ca5ffe4d1629d670fbfd3265e38ac15f52292b193d251038e7dad08.cert",
       "source_n": 859
     },
     {"ceiling_12":"29.832000576669","certificate":"certificates/best/n861.cert","certificate_sha256":"f1742dbf90cf6064a6a94fb00ee1dc2290cd272ebe0c245decb9e9e6ef20faa8","credit":"Kirill Tymchishin (kirilltym), Kaggle notebook \"22-3662-cpu-cuda-mps-eda-union\" run 361576574; earlier construction credits in the notebook; earlier seed and construction credits retained in provenance","deleted_squares":0,"exact":"45318769527459622987527747/1519132765199218750000000","goebel":{"bound":"15 + 21/2*sqrt(2)","margin":"1.72e-2"},"index_print":"29.832000576669","kind":"certificate","n":861,"notebook":{"kaggle_submission":"kaggle-push-20261022-u","license":"per the notebook","notebook":"https://www.kaggle.com/code/kirilltym/22-3662-cpu-cuda-mps-eda-union","original_credits":"Earlier construction credits retained in the notebook.","run":361576574},"source_n":861},
@@ -6257,6 +6265,7 @@
       "kind": "construction",
       "n": 903,
       "notebook": {"kaggle_submission":"submissions/kaggle-push-20261022-q","license":"Apache-2.0","notebook":"https://www.kaggle.com/code/kirilltym/22-408512-cpu-alternating-reclosure","notebook_version":3,"original_credits":"Earlier construction credits retained in the notebook and its source notices.","run":361239073,"source_notices":"submissions/kaggle-public-portfolio-20261022/SOURCE_NOTICES.md"},
+      "recipe_certificate": "certificates/parents/1c7bb8aa03df2b4e637f4d158c472efb5f74bc94139bd0e5806666a5df3d7e94.cert",
       "source_n": 903
     },
     {
@@ -6287,6 +6296,7 @@
       "kind": "construction",
       "n": 913,
       "notebook": {"kaggle_submission":"submissions/kaggle-push-20261022-q","license":"Apache-2.0","notebook":"https://www.kaggle.com/code/kirilltym/22-408512-cpu-alternating-reclosure","notebook_version":3,"original_credits":"Earlier construction credits retained in the notebook and its source notices.","run":361239073,"source_notices":"submissions/kaggle-public-portfolio-20261022/SOURCE_NOTICES.md"},
+      "recipe_certificate": "certificates/parents/7bfefb2ac5bb4778a4344c46c687bf91a74a61162c537c8bd6b9cd75e2bda20d.cert",
       "source_n": 913
     },
     {"ceiling_12":"30.799684872950","certificate":"certificates/best/n918.cert","certificate_sha256":"2dcd1f65e8eca3d5060729e908fa5760bc32efd65dc1f59a76cdb9862e355ff4","credit":"kyleluecke, Kaggle notebook \"inos-v0-6-k-mosh-squares-in-squares-22-366222\" run 361592092; earlier construction credits in the notebook; earlier seed and construction credits retained in provenance","deleted_squares":0,"exact":"60933921092552459483577914371/1978394303185500000000000000","goebel":{"bound":"16 + 21/2*sqrt(2)","margin":"4.96e-2"},"index_print":"30.799684872950","kind":"certificate","n":918,"notebook":{"kaggle_submission":"kaggle-push-20261022-u","license":"per the notebook","notebook":"https://www.kaggle.com/code/kyleluecke/inos-v0-6-k-mosh-squares-in-squares-22-366222","original_credits":"Earlier construction credits retained in the notebook.","run":361592092},"source_n":918},
@@ -6308,6 +6318,7 @@
       "kind": "construction",
       "n": 964,
       "notebook": {"kaggle_submission":"submissions/kaggle-push-20261022-q","license":"Apache-2.0","notebook":"https://www.kaggle.com/code/kirilltym/22-408512-cpu-alternating-reclosure","notebook_version":3,"original_credits":"Earlier construction credits retained in the notebook and its source notices.","run":361239073,"source_notices":"submissions/kaggle-public-portfolio-20261022/SOURCE_NOTICES.md"},
+      "recipe_certificate": "certificates/parents/bed12e3bf60237a8859b8c2e8d0eda241a2774a5db9ffe3c37772aa64a1e8717.cert",
       "source_n": 964
     },
     {
@@ -6337,6 +6348,7 @@
       "kind": "construction",
       "n": 967,
       "notebook": {"kaggle_submission":"submissions/kaggle-push-20261022-q","license":"Apache-2.0","notebook":"https://www.kaggle.com/code/kirilltym/22-408512-cpu-alternating-reclosure","notebook_version":3,"original_credits":"Earlier construction credits retained in the notebook and its source notices.","run":361239073,"source_notices":"submissions/kaggle-public-portfolio-20261022/SOURCE_NOTICES.md"},
+      "recipe_certificate": "certificates/parents/6a491a5cb96bdaa066c3e1caf0f16d4ff94dca415f303082e1b18c80ef1b53d5.cert",
       "source_n": 967
     },
     {"ceiling_12":"31.619088202057","certificate":"certificates/best/n968.cert","certificate_sha256":"1ab380a2801afc3c764ef5ae0e390d92484729a1e2f13110c107ca2995192d01","credit":"kyleluecke, Kaggle notebook \"inos-v0-6-k-mosh-squares-in-squares-22-366222\" run 361592092; earlier construction credits in the notebook; earlier seed and construction credits retained in provenance","deleted_squares":0,"exact":"4421863631480741923197919990593129239396493920207758239785977/139847917284129519787967592019794454816131138500000000000000","goebel":{"bound":"31 + 1/2*sqrt(2)","margin":"8.80e-2"},"index_print":"31.619088202057","kind":"certificate","n":968,"notebook":{"kaggle_submission":"kaggle-push-20261022-u","license":"per the notebook","notebook":"https://www.kaggle.com/code/kyleluecke/inos-v0-6-k-mosh-squares-in-squares-22-366222","original_credits":"Earlier construction credits retained in the notebook.","run":361592092},"source_n":968},
@@ -6376,7 +6388,7 @@
   ],
   "program": "packing/devtools/couzo_763_claims.py",
   "source_commit": "964ee2bdf301d0c8912d956d4010f478dcbbd5ea",
-  "summary": {"above_limit":233,"at_or_below_limit":203,"certificate_rows":196,"deletions":[683,1646,1727],"distinct_certificates":194,"in_corpus":[268,303],"issue_states":{"leaderboard_smaller":180,"refines_another_author":345},"kinds":{"certificate":194,"construction":240,"deletion":2},"leaderboard_smaller":182,"others":{"by_run":{"361239073":37,"361263594":2,"361412241":11,"361516058":9,"361576574":15,"361589987":7,"361592092":18},"certificates":87,"constructions":[445,488,580,679,732,787,844,859,903,913,964,967],"deletions":[],"rows":99},"refines":{"A":253,"B":94,"C":1,"E":1,"other":2,"own":85},"refines_another_author":351,"rows":436,"unrequested":[204,335,339,344,379,380,421,452,490,507,535,792,800,935,998]},
+  "summary": {"above_limit":233,"at_or_below_limit":203,"certificate_rows":196,"deletions":[683,1646,1727],"distinct_certificates":194,"in_corpus":[268,303],"issue_states":{"leaderboard_smaller":180,"refines_another_author":345},"kinds":{"certificate":194,"construction":240,"deletion":2},"leaderboard_smaller":182,"others":{"by_run":{"361239073":37,"361263594":2,"361412241":11,"361516058":9,"361576574":15,"361589987":7,"361592092":18},"certificates":87,"constructions":[445,488,580,679,732,787,844,859,903,913,964,967],"deletions":[],"recipe_certificates":12,"rows":99},"refines":{"A":253,"B":94,"C":1,"E":1,"other":2,"own":85},"refines_another_author":351,"rows":436,"unrequested":[204,335,339,344,379,380,421,452,490,507,535,792,800,935,998]},
   "unrequested": [
     {
       "ceiling_12": "14.808642830517",

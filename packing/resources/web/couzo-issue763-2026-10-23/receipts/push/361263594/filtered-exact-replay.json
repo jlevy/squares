@@ -20,7 +20,7 @@
         {"candidate_pairs":616,"control":"one-coordinate-overlap","independent_failures":["1 overlapping pairs; worst -1 at 85, 124"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["squares 85 and 124 overlap"]},
         {"candidate_pairs":616,"closed_distance":"5.100e-11","control":"near-contact-overlap","independent_failures":["1 overlapping pairs; worst -6960869359203916554752348197306986836191014963921981129049323144735679086113/6960869358848922215763971066557451187947255557986880866024947712000000000000000000000000000000000000000000 at 258, 265"],"pair":[258,265],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["squares 258 and 265 overlap"]}
       ],
-      "decision": {"all_pairs":54285,"candidate_pairs":616,"cpu_seconds":{"filter":0.098,"independent":0.173,"sqpack":0.115},"independent":{"failure_count":0,"failures":[],"least_pair":[258,265],"least_pair_gap":"354994338988377130749535648243759405935100263024375432735679086113/6960869358848922215763971066557451187947255557986880866024947712000000000000","least_wall_clearance":"1/1000000000000000","pairs_decided":616,"passed":true},"n":330,"passed":true,"side":"101013196297783691697704671973587998814291/5403974893576651383118195500000000000000","sqpack":{"container_contacts":0,"failure_count":0,"failures":[],"pairs_decided":616,"passed":true,"strict_pairs":616,"touching_pairs":0}},
+      "decision": {"all_pairs":54285,"candidate_pairs":616,"cpu_seconds":{"filter":0.093,"independent":0.152,"sqpack":0.194},"independent":{"failure_count":0,"failures":[],"least_pair":[258,265],"least_pair_gap":"354994338988377130749535648243759405935100263024375432735679086113/6960869358848922215763971066557451187947255557986880866024947712000000000000","least_wall_clearance":"1/1000000000000000","pairs_decided":616,"passed":true},"n":330,"passed":true,"side":"101013196297783691697704671973587998814291/5403974893576651383118195500000000000000","sqpack":{"container_contacts":0,"failure_count":0,"failures":[],"pairs_decided":616,"passed":true,"strict_pairs":616,"touching_pairs":0}},
       "deleted_squares": 0,
       "exact_side": "101013196297783691697704671973587998814291/5403974893576651383118195500000000000000",
       "issue_prior": "",
@@ -29,7 +29,117 @@
       "printed_is_upward_rounding": true,
       "side_ceiling_16": "18.6923881563275613",
       "verified": true,
-      "wall_seconds": 8.97
+      "wall_seconds": 3.912
+    },
+    {
+      "certificate": "certificates/parents/eccc21871d976eb5fe1f9e029b795e2dbb402e8ccdcf260c4c2a9bf74fb62492.cert",
+      "certificate_sha256": "eccc21871d976eb5fe1f9e029b795e2dbb402e8ccdcf260c4c2a9bf74fb62492",
+      "controls": [
+        {"candidate_pairs":692,"control":"duplicate-square","independent_failures":["1 overlapping pairs; worst -1 at 1, 2"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["squares 1 and 2 overlap"]},
+        {"candidate_pairs":691,"control":"square-outside-container","independent_failures":["container penetration -3000000000000001/1000000000000000"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["square 1 crosses a wall","square 1 crosses a wall","square 1 crosses a wall"]},
+        {"candidate_pairs":693,"control":"side-below-least-clearance","independent_failures":["container penetration -1/1000000000000000000"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["square 79 crosses a wall","square 79 crosses a wall","square 80 crosses a wall"]},
+        {"candidate_pairs":693,"control":"square-enlarged","independent_failures":["square 1 edge 0 is not unit length","square 1 edge 1 is not unit length","square 1 edge 2 is not unit length"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["shape: square 0 edge 0 is not unit length","shape: square 0 edge 1 is not unit length","shape: square 0 edge 2 is not unit length"]},
+        {"candidate_pairs":692,"control":"one-coordinate-overlap","independent_failures":["1 overlapping pairs; worst -1 at 1, 4"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["squares 1 and 4 overlap"]},
+        {"candidate_pairs":693,"closed_distance":"2.110e-10","control":"near-contact-overlap","independent_failures":["1 overlapping pairs; worst -18021851254565665641177948643789923401/18021851250763102733982963000000000000000000000000000000000000000000 at 49, 64"],"pair":[49,64],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["squares 49 and 64 overlap"]}
+      ],
+      "decision": {"all_pairs":56953,"candidate_pairs":693,"cpu_seconds":{"filter":0.119,"independent":0.152,"sqpack":0.138},"independent":{"failure_count":0,"failures":[],"least_pair":[49,64],"least_pair_gap":"3802562907194985643789923401/18021851250763102733982963000000000000","least_wall_clearance":"1/1000000000000000","pairs_decided":693,"passed":true},"n":338,"passed":true,"side":"51556999022285034543475033507095189405531/2727507803410951905862921750000000000000","sqpack":{"container_contacts":0,"failure_count":0,"failures":[],"pairs_decided":693,"passed":true,"strict_pairs":693,"touching_pairs":0}},
+      "deleted_squares": 0,
+      "exact_side": "51556999022285034543475033507095189405531/2727507803410951905862921750000000000000",
+      "issue_prior": "",
+      "n": 338,
+      "printed": "18.902603672778",
+      "printed_is_upward_rounding": true,
+      "side_ceiling_16": "18.9026036727774574",
+      "verified": true,
+      "wall_seconds": 3.985
+    },
+    {
+      "certificate": "certificates/parents/374d8c421f13fefb5d0e59a9fbf63c4c2d70431f84605688b5638a6a92d6583a.cert",
+      "certificate_sha256": "374d8c421f13fefb5d0e59a9fbf63c4c2d70431f84605688b5638a6a92d6583a",
+      "controls": [
+        {"candidate_pairs":847,"control":"duplicate-square","independent_failures":["1 overlapping pairs; worst -1 at 1, 2"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["squares 1 and 2 overlap"]},
+        {"candidate_pairs":846,"control":"square-outside-container","independent_failures":["container penetration -6750273809785819165723698576906826239140678643712535669863453/2250091269928605597657617449512105078081789203000000000000000"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["square 1 crosses a wall","square 1 crosses a wall","square 1 crosses a wall"]},
+        {"candidate_pairs":848,"control":"side-below-least-clearance","independent_failures":["container penetration -1/1000000000000000000"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["square 211 crosses a wall","square 211 crosses a wall","square 212 crosses a wall"]},
+        {"candidate_pairs":848,"control":"square-enlarged","independent_failures":["square 1 edge 0 is not unit length","square 1 edge 1 is not unit length","square 1 edge 2 is not unit length"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["shape: square 0 edge 0 is not unit length","shape: square 0 edge 1 is not unit length","shape: square 0 edge 2 is not unit length"]},
+        {"candidate_pairs":847,"control":"one-coordinate-overlap","independent_failures":["1 overlapping pairs; worst -1 at 1, 14"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["squares 1 and 14 overlap"]},
+        {"candidate_pairs":848,"closed_distance":"2.110e-10","control":"near-contact-overlap","independent_failures":["1 overlapping pairs; worst -33912889281993777311520790864422238831/33912889274838247447359351000000000000000000000000000000000000000000 at 183, 190"],"pair":[183,190],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["squares 183 and 190 overlap"]}
+      ],
+      "decision": {"all_pairs":71253,"candidate_pairs":848,"cpu_seconds":{"filter":0.167,"independent":0.244,"sqpack":0.177},"independent":{"failure_count":0,"failures":[],"least_pair":[183,190],"least_pair_gap":"7155529864161439864422238831/33912889274838247447359351000000000000","least_wall_clearance":"1/1000000000000000","pairs_decided":848,"passed":true},"n":378,"passed":true,"side":"32324718638227822974724519088315680614558160022805439630769639/1622165031400861827083616564034409204767501944500000000000000","sqpack":{"container_contacts":0,"failure_count":0,"failures":[],"pairs_decided":848,"passed":true,"strict_pairs":848,"touching_pairs":0}},
+      "deleted_squares": 0,
+      "exact_side": "32324718638227822974724519088315680614558160022805439630769639/1622165031400861827083616564034409204767501944500000000000000",
+      "issue_prior": "",
+      "n": 378,
+      "printed": "19.926898935994",
+      "printed_is_upward_rounding": true,
+      "side_ceiling_16": "19.9268989359935783",
+      "verified": true,
+      "wall_seconds": 5.297
+    },
+    {
+      "certificate": "certificates/parents/36ca1b5c078413856bffc740ddfc5b4c3213ef8585ef55ccc7b8134dd2a25128.cert",
+      "certificate_sha256": "36ca1b5c078413856bffc740ddfc5b4c3213ef8585ef55ccc7b8134dd2a25128",
+      "controls": [
+        {"candidate_pairs":825,"control":"duplicate-square","independent_failures":["1 overlapping pairs; worst -1 at 1, 2"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["squares 1 and 2 overlap"]},
+        {"candidate_pairs":824,"control":"square-outside-container","independent_failures":["container penetration -3000000000000001/1000000000000000"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["square 1 crosses a wall","square 1 crosses a wall","square 1 crosses a wall"]},
+        {"candidate_pairs":826,"control":"side-below-least-clearance","independent_failures":["container penetration -1/1000000000000000000"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["square 398 crosses a wall"]},
+        {"candidate_pairs":826,"control":"square-enlarged","independent_failures":["square 1 edge 0 is not unit length","square 1 edge 1 is not unit length","square 1 edge 2 is not unit length"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["shape: square 0 edge 0 is not unit length","shape: square 0 edge 1 is not unit length","shape: square 0 edge 2 is not unit length"]},
+        {"candidate_pairs":825,"control":"one-coordinate-overlap","independent_failures":["1 overlapping pairs; worst -1 at 1, 16"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["squares 1 and 16 overlap"]},
+        {"candidate_pairs":826,"closed_distance":"3.110e-10","control":"near-contact-overlap","independent_failures":["1 overlapping pairs; worst -49132752893547300553033272290247051498993565921592065582605201245463595334051/49132752878267056789396824938447696378702917980698605967501908440000000000000000000000000000000000000000000 at 286, 287"],"pair":[286,287],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["squares 286 and 287 overlap"]}
+      ],
+      "decision": {"all_pairs":81810,"candidate_pairs":826,"cpu_seconds":{"filter":0.159,"independent":0.231,"sqpack":0.155},"independent":{"failure_count":0,"failures":[],"least_pair":[286,287],"least_pair_gap":"15280243763636447351799355120290647940893459615103292805463595334051/49132752878267056789396824938447696378702917980698605967501908440000000000000","least_wall_clearance":"1/1000000000000000","pairs_decided":826,"passed":true},"n":405,"passed":true,"side":"4272697432629683814863112269388954863774177391535465770698087/206952847672852582975793799079525011893298043500000000000000","sqpack":{"container_contacts":0,"failure_count":0,"failures":[],"pairs_decided":826,"passed":true,"strict_pairs":826,"touching_pairs":0}},
+      "deleted_squares": 0,
+      "exact_side": "4272697432629683814863112269388954863774177391535465770698087/206952847672852582975793799079525011893298043500000000000000",
+      "issue_prior": "",
+      "n": 405,
+      "printed": "20.645753275084",
+      "printed_is_upward_rounding": true,
+      "side_ceiling_16": "20.6457532750836494",
+      "verified": true,
+      "wall_seconds": 5.407
+    },
+    {
+      "certificate": "certificates/parents/463b3a67980ee17f44fa62ebed8bcbd4f764b86683508896574a1042f617dbc3.cert",
+      "certificate_sha256": "463b3a67980ee17f44fa62ebed8bcbd4f764b86683508896574a1042f617dbc3",
+      "controls": [
+        {"candidate_pairs":1069,"control":"duplicate-square","independent_failures":["1 overlapping pairs; worst -1 at 1, 2"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["squares 1 and 2 overlap"]},
+        {"candidate_pairs":1064,"control":"square-outside-container","independent_failures":["container penetration -889635840514185051562116784234334690771301047488234142954461/296441454356577794249718118222603648166572461000000000000000"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["square 1 crosses a wall","square 1 crosses a wall","square 1 crosses a wall"]},
+        {"candidate_pairs":1068,"control":"side-below-least-clearance","independent_failures":["container penetration -1/1000000000000000000"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["square 373 crosses a wall","square 373 crosses a wall","square 374 crosses a wall"]},
+        {"candidate_pairs":1068,"control":"square-enlarged","independent_failures":["square 1 edge 0 is not unit length","square 1 edge 1 is not unit length","square 1 edge 2 is not unit length"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["shape: square 0 edge 0 is not unit length","shape: square 0 edge 1 is not unit length","shape: square 0 edge 2 is not unit length"]},
+        {"candidate_pairs":1066,"control":"one-coordinate-overlap","independent_failures":["1 overlapping pairs; worst -1 at 393, 394"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["squares 393 and 394 overlap"]},
+        {"candidate_pairs":1068,"closed_distance":"0.000e+00","control":"near-contact-overlap","independent_failures":["1 overlapping pairs; worst -1/1000000000000000000000000000000 at 373, 374"],"pair":[373,374],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["squares 373 and 374 overlap"]}
+      ],
+      "decision": {"all_pairs":84255,"candidate_pairs":1068,"cpu_seconds":{"filter":0.217,"independent":0.405,"sqpack":0.342},"independent":{"failure_count":0,"failures":[],"least_pair":[373,374],"least_pair_gap":"0","least_wall_clearance":"0","pairs_decided":1068,"passed":true},"n":411,"passed":true,"side":"112942629579308326314104541455845384168056730751803132172639/5428324623765815880886151738734629144606319500000000000000","sqpack":{"container_contacts":82,"failure_count":0,"failures":[],"pairs_decided":1068,"passed":true,"strict_pairs":1031,"touching_pairs":37}},
+      "deleted_squares": 0,
+      "exact_side": "112942629579308326314104541455845384168056730751803132172639/5428324623765815880886151738734629144606319500000000000000",
+      "issue_prior": "",
+      "n": 411,
+      "printed": "20.806167170776",
+      "printed_is_upward_rounding": true,
+      "side_ceiling_16": "20.8061671707754522",
+      "verified": true,
+      "wall_seconds": 7.977
+    },
+    {
+      "certificate": "certificates/parents/4c1e263287d4e96f073122501d20e4951cbd8ac96d76e7fa1d4089d8dd8dace5.cert",
+      "certificate_sha256": "4c1e263287d4e96f073122501d20e4951cbd8ac96d76e7fa1d4089d8dd8dace5",
+      "controls": [
+        {"candidate_pairs":1161,"control":"duplicate-square","independent_failures":["1 overlapping pairs; worst -1 at 1, 2"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["squares 1 and 2 overlap"]},
+        {"candidate_pairs":1158,"control":"square-outside-container","independent_failures":["container penetration -9746639545937252119896381786551351091008445736102916853873/3248708571508714831557222669421284080707748000000000000000"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["square 1 crosses a wall","square 1 crosses a wall","square 1 crosses a wall"]},
+        {"candidate_pairs":1161,"control":"side-below-least-clearance","independent_failures":["container penetration -1/1000000000000000000"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["square 301 crosses a wall"]},
+        {"candidate_pairs":1161,"control":"square-enlarged","independent_failures":["square 1 edge 0 is not unit length","square 1 edge 1 is not unit length","square 1 edge 2 is not unit length"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["shape: square 0 edge 0 is not unit length","shape: square 0 edge 1 is not unit length","shape: square 0 edge 2 is not unit length"]},
+        {"candidate_pairs":1161,"control":"one-coordinate-overlap","independent_failures":["1 overlapping pairs; worst -1045249946228293442854143584720178793/1045249946231505597675353796875000000 at 304, 308"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["squares 304 and 308 overlap"]},
+        {"candidate_pairs":1161,"closed_distance":"3.813e-11","control":"near-contact-overlap","independent_failures":["1 overlapping pairs; worst -1255932463079751552173655495619710577/1255932462760433123395029093750000000000000000000000000000000000000 at 304, 305"],"pair":[304,305],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["squares 304 and 305 overlap"]}
+      ],
+      "decision": {"all_pairs":101475,"candidate_pairs":1161,"cpu_seconds":{"filter":0.199,"independent":0.433,"sqpack":0.293},"independent":{"failure_count":0,"failures":[],"least_pair":[304,305],"least_pair_gap":"164068117297288591007654518576751755959330053/4302470967093799579031955615065410286025904968750000000","least_wall_clearance":"1/1000000000000000","pairs_decided":1161,"passed":true},"n":451,"passed":true,"side":"2124830241116950305563771760076882053504289633978889516067/97665838939444014712875687894254913439233500000000000000","sqpack":{"container_contacts":0,"failure_count":0,"failures":[],"pairs_decided":1161,"passed":true,"strict_pairs":1161,"touching_pairs":0}},
+      "deleted_squares": 0,
+      "exact_side": "2124830241116950305563771760076882053504289633978889516067/97665838939444014712875687894254913439233500000000000000",
+      "issue_prior": "",
+      "n": 451,
+      "printed": "21.756125418986",
+      "printed_is_upward_rounding": true,
+      "side_ceiling_16": "21.7561254189851778",
+      "verified": true,
+      "wall_seconds": 8.784
     },
     {
       "certificate": "certificates/best/n509.cert",
@@ -42,7 +152,7 @@
         {"candidate_pairs":1306,"control":"one-coordinate-overlap","independent_failures":["1 overlapping pairs; worst -175915544454084172893201418797322963/175915544456186284920182000000000000 at 288, 343"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["squares 288 and 343 overlap"]},
         {"candidate_pairs":1306,"closed_distance":"4.563e-11","control":"near-contact-overlap","independent_failures":["1 overlapping pairs; worst -4263824823939211544402886291303656684460245662434362541130544172796651187896199/4263824823318289726156248539266940806060589623708337579087994535207980000000000000000000000000000000000000000 at 318, 333"],"pair":[318,333],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["squares 318 and 333 overlap"]}
       ],
-      "decision": {"all_pairs":129286,"candidate_pairs":1306,"cpu_seconds":{"filter":0.264,"independent":0.509,"sqpack":0.365},"independent":{"failure_count":0,"failures":[],"least_pair":[318,333],"least_pair_gap":"194539335957447027658537746557416350756417189050744172796651187896199/4263824823318289726156248539266940806060589623708337579087994535207980000000000","least_wall_clearance":"1/1000000000000000","pairs_decided":1306,"passed":true},"n":509,"passed":true,"side":"234688608520983446714412931677031249602736727428519117691939/10206892146484216613949018921464842166138469500000000000000","sqpack":{"container_contacts":0,"failure_count":0,"failures":[],"pairs_decided":1306,"passed":true,"strict_pairs":1306,"touching_pairs":0}},
+      "decision": {"all_pairs":129286,"candidate_pairs":1306,"cpu_seconds":{"filter":0.233,"independent":0.495,"sqpack":0.338},"independent":{"failure_count":0,"failures":[],"least_pair":[318,333],"least_pair_gap":"194539335957447027658537746557416350756417189050744172796651187896199/4263824823318289726156248539266940806060589623708337579087994535207980000000000","least_wall_clearance":"1/1000000000000000","pairs_decided":1306,"passed":true},"n":509,"passed":true,"side":"234688608520983446714412931677031249602736727428519117691939/10206892146484216613949018921464842166138469500000000000000","sqpack":{"container_contacts":0,"failure_count":0,"failures":[],"pairs_decided":1306,"passed":true,"strict_pairs":1306,"touching_pairs":0}},
       "deleted_squares": 0,
       "exact_side": "234688608520983446714412931677031249602736727428519117691939/10206892146484216613949018921464842166138469500000000000000",
       "issue_prior": "",
@@ -51,13 +161,101 @@
       "printed_is_upward_rounding": true,
       "side_ceiling_16": "22.9931506234071832",
       "verified": true,
-      "wall_seconds": 13.607
+      "wall_seconds": 10.039
+    },
+    {
+      "certificate": "certificates/parents/d37e5fc9056aaa192427fb4844ae59f0efd6354d67c8cd2ea1572b29fda659db.cert",
+      "certificate_sha256": "d37e5fc9056aaa192427fb4844ae59f0efd6354d67c8cd2ea1572b29fda659db",
+      "controls": [
+        {"candidate_pairs":1348,"control":"duplicate-square","independent_failures":["1 overlapping pairs; worst -1 at 1, 2"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["squares 1 and 2 overlap"]},
+        {"candidate_pairs":1345,"control":"square-outside-container","independent_failures":["container penetration -23817090849368237546796125718590517912786554292624987670257880357598343608911183/7938990716179184451731653676972398065921461089630994111122576383000000000000000"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["square 1 crosses a wall","square 1 crosses a wall","square 1 crosses a wall"]},
+        {"candidate_pairs":1348,"control":"side-below-least-clearance","independent_failures":["container penetration -1/1000000000000000000"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["square 520 crosses a wall"]},
+        {"candidate_pairs":1348,"control":"square-enlarged","independent_failures":["square 1 edge 0 is not unit length","square 1 edge 1 is not unit length","square 1 edge 2 is not unit length"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["shape: square 0 edge 0 is not unit length","shape: square 0 edge 1 is not unit length","shape: square 0 edge 2 is not unit length"]},
+        {"candidate_pairs":1349,"control":"one-coordinate-overlap","independent_failures":["1 overlapping pairs; worst -521034620791675817679006725710070001182910752034940404467475964669126200379/521034620791675800462836555228640262889627265015521504858106521500000000000 at 215, 218"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["squares 215 and 218 overlap"]},
+        {"candidate_pairs":1348,"closed_distance":"3.110e-10","control":"near-contact-overlap","independent_failures":["1 overlapping pairs; worst -481467526832286858893737590416193986266110345625113046967405370045897860738084449/481467526681145637667661061844848976034598495903269425141257411476976600000000000000000000000000000000000000000 at 87, 88"],"pair":[87,88],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["squares 87 and 88 overlap"]}
+      ],
+      "decision": {"all_pairs":141246,"candidate_pairs":1348,"cpu_seconds":{"filter":0.299,"independent":0.537,"sqpack":0.391},"independent":{"failure_count":0,"failures":[],"least_pair":[87,88],"least_pair_gap":"13234389150272209272288890402176201194824967713908987729433700813859474687140348497409173/42555207568599550354555632935358987755889034269384867524970734867572508525939826899638200000000000","least_wall_clearance":"1/1000000000000000","pairs_decided":1348,"passed":true},"n":532,"passed":true,"side":"2099120412231749014920983908537254215074856020971503207367821978254776794617/89059810965942869268884381621395972796522104752451697962874500000000000000","sqpack":{"container_contacts":0,"failure_count":0,"failures":[],"pairs_decided":1348,"passed":true,"strict_pairs":1348,"touching_pairs":0}},
+      "deleted_squares": 0,
+      "exact_side": "2099120412231749014920983908537254215074856020971503207367821978254776794617/89059810965942869268884381621395972796522104752451697962874500000000000000",
+      "issue_prior": "",
+      "n": 532,
+      "printed": "23.569782929749",
+      "printed_is_upward_rounding": true,
+      "side_ceiling_16": "23.5697829297489549",
+      "verified": true,
+      "wall_seconds": 11.111
+    },
+    {
+      "certificate": "certificates/parents/6e77323e39dd37f942eb49f2e6c78fbbc4c710d3548fa68298392036cd4a677b.cert",
+      "certificate_sha256": "6e77323e39dd37f942eb49f2e6c78fbbc4c710d3548fa68298392036cd4a677b",
+      "controls": [
+        {"candidate_pairs":1626,"control":"duplicate-square","independent_failures":["1 overlapping pairs; worst -1 at 1, 2"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["squares 1 and 2 overlap"]},
+        {"candidate_pairs":1625,"control":"square-outside-container","independent_failures":["container penetration -3000000000000001/1000000000000000"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["square 1 crosses a wall","square 1 crosses a wall","square 1 crosses a wall"]},
+        {"candidate_pairs":1627,"control":"side-below-least-clearance","independent_failures":["container penetration -1/1000000000000000000"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["square 494 crosses a wall"]},
+        {"candidate_pairs":1627,"control":"square-enlarged","independent_failures":["square 1 edge 0 is not unit length","square 1 edge 1 is not unit length","square 1 edge 2 is not unit length"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["shape: square 0 edge 0 is not unit length","shape: square 0 edge 1 is not unit length","shape: square 0 edge 2 is not unit length"]},
+        {"candidate_pairs":1626,"control":"one-coordinate-overlap","independent_failures":["1 overlapping pairs; worst -1 at 1, 12"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["squares 1 and 12 overlap"]},
+        {"candidate_pairs":1627,"closed_distance":"3.110e-10","control":"near-contact-overlap","independent_failures":["1 overlapping pairs; worst -56559039890169514918603826837888958295364180601141193632327154209941663594498479693/56472460398116213448401856325233625784641334290615764978791610383003398000000000000000000000000000000000000000000 at 548, 565"],"pair":[548,565],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["squares 548 and 565 overlap"]}
+      ],
+      "decision": {"all_pairs":248865,"candidate_pairs":1627,"cpu_seconds":{"filter":0.373,"independent":0.519,"sqpack":0.302},"independent":{"failure_count":0,"failures":[],"least_pair":[548,565],"least_pair_gap":"111657246204283107357858597429143272336657661462888882196193586760214533686376141719615686861/359006006645276153550583639620251856511179178380623601644227021282384133428067733277104646000000000000","least_wall_clearance":"1/1000000000000000","pairs_decided":1627,"passed":true},"n":706,"passed":true,"side":"6336930810194195456720466491831775379861224157173054017975231/234732655442638603767446341691943968549643396750000000000000","sqpack":{"container_contacts":0,"failure_count":0,"failures":[],"pairs_decided":1627,"passed":true,"strict_pairs":1627,"touching_pairs":0}},
+      "deleted_squares": 0,
+      "exact_side": "6336930810194195456720466491831775379861224157173054017975231/234732655442638603767446341691943968549643396750000000000000",
+      "issue_prior": "",
+      "n": 706,
+      "printed": "26.996375081450",
+      "printed_is_upward_rounding": true,
+      "side_ceiling_16": "26.9963750814498208",
+      "verified": true,
+      "wall_seconds": 10.418
+    },
+    {
+      "certificate": "certificates/parents/eefb9f4ddeaa9b2260974a2903ca9c8c1b1e0ab0ac6e31f152f6b341d6be7d80.cert",
+      "certificate_sha256": "eefb9f4ddeaa9b2260974a2903ca9c8c1b1e0ab0ac6e31f152f6b341d6be7d80",
+      "controls": [
+        {"candidate_pairs":1548,"control":"duplicate-square","independent_failures":["1 overlapping pairs; worst -1 at 1, 2"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["squares 1 and 2 overlap"]},
+        {"candidate_pairs":1547,"control":"square-outside-container","independent_failures":["container penetration -3000000000000001/1000000000000000"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["square 1 crosses a wall","square 1 crosses a wall","square 1 crosses a wall"]},
+        {"candidate_pairs":1549,"control":"side-below-least-clearance","independent_failures":["container penetration -1/1000000000000000000"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["square 197 crosses a wall","square 197 crosses a wall","square 214 crosses a wall"]},
+        {"candidate_pairs":1549,"control":"square-enlarged","independent_failures":["square 1 edge 0 is not unit length","square 1 edge 1 is not unit length","square 1 edge 2 is not unit length"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["shape: square 0 edge 0 is not unit length","shape: square 0 edge 1 is not unit length","shape: square 0 edge 2 is not unit length"]},
+        {"candidate_pairs":1548,"control":"one-coordinate-overlap","independent_failures":["1 overlapping pairs; worst -1 at 1, 11"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["squares 1 and 11 overlap"]},
+        {"candidate_pairs":1549,"closed_distance":"2.110e-10","control":"near-contact-overlap","independent_failures":["1 overlapping pairs; worst -45177113688567440390565875263276877353/45177113679035349496668030000000000000000000000000000000000000000000 at 189, 190"],"pair":[189,190],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["squares 189 and 190 overlap"]}
+      ],
+      "decision": {"all_pairs":277885,"candidate_pairs":1549,"cpu_seconds":{"filter":0.406,"independent":0.407,"sqpack":0.268},"independent":{"failure_count":0,"failures":[],"least_pair":[189,190],"least_pair_gap":"9532090893897845263276877353/45177113679035349496668030000000000000","least_wall_clearance":"1/1000000000000000","pairs_decided":1549,"passed":true},"n":746,"passed":true,"side":"1117627957354123645263840217994237949080621833632984477212164033246457797/40167589120295342243747287123291044938171620116009289786000000000000000","sqpack":{"container_contacts":0,"failure_count":0,"failures":[],"pairs_decided":1549,"passed":true,"strict_pairs":1549,"touching_pairs":0}},
+      "deleted_squares": 0,
+      "exact_side": "1117627957354123645263840217994237949080621833632984477212164033246457797/40167589120295342243747287123291044938171620116009289786000000000000000",
+      "issue_prior": "",
+      "n": 746,
+      "printed": "27.824123424660",
+      "printed_is_upward_rounding": true,
+      "side_ceiling_16": "27.8241234246598967",
+      "verified": true,
+      "wall_seconds": 10.11
+    },
+    {
+      "certificate": "certificates/parents/f70fcc40b60c09b3686d0d32a818825651d9d37c81de379d744cc88bcaf06af3.cert",
+      "certificate_sha256": "f70fcc40b60c09b3686d0d32a818825651d9d37c81de379d744cc88bcaf06af3",
+      "controls": [
+        {"candidate_pairs":1862,"control":"duplicate-square","independent_failures":["1 overlapping pairs; worst -1 at 1, 2"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["squares 1 and 2 overlap"]},
+        {"candidate_pairs":1853,"control":"square-outside-container","independent_failures":["container penetration -6385612914335538970135144014386750229795539343707602016809/1527131768550004547631891478304336939243209000000000000000"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["square 1 crosses a wall","square 1 crosses a wall","square 1 crosses a wall"]},
+        {"candidate_pairs":1859,"control":"side-below-least-clearance","independent_failures":["container penetration -1/1000000000000000000"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["square 375 crosses a wall","square 375 crosses a wall","square 476 crosses a wall"]},
+        {"candidate_pairs":1859,"control":"square-enlarged","independent_failures":["square 1 edge 0 is not unit length","square 1 edge 1 is not unit length","square 1 edge 2 is not unit length"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["shape: square 0 edge 0 is not unit length","shape: square 0 edge 1 is not unit length","shape: square 0 edge 2 is not unit length"]},
+        {"candidate_pairs":1859,"control":"one-coordinate-overlap","independent_failures":["1 overlapping pairs; worst -1 at 133, 137"],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["squares 133 and 137 overlap"]},
+        {"candidate_pairs":1859,"closed_distance":"3.110e-10","control":"near-contact-overlap","independent_failures":["1 overlapping pairs; worst -9783917900654855043112156071125211511/9783917897612169294240567600000000000000000000000000000000000000000 at 468, 469"],"pair":[468,469],"refused_by_independent":true,"refused_by_sqpack":true,"sqpack_failures":["squares 468 and 469 overlap"]}
+      ],
+      "decision": {"all_pairs":332520,"candidate_pairs":1859,"cpu_seconds":{"filter":0.458,"independent":0.459,"sqpack":0.432},"independent":{"failure_count":0,"failures":[],"least_pair":[468,469],"least_pair_gap":"3042685748871588471125211511/9783917897612169294240567600000000000","least_wall_clearance":"1/1000000000000000","pairs_decided":1859,"passed":true},"n":816,"passed":true,"side":"76392232514991540686817496422101645190663/2634787624307320511729906500000000000000","sqpack":{"container_contacts":0,"failure_count":0,"failures":[],"pairs_decided":1859,"passed":true,"strict_pairs":1859,"touching_pairs":0}},
+      "deleted_squares": 0,
+      "exact_side": "76392232514991540686817496422101645190663/2634787624307320511729906500000000000000",
+      "issue_prior": "",
+      "n": 816,
+      "printed": "28.993696421766",
+      "printed_is_upward_rounding": true,
+      "side_ceiling_16": "28.9936964217656365",
+      "verified": true,
+      "wall_seconds": 12.533
     }
   ],
-  "run_releases": ["tymchishin-reclosure-v3-2026-10-23","lavrentev-cuda-v11-2026-10-23","tymchishin-22-3662-2026-10-23","kyleluecke-inos-2026-10-23","alexchilton-fault-line-2026-10-23","aqibrazadev-blending-2026-10-23","lavrentev-cuda-run-361589987-2026-10-23"],
-  "run_wall_seconds": 697.0,
+  "run_releases": ["couzo-efef7d1-2026-10-23","couzo-fa6237e-2026-10-23","tymchishin-reclosure-v3-2026-10-23","lavrentev-cuda-v11-2026-10-23","lavrentev-cuda-run-361589987-2026-10-23"],
+  "run_wall_seconds": 731.1,
   "source_commit": "964ee2bdf301d0c8912d956d4010f478dcbbd5ea",
-  "started_utc": "2026-10-24T14:21:45Z",
-  "summary": {"all_pairs":183571,"candidate_pairs":1922,"controls":12,"controls_refused_by_both":12,"positive_cpu_seconds":1.5,"refused":[],"rows":2,"verified":2},
+  "started_utc": "2026-10-24T17:22:00Z",
+  "summary": {"all_pairs":1579833,"candidate_pairs":12901,"controls":66,"controls_refused_by_both":66,"positive_cpu_seconds":9.8,"refused":[],"rows":11,"verified":11},
   "workers": 2
 }

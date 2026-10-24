@@ -12,9 +12,54 @@
    "printed": "18.692388156328"
   },
   {
+   "n": 338,
+   "certificate": "certificates/parents/eccc21871d976eb5fe1f9e029b795e2dbb402e8ccdcf260c4c2a9bf74fb62492.cert",
+   "printed": "18.902603672778"
+  },
+  {
+   "n": 378,
+   "certificate": "certificates/parents/374d8c421f13fefb5d0e59a9fbf63c4c2d70431f84605688b5638a6a92d6583a.cert",
+   "printed": "19.926898935994"
+  },
+  {
+   "n": 405,
+   "certificate": "certificates/parents/36ca1b5c078413856bffc740ddfc5b4c3213ef8585ef55ccc7b8134dd2a25128.cert",
+   "printed": "20.645753275084"
+  },
+  {
+   "n": 411,
+   "certificate": "certificates/parents/463b3a67980ee17f44fa62ebed8bcbd4f764b86683508896574a1042f617dbc3.cert",
+   "printed": "20.806167170776"
+  },
+  {
+   "n": 451,
+   "certificate": "certificates/parents/4c1e263287d4e96f073122501d20e4951cbd8ac96d76e7fa1d4089d8dd8dace5.cert",
+   "printed": "21.756125418986"
+  },
+  {
    "n": 509,
    "certificate": "certificates/best/n509.cert",
    "printed": "22.993150623408"
+  },
+  {
+   "n": 532,
+   "certificate": "certificates/parents/d37e5fc9056aaa192427fb4844ae59f0efd6354d67c8cd2ea1572b29fda659db.cert",
+   "printed": "23.569782929749"
+  },
+  {
+   "n": 706,
+   "certificate": "certificates/parents/6e77323e39dd37f942eb49f2e6c78fbbc4c710d3548fa68298392036cd4a677b.cert",
+   "printed": "26.996375081450"
+  },
+  {
+   "n": 746,
+   "certificate": "certificates/parents/eefb9f4ddeaa9b2260974a2903ca9c8c1b1e0ab0ac6e31f152f6b341d6be7d80.cert",
+   "printed": "27.824123424660"
+  },
+  {
+   "n": 816,
+   "certificate": "certificates/parents/f70fcc40b60c09b3686d0d32a818825651d9d37c81de379d744cc88bcaf06af3.cert",
+   "printed": "28.993696421766"
   }
  ]
 }

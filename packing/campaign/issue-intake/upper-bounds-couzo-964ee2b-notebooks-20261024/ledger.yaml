@@ -7,10 +7,331 @@ rule: If they are reported in order, then each one should be recorded as a resul
   reason it should be recorded.
 lanes: []
 reports:
+- report: franciscouzo/square-packing@efef7d1
+  url: https://github.com/franciscouzo/square-packing/tree/efef7d1418d0cb629debc962c077740125ba7901
+  kind: publication
+  holders: Francisco Couzo
+  reported_at: '2026-10-23T23:38:42Z'
+  bead: think-lyf9
+  claims:
+  - n: 377
+    printed: '19.925471653955'
+    rounding: up
+    exact: 39878707228746882775925180357/2001393388388500000000000000
+    exact_from: 'certificates/parents/669e184f1636a5e5bc70f4d69bd5eb6a91687267feb0fd94ac6f575ff2dcd343.cert
+      at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23 packet: a side efef7d1
+      first states (receipts/push/push-publications.json)'
+    first_committed: '2026-10-23T18:16:49Z'
+  - n: 404
+    printed: '20.614368938495'
+    rounding: up
+    exact: 173988301167405003558899729471/8440146855163000000000000000
+    exact_from: 'certificates/n404.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: a side efef7d1 first states (receipts/push/push-publications.json), the certificate
+      of the construction its index states there'
+    first_committed: '2026-10-23T18:16:49Z'
+  - n: 409
+    printed: '20.767428349946'
+    rounding: up
+    exact: 11415271987838404258625514907/549671909082000000000000000
+    exact_from: 'certificates/parents/e8be4565215179c5604677bf0733072f0248310129c79a291fd380751a6446a5.cert
+      at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23 packet: a side efef7d1
+      first states (receipts/push/push-publications.json), the certificate of the construction
+      its index states there'
+    first_committed: '2026-10-23T18:16:49Z'
+  - n: 411
+    printed: '20.822875655537'
+    rounding: up
+    exact: 902902643793747814915839361/43361092806300000000000000
+    exact_from: 'certificates/parents/b09b97507108264e3168ad3311b7d3ad4b8630ef4ddb79854932a88a17bc1127.cert
+      at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23 packet: a side efef7d1
+      first states (receipts/push/push-publications.json), the certificate of the construction
+      its index states there'
+    first_committed: '2026-10-23T18:16:49Z'
+  - n: 418
+    printed: '20.939184128245'
+    rounding: up
+    exact: 3789207440682516740482508816359765981238432603377995817389274214383/180962515897235383893119476809625158972353838931194750000000000000
+    exact_from: 'certificates/parents/64e206c451a2914d6b16444d37f00653ed4774414f899d2696d9b2a039e1fcef.cert
+      at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23 packet: a side efef7d1
+      first states (receipts/push/push-publications.json)'
+    first_committed: '2026-10-23T18:16:49Z'
+  - n: 450
+    printed: '21.767428349946'
+    rounding: up
+    exact: 11964943896920404258625514907/549671909082000000000000000
+    exact_from: 'certificates/n450.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: a side efef7d1 first states (receipts/push/push-publications.json), the certificate
+      of the construction its index states there'
+    first_committed: '2026-10-23T18:16:49Z'
+  - n: 451
+    printed: '21.778174593057'
+    rounding: up
+    exact: 96066851499319381267768176733/4411152600914000000000000000
+    exact_from: 'certificates/n451.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: a side efef7d1 first states (receipts/push/push-publications.json), the certificate
+      of the construction its index states there'
+    first_committed: '2026-10-23T18:16:49Z'
+  - n: 454
+    printed: '21.824764034677'
+    rounding: up
+    exact: 35613520828271239817267446471/1631794083623800000000000000
+    exact_from: 'certificates/n454.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: a side efef7d1 first states (receipts/push/push-publications.json)'
+    first_committed: '2026-10-23T18:16:49Z'
+  - n: 455
+    printed: '21.846667192857'
+    rounding: up
+    exact: 39878845643913480534484200769/1825397223836200000000000000
+    exact_from: 'certificates/n455.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: a side efef7d1 first states (receipts/push/push-publications.json)'
+    first_committed: '2026-10-23T18:16:49Z'
+  - n: 460
+    printed: '21.950987687978'
+    rounding: up
+    exact: 101077421423320473936720500307/4604686716611000000000000000
+    exact_from: 'certificates/parents/002a3deb169666a188941b33df4dc7e9e2cbe3988ef3b1cc0c859b5a88fa280b.cert
+      at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23 packet: a side efef7d1
+      first states (receipts/push/push-publications.json)'
+    first_committed: '2026-10-23T18:16:49Z'
+  - n: 540
+    printed: '23.778174593057'
+    rounding: up
+    exact: 4034923843176295915504001817/169690226951000000000000000
+    exact_from: 'certificates/n540.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: a side efef7d1 first states (receipts/push/push-publications.json), the certificate
+      of the construction its index states there'
+    first_committed: '2026-10-23T18:16:49Z'
+  - n: 551
+    printed: '23.964873439804'
+    rounding: up
+    exact: 206163443809523492812562001479/8602734511717000000000000000
+    exact_from: 'certificates/n551.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: a side efef7d1 first states (receipts/push/push-publications.json)'
+    first_committed: '2026-10-23T18:16:49Z'
+  - n: 594
+    printed: '24.896263780065'
+    rounding: up
+    exact: 3705760984501851908323124063702331468731533950576540193/148848076853574333254967872396804760444000000000000000
+    exact_from: 'certificates/n594.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: a side efef7d1 first states (receipts/push/push-publications.json)'
+    first_committed: '2026-10-23T18:16:49Z'
+  - n: 596
+    printed: '24.948767393866'
+    rounding: up
+    exact: 9199790805595301972130258881522313799059350184551388265789305369841/368747307646851602106795303687473076468516021067953000000000000000
+    exact_from: 'certificates/parents/d2ca0397295c00bfc8d5c87aa1f721f751e229edcd4e692f5e6a307f49be493f.cert
+      at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23 packet: a side efef7d1
+      first states (receipts/push/push-publications.json)'
+    first_committed: '2026-10-23T18:16:49Z'
+  - n: 633
+    printed: '25.677669529670'
+    rounding: up
+    exact: 64844367512928128241104194867/2525321366801000000000000000
+    exact_from: 'certificates/n633.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: a side efef7d1 first states (receipts/push/push-publications.json)'
+    first_committed: '2026-10-23T18:16:49Z'
+  - n: 640
+    printed: '25.828427124752'
+    rounding: up
+    exact: 76833094987230214785462836237/2974749279781000000000000000
+    exact_from: 'certificates/n640.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: a side efef7d1 first states (receipts/push/push-publications.json), the certificate
+      of the construction its index states there'
+    first_committed: '2026-10-23T18:16:49Z'
+  - n: 691
+    printed: '26.828427124752'
+    rounding: up
+    exact: 79807844267011214785462836237/2974749279781000000000000000
+    exact_from: 'certificates/n691.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: a side efef7d1 first states (receipts/push/push-publications.json), the certificate
+      of the construction its index states there'
+    first_committed: '2026-10-23T18:16:49Z'
+  - n: 697
+    printed: '26.946234972260'
+    rounding: up
+    exact: 208699073646626525030592836093/7745017953769000000000000000
+    exact_from: 'certificates/n697.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: a side efef7d1 first states (receipts/push/push-publications.json)'
+    first_committed: '2026-10-23T18:16:49Z'
+  - n: 706
+    printed: '26.997916874564'
+    rounding: up
+    exact: 7585429786926873044662658459/280963521080900000000000000
+    exact_from: 'certificates/n706.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: a side efef7d1 first states (receipts/push/push-publications.json)'
+    first_committed: '2026-10-23T18:16:49Z'
+  - n: 735
+    printed: '27.656854249498'
+    rounding: up
+    exact: 466292410818803685048620849/16859922195500000000000000
+    exact_from: 'certificates/n735.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: a side efef7d1 first states (receipts/push/push-publications.json), the certificate
+      of the construction its index states there'
+    first_committed: '2026-10-23T18:16:49Z'
+  - n: 745
+    printed: '27.828427124752'
+    rounding: up
+    exact: 2294661725035922286957481663/82457471087000000000000000
+    exact_from: 'certificates/n745.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: a side efef7d1 first states (receipts/push/push-publications.json)'
+    first_committed: '2026-10-23T18:16:49Z'
+  - n: 746
+    printed: '27.828427124752'
+    rounding: up
+    exact: 22899886618315722415702423117/822895470004750000000000000
+    exact_from: 'certificates/n746.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: a side efef7d1 first states (receipts/push/push-publications.json)'
+    first_committed: '2026-10-23T18:16:49Z'
+  - n: 748
+    printed: '27.883920294486'
+    rounding: up
+    exact: 1399905757404833497009891147/50204768290120000000000000
+    exact_from: 'certificates/n748.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: a side efef7d1 first states (receipts/push/push-publications.json)'
+    first_committed: '2026-10-23T18:16:49Z'
+  - n: 790
+    printed: '28.656854249498'
+    rounding: up
+    exact: 483152333014303685048620849/16859922195500000000000000
+    exact_from: 'certificates/n790.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: a side efef7d1 first states (receipts/push/push-publications.json), the certificate
+      of the construction its index states there'
+    first_committed: '2026-10-23T18:16:49Z'
+  - n: 791
+    printed: '28.656854249499'
+    rounding: up
+    exact: 65669966508444138366887610203/2291597184279000000000000000
+    exact_from: 'certificates/n791.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: a side efef7d1 first states (receipts/push/push-publications.json)'
+    first_committed: '2026-10-23T18:16:49Z'
+  - n: 802
+    printed: '28.827332635379'
+    rounding: up
+    exact: 3102355522834210336264906289402613033837237627567712013/107618542515683814822797769678377379121400000000000000
+    exact_from: 'certificates/n802.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: a side efef7d1 first states (receipts/push/push-publications.json)'
+    first_committed: '2026-10-23T18:16:49Z'
+  - n: 816
+    printed: '28.995928899209'
+    rounding: up
+    exact: 16051324451932773719417177254977527933827183622513221/553571658550000000000000005535716585500000000000000
+    exact_from: 'certificates/n816.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: a side efef7d1 first states (receipts/push/push-publications.json)'
+    first_committed: '2026-10-23T18:16:49Z'
+  - n: 817
+    printed: '28.997492020580'
+    rounding: up
+    exact: 51736138122410003088108739511/1784159060573000000000000000
+    exact_from: 'certificates/parents/db062a3ed47de642f0e6fa38a9475eafa22e15759fb799ee57cd9c9ad285df76.cert
+      at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23 packet: a side efef7d1
+      first states (receipts/push/push-publications.json)'
+    first_committed: '2026-10-23T18:16:49Z'
+  - n: 854
+    printed: '29.778174593058'
+    rounding: up
+    exact: 12915387629932811805079327811/433719924287900000000000000
+    exact_from: 'certificates/n854.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: a side efef7d1 first states (receipts/push/push-publications.json), the certificate
+      of the construction its index states there'
+    first_committed: '2026-10-23T18:16:49Z'
+  - n: 856
+    printed: '29.798989873230'
+    rounding: up
+    exact: 1305978104291867605576421293373253501755437335676279217/43826254173304207900915108272010030351000000000000000
+    exact_from: 'certificates/n856.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: a side efef7d1 first states (receipts/push/push-publications.json), the certificate
+      of the construction its index states there'
+    first_committed: '2026-10-23T18:16:49Z'
+  - n: 858
+    printed: '29.824728376140'
+    rounding: up
+    exact: 7273602589015970784999883207/243878250869000000000000000
+    exact_from: 'certificates/n858.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: a side efef7d1 first states (receipts/push/push-publications.json)'
+    first_committed: '2026-10-23T18:16:49Z'
+  - n: 859
+    printed: '29.824728376140'
+    rounding: up
+    exact: 7273602589015970784999883207/243878250869000000000000000
+    exact_from: 'certificates/n859.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: a side efef7d1 first states (receipts/push/push-publications.json)'
+    first_committed: '2026-10-23T18:16:49Z'
+  - n: 913
+    printed: '30.778174593058'
+    rounding: up
+    exact: 13349107554220711805079327811/433719924287900000000000000
+    exact_from: 'certificates/n913.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: a side efef7d1 first states (receipts/push/push-publications.json), the certificate
+      of the construction its index states there'
+    first_committed: '2026-10-23T18:16:49Z'
+  - n: 918
+    printed: '30.824728376140'
+    rounding: up
+    exact: 7517480839884970784999883207/243878250869000000000000000
+    exact_from: 'certificates/n918.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: a side efef7d1 first states (receipts/push/push-publications.json), the certificate
+      of the construction its index states there'
+    first_committed: '2026-10-23T18:16:49Z'
+  - n: 919
+    printed: '30.827585222354'
+    rounding: up
+    exact: 64257319390254084209720735571/2084409755963000000000000000
+    exact_from: 'certificates/n919.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: a side efef7d1 first states (receipts/push/push-publications.json), the certificate
+      of the construction its index states there'
+    first_committed: '2026-10-23T18:16:49Z'
+  - n: 923
+    printed: '30.899838977702'
+    rounding: up
+    exact: 3055423257102413662517771607365417302663787743650879753/98881526836025000000000000988815268360250000000000000
+    exact_from: 'certificates/n923.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: a side efef7d1 first states (receipts/push/push-publications.json), the certificate
+      of the construction its index states there'
+    first_committed: '2026-10-23T18:16:49Z'
+  - n: 924
+    printed: '30.928790966656'
+    rounding: up
+    exact: 341183631685303264601057397842563275819158618217049/11031263137738895552444271589559727000000000000000
+    exact_from: 'certificates/n924.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: a side efef7d1 first states (receipts/push/push-publications.json), the certificate
+      of the construction its index states there'
+    first_committed: '2026-10-23T18:16:49Z'
+  - n: 980
+    printed: '31.827585222354'
+    rounding: up
+    exact: 66341729146217084209720735571/2084409755963000000000000000
+    exact_from: 'certificates/n980.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: a side efef7d1 first states (receipts/push/push-publications.json), the certificate
+      of the construction its index states there'
+    first_committed: '2026-10-23T18:16:49Z'
+  - n: 984
+    printed: '31.895323373796'
+    rounding: up
+    exact: 175909988405564597501744162676972666263940011773915348214591981635507453592433370295397031867/5515228246598978952428439345292296991573708846016922697105323308808058984056000000000000000
+    exact_from: 'certificates/n984.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: a side efef7d1 first states (receipts/push/push-publications.json)'
+    first_committed: '2026-10-23T18:16:49Z'
+  - n: 994
+    printed: '31.990639611064'
+    rounding: up
+    exact: 9533953550774797349/298023223876953125
+    exact_from: 'certificates/n994.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: a side efef7d1 first states (receipts/push/push-publications.json), the certificate
+      of the construction its index states there'
+    first_committed: '2026-10-23T18:16:49Z'
+  note: 'The 40 sides efef7d1 first states at the counts of the notebook rows (40 certificates),
+    each its least new side there below the start, commit by commit through the push (devtools.beyond_horizon_replay
+    push-publications, couzo-issue763-2026-10-23 packet, receipts/push/push-publications.json):
+    Francisco Couzo''s own (40). No issue reports them. The push of 23:38:42Z made efef7d1,
+    fa6237e and 964ee2b public together (PUSHED_LATER), so each commit is a report from it,
+    taken in commit order, and an import of their own (think-lyf9; #795''s review A, A1),
+    each holder''s rows a coverage source of their own. first_committed is the committer time
+    of efef7d1.'
 - report: franciscouzo/square-packing@fa6237e
   url: https://github.com/franciscouzo/square-packing/tree/fa6237e288cf3fc53b53fc43438c91f3f59c40e9
   kind: publication
-  holders: Kirill Tymchishin and Vladislav Lavrentev
+  holders: Francisco Couzo, Kirill Tymchishin and Vladislav Lavrentev
   reported_at: '2026-10-23T23:38:42Z'
   bead: think-lyf9
   claims:
@@ -19,326 +340,714 @@ reports:
     rounding: up
     exact: 75225389237720195768418759984367860018839/4047905235380386593933869500000000000000
     exact_from: 'certificates/best/n327.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side fa6237e first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T18:59:39Z'
   - n: 330
     printed: '18.692388156328'
     rounding: up
     exact: 101013196297783691697704671973587998814291/5403974893576651383118195500000000000000
     exact_from: 'certificates/best/n330.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side fa6237e first states (receipts/push/push-publications.json)'
+    first_committed: '2026-10-23T18:59:39Z'
+  - n: 338
+    printed: '18.902603672778'
+    rounding: up
+    exact: 51556999022285034543475033507095189405531/2727507803410951905862921750000000000000
+    exact_from: 'certificates/parents/eccc21871d976eb5fe1f9e029b795e2dbb402e8ccdcf260c4c2a9bf74fb62492.cert
+      at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23 packet: a side fa6237e
+      first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T18:59:39Z'
   - n: 340
     printed: '18.926898901624'
     rounding: up
     exact: 130801183086441728277169267736837801895431/6910861825083354229910215500000000000000
     exact_from: 'certificates/best/n340.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side fa6237e first states (receipts/push/push-publications.json)'
+    first_committed: '2026-10-23T18:59:39Z'
+  - n: 364
+    printed: '19.571428576644'
+    rounding: up
+    exact: 29501585961133672884167969690620061301957/1507380304181848741171478500000000000000
+    exact_from: 'certificates/parents/05df9ad756b3137f4e959fa32c7868476e8ea6bf55fe29005653fd279c410e51.cert
+      at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23 packet: a side fa6237e
+      first states (receipts/push/push-publications.json)'
+    first_committed: '2026-10-23T18:59:39Z'
+  - n: 377
+    printed: '19.918891242798'
+    rounding: up
+    exact: 146416192001709365798025558213689188409639/7350619581029881598374194500000000000000
+    exact_from: 'certificates/parents/18f69ea805e6a142829cd56057607adcaa277c812da1b40a28ad6152a9884108.cert
+      at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23 packet: a side fa6237e
+      first states (receipts/push/push-publications.json)'
+    first_committed: '2026-10-23T18:59:39Z'
+  - n: 378
+    printed: '19.926898935994'
+    rounding: up
+    exact: 32324718638227822974724519088315680614558160022805439630769639/1622165031400861827083616564034409204767501944500000000000000
+    exact_from: 'certificates/parents/374d8c421f13fefb5d0e59a9fbf63c4c2d70431f84605688b5638a6a92d6583a.cert
+      at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23 packet: a side fa6237e
+      first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T18:59:39Z'
   - n: 404
     printed: '20.591378149728'
     rounding: up
     exact: 50190684854175534410140069278788410698283/2437461178616605734600704000000000000000
     exact_from: 'certificates/best/n404.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side fa6237e first states (receipts/push/push-publications.json)'
+    first_committed: '2026-10-23T18:59:39Z'
+  - n: 405
+    printed: '20.645753275084'
+    rounding: up
+    exact: 4272697432629683814863112269388954863774177391535465770698087/206952847672852582975793799079525011893298043500000000000000
+    exact_from: 'certificates/parents/36ca1b5c078413856bffc740ddfc5b4c3213ef8585ef55ccc7b8134dd2a25128.cert
+      at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23 packet: a side fa6237e
+      first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T18:59:39Z'
   - n: 406
     printed: '20.656854250299'
     rounding: up
     exact: 1354681201310945683309916794321146877233/65580227506875881792366500000000000000
     exact_from: 'certificates/best/n406.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side fa6237e first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T18:59:39Z'
   - n: 409
     printed: '20.740417290708'
     rounding: up
     exact: 789807729312199367598763211845608293069005278339658194918893/38080609384173063872512956093841730638721321500000000000000
     exact_from: 'certificates/best/n409.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side fa6237e first states (receipts/push/push-publications.json)'
+    first_committed: '2026-10-23T18:59:39Z'
+  - n: 411
+    printed: '20.806167170776'
+    rounding: up
+    exact: 112942629579308326314104541455845384168056730751803132172639/5428324623765815880886151738734629144606319500000000000000
+    exact_from: 'certificates/parents/463b3a67980ee17f44fa62ebed8bcbd4f764b86683508896574a1042f617dbc3.cert
+      at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23 packet: a side fa6237e
+      first states (receipts/push/push-publications.json), the certificate of the construction
+      its index states there'
     first_committed: '2026-10-23T18:59:39Z'
   - n: 445
     printed: '21.591378149728'
     rounding: up
     exact: 52628146032792140144740773278788410698283/2437461178616605734600704000000000000000
-    exact_from: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states for its square tiling and L-border recipe of
-      the n404 certificate (certificates/best/n404.cert; 1 a side, 1 L-border layer), with
-      no certificate file at this count
+    exact_from: 'certificates/parents/c635120ea1972ac3904f244a8d2d0f4c7063838f13ec11bbd1b4905217abbbfe.cert
+      at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23 packet: a side fa6237e
+      first states (receipts/push/push-publications.json), the certificate of the construction
+      its index states there'
+    first_committed: '2026-10-23T18:59:39Z'
   - n: 446
     printed: '21.645753254767'
     rounding: up
     exact: 481761244668128048583868868483790955501439/22256617221765546745724469500000000000000
     exact_from: 'certificates/best/n446.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side fa6237e first states (receipts/push/push-publications.json)'
+    first_committed: '2026-10-23T18:59:39Z'
+  - n: 450
+    printed: '21.733166014146'
+    rounding: up
+    exact: 16668261023047666596935500048098829561801/766950430148966712036267687500000000000
+    exact_from: 'certificates/parents/a648ee3fb963efe1750a271bf38afede6a6eb7cba15d8afea15beac41e629e65.cert
+      at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23 packet: a side fa6237e
+      first states (receipts/push/push-publications.json)'
+    first_committed: '2026-10-23T18:59:39Z'
+  - n: 451
+    printed: '21.756125418986'
+    rounding: up
+    exact: 2124830241116950305563771760076882053504289633978889516067/97665838939444014712875687894254913439233500000000000000
+    exact_from: 'certificates/parents/4c1e263287d4e96f073122501d20e4951cbd8ac96d76e7fa1d4089d8dd8dace5.cert
+      at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23 packet: a side fa6237e
+      first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T18:59:39Z'
   - n: 454
     printed: '21.823102658532'
     rounding: up
     exact: 28503695081596645881137345912058256654733/1306124776462658958242516500000000000000
     exact_from: 'certificates/best/n454.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side fa6237e first states (receipts/push/push-publications.json)'
+    first_committed: '2026-10-23T18:59:39Z'
+  - n: 455
+    printed: '21.825157900492'
+    rounding: up
+    exact: 7384498066430558871275789644262024163724420438490330177147/338347978974497021992352799665570930971451625000000000000
+    exact_from: 'certificates/parents/8baf02843f5027f23884d4a43dcdceb8cabd600476112e4a40b0ab38aaee7cc7.cert
+      at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23 packet: a side fa6237e
+      first states (receipts/push/push-publications.json)'
+    first_committed: '2026-10-23T18:59:39Z'
+  - n: 460
+    printed: '21.937369317827'
+    rounding: up
+    exact: 27279393291732584499453225408722515647058671051897979747660782523793074812863/1243512514947036673931211103966701690537694821063689129997726500000000000000
+    exact_from: 'certificates/parents/ccb7bb6a0a91f937abebc8b5352a32b158312478af9e13fc760d309011a73f6e.cert
+      at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23 packet: a side fa6237e
+      first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T18:59:39Z'
   - n: 488
     printed: '22.591378149728'
     rounding: up
     exact: 55065607211408745879341477278788410698283/2437461178616605734600704000000000000000
-    exact_from: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states for its square tiling and L-border recipe of
-      the n404 certificate (certificates/best/n404.cert; 1 a side, 2 L-border layers), with
-      no certificate file at this count
+    exact_from: 'certificates/parents/67df4acb584e77b56acb9aefb7d54ce6d55a697b03b37c725900dd931ebf043f.cert
+      at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23 packet: a side fa6237e
+      first states (receipts/push/push-publications.json), the certificate of the construction
+      its index states there'
+    first_committed: '2026-10-23T18:59:39Z'
+  - n: 504
+    printed: '22.930165198822'
+    rounding: up
+    exact: 16876386466016343409840640488002746199984684783021247514307331469572623170432927/735990618457637892811080158218015887695933552520334395087678963500000000000000
+    exact_from: 'certificates/parents/4a7336a3e8017f0a2874c5b419cd1d14e114c12a3818e1778466a646ec05cdd1.cert
+      at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23 packet: a side fa6237e
+      first states (receipts/push/push-publications.json)'
+    first_committed: '2026-10-23T18:59:39Z'
   - n: 509
     printed: '22.993150623408'
     rounding: up
     exact: 234688608520983446714412931677031249602736727428519117691939/10206892146484216613949018921464842166138469500000000000000
     exact_from: 'certificates/best/n509.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side fa6237e first states (receipts/push/push-publications.json)'
+    first_committed: '2026-10-23T18:59:39Z'
+  - n: 532
+    printed: '23.569782929749'
+    rounding: up
+    exact: 2099120412231749014920983908537254215074856020971503207367821978254776794617/89059810965942869268884381621395972796522104752451697962874500000000000000
+    exact_from: 'certificates/parents/d37e5fc9056aaa192427fb4844ae59f0efd6354d67c8cd2ea1572b29fda659db.cert
+      at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23 packet: a side fa6237e
+      first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T18:59:39Z'
   - n: 533
     printed: '23.583782194417'
     rounding: up
     exact: 1491460236631800055245714488437203384273/63240926511987246743846500000000000000
     exact_from: 'certificates/best/n533.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side fa6237e first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T18:59:39Z'
   - n: 537
     printed: '23.692388159698'
     rounding: up
     exact: 66786409842581997655405144444214733122977/2818897334975681653677163500000000000000
     exact_from: 'certificates/best/n537.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side fa6237e first states (receipts/push/push-publications.json)'
+    first_committed: '2026-10-23T18:59:39Z'
+  - n: 540
+    printed: '23.756125423085'
+    rounding: up
+    exact: 65718618763113089743117034170881049630901/2766386251659279656095700500000000000000
+    exact_from: 'certificates/parents/aad943a6e63cdbaca40bb456b6b2b5634b88e5e5c40b7c2e29c9cbf638f2f68f.cert
+      at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23 packet: a side fa6237e
+      first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T18:59:39Z'
   - n: 541
     printed: '23.778174597323'
     rounding: up
     exact: 2161144001897805333132664857899473988381/90887716929335666932140500000000000000
     exact_from: 'certificates/best/n541.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side fa6237e first states (receipts/push/push-publications.json)'
+    first_committed: '2026-10-23T18:59:39Z'
+  - n: 551
+    printed: '23.939464710057'
+    rounding: up
+    exact: 400583435293859585239282860279601840724173147097744765154631/16733182639859723198994659964379010885720253000000000000000
+    exact_from: 'certificates/parents/60d2589602f2a768d080c71e7a3e1797d2230a130c8f96ec4841f12080a88682.cert
+      at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23 packet: a side fa6237e
+      first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T18:59:39Z'
   - n: 579
     printed: '24.563448006414'
     rounding: up
     exact: 800596008851167498532799950357598199431/32592981597784642005395500000000000000
     exact_from: 'certificates/best/n579.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side fa6237e first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T18:59:39Z'
   - n: 580
     printed: '24.583782194417'
     rounding: up
     exact: 1554701163143787301989560988437203384273/63240926511987246743846500000000000000
-    exact_from: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states for its square tiling and L-border recipe of
-      the n533 certificate (certificates/best/n533.cert; 1 a side, 1 L-border layer), with
-      no certificate file at this count
+    exact_from: 'certificates/parents/95042f46efa5092e76ec4faf783b2ac127cc946175353e19d8d9ef25d6a823a0.cert
+      at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23 packet: a side fa6237e
+      first states (receipts/push/push-publications.json), the certificate of the construction
+      its index states there'
+    first_committed: '2026-10-23T18:59:39Z'
   - n: 589
     printed: '24.778174594028'
     rounding: up
     exact: 321180569563742358953919238595091281123237/12962236921244508622767618500000000000000
     exact_from: 'certificates/best/n589.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side fa6237e first states (receipts/push/push-publications.json)'
+    first_committed: '2026-10-23T18:59:39Z'
+  - n: 594
+    printed: '24.879220692701'
+    rounding: up
+    exact: 30366733951296825355122760592917170463583198006747636034103/1220566123287215593198176190807046267090551500000000000000
+    exact_from: 'certificates/parents/bcfca23c6b87b99ec9f5d91353c19845d92d01428cbbc6d9de5f9ac18a5f4aec.cert
+      at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23 packet: a side fa6237e
+      first states (receipts/push/push-publications.json), the certificate of the construction
+      its index states there'
+    first_committed: '2026-10-23T18:59:39Z'
+  - n: 596
+    printed: '24.888953762946'
+    rounding: up
+    exact: 406671299451039816663150394447687555239978828526536511173748077272901708400741777/16339429263454443484028313075325434537020294287826908901021816451000000000000000
+    exact_from: 'certificates/n596.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: a side fa6237e first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T18:59:39Z'
   - n: 628
     printed: '25.535533911216'
     rounding: up
     exact: 679495975708317191468199710920387782005969/26609820576725282270185984500000000000000
     exact_from: 'certificates/best/n628.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side fa6237e first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T18:59:39Z'
   - n: 633
     printed: '25.656854253781'
     rounding: up
     exact: 227980647093027193782604475295777975308841/8885759915771328001936170500000000000000
     exact_from: 'certificates/best/n633.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side fa6237e first states (receipts/push/push-publications.json)'
+    first_committed: '2026-10-23T18:59:39Z'
+  - n: 637
+    printed: '25.769621349979'
+    rounding: up
+    exact: 3541749789710779585714142319/137438953472000000000000000
+    exact_from: 'certificates/parents/4ddca5ba3e90e1fbcf6b1d9e6864d7de8216f4fd50d39838df057f722d5c4d78.cert
+      at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23 packet: a side fa6237e
+      first states (receipts/push/push-publications.json)'
+    first_committed: '2026-10-23T18:59:39Z'
+  - n: 639
+    printed: '25.802525786986'
+    rounding: up
+    exact: 4143920829442483640668421489/160601363744500000000000000
+    exact_from: 'certificates/parents/3a4e98486624da6c7f6d1e3379d815568d3cff513afa7e66f9cdba599b16cd32.cert
+      at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23 packet: a side fa6237e
+      first states (receipts/push/push-publications.json)'
+    first_committed: '2026-10-23T18:59:39Z'
+  - n: 640
+    printed: '25.813708503286'
+    rounding: up
+    exact: 72501572015795385108739723482212739928121/2808646111680064481767060500000000000000
+    exact_from: 'certificates/parents/d318b5616821caa84f8b4613785588758e2f24af52b4ff103eff9856f892511b.cert
+      at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23 packet: a side fa6237e
+      first states (receipts/push/push-publications.json)'
+    first_committed: '2026-10-23T18:59:39Z'
+  - n: 653
+    printed: '25.991265513275'
+    rounding: up
+    exact: 477370425995444487936144570807980824094386735249927484244937815576857121858569/18366571098727098650968743160490876569728524521999260163683207937500000000000
+    exact_from: 'certificates/parents/0d530cf90edabf9d1464f37253696fe5d215896e244c90488a9c0a4ffb50e938.cert
+      at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23 packet: a side fa6237e
+      first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T18:59:39Z'
   - n: 679
     printed: '26.535533911216'
     rounding: up
     exact: 706105796285042473738385695420387782005969/26609820576725282270185984500000000000000
-    exact_from: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states for its square tiling and L-border recipe of
-      the n628 certificate (certificates/best/n628.cert; 1 a side, 1 L-border layer), with
-      no certificate file at this count
+    exact_from: 'certificates/parents/ae4c7fc59f5f1d489b21e8c35978fa86ebffc4c474d0f9721e53dfb6adc34f5a.cert
+      at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23 packet: a side fa6237e
+      first states (receipts/push/push-publications.json), the certificate of the construction
+      its index states there'
+    first_committed: '2026-10-23T18:59:39Z'
   - n: 685
     printed: '26.692388159732'
     rounding: up
     exact: 115910612795370661050775507477105745003127/4342459434567742591934813500000000000000
     exact_from: 'certificates/best/n685.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side fa6237e first states (receipts/push/push-publications.json)'
+    first_committed: '2026-10-23T18:59:39Z'
+  - n: 691
+    printed: '26.802453192395'
+    rounding: up
+    exact: 13663823445972108786821620381461487507381/509797493083561320234940500000000000000
+    exact_from: 'certificates/parents/caab6e23cf83d6de70add8737d60db1032a51d17ddf7160cfc4aa2ac5448d7ff.cert
+      at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23 packet: a side fa6237e
+      first states (receipts/push/push-publications.json)'
+    first_committed: '2026-10-23T18:59:39Z'
+  - n: 697
+    printed: '26.889681452139'
+    rounding: up
+    exact: 233142601375514528732614926022961354229090090179637311591950167174563565744577432206161578371/8670337050682157936188971299438176472017556169657587112311450033062633884998000000000000000
+    exact_from: 'certificates/parents/dda38dc100628c333c55d6e3e84b054ebb2a366450810b6c7deb2d9bc7e6f274.cert
+      at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23 packet: a side fa6237e
+      first states (receipts/push/push-publications.json)'
+    first_committed: '2026-10-23T18:59:39Z'
+  - n: 706
+    printed: '26.996375081450'
+    rounding: up
+    exact: 6336930810194195456720466491831775379861224157173054017975231/234732655442638603767446341691943968549643396750000000000000
+    exact_from: 'certificates/parents/6e77323e39dd37f942eb49f2e6c78fbbc4c710d3548fa68298392036cd4a677b.cert
+      at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23 packet: a side fa6237e
+      first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T18:59:39Z'
   - n: 732
     printed: '27.535533911216'
     rounding: up
     exact: 732715616861767756008571679920387782005969/26609820576725282270185984500000000000000
-    exact_from: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states for its square tiling and L-border recipe of
-      the n628 certificate (certificates/best/n628.cert; 1 a side, 2 L-border layers), with
-      no certificate file at this count
+    exact_from: 'certificates/parents/5bb844e20c41fc85f1ab880de0db3a4f094cbe94a24e30f1f9302867da1855a8.cert
+      at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23 packet: a side fa6237e
+      first states (receipts/push/push-publications.json), the certificate of the construction
+      its index states there'
+    first_committed: '2026-10-23T18:59:39Z'
   - n: 735
     printed: '27.617572177905'
     rounding: up
     exact: 6125292396413963935299438989826432130731/221789676404449060689330500000000000000
     exact_from: 'certificates/best/n735.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side fa6237e first states (receipts/push/push-publications.json)'
+    first_committed: '2026-10-23T18:59:39Z'
+  - n: 738
+    printed: '27.691431135633'
+    rounding: up
+    exact: 96446849936151902861423638079229341284363/3482913160528088238435931500000000000000
+    exact_from: 'certificates/parents/1c01767d5e2ef3cb809ef91114fb2f706ec31325ed86256b6cf2674610c0eff2.cert
+      at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23 packet: a side fa6237e
+      first states (receipts/push/push-publications.json)'
+    first_committed: '2026-10-23T18:59:39Z'
+  - n: 745
+    printed: '27.806788989465'
+    rounding: up
+    exact: 10502861897211505913717963385564006238451317095638260598909/377708548124376573852779838792501864588698250000000000000
+    exact_from: 'certificates/parents/85fcec221378ec3b721d11720430fc3b7d81422707f92e4c20be0e65dd3d30d4.cert
+      at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23 packet: a side fa6237e
+      first states (receipts/push/push-publications.json)'
+    first_committed: '2026-10-23T18:59:39Z'
+  - n: 746
+    printed: '27.824123424660'
+    rounding: up
+    exact: 1117627957354123645263840217994237949080621833632984477212164033246457797/40167589120295342243747287123291044938171620116009289786000000000000000
+    exact_from: 'certificates/parents/eefb9f4ddeaa9b2260974a2903ca9c8c1b1e0ab0ac6e31f152f6b341d6be7d80.cert
+      at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23 packet: a side fa6237e
+      first states (receipts/push/push-publications.json)'
+    first_committed: '2026-10-23T18:59:39Z'
+  - n: 748
+    printed: '27.845242229885'
+    rounding: up
+    exact: 3869008157316670936627998204436888742517183003930994132304402092134214585891433/138946830678467539762247057774056755720235225894672720803226266500000000000000
+    exact_from: 'certificates/parents/3672b91e457f155c309198d13038772042f6040b12f90abeabb6e29801fc0299.cert
+      at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23 packet: a side fa6237e
+      first states (receipts/push/push-publications.json)'
+    first_committed: '2026-10-23T18:59:39Z'
+  - n: 751
+    printed: '27.889780769648'
+    rounding: up
+    exact: 898746453641482510274984027063101492644778421979509533918207727109432820577774271/32224937910576438847663850530459782563774529561513540181753011135500000000000000
+    exact_from: 'certificates/parents/38802679b7a01ba06cc8edd5b934e9553bb2f431b45191c8e6881e1d8dde316f.cert
+      at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23 packet: a side fa6237e
+      first states (receipts/push/push-publications.json)'
+    first_committed: '2026-10-23T18:59:39Z'
+  - n: 755
+    printed: '27.935151038081'
+    rounding: up
+    exact: 48754970168835826695319361743022084365773145677328722579653557/1745291088720947816098880459069524488043334153500000000000000
+    exact_from: 'certificates/parents/d30b09d52e1af3fb6c79d23690dc3692778775377c7e59e331a53bf63969c7ac.cert
+      at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23 packet: a side fa6237e
+      first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T18:59:39Z'
   - n: 787
     printed: '28.535533911216'
     rounding: up
     exact: 759325437438493038278757664420387782005969/26609820576725282270185984500000000000000
-    exact_from: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states for its square tiling and L-border recipe of
-      the n628 certificate (certificates/best/n628.cert; 1 a side, 3 L-border layers), with
-      no certificate file at this count
+    exact_from: 'certificates/parents/d2b03e09b63cd8d8635b849c5cea45181d07b2dfb5f4d457814b2a7804acabfb.cert
+      at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23 packet: a side fa6237e
+      first states (receipts/push/push-publications.json), the certificate of the construction
+      its index states there'
+    first_committed: '2026-10-23T18:59:39Z'
   - n: 790
     printed: '28.614368942839'
     rounding: up
     exact: 1005183461921029986106398901246739187029887/35128625898723060394728193500000000000000
     exact_from: 'certificates/best/n790.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side fa6237e first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T18:59:39Z'
   - n: 791
     printed: '28.642135624899'
     rounding: up
     exact: 2186060518297638378371624472304000565311/76323237447325836115968000000000000000
     exact_from: 'certificates/best/n791.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side fa6237e first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T18:59:39Z'
   - n: 793
     printed: '28.678779879669'
     rounding: up
     exact: 268826184242554642606498948255457122353/9373696697366649212864000000000000000
     exact_from: 'certificates/best/n793.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side fa6237e first states (receipts/push/push-publications.json)'
+    first_committed: '2026-10-23T18:59:39Z'
+  - n: 802
+    printed: '28.824518961150'
+    rounding: up
+    exact: 132423461813732793310629681977748620720099287262582807155913/4594125646718166935482160617786081372540331500000000000000
+    exact_from: 'certificates/parents/1e23d25d97b83cb02b834cf0eccc5d61303d9d51d4abb5b2089806f6d0208b91.cert
+      at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23 packet: a side fa6237e
+      first states (receipts/push/push-publications.json)'
+    first_committed: '2026-10-23T18:59:39Z'
+  - n: 807
+    printed: '28.888230041699'
+    rounding: up
+    exact: 269691098982763918655647188472119613056708567310374531495493/9335674030339782952795915056830267914985821500000000000000
+    exact_from: 'certificates/parents/a64ea40f8051d6f7f7eac35e186cfd98680670c6584acf1d74d80f9f2f6373d8.cert
+      at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23 packet: a side fa6237e
+      first states (receipts/push/push-publications.json)'
+    first_committed: '2026-10-23T18:59:39Z'
+  - n: 816
+    printed: '28.993696421766'
+    rounding: up
+    exact: 76392232514991540686817496422101645190663/2634787624307320511729906500000000000000
+    exact_from: 'certificates/parents/f70fcc40b60c09b3686d0d32a818825651d9d37c81de379d744cc88bcaf06af3.cert
+      at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23 packet: a side fa6237e
+      first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T18:59:39Z'
   - n: 844
     printed: '29.535533911216'
     rounding: up
     exact: 785935258015218320548943648920387782005969/26609820576725282270185984500000000000000
-    exact_from: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states for its square tiling and L-border recipe of
-      the n628 certificate (certificates/best/n628.cert; 1 a side, 4 L-border layers), with
-      no certificate file at this count
+    exact_from: 'certificates/parents/409be52c47ae715e3ba0c7b283300db5f2fea1c48dcb926febd202a9adfb4afd.cert
+      at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23 packet: a side fa6237e
+      first states (receipts/push/push-publications.json), the certificate of the construction
+      its index states there'
+    first_committed: '2026-10-23T18:59:39Z'
   - n: 846
     printed: '29.583782195484'
     rounding: up
     exact: 690205527116674720028369403852589948034137/23330537067773743273846693500000000000000
     exact_from: 'certificates/best/n846.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side fa6237e first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T18:59:39Z'
   - n: 854
     printed: '29.727922065706'
     rounding: up
     exact: 288611121316616366409293665066586703241697/9708418929473825354073848500000000000000
     exact_from: 'certificates/best/n854.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side fa6237e first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T18:59:39Z'
   - n: 856
     printed: '29.778174594233'
     rounding: up
     exact: 25187662431341151454771030256839335053873/845843063739029162707686500000000000000
     exact_from: 'certificates/best/n856.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side fa6237e first states (receipts/push/push-publications.json)'
+    first_committed: '2026-10-23T18:59:39Z'
+  - n: 858
+    printed: '29.802446344800'
+    rounding: up
+    exact: 2150122565987588381883852119354840824570983017144553330011/72145841355160758580315757146634147111380500000000000000
+    exact_from: 'certificates/parents/f63ccca7fc765ac2a1c0417b7a92dc55f8d238ec1856a11ac51fb79f543fc81c.cert
+      at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23 packet: a side fa6237e
+      first states (receipts/push/push-publications.json)'
+    first_committed: '2026-10-23T18:59:39Z'
+  - n: 859
+    printed: '29.810784558747'
+    rounding: up
+    exact: 680153605224544048171422192474768923216812110487887165062563/22815689532900180567693188131565277515492525500000000000000
+    exact_from: 'certificates/parents/c3fe36f3bf9541941e30f5cb5680cc7988de6f29920036e77891201b9a8dce71.cert
+      at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23 packet: a side fa6237e
+      first states (receipts/push/push-publications.json)'
+    first_committed: '2026-10-23T18:59:39Z'
+  - n: 861
+    printed: '29.834244105301'
+    rounding: up
+    exact: 1357588021077177688498553208685879697713549233644777880591343/45504354535865782883296166774647963371281171500000000000000
+    exact_from: 'certificates/parents/2b538aa4374f2a873ad4b6385fa5f6a990fe3c8cd33843e74097ff0f8e292f32.cert
+      at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23 packet: a side fa6237e
+      first states (receipts/push/push-publications.json)'
+    first_committed: '2026-10-23T18:59:39Z'
+  - n: 867
+    printed: '29.908095427843'
+    rounding: up
+    exact: 37072480028444517877721687738597461259248517443389985078237421/1239546667820680159951941516678206801599395460500000000000000
+    exact_from: 'certificates/parents/a3e77762ed06e6ec518ba3746767e8f1f6f58c297b1665910cca68253019523c.cert
+      at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23 packet: a side fa6237e
+      first states (receipts/push/push-publications.json)'
+    first_committed: '2026-10-23T18:59:39Z'
+  - n: 873
+    printed: '29.987674023347'
+    rounding: up
+    exact: 102505467008264583230731793807042000673678820399385651414774379644699109500415199/3418253343972656104223520741293004570575878332078532780095339849500000000000000
+    exact_from: 'certificates/parents/9aa60ae2563023cfad1bbe8eaa2206b14e0910d5f44d29ec769a608720e411c6.cert
+      at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23 packet: a side fa6237e
+      first states (receipts/push/push-publications.json)'
+    first_committed: '2026-10-23T18:59:39Z'
+  - n: 874
+    printed: '29.992261829511'
+    rounding: up
+    exact: 30012353509572980157982955576733388399000057170040890466772887245022427655844517/1000669895460929145273494407470214027964320558004239713078605258500000000000000
+    exact_from: 'certificates/parents/9c8c7742da9a36f7071731d4376e26b2374a7aa42e45dbd37accc5bc1357a417.cert
+      at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23 packet: a side fa6237e
+      first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T18:59:39Z'
   - n: 903
     printed: '30.535533911216'
     rounding: up
     exact: 812545078591943602819129633420387782005969/26609820576725282270185984500000000000000
-    exact_from: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states for its square tiling and L-border recipe of
-      the n628 certificate (certificates/best/n628.cert; 1 a side, 5 L-border layers), with
-      no certificate file at this count
+    exact_from: 'certificates/parents/1c7bb8aa03df2b4e637f4d158c472efb5f74bc94139bd0e5806666a5df3d7e94.cert
+      at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23 packet: a side fa6237e
+      first states (receipts/push/push-publications.json), the certificate of the construction
+      its index states there'
+    first_committed: '2026-10-23T18:59:39Z'
   - n: 906
     printed: '30.591378150840'
     rounding: up
     exact: 806744522817451050109295389072277471886411/26371630556804661519341205500000000000000
     exact_from: 'certificates/best/n906.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side fa6237e first states (receipts/push/push-publications.json)'
+    first_committed: '2026-10-23T18:59:39Z'
+  - n: 907
+    printed: '30.619460176442'
+    rounding: up
+    exact: 1646033119306520041198786890036026436724028191410735869135783/53757744578820952152700477445788209521521629000000000000000
+    exact_from: 'certificates/parents/e6ed3daab9fd70e70201fffd5c7e820214b1302aa7acacecec7faeed7747d475.cert
+      at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23 packet: a side fa6237e
+      first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T18:59:39Z'
   - n: 913
     printed: '30.727922065706'
     rounding: up
     exact: 298319540246090191763367513566586703241697/9708418929473825354073848500000000000000
-    exact_from: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states for its square tiling and L-border recipe of
-      the n854 certificate (certificates/best/n854.cert; 1 a side, 1 L-border layer), with
-      no certificate file at this count
+    exact_from: 'certificates/parents/7bfefb2ac5bb4778a4344c46c687bf91a74a61162c537c8bd6b9cd75e2bda20d.cert
+      at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23 packet: a side fa6237e
+      first states (receipts/push/push-publications.json), the certificate of the construction
+      its index states there'
+    first_committed: '2026-10-23T18:59:39Z'
+  - n: 918
+    printed: '30.803910346360'
+    rounding: up
+    exact: 226419111230754370881988627415720339855568628703713749297539/7350336651577494746786865936374588973864944500000000000000
+    exact_from: 'certificates/parents/0ab5755f41d7a0677c4e8f5b599323ec7cb434494450674a1a4932014f783e30.cert
+      at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23 packet: a side fa6237e
+      first states (receipts/push/push-publications.json)'
+    first_committed: '2026-10-23T18:59:39Z'
+  - n: 919
+    printed: '30.821724093995'
+    rounding: up
+    exact: 2865048381173284778804890771/92955487254250000000000000
+    exact_from: 'certificates/parents/6958be9708c606204e4a318b7df3d499f386ca8242771ac77ea007d81b0c267d.cert
+      at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23 packet: a side fa6237e
+      first states (receipts/push/push-publications.json)'
+    first_committed: '2026-10-23T18:59:39Z'
+  - n: 920
+    printed: '30.821724125995'
+    rounding: up
+    exact: 151835091196290668707531347391/4926236137070500000000000000
+    exact_from: 'certificates/parents/d557814d2d53fe0f577ab4b24f42926111f255112e66b64474ee9ba352379a17.cert
+      at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23 packet: a side fa6237e
+      first states (receipts/push/push-publications.json)'
+    first_committed: '2026-10-23T18:59:39Z'
+  - n: 923
+    printed: '30.866094302498'
+    rounding: up
+    exact: 2151705606995650267200030107621294600394482985647135220201757441473700425851469/69710977550586198262838204541864162678413592217224678109351859500000000000000
+    exact_from: 'certificates/parents/218814101c941f35176db4b4b846652e76058c83007566680c0e3014cbdf15ff.cert
+      at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23 packet: a side fa6237e
+      first states (receipts/push/push-publications.json)'
+    first_committed: '2026-10-23T18:59:39Z'
+  - n: 924
+    printed: '30.877665942945'
+    rounding: up
+    exact: 2668841488762144209475006724840975920497883176802785909168649/86432747011825071450546777470118250714496824500000000000000
+    exact_from: 'certificates/parents/3323dfcfdaad8a81ebd9ad157e661df81b0dc78e70611ab80068335ee847c892.cert
+      at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23 packet: a side fa6237e
+      first states (receipts/push/push-publications.json)'
+    first_committed: '2026-10-23T18:59:39Z'
+  - n: 929
+    printed: '30.934561887031'
+    rounding: up
+    exact: 126154464744706088159162779401648611905226030596481964321405306143672944493363333/4078107367591283151220795647308871329473891795736329584979620916500000000000000
+    exact_from: 'certificates/parents/30c18fd3d863aaa068e02816ca64da60a428f8f483a0cac0c13bd2b16763f673.cert
+      at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23 packet: a side fa6237e
+      first states (receipts/push/push-publications.json)'
+    first_committed: '2026-10-23T18:59:39Z'
   - n: 964
     printed: '31.535533911216'
     rounding: up
     exact: 839154899168668885089315617920387782005969/26609820576725282270185984500000000000000
-    exact_from: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states for its square tiling and L-border recipe of
-      the n628 certificate (certificates/best/n628.cert; 1 a side, 6 L-border layers), with
-      no certificate file at this count
+    exact_from: 'certificates/parents/bed12e3bf60237a8859b8c2e8d0eda241a2774a5db9ffe3c37772aa64a1e8717.cert
+      at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23 packet: a side fa6237e
+      first states (receipts/push/push-publications.json), the certificate of the construction
+      its index states there'
+    first_committed: '2026-10-23T18:59:39Z'
   - n: 965
     printed: '31.563625656683'
     rounding: up
     exact: 4787021048269295781896454594750858748961/151662584657978983465861359375000000000
     exact_from: 'certificates/best/n965.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side fa6237e first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T18:59:39Z'
   - n: 967
     printed: '31.591378150840'
     rounding: up
     exact: 833116153374255711628636594572277471886411/26371630556804661519341205500000000000000
-    exact_from: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states for its square tiling and L-border recipe of
-      the n906 certificate (certificates/best/n906.cert; 1 a side, 1 L-border layer), with
-      no certificate file at this count
+    exact_from: 'certificates/parents/6a491a5cb96bdaa066c3e1caf0f16d4ff94dca415f303082e1b18c80ef1b53d5.cert
+      at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23 packet: a side fa6237e
+      first states (receipts/push/push-publications.json), the certificate of the construction
+      its index states there'
+    first_committed: '2026-10-23T18:59:39Z'
+  - n: 968
+    printed: '31.619416178875'
+    rounding: up
+    exact: 1176003681951238355434546671532910371282651/37192454006691820552428825500000000000000
+    exact_from: 'certificates/parents/80c7cfab9055df44141aeead26ace52cede06606237e32edf765fac03ecf1d0f.cert
+      at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23 packet: a side fa6237e
+      first states (receipts/push/push-publications.json)'
+    first_committed: '2026-10-23T18:59:39Z'
   - n: 971
     printed: '31.678779879703'
     rounding: up
     exact: 2630899703538458098941857761432191546701/83049275051914980183644250000000000000
     exact_from: 'certificates/best/n971.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side fa6237e first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T18:59:39Z'
   - n: 975
     printed: '31.727922066728'
     rounding: up
     exact: 2775242963295895219120648269795981059063/87470051062884494275808375000000000000
     exact_from: 'certificates/best/n975.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side fa6237e first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T18:59:39Z'
-  note: 'The 39 sides certified_bounds.json publishes at 964ee2bd at or below 1024 (28 certificates
-    and 11 constructions) credited to the authors of Kaggle notebooks whose certificates fa6237e
-    first holds: Kirill Tymchishin''s "22-408512-cpu-alternating-reclosure" v3, run 361239073
-    (37) and Vladislav Lavrentev''s "squares-in-squares-cuda-packing-search" v11, run 361263594
-    (2). No issue reports them and no earlier publication states them, and each is below Göbel''s
-    construction at its count (devtools.couzo_763_claims, couzo-issue763-2026-10-23 packet,
-    receipts/claim-map.json, others). They are the watched repository''s publication, dated
-    by the push that made fa6237e public (PUSHED_LATER), and an import of their own (think-lyf9),
-    each notebook''s rows a coverage source of their own. first_committed is the committer
-    time of fa6237e. The walk holds its publications at 11 counts back from a row, each waiting
-    on an owner decision (beyond_horizon_replay.WALKS[''upper-bounds-couzo-964ee2b-notebooks-20261024''].held):
-    11 constructions with no certificate file, L-border recipes of a notebook certificate
-    the packet retains (think-ww95, think-f2io).'
+  - n: 980
+    printed: '31.807256605352'
+    rounding: up
+    exact: 5720908932977145387172040653390682787747251015321100813305773/179861753057149994817612267530571499948158136500000000000000
+    exact_from: 'certificates/parents/a84cc0236eb51dd0b1b3e6606dd08d6f7a7132dcf3a6a2daf51194163ee75338.cert
+      at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23 packet: a side fa6237e
+      first states (receipts/push/push-publications.json)'
+    first_committed: '2026-10-23T18:59:39Z'
+  - n: 981
+    printed: '31.821724094196'
+    rounding: up
+    exact: 68877001944070216866065233773/2164464808386500000000000000
+    exact_from: 'certificates/parents/75acfd057790e695e550908f39eed4ffd71eaddff6abfc9ae7c1eff189ceae17.cert
+      at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23 packet: a side fa6237e
+      first states (receipts/push/push-publications.json)'
+    first_committed: '2026-10-23T18:59:39Z'
+  - n: 982
+    printed: '31.829315279663'
+    rounding: up
+    exact: 20147931928306101692716687280934695993027789533805454570343/632999225753998798793967773912060504332991812500000000000
+    exact_from: 'certificates/parents/db97265ae98db8d5031beca51387b4f95535966d17d8c4ccfab1d9f4fcf312c7.cert
+      at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23 packet: a side fa6237e
+      first states (receipts/push/push-publications.json)'
+    first_committed: '2026-10-23T18:59:39Z'
+  - n: 984
+    printed: '31.853001163230'
+    rounding: up
+    exact: 146972257530020658676468762242738535639088196994183153394720400990897092535788553/4614078804595669876663908515256624669443530327272106679706773526500000000000000
+    exact_from: 'certificates/parents/0dd90a3aaf0123f1b877bec0a1ce48d3cc4d112a5587eddcf3b4be81cb25a8ee.cert
+      at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23 packet: a side fa6237e
+      first states (receipts/push/push-publications.json)'
+    first_committed: '2026-10-23T18:59:39Z'
+  - n: 994
+    printed: '31.960278551224'
+    rounding: up
+    exact: 119724051041370235516574234869/3746026520059500000000000000
+    exact_from: 'certificates/parents/df53cb9ff41036a3cac5480c9fe8d432de5550ac850eae9a452a02941ef62e63.cert
+      at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23 packet: a side fa6237e
+      first states (receipts/push/push-publications.json)'
+    first_committed: '2026-10-23T18:59:39Z'
+  note: 'The 90 sides fa6237e first states at the counts of the notebook rows (90 certificates),
+    each its least new side there below the start, commit by commit through the push (devtools.beyond_horizon_replay
+    push-publications, couzo-issue763-2026-10-23 packet, receipts/push/push-publications.json):
+    Francisco Couzo''s own (37), Kirill Tymchishin''s "22-408512-cpu-alternating-reclosure"
+    v3, run 361239073 (42) and Vladislav Lavrentev''s "squares-in-squares-cuda-packing-search"
+    v11, run 361263594 (11). No issue reports them. The push of 23:38:42Z made efef7d1, fa6237e
+    and 964ee2b public together (PUSHED_LATER), so each commit is a report from it, taken
+    in commit order, and an import of their own (think-lyf9; #795''s review A, A1), each holder''s
+    rows a coverage source of their own. first_committed is the committer time of fa6237e.'
 - report: franciscouzo/square-packing@964ee2b
   url: https://github.com/franciscouzo/square-packing/tree/964ee2bdf301d0c8912d956d4010f478dcbbd5ea
   kind: publication
@@ -351,496 +1060,476 @@ reports:
     rounding: up
     exact: 15319814321392969549068494054154033054955389682879567164202939/810844264662291156316315392646622911563082069500000000000000
     exact_from: 'certificates/best/n338.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side 964ee2b first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T22:38:09Z'
   - n: 364
     printed: '19.571428575293'
     rounding: up
     exact: 229847819330463556412741870331579451727531/11744049160551575726475078000000000000000
     exact_from: 'certificates/best/n364.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side 964ee2b first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T22:38:09Z'
+    measured:
+      against: franciscouzo/square-packing@fa6237e
+      finding: under the best of the box's eight symmetries the pairing is not one to one
+        (345 of 364 squares matched); 116 move beyond 1e-6, 116 beyond 1e-3 and 115 beyond
+        0.1 (largest 6.911e-01), largest turn 3.687e+01 degrees; the side is 1.350e-09 below
+      source: packing/resources/web/couzo-issue763-2026-10-23/receipts/push/pose-identity.json
   - n: 376
     printed: '19.897064162577'
     rounding: up
     exact: 11080971884861650727364605159069623234897/556914919423313113172448500000000000000
     exact_from: 'certificates/best/n376.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side 964ee2b first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T22:38:09Z'
   - n: 377
     printed: '19.909958295508'
     rounding: up
     exact: 142791193915162334284242373567093871616121/7171847966521426353433185500000000000000
     exact_from: 'certificates/best/n377.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side 964ee2b first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T22:38:09Z'
   - n: 378
     printed: '19.926898904855'
     rounding: up
     exact: 221223817630592333233184330208968914831482665572444550085149/11101768453128524727614717684531285247275037000000000000000
     exact_from: 'certificates/best/n378.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side 964ee2b first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T22:38:09Z'
+    measured:
+      against: franciscouzo/square-packing@fa6237e
+      finding: under the best of the box's eight symmetries every square pairs one to one;
+        none moves beyond 1e-6 (largest 4.422e-08), largest turn 2.077e-08 degrees; the side
+        is 3.114e-08 below
+      source: packing/resources/web/couzo-issue763-2026-10-23/receipts/push/pose-identity.json
+    refines:
+      packing_of: Vladislav Lavrentev
+      entry: franciscouzo/square-packing@fa6237e
+      source: 964ee2b's manifest names Vladislav Lavrentev's fa6237e certificate (certificates/parents/374d8c421f13fefb5d0e59a9fbf63c4c2d70431f84605688b5638a6a92d6583a.cert)
+        as the row's previous_source, and the measurement pairs every square one to one within
+        1e-3 (receipts/push/pose-identity.json)
   - n: 405
     printed: '20.645753256143'
     rounding: up
     exact: 54336482610730047065521843724837910388873/2631847912575563456129786500000000000000
     exact_from: 'certificates/best/n405.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side 964ee2b first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T22:38:09Z'
+    measured:
+      against: franciscouzo/square-packing@fa6237e
+      finding: under the best of the box's eight symmetries every square pairs one to one;
+        none moves beyond 1e-6 (largest 2.460e-08), largest turn 4.030e-08 degrees; the side
+        is 1.894e-08 below
+      source: packing/resources/web/couzo-issue763-2026-10-23/receipts/push/pose-identity.json
+    refines:
+      packing_of: Vladislav Lavrentev
+      entry: franciscouzo/square-packing@fa6237e
+      source: 964ee2b's manifest names Vladislav Lavrentev's fa6237e certificate (certificates/parents/36ca1b5c078413856bffc740ddfc5b4c3213ef8585ef55ccc7b8134dd2a25128.cert)
+        as the row's previous_source, and the measurement pairs every square one to one within
+        1e-3 (receipts/push/pose-identity.json)
   - n: 411
     printed: '20.795693819980'
     rounding: up
     exact: 101429665268948311984160700473/4877435980111500000000000000
     exact_from: 'certificates/best/n411.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side 964ee2b first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T22:38:09Z'
   - n: 418
     printed: '20.933868727956'
     rounding: up
     exact: 49871936373870500385403904831024099079146770809046427239061281831833205258879/2382356411133402331931834943961447530625589847094294846326314500000000000000
     exact_from: 'certificates/best/n418.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side 964ee2b first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T22:38:09Z'
   - n: 419
     printed: '20.949984998042'
     rounding: up
     exact: 17346941518130770052663008425440170261281/828016894511033599033421750000000000000
     exact_from: 'certificates/best/n419.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side 964ee2b first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T22:38:09Z'
   - n: 450
     printed: '21.733166012067'
     rounding: up
     exact: 224517575127240282229697999501283708673859/10330642806601776906195679500000000000000
     exact_from: 'certificates/best/n450.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side 964ee2b first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T22:38:09Z'
+    measured:
+      against: franciscouzo/square-packing@fa6237e
+      finding: under the best of the box's eight symmetries the pairing is not one to one
+        (430 of 450 squares matched); 200 move beyond 1e-6, 200 beyond 1e-3 and 189 beyond
+        0.1 (largest 7.332e-01), largest turn 4.500e+01 degrees; the side is 2.079e-09 below
+      source: packing/resources/web/couzo-issue763-2026-10-23/receipts/push/pose-identity.json
   - n: 451
     printed: '21.756097565469'
     rounding: up
     exact: 1341608405641676464939461126634095959527/61665857197251768500344750000000000000
     exact_from: 'certificates/best/n451.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side 964ee2b first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T22:38:09Z'
   - n: 455
     printed: '21.825061500508'
     rounding: up
     exact: 221203128953773025681217746286517361903449/10135280899374900846933724500000000000000
     exact_from: 'certificates/best/n455.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side 964ee2b first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T22:38:09Z'
   - n: 460
     printed: '21.933868736974'
     rounding: up
     exact: 2406225278277811485189418157964577384243802235085501072073/109703641757537005996135581873680125827000562500000000000
     exact_from: 'certificates/best/n460.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side 964ee2b first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T22:38:09Z'
   - n: 504
     printed: '22.925987278335'
     rounding: up
     exact: 49864463835214077397865404736136876359542539992566945250339/2175019257833092308274720786111889544137982000000000000000
     exact_from: 'certificates/best/n504.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side 964ee2b first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T22:38:09Z'
   - n: 508
     printed: '22.982358327699'
     rounding: up
     exact: 554804548686152045515277365797670723114294160941/24140453332741503742720146938570500000000000000
     exact_from: 'certificates/best/n508.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side 964ee2b first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T22:38:09Z'
   - n: 532
     printed: '23.569769402565'
     rounding: up
     exact: 24664581997079351269006689537187110964695718772392541161209/1046449864477500883416587756657679868668104500000000000000
     exact_from: 'certificates/best/n532.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side 964ee2b first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T22:38:09Z'
   - n: 540
     printed: '23.756097566212'
     rounding: up
     exact: 501840014472729402016731495325838863499483/21124682329411641880120741500000000000000
     exact_from: 'certificates/best/n540.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side 964ee2b first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T22:38:09Z'
   - n: 543
     printed: '23.803053261145'
     rounding: up
     exact: 25762691170271432528658914577/1082327165663500000000000000
     exact_from: 'certificates/best/n543.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side 964ee2b first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T22:38:09Z'
   - n: 551
     printed: '23.935417083687'
     rounding: up
     exact: 787703213097107602502506329311293732519927/32909525258867166033953713500000000000000
     exact_from: 'certificates/best/n551.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side 964ee2b first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T22:38:09Z'
   - n: 594
     printed: '24.878125203750'
     rounding: up
     exact: 64659186072374007734804578869908317935104748299273982169650138506921/2599037730649730645389040008542649683596782300794698000000000000000
     exact_from: 'certificates/best/n594.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side 964ee2b first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T22:38:09Z'
   - n: 596
     printed: '24.888197391569'
     rounding: up
     exact: 183458574557525546506016551761261684160693/7371308241860604444288996500000000000000
     exact_from: 'certificates/best/n596.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side 964ee2b first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T22:38:09Z'
   - n: 604
     printed: '24.996827861719'
     rounding: up
     exact: 5897817130100046960639247964331341256810415277124309500027189/235942622909060206734410867761020009374827313250000000000000
     exact_from: 'certificates/best/n604.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side 964ee2b first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T22:38:09Z'
   - n: 637
     printed: '25.769289519260'
     rounding: up
     exact: 72740957466455010077516270201775664266993/2822776988558000476773746500000000000000
     exact_from: 'certificates/best/n637.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side 964ee2b first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T22:38:09Z'
   - n: 639
     printed: '25.799684810945'
     rounding: up
     exact: 52683851474305395900849793947/2042034693848500000000000000
     exact_from: 'certificates/best/n639.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side 964ee2b first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T22:38:09Z'
   - n: 640
     printed: '25.803053261947'
     rounding: up
     exact: 24449382200221253738938987023/947538337886500000000000000
     exact_from: 'certificates/best/n640.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side 964ee2b first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T22:38:09Z'
   - n: 653
     printed: '25.991128755446'
     rounding: up
     exact: 103000662585149636233399984874252559342165386133/3962916099346694229343548005366500000000000000
     exact_from: 'certificates/best/n653.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side 964ee2b first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T22:38:09Z'
   - n: 691
     printed: '26.799999051183'
     rounding: up
     exact: 80827807248389567876110633861/3015963063805500000000000000
     exact_from: 'certificates/best/n691.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side 964ee2b first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T22:38:09Z'
   - n: 697
     printed: '26.888197389264'
     rounding: up
     exact: 50310688215820496829695563714778285411333/1871106771773009747247104000000000000000
     exact_from: 'certificates/best/n697.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side 964ee2b first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T22:38:09Z'
   - n: 706
     printed: '26.995398008109'
     rounding: up
     exact: 1713284115278776748210770739633000121278630794155257848281/63465784603885791330190558789296078593015500000000000000
     exact_from: 'certificates/best/n706.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side 964ee2b first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T22:38:09Z'
   - n: 738
     printed: '27.691283629550'
     rounding: up
     exact: 41367801805601047598805673562071154084609/1493892531636080792176954500000000000000
     exact_from: 'certificates/best/n738.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side 964ee2b first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T22:38:09Z'
   - n: 745
     printed: '27.799999071184'
     rounding: up
     exact: 1163526915159769373634608969084181339651275871596529516448827/41853487555178760147544253083981193228139038500000000000000
     exact_from: 'certificates/best/n745.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side 964ee2b first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T22:38:09Z'
   - n: 746
     printed: '27.803053268109'
     rounding: up
     exact: 468067440628431266001547079/16835109299500000000000000
     exact_from: 'certificates/best/n746.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side 964ee2b first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T22:38:09Z'
   - n: 748
     printed: '27.844000201765'
     rounding: up
     exact: 53621108200101949190889465313/1925768848281500000000000000
     exact_from: 'certificates/best/n748.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side 964ee2b first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T22:38:09Z'
   - n: 751
     printed: '27.888197393173'
     rounding: up
     exact: 23158218026367940905769885227788605623767/830394940909227087463871000000000000000
     exact_from: 'certificates/best/n751.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side 964ee2b first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T22:38:09Z'
   - n: 755
     printed: '27.933868760801'
     rounding: up
     exact: 122244082006974126638496340391/4376195902320500000000000000
     exact_from: 'certificates/best/n755.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side 964ee2b first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T22:38:09Z'
   - n: 761
     printed: '27.998784458427'
     rounding: up
     exact: 45428736290196559456035864047/1622525304898500000000000000
     exact_from: 'certificates/best/n761.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side 964ee2b first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T22:38:09Z'
   - n: 802
     printed: '28.809159596152'
     rounding: up
     exact: 5875585674416822045044095391/203948527370500000000000000
     exact_from: 'certificates/best/n802.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side 964ee2b first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T22:38:09Z'
   - n: 807
     printed: '28.888197393373'
     rounding: up
     exact: 9566431839635861792192655909492874619387/331153644146396012153443500000000000000
     exact_from: 'certificates/best/n807.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side 964ee2b first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T22:38:09Z'
   - n: 816
     printed: '28.992261752627'
     rounding: up
     exact: 7969332228134570004076996763/274877906944000000000000000
     exact_from: 'certificates/best/n816.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side 964ee2b first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T22:38:09Z'
   - n: 817
     printed: '28.996875956628'
     rounding: up
     exact: 36096377832439354030721265417/1244836784708500000000000000
     exact_from: 'certificates/best/n817.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side 964ee2b first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T22:38:09Z'
   - n: 858
     printed: '29.799684951024'
     rounding: up
     exact: 42876888993155690929677252433/1438836989841500000000000000
     exact_from: 'certificates/best/n858.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side 964ee2b first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T22:38:09Z'
   - n: 859
     printed: '29.809159596152'
     rounding: up
     exact: 6079534201787322045044095391/203948527370500000000000000
-    exact_from: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states for its square tiling and L-border recipe of
-      the n802 certificate (certificates/best/n802.cert; 1 a side, 1 L-border layer), with
-      no certificate file at this count
+    exact_from: 'certificates/parents/fd3b49f57ca5ffe4d1629d670fbfd3265e38ac15f52292b193d251038e7dad08.cert
+      at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23 packet: a side 964ee2b
+      first states (receipts/push/push-publications.json), the certificate of the construction
+      its index states there'
+    first_committed: '2026-10-23T22:38:09Z'
   - n: 861
     printed: '29.832000576669'
     rounding: up
     exact: 45318769527459622987527747/1519132765199218750000000
     exact_from: 'certificates/best/n861.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side 964ee2b first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T22:38:09Z'
   - n: 867
     printed: '29.908036104109'
     rounding: up
     exact: 96369086550898837502134688970094820146161/3222180360336637331426205500000000000000
     exact_from: 'certificates/best/n867.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side 964ee2b first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T22:38:09Z'
   - n: 873
     printed: '29.985475579740'
     rounding: up
     exact: 4121172383039609008307470569/137438953472000000000000000
     exact_from: 'certificates/best/n873.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side 964ee2b first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T22:38:09Z'
   - n: 874
     printed: '29.992261722443'
     rounding: up
     exact: 897871003081144630498994351840454039222901242040974839862477/29936755400119599297539533215797529711832207250000000000000
     exact_from: 'certificates/best/n874.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side 964ee2b first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T22:38:09Z'
+    measured:
+      against: franciscouzo/square-packing@fa6237e
+      finding: under the best of the box's eight symmetries the pairing is not one to one
+        (873 of 874 squares matched); 276 move beyond 1e-6, 234 beyond 1e-3 and 60 beyond
+        0.1 (largest 5.500e-01), largest turn 8.132e-06 degrees; the side is 1.071e-07 below
+      source: packing/resources/web/couzo-issue763-2026-10-23/receipts/push/pose-identity.json
   - n: 875
     printed: '29.996827869334'
     rounding: up
     exact: 1531254611219270783049751136480275371753599927568031475653609/51047217988830414135524413700093110031611679500000000000000
     exact_from: 'certificates/best/n875.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side 964ee2b first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T22:38:09Z'
   - n: 907
     printed: '30.619088210478'
     rounding: up
     exact: 66216450368024237758015562712954159285855473988172550051783178729144162873935261/2162587269511355434171611467418152744697692677591060196133169005500000000000000
     exact_from: 'certificates/best/n907.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side 964ee2b first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T22:38:09Z'
   - n: 918
     printed: '30.799684872950'
     rounding: up
     exact: 60933921092552459483577914371/1978394303185500000000000000
     exact_from: 'certificates/best/n918.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side 964ee2b first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T22:38:09Z'
   - n: 919
     printed: '30.809159596954'
     rounding: up
     exact: 113438018743151013425077173809/3681957581029500000000000000
     exact_from: 'certificates/best/n919.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side 964ee2b first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T22:38:09Z'
   - n: 920
     printed: '30.821593354959'
     rounding: up
     exact: 14127665834778607713478531033/458369094422750000000000000
     exact_from: 'certificates/best/n920.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side 964ee2b first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T22:38:09Z'
   - n: 923
     printed: '30.858737702974'
     rounding: up
     exact: 3187836587274397239015856611/103304179774250000000000000
     exact_from: 'certificates/best/n923.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side 964ee2b first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T22:38:09Z'
   - n: 924
     printed: '30.877654761160'
     rounding: up
     exact: 26536579773420552001498394292822417739177/859410469437615521999758500000000000000
     exact_from: 'certificates/best/n924.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side 964ee2b first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T22:38:09Z'
   - n: 929
     printed: '30.934039771569'
     rounding: up
     exact: 52665709013419712018283248868989741676241465742984126570791/1702516367158278922602298766773924382742420890625000000000
     exact_from: 'certificates/best/n929.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side 964ee2b first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T22:38:09Z'
   - n: 968
     printed: '31.619088202057'
     rounding: up
     exact: 4421863631480741923197919990593129239396493920207758239785977/139847917284129519787967592019794454816131138500000000000000
     exact_from: 'certificates/best/n968.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side 964ee2b first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T22:38:09Z'
   - n: 980
     printed: '31.800000616031'
     rounding: up
     exact: 23488985066989201815046754633/738647314841500000000000000
     exact_from: 'certificates/best/n980.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side 964ee2b first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T22:38:09Z'
   - n: 981
     printed: '31.809159874355'
     rounding: up
     exact: 119856020412372345584460975891/3767971895070500000000000000
     exact_from: 'certificates/best/n981.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side 964ee2b first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T22:38:09Z'
   - n: 982
     printed: '31.828000616591'
     rounding: up
     exact: 63442661306571703350801377413/1993297099331500000000000000
     exact_from: 'certificates/best/n982.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side 964ee2b first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T22:38:09Z'
   - n: 984
     printed: '31.851684895372'
     rounding: up
     exact: 35021297906718298985302163927/1099511627776000000000000000
     exact_from: 'certificates/best/n984.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side 964ee2b first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T22:38:09Z'
   - n: 994
     printed: '31.960209732221'
     rounding: up
     exact: 1190253052990506334802083525897688296279/37241715963789605161186375000000000000
     exact_from: 'certificates/best/n994.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
-      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
-      packet (receipts/claim-map.json) states'
+      packet: a side 964ee2b first states (receipts/push/push-publications.json)'
     first_committed: '2026-10-23T22:38:09Z'
-  note: 'The 60 sides certified_bounds.json publishes at 964ee2bd at or below 1024 (59 certificates
-    and 1 construction) credited to the authors of Kaggle notebooks whose certificates 964ee2b
-    first holds: Kirill Tymchishin''s "22-3662-cpu-cuda-mps-eda-union", run 361576574 (15),
-    kyleluecke''s "inos-v0-6-k-mosh-squares-in-squares-22-366222", run 361592092 (18), alexchilton''s
-    "fault-line-dp-basin-hopping-lb-22-3747", run 361412241 (11), aqibrazadev''s "squares-in-squares-top-lb-blending-visualization",
+  note: 'The 60 sides 964ee2b first states at the counts of the notebook rows (60 certificates),
+    each its least new side there below the start, commit by commit through the push (devtools.beyond_horizon_replay
+    push-publications, couzo-issue763-2026-10-23 packet, receipts/push/push-publications.json):
+    Kirill Tymchishin''s "22-3662-cpu-cuda-mps-eda-union", run 361576574 (15), kyleluecke''s
+    "inos-v0-6-k-mosh-squares-in-squares-22-366222", run 361592092 (18), alexchilton''s "fault-line-dp-basin-hopping-lb-22-3747",
+    run 361412241 (11), aqibrazadev''s "squares-in-squares-top-lb-blending-visualization",
     run 361516058 (9) and Vladislav Lavrentev''s "squares-in-squares-cuda-packing-search",
-    run 361589987 (7). No issue reports them and no earlier publication states them, and each
-    is below Göbel''s construction at its count (devtools.couzo_763_claims, couzo-issue763-2026-10-23
-    packet, receipts/claim-map.json, others). They are the watched repository''s publication,
-    dated by the push that made 964ee2b public (PUSHED_LATER), and an import of their own
-    (think-lyf9), each notebook''s rows a coverage source of their own. first_committed is
-    the committer time of 964ee2b. The walk holds its publications at 1 count back from a
-    row, each waiting on an owner decision (beyond_horizon_replay.WALKS[''upper-bounds-couzo-964ee2b-notebooks-20261024''].held):
-    1 construction with no certificate file, an L-border recipe of a notebook certificate
-    the packet retains (think-ww95, think-f2io).'
+    run 361589987 (7). No issue reports them. The push of 23:38:42Z made efef7d1, fa6237e
+    and 964ee2b public together (PUSHED_LATER), so each commit is a report from it, taken
+    in commit order, and an import of their own (think-lyf9; #795''s review A, A1), each holder''s
+    rows a coverage source of their own. first_committed is the committer time of 964ee2b.'
 - report: franciscouzo/square-packing@487b058
   url: https://github.com/franciscouzo/square-packing/tree/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d
   kind: publication
