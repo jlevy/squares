@@ -20640,10 +20640,10 @@ results:
       s(n² − n + 1) < n for every n ≥ 15, and n² − n + F(n) squares below side n, from Kevin
       Fang
     claim: >-
-      Kevin Fang states two theorems, with their proofs, in a note, draft v0.9 of 18 October
-      2026, published on Zenodo: Theorem 1, s(n^2 - n + 1) < n for every integer n >= 15; and
-      Theorem 2, s(n^2 - n + F(n)) < n with F(n) = 1 + max{p + 2q : 16p + 21q <= n - 15}
-      over integers p, q >= 0. The proof glues a squeezable 17 x 16 rectangle of 257
+      Kevin Fang states two theorems, with their proofs, in a note, draft v0.9 of 18
+      October 2026, published on Zenodo: Theorem 1, s(n^2 - n + 1) < n for every integer n
+      >= 15; and Theorem 2, s(n^2 - n + F(n)) < n with F(n) = 1 + max{p + 2q : 16p + 21q <=
+      n - 15} over integers p, q >= 0. The proof glues a squeezable 17 x 16 rectangle of 257
       squares, or a 22 x 21 rectangle of 443 that adds two, onto a square packing (Lemma 3)
       and inducts on n from finitely many certificates; the construction gives side n -
       1/20000 at every n >= 15.
@@ -20741,9 +20741,9 @@ results:
       conditional proofs a premise needs a complete machine execution, and the published
       text alone discharges nothing (review A of pull request 781).
 
-      From 14 to 24 October the entry stood at V2, a proof asserted but not publicly recoverable, since the note
-      was not public until 18 October; the four finite bounds have had the two-route replay
-      throughout.
+      From 14 to 24 October the entry stood at V2, a proof asserted but not publicly
+      recoverable, since the note was not public until 18 October; the four finite bounds
+      have had the two-route replay throughout.
 
       The intake audit of 24 October (think-494l) found the note's Theorems 1 and 2 equal to
       this claim, hypotheses and conclusions, and read no proof against another. Fang's own

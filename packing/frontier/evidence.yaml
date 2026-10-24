@@ -36120,19 +36120,26 @@ evidence:
       The 14 October review's clean-room exact checker, the one program the review wrote
       to decide the pieces, run again here on the 18 pieces the note's Theorems 1 and 2
       use, which the note cites as exact certificates in TheSnakeFang/squarepack-certs at
-      078789a and does not reproduce. All 18 are strict-valid in the open box their header
-      states, with exact squeezes that agree with theorem/PIECES.md's rounded-down values
-      and with Propositions 4 and 5: 0.000743691554 for R in 17 x 16, 0.009439615924 for R'
-      in 22 x 21, and the least of the 18, 0.000690144837 for n0308, each above the uniform
-      squeeze 1/10000. Each certificate's output equals the review's retained
-      review/outputs/pieces.out and rectangles.out apart from CPU times. The scope is the theorem's own at the four counts the record
-      holds, which the premise's discharge must cover: there the pieces are the bases
-      themselves (211, 241, 273, and 308, whose first 307 squares are Proposition 5's base
-      for n = 18); the other fourteen are the theorem's premises past them, and R and R'
-      bound no s(n). One route, of the same system family as the author's assistant; the
-      inventory's six retained certificates are decided by both maintained routes in
-      E-fang-excess-theorem-exact-feasibility. It decides the finite premise only: Lemma
-      3, the induction and the strict scaling are the note's.
+      078789a and does not reproduce. The bytes decided are 078789a's for R, R' and n0381
+      to n0651 (the 13 October and direct-certificates packets), the two-wedge packet's
+      c75bebd copies for n0308 and n0343, and the 2026-10-05 evand packet's for Daniel's
+      seven bases. They are theorem/PIECES.md's pieces: Daniel's seven by the table's
+      SHA-256, and the other eleven, whose digests in the table are of other copies (the
+      review's MR-1), by data lines identical to the Lean packet's copies, which have those
+      digests and differ only in their comment line; tests/test_fang_excess_theorem.py
+      checks both. All 18 are strict-valid in the open box their header states, with exact
+      squeezes that agree with PIECES.md's rounded-down values and with Propositions 4 and
+      5: 0.000743691554 for R in 17 x 16, 0.009439615924 for R' in 22 x 21, and the least
+      of the 18, 0.000690144837 for n0308, each above the uniform squeeze 1/10000. Each
+      certificate's output equals the review's retained review/outputs/pieces.out and
+      rectangles.out apart from CPU times. The scope is the theorem's own at the four
+      counts the record holds, which the premise's discharge must cover: there the pieces
+      are the bases themselves (211, 241, 273, and 308, whose first 307 squares are
+      Proposition 5's base for n = 18); the other fourteen are the theorem's premises past
+      them, and R and R' bound no s(n). One route, of the same system family as the
+      author's assistant; the inventory's six retained certificates are decided by both
+      maintained routes in E-fang-excess-theorem-exact-feasibility. It decides the finite
+      premise only: Lemma 3, the induction and the strict scaling are the note's.
     source_reviewed: '2026-10-24'
   - id: E-fang-excess-note-proof
     claim: upper-bound
@@ -36170,8 +36177,10 @@ evidence:
           The pieces of Propositions 4 and 5, the rectangles R and R' and the sixteen square
           bases, are the exact rational certificates of TheSnakeFang/squarepack-certs at
           078789a, which the note cites and does not reproduce; theorem/PIECES.md in the 13
-          October packet lists them, and the copies decided here are the retained ones it
-          names.
+          October packet lists them. The copies decided here bind to its table by its
+          SHA-256 for Daniel's seven and by identical data lines to the Lean packet's
+          copies, which have its digests, for the other eleven
+          (E-fang-excess-pieces-exact-replay).
         - Packings permit arbitrary orientations and boundary contact.
       conditional_on:
         - hypothesis: Propositions 4 and 5 (the 18 pieces, each 1/10000-squeezable)
@@ -36199,10 +36208,10 @@ evidence:
       211, 241, 273, 307, 308 and 932 are replayed by both maintained exact routes
       (E-fang-excess-theorem-exact-feasibility); neither Lean proof of the theorems has
       been built here. This entry records the published argument, not a read of it. The
-      note states that its software, verifiers, gluing
-      program and bundle were written and run with Claude (Anthropic) as a coding and
-      research agent, directed and reviewed by the author, and that two language-model
-      reviews of earlier drafts found errors that were corrected.
+      note states that its software, verifiers, gluing program and bundle were written and
+      run with Claude (Anthropic) as a coding and research agent, directed and reviewed by
+      the author, and that two language-model reviews of earlier drafts found errors that
+      were corrected.
     source_reviewed: '2026-10-24'
   - id: E-fang-excess-lean-report
     claim: upper-bound

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 import re
 import shlex
@@ -25,6 +26,8 @@ NAME = "fang-excess-theorem-2026-10-13"
 #: The 14 October review's checker run on the 18 pieces of Propositions 4 and 5, which
 #: E-fang-excess-pieces-exact-replay records and the note's proof takes as its premise.
 PIECES_RECEIPT = reports.packet_path(NAME) / "receipts" / "pieces-exact-check.log"
+#: The Lean packet's copies of the author's pieces, whose bytes PIECES.md's digests name.
+LEAN_CERTS = inventory.ROOT / "resources/web/fang-excess-lean-2026-10-18/source/certs/ours"
 NOTE_PROOF = "E-fang-excess-note-proof"
 PIECES_REPLAY = "E-fang-excess-pieces-exact-replay"
 
@@ -185,16 +188,49 @@ def test_the_lean_excess_is_f_or_one_short_wherever_mixing_the_steps_gains() -> 
     assert sorted(n for n in short if n < 100) == below_100
 
 
-def theorem_pieces() -> set[str]:
-    """The certificate file of each piece theorem/PIECES.md gives the role `theorem`."""
-    names: set[str] = set()
+def theorem_piece_digests() -> dict[str, str]:
+    """The certificate file of each piece theorem/PIECES.md gives the role `theorem`, with
+    the SHA-256 its table lists."""
+    digests: dict[str, str] = {}
     for line in inventory.retained_text("theorem/PIECES.md").splitlines():
         cells = [cell.strip() for cell in line.strip().strip("|").split("|")]
         if len(cells) == 10 and cells[7] == "theorem":
             path = cells[1].strip("`")
             fetched = f"{cells[0]}.cert"  # n-211 is fetched, and its row names no path
-            names.add(PurePosixPath(path).name if path.endswith(".cert") else fetched)
-    return names
+            name = PurePosixPath(path).name if path.endswith(".cert") else fetched
+            digests[name] = cells[9].strip("`")
+    return digests
+
+
+def theorem_pieces() -> set[str]:
+    """The certificate file of each piece theorem/PIECES.md gives the role `theorem`."""
+    return set(theorem_piece_digests())
+
+
+def data_lines(path: Path) -> list[str]:
+    """A certificate's lines without its comment lines, which copies of one packing vary in."""
+    lines = path.read_text(encoding="utf-8").splitlines()
+    return [line for line in lines if not line.startswith("#")]
+
+
+def piece_bindings(named: list[str]) -> dict[str, str]:
+    """How each replayed certificate is the piece theorem/PIECES.md lists (review B1 of
+    PR 781): by the table's SHA-256 itself, or, where the table's digest is of another
+    copy (the 14 October review's MR-1), by data lines identical to the Lean packet's
+    copy, whose bytes have that digest. Raises if a file binds neither way."""
+    digests = theorem_piece_digests()
+    bindings: dict[str, str] = {}
+    for relative in named:
+        path = inventory.ROOT / relative
+        listed = digests[path.name]
+        if hashlib.sha256(path.read_bytes()).hexdigest() == listed:
+            bindings[path.name] = "digest"
+            continue
+        twin = LEAN_CERTS / path.name
+        assert hashlib.sha256(twin.read_bytes()).hexdigest() == listed, path.name
+        assert data_lines(path) == data_lines(twin), path.name
+        bindings[path.name] = "data lines"
+    return bindings
 
 
 def receipt_verdicts(text: str) -> dict[str, tuple[Fraction, str]]:
@@ -228,6 +264,13 @@ def test_the_pieces_receipt_decides_the_eighteen_theorem_pieces_above_the_squeez
         assert verdicts[f"{stem}.cert"][0] >= stated
     assert "18 of 18 as required" in text
     assert "; exit 0; " in text.splitlines()[-1]
+    # The bytes decided are the pieces the note's table names: Daniel's seven by the
+    # table's digest, the author's eleven by their data lines.
+    bindings = piece_bindings(named)
+    assert sorted(name for name, how in bindings.items() if how == "digest") == [
+        f"n-{n}.cert" for n in (110, 132, 156, 182, 211, 241, 273)
+    ]
+    assert len(bindings) == 18
 
 
 def test_the_note_s_finite_premise_is_discharged_by_the_pieces_replay() -> None:
@@ -241,7 +284,12 @@ def test_the_note_s_finite_premise_is_discharged_by_the_pieces_replay() -> None:
     problems = conditional_problems({key: by_id[key] for key in (NOTE_PROOF, PIECES_REPLAY)})
     assert problems == []
     # The published proof carries its V3 to the theorem only through the replay: without
-    # it the premise is open and the note supports the implication alone.
-    assert claim_support_level(note, by_id, lambda _: 3, confirming=False) == 3
-    assert claim_support_level(note, {NOTE_PROOF: note}, lambda _: 3, confirming=False) == 0
+    # it the premise is open and the note supports the implication alone. T-163's derived
+    # V3 does not depend on the note, since each count's pool takes the inventory's
+    # two-route replay, so the theorem part's V3 is held here and in its composition.
+    level = check_results.verification_level
+    assert level(note) == 3
+    assert level(by_id[PIECES_REPLAY]) == 3
+    assert claim_support_level(note, by_id, level, confirming=False) == 3
+    assert claim_support_level(note, {NOTE_PROOF: note}, level, confirming=False) == 0
     assert check_results.derive_verification([note]) == "V0"
