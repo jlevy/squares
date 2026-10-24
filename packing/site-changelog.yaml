@@ -6,6 +6,119 @@ softschema:
   status: enforced
 repository: https://github.com/jlevy/squares
 entries:
+  - id: daniel-fang-theorems-lean-and-small-n-register
+    date: '2026-10-24'
+    title: Daniel Reports Lean Proofs of Fang’s Theorems, and the Register Takes In s(2) to s(5)
+    significance:
+      score: 3
+      rationale: >-
+        Two S3 results. T-236 reports a machine-checked proof, by another author, of the
+        bound family T-163 holds on a reviewer’s reading of its proof: both of Fang’s
+        theorems, for every n ≥ 15 and with no hypothesis. T-237 registers the classical
+        exact values s(2) to s(5), Göbel’s s(5) a substantive case result scored as its
+        claim, as the register’s other published exact values are. Neither moves a bound,
+        and the significance does not establish verification.
+    topics: [upper-bound, optimality, formalization]
+    categories: [records]
+    pull_requests: [750]
+    result_ids: [T-236, T-237]
+    summary: |-
+      Daniel reports Lean 4 proofs of Fang’s Theorems 1 and 2 (T-163) with no hypothesis:
+      $s(n^2 - n + 1) < n$ for every integer $n \ge 15$, and, for Theorem 2, that
+      $n^2 - n + 1 + p + 2q$ unit squares fit in a square of side below $n$ whenever
+      $n \ge 15$ and $16p + 21q \le n - 15$. T-236 is a reported formalization at V0/C0:
+      it has not been built or reviewed here. The register also takes in the classical
+      values $s(2) = s(3) = s(4) = 2$ and $s(5) = 2 + 1/\sqrt{2}$ as T-237, on Göbel’s 1979
+      proof and Friedman’s survey, so that chelokot’s and Daniel’s Lean proofs of them
+      (T-238) formalize a registered result.
+    details: |-
+      - The proof formalizes Fang’s: the gluing lemma, which is Arslanov, Mustafin and
+        Shangitbayev’s decomposition, the induction on $n$, and 18 pieces held as exact
+        rational certificates, each checked by Lean’s kernel in a generated module. The
+        source reports the standard axioms only and publishes no build log, and the
+        generated modules are rebuilt from the certificates rather than published.
+      - The record holds Fang’s theorems on the 14 October review’s reading of their
+        proof. Fang’s own Lean statement covers Theorem 1 and the unmixed bounds of
+        Theorem 2; Daniel’s states Theorem 2 in full. At the counts the record holds, 211,
+        241, 273 and 307, the theorems give sides below $n$, which T-163’s construction
+        and the case bounds already improve on.
+      - The source says its work was produced by Claude (Anthropic) under human direction.
+        A stage 4 review and a build here, priced at 1.5 to 3 CPU-hours, come next.
+      - T-237 cites the evidence the case records of 2 to 5 already cite: the exact
+        replays here of the side-2 bound, the area bound, the grid and Göbel’s packing,
+        and Göbel’s published proof that no square of side below $2 + 1/\sqrt{2}$ holds
+        five unit squares, which no review here has read yet. The case records are
+        unchanged.
+      - The same change records three S2 Lean reports, none with a receipt-bound build
+        here: Hosono’s $s(21) = 5$ by the point-only route (T-234) and $s(59) = 8$ on
+        Daniel’s mixed-measure checker (T-235), and chelokot’s and Daniel’s proofs of
+        $s(2)$ to $s(5)$ (T-238).
+    artifacts:
+      - kind: result
+        label: Daniel’s Lean proof report for Fang’s theorems
+        target: https://squaremath.org/result/t-236.html
+      - kind: result
+        label: The classical values s(2) to s(5)
+        target: https://squaremath.org/result/t-237.html
+    publication:
+      date: '2026-10-24'
+      evidence: https://github.com/jlevy/squares/actions/runs/40065536417/job/120790587248
+    references:
+      - label: Retained source, build plan and verification limits
+        target: packing/resources/web/evand-fang-ryu-lean-2026-10-18/README.md
+      - label: Fang’s theorems as the record holds them
+        target: https://squaremath.org/result/t-163.html
+      - label: chelokot’s Lean proofs of s(2) to s(5), retained
+        target: packing/resources/web/chelokot-small-n-lean-2026-09-05/README.md
+  - id: hosono-thirty-one-fine-net-lower-bound
+    date: '2026-10-24'
+    title: Hosono Raises the Lower Bound for 31 Squares to 5.9775
+    significance:
+      score: 3
+      rationale: >-
+        T-232 is an S3 result at one count: the strongest lower bound on record at n = 31,
+        which more than halves the gap to the upper bound 6, by the existing fine-net
+        rectangle-measure method on its declared 2,073-direction net. T-233 is an S3
+        report of stronger bounds at four counts by the same method, reviewed and not yet
+        adopted. Neither brings a new technique or an optimality claim.
+    topics: [lower-bound, verification]
+    categories: [records]
+    pull_requests: [745]
+    result_ids: [T-232, T-233]
+    summary: |-
+      [Hiroaki Hosono](packing/contributors/people/hiroaki-hosono.md) (wand125) shows that 31 unit squares do not fit in a square of side $2391/400 = 5.9775$, by a measure certificate checked at every direction of a fine angle net. T-232 is confirmed at V3/C3 and is now the verified lower bound at 31, $1/40$ above the standing $2381/400$. Four more of his bounds, reported in issue 446, are registered as T-233 at V0/C1.
+    details: |-
+      - The certificate is a density of 536 rectangles, averaged over the square’s
+        symmetries, of total mass $31 - 1/100000$. Every unit square in the container
+        contains a slightly smaller concentric square, at one of 2,073 net angles, that
+        holds mass at least one, so 31 squares would need mass 31.
+      - The project replayed the certificate at all 2,073 directions with its reviewed
+        `sqverify-fast` verifier, which the source adapted for its own check, so the
+        replay re-implements the check sharing the producer’s components, and its controls
+        refused the scaled mutant at every direction. A mathematical review re-derived the
+        argument and decided 122 of the directions again with a clean-room exact checker
+        of its own. The gap to the upper bound 6 narrows from $19/400$ to $9/400$.
+      - T-233 reports $s(19) \ge 1931/400$, $s(20) \ge 393/80$, $s(26) \ge 1111/200$ and
+        $s(27) \ge 1131/200$, credited to Hosono after
+        [Tokoharu](packing/contributors/people/tokoharu.md) and
+        [Joshua Levy](packing/contributors/people/joshua-levy.md). T-233 stands as
+        reported (V0/C1): a review accepts their mathematics, and complete replays here
+        passed at all four counts, but the entry waits on a reviewed fix to a tolerance in
+        this project’s control, which failed closed at 26 on the control, not on the
+        certificate. Until then the four standing bounds are unchanged.
+    references:
+      - label: The case record at 31
+        target: packing/frontier/n-031.md
+      - label: Hosono’s certificate at 31
+        target: https://github.com/wand125/square-packing/tree/23e31862345c532d17ad2c896677a3a8d8821aa4/problems/square-lower-bounds/certificates/mixed_n31_L59775
+      - label: Retained report and verification limits at 31
+        target: packing/resources/web/wand125-fine-net-n31-2026-10-11/README.md
+      - label: Mathematical review of the bound at 31
+        target: docs/project/reviews/review-2026-10-23-wand125-n31-fine-net.md
+      - label: Mathematical review of the four bounds of issue 446
+        target: docs/project/reviews/review-2026-10-23-wand125-446-fine-net.md
+      - label: Hosono’s report of the four bounds
+        target: https://github.com/jlevy/squares/issues/446
   - id: visual-atlas-follows-the-scroll
     date: '2026-10-23'
     title: The Visual Atlas Follows the Scroll
@@ -2471,6 +2584,16 @@ entries:
       - label: Revised verification and confirmation ladder
         target: https://github.com/jlevy/squares/pull/262
 deliveries:
+- number: 750
+  title: 'records(intake): five Lean formalization sources retained; T-234 to T-238 registered, with the classical s(2) to s(5)'
+  merged_at: '2026-10-24T05:15:20Z'
+  base_ref: main
+  merge_commit: 2c58b6373cb2683e200344ae14eae537bdfa895b
+- number: 745
+  title: 'records(think-wop1, #446): T-232 at n31 and T-233 at n19, 20, 26, 27, lower bounds from wand125'
+  merged_at: '2026-10-24T04:49:58Z'
+  base_ref: main
+  merge_commit: af9c9e8509fd0d1622a7654de1b1b58740339d12
 - number: 764
   title: 'fix(site): pan the Atlas by hand at the end; title the homepage The Squares Project'
   merged_at: '2026-10-24T02:12:47Z'
@@ -3216,6 +3339,8 @@ stacks:
   evidence: https://github.com/jlevy/squares/pull/518
 coverage:
   pull_requests:
+  - 750
+  - 745
   - 764
   - 760
   - 746

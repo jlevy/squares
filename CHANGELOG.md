@@ -9,6 +9,82 @@ The authoritative record is [site-changelog.yaml](packing/site-changelog.yaml).
 
 ## Changelog
 
+<a id="changelog-date-2026-10-24"></a>
+
+### 2026-10-24
+
+<a id="changelog-entry-daniel-fang-theorems-lean-and-small-n-register"></a>
+
+#### Daniel Reports Lean Proofs of Fang’s Theorems, and the Register Takes In s(2) to s(5)
+
+Significance S3: Two S3 results. T-236 reports a machine-checked proof, by another author, of the bound family T-163 holds on a reviewer’s reading of its proof: both of Fang’s theorems, for every n ≥ 15 and with no hypothesis. T-237 registers the classical exact values s(2) to s(5), Göbel’s s(5) a substantive case result scored as its claim, as the register’s other published exact values are. Neither moves a bound, and the significance does not establish verification.
+
+Daniel reports Lean 4 proofs of Fang’s Theorems 1 and 2 (T-163) with no hypothesis:
+$s(n^2 - n + 1) < n$ for every integer $n \ge 15$, and, for Theorem 2, that
+$n^2 - n + 1 + p + 2q$ unit squares fit in a square of side below $n$ whenever
+$n \ge 15$ and $16p + 21q \le n - 15$. T-236 is a reported formalization at V0/C0:
+it has not been built or reviewed here. The register also takes in the classical
+values $s(2) = s(3) = s(4) = 2$ and $s(5) = 2 + 1/\sqrt{2}$ as T-237, on Göbel’s 1979
+proof and Friedman’s survey, so that chelokot’s and Daniel’s Lean proofs of them
+(T-238) formalize a registered result.
+
+- The proof formalizes Fang’s: the gluing lemma, which is Arslanov, Mustafin and
+  Shangitbayev’s decomposition, the induction on $n$, and 18 pieces held as exact
+  rational certificates, each checked by Lean’s kernel in a generated module. The
+  source reports the standard axioms only and publishes no build log, and the
+  generated modules are rebuilt from the certificates rather than published.
+- The record holds Fang’s theorems on the 14 October review’s reading of their
+  proof. Fang’s own Lean statement covers Theorem 1 and the unmixed bounds of
+  Theorem 2; Daniel’s states Theorem 2 in full. At the counts the record holds, 211,
+  241, 273 and 307, the theorems give sides below $n$, which T-163’s construction
+  and the case bounds already improve on.
+- The source says its work was produced by Claude (Anthropic) under human direction.
+  A stage 4 review and a build here, priced at 1.5 to 3 CPU-hours, come next.
+- T-237 cites the evidence the case records of 2 to 5 already cite: the exact
+  replays here of the side-2 bound, the area bound, the grid and Göbel’s packing,
+  and Göbel’s published proof that no square of side below $2 + 1/\sqrt{2}$ holds
+  five unit squares, which no review here has read yet. The case records are
+  unchanged.
+- The same change records three S2 Lean reports, none with a receipt-bound build
+  here: Hosono’s $s(21) = 5$ by the point-only route (T-234) and $s(59) = 8$ on
+  Daniel’s mixed-measure checker (T-235), and chelokot’s and Daniel’s proofs of
+  $s(2)$ to $s(5)$ (T-238).
+
+Published artifacts: [Daniel’s Lean proof report for Fang’s theorems](https://squaremath.org/result/t-236.html) · [The classical values s(2) to s(5)](https://squaremath.org/result/t-237.html).
+
+First public: 2026-10-24 ([publication evidence](https://github.com/jlevy/squares/actions/runs/40065536417/job/120790587248)).
+
+PRs and supporting records: [\#750](https://github.com/jlevy/squares/pull/750) · [Retained source, build plan and verification limits](packing/resources/web/evand-fang-ryu-lean-2026-10-18/README.md) · [Fang’s theorems as the record holds them](https://squaremath.org/result/t-163.html) · [chelokot’s Lean proofs of s(2) to s(5), retained](packing/resources/web/chelokot-small-n-lean-2026-09-05/README.md).
+
+<a id="changelog-entry-hosono-thirty-one-fine-net-lower-bound"></a>
+
+#### Hosono Raises the Lower Bound for 31 Squares to 5.9775
+
+Significance S3: T-232 is an S3 result at one count: the strongest lower bound on record at n = 31, which more than halves the gap to the upper bound 6, by the existing fine-net rectangle-measure method on its declared 2,073-direction net. T-233 is an S3 report of stronger bounds at four counts by the same method, reviewed and not yet adopted. Neither brings a new technique or an optimality claim.
+
+[Hiroaki Hosono](packing/contributors/people/hiroaki-hosono.md) (wand125) shows that 31 unit squares do not fit in a square of side $2391/400 = 5.9775$, by a measure certificate checked at every direction of a fine angle net. T-232 is confirmed at V3/C3 and is now the verified lower bound at 31, $1/40$ above the standing $2381/400$. Four more of his bounds, reported in issue 446, are registered as T-233 at V0/C1.
+
+- The certificate is a density of 536 rectangles, averaged over the square’s
+  symmetries, of total mass $31 - 1/100000$. Every unit square in the container
+  contains a slightly smaller concentric square, at one of 2,073 net angles, that
+  holds mass at least one, so 31 squares would need mass 31.
+- The project replayed the certificate at all 2,073 directions with its reviewed
+  `sqverify-fast` verifier, which the source adapted for its own check, so the
+  replay re-implements the check sharing the producer’s components, and its controls
+  refused the scaled mutant at every direction. A mathematical review re-derived the
+  argument and decided 122 of the directions again with a clean-room exact checker
+  of its own. The gap to the upper bound 6 narrows from $19/400$ to $9/400$.
+- T-233 reports $s(19) \ge 1931/400$, $s(20) \ge 393/80$, $s(26) \ge 1111/200$ and
+  $s(27) \ge 1131/200$, credited to Hosono after
+  [Tokoharu](packing/contributors/people/tokoharu.md) and
+  [Joshua Levy](packing/contributors/people/joshua-levy.md). T-233 stands as
+  reported (V0/C1): a review accepts their mathematics, and complete replays here
+  passed at all four counts, but the entry waits on a reviewed fix to a tolerance in
+  this project’s control, which failed closed at 26 on the control, not on the
+  certificate. Until then the four standing bounds are unchanged.
+
+PRs and supporting records: [\#745](https://github.com/jlevy/squares/pull/745) · [The case record at 31](packing/frontier/n-031.md) · [Hosono’s certificate at 31](https://github.com/wand125/square-packing/tree/23e31862345c532d17ad2c896677a3a8d8821aa4/problems/square-lower-bounds/certificates/mixed_n31_L59775) · [Retained report and verification limits at 31](packing/resources/web/wand125-fine-net-n31-2026-10-11/README.md) · [Mathematical review of the bound at 31](docs/project/reviews/review-2026-10-23-wand125-n31-fine-net.md) · [Mathematical review of the four bounds of issue 446](docs/project/reviews/review-2026-10-23-wand125-446-fine-net.md) · [Hosono’s report of the four bounds](https://github.com/jlevy/squares/issues/446).
+
 <a id="changelog-date-2026-10-23"></a>
 
 ### 2026-10-23

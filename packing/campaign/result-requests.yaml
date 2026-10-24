@@ -2328,6 +2328,21 @@ issues:
             status: confirmed
         corrects:
           - https://github.com/jlevy/squares/issues/294#issuecomment-5972549384
+      - url: https://github.com/jlevy/squares/issues/294#issuecomment-6381479220
+        date: '2026-10-24'
+        by: jlevy
+        kind: follow-up
+        reported:
+          - result: n101
+            id: T-073
+            verification: V3
+            confirmation: C3
+            status: confirmed
+          - result: n101
+            id: T-080
+            verification: V3
+            confirmation: C3
+            status: confirmed
     close_when: T-073 is confirmed or refuted, and the n = 82 certificate is imported and settled.
 
   - number: 282
@@ -3997,8 +4012,165 @@ issues:
       - result: fine-net-18-1016
         id: E-wand125-fine-net-n108-1062-sqverify-fast-replay
         status: confirmed
+    - url: https://github.com/jlevy/squares/issues/446#issuecomment-6380484985
+      date: '2026-10-24'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: fine-net-n19
+        id: T-233
+        verification: V0
+        confirmation: C1
+        status: reviewed
+      - result: fine-net-n20
+        id: T-233
+        verification: V0
+        confirmation: C1
+        status: reviewed
+      - result: fine-net-n26
+        id: T-233
+        verification: V0
+        confirmation: C1
+        status: reviewed
+      - result: fine-net-n27-5655-followup
+        id: T-233
+        verification: V0
+        confirmation: C1
+        status: reviewed
+      - result: fine-net-n27-5655-followup
+        id: E-wand125-fine-net-n27-5655-followup-report
+        status: reviewed
+      - result: fine-net-n27
+      - result: fine-net-n31
+      - result: fine-net-18-1016
+        id: T-205
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: fine-net-18-1016
+        id: T-206
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: fine-net-18-1016
+        id: T-207
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: fine-net-18-1016
+        id: T-216
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: fine-net-n37-n39-n44-1016
+        id: T-176
+        verification: V0
+        confirmation: C1
+        status: reviewed
+      - result: fine-net-n37-n39-n44-1016
+        id: T-177
+        verification: V0
+        confirmation: C1
+        status: reviewed
+      - result: fine-net-n37-n39-n44-1016
+        id: T-178
+        verification: V0
+        confirmation: C1
+        status: reviewed
+      - result: fine-net-n29-582-followup
+        id: T-132
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-18-1016
+        id: T-200
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-18-1016
+        id: T-201
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-18-1016
+        id: T-202
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-18-1016
+        id: T-203
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-18-1016
+        id: T-204
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-18-1016
+        id: T-208
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-18-1016
+        id: T-209
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-18-1016
+        id: T-210
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-18-1016
+        id: T-211
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-18-1016
+        id: T-212
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-18-1016
+        id: T-213
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-18-1016
+        id: T-214
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-18-1016
+        id: T-215
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-18-1016
+        id: T-217
+        verification: V0
+        confirmation: C0
+        status: recorded
     close_when: Accurate source-only disposition reaches main and the remaining independent native/review
       obligations have explicit dispositions. Source-byte custody alone does not close this request.
+    notes: >-
+      The follow-up posted at 2026-10-24T05:40:18Z (issuecomment-6380484985), after #745
+      merged (af9c9e850) and #750 after it (2c58b6373), and after the Pages deployment of
+      2c58b6373 was checked (run 40065536417, its verify-deployment job included;
+      squaremath.org serving v0.9.2-e48b91), reports T-233 at V0/C1, reviewed, for n19, n20,
+      n26 and the n27 follow-up, 1/400, 3/400, 1/100 and 23/2000 above T-103 to T-106, with
+      the n27 follow-up's report entry now reviewed. It gives the stage 4 review's reads,
+      the four complete sqverify-fast captures (each with the source's node total), the
+      whole-net controls refused at n19, n20 and n27 and failed closed at n26 on the
+      census's constant axis allowance, so that the replays are held together until
+      think-tcsl and the case records keep their lower lanes. It reports T-232, s(31) >=
+      2391/400 at V3/C3, confirmed, by a re-implementation sharing components with the
+      author's checker, though no issue reported it (it maps to no result here), and
+      restates the other results' states of the 20 October reply. It puts the review of the
+      four's notes F-6 to F-8 and its four questions to the author; the n31 review's M-1 to
+      M-3 and its questions are the owner’s call (think-nq5g) and were not sent. The issue
+      stays open.
   - number: 451
     title: '105, 108, 127, 131, 155, 180, 228, 306: registration request'
     author: franciscouzo
@@ -7457,17 +7629,21 @@ issues:
       mixed_n31_L59775, a fine-net check2 certificate reporting s(31) >= 2391/400 = 5.9775 on the
       2,073-direction net, above n = 31's recorded 2381/400 and #446's 597/100, reported on no
       issue. It takes the route of T-142 and T-143: triage and a packet, registration at V0/C0,
-      then a stage 4 replay in #532's lane with an owner budget.
+      then a stage 4 replay in #532's lane with an owner budget. The 23 October intake pass
+      took it instead (think-wop1, PR #745, merged on 24 October 2026): registered as T-232,
+      replayed in full here with sqverify-fast and its whole-net control on the coordinator's
+      approval, and reviewed, so T-232 is at V3/C3.
     read_through: '2026-10-12T07:50:19Z'
     results:
     - key: s31-mixed-fine-net
       claim: s(31) >= 2391/400 = 5.9775, by the fine-net check2 certificate mixed_n31_L59775 at
         wand125/square-packing 23e3186.
       source: body
-      not_registered: No lane has triaged or retained it yet; registration at V0/C0 and the replay
-        follow the route of T-142 and T-143.
-      queued: true
-      bead: think-wop1
+      register:
+      - T-232
+      evidence:
+      - E-wand125-fine-net-n31-59775-report
+      - E-wand125-fine-net-n31-59775-sqverify-fast-replay
     beads:
     - think-wop1
     answer_bead: think-wop1
@@ -7534,13 +7710,27 @@ issues:
       Lean proof s59_eq_8 on Evan Daniel's mixed-measure checker, which T-066 does not yet cite: a
       packet of the lean/ directory, a read of the statement binding, an evidence entry, and a
       price for a kernel rebuild from the generator, which needs an owner budget once priced.
+      The 23 October intake pass did each (think-xk3f, PR #750, merged on 24 October 2026),
+      registering the proof as its own formalization entry, T-235, whose evidence entry is
+      E-n059-wand125-lean-kernel-report, rather than as evidence for T-066.
     read_through: '2026-10-12T07:50:22Z'
     results: []
     asks:
     - what: Retain the Lean proof at f9a77b7, read its statement binding, add an evidence entry for
         T-066 and price a kernel rebuild.
-      state: queued
-      bead: think-xk3f
+      state: done
+      note: >-
+        Done in #750 (2c58b6373), on main since 24 October 2026. The packet
+        wand125-n59-lean-kernel-2026-10-11 retains lean/ at f9a77b7 with Daniel's library
+        closure at 1718a580, and its README reads the statement binding: s59_eq_8 states
+        minSide 59 = 8 with minSide and Packs from S32.lean at 1718a580, closed unit squares
+        translated and rotated in [0, s]^2 with pairwise disjoint interiors. A proof in a proof
+        assistant of a result the record holds is a formalization of its own (epistemics.md,
+        Result Kinds), so the evidence entry, E-n059-wand125-lean-kernel-report, belongs to
+        T-235 rather than T-066, and T-066's claim names T-235. The kernel rebuild is priced
+        at about 862 CPU-hours by the source's receipt, with 9.8 GB per Part process and 35 GB
+        for the last two modules, and held above the owner's 40 CPU-hour item cap and this
+        host (think-cs9x).
     beads:
     - think-xk3f
     answer_bead: think-xk3f
@@ -9790,7 +9980,7 @@ issues:
       squarepack-certs 0e9be7961773aa78b879c4ee6ba584a67e2e5513 and public squarepack-lean at
       947bdae. These source assertions await statement, axiom and replay review under think-494l;
       T-163 remains V2/C1, and Stage 4 adoption is separate.
-    read_through: '2026-10-19T03:30:28Z'
+    read_through: '2026-10-24T01:23:05Z'
     results:
     - key: excess-theorem
       claim: 's(n^2 - n + 1) < n for every n >= 15, and s(n^2 - n + F(n)) < n with F(n) = 1 + max{p + 2q
@@ -9877,9 +10067,23 @@ issues:
       by: jlevy
       kind: other
       reported: []
+    - url: https://github.com/jlevy/squares/issues/603#issuecomment-6381479105
+      date: '2026-10-24'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: excess-theorem
+        id: T-163
+        verification: V2
+        confirmation: C1
+        status: reviewed
     close_when: The import and its disposition are on main, the owner has posted the resulting state with
       the entry's id, and the review and replay that would raise its rungs are owned by its bead; optimality
       is outside this request.
+    notes: >-
+      Fang's comment of 2026-10-24T01:23:05Z (issuecomment-6378113855) answers the owner's
+      question of 19 October with his X handle: it is social and carries no result content, so
+      nothing is read into the record from it.
   - number: 643
     title: 's(k² − 4) = k for every k ≥ 8 in the Lean kernel: ValidTilt9 (Hosono, after Daniel): tracking
       an unreported result'
@@ -12446,6 +12650,24 @@ issues:
         verification: V3
         confirmation: C3
         status: confirmed
+    - url: https://github.com/jlevy/squares/issues/670#issuecomment-6380974872
+      date: '2026-10-24'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n204
+        id: T-226
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: n364
+      - result: n382
+      - result: n403
+      - result: n444
+      - result: n922
+      - result: n370
+      - result: n452
+      - result: n536
     close_when: Every claim or correction has a reviewed disposition on main, pending validation has a priced
       owner, any changed house is regularized in its adoption, and the author has received a reply verified
       against main and the deployed site.
@@ -12527,7 +12749,9 @@ issues:
       PingYou Ltd, Daniel, Levy, and the same lineage reaches T-228, T-223, T-225, T-229 and
       T-231; T-226's short credit, S3, V3/C3 and first-report standing are unchanged. The final
       comment, which says so, follows that change's merge and verified deploy, and its record
-      follows it.
+      follows it. It was posted at 2026-10-24T06:35:42Z (issuecomment-6380974872), after #766
+      merged (5f8f005a3) and its deploy was verified (run 40070014484); GitHub had closed the
+      issue on 23 October, when #747 merged, so it is the final comment on a closed issue.
   - number: 672
     title: '227, 229, 330-996: registration request'
     author: franciscouzo
@@ -19549,6 +19773,94 @@ issues:
       - result: n985
       - result: n335
       - result: above-1024
+    - url: https://github.com/jlevy/squares/issues/715#issuecomment-6381214428
+      date: '2026-10-24'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n335
+      - result: n336
+      - result: n337
+      - result: n341
+      - result: n373
+      - result: n374
+      - result: n798
+      - result: n855
+      - result: n743
+      - result: n985
+      - result: n328
+      - result: n343
+      - result: n365
+      - result: n404
+      - result: n455
+      - result: n458
+      - result: n459
+      - result: n463
+      - result: n496
+      - result: n497
+      - result: n500
+      - result: n501
+      - result: n502
+      - result: n504
+      - result: n505
+      - result: n509
+      - result: n545
+      - result: n546
+      - result: n547
+      - result: n548
+      - result: n549
+      - result: n550
+      - result: n554
+      - result: n592
+      - result: n593
+      - result: n594
+      - result: n597
+      - result: n598
+      - result: n600
+      - result: n602
+      - result: n643
+      - result: n654
+      - result: n694
+      - result: n700
+      - result: n747
+      - result: n748
+      - result: n749
+      - result: n801
+      - result: n802
+      - result: n803
+      - result: n804
+      - result: n805
+      - result: n806
+      - result: n808
+      - result: n858
+      - result: n859
+      - result: n860
+      - result: n863
+      - result: n865
+      - result: n873
+      - result: n917
+      - result: n918
+      - result: n919
+      - result: n924
+      - result: n926
+      - result: n978
+      - result: n979
+      - result: n980
+      - result: n987
+      - result: n503
+      - result: n595
+      - result: n815
+      - result: n867
+      - result: n850
+      - result: n862
+      - result: n909
+      - result: n914
+      - result: n970
+      - result: n975
+      - result: n976
+      - result: n986
+      - result: n988
+      - result: above-1024
     close_when: >-
       Every claim has a reviewed disposition on main, pending validation has a priced owner,
       any changed house is regularized in its adoption, and the author has received a reply
@@ -21330,6 +21642,47 @@ issues:
         verification: V3
         confirmation: C3
         status: confirmed
+    - url: https://github.com/jlevy/squares/issues/719#issuecomment-6380975041
+      date: '2026-10-24'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n204
+        id: T-229
+      - result: n204-lower
+        id: T-231
+    - url: https://github.com/jlevy/squares/issues/719#issuecomment-6381214260
+      date: '2026-10-24'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n410
+      - result: n413
+      - result: n454
+      - result: n456
+      - result: n490
+      - result: n498
+      - result: n544
+      - result: n584
+      - result: n596
+      - result: n637
+      - result: n644
+      - result: n682
+      - result: n689
+      - result: n692
+      - result: n699
+      - result: n736
+      - result: n743
+      - result: n744
+      - result: n746
+      - result: n792
+      - result: n800
+      - result: n105
+        id: T-229
+      - result: n204
+        id: T-229
+      - result: n204-lower
+        id: T-231
     close_when: >-
       T-229 is reviewed and adopted at 105 and 204 (think-4h23), T-231 is reviewed and adopted
       at 204 (think-tetq, think-h01y), the owner has answered whether counts above 1024 are
@@ -21496,7 +21849,13 @@ issues:
       the two 204 files he wrote first and why n-204.cert carries the larger padding. It
       answered his recommendation to publish the checkers by #732's import reply, with this
       result's commands and the review's programs in the packet. It states the 204 lineage
-      only back to Couzo's #678 certificate, and the issue stays open.
+      only back to Couzo's #678 certificate, and the issue stays open. The follow-up of
+      2026-10-24T06:35:43Z (issuecomment-6380975041), after #766 merged (5f8f005a3) and its
+      deploy was verified (run 40070014484), takes the lineage at 204 back through Couzo's
+      #670 certificate to T-186, as his answer on #670 names it, and quotes T-229's and
+      T-231's credit lines, which now name Ostashev; the issue stays open. The follow-up of
+      2026-10-24T07:02:08Z (issuecomment-6381214260), after #769 merged, reports the 21 rows
+      f1ceee4 supersedes and 34e59f3's 105 and 204 not recorded; the issue stays open.
   - number: 728
     title: 's(303) ≤ 17.909772217275: registration request'
     author: evand
@@ -21810,6 +22169,15 @@ issues:
       - result: rows-above-1024
       - result: saturation-argument
       - result: ceiling-census
+    - url: https://github.com/jlevy/squares/issues/732#issuecomment-6381214121
+      date: '2026-10-24'
+      by: jlevy
+      kind: import
+      reported:
+      - result: rows-f1ceee4
+      - result: rows-325-1024
+      - result: rigidity-theorems
+      - result: rows-above-1024
     close_when: >-
       The rows at or below 1024 are recorded in report order, the owner has answered whether
       counts above 1024 are tracked and where tracking stops (think-f2io), and the replies
@@ -21920,12 +22288,16 @@ issues:
       GitHub's activity API records it), so they follow f1ceee4 by the push rule, which dates a
       commit by the push that made it public, not by its commit time
       (beyond_horizon_replay.PUSHED_LATER, which now holds that push); they are the next
-      import's (think-cnn7). The import reply is drafted for after the merge.
+      import's (think-cnn7). The import reply is drafted for after the merge. It was posted
+      at 2026-10-24T07:02:07Z (issuecomment-6381214121), after #769 merged (34eb8bb75) and its
+      deploy was verified (run 40071682379), and reports the 138 f1ceee4 rows, the three later
+      commits not recorded and the two theorems not registered; the issue stays open.
   - number: 734
     title: 'Proposal: submit and fetch upper bounds by API (automated intake, reported the same day)'
     author: wand125
     opened: '2026-10-22'
-    state: open
+    state: closed
+    closed: '2026-10-24'
     kind: other
     triage: done
     summary: >-
@@ -21960,7 +22332,12 @@ issues:
     beads:
     - think-lnzm
     answer_bead: think-lnzm
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/734#issuecomment-6380975210
+      date: '2026-10-24'
+      by: jlevy
+      kind: final
+      reported: []
     close_when: >-
       The owner has answered the three questions (think-lnzm), which the decision of 24 October
       2026 to put the proposal on hold does, and the reply that says so is posted.
@@ -21988,12 +22365,15 @@ issues:
       endpoint listing the counts with the most room, an in-browser inspector) are recorded
       beside it. On 24 October 2026, asked how far a submission bot should go, the owner
       answered "Not now" (think-lnzm), so the proposal is on hold and nothing is built; the
-      reply that says so is owed after this change merges.
+      reply that says so is owed after this change merges. It was posted at
+      2026-10-24T06:35:44Z (issuecomment-6380975210), after #766 merged (5f8f005a3), as the
+      final comment, and the issue was closed with it at 06:35:45Z, as not planned.
   - number: 755
     title: 's(303) ≤ 17.909762327476: registration request'
     author: amundsk
     opened: '2026-10-23'
-    state: open
+    state: closed
+    closed: '2026-10-24'
     kind: result-report
     triage: done
     summary: >-
@@ -22033,10 +22413,26 @@ issues:
     - think-tqb5
     - think-jdz0
     answer_bead: think-tqb5
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/755#issuecomment-6380774849
+      date: '2026-10-24'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n303
+        id: T-239
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: n303
+        id: E-amundsk-755-n303-report
+        status: reviewed
     close_when: >-
       The result is registered, reviewed and adopted at 303 with its drawing regularized, and
       the reply on main says so; nothing the author asked for is queued.
+    notes: >-
+      The reply posted at 2026-10-24T06:13:58Z (issuecomment-6380774849) was edited at
+      06:17:22Z to become the final comment, and the issue was closed with it at 06:17:24Z.
   - number: 763
     title: '268–9802: registration request'
     author: franciscouzo
@@ -22206,7 +22602,26 @@ issues:
     beads:
     - think-o9kd
     answer_bead: think-o9kd
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/772#issuecomment-6381477449
+      date: '2026-10-24'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: six-plus-five-restricted-optimality
+        id: T-036
+        verification: V3
+        confirmation: C2
+        status: confirmed
+      - result: six-plus-five-restricted-optimality
+        id: E-n011-h236-rung0-reduction
+        status: confirmed
+      - result: six-plus-five-restricted-optimality
+        id: E-n011-trump-local-theorem-first-clause
+        status: confirmed
+      - result: six-plus-five-restricted-optimality
+        id: E-n011-trump-isolation-radius
+        status: confirmed
     close_when: >-
       The review that its C3 needs has landed on main, by a distinct reviewer or a
       mechanisation of BC-240's prose steps, and the reply that reports the resulting rungs is
@@ -22244,7 +22659,26 @@ issues:
     - think-sb7a
     - think-wcex
     answer_bead: think-sb7a
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/773#issuecomment-6381477713
+      date: '2026-10-24'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: rectangle-density-48
+        id: T-046
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: rectangle-density-48
+        id: E-wand125-rectangle-report
+        status: recorded
+      - result: rectangle-density-48
+        id: E-wand125-rectangle-2026-09-28-report
+        status: recorded
+      - result: rectangle-density-48
+        id: E-wand125-rectangle-2026-09-28-monotone-report
+        status: recorded
     close_when: >-
       The confirmations its C1 and C3 need have landed on main, or the record says why they
       will not, and the reply that reports the resulting rungs is posted.
@@ -22275,7 +22709,20 @@ issues:
     beads:
     - think-gtjq
     answer_bead: think-gtjq
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/774#issuecomment-6381477862
+      date: '2026-10-24'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: piercing-lower-37-61
+        id: T-087
+        verification: V3
+        confirmation: C1
+        status: reviewed
+      - result: piercing-lower-37-61
+        id: E-basic-slivkova-piercing-lower
+        status: reviewed
     close_when: >-
       The replay of the geometry its C2 needs has landed on main, or the record says why it
       will not, and the reply that reports the resulting rungs is posted.
@@ -22308,7 +22755,20 @@ issues:
     beads:
     - think-ysr9
     answer_bead: think-ysr9
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/775#issuecomment-6381477972
+      date: '2026-10-24'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: n11-uniqueness
+        id: T-112
+        verification: V3
+        confirmation: C2
+        status: confirmed
+      - result: n11-uniqueness
+        id: E-n011-optimum-uniqueness
+        status: confirmed
     close_when: >-
       The review that its C3 needs has landed on main, by a distinct reviewer with the
       oversight record or a mechanisation of the step at S = T, and the reply that reports the
@@ -22341,7 +22801,20 @@ issues:
     - think-i85v
     - think-ux1v
     answer_bead: think-i85v
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/776#issuecomment-6381478097
+      date: '2026-10-24'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: mixed-n28-57425
+        id: T-142
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: mixed-n28-57425
+        id: E-wand125-fine-net-n28-57425-report
+        status: recorded
     close_when: >-
       The census, its control and the review its C3 needs have landed on main, and the reply
       that reports the resulting rungs is posted.
@@ -22373,7 +22846,20 @@ issues:
     - think-i85v
     - think-ux1v
     answer_bead: think-i85v
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/777#issuecomment-6381478206
+      date: '2026-10-24'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: mixed-n30-58925
+        id: T-143
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: mixed-n30-58925
+        id: E-wand125-fine-net-n30-58925-report
+        status: recorded
     close_when: >-
       The census, its control and the review its C3 needs have landed on main, and the reply
       that reports the resulting rungs is posted.
@@ -22405,7 +22891,20 @@ issues:
     - think-nd7g
     - think-ux1v
     answer_bead: think-nd7g
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/778#issuecomment-6381478328
+      date: '2026-10-24'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: linear-n122-1126
+        id: T-144
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: linear-n122-1126
+        id: E-wand125-linear-n122-1126-report
+        status: recorded
     close_when: >-
       The replay, its control and the review its C3 needs have landed on main, and the reply
       that reports the resulting rungs is posted.
@@ -22436,7 +22935,20 @@ issues:
     beads:
     - think-u0av
     answer_bead: think-u0av
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/779#issuecomment-6381478445
+      date: '2026-10-24'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: linear-n145-1224
+        id: T-179
+        verification: V0
+        confirmation: C1
+        status: reviewed
+      - result: linear-n145-1224
+        id: E-wand125-linear-n145-1224-report
+        status: reviewed
     close_when: >-
       The replay, its control and the review its C3 needs have landed on main, and the reply
       that reports the resulting rungs is posted.
@@ -22469,7 +22981,20 @@ issues:
     - think-8eo1
     - think-0arj
     answer_bead: think-zb5w
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/780#issuecomment-6381478547
+      date: '2026-10-24'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: continuous-n28-5745
+        id: T-192
+        verification: V0
+        confirmation: C1
+        status: reviewed
+      - result: continuous-n28-5745
+        id: E-wand125-continuous-n28-5745-report
+        status: reviewed
     close_when: >-
       A replay route, its controls and the review its C3 needs have landed on main, and the
       reply that reports the resulting rungs is posted.
@@ -22504,7 +23029,20 @@ issues:
     - think-f2bm
     - think-tpbd
     answer_bead: think-f2bm
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/782#issuecomment-6381478640
+      date: '2026-10-24'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: n21-zero-margin-lean
+        id: T-234
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: n21-zero-margin-lean
+        id: E-n021-wand125-zero-margin-lean-report
+        status: recorded
     close_when: >-
       The review its C1 needs and the build its C3 needs have landed on main, or the record
       says why they will not, and the reply that reports the resulting rungs is posted.
@@ -22539,7 +23077,20 @@ issues:
     - think-xk3f
     - think-cs9x
     answer_bead: think-xk3f
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/783#issuecomment-6381478743
+      date: '2026-10-24'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: n59-lean-kernel
+        id: T-235
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: n59-lean-kernel
+        id: E-n059-wand125-lean-kernel-report
+        status: recorded
     close_when: >-
       The review its C1 needs has landed on main, the build its C3 needs has landed or the
       record says why it will not, and the reply that reports the resulting rungs is posted.
@@ -22576,7 +23127,20 @@ issues:
     - think-57ei
     - think-dgrc
     answer_bead: think-57ei
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/784#issuecomment-6381478818
+      date: '2026-10-24'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: fang-theorems-daniel-lean
+        id: T-236
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fang-theorems-daniel-lean
+        id: E-fang-theorems-daniel-lean-report
+        status: recorded
     close_when: >-
       The review its C1 needs and the build its C3 needs have landed on main, or the record
       says why they will not, and the reply that reports the resulting rungs is posted.
@@ -22616,7 +23180,32 @@ issues:
     - think-wuo4
     - think-vvjk
     answer_bead: think-wuo4
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/785#issuecomment-6381478925
+      date: '2026-10-24'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: classical-s2-to-s5
+        id: T-237
+        verification: V3
+        confirmation: C0
+        status: recorded
+      - result: classical-s2-to-s5
+        id: E-n005-gobel-proof
+        status: recorded
+      - result: classical-s2-to-s5
+        id: E-n005-gobel-upper
+        status: confirmed
+      - result: classical-s2-to-s5
+        id: E-side2-center-lower
+        status: confirmed
+      - result: classical-s2-to-s5
+        id: E-basic-area-lower
+        status: confirmed
+      - result: classical-s2-to-s5
+        id: E-basic-grid-upper
+        status: confirmed
     close_when: >-
       The review its C1 needs and the audit its C3 needs have landed on main, or the record
       says why they will not, and the reply that reports the resulting rungs is posted.
@@ -22652,7 +23241,23 @@ issues:
     - think-7l2j
     - think-tq3g
     answer_bead: think-7l2j
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/786#issuecomment-6381479019
+      date: '2026-10-24'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: small-n-lean
+        id: T-238
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: small-n-lean
+        id: E-small-n-chelokot-lean-report
+        status: recorded
+      - result: small-n-lean
+        id: E-small-n-daniel-rect-lean-report
+        status: recorded
     close_when: >-
       The review its C1 needs and the builds its C3 needs have landed on main, or the record
       says why they will not, and the reply that reports the resulting rungs is posted.
