@@ -33251,7 +33251,7 @@ results:
   - id: T-239
     kind: upper-bound
     registered: '2026-10-23'
-    landed: '2026-10-23'
+    landed: '2026-10-24'
     headline: >-
       Kristiansen's smaller n303 packing, found from Daniel's packing, certified exactly
     claim: >-
