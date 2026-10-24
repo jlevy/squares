@@ -254,6 +254,10 @@ def test_a_recipe_row_is_decided_by_the_checker_and_held_to_its_receipt(
         row for row in replay.beyond_horizon_rows(chosen, sides)["results"] if row["n"] == 444
     ]
     assert row["recipe"]["source_n"] == 403
+    unreplayed = replay.recipe_decisions(chosen, {})
+    assert unreplayed == [
+        {"n": 444, "verdict": "refused", "reason": "the parent n403 is not replayed"}
+    ]
     forged = copy.deepcopy(receipt)
     forged["rows"][0]["capacity"] = 445
     chosen.path(replay.RECIPES).write_text(json.dumps(forged), encoding="utf-8")

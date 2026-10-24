@@ -2252,10 +2252,11 @@ def recipe_decisions(
     for row in recipe_claims(chosen):
         recipe = recipe_of(chosen, row)
         replayed = parents.get(row.path)
+        # A parent with no replay is refused as not replayed, whatever its side.
         parent = (
             checker.parent_from_replay(replayed)
             if replayed is not None
-            else checker.Parent(recipe.source_n, Fraction(0), row.path, "", None)
+            else checker.Parent(recipe.source_n, Fraction(0), row.path, recipe.parent_sha256)
         )
         try:
             decision = checker.decide(recipe, parent)
