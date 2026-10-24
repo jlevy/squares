@@ -78,8 +78,9 @@ those later reports had superseded on ``main`` names the backlog report that bea
 first. A report the walk records whose own import has not yet landed (`Awaiting`) has no
 row, so the chain passes over it until that import writes one: Couzo's 4e4c8ce and 5a299b4
 publications awaited theirs that way until the history walk recorded them, and the #719
-walk now names their sources. #715's re-certifications wait on a decision, not an import,
-so both walks hold them (`Held`, think-fwa9). ``check`` holds
+walk now names their sources. #715's re-certifications of them below the 12-place print
+restate them, by the owner's answer of 23 October (think-fwa9), so neither walk records
+them. ``check`` holds
 ``frontier/source-coverage.yaml`` to that plan, and holds every count a walk reaches beyond
 the corpus to ``LIMIT`` to one chain in report order (`chain_problems`): the start, then
 each recorded report's row, each superseded by the next, the last current or superseded by
@@ -91,12 +92,28 @@ time it reached GitHub, as the owner ruled on 14 October, and a `Release` with n
 its packet declares the rows its walk records (``declare-rows``, `read_declared_rows`), and
 a second report retained in one packet has its own source, record and receipts. A walk
 holds back a publication that waits on an owner decision rather than an import (`Held`):
-a re-certification below the 12-place print, one above Göbel's construction, an index
-deletion bound or a construction with no certificate file (`HELD_CLASSES`). A verdict the
-walk decides only against held publications rests on them (`Resting`): an answer that
-leaves a hold out reruns the walk, and ``held-dependents`` says what each such answer
-would reopen (`refusal_flips`). ``check`` holds every hold, every resting verdict and every
-declaration to the walk.
+a construction with no certificate file, or an index bound deleting squares from one
+(`HELD_CLASSES`). Two holds are settled by the owner's answers of 23 October
+(`Held.answer`): a certificate its author withdrew from an issue is kept out of the record
+(think-8m4k), and an index bound deleting a square from the next count's published
+certificate is an earlier report (D6, think-f2io), so a later equal side, as #732's 985,
+is not recorded; that it has no row of its own is D6's recommendation, which the owner has
+not confirmed (think-kzme). A verdict the walk decides
+only against held publications rests on them (`Resting`): an answer that leaves a hold
+out reruns the walk, and ``held-dependents`` says what each such answer would reopen
+(`refusal_flips`). ``check`` holds every hold, every resting verdict and every declaration
+to the walk.
+
+**The owner's rulings.** The history, #719 and #732 walks apply two answers of the owner
+of 23 October 2026 as rules of the walk (`WALK_RULINGS`, `devtools.intake_ledger.RULINGS`):
+a side below an earlier report by less than one unit in the 12th place, at the same
+12-place print, restates it and is not recorded (think-fwa9); and Göbel's classical
+construction at each count is an earlier report, so a side at or above it is not
+recorded (think-8krd, #613). A register row at or above Göbel's construction stays listed
+as its source printed it, marked ``above-classical-construction`` with the construction it
+is above, and holds no count (`construction_problems`). #719's 631, another holder's
+re-certification #722 recorded, is in the first answer's words and waits on the owner
+(think-oqjd), so the walks record it as before.
 
 **The history walk.** ``campaign/issue-intake/upper-bounds-couzo-history-20261022`` walks
 every count from 325 to 1024 from starts frozen at ``main`` a97b712b9 (#479's merge, whose
@@ -121,9 +138,9 @@ that held it. The repository is watched, so ``release-sources`` transcribes the 
 ``sources.yaml`` from that receipt, the history scan and #715's held re-certifications: the
 issue's claims, dated by the issue with the first commit of each side, the author's own
 earlier sides, and every watched publication, each where it is strictly below the start
-(`release_walk_sources`). The walk holds what #730's walk holds, 499 below #719's row at the
-same print (`SUB_PRINT`), and the author's own files at the nine counts #719's edit withdrew
-(`WITHDRAWN`, think-8m4k).
+(`release_walk_sources`). The walk holds what #730's walk holds, and keeps out the author's
+own files at the nine counts #719's edit withdrew (`WITHDRAWN`, think-8m4k); 499, below
+#719's row by 8.66e-13 at the same print, restates it (think-fwa9).
 
 **Earlier publications.** ``earlier`` reads clones of the watched repositories and writes
 ``receipts/earlier-publications.json`` for a release: at each of its counts, every
@@ -176,7 +193,7 @@ from dataclasses import dataclass, field
 from datetime import UTC, datetime
 from fractions import Fraction
 from pathlib import Path
-from typing import Any
+from typing import Any, NamedTuple
 
 from strif import atomic_output_file
 
@@ -236,18 +253,19 @@ class Awaiting:
 
 
 #: Why a walk holds a report's publication back from a row: each class waits on an owner
-#: decision, which its `Held` names by bead (`HELD_CLASSES`).
-GOEBEL_ABOVE, SUB_PRINT, CONSEQUENCE, RECIPE = "goebel", "sub-print", "consequence", "recipe"
-WITHDRAWN = "withdrawn"
+#: decision, which its `Held` names by bead, or is settled by the owner's answer, which it
+#: states (`HELD_CLASSES`, `Held.answer`). The owner answered two classes on 23 October
+#: 2026 as rules of the walk itself (`devtools.intake_ledger.RULINGS`), so they are no
+#: longer holds: a re-certification below the 12-place print restates the report it beats
+#: (think-fwa9), and a side above Göbel's classical construction is above an earlier
+#: report (think-8krd).
+CONSEQUENCE, RECIPE, WITHDRAWN = "consequence", "recipe", "withdrawn"
 HELD_CLASSES = {
-    GOEBEL_ABOVE: "above Göbel's classical construction at its count (#613)",
-    SUB_PRINT: (
-        "below the side it beats by less than 1e-12, both rounding up to one 12-place print: "
-        "a re-certification of the same packing"
-    ),
     CONSEQUENCE: (
         "an index bound that deletes squares from a larger count's certificate or from a "
-        "construction the index states, with no certificate file at its own count"
+        "construction the index states, with no certificate file at its own count; one "
+        "deleting a square from the next count's published certificate is an earlier report, "
+        "as the owner answered on 23 October 2026 (D6, think-f2io)"
     ),
     RECIPE: (
         "a construction an index or table states with no certificate file of its own: an "
@@ -256,22 +274,40 @@ HELD_CLASSES = {
     ),
     WITHDRAWN: (
         "a certificate in the reporter's own watched repository that his issue withdrew, at a "
-        "count where his later release claims a lower side"
+        "count where his later release claims a lower side: not a report, as the owner "
+        "answered on 23 October 2026 (think-8m4k)"
     ),
 }
-#: How far below the side it beats a re-certification lies, at most (`SUB_PRINT`).
-SUB_PRINT_GAP = Fraction(1, 10**12)
+#: The owner's answer that settles the withdrawn class (`Held.answer`).
+WITHDRAWN_ANSWER = (
+    "the owner's answer of 23 October 2026 (think-8m4k): a watched certificate its author "
+    "withdrew from an issue, claiming a lower file later, is not a report, so the walk "
+    "keeps it out of the record"
+)
+#: The owner's answer that settles an index bound deleting one square from the next
+#: count's published certificate (`Held.answer`; D6 on think-f2io). The owner selected
+#: the option labelled "Yes, an earlier report (Recommended)". The rest is the question
+#: the coordinator asked, not the owner's words: whether a side obtained by deleting a
+#: square from a neighbour's certificate, Couzo's 985 from his 986, is an earlier report,
+#: with that option described as "A published deletion bound counts like any stated
+#: bound; a later equal or higher side is not recorded". The walk records it and the chain
+#: passes over it; that it has no row of its own is the decision's recommendation, which
+#: the owner has not confirmed (think-kzme). A bound deleting more squares, or from a
+#: farther count, is outside the question's words and stays held.
+DELETION_ANSWER = (
+    "the owner's answer of 23 October 2026 on D6 (think-f2io), the option labelled "
+    '"Yes, an earlier report (Recommended)" in the question the coordinator asked, whether '
+    "a side obtained by deleting a square from a neighbour's certificate is an earlier "
+    "report; so a later equal or higher side is not recorded, and on the decision's "
+    "recommendation, which the owner has not confirmed (think-kzme), it has no row of its own"
+)
 #: What a hold's class is called where a sentence counts holds (`held_sentence`).
 HELD_NAMES = {
-    GOEBEL_ABOVE: "publications above Göbel's construction",
-    SUB_PRINT: "re-certifications below the 12-place print",
     CONSEQUENCE: "index deletion bounds",
     RECIPE: "constructions with no certificate file",
     WITHDRAWN: "certificates their author withdrew from an issue",
 }
 HELD_NAME = {
-    GOEBEL_ABOVE: "publication above Göbel's construction",
-    SUB_PRINT: "re-certification below the 12-place print",
     CONSEQUENCE: "index deletion bound",
     RECIPE: "construction with no certificate file",
     WITHDRAWN: "certificate its author withdrew from an issue",
@@ -280,7 +316,8 @@ HELD_NAME = {
 
 @dataclass(frozen=True, slots=True)
 class Held:
-    """A report's publications a walk records that wait on an owner decision.
+    """A report's publications a walk records that wait on an owner decision, or that an
+    answer has settled out of the record.
 
     ``kind`` is the class (`HELD_CLASSES`), ``bead`` the decision's bead and ``counts`` the
     counts held; ``also`` names any further decision the hold waits on, and ``note`` says
@@ -288,6 +325,11 @@ class Held:
     pending but the decision: the walk records the publication, so it stands at its count,
     and no row may hold it until the owner answers, when the walk's declaration drops it
     and a row is written. The chain passes over it as over a report awaiting its import.
+    ``answer`` states the owner's answer where it settles the publication's disposition for
+    good: a certificate its author withdrew is kept out of the record (`WITHDRAWN_ANSWER`),
+    and an index deletion bound from a published certificate is an earlier report with no
+    row of its own (`DELETION_ANSWER`). The hold is then the settled disposition, nothing
+    waits, and a verdict decided against it rests on nothing (`resting_on_holds`).
 
     A later report the walk decides only against held publications rests on them
     (`Resting`, `resting_on_holds`). An answer that leaves a hold out of the record takes
@@ -300,6 +342,7 @@ class Held:
     counts: frozenset[int]
     also: tuple[str, ...] = ()
     note: str = ""
+    answer: str = ""
 
 
 @dataclass(frozen=True, slots=True)
@@ -349,7 +392,8 @@ class Walk:
 
 def _held_715() -> frozenset[int]:
     """#715's re-certifications of Couzo's 4e4c8ce certificates below the print, which the
-    22 October ledger left to a decision (think-fwa9), as #715's committed receipt sets them."""
+    22 October ledger left to a decision, as #715's committed receipt sets them: the owner's
+    answer of 23 October (think-fwa9) makes each a restatement, which the walks decide."""
     return frozenset(couzo_715.counts_in(couzo_715.HELD))
 
 
@@ -426,10 +470,16 @@ HISTORY_SOURCES = (
 
 
 def _held(
-    kind: str, bead: str, counts: str, *, also: tuple[str, ...] = (), note: str = ""
+    kind: str,
+    bead: str,
+    counts: str,
+    *,
+    also: tuple[str, ...] = (),
+    note: str = "",
+    answer: str = "",
 ) -> Held:
     """A `Held` whose counts are written out, separated by spaces."""
-    return Held(kind, bead, frozenset(int(n) for n in counts.split()), also, note)
+    return Held(kind, bead, frozenset(int(n) for n in counts.split()), also, note, answer)
 
 
 def _resting(report: str, verdict: str, kinds: str, counts: str) -> Resting:
@@ -445,23 +495,21 @@ def _resting(report: str, verdict: str, kinds: str, counts: str) -> Resting:
 #: off-centre family (19, citing this repository's ``packing/cases/gobel_offcentre``), 41
 #: of the 46 as L-border extensions and 368, 543, 626, 752 and 849 bare; and 15 bounds
 #: that delete one or two squares from Friedman's constructions at 368, 407, 448, 543,
-#: 590, 639, 752, 849, 908 and 969. All 61 are classical constructions, so they wait on
-#: #613's question (think-8krd), whether a classical construction counts as an earlier
-#: report, as well as on D2 and D6 (think-f2io).
+#: 590, 639, 752, 849, 908 and 969. #613's answer (think-8krd) makes Göbel's own
+#: constructions earlier reports, and every one of these is below Göbel's construction at
+#: its count, so they wait on D2 and D6 (think-f2io) and on whether Friedman's
+#: constructions count as Göbel's do (think-zkxy).
 _CLASSICAL_23AFF0C = "Göbel's squares and Friedman's off-centre family"
 
 
-#: What the history walk records and holds back from a row, by report and class, each
-#: waiting on its decision's bead: Göbel's constructions (#613, think-8krd), sub-print
-#: re-certifications (think-fwa9), index deletion bounds (D6, proposed on think-f2io) and
-#: constructions with no certificate file (D2, think-f2io); 23aff0c's deletion bounds and
-#: constructions are classical (`_CLASSICAL_23AFF0C`), so they wait on #613 (think-8krd)
-#: too. ``check`` holds each to the walk.
+#: What the history walk records and holds back from a row, by report and class: index
+#: deletion bounds and constructions with no certificate file, waiting on D2 (think-f2io);
+#: 23aff0c's extend Friedman's constructions (`_CLASSICAL_23AFF0C`), so they wait on
+#: think-zkxy too. 36 of 4e4c8ce's 39 deletion bounds each delete one square from the next
+#: count's certificate and are settled by the owner's D6 answer (`DELETION_ANSWER`); the
+#: other three delete two or three squares and wait on think-kzme. ``check`` holds each to
+#: the walk.
 HISTORY_HELD: dict[str, tuple[Held, ...]] = {
-    "franciscouzo/square-packing@02f9690": (_held(GOEBEL_ABOVE, "think-8krd", "369 375 376"),),
-    "evand/square-packing@49907ec": (_held(GOEBEL_ABOVE, "think-8krd", "964"),),
-    "franciscouzo/square-packing@f311f08": (_held(GOEBEL_ABOVE, "think-8krd", "376"),),
-    "franciscouzo/square-packing@a7067d7": (_held(GOEBEL_ABOVE, "think-8krd", "375"),),
     "TheSnakeFang/squarepack-certs@bef5c42": (
         _held(
             RECIPE,
@@ -469,51 +517,37 @@ HISTORY_HELD: dict[str, tuple[Held, ...]] = {
             "420 462 506 552 600 650 702 756 757 812 813 870 871 930 931 992 993",
         ),
     ),
-    "franciscouzo/square-packing@93570ef": (_held(GOEBEL_ABOVE, "think-8krd", "375"),),
-    "franciscouzo/square-packing@487b058": (
-        _held(
-            GOEBEL_ABOVE,
-            "think-8krd",
-            "369 376 408 415 416 445 449 488 489 492 493 537 538 585 586 634 635 636 "
-            "685 686 687 688 738 739 740 793 794 795 851 852 853 860 861 910 911 912 "
-            "919 920 921 964 971 972 973 974",
-        ),
-        _held(RECIPE, "think-f2io", "327"),
-    ),
+    "franciscouzo/square-packing@487b058": (_held(RECIPE, "think-f2io", "327"),),
     "franciscouzo/square-packing@4e4c8ce": (
-        _held(
-            GOEBEL_ABOVE,
-            "think-8krd",
-            "331 368 407 408 415 416 445 448 449 488 489 491 492 493 537 538 585 586 "
-            "634 635 636 685 686 687 688 738 739 740 793 794 795 851 852 853 860 861 "
-            "910 911 912 919 920 921 964 971 972 973 974",
-        ),
-        _held(SUB_PRINT, "think-fwa9", "327 332 542"),
         _held(
             CONSEQUENCE,
             "think-f2io",
             "505 533 549 551 580 583 589 593 595 598 629 632 638 642 680 683 693 700 "
-            "733 743 751 752 753 788 798 805 807 845 855 864 869 904 923 927 928 965 "
-            "979 985 989",
+            "733 743 753 788 798 805 807 845 855 864 869 904 923 928 965 979 985 989",
+            note="each deleting one square from the next count's 4e4c8ce certificate",
+            answer=DELETION_ANSWER,
         ),
-    ),
-    "franciscouzo/square-packing@58a7833": (
         _held(
-            GOEBEL_ABOVE,
-            "think-8krd",
-            "331 368 369 376 407 408 415 416 445 448 449 488 489 491 492 493 537 538 "
-            "585 586 634 635 636 685 686 687 688 738 739 740 793 794 795 851 852 853 "
-            "860 861 910 911 912 919 920 921 964 971 972 973 974",
+            CONSEQUENCE,
+            "think-kzme",
+            "751 752 927",
+            note=(
+                "deleting three squares from 754's certificate, two from 754's and two from "
+                "929's (certified_bounds.json at 4e4c8ce), beyond the D6 answer's words"
+            ),
         ),
     ),
     "franciscouzo/square-packing@23aff0c": (
-        _held(SUB_PRINT, "think-fwa9", "325 333 362 401 442 456 485 499 530 577"),
         _held(
             CONSEQUENCE,
             "think-f2io",
             "367 406 447 541 542 588 589 638 751 847 848 906 907 967 968",
-            also=("think-8krd",),
-            note="deletions from Friedman's off-centre constructions",
+            also=("think-zkxy",),
+            note=(
+                "deletions from Friedman's off-centre constructions, which no certificate "
+                "file states, so D6's answer on deletions from certificates does not reach "
+                "them"
+            ),
         ),
         _held(
             RECIPE,
@@ -521,48 +555,21 @@ HISTORY_HELD: dict[str, tuple[Held, ...]] = {
             "368 407 448 457 491 500 533 534 543 545 580 581 590 592 626 629 630 639 "
             "641 677 680 681 690 730 733 734 741 752 785 788 789 796 842 845 846 849 "
             "901 904 905 908 962 965 966 969 981 982",
-            also=("think-8krd",),
+            also=("think-zkxy",),
             note=f"{_CLASSICAL_23AFF0C}, 41 of them as L-border extensions",
         ),
     ),
-    "#715": (
-        _held(
-            SUB_PRINT,
-            "think-fwa9",
-            "535 582 591 631 633 640 682 684 691 695 735 737 742 745 790 791 797 798 "
-            "799 854 855 856 857 909 913 915 916 970 975 977",
-        ),
-    ),
-    "franciscouzo/square-packing@5a299b4": (
-        _held(GOEBEL_ABOVE, "think-8krd", "331"),
-        _held(
-            SUB_PRINT,
-            "think-fwa9",
-            "326 327 329 332 334 363 366 371 372 402 405 414 443 446 451 486 494 531 "
-            "539 540 578 587 627 632 678 683 731 786 843 902 963",
-        ),
-    ),
 }
-#: The history walk's verdicts decided only against publications it holds (`Resting`):
-#: 131 at 107 counts, by report, verdict and the classes they rest on. Those resting on
-#: Göbel and sub-print holds stand whatever those answers are, since a side above a side
-#: above Göbel's construction is above it too and one within 1e-12 of a re-certification
-#: is one itself; the 9 on deletion bounds and the 47 on recipes would be recorded if D6
-#: and D2 left those out (`refusal_flips`). ``check`` holds the list to the ledger.
+#: The history walk's verdicts decided only against publications it holds for a decision
+#: still owed (`Resting`), by report, verdict and the classes they rest on: recipes, and
+#: 23aff0c's deletions from Friedman's constructions. ``refusal_flips`` says which would be
+#: recorded if an answer left those out. ``check`` holds the list to the ledger.
 HISTORY_RESTING = (
     _resting("TheSnakeFang/squarepack-certs@5f3bdbf", NOT_RECORDED, RECIPE, "757 813 871"),
-    _resting("evand/square-packing@41fc9ec", NOT_RECORDED, GOEBEL_ABOVE, "375"),
-    _resting(
-        "franciscouzo/square-packing@23aff0c",
-        NOT_RECORDED,
-        GOEBEL_ABOVE,
-        "369 376 416 445 488 489 493 538 585 586 634 635 636 685 686 687 688 738 739 740 "
-        "794 795 851 852 853 860 861 910 911 912 921 964 971 972 973 974",
-    ),
-    _resting("franciscouzo/square-packing@23aff0c", NOT_RECORDED, SUB_PRINT, "327"),
+    _resting("franciscouzo/square-packing@23aff0c", NOT_RECORDED, RECIPE, "327"),
     _resting("franciscouzo/square-packing@43ac7d2", UNDECIDED, RECIPE, "812 930 931 992 993"),
     _resting("franciscouzo/square-packing@487b058", NOT_RECORDED, RECIPE, "812 930"),
-    _resting("franciscouzo/square-packing@4e4c8ce", NOT_RECORDED, GOEBEL_ABOVE, "369 376"),
+    _resting("franciscouzo/square-packing@4e4c8ce", NOT_RECORDED, RECIPE, "327"),
     _resting(
         "franciscouzo/square-packing@5a299b4",
         NOT_RECORDED,
@@ -572,89 +579,38 @@ HISTORY_RESTING = (
     _resting(
         "franciscouzo/square-packing@5a299b4",
         NOT_RECORDED,
-        GOEBEL_ABOVE,
-        "408 415 449 488 492 537 538 585 634 635 685 686 687 738 739 793 794 795 851 852 "
-        "910 911 912 920 971 972 973",
-    ),
-    _resting(
-        "franciscouzo/square-packing@5a299b4",
-        NOT_RECORDED,
         RECIPE,
-        "407 448 457 491 533 534 580 581 590 629 630 639 677 680 681 690 730 733 734 741 "
-        "785 788 789 796 842 845 846 901 904 905 908 962 965 966 969 981 982",
-    ),
-    _resting(
-        "franciscouzo/square-packing@5a299b4",
-        NOT_RECORDED,
-        SUB_PRINT,
-        "325 333 362 401 442 485 530 577",
+        "327 407 448 457 491 533 534 580 581 590 629 630 639 677 680 681 690 730 733 734 "
+        "741 785 788 789 796 842 845 846 901 904 905 908 962 965 966 969 981 982",
     ),
 )
 #: The publications the #732 walk records that the history walk holds, at the counts the
 #: walk records them: the history walk's holds there (`HISTORY_HELD`).
 _HELD_IN_732 = (
-    ("#715", "854 855 856 857 909 913 915 916 970 975 977"),
-    ("evand/square-packing@49907ec", "964"),
-    ("franciscouzo/square-packing@02f9690", "369"),
     (
         "franciscouzo/square-packing@23aff0c",
         (
-            "333 362 367 368 401 406 407 442 448 457 485 491 530 533 534 541 542 543 577 "
-            "580 581 588 589 590 626 629 630 638 639 677 680 681 690 730 733 734 741 785 "
-            "788 789 796 842 845 846 847 848 849 901 904 905 906 907 908 962 965 966 967 "
-            "968 969 981 982"
-        ),
-    ),
-    (
-        "franciscouzo/square-packing@487b058",
-        (
-            "369 376 408 415 416 445 449 488 489 492 493 537 538 585 586 634 635 636 685 "
-            "686 687 688 738 739 740 793 794 795 851 852 853 861 910 911 912 920 921 964 "
-            "971 972 973 974"
+            "367 368 406 407 448 457 491 533 534 541 542 543 580 581 588 589 590 626 629 630 "
+            "638 639 677 680 681 690 730 733 734 741 785 788 789 796 842 845 846 847 848 849 "
+            "901 904 905 906 907 908 962 965 966 967 968 969 981 982"
         ),
     ),
     (
         "franciscouzo/square-packing@4e4c8ce",
-        (
-            "331 332 368 407 408 415 416 445 448 449 488 489 491 492 493 533 537 538 542 "
-            "580 583 585 586 589 629 632 634 635 636 638 680 683 685 686 687 688 733 738 "
-            "739 740 788 793 794 795 845 851 852 853 855 861 904 910 911 912 920 921 964 "
-            "965 971 972 973 974 985"
-        ),
-    ),
-    (
-        "franciscouzo/square-packing@58a7833",
-        (
-            "331 368 369 376 407 408 415 416 445 448 449 488 489 491 492 493 537 538 585 "
-            "586 634 635 636 685 686 687 688 738 739 740 793 794 795 851 852 853 861 910 "
-            "911 912 920 921 964 971 972 973 974"
-        ),
-    ),
-    (
-        "franciscouzo/square-packing@5a299b4",
-        (
-            "329 331 332 334 363 366 371 402 405 414 443 446 451 486 494 531 539 540 578 "
-            "587 627 632 678 683 731 786 843 902 963"
-        ),
+        "533 580 583 589 629 632 638 680 683 733 788 845 855 904 965 985",
     ),
 )
-#: The #732 walk's verdicts decided only against publications it holds (`Resting`): those
-#: on Göbel and sub-print holds stand whatever those answers are (`HISTORY_RESTING`); those
-#: on recipes, deletion bounds and the withdrawn files are reopened by `held-dependents`.
+#: The #732 walk's verdicts decided only against publications it holds for a decision
+#: still owed (`Resting`): those on recipes and on 23aff0c's deletions from Friedman's
+#: constructions are reopened by `held-dependents`. None rests on a settled hold: the
+#: withdrawn files (think-8m4k), or 4e4c8ce's deletion bounds, earlier reports by the D6
+#: answer, against which #732's 985 is not recorded.
 _RESTING_732 = (
     _resting(
         "#732",
         NOT_RECORDED,
         CONSEQUENCE,
-        "367 406 541 542 588 589 638 847 848 906 907 967 968 985",
-    ),
-    _resting(
-        "#732",
-        NOT_RECORDED,
-        GOEBEL_ABOVE,
-        "331 369 376 408 415 416 445 449 488 489 492 493 537 538 585 586 634 635 636 "
-        "685 686 687 688 738 739 740 793 794 795 851 852 853 861 910 911 912 920 921 "
-        "964 971 972 973 974",
+        "367 406 541 542 588 589 638 847 848 906 907 967 968",
     ),
     _resting(
         "#732",
@@ -665,23 +621,10 @@ _RESTING_732 = (
         "969 981 982",
     ),
     _resting(
-        "#732",
-        NOT_RECORDED,
-        SUB_PRINT,
-        "329 332 333 334 362 363 366 371 401 402 405 414 442 443 446 485 486 530 531 "
-        "577 578 627 678 731 786 843 902 909 963 970 975",
-    ),
-    _resting(
         f"{MISHAPOLK_REPOSITORY}@1851c2c",
         NOT_RECORDED,
         CONSEQUENCE,
         "367 406 541 542 588 589 638 847",
-    ),
-    _resting(
-        f"{MISHAPOLK_REPOSITORY}@1851c2c",
-        NOT_RECORDED,
-        GOEBEL_ABOVE,
-        "416 445 488 489 493 538 585 586 634 635 636 685 686 687 688 738 739 740 793 794 795",
     ),
     _resting(
         f"{MISHAPOLK_REPOSITORY}@1851c2c",
@@ -693,14 +636,6 @@ _RESTING_732 = (
     _resting(f"{MISHAPOLK_REPOSITORY}@8a488a1", NOT_RECORDED, CONSEQUENCE, "848"),
     _resting(f"{MISHAPOLK_REPOSITORY}@8a488a1", NOT_RECORDED, RECIPE, "849"),
     _resting(
-        "franciscouzo/square-packing@23aff0c",
-        NOT_RECORDED,
-        GOEBEL_ABOVE,
-        "369 376 416 445 488 489 493 538 585 586 634 635 636 685 686 687 688 738 739 "
-        "740 794 795 851 852 853 861 910 911 912 921 964 971 972 973 974",
-    ),
-    _resting("franciscouzo/square-packing@4e4c8ce", NOT_RECORDED, GOEBEL_ABOVE, "369 376"),
-    _resting(
         "franciscouzo/square-packing@5a299b4",
         NOT_RECORDED,
         CONSEQUENCE,
@@ -709,22 +644,9 @@ _RESTING_732 = (
     _resting(
         "franciscouzo/square-packing@5a299b4",
         NOT_RECORDED,
-        GOEBEL_ABOVE,
-        "408 415 449 488 492 537 538 585 634 635 685 686 687 738 739 793 794 795 851 "
-        "852 910 911 912 920 971 972 973",
-    ),
-    _resting(
-        "franciscouzo/square-packing@5a299b4",
-        NOT_RECORDED,
         RECIPE,
         "407 448 457 491 533 534 580 581 590 629 630 639 677 680 681 690 730 733 734 "
         "741 785 788 789 796 842 845 846 901 904 905 908 962 965 966 969 981 982",
-    ),
-    _resting(
-        "franciscouzo/square-packing@5a299b4",
-        NOT_RECORDED,
-        SUB_PRINT,
-        "333 362 401 442 485 530 577",
     ),
 )
 #: Mykhailo Polkovskyi's 1851c2c files at the nine counts #719's 06:05Z edit withdrew where
@@ -736,7 +658,7 @@ def _held_from_history(report: str, counts: str) -> tuple[Held, ...]:
     """The history walk's holds of a report (`HISTORY_HELD`), at ``counts`` only."""
     wanted = frozenset(int(n) for n in counts.split())
     return tuple(
-        Held(item.kind, item.bead, item.counts & wanted, item.also, item.note)
+        Held(item.kind, item.bead, item.counts & wanted, item.also, item.note, item.answer)
         for item in HISTORY_HELD[report]
         if item.counts & wanted
     )
@@ -744,6 +666,10 @@ def _held_from_history(report: str, counts: str) -> tuple[Held, ...]:
 
 #: The walk of each ledger these releases' rows are planned from. The backlog ledger's
 #: starts were frozen at the 18 October ledger's ``main``; #719's at ``main`` after #720.
+#: The history, #719 and #732 walks apply the owner's rulings of 23 October 2026
+#: (`devtools.intake_ledger.RULINGS`): the re-certifications below the 12-place print they
+#: held for think-fwa9 restate the reports they beat, and the publications above Göbel's
+#: construction they held for think-8krd are above an earlier report, so neither is held.
 WALKS: dict[str, Walk] = {
     BACKLOG: Walk(
         BACKLOG,
@@ -764,35 +690,24 @@ WALKS: dict[str, Walk] = {
         awaiting={},
         held={
             report: tuple(
-                Held(item.kind, item.bead, item.counts & counts)
+                Held(
+                    item.kind,
+                    item.bead,
+                    item.counts & counts,
+                    item.also,
+                    item.note,
+                    item.answer,
+                )
                 for item in HISTORY_HELD[report]
                 if item.counts & counts
             )
             for report, counts in (
                 ("franciscouzo/square-packing@4e4c8ce", frozenset({743, 798})),
                 ("franciscouzo/square-packing@23aff0c", frozenset({447})),
-                ("franciscouzo/square-packing@5a299b4", frozenset({366, 372})),
-                # #715's re-certifications wait on a decision, not an import (review A of
-                # #730, A6): held here as in the history walk, at the 19 counts this walk
-                # records them.
-                (
-                    "#715",
-                    frozenset(
-                        {535, 582, 591, 631, 633, 640, 682, 684, 691, 695}
-                        | {735, 737, 742, 745, 790, 791, 797, 798, 799}
-                    ),
-                ),
             )
         },
         resting=(
-            _resting("#719", NOT_RECORDED, SUB_PRINT, "366"),
             _resting("franciscouzo/square-packing@5a299b4", NOT_RECORDED, CONSEQUENCE, "447"),
-            _resting(
-                "franciscouzo/square-packing@5a299b4",
-                NOT_RECORDED,
-                SUB_PRINT,
-                "535 582 591 631 633 640 682 684 691 695 735 737 742 745 790 791 797 798 799",
-            ),
         ),
     ),
     HISTORY: Walk(
@@ -803,22 +718,67 @@ WALKS: dict[str, Walk] = {
         resting=HISTORY_RESTING,
     ),
     # #732's walk records the history walk's held publications where they stand below the
-    # starts frozen after #730, #732's 499 below #719's row by 8.66e-13 at the same 12-place
-    # print, and the 1851c2c files #719 withdrew (think-8m4k). Its verdicts resting on those
-    # holds are declared so that an answer names what it reopens (`held-dependents`).
+    # starts frozen after #730, and the 1851c2c files #719 withdrew, which the owner's answer
+    # keeps out of the record (think-8m4k). Its verdicts resting on holds are declared so
+    # that an answer names what it reopens (`held-dependents`).
     ISSUE_732: Walk(
         ISSUE_732,
         later={},
         awaiting={},
         held={
             **{report: _held_from_history(report, counts) for report, counts in _HELD_IN_732},
-            "#732": (_held(SUB_PRINT, "think-fwa9", "499"),),
             f"{MISHAPOLK_REPOSITORY}@1851c2c": (
-                _held(WITHDRAWN, "think-8m4k", _WITHDRAWN_1851C2C),
+                _held(WITHDRAWN, "think-8m4k", _WITHDRAWN_1851C2C, answer=WITHDRAWN_ANSWER),
             ),
         },
         resting=_RESTING_732,
     ),
+}
+#: #719's 631: 2.73e-13 below Couzo's 4e4c8ce certificate (and 2.57e-23 below #715's
+#: re-certification of it), all three rounding up to 25.656854249519. It is in the
+#: restatement ruling's words, but the answer named the re-certifications the walks held,
+#: and #722 recorded this one, another holder's, which its source states at 16 places: it
+#: waits on the owner (think-oqjd), and the walks record it as before.
+_AWAITING_719_631 = {
+    "n": 631,
+    "report": "#719",
+    "bead": "think-oqjd",
+    "reason": (
+        "Another holder's re-certification of Couzo's 4e4c8ce certificate, 2.73e-13 below it "
+        "at the same 12-place print, which #722 recorded and the owner's answer did not name"
+    ),
+}
+
+
+def _rulings(*awaiting: Mapping[str, Any]) -> list[dict[str, Any]]:
+    """The owner's rulings of 23 October 2026 as a walk's ``sources.yaml`` names them
+    (`devtools.intake_ledger.Ruling`), with the claims the restatement ruling leaves to the
+    owner."""
+    restatement: dict[str, Any] = {
+        "ruling": "restatement",
+        "decided": "2026-10-23",
+        "bead": "think-fwa9",
+        "through": LIMIT,
+    }
+    if awaiting:
+        restatement["awaiting_owner"] = [dict(item) for item in awaiting]
+    classical = {
+        "ruling": "classical-constructions",
+        "decided": "2026-10-23",
+        "bead": "think-8krd",
+        "through": LIMIT,
+    }
+    return [restatement, classical]
+
+
+#: The owner's rulings each walk applies (`devtools.intake_ledger.RULINGS`), through
+#: ``LIMIT``: the counts above it wait on their own work (D1, think-llit), which applies the
+#: same answers there. The backlog walk applies none: it was read on 22 October, and no
+#: step of it is in either's words.
+WALK_RULINGS: dict[str, list[dict[str, Any]]] = {
+    ISSUE_719: _rulings(_AWAITING_719_631),
+    HISTORY: _rulings(_AWAITING_719_631),
+    ISSUE_732: _rulings(),
 }
 #: A Couzo row: the count, the prior and new prints, the deletion and the link.
 _COUZO_ROW = re.compile(
@@ -1953,27 +1913,78 @@ def row_side(source: Mapping[str, Any], n: int, printed: str) -> Fraction:
     return Fraction(printed) if side is None else side
 
 
-def _standing(chosen: Release) -> dict[int, Fraction]:
-    """Each claimed count's standing side as the packet's frozen claim record read the
-    record: the case's exact side in the corpus, else the exact side of the row that stood
-    there, read from its source's claims record, or the grid; a count above ``LIMIT``, which
-    no record holds yet, stands at the grid."""
-    record = _read(chosen.directory / reports.CLAIMS)
-    coverage = safe_load(COVERAGE.read_text(encoding="utf-8"))
-    sources = {source["id"]: source for source in coverage["sources"]}
-    standing = {row.n: reports.grid_side(row.n) for row in claims(chosen)}
+class Standing(NamedTuple):
+    """A claimed count's standing side as a packet's frozen claim record read the record
+    (`standing_sides`): the least of the case, or of the rows that stood there and the
+    grid (``side``), and, for a record read from `devtools.intake_ledger.GOEBEL_FROM`, an
+    enclosure of Göbel's construction there (``construction``, of the closed form
+    ``form``), as the importer reads it (`reports.goebel_construction`)."""
+
+    side: Fraction
+    construction: reports.Span | None = None
+    form: str = ""
+
+    def covers(self, value: Fraction) -> bool:
+        """``value`` is at or above the standing side: no publication strictly below it. A
+        rational side the construction's enclosure cannot separate from it is refused."""
+        if value >= self.side:
+            return True
+        if self.construction is None:
+            return False
+        own = reports.exact_span(value)
+        if reports.below(own, self.construction):
+            return False
+        _require(
+            reports.below(self.construction, own),
+            f"{value} does not separate from the enclosure of Göbel's construction",
+        )
+        return True
+
+
+def standing_sides(
+    record: Mapping[str, Any], counts: Iterable[int], sources: Mapping[str, Mapping[str, Any]]
+) -> dict[int, Standing]:
+    """Each claimed count's standing side as the frozen claim ``record`` read the record:
+    the case's exact side in the corpus, else the exact side of the row that stood there,
+    read from its source's claims record (``sources``, by id), or the grid; a count of
+    ``counts`` the record has no result for, one above ``LIMIT`` that no record holds yet,
+    stands at the grid. Beyond the horizon a record read from
+    `devtools.intake_ledger.GOEBEL_FROM` takes Göbel's construction too, and refuses a
+    count above the retained program's reach of 1073."""
+    read_on = str(record.get("read_on", ""))
+
+    def beyond(n: int, side: Fraction) -> Standing:
+        try:
+            construction = reports.goebel_construction(n, read_on)
+        except reports.ReportError as error:
+            raise ReplayError(str(error)) from error
+        if construction is None:
+            return Standing(side)
+        _, form, span = construction
+        return Standing(side, span, form)
+
+    standing = {n: beyond(n, reports.grid_side(n)) for n in counts}
     for row in record["results"]:
         n = row["n"]
         if row["case"] is not None:
-            standing[n] = Fraction(row["case"]["exact_side"])
+            standing[n] = Standing(Fraction(row["case"]["exact_side"]))
             continue
         rows = [
             row_side(sources[item["report"]], n, item["printed"])
             for item in row["pending"]
             if "printed" in item
         ]
-        standing[n] = min([*rows, Fraction(row["grid_side"])])
+        standing[n] = beyond(n, min([*rows, Fraction(row["grid_side"])]))
     return standing
+
+
+def _standing(chosen: Release) -> dict[int, Standing]:
+    """Each claimed count's standing side as the packet's frozen claim record read the
+    record (`standing_sides`)."""
+    record = _read(chosen.directory / reports.CLAIMS)
+    coverage = safe_load(COVERAGE.read_text(encoding="utf-8"))
+    sources = {source["id"]: source for source in coverage["sources"]}
+    return standing_sides(record, [row.n for row in claims(chosen)], sources)
 
 
 def release_sides(chosen: Release, clone: Path | None) -> dict[int, Fraction]:
@@ -2035,7 +2046,7 @@ def earlier_publications(
             if header is None or header[0] not in claimed:
                 continue
             n, side = header
-            if when >= chosen.first_commit_of(n)[1] or side >= standing[n]:
+            if when >= chosen.first_commit_of(n)[1] or standing[n].covers(side):
                 continue
             item = {
                 "repository": name,
@@ -2062,7 +2073,7 @@ def earlier_publications(
                 if entry is None:
                     continue
                 side = Fraction(str(entry))
-                if when >= chosen.first_commit_of(n)[1] or side >= standing[n]:
+                if when >= chosen.first_commit_of(n)[1] or standing[n].covers(side):
                     continue
                 item = {
                     "repository": name,
@@ -2086,7 +2097,12 @@ def earlier_publications(
         result.append(
             {
                 "n": n,
-                "standing": legacy.literal(standing[n]),
+                "standing": legacy.literal(standing[n].side),
+                **(
+                    {"standing_construction": standing[n].form}
+                    if standing[n].construction is not None
+                    else {}
+                ),
                 "release_side": legacy.literal(own),
                 "publications": [
                     {
@@ -2206,9 +2222,10 @@ def ledger_sources(issue: int | str, read_at_main: str, read_on: str) -> dict[st
 
     The reports are the release's own rows, at their exact sides, and every earlier report
     at its counts no row holds: each publication the release's earlier-publications receipt
-    lists, at its exact side; #715's rows at the counts it re-certified below the print
-    (think-fwa9) and above ``LIMIT``, and #666's above ``LIMIT``, which wait on the owner
-    (D1). A claim the start already holds is not walked again.
+    lists, at its exact side; #715's rows at the counts it re-certified below the print,
+    which the walk decides as restatements (think-fwa9), and above ``LIMIT``, and #666's
+    above ``LIMIT``, which wait on the owner (D1). A claim the start already holds is not
+    walked again. The walk's rulings are `WALK_RULINGS`'.
     """
     chosen = release(issue)
     walk = walk_of(chosen)
@@ -2301,9 +2318,10 @@ def ledger_sources(issue: int | str, read_at_main: str, read_on: str) -> dict[st
                 "Issue 715's rows at the counts issue 719 also claims that no row of the "
                 "couzo-issue715-2026-10-21 source holds: its re-certifications of the "
                 "4e4c8ce certificates below the 12-place print, at their exact sides from "
-                "that packet's filtered replay, which wait on a decision (think-fwa9), and "
-                "its rows above 1024, at the exact sides of the certificates the issue "
-                "links, which wait on the owner (think-f2io). None is recorded by this pass. "
+                "that packet's filtered replay, which restate those certificates by the "
+                "owner's answer of 23 October 2026 (think-fwa9), and its rows above 1024, at "
+                "the exact sides of the certificates the issue links, which wait on the owner "
+                "(think-f2io). None is recorded by this pass. "
                 "Its other rows at these counts, at 410, 413, 454, 490, 498, 544, 584, 596, "
                 "637, 644, 689, 692, 699, 736, 743, 744, 746, 792 and 800, state the 4e4c8ce "
                 "certificates' sides exactly, the same holder's, so they are not walked: each "
@@ -2332,7 +2350,7 @@ def ledger_sources(issue: int | str, read_at_main: str, read_on: str) -> dict[st
             ),
         },
     ]
-    return {
+    document: dict[str, Any] = {
         "format": "intake-ledger-sources-v1",
         "read_at_main": read_at_main,
         "read_on": read_on,
@@ -2340,6 +2358,9 @@ def ledger_sources(issue: int | str, read_at_main: str, read_on: str) -> dict[st
         "lanes": [],
         "reports": [report for report in reports_list if report["claims"]],
     }
+    if walk.name in WALK_RULINGS:
+        document["rulings"] = WALK_RULINGS[walk.name]
+    return document
 
 
 def release_715_claims(
@@ -2630,6 +2651,11 @@ def _counted(total: int) -> str:
     return "1 count" if total == 1 else f"{total} counts"
 
 
+def _compress_counts(counts: Iterable[int]) -> str:
+    """Counts written out in order, separated by commas and a final "and"."""
+    return _listing([str(n) for n in sorted(counts)])
+
+
 def _listing(parts: Sequence[str]) -> str:
     return parts[0] if len(parts) == 1 else ", ".join(parts[:-1]) + " and " + parts[-1]
 
@@ -2643,7 +2669,7 @@ def held_sentence(walk: Walk, report: str) -> str:
     history = walk.name == HISTORY
     held_name = "HISTORY_HELD" if history else f"WALKS[{walk.name!r}].held"
     resting_name = "HISTORY_RESTING" if history else f"WALKS[{walk.name!r}].resting"
-    items = walk.held.get(report, ())
+    items = [item for item in walk.held.get(report, ()) if not item.answer]
     if items:
         parts = [
             f"{len(item.counts)} "
@@ -2658,6 +2684,15 @@ def held_sentence(walk: Walk, report: str) -> str:
             f"waiting on an owner decision (beyond_horizon_replay.{held_name}): "
             f"{_listing(parts)}."
         )
+    for item in walk.held.get(report, ()):
+        if item.answer:
+            text += (
+                f" Its {len(item.counts)} "
+                + (HELD_NAMES if len(item.counts) > 1 else HELD_NAME)[item.kind]
+                + (f", {item.note}" if item.note else "")
+                + f", at {_compress_counts(item.counts)}, have no row by {item.answer} "
+                f"(beyond_horizon_replay.{held_name})."
+            )
     resting = [item for item in walk.resting if item.report == report]
     if resting:
         parts = [
@@ -2683,9 +2718,10 @@ def history_sources(read_on: str) -> dict[str, Any]:
     report a commit, at the least side the commit states at each count (#722's review A,
     A2). A publication of a row's side is that row's report; where it came before the issue
     that reported the row, the claim says when (``first_committed``). #715's
-    re-certifications held on think-fwa9 are #715's claims, at the exact sides its packet's
-    filtered receipt states. A row source an issue did not report is dated, side by side, by
-    the first publication of the side, else its packet's pinned commit.
+    re-certifications below the print are #715's claims, at the exact sides its packet's
+    filtered receipt states, which the walk decides as restatements (think-fwa9). A row
+    source an issue did not report is dated, side by side, by the first publication of the
+    side, else its packet's pinned commit. The walk's rulings are `WALK_RULINGS`'.
     """
     coverage = safe_load(COVERAGE.read_text(encoding="utf-8"))
     sources = {source["id"]: source for source in coverage["sources"]}
@@ -2789,6 +2825,7 @@ def history_sources(read_on: str) -> dict[str, Any]:
         "rule": RULE,
         "lanes": [],
         "reports": reports_list + publications,
+        "rulings": WALK_RULINGS[HISTORY],
     }
 
 
@@ -2830,8 +2867,9 @@ def _history_note(source: str, label: str) -> str:
             "Issue 715's rows, at the exact sides its source's claims record states, and its "
             "30 re-certifications of the 4e4c8ce certificates below the 12-place print, at "
             "the exact sides of the certificates its packet's filtered receipt states, which "
-            "wait on a decision (think-fwa9). Its other restatements of earlier certificates "
-            "tie them exactly and are not walked."
+            "restate those certificates by the owner's answer of 23 October 2026 "
+            "(think-fwa9). Its other restatements of earlier certificates tie them exactly "
+            "and are not walked."
         )
     if label.startswith("#"):
         return (
@@ -3053,9 +3091,9 @@ def release_walk_sources(issue: int | str, read_on: str) -> dict[str, Any]:
       commit, dated by the commit: the repository is watched;
     - every publication of the watched repositories the history scan found
       (`HISTORY_PUBLICATIONS`), one report a commit, at the least side the commit states
-      at each count (#722's review A, A2), and #715's re-certifications held on
-      think-fwa9, at the exact sides its packet's filtered receipt states; a publication of
-      a side #715 re-certified is #715's report.
+      at each count (#722's review A, A2), and #715's re-certifications below the print,
+      at the exact sides its packet's filtered receipt states, which the walk decides as
+      restatements (think-fwa9); a publication of a side #715 re-certified is #715's report.
 
     Every earlier publication is walked only where it is strictly below the count's start
     (`_start_highs`): at or above it, it could never be recorded or change a verdict. The
@@ -3199,8 +3237,9 @@ def release_walk_sources(issue: int | str, read_on: str) -> dict[str, Any]:
                 "note": (
                     f"Issue 715's re-certifications of the 4e4c8ce certificates below the "
                     f"12-place print at the counts {chosen.label} claims, strictly below the "
-                    "start, at the exact sides its packet's filtered receipt states; they wait "
-                    "on a decision (think-fwa9)." + held_sentence(walk, "#715")
+                    "start, at the exact sides its packet's filtered receipt states; each "
+                    "restates the certificate it re-certifies, by the owner's answer of 23 "
+                    "October 2026 (think-fwa9)." + held_sentence(walk, "#715")
                 ),
             }
         )
@@ -3211,6 +3250,7 @@ def release_walk_sources(issue: int | str, read_on: str) -> dict[str, Any]:
         "rule": RULE,
         "lanes": [],
         "reports": reports_list + publications,
+        "rulings": WALK_RULINGS[walk.name],
     }
 
 
@@ -3509,6 +3549,7 @@ def held_plan() -> list[dict[str, Any]]:
             "bead": item.bead,
         }
         | ({"also": list(item.also)} if item.also else {})
+        | ({"settled": True} if item.answer else {})
         for walk in WALKS.values()
         for report, items in walk.held.items()
         for item in items
@@ -3517,9 +3558,10 @@ def held_plan() -> list[dict[str, Any]]:
 
 
 def resting_on_holds(walk: Walk) -> tuple[Resting, ...]:
-    """The verdicts ``walk`` decided only against publications it holds, from its ledger:
-    a step not recorded, or undecided, every report of whose ``decided_against`` the walk
-    holds at that count, grouped by report, verdict and the holds' classes."""
+    """The verdicts ``walk`` decided only against publications it holds for a decision still
+    owed, from its ledger: a step not recorded, or undecided, every report of whose
+    ``decided_against`` the walk holds at that count with no answer settling it
+    (`Held.answer`), grouped by report, verdict and the holds' classes."""
     groups: dict[tuple[str, str, tuple[str, ...]], set[int]] = {}
     for count in _counts(walk):
         n = count["n"]
@@ -3528,7 +3570,7 @@ def resting_on_holds(walk: Walk) -> tuple[Resting, ...]:
             if step["verdict"] == RECORDED or not against:
                 continue
             holds = [walk.holds(report, n) for report in against]
-            if all(holds):
+            if all(item is not None and not item.answer for item in holds):
                 kinds = tuple(sorted({item.kind for item in holds if item is not None}))
                 groups.setdefault((step["report"], step["verdict"], kinds), set()).add(n)
     return tuple(
@@ -3561,32 +3603,32 @@ def resting_problems() -> list[str]:
     return problems
 
 
-#: What a step a rerun walk records would be (`refusal_flips`): a record, which needs a
-#: row, or a publication held again in a class of its own.
+#: What a step a rerun walk records would be (`refusal_flips`): a record, which needs a row.
 NEW_RECORD = "record"
 
 
 def refusal_flips(walk: Walk, kinds: Iterable[str]) -> list[tuple[int, str, str]]:
     """The steps ``walk`` would record if the owner left its holds of ``kinds`` out of the
-    record, each with what it would then be.
+    record, each with what it would then be. A hold an answer has settled stays.
 
     The walk is run again by `devtools.intake_ledger`'s rule from its frozen starts without
-    those publications, and each step that was not recorded and now is is named. It is a
-    new record (`NEW_RECORD`) unless it is itself above Göbel's construction at its count
-    (`GOEBEL_ABOVE`, by the 15 October packet's program, as `goebel` compares) or below
-    the side it beats by less than 1e-12 at the same 12-place print (`SUB_PRINT`), when
-    the same decision holds it in turn.
+    those publications, under the ledger's own exceptions and rulings, and each step that
+    was not recorded and now is is named: a new record (`NEW_RECORD`). The rulings decide
+    in the rerun as in the walk, so a side above Göbel's construction or a restatement of
+    the report it beats is not recorded there either.
     """
     from devtools import intake_ledger  # noqa: PLC0415
 
     refused = set(kinds)
     ledger = intake_ledger.load_ledger(walk.directory)
     starts = intake_ledger.load_starts(walk.directory, ledger["read_at_main"])
+    exceptions = {(item["n"], item["report"]): item["reason"] for item in ledger["exceptions"]}
+    rulings = intake_ledger.rulings_of(ledger)
     entries: dict[int, list[Any]] = {}
     for report in ledger["reports"]:
         for claim in report["claims"]:
             held = walk.holds(report["report"], claim["n"])
-            if held is None or held.kind not in refused:
+            if held is None or held.kind not in refused or held.answer:
                 entries.setdefault(claim["n"], []).append(
                     intake_ledger.entry_side(report, claim)
                 )
@@ -3595,32 +3637,32 @@ def refusal_flips(walk: Walk, kinds: Iterable[str]) -> list[tuple[int, str, str]
         for count in _counts(walk)
         for step in count["steps"]
     }
-    program = _goebel_program()
-    forms = program.families(program.LIMIT)
     flips: list[tuple[int, str, str]] = []
     for n, sides in sorted(entries.items()):
-        for step in intake_ledger.walk(n, starts[n], sides).steps:
+        for step in intake_ledger.walk(n, starts[n], sides, exceptions, rulings).steps:
             if step.verdict != RECORDED or before.get((n, step.side.label)) == RECORDED:
                 continue
-            side = step.side.value
-            least = min(member.span.high for member in step.holders)
-            construction = program.goebel_at(n, forms)
-            if construction is not None and program.sign(side, construction) >= 0:
-                falls = GOEBEL_ABOVE
-            elif least - side < SUB_PRINT_GAP and ceiling(side) == ceiling(least):
-                falls = SUB_PRINT
-            else:
-                falls = NEW_RECORD
-            flips.append((n, step.side.label, falls))
+            flips.append((n, step.side.label, NEW_RECORD))
     return flips
 
 
 def held_dependents() -> dict[str, Any]:
-    """For each walk, the verdicts resting on its holds and, for each class of hold an
-    answer might leave out, the steps a rerun walk would then record, by what each would
-    be (`refusal_flips`)."""
+    """For each walk, the verdicts resting on its holds; for each class of hold an answer
+    might leave out, the steps a rerun walk would then record, by what each would be
+    (`refusal_flips`); and the holds an answer has settled (`Held.answer`)."""
     return {
         walk.name: {
+            "settled": [
+                {
+                    "report": report,
+                    "class": item.kind,
+                    "counts": sorted(item.counts),
+                    "answer": item.answer,
+                }
+                for report, items in walk.held.items()
+                for item in items
+                if item.answer
+            ],
             "resting": [
                 {
                     "report": item.report,
@@ -3636,7 +3678,12 @@ def held_dependents() -> dict[str, Any]:
                     for falls in sorted({how for _, _, how in flips})
                 }
                 for kind in sorted(
-                    {item.kind for items in walk.held.values() for item in items}
+                    {
+                        item.kind
+                        for items in walk.held.values()
+                        for item in items
+                        if not item.answer
+                    }
                 )
                 for flips in [refusal_flips(walk, (kind,))]
             },
@@ -3803,11 +3850,51 @@ def _superseded_after(
     )
 
 
+def construction_problems(register: Mapping[str, Any]) -> list[str]:
+    """Where a register row beyond the corpus to ``LIMIT`` is not marked as the owner's
+    answer of 23 October 2026 on #613 requires (think-8krd): a row at or above Göbel's
+    construction at its count, as `devtools.intake_ledger.goebel_form` reads the retained
+    program, is marked ``above-classical-construction`` with that construction, and a row
+    so marked is above it. A row is read at its exact side where its source's claims
+    record states one, else as low as its print allows."""
+    from devtools import check_source_coverage as coverage_check  # noqa: PLC0415
+    from devtools import intake_ledger  # noqa: PLC0415
+
+    sources = {str(source["id"]): source for source in register["sources"]}
+    problems: list[str] = []
+    for row in register["beyond_horizon_claims"]:
+        n, value = int(row["n"]), str(row["value"])
+        if not reports.HORIZON < n <= LIMIT:
+            continue
+        where = f"n={n} from {row['source_id']}"
+        marked = row.get("disposition") == coverage_check.ABOVE_CONSTRUCTION
+        form = intake_ledger.goebel_form(n)
+        exact = _stated_side(sources[str(row["source_id"])], n)
+        low = exact if exact is not None else Fraction(value) - intake_ledger.unit(value)
+        above = coverage_check.construction_sign(low, form.text()) == 1
+        below = coverage_check.construction_sign(exact or Fraction(value), form.text()) == -1
+        if not (above or below):
+            problems.append(f"{where}: its print does not decide it against {form.text()}")
+        elif above and not marked:
+            problems.append(
+                f"{where}: above Göbel's construction {form.text()}, and not marked "
+                f"{coverage_check.ABOVE_CONSTRUCTION}"
+            )
+        elif marked and not above:
+            problems.append(f"{where}: marked, and not above Göbel's {form.text()}")
+        elif marked and row.get("construction") != form.text():
+            problems.append(
+                f"{where}: names {row.get('construction')!r}, not Göbel's {form.text()}"
+            )
+    return problems
+
+
 def coverage_problems(coverage: Mapping[str, Any] | None = None) -> list[str]:
     """Where the coverage register differs from the plan: each planned row, as written, or
     superseded by a report its walk does not reach where the plan calls it current; no row
     for a decided row its walk does not record; each start a release's row beat first naming
-    the release's source as its successor; and each walked count one chain in report order.
+    the release's source as its successor; each walked count one chain in report order; and
+    each row above Göbel's construction marked so (`construction_problems`).
     ``coverage`` is the register as `safe_load` reads it, by default the checkout's."""
     register: Mapping[str, Any] = (
         safe_load(COVERAGE.read_text(encoding="utf-8")) if coverage is None else coverage
@@ -3841,6 +3928,7 @@ def coverage_problems(coverage: Mapping[str, Any] | None = None) -> list[str]:
         + resting_problems()
         + declaration_problems()
         + chain_problems(register)
+        + construction_problems(register)
     )
 
 
