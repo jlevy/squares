@@ -18,6 +18,8 @@ The certificate gives 204 unit squares, each a rational centre and a rational
 $t = \tan(\theta/2)$, in Evan Daniel’s certificate format, which the header names.
 Its per-count JSON, `certificates/n204.json`, names its digest and exact side and credits
 the seed to Mykhailo Polkovskyi (Mishapolk), search job 105412 (`hop`).
+The author’s answer of 23 October names the whole chain behind that credit
+([The Author’s Answers of 23 October](#the-authors-answers-of-23-october)).
 
 ## Retained Here
 
@@ -168,10 +170,57 @@ The [history walk of 22 October](../../../campaign/issue-intake/upper-bounds-cou
 
 The pin’s 10 re-certifications below the side they beat by less than 10⁻¹² with the same 12-place print, at 325, 333, 362, 401, 442, 456, 485, 499, 530 and 577, restate those reports by the owner’s answer of 23 October 2026 (think-fwa9), so the walk does not record them. It records the pin’s 61 classical constructions `upper_bounds.json` states with no certificate file of their own and holds each back from a row for its decision. Of these, 46 are Göbel’s squares (27) and Friedman’s off-centre family (19), 41 of them L-border extensions and 368, 543, 626, 752 and 849 bare (D2, think-f2io); 15, 447 among them, delete one or two squares from Friedman’s constructions at 368, 407, 448, 543, 590, 639, 752, 849, 908 and 969 (D6, proposed on think-f2io). Each is below Göbel’s construction at its count, so #613’s answer (think-8krd) leaves them to D2 and D6; whether Friedman’s constructions count as earlier reports as Göbel’s do is think-zkxy.
 
+## The Author’s Answers of 23 October
+
+Francisco Couzo answered the [22 October review](../../../../docs/project/reviews/review-2026-10-22-couzo-670-672-675.md)’s
+two questions on the issue at 2026-10-23T22:22:03Z
+([issuecomment-6375905012](https://github.com/jlevy/squares/issues/670#issuecomment-6375905012)),
+and the answer is retained as a claim in [acquisition/declaration.json](acquisition/declaration.json).
+It says Claude Code assisted with the reply.
+
+- **The seed.** The per-count JSON reduced the chain to its first and last links.
+  In full, the search began at Mykhailo Polkovskyi’s `certificates/square-204.cert` at
+  `Mishapolk/square-packing-records@70a033f` (SHA-256 `f0885fa8…`), T-186’s
+  certificate, which the source published in decimals as `n204.txt` at `4e4c8ce`
+  (`3e7c2456…`). Hop jobs 101216, 103222 and 105412 followed, each from the last one’s
+  output, none of them published, and a quarter turn made the certificate.
+  The answer concludes that the construction lineage is T-186’s: Polkovskyi’s refinement
+  of Daniil Ostashev’s packing, as PingYou Ltd refined it.
+- **The checker call.** The source passes exact rational corners built from (x, y, t)
+  to this repository’s `sqpack/verify.py`, byte-identical to its `verify.py` at
+  `37e6757`, as `verify_packing(..., bucket=True)` with an exact rational sign, in the
+  closed box $[0, S]^2$. Its strict verdict at 204 is false only because squares touch
+  the walls, and `sqpack.verify` counts 32 corner coordinates on the boundary and no
+  touching pairs.
+
+[measure/seed-identity.py](measure/seed-identity.py) holds both to this record’s files in
+about a second, and [measure/seed-identity.json](measure/seed-identity.json) is its
+receipt. It is a measurement and decides nothing:
+
+- every digest the answers on #670 and #675 print is the SHA-256 a packet’s manifest
+  records, and `4e4c8ce`’s `certificates/best/n204.cert` is T-186’s certificate byte for
+  byte;
+- `n204.txt`, retained in [`couzo-index-2026-10-15`](../couzo-index-2026-10-15/README.md#the-204-seed)
+  and read by `devtools.upper_bound_reports`’ `calle-txt` adapter, pairs one to one
+  with T-186’s packing under the identity, every centre within $3.94 \times 10^{-12}$,
+  at a printed side $2.78 \times 10^{-12}$ above T-186’s exact side;
+- the same call on this packet’s certificate counts the same 32 boundary corner
+  coordinates and no touching pair, as the replay’s least wall clearance of exactly 0
+  and least pair gap of $5.47 \times 10^{-11}$ say.
+
+The hop jobs’ outputs were never published, so the steps between T-186’s packing and
+this one are the author’s account. They agree with the review’s measurement that no
+symmetry of the box pairs the two.
+By [attribution.md](../../../../attribution.md#credit-text-and-lineage)’s chain rule,
+T-226’s credit line names T-186’s lineage at 204.
+
 ## Credit
 
 Francisco Couzo, whose issue keeps every seed, construction and certificate credit in
-the source’s manifest; the per-count JSON credits the seed to Mykhailo Polkovskyi.
+the source’s manifest; the per-count JSON credits the seed to Mykhailo Polkovskyi, and
+the author’s answer of 23 October traces it to T-186’s packing, Polkovskyi’s refinement
+of Daniil Ostashev’s packing as PingYou Ltd refined it. The credit line is *Couzo after
+Polkovskyi, Ostashev, PingYou Ltd, Daniel, Levy*.
 The source discloses OpenAI Codex assistance with its checker.
 Beyond the corpus the per-count JSON credits Couzo’s seeds at most counts, Evan Daniel’s
 at 364 and his seed or construction at 403 and 444, Kevin Fang’s at 382, and Fang’s
@@ -191,6 +240,7 @@ python -m devtools.upper_bound_reports couzo-issue670-2026-10-17 check --replay
 python -m devtools.upper_bound_reports couzo-issue670-2026-10-17 register-plan
 python -m devtools.beyond_horizon_replay check --issue 670
 python -m devtools.beyond_horizon_replay check --issue 670 --replay --workers 2
+python resources/web/couzo-issue670-2026-10-17/measure/seed-identity.py --out resources/web/couzo-issue670-2026-10-17/measure/seed-identity.json
 ```
 
 <!-- This document follows common-doc-guidelines.md.

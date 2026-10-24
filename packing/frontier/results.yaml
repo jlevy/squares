@@ -30680,6 +30680,10 @@ results:
       The source credits Mykhailo Polkovskyi's construction at 204, and Joost de Winter's
       (issue 668) at 260, seeded from Evan Daniel's exact-form certificate of it, published
       on 17 October 2026 in his square-packing repository (https://github.com/evand/square-packing).
+      At 204 the certificate refines the arrangement Couzo's #670 first reported (T-226),
+      whose search, his answer of 23 October 2026 on that issue says, started from T-186's
+      packing: Polkovskyi's refinement of Daniil Ostashev's packing, as PingYou Ltd refined
+      it.
       The source checks its certificates with this project's verification code and Daniel's
       checker as modified by Couzo with Codex. No arrangement identity, local minimum or
       optimum is established.
@@ -30971,8 +30975,9 @@ results:
 
       Credit the packings to their finders (at 227 the source's list names Couzo, whose
       #672 refines de Winter's packing): Francisco
-      Couzo's at 204 (#678, T-223, which his source credits to Mykhailo Polkovskyi's
-      construction) and 260 (#678, T-223, his arrangement from a search seeded with Evan
+      Couzo's at 204 (#678, T-223, whose search, by his answer of 23 October 2026 on #670,
+      began at Mykhailo Polkovskyi's T-186 packing, his refinement of Daniil Ostashev's as
+      PingYou Ltd refined it) and 260 (#678, T-223, his arrangement from a search seeded with Evan
       Daniel's exact-form certificate of Joost de Winter's #668 packing); Joost de Winter's
       at 227 (#668, T-196) as refined in Francisco Couzo's #672 report (T-227, which the
       source's manifest credits to Couzo, retaining de Winter's seed credit, from a CT105
@@ -31224,8 +31229,8 @@ results:
       45044217780850246618141/3041751595240000000000, below T-186, the case's house best
       packing when it was reported. The case's house best packing is unchanged, since
       Couzo's own later #675 and #678 (T-223) certificates, Evan Daniel's view of #678's
-      packing (T-225) and Polkovskyi's re-solve of #678's packing (T-229), the house since
-      23 October 2026, are smaller.
+      packing (T-225) and Polkovskyi's re-solves of #678's packing (T-229, and T-231, the
+      house since 24 October 2026) are smaller.
 
       The certificate and its duplicate-square and outside-container controls were decided
       here on 22 October 2026 by both maintained exact routes, and the frozen comparison
@@ -31244,10 +31249,17 @@ results:
       with Codex), pinned here by digest and not run. Those statements are the author's;
       no source script ran here.
 
-      Credit Francisco Couzo (https://github.com/franciscouzo/square-packing), whose
-      per-count JSON credits the 204 seed to Mykhailo Polkovskyi (Mishapolk), search job
-      105412 (hop). The issue keeps every seed, construction and certificate credit in the
-      source's manifest.
+      Credit Francisco Couzo (https://github.com/franciscouzo/square-packing), after the
+      packing his search started from. His per-count JSON credits the 204 seed to Mykhailo
+      Polkovskyi (Mishapolk), search job 105412 (hop). The issue keeps every seed,
+      construction and certificate credit in the source's manifest.
+
+      His answer of 23 October 2026 on the issue gives the chain that JSON reduces to its
+      first and last links: Polkovskyi's 204 certificate, T-186's, which is his refinement of
+      Daniil Ostashev's packing as PingYou Ltd refined it; its decimal form, n204.txt, which
+      Couzo's repository published on 15 October 2026; hop jobs 101216, 103222 and 105412,
+      whose outputs were not published; then a quarter turn. Measured here, that n204.txt is
+      T-186's packing under the identity, every centre within 3.94e-12.
     scope:
       n_values: [204]
     verification: V3
@@ -31282,6 +31294,7 @@ results:
       - packing/resources/web/couzo-issue670-2026-10-17/acquisition/claims.json
       - packing/resources/web/couzo-issue670-2026-10-17/source/certificates/n204.cert
       - packing/resources/web/couzo-issue670-2026-10-17/receipts/exact-certification.json.xz
+      - packing/resources/web/couzo-issue670-2026-10-17/measure/seed-identity.json
       - packing/resources/web/couzo-issue672-2026-10-17/measure/identity.json
       - packing/campaign/issue-intake/upper-bounds-20261018/README.md
       - packing/devtools/upper_bound_reports.py
@@ -31322,6 +31335,33 @@ results:
       So #670 first reported an arrangement other than T-186's, from a hop search its
       per-count JSON seeds with Polkovskyi's construction, and #675 and #678 refine it.
 
+      The author's answer of 23 October 2026 on the issue (issuecomment-6375905012), retained
+      in the packet's declaration, names that seed: three rounds of basin hopping, hop jobs
+      101216, 103222 and 105412, separate T-186's packing from this one, and the per-count
+      JSON reduced the chain to its first and last links. The three hop outputs were never
+      published, so the steps between are the author's account, consistent with the review's
+      measurement that no symmetry pairs the two packings. The answer says Claude Code
+      assisted with it.
+
+      Measured here in seconds (measure/seed-identity.json in the packet; a measurement,
+      which decides nothing): every digest the answer prints is the one a packet's manifest
+      records, the seed certificate's the one T-186's packet records; n204.txt, retained in
+      couzo-index-2026-10-15, pairs one to one with T-186's packing under the identity, every
+      centre within 3.94e-12, at a printed side 2.78e-12 above T-186's exact side; and the
+      same publication of Couzo's repository holds T-186's certificate byte for byte. By the
+      chain rule of attribution.md the credit line names T-186's lineage at 204, as T-186
+      credits it: Couzo after Polkovskyi, Ostashev, PingYou Ltd, Daniel, Levy. No
+      regularization is recorded, since the packing is another arrangement.
+
+      The same answer says how the source calls this repository's sqpack/verify.py, which
+      its verify.py copies byte for byte: exact rational corners built from (x, y, t), passed to verify_packing(..., bucket=True) with an exact rational sign, in the
+      closed box [0, S]^2 with touching allowed. Its strict verdict is false only because
+      squares touch the walls, the wall margin sign is 0 and the pair margin sign +1, and
+      sqpack.verify counts 32 corner coordinates on the boundary and no touching pairs. The
+      packet's measure/seed-identity.py makes that call here and counts the same 32, with no
+      touching pair, which agrees with the replay: a least wall clearance of exactly 0 and a
+      least pair gap of 5.47e-11.
+
       The source's own scripts were not run here. Its manifest names this repository's
       sqpack/verify.py as its first checker, byte-identical on main, and the maintained
       sqpack route decides through that file, so the replay is recorded as sharing the
@@ -31354,8 +31394,9 @@ results:
       None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
       reviewer and a retained human oversight record; one AI review, of 22 October, is
       retained. The entry is superseded on entry at 204: Couzo's own #675 and #678 (T-223)
-      and Evan Daniel's view of #678's packing (T-225) are smaller, and since 23 October
-      2026 the case has held Polkovskyi's re-solve of #678's packing (T-229). The 72 rows
+      and Evan Daniel's view of #678's packing (T-225) are smaller, and the case held
+      Polkovskyi's re-solve of #678's packing (T-229) from 23 October 2026 and its solved
+      side (T-231) since 24 October 2026. The 72 rows
       beyond the corpus are the source's dated beyond-horizon rows since 22 October 2026,
       recorded in report order by the backlog ledger (upper-bounds-backlog-20261022).
     reviews:
@@ -31603,8 +31644,8 @@ results:
       improvement at the exact side it states: s(204) <=
       101859759444979981360793459/6878398651426000000000000, below his #670 (T-226). The
       case's house best packing is unchanged, since Couzo's own later #678 certificate
-      (T-223), Evan Daniel's view of its packing (T-225) and Polkovskyi's re-solve of its
-      packing (T-229), the house since 23 October 2026, are smaller.
+      (T-223), Evan Daniel's view of its packing (T-225) and Polkovskyi's re-solves of its
+      packing (T-229, and T-231, the house since 24 October 2026) are smaller.
 
       The certificate and its duplicate-square and outside-container controls were decided
       here on 22 October 2026 by both maintained exact routes, and the frozen comparison
@@ -31625,7 +31666,10 @@ results:
 
       Credit Francisco Couzo (https://github.com/franciscouzo/square-packing), whose
       per-count JSON credits the 204 seed to Mykhailo Polkovskyi (Mishapolk), search job
-      107960 (slp). The issue keeps every seed, construction and certificate credit in the
+      107960 (slp). It refines his #670 packing (T-226), whose search, his answer of 23
+      October 2026 on #670 says, started from T-186's packing, Polkovskyi's refinement of
+      Daniil Ostashev's packing as PingYou Ltd refined it, so the credit line names that
+      lineage. The issue keeps every seed, construction and certificate credit in the
       source's manifest.
     scope:
       n_values: [204]
@@ -31689,6 +31733,16 @@ results:
       tenth, at most 0.085, turns up to 2.58 degrees. This is Couzo's own sequence at 204,
       so the credit does not change, and no regularization is recorded.
 
+      The author's answer of 23 October 2026 on the issue (issuecomment-6375912099),
+      retained in the packet's declaration, says the source calls sqpack/verify.py as on
+      #672: at 204 the strict verdict is false only because squares touch the walls, the
+      wall margin sign is 0 and the pair margin sign +1, and sqpack.verify counts 88 corner
+      coordinates on the boundary and no touching pairs. The #670 packet's
+      measure/seed-identity.py makes that call, verify_packing(..., bucket=True) on exact
+      corners in the closed box, and counts the same 88, with no touching pair, which agrees
+      with the replay: a least wall clearance of exactly 0 and a least pair gap of 1.20e-12.
+      The answer says Claude Code assisted with it.
+
       The source's own scripts were not run here. Its manifest names this repository's
       sqpack/verify.py as its first checker, byte-identical on main, and the maintained
       sqpack route decides through that file, so the replay is recorded as sharing the
@@ -31721,8 +31775,9 @@ results:
       None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
       reviewer and a retained human oversight record; one AI review, of 22 October, is
       retained. The entry is superseded on entry at 204: Couzo's own #678 (T-223) and Evan
-      Daniel's view of its packing (T-225) are smaller, and since 23 October 2026 the case
-      has held Polkovskyi's re-solve of #678's packing (T-229). The 78 rows beyond the
+      Daniel's view of its packing (T-225) are smaller, and the case held Polkovskyi's
+      re-solve of #678's packing (T-229) from 23 October 2026 and its solved side (T-231)
+      since 24 October 2026. The 78 rows beyond the
       corpus are the source's dated beyond-horizon rows since 22 October 2026, recorded in
       report order by the backlog ledger (upper-bounds-backlog-20261022).
     reviews:
@@ -31788,8 +31843,9 @@ results:
       gives him since issue 593 and the issue's credit since its edit of 22 October: at 105
       Ryan Xu's packing as Francisco Couzo and PingYou Ltd refined it (T-174); at 204
       Francisco Couzo's packing, first reported in #670 and refined in #675 and #678 (T-226,
-      T-228, T-223), which Couzo's source credits to Polkovskyi's own construction (hop job
-      105412). The issue credits Mishapolk (Mykhailo Polkovskyi) and names the earlier
+      T-228, T-223), whose search Couzo's answer of 23 October 2026 on #670 traces through
+      three rounds of basin hopping to Polkovskyi's own T-186 packing, his refinement of
+      Daniil Ostashev's as PingYou Ltd refined it. The issue credits Mishapolk (Mykhailo Polkovskyi) and names the earlier
       finders its packings build on, and discloses Gemini assistance.
 
       The author's comments on the issue give the lineage of each count. At 105 he refined
@@ -32195,8 +32251,9 @@ results:
       (T-226, T-228, T-223), re-solved to a smaller side by Mykhailo Polkovskyi
       (https://github.com/Mishapolk/square-packing-records), whose continuous SQP
       optimization started from Couzo's #678 certificate in Couzo's frame, as his comment of
-      23 October on issue 719 says; Couzo's source credits Polkovskyi's own construction as
-      the seed of its search. The issue discloses Gemini assistance.
+      23 October on issue 719 says; Couzo's answer of 23 October on #670 traces the seed of
+      his search to Polkovskyi's own T-186 packing, his refinement of Daniil Ostashev's
+      packing as PingYou Ltd refined it. The issue discloses Gemini assistance.
     scope: {n_values: [204]}
     verification: V3
     confirmation: C3

@@ -1371,3 +1371,23 @@ repositories:
       says. It changes nothing at or below 1024, so the packet stays at 17cc220, whose
       indexes have the SHA-256 the issue states. 3426 is among the rows above 1024 that wait
       on the owner (think-f2io). Nothing else to import.
+  # The intake pass of 2026-10-23, lane c-records-a-1024 (think-t5hc): a repository the
+  # site's other-projects list makes watched (8c26340d9), read at its archived head.
+  - url: https://github.com/wand125/square-packing-tools
+    read_through: 24ee7fc9ac1bca45470d29610d33d41d279115a2
+    read_on: '2026-10-24'
+    note: >-
+      The eight commits of 29 September to 7 October 2026 past 0d33ab6, the
+      wand125-tools-2026-09-29 packet's pin, through 24ee7fc, the head. 6f5b151, 98436ed,
+      1b51883 and 3eb08e6 are the four that packet's update-3eb08e6 archive retains. d32a0c9
+      changes two CI action versions. 5fba675 adds fine_net_verifier (sqverify_fast with a
+      declared angle net, with its patch, soundness and independence notes) and
+      fine_net_witnesses, and 18561cd adds n17_bb_verifier, the exact verifier of the n = 17
+      branch-and-bound certificates, n = 17 tooling under think-x4v4's hold. 24ee7fc adds
+      MOVED.json, which maps every path at 18561cd to wand125/square-packing, and a README
+      notice that the repository is archived. The three tool trees equal tools/fine_net_verifier,
+      tools/fine_net_witnesses and tools/n17_bb_verifier at 61e37d5, the wand125/square-packing
+      commit the wand125-fine-net-lower-bounds-2026-10-08 packet pins (whose manifest names
+      5fba675's fine_net_verifier as an unacquired alternative source), and at that
+      repository's head e48de24, tree for tree. No certificate or claim changes. Nothing to
+      import.
