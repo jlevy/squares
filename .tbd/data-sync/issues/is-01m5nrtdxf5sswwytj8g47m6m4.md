@@ -5,13 +5,13 @@ title: "Question for the flip-regularization work: atlas/regularized/n-N.svg ser
 kind: task
 status: open
 priority: 2
-version: 2
+version: 3
 spec_path: docs/project/specs/active/plan-2026-10-23-flip-regularization.md
 labels: []
 dependencies: []
-parent_id: is-01m5mt15em8s41h5vb6tdknd5t
+parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 created_at: 2026-10-24T01:36:19.374Z
-updated_at: 2026-10-24T01:36:25.184Z
+updated_at: 2026-10-24T02:13:54.864Z
 ---
 
 ## Notes
