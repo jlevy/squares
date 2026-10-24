@@ -28,6 +28,7 @@ import os
 import re
 import subprocess
 from collections import Counter
+from collections.abc import Callable
 from fractions import Fraction
 from pathlib import Path
 from typing import Any
@@ -2085,9 +2086,14 @@ def test_the_index_s_unrequested_rows_are_a_publication_of_their_own() -> None:
         "2026-10-23T23:38:42Z",
         SOURCE_964,
     )
-    pushes = replay.PUSHED_LATER["franciscouzo/square-packing"]
-    assert chosen.reported == pushes[-1].pushed
-    assert pushes[-1].head == chosen.pin
+    # The push whose head is the pin, whichever pushes are recorded after it (#789 review
+    # A, A8: 43f666c's push of 24 October joins PUSHED_LATER with think-gn29).
+    (push,) = [
+        push
+        for push in replay.PUSHED_LATER["franciscouzo/square-packing"]
+        if push.head == chosen.pin
+    ]
+    assert chosen.reported == push.pushed == "2026-10-23T23:38:42Z"
     steps = _steps_763()[PUBLICATION_964]
     assert sorted(steps) == [
         204,
@@ -2174,3 +2180,130 @@ def test_763_s_rows_are_current_and_supersede_the_rows_they_beat() -> None:
         start for _, start, source in replay.planned_supersessions() if source == SOURCE_763
     )
     assert beaten == SUPERSEDED_BY_763
+
+
+def _flip_964ee2b_at_204(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Review B's control C8 (#789): 964ee2b's step at 204, above T-231, read as recorded."""
+    real = replay._ledger_counts  # noqa: SLF001
+
+    def flipped(path: str, modified: int) -> list[dict[str, Any]]:
+        counts = copy.deepcopy(real(path, modified))
+        if path.endswith(f"{replay.ISSUE_763}/ledger.json"):
+            for count in counts:
+                for step in count["steps"] if count["n"] == 204 else ():
+                    if step["report"] == PUBLICATION_964:
+                        step["verdict"] = replay.RECORDED
+        return counts
+
+    monkeypatch.setattr(replay, "_ledger_counts", flipped)
+    monkeypatch.setattr(
+        replay,
+        "_ledger_index",
+        lambda path, modified: {count["n"]: count for count in flipped(path, modified)},
+    )
+
+
+def test_a_corpus_count_a_walk_records_is_held_to_a_registered_result(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """A count in the corpus a walk records of a release is no declared row, so the register
+    must hold it: a result whose scope has the count and whose artifacts are the release's
+    packet. 268 and 303 are T-240's; 964ee2b's 204, flipped to recorded (#789 review B, C8),
+    has none and is named, as are 268 and 303 when no result holds them."""
+    assert replay.registered_corpus_counts(SOURCE_763) >= {268, 303}
+    assert replay.declaration_problems() == []
+    _flip_964ee2b_at_204(monkeypatch)
+    assert replay.declaration_problems() == [
+        (
+            f"{PUBLICATION_964} n=204: the walk records a count in the corpus, and no "
+            f"registered result holds it from the {SOURCE_763} packet"
+        )
+    ]
+    monkeypatch.undo()
+    monkeypatch.setattr(replay, "registered_corpus_counts", lambda _packet: set())
+    assert replay.declaration_problems() == [
+        f"#763 n={n}: the walk records a count in the corpus, and no registered result "
+        f"holds it from the {SOURCE_763} packet"
+        for n in (268, 303)
+    ]
+
+
+def _with_read(
+    monkeypatch: pytest.MonkeyPatch, path: Path, change: Callable[[dict[str, Any]], None]
+) -> None:
+    real = replay._read  # noqa: SLF001
+
+    def read(where: Path) -> Any:
+        data = real(where)
+        if where == path:
+            data = copy.deepcopy(data)
+            change(data)
+        return data
+
+    monkeypatch.setattr(replay, "_read", read)
+
+
+def test_a_publication_of_an_unwatched_repository_is_refused_not_credited(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """A history publication of a repository `WATCHED_HOLDERS` does not name is refused,
+    not credited to Polkovskyi (#789 review B, control C9)."""
+    _with_read(
+        monkeypatch,
+        replay.HISTORY_PUBLICATIONS,
+        lambda data: data["publications"].append(
+            {
+                "repository": "someone/new-watched",
+                "commit": "a" * 40,
+                "n": 456,
+                "side": "21.86",
+                "path": "n456.cert",
+                "kind": "certificate",
+                "published": "2026-10-22T12:00:00Z",
+            }
+        ),
+    )
+    with pytest.raises(replay.ReplayError, match="someone/new-watched is not a watched"):
+        replay.claim_map_walk_sources(763, "2026-10-24")
+
+
+def test_every_earlier_publication_list_is_cut_at_the_issue(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """A commit of Polkovskyi's repository pushed after the issue is no earlier
+    publication, as a late history item is not (#789 review B, control C6)."""
+    late = "c" * 40
+    _with_read(
+        monkeypatch,
+        replay.WEB / "mishapolk-issue732-f1ceee4-2026-10-23" / replay.LATER_COMMITS,
+        lambda data: data["commits"].append(
+            {
+                "commit": late,
+                "committed": "2026-10-24T00:59:00Z",
+                "pushed": "2026-10-24T01:00:00Z",
+                "publications": [
+                    {"kind": "certificate", "n": 343, "path": "n343.cert", "side": "18"}
+                ],
+            }
+        ),
+    )
+    reported = {
+        item["report"] for item in replay.claim_map_walk_sources(763, "2026-10-24")["reports"]
+    }
+    assert f"{replay.MISHAPOLK_REPOSITORY}@{late[:7]}" not in reported
+
+
+def test_releases_sharing_a_claim_map_claim_disjoint_counts(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """A count in both claim-map lists is refused, not walked as two reports (#789 review
+    B, control C5: 335 copied from the unrequested rows into the claims)."""
+    real = replay.mapped_claims
+    extra = [item for item in real(replay.release(PUBLICATION_964)) if item["n"] == 335]
+    monkeypatch.setattr(
+        replay,
+        "mapped_claims",
+        lambda chosen: real(chosen) + (extra if chosen.issue == 763 else []),
+    )
+    with pytest.raises(replay.ReplayError, match=r"both claim \[335\]"):
+        replay.claim_map_walk_sources(763, "2026-10-24")

@@ -269,6 +269,8 @@ EARLIER = Path("receipts/earlier-publications.json")
 EARLIER_FORMAT = "beyond-horizon-earlier-publications-v1"
 INTAKE = ROOT / "campaign/issue-intake"
 COVERAGE = ROOT / "frontier/source-coverage.yaml"
+#: The results register, which holds the corpus counts a walk records (`declaration_problems`).
+RESULTS = ROOT / "frontier/results.yaml"
 RECORDED, NOT_RECORDED, UNDECIDED = "recorded", "not recorded", "undecided"
 #: How an issue prints a side: rounded up at 12 places, or as the binary64 value of the
 #: exact side at 16 places, which may lie below it (#719).
@@ -4129,6 +4131,30 @@ ISSUE_763_REPORTED = "2026-10-23T23:35:51Z"
 _F1CEEE4 = WEB / "mishapolk-issue732-f1ceee4-2026-10-23"
 
 
+class ClaimMapWalk(NamedTuple):
+    """What the walk of a release whose claims are re-derived (`Release.claim_map`) reads
+    beyond its releases (`claim_map_walk_sources`), by the walk: a second such release
+    declares its own rather than borrowing #763's (#789's review A, A9)."""
+
+    #: When the issue was opened: its claims' date, and the cutoff of every earlier
+    #: publication the walk reads (the history scan's, Polkovskyi's and the ledgers').
+    reported: str
+    #: How the issue's note names the push that made its commits public.
+    pushed: str
+    #: The packet whose receipts hold Polkovskyi's repository's publications.
+    polkovskyi: Path
+
+
+CLAIM_MAP_WALKS = {
+    ISSUE_763: ClaimMapWalk(
+        reported=ISSUE_763_REPORTED,
+        pushed="the push of 23:38:42Z made efef7d1, fa6237e and 964ee2b public together, after "
+        "the issue",
+        polkovskyi=_F1CEEE4,
+    ),
+}
+
+
 def _claim_map_claim(chosen: Release, item: Mapping[str, Any]) -> dict[str, Any]:
     """One claim of a re-derived release (`Release.claim_map`) as its walk transcribes it:
     the exact bound the index states, the file or recipe it comes from, and, for a
@@ -4194,12 +4220,18 @@ def _grouped_publications(
             else:
                 claims.append(claim)
         label = f"{name}@{commit[:7]}"
+        holders = stated[0].get("holders")
+        if holders is None:
+            # Only a watched repository's publication is a report; an unknown name is
+            # refused, not credited (#789's review B, B3).
+            _require(name in WATCHED_HOLDERS, f"{label}: {name} is not a watched repository")
+            holders = WATCHED_HOLDERS[name]
         found.append(
             {
                 "report": label,
                 "url": f"https://github.com/{name}/tree/{commit}",
                 "reported_at": stated[0]["published"],
-                "holders": WATCHED_HOLDERS.get(name, MISHAPOLK_HOLDER),
+                "holders": holders,
                 "bead": bead(label),
                 "claims": claims,
                 "note": note + held_sentence(walk, label),
@@ -4227,17 +4259,27 @@ def claim_map_walk_sources(issue: int | str, read_on: str) -> dict[str, Any]:
     - in the corpus, every earlier report a retained ledger walked strictly below the start
       before the issue (`ledger_reports`).
 
-    The claims above ``LIMIT`` are not walked: they are think-llit's (D1).
+    Every earlier publication is cut at the issue (`CLAIM_MAP_WALKS`). The claims above
+    ``LIMIT`` are not walked: they are think-llit's (D1).
     """
     chosen = release(issue)
     walk = walk_of(chosen)
+    _require(
+        walk.name in CLAIM_MAP_WALKS,
+        f"{walk.name}: no claim-map walk declared (CLAIM_MAP_WALKS)",
+    )
+    declared = CLAIM_MAP_WALKS[walk.name]
+    cutoff = declared.reported
     read_at_main = WALK_READ_AT_MAIN[walk.name]
     ours = [item for item in _releases(walk).values() if item.claim_map]
     own = {
         item.label: [claim for claim in mapped_claims(item) if int(claim["n"]) <= LIMIT]
         for item in ours
     }
-    counts = sorted({int(claim["n"]) for claims in own.values() for claim in claims})
+    claimed = Counter(int(claim["n"]) for claims in own.values() for claim in claims)
+    twice = sorted(n for n, times in claimed.items() if times > 1)
+    _require(not twice, f"{walk.name}: the releases sharing a claim map both claim {twice}")
+    counts = sorted(claimed)
     starts = _start_sides(walk, read_at_main, counts, read_on)
     highs = _least_highs(starts)
     reports_list: list[dict[str, Any]] = []
@@ -4258,9 +4300,8 @@ def claim_map_walk_sources(issue: int | str, read_on: str) -> dict[str, Any]:
                 f"rule ({item.packet} packet, {CLAIM_MAP.as_posix()}), since the issue carries "
                 "no table; each at the exact bound certified_bounds.json states, dated by the "
                 "issue. first_committed is the committer time of the commit that first holds "
-                "the certificate; the push of 23:38:42Z made efef7d1, fa6237e and 964ee2b "
-                "public together, after the issue. Its claims above 1024 are not walked here "
-                "(think-llit)."
+                f"the certificate; {declared.pushed}. Its claims above 1024 are not walked "
+                "here (think-llit)."
             )
         else:
             head = {
@@ -4274,8 +4315,8 @@ def claim_map_walk_sources(issue: int | str, read_on: str) -> dict[str, Any]:
                 "selection rule leaves out: each is below the comparison's 12-place print, "
                 "but by 1e-10 or less where the comparison is another author's. No issue "
                 "reports them, so they are the watched repository's publication, dated by the "
-                "push that made 964ee2b public (PUSHED_LATER), and an import of their own "
-                f"({item.packet} packet, {CLAIM_MAP.as_posix()}, unrequested)."
+                f"push that made {item.pin[:7]} public (PUSHED_LATER), and an import of their "
+                f"own ({item.packet} packet, {CLAIM_MAP.as_posix()}, unrequested)."
             )
         reports_list.append(
             head
@@ -4312,7 +4353,7 @@ def claim_map_walk_sources(issue: int | str, read_on: str) -> dict[str, Any]:
         if item["n"] in highs
         and Fraction(item["side"]) < highs[item["n"]]
         and (item["n"], Fraction(item["side"])) not in by_side
-        and item["published"] < ISSUE_763_REPORTED
+        and item["published"] < cutoff
     ]
     reports_list += _grouped_publications(
         history,
@@ -4324,18 +4365,29 @@ def claim_map_walk_sources(issue: int | str, read_on: str) -> dict[str, Any]:
         "commit states there.",
         walk,
     )
+    # Polkovskyi's publications carry their holder, and are cut at the issue as the
+    # history scan's are (#789's review B, B3 and B4).
     mishapolk = [
-        item | {"repository": MISHAPOLK_REPOSITORY, "kind": "certificate"}
-        for item in _read(_F1CEEE4 / SOURCE_HISTORY)["publications"]
-        if item["n"] in highs and Fraction(item["side"]) < highs[item["n"]]
+        item
+        | {
+            "repository": MISHAPOLK_REPOSITORY,
+            "kind": "certificate",
+            "holders": MISHAPOLK_HOLDER,
+        }
+        for item in _read(declared.polkovskyi / SOURCE_HISTORY)["publications"]
+        if item["n"] in highs
+        and Fraction(item["side"]) < highs[item["n"]]
+        and item["published"] < cutoff
     ] + [
         publication
         | {
             "repository": MISHAPOLK_REPOSITORY,
             "commit": later["commit"],
             "published": later["pushed"],
+            "holders": MISHAPOLK_HOLDER,
         }
-        for later in _read(_F1CEEE4 / LATER_COMMITS)["commits"]
+        for later in _read(declared.polkovskyi / LATER_COMMITS)["commits"]
+        if later["pushed"] < cutoff
         for publication in later["publications"]
         if publication["n"] in highs and Fraction(publication["side"]) < highs[publication["n"]]
     ]
@@ -4344,8 +4396,8 @@ def claim_map_walk_sources(issue: int | str, read_on: str) -> dict[str, Any]:
         lambda label: RELEASES[label].bead if label in RELEASES else chosen.bead,
         "A publication in Mykhailo Polkovskyi's watched repository, dated by its commit, or "
         "by the push that made it public; transcribed from the "
-        f"{_F1CEEE4.name} packet's receipts (source-history.json through f1ceee4 and "
-        f"later-commits.json after it) at each count {chosen.label} claims where it states "
+        f"{declared.polkovskyi.name} packet's receipts (source-history.json through f1ceee4 "
+        f"and later-commits.json after it) at each count {chosen.label} claims where it states "
         "a side strictly below the start, at the least side the commit states there.",
         walk,
     )
@@ -4370,7 +4422,7 @@ def claim_map_walk_sources(issue: int | str, read_on: str) -> dict[str, Any]:
     prints = {
         n: {read for member in starts[n] for read in member.record_prints} for n in inside
     }
-    reports_list += ledger_reports(walk, inside, ISSUE_763_REPORTED, prints)
+    reports_list += ledger_reports(walk, inside, cutoff, prints)
     labels = [item["report"] for item in reports_list]
     twice = sorted({label for label in labels if labels.count(label) > 1})
     _require(not twice, f"{walk.name}: two reports share a label: {twice}")
@@ -5004,24 +5056,48 @@ def held_dependents() -> dict[str, Any]:
     }
 
 
+def registered_corpus_counts(packet: str) -> set[int]:
+    """The corpus counts the results register holds from a packet: the scope of every entry
+    that names one of the packet's files among its artifacts."""
+    prefix = f"packing/resources/web/{packet}/"
+    entries = safe_load(RESULTS.read_text(encoding="utf-8"))["results"]
+    return {
+        int(n)
+        for entry in entries
+        if any(str(path).startswith(prefix) for path in entry.get("artifacts") or ())
+        for n in (entry.get("scope") or {}).get("n_values") or ()
+        if int(n) <= reports.HORIZON
+    }
+
+
 def declaration_problems() -> list[str]:
     """Where a release that declares its rows (`declares_rows`) declares other rows than its
-    walk makes: every claim the walk records of it, and does not hold, is a declared row, and
-    no other."""
+    walk makes: every claim the walk records of it beyond the corpus, and does not hold, is a
+    declared row, and no other. A count in the corpus the walk records and does not hold is
+    no row: a registered result must hold it from the release's packet
+    (`registered_corpus_counts`), as T-240 holds #763's 268 and 303 (#789's review B, B2)."""
     problems: list[str] = []
     for chosen in RELEASES.values():
         if not declares_rows(chosen):
             continue
         walk = walk_of(chosen)
-        recorded = {
+        walked = {
             n
             for n, count in _walked(walk).items()
             for step in count["steps"]
-            if n > reports.HORIZON
-            and step["report"] == chosen.label
+            if step["report"] == chosen.label
             and step["verdict"] == RECORDED
             and walk.holds(chosen.label, n) is None
         }
+        recorded = {n for n in walked if n > reports.HORIZON}
+        corpus = walked - recorded
+        if corpus:
+            registered = registered_corpus_counts(chosen.packet)
+            problems.extend(
+                f"{chosen.label} n={n}: the walk records a count in the corpus, and no "
+                f"registered result holds it from the {chosen.packet} packet"
+                for n in sorted(corpus - registered)
+            )
         declared = {row.n for row in decided_claims(chosen)}
         problems.extend(
             f"{chosen.label} n={n}: the walk records it, and the packet declares no row"
