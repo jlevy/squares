@@ -26353,7 +26353,7 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 n21 zero-margin Lean 2026-09-29]'
     field: /credit
-  expected_text: Hosono after Daniel, Levy
+  expected_text: Hosono after Daniel, Levy, Stromquist, Nagamochi, Burns, Massaccesi
   start: 0
   end: 6
   label: Hosono
@@ -26370,7 +26370,7 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 n21 zero-margin Lean 2026-09-29]'
     field: /credit
-  expected_text: Hosono after Daniel, Levy
+  expected_text: Hosono after Daniel, Levy, Stromquist, Nagamochi, Burns, Massaccesi
   start: 13
   end: 19
   label: Daniel
@@ -26385,7 +26385,7 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 n21 zero-margin Lean 2026-09-29]'
     field: /credit
-  expected_text: Hosono after Daniel, Levy
+  expected_text: Hosono after Daniel, Levy, Stromquist, Nagamochi, Burns, Massaccesi
   start: 21
   end: 25
   label: Levy
@@ -26397,6 +26397,78 @@ occurrences:
   contributor_id: joshua-levy
   note: Reviewed 2026-10-23, /credit span 21:25. The first-party jlevy/squares record, credited second-hand
     as for the same source's earlier keys; project credit does not imply sole personal authorship.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[wand125 n21 zero-margin Lean 2026-09-29]'
+    field: /credit
+  expected_text: Hosono after Daniel, Levy, Stromquist, Nagamochi, Burns, Massaccesi
+  start: 27
+  end: 37
+  label: Stromquist
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - paper-byline
+  - bibliography
+  contributor_id: walter-stromquist
+  note: >-
+    Reviewed 2026-10-24, /credit span 27:37. The checked cover's fractional-cover
+    antecedent, credited as [wand125 point and mixed bounds 2026-09-28] credits it (PR #750 review A3):
+    Walter Stromquist and his 2003 unavoidable-point paper, matched to the retained paper byline.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[wand125 n21 zero-margin Lean 2026-09-29]'
+    field: /credit
+  expected_text: Hosono after Daniel, Levy, Stromquist, Nagamochi, Burns, Massaccesi
+  start: 39
+  end: 48
+  label: Nagamochi
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - bibliography
+  contributor_id: hiroshi-nagamochi
+  note: >-
+    Reviewed 2026-10-24, /credit span 39:48. The checked cover's fractional-cover
+    antecedent, credited as [wand125 point and mixed bounds 2026-09-28] credits it (PR #750 review A3):
+    Hiroshi Nagamochi and his 2005 weighted-score paper, matched to its retained byline.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[wand125 n21 zero-margin Lean 2026-09-29]'
+    field: /credit
+  expected_text: Hosono after Daniel, Levy, Stromquist, Nagamochi, Burns, Massaccesi
+  start: 50
+  end: 55
+  label: Burns
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - bibliography
+  contributor_id: sam-burns
+  note: >-
+    Reviewed 2026-10-24, /credit span 50:55. The checked cover's fractional-cover
+    antecedent, credited as [wand125 point and mixed bounds 2026-09-28] credits it (PR #750 review A3):
+    Sam Burns and his rational-net/weighted-cover article; retained author metadata confirms his full name.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[wand125 n21 zero-margin Lean 2026-09-29]'
+    field: /credit
+  expected_text: Hosono after Daniel, Levy, Stromquist, Nagamochi, Burns, Massaccesi
+  start: 57
+  end: 67
+  label: Massaccesi
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - bibliography
+  contributor_id: gustavo-massaccesi
+  note: >-
+    Reviewed 2026-10-24, /credit span 57:67. The checked cover's fractional-cover
+    antecedent, credited as [wand125 point and mixed bounds 2026-09-28] credits it (PR #750 review A3):
+    Gustavo Massaccesi; the retained checker prints Modified by Gustavo Massaccesi 2026.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 n59 Lean kernel 2026-10-11]'
@@ -26418,7 +26490,7 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 n59 Lean kernel 2026-10-11]'
     field: /credit
-  expected_text: Hosono after Daniel, Levy
+  expected_text: Hosono after Daniel, Levy, Stromquist, Nagamochi, Burns, Massaccesi
   start: 0
   end: 6
   label: Hosono
@@ -26435,7 +26507,7 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 n59 Lean kernel 2026-10-11]'
     field: /credit
-  expected_text: Hosono after Daniel, Levy
+  expected_text: Hosono after Daniel, Levy, Stromquist, Nagamochi, Burns, Massaccesi
   start: 13
   end: 19
   label: Daniel
@@ -26450,7 +26522,7 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 n59 Lean kernel 2026-10-11]'
     field: /credit
-  expected_text: Hosono after Daniel, Levy
+  expected_text: Hosono after Daniel, Levy, Stromquist, Nagamochi, Burns, Massaccesi
   start: 21
   end: 25
   label: Levy
@@ -26462,6 +26534,78 @@ occurrences:
   contributor_id: joshua-levy
   note: Reviewed 2026-10-23, /credit span 21:25. The first-party jlevy/squares record, credited second-hand
     as for the same source's earlier keys; project credit does not imply sole personal authorship.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[wand125 n59 Lean kernel 2026-10-11]'
+    field: /credit
+  expected_text: Hosono after Daniel, Levy, Stromquist, Nagamochi, Burns, Massaccesi
+  start: 27
+  end: 37
+  label: Stromquist
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - paper-byline
+  - bibliography
+  contributor_id: walter-stromquist
+  note: >-
+    Reviewed 2026-10-24, /credit span 27:37. The checked cover's fractional-cover
+    antecedent, credited as [wand125 exact covers 2026-10-01] credits it (PR #750 review A3):
+    Walter Stromquist and his 2003 unavoidable-point paper, matched to the retained paper byline.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[wand125 n59 Lean kernel 2026-10-11]'
+    field: /credit
+  expected_text: Hosono after Daniel, Levy, Stromquist, Nagamochi, Burns, Massaccesi
+  start: 39
+  end: 48
+  label: Nagamochi
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - bibliography
+  contributor_id: hiroshi-nagamochi
+  note: >-
+    Reviewed 2026-10-24, /credit span 39:48. The checked cover's fractional-cover
+    antecedent, credited as [wand125 exact covers 2026-10-01] credits it (PR #750 review A3):
+    Hiroshi Nagamochi and his 2005 weighted-score paper, matched to its retained byline.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[wand125 n59 Lean kernel 2026-10-11]'
+    field: /credit
+  expected_text: Hosono after Daniel, Levy, Stromquist, Nagamochi, Burns, Massaccesi
+  start: 50
+  end: 55
+  label: Burns
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - bibliography
+  contributor_id: sam-burns
+  note: >-
+    Reviewed 2026-10-24, /credit span 50:55. The checked cover's fractional-cover
+    antecedent, credited as [wand125 exact covers 2026-10-01] credits it (PR #750 review A3):
+    Sam Burns and his rational-net/weighted-cover article; retained author metadata confirms his full name.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[wand125 n59 Lean kernel 2026-10-11]'
+    field: /credit
+  expected_text: Hosono after Daniel, Levy, Stromquist, Nagamochi, Burns, Massaccesi
+  start: 57
+  end: 67
+  label: Massaccesi
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - bibliography
+  contributor_id: gustavo-massaccesi
+  note: >-
+    Reviewed 2026-10-24, /credit span 57:67. The checked cover's fractional-cover
+    antecedent, credited as [wand125 exact covers 2026-10-01] credits it (PR #750 review A3):
+    Gustavo Massaccesi; the retained checker prints Modified by Gustavo Massaccesi 2026.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel Fang and Ryu Lean 2026-10-18]'
@@ -26481,7 +26625,7 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel Fang and Ryu Lean 2026-10-18]'
     field: /credit
-  expected_text: Daniel after Fang, Ryu, Arslanov, Mustafin, Shangitbayev, Levy
+  expected_text: Daniel after Fang, Arslanov, Mustafin, Shangitbayev, Levy
   start: 0
   end: 6
   label: Daniel
@@ -26496,7 +26640,7 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel Fang and Ryu Lean 2026-10-18]'
     field: /credit
-  expected_text: Daniel after Fang, Ryu, Arslanov, Mustafin, Shangitbayev, Levy
+  expected_text: Daniel after Fang, Arslanov, Mustafin, Shangitbayev, Levy
   start: 13
   end: 17
   label: Fang
@@ -26512,24 +26656,9 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel Fang and Ryu Lean 2026-10-18]'
     field: /credit
-  expected_text: Daniel after Fang, Ryu, Arslanov, Mustafin, Shangitbayev, Levy
+  expected_text: Daniel after Fang, Arslanov, Mustafin, Shangitbayev, Levy
   start: 19
-  end: 22
-  label: Ryu
-  role: prerequisite
-  disposition: resolved
-  evidence:
-  - primary-byline
-  contributor_id: ryu-sungjoon
-  note: Reviewed 2026-10-23, /credit span 19:22. Sungjoon Ryu's Theorem 1.4, as RyuBound.lean credits
-    it; the original credit role is retained.
-- origin:
-    path: packing/resources/bibliography.yaml
-    record_key: '[Daniel Fang and Ryu Lean 2026-10-18]'
-    field: /credit
-  expected_text: Daniel after Fang, Ryu, Arslanov, Mustafin, Shangitbayev, Levy
-  start: 24
-  end: 32
+  end: 27
   label: Arslanov
   role: prerequisite
   disposition: resolved
@@ -26537,15 +26666,15 @@ occurrences:
   - paper-byline
   - bibliography
   contributor_id: mz-arslanov
-  note: Reviewed 2026-10-23, /credit span 24:32. The decomposition of Arslanov, Mustafin and Shangitbayev
+  note: Reviewed 2026-10-23, /credit span 19:27. The decomposition of Arslanov, Mustafin and Shangitbayev
     (2021), as the retained pieces' README credits it.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel Fang and Ryu Lean 2026-10-18]'
     field: /credit
-  expected_text: Daniel after Fang, Ryu, Arslanov, Mustafin, Shangitbayev, Levy
-  start: 34
-  end: 42
+  expected_text: Daniel after Fang, Arslanov, Mustafin, Shangitbayev, Levy
+  start: 29
+  end: 37
   label: Mustafin
   role: prerequisite
   disposition: resolved
@@ -26553,15 +26682,15 @@ occurrences:
   - paper-byline
   - bibliography
   contributor_id: sa-mustafin
-  note: Reviewed 2026-10-23, /credit span 34:42. The decomposition of Arslanov, Mustafin and Shangitbayev
+  note: Reviewed 2026-10-23, /credit span 29:37. The decomposition of Arslanov, Mustafin and Shangitbayev
     (2021), as the retained pieces' README credits it.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel Fang and Ryu Lean 2026-10-18]'
     field: /credit
-  expected_text: Daniel after Fang, Ryu, Arslanov, Mustafin, Shangitbayev, Levy
-  start: 44
-  end: 56
+  expected_text: Daniel after Fang, Arslanov, Mustafin, Shangitbayev, Levy
+  start: 39
+  end: 51
   label: Shangitbayev
   role: prerequisite
   disposition: resolved
@@ -26569,15 +26698,15 @@ occurrences:
   - paper-byline
   - bibliography
   contributor_id: zk-shangitbayev
-  note: Reviewed 2026-10-23, /credit span 44:56. The decomposition of Arslanov, Mustafin and Shangitbayev
+  note: Reviewed 2026-10-23, /credit span 39:51. The decomposition of Arslanov, Mustafin and Shangitbayev
     (2021), as the retained pieces' README credits it.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel Fang and Ryu Lean 2026-10-18]'
     field: /credit
-  expected_text: Daniel after Fang, Ryu, Arslanov, Mustafin, Shangitbayev, Levy
-  start: 58
-  end: 62
+  expected_text: Daniel after Fang, Arslanov, Mustafin, Shangitbayev, Levy
+  start: 53
+  end: 57
   label: Levy
   role: prerequisite
   disposition: resolved
@@ -26585,7 +26714,7 @@ occurrences:
   - primary-byline
   - announcement-account
   contributor_id: joshua-levy
-  note: Reviewed 2026-10-23, /credit span 58:62. The first-party jlevy/squares record, credited second-hand
+  note: Reviewed 2026-10-23, /credit span 53:57. The first-party jlevy/squares record, credited second-hand
     as for the same source's earlier keys; project credit does not imply sole personal authorship.
 - origin:
     path: packing/resources/bibliography.yaml

@@ -32398,7 +32398,9 @@ results:
       Hosono after Daniel, [square-packing-bounds](https://github.com/wand125/square-packing-bounds/tree/77636c63f45a90d9a829417a1722a3bf9bfef37d/point_n21_L5/lean/zero-margin),
       29 September 2026. The Lean library and generator are Daniel's, used unchanged from
       evand/square-packing; the README says only the theorem file, the axiom report and the
-      build script are the author's.
+      build script are the author's. The repository's README says parts of the work were
+      produced with AI assistance under human direction, and the s(21) write-up that its
+      code was developed with Codex.
     scope:
       n_values: [21]
     verification: V0
@@ -32496,7 +32498,7 @@ results:
       generated files and the axiom output are not published. Nothing here has built it.
 
       Hosono after Daniel, [square-packing](https://github.com/wand125/square-packing/tree/f9a77b7d38fd60144b78fe290c94f841ab626156/problems/square-lower-bounds/certificates/k2m5_n59_L8/lean),
-      11 October 2026. The commit names an AI assistant as co-author.
+      11 October 2026. The commit names Claude as co-author.
     scope:
       n_values: [59]
     verification: V0
@@ -32594,11 +32596,12 @@ results:
       s(241) < 16, s(273) < 17 and s(307) < 18, which T-163's construction and the case
       bounds improve on; the theorems are what is new here, in Lean.
 
-      Daniel after Fang, Ryu, Arslanov, Mustafin and Shangitbayev,
+      Daniel after Fang, Arslanov, Mustafin and Shangitbayev,
       [square-packing](https://github.com/evand/square-packing/tree/8475bdf41571c59c8c240aedaddc48e19e0e4707/lean/Sqpack),
       18 October 2026. The pieces' README credits each
       packing to its finder; Fang's own repository states its Lean scope as Theorem 1 and
-      the unmixed bounds of Theorem 2. Claude (Anthropic) assistance disclosed.
+      the unmixed bounds of Theorem 2. The repository's CREDITS.md reads "Produced by
+      Claude (Anthropic) in a single session under human direction".
     scope:
       n_values: [211, 241, 273, 307]
     verification: V0
@@ -32682,7 +32685,7 @@ results:
     claim: >-
       s(2) = s(3) = s(4) = 2 and s(5) = 2 + 1/√2 = 2.70710678118654752440…, the exact values
       at the first four counts above one square, which the case records n-002 to n-005 hold
-      on the published proofs they cite.
+      on the published proofs and exact replays their verified bounds cite.
 
       Göbel's 1979 survey of geometrical packing and covering problems, the first
       publication on the problem by Friedman's account, gives the exact value as known for
@@ -32740,7 +32743,8 @@ results:
       lower half is the side-2 bound Friedman's Theorem 1 states, replayed exactly here
       (E-side2-center-lower); at n = 4 it is the area bound, and at n = 2 to 4 the upper
       half is the grid, both replayed exactly by the basic-bounds checker (E-basic-area-lower,
-      E-basic-grid-upper). These are the evidence entries the four case records cite.
+      E-basic-grid-upper). These are the evidence entries the four case records' verified
+      bounds cite.
 
       The entry stands at C0, the minimum over its parts, which is the lower half at n = 5: the
       checker's claim pools also count the area bound there, and at n = 2 and 3, where it
@@ -32761,6 +32765,26 @@ results:
       cited here. A build of T-238's Lean proofs would be that formalization's evidence and
       not this entry's. V4 and C4 need two adversarial AI reviews by distinct reviewers and
       a human oversight record.
+    unfinished_confirmations:
+      - what: >-
+          a stage 4 review of the lower half at n = 5, Göbel's Proposition 1 or Friedman's
+          Theorem 2, read from the retained papers, recorded on E-n005-gobel-proof
+        rung: C1
+        link: think-wuo4
+      - what: >-
+          an exact audit here of Friedman's four unavoidable points (1, 1), (1, 1 + 1/√2),
+          (1 + 1/√2, 1) and (1 + 1/√2, 1 + 1/√2) of [0, 2 + 1/√2]^2, with a negative control,
+          as T-004 audits Bentz's s(46)
+        rung: C3
+        link: think-vvjk
+        estimated_cost:
+          cpu_hours: 0.01
+          cpu_hours_high: 0.1
+          basis: >-
+            T-004's exact audit of Bentz's 45 points, cases/bentz46/verify_cover.py, ran in
+            6.6 s wall here on 24 October 2026, and four points need less; the checker is not
+            yet written, and writing it is the cost, which CPU-hours do not price
+          priced: '2026-10-24'
     notes: >-
       Registered on 24 October 2026 by the landing lane c-land-750-1024 (think-ehx5), by
       the owner's decision of 24 October on think-4o9c: the classical proofs of s(2) to
@@ -32776,14 +32800,14 @@ results:
     registered: '2026-10-24'
     landed: '2026-10-24'
     headline: >-
-      `s(2), s(3), s(4) = 2` and `s(5) = 2 + 1/√2 = 2.70710678…`, in Lean, by chelokot and by Daniel
+      chelokot reports Lean proofs of `s(2), s(3), s(4) = 2`, `s(5) = 2.707…`; Daniel, rectangle theorems
     claim: >-
-      s(2) = s(3) = s(4) = 2 and s(5) = 2 + 1/√2 = 2.70710678118654752440…, proved in Lean 4
-      twice, by chelokot and by Evan Daniel: a formalization of T-237, the classical values
-      the case records hold by published proofs, and the first proof-assistant routes to
-      them the record holds.
+      chelokot reports Lean 4 proofs that s(2) = s(3) = s(4) = 2 and s(5) = 2 + 1/√2 =
+      2.70710678118654752440…, and Evan Daniel Lean 4 theorems on rectangles from which
+      those values are read at equal sides: a formalization of T-237, the classical values,
+      and the first proof-assistant routes to them the record holds.
 
-      chelokot's archive proves Records.Square5.s5_eq_goebel : IsMinimumSide 5 (2 +
+      chelokot's theorems are Records.Square5.s5_eq_goebel : IsMinimumSide 5 (2 +
       Real.sqrt 2 / 2), by Göbel's packing and Friedman's four unavoidable points (1, 1),
       (1, 1 + d), (1 + d, 1) and (1 + d, 1 + d) with d = √2/2, and s2_eq_two, s3_eq_two and
       s4_eq_two, IsMinimumSide n 2 for n = 2, 3 and 4, where IsMinimumSide n s says that n
@@ -32794,7 +32818,9 @@ results:
       the pin on 2 October 2026 for T-086, and that build's log prints these theorems'
       axioms, propext, Classical.choice and Quot.sound; no receipt names them yet. chelokot,
       [square-packing-archive](https://github.com/chelokot/square-packing-archive/tree/753079eb37d8d16225a5dc1f56e493a3c3b243f4/formal/SquarePackingArchive/Records),
-      August 2026.
+      August 2026. The archive's ATTRIBUTION.md credits chelokot as "project creator,
+      concept, and product direction" and GPT 6 Astra with "AI-produced research, packing
+      optimizations, and Lean formalizations credited under this name in the archive".
 
       Daniel's rect2_iff, rect3_iff and rect4_iff decide which rectangles hold two, three
       and four unit squares, and rect5_pts_lower and rect5_upper give five squares in a
@@ -32803,7 +32829,9 @@ results:
       theorems to the square values is read here, not proved in Lean. The source reports
       standard axioms only. Daniel,
       [square-packing](https://github.com/evand/square-packing/tree/7051f4eabf7f9b2509ad1e7cc296f57d19482027/lean/Sqpack),
-      21 October 2026; his literature note credits chelokot's proof as the earlier.
+      21 October 2026; his literature note credits chelokot's proof as the earlier, and the
+      repository's CREDITS.md reads "Produced by Claude (Anthropic) in a single session
+      under human direction".
     scope:
       n_values: [2, 3, 4, 5]
     verification: V0
@@ -32811,9 +32839,9 @@ results:
     significance:
       score: 2
       rationale: >-
-        Proof-assistant proofs of four classical values the record holds by published
-        proofs (T-237): a second route to values the record holds, which is S2, as T-054,
-        T-055 and T-234 are, a citable detail that changes no theorem.
+        Proof-assistant routes to four classical values the record holds (T-237): a second
+        route to values the record holds, which is S2, as T-054, T-055 and T-234 are, a
+        citable detail that changes no theorem.
       scored: '2026-10-24'
       by: >-
         think-7l2j chelokot and Evan Daniel import (draft, c-lean-1023), kept for the

@@ -3572,7 +3572,8 @@ sources:
     year: 2026
     venue: GitHub
     dated: '2026-09-29'
-    credit: Hosono after Daniel, Levy
+    credit: Hosono after Daniel, Levy, Stromquist, Nagamochi, Burns, Massaccesi
+    short_credit: Hosono after Daniel, Levy et al.
     lineage: credits-project
     note: >-
       Hiroaki Hosono's hypothesis-free Lean proof SquarePacking.n21pts_eq_5 : minSide 21 = 5
@@ -3585,13 +3586,18 @@ sources:
       N21PtsLower.lean, the axiom report and the build script are the author's. The
       repository README credits this project second-hand, as for [wand125 point and mixed
       bounds 2026-09-28], and says parts of the work were produced with AI assistance under
-      human direction. Not built here.
+      human direction. The proof checks that key's cover, so the cover's antecedents travel
+      with it: the README at the pin keeps "The method is not ours", attributing the
+      weighted fractional unavoidable-set method to Stromquist, Nagamochi, Burns and
+      Massaccesi (lines 635-650). Tokoharu, whom that key also credits, is the antecedent of
+      its n = 50 checker and not of the s(21) cover. Not built here.
   - key: '[wand125 n59 Lean kernel 2026-10-11]'
     authors: [Hosono]
     year: 2026
     venue: GitHub
     dated: '2026-10-11'
-    credit: Hosono after Daniel, Levy
+    credit: Hosono after Daniel, Levy, Stromquist, Nagamochi, Burns, Massaccesi
+    short_credit: Hosono after Daniel, Levy et al.
     lineage: credits-project
     note: >-
       Hiroaki Hosono's Lean kernel proof SquarePacking.s59_eq_8 : minSide 59 = 8 in
@@ -3601,15 +3607,16 @@ sources:
       Daniel's ZMTreeM.checkM, CovM and le_minSide_mixed, used unchanged at
       evand/square-packing 1718a580, over 43,444 generated files the source does not store
       (SOURCES.sha256 lists them). The source's receipt gives 862 CPU-hours. The lineage is
-      the same repository's, credits-project; the commit names an AI assistant as co-author.
-      Not built here.
+      the same repository's, credits-project, and the credit carries the cover's
+      antecedents, as [wand125 exact covers 2026-10-01] credits them; the commit names Claude
+      as co-author. Not built here.
   - key: '[Daniel Fang and Ryu Lean 2026-10-18]'
     authors: [Daniel]
     year: 2026
     venue: GitHub
     dated: '2026-10-18'
-    credit: Daniel after Fang, Ryu, Arslanov, Mustafin, Shangitbayev, Levy
-    short_credit: Daniel after Fang, Ryu et al.
+    credit: Daniel after Fang, Arslanov, Mustafin, Shangitbayev, Levy
+    short_credit: Daniel after Fang et al.
     lineage: credits-project
     note: >-
       Evan Daniel's Lean proofs of Kevin Fang's Theorems 1 and 2, theorem1 and theorem2 of
@@ -3620,8 +3627,16 @@ sources:
       (2026-10-18T02:17:40Z), in web/evand-fang-ryu-lean-2026-10-18/. The pieces' README
       credits the theorems to Fang after Arslanov, Mustafin and Shangitbayev's decomposition
       and each piece's packing to its finder; the task note names this project's T-163 and
-      issue 603, so this project is credited second-hand. Claude (Anthropic) assistance
-      disclosed. Not built here.
+      issue 603, so this project is credited second-hand. The credit names the Fang
+      theorems' lineage, the only use the register makes of this key: the closure of
+      theorem1 and theorem2 (receipts/lean-closure.json) is FangFinal, FangTheorem,
+      FangGlue, ConjecturesProofs, Conjectures, Spec and the 18 generated pieces, and
+      RyuBand imports FangGlue, not the reverse, so T-236 rests on no theorem of Ryu's.
+      Sungjoon Ryu is the antecedent of the packs_sub_8sqrt formalization alone, which
+      RyuBound.lean credits to him and the asymptotic register's row records under his
+      name. CREDITS.md, byte-identical to the 12 October exact-data packet's, reads
+      "Produced by Claude (Anthropic) in a single session under human direction". Not built
+      here.
   - key: '[Daniel small-n rectangles Lean 2026-10-22]'
     authors: [Daniel]
     year: 2026
@@ -3636,8 +3651,9 @@ sources:
       web/evand-rect-small-n-lean-2026-10-22/. At equal sides they give s(2) = s(3) = s(4) = 2
       and s(5) = 2 + 1/sqrt 2. The README credits the regions' boundaries to Erich Friedman's
       Math Magic of June 2010, mostly Maurizio Morandi, and the value of s(5) to Goebel 1979;
-      its literature note finds chelokot's formalization of s(5) earlier. Claude (Anthropic)
-      assistance disclosed. Not built here.
+      its literature note finds chelokot's formalization of s(5) earlier. CREDITS.md,
+      byte-identical to the 12 October exact-data packet's, reads "Produced by Claude
+      (Anthropic) in a single session under human direction". Not built here.
   - key: '[chelokot small-n Lean 2026-09-05]'
     authors: [chelokot]
     year: 2026
@@ -3652,8 +3668,9 @@ sources:
       753079eb37d8d16225a5dc1f56e493a3c3b243f4 (2026-09-05T21:42:12Z), the commit
       [chelokot Nagamochi counterexample 2026] pins, in web/chelokot-small-n-lean-2026-09-05/.
       Apache-2.0. The author is the handle the repository names; its ATTRIBUTION.md credits
-      AI-produced Lean formalizations to an AI system, and the repository does not cite this
-      project. This repository built the whole archive at this commit on 2 October 2026 for
+      chelokot with the project's creation, concept and product direction, and GPT 6 Astra
+      with the archive's AI-produced research, packing optimizations and Lean
+      formalizations, and the repository does not cite this project. This repository built the whole archive at this commit on 2 October 2026 for
       T-086, and that build's log prints these theorems' axioms.
   - key: '[wand125 sqverify continuous 2026-10-12]'
     authors: [Hosono]
