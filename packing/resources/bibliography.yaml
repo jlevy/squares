@@ -3541,6 +3541,38 @@ sources:
       re-solves of this project's house packings at 105 and 204, and #719 states no lineage
       for its rows beyond the corpus. Upper bounds only; no optimality claim, and its
       saturation argument bounds no s(n).
+  - key: '[Mishapolk issue 732 f1ceee4 2026-10-23]'
+    authors: [Polkovskyi]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-23'
+    lineage: builds-on-project
+    credit: Polkovskyi after Couzo, Muglich, Daniel, Fang, PingYou Ltd, Levy
+    short_credit: Polkovskyi after Couzo et al.
+    note: >-
+      Issue 732's second release, which the author's comment of 23 October reports
+      (issuecomment-6374211504): exact certificates at
+      f1ceee4c1dd69f97d8e50e6ddaf1a14084dceda7 in Evan Daniel's format,
+      certificates/0000-0999/nN.cert, 138 rewritten at 328 to 989 and indexed by
+      certified_bounds.json, retained under the MIT licence of 17cc220. All 138 are rows in
+      report order. The index credits each to Mishapolk as a refinement of Couzo topology
+      ("continuous SLP quench" at 127 counts, "major structural quench" at the other 11), and
+      the comment says the candidates were Couzo's base topologies, re-quenched, and that the
+      author verified them with this project's sqpack.verify in his testbench. Couzo's own
+      manifests credit the topologies at some of these counts to earlier work, and a chain
+      through an intermediate author keeps every supported link. His #715 manifest at
+      6b7391d (pinned in the couzo-issue715-2026-10-21 packet) credits Darius Muglich at 15
+      of the 138 (328, 365, 404, 548, 554, 599, 602, 648, 651, 654, 700, 756, 813, 814 and
+      871), Evan Daniel with Kevin Fang's two-wedge construction at 343, and Muglich, Fang
+      and PingYou Ltd in its provenance at 813. His 4e4c8ce manifest (pinned in the
+      couzo-index-2026-10-15 packet) credits PingYou Ltd at 328, Daniel at 365, 404 and 455
+      and after Fang at 343, a refinement of Fang's packing at 651, and Fang's rectangle and
+      gluing with PingYou Ltd's square input at 813. So the credit names Muglich, Daniel,
+      Fang and PingYou Ltd after Couzo, and Levy for the checker. The comment asks sole
+      credit at the 11 (463, 645, 646, 651, 696, 702, 747, 756, 809, 813 and 989), which the
+      record keeps as a request beside the index's own word, with a measurement that decides
+      nothing; per-row credit beyond the corpus is the owner's open question (D5,
+      think-f2io). Upper bounds only; the comment's two theorems bound no s(n).
   - key: '[de Winter issue 666 2026-10-17]'
     authors: [de Winter]
     year: 2026

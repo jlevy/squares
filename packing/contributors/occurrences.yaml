@@ -27245,6 +27245,156 @@ occurrences:
     ojoshe receipt; project credit does not imply sole personal authorship.
 - origin:
     path: packing/resources/bibliography.yaml
+    record_key: '[Mishapolk issue 732 f1ceee4 2026-10-23]'
+    field: /authors/0
+  expected_text: Polkovskyi
+  start: 0
+  end: 10
+  label: Polkovskyi
+  role: source-author
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: mykhailo-polkovskyi
+  note: >-
+    Reviewed author byline: the comment on issue 732 of 23 October and the packet
+    mishapolk-issue732-f1ceee4-2026-10-23 credit Mishapolk / Mykhailo Polkovskyi, whom the
+    record credits as Mykhailo Polkovskyi since issue 593; the packet's LICENSE names the same
+    person.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Mishapolk issue 732 f1ceee4 2026-10-23]'
+    field: /credit
+  expected_text: Polkovskyi after Couzo, Muglich, Daniel, Fang, PingYou Ltd, Levy
+  start: 0
+  end: 10
+  label: Polkovskyi
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: mykhailo-polkovskyi
+  note: >-
+    Reviewed source credit matches the evidenced person and printed name; the original
+    credit role is retained.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Mishapolk issue 732 f1ceee4 2026-10-23]'
+    field: /credit
+  expected_text: Polkovskyi after Couzo, Muglich, Daniel, Fang, PingYou Ltd, Levy
+  start: 17
+  end: 22
+  label: Couzo
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - bibliography
+  contributor_id: francisco-couzo
+  note: >-
+    Reviewed packing/resources/bibliography.yaml [[Mishapolk issue 732 f1ceee4 2026-10-23]]
+    /credit span 17:22: the source's certified_bounds.json credits all 138 rows as
+    refinements of Couzo topology, and the comment says the candidates were Francisco
+    Couzo's base topologies. Keep packing finder and refinement roles distinct.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Mishapolk issue 732 f1ceee4 2026-10-23]'
+    field: /credit
+  expected_text: Polkovskyi after Couzo, Muglich, Daniel, Fang, PingYou Ltd, Levy
+  start: 24
+  end: 31
+  label: Muglich
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: darius-muglich
+  note: >-
+    Reviewed packing/resources/bibliography.yaml [[Mishapolk issue 732 f1ceee4 2026-10-23]]
+    /credit span 24:31: the 6b7391d manifest the couzo-issue715-2026-10-21 packet pins
+    credits the topology at 15 of the 138 counts to Darius Muglich (328, 365, 404, 548,
+    554, 599, 602, 648, 651, 654, 700, 756, 813, 814 and 871), as its own credit or its
+    prior source credit (#686). A chain through an intermediate author retains the link.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Mishapolk issue 732 f1ceee4 2026-10-23]'
+    field: /credit
+  expected_text: Polkovskyi after Couzo, Muglich, Daniel, Fang, PingYou Ltd, Levy
+  start: 33
+  end: 39
+  label: Daniel
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - intake-credit
+  - bibliography
+  contributor_id: evan-daniel
+  note: >-
+    Reviewed packing/resources/bibliography.yaml [[Mishapolk issue 732 f1ceee4 2026-10-23]]
+    /credit span 33:39: Couzo's 6b7391d manifest (the couzo-issue715-2026-10-21 packet)
+    credits 343 to Evan Daniel with Kevin Fang's two-wedge construction, and his 4e4c8ce
+    manifest (the couzo-index-2026-10-15 packet) credits 365, 404 and 455 to Daniel and 343
+    to Daniel after Fang. A chain through an intermediate author retains the link.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Mishapolk issue 732 f1ceee4 2026-10-23]'
+    field: /credit
+  expected_text: Polkovskyi after Couzo, Muglich, Daniel, Fang, PingYou Ltd, Levy
+  start: 41
+  end: 45
+  label: Fang
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: kevin-fang
+  note: >-
+    Reviewed packing/resources/bibliography.yaml [[Mishapolk issue 732 f1ceee4 2026-10-23]]
+    /credit span 41:45: Couzo's 6b7391d manifest credits Kevin Fang's two-wedge
+    construction at 343 and names Fang in its provenance at 813, and his 4e4c8ce manifest
+    credits 651 as a refinement of Fang's packing and 813 to Fang's rectangle and gluing.
+    A chain through an intermediate author retains the link.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Mishapolk issue 732 f1ceee4 2026-10-23]'
+    field: /credit
+  expected_text: Polkovskyi after Couzo, Muglich, Daniel, Fang, PingYou Ltd, Levy
+  start: 47
+  end: 58
+  label: PingYou Ltd
+  role: prerequisite
+  disposition: non-person
+  evidence: []
+  note: >-
+    Corporate credit: Couzo's 4e4c8ce manifest (the couzo-index-2026-10-15 packet) credits
+    328 to PingYou Ltd (BuddenPing) and PingYou Ltd's square input at 813, which his
+    6b7391d manifest also names in its provenance; the prior reviewed corporate identity is
+    retained. No individual is inferred.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Mishapolk issue 732 f1ceee4 2026-10-23]'
+    field: /credit
+  expected_text: Polkovskyi after Couzo, Muglich, Daniel, Fang, PingYou Ltd, Levy
+  start: 60
+  end: 64
+  label: Levy
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - announcement-account
+  contributor_id: joshua-levy
+  note: >-
+    Reviewed /credit span 60:64: the comment says the author verified the certificates with
+    this project's sqpack.verify in his testbench. The first-party jlevy/squares record is the
+    Joshua Levy identity established by LICENSE and the retained ojoshe receipt; project
+    credit does not imply sole personal authorship.
+- origin:
+    path: packing/resources/bibliography.yaml
     record_key: '[Fang excess note 2026-10-19]'
     field: /authors/0
   expected_text: Fang

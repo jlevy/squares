@@ -1529,7 +1529,8 @@ def test_the_issue_732_walk_applies_goebel_s_baseline_through_its_ruling() -> No
     """Review B of #754, B1: #732's walk, read on 23 October 2026, froze its starts before
     the rule, so none holds Göbel's construction. Its ``classical-constructions`` ruling
     through 1024 applies the baseline at every count it walks; without that ruling the
-    check would fail. Every other walk was read earlier."""
+    check would fail. Every other walk was read earlier, or later with Göbel's construction
+    frozen into its start at every count beyond the horizon."""
     directory = ledger.ROOT / "campaign/issue-intake/upper-bounds-issue732-20261023"
     data, starts = ledger.load_walk(directory)
     assert str(data["read_on"]) == ledger.GOEBEL_FROM
@@ -1553,7 +1554,14 @@ def test_the_issue_732_walk_applies_goebel_s_baseline_through_its_ruling() -> No
     assert others
     for path in others:
         read_on = str(ledger.load_yaml(path / ledger.LEDGER)["read_on"])
-        assert read_on < ledger.GOEBEL_FROM, path.name
+        if read_on < ledger.GOEBEL_FROM:
+            continue
+        # A walk read later, as f1ceee4's of 24 October, froze Göbel's construction into
+        # its start at every count it walks beyond the horizon.
+        later, frozen = ledger.load_walk(path)
+        beyond = {n for n in ledger.counts_of(later) if n > ledger.HORIZON}
+        assert beyond <= ledger.construction_counts(frozen), path.name
+        assert ledger.answer_problems(later, beyond, ledger.construction_counts(frozen)) == []
 
 
 def test_tree_drift_reports_goebel_s_member_only_from_23_october(

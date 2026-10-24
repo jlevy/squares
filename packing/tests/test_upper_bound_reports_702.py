@@ -51,9 +51,11 @@ MARGINS = {
         666206980387357549497215734802998628885949191983887537, 2**85 * 10**30
     ),
 }
-#: The source this import supersedes at 343, and the later one that supersedes it.
+#: The source this import supersedes at 343, the later one that supersedes it, and the
+#: release that supersedes that one in turn.
 SUPERSEDED = "couzo-issue678-2026-10-18"
 LATER = "couzo-issue715-2026-10-21"
+CURRENT = "mishapolk-issue732-f1ceee4-2026-10-23"
 COVERAGE = reports.REPO / "packing/frontier/source-coverage.yaml"
 
 
@@ -115,7 +117,8 @@ def test_the_certificate_is_below_every_row_at_343_by_the_margins_the_records_st
 
 def test_the_row_supersedes_678s_at_343_and_reads_its_claims_record() -> None:
     """The row superseded #678's at 343; #715's row, reported later, supersedes it in
-    turn (couzo-issue715-2026-10-21), and it stays listed as its source printed it."""
+    turn (couzo-issue715-2026-10-21), and Polkovskyi's f1ceee4 row, reported on #732 on
+    23 October, supersedes #715's. The row stays listed as its source printed it."""
     claims = coverage_check.load_claims(reports.packet_path(PACKET) / reports.BEYOND)
     assert claims == {N: PRINTED}
     coverage = safe_load(COVERAGE.read_text(encoding="utf-8"))
@@ -125,7 +128,8 @@ def test_the_row_supersedes_678s_at_343_and_reads_its_claims_record() -> None:
     assert rows[SUPERSEDED]["superseded_by"] == PACKET
     assert rows[PACKET]["disposition"] == "superseded"
     assert rows[PACKET]["superseded_by"] == LATER
-    assert coverage_check.current_beyond_horizon(coverage)[N]["source_id"] == LATER
+    assert rows[LATER]["superseded_by"] == CURRENT
+    assert coverage_check.current_beyond_horizon(coverage)[N]["source_id"] == CURRENT
 
 
 def test_the_replay_clears_walls_and_pairs_by_the_margins_its_construction_gives() -> None:
