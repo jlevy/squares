@@ -8258,6 +8258,24 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "v0.2.7."
         ),
     ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=("packing/campaign/result-requests.yaml",),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The stage 7 records of 24 October (think-9i18): the #446 follow-up and the "
+            "#755 final reply, #755 closed, #534's result mapped to T-232, #536's ask "
+            "done by T-235, and #603 read through a social comment, against main "
+            "5f8f005a3 (#766): rendered at link revision 5f8f005a into empty site "
+            "directories, twice from this tree and once from it with main's "
+            "result-requests.yaml swapped in (43 files each), render_packing_methods "
+            "writes every file byte-identical across all three. No PDF was printed; it "
+            "prints from that HTML. Retain v0.2.7."
+        ),
+    ),
 )
 
 
