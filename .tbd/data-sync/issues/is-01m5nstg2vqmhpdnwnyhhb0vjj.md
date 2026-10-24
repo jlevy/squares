@@ -5,17 +5,18 @@ title: "PR #759 (merge): senior review of the News feed plan"
 kind: task
 status: in_progress
 priority: 2
-version: 4
+version: 5
 delegate: c-rev-759-1024
 labels: []
 dependencies: []
 parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 child_order_hints:
   - is-01m5nvex330ynadac7263123y2
+  - is-01m5nxsv4849rrgby596kc6prq
 hold: null
 hold_until: null
 created_at: 2026-10-24T01:53:50.171Z
-updated_at: 2026-10-24T02:22:27.427Z
+updated_at: 2026-10-24T03:03:23.016Z
 started_at: 2026-10-24T01:53:57.856Z
 ---
 
