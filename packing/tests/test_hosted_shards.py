@@ -205,27 +205,48 @@ def _bomb(path: Path, kind: str, payload: int, good: tuple[str, bytes]) -> Path:
 
 
 def test_a_record_that_decompresses_past_the_bound_is_refused(tmp_path: Path) -> None:
-    """Review C, C1: `tarfile` reads a pax record or a GNU long name whole before it yields
-    the member it describes, so a bound on the members' sizes alone admitted a shard of a
-    few kilobytes that decompressed to gigabytes, and a pax comment was accepted with the
-    pinned bytes. Everything the decompressor yields is now bounded: each record of 4 MiB is
-    refused under a 1 MiB allowance, and the good member alone reads under the same one."""
+    """Reviews C, C1, and D, D1: `tarfile` reads a pax record or a GNU long name whole
+    before it yields the member it describes. A bound on the members' sizes alone admitted a
+    shard of a few kilobytes that decompressed to gigabytes, and so did a stream bound that
+    lent such a record the whole member budget. At the shipped bounds the stream's
+    allowance is `MAX_HEADERS` until a member is admitted, so each record 4 MiB larger than
+    that is refused, while a small record and the good member alone read."""
     name, data = next(iter(_sample(1).items()))
     pins = _pins({name: data})
-    bounds = {"max_unpacked": 1 << 20, "max_headers": 1 << 20}
+    payload = shards.MAX_HEADERS + (4 << 20)
     for kind in ("pax-comment", "longname"):
-        shard = _bomb(tmp_path / f"{kind}.tar.xz", kind, 4 << 20, (name, data))
+        shard = _bomb(tmp_path / f"{kind}.tar.xz", kind, payload, (name, data))
         assert shard.stat().st_size < 64 * 1024
-        with pytest.raises(shards.ShardError, match="decompresses past 2097152 bytes"):
-            list(shards.members(shard, pins, **bounds))
+        with pytest.raises(shards.ShardError, match=f"decompresses past {shards.MAX_HEADERS} "):
+            list(shards.members(shard, pins))
     small = _bomb(tmp_path / "small-comment.tar.xz", "pax-comment", 100, (name, data))
-    assert dict(shards.members(small, pins, **bounds)) == {name: data}
+    assert dict(shards.members(small, pins)) == {name: data}
     good = _shard(tmp_path / "good.tar.xz", [(name, data)])
-    assert dict(shards.members(good, pins, **bounds)) == {name: data}
+    assert dict(shards.members(good, pins)) == {name: data}
     garbage = tmp_path / "garbage.tar.xz"
     garbage.write_bytes(b"not xz")
     with pytest.raises(shards.ShardError, match=r"not a tar\.xz shard"):
         list(shards.members(garbage, pins))
+
+
+def test_a_shard_that_ends_inside_a_member_is_refused(tmp_path: Path) -> None:
+    """Review D, D2: a shard whose xz stream ends inside a member's bytes raised a bare
+    `EOFError` from the copy, outside the handler that converts header errors. It is a
+    `ShardError` now, from `members` and from `unpack`, and no member is published."""
+    repo = _repo(tmp_path)
+    name = "certificates/1000-1999/n1025.cert"
+    data = hashlib.sha256(b"seed").digest() * (3 << 15)
+    whole = _shard(tmp_path / "whole.tar.xz", [(name, data)])
+    cut = repo / "hosted/shards/cut.tar.xz"
+    cut.parent.mkdir(parents=True)
+    cut.write_bytes(whole.read_bytes()[: whole.stat().st_size // 2])
+    with pytest.raises(shards.ShardError, match=r"n1025\.cert: not a tar\.xz shard"):
+        list(shards.members(cut, _pins({name: data})))
+    manifest = _manifest(repo, cut.parent)
+    with pytest.raises(shards.ShardError, match=r"not a tar\.xz shard"):
+        shards.unpack(manifest, _pins({name: data}), repo)
+    directory = shards.members_directory(manifest, repo)
+    assert not directory.exists() or not any(path.is_file() for path in directory.rglob("*"))
 
 
 def test_two_manifests_sharing_a_shard_directory_keep_their_own_members(
@@ -287,6 +308,13 @@ def test_a_shard_at_the_root_or_a_members_link_out_of_the_repository_is_refused(
     members.symlink_to(outside, target_is_directory=True)
     with pytest.raises(shards.ShardError, match="resolves outside the repository"):
         shards.read(manifest, _pins({name: data}), name, repo)
+    assert list(outside.iterdir()) == []
+    # Review D, D3: a link one level below the members directory is refused as well.
+    members.unlink()
+    members.mkdir()
+    (members / "certificates").symlink_to(outside, target_is_directory=True)
+    with pytest.raises(shards.ShardError, match="a link below it leads"):
+        shards.unpack(manifest, _pins({name: data}), repo)
     assert list(outside.iterdir()) == []
 
 

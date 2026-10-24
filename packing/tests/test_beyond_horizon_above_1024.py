@@ -548,6 +548,11 @@ def test_a_recipe_row_s_side_is_read_one_way(
     monkeypatch.setattr(replay, "claims", lambda _chosen: [row])
     assert replay.release_sides(hosted, None) == {444: decided}
     assert replay.ceiling(decided) == "21.571428571434"
+    # Review D, D4: the clone branch, with the clone's two reads stood in by the parent's
+    # retained bytes, gives the same side.
+    monkeypatch.setattr(replay, "_pinned_blob", lambda _chosen, _row, _clone: "parent-blob")
+    monkeypatch.setattr(replay, "_blobs", lambda _clone, blobs: dict.fromkeys(blobs, raw))
+    assert replay.release_sides(chosen, tmp_path / "clone") == {444: decided}
 
 
 def test_a_changed_byte_in_a_record_or_goebel_receipt_is_refused(tmp_path: Path) -> None:
@@ -589,13 +594,24 @@ def test_lifting_666_leaves_the_frozen_719_walk_s_sources_as_written(
 
 
 def test_a_later_commits_receipt_that_stops_below_the_walk_is_refused(
-    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     """Review B, B4: f1ceee4's later-commits receipt reads to 1024, its own walk's reach;
     asked for the walk above 1024, which reaches every count above it, it is refused rather
-    than passing over every later publication there."""
+    than passing over every later publication there. A receipt that states no limit is
+    refused rather than read as reaching every count (review D, D5)."""
     chosen = replay.release("#732 comment 6374211504")
     assert replay.later_publications(chosen)
     monkeypatch.setitem(replay.WALKS, ABOVE, _above())
     with pytest.raises(replay.ReplayError, match=f"reads to 1024, and {ABOVE} reaches above"):
         replay.later_publications(chosen, replay.WALKS[ABOVE])
+    receipts = tmp_path / "receipts"
+    receipts.mkdir()
+    for path in (chosen.directory / chosen.receipts).iterdir():
+        (receipts / path.name).write_bytes(path.read_bytes())
+    stored = json.loads((receipts / replay.LATER_COMMITS.name).read_text(encoding="utf-8"))
+    del stored["limit"]
+    (receipts / replay.LATER_COMMITS.name).write_text(json.dumps(stored), encoding="utf-8")
+    copied = dataclasses.replace(chosen, receipts=receipts)
+    with pytest.raises(replay.ReplayError, match="the later-commits receipt states no limit"):
+        replay.later_publications(copied)

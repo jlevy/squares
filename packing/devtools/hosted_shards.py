@@ -14,15 +14,17 @@ not the manifest's, then streams its members with `tarfile` (`members`). It refu
 that is not a regular file (a link, a directory), whose path escapes the shard or repeats,
 that the packet does not pin, that is larger than a member may be (`MAX_MEMBER`), or whose
 bytes do not have the SHA-256 the packet pins. It bounds the shard's member bytes
-(`MAX_UNPACKED`) and, separately, everything the decompressor yields, headers and pax or
-GNU long-name records included (`MAX_HEADERS` beyond the member bytes), so a record
-`tarfile` reads whole before any member is seen cannot exhaust memory (#793's review C,
-C1). After the last shard it refuses a pinned file no shard holds. Each member is copied in
-chunks, hashed as it is copied, and published only once its digest holds, beside the
-shards' directory in ``DIR-members/STEM/``, keyed by the manifest, only into a directory
-Git ignores and inside the repository; `Hosted.read` reads one back and holds it to its pin
-again. The source states no size for its files, so a member's size is bounded and not
-compared.
+(`MAX_UNPACKED`) and, separately, everything the decompressor yields: the stream's
+allowance starts at `MAX_HEADERS` and grows by each member's padded size only once that
+member is admitted, so a pax or GNU long-name record, which `tarfile` reads whole before
+it yields the member it describes, is refused past `MAX_HEADERS` whatever the member
+budget (#793's reviews C, C1, and D, D1). A shard that ends inside a member is a
+`ShardError` too (D2). After the last shard it refuses a pinned file no shard holds. Each
+member is copied in chunks, hashed as it is copied, and published only once its digest
+holds, beside the shards' directory in ``DIR-members/STEM/``, keyed by the manifest, only
+into a directory Git ignores and inside the repository, with no link below it leading out
+(D3); `Hosted.read` reads one back and holds it to its pin again. The source states no size
+for its files, so a member's size is bounded and not compared.
 
 From ``packing/`` nothing here reads the network: `sqpack.hosted_data.fetch` does that.
 """
@@ -47,8 +49,9 @@ from sqpack import hosted_data
 MAX_UNPACKED = 2 * 1024**3
 #: The most one member may hold: a certificate is at most a few MB.
 MAX_MEMBER = 64 * 1024**2
-#: What the decompressed stream may hold beyond the member bytes: each member's header and
-#: padding, and any pax or long-name record, which `tarfile` reads whole.
+#: What the decompressed stream may hold beyond the admitted members' bytes and padding:
+#: each member's header, the end-of-archive blocks, and any pax or long-name record, which
+#: `tarfile` reads whole before the member it describes is admitted.
 MAX_HEADERS = 16 * 1024**2
 #: The size of each read when a member is copied and hashed.
 CHUNK = 1 << 20
@@ -67,11 +70,16 @@ def _require(condition: object, message: str) -> None:
 
 
 class _Bounded(io.RawIOBase):
-    """A decompressed stream that refuses to yield more than ``limit`` bytes."""
+    """A decompressed stream that refuses to yield more than ``limit`` bytes, a limit
+    that grows only as members are admitted (`allow`)."""
 
     def __init__(self, raw: IO[bytes], limit: int, where: str) -> None:
         super().__init__()
         self._raw, self._limit, self._where, self._count = raw, limit, where, 0
+
+    def allow(self, more: int) -> None:
+        """Raise the limit by ``more`` bytes: an admitted member's padded size."""
+        self._limit += more
 
     @override
     def readable(self) -> bool:
@@ -89,18 +97,20 @@ class _Bounded(io.RawIOBase):
         return len(data)
 
 
+#: What a damaged shard raises from `lzma` or `tarfile`, as a header or a member is read.
+_DAMAGED = (lzma.LZMAError, tarfile.TarError, EOFError)
+
+
 @contextmanager
-def _archive(shard: Path, limit: int) -> Iterator[tarfile.TarFile]:
-    """A shard as a ``tar`` stream, with at most ``limit`` decompressed bytes read."""
+def _archive(shard: Path, limit: int) -> Iterator[tuple[tarfile.TarFile, _Bounded]]:
+    """A shard as a ``tar`` stream and its bound, with at most ``limit`` decompressed
+    bytes read until the caller allows more (`_Bounded.allow`)."""
     try:
-        with (
-            lzma.open(shard) as raw,
-            tarfile.open(
-                fileobj=io.BufferedReader(_Bounded(raw, limit, shard.name)), mode="r|"
-            ) as archive,
-        ):
-            yield archive
-    except (lzma.LZMAError, tarfile.TarError, EOFError) as error:
+        with lzma.open(shard) as raw:
+            bounded = _Bounded(raw, limit, shard.name)
+            with tarfile.open(fileobj=io.BufferedReader(bounded), mode="r|") as archive:
+                yield archive, bounded
+    except _DAMAGED as error:
         raise ShardError(f"{shard.name}: not a tar.xz shard ({error})") from error
 
 
@@ -116,7 +126,7 @@ def _entries(
     are read; the caller copies the stream (`_copy`) before taking the next."""
     seen: set[str] = set()
     total = 0
-    with _archive(shard, max_unpacked + max_headers) as archive:
+    with _archive(shard, max_headers) as (archive, bounded):
         for member in archive:
             name = member.name
             where = f"{shard.name}: {name}"
@@ -135,6 +145,7 @@ def _entries(
                 member.size <= max_member,
                 f"{where}: {member.size} bytes, more than a member may hold ({max_member})",
             )
+            bounded.allow(member.size + (-member.size % 512))
             stream = archive.extractfile(member)
             _require(stream is not None, f"{where}: no bytes")
             assert stream is not None
@@ -147,7 +158,10 @@ def _copy(stream: IO[bytes], size: int, out: IO[bytes], where: str, digest: str)
     hasher = hashlib.sha256()
     left = size
     while left:
-        chunk = stream.read(min(CHUNK, left))
+        try:
+            chunk = stream.read(min(CHUNK, left))
+        except _DAMAGED as error:
+            raise ShardError(f"{where}: not a tar.xz shard ({error})") from error
         _require(chunk, f"{where}: truncated")
         hasher.update(chunk)
         out.write(chunk)
@@ -217,6 +231,7 @@ def unpack(
         relative in hosted_data.git_ignored(repo, [relative]),
         f"{relative} is not ignored by Git, so its members could be committed",
     )
+    inside = target.resolve()
     held: set[str] = set()
     for item in manifest.objects:
         local = hosted_data.require(item.path, manifest_path, repo=repo)
@@ -229,6 +244,10 @@ def unpack(
         ):
             _require(name not in held, f"{name}: in two shards")
             held.add(name)
+            _require(
+                (target / name).parent.resolve().is_relative_to(inside),
+                f"{relative}: a link below it leads {name} out of the members directory",
+            )
             with atomic_output_file(target / name, make_parents=True) as temporary:
                 try:
                     with temporary.open("wb") as out:

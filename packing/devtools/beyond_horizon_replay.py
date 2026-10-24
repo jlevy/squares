@@ -2953,20 +2953,18 @@ def release_sides(chosen: Release, clone: Path | None) -> dict[int, Fraction]:
         if row.n in stated:
             sides[row.n] = stated[row.n]
             continue
-        # Both branches read the certificate's header at its own count, and take the row's
-        # side from it as `decided_sides` does (`claim_side`, #793's review B, B2).
+        # Both branches read the certificate's header at its own count by one rule
+        # (`header_side`, #793's review D, D6), and take the row's side from it as
+        # `decided_sides` does (`claim_side`, review B, B2).
         where = f"{chosen.label} n={row.n}"
         if hosting.hosts(row.path):
             raw = hosting.read(row.path)
-            sides[row.n] = claim_side(row, header_side(raw, row.certificate_n, where))
-            continue
-        _require(clone is not None, f"{where}: no clone to read it from")
-        assert clone is not None
-        blob = _pinned_blob(chosen, row, clone)
-        header = _header(_blobs(clone, [blob])[blob])
-        _require(header is not None and header[0] == row.certificate_n, f"{where}: no header")
-        assert header is not None
-        sides[row.n] = claim_side(row, header[1])
+        else:
+            _require(clone is not None, f"{where}: no clone to read it from")
+            assert clone is not None
+            blob = _pinned_blob(chosen, row, clone)
+            raw = _blobs(clone, [blob])[blob]
+        sides[row.n] = claim_side(row, header_side(raw, row.certificate_n, where))
     return sides
 
 
@@ -4434,7 +4432,8 @@ def later_publications(
         == list(chosen.later_reads),
         f"{chosen.label}: the later-commits receipt names other commits",
     )
-    limit = record.get("limit")
+    _require("limit" in record, f"{chosen.label}: the later-commits receipt states no limit")
+    limit = record["limit"]
     _require(
         limit is None or (walk.through is not None and limit >= walk.through),
         f"{chosen.label}: the later-commits receipt reads to {limit}, and {walk.name} "
