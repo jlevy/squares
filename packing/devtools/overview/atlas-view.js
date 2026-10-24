@@ -77,7 +77,8 @@
 // down. A sideways wheel or swipe pans it further while the page scrolls; that pan holds
 // while the reader pauses, eases back onto the path as they scroll on and away at the
 // top, a swipe's small sideways wobble pans nothing (`sideways`), and the last of the
-// motion slides to the left edge whatever the pan. Until the first frame the stylesheet
+// motion slides to the left edge, where the reader's pan still holds on top of it, so a
+// triangle at rest pans by hand. Until the first frame the stylesheet
 // keeps the triangle out of sight, so the first paint never shows it elsewhere.
 // Nothing is written to the address.
 //
@@ -1647,15 +1648,17 @@
       if (Math.abs(nudge) < 0.5) {
         nudge = 0;
       }
-      const held = Math.min(
-        Math.max(framed - nudge, Math.min(framed, 0) - room / 2),
-        Math.max(range, framed),
-      );
-      nudge = framed - held;
-      // The last of the motion slides all the way to the left edge, whatever the reader's
-      // own pan, starting as the rows begin to slow and ending with the runway.
+      // The last of the motion slides all the way to the left edge, starting as the rows
+      // begin to slow and ending with the runway. The reader's own pan holds on top of the
+      // path, the end included, so a triangle come to rest still pans by hand; it never
+      // passes the triangle's left edge, nor its right end past the stage's middle.
       const reach = smootherstep((scrolled - slowing) / (laid.runway + laid.stop));
-      const shift = between(held, range, reach);
+      const path = between(framed, range, reach);
+      const shift = Math.min(
+        Math.max(path - nudge, Math.min(path, 0) - room / 2),
+        Math.max(range, path),
+      );
+      nudge = path - shift;
       panned = -shift;
       // The picture is scaled about its top left corner (site.css). Each row's right end
       // moves `shift` from where it is laid out, and each point at height y comes to
