@@ -1,0 +1,113 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-24T13:52Z",
+  "git_scope": "Blobless clone of evand/square-packing fetched for the 24 October intake pass, and a sparse checkout of 8a8879a (authored 2026-10-24T04:38:50Z, committed 04:49:33Z, 'Candidates s(268), s(303), s(304): certificates for three posts beyond the register'), which GitHub's activity log records pushed at 2026-10-24T04:53:53Z in the push 5e862ac..8a8879a; no issue reports it, and 659ee62, the head read on 24 October, leaves the files unchanged. Retained: the licence, the credits, and under search/packer/candidates/ every file the commit adds at 268 and 304 (the certificate, its JSON report, the binary64 input, the predescent and exact float packings, the comparison with the store's prior best and, at 268, the regularized display view) and the certificate and JSON report at 303, as credit evidence. The other six files at 303 are pinned by digest, and the two exact checkers the certificates name against the identical copies the n183 packet retains. The rest of the tree is pinned by the commit; no source program was executed.",
+  "sources": [
+    {
+      "id": "evand-kaggle-descents-2026-10-24",
+      "source_url": "https://github.com/evand/square-packing",
+      "source_ref": "8a8879a2972c32cbd2d906049228cc9f0762b02a",
+      "source_commit": "8a8879a2972c32cbd2d906049228cc9f0762b02a",
+      "committed_utc": "2026-10-24T04:49:33Z",
+      "git_tree": "07ebae5180104126b4b9248b7e3b25e5d4eeda9c",
+      "archived_path": "packing/resources/web/evand-kaggle-descents-2026-10-24/source",
+      "subtree_manifest": "packing/resources/web/evand-kaggle-descents-2026-10-24/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "LICENSE",
+        "CREDITS.md",
+        "search/exact/verify_cert.py",
+        "search/exact/verify_cert2.py",
+        "search/packer/candidates/s268_lightning.cert",
+        "search/packer/candidates/s268_lightning.exact.txt",
+        "search/packer/candidates/s268_lightning.input.txt",
+        "search/packer/candidates/s268_lightning.json",
+        "search/packer/candidates/s268_lightning.predescent.txt",
+        "search/packer/candidates/s268_lightning_prior.json",
+        "search/packer/candidates/s268_lightning_regularized.cert",
+        "search/packer/candidates/s268_lightning_regularized.json",
+        "search/packer/candidates/s268_lightning_vs_prior.json",
+        "search/packer/candidates/s303_cdeotte.cert",
+        "search/packer/candidates/s303_cdeotte.exact.txt",
+        "search/packer/candidates/s303_cdeotte.input.txt",
+        "search/packer/candidates/s303_cdeotte.json",
+        "search/packer/candidates/s303_cdeotte.predescent.txt",
+        "search/packer/candidates/s303_cdeotte_prior.json",
+        "search/packer/candidates/s303_cdeotte_regularized.cert",
+        "search/packer/candidates/s303_cdeotte_regularized.json",
+        "search/packer/candidates/s304_pub.cert",
+        "search/packer/candidates/s304_pub.exact.txt",
+        "search/packer/candidates/s304_pub.input.txt",
+        "search/packer/candidates/s304_pub.json",
+        "search/packer/candidates/s304_pub_prior.json",
+        "search/packer/candidates/s304_pub_vs_prior.json"
+      ],
+      "subtree_file_count": 27,
+      "subtree_total_bytes": 657988,
+      "retained_file_count": 19,
+      "retained_total_bytes": 478041,
+      "compressed": [
+        "source/search/packer/candidates/s268_lightning_vs_prior.json.gz",
+        "source/search/packer/candidates/s304_pub_vs_prior.json.gz"
+      ],
+      "pinned_only": [
+        {
+          "path": "search/exact/verify_cert.py",
+          "bytes": 3401,
+          "sha256": "3299ca0c0f02f7c221deeea69a9a85b5a90db6bc410b20727fdff211c92bed52",
+          "reason": "The source's two standalone exact checkers, which each certificate's header names; byte-identical to the copies the n183 packet retains at 3a9948c, and never executed here.",
+          "identical_to": "packing/resources/web/evand-n183-subgrid-2026-10-19/source/search/exact/verify_cert.py"
+        },
+        {
+          "path": "search/exact/verify_cert2.py",
+          "bytes": 3101,
+          "sha256": "55140a35d95d9eaa64a14c3b044641efbcda94ebfc3b12b7dec9fa52692e31d3",
+          "reason": "The source's two standalone exact checkers, which each certificate's header names; byte-identical to the copies the n183 packet retains at 3a9948c, and never executed here.",
+          "identical_to": "packing/resources/web/evand-n183-subgrid-2026-10-19/source/search/exact/verify_cert2.py"
+        },
+        {
+          "path": "search/packer/candidates/s303_cdeotte.exact.txt",
+          "bytes": 42116,
+          "sha256": "a07552f4aa9409bd80cb7ea13a6aae255bf39043edd5cf8b7d45c4dcc1e1119c",
+          "reason": "The float packings behind the 303 certificate, which is above #763's 303 and not recorded; pinned for credit."
+        },
+        {
+          "path": "search/packer/candidates/s303_cdeotte.input.txt",
+          "bytes": 16176,
+          "sha256": "cb522b9161c871497f9258058006a2f966d19d088b87fa019948d132b5e95803",
+          "reason": "The float packings behind the 303 certificate, which is above #763's 303 and not recorded; pinned for credit."
+        },
+        {
+          "path": "search/packer/candidates/s303_cdeotte.predescent.txt",
+          "bytes": 13773,
+          "sha256": "39b7e7dd51d5e542da4abd4566aa9f82ad4957cf6d1a92f10d37a65ac94e469a",
+          "reason": "The float packings behind the 303 certificate, which is above #763's 303 and not recorded; pinned for credit."
+        },
+        {
+          "path": "search/packer/candidates/s303_cdeotte_prior.json",
+          "bytes": 738,
+          "sha256": "ee898865bddb1a2ec51fe50fb60e8bc07f61d5204f376c780025661920a29423",
+          "reason": "The 303 certificate's prior-best note and its regularized display view, which is above #763's 303 and not recorded; pinned for credit."
+        },
+        {
+          "path": "search/packer/candidates/s303_cdeotte_regularized.cert",
+          "bytes": 50958,
+          "sha256": "87db126cb2b021a669ee1eae630f10eb64f9c38bee4bacb74edbfd81cc0e659c",
+          "reason": "The 303 certificate's prior-best note and its regularized display view, which is above #763's 303 and not recorded; pinned for credit."
+        },
+        {
+          "path": "search/packer/candidates/s303_cdeotte_regularized.json",
+          "bytes": 49684,
+          "sha256": "e9e1e0536ec5f2503ee73d20c5b188fa54519f2c873bdb917035bbff4388f149",
+          "reason": "The 303 certificate's prior-best note and its regularized display view, which is above #763's 303 and not recorded; pinned for credit."
+        }
+      ],
+      "license": "MIT, copyright (c) 2026 Evan Daniel (LICENSE retained). CREDITS.md says the repository's work was 'Produced by Claude (Anthropic) in a single session under human direction'; the pinned commit carries a Co-Authored-By trailer naming Claude and says 'Posting approved by Evan in chat 10-23'.",
+      "claims": [
+        "search/packer/candidates/s268_lightning.cert states s(268) <= 8437180857934672912242411148233/(5*10^29) = 16.874361715869345824484822296466; its JSON report states the same S_cert, cert_valid true at 80 digits, least wall and pair clearances of 5e-21 and about 1e-20, S_input 16.87436171586941 and S_exact 16.8743617158693458243160786793\u2026, a Newton-converged KKT point with 19 free squares and a second-order report (dim_null 127). The commit message describes it as 'Vladislav Lavrentev's (Kaggle lightningv08) public packing, exact descent (shrink-only) to 16.8743617159, the side a Kaggle per-puzzle side-only claim lists; the first public packing at that side'.",
+        "search/packer/candidates/s304_pub.cert states s(304) <= 1792689890035674158972360842897/10^29 = 17.92689890035674158972360842897; its JSON report states the same S_cert, cert_valid true at 80 digits, least clearances of 5e-21 and about 1e-20, S_input 17.926898901941495 and S_exact 17.9268989003567415895443394399\u2026. The commit message describes it as 'the public Kaggle packing at 17.9268989004 (finder unknown; earliest public copy: kozykappa's notebook)'.",
+        "search/packer/candidates/s303_cdeotte.cert states s(303) <= 17907238274538241192624181047171/10^30 = 17.907238274538241192624181047171, 'Chris Deotte's public Kaggle packing, exact descent to 17.9072382745', by the commit message.",
+        "The commit message closes: 'Posting approved by Evan in chat 10-23 (304 on behalf, 268 first public; 303 cdeotte's)'. The source's later commit 659ee62 says it 'certified the public Kaggle packings (8a8879a2; 268 and 303 by exact descent of lightningv08's / cdeotte's packings) but did not post: franciscouzo's open #763 already held all three', and its TODO.md says 'the packing first appears in lightningv08's CUDA Packing Search output, kirilltym's input'. Those statements are the author's; no source program ran here."
+      ]
+    }
+  ]
+}

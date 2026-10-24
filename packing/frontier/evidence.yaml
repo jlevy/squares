@@ -44762,3 +44762,63 @@ evidence:
       own checker was not run here. Review and confirmation remain pending; no stage 4
       review is owed for a beyond-horizon row. No arrangement identity, local minimum,
       optimum or credit statement of the source is established.
+  - id: E-couzo-n304-certificate-report
+    claim: upper-bound
+    scope:
+      n_values: [304]
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Couzo n304 2026-10-23]'
+    certificate: packing/resources/web/couzo-issue763-2026-10-23/source/certificates/best/n304.cert
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-24'
+    limitations: >-
+      This atom records the source author's publication, in his watched repository with no
+      issue, of 1 exact rational certificate at fa6237e, certificates/best/n304.cert, which
+      the issue-763 packet retains byte-identical at 964ee2b and the couzo-n304-2026-10-23
+      packet reads from there. A separate complete repository replay is retained for n = 304:
+      1 positive and 2 duplicate-square and outside-container controls passed their required
+      outcomes on both routes, 276336 pair decisions; summed over the 3 jobs, the receipt
+      records 40.35 route CPU seconds and 40.77 job wall seconds, the longest job 13.94
+      seconds. Every positive clears every wall by at least 1.00e-15 and every pair by at
+      least 8.18e-11, and the packet's sharp controls meet the 1e-15 wall margin on both
+      routes. Independent review and confirmation remain pending. The source's own checkers
+      were not run here. The two maintained routes, the sqpack rational witness verifier and
+      the independent rational corner checker, share certificate parsing, half-angle
+      conversion, Fraction arithmetic and the separating-axis method. No two independent
+      methods, human oversight or optimality is claimed.
+  - id: E-evand-kaggle-descents-certificate-report
+    claim: upper-bound
+    scope:
+      n_values: [268, 304]
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Daniel Kaggle descents 2026-10-24]'
+    certificate: packing/resources/web/evand-kaggle-descents-2026-10-24/source/search/packer/candidates/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-24'
+    limitations: >-
+      This atom records the source author's publication, in his watched repository with no
+      issue, of 2 exact rational certificates at 8a8879a, s268_lightning.cert and
+      s304_pub.cert; the same commit's s303_cdeotte.cert is above T-240's 303 and is not
+      recorded. A separate complete repository replay is retained for n = 268, 303 and 304:
+      3 positives and 6 duplicate-square and outside-container controls passed their required
+      outcomes on both routes, 765522 pair decisions; summed over the 9 jobs, the receipt
+      records 118.9 route CPU seconds and 120.14 job wall seconds, the longest job 15.69
+      seconds. Every positive clears every wall by at least 5.00e-21 and every pair by at
+      least 9.99e-21, and the packet's sharp controls at 268 and 304 meet those margins on
+      both routes. Independent review and confirmation remain pending. The source's own
+      checkers were not run here. The two maintained routes, the sqpack rational witness
+      verifier and the independent rational corner checker, share certificate parsing,
+      half-angle conversion, Fraction arithmetic and the separating-axis method. No two
+      independent methods, human oversight or optimality is claimed.

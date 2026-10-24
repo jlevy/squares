@@ -7123,7 +7123,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-16'
+  lastmod: '2026-10-24'
   status: live
 - path: cases/305.html
   canonical: cases/305.html
@@ -21199,6 +21199,69 @@ urls:
     - packing/campaign/issue-intake/upper-bounds-issue763-20261024/README.md
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/couzo_763_claims.py
+- path: result/t-241.html
+  canonical: result/t-241.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-24'
+  lastmod: '2026-10-24'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 304
+    established: null
+    attribution:
+      source_keys:
+      - '[Couzo n304 2026-10-23]'
+      published: '2026-10-23'
+    builds_on: null
+    evidence:
+    - E-couzo-n304-certificate-report
+    artifacts:
+    - packing/resources/web/couzo-n304-2026-10-23/README.md
+    - packing/resources/web/couzo-n304-2026-10-23/acquisition/claims.json
+    - packing/resources/web/couzo-issue763-2026-10-23/source/certificates/best/n304.cert
+    - packing/resources/web/couzo-n304-2026-10-23/receipts/exact-certification.json.xz
+    - packing/resources/web/couzo-n304-2026-10-23/receipts/sharp-controls.json
+    - packing/resources/web/evand-kaggle-descents-2026-10-24/measure/identity.json
+    - packing/campaign/issue-intake/upper-bounds-evand-20261024/README.md
+    - packing/devtools/upper_bound_reports.py
+- path: result/t-242.html
+  canonical: result/t-242.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-24'
+  lastmod: '2026-10-24'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 268
+      - 304
+    established: null
+    attribution:
+      source_keys:
+      - '[Daniel Kaggle descents 2026-10-24]'
+      published: '2026-10-24'
+    builds_on: null
+    evidence:
+    - E-evand-kaggle-descents-certificate-report
+    artifacts:
+    - packing/resources/web/evand-kaggle-descents-2026-10-24/README.md
+    - packing/resources/web/evand-kaggle-descents-2026-10-24/acquisition/claims.json
+    - packing/resources/web/evand-kaggle-descents-2026-10-24/source/search/packer/candidates/s268_lightning.cert
+    - packing/resources/web/evand-kaggle-descents-2026-10-24/source/search/packer/candidates/s304_pub.cert
+    - packing/resources/web/evand-kaggle-descents-2026-10-24/receipts/exact-certification.json.xz
+    - packing/resources/web/evand-kaggle-descents-2026-10-24/receipts/sharp-controls-n268.json
+    - packing/resources/web/evand-kaggle-descents-2026-10-24/receipts/sharp-controls-n304.json
+    - packing/resources/web/evand-kaggle-descents-2026-10-24/measure/identity.json
+    - packing/campaign/issue-intake/upper-bounds-evand-20261024/README.md
+    - packing/devtools/upper_bound_reports.py
 - path: results.html
   canonical: results.html
   kind: page
