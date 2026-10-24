@@ -897,6 +897,16 @@ FIRST_PUBLISHED = PUBLICATION_HISTORY[-1].first_published
 #: The leading entry is proposed for the next publication; confirm its date at first deployment.
 EXPLAINER_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.4.24",
+        first_published="October 24, 2026",
+        result_scope=(
+            "Update the registered result count after the registrations of the Lean "
+            "formalization reports of Hosono at 21 (T-234) and 59 (T-235) and of Daniel "
+            "for Fang's theorems (T-236), of the classical values at 2 to 5 (T-237) and "
+            "of chelokot's and Daniel's Lean routes to them (T-238)."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.4.23",
         first_published="October 24, 2026",
         result_scope=(
@@ -1438,6 +1448,18 @@ class ReleaseImpactDecision(NamedTuple):
 # New component cuts append decisions here, newest first, alongside their own histories.
 # No impact is invented retrospectively for the published baseline editions.
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
+    ReleaseImpactDecision(
+        component="paper:n11-lower-bounds-explainer",
+        previous_version="v0.4.23",
+        version="v0.4.24",
+        impact="patch",
+        reason=(
+            "Update the registered result count after the registrations of the Lean "
+            "formalization reports of Hosono at 21 (T-234) and 59 (T-235) and of Daniel "
+            "for Fang's theorems (T-236), of the classical values at 2 to 5 (T-237) and "
+            "of chelokot's and Daniel's Lean routes to them (T-238)."
+        ),
+    ),
     ReleaseImpactDecision(
         component="paper:n11-lower-bounds-explainer",
         previous_version="v0.4.22",
@@ -2792,8 +2814,14 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "again at 6b739f337, after review A's wording and credit fixes to T-234 to "
             "T-238 and their keys: from that tree, and with d8d5c6774's register, "
             "bibliography and credit manifest swapped in, all four papers write their 69 "
-            "files byte-identical, so the explainer keeps v0.4.23. No PDF was printed; "
-            "each prints from that HTML. Retain v0.1.11, v0.1.4 and v0.2.7."
+            "files byte-identical, so the explainer keeps v0.4.23. Measured a fourth time "
+            "after merging main af9c9e850 (#745: T-232, T-233 and the explainer's v0.4.23 "
+            "for 233 results), at link revision af9c9e85, from this tree at e48b9127d and "
+            "with main's version of each of the 17 files the branch modifies swapped in, "
+            "release.py and tests aside (69 files each): the three write every file "
+            "byte-identical, and the explainer differs only in counting 238 results "
+            "against main's 233, so it takes v0.4.24 over main's v0.4.23. No PDF was "
+            "printed; each prints from that HTML. Retain v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
     ReleaseNoPublicChange(
