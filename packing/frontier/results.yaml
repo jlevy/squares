@@ -32152,7 +32152,7 @@ results:
   - id: T-231
     kind: upper-bound
     registered: '2026-10-23'
-    landed: '2026-10-23'
+    landed: '2026-10-24'
     headline: >-
       Polkovskyi's lower re-solve at 204 of Couzo's packing, 1.48e-11 below T-229
     claim: >-
