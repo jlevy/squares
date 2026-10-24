@@ -5,7 +5,7 @@ title: "Import wand125: register #446's s(19) >= 1931/400, s(20) >= 393/80, s(26
 kind: task
 status: in_progress
 priority: 2
-version: 8
+version: 9
 delegate: c-lower-1023
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-11T21:56:11.508Z
-updated_at: 2026-10-23T16:54:42.952Z
+updated_at: 2026-10-23T23:43:25.110Z
 started_at: 2026-10-23T06:18:58.822Z
 ---
 Found by the 2026-10-11 wand125/evand survey (think-1jnr). wand125/square-packing INDEX.json at 04fbef0 (2026-10-11) lists, as its best certificate at four counts, the #446 fine-net bundles mixed_n19_L48275 (1931/400 = 4.8275), mixed_n20_L49125 (393/80 = 4.9125), mixed_n26_L5555 (1111/200 = 5.555) and mixed_n27_L5655 (1131/200 = 5.655, the bf85d6b follow-up), all on the 2,073-direction net, data in release square-lower-bounds-v1. The record holds them only as evidence (E-wand125-fine-net-lower-bounds-446-report, E-wand125-fine-net-n27-5655-followup-report), #446's result-requests entry and case-record blockers; no register entry states them, unlike the same release's n = 28, 29, 30 values (T-142, T-132, T-143). Each is above its case's reported and verified lower bound (by 1/400, 3/400, 1/100 and 23/2000) and above every register claim at its count (T-103, T-104, T-105, T-106). Runbook row: bounds of one kind at several counts in one release, one entry whose scope covers them, registered as reported (V0/C0, pending adoption) with unfinished_confirmations naming think-ndvg's replay. Price: registration minutes (records lane); replay about 3.3 to 4.5 CPU-hours per certificate on the T-142/T-143 measurements, so about 13 to 18 CPU-hours for the four, under think-ndvg's owner budget.
@@ -71,4 +71,4 @@ Separately, your repository's `mixed_n31_L59775` (23e3186, 11 October), s(31) â‰
 This issue stays open while that work is queued, and a reply follows each change in the record.
 
 (Before posting: confirm the ids are on `main`, fill T-232's line, and link the result pages and the review on `main`.)
-2026-10-23 c-lower-1023, census status (PR #745): captures VERIFIED at all 2,073 directions for n19, n20, n26 and n27; whole-net controls CONTROLS_REFUSED at n19, n20 and n27. At n26 the control failed closed on AXIS_ROUNDING (gap 3.28e-9 > 1e-9), which is think-tcsl. On the coordinator's option (a), T-233's replay evidence is held until think-tcsl lands, and T-233 stays V0/C1. The n26 receipt is kept byte-identical as mixed_n26_L5555.control-failed-v2.json (9c38ae281), outside the receipts the census tests hold to CONTROLS_REFUSED; the control logic is unchanged.
+2026-10-23 c-lower-1023, census status (PR #745): captures VERIFIED at all 2,073 directions for n19, n20, n26 and n27; whole-net controls CONTROLS_REFUSED at n19, n20 and n27. At n26 the control failed closed on AXIS_ROUNDING (gap 3.28e-9 > 1e-9), which is think-tcsl. On the coordinator's option (a), T-233's replay evidence is held until think-tcsl lands, and T-233 stays V0/C1. The n26 receipt is kept byte-identical as mixed_n26_L5555.control-failed-v2.json (9c38ae281), outside the receipts the census tests hold to CONTROLS_REFUSED; the control logic is unchanged.2026-10-23 c-fix-745-1023 (review A of PR #745): T-233's records now say what the 23 October censuses found (7e12d05ce): claim, next_rung and unfinished_confirmations on think-tcsl (n26 re-judge or rerun, at most 0.32 CPU-h; the spent 10.5 to 19.2 price dropped, about 7.8 spent), notes on why n19, n20 and n27 wait for n26 (one entry takes the least rung; held together rather than split), the eight census receipts as artifacts; both evidence entries, the four case blockers, both coverage notes, #446's request summary (V0/C1), the bibliography note and the release packet README follow. The stage 7 draft above predates this: its "census is approved and queued" line should say the four captures passed and n26's control waits on think-tcsl. Branch head bdf7fe618.

@@ -5,7 +5,7 @@ title: "PR #753 (merge on 24 October UTC): T-231, T-229 lineage, reply records"
 kind: task
 status: in_progress
 priority: 1
-version: 5
+version: 6
 delegate: c-land-753-1023
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-23T15:34:21.973Z
-updated_at: 2026-10-23T22:54:00.119Z
+updated_at: 2026-10-24T00:19:15.860Z
 started_at: 2026-10-23T15:34:24.630Z
 ---
 
@@ -31,3 +31,5 @@ Findings:
 - Suggestions A10 to A12.
 Tests: 132 targeted pytest passed. The record and release tools pass. My own exact checker and its controls agree with the receipts.
 Dedicated reviews: none recommended.
+
+2026-10-24 c-land-753-1023 (landing lane): merged main 64b316b6c (#751, #748, #746, #747, #761, #762) into #753 at 264990965, no rebase (release.py RELEASE_IMPACTS keeps the explainer's v0.4.22 above infographics v0.7.0; the document map keeps both new rows; INVENTORY/VERIFIERS re-rendered). 695a07431 records the stage 7 replies and closes of 23 October: #533's status reply (issuecomment-6370778184, follow-up), #470 closed with its final reply (issuecomment-6376106671; think-5ip2's patch applied cleanly), and the #557/#565/#570/#574 hold notes (the owner stated no preference on 23 October, so the holds stand; basis recorded-reservation). dde44d903 re-measured the papers' no-change record against 64b316b6c (three papers byte-identical; the explainer differs only in 231 and v0.4.22); e3e2513ca re-pinned. At 00:00Z on 24 October: every place in the re-dating list already names 24 October, so nothing re-dated; 527ba8761 stamp_landed --apply (T-231 landed 2026-10-23 -> 2026-10-24; landings.yaml is not on main); 29ad81911 re-pinned (527ba87617c4); check_release_impact passes. Records tier 53/53 at e3e2513ca and at 29ad81911. Hosted CI at 29ad81911: Packing validation 40042862448, Certificate page 40042862455, Branch mergeability 40042856551, all success. Not merged and still draft (the coordinator's). Deferral: think-mboh (check_requests' hold_text still prints "pending the owner's confirmation" for a recorded-reservation hold).

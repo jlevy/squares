@@ -5,14 +5,14 @@ title: "Decision: register kind for chelokot's and Daniel's Lean proofs of s(2) 
 kind: task
 status: open
 priority: 2
-version: 2
+version: 3
 labels:
   - decision
   - result-import
 dependencies: []
 parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 created_at: 2026-10-23T07:19:57.434Z
-updated_at: 2026-10-23T09:04:30.628Z
+updated_at: 2026-10-24T01:02:18.643Z
 ---
 Owner decision for think-7l2j, raised by the intake lane c-lean-1023 on 23 October 2026. The lane retained both sources (packing/resources/web/chelokot-small-n-lean-2026-09-05/ and evand-rect-small-n-lean-2026-10-22/) and their reported evidence entries (E-small-n-chelokot-lean-report, E-small-n-daniel-rect-lean-report), and held back the register entry (id T-237, allocated to the lane) because the record's rules give it no kind the checks accept:
 
@@ -27,3 +27,7 @@ Options:
 The lane's draft entry (headline, claim, significance S2, unfinished confirmations think-7l2j and think-tq3g) is in the lane's report to the coordinator and can be registered as written under option 2, or with kind formalization under option 1. Stage 4's review and the builds (think-tq3g) do not wait on this decision.
 
 blocked_on: none
+
+## Notes
+
+2026-10-24 coord-intake-1023: OWNER ANSWER. In conversation at about 00:05Z on 24 October, the coordinator asked "How should chelokot's and Daniel's Lean proofs of the smallest boxes for 2–5 squares go on the register?" The owner selected the option labelled "Classical entry + formalization (Recommended)", which is option 1 above. The option's description was the coordinator's text, not the owner's: register the classical proofs first (side 2 for 2–4 squares, and Göbel 1979 for 5) as their own entry, then the two Lean proofs as a formalization naming it, using two ids (T-237, T-238), so that #757's Kristiansen entry moves from T-238 to T-239. To be implemented in #750 (lane think-ehx5); #757 renumbers.
