@@ -5,7 +5,7 @@ title: "Import #763 (PR A, W1): Couzo's 964ee2b at or below 1024 — packet, led
 kind: task
 status: in_progress
 priority: 1
-version: 8
+version: 9
 delegate: c-import-763-1024b
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-24T07:16:16.676Z
-updated_at: 2026-10-24T13:23:35.389Z
+updated_at: 2026-10-24T13:37:35.841Z
 started_at: 2026-10-24T07:16:25.387Z
 ---
 Plan and verdicts: think-cnn7's notes (triage of 24 Oct). After #769 (PR C) and #757, both merged. Licence: the owner's presumption of permission (think-m8f4 follows up the exact licence). PR B (review, V3/C3, adoption and regularization at 268 and 303) follows.
@@ -64,3 +64,5 @@ ROUND 2026-10-24 (c-import-763-1024b, reviews A and B of #789, round 1; parent t
 Head c6617f3ee: Packing validation 40094477677 and Certificate page 40094477650 succeeded; packing-required and pages-required pass. Disposition replies: A https://github.com/jlevy/squares/pull/789#issuecomment-6384392221, B https://github.com/jlevy/squares/pull/789#issuecomment-6384392366. Beads: think-n26i (parent) and its 17 children closed; think-299t (new, open, under think-ezt8) holds 20261014's regather drift; B1 stays on think-lyf9. Not synced (the coordinator syncs).
 
 2026-10-24 coord-intake-1024: PR #789 merged 2026-10-24T13:22:46Z as 2ec489d1e after review A (senior), review B (correctness; B1 deferred to think-lyf9) and follow-up review C (approve; C1 to think-bgij, C3 fixed at 0329f73d6). T-240 on main as reported (V0/C0). #763 stays open (closingIssuesReferences empty). Next: the #763 acknowledgement after the deploy of 2ec489d1e is verified; T-240's stage 4 review (think-zjus) is running; PR B follows it and think-l49q.
+
+2026-10-24 coord-intake-1024: #763 acknowledgement posted 13:37:28Z (https://github.com/jlevy/squares/issues/763#issuecomment-6384882980) after the deploy of 2ec489d1e was verified (Pages run 40097882450 attempt 2: deploy 120885754751, verify-deployment 120885911221; attempt 1 failed only on the D-509 explainer PDF flake, think-6dle; live result/t-240.html S3 V0 C0 and cases 268/303 checked). It carries nine author questions and names the 99 Kaggle-credited sides (think-lyf9). Its record rides the next records PR (PR B or think-l49q's). #763 stays open for PR B, the rows above 1024 and the author's answers.
