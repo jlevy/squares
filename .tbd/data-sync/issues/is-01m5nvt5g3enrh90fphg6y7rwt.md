@@ -3,9 +3,9 @@ type: is
 id: is-01m5nvt5g3enrh90fphg6y7rwt
 title: "PR #750 (merge): senior review"
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 4
+version: 5
 delegate: c-rev-750-1024
 labels: []
 dependencies: []
@@ -15,8 +15,12 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-24T02:28:36.483Z
-updated_at: 2026-10-24T03:09:47.876Z
+updated_at: 2026-10-24T05:15:52.572Z
 started_at: 2026-10-24T02:28:43.524Z
+closed_at: 2026-10-24T05:15:52.572Z
+close_reason: "#750 merged at 2c58b6373 (head c5f747bf0; review A 6379115396 with dispositions 6379656735; CI green 40064635396, 40064635355, 40064633304)"
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes

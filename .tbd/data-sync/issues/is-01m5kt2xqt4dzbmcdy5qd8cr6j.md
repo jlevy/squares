@@ -3,16 +3,20 @@ type: is
 id: is-01m5kt2xqt4dzbmcdy5qd8cr6j
 title: "Decision: register kind for chelokot's and Daniel's Lean proofs of s(2) to s(5) (think-7l2j)"
 kind: task
-status: open
+status: closed
 priority: 2
-version: 5
+version: 6
 labels:
   - decision
   - result-import
 dependencies: []
 parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 created_at: 2026-10-23T07:19:57.434Z
-updated_at: 2026-10-24T04:01:38.360Z
+updated_at: 2026-10-24T05:15:53.756Z
+closed_at: 2026-10-24T05:15:53.756Z
+close_reason: "#750 merged at 2c58b6373 (head c5f747bf0; review A 6379115396 with dispositions 6379656735; CI green 40064635396, 40064635355, 40064633304)"
+resolution: null
+duplicate_of: null
 ---
 Owner decision for think-7l2j, raised by the intake lane c-lean-1023 on 23 October 2026. The lane retained both sources (packing/resources/web/chelokot-small-n-lean-2026-09-05/ and evand-rect-small-n-lean-2026-10-22/) and their reported evidence entries (E-small-n-chelokot-lean-report, E-small-n-daniel-rect-lean-report), and held back the register entry (id T-237, allocated to the lane) because the record's rules give it no kind the checks accept:
 
