@@ -603,7 +603,7 @@ def problems(ledger: Mapping[str, Any]) -> list[str]:
     )
     labels: set[str] = set()
     claimed: set[tuple[str, int]] = set()
-    arrivals: dict[int, dict[str, list[str]]] = {}
+    arrivals: dict[int, dict[tuple[str, str], list[str]]] = {}
     for report in _mappings(found, ledger["reports"], "reports"):
         label = str(report.get("report"))
         absent = [key for key in (*REPORT_KEYS, "claims") if key not in report]
@@ -639,12 +639,15 @@ def problems(ledger: Mapping[str, Any]) -> list[str]:
             claimed.add(key)
             arrived = str(claim.get("reported_at") or when)
             if arrived != UNKNOWN:
-                arrivals.setdefault(key[1], {}).setdefault(arrived, []).append(label)
+                # Reports of one instant go in commit order (`walk`).
+                order = (arrived, str(claim.get("first_committed") or ""))
+                arrivals.setdefault(key[1], {}).setdefault(order, []).append(label)
     found.extend(
-        f"n={n}: {' and '.join(sorted(tied))} arrive at {arrived}, so only their labels "
-        "would order them; give each claim its own reported_at"
+        f"n={n}: {' and '.join(sorted(tied))} arrive at {arrived}"
+        + (f", first committed at {committed}" if committed else "")
+        + ", so only their labels would order them; give each claim its own reported_at"
         for n, times in sorted(arrivals.items())
-        for arrived, tied in times.items()
+        for (arrived, committed), tied in times.items()
         if len(tied) > 1
     )
     for exception in _mappings(found, ledger["exceptions"], "exceptions"):
@@ -1903,6 +1906,9 @@ def walk(
 ) -> Walk:
     """The owner's rule at one count: each claim in report order against the standing side.
 
+    Report order is the time each report was made, then, among reports of one instant (the
+    commits of one push), the time its side was first committed, then its label.
+
     The standing side is a set: the minimal members of the start (`minimal`), then each
     recorded claim, together with any undecided claim nothing has since been decidably
     below. A claim is recorded only when it is below every member; it is not recorded when
@@ -1925,7 +1931,10 @@ def walk(
     seeds = minimal([*members, construction] if construction is not None else members)
     standing = list(seeds)
     steps: list[Step] = []
-    for side in sorted(entries, key=lambda item: (item.reported_at, item.label)):
+    # Reports of one instant, the commits of one push, go in commit order (#795's review A).
+    for side in sorted(
+        entries, key=lambda item: (item.reported_at, item.first_committed, item.label)
+    ):
         relations = [(member, compare(side, member)) for member in standing]
         above = [member for member, relation in relations if relation == ABOVE]
         equal = [member for member, relation in relations if relation == EQUAL]
@@ -2353,9 +2362,13 @@ def report_summaries(ledger: Ledger, walks: Sequence[Walk]) -> list[dict[str, An
         for step in result.steps:
             steps.setdefault(step.side.label, []).append((result.n, step))
     summaries = []
-    for report in sorted(
-        ledger["reports"], key=lambda item: (item["reported_at"], item["report"])
-    ):
+
+    def order(report: Report) -> tuple[str, str, str]:
+        # Reports of one instant, the commits of one push, in commit order (`walk`).
+        committed = [str(claim.get("first_committed") or "") for claim in report["claims"]]
+        return (report["reported_at"], min(committed, default=""), report["report"])
+
+    for report in sorted(ledger["reports"], key=order):
         own = steps.get(report["report"], [])
         summaries.append(
             {

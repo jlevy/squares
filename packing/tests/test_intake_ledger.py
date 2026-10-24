@@ -788,6 +788,32 @@ def test_claims_at_one_count_and_one_time_are_refused_rather_than_ordered_by_lab
     assert ledger.problems(data) == []
 
 
+def test_claims_of_one_instant_with_their_own_commit_times_are_ordered_by_them() -> None:
+    """The commits of one push arrive together; each claim's ``first_committed`` orders
+    them, so only a tie in both is refused (#795's review A, A1)."""
+    data = _minimal()
+    data["reports"][0]["claims"][0]["first_committed"] = "2026-10-11T23:00:00Z"
+    second = copy.deepcopy(data["reports"][0])
+    second.update(report="#0", url="https://github.com/jlevy/squares/issues/0")
+    second["claims"][0]["first_committed"] = "2026-10-11T22:00:00Z"
+    data["reports"].append(second)
+    assert ledger.problems(data) == []
+    second["claims"][0]["first_committed"] = "2026-10-11T23:00:00Z"
+    assert "first committed at 2026-10-11T23:00:00Z" in " ".join(ledger.problems(data))
+
+
+def test_one_instant_is_walked_in_commit_order_and_not_by_label() -> None:
+    """A later commit of one push is decided against an earlier one, whatever their labels."""
+    pushed = "2026-10-12T05:00:00Z"
+    earlier = side("z@early", "10.4", when=pushed, first_committed="2026-10-12T01:00:00Z")
+    later = side("a@late", "10.3", when=pushed, first_committed="2026-10-12T02:00:00Z")
+    walk = ledger.walk(100, record(), [later, earlier])
+    assert verdicts(walk) == [
+        ("z@early", "recorded", "record T-001"),
+        ("a@late", "recorded", "z@early"),
+    ]
+
+
 def test_a_malformed_start_is_refused_and_main_reports_one_line(
     tmp_path: Path, capsys: pytest.CaptureFixture[str]
 ) -> None:
