@@ -133,12 +133,12 @@ The ones that carry the most weight:
   side’s last place as the same displayed bound.
   An `exact_form` on the ceiling is the exact form of the ceiling; $s(n)$ is known
   exactly only when `status` is `proved`. An algebraic ceiling the house writer writes
-  is `root(p, low, high)`: `p` its minimal polynomial in `s`, highest degree first, as
+  is `root(p, low, high)`: $p$ its minimal polynomial in $s$, highest degree first, as
   `minimal_polynomial` writes it, and `low` and `high` the side cut down and rounded up
-  at forty places, an interval in which it is `p`’s one root
+  at forty places, an interval in which it is $p$’s one root
   ([`exact_sides.form`](../devtools/exact_sides.py), which `exact_sides.read_form` reads
   back exactly). A side of degree two is written in its closed form instead,
-  `(a+b*sqrt(d))/c` with `d` square-free and the fraction in lowest terms, as n = 51’s
+  `(a+b*sqrt(d))/c` with $d$ square-free and the fraction in lowest terms, as n = 51’s
   `(16+5*sqrt(2))/3` and n = 295’s `(22+22*sqrt(2))/3` are.
   n = 11’s `root(P_trump11, …)`, which names its polynomial, is not this form.
 - Both upper lanes hold the certificate of the case’s **house best packing**, as the
