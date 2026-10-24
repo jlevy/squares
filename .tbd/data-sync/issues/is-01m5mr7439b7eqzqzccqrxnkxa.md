@@ -5,7 +5,7 @@ title: "Import Amund Kristiansen: s(303) <= 17.909762327476, 9.89e-6 below T-230
 kind: task
 status: in_progress
 priority: 1
-version: 7
+version: 8
 delegate: c-land-757-1024
 labels:
   - result-import
@@ -17,7 +17,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-23T16:06:32.296Z
-updated_at: 2026-10-24T01:05:26.899Z
+updated_at: 2026-10-24T01:47:09.744Z
 started_at: 2026-10-23T16:06:37.444Z
 ---
 Issue #755 (https://github.com/jlevy/squares/issues/755), opened 2026-10-23T11:12:48Z by amundsk (Amund Kristiansen): one upper bound at 303, a dilation certificate made with Evan Daniel's dilate_cert.py (evand 7982d7a), gist 78f9f0e7b4669f2f509a281845081768 at 511f56bf6e6afb4eb22f12d31371c2a2fe7b4767, s303_amund.cert SHA-256 9ec01059b35cc983cb28a1bb33bd215a2717228f7efd182e1724de6b22dc511b, side 223872029093440709529093216833/12500000000000000000000000000. Below the house T-230 (Daniel, #728) by 9.89e-6 if verified. Stages 1-3 then stage 4 (separate review lane), then adoption and regularization at 303 (think-ykgh owns 303's open row-7 review).
@@ -103,3 +103,12 @@ binary64 float, about 3.4 × 10⁻¹⁶ below it; the side itself is 17.90976232
 record quotes it exactly or rounded up.
 
 🤖 Generated with [Claude Code](https://claude.com/claude-code)
+
+## 2026-10-24 c-land-757-1024 (coordinator coord-intake-1023): T-238 renumbered to T-239, main merged twice
+
+- The owner gave T-237 and T-238 to #750 on 24 October (think-4o9c), so #755's entry is T-239. Every "T-238" in these notes above, the stage 7 reply draft included, means T-239; the reply must name T-239 when it is posted. This note is added rather than the history rewritten.
+- 045497b6a: renumbered in every record, view, test and tool (98 occurrences in 29 files), with a dated renumbering note on the register entry and on the #755 requests entry (no reply had named the old id). The review document and the review packet's README each gain one sentence naming the old id; the review's programs keep "T-238" in their docstrings and `t238` in their names, and the receipts are untouched (program-digests.sha256 binds them). result/t-238.html became result/t-239.html; the case record's anchor follows.
+- da9326b9b: merged main 5f5294d82 (#753, #760). The pass of 24 October now holds 204 (T-231, main) and 303 (T-239): LATER_PASSES {204, 303}, both prior-state rows in house-adoption-prior-state-2026-10-24.json.xz (main's byte for byte, via retain_history), house sources T-231's packet beside T-239's, results.yaml T-231 then T-239, the regularized index main's plus this branch's 303 entry and run (carried_index). Custody re-run: 70 houses, 194 inputs, 46 mutations refused.
+- afa83b456: merged main 0bbb0a2c4 (#754), clean. db562c8bd: synopsis count (232, 200 by others) and evidence inventory. 1cef5213f: re-pin to db562c8b. b6ae779b4: explainer v0.4.23 over main's v0.4.22 (316 edition tests). 01d5c60f5: the three papers' no-change record re-measured against 0bbb0a2c4 (byte-identical across four renders; the explainer differs only in its count and the profile link).
+- Not applied: stamp_landed (landings.yaml is not on main); its dry run lists T-239 2026-10-23 -> 2026-10-24 for the merge step.
+- For the record: Polkovskyi's later commit Mishapolk/square-packing-records@7e82c64 holds a 303 side above #755's; in report order #755's 11:12:48Z report stands and nothing changes here. Its intake-watch read belongs to a later PR (C).

@@ -5,7 +5,7 @@ title: "PR #757: the gist source card (OTHER_PROJECTS accepts gist.github.com)"
 kind: task
 status: in_progress
 priority: 2
-version: 3
+version: 4
 delegate: c-fix-757-1023
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m5mr7439b7eqzqzccqrxnkxa
 hold: null
 hold_until: null
 created_at: 2026-10-23T22:18:34.921Z
-updated_at: 2026-10-23T23:17:47.870Z
+updated_at: 2026-10-24T01:47:15.127Z
 started_at: 2026-10-23T22:18:44.697Z
 ---
 
@@ -40,3 +40,5 @@ started_at: 2026-10-23T22:18:44.697Z
 - Hosted run 40037263522: suite-b and suite-c pass; validate, suite-a and suite-d fail on id contiguity only.
 - Hosted, complete at 825c95959: Packing validation 40037263522 (packing-required fails on validate, suite-a, suite-d only, all id contiguity; frontend, typecheck, geometry, sweeps, measure-verifier, suite-b, suite-c pass), Certificate page 40037263599 success, Branch mergeability 40037258662 success.
 - PR #757 body updated (gist-card and flip rows, Changes by Purpose, Validation, merges, Limits, think-mwi8). Still a draft; labels intake, S2. Not merged; think-ykgh untouched; think-8r5w not registered.
+
+2026-10-24 c-land-757-1024: the entry these notes call T-238 is T-239 since commit 045497b6a on PR #757 (renumbered when the owner gave T-237 and T-238 to #750, think-4o9c). The gist card counts T-239.

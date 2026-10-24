@@ -3,9 +3,9 @@ type: is
 id: is-01m5myjasmbm71pa68wgypjv9s
 title: "PR #758 (merge): senior review, address, gate"
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 5
+version: 6
 delegate: c-rev-758-1023
 labels: []
 dependencies: []
@@ -16,8 +16,12 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-23T17:57:31.060Z
-updated_at: 2026-10-24T01:05:16.769Z
+updated_at: 2026-10-24T01:53:14.336Z
 started_at: 2026-10-23T18:23:11.474Z
+closed_at: 2026-10-24T01:53:14.336Z
+close_reason: "#758 merged at 5664ac1e8 (head c4fe4312a; reviews A 6372329921 and B 6378129147 with dispositions 6376713694 and 6378406397; CI green 40050494138, 40050494149, 40050490671)"
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes

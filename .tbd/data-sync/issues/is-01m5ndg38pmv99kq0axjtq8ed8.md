@@ -3,9 +3,9 @@ type: is
 id: is-01m5ndg38pmv99kq0axjtq8ed8
 title: "Address PR #758 review A (A1-A16)"
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 3
+version: 4
 delegate: c-fix-758-1023
 labels: []
 dependencies: []
@@ -13,8 +13,12 @@ parent_id: is-01m5myjasmbm71pa68wgypjv9s
 hold: null
 hold_until: null
 created_at: 2026-10-23T22:18:26.454Z
-updated_at: 2026-10-23T23:22:39.905Z
+updated_at: 2026-10-24T01:53:12.992Z
 started_at: 2026-10-23T22:18:43.844Z
+closed_at: 2026-10-24T01:53:12.992Z
+close_reason: "#758 merged at 5664ac1e8 (head c4fe4312a; reviews A 6372329921 and B 6378129147 with dispositions 6376713694 and 6378406397; CI green 40050494138, 40050494149, 40050490671)"
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes

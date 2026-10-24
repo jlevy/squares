@@ -5,7 +5,7 @@ title: "Stage 4 mathematical review of T-238: Amund Kristiansen's s(303) <= 17.9
 kind: task
 status: in_progress
 priority: 1
-version: 3
+version: 4
 delegate: c-review-t238-math
 labels:
   - result-import
@@ -15,7 +15,7 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-23T16:23:53.828Z
-updated_at: 2026-10-23T17:35:57.601Z
+updated_at: 2026-10-24T01:47:12.332Z
 started_at: 2026-10-23T16:23:55.732Z
 ---
 
@@ -32,3 +32,5 @@ Findings (none blocking): RF-1 minor, the issue's verify_cert.py wall clearance 
 Rungs once entered: V3/C3, confirmed, independently re-implemented (Claude, a system family the producer also used). Then adopt at 303 and regularize; T-230 stays as history.
 
 Outputs (scratchpad/review-t238/): docs/project/reviews/review-2026-10-23-amundsk-n303.md; packing/resources/web/amundsk-n303-2026-10-23/review/review-2026-10-23/ (README, programs/, outputs/); record-changes.md (evidence, verifiers, results, document-map, significance, News note, reply draft).
+
+2026-10-24 c-land-757-1024 (coordinator coord-intake-1023): the entry this review covers was renumbered from T-238 to T-239 on PR #757, before it merged, when the owner gave T-237 and T-238 to #750 (think-4o9c). Every "T-238" in this bead's title and notes above means T-239. The review document and its packet README each gained one dated sentence naming the old id (commit 045497b6a); the review's programs keep "T-238" in their docstrings and `t238` in their names, and the receipts are untouched, since outputs/program-digests.sha256 binds them. The register entry's notes record the renumbering.

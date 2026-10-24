@@ -3,9 +3,9 @@ type: is
 id: is-01m5nq1jz1wykwtgx07hbhdqmk
 title: "PR #758 follow-up review B"
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 4
+version: 5
 delegate: c-rev-758b-1024
 labels: []
 dependencies: []
@@ -15,8 +15,12 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-24T01:05:16.769Z
-updated_at: 2026-10-24T01:25:32.039Z
+updated_at: 2026-10-24T01:53:11.870Z
 started_at: 2026-10-24T01:05:24.893Z
+closed_at: 2026-10-24T01:53:11.866Z
+close_reason: "#758 merged at 5664ac1e8 (head c4fe4312a; reviews A 6372329921 and B 6378129147 with dispositions 6376713694 and 6378406397; CI green 40050494138, 40050494149, 40050490671)"
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes
