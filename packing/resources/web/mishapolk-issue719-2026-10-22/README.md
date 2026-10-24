@@ -10,7 +10,8 @@ revision the issue pins. The source was read at 08:41Z on 22 October; `main` sto
 `ISSUE_SUBMISSION_122.md`, the issue’s body.
 
 Two of the counts are in the n ≤ 324 case corpus, 105 and 204, and one register entry
-records them, T-229, the house best packing at 105 and 204 since 23 October 2026
+records them, T-229, the house best packing at 105 since 23 October 2026, and at 204 from
+23 to 24 October 2026, when T-231, the release's other 204 file, superseded it
 ([Against the Record](#against-the-record)).
 111 of the 112 beyond the corpus at or below 1024 are dated beyond-horizon rows, each the
 current row at its count ([Beyond the Corpus](#beyond-the-corpus)); 366 is not recorded,
@@ -44,7 +45,13 @@ below an earlier certificate; the 8 above 1024 wait on the owner.
   that route shares the producer’s named checker (RF-1 of the
   [22 October review](../../../../docs/project/reviews/review-2026-10-22-mishapolk-719.md)). It has no command-line entry point at any revision, so
   run as the issue writes the command it reads no file and exits 0 whatever it is given
-  (RF-2). The source’s README names `verify_cert.py` and `verify_cert2.py`.
+  (RF-2). The source’s README names `verify_cert.py` and `verify_cert2.py`. The author’s
+  comment of 2026-10-23T01:52:40Z
+  ([issuecomment-6355484781](https://github.com/jlevy/squares/issues/719#issuecomment-6355484781),
+  answer 1) says the command was shorthand: his batch harness imported `sqpack.verify` as
+  a module, parsed each certificate and called its pair-overlap and containment routines
+  in memory, and his `verify_cert.py` and `verify_cert2.py` were the copies archived in
+  Francisco Couzo’s repository at `6b7391d`. Those statements are the author’s.
 - **Not claimed.** No global optimality, local rigidity or KKT condition.
 - **Lineage.** Each row names a baseline holder, and the closing paragraph credits the
   finders the packings build on: Erich Friedman, Joshua Levy, Evan Daniel, Francisco
@@ -241,8 +248,16 @@ Each is pinned by digest in the manifest, and the reply asks the author about it
   `certificates/n266_fresh.cert` (33 overlapping pairs) and `certificates/n275.cert`.
   Neither the issue nor the indexes claim them.
 - **A second 204 file.** `certificates/n204.cert` is the same packing as `n-204.cert`,
-  $1.48 \times 10^{-11}$ lower, and passed both routes in triage. The issue and the
-  indexes name `n-204.cert`.
+  $1.48 \times 10^{-11}$ lower. The stage 1 triage ran it through both routes and kept no
+  receipt; the replay of record is the n204 packet’s, with the 23 October review’s. The
+  issue and the indexes name `n-204.cert`. The author claimed the lower file on 22 October
+  ([issuecomment-6350348588](https://github.com/jlevy/squares/issues/719#issuecomment-6350348588),
+  answer 3), and the [mishapolk-n204-2026-10-22](../mishapolk-n204-2026-10-22/README.md)
+  packet retains it under his written grant; T-231 registers it. The same commit,
+  `1851c2c`, first published both files, and the ledger keeps a report’s least side at a
+  count, so it walks #719’s claim at 204 at this file’s side. T-229 stands as registered
+  and adopted on `n-204.cert`, the file the issue names, before that claim; T-231
+  superseded it at 204 when the case adopted it on 24 October.
 
 ## What Is Not Established
 
@@ -268,16 +283,23 @@ since this packet keeps no upstream byte. `tests/test_upper_bound_reports.py` ru
 kernel’s two sharp controls on the 105 certificate (RF-7).
 T-229 rests at `V3`/`C3` on that review, the replay it reproduced and its checker’s run.
 The review’s two questions for the author, how `sqpack/verify.py` was run and how square
-38 at 204 came to be released from which starting file, go with the reply on #719.
+38 at 204 came to be released from which starting file, went with the reply on #719, and
+his comment of 2026-10-23T01:52:40Z answers both: the harness imported the module
+([What the Issue Reports](#what-the-issue-reports)), and the 204 solve started from
+Couzo’s #678 certificate, `n204.cert` in Couzo’s repository, in Couzo’s unrotated frame,
+so the packing pairs with T-223 under the identity and with T-225 only under a half turn.
 
 ## Credit
 
 Mykhailo Polkovskyi (Mishapolk), the name the record has used since issue 593 and the
 issue’s credit since its 11:35:16Z edit. At 105 and 204 the entry credits each packing’s
 finders first, as a regularization: Ryan Xu’s packing as Francisco Couzo and PingYou Ltd
-refined it, and Couzo’s packing, first reported in #670 and refined in #675 and #678, as
-Evan Daniel regularized it, which Couzo’s source credits to Polkovskyi’s own
-construction. Per-row lineage beyond the corpus is not stated by the source, and per-row
+refined it (T-174), and Couzo’s packing, first reported in #670 and refined in #675 and
+#678 (T-223), which Couzo’s source credits to Polkovskyi’s own construction. The
+author’s comments give the lineage: at 105 he refined PingYou Ltd’s certificate of
+Couzo’s refinement of Xu’s packing, and at 204 he started from Couzo’s #678 certificate,
+not from Evan Daniel’s regularized view (T-225), so Daniel’s regularization is no
+antecedent at 204. Per-row lineage beyond the corpus is not stated by the source, and per-row
 credit beyond the horizon is the owner’s open question from #686. The issue discloses
 Gemini assistance.
 
