@@ -237,13 +237,14 @@ from typing import Any, NamedTuple, cast
 
 from strif import atomic_output_file
 
-from devtools import acquire_source, goebel_construction
+from devtools import acquire_source, goebel_construction, hosted_shards
+from devtools import construction_checker as checker
 from devtools import couzo_678_replay as base
 from devtools import couzo_715_replay as couzo_715
 from devtools import evand_arrangement_reports as kernel
 from devtools import evand_exact_certificates as legacy
 from devtools import upper_bound_reports as reports
-from devtools.retained_data import read_retained_bytes, read_retained_text
+from devtools.retained_data import read_retained_bytes, read_retained_text, retained_exists
 from sqpack.retained_json import dumps as retained_dumps
 from sqpack.yamlio import safe_load
 
@@ -274,6 +275,10 @@ GOEBEL_FORMAT = "beyond-horizon-goebel-comparison-v1"
 #: The Göbel receipt of a window above 1024, from the maintained module (`goebel_receipt`).
 GOEBEL_FORMAT_V2 = "beyond-horizon-goebel-comparison-v2"
 GOEBEL_MODULE = "packing/devtools/goebel_construction.py"
+#: Each recipe row's decision by the construction checker, and the recipe parents the
+#: release replays that are not rows (`write_recipe_decisions`).
+RECIPES = Path("receipts/recipe-decisions.json")
+RECIPES_FORMAT = "beyond-horizon-recipe-decisions-v1"
 EARLIER = Path("receipts/earlier-publications.json")
 EARLIER_FORMAT = "beyond-horizon-earlier-publications-v1"
 INTAKE = ROOT / "campaign/issue-intake"
@@ -309,6 +314,11 @@ class Awaiting:
 #: (think-fwa9), and a side above Göbel's classical construction is above an earlier
 #: report (think-8krd).
 CONSEQUENCE, RECIPE, WITHDRAWN = "consequence", "recipe", "withdrawn"
+#: The Kingbird catalogue's sides beyond the corpus (N1): the walk above 1024 records them
+#: and the chain passes over them, so only the verdicts that rest on them wait.
+CATALOGUE = "catalogue"
+#: Where the owner's open questions on the work above 1024 are kept, N1 among them.
+N1_BEAD = "think-llit"
 HELD_CLASSES = {
     CONSEQUENCE: (
         "an index bound that deletes squares from a larger count's certificate or from a "
@@ -325,6 +335,12 @@ HELD_CLASSES = {
         "a certificate in the reporter's own watched repository that his issue withdrew, at a "
         "count where his later release claims a lower side: not a report, as the owner "
         "answered on 23 October 2026 (think-8m4k)"
+    ),
+    CATALOGUE: (
+        "a side the Kingbird catalogue states beyond the corpus with its minimal polynomial, "
+        "which is no issue, comment, pull request or watched commit: whether the catalogue "
+        "is an earlier report there waits on the owner (N1, think-llit), so no row may hold "
+        "it until the owner answers"
     ),
 }
 #: The owner's answer that settles the withdrawn class (`Held.answer`).
@@ -355,11 +371,13 @@ HELD_NAMES = {
     CONSEQUENCE: "index deletion bounds",
     RECIPE: "constructions with no certificate file",
     WITHDRAWN: "certificates their author withdrew from an issue",
+    CATALOGUE: "catalogue sides",
 }
 HELD_NAME = {
     CONSEQUENCE: "index deletion bound",
     RECIPE: "construction with no certificate file",
     WITHDRAWN: "certificate its author withdrew from an issue",
+    CATALOGUE: "catalogue side",
 }
 
 
@@ -569,6 +587,73 @@ def _held(
 ) -> Held:
     """A `Held` whose counts are written out, separated by spaces."""
     return Held(kind, bead, frozenset(int(n) for n in counts.split()), also, note, answer)
+
+
+def deletion_holds(
+    bounds: Iterable[tuple[int, int, int]], *, claimed_by: str = ""
+) -> tuple[Held, ...]:
+    """How a walk holds a report's deletion bounds, each ``(n, parent, deleted)``: the
+    certificate at ``parent`` less its last ``deleted`` squares, so ``parent - deleted`` is
+    ``n``.
+
+    A bound a publication states that deletes one square from the next count's certificate
+    is an earlier report by the owner's D6 answer, settled with no row of its own
+    (`DELETION_ANSWER`, think-f2io). A bound deleting two or more squares is outside that
+    question's words and waits on think-kzme, as the history walk's 751, 752 and 927 do.
+    Every bound an issue claims waits on think-kzme too, whatever it deletes, with the bead
+    of the issue's import (``claimed_by``), as #763's 683 does: whether an issue's deletion
+    bound gets a row is that question (think-llit's plan, Deletion Rows).
+    """
+    settled: set[int] = set()
+    waiting: set[int] = set()
+    for n, parent, deleted in bounds:
+        _require(
+            deleted > 0 and parent - deleted == n,
+            f"n={n}: {parent} less {deleted} squares is not {n}",
+        )
+        (settled if deleted == 1 and not claimed_by else waiting).add(n)
+    holds: list[Held] = []
+    if settled:
+        holds.append(
+            Held(
+                CONSEQUENCE,
+                "think-f2io",
+                frozenset(settled),
+                note="each deleting one square from the next count's certificate",
+                answer=DELETION_ANSWER,
+            )
+        )
+    if waiting and claimed_by:
+        holds.append(
+            Held(
+                CONSEQUENCE,
+                claimed_by,
+                frozenset(waiting),
+                also=("think-kzme",),
+                note="deletion bounds the issue claims",
+            )
+        )
+    elif waiting:
+        holds.append(
+            Held(
+                CONSEQUENCE,
+                "think-kzme",
+                frozenset(waiting),
+                note="each deleting two or more squares, beyond the D6 answer's words",
+            )
+        )
+    return tuple(holds)
+
+
+def catalogue_hold(counts: Iterable[int]) -> Held:
+    """The walk above 1024's hold of the Kingbird catalogue's sides there (`CATALOGUE`),
+    until the owner answers N1: recorded, passed over by the chain, and no row."""
+    return Held(
+        CATALOGUE,
+        N1_BEAD,
+        frozenset(counts),
+        note="the capture of 2026-08-22, each side with its minimal polynomial (N1)",
+    )
 
 
 def _resting(report: str, verdict: str, kinds: str, counts: str) -> Resting:
@@ -920,7 +1005,7 @@ _AWAITING_719_631 = {
 }
 
 
-def _rulings(
+def ruling_entries(
     *awaiting: Mapping[str, Any], through: int | None = FROZEN_THROUGH
 ) -> list[dict[str, Any]]:
     """The owner's rulings of 23 October 2026 as a walk's ``sources.yaml`` names them
@@ -948,14 +1033,14 @@ def _rulings(
 
 #: The owner's rulings each walk applies (`devtools.intake_ledger.RULINGS`). The walks
 #: frozen at 1024 apply them through `FROZEN_THROUGH`; the walk above 1024 applies the same
-#: answers with no top (`_rulings`, ``through`` None). The backlog walk applies none: it was
-#: read on 22 October, and no step of it is in either's words.
+#: answers with no top (`ruling_entries`, ``through`` None). The backlog walk applies none:
+#: it was read on 22 October, and no step of it is in either's words.
 WALK_RULINGS: dict[str, list[dict[str, Any]]] = {
-    ISSUE_719: _rulings(_AWAITING_719_631),
-    HISTORY: _rulings(_AWAITING_719_631),
-    ISSUE_732: _rulings(),
-    ISSUE_732_F1: _rulings(),
-    ISSUE_763: _rulings(),
+    ISSUE_719: ruling_entries(_AWAITING_719_631),
+    HISTORY: ruling_entries(_AWAITING_719_631),
+    ISSUE_732: ruling_entries(),
+    ISSUE_732_F1: ruling_entries(),
+    ISSUE_763: ruling_entries(),
 }
 #: A Couzo row: the count, the prior and new prints, the deletion and the link.
 _COUZO_ROW = re.compile(
@@ -993,7 +1078,13 @@ def _require(condition: object, message: str) -> None:
 
 @dataclass(frozen=True, slots=True)
 class Claim:
-    """One row of an issue's table: the count, the print, and the certificate it reads."""
+    """One row of an issue's table: the count, the print, and the certificate it reads.
+
+    A deletion row reads its parent's certificate, ``certificate_n``, less ``deleted``
+    squares. A recipe row (``recipe``, as its packet declares it) has no certificate file
+    of its own: ``path`` is its parent's, and the construction checker decides it
+    (`write_recipe_decisions`, D2).
+    """
 
     n: int
     prior: str
@@ -1001,6 +1092,7 @@ class Claim:
     path: str
     certificate_n: int
     deleted: int
+    recipe: Mapping[str, Any] | None = None
 
 
 @dataclass(frozen=True, slots=True)
@@ -1263,7 +1355,8 @@ def read_declared_rows(body: str, release: Release) -> list[Claim]:
     """The rows a publication no issue reports declares in its packet (`WATCHED_FORMAT`):
     each count, the certificate the walk records there and its exact header side rounded
     up at 12 places, all of the publication's commit, and for a deletion the squares it
-    deletes from that certificate (``deleted``); `declare_rows` writes them."""
+    deletes from that certificate (``deleted``), and for a recipe its parent's certificate
+    and the recipe (``recipe``); `declare_rows` writes them."""
     declared = json.loads(body)
     _require(declared.get("format") == WATCHED_FORMAT, f"{release.label}: not {WATCHED_FORMAT}")
     _require(
@@ -1280,6 +1373,7 @@ def read_declared_rows(body: str, release: Release) -> list[Claim]:
             str(row["certificate"]),
             int(row["n"]) + int(row.get("deleted", 0)),
             int(row.get("deleted", 0)),
+            row.get("recipe"),
         )
         for row in declared["rows"]
     ]
@@ -1741,9 +1835,89 @@ def held_claims(chosen: Release) -> list[Claim]:
     return [] if top is None else [row for row in claims(chosen) if row.n > top]
 
 
+def replayed_claims(chosen: Release) -> list[Claim]:
+    """The decided rows the filtered replay decides: every one but a recipe row."""
+    return [row for row in decided_claims(chosen) if row.recipe is None]
+
+
+def recipe_claims(chosen: Release) -> list[Claim]:
+    """The decided rows the construction checker decides (`write_recipe_decisions`)."""
+    return [row for row in decided_claims(chosen) if row.recipe is not None]
+
+
 def manifest(chosen: Release) -> dict[str, str]:
     """The packet's upstream digests, by upstream path."""
     return acquire_source.read_manifest(chosen.directory / acquire_source.MANIFEST)
+
+
+def hosted_pins(chosen: Release) -> dict[str, str]:
+    """The certificates a release's hosted shards hold: every file the packet pins and
+    does not retain whose path names a count above `FROZEN_THROUGH` (`named_count`), with
+    the SHA-256 the packet pins for it."""
+    return {
+        path: digest
+        for path, digest in manifest(chosen).items()
+        if (n := named_count(path)) is not None
+        and n > FROZEN_THROUGH
+        and not retained_exists(archive(chosen) / path)
+    }
+
+
+def is_hosted(chosen: Release, path: str) -> bool:
+    """Whether a certificate is read from the release's hosted shards, not its packet."""
+    return chosen.hosted is not None and not retained_exists(archive(chosen) / path)
+
+
+def certificate_bytes(chosen: Release, path: str) -> bytes:
+    """A certificate's bytes: retained in the packet, or, for one it pins and does not
+    retain, read from the release's hosted shards through `sqpack.hosted_data.require`
+    and held to the packet's pin (`devtools.hosted_shards`)."""
+    if not is_hosted(chosen, path):
+        return read_retained_bytes(archive(chosen) / path)
+    assert chosen.hosted is not None
+    try:
+        return hosted_shards.read(REPO / chosen.hosted, hosted_pins(chosen), path, REPO)
+    except hosted_shards.ShardError as error:
+        raise ReplayError(f"{chosen.label}: {error}") from error
+
+
+def index_entries(chosen: Release) -> dict[str, Mapping[str, Any]]:
+    """Each certificate the release's source-history receipts list at the retained
+    commit, by path: its Git blob, SHA-256 and exact side, each held to the release's index
+    when the receipt was written (`source_history`). The fast check reads a hosted row's
+    side and blob from here, so it opens no shard."""
+    found: dict[str, Mapping[str, Any]] = {}
+    for walk in walks_of(chosen):
+        path = source_history_path(chosen, walk)
+        if path.is_file():
+            found |= {row["certificate"]: row for row in _read(path)["at_commit"]}
+    return found
+
+
+def certificate_side(chosen: Release, path: str, n: int, where: str) -> Fraction:
+    """A certificate's exact side: its header line (`header_side`), or for a hosted one
+    the side its source-history receipt states, held to the digest the packet pins."""
+    if not is_hosted(chosen, path):
+        return header_side(read_retained_bytes(archive(chosen) / path), n, where)
+    entry = index_entries(chosen).get(path)
+    _require(entry is not None, f"{where}: hosted, and no source-history receipt lists it")
+    assert entry is not None
+    _require(
+        entry["sha256"] == manifest(chosen).get(path) and entry["n"] == n,
+        f"{where}: the source history's digest or count is not the packet's",
+    )
+    return Fraction(str(entry["side"]))
+
+
+def blob_of(chosen: Release, path: str) -> str:
+    """A certificate's Git blob: from its retained bytes, or for a hosted one from its
+    source-history receipt, which held it to the clone's tree."""
+    if not is_hosted(chosen, path):
+        return git_blob(read_retained_bytes(archive(chosen) / path))
+    entry = index_entries(chosen).get(path)
+    _require(entry is not None, f"{chosen.label} {path}: no source-history receipt lists it")
+    assert entry is not None
+    return str(entry["blob"])
 
 
 def archive(chosen: Release) -> Path:
@@ -1778,7 +1952,7 @@ def certificate(chosen: Release, row: Claim) -> legacy.Certificate:
         )
         parsed = facts[row.certificate_n]
     else:
-        raw = read_retained_bytes(archive(chosen) / row.path)
+        raw = certificate_bytes(chosen, row.path)
         parsed = legacy.parse(raw.decode("utf-8"), expected_n=row.certificate_n)
     if row.deleted:
         parsed = legacy.Certificate(row.n, parsed.side, parsed.poses[: row.n])
@@ -1827,14 +2001,18 @@ def decided_sides(chosen: Release) -> dict[int, Fraction]:
     that check's time (think-llit, Gate Cost)."""
     rows = decided_claims(chosen)
     if not chosen.derived:
-        return {
-            row.n: header_side(
-                read_retained_bytes(archive(chosen) / row.path),
-                row.certificate_n,
-                f"{chosen.label} n={row.n} {row.path}",
-            )
-            for row in rows
-        }
+        sides: dict[int, Fraction] = {}
+        for row in rows:
+            where = f"{chosen.label} n={row.n} {row.path}"
+            if row.recipe is None:
+                sides[row.n] = certificate_side(chosen, row.path, row.certificate_n, where)
+                continue
+            # A recipe row's side is its parent's times the tiles, plus its layers; the
+            # construction checker holds the recipe's stated bound to it.
+            parent = certificate_side(chosen, row.path, int(row.recipe["source_n"]), where)
+            tiles, layers = int(row.recipe["tiles_per_side"]), int(row.recipe["layers"])
+            sides[row.n] = tiles * parent + layers
+        return sides
     stated = {
         item["n"]: Fraction(item["exact_side"])
         for item in _read(chosen.directory / reports.CLAIMS)["results"]
@@ -1911,7 +2089,7 @@ def _environment() -> dict[str, str]:
 def decide_row(job: tuple[str, int]) -> dict[str, Any]:
     """One row: the side against the print, both routes, and the certificate's controls."""
     chosen = release(job[0])
-    row = next(row for row in decided_claims(chosen) if row.n == job[1])
+    row = next(row for row in replayed_claims(chosen) if row.n == job[1])
     cert = certificate(chosen, row)
     started = time.monotonic()
     result = base.decide(base.geometry(cert))
@@ -1950,7 +2128,7 @@ def _jobs(chosen: Sequence[Release]) -> list[tuple[str, int]]:
     jobs = [
         (row.certificate_n, item.label, row.n)
         for item in chosen
-        for row in decided_claims(item)
+        for row in replayed_claims(item)
     ]
     return [(issue, n) for _, issue, n in sorted(jobs, key=lambda job: -job[0])]
 
@@ -1967,7 +2145,7 @@ def filtered(issues: Sequence[int | str], workers: int) -> dict[str, dict[str, A
     elapsed = round(time.monotonic() - wall, 1)
     receipts: dict[str, dict[str, Any]] = {}
     for item in chosen:
-        results = [decided[item.label, row.n] for row in decided_claims(item)]
+        results = [decided[item.label, row.n] for row in replayed_claims(item)]
         receipt: dict[str, Any] = {
             "format": FILTERED_FORMAT,
             item.report_key: item.issue_url,
@@ -1989,6 +2167,170 @@ def filtered(issues: Sequence[int | str], workers: int) -> dict[str, dict[str, A
         _write(item.path(FILTERED), receipt)
         receipts[item.label] = receipt
     return receipts
+
+
+# --------------------------------------------------------------------------- recipe rows
+
+
+def recipe_of(chosen: Release, row: Claim) -> checker.Recipe:
+    """A recipe row as the construction checker reads it: the recipe its packet declares
+    (``kind``, ``source_n``, ``tiles_per_side``, ``layers``, the ``capacity`` and exact
+    ``bound`` the index states and the parent's ``sha256``), on the parent ``row.path``."""
+    recipe = row.recipe
+    _require(recipe is not None, f"{chosen.label} n={row.n}: not a recipe row")
+    assert recipe is not None
+    return checker.Recipe(
+        n=row.n,
+        kind=str(recipe["kind"]),
+        source_n=int(recipe["source_n"]),
+        parent=row.path,
+        parent_sha256=str(recipe["sha256"]),
+        bound=Fraction(str(recipe["bound"])),
+        tiles_per_side=int(recipe["tiles_per_side"]),
+        layers=int(recipe["layers"]),
+        deleted=row.deleted,
+        capacity=None if recipe.get("capacity") is None else int(recipe["capacity"]),
+        parts=tuple(str(part) for part in recipe.get("parts") or ()),
+    )
+
+
+def decide_parent(job: tuple[str, str, int]) -> dict[str, Any]:
+    """A recipe parent that is not a row, ``(release, path, count)``, decided as
+    `decide_row` decides a row: both routes, and its six controls."""
+    chosen = release(job[0])
+    path, n = job[1], job[2]
+    raw = certificate_bytes(chosen, path)
+    cert = legacy.parse(raw.decode("utf-8"), expected_n=n)
+    started = time.monotonic()
+    result = base.decide(base.geometry(cert))
+    return {
+        "n": n,
+        "certificate": path,
+        "certificate_sha256": hashlib.sha256(raw).hexdigest(),
+        "exact_side": legacy.literal(cert.side),
+        "verified": result["passed"],
+        "decision": result,
+        "controls": base.decide_controls(cert),
+        "wall_seconds": round(time.monotonic() - started, 3),
+    }
+
+
+def _replayed_parents(chosen: Release) -> dict[str, Mapping[str, Any]]:
+    """The release's filtered receipt's rows that read a certificate whole, by path: the
+    parents a recipe row may build on without a replay of their own."""
+    path = chosen.path(FILTERED)
+    if not path.is_file():
+        return {}
+    return {
+        row["certificate"]: row for row in _read(path)["rows"] if not row["deleted_squares"]
+    }
+
+
+def recipe_decisions(
+    chosen: Release, parents: Mapping[str, Mapping[str, Any]]
+) -> list[dict[str, Any]]:
+    """Each recipe row decided by the construction checker against its parent's replay
+    (``parents``, by path), with the recipe's controls; a row it refuses keeps the reason."""
+    found = []
+    for row in recipe_claims(chosen):
+        recipe = recipe_of(chosen, row)
+        replayed = parents.get(row.path)
+        parent = (
+            checker.parent_from_replay(replayed)
+            if replayed is not None
+            else checker.Parent(recipe.source_n, Fraction(0), row.path, "", None)
+        )
+        try:
+            decision = checker.decide(recipe, parent)
+        except checker.RecipeRefusedError as error:
+            found.append({"n": row.n, "verdict": "refused", "reason": str(error)})
+            continue
+        found.append(decision | {"controls": checker.controls(recipe, parent)})
+    return found
+
+
+def write_recipe_decisions(issues: Sequence[int | str], workers: int) -> dict[str, int]:
+    """Write each chosen release's recipe decisions (`RECIPES`): every recipe parent that
+    is not a replayed row of the release decided on both routes with its six controls
+    (`decide_parent`), then every recipe row decided from its recipe (`recipe_decisions`).
+    Returns each release's decided rows."""
+    written: dict[str, int] = {}
+    for chosen in [release(issue) for issue in issues]:
+        custody(chosen)
+        rows = recipe_claims(chosen)
+        _require(rows, f"{chosen.label}: no recipe row in its window")
+        replayed = _replayed_parents(chosen)
+        needed = sorted(
+            {(row.path, int((row.recipe or {})["source_n"])) for row in rows}
+            - {(path, int(row["n"])) for path, row in replayed.items()}
+        )
+        with ProcessPoolExecutor(max_workers=workers) as pool:
+            parents = list(pool.map(decide_parent, [(chosen.label, *job) for job in needed]))
+        decisions = recipe_decisions(
+            chosen, {**replayed, **{item["certificate"]: item for item in parents}}
+        )
+        _write(
+            chosen.path(RECIPES),
+            {
+                "format": RECIPES_FORMAT,
+                chosen.report_key: chosen.issue_url,
+                "checker": "packing/devtools/construction_checker.py",
+                "lemma": checker.LEMMA,
+                "controls": list(checker.CONTROLS),
+                "parents": parents,
+                "rows": decisions,
+            },
+        )
+        written[chosen.label] = sum(1 for item in decisions if item["verdict"] == "decided")
+    return written
+
+
+def recipe_problems(chosen: Release, *, replay: bool, workers: int) -> list[str]:
+    """Where a release's recipe rows are not decided as its receipt says (`RECIPES`):
+    each derived again from the stored parent replays, each decided with every control
+    refused, and each parent replayed on both routes with its six controls refused; with
+    ``replay`` the parents that are not rows are decided again."""
+    rows = recipe_claims(chosen)
+    path = chosen.path(RECIPES)
+    if not rows:
+        return (
+            [f"{chosen.label}: recipe decisions with no recipe row"] if path.is_file() else []
+        )
+    if not path.is_file():
+        return [f"{chosen.label}: {len(rows)} recipe rows and no recipe decisions"]
+    receipt = _read(path)
+    parents = {item["certificate"]: item for item in receipt["parents"]}
+    problems = [
+        f"{chosen.label}: the recipe parent {item['certificate']} is not verified with its "
+        "six controls refused by both routes"
+        for item in receipt["parents"]
+        if not item["verified"]
+        or len(item["controls"]) != len(base.CONTROLS)
+        or not all(
+            c["refused_by_sqpack"] and c["refused_by_independent"] for c in item["controls"]
+        )
+    ]
+    if receipt["rows"] != recipe_decisions(chosen, {**_replayed_parents(chosen), **parents}):
+        problems.append(f"{chosen.label}: the recipe decisions differ from their derivation")
+    problems.extend(
+        f"{chosen.label} n={item['n']}: the recipe is {item['verdict']}"
+        + (f", {item['reason']}" if item.get("reason") else "")
+        for item in receipt["rows"]
+        if item["verdict"] != checker.DECIDED
+        or not all(control["refused"] for control in item["controls"])
+    )
+    if replay and receipt["parents"]:
+        jobs = [
+            (chosen.label, item["certificate"], int(item["n"])) for item in receipt["parents"]
+        ]
+        with ProcessPoolExecutor(max_workers=workers) as pool:
+            again = list(pool.map(decide_parent, jobs))
+        problems.extend(
+            f"{chosen.label}: the replay of the recipe parent {kept['certificate']} differs"
+            for kept, fresh in zip(receipt["parents"], again, strict=True)
+            if _stable(fresh) != _stable(kept)
+        )
+    return problems
 
 
 # --------------------------------------------------------------------------- first commits
@@ -2024,10 +2366,7 @@ def first_commits(issue: int | str, clone: Path) -> dict[str, Any]:
             first.setdefault(meta.split()[2], commit)
     rows = []
     for row in [*decided_claims(chosen), *held_claims(chosen)]:
-        if chosen.derived:
-            blob = _pinned_blob(chosen, row, clone)
-        else:
-            blob = git_blob(read_retained_bytes(archive(chosen) / row.path))
+        blob = _pinned_blob(chosen, row, clone) if chosen.derived else blob_of(chosen, row.path)
         commit = first[blob]
         item = {
             "n": row.n,
@@ -2075,7 +2414,7 @@ def _utc(stamp: str) -> str:
 def exhaustive_row(job: tuple[str, int]) -> dict[str, Any]:
     """The maintained all-pairs kernel on one row, beside the filtered decision of it."""
     chosen = release(job[0])
-    row = next(row for row in decided_claims(chosen) if row.n == job[1])
+    row = next(row for row in replayed_claims(chosen) if row.n == job[1])
     cert = certificate(chosen, row)
     wall = time.monotonic()
     case = kernel.run_case(cert, "positive")
@@ -2104,7 +2443,7 @@ def exhaustive(issue: int | str, counts: Sequence[int], workers: int) -> dict[st
     """The all-pairs kernel on chosen rows of one release, each against the filtered one."""
     chosen = release(issue)
     custody(chosen)
-    decided = {row.n for row in decided_claims(chosen)}
+    decided = {row.n for row in replayed_claims(chosen)}
     for n in counts:
         _require(n in decided, f"{chosen.label} n={n}: not a decided row")
     started = datetime.now(UTC)
@@ -2230,6 +2569,8 @@ def beyond_horizon_rows(
             "deleted": row.deleted,
             "first_committed": chosen.first_commit_of(row.n)[1],
         }
+        if row.recipe is not None:
+            result["recipe"] = dict(row.recipe)
         if chosen.rounding != UP:
             result["issue_print"] = row.printed
         results.append(result)
@@ -2480,15 +2821,19 @@ def _standing(chosen: Release) -> dict[int, Standing]:
 
 def release_sides(chosen: Release, clone: Path | None) -> dict[int, Fraction]:
     """Each claimed row's exact side: from the packet's frozen claim record, and for a row
-    the packet does not derive (above its window), from the header of the file a clone of
-    the source holds at the retained commit, refused unless it has the digest the packet
-    pins."""
+    the packet does not derive (above its window), from the release's hosted shard where it
+    is hosted, else from the header of the file a clone of the source holds at the retained
+    commit, refused unless it has the digest the packet pins."""
     record = _read(chosen.directory / reports.CLAIMS)
     stated = {item["n"]: Fraction(item["exact_side"]) for item in record["results"]}
     sides: dict[int, Fraction] = {}
     for row in claims(chosen):
         if row.n in stated:
             sides[row.n] = stated[row.n]
+            continue
+        if is_hosted(chosen, row.path):
+            raw = certificate_bytes(chosen, row.path)
+            sides[row.n] = header_side(raw, row.certificate_n, f"{chosen.label} n={row.n}")
             continue
         _require(clone is not None, f"{chosen.label} n={row.n}: no clone to read it from")
         assert clone is not None
@@ -3413,20 +3758,34 @@ def named_count(path: str) -> int | None:
     return None if match is None else int(match[1])
 
 
-def source_history(issue: int | str, clone: Path) -> dict[str, Any]:
-    """Every side a release's own repository published in a certificate file at
-    `HISTORY_COUNTS`, from a clone.
+def source_history_path(chosen: Release, walk: Walk | None = None) -> Path:
+    """Where a release's source-history receipt for ``walk`` is kept: `SOURCE_HISTORY` for
+    its own walk, and ``receipts/source-history-WALK.json`` for the walk above 1024."""
+    if walk is None or walk.name == chosen.walk:
+        return chosen.path(SOURCE_HISTORY)
+    return chosen.path(SOURCE_HISTORY.with_name(f"source-history-{walk.name}.json"))
+
+
+def source_history(issue: int | str, clone: Path, walk: Walk | None = None) -> dict[str, Any]:
+    """Every side a release's own repository published in a certificate file at the counts
+    beyond the corpus a walk reaches, from a clone: its own walk by default, which reaches
+    `HISTORY_COUNTS`.
 
     The repository is watched, so each certificate there is a publication from the first
     commit of the retained commit's history that holds its side. Only certificate files
-    whose paths name a count in `HISTORY_COUNTS` are read (`_COUNT_NAMED`), so a blobless
-    clone fetches no certificate above `FROZEN_THROUGH`, and each file's header must state the
+    whose paths name a count the walk reaches are read (`_COUNT_NAMED`), so a blobless clone
+    fetches no certificate outside it, and each file's header must state the
     count its path names. At the retained commit each count's certificate is listed with
     its Git blob, SHA-256 and exact side, the first commit that holds its side and the first
     that holds its blob, and is held to the release's index (``Release.index``, by default the
     source's manifest, `SOURCE_MANIFEST`): the path, digest and exact bound the index states
     for the count must be the file's. f1ceee4 left the manifest as the commit before it wrote
     it, so its release is held to ``certified_bounds.json``, the index it rewrote.
+
+    Above 1024, where a release's certificates are hosted (`Release.hosted`), the files at
+    the retained commit are read from the shards, each held to the Git blob the clone's tree
+    names, so a blobless clone fetches only the earlier blobs at those paths; the first
+    commits come from the clone's trees.
 
     The source's decimal poses and its own indexes are not read. At #732's source no
     ``verified`` or certified bound either index states at 325 to 1024, the lanes the history
@@ -3435,6 +3794,11 @@ def source_history(issue: int | str, clone: Path) -> dict[str, Any]:
     Kingbird catalogue's 14-place prints (the packet README).
     """
     chosen = release(issue)
+    walk = walk or walk_of(chosen)
+
+    def wanted(n: int | None) -> bool:
+        return n is not None and n > reports.HORIZON and walk.reaches(n)
+
     chain = _git(clone, "rev-list", "--reverse", "--topo-order", chosen.retained).split()
     _require(chain and chain[-1] == chosen.retained, "the clone does not hold the commit")
     times = {
@@ -3451,13 +3815,23 @@ def source_history(issue: int | str, clone: Path) -> dict[str, Any]:
         for line in _git(clone, "ls-tree", "-r", commit).splitlines():
             meta, _, path = line.partition("\t")
             n = named_count(path)
-            if n is None or n not in HISTORY_COUNTS:
+            if n is None or not wanted(n):
                 continue
             blob = meta.split()[2]
             first.setdefault((blob, path), commit)
             if commit == chosen.retained:
                 at_pin.setdefault(n, []).append((path, blob))
-    texts = _blobs(clone, sorted({blob for blob, _ in first}))
+    hosted = {
+        blob: path
+        for items in at_pin.values()
+        for path, blob in items
+        if is_hosted(chosen, path)
+    }
+    texts = _blobs(clone, sorted({blob for blob, _ in first} - set(hosted)))
+    for blob, path in hosted.items():
+        raw = certificate_bytes(chosen, path)
+        _require(git_blob(raw) == blob, f"{path}: the hosted bytes are not the clone's blob")
+        texts[blob] = raw
     sides: dict[str, Fraction] = {}
     for (blob, path), _commit in sorted(first.items()):
         header = _header(texts[blob])
@@ -3518,18 +3892,17 @@ def source_history(issue: int | str, clone: Path) -> dict[str, Any]:
                 "blob_first_published": times[blob_first[blob]],
             }
         )
-    in_range = sorted(int(key) for key in stated if int(key) in HISTORY_COUNTS)
+    in_range = sorted(int(key) for key in stated if wanted(int(key)))
     _require(
         in_range == sorted(at_pin),
-        f"{chosen.index} states other counts at or below {FROZEN_THROUGH} than the commit "
-        "holds",
+        f"{chosen.index} states other counts {walk.reach} than the commit holds",
     )
     return {
         "format": SOURCE_HISTORY_FORMAT,
         "source": chosen.source_url,
         "retained_commit": chosen.retained,
         "history_commits": len(chain),
-        "counts": [HISTORY_COUNTS.start, HISTORY_COUNTS.stop - 1],
+        "counts": [max(walk.above, reports.HORIZON) + 1, walk.through],
         "manifest": chosen.index,
         "manifest_sha256": hashlib.sha256(manifest_raw).hexdigest(),
         "at_commit": pin_rows,
@@ -3542,11 +3915,13 @@ def source_history(issue: int | str, clone: Path) -> dict[str, Any]:
     }
 
 
-def write_source_history(issue: int | str, clone: Path) -> dict[str, int]:
-    """Write a release's source-history receipt; return its counts at the commit and its
-    publications."""
-    record = source_history(issue, clone)
-    _write(release(issue).path(SOURCE_HISTORY), record)
+def write_source_history(
+    issue: int | str, clone: Path, walk: Walk | None = None
+) -> dict[str, int]:
+    """Write a release's source-history receipt for a walk (`source_history_path`); return
+    its counts at the commit and its publications."""
+    record = source_history(issue, clone, walk)
+    _write(source_history_path(release(issue), walk), record)
     return {"at_commit": len(record["at_commit"]), "publications": len(record["publications"])}
 
 
@@ -3618,7 +3993,7 @@ def release_walk_sources(
     chosen = release(issue)
     walk = walk or walk_of(chosen)
     read_at_main = WALK_READ_AT_MAIN[walk.name]
-    history = _read(chosen.path(SOURCE_HISTORY))
+    history = _read(source_history_path(chosen, walk))
     own = {
         row["n"]: row
         for row in history["at_commit"]
@@ -4608,17 +4983,17 @@ def claim_map_walk_sources(
     }
 
 
-def write_release_walk_sources(issue: int | str, read_on: str) -> int:
+def write_release_walk_sources(issue: int | str, read_on: str, walk: Walk | None = None) -> int:
     """Write a release walk's ``sources.yaml`` (`release_walk_sources`, or
-    `claim_map_walk_sources` for a release whose claims are re-derived); return how many
-    reports it holds."""
+    `claim_map_walk_sources` for a release whose claims are re-derived), for its own walk
+    or ``walk``; return how many reports it holds."""
     import yaml  # noqa: PLC0415
 
     chosen = release(issue)
     document = (claim_map_walk_sources if chosen.claim_map else release_walk_sources)(
-        issue, read_on
+        issue, read_on, walk
     )
-    target = walk_of(release(issue)).directory / "sources.yaml"
+    target = (walk or walk_of(chosen)).directory / "sources.yaml"
     target.parent.mkdir(parents=True, exist_ok=True)
     with atomic_output_file(target) as temporary:
         temporary.write_text(
@@ -4640,7 +5015,9 @@ def declared_rows(chosen: Release) -> dict[str, Any]:
     hold is a row at its parent's side, declaring the parent's certificate and the squares
     it deletes (``deleted``), which the replay decides as the parent's first ``n`` poses;
     whether an issue's deletion bound gets a row is think-kzme's, so a walk holds it until
-    the owner answers."""
+    the owner answers. A recipe the walk records and does not hold is a row by the owner's
+    D2 answer, declaring its parent's certificate and the recipe the construction checker
+    decides (`write_recipe_decisions`)."""
     commit = chosen.pin
     if chosen.claim_map:
         found = {
@@ -4649,13 +5026,16 @@ def declared_rows(chosen: Release) -> dict[str, Any]:
                 "path": item["certificate"],
                 "side": item["exact"],
                 "deleted": int(item.get("deleted_squares") or 0),
+                **({"recipe": declared_recipe(item)} if item.get("construction") else {}),
             }
             for item in mapped_claims(chosen)
         }
     elif chosen.issue is not None:
         found = {
             row["n"]: {"kind": "certificate", "path": row["certificate"], "side": row["side"]}
-            for row in _read(chosen.path(SOURCE_HISTORY))["at_commit"]
+            for walk in walks_of(chosen)
+            if source_history_path(chosen, walk).is_file()
+            for row in _read(source_history_path(chosen, walk))["at_commit"]
         }
     else:
         found = {
@@ -4688,11 +5068,14 @@ def declared_rows(chosen: Release) -> dict[str, Any]:
         item = found[n]
         deleted = int(item.get("deleted") or 0)
         _require(
-            item["kind"] == "certificate" or (item["kind"] == "deletion" and deleted > 0),
-            f"{chosen.label} n={n}: no certificate file",
+            item["kind"] == "certificate"
+            or (item["kind"] == "deletion" and deleted > 0)
+            or "recipe" in item,
+            f"{chosen.label} n={n}: no certificate file and no recipe",
         )
         row = {"n": n, "certificate": item["path"], "printed": ceiling(Fraction(item["side"]))}
-        rows.append(row | ({"deleted": deleted} if deleted else {}))
+        row |= {"deleted": deleted} if deleted else {}
+        rows.append(row | ({"recipe": item["recipe"]} if "recipe" in item else {}))
     declared: dict[str, Any] = {
         "format": WATCHED_FORMAT,
         "publication": chosen.issue_url,
@@ -4702,6 +5085,21 @@ def declared_rows(chosen: Release) -> dict[str, Any]:
     if chosen.issue is None:
         declared["published"] = chosen.reported
     return declared | {"walk": chosen.walk, "rows": rows}
+
+
+def declared_recipe(item: Mapping[str, Any]) -> dict[str, Any]:
+    """A claim map's recipe as a declared row carries it (`recipe_of` reads it back): the
+    construction, the exact bound the index states and the parent's SHA-256."""
+    recipe = checker.recipe_from_index(item)
+    return {
+        "kind": recipe.kind,
+        "source_n": recipe.source_n,
+        "tiles_per_side": recipe.tiles_per_side,
+        "layers": recipe.layers,
+        "capacity": recipe.capacity,
+        "bound": legacy.literal(recipe.bound),
+        "sha256": recipe.parent_sha256,
+    }
 
 
 def declare_rows() -> dict[str, int]:
@@ -5619,7 +6017,8 @@ def sample_problems(
 def release_problems(chosen: Release, *, replay: bool, workers: int) -> list[str]:
     """Problems with one packet's receipts and record; empty when they hold."""
     custody(chosen)
-    rows = decided_claims(chosen)
+    decided = decided_claims(chosen)
+    rows = [row for row in decided if row.recipe is None]
     receipt = _read(chosen.path(FILTERED))
     stored = receipt["rows"]
     if [row["n"] for row in stored] != [row.n for row in rows]:
@@ -5640,11 +6039,12 @@ def release_problems(chosen: Release, *, replay: bool, workers: int) -> list[str
             for row, kept, fresh in zip(rows, stored, again, strict=True)
             if _stable(fresh) != _stable(kept)
         )
+    problems += recipe_problems(chosen, replay=replay, workers=workers)
     record = chosen.path(RECORD)
     rebuilt = retained_dumps(beyond_horizon_rows(chosen, sides), sort_keys=True)
     if not record.is_file() or record.read_text(encoding="utf-8") != rebuilt:
         problems.append(f"{chosen.label}: the beyond-horizon record differs from its rebuild")
-    return problems + _cross_check_problems(chosen, rows, sides)
+    return problems + _cross_check_problems(chosen, decided, sides)
 
 
 def _cross_check_problems(
@@ -5666,10 +6066,7 @@ def _cross_check_problems(
         expected = [(row.n, row.path, pinned[row.path]) for row in held]
         found = [(item["n"], item["certificate"], item["sha256"]) for item in commits["rows"]]
     else:
-        expected = [
-            (row.n, row.path, git_blob(read_retained_bytes(archive(chosen) / row.path)))
-            for row in held
-        ]
+        expected = [(row.n, row.path, blob_of(chosen, row.path)) for row in held]
         found = [(item["n"], item["certificate"], item["blob"]) for item in commits["rows"]]
     if found != expected:
         problems.append(f"{chosen.label}: the first commits are not the retained certificates'")
@@ -5767,6 +6164,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     own_history = commands.add_parser("source-history")
     own_history.add_argument("--issue", required=True, help=KEY_HELP)
     own_history.add_argument("--clone", type=Path, required=True)
+    own_history.add_argument("--walk", default="", help="a walk of WALKS; the release's own")
     after_pin = commands.add_parser("later-commits")
     after_pin.add_argument("--issue", required=True, help=KEY_HELP)
     after_pin.add_argument("--clone", type=Path, required=True)
@@ -5777,6 +6175,10 @@ def main(argv: Sequence[str] | None = None) -> int:
     transcribe_release = commands.add_parser("release-sources")
     transcribe_release.add_argument("--issue", required=True, help=KEY_HELP)
     transcribe_release.add_argument("--read-on", required=True)
+    transcribe_release.add_argument("--walk", default="", help="a walk of WALKS")
+    decide_recipes = commands.add_parser("recipe-decisions")
+    decide_recipes.add_argument("--issue", nargs="+", required=True, help=KEY_HELP)
+    decide_recipes.add_argument("--workers", type=int, default=2)
     commands.add_parser("declare-rows")
     commands.add_parser("coverage-plan")
     commands.add_parser("held-dependents")
@@ -5806,11 +6208,16 @@ def main(argv: Sequence[str] | None = None) -> int:
             dict(_clone(item) for item in args.clone), args.start_coverage
         ),
         "history-sources": lambda: write_history_sources(args.read_on),
-        "source-history": lambda: write_source_history(args.issue, args.clone),
+        "source-history": lambda: write_source_history(
+            args.issue, args.clone, WALKS[args.walk] if args.walk else None
+        ),
         "later-commits": lambda: write_later_commits(args.issue, args.clone),
         "decide-later": lambda: write_decide_later(args.issue),
         "pose-identity": lambda: write_pose_identity(args.issue),
-        "release-sources": lambda: write_release_walk_sources(args.issue, args.read_on),
+        "release-sources": lambda: write_release_walk_sources(
+            args.issue, args.read_on, WALKS[args.walk] if args.walk else None
+        ),
+        "recipe-decisions": lambda: write_recipe_decisions(args.issue, args.workers),
         "declare-rows": declare_rows,
         "coverage-plan": lambda: {
             "rows": planned_rows(),
