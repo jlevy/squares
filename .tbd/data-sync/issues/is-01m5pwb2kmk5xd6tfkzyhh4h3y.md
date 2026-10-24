@@ -3,17 +3,21 @@ type: is
 id: is-01m5pwb2kmk5xd6tfkzyhh4h3y
 title: "Import the 99 Kaggle-credited sides franciscouzo/square-packing published at 964ee2b (pushed 2026-10-23T23:38:42Z): 87 certificates and 12 recipes at 325-1024, each 1.46e-4 to 6.60e-2 below main's record, credited to notebook authors (no issue)"
 kind: task
-status: open
+status: in_progress
 priority: 1
-version: 3
+version: 4
+delegate: c-triage-lyf9-1024
 labels:
   - result-import
 dependencies:
   - type: blocks
     target: is-01m5pjxq31vpw03t0emgwnvhfe
 parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
+hold: null
+hold_until: null
 created_at: 2026-10-24T11:57:05.011Z
-updated_at: 2026-10-24T11:57:23.422Z
+updated_at: 2026-10-24T13:38:16.607Z
+started_at: 2026-10-24T13:38:16.607Z
 ---
 
 ## Notes

@@ -3,15 +3,19 @@ type: is
 id: is-01m5pjxn8ykge4h67nqv0hgqer
 title: "Import evand and franciscouzo: s(268) <= 16.874361715870 and s(304) <= 17.926898900357 (evand/square-packing 8a8879a), and s(304) <= 17.926898903393 (franciscouzo/square-packing fa6237e, Tymchishin's packing) (no issue)"
 kind: task
-status: open
+status: in_progress
 priority: 2
-version: 2
+version: 3
+delegate: c-import-l49q-1024
 labels:
   - result-import
 dependencies: []
 parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
+hold: null
+hold_until: null
 created_at: 2026-10-24T09:12:28.189Z
-updated_at: 2026-10-24T09:12:49.374Z
+updated_at: 2026-10-24T13:38:16.088Z
+started_at: 2026-10-24T13:38:16.088Z
 ---
 
 ## Notes
