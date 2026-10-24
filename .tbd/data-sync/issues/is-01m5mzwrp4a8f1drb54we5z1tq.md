@@ -5,17 +5,18 @@ title: "PR #745 (merge): senior review, address, gate"
 kind: task
 status: in_progress
 priority: 2
-version: 4
+version: 5
 delegate: c-rev-745-1023
 labels: []
 dependencies: []
 parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 child_order_hints:
   - is-01m5ndfyhknd8p766m3pnpgn4a
+  - is-01m5nvh5ndwftscfb39m9ma4fb
 hold: null
 hold_until: null
 created_at: 2026-10-23T18:20:41.540Z
-updated_at: 2026-10-23T22:18:21.615Z
+updated_at: 2026-10-24T02:23:41.741Z
 started_at: 2026-10-23T18:20:46.241Z
 ---
 
