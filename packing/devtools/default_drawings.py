@@ -399,21 +399,6 @@ _README_QL4V = (
     "packing/cases/regularized_drawings/think-ql4v-2026-10-22/README.md, the selection of 22 "
     "October 2026 (think-ql4v), beside the runs' receipt, blocks and reports"
 )
-#: Both generators on the witness the adoption of 23 October 2026 moved to Evan Daniel's
-#: certificate of issue 728 (T-230, think-icp1) at 303: his regularizer and grid-slack at
-#: 0.5, 1 and 5 degrees. The selection drew nothing and decided 303 (`SETTLED`). Their
-#: receipt, run blocks, reports and the selection's report are in
-#: packing/cases/regularized_drawings/think-icp1-2026-10-23/.
-_RUNICP1 = (
-    ("evand-regularize", "evand-regularize-adopt-2026-10-23-n303-evand"),
-    ("regularize_grid_slack/1", "grid-slack-adopt-2026-10-23-n303-grid-deg05"),
-    ("regularize_grid_slack/1", "grid-slack-adopt-2026-10-23-n303-grid-deg1"),
-    ("regularize_grid_slack/1", "grid-slack-adopt-2026-10-23-n303-grid-deg5"),
-)
-_README_ICP1 = (
-    "packing/cases/regularized_drawings/think-icp1-2026-10-23/README.md, the selection of 23 "
-    "October 2026 (think-icp1), beside the runs' receipt, blocks and reports"
-)
 _T225 = "[Daniel regularized lists 2026-10-20]"
 _T225_CERTS = "resources/web/evand-regularized-2026-10-20/source/search/regularize/lists/certs/"
 _T225_REVISION = "0075967bace18a3deabcc0baa64c2fb294fc80a0"
@@ -1051,22 +1036,6 @@ SETTLED: dict[int, Settled] = {
         "certificate), and grid-slack finds no view at 0.5, 1 or 5 degrees (relaxed "
         "rows overlap at this side)",
         _README_3MRY,
-    ),
-    303: Settled(
-        DECIDED,
-        "[Daniel n303 2026-10-22]",
-        "resources/web/evand-n303-2026-10-22/source/search/packer/candidates/s303_r303w0.cert",
-        "f06521f4bde9e379a91c1ea88053f3e43df8ede5",
-        "447744305431858194305431410441/25000000000000000000000000000",
-        _RUNICP1,
-        "Evan Daniel's regularizer finds the witness not first-order jammed and yields no "
-        "view (row 1), and grid-slack's views at 0.5, 1 and 5 degrees, one view at the "
-        "witness's side that straightens its 15 near-upright squares, are sent to review at "
-        "row 7: better than the axis tool's view on near-axis squares, angle classes and "
-        "both totals of shared sides, and worse on light squares (13 to 12)",
-        _README_ICP1,
-        "think-ykgh: the owner's row-7 review of grid-slack's view at 303; until a review "
-        "record admits it, the axis tool's view stays drawn",
     ),
     304: Settled(
         DECIDED,

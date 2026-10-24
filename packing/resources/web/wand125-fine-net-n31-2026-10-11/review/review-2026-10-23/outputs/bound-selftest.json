@@ -1,0 +1,324 @@
+{
+ "kind": "review-2026-10-23-n31-bound-selftest/v1",
+ "status": "PASS",
+ "cells": 24,
+ "points_per_cell": 7,
+ "least_gap": 6.796443483983797e-22,
+ "rows": [
+  {
+   "j": 0,
+   "cell": [
+    206,
+    9,
+    361,
+    9
+   ],
+   "bound": 1.3292029498282918,
+   "least_capture_at_points": 1.3293294523400412,
+   "bound_at_most_every_capture": true,
+   "gap": 0.00012650251174940798
+  },
+  {
+   "j": 0,
+   "cell": [
+    825,
+    10,
+    40,
+    10
+   ],
+   "bound": 1.127115205803615,
+   "least_capture_at_points": 1.1271383795955126,
+   "bound_at_most_every_capture": true,
+   "gap": 2.3173791897562708e-05
+  },
+  {
+   "j": 0,
+   "cell": [
+    62,
+    10,
+    558,
+    10
+   ],
+   "bound": 1.0859170879370068,
+   "least_capture_at_points": 1.0859797302139302,
+   "bound_at_most_every_capture": true,
+   "gap": 6.264227692350709e-05
+  },
+  {
+   "j": 0,
+   "cell": [
+    138,
+    8,
+    154,
+    8
+   ],
+   "bound": 1.1328196745142907,
+   "least_capture_at_points": 1.1580128351980112,
+   "bound_at_most_every_capture": true,
+   "gap": 0.02519316068372044
+  },
+  {
+   "j": 0,
+   "cell": [
+    317,
+    10,
+    165,
+    11
+   ],
+   "bound": 1.1465760889719394,
+   "least_capture_at_points": 1.1467386374728679,
+   "bound_at_most_every_capture": true,
+   "gap": 0.0001625485009283542
+  },
+  {
+   "j": 0,
+   "cell": [
+    459,
+    9,
+    414,
+    9
+   ],
+   "bound": 1.2080754969686034,
+   "least_capture_at_points": 1.2080754969686034,
+   "bound_at_most_every_capture": true,
+   "gap": 6.796443483983797e-22
+  },
+  {
+   "j": 1,
+   "cell": [
+    12,
+    5,
+    15,
+    6
+   ],
+   "bound": 1.0428588862778656,
+   "least_capture_at_points": 1.0956180348755291,
+   "bound_at_most_every_capture": true,
+   "gap": 0.05275914859766336
+  },
+  {
+   "j": 1,
+   "cell": [
+    758,
+    10,
+    917,
+    10
+   ],
+   "bound": 1.2382183858442655,
+   "least_capture_at_points": 1.2382188130403462,
+   "bound_at_most_every_capture": true,
+   "gap": 4.2719608080116684e-07
+  },
+  {
+   "j": 1,
+   "cell": [
+    133,
+    11,
+    1169,
+    11
+   ],
+   "bound": 1.0710158149062787,
+   "least_capture_at_points": 1.0710160522069991,
+   "bound_at_most_every_capture": true,
+   "gap": 2.3730072046063444e-07
+  },
+  {
+   "j": 1,
+   "cell": [
+    357,
+    9,
+    455,
+    10
+   ],
+   "bound": 1.3199724295452644,
+   "least_capture_at_points": 1.3201768365574924,
+   "bound_at_most_every_capture": true,
+   "gap": 0.000204407012228124
+  },
+  {
+   "j": 1,
+   "cell": [
+    46,
+    6,
+    3,
+    6
+   ],
+   "bound": 1.2327026774055767,
+   "least_capture_at_points": 1.2358826289509273,
+   "bound_at_most_every_capture": true,
+   "gap": 0.0031799515453506746
+  },
+  {
+   "j": 1,
+   "cell": [
+    14,
+    5,
+    1,
+    5
+   ],
+   "bound": 1.0996978149715466,
+   "least_capture_at_points": 1.142150950436331,
+   "bound_at_most_every_capture": true,
+   "gap": 0.04245313546478441
+  },
+  {
+   "j": 296,
+   "cell": [
+    26,
+    5,
+    14,
+    5
+   ],
+   "bound": 1.1614427658526745,
+   "least_capture_at_points": 1.1930360850576653,
+   "bound_at_most_every_capture": true,
+   "gap": 0.031593319204990936
+  },
+  {
+   "j": 296,
+   "cell": [
+    19,
+    6,
+    15,
+    6
+   ],
+   "bound": 1.0885148322607163,
+   "least_capture_at_points": 1.1103931223085008,
+   "bound_at_most_every_capture": true,
+   "gap": 0.021878290047784528
+  },
+  {
+   "j": 296,
+   "cell": [
+    109,
+    7,
+    153,
+    8
+   ],
+   "bound": 1.1155076785157236,
+   "least_capture_at_points": 1.1801950998110056,
+   "bound_at_most_every_capture": true,
+   "gap": 0.06468742129528204
+  },
+  {
+   "j": 296,
+   "cell": [
+    8,
+    10,
+    95,
+    10
+   ],
+   "bound": 1.124017499402827,
+   "least_capture_at_points": 1.1244003817044899,
+   "bound_at_most_every_capture": true,
+   "gap": 0.00038288230166303756
+  },
+  {
+   "j": 296,
+   "cell": [
+    6,
+    5,
+    22,
+    6
+   ],
+   "bound": 0.8405410172803449,
+   "least_capture_at_points": 1.096747504245484,
+   "bound_at_most_every_capture": true,
+   "gap": 0.256206486965139
+  },
+  {
+   "j": 296,
+   "cell": [
+    3685,
+    12,
+    1304,
+    12
+   ],
+   "bound": 1.1565283592374593,
+   "least_capture_at_points": 1.156554474377315,
+   "bound_at_most_every_capture": true,
+   "gap": 2.611513985585127e-05
+  },
+  {
+   "j": 2072,
+   "cell": [
+    130,
+    8,
+    110,
+    8
+   ],
+   "bound": 1.3129408395940259,
+   "least_capture_at_points": 1.3182374041832752,
+   "bound_at_most_every_capture": true,
+   "gap": 0.005296564589249292
+  },
+  {
+   "j": 2072,
+   "cell": [
+    188,
+    9,
+    385,
+    10
+   ],
+   "bound": 1.21884329596708,
+   "least_capture_at_points": 1.2198187065493866,
+   "bound_at_most_every_capture": true,
+   "gap": 0.0009754105823064933
+  },
+  {
+   "j": 2072,
+   "cell": [
+    3191,
+    12,
+    1757,
+    12
+   ],
+   "bound": 1.4482897982851246,
+   "least_capture_at_points": 1.448462545739513,
+   "bound_at_most_every_capture": true,
+   "gap": 0.00017274745438837556
+  },
+  {
+   "j": 2072,
+   "cell": [
+    24,
+    5,
+    18,
+    5
+   ],
+   "bound": 0.997040166342977,
+   "least_capture_at_points": 1.131907372041681,
+   "bound_at_most_every_capture": true,
+   "gap": 0.13486720569870403
+  },
+  {
+   "j": 2072,
+   "cell": [
+    758,
+    12,
+    1598,
+    12
+   ],
+   "bound": 1.046509073730993,
+   "least_capture_at_points": 1.0465463590082997,
+   "bound_at_most_every_capture": true,
+   "gap": 3.7285277306820085e-05
+  },
+  {
+   "j": 2072,
+   "cell": [
+    167,
+    9,
+    145,
+    9
+   ],
+   "bound": 1.0168062933807276,
+   "least_capture_at_points": 1.0190321842553067,
+   "bound_at_most_every_capture": true,
+   "gap": 0.0022258908745790692
+  }
+ ],
+ "program_sha256": "d4c4cc9b313fde214aba5eb03544c40e3a09ff1a0a903d70965c20718b87fedb",
+ "capture_sha256": "783429185f890015440b3d937ad79a0ad353da1e4d9912e3e764aad648798ce9",
+ "cpu_seconds": 10.353
+}

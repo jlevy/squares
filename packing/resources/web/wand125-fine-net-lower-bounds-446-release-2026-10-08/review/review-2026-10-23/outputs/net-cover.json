@@ -1,0 +1,27 @@
+{
+ "coverage": {
+  "consecutive_bins_share_endpoints": true,
+  "first_bin_starts_at_or_below_0": true,
+  "last_bin_reaches_past_tan_pi_8": true
+ },
+ "cpu_seconds": 0.957,
+ "domain_monotonicity_checks": 10360,
+ "failures": [],
+ "half_step": "1/10004",
+ "kind": "t233-review-net-cover/v1",
+ "largest_half_turn_tangent": "1/10004",
+ "least_clearance_at": [
+  0,
+  "1/10004"
+ ],
+ "least_clearance_decimal": 6.996701449401233e-08,
+ "least_clearance_of_core_inside_unit_square": "70023/1000800170000",
+ "net": {
+  "B": "4999/5000",
+  "last": 2072,
+  "step": "1/5002"
+ },
+ "orientations_checked": 10363,
+ "verdict": "NET_COVERS",
+ "wall_seconds": 2.872
+}

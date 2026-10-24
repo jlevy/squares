@@ -8,8 +8,8 @@ ours, which rest on someone else's argument, and how far each has been checked.
 
 ## The short version
 
-- **726** evidence records. **409** are formal; **401** of those were established here. **10** are samples, counted separately.
-- **300** rest on an argument made elsewhere, of which **7** have been read by nobody here.
+- **741** evidence records. **414** are formal; **406** of those were established here. **12** are samples, counted separately.
+- **308** rest on an argument made elsewhere, of which **7** have been read by nobody here.
 - **1** formal record proves a theorem only under a hypothesis nothing here has replayed, and is verified as that implication alone: `E-k2m4-evand-bentz4-lean-build` (ValidTilt9).
 - **43** claim to be first established here. **14** make no novelty statement at all - not assessed, which is not the same as not novel.
 
@@ -52,8 +52,8 @@ results, it is a statement about what this repository has itself examined.
 | `E-wand125-rectangle-2026-09-28-report` | 0 | lower-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | `V-tokoharu-verify-cpp` |
 | `E-wand125-rectangle-2026-09-28-monotone-report` | 0 | lower-bound | reported | - | here | - | previously-published | no code | not recorded | `V-tokoharu-verify-cpp` |
 | `E-wand125-rectangle-2026-09-28-source-replay` | 0 | lower-bound | verified | strict inequalities only | here | - | previously-published | producer’s code | not recorded | `V-tokoharu-verify-cpp`, `V-audit-wand125-rectangles` |
-| `E-wand125-rectangle-2026-10-01-report` | 2 | lower-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | `V-tokoharu-verify-cpp` |
-| `E-wand125-rectangle-2026-10-01-source-replay` | 2 | lower-bound | verified | strict inequalities only | here | - | previously-published | producer’s code | not recorded | `V-tokoharu-verify-cpp`, `V-audit-wand125-rectangles` |
+| `E-wand125-rectangle-2026-10-01-report` | 1 | lower-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | `V-tokoharu-verify-cpp` |
+| `E-wand125-rectangle-2026-10-01-source-replay` | 1 | lower-bound | verified | strict inequalities only | here | - | previously-published | producer’s code | not recorded | `V-tokoharu-verify-cpp`, `V-audit-wand125-rectangles` |
 | `E-n019-wand125-rect-48175-sqverify-fast-replay` | 0 | lower-bound | verified | strict inequalities only | here | - | previously-published | independent | not recorded | `V-sqverify-fast` |
 | `E-n020-wand125-rect-48975-sqverify-fast-replay` | 0 | lower-bound | verified | strict inequalities only | here | - | previously-published | independent | not recorded | `V-sqverify-fast` |
 | `E-n026-wand125-rect-55325-sqverify-fast-replay` | 0 | lower-bound | verified | strict inequalities only | here | - | previously-published | independent | not recorded | `V-sqverify-fast` |
@@ -488,7 +488,7 @@ results, it is a statement about what this repository has itself examined.
 | `E-gupta-438-exact-feasibility` | 2 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | independent | not recorded | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-gupta-complete-custody` |
 | `E-couzo-451-rational-report` | 0 | upper-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | *none held* |
 | `E-couzo-451-exact-feasibility` | 0 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | independent | not recorded | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-check-half-angle-area`, `V-evand-exact-certificates`, `V-evand-arrangement-receipts` |
-| `E-wand125-fine-net-n27-5655-followup-report` | 0 | lower-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-wand125-fine-net-n27-5655-followup-report` | 0 | lower-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | *none held* |
 | `E-daniel-375-dated-105-130-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
 | `E-daniel-375-dated-292-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
 | `E-couzo-extended-range-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | no code | not recorded | - |
@@ -668,9 +668,12 @@ results, it is a statement about what this repository has itself examined.
 | `E-evand-689-n308-exact-feasibility` | 1 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | independent | full, 1 of 1: the certificate at n = 308 that T-221 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-evand-arrangement-receipts`, `V-upper-bound-reports`, `V-evand-exact-certificates` |
 | `E-evand-694-n154-report` | 1 | upper-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | *none held* |
 | `E-evand-694-n154-exact-feasibility` | 1 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | independent | full, 1 of 1: the certificate at n = 154 that T-222 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-evand-arrangement-receipts`, `V-upper-bound-reports`, `V-evand-exact-certificates` |
-| `E-evand-728-n303-report` | 1 | upper-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | *none held* |
-| `E-evand-728-n303-exact-feasibility` | 1 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | shared components | full, 1 of 1: the certificate at n = 303 that T-230 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-evand-arrangement-receipts`, `V-upper-bound-reports`, `V-evand-exact-certificates` |
-| `E-evand-728-n303-review-exact-feasibility` | 1 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | full, 1 of 1: the certificate at n = 303 that T-230 cites, every wall and all 45,753 pairs, on each of the checker's two routes | `V-evand-728-review-check`, `V-evand-728-review-controls` |
+| `E-evand-728-n303-report` | 0 | upper-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | *none held* |
+| `E-evand-728-n303-exact-feasibility` | 0 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | shared components | full, 1 of 1: the certificate at n = 303 that T-230 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-evand-arrangement-receipts`, `V-upper-bound-reports`, `V-evand-exact-certificates` |
+| `E-evand-728-n303-review-exact-feasibility` | 0 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | full, 1 of 1: the certificate at n = 303 that T-230 cites, every wall and all 45,753 pairs, on each of the checker's two routes | `V-evand-728-review-check`, `V-evand-728-review-controls` |
+| `E-amundsk-755-n303-report` | 1 | upper-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | *none held* |
+| `E-amundsk-755-n303-exact-feasibility` | 1 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | shared components | full, 1 of 1: the certificate at n = 303 that T-239 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt and replay/sharp-controls.json | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-evand-arrangement-receipts`, `V-upper-bound-reports`, `V-evand-exact-certificates` |
+| `E-amundsk-755-n303-review-exact-feasibility` | 1 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | full, 1 of 1: the certificate at n = 303 that T-239 cites, every wall and all 45,753 pairs, on each of the checker's two routes | `V-amundsk-755-review-check`, `V-amundsk-755-review-controls` |
 | `E-evand-703-n270-report` | 1 | upper-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | *none held* |
 | `E-evand-703-n270-exact-feasibility` | 1 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | independent | full, 1 of 1: the certificate at n = 270 that T-224 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-evand-arrangement-receipts`, `V-upper-bound-reports`, `V-evand-exact-certificates` |
 | `E-wand125-fine-net-n38-65775-report` | 0 | lower-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | `V-wand125-sqverify-proof-net` |
@@ -747,15 +750,27 @@ results, it is a statement about what this repository has itself examined.
 | `E-couzo-23aff0c-beyond-horizon-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
 | `E-couzo-5a299b4-beyond-horizon-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
 | `E-mishapolk-732-beyond-horizon-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-n021-wand125-zero-margin-lean-report` | 0 | exact-value | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-n059-wand125-lean-kernel-report` | 0 | exact-value | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-fang-theorems-daniel-lean-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-small-n-chelokot-lean-report` | 0 | exact-value | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-small-n-daniel-rect-lean-report` | 0 | exact-value | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
 | `E-evand-gradec-local-minima-233-report` | 0 | derived-structure | reported | - | elsewhere | defect-found | previously-published | producer’s code | not recorded | `V-evand-gradec-py`, `V-evand-verify-exact` |
+| `E-wand125-fine-net-n31-59775-report` | 1 | lower-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | `V-wand125-sqverify-proof-net` |
+| `E-wand125-fine-net-446-n19-n20-n26-report` | 0 | lower-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | `V-wand125-sqverify-proof-net` |
+| `E-wand125-fine-net-446-review-premises` | 0 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | previously-published | not applicable | full: the exact premises of each of the four candidates: custody, the claim, the field order, the measure and its D4 expansion, lemma N0 (a) to (e), the sharp extent, the last bin, the per-bin domains, F3's caps and the semantic digest; the net's coverage at 10,363 exact orientations; the archived verifier's files against this repository's crate by digest | `V-wand125-446-review-premises` |
+| `E-wand125-fine-net-446-review-axis-direction` | 0 | lower-bound | verified | strict inequalities only | here | - | previously-published | independent | sample, 4 of 8,292: net directions (index 0 of each of the four certificates, decided over its whole per-bin quadrant) | `V-wand125-446-review-axis-decision` |
+| `E-wand125-fine-net-446-review-captures` | 0 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | previously-published | not applicable | full, 10,596 of 10,596: exact captures at the listed poses only: every rotated direction's least-bound box centre (8,288), the axis argmins (4), the 197/200 control witnesses (128, 124 equal to the source's fractions) and the end points of the searches at 128 sampled directions; no direction's domain | `V-wand125-446-review-exact-capture` |
+| `E-wand125-fine-net-n31-59775-sqverify-fast-replay` | 1 | lower-bound | verified | strict inequalities only | here | - | previously-published | shared components | full, 2,073 of 2,073: complete legal core-centre domains at every declared-net direction | `V-sqverify-fast` |
+| `E-wand125-fine-net-n31-59775-review-sample` | 0 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | sample, 122 of 2,073: net directions, each decided over its whole quadrant of centres | `V-review-1023-n31-premises`, `V-review-1023-n31-capture`, `V-review-1023-n31-poses` |
 | `E-mishapolk-732-f1ceee4-beyond-horizon-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
 
 ## What the register rests on
 
-- **assurance**: numerically-checked 5, reported 303, verified 418
-- **method**: exact-algebraic 228, interval-certified 173, numerical-multiprecision 5, proof-assistant-checked 6, proof-audited 4, published-proof 7, reported 303
-- **novelty**: apparently-novel 43, common-knowledge 4, not assessed 14, previously-published 665
-- **relationship to the producer's code**: generator 5, independent-implementation 255, not-applicable 31, same-implementation 397, shared-components 32, unknown-historical 6
+- **assurance**: numerically-checked 5, reported 311, verified 425
+- **method**: exact-algebraic 233, interval-certified 175, numerical-multiprecision 5, proof-assistant-checked 6, proof-audited 4, published-proof 7, reported 311
+- **novelty**: apparently-novel 43, common-knowledge 4, not assessed 14, previously-published 680
+- **relationship to the producer's code**: generator 5, independent-implementation 258, not-applicable 33, same-implementation 405, shared-components 34, unknown-historical 6
 
 The `cases` column is how many frontier records cite each piece of evidence, and it is the reason to read this table rather than count records. Ranked below are the *formal* records only: a `reported` record cited across the frontier may be a shared catalogue and is labelled as such, which is the register working rather than risk. The risk is a verified claim resting on an argument nobody has examined.
 

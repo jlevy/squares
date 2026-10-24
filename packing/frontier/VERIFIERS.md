@@ -25,8 +25,8 @@ second implementation agrees.
 
 ## The Short Version
 
-- **197** programs: **52** external and **145** first-party; **132** decide claims and **65** check premises.
-- **587** of **726** evidence entries name the programs that verified them: 281 reproduced with the producer’s code, 255 independently re-implemented, 32 re-implemented, sharing the producer’s components, 19 no relation: a proof, a derivation or a report.
+- **205** programs: **52** external and **153** first-party; **137** decide claims and **68** check premises.
+- **596** of **741** evidence entries name the programs that verified them: 283 reproduced with the producer’s code, 258 independently re-implemented, 34 re-implemented, sharing the producer’s components, 21 no relation: a proof, a derivation or a report.
 
 ## Programs
 
@@ -38,7 +38,7 @@ second implementation agrees.
 | [`V-tokoharu-verify-cpp`](#v-tokoharu-verify-cpp) | verify.cpp | Tokoharu | external | decides | 13 | 7 |
 | [`V-wand125-mixed-rotated-verify-cpp`](#v-wand125-mixed-rotated-verify-cpp) | mixed_rotated_verify.cpp | Hosono | external | decides | 89 | 14 |
 | [`V-wand125-verify-mixed-full-proof-py`](#v-wand125-verify-mixed-full-proof-py) | verify_mixed_full_proof.py | Hosono | external | decides | 66 | 11 |
-| [`V-wand125-sqverify-proof-net`](#v-wand125-sqverify-proof-net) | sqverify-proof-net | Hosono, adapting this repository's sqverify_fast | external | decides | 33 | 33 |
+| [`V-wand125-sqverify-proof-net`](#v-wand125-sqverify-proof-net) | sqverify-proof-net | Hosono, adapting this repository's sqverify_fast | external | decides | 35 | 35 |
 | [`V-wand125-unified-linear-verify-cpp`](#v-wand125-unified-linear-verify-cpp) | unified_linear_verify.cpp | Hosono | external | decides | 8 | 5 |
 | [`V-wand125-verify-portable-py`](#v-wand125-verify-portable-py) | verify_portable.py | Hosono | external | decides | 2 | 1 |
 | [`V-wand125-check-with-sqpack`](#v-wand125-check-with-sqpack) | check_with_sqpack.py | Hosono | external | decides | 5 | 1 |
@@ -78,10 +78,10 @@ second implementation agrees.
 | [`V-overbeck-n17-capture-checkers`](#v-overbeck-n17-capture-checkers) | recompute_slice.py | Overbeck | external | decides | 2 | 1 |
 | [`V-overbeck-n17-tree-checkers`](#v-overbeck-n17-tree-checkers) | wxcheck_v30.py and wxcheck2_v30.js | Overbeck | external | decides | 2 | 1 |
 | [`V-fitzharding-n17-lean`](#v-fitzharding-n17-lean) | The sq17-lean Lean 4 development (Sq17Lean) | Fitzharding | external | decides | 2 | 1 |
-| [`V-check-basic-bounds`](#v-check-basic-bounds) | devtools.check_basic_bounds | Squares Project (Levy) | first-party | decides | 3 | 16 |
-| [`V-optimal-moduli`](#v-optimal-moduli) | cases.small_n.optimal_moduli | Squares Project (Levy) | first-party | decides | 1 | 0 |
-| [`V-sqpack-verify`](#v-sqpack-verify) | sqpack.verify | Squares Project (Levy) | first-party | decides | 90 | 79 |
-| [`V-check-rational-witness-independent`](#v-check-rational-witness-independent) | devtools.check_rational_witness_independent | Squares Project (Levy) | first-party | decides | 84 | 82 |
+| [`V-check-basic-bounds`](#v-check-basic-bounds) | devtools.check_basic_bounds | Squares Project (Levy) | first-party | decides | 3 | 17 |
+| [`V-optimal-moduli`](#v-optimal-moduli) | cases.small_n.optimal_moduli | Squares Project (Levy) | first-party | decides | 1 | 1 |
+| [`V-sqpack-verify`](#v-sqpack-verify) | sqpack.verify | Squares Project (Levy) | first-party | decides | 91 | 81 |
+| [`V-check-rational-witness-independent`](#v-check-rational-witness-independent) | devtools.check_rational_witness_independent | Squares Project (Levy) | first-party | decides | 85 | 83 |
 | [`V-check-nagamochi-lemma1-counterexample`](#v-check-nagamochi-lemma1-counterexample) | devtools.check_nagamochi_lemma1_counterexample | Squares Project (Levy) | first-party | decides | 1 | 1 |
 | [`V-check-karakus-strip-measure`](#v-check-karakus-strip-measure) | devtools.check_karakus_strip_measure | Squares Project (Levy) | first-party | decides | 1 | 2 |
 | [`V-upper-bound-promotion`](#v-upper-bound-promotion) | devtools.upper_bound_packets | Squares Project (Levy) | first-party | decides | 6 | 5 |
@@ -149,9 +149,11 @@ second implementation agrees.
 | [`V-mishapolk-n204-review-controls`](#v-mishapolk-n204-review-controls) | sharp_controls_t231.py | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-overbeck-review3-seed-packing`](#v-overbeck-review3-seed-packing) | seed_packing_check.py | Squares Project (Levy) | first-party | premises | 1 | 0 |
 | [`V-evand-728-review-controls`](#v-evand-728-review-controls) | sharp_controls_728.py | Squares Project (Levy) | first-party | premises | 1 | 1 |
+| [`V-amundsk-755-review-check`](#v-amundsk-755-review-check) | review_t238_check.py | Squares Project (Levy) | first-party | decides | 1 | 1 |
+| [`V-amundsk-755-review-controls`](#v-amundsk-755-review-controls) | sharp_controls_t238.py | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-overbeck-review3-spec-lemmas`](#v-overbeck-review3-spec-lemmas) | spec_lemmas_numeric.py | Squares Project (Levy) | first-party | premises | 1 | 0 |
 | [`V-overbeck-review3-parallel-rows`](#v-overbeck-review3-parallel-rows) | parallel_row_check.py | Squares Project (Levy) | first-party | premises | 0 | 0 |
-| [`V-evand-exact-certificates`](#v-evand-exact-certificates) | devtools.evand_exact_certificates | Squares Project (Levy) | first-party | premises | 68 | 66 |
+| [`V-evand-exact-certificates`](#v-evand-exact-certificates) | devtools.evand_exact_certificates | Squares Project (Levy) | first-party | premises | 69 | 67 |
 | [`V-check-n11-final-composition`](#v-check-n11-final-composition) | devtools.check_n11_final_composition | Squares Project (Levy) | first-party | premises | 2 | 2 |
 | [`V-audit-n11-lean`](#v-audit-n11-lean) | devtools.audit_n11_lean | Squares Project (Levy) | first-party | premises | 2 | 1 |
 | [`V-fitzharding-n17-source-manifest`](#v-fitzharding-n17-source-manifest) | check_source_manifest.py | Squares Project (Levy) | first-party | premises | 1 | 1 |
@@ -162,7 +164,7 @@ second implementation agrees.
 | [`V-audit-wand125-point-and-mixed`](#v-audit-wand125-point-and-mixed) | devtools.audit_wand125_point_and_mixed | Squares Project (Levy) | first-party | premises | 17 | 7 |
 | [`V-audit-wand125-declared-net`](#v-audit-wand125-declared-net) | devtools.audit_wand125_declared_net | Squares Project (Levy) | first-party | premises | 2 | 2 |
 | [`V-audit-wand125-linear`](#v-audit-wand125-linear) | devtools.audit_wand125_linear | Squares Project (Levy) | first-party | premises | 3 | 3 |
-| [`V-sqverify-fast`](#v-sqverify-fast) | sqverify-fast | Squares Project (Levy) | first-party | decides | 115 | 27 |
+| [`V-sqverify-fast`](#v-sqverify-fast) | sqverify-fast | Squares Project (Levy) | first-party | decides | 116 | 28 |
 | [`V-replay-chelokot-lean`](#v-replay-chelokot-lean) | devtools.replay_chelokot_lean | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-replay-evand-zmx2`](#v-replay-evand-zmx2) | devtools.replay_evand_zmx2 | Squares Project (Levy) | first-party | premises | 7 | 7 |
 | [`V-audit-evand-mixed-covers`](#v-audit-evand-mixed-covers) | devtools.audit_evand_mixed_covers | Squares Project (Levy) | first-party | premises | 11 | 10 |
@@ -178,9 +180,9 @@ second implementation agrees.
 | [`V-squish-upper-bound-packets`](#v-squish-upper-bound-packets) | devtools.squish_upper_bound_packets | Squares Project (Levy) | first-party | premises | 2 | 2 |
 | [`V-squish-followup-packets`](#v-squish-followup-packets) | devtools.squish_followup_packets | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-squish-second-update-confirmation`](#v-squish-second-update-confirmation) | devtools.squish_second_update_confirmation | Squares Project (Levy) | first-party | premises | 1 | 1 |
-| [`V-evand-arrangement-receipts`](#v-evand-arrangement-receipts) | devtools.evand_arrangement_reports | Squares Project (Levy) | first-party | premises | 65 | 65 |
+| [`V-evand-arrangement-receipts`](#v-evand-arrangement-receipts) | devtools.evand_arrangement_reports | Squares Project (Levy) | first-party | premises | 66 | 66 |
 | [`V-algebraic-witness-reports`](#v-algebraic-witness-reports) | devtools.algebraic_witness_reports | Squares Project (Levy) | first-party | premises | 1 | 1 |
-| [`V-upper-bound-reports`](#v-upper-bound-reports) | devtools.upper_bound_reports | Squares Project (Levy) | first-party | premises | 60 | 60 |
+| [`V-upper-bound-reports`](#v-upper-bound-reports) | devtools.upper_bound_reports | Squares Project (Levy) | first-party | premises | 61 | 61 |
 | [`V-rehwaldt-n68-verify`](#v-rehwaldt-n68-verify) | verify.py | Seth Rehwaldt | external | decides | 1 | 1 |
 | [`V-rehwaldt-n68-independent-support-check`](#v-rehwaldt-n68-independent-support-check) | independent_support_check.py | Seth Rehwaldt | external | decides | 1 | 1 |
 | [`V-refinement-custody`](#v-refinement-custody) | devtools.refinement_custody | Squares Project (Levy) | first-party | premises | 2 | 2 |
@@ -229,6 +231,12 @@ second implementation agrees.
 | [`V-couzo-678-review-identity`](#v-couzo-678-review-identity) | identity_260.py | Squares Project (Levy) | first-party | premises | 0 | 0 |
 | [`V-evand-gradec-review-compare`](#v-evand-gradec-review-compare) | compare_certificates.py | Squares Project (Levy) | first-party | premises | 0 | 0 |
 | [`V-evand-gradec-review-derivatives`](#v-evand-gradec-review-derivatives) | test_derivatives.py | Squares Project (Levy) | first-party | premises | 0 | 0 |
+| [`V-wand125-446-review-premises`](#v-wand125-446-review-premises) | premises.py | Squares Project (Levy) | first-party | premises | 1 | 0 |
+| [`V-wand125-446-review-axis-decision`](#v-wand125-446-review-axis-decision) | axis_decide.py (with t233lib.py) | Squares Project (Levy) | first-party | decides | 1 | 0 |
+| [`V-wand125-446-review-exact-capture`](#v-wand125-446-review-exact-capture) | t233lib.exact_capture | Squares Project (Levy) | first-party | decides | 1 | 0 |
+| [`V-review-1023-n31-premises`](#v-review-1023-n31-premises) | premises.py and net.py | Squares Project (Levy) | first-party | premises | 1 | 0 |
+| [`V-review-1023-n31-capture`](#v-review-1023-n31-capture) | capture.py | Squares Project (Levy) | first-party | decides | 1 | 0 |
+| [`V-review-1023-n31-poses`](#v-review-1023-n31-poses) | source_log_points.py | Squares Project (Levy) | first-party | decides | 1 | 0 |
 
 ## By Program
 
@@ -526,6 +534,8 @@ The source's copy of this repository's sqverify_fast with one change, reading a 
 | `E-wand125-fine-net-n107-1058-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-215 |
 | `E-wand125-fine-net-n108-1062-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-216 |
 | `E-wand125-fine-net-n110-1073-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-217 |
+| `E-wand125-fine-net-n31-59775-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-232 |
+| `E-wand125-fine-net-446-n19-n20-n26-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-233 |
 
 ### `V-wand125-unified-linear-verify-cpp`
 
@@ -1185,8 +1195,8 @@ Derives and checks the elementary bounds exactly: the grid upper bound, the area
 
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
-| `E-basic-grid-upper` | replayed here | independently re-implemented | not recorded | T-008, T-051, T-052, T-053, T-054, T-055, T-062, T-063, T-064, T-066, T-067, T-081, T-084, T-086, T-184, T-191 |
-| `E-basic-area-lower` | replayed here | independently re-implemented | not recorded | - |
+| `E-basic-grid-upper` | replayed here | independently re-implemented | not recorded | T-008, T-051, T-052, T-053, T-054, T-055, T-062, T-063, T-064, T-066, T-067, T-081, T-084, T-086, T-184, T-191, T-237 |
+| `E-basic-area-lower` | replayed here | independently re-implemented | not recorded | T-237 |
 | `E-n012-monotonicity-lower` | replayed here | independently re-implemented | not recorded | - |
 
 ### `V-optimal-moduli`
@@ -1200,7 +1210,7 @@ Replays the exact optimal moduli for n = 2 to 4 and the side-2 lower bound.
 
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
-| `E-side2-center-lower` | replayed here | reproduced with the producer’s code | not recorded | - |
+| `E-side2-center-lower` | replayed here | reproduced with the producer’s code | not recorded | T-237 |
 
 ### `V-sqpack-verify`
 
@@ -1214,7 +1224,7 @@ Decides a packing pair by pair and wall by wall: by exact sign in a number field
 
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
-| `E-n005-gobel-upper` | replayed here | independently re-implemented | not recorded | - |
+| `E-n005-gobel-upper` | replayed here | independently re-implemented | not recorded | T-237 |
 | `E-n010-gobel-upper` | replayed here | independently re-implemented | not recorded | - |
 | `E-n040-gobel-upper` | replayed here | independently re-implemented | not recorded | - |
 | `E-gobel-family-upper` | replayed here | independently re-implemented | not recorded | - |
@@ -1295,6 +1305,7 @@ Decides a packing pair by pair and wall by wall: by exact sign in a number field
 | `E-evand-689-n308-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 308 that T-221 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-221 |
 | `E-evand-694-n154-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 154 that T-222 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-222 |
 | `E-evand-728-n303-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 303 that T-230 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-230 |
+| `E-amundsk-755-n303-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 303 that T-239 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt and replay/sharp-controls.json | T-239 |
 | `E-evand-703-n270-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 270 that T-224 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-224 |
 | `E-evand-680-n183-primary-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 1 of 1: the original n183 rational certificate, all 183 squares, every wall and all 16653 unordered pairs in each of three jobs through both maintained routes; positive plus two sensitive invalid controls | T-220 |
 | `E-couzo-678-filtered-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 2 of 2: the certificates at n = 204 and 260 that T-223 cites: every wall and every pair whose centres are closer than sqrt 2 decided by both routes, the others excluded by the filter's lemma, and every pair decided again by the all-pairs kernel; the receipt decides all 85 rows of the issue | T-223 |
@@ -1393,6 +1404,7 @@ Decides a rational-corner witness pair by pair and wall by wall in Fraction arit
 | `E-evand-689-n308-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 308 that T-221 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-221 |
 | `E-evand-694-n154-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 154 that T-222 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-222 |
 | `E-evand-728-n303-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 303 that T-230 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-230 |
+| `E-amundsk-755-n303-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 303 that T-239 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt and replay/sharp-controls.json | T-239 |
 | `E-evand-703-n270-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 270 that T-224 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-224 |
 | `E-evand-680-n183-primary-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 1 of 1: the original n183 rational certificate, all 183 squares, every wall and all 16653 unordered pairs in each of three jobs through both maintained routes; positive plus two sensitive invalid controls | T-220 |
 | `E-couzo-678-filtered-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 2 of 2: the certificates at n = 204 and 260 that T-223 cites: every wall and every pair whose centres are closer than sqrt 2 decided by both routes, the others excluded by the filter's lemma, and every pair decided again by the all-pairs kernel; the receipt decides all 85 rows of the issue | T-223 |
@@ -2486,6 +2498,37 @@ The 22 October review's sharp controls of T-230's certificate: eight mutants at 
 | --- | --- | --- | --- | --- |
 | `E-evand-728-n303-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 1 of 1: the certificate at n = 303 that T-230 cites, every wall and all 45,753 pairs, on each of the checker's two routes | T-230 |
 
+### `V-amundsk-755-review-check`
+
+**review_t238_check.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+The 23 October review's standard-library exact checker of the certificate T-239 cites, with a reader of its own that admits only integer and p/q literals, deciding the certificate on two routes that share only that reader: route Z in integers alone, never loading fractions (a Pythagorean triple per row, containment by half-extents and every pair, with no distance filter, by four separating-axis inequalities cleared of denominators, giving each pair's exact gap), and route E in Fraction (unit edges, right angles, orientation and corner mean, corner containment, pairs whose centres lie more than sqrt(2) apart by their circumscribed discs, every other pair by exact edge intersection and vertex containment with its exact squared Euclidean distance and the region one square's closed half-planes clip from the other as a check, and every pair's separating-axis gap again from corner projections, as a comparison).
+
+- Source: [`packing/resources/web/amundsk-n303-2026-10-23/review/review-2026-10-23/programs/review_t238_check.py`](../../packing/resources/web/amundsk-n303-2026-10-23/review/review-2026-10-23/programs/review_t238_check.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-23-amundsk-n303.md`](../../docs/project/reviews/review-2026-10-23-amundsk-n303.md)
+- Independence: its authors read mathematics, specification, certificate-format; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review lane of #755 (c-review-t238-math, think-jdz0), strong sub-agent tier, maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, Issue 755 says the search, the certificate and the report were done by Claude (Anthropic) at Amund Kristiansen's direction. Written in a file of its own that imports nothing from this repository or the source, from the issue, the gist README and the certificate, after its author had read the 23 October review of the second 204 certificate's account of its own checker's design; it had decided the certificate, and its digest was recorded, before its author read any maintained route or Evan Daniel's verify_cert.py, verify_cert2.py or dilate_cert.py, and it did not change after. Its disc test and its edge and vertex tests are the mathematics of verify_cert.py's filter and verify_cert2.py, read only after it decided.
+- Note: Written and run on 23 October 2026 by the review; kept in the amundsk-n303-2026-10-23 packet's review/review-2026-10-23/ with its README and receipts (RF-9).
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-amundsk-755-n303-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 1 of 1: the certificate at n = 303 that T-239 cites, every wall and all 45,753 pairs, on each of the checker's two routes | T-239 |
+
+### `V-amundsk-755-review-controls`
+
+**sharp_controls_t238.py, with maintained_routes_t238.py** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
+
+The 23 October review's controls of T-239's certificate: 21 mutants (the side lowered by the least top-or-right clearance, every square moved by the least left and the least bottom clearance, and five pairs closed along the normal or the corner vector that separates them: the least-gap pair, a tilted and an aligned square, two squares tilted alike, two tilted 0.5 degree or more apart, and a corner-to-corner pair whose centres lie more than sqrt(2) apart, each at exact contact and 1e-30 past it; a duplicated square; a square moved outside; every tangent negated; a row dropped; a decimal literal), each decided by the review's checker on both routes and by both maintained routes through the evand-cert adapter and the kernel's run_case; and maintained_routes_t238.py, which runs the kernel's three jobs on the certificate's bytes as certify's child does (run_case and validate_job) and the kernel's run_sharp. It adds the mutants and the expectations; the routes decide.
+
+- Source: [`packing/resources/web/amundsk-n303-2026-10-23/review/review-2026-10-23/programs/sharp_controls_t238.py`](../../packing/resources/web/amundsk-n303-2026-10-23/review/review-2026-10-23/programs/sharp_controls_t238.py), [`packing/resources/web/amundsk-n303-2026-10-23/review/review-2026-10-23/programs/maintained_routes_t238.py`](../../packing/resources/web/amundsk-n303-2026-10-23/review/review-2026-10-23/programs/maintained_routes_t238.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-23-amundsk-n303.md`](../../docs/project/reviews/review-2026-10-23-amundsk-n303.md)
+- Note: Written and run on 23 October 2026 by the review (c-review-t238-math); it imports devtools.evand_arrangement_reports and devtools.upper_bound_reports to reach the maintained routes, and loads the review's checker by path. Kept with its receipts outputs/sharp-controls.json and outputs/maintained/ in the packet's review/review-2026-10-23/ (RF-9).
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-amundsk-755-n303-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 1 of 1: the certificate at n = 303 that T-239 cites, every wall and all 45,753 pairs, on each of the checker's two routes | T-239 |
+
 ### `V-overbeck-review3-spec-lemmas`
 
 **spec_lemmas_numeric.py** · Squares Project (Levy) · first-party · checks premises · Python · numerical-f64
@@ -2588,6 +2631,7 @@ Reads Evan Daniel's rational certificates, refusing anything the format does not
 | `E-evand-689-n308-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 308 that T-221 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-221 |
 | `E-evand-694-n154-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 154 that T-222 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-222 |
 | `E-evand-728-n303-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 303 that T-230 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-230 |
+| `E-amundsk-755-n303-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 303 that T-239 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt and replay/sharp-controls.json | T-239 |
 | `E-evand-703-n270-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 270 that T-224 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-224 |
 | `E-evand-680-n183-primary-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 1 of 1: the original n183 rational certificate, all 183 squares, every wall and all 16653 unordered pairs in each of three jobs through both maintained routes; positive plus two sensitive invalid controls | T-220 |
 | `E-couzo-678-filtered-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 2 of 2: the certificates at n = 204 and 260 that T-223 cites: every wall and every pair whose centres are closer than sqrt 2 decided by both routes, the others excluded by the filter's lemma, and every pair decided again by the all-pairs kernel; the receipt decides all 85 rows of the issue | T-223 |
@@ -2881,6 +2925,7 @@ Decides a measure-capture lower-bound certificate of format T, M or L on the 201
 | `E-wand125-fine-net-n68-853-sqverify-fast-replay` | replayed here | re-implemented, sharing named components | full, 201 of 201: complete legal core-centre domains at every declared-net direction | T-205 |
 | `E-wand125-fine-net-n84-94225-sqverify-fast-replay` | replayed here | re-implemented, sharing named components | full, 201 of 201: complete legal core-centre domains at every declared-net direction | T-206 |
 | `E-wand125-fine-net-n85-9475-sqverify-fast-replay` | replayed here | re-implemented, sharing named components | full, 201 of 201: complete legal core-centre domains at every declared-net direction | T-207 |
+| `E-wand125-fine-net-n31-59775-sqverify-fast-replay` | replayed here | re-implemented, sharing named components | full, 2,073 of 2,073: complete legal core-centre domains at every declared-net direction | T-232 |
 
 ### `V-replay-chelokot-lean`
 
@@ -3171,6 +3216,7 @@ Binds all three complete source certificates and all nine full deciding inputs/n
 | `E-evand-689-n308-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 308 that T-221 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-221 |
 | `E-evand-694-n154-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 154 that T-222 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-222 |
 | `E-evand-728-n303-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 303 that T-230 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-230 |
+| `E-amundsk-755-n303-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 303 that T-239 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt and replay/sharp-controls.json | T-239 |
 | `E-evand-703-n270-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 270 that T-224 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-224 |
 | `E-evand-680-n183-primary-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 1 of 1: the original n183 rational certificate, all 183 squares, every wall and all 16653 unordered pairs in each of three jobs through both maintained routes; positive plus two sensitive invalid controls | T-220 |
 | `E-couzo-678-filtered-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 2 of 2: the certificates at n = 204 and 260 that T-223 cites: every wall and every pair whose centres are closer than sqrt 2 decided by both routes, the others excluded by the filter's lemma, and every pair decided again by the all-pairs kernel; the receipt decides all 85 rows of the issue | T-223 |
@@ -3259,6 +3305,7 @@ Imports a report of rational upper-bound certificates by another author from its
 | `E-evand-689-n308-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 308 that T-221 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-221 |
 | `E-evand-694-n154-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 154 that T-222 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-222 |
 | `E-evand-728-n303-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 303 that T-230 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-230 |
+| `E-amundsk-755-n303-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 303 that T-239 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt and replay/sharp-controls.json | T-239 |
 | `E-evand-703-n270-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 270 that T-224 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-224 |
 | `E-evand-680-n183-primary-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 1 of 1: the original n183 rational certificate, all 183 squares, every wall and all 16653 unordered pairs in each of three jobs through both maintained routes; positive plus two sensitive invalid controls | T-220 |
 | `E-evand-regularized-1020-exact-feasibility` | replayed here | independently re-implemented | full, 4 of 4: the certificates at n = 204, 227, 229 and 260 that T-225 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-225 |
@@ -3978,6 +4025,102 @@ Tests the closed-form gradients and Hessians of the rows that check_theorem_c.py
 - Note: Written and run on 23 October 2026 by the grade-C review (think-7scz); its output is receipts/review-derivatives.json in the evand-exact-data-2026-10-12 packet. No evidence entry cites it until the grade-C claim is registered, as for V-evand-gradec-review-check.
 
 No evidence entry names it yet.
+
+### `V-wand125-446-review-premises`
+
+**premises.py, custody.py, crate_identity.py and net_cover.py (with t233lib.py)** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
+
+Recomputes, apart from the crate, the tools and the source, every exact premise of a format M candidate on its declared net, re-derives the release packet's custody records from the bytes, compares the source's archived verifier with this repository's crate by file digest, and checks the net's orientation coverage by direct exact geometry.
+
+- Source: [`packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/programs/t233lib.py`](../../packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/programs/t233lib.py), [`packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/programs/premises.py`](../../packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/programs/premises.py), [`packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/programs/custody.py`](../../packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/programs/custody.py), [`packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/programs/crate_identity.py`](../../packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/programs/crate_identity.py), [`packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/programs/net_cover.py`](../../packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/programs/net_cover.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/README.md`](../../packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/README.md)
+- Independence: its authors read mathematics, specification, certificate-format, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review lane c-review-t233-math of the 23 October intake pass (think-bwis), tbd-strong-max tier, maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, The source's commits 7400660, 61e37d5 and bf85d6b carry Co-Authored-By trailers naming Claude, and the crate the source adapted was written by a Claude agent of this project (lane W2). Written in files of their own that import nothing from the crate, the tools or the source.
+- Note: Written and run on 23 October 2026 by the stage 4 review of T-233; kept in the release packet's review/review-2026-10-23/ with its README, which records each program's SHA-256 as it ran, and receipts.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-wand125-fine-net-446-review-premises` | audited here | not applicable | full: the exact premises of each of the four candidates: custody, the claim, the field order, the measure and its D4 expansion, lemma N0 (a) to (e), the sharp extent, the last bin, the per-bin domains, F3's caps and the semantic digest; the net's coverage at 10,363 exact orientations; the archived verifier's files against this repository's crate by digest | - |
+
+### `V-wand125-446-review-axis-decision`
+
+**axis_decide.py (with t233lib.py)** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic, interval-certified
+
+Decides net index 0 of a format M rectangle measure completely: the least capture of the axis-parallel core over the per-bin quadrant is a least value over the event grid's vertices, evaluated from exact int64 overlaps by one binary64 matrix product under an a priori error bound and compared with the threshold exactly, the smallest vertices again in fractions.
+
+- Source: [`packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/programs/axis_decide.py`](../../packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/programs/axis_decide.py), [`packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/programs/t233lib.py`](../../packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/programs/t233lib.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/README.md`](../../packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/README.md)
+- Independence: its authors read mathematics, specification, certificate-format, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review lane c-review-t233-math of the 23 October intake pass (think-bwis), tbd-strong-max tier, maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, The source's commits 7400660, 61e37d5 and bf85d6b carry Co-Authored-By trailers naming Claude, and the crate the source adapted was written by a Claude agent of this project (lane W2). Written in files of their own that import nothing from the crate, the tools or the source.
+- Note: Written and run on 23 October 2026 by the stage 4 review of T-233; kept in the release packet's review/review-2026-10-23/ with its README, which records each program's SHA-256 as it ran, and receipts.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-wand125-fine-net-446-review-axis-direction` | replayed here | independently re-implemented, clean-room | sample, 4 of 8,292: net directions (index 0 of each of the four certificates, decided over its whole per-bin quadrant) | - |
+
+### `V-wand125-446-review-exact-capture`
+
+**t233lib.exact_capture, driven by receipts_check.py and direction_sample.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+The exact mass a closed core at a given centre and net angle captures from a format M measure, by Sutherland-Hodgman clipping of the core against each D4 image in fractions. Decides the capture at the poses it evaluates: every least-bound box centre and axis argmin of the source's runs, the source's control witnesses (equal to its exact values as fractions at 124 of 124 oblique poses), and the end points of an independent search at 32 sampled directions per certificate.
+
+- Source: [`packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/programs/t233lib.py`](../../packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/programs/t233lib.py), [`packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/programs/receipts_check.py`](../../packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/programs/receipts_check.py), [`packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/programs/direction_sample.py`](../../packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/programs/direction_sample.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/README.md`](../../packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/README.md)
+- Independence: its authors read mathematics, specification, certificate-format, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review lane c-review-t233-math of the 23 October intake pass (think-bwis), tbd-strong-max tier, maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, The source's commits 7400660, 61e37d5 and bf85d6b carry Co-Authored-By trailers naming Claude, and the crate the source adapted was written by a Claude agent of this project (lane W2). Written in files of their own that import nothing from the crate, the tools or the source.
+- Note: Written and run on 23 October 2026 by the stage 4 review of T-233; kept in the release packet's review/review-2026-10-23/ with its README, which records each program's SHA-256 as it ran, and receipts.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-wand125-fine-net-446-review-captures` | audited here | not applicable | full, 10,596 of 10,596: exact captures at the listed poses only: every rotated direction's least-bound box centre (8,288), the axis argmins (4), the 197/200 control witnesses (128, 124 equal to the source's fractions) and the end points of the searches at 128 sampled directions; no direction's domain | - |
+
+### `V-review-1023-n31-premises`
+
+**premises.py and net.py, with n31_exact.py** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
+
+Recomputes, apart from the crate, the source and the tools, every exact premise of mixed_n31_L59775 (identity, claim, the 536 rows inside the container with positive masses summing exactly to 3099999/100000, the merged D4 expansion's 4,244 rows, its exact integral and invariance under all eight symmetries, lemma N0's (a) to (e), the last bin, the per-bin domains), and re-derives the reduction from a packing to the capture condition node by node: the core strictly inside at both ends of all 2,073 bins with exact z, the monotonicity of r at every a_j, and the quadrant's four quarter-turn images tiling every node's domain.
+
+- Source: [`packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/programs/n31_exact.py`](../../packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/programs/n31_exact.py), [`packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/programs/premises.py`](../../packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/programs/premises.py), [`packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/programs/net.py`](../../packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/programs/net.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-23-wand125-n31-fine-net.md`](../../docs/project/reviews/review-2026-10-23-wand125-n31-fine-net.md)
+- Independence: its authors read mathematics, specification, certificate-format, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review lane of think-wop1 (think-oc25), tbd-strong-max tier, maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, The source's commit names Claude as co-author. Written by a Claude agent prompted separately from the source and from the records lane, in files of its own that import nothing of the source, the crate or devtools.
+- Note: Written and run on 23 October 2026 by the stage 4 review of T-232; kept in the n31 packet's review/review-2026-10-23/ with its README and outputs, whose program-digests.sha256 records each program's SHA-256 as it ran.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-wand125-fine-net-n31-59775-review-sample` | replayed here | independently re-implemented, clean-room | sample, 122 of 2,073: net directions, each decided over its whole quadrant of centres | - |
+
+### `V-review-1023-n31-capture`
+
+**capture.py, with n31_geometry.py, n31_exact.py and n31_brute.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+Decides the capture condition of a format M measure on a declared net at the directions it is given, over the whole quadrant [L/2, L - r(a_j)]^2 of centres: a branch and bound on the kernel-and-slab cell bound (exact to first order in the cell's size), chosen by a float64 pass and decided leaf by leaf in exact integers (densities rounded down to 2^-64, the domain's upper end rounded up), with the leaves checked to partition the quadrant. Refuses with an exact witness, by Sutherland-Hodgman clipping in Fractions, when the measure fails. Ran at the review's stratified sample of 122 directions of mixed_n31_L59775 and on its mutants.
+
+- Source: [`packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/programs/capture.py`](../../packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/programs/capture.py), [`packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/programs/n31_geometry.py`](../../packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/programs/n31_geometry.py), [`packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/programs/n31_exact.py`](../../packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/programs/n31_exact.py), [`packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/programs/n31_brute.py`](../../packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/programs/n31_brute.py), [`packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/programs/geometry_selftest.py`](../../packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/programs/geometry_selftest.py), [`packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/programs/sample_plan.py`](../../packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/programs/sample_plan.py), [`packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/programs/bound_selftest.py`](../../packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/programs/bound_selftest.py), [`packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/programs/run_after_sample.sh`](../../packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/programs/run_after_sample.sh)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-23-wand125-n31-fine-net.md`](../../docs/project/reviews/review-2026-10-23-wand125-n31-fine-net.md)
+- Independence: its authors read mathematics, specification, certificate-format, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review lane of think-wop1 (think-oc25), tbd-strong-max tier, maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, The source's commit names Claude as co-author. Written by a Claude agent prompted separately from the source and from the records lane, in files of its own that import nothing of the source, the crate or devtools.
+- Note: Written and run on 23 October 2026 by the stage 4 review of T-232; kept in the n31 packet's review/review-2026-10-23/ with its README and outputs, whose program-digests.sha256 records each program's SHA-256 as it ran.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-wand125-fine-net-n31-59775-review-sample` | replayed here | independently re-implemented, clean-room | sample, 122 of 2,073: net directions, each decided over its whole quadrant of centres | - |
+
+### `V-review-1023-n31-poses`
+
+**source_log_points.py, with n31_brute.py and n31_exact.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+Decides the exact capture at single poses the source's logs name: the axis row's argmin, two points of each of the twelve tightest rows' least-bound boxes, and every control witness of the 197/200 mutant, against the logged bounds and exact rationals. Decides those poses only, and no coverage.
+
+- Source: [`packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/programs/source_log_points.py`](../../packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/programs/source_log_points.py), [`packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/programs/n31_brute.py`](../../packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/programs/n31_brute.py), [`packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/programs/n31_exact.py`](../../packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/programs/n31_exact.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-23-wand125-n31-fine-net.md`](../../docs/project/reviews/review-2026-10-23-wand125-n31-fine-net.md)
+- Independence: its authors read mathematics, specification, certificate-format, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review lane of think-wop1 (think-oc25), tbd-strong-max tier, maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, The source's commit names Claude as co-author. Written by a Claude agent prompted separately from the source and from the records lane, in files of its own that import nothing of the source, the crate or devtools.
+- Note: Written and run on 23 October 2026 by the stage 4 review of T-232; kept in the n31 packet's review/review-2026-10-23/ with its README and outputs, whose program-digests.sha256 records each program's SHA-256 as it ran.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-wand125-fine-net-n31-59775-review-sample` | replayed here | independently re-implemented, clean-room | sample, 122 of 2,073: net directions, each decided over its whole quadrant of centres | - |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

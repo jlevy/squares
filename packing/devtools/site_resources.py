@@ -16,9 +16,10 @@ from devtools.profile_links import ProfileIndex, named_profile_ids, public_index
 from sqpack.contributors import record_metadata
 
 #: The other public square-packing projects on GitHub that the research frontier cites:
-#: each repository's home, its author as the record credits them (the GitHub handle
-#: where the record names no one), and what it holds. A test holds this list to cover
-#: every source repository in the source-coverage register.
+#: each repository's home (a gist's, at no revision, for a source published as a gist),
+#: its author as the record credits them (the GitHub handle where the record names no
+#: one), and what it holds. A test holds this list to cover every source repository in
+#: the source-coverage register.
 OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
     (
         "https://github.com/SidG2k1/square-packing-refinements",
@@ -316,6 +317,14 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         "https://github.com/BalthasarStrauss/Squares-packing_S-29-_New-Record",
         "Thomas Schadt",
         "A record packing of 29 squares.",
+    ),
+    (
+        "https://gist.github.com/amundsk/78f9f0e7b4669f2f509a281845081768",
+        "Amund Kristiansen",
+        (
+            "An exact certificate for 303 squares, another arrangement of Evan Daniel's"
+            " packing found from it, replayed and reviewed here (T-239)."
+        ),
     ),
 )
 

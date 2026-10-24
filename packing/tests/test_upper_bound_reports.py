@@ -131,6 +131,9 @@ DANIEL_728 = "evand-n303-2026-10-22"
 #: Mykhailo Polkovskyi's second 204 file of issue #719's release, retained under his
 #: written grant by the #719 records lane of 23 October (`test_upper_bound_reports_n204`).
 MISHAPOLK_N204 = "mishapolk-n204-2026-10-22"
+#: Amund Kristiansen's issue #755, derived facts only, by the #755 lane of 23 October
+#: (`test_upper_bound_reports_755`).
+KRISTIANSEN_755 = "amundsk-n303-2026-10-23"
 #: How a declaration cites a beyond-horizon row of the source register.
 COVERAGE_URL = "packing/frontier/source-coverage.yaml"
 EVERY = (
@@ -176,6 +179,7 @@ EVERY = (
     COUZO_675,
     DANIEL_728,
     MISHAPOLK_N204,
+    KRISTIANSEN_755,
 )
 
 
@@ -1472,6 +1476,7 @@ def test_the_register_plan_states_each_bound_as_check_standing_reads_it(name: st
         COUZO_675: "2026-10-18",
         DANIEL_728: "2026-10-22",
         MISHAPOLK_N204: "2026-10-22",
+        KRISTIANSEN_755: "2026-10-23",
     }
     assert result["attribution"]["published"] == published.get(name, "2026-10-10")
     evidence = plan["evidence.yaml"]

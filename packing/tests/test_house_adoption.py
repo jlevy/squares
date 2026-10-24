@@ -169,11 +169,12 @@ MOVED_AGAIN = {
 #: of 23 October 2026 to Mykhailo Polkovskyi's re-solve of #678's packing (T-229), and that
 #: of 24 October 2026 to the release's lower 204 file, the same packing at its solved side
 #: (T-231); the pass of 23 October took 303 from T-186 to Evan Daniel's issue-728
-#: certificate (T-230).
+#: certificate (T-230), which that of 24 October 2026 moved to Amund Kristiansen's
+#: issue-755 certificate (T-239).
 MOVED_LATER = {
     271: ("T-219", "2026-10-19"),
     204: ("T-231", "2026-10-24"),
-    303: ("T-230", "2026-10-23"),
+    303: ("T-239", "2026-10-24"),
 }
 
 #: Issue 639's exact algebraic sides (T-193), the smallest at all sixteen of its counts
@@ -1411,10 +1412,11 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
     # regularized views (T-225), and the adoption of 23 October 2026 moved 105 and 204 to
     # Mykhailo Polkovskyi's issue-719 re-solves (T-229) and 303 to Evan Daniel's issue-728
     # certificate (T-230), and the adoption of 24 October 2026 moved 204 to the release's
-    # lower 204 file (T-231), after this receipt was retained.
+    # lower 204 file (T-231) and 303 again, to Amund Kristiansen's issue-755 certificate
+    # (T-239), after this receipt was retained.
     later = {
         105: "T-229",
-        303: "T-230",
+        303: "T-239",
         155: "T-197",
         183: "T-220",
         229: "T-225",

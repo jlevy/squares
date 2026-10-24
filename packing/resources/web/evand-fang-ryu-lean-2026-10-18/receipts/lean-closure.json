@@ -1,0 +1,420 @@
+{
+  "kind": "lean-import-closure/v1",
+  "source_url": "https://github.com/evand/square-packing.git",
+  "commit": "8475bdf41571c59c8c240aedaddc48e19e0e4707",
+  "tree": "89c618cbb17711033b6d9ca9ac70188f2dbb4389",
+  "root": "lean",
+  "targets": [
+    "Sqpack.FangFinal",
+    "Sqpack.RyuBound",
+    "Sqpack.ExactQuad",
+    "Sqpack.ExactCheckCut",
+    "Sqpack.ExactRect"
+  ],
+  "toolchain": "leanprover/lean4:v4.33.1",
+  "packages": [
+    {
+      "name": "mathlib",
+      "rev": "0df444a360eaa60ab8c11dca51a86af692955474",
+      "input_rev": "v4.33.1"
+    },
+    {
+      "name": "plausible",
+      "rev": "b7eb3304aeae834b12dda98993a37f6a41f6f0bb",
+      "input_rev": "main"
+    },
+    {
+      "name": "LeanSearchClient",
+      "rev": "5f4d51b81cbd3f6b32b156bfad9056621a040404",
+      "input_rev": "main"
+    },
+    {
+      "name": "importGraph",
+      "rev": "16f02aa7642864af59f1ff0e384a015994db9118",
+      "input_rev": "main"
+    },
+    {
+      "name": "proofwidgets",
+      "rev": "4be2e3d5087eeb272cf5a8853b8f9dd025ef5957",
+      "input_rev": "main"
+    },
+    {
+      "name": "aesop",
+      "rev": "3448c0bcc5ce01b2d1546e483ec3620e32df3d0e",
+      "input_rev": "master"
+    },
+    {
+      "name": "Qq",
+      "rev": "92c15be17b7caf78c2ad767ec40f89052d908d81",
+      "input_rev": "master"
+    },
+    {
+      "name": "batteries",
+      "rev": "4488d40d070b9700d4d5a6aa342f0d40c31b2a2d",
+      "input_rev": "main"
+    },
+    {
+      "name": "Cli",
+      "rev": "6130a47896ce867c6a4a55373441e59e565bad0f",
+      "input_rev": "v4.33.0"
+    }
+  ],
+  "libraries": [
+    "Sqpack"
+  ],
+  "modules": [
+    {
+      "module": "Sqpack.Conjectures",
+      "path": "lean/Sqpack/Conjectures.lean",
+      "blob": "5c9e12d9eff231000f6a5973470cd63c56b7306a",
+      "bytes": 13789,
+      "lines": 247,
+      "imports": [
+        "Sqpack.Spec"
+      ],
+      "escapes": {
+        "\\bsorry\\b": 0,
+        "^\\s*axiom\\b": 0,
+        "\\bnative_decide\\b": 0,
+        "\\bofReduceBool\\b": 0,
+        "\\bimplemented_by\\b": 0,
+        "@\\[extern": 0,
+        "debug\\.skipKernelTC": 0,
+        "\\bunsafe\\b": 0
+      }
+    },
+    {
+      "module": "Sqpack.ConjecturesProofs",
+      "path": "lean/Sqpack/ConjecturesProofs.lean",
+      "blob": "f57577d2081cb88f990529bc32fd550575c4e71c",
+      "bytes": 15187,
+      "lines": 309,
+      "imports": [
+        "Sqpack.Conjectures"
+      ],
+      "escapes": {
+        "\\bsorry\\b": 0,
+        "^\\s*axiom\\b": 0,
+        "\\bnative_decide\\b": 0,
+        "\\bofReduceBool\\b": 0,
+        "\\bimplemented_by\\b": 0,
+        "@\\[extern": 0,
+        "debug\\.skipKernelTC": 0,
+        "\\bunsafe\\b": 0
+      }
+    },
+    {
+      "module": "Sqpack.ExactCheck",
+      "path": "lean/Sqpack/ExactCheck.lean",
+      "blob": "c4fbb6c148149e703bb19c7faef7e651939de65c",
+      "bytes": 28007,
+      "lines": 606,
+      "imports": [
+        "Sqpack.ExactPack",
+        "Sqpack.ShadowCheck"
+      ],
+      "escapes": {
+        "\\bsorry\\b": 0,
+        "^\\s*axiom\\b": 0,
+        "\\bnative_decide\\b": 0,
+        "\\bofReduceBool\\b": 0,
+        "\\bimplemented_by\\b": 0,
+        "@\\[extern": 0,
+        "debug\\.skipKernelTC": 0,
+        "\\bunsafe\\b": 0
+      }
+    },
+    {
+      "module": "Sqpack.ExactCheckCut",
+      "path": "lean/Sqpack/ExactCheckCut.lean",
+      "blob": "36ac76756760ae00ad0304343f3f978d374a494f",
+      "bytes": 4145,
+      "lines": 84,
+      "imports": [
+        "Sqpack.ExactCheck"
+      ],
+      "escapes": {
+        "\\bsorry\\b": 0,
+        "^\\s*axiom\\b": 0,
+        "\\bnative_decide\\b": 0,
+        "\\bofReduceBool\\b": 0,
+        "\\bimplemented_by\\b": 0,
+        "@\\[extern": 0,
+        "debug\\.skipKernelTC": 0,
+        "\\bunsafe\\b": 0
+      }
+    },
+    {
+      "module": "Sqpack.ExactPack",
+      "path": "lean/Sqpack/ExactPack.lean",
+      "blob": "385f361dcf9cb3b8941d3795963b443b22547cc2",
+      "bytes": 10099,
+      "lines": 192,
+      "imports": [
+        "Sqpack.Spec"
+      ],
+      "escapes": {
+        "\\bsorry\\b": 0,
+        "^\\s*axiom\\b": 0,
+        "\\bnative_decide\\b": 0,
+        "\\bofReduceBool\\b": 0,
+        "\\bimplemented_by\\b": 0,
+        "@\\[extern": 0,
+        "debug\\.skipKernelTC": 0,
+        "\\bunsafe\\b": 0
+      }
+    },
+    {
+      "module": "Sqpack.ExactQuad",
+      "path": "lean/Sqpack/ExactQuad.lean",
+      "blob": "0bf6e8277ea53bbc86063a8f711ff3c4f4801a50",
+      "bytes": 5514,
+      "lines": 91,
+      "imports": [
+        "Sqpack.ExactCheck"
+      ],
+      "escapes": {
+        "\\bsorry\\b": 0,
+        "^\\s*axiom\\b": 0,
+        "\\bnative_decide\\b": 0,
+        "\\bofReduceBool\\b": 0,
+        "\\bimplemented_by\\b": 0,
+        "@\\[extern": 0,
+        "debug\\.skipKernelTC": 0,
+        "\\bunsafe\\b": 0
+      }
+    },
+    {
+      "module": "Sqpack.ExactRect",
+      "path": "lean/Sqpack/ExactRect.lean",
+      "blob": "06dccc000ce12f6f9c914773509773f5935e04ae",
+      "bytes": 4011,
+      "lines": 77,
+      "imports": [
+        "Sqpack.ExactCheckCut",
+        "Sqpack.ConjecturesProofs"
+      ],
+      "escapes": {
+        "\\bsorry\\b": 0,
+        "^\\s*axiom\\b": 0,
+        "\\bnative_decide\\b": 0,
+        "\\bofReduceBool\\b": 0,
+        "\\bimplemented_by\\b": 0,
+        "@\\[extern": 0,
+        "debug\\.skipKernelTC": 0,
+        "\\bunsafe\\b": 0
+      }
+    },
+    {
+      "module": "Sqpack.FangFinal",
+      "path": "lean/Sqpack/FangFinal.lean",
+      "blob": "9ee7d52d559c1cc4ce2a046e3f87d27cf8ea4cfb",
+      "bytes": 4095,
+      "lines": 91,
+      "imports": [
+        "Sqpack.FangTheorem",
+        "Sqpack.Exact.Fang.P110",
+        "Sqpack.Exact.Fang.P132",
+        "Sqpack.Exact.Fang.P156",
+        "Sqpack.Exact.Fang.P182",
+        "Sqpack.Exact.Fang.P211",
+        "Sqpack.Exact.Fang.P241",
+        "Sqpack.Exact.Fang.P273",
+        "Sqpack.Exact.Fang.P308",
+        "Sqpack.Exact.Fang.P343",
+        "Sqpack.Exact.Fang.P381",
+        "Sqpack.Exact.Fang.P421",
+        "Sqpack.Exact.Fang.P463",
+        "Sqpack.Exact.Fang.P507",
+        "Sqpack.Exact.Fang.P553",
+        "Sqpack.Exact.Fang.P601",
+        "Sqpack.Exact.Fang.P651",
+        "Sqpack.Exact.Fang.R257",
+        "Sqpack.Exact.Fang.R443"
+      ],
+      "escapes": {
+        "\\bsorry\\b": 0,
+        "^\\s*axiom\\b": 0,
+        "\\bnative_decide\\b": 0,
+        "\\bofReduceBool\\b": 0,
+        "\\bimplemented_by\\b": 0,
+        "@\\[extern": 0,
+        "debug\\.skipKernelTC": 0,
+        "\\bunsafe\\b": 0
+      }
+    },
+    {
+      "module": "Sqpack.FangGlue",
+      "path": "lean/Sqpack/FangGlue.lean",
+      "blob": "579f1c315b3864a679a08d2509333c33d3d5473b",
+      "bytes": 6740,
+      "lines": 125,
+      "imports": [
+        "Sqpack.ConjecturesProofs"
+      ],
+      "escapes": {
+        "\\bsorry\\b": 0,
+        "^\\s*axiom\\b": 0,
+        "\\bnative_decide\\b": 0,
+        "\\bofReduceBool\\b": 0,
+        "\\bimplemented_by\\b": 0,
+        "@\\[extern": 0,
+        "debug\\.skipKernelTC": 0,
+        "\\bunsafe\\b": 0
+      }
+    },
+    {
+      "module": "Sqpack.FangTheorem",
+      "path": "lean/Sqpack/FangTheorem.lean",
+      "blob": "1883fe2ada834e10d288e05514198d3554104f7b",
+      "bytes": 7831,
+      "lines": 160,
+      "imports": [
+        "Sqpack.FangGlue"
+      ],
+      "escapes": {
+        "\\bsorry\\b": 0,
+        "^\\s*axiom\\b": 0,
+        "\\bnative_decide\\b": 0,
+        "\\bofReduceBool\\b": 0,
+        "\\bimplemented_by\\b": 0,
+        "@\\[extern": 0,
+        "debug\\.skipKernelTC": 0,
+        "\\bunsafe\\b": 0
+      }
+    },
+    {
+      "module": "Sqpack.RyuBand",
+      "path": "lean/Sqpack/RyuBand.lean",
+      "blob": "60614c94dc25aa92ab32d1f21049c9c367b4156f",
+      "bytes": 13064,
+      "lines": 245,
+      "imports": [
+        "Sqpack.FangGlue",
+        "Sqpack.ExactPack"
+      ],
+      "escapes": {
+        "\\bsorry\\b": 0,
+        "^\\s*axiom\\b": 0,
+        "\\bnative_decide\\b": 0,
+        "\\bofReduceBool\\b": 0,
+        "\\bimplemented_by\\b": 0,
+        "@\\[extern": 0,
+        "debug\\.skipKernelTC": 0,
+        "\\bunsafe\\b": 0
+      }
+    },
+    {
+      "module": "Sqpack.RyuBound",
+      "path": "lean/Sqpack/RyuBound.lean",
+      "blob": "e68f609eb36e9b314bb44182cfdd57912eee8065",
+      "bytes": 10386,
+      "lines": 209,
+      "imports": [
+        "Sqpack.RyuBand"
+      ],
+      "escapes": {
+        "\\bsorry\\b": 0,
+        "^\\s*axiom\\b": 0,
+        "\\bnative_decide\\b": 0,
+        "\\bofReduceBool\\b": 0,
+        "\\bimplemented_by\\b": 0,
+        "@\\[extern": 0,
+        "debug\\.skipKernelTC": 0,
+        "\\bunsafe\\b": 0
+      }
+    },
+    {
+      "module": "Sqpack.ShadowCheck",
+      "path": "lean/Sqpack/ShadowCheck.lean",
+      "blob": "07638f7ae17365c368ba369362ab5c1599b7787c",
+      "bytes": 13695,
+      "lines": 276,
+      "imports": [
+        "Sqpack.ExactPack"
+      ],
+      "escapes": {
+        "\\bsorry\\b": 0,
+        "^\\s*axiom\\b": 0,
+        "\\bnative_decide\\b": 0,
+        "\\bofReduceBool\\b": 0,
+        "\\bimplemented_by\\b": 0,
+        "@\\[extern": 0,
+        "debug\\.skipKernelTC": 0,
+        "\\bunsafe\\b": 0
+      }
+    },
+    {
+      "module": "Sqpack.Spec",
+      "path": "lean/Sqpack/Spec.lean",
+      "blob": "fa4a6248a5f6168220397a359e4bbe474d9d1e8c",
+      "bytes": 4812,
+      "lines": 105,
+      "imports": [
+        "Mathlib"
+      ],
+      "escapes": {
+        "\\bsorry\\b": 0,
+        "^\\s*axiom\\b": 0,
+        "\\bnative_decide\\b": 0,
+        "\\bofReduceBool\\b": 0,
+        "\\bimplemented_by\\b": 0,
+        "@\\[extern": 0,
+        "debug\\.skipKernelTC": 0,
+        "\\bunsafe\\b": 0
+      }
+    }
+  ],
+  "missing": [
+    "Sqpack.Exact.Fang.P110",
+    "Sqpack.Exact.Fang.P132",
+    "Sqpack.Exact.Fang.P156",
+    "Sqpack.Exact.Fang.P182",
+    "Sqpack.Exact.Fang.P211",
+    "Sqpack.Exact.Fang.P241",
+    "Sqpack.Exact.Fang.P273",
+    "Sqpack.Exact.Fang.P308",
+    "Sqpack.Exact.Fang.P343",
+    "Sqpack.Exact.Fang.P381",
+    "Sqpack.Exact.Fang.P421",
+    "Sqpack.Exact.Fang.P463",
+    "Sqpack.Exact.Fang.P507",
+    "Sqpack.Exact.Fang.P553",
+    "Sqpack.Exact.Fang.P601",
+    "Sqpack.Exact.Fang.P651",
+    "Sqpack.Exact.Fang.R257",
+    "Sqpack.Exact.Fang.R443"
+  ],
+  "external": {
+    "Mathlib": 1
+  },
+  "escapes": {
+    "\\bsorry\\b": 0,
+    "^\\s*axiom\\b": 0,
+    "\\bnative_decide\\b": 0,
+    "\\bofReduceBool\\b": 0,
+    "\\bimplemented_by\\b": 0,
+    "@\\[extern": 0,
+    "debug\\.skipKernelTC": 0,
+    "\\bunsafe\\b": 0
+  },
+  "scope": [
+    "lean/Sqpack/Conjectures.lean",
+    "lean/Sqpack/ConjecturesProofs.lean",
+    "lean/Sqpack/ExactCheck.lean",
+    "lean/Sqpack/ExactCheckCut.lean",
+    "lean/Sqpack/ExactPack.lean",
+    "lean/Sqpack/ExactQuad.lean",
+    "lean/Sqpack/ExactRect.lean",
+    "lean/Sqpack/FangFinal.lean",
+    "lean/Sqpack/FangGlue.lean",
+    "lean/Sqpack/FangTheorem.lean",
+    "lean/Sqpack/RyuBand.lean",
+    "lean/Sqpack/RyuBound.lean",
+    "lean/Sqpack/ShadowCheck.lean",
+    "lean/Sqpack/Spec.lean",
+    "lean/lake-manifest.json",
+    "lean/lakefile.toml",
+    "lean/lean-toolchain"
+  ]
+}

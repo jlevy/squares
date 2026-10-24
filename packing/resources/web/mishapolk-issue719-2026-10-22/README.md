@@ -295,7 +295,9 @@ Mykhailo Polkovskyi (Mishapolk), the name the record has used since issue 593 an
 issue’s credit since its 11:35:16Z edit. At 105 and 204 the entry credits each packing’s
 finders first, as a regularization: Ryan Xu’s packing as Francisco Couzo and PingYou Ltd
 refined it (T-174), and Couzo’s packing, first reported in #670 and refined in #675 and
-#678 (T-223), which Couzo’s source credits to Polkovskyi’s own construction. The
+#678 (T-223), whose search, by Couzo’s answer of 23 October on #670, started from
+Polkovskyi’s own T-186 packing, his refinement of Daniil Ostashev’s packing as PingYou Ltd
+refined it; so the credit line names Ostashev and PingYou Ltd in that chain. The
 author’s comments give the lineage: at 105 he refined PingYou Ltd’s certificate of
 Couzo’s refinement of Xu’s packing, and at 204 he started from Couzo’s #678 certificate,
 not from Evan Daniel’s regularized view (T-225), so Daniel’s regularization is no

@@ -176,6 +176,16 @@ sources:
       at 4.5058 on Burns's architecture (21 August 2026), retained under
       web/n17-lower-bounds-2026/ with both public verifiers; the authors are read from
       the two retained posts. Dated by Massaccesi's post, the result T-015 registers.
+  - key: '[Friedman DS7]'
+    authors: [Friedman]
+    year: 2009
+    venue: Electron. J. Combin. DS7
+    note: >-
+      Erich Friedman's dynamic survey, first published in 1998; the retained copy, in
+      papers/friedman-ds7-packing-unit-squares-in-squares.pdf with its transcription, is the
+      2009 revision, whose Theorem 1 proves s(2) = s(3) = 2 and Theorem 2 s(5) = 2 + 1/sqrt 2
+      by four unavoidable points. Added on 24 October 2026 for T-237, the first register
+      entry to name it in its attribution.
   - key: '[Göbel 1979]'
     authors: [Göbel]
     year: 1979
@@ -1669,13 +1679,18 @@ sources:
     year: 2026
     venue: GitHub
     dated: '2026-10-08'
-    credit: Hosono after Levy
+    credit: Hosono after Tokoharu and Levy
     lineage: builds-on-project
     note: Seven finer-net measure lower-bound reports for n19,20,26,27,28,29,31 at source 61e37d583ad690266da2188ad027ef3f697bf162;
       original archives/nested source identities retained outside live Git. Conditional maintained measure/net-premise
-      review accepted, native capture/outcomes/adoption pending. Nearest enclosing project MIT notice
+      review accepted. Complete native captures of the four certificates T-233 registers passed here on
+      23 October, with whole-net controls refused at n19, n20 and n27 and failed closed at n26 on the
+      census's axis allowance (think-tcsl); their adoption is pending. Nearest enclosing project MIT notice
       does not settle nested verifier third-party redistribution. The source adapts this project’s sqverify_fast
-      geometric kernel; the prospective maintained replay is not another independent implementation.
+      geometric kernel; the maintained replay is not another independent implementation.
+      The release members of the four certificates T-233 registers (n19, n20, n26 and the n27
+      follow-up at bf85d6b537a7e854ac2f885c871474ea46db65ac) are retained in packet
+      wand125-fine-net-lower-bounds-446-release-2026-10-08.
   - key: '[Couzo exact refinements 2026-10-08]'
     authors:
     - Couzo
@@ -1985,6 +2000,24 @@ sources:
       Native capture, controls and adoption pending. The enclosing MIT notice does not settle
       redistribution of the nested verifier, which adapts this project's sqverify_fast, so a maintained
       replay is not another independent implementation.
+  - key: '[wand125 fine-net n31 2026-10-11]'
+    authors: [Hosono]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-11'
+    credit: Hosono after Tokoharu and Levy
+    lineage: builds-on-project
+    note: >-
+      The n31 finer-net measure lower-bound report, s(31) >= 2391/400 = 5.9775 by
+      mixed_n31_L59775 on the 2,073-direction net, that wand125/square-packing added at
+      23e31862345c532d17ad2c896677a3a8d8821aa4, the packet's pin, on 2026-10-11, reported on
+      no issue. Its data are in release square-lower-bounds-v1; the asset's candidate,
+      receipts and logs are retained under OR-18, the nested verifier archive is pinned by
+      digest, and the directory's MIT documents are retained. Maintained measure,
+      declared-net and full check2 premises accepted. Complete maintained native capture,
+      whole-net controls and the mathematical review of 23 October 2026 done; adopted at
+      n = 31 (T-232). The nested verifier adapts this project's sqverify_fast, so the
+      maintained replay is not another independent implementation.
   - key: '[wand125 linear n122 2026-10-10]'
     authors: [Hosono]
     year: 2026
@@ -3154,7 +3187,7 @@ sources:
     venue: GitHub
     dated: '2026-10-18'
     lineage: builds-on-project
-    credit: Couzo after de Winter, Polkovskyi, Daniel, Fang, PingYou Ltd, Levy
+    credit: Couzo after de Winter, Polkovskyi, Ostashev, Daniel, Fang, PingYou Ltd, Levy
     short_credit: Couzo after de Winter et al.
     note: >-
       Francisco Couzo's issue 678 reports 85 upper bounds for n = 204 to 998 by 83 exact
@@ -3165,7 +3198,10 @@ sources:
       modified by Couzo with Codex, in web/couzo-issue678-2026-10-18/; prose, the index
       and the provenance manifest are hash-pinned. The manifest keeps seed and
       construction credits, among them Joost de Winter, Mykhailo Polkovskyi, Evan Daniel,
-      Kevin Fang and PingYou Ltd. The source checks with this project's verification
+      Kevin Fang and PingYou Ltd. At 204 the seed it credits to Polkovskyi is T-186's
+      packing, his refinement of Daniil Ostashev's packing as PingYou Ltd refined it, by the
+      author's answer of 23 October 2026 on issue 670: the 204 certificate refines #670's
+      packing, whose search started there. The source checks with this project's verification
       code and Daniel's checker; that lineage is not independent. T-223 registers 204
       and 260 at V0/C0, pending adoption, and the 83 beyond the corpus are beyond-horizon
       rows; the packet's exact replay is Stage 4 evidence pending a mapped mathematical
@@ -3241,6 +3277,22 @@ sources:
       it was dilated from and the source''s pipeline report are retained beside it. MIT-licensed; Claude
       assistance disclosed. The not-jammed verdict and the predicted descent of about 4.8e-7 are the author''s
       numerical statements; no local or global optimality claim.'
+  - key: '[Kristiansen n303 2026-10-23]'
+    authors:
+    - Kristiansen
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-23'
+    lineage: builds-on-project
+    credit: Kristiansen after Daniel, Ostashev, Levy
+    note: 'One complete exact dilation certificate in the gist amundsk/78f9f0e7b4669f2f509a281845081768 at
+      511f56bf6e6afb4eb22f12d31371c2a2fe7b4767, s(303) <= 223872029093440709529093216833/(125*10^26), found by
+      a perturb-and-polish search from Evan Daniel''s #728 packing (W-known-best-n303, found from Daniil
+      Ostashev''s packing), which the issue names as the start, with Daniel''s fq quench, dilate_cert.py and
+      checkers. Measured pose by pose in the packet (measure/identity.json), it is another arrangement of
+      T-230''s packing, found from it, not a refinement of it: one to one under the identity, 12 squares
+      beyond a tenth, 96 tilted squares against 91. No licence stated: derived exact fact only, no upstream
+      byte retained. Claude assistance disclosed. No local or global optimality claim.'
   - key: '[Muglich issue 686 2026-10-19]'
     authors:
     - Muglich
@@ -3293,13 +3345,15 @@ sources:
     venue: GitHub
     dated: '2026-10-20'
     lineage: builds-on-project
-    credit: Daniel after Couzo, de Winter, Polkovskyi, Levy
+    credit: Daniel after Couzo, de Winter, Polkovskyi, Ostashev, PingYou Ltd, Levy
     short_credit: Daniel after Couzo et al.
     note: 'Four complete exact certificates at 0075967bace18a3deabcc0baa64c2fb294fc80a0 from the
       display-regularized record lists of search/regularize: at 204, 227 and 260 Francisco Couzo''s packings
       (at 227 the refinement of Joost de Winter''s #668 packing that his #672 reports) and at 229 Evan
       Daniel''s own #674 packing, each solved to its exact side, regularized for display at that side and
-      scaled by 1 + 1e-20. MIT-licensed certificates and JSON retained; Claude assistance disclosed. The
+      scaled by 1 + 1e-20. At 204 Couzo''s packing descends from Mykhailo Polkovskyi''s T-186 packing, his
+      refinement of Daniil Ostashev''s packing as PingYou Ltd refined it, by Couzo''s answer of 23 October
+      2026 on issue 670. MIT-licensed certificates and JSON retained; Claude assistance disclosed. The
       source claims no record; no KKT, same-packing, local or global optimality is admitted.'
   - key: '[Couzo issue 670 2026-10-17]'
     authors:
@@ -3308,13 +3362,16 @@ sources:
     venue: GitHub
     dated: '2026-10-17'
     lineage: builds-on-project
-    credit: Couzo after Polkovskyi, Daniel, Levy
+    credit: Couzo after Polkovskyi, Ostashev, PingYou Ltd, Daniel, Levy
     short_credit: Couzo after Polkovskyi et al.
-    note: 'Issue 670''s in-corpus certificate at 23aff0c6f992271e1ad13a148d44f392c4b386c0: s(204) from a
-      search the source seeds with Mykhailo Polkovskyi''s construction (hop job 105412). Retained as factual
-      data with its per-count JSON; the source''s checker, Evan Daniel''s MIT verifier as Couzo modified
-      it with Codex, is pinned by digest. OpenAI Codex assistance disclosed. No optimizer, local or global
-      claim.'
+    note: 'Issue 670''s in-corpus certificate at 23aff0c6f992271e1ad13a148d44f392c4b386c0: s(204) from three
+      rounds of basin hopping (jobs 101216, 103222 and 105412) and a quarter turn, which the author''s answer
+      of 23 October 2026 on the issue starts at Mykhailo Polkovskyi''s certificates/square-204.cert at
+      Mishapolk/square-packing-records@70a033f, T-186''s certificate: Polkovskyi''s refinement of Daniil
+      Ostashev''s packing, as PingYou Ltd refined it. Retained as factual data with its per-count JSON; the
+      seed''s decimal form, n204.txt at 4e4c8ce, is retained in couzo-index-2026-10-15. The source''s checker,
+      Evan Daniel''s MIT verifier as Couzo modified it with Codex, is pinned by digest. OpenAI Codex assistance
+      disclosed. No optimizer, local or global claim.'
   - key: '[Couzo issue 672 2026-10-17]'
     authors:
     - Couzo
@@ -3336,13 +3393,15 @@ sources:
     venue: GitHub
     dated: '2026-10-18'
     lineage: builds-on-project
-    credit: Couzo after Polkovskyi, Daniel, Levy
+    credit: Couzo after Polkovskyi, Ostashev, PingYou Ltd, Daniel, Levy
     short_credit: Couzo after Polkovskyi et al.
     note: 'Issue 675''s in-corpus certificate at c6da0fc7524d667bf3d224559724ba9b60762e60: s(204), an slp
       refinement (job 107960) from a search the source seeds with Mykhailo Polkovskyi''s construction, one
-      to one with #670''s packing. Retained as factual data with its per-count JSON; the source''s checker,
-      Evan Daniel''s MIT verifier as Couzo modified it with Codex, is pinned by digest. OpenAI Codex assistance
-      disclosed. No optimizer, local or global claim.'
+      to one with #670''s packing, whose search the author''s answer of 23 October 2026 on issue 670 starts
+      at T-186''s packing: Polkovskyi''s refinement of Daniil Ostashev''s packing, as PingYou Ltd refined
+      it. Retained as factual data with its per-count JSON; the source''s checker, Evan Daniel''s MIT
+      verifier as Couzo modified it with Codex, is pinned by digest. OpenAI Codex assistance disclosed. No
+      optimizer, local or global claim.'
   - key: '[Couzo issue 715 2026-10-21]'
     authors:
     - Couzo
@@ -3372,13 +3431,15 @@ sources:
     venue: GitHub
     dated: '2026-10-22'
     lineage: builds-on-project
-    credit: Polkovskyi after Couzo, Muglich, Daniel, Xu, PingYou Ltd, Levy
+    credit: Polkovskyi after Couzo, Muglich, Daniel, Xu, Ostashev, PingYou Ltd, Levy
     short_credit: Polkovskyi after Couzo et al.
     note: >-
       Issue 719's 122 exact certificates at 12fc46678fa8eefa3f156ff37dfffd84c8f3a580 in
       Evan Daniel's format, certificates/n-N.cert: re-solves at 105 and 204 of the case's
       house packings (T-174's at 105 and, at 204, Couzo's #678 packing, which the author's
-      comment of 23 October names as his start) and 120 rows beyond the corpus, many of them
+      comment of 23 October names as his start and whose search, by Couzo's answer of 23
+      October on issue 670, began at the author's own T-186 packing, his refinement of Daniil
+      Ostashev's packing as PingYou Ltd refined it) and 120 rows beyond the corpus, many of them
       re-solves of Couzo's and Muglich's packings and some new arrangements. No licence:
       derived exact facts only, no upstream byte retained. The issue credits Mishapolk
       (Mykhailo Polkovskyi, since its 11:35:16Z edit) and the finders its packings build
@@ -3389,7 +3450,7 @@ sources:
     venue: GitHub
     dated: '2026-10-22'
     lineage: builds-on-project
-    credit: Polkovskyi after Couzo, Daniel, Levy
+    credit: Polkovskyi after Couzo, Ostashev, PingYou Ltd, Daniel, Levy
     short_credit: Polkovskyi after Couzo et al.
     note: >-
       The second 204 file of issue 719's release, certificates/n204.cert at
@@ -3402,7 +3463,9 @@ sources:
       certificates/n*.cert; the certificate's own first line names verify_cert.py. His
       comment of 23 October on how those checkers ran was given of the 122 claimed files,
       and of this one he says only that it passed both of this repository's exact routes.
-      Couzo's source credits Polkovskyi's own construction as the seed of its search. Measured by the 23 October review, its side and the rows
+      Couzo's answer of 23 October on issue 670 traces the seed of that search to
+      Polkovskyi's own T-186 packing, his refinement of Daniil Ostashev's packing as PingYou
+      Ltd refined it. Measured by the 23 October review, its side and the rows
       Daniel's exact solver determines are that solver's output for T-229's arrangement,
       which the source does not say: a method credit, not an antecedent of the packing.
       Retained under the author's written grant on issue 719, the MIT licence of 17cc220
@@ -3589,6 +3652,111 @@ sources:
       reports they beat (think-fwa9, answered 23 October 2026); its bounds above 1024 wait on the
       owner (D1). Retained as factual data.
       OpenAI Codex assistance disclosed. No optimality claim.
+  - key: '[wand125 n21 zero-margin Lean 2026-09-29]'
+    authors: [Hosono]
+    year: 2026
+    venue: GitHub
+    dated: '2026-09-29'
+    credit: Hosono after Daniel, Levy, Stromquist, Nagamochi, Burns, Massaccesi
+    short_credit: Hosono after Daniel, Levy et al.
+    lineage: credits-project
+    note: >-
+      Hiroaki Hosono's hypothesis-free Lean proof SquarePacking.n21pts_eq_5 : minSide 21 = 5
+      in wand125/square-packing-bounds point_n21_L5/lean/zero-margin/, added at
+      77636c63f45a90d9a829417a1722a3bf9bfef37d (2026-09-29T07:16:17Z), the pin, and unchanged
+      to the archived head 069f3276, in web/wand125-n21-zero-margin-lean-2026-09-29/. It
+      checks the capture-one normalisation of the point-only cover of T-055 by a zero-margin
+      box tree that Evan Daniel's gen_zmtree.py generates, on his Lean library at
+      evand/square-packing 6aa82ba4, which earlier evand packets retain; the README says only
+      N21PtsLower.lean, the axiom report and the build script are the author's. The
+      repository README credits this project second-hand, as for [wand125 point and mixed
+      bounds 2026-09-28], and says parts of the work were produced with AI assistance under
+      human direction. The proof checks that key's cover, so the cover's antecedents travel
+      with it: the README at the pin keeps "The method is not ours", attributing the
+      weighted fractional unavoidable-set method to Stromquist, Nagamochi, Burns and
+      Massaccesi (lines 635-650). Tokoharu, whom that key also credits, is the antecedent of
+      its n = 50 checker and not of the s(21) cover. Not built here.
+  - key: '[wand125 n59 Lean kernel 2026-10-11]'
+    authors: [Hosono]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-11'
+    credit: Hosono after Daniel, Levy, Stromquist, Nagamochi, Burns, Massaccesi
+    short_credit: Hosono after Daniel, Levy et al.
+    lineage: credits-project
+    note: >-
+      Hiroaki Hosono's Lean kernel proof SquarePacking.s59_eq_8 : minSide 59 = 8 in
+      wand125/square-packing problems/square-lower-bounds/certificates/k2m5_n59_L8/lean/,
+      added at the pin f9a77b7d38fd60144b78fe290c94f841ab626156 (2026-10-11T01:42:37Z), in
+      web/wand125-n59-lean-kernel-2026-10-11/: the mixed cover of T-066 checked by Evan
+      Daniel's ZMTreeM.checkM, CovM and le_minSide_mixed, used unchanged at
+      evand/square-packing 1718a580, over 43,444 generated files the source does not store
+      (SOURCES.sha256 lists them). The source's receipt gives 862 CPU-hours. The lineage is
+      the same repository's, credits-project, and the credit carries the cover's
+      antecedents, as [wand125 exact covers 2026-10-01] credits them; the commit names Claude
+      as co-author. Not built here.
+  - key: '[Daniel Fang and Ryu Lean 2026-10-18]'
+    authors: [Daniel]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-18'
+    credit: Daniel after Fang, Arslanov, Mustafin, Shangitbayev, Levy
+    short_credit: Daniel after Fang et al.
+    lineage: credits-project
+    note: >-
+      Evan Daniel's Lean proofs of Kevin Fang's Theorems 1 and 2, theorem1 and theorem2 of
+      lean/Sqpack/FangFinal.lean (f4883b41, 2026-10-18T02:08:26Z), on 18 exact rational piece
+      certificates checked by decide +kernel, and of Sungjoon Ryu's Theorem 1.4,
+      packs_sub_8sqrt of lean/Sqpack/RyuBound.lean, with no certificates, in
+      evand/square-packing at the pin 8475bdf41571c59c8c240aedaddc48e19e0e4707
+      (2026-10-18T02:17:40Z), in web/evand-fang-ryu-lean-2026-10-18/. The pieces' README
+      credits the theorems to Fang after Arslanov, Mustafin and Shangitbayev's decomposition
+      and each piece's packing to its finder; the task note names this project's T-163 and
+      issue 603, so this project is credited second-hand. The credit names the Fang
+      theorems' lineage, the only use the register makes of this key: the closure of
+      theorem1 and theorem2 (receipts/lean-closure.json) is FangFinal, FangTheorem,
+      FangGlue, ConjecturesProofs, Conjectures, Spec and the 18 generated pieces, and
+      RyuBand imports FangGlue, not the reverse, so T-236 rests on no theorem of Ryu's.
+      Sungjoon Ryu is the antecedent of the packs_sub_8sqrt formalization alone, which
+      RyuBound.lean credits to him and the asymptotic register's row records under his
+      name. CREDITS.md, byte-identical to the 12 October exact-data packet's, reads
+      "Produced by Claude (Anthropic) in a single session under human direction". Not built
+      here.
+  - key: '[Daniel small-n rectangles Lean 2026-10-22]'
+    authors: [Daniel]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-22'
+    lineage: independent
+    note: >-
+      Evan Daniel's Lean proofs of which rectangles hold two, three and four unit squares
+      (rect2_iff, rect3_iff, rect4_iff) and of the four-point bound rect5_pts_lower with the
+      constructions rect5_upper, 21 October 2026, at evand/square-packing
+      7051f4eabf7f9b2509ad1e7cc296f57d19482027 (2026-10-22T01:54:20Z), in
+      web/evand-rect-small-n-lean-2026-10-22/. At equal sides they give s(2) = s(3) = s(4) = 2
+      and s(5) = 2 + 1/sqrt 2. The README credits the regions' boundaries to Erich Friedman's
+      Math Magic of June 2010, mostly Maurizio Morandi, and the value of s(5) to Goebel 1979;
+      its literature note finds chelokot's formalization of s(5) earlier. CREDITS.md,
+      byte-identical to the 12 October exact-data packet's, reads "Produced by Claude
+      (Anthropic) in a single session under human direction". Not built here.
+  - key: '[chelokot small-n Lean 2026-09-05]'
+    authors: [chelokot]
+    year: 2026
+    venue: GitHub
+    dated: '2026-09-05'
+    credit: chelokot
+    lineage: independent
+    note: >-
+      chelokot's Lean proofs s2_eq_two, s3_eq_two, s4_eq_two (16 August 2026) and
+      s5_eq_goebel : IsMinimumSide 5 (2 + Real.sqrt 2 / 2) (29 August, by Friedman's four
+      unavoidable points) in chelokot/square-packing-archive, at
+      753079eb37d8d16225a5dc1f56e493a3c3b243f4 (2026-09-05T21:42:12Z), the commit
+      [chelokot Nagamochi counterexample 2026] pins, in web/chelokot-small-n-lean-2026-09-05/.
+      Apache-2.0. The author is the handle the repository names; its ATTRIBUTION.md credits
+      chelokot with the project's creation, concept and product direction, and GPT 6 Astra
+      with the archive's AI-produced research, packing optimizations and Lean
+      formalizations, and the repository does not cite this project. This repository built the whole archive at this commit on 2 October 2026 for
+      T-086, and that build's log prints these theorems' axioms.
   - key: '[wand125 sqverify continuous 2026-10-12]'
     authors: [Hosono]
     year: 2026
@@ -3655,3 +3823,4 @@ credited_names:
   Mishapolk: Mishapolk
   PingYou Ltd: PingYou Ltd
   Darius Muglich: Muglich
+  Amund Kristiansen: Kristiansen
