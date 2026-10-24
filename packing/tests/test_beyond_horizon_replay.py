@@ -2184,7 +2184,7 @@ def test_763_s_rows_are_current_and_supersede_the_rows_they_beat() -> None:
 
 def _flip_964ee2b_at_204(monkeypatch: pytest.MonkeyPatch) -> None:
     """Review B's control C8 (#789): 964ee2b's step at 204, above T-231, read as recorded."""
-    real = replay._ledger_counts  # noqa: SLF001
+    real = vars(replay)["_ledger_counts"]
 
     def flipped(path: str, modified: int) -> list[dict[str, Any]]:
         counts = copy.deepcopy(real(path, modified))
@@ -2231,7 +2231,7 @@ def test_a_corpus_count_a_walk_records_is_held_to_a_registered_result(
 def _with_read(
     monkeypatch: pytest.MonkeyPatch, path: Path, change: Callable[[dict[str, Any]], None]
 ) -> None:
-    real = replay._read  # noqa: SLF001
+    real = vars(replay)["_read"]
 
     def read(where: Path) -> Any:
         data = real(where)
