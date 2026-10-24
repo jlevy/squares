@@ -5,7 +5,7 @@ title: "Import the 99 Kaggle-credited sides franciscouzo/square-packing publishe
 kind: task
 status: in_progress
 priority: 1
-version: 9
+version: 10
 delegate: c-import-lyf9-1024
 labels:
   - result-import
@@ -16,7 +16,7 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-24T11:57:05.011Z
-updated_at: 2026-10-24T18:11:05.533Z
+updated_at: 2026-10-24T18:23:43.288Z
 started_at: 2026-10-24T13:38:16.607Z
 ---
 
@@ -148,3 +148,5 @@ LEFT
 - Replay: 185 of 185 verified on both routes, 1,110 controls refused by both (213.8 positive CPU s; the five changed releases 731 s of wall on two workers from 17:22:00Z).
 - For the coordinator (outside this diff, from the review): think-g2qy's "no certificate file" premise for #763's held recipes needs the same check (best/nN.cert new in this push at 444, 487, 632, 683, 733, 734, 737, 788, 789, 845, 909, 910, 966, 970).
 - Owner question added: credit at 364, 450 and 874 (the measurement does not pair the row with the push's earlier side one to one).
+
+2026-10-24 coord-intake-1024: credit at 364, 450 and 874 (pairing not one to one: 116, 200, 234 squares beyond 1e-3) is decided by the runbook, not the owner: only a refinement is credited 'after' the packing it refines ('Several Reports at One Count', 'A refinement'), so each row is credited to its finder as the source's manifest states, with the measurement recorded. The addressing round after review B applies it.
