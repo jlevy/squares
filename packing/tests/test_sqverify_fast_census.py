@@ -249,6 +249,50 @@ def test_every_entry_the_verifier_decides_has_a_verified_case_and_a_refused_cont
         assert controls()[name]["status"] == "CONTROLS_REFUSED", evidence_id
 
 
+def failed_controls() -> dict[Path, dict[str, Any]]:
+    """Each control receipt kept after it failed closed, `CERT.control-failed-vN.json`,
+    outside the receipts `controls()` reads."""
+    return {
+        path: json.loads(path.read_text(encoding="utf-8"))
+        for folder in (FOLDER, RECTANGLES)
+        for path in sorted(folder.glob("*/*.control-failed-v*.json"))
+    }
+
+
+def test_each_failed_control_receipt_is_kept_as_it_failed_and_decides_nothing() -> None:
+    """A receipt kept after its control failed closed (n96's v1 of 3 October, n26's v2 of
+    23 October) says `CONTROL_FAILED`, names its own certificate and packet and the
+    candidate its census row read, and has the kind of a control receipt. Where no
+    passing receipt was written beside it, no evidence entry the verifier decides rests on
+    its certificate (A6 of PR #745's review A)."""
+    failed = failed_controls()
+    assert {path.name for path in failed} >= {
+        "mixed_n96_L997.control-failed-v1.json",
+        "mixed_n26_L5555.control-failed-v2.json",
+    }
+    for path, receipt in failed.items():
+        name = path.name.split(".control-failed-v", 1)[0]
+        assert receipt["kind"] in KINDS, path.name
+        assert receipt["status"] == "CONTROL_FAILED", path.name
+        assert receipt["certificate"] == name, path.name
+        assert receipt["packet"] == path.parent.name, path.name
+        assert receipt["candidate_sha256"] == row_of(name)["candidate_sha256"], path.name
+        if name not in controls():
+            assert name not in cited().values(), path.name
+
+
+def test_the_census_view_marks_a_failed_control_as_kept() -> None:
+    """The generated view tells n26's failed control from a certificate with none."""
+    view = (FOLDER / "README.md").read_text(encoding="utf-8")
+    rows = {
+        line.split("|")[1].strip().strip("`"): line
+        for line in view.splitlines()
+        if line.startswith("| `")
+    }
+    assert rows["mixed_n26_L5555"].rstrip(" |").endswith("CONTROL_FAILED (kept)")
+    assert rows["mixed_n37_L644"].rstrip(" |").endswith("-")
+
+
 def net_problems(
     raw: dict[str, Any], premises: dict[str, Any], source: census.ReviewedSource | None
 ) -> list[str]:
@@ -528,22 +572,61 @@ def sweeps() -> dict[str, dict[str, Any]]:
     }
 
 
-@pytest.mark.parametrize("name", sorted(sweeps()))
+#: A sweep re-derives an exact capture at each direction it refused, so its cost grows
+#: with the net: on 23 October, 415.68 s locally for mixed_n31_L59775's 2,073 refusals
+#: against 14.90 s for mixed_n108_L1062's 201, beside a 12 s per-test ceiling. A sweep on
+#: a declared net finer than the standard one runs whole in the deep surface, and the
+#: pull request reads its refusals at every FINE_NET_STRIDE-th direction: 0, 296, ...,
+#: 2072 on a 2,073-direction net, the directions of the eight-direction pricing sample,
+#: and at the receipt's least-bound direction (`index`), where the original's capture is
+#: nearest 1 and none of those eight falls (A5 of PR #745's review A).
+FINE_NET_STRIDE = 296
+
+
+def sweep_cases() -> list[Any]:
+    """Each sweep: whole on the standard net; whole in the deep surface and sampled in
+    the pull request on a finer declared net."""
+    params: list[Any] = []
+    for name, sweep in sorted(sweeps().items()):
+        if sweep["net_directions"] > census.STANDARD_DIRECTIONS:
+            params.append(pytest.param(name, "whole", marks=pytest.mark.slow, id=name))
+            params.append(pytest.param(name, "sampled", id=f"{name}-sampled"))
+        else:
+            params.append(pytest.param(name, "whole", id=name))
+    return params
+
+
+@pytest.mark.parametrize(("name", "reading"), sweep_cases())
 def test_each_scaled_sweep_refuses_its_mutant_somewhere_with_an_exact_witness(
-    name: str,
+    name: str, reading: str
 ) -> None:
     """At every direction of the net, the 99/100 mutant is refused at one at least, and
     every direction that does not verify it is a coverage refusal at a pose in the per-bin
     domain where its capture, recomputed here from the candidate by the evaluator written
     apart from the crate, is the one the receipt keeps, below 1, with the original's at
     least 1. Where it verifies, the original captures at least 100/99, which is no
-    defect."""
+    defect. Sampled, the recomputation reads the refusals at every FINE_NET_STRIDE-th
+    direction and at the receipt's least-bound direction."""
     sweep = sweeps()[name]
     case = cases()[name]
     assert census.sweep_held(sweep)
     assert sweep["net_directions"] == census.net_directions(case)
     raw = read_raw(case.candidate)
-    for item in sweep["refused"]:
+    least = int(controls()[name]["index"])
+    refused = [
+        item
+        for item in sweep["refused"]
+        if reading == "whole"
+        or int(item["r"]) % FINE_NET_STRIDE == 0
+        or int(item["r"]) == least
+    ]
+    assert refused, name
+    if reading == "sampled":
+        # The least-bound direction is where a re-derivation matters most, so the sample
+        # must read a refusal there, as each fine-net sweep kept has one (on the standard
+        # net the mutant can verify there: mixed_n96_L997's index 139).
+        assert least in {int(item["r"]) for item in refused}, name
+    for item in refused:
         index = int(item["r"])
         assert item["verdict"] in {census.CANDIDATE, census.AXIS_REFUSED}, index
         assert census.in_domain(raw, index, item["pose"]), index
@@ -1186,3 +1269,38 @@ def test_the_16_october_fine_net_packet_is_read_from_its_retained_release_member
     for name, case in found.items():
         assert case.candidate == root / name / "candidate.json.gz"
         assert census.net_directions(case) == (2073 if case.n <= 51 else 201)
+
+
+def test_the_n31_fine_net_packet_is_read_from_its_retained_release_members() -> None:
+    """The 11 October n31 packet keeps its asset's members as the 16 October one does, and
+    is classified as sharing the producer's crate, as that packet is."""
+    packet = "wand125-fine-net-n31-2026-10-11"
+    found = {name: case for name, case in cases().items() if case.packet == packet}
+    assert list(found) == ["mixed_n31_L59775"]
+    case = found["mixed_n31_L59775"]
+    root = census.WEB / packet / "release/certificates"
+    assert case.candidate == root / "mixed_n31_L59775" / "candidate.json.gz"
+    assert (case.n, case.side) == (31, "2391/400")
+    assert census.net_directions(case) == 2073
+    assert packet in census.SHARED_CRATE_PACKETS
+    assert packet not in census.INDEPENDENT_MIXED_PACKETS
+
+
+def test_the_446_release_packet_is_read_from_its_retained_release_members() -> None:
+    """The release members of #446's four T-233 certificates are read like the n31
+    packet's, and the packet shares the producer's crate."""
+    packet = "wand125-fine-net-lower-bounds-446-release-2026-10-08"
+    found = {name: case for name, case in cases().items() if case.packet == packet}
+    expected = {
+        "mixed_n19_L48275": (19, "1931/400"),
+        "mixed_n20_L49125": (20, "393/80"),
+        "mixed_n26_L5555": (26, "1111/200"),
+        "mixed_n27_L5655": (27, "1131/200"),
+    }
+    assert {name: (case.n, case.side) for name, case in found.items()} == expected
+    root = census.WEB / packet / "release/certificates"
+    for name, case in found.items():
+        assert case.candidate == root / name / "candidate.json.gz"
+        assert census.net_directions(case) == 2073
+    assert packet in census.SHARED_CRATE_PACKETS
+    assert packet not in census.INDEPENDENT_MIXED_PACKETS

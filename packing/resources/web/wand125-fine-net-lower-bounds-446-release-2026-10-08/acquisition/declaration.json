@@ -1,0 +1,64 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "wand125-square-packing",
+  "source_url": "https://github.com/wand125/square-packing",
+  "source_ref": "refs/heads/main",
+  "source_commit": "bf85d6b537a7e854ac2f885c871474ea46db65ac",
+  "retrieved_at_utc": "2026-10-23T07:00Z",
+  "git_scope": "A depth-one, blobless fetch of this commit, of 61e37d583ad690266da2188ad027ef3f697bf162 (the revision jlevy/squares#446 reports) and of the head e48de24 read on 2026-10-23, sparsely checked out at this commit: the four certificate directories of jlevy/squares#446 that T-233 registers, mixed_n19_L48275, mixed_n20_L49125 and mixed_n26_L5555 (the same Git trees 415619d8, 8e1d48bb and 16d306b7 at 61e37d5, at this commit and at the head) and mixed_n27_L5655 (tree f109c1de at this commit and at the head), and the enclosing licence (blob bbfbff13 at all three). Every file under those directories is digested; the rest of the tree is pinned by the commit. The candidates, receipts, run and control logs, the sealed inner bundles and the nested verifier archive are assets of release square-lower-bounds-v1, outside Git; devtools.fine_net_followup retain copies each asset's data members under release/ and pins the rest (acquisition/release-assets.json). The authored-facts packet wand125-fine-net-lower-bounds-2026-10-08 holds the issue's seven claims at 61e37d5 and is unchanged.",
+  "archived_dir": "square-packing",
+  "license": "MIT, Copyright (c) 2026 wand125 (problems/square-lower-bounds/LICENSE)",
+  "claims": [
+    "s(19) >= 1931/400 = 4.8275 (problems/square-lower-bounds/certificates/mixed_n19_L48275, added at 7400660, in the issue's revision 61e37d5)",
+    "s(20) >= 393/80 = 4.9125 (problems/square-lower-bounds/certificates/mixed_n20_L49125, added at 61e37d5)",
+    "s(26) >= 1111/200 = 5.555 (problems/square-lower-bounds/certificates/mixed_n26_L5555, added at 7400660, in the issue's revision 61e37d5)",
+    "s(27) >= 1131/200 = 5.655 (problems/square-lower-bounds/certificates/mixed_n27_L5655, added at this commit, the issue's follow-up of 2026-10-08T16:53:52Z)"
+  ],
+  "scope": [
+    "problems/square-lower-bounds/LICENSE",
+    "problems/square-lower-bounds/certificates/mixed_n19_L48275",
+    "problems/square-lower-bounds/certificates/mixed_n20_L49125",
+    "problems/square-lower-bounds/certificates/mixed_n26_L5555",
+    "problems/square-lower-bounds/certificates/mixed_n27_L5655"
+  ],
+  "pinned_only": [
+    {
+      "match": "problems/square-lower-bounds/LICENSE",
+      "reason": "retained byte-identical by the FN-1 input bindings packet",
+      "identical_to": "packing/resources/web/wand125-fn1-input-bindings-2026-10-07/square-packing-bounds/LICENSE"
+    },
+    {
+      "match": "problems/square-lower-bounds/certificates/mixed_*/check2/src/SOUNDNESS.md",
+      "reason": "this repository's own packing/sqverify_fast/SOUNDNESS.md as of e020eb1e2 (Git blob cadf59b6, from b2c98e3bd until f007d7afd added lemma N0), which its history holds; the bundle copies it beside the verifier source"
+    },
+    {
+      "match": "problems/square-lower-bounds/certificates/mixed_*/check2/src/INDEPENDENCE.md",
+      "reason": "this repository's own packing/sqverify_fast/INDEPENDENCE.md as of e020eb1e2 (Git blob 9b60b4af, from 61acc9dcb until f007d7afd), which its history holds; the bundle copies it beside the verifier source"
+    },
+    {
+      "match": "problems/square-lower-bounds/certificates/mixed_*/check2/src/*",
+      "reason": "byte-identical to the mixed_n18_L4705 check2/src/ file of the same name, retained by the 2026-10-06 check2 packet",
+      "identical_to": "packing/resources/web/wand125-mixed-bounds-check2-2026-10-06/square-packing-bounds/certificates/mixed_n18_L4705/check2/src"
+    },
+    {
+      "match": "problems/square-lower-bounds/certificates/mixed_n19_L48275/provenance/search-notes.md",
+      "reason": "byte-identical to mixed_n39_L665/provenance/search-notes.md, retained by the 2026-10-06 check2 packet",
+      "identical_to": "packing/resources/web/wand125-mixed-bounds-check2-2026-10-06/square-packing-bounds/certificates/mixed_n39_L665/provenance/search-notes.md"
+    },
+    {
+      "match": "problems/square-lower-bounds/certificates/mixed_n20_L49125/provenance/search-notes.md",
+      "reason": "byte-identical to mixed_n39_L665/provenance/search-notes.md, retained by the 2026-10-06 check2 packet",
+      "identical_to": "packing/resources/web/wand125-mixed-bounds-check2-2026-10-06/square-packing-bounds/certificates/mixed_n39_L665/provenance/search-notes.md"
+    },
+    {
+      "match": "problems/square-lower-bounds/certificates/mixed_n26_L5555/provenance/search-notes.md",
+      "reason": "byte-identical to mixed_n39_L665/provenance/search-notes.md, retained by the 2026-10-06 check2 packet",
+      "identical_to": "packing/resources/web/wand125-mixed-bounds-check2-2026-10-06/square-packing-bounds/certificates/mixed_n39_L665/provenance/search-notes.md"
+    },
+    {
+      "match": "problems/square-lower-bounds/certificates/mixed_n27_L5655/provenance/search-notes.md",
+      "reason": "byte-identical to mixed_n39_L665/provenance/search-notes.md, retained by the 2026-10-06 check2 packet",
+      "identical_to": "packing/resources/web/wand125-mixed-bounds-check2-2026-10-06/square-packing-bounds/certificates/mixed_n39_L665/provenance/search-notes.md"
+    }
+  ]
+}

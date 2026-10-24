@@ -799,7 +799,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "4d04e40e1ff0e6a4e1976ed268a9b5b9db621eec"
+DATA_REVISION = "2e4f00244b52ee28c3df2f85eea9332100248d1b"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -896,6 +896,14 @@ FIRST_PUBLISHED = PUBLICATION_HISTORY[-1].first_published
 #:                                            day is the one recorded
 #: The leading entry is proposed for the next publication; confirm its date at first deployment.
 EXPLAINER_HISTORY = (
+    PublicationHistoryEntry(
+        version="v0.4.23",
+        first_published="October 24, 2026",
+        result_scope=(
+            "Update the registered result count after the registrations of Hosono's "
+            "fine-net lower bounds at 31 (T-232) and at 19, 20, 26 and 27 (T-233)."
+        ),
+    ),
     PublicationHistoryEntry(
         version="v0.4.22",
         first_published="October 24, 2026",
@@ -1430,6 +1438,16 @@ class ReleaseImpactDecision(NamedTuple):
 # New component cuts append decisions here, newest first, alongside their own histories.
 # No impact is invented retrospectively for the published baseline editions.
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
+    ReleaseImpactDecision(
+        component="paper:n11-lower-bounds-explainer",
+        previous_version="v0.4.22",
+        version="v0.4.23",
+        impact="patch",
+        reason=(
+            "Update the registered result count after the registrations of Hosono's "
+            "fine-net lower bounds at 31 (T-232) and at 19, 20, 26 and 27 (T-233)."
+        ),
+    ),
     ReleaseImpactDecision(
         component="paper:n11-lower-bounds-explainer",
         previous_version="v0.4.21",
@@ -2475,6 +2493,56 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "byte-identical. Measured once more after merging main 7335d0098 (#752), at "
             "link revision 7335d009 with that main's two files swapped in: the same "
             "outcome. No PDF was printed; it prints from that HTML. Retain v0.2.7."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/frontier/README.md",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "T-232's registration and adoption at 31 (V3/C3 after the 23 October replay "
+            "and review) and T-233's at 19, 20, 26 and 27 (V0/C1), with #446's request "
+            "entry, the coverage entries and the Smallest Open Gaps table, where n = 31 "
+            "enters second, against main 7335d0098 (#752): rendered at link revision "
+            "1d0fba96 into empty site directories, twice from this tree at 3c7f9d11e and "
+            "twice from the same tree with main's requests record, frontier README, "
+            "register, coverage record, bound citations and composite figure record "
+            "swapped in (69 files each), render_n11_optimality_review, "
+            "render_n11_threshold_bound_review and render_packing_methods write every file "
+            "byte-identical across all four. Measured before at 2d32050e4 against main "
+            "c1115c095, without the README, with the same outcome, and once more after "
+            "merging main 769e441e1 (#751, #748), at link revision b33d7f7d with that "
+            "main's six inputs swapped in: the same outcome. Only the explainer's register "
+            "count differs (230 to 232). Measured once more after "
+            "review A's record fixes (7e12d05ce, 541fea60a), against main 64b316b6c: at link "
+            "revision 541fea60 into empty site directories, from this tree and with the 16 "
+            "record files those commits change swapped back, all four papers' 69 files are "
+            "byte-identical. And after merging main 5f5294d82 (#753: T-231 and the "
+            "explainer's v0.4.22), at link revision 5f5294d8 into empty site directories, "
+            "from main's tree and from this tree at ea4a21c61 (69 files each): the three "
+            "papers' files are byte-identical, and only the explainer's HTML and Markdown "
+            "differ, in its register count (231 to 233), so the explainer takes v0.4.23. "
+            "Measured once more after merging main 0bbb0a2c4 (#754), at link revision "
+            "0bbb0a2c from main's tree and from this tree at 9bbd14ca0: the three papers' "
+            "files are again byte-identical, and the explainer differs only in that count "
+            "and its v0.4.23 history line. No PDF was printed; each prints from that HTML. "
+            "Retain v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
     ReleaseNoPublicChange(
