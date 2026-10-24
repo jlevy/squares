@@ -1224,8 +1224,8 @@ repositories:
       rect4_iff give s(2) = s(3) = s(4) = 2 and rect5_pts_lower (e96ab69) gives
       s(5) >= 2 + 1/sqrt 2: a proof-assistant route to values the record holds by published
       proofs. Since 23 October the evand-rect-small-n-lean-2026-10-22 packet pins this commit
-      and retains those theorems' closure and notes, and think-7l2j imports them, its register
-      kind awaiting think-4o9c; the rest of the R_5 development is rectangles only. The note
+      and retains those theorems' closure and notes, and think-7l2j imports them, registered
+      with chelokot's as T-238, a formalization of T-237 (think-4o9c); the rest of the R_5 development is rectangles only. The note
       literature/s5-proofs-2026-10-21.md points to chelokot's s5_eq_goebel, in the 753079eb
       tree, which the chelokot-small-n-lean-2026-09-05 packet now retains. The rest is the packer's store hygiene, deduplication and
       allocator design, and runs at 157, 273, 274 and 308 whose best sides (13.009188 at

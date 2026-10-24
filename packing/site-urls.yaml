@@ -6187,7 +6187,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-07'
+  lastmod: '2026-10-24'
   status: live
 - path: cases/20.html
   canonical: cases/20.html
@@ -7075,7 +7075,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-07'
+  lastmod: '2026-10-24'
   status: live
 - path: cases/30.html
   canonical: cases/30.html
@@ -7363,7 +7363,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-07'
+  lastmod: '2026-10-24'
   status: live
 - path: cases/40.html
   canonical: cases/40.html
@@ -7451,7 +7451,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-03'
+  lastmod: '2026-10-24'
   status: live
 - path: cases/50.html
   canonical: cases/50.html
@@ -20850,6 +20850,80 @@ urls:
     - packing/resources/web/evand-fang-ryu-lean-2026-10-18/square-packing/certificates/fang-gluing/README.md
     - packing/resources/web/evand-fang-ryu-lean-2026-10-18/square-packing/search/exact/fang_pieces.py
     - packing/resources/web/evand-fang-ryu-lean-2026-10-18/receipts/lean-closure.json
+    - packing/devtools/lean_closure.py
+- path: result/t-237.html
+  canonical: result/t-237.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-24'
+  lastmod: '2026-10-24'
+  status: live
+  identity:
+    kind: optimality
+    scope:
+      n_values:
+      - 2
+      - 3
+      - 4
+      - 5
+    established: null
+    attribution:
+      source_keys:
+      - '[Göbel 1979]'
+      - '[Friedman DS7]'
+      published: '1979'
+    builds_on: null
+    evidence:
+    - E-n005-gobel-proof
+    - E-n005-gobel-upper
+    - E-side2-center-lower
+    - E-basic-area-lower
+    - E-basic-grid-upper
+    artifacts:
+    - packing/resources/papers/gobel-1979-geometrical-packing-and-covering-problems.pdf
+    - packing/resources/papers/friedman-ds7-packing-unit-squares-in-squares.md
+    - packing/cases/gobel5/packing.py
+    - packing/cases/gobel5/verify_exact.py
+    - packing/cases/small_n/optimal_moduli.py
+    - packing/campaign/series/series-000-smoke-and-calibration/results/exp-014-h-032-n3-optimal-moduli.json
+    - packing/devtools/check_basic_bounds.py
+- path: result/t-238.html
+  canonical: result/t-238.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-24'
+  lastmod: '2026-10-24'
+  status: live
+  identity:
+    kind: formalization
+    scope:
+      n_values:
+      - 2
+      - 3
+      - 4
+      - 5
+    established: null
+    attribution:
+      source_keys:
+      - '[chelokot small-n Lean 2026-09-05]'
+      - '[Daniel small-n rectangles Lean 2026-10-22]'
+      published: '2026-08-29'
+    builds_on: null
+    evidence:
+    - E-small-n-chelokot-lean-report
+    - E-small-n-daniel-rect-lean-report
+    artifacts:
+    - packing/resources/web/chelokot-small-n-lean-2026-09-05/README.md
+    - packing/resources/web/chelokot-small-n-lean-2026-09-05/square-packing-archive/formal/SquarePackingArchive/Records/Square5.lean
+    - packing/resources/web/chelokot-small-n-lean-2026-09-05/square-packing-archive/formal/SquarePackingArchive/Records/NearSquare.lean
+    - packing/resources/web/chelokot-small-n-lean-2026-09-05/square-packing-archive/formal/SquarePackingArchive/Records/SquareNumbers.lean
+    - packing/resources/web/chelokot-small-n-lean-2026-09-05/receipts/lean-closure.json
+    - packing/campaign/series/series-000-smoke-and-calibration/results/chelokot-lean-replay/build.log
+    - packing/resources/web/evand-rect-small-n-lean-2026-10-22/README.md
+    - packing/resources/web/evand-rect-small-n-lean-2026-10-22/square-packing/lean/Sqpack/Rect5Pts.lean
+    - packing/resources/web/evand-rect-small-n-lean-2026-10-22/receipts/lean-closure.json
     - packing/devtools/lean_closure.py
 - path: results.html
   canonical: results.html

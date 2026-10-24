@@ -176,6 +176,16 @@ sources:
       at 4.5058 on Burns's architecture (21 August 2026), retained under
       web/n17-lower-bounds-2026/ with both public verifiers; the authors are read from
       the two retained posts. Dated by Massaccesi's post, the result T-015 registers.
+  - key: '[Friedman DS7]'
+    authors: [Friedman]
+    year: 2009
+    venue: Electron. J. Combin. DS7
+    note: >-
+      Erich Friedman's dynamic survey, first published in 1998; the retained copy, in
+      papers/friedman-ds7-packing-unit-squares-in-squares.pdf with its transcription, is the
+      2009 revision, whose Theorem 1 proves s(2) = s(3) = 2 and Theorem 2 s(5) = 2 + 1/sqrt 2
+      by four unavoidable points. Added on 24 October 2026 for T-237, the first register
+      entry to name it in its attribution.
   - key: '[Göbel 1979]'
     authors: [Göbel]
     year: 1979

@@ -9,11 +9,12 @@ holds them by published proofs; these are machine routes to them, and of the rep
 record holds, the first in a proof assistant. Evan Daniel’s later Lean route to the same
 values is in the [21 October rectangle packet](../evand-rect-small-n-lean-2026-10-22/README.md).
 
-Its proposed Frontier key is **[chelokot small-n Lean 2026-09-05]**. No issue asked for
-it: the triage of 22 October found it from Daniel’s literature note, which points to
-chelokot’s `s5_eq_goebel`, and bead `think-7l2j` owns its import; which kind of register
-entry it takes waits on the owner (`think-4o9c`). The claims below are
-stated as the source states them. Nothing was built for this packet; what the build of 2
+Its Frontier key is **[chelokot small-n Lean 2026-09-05]**. No issue asked for it: the
+triage of 22 October found it from Daniel’s literature note, which points to chelokot’s
+`s5_eq_goebel`, and bead `think-7l2j` owns its import. By the owner’s decision of 24
+October (`think-4o9c`) the published proofs are registered as `T-237` and this route,
+with Daniel’s, as `T-238`, a formalization of `T-237`. The claims below are stated as
+the source states them. Nothing was built for this packet; what the build of 2
 October logged for these theorems is in [Checks Made Here](#checks-made-here).
 
 ## Source and Pin

@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:ResultsRegister/v1
   schema: results.schema.yaml
   status: enforced
-last_reviewed: '2026-10-23'
+last_reviewed: '2026-10-24'
 results:
   - id: T-001
     kind: lower-bound
@@ -32673,6 +32673,219 @@ results:
       formalization states Theorem 2 in full. The theorems state s < n, not the
       construction's side n - 1/20000, so its four finite bounds are weaker than T-163's.
       The case records are unchanged.
+  - id: T-237
+    kind: optimality
+    registered: '2026-10-24'
+    landed: '2026-10-24'
+    headline: >-
+      `s(2), s(3), s(4) = 2` and `s(5) = 2 + √2/2 = 2.70710678…`, the classical first cases
+    claim: >-
+      s(2) = s(3) = s(4) = 2 and s(5) = 2 + √2/2 = 2.70710678118654752440…, the exact values
+      at the first four counts above one square, which the case records n-002 to n-005 hold
+      on the published proofs they cite.
+
+      Göbel's 1979 survey of geometrical packing and covering problems, the first
+      publication on the problem by Friedman's account, gives the exact value as known for
+      n = 2, 3 and 5 and the squares of integers, and proves s(5): its Proposition 1 says
+      that a square of side 2 + √2/2 - ε holds no five unit squares for any ε > 0, since
+      every unit square inside it covers one of four points at distance 1 - ε/3 from the
+      sides, in an outline of three cases whose calculations are omitted. The packing at
+      that side, Göbel's, puts four squares in the corners and the fifth, turned 45°, in
+      the middle.
+
+      Friedman's survey proves s(2) = s(3) = 2 as its Theorem 1: by its Lemma 1 a unit
+      square in [0, 2]^2 contains the point (1, 1) wherever its centre lies, so that one
+      point is unavoidable. s(4) = 2 is the area bound s(n) ≥ √n met by the 2 x 2 grid,
+      which also packs two and three squares at side 2. The survey's Theorem 2 proves s(5)
+      again, by the four unavoidable points (1, 1), (1, 1 + 1/√2), (1 + 1/√2, 1) and
+      (1 + 1/√2, 1 + 1/√2) of [0, 2 + 1/√2]^2, the argument chelokot's Lean proof formalizes
+      (T-238).
+
+      Göbel, Geometrical Packing and Covering Problems, Math. Centre Tracts 106, 1979;
+      Friedman,
+      [Packing Unit Squares in Squares: A Survey and New Results](https://www.combinatorics.org/ojs/index.php/eljc/article/view/DS7),
+      Electron. J. Combin. Dynamic Survey DS7, cited in its 2009 revision.
+    scope:
+      n_values: [2, 3, 4, 5]
+    verification: V3
+    confirmation: C0
+    significance:
+      score: 3
+      rationale: >-
+        Scored as its claim, as the rubric reads a result by others: every exact value
+        closes a case, and Göbel's s(5) = 2 + √2/2, the first count at which a tilted square
+        beats the grid, is a substantive case result. s(2) to s(4), consequences of one
+        unavoidable point and of area, would alone be S1, a routine consequence. The
+        record's other published exact values take their theorem's score, T-006 and T-008
+        at S3, and a value's age does not lower it, since a score follows the claim and not
+        the frontier.
+      scored: '2026-10-24'
+      by: think-4o9c classical entry (draft, c-land-750-1024 for think-ehx5)
+    novelty: previously-published
+    attribution:
+      source_keys:
+        - '[Göbel 1979]'
+        - '[Friedman DS7]'
+      published: '1979'
+    evidence:
+      - E-n005-gobel-proof
+      - E-n005-gobel-upper
+      - E-side2-center-lower
+      - E-basic-area-lower
+      - E-basic-grid-upper
+    composition: >-
+      Compound, by count and half. At n = 5 the lower half is Göbel's published proof
+      (E-n005-gobel-proof), an outline no review here has read, and the upper half is his
+      packing, checked in exact arithmetic here (E-n005-gobel-upper). At n = 2 and 3 the
+      lower half is the side-2 bound Friedman's Theorem 1 states, replayed exactly here
+      (E-side2-center-lower); at n = 4 it is the area bound, and at n = 2 to 4 the upper
+      half is the grid, both replayed exactly by the basic-bounds checker (E-basic-area-lower,
+      E-basic-grid-upper). These are the evidence entries the four case records cite. The
+      entry stands at C0, the minimum over its parts, which is the lower half at n = 5: the
+      checker's claim pools also count the area bound there, and at n = 2 and 3, where it
+      falls short of the value, and so derive more than that half holds. The Lean proofs
+      are T-238's and are not cited here.
+    artifacts:
+      - packing/resources/papers/gobel-1979-geometrical-packing-and-covering-problems.pdf
+      - packing/resources/papers/friedman-ds7-packing-unit-squares-in-squares.md
+      - packing/cases/gobel5/packing.py
+      - packing/cases/gobel5/verify_exact.py
+      - packing/cases/small_n/optimal_moduli.py
+      - packing/campaign/series/series-000-smoke-and-calibration/results/exp-014-h-032-n3-optimal-moduli.json
+      - packing/devtools/check_basic_bounds.py
+    next_rung: >-
+      C1 needs a review here of the lower half at n = 5, Göbel's Proposition 1 or
+      Friedman's Theorem 2, read from the retained papers. C3 needs a machine check of that
+      half here, an exact audit of the four unavoidable points as T-004 is of Bentz's s(46),
+      cited here. A build of T-238's Lean proofs would be that formalization's evidence and
+      not this entry's. V4 and C4 need two adversarial AI reviews by distinct reviewers and
+      a human oversight record.
+    notes: >-
+      Registered on 24 October 2026 by the landing lane c-land-750-1024 (think-ehx5), by
+      the owner's decision of 24 October on think-4o9c: the classical proofs of s(2) to
+      s(5) are registered first, so that chelokot's and Evan Daniel's Lean proofs, T-238,
+      formalize a registered result. It enters under the register's rule for older
+      results, since its evidence holds n-005's verified lower and upper bounds. The
+      evidence it cites is what the case records already cite, and the case records are
+      unchanged. [Friedman DS7] entered the bibliography with this entry, from the
+      retained survey.
+  - id: T-238
+    kind: formalization
+    proves_kind: optimality
+    registered: '2026-10-24'
+    landed: '2026-10-24'
+    headline: >-
+      `s(2), s(3), s(4) = 2` and `s(5) = 2 + √2/2 = 2.70710678…`, in Lean, by chelokot and by Daniel
+    claim: >-
+      s(2) = s(3) = s(4) = 2 and s(5) = 2 + √2/2 = 2.70710678118654752440…, proved in Lean 4
+      twice, by chelokot and by Evan Daniel: a formalization of T-237, the classical values
+      the case records hold by published proofs, and the first proof-assistant routes to
+      them the record holds.
+
+      chelokot's archive proves Records.Square5.s5_eq_goebel : IsMinimumSide 5 (2 +
+      Real.sqrt 2 / 2), by Göbel's packing and Friedman's four unavoidable points (1, 1),
+      (1, 1 + d), (1 + d, 1) and (1 + d, 1 + d) with d = √2/2, and s2_eq_two, s3_eq_two and
+      s4_eq_two, IsMinimumSide n 2 for n = 2, 3 and 4, where IsMinimumSide n s says that n
+      closed unit squares, each translated and rotated, fit in [0, s]^2 with pairwise
+      disjoint interiors and fit in no smaller side. This repository built the archive at
+      the pin on 2 October 2026 for T-086, and that build's log prints these theorems'
+      axioms, propext, Classical.choice and Quot.sound; no receipt names them yet. chelokot,
+      [square-packing-archive](https://github.com/chelokot/square-packing-archive/tree/753079eb37d8d16225a5dc1f56e493a3c3b243f4/formal/SquarePackingArchive/Records),
+      August 2026.
+
+      Daniel's rect2_iff, rect3_iff and rect4_iff decide which rectangles hold two, three
+      and four unit squares, and rect5_pts_lower and rect5_upper give five squares in a
+      square of side a >= 2 exactly when a >= 2 + √2/2. At equal sides they give the same
+      values; no theorem of his states s(n) itself, and the step from the rectangle
+      theorems to the square values is read here, not proved in Lean. The source reports
+      standard axioms only. Daniel,
+      [square-packing](https://github.com/evand/square-packing/tree/7051f4eabf7f9b2509ad1e7cc296f57d19482027/lean/Sqpack),
+      21 October 2026; his literature note credits chelokot's proof as the earlier.
+    scope:
+      n_values: [2, 3, 4, 5]
+    verification: V0
+    confirmation: C0
+    significance:
+      score: 2
+      rationale: >-
+        Proof-assistant proofs of four classical values the record holds by published
+        proofs (T-237): a second route to values the record holds, which is S2, as T-054,
+        T-055 and T-234 are, a citable detail that changes no theorem.
+      scored: '2026-10-24'
+      by: >-
+        think-7l2j chelokot and Evan Daniel import (draft, c-lean-1023), kept for the
+        formalization of T-237 by c-land-750-1024 (think-4o9c)
+    novelty: previously-published
+    attribution:
+      source_keys:
+        - '[chelokot small-n Lean 2026-09-05]'
+        - '[Daniel small-n rectangles Lean 2026-10-22]'
+      published: '2026-08-29'
+    evidence:
+      - E-small-n-chelokot-lean-report
+      - E-small-n-daniel-rect-lean-report
+    composition: >-
+      Two routes, each its source's report and each claiming the four exact values:
+      E-small-n-chelokot-lean-report, chelokot's, first, and
+      E-small-n-daniel-rect-lean-report, Daniel's, second, whose square values are read
+      from rectangle theorems. Neither is a build retained under a receipt, so V0, and no
+      review has read either, so C0. T-237's evidence, the published proofs and this
+      record's checks of them, is not cited: a proof assistant's check of T-237 is what
+      this entry adds.
+    artifacts:
+      - packing/resources/web/chelokot-small-n-lean-2026-09-05/README.md
+      - packing/resources/web/chelokot-small-n-lean-2026-09-05/square-packing-archive/formal/SquarePackingArchive/Records/Square5.lean
+      - packing/resources/web/chelokot-small-n-lean-2026-09-05/square-packing-archive/formal/SquarePackingArchive/Records/NearSquare.lean
+      - packing/resources/web/chelokot-small-n-lean-2026-09-05/square-packing-archive/formal/SquarePackingArchive/Records/SquareNumbers.lean
+      - packing/resources/web/chelokot-small-n-lean-2026-09-05/receipts/lean-closure.json
+      - packing/campaign/series/series-000-smoke-and-calibration/results/chelokot-lean-replay/build.log
+      - packing/resources/web/evand-rect-small-n-lean-2026-10-22/README.md
+      - packing/resources/web/evand-rect-small-n-lean-2026-10-22/square-packing/lean/Sqpack/Rect5Pts.lean
+      - packing/resources/web/evand-rect-small-n-lean-2026-10-22/receipts/lean-closure.json
+      - packing/devtools/lean_closure.py
+    next_rung: >-
+      C1 needs the stage 4 mathematical review of both routes: chelokot's four-point lemma
+      and IsMinimumSide, and Daniel's rectangle theorems with the square-case reading, Fried4
+      at equal sides below 2 and five squares in a side below 2 included. V3 and C3 need a
+      receipt-bound build here of chelokot's three Records modules from the retained bytes
+      with their axioms printed, minutes over Mathlib's cache; Daniel's eight modules are a
+      second build of the same size (think-tq3g). Rung 5 needs a human expert's review of a
+      formalization.
+    unfinished_confirmations:
+      - what: >-
+          the stage 4 mathematical review of chelokot's s2_eq_two to s5_eq_goebel and of
+          Daniel's rect2_iff to rect4_iff, rect5_pts_lower and rect5_upper at equal sides,
+          read from the two retained packets
+        rung: C1
+        link: think-7l2j
+      - what: >-
+          receipt-bound builds here of chelokot's Records.Square5, NearSquare and
+          SquareNumbers at 753079eb and of Daniel's five rectangle modules at 7051f4e, from
+          the retained bytes, each with its theorems' axioms printed
+        rung: C3
+        link: think-tq3g
+        estimated_cost:
+          cpu_hours: 0.5
+          cpu_hours_high: 1
+          basis: >-
+            Eight modules a route over Mathlib's prebuilt cache, no certificates; an estimate
+            from their size and from the 2 October build of the whole archive, about 53
+            minutes wall for 2,920 jobs on 4 cores
+          priced: '2026-10-23'
+    notes: >-
+      Drafted on 23 October 2026 by the intake lane c-lean-1023 (think-7l2j), from the
+      triage of 22 October; no issue asked. The draft took kind optimality, since no
+      registered result then held s(2) to s(5) for a formalization to name. The owner
+      decided on 24 October (think-4o9c) to register the published proofs first, as T-237,
+      and this entry as a formalization naming it; c-land-750-1024 registered both on 24
+      October (think-ehx5). The published date is chelokot's s5_eq_goebel, 29 August 2026
+      (UTC); s2_eq_two to s4_eq_two are of 16 August and Daniel's route of 21 October.
+
+      The triage said the 2 October build printed axioms for squareMinusTwo only; its
+      retained build.log prints Audit.lean's axioms for all seven of these theorems (lines
+      330 and 338 to 343). After the pin chelokot moved s(1) to s(4) and s(6) to s(9) to
+      Bend, s4_eq_two leaving Lean, and proved s(5) in Bend too; think-fddm holds those
+      routes. The case records are unchanged.
 
 # Generated by python -m devtools.regularized_drawings from the regularized layer's
 # index (packing/atlas/known-best/regularized/index.json); do not edit by hand.

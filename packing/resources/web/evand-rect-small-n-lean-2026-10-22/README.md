@@ -11,11 +11,12 @@ after chelokot’s Lean proofs, which the
 Rectangles themselves are outside this record, and this packet keeps only what the
 square case needs.
 
-Its proposed Frontier key is **[Daniel small-n rectangles Lean 2026-10-22]**. No issue
-asked for it: the intake reads of 22 October found it, and bead `think-7l2j` owns its
-import with chelokot’s; which kind of register entry the two take waits on the owner
-(`think-4o9c`). The claims below are stated as the source states them; nothing
-here has built the proofs, and no review has read them yet.
+Its Frontier key is **[Daniel small-n rectangles Lean 2026-10-22]**. No issue asked for
+it: the intake reads of 22 October found it, and bead `think-7l2j` owns its import with
+chelokot’s. By the owner’s decision of 24 October (`think-4o9c`) the published proofs
+are registered as `T-237` and the two Lean routes as `T-238`, a formalization of
+`T-237`. The claims below are stated as the source states them; nothing here has built
+the proofs, and no review has read them yet.
 
 ## Source and Pin
 
