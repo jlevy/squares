@@ -32366,7 +32366,7 @@ results:
   - id: T-232
     kind: lower-bound
     registered: '2026-10-23'
-    landed: '2026-10-23'
+    landed: '2026-10-24'
     headline: >-
       Mixed rectangle-measure lower bound `s(31) ≥ 2391/400` verified, on a
       2,073-direction declared net
@@ -32496,7 +32496,7 @@ results:
   - id: T-233
     kind: lower-bound
     registered: '2026-10-23'
-    landed: '2026-10-23'
+    landed: '2026-10-24'
     headline: >-
       Mixed rectangle-measure lower bounds reported at `n = 19, 20, 26, 27`, on a
       2,073-direction net
