@@ -1432,9 +1432,9 @@ The owner’s answer to who builds the page part, “Me, with the records (Recom
     count in `ADOPTED`, and layer 2, based on layer 1’s branch, registers T-002 and
     raises T-001; one merge commit on `main` delivers both, and the GitHub fixture gives
     both pull requests that commit as their `mergeCommit`, as GitHub gave d3860c97a to
-    11\. Layer 1’s row holds only T-001 registered and adopted, and layer 2’s only T-002
-    registered and T-001 raised, a raise kept although T-001 is new against the merge’s
-    first parent;
+    11 pull requests. Layer 1’s row holds only T-001 registered and adopted, and layer
+    2’s only T-002 registered and T-001 raised, a raise kept although T-001 is new
+    against the merge’s first parent;
   - an upper layer that merges `main` after `main` registered an id does not take that
     id, which is not part of the group’s change (rule 5);
   - a pull request merged into its base branch by a merge commit, the shape of 13 of the
