@@ -5,16 +5,18 @@ title: "PR B of #763: map T-240's stage 4 review (V3/C3), adopt and regularize a
 kind: task
 status: in_progress
 priority: 1
-version: 7
+version: 8
 delegate: c-prb-763-1024
 labels:
   - result-import
 dependencies: []
 parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
+child_order_hints:
+  - is-01m5qt18yk6n8pdxea1b9at2bx
 hold: null
 hold_until: null
 created_at: 2026-10-24T13:58:21.741Z
-updated_at: 2026-10-24T18:12:40.604Z
+updated_at: 2026-10-24T20:36:01.107Z
 started_at: 2026-10-24T13:58:27.438Z
 ---
 
