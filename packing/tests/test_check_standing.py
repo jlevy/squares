@@ -13,6 +13,7 @@ to refusing each kind of mismatch.
 from __future__ import annotations
 
 import dataclasses
+import math
 from collections.abc import Mapping
 from decimal import Decimal
 from fractions import Fraction
@@ -20,7 +21,7 @@ from typing import Any
 
 import pytest
 
-from devtools import check_standing
+from devtools import check_standing, exact_sides
 from devtools import render_recent_results as view
 from devtools.check_results import BOUND_KINDS, SECOND_PROOF_KINDS
 from devtools.check_standing import BEATEN, EQUAL, EXCEEDS, LOWER, UPPER, Stated
@@ -667,3 +668,43 @@ def test_an_entry_pending_adoption_is_cited_by_no_case_bound(records: view.Recor
     assert (
         "T-122 is pending adoption, yet a case bound at n = 152 cites its evidence" in problem
     )
+
+
+def test_a_stated_bound_is_held_to_an_algebraic_house_exactly(records: view.Records) -> None:
+    """An algebraic house's side is the one root of its minimal polynomial in its written
+    interval (`exact_sides.form`), and a stated bound is held to that root by sign tests,
+    never by an enclosure of it (review A2 of #756). T-174's rational certificate at 102
+    states a side 3.69e-88 above T-193's root there, the house: inside any enclosure of the
+    root 1e-60 wide, and still strictly above it, so it is beaten and not equal. A rational
+    1e-80 either side of the root is beaten or exceeds the house; cut decimals that start
+    as the root does equal it, and cut decimals that start just above it are beaten."""
+    from devtools import select_houses  # noqa: PLC0415
+
+    bound = records.cases[102]["verified_upper_bound"]
+    house = exact_sides.read_form(bound["exact_form"])
+    assert isinstance(house, exact_sides.Algebraic)
+    (key,) = records.results["T-174"]["attribution"]["source_keys"]
+    rational = select_houses.exact_side(str(key), 102)
+    assert isinstance(rational, Fraction)
+    assert exact_sides.compare(rational, house) == 1
+    gap = exact_sides.lower_gap(rational, house)
+    assert Fraction(1, 10**89) < gap < Fraction(1, 10**87)
+    low, high = exact_sides.enclosure(house, Fraction(1, 10**60))
+    assert low < rational < high
+    assert check_standing.relation(Stated(rational, EXACT), bound, UPPER) == BEATEN
+    assert check_standing.relation(Stated(rational, EXACT), bound, LOWER) == EXCEEDS
+
+    near_low, near_high = exact_sides.enclosure(house, Fraction(1, 10**100))
+    above = near_high + Fraction(1, 10**80)
+    below = near_low - Fraction(1, 10**80)
+    assert check_standing.relation(Stated(above, EXACT), bound, UPPER) == BEATEN
+    assert check_standing.relation(Stated(below, EXACT), bound, UPPER) == EXCEEDS
+    assert check_standing.relation(Stated(below, EXACT), bound, LOWER) == BEATEN
+
+    places = 30
+    unit = Fraction(1, 10**places)
+    start = Fraction(math.floor(near_low / unit)) * unit
+    assert start < house < start + unit
+    assert check_standing.relation(Stated(start, unit), bound, UPPER) == EQUAL
+    assert check_standing.relation(Stated(start + unit, unit), bound, UPPER) == BEATEN
+    assert check_standing.relation(Stated(start - unit, unit), bound, UPPER) == EXCEEDS

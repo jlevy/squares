@@ -77,6 +77,7 @@ from collections.abc import Mapping, Sequence
 from fractions import Fraction
 from typing import Any, NamedTuple
 
+from devtools import exact_sides
 from devtools import render_recent_results as view
 from devtools.build_bound_citations import own_evidence
 from devtools.check_results import SECOND_PROOF_KINDS, kind_label, scope_values
@@ -224,9 +225,15 @@ def relation(stated: Stated, bound: Mapping[str, Any] | None, direction: str) ->
     `low` up to, and not including, `high`, and the case record's bound is its `span`, a
     single number where it is exact and a unit either side of a closed form's printed
     value. Where the two sets meet, nothing tells them apart and they are equal; beaten
-    and more mean every number of one is better than every number of the other."""
+    and more mean every number of one is better than every number of the other. An
+    algebraic house's side is a single number too, the root its exact form states
+    (`render_recent_results.root_side`), and is held to by sign tests (`against_root`),
+    never by an enclosure of it."""
     if not bound:
         return None
+    root = view.root_side(bound)
+    if root is not None:
+        return against_root(stated, root, direction)
     floor, ceiling = view.span(bound)
     low, high = stated.value, stated.value + stated.slack
     meets = floor < high and ceiling >= low if stated.slack else floor <= low <= ceiling
@@ -235,6 +242,25 @@ def relation(stated: Stated, bound: Mapping[str, Any] | None, direction: str) ->
     if direction == LOWER:
         return BEATEN if floor > low else EXCEEDS
     return BEATEN if ceiling < low else EXCEEDS
+
+
+def against_root(stated: Stated, root: exact_sides.Algebraic, direction: str) -> str:
+    """How a stated bound stands against an algebraic house's side, decided exactly: by
+    `exact_sides.compare`, which holds a rational to the root by the sign of its polynomial
+    and narrows the root's interval as far as that takes. Cut decimals equal the root only
+    where it lies in `[low, high)`, and a single number only where it is the root, which
+    no rational is. Register entries state rationals within 1e-87 of these roots, inside
+    any enclosure a print could choose (review A2 of #756)."""
+    below = exact_sides.compare(root, stated.value)
+    if stated.slack:
+        meets = below >= 0 and exact_sides.compare(root, stated.value + stated.slack) < 0
+    else:
+        meets = below == 0
+    if meets:
+        return EQUAL
+    if direction == LOWER:
+        return BEATEN if below > 0 else EXCEEDS
+    return BEATEN if below < 0 else EXCEEDS
 
 
 def findings(record: Mapping[str, Any], records: view.Records) -> list[Finding]:

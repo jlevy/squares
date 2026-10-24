@@ -256,8 +256,10 @@ class Held(NamedTuple):
     """Entries an upper bound, verified or reported, rests on."""
 
 
-#: How narrow the enclosure of an algebraic house's written side is (`span`): the root is
-#: held exactly, so the enclosure narrows past any print a register entry states.
+#: How narrow the enclosure of an algebraic house's written side is (`span`). The enclosure
+#: is for reading a bound as numbers, and it decides no order: `check_standing.relation`
+#: holds a stated bound to the root itself (`root_side`), since register entries state
+#: rationals within 1e-87 of these roots (review A2 of #756).
 ROOT_WIDTH = Fraction(1, 10**60)
 
 
@@ -269,6 +271,14 @@ def _root_side(text: object) -> exact_sides.Algebraic | None:
     except exact_sides.ExactSideError:
         return None
     return side if isinstance(side, exact_sides.Algebraic) else None
+
+
+def root_side(bound: Mapping[str, Any]) -> exact_sides.Algebraic | None:
+    """A case record's bound as the algebraic number its exact form states, where that form
+    is the house writer's root form (`exact_sides.form`), held exactly; None for a fraction,
+    a closed form or no exact form. An order against it is decided by
+    `exact_sides.compare`, never read from `span`'s enclosure."""
+    return _root_side(bound.get("exact_form"))
 
 
 def _rational(text: object) -> Fraction | None:
@@ -309,8 +319,10 @@ def span(bound: Mapping[str, Any]) -> tuple[Fraction, Fraction]:
     every number within one unit of its last printed place, as
     `bounds_agree_at_declared_precision` reads a display: n = 5's verified ceiling prints
     `2 + (1/2)sqrt(2)` rounded up in its 32nd place. An algebraic house's side, written as
-    the one root of its minimal polynomial in an interval (`exact_sides.form`), is held
-    exactly, and its span is an enclosure `ROOT_WIDTH` wide."""
+    the one root of its minimal polynomial in an interval (`exact_sides.form`), is read
+    exactly by `root_side`; its span here is only an enclosure `ROOT_WIDTH` wide, which
+    holds rationals that are not the root, so a comparison that decides anything holds a
+    number to `root_side` instead."""
     rational = _rational(bound.get("exact_form"))
     if rational is not None:
         return rational, rational
