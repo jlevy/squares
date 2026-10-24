@@ -5,10 +5,11 @@ source, at assurance ``reported``, once its certificates are retained and replay
 Issues #678 and #715 each had a module of their own (`devtools.couzo_678_replay`,
 `devtools.couzo_715_replay`); this one takes the same filtered decision and declares each
 report it decides as a `Release`, so a further report of the same kind is a declaration and
-not a module. `RELEASES` holds 20, each decided at or below ``LIMIT = 1024``: the seven
-issues below, #732's later release, the publication #763's index makes beside it, and 11
-publications in watched repositories that no issue reports (**Publications no issue
-reports**, `WATCHED`):
+not a module. `RELEASES` holds 20, each decided within a window of counts
+(`Release.decided_above`, `Release.decided_through`), every one of them today from the
+corpus to ``FROZEN_THROUGH = 1024``: the seven issues below, #732's later release, the
+publication #763's index makes beside it, and 11 publications in watched repositories that
+no issue reports (**Publications no issue reports**, `WATCHED`):
 
 - **#666**, Joost de Winter: 19 certificates ``square-packing-above-324/nNNNN.cert`` in
   JoostdeWinter/joostdewinter.github.io. The issue pins ``b3152f52``, which no branch
@@ -91,7 +92,8 @@ walk now names their sources. #715's re-certifications of them below the 12-plac
 restate them, by the owner's answer of 23 October (think-fwa9), so neither walk records
 them. ``check`` holds
 ``frontier/source-coverage.yaml`` to that plan, and holds every count a walk reaches beyond
-the corpus to ``LIMIT`` to one chain in report order (`chain_problems`): the start, then
+the corpus, each walk to its own reach (`Walk.reaches`), to one chain in report order
+(`chain_problems`): the start, then
 each recorded report's row, each superseded by the next, the last current or superseded by
 a report the walk does not reach. A planned current row the register shows superseded by
 such a later report holds the plan too (`coverage_problems`).
@@ -235,7 +237,7 @@ from typing import Any, NamedTuple, cast
 
 from strif import atomic_output_file
 
-from devtools import acquire_source
+from devtools import acquire_source, goebel_construction
 from devtools import couzo_678_replay as base
 from devtools import couzo_715_replay as couzo_715
 from devtools import evand_arrangement_reports as kernel
@@ -248,8 +250,12 @@ from sqpack.yamlio import safe_load
 ROOT = Path(__file__).resolve().parents[1]
 REPO = ROOT.parent
 WEB = ROOT / "resources/web"
-#: The largest count this module decides; above it every row waits on the owner (D1).
-LIMIT = 1024
+#: The reach of the walks and releases frozen at 1024: the five walks and 20 releases on
+#: ``main`` before the work above 1024 (think-llit), which keep it. It is no longer a
+#: ceiling: a release decides the rows in its own window (`Release.decided_above`,
+#: `Release.decided_through`) and a walk reaches the counts in its own (`Walk.reaches`), so
+#: a release whose window a records slice lifts decides its rows above 1024 (D1, think-f2io).
+FROZEN_THROUGH = 1024
 PLACES = 12
 ISSUE = Path("acquisition/issue.json")
 RECORD = Path("acquisition/beyond-horizon-rows.json")
@@ -265,6 +271,9 @@ FILTERED_FORMAT = "beyond-horizon-filtered-exact-replay-v1"
 FIRST_COMMITS_FORMAT = "beyond-horizon-first-commits-v1"
 EXHAUSTIVE_FORMAT = "beyond-horizon-exhaustive-sample-v1"
 GOEBEL_FORMAT = "beyond-horizon-goebel-comparison-v1"
+#: The Göbel receipt of a window above 1024, from the maintained module (`goebel_receipt`).
+GOEBEL_FORMAT_V2 = "beyond-horizon-goebel-comparison-v2"
+GOEBEL_MODULE = "packing/devtools/goebel_construction.py"
 EARLIER = Path("receipts/earlier-publications.json")
 EARLIER_FORMAT = "beyond-horizon-earlier-publications-v1"
 INTAKE = ROOT / "campaign/issue-intake"
@@ -409,6 +418,12 @@ class Walk:
     ``held`` the publications it records that wait on an owner decision (`Held`), and
     ``resting`` the verdicts it decided only against those (`Resting`), which ``check``
     holds to the ledger (`resting_problems`).
+
+    ``above`` and ``through`` are the counts the walk plans rows for (`reaches`): every
+    walk frozen at 1024 reaches every count it walks to `FROZEN_THROUGH`, the corpus
+    counts a release claims included, and the walk above 1024 every count above 1024, with
+    no top (``through`` None). A count it walks outside them, as the #719 walk's claims
+    above 1024, plans no row there.
     """
 
     name: str
@@ -416,6 +431,19 @@ class Walk:
     awaiting: Mapping[str, Awaiting]
     held: Mapping[str, tuple[Held, ...]] = field(default_factory=dict)
     resting: tuple[Resting, ...] = ()
+    above: int = 0
+    through: int | None = FROZEN_THROUGH
+
+    def reaches(self, n: int) -> bool:
+        """Whether the walk plans rows at ``n``: above ``above`` and at most ``through``."""
+        return self.above < n and (self.through is None or n <= self.through)
+
+    @property
+    def reach(self) -> str:
+        """The counts the walk reaches beyond the corpus, as its sources' notes say them."""
+        if self.through is None:
+            return f"above {self.above}"
+        return f"at or below {self.through}"
 
     @property
     def directory(self) -> Path:
@@ -445,8 +473,8 @@ HISTORY = "upper-bounds-couzo-history-20261022"
 #: The history walk's starts: ``main`` at #479's merge, 2026-10-10T00:28:19Z, the last
 #: ``main`` whose only beyond-horizon rows are the two 8 October sources.
 HISTORY_READ_AT_MAIN = "a97b712b94a138ebe9998070dd08d0ba0f320e09"
-#: The counts the history walk reaches: beyond the corpus to ``LIMIT``.
-HISTORY_COUNTS = range(reports.HORIZON + 1, LIMIT + 1)
+#: The counts the history walk reaches: beyond the corpus to `FROZEN_THROUGH`.
+HISTORY_COUNTS = range(reports.HORIZON + 1, FROZEN_THROUGH + 1)
 #: The sources whose rows are the history walk's starts, and so are not walked.
 HISTORY_START_SOURCES = (
     "couzo-extended-range-reports-2026-10-08",
@@ -479,7 +507,7 @@ ISSUE_732_READ_AT_MAIN = "fcf2f96a5213bb6cc076bcba90e353a661db773a"
 #: (`ISSUE_732_F1_READ_AT_MAIN`).
 ISSUE_732_F1 = "upper-bounds-issue732-f1ceee4-20261024"
 ISSUE_732_F1_READ_AT_MAIN = "0bbb0a2c4bae92393e26e7272c73a8de4cda1793"
-#: The walk of issue #763's claims at or below ``LIMIT``, Couzo's 964ee2b, with the
+#: The walk of issue #763's claims at or below `FROZEN_THROUGH`, Couzo's 964ee2b, with the
 #: index's unrequested rows there, from starts frozen at ``main`` at #756's merge, the first
 #: ``main`` that holds f1ceee4's rows (#769) and T-239 at 303 (#757)
 #: (`ISSUE_763_READ_AT_MAIN`).
@@ -892,15 +920,20 @@ _AWAITING_719_631 = {
 }
 
 
-def _rulings(*awaiting: Mapping[str, Any]) -> list[dict[str, Any]]:
+def _rulings(
+    *awaiting: Mapping[str, Any], through: int | None = FROZEN_THROUGH
+) -> list[dict[str, Any]]:
     """The owner's rulings of 23 October 2026 as a walk's ``sources.yaml`` names them
     (`devtools.intake_ledger.Ruling`), with the claims the restatement ruling leaves to the
-    owner."""
+    owner. A walk frozen at 1024 lists both through `FROZEN_THROUGH`; the walk above 1024
+    lists them with no ``through`` (``through`` None, `devtools.intake_ledger.NO_LIMIT`), so
+    they reach its top count, as `devtools.intake_ledger.answer_problems` requires."""
+    reach = {} if through is None else {"through": through}
     restatement: dict[str, Any] = {
         "ruling": "restatement",
         "decided": "2026-10-23",
         "bead": "think-fwa9",
-        "through": LIMIT,
+        **reach,
     }
     if awaiting:
         restatement["awaiting_owner"] = [dict(item) for item in awaiting]
@@ -908,15 +941,15 @@ def _rulings(*awaiting: Mapping[str, Any]) -> list[dict[str, Any]]:
         "ruling": "classical-constructions",
         "decided": "2026-10-23",
         "bead": "think-8krd",
-        "through": LIMIT,
+        **reach,
     }
     return [restatement, classical]
 
 
-#: The owner's rulings each walk applies (`devtools.intake_ledger.RULINGS`), through
-#: ``LIMIT``: the counts above it wait on their own work (D1, think-llit), which applies the
-#: same answers there. The backlog walk applies none: it was read on 22 October, and no
-#: step of it is in either's words.
+#: The owner's rulings each walk applies (`devtools.intake_ledger.RULINGS`). The walks
+#: frozen at 1024 apply them through `FROZEN_THROUGH`; the walk above 1024 applies the same
+#: answers with no top (`_rulings`, ``through`` None). The backlog walk applies none: it was
+#: read on 22 October, and no step of it is in either's words.
 WALK_RULINGS: dict[str, list[dict[str, Any]]] = {
     ISSUE_719: _rulings(_AWAITING_719_631),
     HISTORY: _rulings(_AWAITING_719_631),
@@ -998,7 +1031,7 @@ class Release:
     every certificate a row reads, committed at ``committed``, but for the counts
     ``later_commits`` names with their own commit and time: what ``first-commits`` measures
     and the claims record states. ``rows`` counts the issue's table and ``decided`` the rows
-    beyond the corpus at or below ``LIMIT``; ``sampled`` names the counts the all-pairs
+    in the release's window (`decided_claims`); ``sampled`` names the counts the all-pairs
     sample decides, which the packet README and the atom state. ``walk`` names the ledger
     that plans its rows, ``rounding`` how the issue prints a side (`UP`, `BINARY64`), and
     ``derived`` that the packet keeps derived facts and no upstream byte. ``claimed_at``
@@ -1024,8 +1057,8 @@ class Release:
     ``index_key`` maps each count to its certificate path, SHA-256 and exact bound), and
     with ``changed_only`` its walk's claims are the certificates the pinned commit adds or
     changes, not every certificate the commit holds. ``later_reads`` names the commits past
-    the pin, each with the time a push made it public, whose publications at any count to
-    ``LIMIT`` the walk takes as reports of their own (`later_commits`).
+    the pin, each with the time a push made it public, whose publications at any count the
+    walk reaches the walk takes as reports of their own (`later_commits`).
 
     **An issue whose claims are re-derived** from its source's indexes, as #763's, names the
     list of its packet's claim map (`CLAIM_MAP`, written by `devtools.couzo_763_claims`) its
@@ -1033,6 +1066,15 @@ class Release:
     index publishes that its selection rule leaves out, a publication of their own. Its walk's
     sources are transcribed from that map (`claim_map_walk_sources`), and its declared rows
     read each certificate from it (`declared_rows`).
+
+    **The window.** A release decides its rows from ``decided_above`` (exclusive, the
+    corpus by default) to ``decided_through`` (inclusive; None for no top): every release
+    on ``main`` before the work above 1024 decides to `FROZEN_THROUGH`, and its rows above
+    wait (`held_claims`) until the records slice that lifts its window, in the same pull
+    request as the receipts that window needs (think-llit). Its rows to 1024 are planned by
+    ``walk``, and those above 1024 by ``walk_above``, the walk above 1024 that records them
+    (`walk_of`). ``hosted`` names the hosted-data manifest of the certificates the packet
+    pins and does not retain, read through `sqpack.hosted_data.require` (`hosted_bytes`).
     """
 
     issue: int | None
@@ -1065,6 +1107,22 @@ class Release:
     changed_only: bool = False
     later_reads: tuple[tuple[str, str], ...] = ()
     claim_map: str = ""
+    decided_above: int = reports.HORIZON
+    decided_through: int | None = FROZEN_THROUGH
+    walk_above: str = ""
+    hosted: Path | None = None
+
+    def decides(self, n: int) -> bool:
+        """Whether ``n`` is in the release's window (`decided_claims`)."""
+        return self.decided_above < n and (
+            self.decided_through is None or n <= self.decided_through
+        )
+
+    @property
+    def frozen(self) -> bool:
+        """Whether the release's window ends at or below `FROZEN_THROUGH`, so its Göbel
+        receipt keeps the retained program (`goebel_receipt`)."""
+        return self.decided_through is not None and self.decided_through <= FROZEN_THROUGH
 
     @property
     def directory(self) -> Path:
@@ -1204,7 +1262,8 @@ def _mishapolk_rows(body: str, release: Release) -> list[Claim]:
 def read_declared_rows(body: str, release: Release) -> list[Claim]:
     """The rows a publication no issue reports declares in its packet (`WATCHED_FORMAT`):
     each count, the certificate the walk records there and its exact header side rounded
-    up at 12 places, all of the publication's commit; `declare_rows` writes them."""
+    up at 12 places, all of the publication's commit, and for a deletion the squares it
+    deletes from that certificate (``deleted``); `declare_rows` writes them."""
     declared = json.loads(body)
     _require(declared.get("format") == WATCHED_FORMAT, f"{release.label}: not {WATCHED_FORMAT}")
     _require(
@@ -1214,7 +1273,14 @@ def read_declared_rows(body: str, release: Release) -> list[Claim]:
         f"{release.label}: the declaration names another commit or walk",
     )
     return [
-        Claim(int(row["n"]), "", str(row["printed"]), str(row["certificate"]), int(row["n"]), 0)
+        Claim(
+            int(row["n"]),
+            "",
+            str(row["printed"]),
+            str(row["certificate"]),
+            int(row["n"]) + int(row.get("deleted", 0)),
+            int(row.get("deleted", 0)),
+        )
         for row in declared["rows"]
     ]
 
@@ -1540,7 +1606,8 @@ RELEASES: dict[str, Release] = {
         ),
         # Issue #763 (2026-10-23T23:35:51Z) names 964ee2b and carries no table: its claims
         # are re-derived from the source's indexes by the README's rule (`CLAIM_MAP`), and
-        # its rows are those its walk records at or below ``LIMIT`` (`declared_rows`).
+        # its rows are those its walk records in its window, to `FROZEN_THROUGH`
+        # (`declared_rows`).
         Release(
             issue=763,
             packet=COUZO_763_PACKET,
@@ -1562,7 +1629,7 @@ RELEASES: dict[str, Release] = {
             index_key="entries",
             claim_map="claims",
         ),
-        # The rows certified_bounds.json publishes at 964ee2b at or below ``LIMIT`` that the
+        # The rows certified_bounds.json publishes at 964ee2b to `FROZEN_THROUGH` that the
         # issue's selection rule leaves out (`CLAIM_MAP`'s ``unrequested``): a publication
         # of the watched repository from the push that made it public, 2 min 51 s after the
         # issue, and an import of its own in the same packet (result-import.md, stage 1).
@@ -1649,19 +1716,29 @@ def declares_rows(chosen: Release) -> bool:
     return chosen.read is read_declared_rows
 
 
+def window(chosen: Release) -> str:
+    """A release's window in words, as a refusal names it."""
+    top = "" if chosen.decided_through is None else f" to {chosen.decided_through}"
+    return f"above {chosen.decided_above}{top}"
+
+
 def decided_claims(chosen: Release) -> list[Claim]:
-    """The rows beyond the corpus at or below ``LIMIT``, which this module decides."""
-    rows = [row for row in claims(chosen) if reports.HORIZON < row.n <= LIMIT]
+    """The rows in the release's window (`Release.decides`), which this module decides,
+    refused unless they are as many as the release declares: a release asked to decide a
+    claim outside the window it was recorded with no longer matches its count."""
+    rows = [row for row in claims(chosen) if chosen.decides(row.n)]
     _require(
         len(rows) == chosen.decided,
-        f"{chosen.label}: {len(rows)} rows beyond the corpus to {LIMIT}, not {chosen.decided}",
+        f"{chosen.label}: {len(rows)} rows {window(chosen)}, not {chosen.decided}",
     )
     return rows
 
 
 def held_claims(chosen: Release) -> list[Claim]:
-    """The rows above ``LIMIT``, retained and not decided: they wait on the owner."""
-    return [row for row in claims(chosen) if row.n > LIMIT]
+    """The rows above the release's window, retained or pinned and not decided: they wait
+    on the records slice that lifts it (think-llit)."""
+    top = chosen.decided_through
+    return [] if top is None else [row for row in claims(chosen) if row.n > top]
 
 
 def manifest(chosen: Release) -> dict[str, str]:
@@ -1708,15 +1785,56 @@ def certificate(chosen: Release, row: Claim) -> legacy.Certificate:
     return parsed
 
 
+#: A certificate's header and the rational literals it may state, as
+#: `devtools.evand_exact_certificates.parse` reads them (`header_side`).
+_HEADER_COUNT = re.compile(r"[1-9]\d*")
+_HEADER_SIDE = re.compile(r"-?\d+(?:/[1-9]\d*|\.\d+)?")
+
+
+def header_side(raw: bytes, expected_n: int, where: str) -> Fraction:
+    """A certificate's side from its header line alone, ``n S``, the first line that is
+    neither blank nor a comment, read by the rule `devtools.evand_exact_certificates.parse`
+    applies to it; the count must be ``expected_n``. The squares are not read: their parse
+    is what the replay decides, and the receipts hold."""
+    start = 0
+    while start <= len(raw):
+        end = raw.find(b"\n", start)
+        end = len(raw) if end < 0 else end
+        line = raw[start:end].decode("utf-8").strip()
+        start = end + 1
+        if not line or line.startswith("#"):
+            continue
+        parts = line.split()
+        _require(
+            len(parts) == 2
+            and _HEADER_COUNT.fullmatch(parts[0]) is not None
+            and _HEADER_SIDE.fullmatch(parts[1]) is not None,
+            f"{where}: the header is not `n S`",
+        )
+        _require(int(parts[0]) == expected_n, f"{where}: the header says n = {parts[0]}")
+        side = Fraction(parts[1])
+        _require(side > 0, f"{where}: the side must be positive")
+        return side
+    raise ReplayError(f"{where}: no header")
+
+
 def decided_sides(chosen: Release) -> dict[int, Fraction]:
-    """Each decided row's exact side: a retained certificate's header, or, for a derived
-    packet, the side its frozen claim record states (`devtools.upper_bound_reports`), which
-    that importer's ``check`` holds to the facts and ``check --replay`` here decides again
-    from them. Admitting a fact validates the whole witness, a fraction of a second each, so
-    the sides alone are read from the record."""
+    """Each decided row's exact side: a retained certificate's header line alone
+    (`header_side`), or, for a derived packet, the side its frozen claim record states
+    (`devtools.upper_bound_reports`), which that importer's ``check`` holds to the facts and
+    ``check --replay`` here decides again from them. The fast check reads it once a release
+    (`release_problems`): parsing every square, as the replay does, was three quarters of
+    that check's time (think-llit, Gate Cost)."""
     rows = decided_claims(chosen)
     if not chosen.derived:
-        return {row.n: certificate(chosen, row).side for row in rows}
+        return {
+            row.n: header_side(
+                read_retained_bytes(archive(chosen) / row.path),
+                row.certificate_n,
+                f"{chosen.label} n={row.n} {row.path}",
+            )
+            for row in rows
+        }
     stated = {
         item["n"]: Fraction(item["exact_side"])
         for item in _read(chosen.directory / reports.CLAIMS)["results"]
@@ -2008,6 +2126,7 @@ def exhaustive(issue: int | str, counts: Sequence[int], workers: int) -> dict[st
     return receipt
 
 
+@functools.cache
 def _goebel_program() -> Any:
     """The 15 October packet's exact Göbel comparison, loaded from its retained path."""
     spec = importlib.util.spec_from_file_location("goebel_beyond_horizon", base.GOEBEL_PROGRAM)
@@ -2018,33 +2137,55 @@ def _goebel_program() -> Any:
     return module
 
 
-def goebel() -> dict[str, dict[str, Any]]:
-    """Every decided side against Göbel's classical constructions, exactly.
+def goebel_receipt(chosen: Release, sides: Mapping[int, Fraction]) -> dict[str, Any]:
+    """A release's decided sides against Göbel's classical constructions, exactly.
 
-    The families, their deletion to smaller counts and the sign test are those of the 15
-    October packet's retained ``goebel_beyond_horizon.py``, read from its path unchanged;
-    its ``LIMIT`` of 1100 covers every count decided here.
+    A window frozen at 1024 (`Release.frozen`) keeps the 15 October packet's retained
+    ``goebel_beyond_horizon.py``, read from its path unchanged, whose ``LIMIT`` of 1100
+    covers it, so its receipt and its ``program`` field stay as written (#791's review A,
+    A11). A window above reads the maintained module (`devtools.goebel_construction`),
+    which proves every side it gives final, and writes `GOEBEL_FORMAT_V2`, naming it.
     """
-    program = _goebel_program()
-    _require(program.LIMIT >= LIMIT, "the Göbel program stops below the decided counts")
-    forms = program.families(program.LIMIT)
+    rows = [(row.n, sides[row.n], row.path) for row in decided_claims(chosen)]
+    label = f"{chosen.described} at {chosen.pin[:8]}"
+    if chosen.frozen:
+        program = _goebel_program()
+        _require(
+            (chosen.decided_through or 0) <= program.LIMIT,
+            "the Göbel program stops below the decided counts",
+        )
+        return {
+            "format": GOEBEL_FORMAT,
+            "program": base.GOEBEL_PROGRAM.relative_to(REPO).as_posix(),
+            "families": (
+                "Göbel squares, Göbel strips and corner-touching strips, with deletion"
+            ),
+            "comparison": program.compare(label, rows, program.families(program.LIMIT)),
+        }
+    try:
+        comparison = goebel_construction.compare(label, rows)
+    except goebel_construction.GoebelError as error:
+        raise ReplayError(f"{chosen.label}: {error}") from error
+    return {
+        "format": GOEBEL_FORMAT_V2,
+        "program": GOEBEL_MODULE,
+        "families": goebel_construction.FAMILIES,
+        "proof": (
+            "each side is the least member at the count or above of a build the module "
+            "proves final by the area bound, S^2 < B + 1 for a build to B"
+        ),
+        "comparison": comparison,
+    }
+
+
+def goebel() -> dict[str, dict[str, Any]]:
+    """Write every release's Göbel receipt (`goebel_receipt`); return its tallies."""
     tallies: dict[str, dict[str, Any]] = {}
     for chosen in RELEASES.values():
         custody(chosen)
-        sides = decided_sides(chosen)
-        rows = [(row.n, sides[row.n], row.path) for row in decided_claims(chosen)]
-        result = program.compare(f"{chosen.described} at {chosen.pin[:8]}", rows, forms)
-        _write(
-            chosen.path(GOEBEL),
-            {
-                "format": GOEBEL_FORMAT,
-                "program": base.GOEBEL_PROGRAM.relative_to(REPO).as_posix(),
-                "families": (
-                    "Göbel squares, Göbel strips and corner-touching strips, with deletion"
-                ),
-                "comparison": result,
-            },
-        )
+        receipt = goebel_receipt(chosen, decided_sides(chosen))
+        _write(chosen.path(GOEBEL), receipt)
+        result = receipt["comparison"]
         tallies[chosen.label] = {"rows": result["rows"], "tally": result["tally"]}
     return tallies
 
@@ -2052,19 +2193,25 @@ def goebel() -> dict[str, dict[str, Any]]:
 # --------------------------------------------------------------------------- claims record
 
 
-def beyond_horizon_rows(chosen: Release) -> dict[str, Any]:
-    """The decided rows as the coverage register reads them, rebuilt.
+def beyond_horizon_rows(
+    chosen: Release, sides: Mapping[int, Fraction] | None = None
+) -> dict[str, Any]:
+    """The decided rows as the coverage register reads them, rebuilt; ``sides`` are the
+    decided sides where the caller has read them (`decided_sides`).
 
     Each keeps the side the row records as ``offered_side``, the value a dated
     beyond-horizon row holds byte for byte: an `UP` release's print; for a `BINARY64`
     release, the side rounded up at 16 places, with the issue's print beside it
     (`recorded_side`). Each also keeps its certificate's exact header side and when the
     certificate was first committed. A decided row the walk does not record, as #719's 366,
-    is no row, so the record leaves it out; the filtered receipt keeps its decision.
+    is no row, so the record leaves it out; the filtered receipt keeps its decision. The
+    record's ``limit`` is the release's window's top, None where it has none, and a window
+    that starts above the corpus says where (``decided_above``).
     """
-    custody(chosen)
+    if sides is None:
+        custody(chosen)
+        sides = decided_sides(chosen)
     results = []
-    sides = decided_sides(chosen)
     unrecorded = {n for n, source in unrecorded_rows() if source == chosen.source}
     for row in decided_claims(chosen):
         if row.n in unrecorded:
@@ -2093,9 +2240,11 @@ def beyond_horizon_rows(chosen: Release) -> dict[str, Any]:
         "revision": chosen.retained,
         "issue_pin": chosen.pin,
         "horizon": reports.HORIZON,
-        "limit": LIMIT,
+        "limit": chosen.decided_through,
         "results": results,
     }
+    if chosen.decided_above != reports.HORIZON:
+        record["decided_above"] = chosen.decided_above
     if chosen.rounding != UP:
         record["issue_rounding"] = chosen.rounding
     if chosen.issue is None:
@@ -2289,10 +2438,10 @@ def standing_sides(
     """Each claimed count's standing side as the frozen claim ``record`` read the record:
     the case's exact side in the corpus, else the exact side of the row that stood there,
     read from its source's claims record (``sources``, by id), or the grid; a count of
-    ``counts`` the record has no result for, one above ``LIMIT`` that no record holds yet,
-    stands at the grid. Beyond the horizon a record read from
-    `devtools.intake_ledger.GOEBEL_FROM` takes Göbel's construction too, and refuses a
-    count above the retained program's reach of 1073."""
+    ``counts`` the record has no result for, one above the window that no record holds
+    yet, stands at the grid. Beyond the horizon a record read from
+    `devtools.intake_ledger.GOEBEL_FROM` takes Göbel's construction too, from the
+    maintained module, and refuses only a count whose side no build proves final."""
     read_on = str(record.get("read_on", ""))
 
     def beyond(n: int, side: Fraction) -> Standing:
@@ -2331,8 +2480,9 @@ def _standing(chosen: Release) -> dict[int, Standing]:
 
 def release_sides(chosen: Release, clone: Path | None) -> dict[int, Fraction]:
     """Each claimed row's exact side: from the packet's frozen claim record, and for a row
-    the packet does not derive (above ``LIMIT``), from the header of the file a clone of the
-    source holds at the retained commit, refused unless it has the digest the packet pins."""
+    the packet does not derive (above its window), from the header of the file a clone of
+    the source holds at the retained commit, refused unless it has the digest the packet
+    pins."""
     record = _read(chosen.directory / reports.CLAIMS)
     stated = {item["n"]: Fraction(item["exact_side"]) for item in record["results"]}
     sides: dict[int, Fraction] = {}
@@ -2562,9 +2712,10 @@ def ledger_sources(issue: int | str, read_at_main: str, read_on: str) -> dict[st
     The reports are the release's own rows, at their exact sides, and every earlier report
     at its counts no row holds: each publication the release's earlier-publications receipt
     lists, at its exact side; #715's rows at the counts it re-certified below the print,
-    which the walk decides as restatements (think-fwa9), and above ``LIMIT``, and #666's
-    above ``LIMIT``, which wait on the owner (D1). A claim the start already holds is not
-    walked again. The walk's rulings are `WALK_RULINGS`'.
+    which the walk decides as restatements (think-fwa9), and above `FROZEN_THROUGH`, and
+    #666's above it, which wait on their own walk (D1). A claim the start already holds is
+    not walked again. The walk's rulings are `WALK_RULINGS`'. It transcribes the #719
+    walk, frozen at 1024 (`tests/test_beyond_horizon_replay.py` holds the file to it).
     """
     chosen = release(issue)
     walk = walk_of(chosen)
@@ -2616,7 +2767,7 @@ def ledger_sources(issue: int | str, read_at_main: str, read_on: str) -> dict[st
         where = (
             f"facts/n-{row.n:03d}.yaml.gz in the {chosen.packet} packet, derived from "
             f"{row.path} at {chosen.retained[:8]} (its header)"
-            if row.n <= LIMIT
+            if row.n <= FROZEN_THROUGH
             else f"{row.path} at {chosen.retained[:8]} (its header), pinned by digest in the "
             f"{chosen.packet} packet and read from a clone; not derived until the owner's D1"
         )
@@ -2706,8 +2857,9 @@ def release_715_claims(
     counts: set[int], by_n: Mapping[int, Mapping[str, Any]]
 ) -> list[dict[str, Any]]:
     """#715's claims at ``counts`` that no row holds: its held re-certifications, at the
-    exact sides its packet's filtered receipt states, and its rows above ``LIMIT``, at the
-    side of the publication the earlier-publications receipt found its print to round up."""
+    exact sides its packet's filtered receipt states, and its rows above `FROZEN_THROUGH`,
+    at the side of the publication the earlier-publications receipt found its print to round
+    up."""
     packet = WEB / "couzo-issue715-2026-10-21"
     held = _held_715()
     replayed = {
@@ -2728,7 +2880,7 @@ def release_715_claims(
                 )
                 | {"printed": row["printed"]}
             )
-        elif n > LIMIT and n in printed:
+        elif n > FROZEN_THROUGH and n in printed:
             sides = [
                 Fraction(item["side"])
                 for item in by_n[n]["publications"]
@@ -3268,7 +3420,7 @@ def source_history(issue: int | str, clone: Path) -> dict[str, Any]:
     The repository is watched, so each certificate there is a publication from the first
     commit of the retained commit's history that holds its side. Only certificate files
     whose paths name a count in `HISTORY_COUNTS` are read (`_COUNT_NAMED`), so a blobless
-    clone fetches no certificate above ``LIMIT``, and each file's header must state the
+    clone fetches no certificate above `FROZEN_THROUGH`, and each file's header must state the
     count its path names. At the retained commit each count's certificate is listed with
     its Git blob, SHA-256 and exact side, the first commit that holds its side and the first
     that holds its blob, and is held to the release's index (``Release.index``, by default the
@@ -3369,7 +3521,8 @@ def source_history(issue: int | str, clone: Path) -> dict[str, Any]:
     in_range = sorted(int(key) for key in stated if int(key) in HISTORY_COUNTS)
     _require(
         in_range == sorted(at_pin),
-        f"{chosen.index} states other counts at or below {LIMIT} than the commit holds",
+        f"{chosen.index} states other counts at or below {FROZEN_THROUGH} than the commit "
+        "holds",
     )
     return {
         "format": SOURCE_HISTORY_FORMAT,
@@ -3431,10 +3584,13 @@ def _start_sides(
 MISHAPOLK_HOLDER = "Mykhailo Polkovskyi"
 
 
-def release_walk_sources(issue: int | str, read_on: str) -> dict[str, Any]:
+def release_walk_sources(
+    issue: int | str, read_on: str, walk: Walk | None = None
+) -> dict[str, Any]:
     """The ``sources.yaml`` of a release whose walk reads its own source's history (#732).
 
-    The reports, at each count the release claims at or below ``LIMIT``:
+    ``walk`` is the release's own walk by default (`walk_of`). The reports, at each count the
+    release claims that the walk reaches (`Walk.reaches`):
 
     - the release's claims, every certificate its source holds at the retained commit, at
       the exact sides the source-history receipt states (`source_history`), dated by the
@@ -3460,13 +3616,13 @@ def release_walk_sources(issue: int | str, read_on: str) -> dict[str, Any]:
     strictly below the start (`ledger_reports`).
     """
     chosen = release(issue)
-    walk = walk_of(chosen)
+    walk = walk or walk_of(chosen)
     read_at_main = WALK_READ_AT_MAIN[walk.name]
     history = _read(chosen.path(SOURCE_HISTORY))
     own = {
         row["n"]: row
         for row in history["at_commit"]
-        if row["n"] <= LIMIT
+        if walk.reaches(row["n"])
         and (not chosen.changed_only or row["blob_first_commit"] == chosen.retained)
     }
     later = later_publications(chosen)
@@ -3486,7 +3642,7 @@ def release_walk_sources(issue: int | str, read_on: str) -> dict[str, Any]:
     if chosen.comment is None:
         what = (
             f"The {len(claims)} certificates the source holds at "
-            f"{chosen.retained[:8]} beyond the corpus at or below {LIMIT}, which its "
+            f"{chosen.retained[:8]} beyond the corpus {walk.reach}, which its "
             f"manifest ({SOURCE_MANIFEST}, pinned by the SHA-256 the issue states) lists "
             "as the issue's claims there, each at its header's exact side and dated by "
             "the issue; first_committed is the first commit of the source's history "
@@ -3495,7 +3651,7 @@ def release_walk_sources(issue: int | str, read_on: str) -> dict[str, Any]:
     else:
         what = (
             f"The {len(claims)} certificates {chosen.retained[:8]} adds or changes beyond "
-            f"the corpus at or below {LIMIT}, which the comment reports, each held to the "
+            f"the corpus {walk.reach}, which the comment reports, each held to the "
             f"path, SHA-256 and exact bound the release's index ({chosen.index}) states and "
             "read at its header's exact side, dated by the comment; first_committed is the "
             "first commit of the source's history that published the side."
@@ -3652,7 +3808,9 @@ LATER_COMMITS_FORMAT = "beyond-horizon-later-commits-v1"
 
 def later_commits(issue: int | str, clone: Path) -> dict[str, Any]:
     """Every side the commits a release names past its pin (``later_reads``) publish at a
-    count to ``LIMIT``, from a clone: each certificate file whose path names a count
+    count its walk reaches (`Walk.reaches`; to 1024 for every walk frozen there, so
+    f1ceee4's receipt keeps its ``"limit": 1024``), from a clone: each certificate file whose
+    path names a count
     (`_COUNT_NAMED`) that the commit adds or changes, at its header's side, and each bound an
     index (`INDEXES`) states at a count where the commit changes it.
 
@@ -3662,6 +3820,7 @@ def later_commits(issue: int | str, clone: Path) -> dict[str, Any]:
     """
     chosen = release(issue)
     _require(chosen.later_reads, f"{chosen.label}: declares no later commits")
+    walk = walk_of(chosen)
     parent = chosen.retained
     commits = []
     for commit, pushed in chosen.later_reads:
@@ -3675,7 +3834,7 @@ def later_commits(issue: int | str, clone: Path) -> dict[str, Any]:
             meta, _, path = entry.partition("\t")
             _old_mode, _new_mode, old, new, status = meta.lstrip(":").split()
             n = named_count(path)
-            if n is not None and n <= LIMIT and status in ("A", "M"):
+            if n is not None and walk.reaches(n) and status in ("A", "M"):
                 wanted.append((n, path, new, "certificate"))
             elif path in INDEXES and status == "M":
                 indexes[path] = (old, new)
@@ -3715,7 +3874,7 @@ def later_commits(issue: int | str, clone: Path) -> dict[str, Any]:
                 return value
 
             for key in sorted(after, key=lambda item: int(item) if item.isdigit() else 0):
-                if not key.isdigit() or int(key) > LIMIT:
+                if not key.isdigit() or not walk.reaches(int(key)):
                     continue
                 stated = bound(after, key, INDEXES[path])
                 if stated is None or stated == bound(before, key, INDEXES[path]):
@@ -3745,7 +3904,7 @@ def later_commits(issue: int | str, clone: Path) -> dict[str, Any]:
         "format": LATER_COMMITS_FORMAT,
         "source": chosen.source_url,
         "retained_commit": chosen.retained,
-        "limit": LIMIT,
+        "limit": walk.through,
         "indexes": {path: ".".join(keys) for path, keys in INDEXES.items()},
         "commits": commits,
     }
@@ -3819,13 +3978,18 @@ def later_reports(
                     "reports, which no issue reports: the repository is watched, so it is a "
                     "report from the push that made it public, which the repository's "
                     "activity log dates. Transcribed from the "
-                    f"{chosen.packet} packet's {LATER_COMMITS.as_posix()} at every count to "
-                    f"{LIMIT} where it adds or changes a certificate or an index's bound, at "
-                    "the least side it states there." + held_sentence(walk, label)
+                    f"{chosen.packet} packet's {LATER_COMMITS.as_posix()} at every count "
+                    f"{_to(walk)} where it adds or changes a certificate or an index's bound, "
+                    "at the least side it states there." + held_sentence(walk, label)
                 ),
             }
         )
     return found
+
+
+def _to(walk: Walk) -> str:
+    """The counts a walk reaches as a later commit's note says them: ``to 1024``."""
+    return f"above {walk.above}" if walk.through is None else f"to {walk.through}"
 
 
 def _open_against(
@@ -4240,11 +4404,14 @@ def _grouped_publications(
     return found
 
 
-def claim_map_walk_sources(issue: int | str, read_on: str) -> dict[str, Any]:
+def claim_map_walk_sources(
+    issue: int | str, read_on: str, walk: Walk | None = None
+) -> dict[str, Any]:
     """The ``sources.yaml`` of a release whose claims are re-derived from its source's
     indexes (#763, `Release.claim_map`), with every other release of its walk.
 
-    The reports, at each count those releases claim at or below ``LIMIT``:
+    ``walk`` is the release's own walk by default (`walk_of`). The reports, at each count
+    those releases claim that the walk reaches (`Walk.reaches`):
 
     - the issue's claims, dated by the issue, each at the exact bound the index states:
       a certificate's header, a deletion's or a recipe's bound; and the index's
@@ -4259,11 +4426,11 @@ def claim_map_walk_sources(issue: int | str, read_on: str) -> dict[str, Any]:
     - in the corpus, every earlier report a retained ledger walked strictly below the start
       before the issue (`ledger_reports`).
 
-    Every earlier publication is cut at the issue (`CLAIM_MAP_WALKS`). The claims above
-    ``LIMIT`` are not walked: they are think-llit's (D1).
+    Every earlier publication is cut at the issue (`CLAIM_MAP_WALKS`). The claims a walk
+    frozen at 1024 does not reach are the walk above 1024's (D1, think-llit).
     """
     chosen = release(issue)
-    walk = walk_of(chosen)
+    walk = walk or walk_of(chosen)
     _require(
         walk.name in CLAIM_MAP_WALKS,
         f"{walk.name}: no claim-map walk declared (CLAIM_MAP_WALKS)",
@@ -4273,7 +4440,7 @@ def claim_map_walk_sources(issue: int | str, read_on: str) -> dict[str, Any]:
     read_at_main = WALK_READ_AT_MAIN[walk.name]
     ours = [item for item in _releases(walk).values() if item.claim_map]
     own = {
-        item.label: [claim for claim in mapped_claims(item) if int(claim["n"]) <= LIMIT]
+        item.label: [claim for claim in mapped_claims(item) if walk.reaches(int(claim["n"]))]
         for item in ours
     }
     claimed = Counter(int(claim["n"]) for claims in own.values() for claim in claims)
@@ -4295,13 +4462,17 @@ def claim_map_walk_sources(issue: int | str, read_on: str) -> dict[str, Any]:
         if item.issue is not None:
             head: dict[str, Any] = {"report": item.label, "issue": item.issue}
             what = (
-                f"The issue's {len(claims)} claims at or below {LIMIT} ({described}), "
+                f"The issue's {len(claims)} claims {walk.reach} ({described}), "
                 f"re-derived from the source's indexes at {item.retained[:8]} by its README's "
                 f"rule ({item.packet} packet, {CLAIM_MAP.as_posix()}), since the issue carries "
                 "no table; each at the exact bound certified_bounds.json states, dated by the "
                 "issue. first_committed is the committer time of the commit that first holds "
-                f"the certificate; {declared.pushed}. Its claims above 1024 are not walked "
-                "here (think-llit)."
+                f"the certificate; {declared.pushed}."
+                + (
+                    f" Its claims above {walk.through} are not walked here (think-llit)."
+                    if walk.through is not None
+                    else f" Its claims at or below {walk.above} are walked by {item.walk}."
+                )
             )
         else:
             head = {
@@ -4311,7 +4482,7 @@ def claim_map_walk_sources(issue: int | str, read_on: str) -> dict[str, Any]:
             }
             what = (
                 f"The {len(claims)} rows certified_bounds.json publishes at "
-                f"{item.retained[:8]} at or below {LIMIT} ({described}) that the issue's "
+                f"{item.retained[:8]} {walk.reach} ({described}) that the issue's "
                 "selection rule leaves out: each is below the comparison's 12-place print, "
                 "but by 1e-10 or less where the comparison is another author's. No issue "
                 "reports them, so they are the watched repository's publication, dated by the "
@@ -4464,8 +4635,12 @@ def declared_rows(chosen: Release) -> dict[str, Any]:
     (#732), the certificate its source holds at the retained commit (`source_history`), or,
     for one whose claims are re-derived from its source's indexes (#763), the certificate
     its packet's claim map names (`Release.claim_map`), with that side rounded up at 12
-    places. A count in the corpus is the register's, not a row's."""
-    walk = walk_of(chosen)
+    places. A count in the corpus is the register's, not a row's. Each walk of the release
+    (`walks_of`) declares the counts it reaches. A deletion the walk records and does not
+    hold is a row at its parent's side, declaring the parent's certificate and the squares
+    it deletes (``deleted``), which the replay decides as the parent's first ``n`` poses;
+    whether an issue's deletion bound gets a row is think-kzme's, so a walk holds it until
+    the owner answers."""
     commit = chosen.pin
     if chosen.claim_map:
         found = {
@@ -4473,6 +4648,7 @@ def declared_rows(chosen: Release) -> dict[str, Any]:
                 "kind": item["kind"],
                 "path": item["certificate"],
                 "side": item["exact"],
+                "deleted": int(item.get("deleted_squares") or 0),
             }
             for item in mapped_claims(chosen)
         }
@@ -4495,7 +4671,13 @@ def declared_rows(chosen: Release) -> dict[str, Any]:
             )
         }
     rows = []
-    for n, count in sorted(_walked(walk).items()):
+    walked = {
+        n: (walk, count)
+        for walk in walks_of(chosen)
+        for n, count in _walked(walk).items()
+        if walk.reaches(n)
+    }
+    for n, (walk, count) in sorted(walked.items()):
         if n <= reports.HORIZON or walk.holds(chosen.label, n) is not None:
             continue
         if not any(
@@ -4504,10 +4686,13 @@ def declared_rows(chosen: Release) -> dict[str, Any]:
         ):
             continue
         item = found[n]
-        _require(item["kind"] == "certificate", f"{chosen.label} n={n}: no certificate file")
-        rows.append(
-            {"n": n, "certificate": item["path"], "printed": ceiling(Fraction(item["side"]))}
+        deleted = int(item.get("deleted") or 0)
+        _require(
+            item["kind"] == "certificate" or (item["kind"] == "deletion" and deleted > 0),
+            f"{chosen.label} n={n}: no certificate file",
         )
+        row = {"n": n, "certificate": item["path"], "printed": ceiling(Fraction(item["side"]))}
+        rows.append(row | ({"deleted": deleted} if deleted else {}))
     declared: dict[str, Any] = {
         "format": WATCHED_FORMAT,
         "publication": chosen.issue_url,
@@ -4693,14 +4878,36 @@ def write_pose_identity(issue: int | str) -> dict[int, list[str]]:
 # --------------------------------------------------------------------------- coverage plan
 
 
-def walk_of(chosen: Release) -> Walk:
-    """The ledger walk that plans a release's rows."""
-    return WALKS[chosen.walk]
+def walk_of(chosen: Release, n: int | None = None) -> Walk:
+    """The ledger walk that plans a release's row at ``n``: its own walk where that walk
+    reaches ``n``, as every row to 1024 and every count by default; above it, the walk
+    above 1024 that records the release there (`Release.walk_above`), which must reach it."""
+    own = WALKS[chosen.walk]
+    if n is None or own.reaches(n):
+        return own
+    _require(
+        bool(chosen.walk_above) and chosen.walk_above in WALKS,
+        f"{chosen.label} n={n}: no walk reaches it ({own.name} reaches {own.reach})",
+    )
+    above = WALKS[chosen.walk_above]
+    _require(above.reaches(n), f"{chosen.label} n={n}: {above.name} does not reach it")
+    return above
+
+
+def walks_of(chosen: Release) -> list[Walk]:
+    """Every walk that plans a release's rows: its own, then the walk above 1024."""
+    own = [WALKS[chosen.walk]]
+    return own + ([WALKS[chosen.walk_above]] if chosen.walk_above else [])
 
 
 def _releases(walk: Walk) -> dict[str, Release]:
-    """The releases a walk plans, by the report label the ledger gives each."""
-    return {item.label: item for item in RELEASES.values() if item.walk == walk.name}
+    """The releases a walk plans, by the report label the ledger gives each: those it is
+    the own walk of, and those whose rows above 1024 it records (`Release.walk_above`)."""
+    return {
+        item.label: item
+        for item in RELEASES.values()
+        if walk.name in (item.walk, item.walk_above)
+    }
 
 
 def _awaits(walk: Walk, report: str, n: int) -> bool:
@@ -4765,12 +4972,12 @@ def planned_rows() -> list[dict[str, Any]]:
     """
     rows: list[dict[str, Any]] = []
     for chosen in RELEASES.values():
-        walk = walk_of(chosen)
-        walked = {count["n"]: count for count in _counts(walk)}
         printed = {
             row["n"]: row["offered_side"] for row in _read(chosen.path(RECORD))["results"]
         }
         for row in decided_claims(chosen):
+            walk = walk_of(chosen, row.n)
+            walked = _walked(walk)
             _require(row.n in walked, f"{chosen.label} n={row.n}: the ledger does not walk it")
             steps = walked[row.n]["steps"]
             (mine,) = [i for i, step in enumerate(steps) if step["report"] == chosen.label]
@@ -4804,9 +5011,8 @@ def unrecorded_rows() -> list[tuple[int, str]]:
     """The decided rows each walk does not record, ``(n, source)``: no row may hold them."""
     found: list[tuple[int, str]] = []
     for chosen in RELEASES.values():
-        walked = {count["n"]: count for count in _counts(walk_of(chosen))}
         for row in decided_claims(chosen):
-            steps = walked.get(row.n, {"steps": []})["steps"]
+            steps = _walked(walk_of(chosen, row.n)).get(row.n, {"steps": []})["steps"]
             if any(
                 step["report"] == chosen.label and step["verdict"] == NOT_RECORDED
                 for step in steps
@@ -5080,10 +5286,11 @@ def declaration_problems() -> list[str]:
     for chosen in RELEASES.values():
         if not declares_rows(chosen):
             continue
-        walk = walk_of(chosen)
         walked = {
             n
+            for walk in walks_of(chosen)
             for n, count in _walked(walk).items()
+            if walk.reaches(n)
             for step in count["steps"]
             if step["report"] == chosen.label
             and step["verdict"] == RECORDED
@@ -5116,8 +5323,9 @@ def chain_problems(coverage: Mapping[str, Any]) -> list[str]:
     The chain is the count's start, where it is a beyond-horizon row, then the row of each
     report the walk records, in report order, passing over a report whose import is pending
     (`Awaiting`). Each must be in the register and superseded by the next; the last is
-    current, or superseded by a report the walk does not reach. Counts above ``LIMIT``
-    have no rows yet (the owner's D1) and are not held. Where two walks reach a count, a
+    current, or superseded by a report the walk does not reach. Each walk is held at the
+    counts it reaches (`Walk.reaches`): a count it walks beyond them, as the #719 walk's
+    claims above 1024, is another walk's. Where two walks reach a count, a
     later walk may insert between two of an earlier walk's reports a report the earlier
     walk does not reach, as the history walk inserts Couzo's 4e4c8ce between a start and
     #670; the register may then lead from one to the other through it (`bridged`), and
@@ -5129,7 +5337,7 @@ def chain_problems(coverage: Mapping[str, Any]) -> list[str]:
     for walk in WALKS.values():
         for count in _counts(walk):
             n = count["n"]
-            if not reports.HORIZON < n <= LIMIT:
+            if n <= reports.HORIZON or not walk.reaches(n):
                 continue
             start = _start_source(count)
             chain = ([start] if start is not None else []) + [
@@ -5239,10 +5447,10 @@ def _superseded_after(
 
 
 def construction_problems(register: Mapping[str, Any]) -> list[str]:
-    """Where a register row beyond the corpus to ``LIMIT`` is not marked as the owner's
-    answer of 23 October 2026 on #613 requires (think-8krd): a row at or above Göbel's
-    construction at its count, as `devtools.intake_ledger.goebel_form` reads the retained
-    program, is marked ``above-classical-construction`` with that construction, and a row
+    """Where a register row beyond the corpus is not marked as the owner's answer of 23
+    October 2026 on #613 requires (think-8krd): a row at or above Göbel's construction at its
+    count, as `devtools.intake_ledger.goebel_form` reads the maintained module at any count,
+    is marked ``above-classical-construction`` with that construction, and a row
     so marked is above it. A row is read at its exact side where its source's claims
     record states one, else as low as its print allows."""
     from devtools import check_source_coverage as coverage_check  # noqa: PLC0415
@@ -5252,11 +5460,16 @@ def construction_problems(register: Mapping[str, Any]) -> list[str]:
     problems: list[str] = []
     for row in register["beyond_horizon_claims"]:
         n, value = int(row["n"]), str(row["value"])
-        if not reports.HORIZON < n <= LIMIT:
+        if n <= reports.HORIZON:
             continue
         where = f"n={n} from {row['source_id']}"
         marked = row.get("disposition") == coverage_check.ABOVE_CONSTRUCTION
-        form = intake_ledger.goebel_form(n)
+        try:
+            form = intake_ledger.goebel_form(n)
+        except intake_ledger.LedgerError as error:
+            problems.append(f"{where}: {error}")
+            continue
+        assert form is not None
         exact = _stated_side(sources[str(row["source_id"])], n)
         low = exact if exact is not None else Fraction(value) - intake_ledger.unit(value)
         above = coverage_check.construction_sign(low, form.text()) == 1
@@ -5288,12 +5501,13 @@ def coverage_problems(coverage: Mapping[str, Any] | None = None) -> list[str]:
         safe_load(COVERAGE.read_text(encoding="utf-8")) if coverage is None else coverage
     )
     rows = {(row["n"], row["source_id"]): row for row in register["beyond_horizon_claims"]}
-    walks = {item.source: walk_of(item) for item in RELEASES.values()}
+    releases = {item.source: item for item in RELEASES.values()}
     problems = []
     for row in planned_rows():
         held = rows.get((row["n"], row["source_id"]))
+        walk = walk_of(releases[row["source_id"]], row["n"])
         if held != row and not (
-            held is not None and _superseded_after(row, held, walks[row["source_id"]], register)
+            held is not None and _superseded_after(row, held, walk, register)
         ):
             problems.append(
                 f"n={row['n']} from {row['source_id']}: the register's row is not the plan's"
@@ -5427,13 +5641,17 @@ def release_problems(chosen: Release, *, replay: bool, workers: int) -> list[str
             if _stable(fresh) != _stable(kept)
         )
     record = chosen.path(RECORD)
-    if not record.is_file() or _read(record) != beyond_horizon_rows(chosen):
+    rebuilt = retained_dumps(beyond_horizon_rows(chosen, sides), sort_keys=True)
+    if not record.is_file() or record.read_text(encoding="utf-8") != rebuilt:
         problems.append(f"{chosen.label}: the beyond-horizon record differs from its rebuild")
-    return problems + _cross_check_problems(chosen, rows)
+    return problems + _cross_check_problems(chosen, rows, sides)
 
 
-def _cross_check_problems(chosen: Release, rows: Sequence[Claim]) -> list[str]:
-    """The first commits', the all-pairs sample's and the Göbel receipt's outcomes.
+def _cross_check_problems(
+    chosen: Release, rows: Sequence[Claim], decided: Mapping[int, Fraction]
+) -> list[str]:
+    """The first commits', the all-pairs sample's and the Göbel receipt's outcomes; the
+    Göbel receipt must also be its rebuild byte for byte (`goebel_receipt`).
 
     A retained certificate's Git blob is rebuilt from its bytes; a derived packet keeps
     none, so its receipt's SHA-256 must be the one the packet pins. Every side the walk
@@ -5469,12 +5687,14 @@ def _cross_check_problems(chosen: Release, rows: Sequence[Claim]) -> list[str]:
         (item["n"], Fraction(item["side"]), item["relation"]) for item in comparison["detail"]
     ]
     unrecorded = {n for n, source in unrecorded_rows() if source == chosen.source}
-    decided = decided_sides(chosen)
     sides = [(row.n, decided[row.n]) for row in rows]
     if [(n, side) for n, side, _ in compared] != sides or any(
         relation != "below" for n, _, relation in compared if n not in unrecorded
     ):
         problems.append(f"{chosen.label}: a decided side is not below Göbel's construction")
+    rebuilt = retained_dumps(goebel_receipt(chosen, decided), sort_keys=True)
+    if chosen.path(GOEBEL).read_text(encoding="utf-8") != rebuilt:
+        problems.append(f"{chosen.label}: the Göbel receipt differs from its rebuild")
     return problems
 
 

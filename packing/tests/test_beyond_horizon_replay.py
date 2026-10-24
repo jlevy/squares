@@ -615,7 +615,7 @@ def test_the_719_walk_decides_715_s_re_certifications_as_restatements() -> None:
         "restatement",
         "classical-constructions",
     )
-    assert restatement["through"] == classical["through"] == replay.LIMIT
+    assert restatement["through"] == classical["through"] == replay.FROZEN_THROUGH
     restated = {(item["n"], item["report"]) for item in restatement["not_recorded"]}
     assert {n for n, report in restated if report == "#715"} == HELD_715_IN_719
     assert {n for n, report in restated if report.endswith("@5a299b4")} == (
@@ -656,7 +656,7 @@ def test_the_719_ledger_transcribes_the_packets_receipts() -> None:
     )
     counts = {row["n"] for row in earlier["rows"] if row["publications"]}
     assert len(counts) == 60
-    assert {n for n in counts if n > replay.LIMIT} == {
+    assert {n for n in counts if n > replay.FROZEN_THROUGH} == {
         1061,
         1128,
         1196,
@@ -1221,7 +1221,7 @@ def test_the_732_source_history_holds_each_certificate_to_the_manifest() -> None
     rows = history["at_commit"]
     assert history["retained_commit"] == chosen.retained
     assert len(rows) == 390
-    assert all(325 <= row["n"] <= replay.LIMIT for row in rows)
+    assert all(325 <= row["n"] <= replay.FROZEN_THROUGH for row in rows)
     assert history["manifest_sha256"] == MANIFEST_732
     assert replay.manifest(chosen)[replay.SOURCE_MANIFEST] == MANIFEST_732
     pinned = replay.manifest(chosen)
@@ -2053,7 +2053,9 @@ def test_763_s_claims_are_the_claim_map_s_and_its_rows_what_its_walk_records() -
     the 13 recipes and 683 are held, and the other 184 are declared rows at their exact
     sides rounded up; 328, 850 and 909 restate f1ceee4's rows below the print."""
     chosen = replay.release(763)
-    mapped = [item for item in replay.mapped_claims(chosen) if item["n"] <= replay.LIMIT]
+    mapped = [
+        item for item in replay.mapped_claims(chosen) if item["n"] <= replay.FROZEN_THROUGH
+    ]
     assert len(mapped) == 203
     steps = _steps_763()["#763"]
     assert set(steps) == {item["n"] for item in mapped}
