@@ -799,7 +799,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "4d04e40e1ff0e6a4e1976ed268a9b5b9db621eec"
+DATA_REVISION = "45024cdb5675a42c7d25c81eece97dd51cfc67c2"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -7906,6 +7906,40 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "is byte-identical, and each paper's HTML differs only in the inlined head "
             "bootstrap and the hashed name of `site-nav.css`. Every paper keeps its "
             "version."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/devtools/profile_records.py",
+            "packing/frontier/results.yaml",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "T-163's family assessment (think-rh4j): the record index reads a recomputed "
+            "record_scope assessment, and T-163's rationale, notes, next_rung and "
+            "composition name Ryu's Theorem 1.3 window and the published note. Against "
+            "main 5664ac1e8 (#758): rendered at link revision bb031f6b into empty site "
+            "directories, twice from this tree and once from it with main's "
+            "profile_records.py and results.yaml swapped in (69 files each), "
+            "render_n11_lower_bounds_explainer, render_n11_optimality_review, "
+            "render_n11_threshold_bound_review and render_packing_methods write every "
+            "file byte-identical across all three. No PDF was printed; each prints from "
+            "that HTML. Retain v0.4.22, v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
 )
