@@ -37,6 +37,7 @@ import pytest
 
 from devtools import beyond_horizon_replay as replay
 from devtools import check_source_coverage as coverage_check
+from devtools import goebel_construction
 from devtools.retained_data import read_retained_bytes
 from sqpack.yamlio import safe_load
 
@@ -614,7 +615,7 @@ def test_the_719_walk_decides_715_s_re_certifications_as_restatements() -> None:
         "restatement",
         "classical-constructions",
     )
-    assert restatement["through"] == classical["through"] == replay.LIMIT
+    assert restatement["through"] == classical["through"] == replay.FROZEN_THROUGH
     restated = {(item["n"], item["report"]) for item in restatement["not_recorded"]}
     assert {n for n, report in restated if report == "#715"} == HELD_715_IN_719
     assert {n for n, report in restated if report.endswith("@5a299b4")} == (
@@ -655,7 +656,7 @@ def test_the_719_ledger_transcribes_the_packets_receipts() -> None:
     )
     counts = {row["n"] for row in earlier["rows"] if row["publications"]}
     assert len(counts) == 60
-    assert {n for n in counts if n > replay.LIMIT} == {
+    assert {n for n in counts if n > replay.FROZEN_THROUGH} == {
         1061,
         1128,
         1196,
@@ -1220,7 +1221,7 @@ def test_the_732_source_history_holds_each_certificate_to_the_manifest() -> None
     rows = history["at_commit"]
     assert history["retained_commit"] == chosen.retained
     assert len(rows) == 390
-    assert all(325 <= row["n"] <= replay.LIMIT for row in rows)
+    assert all(325 <= row["n"] <= replay.FROZEN_THROUGH for row in rows)
     assert history["manifest_sha256"] == MANIFEST_732
     assert replay.manifest(chosen)[replay.SOURCE_MANIFEST] == MANIFEST_732
     pinned = replay.manifest(chosen)
@@ -1990,12 +1991,15 @@ def test_deletions_of_two_or_three_squares_stay_held_for_the_owner() -> None:
     ]
 
 
-def test_a_claim_record_read_from_23_october_stands_on_goebel_s_construction() -> None:
+def test_a_claim_record_read_from_23_october_stands_on_goebel_s_construction(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
     """Review A of #754, A2 (think-v022): the replay's standing side follows the claims
     importer's. A frozen claim record read on or after 23 October 2026 takes Göbel's
     construction beyond 324 into the standing side, so a publication above it is not below
     the standing side; one read before stands at the rows and the grid, as every frozen
-    record does; beyond 1073 the newer reading refuses."""
+    record does. The newer reading refuses only a count whose Göbel side no build proves
+    final: 1074 reads, and is refused with every build capped at 1100 (think-llit)."""
     result = {"n": 369, "case": None, "pending": [], "grid_side": "20"}
     above, under = Fraction("19.71"), Fraction("19.7")
     later = replay.standing_sides({"read_on": "2026-10-23", "results": [result]}, [369], {})
@@ -2004,7 +2008,10 @@ def test_a_claim_record_read_from_23_october_stands_on_goebel_s_construction() -
     assert not later[369].covers(under)
     earlier = replay.standing_sides({"read_on": "2026-10-22", "results": [result]}, [369], {})
     assert not earlier[369].covers(above)
-    with pytest.raises(replay.ReplayError, match="no side above 1073"):
+    far = replay.standing_sides({"read_on": "2026-10-23", "results": []}, [1074], {})
+    assert far[1074].form == "33 + 1/2*sqrt(2)"
+    monkeypatch.setattr(goebel_construction, "MAX_BUILD", 1100)
+    with pytest.raises(replay.ReplayError, match="n = 1074: no build to 1100 proves"):
         replay.standing_sides({"read_on": "2026-10-23", "results": []}, [1074], {})
 
 
@@ -2046,7 +2053,9 @@ def test_763_s_claims_are_the_claim_map_s_and_its_rows_what_its_walk_records() -
     the 13 recipes and 683 are held, and the other 184 are declared rows at their exact
     sides rounded up; 328, 850 and 909 restate f1ceee4's rows below the print."""
     chosen = replay.release(763)
-    mapped = [item for item in replay.mapped_claims(chosen) if item["n"] <= replay.LIMIT]
+    mapped = [
+        item for item in replay.mapped_claims(chosen) if item["n"] <= replay.FROZEN_THROUGH
+    ]
     assert len(mapped) == 203
     steps = _steps_763()["#763"]
     assert set(steps) == {item["n"] for item in mapped}

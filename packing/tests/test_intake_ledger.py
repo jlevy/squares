@@ -13,7 +13,7 @@ from typing import Any, cast
 import pytest
 import yaml
 
-from devtools import check_standing
+from devtools import check_standing, goebel_construction
 from devtools import intake_ledger as ledger
 from devtools.upper_bound_reports import exact_span
 
@@ -382,13 +382,16 @@ def test_a_claim_in_the_ruling_s_words_may_wait_on_the_owner() -> None:
     assert ledger.step_record(walk.steps[1])["awaiting_owner"] == "think-oqjd"
 
 
-def test_goebel_s_construction_is_an_earlier_report_beyond_the_horizon() -> None:
+def test_goebel_s_construction_is_an_earlier_report_beyond_the_horizon(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
     """The owner's answer on #613 (think-8krd): at 369 Göbel's strip 19 + sqrt(2)/2 joins
     the start below the grid, so a side above it is not recorded and one below is. A side
     just below the construction at its 12-place print is recorded: the restatement ruling
     as written restates reports, and whether it also reaches a construction is an open
-    question (think-oqjd); no case of it exists to 1024. Above the retained program's
-    reach, 1073, the construction is refused rather than read as absent."""
+    question (think-oqjd); no case of it exists to 1024. A count whose side no build proves
+    final is refused rather than read as absent: with every build capped at the retained
+    program's limit of 1100, 1074 (think-llit); the module's builds read it, and 9913."""
     construction = ledger.construction_side(369)
     assert construction is not None
     assert construction.kind == ledger.CONSTRUCTION
@@ -405,10 +408,12 @@ def test_goebel_s_construction_is_an_earlier_report_beyond_the_horizon() -> None
     plain = ledger.walk(369, grid, [above, under])
     assert [step.verdict for step in plain.steps] == ["recorded", "recorded"]
     assert ledger.construction_side(324) is None
-    assert ledger.goebel_reach() == 1073
-    assert ledger.construction_side(1073) is not None
+    assert ledger.goebel_reach() == 10_345
+    for n in (1073, 1074, 9913):
+        assert ledger.construction_side(n) is not None
+    monkeypatch.setattr(goebel_construction, "MAX_BUILD", 1100)
     for n in (1074, 1100, 1101):
-        with pytest.raises(ledger.LedgerError, match="gives no side above 1073"):
+        with pytest.raises(ledger.LedgerError, match=rf"n = {n}: no build to 1100 proves"):
             ledger.construction_side(n)
 
 
@@ -1351,12 +1356,15 @@ def test_refinements_render_with_their_packing_and_form_a_chain() -> None:
 SPAN_KEYS = ("model", "low", "high", "open_low", "open_high")
 
 
-def test_a_start_frozen_from_23_october_holds_goebel_s_construction_beyond_324() -> None:
+def test_a_start_frozen_from_23_october_holds_goebel_s_construction_beyond_324(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
     """Review A of #754, A2 (think-v022): a start `gather` freezes for a ledger read on or
     after 23 October 2026 holds Göbel's construction beside the beyond-horizon row or the
-    grid, from 325 to 1073, and refuses beyond 1073 (think-llit). The member recomputes
-    from the retained program, reads as the walk's construction, and a classical ruling
-    does not seed it twice. A start frozen earlier stays the grid alone."""
+    grid, at every count whose side a build proves final, and refuses any other
+    (think-llit). The member recomputes from the maintained module, reads as the walk's
+    construction, and a classical ruling does not seed it twice. A start frozen earlier
+    stays the grid alone."""
     (grid,) = ledger.tree_members([369], read_on="2026-10-22")[369]
     assert grid["label"] == "the grid"
     members = ledger.tree_members([369], read_on="2026-10-23")[369]
@@ -1395,7 +1403,10 @@ def test_a_start_frozen_from_23_october_holds_goebel_s_construction_beyond_324()
     assert [member.label for member in ledger.walk(369, start, [], rulings=RULED).start] == [
         ledger.GOEBEL_LABEL
     ]
-    with pytest.raises(ledger.LedgerError, match="gives no side above 1073"):
+    (_, far) = ledger.tree_members([1074], read_on="2026-10-23")[1074]
+    assert ledger.recomputed(1074, far) == [{key: far[key] for key in SPAN_KEYS}]
+    monkeypatch.setattr(goebel_construction, "MAX_BUILD", 1100)
+    with pytest.raises(ledger.LedgerError, match="n = 1074: no build to 1100 proves"):
         ledger.tree_members([1074], read_on="2026-10-23")
 
 
@@ -1566,13 +1577,14 @@ def test_the_issue_732_walk_applies_goebel_s_baseline_through_its_ruling() -> No
 
 
 def test_tree_drift_reports_goebel_s_member_only_from_23_october(
-    tmp_path: Path, capsys: pytest.CaptureFixture[str]
+    tmp_path: Path, capsys: pytest.CaptureFixture[str], monkeypatch: pytest.MonkeyPatch
 ) -> None:
     """Review B of #754, B2 and B3: `tree_drift` compares a frozen start with the one the
     tree gives on the ledger's day. At 369, where the tree's start is the grid, a start
     frozen as the grid has no drift for a ledger read on 22 October, and for one read on
     23 October the tree adds Göbel's construction. `check --tree` reports drift without
-    failing, but fails where the tree gives no start, as above 1073 from 23 October."""
+    failing, but fails where the tree gives no start, as at a count whose Göbel side no
+    build proves final, from 23 October: 1074 with every build capped at 1100."""
     grid = ledger.beyond_member(369, {})
     starts = ledger.starts_document(FROZEN_AT, {369: [grid]})
     (tmp_path / ledger.STARTS).write_text(yaml.safe_dump(starts), encoding="utf-8")
@@ -1600,8 +1612,9 @@ def test_tree_drift_reports_goebel_s_member_only_from_23_october(
     beyond = ledger.starts_document(FROZEN_AT, {1074: [ledger.beyond_member(1074, {})]})
     (tmp_path / ledger.STARTS).write_text(yaml.safe_dump(beyond), encoding="utf-8")
     assert ledger.main(["check", str(tmp_path)]) == 0
+    monkeypatch.setattr(goebel_construction, "MAX_BUILD", 1100)
     assert ledger.main(["check", "--tree", str(tmp_path)]) == 1
-    assert "gives no side above 1073" in capsys.readouterr().err
+    assert "n = 1074: no build to 1100 proves" in capsys.readouterr().err
 
 
 #: The walks whose ``ledger.yaml`` an offline gather does not reproduce, with the bead
@@ -1661,3 +1674,27 @@ def test_a_source_edited_without_a_regather_is_refused(tmp_path: Path) -> None:
     )
     ledger.gather(copy_of, snapshot=True)
     assert (copy_of / "ledger.yaml").read_bytes() != (directory / "ledger.yaml").read_bytes()
+
+
+def test_a_walk_past_the_summary_threshold_renders_a_summary_readme(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """A walk of more than `SUMMARY_FROM` counts keeps its per-count table in ledger.json
+    alone (think-llit, Gate Cost): its README keeps the tallies, each report, the rulings
+    and the owner's lists. Every retained walk walks fewer counts, so each renders as it
+    did; with the threshold under a walk's 23 counts, its README is the summary and its
+    ledger.json is unchanged."""
+    walks = sorted((ledger.ROOT / "campaign/issue-intake").glob("upper-bounds-*/ledger.json"))
+    walked = [len(json.loads(path.read_text(encoding="utf-8"))["counts"]) for path in walks]
+    assert max(walked) == 392 <= ledger.SUMMARY_FROM
+    directory = ledger.ROOT / "campaign/issue-intake/upper-bounds-20261016"
+    full = ledger.rendered(directory)
+    monkeypatch.setattr(ledger, "SUMMARY_FROM", 22)
+    summary = ledger.rendered(directory)
+    assert summary[ledger.VERDICTS] == full[ledger.VERDICTS]
+    text = summary[ledger.README]
+    assert "| n | Record on main | Reports in order | Best now |" not in text
+    assert "This walk reaches 23 counts, more than 22, so this README is a summary" in text
+    for kept in ("## Counts", "## Per Report", "## Owner Decisions"):
+        assert kept in text
+    assert len(text) < len(full[ledger.README])
