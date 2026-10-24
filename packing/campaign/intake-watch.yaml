@@ -530,12 +530,13 @@ repositories:
   - url: https://github.com/wand125/square-packing
     read_through: 04fbef0d4e8fc33d628c7fe626605e7fbbbf3250
     read_on: '2026-10-11'
-    bead: think-xk3f
     note: >-
       The commits of 11 October (UTC) from f9a77b7 to 04fbef0 past the 23e3186 read. f9a77b7 adds
       problems/square-lower-bounds/certificates/k2m5_n59_L8/lean/, a generated Lean kernel proof of
-      s(59) = 8 on Evan Daniel's mixed-measure checker at 1718a58, new evidence for T-066 that
-      think-xk3f owns. cac504b adds packing-certificate files with two exact checkers
+      s(59) = 8 on Evan Daniel's mixed-measure checker at 1718a58; since 23 October the
+      wand125-n59-lean-kernel-2026-10-11 packet pins f9a77b7 and retains that directory but
+      SOURCES.sha256, and T-235 registers the proof as a formalization of T-066 (think-xk3f).
+      cac504b adds packing-certificate files with two exact checkers
       (tools/packing_check/) for upper bounds the record already holds as grid packings (k2m4_n77_L9
       at 77 and 78, point_n21_L5 at 22 to 25, point_n45_L7 at 45, point_n61_L8 at 61) and for other
       containers; 0f289d0 runs those checks in CI. The triangle, domino, hexagon and right-isosceles
@@ -1024,7 +1025,9 @@ repositories:
       Read all 17 commits past 757b40b, through 5ca0dc3. #669 s155 is think-n1ga; #674 both s229
       certificates are think-5ij2; #673 credit clarification and PathCert theorem are think-gzvu.
       Fang gluing formalization f4883b4 is think-57ei (coordinate think-0esw); Ryu formalization
-      8475bdf is think-ahr2; improved filled L-shape bound a645fe3 is think-f8py. The exact 3-angle
+      8475bdf is think-ahr2; since 23 October the evand-fang-ryu-lean-2026-10-18 packet pins
+      8475bdf and retains both proofs, T-236 registers Fang's and the asymptotic register's row
+      notes Ryu's. Improved filled L-shape bound a645fe3 is think-f8py. The exact 3-angle
       n232 witness/Lean proof at 5ca0dc3 is evidence for T-193, held by think-phyb. Other commits
       change search tooling, status, site/provenance and displays; the complete changed-path
       inventory is retained in campaign/issue-intake/intake-20261018/source-commit-files.json. Full
@@ -1215,7 +1218,6 @@ repositories:
   - url: https://github.com/evand/square-packing
     read_through: 7051f4eabf7f9b2509ad1e7cc296f57d19482027
     read_on: '2026-10-22'
-    bead: think-7l2j
     note: >-
       The 75 commits from b64d5ab (20 October, 22:21Z) to 7051f4e (22 October, 01:54Z), the
       head, past 88385ab, the pin of the evand-n270-sweep-2026-10-20 and
@@ -1227,10 +1229,11 @@ repositories:
       outside this record, which is squares in a square, but at w = h rect2_iff to
       rect4_iff give s(2) = s(3) = s(4) = 2 and rect5_pts_lower (e96ab69) gives
       s(5) >= 2 + 1/sqrt 2: a proof-assistant route to values the record holds by published
-      proofs, which think-7l2j holds until a packet pins this commit or its import declines
-      it. The note literature/s5-proofs-2026-10-21.md points to chelokot's s5_eq_goebel, in
-      the 753079eb tree the chelokot-nagamochi-counterexample-2026-09-05 packet pins, which
-      think-7l2j holds too. The rest is the packer's store hygiene, deduplication and
+      proofs. Since 23 October the evand-rect-small-n-lean-2026-10-22 packet pins this commit
+      and retains those theorems' closure and notes, and think-7l2j imports them, registered
+      with chelokot's as T-238, a formalization of T-237 (think-4o9c); the rest of the R_5 development is rectangles only. The note
+      literature/s5-proofs-2026-10-21.md points to chelokot's s5_eq_goebel, in the 753079eb
+      tree, which the chelokot-small-n-lean-2026-09-05 packet now retains. The rest is the packer's store hygiene, deduplication and
       allocator design, and runs at 157, 273, 274 and 308 whose best sides (13.009188 at
       157, 17.000299455 at 274) are above the register's, with no certificate. Nothing else
       to import.
@@ -1277,7 +1280,6 @@ repositories:
   - url: https://github.com/evand/square-packing
     read_through: 7982d7a9346e29e36cab3ce075274f3023114353
     read_on: '2026-10-22'
-    bead: think-7l2j
     note: >-
       The ten commits of 22 October past the 7051f4e read, 3ee3aeb to 7982d7a, the head,
       authored 16:11Z to 17:12Z and all committed at 17:14Z. f06521f adds search/packer/candidates/s303_r303w0.cert, its
@@ -1292,9 +1294,9 @@ repositories:
       slope walk strip_walk, and strip_odd_of for odd n, which assumes the per-square
       inequalities KapS and KapC). Strips are rectangles, outside this record, which is
       squares in a square, and at L = H < 2 they bound nothing the record holds.
-      593391f edits CLAUDE.md. No other certificate changes. think-7l2j still holds
-      e96ab69's rect5_pts_lower (s(5) >= 2 + 1/sqrt 2 in Lean) and the chelokot
-      s5_eq_goebel pointer, as the 7051f4e read says.
+      593391f edits CLAUDE.md. No other certificate changes. e96ab69's rect5_pts_lower
+      (s(5) >= 2 + 1/sqrt 2 in Lean) and the chelokot s5_eq_goebel pointer are retained since
+      23 October, as the 7051f4e read says. Nothing else to import.
   - url: https://github.com/wand125/square-packing
     read_through: e48de243d7f5e348f1baa111b19265eb02f0d4a1
     read_on: '2026-10-22'
@@ -1371,6 +1373,27 @@ repositories:
       says. It changes nothing at or below 1024, so the packet stays at 17cc220, whose
       indexes have the SHA-256 the issue states. 3426 is among the rows above 1024 that wait
       on the owner (think-f2io). Nothing else to import.
+  # The intake pass of 2026-10-23, lane c-lean-1023 (think-7l2j): the repository the
+  # chelokot-small-n-lean-2026-09-05 packet's acquisition record now makes watched.
+  - url: https://github.com/chelokot/square-packing-archive
+    read_through: e1e9ef5de4cf419f62cd7971f7a8faaffaa7771e
+    read_on: '2026-10-23'
+    bead: think-fddm
+    note: >-
+      The 34 commits of 4 to 7 October 2026 past 753079eb, the pin of the
+      chelokot-small-n-lean-2026-09-05 and chelokot-nagamochi-counterexample-2026-09-05
+      packets, through e1e9ef5, the head (21 commits and 13 merges of pull requests up to
+      #33). They add a Bend development under bend/ (a bend-math submodule and 20 files) with
+      its generators under scripts/generate-bend-*.py, bend_proof.py and bend-certificates.json, and
+      docs/bend-formalization.md: proofs of s(1) to s(9) in Bend, s(5) = 2 + sqrt 2 / 2 among
+      them (9309180, 4a98d63), s(6) >= 3 (defcf46) and the grid and area bounds. 878596b moves
+      s(1) to s(4) and s(6) to s(9) from Lean to Bend, deleting Records/Basic.lean,
+      GridBounds.lean, Square6Exact.lean and the six StromquistSix*.lean modules and the
+      s4_eq_two theorem; Records/Square5.lean and NearSquare.lean keep their blobs, so
+      s2_eq_two, s3_eq_two and s5_eq_goebel stay in Lean. The rest changes the web app,
+      the domain package, the archive manifest, CI and two formalization notes. Routes in a
+      second proof checker to values the record holds, which think-fddm holds until its
+      triage imports or declines them. Nothing else to import.
   # The intake pass of 2026-10-23, lane c-records-a-1024 (think-t5hc): a repository the
   # site's other-projects list makes watched (8c26340d9), read at its archived head.
   - url: https://github.com/wand125/square-packing-tools

@@ -1,0 +1,124 @@
+{
+ "cpu_seconds": 25.826,
+ "kind": "t233-review-controls/v1",
+ "results": {
+  "axis": [
+   {
+    "control": "axis decision of the 99/100 mutant, n = 19",
+    "exact_min": 0.9915020495084085,
+    "refused": true,
+    "rigorous_lower_bound": 0.9915020495081024
+   },
+   {
+    "control": "axis decision of the 99/100 mutant, n = 20",
+    "exact_min": 0.9909918358367399,
+    "refused": true,
+    "rigorous_lower_bound": 0.990991835836325
+   },
+   {
+    "control": "axis decision of the 99/100 mutant, n = 26",
+    "exact_min": 0.9909807832479762,
+    "refused": true,
+    "rigorous_lower_bound": 0.990980783247435
+   },
+   {
+    "control": "axis decision of the 99/100 mutant, n = 27",
+    "exact_min": 0.9909086324141434,
+    "refused": true,
+    "rigorous_lower_bound": 0.9909086324135165
+   }
+  ],
+  "conventions": [
+   {
+    "control": "right conventions",
+    "equal_to_source_fraction": 31,
+    "refused": null,
+    "witnesses": 31
+   },
+   {
+    "control": "other field order",
+    "equal_to_source_fraction": 0,
+    "refused": true,
+    "witnesses": 31
+   },
+   {
+    "control": "standard step 83/40000",
+    "equal_to_source_fraction": 0,
+    "refused": true,
+    "witnesses": 31
+   },
+   {
+    "control": "half the declared step",
+    "equal_to_source_fraction": 0,
+    "refused": true,
+    "witnesses": 31
+   },
+   {
+    "control": "no D4 images",
+    "equal_to_source_fraction": 0,
+    "refused": true,
+    "witnesses": 31
+   }
+  ],
+  "premises": [
+   {
+    "control": "total mass n",
+    "failed": [
+     "listed_total_equals_total_mass",
+     "total_mass_is_n_minus_1e-5",
+     "total_mass_below_n",
+     "expanded_integrates_to_total_mass"
+    ],
+    "refused": true
+   },
+   {
+    "control": "step 1/4999",
+    "failed": [
+     "b_B_times_1_plus_D_below_1",
+     "e_tangent_form_below_1",
+     "last_bin_lower_end_below_tan_pi_8"
+    ],
+    "refused": true
+   },
+   {
+    "control": "last 2071",
+    "failed": [
+     "c_last_tangent_past_tan_pi_8",
+     "bins_reach_tan_pi_8"
+    ],
+    "refused": true
+   }
+  ],
+  "reader": [
+   {
+    "control": "duplicate key",
+    "message": "duplicate JSON key 'n'",
+    "refused": true
+   },
+   {
+    "control": "float token",
+    "message": "binary floating-point JSON token '4.8275'",
+    "refused": true
+   },
+   {
+    "control": "negative mass",
+    "message": "not an exact nonnegative decimal or fraction: '-1/2'",
+    "refused": true
+   },
+   {
+    "control": "second gzip member",
+    "message": "/tmp/claude-0/-home-user-squares/f8504540-2b5a-5f78-8968-eb4ffa4c4b64/scratchpad/t233-work/two-members.json.gz: not exactly one complete gzip member",
+    "refused": true
+   }
+  ],
+  "sample": [
+   {
+    "below_1": 32,
+    "control": "99/100 mutant at the sample's least points, n = 19",
+    "directions": 32,
+    "refused": true
+   }
+  ]
+ },
+ "verdict": "EVERY_CONTROL_REFUSED"
+}

@@ -2367,21 +2367,25 @@ ci_gates:
     The aggregate has no entry: it is four seconds of `test` commands, and putting a
     four-second script under the same band as a 44-minute tier measures nothing.
   wall:
-    measured_seconds: 1133.0
-    measured_on: '2026-09-29'
+    measured_seconds: 1517.0
+    measured_on: '2026-10-23'
     measured_where: >-
-      Workflow dispatch run 36636552951 at 9174140a, testing merge
-      0376416ec9ab3220bb87e52888ddb72919d3e861; run start to last gating job.
-      One complete observation; declared workers total 7408 seconds (123.47 runner-minutes).
+      Workflow dispatch run 40033801674 at b39bd7ce, PR #745's branch; run start to last
+      gating job, read by `devtools.check_ci_gate_walls` on 2026-10-24, its critical path
+      `deferred-slow-lane` at 1477s. One complete observation; declared workers total
+      8610 seconds (143.5 runner-minutes).
     # One reading gives sample max/min = 1.00; runner-to-runner variance is unknown.
     spread: 1.00
     ceiling_seconds: 1900.0
     argument: >-
-      The first complete fanout measured 1133s of wall and 7408 declared worker-seconds
-      on run 36636552951. The 1900s reporting ceiling is 1.68x that single reading,
-      within the 2x headroom rule; runner spread and a repeat-run baseline remain unknown.
-      The predecessor topology's eight-run 2540.6s record stays in history below and is
-      not a like-for-like speedup control.
+      Re-recorded with the slow lane's band (think-znx8, option a), from the first run with
+      the four whole fine-net census sweeps in that lane: 1517s of wall and 8610 declared
+      worker-seconds on run 40033801674. The 1900s reporting ceiling is unchanged; it is
+      1.25x that single reading, the least the gate's drift band admits, and it covers the
+      slow lane's 1850s ceiling with the 35s tree resolution before it. Runner spread and
+      a repeat-run baseline remain unknown. The first complete fanout's 1133s and the
+      predecessor topology's eight-run 2540.6s record stay in history below; neither is
+      a like-for-like speedup control.
     history:
     - measured_seconds: 2540.6
       measured_on: '2026-09-22'
@@ -2391,6 +2395,27 @@ ci_gates:
         on 2026-09-22 and reduced to their geometric mean.
         Each reading is the run starting to its last gating job completing: 2611, 2773,
         2762, 1882, 2590, 2635, 2581 and 2618 s.
+    - measured_seconds: 1133.0
+      measured_on: '2026-09-29'
+      measured_where: >-
+        Workflow dispatch run 36636552951 at 9174140a, testing merge
+        0376416ec9ab3220bb87e52888ddb72919d3e861; run start to last gating job (`screen`,
+        1111s). One complete observation; declared workers total 7408 seconds (123.47
+        runner-minutes). Its 1900s reporting ceiling was 1.68x that reading. Superseded
+        on 2026-10-24 by run 40033801674.
+    attribution:
+      cause: >-
+        The critical path moved to `deferred-slow-lane`, which the four whole fine-net
+        census sweeps PR #745 added to it took to 1477s; it read 1015s on run
+        36636552951, where `screen` set the wall at 1111s, and `screen` read 642s on run
+        40033801674. The job's own attribution names the four nodes and their costs.
+      unit: job-seconds
+      source: >-
+        Job start and end times from the GitHub API for runs 36636552951 and
+        40033801674, the latter read by `devtools.check_ci_gate_walls --gate deep-gate
+        --run-id 40033801674`.
+      grew:
+      - {name: deferred-slow-lane, before: 1015.0, after: 1477.0}
   jobs:
   - id: resolve-tree
     measured_seconds: 17.0
@@ -2485,20 +2510,67 @@ ci_gates:
       originally derived from predecessor run 35579234418 JUnit file time (837.940s),
       24s setup and runner spread.
   - id: deferred-slow-lane
-    measured_seconds: 921.7
-    measured_on: '2026-09-22'
+    measured_seconds: 1477.0
+    measured_on: '2026-10-23'
     measured_where: >-
-      In order, run 35632055808, 35627075872, 35579234418, 35480905141, 35213757305,
-      35078581840, 35012089923 and 34997041426, read by `devtools.check_ci_gate_walls`
-      on 2026-09-22 and reduced to their geometric mean.
-      Job wall: 990, 993, 999, 879, 953, 713, 913 and 973 s.
-    spread: 1.40
-    ceiling_seconds: 1250.0
+      Workflow dispatch run 40033801674 at b39bd7ce, PR #745's branch, the first run with
+      the four whole fine-net census sweeps in the lane, read by
+      `devtools.check_ci_gate_walls` on 2026-10-24: 1477 s of job wall, 54 s of setup and
+      1422 s of work, the `slow behavioral tests` Step 1418.5 s at `-n 4` over 284 tests
+      and 4,979.8 test-seconds (JUnit artifact validation-timings-deferred-slow-lane-1).
+      One reading. One test failed, register-id contiguity
+      (`test_unmutated_results_checker_is_green_inside_a_worker`, 23.9 s, while T-231
+      was on #753); the other 283 passed.
+    spread: 1.00
+    ceiling_seconds: 1850.0
     argument: >-
       The slow behavioural lane, isolated after run 34177317419 timed it out at 1800s
-      while the escape screen shared its runner. It finishes inside the gate's first
-      seventeen minutes and has never been the wall, so its band is a regression check
-      rather than a cost to attack.
+      while the escape screen shared its runner. Since PR #745 it also runs the four whole
+      2,073-direction fine-net census sweeps, which the pull-request surface samples. The
+      band was raised for them on purpose, an `OR-17` selection by the coordinator's
+      decision think-znx8 (option a): the deep gate is the deferred lane rather than the
+      cycle `OR-14` keeps quick, and splitting the four into a job of their own or making
+      the exact evaluator cheaper (think-o8to) would have held the pull request back.
+      1850s is the lowest ceiling the gate's 1.25x drift band admits over the 1477s
+      record. It is also about the Step's own 1800s subprocess cap
+      (`FAST_SUITE_BUDGET_SECONDS`) plus that run's 54s of setup, so the job's ceiling and
+      the Step's cap name about the same wall; that cap, 1.27x the 1418.5s Step, is the
+      tighter limit. The lane is now the gate's longest job and sets its wall.
+    history:
+    - measured_seconds: 921.7
+      measured_on: '2026-09-22'
+      measured_where: >-
+        In order, run 35632055808, 35627075872, 35579234418, 35480905141, 35213757305,
+        35078581840, 35012089923 and 34997041426, read by `devtools.check_ci_gate_walls`
+        on 2026-09-22 and reduced to their geometric mean.
+        Job wall: 990, 993, 999, 879, 953, 713, 913 and 973 s. Spread 1.40, under a
+        1250s ceiling, 1.36x the record, when the lane finished inside the gate's first
+        seventeen minutes and had never been the wall. Superseded on 2026-10-24 by run
+        40033801674's reading with the four fine-net sweeps.
+    attribution:
+      cause: >-
+        Four test nodes joined the lane in PR #745 (9a92c2370): the whole sweeps of
+        `test_each_scaled_sweep_refuses_its_mutant_somewhere_with_an_exact_witness` at the
+        four 2,073-direction fine-net packets in `tests/test_sqverify_fast_census.py`, each
+        re-deriving an exact capture at all 2,073 refusals. They cost 953.25 test-seconds,
+        about 238s of wall across the Step's four xdist workers, and n27's 338.92s on one
+        worker. The lane without them read 1140s on main's post-merge `slow-lane` job in
+        run 40034964765 at 64b316b6c, which started about ten minutes later that evening,
+        and 698 to 1140s across six such runs on 2026-10-23; with them it read 1477s, 337s
+        more. The rest of the rise from 921.7s is a month's other slow tests and the
+        runner, which this record does not separate.
+      unit: test-seconds
+      source: >-
+        The JUnit receipt in artifact validation-timings-deferred-slow-lane-1 (id
+        12536764221) of run 40033801674; job walls by `devtools.check_ci_gate_walls --gate
+        deep-gate --run-id 40033801674`; the `slow-lane` job of packing-validation.yml runs
+        40034964765, 40018711061, 40004187718, 39999150174, 39994323469 and 39987074688
+        (1140, 1064, 882, 1077, 698 and 1139 s), from the GitHub API's job start and end.
+      grew:
+      - {name: 'test_sqverify_fast_census.py sweep mixed_n27_L5655', before: 0.0, after: 338.92}
+      - {name: 'test_sqverify_fast_census.py sweep mixed_n19_L48275', before: 0.0, after: 256.43}
+      - {name: 'test_sqverify_fast_census.py sweep mixed_n20_L49125', before: 0.0, after: 200.55}
+      - {name: 'test_sqverify_fast_census.py sweep mixed_n31_L59775', before: 0.0, after: 157.35}
   - id: screen
     measured_seconds: 914.0
     measured_on: '2026-09-22'
@@ -2644,10 +2716,12 @@ ci_gates:
     measured_where: null
     spread: null
     pending_measurement: think-0atx
-    ceiling_seconds: 1250.0
+    ceiling_seconds: 1850.0
     argument: >-
-      Derived reporting estimate from the identically shaped deep-gate slow worker. That
-      proxy is not an observation of this workflow's post-merge worker.
+      Derived reporting estimate from the identically shaped deep-gate slow worker,
+      re-derived on 2026-10-24 when that worker's band rose from 1250s to 1850s for the
+      four whole fine-net census sweeps (think-znx8), which run here too. That proxy is not
+      an observation of this workflow's post-merge worker.
   - id: exhaustive-1
     measured_seconds: null
     measured_on: null

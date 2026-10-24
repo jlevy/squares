@@ -197,6 +197,14 @@ class Prose:
     #: reads it (`verifier_registry.LABELS`). T-223's two routes share the corner verifier
     #: its source reports running, so its replay shares the producer's components.
     confirmation: str = "independently re-implemented"
+    #: Whose re-implementation it is, where its author's system family is also the
+    #: producer's: epistemics.md's confidence order states that diversity after the level
+    #: (rule 4). T-239's review checker is by a Claude agent, as its search was (review A4
+    #: of #757).
+    diversity: str = ""
+    #: What the retained packet holds of the certificate: the certificate, or, where the
+    #: packet is derived-only, the exact fact derived from it (T-239, review A5 of #757).
+    retained: str = "it"
     #: How the certificate states each square. T-196's states a rational centre and the
     #: rotation's cosine and sine, which the adapter turns into a half-angle tangent.
     squares: str = "a rational centre and the tangent of its half-angle"
@@ -1014,6 +1022,45 @@ RESULTS: dict[str, Prose] = {
             "maintained routes exact at every wall and at three kinds of least-gap pair"
         ),
     ),
+    "T-239": Prose(
+        author="Amund Kristiansen",
+        reported="on [jlevy/squares#755](https://github.com/jlevy/squares/issues/755)",
+        producer_route=False,
+        ai=(
+            "Issue 755 says the search, the certificate and the report were done by Claude "
+            "(Anthropic), working in Claude Code at Amund Kristiansen’s direction, with Evan "
+            "Daniel’s engine and checkers."
+        ),
+        routes=(
+            "No route here is the source’s code. Both read the certificate, kept here as a "
+            "derived exact fact since the source states no licence, through an adapter whose "
+            "author read Evan Daniel’s two checkers and which carries two of their "
+            "expressions, its line filter and its corner construction (RF-7 of the 23 October "
+            "review), so the replay is re-implemented sharing those components; the review’s "
+            "checker shares no code with either maintained route or the source."
+        ),
+        lineage=(
+            "The issue says the search started from Evan Daniel’s n = 303 packing of #728, "
+            "this case’s house best packing before this adoption (T-230), itself found from "
+            "Daniil Ostashev’s packing, and relaxed perturbed variants of it in float32 "
+            "batches, polished in binary64 with Daniel’s quench; it calls the result a new "
+            "packing, not a refinement. Measured by the 23 October review, square by square, "
+            "it pairs one to one with T-230’s packing under the identity and row for row: 12 "
+            "squares lie beyond a tenth, at most 0.547, five are newly tilted and 47 of about "
+            "860 contacts change. So it is another arrangement of T-230’s packing, found from "
+            "it, not a refinement in this record’s sense (T-239). The certificate is a "
+            "dilation by $1 + 10^{-12}$ of a binary64 packing; the issue claims the upper "
+            "bound only, and the packing is not rigid: five squares touch nothing."
+        ),
+        third_route=(
+            ", and the 23 October review’s clean-room checker decided it again on two routes "
+            "of its own, in integers alone and in rationals with exact edge and vertex tests; "
+            "its controls at $10^{-30}$ found both maintained routes exact at three walls and "
+            "five pairs"
+        ),
+        diversity="by a Claude agent, a system family the producer also used",
+        retained="its derived exact fact",
+    ),
 }
 
 XU = "Ryan Xu"
@@ -1026,6 +1073,7 @@ OSTASHEV = "Daniil Ostashev"
 BARNETT = "Robert Barnett"
 #: Mykhailo Polkovskyi, by the handle his earlier credits use (T-173, T-183).
 POLKOVSKYI = "Mishapolk"
+KRISTIANSEN = "Amund Kristiansen"
 
 
 @dataclass(frozen=True)
@@ -1569,16 +1617,16 @@ CREDITS: dict[int, Credit] = {
         "Mykhailo Polkovskyi’s tighter certificate of Francisco Couzo’s continuation of "
         "PingYou Ltd’s n = 302 arrangement",
     ),
-    # Issue 728's packing (T-230, adopted on 23 October 2026), another arrangement of Daniil
-    # Ostashev's two-band design (64 squares beyond a tenth of T-186's packing and 24 tilts
-    # reversed, the 22 October review), found from Ostashev's packing, which the issue names
-    # as the start. As at 155, Daniel is the finder and the start's author is named in the
-    # sentence, not in the structured fields.
+    # Issue 755's packing (T-239, adopted on 24 October 2026), another arrangement of T-230's
+    # packing (one to one with it, 12 squares beyond a tenth and five newly tilted, the 23
+    # October review), found from it, which the issue names as the start. As at 155 and for
+    # T-230, Kristiansen is the finder and the start's author is named in the sentence, not
+    # in the structured fields.
     303: Credit(
-        (DANIEL,),
+        (KRISTIANSEN,),
         (),
-        "Evan Daniel’s arrangement of Daniil Ostashev’s two-band design in a search started "
-        "from Ostashev’s n = 303 packing",
+        "Amund Kristiansen’s arrangement of Evan Daniel’s n = 303 packing in a search "
+        "started from it",
     ),
     # Issue 575's packing padded (T-186's regularization of T-175).
     304: Credit(
@@ -2331,8 +2379,8 @@ def section(move: Move) -> str:
             f"{credit.phrase[0].upper()}{credit.phrase[1:]}, {verb} {prose.reported}, "
             f"{side} ({house.result}). The certificate gives a rational side and, for each "
             f"of the {n} unit squares, {prose.squares}; "
-            f"the [retained packet](../resources/web/{packet}/README.md) holds it with the "
-            "complete native jobs that decided it."
+            f"the [retained packet](../resources/web/{packet}/README.md) holds "
+            f"{prose.retained} with the complete native jobs that decided it."
         ),
         (
             "Both maintained exact routes decided it here, `sqpack`’s exact separating-axis "
@@ -2340,7 +2388,8 @@ def section(move: Move) -> str:
             f"and outside-container controls{third}. {routes} The {reviews} "
             "accepted the replay for finite feasibility. "
             f"That proves $s({n}) \\le {ceiling}$, the verified upper bound: confirmed, "
-            f"{prose.confirmation}. It says nothing about "
+            f"{prose.confirmation}{f', {prose.diversity}' if prose.diversity else ''}. "
+            "It says nothing about "
             "optimality, rigidity or a local minimum."
         ),
     ]

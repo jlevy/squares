@@ -1107,7 +1107,13 @@ The screen, regularized-views and exhaustive shard jobs use `--jobs 1 --inner-jo
 the hosted four-CPU runners.
 The slow lane also has its own job, using `--jobs 1 --inner-jobs 2`: xdist supplies four
 test workers, while tests that create their own pools retain two inner workers.
-Each hosted deferred-check group runs one whole step at a time on its own runner with
+Since PR #745 it also runs the four whole 2,073-direction fine-net census sweeps, 953
+test-seconds on
+[run 40033801674](https://github.com/jlevy/squares/actions/runs/40033801674), which make
+it the deep gate’s longest job and set the gate’s wall.
+Its band in `devtools/gate-budgets.yaml` was raised for them on purpose (`think-znx8`);
+a job of their own or a cheaper exact evaluator is `think-o8to`. Each hosted
+deferred-check group runs one whole step at a time on its own runner with
 `--jobs 1 --inner-jobs 2`, preserving PR #120’s response to the concurrent corpus-pool
 timeout in [run 34181619739](https://github.com/jlevy/squares/actions/runs/34181619739).
 The workflow tests derive selections through the CLI and require complete, disjoint

@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:ResultsRegister/v1
   schema: results.schema.yaml
   status: enforced
-last_reviewed: '2026-10-23'
+last_reviewed: '2026-10-24'
 results:
   - id: T-001
     kind: lower-bound
@@ -5036,6 +5036,10 @@ results:
       point-only review was recorded as the report entry's external_review and in reviews.
       The review found no blocking defect. The Lean build was not run here.
 
+      On 29 September 2026 the source removed the overlay's one hypothesis: its zero-margin
+      Lean proof, n21pts_eq_5 : minSide 21 = 5, is T-234, a formalization of this route,
+      reported and not built here (think-f2bm).
+
   - id: T-056
     kind: upper-bound
     registered: '2026-09-29'
@@ -6130,8 +6134,9 @@ results:
       The source reports the cover accepted by Daniel's zmx2, with outward-rounded binary64
       enclosures, over 6,400 symmetry-reduced roots and 51,200 unreduced ones, none
       uncertified. Its exact-rational evidence is two zm_mixed.py runs whose joint coverage
-      cannot be checked from what is published, so it is not recorded here. It has no Lean
-      statement.
+      cannot be checked from what is published, so it is not recorded here. Its Lean kernel
+      proof of 11 October 2026, by the same author on Daniel's mixed-measure checker, is
+      T-235, a formalization reported and not built here.
 
       zmx2 was replayed here in full on 2 October 2026, over all 6,400 D4 roots and all
       51,200 unreduced roots, none uncertified, with the box totals the source states; its
@@ -20727,6 +20732,10 @@ results:
 
       The deficiency bound c*(k) <= k - 1 - F(k) is listed in asymptotic-waste-bounds.yaml's
       deficiency_upper_bounds.
+
+      Evan Daniel's Lean proofs of both theorems, unconditional, on the 18 pieces as exact
+      certificates (evand/square-packing, 18 October 2026), are T-236, a formalization
+      reported and not built here (think-57ei).
     next_rung: >-
       C4 needs a second accepted adversarial review by a distinct reviewer and a retained
       human oversight record; the note, draft v0.6, is asked of the author, and its own text
@@ -32184,7 +32193,9 @@ results:
       from T-186, which stays retained as history, and both strong generators decided the
       new witness in the same pull request: Evan Daniel's regularizer finds it not
       first-order jammed and draws no view, and grid-slack's view waits on the owner's
-      row-7 review (think-ykgh), so the axis tool's view of the new witness is drawn.
+      row-7 review (think-ykgh), so the axis tool's view of the new witness is drawn. On
+      24 October 2026 the case moved again, to T-239, another arrangement of this packing
+      found from it, and this certificate stays retained as history.
     next_rung: >-
       None for the bound. V4 and C4 need a second accepted adversarial review by a
       distinct reviewer and a retained human oversight record; one AI review, of 22
@@ -32421,6 +32432,1042 @@ results:
           moved: 0
           max_move: 2.02e-11
           max_turn_deg: 0.0
+  - id: T-232
+    kind: lower-bound
+    registered: '2026-10-23'
+    landed: '2026-10-24'
+    headline: >-
+      Mixed rectangle-measure lower bound `s(31) ≥ 2391/400` verified, on a
+      2,073-direction declared net
+    claim: >-
+      A rectangle measure of wand125/square-packing, published on 11 October 2026 and
+      reported on no issue, proves s(31) >= 2391/400 = 5.9775.
+
+      The certificate, mixed_n31_L59775, is a density of 536 uniform rectangles in D4
+      orbits, 4,244 distinct rectangles after expansion, and no point mass, of total mass
+      3099999/100000 < 31, on a net its candidate declares: core side 4999/5000 and 2,073
+      half-angle tangents of step 1/5002, the net of T-132, T-142 and T-143. Since
+      4999/5000 (1 + 1/5002) = 25009997/25010000 < 1, and the last tangent 1036/2501 is
+      past tan(pi/8), every unit square contains a concentric core at a net angle strictly
+      in its interior.
+
+      The retained maintained sqverify-fast capture verifies all 2,073 directions at
+      threshold one, every core centred in its per-bin domain capturing mass at least one,
+      with the source's node total. Its whole-net controls record 2,073 coverage refusals
+      of the 99/100 mutant and no verified mutant direction, and the near-threshold mutant
+      is refused. The mathematical review accepts the argument and the exact premises, and
+      decided the capture again at 122 of the 2,073 directions with a clean-room exact
+      checker of its own, all verified: sampled, 122 of 2,073 net directions,
+      independently re-implemented.
+
+      This raises the verified and reported lower lanes at n = 31 from 2381/400 (T-068,
+      T-074) to 2391/400, by 1/40, above the 597/100 that jlevy/squares#446 reported on 8
+      October and never adopted, by 3/400. The bound is confirmed by a re-implementation
+      sharing components with the producer's checker, sqverify-proof-net, which is
+      Hosono's adaptation of this repository's sqverify_fast crate: the two share the
+      crate apart from their declared-net readers. No independent full implementation,
+      second method, proof-assistant check or optimality theorem is claimed.
+
+      Hiroaki Hosono after Tokoharu and Levy,
+      [square-packing](https://github.com/wand125/square-packing/tree/23e31862345c532d17ad2c896677a3a8d8821aa4/problems/square-lower-bounds/certificates/mixed_n31_L59775).
+      The source says parts of the work were produced with AI assistance under human
+      direction.
+    scope: {n_values: [31]}
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 3
+      rationale: >-
+        Scored as a claim: the strongest lower bound on record at n = 31, 1/40 above the
+        prior lanes, and it more than halves the gap to the upper bound 6 (from 19/400 to
+        9/400), by the certificate kind and declared net of T-132, T-142 and T-143, with
+        no new technique, at S3 as T-142, T-143 and T-200 are. Not S4: no reusable
+        technique, bound family or resolved disputed value. Not S5: n = 31 is not a
+        central open case.
+      scored: '2026-10-23'
+      by: >-
+        docs/project/reviews/review-2026-10-23-wand125-n31-fine-net.md (repository;
+        confirms the registering lane's draft)
+    novelty: previously-published
+    attribution:
+      source_keys: ['[wand125 fine-net n31 2026-10-11]']
+      published: '2026-10-11'
+    composition: >-
+      One source certificate and one complete maintained native replay, C3. The replay
+      shares components with the producer's checker, Hosono's adaptation of this
+      repository's sqverify_fast crate, apart from the declared-net readers. Beside it
+      stands a sample, not a second implementation of the whole: 122 of the 2,073
+      directions decided by the review's clean-room exact checker
+      (E-wand125-fine-net-n31-59775-review-sample, cited by the case record), which sets
+      no rung.
+    evidence:
+      - E-wand125-fine-net-n31-59775-report
+      - E-wand125-fine-net-n31-59775-sqverify-fast-replay
+    artifacts:
+      - packing/resources/web/wand125-fine-net-n31-2026-10-11/README.md
+      - packing/resources/web/wand125-fine-net-n31-2026-10-11/acquisition/sources.json
+      - packing/resources/web/wand125-fine-net-n31-2026-10-11/acquisition/release-assets.json
+      - >-
+        packing/resources/web/wand125-fine-net-n31-2026-10-11/release/certificates/mixed_n31_L59775/candidate.json.gz
+      - >-
+        packing/resources/web/wand125-fine-net-n31-2026-10-11/release/certificates/mixed_n31_L59775/check2/receipt.json
+      - packing/resources/web/wand125-fine-net-n31-2026-10-11/receipts/premises-n31.json
+      - packing/resources/web/wand125-fine-net-n31-2026-10-11/receipts/sample-diagnostic-n31.json
+      - packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/README.md
+      - docs/project/reviews/review-2026-10-23-wand125-n31-fine-net.md
+      - packing/benchmarks/measure-verifier/census-mixed/census.json
+      - >-
+        packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-n31-2026-10-11/mixed_n31_L59775.jsonl.gz
+      - packing/devtools/fine_net_followup.py
+    next_rung: >-
+      None for the bound. V4 and C4 need a second qualifying adversarial AI review by a
+      distinct reviewer and an explicit human oversight record; one AI review, of 23
+      October, is retained. An independent full implementation would add implementation
+      diversity; the review's sample of 122 directions does not supply it.
+    notes: >-
+      From the complete maintained capture of 23 October (two threads, 14,607.6 CPU
+      seconds), its whole-net control receipt and the mapped mathematical review. The case
+      records' lower lanes move to 2391/400; T-068 and T-074 keep their claims at n = 31,
+      now superseded there, and the issue-446 report of 597/100 stays where it is. The
+      pre-publication receipt is a second complete run of the same source on a fresh
+      machine (7,277 s), not the run the check2 receipt embeds. The release asset's data
+      members are retained in Git under OR-18; the adapted verifier archive inside it is
+      pinned by digest and not opened.
+    reviews:
+      - path: docs/project/reviews/review-2026-10-23-wand125-n31-fine-net.md
+        kind: adversarial
+        reviewer: >-
+          Claude (Anthropic), the tbd-strong-max sub-agent at maximum reasoning, the
+          stage 4 mathematical review lane of think-wop1 (think-oc25), prompted
+          separately from the records lane that retained and registered the entry and
+          sharing none of its context beyond the brief and the committed record, running
+          only programs of its own at one process, and barred from the source's adapted
+          crate and this repository's sqverify_fast source
+        reviewer_kind: ai
+        relation: project
+        date: '2026-10-23'
+        scope: >-
+          wand125's mixed_n31_L59775 at 23e3186 and its release asset: the argument
+          from certificate to bound re-derived (the D4 fold, lemma N0 on the 1/5002
+          net, the per-bin domains, the quarter-turn quadrant, the count); every exact
+          premise; the declared net node by node; the capture at a stratified sample of
+          122 of the 2,073 directions by a clean-room exact checker of its own, with
+          its mutants refused; the source's run and control logs at single poses;
+          custody against the upstream commit and release asset; the entry, its
+          evidence entry and n-031.md on the records branch at 7b90d47d2; and the
+          drafted significance
+        verdict: accepted
+        covers: [T-232]
+    controls:
+      - >-
+        packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-n31-2026-10-11/mixed_n31_L59775.control.json
+      - packing/tests/test_sqverify_fast_census.py
+  - id: T-233
+    kind: lower-bound
+    registered: '2026-10-23'
+    landed: '2026-10-24'
+    headline: >-
+      Mixed rectangle-measure lower bounds reported at `n = 19, 20, 26, 27`, on a
+      2,073-direction net
+    claim: >-
+      Four rectangle measures of wand125/square-packing, published on 7 and 8 October
+      2026 and reported in jlevy/squares#446, are reported to prove s(19) >= 1931/400 =
+      4.8275, s(20) >= 393/80 = 4.9125, s(26) >= 1111/200 = 5.555 and s(27) >= 1131/200
+      = 5.655.
+
+      The certificates, mixed_n19_L48275, mixed_n20_L49125, mixed_n26_L5555 and
+      mixed_n27_L5655, are densities of 347, 471, 615 and 714 uniform rectangles in D4
+      orbits, each of total mass n - 1/100000, on a net each candidate declares: core
+      side 4999/5000 and 2,073 half-angle tangents of step 1/5002, the net of T-132,
+      T-142 and T-143. Since 4999/5000 (1 + 1/5002) = 25009997/25010000 < 1, and the
+      last tangent 1036/2501 is past tan(pi/8), every unit square contains a concentric
+      core at a net angle strictly in its interior. The n = 27 certificate is the
+      author's follow-up of 8 October on the issue, which supersedes the issue's
+      2261/400.
+
+      The source reports every such core centred in its per-bin domain capturing mass at
+      least one at all 2,073 directions of each net, by sqverify-proof-net, its copy of
+      this repository's sqverify_fast changed to read the declared net, and a control
+      with every mass scaled by 197/200 refused at 32 sampled directions of each.
+
+      Each value is above its case's reported and verified lower bound: 193/40 at
+      n = 19 (T-103) by 1/400, 981/200 at n = 20 (T-104) by 3/400, 1109/200 at n = 26
+      (T-105) by 1/100 and 11287/2000 at n = 27 (T-106) by 23/2000.
+
+      Here the maintained readers accepted each candidate's exact mass, declared-net and
+      check2 premises from its release members, retained since 23 October. The stage 4
+      review of 23 October read all four certificates and accepted them: it re-derived the
+      argument, recomputed every exact premise apart from the crate, decided each axis
+      direction completely by an independent vertex argument, and evaluated the source's
+      logs and 32 sampled directions per count exactly, finding no blocking or major
+      defect.
+
+      Complete sqverify-fast replays ran here on 23 October, from the retained
+      candidates: each capture passed at all 2,073 directions, with the source's node
+      total, and the whole-net controls were refused at n = 19, 20 and 27. At n = 26 the
+      control failed closed: the 99/100 mutant was refused at every direction, but at the
+      axis direction its exact capture sits 3.28e-9 above the sweep's certified bound,
+      beyond the census's constant allowance of 1e-9. The receipts are in
+      packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-446-release-2026-10-08/,
+      n = 26's kept as mixed_n26_L5555.control-failed-v2.json. The replays' evidence is
+      held until that allowance is fixed (think-tcsl), so the values stand as reported.
+
+      Hiroaki Hosono after Tokoharu and Levy,
+      [square-packing](https://github.com/wand125/square-packing/tree/61e37d583ad690266da2188ad027ef3f697bf162/problems/square-lower-bounds)
+      and
+      [mixed_n27_L5655](https://github.com/wand125/square-packing/tree/bf85d6b537a7e854ac2f885c871474ea46db65ac/problems/square-lower-bounds/certificates/mixed_n27_L5655).
+      The source says parts of the work were produced with AI assistance under human
+      direction.
+    scope: {n_values: [19, 20, 26, 27]}
+    verification: V0
+    confirmation: C1
+    significance:
+      score: 3
+      rationale: >-
+        Scored as a claim: once replayed, each raises its case's verified and reported
+        lower lanes, by 1/400 at n = 19, 3/400 at 20, 1/100 at 26 and 23/2000 at 27, over
+        T-103 to T-106, by the certificate kind and declared net of T-142 with no new
+        technique, at S3 as T-103 to T-106 and T-142 are. At n = 19 the record also holds
+        a reported Lean proof of s(19) = 3 + 4√2/3 (T-194), which would supersede any
+        lower bound if adopted.
+      scored: '2026-10-23'
+      by: >-
+        the stage 4 review of 23 October
+        (docs/project/reviews/review-2026-10-23-wand125-446-fine-net.md), confirming the
+        draft of the registering lane (think-eth9)
+    novelty: previously-published
+    attribution:
+      source_keys: ['[wand125 fine-net lower bounds 2026-10-08]']
+      published: '2026-10-08'
+    composition: >-
+      Four reported certificates on two reported entries, one for n = 19, 20 and 26 and
+      one for n = 27, each read by the stage 4 review. The source's check is a copy of
+      this repository's sqverify_fast crate with one change, so a sqverify-fast replay
+      here would be re-implemented sharing the producer's components, as T-104's is, and
+      no second implementation stands beside it. The review's own runs are samples and
+      premise checks, cited by the case records. The entry takes the least rung of its
+      four counts.
+    evidence:
+      - E-wand125-fine-net-446-n19-n20-n26-report
+      - E-wand125-fine-net-n27-5655-followup-report
+    artifacts:
+      - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-08/README.md
+      - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-08/reported-catalogue.json
+      - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-08/reported-n27-followup.json
+      - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-08/source-manifest.json
+      - packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/README.md
+      - packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/acquisition/sources.json
+      - packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/acquisition/release-assets.json
+      - >-
+        packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/release/certificates/mixed_n19_L48275/candidate.json.gz
+      - >-
+        packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/release/certificates/mixed_n20_L49125/candidate.json.gz
+      - >-
+        packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/release/certificates/mixed_n26_L5555/candidate.json.gz
+      - >-
+        packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/release/certificates/mixed_n27_L5655/candidate.json.gz
+      - packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/receipts/premises-n19.json
+      - packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/receipts/premises-n20.json
+      - packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/receipts/premises-n26.json
+      - packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/receipts/premises-n27.json
+      - packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/README.md
+      - docs/project/reviews/review-2026-10-23-wand125-446-fine-net.md
+      - packing/devtools/fine_net_followup.py
+      - >-
+        packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-446-release-2026-10-08/README.md
+      - >-
+        packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-446-release-2026-10-08/mixed_n19_L48275.jsonl.gz
+      - >-
+        packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-446-release-2026-10-08/mixed_n19_L48275.control.json
+      - >-
+        packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-446-release-2026-10-08/mixed_n20_L49125.jsonl.gz
+      - >-
+        packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-446-release-2026-10-08/mixed_n20_L49125.control.json
+      - >-
+        packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-446-release-2026-10-08/mixed_n26_L5555.jsonl.gz
+      - >-
+        packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-446-release-2026-10-08/mixed_n26_L5555.control-failed-v2.json
+      - >-
+        packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-446-release-2026-10-08/mixed_n27_L5655.jsonl.gz
+      - >-
+        packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-446-release-2026-10-08/mixed_n27_L5655.control.json
+    next_rung: >-
+      C3 needs think-tcsl: a reviewed fix that derives the census control's axis
+      allowance from the sweep's enclosure rather than the constant 1e-9 (F-1 of the 14
+      October review), n = 26's whole-net control re-judged from its retained receipt or
+      rerun under it and ending CONTROLS_REFUSED, and then the replay evidence of the four
+      complete captures and controls of 23 October mapped, by the checklist of the 6
+      October declared-net soundness review, of which the stage 4 review of 23 October is
+      each certificate's review. The captures and controls themselves are spent, about
+      7.8 CPU-hours on 23 October, and are not rerun.
+    unfinished_confirmations:
+      - what: >-
+          mixed_n26_L5555's whole-net control re-judged from its retained receipt, or
+          rerun, under think-tcsl's reviewed fix to the axis allowance, ending
+          CONTROLS_REFUSED; then the replay evidence of the four complete captures and
+          controls of 23 October mapped, by the checklist of the 6 October declared-net
+          soundness review
+        rung: C3
+        link: think-tcsl
+        estimated_cost:
+          cpu_hours: 0.01
+          cpu_hours_high: 0.4
+          basis: >-
+            Re-judging n = 26's retained receipt reads it and recomputes one exact
+            capture, a matter of seconds; rerunning its whole-net control is the 99/100
+            sweep's 569.68 s of wall at two threads on 23 October, at most 0.32
+            CPU-hours. The four captures (23,900 CPU-seconds) and the four controls (about
+            2,055 s of wall at two threads) ran on 23 October and are not rerun. The fix
+            and its review are not CPU work.
+          priced: '2026-10-23'
+    notes: >-
+      V0 because the cited entries are the source's public claims: assurance reported. The
+      complete replays of 23 October ran here, but their evidence is not mapped while n =
+      26's control has failed closed on the axis allowance (think-tcsl). C1 because both
+      carry the qualifying read of the stage 4 review of 23 October, which accepted all
+      four certificates.
+
+      n = 19, 20 and 27, whose controls were refused, wait for n = 26 because one entry
+      states the four counts and takes the least rung of them: mapping their replays alone
+      would move no rung of it. The coordinator of the 23 October intake pass held all
+      four together (think-eth9) rather than split n = 26 into an entry of its own; a
+      split remains open if think-tcsl is slow to land.
+
+      The case records' lanes are unchanged, so the entry is pending adoption at n = 19,
+      20, 26 and 27 while T-103 to T-106 hold both lanes. The issue's n = 27 value of
+      2261/400, which the same release supersedes, stays in the packet and the case
+      record. The four release assets' data members are retained in Git under OR-18
+      (packet wand125-fine-net-lower-bounds-446-release-2026-10-08); the adapted verifier
+      archive inside each is pinned by digest and not opened.
+    reviews:
+      - path: docs/project/reviews/review-2026-10-23-wand125-446-fine-net.md
+        kind: adversarial
+        reviewer: >-
+          Claude (Anthropic), tbd-strong-max tier at maximum reasoning; the stage 4
+          mathematical review lane c-review-t233-math of the 23 October intake pass
+          (think-bwis), prompted separately from the records lane
+        reviewer_kind: ai
+        relation: project
+        date: '2026-10-23'
+        scope: >-
+          The net-and-shrink argument of mixed_n19_L48275, mixed_n20_L49125,
+          mixed_n26_L5555 and mixed_n27_L5655 re-derived; every exact premise recomputed
+          apart from the crate, the tools and the source; the axis direction of each decided
+          completely by an independent vertex argument; the source's run and control logs
+          read exactly (8,288 least-bound centres, 124 control witnesses equal as
+          fractions); a 32-direction sample per count, independently minimised and
+          evaluated exactly. No full replay; coverage at the other 2,072 directions of each
+          net rests on the source's runs until the census.
+        verdict: accepted
+        covers: [T-233]
+  - id: T-234
+    kind: formalization
+    proves_kind: optimality
+    registered: '2026-10-23'
+    landed: '2026-10-24'
+    headline: >-
+      Hosono reports a hypothesis-free Lean proof that `s(21) = 5`, by the point-only route
+    claim: >-
+      Hiroaki Hosono (wand125) reports a Lean 4 proof that s(21) = 5 with no hypothesis, a
+      formalization of the point-only route T-055 registers, whose Lean reduction took the
+      capture bound as an assumption. Its theorem, SquarePacking.n21pts_eq_5 : minSide 21 = 5,
+      says that the least side of a square holding 21 closed unit squares, each translated
+      and rotated, with pairwise disjoint interiors, is 5; the 5 x 5 grid attains it.
+
+      The lower half, n21pts_ge_5, applies Evan Daniel's BoxTree.le_minSide to the point-only
+      cover renormalised to capture threshold 1, n21-capture-one.txt (4,604 entries of
+      [0,5]^2, total 20998900000168/999948000000 < 21), through a zero-margin box tree over
+      the D4 roots that Daniel's gen_zmtree.py generates: 59,433 Z leaves, 5,876 E leaves and
+      5,591 clips in 2,076 chunks over 64 files, each chunk one decide +kernel of
+      ZMTree.check, proved sound once. The source reports the axioms propext,
+      Classical.choice and Quot.sound, and an end-to-end run of its build script whose
+      generated data matched its list of digests; it publishes neither the 66 generated files
+      nor a build log. Nothing here has built it.
+
+      Hosono after Daniel, [square-packing-bounds](https://github.com/wand125/square-packing-bounds/tree/77636c63f45a90d9a829417a1722a3bf9bfef37d/point_n21_L5/lean/zero-margin),
+      29 September 2026. The Lean library and generator are Daniel's, used unchanged from
+      evand/square-packing; the README says only the theorem file, the axiom report and the
+      build script are the author's. The repository's README says parts of the work were
+      produced with AI assistance under human direction, and the s(21) write-up that its
+      code was developed with Codex.
+    scope:
+      n_values: [21]
+    verification: V0
+    confirmation: C0
+    significance:
+      score: 2
+      rationale: >-
+        A proof-assistant route to a value the record holds three ways (T-052, T-055 and the
+        grid), completing T-055's Lean reduction: a citable detail that changes no theorem,
+        as T-055 itself is.
+      scored: '2026-10-23'
+      by: think-f2bm wand125 import (draft, c-lean-1023)
+    novelty: previously-published
+    attribution:
+      source_keys:
+        - '[wand125 n21 zero-margin Lean 2026-09-29]'
+      published: '2026-09-29'
+    evidence:
+      - E-n021-wand125-zero-margin-lean-report
+    composition: >-
+      One cited entry, the source's report (E-n021-wand125-zero-margin-lean-report), which
+      claims the exact value in Lean, the grid inside the proof as packs_grid. T-055's replay
+      and the grid entry are not cited: a proof assistant's check of this route is what the
+      entry adds, and their evidence is T-055's. No build of the proof is retained here, so
+      the entry stands at V0, as T-194 did; no review has read it, so C0.
+    artifacts:
+      - packing/resources/web/wand125-n21-zero-margin-lean-2026-09-29/README.md
+      - packing/resources/web/wand125-n21-zero-margin-lean-2026-09-29/square-packing-bounds/point_n21_L5/lean/zero-margin/N21PtsLower.lean
+      - packing/resources/web/wand125-n21-zero-margin-lean-2026-09-29/square-packing-bounds/point_n21_L5/lean/zero-margin/build_zero_margin.sh
+      - packing/resources/web/wand125-n21-zero-margin-lean-2026-09-29/square-packing-bounds/point_n21_L5/lean/zero-margin/data-sha256.txt
+      - packing/resources/web/wand125-n21-zero-margin-lean-2026-09-29/receipts/evand-library-closure-6aa82ba4.json
+      - packing/devtools/lean_closure.py
+    next_rung: >-
+      C1 needs the stage 4 mathematical review of the proof, which starts from the packet.
+      V3 and C3 need a build here of the source's recipe from the retained bytes, with
+      Daniel's library staged from the evand packets in place of the clone the script makes,
+      and its axiom receipt (think-tpbd): about 6 to 12 CPU-hours and 10 GB of disk.
+      That would be reproduction with the producer's code. Rung 5 needs, beside it, a human
+      expert's review of the formalization.
+    unfinished_confirmations:
+      - what: >-
+          the stage 4 mathematical review of n21pts_eq_5, its statement and the zero-margin
+          route, read from the retained packet
+        rung: C1
+        link: think-f2bm
+      - what: >-
+          a build here of build_zero_margin.sh from the retained bytes, generation of the 64
+          parts compared with data-sha256.txt, the kernel check and the axiom receipt,
+          accepted only with propext, Classical.choice and Quot.sound
+        rung: C3
+        link: think-tpbd
+        estimated_cost:
+          cpu_hours: 9
+          cpu_hours_high: 12
+          basis: >-
+            The source's run on an Apple M4 under load: generation 1,459 s on 6 workers,
+            about 2.4 CPU-hours, and the kernel check about 3.5 h wall at 2 parts, about 7;
+            an estimate from its README, not a receipt
+          priced: '2026-10-23'
+    notes: >-
+      Registered on 23 October 2026 by the intake lane c-lean-1023 (think-f2bm), which
+      found it at the triage of wand125/square-packing-bounds of 2 October; no issue asked.
+      The bead's triage of 2 October expected an evidence update to T-055 and no new entry;
+      since 13 October a proof in a proof assistant of a result the record holds is a
+      formalization of its own (epistemics.md, Result Kinds), as T-154 is, so this entry
+      takes it, and T-055 names it.
+
+      The proof uses the certificate n21-capture-one.txt, not the n21-original.txt of
+      T-055's replay; both are the same support, and the theorem is the same. The
+      archived repository's zero-margin/ is unchanged from the pin to its head; the moved
+      copy at wand125/square-packing lacks the list of the generated files' digests, so the
+      packet pins the archived repository. The case record is unchanged.
+  - id: T-235
+    kind: formalization
+    proves_kind: optimality
+    registered: '2026-10-23'
+    landed: '2026-10-24'
+    headline: >-
+      Hosono reports a Lean kernel proof that `s(59) = 8`, on Daniel's mixed-measure checker
+    claim: >-
+      Hiroaki Hosono (wand125) reports a Lean 4 kernel proof that s(59) = 8, a formalization
+      of T-066, whose lower half this record holds on a replay of Evan Daniel's zmx2 over the
+      same cover. Its theorem, SquarePacking.s59_eq_8 : minSide 59 = 8, says that the least
+      side of a square holding 59 closed unit squares, each translated and rotated, with
+      pairwise disjoint interiors, is 8; the 8 x 8 grid attains it.
+
+      The lower half, s59_ge_8, applies Daniel's le_minSide_mixed to T-066's mixed cover,
+      26,308 points and 5,240 segments of [0,8]^2 with masses w/10^8 and total below 59,
+      whose D4 invariance and total are checked by decide +kernel, through a box tree over
+      80 x 80 root cells of the D4 region: 43,154 generated Part files and 290 Roots files in
+      290 batches, every chunk one decide +kernel of ZMTreeM.checkM, proved sound once, on
+      Daniel's library used unchanged from evand/square-packing. The source reports
+      the axioms propext, Classical.choice and Quot.sound, no sorry and no native_decide,
+      and a run of about 862 CPU-hours, of which it publishes a per-task receipt; the
+      generated files and the axiom output are not published. Nothing here has built it.
+
+      Hosono after Daniel, [square-packing](https://github.com/wand125/square-packing/tree/f9a77b7d38fd60144b78fe290c94f841ab626156/problems/square-lower-bounds/certificates/k2m5_n59_L8/lean),
+      11 October 2026. The commit names Claude as co-author.
+    scope:
+      n_values: [59]
+    verification: V0
+    confirmation: C0
+    significance:
+      score: 2
+      rationale: >-
+        A proof-assistant route to a value T-066 holds on a complete replay, by the same
+        cover and the same author's checker family checked in Lean's kernel instead: a
+        citable detail that changes no theorem.
+      scored: '2026-10-23'
+      by: think-xk3f wand125 import (draft, c-lean-1023)
+    novelty: previously-published
+    attribution:
+      source_keys:
+        - '[wand125 n59 Lean kernel 2026-10-11]'
+      published: '2026-10-11'
+    evidence:
+      - E-n059-wand125-lean-kernel-report
+    composition: >-
+      One cited entry, the source's report (E-n059-wand125-lean-kernel-report), which claims
+      the exact value in Lean, the grid inside the proof. T-066's zmx2 replay is not cited:
+      it is T-066's evidence, and a kernel check of the same cover is what this entry adds.
+      No build is retained here, so V0; no review has read it, so C0.
+    artifacts:
+      - packing/resources/web/wand125-n59-lean-kernel-2026-10-11/README.md
+      - packing/resources/web/wand125-n59-lean-kernel-2026-10-11/square-packing/problems/square-lower-bounds/certificates/k2m5_n59_L8/lean/Sqpack/S59Lower.lean
+      - packing/resources/web/wand125-n59-lean-kernel-2026-10-11/square-packing/problems/square-lower-bounds/certificates/k2m5_n59_L8/lean/Sqpack/S59T/Pts.lean
+      - packing/resources/web/wand125-n59-lean-kernel-2026-10-11/square-packing/problems/square-lower-bounds/certificates/k2m5_n59_L8/lean/README.md
+      - packing/resources/web/wand125-n59-lean-kernel-2026-10-11/square-packing/problems/square-lower-bounds/certificates/k2m5_n59_L8/lean/receipts/kernel_tasks.jsonl.gz
+      - packing/resources/web/wand125-n59-lean-kernel-2026-10-11/receipts/evand-library-closure-1718a580.json
+      - packing/devtools/lean_closure.py
+    next_rung: >-
+      C1 needs the stage 4 mathematical review of the proof, which starts from the packet.
+      V3 and C3 need a complete build here or by a third party retained here, from the
+      retained scripts and Daniel's library staged from the 7 October evand packet,
+      with its axiom receipt (think-cs9x): about 862 CPU-hours by the source's receipt, with
+      9.8 GB per Part process and 35 GB for the last two modules, so it is held above the
+      owner's 40 CPU-hour item cap and this host. A build of Pts.lean alone decides the
+      cover's data facts in Lean and moves no rung.
+    unfinished_confirmations:
+      - what: >-
+          the stage 4 mathematical review of s59_eq_8, its statement, the batch structure
+          and the generator, read from the retained packet
+        rung: C1
+        link: think-xk3f
+      - what: >-
+          a complete build of the 43,444 generated modules, Cov.lean and S59Lower.lean from
+          the retained scripts on the library at 1718a580, compared with SOURCES.sha256,
+          with its axiom receipt, here or by a third party whose build is retained here
+        rung: C3
+        link: think-cs9x
+        estimated_cost:
+          cpu_hours: 862
+          basis: >-
+            The source's retained receipt, kernel_tasks.jsonl.gz: 94.04 generation hours,
+            767.87 for the Part files and 0.48 for the Roots files, on Arm64 Linux
+          priced: '2026-10-23'
+    notes: >-
+      Registered on 23 October 2026 by the intake lane c-lean-1023 (think-xk3f), from the
+      intake read of 11 October (think-q655); no issue asked, and jlevy/squares#536 and #544
+      track the pass's work on GitHub. The bead expected an evidence update to T-066; a
+      proof in a proof assistant of a result the record holds is a formalization of its own
+      (epistemics.md, Result Kinds), so this entry takes it, and T-066's claim, which said
+      the cover has no Lean statement, names it.
+
+      Daniel's library at the commit the proof names is retained here byte for byte: the 19
+      modules of the closure are the 7 October evand packet's copies. The receipt records task, seconds and
+      peak memory and no exit status, and the README's final_build.log is not in the tree at
+      the pin. The case record is unchanged.
+  - id: T-236
+    kind: formalization
+    proves_kind: upper-bound
+    registered: '2026-10-23'
+    landed: '2026-10-24'
+    headline: >-
+      Daniel reports Lean proofs of Fang's Theorems 1 and 2, `s(n² − n + 1) < n` for `n ≥ 15`
+    claim: >-
+      Evan Daniel reports Lean 4 proofs of Kevin Fang's Theorems 1 and 2 (T-163), with no
+      hypothesis: theorem1, s(n^2 - n + 1) < n for every integer n >= 15, and theorem2, that
+      n^2 - n + 1 + p + 2q unit squares pack in a square of side below n whenever n >= 15 and
+      16p + 21q <= n - 15. Each states that the squares, closed, translated and rotated, fit
+      in [0, s]^2 with pairwise disjoint interiors for some s < n.
+
+      The proof formalizes Fang's: his Lemma 3, the gluing of Arslanov, Mustafin and
+      Shangitbayev's decomposition, on packings in a region; the induction on n; and the 18
+      pieces as exact rational certificates, each checked by decide +kernel in a generated
+      module, the rectangles of 257 squares in 17 x 16 and 443 in 22 x 21, the bases
+      r^2 - r + 1 in a side below r for r = 15 to 26, and m^2 - m for m = 11 to 14. The
+      source reports the axioms propext, Classical.choice and Quot.sound only, and a build
+      of the pieces in about 19 minutes at 8 chunks in parallel; it publishes no build log.
+      Nothing here has built it.
+
+      At the counts this record holds, n = 15 to 18, the theorems give s(211) < 15,
+      s(241) < 16, s(273) < 17 and s(307) < 18, which T-163's construction and the case
+      bounds improve on; the theorems are what is new here, in Lean.
+
+      Daniel after Fang, Arslanov, Mustafin and Shangitbayev,
+      [square-packing](https://github.com/evand/square-packing/tree/8475bdf41571c59c8c240aedaddc48e19e0e4707/lean/Sqpack),
+      18 October 2026. The pieces' README credits each
+      packing to its finder; Fang's own repository states its Lean scope as Theorem 1 and
+      the unmixed bounds of Theorem 2. The repository's CREDITS.md reads "Produced by
+      Claude (Anthropic) in a single session under human direction".
+    scope:
+      n_values: [211, 241, 273, 307]
+    verification: V0
+    confirmation: C0
+    significance:
+      score: 3
+      rationale: >-
+        A machine-checked proof, by another author, of a bound family the record holds on a
+        reviewer's reading of its proof: both theorems for every n >= 15, unconditional,
+        where the family's own formalization covers Theorem 1 and part of Theorem 2. A
+        machine audit, S3, below T-163's S4 because it proves no new bound.
+      scored: '2026-10-23'
+      by: think-57ei Evan Daniel import (draft, c-lean-1023)
+    novelty: previously-published
+    attribution:
+      source_keys:
+        - '[Daniel Fang and Ryu Lean 2026-10-18]'
+      published: '2026-10-18'
+    evidence:
+      - E-fang-theorems-daniel-lean-report
+    composition: >-
+      One cited entry, the source's report (E-fang-theorems-daniel-lean-report), which claims
+      the theorems' upper bounds at the four counts in scope. T-163's evidence is not cited.
+      No build is retained here, so V0; no review has read it, so C0.
+    artifacts:
+      - packing/resources/web/evand-fang-ryu-lean-2026-10-18/README.md
+      - packing/resources/web/evand-fang-ryu-lean-2026-10-18/square-packing/lean/Sqpack/FangFinal.lean
+      - packing/resources/web/evand-fang-ryu-lean-2026-10-18/square-packing/lean/Sqpack/FangTheorem.lean
+      - packing/resources/web/evand-fang-ryu-lean-2026-10-18/square-packing/lean/Sqpack/FangGlue.lean
+      - packing/resources/web/evand-fang-ryu-lean-2026-10-18/square-packing/certificates/fang-gluing/README.md
+      - packing/resources/web/evand-fang-ryu-lean-2026-10-18/square-packing/search/exact/fang_pieces.py
+      - packing/resources/web/evand-fang-ryu-lean-2026-10-18/receipts/lean-closure.json
+      - packing/devtools/lean_closure.py
+    next_rung: >-
+      C1 needs the stage 4 mathematical review, which reads Packs against the record's s(n),
+      the gluing lemma, the induction and the generated pieces against their certificates.
+      V3 and C3 need a build here from the retained bytes with the generated pieces and the
+      axiom receipt of theorem1 and theorem2 (think-dgrc): about 1.5 to 3 CPU-hours, at most
+      about 8 GB per chunk, and 10 GB of disk. That would be reproduction with the producer's
+      code. Rung 5 needs a human expert's review of the formalization beside it.
+    unfinished_confirmations:
+      - what: >-
+          the stage 4 mathematical review of theorem1 and theorem2, their statements, the
+          gluing lemma and the induction, and the 18 pieces, read from the retained packet
+        rung: C1
+        link: think-57ei
+      - what: >-
+          a build here of FangFinal from the retained bytes, the 18 piece modules generated
+          by the retained generator and built one chunk at a time, with the axiom receipt
+          of theorem1 and theorem2
+        rung: C3
+        link: think-dgrc
+        estimated_cost:
+          cpu_hours: 2
+          cpu_hours_high: 3
+          basis: >-
+            The source's task note of 17 October: the 18 pieces in about 19 minutes wall at
+            8 chunks in parallel, at most about 2.5 CPU-hours, a minute of generation, and
+            the theorem modules in minutes; an estimate, not a receipt
+          priced: '2026-10-23'
+    notes: >-
+      Registered on 23 October 2026 by the intake lane c-lean-1023 (think-57ei), from the
+      intake read of 18 October (think-xmxb); no issue asked, and issue 603 holds T-163's
+      intake. Its kind is formalization: a proof in a proof assistant of the result T-163
+      holds, by another author, which the owner asked be reported as its own result where it
+      is one (T-154's notes). The same packet retains Daniel's Lean proof of Sungjoon Ryu's
+      Theorem 1.4, which the asymptotic register's row records (think-ahr2); it settles no
+      count n <= 324 and has no entry here.
+
+      Fang's repository narrowed its own Lean statement on 19 October to Theorem 1 and the
+      unmixed bounds of Theorem 2 (think-494l compares that scope with T-163); this
+      formalization states Theorem 2 in full. The theorems state s < n, not the
+      construction's side n - 1/20000, so its four finite bounds are weaker than T-163's.
+      The case records are unchanged.
+  - id: T-237
+    kind: optimality
+    registered: '2026-10-24'
+    landed: '2026-10-24'
+    headline: >-
+      `s(2), s(3), s(4) = 2` and `s(5) = 2 + 1/√2 = 2.70710678…`, the classical first cases
+    claim: >-
+      s(2) = s(3) = s(4) = 2 and s(5) = 2 + 1/√2 = 2.70710678118654752440…, the exact values
+      at the first four counts above one square, which the case records n-002 to n-005 hold
+      on the published proofs and exact replays their verified bounds cite.
+
+      Göbel's 1979 survey of geometrical packing and covering problems, the first
+      publication on the problem by Friedman's account, gives the exact value as known for
+      n = 2, 3 and 5 and the squares of integers, and proves s(5): its Proposition 1 says
+      that a square of side 2 + √2/2 - ε holds no five unit squares for any ε > 0, since
+      every unit square inside it covers one of four points at distance 1 - ε/3 from the
+      sides, in an outline of three cases whose calculations are omitted. The packing at
+      that side, Göbel's, puts four squares in the corners and the fifth, turned 45°, in
+      the middle.
+
+      Friedman's survey proves s(2) = s(3) = 2 as its Theorem 1: by its Lemma 1 a unit
+      square in [0, 2]^2 contains the point (1, 1) wherever its centre lies, so that one
+      point is unavoidable. s(4) = 2 is the area bound s(n) ≥ √n met by the 2 x 2 grid,
+      which also packs two and three squares at side 2. The survey's Theorem 2 proves s(5)
+      again, by the four unavoidable points (1, 1), (1, 1 + 1/√2), (1 + 1/√2, 1) and
+      (1 + 1/√2, 1 + 1/√2) of [0, 2 + 1/√2]^2, the argument chelokot's Lean proof formalizes
+      (T-238).
+
+      Göbel, Geometrical Packing and Covering Problems, Math. Centre Tracts 106, 1979;
+      Friedman,
+      [Packing Unit Squares in Squares: A Survey and New Results](https://www.combinatorics.org/ojs/index.php/eljc/article/view/DS7),
+      Electron. J. Combin. Dynamic Survey DS7, cited in its 2009 revision.
+    scope:
+      n_values: [2, 3, 4, 5]
+    verification: V3
+    confirmation: C0
+    significance:
+      score: 3
+      rationale: >-
+        Scored as its claim, as the rubric reads a result by others: every exact value
+        closes a case, and Göbel's s(5) = 2 + 1/√2, the first count at which a tilted square
+        beats the grid, is a substantive case result. s(2) to s(4), consequences of one
+        unavoidable point and of area, would alone be S1, a routine consequence. The
+        record's other published exact values take their theorem's score, T-006 and T-008
+        at S3, and a value's age does not lower it, since a score follows the claim and not
+        the frontier.
+      scored: '2026-10-24'
+      by: think-4o9c classical entry (draft, c-land-750-1024 for think-ehx5)
+    novelty: previously-published
+    attribution:
+      source_keys:
+        - '[Göbel 1979]'
+        - '[Friedman DS7]'
+      published: '1979'
+    evidence:
+      - E-n005-gobel-proof
+      - E-n005-gobel-upper
+      - E-side2-center-lower
+      - E-basic-area-lower
+      - E-basic-grid-upper
+    composition: >-
+      Compound, by count and half. At n = 5 the lower half is Göbel's published proof
+      (E-n005-gobel-proof), an outline no review here has read, and the upper half is his
+      packing, checked in exact arithmetic here (E-n005-gobel-upper). At n = 2 and 3 the
+      lower half is the side-2 bound Friedman's Theorem 1 states, replayed exactly here
+      (E-side2-center-lower); at n = 4 it is the area bound, and at n = 2 to 4 the upper
+      half is the grid, both replayed exactly by the basic-bounds checker (E-basic-area-lower,
+      E-basic-grid-upper). These are the evidence entries the four case records' verified
+      bounds cite.
+
+      The entry stands at C0, the minimum over its parts, which is the lower half at n = 5: the
+      checker's claim pools also count the area bound there, and at n = 2 and 3, where it
+      falls short of the value, and so derive more than that half holds. The Lean proofs
+      are T-238's and are not cited here.
+    artifacts:
+      - packing/resources/papers/gobel-1979-geometrical-packing-and-covering-problems.pdf
+      - packing/resources/papers/friedman-ds7-packing-unit-squares-in-squares.md
+      - packing/cases/gobel5/packing.py
+      - packing/cases/gobel5/verify_exact.py
+      - packing/cases/small_n/optimal_moduli.py
+      - packing/campaign/series/series-000-smoke-and-calibration/results/exp-014-h-032-n3-optimal-moduli.json
+      - packing/devtools/check_basic_bounds.py
+    next_rung: >-
+      C1 needs a review here of the lower half at n = 5, Göbel's Proposition 1 or
+      Friedman's Theorem 2, read from the retained papers. C3 needs a machine check of that
+      half here, an exact audit of the four unavoidable points as T-004 is of Bentz's s(46),
+      cited here. A build of T-238's Lean proofs would be that formalization's evidence and
+      not this entry's. V4 and C4 need two adversarial AI reviews by distinct reviewers and
+      a human oversight record.
+    unfinished_confirmations:
+      - what: >-
+          a stage 4 review of the lower half at n = 5, Göbel's Proposition 1 or Friedman's
+          Theorem 2, read from the retained papers, recorded on E-n005-gobel-proof
+        rung: C1
+        link: think-wuo4
+      - what: >-
+          an exact audit here of Friedman's four unavoidable points (1, 1), (1, 1 + 1/√2),
+          (1 + 1/√2, 1) and (1 + 1/√2, 1 + 1/√2) of [0, 2 + 1/√2]^2, with a negative control,
+          as T-004 audits Bentz's s(46)
+        rung: C3
+        link: think-vvjk
+        estimated_cost:
+          cpu_hours: 0.01
+          cpu_hours_high: 0.1
+          basis: >-
+            T-004's exact audit of Bentz's 45 points, cases/bentz46/verify_cover.py, ran in
+            6.6 s wall here on 24 October 2026, and four points need less; the checker is not
+            yet written, and writing it is the cost, which CPU-hours do not price
+          priced: '2026-10-24'
+    notes: >-
+      Registered on 24 October 2026 by the landing lane c-land-750-1024 (think-ehx5), by
+      the owner's decision of 24 October on think-4o9c: the classical proofs of s(2) to
+      s(5) are registered first, so that chelokot's and Evan Daniel's Lean proofs, T-238,
+      formalize a registered result. It enters under the register's rule for older
+      results, since its evidence holds n-005's verified lower and upper bounds. The
+      evidence it cites is what the case records already cite, and the case records are
+      unchanged. [Friedman DS7] entered the bibliography with this entry, from the
+      retained survey.
+  - id: T-238
+    kind: formalization
+    proves_kind: optimality
+    registered: '2026-10-24'
+    landed: '2026-10-24'
+    headline: >-
+      chelokot reports Lean proofs of `s(2), s(3), s(4) = 2`, `s(5) = 2.707…`; Daniel, rectangle theorems
+    claim: >-
+      chelokot reports Lean 4 proofs that s(2) = s(3) = s(4) = 2 and s(5) = 2 + 1/√2 =
+      2.70710678118654752440…, and Evan Daniel Lean 4 theorems on rectangles from which
+      those values are read at equal sides: a formalization of T-237, the classical values,
+      and the first proof-assistant routes to them the record holds.
+
+      chelokot's theorems are Records.Square5.s5_eq_goebel : IsMinimumSide 5 (2 +
+      Real.sqrt 2 / 2), by Göbel's packing and Friedman's four unavoidable points (1, 1),
+      (1, 1 + d), (1 + d, 1) and (1 + d, 1 + d) with d = √2/2, and s2_eq_two, s3_eq_two and
+      s4_eq_two, IsMinimumSide n 2 for n = 2, 3 and 4, where IsMinimumSide n s says that n
+      closed unit squares, each translated and rotated, fit in [0, s]^2 with pairwise
+      disjoint interiors and fit in no smaller side.
+
+      This repository built the archive at
+      the pin on 2 October 2026 for T-086, and that build's log prints these theorems'
+      axioms, propext, Classical.choice and Quot.sound; no receipt names them yet. chelokot,
+      [square-packing-archive](https://github.com/chelokot/square-packing-archive/tree/753079eb37d8d16225a5dc1f56e493a3c3b243f4/formal/SquarePackingArchive/Records),
+      August 2026. The archive's ATTRIBUTION.md credits chelokot as "project creator,
+      concept, and product direction" and GPT 6 Astra with "AI-produced research, packing
+      optimizations, and Lean formalizations credited under this name in the archive".
+
+      Daniel's rect2_iff, rect3_iff and rect4_iff decide which rectangles hold two, three
+      and four unit squares, and rect5_pts_lower and rect5_upper give five squares in a
+      square of side a >= 2 exactly when a >= 2 + √2/2. At equal sides they give the same
+      values; no theorem of his states s(n) itself, and the step from the rectangle
+      theorems to the square values is read here, not proved in Lean. The source reports
+      standard axioms only. Daniel,
+      [square-packing](https://github.com/evand/square-packing/tree/7051f4eabf7f9b2509ad1e7cc296f57d19482027/lean/Sqpack),
+      21 October 2026; his literature note credits chelokot's proof as the earlier, and the
+      repository's CREDITS.md reads "Produced by Claude (Anthropic) in a single session
+      under human direction".
+    scope:
+      n_values: [2, 3, 4, 5]
+    verification: V0
+    confirmation: C0
+    significance:
+      score: 2
+      rationale: >-
+        Proof-assistant routes to four classical values the record holds (T-237): a second
+        route to values the record holds, which is S2, as T-054, T-055 and T-234 are, a
+        citable detail that changes no theorem.
+      scored: '2026-10-24'
+      by: >-
+        think-7l2j chelokot and Evan Daniel import (draft, c-lean-1023), kept for the
+        formalization of T-237 by c-land-750-1024 (think-4o9c)
+    novelty: previously-published
+    attribution:
+      source_keys:
+        - '[chelokot small-n Lean 2026-09-05]'
+        - '[Daniel small-n rectangles Lean 2026-10-22]'
+      published: '2026-08-29'
+    evidence:
+      - E-small-n-chelokot-lean-report
+      - E-small-n-daniel-rect-lean-report
+    composition: >-
+      Two routes, each its source's report and each claiming the four exact values:
+      E-small-n-chelokot-lean-report, chelokot's, first, and
+      E-small-n-daniel-rect-lean-report, Daniel's, second, whose square values are read
+      from rectangle theorems. Neither is a build retained under a receipt, so V0, and no
+      review has read either, so C0. T-237's evidence, the published proofs and this
+      record's checks of them, is not cited: a proof assistant's check of T-237 is what
+      this entry adds.
+    artifacts:
+      - packing/resources/web/chelokot-small-n-lean-2026-09-05/README.md
+      - packing/resources/web/chelokot-small-n-lean-2026-09-05/square-packing-archive/formal/SquarePackingArchive/Records/Square5.lean
+      - packing/resources/web/chelokot-small-n-lean-2026-09-05/square-packing-archive/formal/SquarePackingArchive/Records/NearSquare.lean
+      - packing/resources/web/chelokot-small-n-lean-2026-09-05/square-packing-archive/formal/SquarePackingArchive/Records/SquareNumbers.lean
+      - packing/resources/web/chelokot-small-n-lean-2026-09-05/receipts/lean-closure.json
+      - packing/campaign/series/series-000-smoke-and-calibration/results/chelokot-lean-replay/build.log
+      - packing/resources/web/evand-rect-small-n-lean-2026-10-22/README.md
+      - packing/resources/web/evand-rect-small-n-lean-2026-10-22/square-packing/lean/Sqpack/Rect5Pts.lean
+      - packing/resources/web/evand-rect-small-n-lean-2026-10-22/receipts/lean-closure.json
+      - packing/devtools/lean_closure.py
+    next_rung: >-
+      C1 needs the stage 4 mathematical review of both routes: chelokot's four-point lemma
+      and IsMinimumSide, and Daniel's rectangle theorems with the square-case reading, Fried4
+      at equal sides below 2 and five squares in a side below 2 included. V3 and C3 need a
+      receipt-bound build here of chelokot's three Records modules from the retained bytes
+      with their axioms printed, minutes over Mathlib's cache; Daniel's eight modules are a
+      second build of the same size (think-tq3g). Rung 5 needs a human expert's review of a
+      formalization.
+    unfinished_confirmations:
+      - what: >-
+          the stage 4 mathematical review of chelokot's s2_eq_two to s5_eq_goebel and of
+          Daniel's rect2_iff to rect4_iff, rect5_pts_lower and rect5_upper at equal sides,
+          read from the two retained packets
+        rung: C1
+        link: think-7l2j
+      - what: >-
+          receipt-bound builds here of chelokot's Records.Square5, NearSquare and
+          SquareNumbers at 753079eb and of Daniel's five rectangle modules at 7051f4e, from
+          the retained bytes, each with its theorems' axioms printed
+        rung: C3
+        link: think-tq3g
+        estimated_cost:
+          cpu_hours: 0.5
+          cpu_hours_high: 1
+          basis: >-
+            Eight modules a route over Mathlib's prebuilt cache, no certificates; an estimate
+            from their size and from the 2 October build of the whole archive, about 53
+            minutes wall for 2,920 jobs on 4 cores
+          priced: '2026-10-23'
+    notes: >-
+      Drafted on 23 October 2026 by the intake lane c-lean-1023 (think-7l2j), from the
+      triage of 22 October; no issue asked. The draft took kind optimality, since no
+      registered result then held s(2) to s(5) for a formalization to name. The owner
+      decided on 24 October (think-4o9c) to register the published proofs first, as T-237,
+      and this entry as a formalization naming it; c-land-750-1024 registered both on 24
+      October (think-ehx5). The published date is chelokot's s5_eq_goebel, 29 August 2026;
+      s2_eq_two to s4_eq_two are of 16 August and Daniel's route of 21 October.
+
+      The triage said the 2 October build printed axioms for squareMinusTwo only; its
+      retained build.log prints Audit.lean's axioms for all seven of these theorems (lines
+      330 and 338 to 343). After the pin chelokot moved s(1) to s(4) and s(6) to s(9) to
+      Bend, s4_eq_two leaving Lean, and proved s(5) in Bend too; think-fddm holds those
+      routes. The case records are unchanged.
+
+  - id: T-239
+    kind: upper-bound
+    registered: '2026-10-23'
+    landed: '2026-10-24'
+    headline: >-
+      Kristiansen's smaller n303 packing, found from Daniel's packing, certified exactly
+    claim: >-
+      One complete rational source certificate of issue 755 reports a finite upper-bound
+      improvement at the exact side it states: s(303) <=
+      223872029093440709529093216833/12500000000000000000000000000 =
+      17.90976232747525676232745734664, 9.89e-6 below T-230, the case's house best packing
+      when it was reported.
+
+      The certificate and its duplicate-square and outside-container controls were decided
+      here on 23 October 2026 by both maintained exact routes, from a derived exact fact of
+      the certificate, and the frozen comparison rebuilt; both routes also meet the
+      kernel's sharp controls at exact contact and refuse them 1e-30 past it. No route here
+      is the source's code, but both read it through an adapter that carries two of Evan
+      Daniel's checkers' expressions transcribed, so the replay shares those components
+      with the producer (RF-7). The 23 October review decided the certificate again on a
+      clean-room checker of its own, by a Claude agent, a system family the producer also
+      used, and found no blocking defect, so the bound is confirmed, independently
+      re-implemented.
+
+      Issue 755 reports a packing found by Amund Kristiansen's search from Evan Daniel's
+      packing at 303 (#728, T-230, itself found from Daniil Ostashev's packing):
+      perturbed variants relaxed in float32 batches and polished with Daniel's fq quench.
+      Measured here pose by pose, it is another arrangement of T-230's packing, found from
+      it, not a refinement of it (RF-4).
+
+      The certificate is a dilation, by Daniel's
+      dilate_cert.py, of the binary64 packing the gist publishes beside it; its side and
+      centres are that program's output from that input to the last digit, and its
+      tangents to within one unit in the last place of the platform's tan (measured,
+      RF-3). The issue claims the upper bound only, and the search, the certificate and the
+      report were done by Claude (Anthropic) at Amund Kristiansen's direction.
+    scope: {n_values: [303]}
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 2
+      rationale: >-
+        A further arrangement of T-230's packing at 303, 9.89e-06 below it and every report
+        there, one to one with it under the identity and row for row, 12 squares beyond a
+        tenth (at most 0.547), five squares newly tilted and 47 of about 860 contacts
+        changed; T-188's case at its scale (9.29e-06, five squares beyond a tenth, S2), below
+        T-198's 1.15e-05 (S2) and well below T-226's 1.88e-05 at the low end of S3, an
+        arrangement no symmetry pairs one to one with the house's; no lower bound or optimum.
+      scored: '2026-10-23'
+      by: >-
+        the 23 October review (docs/project/reviews/review-2026-10-23-amundsk-n303.md), the
+        stage 4 mathematical review lane c-review-t238-math, changing the draft S3 of the
+        think-tqb5 import
+    novelty: previously-published
+    attribution:
+      source_keys: ['[Kristiansen n303 2026-10-23]']
+      published: '2026-10-23'
+    evidence:
+      [E-amundsk-755-n303-report, E-amundsk-755-n303-exact-feasibility, E-amundsk-755-n303-review-exact-feasibility]
+    artifacts:
+      - packing/resources/web/amundsk-n303-2026-10-23/README.md
+      - packing/resources/web/amundsk-n303-2026-10-23/acquisition/claims.json
+      - packing/resources/web/amundsk-n303-2026-10-23/facts/n-303.yaml.gz
+      - packing/resources/web/amundsk-n303-2026-10-23/receipts/exact-certification.json.xz
+      - packing/resources/web/amundsk-n303-2026-10-23/replay/sharp-controls.json
+      - packing/resources/web/amundsk-n303-2026-10-23/measure/identity.json
+      - packing/devtools/upper_bound_reports.py
+      - docs/project/reviews/review-2026-10-23-amundsk-n303.md
+      - packing/resources/web/amundsk-n303-2026-10-23/review/review-2026-10-23/README.md
+    controls:
+      - packing/tests/test_upper_bound_reports.py
+      - packing/tests/test_upper_bound_reports_755.py
+      - packing/resources/web/amundsk-n303-2026-10-23/receipts/exact-certification.json.xz
+      - packing/resources/web/amundsk-n303-2026-10-23/replay/sharp-controls.json
+      - packing/resources/web/amundsk-n303-2026-10-23/review/review-2026-10-23/outputs/sharp-controls.json
+    notes: >-
+      A complete repository replay is retained for n = 303: 1 positive and 2
+      duplicate-square and outside-container controls passed their required outcomes on
+      both routes, 274518 pair decisions; summed over the 3 jobs, the receipt records 28.73
+      route CPU seconds and 67.37 job wall seconds, the longest job 27.16 seconds. Every
+      wall is cleared by at least about 6.020e-13 (square 3 at the top, numbered from 0;
+      6.025e-13 at the right and 6.03e-13 at the left and bottom), and every pair by at
+      least 60250000000010249/(5*10^28), about 1.2050e-12, at six pairs, as a 1e-12 dilation
+      gives; no square touches a wall or another.
+
+      The issue reports a least wall clearance of 8.2e-13 from verify_cert.py, which is not
+      this file's: that checker, by its code (read, not run), gives the 6.020e-13 measured
+      here (RF-1). The kernel's two sharp controls
+      (replay/sharp-controls.json) and the review's 21 mutants are accepted at exact
+      contact and refused 1e-30 past it by both maintained routes.
+
+      In the packet's frozen comparison (acquisition/claims.json, read from main on 23
+      October 2026), at n = 303 the certificate is below the case's ceiling (Evan Daniel,
+      found from Daniil Ostashev's packing, T-230) by exactly 9889799071009889799071/10^27;
+      below T-186, T-174 (PR #574), T-162 (#562) and #593 by 1.96e-04; below T-146, T-136
+      (#481) and #573 by 3.30e-03; below #488 and T-134 (#476) by 7.60e-03 and 7.68e-03;
+      below T-138 (#470) and T-113 (#401) by 1.06e-02; and below T-098 (#375), T-092 and
+      T-056 by 1.46e-02. It is the smallest report at 303.
+
+      Measured pose by pose (measure/identity.json in the packet, with the #728 packet's
+      identity program, and the review's outputs/identity.json; measurements, which decide
+      nothing): another arrangement of T-230's packing, found from it, not a refinement of
+      it. It is one to one with T-230's packing under the identity and row for row, with 12
+      squares beyond a tenth (at most 0.547, square 166) and 31 beyond 1e-2; five squares
+      are newly tilted (57 and 164 to 167), eleven at one tilt turn by 1.04 degrees, and 38
+      contacts are released (30 as one row of eleven aligned squares slides) and 9 new. The
+      issue's figures, 0.547, 12, 31 and 96 tilted squares against 91, are reproduced. It
+      lists no regularization.
+
+      The side is quoted exactly or rounded up (17.909762327476 at 12 places,
+      17.9097623274752568 at 16); the issue's 17.909762327475256427... is the binary64
+      print of the side, not the side (RF-2). The packing is not rigid: five squares touch
+      nothing and keep at least 4.67e-3 to every other square and wall (RF-6); no
+      local-minimum, KKT or rigidity statement is made beyond that. The gist states no
+      licence, so the certificate is kept as a derived exact fact (RF-8).
+
+      The case at 303 adopted this certificate as its house best packing on 24 October 2026,
+      from T-230, which stays retained as history, and both strong generators decided the
+      new witness in the same pull request: grid-slack's view at the witness's side is
+      admitted and drawn, and Evan Daniel's regularizer solves the witness to a certified
+      KKT local minimum 2.17e-11 below its side, a view that waits to be registered
+      (think-8r5w).
+
+      The source's own checkers were not run here. The two maintained routes, the sqpack
+      rational witness verifier and the independent rational corner checker, share
+      certificate parsing, half-angle conversion, Fraction arithmetic and the
+      separating-axis method, and the two expressions RF-7 names with Daniel's checkers;
+      the review's checker shares no code with them. No human oversight or optimality is
+      claimed.
+
+      Registered as T-238 on the records branch of 23 October 2026 and renumbered to T-239
+      on 24 October, before it merged, when the owner gave T-237 and T-238 to #750 (the
+      classical s(2) to s(5) result and its Lean formalization, think-4o9c), in every
+      record, view, test and tool that names it. The 23 October review's programs are
+      stored as their reviewer wrote them, their digests bound, and are not edited: the
+      "T-238" in their docstrings and the "t238" in their names and in the lane name
+      c-review-t238-math mean this entry, T-239.
+    next_rung: >-
+      None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
+      reviewer and a retained human oversight record; one AI review, of 23 October, is
+      retained.
+    reviews:
+      - path: docs/project/reviews/review-2026-10-23-amundsk-n303.md
+        kind: adversarial
+        reviewer: >-
+          AI agent (Claude, strong sub-agent tier, max reasoning), the stage 4 review lane
+          c-review-t238-math of the 23 October intake, prompted separately from the records
+          lane, with no shared context
+        reviewer_kind: ai
+        relation: project
+        date: '2026-10-23'
+        scope: >-
+          Finite feasibility of the certificate issue 755 names: decided on a clean-room
+          checker of two exact routes, held to both maintained routes, the records lane's
+          receipt and its derived fact at 116 shared numbers, 21 controls on all four
+          deciders (sharp at 1e-30 at three walls and five pairs), the side and its prints,
+          the margins in report order, each route's trust boundary, the method statement
+          against the float input, and the identity, contacts and credit measured pose by
+          pose against T-230 and thirteen other packings at 303.
+        verdict: accepted
+        covers: [T-239]
 
 # Generated by python -m devtools.regularized_drawings from the regularized layer's
 # index (packing/atlas/known-best/regularized/index.json); do not edit by hand.
@@ -33610,17 +34657,18 @@ regularized_drawings:
         max_turn_deg: 2.2217
       view: packing/atlas/known-best/regularized/n-302-regularized.yaml.gz
     - n: 303
-      of: T-230
+      of: T-239
       by: project
-      method: regularize_axis_components/2
+      method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      modifications: ["port of his coincidence placement (regularize_grid_slack/1) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       identity:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 14
-        max_move: 0.3939059
-        max_turn_deg: 1.44906e-11
+        moved: 23
+        max_move: 0.3791248
+        max_turn_deg: 1.07083e-10
       view: packing/atlas/known-best/regularized/n-303-regularized.yaml.gz
     - n: 304
       of: T-186

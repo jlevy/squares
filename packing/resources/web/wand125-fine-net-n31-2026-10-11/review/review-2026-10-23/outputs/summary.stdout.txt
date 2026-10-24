@@ -1,0 +1,11 @@
+planned 122 decided 122 verified 122 not verified [] missing []
+cpu sample 1909.7 s, controls 9.8 s; nodes 2842868 here against 46696377 at the source
+control capture-drop-row-33-0001.json REFUTED 0.6628629122502617
+control capture-drop-row-33-1036.json REFUTED 0.7792201236515192
+control capture-drop-row-33-2072.json REFUTED 0.7433255182137848
+control capture-scaled-99-100-0000.json REFUTED 0.9948577872526713
+control capture-scaled-99-100-0001.json REFUTED 0.9948749699451019
+control capture-scaled-99-100-0676.json REFUTED 0.998225597309189
+control capture-scaled-99-100-1036.json REFUTED 0.9948268309708354
+control capture-scaled-99-100-2072.json REFUTED 0.9934155212093154
+control capture-sharp-1841.json REFUTED 0.9999947478910264

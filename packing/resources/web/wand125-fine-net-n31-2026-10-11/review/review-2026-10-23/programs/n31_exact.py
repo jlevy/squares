@@ -1,0 +1,186 @@
+"""Exact reading of a fine-net measure certificate, written for the stage 4 review of
+wand125's mixed_n31_L59775 (s(31) >= 2391/400), 23 October 2026.
+
+Written from the mathematics and from the certificate format alone (the source's
+SPEC.md, sections 2 and 3). It imports nothing of the source, of this repository's
+sqverify_fast crate or of its devtools, and it was written before its authors read any
+of them. Standard library only.
+
+What it provides:
+
+- read_candidate: the candidate JSON, refusing duplicate keys, floating-point tokens,
+  NaN and Infinity, and any rational that is not a string; every number becomes an exact
+  Fraction.
+- d4_images and expand: the eight images of a rectangle under the symmetry group of the
+  container [0, L]^2, each carrying one eighth of the listed mass spread uniformly, merged
+  where images coincide (densities add).
+- direction: the exact cosine and sine of the net angle theta_j = 2 atan(j * step), and
+  the integers (C, S, E) with cos = C/E, sin = S/E, C^2 + S^2 = E^2.
+- r_of: (cos + sin)/2 as a rational function of the half-angle tangent.
+"""
+
+from __future__ import annotations
+
+import gzip
+import hashlib
+import json
+import re
+from fractions import Fraction
+from pathlib import Path
+
+_RATIONAL = re.compile(r"^-?[0-9]+(/[0-9]+)?$")
+_DECIMAL = re.compile(r"^-?[0-9]+\.[0-9]+$")
+
+
+class CandidateError(ValueError):
+    """The candidate is malformed."""
+
+
+def _no_duplicates(pairs):
+    out = {}
+    for key, value in pairs:
+        if key in out:
+            msg = f"duplicate key {key!r}"
+            raise CandidateError(msg)
+        out[key] = value
+    return out
+
+
+def _refuse_float(text):
+    msg = f"floating-point token {text!r}"
+    raise CandidateError(msg)
+
+
+def _refuse_constant(text):
+    msg = f"non-finite constant {text!r}"
+    raise CandidateError(msg)
+
+
+def rational(value) -> Fraction:
+    """An exact rational from a string 'a', 'a/b' or a decimal 'a.b'."""
+    if not isinstance(value, str):
+        msg = f"a rational must be a string, got {type(value).__name__}: {value!r}"
+        raise CandidateError(msg)
+    if _RATIONAL.match(value):
+        num, _, den = value.partition("/")
+        if den and int(den) == 0:
+            msg = f"zero denominator in {value!r}"
+            raise CandidateError(msg)
+        return Fraction(int(num), int(den) if den else 1)
+    if _DECIMAL.match(value):
+        return Fraction(value)
+    msg = f"not a rational string: {value!r}"
+    raise CandidateError(msg)
+
+
+def load_bytes(path: Path) -> bytes:
+    raw = path.read_bytes()
+    if raw[:2] == b"\x1f\x8b":
+        return gzip.decompress(raw)
+    return raw
+
+
+def read_candidate(path: Path) -> dict:
+    data = load_bytes(path)
+    doc = json.loads(
+        data.decode("utf-8"),
+        object_pairs_hook=_no_duplicates,
+        parse_float=_refuse_float,
+        parse_constant=_refuse_constant,
+    )
+    expected = {"n", "L", "B", "proof_net", "total_mass", "points", "rectangles"}
+    keys = set(doc)
+    if keys != expected:
+        msg = f"top-level keys {sorted(keys)} differ from {sorted(expected)}"
+        raise CandidateError(msg)
+    n = doc["n"]
+    if not isinstance(n, int) or isinstance(n, bool):
+        msg = "n must be a JSON integer"
+        raise CandidateError(msg)
+    net = doc["proof_net"]
+    if set(net) != {"step", "last"}:
+        msg = f"proof_net keys {sorted(net)}"
+        raise CandidateError(msg)
+    last = net["last"]
+    if not isinstance(last, int) or isinstance(last, bool):
+        msg = "proof_net.last must be a JSON integer"
+        raise CandidateError(msg)
+    rects = []
+    for k, row in enumerate(doc["rectangles"]):
+        if set(row) != {"rectangle", "mass"}:
+            msg = f"rectangle row {k} keys {sorted(row)}"
+            raise CandidateError(msg)
+        coords = row["rectangle"]
+        if not isinstance(coords, list) or len(coords) != 4:
+            msg = f"rectangle row {k} is not four coordinates"
+            raise CandidateError(msg)
+        x0, y0, x1, y1 = (rational(c) for c in coords)
+        rects.append((x0, y0, x1, y1, rational(row["mass"])))
+    points = []
+    for k, row in enumerate(doc["points"]):
+        if set(row) != {"point", "mass"}:
+            msg = f"point row {k} keys {sorted(row)}"
+            raise CandidateError(msg)
+        px, py = (rational(c) for c in row["point"])
+        points.append((px, py, rational(row["mass"])))
+    return {
+        "n": n,
+        "L": rational(doc["L"]),
+        "B": rational(doc["B"]),
+        "step": rational(net["step"]),
+        "last": last,
+        "total_mass": rational(doc["total_mass"]),
+        "rectangles": rects,
+        "points": points,
+        "sha256": hashlib.sha256(data).hexdigest(),
+        "bytes": len(data),
+    }
+
+
+def d4_images(x0, y0, x1, y1, side):
+    """The eight images of [x0, x1] x [y0, y1] under the symmetries of [0, side]^2.
+
+    The group is generated by the swap (x, y) -> (y, x) and the reflections x -> side - x
+    and y -> side - y; an image is again an axis-parallel rectangle, returned as
+    (x0, y0, x1, y1) with x0 < x1 and y0 < y1.
+    """
+    out = []
+    for swap in (False, True):
+        a0, b0, a1, b1 = (y0, x0, y1, x1) if swap else (x0, y0, x1, y1)
+        for flip_x in (False, True):
+            c0, c1 = (side - a1, side - a0) if flip_x else (a0, a1)
+            for flip_y in (False, True):
+                d0, d1 = (side - b1, side - b0) if flip_y else (b0, b1)
+                out.append((c0, d0, c1, d1))
+    return out
+
+
+def expand(rects, side):
+    """Merged D4 expansion: {(x0, y0, x1, y1): density}, each image mass m/8 uniform."""
+    merged: dict[tuple, Fraction] = {}
+    for x0, y0, x1, y1, mass in rects:
+        area = (x1 - x0) * (y1 - y0)
+        density = mass / (8 * area)
+        for image in d4_images(x0, y0, x1, y1, side):
+            merged[image] = merged.get(image, Fraction(0)) + density
+    return merged
+
+
+def direction(j: int, step: Fraction):
+    """Integers (C, S, E) with cos(theta_j) = C/E and sin(theta_j) = S/E.
+
+    t_j = j * step = P/Q; cos = (Q^2 - P^2)/(Q^2 + P^2), sin = 2PQ/(Q^2 + P^2). The
+    integers are not reduced by their common factor; nothing below needs them reduced.
+    """
+    t = j * step
+    p, q = t.numerator, t.denominator
+    return q * q - p * p, 2 * p * q, q * q + p * p
+
+
+def r_of(t: Fraction) -> Fraction:
+    """(cos theta + sin theta)/2 for theta = 2 atan(t): (1 + 2t - t^2)/(2(1 + t^2))."""
+    return (1 + 2 * t - t * t) / (2 * (1 + t * t))
+
+
+def sha256_file(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()

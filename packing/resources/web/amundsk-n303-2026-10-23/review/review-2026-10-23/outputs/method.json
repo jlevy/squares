@@ -1,0 +1,366 @@
+{
+  "program": "method_t238.py",
+  "program_sha256": "e0e3140feafee7be17267969ccaac31b81c60e98736aae1d54efae266ecab19b",
+  "certificate": {
+    "certificate_sha256": "9ec01059b35cc983cb28a1bb33bd215a2717228f7efd182e1724de6b22dc511b",
+    "input_sha256": "19fc5d171a26bf8d4a925c0457fa367b12127e8bd581d91c6dcd573108e4bba4",
+    "n": 303,
+    "certificate_side": "223872029093440709529093216833/12500000000000000000000000000",
+    "input_side": "17.909762327457347",
+    "side_minus_input_decimal_times_dilation": "-3.6e-28",
+    "side_minus_input_binary64_times_dilation": "-1.974236e-16",
+    "side_ratio_minus_one_minus_delta": "-2.010077e-29",
+    "centres_minus_input_decimal_times_dilation": {
+      "max": "3.5e-28",
+      "min": "1.0e-29"
+    },
+    "centres_minus_input_decimal_times_side_ratio": {
+      "max": "6.681414e-31",
+      "min": "4.269205e-32"
+    },
+    "centres_minus_input_binary64_times_dilation": {
+      "max": "1.075632e-15",
+      "min": "8.946755e-18"
+    },
+    "tangent_minus_exact_half_angle_tangent": {
+      "max": "5.235988e-16"
+    },
+    "rotation_minus_input_angle_deg": {
+      "max": "5.7e-14"
+    },
+    "float_pipelines_then_limit_denominator_1e15": {
+      "tan(radians(a)/2)": {
+        "rows_reproduced": 267,
+        "of": 303,
+        "first_row_not": 4
+      },
+      "tan(radians(a/2))": {
+        "rows_reproduced": 267,
+        "of": 303,
+        "first_row_not": 4
+      },
+      "tan(a*pi/360)": {
+        "rows_reproduced": 248,
+        "of": 303,
+        "first_row_not": 4
+      }
+    },
+    "tilt_counts_mod_90": {
+      "1e-9 deg": 96,
+      "1e-6 deg": 96,
+      "1e-3 deg": 96,
+      "0.1 deg": 96,
+      "1 deg": 96
+    },
+    "tilt_range_beyond_0p1_deg": [
+      1.9316,
+      26.137
+    ],
+    "tilt_signs_beyond_0p1_deg": {
+      "positive": 0,
+      "negative": 96
+    },
+    "rows_with_t_in_0_or_pm1": 201,
+    "dilate_cert_formulas": {
+      "factor_minus_one_minus_1e-12": "-2.011335e-29",
+      "side_reproduced": true,
+      "centres_reproduced": 303,
+      "tangents_reproduced_on_this_platform": 267,
+      "of": 303,
+      "other_tangents_by_ulp_offset": {
+        "1": 25,
+        "-1": 11
+      },
+      "other_tangents": [
+        {
+          "row": 4,
+          "degrees": "89.99999999999997",
+          "certificate_t": "1/1",
+          "ulps_from_this_tan": 1
+        },
+        {
+          "row": 6,
+          "degrees": "89.99999999999989",
+          "certificate_t": "500399958596721/500399958596722",
+          "ulps_from_this_tan": 1
+        },
+        {
+          "row": 10,
+          "degrees": "89.99999999999997",
+          "certificate_t": "1/1",
+          "ulps_from_this_tan": 1
+        },
+        {
+          "row": 17,
+          "degrees": "68.21113104229558",
+          "certificate_t": "283158955185468/418136533834573",
+          "ulps_from_this_tan": 1
+        },
+        {
+          "row": 27,
+          "degrees": "66.60897277103912",
+          "certificate_t": "182831594766431/278287013336577",
+          "ulps_from_this_tan": -1
+        },
+        {
+          "row": 30,
+          "degrees": "65.12852153875835",
+          "certificate_t": "58271051720059/91241244572002",
+          "ulps_from_this_tan": -1
+        },
+        {
+          "row": 37,
+          "degrees": "68.21113104229552",
+          "certificate_t": "463633927704293/684641188096641",
+          "ulps_from_this_tan": -1
+        },
+        {
+          "row": 38,
+          "degrees": "65.12852153875835",
+          "certificate_t": "58271051720059/91241244572002",
+          "ulps_from_this_tan": -1
+        },
+        {
+          "row": 42,
+          "degrees": "65.89041965588525",
+          "certificate_t": "603229310654083/930839214636860",
+          "ulps_from_this_tan": -1
+        },
+        {
+          "row": 43,
+          "degrees": "65.12852153875835",
+          "certificate_t": "58271051720059/91241244572002",
+          "ulps_from_this_tan": -1
+        },
+        {
+          "row": 45,
+          "degrees": "65.10743394529527",
+          "certificate_t": "593785444396559/930130933141982",
+          "ulps_from_this_tan": 1
+        },
+        {
+          "row": 48,
+          "degrees": "66.0396898214411",
+          "certificate_t": "605382924851293/931501463090202",
+          "ulps_from_this_tan": 1
+        },
+        {
+          "row": 49,
+          "degrees": "65.12852153875835",
+          "certificate_t": "58271051720059/91241244572002",
+          "ulps_from_this_tan": -1
+        },
+        {
+          "row": 58,
+          "degrees": "67.69948212085649",
+          "certificate_t": "574512964696466/856587619587813",
+          "ulps_from_this_tan": 1
+        },
+        {
+          "row": 69,
+          "degrees": "89.99999999999997",
+          "certificate_t": "1/1",
+          "ulps_from_this_tan": 1
+        },
+        {
+          "row": 81,
+          "degrees": "66.8429132686626",
+          "certificate_t": "655992652069427/994054849281505",
+          "ulps_from_this_tan": 1
+        },
+        {
+          "row": 83,
+          "degrees": "66.73647329483306",
+          "certificate_t": "321918487909727/488804441092689",
+          "ulps_from_this_tan": 1
+        },
+        {
+          "row": 85,
+          "degrees": "66.8429132686626",
+          "certificate_t": "655992652069427/994054849281505",
+          "ulps_from_this_tan": 1
+        },
+        {
+          "row": 90,
+          "degrees": "66.12789627339819",
+          "certificate_t": "125603708318281/192940964236883",
+          "ulps_from_this_tan": -1
+        },
+        {
+          "row": 91,
+          "degrees": "66.7364732948331",
+          "certificate_t": "243675508665147/369999472830665",
+          "ulps_from_this_tan": 1
+        },
+        {
+          "row": 95,
+          "degrees": "66.73647329483312",
+          "certificate_t": "488922582662404/742385227104159",
+          "ulps_from_this_tan": 1
+        },
+        {
+          "row": 98,
+          "degrees": "66.7364732948331",
+          "certificate_t": "243675508665147/369999472830665",
+          "ulps_from_this_tan": 1
+        },
+        {
+          "row": 100,
+          "degrees": "64.89097792248657",
+          "certificate_t": "635088129295865/998984776579229",
+          "ulps_from_this_tan": 1
+        },
+        {
+          "row": 102,
+          "degrees": "66.73647329483306",
+          "certificate_t": "321918487909727/488804441092689",
+          "ulps_from_this_tan": 1
+        },
+        {
+          "row": 104,
+          "degrees": "65.87518311573601",
+          "certificate_t": "592084627655505/913908164641172",
+          "ulps_from_this_tan": -1
+        },
+        {
+          "row": 108,
+          "degrees": "66.8429132686626",
+          "certificate_t": "655992652069427/994054849281505",
+          "ulps_from_this_tan": 1
+        },
+        {
+          "row": 109,
+          "degrees": "66.73647329483312",
+          "certificate_t": "488922582662404/742385227104159",
+          "ulps_from_this_tan": 1
+        },
+        {
+          "row": 111,
+          "degrees": "64.89097792248661",
+          "certificate_t": "308791509572295/485724741134207",
+          "ulps_from_this_tan": -1
+        },
+        {
+          "row": 113,
+          "degrees": "66.73647329483312",
+          "certificate_t": "488922582662404/742385227104159",
+          "ulps_from_this_tan": 1
+        },
+        {
+          "row": 114,
+          "degrees": "66.62512630610745",
+          "certificate_t": "621535735222627/945745750651531",
+          "ulps_from_this_tan": -1
+        },
+        {
+          "row": 115,
+          "degrees": "65.86222519257916",
+          "certificate_t": "626022184000642/966531737985837",
+          "ulps_from_this_tan": 1
+        },
+        {
+          "row": 122,
+          "degrees": "66.8429132686626",
+          "certificate_t": "655992652069427/994054849281505",
+          "ulps_from_this_tan": 1
+        },
+        {
+          "row": 162,
+          "degrees": "89.99999999997604",
+          "certificate_t": "980603211482279/980603211482689",
+          "ulps_from_this_tan": 1
+        },
+        {
+          "row": 163,
+          "degrees": "89.99999999999993",
+          "certificate_t": "900719925474098/900719925474099",
+          "ulps_from_this_tan": 1
+        },
+        {
+          "row": 166,
+          "degrees": "72.15303056517948",
+          "certificate_t": "422590502204544/580015465161199",
+          "ulps_from_this_tan": 1
+        },
+        {
+          "row": 170,
+          "degrees": "89.99999999999997",
+          "certificate_t": "1/1",
+          "ulps_from_this_tan": 1
+        }
+      ]
+    },
+    "rows_with_input_angle_text_0": 101
+  },
+  "reference": {
+    "certificate_sha256": "929c2acf72ee54a1850183fc149f06dbf35bffa2f7ee68c8f833d888400e8080",
+    "input_sha256": "8167bcb37498ded1029f8fea6b13665f59806cfb0a2beb750388852452f107b7",
+    "n": 303,
+    "certificate_side": "447744305431858194305431410441/25000000000000000000000000000",
+    "input_side": "17.909772217256418",
+    "side_minus_input_decimal_times_dilation": "-3.6e-28",
+    "side_minus_input_binary64_times_dilation": "4.519853e-16",
+    "side_ratio_minus_one_minus_delta": "-2.010076e-29",
+    "centres_minus_input_decimal_times_dilation": {
+      "max": "3.5e-28",
+      "min": "1.0e-29"
+    },
+    "centres_minus_input_decimal_times_side_ratio": {
+      "max": "6.991845e-31",
+      "min": "4.27975e-32"
+    },
+    "centres_minus_input_binary64_times_dilation": {
+      "max": "1.57246e-15",
+      "min": "5.053525e-18"
+    },
+    "tangent_minus_exact_half_angle_tangent": {
+      "max": "4.974188e-16"
+    },
+    "rotation_minus_input_angle_deg": {
+      "max": "5.7e-14"
+    },
+    "float_pipelines_then_limit_denominator_1e15": {
+      "tan(radians(a)/2)": {
+        "rows_reproduced": 303,
+        "of": 303,
+        "first_row_not": null
+      },
+      "tan(radians(a/2))": {
+        "rows_reproduced": 303,
+        "of": 303,
+        "first_row_not": null
+      },
+      "tan(a*pi/360)": {
+        "rows_reproduced": 284,
+        "of": 303,
+        "first_row_not": 28
+      }
+    },
+    "tilt_counts_mod_90": {
+      "1e-9 deg": 93,
+      "1e-6 deg": 93,
+      "1e-3 deg": 93,
+      "0.1 deg": 91,
+      "1 deg": 91
+    },
+    "tilt_range_beyond_0p1_deg": [
+      22.8336,
+      26.1238
+    ],
+    "tilt_signs_beyond_0p1_deg": {
+      "positive": 0,
+      "negative": 91
+    },
+    "rows_with_t_in_0_or_pm1": 197,
+    "dilate_cert_formulas": {
+      "factor_minus_one_minus_1e-12": "-2.011335e-29",
+      "side_reproduced": true,
+      "centres_reproduced": 303,
+      "tangents_reproduced_on_this_platform": 303,
+      "of": 303,
+      "other_tangents_by_ulp_offset": {},
+      "other_tangents": []
+    },
+    "rows_with_input_angle_text_0": 72
+  }
+}

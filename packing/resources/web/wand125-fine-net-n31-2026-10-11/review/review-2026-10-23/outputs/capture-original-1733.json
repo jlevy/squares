@@ -1,0 +1,63 @@
+{
+ "j": 1733,
+ "C": 22016715,
+ "S": 17336932,
+ "E": 28023293,
+ "t_j": "1733/5002",
+ "a_j": "3465/10004",
+ "r_a_j": "157401511/224172482",
+ "domain_quadrant_exact": [
+  "2391/800",
+  "236517900031/44834496400"
+ ],
+ "domain_quadrant_decided": [
+  "2391/800",
+  "138290275043050252706753/26214400000000000000000"
+ ],
+ "mass_scale": "1",
+ "float_nodes": 21117,
+ "float_leaves": 10559,
+ "float_status": "complete",
+ "float_least_accepted_bound": 1.000000159027258,
+ "float_failures": 0,
+ "cpu_setup": 0.069,
+ "cpu_float": 7.132,
+ "exact_leaves": 10559,
+ "exact_retried_leaves": 0,
+ "exact_least_bound": "2536847258482255610659159516009029860739267165890152108647363062947325717379085197163/2536846855055131716675957783470965943202537170534400000000000000000000000000000000000",
+ "exact_least_bound_float": 1.0000001590269918,
+ "exact_least_leaf": [
+  11,
+  9,
+  101,
+  9
+ ],
+ "partition_holds": true,
+ "cpu_partition": 0.006,
+ "cpu_exact": 11.535,
+ "verdict": "VERIFIED",
+ "least_leaf_centre": [
+  "81607312613990155812255319/26843545600000000000000000",
+  "92396870281739201299470859/26843545600000000000000000"
+ ],
+ "least_leaf_centre_capture_float": 1.0068299185292864,
+ "least_leaf_centre_capture_at_least_bound": true,
+ "least_capture_found_centre": [
+  "784071510549158249673124869/214748364800000000000000000",
+  "349626799441621071046534687/107374182400000000000000000"
+ ],
+ "least_capture_found_float": 1.0014938708673846,
+ "least_capture_found_float_pass": 1.0014938708675705,
+ "least_capture_found_at_least_one": true,
+ "cpu_total": 18.924,
+ "kind": "review-2026-10-23-n31-capture/v1",
+ "candidate_sha256": "4a7df269037a6449ba2d4bee2b6a76962df097c1515025545d4ca4cfcc39be3b",
+ "dropped_row": null,
+ "programs_sha256": {
+  "n31_brute.py": "9d836e14c22f996b2e13805e53b9041a89d694047aa99e1a3a79a41a070d70ae",
+  "n31_exact.py": "ddb9655ed8cd95a74dc5c32b51844ce2f91671f631d88fc16efdbfa01b1c11dc",
+  "n31_geometry.py": "c30893c2ad0389d910533f2f1a345aeec9c64897ba5a917ddedfc2448b628b8e",
+  "capture.py": "783429185f890015440b3d937ad79a0ad353da1e4d9912e3e764aad648798ce9"
+ },
+ "max_rss_kb": 193084
+}

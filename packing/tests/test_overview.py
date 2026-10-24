@@ -2622,6 +2622,57 @@ def test_the_document_cards_lead_with_readme_and_epistemics(
         assert 'packing/frontier/n-017.md"' not in served
 
 
+#: The addresses a project card may open: a repository on GitHub, or a gist there,
+#: which is a repository of its own (Kristiansen's n = 303 certificate, #755).
+PROJECT_HOSTS = ("https://github.com/", "https://gist.github.com/")
+
+
+def project_host_admitted(url: str) -> bool:
+    """Whether a card in Other Square Packing Projects opens a place on a host the list
+    admits, by its whole scheme and host, so a lookalike host is refused."""
+    return url.startswith(PROJECT_HOSTS)
+
+
+def test_a_project_card_on_an_unsupported_host_is_refused() -> None:
+    """The negative control for the host check: an address off GitHub, or on a host
+    that only begins like one of its hosts, is refused."""
+    for url in (
+        "https://example.com/",
+        "https://example.com/amundsk/78f9f0e7b4669f2f509a281845081768",
+        "https://github.com.example.com/evand/square-packing",
+        "https://gist.github.com.example.com/amundsk/78f9f0e7b4669f2f509a281845081768",
+        "http://github.com/evand/square-packing",
+    ):
+        assert not project_host_admitted(url), url
+    assert project_host_admitted("https://github.com/evand/square-packing")
+    assert project_host_admitted(
+        "https://gist.github.com/amundsk/78f9f0e7b4669f2f509a281845081768"
+    )
+
+
+def test_a_gist_revision_names_the_gist_and_nothing_else_is_cut() -> None:
+    """A gist's pinned revision names the gist, as a repository's `/tree/…` names the
+    repository, so its card is at the gist's home. A path that only looks like a revision
+    off a gist, or a gist's address with no revision, is left as it is."""
+    gist = "https://gist.github.com/amundsk/78f9f0e7b4669f2f509a281845081768"
+    revision = "511f56bf6e6afb4eb22f12d31371c2a2fe7b4767"
+    assert overview_sections.source_repository(f"{gist}/{revision}") == gist
+    assert overview_sections.source_repository(f"{gist}/{revision}/") == gist
+    assert overview_sections.source_repository(gist) == gist
+    for kept in (
+        f"https://example.com/amundsk/78f9f0e7b4669f2f509a281845081768/{revision}",
+        f"https://github.com/amundsk/square-packing/{revision}",
+        f"https://gist.github.com/amundsk/78f9f0e7b4669f2f509a281845081768/{revision[:12]}",
+    ):
+        assert overview_sections.source_repository(kept) == kept
+    assert (
+        overview_sections.source_repository(
+            f"https://github.com/evand/square-packing/tree/{revision}"
+        )
+        == "https://github.com/evand/square-packing"
+    )
+
+
 def test_other_projects_include_every_source_repository_the_record_reviews() -> None:
     coverage = safe_load(
         (overview_data.REPO / "packing/frontier/source-coverage.yaml").read_text(
@@ -2629,7 +2680,7 @@ def test_other_projects_include_every_source_repository_the_record_reviews() -> 
         )
     )
     reviewed = {
-        re.sub(r"/tree/.*", "", source["url"])
+        overview_sections.source_repository(source["url"])
         for source in coverage["sources"]
         if source["role"] == "source-repository" and "github.com" in source["url"]
     }
@@ -2637,7 +2688,7 @@ def test_other_projects_include_every_source_repository_the_record_reviews() -> 
     assert reviewed <= set(listed)
     assert len(set(listed)) == len(listed)
     assert not any("jlevy/squares" in url for url in listed)
-    assert all(url.startswith("https://github.com/") for url in listed)
+    assert all(project_host_admitted(url) for url in listed)
 
 
 def test_every_source_the_coverage_register_reviews_has_a_card() -> None:

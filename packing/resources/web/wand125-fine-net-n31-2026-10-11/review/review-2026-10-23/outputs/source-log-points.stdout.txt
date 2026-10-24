@@ -1,0 +1,5 @@
+CONSISTENT axis 1.001298750503704 tightest 12 control witnesses 31 cpu 3.146 s
+
+real	0m3.960s
+user	0m3.181s
+sys	0m0.012s

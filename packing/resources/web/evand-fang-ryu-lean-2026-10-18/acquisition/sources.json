@@ -1,0 +1,213 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-23T06:23Z",
+  "git_scope": "A blobless clone of evand/square-packing, whose head is 7982d7a9 (22 October 2026), with a sparse checkout of the pin 8475bdf, the commit that adds lean/Sqpack/RyuBand.lean and RyuBound.lean on top of its parent f4883b41, which adds Fang's theorems; every file f4883b41 adds for them is unchanged at the pin. The scope is the import closure of FangFinal and RyuBound and of the three checker modules the generated piece modules import (ExactQuad, ExactCheckCut, ExactRect), read by devtools.lean_closure; the three build pins, the root module and the axiom probe; the 18 piece certificates with their README and SHA256SUMS; the piece generator, its converter and the chunked build script; the task note; and the root LICENSE, CREDITS.md and README.md. The 18 generated piece modules under lean/Sqpack/Exact/Fang/ are gitignored and not in the tree. Nothing in the tree was executed.",
+  "sources": [
+    {
+      "id": "evand-square-packing",
+      "source_url": "https://github.com/evand/square-packing",
+      "source_ref": "8475bdf41571c59c8c240aedaddc48e19e0e4707",
+      "source_commit": "8475bdf41571c59c8c240aedaddc48e19e0e4707",
+      "committed_utc": "2026-10-18T02:17:40Z",
+      "git_tree": "89c618cbb17711033b6d9ca9ac70188f2dbb4389",
+      "archived_path": "packing/resources/web/evand-fang-ryu-lean-2026-10-18/square-packing",
+      "subtree_manifest": "packing/resources/web/evand-fang-ryu-lean-2026-10-18/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "LICENSE",
+        "CREDITS.md",
+        "README.md",
+        "certificates/fang-gluing",
+        "lean/lean-toolchain",
+        "lean/lakefile.toml",
+        "lean/lake-manifest.json",
+        "lean/Sqpack.lean",
+        "lean/Axioms.lean",
+        "lean/scripts/build_chunks.sh",
+        "search/exact/fang_pieces.py",
+        "search/exact/lean_cert.py",
+        "tasks/fang-gluing/README.md",
+        "lean/Sqpack/Spec.lean",
+        "lean/Sqpack/Conjectures.lean",
+        "lean/Sqpack/ConjecturesProofs.lean",
+        "lean/Sqpack/ExactPack.lean",
+        "lean/Sqpack/ExactCheck.lean",
+        "lean/Sqpack/ShadowCheck.lean",
+        "lean/Sqpack/ExactQuad.lean",
+        "lean/Sqpack/ExactCheckCut.lean",
+        "lean/Sqpack/ExactRect.lean",
+        "lean/Sqpack/FangGlue.lean",
+        "lean/Sqpack/FangTheorem.lean",
+        "lean/Sqpack/FangFinal.lean",
+        "lean/Sqpack/RyuBand.lean",
+        "lean/Sqpack/RyuBound.lean"
+      ],
+      "subtree_file_count": 46,
+      "subtree_total_bytes": 1362382,
+      "retained_file_count": 24,
+      "retained_total_bytes": 330940,
+      "compressed": [],
+      "pinned_only": [
+        {
+          "path": "CREDITS.md",
+          "bytes": 7501,
+          "sha256": "778884d09f88ce159ea2cea2134d30fb14bf01bf58fc9e69c6f3d77433da8168",
+          "reason": "Retained byte-identical by the 12 October exact-data packet",
+          "identical_to": "packing/resources/web/evand-exact-data-2026-10-12/source/CREDITS.md"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1068,
+          "sha256": "c51886c0f7e6724a7d89fc22cb237a1688ba1bbff04cb21a13b8e1a01fb15578",
+          "reason": "Retained byte-identical by the 12 October exact-data packet",
+          "identical_to": "packing/resources/web/evand-exact-data-2026-10-12/source/LICENSE"
+        },
+        {
+          "path": "README.md",
+          "bytes": 6407,
+          "sha256": "95ba198a9c389308c040d3372b06204f425625fe812025df1098992491aaa8c0",
+          "reason": "Retained byte-identical by the 17 October n271 packet",
+          "identical_to": "packing/resources/web/evand-n271-2026-10-17/source/README.md"
+        },
+        {
+          "path": "certificates/fang-gluing/inputs/P308.cert",
+          "bytes": 60335,
+          "sha256": "24fcaac0c55cdfd516adbe72d074a5a09adf3ca49e8f2a0cdd3528bc0e70ecba",
+          "reason": "Kevin Fang's certificate, which the README says is copied byte for byte from TheSnakeFang/squarepack-certs, retained byte-identical by the fang-two-wedge-certificates-2026-10-10 packet",
+          "identical_to": "packing/resources/web/fang-two-wedge-certificates-2026-10-10/source/n0308/n0308.cert"
+        },
+        {
+          "path": "certificates/fang-gluing/inputs/P343.cert",
+          "bytes": 61801,
+          "sha256": "698f11cc69271904a4c09a8debcb005e270af2840c4b8d7371ad943d046dbced",
+          "reason": "Kevin Fang's certificate, which the README says is copied byte for byte from TheSnakeFang/squarepack-certs, retained byte-identical by the fang-two-wedge-certificates-2026-10-10 packet",
+          "identical_to": "packing/resources/web/fang-two-wedge-certificates-2026-10-10/source/n0343/n0343.cert"
+        },
+        {
+          "path": "certificates/fang-gluing/inputs/P381.cert",
+          "bytes": 73567,
+          "sha256": "726164b7a570b69324a3c0ccde0bbd3d01bdd5bdf76f8a29212f12889d7ccbff",
+          "reason": "Kevin Fang's certificate, which the README says is copied byte for byte from TheSnakeFang/squarepack-certs, retained byte-identical by the fang-direct-certificates-2026-10-13 packet",
+          "identical_to": "packing/resources/web/fang-direct-certificates-2026-10-13/source/n0381/n0381.cert"
+        },
+        {
+          "path": "certificates/fang-gluing/inputs/P421.cert",
+          "bytes": 78939,
+          "sha256": "293eb22a57044452905f8b80f4000f05d18b6b33743ad3b84af90c56346714e4",
+          "reason": "Kevin Fang's certificate, which the README says is copied byte for byte from TheSnakeFang/squarepack-certs, retained byte-identical by the fang-direct-certificates-2026-10-13 packet",
+          "identical_to": "packing/resources/web/fang-direct-certificates-2026-10-13/source/n0421/n0421.cert"
+        },
+        {
+          "path": "certificates/fang-gluing/inputs/P463.cert",
+          "bytes": 89538,
+          "sha256": "6740ef0a765277491971955beb09c6188febe4f39343cd3b59f859cae51bdfcb",
+          "reason": "Kevin Fang's certificate, which the README says is copied byte for byte from TheSnakeFang/squarepack-certs, retained byte-identical by the fang-direct-certificates-2026-10-13 packet",
+          "identical_to": "packing/resources/web/fang-direct-certificates-2026-10-13/source/n0463/n0463.cert"
+        },
+        {
+          "path": "certificates/fang-gluing/inputs/P507.cert",
+          "bytes": 97990,
+          "sha256": "a6e179c9b9a58acee9fc687ea6a71ba3e56a91435440beaa6ec0e1ded19d9ee4",
+          "reason": "Kevin Fang's certificate, which the README says is copied byte for byte from TheSnakeFang/squarepack-certs, retained byte-identical by the fang-direct-certificates-2026-10-13 packet",
+          "identical_to": "packing/resources/web/fang-direct-certificates-2026-10-13/source/n0507/n0507.cert"
+        },
+        {
+          "path": "certificates/fang-gluing/inputs/P553.cert",
+          "bytes": 102167,
+          "sha256": "2271ec012fa3a01ca6a3f252bf193bd8ce491de54799a5361adb33ac86e6a9bd",
+          "reason": "Kevin Fang's certificate, which the README says is copied byte for byte from TheSnakeFang/squarepack-certs, retained byte-identical by the fang-direct-certificates-2026-10-13 packet",
+          "identical_to": "packing/resources/web/fang-direct-certificates-2026-10-13/source/n0553/n0553.cert"
+        },
+        {
+          "path": "certificates/fang-gluing/inputs/P601.cert",
+          "bytes": 117103,
+          "sha256": "226514e90ddc56e4324f3c374d12b585c95c6d817b15b33541cfef1f30e9c1e1",
+          "reason": "Kevin Fang's certificate, which the README says is copied byte for byte from TheSnakeFang/squarepack-certs, retained byte-identical by the fang-direct-certificates-2026-10-13 packet",
+          "identical_to": "packing/resources/web/fang-direct-certificates-2026-10-13/source/n0601/n0601.cert"
+        },
+        {
+          "path": "certificates/fang-gluing/inputs/P651.cert",
+          "bytes": 122265,
+          "sha256": "8e44f0e68ea23f094d3ddf291d46b5173d3d910aac7076b175863c113c6a3bec",
+          "reason": "Kevin Fang's certificate, which the README says is copied byte for byte from TheSnakeFang/squarepack-certs, retained byte-identical by the fang-direct-certificates-2026-10-13 packet",
+          "identical_to": "packing/resources/web/fang-direct-certificates-2026-10-13/source/n0651/n0651.cert"
+        },
+        {
+          "path": "certificates/fang-gluing/inputs/R257.cert",
+          "bytes": 49378,
+          "sha256": "a7d54dcc742eb0d1d4144e8f93320f476def0b0475d6203d97a908f9960f5e9c",
+          "reason": "Kevin Fang's certificate, which the README says is copied byte for byte from TheSnakeFang/squarepack-certs, retained byte-identical by the fang-excess-theorem-2026-10-13 packet",
+          "identical_to": "packing/resources/web/fang-excess-theorem-2026-10-13/source/rectangles/r17x16_n0257/r17x16_n0257.cert"
+        },
+        {
+          "path": "certificates/fang-gluing/inputs/R443.cert",
+          "bytes": 79634,
+          "sha256": "db13813740cd979cfcdb071a6a252239df85936748b93f1ac4234e8c3f096d3c",
+          "reason": "Kevin Fang's certificate, which the README says is copied byte for byte from TheSnakeFang/squarepack-certs, retained byte-identical by the fang-excess-theorem-2026-10-13 packet",
+          "identical_to": "packing/resources/web/fang-excess-theorem-2026-10-13/source/rectangles/r22x21_n0443/r22x21_n0443.cert"
+        },
+        {
+          "path": "lean/Sqpack/ExactCheck.lean",
+          "bytes": 28007,
+          "sha256": "2181a54071fb3b736d35fde0ba7668e019cca4eeaaaf435802825ca8da37c916",
+          "reason": "Retained byte-identical by the 7 October exact-and-local-reports packet",
+          "identical_to": "packing/resources/web/evand-exact-and-local-reports-2026-10-07/source/s12/lean/Sqpack/ExactCheck.lean"
+        },
+        {
+          "path": "lean/Sqpack/ExactPack.lean",
+          "bytes": 10099,
+          "sha256": "8870c8b01270e9b7392609bbbc94e201b28e6fc108e752222e0167c85220d8bf",
+          "reason": "Retained byte-identical by the 7 October exact-and-local-reports packet",
+          "identical_to": "packing/resources/web/evand-exact-and-local-reports-2026-10-07/source/s12/lean/Sqpack/ExactPack.lean"
+        },
+        {
+          "path": "lean/Sqpack/ShadowCheck.lean",
+          "bytes": 13695,
+          "sha256": "0a809b898a2de0d87cd363365f4a0f4920bf8ce3f91a4240ea7a0ef635ddcbdc",
+          "reason": "Retained byte-identical by the 7 October exact-and-local-reports packet",
+          "identical_to": "packing/resources/web/evand-exact-and-local-reports-2026-10-07/source/s12/lean/Sqpack/ShadowCheck.lean"
+        },
+        {
+          "path": "lean/Sqpack/Spec.lean",
+          "bytes": 4812,
+          "sha256": "e0d7e50626b1ad7559a0823030fca6559a072e211d90e7079e95b498cfd564a0",
+          "reason": "Retained byte-identical by the 7 October exact-and-local-reports packet",
+          "identical_to": "packing/resources/web/evand-exact-and-local-reports-2026-10-07/source/s12/lean/Sqpack/Spec.lean"
+        },
+        {
+          "path": "lean/lake-manifest.json",
+          "bytes": 3140,
+          "sha256": "b9b5f5bed3f50b33689db9c81ab08edde808022c86cd35f0f97f6e860902c672",
+          "reason": "Retained byte-identical by the 7 October exact-and-local-reports packet",
+          "identical_to": "packing/resources/web/evand-exact-and-local-reports-2026-10-07/source/s12/lean/lake-manifest.json"
+        },
+        {
+          "path": "lean/lakefile.toml",
+          "bytes": 347,
+          "sha256": "87f83bdcb6d964d664cc1a06604c847c13c430e9505d0cae41d73e31c338bb5a",
+          "reason": "Retained byte-identical by the 7 October exact-and-local-reports packet",
+          "identical_to": "packing/resources/web/evand-exact-and-local-reports-2026-10-07/source/s12/lean/lakefile.toml"
+        },
+        {
+          "path": "lean/lean-toolchain",
+          "bytes": 25,
+          "sha256": "3aac669c7a910ec2389f4e4f921b605adf6ebf2d1e0c9b9cd0be4d33f3f5db71",
+          "reason": "Retained byte-identical by the 7 October exact-and-local-reports packet",
+          "identical_to": "packing/resources/web/evand-exact-and-local-reports-2026-10-07/source/s12/lean/lean-toolchain"
+        },
+        {
+          "path": "search/exact/lean_cert.py",
+          "bytes": 23624,
+          "sha256": "448b091d09d0503f3571f3f8964d2e6fd7d4c8f54a663f916f87d8ce79d10968",
+          "reason": "The certificate-to-Lean converter fang_pieces.py runs, 541 lines and 23,624 bytes of Python whose Lean strings (fun i j => ...) this repository's embedded-JavaScript gate reads as arrow functions and admits no exception for; fetched at the pin for a rebuild, as the 26 September evand packet does s32_sweep.py"
+        }
+      ],
+      "license": "MIT, Copyright (c) 2026 Evan Daniel (LICENSE). certificates/fang-gluing/README.md credits each piece: Kevin Fang's R257, R443 and P308 to P651, copied byte for byte from TheSnakeFang/squarepack-certs at 078789a; David Ellsworth's P110; Arslanov, Mustafin and Shangitbayev's P132, P156 and P182; Joost de Winter's P211; David Ellsworth's and Peter Stead's P241 and P273, the last seven certified by Evan Daniel. It credits the theorems to Kevin Fang after Arslanov, Mustafin and Shangitbayev, whose decomposition is the gluing lemma, and the formalization to this repository, 17 October 2026; RyuBound.lean credits the bound to Sungjoon Ryu. CREDITS.md says the work was produced by Claude (Anthropic) under human direction.",
+      "claims": [
+        "lean/Sqpack/FangFinal.lean (first committed at f4883b41, 2026-10-18T02:08:26Z) states theorem UnitSquarePacking.FangGlue.theorem1 (n : \u2115) (hn : 15 \u2264 n) : \u2203 s < (n : \u211d), Packs (n * n - n + 1) s, Fang's Theorem 1, s(n^2 - n + 1) < n for every n >= 15, and theorem2 (n p q : \u2115) (hn : 15 \u2264 n) (hpq : 16 * p + 21 * q \u2264 n - 15) : \u2203 s < (n : \u211d), Packs (n * n - n + (1 + p + 2 * q)) s, Fang's Theorem 2, with no other hypothesis; certificates/fang-gluing/README.md reports the axioms propext, Classical.choice and Quot.sound only.",
+        "The proof is FangGlue.glue (Arslanov, Mustafin and Shangitbayev's decomposition, Fang's Lemma 3, on PacksIn, for any real d >= 0), FangTheorem's Squeezable, Excess and FangPieces induction, and fangPieces from 18 exact rational certificates, each checked by decide +kernel in a module that search/exact/fang_pieces.py and lean_cert.py --split 25 --cut generate into lean/Sqpack/Exact/Fang/ (gitignored, 6.4 MB): the rectangles R257 (257 squares in 17 x 16) and R443 (443 in 22 x 21) and the square pieces P110 to P651.",
+        "lean/Sqpack/RyuBound.lean (8475bdf, 2026-10-18T02:17:40Z) states theorem UnitSquarePacking.Ryu.packs_sub_8b (k b : \u2115) (hb : 2 \u2264 b) (hkb : b + 4 \u2264 k) (hk : k \u2264 b ^ 2 + 4) : \u2203 s < (k : \u211d), Packs (k * k - 8 * b) s and theorem packs_sub_8sqrt (k : \u2115) (hk : 6 \u2264 k) : \u2203 s < (k : \u211d), Packs (k * k - 8 * (Nat.sqrt (k - 5) + 1)) s, Ryu's Theorem 1.4, c*(k) <= 8 ceil(sqrt(k - 4)) - 1 for every k >= 6, with ceil(sqrt(k - 4)) written Nat.sqrt (k - 5) + 1; the commit message and tasks/fang-gluing/README.md say standard axioms and no certificates. RyuBand.lean is the geometry of Ryu's L-shaped packing (his Theorem 1.3 and Lemmas 3.1 to 4.1) at any angle with cosine > 0 and sine >= 0; the angle t = 1/b + 1/((b^2 + 1)(6k + 4b)) replaces Ryu's mean-value argument (Lemma 4.2).",
+        "The source reports building the 18 pieces in about 19 minutes wall with 8 chunks in parallel, at most about 8 GB per chunk with the sweep-line cut (tasks/fang-gluing/README.md, 17 October); a plain lake build of every chunk at once reached 120 of 125 GB and was stopped. No build log is published."
+      ]
+    }
+  ]
+}

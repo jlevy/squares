@@ -1,0 +1,147 @@
+{
+  "program": "maintained_routes_t238.py",
+  "program_sha256": "4c777df6701e81cdcebca5dba2565f91737224a6c3d7d3eb59ebc23593d81045",
+  "input_sha256": "9ec01059b35cc983cb28a1bb33bd215a2717228f7efd182e1724de6b22dc511b",
+  "python": "3.14.7",
+  "kernel_sha256": "be329074444bd56e74b44ff5a10e9e15c3f83774e854f883c03ebeedf8d0bc89",
+  "reports_sha256": "7cf2d147a6b282d9811035184fe9669e147af7f31b5cc9c303ffe330ce84dce9",
+  "profile": {
+    "witness_prefix": "W-amundsk-755-n",
+    "claim_limitations": "Complete 511f56b rational centre/half-angle dilation certificate in Evan Daniel's format, centres in [0, S]^2, converted from a checkout at the gist's pin whose bytes have the digests the packet records; no upstream byte is retained. Finite construction feasibility only; no KKT, local minimum, rigidity, novelty, priority or global optimality claim."
+  },
+  "jobs": {
+    "positive": {
+      "validated": true,
+      "routes": {
+        "exact_verify": {
+          "passed": true,
+          "pairs_tested": 45753,
+          "minimum_containment_clearance": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+          "minimum_best_pair_gap": "60250000000010249/50000000000000000000000000000",
+          "failures": 0,
+          "cpu_seconds": 5.711
+        },
+        "independent": {
+          "passed": true,
+          "pairs_tested": 45753,
+          "minimum_containment_clearance": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+          "minimum_best_pair_gap": "60250000000010249/50000000000000000000000000000",
+          "failures": 0,
+          "cpu_seconds": 4.178
+        }
+      },
+      "checker_input_sha256": "6644a8026dd30ee6bc42c22db3c8d1d28e4665ce0ba581a22d34bb210149e29a",
+      "wall_seconds": 14.51
+    },
+    "duplicate-square-overlap": {
+      "validated": true,
+      "routes": {
+        "exact_verify": {
+          "passed": false,
+          "pairs_tested": 45753,
+          "minimum_containment_clearance": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+          "minimum_best_pair_gap": "-1",
+          "failures": 1,
+          "cpu_seconds": 5.1
+        },
+        "independent": {
+          "passed": false,
+          "pairs_tested": 45753,
+          "minimum_containment_clearance": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+          "minimum_best_pair_gap": "-1",
+          "failures": 1,
+          "cpu_seconds": 3.745
+        }
+      },
+      "checker_input_sha256": "8fd481df8464d62bc4d72ce9c33103c13e5728f4d06080032baa676c968578ad",
+      "wall_seconds": 18.3
+    },
+    "square-translated-outside-container": {
+      "validated": true,
+      "routes": {
+        "exact_verify": {
+          "passed": false,
+          "pairs_tested": 45753,
+          "minimum_containment_clearance": "-300000000000060300000000010299/100000000000000000000000000000",
+          "minimum_best_pair_gap": "60250000000010249/50000000000000000000000000000",
+          "failures": 4,
+          "cpu_seconds": 5.537
+        },
+        "independent": {
+          "passed": false,
+          "pairs_tested": 45753,
+          "minimum_containment_clearance": "-300000000000060300000000010299/100000000000000000000000000000",
+          "minimum_best_pair_gap": "60250000000010249/50000000000000000000000000000",
+          "failures": 1,
+          "cpu_seconds": 3.913
+        }
+      },
+      "checker_input_sha256": "c0767ea2ae55369b22bc527190c51d1ef2ab62a7dca9fc76db731c15cd538075",
+      "wall_seconds": 20.85
+    }
+  },
+  "sharp": {
+    "side-lowered-past-wall-contact:contact": {
+      "exact_verify": {
+        "passed": true,
+        "wall": "0/1",
+        "gap": "60250000000010249/50000000000000000000000000000"
+      },
+      "independent": {
+        "passed": true,
+        "wall": "0/1",
+        "gap": "60250000000010249/50000000000000000000000000000"
+      },
+      "wall_seconds": 21.79
+    },
+    "side-lowered-past-wall-contact:past": {
+      "exact_verify": {
+        "passed": false,
+        "wall": "-1/1000000000000000000000000000000",
+        "gap": "60250000000010249/50000000000000000000000000000"
+      },
+      "independent": {
+        "passed": false,
+        "wall": "-1/1000000000000000000000000000000",
+        "gap": "60250000000010249/50000000000000000000000000000"
+      },
+      "wall_seconds": 20.46
+    },
+    "tightest-pair-closed-past-contact:contact": {
+      "exact_verify": {
+        "passed": true,
+        "wall": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+        "gap": "0/1"
+      },
+      "independent": {
+        "passed": true,
+        "wall": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+        "gap": "0/1"
+      },
+      "wall_seconds": 22.29
+    },
+    "tightest-pair-closed-past-contact:past": {
+      "exact_verify": {
+        "passed": false,
+        "wall": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+        "gap": "-1/1000000000000000000000000000000"
+      },
+      "independent": {
+        "passed": false,
+        "wall": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+        "gap": "-1/1000000000000000000000000000000"
+      },
+      "wall_seconds": 20.91
+    }
+  },
+  "tightest_pair": {
+    "left": 2,
+    "right": 13,
+    "gap": "60250000000010249/50000000000000000000000000000",
+    "normal": [
+      "0",
+      "1"
+    ]
+  },
+  "top_clearance": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000"
+}

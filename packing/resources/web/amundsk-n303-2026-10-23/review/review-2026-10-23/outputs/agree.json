@@ -1,0 +1,705 @@
+{
+  "program": "agree_t238.py",
+  "program_sha256": "b6e2168eb5ea96fb7ea41488647d4e3f0afb027f18851c5cb7f3374fc4e39791",
+  "checks": 116,
+  "equal": 116,
+  "unequal": [],
+  "all": [
+    {
+      "check": "checker_input: this review's reader = this lane's maintained run (positive)",
+      "equal": true,
+      "left": "{'n': 303, 'side': '223872029093440709529093216833/12500000000000000000000000000', 'poses': [['5000000000006030000000001",
+      "right": "{'n': 303, 'poses': [['50000000000060300000000010299/100000000000000000000000000000', '6500000000007857000000001356869/1"
+    },
+    {
+      "check": "checker_input: this review's reader = the records lane's receipt (positive, from its fact)",
+      "equal": true,
+      "left": "{'n': 303, 'side': '223872029093440709529093216833/12500000000000000000000000000', 'poses': [['5000000000006030000000001",
+      "right": "{'n': 303, 'poses': [['50000000000060300000000010299/100000000000000000000000000000', '6500000000007857000000001356869/1"
+    },
+    {
+      "check": "fact side = certificate side",
+      "equal": true,
+      "left": "223872029093440709529093216833/12500000000000000000000000000",
+      "right": "223872029093440709529093216833/12500000000000000000000000000"
+    },
+    {
+      "check": "fact: 303 centres and bases equal the certificate's centres and the cosine and sine of its tangents",
+      "equal": true,
+      "left": "True",
+      "right": "True"
+    },
+    {
+      "check": "least wall clearance: route Z = route E",
+      "equal": true,
+      "left": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+      "right": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000"
+    },
+    {
+      "check": "least wall clearance: route Z = exact_verify, this lane's maintained run",
+      "equal": true,
+      "left": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+      "right": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000"
+    },
+    {
+      "check": "least pair gap: route Z = exact_verify, this lane's maintained run",
+      "equal": true,
+      "left": "60250000000010249/50000000000000000000000000000",
+      "right": "60250000000010249/50000000000000000000000000000"
+    },
+    {
+      "check": "pairs decided: route Z = exact_verify, this lane's maintained run",
+      "equal": true,
+      "left": "45753",
+      "right": "45753"
+    },
+    {
+      "check": "verdict: accepted = exact_verify, this lane's maintained run",
+      "equal": true,
+      "left": "True",
+      "right": "True"
+    },
+    {
+      "check": "least wall clearance: route Z = independent, this lane's maintained run",
+      "equal": true,
+      "left": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+      "right": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000"
+    },
+    {
+      "check": "least pair gap: route Z = independent, this lane's maintained run",
+      "equal": true,
+      "left": "60250000000010249/50000000000000000000000000000",
+      "right": "60250000000010249/50000000000000000000000000000"
+    },
+    {
+      "check": "pairs decided: route Z = independent, this lane's maintained run",
+      "equal": true,
+      "left": "45753",
+      "right": "45753"
+    },
+    {
+      "check": "verdict: accepted = independent, this lane's maintained run",
+      "equal": true,
+      "left": "True",
+      "right": "True"
+    },
+    {
+      "check": "least wall clearance: route Z = exact_verify, the records lane's receipt",
+      "equal": true,
+      "left": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+      "right": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000"
+    },
+    {
+      "check": "least pair gap: route Z = exact_verify, the records lane's receipt",
+      "equal": true,
+      "left": "60250000000010249/50000000000000000000000000000",
+      "right": "60250000000010249/50000000000000000000000000000"
+    },
+    {
+      "check": "pairs decided: route Z = exact_verify, the records lane's receipt",
+      "equal": true,
+      "left": "45753",
+      "right": "45753"
+    },
+    {
+      "check": "verdict: accepted = exact_verify, the records lane's receipt",
+      "equal": true,
+      "left": "True",
+      "right": "True"
+    },
+    {
+      "check": "least wall clearance: route Z = independent, the records lane's receipt",
+      "equal": true,
+      "left": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+      "right": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000"
+    },
+    {
+      "check": "least pair gap: route Z = independent, the records lane's receipt",
+      "equal": true,
+      "left": "60250000000010249/50000000000000000000000000000",
+      "right": "60250000000010249/50000000000000000000000000000"
+    },
+    {
+      "check": "pairs decided: route Z = independent, the records lane's receipt",
+      "equal": true,
+      "left": "45753",
+      "right": "45753"
+    },
+    {
+      "check": "verdict: accepted = independent, the records lane's receipt",
+      "equal": true,
+      "left": "True",
+      "right": "True"
+    },
+    {
+      "check": "least pair gap: route Z = route E's least Euclidean distance",
+      "equal": true,
+      "left": "3630062500001235004500000105042001/2500000000000000000000000000000000000000000000000000000000",
+      "right": "3630062500001235004500000105042001/2500000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "check": "pairs decided: route Z = route E",
+      "equal": true,
+      "left": "45753",
+      "right": "45753"
+    },
+    {
+      "check": "per-square wall clearances: route Z = route E (digest)",
+      "equal": true,
+      "left": "9d856d3291d95abd85c23a732f4210964d5044006ebe9657ac054f2a7d02d4a6",
+      "right": "9d856d3291d95abd85c23a732f4210964d5044006ebe9657ac054f2a7d02d4a6"
+    },
+    {
+      "check": "per-pair gaps: route Z = route E (digest)",
+      "equal": true,
+      "left": "39e85433fdd64e996322a7c778bd1914ce864cb5e7cd42482b43b6acb51e8b4c",
+      "right": "39e85433fdd64e996322a7c778bd1914ce864cb5e7cd42482b43b6acb51e8b4c"
+    },
+    {
+      "check": "duplicate-square control gap: route Z (G1) = exact_verify, this lane's maintained run",
+      "equal": true,
+      "left": "-1",
+      "right": "-1"
+    },
+    {
+      "check": "outside-container control wall: route Z (G2) = exact_verify, this lane's maintained run",
+      "equal": true,
+      "left": "-300000000000060300000000010299/100000000000000000000000000000",
+      "right": "-300000000000060300000000010299/100000000000000000000000000000"
+    },
+    {
+      "check": "duplicate-square control gap: route Z (G1) = independent, this lane's maintained run",
+      "equal": true,
+      "left": "-1",
+      "right": "-1"
+    },
+    {
+      "check": "outside-container control wall: route Z (G2) = independent, this lane's maintained run",
+      "equal": true,
+      "left": "-300000000000060300000000010299/100000000000000000000000000000",
+      "right": "-300000000000060300000000010299/100000000000000000000000000000"
+    },
+    {
+      "check": "duplicate-square control gap: route Z (G1) = exact_verify, the records lane's receipt",
+      "equal": true,
+      "left": "-1",
+      "right": "-1"
+    },
+    {
+      "check": "outside-container control wall: route Z (G2) = exact_verify, the records lane's receipt",
+      "equal": true,
+      "left": "-300000000000060300000000010299/100000000000000000000000000000",
+      "right": "-300000000000060300000000010299/100000000000000000000000000000"
+    },
+    {
+      "check": "duplicate-square control gap: route Z (G1) = independent, the records lane's receipt",
+      "equal": true,
+      "left": "-1",
+      "right": "-1"
+    },
+    {
+      "check": "outside-container control wall: route Z (G2) = independent, the records lane's receipt",
+      "equal": true,
+      "left": "-300000000000060300000000010299/100000000000000000000000000000",
+      "right": "-300000000000060300000000010299/100000000000000000000000000000"
+    },
+    {
+      "check": "kernel's tightest pair = route Z's first least-gap pair",
+      "equal": true,
+      "left": "[2, 13]",
+      "right": "[2, 13]"
+    },
+    {
+      "check": "kernel's tightest gap = route Z's least gap",
+      "equal": true,
+      "left": "60250000000010249/50000000000000000000000000000",
+      "right": "60250000000010249/50000000000000000000000000000"
+    },
+    {
+      "check": "kernel's top clearance = route Z's least top-or-right clearance",
+      "equal": true,
+      "left": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+      "right": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000"
+    },
+    {
+      "check": "side-lowered-past-wall-contact:contact: exact_verify verdict = route Z on F0",
+      "equal": true,
+      "left": "True",
+      "right": "True"
+    },
+    {
+      "check": "side-lowered-past-wall-contact:contact: exact_verify wall = route Z on F0",
+      "equal": true,
+      "left": "0",
+      "right": "0"
+    },
+    {
+      "check": "side-lowered-past-wall-contact:contact: independent verdict = route Z on F0",
+      "equal": true,
+      "left": "True",
+      "right": "True"
+    },
+    {
+      "check": "side-lowered-past-wall-contact:contact: independent wall = route Z on F0",
+      "equal": true,
+      "left": "0",
+      "right": "0"
+    },
+    {
+      "check": "side-lowered-past-wall-contact:past: exact_verify verdict = route Z on F1",
+      "equal": true,
+      "left": "False",
+      "right": "False"
+    },
+    {
+      "check": "side-lowered-past-wall-contact:past: exact_verify wall = route Z on F1",
+      "equal": true,
+      "left": "-1/1000000000000000000000000000000",
+      "right": "-1/1000000000000000000000000000000"
+    },
+    {
+      "check": "side-lowered-past-wall-contact:past: independent verdict = route Z on F1",
+      "equal": true,
+      "left": "False",
+      "right": "False"
+    },
+    {
+      "check": "side-lowered-past-wall-contact:past: independent wall = route Z on F1",
+      "equal": true,
+      "left": "-1/1000000000000000000000000000000",
+      "right": "-1/1000000000000000000000000000000"
+    },
+    {
+      "check": "tightest-pair-closed-past-contact:contact: exact_verify verdict = route Z on P0",
+      "equal": true,
+      "left": "True",
+      "right": "True"
+    },
+    {
+      "check": "tightest-pair-closed-past-contact:contact: exact_verify gap = route Z on P0",
+      "equal": true,
+      "left": "0",
+      "right": "0"
+    },
+    {
+      "check": "tightest-pair-closed-past-contact:contact: independent verdict = route Z on P0",
+      "equal": true,
+      "left": "True",
+      "right": "True"
+    },
+    {
+      "check": "tightest-pair-closed-past-contact:contact: independent gap = route Z on P0",
+      "equal": true,
+      "left": "0",
+      "right": "0"
+    },
+    {
+      "check": "tightest-pair-closed-past-contact:past: exact_verify verdict = route Z on P1",
+      "equal": true,
+      "left": "False",
+      "right": "False"
+    },
+    {
+      "check": "tightest-pair-closed-past-contact:past: exact_verify gap = route Z on P1",
+      "equal": true,
+      "left": "-1/1000000000000000000000000000000",
+      "right": "-1/1000000000000000000000000000000"
+    },
+    {
+      "check": "tightest-pair-closed-past-contact:past: independent verdict = route Z on P1",
+      "equal": true,
+      "left": "False",
+      "right": "False"
+    },
+    {
+      "check": "tightest-pair-closed-past-contact:past: independent gap = route Z on P1",
+      "equal": true,
+      "left": "-1/1000000000000000000000000000000",
+      "right": "-1/1000000000000000000000000000000"
+    },
+    {
+      "check": "F0: exact_verify least wall = route Z",
+      "equal": true,
+      "left": "0",
+      "right": "0"
+    },
+    {
+      "check": "F0: exact_verify least gap = route Z",
+      "equal": true,
+      "left": "60250000000010249/50000000000000000000000000000",
+      "right": "60250000000010249/50000000000000000000000000000"
+    },
+    {
+      "check": "F0: independent least wall = route Z",
+      "equal": true,
+      "left": "0",
+      "right": "0"
+    },
+    {
+      "check": "F0: independent least gap = route Z",
+      "equal": true,
+      "left": "60250000000010249/50000000000000000000000000000",
+      "right": "60250000000010249/50000000000000000000000000000"
+    },
+    {
+      "check": "F1: exact_verify least wall = route Z",
+      "equal": true,
+      "left": "-1/1000000000000000000000000000000",
+      "right": "-1/1000000000000000000000000000000"
+    },
+    {
+      "check": "F1: exact_verify least gap = route Z",
+      "equal": true,
+      "left": "60250000000010249/50000000000000000000000000000",
+      "right": "60250000000010249/50000000000000000000000000000"
+    },
+    {
+      "check": "F1: independent least wall = route Z",
+      "equal": true,
+      "left": "-1/1000000000000000000000000000000",
+      "right": "-1/1000000000000000000000000000000"
+    },
+    {
+      "check": "F1: independent least gap = route Z",
+      "equal": true,
+      "left": "60250000000010249/50000000000000000000000000000",
+      "right": "60250000000010249/50000000000000000000000000000"
+    },
+    {
+      "check": "N0: exact_verify least wall = route Z",
+      "equal": true,
+      "left": "0",
+      "right": "0"
+    },
+    {
+      "check": "N0: exact_verify least gap = route Z",
+      "equal": true,
+      "left": "60250000000010249/50000000000000000000000000000",
+      "right": "60250000000010249/50000000000000000000000000000"
+    },
+    {
+      "check": "N0: independent least wall = route Z",
+      "equal": true,
+      "left": "0",
+      "right": "0"
+    },
+    {
+      "check": "N0: independent least gap = route Z",
+      "equal": true,
+      "left": "60250000000010249/50000000000000000000000000000",
+      "right": "60250000000010249/50000000000000000000000000000"
+    },
+    {
+      "check": "N1: exact_verify least wall = route Z",
+      "equal": true,
+      "left": "-1/1000000000000000000000000000000",
+      "right": "-1/1000000000000000000000000000000"
+    },
+    {
+      "check": "N1: exact_verify least gap = route Z",
+      "equal": true,
+      "left": "60250000000010249/50000000000000000000000000000",
+      "right": "60250000000010249/50000000000000000000000000000"
+    },
+    {
+      "check": "N1: independent least wall = route Z",
+      "equal": true,
+      "left": "-1/1000000000000000000000000000000",
+      "right": "-1/1000000000000000000000000000000"
+    },
+    {
+      "check": "N1: independent least gap = route Z",
+      "equal": true,
+      "left": "60250000000010249/50000000000000000000000000000",
+      "right": "60250000000010249/50000000000000000000000000000"
+    },
+    {
+      "check": "B0: exact_verify least wall = route Z",
+      "equal": true,
+      "left": "0",
+      "right": "0"
+    },
+    {
+      "check": "B0: exact_verify least gap = route Z",
+      "equal": true,
+      "left": "60250000000010249/50000000000000000000000000000",
+      "right": "60250000000010249/50000000000000000000000000000"
+    },
+    {
+      "check": "B0: independent least wall = route Z",
+      "equal": true,
+      "left": "0",
+      "right": "0"
+    },
+    {
+      "check": "B0: independent least gap = route Z",
+      "equal": true,
+      "left": "60250000000010249/50000000000000000000000000000",
+      "right": "60250000000010249/50000000000000000000000000000"
+    },
+    {
+      "check": "B1: exact_verify least wall = route Z",
+      "equal": true,
+      "left": "-1/1000000000000000000000000000000",
+      "right": "-1/1000000000000000000000000000000"
+    },
+    {
+      "check": "B1: exact_verify least gap = route Z",
+      "equal": true,
+      "left": "60250000000010249/50000000000000000000000000000",
+      "right": "60250000000010249/50000000000000000000000000000"
+    },
+    {
+      "check": "B1: independent least wall = route Z",
+      "equal": true,
+      "left": "-1/1000000000000000000000000000000",
+      "right": "-1/1000000000000000000000000000000"
+    },
+    {
+      "check": "B1: independent least gap = route Z",
+      "equal": true,
+      "left": "60250000000010249/50000000000000000000000000000",
+      "right": "60250000000010249/50000000000000000000000000000"
+    },
+    {
+      "check": "P0: exact_verify least wall = route Z",
+      "equal": true,
+      "left": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+      "right": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000"
+    },
+    {
+      "check": "P0: exact_verify least gap = route Z",
+      "equal": true,
+      "left": "0",
+      "right": "0"
+    },
+    {
+      "check": "P0: independent least wall = route Z",
+      "equal": true,
+      "left": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+      "right": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000"
+    },
+    {
+      "check": "P0: independent least gap = route Z",
+      "equal": true,
+      "left": "0",
+      "right": "0"
+    },
+    {
+      "check": "P1: exact_verify least wall = route Z",
+      "equal": true,
+      "left": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+      "right": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000"
+    },
+    {
+      "check": "P1: exact_verify least gap = route Z",
+      "equal": true,
+      "left": "-1/1000000000000000000000000000000",
+      "right": "-1/1000000000000000000000000000000"
+    },
+    {
+      "check": "P1: independent least wall = route Z",
+      "equal": true,
+      "left": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+      "right": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000"
+    },
+    {
+      "check": "P1: independent least gap = route Z",
+      "equal": true,
+      "left": "-1/1000000000000000000000000000000",
+      "right": "-1/1000000000000000000000000000000"
+    },
+    {
+      "check": "Q0: exact_verify least wall = route Z",
+      "equal": true,
+      "left": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+      "right": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000"
+    },
+    {
+      "check": "Q0: exact_verify least gap = route Z",
+      "equal": true,
+      "left": "0",
+      "right": "0"
+    },
+    {
+      "check": "Q0: independent least wall = route Z",
+      "equal": true,
+      "left": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+      "right": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000"
+    },
+    {
+      "check": "Q0: independent least gap = route Z",
+      "equal": true,
+      "left": "0",
+      "right": "0"
+    },
+    {
+      "check": "Q1: exact_verify least wall = route Z",
+      "equal": true,
+      "left": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+      "right": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000"
+    },
+    {
+      "check": "Q1: exact_verify least gap = route Z",
+      "equal": true,
+      "left": "-1/1000000000000000000000000000000",
+      "right": "-1/1000000000000000000000000000000"
+    },
+    {
+      "check": "Q1: independent least wall = route Z",
+      "equal": true,
+      "left": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+      "right": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000"
+    },
+    {
+      "check": "Q1: independent least gap = route Z",
+      "equal": true,
+      "left": "-1/1000000000000000000000000000000",
+      "right": "-1/1000000000000000000000000000000"
+    },
+    {
+      "check": "T0: exact_verify least wall = route Z",
+      "equal": true,
+      "left": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+      "right": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000"
+    },
+    {
+      "check": "T0: exact_verify least gap = route Z",
+      "equal": true,
+      "left": "0",
+      "right": "0"
+    },
+    {
+      "check": "T0: independent least wall = route Z",
+      "equal": true,
+      "left": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+      "right": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000"
+    },
+    {
+      "check": "T0: independent least gap = route Z",
+      "equal": true,
+      "left": "0",
+      "right": "0"
+    },
+    {
+      "check": "T1: exact_verify least wall = route Z",
+      "equal": true,
+      "left": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+      "right": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000"
+    },
+    {
+      "check": "T1: exact_verify least gap = route Z",
+      "equal": true,
+      "left": "-1/1000000000000000000000000000000",
+      "right": "-1/1000000000000000000000000000000"
+    },
+    {
+      "check": "T1: independent least wall = route Z",
+      "equal": true,
+      "left": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+      "right": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000"
+    },
+    {
+      "check": "T1: independent least gap = route Z",
+      "equal": true,
+      "left": "-1/1000000000000000000000000000000",
+      "right": "-1/1000000000000000000000000000000"
+    },
+    {
+      "check": "U0: exact_verify least wall = route Z",
+      "equal": true,
+      "left": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+      "right": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000"
+    },
+    {
+      "check": "U0: exact_verify least gap = route Z",
+      "equal": true,
+      "left": "0",
+      "right": "0"
+    },
+    {
+      "check": "U0: independent least wall = route Z",
+      "equal": true,
+      "left": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+      "right": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000"
+    },
+    {
+      "check": "U0: independent least gap = route Z",
+      "equal": true,
+      "left": "0",
+      "right": "0"
+    },
+    {
+      "check": "U1: exact_verify least wall = route Z",
+      "equal": true,
+      "left": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+      "right": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000"
+    },
+    {
+      "check": "U1: exact_verify least gap = route Z",
+      "equal": true,
+      "left": "-1/1000000000000000000000000000000",
+      "right": "-1/1000000000000000000000000000000"
+    },
+    {
+      "check": "U1: independent least wall = route Z",
+      "equal": true,
+      "left": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+      "right": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000"
+    },
+    {
+      "check": "U1: independent least gap = route Z",
+      "equal": true,
+      "left": "-1/1000000000000000000000000000000",
+      "right": "-1/1000000000000000000000000000000"
+    },
+    {
+      "check": "D0: exact_verify least wall = route Z",
+      "equal": true,
+      "left": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+      "right": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000"
+    },
+    {
+      "check": "D0: exact_verify least gap = route Z",
+      "equal": true,
+      "left": "0",
+      "right": "0"
+    },
+    {
+      "check": "D0: independent least wall = route Z",
+      "equal": true,
+      "left": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+      "right": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000"
+    },
+    {
+      "check": "D0: independent least gap = route Z",
+      "equal": true,
+      "left": "0",
+      "right": "0"
+    },
+    {
+      "check": "D1: exact_verify least wall = route Z",
+      "equal": true,
+      "left": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+      "right": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000"
+    },
+    {
+      "check": "D1: exact_verify least gap = route Z",
+      "equal": true,
+      "left": "-1/1000000000000000000000000000000",
+      "right": "-1/1000000000000000000000000000000"
+    },
+    {
+      "check": "D1: independent least wall = route Z",
+      "equal": true,
+      "left": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000",
+      "right": "60200000000010299100000000000060300000000010299/100000000000000000000000000000100000000000000000000000000000"
+    },
+    {
+      "check": "D1: independent least gap = route Z",
+      "equal": true,
+      "left": "-1/1000000000000000000000000000000",
+      "right": "-1/1000000000000000000000000000000"
+    }
+  ]
+}
