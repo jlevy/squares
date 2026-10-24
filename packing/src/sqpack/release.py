@@ -8633,6 +8633,44 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "three; each prints from that HTML. Retain v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/devtools/goebel_construction.py",
+            "packing/devtools/intake_ledger.py",
+            "packing/frontier/README.md",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "W7 of the rows above 1024 (think-llit) moves Göbel's construction beyond 324 "
+            "to the new maintained module goebel_construction, which intake_ledger now "
+            "imports, adds a summary README for walks of more than 400 counts, and states "
+            "the frontier README's beyond-horizon rules with no ceiling. No paper reads "
+            "Göbel's construction, a walk or the frontier README's Source Coverage text; "
+            "they reach intake_ledger and the new module only through shared import "
+            "discovery, and the survey declares the frontier README as a whole. Rendered "
+            "from this branch's tree and from main 2ec489d1e's versions of the two changed "
+            "files, at the link revision 2ec489d1e, the survey's and both reviews' HTML "
+            "and Markdown and every other file the three renderers write are "
+            "byte-identical (51 of 51). The explainer, whose render needs a browser this "
+            "host lacks, is source-reviewed only, and no PDF was printed. All four papers "
+            "keep their versions."
+        ),
+    ),
 )
 
 
