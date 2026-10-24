@@ -5,7 +5,7 @@ title: "Import the 99 Kaggle-credited sides franciscouzo/square-packing publishe
 kind: task
 status: in_progress
 priority: 1
-version: 7
+version: 8
 delegate: c-import-lyf9-1024
 labels:
   - result-import
@@ -16,7 +16,7 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-24T11:57:05.011Z
-updated_at: 2026-10-24T14:00:11.952Z
+updated_at: 2026-10-24T16:20:09.553Z
 started_at: 2026-10-24T13:38:16.607Z
 ---
 
@@ -115,3 +115,26 @@ INCIDENT: at 13:40Z my `git ls-tree -l` on the blobless clone lazily fetched abo
 blocked_on: think-g2qy (the 12 recipes only, via think-llit's D2 checker); the 87 certificates are unblocked since #789 merged as 2ec489d1e
 
 2026-10-24 coord-intake-1024 decisions on the triage's two calls: (1) licence basis: the certificates are retained as factual data under the owner's decision of 2026-10-09 (as #789 retained the 268 parent); the notebooks' own licences (Apache-2.0 stated for 28, 'per the notebook' for 59) and the missing SOURCE_NOTICES.md are followed up on think-m8f4 and hold nothing; the new stage 2 rule (presumption for the submitting author) is not stretched to cover them. (2) coverage sources: one per notebook (7), keeping the versions the credit chains cite. Import lane c-import-lyf9-1024 starts now.
+
+2026-10-24 c-import-lyf9-1024 (import lane, W1 records; coordinator coord-intake-1024). Branch claude/intake-2026-10-24-kaggle-sides-964ee2b (worktree /home/user/wt-lyf9), from main 2ec489d1e. PR: https://github.com/jlevy/squares/pull/795 (draft; labels intake, S2), head cbf4998f2 (hosted CI green: Packing validation 40110212062, Certificate page 40110212035).
+
+WHAT LANDED ON THE BRANCH
+- Selection: devtools.couzo_763_claims `others` (receipts/claim-map.json): certificate or construction at 325-1024, credit not Couzo's, strictly below Göbel's construction (exact), not an earlier publication in the history scan or f1ceee4's source-history/later-commits receipts. Gives the triage's controls exactly: 99 = 87 certificates + 12 recipes (445 488 580 679 732 787 844 859 903 913 964 967); 70 of the 169 non-Couzo certificates/constructions there are earlier publications. "Below main's start" is applied by the walk (frozen starts), which records all 99, so the claim map stays a fresh derivation after landing.
+- Packet: 87 certificates added to couzo-issue763-2026-10-23 (9,780,397 bytes; 2.1 MB thin pack; check_added_blobs PASS); licence basis factual data (owner decision of 2026-10-09), Apache-2.0 for 28 and "per the notebook" for 59, SOURCE_NOTICES.md missing; think-m8f4 holds nothing. README: own section "The Notebook Rows".
+- Walk: campaign/issue-intake/upper-bounds-couzo-964ee2b-notebooks-20261024, read at main 2ec489d1e; reports franciscouzo/square-packing@fa6237e (39) and @964ee2b (60), both 2026-10-23T23:38:42Z; all 99 recorded, 1.46e-4 (875) to 6.60e-2 (923) below the record; 12 recipes held on think-ww95 (new, under think-ezt8, blocked on think-f2io); history holds at 16 counts (487b058 327; 4e4c8ce 533 580 589 965; 23aff0c 406 533 541 543 580 589 639 846 906 907 965 967 968 981 982) and their resting verdicts declared.
+- Replay: 7 releases (one per notebook run, NOTEBOOKS); 87 verified on both routes, 522 controls refused; 89.2 positive CPU s; 697 s wall on 2 workers, 1,389 s summed (started 14:21:45Z); all-pairs at 975 and 994 agree (968,346 pairs, 225.2 CPU s); all below Göbel; first commits 28 fa6237e, 59 964ee2b.
+- Rows: 87 current rows of 7 sources; 77 supersessions (f1ceee4 30, #719 12, couzo-index 12, #732 8, Muglich 3, other Couzo 12), 10 first rows.
+- Sources and keys: tymchishin-reclosure-v3-2026-10-23 [Tymchishin CPU Alternating Reclosure v3 2026-10-23]; lavrentev-cuda-v11-2026-10-23 [Lavrentev CUDA Packing Search v11 2026-10-23]; tymchishin-22-3662-2026-10-23 [Tymchishin 22-3662 2026-10-23]; kyleluecke-inos-2026-10-23 [kyleluecke inos 2026-10-23]; alexchilton-fault-line-2026-10-23 [alexchilton fault-line 2026-10-23]; aqibrazadev-blending-2026-10-23 [aqibrazadev blending 2026-10-23]; lavrentev-cuda-run-361589987-2026-10-23 [Lavrentev CUDA Packing Search run 361589987 2026-10-23]. Evidence E-<source stem>-beyond-horizon-report. Profiles kirill-tymchishin, vladislav-lavrentev, kyleluecke, alexchilton, aqibrazadev; census spans resolved, including #763's two pending ones.
+- #763 requests entry: notebook-rows-325-1024 (not registered, not queued) and notebook-recipes-325-1024 (queued, think-ww95). Draft significance S2 (PR label), below S4: no project issue.
+
+DRAFT AUTHOR QUESTIONS (for the next reply on #763, to Francisco Couzo as the publisher; not posted)
+1. Your push of 23 October also published, in certified_bounds.json at 964ee2b, 99 sides at 325 to 1024 credited to the authors of seven Kaggle notebooks, which the record now holds as theirs (87 rows; 12 L-border recipes held). Do you claim any part of them, or is each notebook's author the finder? At 994, for example, the manifest's previous_reference is your own Kaggle push packing seeded from Lavrentev's, and aqibrazadev's notebook is a "top-lb-blending" one.
+2. The manifest names five of the notebooks by run alone: Kirill Tymchishin's "22-3662-cpu-cuda-mps-eda-union" (run 361576574), kyleluecke's "inos-v0-6-k-mosh-squares-in-squares-22-366222" (361592092), alexchilton's "fault-line-dp-basin-hopping-lb-22-3747" (361412241), aqibrazadev's "squares-in-squares-top-lb-blending-visualization" (361516058) and Vladislav Lavrentev's "squares-in-squares-cuda-packing-search" (361589987). Which version of each was it, and what licence and source notices does each state? Could you also commit submissions/kaggle-public-portfolio-20261022/SOURCE_NOTICES.md, which the manifest cites for "CPU Alternating Reclosure" v3 and "CUDA Packing Search" v11 and which is not in the tree at 964ee2b?
+3. Are the Kaggle accounts kyleluecke, alexchilton and aqibrazadev Kyle Luecke, Alex Chilton and Aqib Raza, as their public profile pages show ("Kyle Luecke", "alex chilton", "Aqib Raza")? The record credits them by handle until a source names them.
+4. At 18 counts your later commit 43f666c (pushed 24 October at 06:10:44Z) is 5e-12 to 3e-11 below the notebook side 964ee2b published, and at the four counts measured (377, 405, 596, 984) it is the same packing. Is "Couzo after <author>" there meant as a new packing, or as a tighter certificate of theirs?
+
+LEFT
+- The 12 recipes: think-ww95, after think-llit's D2 checker (think-f2io).
+- think-gn29: walks 43f666c (46 of the 99 counts; 39 certificate rows superseded, 488/679 after held recipes, 5 recipe counts both held) from these rows; needs the PUSHED_LATER entry for 06:10:44Z and pose identity at the 18 sub-1e-10 counts.
+- Licence follow-up: think-m8f4 (the notebooks' licences and SOURCE_NOTICES.md), holding nothing.
+- Not done here: tbd sync (coordinator), posting on #763.
