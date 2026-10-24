@@ -5,7 +5,7 @@ title: "Import the 99 Kaggle-credited sides franciscouzo/square-packing publishe
 kind: task
 status: in_progress
 priority: 1
-version: 11
+version: 13
 delegate: c-import-lyf9-1024
 labels:
   - result-import
@@ -16,7 +16,7 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-24T11:57:05.011Z
-updated_at: 2026-10-24T18:43:53.814Z
+updated_at: 2026-10-24T19:57:46.397Z
 started_at: 2026-10-24T13:38:16.607Z
 ---
 
@@ -152,3 +152,10 @@ LEFT
 2026-10-24 coord-intake-1024: credit at 364, 450 and 874 (pairing not one to one: 116, 200, 234 squares beyond 1e-3) is decided by the runbook, not the owner: only a refinement is credited 'after' the packing it refines ('Several Reports at One Count', 'A refinement'), so each row is credited to its finder as the source's manifest states, with the measurement recorded. The addressing round after review B applies it.
 
 2026-10-24 coord-intake-1024: REVISED credit decision at 364, 450 and 874 (supersedes the note above): the chain rule credits every link the source's own files state; 964ee2b's manifest names a previous_source at each, so the row is credited '<finder> after <previous_source's finder>' (seeded from), with the measured non-one-to-one pairing recorded. Unlike #792's 304, the measurement does not contradict the stated link. Applied in #795's review-B round.
+
+2026-10-24 c-import-lyf9-1024, review B round on #795 (https://github.com/jlevy/squares/pull/795#issuecomment-6388080390, correctness, approve with fixes; coordinator's final round, sole committer). Tracking beads under think-ezt8: think-fwmu (parent), think-zy8c (B1), think-tzzl (B2), think-5qjt (B3), all fixed at bdf789c9b; dispositions https://github.com/jlevy/squares/pull/795#issuecomment-6388475419. Base: main dd0061553 (#793, W7) merged with a merge commit (4ef6dedd0): both sides' behaviour kept in beyond_horizon_replay (main's windows, walk above 1024, ruling_entries; this branch's push releases, with _walk_groups now over a walk's own and walk-above releases and main's label map dropped as unused); every walk checks and renders unchanged.
+
+- B1 fixed by the coordinator's revised decision, which supersedes the earlier "owner question" in these notes: at 364, 450 and 874 the record's chain rule credits every link the source's files state. The manifest's previous_source is the push's earlier side at all five counts (checked in _push_identity_parts). 364: aqibrazadev after Kirill Tymchishin; 450: kyleluecke after Kirill Tymchishin; 874: kyleluecke after Francisco Couzo and Vladislav Lavrentev (the index credits Couzo's fa6237e side as a refinement of Lavrentev's packing). Each is a new packing seeded from the earlier side (ledger new_packing.continues; "seeded from", not "a refinement of"), with the measurement that the pairing is not one to one (116, 200, 234 squares beyond 1e-3) beside it. No owner question remains at these counts; the "owner decides" text is removed from the coverage notes, packet README, requests entry and PR body.
+- B2 fixed: intake_ledger refuses a tie in reported_at unless every tied claim has a distinct first_committed (_tie_problem); the reviewer's red control is test_a_tie_in_time_with_one_unknown_commit_time_is_refused.
+- B3 fixed: push claims are held by the index's credit (_push_holder): notebook run, publisher only where is_own, else OTHER_AUTHOR with no release; 994 at efef7d1 is Polkovskyi's, still a restatement, and the efef7d1 note reads Couzo's own (39) and 1 credited to Polkovskyi. Control: test_a_push_side_another_author_is_credited_with_has_no_release.
+- Review B round, pushes: bdf789c9b (main 84d4a75af, #796, merged; hosted typecheck failed on the Göbel form #793 made optional, unnarrowed in couzo_763_claims), then 439861d40 (narrowed); hosted CI green at 439861d40 (runs 40126801264, 40126801302).
