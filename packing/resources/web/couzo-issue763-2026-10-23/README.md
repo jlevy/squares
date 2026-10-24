@@ -321,10 +321,12 @@ commit’s least side there that no earlier commit or publication states, strict
 frozen start. It refuses unless the commits are a chain and every claim is held by a
 certificate `964ee2b` keeps at the same Git blob, and its controls are the claims of each
 commit, 40, 90 and 60, and that the last at each count is the claim map’s row. Besides the
-99, `efef7d1` and `fa6237e` state **91 more sides at 63 of the counts**: 77 as Couzo’s own,
-37 of which the index says refine Lavrentev’s (33) or Tymchishin’s (4) packings, 9 of
-Lavrentev’s v11 and 5 of Tymchishin’s v3, all replaced at `964ee2b` and kept under
-`certificates/parents/` or as root certificates.
+99, `efef7d1` and `fa6237e` state **91 more sides at 63 of the counts**: 76 as Couzo’s own,
+37 of which the index says refine Lavrentev’s (33) or Tymchishin’s (4) packings, one at 994
+that the index credits to Mykhailo Polkovskyi, 9 of Lavrentev’s v11 and 5 of Tymchishin’s
+v3, all replaced at `964ee2b` and kept under `certificates/parents/` or as root
+certificates. A side the index credits to neither Couzo nor a notebook has no release, so
+the walk may only rule it out; the one at 994 restates Polkovskyi’s own #732 row.
 
 **Retained.** The 87 certificates `certificates/best/nN.cert`, 9,780,397 bytes, were added
 to this packet’s scope from a checkout of the same commit for the import, and the 103
@@ -343,9 +345,10 @@ Alternating Reclosure” v3 and Lavrentev’s “CUDA Packing Search” v11 and 
 for the other five, and the source notices it cites,
 `submissions/kaggle-public-portfolio-20261022/SOURCE_NOTICES.md`, are not in the tree at
 `964ee2b`. think-m8f4 follows up those licences and notices, and holds nothing. Of the 103
-added for review A, 77 are sides the index states as Couzo’s own, retained on the
-presumption as well, and 26 are notebook packings (Tymchishin’s v3 16, Lavrentev’s v11 9 and
-the 859 recipe of Lavrentev’s later run).
+added for review A, 76 are sides the index states as Couzo’s own, retained on the
+presumption as well, one is the side at 994 it credits to Polkovskyi, and 26 are notebook
+packings (Tymchishin’s v3 16, Lavrentev’s v11 9 and the 859 recipe of Lavrentev’s later
+run).
 
 **The releases.** Each holder at each commit is a coverage source with its own bibliography
 key, credited by name where the source states one and by handle where it gives only a
@@ -432,11 +435,17 @@ packet’s pose measure (`measured_identity`, as `pose-identity` does for #732�
 | 450 | kyleluecke | Tymchishin’s v3, `fa6237e` | 2.08e-9 | not one to one | 200 |
 | 874 | kyleluecke | Couzo’s, `fa6237e`, which the index says refines Lavrentev’s | 1.07e-7 | not one to one | 234 |
 
-At 378 and 405 kyleluecke’s row is Lavrentev’s packing refined, every square within 5e-8
-and every turn within 5e-8 degrees, so the ledger records a refinement and the row is
-credited to kyleluecke after Vladislav Lavrentev. At 364, 450 and 874 more than fifty
-squares move beyond 0.1; the measurement stands beside the source’s word under the ledger’s
-Measured Identity, and the owner decides the credit there.
+Each row is credited by the record’s chain rule: every link the source’s files state is
+credited, and the manifest’s `previous_source` is the link at all five counts. At 378 and
+405 kyleluecke’s row is Lavrentev’s packing refined, every square within 5e-8 and every
+turn within 5e-8 degrees, so the ledger records a refinement and the row is credited to
+kyleluecke after Vladislav Lavrentev. At 364, 450 and 874 more than fifty squares move
+beyond 0.1: the search moved the arrangement it was seeded from, which does not contradict
+the seed link. The ledger records each as a new packing seeded from the earlier side, with
+the measurement beside it, and credits it after that side’s finders: aqibrazadev after
+Kirill Tymchishin at 364, kyleluecke after Kirill Tymchishin at 450, and kyleluecke after
+Francisco Couzo and Vladislav Lavrentev at 874, where the index credits Couzo’s side as a
+refinement of Lavrentev’s packing.
 
 **Later.** Couzo’s `43f666c`, pushed at 2026-10-24T06:10:44Z, is below the notebook side at
 46 of the 99 counts. think-gn29 walks it after this import, from these rows. The questions

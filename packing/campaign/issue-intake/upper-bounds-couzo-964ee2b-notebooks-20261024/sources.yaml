@@ -321,10 +321,11 @@ reports:
   note: 'The 40 sides efef7d1 first states at the counts of the notebook rows (40 certificates), each
     its least new side there below the start, commit by commit through the push (devtools.beyond_horizon_replay
     push-publications, couzo-issue763-2026-10-23 packet, receipts/push/push-publications.json): Francisco
-    Couzo''s own (40). No issue reports them. The push of 23:38:42Z made efef7d1, fa6237e and 964ee2b
-    public together (PUSHED_LATER), so each commit is a report from it, taken in commit order, and an
-    import of their own (think-lyf9; #795''s review A, A1), each holder''s rows a coverage source of their
-    own. first_committed is the committer time of efef7d1.'
+    Couzo''s own (39) and 1 credited to Mykhailo Polkovskyi (Mishapolk), which no release of the push
+    holds. No issue reports them. The push of 23:38:42Z made efef7d1, fa6237e and 964ee2b public together
+    (PUSHED_LATER), so each commit is a report from it, taken in commit order, and an import of their
+    own (think-lyf9; #795''s review A, A1), each holder''s rows a coverage source of their own. first_committed
+    is the committer time of efef7d1.'
 - report: franciscouzo/square-packing@fa6237e
   url: https://github.com/franciscouzo/square-packing/tree/fa6237e288cf3fc53b53fc43438c91f3f59c40e9
   reported_at: '2026-10-23T23:38:42Z'
@@ -1070,6 +1071,11 @@ reports:
         squares matched); 116 move beyond 1e-6, 116 beyond 1e-3 and 115 beyond 0.1 (largest 6.911e-01),
         largest turn 3.687e+01 degrees; the side is 1.350e-09 below
       source: packing/resources/web/couzo-issue763-2026-10-23/receipts/push/pose-identity.json
+    new_packing:
+      source: '964ee2b''s manifest names Kirill Tymchishin''s fa6237e certificate (certificates/parents/05df9ad756b3137f4e959fa32c7868476e8ea6bf55fe29005653fd279c410e51.cert)
+        as the row''s previous_source; the measurement does not pair them one to one (116 squares beyond
+        1e-3, receipts/push/pose-identity.json): the search moved the arrangement it was seeded from'
+      continues: Kirill Tymchishin's fa6237e packing (franciscouzo/square-packing@fa6237e)
   - n: 376
     printed: '19.897064162577'
     rounding: up
@@ -1152,6 +1158,11 @@ reports:
         squares matched); 200 move beyond 1e-6, 200 beyond 1e-3 and 189 beyond 0.1 (largest 7.332e-01),
         largest turn 4.500e+01 degrees; the side is 2.079e-09 below
       source: packing/resources/web/couzo-issue763-2026-10-23/receipts/push/pose-identity.json
+    new_packing:
+      source: '964ee2b''s manifest names Kirill Tymchishin''s fa6237e certificate (certificates/parents/a648ee3fb963efe1750a271bf38afede6a6eb7cba15d8afea15beac41e629e65.cert)
+        as the row''s previous_source; the measurement does not pair them one to one (200 squares beyond
+        1e-3, receipts/push/pose-identity.json): the search moved the arrangement it was seeded from'
+      continues: Kirill Tymchishin's fa6237e packing (franciscouzo/square-packing@fa6237e)
   - n: 451
     printed: '21.756097565469'
     rounding: up
@@ -1412,6 +1423,12 @@ reports:
         squares matched); 276 move beyond 1e-6, 234 beyond 1e-3 and 60 beyond 0.1 (largest 5.500e-01),
         largest turn 8.132e-06 degrees; the side is 1.071e-07 below
       source: packing/resources/web/couzo-issue763-2026-10-23/receipts/push/pose-identity.json
+    new_packing:
+      source: '964ee2b''s manifest names Francisco Couzo''s fa6237e certificate (certificates/parents/9c8c7742da9a36f7071731d4376e26b2374a7aa42e45dbd37accc5bc1357a417.cert)
+        as the row''s previous_source; the measurement does not pair them one to one (234 squares beyond
+        1e-3, receipts/push/pose-identity.json): the search moved the arrangement it was seeded from'
+      continues: Francisco Couzo's fa6237e packing (franciscouzo/square-packing@fa6237e), which the index
+        credits as a refinement of Vladislav Lavrentev's packing
   - n: 875
     printed: '29.996827869334'
     rounding: up

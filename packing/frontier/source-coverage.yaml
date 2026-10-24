@@ -10541,31 +10541,34 @@ sources:
   evidence:
   - E-couzo-efef7d1-beyond-horizon-report
   notes: >-
-    The push of 2026-10-23T23:38:42Z made franciscouzo/square-packing's efef7d1, fa6237e and
-    964ee2bd public together. Read commit by commit, as the first-commit rule reads a
-    history (#795's review A; devtools.beyond_horizon_replay push-publications,
-    receipts/push/push-publications.json), efef7d1 first states sides at the counts of the
-    Kaggle notebook rows that certified_bounds.json at 964ee2bd credits to the authors of
-    seven notebooks, and these are the sides the index there states as Couzo's own. No issue
-    reports them: issue 763 says the index's notebook packings by other authors are not part
-    of its request. A certificate in a watched repository is a report from its first commit,
-    so each commit is a report from the push, taken in commit order, and an import of their
-    own (think-lyf9). The ledger of 24 October for the push
-    (campaign/issue-intake/upper-bounds-couzo-964ee2b-notebooks-20261024), walked from
-    starts frozen at main 2ec489d1e with Göbel's construction beside each row, records 35
-    certificates of efef7d1 here at the exact side rounded up at 12 places, each below the
-    side it was decided against by 6.21e-14 (746) to 2.49e-02 (923); each is superseded by a
-    later commit of the same push: by couzo-fa6237e-2026-10-23 (18),
-    tymchishin-reclosure-v3-2026-10-23 (10), lavrentev-cuda-v11-2026-10-23 (5) and
-    alexchilton-fault-line-2026-10-23 (2); As the push's first side at 35 of its counts they
-    supersede the rows of mishapolk-issue732-f1ceee4-2026-10-23 (21),
-    mishapolk-issue732-2026-10-22 (6), mishapolk-issue719-2026-10-22 (5),
-    muglich-issue686-2026-10-19 (2) and couzo-issue678-2026-10-18 (1). Its sides at 633,
-    791, 856, 919 and 994 restate earlier publications below the print (think-fwa9) and have
-    no row. The packet's filtered exact replay decided every one on two routes with all six
-    controls refused (receipts/push/couzo-efef7d1/filtered-exact-replay.json,
+    The push of 2026-10-23T23:38:42Z made franciscouzo/square-packing's efef7d1, fa6237e
+    and 964ee2bd public together. Read commit by commit, as the first-commit rule reads
+    a history (#795's review A; devtools.beyond_horizon_replay push-publications,
+    receipts/push/push-publications.json), efef7d1 first states sides at the counts of
+    the Kaggle notebook rows that certified_bounds.json at 964ee2bd credits to the
+    authors of seven notebooks, and these are the sides the index there states as
+    Couzo's own. No issue reports them: issue 763 says the index's notebook packings by
+    other authors are not part of its request. A certificate in a watched repository is
+    a report from its first commit, so each commit is a report from the push, taken in
+    commit order, and an import of their own (think-lyf9). The ledger of 24 October for
+    the push (campaign/issue-intake/upper-bounds-couzo-964ee2b-notebooks-20261024),
+    walked from starts frozen at main 2ec489d1e with Göbel's construction beside each
+    row, records 35 certificates of efef7d1 here at the exact side rounded up at 12
+    places, each below the side it was decided against by 6.21e-14 (746) to 2.49e-02
+    (923); each is superseded by a later commit of the same push: by
+    couzo-fa6237e-2026-10-23 (18), tymchishin-reclosure-v3-2026-10-23 (10),
+    lavrentev-cuda-v11-2026-10-23 (5) and alexchilton-fault-line-2026-10-23 (2); As the
+    push's first side at 35 of its counts they supersede the rows of
+    mishapolk-issue732-f1ceee4-2026-10-23 (21), mishapolk-issue732-2026-10-22 (6),
+    mishapolk-issue719-2026-10-22 (5), muglich-issue686-2026-10-19 (2) and
+    couzo-issue678-2026-10-18 (1). Its sides at 633, 791, 856 and 919, and its side at
+    994, which the index credits to Mykhailo Polkovskyi, restate earlier publications
+    below the print (think-fwa9) and have no row. The packet's filtered exact replay
+    decided every one on two routes with all six controls refused
+    (receipts/push/couzo-efef7d1/filtered-exact-replay.json,
     devtools.beyond_horizon_replay), and every side is below Göbel's construction. The
-    certificates are retained on the presumption of Couzo's submission and as factual data.
+    certificates are retained on the presumption of Couzo's submission and as factual
+    data.
   claims_record: resources/web/couzo-issue763-2026-10-23/acquisition/beyond-horizon-rows-push-couzo-efef7d1.json
 - id: couzo-fa6237e-2026-10-23
   title: Francisco Couzo's own sides at fa6237e at the counts of the Kaggle notebook rows
@@ -10622,36 +10625,39 @@ sources:
   evidence:
   - E-couzo-fa6237e-beyond-horizon-report
   notes: >-
-    The push of 2026-10-23T23:38:42Z made franciscouzo/square-packing's efef7d1, fa6237e and
-    964ee2bd public together. Read commit by commit, as the first-commit rule reads a
-    history (#795's review A; devtools.beyond_horizon_replay push-publications,
-    receipts/push/push-publications.json), fa6237e first states sides at the counts of the
-    Kaggle notebook rows that certified_bounds.json at 964ee2bd credits to the authors of
-    seven notebooks, and these are the sides the index there states as Couzo's own. No issue
-    reports them: issue 763 says the index's notebook packings by other authors are not part
-    of its request. A certificate in a watched repository is a report from its first commit,
-    so each commit is a report from the push, taken in commit order, and an import of their
-    own (think-lyf9). The ledger of 24 October for the push
-    (campaign/issue-intake/upper-bounds-couzo-964ee2b-notebooks-20261024), walked from
-    starts frozen at main 2ec489d1e with Göbel's construction beside each row, records 37
-    certificates of fa6237e here at the exact side rounded up at 12 places, each below the
-    side it was decided against by 3.92e-04 (874) to 5.98e-02 (596); each is superseded by a
-    later commit of the same push: by kyleluecke-inos-2026-10-23 (12),
-    tymchishin-22-3662-2026-10-23 (9), aqibrazadev-blending-2026-10-23 (7),
-    lavrentev-cuda-run-361589987-2026-10-23 (6) and alexchilton-fault-line-2026-10-23 (3);
-    As the push's first side at 19 of its counts they supersede the rows of
-    mishapolk-issue732-f1ceee4-2026-10-23 (6), couzo-index-2026-10-15 (5),
-    mishapolk-issue719-2026-10-22 (3), mishapolk-issue732-2026-10-22 (2) and
-    couzo-issue715-2026-10-21 (1), and at 2 no row stood before them; They supersede 18 rows
-    of the push's earlier commits: couzo-efef7d1-2026-10-23 (18). The index credits 37 of
-    them to Couzo as refinements of notebook packings (Vladislav Lavrentev (33) and Kirill
-    Tymchishin (4)); those statements are the source's. At 874 kyleluecke's 964ee2bd row is
-    1.07e-07 below this commit's side; the measurement does not pair them one to one
-    (receipts/push/pose-identity.json), and the owner decides the credit there. The packet's
-    filtered exact replay decided every one on two routes with all six controls refused
-    (receipts/push/couzo-fa6237e/filtered-exact-replay.json,
+    The push of 2026-10-23T23:38:42Z made franciscouzo/square-packing's efef7d1, fa6237e
+    and 964ee2bd public together. Read commit by commit, as the first-commit rule reads
+    a history (#795's review A; devtools.beyond_horizon_replay push-publications,
+    receipts/push/push-publications.json), fa6237e first states sides at the counts of
+    the Kaggle notebook rows that certified_bounds.json at 964ee2bd credits to the
+    authors of seven notebooks, and these are the sides the index there states as
+    Couzo's own. No issue reports them: issue 763 says the index's notebook packings by
+    other authors are not part of its request. A certificate in a watched repository is
+    a report from its first commit, so each commit is a report from the push, taken in
+    commit order, and an import of their own (think-lyf9). The ledger of 24 October for
+    the push (campaign/issue-intake/upper-bounds-couzo-964ee2b-notebooks-20261024),
+    walked from starts frozen at main 2ec489d1e with Göbel's construction beside each
+    row, records 37 certificates of fa6237e here at the exact side rounded up at 12
+    places, each below the side it was decided against by 3.92e-04 (874) to 5.98e-02
+    (596); each is superseded by a later commit of the same push: by
+    kyleluecke-inos-2026-10-23 (12), tymchishin-22-3662-2026-10-23 (9),
+    aqibrazadev-blending-2026-10-23 (7), lavrentev-cuda-run-361589987-2026-10-23 (6) and
+    alexchilton-fault-line-2026-10-23 (3); As the push's first side at 19 of its counts
+    they supersede the rows of mishapolk-issue732-f1ceee4-2026-10-23 (6),
+    couzo-index-2026-10-15 (5), mishapolk-issue719-2026-10-22 (3),
+    mishapolk-issue732-2026-10-22 (2) and couzo-issue715-2026-10-21 (1), and at 2 no row
+    stood before them; They supersede 18 rows of the push's earlier commits:
+    couzo-efef7d1-2026-10-23 (18). The index credits 37 of them to Couzo as refinements
+    of notebook packings (Vladislav Lavrentev (33) and Kirill Tymchishin (4)); those
+    statements are the source's. At 874 kyleluecke's 964ee2bd row, 1.07e-07 below this
+    commit's side, names it as its previous_source; the measurement does not pair them
+    one to one (receipts/push/pose-identity.json), so it is a new packing seeded from
+    this one, credited after Couzo and Lavrentev by the record's chain rule. The
+    packet's filtered exact replay decided every one on two routes with all six controls
+    refused (receipts/push/couzo-fa6237e/filtered-exact-replay.json,
     devtools.beyond_horizon_replay), and every side is below Göbel's construction. The
-    certificates are retained on the presumption of Couzo's submission and as factual data.
+    certificates are retained on the presumption of Couzo's submission and as factual
+    data.
   claims_record: resources/web/couzo-issue763-2026-10-23/acquisition/beyond-horizon-rows-push-couzo-fa6237e.json
 - id: tymchishin-reclosure-v3-2026-10-23
   title: Kirill Tymchishin's Kaggle notebook packings ("CPU Alternating Reclosure" v3) at fa6237e
@@ -10713,37 +10719,39 @@ sources:
   evidence:
   - E-tymchishin-reclosure-v3-beyond-horizon-report
   notes: >-
-    The push of 2026-10-23T23:38:42Z made franciscouzo/square-packing's efef7d1, fa6237e and
-    964ee2bd public together. Read commit by commit, as the first-commit rule reads a
-    history (#795's review A; devtools.beyond_horizon_replay push-publications,
-    receipts/push/push-publications.json), fa6237e first states sides at the counts of the
-    Kaggle notebook rows that certified_bounds.json at 964ee2bd credits to the authors of
-    seven notebooks, and these are the sides it credits to Kirill Tymchishin's (kirilltym)
-    Kaggle notebook "CPU Alternating Reclosure" v3, run 361239073. No issue reports them:
-    issue 763 says the index's notebook packings by other authors are not part of its
-    request. A certificate in a watched repository is a report from its first commit, so
-    each commit is a report from the push, taken in commit order, and an import of their own
-    (think-lyf9). The ledger of 24 October for the push
-    (campaign/issue-intake/upper-bounds-couzo-964ee2b-notebooks-20261024), walked from
-    starts frozen at main 2ec489d1e with Göbel's construction beside each row, records 42
-    certificates of fa6237e here at the exact side rounded up at 12 places, each below the
-    side it was decided against by 1.66e-03 (454) to 5.08e-02 (967); 37 are the count's
-    current row, and 5 are superseded by a later commit of the same push: by
-    aqibrazadev-blending-2026-10-23 (2), tymchishin-22-3662-2026-10-23 (2) and
-    kyleluecke-inos-2026-10-23 (1); As the push's first side at 32 of its counts they
-    supersede the rows of couzo-reconcile-2026-10-20 (7), couzo-index-2026-10-15 (6),
-    couzo-verified-bounds-2026-10-14 (4), mishapolk-issue732-f1ceee4-2026-10-23 (4),
-    couzo-extended-certificates-2026-10-11 (1), couzo-extended-range-reports-2026-10-08 (1)
-    and couzo-issue670-2026-10-17 (1), and at 8 no row stood before them; They supersede 10
-    rows of the push's earlier commits: couzo-efef7d1-2026-10-23 (10). At 445, 488, 580,
-    679, 732, 787, 844, 903, 913, 964 and 967 the index states an L-border recipe of the
-    notebook's certificates; 964ee2bd keeps each recipe's full n-square expansion under
-    certificates/parents/ at exactly its side, first committed at fa6237e, and the row is
-    that certificate (#795's review A, A2). At 364 and 450 the 964ee2bd rows of aqibrazadev
-    and kyleluecke are 1.35e-09 and 2.08e-09 below these sides; the measurement does not
-    pair them one to one (receipts/push/pose-identity.json), and the owner decides the
-    credit there. The packet's filtered exact replay decided every one on two routes with
-    all six controls refused (receipts/push/361239073/filtered-exact-replay.json,
+    The push of 2026-10-23T23:38:42Z made franciscouzo/square-packing's efef7d1, fa6237e
+    and 964ee2bd public together. Read commit by commit, as the first-commit rule reads
+    a history (#795's review A; devtools.beyond_horizon_replay push-publications,
+    receipts/push/push-publications.json), fa6237e first states sides at the counts of
+    the Kaggle notebook rows that certified_bounds.json at 964ee2bd credits to the
+    authors of seven notebooks, and these are the sides it credits to Kirill
+    Tymchishin's (kirilltym) Kaggle notebook "CPU Alternating Reclosure" v3, run
+    361239073. No issue reports them: issue 763 says the index's notebook packings by
+    other authors are not part of its request. A certificate in a watched repository is
+    a report from its first commit, so each commit is a report from the push, taken in
+    commit order, and an import of their own (think-lyf9). The ledger of 24 October for
+    the push (campaign/issue-intake/upper-bounds-couzo-964ee2b-notebooks-20261024),
+    walked from starts frozen at main 2ec489d1e with Göbel's construction beside each
+    row, records 42 certificates of fa6237e here at the exact side rounded up at 12
+    places, each below the side it was decided against by 1.66e-03 (454) to 5.08e-02
+    (967); 37 are the count's current row, and 5 are superseded by a later commit of the
+    same push: by aqibrazadev-blending-2026-10-23 (2), tymchishin-22-3662-2026-10-23 (2)
+    and kyleluecke-inos-2026-10-23 (1); As the push's first side at 32 of its counts
+    they supersede the rows of couzo-reconcile-2026-10-20 (7), couzo-index-2026-10-15
+    (6), couzo-verified-bounds-2026-10-14 (4), mishapolk-issue732-f1ceee4-2026-10-23
+    (4), couzo-extended-certificates-2026-10-11 (1),
+    couzo-extended-range-reports-2026-10-08 (1) and couzo-issue670-2026-10-17 (1), and
+    at 8 no row stood before them; They supersede 10 rows of the push's earlier commits:
+    couzo-efef7d1-2026-10-23 (10). At 445, 488, 580, 679, 732, 787, 844, 903, 913, 964
+    and 967 the index states an L-border recipe of the notebook's certificates; 964ee2bd
+    keeps each recipe's full n-square expansion under certificates/parents/ at exactly
+    its side, first committed at fa6237e, and the row is that certificate (#795's review
+    A, A2). At 364 and 450 the 964ee2bd rows of aqibrazadev and kyleluecke, 1.35e-09 and
+    2.08e-09 below these sides, name them as their previous_source; the measurement does
+    not pair them one to one (receipts/push/pose-identity.json), so they are new
+    packings seeded from these, credited after Tymchishin by the record's chain rule.
+    The packet's filtered exact replay decided every one on two routes with all six
+    controls refused (receipts/push/361239073/filtered-exact-replay.json,
     devtools.beyond_horizon_replay), and every side is below Göbel's construction. The
     certificates are retained as factual data; the notebook's licence is followed up on
     think-m8f4.
@@ -10899,32 +10907,38 @@ sources:
   evidence:
   - E-kyleluecke-inos-beyond-horizon-report
   notes: >-
-    The push of 2026-10-23T23:38:42Z made franciscouzo/square-packing's efef7d1, fa6237e and
-    964ee2bd public together. Read commit by commit, as the first-commit rule reads a
-    history (#795's review A; devtools.beyond_horizon_replay push-publications,
-    receipts/push/push-publications.json), 964ee2b first states sides at the counts of the
-    Kaggle notebook rows that certified_bounds.json at 964ee2bd credits to the authors of
-    seven notebooks, and these are the sides it credits to the Kaggle notebook
-    "inos-v0-6-k-mosh-squares-in-squares-22-366222" of the account kyleluecke, run
-    361592092. No issue reports them: issue 763 says the index's notebook packings by other
-    authors are not part of its request. A certificate in a watched repository is a report
-    from its first commit, so each commit is a report from the push, taken in commit order,
-    and an import of their own (think-lyf9). The ledger of 24 October for the push
-    (campaign/issue-intake/upper-bounds-couzo-964ee2b-notebooks-20261024), walked from
-    starts frozen at main 2ec489d1e with Göbel's construction beside each row, records 18
-    certificates of 964ee2b here at the exact side rounded up at 12 places, each below the
-    side it was decided against by 2.08e-09 (450) to 1.26e-02 (981); each is the count's
-    current row; They supersede 18 rows of the push's earlier commits:
-    couzo-fa6237e-2026-10-23 (12), lavrentev-cuda-v11-2026-10-23 (5) and
-    tymchishin-reclosure-v3-2026-10-23 (1). At 378 and 405 the row is Vladislav Lavrentev's
-    fa6237e packing refined: every square pairs one to one within 4.5e-08 under the box's
-    identity (receipts/push/pose-identity.json), and the manifest names his certificate as
-    the row's previous_source, so the ledger records a refinement and the row is credited to
-    kyleluecke after Vladislav Lavrentev. At 450 and 874 the push's earlier side, 2.08e-09
-    above (Tymchishin's v3) and 1.07e-07 above (Couzo's fa6237e refinement of Lavrentev's
-    packing), does not pair one to one (200 and 234 squares beyond 1e-3); the owner decides
-    the credit there. The packet's filtered exact replay decided every one on two routes
-    with all six controls refused (receipts/push/361592092/filtered-exact-replay.json,
+    The push of 2026-10-23T23:38:42Z made franciscouzo/square-packing's efef7d1, fa6237e
+    and 964ee2bd public together. Read commit by commit, as the first-commit rule reads
+    a history (#795's review A; devtools.beyond_horizon_replay push-publications,
+    receipts/push/push-publications.json), 964ee2b first states sides at the counts of
+    the Kaggle notebook rows that certified_bounds.json at 964ee2bd credits to the
+    authors of seven notebooks, and these are the sides it credits to the Kaggle
+    notebook "inos-v0-6-k-mosh-squares-in-squares-22-366222" of the account kyleluecke,
+    run 361592092. No issue reports them: issue 763 says the index's notebook packings
+    by other authors are not part of its request. A certificate in a watched repository
+    is a report from its first commit, so each commit is a report from the push, taken
+    in commit order, and an import of their own (think-lyf9). The ledger of 24 October
+    for the push (campaign/issue-intake/upper-bounds-couzo-964ee2b-notebooks-20261024),
+    walked from starts frozen at main 2ec489d1e with Göbel's construction beside each
+    row, records 18 certificates of 964ee2b here at the exact side rounded up at 12
+    places, each below the side it was decided against by 2.08e-09 (450) to 1.26e-02
+    (981); each is the count's current row; They supersede 18 rows of the push's earlier
+    commits: couzo-fa6237e-2026-10-23 (12), lavrentev-cuda-v11-2026-10-23 (5) and
+    tymchishin-reclosure-v3-2026-10-23 (1). At 378 and 405 the row is Vladislav
+    Lavrentev's fa6237e packing refined: every square pairs one to one within 4.5e-08
+    under the box's identity (receipts/push/pose-identity.json), and the manifest names
+    his certificate as the row's previous_source, so the ledger records a refinement and
+    the row is credited to kyleluecke after Vladislav Lavrentev. At 450 and 874 the
+    manifest names the push's earlier side as the row's previous_source, the packing
+    that seeded it: Tymchishin's v3, 2.08e-09 above, and Couzo's fa6237e side, 1.07e-07
+    above, which the index credits as a refinement of Lavrentev's packing. The
+    measurement does not pair them one to one (200 and 234 squares beyond 1e-3): the
+    search moved the arrangement, which does not contradict the seed link. By the
+    record's chain rule, every link the source's files state is credited, so the rows
+    are credited to kyleluecke after Kirill Tymchishin at 450 and after Francisco Couzo
+    and Vladislav Lavrentev at 874, new packings seeded from theirs. The packet's
+    filtered exact replay decided every one on two routes with all six controls refused
+    (receipts/push/361592092/filtered-exact-replay.json,
     devtools.beyond_horizon_replay), and every side is below Göbel's construction. The
     certificates are retained as factual data; the notebook's licence is followed up on
     think-m8f4.
@@ -11010,30 +11024,35 @@ sources:
   evidence:
   - E-aqibrazadev-blending-beyond-horizon-report
   notes: >-
-    The push of 2026-10-23T23:38:42Z made franciscouzo/square-packing's efef7d1, fa6237e and
-    964ee2bd public together. Read commit by commit, as the first-commit rule reads a
-    history (#795's review A; devtools.beyond_horizon_replay push-publications,
-    receipts/push/push-publications.json), 964ee2b first states sides at the counts of the
-    Kaggle notebook rows that certified_bounds.json at 964ee2bd credits to the authors of
-    seven notebooks, and these are the sides it credits to the Kaggle notebook
-    "squares-in-squares-top-lb-blending-visualization" of the account aqibrazadev, run
-    361516058. No issue reports them: issue 763 says the index's notebook packings by other
-    authors are not part of its request. A certificate in a watched repository is a report
-    from its first commit, so each commit is a report from the push, taken in commit order,
-    and an import of their own (think-lyf9). The ledger of 24 October for the push
+    The push of 2026-10-23T23:38:42Z made franciscouzo/square-packing's efef7d1, fa6237e
+    and 964ee2bd public together. Read commit by commit, as the first-commit rule reads
+    a history (#795's review A; devtools.beyond_horizon_replay push-publications,
+    receipts/push/push-publications.json), 964ee2b first states sides at the counts of
+    the Kaggle notebook rows that certified_bounds.json at 964ee2bd credits to the
+    authors of seven notebooks, and these are the sides it credits to the Kaggle
+    notebook "squares-in-squares-top-lb-blending-visualization" of the account
+    aqibrazadev, run 361516058. No issue reports them: issue 763 says the index's
+    notebook packings by other authors are not part of its request. A certificate in a
+    watched repository is a report from its first commit, so each commit is a report
+    from the push, taken in commit order, and an import of their own (think-lyf9). The
+    ledger of 24 October for the push
     (campaign/issue-intake/upper-bounds-couzo-964ee2b-notebooks-20261024), walked from
     starts frozen at main 2ec489d1e with Göbel's construction beside each row, records 9
-    certificates of 964ee2b here at the exact side rounded up at 12 places, each below the
-    side it was decided against by 1.35e-09 (364) to 1.58e-03 (751); each is the count's
-    current row; They supersede 9 rows of the push's earlier commits:
-    couzo-fa6237e-2026-10-23 (7) and tymchishin-reclosure-v3-2026-10-23 (2). At 364 the row
-    is 1.35e-09 below Tymchishin's v3 side, which the manifest names as its previous_source;
-    the measurement does not pair the two one to one (116 squares beyond 1e-3;
-    receipts/push/pose-identity.json), and the owner decides the credit there. The packet's
-    filtered exact replay decided every one on two routes with all six controls refused
-    (receipts/push/361516058/filtered-exact-replay.json, devtools.beyond_horizon_replay),
-    and every side is below Göbel's construction. The certificates are retained as factual
-    data; the notebook's licence is followed up on think-m8f4.
+    certificates of 964ee2b here at the exact side rounded up at 12 places, each below
+    the side it was decided against by 1.35e-09 (364) to 1.58e-03 (751); each is the
+    count's current row; They supersede 9 rows of the push's earlier commits:
+    couzo-fa6237e-2026-10-23 (7) and tymchishin-reclosure-v3-2026-10-23 (2). At 364 the
+    row is 1.35e-09 below Tymchishin's v3 side at fa6237e, which the manifest names as
+    its previous_source, the packing that seeded it; the measurement does not pair the
+    two one to one (116 squares beyond 1e-3; receipts/push/pose-identity.json): the
+    search moved the arrangement, which does not contradict the seed link. By the
+    record's chain rule, every link the source's files state is credited, so the row is
+    credited to aqibrazadev after Kirill Tymchishin, a new packing seeded from his. The
+    packet's filtered exact replay decided every one on two routes with all six controls
+    refused (receipts/push/361516058/filtered-exact-replay.json,
+    devtools.beyond_horizon_replay), and every side is below Göbel's construction. The
+    certificates are retained as factual data; the notebook's licence is followed up on
+    think-m8f4.
   claims_record: resources/web/couzo-issue763-2026-10-23/acquisition/beyond-horizon-rows-push-361516058.json
 - id: lavrentev-cuda-run-361589987-2026-10-23
   title: Vladislav Lavrentev's Kaggle notebook packings ("squares-in-squares-cuda-packing-search", run 361589987) at 964ee2bd
