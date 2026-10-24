@@ -10173,9 +10173,25 @@ issues:
     results: []
     asks:
     - what: The owner decides whether Göbel's constructions are earlier reports and the baseline beyond
-        324; if so, a records PR adds them as the baseline, corrects 369 and 376 and records a defect. Until
-        then the 42 rows of 487b058 above them are not recorded, and 369 and 376 stay.
+        324; if so, a records PR adds them as the baseline, corrects 369 and 376 and records a defect.
+        The owner answered yes on 23 October 2026; the record still owes the defect.
       state: queued
+      note: >-
+        Answered by the owner on 23 October 2026 (think-8krd): yes, Göbel's classical constructions
+        count as earlier reports beyond n = 324, and a rational row above Göbel's exact side at its
+        count is not recorded. The owner-answers records change (PR #754) delivers the baseline and
+        the correction. It makes the answer a ruling of the report-order walks
+        (devtools.intake_ledger, classical-constructions), so Göbel's construction joins each
+        walk's start and the publications the walks held above it are not recorded; and from the
+        day of the answer every reading beyond 324 takes it (intake_ledger.GOEBEL_FROM): a start
+        gather freezes, the claims importer and the replay's standing side, while earlier
+        readings keep what they froze. The Fang inventory stays on recorded rows, since it
+        measures the excess over what the record holds (think-a75a). And it corrects 369 and 376:
+        nine rows of 8 to 13 October above Göbel's construction, at 369 (1), 375 (4) and 376 (4),
+        stay listed as printed and are marked above-classical-construction, so 369 and 376 have
+        no current row. Still owed: a defect entry recording the cause, that beyond 324 the record
+        compared reports only with the grid and earlier reports, so two current rows stood above
+        Göbel's sides.
       bead: think-8krd
     beads:
     - think-8krd
@@ -10197,6 +10213,13 @@ issues:
       reported item, as #532 to #537 are: Göbel's classical constructions, results the record does
       not hold, as the baseline beyond 324. Its answer also decides which reported rows beyond 324 the record takes in. It is not a counterexample
       report: the rows at 369 and 376 are valid upper bounds that smaller classical sides dominate.
+
+      The owner answered on 23 October 2026 (think-8krd): Göbel's constructions are earlier reports
+      beyond 324. The owner-answers records change applies it: the walks hold no publication above
+      Göbel's construction, the nine rows above it at 369, 375 and 376 are marked
+      above-classical-construction, and 369 and 376 keep no current row. Whether Friedman's
+      off-centre constructions count the same way was not asked; think-zkxy asks it. The ask stays
+      queued, and the issue open, until the defect is recorded.
   - number: 622
     title: 'data: submit a tighter exact N29 packing certificate'
     author: BuddenPing
@@ -17416,7 +17439,8 @@ issues:
       certificates first committed after 7b6c87e, whose filtered exact replay decided every one
       on two routes with every control refused, and the 109 that are the issue's own reports are
       beyond-horizon rows. 30 re-certify the author's 4e4c8ce certificates under the print's
-      resolution and wait on a decision; 34 restate earlier publications; the 1112 above 1024
+      resolution and restate them (the owner's answer of 23 October, think-fwa9); 34 restate earlier
+      publications; the 1112 above 1024
       wait on the owner.
     read_through: '2026-10-21T20:55:57Z'
     results:
@@ -17762,10 +17786,10 @@ issues:
       not_registered: >-
         Beyond the n <= 324 corpus. Its certificate, retained and replayed with every control
         refused, is 2.37e-23 below the certificate the source first published at 4e4c8ce on
-        2026-10-15, under the print's resolution; whether that re-certification is a new report
-        waits on a decision, and no row is recorded.
-      queued: true
-      bead: think-fwa9
+        2026-10-15, and both round up to the same 12-place print. By the owner's answer of 23
+        October 2026 (think-fwa9) it restates that certificate, which stays the row, so no row
+        is recorded.
+      queued: false
     - key: n544
       claim: s(544) <= 23.828427124775, rounded upward; exact certificate side is authoritative.
       source: body
@@ -17861,10 +17885,10 @@ issues:
       not_registered: >-
         Beyond the n <= 324 corpus. Its certificate, retained and replayed with every control
         refused, is 2.47e-23 below the certificate the source first published at 4e4c8ce on
-        2026-10-15, under the print's resolution; whether that re-certification is a new report
-        waits on a decision, and no row is recorded.
-      queued: true
-      bead: think-fwa9
+        2026-10-15, and both round up to the same 12-place print. By the owner's answer of 23
+        October 2026 (think-fwa9) it restates that certificate, which stays the row, so no row
+        is recorded.
+      queued: false
     - key: n584
       claim: s(584) <= 24.677669529693, rounded upward; exact certificate side is authoritative.
       source: body
@@ -17880,10 +17904,10 @@ issues:
       not_registered: >-
         Beyond the n <= 324 corpus. Its certificate, retained and replayed with every control
         refused, is 2.48e-23 below the certificate the source first published at 4e4c8ce on
-        2026-10-15, under the print's resolution; whether that re-certification is a new report
-        waits on a decision, and no row is recorded.
-      queued: true
-      bead: think-fwa9
+        2026-10-15, and both round up to the same 12-place print. By the owner's answer of 23
+        October 2026 (think-fwa9) it restates that certificate, which stays the row, so no row
+        is recorded.
+      queued: false
     - key: n592
       claim: s(592) <= 24.883414761903, rounded upward; exact certificate side is authoritative.
       source: body
@@ -17999,20 +18023,20 @@ issues:
       not_registered: >-
         Beyond the n <= 324 corpus. Its certificate, retained and replayed with every control
         refused, is 2.57e-23 below the certificate the source first published at 4e4c8ce on
-        2026-10-15, under the print's resolution; whether that re-certification is a new report
-        waits on a decision, and no row is recorded.
-      queued: true
-      bead: think-fwa9
+        2026-10-15, and both round up to the same 12-place print. By the owner's answer of 23
+        October 2026 (think-fwa9) it restates that certificate, which stays the row, so no row
+        is recorded.
+      queued: false
     - key: n633
       claim: s(633) <= 25.677669529693, rounded upward; exact certificate side is authoritative.
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus. Its certificate, retained and replayed with every control
         refused, is 2.57e-23 below the certificate the source first published at 4e4c8ce on
-        2026-10-15, under the print's resolution; whether that re-certification is a new report
-        waits on a decision, and no row is recorded.
-      queued: true
-      bead: think-fwa9
+        2026-10-15, and both round up to the same 12-place print. By the owner's answer of 23
+        October 2026 (think-fwa9) it restates that certificate, which stays the row, so no row
+        is recorded.
+      queued: false
     - key: n637
       claim: s(637) <= 25.778174593082, rounded upward; exact certificate side is authoritative.
       source: body
@@ -18028,10 +18052,10 @@ issues:
       not_registered: >-
         Beyond the n <= 324 corpus. Its certificate, retained and replayed with every control
         refused, is 2.58e-23 below the certificate the source first published at 4e4c8ce on
-        2026-10-15, under the print's resolution; whether that re-certification is a new report
-        waits on a decision, and no row is recorded.
-      queued: true
-      bead: think-fwa9
+        2026-10-15, and both round up to the same 12-place print. By the owner's answer of 23
+        October 2026 (think-fwa9) it restates that certificate, which stays the row, so no row
+        is recorded.
+      queued: false
     - key: n643
       claim: s(643) <= 25.898819144794, rounded upward; exact certificate side is authoritative.
       source: body
@@ -18137,20 +18161,20 @@ issues:
       not_registered: >-
         Beyond the n <= 324 corpus. Its certificate, retained and replayed with every control
         refused, is 2.67e-23 below the certificate the source first published at 4e4c8ce on
-        2026-10-15, under the print's resolution; whether that re-certification is a new report
-        waits on a decision, and no row is recorded.
-      queued: true
-      bead: think-fwa9
+        2026-10-15, and both round up to the same 12-place print. By the owner's answer of 23
+        October 2026 (think-fwa9) it restates that certificate, which stays the row, so no row
+        is recorded.
+      queued: false
     - key: n684
       claim: s(684) <= 26.677669529693, rounded upward; exact certificate side is authoritative.
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus. Its certificate, retained and replayed with every control
         refused, is 2.67e-23 below the certificate the source first published at 4e4c8ce on
-        2026-10-15, under the print's resolution; whether that re-certification is a new report
-        waits on a decision, and no row is recorded.
-      queued: true
-      bead: think-fwa9
+        2026-10-15, and both round up to the same 12-place print. By the owner's answer of 23
+        October 2026 (think-fwa9) it restates that certificate, which stays the row, so no row
+        is recorded.
+      queued: false
     - key: n689
       claim: s(689) <= 26.778174593084, rounded upward; exact certificate side is authoritative.
       source: body
@@ -18166,10 +18190,10 @@ issues:
       not_registered: >-
         Beyond the n <= 324 corpus. Its certificate, retained and replayed with every control
         refused, is 2.68e-23 below the certificate the source first published at 4e4c8ce on
-        2026-10-15, under the print's resolution; whether that re-certification is a new report
-        waits on a decision, and no row is recorded.
-      queued: true
-      bead: think-fwa9
+        2026-10-15, and both round up to the same 12-place print. By the owner's answer of 23
+        October 2026 (think-fwa9) it restates that certificate, which stays the row, so no row
+        is recorded.
+      queued: false
     - key: n692
       claim: s(692) <= 26.828427124777, rounded upward; exact certificate side is authoritative.
       source: body
@@ -18195,10 +18219,10 @@ issues:
       not_registered: >-
         Beyond the n <= 324 corpus. Its certificate, retained and replayed with every control
         refused, is 2.69e-23 below the certificate the source first published at 4e4c8ce on
-        2026-10-15, under the print's resolution; whether that re-certification is a new report
-        waits on a decision, and no row is recorded.
-      queued: true
-      bead: think-fwa9
+        2026-10-15, and both round up to the same 12-place print. By the owner's answer of 23
+        October 2026 (think-fwa9) it restates that certificate, which stays the row, so no row
+        is recorded.
+      queued: false
     - key: n696
       claim: s(696) <= 26.946937290069, rounded upward; exact certificate side is authoritative.
       source: body
@@ -18274,10 +18298,10 @@ issues:
       not_registered: >-
         Beyond the n <= 324 corpus. Its certificate, retained and replayed with every control
         refused, is 2.77e-23 below the certificate the source first published at 4e4c8ce on
-        2026-10-15, under the print's resolution; whether that re-certification is a new report
-        waits on a decision, and no row is recorded.
-      queued: true
-      bead: think-fwa9
+        2026-10-15, and both round up to the same 12-place print. By the owner's answer of 23
+        October 2026 (think-fwa9) it restates that certificate, which stays the row, so no row
+        is recorded.
+      queued: false
     - key: n736
       claim: s(736) <= 27.656854249525, rounded upward; exact certificate side is authoritative.
       source: body
@@ -18293,28 +18317,30 @@ issues:
       not_registered: >-
         Beyond the n <= 324 corpus. Its certificate, retained and replayed with every control
         refused, is 2.77e-23 below the certificate the source first published at 4e4c8ce on
-        2026-10-15, under the print's resolution; whether that re-certification is a new report
-        waits on a decision, and no row is recorded.
-      queued: true
-      bead: think-fwa9
+        2026-10-15, and both round up to the same 12-place print. By the owner's answer of 23
+        October 2026 (think-fwa9) it restates that certificate, which stays the row, so no row
+        is recorded.
+      queued: false
     - key: n742
       claim: s(742) <= 27.778174593084, rounded upward; exact certificate side is authoritative.
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus. Its certificate, retained and replayed with every control
         refused, is 2.78e-23 below the certificate the source first published at 4e4c8ce on
-        2026-10-15, under the print's resolution; whether that re-certification is a new report
-        waits on a decision, and no row is recorded.
-      queued: true
-      bead: think-fwa9
+        2026-10-15, and both round up to the same 12-place print. By the owner's answer of 23
+        October 2026 (think-fwa9) it restates that certificate, which stays the row, so no row
+        is recorded.
+      queued: false
     - key: n743
       claim: s(743) <= 27.798989873256, rounded upward; exact certificate side is authoritative.
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus: the index bound at 7b6c87e from the certificate of the next
         count, first published at 4e4c8ce on 2026-10-15, at the same exact side, an earlier report.
-        It is an index deletion bound, held with the others from Couzo's index for the owner's
-        decision on proposed D6 (think-f2io), and not recorded; this restatement is not recorded.
+        It is an index deletion bound, one square below the next count's certificate, an earlier
+        report by the owner's answer of 23 October 2026 on D6 (think-f2io), and this claim of its
+        side is not recorded; on the decision's recommendation the bound has no row of its own
+        (think-kzme).
       queued: false
     - key: n744
       claim: s(744) <= 27.798989873256, rounded upward; exact certificate side is authoritative.
@@ -18331,10 +18357,10 @@ issues:
       not_registered: >-
         Beyond the n <= 324 corpus. Its certificate, retained and replayed with every control
         refused, is 2.78e-23 below the certificate the source first published at 4e4c8ce on
-        2026-10-15, under the print's resolution; whether that re-certification is a new report
-        waits on a decision, and no row is recorded.
-      queued: true
-      bead: think-fwa9
+        2026-10-15, and both round up to the same 12-place print. By the owner's answer of 23
+        October 2026 (think-fwa9) it restates that certificate, which stays the row, so no row
+        is recorded.
+      queued: false
     - key: n746
       claim: s(746) <= 27.828427124795, rounded upward; exact certificate side is authoritative.
       source: body
@@ -18430,20 +18456,20 @@ issues:
       not_registered: >-
         Beyond the n <= 324 corpus. Its certificate, retained and replayed with every control
         refused, is 2.87e-23 below the certificate the source first published at 4e4c8ce on
-        2026-10-15, under the print's resolution; whether that re-certification is a new report
-        waits on a decision, and no row is recorded.
-      queued: true
-      bead: think-fwa9
+        2026-10-15, and both round up to the same 12-place print. By the owner's answer of 23
+        October 2026 (think-fwa9) it restates that certificate, which stays the row, so no row
+        is recorded.
+      queued: false
     - key: n791
       claim: s(791) <= 28.656854249525, rounded upward; exact certificate side is authoritative.
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus. Its certificate, retained and replayed with every control
         refused, is 2.87e-23 below the certificate the source first published at 4e4c8ce on
-        2026-10-15, under the print's resolution; whether that re-certification is a new report
-        waits on a decision, and no row is recorded.
-      queued: true
-      bead: think-fwa9
+        2026-10-15, and both round up to the same 12-place print. By the owner's answer of 23
+        October 2026 (think-fwa9) it restates that certificate, which stays the row, so no row
+        is recorded.
+      queued: false
     - key: n792
       claim: s(792) <= 28.656854249526, rounded upward; exact certificate side is authoritative.
       source: body
@@ -18459,30 +18485,31 @@ issues:
       not_registered: >-
         Beyond the n <= 324 corpus. Its certificate, retained and replayed with every control
         refused, is 2.88e-23 below the certificate the source first published at 4e4c8ce on
-        2026-10-15, under the print's resolution; whether that re-certification is a new report
-        waits on a decision, and no row is recorded.
-      queued: true
-      bead: think-fwa9
+        2026-10-15, and both round up to the same 12-place print. By the owner's answer of 23
+        October 2026 (think-fwa9) it restates that certificate, which stays the row, so no row
+        is recorded.
+      queued: false
     - key: n798
       claim: s(798) <= 28.798989873256, rounded upward; exact certificate side is authoritative.
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus. Its certificate, retained and replayed with every control
-        refused, is 2.88e-23 below the certificate the source first published at 4e4c8ce on
-        2026-10-15, under the print's resolution; whether that re-certification is a new report
-        waits on a decision, and no row is recorded.
-      queued: true
-      bead: think-fwa9
+        refused, is 2.88e-23 below the bound Couzo's 4e4c8ce index states at 798 by deleting one
+        square from its 799 certificate, published on 2026-10-15, and both round up to the same
+        12-place print. By the owner's answer of 23 October 2026 (think-fwa9) it restates that
+        bound, so no row is recorded. The bound is an earlier report by the owner's answer on D6
+        (think-f2io) and, on that decision's recommendation, has no row of its own (think-kzme).
+      queued: false
     - key: n799
       claim: s(799) <= 28.798989873256, rounded upward; exact certificate side is authoritative.
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus. Its certificate, retained and replayed with every control
         refused, is 2.88e-23 below the certificate the source first published at 4e4c8ce on
-        2026-10-15, under the print's resolution; whether that re-certification is a new report
-        waits on a decision, and no row is recorded.
-      queued: true
-      bead: think-fwa9
+        2026-10-15, and both round up to the same 12-place print. By the owner's answer of 23
+        October 2026 (think-fwa9) it restates that certificate, which stays the row, so no row
+        is recorded.
+      queued: false
     - key: n800
       claim: s(800) <= 28.798989873257, rounded upward; exact certificate side is authoritative.
       source: body
@@ -18627,40 +18654,41 @@ issues:
       not_registered: >-
         Beyond the n <= 324 corpus. Its certificate, retained and replayed with every control
         refused, is 2.98e-23 below the certificate the source first published at 4e4c8ce on
-        2026-10-15, under the print's resolution; whether that re-certification is a new report
-        waits on a decision, and no row is recorded.
-      queued: true
-      bead: think-fwa9
+        2026-10-15, and both round up to the same 12-place print. By the owner's answer of 23
+        October 2026 (think-fwa9) it restates that certificate, which stays the row, so no row
+        is recorded.
+      queued: false
     - key: n855
       claim: s(855) <= 29.798989873256, rounded upward; exact certificate side is authoritative.
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus. Its certificate, retained and replayed with every control
-        refused, is 2.98e-23 below the certificate the source first published at 4e4c8ce on
-        2026-10-15, under the print's resolution; whether that re-certification is a new report
-        waits on a decision, and no row is recorded.
-      queued: true
-      bead: think-fwa9
+        refused, is 2.98e-23 below the bound Couzo's 4e4c8ce index states at 855 by deleting one
+        square from its 856 certificate, published on 2026-10-15, and both round up to the same
+        12-place print. By the owner's answer of 23 October 2026 (think-fwa9) it restates that
+        bound, so no row is recorded. The bound is an earlier report by the owner's answer on D6
+        (think-f2io) and, on that decision's recommendation, has no row of its own (think-kzme).
+      queued: false
     - key: n856
       claim: s(856) <= 29.798989873256, rounded upward; exact certificate side is authoritative.
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus. Its certificate, retained and replayed with every control
         refused, is 2.98e-23 below the certificate the source first published at 4e4c8ce on
-        2026-10-15, under the print's resolution; whether that re-certification is a new report
-        waits on a decision, and no row is recorded.
-      queued: true
-      bead: think-fwa9
+        2026-10-15, and both round up to the same 12-place print. By the owner's answer of 23
+        October 2026 (think-fwa9) it restates that certificate, which stays the row, so no row
+        is recorded.
+      queued: false
     - key: n857
       claim: s(857) <= 29.798989873257, rounded upward; exact certificate side is authoritative.
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus. Its certificate, retained and replayed with every control
         refused, is 2.98e-23 below the certificate the source first published at 4e4c8ce on
-        2026-10-15, under the print's resolution; whether that re-certification is a new report
-        waits on a decision, and no row is recorded.
-      queued: true
-      bead: think-fwa9
+        2026-10-15, and both round up to the same 12-place print. By the owner's answer of 23
+        October 2026 (think-fwa9) it restates that certificate, which stays the row, so no row
+        is recorded.
+      queued: false
     - key: n858
       claim: s(858) <= 29.825571500168, rounded upward; exact certificate side is authoritative.
       source: body
@@ -18816,20 +18844,20 @@ issues:
       not_registered: >-
         Beyond the n <= 324 corpus. Its certificate, retained and replayed with every control
         refused, is 3.07e-23 below the certificate the source first published at 4e4c8ce on
-        2026-10-15, under the print's resolution; whether that re-certification is a new report
-        waits on a decision, and no row is recorded.
-      queued: true
-      bead: think-fwa9
+        2026-10-15, and both round up to the same 12-place print. By the owner's answer of 23
+        October 2026 (think-fwa9) it restates that certificate, which stays the row, so no row
+        is recorded.
+      queued: false
     - key: n913
       claim: s(913) <= 30.778174593084, rounded upward; exact certificate side is authoritative.
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus. Its certificate, retained and replayed with every control
         refused, is 3.08e-23 below the certificate the source first published at 4e4c8ce on
-        2026-10-15, under the print's resolution; whether that re-certification is a new report
-        waits on a decision, and no row is recorded.
-      queued: true
-      bead: think-fwa9
+        2026-10-15, and both round up to the same 12-place print. By the owner's answer of 23
+        October 2026 (think-fwa9) it restates that certificate, which stays the row, so no row
+        is recorded.
+      queued: false
     - key: n914
       claim: s(914) <= 30.778174593089, rounded upward; exact certificate side is authoritative.
       source: body
@@ -18845,20 +18873,20 @@ issues:
       not_registered: >-
         Beyond the n <= 324 corpus. Its certificate, retained and replayed with every control
         refused, is 3.08e-23 below the certificate the source first published at 4e4c8ce on
-        2026-10-15, under the print's resolution; whether that re-certification is a new report
-        waits on a decision, and no row is recorded.
-      queued: true
-      bead: think-fwa9
+        2026-10-15, and both round up to the same 12-place print. By the owner's answer of 23
+        October 2026 (think-fwa9) it restates that certificate, which stays the row, so no row
+        is recorded.
+      queued: false
     - key: n916
       claim: s(916) <= 30.798989873257, rounded upward; exact certificate side is authoritative.
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus. Its certificate, retained and replayed with every control
         refused, is 3.08e-23 below the certificate the source first published at 4e4c8ce on
-        2026-10-15, under the print's resolution; whether that re-certification is a new report
-        waits on a decision, and no row is recorded.
-      queued: true
-      bead: think-fwa9
+        2026-10-15, and both round up to the same 12-place print. By the owner's answer of 23
+        October 2026 (think-fwa9) it restates that certificate, which stays the row, so no row
+        is recorded.
+      queued: false
     - key: n917
       claim: s(917) <= 30.825571499902, rounded upward; exact certificate side is authoritative.
       source: body
@@ -18975,20 +19003,20 @@ issues:
       not_registered: >-
         Beyond the n <= 324 corpus. Its certificate, retained and replayed with every control
         refused, is 3.17e-23 below the certificate the source first published at 4e4c8ce on
-        2026-10-15, under the print's resolution; whether that re-certification is a new report
-        waits on a decision, and no row is recorded.
-      queued: true
-      bead: think-fwa9
+        2026-10-15, and both round up to the same 12-place print. By the owner's answer of 23
+        October 2026 (think-fwa9) it restates that certificate, which stays the row, so no row
+        is recorded.
+      queued: false
     - key: n975
       claim: s(975) <= 31.778174593089, rounded upward; exact certificate side is authoritative.
       source: body
       not_registered: >-
         Beyond the n <= 324 corpus. Its certificate, retained and replayed with every control
         refused, is 3.18e-23 below the certificate the source first published at 4e4c8ce on
-        2026-10-15, under the print's resolution; whether that re-certification is a new report
-        waits on a decision, and no row is recorded.
-      queued: true
-      bead: think-fwa9
+        2026-10-15, and both round up to the same 12-place print. By the owner's answer of 23
+        October 2026 (think-fwa9) it restates that certificate, which stays the row, so no row
+        is recorded.
+      queued: false
     - key: n976
       claim: s(976) <= 31.778174593090, rounded upward; exact certificate side is authoritative.
       source: body
@@ -19004,10 +19032,10 @@ issues:
       not_registered: >-
         Beyond the n <= 324 corpus. Its certificate, retained and replayed with every control
         refused, is 3.18e-23 below the certificate the source first published at 4e4c8ce on
-        2026-10-15, under the print's resolution; whether that re-certification is a new report
-        waits on a decision, and no row is recorded.
-      queued: true
-      bead: think-fwa9
+        2026-10-15, and both round up to the same 12-place print. By the owner's answer of 23
+        October 2026 (think-fwa9) it restates that certificate, which stays the row, so no row
+        is recorded.
+      queued: false
     - key: n978
       claim: s(978) <= 31.825090165859, rounded upward; exact certificate side is authoritative.
       source: body
@@ -19044,8 +19072,10 @@ issues:
       not_registered: >-
         Beyond the n <= 324 corpus: the index bound at 7b6c87e from the certificate of the next
         count, first published at 4e4c8ce on 2026-10-15, at the same exact side, an earlier report.
-        It is an index deletion bound, held with the others from Couzo's index for the owner's
-        decision on proposed D6 (think-f2io), and not recorded; this restatement is not recorded.
+        It is an index deletion bound, one square below the next count's certificate, an earlier
+        report by the owner's answer of 23 October 2026 on D6 (think-f2io), and this claim of its
+        side is not recorded; on the decision's recommendation the bound has no row of its own
+        (think-kzme).
       queued: false
     - key: n986
       claim: s(986) <= 31.920310216821, rounded upward; exact certificate side is authoritative.
@@ -19588,6 +19618,22 @@ issues:
       tracked with no ceiling (think-f2io, D1). It listed as open 743 and 985 on the
       deletion-bound question (think-f2io), the exact check at 335 (think-rx26) and the rows
       above 1024. It states no T-NNN, and the issue stays open.
+
+      The owner answered think-fwa9 on 23 October 2026 that sub-print re-certifications are
+      restatements, not new rows, and the earlier certificate stays the row. The record reads a
+      sub-print re-certification as a side below an earlier report at its count by less than one
+      unit in the 12th place, with both rounding up to the same 12-place print. The owner-answers
+      records change
+      (think-temp) writes the answer into the walks as a ruling: the history, #719 and #732 walks
+      decide the 30 re-certifications, and 44 of Couzo's publications in 5a299b4, 23aff0c and
+      4e4c8ce, as restatements and no longer hold them. No row changes: at 28 of the 30 counts the
+      4e4c8ce certificate's row stands as it did, and at 798 and 855 the 4e4c8ce side is an index
+      deletion bound, one square below the next count's certificate, which has no row. The owner
+      answered D6 the same day: such a bound is an earlier report, so #715's restatements at 743 and
+      985 stay unrecorded too; that the bounds have no row of their own is the decision's
+      recommendation (think-kzme asks the owner, and whether an issue's claim gives one a row). The
+      follow-up that says so is drafted on think-temp for after that change
+      merges (think-cyal).
   - number: 719
     title: 'New packings: 122 verified upper bounds for square packing (N in [105, 1568]): registration request'
     author: Mishapolk
@@ -21234,10 +21280,10 @@ issues:
       quenches of the predecessor reports' arrangements, so refinements, recorded as they are;
       their per-row credit beyond the corpus is the owner's open question (D5, think-f2io).
       447 is a new arrangement. The ten withdrawn rows are claimed again as part of #732
-      (think-0gp6). The lower 204 file is claimed (n204-lower, think-h01y). The 34 in-corpus
-      files beyond the twelfth place are left to the maintainers, not claimed: they stay
-      pinned by digest, and whether the record takes that class is the owner's question on
-      think-fwa9. The author added an MIT licence at 17cc220 (20:15:36Z) that the comment says
+      (think-0gp6). The lower 204 file is claimed (n204-lower, think-h01y). The 34 in-corpus files
+      beyond the twelfth place are left to the maintainers, not claimed: they stay pinned by digest,
+      and whether the record takes that class was the owner's question on think-fwa9. The author
+      added an MIT licence at 17cc220 (20:15:36Z) that the comment says
       covers every certificate, catalogue, manifest and tool. This packet stays derived-only
       at 12fc466; later packets from the repository may retain the files.
 
@@ -21300,6 +21346,19 @@ issues:
       (think-h01y), the rows above 1024 and per-row credit beyond the corpus. The #732 import
       reply of the same morning answers his recommendation to publish the checkers. It states
       no T-NNN, and the issue stays open.
+
+      The owner answered think-fwa9 on 23 October 2026 that sub-print re-certifications are
+      restatements, not new rows, and the earlier certificate stays the row; the record reads them
+      as sides below an earlier report by less than one unit in the 12th place, at the same 12-place
+      print. The owner-answers records change (think-temp)
+      applies it beyond the corpus: in this issue's walk #715's re-certifications at 19 counts and
+      5a299b4's at 21 restate the 4e4c8ce certificates and are no longer held, and no row of this
+      source changes. #719's own 631, 2.73e-13 below the 4e4c8ce certificate at the same print,
+      which #722 recorded, is in the answer's words; it waits on the owner (think-oqjd) and stays
+      recorded until then. The in-corpus files stay pinned and unclaimed. Of the ten files #719's
+      edit withdrew, the nine where #732 claims a lower side are not reports, by the owner's answer
+      of the same day (think-8m4k), and #732's rows there stand; at 539 the file is #732's own row.
+      The follow-up that says so is drafted on think-temp.
   - number: 728
     title: 's(303) ≤ 17.909772217275: registration request'
     author: evand
@@ -21400,7 +21459,8 @@ issues:
       recorded yet. Imported on 23 October (think-0gp6, c-lane-732-import-1023): the ledger of
       23 October for issue 732 records 77 of the 390 rows at or below 1024 as current rows of
       the mishapolk-issue732-2026-10-22 source, retained at 17cc220 and replayed on both exact
-      routes, holds 499 (think-fwa9), and leaves 985 to the deletion-bound decision (think-f2io).
+      routes, finds that 499 restates #719's row (think-fwa9, answered 23 October), and that 985
+      ties Couzo's 4e4c8ce deletion bound, an earlier report (D6, think-f2io, answered 23 October).
     read_through: '2026-10-23T01:53:19Z'
     results:
     - key: rows-325-1024
@@ -21419,12 +21479,14 @@ issues:
         withdrawn rows. They supersede 30 of #715's rows, 29 of #719's, 14 of
         couzo-index-2026-10-15's and 4 of couzo-verified-bounds-2026-10-14's. The packet retains
         the 77 certificates under the author's MIT licence, and both project exact routes accept
-        all 77 with all 462 controls refused (receipts/filtered-exact-replay.json). The other 311
-        are not recorded: 81 restate #719's rows, and the rest equal or lie above an earlier
-        report. 128 of those verdicts rest on publications the walk holds for the owner's
-        decisions (beyond_horizon_replay.WALKS), among them 369 and 376, above Couzo's 58a7833
-        bound, which is above Göbel's construction (think-8krd), so they stay unrecorded whatever
-        that answer is.
+        all 77 with all 462 controls refused (receipts/filtered-exact-replay.json). The other 313
+        are not recorded: 131 equal an earlier report, 81 of them #719's rows, 181 lie above one,
+        and 499 restates #719's row. Since the owner's answers of 23 October, 43 of them, 331, 369
+        and 376 among them, are above Göbel's construction at their count, an earlier report
+        (think-8krd), and 54 rest on constructions with no certificate file and deletions from
+        Friedman's constructions that the walk holds for D2 and think-zkxy
+        (beyond_horizon_replay.WALKS); 985 ties a deletion bound, an earlier report by the D6
+        answer.
       queued: false
     - key: n499
       claim: >-
@@ -21432,16 +21494,11 @@ issues:
         at 17cc220 is authoritative.
       source: body
       not_registered: >-
-        Beyond the corpus. The ledger of 23 October for issue 732 records it, 8.66e-13 below
-        #719's row at 499, and holds it: both round up to 22.881306218113 at 12 places, a
-        re-certification below the print, the class the owner's question think-fwa9 covers. The
-        packet pins the certificate by digest; no row until that answer. On 23 October the owner
-        answered that such re-certifications are restatements; think-temp applies the answer
-        after this import merges.
-      queued: true
-      bead: think-fwa9
-      blocked_on:
-      - think-fwa9
+        Beyond the corpus. 8.66e-13 below #719's row at 499, and both round up to 22.881306218113
+        at 12 places: by the owner's answer of 23 October 2026 (think-fwa9) it restates that
+        row, which stays the count's row, so the walk does not record it. The packet pins the
+        certificate by digest.
+      queued: false
     - key: n985
       claim: >-
         s(985) <= 31.920310216821, rounded up; the exact side of certificates/0000-0999/n985.cert
@@ -21449,13 +21506,10 @@ issues:
       source: body
       not_registered: >-
         Beyond the corpus. Equal to the bound Couzo's 4e4c8ce index states at 985 by deleting a
-        square from the 986 certificate, which the walk holds for the deletion-bound decision
-        (D6, think-f2io), so not recorded. An answer that leaves such bounds out reruns the walk,
-        and this claim would then be recorded (beyond_horizon_replay held-dependents).
-      queued: true
-      bead: think-f2io
-      blocked_on:
-      - think-f2io
+        square from the 986 certificate. By the owner's answer of 23 October 2026 on D6
+        (think-f2io) such a bound is an earlier report, so this tie is not recorded. Whether
+        the bound itself gets a row where an issue claims the count is think-kzme.
+      queued: false
     - key: rows-above-1024
       claim: >-
         5,078 upper bounds at n = 1025 to 9913, each the exact side of a certificate at 814fbe9
@@ -21640,6 +21694,17 @@ issues:
       985, the 5,077 rows above 1024, applying the answers on 499 and the withdrawn files to
       the walk, and per-row credit beyond the corpus. It states no T-NNN, and the issue stays
       open.
+
+      The owner answered three of the import's questions on 23 October 2026, and the owner-answers
+      records change (think-temp, think-8m4k, think-8krd) applies them. 499 restates #719's row, a
+      re-certification below the 12-place print (think-fwa9). The nine 1851c2c files #719's edit
+      withdrew are not reports: the walk keeps them out of the record as a settled disposition, and
+      no verdict rests on them (think-8m4k). Göbel's constructions are earlier reports beyond 324,
+      so #732's 331, 369 and 376 are not recorded against Göbel's construction itself (think-8krd).
+      A deletion bound from a published certificate is an earlier report (D6, think-f2io), so 985,
+      equal to Couzo's 4e4c8ce bound, stays unrecorded.
+      No row of this source changes: the 77 stay current. The follow-up that says so is drafted on
+      think-temp.
   - number: 734
     title: 'Proposal: submit and fetch upper bounds by API (automated intake, reported the same day)'
     author: wand125

@@ -33,7 +33,12 @@ certificate headers:
   k - 1; Ryu's 8 ceil(sqrt(k - 4)) - 1 (``deficiency_upper_bounds``); Theorems 1 and 2,
   k - 2 and k - 1 - F(k); the inventory's best excess j, k - 1 - j; and the record's own
   finite rows, k^2 - m - 1 for the largest count m <= k^2 whose recorded upper bound is
-  below k. It also finds where Theorem 2 and Ryu's bound cross.
+  below k. It also finds where Theorem 2 and Ryu's bound cross. The record's column is
+  the excess over what the record holds, its case records and current beyond-horizon
+  rows, not over a baseline: Göbel's classical constructions, earlier reports beyond 324
+  by the owner's answer on #613 (think-8krd) with no row of their own, are not read, and
+  a count whose rows are all marked above one has no recorded row. A Göbel column is
+  deferred (think-a75a).
 
 The record's rows are read once, when the receipt is written, and frozen in it with the
 commit they were read at, so ``--check`` rebuilds the receipt from the packet and those
@@ -391,7 +396,10 @@ def squeeze_check(squeezes: Mapping[str, Fraction]) -> Check:
 
 
 def read_record(commit: str) -> dict[str, Any]:
-    """Each count's recorded upper bound where it is below its grid, from the live record."""
+    """Each count's recorded upper bound where it is below its grid, from the live record:
+    the case records, then each current beyond-horizon row (`coverage.current_beyond_horizon`,
+    so a row marked above a classical construction is not read). The record's rows only,
+    not Göbel's constructions, which have no row (think-a75a)."""
     rows: dict[str, str] = {}
     for n in range((TABLE.start - 1) ** 2 + 1, HORIZON + 1):
         case = coverage.parse_case(ROOT / f"frontier/n-{n:03d}.md")
