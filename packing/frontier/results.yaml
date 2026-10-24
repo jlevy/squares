@@ -32703,7 +32703,7 @@ results:
     kind: formalization
     proves_kind: optimality
     registered: '2026-10-23'
-    landed: '2026-10-23'
+    landed: '2026-10-24'
     headline: >-
       Hosono reports a hypothesis-free Lean proof that `s(21) = 5`, by the point-only route
     claim: >-
@@ -32805,7 +32805,7 @@ results:
     kind: formalization
     proves_kind: optimality
     registered: '2026-10-23'
-    landed: '2026-10-23'
+    landed: '2026-10-24'
     headline: >-
       Hosono reports a Lean kernel proof that `s(59) = 8`, on Daniel's mixed-measure checker
     claim: >-
@@ -32901,7 +32901,7 @@ results:
     kind: formalization
     proves_kind: upper-bound
     registered: '2026-10-23'
-    landed: '2026-10-23'
+    landed: '2026-10-24'
     headline: >-
       Daniel reports Lean proofs of Fang's Theorems 1 and 2, `s(n² − n + 1) < n` for `n ≥ 15`
     claim: >-
