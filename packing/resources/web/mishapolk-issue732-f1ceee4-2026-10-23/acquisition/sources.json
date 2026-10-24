@@ -1,0 +1,2030 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-24T01:31Z",
+  "git_scope": "Blobless clone of Mishapolk/square-packing-records (history to the head 7e82c64, fetched 24 October), checked out sparsely at f1ceee4 (committed 2026-10-23T20:34:13Z and pushed at 20:34:22Z, 'Add 138 newly certified world records (N <= 1024) with exact open-container Weierstrass SAT verification'), the commit the author's comment on issue 732 of 20:35:12Z (issuecomment-6374211504) reports. f1ceee4 rewrites 138 certificates at 328 to 989, certified_bounds.json and upper_bounds.json, and adds .gitignore. The three commits after it, 34e59f3 and c0bf150 (pushed together at 21:28:42Z) and 7e82c64 (21:42:38Z), change only counts in the corpus and are read in receipts/later-commits.json. Retained: the 138 certificates the report-order walk of 24 October records as rows, README.md and LICENSE. Pinned by digest only: the other 252 certificates at 325 to 1024, unchanged since 17cc220 (30 of them byte-identical to the 17cc220 packet's retained copies), the five indexes, .gitignore, the author's checker, and Evan Daniel's verifier with its licence against the issue-678 packet's identical copies. The certificates in the corpus and above 1024 are pinned by the commit alone; no blob above 1024 was fetched, and no source file was executed.",
+  "sources": [
+    {
+      "id": "mishapolk-square-packing-records",
+      "source_url": "https://github.com/Mishapolk/square-packing-records",
+      "source_ref": "main",
+      "source_commit": "f1ceee4c1dd69f97d8e50e6ddaf1a14084dceda7",
+      "committed_utc": "2026-10-23T20:34:13Z",
+      "git_tree": "43b24f3761b36939c6f0ee278bb0ebf4f5989159",
+      "archived_path": "packing/resources/web/mishapolk-issue732-f1ceee4-2026-10-23/source",
+      "subtree_manifest": "packing/resources/web/mishapolk-issue732-f1ceee4-2026-10-23/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        ".gitignore",
+        "BOUND_VERIFIER_LICENSE.txt",
+        "LICENSE",
+        "README.md",
+        "certificates/SHA256SUMS",
+        "certificates/census.json",
+        "certificates/manifest.json",
+        "certificates/0000-0999/n328.cert",
+        "certificates/0000-0999/n329.cert",
+        "certificates/0000-0999/n330.cert",
+        "certificates/0000-0999/n331.cert",
+        "certificates/0000-0999/n332.cert",
+        "certificates/0000-0999/n333.cert",
+        "certificates/0000-0999/n334.cert",
+        "certificates/0000-0999/n335.cert",
+        "certificates/0000-0999/n336.cert",
+        "certificates/0000-0999/n337.cert",
+        "certificates/0000-0999/n338.cert",
+        "certificates/0000-0999/n339.cert",
+        "certificates/0000-0999/n340.cert",
+        "certificates/0000-0999/n341.cert",
+        "certificates/0000-0999/n342.cert",
+        "certificates/0000-0999/n343.cert",
+        "certificates/0000-0999/n344.cert",
+        "certificates/0000-0999/n362.cert",
+        "certificates/0000-0999/n363.cert",
+        "certificates/0000-0999/n364.cert",
+        "certificates/0000-0999/n365.cert",
+        "certificates/0000-0999/n366.cert",
+        "certificates/0000-0999/n367.cert",
+        "certificates/0000-0999/n368.cert",
+        "certificates/0000-0999/n369.cert",
+        "certificates/0000-0999/n370.cert",
+        "certificates/0000-0999/n371.cert",
+        "certificates/0000-0999/n372.cert",
+        "certificates/0000-0999/n373.cert",
+        "certificates/0000-0999/n374.cert",
+        "certificates/0000-0999/n375.cert",
+        "certificates/0000-0999/n376.cert",
+        "certificates/0000-0999/n377.cert",
+        "certificates/0000-0999/n378.cert",
+        "certificates/0000-0999/n379.cert",
+        "certificates/0000-0999/n380.cert",
+        "certificates/0000-0999/n381.cert",
+        "certificates/0000-0999/n382.cert",
+        "certificates/0000-0999/n401.cert",
+        "certificates/0000-0999/n402.cert",
+        "certificates/0000-0999/n403.cert",
+        "certificates/0000-0999/n404.cert",
+        "certificates/0000-0999/n405.cert",
+        "certificates/0000-0999/n406.cert",
+        "certificates/0000-0999/n407.cert",
+        "certificates/0000-0999/n408.cert",
+        "certificates/0000-0999/n409.cert",
+        "certificates/0000-0999/n410.cert",
+        "certificates/0000-0999/n411.cert",
+        "certificates/0000-0999/n412.cert",
+        "certificates/0000-0999/n413.cert",
+        "certificates/0000-0999/n414.cert",
+        "certificates/0000-0999/n415.cert",
+        "certificates/0000-0999/n416.cert",
+        "certificates/0000-0999/n417.cert",
+        "certificates/0000-0999/n418.cert",
+        "certificates/0000-0999/n419.cert",
+        "certificates/0000-0999/n420.cert",
+        "certificates/0000-0999/n421.cert",
+        "certificates/0000-0999/n422.cert",
+        "certificates/0000-0999/n442.cert",
+        "certificates/0000-0999/n443.cert",
+        "certificates/0000-0999/n444.cert",
+        "certificates/0000-0999/n445.cert",
+        "certificates/0000-0999/n446.cert",
+        "certificates/0000-0999/n447.cert",
+        "certificates/0000-0999/n448.cert",
+        "certificates/0000-0999/n449.cert",
+        "certificates/0000-0999/n450.cert",
+        "certificates/0000-0999/n451.cert",
+        "certificates/0000-0999/n452.cert",
+        "certificates/0000-0999/n453.cert",
+        "certificates/0000-0999/n454.cert",
+        "certificates/0000-0999/n455.cert",
+        "certificates/0000-0999/n456.cert",
+        "certificates/0000-0999/n457.cert",
+        "certificates/0000-0999/n458.cert",
+        "certificates/0000-0999/n459.cert",
+        "certificates/0000-0999/n460.cert",
+        "certificates/0000-0999/n461.cert",
+        "certificates/0000-0999/n462.cert",
+        "certificates/0000-0999/n463.cert",
+        "certificates/0000-0999/n464.cert",
+        "certificates/0000-0999/n485.cert",
+        "certificates/0000-0999/n486.cert",
+        "certificates/0000-0999/n487.cert",
+        "certificates/0000-0999/n488.cert",
+        "certificates/0000-0999/n489.cert",
+        "certificates/0000-0999/n490.cert",
+        "certificates/0000-0999/n491.cert",
+        "certificates/0000-0999/n492.cert",
+        "certificates/0000-0999/n493.cert",
+        "certificates/0000-0999/n494.cert",
+        "certificates/0000-0999/n495.cert",
+        "certificates/0000-0999/n496.cert",
+        "certificates/0000-0999/n497.cert",
+        "certificates/0000-0999/n498.cert",
+        "certificates/0000-0999/n499.cert",
+        "certificates/0000-0999/n500.cert",
+        "certificates/0000-0999/n501.cert",
+        "certificates/0000-0999/n502.cert",
+        "certificates/0000-0999/n503.cert",
+        "certificates/0000-0999/n504.cert",
+        "certificates/0000-0999/n505.cert",
+        "certificates/0000-0999/n506.cert",
+        "certificates/0000-0999/n507.cert",
+        "certificates/0000-0999/n508.cert",
+        "certificates/0000-0999/n509.cert",
+        "certificates/0000-0999/n530.cert",
+        "certificates/0000-0999/n531.cert",
+        "certificates/0000-0999/n532.cert",
+        "certificates/0000-0999/n533.cert",
+        "certificates/0000-0999/n534.cert",
+        "certificates/0000-0999/n535.cert",
+        "certificates/0000-0999/n536.cert",
+        "certificates/0000-0999/n537.cert",
+        "certificates/0000-0999/n538.cert",
+        "certificates/0000-0999/n539.cert",
+        "certificates/0000-0999/n540.cert",
+        "certificates/0000-0999/n541.cert",
+        "certificates/0000-0999/n542.cert",
+        "certificates/0000-0999/n543.cert",
+        "certificates/0000-0999/n544.cert",
+        "certificates/0000-0999/n545.cert",
+        "certificates/0000-0999/n546.cert",
+        "certificates/0000-0999/n547.cert",
+        "certificates/0000-0999/n548.cert",
+        "certificates/0000-0999/n549.cert",
+        "certificates/0000-0999/n550.cert",
+        "certificates/0000-0999/n551.cert",
+        "certificates/0000-0999/n552.cert",
+        "certificates/0000-0999/n553.cert",
+        "certificates/0000-0999/n554.cert",
+        "certificates/0000-0999/n555.cert",
+        "certificates/0000-0999/n577.cert",
+        "certificates/0000-0999/n578.cert",
+        "certificates/0000-0999/n579.cert",
+        "certificates/0000-0999/n580.cert",
+        "certificates/0000-0999/n581.cert",
+        "certificates/0000-0999/n582.cert",
+        "certificates/0000-0999/n583.cert",
+        "certificates/0000-0999/n584.cert",
+        "certificates/0000-0999/n585.cert",
+        "certificates/0000-0999/n586.cert",
+        "certificates/0000-0999/n587.cert",
+        "certificates/0000-0999/n588.cert",
+        "certificates/0000-0999/n589.cert",
+        "certificates/0000-0999/n590.cert",
+        "certificates/0000-0999/n591.cert",
+        "certificates/0000-0999/n592.cert",
+        "certificates/0000-0999/n593.cert",
+        "certificates/0000-0999/n594.cert",
+        "certificates/0000-0999/n595.cert",
+        "certificates/0000-0999/n596.cert",
+        "certificates/0000-0999/n597.cert",
+        "certificates/0000-0999/n598.cert",
+        "certificates/0000-0999/n599.cert",
+        "certificates/0000-0999/n600.cert",
+        "certificates/0000-0999/n601.cert",
+        "certificates/0000-0999/n602.cert",
+        "certificates/0000-0999/n603.cert",
+        "certificates/0000-0999/n626.cert",
+        "certificates/0000-0999/n627.cert",
+        "certificates/0000-0999/n628.cert",
+        "certificates/0000-0999/n629.cert",
+        "certificates/0000-0999/n630.cert",
+        "certificates/0000-0999/n631.cert",
+        "certificates/0000-0999/n632.cert",
+        "certificates/0000-0999/n633.cert",
+        "certificates/0000-0999/n634.cert",
+        "certificates/0000-0999/n635.cert",
+        "certificates/0000-0999/n636.cert",
+        "certificates/0000-0999/n637.cert",
+        "certificates/0000-0999/n638.cert",
+        "certificates/0000-0999/n639.cert",
+        "certificates/0000-0999/n640.cert",
+        "certificates/0000-0999/n641.cert",
+        "certificates/0000-0999/n642.cert",
+        "certificates/0000-0999/n643.cert",
+        "certificates/0000-0999/n644.cert",
+        "certificates/0000-0999/n645.cert",
+        "certificates/0000-0999/n646.cert",
+        "certificates/0000-0999/n647.cert",
+        "certificates/0000-0999/n648.cert",
+        "certificates/0000-0999/n649.cert",
+        "certificates/0000-0999/n650.cert",
+        "certificates/0000-0999/n651.cert",
+        "certificates/0000-0999/n652.cert",
+        "certificates/0000-0999/n653.cert",
+        "certificates/0000-0999/n654.cert",
+        "certificates/0000-0999/n677.cert",
+        "certificates/0000-0999/n678.cert",
+        "certificates/0000-0999/n679.cert",
+        "certificates/0000-0999/n680.cert",
+        "certificates/0000-0999/n681.cert",
+        "certificates/0000-0999/n682.cert",
+        "certificates/0000-0999/n683.cert",
+        "certificates/0000-0999/n684.cert",
+        "certificates/0000-0999/n685.cert",
+        "certificates/0000-0999/n686.cert",
+        "certificates/0000-0999/n687.cert",
+        "certificates/0000-0999/n688.cert",
+        "certificates/0000-0999/n689.cert",
+        "certificates/0000-0999/n690.cert",
+        "certificates/0000-0999/n691.cert",
+        "certificates/0000-0999/n692.cert",
+        "certificates/0000-0999/n693.cert",
+        "certificates/0000-0999/n694.cert",
+        "certificates/0000-0999/n695.cert",
+        "certificates/0000-0999/n696.cert",
+        "certificates/0000-0999/n697.cert",
+        "certificates/0000-0999/n698.cert",
+        "certificates/0000-0999/n699.cert",
+        "certificates/0000-0999/n700.cert",
+        "certificates/0000-0999/n701.cert",
+        "certificates/0000-0999/n702.cert",
+        "certificates/0000-0999/n703.cert",
+        "certificates/0000-0999/n704.cert",
+        "certificates/0000-0999/n705.cert",
+        "certificates/0000-0999/n706.cert",
+        "certificates/0000-0999/n730.cert",
+        "certificates/0000-0999/n731.cert",
+        "certificates/0000-0999/n732.cert",
+        "certificates/0000-0999/n733.cert",
+        "certificates/0000-0999/n734.cert",
+        "certificates/0000-0999/n735.cert",
+        "certificates/0000-0999/n736.cert",
+        "certificates/0000-0999/n737.cert",
+        "certificates/0000-0999/n738.cert",
+        "certificates/0000-0999/n739.cert",
+        "certificates/0000-0999/n740.cert",
+        "certificates/0000-0999/n741.cert",
+        "certificates/0000-0999/n742.cert",
+        "certificates/0000-0999/n743.cert",
+        "certificates/0000-0999/n744.cert",
+        "certificates/0000-0999/n745.cert",
+        "certificates/0000-0999/n746.cert",
+        "certificates/0000-0999/n747.cert",
+        "certificates/0000-0999/n748.cert",
+        "certificates/0000-0999/n749.cert",
+        "certificates/0000-0999/n750.cert",
+        "certificates/0000-0999/n751.cert",
+        "certificates/0000-0999/n752.cert",
+        "certificates/0000-0999/n753.cert",
+        "certificates/0000-0999/n754.cert",
+        "certificates/0000-0999/n755.cert",
+        "certificates/0000-0999/n756.cert",
+        "certificates/0000-0999/n757.cert",
+        "certificates/0000-0999/n758.cert",
+        "certificates/0000-0999/n759.cert",
+        "certificates/0000-0999/n760.cert",
+        "certificates/0000-0999/n785.cert",
+        "certificates/0000-0999/n786.cert",
+        "certificates/0000-0999/n787.cert",
+        "certificates/0000-0999/n788.cert",
+        "certificates/0000-0999/n789.cert",
+        "certificates/0000-0999/n790.cert",
+        "certificates/0000-0999/n791.cert",
+        "certificates/0000-0999/n792.cert",
+        "certificates/0000-0999/n793.cert",
+        "certificates/0000-0999/n794.cert",
+        "certificates/0000-0999/n795.cert",
+        "certificates/0000-0999/n796.cert",
+        "certificates/0000-0999/n797.cert",
+        "certificates/0000-0999/n798.cert",
+        "certificates/0000-0999/n799.cert",
+        "certificates/0000-0999/n800.cert",
+        "certificates/0000-0999/n801.cert",
+        "certificates/0000-0999/n802.cert",
+        "certificates/0000-0999/n803.cert",
+        "certificates/0000-0999/n804.cert",
+        "certificates/0000-0999/n805.cert",
+        "certificates/0000-0999/n806.cert",
+        "certificates/0000-0999/n807.cert",
+        "certificates/0000-0999/n808.cert",
+        "certificates/0000-0999/n809.cert",
+        "certificates/0000-0999/n810.cert",
+        "certificates/0000-0999/n811.cert",
+        "certificates/0000-0999/n812.cert",
+        "certificates/0000-0999/n813.cert",
+        "certificates/0000-0999/n814.cert",
+        "certificates/0000-0999/n815.cert",
+        "certificates/0000-0999/n816.cert",
+        "certificates/0000-0999/n817.cert",
+        "certificates/0000-0999/n842.cert",
+        "certificates/0000-0999/n843.cert",
+        "certificates/0000-0999/n844.cert",
+        "certificates/0000-0999/n845.cert",
+        "certificates/0000-0999/n846.cert",
+        "certificates/0000-0999/n847.cert",
+        "certificates/0000-0999/n848.cert",
+        "certificates/0000-0999/n849.cert",
+        "certificates/0000-0999/n850.cert",
+        "certificates/0000-0999/n851.cert",
+        "certificates/0000-0999/n852.cert",
+        "certificates/0000-0999/n853.cert",
+        "certificates/0000-0999/n854.cert",
+        "certificates/0000-0999/n855.cert",
+        "certificates/0000-0999/n856.cert",
+        "certificates/0000-0999/n857.cert",
+        "certificates/0000-0999/n858.cert",
+        "certificates/0000-0999/n859.cert",
+        "certificates/0000-0999/n860.cert",
+        "certificates/0000-0999/n861.cert",
+        "certificates/0000-0999/n862.cert",
+        "certificates/0000-0999/n863.cert",
+        "certificates/0000-0999/n864.cert",
+        "certificates/0000-0999/n865.cert",
+        "certificates/0000-0999/n866.cert",
+        "certificates/0000-0999/n867.cert",
+        "certificates/0000-0999/n868.cert",
+        "certificates/0000-0999/n869.cert",
+        "certificates/0000-0999/n870.cert",
+        "certificates/0000-0999/n871.cert",
+        "certificates/0000-0999/n872.cert",
+        "certificates/0000-0999/n873.cert",
+        "certificates/0000-0999/n874.cert",
+        "certificates/0000-0999/n875.cert",
+        "certificates/0000-0999/n901.cert",
+        "certificates/0000-0999/n902.cert",
+        "certificates/0000-0999/n903.cert",
+        "certificates/0000-0999/n904.cert",
+        "certificates/0000-0999/n905.cert",
+        "certificates/0000-0999/n906.cert",
+        "certificates/0000-0999/n907.cert",
+        "certificates/0000-0999/n908.cert",
+        "certificates/0000-0999/n909.cert",
+        "certificates/0000-0999/n910.cert",
+        "certificates/0000-0999/n911.cert",
+        "certificates/0000-0999/n912.cert",
+        "certificates/0000-0999/n913.cert",
+        "certificates/0000-0999/n914.cert",
+        "certificates/0000-0999/n915.cert",
+        "certificates/0000-0999/n916.cert",
+        "certificates/0000-0999/n917.cert",
+        "certificates/0000-0999/n918.cert",
+        "certificates/0000-0999/n919.cert",
+        "certificates/0000-0999/n920.cert",
+        "certificates/0000-0999/n921.cert",
+        "certificates/0000-0999/n922.cert",
+        "certificates/0000-0999/n923.cert",
+        "certificates/0000-0999/n924.cert",
+        "certificates/0000-0999/n925.cert",
+        "certificates/0000-0999/n926.cert",
+        "certificates/0000-0999/n927.cert",
+        "certificates/0000-0999/n928.cert",
+        "certificates/0000-0999/n929.cert",
+        "certificates/0000-0999/n930.cert",
+        "certificates/0000-0999/n931.cert",
+        "certificates/0000-0999/n932.cert",
+        "certificates/0000-0999/n933.cert",
+        "certificates/0000-0999/n934.cert",
+        "certificates/0000-0999/n935.cert",
+        "certificates/0000-0999/n962.cert",
+        "certificates/0000-0999/n963.cert",
+        "certificates/0000-0999/n964.cert",
+        "certificates/0000-0999/n965.cert",
+        "certificates/0000-0999/n966.cert",
+        "certificates/0000-0999/n967.cert",
+        "certificates/0000-0999/n968.cert",
+        "certificates/0000-0999/n969.cert",
+        "certificates/0000-0999/n970.cert",
+        "certificates/0000-0999/n971.cert",
+        "certificates/0000-0999/n972.cert",
+        "certificates/0000-0999/n973.cert",
+        "certificates/0000-0999/n974.cert",
+        "certificates/0000-0999/n975.cert",
+        "certificates/0000-0999/n976.cert",
+        "certificates/0000-0999/n977.cert",
+        "certificates/0000-0999/n978.cert",
+        "certificates/0000-0999/n979.cert",
+        "certificates/0000-0999/n980.cert",
+        "certificates/0000-0999/n981.cert",
+        "certificates/0000-0999/n982.cert",
+        "certificates/0000-0999/n983.cert",
+        "certificates/0000-0999/n984.cert",
+        "certificates/0000-0999/n985.cert",
+        "certificates/0000-0999/n986.cert",
+        "certificates/0000-0999/n987.cert",
+        "certificates/0000-0999/n988.cert",
+        "certificates/0000-0999/n989.cert",
+        "certificates/0000-0999/n990.cert",
+        "certificates/0000-0999/n991.cert",
+        "certificates/0000-0999/n992.cert",
+        "certificates/0000-0999/n993.cert",
+        "certificates/0000-0999/n994.cert",
+        "certificates/0000-0999/n995.cert",
+        "certificates/0000-0999/n996.cert",
+        "certificates/0000-0999/n997.cert",
+        "certificates/0000-0999/n998.cert",
+        "certified_bounds.json",
+        "check_packing.py",
+        "upper_bounds.json",
+        "verify_bound_certificate.py"
+      ],
+      "subtree_file_count": 401,
+      "subtree_total_bytes": 62808578,
+      "retained_file_count": 140,
+      "retained_total_bytes": 18869805,
+      "compressed": [],
+      "pinned_only": [
+        {
+          "path": ".gitignore",
+          "bytes": 13,
+          "sha256": "32dae3052f331ee34d628ef535709b301259a45df7c7522c4d35dcf49873f00b",
+          "reason": "A one-line ignore rule (__pycache__/) that f1ceee4 adds; it states no result. Pinned by digest."
+        },
+        {
+          "path": "BOUND_VERIFIER_LICENSE.txt",
+          "bytes": 1068,
+          "sha256": "c51886c0f7e6724a7d89fc22cb237a1688ba1bbff04cb21a13b8e1a01fb15578",
+          "reason": "The checker's MIT licence (Copyright (c) 2026 Evan Daniel), byte-identical to the copy the 18 October packet retains.",
+          "identical_to": "packing/resources/web/couzo-issue678-2026-10-18/source/BOUND_VERIFIER_LICENSE.txt"
+        },
+        {
+          "path": "certificates/0000-0999/n329.cert",
+          "bytes": 78224,
+          "sha256": "73334b98ff7d364c653ffc4433b3962285ca4e6485a462e636c167aaa075c336",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n330.cert",
+          "bytes": 42591,
+          "sha256": "d4678fbbf945af31edc710d0aee3a96ccdbcf2ecb70656e761bf1602060194b7",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n331.cert",
+          "bytes": 66696,
+          "sha256": "6b153c7490f7f2ac31a766f88464a37003373c6658584eabcb7695a02d3e66a5",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n332.cert",
+          "bytes": 75859,
+          "sha256": "0b7ceaea2150a126b370ca1da1595aeb67c5203117378c5256163013192a46fd",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n333.cert",
+          "bytes": 74273,
+          "sha256": "eb8ac81c202c8f296550869890cf3b6c7a3eb73c0df5c319af6111e67511fe25",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n334.cert",
+          "bytes": 69415,
+          "sha256": "27cfc3a3d1e2e66a280839e7d4d1382eaa15f06c90064d177df44fbc2e9da0ad",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n336.cert",
+          "bytes": 45507,
+          "sha256": "8c505da7e70d75efc9eb87a70f9ce1028fec51f3a77250008dcec9e3bd4d6ca5",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n337.cert",
+          "bytes": 46197,
+          "sha256": "df11d37d8c7fda159f0580d8a8dd87e4c3291cf097c4bb215e1ac72a19da748c",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n338.cert",
+          "bytes": 50593,
+          "sha256": "15afbdaead25950f9bcf51599751bdf60be7ea4f662930ef84ca9a2139c9b150",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n339.cert",
+          "bytes": 44266,
+          "sha256": "22111409d656ad985586487b79d2ae6a05c9e8b4adf3d7a5e44cfc5b7d14c4c7",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n340.cert",
+          "bytes": 54253,
+          "sha256": "3f0c0788131a5b96f058c04a0bb34392e8e33ae9319c37227f0ec0453881eb06",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n341.cert",
+          "bytes": 55684,
+          "sha256": "c8cb93c2e6bf33800105b54d499a9298d52c89122134fffb5b995d44a6d04923",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n342.cert",
+          "bytes": 39669,
+          "sha256": "9fc599e8d8df3c003948f05a9a8a587d0dccc4b3770ec96680be347b3207a0b2",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n344.cert",
+          "bytes": 44296,
+          "sha256": "272f90ac8e4e1e4a8152ab0ab61b97e4d9b8e272952c5f7e3814b0d6bbe8ae0b",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n362.cert",
+          "bytes": 60742,
+          "sha256": "67c3fb965eea6aa680ebb807a1d2c50ba84f0e97857c5f1fb537c55501419d2e",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n363.cert",
+          "bytes": 73564,
+          "sha256": "48cdecc495523c78f501a932394b91055d69a1dd893aa1d141aa98a74568cdaa",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n364.cert",
+          "bytes": 60179,
+          "sha256": "4b8773a2921f88e1c7bf98d6d82191bf84424fdf429ed049d62ade3a969ad69f",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n366.cert",
+          "bytes": 83731,
+          "sha256": "59be34cea5abafdb8c04a66ac02742e8fe36ebdbc724754d256085a837edf6a7",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n367.cert",
+          "bytes": 33013,
+          "sha256": "26d36f86f5e1f7b8a4e169757cf22a97edd1aba91882696b4a9cb6f31cd8f838",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n368.cert",
+          "bytes": 33090,
+          "sha256": "1becee74e2e3f497b892f9bc66ebe02f3cad5c1bb0c3eb87011726e8a03abf3e",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n369.cert",
+          "bytes": 83759,
+          "sha256": "a4e11e7b01243b44ee71d5194d10440034d166c30f38afe41eb0e76803bfe15f",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n370.cert",
+          "bytes": 44738,
+          "sha256": "1bd0618236fdf8755f908b74df5fc6518b1d3c588f4613627ab4604c304d8d4d",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n371.cert",
+          "bytes": 74811,
+          "sha256": "6465586467240f6a06160b5a20f9b47ed12c6ecca354aedc7c0b579cdb7e091a",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n372.cert",
+          "bytes": 62346,
+          "sha256": "ce471232ab5e0679ceb8c52b4b85d609f9f28ac715449d556cdc6fab56e9041b",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Retained by the 17cc220 packet; pinned by digest here, not replayed or recorded here.",
+          "identical_to": "packing/resources/web/mishapolk-issue732-2026-10-22/source/certificates/0000-0999/n372.cert"
+        },
+        {
+          "path": "certificates/0000-0999/n373.cert",
+          "bytes": 50303,
+          "sha256": "90129b66cf8bc77ca75d84f42dff51f44abd7b99b5b5c170f89f6e569a413d01",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n374.cert",
+          "bytes": 52540,
+          "sha256": "ebade1d6a58c56315ed83f8409c9203ce40ee5f764fb5b51cca93367921effa1",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n375.cert",
+          "bytes": 65512,
+          "sha256": "17facf651f71256a934bae28a0b6ee03d7a537d15284ad323da5cda19e6634b4",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n376.cert",
+          "bytes": 152605,
+          "sha256": "1433a9b5d2f70f05420418285be0f947efcb6627e8ebebb713e3e59a05010d26",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n377.cert",
+          "bytes": 48333,
+          "sha256": "496bb872df2def0ad6a1c1cb23fe340e4514549f0f25c1fb0dddb52bcb933017",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n378.cert",
+          "bytes": 51770,
+          "sha256": "966f0ef3d4325001caf41f3241e4772d5879d1f5eb4c975f595d178221aa75bb",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n379.cert",
+          "bytes": 49836,
+          "sha256": "6521ee0d9bd0a1152cafdbb65402c6500065a2a9815a72adcfe4721fa865cb96",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n380.cert",
+          "bytes": 48192,
+          "sha256": "84023e2535b25fecaaa83e480a8fa943f0877e591301d84a6dc6f0b785d25f9d",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n381.cert",
+          "bytes": 48910,
+          "sha256": "dc6f86561481e1fe0eda1853398386885fbf2497d17087bc6ef18e22bb8ec93a",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n382.cert",
+          "bytes": 55274,
+          "sha256": "1097e4caaec6c02be27bafe925ce147120c9f46f8cbd2f92137acb4fed9f59b4",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n401.cert",
+          "bytes": 66508,
+          "sha256": "ad41a8ae2658c9ef2ae6e5e315bed27affe6fcafa28565ec49f5a8a72a27eef8",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n402.cert",
+          "bytes": 79330,
+          "sha256": "6129c11ec1704008477f0d0aa5844c316637f5025f3fb5d1a99bba8f4ac94ccd",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n403.cert",
+          "bytes": 94077,
+          "sha256": "cf7b1dac00509c74199056c3878558d2d8c7c3f07928009f6bb3c5822d2c3ae0",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n405.cert",
+          "bytes": 89536,
+          "sha256": "df6c1a122082fc5a6706144be21fb19a054de5d9eba56f5de04872d916b067eb",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n406.cert",
+          "bytes": 66596,
+          "sha256": "405710589dd62e4009219dd1d33266be83ff3776a0ba465c7b1f3b882472807c",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n407.cert",
+          "bytes": 66726,
+          "sha256": "2fefa361938a317a658a2dc6a06fa9b1c6fef0491640ad1e3a09a6df3211b010",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n408.cert",
+          "bytes": 120201,
+          "sha256": "f5dc7cde34b47acde41e542a141b374351bd95a2b56618ce76885838c9f7721e",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n409.cert",
+          "bytes": 69137,
+          "sha256": "7272f47bbc0a4f5ae752dea737e674e22174e341629225b5b56368e9a5c6f1ab",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Retained by the 17cc220 packet; pinned by digest here, not replayed or recorded here.",
+          "identical_to": "packing/resources/web/mishapolk-issue732-2026-10-22/source/certificates/0000-0999/n409.cert"
+        },
+        {
+          "path": "certificates/0000-0999/n411.cert",
+          "bytes": 67253,
+          "sha256": "eea3cc874a5b4bd3037ab9dfbd062cde271610d1d592f9eafa801dc68914a4a4",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Retained by the 17cc220 packet; pinned by digest here, not replayed or recorded here.",
+          "identical_to": "packing/resources/web/mishapolk-issue732-2026-10-22/source/certificates/0000-0999/n411.cert"
+        },
+        {
+          "path": "certificates/0000-0999/n412.cert",
+          "bytes": 50839,
+          "sha256": "9187ee9466c19fe59ad419b91a4398eaa04995b8e42a83f567dfd0eb76fd1e52",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n414.cert",
+          "bytes": 100103,
+          "sha256": "8045c455a0341c5ba7fe555a58a069a80f3e119ed933ebbcef71517a515bc8a0",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n415.cert",
+          "bytes": 189639,
+          "sha256": "1f24b86ffc3c82bccb54af5eaec7d7702c1db66394c532af3ce14ca1d7f91770",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n416.cert",
+          "bytes": 36346,
+          "sha256": "e78d0c306b7a702db14c2efb1c2a147440c34914fb0a811bf3c2d47f5b651ec0",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n417.cert",
+          "bytes": 72103,
+          "sha256": "0587edbfd08b60840cc13f8bbc938dfa9ac2f3b9ecda416d5bd02a0588b3555b",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n418.cert",
+          "bytes": 57021,
+          "sha256": "26dbc618e210b35a0a6f03d82fc4df6a0c76d73be1f6d82bd567bf62187090df",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n419.cert",
+          "bytes": 57441,
+          "sha256": "05ac2f24b1122fa5b1bf0ff0e34e677d0ccbddea7e0f063ff81da4b03e696c57",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n420.cert",
+          "bytes": 57616,
+          "sha256": "0fe6f10d29f855e96024e7bac25e38dad993c6dc33189ed2cf8b79a590fef1ca",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n421.cert",
+          "bytes": 71621,
+          "sha256": "7c6200a0928714259c86a849efa0a51e2bba457d850500c2d5c5b5193f843aa4",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n422.cert",
+          "bytes": 56046,
+          "sha256": "17c171890207d889d5e8f9a2019cebeee8f87f27152b5526260629cfbadbb142",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n442.cert",
+          "bytes": 72570,
+          "sha256": "22c9bf8a81fba936323ddb6f74970e4b164409eff9878ae6325c58b6f21204f4",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n443.cert",
+          "bytes": 85392,
+          "sha256": "a456231baa1e07e3c0b3273ef7748f337ae8f7fdb64c4222e3997f7647906863",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n444.cert",
+          "bytes": 100221,
+          "sha256": "fab024314f64094212869e58c8fa66ee3751e7d610545af439240cdfb0af45ca",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n445.cert",
+          "bytes": 40606,
+          "sha256": "898a193fe5b85f4ab338729a390c20dc15b2cf8c6bd10869325a86033ef802d9",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n446.cert",
+          "bytes": 95639,
+          "sha256": "de590a6837e62264f7eeb75df2d1ff9c9ae5482e10f2985621bba8b23dda9cdc",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n447.cert",
+          "bytes": 69361,
+          "sha256": "e8096753c84937be44ad72d47a7d252671a7ff46b6c0fb296c93b9ea690496fa",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n448.cert",
+          "bytes": 72050,
+          "sha256": "4334114ad7b431fe6770059141f0448d6182f4ab9865ad4294b55699472337f5",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n449.cert",
+          "bytes": 128887,
+          "sha256": "e4db9d583f86e6c0702a730b95114a54f7808816a25cebe4fd0215bc0875102e",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n450.cert",
+          "bytes": 74296,
+          "sha256": "2857f73bed154905aed24bc18a2fca8a8f86f97c8a413e3e21823692befe900b",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Retained by the 17cc220 packet; pinned by digest here, not replayed or recorded here.",
+          "identical_to": "packing/resources/web/mishapolk-issue732-2026-10-22/source/certificates/0000-0999/n450.cert"
+        },
+        {
+          "path": "certificates/0000-0999/n451.cert",
+          "bytes": 78659,
+          "sha256": "b59eab2680018e3cfa649f716886fb1f412a7dfa1073377d248fa494e7dfb8f4",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Retained by the 17cc220 packet; pinned by digest here, not replayed or recorded here.",
+          "identical_to": "packing/resources/web/mishapolk-issue732-2026-10-22/source/certificates/0000-0999/n451.cert"
+        },
+        {
+          "path": "certificates/0000-0999/n452.cert",
+          "bytes": 56765,
+          "sha256": "fdd961bc447f1d416fbf91847b28e55681209f2aadff0a8ef27f015f1a123e1b",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n453.cert",
+          "bytes": 77552,
+          "sha256": "1290dc93458a99e68a68555e181bf4f57eabf05853cfa45188e601b7480038d3",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Retained by the 17cc220 packet; pinned by digest here, not replayed or recorded here.",
+          "identical_to": "packing/resources/web/mishapolk-issue732-2026-10-22/source/certificates/0000-0999/n453.cert"
+        },
+        {
+          "path": "certificates/0000-0999/n457.cert",
+          "bytes": 73866,
+          "sha256": "39c3310d32d2e3769edcd8a85be29cbca8e37068155e873bf995cc1bc0e68f46",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n460.cert",
+          "bytes": 62735,
+          "sha256": "01836181ee158bf2c0e6a5dc0ac9e03fefccea1232829a69fa762b5ea460df66",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n461.cert",
+          "bytes": 75408,
+          "sha256": "594c6e0607efb723e2aa0881a07e5154689a215ee9c50bbdd17a30ff718e4a4b",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Retained by the 17cc220 packet; pinned by digest here, not replayed or recorded here.",
+          "identical_to": "packing/resources/web/mishapolk-issue732-2026-10-22/source/certificates/0000-0999/n461.cert"
+        },
+        {
+          "path": "certificates/0000-0999/n462.cert",
+          "bytes": 79736,
+          "sha256": "dc59a3872aa4376174233213cb1e9a7de0541cf6b4bf29b56d13c67b6340e685",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n464.cert",
+          "bytes": 70242,
+          "sha256": "ef9ad091d9ca3043eb82cf44860d5639ef62698f79f7e3d3b61e45dd3968a4b4",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n485.cert",
+          "bytes": 78928,
+          "sha256": "51fca6d61f8dfdae71bbbe91d45d5456b0f32dfdbb5f963992aa65f1b98f7958",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n486.cert",
+          "bytes": 91750,
+          "sha256": "576652f53746fa5792a5bfba3aeef36c477fee2380fe836021b882ccdfe707c0",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n487.cert",
+          "bytes": 106665,
+          "sha256": "557568a6cfe83f2a29b72c511f87e5ae79a965ac6e8805929b991fd0b0841bdf",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n488.cert",
+          "bytes": 80228,
+          "sha256": "45519356459bfd88a8ea672fbd501f62aec66f6703328001f4b302b1a634b8ee",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n489.cert",
+          "bytes": 43908,
+          "sha256": "b34fe4c1c0830865ca36e760823a9f00ea13197b890f5916f8b5c5d8520cdb1b",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n491.cert",
+          "bytes": 77634,
+          "sha256": "64dd2eac3d8eb060966ad81d6743cf6cb5b9acccabd006ad6689dd16538912b2",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n492.cert",
+          "bytes": 137997,
+          "sha256": "e85133953e7d1e8d35e75f6c53908853c316ed3cd77520571772427f5408f8d8",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n493.cert",
+          "bytes": 38294,
+          "sha256": "9b585062d82926094d7abbadedd997ba3dc443a484c95b3465b929aac64878f6",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n494.cert",
+          "bytes": 84070,
+          "sha256": "40649180ee0693b9df9df61c08698048680866c85c7fa2aa258b5747f43c8f88",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Retained by the 17cc220 packet; pinned by digest here, not replayed or recorded here.",
+          "identical_to": "packing/resources/web/mishapolk-issue732-2026-10-22/source/certificates/0000-0999/n494.cert"
+        },
+        {
+          "path": "certificates/0000-0999/n495.cert",
+          "bytes": 85813,
+          "sha256": "b2a925de40c0ab034dec023844b5d5d21a07c063ce2e68a6db3eba6966b1ad24",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Retained by the 17cc220 packet; pinned by digest here, not replayed or recorded here.",
+          "identical_to": "packing/resources/web/mishapolk-issue732-2026-10-22/source/certificates/0000-0999/n495.cert"
+        },
+        {
+          "path": "certificates/0000-0999/n499.cert",
+          "bytes": 89365,
+          "sha256": "3ffad8dda5401d290976879c90c51b5833212321fbcd547b3bb85891dd871ad2",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n503.cert",
+          "bytes": 146550,
+          "sha256": "b5afe4db876a309522e09e0e29d1de46d2a4e401d780fb9b542584a9e4ede13a",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n506.cert",
+          "bytes": 56766,
+          "sha256": "c2aa61c3981236d84e8cf1ff47d87f35fe7523961878a607b6a1355189acb90e",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Retained by the 17cc220 packet; pinned by digest here, not replayed or recorded here.",
+          "identical_to": "packing/resources/web/mishapolk-issue732-2026-10-22/source/certificates/0000-0999/n506.cert"
+        },
+        {
+          "path": "certificates/0000-0999/n507.cert",
+          "bytes": 67887,
+          "sha256": "c813779ee514b147a3bf99b7fd2221545eb75caedd24bac4e129dd6450050301",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n508.cert",
+          "bytes": 67595,
+          "sha256": "6bbc1d600e741cef3a7adb549385bc0eef216989c05edce92a30a55f14533a58",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n530.cert",
+          "bytes": 85582,
+          "sha256": "054da1af88a85e568d6a0c6a97fa9b9df732f15898d936e17bdd72862fdd9ac8",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n531.cert",
+          "bytes": 98404,
+          "sha256": "eb12d977e0d9ed5bdeba8e11e8f724988b6515cc20f76b2306c0691634384f98",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n532.cert",
+          "bytes": 113409,
+          "sha256": "24b2dd455a4f88b12409a3845fb84aab3a38eb46ae214020d64dd195d5356537",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n533.cert",
+          "bytes": 85982,
+          "sha256": "525a3d37087595eacdfb45f3d8773f677537aa359c1eec0b7eebafb1bc8604d4",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n534.cert",
+          "bytes": 87156,
+          "sha256": "a43d374f68a78efd23d839a480e791d97e7a995bd1dbed691ed95e49d2c1e93e",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n536.cert",
+          "bytes": 70559,
+          "sha256": "699debef886d9dda6883e049737e016d7b14e5a6029e88b3b3e8746f7525ea4d",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n537.cert",
+          "bytes": 147531,
+          "sha256": "04ca5682c3cba66c4f33a1d3101ff01b4dd16a271237e9119f06d0d3389a230d",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n538.cert",
+          "bytes": 41660,
+          "sha256": "a3bb8b4684871d71fe5b421f10faf0e0998aca1a84c2f44aba234708cb9cb15c",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n539.cert",
+          "bytes": 69437,
+          "sha256": "18b0434f27d728a67420cd08f5031f4aae4b432404daf4c93b9d16a31a404baf",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Retained by the 17cc220 packet; pinned by digest here, not replayed or recorded here.",
+          "identical_to": "packing/resources/web/mishapolk-issue732-2026-10-22/source/certificates/0000-0999/n539.cert"
+        },
+        {
+          "path": "certificates/0000-0999/n540.cert",
+          "bytes": 91476,
+          "sha256": "d197fdd9f9aa33d5a4d9317a3c2aca73b6598f4d7da681035796790573bcb1d4",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Retained by the 17cc220 packet; pinned by digest here, not replayed or recorded here.",
+          "identical_to": "packing/resources/web/mishapolk-issue732-2026-10-22/source/certificates/0000-0999/n540.cert"
+        },
+        {
+          "path": "certificates/0000-0999/n541.cert",
+          "bytes": 47836,
+          "sha256": "e28c0acbbce4fa9514eb4f3d5d8c177235f34cff07646cc40a7492c5a29a7514",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n542.cert",
+          "bytes": 47912,
+          "sha256": "9550c48435757585f7e19965b5a1050edb207b671baf0290d823765afb1af430",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n543.cert",
+          "bytes": 47988,
+          "sha256": "c0601ba7cdeb3296bc6b6d7b89b0a8fa0b19e3cca3294a8d3da1fdc46a2d7527",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n551.cert",
+          "bytes": 69511,
+          "sha256": "0ec0b8dd4079fae3817e03f88a4f105dcce81a3e6319936d47ee6ad41d76cc2b",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n552.cert",
+          "bytes": 73265,
+          "sha256": "ed3677a22e99d3a75a86117c5438fcd2f51fbaa1a45e701695f00382b51d2d6c",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n553.cert",
+          "bytes": 95201,
+          "sha256": "dd2456a49a287016ec887d4892f549cacb1172c7d5f5370c51fdff3feefe9ed0",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n555.cert",
+          "bytes": 71940,
+          "sha256": "2cff867c24b7b0b4c1cfb040d5235936c9af451aba8b8813758220bfa321862c",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n577.cert",
+          "bytes": 92532,
+          "sha256": "9494a389f79b3e54d8305471098eac5c79eeadbbcc59a3fadd8eb7f7593cfa52",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n578.cert",
+          "bytes": 105354,
+          "sha256": "d9d352cd8cb1911ea1cfa0c88d05017beba2744d0d8da4ad59330dd33616e4a9",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n579.cert",
+          "bytes": 120453,
+          "sha256": "11b5bcf2dad3d72b10466807b3e31b336253766716236f272b6da44038daa694",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n580.cert",
+          "bytes": 91992,
+          "sha256": "21c611691331ae9c723364da880f508b2219f46fd438a8a9b4fc8ea8bad02014",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n581.cert",
+          "bytes": 93166,
+          "sha256": "2387ec59184ac41a8d4cec5a893be706db7b022c544b5fe0c569c349dcb67363",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n583.cert",
+          "bytes": 104368,
+          "sha256": "abeefc7d4793aadb429fbbae22a7d7751b90fffd2c7ef9923c339368c4197968",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Retained by the 17cc220 packet; pinned by digest here, not replayed or recorded here.",
+          "identical_to": "packing/resources/web/mishapolk-issue732-2026-10-22/source/certificates/0000-0999/n583.cert"
+        },
+        {
+          "path": "certificates/0000-0999/n585.cert",
+          "bytes": 89631,
+          "sha256": "3cea97c2cdbb30f77b8f78d20cd1a008c9d00bd7d57fdee9b2e3f3509267f2ac",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n586.cert",
+          "bytes": 45390,
+          "sha256": "db1324d3d0fff94218452679baa11e8d701f66f43c24bfbad747f59ce0b6eec2",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n587.cert",
+          "bytes": 97393,
+          "sha256": "bfd77754771d91cb1bf6ed91427c946c0f9d352454b8a2b430e51ed6b50b9d04",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Retained by the 17cc220 packet; pinned by digest here, not replayed or recorded here.",
+          "identical_to": "packing/resources/web/mishapolk-issue732-2026-10-22/source/certificates/0000-0999/n587.cert"
+        },
+        {
+          "path": "certificates/0000-0999/n588.cert",
+          "bytes": 95589,
+          "sha256": "c0f14b289d9d9d25f60348b6b53a02639489dfac4a3f283441c44963c5debc1c",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n589.cert",
+          "bytes": 95716,
+          "sha256": "ff6e1d3aa89f2ed314b230deabe9e3c2b37f2697dec7f11daee31d87b028baed",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n590.cert",
+          "bytes": 95843,
+          "sha256": "f8c39d4fa143b465bb52ad0993d86e50ec8956bd97e3303ff14b03cff54433cd",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n595.cert",
+          "bytes": 210339,
+          "sha256": "c17f69e2421f2abe352b29f127eadaf7fc6499b61fff520feba09467629bb234",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n601.cert",
+          "bytes": 76596,
+          "sha256": "a2c3d8852be34ebcabe2696ec0ebca48c17aa1adad46a2f31e156e8a89f68e0b",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n603.cert",
+          "bytes": 89390,
+          "sha256": "89a8d85335ea384a8d61df918bc9c97f5add3b3314e439d9fe823321c5462130",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n626.cert",
+          "bytes": 55611,
+          "sha256": "fe655df01d973782359ebee9c56def2f1bf31da39656fb0af9e78dca910baa79",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n627.cert",
+          "bytes": 112600,
+          "sha256": "8a61d24922cbff9a3d053aecd26989c12327e638de52fcdda2f33f846e1c5a6c",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n628.cert",
+          "bytes": 127797,
+          "sha256": "86afe29fb667c4d9d32170ee9d5f97eef4b890ee500126834d7c16d4553c0225",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n629.cert",
+          "bytes": 98258,
+          "sha256": "1ce4c70be49e0626c37c40ac5feba6c0a4da20cfa05827e707682d2e5bedddd8",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n630.cert",
+          "bytes": 99432,
+          "sha256": "3a5d760f985afaf4b2a824695786b53ad5d2197ea9b7ff9186fa5e918f133c4f",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n632.cert",
+          "bytes": 110535,
+          "sha256": "e5ecc79d20d1851abd0d8420f6c7ba2be086a1ebecd5306e34a1dc3ff5d23767",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Retained by the 17cc220 packet; pinned by digest here, not replayed or recorded here.",
+          "identical_to": "packing/resources/web/mishapolk-issue732-2026-10-22/source/certificates/0000-0999/n632.cert"
+        },
+        {
+          "path": "certificates/0000-0999/n634.cert",
+          "bytes": 95995,
+          "sha256": "77a85313b066734dbf923a231cca5b63e894c9efcbc337d39e3bcf7a2cbfaa18",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n635.cert",
+          "bytes": 49286,
+          "sha256": "9689e3d6a47bfa7f097f6e3a7eb12db97056b1f042d0229ff2dbcd83f11aea8d",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n636.cert",
+          "bytes": 56370,
+          "sha256": "4a56e8567deae3893304bfe1c55d5013002dd3a6b8c95a67654247da3c5e5110",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n638.cert",
+          "bytes": 101933,
+          "sha256": "3dc8707df022ddd8a8c37b17d12cf50f0b660356a1ddc2b3c18423c18bea2159",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n639.cert",
+          "bytes": 102060,
+          "sha256": "cebc27fc02075b1917597535cde6257c2f93cd641c22e9189e5ec13a1f27aa85",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n641.cert",
+          "bytes": 80789,
+          "sha256": "172636bf8c0fb4c0ed18bcbb3b8ec50daf95f16885c9e06b14f6b069737969ed",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n642.cert",
+          "bytes": 79903,
+          "sha256": "2a9bc8f0b4c8c477f9b2a5f11e494f98bd3d8042277a2746a22697b723ceed10",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n649.cert",
+          "bytes": 88220,
+          "sha256": "8dff31cdaa4f9c1fc11c932ea9a0d92a6edac9f2e4336570c2f2e6b00d1ad2d2",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Retained by the 17cc220 packet; pinned by digest here, not replayed or recorded here.",
+          "identical_to": "packing/resources/web/mishapolk-issue732-2026-10-22/source/certificates/0000-0999/n649.cert"
+        },
+        {
+          "path": "certificates/0000-0999/n650.cert",
+          "bytes": 88360,
+          "sha256": "838f4f3af345e0ee072f04a4e43a540451e32179e408c1736ee526424bb8eda7",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n652.cert",
+          "bytes": 89236,
+          "sha256": "b54a28e4b3baa987dfc7947018a7f6a064bd1b177c4f061ba356ffe91203003b",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n677.cert",
+          "bytes": 110335,
+          "sha256": "4d3192d0b7a0e41ea5f2be2a23b8a22362b07b73c6decee1a55b8a0b9befe6ed",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n678.cert",
+          "bytes": 120142,
+          "sha256": "8f1b56313379644fe2185a57fbfdf17c14dfe51b3747a7c8a02d57eb9f93bb4e",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n679.cert",
+          "bytes": 135441,
+          "sha256": "3b9883ef1cba01e747cbe45746aa900a23319ee1ddbc2017b2af10a46e9a6e73",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n680.cert",
+          "bytes": 104780,
+          "sha256": "779b3d6c5e2a2dda31fd44de18870b3d64a31438ff918d6cdcb32576442b636f",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n681.cert",
+          "bytes": 105954,
+          "sha256": "c48dc9422d2340d3ed2e6264a6e258f3fbed2398a02aa0c4b6ed4ce13739802b",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n683.cert",
+          "bytes": 116956,
+          "sha256": "d27db350077a7def1fb16bf1ce6e402a36de2ec171dc75679348e00e67913a2a",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Retained by the 17cc220 packet; pinned by digest here, not replayed or recorded here.",
+          "identical_to": "packing/resources/web/mishapolk-issue732-2026-10-22/source/certificates/0000-0999/n683.cert"
+        },
+        {
+          "path": "certificates/0000-0999/n685.cert",
+          "bytes": 102619,
+          "sha256": "829cc6de67c1c36e8dc8e9c7a1fcf1a8d81750e8586c1fedaf6012d7ce18b30e",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n686.cert",
+          "bytes": 53102,
+          "sha256": "4c3c447fff0cb6539ed096bec4eafede91af49513c57f8560a57226679ce47dc",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n687.cert",
+          "bytes": 112204,
+          "sha256": "1e605f54945defff7ff66aaf360b48c466f26a0ef5b47ae1eaed82f72681059e",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n688.cert",
+          "bytes": 60186,
+          "sha256": "baf92192bf89c2c803e2dbbd1217a6e9b96fcacfaeba995551eb8e1436435f4d",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n690.cert",
+          "bytes": 108531,
+          "sha256": "73e1f90cb130e9f7a86ef7e0724f164c1b83a6b8993311f0fd9b9bb88931c5c0",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n693.cert",
+          "bytes": 119569,
+          "sha256": "9394d6e4c69e14b36878c3145f59828eada28d8a71fa200e8b2cd5745505e897",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Retained by the 17cc220 packet; pinned by digest here, not replayed or recorded here.",
+          "identical_to": "packing/resources/web/mishapolk-issue732-2026-10-22/source/certificates/0000-0999/n693.cert"
+        },
+        {
+          "path": "certificates/0000-0999/n697.cert",
+          "bytes": 163066,
+          "sha256": "594f2c445e4024aba32b55114a1be5473fdf4f7d66a29f2081dd9c7b6a02b4be",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Retained by the 17cc220 packet; pinned by digest here, not replayed or recorded here.",
+          "identical_to": "packing/resources/web/mishapolk-issue732-2026-10-22/source/certificates/0000-0999/n697.cert"
+        },
+        {
+          "path": "certificates/0000-0999/n701.cert",
+          "bytes": 120867,
+          "sha256": "b1587700d32c8a16dbfaddd3f7e3365f5384f35fbde22267dec38fb8b0356d38",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n703.cert",
+          "bytes": 88533,
+          "sha256": "7e1b170864d4abc0f2cb0bcf403c811528e778ef78c452ca85f3891bce47eedc",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n704.cert",
+          "bytes": 90689,
+          "sha256": "6bcaf60795f48671ce6dc062a843d391e0e61fbe3423ccbd4dd735ad58132ce3",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n705.cert",
+          "bytes": 93342,
+          "sha256": "e4ab97d9fd376773da4175996f330199ca30634fc11f8897da25e17997325909",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n706.cert",
+          "bytes": 106108,
+          "sha256": "6cc29993f8c5f497890a555ef1780ddb7d4e44afdc5c8a69c5859e836b367735",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n730.cert",
+          "bytes": 117060,
+          "sha256": "6c44471dbf366e008627b7b795857dff89c4770717e42c920a53b56efcc77888",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n731.cert",
+          "bytes": 127981,
+          "sha256": "2d902df38253893dd19bdc499ae8db6e6c0702024c84137c46b60a7382c02dc3",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n732.cert",
+          "bytes": 143385,
+          "sha256": "77340ea18a7a5a7882c8e99dee65caffa464ae7ff73e4cabc8f797ad7e20e683",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n733.cert",
+          "bytes": 111558,
+          "sha256": "08d0e192f0be61bde26af71daf7bd8d2a83a7ae97086355466ae8a9e383b7761",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n734.cert",
+          "bytes": 112732,
+          "sha256": "536d9b6a5b3f3356d589a1bb19fe97ba556ddd3089172fd6925efe5c75596040",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n738.cert",
+          "bytes": 109503,
+          "sha256": "bdd2b9551adfc4e6ee6ba833980617cc0a5738dcd4890249cda3ff8186ee63a4",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n739.cert",
+          "bytes": 113275,
+          "sha256": "a71795f987a5b0f4bf341302bbbe5396e0d36a8fff1c279ad23df1cb5e82e577",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n740.cert",
+          "bytes": 57294,
+          "sha256": "2410af8d6edaa4d37b879b1b23af5a826182a9c150446dde0775495aff06912c",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n741.cert",
+          "bytes": 120216,
+          "sha256": "b62874c42b7e75177b1fd6823255799c9c0726e9d6db4f4a3f8f29bff5f46e5a",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n751.cert",
+          "bytes": 120311,
+          "sha256": "5542dd892a16c64859ee5e0fb9a97257fed9ab12676fb6df89234accb2144c6b",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Retained by the 17cc220 packet; pinned by digest here, not replayed or recorded here.",
+          "identical_to": "packing/resources/web/mishapolk-issue732-2026-10-22/source/certificates/0000-0999/n751.cert"
+        },
+        {
+          "path": "certificates/0000-0999/n753.cert",
+          "bytes": 90168,
+          "sha256": "dad0e16eb7766c1cefd77114f4edc1b396e134e413b983b2b3b62aa4e470a20e",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n754.cert",
+          "bytes": 96402,
+          "sha256": "7b7e3ac17b04e4539e2c679097f23847c49193d17bb385a0176c2b806c5e16dc",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n755.cert",
+          "bytes": 100197,
+          "sha256": "80caf2fa2960461fc842cb17f7876b77a6592088a96693235858d934bf683b96",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n757.cert",
+          "bytes": 102951,
+          "sha256": "c6ad57f110d65540b56f66eda4f2e4c8216314e78fc604871f649491f872c62a",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n758.cert",
+          "bytes": 103269,
+          "sha256": "c105b55aefb3fd472e4df7e202d3f5adac8d6c30fb93bf8b24d2042adee793e9",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n759.cert",
+          "bytes": 95935,
+          "sha256": "112225497b24614b209a2d5a7123139964be90ede77a73ba7d13a65d4fc92823",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n760.cert",
+          "bytes": 112684,
+          "sha256": "96038b159bc1857e1d55897e04fc45bc272287b62f44b258bbabaf418995827f",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n785.cert",
+          "bytes": 124040,
+          "sha256": "d493962993945ab943e32cab8b3b7056dffcfde86a91532c1e29bfa00492a631",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n786.cert",
+          "bytes": 136116,
+          "sha256": "0841dd4c013df0af17f6b6e97ff3c621bc7e516ba5f8d3eed7663c891482ef74",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n787.cert",
+          "bytes": 151630,
+          "sha256": "9739ad28f21d6df057121c95fcd4405241226b6d6e3b6c352032c20fab6122a4",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n788.cert",
+          "bytes": 118593,
+          "sha256": "da8a3e2d4897841287e26ecc3b805713a04a869e0e4811be919343c6602bf337",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n789.cert",
+          "bytes": 119767,
+          "sha256": "24a33b47dd52b27b88d2a0c46f6c56b84046222acb822f93cfcd8ce9bf6ce029",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n793.cert",
+          "bytes": 116648,
+          "sha256": "0953859dd234335c75a7c8a7ed9fd75ac07e00e61ab7046cc6aad8d1cac947ea",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n794.cert",
+          "bytes": 120420,
+          "sha256": "1b8314277c6c97e398ff2f234255f85b5dddce39740a1e9e8a6fd74cc7edc6fc",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n795.cert",
+          "bytes": 61654,
+          "sha256": "f004eade02665c3a9ec18240bd8386a23416adaac40bab610e99b2592166b77a",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n796.cert",
+          "bytes": 127196,
+          "sha256": "dbbfccc228f42c3a172870ad5899b2b4d6e6f23fbd7db31032febc32bdd61f7e",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n810.cert",
+          "bytes": 146172,
+          "sha256": "8ea08582ae2e2e95f763f97c39b280edd94e28b6cd3c977297dc69515f3cf600",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Retained by the 17cc220 packet; pinned by digest here, not replayed or recorded here.",
+          "identical_to": "packing/resources/web/mishapolk-issue732-2026-10-22/source/certificates/0000-0999/n810.cert"
+        },
+        {
+          "path": "certificates/0000-0999/n811.cert",
+          "bytes": 138187,
+          "sha256": "e042c56350e31579a3a9deeaa75cf6aa8bbb2efde60fc0c631c67e207f747d84",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n812.cert",
+          "bytes": 110541,
+          "sha256": "b5aa1c34f5bd711cfb1a3f9aa9be91827709b4ceb5d3e7acc068be7d83c60502",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n815.cert",
+          "bytes": 107853,
+          "sha256": "e2bf3acab6af4cfa84c043c1fb1e85bf3dbc4faadbf571f8e8691ac6bbb10b55",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n816.cert",
+          "bytes": 106838,
+          "sha256": "279bf6279fc00d7100be8570d217d9a85d8bade0ccc23bf6dd5342abf3536f74",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n817.cert",
+          "bytes": 124625,
+          "sha256": "4a06fbce4c62548d5e3981aa35c6172f5c14ad0ca72c6dfe5a0b170d17a48de3",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n842.cert",
+          "bytes": 131276,
+          "sha256": "8a06c8e16ba19845b9ad7092c1e317b09c38bcfcf731f29f2bb16be0371233b8",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n843.cert",
+          "bytes": 144549,
+          "sha256": "6d335506698147de9d136ff656146c58784384a8576c5bbd749b5dd403d16e05",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n844.cert",
+          "bytes": 160178,
+          "sha256": "9b5f2c076a25fe2d354dbe80519bb387e67800a2997981470546fa06c6fe897b",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n845.cert",
+          "bytes": 125886,
+          "sha256": "4377f9236c28c8b3c7bb0a929b7fb175f892d2f6d29cf80737d61fdf694776f4",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n846.cert",
+          "bytes": 127060,
+          "sha256": "ddd3bdf2f4451a9fadb007bff3e728582018e2e2e82dbeaa96b89bfda96cc130",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n847.cert",
+          "bytes": 74009,
+          "sha256": "61f6155c6462ca7e8d2238265998a67431904aefd51c3a63515e75632db7c3e2",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n848.cert",
+          "bytes": 74082,
+          "sha256": "3ff64ca5bbb61dbfec44ba5938e548b752d9426924b4e12cd202963b690a2c65",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n849.cert",
+          "bytes": 74155,
+          "sha256": "381dee5165189688be9a3b4d79c372b29c9e86b81497997196aa0312251c0159",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n851.cert",
+          "bytes": 127827,
+          "sha256": "9c22d2a0e6489f3a111247209528296706d1245b797bc0c8b15202bc154e8f07",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n852.cert",
+          "bytes": 130736,
+          "sha256": "7cb7d17cbb076f6d1eac02dd5858dd4b3ffb351d276c9e2155608f8c0fbf90de",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n853.cert",
+          "bytes": 66162,
+          "sha256": "352be54929e60e7ac2de991d42c827fad89ef3dc401fa1cc30bd225d7a7bfb0b",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n861.cert",
+          "bytes": 77958,
+          "sha256": "6ec21dfbeba90cb874f7121dd0972222792b89ec1efb72d17bd004fb70b47e8e",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n866.cert",
+          "bytes": 98689,
+          "sha256": "914d12e0cd9ffa78c26cfa226feb3d07c4f100191c2b25f5b33fb9426b217281",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Retained by the 17cc220 packet; pinned by digest here, not replayed or recorded here.",
+          "identical_to": "packing/resources/web/mishapolk-issue732-2026-10-22/source/certificates/0000-0999/n866.cert"
+        },
+        {
+          "path": "certificates/0000-0999/n867.cert",
+          "bytes": 114633,
+          "sha256": "11b3c49e194c3132301208a9ebe326b4de649ba7f4843b0179ce56eaf8a2e0a9",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n868.cert",
+          "bytes": 109302,
+          "sha256": "75b7ab899c8afa9c8d04448ab7ea4fdc800e178c7cabb92b795e785809db81bd",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n869.cert",
+          "bytes": 141657,
+          "sha256": "d40c44bb50ca45d6b47b0ef7fdaf0d1cef03193b66ed62da60949a94cf6dfb0f",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Retained by the 17cc220 packet; pinned by digest here, not replayed or recorded here.",
+          "identical_to": "packing/resources/web/mishapolk-issue732-2026-10-22/source/certificates/0000-0999/n869.cert"
+        },
+        {
+          "path": "certificates/0000-0999/n870.cert",
+          "bytes": 165484,
+          "sha256": "5adf37f257d68b9414e99d6c175f78172b0203019947eeac769f09ab446ca6d8",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Retained by the 17cc220 packet; pinned by digest here, not replayed or recorded here.",
+          "identical_to": "packing/resources/web/mishapolk-issue732-2026-10-22/source/certificates/0000-0999/n870.cert"
+        },
+        {
+          "path": "certificates/0000-0999/n872.cert",
+          "bytes": 110857,
+          "sha256": "ff00ca01728ee3e3a096c21668c843543387c4b8b59c52162e4ea17aa0ca9f6e",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n874.cert",
+          "bytes": 158605,
+          "sha256": "5a16e6c7e225cbc0b365f9ab32bdad5cfc6f5587f19442773a5c243ce4c74257",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n875.cert",
+          "bytes": 130653,
+          "sha256": "cf9b508eefbed405d3c8ce0908e570001ceefe8f990fa7467b4ee95cc6cc318f",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n901.cert",
+          "bytes": 138768,
+          "sha256": "038400e34be42b702a49ebffef8db8ab3f51002a3c5badf3b9f06704aec8020b",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n902.cert",
+          "bytes": 153280,
+          "sha256": "97c153614a02ae96302e02b8a44eabc034c0a2a7a9bf66b6df55911edbf0496d",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n903.cert",
+          "bytes": 169027,
+          "sha256": "045d2516374743b5e323e77714f12875a3404a4dae56543bfc3dc4373be2b52d",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n904.cert",
+          "bytes": 133497,
+          "sha256": "4f6a3f0b278874486aa5f32790f47802c95f08768faad6eb20b3953829472fab",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n905.cert",
+          "bytes": 134671,
+          "sha256": "da8de20bad96d1cb324a04a0896c82d2f30cdb8741fe7191c0412d08bcabd3ff",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n906.cert",
+          "bytes": 147150,
+          "sha256": "bc65fed54772ff8fcde4cf100097b12aa1ba519cc1f98ab1ad4a4b6070219c55",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n907.cert",
+          "bytes": 147279,
+          "sha256": "fc0e9133b3dcf5f0d39df1e552c9f6f94a1ea85f22aef19e23c4755f53ecddca",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n908.cert",
+          "bytes": 147408,
+          "sha256": "6207e4337aea56d3d345c6f8ff918cd883ee2026e9b8080cd1bc924466e4d673",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n910.cert",
+          "bytes": 135496,
+          "sha256": "2661ce7f3e61298b0327bd3f678a4c33527636c9d06e2741bd78ada6ab63cd95",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n911.cert",
+          "bytes": 138405,
+          "sha256": "77860a01166a821466a7746a31e760b1018b49cf1ab066f3a1b210b4b232d2a7",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n912.cert",
+          "bytes": 70574,
+          "sha256": "6fd40eeb5e8e721c858839f74addbdb10b51aed8ba8df93e38521a3e45c96995",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n920.cert",
+          "bytes": 151747,
+          "sha256": "b0aa586e459a316f2d15f56aff450ae3d50d0ecbcd9063b0c93aeec165a19ba9",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n921.cert",
+          "bytes": 82360,
+          "sha256": "e33c287f709e37c8fb3820a0c8680ec46d856c9e953735d14330f5964eb21ebc",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n922.cert",
+          "bytes": 153332,
+          "sha256": "87baf7b253528febeca297a9c57043af681735280bb158023f3e48b4af4dee7a",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n925.cert",
+          "bytes": 173822,
+          "sha256": "c91b69606b094ff274ac96808165ca913910b416bcbe18928a8dc1904d649af7",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Retained by the 17cc220 packet; pinned by digest here, not replayed or recorded here.",
+          "identical_to": "packing/resources/web/mishapolk-issue732-2026-10-22/source/certificates/0000-0999/n925.cert"
+        },
+        {
+          "path": "certificates/0000-0999/n927.cert",
+          "bytes": 127368,
+          "sha256": "0af0202dd97ebee595e11c0f78e9737e6940a2d4614ac0bf6afe1b687ab5eb19",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n928.cert",
+          "bytes": 126981,
+          "sha256": "cf674b21e79a5234135315ad876a461ad00b9dbe4ea6426a89be08a9ee16e0df",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n929.cert",
+          "bytes": 127351,
+          "sha256": "9668e87782012d53a75f3568646e68d335c2d6b815166ede050c2a7e1c129117",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n930.cert",
+          "bytes": 165697,
+          "sha256": "119300e04f8e84c74976bc8cb87221b31d3de1c6a37c0b8b0b62ae34d69033d8",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n931.cert",
+          "bytes": 152495,
+          "sha256": "45b10233ae6cd34fb77b79f4d9b3255a7cd91d9dac869232459ff641606d4b84",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Retained by the 17cc220 packet; pinned by digest here, not replayed or recorded here.",
+          "identical_to": "packing/resources/web/mishapolk-issue732-2026-10-22/source/certificates/0000-0999/n931.cert"
+        },
+        {
+          "path": "certificates/0000-0999/n932.cert",
+          "bytes": 126535,
+          "sha256": "83cbc5e61bbc25d3b3dc6d6fcb6b6b95bf3066872fdb6ebcb957501064f47946",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Retained by the 17cc220 packet; pinned by digest here, not replayed or recorded here.",
+          "identical_to": "packing/resources/web/mishapolk-issue732-2026-10-22/source/certificates/0000-0999/n932.cert"
+        },
+        {
+          "path": "certificates/0000-0999/n933.cert",
+          "bytes": 126672,
+          "sha256": "7f0fb894a7c53527cbaa55399bd29677624815eea771783f9d03d2f431df31d5",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n934.cert",
+          "bytes": 127584,
+          "sha256": "85d741ce1351e874b0e5dda163441f624a057b8dac899aed96b5d51d46b16ad9",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n935.cert",
+          "bytes": 136616,
+          "sha256": "e3af5877cb191bd973a63e9c88f4e51896e2ea7978f0a91924ba4a3bc2151ccb",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n962.cert",
+          "bytes": 146516,
+          "sha256": "dd727f2f69ba910314e0d4fac2f2c536515d9bf2e4c436286d6b817c0338666a",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n963.cert",
+          "bytes": 162309,
+          "sha256": "35d3ef68721a5a8c89f74b6932f5c6db59af1571d63f03e4aa652611e26be169",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n964.cert",
+          "bytes": 85310,
+          "sha256": "198ff83ea282f36ac8db8b88708d0c569691066aa117df291d0162cb8811df50",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n965.cert",
+          "bytes": 141368,
+          "sha256": "3f5d87dd02a90c5262e2f95fd29a6ba1dbd89ce6e87757ef37874dc67f0b9a04",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n966.cert",
+          "bytes": 142541,
+          "sha256": "64a1b899088cdeb50bd9fe1611a7f857dfbf68a6118d2d8cf57a40dfcd0c4102",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n967.cert",
+          "bytes": 154959,
+          "sha256": "f4dcbc115b41ed01533e7da6c960e4075f53beeaa7e57e5c1fa30665f168cf33",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n968.cert",
+          "bytes": 155088,
+          "sha256": "1f4db161ef85442144f07f5d62d5b70273e8cd9a31f7b9c4214eb5e45ea075d3",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n969.cert",
+          "bytes": 155217,
+          "sha256": "d4e293ba66eae56f562c94fc166e220e2fb930d122e03520da927e2fba1334d4",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n971.cert",
+          "bytes": 143427,
+          "sha256": "bbb57939e9625c378dee49f01146de6372f8129e21dcf1893941a3aa3a76036b",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n972.cert",
+          "bytes": 146336,
+          "sha256": "81dd49726778016e79a6000c587cf7a9b2ebf324e601ca155db6e9538211b341",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n973.cert",
+          "bytes": 149246,
+          "sha256": "29f0a56a4f71836438ecc815554c3008fa7c3b229528865b7222f00d91cbb633",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n974.cert",
+          "bytes": 75386,
+          "sha256": "947fde6321cf8507e00c24365a45f85fc9dbbe6331da37c3df9fb9deb769eaa1",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n981.cert",
+          "bytes": 159495,
+          "sha256": "a2c9564157765aa533ec0bf7334e69e8b6aa3a197da7ecf3d537ce9b57bb94c5",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n982.cert",
+          "bytes": 161051,
+          "sha256": "fe515770cd03c03552e7e0d89f0670c1842eed2128e35e2e44cea8232cec46a9",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n983.cert",
+          "bytes": 130524,
+          "sha256": "bf76b6d6de6f313315ba9423777b68190a19bab44f69f526575ae0c34f1fcb31",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n984.cert",
+          "bytes": 121518,
+          "sha256": "8f7d33bc9b5cf9d9870f14800c2a8553101c97ffa29cff312bc5a66ac9a65862",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n990.cert",
+          "bytes": 182946,
+          "sha256": "ff17aa03f3937ad75820142946eee19bdc8f26a5d5bdc33013c3e25c3d295c92",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Retained by the 17cc220 packet; pinned by digest here, not replayed or recorded here.",
+          "identical_to": "packing/resources/web/mishapolk-issue732-2026-10-22/source/certificates/0000-0999/n990.cert"
+        },
+        {
+          "path": "certificates/0000-0999/n991.cert",
+          "bytes": 168423,
+          "sha256": "ed9e84cd8cc33c336781624f13afa11fc3117e83a4286cba31acd43e805828d8",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n992.cert",
+          "bytes": 167404,
+          "sha256": "ff36a7e679986c2e03adf62ec5d13149e9ce22b45a578d97f85679d1c5402693",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n993.cert",
+          "bytes": 127523,
+          "sha256": "6cee777ce1fb65ec2a1141e3020167a8d18259ed5418fdc8fce7eb8b72f6e468",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n994.cert",
+          "bytes": 182509,
+          "sha256": "d1a9dd7fe5eda2751fd2042370f9eb6febf3111edaf8bbd1cdc75d79687875b6",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Retained by the 17cc220 packet; pinned by digest here, not replayed or recorded here.",
+          "identical_to": "packing/resources/web/mishapolk-issue732-2026-10-22/source/certificates/0000-0999/n994.cert"
+        },
+        {
+          "path": "certificates/0000-0999/n995.cert",
+          "bytes": 180114,
+          "sha256": "4b81ea9f143834233585c6950bd8dbe01ec80a976d2567bd31e109aec1eaecf1",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Retained by the 17cc220 packet; pinned by digest here, not replayed or recorded here.",
+          "identical_to": "packing/resources/web/mishapolk-issue732-2026-10-22/source/certificates/0000-0999/n995.cert"
+        },
+        {
+          "path": "certificates/0000-0999/n996.cert",
+          "bytes": 180291,
+          "sha256": "9e2b266058cdebc97a5c46de9241de8caea349d77aaa08f79c8e3d4cbb3b8231",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n997.cert",
+          "bytes": 135620,
+          "sha256": "ef3750954b94be50c998abf602acf7822f537f7f047253f858ab59a344ef06ab",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/0000-0999/n998.cert",
+          "bytes": 151694,
+          "sha256": "f0f0174355ded5e45975861137afa76eb4c1154a2210198084733f405c80201e",
+          "reason": "Unchanged since 17cc220, the commit issue 732 reports, whose report-order walk of 23 October (campaign/issue-intake/upper-bounds-issue732-20261023) decided it; f1ceee4 does not change it and the comment does not report it. Pinned by digest, not replayed or recorded here."
+        },
+        {
+          "path": "certificates/SHA256SUMS",
+          "bytes": 558748,
+          "sha256": "8510e636ec72ee0ae9a8faf1c2bd11575f1ffaebb78ba3be5916d243baf3921b",
+          "reason": "The author's digest list of every certificate, as 7b6366f left it: at the 138 counts f1ceee4 changes it lists the earlier files' digests. Pinned by digest."
+        },
+        {
+          "path": "certificates/census.json",
+          "bytes": 3062696,
+          "sha256": "01b4ea6f79d1d72ec88e3a9edf65f86a3d8970137d2301d08ac5645ea3395392",
+          "reason": "The author's census of his certificates against the baselines he names (3.1 MB), as 7b6366f left it; its comparisons are with 12-place prints and are not the record's. Pinned by digest under OR-18."
+        },
+        {
+          "path": "certificates/manifest.json",
+          "bytes": 2695861,
+          "sha256": "ee6e1934ff1c244d89e07040dd58e9d227596c594d7f613d4ec01eba8926d03b",
+          "reason": "Issue 732's certificate index (2.7 MB) as 7b6366f left it: f1ceee4 does not rewrite it, so at the 138 counts the commit changes it still names the earlier files' digests and bounds, and the release is held to certified_bounds.json instead (receipts/source-history.json). Pinned by digest under OR-18."
+        },
+        {
+          "path": "certified_bounds.json",
+          "bytes": 4619591,
+          "sha256": "02cbebaaff81cf291cdf354c8aa397629f6ef254e2ab7a0462fd27d5a491c091",
+          "reason": "The author's certificate and construction index through n = 10000 at the pin (4.6 MB), which f1ceee4 rewrites with the 138 new bounds: each count's certificate path, SHA-256 and exact bound. devtools.beyond_horizon_replay source-history holds each of the 390 certificates at 325 to 1024 to it (receipts/source-history.json). Its rounded_up print is one unit below the exact side rounded up at 70 of the 138 counts, since it rounds to the nearest place; the rows record each exact side rounded up at 12 places. Pinned by digest under OR-18."
+        },
+        {
+          "path": "check_packing.py",
+          "bytes": 10454,
+          "sha256": "005886b8da196538871b2f136ca37d9cbed78ffadada66ce86f1cc34c9c70c58",
+          "reason": "The author's checker, unchanged since 17cc220. No code from the source runs here; pinned by digest, never executed."
+        },
+        {
+          "path": "upper_bounds.json",
+          "bytes": 7743131,
+          "sha256": "6c74b818fcd5102622fa9738aeeaf324d8275d8a3b7f7845aaa8cd8447750415",
+          "reason": "The author's bound index through n = 10000 at the pin (7.7 MB), which f1ceee4 rewrites with the 138 new bounds. At 325 to 1024 its certificate bounds are the certificates' headers (receipts/source-history.json). Pinned by digest under OR-18."
+        },
+        {
+          "path": "verify_bound_certificate.py",
+          "bytes": 3567,
+          "sha256": "1c8b89eb0de71bc751db57061a015b8ed8ffb354d38ce13bcf8201ce8c90e98b",
+          "reason": "Evan Daniel's exact checker as Francisco Couzo modified it, under Daniel's MIT licence, byte-identical to the copy the 18 October packet retains; never executed here.",
+          "identical_to": "packing/resources/web/couzo-issue678-2026-10-18/source/verify_bound_certificate.py"
+        }
+      ],
+      "license": "MIT License, Copyright (c) 2026 Mykhailo Polkovskyi (Mishapolk), added at 17cc220 and unchanged at f1ceee4 (LICENSE, retained). The author's comment on #719 (issuecomment-6350348588) says it covers every certificate, catalogue, manifest and tool in the repository, so the 138 certificates, README.md and LICENSE are retained under it. verify_bound_certificate.py and BOUND_VERIFIER_LICENSE.txt are Evan Daniel's MIT-licensed verifier as Francisco Couzo modified it, pinned against the copies the couzo-issue678-2026-10-18 packet retains. The indexes are pinned by digest under OR-18 (2.7 to 7.7 MB each). The README credits the author and names no AI assistance; the comment's own text is the author's.",
+      "claims": [
+        "The author's comment on issue #732 of 2026-10-23T20:35:12Z (issuecomment-6374211504) reports f1ceee4: 138 exact rational certificates at 328 to 989 in certificates/0000-0999/nN.cert, each n S then n rows x y t with S its exact side, which certified_bounds.json indexes and credits to Mishapolk as refinements of Couzo topology; the comment asks sole credit at 11 of the counts and states two theorems on rigidity and slack.",
+        "The report-order walk of 24 October for f1ceee4 (campaign/issue-intake/upper-bounds-issue732-f1ceee4-20261024) records all 138 as rows, each below the row that stood at its count on main 0bbb0a2c4, and none of the three later commits' sides in the corpus (34e59f3, c0bf150, 7e82c64). The theorems are prose and bound no s(n); no optimality is claimed here."
+      ]
+    }
+  ]
+}
