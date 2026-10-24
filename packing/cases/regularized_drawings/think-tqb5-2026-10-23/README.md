@@ -1,8 +1,8 @@
-# Regularization Runs After the Adoption of T-238 (think-tqb5)
+# Regularization Runs After the Adoption of T-239 (think-tqb5)
 
 These are the strong generators’ runs on the witness that the adoption pass of 24
 October 2026 wrote at 303: Amund Kristiansen’s dilation certificate of issue #755
-(T-238), adopted as the house best packing under
+(T-239), adopted as the house best packing under
 [the house rule](../../../campaign/result-import.md#the-house-rule) after the
 [review of 23 October 2026](../../../../docs/project/reviews/review-2026-10-23-amundsk-n303.md).
 The house rule regularizes each re-housed count in the pull request that adopts it.
@@ -48,7 +48,7 @@ Then `render_regularized_atlas --update`, `default_drawings --update`,
 
 `default_drawings --compare` against `main`’s record: 303 was drawn by the axis tool’s
 view of T-230, decided no better (`SETTLED`, owing the owner’s row-7 review think-ykgh),
-and is now drawn by grid-slack’s view of T-238, regularized.
+and is now drawn by grid-slack’s view of T-239, regularized.
 No strong view gives way.
 `SETTLED`’s entry at 303, decided on T-230’s witness, is removed, since the count no
 longer needs it; the row-7 review it owed was of a view of T-230’s witness.

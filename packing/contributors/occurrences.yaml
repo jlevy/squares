@@ -24093,7 +24093,7 @@ occurrences:
   note: Reviewed packing/frontier/n-303.md [303] /reported_upper_bound/found_by/0
     span 0:17. Issue 755's packing, credited to Amund Kristiansen (GitHub amundsk) by the
     issue and the gist's README, the case's house since the adoption of 24 October 2026
-    (T-238), found from Evan Daniel's packing of issue 728 (T-230). Keep finder, improver
+    (T-239), found from Evan Daniel's packing of issue 728 (T-230). Keep finder, improver
     and solver roles distinct.
   contributor_id: amund-kristiansen
 - origin:

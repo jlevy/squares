@@ -2370,7 +2370,7 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     # source asks; Kevin Fang's two-wedge construction, which no other count credits,
     # is named in that case's credit sentence and leaves this list. On 20 October 2026 the
     # adoption at 227 and 260 (T-196) drew the poster's first de Winter packings, and his
-    # name joined it. On 24 October 2026 the adoption at 303 (T-238) drew the poster's first
+    # name joined it. On 24 October 2026 the adoption at 303 (T-239) drew the poster's first
     # Kristiansen packing, and his name joined it.
     assert len(expected_names) == 27
     # The adoption of 19 October draws from five more, Evan Daniel's packets at 155, 183
@@ -2393,7 +2393,7 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     # lists still hold other counts, and Polkovskyi's name is already on the poster. The
     # same pass draws 303 from one more, Evan Daniel's issue 728 packet (T-230), with no new
     # name: Mishapolk's KKT refinements still hold other counts. The adoption of 24 October
-    # draws 303 from Amund Kristiansen's issue 755 packet (T-238) instead, and no longer from
+    # draws 303 from Amund Kristiansen's issue 755 packet (T-239) instead, and no longer from
     # Daniel's issue 728 packet, which held nothing else: the same number of sources.
     assert len(expected_sources) == 27
     assert set(json.loads(credit_block.attrib["data-credited-names"])) == expected_names

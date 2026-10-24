@@ -52,7 +52,11 @@ $9.89 \times 10^{-6}$ below it, at the scale of T-188’s S2, where the draft ha
 This is the stage 4 mathematical review lane of the 23 October intake
 ([result-import.md](../../../packing/campaign/result-import.md#stage-4-validate)) for
 issue #755. The entry the records branch `claude/intake-2026-10-23-755` registers for it
-is T-238, which `main` does not yet hold; this review names it as that entry.
+is T-239, which `main` does not yet hold; this review names it as that entry.
+The branch registered it as T-238 when this review was written and renumbered it T-239
+on 24 October 2026, after the review, when #750 took T-237 and T-238. The renumbering
+changed only the sentence before this one; the review’s programs keep the old id in
+their names and docstrings, since their digests are bound.
 It was written by an AI reviewer of the Claude system family (Anthropic), strong
 sub-agent tier (`tbd-strong-max`), at maximum reasoning, as lane `c-review-t238-math`
 for the intake coordinator `coord-intake-1023`. The lane was prompted separately from

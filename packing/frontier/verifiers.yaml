@@ -2816,7 +2816,7 @@ verifiers:
     methods: [exact-algebraic]
     role: decides
     summary: >-
-      The 23 October review's standard-library exact checker of the certificate T-238
+      The 23 October review's standard-library exact checker of the certificate T-239
       cites, with a reader of its own that admits only integer and p/q literals, deciding
       the certificate on two routes that share only that reader: route Z in integers
       alone, never loading fractions (a Pythagorean triple per row, containment by
@@ -2868,7 +2868,7 @@ verifiers:
     methods: [exact-algebraic]
     role: premises
     summary: >-
-      The 23 October review's controls of T-238's certificate: 21 mutants (the side
+      The 23 October review's controls of T-239's certificate: 21 mutants (the side
       lowered by the least top-or-right clearance, every square moved by the least left
       and the least bottom clearance, and five pairs closed along the normal or the corner
       vector that separates them: the least-gap pair, a tilted and an aligned square, two

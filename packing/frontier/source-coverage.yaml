@@ -7564,7 +7564,7 @@ sources:
   evidence:
   - E-amundsk-755-n303-report
   notes: The 1 complete certificate is kept as a derived exact fact, no upstream byte retained, admitted
-    only where its exact side equals, or rounds up to, the side its source prints. T-238 records the
+    only where its exact side equals, or rounds up to, the side its source prints. T-239 records the
     in-horizon report. All 3 native jobs have full outcomes. No selected override or superseded claim
     is created at this source-only stage; current cases and earlier source ownership remain unchanged.
 
@@ -10109,7 +10109,7 @@ selected_overrides:
   value: '17.9097623274752568'
   evidence: E-amundsk-755-n303-report
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
-    a replay here and an accepted review, adopted on 2026-10-24 (T-238).
+    a replay here and an accepted review, adopted on 2026-10-24 (T-239).
 - n: 304
   source_id: mishapolk-kkt-refinements-2026-10-14
   value: '17.92942775807517497'
@@ -11844,7 +11844,7 @@ superseded_reports:
 - n: 303
   source_id: squish-ten-packings-2026-10-07
   value: '17.9203123729203498'
-  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-238's exact
+  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-239's exact
     side is smaller.
   superseded_by: amundsk-n303-2026-10-23
 - n: 305
@@ -12055,7 +12055,7 @@ superseded_reports:
   source_id: evand-regularized-2026-10-10
   value: '17.9130654627385324'
   reason: The house from 2026-10-11 until 2026-10-15; its certificate stays retained and verified,
-    and T-238's exact side is smaller.
+    and T-239's exact side is smaller.
   superseded_by: amundsk-n303-2026-10-23
 - n: 129
   source_id: dostashev-compositions-2026-10-12
@@ -12139,7 +12139,7 @@ superseded_reports:
   source_id: dostashev-compositions-2026-10-12
   value: '17.9099582910699080'
   reason: The house from 2026-10-15 until 2026-10-16; its certificate stays retained and verified,
-    and T-238's exact side is smaller.
+    and T-239's exact side is smaller.
   superseded_by: amundsk-n303-2026-10-23
 - n: 304
   source_id: dostashev-merged-bands-2026-10-13
@@ -12457,13 +12457,13 @@ superseded_reports:
   source_id: mishapolk-kkt-refinements-2026-10-14
   value: '17.90995829106990799'
   reason: The house from 2026-10-16 until 2026-10-23; its certificate stays retained and verified,
-    and T-238's exact side is smaller.
+    and T-239's exact side is smaller.
   superseded_by: amundsk-n303-2026-10-23
 - n: 303
   source_id: evand-n303-2026-10-22
   value: '17.9097722172743278'
   reason: The house from 2026-10-23 until 2026-10-24; its certificate stays retained and verified,
-    and T-238's exact side is smaller.
+    and T-239's exact side is smaller.
   superseded_by: amundsk-n303-2026-10-23
 beyond_horizon_claims:
 - n: 327

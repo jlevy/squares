@@ -977,7 +977,7 @@ RESULTS: dict[str, Prose] = {
             "at a wall and at the least-gap pair"
         ),
     ),
-    "T-238": Prose(
+    "T-239": Prose(
         author="Amund Kristiansen",
         reported="on [jlevy/squares#755](https://github.com/jlevy/squares/issues/755)",
         producer_route=False,
@@ -1003,7 +1003,7 @@ RESULTS: dict[str, Prose] = {
             "it pairs one to one with T-230’s packing under the identity and row for row: 12 "
             "squares lie beyond a tenth, at most 0.547, five are newly tilted and 47 of about "
             "860 contacts change. So it is another arrangement of T-230’s packing, found from "
-            "it, not a refinement in this record’s sense (T-238). The certificate is a "
+            "it, not a refinement in this record’s sense (T-239). The certificate is a "
             "dilation by $1 + 10^{-12}$ of a binary64 packing; the issue claims the upper "
             "bound only, and the packing is not rigid: five squares touch nothing."
         ),
@@ -1561,7 +1561,7 @@ CREDITS: dict[int, Credit] = {
         "Mykhailo Polkovskyi’s tighter certificate of Francisco Couzo’s continuation of "
         "PingYou Ltd’s n = 302 arrangement",
     ),
-    # Issue 755's packing (T-238, adopted on 24 October 2026), another arrangement of T-230's
+    # Issue 755's packing (T-239, adopted on 24 October 2026), another arrangement of T-230's
     # packing (one to one with it, 12 squares beyond a tenth and five newly tilted, the 23
     # October review), found from it, which the issue names as the start. As at 155 and for
     # T-230, Kristiansen is the finder and the start's author is named in the sentence, not

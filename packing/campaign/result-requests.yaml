@@ -21378,12 +21378,14 @@ issues:
       quench, not a refinement, and claims the upper bound only. Triaged on 23 October 2026
       (think-tqb5): no licence stated, so retained as a derived exact fact in
       amundsk-n303-2026-10-23, replayed on this repository's two exact routes with the gross
-      and sharp controls refused, and registered as T-238 at V0/C0; measured pose by pose, it
+      and sharp controls refused, and registered as T-239 at V0/C0; measured pose by pose, it
       pairs one to one with T-230's packing with 12 squares moved beyond a tenth and five more
       tilted, another arrangement of T-230's packing, not a refinement. The stage 4 review of
-      23 October (think-jdz0) accepted it with nine findings, none blocking, so T-238 is at
+      23 October (think-jdz0) accepted it with nine findings, none blocking, so T-239 is at
       V3/C3, scored S2; the adoption at 303 and its regularization follow in the same pull
-      request. Claude assistance disclosed.
+      request. Registered as T-238 on the records branch and renumbered T-239 on 24 October,
+      before any reply named it, when the owner gave T-237 and T-238 to #750 (think-4o9c).
+      Claude assistance disclosed.
     read_through: '2026-10-23T11:12:48Z'
     results:
     - key: n303
@@ -21395,7 +21397,7 @@ issues:
       source: body
       bead: think-tqb5
       register:
-      - T-238
+      - T-239
       evidence:
       - E-amundsk-755-n303-report
     beads:

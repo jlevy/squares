@@ -114,7 +114,7 @@ def _rendering_entry(directory: Path) -> dict[str, Any]:
 #: dilation of a binary64 packing, as 229 did, its least margins 6.0e-13 against every wall
 #: and 1.2e-12 between pairs, at the screen's tightest tolerance of 1e-12. The adoption of
 #: 24 October 2026 (think-tqb5) moved it again at 303, to Amund Kristiansen's dilation
-#: certificate of issue 755 (T-238): 303 stayed, its least margins 6.0e-13 and 1.2e-12
+#: certificate of issue 755 (T-239): 303 stayed, its least margins 6.0e-13 and 1.2e-12
 #: again. Re-screening the adopted counts with the screen's own
 #: `--update --n` rebuilds the retained screen byte for byte.
 GOLDEN_UNSTABLE = {

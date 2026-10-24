@@ -39811,7 +39811,7 @@ evidence:
         prompted separately from the records lane
       note: >-
         docs/project/reviews/review-2026-10-23-amundsk-n303.md accepted the certificate
-        T-238 cites for finite feasibility only, with nine non-blocking findings (RF-1
+        T-239 cites for finite feasibility only, with nine non-blocking findings (RF-1
         minor, RF-2 to RF-9 notes); the replay it reproduced is
         E-amundsk-755-n303-exact-feasibility, and its own checker's run is
         E-amundsk-755-n303-review-exact-feasibility.
@@ -39852,7 +39852,7 @@ evidence:
       coverage:
         extent: full
         unit: >-
-          the certificate at n = 303 that T-238 cites, every wall and every pair decided by
+          the certificate at n = 303 that T-239 cites, every wall and every pair decided by
           both maintained routes; the kernel's controls are retained in the packet's
           receipt and replay/sharp-controls.json
         checked: 1
@@ -39883,7 +39883,7 @@ evidence:
           which carries two of their expressions transcribed: the reader's line filter and
           Pose.corners, the corner construction the independent route decides on. A
           transcription shares the producer's definitions (epistemics.md), so this replay
-          is shared-components, as T-230's is, and T-238's independent re-implementation
+          is shared-components, as T-230's is, and T-239's independent re-implementation
           rests on the review's clean-room entry (RF-7 of the 23 October review).
     independence_record: docs/project/reviews/review-2026-10-23-amundsk-n303.md
     external_review:
@@ -39952,7 +39952,7 @@ evidence:
       coverage:
         extent: full
         unit: >-
-          the certificate at n = 303 that T-238 cites, every wall and all 45,753 pairs, on
+          the certificate at n = 303 that T-239 cites, every wall and all 45,753 pairs, on
           each of the checker's two routes
         checked: 1
         of: 1

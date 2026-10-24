@@ -315,7 +315,7 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         "Amund Kristiansen",
         (
             "An exact certificate for 303 squares, another arrangement of Evan Daniel's"
-            " packing found from it, replayed and reviewed here (T-238)."
+            " packing found from it, replayed and reviewed here (T-239)."
         ),
     ),
 )

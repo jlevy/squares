@@ -751,7 +751,7 @@ The evidence is retained in
 [`cases/regularized_drawings/think-icp1-2026-10-23/`](../../cases/regularized_drawings/think-icp1-2026-10-23/README.md).
 The index still draws 95 views.
 
-The pass of 24 October 2026 adopted Amund Kristiansen’s #755 certificate (T-238,
+The pass of 24 October 2026 adopted Amund Kristiansen’s #755 certificate (T-239,
 think-tqb5) at 303, moving the house best packing from T-230 by $9.89 \times 10^{-6}$.
 Both generators ran on the new witness: grid-slack at 0.5, 1 and 5 degrees
 (`grid-slack-adopt-2026-10-24-n303-grid-deg05`, `-grid-deg1` and `-grid-deg5`, 77

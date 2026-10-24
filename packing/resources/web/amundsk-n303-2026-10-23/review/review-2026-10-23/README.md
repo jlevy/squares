@@ -3,11 +3,17 @@
 These are the programs and receipts of the stage 4 mathematical review of Amund
 Kristiansen’s certificate at 303, from issue #755
 ([the review](../../../../../../docs/project/reviews/review-2026-10-23-amundsk-n303.md)).
-The entry the records branch `claude/intake-2026-10-23-755` registers for it is T-238,
+The entry the records branch `claude/intake-2026-10-23-755` registers for it is T-239,
 which `main` does not yet hold.
 They were written on 23 October 2026 by the review lane `c-review-t238-math` (bead
 `think-jdz0`), an AI reviewer of the Claude system family (Anthropic) at the strong
 sub-agent tier (`tbd-strong-max`) and maximum reasoning.
+
+The branch registered the entry as T-238 when the programs were written and renumbered
+it T-239 on 24 October 2026, after the review, when #750 took T-237 and T-238. The
+programs keep the old id in their names (`*_t238.py`) and docstrings, and the receipts
+keep the programs’ names: the digests in `outputs/program-digests.sha256` are bound, so
+neither is edited. Every “T-238” under `programs/` means this entry, T-239.
 
 The certificate is not retained here: the gist states no licence.
 Every program reads it from a checkout of the gist at

@@ -901,7 +901,7 @@ EXPLAINER_HISTORY = (
         first_published="October 23, 2026",
         result_scope=(
             "Update the registered result count after the registration of Amund "
-            "Kristiansen's #755 certificate at 303 (T-238)."
+            "Kristiansen's #755 certificate at 303 (T-239)."
         ),
     ),
     PublicationHistoryEntry(
@@ -1437,7 +1437,7 @@ RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
         impact="patch",
         reason=(
             "Update the registered result count after the registration of Amund "
-            "Kristiansen's #755 certificate at 303 (T-238)."
+            "Kristiansen's #755 certificate at 303 (T-239)."
         ),
     ),
     ReleaseImpactDecision(
@@ -2504,7 +2504,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "papers/square-packing-methods-survey.md",
         ),
         reason=(
-            "T-238's registration (#755, Amund Kristiansen's s(303)), its stage 4 review "
+            "T-239's registration (#755, Amund Kristiansen's s(303)), its stage 4 review "
             "(V3/C3, S2), its adoption at 303 in the pass of 24 October 2026 with its "
             "regularization, its contributor profile, its house reader, the #755 request "
             "entry and its gist's card in Other Square Packing Projects (OTHER_PROJECTS, "
