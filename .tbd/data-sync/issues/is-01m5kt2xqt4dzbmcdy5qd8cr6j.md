@@ -5,14 +5,14 @@ title: "Decision: register kind for chelokot's and Daniel's Lean proofs of s(2) 
 kind: task
 status: open
 priority: 2
-version: 3
+version: 4
 labels:
   - decision
   - result-import
 dependencies: []
 parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 created_at: 2026-10-23T07:19:57.434Z
-updated_at: 2026-10-24T01:02:18.643Z
+updated_at: 2026-10-24T02:14:01.353Z
 ---
 Owner decision for think-7l2j, raised by the intake lane c-lean-1023 on 23 October 2026. The lane retained both sources (packing/resources/web/chelokot-small-n-lean-2026-09-05/ and evand-rect-small-n-lean-2026-10-22/) and their reported evidence entries (E-small-n-chelokot-lean-report, E-small-n-daniel-rect-lean-report), and held back the register entry (id T-237, allocated to the lane) because the record's rules give it no kind the checks accept:
 
@@ -31,3 +31,4 @@ blocked_on: none
 ## Notes
 
 2026-10-24 coord-intake-1023: OWNER ANSWER. In conversation at about 00:05Z on 24 October, the coordinator asked "How should chelokot's and Daniel's Lean proofs of the smallest boxes for 2–5 squares go on the register?" The owner selected the option labelled "Classical entry + formalization (Recommended)", which is option 1 above. The option's description was the coordinator's text, not the owner's: register the classical proofs first (side 2 for 2–4 squares, and Göbel 1979 for 5) as their own entry, then the two Lean proofs as a formalization naming it, using two ids (T-237, T-238), so that #757's Kristiansen entry moves from T-238 to T-239. To be implemented in #750 (lane think-ehx5); #757 renumbers.
+2026-10-24 c-land-750-1024 (think-ehx5), PR #750, commit 233fce701 (text fixes 3c332a339, credits 2a29cf8ae): applied as option 1. T-237, kind optimality, n = 2-5, V3/C0, draft S3: s(2) = s(3) = s(4) = 2 and s(5) = 2 + 1/sqrt 2, attribution [Göbel 1979] (Proposition 1) and [Friedman DS7] (Theorems 1 and 2), published 1979; it cites exactly the evidence n-002 to n-005 cite (E-n005-gobel-proof, E-n005-gobel-upper, E-side2-center-lower, E-basic-area-lower, E-basic-grid-upper), so check_standing derives it current best at n = 2-5; C0 is the minimum over parts (Göbel's unreviewed outline at n = 5), the checker's pools deriving C3 via the area bound's scope, which the composition states. S3 rather than the expected S1/S2: by the rubric as the 11 October significance review applies it, every exact value closes a case and published exact values take the theorem's score (T-006, T-008 S3); s(2)-s(4) alone would be S1; for the reviewing lane to confirm. T-238, kind formalization, proves_kind optimality, claim naming T-237, n = 2-5, V0/C0, S2: the c-lean-1023 draft with its kind changed, citing E-small-n-chelokot-lean-report and E-small-n-daniel-rect-lean-report; check_results accepts it as one entry; check_standing: second certificate, reported. [Friedman DS7] was missing from bibliography.yaml and was added from the retained survey (year 2009; the archive index's Papers year cell 1998– changed to 2009, first year kept in the venue cell). chelokot's small-n coverage entry added; the repository's Other Projects card already existed, so no site change. Case records unchanged. Left open for the coordinator to close.

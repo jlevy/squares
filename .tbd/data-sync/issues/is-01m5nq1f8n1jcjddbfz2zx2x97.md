@@ -5,14 +5,16 @@ title: "Records PR A: the authors' answers on #670, #675, #715 and #734, and T-2
 kind: task
 status: in_progress
 priority: 2
-version: 2
+version: 3
 delegate: c-records-a-1024
 labels: []
 dependencies: []
 parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
+child_order_hints:
+  - is-01m5nvf31dym5rjns3hp10xbdd
 hold: null
 hold_until: null
 created_at: 2026-10-24T01:05:12.981Z
-updated_at: 2026-10-24T01:05:24.493Z
+updated_at: 2026-10-24T02:22:33.517Z
 started_at: 2026-10-24T01:05:24.492Z
 ---

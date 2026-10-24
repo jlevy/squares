@@ -5,7 +5,7 @@ title: "Import chelokot and Evan Daniel: Lean proofs that s(5) = 2 + 1/√2, and
 kind: task
 status: in_progress
 priority: 3
-version: 4
+version: 5
 delegate: c-lean-1023
 labels:
   - result-import
@@ -13,7 +13,7 @@ dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-10-22T13:12:44.171Z
-updated_at: 2026-10-23T09:06:20.208Z
+updated_at: 2026-10-24T02:14:04.255Z
 started_at: 2026-10-23T06:19:01.857Z
 ---
 Stage 1 triage, read-only, by c-triage-1022b from the 12:20Z sweep of 22 October 2026, at
@@ -94,3 +94,4 @@ Claim map: the triage proposed a formalization entry, but check_results requires
 Stage 2. Packets packing/resources/web/chelokot-small-n-lean-2026-09-05/ (18 retained, NOTICE identical) and evand-rect-small-n-lean-2026-10-22/ (14 retained, 6 identical); keys [chelokot small-n Lean 2026-09-05], [Daniel small-n rectangles Lean 2026-10-22]; evidence E-small-n-chelokot-lean-report, E-small-n-daniel-rect-lean-report; a coverage entry for Daniel's source only (chelokot's would need a home-page Other Projects card, so it waits with the register entry on think-4o9c). PR https://github.com/jlevy/squares/pull/750. chelokot is now watched: read through e1e9ef5 added, owned by think-fddm (Bend proofs, deferral bead). The two evand reads (7051f4e, 7982d7a) no longer name this bead. Packet pushed at 918d780b0; records at 1e22df80f (merged with main at 9ba8e7a85).
 Price: under 1 CPU-hour for both receipt-bound builds; two toolchains (v4.33.0/db584cd6 and v4.33.1/0df444a3), about 20 GB disk this host lacked. Validation bead think-tq3g.
 Stage 4 review: owed for both routes, from the two packets.
+2026-10-24 c-land-750-1024 (think-ehx5): stage 3 done on the owner's decision (think-4o9c, option 1). T-237 registers the published proofs (Göbel 1979; Friedman DS7); T-238 registers chelokot's and Daniel's Lean routes as its formalization, V0/C0, S2, with unfinished confirmations think-7l2j (C1, stage 4 review) and think-tq3g (C3, builds). chelokot's coverage entry chelokot-small-n-lean-2026-09-05 added; both packet READMEs name T-237 and T-238. PR #750, commit 233fce701. Stage 4 review still owed for both routes.
