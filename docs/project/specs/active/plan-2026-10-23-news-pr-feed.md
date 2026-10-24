@@ -5,17 +5,18 @@ author: Intake lane c-news-plan-1023, for the repository owner
 ---
 # Feature: News Feed of Every Merged Pull Request
 
-**Date:** 2026-10-23 (last updated 2026-10-23)
+**Date:** 2026-10-23 (last updated 2026-10-24)
 
 **Author:** intake lane `c-news-plan-1023` under coordinator `coord-intake-1023`, for
 the repository owner
 
-**Status:** Approved in outline.
+**Status:** Owner’s questions answered.
 The owner answered every open question on 23 October 2026 ([Decisions](#decisions)).
+Nobody has approved the plan itself.
 
 **Tracking:** `think-vph5` (this plan); `think-4oj0` (News stories for the 16 merged S3
-pull requests that have none); `think-n51k` (a pull request carrying its own News entry,
-which this plan does not do)
+pull requests that had none, landed with #758 on 24 October); `think-n51k` (a pull
+request carrying its own News entry, which this plan does not do)
 
 ## Overview
 
@@ -36,9 +37,9 @@ This plan adds:
 - on each contributor profile, the list of pull requests that carry that person’s
   results.
 
-The plan has two phases, each one pull request that can land on its own: the record, its
-tool, the one-time backfill and the gate; then the page, its budget and the profile
-lists.
+The plan has three pull requests, each able to land on its own: first the page budget’s
+raise, then Phase 1 (the record, its tool, the one-time backfill and the gate), then
+Phase 2 (the page and the profile lists).
 
 ## The Owner’s Words
 
@@ -57,9 +58,9 @@ The owner, in conversation on 23 October 2026:
 3. “Maybe the best design would be to have a toggle at the top of the news page that
    shows either just the notable news stories or a feed of all changes by PR.”
 
-4. Asked where the feed starts: “All merged PRs”, from the repository’s start,
-   backfilled once. Asked who builds the page part: “Me, with the records”, meaning the
-   intake session builds it along with the records.
+4. Asked where the feed starts, the owner chose “All merged PRs (Recommended)”. Asked
+   who builds the page part, the owner chose “Me, with the records (Recommended)”.
+   [Decision 4](#decisions) gives both answers and who wrote each reading of them.
 
 5. “Let’s plan this out separately and make sure that you have landed the news items in
    parallel that are outstanding first, before we tackle the bigger design problem.
@@ -73,10 +74,10 @@ The owner, in conversation on 23 October 2026:
 The owner’s answers to the plan’s questions are under [Decisions](#decisions).
 
 Point 5 is why this is a plan.
-Two things proceed without it and the plan takes both as given: `think-4oj0` lands News
-stories for the 16 merged S3 pull requests that have none, and live intake lanes draft a
-News entry in the description of every S3+ pull request they open, which the coordinator
-lands after the merge.
+Two things proceeded without it and the plan takes both as given: `think-4oj0` landed
+News stories for the 16 merged S3 pull requests that had none (#758, merged at 5664ac1e8
+on 24 October), and live intake lanes draft a News entry in the description of every S3+
+pull request they open, which the coordinator lands after the merge.
 
 ## Goals
 
@@ -179,8 +180,8 @@ lands after the merge.
   `docs/project/site-urls.md` renders both.
   `check_published_site` holds every registered page to `page_budget(row)`: in the Pages
   workflow before a deploy (`--local site`), and on the deployed site after it.
-  `test_overview.py` repeats the two largest page ceilings in `PAGE_CEILINGS` and gives
-  `results.html` a fixed runway, `RESULTS_ROOM_THROUGH`.
+  `test_overview.py` repeats two of the largest page ceilings in `PAGE_CEILINGS` and
+  gives `results.html` a fixed runway, `RESULTS_ROOM_THROUGH`.
 - **Load checks in Chromium**, through Playwright, in three retained tools:
   - `check_site_rendering`: CLS, LCP, longest task and blocking time at 1280 and 390 px,
     light and dark, served gzipped from a local server, with a separate no-JS
@@ -194,10 +195,14 @@ lands after the merge.
   through `site_tallies.person_credit_stats`, and Related News from profile links in
   story prose (`news_by_profile`).
 - **`devtools.stamp_landed`** is the precedent for a tool that reads history and writes
-  the answer into a record: it dates each register entry’s `landed`, and its `--audit`
-  compares the record with `main`’s first-parent history and gates nothing.
+  the answer into a record.
+  Its `--backfill` and `--audit` modes read the register at each first-parent commit of
+  `main` (`git show COMMIT:packing/frontier/results.yaml`) to date each entry’s
+  `landed`, and `--audit --apply` writes the corrections; its default `--apply` compares
+  only with `origin/main`’s copy.
+  Nothing that renders a page or gates a change reads Git, which is the rule
   [OR-18](../../../../operating-rules.md#or-18-keep-bulk-data-out-of-git-and-never-bind-code-or-verdicts-to-a-git-commit-or-blob)
-  is why: no program depends on Git history to produce its answer.
+  sets: no program depends on Git history to produce its answer.
 
 ### Measured on 23 October 2026
 
@@ -205,7 +210,9 @@ The coordinator’s first figures were taken at 05e95db36. Every figure below wa
 at 769e441e1 and the record counts again at cc91ee1b8, where they are unchanged; GitHub
 and the deployed site were read the same day.
 The pace, budget, bytes-sent and timing rows were re-taken at 64b316b6c, with GitHub and
-the deployed site read at about 23:00Z.
+the deployed site read at about 23:00Z. Rows marked **24 October** were re-taken after
+#758 merged: the record counts at da117ad0b, and the deployed News page as review A of
+#759 measured it.
 
 | Fact | Value | How measured |
 | --- | --- | --- |
@@ -217,14 +224,17 @@ the deployed site read at about 23:00Z.
 | Bases other than `main` | 73 | the same listing |
 | Merge pace | August 61, September 162, October to the 23rd 314; 95 in the last 7 days | the same listing |
 | S3+ merge pace | 56 in October to the 23rd, 2.4 a day, and 1 before; 14 in the 7 days to 23 October 23:00Z, 2.0 a day | the same listing, re-read at 23:00Z, when it held 541 merged pull requests |
-| Changelog entries | 48: S5 4, S4 8, S3 24, S2 12; News shows 36, 35 of them dated October | `site-changelog.yaml` |
-| Deliveries, coverage, omissions | 103, 103, 42; 3 formal stacks | `site-changelog.yaml` |
-| S3+ pull requests with a story | 41 of 57; the 16 without are #731, #725, #708, #699, #692, #688, #676, #671, #657, #645, #644, #621, #620, #578, #469, #460, all S3 and all merged in October | labels joined to entries’ `pull_requests` |
+| Changelog entries, **24 October** | 62: S5 4, S4 8, S3 38, S2 12; News shows 50 (48 entries and 36 on News on 23 October) | `site-changelog.yaml` |
+| Deliveries, coverage, omissions, **24 October** | 117, 117, 40; 3 formal stacks (103, 103 and 42 on 23 October) | `site-changelog.yaml` |
+| S3+ pull requests with a story, **24 October** | all 57; on 23 October 41, and the 16 without were #731, #725, #708, #699, #692, #688, #676, #671, #657, #645, #644, #621, #620, #578, #469, #460, all S3 and all merged in October, which #758 gave stories | labels from a fresh listing of 546 merged pull requests joined to entries’ `pull_requests`; the story gate as specified below fails none |
+| Shared merge commits, **24 October** | 28 commits are GitHub’s `mergeCommit` for more than one pull request, 89 pull requests in all; 16 of the 28 register or raise a result | review A of #759, and a scratch read of the same listing with each pull request’s `headRefName` and `headRefOid` |
+| Register-changing merges, **24 October** | 125 first-parent commits of `main` change `frontier/results.yaml` | `git rev-list --first-parent origin/main -- packing/frontier/results.yaml` at da117ad0b |
 | Register | 230 results; 177 at S3+ (S5 10, S4 11, S3 156) | `frontier/results.yaml` |
 | S3+ results with no story at their own score | 124: the 15 exempt S4 and S5 results and 109 S3 results | the gate’s rule, `news_announced_scores` |
 | S3+ results named by no entry at all | 121; T-062, T-064 and T-081 are named only by S2 entries, which News does not show | the coordinator’s first figure of 121 counts this way |
 | The 109 unannounced S3 results by `landed` | 81 before 13 October, when the News archive began; 27 on 13–22 October; 1 on 23 October | `landed` |
 | Deployed News page | 223,432 bytes: 36 cards averaging 5,264 bytes (2,867 to 11,846), and 33,910 bytes outside them; one significance meter paragraph averages 628 bytes | `https://squaremath.org/news.html`, fetched twice that day (223,194 bytes at the first fetch) |
+| Deployed News page, **24 October** | 318,655 bytes: 50 cards averaging 5,685 bytes (90th percentile 8,479), the 14 cards added since 23 October averaging about 6,800, and 34,414 bytes outside the cards; sent as 43,345 gzipped bytes (7.4 to 1), where zlib at level 6 gives 41,988; 90 `<math>` elements | review A of #759 (`curl` with each `Accept-Encoding`); the card split re-counted from its copy of the page |
 | Page budget | 600,000 bytes for a `page`, and 2,000,000 for every HTML file; News has no exception; the largest exceptions are 1,500,000 (`papers/n11-lower-bounds-explainer.html`), 1,400,000 (`results.html`) and 1,300,000 (`index.html`) | `site_urls.PAGE_BUDGETS`, `PAGE_BUDGET_EXCEPTIONS` and `HARD_HTML_LIMIT` at 64b316b6c, unchanged since 769e441e1 |
 | Bytes sent | `news.html` 223,432 bytes, sent as 32,172 gzipped (6.9 to 1); `results.html` 1,303,283 as 86,414 (15 to 1); `index.html` 483,093 as 45,445; a request accepting only brotli got `news.html` uncompressed, and one accepting brotli or gzip got gzip | `curl` with each `Accept-Encoding` against `https://squaremath.org` |
 | Load timings on record | `results.html` at 1,324,108 bytes passed three runs at desktop and phone widths, light and dark, and with scripts off: CLS 0, LCP at most 444 ms, longest task 197 ms, blocking 155 ms; News has none | the reason in `PAGE_BUDGET_EXCEPTIONS["results.html"]`, recorded on 22 October and not re-run |
@@ -237,17 +247,43 @@ the deployed site read at about 23:00Z.
 **A separate file, which absorbs `deliveries` and `stacks`.** The record is
 `packing/pull-requests.yaml`, schema `packing/pull-requests.schema.yaml`, contract
 `packing.squares:PullRequests/v1`, status `enforced`. It becomes the one home of every
-merge fact. The 103 `deliveries` rows and the 3 `stacks` move into it in Phase 1, and
-`site-changelog.yaml` keeps only editorial content: `entries`, `coverage` and
-`frozen_entries`, under contract `SiteChangelog/v2`. An entry’s pull requests are looked
-up in the new record, where the old rule looked them up in `deliveries`.
+merge fact.
+Every `deliveries` row (117 on 24 October) and the 3 `stacks` move into it in
+Phase 1, and `site-changelog.yaml` keeps only editorial content: `entries`, `coverage`,
+`frozen_entries` and the optional feed summaries, under contract `SiteChangelog/v2`. An
+entry’s pull requests are looked up in the new record, where the old rule looked them up
+in `deliveries`.
+
+**The coverage rule under v2.** Today `validate` requires `coverage.pull_requests` to
+equal both the set of `deliveries` and the pull requests entries represent together with
+those omitted (`render_changelog.py:682`), and the runbook asks for an entry or an
+omission for each S1 or S2 pull request
+([`result-import.md`](../../../../packing/campaign/result-import.md#label-the-pr-and-prepare-news),
+“For S1/S2, record a coverage omission or retain an entry in the full changelog”). Under
+v2:
+
+- `coverage.pull_requests` is a subset of the record’s numbers, and equals the pull
+  requests the entries represent together with those omitted, each omitted at most once
+  and never also represented;
+- a row of the record owes `coverage` nothing: an S1, S2 or unscored row needs neither
+  an entry nor an omission, so the about 430 rows the backfill adds need no written
+  omission;
+- an omission does not excuse an S3+ row, which the story gate holds to its story
+  ([Gates](#gates)).
+
+The 117 covered pull requests and 40 omissions carry over unchanged.
+The runbook’s S1/S2 sentence changes to match in Phase 1 ([Process](#process)), and
+`test_changelog.py` holds the rule: a coverage number the record lacks fails, a coverage
+list that differs from the represented and omitted pull requests fails, an S2 row with
+neither an entry nor an omission passes, and an S3 row with only an omission fails the
+story gate.
 
 Extending `deliveries` in place to all 537 pull requests was the alternative.
 It loses on four counts:
 
-- **The coverage rule.** Every delivery needs an entry or exactly one omission, so 434
-  new deliveries would need 434 written omissions, or the rule would have to change
-  anyway.
+- **The coverage rule.** Every delivery needs an entry or exactly one omission, so the
+  about 430 new deliveries would need as many written omissions, or the rule would have
+  to change anyway.
 - **Authorship.** `site-changelog.yaml` is hand-edited prose under review; the record is
   written by a tool and can be regenerated from GitHub.
   Mixing them puts several thousand machine-written lines in the file editors work in,
@@ -280,10 +316,9 @@ pull_requests:
     author: jlevy
     labels: [S3, intake]
     results:
-      - {id: T-223, change: raised}
+      - {id: T-223, change: raised, score: 3}
       - {id: T-223, change: adopted, n: [204, 260]}
 stacks: []          # moved unchanged from site-changelog.yaml
-story_exempt: []    # S3+ pull requests allowed no story; may only shrink
 ```
 
 | Field | Required | Meaning |
@@ -293,15 +328,37 @@ story_exempt: []    # S3+ pull requests allowed no story; may only shrink
 | `labels` | yes, may be empty | every GitHub label; the significance label is the one `S1`–`S5` label, at most one |
 | `delivery_to_main` | when the base is not `main` or the merge commit is off `main`’s first-parent line | `{commit, evidence}`: the first-parent commit of `main` whose history first holds the merge, and its commit URL; `via` names the carrying pull request when there is one |
 | `stack_id` | no | formal stack membership, as today |
-| `results` | no | each result the merge changed: `registered` (a new id), `raised` (a higher verification or confirmation rung, or a higher significance), or `adopted` with the counts `n` it became the house best packing at |
-| `summary` | no | one plain sentence for a feed reader, for a title worth replacing ([Decision 4](#decisions)) |
+| `results` | no | each result this pull request’s own change delivered ([the tool](#the-tool-devtoolsrecord_pull_requests) says how a shared merge is split): `registered` (a new id), `raised` (a higher verification or confirmation rung, or a higher significance), or `adopted` with the counts `n` it became the house best packing at; a `registered` or `raised` item carries `score`, the result’s significance at the pull request’s own head |
+
+Everything in the record is written by the tool.
+The two hand-edited fields the first draft put here live with the other editorial
+content instead:
+
+- **Pull requests allowed no story** are `render_changelog.STORY_EXEMPT`, a constant
+  beside `ANNOUNCEMENT_EXEMPT`, mapping each number to its reason.
+  It starts empty and may only shrink ([Gates](#gates)).
+- **A feed summary**, one plain sentence for a title worth replacing
+  ([Coordinator Defaults](#coordinator-defaults)), is an entry of the optional
+  `pull_request_summaries` mapping in `site-changelog.yaml`, keyed by number, each
+  number a row of the record.
+
+So the tool’s rewrite carries no hand-written field, and the record can be regenerated
+from GitHub and Git without losing an edit.
+
+**Why each item keeps its score.** `score` on a `registered` or `raised` item is the
+result’s significance when this pull request delivered it, a fact of that delivery.
+The register keeps the result’s current score, and a later rescoring there is the
+`raised` item of the pull request that made it.
+The label floor, the story gate’s result rule and the score taken from results
+([Gates](#gates), [Decision 2](#decisions)) read the item’s `score`, so a later raise is
+not charged to an earlier pull request.
 
 Three fields the coordinator proposed are derived at render time rather than stored,
 each because storing it would give a fact a second home:
 
 - **Significance** is the S label.
-  A pull request with no S label takes the score of the strongest result it `registered`
-  or `raised`, read from the register, and is marked as scored from its results
+  A pull request with no S label takes the highest `score` among the results it
+  `registered` or `raised`, and is marked as scored from its results
   ([Decision 2](#decisions)). A pull request with neither is “Not scored”.
   The label can change after a merge, and the tool’s next run refreshes `labels`.
 - **News entry ids** are the entries whose `pull_requests` name the number;
@@ -346,22 +403,22 @@ derives from it for every renderer and gate, as `render_changelog` and
 `import_changelog` divide the same work today.
 
 - **Fetch.** One call:
-  `gh pr list --repo jlevy/squares --state merged --limit 2000 --json number,title,mergedAt,mergeCommit,baseRefName,labels,author`.
-  On 23 October it returned 537 rows in 3.6 s. The tool refuses a result whose length
-  equals the limit, which could be a truncated list.
+  `gh pr list --repo jlevy/squares --state merged --limit 2000 --json number,title,mergedAt,mergeCommit,baseRefName,headRefName,headRefOid,labels,author`.
+  On 23 October it returned 537 rows in 3.6 s, and with the two head fields 546 rows in
+  3.9 s on 24 October.
+  The tool refuses a result whose length equals the limit, which could be a truncated
+  list.
 - **Verify.** Each merge commit must reach local `origin/main` (fetch it first), the
   check `import_changelog.verify_main_delivery` makes today.
   For a merge commit off the first-parent line, the tool finds the first first-parent
   commit of `main` that holds it, by ancestry tests along
   `git rev-list --first-parent origin/main`, and records it as `delivery_to_main`. A
   pull request that never reached `main` is refused by name.
-- **Results.** For a merge whose first-parent diff touches `frontier/results.yaml`, the
-  tool compares the register at the merge’s first parent and at the delivering commit:
-  new ids are `registered`, and an id whose rung or significance rose is `raised`. It
-  reads the house table `upper_bound_houses.ADOPTED` at the same two commits for
-  `adopted`. It reads each entry’s id, rungs and score with a line scanner of the kind
-  `render_changelog.register_score` is, so it need not parse a 1.98 MB register per
-  commit. 122 first-parent commits on `main` have changed the register.
+- **Results.** Each row’s `results` are the change its own pull request delivered, not
+  the whole of the merge that brought it to `main` (How results are attributed, below).
+  The tool reads each entry’s id, rungs and score with a line scanner of the kind
+  `render_changelog.register_score` is, so it need not parse a 1.99 MB register per
+  commit. 125 first-parent commits on `main` had changed the register on 24 October.
 - **Idempotent.** Rows are sorted by number and written atomically with a fixed YAML
   layout. A run with nothing new writes nothing, and a second run of the same input is
   byte-identical. A row already recorded is refreshed only in `title` and `labels`, which
@@ -379,20 +436,84 @@ derives from it for every renderer and gate, as `render_changelog` and
   - `--audit` reads only local Git: every first-parent `Merge pull request #N` commit on
     `origin/main` has a row, and every row’s merge commit is reachable.
     It gates nothing, like `stamp_landed --audit`.
-- **The backfill** is the first `--apply`: about 540 rows, the 103 migrated `deliveries`
-  among them, whose `merged_at`, `base_ref`, `merge_commit` and `delivery_to_main` must
-  agree with what GitHub and Git return (a title edited since is refreshed and listed),
-  and the `results` of the 122 register-changing merges.
-  Its cost is estimated, not measured, at under five CPU-minutes: one GitHub call, and
-  at most 244 `git show` reads of the register (two for each of the 122 merges) and as
-  many of `upper_bound_houses.py`.
+- **The backfill** is the first `--apply`: about 550 rows, every migrated `deliveries`
+  row among them, whose `merged_at`, `base_ref`, `merge_commit` and `delivery_to_main`
+  must agree with what GitHub and Git return (a title edited since is refreshed and
+  listed), and the `results` of the register-changing merges, 125 on 24 October.
+  Its evidence lists each shared-merge group and carried pull request with the results
+  each row took, and any group it refused.
+  Its cost is estimated, not measured, at under five CPU-minutes: one GitHub call, two
+  `git show` reads of the register for each register-changing merge and one for each
+  layer head of a shared group, about 340 in all, and as many of
+  `upper_bound_houses.py`. The scratch read of the 28 shared groups took 9 s.
+- **Its standing under OR-18.** The tool reads `git show REV:path` at historical
+  commits, which OR-18 rules out for a program that produces an answer.
+  It is an authoring-time acquisition: it reads history once, writes the facts into a
+  reviewed record, and nothing re-derives them later.
+  The precedents are `stamp_landed --backfill` and `--audit --apply`, which read the
+  register at first-parent commits and write `landed`, and
+  `import_changelog.verify_main_delivery`, which checks a merge’s ancestry while an
+  entry is drafted. No gate, renderer or test reads `results` from Git: the gates read
+  the committed record and register, and the tests build their own fixture repositories.
+
+**How results are attributed.** GitHub can give one `mergeCommit` to several pull
+requests: every layer of a formal stack or chain that lands together gets the commit
+that delivered the whole group.
+On 24 October 28 commits were the `mergeCommit` of more than one pull request, 89 in
+all. A merge’s first-parent diff therefore cannot be a row’s `results`, or each layer
+would show every other layer’s results, credits and story debt.
+The tool works per delivering commit *D*, a first-parent commit of `main`: a row’s merge
+commit when that is on the first-parent line, otherwise its `delivery_to_main.commit`.
+
+1. **The group’s change.** The register at *D*’s first parent against the register at
+   *D*: new ids are registered, and an id whose rung or significance rose is raised.
+   The house table `upper_bound_houses.ADOPTED` at the same two commits gives `adopted`.
+2. **One pull request.** When *D* delivers one pull request, as for most merges, that
+   row takes the whole change.
+3. **Layers that share *D* as their `mergeCommit`.** The tool orders them into one chain
+   by their refs: exactly one is based on `main`, each other’s `baseRefName` is another
+   layer’s `headRefName`, and each layer’s `headRefOid` is an ancestor of *D* and of the
+   head of every layer above it.
+   A layer’s own change is the register at the head of the layer below it (for the layer
+   based on `main`, *D*’s first parent) against the register at its own head, kept only
+   where it is part of the group’s change.
+4. **A pull request carried into *D*** by a merge into another branch (one whose merge
+   commit is off the first-parent line) takes its own merge’s change, its merge commit’s
+   first parent against that commit, kept only where it is part of the group’s change.
+   The pull request that carried it does not take those ids.
+5. **Everything accounted for once.** Every id the group registers goes to exactly one
+   row, and every rise it makes to at least one.
+   A group whose layers cannot be ordered, a head that is not an ancestor of *D*, or a
+   change no row accounts for is refused by name, and is recorded only when the reviewed
+   backfill says which pull request delivered each id.
+
+The review’s example is d3860c97a, “Merge pull request #469”, GitHub’s `mergeCommit` for
+11 pull requests. Its first-parent change registers T-125 to T-130. By the rule above,
+read from the 11 layer heads on 24 October:
+
+- #442, the layer based on `main`, registered T-125 and T-126;
+- #448 registered T-127, and #459 raised it;
+- #460 registered T-128, #463 T-129 and #469 T-130;
+- #443, #449, #450, #466 and #468 registered and raised nothing.
+
+The first-parent diff alone would have given all six ids to all 11 rows.
+The same read ordered all 28 shared groups by their refs, and in each one the layers’
+own changes added up to the merge’s change, every registered id claimed once.
+Of the 16 pull requests carried by a later merge, only #336’s own merge registers ids
+(T-094 to T-100). Its GitHub merge commit is a merge of `main` into its branch, and
+those ids were already on `main` from #362, so rule 4 gives #336 none of them.
+These figures come from a scratch read of the GitHub listing and local Git; the tool and
+its backfill evidence re-derive them.
+Because each row holds only its own results, the credited people derived from it and the
+story it owes follow the pull request that delivered them.
 
 `import_changelog` changes in two ways.
-It reads merge facts from the record rather than writing `deliveries`, so drafting a
-story is offline once the merge is recorded.
-It also takes a drafted entry from the pull request’s description.
-Live lanes already draft the entry under a **News** heading; this plan fixes its form as
-one fenced `yaml` block under `## News`, which becomes the candidate in place of
+It reads merge facts from the record rather than writing `deliveries`. It also takes a
+drafted entry from the pull request’s description, which it still reads from GitHub
+(`gh pr view`, its `body` field) at authoring time; rendering and every gate stay
+offline.
+Live lanes already draft the entry under a **News** heading; this plan fixes its
+form as one fenced `yaml` block under `## News`, which becomes the candidate in place of
 placeholder prose, with the merge day as its `date`. The candidate is still reviewed
 before it lands.
 
@@ -413,11 +534,12 @@ Once the deploy of a merge is verified, the intake pass’s runner:
    `packing-validate --records`, and lands the change as the first change after the
    merge, the same follow-up that records the replies.
 
-**The page’s room.** Once the budget raise has landed, step 3 also runs
-`python -m devtools.measure_news_page bytes` on the rendered page.
-When fewer than 30 days of room remain before the trip point, the coordinator opens a
-`decision` bead for the owner then, before the check fails
-([The page budget](#the-page-budget)).
+**The page’s room.** Once the budget raise has landed, the follow-up that lands a story
+runs `python -m devtools.measure_news_page bytes` on the rendered page; from Phase 1 on
+that is step 3. When fewer than 30 days of room remain before the trip point, the
+coordinator opens a `decision` bead for the owner then, before the check fails.
+The bead says that at the trip point no S3+ merge can be recorded, and asks the owner to
+choose the next step before the page gets there ([The page budget](#the-page-budget)).
 
 **Who runs it.** The intake pass’s runner, its coordinator, which merges under the
 `github-merge: autonomous` grant ([Decision 5](#decisions)). When the owner merges by
@@ -427,24 +549,61 @@ hand, the next pass’s sweep lists the pull request and that pass records it.
 so the record always trails `main` by the latest follow-up and by anything merged after
 it. The sweep tells that tail apart from a gap (below).
 
-**The runbook and the comments change to the 23 October rule** in Phase 1:
+**The runbook and the comments change to the 23 October rule** in Phase 1. Each passage
+below stops being true then, and Phase 1’s checklist item rewrites every one.
+Line numbers are `main`’s at da117ad0b.
 
 - [Label the PR and Prepare News](../../../../packing/campaign/result-import.md#label-the-pr-and-prepare-news):
-  “For other S3–S5 work, S3 results included, News stays optional” becomes: every pull
-  request labelled S3, S4 or S5 has a story naming each S3+ result it registers or
-  raises, drafted under **News** in its description as a fenced `yaml` entry and landed
-  in the first change after its merge (the owner, 23 October 2026, point 1 above and
-  [Decision 1](#decisions)).
-- [Announce a Significant Result](../../../../packing/campaign/result-import.md#announce-a-significant-result)
-  keeps the 22 October rule for results and adds the pull-request rule and its gate.
-- Stage 7’s bullet list gains the record step, and
-  [Maintaining the project changelog](../../../../development.md#maintaining-the-project-changelog)
-  says where merge facts now live.
-- The `ANNOUNCED_FROM` comment cites both decisions: 22 October (“Let’s have it do S4
-  and S5 then”) for registered results, and 23 October (“Via each PR’s story”) for S3
-  results, which reach News through the story of the pull request that registers or
-  raises them. Its value stays 4.
-- `.github/PULL_REQUEST_TEMPLATE.md`’s opening comment names the `## News` block form.
+  - `result-import.md:1128-1131`, “For other S3–S5 work, S3 results included, News stays
+    optional, as before: draft a concise News entry before merge, or record an editorial
+    omission when the PR is an intermediate research checkpoint without a distinct
+    reader-facing development.”
+    It becomes: every pull request labelled S3, S4 or S5 has a story naming each S3+
+    result it registers or raises, drafted under **News** in its description as a fenced
+    `yaml` entry and landed in the first change after its merge (the owner, 23 October
+    2026, point 1 above and [Decision 1](#decisions)). The omission clause goes: an S3+
+    pull request cannot be omitted, since `STORY_EXEMPT` may only shrink, so a pull
+    request that is an intermediate checkpoint with no reader-facing development is
+    labelled S1 or S2 by the rubric instead.
+  - `:1142-1143`, “For S1/S2, record a coverage omission or retain an entry in the full
+    changelog; these scores stay out of News.”
+    It becomes the v2 coverage rule: an S1 or S2 pull request’s row is its record, and
+    an entry or an omission is optional.
+  - `:1148-1166`, the import paragraph (“After the source PR merges and its commit
+    reaches local main, use the existing authoring command”, through “bring the approved
+    entry into `site-changelog.yaml`”). Its candidate brings a delivery row; it becomes:
+    once Record the merge has written the row, `import_changelog` reads the merge facts
+    from `pull-requests.yaml`, takes the drafted `## News` block from the description,
+    and the candidate carries the entry and its coverage number, with no delivery row.
+- [Stage 7](../../../../packing/campaign/result-import.md#stage-7-answer): `:1290-1292`,
+  “Every S4 or S5 result gets a News item in the first change after the merge that
+  registered or raised it”.
+  It gains the pull-request rule (every S3+ pull request gets its story in that change)
+  and Record the merge as the change’s first step.
+- [Announce a Significant Result](../../../../packing/campaign/result-import.md#announce-a-significant-result):
+  - `:1357-1358`, “S3 News stays optional, as Label the PR and Prepare News says.”
+    It becomes: S3 results reach News through the story of the pull request that
+    registers or raises them (the owner, 23 October, [Decision 1](#decisions)), and that
+    story is held by the story gate.
+    The section keeps the 22 October rule for registered results and adds the
+    pull-request rule and its gate.
+  - `:1372-1374`, step 2’s “Bring its delivery row, its coverage number and the reviewed
+    entry into `site-changelog.yaml`”. The delivery row is now the record’s, written by
+    Record the merge, so the step brings the coverage number and the entry.
+- [After the Merge](../../../../packing/campaign/result-import.md#after-the-merge)
+  (`:1509`) gains Record the merge as its first step.
+- [Maintaining the project changelog](../../../../development.md#maintaining-the-project-changelog):
+  `development.md:2128-2130`, “One merged PR may support separate articles for distinct
+  contributions, with one retained delivery row and all article IDs listed in its
+  coverage audit”, and the section says where merge facts now live.
+- The `ANNOUNCED_FROM` comment (`render_changelog.py:708-711`), which ends “S3 News
+  stays optional.” It cites both decisions instead: 22 October (“Let’s have it do S4 and
+  S5 then”) for registered results, and 23 October (“Via each PR’s story (Recommended)”)
+  for S3 results, which reach News through the story of the pull request that registers
+  or raises them. Its value stays 4.
+- `.github/PULL_REQUEST_TEMPLATE.md`’s opening comment, “Prepare appropriate News
+  wording or an explicit editorial omission under that policy”, names the `## News`
+  block form and drops the omission for S3+.
 
 ### Gates
 
@@ -455,16 +614,32 @@ announcement gate. It reads only the tree:
 - every pull request an entry names is a row of the record, and an entry’s date is the
   latest merge day of its pull requests (the rule today, moved to the record);
 - every row whose S label is S*k*, with *k* at least 3 and the row not in
-  `story_exempt`, is named by a News-shown entry scored *k* or higher, so an S4 pull
+  `STORY_EXEMPT`, is named by a News-shown entry scored *k* or higher, so an S4 pull
   request named only by an S3 entry fails, as a result announced below its score does
   today;
 - for rows numbered above Phase 1’s own pull request (a constant set when that pull
-  request is opened), that entry also lists in `result_ids` every S3+ result the row
-  `registered` or `raised` ([Decision 1](#decisions)); earlier rows are reported, not
-  failed;
+  request is opened), that entry also lists in `result_ids` every result the row
+  `registered` or `raised` with a `score` of 3 or more ([Decision 1](#decisions));
+  earlier rows are reported, not failed;
 - a score taken from results ([Decision 2](#decisions)) owes no story;
-- a `story_exempt` entry that now has its story, or names a row that is not S3+, fails
+- a `STORY_EXEMPT` entry that now has its story, or names a row that is not S3+, fails
   until it is removed, the same rule `ANNOUNCEMENT_EXEMPT` follows.
+
+**The label floor.** A row’s S label, when it has one, is at least the `score` of every
+result it `registered`, since the rubric gives a registered result’s pull request that
+result’s score (“A new registered result and its announcement inherit that result’s
+actual S score”,
+[Label the PR and Prepare News](../../../../packing/campaign/result-import.md#label-the-pr-and-prepare-news)).
+Under Decision 1 an S3 result reaches News only through its pull request’s story, so an
+S2 label on that pull request would keep the result off News with nothing to catch it.
+The check reads only the record, runs in the same step with the same scopes as the story
+gate, and lists each row it fails with the result and its score.
+A raise is left to the rubric, since raising a rung is not always new significance, and
+the story gate already requires an S3+ row’s story to name the S3+ results it raised.
+Review A of #759 scanned the 125 register-changing merges and found none labelled below
+a result it registers, and the scratch read of the 28 shared groups found no layer below
+one (#463, labelled S1, registered T-129 at score 1), so the floor starts with no
+exemptions.
 
 A row and its story arrive in the same follow-up, so the change that records an S3+ pull
 request without its story is the change that fails.
@@ -495,10 +670,18 @@ most one S label a row; `merged_at` timestamps that parse; `delivery_to_main` ev
 that matches its commit; stack membership as today; every result id in the register.
 
 **The freeze check.** `validate_previous_ref` validates `main`’s changelog with the
-current `validate` code.
-From Phase 1 on it validates a `SiteChangelog/v1` document from `main` against that
-document’s own schema, then compares entry ids, dates and pull request membership, which
-is all the freeze needs.
+current `validate` code, then compares entry ids, dates and pull request membership,
+which is all the freeze needs.
+From Phase 1 on it accepts either contract from the base:
+
+- **a `SiteChangelog/v1` document**, which only Phase 1’s own pull request sees on
+  `main`, is validated against its own schema, and its entries’ dates come from its own
+  `deliveries`;
+- **a `SiteChangelog/v2` document**, what `main` holds once Phase 1 merges, takes its
+  entries’ dates from the base’s `pull-requests.yaml`, read at the same merge base.
+
+Phase 2, which starts from a `main` that holds v2, removes the v1 path, and a test then
+requires the base to be v2.
 
 ### The page
 
@@ -531,14 +714,15 @@ Triangle tablist does:
 - **A new script, `overview/news-views.js`, turns the strip into a tablist.** It sets
   `role="tablist"` on the strip, `role="tab"`, `aria-selected` and `aria-controls` on
   each link, and `role="tabpanel"` with `aria-labelledby` on each view’s section.
-  Only the selected tab is in the tab order.
+  ARIA in HTML allows `tablist` on `nav` and `tab` on `a[href]`, as review A of #759
+  checked. Only the selected tab is in the tab order.
   The Left and Right arrows (wrapping), Home and End move between the tabs and select,
   as `atlas-view.js` does, and a click or Enter selects.
   The style is unchanged, because `site-nav.css` gives
-  `[role="tab"][aria-selected="true"]` the same fill as `a[aria-current="page"]`. This
-  plan has not checked that ARIA in HTML allows `role="tablist"` on a `nav` element; if
-  it does not, Phase 2 puts the role on an inner element with `display: contents`, which
-  keeps the strip’s layout.
+  `[role="tab"][aria-selected="true"]` the same fill as `a[aria-current="page"]`. The
+  script removes `aria-current` from the strip’s links when it enhances them: left on
+  “Notable stories”, it would keep that tab filled by `site-nav.css:493` while the feed
+  is selected, and both tabs would show the fill.
 - **Each tab’s `href` becomes its view’s own address**, so opening a tab in a new window
   or copying its link gives that view.
   The view can be bookmarked and shared, as Film and Workbench could.
@@ -692,7 +876,10 @@ Phase 2 makes two small changes:
   “All changes by PR” on the archive page, the strip `--site-tabs-space` under the rule,
   and the title `--site-page-top` under the strip.
 
-**How this fits with #736.** #736 (open, the site agent’s) makes these changes:
+**How this fits with #736.** #736 (open) makes the changes below.
+On the owner’s word, another lane is taking #736 over from the site agent, to bring it
+up to current `main` with its design unchanged; Phase 2 still waits for it to merge.
+#736 makes these changes:
 
 - it adds `NEWS_FLOOR` and `NEWS_LEVELS`;
 - it moves the significance buttons into `news_significance_filter(selected)`;
@@ -712,8 +899,8 @@ Phase 2 starts from `main` after #736 merges and builds on it:
 - `news_highlights.py`’s selection, the compact filter, `stamp_landed.py` and
   `landings.yaml` are untouched.
 
-Phase 1 changes no page.
-Its edits to `render_changelog.py` (`validate`, the gates, `load`) and to
+The budget raise and Phase 1 change no page.
+Their edits to `render_changelog.py` (`validate`, the gates, `load`) and to
 `result-import.md` meet #736’s only as text merges, and whichever lands second merges
 `main`.
 
@@ -739,22 +926,24 @@ unaffected; it runs in the full gate as always.
 the 600,000-byte `page` budget and needs a measured exception of its own.
 Only feed rows leave it, for the archive pages above.
 
-**Expected size**, estimated from the averages measured on 23 October: 5,264 bytes a
-story; a shell of about 38,000 bytes (33,910 today, plus the strip, the feed’s filter
-and the archive links); the feed’s 200,000-byte cap; and October’s 2.4 S3+ merges a day,
-one story each, about 12,600 bytes a day.
+**Expected size**, re-taken from the deployed page on 24 October: 318,655 bytes over 50
+stories, 34,414 of them outside the cards.
+The 14 cards added since 23 October average about 6,800 bytes against 5,685 for all 50,
+so the projection takes about 6,000 bytes a story.
+At October’s 2.4 S3+ merges a day, one story each, the page gains about 14,400 bytes a
+day. Phase 2 adds about 204,000 bytes at once: the feed’s 200,000-byte cap and about
+4,000 for the strip, the feed’s filter and the archive links.
 
-| When | `news.html` | What it shows |
-| --- | --- | --- |
-| Today | 223,432 bytes | 36 stories |
-| After `think-4oj0` | about 307,700 | 52 stories |
-| Phase 2 lands | about 512,000 | 52 stories, and about 420 rows filling the feed’s cap at once |
-| About 7 days after Phase 2 | 600,000 | today’s `page` budget |
-| About 50 days after | 1,150,000 | the trip point below: about 173 stories |
-| About 62 days after | 1,300,000 | the proposed budget: about 200 stories |
+| `news.html` | Days from 24 October, stories only | With Phase 2’s feed | What it is |
+| --- | --- | --- | --- |
+| 318,655 bytes | today |  | 50 stories, deployed |
+| 450,000 | about 9 |  | the raise must have merged by then ([When the raise lands](#the-page-budget)) |
+| 600,000 | about 19 |  | today’s `page` budget; `check_published_site` fails each follow-up that adds a story past it |
+| 1,150,000 | about 58 | about 44 | the trip point below: about 189 stories, or about 155 beside the feed |
+| 1,300,000 | about 68 | about 54 | the proposed budget: about 214 stories, or about 180 beside the feed |
 
-At the last seven days’ pace, 2.0 a day, the trip point comes about 61 days after Phase
-2 and the budget about 75.
+At 6,800 bytes a story, the pace of the newest cards, each day count is about an eighth
+shorter: `page`’s 600,000 bytes about 17 days away and the trip point about 51.
 
 **The measurement, before the budget moves.** One retained tool,
 `devtools.measure_news_page`, takes the measurement, as
@@ -766,16 +955,17 @@ It measures two pages, both built by the site’s own renderer:
 - **today’s `news.html`**, as `main` renders it when the raise is made;
 - **a projected `news.html` at the proposed budget**, 1,300,000 bytes: the real stories
   repeated in date order under new ids and anchors until the page reaches that size,
-  with the feed at its full cap.
+  with the feed at its full cap once Phase 2 has a feed.
   Built from the page’s own cards, the projection carries the markup readers will get.
 
 Its modes, from `packing/`:
-
 - **`bytes PAGE...`** needs no browser.
   For each page it reports:
   - the raw bytes;
   - the gzip bytes at level 6, the level `preview_site.serve` uses; GitHub Pages sent
-    gzip on 23 October;
+    gzip on 23 and 24 October, though not at level 6 (43,345 bytes on 24 October for a
+    page level 6 compresses to 41,988);
+  - given a deployed address, the raw bytes and the gzip transfer size the site sends;
   - the brotli bytes at quality 11, through the `brotli` module the environment already
     has from `fonttools[woff]`, for reference only, since GitHub Pages answered a
     brotli-only request with the uncompressed page;
@@ -797,20 +987,34 @@ Its modes, from `packing/`:
     them, and the `ParseHTML` total from one `check_site_rendering --trace` navigation,
     recorded as a diagnostic with no gate credit.
 - **`switch DIR`** times the in-place tab switch on Phase 2’s page, at its launch size
-  and at the projected size: five runs of each switch, to the feed and back, by click
-  and by arrow key, at 1280 and 390 px.
-  For each it reports the handler’s time, the time to the next frame, any long task, and
-  the same counters over the change.
-  Its page code is a probe file under `probes/measure_news_page/`, loaded with
-  `sqpack.probes.probe`.
+  and at the projected size, at 1280 and 390 px, by click and by arrow key, five runs of
+  each path. For each it reports the handler’s time, the time to the next frame, any long
+  task, the same counters over the change (`LayoutCount` among them), and the
+  long-animation-frame `forcedStyleAndLayoutDuration` of each script, which
+  `check_site_rendering`’s probe already records
+  (`probes/check_site_rendering/instrument.js:126-137`). Its page code is a probe file
+  under `probes/measure_news_page/`, loaded with `sqpack.probes.probe`. The paths:
+  - from the default view to the feed and back;
+  - **an address that opens on the feed (`news-view=changes`), then a switch to the
+    stories.** This is the expensive path.
+    The stories’ panel is hidden before first paint, so `news-cards.js` enhances none of
+    its cards at load: `refresh` returns while a card has no box (`news-cards.js:48`),
+    and each card’s `previousWidth` is recorded as 0 (`:95`). On the first switch to the
+    stories every card’s `ResizeObserver` sees its width change and runs `refresh`
+    (`:96-100`), which collapses the card and reads `getComputedStyle(body).lineHeight`
+    and `body.scrollHeight`, one card after another.
 
 The budget may move when both pages pass:
 
 - every `check_site_rendering` limit, unchanged (CLS 0.1, LCP 4,000 ms, longest task 300
   ms, blocking 600 ms), on the median of three runs, with the no-JS page readable;
 - a tab switch that paints its next frame within 200 ms of the press, the median of five
-  runs at 390 px, with no long task above the site’s 300 ms limit; 200 ms is the “good”
-  bound of the web’s Interaction to Next Paint measure.
+  runs at 390 px on each path above, the first reveal of the stories included, with no
+  long task above the site’s 300 ms limit; 200 ms is the “good” bound of the web’s
+  Interaction to Next Paint measure.
+
+The raise lands before Phase 2 has a switch, so it is held to the load limits alone;
+Phase 2 adds the switch limit and re-runs `load` on its page with the feed.
 
 Transfer size has no limit of its own; the measured gzip and brotli bytes go into the
 exception’s reason. Timings taken on the shared host are advisory, as `results.html`’s
@@ -823,19 +1027,26 @@ If the projected page fails a limit, the tool measures a projection at 1,000,000
 and the budget is the larger size that passes, with its trip point 150,000 bytes below
 it. If 1,000,000 fails too, the raise stops and the report goes to the owner.
 
-**The budget: 1,300,000 bytes**, if the measurement passes, for four reasons:
+**The proposed budget: 1,300,000 bytes.** The budget, the 150,000-byte trip margin, the
+feed’s 200,000-byte cap and the half-month split of rows are this plan’s proposals, not
+the owner’s choices.
+The owner chose only “Keep all, raise the limit” ([Decision 6](#decisions)); the
+measurement confirms the budget, and all four stay proposals until the owner confirms
+them. 1,300,000 bytes is proposed, if the measurement passes, for four reasons:
 
-- It is the size the owner’s question named ([Decision 6](#decisions)).
 - The site already serves a page that size.
   `results.html` is 1,303,283 bytes deployed, and its exception records three-run checks
-  passing at 1,324,108. News prose compresses less than that table did on 23 October,
-  6.9 to 1 against 15 to 1. If that ratio holds, News at 1,300,000 bytes sends about
-  187,000 gzipped bytes, about twice what `results.html` sends, so the measurement
+  passing at 1,324,108. News prose compresses less than that table does: 7.4 to 1 on 24
+  October against 15 to 1. If that ratio holds, News at 1,300,000 bytes sends about
+  177,000 gzipped bytes, about twice what `results.html` sends, so the measurement
   settles the budget and the precedent only suggests it.
+- It is the size the coordinator’s option text gave as an illustration of runway (“even
+  1.3 MB, the largest exception any page has, would last about 86 days”), not as a
+  proposed budget, and the plan keeps it because the first reason holds.
 - It leaves 700,000 bytes under the 2,000,000-byte hard limit every HTML file has, room
   for one more measured raise if the owner chooses one later.
-- At October’s pace it lasts about 62 days after Phase 2 lands, and the check below
-  trips about 50 days in.
+- From today’s page, at October’s pace, it lasts about 68 days, or about 54 once Phase
+  2’s feed is on the page, and the check below trips about 10 days before it.
 
 **Where it is set.**
 
@@ -846,9 +1057,9 @@ it. If 1,000,000 fails too, the raise stops and the report goes to the owner.
   give a reason.
 - `docs/project/site-urls.md`, re-rendered by `python -m devtools.site_urls --write`,
   lists it under Measured exceptions.
-- `test_changelog_publication.py` holds it.
-  `NEWS_CEILING = 1_300_000` and `NEWS_TRIP_BYTES = 1_150_000` sit beside the News page
-  tests, and a test requires the exception to equal `NEWS_CEILING`, as
+- `render_changelog` holds the two figures, `NEWS_CEILING = 1_300_000` and
+  `NEWS_TRIP_BYTES = 1_150_000`, beside the announcement gate, and a test in
+  `test_changelog_publication.py` requires the exception to equal `NEWS_CEILING`, as
   `test_overview.py`’s `PAGE_CEILINGS` does for `index.html` and `results.html`.
 - `check_published_site` needs no change.
   It reads `page_budget(row)`, so the Pages workflow refuses to deploy a `news.html`
@@ -856,47 +1067,81 @@ it. If 1,000,000 fails too, the raise stops and the report goes to the owner.
 - The archive pages are ordinary `page` rows under the 600,000-byte default, with no
   exception.
 
-**The check that trips first.** `test_news_page_stops_short_of_its_budget` runs in the
-quick lane every pull request runs.
-It renders `news.html` and fails when the page reaches `NEWS_TRIP_BYTES`, 150,000 bytes
-under the budget, about 12 days of stories at October’s pace.
+**The check that trips first.** The trip check renders `news.html` through
+`render_overview.news_page` and compares its bytes with `NEWS_TRIP_BYTES`, 150,000 bytes
+under the budget, about 10 days of stories at October’s pace.
 It prints the page’s bytes, the trip point, the budget and the days of room left at the
 last 28 days’ pace, as the results page’s runway test prints its projection.
-The change that would carry the page past the trip point is the change that fails, so no
-story lands past it until the owner has chosen the next step.
 This is the shape
 [OR-17](../../../../operating-rules.md#or-17-every-routine-gate-has-a-wall-ceiling-and-anything-above-it-is-selected-on-purpose)
 gives a gate’s wall time: a ceiling, and anything above it selected on purpose, with the
 record saying who selected it.
-The coordinator’s 30-day notice ([Process](#process)) gives the owner time to answer
-before the check fails.
 
-**When the page reaches its trip point.** The plan builds nothing for that day.
-The next step is the owner’s decision, made then.
-The coordinator’s `decision` bead puts these options to the owner, and none of them runs
-automatically:
+- **Where it runs, and its scope.** It runs inside `render_changelog --check`, in the
+  records-tier step that runs the announcement gate, and takes that gate’s
+  `--announcement-base` and scopes.
+  It fails a change that edits `site-changelog.yaml`, `pull-requests.yaml` (once Phase 1
+  adds it) or the News renderer (`render_changelog.py`, `render_overview.news_page` and
+  the News templates), measured against the merge base.
+  It warns on any other change, and only warns on `main` (`--announcement-base
+  HEAD^1`), where a merged change can no longer act.
+  A pull request that cannot change the page’s stories does not go red because `main`
+  crossed. Its fail, warn and main-only-warn cases are tested in the quick lane on
+  fixture pages.
+- **It holds against `main` plus the change.** For a pull request, CI checks out
+  GitHub’s merge of the branch onto `main` (`refs/pull/N/merge`), so the page it
+  measures is `main`’s stories with the change’s added.
+  That still leaves a race: two follow-ups can each pass against a `main` that lacks the
+  other, and together cross the trip point once both merge.
+  So a change in the failing scope merges only on a check run against the `main` it
+  merges into: when `main` has moved since the run, the branch merges `main` and the
+  check runs again before the merge.
+  The coordinator, who merges every follow-up, applies this at Record the merge and at
+  the merge step, and the runbook says so.
+- **Anything else that grows the page.** A change outside the scope can still add bytes,
+  a header change on every page for example.
+  It gets the warning, and the hard limit stays where it is: `check_published_site`
+  refuses to deploy a `news.html` above the budget.
+
+**At the trip point, recording S3+ merges stops.** There the story gate and the trip
+check conflict. The follow-up that records an S3+ merge must carry its story, and the
+story is what carries the page past the trip point, so the check refuses it;
+`STORY_EXEMPT` may only shrink, so it offers no way round.
+No S3+ row can be recorded, and the sweep lists each such merge as needing action.
+S1 and S2 merges are still recorded, since their rows enter a feed whose cap is fixed.
+
+**The owner chooses what happens before the page gets there.** The plan builds nothing
+for that day. When fewer than 30 days of room remain, the coordinator’s `decision` bead
+([Process](#process)) states that recording S3+ merges stops at the trip point, and puts
+these options to the owner; none of them runs automatically:
 
 - raise the budget again, after the same measurement at the new size, up to the
   2,000,000-byte hard limit;
-- shrink the feed’s cap on `news.html`, whose 200,000 bytes are about 16 days of
+- shrink the feed’s cap on `news.html`, whose 200,000 bytes are about 14 days of
   stories;
 - move older stories to dated archive pages, the design this plan drafted and the owner
   did not take on 23 October;
 - shorten the cards on `news.html`, a card design the site agent owns;
+- let recording S3+ merges pause at the trip point until a later step lands, with each
+  paused merge listed by the sweep;
 - another step the owner names.
+
+The step the owner chooses lands before the page reaches the trip point, so recording
+does not stop unless the owner chose that.
 
 **What keeps the page cheap to load at that size.**
 
 - **Static stories.** The renderer writes every story as HTML at build time.
   No script builds, fetches or re-renders a card, so a reader without scripts gets the
   whole page, which the no-JS check holds.
-  Formulas arrive as prepared MathML (58 `<math>` elements on 23 October), and the page
+  Formulas arrive as prepared MathML (90 `<math>` elements on 24 October), and the page
   loads no math script.
 - **Small scripts that only switch state.** `news-filters.js` (164 lines) sets `hidden`
   on cards and rows. `news-views.js` sets one attribute on the root and the tablist’s
   ARIA states, and `site.css` hides the other view.
-  Neither creates, moves or re-renders markup, so a switch costs a style change and no
-  parsing.
+  Neither creates, moves or re-renders markup, so a switch parses nothing.
+  The first reveal of the stories on a page opened on the feed costs more than a style
+  change: it runs `news-cards.js`’s `refresh` on every card (below).
 - **Cached shared files.** Styles, scripts and fonts are content-hashed files under
   `assets/`, cached across pages, so only the HTML grows.
 - **Lazy images.** News has none today (no `<img>` on 23 October).
@@ -905,19 +1150,42 @@ automatically:
   holds every `<img>` on a News page to that.
 - **A capped feed.** Rows past 200,000 bytes go to the archive pages, so the feed’s
   share stays fixed while the stories grow.
-- **One cost to watch, read from the code and not measured.** At load, `news-cards.js`
-  collapses each card and then reads its `scrollHeight`, one card at a time, so each
-  card can force a layout before the next.
-  The `load` mode’s `LayoutCount` and longest task show whether that cost grows with the
-  story count. If it does, Phase 2 reads every card’s height before collapsing any.
+- **One cost to watch, read from the code and not measured.** `news-cards.js` collapses
+  each card and then reads its `scrollHeight`, one card at a time, so each card can
+  force a layout before the next.
+  It does so on three paths: at load (`news-cards.js:94`), from each card’s
+  `ResizeObserver` when its width changes (`:96-100`), which on a page opened on the
+  feed is every card at the first switch to the stories, and on every `news:filter`
+  event (`:117-122`). The `load` and `switch` modes’ `LayoutCount`,
+  `forcedStyleAndLayoutDuration` and longest task show whether that cost grows with the
+  story count. If it does, Phase 2 batches all three paths: every card’s height is read
+  before any card collapses, and the observers’ callbacks are gathered into one such
+  pass per frame.
 
-**When the raise lands.** In Phase 2, measured on Phase 2’s own page, which launches at
-about 512,000 bytes, about 7 days of stories under today’s budget.
-Before Phase 2, the stories alone pass 600,000 bytes about 23 days after `think-4oj0`
-lands. If Phase 2 has not merged two weeks after `think-4oj0` lands, the raise lands
-ahead of it on its own: the tool, the measurement at both sizes without the switch, the
-exception and the trip check.
-Phase 2 then adds the switch’s measurement.
+**When the raise lands: before Phase 1, as its own pull request.** On 24 October the
+deployed `news.html` was 318,655 bytes over 50 stories, and at about 14,400 bytes a day
+it reaches the 600,000-byte `page` budget in about 19 days.
+Then `check_published_site` fails each follow-up that adds a story.
+Phase 1 is a larger change, a record migration and a gate, and needs its own correctness
+review, so the raise does not wait for it.
+
+- **Its trigger is a size, not a date.** The raise is the next News work after this plan
+  merges, and it must merge before `main`’s `news.html` passes 450,000 bytes, about 9
+  days away at that pace and about 10 days short of the `page` budget.
+- **Who watches it.** Until the raise merges, the coordinator reads the rendered page’s
+  bytes in each follow-up that lands a story.
+  If `main`’s page passes 450,000 bytes with the raise unmerged, the coordinator opens a
+  `decision` bead for the owner that day, ahead of the 600,000-byte failure.
+- **What it carries.** `devtools.measure_news_page` with its `bytes`, `project` and
+  `load` modes; the measurement at today’s size and at the projected size, stories only;
+  the exception and its reason; `NEWS_CEILING`, `NEWS_TRIP_BYTES` and the trip check;
+  and the room report in the follow-up that lands a story.
+- **What Phase 2 adds.** The `switch` mode and its probe, and the `load` and `switch`
+  measurements of its own page with the feed at its cap, at launch size and at the
+  projected size. Phase 2 does not merge if its page fails the limits the raise was set
+  on.
+
+The raise changes no visual, site template, style or browser script.
 
 ### Profiles
 
@@ -930,66 +1198,106 @@ cannot disagree, and the folding `_work_listing` already applies to long lists.
 
 ## Implementation Plan
 
+### Before Phase 1: The Budget Raise
+
+One pull request, the next News work after this plan merges, and merged before `main`’s
+`news.html` passes 450,000 bytes ([When the raise lands](#the-page-budget)).
+
+- [ ] `devtools.measure_news_page`, with its `bytes`, `project` and `load` modes.
+- [ ] Its report at today’s size and at the projected 1,300,000 bytes, stories only, in
+  the pull request.
+- [ ] `PAGE_BUDGET_EXCEPTIONS["news.html"]` with its measured reason, and
+  `docs/project/site-urls.md` re-rendered.
+- [ ] `NEWS_CEILING`, `NEWS_TRIP_BYTES` and the trip check in
+  `render_changelog --check`, with its scopes.
+- [ ] The room report in the follow-up that lands a story, and the merge-step rule that
+  a change in the trip check’s failing scope is checked against the `main` it merges
+  into, in the runbook.
+- [ ] Tests, as the Testing Strategy says.
+
 ### Phase 1: The Record, Its Tool, the Backfill and the Gate
 
-One pull request. It starts after `think-4oj0`’s stories merge, so `story_exempt` starts
-empty; if any of the 16 are still missing then, they go into `story_exempt` with a
-reason, and that list may only shrink.
+One pull request. `think-4oj0`’s stories merged with #758 on 24 October, and every S3+
+pull request then had a story, so `STORY_EXEMPT` starts empty.
 
 - [ ] `packing/pull-requests.schema.yaml` and the offline module
   `devtools.pull_request_record`: load, validate, and the derivations the gates need,
   scores from results among them.
 - [ ] `devtools.record_pull_requests`, with its listing, `--apply`, `--pr` and `--audit`
-  modes.
+  modes, and its per-pull-request split of a shared or carried merge’s results.
 - [ ] Run the backfill: `--apply` over every merged pull request.
-  Move the 103 `deliveries` and 3 `stacks` out of `site-changelog.yaml` and check that
-  they agree with their rows.
-- [ ] `render_changelog`: `SiteChangelog/v2`; entries checked against the record; the
+  Move every `deliveries` row and the 3 `stacks` out of `site-changelog.yaml` and check
+  that they agree with their rows.
+  List each shared-merge group and carried pull request in the evidence, with the
+  results each row took.
+- [ ] `render_changelog`: `SiteChangelog/v2`, with its coverage rule and the optional
+  `pull_request_summaries`; entries checked against the record; `STORY_EXEMPT`; the
   story gate, with its `result_ids` rule for rows numbered above this pull request; the
-  freeze check reading v1 from `main`; `CHANGELOG.md` re-rendered and unchanged.
+  label floor; the freeze check accepting v1 or v2 from the base; `CHANGELOG.md`
+  re-rendered and unchanged.
 - [ ] `import_changelog`: merge facts from the record; the drafted `## News` entry from
   the description.
 - [ ] `intake_sweep`: the Merged pull requests section, and the audit in `--offline`.
 - [ ] `validate_schemas`’ corpus, the two steps’ `known_inputs`, and
   `release.validate_release_impacts` with whatever `check_release_impact` asks.
-- [ ] The runbook, `development.md`, the `ANNOUNCED_FROM` comment and the template
-  comment, as Process says.
+- [ ] Every runbook, `development.md`, `ANNOUNCED_FROM` and template passage that
+  [Process](#process) lists.
 - [ ] Tests, as the Testing Strategy says.
 
-### Phase 2: The Toggle, the Feed, the Archives, the Budget and the Profile Lists
+### Phase 2: The Toggle, the Feed, the Archives and the Profile Lists
 
 One pull request, after #736 and Phase 1 merge.
-The intake session builds it, as the owner said (point 4). The budget raise lands ahead
-of it on its own if Phase 2 is late ([When the raise lands](#the-page-budget)).
+The intake session builds it, as the owner said (point 4, [Decision 4](#decisions)).
 
 - [ ] `site_tallies.result_people(record)`, public, shared by the feed and the profiles.
 - [ ] The feed view and its cap in `render_news`, through a feed renderer
   `devtools.render_pr_feed`; `row_location`; the half-month archive pages of rows in
   `render_overview`’s page table and `site-urls.yaml`; the archive links; and
-  `news/anchors.json`.
-- [ ] The budget raise, as [The page budget](#the-page-budget) says:
-  `devtools.measure_news_page` and its probe; its report at today’s and the projected
-  size; `PAGE_BUDGET_EXCEPTIONS["news.html"]` with its measured reason, and
-  `docs/project/site-urls.md` re-rendered; `NEWS_CEILING`, `NEWS_TRIP_BYTES` and the
-  trip check; the room report in Record the merge.
-- [ ] `news-cards.js`: every card’s height read before any card collapses, if the
-  measurement shows its load work growing with the story count.
+  `news/anchors.json`, with its own `site-urls.yaml` row, since `check_published_site`
+  fails a file it does not expect.
+- [ ] The switch measurement, as [The page budget](#the-page-budget) says:
+  `measure_news_page switch` and its probe, and the `load` and `switch` report on this
+  pull request’s page with the feed at its cap, at launch size and at the projected
+  size.
+- [ ] `news-cards.js`: every card’s height read before any card collapses, on load, on
+  the `ResizeObserver` path and on `news:filter`, if the measurement shows that work
+  growing with the story count or the first reveal of the stories missing the switch
+  limit.
 - [ ] `news_view_tabs()`, passed to `kpress_page(tabs=…)` for `news.html` and every
   archive page; `news_significance_filter(levels)`.
-- [ ] `overview/news-views.js` (new): the tablist, the `news-view` address and history.
+- [ ] `overview/news-views.js` (new): the tablist, `aria-current` removed from the
+  enhanced strip, the `news-view` address and history.
 - [ ] `overview/embed.js`: `data-site-news-view` from `news-view` or a `#pr-` fragment.
 - [ ] `news-filters.js`: one instance per view, the **All** button and “Not scored”.
 - [ ] `news-forward.js`: the `news/anchors.json` lookup on a missed fragment.
+- [ ] `devtools.check_site_scripts`’ inventory: an entry for `news-views.js`, and
+  `news-forward.js`’s entry, today “registered-forwarder: Forward only retained About
+  history anchors…” (`check_site_scripts.py:54`), rewritten for a script that also
+  fetches `news/anchors.json`.
 - [ ] `site.css`: the feed row, hiding the unselected view under `data-site-news-view`,
   and the `scripting: none` rule for rows.
 - [ ] The header probe’s `[aria-selected="true"]`, and `news.html` and an archive page
   in `test_site_wide_blocks.py`.
 - [ ] The profiles’ Pull Requests section.
+- [ ] `validate_previous_ref`’s v1 path removed.
 - [ ] Tests and browser probes, as the Testing Strategy says.
 - [ ] If Phase 2 is labelled S3 or higher, as a new public capability is likely to be,
   its own story lands in the follow-up after its merge, through the step Phase 1 adds.
 
 ## Testing Strategy
+
+**The budget raise**, from `packing/`, in `test_changelog_publication.py`,
+`test_changelog.py` and a new `tests/test_measure_news_page.py`:
+
+- `PAGE_BUDGET_EXCEPTIONS["news.html"]` equals `NEWS_CEILING`, and `NEWS_TRIP_BYTES` is
+  below it;
+- the trip check on fixture pages: a page at the trip point fails a change that edits
+  `site-changelog.yaml` or the News renderer, warns a change to another file, and only
+  warns on `main`; a page under it passes all three;
+- `measure_news_page bytes` on a fixture page reports the gzip and brotli sizes the
+  libraries give, and the days of room that follow from a fixture pace;
+- `measure_news_page project` reaches its target within one story’s bytes, from the
+  page’s own cards only, with every id and anchor unique.
 
 **Phase 1**, from `packing/`:
 
@@ -1000,9 +1308,23 @@ of it on its own if Phase 2 is late ([When the raise lands](#the-page-budget)).
   - a fixture repository in the style of `test_changelog.py`’s delivery tests: a merge
     commit off the first-parent line gets the right carrying commit, and a commit that
     never reached `main` is refused;
-  - a two-commit fixture register yields `registered` and `raised`, and a two-commit
-    `ADOPTED` table yields `adopted` with its counts;
-  - an unlabelled row takes the score of its strongest registered or raised result;
+  - a two-commit fixture register yields `registered` and `raised`, each with its
+    `score`, and a two-commit `ADOPTED` table yields `adopted` with its counts;
+  - **no row shows another layer’s results**, in
+    `test_a_shared_merge_commit_gives_each_layer_only_its_own_results`: a fixture
+    repository in which layer 1, based on `main`, registers T-001, and layer 2, based on
+    layer 1’s branch, registers T-002 and raises T-001; one merge commit on `main`
+    delivers both, and the GitHub fixture gives both pull requests that commit as their
+    `mergeCommit`, as GitHub gave d3860c97a to 11. Layer 1’s row holds only T-001
+    registered, and layer 2’s only T-002 registered and T-001 raised;
+  - a pull request merged into another branch keeps the id its own merge registered, and
+    the pull request that carried it to `main` does not take that id;
+  - two pull requests based on `main` that share one merge commit, which cannot be
+    ordered, are refused by name, and so is a group whose layers’ changes leave an id of
+    the merge’s change unclaimed;
+  - `pull_request_record.validate` fails a record in which two rows register the same
+    id, the invariant that holds the property on the real record after the backfill;
+  - an unlabelled row takes the highest `score` among its registered or raised results;
   - a listing as long as the limit is refused.
 - `test_changelog.py`, extended:
   - an entry naming a pull request the record lacks fails, and an entry’s date comes
@@ -1013,15 +1335,26 @@ of it on its own if Phase 2 is late ([When the raise lands](#the-page-budget)).
   - a row above the cut-over whose story leaves out an S3+ result it registered fails,
     and a row below it is reported;
   - a row scored from its results owes no story;
-  - a stale `story_exempt` entry fails;
-  - main’s v1 document still freezes entries;
+  - a stale `STORY_EXEMPT` entry fails;
+  - a row labelled S2 that registered a result with `score: 3` fails the label floor,
+    and a row labelled S3 that registered it passes;
+  - the v2 coverage rule: a coverage number the record lacks fails, a coverage list that
+    differs from the represented and omitted pull requests fails, an S2 row with neither
+    an entry nor an omission passes, and an S3 row with only an omission fails the story
+    gate;
+  - a `pull_request_summaries` key the record lacks fails;
+  - the freeze check: a v1 document from the base and a v2 document from the base each
+    still freeze entries, the v2 one dated from the base’s `pull-requests.yaml`;
   - the migrated `CHANGELOG.md` renders identically.
 - `test_intake_sweep.py`: a gap and an S3+ pull request need action, the trailing S1 is
   listed, and label drift needs action.
 - `packing-validate --records`, then `--fast` in CI.
 - The backfill’s evidence in the pull request: the row count equals the GitHub count at
-  the run, `record_pull_requests --audit` reports nothing, and the 103 migrated rows
-  match.
+  the run, `record_pull_requests --audit` reports nothing, every migrated `deliveries`
+  row matches, and each shared-merge group and carried pull request is listed with the
+  results each row took.
+  For d3860c97a that is #442 T-125 and T-126, #448 T-127, #459 a raise of T-127, #460
+  T-128, #463 T-129 and #469 T-130.
 
 **Phase 2**:
 
@@ -1040,22 +1373,19 @@ of it on its own if Phase 2 is late ([When the raise lands](#the-page-budget)).
   - each badge’s `aria-label`, “scored from its results” included;
   - every story, result and profile link resolving to a page and anchor that exist;
   - the “recorded through” line.
-- The budget, in `test_changelog_publication.py` and a new
-  `tests/test_measure_news_page.py`:
-  - `PAGE_BUDGET_EXCEPTIONS["news.html"]` equals `NEWS_CEILING`, and `NEWS_TRIP_BYTES`
-    is below it;
-  - `news.html` under `NEWS_TRIP_BYTES`, which is the trip check itself;
-  - `measure_news_page bytes` on a fixture page reports the gzip and brotli sizes the
-    libraries give, and the days of room that follow from a fixture pace;
-  - `measure_news_page project` reaches its target within one story’s bytes, from the
-    page’s own cards only, with every id and anchor unique.
+- The switch measurement, in `tests/test_measure_news_page.py`: `measure_news_page
+  switch` on a fixture page covers both paths, the first reveal of the stories from an
+  address opened on the feed among them, and reports `forcedStyleAndLayoutDuration`.
 - Browser tests in `test_site_homepage.py`’s style:
   - the strip’s roles once enhanced: `tablist`, `tab`, `aria-selected`, `aria-controls`
-    and `tabpanel`;
+    and `tabpanel`, and no link left with `aria-current`, so only the selected tab is
+    filled;
   - only the selected tab is in the tab order, and the arrows, Home and End move and
     select;
   - `news-view=changes` opens on the feed with no layout shift, switching pushes the
     address, and Back restores it;
+  - after a page opens on the feed and switches to the stories, each card is collapsed
+    or short as on a page opened on the stories;
   - a `#pr-N` fragment selects the feed and reveals its row;
   - `news-s` is kept per view, and **All** selects every level;
   - a link to a row that left `news.html` forwards to its archive page, and a link to
@@ -1072,14 +1402,21 @@ of it on its own if Phase 2 is late ([When the raise lands](#the-page-budget)).
 
 ## Rollout Plan
 
-1. Phase 1 merges. From then on the intake runner runs Record the merge after every
+1. The budget raise merges and deploys.
+   `measure_news_page bytes`, given the deployed address, reports the deployed page’s
+   raw bytes, which equal those of the page `main` rendered at the merge, and its gzip
+   transfer size. GitHub Pages’ gzip is not zlib’s level 6: on 24 October it sent 43,345
+   bytes for a page level 6 compresses to 41,988, 3.2% more.
+   So the transfer size is compared with the level-6 figure in the exception’s reason
+   within 5%, and the next follow-up records the deployed figure in the reason beside
+   it.
+2. Phase 1 merges. From then on the intake runner runs Record the merge after every
    merge, and the sweep reports anything missed.
-2. Phase 2 merges and deploys.
+3. Phase 2 merges and deploys.
    `check_published_site` and a look at `news.html` in both views, at its stacked form
    with scripts off, and at one archive page on the deployed site confirm it.
-   `measure_news_page bytes` run against the deployed page agrees with the raw and gzip
-   bytes in the exception’s reason.
-3. The next follow-up records Phase 2 and lands its story, the first story the new step
+   The deployed page’s bytes are checked as in step 1.
+4. The next follow-up records Phase 2 and lands its story, the first story the new step
    carries.
 
 The News address and its bookmarks keep working: stories never leave `news.html`, a row
@@ -1088,7 +1425,9 @@ that leaves it is forwarded to its archive page, and the archive pages are new.
 ## Decisions
 
 The owner answered the plan’s questions in conversation on 23 October 2026, and the
-coordinator relayed the answers with the option labels quoted below.
+coordinator relayed the answers with the option labels quoted below, each exactly as
+selected. The text after each label says how the plan follows the answer; it is this
+plan’s, except where it names the coordinator or quotes the option text.
 
 1. **S3 results reach News through each pull request’s story.** The owner chose “Via
    each PR’s story (Recommended)”. `ANNOUNCED_FROM` stays 4. From Phase 1 on, every S3+
@@ -1100,8 +1439,8 @@ coordinator relayed the answers with the option labels quoted below.
    or with 109 stories to write, was not taken.
 2. **Pull requests with no S label are scored from their results.** The owner chose
    “Score from their results (Recommended)”. Each takes the score of the strongest
-   result it registered or raised, is marked as scored from its results, and owes no
-   story, since it predates the rule.
+   result it registered or raised, as its row records that score, is marked as scored
+   from its results, and owes no story, since it predates the rule.
    One with no label and no result stays “Not scored”.
    Hand-labelling the 352 on GitHub, and leaving them all unscored, were not taken.
 3. **One page, switched in place.** The owner chose “One page, switched in place”, not
@@ -1110,9 +1449,13 @@ coordinator relayed the answers with the option labels quoted below.
    much like we had a while back in the history, where there was a Film | Workbench
    toggle”. [The page](#the-page) follows both: the Film | Workbench strip’s element,
    look and place, switched in place as a tablist.
-4. **Routine rows show the GitHub title.** This was not put to the owner, and the first
-   draft’s recommendation stands.
-   The optional `summary` remains for a title worth replacing.
+4. **The feed covers every merged pull request, and the intake session builds the page
+   part.** Asked where the feed starts, the owner chose “All merged PRs (Recommended)”.
+   This plan reads that as every merged pull request from #1 on, backfilled once, which
+   is the tool’s first `--apply`. Asked who builds the page part, the owner chose “Me,
+   with the records (Recommended)”. The reading is the coordinator’s, restated on 24
+   October: the owner chose that the intake session build the page part along with the
+   records. Phase 2 follows it.
 5. **The intake runner records each merge.** The owner chose “Intake runner
    (Recommended)”: the intake pass’s runner, its coordinator, records each merge in the
    follow-up it opens for the replies, and the sweep is the backstop.
@@ -1125,17 +1468,31 @@ coordinator relayed the answers with the option labels quoted below.
    It said that every story stays on `news.html`, that only old feed rows are archived,
    that raising the size limit needs measured load-time checks, and that even 1.3 MB,
    the largest exception any page has, would last about 86 days.
-   [The page budget](#the-page-budget) follows the answer: half-month archive pages hold
-   feed rows only, the budget moves to 1,300,000 bytes on a measured load check, and a
-   check trips 150,000 bytes short of it, leaving the next step to the owner.
+   The 1.3 MB was the option text’s illustration of runway, not a budget the owner set.
+   The owner chose only that option.
+   The 1,300,000-byte budget, the 150,000-byte trip margin, the feed’s 200,000-byte cap
+   and the half-month split of feed rows are this plan’s proposals
+   ([The page budget](#the-page-budget)): the measurement confirms the budget, and all
+   four stay proposals until the owner confirms them.
    Half-month archive pages for stories, which the plan recommended, and shorter cards
    on `news.html` were not taken.
    Two figures in the question text were off, and the plan uses corrected ones:
    - `index.html`’s 1,300,000 bytes is the third-largest exception, after
      `results.html`’s 1,400,000 and the lower-bounds explainer’s 1,500,000.
    - The 86 days counted the stories alone at 2.2 a day.
-     With the feed and the shell on the page, at October’s 2.4 a day, 1,300,000 bytes
-     lasts about 62 days after Phase 2 lands.
+     From the page as deployed on 24 October, at October’s 2.4 stories a day of about
+     6,000 bytes, 1,300,000 bytes lasts about 68 days, or about 54 with Phase 2’s feed
+     on the page.
+
+## Coordinator Defaults
+
+This was not put to the owner.
+The coordinator set it, and the owner can overturn it.
+
+- **Routine rows show the GitHub title.** The first draft’s recommendation stands, as
+  the coordinator’s default of 23 October.
+  An optional feed summary, kept in `site-changelog.yaml`’s `pull_request_summaries`,
+  remains for a title worth replacing.
 
 ## Open Questions
 
