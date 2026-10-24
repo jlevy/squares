@@ -67,7 +67,11 @@ ROWS = re.compile(
 #: table; the remedy is a shorter entry, not a higher number.
 RECENT_BYTES = 40_000
 #: The most bytes the News box may weigh: the newest three News articles of each level,
-#: nine cards of 3 to 6 KB, measured at 42,550 bytes on 22 October 2026.
+#: nine cards, three shown and six behind the filter. It measured 42,550 bytes on 22
+#: October 2026 and 55,692 on 24 October, after #787's two S3 stories, when the three S3
+#: cards were the heaviest yet (13,029, 9,598 and 8,406 bytes) and the worst case over
+#: that day's stories was 59,874. Two more S3 stories of that size reach the limit; the
+#: remedy is a shorter card, not a higher number.
 NEWS_BOX_BYTES = 64_000
 
 
