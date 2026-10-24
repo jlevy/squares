@@ -897,6 +897,14 @@ FIRST_PUBLISHED = PUBLICATION_HISTORY[-1].first_published
 #: The leading entry is proposed for the next publication; confirm its date at first deployment.
 EXPLAINER_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.4.23",
+        first_published="October 24, 2026",
+        result_scope=(
+            "Update the registered result count after the registrations of Hosono's "
+            "fine-net lower bounds at 31 (T-232) and at 19, 20, 26 and 27 (T-233)."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.4.22",
         first_published="October 24, 2026",
         result_scope=(
@@ -1430,6 +1438,16 @@ class ReleaseImpactDecision(NamedTuple):
 # New component cuts append decisions here, newest first, alongside their own histories.
 # No impact is invented retrospectively for the published baseline editions.
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
+    ReleaseImpactDecision(
+        component="paper:n11-lower-bounds-explainer",
+        previous_version="v0.4.22",
+        version="v0.4.23",
+        impact="patch",
+        reason=(
+            "Update the registered result count after the registrations of Hosono's "
+            "fine-net lower bounds at 31 (T-232) and at 19, 20, 26 and 27 (T-233)."
+        ),
+    ),
     ReleaseImpactDecision(
         component="paper:n11-lower-bounds-explainer",
         previous_version="v0.4.21",
@@ -2511,12 +2529,17 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "c1115c095, without the README, with the same outcome, and once more after "
             "merging main 769e441e1 (#751, #748), at link revision b33d7f7d with that "
             "main's six inputs swapped in: the same outcome. Only the explainer's register "
-            "count differs (230 to 232), and it took v0.4.22. Measured once more after "
+            "count differs (230 to 232). Measured once more after "
             "review A's record fixes (7e12d05ce, 541fea60a), against main 64b316b6c: at link "
             "revision 541fea60 into empty site directories, from this tree and with the 16 "
             "record files those commits change swapped back, all four papers' 69 files are "
-            "byte-identical. No PDF was printed; each prints from that HTML. Retain "
-            "v0.1.11, v0.1.4 and v0.2.7."
+            "byte-identical. And after merging main 5f5294d82 (#753: T-231 and the "
+            "explainer's v0.4.22), at link revision 5f5294d8 into empty site directories, "
+            "from main's tree and from this tree at ea4a21c61 (69 files each): the three "
+            "papers' files are byte-identical, and only the explainer's HTML and Markdown "
+            "differ, in its register count (231 to 233), so the explainer takes v0.4.23. "
+            "No PDF was printed; each prints from that HTML. Retain v0.1.11, v0.1.4 and "
+            "v0.2.7."
         ),
     ),
     ReleaseNoPublicChange(
