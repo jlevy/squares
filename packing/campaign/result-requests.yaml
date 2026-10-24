@@ -11506,7 +11506,8 @@ issues:
     title: '204-993: registration request'
     author: franciscouzo
     opened: '2026-10-17'
-    state: open
+    state: closed
+    closed: '2026-10-23'
     kind: result-report
     triage: done
     summary: >-
@@ -11515,9 +11516,12 @@ issues:
       registers 204 (#718). Imported on 22 October 2026: the couzo-issue670-2026-10-17 packet
       retains the 72 certificates beyond the corpus, whose filtered exact replay decided each on
       two routes with every control refused, and the backlog ledger records each in report order
-      as a beyond-horizon row: 64 superseded on entry by later reports and 8 current, at 364, 370,
-      382, 403, 444, 452, 536 and 922.
-    read_through: '2026-10-17T18:05:06Z'
+      as a beyond-horizon row: 64 superseded on entry by later reports and 8 current then, at 364,
+      370, 382, 403, 444, 452, 536 and 922, of which issue 719's rows (#722) supersede 370, 452 and
+      536, so 5 are current. The author's answer of 23 October 2026 traces T-226's seed to T-186's
+      packing, and the credit of T-226 and of the entries continuing its arrangement names that
+      lineage.
+    read_through: '2026-10-23T22:22:03Z'
     results:
     - key: n204
       claim: s(204) <= 14.808644417690, rounded upward; exact certificate side is authoritative.
@@ -11562,9 +11566,11 @@ issues:
       not_registered: >-
         Beyond the n <= 324 corpus: a dated row of the couzo-issue670-2026-10-17 source, recorded in
         report order by the backlog ledger of 22 October (upper-bounds-backlog-20261022), below
-        every earlier report at its count, and the count's current row. Its retained certificate's
-        exact header side rounds up to this print, and both project exact routes accept the packing
-        with every control refused (receipts/filtered-exact-replay.json).
+        every earlier report at its count, and the count's current row until #722 merged that day:
+        issue 719's row (mishapolk-issue719-2026-10-22), which the ledger of 22 October for issue
+        719 (upper-bounds-issue719-20261022) records next at the count, supersedes it. Its retained
+        certificate's exact header side rounds up to this print, and both project exact routes
+        accept the packing with every control refused (receipts/filtered-exact-replay.json).
       queued: false
     - key: n378
       claim: s(378) <= 19.942505611659, rounded upward; exact certificate side is authoritative.
@@ -11679,9 +11685,11 @@ issues:
       not_registered: >-
         Beyond the n <= 324 corpus: a dated row of the couzo-issue670-2026-10-17 source, recorded in
         report order by the backlog ledger of 22 October (upper-bounds-backlog-20261022), below
-        every earlier report at its count, and the count's current row. Its retained certificate's
-        exact header side rounds up to this print, and both project exact routes accept the packing
-        with every control refused (receipts/filtered-exact-replay.json).
+        every earlier report at its count, and the count's current row until #722 merged that day:
+        issue 719's row (mishapolk-issue719-2026-10-22), which the ledger of 22 October for issue
+        719 (upper-bounds-issue719-20261022) records next at the count, supersedes it. Its retained
+        certificate's exact header side rounds up to this print, and both project exact routes
+        accept the packing with every control refused (receipts/filtered-exact-replay.json).
       queued: false
     - key: n458
       claim: s(458) <= 21.942505611689, rounded upward; exact certificate side is authoritative.
@@ -11788,9 +11796,11 @@ issues:
       not_registered: >-
         Beyond the n <= 324 corpus: a dated row of the couzo-issue670-2026-10-17 source, recorded in
         report order by the backlog ledger of 22 October (upper-bounds-backlog-20261022), below
-        every earlier report at its count, and the count's current row. Its retained certificate's
-        exact header side rounds up to this print, and both project exact routes accept the packing
-        with every control refused (receipts/filtered-exact-replay.json).
+        every earlier report at its count, and the count's current row until #722 merged that day:
+        issue 719's row (mishapolk-issue719-2026-10-22), which the ledger of 22 October for issue
+        719 (upper-bounds-issue719-20261022) records next at the count, supersedes it. Its retained
+        certificate's exact header side rounds up to this print, and both project exact routes
+        accept the packing with every control refused (receipts/filtered-exact-replay.json).
       queued: false
     - key: n546
       claim: s(546) <= 23.933763683699, rounded upward; exact certificate side is authoritative.
@@ -12316,9 +12326,15 @@ issues:
         34 squares sit within 1e-6 of T-186's.
       changes: lineage
       asked: https://github.com/jlevy/squares/issues/670#issuecomment-6354654599
-      state: withdrawn
+      state: answered
+      answer: https://github.com/jlevy/squares/issues/670#issuecomment-6375905012
       note: >-
-        Withdrawn on 23 October 2026 (review A3 of #747): the record already answers what
+        Answered on 23 October 2026 at 22:22:03Z, after the withdrawal below: yes at the root,
+        three hop jobs apart (101216, 103222 and 105412), from Polkovskyi's square-204.cert at
+        70a033f, T-186's certificate, through its decimal form n204.txt at 4e4c8ce. The answer
+        is read into T-226's credit, claim and notes (think-t5hc) and measured in the packet's
+        measure/seed-identity.json; it also answers question 1, how sqpack/verify.py was
+        called. Withdrawn on 23 October 2026 (review A3 of #747): the record already answers what
         it asserts. T-226 states the source's own claim, that the per-count JSON seeds job
         105412 with Polkovskyi's construction, and the measured fact that #670's packing
         is an arrangement other than T-186's; the 22 October review's RF-5 says the
@@ -12662,6 +12678,31 @@ issues:
       to S3 as the first report of the 204 arrangement, still superseded at 204, where T-229 is
       the house since 23 October. It asked how sqpack/verify.py was called and whether the hop
       job's seed was T-186's packing.
+
+      GitHub closed the issue at 2026-10-23T18:32:53Z, when #747 merged, because #747's
+      description said "the coordinator closes #670", which GitHub reads as a closing keyword.
+      No final comment was posted then; the coordinator decided to leave the issue closed and
+      post its final comment there after the change that reads the author's answers merges
+      (think-0lu6), and not to reopen it.
+
+      The author's answer of 2026-10-23T22:22:03Z (issuecomment-6375905012), retained in the
+      packet's declaration, answers both questions; it says Claude Code assisted with it. The
+      seed: three rounds of basin hopping (jobs 101216, 103222 and 105412) and a quarter turn
+      separate the certificate from Polkovskyi's certificates/square-204.cert at
+      Mishapolk/square-packing-records@70a033f, T-186's certificate, which the source published
+      in decimals as n204.txt at 4e4c8ce; the construction lineage is therefore T-186's,
+      Polkovskyi's refinement of Daniil Ostashev's packing as PingYou Ltd refined it. The
+      checker: exact rational corners passed to verify_packing(..., bucket=True) in the closed
+      box, the strict verdict false only because squares touch the walls, 32 corner coordinates
+      on the boundary and no touching pairs. The records change of think-t5hc retains n204.txt
+      in couzo-index-2026-10-15 and measures both in the #670 packet (measure/seed-identity.json:
+      every digest the answer prints is a packet's SHA-256; n204.txt is T-186's packing under
+      the identity, every centre within 3.94e-12; the same call counts the same 32). By
+      attribution.md's chain rule T-226's credit becomes Couzo after Polkovskyi, Ostashev,
+      PingYou Ltd, Daniel, Levy, and the same lineage reaches T-228, T-223, T-225, T-229 and
+      T-231; T-226's short credit, S3, V3/C3 and first-report standing are unchanged. The final
+      comment, which says so, follows that change's merge and verified deploy, and its record
+      follows it.
   - number: 672
     title: '227, 229, 330-996: registration request'
     author: franciscouzo
@@ -13664,7 +13705,7 @@ issues:
       993 and 996 certificates, whose filtered exact replay decided each row on two routes with
       every control refused; the backlog ledger records each in report order as a beyond-horizon
       row, superseded on entry by a later report.
-    read_through: '2026-10-18T06:02:11Z'
+    read_through: '2026-10-23T22:22:34Z'
     results:
     - key: n204
       claim: s(204) <= 14.808644367227, rounded upward; exact certificate side is authoritative.
@@ -14938,6 +14979,15 @@ issues:
       entry by a later report. Nothing asked for is queued; the follow-up's question, how
       sqpack/verify.py was called, is still welcome but holds nothing open. The issue was closed
       with it at 03:54:39Z.
+
+      The author's answer of 2026-10-23T22:22:34Z (issuecomment-6375912099), retained in the
+      packet's declaration, says the source calls sqpack/verify.py as described on #672: at 204
+      the strict verdict is false only because squares touch the walls, 88 corner coordinates
+      lie on the boundary and no pair touches. It is read into T-228's notes and the packet's
+      README (think-t5hc), and the #670 packet's measure/seed-identity.py makes the same call and
+      counts the same 88, as the replay's least wall clearance of 0 and least pair gap of
+      1.20e-12 say. It changes no field. Nothing is posted here: the issue is closed with its
+      final comment, and #670's final comment covers the answer.
   - number: 678
     title: '204-998: registration request'
     author: franciscouzo
@@ -17617,7 +17667,7 @@ issues:
       resolution and restate them (the owner's answer of 23 October, think-fwa9); 34 restate earlier
       publications; the 1112 above 1024
       wait on the owner.
-    read_through: '2026-10-21T20:55:57Z'
+    read_through: '2026-10-23T22:16:52Z'
     results:
     - key: n328
       claim: s(328) <= 18.614368938513, rounded upward; exact certificate side is authoritative.
@@ -17635,8 +17685,20 @@ issues:
       not_registered: >-
         Beyond the n <= 324 corpus: the certificate first published at 02f9690 on 2026-10-09,
         1.78e-11 or more above the 8 October decimal report the record holds at 335, so neither
-        it nor this restatement is recorded; the exact check of that report's poses is
-        think-rx26.
+        it nor this restatement is recorded. The author's answer of 23 October 2026
+        (issuecomment-6375833547) says the certificate is that report's packing in exact form:
+        its centres dilated by exactly 1 + 1e-12 about (1/2, 1/2), and the three near-axis
+        angles the report prints (4.73e-11, 9.02e-12 and 1.10e-12 rad) set to exactly 0. He
+        reports that the 8 October print, read literally with t = tan(theta/2) of its binary64
+        angles, overshoots a wall by up to 7.8e-16 at its printed side, and packs with the
+        certificate's rotations, and he concludes that "the bound we stand behind is the
+        certificate's". By stage 1's rule for several reports at one count, which reads a
+        printed side as its exact side where the certificate gives one, the row's exact side is
+        the one the certificate gives. The record's own exact check of the 8 October poses
+        (think-rx26) decides whether the print holds as printed, in the next import, of Mykhailo
+        Polkovskyi's #732 rows at f1ceee4. That import supersedes the row whichever way the check
+        comes out, since Polkovskyi's 335 there is 1.607e-12 below the print, and keeps the 8
+        October print as a quote in the history.
       queued: false
     - key: n336
       claim: s(336) <= 18.825571499862, rounded upward; exact certificate side is authoritative.
@@ -19809,6 +19871,47 @@ issues:
       recommendation (think-kzme asks the owner, and whether an issue's claim gives one a row). The
       follow-up that says so is drafted on think-temp for after that change
       merges (think-cyal).
+
+      The author's comment of 2026-10-23T22:16:52Z (issuecomment-6375833547), read into this
+      entry by think-t5hc, answers the acknowledgement's two open questions; it says Claude Code
+      assisted with it and its measurements.
+
+      335: the 9 October certificate at 02f9690 (SHA-256 d500b46c...) is the 8 October decimal
+      packing of n335.txt at b10ad36 in exact form, the same packing and not an exact solve: its
+      centres are the decimal centres dilated by exactly 1 + 1e-12 about (1/2, 1/2), to within
+      3.6e-15 of the printed decimals, and its rotations agree within 3.1e-15 rad but at three
+      near-axis squares, whose printed angles of 4.73e-11, 9.02e-12 and 1.10e-12 rad are exactly
+      0 in the certificate; the dilation accounts for the 1.7825e-11 between the two sides. His
+      exact checks of the 8 October poses at the printed side 18822875655543559/10^15, with
+      verify_bound_certificate.py: with the certificate's rational rotations the printed
+      centres pack in the closed box, touching the walls, every pair strictly separated; with t =
+      tan(theta/2) of the printed binary64 angles they overshoot a wall by up to 7.8e-16. He
+      concludes: "So the printed side holds exactly only when the near-zero angles are read as 0.
+      How the record reads them is your decision; the bound we stand behind is the
+      certificate's." Those are his statements. The rule that decides the row is stage 1's for
+      several reports at one count: the comparison reads a printed side as its exact side where
+      a lane or the certificate gives one, and every decision is exact. So the row's exact side
+      is the one the certificate gives. The record's own exact check of the 8 October poses
+      (think-rx26) decides whether the print holds as printed, in the next import, of Mykhailo
+      Polkovskyi's #732 rows at f1ceee4. That import supersedes the row whichever way the check
+      comes out, since Polkovskyi's 335 there is 1.607e-12 below the print, and keeps the 8
+      October print as a quote in the history. The test certificates Couzo offers are not needed.
+
+      Above 1024: measured by the author against Joost de Winter's certificates at
+      JoostdeWinter/joostdewinter.github.io@19f7412, by the best of the box's eight symmetries
+      and nearest centres, 1266, 1339 and 1568 refine de Winter's packings, one to one (1339 a
+      precision refinement, every square within 1.8e-9), and 1061, 1413 and 1489 are not one to
+      one (434, 279 and 383 squares more than 0.1 away): they are the author's own
+      recursive-staircase assemblies in de Winter's construction family, whose source records
+      credit Arslanov, Mustafin and Shangitbayev (2021) and de Winter's staircase and four-block
+      constructions, a credit the 6b7391de manifest's entries at those counts dropped. He asks
+      that those three rows be carried as "Couzo after de Winter's staircase/four-block
+      constructions and Arslanov, Mustafin and Shangitbayev (2021)" and says he will restore
+      the credit in his manifest. These are his measurements and his request, for the import
+      of the rows above 1024 (think-llit): it measures each pairing here, credits 1266, 1339 and
+      1568 as refinements of de Winter's packings and 1061, 1413 and 1489 as the author's
+      assemblies, worded as he asks, and cites this comment for that credit until his manifest
+      restores it.
   - number: 719
     title: 'New packings: 122 verified upper bounds for square packing (N in [105, 1568]): registration request'
     author: Mishapolk
@@ -21391,6 +21494,20 @@ issues:
       - result: n1413
       - result: n1489
       - result: n1568
+    - url: https://github.com/jlevy/squares/issues/719#issuecomment-6378136960
+      date: '2026-10-24'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n105
+        id: T-229
+      - result: n204
+        id: T-229
+      - result: n204-lower
+        id: T-231
+        verification: V3
+        confirmation: C3
+        status: confirmed
     close_when: >-
       T-229 is reviewed and adopted at 105 and 204 (think-4h23), T-231 is reviewed and adopted
       at 204 (think-tetq, think-h01y), the owner has answered whether counts above 1024 are
@@ -21534,6 +21651,30 @@ issues:
       edit withdrew, the nine where #732 claims a lower side are not reports, by the owner's answer
       of the same day (think-8m4k), and #732's rows there stand; at 539 the file is #732's own row.
       The follow-up that says so is drafted on think-temp.
+
+      The follow-up posted at 2026-10-24T01:25:17Z (issuecomment-6378136960), after #753
+      merged (5f5294d82) and its Pages deployment was checked (run 40047992794, its
+      verify-deployment job included; squaremath.org serving v0.9.2-527ba8), takes up the
+      author's comment of 01:52:40Z. It said that T-229's credit at 204 now follows his
+      solve from Couzo's #678 certificate and no longer names Daniel's regularization as an
+      antecedent, that its regularization item at 204 names T-223 (60 squares beyond 1e-3, 7
+      beyond a tenth, at most 0.237), that the author's lineage at 105 and 204 replaces the
+      sentence that the source states none, and that his account of the verifier runs is
+      recorded in T-229's notes and evidence and in both packets. It reported T-231 for
+      n204-lower at V3/C3, confirmed, independently re-implemented, at S2, 1.4809e-11 below
+      T-229 and the house best packing at 204 since the pass of 24 October, T-229 retained
+      as history and 105 unchanged: the packet's custody under his grant of 22 October, the
+      two maintained routes (sqpack.verify, sharing his named checker's components, and
+      check_rational_witness_independent) and the review's checker (review_t231_check.py,
+      sharp_controls_t231.py) by name, and both strong generators' outcomes. It said the
+      ledger walks #719's claim at 204 at n204.cert's side, and gave the review's
+      measurement of the two 204 files as one solved packing at two paddings, with Evan
+      Daniel's exact solver stated as a measured method, not an antecedent. It put the
+      review's three questions to the author: asks 1 and 2 above, and question 3, which of
+      the two 204 files he wrote first and why n-204.cert carries the larger padding. It
+      answered his recommendation to publish the checkers by #732's import reply, with this
+      result's commands and the review's programs in the packet. It states the 204 lineage
+      only back to Couzo's #678 certificate, and the issue stays open.
   - number: 728
     title: 's(303) ≤ 17.909772217275: registration request'
     author: evand
@@ -21886,7 +22027,7 @@ issues:
     opened: '2026-10-22'
     state: open
     kind: other
-    triage: pending
+    triage: done
     summary: >-
       A proposal for discussion, not a result: submit an upper bound as a Witness/v2 by issue
       or API, have a workflow verify it exactly and compare it with the house (Level 1),
@@ -21898,24 +22039,31 @@ issues:
     results: []
     asks:
     - what: How far to automate the intake of upper bounds, Level 1, 2 or 3.
-      state: queued
-      bead: think-lnzm
+      state: done
+      note: >-
+        The owner's decision of 24 October 2026 (think-lnzm): asked how far a submission bot
+        should go, the owner answered "Not now". The proposal is on hold, and intake stays as
+        the runbook describes it.
     - what: >-
         Whether Level 3's substitutions are accepted (the form's credit fields, the issue
         number for an import bead, one approval for the review), and whether the bot or the
         maintainer merges an approved Level 3 pull request.
-      state: queued
-      bead: think-lnzm
+      state: declined
+      note: >-
+        Not taken up while the proposal is on hold by the owner's decision of 24 October 2026
+        ("Not now").
     - what: Whether api/v1/ on squaremath.org is the place for the API, and whether lower bounds join it from the start.
-      state: queued
-      bead: think-lnzm
+      state: declined
+      note: >-
+        Not taken up while the proposal is on hold by the owner's decision of 24 October 2026
+        ("Not now").
     beads:
     - think-lnzm
     answer_bead: think-lnzm
     replies: []
     close_when: >-
-      The owner has answered the three questions (think-lnzm) and the reply that says so is
-      posted.
+      The owner has answered the three questions (think-lnzm), which the decision of 24 October
+      2026 to put the proposal on hold does, and the reply that says so is posted.
     notes: >-
       Mykhailo Polkovskyi's comment of 2026-10-23T02:17:06Z (issuecomment-6355791263),
       read on 23 October (c-lane-719-records-1023), reports no result. It supports the
@@ -21926,6 +22074,21 @@ issues:
       path to Level 3; the form's structured credit, lineage, method and AI-assistance fields
       and the issue number in place of a bead; and api/v1/ on squaremath.org with lower bounds
       from the start. The questions stay the owner's, on think-lnzm.
+
+      Triaged read-only on 23 October 2026 (think-rtob) and set done by think-t5hc: a proposal
+      for project work, not a result; it registers nothing and nothing in it waits on
+      validation. What it proposes: Level 1, a workflow that verifies a submitted Witness/v2
+      exactly and compares it with the house, using what main already has (packing-witness
+      verify, devtools.exact_sides, sqpack.verify and
+      devtools.check_rational_witness_independent, with devtools.beyond_horizon_replay for a
+      batch); Level 2, a same-day bot pull request recording a smaller packing as reported;
+      Level 3, adoption and regularization on one maintainer approval; and the current best
+      packings as static JSON under squaremath.org/api/v1/. Polkovskyi's additions (sharded
+      bundles verified in parallel, a pre-flight command-line tool and GitHub Action, an
+      endpoint listing the counts with the most room, an in-browser inspector) are recorded
+      beside it. On 24 October 2026, asked how far a submission bot should go, the owner
+      answered "Not now" (think-lnzm), so the proposal is on hold and nothing is built; the
+      reply that says so is owed after this change merges.
   - number: 755
     title: 's(303) ≤ 17.909762327476: registration request'
     author: amundsk

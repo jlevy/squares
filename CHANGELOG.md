@@ -110,7 +110,11 @@ their counts.
 - Couzo’s issue 670 (T-226) first reported the 204-square arrangement that his
   issues 675 and 678 refine one to one: no symmetry pairs it with the house packing
   when it was reported, and 15 squares lie beyond a tenth of it. His source credits
-  the 204 seed to Polkovskyi. At 227 his issue 672 (T-227) refines
+  the 204 seed to Polkovskyi, and his answer of 23 October names it: T-226 continues
+  the line of Polkovskyi’s refinement of
+  [Daniil Ostashev](packing/contributors/people/daniil-ostashev.md)’s packing, as
+  PingYou Ltd refined it (T-186), three rounds of basin hopping on. At 227 his issue
+  672 (T-227) refines
   [Joost de Winter](packing/contributors/people/joost-de-winter.md)’s packing, by
   way of [Evan Daniel](packing/contributors/people/evan-daniel.md)’s exact form of
   it, to a side $1.71 \times 10^{-4}$ below it;
