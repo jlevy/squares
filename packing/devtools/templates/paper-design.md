@@ -2007,7 +2007,11 @@ contributor articles use their component sheets and the same text tokens.
     diagonal gesture moves both ways.
     That pan holds while the reader pauses and eases back onto the path as they scroll
     on, by a factor of e a window, and eases away back at the top.
-    The last of the motion slides to the triangle’s left edge whatever the pan.
+    The last of the motion slides to the triangle’s left edge, and the reader’s pan
+    holds on top of it there too, so the triangle at rest at the bottom still pans by
+    hand, from its left edge to its right end.
+    Until 2026-10-23 the slide overrode the pan, and on a phone a finger could no longer
+    move the triangle at the end (the owner).
     A swipe down wobbles a little sideways, most as it starts, and the pan once counted
     the wobble, so the triangle sometimes went left and then right (the owner,
     2026-10-23). Sideways travel now pans only past 16 pixels and a quarter of the
