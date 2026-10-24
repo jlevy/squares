@@ -8456,9 +8456,11 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "render_n11_lower_bounds_explainer with its math pass, "
             "render_n11_optimality_review, render_n11_threshold_bound_review and "
             "render_packing_methods write every file byte-identical across all three. "
-            "No result is registered, so the explainer's count is unchanged. No PDF was "
-            "printed; each prints from that HTML. Retain v0.4.25, v0.1.11, v0.1.4 and "
-            "v0.2.7."
+            "No result is registered, so the explainer's count is unchanged. Measured "
+            "again after #534's final reply record listed its report entry: "
+            "render_packing_methods at the same link revision writes all 43 files "
+            "byte-identical to that render. No PDF was printed; each prints from that "
+            "HTML. Retain v0.4.25, v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
 )
