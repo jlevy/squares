@@ -9965,7 +9965,7 @@ issues:
       squarepack-certs 0e9be7961773aa78b879c4ee6ba584a67e2e5513 and public squarepack-lean at
       947bdae. These source assertions await statement, axiom and replay review under think-494l;
       T-163 remains V2/C1, and Stage 4 adoption is separate.
-    read_through: '2026-10-19T03:30:28Z'
+    read_through: '2026-10-24T01:23:05Z'
     results:
     - key: excess-theorem
       claim: 's(n^2 - n + 1) < n for every n >= 15, and s(n^2 - n + F(n)) < n with F(n) = 1 + max{p + 2q
@@ -10055,6 +10055,10 @@ issues:
     close_when: The import and its disposition are on main, the owner has posted the resulting state with
       the entry's id, and the review and replay that would raise its rungs are owned by its bead; optimality
       is outside this request.
+    notes: >-
+      Fang's comment of 2026-10-24T01:23:05Z (issuecomment-6378113855) answers the owner's
+      question of 19 October with his X handle: it is social and carries no result content, so
+      nothing is read into the record from it.
   - number: 643
     title: 's(k² − 4) = k for every k ≥ 8 in the Lean kernel: ValidTilt9 (Hosono, after Daniel): tracking
       an unreported result'
