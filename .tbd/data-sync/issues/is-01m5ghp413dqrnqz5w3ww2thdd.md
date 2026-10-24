@@ -5,7 +5,7 @@ title: "Decide Couzo's 8 October decimal poses at 335 (and 336, 337, 341, 373, 3
 kind: task
 status: open
 priority: 2
-version: 4
+version: 5
 delegate: coord-intake-1023
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m5g8xj3hqca5wcen9f71dtnd
 hold: null
 hold_until: null
 created_at: 2026-10-22T00:55:25.968Z
-updated_at: 2026-10-23T06:17:11.817Z
+updated_at: 2026-10-24T03:05:35.586Z
 started_at: 2026-10-22T00:55:35.613Z
 ---
 D3 of think-f2io, and a promise of the #715 acknowledgement (https://github.com/jlevy/squares/issues/715#issuecomment-6329883508): decide exactly whether Francisco Couzo's 8 October decimal report at n = 335 packs at its printed side, 18.822875655543559 (source couzo-extended-range-reports-2026-10-08, packet packing/resources/web/couzo-extended-reports-2026-10-08, facts/n-335.yaml: decimal centres and angles, "no geometry, native replay"). The 9 October exact certificate at 335 (02f9690, retained in packing/resources/web/couzo-exact-certificates-2026-10-09; #715 restates it byte for byte) is 1.78e-11 or more above that row, so the 22 October ledger (packing/campaign/issue-intake/upper-bounds-20261022) records neither it nor #715 at 335.
@@ -25,3 +25,16 @@ Not run in the #715 import: the poses are decimal angles, so an exact decision n
 
 Done when: each pose set is decided (feasible at its printed side, or infeasible with the overlap or wall named), the outcome is recorded with its receipt, and, if one is infeasible, the owner gets a concrete correction (the decimal row to deferred-conflict with a bead, and the certified 335 made current).
 blocked_on: none
+
+## Notes
+
+2026-10-24 c-import-732c-1024 (think-e3im, PR #769, branch claude/intake-2026-10-24-issue732-f1ceee4): decided, per the owner's answer of 24 October that the existing process decides it ("we should have clear defined process for this already, why are you asking? if it is replaced by another one, we could indicate that too").
+
+Tool: packing/devtools/couzo_decimal_decisions.py (decide --write; check). Receipt: packing/resources/web/mishapolk-issue732-f1ceee4-2026-10-23/receipts/couzo-8-october-decisions.json (the 8 October packet refuses extra files, so the receipt sits with the release whose 335 supersedes the row). 4.6 CPU s for six counts.
+
+Four readings per count: literal (printed centres and radian angles, outward-rounded interval arithmetic at 60 digits with decimal_pose_margins' wall and pair formulas); near-axis read as 0 (every nonzero angle below 1e-10); the printed centres with the 9 October certificate's rotations (exact, both couzo_678_replay routes; only where the certificate is the same packing, centres within 1e-6); and the 9 October certificate itself (exact, both routes).
+
+- 335: literal NOT a packing at 18.822875655543559 (21 squares cross a wall; worst square 2 by 7.77e-16, angle -1.55e-15 rad; no pair overlaps). Near-axis 0 (196 angles: 193 binary64 roundings of zero up to 3.1e-15 and three near-axis angles 1.1e-12, 9.0e-12, 4.7e-11, exactly the certificate's zeros): a PACKING at the print, least pair separation 5.86e-14. Certificate rotations at the print: packing on both routes. Certificate (1.78e-11 larger): packing.
+- 336, 337: literal and near-axis both not packings at the print (near-axis: one wall by 4.0e-16 at 336, three by 1.0e-16 at 337). 341, 373, 374: literal not, near-axis a packing. At all five the 9 October certificate is another packing below the print (centres up to 5.3e-4 away), and its rows already supersede the 8 October ones.
+
+Disposition: no deferred-conflict and no correction. The 335 row stays as printed (a report of a packing that exists at its print, read as its certificate reads it, within one unit of the print on either reading, as the ledger reads it); Polkovskyi's f1ceee4 row supersedes it, at least 1.61e-12 below on either reading (source-coverage.yaml; the 8 October source's notes and #715's n335 entry say so). Recommend closing this bead once PR #769 merges; the coordinator closes it (lane rules: notes only).
