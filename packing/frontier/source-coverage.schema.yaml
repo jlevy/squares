@@ -89,10 +89,13 @@ properties:
       several dated rows: at most one current row, and each earlier report that a later
       one beats, kept as it was printed, with `disposition: superseded` and
       `superseded_by` naming the source of the row that beats it, as a superseded report
-      names its source. check_source_coverage holds every row to its source's reparsed
-      record byte for byte, and each successor to be a row at the same count, of the same
-      claim, from a source dated no earlier, strictly better by exact decimal comparison,
-      and never a cycle back to the row it supersedes.
+      names its source. A row above a classical construction the owner counts as an
+      earlier report (Göbel's, 23 October 2026) is kept the same way, with `disposition:
+      above-classical-construction` and the `construction` it is above, and holds no
+      count. check_source_coverage holds every row to its source's reparsed record byte
+      for byte, and each successor to be a row at the same count, of the same claim, from
+      a source dated no earlier, strictly better by exact decimal comparison, and never a
+      cycle back to the row it supersedes.
     type: array
     items:
       type: object
@@ -101,21 +104,30 @@ properties:
       description: >-
         A `deferred-conflict` is a deferral, like a pending intake, so it names the open
         bead that owns resolving it. A `superseded` row names its successor, and only a
-        superseded row names one.
+        superseded row names one. An `above-classical-construction` row names the
+        construction `p + q*sqrt(2)` it is above, and only such a row names one.
       allOf:
         - if: {properties: {disposition: {const: deferred-conflict}}}
           then: {required: [bead]}
         - if: {properties: {disposition: {const: superseded}}}
           then: {required: [superseded_by]}
           else: {not: {required: [superseded_by]}}
+        - if: {properties: {disposition: {const: above-classical-construction}}}
+          then: {required: [construction]}
+          else: {not: {required: [construction]}}
       properties:
         n: {type: integer, minimum: 1}
         source_id: {type: string, pattern: '^[a-z0-9-]+$'}
         claim: {enum: [upper-bound, lower-bound, exact-value]}
         value: {type: string, pattern: '^[0-9]+(?:\.[0-9]+)?$'}
         assurance: {enum: [reported, numerically-checked, verified]}
-        disposition: {enum: [tracked-outside-case-corpus, deferred-conflict, superseded]}
+        disposition:
+          enum: [tracked-outside-case-corpus, deferred-conflict, superseded,
+            above-classical-construction]
         superseded_by: {type: string, pattern: '^[a-z0-9-]+$'}
+        construction:
+          type: string
+          pattern: '^[0-9]+(?:/[1-9][0-9]*)? \+ [0-9]+(?:/[1-9][0-9]*)?\*sqrt\(2\)$'
         bead: {$ref: '#/$defs/bead'}
 $defs:
   bead:

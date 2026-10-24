@@ -768,12 +768,13 @@ reports:
       the certificate the issue links, read from a clone; not retained (think-f2io)
   note: 'Issue 715''s rows at the counts issue 719 also claims that no row of the couzo-issue715-2026-10-21
     source holds: its re-certifications of the 4e4c8ce certificates below the 12-place print,
-    at their exact sides from that packet''s filtered replay, which wait on a decision (think-fwa9),
-    and its rows above 1024, at the exact sides of the certificates the issue links, which
-    wait on the owner (think-f2io). None is recorded by this pass. Its other rows at these
-    counts, at 410, 413, 454, 490, 498, 544, 584, 596, 637, 644, 689, 692, 699, 736, 743,
-    744, 746, 792 and 800, state the 4e4c8ce certificates'' sides exactly, the same holder''s,
-    so they are not walked: each would be an exact tie, not recorded, and move nothing.'
+    at their exact sides from that packet''s filtered replay, which restate those certificates
+    by the owner''s answer of 23 October 2026 (think-fwa9), and its rows above 1024, at the
+    exact sides of the certificates the issue links, which wait on the owner (think-f2io).
+    None is recorded by this pass. Its other rows at these counts, at 410, 413, 454, 490,
+    498, 544, 584, 596, 637, 644, 689, 692, 699, 736, 743, 744, 746, 792 and 800, state the
+    4e4c8ce certificates'' sides exactly, the same holder''s, so they are not walked: each
+    would be an exact tie, not recorded, and move nothing.'
 - report: '#719'
   url: https://github.com/jlevy/squares/issues/719
   kind: issue
@@ -1542,4 +1543,20 @@ reports:
 exceptions: []
 key_reason_candidates: []
 other_items: []
+rulings:
+- ruling: restatement
+  decided: '2026-10-23'
+  bead: think-fwa9
+  through: 1024
+  awaiting_owner:
+  - n: 631
+    report: '#719'
+    bead: think-oqjd
+    reason: 'Another holder''s re-certification of Couzo''s 4e4c8ce certificate, 2.73e-13
+      below it at the same 12-place print, which #722 recorded and the owner''s answer did
+      not name'
+- ruling: classical-constructions
+  decided: '2026-10-23'
+  bead: think-8krd
+  through: 1024
 cross_check: []

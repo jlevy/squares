@@ -11,19 +11,19 @@
     {"n":344,"start":[{"label":"beyond-horizon row muglich-issue686-2026-10-19","holders":"muglich-issue686-2026-10-19","side":"18.992727809365345","exact":false}],"steps":[{"report":"#719","kind":"issue","reported_at":"2026-10-22T05:30:47Z","side":"18.992727809356","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row muglich-issue686-2026-10-19"],"difference":"below by at least 9.43e-12"}],"best_now":[{"label":"#719","holders":"Mykhailo Polkovskyi","side":"18.992727809356","exact":true}],"publication_dependent":[]},
     {
       "n": 366,
-      "start": [{"label":"the grid","holders":"ceil(sqrt n)","side":"20","exact":true}],
-      "steps": [{"report":"franciscouzo/square-packing@4e4c8ce","kind":"publication","reported_at":"2026-10-15T00:31:53Z","side":"19.656854249493","exact":true,"verdict":"recorded","reason":"below","decided_against":["the grid"],"difference":"below by 3.43e-01"},{"report":"franciscouzo/square-packing@5a299b4","kind":"publication","reported_at":"2026-10-21T22:56:37Z","side":"19.656854249493","exact":true,"verdict":"recorded","reason":"below","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"below by 1.97e-23"},{"report":"#719","kind":"issue","reported_at":"2026-10-22T06:05:31Z","side":"19.738803147571","exact":true,"verdict":"not recorded","reason":"above","decided_against":["franciscouzo/square-packing@5a299b4"],"difference":"above by 8.19e-02"}],
-      "best_now": [{"label":"franciscouzo/square-packing@5a299b4","holders":"Francisco Couzo","side":"19.656854249493","exact":true}],
-      "publication_dependent": [{"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"the grid","without_publications":"not in the walk","held_by_without":""},{"report":"franciscouzo/square-packing@5a299b4","with_publications":"recorded","held_by_with":"franciscouzo/square-packing@4e4c8ce","without_publications":"not in the walk","held_by_without":""},{"report":"#719","with_publications":"not recorded","held_by_with":"franciscouzo/square-packing@5a299b4","without_publications":"recorded","held_by_without":"the grid"}],
-      "best_now_without_publications": [{"label":"#719","holders":"Mykhailo Polkovskyi","side":"19.738803147571","exact":true}]
+      "start": [{"label":"Göbel's construction","holders":"Frits Göbel: the Göbel strip 19 + 1/2*sqrt(2) of n = 369, less 3 of its squares","side":"19.707106781187","exact":false}],
+      "steps": [{"report":"franciscouzo/square-packing@4e4c8ce","kind":"publication","reported_at":"2026-10-15T00:31:53Z","side":"19.656854249493","exact":true,"verdict":"recorded","reason":"below","decided_against":["Göbel's construction"],"difference":"below by at least 5.03e-02"},{"report":"franciscouzo/square-packing@5a299b4","kind":"publication","reported_at":"2026-10-21T22:56:37Z","side":"19.656854249493","exact":true,"verdict":"not recorded","reason":"restates","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"restates, below by 1.97e-23 at the same 12-place print"},{"report":"#719","kind":"issue","reported_at":"2026-10-22T06:05:31Z","side":"19.738803147571","exact":true,"verdict":"not recorded","reason":"above","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"above by 8.19e-02"}],
+      "best_now": [{"label":"franciscouzo/square-packing@4e4c8ce","holders":"Francisco Couzo","side":"19.656854249493","exact":true}],
+      "publication_dependent": [{"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"Göbel's construction","without_publications":"not in the walk","held_by_without":""}],
+      "best_now_without_publications": [{"label":"Göbel's construction","holders":"Frits Göbel: the Göbel strip 19 + 1/2*sqrt(2) of n = 369, less 3 of its squares","side":"19.707106781187","exact":false}]
     },
     {"n":370,"start":[{"label":"beyond-horizon row couzo-issue670-2026-10-17","holders":"couzo-issue670-2026-10-17","side":"19.767428349965","exact":false}],"steps":[{"report":"#719","kind":"issue","reported_at":"2026-10-22T05:30:47Z","side":"19.767428349962","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-issue670-2026-10-17"],"difference":"below by at least 2.29e-12"}],"best_now":[{"label":"#719","holders":"Mykhailo Polkovskyi","side":"19.767428349962","exact":true}],"publication_dependent":[]},
     {
       "n": 372,
       "start": [{"label":"beyond-horizon row couzo-extended-range-reports-2026-10-08","holders":"couzo-extended-range-reports-2026-10-08","side":"19.822875655616990","exact":false}],
-      "steps": [{"report":"franciscouzo/square-packing@4e4c8ce","kind":"publication","reported_at":"2026-10-15T00:31:53Z","side":"19.822875655562","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-extended-range-reports-2026-10-08"],"difference":"below by at least 5.56e-11"},{"report":"franciscouzo/square-packing@5a299b4","kind":"publication","reported_at":"2026-10-21T22:56:37Z","side":"19.822875655562","exact":true,"verdict":"recorded","reason":"below","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"below by 1.98e-23"},{"report":"#719","kind":"issue","reported_at":"2026-10-22T05:30:47Z","side":"19.822875655553","exact":true,"verdict":"recorded","reason":"below","decided_against":["franciscouzo/square-packing@5a299b4"],"difference":"below by 9.07e-12"}],
+      "steps": [{"report":"franciscouzo/square-packing@4e4c8ce","kind":"publication","reported_at":"2026-10-15T00:31:53Z","side":"19.822875655562","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-extended-range-reports-2026-10-08"],"difference":"below by at least 5.56e-11"},{"report":"franciscouzo/square-packing@5a299b4","kind":"publication","reported_at":"2026-10-21T22:56:37Z","side":"19.822875655562","exact":true,"verdict":"not recorded","reason":"restates","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"restates, below by 1.98e-23 at the same 12-place print"},{"report":"#719","kind":"issue","reported_at":"2026-10-22T05:30:47Z","side":"19.822875655553","exact":true,"verdict":"recorded","reason":"below","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"below by 9.07e-12"}],
       "best_now": [{"label":"#719","holders":"Mykhailo Polkovskyi","side":"19.822875655553","exact":true}],
-      "publication_dependent": [{"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-extended-range-reports-2026-10-08","without_publications":"not in the walk","held_by_without":""},{"report":"franciscouzo/square-packing@5a299b4","with_publications":"recorded","held_by_with":"franciscouzo/square-packing@4e4c8ce","without_publications":"not in the walk","held_by_without":""}],
+      "publication_dependent": [{"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-extended-range-reports-2026-10-08","without_publications":"not in the walk","held_by_without":""}],
       "best_now_without_publications": [{"label":"#719","holders":"Mykhailo Polkovskyi","side":"19.822875655553","exact":true}]
     },
     {"n":377,"start":[{"label":"beyond-horizon row muglich-issue686-2026-10-19","holders":"muglich-issue686-2026-10-19","side":"19.925471653974826","exact":false}],"steps":[{"report":"#719","kind":"issue","reported_at":"2026-10-22T05:30:47Z","side":"19.925471653970","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row muglich-issue686-2026-10-19"],"difference":"below by at least 5.56e-12"}],"best_now":[{"label":"#719","holders":"Mykhailo Polkovskyi","side":"19.925471653970","exact":true}],"publication_dependent":[]},
@@ -125,9 +125,14 @@
     {
       "n": 535,
       "start": [{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"23.656854249525","exact":false}],
-      "steps": [{"report":"franciscouzo/square-packing@4e4c8ce","kind":"publication","reported_at":"2026-10-15T00:31:53Z","side":"23.656854249519","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 5.45e-12"},{"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"23.656854249519","exact":true,"verdict":"recorded","reason":"below","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"below by 2.37e-23"},{"report":"franciscouzo/square-packing@5a299b4","kind":"publication","reported_at":"2026-10-21T22:56:37Z","side":"23.656854249519","exact":true,"verdict":"not recorded","reason":"equal","decided_against":["#715"],"difference":"equal"},{"report":"#719","kind":"issue","reported_at":"2026-10-22T05:30:47Z","side":"23.656854249517","exact":true,"verdict":"recorded","reason":"below","decided_against":["#715"],"difference":"below by 2.37e-12"}],
+      "steps": [
+        {"report":"franciscouzo/square-packing@4e4c8ce","kind":"publication","reported_at":"2026-10-15T00:31:53Z","side":"23.656854249519","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 5.45e-12"},
+        {"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"23.656854249519","exact":true,"verdict":"not recorded","reason":"restates","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"restates, below by 2.37e-23 at the same 12-place print"},
+        {"report":"franciscouzo/square-packing@5a299b4","kind":"publication","reported_at":"2026-10-21T22:56:37Z","side":"23.656854249519","exact":true,"verdict":"not recorded","reason":"restates","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"restates, below by 2.37e-23 at the same 12-place print"},
+        {"report":"#719","kind":"issue","reported_at":"2026-10-22T05:30:47Z","side":"23.656854249517","exact":true,"verdict":"recorded","reason":"below","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"below by 2.37e-12"}
+      ],
       "best_now": [{"label":"#719","holders":"Mykhailo Polkovskyi","side":"23.656854249517","exact":true}],
-      "publication_dependent": [{"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":""}],
+      "publication_dependent": [{"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":""},{"report":"#715","with_publications":"not recorded","held_by_with":"franciscouzo/square-packing@4e4c8ce","without_publications":"recorded","held_by_without":"beyond-horizon row couzo-verified-bounds-2026-10-14"}],
       "best_now_without_publications": [{"label":"#719","holders":"Mykhailo Polkovskyi","side":"23.656854249517","exact":true}]
     },
     {"n":536,"start":[{"label":"beyond-horizon row couzo-issue670-2026-10-17","holders":"couzo-issue670-2026-10-17","side":"23.677669529701","exact":false}],"steps":[{"report":"#719","kind":"issue","reported_at":"2026-10-22T05:30:47Z","side":"23.677669529688","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-issue670-2026-10-17"],"difference":"below by at least 1.25e-11"}],"best_now":[{"label":"#719","holders":"Mykhailo Polkovskyi","side":"23.677669529688","exact":true}],"publication_dependent":[]},
@@ -146,9 +151,14 @@
     {
       "n": 582,
       "start": [{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"24.656854249526","exact":false}],
-      "steps": [{"report":"franciscouzo/square-packing@4e4c8ce","kind":"publication","reported_at":"2026-10-15T00:31:53Z","side":"24.656854249519","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 6.45e-12"},{"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"24.656854249519","exact":true,"verdict":"recorded","reason":"below","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"below by 2.47e-23"},{"report":"franciscouzo/square-packing@5a299b4","kind":"publication","reported_at":"2026-10-21T22:56:37Z","side":"24.656854249519","exact":true,"verdict":"not recorded","reason":"equal","decided_against":["#715"],"difference":"equal"},{"report":"#719","kind":"issue","reported_at":"2026-10-22T05:30:47Z","side":"24.656854249518","exact":true,"verdict":"recorded","reason":"below","decided_against":["#715"],"difference":"below by 1.31e-12"}],
+      "steps": [
+        {"report":"franciscouzo/square-packing@4e4c8ce","kind":"publication","reported_at":"2026-10-15T00:31:53Z","side":"24.656854249519","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 6.45e-12"},
+        {"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"24.656854249519","exact":true,"verdict":"not recorded","reason":"restates","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"restates, below by 2.47e-23 at the same 12-place print"},
+        {"report":"franciscouzo/square-packing@5a299b4","kind":"publication","reported_at":"2026-10-21T22:56:37Z","side":"24.656854249519","exact":true,"verdict":"not recorded","reason":"restates","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"restates, below by 2.47e-23 at the same 12-place print"},
+        {"report":"#719","kind":"issue","reported_at":"2026-10-22T05:30:47Z","side":"24.656854249518","exact":true,"verdict":"recorded","reason":"below","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"below by 1.31e-12"}
+      ],
       "best_now": [{"label":"#719","holders":"Mykhailo Polkovskyi","side":"24.656854249518","exact":true}],
-      "publication_dependent": [{"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":""}],
+      "publication_dependent": [{"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":""},{"report":"#715","with_publications":"not recorded","held_by_with":"franciscouzo/square-packing@4e4c8ce","without_publications":"recorded","held_by_without":"beyond-horizon row couzo-verified-bounds-2026-10-14"}],
       "best_now_without_publications": [{"label":"#719","holders":"Mykhailo Polkovskyi","side":"24.656854249518","exact":true}]
     },
     {
@@ -162,9 +172,14 @@
     {
       "n": 591,
       "start": [{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"24.828427124781","exact":false}],
-      "steps": [{"report":"franciscouzo/square-packing@4e4c8ce","kind":"publication","reported_at":"2026-10-15T00:31:53Z","side":"24.828427124775","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 5.87e-12"},{"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"24.828427124775","exact":true,"verdict":"recorded","reason":"below","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"below by 2.48e-23"},{"report":"franciscouzo/square-packing@5a299b4","kind":"publication","reported_at":"2026-10-21T22:56:37Z","side":"24.828427124775","exact":true,"verdict":"not recorded","reason":"equal","decided_against":["#715"],"difference":"equal"},{"report":"#719","kind":"issue","reported_at":"2026-10-22T05:30:47Z","side":"24.828427124772","exact":true,"verdict":"recorded","reason":"below","decided_against":["#715"],"difference":"below by 2.64e-12"}],
+      "steps": [
+        {"report":"franciscouzo/square-packing@4e4c8ce","kind":"publication","reported_at":"2026-10-15T00:31:53Z","side":"24.828427124775","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 5.87e-12"},
+        {"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"24.828427124775","exact":true,"verdict":"not recorded","reason":"restates","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"restates, below by 2.48e-23 at the same 12-place print"},
+        {"report":"franciscouzo/square-packing@5a299b4","kind":"publication","reported_at":"2026-10-21T22:56:37Z","side":"24.828427124775","exact":true,"verdict":"not recorded","reason":"restates","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"restates, below by 2.48e-23 at the same 12-place print"},
+        {"report":"#719","kind":"issue","reported_at":"2026-10-22T05:30:47Z","side":"24.828427124772","exact":true,"verdict":"recorded","reason":"below","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"below by 2.64e-12"}
+      ],
       "best_now": [{"label":"#719","holders":"Mykhailo Polkovskyi","side":"24.828427124772","exact":true}],
-      "publication_dependent": [{"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":""}],
+      "publication_dependent": [{"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":""},{"report":"#715","with_publications":"not recorded","held_by_with":"franciscouzo/square-packing@4e4c8ce","without_publications":"recorded","held_by_without":"beyond-horizon row couzo-verified-bounds-2026-10-14"}],
       "best_now_without_publications": [{"label":"#719","holders":"Mykhailo Polkovskyi","side":"24.828427124772","exact":true}]
     },
     {
@@ -179,17 +194,27 @@
     {
       "n": 631,
       "start": [{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"25.656854249528","exact":false}],
-      "steps": [{"report":"franciscouzo/square-packing@4e4c8ce","kind":"publication","reported_at":"2026-10-15T00:31:53Z","side":"25.656854249519","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 8.45e-12"},{"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"25.656854249519","exact":true,"verdict":"recorded","reason":"below","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"below by 2.57e-23"},{"report":"franciscouzo/square-packing@5a299b4","kind":"publication","reported_at":"2026-10-21T22:56:37Z","side":"25.656854249519","exact":true,"verdict":"not recorded","reason":"equal","decided_against":["#715"],"difference":"equal"},{"report":"#719","kind":"issue","reported_at":"2026-10-22T05:30:47Z","side":"25.656854249519","exact":true,"verdict":"recorded","reason":"below","decided_against":["#715"],"difference":"below by 2.73e-13"}],
+      "steps": [
+        {"report":"franciscouzo/square-packing@4e4c8ce","kind":"publication","reported_at":"2026-10-15T00:31:53Z","side":"25.656854249519","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 8.45e-12"},
+        {"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"25.656854249519","exact":true,"verdict":"not recorded","reason":"restates","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"restates, below by 2.57e-23 at the same 12-place print"},
+        {"report":"franciscouzo/square-packing@5a299b4","kind":"publication","reported_at":"2026-10-21T22:56:37Z","side":"25.656854249519","exact":true,"verdict":"not recorded","reason":"restates","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"restates, below by 2.57e-23 at the same 12-place print"},
+        {"report":"#719","kind":"issue","reported_at":"2026-10-22T05:30:47Z","side":"25.656854249519","exact":true,"verdict":"recorded","reason":"below","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"below by 2.73e-13","awaiting_owner":"think-oqjd"}
+      ],
       "best_now": [{"label":"#719","holders":"Mykhailo Polkovskyi","side":"25.656854249519","exact":true}],
-      "publication_dependent": [{"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":""}],
+      "publication_dependent": [{"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":""},{"report":"#715","with_publications":"not recorded","held_by_with":"franciscouzo/square-packing@4e4c8ce","without_publications":"recorded","held_by_without":"beyond-horizon row couzo-verified-bounds-2026-10-14"}],
       "best_now_without_publications": [{"label":"#719","holders":"Mykhailo Polkovskyi","side":"25.656854249519","exact":true}]
     },
     {
       "n": 633,
       "start": [{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"25.677669529699","exact":false}],
-      "steps": [{"report":"franciscouzo/square-packing@4e4c8ce","kind":"publication","reported_at":"2026-10-15T00:31:53Z","side":"25.677669529693","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 5.73e-12"},{"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"25.677669529693","exact":true,"verdict":"recorded","reason":"below","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"below by 2.57e-23"},{"report":"franciscouzo/square-packing@5a299b4","kind":"publication","reported_at":"2026-10-21T22:56:37Z","side":"25.677669529693","exact":true,"verdict":"not recorded","reason":"equal","decided_against":["#715"],"difference":"equal"},{"report":"#719","kind":"issue","reported_at":"2026-10-22T05:30:47Z","side":"25.677669529690","exact":true,"verdict":"recorded","reason":"below","decided_against":["#715"],"difference":"below by 2.73e-12"}],
+      "steps": [
+        {"report":"franciscouzo/square-packing@4e4c8ce","kind":"publication","reported_at":"2026-10-15T00:31:53Z","side":"25.677669529693","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 5.73e-12"},
+        {"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"25.677669529693","exact":true,"verdict":"not recorded","reason":"restates","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"restates, below by 2.57e-23 at the same 12-place print"},
+        {"report":"franciscouzo/square-packing@5a299b4","kind":"publication","reported_at":"2026-10-21T22:56:37Z","side":"25.677669529693","exact":true,"verdict":"not recorded","reason":"restates","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"restates, below by 2.57e-23 at the same 12-place print"},
+        {"report":"#719","kind":"issue","reported_at":"2026-10-22T05:30:47Z","side":"25.677669529690","exact":true,"verdict":"recorded","reason":"below","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"below by 2.73e-12"}
+      ],
       "best_now": [{"label":"#719","holders":"Mykhailo Polkovskyi","side":"25.677669529690","exact":true}],
-      "publication_dependent": [{"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":""}],
+      "publication_dependent": [{"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":""},{"report":"#715","with_publications":"not recorded","held_by_with":"franciscouzo/square-packing@4e4c8ce","without_publications":"recorded","held_by_without":"beyond-horizon row couzo-verified-bounds-2026-10-14"}],
       "best_now_without_publications": [{"label":"#719","holders":"Mykhailo Polkovskyi","side":"25.677669529690","exact":true}]
     },
     {
@@ -203,9 +228,14 @@
     {
       "n": 640,
       "start": [{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"25.828427124782","exact":false}],
-      "steps": [{"report":"franciscouzo/square-packing@4e4c8ce","kind":"publication","reported_at":"2026-10-15T00:31:53Z","side":"25.828427124775","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 6.87e-12"},{"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"25.828427124775","exact":true,"verdict":"recorded","reason":"below","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"below by 2.58e-23"},{"report":"franciscouzo/square-packing@5a299b4","kind":"publication","reported_at":"2026-10-21T22:56:37Z","side":"25.828427124775","exact":true,"verdict":"not recorded","reason":"equal","decided_against":["#715"],"difference":"equal"},{"report":"#719","kind":"issue","reported_at":"2026-10-22T05:30:47Z","side":"25.828427124773","exact":true,"verdict":"recorded","reason":"below","decided_against":["#715"],"difference":"below by 1.63e-12"}],
+      "steps": [
+        {"report":"franciscouzo/square-packing@4e4c8ce","kind":"publication","reported_at":"2026-10-15T00:31:53Z","side":"25.828427124775","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 6.87e-12"},
+        {"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"25.828427124775","exact":true,"verdict":"not recorded","reason":"restates","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"restates, below by 2.58e-23 at the same 12-place print"},
+        {"report":"franciscouzo/square-packing@5a299b4","kind":"publication","reported_at":"2026-10-21T22:56:37Z","side":"25.828427124775","exact":true,"verdict":"not recorded","reason":"restates","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"restates, below by 2.58e-23 at the same 12-place print"},
+        {"report":"#719","kind":"issue","reported_at":"2026-10-22T05:30:47Z","side":"25.828427124773","exact":true,"verdict":"recorded","reason":"below","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"below by 1.63e-12"}
+      ],
       "best_now": [{"label":"#719","holders":"Mykhailo Polkovskyi","side":"25.828427124773","exact":true}],
-      "publication_dependent": [{"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":""}],
+      "publication_dependent": [{"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":""},{"report":"#715","with_publications":"not recorded","held_by_with":"franciscouzo/square-packing@4e4c8ce","without_publications":"recorded","held_by_without":"beyond-horizon row couzo-verified-bounds-2026-10-14"}],
       "best_now_without_publications": [{"label":"#719","holders":"Mykhailo Polkovskyi","side":"25.828427124773","exact":true}]
     },
     {"n":641,"start":[{"label":"beyond-horizon row couzo-issue678-2026-10-18","holders":"couzo-issue678-2026-10-18","side":"25.881306220594","exact":false}],"steps":[{"report":"#719","kind":"issue","reported_at":"2026-10-22T05:30:47Z","side":"25.881306218116","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-issue678-2026-10-18"],"difference":"below by at least 2.48e-09"}],"best_now":[{"label":"#719","holders":"Mykhailo Polkovskyi","side":"25.881306218116","exact":true}],"publication_dependent":[]},
@@ -231,17 +261,27 @@
     {
       "n": 682,
       "start": [{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"26.656854249529","exact":false}],
-      "steps": [{"report":"franciscouzo/square-packing@4e4c8ce","kind":"publication","reported_at":"2026-10-15T00:31:53Z","side":"26.656854249519","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 9.45e-12"},{"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"26.656854249519","exact":true,"verdict":"recorded","reason":"below","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"below by 2.67e-23"},{"report":"franciscouzo/square-packing@5a299b4","kind":"publication","reported_at":"2026-10-21T22:56:37Z","side":"26.656854249519","exact":true,"verdict":"not recorded","reason":"equal","decided_against":["#715"],"difference":"equal"},{"report":"#719","kind":"issue","reported_at":"2026-10-22T05:30:47Z","side":"26.656854249506","exact":true,"verdict":"recorded","reason":"below","decided_against":["#715"],"difference":"below by 1.27e-11"}],
+      "steps": [
+        {"report":"franciscouzo/square-packing@4e4c8ce","kind":"publication","reported_at":"2026-10-15T00:31:53Z","side":"26.656854249519","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 9.45e-12"},
+        {"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"26.656854249519","exact":true,"verdict":"not recorded","reason":"restates","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"restates, below by 2.67e-23 at the same 12-place print"},
+        {"report":"franciscouzo/square-packing@5a299b4","kind":"publication","reported_at":"2026-10-21T22:56:37Z","side":"26.656854249519","exact":true,"verdict":"not recorded","reason":"restates","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"restates, below by 2.67e-23 at the same 12-place print"},
+        {"report":"#719","kind":"issue","reported_at":"2026-10-22T05:30:47Z","side":"26.656854249506","exact":true,"verdict":"recorded","reason":"below","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"below by 1.27e-11"}
+      ],
       "best_now": [{"label":"#719","holders":"Mykhailo Polkovskyi","side":"26.656854249506","exact":true}],
-      "publication_dependent": [{"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":""}],
+      "publication_dependent": [{"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":""},{"report":"#715","with_publications":"not recorded","held_by_with":"franciscouzo/square-packing@4e4c8ce","without_publications":"recorded","held_by_without":"beyond-horizon row couzo-verified-bounds-2026-10-14"}],
       "best_now_without_publications": [{"label":"#719","holders":"Mykhailo Polkovskyi","side":"26.656854249506","exact":true}]
     },
     {
       "n": 684,
       "start": [{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"26.677669529700","exact":false}],
-      "steps": [{"report":"franciscouzo/square-packing@4e4c8ce","kind":"publication","reported_at":"2026-10-15T00:31:53Z","side":"26.677669529693","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 6.73e-12"},{"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"26.677669529693","exact":true,"verdict":"recorded","reason":"below","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"below by 2.67e-23"},{"report":"franciscouzo/square-packing@5a299b4","kind":"publication","reported_at":"2026-10-21T22:56:37Z","side":"26.677669529693","exact":true,"verdict":"not recorded","reason":"equal","decided_against":["#715"],"difference":"equal"},{"report":"#719","kind":"issue","reported_at":"2026-10-22T05:30:47Z","side":"26.677669529691","exact":true,"verdict":"recorded","reason":"below","decided_against":["#715"],"difference":"below by 1.57e-12"}],
+      "steps": [
+        {"report":"franciscouzo/square-packing@4e4c8ce","kind":"publication","reported_at":"2026-10-15T00:31:53Z","side":"26.677669529693","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 6.73e-12"},
+        {"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"26.677669529693","exact":true,"verdict":"not recorded","reason":"restates","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"restates, below by 2.67e-23 at the same 12-place print"},
+        {"report":"franciscouzo/square-packing@5a299b4","kind":"publication","reported_at":"2026-10-21T22:56:37Z","side":"26.677669529693","exact":true,"verdict":"not recorded","reason":"restates","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"restates, below by 2.67e-23 at the same 12-place print"},
+        {"report":"#719","kind":"issue","reported_at":"2026-10-22T05:30:47Z","side":"26.677669529691","exact":true,"verdict":"recorded","reason":"below","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"below by 1.57e-12"}
+      ],
       "best_now": [{"label":"#719","holders":"Mykhailo Polkovskyi","side":"26.677669529691","exact":true}],
-      "publication_dependent": [{"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":""}],
+      "publication_dependent": [{"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":""},{"report":"#715","with_publications":"not recorded","held_by_with":"franciscouzo/square-packing@4e4c8ce","without_publications":"recorded","held_by_without":"beyond-horizon row couzo-verified-bounds-2026-10-14"}],
       "best_now_without_publications": [{"label":"#719","holders":"Mykhailo Polkovskyi","side":"26.677669529691","exact":true}]
     },
     {
@@ -255,9 +295,14 @@
     {
       "n": 691,
       "start": [{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"26.828427124789","exact":false}],
-      "steps": [{"report":"franciscouzo/square-packing@4e4c8ce","kind":"publication","reported_at":"2026-10-15T00:31:53Z","side":"26.828427124775","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 1.39e-11"},{"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"26.828427124775","exact":true,"verdict":"recorded","reason":"below","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"below by 2.68e-23"},{"report":"franciscouzo/square-packing@5a299b4","kind":"publication","reported_at":"2026-10-21T22:56:37Z","side":"26.828427124775","exact":true,"verdict":"not recorded","reason":"equal","decided_against":["#715"],"difference":"equal"},{"report":"#719","kind":"issue","reported_at":"2026-10-22T05:30:47Z","side":"26.828427124774","exact":true,"verdict":"recorded","reason":"below","decided_against":["#715"],"difference":"below by 6.07e-13"}],
+      "steps": [
+        {"report":"franciscouzo/square-packing@4e4c8ce","kind":"publication","reported_at":"2026-10-15T00:31:53Z","side":"26.828427124775","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 1.39e-11"},
+        {"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"26.828427124775","exact":true,"verdict":"not recorded","reason":"restates","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"restates, below by 2.68e-23 at the same 12-place print"},
+        {"report":"franciscouzo/square-packing@5a299b4","kind":"publication","reported_at":"2026-10-21T22:56:37Z","side":"26.828427124775","exact":true,"verdict":"not recorded","reason":"restates","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"restates, below by 2.68e-23 at the same 12-place print"},
+        {"report":"#719","kind":"issue","reported_at":"2026-10-22T05:30:47Z","side":"26.828427124774","exact":true,"verdict":"recorded","reason":"below","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"below by 6.07e-13"}
+      ],
       "best_now": [{"label":"#719","holders":"Mykhailo Polkovskyi","side":"26.828427124774","exact":true}],
-      "publication_dependent": [{"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":""}],
+      "publication_dependent": [{"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":""},{"report":"#715","with_publications":"not recorded","held_by_with":"franciscouzo/square-packing@4e4c8ce","without_publications":"recorded","held_by_without":"beyond-horizon row couzo-verified-bounds-2026-10-14"}],
       "best_now_without_publications": [{"label":"#719","holders":"Mykhailo Polkovskyi","side":"26.828427124774","exact":true}]
     },
     {
@@ -272,9 +317,14 @@
     {
       "n": 695,
       "start": [{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"26.899494936649","exact":false}],
-      "steps": [{"report":"franciscouzo/square-packing@4e4c8ce","kind":"publication","reported_at":"2026-10-15T00:31:53Z","side":"26.899494936642","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 6.26e-12"},{"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"26.899494936642","exact":true,"verdict":"recorded","reason":"below","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"below by 2.69e-23"},{"report":"franciscouzo/square-packing@5a299b4","kind":"publication","reported_at":"2026-10-21T22:56:37Z","side":"26.899494936642","exact":true,"verdict":"not recorded","reason":"equal","decided_against":["#715"],"difference":"equal"},{"report":"#719","kind":"issue","reported_at":"2026-10-22T05:30:47Z","side":"26.899494936639","exact":true,"verdict":"recorded","reason":"below","decided_against":["#715"],"difference":"below by 3.05e-12"}],
+      "steps": [
+        {"report":"franciscouzo/square-packing@4e4c8ce","kind":"publication","reported_at":"2026-10-15T00:31:53Z","side":"26.899494936642","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 6.26e-12"},
+        {"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"26.899494936642","exact":true,"verdict":"not recorded","reason":"restates","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"restates, below by 2.69e-23 at the same 12-place print"},
+        {"report":"franciscouzo/square-packing@5a299b4","kind":"publication","reported_at":"2026-10-21T22:56:37Z","side":"26.899494936642","exact":true,"verdict":"not recorded","reason":"restates","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"restates, below by 2.69e-23 at the same 12-place print"},
+        {"report":"#719","kind":"issue","reported_at":"2026-10-22T05:30:47Z","side":"26.899494936639","exact":true,"verdict":"recorded","reason":"below","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"below by 3.05e-12"}
+      ],
       "best_now": [{"label":"#719","holders":"Mykhailo Polkovskyi","side":"26.899494936639","exact":true}],
-      "publication_dependent": [{"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":""}],
+      "publication_dependent": [{"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":""},{"report":"#715","with_publications":"not recorded","held_by_with":"franciscouzo/square-packing@4e4c8ce","without_publications":"recorded","held_by_without":"beyond-horizon row couzo-verified-bounds-2026-10-14"}],
       "best_now_without_publications": [{"label":"#719","holders":"Mykhailo Polkovskyi","side":"26.899494936639","exact":true}]
     },
     {
@@ -292,9 +342,14 @@
     {
       "n": 735,
       "start": [{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"27.656854249623","exact":false}],
-      "steps": [{"report":"franciscouzo/square-packing@4e4c8ce","kind":"publication","reported_at":"2026-10-15T00:31:53Z","side":"27.656854249519","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 1.03e-10"},{"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"27.656854249519","exact":true,"verdict":"recorded","reason":"below","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"below by 2.77e-23"},{"report":"franciscouzo/square-packing@5a299b4","kind":"publication","reported_at":"2026-10-21T22:56:37Z","side":"27.656854249519","exact":true,"verdict":"not recorded","reason":"equal","decided_against":["#715"],"difference":"equal"},{"report":"#719","kind":"issue","reported_at":"2026-10-22T05:30:47Z","side":"27.656854249507","exact":true,"verdict":"recorded","reason":"below","decided_against":["#715"],"difference":"below by 1.19e-11"}],
+      "steps": [
+        {"report":"franciscouzo/square-packing@4e4c8ce","kind":"publication","reported_at":"2026-10-15T00:31:53Z","side":"27.656854249519","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 1.03e-10"},
+        {"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"27.656854249519","exact":true,"verdict":"not recorded","reason":"restates","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"restates, below by 2.77e-23 at the same 12-place print"},
+        {"report":"franciscouzo/square-packing@5a299b4","kind":"publication","reported_at":"2026-10-21T22:56:37Z","side":"27.656854249519","exact":true,"verdict":"not recorded","reason":"restates","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"restates, below by 2.77e-23 at the same 12-place print"},
+        {"report":"#719","kind":"issue","reported_at":"2026-10-22T05:30:47Z","side":"27.656854249507","exact":true,"verdict":"recorded","reason":"below","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"below by 1.19e-11"}
+      ],
       "best_now": [{"label":"#719","holders":"Mykhailo Polkovskyi","side":"27.656854249507","exact":true}],
-      "publication_dependent": [{"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":""}],
+      "publication_dependent": [{"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":""},{"report":"#715","with_publications":"not recorded","held_by_with":"franciscouzo/square-packing@4e4c8ce","without_publications":"recorded","held_by_without":"beyond-horizon row couzo-verified-bounds-2026-10-14"}],
       "best_now_without_publications": [{"label":"#719","holders":"Mykhailo Polkovskyi","side":"27.656854249507","exact":true}]
     },
     {
@@ -308,17 +363,27 @@
     {
       "n": 737,
       "start": [{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"27.677669529702","exact":false}],
-      "steps": [{"report":"franciscouzo/square-packing@4e4c8ce","kind":"publication","reported_at":"2026-10-15T00:31:53Z","side":"27.677669529693","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 8.73e-12"},{"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"27.677669529693","exact":true,"verdict":"recorded","reason":"below","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"below by 2.77e-23"},{"report":"franciscouzo/square-packing@5a299b4","kind":"publication","reported_at":"2026-10-21T22:56:37Z","side":"27.677669529693","exact":true,"verdict":"not recorded","reason":"equal","decided_against":["#715"],"difference":"equal"},{"report":"#719","kind":"issue","reported_at":"2026-10-22T05:30:47Z","side":"27.677669529692","exact":true,"verdict":"recorded","reason":"below","decided_against":["#715"],"difference":"below by 6.98e-13"}],
+      "steps": [
+        {"report":"franciscouzo/square-packing@4e4c8ce","kind":"publication","reported_at":"2026-10-15T00:31:53Z","side":"27.677669529693","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 8.73e-12"},
+        {"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"27.677669529693","exact":true,"verdict":"not recorded","reason":"restates","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"restates, below by 2.77e-23 at the same 12-place print"},
+        {"report":"franciscouzo/square-packing@5a299b4","kind":"publication","reported_at":"2026-10-21T22:56:37Z","side":"27.677669529693","exact":true,"verdict":"not recorded","reason":"restates","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"restates, below by 2.77e-23 at the same 12-place print"},
+        {"report":"#719","kind":"issue","reported_at":"2026-10-22T05:30:47Z","side":"27.677669529692","exact":true,"verdict":"recorded","reason":"below","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"below by 6.98e-13"}
+      ],
       "best_now": [{"label":"#719","holders":"Mykhailo Polkovskyi","side":"27.677669529692","exact":true}],
-      "publication_dependent": [{"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":""}],
+      "publication_dependent": [{"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":""},{"report":"#715","with_publications":"not recorded","held_by_with":"franciscouzo/square-packing@4e4c8ce","without_publications":"recorded","held_by_without":"beyond-horizon row couzo-verified-bounds-2026-10-14"}],
       "best_now_without_publications": [{"label":"#719","holders":"Mykhailo Polkovskyi","side":"27.677669529692","exact":true}]
     },
     {
       "n": 742,
       "start": [{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"27.778174593090","exact":false}],
-      "steps": [{"report":"franciscouzo/square-packing@4e4c8ce","kind":"publication","reported_at":"2026-10-15T00:31:53Z","side":"27.778174593084","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 5.84e-12"},{"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"27.778174593084","exact":true,"verdict":"recorded","reason":"below","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"below by 2.78e-23"},{"report":"franciscouzo/square-packing@5a299b4","kind":"publication","reported_at":"2026-10-21T22:56:37Z","side":"27.778174593084","exact":true,"verdict":"not recorded","reason":"equal","decided_against":["#715"],"difference":"equal"},{"report":"#719","kind":"issue","reported_at":"2026-10-22T05:30:47Z","side":"27.778174593080","exact":true,"verdict":"recorded","reason":"below","decided_against":["#715"],"difference":"below by 3.20e-12"}],
+      "steps": [
+        {"report":"franciscouzo/square-packing@4e4c8ce","kind":"publication","reported_at":"2026-10-15T00:31:53Z","side":"27.778174593084","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 5.84e-12"},
+        {"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"27.778174593084","exact":true,"verdict":"not recorded","reason":"restates","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"restates, below by 2.78e-23 at the same 12-place print"},
+        {"report":"franciscouzo/square-packing@5a299b4","kind":"publication","reported_at":"2026-10-21T22:56:37Z","side":"27.778174593084","exact":true,"verdict":"not recorded","reason":"restates","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"restates, below by 2.78e-23 at the same 12-place print"},
+        {"report":"#719","kind":"issue","reported_at":"2026-10-22T05:30:47Z","side":"27.778174593080","exact":true,"verdict":"recorded","reason":"below","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"below by 3.20e-12"}
+      ],
       "best_now": [{"label":"#719","holders":"Mykhailo Polkovskyi","side":"27.778174593080","exact":true}],
-      "publication_dependent": [{"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":""}],
+      "publication_dependent": [{"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":""},{"report":"#715","with_publications":"not recorded","held_by_with":"franciscouzo/square-packing@4e4c8ce","without_publications":"recorded","held_by_without":"beyond-horizon row couzo-verified-bounds-2026-10-14"}],
       "best_now_without_publications": [{"label":"#719","holders":"Mykhailo Polkovskyi","side":"27.778174593080","exact":true}]
     },
     {
@@ -340,9 +405,14 @@
     {
       "n": 745,
       "start": [{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"27.828427124812","exact":false}],
-      "steps": [{"report":"franciscouzo/square-packing@4e4c8ce","kind":"publication","reported_at":"2026-10-15T00:31:53Z","side":"27.828427124777","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 3.50e-11"},{"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"27.828427124777","exact":true,"verdict":"recorded","reason":"below","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"below by 2.78e-23"},{"report":"franciscouzo/square-packing@5a299b4","kind":"publication","reported_at":"2026-10-21T22:56:37Z","side":"27.828427124777","exact":true,"verdict":"not recorded","reason":"equal","decided_against":["#715"],"difference":"equal"},{"report":"#719","kind":"issue","reported_at":"2026-10-22T05:30:47Z","side":"27.828427124775","exact":true,"verdict":"recorded","reason":"below","decided_against":["#715"],"difference":"below by 1.85e-12"}],
+      "steps": [
+        {"report":"franciscouzo/square-packing@4e4c8ce","kind":"publication","reported_at":"2026-10-15T00:31:53Z","side":"27.828427124777","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 3.50e-11"},
+        {"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"27.828427124777","exact":true,"verdict":"not recorded","reason":"restates","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"restates, below by 2.78e-23 at the same 12-place print"},
+        {"report":"franciscouzo/square-packing@5a299b4","kind":"publication","reported_at":"2026-10-21T22:56:37Z","side":"27.828427124777","exact":true,"verdict":"not recorded","reason":"restates","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"restates, below by 2.78e-23 at the same 12-place print"},
+        {"report":"#719","kind":"issue","reported_at":"2026-10-22T05:30:47Z","side":"27.828427124775","exact":true,"verdict":"recorded","reason":"below","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"below by 1.85e-12"}
+      ],
       "best_now": [{"label":"#719","holders":"Mykhailo Polkovskyi","side":"27.828427124775","exact":true}],
-      "publication_dependent": [{"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":""}],
+      "publication_dependent": [{"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":""},{"report":"#715","with_publications":"not recorded","held_by_with":"franciscouzo/square-packing@4e4c8ce","without_publications":"recorded","held_by_without":"beyond-horizon row couzo-verified-bounds-2026-10-14"}],
       "best_now_without_publications": [{"label":"#719","holders":"Mykhailo Polkovskyi","side":"27.828427124775","exact":true}]
     },
     {
@@ -362,17 +432,27 @@
     {
       "n": 790,
       "start": [{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"28.656854249532","exact":false}],
-      "steps": [{"report":"franciscouzo/square-packing@4e4c8ce","kind":"publication","reported_at":"2026-10-15T00:31:53Z","side":"28.656854249519","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 1.24e-11"},{"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"28.656854249519","exact":true,"verdict":"recorded","reason":"below","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"below by 2.87e-23"},{"report":"franciscouzo/square-packing@5a299b4","kind":"publication","reported_at":"2026-10-21T22:56:37Z","side":"28.656854249519","exact":true,"verdict":"not recorded","reason":"equal","decided_against":["#715"],"difference":"equal"},{"report":"#719","kind":"issue","reported_at":"2026-10-22T05:30:47Z","side":"28.656854249508","exact":true,"verdict":"recorded","reason":"below","decided_against":["#715"],"difference":"below by 1.15e-11"}],
+      "steps": [
+        {"report":"franciscouzo/square-packing@4e4c8ce","kind":"publication","reported_at":"2026-10-15T00:31:53Z","side":"28.656854249519","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 1.24e-11"},
+        {"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"28.656854249519","exact":true,"verdict":"not recorded","reason":"restates","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"restates, below by 2.87e-23 at the same 12-place print"},
+        {"report":"franciscouzo/square-packing@5a299b4","kind":"publication","reported_at":"2026-10-21T22:56:37Z","side":"28.656854249519","exact":true,"verdict":"not recorded","reason":"restates","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"restates, below by 2.87e-23 at the same 12-place print"},
+        {"report":"#719","kind":"issue","reported_at":"2026-10-22T05:30:47Z","side":"28.656854249508","exact":true,"verdict":"recorded","reason":"below","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"below by 1.15e-11"}
+      ],
       "best_now": [{"label":"#719","holders":"Mykhailo Polkovskyi","side":"28.656854249508","exact":true}],
-      "publication_dependent": [{"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":""}],
+      "publication_dependent": [{"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":""},{"report":"#715","with_publications":"not recorded","held_by_with":"franciscouzo/square-packing@4e4c8ce","without_publications":"recorded","held_by_without":"beyond-horizon row couzo-verified-bounds-2026-10-14"}],
       "best_now_without_publications": [{"label":"#719","holders":"Mykhailo Polkovskyi","side":"28.656854249508","exact":true}]
     },
     {
       "n": 791,
       "start": [{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"28.656854249532","exact":false}],
-      "steps": [{"report":"franciscouzo/square-packing@4e4c8ce","kind":"publication","reported_at":"2026-10-15T00:31:53Z","side":"28.656854249525","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 6.38e-12"},{"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"28.656854249525","exact":true,"verdict":"recorded","reason":"below","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"below by 2.87e-23"},{"report":"franciscouzo/square-packing@5a299b4","kind":"publication","reported_at":"2026-10-21T22:56:37Z","side":"28.656854249525","exact":true,"verdict":"not recorded","reason":"equal","decided_against":["#715"],"difference":"equal"},{"report":"#719","kind":"issue","reported_at":"2026-10-22T05:30:47Z","side":"28.656854249522","exact":true,"verdict":"recorded","reason":"below","decided_against":["#715"],"difference":"below by 3.39e-12"}],
+      "steps": [
+        {"report":"franciscouzo/square-packing@4e4c8ce","kind":"publication","reported_at":"2026-10-15T00:31:53Z","side":"28.656854249525","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 6.38e-12"},
+        {"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"28.656854249525","exact":true,"verdict":"not recorded","reason":"restates","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"restates, below by 2.87e-23 at the same 12-place print"},
+        {"report":"franciscouzo/square-packing@5a299b4","kind":"publication","reported_at":"2026-10-21T22:56:37Z","side":"28.656854249525","exact":true,"verdict":"not recorded","reason":"restates","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"restates, below by 2.87e-23 at the same 12-place print"},
+        {"report":"#719","kind":"issue","reported_at":"2026-10-22T05:30:47Z","side":"28.656854249522","exact":true,"verdict":"recorded","reason":"below","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"below by 3.39e-12"}
+      ],
       "best_now": [{"label":"#719","holders":"Mykhailo Polkovskyi","side":"28.656854249522","exact":true}],
-      "publication_dependent": [{"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":""}],
+      "publication_dependent": [{"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":""},{"report":"#715","with_publications":"not recorded","held_by_with":"franciscouzo/square-packing@4e4c8ce","without_publications":"recorded","held_by_without":"beyond-horizon row couzo-verified-bounds-2026-10-14"}],
       "best_now_without_publications": [{"label":"#719","holders":"Mykhailo Polkovskyi","side":"28.656854249522","exact":true}]
     },
     {
@@ -386,25 +466,40 @@
     {
       "n": 797,
       "start": [{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"28.778174593092","exact":false}],
-      "steps": [{"report":"franciscouzo/square-packing@4e4c8ce","kind":"publication","reported_at":"2026-10-15T00:31:53Z","side":"28.778174593084","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 7.84e-12"},{"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"28.778174593084","exact":true,"verdict":"recorded","reason":"below","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"below by 2.88e-23"},{"report":"franciscouzo/square-packing@5a299b4","kind":"publication","reported_at":"2026-10-21T22:56:37Z","side":"28.778174593084","exact":true,"verdict":"not recorded","reason":"equal","decided_against":["#715"],"difference":"equal"},{"report":"#719","kind":"issue","reported_at":"2026-10-22T05:30:47Z","side":"28.778174593081","exact":true,"verdict":"recorded","reason":"below","decided_against":["#715"],"difference":"below by 2.18e-12"}],
+      "steps": [
+        {"report":"franciscouzo/square-packing@4e4c8ce","kind":"publication","reported_at":"2026-10-15T00:31:53Z","side":"28.778174593084","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 7.84e-12"},
+        {"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"28.778174593084","exact":true,"verdict":"not recorded","reason":"restates","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"restates, below by 2.88e-23 at the same 12-place print"},
+        {"report":"franciscouzo/square-packing@5a299b4","kind":"publication","reported_at":"2026-10-21T22:56:37Z","side":"28.778174593084","exact":true,"verdict":"not recorded","reason":"restates","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"restates, below by 2.88e-23 at the same 12-place print"},
+        {"report":"#719","kind":"issue","reported_at":"2026-10-22T05:30:47Z","side":"28.778174593081","exact":true,"verdict":"recorded","reason":"below","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"below by 2.18e-12"}
+      ],
       "best_now": [{"label":"#719","holders":"Mykhailo Polkovskyi","side":"28.778174593081","exact":true}],
-      "publication_dependent": [{"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":""}],
+      "publication_dependent": [{"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":""},{"report":"#715","with_publications":"not recorded","held_by_with":"franciscouzo/square-packing@4e4c8ce","without_publications":"recorded","held_by_without":"beyond-horizon row couzo-verified-bounds-2026-10-14"}],
       "best_now_without_publications": [{"label":"#719","holders":"Mykhailo Polkovskyi","side":"28.778174593081","exact":true}]
     },
     {
       "n": 798,
       "start": [{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"28.798989873291","exact":false}],
-      "steps": [{"report":"franciscouzo/square-packing@4e4c8ce","kind":"publication","reported_at":"2026-10-15T00:31:53Z","side":"28.798989873256","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 3.43e-11"},{"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"28.798989873256","exact":true,"verdict":"recorded","reason":"below","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"below by 2.88e-23"},{"report":"franciscouzo/square-packing@5a299b4","kind":"publication","reported_at":"2026-10-21T22:56:37Z","side":"28.798989873256","exact":true,"verdict":"not recorded","reason":"equal","decided_against":["#715"],"difference":"equal"},{"report":"#719","kind":"issue","reported_at":"2026-10-22T05:30:47Z","side":"28.798989873253","exact":true,"verdict":"recorded","reason":"below","decided_against":["#715"],"difference":"below by 3.45e-12"}],
+      "steps": [
+        {"report":"franciscouzo/square-packing@4e4c8ce","kind":"publication","reported_at":"2026-10-15T00:31:53Z","side":"28.798989873256","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 3.43e-11"},
+        {"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"28.798989873256","exact":true,"verdict":"not recorded","reason":"restates","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"restates, below by 2.88e-23 at the same 12-place print"},
+        {"report":"franciscouzo/square-packing@5a299b4","kind":"publication","reported_at":"2026-10-21T22:56:37Z","side":"28.798989873256","exact":true,"verdict":"not recorded","reason":"restates","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"restates, below by 2.88e-23 at the same 12-place print"},
+        {"report":"#719","kind":"issue","reported_at":"2026-10-22T05:30:47Z","side":"28.798989873253","exact":true,"verdict":"recorded","reason":"below","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"below by 3.45e-12"}
+      ],
       "best_now": [{"label":"#719","holders":"Mykhailo Polkovskyi","side":"28.798989873253","exact":true}],
-      "publication_dependent": [{"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":""}],
+      "publication_dependent": [{"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":""},{"report":"#715","with_publications":"not recorded","held_by_with":"franciscouzo/square-packing@4e4c8ce","without_publications":"recorded","held_by_without":"beyond-horizon row couzo-verified-bounds-2026-10-14"}],
       "best_now_without_publications": [{"label":"#719","holders":"Mykhailo Polkovskyi","side":"28.798989873253","exact":true}]
     },
     {
       "n": 799,
       "start": [{"label":"beyond-horizon row couzo-verified-bounds-2026-10-14","holders":"couzo-verified-bounds-2026-10-14","side":"28.798989873291","exact":false}],
-      "steps": [{"report":"franciscouzo/square-packing@4e4c8ce","kind":"publication","reported_at":"2026-10-15T00:31:53Z","side":"28.798989873256","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 3.43e-11"},{"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"28.798989873256","exact":true,"verdict":"recorded","reason":"below","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"below by 2.88e-23"},{"report":"franciscouzo/square-packing@5a299b4","kind":"publication","reported_at":"2026-10-21T22:56:37Z","side":"28.798989873256","exact":true,"verdict":"not recorded","reason":"equal","decided_against":["#715"],"difference":"equal"},{"report":"#719","kind":"issue","reported_at":"2026-10-22T05:30:47Z","side":"28.798989873253","exact":true,"verdict":"recorded","reason":"below","decided_against":["#715"],"difference":"below by 3.43e-12"}],
+      "steps": [
+        {"report":"franciscouzo/square-packing@4e4c8ce","kind":"publication","reported_at":"2026-10-15T00:31:53Z","side":"28.798989873256","exact":true,"verdict":"recorded","reason":"below","decided_against":["beyond-horizon row couzo-verified-bounds-2026-10-14"],"difference":"below by at least 3.43e-11"},
+        {"report":"#715","kind":"issue","reported_at":"2026-10-21T20:55:57Z","side":"28.798989873256","exact":true,"verdict":"not recorded","reason":"restates","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"restates, below by 2.88e-23 at the same 12-place print"},
+        {"report":"franciscouzo/square-packing@5a299b4","kind":"publication","reported_at":"2026-10-21T22:56:37Z","side":"28.798989873256","exact":true,"verdict":"not recorded","reason":"restates","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"restates, below by 2.88e-23 at the same 12-place print"},
+        {"report":"#719","kind":"issue","reported_at":"2026-10-22T05:30:47Z","side":"28.798989873253","exact":true,"verdict":"recorded","reason":"below","decided_against":["franciscouzo/square-packing@4e4c8ce"],"difference":"below by 3.43e-12"}
+      ],
       "best_now": [{"label":"#719","holders":"Mykhailo Polkovskyi","side":"28.798989873253","exact":true}],
-      "publication_dependent": [{"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":""}],
+      "publication_dependent": [{"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":""},{"report":"#715","with_publications":"not recorded","held_by_with":"franciscouzo/square-packing@4e4c8ce","without_publications":"recorded","held_by_without":"beyond-horizon row couzo-verified-bounds-2026-10-14"}],
       "best_now_without_publications": [{"label":"#719","holders":"Mykhailo Polkovskyi","side":"28.798989873253","exact":true}]
     },
     {
@@ -531,13 +626,48 @@
       "publication_dependent": []
     }
   ],
-  "summary": {"counts":122,"claims":239,"recorded_new":0,"recorded_new_continuing":0,"recorded_refinement":0,"recorded_unclassified":210,"recorded_by_exception":0,"not_recorded":29,"undecided":0},
+  "summary": {"counts":122,"claims":239,"recorded_new":0,"recorded_new_continuing":0,"recorded_refinement":0,"recorded_unclassified":189,"recorded_by_exception":0,"not_recorded":50,"undecided":0},
   "cross_check": [],
   "reports": [
     {"report":"franciscouzo/square-packing@4e4c8ce","url":"https://github.com/franciscouzo/square-packing/tree/4e4c8ce23cb5e87f033021687010992c40575480","kind":"publication","holders":"Francisco Couzo","reported_at":"2026-10-15T00:31:53Z","bead":"think-yfoo","counts":[366,372,410,413,447,450,454,490,498,535,544,582,584,591,596,631,633,637,640,644,682,684,689,691,692,695,699,735,736,737,742,743,744,745,746,790,791,792,797,798,799,800],"recorded":[366,372,410,413,447,450,454,490,498,535,544,582,584,591,596,631,633,637,640,644,682,684,689,691,692,695,699,735,736,737,742,743,744,745,746,790,791,792,797,798,799,800],"recorded_new":[],"recorded_refinement":[],"recorded_unclassified":[366,372,410,413,447,450,454,490,498,535,544,582,584,591,596,631,633,637,640,644,682,684,689,691,692,695,699,735,736,737,742,743,744,745,746,790,791,792,797,798,799,800],"recorded_by_exception":[],"not_recorded":[],"undecided":[]},
     {"report":"#666","url":"https://github.com/jlevy/squares/issues/666","kind":"issue","holders":"Joost de Winter","reported_at":"2026-10-17T07:06:07Z","bead":"think-3m10","counts":[1061,1128,1196,1266,1339,1413,1489,1568],"recorded":[1061,1128,1196,1266,1339,1413,1489,1568],"recorded_new":[],"recorded_refinement":[],"recorded_unclassified":[1061,1128,1196,1266,1339,1413,1489,1568],"recorded_by_exception":[],"not_recorded":[],"undecided":[]},
     {"report":"franciscouzo/square-packing@23aff0c","url":"https://github.com/franciscouzo/square-packing/tree/23aff0c6f992271e1ad13a148d44f392c4b386c0","kind":"publication","holders":"Francisco Couzo","reported_at":"2026-10-17T18:00:09Z","bead":"think-tmwt","counts":[447],"recorded":[447],"recorded_new":[],"recorded_refinement":[],"recorded_unclassified":[447],"recorded_by_exception":[],"not_recorded":[],"undecided":[]},
-    {"report":"#715","url":"https://github.com/jlevy/squares/issues/715","kind":"issue","holders":"Francisco Couzo","reported_at":"2026-10-21T20:55:57Z","bead":"think-cyal","counts":[535,582,591,631,633,640,682,684,691,695,735,737,742,745,790,791,797,798,799,1061,1266,1339,1413,1489,1568],"recorded":[535,582,591,631,633,640,682,684,691,695,735,737,742,745,790,791,797,798,799,1061,1266,1339,1413,1489,1568],"recorded_new":[],"recorded_refinement":[],"recorded_unclassified":[535,582,591,631,633,640,682,684,691,695,735,737,742,745,790,791,797,798,799,1061,1266,1339,1413,1489,1568],"recorded_by_exception":[],"not_recorded":[],"undecided":[]},
+    {
+      "report": "#715",
+      "url": "https://github.com/jlevy/squares/issues/715",
+      "kind": "issue",
+      "holders": "Francisco Couzo",
+      "reported_at": "2026-10-21T20:55:57Z",
+      "bead": "think-cyal",
+      "counts": [535,582,591,631,633,640,682,684,691,695,735,737,742,745,790,791,797,798,799,1061,1266,1339,1413,1489,1568],
+      "recorded": [1061,1266,1339,1413,1489,1568],
+      "recorded_new": [],
+      "recorded_refinement": [],
+      "recorded_unclassified": [1061,1266,1339,1413,1489,1568],
+      "recorded_by_exception": [],
+      "not_recorded": [
+        {"n":535,"reason":"restates","held_by":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":582,"reason":"restates","held_by":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":591,"reason":"restates","held_by":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":631,"reason":"restates","held_by":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":633,"reason":"restates","held_by":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":640,"reason":"restates","held_by":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":682,"reason":"restates","held_by":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":684,"reason":"restates","held_by":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":691,"reason":"restates","held_by":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":695,"reason":"restates","held_by":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":735,"reason":"restates","held_by":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":737,"reason":"restates","held_by":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":742,"reason":"restates","held_by":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":745,"reason":"restates","held_by":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":790,"reason":"restates","held_by":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":791,"reason":"restates","held_by":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":797,"reason":"restates","held_by":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":798,"reason":"restates","held_by":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":799,"reason":"restates","held_by":"franciscouzo/square-packing@4e4c8ce"}
+      ],
+      "undecided": []
+    },
     {
       "report": "franciscouzo/square-packing@5a299b4",
       "url": "https://github.com/franciscouzo/square-packing/tree/5a299b4708ab1ae4870d0fc1ab155738144f6ab8",
@@ -546,32 +676,34 @@
       "reported_at": "2026-10-21T22:56:37Z",
       "bead": "think-tmwt",
       "counts": [366,372,409,447,450,453,535,582,591,631,633,640,649,682,684,691,695,735,737,742,745,790,791,797,798,799,810,812,933,934,990,991,997,1061,1128,1196,1266,1339,1413,1489,1568],
-      "recorded": [366,372,409,450,453,649,810,812,933,934,990,991,997],
+      "recorded": [409,450,453,649,810,812,933,934,990,991,997],
       "recorded_new": [],
       "recorded_refinement": [],
-      "recorded_unclassified": [366,372,409,450,453,649,810,812,933,934,990,991,997],
+      "recorded_unclassified": [409,450,453,649,810,812,933,934,990,991,997],
       "recorded_by_exception": [],
       "not_recorded": [
+        {"n":366,"reason":"restates","held_by":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":372,"reason":"restates","held_by":"franciscouzo/square-packing@4e4c8ce"},
         {"n":447,"reason":"above","held_by":"franciscouzo/square-packing@23aff0c"},
-        {"n":535,"reason":"equal","held_by":"#715"},
-        {"n":582,"reason":"equal","held_by":"#715"},
-        {"n":591,"reason":"equal","held_by":"#715"},
-        {"n":631,"reason":"equal","held_by":"#715"},
-        {"n":633,"reason":"equal","held_by":"#715"},
-        {"n":640,"reason":"equal","held_by":"#715"},
-        {"n":682,"reason":"equal","held_by":"#715"},
-        {"n":684,"reason":"equal","held_by":"#715"},
-        {"n":691,"reason":"equal","held_by":"#715"},
-        {"n":695,"reason":"equal","held_by":"#715"},
-        {"n":735,"reason":"equal","held_by":"#715"},
-        {"n":737,"reason":"equal","held_by":"#715"},
-        {"n":742,"reason":"equal","held_by":"#715"},
-        {"n":745,"reason":"equal","held_by":"#715"},
-        {"n":790,"reason":"equal","held_by":"#715"},
-        {"n":791,"reason":"equal","held_by":"#715"},
-        {"n":797,"reason":"equal","held_by":"#715"},
-        {"n":798,"reason":"equal","held_by":"#715"},
-        {"n":799,"reason":"equal","held_by":"#715"},
+        {"n":535,"reason":"restates","held_by":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":582,"reason":"restates","held_by":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":591,"reason":"restates","held_by":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":631,"reason":"restates","held_by":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":633,"reason":"restates","held_by":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":640,"reason":"restates","held_by":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":682,"reason":"restates","held_by":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":684,"reason":"restates","held_by":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":691,"reason":"restates","held_by":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":695,"reason":"restates","held_by":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":735,"reason":"restates","held_by":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":737,"reason":"restates","held_by":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":742,"reason":"restates","held_by":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":745,"reason":"restates","held_by":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":790,"reason":"restates","held_by":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":791,"reason":"restates","held_by":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":797,"reason":"restates","held_by":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":798,"reason":"restates","held_by":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":799,"reason":"restates","held_by":"franciscouzo/square-packing@4e4c8ce"},
         {"n":1061,"reason":"equal","held_by":"#715"},
         {"n":1128,"reason":"equal","held_by":"#666"},
         {"n":1196,"reason":"equal","held_by":"#666"},
@@ -596,7 +728,7 @@
       "recorded_refinement": [],
       "recorded_unclassified": [105,204,330,339,342,344,370,372,377,378,379,380,381,409,410,412,413,417,418,419,420,421,422,447,450,452,453,454,456,460,462,490,498,499,507,508,535,536,544,551,552,553,555,582,584,591,596,601,631,633,637,640,641,642,644,649,650,652,682,684,689,691,692,693,695,699,701,703,704,705,735,736,737,742,743,744,745,746,753,754,755,757,758,759,790,791,792,797,798,799,800,810,811,812,816,868,869,872,874,927,928,929,930,932,933,934,990,991,992,993,994,996,997,1061,1128,1196,1266,1339,1413,1489,1568],
       "recorded_by_exception": [],
-      "not_recorded": [{"n":366,"reason":"above","held_by":"franciscouzo/square-packing@5a299b4"}],
+      "not_recorded": [{"n":366,"reason":"above","held_by":"franciscouzo/square-packing@4e4c8ce"}],
       "undecided": []
     }
   ],
@@ -605,11 +737,8 @@
     "first_commit_before_report": [],
     "undecided": [],
     "publication_dependent": [
-      {"n":366,"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"the grid","without_publications":"not in the walk","held_by_without":"","best_now_without":"#719 19.738803147571"},
-      {"n":366,"report":"franciscouzo/square-packing@5a299b4","with_publications":"recorded","held_by_with":"franciscouzo/square-packing@4e4c8ce","without_publications":"not in the walk","held_by_without":"","best_now_without":"#719 19.738803147571"},
-      {"n":366,"report":"#719","with_publications":"not recorded","held_by_with":"franciscouzo/square-packing@5a299b4","without_publications":"recorded","held_by_without":"the grid","best_now_without":"#719 19.738803147571"},
+      {"n":366,"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"Göbel's construction","without_publications":"not in the walk","held_by_without":"","best_now_without":"Göbel's construction 19.707106781187"},
       {"n":372,"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-extended-range-reports-2026-10-08","without_publications":"not in the walk","held_by_without":"","best_now_without":"#719 19.822875655553"},
-      {"n":372,"report":"franciscouzo/square-packing@5a299b4","with_publications":"recorded","held_by_with":"franciscouzo/square-packing@4e4c8ce","without_publications":"not in the walk","held_by_without":"","best_now_without":"#719 19.822875655553"},
       {"n":409,"report":"franciscouzo/square-packing@5a299b4","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-certificates-2026-10-14","without_publications":"not in the walk","held_by_without":"","best_now_without":"#719 20.767428349963"},
       {"n":410,"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":"","best_now_without":"#719 20.778174593073"},
       {"n":413,"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":"","best_now_without":"#719 20.831663365375"},
@@ -622,38 +751,57 @@
       {"n":490,"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":"","best_now_without":"#719 22.656854249516"},
       {"n":498,"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":"","best_now_without":"#719 22.828427124770"},
       {"n":535,"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":"","best_now_without":"#719 23.656854249517"},
+      {"n":535,"report":"#715","with_publications":"not recorded","held_by_with":"franciscouzo/square-packing@4e4c8ce","without_publications":"recorded","held_by_without":"beyond-horizon row couzo-verified-bounds-2026-10-14","best_now_without":"#719 23.656854249517"},
       {"n":544,"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":"","best_now_without":"#719 23.828427124771"},
       {"n":582,"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":"","best_now_without":"#719 24.656854249518"},
+      {"n":582,"report":"#715","with_publications":"not recorded","held_by_with":"franciscouzo/square-packing@4e4c8ce","without_publications":"recorded","held_by_without":"beyond-horizon row couzo-verified-bounds-2026-10-14","best_now_without":"#719 24.656854249518"},
       {"n":584,"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":"","best_now_without":"#719 24.677669529689"},
       {"n":591,"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":"","best_now_without":"#719 24.828427124772"},
+      {"n":591,"report":"#715","with_publications":"not recorded","held_by_with":"franciscouzo/square-packing@4e4c8ce","without_publications":"recorded","held_by_without":"beyond-horizon row couzo-verified-bounds-2026-10-14","best_now_without":"#719 24.828427124772"},
       {"n":596,"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":"","best_now_without":"#719 24.949747468331"},
       {"n":631,"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":"","best_now_without":"#719 25.656854249519"},
+      {"n":631,"report":"#715","with_publications":"not recorded","held_by_with":"franciscouzo/square-packing@4e4c8ce","without_publications":"recorded","held_by_without":"beyond-horizon row couzo-verified-bounds-2026-10-14","best_now_without":"#719 25.656854249519"},
       {"n":633,"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":"","best_now_without":"#719 25.677669529690"},
+      {"n":633,"report":"#715","with_publications":"not recorded","held_by_with":"franciscouzo/square-packing@4e4c8ce","without_publications":"recorded","held_by_without":"beyond-horizon row couzo-verified-bounds-2026-10-14","best_now_without":"#719 25.677669529690"},
       {"n":637,"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":"","best_now_without":"#719 25.778174593078"},
       {"n":640,"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":"","best_now_without":"#719 25.828427124773"},
+      {"n":640,"report":"#715","with_publications":"not recorded","held_by_with":"franciscouzo/square-packing@4e4c8ce","without_publications":"recorded","held_by_without":"beyond-horizon row couzo-verified-bounds-2026-10-14","best_now_without":"#719 25.828427124773"},
       {"n":644,"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":"","best_now_without":"#719 25.899494936638"},
       {"n":649,"report":"franciscouzo/square-packing@5a299b4","with_publications":"recorded","held_by_with":"beyond-horizon row muglich-issue686-2026-10-19","without_publications":"not in the walk","held_by_without":"","best_now_without":"#719 25.974897345923"},
       {"n":682,"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":"","best_now_without":"#719 26.656854249506"},
+      {"n":682,"report":"#715","with_publications":"not recorded","held_by_with":"franciscouzo/square-packing@4e4c8ce","without_publications":"recorded","held_by_without":"beyond-horizon row couzo-verified-bounds-2026-10-14","best_now_without":"#719 26.656854249506"},
       {"n":684,"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":"","best_now_without":"#719 26.677669529691"},
+      {"n":684,"report":"#715","with_publications":"not recorded","held_by_with":"franciscouzo/square-packing@4e4c8ce","without_publications":"recorded","held_by_without":"beyond-horizon row couzo-verified-bounds-2026-10-14","best_now_without":"#719 26.677669529691"},
       {"n":689,"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":"","best_now_without":"#719 26.778174593079"},
       {"n":691,"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":"","best_now_without":"#719 26.828427124774"},
+      {"n":691,"report":"#715","with_publications":"not recorded","held_by_with":"franciscouzo/square-packing@4e4c8ce","without_publications":"recorded","held_by_without":"beyond-horizon row couzo-verified-bounds-2026-10-14","best_now_without":"#719 26.828427124774"},
       {"n":692,"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":"","best_now_without":"#719 26.828427124774"},
       {"n":695,"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":"","best_now_without":"#719 26.899494936639"},
+      {"n":695,"report":"#715","with_publications":"not recorded","held_by_with":"franciscouzo/square-packing@4e4c8ce","without_publications":"recorded","held_by_without":"beyond-horizon row couzo-verified-bounds-2026-10-14","best_now_without":"#719 26.899494936639"},
       {"n":699,"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":"","best_now_without":"#719 26.949747468333"},
       {"n":735,"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":"","best_now_without":"#719 27.656854249507"},
+      {"n":735,"report":"#715","with_publications":"not recorded","held_by_with":"franciscouzo/square-packing@4e4c8ce","without_publications":"recorded","held_by_without":"beyond-horizon row couzo-verified-bounds-2026-10-14","best_now_without":"#719 27.656854249507"},
       {"n":736,"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":"","best_now_without":"#719 27.656854249521"},
       {"n":737,"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":"","best_now_without":"#719 27.677669529692"},
+      {"n":737,"report":"#715","with_publications":"not recorded","held_by_with":"franciscouzo/square-packing@4e4c8ce","without_publications":"recorded","held_by_without":"beyond-horizon row couzo-verified-bounds-2026-10-14","best_now_without":"#719 27.677669529692"},
       {"n":742,"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":"","best_now_without":"#719 27.778174593080"},
+      {"n":742,"report":"#715","with_publications":"not recorded","held_by_with":"franciscouzo/square-packing@4e4c8ce","without_publications":"recorded","held_by_without":"beyond-horizon row couzo-verified-bounds-2026-10-14","best_now_without":"#719 27.778174593080"},
       {"n":743,"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":"","best_now_without":"#719 27.798989873252"},
       {"n":744,"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":"","best_now_without":"#719 27.798989873252"},
       {"n":745,"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":"","best_now_without":"#719 27.828427124775"},
+      {"n":745,"report":"#715","with_publications":"not recorded","held_by_with":"franciscouzo/square-packing@4e4c8ce","without_publications":"recorded","held_by_without":"beyond-horizon row couzo-verified-bounds-2026-10-14","best_now_without":"#719 27.828427124775"},
       {"n":746,"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":"","best_now_without":"#719 27.828427124775"},
       {"n":790,"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":"","best_now_without":"#719 28.656854249508"},
+      {"n":790,"report":"#715","with_publications":"not recorded","held_by_with":"franciscouzo/square-packing@4e4c8ce","without_publications":"recorded","held_by_without":"beyond-horizon row couzo-verified-bounds-2026-10-14","best_now_without":"#719 28.656854249508"},
       {"n":791,"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":"","best_now_without":"#719 28.656854249522"},
+      {"n":791,"report":"#715","with_publications":"not recorded","held_by_with":"franciscouzo/square-packing@4e4c8ce","without_publications":"recorded","held_by_without":"beyond-horizon row couzo-verified-bounds-2026-10-14","best_now_without":"#719 28.656854249522"},
       {"n":792,"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":"","best_now_without":"#719 28.656854249522"},
       {"n":797,"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":"","best_now_without":"#719 28.778174593081"},
+      {"n":797,"report":"#715","with_publications":"not recorded","held_by_with":"franciscouzo/square-packing@4e4c8ce","without_publications":"recorded","held_by_without":"beyond-horizon row couzo-verified-bounds-2026-10-14","best_now_without":"#719 28.778174593081"},
       {"n":798,"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":"","best_now_without":"#719 28.798989873253"},
+      {"n":798,"report":"#715","with_publications":"not recorded","held_by_with":"franciscouzo/square-packing@4e4c8ce","without_publications":"recorded","held_by_without":"beyond-horizon row couzo-verified-bounds-2026-10-14","best_now_without":"#719 28.798989873253"},
       {"n":799,"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":"","best_now_without":"#719 28.798989873253"},
+      {"n":799,"report":"#715","with_publications":"not recorded","held_by_with":"franciscouzo/square-packing@4e4c8ce","without_publications":"recorded","held_by_without":"beyond-horizon row couzo-verified-bounds-2026-10-14","best_now_without":"#719 28.798989873253"},
       {"n":800,"report":"franciscouzo/square-packing@4e4c8ce","with_publications":"recorded","held_by_with":"beyond-horizon row couzo-verified-bounds-2026-10-14","without_publications":"not in the walk","held_by_without":"","best_now_without":"#719 28.798989873253"},
       {"n":810,"report":"franciscouzo/square-packing@5a299b4","with_publications":"recorded","held_by_with":"beyond-horizon row muglich-issue686-2026-10-19","without_publications":"not in the walk","held_by_without":"","best_now_without":"#719 28.951463050005"},
       {"n":812,"report":"franciscouzo/square-packing@5a299b4","with_publications":"recorded","held_by_with":"beyond-horizon row muglich-issue686-2026-10-19","without_publications":"not in the walk","held_by_without":"","best_now_without":"#719 28.976914320520"},
@@ -668,5 +816,58 @@
     "key_reason_candidates": [],
     "measured_identity": []
   },
-  "other_items": []
+  "other_items": [],
+  "rulings": [
+    {
+      "ruling": "restatement",
+      "decided": "2026-10-23",
+      "bead": "think-fwa9",
+      "text": "A side below an earlier report at its count by less than one unit in the 12th place, with both rounding up to the same 12-place print, restates that report: the earlier report stays the row, and the later side is not recorded.",
+      "through": 1024,
+      "not_recorded": [
+        {"n":366,"report":"franciscouzo/square-packing@5a299b4","restates":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":372,"report":"franciscouzo/square-packing@5a299b4","restates":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":535,"report":"#715","restates":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":535,"report":"franciscouzo/square-packing@5a299b4","restates":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":582,"report":"#715","restates":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":582,"report":"franciscouzo/square-packing@5a299b4","restates":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":591,"report":"#715","restates":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":591,"report":"franciscouzo/square-packing@5a299b4","restates":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":631,"report":"#715","restates":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":631,"report":"franciscouzo/square-packing@5a299b4","restates":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":633,"report":"#715","restates":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":633,"report":"franciscouzo/square-packing@5a299b4","restates":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":640,"report":"#715","restates":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":640,"report":"franciscouzo/square-packing@5a299b4","restates":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":682,"report":"#715","restates":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":682,"report":"franciscouzo/square-packing@5a299b4","restates":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":684,"report":"#715","restates":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":684,"report":"franciscouzo/square-packing@5a299b4","restates":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":691,"report":"#715","restates":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":691,"report":"franciscouzo/square-packing@5a299b4","restates":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":695,"report":"#715","restates":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":695,"report":"franciscouzo/square-packing@5a299b4","restates":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":735,"report":"#715","restates":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":735,"report":"franciscouzo/square-packing@5a299b4","restates":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":737,"report":"#715","restates":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":737,"report":"franciscouzo/square-packing@5a299b4","restates":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":742,"report":"#715","restates":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":742,"report":"franciscouzo/square-packing@5a299b4","restates":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":745,"report":"#715","restates":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":745,"report":"franciscouzo/square-packing@5a299b4","restates":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":790,"report":"#715","restates":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":790,"report":"franciscouzo/square-packing@5a299b4","restates":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":791,"report":"#715","restates":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":791,"report":"franciscouzo/square-packing@5a299b4","restates":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":797,"report":"#715","restates":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":797,"report":"franciscouzo/square-packing@5a299b4","restates":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":798,"report":"#715","restates":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":798,"report":"franciscouzo/square-packing@5a299b4","restates":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":799,"report":"#715","restates":"franciscouzo/square-packing@4e4c8ce"},
+        {"n":799,"report":"franciscouzo/square-packing@5a299b4","restates":"franciscouzo/square-packing@4e4c8ce"}
+      ],
+      "awaiting_owner": [{"n":631,"report":"#719","bead":"think-oqjd"}]
+    },
+    {"ruling":"classical-constructions","decided":"2026-10-23","bead":"think-8krd","text":"Göbel's classical constructions are earlier reports beyond n = 324: at each count the least side of the three families the Kingbird catalogue states, at that count or by deleting squares from a larger one, joins the start, so a side at or above it is not recorded.","through":1024,"start":[366],"not_recorded":[]}
+  ]
 }
