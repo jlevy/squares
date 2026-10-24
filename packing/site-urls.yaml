@@ -6795,7 +6795,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-24'
+  lastmod: '2026-10-25'
   status: live
 - path: cases/269.html
   canonical: cases/269.html
@@ -7115,7 +7115,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-24'
+  lastmod: '2026-10-25'
   status: live
 - path: cases/304.html
   canonical: cases/304.html
@@ -21173,7 +21173,7 @@ urls:
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-24'
-  lastmod: '2026-10-24'
+  lastmod: '2026-10-25'
   status: live
   identity:
     kind: upper-bound
@@ -21189,6 +21189,8 @@ urls:
     builds_on: null
     evidence:
     - E-couzo-763-certificate-report
+    - E-couzo-763-exact-feasibility
+    - E-couzo-763-review-exact-feasibility
     artifacts:
     - packing/resources/web/couzo-issue763-2026-10-23/README.md
     - packing/resources/web/couzo-issue763-2026-10-23/acquisition/claims.json
@@ -21199,6 +21201,38 @@ urls:
     - packing/campaign/issue-intake/upper-bounds-issue763-20261024/README.md
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/couzo_763_claims.py
+    - docs/project/reviews/review-2026-10-24-couzo-n268-n303.md
+    - packing/resources/web/couzo-issue763-2026-10-23/review/review-2026-10-24/README.md
+  amendments:
+  - date: '2026-10-25'
+    reason: 'The 24 October stage 4 review of T-240 accepts both certificates: the result rises to
+      V3/C3 and cites its two confirming evidence entries, the packet''s replay (sharing the producer''s
+      named components) and the review''s clean-room checker, with the review and its retained programs
+      among its artifacts and controls; the bounds, scope and attribution are unchanged.'
+    previous:
+      kind: upper-bound
+      scope:
+        n_values:
+        - 268
+        - 303
+      established: null
+      attribution:
+        source_keys:
+        - '[Couzo issue 763 2026-10-23]'
+        published: '2026-10-23'
+      builds_on: null
+      evidence:
+      - E-couzo-763-certificate-report
+      artifacts:
+      - packing/resources/web/couzo-issue763-2026-10-23/README.md
+      - packing/resources/web/couzo-issue763-2026-10-23/acquisition/claims.json
+      - packing/resources/web/couzo-issue763-2026-10-23/source/certificates/best/n268.cert
+      - packing/resources/web/couzo-issue763-2026-10-23/source/certificates/best/n303.cert
+      - packing/resources/web/couzo-issue763-2026-10-23/receipts/exact-certification.json.xz
+      - packing/resources/web/couzo-issue763-2026-10-23/receipts/claim-map.json
+      - packing/campaign/issue-intake/upper-bounds-issue763-20261024/README.md
+      - packing/devtools/upper_bound_reports.py
+      - packing/devtools/couzo_763_claims.py
 - path: results.html
   canonical: results.html
   kind: page

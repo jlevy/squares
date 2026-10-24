@@ -33609,9 +33609,11 @@ results:
       the author's checker receipts with sqpack/verify.py and the source's exact checker
       verify_bound_certificate.py (Evan Daniel's MIT verifier, with modifications by
       Francisco Couzo with Codex, as its header says), pinned here by digest and not run. The
-      source's commits 964ee2b, which the issue names, fa6237e and efef7d1 each end with a
-      Co-Authored-By trailer naming Claude, and efef7d1's message describes "Codex's
-      reviewed intake" (RF-1). The source's README selects its claims: each count credited
+      source's commit the issue names and its two parents each end with a Co-Authored-By
+      trailer naming Claude, and the earlier parent's message describes "Codex's reviewed
+      intake" (RF-1).
+
+      The source's README selects its claims: each count credited
       to Couzo whose exact side, rounded up at 12 places, is strictly below the reviewed
       comparison's 12-place print where that comparison is Couzo's own, and more than 1e-10
       below it where it is another author's. Those statements are the author's; no source
@@ -33687,7 +33689,9 @@ results:
       controls per certificate, sharp at 1e-30 at the closest pair, the square nearest a
       wall and the box, were as expected on both of its routes, and its agree.py found the
       maintained receipt's sides, poses, pairs tested, least gaps and least clearances
-      equal to its own, 24 of 24. With every rotation reversed, 94 pairs overlap at 268 and
+      equal to its own, 24 of 24.
+
+      With every rotation reversed, 94 pairs overlap at 268 and
       106 at 303, so the certificates hold under the counter-clockwise reading of the
       half-angle tangent only, which the format line does not state (RF-11).
 
@@ -33699,7 +33703,9 @@ results:
       2.78e-03, below T-230 (#728) and Mykhailo Polkovskyi's later certificate of 23 October
       by 2.79e-03, below T-186, T-174, T-162 and #593 by 2.98e-03, and below every other
       report there by 6.09e-03 or more. At that frozen read of main it is the smallest report
-      at each count, and the review found each side below every bound the record holds at
+      at each count.
+
+      The review found each side below every bound the record holds at
       the later counts, 269 to 288 and 304 to 320, the least margins 2.715e-2 at 269 and
       2.245e-2 at 304.
 
@@ -33709,7 +33715,9 @@ results:
       beyond a tenth, the largest move 5.91e-2 and none turned beyond a degree; at 303 it
       pairs one to one with its parent, Couzo's own Kaggle push packing, under the identity,
       three squares beyond a tenth (230, 264 and 289), the largest move 0.309, square 264
-      turned from -27.06 to -0.03 degrees. Against the houses it replaces, no symmetry pairs
+      turned from -27.06 to -0.03 degrees.
+
+      Against the houses it replaces, no symmetry pairs
       nearest centres one to one: 118 squares lie beyond a tenth of T-174's packing, 133 of
       T-239's and 125 of T-230's (118 to 119, 131 to 134 and 123 to 125 across the review's
       variants). So each is a refinement of its notebook parent and another arrangement
@@ -33725,9 +33733,11 @@ results:
       house at 268 follows the placement adopted.
 
       The manifest's top-level previous_source at each count is the retained parent, the
-      packing each search refined (certificates/parents/85dbd707... at 268 and 22f07a7c...
-      at 303); the source's previous record, PingYou Ltd's 733f7a5d... at 268 and Daniel's
-      929c2acf... at 303, is that parent's own previous_source (RF-2). At 303 the live
+      packing each search refined (the packet's certificates/parents/); the source's previous
+      record, PingYou Ltd's certificate at 268 and Evan Daniel's T-230 at 303, is that
+      parent's own previous_source (RF-2).
+
+      At 303 the live
       record's predecessor, 17.906978233798913 from a browser search, and the steps from
       the retained parent to it are not published (RF-8); the manifest names Lavrentev's
       "CUDA Packing Search" v11 as the seed without a run (RF-9), and the push parent pairs
@@ -33764,7 +33774,9 @@ results:
       counts, and Evan Daniel's regularizer solves each witness to a KKT local minimum below
       its side, register candidates that are never admitted: at 268 exactly the side of
       Daniel's later certificate, 4.48e-12 below, and at 303 a view 3.63e-12 below
-      (cases/regularized_drawings/think-bk9r-2026-10-24). At 268 Daniel's later certificate,
+      (cases/regularized_drawings/think-bk9r-2026-10-24).
+
+      At 268 Daniel's later certificate,
       a sibling placement, is imported as reported (think-l49q); once validated it re-houses
       268 under the same rule, and the credit there follows the placement it holds.
 
