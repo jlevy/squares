@@ -36,8 +36,10 @@ intake directory such as ``campaign/issue-intake/upper-bounds-20261014/``:
   (``awaiting_owner``) and is walked as before. Under ``classical-constructions`` (23
   October 2026, think-8krd) Göbel's construction at the count, the least side of the
   three families the Kingbird catalogue states at that count or by deletion from a larger
-  one, as the 15 October packet's retained program computes it (`GOEBEL_PROGRAM`), joins
-  the start as an earlier report (`construction_side`). A ledger read before the rulings
+  one, as the maintained module computes it with its side proved final
+  (`devtools.goebel_construction`, which agrees with the 15 October packet's retained
+  program, `GOEBEL_PROGRAM`, at every count to 1073), joins the start as an earlier report
+  (`construction_side`). A ledger read before the rulings
   names none and renders as it did. One read from the day of the answers (`GOEBEL_FROM`)
   with claims beyond the horizon applies both at every such count, Göbel's through its
   ruling or a start member ``gather`` froze, or names each it does not apply under
@@ -97,8 +99,6 @@ file would change.
 from __future__ import annotations
 
 import argparse
-import functools
-import importlib.util
 import json
 import math
 import re
@@ -120,6 +120,7 @@ from strif import atomic_output_file
 
 from devtools import check_source_coverage as coverage_check
 from devtools import check_standing
+from devtools import goebel_construction as goebel
 from devtools import render_recent_results as view
 from devtools.retained_data import read_retained_text, retained_exists
 from devtools.upper_bound_reports import Span, below, exact_span, grid_side, printed_span
@@ -195,11 +196,19 @@ GOEBEL_LABEL = "Göbel's construction"
 #: it applies both answers of that day beyond the horizon, or says why not
 #: (`answer_problems`; review B of #754, B1).
 GOEBEL_FROM = "2026-10-23"
-#: The exact comparison with Göbel's families every Göbel reading in the record uses: the
-#: 15 October packet's retained program, read from its path unchanged.
+#: The 15 October packet's retained Göbel program, which every frozen receipt names as its
+#: ``program`` and computes with, read from its path unchanged. The readers here take
+#: Göbel's construction from the maintained module (`devtools.goebel_construction`), which
+#: agrees with it at every count to 1073 and reaches past it (think-llit).
 GOEBEL_PROGRAM = ROOT / (
     "resources/web/couzo-verified-bounds-2026-10-14/review/goebel_beyond_horizon.py"
 )
+#: A walk of more counts than this renders a summary README (`readme`): its per-count table
+#: stays in ``ledger.json`` alone. Every walk retained to date walks fewer (the history
+#: walk's 392 is the most, in a README of 339 kB), so each renders as it did; the walk above
+#: 1024, about 5,000 counts, would otherwise write one of about 2.5 MB (think-llit, Gate
+#: Cost).
+SUMMARY_FROM = 400
 #: The common-doc footer every durable document carries (`check_documentation`).
 FOOTER = (
     "<!-- This document follows common-doc-guidelines.md.",
@@ -1370,8 +1379,8 @@ def tree_members(
     """Each count's start members, read from the records on the tree: both case lanes and
     any register entry pending adoption that states a smaller bound, or above the horizon
     the beyond-horizon row or the grid, and beside it Göbel's construction for a ledger
-    read on ``read_on`` from `GOEBEL_FROM` (`construction_member`, refused above 1073). A
-    lane's holders are credited by ``names``."""
+    read on ``read_on`` from `GOEBEL_FROM` (`construction_member`, refused at a count whose
+    side no build proves final). A lane's holders are credited by ``names``."""
     wanted = sorted(set(counts))
     members: dict[int, list[StartMember]] = {}
     inside = [n for n in wanted if n <= HORIZON]
@@ -1500,7 +1509,7 @@ _MEMBER_TYPES: Mapping[str, type] = {
 def recomputed(n: int, member: Mapping[str, Any]) -> list[dict[str, Any]]:
     """The span each of a frozen member's stored inputs gives: every case lane it stands
     for (`lane_member`), a pending entry's stated bound, a beyond-horizon print, the grid,
-    or Göbel's construction from the retained program. Each must equal the member's own.
+    or Göbel's construction from the maintained module. Each must equal the member's own.
     A beyond-horizon row read at its exact side keeps that side as its one lane, and is
     recomputed by `beyond_member`, so the side must still lie within the row's print."""
     if member["lanes"]:
@@ -1771,39 +1780,25 @@ def rulings_of(ledger: Mapping[str, Any]) -> Rulings:
     )
 
 
-@functools.cache
-def _goebel() -> tuple[Any, tuple[Any, ...]]:
-    """The retained Göbel program (`GOEBEL_PROGRAM`) and its families to its ``LIMIT``."""
-    spec = importlib.util.spec_from_file_location("goebel_beyond_horizon", GOEBEL_PROGRAM)
-    if spec is None or spec.loader is None:
-        raise LedgerError("the Göbel program is missing")
-    program = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(program)
-    return program, tuple(program.families(program.LIMIT))
-
-
 def goebel_reach() -> int:
-    """The last count at which the retained program gives Göbel's side: the largest count
-    of any member it builds to its ``LIMIT`` of 1100, 1073. Above it the program states no
-    form. Builds of the same families to 3000 here, and to 5000 in review A of #754, give
-    the same least side at every count from 325 to 1073."""
-    _, forms = _goebel()
-    return max(form.count for form in forms)
+    """The last count the maintained module's first build proves final with every count
+    below it beyond the horizon (`devtools.goebel_construction.reach`): 10,345. A larger
+    count is read from a larger build, derived from it; the retained program, whose largest
+    member is at 1073, agrees with the module at every count to there."""
+    return goebel.reach()
 
 
-def goebel_form(n: int) -> Any:
-    """Göbel's construction at ``n`` beyond the horizon, as the retained program states it
-    (a ``Form``: ``p + q sqrt 2``, its family and the count it packs); None in the corpus.
-    A count above `goebel_reach` is refused, so a walk or check reaching past it fails
-    rather than reading no construction there."""
+def goebel_form(n: int) -> goebel.Form | None:
+    """Göbel's construction at ``n`` beyond the horizon, from the maintained module
+    (`devtools.goebel_construction.side`, a ``Form``: ``p + q sqrt 2``, its family and the
+    count it packs); None in the corpus. A count whose side no build proves final is
+    refused, so a walk or check reaching it fails rather than reading no construction."""
     if n <= HORIZON:
         return None
-    program, forms = _goebel()
-    reach = goebel_reach()
-    _require(n <= reach, f"n = {n}: the retained Göbel program gives no side above {reach}")
-    form = program.goebel_at(n, list(forms))
-    _require(form is not None, f"n = {n}: the Göbel program states no construction")
-    return form
+    try:
+        return goebel.side(n)
+    except goebel.GoebelError as error:
+        raise LedgerError(str(error)) from error
 
 
 def goebel_baseline(read_on: str) -> bool:
@@ -1814,8 +1809,8 @@ def goebel_baseline(read_on: str) -> bool:
 
 def construction_member(n: int) -> StartMember:
     """Göbel's construction at ``n`` as a frozen start member (`construction_side`), which
-    `recomputed` reads again from the retained program; refused within the horizon and
-    above the program's reach (`goebel_reach`)."""
+    `recomputed` reads again from the maintained module; refused within the horizon and
+    at a count whose side no build proves final (`goebel_form`)."""
     side = construction_side(n)
     _require(side is not None, f"n = {n}: Göbel's construction is no start within the horizon")
     assert side is not None
@@ -2500,7 +2495,9 @@ def _report_link(label: str, url: str) -> str:
 
 def readme(ledger: Ledger, verdicts: Mapping[str, Any], *, retained: bool = True) -> str:
     """The human tables: the rule, per report, per count, owner decisions, other items.
-    ``retained`` says the intake directory holds a `LANE_CLAIMS` copy to link to."""
+    ``retained`` says the intake directory holds a `LANE_CLAIMS` copy to link to. A walk of
+    more than `SUMMARY_FROM` counts is summarized: the tallies, each report, the rulings and
+    the owner's lists stay, and the per-count table is ``ledger.json``'s alone."""
     lines = [
         "# Upper-Bound Reports, Count by Count, in Report Order",
         "",
@@ -2607,19 +2604,33 @@ def readme(ledger: Ledger, verdicts: Mapping[str, Any], *, retained: bool = True
             f"| {_cell(refined)} | {unclassified} "
             f"| {_cell(not_recorded)} | {undecided} | {summary['bead'] or '-'} |"
         )
-    lines += [
-        "",
-        "## Per Count",
-        "",
-        (
-            "Each report at the count in report order, with its side and verdict; a verdict "
-            "names what decided it and by how much."
-        ),
-        "",
-        "| n | Record on main | Reports in order | Best now |",
-        "| ---: | --- | --- | --- |",
-    ]
-    for count in verdicts["counts"]:
+    counts = verdicts["counts"]
+    if len(counts) > SUMMARY_FROM:
+        lines += [
+            "",
+            "## Per Count",
+            "",
+            (
+                f"This walk reaches {len(counts)} counts, more than {SUMMARY_FROM}, so this "
+                "README is a summary: each count's start, reports in order, verdicts and best "
+                "side are in [ledger.json](ledger.json) (`counts`), which `render --check` "
+                "holds to the rule like the rest."
+            ),
+        ]
+    else:
+        lines += [
+            "",
+            "## Per Count",
+            "",
+            (
+                "Each report at the count in report order, with its side and verdict; a "
+                "verdict names what decided it and by how much."
+            ),
+            "",
+            "| n | Record on main | Reports in order | Best now |",
+            "| ---: | --- | --- | --- |",
+        ]
+    for count in counts if len(counts) <= SUMMARY_FROM else []:
         record = "; ".join(
             f"{member['side']} ({_cell(member['label'])}; {_cell(member['holders'])})"
             for member in count["start"]
@@ -3476,8 +3487,8 @@ def main(argv: Sequence[str] | None = None) -> int:
                 action="store_true",
                 help=(
                     "also report where today's records give other starts; drift is not a "
-                    "gate, but a start the records cannot give fails, as above 1073 for a "
-                    "ledger read from 23 October 2026"
+                    "gate, but a start the records cannot give fails, as at a count whose "
+                    "Göbel side no build proves final for a ledger read from 23 October 2026"
                 ),
             )
         if name == "render":
