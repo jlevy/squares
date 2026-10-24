@@ -8682,8 +8682,9 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "swapped, 69 files each, all byte-identical across the three, by the same "
             "browser. Measured once more after the rigidity blocks and the composite "
             "figure's record at 268 and 303, at link revision ff9e896e with the same ten "
-            "files swapped in: the same outcome. Retain v0.4.26, v0.1.11, v0.1.4 and "
-            "v0.2.7."
+            "files swapped in: the same outcome. After review A's fixes to T-240's notes, at "
+            "link revision 9ebc1357 with the same ten files swapped in: the same outcome. "
+            "Retain v0.4.26, v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
 )
