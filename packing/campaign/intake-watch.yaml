@@ -1456,8 +1456,10 @@ repositories:
       are later reports the record takes, held for think-l49q until a packet pins
       8a8879a. c1572fc, d47d17a, f3ea419, d28be37 and 6bc50ea prove in Lean
       (strip_odd_iff, standard axioms) that for odd n >= 3 and 1.87 <= H < 2, n unit
-      squares fit in an L x H strip iff L >= n or L >= (n - 2)(2 sqrt 2 - H) + 4 - H;
-      strips are rectangles, outside this record, and bound no s(n). c185697 adds the
+      squares fit in an L x H strip iff L >= n or L >= (n - 2)(2 sqrt 2 - H) + 4 - H, and
+      8b2f214 adds notes on that theorem (README.md, TODO.md and
+      search/rectfront/RECTFRONT.md); strips are rectangles, outside this record, and bound
+      no s(n). c185697 adds the
       source's register-check and Kaggle import tools and its "Beyond the register" posting
       policy; f5fbf7b, 9a8d502, a9cdd63, 5e862ac, fd90f09, 2aae1b6 and 659ee62 are packer
       framework, TODO, CLAUDE.md and submission checklist edits. Nothing else to import.
@@ -1472,7 +1474,11 @@ repositories:
       lowers certified_bounds.json at 957 counts, each below #763's side and every bound
       this record held: at or below 1024, 108 own-count certificates at 330 to 997, a
       deletion at 690 and 17 L-border recipes; above 1024, 831 L-border recipes on 14 of
-      those certificates. No issue or comment claims them; they are held for think-gn29.
+      those certificates. Two of the 108, at 797 and 847, are below #763's side by only
+      8.43e-13 and 2.49e-14 and round up to the same 12-place print, so under the print
+      rule of Several Reports at One Count they restate #763 and are not rows: 106
+      certificate rows to record. No issue or comment claims them; they are held for
+      think-gn29.
       43f666c also adds the Kaggle per-puzzle leaderboard of 24 October to its public
       comparison, after which its README cedes 303 to pjmathematician's side-only entry,
       3.47e-11 above #763's side, and holds 340, 679, 732, 787, 844 and 903. It and

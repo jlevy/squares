@@ -17,10 +17,11 @@ checks the links this record holds:
   `certificates/n227.json` records for Evan Daniel's `alt/n-227.cert.gz`, and against
   #672's 227 certificate; and whether its bytes are de Winter's certificate, by the SHA-256
   the de Winter packet's manifest records for `n227/n227_record.cert`.
-- **The pairings.** The seed against T-196's packing, and #672's 227 against the seed, by
-  the measures of the evand-regularized-2026-10-20 packet's measure/identity.py, loaded
-  from its file unchanged: the nearest centre under each of the box's eight symmetries,
-  kept only where one to one, and an optimal assignment.
+- **The pairings.** The seed against T-196's packing, #672's 227 against the seed, and
+  #672's 227 against T-196's packing, so the three sit together, by the measures of the
+  evand-regularized-2026-10-20 packet's measure/identity.py, loaded from its file
+  unchanged: the nearest centre under each of the box's eight symmetries, kept only where
+  one to one, and an optimal assignment.
 - **The checker call.** Answer 2: exact rational corners built from (x, y, t), passed to
   this repository's `sqpack.verify.verify_packing(..., bucket=True)` with an exact
   rational sign, in the closed box [0, S]^2. Its report's `container_contacts` counts the
@@ -193,6 +194,12 @@ def main(argv: list[str] | None = None) -> int:
                 "view": "#672 certificates/n227.cert (T-227)",
                 "against": "the seed (af8cb79 cdd08485)",
                 **m.measure(issue, (side, placed)),  # type: ignore[attr-defined]
+            },
+            {
+                "n": N,
+                "view": "#672 certificates/n227.cert (T-227)",
+                "against": "T-196 (de Winter's #668 n227_record.cert)",
+                **m.measure(issue, t196),  # type: ignore[attr-defined]
             },
         ],
         "checker_call": {str(n): checker_call(n) for n in (227, 229)},

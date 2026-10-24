@@ -13592,8 +13592,14 @@ issues:
       its seed, which the 22 October review measured as Daniel's exact form of de Winter's
       certificate. So T-227's credit, Couzo after de Winter, Daniel, Levy, stands, and its
       claim, T-225's and the packet README now say the submission was his and name the
-      intermediate witness; how the witness was made is the source's own and is asked as an
-      informational question that holds nothing open. Nothing the author asked for is queued
+      intermediate witness. The source's certificates/parents/manifest.json at af8cb795,
+      pinned in the packet since review A5 of #790, credits the witness to Joost de Winter
+      and notes "Prior locally retained witness; seed/construction provenance is preserved
+      without asserting an independently established browser trajectory", so the source
+      keeps no record of how it was made; the final comment says so and asks, as an
+      informational question that holds nothing open, whether he recalls. The call itself
+      is in the source, exact_finish.py lines 68 to 70 at 1c17153, which the packet README
+      cites. Nothing the author asked for is queued
       and no question awaits him, so the final comment, owed after that change merges and its
       deploy is verified, closes the issue.
   - number: 673

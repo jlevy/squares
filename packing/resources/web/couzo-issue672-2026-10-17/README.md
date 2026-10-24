@@ -49,6 +49,8 @@ directory’s `README.md`, `manifest.json` and `SHA256SUMS`, and the source’s 
 `verify_bound_certificate.py` with its MIT licence `BOUND_VERIFIER_LICENSE.txt`, which are
 byte-identical to the copies the [issue-678 packet](../couzo-issue678-2026-10-18/README.md)
 retains and were not run.
+Since 24 October `certificates/parents/manifest.json`, the source’s record of the parent
+certificates it retains, is pinned by digest too, for its entry on the 227 witness.
 The rest of the tree is pinned by the commit alone.
 
 ## Exact Replay
@@ -122,10 +124,17 @@ He says the task was seeded from the source’s retained 227 witness `cdd08485�
 is de Winter’s #668 certificate”, and that his record lists Evan Daniel’s
 `alt/n-227.cert.gz` as that certificate’s seed.
 His `verify.py`, he says, is this repository’s `packing/src/sqpack/verify.py` at
-`37e6757`, byte for byte (`main` still holds the same Git blob): exact rational corners
-from each `x y t` line, passed to `verify_packing(corners, S, sign, bucket=True)` in the
-closed box. His strict verdict is false at 229 only because squares touch the walls, and
-true at 227.
+`37e6757`, byte for byte (`main` still holds the same Git blob). The source does not
+publish its `verify.py`, but it publishes the call, in
+[`exact_finish.py`, lines 68 to 70](https://github.com/franciscouzo/square-packing/blob/1c1715399709bc955e9b402947ab8b52bbacdfc3/exact_finish.py#L68-L70)
+at `1c17153`: `verify_packing([corners(*q) for q in squares], side, lambda v: (v > 0)-(v < 0), bucket=True)`,
+exact rational corners from each `x y t` line in the closed box. His strict verdict is
+false at 229 only because squares touch the walls, and true at 227.
+The source’s record of the witness, `certificates/parents/manifest.json` at the pin, which
+this packet pins by digest, credits it to “Joost de Winter (JoostdeWinter)” and notes:
+“Prior locally retained witness; seed/construction provenance is preserved without
+asserting an independently established browser trajectory.”
+So the source keeps no record of how the witness was made.
 
 [measure/answers-2026-10-24.py](measure/answers-2026-10-24.py) holds the answers to the
 retained files and writes [measure/answers-2026-10-24.json](measure/answers-2026-10-24.json),
@@ -137,13 +146,18 @@ in about 3 seconds; it decides nothing:
 - **The witness.** `certificates/parents/cdd08485….cert`, first committed at the pin with
   the issue’s certificates, is not de Winter’s certificate (SHA-256 `7d386887…`). Its
   exact side, `8556247787153006491973257/549755813888000000000000`, is
-  $7.26 	imes 10^{-5}$ below T-196’s and below the side the per-count JSON records for
+  $7.26 \times 10^{-5}$ below T-196’s and below the side the per-count JSON records for
   Daniel’s `alt/n-227.cert.gz`, which the 22 October review measured as Daniel’s exact
-  form of de Winter’s certificate. Nearest centres pair it with T-196’s packing one to one
-  under a reflection: 82 squares move beyond $10^{-3}$, none beyond a tenth, at most
-  0.0887. #672’s 227 pairs with it one to one under the identity, 91 beyond $10^{-3}$,
-  none beyond a tenth, at most 0.0793, $9.84 	imes 10^{-5}$ below it. So the witness is
-  de Winter’s packing part of the way to #672’s; how it was made is the source’s own.
+  form of de Winter’s certificate, and $9.84 \times 10^{-5}$ above #672’s 227: its side
+  lies between the two.
+- **The pairings.** By nearest centres, each pair is one to one with no square beyond a
+  tenth. The witness pairs with T-196’s packing under a reflection, 82 squares beyond
+  $10^{-3}$, at most 0.0887; #672’s 227 pairs with the witness under the identity, 91
+  beyond $10^{-3}$, at most 0.0793; and #672’s 227 pairs with T-196’s packing under the
+  same reflection, 59 beyond $10^{-3}$, at most 0.0796, as T-227’s regularization item
+  records. So #672’s packing is nearer de Winter’s than the witness is. That the witness
+  is a step from de Winter’s certificate to #672’s is the source’s statement, in the
+  per-count JSON and the comment, and not a measurement here.
 - **The call.** The same call here counts 58 corner coordinates on the boundary at 229
   and none at 227, with no touching pair at either, as the comment says and as the
   replay’s least wall clearances, exactly 0 and $10^{-15}$, imply.

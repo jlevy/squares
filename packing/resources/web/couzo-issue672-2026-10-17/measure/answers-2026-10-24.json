@@ -115,6 +115,40 @@
     "largest_turn_degrees": "5.885",
     "turned_beyond_1e-6": 57
    }
+  },
+  {
+   "n": 227,
+   "view": "#672 certificates/n227.cert (T-227)",
+   "against": "T-196 (de Winter's #668 n227_record.cert)",
+   "side_difference": "-1.710513e-04",
+   "side_difference_exact": "-19625608518563135753723747387243446036498414056943678211299386383188171187278853444289021263441244084191877555805979531385350241362792418377660126833372889968243/114735202090712500000000000000011677333830293841700192602309575669659645240534856976514727985045758957934996122322966418250992484037241536850000000000000000000000000",
+   "nearest_centre": {
+    "one_to_one": true,
+    "symmetry": 7,
+    "largest_displacement": "7.961378e-2",
+    "largest_turn_degrees": "5.842",
+    "moved_beyond": {
+     "1e-9": 227,
+     "1e-6": 226,
+     "1e-3": 59,
+     "1e-2": 45,
+     "1e-1": 0
+    },
+    "turned_beyond_1e-6": 58
+   },
+   "assignment": {
+    "symmetry": 7,
+    "largest_move": "0.0796138",
+    "moved_beyond": {
+     "1e-9": 227,
+     "1e-6": 226,
+     "1e-3": 59,
+     "1e-2": 45,
+     "1e-1": 0
+    },
+    "largest_turn_degrees": "5.842",
+    "turned_beyond_1e-6": 58
+   }
   }
  ],
  "checker_call": {

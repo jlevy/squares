@@ -228,7 +228,8 @@ def test_the_672_answers_receipt_rebuilds_from_the_retained_files(tmp_path: Path
     digest prefix the comment prints is the SHA-256 the #672 packet's manifest records; the
     227 seed it names, cdd08485, retained from af8cb79, is not de Winter's certificate but
     a packing one to one with it, no square beyond a tenth, 7.26e-5 below T-196 and 9.84e-5
-    above #672's 227, which pairs with it one to one under the identity; and the author's
+    above #672's 227, which pairs with it one to one under the identity and with T-196 one
+    to one, 59 squares beyond 1e-3 as T-227's item records; and the author's
     call, verify_packing(..., bucket=True) on exact corners in the closed box, counts the 58
     boundary corner coordinates at 229 his answer reports and none at 227, with no touching
     pair at either. The packet's program rebuilds the committed receipt from the retained
@@ -253,6 +254,7 @@ def test_the_672_answers_receipt_rebuilds_from_the_retained_files(tmp_path: Path
         nearest = pair["nearest_centre"]
         assert nearest["one_to_one"]
         assert nearest["moved_beyond"]["1e-1"] == 0
+    assert receipt["pairs"][2]["nearest_centre"]["moved_beyond"]["1e-3"] == 59
     for count, call in receipt["checker_call"].items():
         assert call["valid"]
         assert call["failures"] == 0
