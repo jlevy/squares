@@ -1305,8 +1305,8 @@ cannot disagree, and the folding `_work_listing` already applies to long lists.
 One pull request, the next News work after this plan merges, and merged before `main`’s
 `news.html` passes 450,000 bytes ([When the raise lands](#the-page-budget)).
 
-- [ ] `devtools.measure_news_page`, with its `bytes`, `project` and `load` modes.
-- [ ] Its report at today’s size and at the projected 1,300,000 bytes, stories only, in
+- [x] `devtools.measure_news_page`, with its `bytes`, `project` and `load` modes.
+- [x] Its report at today’s size and at the projected 1,300,000 bytes, stories only, in
   the pull request.
 - [ ] `PAGE_BUDGET_EXCEPTIONS["news.html"]` with its measured reason, and
   `docs/project/site-urls.md` re-rendered.
@@ -1316,6 +1316,13 @@ One pull request, the next News work after this plan merges, and merged before `
   a change in the trip check’s failing scope is checked against the `main` it merges
   into, in the runbook.
 - [ ] Tests, as the Testing Strategy says.
+
+**24 October 2026:** the tool and its report landed on their own, with the budget
+unchanged. The measurement failed `check_site_rendering`’s load limits at all three
+sizes, today’s 318,950 bytes, 1,005,302 and 1,304,794: a layout shift above 0.1, present
+at today’s size, when `news-cards.js` collapses the first visible card after the first
+paint, and a longest task that grows with the page, past 300 ms at 1,304,794 bytes.
+The raise waits on the owner’s decision `think-lsam`.
 
 ### Phase 1: The Record, Its Tool, the Backfill and the Gate
 
