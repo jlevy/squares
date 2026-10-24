@@ -8469,8 +8469,14 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "And after merging main 34eb8bb75 (#769), at link revision d63381d5, and main "
             "11d0ab06b (#770), at link revision 8753d8dc, and main e5c1c64e3 (#756), at "
             "link revision b133025b, each with that main's four files swapped in: the same "
-            "outcome. No PDF was printed; each prints from that HTML. Every paper keeps its "
-            "version."
+            "outcome. After review A's fixes (a third evidence entry, the replay of the "
+            "note's 18 pieces, and T-163's claim, notes, next steps and composition) and "
+            "the merge of main 6808d293a (#787), at link revision 98ce1995: twice from this "
+            "tree and once with that main's four files swapped in, 69 files each, all "
+            "byte-identical across the three; the explainer's math was prepared by the "
+            "host's Chrome for Testing 153 headless shell through SQPACK_CHROMIUM, the same "
+            "browser for every render. No PDF was printed; each prints from that HTML. "
+            "Every paper keeps its version."
         ),
     ),
 )
