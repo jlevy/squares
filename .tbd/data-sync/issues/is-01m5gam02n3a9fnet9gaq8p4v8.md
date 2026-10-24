@@ -5,7 +5,7 @@ title: "Owner decisions for #715 (and #666): counts above 1024, recipe-only rows
 kind: task
 status: in_progress
 priority: 1
-version: 13
+version: 14
 delegate: coord-intake-1021b
 labels:
   - result-import
@@ -14,7 +14,7 @@ dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-10-21T22:51:56.373Z
-updated_at: 2026-10-23T23:17:17.385Z
+updated_at: 2026-10-24T05:27:49.036Z
 started_at: 2026-10-21T22:51:57.158Z
 ---
 From the read-only triage of #715 (c-triage-715; full text: policy.md in the coordinator scratchpad triage-715/). No rule sets a ceiling above the n <= 324 horizon or mentions 1024, but the record holds nothing above 998, and #666's eight counts above 1024 wait on the same question.
@@ -136,3 +136,5 @@ declares yet. Packet README, Held Back and Not Recorded.
 - Corrected in place: the note above that called the question and the option's text "the recorded words", and its reference to "counts like any stated bound". No other note on this bead quotes the question or the description as the owner's.
 - In #754 (commit 8775445cd): `result-import.md`, `beyond_horizon_replay.DELETION_ANSWER` and its comment, and the history and #732 walks' notes now quote only the selected label as the owner's answer and attribute the rest to the question the coordinator asked. `DELETION_ANSWER` states "a later equal or higher side is not recorded" as the consequence, not as the answer. No ledger.json, start or verdict changed.
 - think-kzme's description and notes are corrected the same way.
+
+2026-10-24 coord-intake-1023: D5 now includes Polkovskyi's request, in his #732 comment of 20:35:12Z on 23 October, for sole credit at 11 counts of the f1ceee4 release. His manifest calls all 138 refinements of Couzo's topology (127 under one wording, 11 under another). #769 records the request as queued and measures it pose by pose in `receipts/pose-identity.json`; it decides nothing. The owner's D5 answer, on how per-row credit beyond the corpus names a packing it refines, decides it.
