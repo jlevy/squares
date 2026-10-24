@@ -5,7 +5,7 @@ title: "Import evand and franciscouzo: s(268) <= 16.874361715870 and s(304) <= 1
 kind: task
 status: in_progress
 priority: 2
-version: 4
+version: 5
 delegate: c-import-l49q-1024
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-24T09:12:28.189Z
-updated_at: 2026-10-24T14:47:31.000Z
+updated_at: 2026-10-24T15:27:28.406Z
 started_at: 2026-10-24T13:38:16.088Z
 ---
 
@@ -42,3 +42,5 @@ A mapped review comes next, then adoption at 268 and 304 with both drawings regu
 1. Do you claim the 268 and 304 certificates at `8a8879a` as bounds, with this credit: at 268 "Daniel after Lavrentev" (your exact descent of Vladislav Lavrentev's public lightningv08 packing), and at 304 your exact descent of the public packing that Couzo's index credits to Kirill Tymchishin's "CPU Alternating Reclosure" v3, whose finder you name as unknown?
 2. Which notebook versions and dates hold lightningv08's 268, Chris Deotte's 303 and kozykappa's 304? In particular, was Lavrentev's 268 public before #763 (23 October, 23:35:51Z)?
 3. `s268_lightning.predescent.txt` is #763's Kaggle parent at 268 (Tymchishin's EDA+Seam LP v4 packing) to 2.5e-10, while `s268_lightning.input.txt` is Lavrentev's placement. What is the predescent file, and which of the two did the descent start from?
+
+2026-10-24 c-import-l49q-1024: #792 head 37ce67593 is green (Packing validation 40106027298, Certificate page 40106027300; 31 pass, 0 fail). The first push failed on three bookkeeping causes, fixed in 5890f261b: SYNOPSIS research-status count, eight census spans in packing/contributors/occurrences.yaml (Tymchishin and Lavrentev unresolved pending profiles), and T-241 coverage address as /tree/fa6237e. Still a draft; not merged.
