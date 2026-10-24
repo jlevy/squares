@@ -3,9 +3,9 @@ type: is
 id: is-01m5qqwh830qd3x6f9qrga2tyz
 title: "PR #795 (merge): follow-up review C of the W7 merge resolution (4ef6dedd0) and the review-B fixes"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 3
+version: 4
 delegate: c-rev-795c-1024
 labels: []
 dependencies: []
@@ -13,8 +13,12 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-24T19:58:28.611Z
-updated_at: 2026-10-24T20:14:52.219Z
+updated_at: 2026-10-24T20:35:19.538Z
 started_at: 2026-10-24T19:58:33.893Z
+closed_at: 2026-10-24T20:35:19.537Z
+close_reason: "Review C of #795 posted (issuecomment-6389018390); its dispositions posted (issuecomment-6389064041); #795 merged as 2ed0ea740."
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes

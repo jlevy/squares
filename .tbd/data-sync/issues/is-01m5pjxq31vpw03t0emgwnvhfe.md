@@ -3,16 +3,20 @@ type: is
 id: is-01m5pjxq31vpw03t0emgwnvhfe
 title: "Import franciscouzo: 126 upper bounds at 330-997 (106 certificate rows) and 831 L-border recipes above 1024, the live records since #763's pin, at 43f666c (no issue)"
 kind: task
-status: open
+status: in_progress
 priority: 2
-version: 4
+version: 5
 spec_path: docs/project/specs/active/plan-2026-10-24-rows-above-1024.md
+delegate: c-import-gn29-1024
 labels:
   - result-import
 dependencies: []
 parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
+hold: null
+hold_until: null
 created_at: 2026-10-24T09:12:30.049Z
-updated_at: 2026-10-24T11:57:24.607Z
+updated_at: 2026-10-24T20:35:18.503Z
+started_at: 2026-10-24T20:35:18.503Z
 ---
 
 ## Notes
