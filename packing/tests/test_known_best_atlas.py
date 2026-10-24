@@ -4608,10 +4608,10 @@ def test_print_information_shares_content_style_and_measured_block_gaps(data_dat
         for block in blocks
     ]
     assert credit_text[0] == credit_text[1]
-    # 27 since the adoption at 303 of 24 October 2026 (see the credits test above).
+    # 28 since the adoption at 268 and 303 of 25 October 2026 (see the credits test above).
     assert (
         len(credit_text[0].removeprefix("Best packings due to ").removesuffix(".").split(", "))
-        == 27
+        == 28
     )
 
 
