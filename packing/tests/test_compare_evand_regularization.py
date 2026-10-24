@@ -186,18 +186,25 @@ def test_a_tilt_near_but_not_at_a_class_angle_is_refused() -> None:
 
 def test_the_refused_records_split_by_their_witness_tilts() -> None:
     index = compare.load_index()
-    # n = 259's house since 23 October 2026, issue 639's exact form (T-193, think-ot5c),
-    # holds square 229 5.21e-7 degrees from the axis, which the module will not round
-    # either way: the whole index is refused, and the split is of the other records.
-    with pytest.raises(
-        compare.InputRefusedError, match=r"n = 259, square 229: a tilt 5\.21e-7 degrees from 0"
-    ):
-        compare.refused_tilts(index)
-    result = compare.refused_tilts({n: entry for n, entry in index.items() if n != 259})
+    result = compare.refused_tilts(index)
     counts, records = result["counts"], result["records"]
     assert set(counts) == {"all-45", "other-tilt", "axis-only"}
     assert {kind: len(members) for kind, members in records.items()} == counts
-    assert sum(counts.values()) == result["refused"] == _axis_refused() - 1
+    # n = 259's house since 23 October 2026, issue 639's exact form (T-193, think-ot5c),
+    # holds square 229 5.21e-7 degrees from the axis, which the module will not round
+    # either way. `KNOWN_TILTS` records it with the bead that owes its regularization, so
+    # the record is held apart, in no class, and the rest split (review A6 of #756).
+    assert result["held"] == {
+        "259": {
+            "229": {
+                "near_degrees": 0,
+                "distance_degrees": "5.21e-7",
+                "owner": compare.KNOWN_TILTS[(259, 229)].owner,
+            }
+        }
+    }
+    assert compare.KNOWN_TILTS[(259, 229)].owner.startswith("think-mbdw: ")
+    assert sum(counts.values()) + len(result["held"]) == result["refused"] == _axis_refused()
     # Every refused record holds a tilted square.
     assert counts["axis-only"] == 0
     # n = 51's witness is exact over Q(sqrt 2), with 17 squares at 45 degrees.
@@ -207,6 +214,42 @@ def test_the_refused_records_split_by_their_witness_tilts() -> None:
     assert tilts["11"] == ["40.1819"]
     assert tilts["17"] == ["36.6238", "39.805"]
     assert tilts["18"] == ["24.2952"]
+
+
+def test_an_ambiguous_tilt_the_list_does_not_record_is_still_refused() -> None:
+    """The known-tilt list excuses that tilt and no other: without its entry the index is
+    refused at 259 as before, an entry at another distance or square no longer excuses
+    the tilt and is itself refused as stale, and so is one at a count the index no longer
+    refuses (review A6 of #756)."""
+    index = compare.load_index()
+    with pytest.raises(
+        compare.InputRefusedError, match=r"n = 259, square 229: a tilt 5\.21e-7 degrees from 0"
+    ):
+        compare.refused_tilts(index, known={})
+    elsewhere = {
+        (259, 228): compare.KNOWN_TILTS[(259, 229)],
+        **{key: value for key, value in compare.KNOWN_TILTS.items() if key != (259, 229)},
+    }
+    with pytest.raises(compare.InputRefusedError, match="no longer holds"):
+        compare.refused_tilts(index, known=elsewhere)
+    moved = {(259, 229): compare.KNOWN_TILTS[(259, 229)]._replace(distance="5.22e-7")}
+    with pytest.raises(compare.InputRefusedError, match="no longer holds"):
+        compare.refused_tilts(index, known=moved)
+    unrefused = min(n for n, entry in index.items() if entry["status"] != "refused")
+    lapsed = {**compare.KNOWN_TILTS, (unrefused, 1): compare.KNOWN_TILTS[(259, 229)]}
+    with pytest.raises(compare.InputRefusedError, match="no longer refuses"):
+        compare.refused_tilts(index, known=lapsed)
+
+
+def test_the_command_reports_a_held_record_and_succeeds(
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    assert compare.main(["refused-tilts"]) == 0
+    out = capsys.readouterr().out
+    assert (
+        "held, a known ambiguous tilt: n = 259, square 229, 5.21e-7 degrees from 0 "
+        "(think-mbdw: " in out
+    )
 
 
 def test_certificate_angles_read_each_rotation_exactly(tmp_path: Path) -> None:
