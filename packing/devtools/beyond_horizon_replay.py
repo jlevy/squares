@@ -4916,14 +4916,16 @@ def claim_map_walk_sources(issue: int | str, read_on: str) -> dict[str, Any]:
         for items in groups.values()
         for item in items
     }
+    # A count is one release's among the releases sharing a claim map; a push read commit
+    # by commit (`PUSH`) claims it at most once a commit.
     claimed = Counter(
-        (label, int(claim["n"]))
+        (label if item.claim_map == PUSH else "", int(claim["n"]))
         for label, items in groups.items()
         for item in items
         for claim in own[item.key]
     )
-    twice = sorted(f"{label} {n}" for (label, n), times in claimed.items() if times > 1)
-    _require(not twice, f"{walk.name}: two releases of one report both claim {twice}")
+    twice = sorted(n for (_, n), times in claimed.items() if times > 1)
+    _require(not twice, f"{walk.name}: the releases sharing a claim map both claim {twice}")
     counts = sorted({n for _, n in claimed})
     starts = _start_sides(walk, read_at_main, counts, read_on)
     highs = _least_highs(starts)

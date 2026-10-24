@@ -242,12 +242,16 @@ sources:
     landed: '2026-10-14'
   - id: couzo-certificates-2026-10-14
     landed: '2026-10-16'
+  - id: couzo-efef7d1-2026-10-23
+    landed: '2026-10-24'
   - id: couzo-extended-certificates-2026-10-11
     landed: '2026-10-23'
   - id: couzo-extended-range-reports-2026-10-08
     landed: '2026-10-09'
   - id: couzo-extended-range-updates-2026-10-08
     landed: '2026-10-10'
+  - id: couzo-fa6237e-2026-10-23
+    landed: '2026-10-24'
   - id: couzo-index-2026-10-15
     landed: '2026-10-23'
   - id: couzo-issue583-2026-10-13

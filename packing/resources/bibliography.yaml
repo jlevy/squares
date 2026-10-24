@@ -3614,15 +3614,19 @@ sources:
       Kirill Tymchishin's (kirilltym) Kaggle notebook "CPU Alternating Reclosure" v3, run
       361239073 (https://www.kaggle.com/code/kirilltym/22-408512-cpu-alternating-reclosure),
       as franciscouzo/square-packing's certified_bounds.json and certificate manifest credit
-      its packings, first committed at fa6237e on 23 October 2026 and public from the push of
-      2026-10-23T23:38:42Z that made 964ee2b public. At 325 to 1024 the index states 37 of its
-      sides that no issue reports and no earlier publication states, each below Göbel's
-      construction (web/couzo-issue763-2026-10-23/receipts/claim-map.json, others): 26
-      certificates, retained as factual data and recorded in report order as beyond-horizon
-      rows of the tymchishin-reclosure-v3-2026-10-23 source, and 11 L-border recipes of
-      certificates among them, recorded and held for the D2 construction checker (think-ww95).
-      The manifest states the notebook's licence as Apache-2.0 and says its earlier
-      construction credits are retained in the notebook and its source notices, which cite
+      its packings, first committed at fa6237e on 23 October 2026 and public from the push
+      of 2026-10-23T23:38:42Z that made 964ee2b public. At 325 to 1024 the index states 37
+      of its sides that no issue reports and no earlier publication states, each below
+      Göbel's construction (web/couzo-issue763-2026-10-23/receipts/claim-map.json, others):
+      26 certificates, retained as factual data and recorded in report order as
+      beyond-horizon rows of the tymchishin-reclosure-v3-2026-10-23 source, and 11 L-border
+      recipes of certificates among them, each with its full n-square expansion under
+      certificates/parents/ at exactly its side, first committed at fa6237e, which are rows
+      of the source too (#795's review A, A2). Read commit by commit, fa6237e also states 5
+      more of its sides at those counts, which 964ee2b replaced; they are rows of the
+      source, each superseded within the push. The manifest states the notebook's licence as
+      Apache-2.0 and says its earlier construction credits are retained in the notebook and
+      its source notices, which cite
       submissions/kaggle-public-portfolio-20261022/SOURCE_NOTICES.md, a file not in the tree
       at 964ee2b. The notebook's licence and notices are followed up on think-m8f4, which
       holds nothing. Upper bounds only; no optimality claim.
@@ -3715,15 +3719,17 @@ sources:
       Vladislav Lavrentev's (lightningv08) Kaggle notebook "CUDA Packing Search" v11, run
       361263594
       (https://www.kaggle.com/code/lightningv08/squares-in-squares-cuda-packing-search), as
-      franciscouzo/square-packing's certified_bounds.json and certificate manifest credit its
-      packings, first committed at fa6237e on 23 October 2026 and public from the push of
-      2026-10-23T23:38:42Z that made 964ee2b public. At 325 to 1024 the index states 2 of its
-      sides that no issue reports and no earlier publication states, each below Göbel's
+      franciscouzo/square-packing's certified_bounds.json and certificate manifest credit
+      its packings, first committed at fa6237e on 23 October 2026 and public from the push
+      of 2026-10-23T23:38:42Z that made 964ee2b public. At 325 to 1024 the index states 2 of
+      its sides that no issue reports and no earlier publication states, each below Göbel's
       construction (web/couzo-issue763-2026-10-23/receipts/claim-map.json, others): 2
       certificates, retained as factual data and recorded in report order as beyond-horizon
-      rows of the lavrentev-cuda-v11-2026-10-23 source. The manifest states the notebook's
-      licence as Apache-2.0 and says its earlier construction credits are retained in the
-      notebook and its source notices, which cite
+      rows of the lavrentev-cuda-v11-2026-10-23 source. Read commit by commit (#795's review
+      A), fa6237e also states 9 more of its sides at those counts, which 964ee2b replaced;
+      they are rows of the source, each superseded within the push. The manifest states the
+      notebook's licence as Apache-2.0 and says its earlier construction credits are
+      retained in the notebook and its source notices, which cite
       submissions/kaggle-public-portfolio-20261022/SOURCE_NOTICES.md, a file not in the tree
       at 964ee2b. The notebook's licence and notices are followed up on think-m8f4, which
       holds nothing. Upper bounds only; no optimality claim.
@@ -3735,21 +3741,22 @@ sources:
     lineage: independent
     note: >-
       Vladislav Lavrentev's (lightningv08) Kaggle notebook
-      "squares-in-squares-cuda-packing-search", run 361589987, a later run of the notebook of
-      "CUDA Packing Search" v11
+      "squares-in-squares-cuda-packing-search", run 361589987, a later run of the notebook
+      of "CUDA Packing Search" v11
       (https://www.kaggle.com/code/lightningv08/squares-in-squares-cuda-packing-search), as
-      franciscouzo/square-packing's certified_bounds.json and certificate manifest credit its
-      packings, first committed at 964ee2b on 23 October 2026 and public from the push of
-      2026-10-23T23:38:42Z that made 964ee2b public. At 325 to 1024 the index states 7 of its
-      sides that no issue reports and no earlier publication states, each below Göbel's
+      franciscouzo/square-packing's certified_bounds.json and certificate manifest credit
+      its packings, first committed at 964ee2b on 23 October 2026 and public from the push
+      of 2026-10-23T23:38:42Z that made 964ee2b public. At 325 to 1024 the index states 7 of
+      its sides that no issue reports and no earlier publication states, each below Göbel's
       construction (web/couzo-issue763-2026-10-23/receipts/claim-map.json, others): 6
       certificates, retained as factual data and recorded in report order as beyond-horizon
-      rows of the lavrentev-cuda-run-361589987-2026-10-23 source, and an L-border recipe of a
-      certificate among them, recorded and held for the D2 construction checker (think-ww95).
-      The manifest states the notebook's licence as 'per the notebook' and says its earlier
-      construction credits are retained in the notebook; it names the run and no version. The
-      notebook's licence and notices are followed up on think-m8f4, which holds nothing. Upper
-      bounds only; no optimality claim.
+      rows of the lavrentev-cuda-run-361589987-2026-10-23 source, and an L-border recipe of
+      a certificate among them, at 859, whose full n-square expansion under
+      certificates/parents/ at exactly its side is a row of the source too (#795's review A,
+      A2). The manifest states the notebook's licence as 'per the notebook' and says its
+      earlier construction credits are retained in the notebook; it names the run and no
+      version. The notebook's licence and notices are followed up on think-m8f4, which holds
+      nothing. Upper bounds only; no optimality claim.
   - key: '[de Winter issue 666 2026-10-17]'
     authors: [de Winter]
     year: 2026

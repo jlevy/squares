@@ -1469,8 +1469,9 @@ def test_732_declares_the_77_rows_its_walk_records_and_restates_499() -> None:
 def test_732_s_rows_are_current_and_supersede_the_rows_they_beat() -> None:
     """#732's 77 rows supersede the rows they beat, and its walk plans each current. Since
     24 October f1ceee4's rows, which a later walk records, supersede 47 of them in the
-    register, as a later import may (`_superseded_after`), #763's rows 20 more and the
-    notebook rows 8 (think-lyf9); the other 2 are current."""
+    register, as a later import may (`_superseded_after`), #763's rows 20 more and the push
+    of 23:38:42Z 8, its first commits' rows, Couzo's own (think-lyf9; #795's review A); the
+    other 2 are current."""
     rows = [row for row in replay.planned_rows() if row["bead"] == "think-0gp6"]
     assert len(rows) == 77
     assert all("superseded_by" not in row for row in rows)
@@ -1484,11 +1485,8 @@ def test_732_s_rows_are_current_and_supersede_the_rows_they_beat() -> None:
         None: 2,
         F1_SOURCE: 47,
         SOURCE_763: 20,
-        "kyleluecke-inos-2026-10-23": 3,
-        "aqibrazadev-blending-2026-10-23": 2,
-        "tymchishin-reclosure-v3-2026-10-23": 1,
-        "alexchilton-fault-line-2026-10-23": 1,
-        "tymchishin-22-3662-2026-10-23": 1,
+        "couzo-efef7d1-2026-10-23": 6,
+        "couzo-fa6237e-2026-10-23": 2,
     }
     beaten = Counter(
         start
