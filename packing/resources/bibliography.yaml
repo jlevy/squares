@@ -3349,9 +3349,10 @@ sources:
     note: 'Issue 675''s in-corpus certificate at c6da0fc7524d667bf3d224559724ba9b60762e60: s(204), an slp
       refinement (job 107960) from a search the source seeds with Mykhailo Polkovskyi''s construction, one
       to one with #670''s packing, whose search the author''s answer of 23 October 2026 on issue 670 starts
-      at T-186''s packing: Polkovskyi''s refinement of Daniil Ostashev''s packing, as PingYou Ltd refined it. Retained as factual data with its per-count JSON; the source''s checker,
-      Evan Daniel''s MIT verifier as Couzo modified it with Codex, is pinned by digest. OpenAI Codex assistance
-      disclosed. No optimizer, local or global claim.'
+      at T-186''s packing: Polkovskyi''s refinement of Daniil Ostashev''s packing, as PingYou Ltd refined
+      it. Retained as factual data with its per-count JSON; the source''s checker, Evan Daniel''s MIT
+      verifier as Couzo modified it with Codex, is pinned by digest. OpenAI Codex assistance disclosed. No
+      optimizer, local or global claim.'
   - key: '[Couzo issue 715 2026-10-21]'
     authors:
     - Couzo

@@ -11379,9 +11379,8 @@ issues:
         every earlier report at its count, and the count's current row until #722 merged that day:
         issue 719's row (mishapolk-issue719-2026-10-22), which the ledger of 22 October for issue
         719 (upper-bounds-issue719-20261022) records next at the count, supersedes it. Its retained
-        certificate's
-        exact header side rounds up to this print, and both project exact routes accept the packing
-        with every control refused (receipts/filtered-exact-replay.json).
+        certificate's exact header side rounds up to this print, and both project exact routes
+        accept the packing with every control refused (receipts/filtered-exact-replay.json).
       queued: false
     - key: n378
       claim: s(378) <= 19.942505611659, rounded upward; exact certificate side is authoritative.
@@ -11499,9 +11498,8 @@ issues:
         every earlier report at its count, and the count's current row until #722 merged that day:
         issue 719's row (mishapolk-issue719-2026-10-22), which the ledger of 22 October for issue
         719 (upper-bounds-issue719-20261022) records next at the count, supersedes it. Its retained
-        certificate's
-        exact header side rounds up to this print, and both project exact routes accept the packing
-        with every control refused (receipts/filtered-exact-replay.json).
+        certificate's exact header side rounds up to this print, and both project exact routes
+        accept the packing with every control refused (receipts/filtered-exact-replay.json).
       queued: false
     - key: n458
       claim: s(458) <= 21.942505611689, rounded upward; exact certificate side is authoritative.
@@ -11611,9 +11609,8 @@ issues:
         every earlier report at its count, and the count's current row until #722 merged that day:
         issue 719's row (mishapolk-issue719-2026-10-22), which the ledger of 22 October for issue
         719 (upper-bounds-issue719-20261022) records next at the count, supersedes it. Its retained
-        certificate's
-        exact header side rounds up to this print, and both project exact routes accept the packing
-        with every control refused (receipts/filtered-exact-replay.json).
+        certificate's exact header side rounds up to this print, and both project exact routes
+        accept the packing with every control refused (receipts/filtered-exact-replay.json).
       queued: false
     - key: n546
       claim: s(546) <= 23.933763683699, rounded upward; exact certificate side is authoritative.
@@ -17504,11 +17501,14 @@ issues:
         angles the report prints (4.73e-11, 9.02e-12 and 1.10e-12 rad) set to exactly 0. He
         reports that the 8 October print, read literally with t = tan(theta/2) of its binary64
         angles, overshoots a wall by up to 7.8e-16 at its printed side, and packs with the
-        certificate's rotations. By stage 1's rule for several reports at one count, which reads
-        a printed side as its exact side where the certificate gives one, the record's own exact
-        check of the certificate (think-rx26) decides the row's exact side, in the next import,
-        of Mykhailo Polkovskyi's #732 rows at f1ceee4. That import also supersedes the row with
-        Polkovskyi's lower 335, and keeps the 8 October print as a quote in the history.
+        certificate's rotations, and he concludes that "the bound we stand behind is the
+        certificate's". By stage 1's rule for several reports at one count, which reads a
+        printed side as its exact side where the certificate gives one, the row's exact side is
+        the one the certificate gives. The record's own exact check of the 8 October poses
+        (think-rx26) decides whether the print holds as printed, in the next import, of Mykhailo
+        Polkovskyi's #732 rows at f1ceee4. That import supersedes the row whichever way the check
+        comes out, since Polkovskyi's 335 there is 1.607e-12 below the print, and keeps the 8
+        October print as a quote in the history.
       queued: false
     - key: n336
       claim: s(336) <= 18.825571499862, rounded upward; exact certificate side is authoritative.
@@ -19695,14 +19695,17 @@ issues:
       exact checks of the 8 October poses at the printed side 18822875655543559/10^15, with
       verify_bound_certificate.py: with the certificate's rational rotations the printed
       centres pack in the closed box, touching the walls, every pair strictly separated; with t =
-      tan(theta/2) of the printed binary64 angles they overshoot a wall by up to 7.8e-16. Those
-      are his statements. The rule that decides the row is stage 1's for several reports at one
-      count: the comparison reads a printed side as its exact side where a lane or the
-      certificate gives one, and every decision is exact. So the record's own exact check of
-      the certificate (think-rx26) decides the row's exact side, in the next import, of
-      Mykhailo Polkovskyi's #732 rows at f1ceee4, which also supersedes the row with his lower
-      335 and keeps the 8 October print as a quote in the history. The test certificates he
-      offers are not needed.
+      tan(theta/2) of the printed binary64 angles they overshoot a wall by up to 7.8e-16. He
+      concludes: "So the printed side holds exactly only when the near-zero angles are read as 0.
+      How the record reads them is your decision; the bound we stand behind is the
+      certificate's." Those are his statements. The rule that decides the row is stage 1's for
+      several reports at one count: the comparison reads a printed side as its exact side where
+      a lane or the certificate gives one, and every decision is exact. So the row's exact side
+      is the one the certificate gives. The record's own exact check of the 8 October poses
+      (think-rx26) decides whether the print holds as printed, in the next import, of Mykhailo
+      Polkovskyi's #732 rows at f1ceee4. That import supersedes the row whichever way the check
+      comes out, since Polkovskyi's 335 there is 1.607e-12 below the print, and keeps the 8
+      October print as a quote in the history. The test certificates Couzo offers are not needed.
 
       Above 1024: measured by the author against Joost de Winter's certificates at
       JoostdeWinter/joostdewinter.github.io@19f7412, by the best of the box's eight symmetries

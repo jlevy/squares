@@ -31354,9 +31354,10 @@ results:
       regularization is recorded, since the packing is another arrangement.
 
       The same answer says how the source calls this repository's sqpack/verify.py, which
-      its verify.py copies byte for byte: exact rational corners built from (x, y, t), passed to verify_packing(..., bucket=True) with an exact rational sign, in the
-      closed box [0, S]^2 with touching allowed. Its strict verdict is false only because
-      squares touch the walls, the wall margin sign is 0 and the pair margin sign +1, and
+      its verify.py copies byte for byte: exact rational corners built from (x, y, t),
+      passed to verify_packing(..., bucket=True) with an exact rational sign, in the closed
+      box [0, S]^2 with touching allowed. Its strict verdict is false only because squares
+      touch the walls, the wall margin sign is 0 and the pair margin sign +1, and
       sqpack.verify counts 32 corner coordinates on the boundary and no touching pairs. The
       packet's measure/seed-identity.py makes that call here and counts the same 32, with no
       touching pair, which agrees with the replay: a least wall clearance of exactly 0 and a
@@ -31845,8 +31846,9 @@ results:
       Francisco Couzo's packing, first reported in #670 and refined in #675 and #678 (T-226,
       T-228, T-223), whose search Couzo's answer of 23 October 2026 on #670 traces through
       three rounds of basin hopping to Polkovskyi's own T-186 packing, his refinement of
-      Daniil Ostashev's as PingYou Ltd refined it. The issue credits Mishapolk (Mykhailo Polkovskyi) and names the earlier
-      finders its packings build on, and discloses Gemini assistance.
+      Daniil Ostashev's as PingYou Ltd refined it. The issue credits Mishapolk (Mykhailo
+      Polkovskyi) and names the earlier finders its packings build on, and discloses Gemini
+      assistance.
 
       The author's comments on the issue give the lineage of each count. At 105 he refined
       PingYou Ltd's certificate of Couzo's refinement of Xu's packing (T-174). At 204 his
