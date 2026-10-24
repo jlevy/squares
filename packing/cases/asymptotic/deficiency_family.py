@@ -26,9 +26,12 @@ function that gives its value there:
 
 The waste bounds of the ledger's ``upper_bounds`` are each O(x^a) with no constant, so
 none states a value of c*(k) at any k; a row there that gains a ``constant`` fails the
-comparison, as does a deficiency row the table above does not name. That is the
-freshness an assessment needs (think-e953): a new statement of the family is compared
-before any assessment stands again.
+comparison, as does a deficiency row the table above does not name, or a row restated in
+place, whose ``bound`` or ``constant`` is no longer the text its entry was compared as.
+That is the freshness an assessment needs (think-e953): a new statement of the family is
+compared before any assessment stands again. A tie is ordered by the bibliography's
+``dated`` read as days, and a source with no day-precision date refuses rather than
+ordering one.
 
 Every k from 15 to ``TAIL - 1`` is decided one by one, in integers. From ``TAIL`` on,
 Fang's bound is larger than Ryu's: F(k) <= 1 + 2(k - 15)/21, because p + 2q <=
@@ -51,9 +54,11 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from collections.abc import Callable, Mapping, Sequence
 from dataclasses import dataclass
+from datetime import date, datetime
 from pathlib import Path
 from typing import Any
 
@@ -71,6 +76,8 @@ AMS = "[Arslanov et al.]"
 FANG = "[Fang excess theorem 2026-10-13]"
 RYU = "[squarepacker k2-minus-c-upper 2026]"
 RYU_V11 = "[squarepacker k2-minus-c-upper v1.1 2026]"
+#: A day-precision bibliography date, the only kind that orders a tie.
+DAY = re.compile(r"\d{4}-\d{2}-\d{2}")
 
 
 def ryu_theorem_1_3(k: int) -> int:
@@ -100,6 +107,11 @@ class Statement:
     #: The maintained function of k, or None where `least_k` lies beyond every k decided
     #: one by one, so that the statement never bears on the comparison.
     value: Callable[[int], int] | None
+    #: The row's `bound` and `constant` as this entry was checked against them, with their
+    #: whitespace collapsed: a row restated in place under the same key, kernel and anchor
+    #: differs from them, and so is compared again (`STATED`).
+    bound: str = ""
+    constant: str = ""
 
 
 STATEMENTS: tuple[Statement, ...] = (
@@ -111,6 +123,20 @@ STATEMENTS: tuple[Statement, ...] = (
         "sqrt k, at integer sides approached from below",
         "k >= 6",
         ryu_theorem_1_3,
+        bound=(
+            "REPORTED: c*(k) <= 8 ceil(sqrt(k-4)) - 1 < 8 sqrt(k-4) + 7 for every integer k "
+            ">= 6 (Theorem 1.4), where c*(k) = max{c : s(k^2-c) = k}. It comes from an "
+            "explicit L-shaped packing of N(k,b) = (k-b)^2 + b(R(k) + R(k-b)) unit squares "
+            "in a square of side less than k (Theorem 1.3), which gives c*(k) <= k^2 - "
+            "N(k,b) - 1 < 6b + 4k/b - 3 for 2 <= b <= k and cannot give less than 8 sqrt(k) "
+            "- 15 (Proposition 1.5)."
+        ),
+        constant=(
+            "8, with b = ceil(sqrt(k-4)) and the additive -1. The family's exact count is "
+            "k^2 - N(k,b) = 6b + b(floor(eta) + floor(eta')) when k - b >= 2, with eta = "
+            "(2k-10)/(b^2+1) + 8/(b^2+1)^2 and eta' = eta - 2b/(b^2+1) (equation 5.1); "
+            "Corollary 5.1 gives c*(k) < 4 sqrt(6) sqrt(k) for k >= 6."
+        ),
     ),
     Statement(
         FANG,
@@ -119,6 +145,17 @@ STATEMENTS: tuple[Statement, ...] = (
         "k, at integer sides approached from below",
         "k >= 15",
         fang.theorem_two,
+        bound=(
+            "REPORTED: c*(k) <= k - 1 - F(k) for every integer k >= 15 (Theorem 2), in "
+            "particular c*(k) <= k - 2 (Theorem 1), where c*(k) = max{c : s(k^2-c) = k}. "
+            "Theorem 1 packs n^2 - n + 1 unit squares in a square of side less than n for "
+            "every n >= 15, by an induction from a base case at n = 15 through Lemma 3 and "
+            "a scaling lemma; Theorem 2 packs n^2 - n + F(n)."
+        ),
+        constant=(
+            "1, less F(k) = 1 + max{p + 2q : 16p + 21q <= k - 15}, about 2(k - 15)/21, so "
+            "the bound reads about (19/21)k."
+        ),
     ),
     Statement(
         RYU,
@@ -127,6 +164,17 @@ STATEMENTS: tuple[Statement, ...] = (
         "k^{2/5}, at integer sides approached from below",
         "k >= 1.6*10^7",
         None,
+        bound=(
+            "REPORTED: c*(k) < (20/3)(3/2)^{2/5} 5.03^{3/5} k^{2/5} + (8/3) 5.03 10^{-4/3} "
+            "< 20.668 k^{2/5} + 0.623 for every integer k >= 1.6*10^7 (Theorem 1.2), and "
+            "c*(k) <= (18.89 + o(1)) k^{2/5}."
+        ),
+        constant=(
+            "20.668 and 0.623, from the end constant C_E = 5.03 of Corollary 7.4, which "
+            "rests on one interval evaluation Phi(10^{-4/3}) <= 5.0163; with b = "
+            "ceil((3k/(2 C_E))^{3/5}). The limit coefficient 18.89 is Phi(0) = "
+            "sqrt(6.000002/0.75) + 3/2 = 4.3284 in place of C_E."
+        ),
     ),
     Statement(
         RYU,
@@ -135,6 +183,18 @@ STATEMENTS: tuple[Statement, ...] = (
         "k^{3/8}, at integer sides approached from below",
         "k >= 4*10^26",
         None,
+        bound=(
+            "REPORTED: c*(k) < (32/5)(5/3)^{3/8} 15.54^{5/8} k^{3/8} + 2*10^-5 < 43.06 "
+            "k^{3/8} + 2*10^-5 for every integer k >= 4*10^26 (Theorem 1.1 of version 1.0; "
+            "version 1.1 keeps it and supersedes it by the tier A5, 40.62 k^{3/8} + "
+            "1.4*10^-5 for k >= 3.4*10^26, next row)."
+        ),
+        constant=(
+            "43.06 = (32/5)(5/3)^{3/8} 15.54^{5/8} rounded up, from the end constant C_E = "
+            "15.54 of Corollary 8.3 for b >= b0 = 10^16, certified by the interval covering "
+            "code/cert3e.py (160 x 64 boxes, C_E <= 14.964). The source reports two further "
+            "coverings that are not in the release."
+        ),
     ),
     Statement(
         RYU_V11,
@@ -143,8 +203,30 @@ STATEMENTS: tuple[Statement, ...] = (
         "k^{3/8}, at integer sides approached from below",
         "k >= k_i in each tier",
         None,
+        bound=(
+            "REPORTED: for each of twelve tiers, c*(k) < C_i k^{3/8} + a_i for every "
+            "integer k >= k_i (Theorem 1.1 of version 1.1): B1 46.31, 2.2*10^13, 0.035; B1s "
+            "45.49, 4.5*10^13, 0.029; B2 45.08, 6.4*10^13, 0.026; A1 48.76, 4.6*10^14, "
+            "0.019; A1s 48.38, 6.1*10^14, 0.017; A2 46.42, 2.7*10^15, 0.011; A3 43.61, "
+            "9.6*10^16, 0.0039; A4 41.73, 1.5*10^20, 5.7*10^-4; A5 40.62, 3.4*10^26, "
+            "1.4*10^-5; C1 41.19, 5.22*10^12, 0.04; C2 41.78, 2.95*10^12, 0.047; C3 42.09, "
+            "2.48*10^12, 0.05. Smaller than Theorem 1.2's bound for every k >= 2.48*10^12."
+        ),
+        constant=(
+            "Per tier, C_i >= (32/5)(5/3)^{3/8} C_E^{5/8}, k_i >= (3/5) C_E b0^{8/5} and "
+            "a_i >= (12/5) C_E b0^{-2/5}, with (b0, C_E) = B1 (10^7.7, 17.461), B1s "
+            "(10^7.9, 16.968), B2 (10^8, 16.721), A1 (10^8.5, 18.961), A1s (10^8.58, "
+            "18.722), A2 (10^9, 17.523), A3 (10^10, 15.859), A4 (10^12, 14.778), A5 (10^16, "
+            "14.153), C1 (10^7.3617, 14.473), C2 (10^7.2, 14.805), C3 (10^7.15, 14.983). "
+            "The tiers B use the variant wall filler ZC' (Lemmas 8.2-8.5); the tiers C also "
+            "the sawtooth accounting and the lift of each band (Lemmas 8.6-8.8, 8.11). Each "
+            "C_E is certified by the author's covering, code/cert_v3/cert_v3.py or "
+            "code/cert_v4/cert_v4.py, at 320 x 128 boxes."
+        ),
     ),
 )
+#: The fields of a row that state its bound, each held to its entry's text in full.
+STATED = ("bound", "constant")
 #: The statements the ledger names only in prose, compared beside its rows.
 PROSE_ONLY = tuple(item for item in STATEMENTS if item.kernel is None)
 #: The rows whose theorem-wide scope this module can assess, with its tail lemma.
@@ -163,8 +245,14 @@ def tail_holds(k: int = TAIL) -> bool:
     return 722 * k > 34266 and 19 * k > 159 and (19 * k - 159) ** 2 > 168**2 * (k - 4)
 
 
+def _collapsed(value: object) -> str:
+    return " ".join(str(value).split()) if value is not None else ""
+
+
 def statement_for(row: Mapping[str, Any]) -> Statement:
-    """The table's entry for a deficiency row, bound to it by its key, kernel and text."""
+    """The table's entry for a deficiency row, bound to it by its key, kernel and
+    side-condition anchor, and held to its stated bound and constant in full, so that a
+    row edited in place refuses until its entry is compared again."""
     found = [
         item
         for item in STATEMENTS
@@ -178,7 +266,15 @@ def statement_for(row: Mapping[str, Any]) -> Statement:
             f"{SECTION}: no single maintained statement for {row.get('source_key')} "
             f"({row.get('kernel')}); compare it before any assessment stands"
         )
-    return found[0]
+    item = found[0]
+    for field in STATED:
+        if _collapsed(row.get(field)) != getattr(item, field):
+            raise FamilyError(
+                f"{SECTION}: {item.source_key} ({item.kernel}) is restated: its {field} "
+                f"is not the text {item.statement} was compared as; compare it before any "
+                "assessment stands"
+            )
+    return item
 
 
 def _runs(values: Sequence[int]) -> list[list[int]]:
@@ -191,12 +287,34 @@ def _runs(values: Sequence[int]) -> list[list[int]]:
     return runs
 
 
+def reported_on(dated: Mapping[str, object], key: str) -> date:
+    """The day a source key was reported, its `dated` in the bibliography, as a date.
+
+    A tie is ordered by these days (`assess`), so a key with no day-precision date, a
+    missing, null or partial one, refuses rather than ordering a tie as text would."""
+    value = dated.get(key)
+    if isinstance(value, datetime):
+        return value.date()
+    if isinstance(value, date):
+        return value
+    if isinstance(value, str) and DAY.fullmatch(value):
+        try:
+            return date.fromisoformat(value)
+        except ValueError:
+            pass
+    raise FamilyError(
+        f"{key} has no day-precision date in the bibliography ({value!r}), so it orders "
+        "no tie; date it before any assessment stands"
+    )
+
+
 def assess(
-    ledger: Mapping[str, Any], row: Mapping[str, Any], dated: Mapping[str, str]
+    ledger: Mapping[str, Any], row: Mapping[str, Any], dated: Mapping[str, object]
 ) -> dict[str, Any]:
     """The assessment of ``row``'s theorem-wide bound against every other statement.
 
-    ``dated`` is each source key's date in the bibliography, which orders a tie."""
+    ``dated`` is each source key's date in the bibliography, which orders a tie: the
+    row's own key always needs one, and so does every key it ties (`reported_on`)."""
     for waste in ledger.get("upper_bounds") or ():
         if "constant" in waste:
             raise FamilyError(
@@ -209,6 +327,7 @@ def assess(
     own = statement_for(row)
     if (own.source_key, own.kernel) not in ASSESSABLE or own.value is None:
         raise FamilyError(f"{SECTION}: no tail lemma assesses {own.source_key}")
+    own_day = reported_on(dated, own.source_key)
     if not tail_holds(TAIL):
         raise FamilyError(f"the tail lemma does not hold from k = {TAIL}")
     others = [*PROSE_ONLY, *(item for item in rows if item != own)]
@@ -230,7 +349,7 @@ def assess(
         elif mine == best:
             tied.append(k)
             if all(
-                dated[item.source_key] > dated[own.source_key]
+                reported_on(dated, item.source_key) > own_day
                 for value, item in values
                 if value == best
             ):
@@ -246,7 +365,7 @@ def assess(
 
 
 def recorded_assessments(
-    ledger: Mapping[str, Any], dated: Mapping[str, str]
+    ledger: Mapping[str, Any], dated: Mapping[str, object]
 ) -> list[tuple[str, dict[str, Any], dict[str, Any]]]:
     """Each linked row's recorded assessment beside its recomputation, by result."""
     found = []
@@ -264,11 +383,12 @@ def stale(recorded: Mapping[str, Any], recomputed: Mapping[str, Any]) -> list[st
     return [key for key in recomputed if recorded.get(key) != recomputed[key]]
 
 
-def load() -> tuple[dict[str, Any], dict[str, str]]:
-    """The ledger and every bibliography key's date."""
+def load() -> tuple[dict[str, Any], dict[str, object]]:
+    """The ledger and every bibliography key's `dated`, as the bibliography gives it:
+    `reported_on` reads it as a day, and refuses one that is not."""
     ledger = safe_load(LEDGER.read_text(encoding="utf-8"))
     sources = safe_load(BIBLIOGRAPHY.read_text(encoding="utf-8"))["sources"]
-    return ledger, {str(item["key"]): str(item.get("dated", "")) for item in sources}
+    return ledger, {str(item["key"]): item.get("dated") for item in sources}
 
 
 def main(argv: Sequence[str] | None = None) -> int:

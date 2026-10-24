@@ -71,3 +71,75 @@ def test_a_tie_stays_with_the_earlier_report() -> None:
     assert family.assess(ledger, row, dated)["smallest"] == [[15, 68], [70, 75]]
     later = {**dated, family.RYU: "2026-10-30"}
     assert family.assess(ledger, row, later)["smallest"] == [[15, 76]]
+
+
+@pytest.mark.parametrize(
+    ("key", "date"),
+    [
+        (family.FANG, ""),
+        (family.FANG, None),
+        (family.RYU, ""),
+        (family.RYU, None),
+        (family.RYU, "None"),
+        (family.RYU, "2026-10"),
+    ],
+)
+def test_an_undated_source_orders_no_tie(key: str, date: str | None) -> None:
+    """Review A4 on #770: a tie is ordered by the bibliography's dates compared as days,
+    so the assessed row's key, or the key of a statement it ties, with no day-precision
+    date refuses the assessment instead of winning every tie. Ryu's key is the one T-163
+    ties at k = 69 and 76."""
+    ledger, dated = family.load()
+    with pytest.raises(family.FamilyError, match="no day-precision date"):
+        family.assess(ledger, fang_row(ledger), {**dated, key: date})
+
+
+def test_dates_are_compared_as_days() -> None:
+    ledger, dated = family.load()
+    row = fang_row(ledger)
+    # As strings "2026-9-30" would sort after "2026-10-13"; it is no date the gate reads.
+    with pytest.raises(family.FamilyError, match="no day-precision date"):
+        family.assess(ledger, row, {**dated, family.RYU: "2026-9-30"})
+    earlier = {**dated, family.RYU: "2026-10-12"}
+    assert family.assess(ledger, row, earlier)["smallest"] == [[15, 68], [70, 75]]
+    same_day = {**dated, family.RYU: dated[family.FANG]}
+    assert family.assess(ledger, row, same_day)["smallest"] == [[15, 68], [70, 75]]
+
+
+def _rows(ledger: dict) -> list[tuple[int, str]]:
+    return [
+        (index, field)
+        for index, row in enumerate(ledger[family.SECTION])
+        for field in family.STATED
+        if row.get(field) is not None
+    ]
+
+
+def test_a_row_restated_in_place_refuses_the_assessment() -> None:
+    """Review A5 on #770: a row whose bound is rewritten under the same key, kernel and
+    side condition is a new statement of the family, so it is compared again before any
+    assessment stands. The review's probe: Ryu's row restated as 4 ceil(sqrt(k - 4)) - 1."""
+    ledger, dated = family.load()
+    probe = copy.deepcopy(ledger)
+    ryu_row = next(
+        row for row in probe[family.SECTION] if str(row.get("kernel", "")).startswith("sqrt k")
+    )
+    ryu_row["bound"] = "c*(k) <= 4 ceil(sqrt(k - 4)) - 1"
+    ryu_row["constant"] = "4"
+    with pytest.raises(family.FamilyError, match="restated"):
+        family.assess(probe, fang_row(probe), dated)
+    assert _rows(ledger)
+    for index, field in _rows(ledger):
+        edited = copy.deepcopy(ledger)
+        edited[family.SECTION][index][field] = f"{edited[family.SECTION][index][field]} x"
+        with pytest.raises(family.FamilyError, match=f"restated: its {field}"):
+            family.assess(edited, fang_row(edited), dated)
+
+
+def test_reflowing_a_row_is_not_a_restatement() -> None:
+    ledger, dated = family.load()
+    for row in ledger[family.SECTION]:
+        for field in family.STATED:
+            if isinstance(row.get(field), str):
+                row[field] = "\n  ".join(row[field].split())
+    assert family.assess(ledger, fang_row(ledger), dated)["smallest"] == [[15, 68], [70, 75]]
