@@ -316,6 +316,7 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 | [T-226](packing/frontier/RESULTS.md) | 204 | `V3` | `C3` | `S3` | `previously-published` | One complete rational source certificate of issue #670 reports a finite upper-bound improvement at the exact side it states: s(204) <= 45044217780850246618141/3041751595240000000000, below T-186, the case’s house best packing when it was reported. |
 | [T-227](packing/frontier/RESULTS.md) | 227, 229 | `V3` | `C3` | `S3` | `previously-published` | Two complete rational source certificates report finite upper-bound improvements at the exact sides they state: s(227) <= 71427829379429597600111901507/4589408083628500000000000000 and s(229) <= 231170315041711399213831561/14771101209934000000000000. |
 | [T-230](packing/frontier/RESULTS.md) | 303 | `V3` | `C3` | `S3` | `previously-published` | One complete rational source certificate reports a finite upper-bound improvement at the exact side it states: s(303) <= 447744305431858194305431410441/25000000000000000000000000000 = 17.90977221727432777221725641764, 1.86e-4 below T-186, the case’s house best packing when it was reported. |
+| [T-232](packing/frontier/RESULTS.md) | 31 | `V3` | `C3` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 11 October 2026 and reported on no issue, proves s(31) >= 2391/400 = 5.9775. |
 | [T-036](packing/frontier/RESULTS.md) | 11 | `V3` | `C2` | `S3` | `apparently-novel` | Every packing of eleven unit squares in a square container, six at orientation 0 and five sharing one orientation modulo pi/2 with half-tangent in [91442076901/250000000000, 73154061521/200000000000] (an interval containing [t* - 10^-6, t* + 10^-6] for Trump’s exact half-tangent t*), has container side at least U = 3.877083590022814 …, the exact side of Trump’s packing, and a packing in the family has side exactly U only if it is a quarter-turn image of Trump’s pose with the squares relabelled within the two classes. |
 | [T-112](packing/frontier/RESULTS.md) | 11 | `V3` | `C2` | `S3` | `apparently-novel` | Every packing of eleven unit squares in a square of side T = 3.8770835900228141773…, the least side T-060 proves possible, is Walter Trump’s 1979 packing after one of the eight symmetries of the container and a relabelling of the squares. |
 | [T-007](packing/frontier/RESULTS.md) | 4-324 | `V0` | `C1` | `S3` | `previously-published` | For every integer 4 <= N <= 324, Nagamochi 2005, Theorem 2 gives s(N) >= min(ceil(sqrt(N)), sqrt(N - 2*floor(sqrt(N)) + 1) + 1). |
@@ -327,6 +328,7 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 | [T-184](packing/frontier/RESULTS.md) | 76 | `V3` | `C1` | `S3` | `previously-published` | Benjamin Greff reports s(76) = 9: the lower half by a mixed cover, the upper half by the 9 x 9 grid. |
 | [T-191](packing/frontier/RESULTS.md) | 95 | `V3` | `C1` | `S3` | `previously-published` | Benjamin Greff reports s(95) = 10: the lower half by a mixed cover, the upper half by the 10 x 10 grid. |
 | [T-192](packing/frontier/RESULTS.md) | 28 | `V0` | `C1` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 15 October 2026 and reported on no issue, is reported to prove s(28) > 1149/200 = 5.745. |
+| [T-233](packing/frontier/RESULTS.md) | 19, 20, 26, 27 | `V0` | `C1` | `S3` | `previously-published` | Four rectangle measures of wand125/square-packing, published on 7 and 8 October 2026 and reported in jlevy/squares#446, are reported to prove s(19) >= 1931/400 = 4.8275, s(20) >= 393/80 = 4.9125, s(26) >= 1111/200 = 5.555 and s(27) >= 1131/200 = 5.655. |
 | [T-046](packing/frontier/RESULTS.md) | 18, 19, 20, 26, 27, 28, 29, 30, 31, 37, 38, 39, 40, 41, 42, 43, 44, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 86, 88, 89, 90, 91, 94, 95 | `V0` | `C0` | `S3` | `previously-published` | wand125/square-packing-bounds reports one standing rectangle-density certificate for each of 48 counts from n = 18 to n = 95, added or raised between 26 and 28 September 2026. |
 | [T-132](packing/frontier/RESULTS.md) | 29 | `V0` | `C0` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 10 October 2026 and reported on jlevy/squares#446, is reported to prove s(29) >= 291/50 = 5.82. |
 | [T-142](packing/frontier/RESULTS.md) | 28 | `V0` | `C0` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 10 October 2026 and reported on no issue, is reported to prove s(28) >= 2297/400 = 5.7425. |
@@ -434,7 +436,7 @@ hypothesis status and summarizes experiment verdicts, and the
 | Explorations | 50 | 30 linked to proposed hypotheses; 20 uncodified |
 | Hypotheses | 283 | 74 confirmed; 48 refuted; 75 blocked; 24 unresolved; 20 open; 37 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
 | Experiments | 246 | 94 accepted; 53 rejected; 63 unresolved; 12 baseline; 18 blocked; 5 abandoned; 0 in progress; 1 exhausted |
-| Frontier results | 231 | 231 registered, 199 by others |
+| Frontier results | 233 | 233 registered, 201 by others |
 
 <!-- END CURRENT-RESEARCH-STATUS -->
 
@@ -694,6 +696,9 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [wand125’s Fine-Net Certificate for $s(31) \ge 2391/400$: Mathematical Review](docs/project/reviews/review-2026-10-23-wand125-n31-fine-net.md) | dated review record | record | retained | — |
+| [wand125’s Fine-Net Lower Bounds of #446 at n = 19, 20, 26 and 27: Mathematical Review](docs/project/reviews/review-2026-10-23-wand125-446-fine-net.md) | dated review record | record | retained | — |
+| [Feature: News Feed of Every Merged Pull Request](docs/project/specs/active/plan-2026-10-23-news-pr-feed.md) | implementation plan | current | transient | — |
 | [Soundness Review: wand125’s `sqverify_continuous`, v3 and v4](docs/project/reviews/review-2026-10-23-wand125-sqverify-continuous-soundness.md) | dated review record | record | retained | — |
 | [Evan Daniel’s Grade-C Local Minima (Theorem C): Mathematical Review](docs/project/reviews/review-2026-10-23-evand-grade-c-theorem-c.md) | dated review record | record | retained | — |
 | [CI and Release Latency Audit, 22 October 2026](docs/project/reviews/review-2026-10-22-ci-release-latency.md) | dated review record | record | retained | — |
@@ -1241,6 +1246,8 @@ case or experiment separately.
 | [Milestone A Census](packing/benchmarks/measure-verifier/census/README.md) | generated status view | generated | generated | — |
 | [Milestone B Census](packing/benchmarks/measure-verifier/census-mixed/README.md) | generated status view | generated | generated | — |
 | [Accepted Mac Checkpoints: n68, n84 and n85](packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-2026-10-16/README.md) | source retention and archive policy | record | retained | — |
+| [T-233’s Fine-Net Censuses: Four #446 Certificates](packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-446-release-2026-10-08/README.md) | source retention and archive policy | record | retained | — |
+| [The n31 Fine-Net Census: mixed_n31_L59775](packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-n31-2026-10-11/README.md) | source retention and archive policy | record | retained | — |
 | [Census Summary](packing/benchmarks/measure-verifier/census-summary.md) | generated status view | generated | generated | — |
 | [Whole `rect_n32_L595`: c2 Against verify.cpp](packing/benchmarks/measure-verifier/experiments/exp-006-whole-certificate-n32.md) | research synthesis | record | retained | — |
 | [H-005: One Error Budget per Edge](packing/benchmarks/measure-verifier/experiments/exp-007-h005-error-budget.md) | research synthesis | record | retained | — |

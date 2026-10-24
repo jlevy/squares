@@ -177,11 +177,18 @@ MIXED_PACKETS = (
     "wand125-mixed-bounds-finer-net-2026-10-06",
     "wand125-mixed-bounds-check2-2026-10-06",
     "wand125-fine-net-lower-bounds-2026-10-16",
+    "wand125-fine-net-n31-2026-10-11",
+    "wand125-fine-net-lower-bounds-446-release-2026-10-08",
 )
 #: A packet that keeps its certificates elsewhere than `square-packing-bounds/certificates`:
-#: the 16 October fine-net packet keeps its release assets' members at the assets' own
-#: paths (`devtools.fine_net_followup retain`).
-MIXED_ROOTS = {"wand125-fine-net-lower-bounds-2026-10-16": "release/certificates"}
+#: the 16 October fine-net packet, the n31 packet of 11 October and the release members of
+#: four #446 certificates keep their release assets' members at the assets' own paths
+#: (`devtools.fine_net_followup retain`).
+MIXED_ROOTS = {
+    "wand125-fine-net-lower-bounds-2026-10-16": "release/certificates",
+    "wand125-fine-net-n31-2026-10-11": "release/certificates",
+    "wand125-fine-net-lower-bounds-446-release-2026-10-08": "release/certificates",
+}
 #: The standard net's direction count; a format M file may declare another.
 STANDARD_DIRECTIONS = 201
 CENSUS_ROOT = PROJECT / "benchmarks/measure-verifier"
@@ -1060,11 +1067,19 @@ def control_run_held(run: dict[str, Any]) -> bool:
 
 
 def control_status(case: Case, out: Path) -> str | None:
-    """A control receipt's status, or None where none is kept."""
+    """A control receipt's status, or None where none is kept.
+
+    Where the only receipt kept is a failed one, `CERT.control-failed-vN.json` (kept
+    outside the receipts the census tests hold to `CONTROLS_REFUSED`), it is that
+    receipt's status marked `(kept)`, so the view tells a control that failed closed from
+    a certificate with no control (A6 of PR #745's review A)."""
     path = out / case.packet / f"{case.certificate}.control.json"
-    if not path.is_file():
+    if path.is_file():
+        return str(json.loads(path.read_text(encoding="utf-8")).get("status"))
+    failed = sorted((out / case.packet).glob(f"{case.certificate}.control-failed-v*.json"))
+    if not failed:
         return None
-    return str(json.loads(path.read_text(encoding="utf-8")).get("status"))
+    return f"{json.loads(failed[-1].read_text(encoding='utf-8')).get('status')} (kept)"
 
 
 #: The register's evidence, read by `--evidence` for each certificate's reported entry.
@@ -1338,6 +1353,8 @@ SHARED_CRATE_PACKETS = frozenset(
     {
         "wand125-mixed-bounds-check2-2026-10-06",
         "wand125-fine-net-lower-bounds-2026-10-16",
+        "wand125-fine-net-n31-2026-10-11",
+        "wand125-fine-net-lower-bounds-446-release-2026-10-08",
     }
 )
 INDEPENDENT_MIXED_PACKETS = frozenset(
@@ -2022,6 +2039,8 @@ def render_mixed_report(census: dict[str, Any], out: Path) -> str:
         "one is kept: the original verified again and a near-threshold mutant refused at its",
         "least-bound direction, and the 99/100 mutant refused at one direction at least,",
         "every direction of the net run (v2), or at that direction alone (v1).",
+        "`CONTROL_FAILED (kept)` marks a certificate whose only receipt failed closed, kept",
+        "as `CERTIFICATE.control-failed-vN.json`; `-` marks one with no receipt.",
         "",
         (
             "| Certificate | n | Format | Status | Directions | Nodes | Least certified bound"

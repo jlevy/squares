@@ -1,0 +1,138 @@
+{
+ "cpu_seconds": 0.934,
+ "fixtures": [
+  {
+   "case": "contains_core",
+   "got": "24990001/25000000",
+   "ok": true,
+   "t": "0"
+  },
+  {
+   "case": "half_plane_x_ge_cx",
+   "got": "24990001/50000000",
+   "ok": true,
+   "t": "0"
+  },
+  {
+   "case": "quadrant",
+   "got": "24990001/100000000",
+   "ok": true,
+   "t": "0"
+  },
+  {
+   "case": "inside_core",
+   "got": "24990001/400000000",
+   "ok": true,
+   "t": "0"
+  },
+  {
+   "case": "far_away",
+   "got": "0",
+   "ok": true,
+   "t": "0"
+  },
+  {
+   "case": "touches_edge_only",
+   "got": "0",
+   "ok": true,
+   "t": "0"
+  },
+  {
+   "case": "contains_core",
+   "got": "24990001/25000000",
+   "ok": true,
+   "t": "977/5002"
+  },
+  {
+   "case": "half_plane_x_ge_cx",
+   "got": "24990001/50000000",
+   "ok": true,
+   "t": "977/5002"
+  },
+  {
+   "case": "quadrant",
+   "got": "24990001/100000000",
+   "ok": true,
+   "t": "977/5002"
+  },
+  {
+   "case": "inside_core",
+   "got": "24990001/400000000",
+   "ok": true,
+   "t": "977/5002"
+  },
+  {
+   "case": "far_away",
+   "got": "0",
+   "ok": true,
+   "t": "977/5002"
+  },
+  {
+   "case": "touches_edge_only",
+   "got": "0",
+   "ok": true,
+   "t": "977/5002"
+  },
+  {
+   "case": "contains_core",
+   "got": "24990001/25000000",
+   "ok": true,
+   "t": "2/5"
+  },
+  {
+   "case": "half_plane_x_ge_cx",
+   "got": "24990001/50000000",
+   "ok": true,
+   "t": "2/5"
+  },
+  {
+   "case": "quadrant",
+   "got": "24990001/100000000",
+   "ok": true,
+   "t": "2/5"
+  },
+  {
+   "case": "inside_core",
+   "got": "24990001/400000000",
+   "ok": true,
+   "t": "2/5"
+  },
+  {
+   "case": "far_away",
+   "got": "0",
+   "ok": true,
+   "t": "2/5"
+  },
+  {
+   "case": "touches_edge_only",
+   "got": "0",
+   "ok": true,
+   "t": "2/5"
+  }
+ ],
+ "float_exact_agreement": {
+  "19": {
+   "max_abs_difference": 1.1087131213116663e-11,
+   "ok": true,
+   "samples": 10
+  },
+  "20": {
+   "max_abs_difference": 1.0729195309977513e-12,
+   "ok": true,
+   "samples": 10
+  },
+  "26": {
+   "max_abs_difference": 8.642864202101919e-12,
+   "ok": true,
+   "samples": 10
+  },
+  "27": {
+   "max_abs_difference": 1.1199485783208729e-11,
+   "ok": true,
+   "samples": 10
+  }
+ },
+ "kind": "t233-review-geometry-selftest/v1",
+ "verdict": "PASS",
+ "wall_seconds": 2.679
+}
