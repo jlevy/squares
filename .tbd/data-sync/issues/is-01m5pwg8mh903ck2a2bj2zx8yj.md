@@ -3,9 +3,9 @@ type: is
 id: is-01m5pwg8mh903ck2a2bj2zx8yj
 title: "Address PR #789 reviews A and B: the #763 import's records wording, the corpus-count refusal and the walk sources"
 kind: task
-status: open
+status: closed
 priority: 1
-version: 18
+version: 19
 labels:
   - result-import
 dependencies: []
@@ -29,6 +29,10 @@ child_order_hints:
   - is-01m5pwh2q4ka85a05tjzzrfcbj
   - is-01m5pwh3j3jwket01k0y986hz8
 created_at: 2026-10-24T11:59:55.025Z
-updated_at: 2026-10-24T12:00:22.594Z
+updated_at: 2026-10-24T12:47:33.909Z
+closed_at: 2026-10-24T12:47:33.909Z
+close_reason: "every finding of reviews A and B of #789 dispositioned at c6617f3ee: https://github.com/jlevy/squares/pull/789#issuecomment-6384392221 and https://github.com/jlevy/squares/pull/789#issuecomment-6384392366; B1 deferred to think-lyf9, B7's 20261014 exception to think-299t"
+resolution: null
+duplicate_of: null
 ---
 Review A (senior): https://github.com/jlevy/squares/pull/789#issuecomment-6383682934. Review B (correctness): https://github.com/jlevy/squares/pull/789#issuecomment-6383901035. Both at head 3773d6025. Addressed by c-import-763-1024b for coordinator coord-intake-1024 (bead think-ptkk).
