@@ -3,9 +3,9 @@ type: is
 id: is-01m5mzwrp4a8f1drb54we5z1tq
 title: "PR #745 (merge): senior review, address, gate"
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 5
+version: 6
 delegate: c-rev-745-1023
 labels: []
 dependencies: []
@@ -16,8 +16,12 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-23T18:20:41.540Z
-updated_at: 2026-10-24T02:23:41.741Z
+updated_at: 2026-10-24T04:50:20.094Z
 started_at: 2026-10-23T18:20:46.241Z
+closed_at: 2026-10-24T04:50:20.093Z
+close_reason: "#745 merged at af9c9e850 (head 6eaa7111e; reviews A 6372288301 and B 6379074892 with dispositions 6376964172 and 6379460703; deep gate 40050481868; CI green)"
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes

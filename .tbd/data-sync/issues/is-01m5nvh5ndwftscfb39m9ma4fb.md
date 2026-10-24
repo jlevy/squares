@@ -3,9 +3,9 @@ type: is
 id: is-01m5nvh5ndwftscfb39m9ma4fb
 title: "PR #745 follow-up review B"
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 3
+version: 4
 delegate: c-rev-745b-1024
 labels: []
 dependencies: []
@@ -13,8 +13,12 @@ parent_id: is-01m5mzwrp4a8f1drb54we5z1tq
 hold: null
 hold_until: null
 created_at: 2026-10-24T02:23:41.741Z
-updated_at: 2026-10-24T03:04:13.028Z
+updated_at: 2026-10-24T04:50:19.628Z
 started_at: 2026-10-24T02:23:48.359Z
+closed_at: 2026-10-24T04:50:19.622Z
+close_reason: "#745 merged at af9c9e850 (head 6eaa7111e; reviews A 6372288301 and B 6379074892 with dispositions 6376964172 and 6379460703; deep gate 40050481868; CI green)"
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes

@@ -3,9 +3,9 @@ type: is
 id: is-01m5ndfyhknd8p766m3pnpgn4a
 title: "Address PR #745 review A (A1-A8)"
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 10
+version: 11
 delegate: c-final-745-1024
 labels: []
 dependencies: []
@@ -16,8 +16,12 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-23T22:18:21.615Z
-updated_at: 2026-10-24T03:45:41.936Z
+updated_at: 2026-10-24T04:50:21.943Z
 started_at: 2026-10-23T22:18:43.416Z
+closed_at: 2026-10-24T04:50:21.942Z
+close_reason: "#745 merged at af9c9e850 (head 6eaa7111e; reviews A 6372288301 and B 6379074892 with dispositions 6376964172 and 6379460703; deep gate 40050481868; CI green); deferrals think-o8to (P1, blocks think-tcsl) and think-lfo0 under think-ezt8"
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes

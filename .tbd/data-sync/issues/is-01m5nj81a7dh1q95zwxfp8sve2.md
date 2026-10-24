@@ -3,9 +3,9 @@ type: is
 id: is-01m5nj81a7dh1q95zwxfp8sve2
 title: "PR #745 A2: certifying deep-gate run at the final head after #753; slow lane against its ceiling"
 kind: bug
-status: in_progress
+status: closed
 priority: 1
-version: 4
+version: 5
 delegate: c-land-745-1024
 labels: []
 dependencies: []
@@ -13,8 +13,12 @@ parent_id: is-01m5ndfyhknd8p766m3pnpgn4a
 hold: null
 hold_until: null
 created_at: 2026-10-23T23:41:25.191Z
-updated_at: 2026-10-24T02:10:25.222Z
+updated_at: 2026-10-24T04:50:20.553Z
 started_at: 2026-10-24T01:05:26.098Z
+closed_at: 2026-10-24T04:50:20.552Z
+close_reason: "#745 merged at af9c9e850 (head 6eaa7111e; reviews A 6372288301 and B 6379074892 with dispositions 6376964172 and 6379460703; deep gate 40050481868; CI green)"
+resolution: null
+duplicate_of: null
 ---
 A2 of PR #745's review A (https://github.com/jlevy/squares/pull/745#issuecomment-6372288301), Medium: the full checkpoint for the four whole 2,073-direction fine-net sweeps, and the deferred slow lane's wall against its 1250 s ceiling (OR-13, OR-17).
 

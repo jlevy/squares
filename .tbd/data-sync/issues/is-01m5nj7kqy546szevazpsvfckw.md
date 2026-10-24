@@ -3,16 +3,20 @@ type: is
 id: is-01m5nj7kqy546szevazpsvfckw
 title: "Deep gate: the four whole fine-net sweeps put deferred-slow-lane over its 1250 s ceiling (1477 s); re-record, split or speed the evaluator"
 kind: task
-status: open
+status: closed
 priority: 1
-version: 4
+version: 5
 labels:
   - decision
   - validation
 dependencies: []
 parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 created_at: 2026-10-23T23:41:11.291Z
-updated_at: 2026-10-24T01:05:10.745Z
+updated_at: 2026-10-24T04:50:21.034Z
+closed_at: 2026-10-24T04:50:21.033Z
+close_reason: "#745 merged at af9c9e850 (head 6eaa7111e; reviews A 6372288301 and B 6379074892 with dispositions 6376964172 and 6379460703; deep gate 40050481868; CI green)"
+resolution: null
+duplicate_of: null
 ---
 Owner or coordinator decision, raised by A2 of PR #745's review A (https://github.com/jlevy/squares/pull/745#issuecomment-6372288301) and escalated by lane c-fix-745-1023 on 23 October.
 

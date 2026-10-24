@@ -5,7 +5,7 @@ title: "Import Polkovskyi's f1ceee4 (#732): 138 certificates at 328-989 in repor
 kind: task
 status: in_progress
 priority: 2
-version: 3
+version: 4
 delegate: c-import-732c-1024
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-24T01:28:09.635Z
-updated_at: 2026-10-24T03:05:37.472Z
+updated_at: 2026-10-24T04:14:02.394Z
 started_at: 2026-10-24T01:28:14.516Z
 ---
 
@@ -28,3 +28,4 @@ started_at: 2026-10-24T01:28:14.516Z
 - Credit: "Polkovskyi after Couzo, Levy"; the 11-count sole-credit request recorded as a queued ask on #732 (think-f2io, D5) with receipts/pose-identity.json.
 - Theorems not registered. #763 and Couzo's efef7d1/fa6237e (pushed 23:38:42Z) are later reports, think-cnn7's.
 - Stage 7 drafts (not posted): scratchpad c732/732-import.md, 715-followup.md, 719-followup.md.
+- Head 38c896bc2 (main 14b14f2d1 merged in 3923096c8): hosted Packing validation 40060694658, Certificate page 40060694641, Branch mergeability 40060690122 all success. Draft; not marked ready, not merged.
