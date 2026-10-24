@@ -3,9 +3,9 @@ type: is
 id: is-01m5ms6x750pfqfd50apa8v8dj
 title: "Stage 4 mathematical review of T-239: Amund Kristiansen's s(303) <= 17.909762327476 (#755)"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 5
+version: 6
 delegate: c-review-t238-math
 labels:
   - result-import
@@ -15,8 +15,12 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-23T16:23:53.828Z
-updated_at: 2026-10-24T02:38:18.813Z
+updated_at: 2026-10-24T05:56:54.842Z
 started_at: 2026-10-23T16:23:55.732Z
+closed_at: 2026-10-24T05:56:54.841Z
+close_reason: "#757 merged at c5697c2f2 on 24 October UTC (head 21a0624cf; review A 6379038105 with dispositions 6380602439; CI green 40067196011, 40067195965, 40067192448)"
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes

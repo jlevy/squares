@@ -3,9 +3,9 @@ type: is
 id: is-01m5nwbzgvqzrtskzde98td2xe
 title: "PR #757 (merge): senior review"
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 3
+version: 4
 delegate: c-rev-757-1024
 labels: []
 dependencies: []
@@ -13,8 +13,12 @@ parent_id: is-01m5mr7439b7eqzqzccqrxnkxa
 hold: null
 hold_until: null
 created_at: 2026-10-24T02:38:20.187Z
-updated_at: 2026-10-24T03:00:13.365Z
+updated_at: 2026-10-24T05:56:53.820Z
 started_at: 2026-10-24T02:38:25.308Z
+closed_at: 2026-10-24T05:56:53.819Z
+close_reason: "#757 merged at c5697c2f2 on 24 October UTC (head 21a0624cf; review A 6379038105 with dispositions 6380602439; CI green 40067196011, 40067195965, 40067192448)"
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes

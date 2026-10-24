@@ -3,9 +3,9 @@ type: is
 id: is-01m5ndgbh9mj424pah2z0csp61
 title: "PR #757: the gist source card (OTHER_PROJECTS accepts gist.github.com)"
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 4
+version: 5
 delegate: c-fix-757-1023
 labels: []
 dependencies: []
@@ -13,8 +13,12 @@ parent_id: is-01m5mr7439b7eqzqzccqrxnkxa
 hold: null
 hold_until: null
 created_at: 2026-10-23T22:18:34.921Z
-updated_at: 2026-10-24T01:47:15.127Z
+updated_at: 2026-10-24T05:56:54.371Z
 started_at: 2026-10-23T22:18:44.697Z
+closed_at: 2026-10-24T05:56:54.371Z
+close_reason: "#757 merged at c5697c2f2 on 24 October UTC (head 21a0624cf; review A 6379038105 with dispositions 6380602439; CI green 40067196011, 40067195965, 40067192448)"
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes

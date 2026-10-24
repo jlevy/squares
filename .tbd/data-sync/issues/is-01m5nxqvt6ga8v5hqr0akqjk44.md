@@ -5,15 +5,15 @@ title: "Address PR #766 review A (A1-A5) and merge main"
 kind: task
 status: in_progress
 priority: 2
-version: 3
-delegate: c-fix-766-1024
+version: 4
+delegate: c-final-766-1024
 labels: []
 dependencies: []
 parent_id: is-01m5nwfyhk87j6dnr7fggzmpwp
 hold: null
 hold_until: null
 created_at: 2026-10-24T03:02:18.182Z
-updated_at: 2026-10-24T03:48:11.328Z
+updated_at: 2026-10-24T05:56:56.270Z
 started_at: 2026-10-24T03:02:29.179Z
 ---
 

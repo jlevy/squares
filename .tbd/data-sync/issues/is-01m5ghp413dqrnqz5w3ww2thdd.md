@@ -5,7 +5,7 @@ title: "Decide Couzo's 8 October decimal poses at 335 (and 336, 337, 341, 373, 3
 kind: task
 status: open
 priority: 2
-version: 5
+version: 7
 delegate: coord-intake-1023
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m5g8xj3hqca5wcen9f71dtnd
 hold: null
 hold_until: null
 created_at: 2026-10-22T00:55:25.968Z
-updated_at: 2026-10-24T03:05:35.586Z
+updated_at: 2026-10-24T05:43:59.692Z
 started_at: 2026-10-22T00:55:35.613Z
 ---
 D3 of think-f2io, and a promise of the #715 acknowledgement (https://github.com/jlevy/squares/issues/715#issuecomment-6329883508): decide exactly whether Francisco Couzo's 8 October decimal report at n = 335 packs at its printed side, 18.822875655543559 (source couzo-extended-range-reports-2026-10-08, packet packing/resources/web/couzo-extended-reports-2026-10-08, facts/n-335.yaml: decimal centres and angles, "no geometry, native replay"). The 9 October exact certificate at 335 (02f9690, retained in packing/resources/web/couzo-exact-certificates-2026-10-09; #715 restates it byte for byte) is 1.78e-11 or more above that row, so the 22 October ledger (packing/campaign/issue-intake/upper-bounds-20261022) records neither it nor #715 at 335.
@@ -38,3 +38,11 @@ Four readings per count: literal (printed centres and radian angles, outward-rou
 - 336, 337: literal and near-axis both not packings at the print (near-axis: one wall by 4.0e-16 at 336, three by 1.0e-16 at 337). 341, 373, 374: literal not, near-axis a packing. At all five the 9 October certificate is another packing below the print (centres up to 5.3e-4 away), and its rows already supersede the 8 October ones.
 
 Disposition: no deferred-conflict and no correction. The 335 row stays as printed (a report of a packing that exists at its print, read as its certificate reads it, within one unit of the print on either reading, as the ledger reads it); Polkovskyi's f1ceee4 row supersedes it, at least 1.61e-12 below on either reading (source-coverage.yaml; the 8 October source's notes and #715's n335 entry say so). Recommend closing this bead once PR #769 merges; the coordinator closes it (lane rules: notes only).
+
+2026-10-24 c-fix-769-1024 (think-0mz5, PR #769 review A, A2: https://github.com/jlevy/squares/pull/769#issuecomment-6380362746). Outcome, closing these notes.
+
+- Correction to the note above: "within one unit of the print on either reading" is false for the literal reading. Read literally, square 2 crosses the left wall by 7.77e-16 and square 308 the right wall by 6.88e-16, so the literal poses need a side of at least the print + 1.465e-15 (recomputed here at 60 digits from the 8 October packet's facts/n-335.yaml), outside the span of one unit either side of the 15-place print that the f1ceee4 walk's starts.yaml reads (…543558 to …543560). Nothing moves: f1ceee4's 335 is 1.607e-12 below the print and 1.94e-11 below the 9 October certificate, so it supersedes the row on either reading.
+- Couzo's own answer on #715 (issuecomment-6375833547, 2026-10-23T22:16:52Z) states the same facts: the certificate is the 8 October packing in exact form, centres dilated by exactly 1 + 1e-12 about (1/2, 1/2), the three near-axis angles (4.73e-11, 9.02e-12, 1.10e-12 rad) set to 0, the literal print overshooting a wall by up to 7.8e-16; "the bound we stand behind is the certificate's". The 9 October certificate sets to 0 exactly the 88 printed zeros and the 196 angles below 1e-10 (284 in all) and keeps the next angle, 2.40e-10.
+- At 341, 373 and 374 "with those angles at 0" is this decision's 1e-10 reading, not a certificate's: the 9 October certificates at those counts (and at 336, 337) are other packings.
+- Record text, in PR #769: #715's n335 not_registered (result-requests.yaml) is the review's merged text; the packet README's 335 section and the 8 October source's note (source-coverage.yaml) cite the answer. When #766 merges, #769 takes the same text into #715's n335 block and drops #766's "the row's exact side is the one the certificate gives" (the walk reads the row at its print). The #715 reply (coordinator scratchpad triage-1023b/reply-715.md, with c732/715-followup.md folded in) gives Couzo this outcome after #766 and #769 merge.
+- Disposition unchanged: no deferred conflict and no correction; the row stays listed as printed and is superseded by mishapolk-issue732-f1ceee4-2026-10-23. Ready to close when #769 merges (the coordinator closes it).

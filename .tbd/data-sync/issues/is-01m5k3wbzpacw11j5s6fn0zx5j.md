@@ -3,16 +3,20 @@ type: is
 id: is-01m5k3wbzpacw11j5s6fn0zx5j
 title: "Owner review at 303: admit grid-slack's 0.5-degree view of T-230 (row 7) or keep the axis tool's view drawn"
 kind: task
-status: open
+status: closed
 priority: 2
-version: 1
+version: 2
 delegate: coord-intake-1021b
 labels:
   - regularization
   - owner-decision
 dependencies: []
 created_at: 2026-10-23T00:51:53.974Z
-updated_at: 2026-10-23T00:51:53.974Z
+updated_at: 2026-10-24T05:56:55.327Z
+closed_at: 2026-10-24T05:56:55.327Z
+close_reason: "Superseded: #757 merged at c5697c2f2 on 24 October UTC (head 21a0624cf; review A 6379038105 with dispositions 6380602439; CI green 40067196011, 40067195965, 40067192448) adopts T-239 at 303, with a regularized 0.5-degree view admitted by the improvement rule, and removes SETTLED[303]. The review of T-230's drawing is moot."
+resolution: null
+duplicate_of: null
 ---
 Owner review owed at n = 303 since the adoption of 23 October 2026 (PR #731, think-icp1). The house is Evan Daniel's dilation certificate T-230 (issue 728). His regularizer draws no view there (its solve is not jammed, row 1). grid-slack's views at 0.5, 1 and 5 degrees are one view at the witness's side, straightening the witness's 15 near-upright squares (13 dilation artefacts within 1e-10 degree and two at 0.062 and 0.080 degree). Against the drawn axis-tool view of the same witness it is better on near-axis squares (0 against 2), angle classes (40 against 42) and both totals of full shared sides (house 766 against 758, stage 782 against 776), and worse on light squares (13 against 12). A square's contact count falls while no total does, so `regularize_select` sends each view to row 7, the owner's review, and the axis tool's view stays drawn until a review record admits one.
 

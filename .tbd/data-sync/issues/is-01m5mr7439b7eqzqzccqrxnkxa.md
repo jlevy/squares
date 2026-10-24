@@ -5,8 +5,8 @@ title: "Import Amund Kristiansen: s(303) <= 17.909762327476, 9.89e-6 below T-230
 kind: task
 status: in_progress
 priority: 1
-version: 11
-delegate: c-final-757-1024
+version: 13
+delegate: c-stage7-757-1024
 labels:
   - result-import
 dependencies: []
@@ -18,7 +18,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-23T16:06:32.296Z
-updated_at: 2026-10-24T05:15:54.330Z
+updated_at: 2026-10-24T05:56:55.817Z
 started_at: 2026-10-23T16:06:37.444Z
 ---
 Issue #755 (https://github.com/jlevy/squares/issues/755), opened 2026-10-23T11:12:48Z by amundsk (Amund Kristiansen): one upper bound at 303, a dilation certificate made with Evan Daniel's dilate_cert.py (evand 7982d7a), gist 78f9f0e7b4669f2f509a281845081768 at 511f56bf6e6afb4eb22f12d31371c2a2fe7b4767, s303_amund.cert SHA-256 9ec01059b35cc983cb28a1bb33bd215a2717228f7efd182e1724de6b22dc511b, side 223872029093440709529093216833/12500000000000000000000000000. Below the house T-230 (Daniel, #728) by 9.89e-6 if verified. Stages 1-3 then stage 4 (separate review lane), then adoption and regularization at 303 (think-ykgh owns 303's open row-7 review).
@@ -122,3 +122,11 @@ record quotes it exactly or rounded up.
 - A7: RF-4 wording at README:194.
 - A8: merge on 24 October UTC, or re-date the pass.
 A2 is decided by the existing improvement rule (policy section 11), not an owner question: the 0.5 degree view stands. The trade-off was reported to the owner as information. A3: close think-ykgh as superseded once #757 merges (main still names it in SETTLED[303]).
+## 2026-10-24 c-final-757-1024 (merge-day push; review A addressed)
+- Head 21a0624cf2881104304305261ae1094ce553c6f3, pushed 05:40Z; hosted CI green on every required check: Packing validation 40067196011 (validate with contiguity, shards A-D, packing-required), Certificate page 40067195965 (pages-required), Branch mergeability 40067192448. PR mergeable, CLEAN. Not merged, still draft.
+- 1f208dfb1: review A1, A4-A7. Packet README Report Order dated to the 16:11Z triage read and naming the later 7e82c64 (1.81e-11 below T-230, 9.89e-6 above T-239) and #763 (2.784e-3 below T-239), both read at their pins with exact arithmetic; adopt_houses.Prose gains `diversity` (A4) and `retained` (A5), n-303.md refreshed (`--refresh --n 303`); RF-1 "read, not run" (A6); RF-4 wording in Pose by Pose (A7).
+- dff9f5b07: merged main 2c58b6373 (#745, #750 and others): register T-231, T-232..T-238, T-239; release.py main's DATA_REVISION, explainer history and impacts, both no-change records kept; views taken from main and re-rendered. 4abb6763e re-pin. f54ecc25a explainer v0.4.25 over main's v0.4.24 (316 tests). c1d0ef591 the three papers' no-change record re-measured against 2c58b6373 (51 files, byte-identical across four renders).
+- 4430381a7: stamp_landed --apply, T-239 landed 2026-10-24. bb9c2b432 re-pin. e63e8906d: check_prose_ceremony refused the bare 7982d7a in the register notes; reworded. 21a0624cf final re-pin; stamp re-run unchanged.
+- Local at 21a0624cf: packing-validate --records --jobs 2 --inner-jobs 1 passes (127 s); check_results passes (239, contiguous); 686 tests in the affected modules pass; house and drawing checks all pass; check_release_impact, render_changelog --check and release_pin --check pass.
+- Dispositions reply (review=A, head 21a0624cf): https://github.com/jlevy/squares/pull/757#issuecomment-6380602439. A2 declined by the improvement rule; A3 deferred to think-ykgh after the merge. PR body updated (A1, A8, the cost, validation).
+- Noted, not acted on: earlier derived-only houses (Couzo's packets) keep the writer's default "holds it" in their case records.

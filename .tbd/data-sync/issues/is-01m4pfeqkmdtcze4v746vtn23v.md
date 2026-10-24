@@ -5,7 +5,7 @@ title: "Import wand125: register #446's s(19) >= 1931/400, s(20) >= 393/80, s(26
 kind: task
 status: in_progress
 priority: 2
-version: 11
+version: 12
 delegate: c-lower-1023
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-11T21:56:11.508Z
-updated_at: 2026-10-24T03:31:43.704Z
+updated_at: 2026-10-24T05:42:36.969Z
 started_at: 2026-10-23T06:18:58.822Z
 ---
 Found by the 2026-10-11 wand125/evand survey (think-1jnr). wand125/square-packing INDEX.json at 04fbef0 (2026-10-11) lists, as its best certificate at four counts, the #446 fine-net bundles mixed_n19_L48275 (1931/400 = 4.8275), mixed_n20_L49125 (393/80 = 4.9125), mixed_n26_L5555 (1111/200 = 5.555) and mixed_n27_L5655 (1131/200 = 5.655, the bf85d6b follow-up), all on the 2,073-direction net, data in release square-lower-bounds-v1. The record holds them only as evidence (E-wand125-fine-net-lower-bounds-446-report, E-wand125-fine-net-n27-5655-followup-report), #446's result-requests entry and case-record blockers; no register entry states them, unlike the same release's n = 28, 29, 30 values (T-142, T-132, T-143). Each is above its case's reported and verified lower bound (by 1/400, 3/400, 1/100 and 23/2000) and above every register claim at its count (T-103, T-104, T-105, T-106). Runbook row: bounds of one kind at several counts in one release, one entry whose scope covers them, registered as reported (V0/C0, pending adoption) with unfinished_confirmations naming think-ndvg's replay. Price: registration minutes (records lane); replay about 3.3 to 4.5 CPU-hours per certificate on the T-142/T-143 measurements, so about 13 to 18 CPU-hours for the four, under think-ndvg's owner budget.
@@ -133,3 +133,6 @@ As with T-205 to T-207, a `sqverify-fast` replay here is a re-implementation tha
 This issue stays open while the control fix is queued, and a reply follows each change in the record.
 
 (Before posting: confirm T-232 and T-233 are on `main` at these rungs, link the result pages and both reviews on `main`, and check whether think-tcsl has landed, which would change the T-233 paragraph. The n31 review's M-1 to M-3 and its five questions go to the author on the owner's word, since no issue asked for n31; decide whether they ride this reply.)
+2026-10-24 c-stage7-745-750 (stage 7 lane of coord-intake-1023, bead think-70ja): after #745 merged (af9c9e850, 2026-10-24T04:49:58Z) and #750 (2c58b6373, 05:15:20Z), the Pages run 40065536417 on 2c58b6373 succeeded (deploy job 120790538650, verify-deployment job 120790587248: check_published_site --commit 2c58b6373 passed 5804 of 5804 checks); squaremath.org serves v0.9.2-e48b91, main's release.PUBLICATION_EDITION (DATA_REVISION e48b9127d). Checked live: result/t-233.html (S3 V0 C1, reviewed, "the values stand as reported", Hosono after Tokoharu and Levy), result/t-232.html (S3 V3 C3, confirmed, same credit), cases/19, 20, 26, 27 (lower lanes 193/40, 981/200, 1109/200, 11287/2000, T-233 blockers on think-tcsl) and cases/31 (2391/400 in both lower lanes, upper 6, gap 9/400). think-tcsl is still open, so the T-233 paragraph stands.
+The #446 follow-up was posted at 2026-10-24T05:40:18Z: https://github.com/jlevy/squares/issues/446#issuecomment-6380484985 (body /tmp/claude-0/-home-user-squares/f8504540-2b5a-5f78-8968-eb4ffa4c4b64/scratchpad/stage7-745-750/446-reply.md). It is the corrected draft of 984f7e132 (T-233's captures "passed") with: result-page links on squaremath.org for T-233, T-232 and the n = 31 case, and full main links for both reviews (the draft's relative links would not resolve in a comment); the correction --draft owed (the 12 October reply gave E-wand125-fine-net-n27-5655-followup-report as recorded; it is now reviewed); "a reviewed fix is queued" rewritten as a fix that still needs its review; "with its values standing as reported" on T-233; the programs named (sqverify-fast by devtools.sqverify_fast_census); a "Where the rest stands" line restating the 20 October states; and the "On main" links. The n31 review's M-1 to M-3 and its questions were left out, as the owner's call (think-wop1). No author comment since our 20 October reply.
+Record patch (not committed): /tmp/claude-0/-home-user-squares/f8504540-2b5a-5f78-8968-eb4ffa4c4b64/scratchpad/stage7-745-750/requests.patch, against origin/main 2c58b6373 (result-requests.yaml blob 0b08043c5): the reply under #446's replies (T-233 at V0/C1 reviewed for fine-net-n19, -n20, -n26 and -n27-5655-followup; the follow-up's report entry reviewed; the restated states) and a notes paragraph. check_requests gate rc 0; --report "Reply due: no" for #446; --github no #446 difference.
