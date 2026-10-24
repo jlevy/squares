@@ -28046,7 +28046,7 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo n304 2026-10-23]'
     field: /credit
-  expected_text: Couzo after Tymchishin, Levy
+  expected_text: Couzo after Tymchishin, Polkovskyi, Chaoweeraprasit, Levy
   start: 0
   end: 5
   label: Couzo
@@ -28063,7 +28063,7 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo n304 2026-10-23]'
     field: /credit
-  expected_text: Couzo after Tymchishin, Levy
+  expected_text: Couzo after Tymchishin, Polkovskyi, Chaoweeraprasit, Levy
   start: 12
   end: 22
   label: Tymchishin
@@ -28072,17 +28072,62 @@ occurrences:
   evidence: []
   note: >-
     Reviewed packing/resources/bibliography.yaml [[Couzo n304 2026-10-23]] /credit span
-    12:22: the source's catalogue and certified_bounds.json credit the packing at 304 to
-    Kirill Tymchishin (kirilltym), Kaggle notebook "CPU Alternating Reclosure" v3. No person
-    record exists yet; identity review pending (a profile by name, as for [Couzo issue 763
-    2026-10-23], think-l49q).
+    12:22: the source's catalogue, certified_bounds.json and manifest credit the packing at
+    304 to Kirill Tymchishin (kirilltym), Kaggle notebook "CPU Alternating Reclosure" v3,
+    run 361239073. No person record exists yet; identity review pending (a profile by name,
+    as for [Couzo issue 763 2026-10-23], think-l49q).
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo n304 2026-10-23]'
     field: /credit
-  expected_text: Couzo after Tymchishin, Levy
+  expected_text: Couzo after Tymchishin, Polkovskyi, Chaoweeraprasit, Levy
   start: 24
-  end: 28
+  end: 34
+  label: Polkovskyi
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: mykhailo-polkovskyi
+  note: >-
+    Reviewed packing/resources/bibliography.yaml [[Couzo n304 2026-10-23]] /credit span
+    24:34: the source's catalogue defers seed and construction credit to its manifest, whose
+    witnesses/304 entry (pinned by the couzo-n304-2026-10-23 packet) gives the notebook's
+    previous_source as Mykhailo Polkovskyi's n304.cert at Mishapolk/square-packing-
+    records@70a033f (#593), credited "Mykhailo Polkovskyi (Mishapolk)", and
+    previous_reference.seed_credit "Mykhailo Polkovskyi (Mishapolk)". That certificate's
+    SHA-256 is the one the mishapolk-kkt-refinements-2026-10-14 packet pins (T-186). A chain
+    through an intermediate author retains the link.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo n304 2026-10-23]'
+    field: /credit
+  expected_text: Couzo after Tymchishin, Polkovskyi, Chaoweeraprasit, Levy
+  start: 36
+  end: 51
+  label: Chaoweeraprasit
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: nate-chaoweeraprasit
+  note: >-
+    Reviewed packing/resources/bibliography.yaml [[Couzo n304 2026-10-23]] /credit span
+    36:51: the source's catalogue defers seed and construction credit to its manifest, whose
+    witnesses/304 entry (pinned by the couzo-n304-2026-10-23 packet) gives the notebook's
+    previous_source as Mykhailo Polkovskyi's n304.cert at Mishapolk/square-packing-
+    records@70a033f (#593), whose construction_credit is "Nate Chaoweeraprasit (itsnaka)",
+    the SQUISH author of the earlier keys. A chain through an intermediate author retains
+    the link.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo n304 2026-10-23]'
+    field: /credit
+  expected_text: Couzo after Tymchishin, Polkovskyi, Chaoweeraprasit, Levy
+  start: 53
+  end: 57
   label: Levy
   role: prerequisite
   disposition: resolved
@@ -28091,10 +28136,10 @@ occurrences:
   - announcement-account
   contributor_id: joshua-levy
   note: >-
-    Reviewed /credit span 24:28: the record's own lineage credit for this project, whose
-    register and verifier the source compares with. The first-party jlevy/squares record is
-    the Joshua Levy identity established by LICENSE and the retained ojoshe receipt; project
-    credit does not imply sole personal authorship.
+    Reviewed /credit span 53:57: the source's manifest names this project's sqpack/verify.py
+    at 37e6757e as its first checker, as for [Couzo issue 763 2026-10-23]. The first-party
+    jlevy/squares record is the Joshua Levy identity established by LICENSE and the retained
+    ojoshe receipt; project credit does not imply sole personal authorship.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel Kaggle descents 2026-10-24]'
@@ -28118,7 +28163,7 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel Kaggle descents 2026-10-24]'
     field: /credit
-  expected_text: Daniel after Lavrentev, Levy
+  expected_text: Daniel after Lavrentev, Tymchishin, Polkovskyi, Chaoweeraprasit, Levy
   start: 0
   end: 6
   label: Daniel
@@ -28136,7 +28181,7 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel Kaggle descents 2026-10-24]'
     field: /credit
-  expected_text: Daniel after Lavrentev, Levy
+  expected_text: Daniel after Lavrentev, Tymchishin, Polkovskyi, Chaoweeraprasit, Levy
   start: 13
   end: 22
   label: Lavrentev
@@ -28152,9 +28197,65 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel Kaggle descents 2026-10-24]'
     field: /credit
-  expected_text: Daniel after Lavrentev, Levy
+  expected_text: Daniel after Lavrentev, Tymchishin, Polkovskyi, Chaoweeraprasit, Levy
   start: 24
-  end: 28
+  end: 34
+  label: Tymchishin
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: >-
+    Reviewed packing/resources/bibliography.yaml [[Daniel Kaggle descents 2026-10-24]]
+    /credit span 24:34: at 304 the source descends the packing T-241 certifies, which
+    Francisco Couzo's catalogue and manifest credit to Kirill Tymchishin's Kaggle notebook
+    "CPU Alternating Reclosure" v3; the source itself calls the finder unknown. A
+    regularization leaves the packing with its finder through the result that holds it. No
+    person record exists yet; identity review pending (think-l49q).
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel Kaggle descents 2026-10-24]'
+    field: /credit
+  expected_text: Daniel after Lavrentev, Tymchishin, Polkovskyi, Chaoweeraprasit, Levy
+  start: 36
+  end: 46
+  label: Polkovskyi
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: mykhailo-polkovskyi
+  note: >-
+    Reviewed packing/resources/bibliography.yaml [[Daniel Kaggle descents 2026-10-24]]
+    /credit span 36:46: at 304 the packing is T-241's, whose source's manifest gives its
+    previous source and seed credit as Mykhailo Polkovskyi's 70a033f certificate (#593,
+    T-186's packing). A chain through an intermediate author retains the link.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel Kaggle descents 2026-10-24]'
+    field: /credit
+  expected_text: Daniel after Lavrentev, Tymchishin, Polkovskyi, Chaoweeraprasit, Levy
+  start: 48
+  end: 63
+  label: Chaoweeraprasit
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: nate-chaoweeraprasit
+  note: >-
+    Reviewed packing/resources/bibliography.yaml [[Daniel Kaggle descents 2026-10-24]]
+    /credit span 48:63: at 304 the packing is T-241's, whose source's manifest gives the
+    construction credit of its previous source as Nate Chaoweeraprasit (itsnaka). A chain
+    through an intermediate author retains the link.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel Kaggle descents 2026-10-24]'
+    field: /credit
+  expected_text: Daniel after Lavrentev, Tymchishin, Polkovskyi, Chaoweeraprasit, Levy
+  start: 65
+  end: 69
   label: Levy
   role: prerequisite
   disposition: resolved
@@ -28163,10 +28264,12 @@ occurrences:
   - announcement-account
   contributor_id: joshua-levy
   note: >-
-    Reviewed /credit span 24:28: the record's own lineage credit for this project, whose
-    register and verifier the source compares with. The first-party jlevy/squares record is
-    the Joshua Levy identity established by LICENSE and the retained ojoshe receipt; project
-    credit does not imply sole personal authorship.
+    Reviewed /credit span 65:69: the source builds on this project's data. Its retained
+    s268_lightning_prior.json and s304_pub_prior.json take the store's prior best from this
+    project's register and its pending issues (#375, #476, #501, #575, #593, #624), and the
+    commit calls the certificates posts beyond the register. The first-party jlevy/squares
+    record is the Joshua Levy identity established by LICENSE and the retained ojoshe
+    receipt; project credit does not imply sole personal authorship.
 inspections:
 - path: packing/resources/papers/addis-locatelli-schoen-2008-disk-packing-square.pdf
   status: pending

@@ -42,8 +42,9 @@ Each certificate’s JSON report (`sNNN_*.json`) states its `S_cert`, which is t
 certificate’s header side; `cert_valid` true at 80 digits; least wall and pair
 clearances of `5e-21` and about `1e-20`; `S_input`, the binary64 side of the packing it
 descends from (16.87436171586941 at 268, 17.926898901941495 at 304); and `S_exact`, the
-side of a Newton-converged KKT point, which `S_cert` exceeds by about 1.7e-22 at 268 and
-1.8e-22 at 304. At 268 it also reports 19 free squares and a second-order analysis with
+side of a Newton-converged KKT point. From those two sides, `S_cert` exceeds `S_exact` by
+about 1.7e-19 at 268 and 1.8e-19 at 304, a relative padding of 1e-20 (computed here; the
+JSON states the sides, not the gap). At 268 it also reports 19 free squares and a second-order analysis with
 127 exact flat motions (`dim_null`). The `_vs_prior.json` files compare each descent with
 the source store’s prior best at the count and call each a “distinct minimum”.
 
@@ -80,15 +81,19 @@ is kept in Git.
 ## Report Order
 
 The [ledger of 24 October for this import](../../../campaign/issue-intake/upper-bounds-evand-20261024/README.md)
-walks the two publications in the order of their first commits against the starts frozen
-at `main` `2ec489d1`:
+walks the two publications in the order of the pushes that made them public, as the
+record dates a commit a later push published (`8a8879a` by its push at 04:53:53Z,
+`fa6237e` by the push at 23:38:42Z on 23 October), against the starts frozen at `main`
+`2ec489d1`:
 
 - **268:** T-240 (#763, 23 October 23:35:51Z), pending adoption, then this commit:
   recorded, 4.48e-12 below. The two sides print differently at 12 places
   (16.874361715874 and 16.874361715870), so the restatement ruling does not reach it.
 - **303:** T-240, then this commit: not recorded, 2.60e-4 above.
-- **304:** T-186, the house; Couzo’s `fa6237e` (T-241, first committed 23 October
-  18:59:39Z), recorded 2.53e-3 below; then this commit, recorded 3.04e-9 below that.
+- **304:** T-186, the house; Couzo’s `fa6237e` (T-241, pushed 23 October 23:38:42Z,
+  committed at 18:59:39Z), recorded 2.53e-3 below; then this commit, recorded 3.04e-9
+  below that. Dating either by its commit instead changes no verdict, since nothing else
+  reached 304 between them.
 
 ## Against the Record
 
@@ -122,13 +127,15 @@ credit; it decides nothing.
   Tymchishin’s EDA+Seam LP v4 packing, `certificates/parents/85dbd707…` in the
   [issue-763 packet](../couzo-issue763-2026-10-23/README.md)) it pairs under the identity,
   none beyond 0.1 (largest 2.49e-2). The source’s `s268_lightning.predescent.txt` is that
-  parent to 2.5e-10. The regularized display view pairs with the certificate only by an
+  parent to 2.47e-10. The regularized display view pairs with the certificate only by an
   optimal assignment (9 squares beyond 0.1), and is not registered here.
 - **304.** Nearest centres pair the certificate with T-241’s packing under the identity,
   none beyond 1e-3 and 73 beyond 1e-6 (largest 4.60e-4, largest turn 0.019°). The
   source’s binary64 input is T-241’s packing to 2.05e-9. So the certificate is T-241’s
   packing descended, which T-242 lists as a regularization of T-241. Against T-186 no
-  symmetry pairs it one to one; an optimal assignment moves 54 squares beyond 0.1.
+  symmetry pairs it one to one by nearest centres; the optimal assignment, best under the
+  diagonal reflection, keeps 250 of 304 squares within 0.1 and moves 54 beyond it (largest
+  1.13), as for T-241, whose source names T-186’s packing as its antecedent.
 - **303.** Against T-240’s 303, one to one under the anti-diagonal reflection, 4
   squares beyond 0.1 (largest 0.238), 71 beyond 1e-3.
 
@@ -182,15 +189,21 @@ before #763, and who found the packing at 304, are the authors’ to say.
   first appears in Lavrentev’s output and is Tymchishin’s input.
 - **304:** the packing T-241 certifies. The source says its finder is unknown and its
   earliest public copy is kozykappa’s notebook. Couzo’s index credits it to Kirill
-  Tymchishin’s Kaggle notebook “CPU Alternating Reclosure” v3. Evan Daniel descended it
-  exactly.
+  Tymchishin’s Kaggle notebook “CPU Alternating Reclosure” v3, and his manifest gives that
+  notebook’s previous source and seed as Mykhailo Polkovskyi’s packing, with construction
+  credit to Nate Chaoweeraprasit ([T-241’s packet](../couzo-n304-2026-10-23/README.md)).
+  A regularization leaves the packing with its finder through the result that holds it,
+  so the line names that chain. Evan Daniel descended it exactly.
 - **Licence and assistance:** MIT, copyright (c) 2026 Evan Daniel ([LICENSE](source/LICENSE)).
   [CREDITS.md](source/CREDITS.md) says the repository’s work was “Produced by Claude
   (Anthropic) in a single session under human direction”, and the commit carries a
   Co-Authored-By trailer naming Claude.
 
 The bibliography key is **[Daniel Kaggle descents 2026-10-24]**, credited *Daniel after
-Lavrentev, Levy*.
+Lavrentev, Tymchishin, Polkovskyi, Chaoweeraprasit, Levy*. Levy because the source builds
+on this project’s data: its `s268_lightning_prior.json` and `s304_pub_prior.json` take the
+store’s prior best from this project’s register and its pending issues (#375, #476, #501,
+#575, #593, #624), and the commit calls the certificates posts beyond the register.
 
 ## Questions for the Author
 
@@ -201,6 +214,10 @@ Drafted in think-l49q for Evan Daniel, who opened no issue:
    at 304?
 2. Which notebook versions and dates hold Lavrentev’s 268 (lightningv08), Deotte’s 303
    and kozykappa’s 304?
+3. `s268_lightning.predescent.txt` is #763’s Kaggle parent at 268, Tymchishin’s EDA+Seam
+   LP v4 packing, to 2.47e-10 (measured here), while `s268_lightning.input.txt` is
+   Lavrentev’s placement. What is the predescent file, and which of the two did the
+   descent start from? The answer bears on the credit “Daniel after Lavrentev”.
 
 ## Commands
 

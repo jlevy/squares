@@ -1,7 +1,7 @@
 {
   "format": "external-source-acquisition-v1",
-  "retrieved_at_utc": "2026-10-24T13:55Z",
-  "git_scope": "Blobless clone of franciscouzo/square-packing fetched for the 24 October intake pass, and a sparse checkout of fa6237e (committed 2026-10-23T18:59:39Z, 'Land the Kaggle intake certificates and restore held records below 324'), the first commit on any ref to hold the bytes of certificates/best/n304.cert (blob 953dc2e5; the path held other bytes, blob 1a0be085, from 4e4c8ce of 15 October). GitHub's activity log records fa6237e pushed with efef7d1 and 964ee2b at 2026-10-23T23:38:42Z, in the push 6b7391d..964ee2b; the file is unchanged at 964ee2b and at the head 1c17153. No issue reports it. The certificate is retained by the couzo-issue763-2026-10-23 packet, which pins 964ee2b and retained it for this import, so it is pinned here against that copy; the root README, the catalogue's README and certified_bounds.json, which print its side and credit, are pinned by digest; the verifier's licence against the 18 October packet's copy. Nothing is retained here, and no source program was executed.",
+  "retrieved_at_utc": "2026-10-24T16:05Z",
+  "git_scope": "Blobless clone of franciscouzo/square-packing fetched for the 24 October intake pass, and a sparse checkout of fa6237e (committed 2026-10-23T18:59:39Z, 'Land the Kaggle intake certificates and restore held records below 324'), the first commit on any ref to hold the bytes of certificates/best/n304.cert (blob 953dc2e5; the path held other bytes, blob 1a0be085, from 4e4c8ce of 15 October). GitHub's activity log records fa6237e pushed with efef7d1 and 964ee2b at 2026-10-23T23:38:42Z, in the push 6b7391d..964ee2b; the file is unchanged at 964ee2b and at the head 1c17153. No issue reports it. The certificate is retained by the couzo-issue763-2026-10-23 packet, which pins 964ee2b and retained it for this import, so it is pinned here against that copy; the root README, the catalogue's README and certified_bounds.json, which print its side and credit, and certificates/best/manifest.json, whose witnesses/304 entry gives the certificate's provenance, seed and construction credits, are pinned by digest; the verifier's licence against the 18 October packet's copy. Nothing is retained here, and no source program was executed.",
   "sources": [
     {
       "id": "couzo-n304-2026-10-23",
@@ -17,10 +17,11 @@
         "BOUND_VERIFIER_LICENSE.txt",
         "certified_bounds.json",
         "certificates/best/README.md",
+        "certificates/best/manifest.json",
         "certificates/best/n304.cert"
       ],
-      "subtree_file_count": 5,
-      "subtree_total_bytes": 9038342,
+      "subtree_file_count": 6,
+      "subtree_total_bytes": 23172771,
       "retained_file_count": 0,
       "retained_total_bytes": 0,
       "compressed": [],
@@ -45,6 +46,12 @@
           "reason": "The source's complete bound catalogue in prose (157 KB), whose 304 row prints the side and the credit; pinned for credit."
         },
         {
+          "path": "certificates/best/manifest.json",
+          "bytes": 14134429,
+          "sha256": "31b0caef3c213b9390165520b6676d3003e8236f7c5cf35db1ed5be930f44f30",
+          "reason": "The source's witness manifest (14 MB), whose witnesses/304 entry gives the certificate's provenance, previous source and seed and construction credits, which the catalogue row defers to; pinned for credit. The issue-763 packet retains the 964ee2b copy, whose 304 entry is identical."
+        },
+        {
           "path": "certificates/best/n304.cert",
           "bytes": 66411,
           "sha256": "c8433dd798aef6f190790c6c78c63b4ab5c26baabe372405f8ff9029d175231d",
@@ -62,6 +69,7 @@
       "claims": [
         "certificates/best/n304.cert states s(304) <= 42654421699169959072564987841514227093543746926117736119087439/2379353056489745832681562849107891444171481219500000000000000 = 17.926898903392\u2026, which the source prints rounded up as 17.926898903393 (SHA-256 c8433dd798aef6f190790c6c78c63b4ab5c26baabe372405f8ff9029d175231d), first committed at fa6237e and pushed at 2026-10-23T23:38:42Z.",
         "certificates/best/README.md lists it as '| [304](n304.cert) | 17.926898903393 | Kirill Tymchishin (kirilltym), Kaggle \"CPU Alternating Reclosure\" v3; earlier construction credits in its source notices; earlier seed and construction credits retained in provenance |', and certified_bounds.json gives the same credit beside a verification record ('valid': true, 4297 pairs tested, 'GMP exact rationals via gmpy2 2.3.2'). Those statements are the author's; no source program ran here.",
+        "certificates/best/README.md at the pin says 'Source, construction, seed and certificate credits are retained in manifest.json'. That manifest's witnesses/304 entry (identical at 964ee2b, where the issue-763 packet retains it) gives the packing's source as Kirill Tymchishin's Kaggle notebook 'CPU Alternating Reclosure' v3 (run 361239073, Apache-2.0, witness_dilation 1+1e-10), its previous_source as Mykhailo Polkovskyi's n304.cert at Mishapolk/square-packing-records@70a033f (#593), credited 'Mykhailo Polkovskyi (Mishapolk)' with construction_credit 'Nate Chaoweeraprasit (itsnaka)', and previous_reference.seed_credit 'Mykhailo Polkovskyi (Mishapolk)'. The previous source's SHA-256, 72fa0c89..., is the certificate the mishapolk-kkt-refinements-2026-10-14 packet pins, T-186's packing. The notebook's own source notices (submissions/kaggle-public-portfolio-20261022/SOURCE_NOTICES.md) are in no commit of the source.",
         "Issue #763 (2026-10-23T23:35:51Z) does not claim 304: its README selects only counts credited to Francisco Couzo, and this one is credited to another author's notebook. A certificate published in a watched repository with no issue is a report from its first commit (the owner, 2026-10-14)."
       ]
     }

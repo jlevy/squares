@@ -1149,9 +1149,12 @@ def _upstream(source: Path, twins: Mapping[str, acquire_source.PinnedOnly], path
     by digest because another packet already retains the same bytes, read from that copy.
 
     Such a file is pinned only, ``identical_to`` the other copy (`acquire_source`), whose
-    custody check compares the two; the bytes read are held to the pinned digest again
-    here. Francisco Couzo's 304 at ``fa6237e`` is retained by the issue-763 packet and
-    pinned so by the packet that imports it (think-l49q).
+    custody check compares the two. The copy is read as that check reads it
+    (`acquire_source.twin_bytes`: an original gzip as stored, anything else plain or from
+    its ``.gz``) and held to the pinned digest again here; an upstream ``.gz`` is then
+    decompressed, as `_read` returns a retained one. Francisco Couzo's 304 at ``fa6237e``
+    is retained by the issue-763 packet and pinned so by the packet that imports it
+    (think-l49q).
     """
     item = twins.get(path)
     if item is None:
@@ -1160,14 +1163,19 @@ def _upstream(source: Path, twins: Mapping[str, acquire_source.PinnedOnly], path
     target = REPO / twin
     ensure_private(target if target.exists() else target.with_name(target.name + ".gz"))
     try:
-        data = read_retained_bytes(target, limit=MAX_SOURCE_BYTES)
+        data = acquire_source.twin_bytes(twin, REPO)
     except (OSError, ValueError) as error:
         raise ReportError(f"{path}: {error}") from error
     _require(
         hashlib.sha256(data).hexdigest() == item["sha256"],
         f"{path}: {twin} is not the bytes the packet pins",
     )
-    return data
+    if not path.endswith(retained_data.GZIP_SUFFIX):
+        return data
+    try:
+        return retained_data.gunzip_bytes(data, limit=MAX_SOURCE_BYTES, name=path)
+    except (OSError, ValueError) as error:
+        raise ReportError(f"{path}: {error}") from error
 
 
 def _twins(record: acquire_source.Source) -> dict[str, acquire_source.PinnedOnly]:

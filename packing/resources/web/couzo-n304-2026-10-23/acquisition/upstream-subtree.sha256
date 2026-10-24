@@ -1,5 +1,6 @@
 c51886c0f7e6724a7d89fc22cb237a1688ba1bbff04cb21a13b8e1a01fb15578  ./BOUND_VERIFIER_LICENSE.txt
 704b71a87e5abd6c5810377e810e542b051aeec4af0e979835d5fe508d5b6df0  ./README.md
 13c4fc9828b6dd2cc0088eb38ce4ffc945b714dc38830ea6cfe9c818e47b687d  ./certificates/best/README.md
+31b0caef3c213b9390165520b6676d3003e8236f7c5cf35db1ed5be930f44f30  ./certificates/best/manifest.json
 c8433dd798aef6f190790c6c78c63b4ab5c26baabe372405f8ff9029d175231d  ./certificates/best/n304.cert
 e9c4e5f5820d14c02718074c2319167e405cf03a1eafc6844d188ec4b58f3bba  ./certified_bounds.json

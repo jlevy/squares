@@ -12,7 +12,7 @@ At each count the standing side starts at the record on `main`, frozen by `gathe
 
 ## Counts
 
-4 claims at 3 counts. Recorded: 0 new packings (of which 0 continue another holder's or the reporter's own arrangement), 1 refinements of a standing packing, 2 that no source classifies; 0 recorded by exception; 1 not recorded; 0 undecided.
+4 claims at 3 counts. Recorded: 0 new packings (of which 0 continue another holder's or the reporter's own arrangement), 0 refinements of a standing packing, 3 that no source classifies; 0 recorded by exception; 1 not recorded; 0 undecided.
 
 A refinement is the same configuration with a tighter certificate (a padding reduction, an exact-contact refinement, an exact attainment), as a source says; a new packing is one its source says is new, including one a continued search found from another arrangement. The rule records both; the register credits a refinement as a regularization of the packing it tightens.
 
@@ -27,8 +27,8 @@ Exact sides marked as a lane's come from its `acquisition/claims.json` (and `alg
 
 | Report | Holder | Reported | Counts claimed | Recorded: new packing | Recorded: refinement (whose packing) | Recorded: unclassified | Not recorded (held by) | Undecided | Bead |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| [franciscouzo/square-packing@fa6237e](https://github.com/franciscouzo/square-packing/tree/fa6237e288cf3fc53b53fc43438c91f3f59c40e9) | Kirill Tymchishin, certified by Francisco Couzo | 2026-10-23 18:59:39Z | 304 | - | - | 304 | - | - | think-l49q |
-| [evand/square-packing@8a8879a](https://github.com/evand/square-packing/tree/8a8879a2972c32cbd2d906049228cc9f0762b02a) | Evan Daniel (evand) | 2026-10-24 04:49:33Z | 268, 303, 304 | - | 304 (franciscouzo/square-packing@fa6237e: Kirill Tymchishin) | 268 | 303 (register T-240, pending adoption) | - | think-l49q |
+| [franciscouzo/square-packing@fa6237e](https://github.com/franciscouzo/square-packing/tree/fa6237e288cf3fc53b53fc43438c91f3f59c40e9) | Kirill Tymchishin, certified by Francisco Couzo | 2026-10-23 23:38:42Z | 304 | - | - | 304 | - | - | think-l49q |
+| [evand/square-packing@8a8879a](https://github.com/evand/square-packing/tree/8a8879a2972c32cbd2d906049228cc9f0762b02a) | Evan Daniel (evand) | 2026-10-24 04:53:53Z | 268, 303, 304 | - | - | 268, 304 | 303 (register T-240, pending adoption) | - | think-l49q |
 
 ## Per Count
 
@@ -38,7 +38,7 @@ Each report at the count in report order, with its side and verdict; a verdict n
 | ---: | --- | --- | --- |
 | 268 | 16.874361715874 (register T-240, pending adoption; [Couzo issue 763 2026-10-23]) | evand/square-packing@8a8879a 16.874361715870: recorded (below by 4.48e-12; measured: one arrangement, another placement; nearest centres one to one under the mirror x to s - x, none beyond 0.1, 69 beyond 1e-2, 135 beyond 1e-3 and 165 beyond 1e-9 (largest 7.08e-2), largest turn 1.36 degrees; against the source's own input, none beyond 1e-3 (largest 1.41e-4)) | evand/square-packing@8a8879a 16.874361715870 |
 | 303 | 17.906978233799 (register T-240, pending adoption; [Couzo issue 763 2026-10-23]) | evand/square-packing@8a8879a 17.907238274539: not recorded (above by 2.60e-04 register T-240, pending adoption; measured: nearest centres one to one under the anti-diagonal reflection; 4 squares beyond 0.1 (largest 0.238) and 71 beyond 1e-3, largest turn 27.0 degrees) | register T-240, pending adoption 17.906978233799 |
-| 304 | 17.929427758076 (record T-186; Daniil Ostashev, improved by Mishapolk) | franciscouzo/square-packing@fa6237e 17.926898903393: recorded (below by 2.53e-03; measured: nearest centres match one to one under no symmetry; an optimal assignment moves 54 squares beyond 0.1 (largest 1.13) and turns squares by up to 26.0 degrees); evand/square-packing@8a8879a 17.926898900357: recorded, a refinement of Kirill Tymchishin's packing (franciscouzo/square-packing@fa6237e) (below by 3.04e-09; measured: nearest centres one to one under the identity; none beyond 1e-3, 73 beyond 1e-6 (largest 4.60e-4), largest turn 0.019 degrees; the source's input is that packing to 2.05e-9) | evand/square-packing@8a8879a 17.926898900357 |
+| 304 | 17.929427758076 (record T-186; Daniil Ostashev, improved by Mishapolk) | franciscouzo/square-packing@fa6237e 17.926898903393: recorded (below by 2.53e-03; measured: nearest centres match one to one under no symmetry; an optimal assignment, best under the diagonal reflection, keeps 250 of 304 squares within 0.1 and moves 54 beyond it (largest 1.13), turning squares by up to 26.0 degrees); evand/square-packing@8a8879a 17.926898900357: recorded (below by 3.04e-09; measured: nearest centres one to one under the identity; none beyond 1e-3, 73 beyond 1e-6 (largest 4.60e-4), largest turn 0.019 degrees; the source's input is that packing to 2.05e-9) | evand/square-packing@8a8879a 17.926898900357 |
 
 ## Owner Decisions Needed
 
@@ -68,8 +68,8 @@ Claims whose certificate a measurement compares with another packing. The measur
 | ---: | --- | --- | --- | --- | --- | --- |
 | 268 | evand/square-packing@8a8879a | recorded | nothing stated | T-240 | one arrangement, another placement; nearest centres one to one under the mirror x to s - x, none beyond 0.1, 69 beyond 1e-2, 135 beyond 1e-3 and 165 beyond 1e-9 (largest 7.08e-2), largest turn 1.36 degrees; against the source's own input, none beyond 1e-3 (largest 1.41e-4) | packing/resources/web/evand-kaggle-descents-2026-10-24/measure/identity.json |
 | 303 | evand/square-packing@8a8879a | not recorded | nothing stated | T-240 | nearest centres one to one under the anti-diagonal reflection; 4 squares beyond 0.1 (largest 0.238) and 71 beyond 1e-3, largest turn 27.0 degrees | packing/resources/web/evand-kaggle-descents-2026-10-24/measure/identity.json |
-| 304 | franciscouzo/square-packing@fa6237e | recorded | nothing stated | T-186 | nearest centres match one to one under no symmetry; an optimal assignment moves 54 squares beyond 0.1 (largest 1.13) and turns squares by up to 26.0 degrees | packing/resources/web/evand-kaggle-descents-2026-10-24/measure/identity.json |
-| 304 | evand/square-packing@8a8879a | recorded | a refinement of Kirill Tymchishin's packing (franciscouzo/square-packing@fa6237e) | franciscouzo/square-packing@fa6237e | nearest centres one to one under the identity; none beyond 1e-3, 73 beyond 1e-6 (largest 4.60e-4), largest turn 0.019 degrees; the source's input is that packing to 2.05e-9 | packing/resources/web/evand-kaggle-descents-2026-10-24/measure/identity.json |
+| 304 | franciscouzo/square-packing@fa6237e | recorded | nothing stated | T-186 | nearest centres match one to one under no symmetry; an optimal assignment, best under the diagonal reflection, keeps 250 of 304 squares within 0.1 and moves 54 beyond it (largest 1.13), turning squares by up to 26.0 degrees | packing/resources/web/evand-kaggle-descents-2026-10-24/measure/identity.json |
+| 304 | evand/square-packing@8a8879a | recorded | nothing stated | franciscouzo/square-packing@fa6237e | nearest centres one to one under the identity; none beyond 1e-3, 73 beyond 1e-6 (largest 4.60e-4), largest turn 0.019 degrees; the source's input is that packing to 2.05e-9 | packing/resources/web/evand-kaggle-descents-2026-10-24/measure/identity.json |
 
 ### Refinement Chains
 
@@ -105,11 +105,12 @@ From `ledger.yaml`; a note that several claims share is one row.
 
 | Report | Counts | Note |
 | --- | --- | --- |
-| franciscouzo/square-packing@fa6237e | all | A publication in a watched repository with no issue, dated by its first commit (the owner, 2026-10-14); GitHub's activity log records it pushed at 2026-10-23T23:38:42Z, with 964ee2b. |
-| franciscouzo/square-packing@fa6237e | 304 | The source's index credits the packing to Kirill Tymchishin's Kaggle notebook "CPU Alternating Reclosure" v3 and claims no refinement of it; #763 does not claim the count. |
-| evand/square-packing@8a8879a | all | A publication in a watched repository with no issue, dated by its first commit (the owner, 2026-10-14); GitHub's activity log records it pushed at 2026-10-24T04:53:53Z. The source did not post it, since #763 already held the counts. |
+| franciscouzo/square-packing@fa6237e | all | A publication in a watched repository with no issue (the owner, 2026-10-14), dated by the push that made it public, 6b7391d..964ee2b at 2026-10-23T23:38:42Z in GitHub's activity log; committed at 18:59:39Z. |
+| franciscouzo/square-packing@fa6237e | 304 | The source's index credits the packing to Kirill Tymchishin's Kaggle notebook "CPU Alternating Reclosure" v3 and claims no refinement of it; #763 does not claim the count. Its manifest (certificates/best/manifest.json, witnesses/304) gives the notebook's previous source as Mykhailo Polkovskyi's 70a033f n304.cert (#593, T-186's packing), credited to Polkovskyi with construction credit to Nate Chaoweeraprasit, and the seed credit as Polkovskyi's. |
+| evand/square-packing@8a8879a | all | A publication in a watched repository with no issue (the owner, 2026-10-14), dated by the push that made it public, 5e862ac..8a8879a at 2026-10-24T04:53:53Z in GitHub's activity log; committed at 04:49:33Z. The source did not post it, since #763 already held the counts. |
 | evand/square-packing@8a8879a | 268 | The source calls it the exact descent of Vladislav Lavrentev's public Kaggle packing (lightningv08), which no report here holds; measured, a sibling placement of the arrangement T-240 also refines, not T-240's packing re-solved (the 24 October review of T-240, RF-6). |
 | evand/square-packing@8a8879a | 303 | The source calls it the exact descent of Chris Deotte's public Kaggle packing. |
+| evand/square-packing@8a8879a | 304 | The source calls it the exact descent of "the public Kaggle packing at 17.9268989004 (finder unknown; earliest public copy: kozykappa's notebook)". That the packing is fa6237e's is this record's measurement, and its finder Couzo's attribution; T-242 lists it as a regularization of T-241 on that measured basis. |
 
 ## Lane Cross-Check
 

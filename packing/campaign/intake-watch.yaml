@@ -1472,7 +1472,10 @@ repositories:
     bead: think-gn29
     note: >-
       The six commits past the 6b7391d read. efef7d1, fa6237e and 964ee2b, pushed together
-      at 2026-10-23T23:38:42Z, are #763's, whose import (think-ptkk) pins 964ee2b.
+      at 2026-10-23T23:38:42Z, are #763's, whose import (think-ptkk) pins 964ee2b. fa6237e
+      also first publishes certificates/best/n304.cert, which #763 does not claim: the
+      couzo-n304-2026-10-23 packet pins it against the issue-763 packet's copy, and T-241
+      registers it, dated by that push (think-l49q).
       43f666c, 73eac5b and 1c17153 were pushed together at 2026-10-24T06:10:44Z. 43f666c
       lowers certified_bounds.json at 957 counts, each below #763's side and every bound
       this record held: at or below 1024, 108 own-count certificates at 330 to 997, a
@@ -1490,4 +1493,4 @@ repositories:
       1413 and 1489; the three commits state the kind of every external gzip hash; and
       73eac5b and 1c17153 change no bound. Couzo's comments of 24 October on #678 and #715
       report these corrections, which the records change of think-mdfr reads. Nothing else
-      to import.
+      to import besides fa6237e's 304, imported as T-241.

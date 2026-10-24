@@ -11,7 +11,7 @@ reports:
   url: https://github.com/franciscouzo/square-packing/tree/fa6237e288cf3fc53b53fc43438c91f3f59c40e9
   kind: publication
   holders: Kirill Tymchishin, certified by Francisco Couzo
-  reported_at: '2026-10-23T18:59:39Z'
+  reported_at: '2026-10-23T23:38:42Z'
   bead: think-l49q
   claims:
   - n: 304
@@ -23,20 +23,24 @@ reports:
     first_committed: '2026-10-23T18:59:39Z'
     measured:
       against: T-186
-      finding: nearest centres match one to one under no symmetry; an optimal assignment moves
-        54 squares beyond 0.1 (largest 1.13) and turns squares by up to 26.0 degrees
+      finding: nearest centres match one to one under no symmetry; an optimal assignment,
+        best under the diagonal reflection, keeps 250 of 304 squares within 0.1 and moves
+        54 beyond it (largest 1.13), turning squares by up to 26.0 degrees
       source: packing/resources/web/evand-kaggle-descents-2026-10-24/measure/identity.json
     note: 'The source''s index credits the packing to Kirill Tymchishin''s Kaggle notebook
       "CPU Alternating Reclosure" v3 and claims no refinement of it; #763 does not claim the
-      count.'
-  note: A publication in a watched repository with no issue, dated by its first commit (the
-    owner, 2026-10-14); GitHub's activity log records it pushed at 2026-10-23T23:38:42Z, with
-    964ee2b.
+      count. Its manifest (certificates/best/manifest.json, witnesses/304) gives the notebook''s
+      previous source as Mykhailo Polkovskyi''s 70a033f n304.cert (#593, T-186''s packing),
+      credited to Polkovskyi with construction credit to Nate Chaoweeraprasit, and the seed
+      credit as Polkovskyi''s.'
+  note: A publication in a watched repository with no issue (the owner, 2026-10-14), dated
+    by the push that made it public, 6b7391d..964ee2b at 2026-10-23T23:38:42Z in GitHub's
+    activity log; committed at 18:59:39Z.
 - report: evand/square-packing@8a8879a
   url: https://github.com/evand/square-packing/tree/8a8879a2972c32cbd2d906049228cc9f0762b02a
   kind: publication
   holders: Evan Daniel (evand)
-  reported_at: '2026-10-24T04:49:33Z'
+  reported_at: '2026-10-24T04:53:53Z'
   bead: think-l49q
   claims:
   - n: 268
@@ -67,22 +71,20 @@ reports:
     printed: 1792689890035674158972360842897/100000000000000000000000000000
     rounding: exact
     first_committed: '2026-10-24T04:49:33Z'
-    refines:
-      packing_of: Kirill Tymchishin
-      entry: franciscouzo/square-packing@fa6237e
-      source: 'the commit: "s304_pub: the public Kaggle packing at 17.9268989004 (finder unknown;
-        earliest public copy: kozykappa''s notebook)"; its input, s304_pub.input.txt, is fa6237e''s
-        packing within 2.05e-9 (measured), which Francisco Couzo''s index credits to Kirill
-        Tymchishin''s Kaggle notebook'
     measured:
       against: franciscouzo/square-packing@fa6237e
       finding: nearest centres one to one under the identity; none beyond 1e-3, 73 beyond
         1e-6 (largest 4.60e-4), largest turn 0.019 degrees; the source's input is that packing
         to 2.05e-9
       source: packing/resources/web/evand-kaggle-descents-2026-10-24/measure/identity.json
-  note: 'A publication in a watched repository with no issue, dated by its first commit (the
-    owner, 2026-10-14); GitHub''s activity log records it pushed at 2026-10-24T04:53:53Z.
-    The source did not post it, since #763 already held the counts.'
+    note: 'The source calls it the exact descent of "the public Kaggle packing at 17.9268989004
+      (finder unknown; earliest public copy: kozykappa''s notebook)". That the packing is
+      fa6237e''s is this record''s measurement, and its finder Couzo''s attribution; T-242
+      lists it as a regularization of T-241 on that measured basis.'
+  note: 'A publication in a watched repository with no issue (the owner, 2026-10-14), dated
+    by the push that made it public, 5e862ac..8a8879a at 2026-10-24T04:53:53Z in GitHub''s
+    activity log; committed at 04:49:33Z. The source did not post it, since #763 already held
+    the counts.'
 exceptions: []
 key_reason_candidates: []
 other_items: []

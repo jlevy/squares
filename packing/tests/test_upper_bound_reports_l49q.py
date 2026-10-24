@@ -15,6 +15,7 @@ network.
 
 from __future__ import annotations
 
+import gzip
 import hashlib
 import json
 import shutil
@@ -89,6 +90,33 @@ def test_a_twin_that_is_not_the_pinned_bytes_is_refused(tmp_path: Path) -> None:
     outside: acquire_source.PinnedOnly = {**item, "identical_to": str(tmp_path / "n304.cert")}
     with pytest.raises(reports.ReportError, match="private repository file"):
         reports._upstream(source, {CERT: outside}, CERT)  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+
+
+#: An original-gzip twin: the 20 October packet keeps n-204.cert.gz as the upstream bytes.
+GZ_PATH = "search/regularize/lists/certs/n-204.cert.gz"
+GZ_TWIN = f"packing/resources/web/evand-regularized-2026-10-20/source/{GZ_PATH}"
+
+
+def test_an_original_gzip_twin_is_read_as_custody_reads_it() -> None:
+    """A twin that is an original gzip is held to its digest as stored, the bytes the custody
+    check compares, then decompressed as `_read` returns a retained ``.gz``; held to the
+    digest of its decompressed bytes instead, it is refused (review A9 of #792)."""
+    source = reports.REPO / reports.acquisition(reports.packet_path(COUZO))["archived_path"]
+    stored = (reports.REPO / GZ_TWIN).read_bytes()
+    item: acquire_source.PinnedOnly = {
+        "path": GZ_PATH,
+        "bytes": len(stored),
+        "sha256": hashlib.sha256(stored).hexdigest(),
+        "reason": "a test",
+        "identical_to": GZ_TWIN,
+    }
+    assert acquire_source.twin_bytes(GZ_TWIN, reports.REPO) == stored
+    read = reports._upstream(source, {GZ_PATH: item}, GZ_PATH)  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+    assert read == gzip.decompress(stored)
+    assert read.startswith(b"# exact certificate")
+    wrong: acquire_source.PinnedOnly = {**item, "sha256": hashlib.sha256(read).hexdigest()}
+    with pytest.raises(reports.ReportError, match="not the bytes the packet pins"):
+        reports._upstream(source, {GZ_PATH: wrong}, GZ_PATH)  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
 
 
 def test_a_changed_copy_in_the_issue_763_packet_fails_custody(

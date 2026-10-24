@@ -322,7 +322,7 @@ def _original_gzip_twin(twin: str, root: Path) -> bool:
     )
 
 
-def _twin_bytes(twin: str, root: Path) -> bytes:
+def twin_bytes(twin: str, root: Path) -> bytes:
     """The upstream bytes of the retained file ``twin``: as stored for an original gzip,
     and otherwise plain or decompressed from ``X.gz`` (`read_retained_bytes`)."""
     path = root / twin
@@ -454,7 +454,7 @@ def acquire(packet: Path, checkout: Path, root: Path) -> Source:
         twin = _twin(rule, path, root)
         if twin is not None:
             _require(
-                _twin_bytes(twin, root) == contents[path],
+                twin_bytes(twin, root) == contents[path],
                 f"{path} is not the bytes of {twin}",
             )
             item["identical_to"] = twin
@@ -558,7 +558,7 @@ def _pinned_problems(
         if twin is None:
             continue
         try:
-            same = _sha256(_twin_bytes(twin, root)) == item["sha256"]
+            same = _sha256(twin_bytes(twin, root)) == item["sha256"]
         except OSError, ValueError, EOFError, zlib.error:
             same = False
         if not same:

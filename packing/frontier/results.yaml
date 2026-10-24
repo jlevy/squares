@@ -33713,11 +33713,11 @@ results:
       standing case is unchanged pending independent review and record review.
 
       It is certificates/best/n304.cert in Francisco Couzo's watched repository
-      (https://github.com/franciscouzo/square-packing), first committed on 23 October 2026
-      and pushed at 23:38:42Z with the release issue 763 names. The issue does not claim
-      this count, and no issue reports it, so it is a report from its publication (the
-      owner, 14 October 2026). The issue-763 packet retains the file byte-identical, and
-      this import reads it from there.
+      (https://github.com/franciscouzo/square-packing), committed on 23 October 2026 and
+      made public by the push at 23:38:42Z that also carried the release issue 763 names, by
+      which the record dates it. The issue does not claim this count, and no issue reports
+      it, so it is a report from its publication (the owner, 14 October 2026). The issue-763
+      packet retains the file byte-identical, and this import reads it from there.
 
       The source's certified_bounds.json records the certificate as verified, 'valid': true,
       4297 pairs tested, with 'GMP exact rationals via gmpy2 2.3.2'. Those statements are the
@@ -33727,9 +33727,16 @@ results:
       (kirilltym), Kaggle "CPU Alternating Reclosure" v3; earlier construction credits in its
       source notices; earlier seed and construction credits retained in provenance",
       certified by Francisco Couzo (https://github.com/franciscouzo/square-packing), who
-      claims no refinement of it. The notebook's source notices are not published, and Evan
-      Daniel's later certificate of the same packing (T-242) says its finder is unknown and
-      its earliest public copy is kozykappa's notebook; both authors are asked.
+      claims no refinement of it.
+
+      The provenance that line defers to is the source's witness manifest: its 304 entry gives the notebook's previous source as Mykhailo
+      Polkovskyi's #593 certificate, T-186's packing, credited to Polkovskyi with
+      construction credit to Nate Chaoweeraprasit, and its seed credit as Polkovskyi's. So
+      the chain the source states is Tymchishin's notebook after Polkovskyi's packing, built
+      on Chaoweeraprasit's construction. The notebook's own source notices are not
+      published. Evan Daniel's later certificate of the same packing (T-242) calls its
+      finder unknown and its earliest public copy kozykappa's notebook; both authors are
+      asked.
     scope: {n_values: [304]}
     verification: V0
     confirmation: C0
@@ -33737,10 +33744,13 @@ results:
       score: 3
       rationale: >-
         Draft, from the stage 1 triage (think-6r5p): a smaller finite construction side at
-        304, 2.53e-03 below the house T-186 and every report there, an arrangement no symmetry
-        pairs one to one with the house's (an optimal assignment moves 54 squares beyond a
-        tenth, the largest 1.13), far above T-226's 1.88e-05 at the low end of S3. The stage 4
-        review confirms or changes the score. No lower bound or optimum.
+        304, 2.53e-03 below the house T-186 and every report there, far above T-226's 1.88e-05
+        at the low end of S3. The source's lineage starts from the house's own packing: its
+        manifest names Polkovskyi's T-186 certificate as the notebook's previous source, and
+        under the diagonal reflection 250 of 304 squares stay within a tenth of it. The 54
+        others (the largest 1.13) are a re-closure beyond the record's refinement threshold,
+        so it is another arrangement found from the house's. The stage 4 review confirms or
+        changes the score. No lower bound or optimum.
       scored: '2026-10-24'
       by: >-
         the stage 1 triage of 24 October (c-triage-watch-1024, think-6r5p) and the records
@@ -33787,10 +33797,16 @@ results:
 
       Measured pose by pose (measure/identity.json in the evand-kaggle-descents-2026-10-24
       packet; a measurement, which decides nothing): nearest centres pair it with T-186's
-      packing under no symmetry, and an optimal assignment moves 54 squares beyond a tenth,
-      the largest 1.13, and turns squares by up to 26.0 degrees, so it is another
-      arrangement than the house's. The binary64 packing Evan Daniel's source publishes as
-      the public Kaggle packing at 304 is this certificate's packing to 2.05e-9.
+      packing one to one under no symmetry, and the optimal assignment, best under the
+      diagonal reflection, keeps 250 of the 304 squares within a tenth of T-186's and moves
+      54 beyond it, the largest 1.13, turning squares by up to 26.0 degrees. That fits the
+      lineage the source's manifest states, a re-closure of the house's packing; with 54
+      squares beyond a tenth it is another arrangement, found from the house's, not a
+      refinement of it.
+
+      The binary64 packing Evan Daniel's source publishes as the public Kaggle packing at 304 is this certificate's packing to 2.05e-9, of the order of the
+      manifest's witness dilation of 1 + 1e-10, which moves a centre by at most about
+      2.5e-9 in this box.
 
       The source's own checkers were not run here. The two maintained routes, the sqpack
       rational witness verifier and the independent rational corner checker, share
@@ -33827,9 +33843,9 @@ results:
 
       Each certificate's JSON report states it valid (cert_valid) at 80 digits, its least
       wall and pair clearances (5e-21 and about 1e-20), and S_exact, the side of a
-      Newton-converged KKT point of the descent, which the certificate's side lies above by
-      about 1.7e-22 at 268 and 1.8e-22 at 304. Those statements are the author's; no source
-      program ran here.
+      Newton-converged KKT point of the descent. Those statements are the author's; no source
+      program ran here. From the two sides it states, the certificate's side lies above
+      S_exact by about 1.7e-19 at 268 and 1.8e-19 at 304, a relative padding of 1e-20.
 
       Credit at 268 Vladislav Lavrentev's public Kaggle packing, as the source credits it:
       "Vladislav Lavrentev's (Kaggle lightningv08) public packing, exact descent
@@ -33840,8 +33856,9 @@ results:
       At 304 credit the packing T-241 certifies, which the source calls "the public Kaggle
       packing at 17.9268989004 (finder unknown; earliest public copy: kozykappa's notebook)"
       and Francisco Couzo's index credits to Kirill Tymchishin's Kaggle notebook "CPU
-      Alternating Reclosure" v3; measured here, the source's input is that packing to
-      2.05e-9. Evan Daniel descended each exactly to the side stated and wrote the
+      Alternating Reclosure" v3, after Mykhailo Polkovskyi's packing and Nate
+      Chaoweeraprasit's construction, as T-241 records; measured here, the source's input is
+      that packing to 2.05e-9. Evan Daniel descended each exactly to the side stated and wrote the
       certificate. The source's credits say its work was produced by Claude (Anthropic) under
       human direction.
     scope: {n_values: [268, 304]}
