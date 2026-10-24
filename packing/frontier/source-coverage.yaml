@@ -9748,6 +9748,134 @@ sources:
     constructions with no certificate file and deletions from Friedman's constructions
     (beyond_horizon_replay.WALKS). The 5,078 rows above 1024 wait on the owner (think-f2io).
   claims_record: resources/web/mishapolk-issue732-2026-10-22/acquisition/beyond-horizon-rows.json
+- id: wand125-n21-zero-margin-lean-2026-09-29
+  title: Hosono's hypothesis-free Lean proof of the point-only s(21) = 5
+  role: source-repository
+  url: https://github.com/wand125/square-packing-bounds/tree/77636c63f45a90d9a829417a1722a3bf9bfef37d/point_n21_L5/lean/zero-margin
+  local: resources/web/wand125-n21-zero-margin-lean-2026-09-29/
+  source_key: '[wand125 n21 zero-margin Lean 2026-09-29]'
+  scope:
+    n_values: [21]
+  reviewed: '2026-10-23'
+  source_date: '2026-09-29'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  evidence:
+  - E-n021-wand125-zero-margin-lean-report
+  notes: >-
+    wand125/square-packing-bounds at 77636c63, 29 September 2026: SquarePacking.n21pts_eq_5 :
+    minSide 21 = 5 with no hypothesis, on Evan Daniel's zero-margin box tree over the
+    capture-one normalisation of T-055's point-only cover; the 66 generated files are not
+    published, and data-sha256.txt lists them. MIT. The packet retains the zero-margin
+    directory and the three READMEs the commit changed, and pins the certificate and the two
+    licences as byte-identical to earlier packets; the library at evand 6aa82ba4 is retained
+    byte for byte in earlier evand packets. T-234 records it as a formalization of T-055. Not
+    built here (think-tpbd); the case record is unchanged.
+- id: wand125-n59-lean-kernel-2026-10-11
+  title: Hosono's Lean kernel proof of s(59) = 8
+  role: source-repository
+  url: https://github.com/wand125/square-packing/tree/f9a77b7d38fd60144b78fe290c94f841ab626156/problems/square-lower-bounds/certificates/k2m5_n59_L8/lean
+  local: resources/web/wand125-n59-lean-kernel-2026-10-11/
+  source_key: '[wand125 n59 Lean kernel 2026-10-11]'
+  scope:
+    n_values: [59]
+  reviewed: '2026-10-23'
+  source_date: '2026-10-11'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  evidence:
+  - E-n059-wand125-lean-kernel-report
+  notes: >-
+    wand125/square-packing at f9a77b7, 11 October 2026: SquarePacking.s59_eq_8 : minSide 59 = 8
+    on T-066's mixed cover and Evan Daniel's mixed-measure checker at evand 1718a580, used
+    unchanged, over 43,444 generated files the source does not publish. MIT. The packet
+    retains the Lean directory's built files, scripts, batch list and the source's per-task
+    receipt (862 CPU-hours), and pins SOURCES.sha256 and INDEX.json by digest; the library's
+    19 closure modules are retained byte for byte in the 7 October evand packet. T-235 records
+    it as a formalization of T-066. Not built here (think-cs9x, held); the case record is
+    unchanged.
+- id: evand-fang-ryu-lean-2026-10-18
+  title: Daniel's Lean proofs of Fang's Theorems 1 and 2 and of Ryu's Theorem 1.4
+  role: source-repository
+  url: https://github.com/evand/square-packing/tree/8475bdf41571c59c8c240aedaddc48e19e0e4707/lean/Sqpack
+  local: resources/web/evand-fang-ryu-lean-2026-10-18/
+  source_key: '[Daniel Fang and Ryu Lean 2026-10-18]'
+  scope:
+    n_values: [211, 241, 273, 307]
+  reviewed: '2026-10-23'
+  source_date: '2026-10-18'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - frontier/asymptotic-waste-bounds.yaml
+  evidence:
+  - E-fang-theorems-daniel-lean-report
+  notes: >-
+    evand/square-packing at 8475bdf, 18 October 2026, with its parent f4883b41: unconditional
+    Lean proofs of Kevin Fang's Theorems 1 and 2 (T-163) on 18 exact piece certificates, and
+    of Sungjoon Ryu's c*(k) <= 8 ceil(sqrt(k - 4)) - 1 for every k >= 6 with no certificates.
+    MIT. The 18 generated piece modules are gitignored upstream; the packet retains the
+    theorem modules, the rest of their closure not retained elsewhere, the generator and the
+    seven certificates of Daniel's, and pins the others as byte-identical to earlier packets.
+    T-236 records Fang's as a formalization of T-163; Ryu's settles no count n <= 324 and is
+    noted on the asymptotic register's row. Not built here (think-dgrc).
+- id: evand-rect-small-n-lean-2026-10-22
+  title: Daniel's Lean proofs for two to five unit squares in a rectangle
+  role: source-repository
+  url: https://github.com/evand/square-packing/tree/7051f4eabf7f9b2509ad1e7cc296f57d19482027/lean/Sqpack
+  local: resources/web/evand-rect-small-n-lean-2026-10-22/
+  source_key: '[Daniel small-n rectangles Lean 2026-10-22]'
+  scope:
+    n_values: [2, 3, 4, 5]
+  reviewed: '2026-10-23'
+  source_date: '2026-10-21'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/evand-rect-small-n-lean-2026-10-22/README.md
+  evidence:
+  - E-small-n-daniel-rect-lean-report
+  notes: >-
+    evand/square-packing at 7051f4e, the theorems of 21 October 2026: rect2_iff, rect3_iff,
+    rect4_iff, rect5_pts_lower and rect5_upper in Lean, which at equal sides give s(2) =
+    s(3) = s(4) = 2 and s(5) = 2 + 1/sqrt 2; no theorem states s(n). MIT. The packet retains
+    the closure of the five modules and the notes that derive them. A second machine route
+    after chelokot's, registered with it as T-238, a formalization of T-237, by the owner's
+    decision of 24 October (think-4o9c). Not built here (think-tq3g); the case records are
+    unchanged.
+- id: chelokot-small-n-lean-2026-09-05
+  title: chelokot's Lean proofs that s(2) = s(3) = s(4) = 2 and s(5) = 2 + sqrt 2 / 2
+  role: source-repository
+  url: https://github.com/chelokot/square-packing-archive/tree/753079eb37d8d16225a5dc1f56e493a3c3b243f4/formal/SquarePackingArchive/Records
+  local: resources/web/chelokot-small-n-lean-2026-09-05/
+  source_key: '[chelokot small-n Lean 2026-09-05]'
+  scope:
+    n_values: [2, 3, 4, 5]
+  reviewed: '2026-10-24'
+  source_date: '2026-09-05'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/chelokot-small-n-lean-2026-09-05/README.md
+  evidence:
+  - E-small-n-chelokot-lean-report
+  notes: >-
+    chelokot/square-packing-archive at 753079eb, the commit the Nagamochi counterexample's
+    coverage entry pins: Records.Square5.s5_eq_goebel (29 August 2026), by Friedman's four
+    unavoidable points, and s2_eq_two, s3_eq_two and s4_eq_two (16 August) in Lean.
+    Apache-2.0. The packet retains Square5.lean, NearSquare.lean, SquareNumbers.lean and
+    their closure with the licence. The first machine route to these values, registered
+    with Daniel's as T-238, a formalization of T-237, by the owner's decision of 24 October
+    (think-4o9c). This repository built the archive at the pin on 2 October for T-086, and
+    that build's log prints these theorems' axioms; no receipt names them yet
+    (think-tq3g). The case records are unchanged.
 
 selected_overrides:
 - n: 29

@@ -1,0 +1,95 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-23T06:23Z",
+  "git_scope": "A blobless clone of evand/square-packing, whose head is 7982d7a9 (22 October 2026), with a sparse checkout of the pin 7051f4e, the head the intake read of 22 October stopped at. The scope is the import closure, read by devtools.lean_closure, of the four modules whose theorems bear on squares in a square, Rect (rect2_iff), Rect3 (rect3_iff), Rect4 (rect4_iff), Rect5Pts (rect5_pts_lower) and Rect5Pack (rect5_upper); the three build pins, the root module and the axiom probe; the two literature notes and the two search notes that state and derive these theorems; and the root LICENSE, CREDITS.md and README.md. The rest of the R_5 development (rect5_iff and its generated strip certificates) and the strip work after the pin are rectangles, outside this record, and are pinned by the commit only. Nothing in the tree was executed.",
+  "sources": [
+    {
+      "id": "evand-square-packing",
+      "source_url": "https://github.com/evand/square-packing",
+      "source_ref": "7051f4eabf7f9b2509ad1e7cc296f57d19482027",
+      "source_commit": "7051f4eabf7f9b2509ad1e7cc296f57d19482027",
+      "committed_utc": "2026-10-22T01:54:20Z",
+      "git_tree": "95e42aeeee83281d5f963da6f8d0ce70d1515956",
+      "archived_path": "packing/resources/web/evand-rect-small-n-lean-2026-10-22/square-packing",
+      "subtree_manifest": "packing/resources/web/evand-rect-small-n-lean-2026-10-22/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "LICENSE",
+        "CREDITS.md",
+        "README.md",
+        "lean/lean-toolchain",
+        "lean/lakefile.toml",
+        "lean/lake-manifest.json",
+        "lean/Sqpack.lean",
+        "lean/Axioms.lean",
+        "literature/s5-proofs-2026-10-21.md",
+        "literature/rectangles-small-n-2026-10-20.md",
+        "search/rectfront/RECTFRONT.md",
+        "search/rectfront/r5pts/R5PTS.md",
+        "lean/Sqpack/Basic.lean",
+        "lean/Sqpack/Rect.lean",
+        "lean/Sqpack/RectChain.lean",
+        "lean/Sqpack/Rect3.lean",
+        "lean/Sqpack/Rect4.lean",
+        "lean/Sqpack/Rect4Core.lean",
+        "lean/Sqpack/Rect5Pts.lean",
+        "lean/Sqpack/Rect5Pack.lean"
+      ],
+      "subtree_file_count": 20,
+      "subtree_total_bytes": 265989,
+      "retained_file_count": 14,
+      "retained_total_bytes": 224993,
+      "compressed": [],
+      "pinned_only": [
+        {
+          "path": "CREDITS.md",
+          "bytes": 7501,
+          "sha256": "778884d09f88ce159ea2cea2134d30fb14bf01bf58fc9e69c6f3d77433da8168",
+          "reason": "Retained byte-identical by the 12 October exact-data packet",
+          "identical_to": "packing/resources/web/evand-exact-data-2026-10-12/source/CREDITS.md"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1068,
+          "sha256": "c51886c0f7e6724a7d89fc22cb237a1688ba1bbff04cb21a13b8e1a01fb15578",
+          "reason": "Retained byte-identical by the 12 October exact-data packet",
+          "identical_to": "packing/resources/web/evand-exact-data-2026-10-12/source/LICENSE"
+        },
+        {
+          "path": "lean/Sqpack/Basic.lean",
+          "bytes": 28915,
+          "sha256": "791251935fb06925464828b9ec7c565dfb43539a5b8bf34cb153ff2b87160ea3",
+          "reason": "Retained byte-identical by the 7 October exact-and-local-reports packet",
+          "identical_to": "packing/resources/web/evand-exact-and-local-reports-2026-10-07/source/s12/lean/Sqpack/Basic.lean"
+        },
+        {
+          "path": "lean/lake-manifest.json",
+          "bytes": 3140,
+          "sha256": "b9b5f5bed3f50b33689db9c81ab08edde808022c86cd35f0f97f6e860902c672",
+          "reason": "Retained byte-identical by the 7 October exact-and-local-reports packet",
+          "identical_to": "packing/resources/web/evand-exact-and-local-reports-2026-10-07/source/s12/lean/lake-manifest.json"
+        },
+        {
+          "path": "lean/lakefile.toml",
+          "bytes": 347,
+          "sha256": "87f83bdcb6d964d664cc1a06604c847c13c430e9505d0cae41d73e31c338bb5a",
+          "reason": "Retained byte-identical by the 7 October exact-and-local-reports packet",
+          "identical_to": "packing/resources/web/evand-exact-and-local-reports-2026-10-07/source/s12/lean/lakefile.toml"
+        },
+        {
+          "path": "lean/lean-toolchain",
+          "bytes": 25,
+          "sha256": "3aac669c7a910ec2389f4e4f921b605adf6ebf2d1e0c9b9cd0be4d33f3f5db71",
+          "reason": "Retained byte-identical by the 7 October exact-and-local-reports packet",
+          "identical_to": "packing/resources/web/evand-exact-and-local-reports-2026-10-07/source/s12/lean/lean-toolchain"
+        }
+      ],
+      "license": "MIT, Copyright (c) 2026 Evan Daniel (LICENSE). Rect4.lean credits the R_4 boundary to Friedman's Math Magic of June 2010, mostly Morandi; Rect5Pts.lean credits piece 4.5 of S_4 to Friedman and s(5) >= 2 + 1/sqrt 2 to Goebel 1979; literature/s5-proofs-2026-10-21.md finds chelokot's Lean s5_eq_goebel the earlier formalization of s(5). CREDITS.md says the work was produced by Claude (Anthropic) under human direction.",
+      "claims": [
+        "lean/Sqpack/Rect.lean defines RectPacks n w h, n closed unit squares (any angles) in [0,w] x [0,h] with pairwise disjoint interiors, from Basic.lean's sq and sqInt, and states theorem SquarePacking.rect2_iff {w h : \u211d} : RectPacks 2 w h \u2194 1 \u2264 w \u2227 1 \u2264 h \u2227 (2 \u2264 w \u2228 2 \u2264 h) (74937b01, 2026-10-21T04:34:52Z).",
+        "Rect3.lean states rect3_iff {w h : \u211d} : RectPacks 3 w h \u2194 1 \u2264 w \u2227 1 \u2264 h \u2227 ((2 \u2264 w \u2227 2 \u2264 h) \u2228 3 \u2264 w \u2228 3 \u2264 h \u2228 (h < 2 \u2227 4 + 2\u221a2 \u2264 w + 2h) \u2228 (w < 2 \u2227 4 + 2\u221a2 \u2264 h + 2w)) (b7d9b1bf, 2026-10-21T14:23:57Z), and Rect4.lean rect4_iff {w h : \u211d} : RectPacks 4 w h \u2194 1 \u2264 w \u2227 1 \u2264 h \u2227 ((2 \u2264 w \u2227 2 \u2264 h) \u2228 4 \u2264 w \u2228 4 \u2264 h \u2228 (h < 2 \u2227 Fried4 w h) \u2228 (w < 2 \u2227 Fried4 h w)) (ee4d2cce, 2026-10-21T16:05:00Z), Friedman's piece of S_3; at w = h they give s(2) = s(3) = s(4) = 2.",
+        "Rect5Pts.lean states rect5_pts_lower {a b : \u211d} (ha : 2 \u2264 a) (hb : 2 \u2264 b) (ha' : a < 2\u221a2) (hb' : b < 2\u221a2) (hab : a + b < 4 + \u221a2) : \u00ac RectPacks 5 a b, by four unavoidable points, and Rect5Pack.lean rect5_upper, whose case 2 \u2264 w \u2227 2 \u2264 h \u2227 4 + \u221a2 \u2264 w + h packs five squares at w = h = 2 + 1/\u221a2 (e96ab691, 2026-10-21T20:10:45Z). At a = b they give s(5) = 2 + 1/\u221a2 for sides at least 2; no theorem states minSide or s(5) itself.",
+        "lean/Axioms.lean is the source's probe that prints each headline theorem's axioms, rect2_iff, rect3_iff, rect4_iff, rect5_upper and rect5_pts_lower among them; the commit messages of b7d9b1bf and ee4d2cce say standard axioms. No axiom output or build log is published."
+      ]
+    }
+  ]
+}
