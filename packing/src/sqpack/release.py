@@ -8349,7 +8349,10 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "once with that main's result-requests.yaml swapped in: all 43 files "
             "byte-identical across the three, and again twice from this tree after the "
             "#715 and #719 follow-ups and the #732 import reply were recorded, both "
-            "byte-identical to that render. No PDF was printed; it prints from that "
+            "byte-identical to that render. Measured last after the merge of main "
+            "11d0ab06b (#770), at link revision 11d0ab06, twice from this tree and once "
+            "with that main's result-requests.yaml swapped in: all 43 files "
+            "byte-identical across the three. No PDF was printed; it prints from that "
             "HTML. Retain v0.2.7."
         ),
     ),
