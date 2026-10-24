@@ -193,14 +193,14 @@ def test_a_notebook_row_is_below_goebel_and_no_earlier_publication() -> None:
         credit: str = other,
         earlier: frozenset[tuple[int, Fraction]] = frozenset(),
     ) -> bool:
-        found = claims.others({str(n): _entry(n, side, credit)}, witnesses, earlier)
+        found = claims.others({str(n): _entry(n, side, credit)}, witnesses, earlier, {})
         return [item["n"] for item in found] == [n]
 
     assert taken(below)
     assert not taken(above)
     assert not taken(below, earlier=frozenset({(n, below)}))
     assert not taken(below, credit="Francisco Couzo")
-    (item,) = claims.others({str(n): _entry(n, below, other)}, witnesses, frozenset())
+    (item,) = claims.others({str(n): _entry(n, below, other)}, witnesses, frozenset(), {})
     assert item["notebook"] == witnesses[str(n)]["provenance"]["source_provenance"]
     assert item["goebel"]["bound"] == goebel.literal()
 
@@ -216,10 +216,35 @@ def test_a_notebook_row_needs_the_manifest_to_name_its_certificate() -> None:
     entry = _entry(n, side, "alexchilton")
     wrong = _notebook(n) | {"certificate": "certificates/best/n401.cert"}
     with pytest.raises(claims.ClaimError, match="names another certificate"):
-        claims.others({str(n): entry}, {str(n): wrong}, frozenset())
+        claims.others({str(n): entry}, {str(n): wrong}, frozenset(), {})
     bare = _notebook(n) | {"provenance": {"source_provenance": {}}}
     with pytest.raises(claims.ClaimError, match="no notebook and run"):
-        claims.others({str(n): entry}, {str(n): bare}, frozenset())
+        claims.others({str(n): entry}, {str(n): bare}, frozenset(), {})
+
+
+def test_a_notebook_recipe_names_the_one_parent_certificate_at_its_side() -> None:
+    """A notebook recipe's row names the one retained certificate under
+    ``certificates/parents/`` whose header states its count and exact side (#795's review A,
+    A2); none, or two, is refused rather than chosen."""
+    from devtools import intake_ledger  # noqa: PLC0415
+
+    n = 445
+    form = intake_ledger.goebel_form(n)
+    side = Fraction(claims.Bound(Fraction(form.p), Fraction(form.q)).ceiling()) - 1
+    recipe = {"kind": "square tiling and L-border", "source_n": 400, "tiles_per_side": 1}
+    entry = _entry(n, side, "Kirill Tymchishin") | {
+        "kind": "construction",
+        "source_n": 400,
+        "certificate": "certificates/best/n400.cert",
+        "construction": recipe | {"layers": 1, "capacity": n},
+    }
+    witnesses = {"400": _notebook(400)}
+    parent = "certificates/parents/" + "a" * 64 + ".cert"
+    (item,) = claims.others({str(n): entry}, witnesses, frozenset(), {(n, side): [parent]})
+    assert item["recipe_certificate"] == parent
+    for found in ({}, {(n, side): [parent, parent.replace("a", "b")]}):
+        with pytest.raises(claims.ClaimError, match="retained parents state"):
+            claims.others({str(n): entry}, witnesses, frozenset(), found)
 
 
 def test_the_notebook_rows_are_the_triage_s_99() -> None:
@@ -235,3 +260,8 @@ def test_the_notebook_rows_are_the_triage_s_99() -> None:
     assert {item["n"] for item in record["others"]}.isdisjoint(
         {item["n"] for item in record["claims"]} | set(record["summary"]["unrequested"])
     )
+    # Each recipe's own certificate is retained and states exactly its count and side.
+    recipes = claims.recipe_certificates()
+    for item in record["others"]:
+        if item["kind"] == "construction":
+            assert recipes[item["n"], Fraction(item["exact"])] == [item["recipe_certificate"]]

@@ -59,8 +59,12 @@ the source notices it cites. The rest of the rule, that each is strictly below t
 on ``main`` at its count, is the walk's, from starts frozen at ``main`` 2ec489d1e
 (``campaign/issue-intake/upper-bounds-couzo-964ee2b-notebooks-20261024``), which records
 every one. Read on 24 October 2026, the two together give 99 sides, 87 certificates and 12
-L-border recipes (`OTHERS_CONTROLS`, the stage 1 triage's counts); of the 169 certificates
-and constructions credited to others there, the other 70 are earlier publications.
+L-border recipes (`OTHERS_CONTROLS`, the stage 1 triage's counts); of the 149 certificates
+and constructions credited to others there that are below Göbel's construction, the other 50
+are earlier publications. Each recipe has a certificate of its own: the source keeps the
+recipe's full n-square expansion under ``certificates/parents/`` at exactly its side, which
+the row names (``recipe_certificate``, `recipe_certificates`; #795's review A, A2), and the
+walk reads the push commit by commit (``devtools.beyond_horizon_replay push-publications``).
 
 From ``packing/``, with the project interpreter::
 
@@ -138,12 +142,17 @@ EARLIER = (
     ROOT / "resources/web/mishapolk-issue732-f1ceee4-2026-10-23/receipts/later-commits.json",
 )
 #: The notebook rows the import takes (``others``), as the stage 1 triage counted them
-#: (think-lyf9): 99 sides, 87 certificates and 12 L-border recipes at these counts.
+#: (think-lyf9): 99 sides, 87 certificates and 12 L-border recipes at these counts, each
+#: recipe with a certificate of its own at exactly its side (#795's review A, A2).
 OTHERS_CONTROLS: dict[str, Any] = {
     "rows": 99,
     "certificates": 87,
     "constructions": [445, 488, 580, 679, 732, 787, 844, 859, 903, 913, 964, 967],
+    "recipe_certificates": 12,
 }
+#: Where the source keeps each certificate a later one replaced and each recipe's full
+#: n-square expansion, named by the SHA-256 of its bytes.
+PARENTS = "certificates/parents"
 #: What the receipt keeps of a notebook's provenance, as the manifest states it.
 NOTEBOOK_KEYS = (
     "notebook",
@@ -448,6 +457,18 @@ def earlier_sides(paths: tuple[Path, ...] = EARLIER) -> frozenset[tuple[int, Fra
     return frozenset(found)
 
 
+def recipe_certificates(archive: Path = ARCHIVE) -> dict[tuple[int, Fraction], list[str]]:
+    """The retained certificates under ``certificates/parents/``, by the count and exact side
+    each one's header states (its first line that is not a comment)."""
+    found: dict[tuple[int, Fraction], list[str]] = {}
+    for path in sorted((archive / PARENTS).glob("*.cert")):
+        lines = read_retained_text(path).splitlines()
+        header = next(line for line in lines if line.strip() and not line.startswith("#"))
+        n, side = header.split()
+        found.setdefault((int(n), Fraction(side)), []).append(f"{PARENTS}/{path.name}")
+    return found
+
+
 def notebook_of(entry: Mapping[str, Any], witnesses: Mapping[str, Any]) -> dict[str, Any]:
     """The notebook an entry's packing comes from, as the manifest states it for the
     certificate the entry reads: the witness at its own count, or, for a construction, at
@@ -470,10 +491,16 @@ def notebook_of(entry: Mapping[str, Any], witnesses: Mapping[str, Any]) -> dict[
 
 
 def other_row(
-    n: int, entry: Mapping[str, Any], witnesses: Mapping[str, Any], goebel: Bound
+    n: int,
+    entry: Mapping[str, Any],
+    witnesses: Mapping[str, Any],
+    goebel: Bound,
+    recipes: Mapping[tuple[int, Fraction], list[str]],
 ) -> dict[str, Any]:
-    """One notebook row as the receipt keeps it: the entry, its notebook and its margin
-    below Göbel's construction."""
+    """One notebook row as the receipt keeps it: the entry, its notebook, its margin below
+    Göbel's construction, and, for a recipe, the one retained certificate under
+    ``certificates/parents/`` that states exactly its count and side (`recipe_certificates`).
+    """
     side = Fraction(str(entry["bound"]))
     found: dict[str, Any] = {
         "n": n,
@@ -495,6 +522,9 @@ def other_row(
             key: recipe[key]
             for key in ("kind", "source_n", "tiles_per_side", "layers", "capacity")
         }
+        files = recipes.get((n, side), [])
+        _require(len(files) == 1, f"{n}: {len(files)} retained parents state the recipe's side")
+        found["recipe_certificate"] = files[0]
     return found
 
 
@@ -502,6 +532,7 @@ def others(
     certified: Mapping[str, Any],
     witnesses: Mapping[str, Any],
     earlier: frozenset[tuple[int, Fraction]],
+    recipes: Mapping[tuple[int, Fraction], list[str]],
 ) -> list[dict[str, Any]]:
     """The notebook rows the import takes: each certificate or construction beyond the
     corpus to ``LIMIT`` credited to another author, strictly below Göbel's construction at
@@ -521,7 +552,7 @@ def others(
         goebel = Bound(Fraction(form.p), Fraction(form.q))
         if not goebel.above(side) or (n, side) in earlier:
             continue
-        found.append(other_row(n, entry, witnesses, goebel))
+        found.append(other_row(n, entry, witnesses, goebel, recipes))
     return found
 
 
@@ -531,6 +562,7 @@ def others_summary(rows: list[dict[str, Any]]) -> dict[str, Any]:
         "rows": len(rows),
         "certificates": sum(1 for item in rows if item["kind"] != "construction"),
         "constructions": [item["n"] for item in rows if item["kind"] == "construction"],
+        "recipe_certificates": sum(1 for item in rows if "recipe_certificate" in item),
         "deletions": [item["n"] for item in rows if item["deleted_squares"]],
         "by_run": {
             str(run): count
@@ -556,7 +588,9 @@ def derive(archive: Path = ARCHIVE) -> dict[str, Any]:
     record = claim_map(certified, public)
     problems = control_problems(record)
     _require(not problems, "; ".join(problems))
-    rows = others(certified, read_witnesses(archive), earlier_sides())
+    rows = others(
+        certified, read_witnesses(archive), earlier_sides(), recipe_certificates(archive)
+    )
     record["others"] = rows
     record["summary"]["others"] = others_summary(rows)
     record["indexes"] = [*record["indexes"], MANIFEST]

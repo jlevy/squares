@@ -2319,19 +2319,23 @@ def test_releases_sharing_a_claim_map_claim_disjoint_counts(
         replay.claim_map_walk_sources(763, "2026-10-24")
 
 
-#: The notebook rows' walk (think-lyf9) and its two reports, one a commit.
+#: The walk of the push of 23:38:42Z at the notebook rows' counts (think-lyf9), its three
+#: reports one a commit, in commit order (#795's review A, A1).
 NOTEBOOKS = replay.ROOT / f"campaign/issue-intake/{replay.NOTEBOOKS_964}"
-#: The notebook rows' 12 recipes the walk records and holds (think-ww95).
+PUSH_REPORTS = (replay.NOTEBOOKS_EFEF7D1, replay.NOTEBOOKS_FA6237E, replay.NOTEBOOKS_964EE2B)
+#: The notebook rows' 12 recipes, each a certificate row of its own (#795's review A, A2).
 RECIPES_NOTEBOOKS = [445, 488, 580, 679, 732, 787, 844, 859, 903, 913, 964, 967]
-#: The rows the notebook rows' 87 certificates supersede, by the source that held each
-#: count; at 10 counts no row stood before them (Göbel's construction or the grid).
+#: Where efef7d1 restates an earlier publication rather than beating it (think-fwa9).
+RESTATED_AT_EFEF7D1 = [633, 791, 856, 919, 994]
+#: The rows the push's first recorded side at each count supersedes, by the source that held
+#: each; at 13 of the 99 counts no row stood before them (Göbel's construction or the grid).
 SUPERSEDED_BY_NOTEBOOKS = {
-    "mishapolk-issue732-f1ceee4-2026-10-23": 30,
+    "mishapolk-issue732-f1ceee4-2026-10-23": 32,
+    "couzo-index-2026-10-15": 13,
     "mishapolk-issue719-2026-10-22": 12,
-    "couzo-index-2026-10-15": 12,
     "mishapolk-issue732-2026-10-22": 8,
-    "couzo-reconcile-2026-10-20": 3,
-    "couzo-verified-bounds-2026-10-14": 3,
+    "couzo-reconcile-2026-10-20": 8,
+    "couzo-verified-bounds-2026-10-14": 4,
     "muglich-issue686-2026-10-19": 3,
     "couzo-extended-range-reports-2026-10-08": 1,
     "couzo-certificates-2026-10-12": 1,
@@ -2339,6 +2343,18 @@ SUPERSEDED_BY_NOTEBOOKS = {
     "couzo-issue670-2026-10-17": 1,
     "couzo-issue715-2026-10-21": 1,
     "couzo-issue678-2026-10-18": 1,
+}
+#: Each push release's rows: Couzo's own at efef7d1 and fa6237e and the seven notebook runs.
+PUSH_ROWS = {
+    "couzo-efef7d1-2026-10-23": 35,
+    "couzo-fa6237e-2026-10-23": 37,
+    "tymchishin-reclosure-v3-2026-10-23": 42,
+    "lavrentev-cuda-v11-2026-10-23": 11,
+    "tymchishin-22-3662-2026-10-23": 15,
+    "kyleluecke-inos-2026-10-23": 18,
+    "alexchilton-fault-line-2026-10-23": 11,
+    "aqibrazadev-blending-2026-10-23": 9,
+    "lavrentev-cuda-run-361589987-2026-10-23": 7,
 }
 
 
@@ -2350,38 +2366,91 @@ def _notebook_steps() -> dict[str, dict[int, dict[str, Any]]]:
     return steps
 
 
-def test_the_notebook_rows_are_two_reports_of_seven_sources() -> None:
-    """The 99 notebook sides of the claim map's ``others`` (think-lyf9) are two reports of the
-    walk, one a commit, both dated by the push of 23:38:42Z: 39 first committed at fa6237e
-    and 60 at 964ee2b. Every one is recorded; the 12 recipes are held, and the 87
-    certificates are declared rows of seven releases, one a notebook run, each its own
-    coverage source."""
+def _push_releases() -> list[replay.Release]:
+    return [item for item in replay.RELEASES.values() if item.walk == replay.NOTEBOOKS_964]
+
+
+def test_the_push_is_three_reports_in_commit_order() -> None:
+    """The push of 23:38:42Z is read commit by commit (#795's review A, A1): efef7d1 (40
+    sides), fa6237e (90) and 964ee2b (60) are three reports, all dated by the push and
+    walked in commit order at every count. The walk records all but five of efef7d1's,
+    which restate earlier publications, and holds none; each holder at each commit is a
+    release with its own coverage source, nine in all, whose rows are its walk's records."""
     steps = _notebook_steps()
-    fa, nb = steps[replay.NOTEBOOKS_FA6237E], steps[replay.NOTEBOOKS_964EE2B]
-    assert (len(fa), len(nb)) == (39, 60)
-    assert all(step["verdict"] == "recorded" for step in [*fa.values(), *nb.values()])
-    assert {step["reported_at"] for step in [*fa.values(), *nb.values()]} == {
+    ef, fa, nb = (steps[report] for report in PUSH_REPORTS)
+    assert (len(ef), len(fa), len(nb)) == (40, 90, 60)
+    assert {step["reported_at"] for mine in (ef, fa, nb) for step in mine.values()} == {
         replay.COUZO_763_PUSHED
     }
+    restated = sorted(n for n, step in ef.items() if step["verdict"] != "recorded")
+    assert restated == RESTATED_AT_EFEF7D1
+    assert all(step["verdict"] == "recorded" for step in [*fa.values(), *nb.values()])
+    for count in _read(NOTEBOOKS / "ledger.json")["counts"]:
+        order = [step["report"] for step in count["steps"] if step["report"] in PUSH_REPORTS]
+        assert order == sorted(order, key=PUSH_REPORTS.index)
     walk = replay.WALKS[replay.NOTEBOOKS_964]
-    held = {
-        n
-        for report, mine in ((replay.NOTEBOOKS_FA6237E, fa), (replay.NOTEBOOKS_964EE2B, nb))
-        for n in mine
-        if walk.holds(report, n) is not None
+    assert not any(report in walk.held for report in PUSH_REPORTS)
+    releases = _push_releases()
+    assert {item.source: item.rows for item in releases} == PUSH_ROWS
+    assert {item.label for item in releases} == set(PUSH_REPORTS)
+    for item in releases:
+        assert {row.n for row in replay.decided_claims(item)} == {
+            n
+            for n, step in steps[item.label].items()
+            if step["verdict"] == "recorded" and replay.release_at(walk, item.label, n) is item
+        }
+        assert item.first_commit == item.pin
+
+
+def test_each_notebook_recipe_is_a_certificate_row_of_its_own() -> None:
+    """Each of the 12 notebook recipes is recorded at its exact side from the n-square
+    certificate 964ee2b keeps under ``certificates/parents/``, the one the claim map names
+    (#795's review A, A2), and the filtered replay decided it with every control refused."""
+    claim_map = _read(replay.release(763).directory / replay.CLAIM_MAP)
+    recipes = {
+        item["n"]: item["recipe_certificate"]
+        for item in claim_map["others"]
+        if item["kind"] == "construction"
     }
-    assert sorted(held) == RECIPES_NOTEBOOKS
-    releases = [item for item in replay.RELEASES.values() if item.walk == replay.NOTEBOOKS_964]
-    assert len(releases) == len({item.source for item in releases}) == 7
-    assert {item.label for item in releases} == {
-        replay.NOTEBOOKS_FA6237E,
-        replay.NOTEBOOKS_964EE2B,
+    assert sorted(recipes) == RECIPES_NOTEBOOKS
+    walk = replay.WALKS[replay.NOTEBOOKS_964]
+    steps = _notebook_steps()
+    for n, path in recipes.items():
+        assert path.startswith("certificates/parents/")
+        report = next(report for report in reversed(PUSH_REPORTS) if n in steps[report])
+        chosen = replay.release_at(walk, report, n)
+        assert chosen is not None
+        (row,) = [row for row in replay.decided_claims(chosen) if row.n == n]
+        assert row.path == path
+        (decided,) = [
+            item for item in _read(chosen.path(replay.FILTERED))["rows"] if item["n"] == n
+        ]
+        assert decided["verified"]
+        assert len(decided["controls"]) == 6
+        assert all(
+            item["refused_by_sqpack"] and item["refused_by_independent"]
+            for item in decided["controls"]
+        )
+
+
+def test_the_push_s_identity_measurements_settle_refinement_at_378_and_405() -> None:
+    """At 378 and 405 kyleluecke's row is Lavrentev's v11 packing, every square within
+    5e-8: the walk records it as a refinement of it. At 364, 450 and 874 the pairing moves
+    over fifty squares beyond 0.1, so the measurement stands beside the source's word for the
+    owner (#795's review A, A1)."""
+    ledger = _read(NOTEBOOKS / "ledger.json")
+    measured = {item["n"]: item for item in ledger["owner_decisions"]["measured_identity"]}
+    assert sorted(measured) == list(replay.PUSH_IDENTITY)
+    refined = {
+        n: item["source_says"]
+        for n, item in measured.items()
+        if item["source_says"].startswith("a refinement")
     }
-    declared = {row.n: item for item in releases for row in replay.decided_claims(item)}
-    assert len(declared) == sum(item.decided for item in releases) == 87
-    assert set(declared) == (set(fa) | set(nb)) - set(RECIPES_NOTEBOOKS)
-    for n, item in declared.items():
-        assert item.first_commit == (replay.COUZO_FA6237E if n in fa else replay.COUZO_763_PIN)
+    assert refined == {
+        378: f"a refinement of Vladislav Lavrentev's packing ({replay.NOTEBOOKS_FA6237E})",
+        405: f"a refinement of Vladislav Lavrentev's packing ({replay.NOTEBOOKS_FA6237E})",
+    }
+    assert {item["report"] for item in measured.values()} == {replay.NOTEBOOKS_964EE2B}
 
 
 def _source_at(walk: replay.Walk, report: str, n: int) -> str | None:
@@ -2399,26 +2468,32 @@ def test_a_count_s_source_is_the_release_of_its_label_that_claims_it() -> None:
         "lavrentev-cuda-run-361589987-2026-10-23"
     )
     assert _source_at(walk, replay.NOTEBOOKS_FA6237E, 509) == "lavrentev-cuda-v11-2026-10-23"
+    assert _source_at(walk, replay.NOTEBOOKS_FA6237E, 377) == "couzo-fa6237e-2026-10-23"
+    assert _source_at(walk, replay.NOTEBOOKS_EFEF7D1, 377) == "couzo-efef7d1-2026-10-23"
     assert _source_at(walk, "franciscouzo/square-packing@23aff0c", 406) is None
     with pytest.raises(replay.ReplayError, match="0 of its releases claim it"):
         replay.release_at(walk, replay.NOTEBOOKS_964EE2B, 509)
     assert _source_at(replay.WALKS[replay.ISSUE_763], PUBLICATION_964, 1) == SOURCE_964
 
 
-def test_the_notebook_rows_are_current_and_supersede_the_rows_they_beat() -> None:
-    sources = {item.source for item in replay.RELEASES.values() if item.notebook_run}
+def test_the_push_s_last_rows_are_current_and_its_first_supersede_the_rows_they_beat() -> None:
+    """The push's 185 rows: at each of the 99 counts the last is current and each earlier one
+    is superseded by the next; the first supersedes the row that stood at its count."""
+    sources = {item.source for item in _push_releases()}
     rows = [row for row in replay.planned_rows() if row["source_id"] in sources]
-    assert len(rows) == 87
-    assert all("superseded_by" not in row for row in rows)
+    assert len(rows) == sum(PUSH_ROWS.values()) == 185
+    current = [row for row in rows if "superseded_by" not in row]
+    assert len(current) == len({row["n"] for row in rows}) == 99
+    assert all(row["superseded_by"] in sources for row in rows if row not in current)
     beaten = Counter(
         start for _, start, source in replay.planned_supersessions() if source in sources
     )
     assert beaten == SUPERSEDED_BY_NOTEBOOKS
-    assert sum(beaten.values()) == 77
+    assert sum(beaten.values()) == 86
 
 
 def test_the_notebook_ledger_transcribes_its_sources_from_the_claim_map() -> None:
-    """The walk's ``sources.yaml`` is what `claim_map_walk_sources` writes from the claim map,
-    the frozen starts and the earlier publications, cut at the push."""
+    """The walk's ``sources.yaml`` is what `claim_map_walk_sources` writes from the push's
+    receipt, the frozen starts and the earlier publications, cut at the push."""
     document = replay.claim_map_walk_sources("tymchishin-reclosure-v3-2026-10-23", "2026-10-24")
     assert document == safe_load((NOTEBOOKS / "sources.yaml").read_text(encoding="utf-8"))
