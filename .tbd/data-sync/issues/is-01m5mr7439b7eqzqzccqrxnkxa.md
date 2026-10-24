@@ -5,7 +5,7 @@ title: "Import Amund Kristiansen: s(303) <= 17.909762327476, 9.89e-6 below T-230
 kind: task
 status: in_progress
 priority: 1
-version: 13
+version: 14
 delegate: c-stage7-757-1024
 labels:
   - result-import
@@ -18,7 +18,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-23T16:06:32.296Z
-updated_at: 2026-10-24T05:56:55.817Z
+updated_at: 2026-10-24T06:15:35.492Z
 started_at: 2026-10-23T16:06:37.444Z
 ---
 Issue #755 (https://github.com/jlevy/squares/issues/755), opened 2026-10-23T11:12:48Z by amundsk (Amund Kristiansen): one upper bound at 303, a dilation certificate made with Evan Daniel's dilate_cert.py (evand 7982d7a), gist 78f9f0e7b4669f2f509a281845081768 at 511f56bf6e6afb4eb22f12d31371c2a2fe7b4767, s303_amund.cert SHA-256 9ec01059b35cc983cb28a1bb33bd215a2717228f7efd182e1724de6b22dc511b, side 223872029093440709529093216833/12500000000000000000000000000. Below the house T-230 (Daniel, #728) by 9.89e-6 if verified. Stages 1-3 then stage 4 (separate review lane), then adoption and regularization at 303 (think-ykgh owns 303's open row-7 review).
@@ -130,3 +130,9 @@ A2 is decided by the existing improvement rule (policy section 11), not an owner
 - Local at 21a0624cf: packing-validate --records --jobs 2 --inner-jobs 1 passes (127 s); check_results passes (239, contiguous); 686 tests in the affected modules pass; house and drawing checks all pass; check_release_impact, render_changelog --check and release_pin --check pass.
 - Dispositions reply (review=A, head 21a0624cf): https://github.com/jlevy/squares/pull/757#issuecomment-6380602439. A2 declined by the improvement rule; A3 deferred to think-ykgh after the merge. PR body updated (A1, A8, the cost, validation).
 - Noted, not acted on: earlier derived-only houses (Couzo's packets) keep the writer's default "holds it" in their case records.
+
+## 2026-10-24 c-stage7-757-1024 (stage 7 for #757; reply posted, record patch drafted)
+- Deploy: Pages run 40068201851 at headSha c5697c2f2b9d727018006c7343257d9b3f68b5f2 (#757's merge, 05:56:09Z); publish, pages-required, deploy (job 120797306102, 06:04:09Z) and verify-deployment (job 120797363405, 06:08:50Z) all success; check_published_site --commit c5697c2f2: 5816 of 5816 checks passed. squaremath.org, result/t-239.html and cases/303.html serve v0.9.2-e63e89, main's release.PUBLICATION_EDITION (DATA_REVISION e63e8906d). result/t-239.html: S2 V3 C3, upper bound, confirmed, "Kristiansen after Daniel, Ostashev, Levy"; cases/303.html: best known and verified upper 17.9097623274752568 by T-239, the 24 October adoption, the regularized drawing credited to the project with Daniel's regularizer.
+- Rendered with check_requests --draft 755 from a sparse clone at origin/main c5697c2f2 (deleted after), and reconciled with main, the live pages, the packet and the review. Numbers checked exactly: the side and its 12- and 16-place prints; T-230 minus T-239 = 9889799071009889799071/10^27; the binary64 print 3.35e-16 below the side; least wall clearance 6.0200000000010e-13 at square 3, top (6.025e-13 right, square 73; 6.030e-13 left, 11 squares, and bottom, 10), recomputed from the derived fact; least pair gap 60250000000010249/(5*10^28) from the retained receipt; 7e82c64's header side read at its pin, 1.81e-11 below T-230 and 9.89e-6 above T-239; #763's 303 bound in upper_bounds.json at franciscouzo/square-packing@964ee2b, 17.906978233799 rounded up, 2.784e-3 below T-239.
+- No comments on #755 before posting. Posted (acknowledgement, import and confirmation in one comment; the issue is not closed): https://github.com/jlevy/squares/issues/755#issuecomment-6380774849 (jlevy, 06:13:58Z). It names T-239 throughout and asks the review's three questions (where the 8.2e-13 came from, whether macOS made the certificate from that input, and permission to keep the bytes).
+- Record patch, not committed: /tmp/claude-0/-home-user-squares/f8504540-2b5a-5f78-8968-eb4ffa4c4b64/scratchpad/stage7-757/requests.patch (#755's replies against origin/main c5697c2f2: kind confirmation; T-239 V3/C3 confirmed; E-amundsk-755-n303-report reviewed). With it applied, check_requests passes and --report shows no reply due; --github lists no #755 difference. check_requests still marks #755 closeable with a final comment; the coordinator decides on that.

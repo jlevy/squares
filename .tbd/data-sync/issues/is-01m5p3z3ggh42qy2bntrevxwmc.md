@@ -3,9 +3,9 @@ type: is
 id: is-01m5p3z3ggh42qy2bntrevxwmc
 title: "PR #770: apply the owner's 'Credit both' answer and open the nine tracking issues"
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 3
+version: 4
 delegate: c-fin-770-1024
 labels: []
 dependencies: []
@@ -13,8 +13,12 @@ parent_id: is-01m5ntqg8kza7vn9e3v650vndr
 hold: null
 hold_until: null
 created_at: 2026-10-24T04:51:06.895Z
-updated_at: 2026-10-24T05:39:13.654Z
+updated_at: 2026-10-24T07:30:01.217Z
 started_at: 2026-10-24T04:51:26.723Z
+closed_at: 2026-10-24T07:30:01.217Z
+close_reason: "PR #770 merged 2026-10-24T07:14:46Z (11d0ab06b): 'Credit both' applied and tracking issues #772-#780 (and #782-#786) opened"
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes

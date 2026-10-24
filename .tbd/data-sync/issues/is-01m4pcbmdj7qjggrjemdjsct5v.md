@@ -5,7 +5,7 @@ title: "Import wand125: s(31) >= 2391/400 = 5.9775 by the mixed_n31_L59775 fine-
 kind: task
 status: in_progress
 priority: 2
-version: 8
+version: 9
 delegate: c-lower-1023
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-11T21:02:04.210Z
-updated_at: 2026-10-24T05:42:38.324Z
+updated_at: 2026-10-24T06:56:18.557Z
 started_at: 2026-10-23T06:18:58.210Z
 ---
 Found in the 2026-10-11 intake read of wand125/square-packing (think-q655); nothing on GitHub asked. Commit 23e3186 (2026-10-11T00:51:18Z, before the head 04fbef0) adds problems/square-lower-bounds/certificates/mixed_n31_L59775/: a fine-net measure certificate reporting s(31) >= 2391/400 = 5.9775 (31 unit squares do not fit in the closed square of side 2391/400), mass 3099999/100000 < 31, core B = 4999/5000, declared net proof_net {step 1/5002, last 2072}, 2,073 directions; candidate digest 2d8d9d59...; the candidate and check2 receipts sit in the repository's data release, not the commit. The author's pre-publication check ran sqverify_fast (jlevy/squares crate with proof_net support, wand125 branch fe12e036c, source digest ab6e33e164db) from the bundle's check2/src on a fresh Ubuntu 24.04 machine: 2073/2073 directions VERIFIED in 7,277 s, mass x 0.985 control refused in 32 directions.
@@ -42,3 +42,4 @@ Against the record: n = 31's reported and verified lower bound is 2381/400 = 5.9
 The #446 follow-up was posted at 2026-10-24T05:40:18Z: https://github.com/jlevy/squares/issues/446#issuecomment-6380484985 (body /tmp/claude-0/-home-user-squares/f8504540-2b5a-5f78-8968-eb4ffa4c4b64/scratchpad/stage7-745-750/446-reply.md). It is the corrected draft of 984f7e132 (T-233's captures "passed") with: result-page links on squaremath.org for T-233, T-232 and the n = 31 case, and full main links for both reviews (the draft's relative links would not resolve in a comment); the correction --draft owed (the 12 October reply gave E-wand125-fine-net-n27-5655-followup-report as recorded; it is now reviewed); "a reviewed fix is queued" rewritten as a fix that still needs its review; "with its values standing as reported" on T-233; the programs named (sqverify-fast by devtools.sqverify_fast_census); a "Where the rest stands" line restating the 20 October states; and the "On main" links. The n31 review's M-1 to M-3 and its questions were left out, as the owner's call (think-wop1). No author comment since our 20 October reply.
 Record patch (not committed): /tmp/claude-0/-home-user-squares/f8504540-2b5a-5f78-8968-eb4ffa4c4b64/scratchpad/stage7-745-750/requests.patch, against origin/main 2c58b6373 (result-requests.yaml blob 0b08043c5): the reply under #446's replies (T-233 at V0/C1 reviewed for fine-net-n19, -n20, -n26 and -n27-5655-followup; the follow-up's report entry reviewed; the restated states) and a notes paragraph. check_requests gate rc 0; --report "Reply due: no" for #446; --github no #446 difference.
 Not posted on #534, this bead's tracking issue: the brief named only #446 for #745, and #534's record entry still has s31-mixed-fine-net queued with no register id, so --report shows no reply due. Mapping it to T-232 would make it closeable (its close_when is met); left for the coordinator.
+2026-10-24 c-stage7-1024 (think-9i18, PR https://github.com/jlevy/squares/pull/787): #534's row maps s31-mixed-fine-net to T-232 with E-wand125-fine-net-n31-59775-report and E-wand125-fine-net-n31-59775-sqverify-fast-replay; the result's bead: think-wop1 and queued are gone. close_when verified on main: T-232 in results.yaml (landed 2026-10-24 via #745, af9c9e850), the replay evidence in evidence.yaml and the census receipt under benchmarks/measure-verifier/census-mixed/wand125-fine-net-n31-2026-10-11/ (capture VERIFIED at 2,073 directions, 787,004,724 nodes, 14,607.6 CPU-s; controls CONTROLS_REFUSED); live result/t-232.html shows S3 V3 C3. check_requests --report: #534 closeable. Closing reply drafted for the coordinator: /tmp/claude-0/-home-user-squares/f8504540-2b5a-5f78-8968-eb4ffa4c4b64/scratchpad/stage7-1024/reply-534.md (third person, main links only; it leaves out the review's M-1 to M-3 and questions). Those are now held by think-nq5g ("Owner's call: send wand125 the n31 review's M-1 to M-3 and its five questions (T-232), and where", decision, under think-ezt8), so this bead holds nothing once #534's reply is posted, recorded and the issue closed; then it can close.

@@ -5,15 +5,17 @@ title: "Triage #763 (Couzo, 23 October 23:35Z): 436 improved upper bounds at 268
 kind: task
 status: in_progress
 priority: 2
-version: 5
+version: 6
 delegate: c-triage-763-1024
 labels: []
-dependencies: []
+dependencies:
+  - type: blocks
+    target: is-01m5pc8x553ae872mqwsb65h9f
 parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-24T01:30:11.731Z
-updated_at: 2026-10-24T05:27:46.840Z
+updated_at: 2026-10-24T07:16:24.873Z
 started_at: 2026-10-24T01:30:16.579Z
 ---
 

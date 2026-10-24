@@ -5,7 +5,7 @@ title: "Address PR #769 review A (A1-A10)"
 kind: task
 status: in_progress
 priority: 2
-version: 3
+version: 4
 delegate: c-fix-769-1024
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m5p3zeaxgseqzx8vxfcbtfbj
 hold: null
 hold_until: null
 created_at: 2026-10-24T05:27:49.575Z
-updated_at: 2026-10-24T05:55:28.392Z
+updated_at: 2026-10-24T06:47:59.918Z
 started_at: 2026-10-24T05:27:56.045Z
 ---
 
@@ -29,3 +29,5 @@ Drafts (scratchpad): c732/732-import.md fixed (A1, A2, A4, A6, A7, A10); triage-
 Local at 3f3a9d4d3: records tier 52/53 (only site_urls --history-ref origin/main: T-232..T-238 on main, A3; passes vs 14b14f2d1); intake_ledger check/render --check, beyond_horizon_replay check + --issue, acquire_source --check, couzo_decimal_decisions check, check_source_coverage, build_bound_citations --check, contributor_census --stale [], release_pin --check, check_release_impact: OK; pytest 13 suites 625 passed. Hosted: Branch mergeability 40067984734 failure (conflicts, A3); pull_request workflows do not run while CONFLICTING.
 
 Remaining (A3): after the coordinator says #766 merged: merge origin/main, n335 = review text (drop #766's "row's exact side is the one the certificate gives" in its #715 summary), regenerate views, stamp_landed --apply, re-measure survey no-change record, re-pin, check_release_impact, CI green, second dispositions reply.
+
+2026-10-24 c-fix-769-1024, A3 done after the coordinator's word that #766 merged (06:23:22Z, 5f8f005a3): 6d4cc24cb merges main 5f8f005a3 (#745, #750, #757, #759, #766, #771), both sides kept; n335 = review A's merged text; #766's #715 335 summary now gives the outcome (drops "the row's exact side is the one the certificate gives"); INVENTORY/VERIFIERS re-rendered; stamp_landed: no entry; aa0afce60 survey no-change record re-measured at 6d4cc24c (43 files identical x3); b2eee7080 re-pin to 6d4cc24c. Local: records tier 53/53, pytest 16 suites 724 passed. Hosted at b2eee7080: Packing validation 40070683895, Certificate page 40070683928, Branch mergeability 40070681189 success; PR MERGEABLE/CLEAN. Second dispositions reply (all A1-A10 fixed): https://github.com/jlevy/squares/pull/769#issuecomment-6381085096. reply-715.md has an [MDFR] placeholder for Couzo's 06:12:05Z comment (think-mdfr's, not recorded in #769). Ready for the coordinator; not merged, still draft.

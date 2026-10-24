@@ -3,9 +3,9 @@ type: is
 id: is-01m5p6s1rztf19pvbwqpq90brf
 title: "PR #770 (merge): senior review"
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 4
+version: 5
 delegate: c-rev-770-1024
 labels: []
 dependencies: []
@@ -15,8 +15,12 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-24T05:40:14.239Z
-updated_at: 2026-10-24T06:03:43.799Z
+updated_at: 2026-10-24T07:30:01.885Z
 started_at: 2026-10-24T05:40:18.937Z
+closed_at: 2026-10-24T07:30:01.885Z
+close_reason: "PR #770 merged 2026-10-24T07:14:46Z at bd12cf323 after review A (approve) and its dispositions"
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes

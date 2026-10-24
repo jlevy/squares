@@ -3,16 +3,20 @@ type: is
 id: is-01m5nwqysr4j4hgp5mn7cq9vsn
 title: "Decision: how profiles count one report registered as two results (T-073/T-080 at n = 101-105; T-083/T-084 at the 16 counts k^2-1)"
 kind: task
-status: open
+status: closed
 priority: 2
-version: 4
+version: 5
 labels:
   - decision
   - result-import
 dependencies: []
 parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 created_at: 2026-10-24T02:44:52.663Z
-updated_at: 2026-10-24T05:31:25.613Z
+updated_at: 2026-10-24T07:30:02.573Z
+closed_at: 2026-10-24T07:30:02.572Z
+close_reason: "Owner answered 'Credit both (Recommended)' on 24 October 2026; applied by PR #770 (merged 07:14:46Z, 11d0ab06b)"
+resolution: null
+duplicate_of: null
 ---
 Owner decision, raised by lane c-review-pending-1024 (think-rh4j) on 24 October 2026 from the owner's request to catch up every "Review pending" on the profiles.
 
