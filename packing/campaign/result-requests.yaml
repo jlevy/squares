@@ -4178,8 +4178,8 @@ issues:
       stays open.
 
       GitHub closed the issue at 2026-10-24T09:02:17Z when #787 merged, reading a commit
-      message that named it beside a closing word as a closing reference. The owner reopened
-      it, and the follow-up of 12:22:29Z (issuecomment-6384155203) says the close was
+      message that named it beside a closing word as a closing reference. The intake pass
+      reopened it, and the follow-up of 12:22:29Z (issuecomment-6384155203) says the close was
       mechanical, not a decision, and that the issue stays open while T-233's replays wait on
       the census control fix (think-tcsl), as the follow-up of that morning said.
   - number: 451
