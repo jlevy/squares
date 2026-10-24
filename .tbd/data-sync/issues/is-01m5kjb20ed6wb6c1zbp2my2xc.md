@@ -5,7 +5,7 @@ title: "Apply the owner's D1 answer: track beyond-horizon rows above 1024 (#666,
 kind: task
 status: in_progress
 priority: 1
-version: 12
+version: 13
 spec_path: docs/project/specs/active/plan-2026-10-24-rows-above-1024.md
 delegate: c-w7-1024
 labels:
@@ -15,7 +15,7 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-23T05:04:35.342Z
-updated_at: 2026-10-24T13:38:17.215Z
+updated_at: 2026-10-24T14:33:08.947Z
 started_at: 2026-10-23T05:05:14.273Z
 ---
 Owner decision of 23 October (think-f2io note): yes, no ceiling. Needs a plan: the rows' walks above 1024 (report order), custody without Git blobs (D4 hosted-data manifest; OR-18), the replay price at thousands of certificates (compute cap), and the frontier README rule. Stage 1 triage and pricing first, read-only.
@@ -45,3 +45,10 @@ Two more obligations from review B1 (`intake_ledger.answer_problems`, #754): a l
 2026-10-24 coord-intake-1024: released (no live lane after the interruption of coord-intake-1023's session); open for the next lane. #763's 233 rows above 1024 join this walk (think-cnn7's plan).
 
 2026-10-24 coord-intake-1024: the plan landed as PR #791 (docs/project/specs/active/plan-2026-10-24-rows-above-1024.md) after review A (approve after six Mediums; all 17 findings fixed, dispositions https://github.com/jlevy/squares/pull/791#issuecomment-6383725520). Slices: W7 code (after #789), R1 (~4.3 CPU-h), R2 #732 (~32, owner publishes the hosted shards first), R3 (#763/964ee2b/43f666c, ~0.1), R4 (held rows). Open owner questions with the coordinator's recommendations: D5, think-kzme's sub-question, N1, N5; D4 recorded as the record's disposition (hosted data/couzo-715-certificates-v1). Next: W7 after #789 merges.
+
+2026-10-24 c-w7-1024 (W7, branch claude/w7-2026-10-24-rows-above-1024-code). Design questions and findings, for the coordinator:
+- STOPPED ON (plan wrong against the code): "The RECIPE hold class becomes settled for every recipe the checker decides. D2's answer applies as Held.answer, the way DELETION_ANSWER applies D6's." In the code an answered Held means the publication has NO row (held_problems refuses a row at any held count; declared_rows skips held counts; held_sentence prints "have no row by {answer}"), while D2's answer makes a decided recipe a row. W7 therefore does not settle recipes through Held.answer: a recipe the walk records and does not hold is a declared row carrying its recipe, decided by devtools.construction_checker into receipts/recipe-decisions.json, and the RECIPE class holds only recipes the checker refuses (classical parents, think-zkxy; Fang composites). No frozen walk changes: every recipe in them stays held as written. If the coordinator wants the Held.answer form instead, that is a change to Held's meaning (an answer that settles a publication AS a row), which the plan should state.
+- Fang composites: the plan says the checker "refuses a Fang composite unless his table states the composite's parts", but states no rule for deciding a composite whose parts are stated. W7 refuses every composite, naming unstated parts when the table states none; a composite rule needs its own decision.
+- The summary README threshold is 400 walked counts (intake_ledger.SUMMARY_FROM): above every retained walk (the history walk walks 392 counts, its README 339 kB), so every frozen README renders byte for byte.
+- Base finding, not W7's: the #678 Goebel receipt (couzo-issue678-2026-10-18/receipts/goebel-comparison.json) does not rebuild byte for byte at main 2ec489d1e: couzo_678_replay.goebel writes families "... and corner-touching strips ..." where the committed file says "... corner-touching Goebel strips ...". Left as committed; a one-line records fix for a later slice.
+- For R1: history-publications and earlier still scan HISTORY_COUNTS (325..1024); scanning the watched repositories above 1024 is R1's change, with the walk above 1024's name in WALKS (above=1024, through=None), Release.walk_above on each lifted release, CLAIM_MAP_WALKS/WALK_READ_AT_MAIN entries, and Barnett's repository in WATCHED_HOLDERS.
