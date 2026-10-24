@@ -8250,8 +8250,12 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "after review A's fixes (19867ffe7) and the merge of main 14b14f2d1: rendered "
             "at link revision 59614d78, twice from this tree and once with main "
             "14b14f2d1's four candidate inputs swapped in, all 69 files byte-identical "
-            "again. No PDF was printed; each prints from that HTML. Retain v0.4.22, "
-            "v0.1.11, v0.1.4 and v0.2.7."
+            "again. Measured once more after the merge of main c5697c2f2 (#745, #750, "
+            "#757, #759, #771), at link revision 54f34f78, twice from this tree and once "
+            "with main c5697c2f2's four candidate inputs swapped in: all 69 files "
+            "byte-identical across the three. No PDF was printed; each prints from that "
+            "HTML. Retain v0.4.25, main's explainer after T-239, v0.1.11, v0.1.4 and "
+            "v0.2.7."
         ),
     ),
 )
