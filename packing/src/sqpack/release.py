@@ -8040,6 +8040,42 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "that HTML. Every paper keeps its version."
         ),
     ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The retention of Kevin Fang's note v0.9 and Lean proof (think-494l): T-163 "
+            "from V2 to V3 with two new evidence entries, its claim, notes, composition, "
+            "next steps and unfinished confirmations rewritten, two coverage sources and "
+            "issue 603's requests entry, against main af9c9e850 (#745): rendered at link "
+            "revision 46effd32 into empty site directories, twice from this tree at "
+            "46effd32 and twice from the same tree with main's register, requests record "
+            "and coverage record swapped in (69 files each), "
+            "render_n11_lower_bounds_explainer, render_n11_optimality_review, "
+            "render_n11_threshold_bound_review and render_packing_methods write every file "
+            "byte-identical across all four. The register stays at 233 results. No PDF was "
+            "printed; each prints from that HTML. Every paper keeps its version."
+        ),
+    ),
 )
 
 
