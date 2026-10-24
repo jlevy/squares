@@ -472,6 +472,19 @@ occurrences:
   contributor_id: sam-burns
 - origin:
     path: packing/resources/bibliography.yaml
+    record_key: '[Friedman DS7]'
+    field: /authors/0
+  expected_text: Friedman
+  start: 0
+  end: 8
+  label: Friedman
+  role: source-author
+  disposition: resolved
+  evidence:
+  - primary-byline
+  contributor_id: erich-friedman
+- origin:
+    path: packing/resources/bibliography.yaml
     record_key: '[Göbel 1979]'
     field: /authors/0
   expected_text: Göbel
