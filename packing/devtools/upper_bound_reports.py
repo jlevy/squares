@@ -37,6 +37,10 @@ declaration ``devtools.acquire_source`` writes the packet from:
   ``receipts/exact-certification.json.xz``, or one ``receipts/exact-certification-nNNN.json.xz``
   per count where the whole would exceed the kernel's ceiling on uncompressed evidence;
   ``check`` admits the receipt, and ``check --replay`` decides it again;
+- **sharp controls.** ``sharp-controls`` takes each count's certificate to exact contact
+  and 1e-30 past it, on both routes, and writes ``receipts/sharp-controls.json``, or one
+  ``receipts/sharp-controls-nNNN.json`` per count of a longer roster; its controls and
+  their expectations are ``devtools.upper_bound_sharp_controls``'s;
 - **registration.** ``register-plan`` prints, and writes nowhere, the register, evidence,
   coverage, bibliography and resources entries the ``requested`` counts need. A release
   whose requested counts all lie beyond the horizon, as #584's do, plans no register
@@ -54,6 +58,7 @@ From ``packing/``, with the project interpreter::
     python -m devtools.upper_bound_reports PACKET check-claims [--write]
     python -m devtools.upper_bound_reports PACKET certify --jobs-dir SCRATCH/jobs --workers 2
     python -m devtools.upper_bound_reports PACKET check [--n N ...] [--replay]
+    python -m devtools.upper_bound_reports PACKET sharp-controls [--n N ...] [--check]
     python -m devtools.upper_bound_reports PACKET register-plan
 
 **Adding a format.** An adapter is a function ``(raw, n, options) -> Certificate`` (the
@@ -2768,6 +2773,9 @@ def main(argv: list[str] | None = None) -> int:
     check.add_argument("--n", type=int, nargs="+")
     check.add_argument("--replay", action="store_true")
     sub.add_parser("register-plan")
+    sharp = sub.add_parser("sharp-controls")
+    sharp.add_argument("--n", type=int, nargs="+")
+    sharp.add_argument("--check", action="store_true")
     job = sub.add_parser("decide-job")
     job.add_argument("--n", type=int, required=True)
     job.add_argument("--control", choices=JOBS, required=True)
@@ -2800,6 +2808,13 @@ def main(argv: list[str] | None = None) -> int:
     elif args.action == "register-plan":
         plan = register_plan(packet)
         print(yaml.safe_dump(plan, sort_keys=False, allow_unicode=True, width=100), end="")
+    elif args.action == "sharp-controls":
+        # Imported here: the controls read certificates through this module.
+        from devtools import upper_bound_sharp_controls as sharp_controls  # noqa: PLC0415
+
+        met = sharp_controls.run(packet, args.n, check=args.check)
+        print(_json_text({str(n): {"all_as_expected": ok} for n, ok in met.items()}), end="")
+        return 0 if all(met.values()) else 1
     else:
         decide_job(packet, args.n, args.control, args.output)
     return 0
