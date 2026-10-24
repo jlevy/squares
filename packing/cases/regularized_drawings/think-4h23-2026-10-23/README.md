@@ -78,13 +78,17 @@ release’s other 204 file, `certificates/n204.cert` at
 digest only. That side was first published at `1851c2c7` (22 October 2026, 05:29:48Z),
 the commit that also first published `n-204.cert`, the certificate T-229 cites; the path
 held his larger 204 sides from 13 October (`8bb41af5`, then `70a033f0` on 14 October).
-The repository is watched, so the side is already Polkovskyi’s report: the view
-reproduces his own publication, in the same commit as T-229’s certificate, and the
-credit is his. The run is corroborating evidence, not a result of this project, and is
-not registered or drawn.
-think-h01y derives and replays `n204.cert`, records it under his credit (T-229 stating
-the smaller side, or an entry of its own), then takes it through stage 4 and adoption at
-204\. The project’s solved view of T-225 at 204, $8.91 \times
+The repository is watched, so the side is already Polkovskyi’s report: the run
+reproduces his side, published in the same commit as T-229’s certificate, and the credit
+is his. The solved view is the display regularization at that side; the solve’s own
+certificate shares 119 rows with his file byte for byte, and differs only at the
+solver’s free squares and frozen flat variables (the
+[review of 23 October](../../../../docs/project/reviews/review-2026-10-23-mishapolk-n204.md),
+RF-1). The run is corroborating evidence, not a result of this project, and is not
+registered or drawn.
+`n204.cert` is T-231 now, an entry of its own under his credit (think-h01y), replayed,
+reviewed on 23 October and adopted at 204 by the house rule.
+The project’s solved view of T-225 at 204, $8.91 \times
 10^{-12}$ below T-225 (think-13e9), lies above T-229 and is superseded by its adoption.
 
 ## Files

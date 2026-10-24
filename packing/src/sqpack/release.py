@@ -799,7 +799,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "541fea60a162ffe95d32da0e343e9a93a2dc7d45"
+DATA_REVISION = "527ba87617c4909d5be472e85df2b6ee0d84188d"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -898,10 +898,10 @@ FIRST_PUBLISHED = PUBLICATION_HISTORY[-1].first_published
 EXPLAINER_HISTORY = (
     PublicationHistoryEntry(
         version="v0.4.22",
-        first_published="October 23, 2026",
+        first_published="October 24, 2026",
         result_scope=(
-            "Update the registered result count after the registrations of Hosono's "
-            "fine-net lower bounds at 31 (T-232) and at 19, 20, 26 and 27 (T-233)."
+            "Update the registered result count after the registration of Mykhailo "
+            "Polkovskyi's lower 204 side (T-231)."
         ),
     ),
     PublicationHistoryEntry(
@@ -1436,8 +1436,8 @@ RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
         version="v0.4.22",
         impact="patch",
         reason=(
-            "Update the registered result count after the registrations of Hosono's "
-            "fine-net lower bounds at 31 (T-232) and at 19, 20, 26 and 27 (T-233)."
+            "Update the registered result count after the registration of Mykhailo "
+            "Polkovskyi's lower 204 side (T-231)."
         ),
     ),
     ReleaseImpactDecision(
@@ -2597,6 +2597,50 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "Measured before at 6b5b479dd against main 7335d0098, with the same outcome. "
             "No PDF was printed; each prints from that HTML. Retain v0.4.21, v0.1.11, "
             "v0.1.4 and v0.2.7."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/devtools/adopt_houses.py",
+            "packing/devtools/site_resources.py",
+            "packing/devtools/site_urls.py",
+            "packing/devtools/upper_bound_houses.py",
+            "packing/devtools/upper_bound_reports.py",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "T-231's registration (#719's lower 204 file, V3/C3 after the 23 October "
+            "review), its adoption at 204 in the 24 October pass, T-229's lineage at 204 "
+            "and the request entries for #715, #719, #732 and #734, against main c1115c095 "
+            "(#749): rendered at link revision 868925d6 into empty site directories, twice "
+            "from this tree (at 5b0fcb2a and with v0.4.22 at 8386d394) and twice from "
+            "main's (69 files each), render_n11_optimality_review, "
+            "render_n11_threshold_bound_review and render_packing_methods write every file "
+            "byte-identical across all four. The n204 source's card in site_resources "
+            "and the 204 page's budget in site_urls (#753's CI), and review A's record "
+            "fixes, change none of the 69 files: rendered again at 6f317a6b, ba0cb64e and "
+            "ea8e97a1, every file equals the 8386d394 render. Re-measured against main "
+            "7335d0098 (#752) after merging it, at c1d1cb7a: the three papers are "
+            "byte-identical to main's, and the explainer differs only in its count and "
+            "v0.4.22. Again against main 64b316b6c (#747, #748, #761, #762) after merging "
+            "it, at 695a0743 with the stage 7 records of 23 October: the same outcome. "
+            "The explainer counts the register and takes v0.4.22. No PDF was "
+            "printed; each prints from that HTML. Retain v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
     ReleaseNoPublicChange(

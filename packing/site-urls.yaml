@@ -6235,7 +6235,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-23'
+  lastmod: '2026-10-24'
   status: live
 - path: cases/205.html
   canonical: cases/205.html
@@ -20726,6 +20726,41 @@ urls:
     - packing/devtools/upper_bound_reports.py
     - docs/project/reviews/review-2026-10-22-daniel-728.md
     - packing/resources/web/evand-n303-2026-10-22/review/review-2026-10-22/README.md
+- path: result/t-231.html
+  canonical: result/t-231.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-23'
+  lastmod: '2026-10-23'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 204
+    established: null
+    attribution:
+      source_keys:
+      - '[Mishapolk n204 2026-10-22]'
+      published: '2026-10-22'
+    builds_on: null
+    evidence:
+    - E-mishapolk-n204-certificate-report
+    - E-mishapolk-n204-exact-feasibility
+    - E-mishapolk-n204-review-exact-feasibility
+    artifacts:
+    - packing/resources/web/mishapolk-n204-2026-10-22/README.md
+    - packing/resources/web/mishapolk-n204-2026-10-22/acquisition/claims.json
+    - packing/resources/web/mishapolk-n204-2026-10-22/source/certificates/n204.cert
+    - packing/resources/web/mishapolk-n204-2026-10-22/receipts/exact-certification.json.xz
+    - packing/resources/web/mishapolk-n204-2026-10-22/receipts/sharp-controls.json
+    - packing/resources/web/mishapolk-n204-2026-10-22/measure/identity.json
+    - packing/campaign/issue-intake/upper-bounds-issue719-20261022/README.md
+    - packing/devtools/upper_bound_reports.py
+    - docs/project/reviews/review-2026-10-23-mishapolk-n204.md
+    - packing/resources/web/mishapolk-n204-2026-10-22/review/review-2026-10-23/README.md
+    - packing/resources/web/mishapolk-n204-2026-10-22/review/review-2026-10-23/outputs/lineage.json
 - path: result/t-232.html
   canonical: result/t-232.html
   kind: result

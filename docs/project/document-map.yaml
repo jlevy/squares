@@ -16,6 +16,7 @@ documents:
   - {path: docs/project/reviews/review-2026-10-22-ci-release-latency.md, role: review, authority: record, lifecycle: retained}
   - {path: packing/contributors/reviews/2026-10-22-credit-link-audit.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/specs/active/plan-2026-10-22-site-navigation.md, role: plan, authority: current, lifecycle: transient}
+  - {path: docs/project/reviews/review-2026-10-23-mishapolk-n204.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/specs/active/plan-2026-10-23-flip-regularization.md, role: plan, authority: current, lifecycle: transient}
   - {path: docs/project/reviews/review-2026-10-22-mishapolk-719.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-22-couzo-670-672-675.md, role: review, authority: record, lifecycle: retained}
@@ -196,6 +197,7 @@ documents:
   - {path: packing/cases/regularized_drawings/think-ql4v-2026-10-22/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: packing/cases/regularized_drawings/think-4h23-2026-10-23/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: packing/cases/regularized_drawings/think-icp1-2026-10-23/README.md, role: source-index, authority: record, lifecycle: retained}
+  - {path: packing/cases/regularized_drawings/think-h01y-2026-10-24/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-07-squish-second-update-mathematics.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-07-squish-second-update-semantic-binding.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-07-squish-update-mathematics.md, role: review, authority: record, lifecycle: retained}

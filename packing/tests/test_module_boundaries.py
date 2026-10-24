@@ -1609,11 +1609,15 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
         # The last: 19.3s of call time across its four cases on 2026-10-22 (think-4h23, RF-7
         # of the 22 October review of T-229), locally under `nice` with two workers on a
         # shared four-core host: each case admits #719's 105 fact and runs both maintained
-        # exact routes on it, 4.53s to 5.02s.
+        # exact routes on it, 4.53s to 5.02s. And 27.1s across the four cases of the lower
+        # 204 file's sharp controls on 2026-10-23 (think-h01y, T-231), locally under `nice`
+        # on a four-core host at load 2: each case runs both maintained exact routes on the
+        # mishapolk-n204-2026-10-22 fact, 6.31s to 7.21s.
         "test_upper_bound_reports.py": {
             "test_the_register_plan_states_each_bound_as_check_standing_reads_it",
             "test_the_593_release_is_smallest_only_at_237_and_ties_couzo_at_211_and_241",
             "test_both_routes_meet_contact_and_refuse_1e30_past_it_at_719s_105",
+            "test_both_routes_meet_contact_and_refuse_1e30_past_it_at_the_lower_204",
         },
         # 38.3s of call time across its four cases on 2026-10-22 (think-0nse, RF-6 of the 22
         # October review of T-226 to T-228), locally under `nice` with two workers on a

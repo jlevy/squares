@@ -785,7 +785,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | cases/201.html | cases/201.html | record | overview | 2026-10-03 | 2026-10-14 | live |
 | cases/202.html | cases/202.html | record | overview | 2026-10-03 | 2026-10-14 | live |
 | cases/203.html | cases/203.html | record | overview | 2026-10-03 | 2026-10-14 | live |
-| cases/204.html | cases/204.html | record | overview | 2026-10-03 | 2026-10-23 | live |
+| cases/204.html | cases/204.html | record | overview | 2026-10-03 | 2026-10-24 | live |
 | cases/205.html | cases/205.html | record | overview | 2026-10-03 | 2026-10-14 | live |
 | cases/206.html | cases/206.html | record | overview | 2026-10-03 | 2026-10-17 | live |
 | cases/207.html | cases/207.html | record | overview | 2026-10-03 | 2026-10-15 | live |
@@ -1361,6 +1361,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | result/t-228.html | result/t-228.html | result | overview | 2026-10-22 | 2026-10-23 | live |
 | result/t-229.html | result/t-229.html | result | overview | 2026-10-22 | 2026-10-23 | live |
 | result/t-230.html | result/t-230.html | result | overview | 2026-10-22 | 2026-10-22 | live |
+| result/t-231.html | result/t-231.html | result | overview | 2026-10-23 | 2026-10-23 | live |
 | result/t-232.html | result/t-232.html | result | overview | 2026-10-23 | 2026-10-23 | live |
 | result/t-233.html | result/t-233.html | result | overview | 2026-10-23 | 2026-10-23 | live |
 | results.html | results.html | page | overview | 2026-09-29 | 2026-10-22 | live |
@@ -1418,6 +1419,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | cases/11.html | 500,000 | Complete n=11 proof/certificate record and prepared bounds measure 416,870 bytes. |
 | cases/17.html | 550,000 | Complete n=17 proof/certificate record and prepared bounds measure 501,977 bytes on 16 October 2026 with T-154's source-build evidence, 499,855 on main at 26d8bb335. The ceiling leaves room for the open n=17 intakes. |
 | cases/18.html | 350,000 | Complete n=18 certificate record; prepared HTML measures 326,548 bytes. |
+| cases/204.html | 350,000 | Ten verified certificates and a section for each of the six that have been the house, each listing every other side; prepared HTML measures 320,903 bytes on 23 October 2026 after T-231's adoption. |
 | frontier.html | 900,000 | On 22 October 2026 the standalone Frontier Survey measures 731,612 bytes for all 324 rows, exact native MathML, credit links, the concise reading key and the shared shell. The 900,000-byte ceiling leaves 168,388 bytes above that measurement; row details remain fetched on demand. Timing has not been re-measured for the split. |
 | index.html | 1,300,000 | The shared 100-case Atlas preview includes all 324 canonical case links and per-case SVG references, with common controls, reading and documentation cards. Retained desktop/mobile expansion checks cover the prepared shared row layout. The page-specific ceiling remains below the global two-megabyte limit. |
 | papers/n11-lower-bounds-explainer.html | 1,500,000 | Four prepared font preferences and the authored paper content measure 1,417,498 bytes. |

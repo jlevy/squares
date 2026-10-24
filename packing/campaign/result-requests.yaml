@@ -4425,7 +4425,8 @@ issues:
     title: 'New packings below register for 28 counts (n = 84–306): registration request'
     author: Mishapolk
     opened: '2026-10-09'
-    state: open
+    state: closed
+    closed: '2026-10-23'
     kind: result-report
     triage: done
     summary: >-
@@ -4550,8 +4551,53 @@ issues:
         id: E-mishapolk-470-exact-feasibility
         status: confirmed
       - result: n105-closed-form-withdrawn
+    - url: https://github.com/jlevy/squares/issues/470#issuecomment-6376106671
+      date: '2026-10-23'
+      by: jlevy
+      kind: final
+      reported:
+      - result: fourteen-below-case
+        id: T-138
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: fourteen-below-case
+        id: E-mishapolk-470-pose-report
+        status: reviewed
+      - result: fourteen-below-case
+        id: E-mishapolk-470-exact-feasibility
+        status: confirmed
+      - result: fourteen-not-below-case
+        id: E-mishapolk-470-pose-report
+        status: reviewed
+      - result: fourteen-not-below-case
+        id: E-mishapolk-470-exact-feasibility
+        status: confirmed
+      - result: readme-132-267
+        id: T-138
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: readme-132-267
+        id: E-mishapolk-470-pose-report
+        status: reviewed
+      - result: readme-132-267
+        id: E-mishapolk-470-exact-feasibility
+        status: confirmed
+      - result: n105-closed-form-withdrawn
     close_when: The import of the corrected certificates and its disposition are on main and the owner
       has posted the resulting state; optimality is outside this request.
+    notes: >-
+      The final reply, posted at 2026-10-23T22:36:26Z (issuecomment-6376106671) after #747
+      merged (7cd0a94bf) and its deploy was verified (squaremath.org at 77aba4c02, data
+      revision 79926ea52), reported T-138 at V3/C3, confirmed, independently re-implemented, at
+      S3, unchanged, and selected at none of its sixteen counts. It gave #747's measurement of
+      where each pose started (measure/identity.json): 103 Ryan Xu's and 258, 302 and 303
+      SQUISH's, each refined; ten Francisco Couzo's T-128 and T-130 packings at a slightly
+      larger side; 267 Ryan Xu's arrangement with every square moved; 132 pairing with none. It
+      named Siddharth Gupta and Evan Daniel in the credit at 180 and 270, and said that neither
+      question of 12 October holds anything open, with answers still welcome. The issue was
+      closed with it at 22:36:27Z: nothing the author asked for is queued.
   - number: 471
     title: 'Preprint: c*(k) = O(k^{3/8}) (explicit: c*(k) < 43.06 k^{3/8} for k >= 4e26; < 20.668 k^{2/5}
       + 0.623 for k >= 1.6e7)'
@@ -6580,9 +6626,10 @@ issues:
         lists #557 as owner-reserved, and think-l3oo item 3 (16 October) reserves the
         replies to #557 and #565 for the owner.
         think-5ip2 lists #557, #565, #570 and #574 as owner-reserved, and the coordinator
-        recorded this hold on 23 October 2026. No instruction in the owner's own words is
-        recorded; the coordinator has asked the owner to confirm the four (think-ezt8 lists
-        them among the owner's open questions).
+        recorded this hold on 23 October 2026. Asked in conversation on 23 October which of
+        the four should stay reserved, the owner stated no preference. As on think-qh3s's
+        question, no preference keeps the status quo, so the four holds stand (think-5ip2).
+        No instruction in the owner's own words is recorded.
     beads:
     - think-00y8
     - think-r7m8
@@ -6691,9 +6738,10 @@ issues:
         owner-reserved, and think-l3oo item 3 (16 October) reserves the replies to #557
         and #565 for the owner.
         think-5ip2 lists #557, #565, #570 and #574 as owner-reserved, and the coordinator
-        recorded this hold on 23 October 2026. No instruction in the owner's own words is
-        recorded; the coordinator has asked the owner to confirm the four (think-ezt8 lists
-        them among the owner's open questions).
+        recorded this hold on 23 October 2026. Asked in conversation on 23 October which of
+        the four should stay reserved, the owner stated no preference. As on think-qh3s's
+        question, no preference keeps the status quo, so the four holds stand (think-5ip2).
+        No instruction in the owner's own words is recorded.
     beads:
     - think-hcqr
     - think-acbk
@@ -7385,6 +7433,11 @@ issues:
     replies:
     - url: https://github.com/jlevy/squares/issues/533#issuecomment-6206055919
       date: '2026-10-16'
+      by: jlevy
+      kind: follow-up
+      reported: []
+    - url: https://github.com/jlevy/squares/issues/533#issuecomment-6370778184
+      date: '2026-10-23'
       by: jlevy
       kind: follow-up
       reported: []
@@ -8582,9 +8635,10 @@ issues:
         October) asks whether the 379 side, which no retained certificate carries, gets a
         beyond-horizon row (think-rfce).
         think-5ip2 lists #557, #565, #570 and #574 as owner-reserved, and the coordinator
-        recorded this hold on 23 October 2026. No instruction in the owner's own words is
-        recorded; the coordinator has asked the owner to confirm the four (think-ezt8 lists
-        them among the owner's open questions).
+        recorded this hold on 23 October 2026. Asked in conversation on 23 October which of
+        the four should stay reserved, the owner stated no preference. As on think-qh3s's
+        question, no preference keeps the status quo, so the four holds stand (think-5ip2).
+        No instruction in the owner's own words is recorded.
     beads:
     - think-rfce
     answer_bead: think-rfce
@@ -8784,9 +8838,10 @@ issues:
         2026) holds it until the owner decides the pull request or tells a pass to post,
         and think-l3oo item 1 (16 October) asks the owner to decide it.
         think-5ip2 lists #557, #565, #570 and #574 as owner-reserved, and the coordinator
-        recorded this hold on 23 October 2026. No instruction in the owner's own words is
-        recorded; the coordinator has asked the owner to confirm the four (think-ezt8 lists
-        them among the owner's open questions).
+        recorded this hold on 23 October 2026. Asked in conversation on 23 October which of
+        the four should stay reserved, the owner stated no preference. As on think-qh3s's
+        question, no preference keeps the status quo, so the four holds stand (think-5ip2).
+        No instruction in the owner's own words is recorded.
     beads:
     - think-9v2k
     answer_bead: think-9v2k
@@ -19336,6 +19391,75 @@ issues:
       - result: n800
       - result: n743
       - result: n985
+    - url: https://github.com/jlevy/squares/issues/715#issuecomment-6360316942
+      date: '2026-10-23'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n461
+      - result: n506
+      - result: n599
+      - result: n645
+      - result: n646
+      - result: n647
+      - result: n648
+      - result: n651
+      - result: n653
+      - result: n696
+      - result: n697
+      - result: n698
+      - result: n702
+      - result: n750
+      - result: n751
+      - result: n752
+      - result: n756
+      - result: n807
+      - result: n809
+      - result: n813
+      - result: n814
+      - result: n864
+      - result: n866
+      - result: n870
+      - result: n871
+      - result: n923
+      - result: n925
+      - result: n931
+      - result: n989
+      - result: n995
+      - result: n535
+      - result: n582
+      - result: n591
+      - result: n631
+      - result: n633
+      - result: n640
+      - result: n682
+      - result: n684
+      - result: n691
+      - result: n695
+      - result: n735
+      - result: n737
+      - result: n742
+      - result: n745
+      - result: n790
+      - result: n791
+      - result: n797
+      - result: n798
+      - result: n799
+      - result: n854
+      - result: n855
+      - result: n856
+      - result: n857
+      - result: n909
+      - result: n913
+      - result: n915
+      - result: n916
+      - result: n970
+      - result: n975
+      - result: n977
+      - result: n743
+      - result: n985
+      - result: n335
+      - result: above-1024
     close_when: >-
       Every claim has a reviewed disposition on main, pending validation has a priced owner,
       any changed house is regularized in its adoption, and the author has received a reply
@@ -19449,6 +19573,21 @@ issues:
       the rows above 1024 are unchanged. It reported the 20 rows of 5a299b4 (9 current) and 21 of
       23aff0c, all superseded on entry, each replayed on both routes with every control refused.
       It states no T-NNN, and the issue stays open.
+
+      The follow-up, posted at 2026-10-23T08:00:01Z (issuecomment-6360316942) after #742
+      merged (598d23289), said that Mykhailo Polkovskyi's #732 rows supersede 30 of the 109
+      recorded rows, at 461 to 995, by 3.07e-8 (at 807) to 7.38e-4 (at 752), each staying
+      listed at the author's print, marked superseded by mishapolk-issue732-2026-10-22, while
+      the 16 #719 superseded stay as they were and the other 63 are current; and that
+      Polkovskyi says his rows at 645, 752 and 931 refine #715's packings, as the triage
+      measured, how a row beyond the corpus names the packing it refines being the owner's
+      open question. It gave two of the owner's answers of 23 October and said the requests
+      record still showed both open: the 30 re-certifications of the 4e4c8ce certificates are
+      restatements and add no rows (think-fwa9; a #732 row is current at 26 of those counts,
+      the 4e4c8ce row at 909, 970 and 975, and a #719 row at 682), and counts above 1024 are
+      tracked with no ceiling (think-f2io, D1). It listed as open 743 and 985 on the
+      deletion-bound question (think-f2io), the exact check at 335 (think-rx26) and the rows
+      above 1024. It states no T-NNN, and the issue stays open.
   - number: 719
     title: 'New packings: 122 verified upper bounds for square packing (N in [105, 1568]): registration request'
     author: Mishapolk
@@ -19464,11 +19603,13 @@ issues:
       places. Imported on 22 October 2026: the source states no licence, so the
       mishapolk-issue719-2026-10-22 packet keeps the 114 certificates at or below 1024 as
       derived exact facts and pins every claimed file by digest. 105 and 204, re-solves of the
-      case's house packings, are T-229 at V0/C0, pending adoption; 111 of the 112 rows beyond
-      the corpus at or below 1024 are beyond-horizon rows, each current, after the filtered
-      exact replay decided every one on two routes with every control refused; 366 is not
-      recorded, below Couzo's 4e4c8ce certificate; the 8 rows above 1024 wait on the owner.
-    read_through: '2026-10-22T20:15:57Z'
+      case's house packings, are T-229, at V0/C0 on import, V3/C3 and adopted at both on 23
+      October, and superseded at 204 on 24 October by T-231, the lower 204 file of the same
+      commit, which the author claimed on the issue; 111 of the 112 rows beyond the corpus at or
+      below 1024 are beyond-horizon rows, each current on import, after the filtered exact
+      replay decided every one on two routes with every control refused; 366 is not recorded,
+      below Couzo's 4e4c8ce certificate; the 8 rows above 1024 wait on the owner.
+    read_through: '2026-10-23T01:52:40Z'
     results:
     - key: n105
       claim: s(105) <= 10.7893037837429748, binary64; the exact header side is authoritative.
@@ -19486,15 +19627,8 @@ issues:
         the header side of certificates/n204.cert at 12fc466 (SHA-256 9c5dabc8...3e7d), 1.48e-11
         below n-204.cert's: the author's answer to the import reply's question 3 claims it.
       source: https://github.com/jlevy/squares/issues/719#issuecomment-6350348588
-      not_registered: >-
-        Claimed after the import registered n-204.cert's side as T-229. The
-        mishapolk-issue719-2026-10-22 packet pins the file by digest only. Its side first
-        appears at 1851c2c (2026-10-22T05:29:48Z), the commit that first published n-204.cert,
-        and is exactly the side Evan Daniel's regularizer reached from T-229's witness in the
-        stage 4 pass. Deriving and replaying it, recording it under the author's credit, its
-        review and its adoption at 204 are think-h01y's.
-      queued: true
-      bead: think-h01y
+      register:
+      - T-231
     - key: n330
       claim: s(330) <= 18.6926724444540682, binary64; the exact header side is authoritative.
       source: body
@@ -20813,11 +20947,31 @@ issues:
       bead: think-9vr8
       blocked_on:
       - think-f2io
+    asks:
+    - what: >-
+        Say which program wrote certificates/n204.cert, and from which input: its side and
+        the rows Evan Daniel's exact solver determines equal that solver's output for T-229's
+        arrangement, row for row (the 23 October review of T-231, RF-1, question 1).
+      state: queued
+      note: >-
+        T-231's method and credit name the solver as measured until he answers; his answer
+        changes them if it names another program.
+      bead: think-xyhn
+    - what: >-
+        Confirm that the MIT licence of 17cc220 and his grant on this issue cover
+        certificates/n204.cert at 12fc4667, which his tree has not held since 3285fac (the
+        23 October review of T-231, RF-3, question 2).
+      state: queued
+      note: >-
+        The mishapolk-n204-2026-10-22 packet retains the file on the grant of his comment of
+        22 October; its custody changes if he says otherwise.
+      bead: think-xyhn
     beads:
     - think-xyhn
     - think-4h23
     - think-9vr8
     - think-h01y
+    - think-tetq
     answer_bead: think-xyhn
     replies:
     - url: https://github.com/jlevy/squares/issues/719#issuecomment-6350110834
@@ -20972,10 +21126,55 @@ issues:
         status: confirmed
       - result: n204-lower
       - result: n447
+    - url: https://github.com/jlevy/squares/issues/719#issuecomment-6360317345
+      date: '2026-10-23'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n372
+      - result: n409
+      - result: n450
+      - result: n453
+      - result: n535
+      - result: n582
+      - result: n591
+      - result: n631
+      - result: n633
+      - result: n640
+      - result: n649
+      - result: n684
+      - result: n691
+      - result: n693
+      - result: n695
+      - result: n735
+      - result: n737
+      - result: n742
+      - result: n745
+      - result: n790
+      - result: n791
+      - result: n797
+      - result: n798
+      - result: n799
+      - result: n810
+      - result: n869
+      - result: n932
+      - result: n990
+      - result: n994
+      - result: n499
+      - result: n204-lower
+      - result: n1061
+      - result: n1128
+      - result: n1196
+      - result: n1266
+      - result: n1339
+      - result: n1413
+      - result: n1489
+      - result: n1568
     close_when: >-
-      T-229 is reviewed and adopted at 105 and 204 (think-4h23), the owner has answered whether
-      counts above 1024 are tracked (think-f2io) and the 8 rows above 1024 have their
-      disposition (think-9vr8), and the replies reporting each are posted.
+      T-229 is reviewed and adopted at 105 and 204 (think-4h23), T-231 is reviewed and adopted
+      at 204 (think-tetq, think-h01y), the owner has answered whether counts above 1024 are
+      tracked (think-f2io) and the 8 rows above 1024 have their disposition (think-9vr8), and
+      the replies reporting each are posted.
     notes: >-
       The issue opened at 2026-10-22T05:30:47Z with 221 counts to 4035 pinned at 1851c2c, was edited
       at 05:35:31Z (credit name Mykhailo Polkovskyi) and at 06:05:31Z to 122 counts pinned at
@@ -21052,6 +21251,55 @@ issues:
       with #732; the 34 in-corpus files stay pinned; and later packets may keep his files under
       the MIT licence of 17cc220. It asked how sqpack/verify.py was called and which 204 file
       the solve began from.
+
+      The author's comment of 2026-10-23T01:52:40Z (issuecomment-6355484781) answers the stage
+      4 follow-up's two questions and adds a recommendation; read through it on 23 October
+      (c-lane-719-records-1023). (1) His harness imported sqpack/verify.py as a module and
+      called its pair-overlap and containment routines on each certificate; his Evan Daniel
+      verify_cert.py and verify_cert2.py were the copies archived in Couzo's repository at
+      6b7391d. T-229's notes, its report atom and both packets' READMEs record it. (2) The 204
+      solve started from Couzo's #678 certificate in Couzo's unrotated frame, not from
+      Daniel's T-225 view. So T-229's credit and lineage at 204 no longer name Daniel's
+      regularization as an antecedent: its regularization item at 204 names T-223 (measured
+      one to one, 60 squares beyond 1e-3, at most 0.237), the sentence that the source states
+      no method and no lineage is replaced by the author's lineage at 105 and 204, and the case
+      record at 204 and its adoption credit follow (think-xyhn). (3) He recommends publishing
+      the review checkers, acceptance harnesses and stage 4 scripts. #732's entry carries the
+      same ask from his comment there (think-0gp6), so none is queued here.
+
+      The lower 204 file (n204-lower) is registered as T-231 from its own packet,
+      mishapolk-n204-2026-10-22, retained under the author's written grant (answer 5 of his
+      comment of 20:15:57Z). Its replay passed on both maintained routes with every control
+      refused, sharp controls included; the stage 4 review of 23 October (think-tetq) accepted
+      it, so it is V3/C3, confirmed, independently re-implemented, at S2; and the pass of 24
+      October adopted it at 204 from T-229, regularized in the same pull request (grid-slack's
+      half-degree view). The review measured the two 204 files as one solved packing at two
+      paddings, with the side and determined rows of Evan Daniel's exact solver, which the
+      source does not name; asks 1 and 2 above put its questions 1 and 2 to the author, and
+      question 3 (which file came first) goes in the reply. The commit 1851c2c first
+      published both 204 files, and a report keeps one claim a count, the least side its
+      commit states there
+      (#722's review A, A2), so the ledger of 22 October walks #719's claim at 204 at
+      n204.cert's side. T-229 stands as registered and adopted at 204 on n-204.cert, the file
+      the issue names, registered before the author claimed the lower file on 22 October at
+      20:15:57Z; T-231, by the same author and from the same commit, superseded it at 204 on
+      24 October. 105 is untouched.
+
+      The follow-up, posted at 2026-10-23T08:00:03Z (issuecomment-6360317345) after #742
+      merged (598d23289), said that #732's rows supersede 29 of the 111 recorded rows, at 372
+      to 994, by 7.49e-13 (at 735) to 3.68e-5 (at 994), each staying listed at its side,
+      marked superseded by mishapolk-issue732-2026-10-22, and that 81 of the other 82 have the
+      same exact side in #732 and stay with their dates. It gave three of the owner's answers
+      of 23 October: 499, 8.66e-13 lower in #732 at the same 12-place print, restates this
+      issue's row, which stays the row there (think-fwa9); the ten withdrawn rows are all rows
+      of #732's source, and the author's 1851c2c files at those counts add no rows, since a
+      file its author withdrew from an issue is not a report (think-8m4k); and counts above
+      1024 are tracked with no ceiling, a later import recording the eight rows at 1061 to
+      1568 (think-f2io, D1). It thanked the author for his answers of 01:52:40Z and said the
+      import of the lower 204 side takes them up, and listed as open the lower 204 side
+      (think-h01y), the rows above 1024 and per-row credit beyond the corpus. The #732 import
+      reply of the same morning answers his recommendation to publish the checkers. It states
+      no T-NNN, and the issue stays open.
   - number: 728
     title: 's(303) ≤ 17.909772217275: registration request'
     author: evand
@@ -21263,11 +21511,14 @@ issues:
       bead: think-f2io
     - what: Publish the review checkers and verification scripts, so that authors can test
         certificates before submitting them.
-      state: queued
+      state: done
       note: >-
-        From the author's comment of 2026-10-23T01:52:47Z. The checkers are already public in this
-        repository (sqpack.verify, devtools.check_rational_witness_independent and
-        devtools.beyond_horizon_replay); the stage 7 reply drafted for this import points to them.
+        From the author's comment of 2026-10-23T01:52:47Z, and his comment on #719 of 01:52:40Z
+        (answer 3). The checkers are already public in this repository (sqpack.verify,
+        devtools.check_rational_witness_independent, devtools.couzo_678_replay and
+        devtools.beyond_horizon_replay), and a stage 4 review keeps its own checker in the
+        packet it reviews; the import reply of 23 October (issuecomment-6360316595) points to
+        each with its command, and says the record plans no separate pre-submission package.
       bead: think-0gp6
     beads:
     - think-0gp6
@@ -21286,6 +21537,25 @@ issues:
       - result: n985
       - result: rows-above-1024
       - result: issue-715-resolution
+      - result: saturation-argument
+      - result: ceiling-census
+    - url: https://github.com/jlevy/squares/issues/732#issuecomment-6360316121
+      date: '2026-10-23'
+      by: jlevy
+      kind: other
+      reported:
+      - result: rows-325-1024
+      - result: n499
+      - result: n985
+    - url: https://github.com/jlevy/squares/issues/732#issuecomment-6360316595
+      date: '2026-10-23'
+      by: jlevy
+      kind: import
+      reported:
+      - result: rows-325-1024
+      - result: n499
+      - result: n985
+      - result: rows-above-1024
       - result: saturation-argument
       - result: ceiling-census
     close_when: >-
@@ -21339,6 +21609,37 @@ issues:
       the nine other counts #719's edit withdrew, each below every earlier report and above
       #732's file there, and holds them (think-8m4k). The stage 7 reply is drafted for after the
       merge; per-row credit beyond the corpus stays the owner's question (D5, think-f2io).
+
+      The verdict comment, posted at 2026-10-23T07:59:58Z (issuecomment-6360316121), is the
+      ledger of 23 October for issue 732 as devtools.intake_comments renders it in its table
+      layout: every count's side at 12 places, verdict and best side now, after a summary (78
+      below every earlier report, 499 among them, and 312 not recorded), with notes where an
+      answer the owner gave on 23 October changes how a verdict reads (499, the nine withdrawn
+      1851c2c files, the sub-print re-certifications, and the held publications of which only
+      985 would change). It states no T-NNN.
+
+      The import reply, posted at 2026-10-23T08:00:00Z (issuecomment-6360316595) after #742
+      merged (598d23289), reported the import: 77 of the 390 rows at or below 1024 are dated
+      rows of the mishapolk-issue732-2026-10-22 source, each current; 499 restates #719's row
+      by the owner's sub-print answer of 23 October (think-fwa9); 985 waits on the
+      deletion-bound question (think-f2io); the other 311 equal or lie above an earlier
+      report; and counts above 1024 are tracked with no ceiling by the owner's answer (D1), a
+      later import recording them. It gave the custody at 17cc220, the report-order walk (76
+      rows first published at 8a488a1 and 539 at 1851c2c, by 7.49e-13 at 735 to 7.38e-4 at
+      752), the filtered two-route replay (all 77 accepted, all 462 controls refused, the
+      all-pairs kernel agreeing at 645, 752 and 995), the rows superseded (30 of #715's, 29 of
+      #719's, 14 of 4e4c8ce's and 4 of 487b058's, correcting the acknowledgement's 30, 30 and
+      17), the ten rows #719's edit withdrew, now all rows of this source, with the owner's
+      answer that a withdrawn file is not a report (think-8m4k), the 128 verdicts that rest on
+      held publications, the credit line and the author's lineage answer, and his other
+      answers (3426, the horizon table, no lower bound claimed). Answering his recommendation,
+      it said the review checkers are public (sqpack.verify,
+      devtools.check_rational_witness_independent, devtools.couzo_678_replay and
+      devtools.beyond_horizon_replay), with their commands, and that the record plans no
+      separate pre-submission package, #734's proposal being with the owner. It listed as open
+      985, the 5,077 rows above 1024, applying the answers on 499 and the withdrawn files to
+      the walk, and per-row credit beyond the corpus. It states no T-NNN, and the issue stays
+      open.
   - number: 734
     title: 'Proposal: submit and fetch upper bounds by API (automated intake, reported the same day)'
     author: wand125
@@ -21353,7 +21654,7 @@ issues:
       and regularize it with one maintainer approval (Level 3), with the current best packings
       served as static JSON under squaremath.org/api/v1/. It tracks project work, not the
       intake of a reported item.
-    read_through: '2026-10-22T20:40:07Z'
+    read_through: '2026-10-23T02:17:06Z'
     results: []
     asks:
     - what: How far to automate the intake of upper bounds, Level 1, 2 or 3.
@@ -21375,3 +21676,13 @@ issues:
     close_when: >-
       The owner has answered the three questions (think-lnzm) and the reply that says so is
       posted.
+    notes: >-
+      Mykhailo Polkovskyi's comment of 2026-10-23T02:17:06Z (issuecomment-6355791263),
+      read on 23 October (c-lane-719-records-1023), reports no result. It supports the
+      proposal from his #719 and #732 submissions, argues that schema-driven intake would
+      cut maintainer and model costs, suggests uses of the API (solver loops, a pre-flight
+      command-line check and a reusable action, distributed search over the gaps, an in-browser
+      inspector, sharded bulk manifests), and answers the three questions: Level 2 now with a
+      path to Level 3; the form's structured credit, lineage, method and AI-assistance fields
+      and the issue number in place of a bead; and api/v1/ on squaremath.org with lower bounds
+      from the start. The questions stay the owner's, on think-lnzm.

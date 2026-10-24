@@ -1,0 +1,97 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/719",
+  "author": "Mishapolk",
+  "source_key": "[Mishapolk n204 2026-10-22]",
+  "report_evidence": "E-mishapolk-n204-certificate-report",
+  "receipt_format": "mishapolk-n204-exact-replay-v1",
+  "witness_prefix": "W-mishapolk-n204-n",
+  "claim_limitations": "Complete 12fc466 rational centre/half-angle certificate in Evan Daniel's format, centres in [0, S]^2, read exactly from the retained source file. Finite construction feasibility only; no KKT, local minimum, rigidity, novelty, priority or global optimality claim.",
+  "read_on": "2026-10-23",
+  "read_at_main": "31584003e738ac4d8e0583e053f688db45c66f6c",
+  "certificates": [
+    {
+      "n": 204,
+      "path": "certificates/n204.cert",
+      "format": "evand-cert",
+      "offered": "14808642830513087197802415708703/1000000000000000000000000000000",
+      "printed_in": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/certificates/n204.cert",
+      "first_committed": "2026-10-22T05:29:48Z"
+    }
+  ],
+  "requested": [204],
+  "replayed": [204],
+  "houses": [
+    {
+      "n": 204,
+      "reader": "[Mishapolk issue 719 2026-10-22]",
+      "source_key": "[Mishapolk issue 719 2026-10-22]",
+      "holders": "Mykhailo Polkovskyi, of Francisco Couzo's packing",
+      "result": "T-229",
+      "reported_value": "14.8086428305278967",
+      "verified_value": "14.8086428305278967",
+      "evidence": [
+        "E-mishapolk-719-exact-feasibility",
+        "E-mishapolk-719-review-exact-feasibility"
+      ]
+    }
+  ],
+  "pending": [
+    {
+      "n": 204,
+      "report": "T-225 (evand 0075967)",
+      "url": "https://github.com/evand/square-packing/tree/0075967bace18a3deabcc0baa64c2fb294fc80a0",
+      "holders": "Francisco Couzo, improved by Evan Daniel",
+      "result": "T-225",
+      "reader": "[Daniel regularized lists 2026-10-20]"
+    },
+    {
+      "n": 204,
+      "report": "T-223 (#678)",
+      "url": "https://github.com/jlevy/squares/issues/678",
+      "holders": "Francisco Couzo",
+      "result": "T-223",
+      "reader": "[Couzo issue 678 2026-10-18]"
+    },
+    {
+      "n": 204,
+      "report": "T-228 (#675)",
+      "url": "https://github.com/jlevy/squares/issues/675",
+      "holders": "Francisco Couzo",
+      "result": "T-228",
+      "reader": "[Couzo issue 675 2026-10-18]"
+    },
+    {
+      "n": 204,
+      "report": "T-226 (#670)",
+      "url": "https://github.com/jlevy/squares/issues/670",
+      "holders": "Francisco Couzo",
+      "result": "T-226",
+      "reader": "[Couzo issue 670 2026-10-17]"
+    },
+    {
+      "n": 204,
+      "report": "T-186 (#593's packet's KKT refinement)",
+      "url": "https://github.com/Mishapolk/square-packing-records/tree/70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94/certificates",
+      "holders": "Mykhailo Polkovskyi, after Daniil Ostashev and PingYou Ltd",
+      "result": "T-186",
+      "reader": "[Mishapolk KKT refinements 2026-10-14]"
+    }
+  ],
+  "register": {
+    "title": "Mykhailo Polkovskyi's lower n204 certificate at 12fc4667, issue 719",
+    "headline": "Polkovskyi's lower re-solve at 204 of Couzo's packing, 1.48e-11 below T-229",
+    "significance": 2,
+    "source_checks": "The author's comment of 23 October says he imported this repository's sqpack/verify.py as a module in a batch harness that parsed each certificate and called its pair-overlap and containment routines, and ran Evan Daniel's verify_cert.py and verify_cert2.py as archived in Francisco Couzo's repository at 6b7391d. Those statements are the author's; no source program ran here.",
+    "credit": "Credit Francisco Couzo's packing, first reported in #670 and refined in #675 and #678 (T-226, T-228, T-223), re-solved to a smaller side by Mykhailo Polkovskyi (https://github.com/Mishapolk/square-packing-records), whose continuous SQP optimization started from Couzo's #678 certificate in Couzo's frame, as his comment of 23 October on issue 719 says; Couzo's source credits Polkovskyi's own construction as the seed of its search (hop job 105412).",
+    "next_rung": "Independently review the retained replay of 204 (think-tetq); once at V3/C3, adopt it as the house and regularize it (think-h01y).",
+    "bead": "think-h01y",
+    "bibliography": {
+      "authors": ["Polkovskyi"],
+      "lineage": "builds-on-project",
+      "credit": "Polkovskyi after Couzo, Daniel, Levy",
+      "short_credit": "Polkovskyi after Couzo et al.",
+      "note": "The second 204 file of issue 719's release, certificates/n204.cert at 12fc46678fa8eefa3f156ff37dfffd84c8f3a580, first committed at 1851c2c, which the author's comment of 22 October claims: a re-solve of Couzo's #678 packing, started from that certificate by continuous SQP, 1.48e-11 below the release's n-204.cert (T-229). The author checked it with this repository's sqpack.verify, imported as a module, and Evan Daniel's verify_cert.py and verify_cert2.py. Retained under the author's written grant on issue 719. Gemini assistance disclosed. Upper bound only; no optimality claim."
+    }
+  }
+}
