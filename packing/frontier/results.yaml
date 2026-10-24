@@ -20711,7 +20711,7 @@ results:
     notes: >-
       V2 because the theorem rests on the 14 October review's reading of its proof, which no
       evidence entry records as a proof audit; the four finite bounds have the two-route
-      replay. The note that holds the author's proof has been public since 18 October 2026
+      replay. It is held at V2 until think-494l lands, as the composition says. The note that holds the author's proof has been public since 18 October 2026
       (v0.9, DOI 10.5281/zenodo.23463481, issue 603) and is not yet retained here. The
       report is dated by the first commit of the theorem it states, Theorem 1's, on 12
       October 2026 (19:16Z), between issues 562 and 564; Theorem 2 took its present form on
@@ -20748,8 +20748,8 @@ results:
       V3 needs an evidence entry the V3 predicate reads for the theorem: the published note
       retained, bound to this claim and recorded as a published proof (think-494l), or a
       build here of Evan Daniel's Lean proof of both theorems with its axiom receipt
-      (think-dgrc: about 2 to 3 CPU-hours, 8 GB of memory and 10 GB of disk), which would
-      also replay the theorem here for C3. C4 needs a second accepted adversarial review by
+      (think-dgrc: about 1.5 to 3 CPU-hours, at most about 8 GB per chunk, and 10 GB of
+      disk, as T-236 prices it), which would also replay the theorem here for C3. C4 needs a second accepted adversarial review by
       a distinct reviewer and a retained human oversight record. The 70 inventory
       certificates pinned by digest wait for a hosted-data release or a W7 route; they move
       no rung of this entry.
@@ -20766,6 +20766,11 @@ results:
       recoverable. The author has since published the note itself (v0.9, 18 October
       2026), so V2's premise, a proof not publicly recoverable, no longer holds; the rung
       moves when an entry for the theorem that the V3 predicate reads is cited (next_rung).
+      Until then V2 is held as the rung nearest what the record holds, not as a finding
+      that the proof cannot be recovered: V3 is derived from cited evidence, and nothing
+      cited yet is evidence the predicate reads, while V0, claimed or recorded only, would
+      drop the review's reading of the proof. think-494l, which retains the note and binds
+      it to this claim as a published proof with a stage 4 review, is the route to V3.
     reviews:
       - path: >-
           docs/project/reviews/review-2026-10-14-fang-excess-theorem-and-direct-certificates.md

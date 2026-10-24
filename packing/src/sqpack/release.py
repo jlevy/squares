@@ -8235,8 +8235,8 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         ),
         reason=(
             "T-163's family assessment and the owner's answer “Credit both "
-            "(Recommended)” (think-rh4j, think-cwfi): the record index reads a recomputed "
-            "record_scope assessment and credits every entry of one report registered "
+            "(Recommended)” (think-rh4j, think-cwfi): the record index reads the stored "
+            "record_scope assessment, which the gate recomputes, and credits every entry of one report registered "
             "twice; T-163's rationale, notes, next_rung and composition name Ryu's "
             "Theorem 1.3 window and the published note; four entries name the beads that "
             "own their unfinished confirmations; and the requests record gains the nine "

@@ -397,8 +397,8 @@ deficiency_upper_bounds:
       at its best b, which Theorem 1.4 never undercuts, smaller for 15 <= k <= 68 and
       70 <= k <= 75, tied at 69 and 76 and larger from 77 (record_scope.assessment).
     complementary_case: >-
-      Ryu's Theorem 1.3 is smaller from k = 77, his Theorem 1.4 from k = 88, and his
-      smaller-exponent rows wherever they apply; this row is the smaller one only in the
+      Ryu's Theorem 1.3 is smaller from k = 77, his Theorem 1.4 at k = 80 to 85 and from
+      k = 88, and his smaller-exponent rows wherever they apply; this row is the smaller one only in the
       window the assessment names.
     note: >-
       Kevin Fang, TheSnakeFang/squarepack-certs at 078789a, no issue, registered as T-163.
