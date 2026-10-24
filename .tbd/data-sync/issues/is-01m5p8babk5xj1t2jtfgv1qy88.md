@@ -5,16 +5,16 @@ title: "News page budget raise: measure_news_page, the news.html exception and t
 kind: task
 status: open
 priority: 1
-version: 7
+version: 8
 spec_path: docs/project/specs/active/plan-2026-10-23-news-pr-feed.md
 delegate: null
 labels: []
 dependencies: []
-parent_id: is-01m5mwbn450xgwq4mgjnrpn0jm
+parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-24T06:07:41.427Z
-updated_at: 2026-10-24T09:26:38.722Z
+updated_at: 2026-10-24T09:43:40.658Z
 started_at: 2026-10-24T06:08:00.514Z
 ---
 The plan docs/project/specs/active/plan-2026-10-23-news-pr-feed.md, section 'Before Phase 1: The Budget Raise' and 'The page budget'. One PR: devtools.measure_news_page (bytes, project, load), its report at today's size and the projected 1,300,000 bytes, PAGE_BUDGET_EXCEPTIONS['news.html'] with a measured reason, docs/project/site-urls.md re-rendered, NEWS_CEILING and NEWS_TRIP_BYTES and the trip check in render_changelog --check with its scopes, the room report and merge-step rule in the runbook, and the tests from the Testing Strategy. Must merge before main's news.html passes 450,000 bytes (318,655 on 24 Oct; about 9 days). Owner's answer: 'Keep all, raise the limit'.
