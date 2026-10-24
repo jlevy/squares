@@ -3,9 +3,9 @@ type: is
 id: is-01m58r5901xpf3e6vy8wwh9mrh
 title: "Import franciscouzo: 85 upper bounds at 204–998 (#678)"
 kind: task
-status: open
+status: closed
 priority: 2
-version: 24
+version: 25
 delegate: coord-intake-1023
 labels:
   - result-import
@@ -17,8 +17,12 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-19T00:14:38.592Z
-updated_at: 2026-10-24T10:20:07.980Z
+updated_at: 2026-10-24T20:22:40.381Z
 started_at: 2026-10-19T00:15:01.708Z
+closed_at: 2026-10-24T20:22:40.381Z
+close_reason: "#678's import is complete: T-223 registered and adopted at 204 and 260 (#701, #706), the 83 beyond-horizon rows recorded, the source corrections answered (#790), and #678 closed with its final reply. The held full-kernel replay stays open on its own in think-fpnd; think-0b6l moved under think-ezt8."
+resolution: null
+duplicate_of: null
 ---
 New 2026-10-18 issue https://github.com/jlevy/squares/issues/678 reports 85 upper-bound rows from franciscouzo/square-packing commit 7b6c87e129cf80b5ff9847b90b47fd30b4563c54, parent c6da0fc7524d667bf3d224559724ba9b60762e60 (#675). Stage 0 owner for the new report; source claims are unverified. Read-only table triage finds 55 counts overlapping #675, each tighter than its earlier displayed value, and 30 new counts; #675 also has 24 counts absent here. Preserve both chronologies and credits, including two deletion-derived rows n545/n641. Next: add pending request/read-through, retain pinned source custody and report-order comparison; price exact replay, independent review and any later house adoption. #678 n260 is below pending T-196 in #676, so later registration must supersede it in merge order without rewriting that earlier report. Do not infer certificate validity or allocate a T number before merge. Draft author reply after the relevant records merge and deployed-site verification. Coordinate with think-pvav (#675). blocked_on: none
 
