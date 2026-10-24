@@ -823,7 +823,7 @@ repositories:
   - url: https://github.com/franciscouzo/square-packing
     read_through: 58a783368d4b7e70bb800f0009ea9ca03e578739
     read_on: '2026-10-15'
-    bead: think-8krd
+    bead: think-kzme
     note: >-
       The head. 43ac7d2 is #607's pin (T-189). 4e4c8ce rewrites the index for n < 1024: its
       certificates/n237.cert is T-190, retained by the couzo-n237-2026-10-15 packet at this
@@ -832,10 +832,16 @@ repositories:
       adds Göbel's square and strip bounds (gobel_bounds.json, GOBEL_COMPARISON.md,
       gobel_comparison.csv), classical closed forms with no discovery claimed, which #613 asks
       the owner about. The couzo-index-2026-10-15 packet pins 4e4c8ce and retains the 253
-      certificates its rows record, and the history walk of Couzo's watched publications holds
-      the rest: the rows above Göbel's construction, which wait with 58a7833's bounds on #613
+      certificates its rows record, and the history walk of Couzo's watched publications holds the
+      rest: the rows above Göbel's construction, which waited with 58a7833's bounds on #613
       (think-8krd), the sub-print re-certifications (think-fwa9) and the index deletion bounds
-      (think-f2io). This read now names think-8krd.
+      (think-f2io). The owner answered all three on 23 October 2026: Göbel's constructions are
+      earlier reports, so neither those rows nor 58a7833's bounds, rational enclosures of Göbel's
+      sides, are recorded; the re-certifications restate the reports they beat; and a bound one
+      square below the next count's certificate is an earlier report (D6). Whether such a bound has
+      a row of its own, whether an issue's claim at 743, 798, 855 or 985 gives it one, and the three
+      bounds at 751, 752 and 927 that delete two or three squares wait, so this read now names
+      think-kzme.
   - url: https://github.com/wand125/square-packing
     read_through: b57e66712b5f722b39fcb703692006062c7d9eb7
     read_on: '2026-10-15'

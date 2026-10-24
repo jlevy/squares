@@ -138,7 +138,7 @@ The [history walk of 22 October](../../../campaign/issue-intake/upper-bounds-cou
 
 [acquisition/beyond-horizon-rows.json](acquisition/beyond-horizon-rows.json) is the record the source register reads them from, as the source `couzo-02f9690-2026-10-09`.
 
-The walk records the commit’s certificates at 369, 375 and 376 too and holds each back from a row: each is above Göbel’s classical construction at its count (#613, think-8krd). The packet’s other five, at 327, 335, 342, 364 and 372, are at or above the side that stood at their count before the walk’s first report, so none could be recorded.
+The commit’s certificates at 369, 375 and 376 are above Göbel’s classical construction at their count, an earlier report by the owner’s answer of 23 October 2026 (#613, think-8krd), so the walk does not record them. The packet’s other five, at 327, 335, 342, 364 and 372, are at or above the side that stood at their count before the walk’s first report, so none could be recorded.
 
 ## What Is Not Established
 
