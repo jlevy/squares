@@ -799,7 +799,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "67f5799ccf8ee06d180e3367b32c47804c16ae45"
+DATA_REVISION = "8f48cc11704344405ab8869d6c5d97999c10fcbc"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -8422,6 +8422,43 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "revision e5c1c64e: each time twice from this tree and once with that main's "
             "result-requests.yaml swapped in, all 43 files byte-identical across the "
             "three. No PDF was printed; it prints from that HTML. Retain v0.2.7."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "Couzo's answers of 24 October on #672, #678 and #715 (think-mdfr): T-227's "
+            "and T-225's credit sentences and T-227's notes, the request entries for "
+            "#672, #678, #715, #534 and #536, and three sources' review dates, against "
+            "main b2ea7b09c (#788): rendered at link revision ba711683 into empty site "
+            "directories, twice from this tree and once from it with main's three "
+            "candidate inputs swapped in (69 files each), "
+            "render_n11_lower_bounds_explainer with its math pass, "
+            "render_n11_optimality_review, render_n11_threshold_bound_review and "
+            "render_packing_methods write every file byte-identical across all three. "
+            "No result is registered, so the explainer's count is unchanged. No PDF was "
+            "printed; each prints from that HTML. Retain v0.4.25, v0.1.11, v0.1.4 and "
+            "v0.2.7."
         ),
     ),
 )
