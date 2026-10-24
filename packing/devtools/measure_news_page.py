@@ -10,17 +10,22 @@ tool's measurement: the plan of 23 October 2026
   for the page the site's own renderer writes when none is named, it reports the raw
   bytes; the gzip bytes at level 6, the level `preview_site.serve` sends; the brotli bytes
   at quality 11, for reference, since GitHub Pages answered a brotli-only request with the
-  uncompressed page; for an address, the raw bytes and the gzip transfer size the site
-  sent; the stories', the feed rows' and the shell's shares and the 90th-percentile
-  story; and the days of room left before the trip point and the budget at the last 28
-  days' story pace, read from the page's own dated cards. The budget is the one the
-  registry gives `news.html` (`site_urls.page_budget`) and the trip point `TRIP_MARGIN`
-  under it, the plan's proposed margin; `--budget` and `--trip` set others.
+  uncompressed page, and withheld on a projected page, whose repeated cards brotli's
+  window reaches across; for an address, the raw bytes and the gzip transfer size the
+  site sent; the stories', the feed rows' and the shell's shares and the 90th-percentile
+  story by nearest rank; and the days of room left before the trip point and the budget
+  at the story pace of the last 28 days, or of `--pace-days`, read from the page's own
+  dated cards, with the earliest story in that window named, since a young page's
+  window dilutes the pace. The budget is the one the registry gives `news.html`
+  (`site_urls.page_budget`) and the trip point `TRIP_MARGIN` under it, the plan's
+  proposed margin; `--budget` and `--trip` set others.
 - `project BYTES --out DIR` writes a site directory, `news.html` beside the shared files
   it names (`render_overview.write_site`), whose page is today's with its own story cards
   repeated, in the page's order, under new ids and anchors, until it reaches BYTES. The
   page passes BYTES by less than one story. A BYTES at or below today's size writes
   today's page unchanged, so `project 0 --out DIR` builds the page as `main` renders it.
+  `--without SCRIPT`, given a script's name such as `news-cards.js`, leaves that script's
+  element out of the page: a control, which says what one script costs at load.
 - `load DIR...` measures `news.html` in each directory in Chromium, every protocol
   unchanged from the tool it belongs to: `check_site_rendering DIR --page news.html
   --runs 3` (CLS, LCP, longest task and blocking time at 1280 and 390 px, light and dark,
@@ -31,9 +36,11 @@ tool's measurement: the plan of 23 October 2026
   gate credit. The report names the host, its load, the Chromium version and the runs.
 
 A page's verdict is the budget's condition: every `check_site_rendering` limit,
-unchanged, on the median of the runs, and the no-JS page readable. Everything else the
-checker reports is listed beside it. Timings on a shared host are advisory, as
-`results.html`'s exception says of its own.
+unchanged, on the median of the runs, and the no-JS page readable. A run the checker
+could not time, or that raised a page error or a failed request, fails it too, since its
+limits were then not measured. Only the checker's count of formulas it cannot see with
+scripts on, which the default filter's hidden S3 cards produce, is listed beside it.
+Timings on a shared host are advisory, as `results.html`'s exception says of its own.
 """
 
 from __future__ import annotations
@@ -41,6 +48,7 @@ from __future__ import annotations
 import argparse
 import gzip
 import json
+import math
 import os
 import platform
 import re
@@ -71,7 +79,8 @@ TRIP_MARGIN = 150_000
 GZIP_LEVEL = 6
 #: Brotli's highest quality, a reference figure only.
 BROTLI_QUALITY = 11
-#: The window the story pace is read over, ending on the day of the reading.
+#: The window the story pace is read over by default, ending on the day of the reading:
+#: the plan's last 28 days. `bytes --pace-days` reads another.
 PACE_DAYS = 28
 #: A story card as `render_changelog.news_card` writes it, `hidden` when it opens
 #: filtered out.
@@ -91,6 +100,8 @@ _LOCAL_HREF = re.compile(r'\bhref="#([^"]*)"')
 _ENTRY = re.compile(r'\bdata-news-entry="([^"]*)"')
 #: The suffix a copy's ids take, numbered by the round of copies it belongs to.
 COPY_SUFFIX = "--projected-{round}"
+#: An id a projection gave a copy, which marks the page as projected.
+_PROJECTED = re.compile(r'\sid="[^"]*--projected-\d+"')
 #: The two widths `check_site_rendering` and `preview_site` lay a page out at.
 WIDTHS = (1280, 390)
 #: Chromium's counters read at load, as `measure_atlas_views` names them.
@@ -103,6 +114,9 @@ COUNTERS = {
 COUNTS = {"LayoutCount": "layouts", "RecalcStyleCount": "style_recalcs"}
 #: The `check_site_rendering` problems that are its four limits, judged on the median.
 LIMIT_PREFIXES = ("cls ", "lcpMs ", "longestTaskMs ", "blockingMs ")
+#: The one problem the checker reports with scripts on that does not decide the verdict:
+#: formulas in the S3 cards the default filter hides. The no-JS check reads them all.
+LISTED_BESIDE = ("visual mathematics missing",)
 
 
 class Card(NamedTuple):
@@ -115,10 +129,13 @@ class Card(NamedTuple):
 
 
 class Room(NamedTuple):
-    """How far a page is from the trip point and the budget, at its own story pace."""
+    """How far a page is from the trip point and the budget, at its own story pace over
+    the `pace_days` days ending on the reading, whose earliest dated story is `earliest`."""
 
     stories: int
+    pace_days: int
     pace_stories: int
+    earliest: date | None
     bytes_per_day: float
     days_to_trip: float | None
     days_to_budget: float | None
@@ -172,14 +189,18 @@ def registered_limits() -> Limits:
     return Limits(budget, budget - TRIP_MARGIN)
 
 
-def room(page: str, *, as_of: date, limits: Limits) -> Room:
+def room(page: str, *, as_of: date, limits: Limits, pace_days: int = PACE_DAYS) -> Room:
     """The page's days of room before the trip point and the budget at the pace of the
-    stories it dates in the `PACE_DAYS` days ending on `as_of`, the plan's last 28 days'
-    pace."""
+    stories it dates in the `pace_days` days ending on `as_of`, by default the plan's
+    last 28 days. The window's bytes are spread over all its days, so a window that
+    starts before the page's first stories reads a slower pace than the page has
+    kept since; `earliest` names the first story inside it."""
+    if pace_days < 1:
+        raise ValueError(f"the pace is read over at least one day, not {pace_days}")
     found = cards(page)
-    first = as_of - timedelta(days=PACE_DAYS - 1)
+    first = as_of - timedelta(days=pace_days - 1)
     recent = [card for card in found if first <= card.day <= as_of]
-    per_day = sum(card.bytes for card in recent) / PACE_DAYS
+    per_day = sum(card.bytes for card in recent) / pace_days
     size = len(page.encode())
 
     def days(limit: int) -> float | None:
@@ -187,19 +208,28 @@ def room(page: str, *, as_of: date, limits: Limits) -> Room:
             return 0.0
         return (limit - size) / per_day if per_day else None
 
-    return Room(len(found), len(recent), per_day, days(limits.trip), days(limits.budget))
+    return Room(
+        len(found),
+        pace_days,
+        len(recent),
+        min((card.day for card in recent), default=None),
+        per_day,
+        days(limits.trip),
+        days(limits.budget),
+    )
 
 
-def room_line(page: str, *, as_of: date, limits: Limits) -> str:
+def room_line(page: str, *, as_of: date, limits: Limits, pace_days: int = PACE_DAYS) -> str:
     """One line: the page's bytes, the trip point, the budget and the days of room."""
-    found = room(page, as_of=as_of, limits=limits)
+    found = room(page, as_of=as_of, limits=limits, pace_days=pace_days)
     if found.days_to_trip is None or found.days_to_budget is None:
-        pace = f"no story dated in the {PACE_DAYS} days to {as_of}, so no pace to project"
+        pace = f"no story dated in the {pace_days} days to {as_of}, so no pace to project"
     else:
         pace = (
             f"about {found.days_to_trip:.0f} days of room before the trip point and "
-            f"{found.days_to_budget:.0f} before the budget at the last {PACE_DAYS} days' "
-            f"pace ({found.pace_stories} stories, {found.bytes_per_day:,.0f} bytes a day)"
+            f"{found.days_to_budget:.0f} before the budget at the last {pace_days} days' "
+            f"pace ({found.pace_stories} stories, the earliest dated {found.earliest}, "
+            f"{found.bytes_per_day:,.0f} bytes a day)"
         )
     return (
         f"{len(page.encode()):,} bytes over {found.stories} stories; trip point "
@@ -214,6 +244,19 @@ def rendered_page() -> str:
     from devtools.site_github_links import decorate_github_links  # noqa: PLC0415
 
     return decorate_github_links(render_overview.news_page().html)
+
+
+def nearest_rank(sizes: Sequence[int], share: float) -> int:
+    """The `share` percentile of `sizes` by nearest rank: the smallest size at or above
+    that share of them, `sorted(sizes)[ceil(share * n) - 1]`."""
+    if not sizes:
+        raise ValueError("no size to rank")
+    return sorted(sizes)[max(math.ceil(share * len(sizes)), 1) - 1]
+
+
+def projected(page: str) -> bool:
+    """Whether `page` carries a projection's copies."""
+    return _PROJECTED.search(page) is not None
 
 
 def gzip_bytes(data: bytes) -> int:
@@ -243,22 +286,26 @@ def byte_report(
     name: str,
     as_of: date,
     limits: Limits,
+    pace_days: int = PACE_DAYS,
     sent: tuple[int, str] | None = None,
 ) -> dict[str, Any]:
-    """The `bytes` mode's report on one page."""
+    """The `bytes` mode's report on one page. On a projected page the brotli size is
+    withheld: quality 11's window reaches across the repeated cards, so it measures the
+    repetition, not the stories. Gzip's 32 KB window does not, so its size stands."""
     data = page.encode()
     found = cards(page)
     sizes = sorted(card.bytes for card in found)
     stories = sum(sizes)
     rows = row_bytes(page)
     shell = len(data) - stories - rows
-    space = room(page, as_of=as_of, limits=limits)
+    space = room(page, as_of=as_of, limits=limits, pace_days=pace_days)
+    copies = projected(page)
     report: dict[str, Any] = {
         "page": name,
         "raw_bytes": len(data),
         "gzip_bytes": gzip_bytes(data),
         "gzip_level": GZIP_LEVEL,
-        "brotli_bytes": brotli_bytes(data),
+        "brotli_bytes": None if copies else brotli_bytes(data),
         "brotli_quality": BROTLI_QUALITY,
         "stories": len(found),
         "story_bytes": stories,
@@ -268,10 +315,12 @@ def byte_report(
         "row_share": round(rows / len(data), 4),
         "shell_share": round(shell / len(data), 4),
         "story_mean_bytes": round(stories / len(found)) if found else None,
-        "story_p90_bytes": sizes[int(len(sizes) * 0.9)] if sizes else None,
+        "story_p90_bytes": nearest_rank(sizes, 0.9) if sizes else None,
+        "story_p90_rule": "nearest rank",
         "as_of": as_of.isoformat(),
-        "pace_days": PACE_DAYS,
+        "pace_days": space.pace_days,
         "pace_stories": space.pace_stories,
+        "pace_earliest_story": None if space.earliest is None else space.earliest.isoformat(),
         "pace_bytes_per_day": round(space.bytes_per_day),
         "trip_bytes": limits.trip,
         "budget_bytes": limits.budget,
@@ -280,6 +329,10 @@ def byte_report(
             None if space.days_to_budget is None else round(space.days_to_budget, 1)
         ),
     }
+    if copies:
+        report["brotli_withheld"] = (
+            "a projected page: brotli's window reaches across its repeated cards"
+        )
     if sent is not None:
         report["sent_bytes"], report["sent_encoding"] = sent
     return report
@@ -326,6 +379,21 @@ def project_page(page: str, target: int) -> Projection:
                 break
     first = found[0].start
     return Projection(page[:first] + "".join(copies) + page[first:], len(copies), rounds)
+
+
+def without_scripts(page: str, names: Sequence[str]) -> str:
+    """`page` with the element of each named script left out, a script named by its
+    file, `news-cards.js`, as the site writes it content-hashed under `assets/js/`."""
+    for name in names:
+        stem = name.removesuffix(".js")
+        element = re.compile(
+            rf'<script\b[^>]*\bsrc="(?:[^"]*/)?{re.escape(stem)}(?:\.[0-9a-f]+)?\.js"'
+            r"[^>]*></script>\n?"
+        )
+        page, count = element.subn("", page)
+        if count != 1:
+            raise ValueError(f"the page has {count} elements for the script {name}, not 1")
+    return page
 
 
 def write_projection(page: str, out: Path) -> None:
@@ -415,27 +483,33 @@ def rendering(directory: Path, runs: int) -> dict[str, Any]:
 
 def verdict(report: dict[str, Any]) -> dict[str, Any]:
     """Whether a `check_site_rendering` report meets the budget's condition: its four
-    limits on the medians, unchanged, and the no-JS page readable. The checker's other
-    problems are listed beside the verdict, not dropped."""
-    limits = [
-        failure
-        for failure in report["failures"]
-        if failure.split(": ", 1)[-1].startswith(LIMIT_PREFIXES)
-    ]
-    static = [failure for failure in report["failures"] if " no-JS " in failure]
-    other = [
-        failure
-        for failure in report["failures"]
-        if failure not in limits and failure not in static
-    ]
+    limits on the medians, unchanged, and the no-JS page readable. A run the checker
+    could not time, or one with a page error or a failed request, fails it as well,
+    since the limits were then not all measured. Only `LISTED_BESIDE` is listed beside
+    the verdict without deciding it."""
+    limits: list[str] = []
+    static: list[str] = []
+    runs: list[str] = []
+    other: list[str] = []
+    for failure in report["failures"]:
+        problem = failure.split(": ", 1)[-1]
+        if " no-JS " in failure:
+            static.append(failure)
+        elif problem.startswith(LIMIT_PREFIXES):
+            limits.append(failure)
+        elif problem in LISTED_BESIDE:
+            other.append(failure)
+        else:
+            runs.append(failure)
     worst = {
         key: max(row[key] for row in report["pages"])
         for key in ("cls", "lcpMs", "longestTaskMs", "blockingMs")
     }
     return {
-        "passes": not limits and not static,
+        "passes": not limits and not static and not runs,
         "limit_failures": limits,
         "no_js_failures": static,
+        "run_failures": sorted(set(runs)),
         "other_findings": sorted(set(other)),
         "worst_medians": worst,
         "timing_exceedances": report.get("timing_exceedances", []),
@@ -613,6 +687,7 @@ def _today() -> date:
 
 def _bytes_mode(args: argparse.Namespace) -> None:
     as_of = args.as_of or _today()
+    pace_days = args.pace_days
     registered = registered_limits()
     budget = args.budget or registered.budget
     limits = Limits(budget, args.trip or budget - TRIP_MARGIN)
@@ -627,10 +702,11 @@ def _bytes_mode(args: argparse.Namespace) -> None:
             pages.append((name, Path(name).read_text(encoding="utf-8"), None))
     if args.markdown:
         for name, text, _sent in pages:
-            print(f"{name}: {room_line(text, as_of=as_of, limits=limits)}")
+            line = room_line(text, as_of=as_of, limits=limits, pace_days=pace_days)
+            print(f"{name}: {line}")
         return
     reports = [
-        byte_report(text, name=name, as_of=as_of, limits=limits, sent=sent)
+        byte_report(text, name=name, as_of=as_of, limits=limits, pace_days=pace_days, sent=sent)
         for name, text, sent in pages
     ]
     json.dump(reports, sys.stdout, indent=2)
@@ -640,16 +716,18 @@ def _bytes_mode(args: argparse.Namespace) -> None:
 def _project_mode(args: argparse.Namespace) -> None:
     today = rendered_page()
     projection = project_page(today, args.target)
-    write_projection(projection.page, args.out)
+    written = without_scripts(projection.page, args.without)
+    write_projection(written, args.out)
     report = {
         "out": str(args.out / PAGE),
         "target_bytes": args.target,
         "today_bytes": len(today.encode()),
         "today_stories": len(cards(today)),
-        "raw_bytes": len(projection.page.encode()),
-        "stories": len(cards(projection.page)),
+        "raw_bytes": len(written.encode()),
+        "stories": len(cards(written)),
         "stories_added": projection.stories_added,
         "rounds": projection.rounds,
+        "without": args.without,
     }
     print(json.dumps(report, indent=2))
 
@@ -688,17 +766,35 @@ def main(argv: Sequence[str] | None = None) -> int:
     sizes.add_argument(
         "--trip", type=int, help=f"the trip point, {TRIP_MARGIN:,} under the budget by default"
     )
+    sizes.add_argument(
+        "--pace-days",
+        type=int,
+        default=PACE_DAYS,
+        metavar="N",
+        help=f"read the story pace over the N days to --as-of, {PACE_DAYS} by default",
+    )
+    sizes.add_argument(
+        "--markdown", action="store_true", help="print each page's room line, not JSON"
+    )
     grow = modes.add_parser("project", help="write today's page grown to BYTES")
     grow.add_argument("target", type=int, metavar="BYTES")
     grow.add_argument("--out", type=Path, required=True, metavar="DIR")
+    grow.add_argument(
+        "--without",
+        action="append",
+        default=[],
+        metavar="SCRIPT",
+        help="leave this script, such as news-cards.js, out of the page, as a control",
+    )
     loads = modes.add_parser("load", help="measure news.html in each built directory")
     loads.add_argument("directory", type=Path, nargs="+", metavar="DIR")
     loads.add_argument("--runs", type=int, default=3)
-    for mode in (sizes, loads):
-        mode.add_argument("--markdown", action="store_true", help="print tables, not JSON")
+    loads.add_argument("--markdown", action="store_true", help="print tables, not JSON")
     args = parser.parse_args(argv)
     if args.mode == "load" and args.runs < 1:
         parser.error("--runs must be positive")
+    if args.mode == "bytes" and args.pace_days < 1:
+        parser.error("--pace-days must be positive")
     try:
         if args.mode == "bytes":
             _bytes_mode(args)
