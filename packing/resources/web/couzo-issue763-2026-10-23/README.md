@@ -309,11 +309,11 @@ derivation’s controls. The walk below finds every one strictly below the recor
 the rest of the triage’s rule.
 
 **Retained.** The 87 certificates `certificates/best/nN.cert`, 9,780,397 bytes, were added
-to this packet’s scope from a checkout of the same commit, each bound to its Git blob there,
-with the SHA-256 the index and the manifest state. The packet now retains 304 of its 310
-files (95,765,140 bytes) and pins 793 certificates under `certificates/best/` by the commit
-alone. `check_added_blobs --base origin/main --staged` passed before the first commit, at
-2.1 MB as a thin pack.
+to this packet’s scope from a checkout of the same commit, each bound to its Git blob
+there; the stage 1 triage found each at the SHA-256 the index states. The packet now
+retains 304 of its 310 files (95,765,140 bytes) and pins 793 certificates under
+`certificates/best/` by the commit alone. `check_added_blobs --base origin/main --staged`
+passed before the first commit, at 2.1 MB as a thin pack.
 
 **Licence.** The 87 are the packings of other authors’ notebooks, so the presumption of
 permission from Couzo’s submission does not cover them. They are retained as factual data

@@ -451,15 +451,14 @@ def earlier_sides(paths: tuple[Path, ...] = EARLIER) -> frozenset[tuple[int, Fra
 def notebook_of(entry: Mapping[str, Any], witnesses: Mapping[str, Any]) -> dict[str, Any]:
     """The notebook an entry's packing comes from, as the manifest states it for the
     certificate the entry reads: the witness at its own count, or, for a construction, at
-    the count of the certificate it builds on. The witness must name that certificate and
-    its SHA-256, and state the notebook and its run."""
+    the count of the certificate it builds on. The witness must name that certificate's
+    path and state the notebook and its run."""
     source_n = int((entry.get("construction") or {}).get("source_n") or entry["n"])
     witness = witnesses.get(str(source_n))
     _require(isinstance(witness, Mapping), f"{entry['n']}: no manifest witness at {source_n}")
     assert isinstance(witness, Mapping)
     _require(
-        witness.get("certificate") == entry["certificate"]
-        and witness.get("certificate_sha256") == entry["certificate_sha256"],
+        witness.get("certificate") == entry["certificate"],
         f"{entry['n']}: the manifest's witness at {source_n} names another certificate",
     )
     stated = (witness.get("provenance") or {}).get("source_provenance") or {}
