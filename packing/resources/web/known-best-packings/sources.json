@@ -2101,19 +2101,19 @@
       "url": "https://github.com/evand/square-packing/blob/7d1407a0b66c46e32cdbcbd5619586fe2bdd52a1/search/exact/cur/data/n-302.minpoly.json.gz"
     },
     {
-      "attribution": "Evan Daniel, https://github.com/evand/square-packing/blob/f06521f4bde9e379a91c1ea88053f3e43df8ede5/search/packer/candidates/s303_r303w0.cert at f06521f4bde9e379a91c1ea88053f3e43df8ede5",
+      "attribution": "Amund Kristiansen, https://gist.github.com/amundsk/78f9f0e7b4669f2f509a281845081768/blob/511f56bf6e6afb4eb22f12d31371c2a2fe7b4767/s303_amund.cert at 511f56bf6e6afb4eb22f12d31371c2a2fe7b4767",
       "kind": "packet-derived-facts",
-      "license_status": "MIT",
+      "license_status": "no-licence-published",
       "listed_n": [
         303
       ],
       "n": 303,
-      "path": "resources/web/evand-n303-2026-10-22/source/search/packer/candidates/s303_r303w0.cert",
-      "raw_asset_retained": true,
-      "retention_policy": "Complete source certificate retained losslessly and bound to the SHA-256 its packet pins upstream; no upstream program or prose is copied.",
-      "retrieved": "2026-10-22",
+      "path": "resources/web/amundsk-n303-2026-10-23/facts/n-303.yaml.gz",
+      "raw_asset_retained": false,
+      "retention_policy": "Exact certificate retained as a derived fact, bound to the SHA-256 its packet pins upstream; no upstream byte is copied.",
+      "retrieved": "2026-10-23",
       "source_n": 303,
-      "url": "https://github.com/evand/square-packing/blob/f06521f4bde9e379a91c1ea88053f3e43df8ede5/search/packer/candidates/s303_r303w0.cert"
+      "url": "https://gist.github.com/amundsk/78f9f0e7b4669f2f509a281845081768/blob/511f56bf6e6afb4eb22f12d31371c2a2fe7b4767/s303_amund.cert"
     },
     {
       "attribution": "Mykhailo Polkovskyi, https://github.com/Mishapolk/square-packing-records/blob/70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94/certificates/n304.cert at 70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94",

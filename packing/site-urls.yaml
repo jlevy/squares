@@ -7115,7 +7115,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-23'
+  lastmod: '2026-10-24'
   status: live
 - path: cases/304.html
   canonical: cases/304.html
@@ -8576,6 +8576,14 @@ urls:
   status: live
 - path: profiles/allen-chang.html
   canonical: profiles/allen-chang.html
+  kind: page
+  generator: devtools.render_contributors:contributor_pages
+  producer: overview
+  first_published: '2026-10-13'
+  lastmod: '2026-10-22'
+  status: live
+- path: profiles/amund-kristiansen.html
+  canonical: profiles/amund-kristiansen.html
   kind: page
   generator: devtools.render_contributors:contributor_pages
   producer: overview
@@ -21013,6 +21021,39 @@ urls:
     - packing/resources/web/evand-rect-small-n-lean-2026-10-22/square-packing/lean/Sqpack/Rect5Pts.lean
     - packing/resources/web/evand-rect-small-n-lean-2026-10-22/receipts/lean-closure.json
     - packing/devtools/lean_closure.py
+- path: result/t-239.html
+  canonical: result/t-239.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-23'
+  lastmod: '2026-10-23'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 303
+    established: null
+    attribution:
+      source_keys:
+      - '[Kristiansen n303 2026-10-23]'
+      published: '2026-10-23'
+    builds_on: null
+    evidence:
+    - E-amundsk-755-n303-report
+    - E-amundsk-755-n303-exact-feasibility
+    - E-amundsk-755-n303-review-exact-feasibility
+    artifacts:
+    - packing/resources/web/amundsk-n303-2026-10-23/README.md
+    - packing/resources/web/amundsk-n303-2026-10-23/acquisition/claims.json
+    - packing/resources/web/amundsk-n303-2026-10-23/facts/n-303.yaml.gz
+    - packing/resources/web/amundsk-n303-2026-10-23/receipts/exact-certification.json.xz
+    - packing/resources/web/amundsk-n303-2026-10-23/replay/sharp-controls.json
+    - packing/resources/web/amundsk-n303-2026-10-23/measure/identity.json
+    - packing/devtools/upper_bound_reports.py
+    - docs/project/reviews/review-2026-10-23-amundsk-n303.md
+    - packing/resources/web/amundsk-n303-2026-10-23/review/review-2026-10-23/README.md
 - path: results.html
   canonical: results.html
   kind: page

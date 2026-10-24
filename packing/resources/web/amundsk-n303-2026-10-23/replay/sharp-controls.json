@@ -1,0 +1,84 @@
+{
+ "format": "amundsk-755-sharp-controls-v1",
+ "n": 303,
+ "epsilon": "1/1000000000000000000000000000000",
+ "controls": [
+  {
+   "control": "side-lowered-past-wall-contact",
+   "where": "at-contact",
+   "margin": "wall",
+   "expected_margin": "0",
+   "routes": {
+    "exact_verify": {
+     "passed": true,
+     "wall": "0",
+     "as_expected": true
+    },
+    "independent": {
+     "passed": true,
+     "wall": "0",
+     "as_expected": true
+    }
+   },
+   "cpu_seconds": 9.55
+  },
+  {
+   "control": "side-lowered-past-wall-contact",
+   "where": "past-contact",
+   "margin": "wall",
+   "expected_margin": "-1/1000000000000000000000000000000",
+   "routes": {
+    "exact_verify": {
+     "passed": false,
+     "wall": "-1/1000000000000000000000000000000",
+     "as_expected": true
+    },
+    "independent": {
+     "passed": false,
+     "wall": "-1/1000000000000000000000000000000",
+     "as_expected": true
+    }
+   },
+   "cpu_seconds": 9.45
+  },
+  {
+   "control": "tightest-pair-closed-past-contact",
+   "where": "at-contact",
+   "margin": "gap",
+   "expected_margin": "0",
+   "routes": {
+    "exact_verify": {
+     "passed": true,
+     "gap": "0",
+     "as_expected": true
+    },
+    "independent": {
+     "passed": true,
+     "gap": "0",
+     "as_expected": true
+    }
+   },
+   "cpu_seconds": 9.97
+  },
+  {
+   "control": "tightest-pair-closed-past-contact",
+   "where": "past-contact",
+   "margin": "gap",
+   "expected_margin": "-1/1000000000000000000000000000000",
+   "routes": {
+    "exact_verify": {
+     "passed": false,
+     "gap": "-1/1000000000000000000000000000000",
+     "as_expected": true
+    },
+    "independent": {
+     "passed": false,
+     "gap": "-1/1000000000000000000000000000000",
+     "as_expected": true
+    }
+   },
+   "cpu_seconds": 10.17
+  }
+ ],
+ "all_as_expected": true
+}

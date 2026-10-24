@@ -7606,6 +7606,29 @@ sources:
     3 native jobs have full outcomes. No selected override or superseded claim is created at this source-only
     stage; current cases and earlier source ownership remain unchanged.
 
+- id: amundsk-n303-2026-10-23
+  title: Amund Kristiansen's n303 dilation certificate at 511f56b, issue755
+  role: source-repository
+  url: https://gist.github.com/amundsk/78f9f0e7b4669f2f509a281845081768/511f56bf6e6afb4eb22f12d31371c2a2fe7b4767
+  local: resources/web/amundsk-n303-2026-10-23/
+  source_key: '[Kristiansen n303 2026-10-23]'
+  scope:
+    n_values:
+    - 303
+  reviewed: '2026-10-23'
+  source_date: '2026-10-23'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/amundsk-n303-2026-10-23/acquisition/claims.json
+  evidence:
+  - E-amundsk-755-n303-report
+  notes: The 1 complete certificate is kept as a derived exact fact, no upstream byte retained, admitted
+    only where its exact side equals, or rounds up to, the side its source prints. T-239 records the
+    in-horizon report. All 3 native jobs have full outcomes. No selected override or superseded claim
+    is created at this source-only stage; current cases and earlier source ownership remain unchanged.
+
 - id: evand-n343-sweep-2026-10-20
   title: Evan Daniel's n343 certificate at 88385ab, issue702
   role: source-repository
@@ -10316,11 +10339,11 @@ selected_overrides:
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
     a replay here and an accepted review, adopted on 2026-10-23 (T-193).
 - n: 303
-  source_id: evand-n303-2026-10-22
-  value: '17.9097722172743278'
-  evidence: E-evand-728-n303-report
+  source_id: amundsk-n303-2026-10-23
+  value: '17.9097623274752568'
+  evidence: E-amundsk-755-n303-report
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
-    a replay here and an accepted review, adopted on 2026-10-23 (T-230).
+    a replay here and an accepted review, adopted on 2026-10-24 (T-239).
 - n: 304
   source_id: mishapolk-kkt-refinements-2026-10-14
   value: '17.92942775807517497'
@@ -11486,17 +11509,17 @@ superseded_reports:
 - n: 303
   source_id: casson-square-packing-2026
   value: '17.93105636462953001'
-  superseded_by: evand-n303-2026-10-22
+  superseded_by: amundsk-n303-2026-10-23
   reason: The SQUISH reported new packing is smaller than this retained earlier claim.
 - n: 303
   source_id: franciscouzo-square-packing-2026
   value: '17.924349265547932'
-  superseded_by: evand-n303-2026-10-22
+  superseded_by: amundsk-n303-2026-10-23
   reason: The SQUISH reported new packing is smaller than this retained earlier claim.
 - n: 303
   source_id: franciscouzo-square-packing-2026-10-03
   value: '17.924341009860250'
-  superseded_by: evand-n303-2026-10-22
+  superseded_by: amundsk-n303-2026-10-23
   reason: The SQUISH reported new packing is smaller than this retained earlier claim.
 - n: 304
   source_id: casson-square-packing-2026
@@ -11594,7 +11617,7 @@ superseded_reports:
 - n: 303
   source_id: evand-square-packing-2026-10-05
   value: '17.924341009851128373110514612828'
-  superseded_by: evand-n303-2026-10-22
+  superseded_by: amundsk-n303-2026-10-23
   reason: The SQUISH reported new packing is smaller than this retained earlier claim.
 - n: 88
   source_id: kingbird-current
@@ -12055,9 +12078,9 @@ superseded_reports:
 - n: 303
   source_id: squish-ten-packings-2026-10-07
   value: '17.9203123729203498'
-  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-230's exact
+  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-239's exact
     side is smaller.
-  superseded_by: evand-n303-2026-10-22
+  superseded_by: amundsk-n303-2026-10-23
 - n: 305
   source_id: evand-square-packing-2026-10-05
   value: '17.952959459015527962875662582531'
@@ -12266,8 +12289,8 @@ superseded_reports:
   source_id: evand-regularized-2026-10-10
   value: '17.9130654627385324'
   reason: The house from 2026-10-11 until 2026-10-15; its certificate stays retained and verified,
-    and T-230's exact side is smaller.
-  superseded_by: evand-n303-2026-10-22
+    and T-239's exact side is smaller.
+  superseded_by: amundsk-n303-2026-10-23
 - n: 129
   source_id: dostashev-compositions-2026-10-12
   value: '11.8700138504044644'
@@ -12350,8 +12373,8 @@ superseded_reports:
   source_id: dostashev-compositions-2026-10-12
   value: '17.9099582910699080'
   reason: The house from 2026-10-15 until 2026-10-16; its certificate stays retained and verified,
-    and T-230's exact side is smaller.
-  superseded_by: evand-n303-2026-10-22
+    and T-239's exact side is smaller.
+  superseded_by: amundsk-n303-2026-10-23
 - n: 304
   source_id: dostashev-merged-bands-2026-10-13
   value: '17.9294277580751750'
@@ -12668,8 +12691,8 @@ superseded_reports:
   source_id: mishapolk-kkt-refinements-2026-10-14
   value: '17.90995829106990799'
   reason: The house from 2026-10-16 until 2026-10-23; its certificate stays retained and verified,
-    and T-230's exact side is smaller.
-  superseded_by: evand-n303-2026-10-22
+    and T-239's exact side is smaller.
+  superseded_by: amundsk-n303-2026-10-23
 - n: 70
   source_id: evand-regularized-2026-10-10
   value: '8.8809603715555796'
@@ -12730,6 +12753,12 @@ superseded_reports:
   reason: The house from 2026-10-23 until 2026-10-24; its certificate stays retained and verified,
     and T-231's exact side is smaller.
   superseded_by: mishapolk-n204-2026-10-22
+- n: 303
+  source_id: evand-n303-2026-10-22
+  value: '17.9097722172743278'
+  reason: The house from 2026-10-23 until 2026-10-24; its certificate stays retained and verified,
+    and T-239's exact side is smaller.
+  superseded_by: amundsk-n303-2026-10-23
 beyond_horizon_claims:
 - n: 327
   source_id: couzo-extended-range-reports-2026-10-08

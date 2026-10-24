@@ -407,6 +407,7 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
         "T-228",
         "T-136",
         "T-173",
+        "T-230",
     }
     # The house adoption of 11 October 2026 moved 42 case records to the smallest
     # confirmed and reviewed side the register held (think-fvz4): SQUISH's earlier packets
@@ -451,6 +452,8 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
     # The same pass's adoption of the nine algebraic houses (think-ot5c) took 259 from
     # SQUISH's third request (T-136) and 153 and 207 from Mishapolk's exact certificates
     # (T-173), the last houses of both; T-146 keeps 292 and T-186 its other houses.
+    # The adoption of 24 October 2026 took 303 to Amund Kristiansen's certificate (T-239),
+    # the only house of Evan Daniel's #728 certificate (T-230), which it supersedes.
     for entry in ("T-128", "T-130"):
         assert view.position_marks(
             records.results[entry], view.standing(records.results[entry], records), records

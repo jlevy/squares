@@ -580,8 +580,10 @@ def _sources() -> dict[str, Source]:
         packet_source("T-224", "evand-n270-sweep-2026-10-20"),
         packet_source("T-225", "evand-regularized-2026-10-20"),
         packet_source("T-229", "mishapolk-issue719-2026-10-22"),
-        packet_source("T-230", "evand-n303-2026-10-22"),
         packet_source("T-231", "mishapolk-n204-2026-10-22"),
+        # The adoption of 24 October 2026 moved 303, T-230's only count, to T-239, so
+        # T-230 is no source here now, as T-196 and T-199 left on 22 October.
+        packet_source("T-239", "amundsk-n303-2026-10-23"),
     ]
     found = {source.result: source for source in sources}
     # Two results may read one packet (T-181 and T-182 both read issue 586's), so the
@@ -622,7 +624,7 @@ def _sources() -> dict[str, Source]:
 #: and Evan Daniel's exact forms of issue 639 (T-193) at 102, 123, 258 and 295 from T-146,
 #: at 259 from T-136 and at 302 from T-186, which leaves T-136 and T-173 no house here.
 #: The pass of 24 October 2026 adopted Polkovskyi's lower 204 file (T-231) at 204 from
-#: T-229.
+#: T-229, and Amund Kristiansen's certificate of issue 755 (T-239) at 303 from T-230.
 ADOPTED: dict[int, str] = {
     29: "T-195",
     68: "T-174",
@@ -688,7 +690,7 @@ ADOPTED: dict[int, str] = {
     295: "T-193",
     297: "T-174",
     302: "T-193",
-    303: "T-230",
+    303: "T-239",
     304: "T-186",
     305: "T-174",
     306: "T-174",
@@ -765,6 +767,11 @@ NUMBERS = tuple(sorted(ADOPTED))
 #: claimed after T-229 was registered (T-231), after the 23 October review of it, at 204
 #: from T-229, 1.48e-11 below it: the same packing at the solved side. It is dated by the
 #: day its pull request merges, since the pass of 23 October had already moved 204.
+#: The same pass adopted Amund Kristiansen's certificate of issue 755 (T-239) after the 23
+#: October review of it, at 303 from T-230, 9.89e-06 below it: another arrangement of
+#: T-230's packing, found from it. The pass of 23 October had already moved 303 too, and one
+#: day's archive holds one prior state a count; its pull request merged after T-231's, and
+#: 303 joined that day's pass, whose archive takes a row for each count.
 #: A count a pass names keeps its place in the earlier passes' sets, which their archives
 #: hold; it was adopted on the latest day that names it.
 LATER_PASSES: dict[str, frozenset[int]] = {
@@ -841,7 +848,7 @@ LATER_PASSES: dict[str, frozenset[int]] = {
     "2026-10-21": frozenset({260, 270}),
     "2026-10-22": frozenset({204, 227, 229, 260}),
     "2026-10-23": frozenset({70, 102, 105, 123, 153, 204, 207, 258, 259, 295, 302, 303}),
-    "2026-10-24": frozenset({204}),
+    "2026-10-24": frozenset({204, 303}),
 }
 
 

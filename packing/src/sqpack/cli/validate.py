@@ -183,11 +183,13 @@ SCREEN_EXCLUDED: dict[str, tuple[str, ...]] = {
 #: against its 9 and 19, 3 and 17 at 258 against T-146's 3 and 16, and 54 and 190 at 259
 #: against T-136's 37 and 177, with 295 and 302 unchanged. The pass of 24 October 2026
 #: moved 204 to the release's lower 204 file (T-231, think-h01y), the same packing at its
-#: solved side: 21 and 85 again, so the totals stand.
+#: solved side: 21 and 85 again, so the totals stand; and 303 again, to Amund Kristiansen's
+#: issue-755 certificate (T-239, think-tqb5): 12 separating and 37 translating squares
+#: against T-230's 10 and 27.
 SCREEN_FINDINGS: dict[str, tuple[int, int, int, int]] = {
     "n=1..100": (28, 111, 86, 577),
     "n=1..200": (67, 397, 182, 2012),
-    "n=1..324": (124, 1182, 302, 5100),
+    "n=1..324": (124, 1184, 302, 5110),
 }
 UNDETERMINED_BY_MISS = (28,)
 #: The cases the two sampled sweeps re-derive on every pull request, computed here from

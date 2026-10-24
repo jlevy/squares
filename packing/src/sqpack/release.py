@@ -799,7 +799,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "5c12633e0f94e95c4b06c48d990af0035aba4b64"
+DATA_REVISION = "e63e8906d0bcf3c6bd165f77907fd5fc3b7f953a"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -896,6 +896,14 @@ FIRST_PUBLISHED = PUBLICATION_HISTORY[-1].first_published
 #:                                            day is the one recorded
 #: The leading entry is proposed for the next publication; confirm its date at first deployment.
 EXPLAINER_HISTORY = (
+    PublicationHistoryEntry(
+        version="v0.4.25",
+        first_published="October 24, 2026",
+        result_scope=(
+            "Update the registered result count after the registration of Amund "
+            "Kristiansen's #755 certificate at 303 (T-239)."
+        ),
+    ),
     PublicationHistoryEntry(
         version="v0.4.24",
         first_published="October 24, 2026",
@@ -1448,6 +1456,16 @@ class ReleaseImpactDecision(NamedTuple):
 # New component cuts append decisions here, newest first, alongside their own histories.
 # No impact is invented retrospectively for the published baseline editions.
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
+    ReleaseImpactDecision(
+        component="paper:n11-lower-bounds-explainer",
+        previous_version="v0.4.24",
+        version="v0.4.25",
+        impact="patch",
+        reason=(
+            "Update the registered result count after the registration of Amund "
+            "Kristiansen's #755 certificate at 303 (T-239)."
+        ),
+    ),
     ReleaseImpactDecision(
         component="paper:n11-lower-bounds-explainer",
         previous_version="v0.4.23",
@@ -2494,73 +2512,6 @@ class ReleaseNoPublicChange(NamedTuple):
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
     ReleaseNoPublicChange(
-        components=(
-            "paper:n11-lower-bounds-explainer",
-            "paper:n11-optimality-review",
-            "paper:n11-threshold-bound-review",
-            "paper:square-packing-methods-survey",
-        ),
-        paths=(
-            "packing/atlas/known-best/bound-citations.json",
-            "packing/atlas/known-best/composite-figure.json",
-            "packing/devtools/adopt_houses.py",
-            "packing/devtools/algebraic_witness_reports.py",
-            "packing/devtools/build_known_best_atlas.py",
-            "packing/devtools/check_standing.py",
-            "packing/devtools/default_drawings.py",
-            "packing/devtools/exact_sides.py",
-            "packing/devtools/regularize_evand.py",
-            "packing/devtools/regularized_drawings.py",
-            "packing/devtools/render_case_pages.py",
-            "packing/devtools/render_recent_results.py",
-            "packing/devtools/render_research_tables.py",
-            "packing/devtools/select_houses.py",
-            "packing/devtools/upper_bound_houses.py",
-            "packing/frontier/README.md",
-            "packing/frontier/n-070.md",
-            "packing/frontier/n-102.md",
-            "packing/frontier/n-123.md",
-            "packing/frontier/n-153.md",
-            "packing/frontier/n-207.md",
-            "packing/frontier/n-295.md",
-            "packing/frontier/results.yaml",
-            "packing/frontier/source-coverage.yaml",
-            "packing/frontier/square-packing-case.schema.yaml",
-            "packing/src/sqpack/cli/validate.py",
-        ),
-        outputs=(
-            "papers/n11-lower-bounds-explainer.html",
-            "papers/n11-lower-bounds-explainer.md",
-            "papers/n11-optimality-review.html",
-            "papers/n11-optimality-review.md",
-            "papers/n11-threshold-bound-review.html",
-            "papers/n11-threshold-bound-review.md",
-            "papers/square-packing-methods-survey.html",
-            "papers/square-packing-methods-survey.md",
-        ),
-        reason=(
-            "The house writer's algebraic side and the adoption of the nine algebraic "
-            "houses of 23 October 2026 (think-ot5c: T-174 at 70, 153 and 207, T-193 at "
-            "102, 123, 258, 259, 295 and 302), their regularization runs, settlements and "
-            "re-renders, against main cc91ee1b8 (#746), after merging it: rendered at link "
-            "revision 52d23673 into empty site directories, twice from this tree at "
-            "52d23673 and twice from main's (69 files each), "
-            "render_n11_lower_bounds_explainer, with its pinned Chromium math pass, "
-            "render_n11_optimality_review, render_n11_threshold_bound_review and "
-            "render_packing_methods write every file byte-identical across all four. "
-            "Measured before at 63c12e35 against main 769e441e1 (#748), at fb0889e2 "
-            "against 7335d0098 (#752), and at e0c2bf25 and 1a2a7d47 against c1115c095 "
-            "(#749), with the same outcome. Measured again after review A of #756 "
-            "(the merge of main 0bbb0a2c4, #753 and #754; check_standing's exact order at "
-            "an algebraic house; the regularization-owed state; T-193's exact solve in the "
-            "case records and case pages; the strict readers; 295's closed form): rendered "
-            "at link revision 618cd1f4 into empty site directories, twice from this tree "
-            "at 618cd1f4 and twice from main 0bbb0a2c4's (69 files each), every file "
-            "byte-identical across all four. No PDF was printed; each prints from that "
-            "HTML. Retain v0.4.22, v0.1.11, v0.1.4 and v0.2.7."
-        ),
-    ),
-    ReleaseNoPublicChange(
         components=("paper:square-packing-methods-survey",),
         paths=(
             "packing/campaign/result-requests.yaml",
@@ -2582,6 +2533,62 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "byte-identical. Measured once more after merging main 7335d0098 (#752), at "
             "link revision 7335d009 with that main's two files swapped in: the same "
             "outcome. No PDF was printed; it prints from that HTML. Retain v0.2.7."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/contributors/people/amund-kristiansen.md",
+            "packing/devtools/adopt_houses.py",
+            "packing/devtools/default_drawings.py",
+            "packing/devtools/overview_sections.py",
+            "packing/devtools/site_resources.py",
+            "packing/devtools/upper_bound_houses.py",
+            "packing/devtools/upper_bound_reports.py",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "T-239's registration (#755, Amund Kristiansen's s(303), registered as T-238 "
+            "and renumbered on 24 October 2026), its stage 4 review (V3/C3, S2), its "
+            "adoption at 303 in the pass of 24 October 2026 with its regularization, its "
+            "contributor profile, its house reader, the #755 request entry and its gist's "
+            "card in Other Square Packing Projects (OTHER_PROJECTS, and source_repository "
+            "dropping a gist's revision), against main 0bbb0a2c4 (#753, #760, #754): "
+            "rendered at link revision b6ae779b into empty site directories, twice from "
+            "this tree and twice from the same tree with main's register, requests record, "
+            "coverage record, upper_bound_reports.py, adopt_houses.py, default_drawings.py, "
+            "upper_bound_houses.py, overview_sections.py and site_resources.py swapped in "
+            "and the new profile set aside (69 files each), render_n11_optimality_review, "
+            "render_n11_threshold_bound_review and render_packing_methods write every file "
+            "byte-identical across all four. Measured before at ea8c6f10 against main "
+            "64b316b6c (51 files each), and at 956839d7 against main 7335d0098, at 1c333cfe "
+            "against 05e95db36, at 0f7eb786 against 769e441e1 and at 5617791b against "
+            "7cd0a94bf (69 files each) without the card, with the same outcome. The "
+            "explainer then counted the register (231 to 232 results), its Markdown and "
+            "HTML differing from main's inputs' render only there and, in the HTML, in its "
+            "version history's link to the new profile, and took v0.4.23. Measured once "
+            "more after review A's wording fixes (1f208dfb1: adopt_houses.py and the "
+            "register's notes) and the merge of main 2c58b6373 (#745, #750), at link "
+            "revision f54ecc25 into empty site directories, twice from this tree and twice "
+            "with main's nine candidate inputs swapped in and the new profile set aside "
+            "(51 files each): the three papers' files are byte-identical across all four. "
+            "The explainer, counting 238 to 239 results, takes v0.4.25 over main's "
+            "v0.4.24. No PDF was printed; each prints from that HTML. Retain v0.1.11, "
+            "v0.1.4 and v0.2.7."
         ),
     ),
     ReleaseNoPublicChange(
