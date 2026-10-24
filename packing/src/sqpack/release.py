@@ -8145,6 +8145,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "paper:square-packing-methods-survey",
         ),
         paths=(
+            "packing/campaign/result-requests.yaml",
             "packing/devtools/profile_records.py",
             "packing/frontier/results.yaml",
         ),
@@ -8159,20 +8160,20 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "papers/square-packing-methods-survey.md",
         ),
         reason=(
-            "T-163's family assessment (think-rh4j): the record index reads a recomputed "
-            "record_scope assessment, and T-163's rationale, notes, next_rung and "
-            "composition name Ryu's Theorem 1.3 window and the published note. Against "
-            "main 5664ac1e8 (#758): rendered at link revision bb031f6b into empty site "
-            "directories, twice from this tree and once from it with main's "
-            "profile_records.py and results.yaml swapped in (69 files each), "
+            "T-163's family assessment and the owner's answer “Credit both "
+            "(Recommended)” (think-rh4j, think-cwfi): the record index reads a recomputed "
+            "record_scope assessment and credits every entry of one report registered "
+            "twice; T-163's rationale, notes, next_rung and composition name Ryu's "
+            "Theorem 1.3 window and the published note; four entries name the beads that "
+            "own their unfinished confirmations; and the requests record gains the nine "
+            "tracking issues #772 to #780. Measured against main 5664ac1e8, 14b14f2d1 and "
+            "last 2c58b6373 (#750): rendered into empty site directories with source "
+            "links pinned to 2c58b637, twice from this tree and once from it with that "
+            "main's profile_records.py, results.yaml and result-requests.yaml swapped in, "
             "render_n11_lower_bounds_explainer, render_n11_optimality_review, "
-            "render_n11_threshold_bound_review and render_packing_methods write every "
-            "file byte-identical across all three. Measured again after merging main "
-            "14b14f2d1 (#768), at link revision ba76f214 with that main's two files "
-            "swapped in: the same outcome; and at bce22ded, after the record index "
-            "stopped recomputing the assessment, from this tree with links pinned to "
-            "ba76f214: the same 69 files. No PDF was printed; each prints from that "
-            "HTML. Retain v0.4.22, v0.1.11, v0.1.4 and v0.2.7."
+            "render_n11_threshold_bound_review and render_packing_methods write all 69 "
+            "files byte-identical across the three. No PDF was printed; each prints from "
+            "that HTML. Retain v0.4.24, v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
 )
