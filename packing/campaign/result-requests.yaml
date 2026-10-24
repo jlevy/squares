@@ -17445,8 +17445,11 @@ issues:
       not_registered: >-
         Beyond the n <= 324 corpus: the certificate first published at 02f9690 on 2026-10-09,
         1.78e-11 or more above the 8 October decimal report the record holds at 335, so neither
-        it nor this restatement is recorded; the exact check of that report's poses is
-        think-rx26.
+        it nor this restatement is recorded. The exact check of that report's poses (think-rx26,
+        24 October, devtools.couzo_decimal_decisions): read literally they are not a packing at
+        the printed side, a wall failing by 7.77e-16; with the 196 angles below 1e-10 read as 0,
+        as this certificate reads them, they pack exactly at it. The row stays as printed, and
+        Polkovskyi's f1ceee4 row there (#732's comment of 23 October) supersedes it.
       queued: false
     - key: n336
       claim: s(336) <= 18.825571499862, rounded upward; exact certificate side is authoritative.
