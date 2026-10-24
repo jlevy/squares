@@ -581,9 +581,10 @@ def _sources() -> dict[str, Source]:
         packet_source("T-225", "evand-regularized-2026-10-20"),
         packet_source("T-229", "mishapolk-issue719-2026-10-22"),
         packet_source("T-231", "mishapolk-n204-2026-10-22"),
-        # The adoption of 24 October 2026 moved 303, T-230's only count, to T-239, so
-        # T-230 is no source here now, as T-196 and T-199 left on 22 October.
-        packet_source("T-239", "amundsk-n303-2026-10-23"),
+        # The adoption of 24 October 2026 moved 303, T-230's only count, to T-239, and the
+        # adoption of 25 October moved it on to T-240, so neither T-230 nor T-239 is a
+        # source here now, as T-196 and T-199 left on 22 October.
+        packet_source("T-240", "couzo-issue763-2026-10-23"),
     ]
     found = {source.result: source for source in sources}
     # Two results may read one packet (T-181 and T-182 both read issue 586's), so the
@@ -624,7 +625,9 @@ def _sources() -> dict[str, Source]:
 #: and Evan Daniel's exact forms of issue 639 (T-193) at 102, 123, 258 and 295 from T-146,
 #: at 259 from T-136 and at 302 from T-186, which leaves T-136 and T-173 no house here.
 #: The pass of 24 October 2026 adopted Polkovskyi's lower 204 file (T-231) at 204 from
-#: T-229, and Amund Kristiansen's certificate of issue 755 (T-239) at 303 from T-230.
+#: T-229, and Amund Kristiansen's certificate of issue 755 (T-239) at 303 from T-230. The
+#: pass of 25 October 2026 adopted Francisco Couzo's certificates of issue 763 (T-240) at
+#: 268 from T-174 and at 303 from T-239.
 ADOPTED: dict[int, str] = {
     29: "T-195",
     68: "T-174",
@@ -680,7 +683,7 @@ ADOPTED: dict[int, str] = {
     263: "T-174",
     264: "T-186",
     267: "T-134",
-    268: "T-174",
+    268: "T-240",
     269: "T-174",
     270: "T-224",
     271: "T-219",
@@ -690,7 +693,7 @@ ADOPTED: dict[int, str] = {
     295: "T-193",
     297: "T-174",
     302: "T-193",
-    303: "T-239",
+    303: "T-240",
     304: "T-186",
     305: "T-174",
     306: "T-174",
@@ -772,6 +775,12 @@ NUMBERS = tuple(sorted(ADOPTED))
 #: T-230's packing, found from it. The pass of 23 October had already moved 303 too, and one
 #: day's archive holds one prior state a count; its pull request merged after T-231's, and
 #: 303 joined that day's pass, whose archive takes a row for each count.
+#: The pass of 25 October 2026 adopted Francisco Couzo's certificates of issue 763 (T-240)
+#: after the 24 October review of them: at 268 from T-174, 4.45e-03 below it, a refinement
+#: of Kirill Tymchishin's Kaggle notebook packing and another arrangement than T-174's;
+#: and at 303 from T-239, 2.78e-03 below it, a refinement of Couzo's own Kaggle push
+#: packing and another arrangement than T-239's. It is dated by the day its pull request
+#: merges, since the pass of 24 October had already moved 303.
 #: A count a pass names keeps its place in the earlier passes' sets, which their archives
 #: hold; it was adopted on the latest day that names it.
 LATER_PASSES: dict[str, frozenset[int]] = {
@@ -849,6 +858,7 @@ LATER_PASSES: dict[str, frozenset[int]] = {
     "2026-10-22": frozenset({204, 227, 229, 260}),
     "2026-10-23": frozenset({70, 102, 105, 123, 153, 204, 207, 258, 259, 295, 302, 303}),
     "2026-10-24": frozenset({204, 303}),
+    "2026-10-25": frozenset({268, 303}),
 }
 
 

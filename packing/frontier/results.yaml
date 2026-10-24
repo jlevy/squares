@@ -33760,9 +33760,13 @@ results:
       The cases at 268 and 303 adopted these certificates as their house best packings in
       the pass of 25 October 2026, at 268 from T-174 and at 303 from T-239, which stay
       retained as history, and both strong generators decided each new witness in the same
-      pull request. At 268 Evan Daniel's later certificate, a sibling placement 4.48e-12
-      below this side, is imported as reported (think-l49q); once validated it re-houses 268
-      under the same rule, and the credit there follows the placement it holds.
+      pull request: grid-slack's view at the witness's side is admitted and drawn at both
+      counts, and Evan Daniel's regularizer solves each witness to a KKT local minimum below
+      its side, register candidates that are never admitted: at 268 exactly the side of
+      Daniel's later certificate, 4.48e-12 below, and at 303 a view 3.63e-12 below
+      (cases/regularized_drawings/think-bk9r-2026-10-24). At 268 Daniel's later certificate,
+      a sibling placement, is imported as reported (think-l49q); once validated it re-houses
+      268 under the same rule, and the credit there follows the placement it holds.
 
       The source's own checkers were not run here. The two maintained routes, the sqpack
       rational witness verifier and the independent rational corner checker, share
@@ -34725,17 +34729,18 @@ regularized_drawings:
         max_turn_deg: 0.584252
       view: packing/atlas/known-best/regularized/n-267-regularized.yaml.gz
     - n: 268
-      of: T-174
+      of: T-240
       by: project
-      method: regularize_axis_components/2
+      method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      modifications: ["port of his coincidence placement (regularize_grid_slack/1) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       identity:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 0
-        max_move: 1.262384e-94
-        max_turn_deg: 0.0
+        moved: 95
+        max_move: 0.4003225
+        max_turn_deg: 0.26227
       view: packing/atlas/known-best/regularized/n-268-regularized.yaml.gz
     - n: 269
       of: T-174
@@ -34863,7 +34868,7 @@ regularized_drawings:
         max_turn_deg: 1.34112
       view: packing/atlas/known-best/regularized/n-301-regularized.yaml.gz
     - n: 303
-      of: T-239
+      of: T-240
       by: project
       method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
       modifications: ["port of his coincidence placement (regularize_grid_slack/1) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
@@ -34872,9 +34877,9 @@ regularized_drawings:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 23
-        max_move: 0.3791248
-        max_turn_deg: 1.07083e-10
+        moved: 28
+        max_move: 0.09786458
+        max_turn_deg: 0.033049
       view: packing/atlas/known-best/regularized/n-303-regularized.yaml.gz
     - n: 304
       of: T-186

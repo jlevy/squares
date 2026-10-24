@@ -1092,6 +1092,64 @@ RESULTS: dict[str, Prose] = {
         diversity="by a Claude agent, a system family the producer also used",
         retained="its derived exact fact",
     ),
+    "T-240": Prose(
+        author="Francisco Couzo",
+        reported="on [jlevy/squares#763](https://github.com/jlevy/squares/issues/763)",
+        producer_route=True,
+        ai=(
+            "The source’s commit that publishes the certificate and its two parents end with "
+            "a co-author trailer naming Claude (Anthropic), the earlier parent’s message "
+            "describes Codex’s reviewed intake, and the header of the source’s second checker "
+            "says Francisco Couzo modified Evan Daniel’s verifier with Codex."
+        ),
+        routes=(
+            "The source’s manifest names this repository’s `sqpack/verify.py`, through which "
+            "one maintained route decides, as its first checker, and both routes read the "
+            "certificate through an adapter transcribed from Evan Daniel’s checkers, from "
+            "which the source’s second checker derives (RF-4 of the 24 October review), so "
+            "the replay shares the producer’s components. The review’s checker shares no code "
+            "with either maintained route or the source, and the independent "
+            "re-implementation rests on it."
+        ),
+        lineage_at={
+            268: (
+                "The source’s manifest says Francisco Couzo’s live search refined Kirill "
+                "Tymchishin’s packing from his Kaggle notebook “CPU/GPU/MPS EDA+Seam LP” v4, "
+                "which the packet retains as the parent. Measured by the 24 October review, "
+                "square by square, nearest centres pair it one to one with that parent under "
+                "a reflection of the box, no square moving beyond a tenth (at most 0.059) or "
+                "turning beyond a degree: a refinement of the notebook packing. Against T-174’s "
+                "packing, the house best packing here before this adoption, no symmetry pairs "
+                "nearest centres one to one and 118 squares lie beyond a tenth, so it is another "
+                "arrangement than T-174’s (T-240). Vladislav Lavrentev’s public Kaggle packing, "
+                "which Evan Daniel later certified $4.48 \\times 10^{-12}$ below this side, is "
+                "the same arrangement in another placement, the mirror image of this one; "
+                "whether the credit should name Lavrentev is asked of the author."
+            ),
+            303: (
+                "The source’s manifest says Francisco Couzo’s browser search refined his own "
+                "Kaggle push packing, itself credited as a refinement of Vladislav Lavrentev’s "
+                "packing from his Kaggle notebook “CUDA Packing Search” v11, and the packet "
+                "retains the push packing as the parent. Measured by the 24 October review, "
+                "square by square, it pairs one to one with that parent under the identity, "
+                "three squares moving beyond a tenth, at most 0.309, one of them turned from "
+                "27° to upright: a refinement of the push packing. Against T-239’s packing, the "
+                "house best packing here before this adoption, no symmetry pairs nearest "
+                "centres one to one and 133 squares lie beyond a tenth, so it is another "
+                "arrangement than T-239’s and T-230’s (T-240). The push packing also pairs one "
+                "to one with Chris Deotte’s public Kaggle packing, two squares beyond a tenth; "
+                "which public packing it started from is asked of the author."
+            ),
+        },
+        third_route=(
+            ", and the 24 October review’s clean-room checker decided it again on two routes "
+            "of its own, in rationals by separating axes over every pair and by the exact "
+            "clipped area of every pair within reach; its controls at $10^{-30}$ refused the "
+            "closest pair moved past exact contact, the square nearest a wall enlarged past "
+            "its clearance and the box shrunk below the packing’s extent"
+        ),
+        diversity="by a Claude agent, a system family the producer also used",
+    ),
 }
 
 XU = "Ryan Xu"
@@ -1105,6 +1163,8 @@ BARNETT = "Robert Barnett"
 #: Mykhailo Polkovskyi, by the handle his earlier credits use (T-173, T-183).
 POLKOVSKYI = "Mishapolk"
 KRISTIANSEN = "Amund Kristiansen"
+TYMCHISHIN = "Kirill Tymchishin"
+LAVRENTEV = "Vladislav Lavrentev"
 
 
 @dataclass(frozen=True)
@@ -1610,13 +1670,15 @@ CREDITS: dict[int, Credit] = {
         "Daniel’s exact optimum of Joost de Winter’s n = 126 packing",
     ),
     267: _couzo("Xu"),
-    # T-174's regularization of T-098's packing, 117 squares moved beyond 1e-3, one to
-    # one; that it is that packing is the source's statement (the 14 October review of PR
-    # 574).
+    # Issue 763's packing at 268 (T-240, adopted on 25 October 2026), a refinement of Kirill
+    # Tymchishin's Kaggle notebook packing, the parent the source's manifest names: one to
+    # one with it under a reflection, no square beyond a tenth (the 24 October review), and
+    # another arrangement than T-174's. Whether the credit should name Vladislav Lavrentev,
+    # whose public packing is the same arrangement, is the author's question 1 of that review.
     268: Credit(
+        (TYMCHISHIN,),
         (COUZO,),
-        (DANIEL, PINGYOU),
-        "PingYou Ltd’s refinement of Evan Daniel’s exact optimum of Francisco Couzo’s packing",
+        "Francisco Couzo’s refinement of Kirill Tymchishin’s Kaggle notebook packing",
     ),
     # T-174's regularization of T-146's view, measured one to one, no square moved beyond
     # 1e-12 (the 14 October review of PR 574).
@@ -1682,16 +1744,17 @@ CREDITS: dict[int, Credit] = {
         "Evan Daniel’s exact form of Mykhailo Polkovskyi’s tighter certificate of Francisco "
         "Couzo’s continuation of PingYou Ltd’s n = 302 arrangement",
     ),
-    # Issue 755's packing (T-239, adopted on 24 October 2026), another arrangement of T-230's
-    # packing (one to one with it, 12 squares beyond a tenth and five newly tilted, the 23
-    # October review), found from it, which the issue names as the start. As at 155 and for
-    # T-230, Kristiansen is the finder and the start's author is named in the sentence, not
-    # in the structured fields.
+    # Issue 763's packing at 303 (T-240, adopted on 25 October 2026), a refinement of
+    # Couzo's own Kaggle push packing, the parent the source's manifest names: one to one
+    # with it, three squares beyond a tenth (the 24 October review), and another arrangement
+    # than T-239's. The manifest credits the push packing as a refinement of Vladislav
+    # Lavrentev's notebook packing, which is not retained; which public packing it started
+    # from is the author's question 4 of that review.
     303: Credit(
-        (KRISTIANSEN,),
-        (),
-        "Amund Kristiansen’s arrangement of Evan Daniel’s n = 303 packing in a search "
-        "started from it",
+        (LAVRENTEV,),
+        (COUZO,),
+        "Francisco Couzo’s refinement of his own refinement of Vladislav Lavrentev’s Kaggle "
+        "notebook packing",
     ),
     # Issue 575's packing padded (T-186's regularization of T-175).
     304: Credit(

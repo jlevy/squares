@@ -1415,6 +1415,9 @@ HOUSES: dict[str, Callable[[int], Fraction]] = {
     # T-231: the release's second 204 file, certificates/n204.cert, which the author
     # claimed on issue 719 after T-229 was registered (think-h01y), under its own key.
     "[Mishapolk n204 2026-10-22]": _import("mishapolk-n204-2026-10-22"),
+    # T-240: Francisco Couzo's two in-corpus certificates of issue 763, at 268 and 303,
+    # retained at 964ee2bd; the packet's rows beyond the corpus are read by the ledger.
+    "[Couzo issue 763 2026-10-23]": _import("couzo-issue763-2026-10-23"),
     # T-155: the side of the retained view of Evan Daniel's regularizer at each count.
     "[Daniel regularizer 2026-10-11]": regularized.view_side,
 }
