@@ -1,0 +1,27 @@
+{
+  "format": "upper-bound-beyond-horizon-claims-v1",
+  "horizon": 324,
+  "issue_pin": "964ee2bdf301d0c8912d956d4010f478dcbbd5ea",
+  "limit": 1024,
+  "publication": "https://github.com/franciscouzo/square-packing/tree/964ee2bdf301d0c8912d956d4010f478dcbbd5ea",
+  "published": "2026-10-23T23:38:42Z",
+  "results": [
+    {"ceiling":"19.8970641625762634","certificate":"certificates/best/n376.cert","deleted":0,"exact_side":"11080971884861650727364605159069623234897/556914919423313113172448500000000000000","first_committed":"2026-10-23T22:38:09Z","n":376,"offered_side":"19.897064162577"},
+    {"ceiling":"20.9499849980411437","certificate":"certificates/best/n419.cert","deleted":0,"exact_side":"17346941518130770052663008425440170261281/828016894511033599033421750000000000000","first_committed":"2026-10-23T22:38:09Z","n":419,"offered_side":"20.949984998042"},
+    {"ceiling":"23.7560975662116144","certificate":"certificates/best/n540.cert","deleted":0,"exact_side":"501840014472729402016731495325838863499483/21124682329411641880120741500000000000000","first_committed":"2026-10-23T22:38:09Z","n":540,"offered_side":"23.756097566212"},
+    {"ceiling":"23.8030532611441077","certificate":"certificates/best/n543.cert","deleted":0,"exact_side":"25762691170271432528658914577/1082327165663500000000000000","first_committed":"2026-10-23T22:38:09Z","n":543,"offered_side":"23.803053261145"},
+    {"ceiling":"25.7996848109447685","certificate":"certificates/best/n639.cert","deleted":0,"exact_side":"52683851474305395900849793947/2042034693848500000000000000","first_committed":"2026-10-23T22:38:09Z","n":639,"offered_side":"25.799684810945"},
+    {"ceiling":"25.8030532619461149","certificate":"certificates/best/n640.cert","deleted":0,"exact_side":"24449382200221253738938987023/947538337886500000000000000","first_committed":"2026-10-23T22:38:09Z","n":640,"offered_side":"25.803053261947"},
+    {"ceiling":"26.7999990511827329","certificate":"certificates/best/n691.cert","deleted":0,"exact_side":"80827807248389567876110633861/3015963063805500000000000000","first_committed":"2026-10-23T22:38:09Z","n":691,"offered_side":"26.799999051183"},
+    {"ceiling":"27.9338687608005813","certificate":"certificates/best/n755.cert","deleted":0,"exact_side":"122244082006974126638496340391/4376195902320500000000000000","first_committed":"2026-10-23T22:38:09Z","n":755,"offered_side":"27.933868760801"},
+    {"ceiling":"27.9987844584269434","certificate":"certificates/best/n761.cert","deleted":0,"exact_side":"45428736290196559456035864047/1622525304898500000000000000","first_committed":"2026-10-23T22:38:09Z","n":761,"offered_side":"27.998784458427"},
+    {"ceiling":"29.8320005766688399","certificate":"certificates/best/n861.cert","deleted":0,"exact_side":"45318769527459622987527747/1519132765199218750000000","first_committed":"2026-10-23T22:38:09Z","n":861,"offered_side":"29.832000576669"},
+    {"ceiling":"29.9854755797394974","certificate":"certificates/best/n873.cert","deleted":0,"exact_side":"4121172383039609008307470569/137438953472000000000000000","first_committed":"2026-10-23T22:38:09Z","n":873,"offered_side":"29.985475579740"},
+    {"ceiling":"30.8215933549585678","certificate":"certificates/best/n920.cert","deleted":0,"exact_side":"14127665834778607713478531033/458369094422750000000000000","first_committed":"2026-10-23T22:38:09Z","n":920,"offered_side":"30.821593354959"},
+    {"ceiling":"31.8000006160308075","certificate":"certificates/best/n980.cert","deleted":0,"exact_side":"23488985066989201815046754633/738647314841500000000000000","first_committed":"2026-10-23T22:38:09Z","n":980,"offered_side":"31.800000616031"},
+    {"ceiling":"31.8280006165908343","certificate":"certificates/best/n982.cert","deleted":0,"exact_side":"63442661306571703350801377413/1993297099331500000000000000","first_committed":"2026-10-23T22:38:09Z","n":982,"offered_side":"31.828000616591"},
+    {"ceiling":"31.8516848953716354","certificate":"certificates/best/n984.cert","deleted":0,"exact_side":"35021297906718298985302163927/1099511627776000000000000000","first_committed":"2026-10-23T22:38:09Z","n":984,"offered_side":"31.851684895372"}
+  ],
+  "revision": "964ee2bdf301d0c8912d956d4010f478dcbbd5ea",
+  "source": "https://github.com/franciscouzo/square-packing"
+}

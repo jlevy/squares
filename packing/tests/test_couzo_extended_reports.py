@@ -639,7 +639,9 @@ def test_retained_outside_horizon_packet_has_twenty_complete_source_reports(
     # and 376 are above Göbel's classical construction there, an earlier report by the
     # owner's answer of 23 October 2026 (#613), so they hold no count. Since 24 October
     # Polkovskyi's f1ceee4 row supersedes the one at 335, whose poses pack at their print
-    # with the near-axis angles read as 0 (think-rx26). One is current.
+    # with the near-axis angles read as 0 (think-rx26), and Kirill Tymchishin's notebook
+    # row, published at fa6237e on 23 October (think-lyf9), the one at 327. None is
+    # current.
     superseded = {row["n"]: row["superseded_by"] for row in own if "superseded_by" in row}
     above = {
         row["n"]: row["construction"]
@@ -656,6 +658,7 @@ def test_retained_outside_horizon_packet_has_twenty_complete_source_reports(
         342: "couzo-certificates-2026-10-14",
         372: "couzo-index-2026-10-15",
         335: "mishapolk-issue732-f1ceee4-2026-10-23",
+        327: "tymchishin-reclosure-v3-2026-10-23",
     }
     assert all(
         row["disposition"]

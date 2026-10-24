@@ -6741,9 +6741,9 @@ occurrences:
   contributor_id: tokoharu
   note: Reviewed packing/resources/bibliography.yaml [[wand125 fine-net lower bounds
     2026-10-08]] /credit span 13:21. The source-specific rectangle-density method/checker
-    lineage identifies tokoharu/square-packing-density-bounds; the retained source licence
-    names tokoharu. Credit aligned with the family's other entries on 23 October 2026
-    (finding F-1 of docs/project/reviews/review-2026-10-23-wand125-446-fine-net.md).
+    lineage identifies tokoharu/square-packing-density-bounds; the retained source
+    licence names tokoharu. Credit aligned with the family's other entries on 23 October
+    2026 (finding F-1 of docs/project/reviews/review-2026-10-23-wand125-446-fine-net.md).
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 fine-net lower bounds 2026-10-08]'
@@ -15250,9 +15250,10 @@ occurrences:
   evidence:
   - source-intake
   - bibliography
-  note: Reviewed packing/resources/bibliography.yaml [[Kristiansen n303 2026-10-23]] /authors/0 span 0:11. Issue 755,
-    filed by the GitHub account amundsk, and the gist's README credit Amund Kristiansen; the
-    certificate is his search's, made with Evan Daniel's tools.
+  note: Reviewed packing/resources/bibliography.yaml [[Kristiansen n303 2026-10-23]]
+    /authors/0 span 0:11. Issue 755, filed by the GitHub account amundsk, and the
+    gist's README credit Amund Kristiansen; the certificate is his search's, made
+    with Evan Daniel's tools.
   contributor_id: amund-kristiansen
 - origin:
     path: packing/resources/bibliography.yaml
@@ -15267,8 +15268,9 @@ occurrences:
   evidence:
   - source-intake
   - bibliography
-  note: Reviewed packing/resources/bibliography.yaml [[Kristiansen n303 2026-10-23]] /credit span 0:11. Issue 755 and
-    the gist's README credit Amund Kristiansen (GitHub @amundsk).
+  note: Reviewed packing/resources/bibliography.yaml [[Kristiansen n303 2026-10-23]]
+    /credit span 0:11. Issue 755 and the gist's README credit Amund Kristiansen (GitHub
+    @amundsk).
   contributor_id: amund-kristiansen
 - origin:
     path: packing/resources/bibliography.yaml
@@ -15283,9 +15285,10 @@ occurrences:
   evidence:
   - repository-license
   - bibliography
-  note: Reviewed source credit matches the evidenced person and printed name; issue 755 names
-    Evan Daniel's registered packing at 303 (issue 728, T-230) as the search's start and his fq
-    quench, dilate_cert.py and checkers as its tools, and the original credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; issue
+    755 names Evan Daniel's registered packing at 303 (issue 728, T-230) as the search's
+    start and his fq quench, dilate_cert.py and checkers as its tools, and the original
+    credit role is retained.
   contributor_id: evan-daniel
 - origin:
     path: packing/resources/bibliography.yaml
@@ -15301,9 +15304,10 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: daniil-ostashev
-  note: Reviewed source credit matches the evidenced person and printed name; the start issue 755
-    names, Evan Daniel's packing of issue 728, was itself found from Daniil Ostashev's packing of issue
-    562, and the chain through Daniel retains the link.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    start issue 755 names, Evan Daniel's packing of issue 728, was itself found from
+    Daniil Ostashev's packing of issue 562, and the chain through Daniel retains the
+    link.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Kristiansen n303 2026-10-23]'
@@ -15317,9 +15321,10 @@ occurrences:
   evidence:
   - primary-byline
   - announcement-account
-  note: Reviewed packing/resources/bibliography.yaml [[Kristiansen n303 2026-10-23]] /credit span 36:40. The specific
-    first-party jlevy/squares method or source is the Joshua Levy identity established by LICENSE
-    and the retained ojoshe receipt; project credit does not imply sole personal authorship.
+  note: Reviewed packing/resources/bibliography.yaml [[Kristiansen n303 2026-10-23]]
+    /credit span 36:40. The specific first-party jlevy/squares method or source is
+    the Joshua Levy identity established by LICENSE and the retained ojoshe receipt;
+    project credit does not imply sole personal authorship.
   contributor_id: joshua-levy
 - origin:
     path: packing/resources/bibliography.yaml
@@ -22911,8 +22916,9 @@ occurrences:
   - bibliography
   contributor_id: evan-daniel
   note: Reviewed packing/frontier/n-259.md [259] /reported_upper_bound/improved_by/1
-    span 0:11. The specific evand/square-packing exact form of issue 639 matches the repository
-    whose retained licence names Evan Daniel. Keep finder, improver and solver roles distinct.
+    span 0:11. The specific evand/square-packing exact form of issue 639 matches the
+    repository whose retained licence names Evan Daniel. Keep finder, improver and
+    solver roles distinct.
 - origin:
     path: packing/frontier/n-260.md
     record_key: '260'
@@ -24285,8 +24291,9 @@ occurrences:
   - bibliography
   contributor_id: evan-daniel
   note: Reviewed packing/frontier/n-302.md [302] /reported_upper_bound/improved_by/2
-    span 0:11. The specific evand/square-packing exact form of issue 639 matches the repository
-    whose retained licence names Evan Daniel. Keep finder, improver and solver roles distinct.
+    span 0:11. The specific evand/square-packing exact form of issue 639 matches the
+    repository whose retained licence names Evan Daniel. Keep finder, improver and
+    solver roles distinct.
 - origin:
     path: packing/frontier/n-303.md
     record_key: '303'
@@ -24301,10 +24308,10 @@ occurrences:
   - source-intake
   - bibliography
   note: Reviewed packing/frontier/n-303.md [303] /reported_upper_bound/found_by/0
-    span 0:17. Issue 755's packing, credited to Amund Kristiansen (GitHub amundsk) by the
-    issue and the gist's README, the case's house since the adoption of 24 October 2026
-    (T-239), found from Evan Daniel's packing of issue 728 (T-230). Keep finder, improver
-    and solver roles distinct.
+    span 0:17. Issue 755's packing, credited to Amund Kristiansen (GitHub amundsk)
+    by the issue and the gist's README, the case's house since the adoption of 24
+    October 2026 (T-239), found from Evan Daniel's packing of issue 728 (T-230). Keep
+    finder, improver and solver roles distinct.
   contributor_id: amund-kristiansen
 - origin:
     path: packing/frontier/n-303.md
@@ -26820,9 +26827,9 @@ occurrences:
   - commit-author
   - owner-confirmation
   contributor_id: hiroaki-hosono
-  note: Reviewed 2026-10-23, /authors/0 span 0:6. Source-keyed wand125 Lean proof; the retained commit
-    author and the owner's confirmation join wand125 to Hiroaki Hosono, as for the earlier wand125
-    keys.
+  note: Reviewed 2026-10-23, /authors/0 span 0:6. Source-keyed wand125 Lean proof;
+    the retained commit author and the owner's confirmation join wand125 to Hiroaki
+    Hosono, as for the earlier wand125 keys.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 n21 zero-margin Lean 2026-09-29]'
@@ -26837,9 +26844,9 @@ occurrences:
   - commit-author
   - owner-confirmation
   contributor_id: hiroaki-hosono
-  note: Reviewed 2026-10-23, /credit span 0:6. Source-keyed wand125 Lean proof; the retained commit
-    author and the owner's confirmation join wand125 to Hiroaki Hosono, as for the earlier wand125
-    keys.
+  note: Reviewed 2026-10-23, /credit span 0:6. Source-keyed wand125 Lean proof; the
+    retained commit author and the owner's confirmation join wand125 to Hiroaki Hosono,
+    as for the earlier wand125 keys.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 n21 zero-margin Lean 2026-09-29]'
@@ -26853,8 +26860,8 @@ occurrences:
   evidence:
   - repository-license
   contributor_id: evan-daniel
-  note: Reviewed 2026-10-23, /credit span 13:19. The evand/square-packing work, whose retained licence
-    names Evan Daniel; the original credit role is retained.
+  note: Reviewed 2026-10-23, /credit span 13:19. The evand/square-packing work, whose
+    retained licence names Evan Daniel; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 n21 zero-margin Lean 2026-09-29]'
@@ -26869,8 +26876,9 @@ occurrences:
   - primary-byline
   - announcement-account
   contributor_id: joshua-levy
-  note: Reviewed 2026-10-23, /credit span 21:25. The first-party jlevy/squares record, credited second-hand
-    as for the same source's earlier keys; project credit does not imply sole personal authorship.
+  note: Reviewed 2026-10-23, /credit span 21:25. The first-party jlevy/squares record,
+    credited second-hand as for the same source's earlier keys; project credit does
+    not imply sole personal authorship.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 n21 zero-margin Lean 2026-09-29]'
@@ -26885,10 +26893,10 @@ occurrences:
   - paper-byline
   - bibliography
   contributor_id: walter-stromquist
-  note: >-
-    Reviewed 2026-10-24, /credit span 27:37. The checked cover's fractional-cover
-    antecedent, credited as [wand125 point and mixed bounds 2026-09-28] credits it (PR #750 review A3):
-    Walter Stromquist and his 2003 unavoidable-point paper, matched to the retained paper byline.
+  note: 'Reviewed 2026-10-24, /credit span 27:37. The checked cover''s fractional-cover
+    antecedent, credited as [wand125 point and mixed bounds 2026-09-28] credits it
+    (PR #750 review A3): Walter Stromquist and his 2003 unavoidable-point paper, matched
+    to the retained paper byline.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 n21 zero-margin Lean 2026-09-29]'
@@ -26903,10 +26911,10 @@ occurrences:
   - primary-byline
   - bibliography
   contributor_id: hiroshi-nagamochi
-  note: >-
-    Reviewed 2026-10-24, /credit span 39:48. The checked cover's fractional-cover
-    antecedent, credited as [wand125 point and mixed bounds 2026-09-28] credits it (PR #750 review A3):
-    Hiroshi Nagamochi and his 2005 weighted-score paper, matched to its retained byline.
+  note: 'Reviewed 2026-10-24, /credit span 39:48. The checked cover''s fractional-cover
+    antecedent, credited as [wand125 point and mixed bounds 2026-09-28] credits it
+    (PR #750 review A3): Hiroshi Nagamochi and his 2005 weighted-score paper, matched
+    to its retained byline.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 n21 zero-margin Lean 2026-09-29]'
@@ -26921,10 +26929,10 @@ occurrences:
   - primary-byline
   - bibliography
   contributor_id: sam-burns
-  note: >-
-    Reviewed 2026-10-24, /credit span 50:55. The checked cover's fractional-cover
-    antecedent, credited as [wand125 point and mixed bounds 2026-09-28] credits it (PR #750 review A3):
-    Sam Burns and his rational-net/weighted-cover article; retained author metadata confirms his full name.
+  note: 'Reviewed 2026-10-24, /credit span 50:55. The checked cover''s fractional-cover
+    antecedent, credited as [wand125 point and mixed bounds 2026-09-28] credits it
+    (PR #750 review A3): Sam Burns and his rational-net/weighted-cover article; retained
+    author metadata confirms his full name.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 n21 zero-margin Lean 2026-09-29]'
@@ -26939,10 +26947,10 @@ occurrences:
   - primary-byline
   - bibliography
   contributor_id: gustavo-massaccesi
-  note: >-
-    Reviewed 2026-10-24, /credit span 57:67. The checked cover's fractional-cover
-    antecedent, credited as [wand125 point and mixed bounds 2026-09-28] credits it (PR #750 review A3):
-    Gustavo Massaccesi; the retained checker prints Modified by Gustavo Massaccesi 2026.
+  note: 'Reviewed 2026-10-24, /credit span 57:67. The checked cover''s fractional-cover
+    antecedent, credited as [wand125 point and mixed bounds 2026-09-28] credits it
+    (PR #750 review A3): Gustavo Massaccesi; the retained checker prints Modified
+    by Gustavo Massaccesi 2026.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 n59 Lean kernel 2026-10-11]'
@@ -26957,9 +26965,9 @@ occurrences:
   - commit-author
   - owner-confirmation
   contributor_id: hiroaki-hosono
-  note: Reviewed 2026-10-23, /authors/0 span 0:6. Source-keyed wand125 Lean proof; the retained commit
-    author and the owner's confirmation join wand125 to Hiroaki Hosono, as for the earlier wand125
-    keys.
+  note: Reviewed 2026-10-23, /authors/0 span 0:6. Source-keyed wand125 Lean proof;
+    the retained commit author and the owner's confirmation join wand125 to Hiroaki
+    Hosono, as for the earlier wand125 keys.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 n59 Lean kernel 2026-10-11]'
@@ -26974,9 +26982,9 @@ occurrences:
   - commit-author
   - owner-confirmation
   contributor_id: hiroaki-hosono
-  note: Reviewed 2026-10-23, /credit span 0:6. Source-keyed wand125 Lean proof; the retained commit
-    author and the owner's confirmation join wand125 to Hiroaki Hosono, as for the earlier wand125
-    keys.
+  note: Reviewed 2026-10-23, /credit span 0:6. Source-keyed wand125 Lean proof; the
+    retained commit author and the owner's confirmation join wand125 to Hiroaki Hosono,
+    as for the earlier wand125 keys.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 n59 Lean kernel 2026-10-11]'
@@ -26990,8 +26998,8 @@ occurrences:
   evidence:
   - repository-license
   contributor_id: evan-daniel
-  note: Reviewed 2026-10-23, /credit span 13:19. The evand/square-packing work, whose retained licence
-    names Evan Daniel; the original credit role is retained.
+  note: Reviewed 2026-10-23, /credit span 13:19. The evand/square-packing work, whose
+    retained licence names Evan Daniel; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 n59 Lean kernel 2026-10-11]'
@@ -27006,8 +27014,9 @@ occurrences:
   - primary-byline
   - announcement-account
   contributor_id: joshua-levy
-  note: Reviewed 2026-10-23, /credit span 21:25. The first-party jlevy/squares record, credited second-hand
-    as for the same source's earlier keys; project credit does not imply sole personal authorship.
+  note: Reviewed 2026-10-23, /credit span 21:25. The first-party jlevy/squares record,
+    credited second-hand as for the same source's earlier keys; project credit does
+    not imply sole personal authorship.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 n59 Lean kernel 2026-10-11]'
@@ -27022,10 +27031,10 @@ occurrences:
   - paper-byline
   - bibliography
   contributor_id: walter-stromquist
-  note: >-
-    Reviewed 2026-10-24, /credit span 27:37. The checked cover's fractional-cover
-    antecedent, credited as [wand125 exact covers 2026-10-01] credits it (PR #750 review A3):
-    Walter Stromquist and his 2003 unavoidable-point paper, matched to the retained paper byline.
+  note: 'Reviewed 2026-10-24, /credit span 27:37. The checked cover''s fractional-cover
+    antecedent, credited as [wand125 exact covers 2026-10-01] credits it (PR #750
+    review A3): Walter Stromquist and his 2003 unavoidable-point paper, matched to
+    the retained paper byline.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 n59 Lean kernel 2026-10-11]'
@@ -27040,10 +27049,10 @@ occurrences:
   - primary-byline
   - bibliography
   contributor_id: hiroshi-nagamochi
-  note: >-
-    Reviewed 2026-10-24, /credit span 39:48. The checked cover's fractional-cover
-    antecedent, credited as [wand125 exact covers 2026-10-01] credits it (PR #750 review A3):
-    Hiroshi Nagamochi and his 2005 weighted-score paper, matched to its retained byline.
+  note: 'Reviewed 2026-10-24, /credit span 39:48. The checked cover''s fractional-cover
+    antecedent, credited as [wand125 exact covers 2026-10-01] credits it (PR #750
+    review A3): Hiroshi Nagamochi and his 2005 weighted-score paper, matched to its
+    retained byline.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 n59 Lean kernel 2026-10-11]'
@@ -27058,10 +27067,10 @@ occurrences:
   - primary-byline
   - bibliography
   contributor_id: sam-burns
-  note: >-
-    Reviewed 2026-10-24, /credit span 50:55. The checked cover's fractional-cover
-    antecedent, credited as [wand125 exact covers 2026-10-01] credits it (PR #750 review A3):
-    Sam Burns and his rational-net/weighted-cover article; retained author metadata confirms his full name.
+  note: 'Reviewed 2026-10-24, /credit span 50:55. The checked cover''s fractional-cover
+    antecedent, credited as [wand125 exact covers 2026-10-01] credits it (PR #750
+    review A3): Sam Burns and his rational-net/weighted-cover article; retained author
+    metadata confirms his full name.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 n59 Lean kernel 2026-10-11]'
@@ -27076,10 +27085,10 @@ occurrences:
   - primary-byline
   - bibliography
   contributor_id: gustavo-massaccesi
-  note: >-
-    Reviewed 2026-10-24, /credit span 57:67. The checked cover's fractional-cover
-    antecedent, credited as [wand125 exact covers 2026-10-01] credits it (PR #750 review A3):
-    Gustavo Massaccesi; the retained checker prints Modified by Gustavo Massaccesi 2026.
+  note: 'Reviewed 2026-10-24, /credit span 57:67. The checked cover''s fractional-cover
+    antecedent, credited as [wand125 exact covers 2026-10-01] credits it (PR #750
+    review A3): Gustavo Massaccesi; the retained checker prints Modified by Gustavo
+    Massaccesi 2026.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel Fang and Ryu Lean 2026-10-18]'
@@ -27093,8 +27102,8 @@ occurrences:
   evidence:
   - repository-license
   contributor_id: evan-daniel
-  note: Reviewed 2026-10-23, /authors/0 span 0:6. The evand/square-packing work, whose retained licence
-    names Evan Daniel; the original credit role is retained.
+  note: Reviewed 2026-10-23, /authors/0 span 0:6. The evand/square-packing work, whose
+    retained licence names Evan Daniel; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel Fang and Ryu Lean 2026-10-18]'
@@ -27108,8 +27117,8 @@ occurrences:
   evidence:
   - repository-license
   contributor_id: evan-daniel
-  note: Reviewed 2026-10-23, /credit span 0:6. The evand/square-packing work, whose retained licence
-    names Evan Daniel; the original credit role is retained.
+  note: Reviewed 2026-10-23, /credit span 0:6. The evand/square-packing work, whose
+    retained licence names Evan Daniel; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel Fang and Ryu Lean 2026-10-18]'
@@ -27124,8 +27133,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: kevin-fang
-  note: Reviewed 2026-10-23, /credit span 13:17. Kevin Fang's theorems, as the retained pieces' README
-    credits them; the original credit role is retained.
+  note: Reviewed 2026-10-23, /credit span 13:17. Kevin Fang's theorems, as the retained
+    pieces' README credits them; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel Fang and Ryu Lean 2026-10-18]'
@@ -27140,8 +27149,8 @@ occurrences:
   - paper-byline
   - bibliography
   contributor_id: mz-arslanov
-  note: Reviewed 2026-10-23, /credit span 19:27. The decomposition of Arslanov, Mustafin and Shangitbayev
-    (2021), as the retained pieces' README credits it.
+  note: Reviewed 2026-10-23, /credit span 19:27. The decomposition of Arslanov, Mustafin
+    and Shangitbayev (2021), as the retained pieces' README credits it.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel Fang and Ryu Lean 2026-10-18]'
@@ -27156,8 +27165,8 @@ occurrences:
   - paper-byline
   - bibliography
   contributor_id: sa-mustafin
-  note: Reviewed 2026-10-23, /credit span 29:37. The decomposition of Arslanov, Mustafin and Shangitbayev
-    (2021), as the retained pieces' README credits it.
+  note: Reviewed 2026-10-23, /credit span 29:37. The decomposition of Arslanov, Mustafin
+    and Shangitbayev (2021), as the retained pieces' README credits it.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel Fang and Ryu Lean 2026-10-18]'
@@ -27172,8 +27181,8 @@ occurrences:
   - paper-byline
   - bibliography
   contributor_id: zk-shangitbayev
-  note: Reviewed 2026-10-23, /credit span 39:51. The decomposition of Arslanov, Mustafin and Shangitbayev
-    (2021), as the retained pieces' README credits it.
+  note: Reviewed 2026-10-23, /credit span 39:51. The decomposition of Arslanov, Mustafin
+    and Shangitbayev (2021), as the retained pieces' README credits it.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel Fang and Ryu Lean 2026-10-18]'
@@ -27188,8 +27197,9 @@ occurrences:
   - primary-byline
   - announcement-account
   contributor_id: joshua-levy
-  note: Reviewed 2026-10-23, /credit span 53:57. The first-party jlevy/squares record, credited second-hand
-    as for the same source's earlier keys; project credit does not imply sole personal authorship.
+  note: Reviewed 2026-10-23, /credit span 53:57. The first-party jlevy/squares record,
+    credited second-hand as for the same source's earlier keys; project credit does
+    not imply sole personal authorship.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel small-n rectangles Lean 2026-10-22]'
@@ -27203,8 +27213,8 @@ occurrences:
   evidence:
   - repository-license
   contributor_id: evan-daniel
-  note: Reviewed 2026-10-23, /authors/0 span 0:6. The evand/square-packing work, whose retained licence
-    names Evan Daniel; the original credit role is retained.
+  note: Reviewed 2026-10-23, /authors/0 span 0:6. The evand/square-packing work, whose
+    retained licence names Evan Daniel; the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[chelokot small-n Lean 2026-09-05]'
@@ -27219,8 +27229,8 @@ occurrences:
   - public-profile
   - source-packet
   contributor_id: andrey-vlasenko
-  note: Reviewed 2026-10-23, /authors/0 span 0:8. The square-packing-archive handle the earlier chelokot
-    key joins; the printed source text and credit role are retained.
+  note: Reviewed 2026-10-23, /authors/0 span 0:8. The square-packing-archive handle
+    the earlier chelokot key joins; the printed source text and credit role are retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[chelokot small-n Lean 2026-09-05]'
@@ -27235,8 +27245,8 @@ occurrences:
   - public-profile
   - source-packet
   contributor_id: andrey-vlasenko
-  note: Reviewed 2026-10-23, /credit span 0:8. The square-packing-archive handle the earlier chelokot
-    key joins; the printed source text and credit role are retained.
+  note: Reviewed 2026-10-23, /credit span 0:8. The square-packing-archive handle the
+    earlier chelokot key joins; the printed source text and credit role are retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel exact and local reports 2026-10-12]'
@@ -27343,11 +27353,10 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: mykhailo-polkovskyi
-  note: >-
-    Reviewed author byline: the comment on issue 732 of 23 October and the packet
-    mishapolk-issue732-f1ceee4-2026-10-23 credit Mishapolk / Mykhailo Polkovskyi, whom the
-    record credits as Mykhailo Polkovskyi since issue 593; the packet's LICENSE names the same
-    person.
+  note: 'Reviewed author byline: the comment on issue 732 of 23 October and the packet
+    mishapolk-issue732-f1ceee4-2026-10-23 credit Mishapolk / Mykhailo Polkovskyi,
+    whom the record credits as Mykhailo Polkovskyi since issue 593; the packet''s
+    LICENSE names the same person.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Mishapolk issue 732 f1ceee4 2026-10-23]'
@@ -27362,9 +27371,8 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: mykhailo-polkovskyi
-  note: >-
-    Reviewed source credit matches the evidenced person and printed name; the original
-    credit role is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Mishapolk issue 732 f1ceee4 2026-10-23]'
@@ -27379,11 +27387,11 @@ occurrences:
   - primary-byline
   - bibliography
   contributor_id: francisco-couzo
-  note: >-
-    Reviewed packing/resources/bibliography.yaml [[Mishapolk issue 732 f1ceee4 2026-10-23]]
-    /credit span 17:22: the source's certified_bounds.json credits all 138 rows as
-    refinements of Couzo topology, and the comment says the candidates were Francisco
-    Couzo's base topologies. Keep packing finder and refinement roles distinct.
+  note: 'Reviewed packing/resources/bibliography.yaml [[Mishapolk issue 732 f1ceee4
+    2026-10-23]] /credit span 17:22: the source''s certified_bounds.json credits all
+    138 rows as refinements of Couzo topology, and the comment says the candidates
+    were Francisco Couzo''s base topologies. Keep packing finder and refinement roles
+    distinct.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Mishapolk issue 732 f1ceee4 2026-10-23]'
@@ -27398,12 +27406,12 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: darius-muglich
-  note: >-
-    Reviewed packing/resources/bibliography.yaml [[Mishapolk issue 732 f1ceee4 2026-10-23]]
-    /credit span 24:31: the 6b7391d manifest the couzo-issue715-2026-10-21 packet pins
-    credits the topology at 15 of the 138 counts to Darius Muglich (328, 365, 404, 548,
-    554, 599, 602, 648, 651, 654, 700, 756, 813, 814 and 871), as its own credit or its
-    prior source credit (#686). A chain through an intermediate author retains the link.
+  note: 'Reviewed packing/resources/bibliography.yaml [[Mishapolk issue 732 f1ceee4
+    2026-10-23]] /credit span 24:31: the 6b7391d manifest the couzo-issue715-2026-10-21
+    packet pins credits the topology at 15 of the 138 counts to Darius Muglich (328,
+    365, 404, 548, 554, 599, 602, 648, 651, 654, 700, 756, 813, 814 and 871), as its
+    own credit or its prior source credit (#686). A chain through an intermediate
+    author retains the link.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Mishapolk issue 732 f1ceee4 2026-10-23]'
@@ -27418,12 +27426,12 @@ occurrences:
   - intake-credit
   - bibliography
   contributor_id: evan-daniel
-  note: >-
-    Reviewed packing/resources/bibliography.yaml [[Mishapolk issue 732 f1ceee4 2026-10-23]]
-    /credit span 33:39: Couzo's 6b7391d manifest (the couzo-issue715-2026-10-21 packet)
-    credits 343 to Evan Daniel with Kevin Fang's two-wedge construction, and his 4e4c8ce
-    manifest (the couzo-index-2026-10-15 packet) credits 365, 404 and 455 to Daniel and 343
-    to Daniel after Fang. A chain through an intermediate author retains the link.
+  note: 'Reviewed packing/resources/bibliography.yaml [[Mishapolk issue 732 f1ceee4
+    2026-10-23]] /credit span 33:39: Couzo''s 6b7391d manifest (the couzo-issue715-2026-10-21
+    packet) credits 343 to Evan Daniel with Kevin Fang''s two-wedge construction,
+    and his 4e4c8ce manifest (the couzo-index-2026-10-15 packet) credits 365, 404
+    and 455 to Daniel and 343 to Daniel after Fang. A chain through an intermediate
+    author retains the link.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Mishapolk issue 732 f1ceee4 2026-10-23]'
@@ -27438,12 +27446,11 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: kevin-fang
-  note: >-
-    Reviewed packing/resources/bibliography.yaml [[Mishapolk issue 732 f1ceee4 2026-10-23]]
-    /credit span 41:45: Couzo's 6b7391d manifest credits Kevin Fang's two-wedge
-    construction at 343 and names Fang in its provenance at 813, and his 4e4c8ce manifest
-    credits 651 as a refinement of Fang's packing and 813 to Fang's rectangle and gluing.
-    A chain through an intermediate author retains the link.
+  note: 'Reviewed packing/resources/bibliography.yaml [[Mishapolk issue 732 f1ceee4
+    2026-10-23]] /credit span 41:45: Couzo''s 6b7391d manifest credits Kevin Fang''s
+    two-wedge construction at 343 and names Fang in its provenance at 813, and his
+    4e4c8ce manifest credits 651 as a refinement of Fang''s packing and 813 to Fang''s
+    rectangle and gluing. A chain through an intermediate author retains the link.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Mishapolk issue 732 f1ceee4 2026-10-23]'
@@ -27455,11 +27462,10 @@ occurrences:
   role: prerequisite
   disposition: non-person
   evidence: []
-  note: >-
-    Corporate credit: Couzo's 4e4c8ce manifest (the couzo-index-2026-10-15 packet) credits
-    328 to PingYou Ltd (BuddenPing) and PingYou Ltd's square input at 813, which his
-    6b7391d manifest also names in its provenance; the prior reviewed corporate identity is
-    retained. No individual is inferred.
+  note: 'Corporate credit: Couzo''s 4e4c8ce manifest (the couzo-index-2026-10-15 packet)
+    credits 328 to PingYou Ltd (BuddenPing) and PingYou Ltd''s square input at 813,
+    which his 6b7391d manifest also names in its provenance; the prior reviewed corporate
+    identity is retained. No individual is inferred.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Mishapolk issue 732 f1ceee4 2026-10-23]'
@@ -27474,11 +27480,10 @@ occurrences:
   - primary-byline
   - announcement-account
   contributor_id: joshua-levy
-  note: >-
-    Reviewed /credit span 60:64: the comment says the author verified the certificates with
-    this project's sqpack.verify in his testbench. The first-party jlevy/squares record is the
-    Joshua Levy identity established by LICENSE and the retained ojoshe receipt; project
-    credit does not imply sole personal authorship.
+  note: 'Reviewed /credit span 60:64: the comment says the author verified the certificates
+    with this project''s sqpack.verify in his testbench. The first-party jlevy/squares
+    record is the Joshua Levy identity established by LICENSE and the retained ojoshe
+    receipt; project credit does not imply sole personal authorship.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Fang excess note 2026-10-19]'
@@ -27493,15 +27498,15 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: kevin-fang
-  note: 'Reviewed 2026-10-24 (think-494l) against the [Fang excess theorem 2026-10-13] span
-    of the same person: the note and the Lean source name the same people in the same roles;
-    the printed source text and credit role are retained.'
+  note: 'Reviewed 2026-10-24 (think-494l) against the [Fang excess theorem 2026-10-13]
+    span of the same person: the note and the Lean source name the same people in
+    the same roles; the printed source text and credit role are retained.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Fang excess note 2026-10-19]'
     field: /credit
-  expected_text: Fang after Arslanov, Mustafin, Shangitbayev, Ellsworth, Stead, de Winter,
-    Daniel, Couzo
+  expected_text: Fang after Arslanov, Mustafin, Shangitbayev, Ellsworth, Stead, de
+    Winter, Daniel, Couzo
   start: 0
   end: 4
   label: Fang
@@ -27511,15 +27516,15 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: kevin-fang
-  note: 'Reviewed 2026-10-24 (think-494l) against the [Fang excess theorem 2026-10-13] span
-    of the same person: the note and the Lean source name the same people in the same roles;
-    the printed source text and credit role are retained.'
+  note: 'Reviewed 2026-10-24 (think-494l) against the [Fang excess theorem 2026-10-13]
+    span of the same person: the note and the Lean source name the same people in
+    the same roles; the printed source text and credit role are retained.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Fang excess note 2026-10-19]'
     field: /credit
-  expected_text: Fang after Arslanov, Mustafin, Shangitbayev, Ellsworth, Stead, de Winter,
-    Daniel, Couzo
+  expected_text: Fang after Arslanov, Mustafin, Shangitbayev, Ellsworth, Stead, de
+    Winter, Daniel, Couzo
   start: 11
   end: 19
   label: Arslanov
@@ -27529,15 +27534,15 @@ occurrences:
   - paper-byline
   - bibliography
   contributor_id: mz-arslanov
-  note: 'Reviewed 2026-10-24 (think-494l) against the [Fang excess theorem 2026-10-13] span
-    of the same person: the note and the Lean source name the same people in the same roles;
-    the printed source text and credit role are retained.'
+  note: 'Reviewed 2026-10-24 (think-494l) against the [Fang excess theorem 2026-10-13]
+    span of the same person: the note and the Lean source name the same people in
+    the same roles; the printed source text and credit role are retained.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Fang excess note 2026-10-19]'
     field: /credit
-  expected_text: Fang after Arslanov, Mustafin, Shangitbayev, Ellsworth, Stead, de Winter,
-    Daniel, Couzo
+  expected_text: Fang after Arslanov, Mustafin, Shangitbayev, Ellsworth, Stead, de
+    Winter, Daniel, Couzo
   start: 21
   end: 29
   label: Mustafin
@@ -27547,15 +27552,15 @@ occurrences:
   - paper-byline
   - bibliography
   contributor_id: sa-mustafin
-  note: 'Reviewed 2026-10-24 (think-494l) against the [Fang excess theorem 2026-10-13] span
-    of the same person: the note and the Lean source name the same people in the same roles;
-    the printed source text and credit role are retained.'
+  note: 'Reviewed 2026-10-24 (think-494l) against the [Fang excess theorem 2026-10-13]
+    span of the same person: the note and the Lean source name the same people in
+    the same roles; the printed source text and credit role are retained.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Fang excess note 2026-10-19]'
     field: /credit
-  expected_text: Fang after Arslanov, Mustafin, Shangitbayev, Ellsworth, Stead, de Winter,
-    Daniel, Couzo
+  expected_text: Fang after Arslanov, Mustafin, Shangitbayev, Ellsworth, Stead, de
+    Winter, Daniel, Couzo
   start: 31
   end: 43
   label: Shangitbayev
@@ -27565,15 +27570,15 @@ occurrences:
   - paper-byline
   - bibliography
   contributor_id: zk-shangitbayev
-  note: 'Reviewed 2026-10-24 (think-494l) against the [Fang excess theorem 2026-10-13] span
-    of the same person: the note and the Lean source name the same people in the same roles;
-    the printed source text and credit role are retained.'
+  note: 'Reviewed 2026-10-24 (think-494l) against the [Fang excess theorem 2026-10-13]
+    span of the same person: the note and the Lean source name the same people in
+    the same roles; the printed source text and credit role are retained.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Fang excess note 2026-10-19]'
     field: /credit
-  expected_text: Fang after Arslanov, Mustafin, Shangitbayev, Ellsworth, Stead, de Winter,
-    Daniel, Couzo
+  expected_text: Fang after Arslanov, Mustafin, Shangitbayev, Ellsworth, Stead, de
+    Winter, Daniel, Couzo
   start: 45
   end: 54
   label: Ellsworth
@@ -27583,15 +27588,15 @@ occurrences:
   - catalogue-byline
   - catalogue-credits
   contributor_id: david-ellsworth
-  note: 'Reviewed 2026-10-24 (think-494l) against the [Fang excess theorem 2026-10-13] span
-    of the same person: the note and the Lean source name the same people in the same roles;
-    the printed source text and credit role are retained.'
+  note: 'Reviewed 2026-10-24 (think-494l) against the [Fang excess theorem 2026-10-13]
+    span of the same person: the note and the Lean source name the same people in
+    the same roles; the printed source text and credit role are retained.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Fang excess note 2026-10-19]'
     field: /credit
-  expected_text: Fang after Arslanov, Mustafin, Shangitbayev, Ellsworth, Stead, de Winter,
-    Daniel, Couzo
+  expected_text: Fang after Arslanov, Mustafin, Shangitbayev, Ellsworth, Stead, de
+    Winter, Daniel, Couzo
   start: 56
   end: 61
   label: Stead
@@ -27601,15 +27606,15 @@ occurrences:
   - catalogue-credit
   - bibliography
   contributor_id: tej-stead
-  note: 'Reviewed 2026-10-24 (think-494l) against the [Fang excess theorem 2026-10-13] span
-    of the same person: the note and the Lean source name the same people in the same roles;
-    the printed source text and credit role are retained.'
+  note: 'Reviewed 2026-10-24 (think-494l) against the [Fang excess theorem 2026-10-13]
+    span of the same person: the note and the Lean source name the same people in
+    the same roles; the printed source text and credit role are retained.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Fang excess note 2026-10-19]'
     field: /credit
-  expected_text: Fang after Arslanov, Mustafin, Shangitbayev, Ellsworth, Stead, de Winter,
-    Daniel, Couzo
+  expected_text: Fang after Arslanov, Mustafin, Shangitbayev, Ellsworth, Stead, de
+    Winter, Daniel, Couzo
   start: 63
   end: 72
   label: de Winter
@@ -27619,15 +27624,15 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: joost-de-winter
-  note: 'Reviewed 2026-10-24 (think-494l) against the [Fang excess theorem 2026-10-13] span
-    of the same person: the note and the Lean source name the same people in the same roles;
-    the printed source text and credit role are retained.'
+  note: 'Reviewed 2026-10-24 (think-494l) against the [Fang excess theorem 2026-10-13]
+    span of the same person: the note and the Lean source name the same people in
+    the same roles; the printed source text and credit role are retained.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Fang excess note 2026-10-19]'
     field: /credit
-  expected_text: Fang after Arslanov, Mustafin, Shangitbayev, Ellsworth, Stead, de Winter,
-    Daniel, Couzo
+  expected_text: Fang after Arslanov, Mustafin, Shangitbayev, Ellsworth, Stead, de
+    Winter, Daniel, Couzo
   start: 74
   end: 80
   label: Daniel
@@ -27637,15 +27642,15 @@ occurrences:
   - repository-license
   - bibliography
   contributor_id: evan-daniel
-  note: 'Reviewed 2026-10-24 (think-494l) against the [Fang excess theorem 2026-10-13] span
-    of the same person: the note and the Lean source name the same people in the same roles;
-    the printed source text and credit role are retained.'
+  note: 'Reviewed 2026-10-24 (think-494l) against the [Fang excess theorem 2026-10-13]
+    span of the same person: the note and the Lean source name the same people in
+    the same roles; the printed source text and credit role are retained.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Fang excess note 2026-10-19]'
     field: /credit
-  expected_text: Fang after Arslanov, Mustafin, Shangitbayev, Ellsworth, Stead, de Winter,
-    Daniel, Couzo
+  expected_text: Fang after Arslanov, Mustafin, Shangitbayev, Ellsworth, Stead, de
+    Winter, Daniel, Couzo
   start: 82
   end: 87
   label: Couzo
@@ -27655,9 +27660,9 @@ occurrences:
   - primary-byline
   - bibliography
   contributor_id: francisco-couzo
-  note: 'Reviewed 2026-10-24 (think-494l) against the [Fang excess theorem 2026-10-13] span
-    of the same person: the note and the Lean source name the same people in the same roles;
-    the printed source text and credit role are retained.'
+  note: 'Reviewed 2026-10-24 (think-494l) against the [Fang excess theorem 2026-10-13]
+    span of the same person: the note and the Lean source name the same people in
+    the same roles; the printed source text and credit role are retained.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Fang excess Lean 2026-10-18]'
@@ -27672,15 +27677,15 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: kevin-fang
-  note: 'Reviewed 2026-10-24 (think-494l) against the [Fang excess theorem 2026-10-13] span
-    of the same person: the note and the Lean source name the same people in the same roles;
-    the printed source text and credit role are retained.'
+  note: 'Reviewed 2026-10-24 (think-494l) against the [Fang excess theorem 2026-10-13]
+    span of the same person: the note and the Lean source name the same people in
+    the same roles; the printed source text and credit role are retained.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Fang excess Lean 2026-10-18]'
     field: /credit
-  expected_text: Fang after Daniel, Arslanov, Mustafin, Shangitbayev, Ellsworth, Stead, de
-    Winter, Couzo
+  expected_text: Fang after Daniel, Arslanov, Mustafin, Shangitbayev, Ellsworth, Stead,
+    de Winter, Couzo
   start: 0
   end: 4
   label: Fang
@@ -27690,15 +27695,15 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: kevin-fang
-  note: 'Reviewed 2026-10-24 (think-494l) against the [Fang excess theorem 2026-10-13] span
-    of the same person: the note and the Lean source name the same people in the same roles;
-    the printed source text and credit role are retained.'
+  note: 'Reviewed 2026-10-24 (think-494l) against the [Fang excess theorem 2026-10-13]
+    span of the same person: the note and the Lean source name the same people in
+    the same roles; the printed source text and credit role are retained.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Fang excess Lean 2026-10-18]'
     field: /credit
-  expected_text: Fang after Daniel, Arslanov, Mustafin, Shangitbayev, Ellsworth, Stead, de
-    Winter, Couzo
+  expected_text: Fang after Daniel, Arslanov, Mustafin, Shangitbayev, Ellsworth, Stead,
+    de Winter, Couzo
   start: 11
   end: 17
   label: Daniel
@@ -27708,15 +27713,15 @@ occurrences:
   - repository-license
   - bibliography
   contributor_id: evan-daniel
-  note: 'Reviewed 2026-10-24 (think-494l) against the [Fang excess theorem 2026-10-13] span
-    of the same person: the note and the Lean source name the same people in the same roles;
-    the printed source text and credit role are retained.'
+  note: 'Reviewed 2026-10-24 (think-494l) against the [Fang excess theorem 2026-10-13]
+    span of the same person: the note and the Lean source name the same people in
+    the same roles; the printed source text and credit role are retained.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Fang excess Lean 2026-10-18]'
     field: /credit
-  expected_text: Fang after Daniel, Arslanov, Mustafin, Shangitbayev, Ellsworth, Stead, de
-    Winter, Couzo
+  expected_text: Fang after Daniel, Arslanov, Mustafin, Shangitbayev, Ellsworth, Stead,
+    de Winter, Couzo
   start: 19
   end: 27
   label: Arslanov
@@ -27726,15 +27731,15 @@ occurrences:
   - paper-byline
   - bibliography
   contributor_id: mz-arslanov
-  note: 'Reviewed 2026-10-24 (think-494l) against the [Fang excess theorem 2026-10-13] span
-    of the same person: the note and the Lean source name the same people in the same roles;
-    the printed source text and credit role are retained.'
+  note: 'Reviewed 2026-10-24 (think-494l) against the [Fang excess theorem 2026-10-13]
+    span of the same person: the note and the Lean source name the same people in
+    the same roles; the printed source text and credit role are retained.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Fang excess Lean 2026-10-18]'
     field: /credit
-  expected_text: Fang after Daniel, Arslanov, Mustafin, Shangitbayev, Ellsworth, Stead, de
-    Winter, Couzo
+  expected_text: Fang after Daniel, Arslanov, Mustafin, Shangitbayev, Ellsworth, Stead,
+    de Winter, Couzo
   start: 29
   end: 37
   label: Mustafin
@@ -27744,15 +27749,15 @@ occurrences:
   - paper-byline
   - bibliography
   contributor_id: sa-mustafin
-  note: 'Reviewed 2026-10-24 (think-494l) against the [Fang excess theorem 2026-10-13] span
-    of the same person: the note and the Lean source name the same people in the same roles;
-    the printed source text and credit role are retained.'
+  note: 'Reviewed 2026-10-24 (think-494l) against the [Fang excess theorem 2026-10-13]
+    span of the same person: the note and the Lean source name the same people in
+    the same roles; the printed source text and credit role are retained.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Fang excess Lean 2026-10-18]'
     field: /credit
-  expected_text: Fang after Daniel, Arslanov, Mustafin, Shangitbayev, Ellsworth, Stead, de
-    Winter, Couzo
+  expected_text: Fang after Daniel, Arslanov, Mustafin, Shangitbayev, Ellsworth, Stead,
+    de Winter, Couzo
   start: 39
   end: 51
   label: Shangitbayev
@@ -27762,15 +27767,15 @@ occurrences:
   - paper-byline
   - bibliography
   contributor_id: zk-shangitbayev
-  note: 'Reviewed 2026-10-24 (think-494l) against the [Fang excess theorem 2026-10-13] span
-    of the same person: the note and the Lean source name the same people in the same roles;
-    the printed source text and credit role are retained.'
+  note: 'Reviewed 2026-10-24 (think-494l) against the [Fang excess theorem 2026-10-13]
+    span of the same person: the note and the Lean source name the same people in
+    the same roles; the printed source text and credit role are retained.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Fang excess Lean 2026-10-18]'
     field: /credit
-  expected_text: Fang after Daniel, Arslanov, Mustafin, Shangitbayev, Ellsworth, Stead, de
-    Winter, Couzo
+  expected_text: Fang after Daniel, Arslanov, Mustafin, Shangitbayev, Ellsworth, Stead,
+    de Winter, Couzo
   start: 53
   end: 62
   label: Ellsworth
@@ -27780,15 +27785,15 @@ occurrences:
   - catalogue-byline
   - catalogue-credits
   contributor_id: david-ellsworth
-  note: 'Reviewed 2026-10-24 (think-494l) against the [Fang excess theorem 2026-10-13] span
-    of the same person: the note and the Lean source name the same people in the same roles;
-    the printed source text and credit role are retained.'
+  note: 'Reviewed 2026-10-24 (think-494l) against the [Fang excess theorem 2026-10-13]
+    span of the same person: the note and the Lean source name the same people in
+    the same roles; the printed source text and credit role are retained.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Fang excess Lean 2026-10-18]'
     field: /credit
-  expected_text: Fang after Daniel, Arslanov, Mustafin, Shangitbayev, Ellsworth, Stead, de
-    Winter, Couzo
+  expected_text: Fang after Daniel, Arslanov, Mustafin, Shangitbayev, Ellsworth, Stead,
+    de Winter, Couzo
   start: 64
   end: 69
   label: Stead
@@ -27798,15 +27803,15 @@ occurrences:
   - catalogue-credit
   - bibliography
   contributor_id: tej-stead
-  note: 'Reviewed 2026-10-24 (think-494l) against the [Fang excess theorem 2026-10-13] span
-    of the same person: the note and the Lean source name the same people in the same roles;
-    the printed source text and credit role are retained.'
+  note: 'Reviewed 2026-10-24 (think-494l) against the [Fang excess theorem 2026-10-13]
+    span of the same person: the note and the Lean source name the same people in
+    the same roles; the printed source text and credit role are retained.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Fang excess Lean 2026-10-18]'
     field: /credit
-  expected_text: Fang after Daniel, Arslanov, Mustafin, Shangitbayev, Ellsworth, Stead, de
-    Winter, Couzo
+  expected_text: Fang after Daniel, Arslanov, Mustafin, Shangitbayev, Ellsworth, Stead,
+    de Winter, Couzo
   start: 71
   end: 80
   label: de Winter
@@ -27816,15 +27821,15 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: joost-de-winter
-  note: 'Reviewed 2026-10-24 (think-494l) against the [Fang excess theorem 2026-10-13] span
-    of the same person: the note and the Lean source name the same people in the same roles;
-    the printed source text and credit role are retained.'
+  note: 'Reviewed 2026-10-24 (think-494l) against the [Fang excess theorem 2026-10-13]
+    span of the same person: the note and the Lean source name the same people in
+    the same roles; the printed source text and credit role are retained.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Fang excess Lean 2026-10-18]'
     field: /credit
-  expected_text: Fang after Daniel, Arslanov, Mustafin, Shangitbayev, Ellsworth, Stead, de
-    Winter, Couzo
+  expected_text: Fang after Daniel, Arslanov, Mustafin, Shangitbayev, Ellsworth, Stead,
+    de Winter, Couzo
   start: 82
   end: 87
   label: Couzo
@@ -27834,9 +27839,9 @@ occurrences:
   - primary-byline
   - bibliography
   contributor_id: francisco-couzo
-  note: 'Reviewed 2026-10-24 (think-494l) against the [Fang excess theorem 2026-10-13] span
-    of the same person: the note and the Lean source name the same people in the same roles;
-    the printed source text and credit role are retained.'
+  note: 'Reviewed 2026-10-24 (think-494l) against the [Fang excess theorem 2026-10-13]
+    span of the same person: the note and the Lean source name the same people in
+    the same roles; the printed source text and credit role are retained.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo issue 763 2026-10-23]'
@@ -27851,15 +27856,15 @@ occurrences:
   - primary-byline
   - bibliography
   contributor_id: francisco-couzo
-  note: >-
-    Reviewed author byline: issue 763 is filed by franciscouzo and names Francisco Couzo as
-    its credit name, and the couzo-issue763-2026-10-23 packet retains his repository at
-    964ee2bd, the source of every earlier Couzo key.
+  note: 'Reviewed author byline: issue 763 is filed by franciscouzo and names Francisco
+    Couzo as its credit name, and the couzo-issue763-2026-10-23 packet retains his
+    repository at 964ee2bd, the source of every earlier Couzo key.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo issue 763 2026-10-23]'
     field: /credit
-  expected_text: Couzo after Lavrentev, Tymchishin, Muglich, Polkovskyi, Daniel, Fang, de Winter, Levy
+  expected_text: Couzo after Lavrentev, Tymchishin, Muglich, Polkovskyi, Daniel, Fang,
+    de Winter, Levy
   start: 0
   end: 5
   label: Couzo
@@ -27869,50 +27874,50 @@ occurrences:
   - primary-byline
   - bibliography
   contributor_id: francisco-couzo
-  note: >-
-    Reviewed source credit matches the evidenced person and printed name; the issue's credit
-    name and the manifest credit Francisco Couzo at every row, and the original credit role
-    is retained.
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    issue's credit name and the manifest credit Francisco Couzo at every row, and
+    the original credit role is retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo issue 763 2026-10-23]'
     field: /credit
-  expected_text: Couzo after Lavrentev, Tymchishin, Muglich, Polkovskyi, Daniel, Fang, de Winter, Levy
+  expected_text: Couzo after Lavrentev, Tymchishin, Muglich, Polkovskyi, Daniel, Fang,
+    de Winter, Levy
   start: 12
   end: 21
   label: Lavrentev
   role: prerequisite
   disposition: unresolved
   evidence: []
-  note: >-
-    Reviewed packing/resources/bibliography.yaml [[Couzo issue 763 2026-10-23]] /credit span
-    12:21: the source's certified_bounds.json and manifest credit 253 of the 436 rows as
-    refinements of the packing of Vladislav Lavrentev (lightningv08), Kaggle notebook "CUDA
-    Packing Search" v11, and the issue's legend names him. No person record exists yet;
-    identity review pending (a profile by name, think-ptkk).
+  note: 'Reviewed packing/resources/bibliography.yaml [[Couzo issue 763 2026-10-23]]
+    /credit span 12:21: the source''s certified_bounds.json and manifest credit 253
+    of the 436 rows as refinements of the packing of Vladislav Lavrentev (lightningv08),
+    Kaggle notebook "CUDA Packing Search" v11, and the issue''s legend names him.
+    No person record exists yet; identity review pending (a profile by name, think-ptkk).'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo issue 763 2026-10-23]'
     field: /credit
-  expected_text: Couzo after Lavrentev, Tymchishin, Muglich, Polkovskyi, Daniel, Fang, de Winter, Levy
+  expected_text: Couzo after Lavrentev, Tymchishin, Muglich, Polkovskyi, Daniel, Fang,
+    de Winter, Levy
   start: 23
   end: 33
   label: Tymchishin
   role: prerequisite
   disposition: unresolved
   evidence: []
-  note: >-
-    Reviewed packing/resources/bibliography.yaml [[Couzo issue 763 2026-10-23]] /credit span
-    23:33: the source credits 97 rows as refinements of packings of Kirill Tymchishin
-    (kirilltym), from his Kaggle notebooks "CPU Alternating Reclosure" v3, "CPU/GPU/MPS
-    EDA+Seam LP" v4 (at 268, whose parent the packet retains) and "22-3662-cpu-cuda-mps-eda-
-    union", and the issue's legend names him. No person record exists yet; identity review
-    pending (a profile by name, think-ptkk).
+  note: 'Reviewed packing/resources/bibliography.yaml [[Couzo issue 763 2026-10-23]]
+    /credit span 23:33: the source credits 97 rows as refinements of packings of Kirill
+    Tymchishin (kirilltym), from his Kaggle notebooks "CPU Alternating Reclosure"
+    v3, "CPU/GPU/MPS EDA+Seam LP" v4 (at 268, whose parent the packet retains) and
+    "22-3662-cpu-cuda-mps-eda- union", and the issue''s legend names him. No person
+    record exists yet; identity review pending (a profile by name, think-ptkk).'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo issue 763 2026-10-23]'
     field: /credit
-  expected_text: Couzo after Lavrentev, Tymchishin, Muglich, Polkovskyi, Daniel, Fang, de Winter, Levy
+  expected_text: Couzo after Lavrentev, Tymchishin, Muglich, Polkovskyi, Daniel, Fang,
+    de Winter, Levy
   start: 35
   end: 42
   label: Muglich
@@ -27923,16 +27928,17 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: darius-muglich
-  note: >-
-    Reviewed packing/resources/bibliography.yaml [[Couzo issue 763 2026-10-23]] /credit span
-    35:42: the source credits 422 as a refinement of the packing of Darius Muglich (#686),
-    and the triage of 24 October (think-cnn7) reads Muglich's seeds in the chains of two of
-    Couzo's own rows. A chain through an intermediate author retains the link.
+  note: 'Reviewed packing/resources/bibliography.yaml [[Couzo issue 763 2026-10-23]]
+    /credit span 35:42: the source credits 422 as a refinement of the packing of Darius
+    Muglich (#686), and the triage of 24 October (think-cnn7) reads Muglich''s seeds
+    in the chains of two of Couzo''s own rows. A chain through an intermediate author
+    retains the link.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo issue 763 2026-10-23]'
     field: /credit
-  expected_text: Couzo after Lavrentev, Tymchishin, Muglich, Polkovskyi, Daniel, Fang, de Winter, Levy
+  expected_text: Couzo after Lavrentev, Tymchishin, Muglich, Polkovskyi, Daniel, Fang,
+    de Winter, Levy
   start: 44
   end: 54
   label: Polkovskyi
@@ -27942,17 +27948,17 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: mykhailo-polkovskyi
-  note: >-
-    Reviewed packing/resources/bibliography.yaml [[Couzo issue 763 2026-10-23]] /credit span
-    44:54: the issue's legend names Mykhailo Polkovskyi (Mishapolk) as a packing refined,
-    and the triage of 24 October (think-cnn7) reads 970 and the rows built on 850 as
-    refinements of packings his f1ceee4 release refined first. A chain through an
-    intermediate author retains the link.
+  note: 'Reviewed packing/resources/bibliography.yaml [[Couzo issue 763 2026-10-23]]
+    /credit span 44:54: the issue''s legend names Mykhailo Polkovskyi (Mishapolk)
+    as a packing refined, and the triage of 24 October (think-cnn7) reads 970 and
+    the rows built on 850 as refinements of packings his f1ceee4 release refined first.
+    A chain through an intermediate author retains the link.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo issue 763 2026-10-23]'
     field: /credit
-  expected_text: Couzo after Lavrentev, Tymchishin, Muglich, Polkovskyi, Daniel, Fang, de Winter, Levy
+  expected_text: Couzo after Lavrentev, Tymchishin, Muglich, Polkovskyi, Daniel, Fang,
+    de Winter, Levy
   start: 56
   end: 62
   label: Daniel
@@ -27962,16 +27968,16 @@ occurrences:
   - intake-credit
   - bibliography
   contributor_id: evan-daniel
-  note: >-
-    Reviewed packing/resources/bibliography.yaml [[Couzo issue 763 2026-10-23]] /credit span
-    56:62: the claims include 343, whose packing Couzo's manifests credit to Evan Daniel
-    with Kevin Fang's two-wedge construction; the chain keeps the link (triage of 24
-    October, think-cnn7).
+  note: 'Reviewed packing/resources/bibliography.yaml [[Couzo issue 763 2026-10-23]]
+    /credit span 56:62: the claims include 343, whose packing Couzo''s manifests credit
+    to Evan Daniel with Kevin Fang''s two-wedge construction; the chain keeps the
+    link (triage of 24 October, think-cnn7).'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo issue 763 2026-10-23]'
     field: /credit
-  expected_text: Couzo after Lavrentev, Tymchishin, Muglich, Polkovskyi, Daniel, Fang, de Winter, Levy
+  expected_text: Couzo after Lavrentev, Tymchishin, Muglich, Polkovskyi, Daniel, Fang,
+    de Winter, Levy
   start: 64
   end: 68
   label: Fang
@@ -27981,15 +27987,16 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: kevin-fang
-  note: >-
-    Reviewed packing/resources/bibliography.yaml [[Couzo issue 763 2026-10-23]] /credit span
-    64:68: Couzo's manifests credit the packing at 343 to Evan Daniel with Kevin Fang's two-
-    wedge construction; the chain keeps the link (triage of 24 October, think-cnn7).
+  note: 'Reviewed packing/resources/bibliography.yaml [[Couzo issue 763 2026-10-23]]
+    /credit span 64:68: Couzo''s manifests credit the packing at 343 to Evan Daniel
+    with Kevin Fang''s two- wedge construction; the chain keeps the link (triage of
+    24 October, think-cnn7).'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo issue 763 2026-10-23]'
     field: /credit
-  expected_text: Couzo after Lavrentev, Tymchishin, Muglich, Polkovskyi, Daniel, Fang, de Winter, Levy
+  expected_text: Couzo after Lavrentev, Tymchishin, Muglich, Polkovskyi, Daniel, Fang,
+    de Winter, Levy
   start: 70
   end: 79
   label: de Winter
@@ -27999,16 +28006,16 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: joost-de-winter
-  note: >-
-    Reviewed packing/resources/bibliography.yaml [[Couzo issue 763 2026-10-23]] /credit span
-    70:79: the triage of 24 October (think-cnn7) reads Joost de Winter's packing in the
-    chain of one of Couzo's own rows, which keeps the chain of the row it builds on. A chain
-    through an intermediate author retains the link.
+  note: 'Reviewed packing/resources/bibliography.yaml [[Couzo issue 763 2026-10-23]]
+    /credit span 70:79: the triage of 24 October (think-cnn7) reads Joost de Winter''s
+    packing in the chain of one of Couzo''s own rows, which keeps the chain of the
+    row it builds on. A chain through an intermediate author retains the link.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo issue 763 2026-10-23]'
     field: /credit
-  expected_text: Couzo after Lavrentev, Tymchishin, Muglich, Polkovskyi, Daniel, Fang, de Winter, Levy
+  expected_text: Couzo after Lavrentev, Tymchishin, Muglich, Polkovskyi, Daniel, Fang,
+    de Winter, Levy
   start: 81
   end: 85
   label: Levy
@@ -28018,11 +28025,11 @@ occurrences:
   - primary-byline
   - announcement-account
   contributor_id: joshua-levy
-  note: >-
-    Reviewed /credit span 81:85: the source's manifest names this project's sqpack/verify.py
-    as its first checker and compares with this project's register. The first-party
-    jlevy/squares record is the Joshua Levy identity established by LICENSE and the retained
-    ojoshe receipt; project credit does not imply sole personal authorship.
+  note: 'Reviewed /credit span 81:85: the source''s manifest names this project''s
+    sqpack/verify.py as its first checker and compares with this project''s register.
+    The first-party jlevy/squares record is the Joshua Levy identity established by
+    LICENSE and the retained ojoshe receipt; project credit does not imply sole personal
+    authorship.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo n304 2026-10-23]'
@@ -28037,16 +28044,16 @@ occurrences:
   - primary-byline
   - bibliography
   contributor_id: francisco-couzo
-  note: >-
-    Reviewed author byline: certificates/best/n304.cert is in franciscouzo/square-packing at
-    fa6237e, the repository of every earlier Couzo key, whose certified_bounds.json records
-    his certification of it; the couzo-n304-2026-10-23 packet reads it from the issue-763
-    packet's copy.
+  note: 'Reviewed author byline: certificates/best/n304.cert is in franciscouzo/square-packing
+    at fa6237e, the repository of every earlier Couzo key, whose certified_bounds.json
+    records his certification of it; the couzo-n304-2026-10-23 packet reads it from
+    the issue-763 packet''s copy.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo n304 2026-10-23]'
     field: /credit
-  expected_text: Couzo after Tymchishin, Polkovskyi, Ostashev, Couzo, PingYou Ltd, Levy
+  expected_text: Couzo after Tymchishin, Polkovskyi, Ostashev, Couzo, PingYou Ltd,
+    Levy
   start: 0
   end: 5
   label: Couzo
@@ -28056,31 +28063,31 @@ occurrences:
   - primary-byline
   - bibliography
   contributor_id: francisco-couzo
-  note: >-
-    Reviewed source credit: Francisco Couzo certified the packing at 304 in his repository;
-    he claims no refinement of it, and the original credit role is retained.
+  note: 'Reviewed source credit: Francisco Couzo certified the packing at 304 in his
+    repository; he claims no refinement of it, and the original credit role is retained.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo n304 2026-10-23]'
     field: /credit
-  expected_text: Couzo after Tymchishin, Polkovskyi, Ostashev, Couzo, PingYou Ltd, Levy
+  expected_text: Couzo after Tymchishin, Polkovskyi, Ostashev, Couzo, PingYou Ltd,
+    Levy
   start: 12
   end: 22
   label: Tymchishin
   role: prerequisite
   disposition: unresolved
   evidence: []
-  note: >-
-    Reviewed packing/resources/bibliography.yaml [[Couzo n304 2026-10-23]] /credit span
-    12:22: at 304, Francisco Couzo's catalogue, certified_bounds.json and manifest credit
-    the packing at 304 to Kirill Tymchishin (kirilltym), Kaggle notebook "CPU Alternating
-    Reclosure" v3, run 361239073. No person record exists yet; identity review pending (a
-    profile by name, think-l49q).
+  note: 'Reviewed packing/resources/bibliography.yaml [[Couzo n304 2026-10-23]] /credit
+    span 12:22: at 304, Francisco Couzo''s catalogue, certified_bounds.json and manifest
+    credit the packing at 304 to Kirill Tymchishin (kirilltym), Kaggle notebook "CPU
+    Alternating Reclosure" v3, run 361239073. No person record exists yet; identity
+    review pending (a profile by name, think-l49q).'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo n304 2026-10-23]'
     field: /credit
-  expected_text: Couzo after Tymchishin, Polkovskyi, Ostashev, Couzo, PingYou Ltd, Levy
+  expected_text: Couzo after Tymchishin, Polkovskyi, Ostashev, Couzo, PingYou Ltd,
+    Levy
   start: 24
   end: 34
   label: Polkovskyi
@@ -28090,19 +28097,19 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: mykhailo-polkovskyi
-  note: >-
-    Reviewed /credit span 24:34: at 304, the manifest of the source names the notebook's
-    previous source and seed as Mykhailo Polkovskyi's 70a033f n304.cert (#593), T-186's
-    packing, which this record measures as Daniil Ostashev's T-175 packing re-solved
-    (mishapolk-kkt-refinements-2026-10-14/review/compare_lineage-output.txt:32, 304 of 304
-    centres within 9.4e-16); the line carries T-186's recorded chain, 'Polkovskyi after
-    Ostashev, Couzo, PingYou Ltd, Levy'. A chain through an intermediate author retains the
-    link.
+  note: 'Reviewed /credit span 24:34: at 304, the manifest of the source names the
+    notebook''s previous source and seed as Mykhailo Polkovskyi''s 70a033f n304.cert
+    (#593), T-186''s packing, which this record measures as Daniil Ostashev''s T-175
+    packing re-solved (mishapolk-kkt-refinements-2026-10-14/review/compare_lineage-output.txt:32,
+    304 of 304 centres within 9.4e-16); the line carries T-186''s recorded chain,
+    ''Polkovskyi after Ostashev, Couzo, PingYou Ltd, Levy''. A chain through an intermediate
+    author retains the link.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo n304 2026-10-23]'
     field: /credit
-  expected_text: Couzo after Tymchishin, Polkovskyi, Ostashev, Couzo, PingYou Ltd, Levy
+  expected_text: Couzo after Tymchishin, Polkovskyi, Ostashev, Couzo, PingYou Ltd,
+    Levy
   start: 36
   end: 44
   label: Ostashev
@@ -28112,19 +28119,19 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: daniil-ostashev
-  note: >-
-    Reviewed /credit span 36:44: at 304, the manifest of the source names the notebook's
-    previous source and seed as Mykhailo Polkovskyi's 70a033f n304.cert (#593), T-186's
-    packing, which this record measures as Daniil Ostashev's T-175 packing re-solved
-    (mishapolk-kkt-refinements-2026-10-14/review/compare_lineage-output.txt:32, 304 of 304
-    centres within 9.4e-16); the line carries T-186's recorded chain, 'Polkovskyi after
-    Ostashev, Couzo, PingYou Ltd, Levy'. Ostashev is T-186's first link at 304 (issue 575;
-    T-175).
+  note: 'Reviewed /credit span 36:44: at 304, the manifest of the source names the
+    notebook''s previous source and seed as Mykhailo Polkovskyi''s 70a033f n304.cert
+    (#593), T-186''s packing, which this record measures as Daniil Ostashev''s T-175
+    packing re-solved (mishapolk-kkt-refinements-2026-10-14/review/compare_lineage-output.txt:32,
+    304 of 304 centres within 9.4e-16); the line carries T-186''s recorded chain,
+    ''Polkovskyi after Ostashev, Couzo, PingYou Ltd, Levy''. Ostashev is T-186''s
+    first link at 304 (issue 575; T-175).'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo n304 2026-10-23]'
     field: /credit
-  expected_text: Couzo after Tymchishin, Polkovskyi, Ostashev, Couzo, PingYou Ltd, Levy
+  expected_text: Couzo after Tymchishin, Polkovskyi, Ostashev, Couzo, PingYou Ltd,
+    Levy
   start: 46
   end: 51
   label: Couzo
@@ -28134,35 +28141,35 @@ occurrences:
   - primary-byline
   - bibliography
   contributor_id: francisco-couzo
-  note: >-
-    Reviewed /credit span 46:51: carried from T-186's recorded chain, the manifest of the
-    source names the notebook's previous source and seed as Mykhailo Polkovskyi's 70a033f
-    n304.cert (#593), T-186's packing, which this record measures as Daniil Ostashev's T-175
-    packing re-solved (mishapolk-kkt-refinements-2026-10-14/review/compare_lineage-
-    output.txt:32, 304 of 304 centres within 9.4e-16); the line carries T-186's recorded
-    chain, 'Polkovskyi after Ostashev, Couzo, PingYou Ltd, Levy'. Keep finder, refinement
-    and certification roles distinct.
+  note: 'Reviewed /credit span 46:51: carried from T-186''s recorded chain, the manifest
+    of the source names the notebook''s previous source and seed as Mykhailo Polkovskyi''s
+    70a033f n304.cert (#593), T-186''s packing, which this record measures as Daniil
+    Ostashev''s T-175 packing re-solved (mishapolk-kkt-refinements-2026-10-14/review/compare_lineage-
+    output.txt:32, 304 of 304 centres within 9.4e-16); the line carries T-186''s recorded
+    chain, ''Polkovskyi after Ostashev, Couzo, PingYou Ltd, Levy''. Keep finder, refinement
+    and certification roles distinct.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo n304 2026-10-23]'
     field: /credit
-  expected_text: Couzo after Tymchishin, Polkovskyi, Ostashev, Couzo, PingYou Ltd, Levy
+  expected_text: Couzo after Tymchishin, Polkovskyi, Ostashev, Couzo, PingYou Ltd,
+    Levy
   start: 53
   end: 64
   label: PingYou Ltd
   role: prerequisite
   disposition: non-person
   evidence: []
-  note: >-
-    Corporate credit carried from T-186's recorded chain ([Mishapolk KKT refinements
-    2026-10-14]); the retained packing/resources/web/pingyou-
-    pr574-certificates-2026-10-13/README.md Credit section records the request to credit
-    PingYou Ltd. No individual identity is inferred from the company label.
+  note: Corporate credit carried from T-186's recorded chain ([Mishapolk KKT refinements
+    2026-10-14]); the retained packing/resources/web/pingyou- pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd. No individual identity
+    is inferred from the company label.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo n304 2026-10-23]'
     field: /credit
-  expected_text: Couzo after Tymchishin, Polkovskyi, Ostashev, Couzo, PingYou Ltd, Levy
+  expected_text: Couzo after Tymchishin, Polkovskyi, Ostashev, Couzo, PingYou Ltd,
+    Levy
   start: 66
   end: 70
   label: Levy
@@ -28172,12 +28179,11 @@ occurrences:
   - primary-byline
   - announcement-account
   contributor_id: joshua-levy
-  note: >-
-    Reviewed /credit span 66:70: at 304 the manifest of T-241's source names this project's
-    sqpack/verify.py at 37e6757e as its first checker, and T-186's recorded chain ends in
-    Levy. The first-party jlevy/squares record is the Joshua Levy identity established by
-    LICENSE and the retained ojoshe receipt; project credit does not imply sole personal
-    authorship.
+  note: 'Reviewed /credit span 66:70: at 304 the manifest of T-241''s source names
+    this project''s sqpack/verify.py at 37e6757e as its first checker, and T-186''s
+    recorded chain ends in Levy. The first-party jlevy/squares record is the Joshua
+    Levy identity established by LICENSE and the retained ojoshe receipt; project
+    credit does not imply sole personal authorship.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel Kaggle descents 2026-10-24]'
@@ -28192,16 +28198,16 @@ occurrences:
   - repository-license
   - bibliography
   contributor_id: evan-daniel
-  note: >-
-    Reviewed packing/resources/bibliography.yaml [[Daniel Kaggle descents 2026-10-24]]
+  note: Reviewed packing/resources/bibliography.yaml [[Daniel Kaggle descents 2026-10-24]]
     /authors/0 span 0:6. The evand/square-packing certificates at 8a8879a match the
-    repository whose retained licence names Evan Daniel. Keep finder, improver and solver
-    roles distinct.
+    repository whose retained licence names Evan Daniel. Keep finder, improver and
+    solver roles distinct.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel Kaggle descents 2026-10-24]'
     field: /credit
-  expected_text: Daniel after Lavrentev, Tymchishin, Polkovskyi, Ostashev, Couzo, PingYou Ltd, Levy
+  expected_text: Daniel after Lavrentev, Tymchishin, Polkovskyi, Ostashev, Couzo,
+    PingYou Ltd, Levy
   start: 0
   end: 6
   label: Daniel
@@ -28211,48 +28217,48 @@ occurrences:
   - repository-license
   - bibliography
   contributor_id: evan-daniel
-  note: >-
-    Reviewed packing/resources/bibliography.yaml [[Daniel Kaggle descents 2026-10-24]]
-    /credit span 0:6: Evan Daniel's exact descents at 268 and 304, in the repository whose
-    retained licence names him. Keep finder, improver and solver roles distinct.
+  note: 'Reviewed packing/resources/bibliography.yaml [[Daniel Kaggle descents 2026-10-24]]
+    /credit span 0:6: Evan Daniel''s exact descents at 268 and 304, in the repository
+    whose retained licence names him. Keep finder, improver and solver roles distinct.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel Kaggle descents 2026-10-24]'
     field: /credit
-  expected_text: Daniel after Lavrentev, Tymchishin, Polkovskyi, Ostashev, Couzo, PingYou Ltd, Levy
+  expected_text: Daniel after Lavrentev, Tymchishin, Polkovskyi, Ostashev, Couzo,
+    PingYou Ltd, Levy
   start: 13
   end: 22
   label: Lavrentev
   role: prerequisite
   disposition: unresolved
   evidence: []
-  note: >-
-    Reviewed packing/resources/bibliography.yaml [[Daniel Kaggle descents 2026-10-24]]
-    /credit span 13:22: the source's commit credits the packing at 268 to Vladislav
-    Lavrentev (Kaggle lightningv08). No person record exists yet; identity review pending (a
-    profile by name, as for [Couzo issue 763 2026-10-23], think-l49q).
+  note: 'Reviewed packing/resources/bibliography.yaml [[Daniel Kaggle descents 2026-10-24]]
+    /credit span 13:22: the source''s commit credits the packing at 268 to Vladislav
+    Lavrentev (Kaggle lightningv08). No person record exists yet; identity review
+    pending (a profile by name, as for [Couzo issue 763 2026-10-23], think-l49q).'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel Kaggle descents 2026-10-24]'
     field: /credit
-  expected_text: Daniel after Lavrentev, Tymchishin, Polkovskyi, Ostashev, Couzo, PingYou Ltd, Levy
+  expected_text: Daniel after Lavrentev, Tymchishin, Polkovskyi, Ostashev, Couzo,
+    PingYou Ltd, Levy
   start: 24
   end: 34
   label: Tymchishin
   role: prerequisite
   disposition: unresolved
   evidence: []
-  note: >-
-    Reviewed packing/resources/bibliography.yaml [[Daniel Kaggle descents 2026-10-24]]
-    /credit span 24:34: at 304, where T-242 regularizes T-241, Francisco Couzo's catalogue,
-    certified_bounds.json and manifest credit the packing at 304 to Kirill Tymchishin
-    (kirilltym), Kaggle notebook "CPU Alternating Reclosure" v3, run 361239073. No person
-    record exists yet; identity review pending (a profile by name, think-l49q).
+  note: 'Reviewed packing/resources/bibliography.yaml [[Daniel Kaggle descents 2026-10-24]]
+    /credit span 24:34: at 304, where T-242 regularizes T-241, Francisco Couzo''s
+    catalogue, certified_bounds.json and manifest credit the packing at 304 to Kirill
+    Tymchishin (kirilltym), Kaggle notebook "CPU Alternating Reclosure" v3, run 361239073.
+    No person record exists yet; identity review pending (a profile by name, think-l49q).'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel Kaggle descents 2026-10-24]'
     field: /credit
-  expected_text: Daniel after Lavrentev, Tymchishin, Polkovskyi, Ostashev, Couzo, PingYou Ltd, Levy
+  expected_text: Daniel after Lavrentev, Tymchishin, Polkovskyi, Ostashev, Couzo,
+    PingYou Ltd, Levy
   start: 36
   end: 46
   label: Polkovskyi
@@ -28262,19 +28268,19 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: mykhailo-polkovskyi
-  note: >-
-    Reviewed /credit span 36:46: at 304, where T-242 regularizes T-241, the manifest of the
-    source names the notebook's previous source and seed as Mykhailo Polkovskyi's 70a033f
-    n304.cert (#593), T-186's packing, which this record measures as Daniil Ostashev's T-175
-    packing re-solved (mishapolk-kkt-refinements-2026-10-14/review/compare_lineage-
-    output.txt:32, 304 of 304 centres within 9.4e-16); the line carries T-186's recorded
-    chain, 'Polkovskyi after Ostashev, Couzo, PingYou Ltd, Levy'. A chain through an
-    intermediate author retains the link.
+  note: 'Reviewed /credit span 36:46: at 304, where T-242 regularizes T-241, the manifest
+    of the source names the notebook''s previous source and seed as Mykhailo Polkovskyi''s
+    70a033f n304.cert (#593), T-186''s packing, which this record measures as Daniil
+    Ostashev''s T-175 packing re-solved (mishapolk-kkt-refinements-2026-10-14/review/compare_lineage-
+    output.txt:32, 304 of 304 centres within 9.4e-16); the line carries T-186''s recorded
+    chain, ''Polkovskyi after Ostashev, Couzo, PingYou Ltd, Levy''. A chain through
+    an intermediate author retains the link.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel Kaggle descents 2026-10-24]'
     field: /credit
-  expected_text: Daniel after Lavrentev, Tymchishin, Polkovskyi, Ostashev, Couzo, PingYou Ltd, Levy
+  expected_text: Daniel after Lavrentev, Tymchishin, Polkovskyi, Ostashev, Couzo,
+    PingYou Ltd, Levy
   start: 48
   end: 56
   label: Ostashev
@@ -28284,19 +28290,19 @@ occurrences:
   - source-intake
   - bibliography
   contributor_id: daniil-ostashev
-  note: >-
-    Reviewed /credit span 48:56: at 304, where T-242 regularizes T-241, the manifest of the
-    source names the notebook's previous source and seed as Mykhailo Polkovskyi's 70a033f
-    n304.cert (#593), T-186's packing, which this record measures as Daniil Ostashev's T-175
-    packing re-solved (mishapolk-kkt-refinements-2026-10-14/review/compare_lineage-
-    output.txt:32, 304 of 304 centres within 9.4e-16); the line carries T-186's recorded
-    chain, 'Polkovskyi after Ostashev, Couzo, PingYou Ltd, Levy'. Ostashev is T-186's first
-    link at 304 (issue 575; T-175).
+  note: 'Reviewed /credit span 48:56: at 304, where T-242 regularizes T-241, the manifest
+    of the source names the notebook''s previous source and seed as Mykhailo Polkovskyi''s
+    70a033f n304.cert (#593), T-186''s packing, which this record measures as Daniil
+    Ostashev''s T-175 packing re-solved (mishapolk-kkt-refinements-2026-10-14/review/compare_lineage-
+    output.txt:32, 304 of 304 centres within 9.4e-16); the line carries T-186''s recorded
+    chain, ''Polkovskyi after Ostashev, Couzo, PingYou Ltd, Levy''. Ostashev is T-186''s
+    first link at 304 (issue 575; T-175).'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel Kaggle descents 2026-10-24]'
     field: /credit
-  expected_text: Daniel after Lavrentev, Tymchishin, Polkovskyi, Ostashev, Couzo, PingYou Ltd, Levy
+  expected_text: Daniel after Lavrentev, Tymchishin, Polkovskyi, Ostashev, Couzo,
+    PingYou Ltd, Levy
   start: 58
   end: 63
   label: Couzo
@@ -28306,35 +28312,35 @@ occurrences:
   - primary-byline
   - bibliography
   contributor_id: francisco-couzo
-  note: >-
-    Reviewed /credit span 58:63: carried from T-186's recorded chain, the manifest of the
-    source names the notebook's previous source and seed as Mykhailo Polkovskyi's 70a033f
-    n304.cert (#593), T-186's packing, which this record measures as Daniil Ostashev's T-175
-    packing re-solved (mishapolk-kkt-refinements-2026-10-14/review/compare_lineage-
-    output.txt:32, 304 of 304 centres within 9.4e-16); the line carries T-186's recorded
-    chain, 'Polkovskyi after Ostashev, Couzo, PingYou Ltd, Levy'. Keep finder, refinement
-    and certification roles distinct.
+  note: 'Reviewed /credit span 58:63: carried from T-186''s recorded chain, the manifest
+    of the source names the notebook''s previous source and seed as Mykhailo Polkovskyi''s
+    70a033f n304.cert (#593), T-186''s packing, which this record measures as Daniil
+    Ostashev''s T-175 packing re-solved (mishapolk-kkt-refinements-2026-10-14/review/compare_lineage-
+    output.txt:32, 304 of 304 centres within 9.4e-16); the line carries T-186''s recorded
+    chain, ''Polkovskyi after Ostashev, Couzo, PingYou Ltd, Levy''. Keep finder, refinement
+    and certification roles distinct.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel Kaggle descents 2026-10-24]'
     field: /credit
-  expected_text: Daniel after Lavrentev, Tymchishin, Polkovskyi, Ostashev, Couzo, PingYou Ltd, Levy
+  expected_text: Daniel after Lavrentev, Tymchishin, Polkovskyi, Ostashev, Couzo,
+    PingYou Ltd, Levy
   start: 65
   end: 76
   label: PingYou Ltd
   role: prerequisite
   disposition: non-person
   evidence: []
-  note: >-
-    Corporate credit carried from T-186's recorded chain ([Mishapolk KKT refinements
-    2026-10-14]); the retained packing/resources/web/pingyou-
-    pr574-certificates-2026-10-13/README.md Credit section records the request to credit
-    PingYou Ltd. No individual identity is inferred from the company label.
+  note: Corporate credit carried from T-186's recorded chain ([Mishapolk KKT refinements
+    2026-10-14]); the retained packing/resources/web/pingyou- pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd. No individual identity
+    is inferred from the company label.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel Kaggle descents 2026-10-24]'
     field: /credit
-  expected_text: Daniel after Lavrentev, Tymchishin, Polkovskyi, Ostashev, Couzo, PingYou Ltd, Levy
+  expected_text: Daniel after Lavrentev, Tymchishin, Polkovskyi, Ostashev, Couzo,
+    PingYou Ltd, Levy
   start: 78
   end: 82
   label: Levy
@@ -28344,13 +28350,96 @@ occurrences:
   - primary-byline
   - announcement-account
   contributor_id: joshua-levy
-  note: >-
-    Reviewed /credit span 78:82: at 304 the manifest of T-241's source names this project's
-    sqpack/verify.py at 37e6757e as its first checker, and T-186's recorded chain ends in
-    Levy; at 268 the source does not state that it builds on this project (its prior-best
-    files only compare with the register). The first-party jlevy/squares record is the
-    Joshua Levy identity established by LICENSE and the retained ojoshe receipt; project
-    credit does not imply sole personal authorship.
+  note: 'Reviewed /credit span 78:82: at 304 the manifest of T-241''s source names
+    this project''s sqpack/verify.py at 37e6757e as its first checker, and T-186''s
+    recorded chain ends in Levy; at 268 the source does not state that it builds on
+    this project (its prior-best files only compare with the register). The first-party
+    jlevy/squares record is the Joshua Levy identity established by LICENSE and the
+    retained ojoshe receipt; project credit does not imply sole personal authorship.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Tymchishin CPU Alternating Reclosure v3 2026-10-23]'
+    field: /authors/0
+  expected_text: Tymchishin
+  start: 0
+  end: 10
+  label: Tymchishin
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Tymchishin 22-3662 2026-10-23]'
+    field: /authors/0
+  expected_text: Tymchishin
+  start: 0
+  end: 10
+  label: Tymchishin
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[kyleluecke inos 2026-10-23]'
+    field: /authors/0
+  expected_text: kyleluecke
+  start: 0
+  end: 10
+  label: kyleluecke
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[alexchilton fault-line 2026-10-23]'
+    field: /authors/0
+  expected_text: alexchilton
+  start: 0
+  end: 11
+  label: alexchilton
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[aqibrazadev blending 2026-10-23]'
+    field: /authors/0
+  expected_text: aqibrazadev
+  start: 0
+  end: 11
+  label: aqibrazadev
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Lavrentev CUDA Packing Search v11 2026-10-23]'
+    field: /authors/0
+  expected_text: Lavrentev
+  start: 0
+  end: 9
+  label: Lavrentev
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Lavrentev CUDA Packing Search run 361589987 2026-10-23]'
+    field: /authors/0
+  expected_text: Lavrentev
+  start: 0
+  end: 9
+  label: Lavrentev
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 inspections:
 - path: packing/resources/papers/addis-locatelli-schoen-2008-disk-packing-square.pdf
   status: pending

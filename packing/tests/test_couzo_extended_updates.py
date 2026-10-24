@@ -118,14 +118,23 @@ def test_the_ffd900d_reports_stay_pinned_and_become_dated_rows() -> None:
         assert current["disposition"] == "superseded"
         assert current["superseded_by"] == "couzo-certificates-2026-10-12"
     # The last reports stand: at 375 issue 763's certificate of 23 October, which beats
-    # evand's composition, which beat Couzo's certificate of 13 October, and at 378 issue
-    # 719's certificate of 22 October, which beats issue 686's of 19 October, which beat
-    # Couzo's 487b058 of 14 October (T-188's source), which beat that certificate in turn.
+    # evand's composition, which beat Couzo's certificate of 13 October, and at 378 the
+    # Kaggle account kyleluecke's notebook certificate, published at 964ee2b on 23 October
+    # (think-lyf9), a refinement of Vladislav Lavrentev's v11 packing at fa6237e, which beat
+    # issue 719's certificate of 22 October, which beat issue 686's of 19 October, which
+    # beat Couzo's 487b058 of 14 October (T-188's source), which beat that certificate in
+    # turn.
     standing = check_source_coverage.current_beyond_horizon(coverage)
     assert {n: standing[n]["source_id"] for n in updates.COUNTS} == {
         375: "couzo-issue763-2026-10-23",
-        378: "mishapolk-issue719-2026-10-22",
+        378: "kyleluecke-inos-2026-10-23",
     }
+    assert rows[378, "mishapolk-issue719-2026-10-22"]["superseded_by"] == (
+        "lavrentev-cuda-v11-2026-10-23"
+    )
+    assert rows[378, "lavrentev-cuda-v11-2026-10-23"]["superseded_by"] == (
+        "kyleluecke-inos-2026-10-23"
+    )
     assert (
         rows[375, "evand-compositions-2026-10-13"]["superseded_by"]
         == standing[375]["source_id"]

@@ -799,7 +799,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "3a9c5b6060fb87ae08fed0364a8862d53e703dea"
+DATA_REVISION = "df7c42cdf8845fe1a979379de5a54c1d10b9a475"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -8776,6 +8776,52 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "explainer, whose render needs a browser this host lacks, is source-reviewed "
             "only, and no PDF was printed. All four papers keep their versions, the "
             "explainer v0.4.27."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/contributors/people/alexchilton.md",
+            "packing/contributors/people/aqibrazadev.md",
+            "packing/contributors/people/kirill-tymchishin.md",
+            "packing/contributors/people/kyleluecke.md",
+            "packing/contributors/people/vladislav-lavrentev.md",
+            "packing/devtools/intake_ledger.py",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The import of the Kaggle-notebook sides of the push that published 964ee2b, "
+            "read commit by commit after #795's reviews A and B (think-lyf9): 185 "
+            "beyond-horizon rows of nine new coverage sources at the 99 notebook counts, 86 "
+            "supersessions of main's rows and 86 within the push, #763's request entries "
+            "for them, the walk's commit order for reports of one instant and its gate "
+            "(intake_ledger), and profiles for Kirill Tymchishin, Vladislav Lavrentev, "
+            "kyleluecke, alexchilton and aqibrazadev, against main dd0061553 (#793): "
+            "rendered at link revision df7c42cd into empty site directories, twice from "
+            "this tree and once from it with main's result-requests.yaml, "
+            "source-coverage.yaml and intake_ledger.py swapped in and the five profiles "
+            "removed, render_n11_lower_bounds_explainer, render_n11_optimality_review, "
+            "render_n11_threshold_bound_review and render_packing_methods write all 69 "
+            "files byte-identical across the three; measured first against main 3480b5fd3 "
+            "(#792) at link revision e9164d19, with the same result. No register entry is "
+            "added, so the explainer's result count is unchanged. No PDF was printed; each "
+            "prints from that HTML. Retain v0.4.27, v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
 )

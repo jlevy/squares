@@ -5,11 +5,13 @@ source, at assurance ``reported``, once its certificates are retained and replay
 Issues #678 and #715 each had a module of their own (`devtools.couzo_678_replay`,
 `devtools.couzo_715_replay`); this one takes the same filtered decision and declares each
 report it decides as a `Release`, so a further report of the same kind is a declaration and
-not a module. `RELEASES` holds 20, each decided within a window of counts
+not a module. `RELEASES` holds 29, each decided within a window of counts
 (`Release.decided_above`, `Release.decided_through`), every one of them today from the
 corpus to ``FROZEN_THROUGH = 1024``: the seven issues below, #732's later release, the
-publication #763's index makes beside it, and 11 publications in watched repositories that
-no issue reports (**Publications no issue reports**, `WATCHED`):
+publication #763's index makes beside it, the sides the same push published at the
+notebook rows' counts (nine releases, one a holder at a commit), and 11 publications in
+watched repositories that no issue reports (**Publications no issue reports**,
+`WATCHED`):
 
 - **#666**, Joost de Winter: 19 certificates ``square-packing-above-324/nNNNN.cert`` in
   JoostdeWinter/joostdewinter.github.io. The issue pins ``b3152f52``, which no branch
@@ -43,6 +45,13 @@ no issue reports (**Publications no issue reports**, `WATCHED`):
   (`CLAIM_MAP`, `Release.claim_map`); its 184 rows are those its walk records, and the 10
   rows of the index that the issue's selection rule leaves out are the publication
   ``franciscouzo/square-packing@964ee2b`` (**Issue #763**).
+- **The push of 23:38:42Z** at the counts of the 99 sides 964ee2b's index credits to the
+  authors of seven Kaggle notebooks, which no issue reports: the 185 sides its walk records
+  from the push's three commits, ``efef7d1``, ``fa6237e`` and ``964ee2b``, read commit by
+  commit, each certificate ``certificates/best/nN.cert`` or the copy 964ee2b keeps under
+  ``certificates/parents/`` or the root, the 12 notebook recipes' own included; a release
+  is a holder at a commit, a notebook run or Couzo's own, each a coverage source (**The push
+  of 23:38:42Z**).
 
 Each certificate is ``n S``, then ``n`` rows ``x y t`` (centre and ``t = tan(theta/2)``),
 and lines that begin with ``#`` are comments; the header is authoritative. The Couzo and
@@ -178,6 +187,26 @@ retained ledgers. The walk holds the issue's 13 recipes and its deletion bound a
 (`_HELD_763`) and the history walk's holds it records (`_HELD_IN_763`). A count in the
 corpus is the register's: no declared row holds 268 or 303 (`declared_rows`).
 
+**The push of 23:38:42Z.** The walk
+``campaign/issue-intake/upper-bounds-couzo-964ee2b-notebooks-20261024`` reads the counts of
+the 99 sides credited to the authors of Kaggle notebooks that the push published in
+964ee2b's index (the claim map's ``others``, think-lyf9), from starts frozen at ``main``
+2ec489d1e (#789's merge). Each certificate in a watched repository is a report from its
+first commit, so the push is read commit by commit (#795's review A, A1):
+``push-publications`` writes ``receipts/push/push-publications.json``, every side efef7d1,
+fa6237e and 964ee2b first state at those counts and each commit's least one below the start,
+held by a certificate 964ee2b keeps, a notebook recipe's included (A2). The walk has three
+reports, all dated by the push and taken in commit order (`intake_ledger.walk`): efef7d1
+(40), fa6237e (90) and 964ee2b (60). Each holder at each commit is a release with its own
+coverage source, record and receipts (`PUSH_RELEASES`): the seven notebook runs and Couzo's
+own sides at efef7d1 and fa6237e. The releases of one commit share its label
+(`_walk_groups`, `release_at`). ``release-sources`` transcribes its ``sources.yaml`` from
+that receipt, every earlier publication cut at the push, and ``push-identity`` measures the
+rows at `PUSH_IDENTITY` against the push's earlier sides there
+(``receipts/push/pose-identity.json``), which the walk records as refinements where the
+packing is the same (`PUSH_SAME_PACKING`). The walk holds the history walk's holds it
+records (`_HELD_IN_NOTEBOOKS`).
+
 **Above 1024.** The owner tracks every count, with no ceiling (D1, think-f2io), and a
 records slice lifts a release's window in the same pull request as the receipts it
 needs (think-llit). Its rows above 1024 are planned by the walk above 1024 it names
@@ -217,6 +246,8 @@ From ``packing/``, with the project interpreter::
         [--walk W]
     python -m devtools.beyond_horizon_replay recipe-decisions --issue 715 [--workers 2]
     python -m devtools.beyond_horizon_replay later-commits --issue LABEL --clone CLONE
+    python -m devtools.beyond_horizon_replay push-publications --issue LABEL --clone CLONE
+    python -m devtools.beyond_horizon_replay push-identity --issue LABEL
     python -m devtools.beyond_horizon_replay decide-later --issue LABEL
     python -m devtools.beyond_horizon_replay pose-identity --issue LABEL
     python -m devtools.beyond_horizon_replay declare-rows
@@ -258,6 +289,7 @@ from devtools import acquire_source, goebel_construction, hosted_shards
 from devtools import construction_checker as checker
 from devtools import couzo_678_replay as base
 from devtools import couzo_715_replay as couzo_715
+from devtools import couzo_763_claims as claims_763
 from devtools import evand_arrangement_reports as kernel
 from devtools import evand_exact_certificates as legacy
 from devtools import upper_bound_reports as reports
@@ -548,15 +580,24 @@ ISSUE_732_F1_READ_AT_MAIN = "0bbb0a2c4bae92393e26e7272c73a8de4cda1793"
 #: (`ISSUE_763_READ_AT_MAIN`).
 ISSUE_763 = "upper-bounds-issue763-20261024"
 ISSUE_763_READ_AT_MAIN = "e5c1c64e39caaff6386eaa6720bdbe932d19b415"
+#: The walk of the notebook rows the push of 23:38:42Z published in 964ee2b's index at 325
+#: to 1024, credited to the authors of seven Kaggle notebooks (the claim map's ``others``,
+#: think-lyf9), from starts frozen at ``main`` at #789's merge, the first ``main`` that
+#: holds #763's rows (`NOTEBOOKS_964_READ_AT_MAIN`).
+NOTEBOOKS_964 = "upper-bounds-couzo-964ee2b-notebooks-20261024"
+NOTEBOOKS_964_READ_AT_MAIN = "2ec489d1eede791bf0686ca1c524278c2bb80253"
 #: The ``main`` each release walk's starts are frozen at (`release_walk_sources`).
 WALK_READ_AT_MAIN = {
     ISSUE_732: ISSUE_732_READ_AT_MAIN,
     ISSUE_732_F1: ISSUE_732_F1_READ_AT_MAIN,
     ISSUE_763: ISSUE_763_READ_AT_MAIN,
+    NOTEBOOKS_964: NOTEBOOKS_964_READ_AT_MAIN,
 }
 #: The receipt of a packet whose issue carries no table and whose claims are re-derived
 #: from the source's own indexes (`devtools.couzo_763_claims`, `Release.claim_map`).
 CLAIM_MAP = Path("receipts/claim-map.json")
+#: The ``claim_map`` of a release of one push read commit by commit (`push_publications`).
+PUSH = "push"
 MISHAPOLK_REPOSITORY = "Mishapolk/square-packing-records"
 MISHAPOLK_URL = f"https://github.com/{MISHAPOLK_REPOSITORY}"
 
@@ -903,6 +944,51 @@ _RESTING_763 = (
 )
 
 
+#: The three commits of the push of 23:38:42Z, as the push walk's ledger labels them, in
+#: commit order: efef7d1 and fa6237e state Couzo's own sides at the notebook rows' counts,
+#: fa6237e first holds Tymchishin's "CPU Alternating Reclosure" v3 and Lavrentev's "CUDA
+#: Packing Search" v11 rows, and 964ee2b the other five notebooks'.
+COUZO_EFEF7D1 = "efef7d1418d0cb629debc962c077740125ba7901"
+COUZO_FA6237E = "fa6237e288cf3fc53b53fc43438c91f3f59c40e9"
+NOTEBOOKS_EFEF7D1 = "franciscouzo/square-packing@efef7d1"
+NOTEBOOKS_FA6237E = "franciscouzo/square-packing@fa6237e"
+NOTEBOOKS_964EE2B = "franciscouzo/square-packing@964ee2b"
+#: The publications the notebook walk records that the history walk holds, at the counts the
+#: walk records them (`HISTORY_HELD`).
+_HELD_IN_NOTEBOOKS: tuple[tuple[str, str], ...] = (
+    ("franciscouzo/square-packing@487b058", "327"),
+    ("franciscouzo/square-packing@4e4c8ce", "533 580 589 965"),
+    (
+        "franciscouzo/square-packing@23aff0c",
+        "406 533 541 543 580 589 639 846 906 907 965 967 968 981 982",
+    ),
+)
+#: The notebook walk's verdicts decided only against publications it holds for a decision
+#: still owed (`Resting`): earlier publications below its starts that rest on 487b058's,
+#: 4e4c8ce's and 23aff0c's recipes and deletion bounds, as in the #763 walk.
+_RESTING_NOTEBOOKS = (
+    _resting(f"{MISHAPOLK_REPOSITORY}@1851c2c", NOT_RECORDED, CONSEQUENCE, "406 541 589"),
+    _resting(f"{MISHAPOLK_REPOSITORY}@1851c2c", NOT_RECORDED, RECIPE, "533 543 580 639 846"),
+    _resting(f"{MISHAPOLK_REPOSITORY}@3285fac", NOT_RECORDED, CONSEQUENCE, "406 541 589"),
+    _resting(f"{MISHAPOLK_REPOSITORY}@3285fac", NOT_RECORDED, RECIPE, "543 639"),
+    _resting(f"{MISHAPOLK_REPOSITORY}@8a488a1", NOT_RECORDED, CONSEQUENCE, "906 907 967 968"),
+    _resting("franciscouzo/square-packing@23aff0c", NOT_RECORDED, RECIPE, "327"),
+    _resting("franciscouzo/square-packing@4e4c8ce", NOT_RECORDED, RECIPE, "327"),
+    _resting(
+        "franciscouzo/square-packing@5a299b4",
+        NOT_RECORDED,
+        CONSEQUENCE,
+        "406 589 906 907 967 968",
+    ),
+    _resting(
+        "franciscouzo/square-packing@5a299b4",
+        NOT_RECORDED,
+        RECIPE,
+        "327 533 580 639 846 965 981 982",
+    ),
+)
+
+
 def _held_from_history(report: str, counts: str) -> tuple[Held, ...]:
     """The history walk's holds of a report (`HISTORY_HELD`), at ``counts`` only."""
     wanted = frozenset(int(n) for n in counts.split())
@@ -1005,6 +1091,18 @@ WALKS: dict[str, Walk] = {
         },
         resting=_RESTING_763,
     ),
+    # The push walk holds the history walk's held publications where they stand below its
+    # starts (`_HELD_IN_NOTEBOOKS`). It holds no recipe: each of the notebooks' 12 has a
+    # certificate at exactly its side (#795's review A, A2).
+    NOTEBOOKS_964: Walk(
+        NOTEBOOKS_964,
+        later={},
+        awaiting={},
+        held={
+            report: _held_from_history(report, counts) for report, counts in _HELD_IN_NOTEBOOKS
+        },
+        resting=_RESTING_NOTEBOOKS,
+    ),
 }
 #: #719's 631: 2.73e-13 below Couzo's 4e4c8ce certificate (and 2.57e-23 below #715's
 #: re-certification of it), all three rounding up to 25.656854249519. It is in the
@@ -1058,6 +1156,7 @@ WALK_RULINGS: dict[str, list[dict[str, Any]]] = {
     ISSUE_732: ruling_entries(),
     ISSUE_732_F1: ruling_entries(),
     ISSUE_763: ruling_entries(),
+    NOTEBOOKS_964: ruling_entries(),
 }
 #: A Couzo row: the count, the prior and new prints, the deletion and the link.
 _COUZO_ROW = re.compile(
@@ -1176,6 +1275,15 @@ class Release:
     sources are transcribed from that map (`claim_map_walk_sources`), and its declared rows
     read each certificate from it (`declared_rows`).
 
+    **Several sources in one report.** A commit's publications that credit several authors,
+    as each commit of the push that made 964ee2b public (think-lyf9), are one report of the
+    ledger, labelled by the commit, with a release a coverage source: ``name`` keys the
+    release in `RELEASES` where its label is shared, and ``notebook_run`` takes from the
+    push's receipt the claims of one notebook run at the release's commit, or 0 the
+    publisher's own (`PUSH`, `push_publications`). The walk reads the releases of one label
+    as one report (`_walk_groups`), and a count's source is the release that claims it there
+    (`release_at`).
+
     **The window.** A release decides its rows from ``decided_above`` (exclusive, the
     corpus by default) to ``decided_through`` (inclusive; None for no top): every release
     on ``main`` before the work above 1024 decides to `FROZEN_THROUGH`, and its rows above
@@ -1216,6 +1324,8 @@ class Release:
     changed_only: bool = False
     later_reads: tuple[tuple[str, str], ...] = ()
     claim_map: str = ""
+    name: str = ""
+    notebook_run: int = 0
     decided_above: int = reports.HORIZON
     decided_through: int | None = FROZEN_THROUGH
     walk_above: str = ""
@@ -1238,6 +1348,18 @@ class Release:
         return WEB / self.packet
 
     @property
+    def push_holder(self) -> str:
+        """Whose claims a push release takes (`PUSH`): its notebook run, else the
+        publisher's (`PUBLISHER`)."""
+        return str(self.notebook_run) if self.notebook_run else PUBLISHER
+
+    @property
+    def key(self) -> str:
+        """How `RELEASES` and the commands name the release: its ``name`` where its label is
+        shared with another release, else its label."""
+        return self.name or self.label
+
+    @property
     def label(self) -> str:
         """How the ledger names the report: ``#N``, ``#N comment ID`` for a release a comment
         reports, or ``owner/name@commit`` (seven hex)."""
@@ -1252,6 +1374,8 @@ class Release:
         """The report in a sentence: ``issue #N``, its comment, or the publication's label."""
         if self.issue is not None and self.comment is not None:
             return f"issue #{self.issue}'s comment {self.comment}"
+        if self.name:
+            return f"{self.label}, the {self.name} rows"
         return f"issue #{self.issue}" if self.issue is not None else self.label
 
     @property
@@ -1560,8 +1684,117 @@ _COUZO_763_EARLIER: dict[int, tuple[str, str]] = {
         ("fa6237e288cf3fc53b53fc43438c91f3f59c40e9", "2026-10-23T18:59:39Z"),
     ),
 }
+
+
+class PushRelease(NamedTuple):
+    """One holder's claims at one commit of the push of 23:38:42Z that made 964ee2b public,
+    as `push_publications` reads them (think-lyf9; #795's review A, A1): the holder, a
+    Kaggle notebook run or the publisher's own sides (0), the receipts' tag, the coverage
+    source and release name of its rows, its holder as the source credits it, the commit and
+    its committer time, its certificate rows, and the counts the all-pairs sample decides."""
+
+    run: int
+    tag: str
+    source: str
+    holders: str
+    commit: str
+    committed: str
+    rows: int
+    sampled: tuple[int, ...] = ()
+
+
+#: The push's releases, one coverage source each (the coordinator's decisions of 24 October
+#: 2026 on think-lyf9): the seven notebook runs, Kirill Tymchishin's and Vladislav
+#: Lavrentev's named by the source and three credited only by their Kaggle handles, and
+#: Couzo's own sides at the push's first two commits, which its last replaced.
+PUSH_RELEASES: tuple[PushRelease, ...] = (
+    PushRelease(
+        0,
+        "couzo-efef7d1",
+        "couzo-efef7d1-2026-10-23",
+        "Francisco Couzo",
+        COUZO_EFEF7D1,
+        "2026-10-23T18:16:49Z",
+        35,
+    ),
+    PushRelease(
+        0,
+        "couzo-fa6237e",
+        "couzo-fa6237e-2026-10-23",
+        "Francisco Couzo",
+        COUZO_FA6237E,
+        "2026-10-23T18:59:39Z",
+        37,
+    ),
+    PushRelease(
+        361239073,
+        "361239073",
+        "tymchishin-reclosure-v3-2026-10-23",
+        "Kirill Tymchishin",
+        COUZO_FA6237E,
+        "2026-10-23T18:59:39Z",
+        42,
+        (975,),
+    ),
+    PushRelease(
+        361263594,
+        "361263594",
+        "lavrentev-cuda-v11-2026-10-23",
+        "Vladislav Lavrentev",
+        COUZO_FA6237E,
+        "2026-10-23T18:59:39Z",
+        11,
+    ),
+    PushRelease(
+        361576574,
+        "361576574",
+        "tymchishin-22-3662-2026-10-23",
+        "Kirill Tymchishin",
+        COUZO_763_PIN,
+        "2026-10-23T22:38:09Z",
+        15,
+    ),
+    PushRelease(
+        361592092,
+        "361592092",
+        "kyleluecke-inos-2026-10-23",
+        "kyleluecke",
+        COUZO_763_PIN,
+        "2026-10-23T22:38:09Z",
+        18,
+    ),
+    PushRelease(
+        361412241,
+        "361412241",
+        "alexchilton-fault-line-2026-10-23",
+        "alexchilton",
+        COUZO_763_PIN,
+        "2026-10-23T22:38:09Z",
+        11,
+    ),
+    PushRelease(
+        361516058,
+        "361516058",
+        "aqibrazadev-blending-2026-10-23",
+        "aqibrazadev",
+        COUZO_763_PIN,
+        "2026-10-23T22:38:09Z",
+        9,
+        (994,),
+    ),
+    PushRelease(
+        361589987,
+        "361589987",
+        "lavrentev-cuda-run-361589987-2026-10-23",
+        "Vladislav Lavrentev",
+        COUZO_763_PIN,
+        "2026-10-23T22:38:09Z",
+        7,
+    ),
+)
+
 RELEASES: dict[str, Release] = {
-    release.label: release
+    release.key: release
     for release in (
         Release(
             issue=666,
@@ -1779,6 +2012,39 @@ RELEASES: dict[str, Release] = {
             index_key="entries",
             claim_map="unrequested",
         ),
+        # The notebook rows the same push published, and Couzo's own sides its first two
+        # commits published at those counts, read commit by commit (`push_publications`): a
+        # release a holder and a commit, each its own coverage source, and one report of
+        # their walk a commit, efef7d1, fa6237e or 964ee2b (`PUSH_RELEASES`, think-lyf9).
+        *(
+            Release(
+                issue=None,
+                packet=COUZO_763_PACKET,
+                holders=item.holders,
+                source_url=COUZO_URL,
+                pin=item.commit,
+                retained=COUZO_763_PIN,
+                first_commit=item.commit,
+                committed=item.committed,
+                rows=item.rows,
+                decided=item.rows,
+                sampled=item.sampled,
+                bead="think-lyf9",
+                read=read_declared_rows,
+                walk=NOTEBOOKS_964,
+                published=COUZO_763_PUSHED,
+                source_id=item.source,
+                record=Path(f"acquisition/beyond-horizon-rows-push-{item.tag}.json"),
+                receipts=Path(f"receipts/push/{item.tag}"),
+                declared=Path(f"acquisition/watched-release-push-{item.tag}.json"),
+                index="certified_bounds.json",
+                index_key="entries",
+                claim_map=PUSH,
+                name=item.source,
+                notebook_run=item.run,
+            )
+            for item in PUSH_RELEASES
+        ),
         *(
             Release(
                 issue=None,
@@ -1805,7 +2071,8 @@ RELEASES: dict[str, Release] = {
 
 def release(key: int | str) -> Release:
     """The declared release of an issue (its number, or ``#N``) or of a publication no
-    issue reports (its label, ``owner/name@commit``)."""
+    issue reports (its label, ``owner/name@commit``, or the ``name`` of one release of a
+    label several share, `Release.key`)."""
     label = f"#{key}" if isinstance(key, int) or str(key).isdigit() else str(key)
     _require(label in RELEASES, f"{label}: no declared release")
     return RELEASES[label]
@@ -1825,9 +2092,22 @@ def claims(chosen: Release) -> list[Claim]:
     return rows
 
 
+def mapped_path(chosen: Release) -> Path:
+    """Where a re-derived release's claims are listed: its packet's claim map, or, for a
+    release of one push read commit by commit (`PUSH`), the push's receipt."""
+    return chosen.directory / (PUSH_PUBLICATIONS if chosen.claim_map == PUSH else CLAIM_MAP)
+
+
 def mapped_claims(chosen: Release) -> list[dict[str, Any]]:
-    """A release's claims as its packet's claim map lists them (`Release.claim_map`)."""
+    """A release's claims as its packet's claim map lists them (`Release.claim_map`), or a
+    push release's, its holder's claims at its commit in the push's receipt."""
     _require(bool(chosen.claim_map), f"{chosen.label}: its claims are not re-derived")
+    if chosen.claim_map == PUSH:
+        return [
+            item
+            for item in _read(mapped_path(chosen))["claims"]
+            if item["commit"] == chosen.pin and item["holder"] == chosen.push_holder
+        ]
     return list(_read(chosen.directory / CLAIM_MAP)[chosen.claim_map])
 
 
@@ -2203,9 +2483,7 @@ def _jobs(chosen: Sequence[Release]) -> list[tuple[str, int]]:
     certificate's work grows with its count, which the issue row names, so no file is read
     to order the jobs."""
     jobs = [
-        (row.certificate_n, item.label, row.n)
-        for item in chosen
-        for row in replayed_claims(item)
+        (row.certificate_n, item.key, row.n) for item in chosen for row in replayed_claims(item)
     ]
     return [(issue, n) for _, issue, n in sorted(jobs, key=lambda job: -job[0])]
 
@@ -2222,7 +2500,7 @@ def filtered(issues: Sequence[int | str], workers: int) -> dict[str, dict[str, A
     elapsed = round(time.monotonic() - wall, 1)
     receipts: dict[str, dict[str, Any]] = {}
     for item in chosen:
-        results = [decided[item.label, row.n] for row in replayed_claims(item)]
+        results = [decided[item.key, row.n] for row in replayed_claims(item)]
         receipt: dict[str, Any] = {
             "format": FILTERED_FORMAT,
             item.report_key: item.issue_url,
@@ -2236,13 +2514,13 @@ def filtered(issues: Sequence[int | str], workers: int) -> dict[str, dict[str, A
             "environment": _environment(),
             "started_utc": started.strftime("%Y-%m-%dT%H:%M:%SZ"),
             "run_wall_seconds": elapsed,
-            "run_releases": [other.label for other in chosen],
+            "run_releases": [other.key for other in chosen],
             "workers": workers,
             "rows": results,
             "summary": base.summary(results),
         }
         _write(item.path(FILTERED), receipt)
-        receipts[item.label] = receipt
+        receipts[item.key] = receipt
     return receipts
 
 
@@ -2272,7 +2550,7 @@ def recipe_of(chosen: Release, row: Claim) -> checker.Recipe:
 
 
 def decide_parent(job: tuple[str, str, int]) -> dict[str, Any]:
-    """A recipe parent that is not a row, ``(release, path, count)``, decided as
+    """A recipe parent that is not a row, ``(release key, path, count)``, decided as
     `decide_row` decides a row: both routes, and its six controls."""
     chosen = release(job[0])
     path, n = job[1], job[2]
@@ -2343,7 +2621,7 @@ def write_recipe_decisions(issues: Sequence[int | str], workers: int) -> dict[st
             - {(path, int(row["n"])) for path, row in replayed.items()}
         )
         with ProcessPoolExecutor(max_workers=workers) as pool:
-            parents = list(pool.map(decide_parent, [(chosen.label, *job) for job in needed]))
+            parents = list(pool.map(decide_parent, [(chosen.key, *job) for job in needed]))
         decisions = recipe_decisions(
             chosen, {**replayed, **{item["certificate"]: item for item in parents}}
         )
@@ -2359,7 +2637,7 @@ def write_recipe_decisions(issues: Sequence[int | str], workers: int) -> dict[st
                 "rows": decisions,
             },
         )
-        written[chosen.label] = sum(1 for item in decisions if item["verdict"] == "decided")
+        written[chosen.key] = sum(1 for item in decisions if item["verdict"] == "decided")
     return written
 
 
@@ -2400,7 +2678,7 @@ def recipe_problems(chosen: Release, *, replay: bool, workers: int) -> list[str]
     )
     if replay and receipt["parents"]:
         jobs = [
-            (chosen.label, item["certificate"], int(item["n"])) for item in receipt["parents"]
+            (chosen.key, item["certificate"], int(item["n"])) for item in receipt["parents"]
         ]
         with ProcessPoolExecutor(max_workers=workers) as pool:
             again = list(pool.map(decide_parent, jobs))
@@ -2569,7 +2847,7 @@ def exhaustive(issue: int | str, counts: Sequence[int], workers: int) -> dict[st
         _require(n in decided, f"{chosen.label} n={n}: not a decided row")
     started = datetime.now(UTC)
     with ProcessPoolExecutor(max_workers=workers) as pool:
-        results = list(pool.map(exhaustive_row, [(chosen.label, n) for n in counts]))
+        results = list(pool.map(exhaustive_row, [(chosen.key, n) for n in counts]))
     receipt = {
         "format": EXHAUSTIVE_FORMAT,
         "kernel": "devtools.evand_arrangement_reports.run_case, positive job, every pair",
@@ -2646,7 +2924,7 @@ def goebel() -> dict[str, dict[str, Any]]:
         receipt = goebel_receipt(chosen, decided_sides(chosen))
         _write(chosen.path(GOEBEL), receipt)
         result = receipt["comparison"]
-        tallies[chosen.label] = {"rows": result["rows"], "tally": result["tally"]}
+        tallies[chosen.key] = {"rows": result["rows"], "tally": result["tally"]}
     return tallies
 
 
@@ -2720,7 +2998,7 @@ def claims_record() -> dict[str, int]:
     for chosen in RELEASES.values():
         record = beyond_horizon_rows(chosen)
         _write(chosen.path(RECORD), record)
-        written[chosen.label] = len(record["results"])
+        written[chosen.key] = len(record["results"])
     return written
 
 
@@ -4415,6 +4693,270 @@ def write_later_commits(issue: int | str, clone: Path) -> dict[str, int]:
     return {item["commit"][:7]: len(item["publications"]) for item in record["commits"]}
 
 
+# --------------------------------------------------------------------------- one push
+
+
+#: A walk whose releases read one push commit by commit (#795's review A, A1): every
+#: certificate header and index bound the push's commits add or change at the walk's counts,
+#: and each commit's least new side at each count below the frozen start, its claim there.
+PUSH_PUBLICATIONS = Path("receipts/push/push-publications.json")
+PUSH_FORMAT = "beyond-horizon-push-publications-v1"
+#: The holder of a push claim the index credits to the publisher: his own side.
+PUBLISHER = "publisher"
+#: The holder of a push claim the index credits to neither the publisher nor a notebook
+#: run: another author's side, which no release of the push holds, so the walk refuses to
+#: record it (`release_at`, `chain_problems`) and may only rule it out (#795's review B, B3).
+OTHER_AUTHOR = "other"
+#: The claims of the push's commits at the notebook rows' counts, as #795's review A counted
+#: them (A1): its 99 rows, the 86 sides of efef7d1 and fa6237e the walk records before them,
+#: and 5 of efef7d1's that restate earlier publications.
+PUSH_CONTROLS = {"efef7d1": 40, "fa6237e": 90, "964ee2b": 60}
+#: How a certificate path names its count in Couzo's repository.
+_PUSH_NAMED = re.compile(r"certificates/(?:best/|extended/)?n([1-9][0-9]*)\.cert")
+
+
+def _cert_headers(clone: Path, blobs: Sequence[str]) -> dict[str, tuple[int, Fraction] | None]:
+    """Each certificate blob's count and side (`_header`), streamed through one
+    ``git cat-file --batch`` so that no file is kept whole."""
+    found: dict[str, tuple[int, Fraction] | None] = {}
+    with subprocess.Popen(
+        ["git", "-C", str(clone), "cat-file", "--batch"],
+        stdin=subprocess.PIPE,
+        stdout=subprocess.PIPE,
+    ) as process:
+        assert process.stdin is not None
+        assert process.stdout is not None
+        for blob in blobs:
+            process.stdin.write(blob.encode() + b"\n")
+            process.stdin.flush()
+            size = int(process.stdout.readline().split()[2])
+            found[blob] = _header(process.stdout.read(size))
+            process.stdout.read(1)
+        process.stdin.close()
+    return found
+
+
+def _push_of(chosen: Release) -> Push:
+    """The recorded push (`PUSHED_LATER`) that made a release's retained commit public."""
+    pushes = PUSHED_LATER.get(repository_of(chosen.source_url), ())
+    found = [push for push in pushes if push.head == chosen.retained]
+    _require(
+        len(found) == 1, f"{chosen.label}: no recorded push made {chosen.retained[:8]} public"
+    )
+    return found[0]
+
+
+def _push_counts(chosen: Release) -> list[int]:
+    """The counts a push walk reads: those its packet's claim map lists as ``others``."""
+    return sorted(int(item["n"]) for item in _read(chosen.directory / CLAIM_MAP)["others"])
+
+
+def _notebook_runs(chosen: Release) -> dict[str, dict[str, Any]]:
+    """Each notebook credit the claim map's ``others`` state, with its notebook: how a push
+    claim's credit names its notebook run."""
+    found: dict[str, dict[str, Any]] = {}
+    for item in _read(chosen.directory / CLAIM_MAP)["others"]:
+        known = found.setdefault(str(item["credit"]), dict(item["notebook"]))
+        _require(known["run"] == item["notebook"]["run"], f"{item['credit']}: two runs")
+    return found
+
+
+def _push_holder(credit: str, notebook: Mapping[str, Any] | None) -> str:
+    """Whose a push claim is, by the credit the index states at its commit: the notebook
+    run it names, the publisher where it names him (`couzo_763_claims.is_own`), else
+    another author (`OTHER_AUTHOR`)."""
+    if notebook:
+        return str(notebook["run"])
+    return PUBLISHER if claims_763.is_own(credit) else OTHER_AUTHOR
+
+
+def push_publications(issue: int | str, clone: Path) -> dict[str, Any]:
+    """Every side the push that made a release's retained commit public states at its walk's
+    counts, commit by commit, and each commit's claim at each count (#795's review A, A1).
+
+    A commit's statements are what it adds or changes: each certificate file's header at a
+    walked count, wherever it lies (``best/``, ``parents/``, a root certificate), and each
+    bound an index (`INDEXES`) states at a walked count where the commit changes it, as
+    `first_publications` reads a history and `later_commits` a commit. A side is the
+    publication of the first commit of the push that states it, and none the history scan or
+    f1ceee4's receipts already hold (`devtools.couzo_763_claims.earlier_sides`) is one. A
+    commit's claim at a count is its least such side strictly below the count's frozen start,
+    one claim a report (#722's review A, A2), read from a certificate the retained commit
+    holds at exactly that blob, under the same path or another (``parents/`` keeps every
+    certificate a later commit replaced). Its credit is the one ``certified_bounds.json``
+    states there at that commit, and its holder by that credit (`_push_holder`): the notebook
+    run it names in the claim map's ``others``, the publisher where it names him, else
+    another author, whom no release holds (#795's review B, B3). The push's commits must be
+    a chain, each the child of the one before; the clone must hold their blobs (a blobless
+    clone fetches each).
+    """
+    chosen = release(issue)
+    walk = walk_of(chosen)
+    push = _push_of(chosen)
+    counts = _push_counts(chosen)
+    highs = _least_highs(_start_sides(walk, WALK_READ_AT_MAIN[walk.name], counts))
+    earlier = claims_763.earlier_sides()
+    runs = _notebook_runs(chosen)
+    commits = _git(
+        clone, "rev-list", "--reverse", "--topo-order", f"{push.before}..{push.head}"
+    )
+    chain = commits.split()
+    _require(
+        chain and chain[-1] == chosen.retained, "the push does not end at the retained commit"
+    )
+    at_pin: dict[str, list[str]] = {}
+    for line in _git(clone, "ls-tree", "-r", chosen.retained, "certificates").splitlines():
+        at_pin.setdefault(line.split()[2], []).append(line.partition("\t")[2])
+    parent = push.before
+    read: list[dict[str, Any]] = []
+    statements: list[tuple[int, int, Fraction, dict[str, Any]]] = []
+    for order, commit in enumerate(chain):
+        (line,) = _git(clone, "log", "-1", "--format=%P %cI %s", commit).splitlines()
+        parents, stamp, subject = line.split(" ", 2)
+        _require(parents == parent, f"{commit[:8]}: not the child of {parent[:8]}")
+        changed = _git(
+            clone, "diff-tree", "-r", "--no-commit-id", "--no-renames", parent, commit
+        ).splitlines()
+        certs: list[tuple[str, str]] = []
+        indexes: dict[str, tuple[str, str]] = {}
+        for entry in changed:
+            meta, _, path = entry.partition("\t")
+            _old_mode, _new_mode, old, new, status = meta.lstrip(":").split()
+            if status in ("A", "M") and path.endswith(".cert"):
+                certs.append((path, new))
+            elif path in INDEXES and status == "M":
+                indexes[path] = (old, new)
+        headers = _cert_headers(clone, sorted({blob for _, blob in certs}))
+        found: list[dict[str, Any]] = []
+        for path, blob in sorted(certs):
+            header = headers[blob]
+            if header is None or header[0] not in highs:
+                continue
+            named = _PUSH_NAMED.fullmatch(path)
+            _require(
+                named is None or int(named[1]) == header[0],
+                f"{path} ({blob[:8]}): its header does not state the count its name gives",
+            )
+            found.append(
+                {"n": header[0], "kind": "certificate", "path": path, "blob": blob}
+                | {"side": legacy.literal(header[1])}
+            )
+        texts = _blobs(clone, sorted({blob for pair in indexes.values() for blob in pair}))
+        for path, (old, new) in sorted(indexes.items()):
+            before = json.loads(texts[old]).get("entries") or {}
+            after = json.loads(texts[new]).get("entries") or {}
+            for n in counts:
+                stated, was = after.get(str(n)), before.get(str(n))
+                for part in INDEXES[path]:
+                    stated = stated.get(part) if isinstance(stated, dict) else None
+                    was = was.get(part) if isinstance(was, dict) else None
+                if stated is None or stated == was:
+                    continue
+                item = {"n": n, "kind": "index", "path": path, "blob": new}
+                item["side"] = legacy.literal(Fraction(str(stated)))
+                if path == "certified_bounds.json":
+                    entry = after[str(n)]
+                    item |= {
+                        "index_kind": entry.get("kind", ""),
+                        "credit": entry.get("credit", ""),
+                    }
+                found.append(item)
+        statements.extend(
+            (order, item["n"], Fraction(item["side"]), item | {"commit": commit})
+            for item in found
+        )
+        read.append(
+            {
+                "commit": commit,
+                "parent": parent,
+                "committed": _utc(stamp),
+                "subject": subject,
+                "changed_paths": len(changed),
+                "publications": sorted(found, key=lambda item: (item["n"], item["path"])),
+            }
+        )
+        parent = commit
+    first: dict[tuple[int, Fraction], int] = {}
+    for order, n, side, _ in statements:
+        first[n, side] = min(order, first.get((n, side), order))
+    claims: list[dict[str, Any]] = []
+    for order, commit in enumerate(chain):
+        mine = [
+            (n, side, item)
+            for at, n, side, item in statements
+            if at == order
+            and first[n, side] == order
+            and (n, side) not in earlier
+            and side < highs[n]
+        ]
+        for n in sorted({n for n, _, _ in mine}):
+            side = min(side for m, side, _ in mine if m == n)
+            items = [item for m, s, item in mine if m == n and s == side]
+            files = sorted(
+                {
+                    path
+                    for item in items
+                    if item["kind"] == "certificate"
+                    for path in at_pin.get(item["blob"], ())
+                },
+                key=lambda path: (not path.startswith("certificates/best/"), path),
+            )
+            _require(
+                bool(files),
+                f"{commit[:8]} n={n}: no certificate the retained commit holds states its side",
+            )
+            stated = next((item for item in items if item.get("credit") is not None), None)
+            credit = str(stated["credit"]) if stated else ""
+            notebook = runs.get(credit)
+            claims.append(
+                {
+                    "n": n,
+                    "commit": commit,
+                    "kind": "certificate",
+                    "certificate": files[0],
+                    "exact": legacy.literal(side),
+                    "deleted_squares": 0,
+                    "index_kind": str(stated["index_kind"]) if stated else "",
+                    "credit": credit,
+                    "holder": _push_holder(credit, notebook),
+                }
+                | ({"notebook": notebook} if notebook else {})
+            )
+    found_counts = Counter(item["commit"][:7] for item in claims)
+    _require(
+        dict(found_counts) == PUSH_CONTROLS,
+        f"the push's claims are {dict(found_counts)}, not {PUSH_CONTROLS}",
+    )
+    # The push's last claim at each count is the claim map's row there (`couzo_763_claims`).
+    last = {item["n"]: item for item in claims}
+    for item in _read(chosen.directory / CLAIM_MAP)["others"]:
+        own = last[int(item["n"])]
+        _require(
+            Fraction(own["exact"]) == Fraction(item["exact"])
+            and own["certificate"] == item.get("recipe_certificate", item["certificate"]),
+            f"n={item['n']}: the push's last claim is not the claim map's row",
+        )
+    return {
+        "format": PUSH_FORMAT,
+        "source": chosen.source_url,
+        "retained_commit": chosen.retained,
+        "push": {"before": push.before, "head": push.head, "pushed": push.pushed},
+        "walk": walk.name,
+        "starts_read_at_main": WALK_READ_AT_MAIN[walk.name],
+        "counts": counts,
+        "indexes": {path: ".".join(keys) for path, keys in INDEXES.items()},
+        "commits": read,
+        "claims": claims,
+    }
+
+
+def write_push_publications(issue: int | str, clone: Path) -> dict[str, int]:
+    """Write a push walk's receipt (`push_publications`); return each commit's claims."""
+    record = push_publications(issue, clone)
+    _write(release(issue).directory / PUSH_PUBLICATIONS, record)
+    return dict(Counter(item["commit"][:7] for item in record["claims"]))
+
+
 def later_publications(
     chosen: Release, walk: Walk | None = None
 ) -> dict[int, list[dict[str, Any]]]:
@@ -4827,6 +5369,13 @@ CLAIM_MAP_WALKS = {
         "the issue",
         polkovskyi=_F1CEEE4,
     ),
+    # The notebook rows are dated by the push itself, so every earlier publication is cut
+    # there: issue #763, 2 min 51 s before it, claims none of their counts.
+    NOTEBOOKS_964: ClaimMapWalk(
+        reported=COUZO_763_PUSHED,
+        pushed="the push of 23:38:42Z made efef7d1, fa6237e and 964ee2b public together",
+        polkovskyi=_F1CEEE4,
+    ),
 }
 
 
@@ -4839,7 +5388,18 @@ def _claim_map_claim(chosen: Release, item: Mapping[str, Any]) -> dict[str, Any]
         f"certified_bounds.json at {chosen.retained[:8]}, retained in the {chosen.packet} "
         f"packet ({CLAIM_MAP.as_posix()})"
     )
-    if item["kind"] == "certificate":
+    if chosen.claim_map == PUSH:
+        where = (
+            f"{item['certificate']} at {chosen.retained[:8]} (its header), retained in the "
+            f"{chosen.packet} packet: a side {chosen.pin[:7]} first states "
+            f"({PUSH_PUBLICATIONS.as_posix()})"
+            + (
+                ", the certificate of the construction its index states there"
+                if item.get("index_kind") == "construction"
+                else ""
+            )
+        )
+    elif item["kind"] == "certificate":
         where = (
             f"{item['certificate']} at {chosen.retained[:8]} (its header), retained in the "
             f"{chosen.packet} packet: the bound {index} states"
@@ -4864,7 +5424,111 @@ def _claim_map_claim(chosen: Release, item: Mapping[str, Any]) -> dict[str, Any]
     claim = _claim(n, Fraction(str(item["exact"])), where)
     if item["kind"] == "certificate":
         claim["first_committed"] = chosen.first_commit_of(n)[1]
+    if chosen.claim_map == PUSH:
+        claim |= _push_identity_parts(chosen, n)
     return claim
+
+
+def _push_identity_parts(chosen: Release, n: int) -> dict[str, Any]:
+    """What a push release's claim at a count of `PUSH_IDENTITY` carries into its walk: the
+    measurement against the push's earlier side there (``measured``), which the manifest of
+    ``certificates/best/`` names as the row's ``previous_source``, and the link the record's
+    chain rule credits (#795's review B, B1). Where the squares pair one to one with none
+    beyond `PUSH_SAME_PACKING`, the row refines that packing (``refines``); otherwise the
+    search moved the arrangement, and the row is a new packing seeded from it
+    (``new_packing``, ``continues``). Either way it is credited after that packing's finder,
+    and after every finder the index names for it."""
+    if n not in PUSH_IDENTITY:
+        return {}
+    receipt = _read(chosen.directory / PUSH_IDENTITY_RECEIPT)
+    found = [
+        row
+        for row in receipt["rows"]
+        if row["n"] == n and row["commit"] == chosen.pin and row["holder"] == chosen.push_holder
+    ]
+    if not found:
+        return {}
+    (row,) = found
+    nearest = min(row["against"], key=lambda item: abs(float(item["side_difference"])))
+    other = _push_release(chosen, nearest["commit"], nearest["holder"])
+    source = PUSH_IDENTITY_RECEIPT.as_posix()
+    witness = claims_763.read_witnesses().get(str(n)) or {}
+    previous = (witness.get("provenance") or {}).get("previous_source") or {}
+    _require(
+        previous.get("certificate") == nearest["certificate"],
+        f"n={n}: the manifest's previous_source is not the push's earlier side measured",
+    )
+    stated = (
+        f"964ee2b's manifest names {other.holders}'s {other.pin[:7]} certificate "
+        f"({nearest['certificate']}) as the row's previous_source"
+    )
+    refined = _REFINES_NAMED.search(str(nearest["credit"]))
+    after = (
+        f", which the index credits as a refinement of {refined[1].strip()}'s packing"
+        if refined
+        else ""
+    )
+    parts: dict[str, Any] = {
+        "measured": {
+            "against": other.label,
+            "finding": _identity_finding(nearest, n),
+            "source": f"packing/resources/web/{chosen.packet}/{source}",
+        }
+    }
+    if nearest["one_to_one"] and not nearest["beyond"][PUSH_SAME_PACKING]:
+        parts["refines"] = {
+            "packing_of": other.holders,
+            "entry": other.label,
+            "source": (
+                f"{stated}, and the measurement pairs every square one to one within "
+                f"{PUSH_SAME_PACKING} ({source})"
+            ),
+        }
+    else:
+        parts["new_packing"] = {
+            "source": (
+                f"{stated}; the measurement does not pair them one to one "
+                f"({nearest['beyond'][PUSH_SAME_PACKING]} squares beyond {PUSH_SAME_PACKING}"
+                f", {source}): the search moved the arrangement it was seeded from"
+            ),
+            "continues": (f"{other.holders}'s {other.pin[:7]} packing ({other.label}){after}"),
+        }
+    return parts
+
+
+def _push_release(chosen: Release, commit: str, holder: str) -> Release:
+    """The release of a push walk that holds ``holder``'s claims at ``commit``."""
+    found = [
+        item
+        for item in RELEASES.values()
+        if item.walk == chosen.walk
+        and item.claim_map == PUSH
+        and item.pin == commit
+        and item.push_holder == holder
+    ]
+    _require(len(found) == 1, f"{commit[:8]} {holder}: {len(found)} releases of the push")
+    return found[0]
+
+
+def _identity_finding(item: Mapping[str, Any], n: int) -> str:
+    """A pose measurement (`measured_identity`) in a sentence."""
+    beyond = item["beyond"]
+    pairing = (
+        "every square pairs one to one"
+        if item["one_to_one"]
+        else f"the pairing is not one to one ({item['paired']} of {n} squares matched)"
+    )
+    moved = (
+        f"none moves beyond 1e-6 (largest {item['largest_centre_distance']})"
+        if not beyond["1e-6"]
+        else f"{beyond['1e-6']} move beyond 1e-6, {beyond['1e-3']} beyond 1e-3 and "
+        f"{beyond['1e-1']} beyond 0.1 (largest {item['largest_centre_distance']})"
+    )
+    below = item["side_difference"].lstrip("-")
+    return (
+        f"under the best of the box's eight symmetries {pairing}; {moved}, largest turn "
+        f"{item['largest_rotation_difference_degrees']} degrees; the side is {below} below"
+    )
 
 
 def _grouped_publications(
@@ -4915,6 +5579,42 @@ def _grouped_publications(
     return found
 
 
+def _notebook_phrase(chosen: Release, count: int) -> str:
+    """A push release in the walk's note: its holder, the notebook as the source's manifest
+    names it, its version where stated and its run, and how many sides it gives; or the
+    publisher's own sides."""
+    if not chosen.notebook_run:
+        return f"{chosen.holders}'s own ({count})"
+    stated = mapped_claims(chosen)[0]["notebook"]
+    slug = str(stated["notebook"]).rstrip("/").rsplit("/", 1)[-1]
+    version = f" v{stated['notebook_version']}" if stated.get("notebook_version") else ""
+    return f'{chosen.holders}\'s "{slug}"{version}, run {stated["run"]} ({count})'
+
+
+def _other_authors(item: Release, walk: Walk) -> list[dict[str, Any]]:
+    """The claims of a push release's commit that the index credits to another author
+    (`OTHER_AUTHOR`), which no release holds: the walk takes them as the commit's report
+    and may only rule them out (`release_at`)."""
+    if item.claim_map != PUSH:
+        return []
+    return [
+        claim
+        for claim in _read(mapped_path(item))["claims"]
+        if claim["commit"] == item.pin
+        and claim["holder"] == OTHER_AUTHOR
+        and walk.reaches(int(claim["n"]))
+    ]
+
+
+def _other_phrase(claims: Sequence[Mapping[str, Any]]) -> list[str]:
+    """Another author's sides of a push commit in the walk's note, by the credit's name."""
+    names = Counter(str(claim["credit"]).split(";", 1)[0].strip() for claim in claims)
+    return [
+        f"{count} credited to {name}, which no release of the push holds"
+        for name, count in sorted(names.items())
+    ]
+
+
 def claim_map_walk_sources(
     issue: int | str, read_on: str, walk: Walk | None = None
 ) -> dict[str, Any]:
@@ -4948,29 +5648,75 @@ def claim_map_walk_sources(
     )
     declared = CLAIM_MAP_WALKS[walk.name]
     cutoff = declared.reported
+    # The notes name the releases whose counts the walk reads.
+    claimant = "the notebook rows" if chosen.claim_map == PUSH else chosen.label
     read_at_main = WALK_READ_AT_MAIN[walk.name]
-    ours = [item for item in _releases(walk).values() if item.claim_map]
-    own = {
-        item.label: [claim for claim in mapped_claims(item) if walk.reaches(int(claim["n"]))]
-        for item in ours
+    groups = {
+        label: [item for item in items if item.claim_map]
+        for label, items in _walk_groups(walk).items()
     }
-    claimed = Counter(int(claim["n"]) for claims in own.values() for claim in claims)
-    twice = sorted(n for n, times in claimed.items() if times > 1)
+    groups = {label: items for label, items in groups.items() if items}
+    own = {
+        item.key: [claim for claim in mapped_claims(item) if walk.reaches(int(claim["n"]))]
+        for items in groups.values()
+        for item in items
+    }
+    # A count is one release's among the releases sharing a claim map; a push read commit
+    # by commit (`PUSH`) claims it at most once a commit.
+    others = {label: _other_authors(items[0], walk) for label, items in groups.items()}
+    claimed = Counter(
+        (label if item.claim_map == PUSH else "", int(claim["n"]))
+        for label, items in groups.items()
+        for item in items
+        for claim in own[item.key]
+    ) + Counter(
+        (label, int(claim["n"])) for label, claims in others.items() for claim in claims
+    )
+    twice = sorted(n for (_, n), times in claimed.items() if times > 1)
     _require(not twice, f"{walk.name}: the releases sharing a claim map both claim {twice}")
-    counts = sorted(claimed)
+    counts = sorted({n for _, n in claimed})
     starts = _start_sides(walk, read_at_main, counts, read_on)
     highs = _least_highs(starts)
     reports_list: list[dict[str, Any]] = []
-    for item in ours:
-        claims = [_claim_map_claim(item, claim) for claim in own[item.label]]
-        kinds = Counter(str(claim["kind"]) for claim in own[item.label])
+    for label, items in groups.items():
+        item = items[0]
+        pairs = sorted(
+            [
+                *((part, claim) for part in items for claim in own[part.key]),
+                *((item, claim) for claim in others[label]),
+            ],
+            key=lambda pair: int(pair[1]["n"]),
+        )
+        claims = [_claim_map_claim(part, claim) for part, claim in pairs]
+        kinds = Counter(str(claim["kind"]) for _, claim in pairs)
         described = _listing(
             [
                 f"{count} {kind}{'' if count == 1 else 's'}"
                 for kind, count in sorted(kinds.items())
             ]
         )
-        if item.issue is not None:
+        if item.claim_map == PUSH:
+            head = {
+                "report": label,
+                "url": f"{item.source_url}/tree/{item.pin}",
+                "reported_at": item.reported,
+            }
+            what = (
+                f"The {len(claims)} sides {item.pin[:7]} first states at the counts of the "
+                f"notebook rows ({described}), each its least new side there below the start, "
+                "commit by commit through the push (devtools.beyond_horizon_replay "
+                f"push-publications, {item.packet} packet, {PUSH_PUBLICATIONS.as_posix()}): "
+                + _listing(
+                    [_notebook_phrase(part, len(own[part.key])) for part in items]
+                    + _other_phrase(others[label])
+                )
+                + ". No issue reports them. The push of 23:38:42Z made efef7d1, fa6237e and "
+                f"964ee2b public together (PUSHED_LATER), so each commit is a report from it, "
+                "taken in commit order, and an import of their own (think-lyf9; #795's review "
+                "A, A1), each holder's rows a coverage source of their own. first_committed is "
+                f"the committer time of {item.pin[:7]}."
+            )
+        elif item.issue is not None:
             head: dict[str, Any] = {"report": item.label, "issue": item.issue}
             what = (
                 f"The issue's {len(claims)} claims {walk.reach} ({described}), "
@@ -5003,10 +5749,10 @@ def claim_map_walk_sources(
         reports_list.append(
             head
             | {
-                "holders": item.holders,
+                "holders": _listing(list(dict.fromkeys(part.holders for part in items))),
                 "bead": item.bead,
                 "claims": claims,
-                "note": what + held_sentence(walk, item.label),
+                "note": what + held_sentence(walk, label),
             }
         )
     held_715 = _held_715()
@@ -5042,7 +5788,7 @@ def claim_map_walk_sources(
         lambda label: _publication_bead(label) or chosen.bead,
         "A publication in a watched repository that no issue reports, dated by its commit, "
         "or by the later push that made it public; transcribed from the history scan "
-        f"({HISTORY_PUBLICATIONS.relative_to(ROOT).as_posix()}) at each count {chosen.label} "
+        f"({HISTORY_PUBLICATIONS.relative_to(ROOT).as_posix()}) at each count {claimant} "
         "claims where it states a side strictly below the start, at the least side the "
         "commit states there.",
         walk,
@@ -5079,7 +5825,7 @@ def claim_map_walk_sources(
         "A publication in Mykhailo Polkovskyi's watched repository, dated by its commit, or "
         "by the push that made it public; transcribed from the "
         f"{declared.polkovskyi.name} packet's receipts (source-history.json through f1ceee4 "
-        f"and later-commits.json after it) at each count {chosen.label} claims where it states "
+        f"and later-commits.json after it) at each count {claimant} claims where it states "
         "a side strictly below the start, at the least side the commit states there.",
         walk,
     )
@@ -5093,7 +5839,7 @@ def claim_map_walk_sources(
                 "claims": couzo,
                 "note": (
                     "Issue 715's re-certifications of the 4e4c8ce certificates below the "
-                    f"12-place print at the counts {chosen.label} claims, strictly below the "
+                    f"12-place print at the counts {claimant} claims, strictly below the "
                     "start, at the exact sides its packet's filtered receipt states; each "
                     "restates the certificate it re-certifies, by the owner's answer of 23 "
                     "October 2026 (think-fwa9)." + held_sentence(walk, "#715")
@@ -5201,6 +5947,8 @@ def declared_rows(chosen: Release) -> dict[str, Any]:
             for step in count["steps"]
         ):
             continue
+        if release_at(walk, chosen.label, n) is not chosen:
+            continue
         item = found[n]
         deleted = int(item.get("deleted") or 0)
         _require(
@@ -5246,7 +5994,7 @@ def declare_rows() -> dict[str, int]:
             document = declared_rows(chosen)
             path = chosen.directory / chosen.declared
             path.write_text(json.dumps(document, indent=1) + "\n", encoding="utf-8")
-            written[chosen.label] = len(document["rows"])
+            written[chosen.key] = len(document["rows"])
     return written
 
 
@@ -5409,6 +6157,72 @@ def write_pose_identity(issue: int | str) -> dict[int, list[str]]:
     }
 
 
+#: How the index states that a side refines another author's packing.
+_REFINES_NAMED = re.compile(r"refines the packing of ([^,;(]+)")
+#: The counts where a notebook row is within 1.1e-7 of a side an earlier commit of the same
+#: push states (#795's review A, A1): measured to settle refinement and credit.
+PUSH_IDENTITY = (364, 378, 405, 450, 874)
+PUSH_IDENTITY_RECEIPT = Path("receipts/push/pose-identity.json")
+#: Where the push walk takes a row as the same packing as an earlier one of the push: its
+#: squares pair one to one under a symmetry and none moves beyond this.
+PUSH_SAME_PACKING = "1e-3"
+
+
+def push_identity(issue: int | str) -> dict[str, Any]:
+    """Each count of `PUSH_IDENTITY`: the certificate of the push's last claim there,
+    measured against the certificate of every earlier claim of the push there
+    (`measured_identity`), each read from the packet. A measurement: it decides nothing, and
+    the walk's notes say what it is taken to show (`PUSH_SAME_PACKING`)."""
+    chosen = release(issue)
+    _require(chosen.claim_map == PUSH, f"{chosen.label}: not a release of one push")
+    custody(chosen)
+    receipt = _read(chosen.directory / PUSH_PUBLICATIONS)
+    order = {item["commit"]: index for index, item in enumerate(receipt["commits"])}
+    root = archive(chosen)
+    rows = []
+    for n in PUSH_IDENTITY:
+        stated = sorted(
+            (item for item in receipt["claims"] if item["n"] == n),
+            key=lambda item: order[item["commit"]],
+        )
+        _require(len(stated) > 1, f"n={n}: the push states one side there")
+        last, earlier = stated[-1], stated[:-1]
+        ours = legacy.parse(read_retained_text(root / last["certificate"]), expected_n=n)
+        against = []
+        for item in earlier:
+            other = legacy.parse(read_retained_text(root / item["certificate"]), expected_n=n)
+            against.append(
+                {key: item[key] for key in ("commit", "holder", "credit", "certificate")}
+                | measured_identity(ours, other)
+            )
+        rows.append(
+            {key: last[key] for key in ("n", "commit", "holder", "credit", "certificate")}
+            | {"against": against}
+        )
+    return {
+        "format": POSE_IDENTITY_FORMAT,
+        "release": f"{chosen.source_url}/tree/{chosen.retained}",
+        "measure": (
+            "binary64: under each of the box's eight symmetries, each square paired with the "
+            "nearest centre of the other packing; the symmetry kept pairs one to one if any "
+            "does, then has the least largest distance. Decides nothing."
+        ),
+        "rows": rows,
+    }
+
+
+def write_push_identity(issue: int | str) -> dict[int, list[str]]:
+    """Write a push walk's pose-identity receipt; return each count's largest distances."""
+    record = push_identity(issue)
+    _write(release(issue).directory / PUSH_IDENTITY_RECEIPT, record)
+    return {
+        row["n"]: [
+            f"{item['commit'][:7]} {item['largest_centre_distance']}" for item in row["against"]
+        ]
+        for row in record["rows"]
+    }
+
+
 # --------------------------------------------------------------------------- coverage plan
 
 
@@ -5434,14 +6248,44 @@ def walks_of(chosen: Release) -> list[Walk]:
     return own + ([WALKS[chosen.walk_above]] if chosen.walk_above else [])
 
 
-def _releases(walk: Walk) -> dict[str, Release]:
-    """The releases a walk plans, by the report label the ledger gives each: those it is
-    the own walk of, and those whose rows above 1024 it records (`Release.walk_above`)."""
-    return {
-        item.label: item
-        for item in RELEASES.values()
-        if walk.name in (item.walk, item.walk_above)
-    }
+def _walk_groups(walk: Walk) -> dict[str, tuple[Release, ...]]:
+    """The releases a walk plans, by the report label the ledger gives each, those it is the
+    own walk of and those whose rows above 1024 it records (`Release.walk_above`): one a
+    label, or several where one commit's publications are several sources
+    (`Release.notebook_run`)."""
+    groups: dict[str, list[Release]] = {}
+    for item in RELEASES.values():
+        if walk.name in (item.walk, item.walk_above):
+            groups.setdefault(item.label, []).append(item)
+    return {label: tuple(items) for label, items in groups.items()}
+
+
+@functools.cache
+def _mapped_counts(key: str, _modified: int) -> frozenset[int]:
+    """The counts a release whose claims are re-derived claims, held ones included, read once
+    while its claim map is unchanged."""
+    return frozenset(int(item["n"]) for item in mapped_claims(release(key)))
+
+
+def release_at(walk: Walk, report: str, n: int) -> Release | None:
+    """The release of ``walk`` whose rows record ``report`` at ``n``: the label's one release,
+    or, where several share it or it is a push's (`PUSH`), the one whose claims hold ``n``;
+    None for a report no release of the walk is, and for another author's side of a push
+    (`OTHER_AUTHOR`), which no release holds, so the walk may not record it
+    (`chain_problems`)."""
+    group = _walk_groups(walk).get(report, ())
+    if len(group) <= 1 and not any(item.claim_map == PUSH for item in group):
+        return group[0] if group else None
+    found = [
+        item
+        for item in group
+        if item.claim_map
+        and n in _mapped_counts(item.key, mapped_path(item).stat().st_mtime_ns)
+    ]
+    if not found and all(item.claim_map == PUSH for item in group):
+        return None
+    _require(len(found) == 1, f"{report} n={n}: {len(found)} of its releases claim it")
+    return found[0]
 
 
 def _awaits(walk: Walk, report: str, n: int) -> bool:
@@ -5452,10 +6296,10 @@ def _awaits(walk: Walk, report: str, n: int) -> bool:
     return pending or walk.holds(report, n) is not None
 
 
-def _source_of(walk: Walk, report: str) -> str:
-    """The coverage source whose rows record a report the walk records."""
-    ours = {label: item.source for label, item in _releases(walk).items()}
-    source = ours.get(report) or walk.later.get(report)
+def _source_of(walk: Walk, report: str, n: int) -> str:
+    """The coverage source whose rows record a report the walk records at ``n``."""
+    ours = release_at(walk, report, n)
+    source = ours.source if ours is not None else walk.later.get(report)
     _require(source is not None, f"{report}: the ledger walks a report no source records")
     assert source is not None
     return source
@@ -5535,7 +6379,7 @@ def planned_rows() -> list[dict[str, Any]]:
                 "disposition": "superseded" if later else "tracked-outside-case-corpus",
             }
             if later:
-                planned["superseded_by"] = _source_of(walk, later[0])
+                planned["superseded_by"] = _source_of(walk, later[0], row.n)
             planned["bead"] = chosen.bead
             rows.append(planned)
     return rows
@@ -5585,12 +6429,12 @@ def _planned_supersessions() -> list[tuple[Walk, int, str, str]]:
     """`planned_supersessions` with the walk that plans each."""
     flips: list[tuple[Walk, int, str, str]] = []
     for walk in WALKS.values():
-        ours = {label: item.source for label, item in _releases(walk).items()}
         for count in _counts(walk):
             recorded = recorded_reports(walk, count)
             start = _start_source(count)
-            if start is not None and recorded and recorded[0] in ours:
-                flips.append((walk, count["n"], start, ours[recorded[0]]))
+            ours = release_at(walk, recorded[0], count["n"]) if recorded else None
+            if start is not None and ours is not None:
+                flips.append((walk, count["n"], start, ours.source))
     return flips
 
 
@@ -5602,14 +6446,11 @@ def held_problems(register: Mapping[str, Any]) -> list[str]:
     problems: list[str] = []
     for walk in WALKS.values():
         walked = _walked(walk)
-        releases = _releases(walk)
+        groups = _walk_groups(walk)
         for report, items in walk.held.items():
-            source = releases[report].source if report in releases else walk.later.get(report)
-            declared = (
-                {row.n for row in decided_claims(releases[report])}
-                if report in releases
-                else set()
-            )
+            declared = {
+                row.n for item in groups.get(report, ()) for row in decided_claims(item)
+            }
             seen: set[int] = set()
             for item in items:
                 where = f"{walk.name}: {report}"
@@ -5632,6 +6473,8 @@ def held_problems(register: Mapping[str, Any]) -> list[str]:
                         problems.append(
                             f"{where} n={n}: the walk does not record it, so it holds nothing"
                         )
+                    ours = release_at(walk, report, n)
+                    source = ours.source if ours is not None else walk.later.get(report)
                     if source is not None and (n, source) in rows:
                         problems.append(
                             f"{where} n={n}: held for {item.bead}, yet {source} has a row there"
@@ -5829,6 +6672,7 @@ def declaration_problems() -> list[str]:
             if step["report"] == chosen.label
             and step["verdict"] == RECORDED
             and walk.holds(chosen.label, n) is None
+            and release_at(walk, chosen.label, n) is chosen
         }
         recorded = {n for n in walked if n > reports.HORIZON}
         corpus = walked - recorded
@@ -5875,7 +6719,7 @@ def chain_problems(coverage: Mapping[str, Any]) -> list[str]:
                 continue
             start = _start_source(count)
             chain = ([start] if start is not None else []) + [
-                _source_of(walk, report) for report in recorded_reports(walk, count)
+                _source_of(walk, report, n) for report in recorded_reports(walk, count)
             ]
             # At 366 the grid stands and only publications awaiting their imports are
             # recorded, so the chain is empty until one lands.
@@ -5909,8 +6753,8 @@ def _reached(walk: Walk, n: int) -> set[str]:
     reached = {_start_source(count)}
     for step in count["steps"]:
         report = step["report"]
-        source = {label: item.source for label, item in _releases(walk).items()}.get(report)
-        reached.add(source or walk.later.get(report))
+        ours = release_at(walk, report, n)
+        reached.add(ours.source if ours is not None else walk.later.get(report))
     return {source for source in reached if source is not None}
 
 
@@ -6169,7 +7013,7 @@ def release_problems(chosen: Release, *, replay: bool, workers: int) -> list[str
         problems.append(f"{chosen.label}: the summary does not match the rows")
     if replay:
         with ProcessPoolExecutor(max_workers=workers) as pool:
-            again = list(pool.map(decide_row, [(chosen.label, row.n) for row in rows]))
+            again = list(pool.map(decide_row, [(chosen.key, row.n) for row in rows]))
         problems.extend(
             f"{chosen.label} n={row.n}: the replay differs from the receipt"
             for row, kept, fresh in zip(rows, stored, again, strict=True)
@@ -6310,6 +7154,11 @@ def main(argv: Sequence[str] | None = None) -> int:
     own_history.add_argument("--issue", required=True, help=KEY_HELP)
     own_history.add_argument("--clone", type=Path, required=True)
     own_history.add_argument("--walk", default="", help="a walk of WALKS; the release's own")
+    one_push = commands.add_parser("push-publications")
+    one_push.add_argument("--issue", required=True, help=KEY_HELP)
+    one_push.add_argument("--clone", type=Path, required=True)
+    push_pose = commands.add_parser("push-identity")
+    push_pose.add_argument("--issue", required=True, help=KEY_HELP)
     after_pin = commands.add_parser("later-commits")
     after_pin.add_argument("--issue", required=True, help=KEY_HELP)
     after_pin.add_argument("--clone", type=Path, required=True)
@@ -6357,6 +7206,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             args.issue, args.clone, WALKS[args.walk] if args.walk else None
         ),
         "later-commits": lambda: write_later_commits(args.issue, args.clone),
+        "push-publications": lambda: write_push_publications(args.issue, args.clone),
+        "push-identity": lambda: write_push_identity(args.issue),
         "decide-later": lambda: write_decide_later(args.issue),
         "pose-identity": lambda: write_pose_identity(args.issue),
         "release-sources": lambda: write_release_walk_sources(
@@ -6377,7 +7228,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             print(problem)
         chosen = [release(issue) for issue in args.issue] or list(RELEASES.values())
         decided = sum(item.decided for item in chosen)
-        named = ", ".join(item.label for item in chosen)
+        named = ", ".join(item.key for item in chosen)
         print(
             "FAILED"
             if problems
