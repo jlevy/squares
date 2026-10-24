@@ -3,9 +3,9 @@ type: is
 id: is-01m5nstg2vqmhpdnwnyhhb0vjj
 title: "PR #759 (merge): senior review of the News feed plan"
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 5
+version: 6
 delegate: c-rev-759-1024
 labels: []
 dependencies: []
@@ -16,8 +16,12 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-24T01:53:50.171Z
-updated_at: 2026-10-24T03:03:23.016Z
+updated_at: 2026-10-24T04:03:29.324Z
 started_at: 2026-10-24T01:53:57.856Z
+closed_at: 2026-10-24T04:03:29.324Z
+close_reason: "#759 merged at 1aa953fad (head f7856724b; reviews A 6378649518 and B 6379328505 with dispositions 6379056910 and 6379608495; B1 verified against corrected_rule_check.out; CI green 40059938843, 40059938857, 40059935573)"
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes

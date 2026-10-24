@@ -5,7 +5,7 @@ title: Plan the News page toggle (notable stories / all changes by PR), the merg
 kind: task
 status: in_progress
 priority: 2
-version: 11
+version: 12
 spec_path: docs/project/specs/active/plan-2026-10-23-news-pr-feed.md
 delegate: c-news-plan-1023b
 labels: []
@@ -14,7 +14,7 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-23T17:18:55.109Z
-updated_at: 2026-10-24T03:02:09.940Z
+updated_at: 2026-10-24T04:03:30.548Z
 started_at: 2026-10-23T17:19:23.812Z
 ---
 
@@ -38,3 +38,6 @@ started_at: 2026-10-23T17:19:23.812Z
 2026-10-24 coord-intake-1023: from #758 review B4: result-import.md also says S3 News is optional at ~:1289, besides ~:1060. Phase 1 must rewrite both to the owner's 23 October rule.
 
 2026-10-24 c-fix-759-1024: review A of #759 addressed at 3f9383d31 (after merging main da117ad0b). Plan now: results attributed per pull request (layers sharing a mergeCommit split by their heads; d3860c97a worked through); the budget raise is its own PR before Phase 1, due before main news.html passes 450,000 bytes (318,655 over 50 cards on 24 Oct, ~19 days to 600,000); trip check scoped like the announcement gate and re-checked against the main it merges into; S3+ recording stops at the trip point unless the owner picks a step beforehand; v2 coverage rule; label floor; STORY_EXEMPT constant; Decision 4 = the point-4 answers ("All merged PRs (Recommended)", "Me, with the records (Recommended)"); GitHub-title default under Coordinator Defaults; Status "Owner's questions answered"; #736 takeover noted. Dispositions: https://github.com/jlevy/squares/pull/759#issuecomment-6379056910
+
+
+2026-10-24 coord-intake-1023: the plan landed on main as 1aa953fad (#759). Next: (0) the News budget-raise PR, before news.html passes 450,000 bytes; (1) Phase 1, the record, the tool, the backfill, the gates and the runbook; (2) Phase 2, the page and profiles, after #736 merges.
