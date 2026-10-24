@@ -863,7 +863,7 @@ def profile_tally(
             + "".join(f"<span>{part}</span>" for part in parts)
             + "</span>"
         )
-    return '<span class="site-credit-tally">' + " · ".join(parts) + "</span>"
+    return '<span class="site-credit-tally">' + join_tally(parts) + "</span>"
 
 
 def contributor_article(

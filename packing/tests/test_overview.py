@@ -4527,7 +4527,7 @@ def test_the_project_is_named_the_squares_project_wherever_it_is_named(
     # README's page is named for the file in its tab, since the project's name follows
     # it there as it does every page's name, and the overview's title is that name alone.
     assert "<title>README · The Squares Project</title>" in rendered("readme.html")
-    assert "<title>Overview · The Squares Project</title>" in page
+    assert "<title>The Squares Project</title>" in page
     labels = [label for _, label, _ in overview_sections.DOCUMENTS]
     assert labels[0] == "The Squares Project"
     for name in (
@@ -7626,7 +7626,9 @@ def test_menu_page_headers_and_metadata_use_the_same_labels(
     rendered: Callable[[str], str],
 ) -> None:
     """The menu model names actual page H1s, browser previews and current crumbs;
-    the category containers never invent a landing page."""
+    the category containers never invent a landing page. The homepage is the exception:
+    Overview in the menu, the project's name in its tab and preview (the owner,
+    2026-10-23)."""
     from devtools import site_navigation  # noqa: PLC0415
 
     for group in site_navigation.NAVIGATION:
@@ -7643,10 +7645,9 @@ def test_menu_page_headers_and_metadata_use_the_same_labels(
                 "The Square Packing Problem" if path == "index.html" else item.label
             )
             assert _rendered_text(heading[1]).strip() == expected_heading, path
-            assert f"<title>{render_overview.page_title(item.label)}</title>" in page, path
-            assert (
-                f'property="og:title" content="{html.escape(item.label, quote=True)}"' in page
-            )
+            name = render_overview.PROJECT_NAME if path == "index.html" else item.label
+            assert f"<title>{render_overview.page_title(name)}</title>" in page, path
+            assert f'property="og:title" content="{html.escape(name, quote=True)}"' in page
             if path in {"index.html", "news.html"}:
                 assert 'aria-label="Breadcrumb"' not in page, path
                 continue
@@ -7668,15 +7669,20 @@ def test_contributor_directory_uses_its_menu_label(
 
 
 def test_overview_keeps_its_problem_heading_and_visual_atlas_section(page: str) -> None:
-    """Overview is the intentional menu/title exception; the original problem and
-    Atlas anchor addresses survive the concise visible labels."""
+    """Overview is the menu's label for the homepage, whose title and link preview are the
+    project's name (the owner, 2026-10-23); the original problem and Atlas anchor
+    addresses survive the concise visible labels."""
     assert '<h1 id="the-problem" class="site-title">The Square Packing Problem</h1>' in page
     assert '<p class="site-navigation-copy">The Square Packing Problem</p>' not in page
     assert (
         '<h2 id="the-atlas-of-square-packings" class="site-title">'
         'Visual Atlas<a id="the-atlas"></a></h2>'
     ) in page
-    assert "<title>Overview · The Squares Project</title>" in page
+    assert "<title>The Squares Project</title>" in page
+    assert '<meta property="og:title" content="The Squares Project">' in page
+    assert '<meta name="twitter:title" content="The Squares Project">' in page
+    assert "Overview · " not in page
+    assert '<a data-page="overview" href="./" aria-current="page">Overview</a>' in page
     assert '<h2 id="recent-results" class="site-title">Results</h2>' in page
     assert 'aria-label="Breadcrumb"' not in page
 

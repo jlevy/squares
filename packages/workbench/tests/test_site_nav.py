@@ -34,13 +34,33 @@ def fake_run(args: Sequence[str], **_: object) -> subprocess.CompletedProcess[st
 
 
 @pytest.fixture(scope="module")
-def page(tmp_path_factory: pytest.TempPathFactory) -> str:
+def built(tmp_path_factory: pytest.TempPathFactory) -> Path:
+    """The directory `build` publishes into, its `index.html` as served."""
     with pytest.MonkeyPatch.context() as patch:
         patch.setattr(build_site.subprocess, "run", fake_run)
         patch.setattr(build_site, "published_script", lambda: "loader")
         out = tmp_path_factory.mktemp("workbench")
         build_site.build(out, revision="0" * 40, dirty=False)
-        return read_inline_page(out / "index.html")
+        return out
+
+
+@pytest.fixture(scope="module")
+def page(built: Path) -> str:
+    return read_inline_page(built / "index.html")
+
+
+def test_the_charset_opens_the_head_within_its_first_1024_bytes(built: Path) -> None:
+    """The HTML standard wants the encoding declaration serialized whole within a page's
+    first 1024 bytes. The policy, the bar's stylesheet and the theme bootstrap were put
+    before the template's charset, which left it at byte 6,840 of the published page; it
+    now opens the head, and the policy follows it before anything it governs."""
+    served = (built / "index.html").read_bytes()
+    charset = b'<meta charset="utf-8">'
+    assert served.count(charset) == 1
+    assert served.index(charset) + len(charset) <= 1024
+    head = served[: served.index(b"</head>")]
+    opened = head.index(b"<head>") + len(b"<head>")
+    assert head[opened:].lstrip().startswith(charset + b"\n" + build_site.POLICY_META.encode())
 
 
 def test_the_page_carries_the_shared_nav_with_learn_as_its_parent(page: str) -> None:
