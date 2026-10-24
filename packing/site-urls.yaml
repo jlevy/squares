@@ -16639,7 +16639,7 @@ urls:
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-14'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-24'
   status: live
   identity:
     kind: upper-bound
@@ -16658,7 +16658,15 @@ urls:
     evidence:
     - E-fang-excess-theorem-report
     - E-fang-excess-theorem-exact-feasibility
+    - E-fang-excess-note-proof
+    - E-fang-excess-lean-report
     artifacts:
+    - packing/resources/web/fang-excess-note-2026-10-19/README.md
+    - packing/resources/web/fang-excess-note-2026-10-19/zenodo/fang-2026-n2-n-1.pdf
+    - packing/resources/web/fang-excess-note-2026-10-19/source/note/fang-2026-n2-n-1.md
+    - packing/resources/web/fang-excess-lean-2026-10-18/README.md
+    - packing/resources/web/fang-excess-lean-2026-10-18/source/Sqlean/Main.lean
+    - packing/resources/web/fang-excess-lean-2026-10-18/source/Sqlean/Theorem2.lean
     - packing/resources/web/fang-excess-theorem-2026-10-13/README.md
     - packing/resources/web/fang-excess-theorem-2026-10-13/acquisition/claims.json
     - packing/resources/web/fang-excess-theorem-2026-10-13/source/theorem/n015_F1.cert
@@ -16671,6 +16679,41 @@ urls:
     - packing/cases/asymptotic/fang_excess_inventory.py
     - docs/project/reviews/review-2026-10-14-fang-excess-theorem-and-direct-certificates.md
     - packing/devtools/upper_bound_reports.py
+  amendments:
+  - date: '2026-10-24'
+    reason: Cite Kevin Fang's published note, draft v0.9 (E-fang-excess-note-proof), and his Lean
+      proof (E-fang-excess-lean-report), with their packets, beside the rung; scope, attribution and
+      the stated bounds are unchanged.
+    previous:
+      kind: upper-bound
+      scope:
+        n_values:
+        - 211
+        - 241
+        - 273
+        - 307
+      established: null
+      attribution:
+        source_keys:
+        - '[Fang excess theorem 2026-10-13]'
+        published: '2026-10-12'
+      builds_on: null
+      evidence:
+      - E-fang-excess-theorem-report
+      - E-fang-excess-theorem-exact-feasibility
+      artifacts:
+      - packing/resources/web/fang-excess-theorem-2026-10-13/README.md
+      - packing/resources/web/fang-excess-theorem-2026-10-13/acquisition/claims.json
+      - packing/resources/web/fang-excess-theorem-2026-10-13/source/theorem/n015_F1.cert
+      - packing/resources/web/fang-excess-theorem-2026-10-13/source/theorem/n016_F1.cert
+      - packing/resources/web/fang-excess-theorem-2026-10-13/source/theorem/n017_F1.cert
+      - packing/resources/web/fang-excess-theorem-2026-10-13/source/theorem/n018_F1.cert
+      - packing/resources/web/fang-excess-theorem-2026-10-13/receipts/exact-certification.json.xz
+      - packing/resources/web/fang-excess-theorem-2026-10-13/source/tools/glue.py
+      - packing/resources/web/fang-excess-theorem-2026-10-13/receipts/inventory-and-deficiency.json
+      - packing/cases/asymptotic/fang_excess_inventory.py
+      - docs/project/reviews/review-2026-10-14-fang-excess-theorem-and-direct-certificates.md
+      - packing/devtools/upper_bound_reports.py
 - path: result/t-164.html
   canonical: result/t-164.html
   kind: result

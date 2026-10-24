@@ -8,8 +8,8 @@ ours, which rest on someone else's argument, and how far each has been checked.
 
 ## The short version
 
-- **732** evidence records. **412** are formal; **404** of those were established here. **12** are samples, counted separately.
-- **301** rest on an argument made elsewhere, of which **7** have been read by nobody here.
+- **734** evidence records. **413** are formal; **404** of those were established here. **12** are samples, counted separately.
+- **303** rest on an argument made elsewhere, of which **8** have been read by nobody here.
 - **1** formal record proves a theorem only under a hypothesis nothing here has replayed, and is verified as that implication alone: `E-k2m4-evand-bentz4-lean-build` (ValidTilt9).
 - **43** claim to be first established here. **14** make no novelty statement at all - not assessed, which is not the same as not novel.
 
@@ -610,6 +610,8 @@ results, it is a statement about what this repository has itself examined.
 | `E-wand125-fine-net-n37-64975-report` | 0 | lower-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | `V-wand125-sqverify-proof-net` |
 | `E-fang-excess-theorem-report` | 0 | upper-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | *none held* |
 | `E-fang-excess-theorem-exact-feasibility` | 0 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | independent | full, 6 of 6: the six retained inventory certificates at 211, 241, 273, 307, 308 and 932, every wall and every pair decided by both maintained routes; the twelve kernel controls are retained separately | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-evand-arrangement-receipts`, `V-upper-bound-reports`, `V-evand-exact-certificates` |
+| `E-fang-excess-note-proof` | 0 | upper-bound | verified | whatever its theorem states | elsewhere | not-reviewed | previously-published | no code | not recorded | - |
+| `E-fang-excess-lean-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
 | `E-wand125-linear-n145-1224-report` | 0 | lower-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | `V-wand125-unified-linear-verify-cpp` |
 | `E-wand125-closed-form-report` | 153 | lower-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | `V-wand125-replay4d` |
 | `E-mishapolk-593-certificate-report` | 0 | upper-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | *none held* |
@@ -758,10 +760,10 @@ results, it is a statement about what this repository has itself examined.
 
 ## What the register rests on
 
-- **assurance**: numerically-checked 5, reported 304, verified 423
-- **method**: exact-algebraic 231, interval-certified 175, numerical-multiprecision 5, proof-assistant-checked 6, proof-audited 4, published-proof 7, reported 304
-- **novelty**: apparently-novel 43, common-knowledge 4, not assessed 14, previously-published 671
-- **relationship to the producer's code**: generator 5, independent-implementation 257, not-applicable 33, same-implementation 398, shared-components 33, unknown-historical 6
+- **assurance**: numerically-checked 5, reported 305, verified 424
+- **method**: exact-algebraic 231, interval-certified 175, numerical-multiprecision 5, proof-assistant-checked 6, proof-audited 4, published-proof 8, reported 305
+- **novelty**: apparently-novel 43, common-knowledge 4, not assessed 14, previously-published 673
+- **relationship to the producer's code**: generator 5, independent-implementation 257, not-applicable 34, same-implementation 399, shared-components 33, unknown-historical 6
 
 The `cases` column is how many frontier records cite each piece of evidence, and it is the reason to read this table rather than count records. Ranked below are the *formal* records only: a `reported` record cited across the frontier may be a shared catalogue and is labelled as such, which is the register working rather than risk. The risk is a verified claim resting on an argument nobody has examined.
 

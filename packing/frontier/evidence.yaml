@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:FrontierEvidenceSet/v1
   schema: frontier-evidence.schema.yaml
   status: enforced
-last_reviewed: '2026-10-23'
+last_reviewed: '2026-10-24'
 evidence:
   - id: E-n017-kleddamag-rational-upper
     claim: upper-bound
@@ -36081,6 +36081,126 @@ evidence:
       and the separating-axis method. Finite feasibility of the six only: the theorem for
       every n rests on the review's reading of Lemma 3 and the induction.
     source_reviewed: '2026-10-14'
+  - id: E-fang-excess-note-proof
+    claim: upper-bound
+    scope: {n_values: [211, 241, 273, 307]}
+    assurance: verified
+    method: published-proof
+    performed_by: source-author
+    novelty: previously-published
+    relationship_to_generator: not-applicable
+    origin: external
+    source_key: '[Fang excess note 2026-10-19]'
+    replay_status: not-attempted
+    proof:
+      source: packing/resources/web/fang-excess-note-2026-10-19/zenodo/fang-2026-n2-n-1.pdf
+      theorem: >-
+        Theorems 1 and 2 of draft v0.9 of 18 October 2026, DOI 10.5281/zenodo.23463481:
+        s(n^2 - n + 1) < n for every integer n >= 15; and for n >= 15 and integers p, q >= 0
+        with 16p + 21q <= n - 15, n^2 - n + 1 + p + 2q unit squares pack in a square of side
+        less than n, so s(n^2 - n + F(n)) < n with F(n) = 1 + max{p + 2q : p, q in Z>=0,
+        16p + 21q <= n - 15}.
+      scope: >-
+        Every integer n >= 15, unit squares closed, rotations allowed, pairwise disjoint
+        interiors, in a square: the record's s(n). The construction gives side n - 1/10000
+        closed and n - 1/20000 strict. At the counts this record holds, n = 15 to 18 with
+        F(n) = 1, it gives s(211) < 15, s(241) < 16, s(273) < 17 and s(307) < 18, and
+        Section 5's certificates s(211) <= 14.99995 to s(307) <= 17.99995.
+      pinpoints: >-
+        Theorems 1 and 2 on printed p. 2; Lemma 3 and its proof, pp. 2-3; Propositions 4
+        and 5, the proof of Theorems 1 and 2 and the strict scaling, p. 3; Section 5, the
+        inventory at side n - 1/20000, p. 4; Section 6, the certificate format, the three
+        exact checkers and the formal verification, p. 5. The same text is
+        source/note/fang-2026-n2-n-1.md and zenodo/zenodo-23463481/main.tex in the packet.
+      assumptions:
+        - >-
+          Propositions 4 and 5, the rectangles R and R' and the sixteen square bases, are
+          established by exact rational certificates in TheSnakeFang/squarepack-certs at
+          078789a, which the note cites and its three exact checkers accept; its text does
+          not reproduce them.
+        - >-
+          Every piece of Propositions 4 and 5 is 1/10000-squeezable (Proposition 5;
+          theorem/PIECES.md in the 13 October packet).
+        - Packings permit arbitrary orientations and boundary contact.
+    external_review:
+      state: not-reviewed
+      date: '2026-10-24'
+      note: >-
+        Statements compared, proofs not reviewed. The intake lane of 24 October (think-494l)
+        found the note's Theorems 1 and 2, hypotheses and conclusions, equal to T-163's,
+        and its construction's side n - 1/20000 equal to the claim's
+        (packing/resources/web/fang-excess-note-2026-10-19/README.md, The Statements
+        Against T-163). The 14 October review re-derived both theorems from the README and
+        tools/glue.py before the note was public, and has not been compared with the
+        note's own proofs; that read is a stage 4 review of its own.
+    limitations: >-
+      A published, unrefereed preprint, Zenodo version 0.9 under CC BY 4.0, with the same
+      text in Markdown at TheSnakeFang/squarepack-certs 9ffba0f. Its proof is computer-
+      assisted: Lemma 3 and the induction are written out, and the 18 finite pieces of
+      Propositions 4 and 5 rest on exact certificates checked by the source's programs.
+      Here the six inventory certificates at 211, 241, 273, 307, 308 and 932 are replayed
+      by both maintained exact routes (E-fang-excess-theorem-exact-feasibility), and the
+      14 October review decided the 18 pieces strict-valid with an exact checker of its
+      own (V-fang-review-exact-checker), which no evidence entry records; neither Lean
+      proof of the theorems has been built here. This entry records the published
+      argument, not a read of it. The note states that its software, verifiers, gluing
+      program and bundle were written and run with Claude (Anthropic) as a coding and
+      research agent, directed and reviewed by the author, and that two language-model
+      reviews of earlier drafts found errors that were corrected.
+    source_reviewed: '2026-10-24'
+  - id: E-fang-excess-lean-report
+    claim: upper-bound
+    scope: {n_values: [211, 241, 273, 307]}
+    assurance: reported
+    reported_method: proof-assistant-checked
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Fang excess Lean 2026-10-18]'
+    certificate: packing/resources/web/fang-excess-lean-2026-10-18/source/Sqlean/Main.lean
+    replay_status: not-attempted
+    verifiers: []
+    proof:
+      source: packing/resources/web/fang-excess-lean-2026-10-18/source/Sqlean/Main.lean
+      theorem: >-
+        UnitSquarePacking.theorem1 (n : ℕ) (h : 15 ≤ n) : minSide (n ^ 2 - n + 1) < n;
+        UnitSquarePacking.main (n : ℕ) (h : 15 ≤ n) : Packs (n ^ 2 - n + 1) ((n : ℝ) - 1 /
+        10000); and UnitSquarePacking.theorem2 (n : ℕ) (h : 15 ≤ n) : minSide (n ^ 2 - n +
+        jExc n) < n with jExc n = max ((n + 1) / 16) (1 + 2 * ((n - 15) / 21)). Packs and
+        minSide are Evan Daniel's Spec.lean, vendored unchanged: closed unit squares at any
+        rotation in [0, s]^2 with pairwise disjoint interiors, and sInf {s | Packs n s}.
+      scope: >-
+        Fang's Theorem 1 for every n >= 15, at side n - 1/10000; Theorem 2 with an excess of
+        jExc n, which is F(n) for 15 <= n <= 51 and F(n) or F(n) - 1 above, one short at
+        n = 52 to 56, since the mixed-step form is not stated. At the counts this record
+        holds, n = 15 to 18, it gives s(211) <= 14.9999, s(241) <= 15.9999, s(273) <=
+        16.9999 and s(307) <= 17.9999.
+      pinpoints: >-
+        Sqlean/Main.lean (base, small, step, main, theorem1); Sqlean/Theorem2.lean (stepR,
+        stepR', packs_j16, packs_j21, jExc, main2, theorem2); Sqlean/Glue.lean (glue, Lemma
+        3); Sqlean/Check.lean (check_sound); Sqlean/Pieces/ and Sqlean/Data/ (the 17
+        committed pieces); Sqlean/Axioms.lean (the axiom probe).
+      assumptions:
+        - Lean v4.33.1's kernel and Mathlib at 0df444a3 are sound
+        - >-
+          The 211 piece, gitignored upstream, is the module scripts/gen_cert.py writes from
+          Daniel's certificate of de Winter's packing; the kernel checks whatever it writes
+        - The build and its axiom set are as the source reports; nothing here built any module
+    limitations: >-
+      TheSnakeFang/squarepack-lean at 947bdae (2026-10-18), whose proof sources are those of
+      837eca1 (2026-10-13), reports Lean proofs of Kevin Fang's Theorem 1, with its side
+      n - 1/10000 version, and of the larger of the two single-step bounds of his Theorem
+      2, over Evan Daniel's Spec.lean: Lemma 3 as glue on rectangular containers, a strong
+      induction on n, and 18 exact piece certificates, each checked by decide +kernel in a
+      generated module. The README and Sqlean/Axioms.lean report the axioms propext,
+      Classical.choice and Quot.sound for theorem1, main and theorem2, and a clean build of
+      765 CPU-seconds on top of the Mathlib cache; no build log or axiom output is
+      published. The README's first line says Theorems 1 and 2, and the note and the
+      certificate repository say Theorem 1 and the unmixed bounds; the mixed-step Theorem 2
+      is not stated. Nothing here has built it: about 0.25 CPU-hours and 9 GB of disk,
+      which this host lacked on 24 October.
+    source_reviewed: '2026-10-24'
   - id: E-wand125-linear-n145-1224-report
     claim: lower-bound
     scope: {n_values: [145, 146, 147, 148, 149]}

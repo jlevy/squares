@@ -21,7 +21,7 @@ softschema:
   status: enforced
 repository: jlevy/squares
 owner: jlevy
-last_reviewed: '2026-10-23'
+last_reviewed: '2026-10-24'
 issues:
   - number: 420
     title: 'Lean proofs that 178 best-known packings are local minima (n ≤ 324): registration request'
@@ -9785,12 +9785,14 @@ issues:
     summary: The project opened this issue to track Kevin Fang's theorem, which reached the project through
       his watched repository TheSnakeFang/squarepack-certs rather than an issue, as the owner asks for results
       at S4 and above. Triage done; the result maps to T-163, dated by Theorem 1's first commit on 12 October,
-      at V2/C1 on the review of 14 October, with the four finite bounds in the case corpus replayed on both
-      maintained exact routes. Fang's comment of 18 October announces note draft v0.8 at
-      squarepack-certs 0e9be7961773aa78b879c4ee6ba584a67e2e5513 and public squarepack-lean at
-      947bdae. These source assertions await statement, axiom and replay review under think-494l;
-      T-163 remains V2/C1, and Stage 4 adoption is separate.
-    read_through: '2026-10-19T03:30:28Z'
+      with the four finite bounds in the case corpus replayed on both maintained exact routes and C1 on the
+      review of 14 October. Fang's comments of 18 and 19 October announce the note, draft v0.9 under DOI
+      10.5281/zenodo.23463481, and his Lean proof at squarepack-lean 947bdae. Both were retained on 24
+      October (think-494l); the note's statements equal T-163's, and T-163 moved from V2 to V3 on the
+      note as a published proof. The Lean proof covers Theorem 1 and the single-step bounds of Theorem 2
+      and is reported, not built. The stage 4 review of the note (think-pxxi) and a Lean build
+      (think-dgrc) remain.
+    read_through: '2026-10-24T01:23:05Z'
     results:
     - key: excess-theorem
       claim: 's(n^2 - n + 1) < n for every n >= 15, and s(n^2 - n + F(n)) < n with F(n) = 1 + max{p + 2q
@@ -9808,13 +9810,10 @@ issues:
         side n - 1/10000 version, and the single-step form of Theorem 2 on Daniel's unchanged
         Spec.lean. The author reports standard axioms only, no sorry or native_decide.
       source: https://github.com/jlevy/squares/issues/603#issuecomment-6255103888
-      not_registered: >-
-        Source announcement retained for separate statement and axiom binding and priced replay
-        under think-494l. The note's mixed-step Theorem 2 and Lean's single-step version require
-        distinct checks. No replay, rung promotion or Stage 4 adoption is claimed by intake;
-        T-163 retains V2/C1 and the existing finite-witness disposition.
-      queued: true
-      bead: think-494l
+      register:
+      - T-163
+      evidence:
+      - E-fang-excess-lean-report
     - key: note-v09-doi-2026-10-19
       claim: Fang announces note v0.9, dated 18 October, archived as DOI 10.5281/zenodo.23463481 with
         PDF and LaTeX under CC BY; he states it is the same text as note/fang-2026-n2-n-1.md in
@@ -9823,16 +9822,15 @@ issues:
         947bdae to Theorem 1 and the maximum of the two unmixed bounds of Theorem 2; the mixed-step
         form of Theorem 2 is not formalised.
       source: https://github.com/jlevy/squares/issues/603#issuecomment-6259031488
-      not_registered: Publication and statement update to the existing theorem, queued with the existing
-        note and Lean review owner. DOI assets and statement binding remain to be retained and reviewed;
-        no new theorem entry, replay, or rung promotion. T-163 remains V2/C1. For the binding review,
-        the README at the same commit claims more than the note does, "Lean 4 formalisation of
-        Theorems 1 and 2" with no scope; the note's scope is the one to bind.
-      queued: true
-      bead: think-494l
+      register:
+      - T-163
+      evidence:
+      - E-fang-excess-note-proof
     beads:
     - think-494l
     - think-0esw
+    - think-pxxi
+    - think-dgrc
     answer_bead: think-0esw
     replies:
     - url: https://github.com/jlevy/squares/issues/603#issuecomment-6179773458
