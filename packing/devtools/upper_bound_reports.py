@@ -1620,12 +1620,12 @@ def smallest(candidates: list[tuple[str, Span]]) -> dict[str, Any]:
 
 def goebel_construction(n: int, read_on: str) -> tuple[str, str, Span] | None:
     """Göbel's construction at ``n`` for a declaration read on ``read_on``: its holders, its
-    form ``p + q*sqrt(2)`` and a rigorous enclosure, from the retained program
-    (`devtools.intake_ledger.construction_side`). None within the horizon and for a
-    declaration read before the owner's answer on #613 (think-8krd) that Göbel's
-    constructions are the baseline beyond 324 (`devtools.intake_ledger.GOEBEL_FROM`), so
-    the frozen claim records keep the reading of their day; refused above the program's
-    reach of 1073."""
+    form ``p + q*sqrt(2)`` and a rigorous enclosure, from the maintained module
+    (`devtools.intake_ledger.construction_side`, `devtools.goebel_construction`). None
+    within the horizon and for a declaration read before the owner's answer on #613
+    (think-8krd) that Göbel's constructions are the baseline beyond 324
+    (`devtools.intake_ledger.GOEBEL_FROM`), so the frozen claim records keep the reading of
+    their day; refused at a count whose side no build proves final."""
     # That module imports this one, so it is imported where it is first used.
     from devtools import intake_ledger as ledger  # noqa: PLC0415
 
