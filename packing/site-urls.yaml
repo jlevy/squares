@@ -20458,7 +20458,7 @@ urls:
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-22'
-  lastmod: '2026-10-23'
+  lastmod: '2026-10-24'
   status: live
   identity:
     kind: upper-bound
@@ -20480,6 +20480,7 @@ urls:
     - packing/resources/web/couzo-issue670-2026-10-17/acquisition/claims.json
     - packing/resources/web/couzo-issue670-2026-10-17/source/certificates/n204.cert
     - packing/resources/web/couzo-issue670-2026-10-17/receipts/exact-certification.json.xz
+    - packing/resources/web/couzo-issue670-2026-10-17/measure/seed-identity.json
     - packing/resources/web/couzo-issue672-2026-10-17/measure/identity.json
     - packing/campaign/issue-intake/upper-bounds-20261018/README.md
     - packing/devtools/upper_bound_reports.py
@@ -20512,6 +20513,36 @@ urls:
       - packing/resources/web/couzo-issue672-2026-10-17/measure/identity.json
       - packing/campaign/issue-intake/upper-bounds-20261018/README.md
       - packing/devtools/upper_bound_reports.py
+  - date: '2026-10-24'
+    reason: 'Francisco Couzo''s answer of 23 October 2026 on #670 traces the 204 seed to T-186''s
+      packing: the result cites the packet''s seed measurement among its artifacts, which pairs the
+      seed with T-186''s packing and reproduces his checker call, and its credit line names T-186''s
+      lineage by the chain rule; the bound, scope, source and evidence are unchanged.'
+    previous:
+      kind: upper-bound
+      scope:
+        n_values:
+        - 204
+      established: null
+      attribution:
+        source_keys:
+        - '[Couzo issue 670 2026-10-17]'
+        published: '2026-10-17'
+      builds_on: null
+      evidence:
+      - E-couzo-670-certificate-report
+      - E-couzo-670-exact-feasibility
+      - E-couzo-670-review-exact-feasibility
+      artifacts:
+      - packing/resources/web/couzo-issue670-2026-10-17/README.md
+      - packing/resources/web/couzo-issue670-2026-10-17/acquisition/claims.json
+      - packing/resources/web/couzo-issue670-2026-10-17/source/certificates/n204.cert
+      - packing/resources/web/couzo-issue670-2026-10-17/receipts/exact-certification.json.xz
+      - packing/resources/web/couzo-issue672-2026-10-17/measure/identity.json
+      - packing/campaign/issue-intake/upper-bounds-20261018/README.md
+      - packing/devtools/upper_bound_reports.py
+      - docs/project/reviews/review-2026-10-22-couzo-670-672-675.md
+      - packing/resources/web/couzo-issue672-2026-10-17/review/review-2026-10-22/README.md
 - path: result/t-227.html
   canonical: result/t-227.html
   kind: result
