@@ -5,7 +5,7 @@ title: "Import #763 (PR A, W1): Couzo's 964ee2b at or below 1024 — packet, led
 kind: task
 status: in_progress
 priority: 1
-version: 7
+version: 8
 delegate: c-import-763-1024b
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-24T07:16:16.676Z
-updated_at: 2026-10-24T12:47:42.027Z
+updated_at: 2026-10-24T13:23:35.389Z
 started_at: 2026-10-24T07:16:25.387Z
 ---
 Plan and verdicts: think-cnn7's notes (triage of 24 Oct). After #769 (PR C) and #757, both merged. Licence: the owner's presumption of permission (think-m8f4 follows up the exact licence). PR B (review, V3/C3, adoption and regularization at 268 and 303) follows.
@@ -62,3 +62,5 @@ REMAINS: PR B (stage 4 review of T-240, V3/C3, adoption and regularization at 26
 STATUS 2026-10-24 (c-import-763-1024b): PR #789 (draft, labels intake and S3) head 3773d6025, main f354a34f5 (#736) merged in 7a2b1b3f5, stamp_landed --apply dated couzo-issue763-2026-10-23 and couzo-964ee2b-2026-10-23 to 2026-10-24 in landings.yaml (6c7e8b1af), DATA_REVISION re-pinned to it (3773d6025). Hosted: Packing validation 40087416456 and Certificate page 40087416434 succeeded; packing-required and pages-required pass. Local: records tier 53/53 after the merge; edit tier 68/69 (the browser floor's ESLint cannot load typescript-eslint from this worktree's node_modules; hosted frontend passes). Fixes after the first push: T-240's 268 decimal rounded (16.87436171587383), the synopsis count, the site-url register for result/t-240.html; the earlier imports' chain tests (#702, #715, #732, Goebel, ffd900d) now end at #763's rows; the receipts check runs per release (the whole crossed the 45 s per-test guard). Not merged; the coordinator stamps again and re-pins if main moves before merge.
 ROUND 2026-10-24 (c-import-763-1024b, reviews A and B of #789, round 1; parent think-n26i): main 3a5e6f79e merged in 3a442d6f0 and main 90a543771 in a8920888f; fixes 8f3ab9567 (B2 corpus refusal via registered_corpus_counts, B3 unwatched repository refused, B4/A9 CLAIM_MAP_WALKS cutoffs, B6 disjoint claim maps, A8 push by head), 8ab4ee087 (B7 offline regather test, 20261014 excepted under think-299t), 9a5112c44 (A1 rule wording, A2 later 268 / think-l49q, A3 43f666c commit message, A4 268 credit question, A6 key note, A7 stage 2 scope and 268 parent licence, B1 99 Kaggle-credited sides -> think-lyf9, B5 201 claims / 184 rows), 24b2ceffc (test private access), cd18bb936 (re-pin to a8920888f), c6617f3ee (requests record: finals on #672 and #678, follow-ups on #715 and #446). A5 declined (one key per release; the coverage source holds 268, 303 and the rows under it). A10: this note now holds one reply copy under its own heading. Hosted at 24b2ceffc green (Packing validation 40093411122, Certificate page 40093411055).
 Head c6617f3ee: Packing validation 40094477677 and Certificate page 40094477650 succeeded; packing-required and pages-required pass. Disposition replies: A https://github.com/jlevy/squares/pull/789#issuecomment-6384392221, B https://github.com/jlevy/squares/pull/789#issuecomment-6384392366. Beads: think-n26i (parent) and its 17 children closed; think-299t (new, open, under think-ezt8) holds 20261014's regather drift; B1 stays on think-lyf9. Not synced (the coordinator syncs).
+
+2026-10-24 coord-intake-1024: PR #789 merged 2026-10-24T13:22:46Z as 2ec489d1e after review A (senior), review B (correctness; B1 deferred to think-lyf9) and follow-up review C (approve; C1 to think-bgij, C3 fixed at 0329f73d6). T-240 on main as reported (V0/C0). #763 stays open (closingIssuesReferences empty). Next: the #763 acknowledgement after the deploy of 2ec489d1e is verified; T-240's stage 4 review (think-zjus) is running; PR B follows it and think-l49q.
