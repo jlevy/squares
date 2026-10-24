@@ -5,8 +5,8 @@ title: "Intake pass 2026-10-23 (resumed): land #736 and #742, #719 records (204 
 kind: epic
 status: in_progress
 priority: 1
-version: 92
-delegate: coord-intake-1023
+version: 94
+delegate: coord-intake-1024
 labels:
   - result-import
 dependencies: []
@@ -101,7 +101,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-23T04:56:08.269Z
-updated_at: 2026-10-24T07:17:26.996Z
+updated_at: 2026-10-24T08:19:42.598Z
 started_at: 2026-10-23T04:56:10.325Z
 ---
 
@@ -111,3 +111,5 @@ Resumes coord-intake-1021b's pass of 21-23 October (no epic of its own). Lanes a
 
 2026-10-23 coord-intake-1023: coordinator call for c-lane-719-records-1023 on #722 review A2 at 204: #719's ledger is re-gathered with 1851c2c's least side at 204 (n204.cert, T-231); T-229 stands as registered and adopted on the issue's named file (n-204.cert) before the author claimed the lower file, and is superseded at 204 by T-231 (same author, same commit). Not an owner question: A2 is an existing rule. Fallback (a dated note only) if the checks need more than a narrow, tested statement of this case. Added lanes at the owner's request for more parallelism: tracker audits A/B/C (think-s4ld, think-ioqe, think-lrg9), stage-7 drafts (think-ntyb), T-231 math review (think-tetq), above-1024 triage (think-llit).
 2026-10-23 15:20Z coord-intake-1023 status. Merged: #742 (598d23289), #749 (c1115c095). Posted: #732 verdict + import reply, #715 and #719 follow-ups (recorded in #753). Open intake PRs: #753 (T-231, T-229 lineage, reply records; CI red on page budget 204.html, a missing source card, a slow-marker test; lane fixing), #745 (T-232 n31 replay clean, review accepted, to map; T-233 four captures verified, n26 control failed closed on AXIS_ROUNDING, think-tcsl; T-233 stays V0/C1), #750 (Lean sources T-234..T-236 reported; waits on #753/#745 ids; stage 4 reviews owed), #747 (close step; review A changes requested; addressing), #748/#751/#752 (green; senior reviews running), #754 (owner answers into walks incl. D6; resumed), algebraic houses branch (9 adoptions; driver rerun of 258/259/302; no PR yet). Owner questions open: think-r8cn (Q13 drawings), think-4o9c (register kind for s(2)-s(5) Lean routes), T-157 human oversight for V4/C4, compute cap for the pass (think-lh7d's 40 CPU-h item rule applied), above-1024 D3/D5/N1/N4/N5/N6, owner-reserved issues #557/#565/#570/#574, T-154 S5 confirmation. Answered today: fwa9, 8m4k, f2io D1/D2/D6, 8krd, 7hq0, llit N2/N3, qh3s (no preference: S1 line kept). Session usage limit hit at 10:30Z stopped four lanes; resumed 15:10Z.
+
+2026-10-24 ~08:20Z coord-intake-1024 (Claude Code remote session, claude/gracious-babbage-szx392): HANDOFF. coord-intake-1023's session (session_014X1vTGQSoQHeyW8Lt5ps7K) was interrupted; the owner asked this session to resume the pass and land everything in flight without further confirmation (OR-10 continuation). State at takeover, main e5c1c64e3 (#756): open drafts #781 (think-494l, Fang note; green, no review), #787 (think-9i18, stage 7 records; green, no review), #788 (think-3oxz, measure_news_page; green, review A at 463f78d3f unaddressed), #736 (think-xae5; review B approves, final-sync decisions B1/B3/B4/B5 pending). Not ours: #744 (owner: another agent's), #599/#574/#435/#403. Lanes of coord-intake-1023 still marked in_progress with no live worker: c-import-763-1024 (think-ptkk, no branch pushed), c-couzo-answers-1024 (think-mdfr, no branch), c-post-770-1024 (think-dxmr; the 16 posts were made, records ride #787). Plan: review/address/merge #788, #787, #781, #736; stage 7 posts after deploy; resume think-ptkk and think-mdfr; sweep; close stale lane beads.
