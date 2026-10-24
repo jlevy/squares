@@ -5,8 +5,8 @@ title: "Import the 99 Kaggle-credited sides franciscouzo/square-packing publishe
 kind: task
 status: in_progress
 priority: 1
-version: 5
-delegate: c-triage-lyf9-1024
+version: 7
+delegate: c-import-lyf9-1024
 labels:
   - result-import
 dependencies:
@@ -16,7 +16,7 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-24T11:57:05.011Z
-updated_at: 2026-10-24T13:59:05.761Z
+updated_at: 2026-10-24T14:00:11.952Z
 started_at: 2026-10-24T13:38:16.607Z
 ---
 
@@ -113,3 +113,5 @@ CHANGES FOR think-gn29 AND PR B
 INCIDENT: at 13:40Z my `git ls-tree -l` on the blobless clone lazily fetched about 3,474 blobs (114 MB) plus a failed 34 MB auto-gc temp pack, during the disk-full window. I removed the two garbage temp packs. I then rewrote the clone's 47 commits and 122 trees into a new promisor pack (f40cac7f) and dropped the 115 MB pack, returning the clone to blobless (14 MB, all history and trees intact; the dropped blobs re-fetch on demand). Another process fetched about 420 MB into the same clone at 13:46-13:47Z; that was not this lane.
 
 blocked_on: think-g2qy (the 12 recipes only, via think-llit's D2 checker); the 87 certificates are unblocked since #789 merged as 2ec489d1e
+
+2026-10-24 coord-intake-1024 decisions on the triage's two calls: (1) licence basis: the certificates are retained as factual data under the owner's decision of 2026-10-09 (as #789 retained the 268 parent); the notebooks' own licences (Apache-2.0 stated for 28, 'per the notebook' for 59) and the missing SOURCE_NOTICES.md are followed up on think-m8f4 and hold nothing; the new stage 2 rule (presumption for the submitting author) is not stretched to cover them. (2) coverage sources: one per notebook (7), keeping the versions the credit chains cite. Import lane c-import-lyf9-1024 starts now.
