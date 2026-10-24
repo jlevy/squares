@@ -7614,17 +7614,21 @@ issues:
       mixed_n31_L59775, a fine-net check2 certificate reporting s(31) >= 2391/400 = 5.9775 on the
       2,073-direction net, above n = 31's recorded 2381/400 and #446's 597/100, reported on no
       issue. It takes the route of T-142 and T-143: triage and a packet, registration at V0/C0,
-      then a stage 4 replay in #532's lane with an owner budget.
+      then a stage 4 replay in #532's lane with an owner budget. The 23 October intake pass
+      took it instead (think-wop1, PR #745, merged on 24 October 2026): registered as T-232,
+      replayed in full here with sqverify-fast and its whole-net control on the coordinator's
+      approval, and reviewed, so T-232 is at V3/C3.
     read_through: '2026-10-12T07:50:19Z'
     results:
     - key: s31-mixed-fine-net
       claim: s(31) >= 2391/400 = 5.9775, by the fine-net check2 certificate mixed_n31_L59775 at
         wand125/square-packing 23e3186.
       source: body
-      not_registered: No lane has triaged or retained it yet; registration at V0/C0 and the replay
-        follow the route of T-142 and T-143.
-      queued: true
-      bead: think-wop1
+      register:
+      - T-232
+      evidence:
+      - E-wand125-fine-net-n31-59775-report
+      - E-wand125-fine-net-n31-59775-sqverify-fast-replay
     beads:
     - think-wop1
     answer_bead: think-wop1
@@ -7691,13 +7695,27 @@ issues:
       Lean proof s59_eq_8 on Evan Daniel's mixed-measure checker, which T-066 does not yet cite: a
       packet of the lean/ directory, a read of the statement binding, an evidence entry, and a
       price for a kernel rebuild from the generator, which needs an owner budget once priced.
+      The 23 October intake pass did each (think-xk3f, PR #750, merged on 24 October 2026),
+      registering the proof as its own formalization entry, T-235, whose evidence entry is
+      E-n059-wand125-lean-kernel-report, rather than as evidence for T-066.
     read_through: '2026-10-12T07:50:22Z'
     results: []
     asks:
     - what: Retain the Lean proof at f9a77b7, read its statement binding, add an evidence entry for
         T-066 and price a kernel rebuild.
-      state: queued
-      bead: think-xk3f
+      state: done
+      note: >-
+        Done in #750 (2c58b6373), on main since 24 October 2026. The packet
+        wand125-n59-lean-kernel-2026-10-11 retains lean/ at f9a77b7 with Daniel's library
+        closure at 1718a580, and its README reads the statement binding: s59_eq_8 states
+        minSide 59 = 8 with minSide and Packs from S32.lean at 1718a580, closed unit squares
+        translated and rotated in [0, s]^2 with pairwise disjoint interiors. A proof in a proof
+        assistant of a result the record holds is a formalization of its own (epistemics.md,
+        Result Kinds), so the evidence entry, E-n059-wand125-lean-kernel-report, belongs to
+        T-235 rather than T-066, and T-066's claim names T-235. The kernel rebuild is priced
+        at about 862 CPU-hours by the source's receipt, with 9.8 GB per Part process and 35 GB
+        for the last two modules, and held above the owner's 40 CPU-hour item cap and this
+        host (think-cs9x).
     beads:
     - think-xk3f
     answer_bead: think-xk3f
