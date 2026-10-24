@@ -8727,9 +8727,12 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "from this branch's tree at ae6c93fe0 and from main 2ec489d1e's versions of the "
             "three changed files, at the link revision 2ec489d1e, the survey's and both "
             "reviews' HTML and Markdown and every other file the three renderers write are "
-            "byte-identical (51 of 51). The explainer, whose render needs a browser this "
-            "host lacks, is source-reviewed only, and no PDF was printed. All four papers "
-            "keep their versions."
+            "byte-identical (51 of 51); measured again after the merge of main 3480b5fd3 "
+            "(#792), from the merged tree at 96bbef3b5 and from it with main's versions of "
+            "the three files, at link revision 3480b5fd3: 51 of 51 byte-identical. The "
+            "explainer, whose render needs a browser this host lacks, is source-reviewed "
+            "only, and no PDF was printed. All four papers keep their versions, the "
+            "explainer v0.4.27."
         ),
     ),
 )
