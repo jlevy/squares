@@ -33591,19 +33591,6 @@ regularized_drawings:
         max_move: 0.06244515
         max_turn_deg: 0.0
       view: packing/atlas/known-best/regularized/n-068-regularized.yaml.gz
-    - n: 70
-      of: T-146
-      by: project
-      method: regularize_axis_components/2
-      side: same
-      identity:
-        basis: measured
-        measured_in: packing/atlas/known-best/regularized/index.json
-        one_to_one: true
-        moved: 0
-        max_move: 7.516648e-20
-        max_turn_deg: 0.0
-      view: packing/atlas/known-best/regularized/n-070-regularized.yaml.gz
     - n: 71
       of: T-155
       by: project
@@ -33689,19 +33676,6 @@ regularized_drawings:
         max_move: 0.1504462
         max_turn_deg: 2.36147
       view: packing/atlas/known-best/regularized/n-088-regularized.yaml.gz
-    - n: 102
-      of: T-146
-      by: project
-      method: regularize_axis_components/2
-      side: same
-      identity:
-        basis: measured
-        measured_in: packing/atlas/known-best/regularized/index.json
-        one_to_one: true
-        moved: 1
-        max_move: 0.02188279
-        max_turn_deg: 0.0
-      view: packing/atlas/known-best/regularized/n-102-regularized.yaml.gz
     - n: 103
       of: T-174
       by: project
@@ -33784,19 +33758,6 @@ regularized_drawings:
         max_move: 0.01405415
         max_turn_deg: 0.0
       view: packing/atlas/known-best/regularized/n-110-regularized.yaml.gz
-    - n: 123
-      of: T-146
-      by: project
-      method: regularize_axis_components/2
-      side: same
-      identity:
-        basis: measured
-        measured_in: packing/atlas/known-best/regularized/index.json
-        one_to_one: true
-        moved: 8
-        max_move: 0.202407
-        max_turn_deg: 0.0
-      view: packing/atlas/known-best/regularized/n-123-regularized.yaml.gz
     - n: 126
       of: T-139
       by: project
@@ -33910,21 +33871,6 @@ regularized_drawings:
         max_move: 0.2626856
         max_turn_deg: 10.8334
       view: packing/atlas/known-best/regularized/n-152-regularized.yaml.gz
-    - n: 153
-      of: T-173
-      by: project
-      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
-      modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
-      side: same
-      changes: {straightened: 21, re_angled: 5}
-      identity:
-        basis: measured
-        measured_in: packing/atlas/known-best/regularized/index.json
-        one_to_one: true
-        moved: 99
-        max_move: 0.08395274
-        max_turn_deg: 2.16769
-      view: packing/atlas/known-best/regularized/n-153-regularized.yaml.gz
     - n: 154
       of: T-222
       by: project
@@ -34179,21 +34125,6 @@ regularized_drawings:
         max_move: 0.3654251
         max_turn_deg: 0.392072
       view: packing/atlas/known-best/regularized/n-206-regularized.yaml.gz
-    - n: 207
-      of: T-173
-      by: project
-      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
-      modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
-      side: same
-      changes: {straightened: 2, re_angled: 6}
-      identity:
-        basis: measured
-        measured_in: packing/atlas/known-best/regularized/index.json
-        one_to_one: true
-        moved: 6
-        max_move: 0.01762341
-        max_turn_deg: 0.0114592
-      view: packing/atlas/known-best/regularized/n-207-regularized.yaml.gz
     - n: 208
       of: T-174
       by: project
@@ -34401,34 +34332,6 @@ regularized_drawings:
         max_move: 1.652168e-94
         max_turn_deg: 0.0
       view: packing/atlas/known-best/regularized/n-240-regularized.yaml.gz
-    - n: 258
-      of: T-146
-      by: project
-      method: regularize_axis_components/2
-      side: same
-      identity:
-        basis: measured
-        measured_in: packing/atlas/known-best/regularized/index.json
-        one_to_one: true
-        moved: 0
-        max_move: 1.350926e-19
-        max_turn_deg: 0.0
-      view: packing/atlas/known-best/regularized/n-258-regularized.yaml.gz
-    - n: 259
-      of: T-136
-      by: project
-      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
-      modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
-      side: same
-      changes: {straightened: 2, re_angled: 27}
-      identity:
-        basis: measured
-        measured_in: packing/atlas/known-best/regularized/index.json
-        one_to_one: true
-        moved: 151
-        max_move: 0.1315596
-        max_turn_deg: 0.403258
-      view: packing/atlas/known-best/regularized/n-259-regularized.yaml.gz
     - n: 260
       of: T-225
       by: project
@@ -34622,19 +34525,6 @@ regularized_drawings:
         max_move: 0.03448276
         max_turn_deg: 0.0
       view: packing/atlas/known-best/regularized/n-293-regularized.yaml.gz
-    - n: 295
-      of: T-146
-      by: project
-      method: regularize_axis_components/2
-      side: same
-      identity:
-        basis: measured
-        measured_in: packing/atlas/known-best/regularized/index.json
-        one_to_one: true
-        moved: 0
-        max_move: 1.05119e-19
-        max_turn_deg: 0.0
-      view: packing/atlas/known-best/regularized/n-295-regularized.yaml.gz
     - n: 297
       of: T-174
       by: project
@@ -34663,20 +34553,6 @@ regularized_drawings:
         max_move: 0.4403689
         max_turn_deg: 1.34112
       view: packing/atlas/known-best/regularized/n-301-regularized.yaml.gz
-    - n: 302
-      of: T-186
-      by: project
-      method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
-      modifications: ["port of his coincidence placement (regularize_grid_slack/1) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
-      side: same
-      identity:
-        basis: measured
-        measured_in: packing/atlas/known-best/regularized/index.json
-        one_to_one: true
-        moved: 136
-        max_move: 0.05055404
-        max_turn_deg: 2.2217
-      view: packing/atlas/known-best/regularized/n-302-regularized.yaml.gz
     - n: 303
       of: T-239
       by: project

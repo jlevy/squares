@@ -1392,6 +1392,15 @@ def _source_index(plans: dict[int, SourcePlan]) -> dict:
     }
 
 
+def _side_text(witness: Mapping[str, Any]) -> str:
+    """The witness's side as a number `_assert_side_matches` reads: its rational literal, or
+    an algebraic house's side in its field, as a 60-place decimal (`upper_bound_houses`)."""
+    if witness["scalar"]["kind"] != "algebraic-number-field":
+        return str(witness["side"])
+    _squares, side = materialize_exact_witness(witness)
+    return side.field.decimal(side, 60)
+
+
 def _assert_side_matches(case: FrontierCase, actual: str) -> None:
     with mp.workdps(120):
         difference = abs(mp.mpf(case.side) - mp.mpf(actual))
@@ -1467,7 +1476,7 @@ def _build_witness(case: FrontierCase, plan: SourcePlan) -> dict:
             refinement = _refinement_source(case.n, plan.path)
             if _adopted(case, pictured_source_key(case)):
                 witness = adopted_houses.build_witness(case.n)
-                _assert_side_matches(case, str(witness["side"]))
+                _assert_side_matches(case, _side_text(witness))
             elif pictured_source_key(case) == gupta_houses.reports.SOURCE_KEY:
                 witness = _gupta_derived_witness(case)
             elif pictured_source_key(case) == ryxu_houses.SOURCE_KEY:

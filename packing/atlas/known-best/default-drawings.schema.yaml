@@ -7,7 +7,7 @@
 # n = 1..324: what is drawn, its measures, the witness as it identifies itself (its id,
 # its source's key, path and revision, and its side; never a digest of its bytes, OR-16),
 # the runs that decided that witness, and whether the drawing is regularized, regular as
-# published, decided no better, exempt or pending (think-gvke). `devtools.default_drawings
+# published, decided no better, regularization owed, exempt or pending (think-gvke). `devtools.default_drawings
 # --update` writes it; what a JSON Schema cannot say -- that each verdict and state is
 # what the measures give, and that the record covers exactly the index's views and counts
 # -- `devtools.default_drawings --check` holds, by measuring every view and house drawing
@@ -52,11 +52,13 @@ properties:
       states:
         type: object
         additionalProperties: false
-        required: [regularized, regular-as-published, decided-no-better, exempt, pending]
+        required:
+          [regularized, regular-as-published, decided-no-better, regularization-owed, exempt, pending]
         properties:
           regularized: {type: integer, minimum: 0}
           regular-as-published: {type: integer, minimum: 0}
           decided-no-better: {type: integer, minimum: 0}
+          regularization-owed: {type: integer, minimum: 0}
           exempt: {type: integer, minimum: 0}
           pending: {type: integer, minimum: 0}
   entries:
@@ -78,10 +80,15 @@ $defs:
           regularized: a strong generator's view (Evan Daniel's regularizer, grid-slack)
           is drawn. regular-as-published: the house drawing has no uneven and no
           near-axis square. decided-no-better: the strong generators ran on this witness
-          and drew nothing the improvement rule takes. exempt: set aside with a reason
-          and the bead that owns it. pending: none of these; the records tier fails on it
-          unless `default_drawings.PENDING_ALLOWED` names it with its bead.
-        enum: [regularized, regular-as-published, decided-no-better, exempt, pending]
+          and drew nothing the improvement rule takes. regularization-owed: the strong
+          generators ran on this witness and drew no view the improvement rule could
+          judge, so the drawing is not regularized and its regularization is owed to the
+          open bead its `default_drawings.SETTLED` entry's `owed` names, as at the exact
+          algebraic houses. exempt: set aside with a reason and the bead that owns it.
+          pending: none of these; the records tier fails on it unless
+          `default_drawings.PENDING_ALLOWED` names it with its bead.
+        enum:
+          [regularized, regular-as-published, decided-no-better, regularization-owed, exempt, pending]
       drawn:
         description: The picture drawn by default.
         enum: [view, house]

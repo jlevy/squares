@@ -743,7 +743,11 @@ def _regularization(case: dict[str, Any]) -> str:
     drawn = any(item.get("view") for item in field.get("items") or []) and (
         case["n"] in frontier.drawn_regularized()
     )
-    label = "Regularized drawing" if drawn else "Regularization"
+    # A source's exact solve of the house is a conversion to an exact packing, not a
+    # regularization (review A5 of #756), and the record's items say which (`kind`).
+    items = field.get("items") or []
+    solved = bool(items) and all(item.get("kind") == "exact-solve" for item in items)
+    label = "Regularized drawing" if drawn else "Exact solve" if solved else "Regularization"
     # Where the layer holds a view that is not the default picture, the note itself opens
     # by saying the house drawing is drawn, and why (`regularized_drawings.case_note`).
     text = " ".join(str(note).split())

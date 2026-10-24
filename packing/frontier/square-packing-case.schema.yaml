@@ -111,8 +111,12 @@ $defs:
       regularization of the house first, in the register's own terms (`by` the source's
       bibliography key, `of` the result that holds the packing it regularizes,
       `registered_in` the result whose `regularizations` records it, its `method` and
-      `side`), then this project's (`by: project`): the layer's generator, its credit
-      line, this project's `modifications` to Evan Daniel's regularizer where his method
+      `side`, and `kind: exact-solve` where the source's certificate is an exact solve of
+      that packing, a conversion to an exact packing and not a regularization, as issue
+      639's exact forms are, T-193's, and PR 574's algebraic certificates at 153 and 207,
+      T-174's), then this project's (`by: project`): the layer's
+      generator, its credit line, this project's `modifications` to Evan Daniel's
+      regularizer where his method
       made the view (empty where none applied; absent for the project's own axis tool),
       the side relation, the registered result that holds the drawn packing (`of`, null
       where none does), the result that registers the drawn regularization itself where
@@ -145,6 +149,7 @@ $defs:
               items: {enum: [retry rungs]}
             method: {type: string, minLength: 1}
             side: {enum: [same, bound, solved]}
+            kind: {enum: [exact-solve]}
             of: {type: [string, 'null'], pattern: '^T-[0-9]{3}$'}
             registered_in: {type: string, pattern: '^T-[0-9]{3}$'}
             first_certified_in: {type: string, pattern: '^T-[0-9]{3}$'}
@@ -223,9 +228,16 @@ $defs:
         description: >-
           Exact identity OF THE CEILING, never of s(n). A present exact_form says the
           ceiling is an exact algebraic number -- for most open cases it is the integer
-          ceil(sqrt(n)), and for n = 29 a truncated decimal written as a rational. It
-          is evidence about s(n) only when status is proved, which requires this
-          identity and verified_lower_bound.exact_form to coincide.
+          ceil(sqrt(n)), and for n = 29 a truncated decimal written as a rational. An
+          algebraic house's side is written `root(p, low, high)`: p its minimal
+          polynomial in s, highest degree first, as minimal_polynomial writes it, and
+          low and high the side cut down and rounded up at forty places, an interval in
+          which it is p's one root (`devtools.exact_sides.form`, read back exactly by
+          `exact_sides.read_form`); a side of degree two as its closed form,
+          `(a+b*sqrt(d))/c`, d square-free and in lowest terms, as n = 295's
+          `(22+22*sqrt(2))/3`. It is evidence about s(n) only when status is
+          proved, which requires this identity and verified_lower_bound.exact_form to
+          coincide.
       evidence: {$ref: '#/$defs/evidenceRefs'}
   rigidity:
     type: [object, 'null']
@@ -279,7 +291,12 @@ $defs:
       - evidence
     properties:
       value: {type: string, minLength: 1}
-      exact_form: {type: [string, 'null']}
+      exact_form:
+        type: [string, 'null']
+        description: >-
+          The reported side's exact form, written as verified_upper_bound.exact_form is:
+          an algebraic house's side as `root(p, low, high)`, or of degree two as
+          `(a+b*sqrt(d))/c` (`devtools.exact_sides.form`), the same text in both lanes.
       algebraic_degree: {type: [integer, 'null'], minimum: 1}
       minimal_polynomial: {type: [string, 'null']}
       analytically_optimized: {type: [boolean, 'null']}

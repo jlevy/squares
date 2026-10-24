@@ -23,7 +23,8 @@ has three since 2026-10-05, and they are not samples of one population:
   2026-10-05 for the catalogue's packing (T-088), whose two corner blocks join the
   catalogue's others.
 - `packet-derived-facts` (6 records) includes T-174's adopted houses at 68, 84 and 86,
-  T-146's house at 70, Gupta's at 88 and the radical n51. The first three have seven
+  its algebraic house at 70 (T-146's until 23 October 2026), Gupta's at 88 and the
+  radical n51. The first three have seven
   corner blocks in all, each touching two walls. The undilated radical n51 has two
   tilted interior polyomino components.
 

@@ -47,7 +47,8 @@ The sources, one section of the report each:
 - **Regularization owed**: from `atlas/known-best/default-drawings.json`, each count
   whose drawing is `pending` regularization, with the bead its
   `default_drawings.PENDING_ALLOWED` entry names; each decision that still owes runs or
-  an outcome, and each exemption, with its bead; and whatever else the records tier's
+  an outcome, each count whose regularization is owed (`regularization-owed`), and each
+  exemption, with its bead; and whatever else the records tier's
   regularization-state gate fails on. Every new house leaves its count pending until the
   strong generators decide it or a bead owns the runs, so this is where a pass sees what
   its adoptions owe (`campaign/result-import.md`, Adopt a House, Then Regularize It).
@@ -1263,6 +1264,7 @@ def _regularization_owed(
     rows = document.get("states") or []
     pending: list[Item] = []
     decided: list[Item] = []
+    owing: list[Item] = []
     exempt: list[Item] = []
     itemized: set[int] = set()
     for row in rows:
@@ -1299,6 +1301,16 @@ def _regularization_owed(
                     step="run or record what the decision owes, then drop its `owed`",
                 )
             )
+        elif row["state"] == default_drawings.OWED and held is not None and held.owed:
+            bead, owed = _owner(held.owed)
+            owing.append(
+                owned(
+                    f"n = {n} not regularized on its witness, regularization owed: {owed}",
+                    bead,
+                    beads,
+                    step="run the regularization its bead owes, then settle the count again",
+                )
+            )
         elif row["state"] == default_drawings.EXEMPT and held is not None:
             found = default_drawings.BEAD.search(held.evidence)
             exempt.append(
@@ -1309,7 +1321,7 @@ def _regularization_owed(
                     step="decide it once its bead's blocker is resolved",
                 )
             )
-    section.items.extend([*pending, *decided, *exempt])
+    section.items.extend([*pending, *decided, *owing, *exempt])
     problems, listed = gate
     itemized_problem = re.compile(r"n=(\d+)(?: is pending:|: PENDING_ALLOWED names no bead)")
     for problem in problems:
