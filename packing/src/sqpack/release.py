@@ -897,6 +897,14 @@ FIRST_PUBLISHED = PUBLICATION_HISTORY[-1].first_published
 #: The leading entry is proposed for the next publication; confirm its date at first deployment.
 EXPLAINER_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.4.26",
+        first_published="October 24, 2026",
+        result_scope=(
+            "Update the registered result count after the registration of Francisco "
+            "Couzo's #763 certificates at 268 and 303 (T-240)."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.4.25",
         first_published="October 24, 2026",
         result_scope=(
@@ -1456,6 +1464,16 @@ class ReleaseImpactDecision(NamedTuple):
 # New component cuts append decisions here, newest first, alongside their own histories.
 # No impact is invented retrospectively for the published baseline editions.
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
+    ReleaseImpactDecision(
+        component="paper:n11-lower-bounds-explainer",
+        previous_version="v0.4.25",
+        version="v0.4.26",
+        impact="patch",
+        reason=(
+            "Update the registered result count after the registration of Francisco "
+            "Couzo's #763 certificates at 268 and 303 (T-240)."
+        ),
+    ),
     ReleaseImpactDecision(
         component="paper:n11-lower-bounds-explainer",
         previous_version="v0.4.24",
@@ -8422,6 +8440,39 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "revision e5c1c64e: each time twice from this tree and once with that main's "
             "result-requests.yaml swapped in, all 43 files byte-identical across the "
             "three. No PDF was printed; it prints from that HTML. Retain v0.2.7."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The #763 import (think-ptkk): T-240's registration of Francisco Couzo's "
+            "certificates at 268 and 303 as reported, the 194 beyond-horizon rows of the "
+            "couzo-issue763-2026-10-23 and couzo-964ee2b-2026-10-23 sources with their 186 "
+            "supersessions, and #763's request entry, against main b2ea7b09c (#787, #788): "
+            "rendered at link revision ac5fdd52 into empty site directories, twice from "
+            "this tree and once from it with main's results.yaml, result-requests.yaml and "
+            "source-coverage.yaml swapped in, render_n11_optimality_review, "
+            "render_n11_threshold_bound_review and render_packing_methods write all 51 "
+            "files byte-identical across the three. The explainer, counting 239 to 240 "
+            "results, takes v0.4.26 over main's v0.4.25. No PDF was printed for these "
+            "three; each prints from that HTML. Retain v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
 )
