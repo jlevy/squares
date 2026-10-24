@@ -5,8 +5,8 @@ title: "PR #754 (merge): owner answers in the walks (restatements, withdrawn fil
 kind: task
 status: in_progress
 priority: 1
-version: 4
-delegate: c-rev-754-1023
+version: 5
+delegate: c-sync-754-1024
 labels: []
 dependencies: []
 parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
@@ -15,7 +15,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-23T15:53:25.937Z
-updated_at: 2026-10-23T22:18:30.739Z
+updated_at: 2026-10-24T01:05:35.981Z
 started_at: 2026-10-23T15:53:27.712Z
 ---
 
