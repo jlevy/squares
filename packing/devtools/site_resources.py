@@ -141,6 +141,14 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         ),
     ),
     (
+        "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/certificates/n204.cert",
+        "Mykhailo Polkovskyi",
+        (
+            "The lower of the two 204 certificates issue 719's release published, retained"
+            " and replayed here, and the house best packing at 204 (T-231)."
+        ),
+    ),
+    (
         "https://github.com/BuddenPing/square-packing-certificates",
         "PingYou Ltd",
         (

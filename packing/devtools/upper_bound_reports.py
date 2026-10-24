@@ -1408,6 +1408,9 @@ HOUSES: dict[str, Callable[[int], Fraction]] = {
     # Mykhailo Polkovskyi's issue-719 release (think-4h23), derived facts only: T-229 at
     # 105 and 204, beside the 112 rows beyond the corpus its packet also derives.
     "[Mishapolk issue 719 2026-10-22]": _import("mishapolk-issue719-2026-10-22"),
+    # T-231: the release's second 204 file, certificates/n204.cert, which the author
+    # claimed on issue 719 after T-229 was registered (think-h01y), under its own key.
+    "[Mishapolk n204 2026-10-22]": _import("mishapolk-n204-2026-10-22"),
     # T-155: the side of the retained view of Evan Daniel's regularizer at each count.
     "[Daniel regularizer 2026-10-11]": regularized.view_side,
 }

@@ -148,8 +148,17 @@ def test_a_record_file_is_a_complete_styled_canonical_page(records: dict[str, st
 
 def test_every_record_file_is_small(records: dict[str, str]) -> None:
     sizes = {name: len(text.encode()) for name, text in records.items()}
-    # These cases preserve their full algebraic proofs and verified result history.
-    exceptions = {"cases/11.html": 500_000, "cases/17.html": 550_000, "cases/18.html": 350_000}
+    # These cases preserve their full algebraic proofs and verified result history. 204
+    # holds ten verified certificates and a section for each of the six that have been
+    # its house; each house's section lists every other certificate's side, so the page
+    # grows with each adoption. T-231's (think-h01y, 23 October 2026) took it to 320,783
+    # bytes: its section is 20,311 and its register entry 7,206.
+    exceptions = {
+        "cases/11.html": 500_000,
+        "cases/17.html": 550_000,
+        "cases/18.html": 350_000,
+        "cases/204.html": 350_000,
+    }
     for name, size in sizes.items():
         assert size < exceptions.get(name, RECORD_CEILING_BYTES), (name, size)
 

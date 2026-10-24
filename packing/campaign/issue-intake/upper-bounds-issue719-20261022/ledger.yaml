@@ -788,11 +788,13 @@ reports:
     exact_from: facts/n-105.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
       certificates/n-105.cert at 12fc4667 (its header)
   - n: 204
-    printed: '14.8086428305278961'
-    rounding: binary64
-    exact: 882663895519250432/59604644775390625
-    exact_from: facts/n-204.yaml.gz in the mishapolk-issue719-2026-10-22 packet, derived from
-      certificates/n-204.cert at 12fc4667 (its header)
+    printed: '14.808642830514'
+    rounding: up
+    exact: 14808642830513087197802415708703/1000000000000000000000000000000
+    exact_from: 'certificates/n204.cert at 12fc4667 (its header), retained in the mishapolk-n204-2026-10-22
+      packet: the least of the 2 sides the commit states at this count, beside certificates/n-204.cert,
+      the file the issue names (facts/n-204.yaml.gz in the mishapolk-issue719-2026-10-22 packet),
+      which the record registered before the author claimed this one (https://github.com/jlevy/squares/issues/719#issuecomment-6350348588)'
   - n: 330
     printed: '18.6926724444540682'
     rounding: binary64
@@ -1529,7 +1531,14 @@ reports:
     at 1851c2c (05:29:48Z), a minute before the issue, and 447''s at the pin (06:05:07Z).
     366 and 447 are dated by the 06:05:31Z edit that first claimed them; the issue opened
     with the other 120. No other report reached the repository at these counts between those
-    times.'
+    times. At 204 the claim is the least side 1851c2c states there, certificates/n204.cert,
+    since a report keeps one claim a count (#722''s review A, A2); this ledger was re-gathered
+    on 23 October 2026 to read it (think-h01y). The issue names certificates/n-204.cert, which
+    T-229 registered before the author claimed the lower file on 22 October at 20:15:57Z,
+    and which the case adopted on 23 October; T-229 stands as registered, and T-231 registers
+    the lower file, by the same author and from the same commit, and supersedes T-229 at 204.
+    Of the 122 claimed counts, 1851c2c holds a second file only at 105, 204, 753, 754 and
+    790 to 792, and only 204''s is lower. 105 is untouched.'
 exceptions: []
 key_reason_candidates: []
 other_items: []

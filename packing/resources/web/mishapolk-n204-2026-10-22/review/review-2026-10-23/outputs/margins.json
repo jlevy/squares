@@ -1,0 +1,469 @@
+{
+ "program": "margins_t231.py",
+ "program_sha256": "a0a5fbbf829b598360051808402eaee42583b6ee647d25f92b852c4f6acc2686",
+ "python": "3.14.7 (main, Sep 29 2026, 15:01:40) [Clang 22.1.3 ]",
+ "certificate_sha256": "9c5dabc8f2456b0c90650eac5794918c5e52ff90d9e817bd215c9816a88f3e7d",
+ "side": "14808642830513087197802415708703/1000000000000000000000000000000",
+ "side_decimal_40": "14.8086428305130871978024157087030000000000",
+ "side_terminates_at_places": 30,
+ "prints": {
+  "up_12": "14.808642830514",
+  "up_16": "14.8086428305130872",
+  "up_18": "14.808642830513087198",
+  "up_30": "14.808642830513087197802415708703"
+ },
+ "solver": [
+  {
+   "report": "cases/regularized_drawings/think-4h23-2026-10-23/adopt-2026-10-23-n105-204-evand/n-204/report.json.gz",
+   "report_sha256": "68d6c56016ac35999a308773121feece7c55755aed64e444d3a62b6cef788c0f",
+   "input_sha256": "4fa2b3484dec158552cea983cd806e0d8ba372e3c1da298e3bdf1c613ec0344e",
+   "source_witness_sha256": "2533ca0a9392c1325cd76e19a5f6a8be7ca8553176b1951754afa2cec7646261",
+   "S_cert": "14808642830513087197802415708703/1000000000000000000000000000000",
+   "S_cert_equals_side": true,
+   "S_cert_string_equals_header": true,
+   "S_exact_print": "14.808642830513087197654329280397180858229902327763609140301316364",
+   "S_exact_print_places": 63,
+   "ceil30_of_dilated_S_exact_low": "14.808642830513087197802415708703",
+   "ceil30_of_dilated_S_exact_high": "14.808642830513087197802415708703",
+   "side_equals_ceil30_of_dilated_S_exact": true,
+   "side_minus_S_exact": "1.480864283058e-19",
+   "dilation_excess": "1.480864283051e-19",
+   "solved_view_git_blob": "5ee06383eb1d1777d23b309df12de5a289fc9196",
+   "same_view_git_blob": "1937dcf649e6d70f285435e4b8429225409a89fc"
+  },
+  {
+   "report": "/tmp/claude-0/-home-user-squares/f8504540-2b5a-5f78-8968-eb4ffa4c4b64/scratchpad/t231-regrun/n-204/report.json",
+   "report_sha256": "6992f59b5e0c9e02b766881f554a4e455cf0b64e1e98d4df45add519a166a396",
+   "input_sha256": "4fa2b3484dec158552cea983cd806e0d8ba372e3c1da298e3bdf1c613ec0344e",
+   "source_witness_sha256": "2533ca0a9392c1325cd76e19a5f6a8be7ca8553176b1951754afa2cec7646261",
+   "S_cert": "14808642830513087197802415708703/1000000000000000000000000000000",
+   "S_cert_equals_side": true,
+   "S_cert_string_equals_header": true,
+   "S_exact_print": "14.808642830513087197654329280397180858229902327763609140301316364",
+   "S_exact_print_places": 63,
+   "ceil30_of_dilated_S_exact_low": "14.808642830513087197802415708703",
+   "ceil30_of_dilated_S_exact_high": "14.808642830513087197802415708703",
+   "side_equals_ceil30_of_dilated_S_exact": true,
+   "side_minus_S_exact": "1.480864283058e-19",
+   "dilation_excess": "1.480864283051e-19",
+   "solved_view_git_blob": "5ee06383eb1d1777d23b309df12de5a289fc9196",
+   "same_view_git_blob": "1937dcf649e6d70f285435e4b8429225409a89fc"
+  }
+ ],
+ "reports_at_204": [
+  {
+   "report": "Kingbird, David Ellsworth's catalogue (print, 14 places)",
+   "reported": "before 2026-09-30",
+   "print": "14.82287565553229",
+   "side_below_by_at_least": "1.423282501919e-2",
+   "below": true,
+   "kind": "print"
+  },
+  {
+   "report": "T-101, Daniel's exact certificate of the catalogue packing",
+   "reported": "2026-10-05",
+   "side": "118583005244258362363192293067/8000000000000000000000000000",
+   "side_up_16": "14.8228756555322953",
+   "side_below_by": "55596972731281631236800487/3906250000000000000000000000",
+   "side_below_by_approx": "1.423282501921e-2",
+   "below": true
+  },
+  {
+   "report": "T-155, the project's regularized certificate of it",
+   "reported": "2026-10-12",
+   "side": "118583005244258362363192293067/8000000000000000000000000000",
+   "side_up_16": "14.8228756555322953",
+   "side_below_by": "55596972731281631236800487/3906250000000000000000000000",
+   "side_below_by_approx": "1.423282501921e-2",
+   "below": true
+  },
+  {
+   "report": "T-162, Ostashev's #562",
+   "reported": "2026-10-12",
+   "side": "74043316171934782832354950404729823976428779059647971914573074043316171934782832354950404729823976428779059647971914573/5000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+   "side_up_16": "14.8086632343869566",
+   "side_below_by": "102019369346843342871861214823976428779059647971914573074043316171934782832354950404729823976428779059647971914573/5000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+   "side_below_by_approx": "2.040387386937e-5",
+   "below": true
+  },
+  {
+   "report": "T-174, PingYou Ltd's PR #574",
+   "reported": "2026-10-13",
+   "side": "210011961958261867316211719829273226324466485375753766876419707701507615155367262036656807374079264231269969868452943009357965776409326741861504985844149039025069465481859616626976640086264010064320503279931027848471631619309661672904241684557765244610090740127371941028657752211148619535684599488090110674278183168538172975853317232719797577033732171955561835562544066499923496983415673777144735795429098683490571715293739200784008624590309480804705969704385638744814351041949201676482383510953450192562447734460685840625631951955944367273509756242050115856325934754988593746625722607694169263956230427818997903194002578800991693571618515835613335597308253701744746902930977/14181696121672650286451136510245721953238090826512455403345235365557155888310395420244932598042209603285871309863265277442781132168258059612472402293656431375031673341848828044537893044584878696301334239549577137333432805600901124345948277548186284919431499992540295879957631730858885847338265468449486238496032235464114860547188995999551140404064330390225380527945549393050826359528452746859273077805730039659643188787453191580846821530091088038561198782653124003575199896245446250835245990854531684806397033988635276271207732343918498616697241018124733083838623304836561491873055967218719802514514137582340870145271393317251267292664588968095763871139167888624326173482173",
+   "side_up_16": "14.8086632343869566",
+   "side_below_by": "289361538920321505244170352687476592332454954403964388412885946623493396303871324739041541479977652099137804655028957798089185238853177913765165986298982177421545456725097148886665486717385738295939612424276306425688758744793548691581806078673431953782248130514749276298731210019415364161753214661089264695639146987261979770955498471714333541042376061977238539797705092724021874865738209618114555450534056145366575526013636799902534524690173549787100106132947211818600689645480475634885843346888892878844603735514905506133807314057378976505524046925037463429579646458890807141574734393155539320665129874445089208604836143620532914914705499416818224453033378457878493917799072517267740389026868548381/14181696121672650286451136510245721953238090826512455403345235365557155888310395420244932598042209603285871309863265277442781132168258059612472402293656431375031673341848828044537893044584878696301334239549577137333432805600901124345948277548186284919431499992540295879957631730858885847338265468449486238496032235464114860547188995999551140404064330390225380527945549393050826359528452746859273077805730039659643188787453191580846821530091088038561198782653124003575199896245446250835245990854531684806397033988635276271207732343918498616697241018124733083838623304836561491873055967218719802514514137582340870145271393317251267292664588968095763871139167888624326173482173000000000000000000000000000000",
+   "side_below_by_approx": "2.040387386937e-5",
+   "below": true
+  },
+  {
+   "report": "Polkovskyi's #593 (8bb41af)",
+   "reported": "2026-10-13",
+   "side": "7404331617193478283235495040473/500000000000000000000000000000",
+   "side_up_16": "14.8086632343869566",
+   "side_below_by": "20403873869368668574372243/1000000000000000000000000000000",
+   "side_below_by_approx": "2.040387386937e-5",
+   "below": true
+  },
+  {
+   "report": "T-186, Polkovskyi's KKT refinements (70a033f)",
+   "reported": "2026-10-14",
+   "side": "740433161719347828316145172430104761481126338872178671530915993369069066972891707484286255665843382616078162213/50000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+   "side_up_16": "14.8086632343869566",
+   "side_below_by": "1020193693468426024386994954761481126338872178671530915993369069066972891707484286255665843382616078162213/50000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+   "side_below_by_approx": "2.040387386937e-5",
+   "below": true
+  },
+  {
+   "report": "T-193, Daniel's exact algebraic side (#639)",
+   "reported": "2026-10-16",
+   "print": "root of a degree-35 polynomial in [14.808663234387, 14.808663234387] (12 places)",
+   "side_below_by_at_least": "2.040387291280e-5",
+   "below": true,
+   "record_states": "1.48e-99 below T-186's exact side",
+   "side_below_by_approx_from_t186": "2.040387386937e-5"
+  },
+  {
+   "report": "T-226, Couzo's #670",
+   "reported": "2026-10-17",
+   "side": "45044217780850246618141/3041751595240000000000",
+   "side_up_16": "14.8086444176899239",
+   "side_below_by": "120694941867163207014893175364965657/76043789881000000000000000000000000000000",
+   "side_below_by_approx": "1.587176836610e-6",
+   "below": true
+  },
+  {
+   "report": "T-228, Couzo's #675",
+   "reported": "2026-10-18",
+   "side": "101859759444979981360793459/6878398651426000000000000",
+   "side_up_16": "14.8086443672267897",
+   "side_below_by": "5285064729447892688739226123374219761/3439199325713000000000000000000000000000000",
+   "side_below_by_approx": "1.536713702499e-6",
+   "below": true
+  },
+  {
+   "report": "T-223, Couzo's #678",
+   "reported": "2026-10-18",
+   "side": "141654921219558922887849/9565692327860000000000",
+   "side_up_16": "14.8086428419812473",
+   "side_below_by": "5485044518625362290154268413431721/478284616393000000000000000000000000000000",
+   "side_below_by_approx": "1.146816002570e-8",
+   "below": true
+  },
+  {
+   "report": "T-225, Daniel's regularized lists",
+   "reported": "2026-10-20",
+   "side": "14808642840591493923068442871459/1000000000000000000000000000000",
+   "side_up_16": "14.8086428405914940",
+   "side_below_by": "2519601681316506790689/250000000000000000000000000000",
+   "side_below_by_approx": "1.007840672527e-8",
+   "below": true
+  },
+  {
+   "report": "T-229, Polkovskyi's #719 n-204.cert, the house",
+   "reported": "2026-10-22 (1851c2c, the same commit)",
+   "side": "882663895519250432/59604644775390625",
+   "side_up_16": "14.8086428305278967",
+   "side_below_by": "14809457954896291297/1000000000000000000000000000000",
+   "side_below_by_approx": "1.480945795490e-11",
+   "below": true
+  }
+ ],
+ "custody": {
+  "t186_clone_equals_packet_fact_side": true,
+  "t229_clone_equals_packet_fact_side": true
+ },
+ "below_every_report": true,
+ "later_counts": {
+  "rows": [
+   {
+    "n": 205,
+    "lane": "verified_upper_bound",
+    "basis": "exact",
+    "above_side_by": "1.580831561100e-2",
+    "above": true
+   },
+   {
+    "n": 205,
+    "lane": "reported_upper_bound",
+    "basis": "print 14.82445114612408 less one unit in its last place",
+    "above_side_by": "1.580831561098e-2",
+    "above": true
+   },
+   {
+    "n": 206,
+    "lane": "verified_upper_bound",
+    "basis": "exact",
+    "above_side_by": "5.151583287882e-2",
+    "above": true
+   },
+   {
+    "n": 206,
+    "lane": "reported_upper_bound",
+    "basis": "exact",
+    "above_side_by": "5.151583287882e-2",
+    "above": true
+   },
+   {
+    "n": 207,
+    "lane": "verified_upper_bound",
+    "basis": "exact",
+    "above_side_by": "7.231754104491e-2",
+    "above": true
+   },
+   {
+    "n": 207,
+    "lane": "reported_upper_bound",
+    "basis": "exact",
+    "above_side_by": "7.231754104491e-2",
+    "above": true
+   },
+   {
+    "n": 208,
+    "lane": "verified_upper_bound",
+    "basis": "exact",
+    "above_side_by": "1.158759415163e-1",
+    "above": true
+   },
+   {
+    "n": 208,
+    "lane": "reported_upper_bound",
+    "basis": "exact",
+    "above_side_by": "1.158759415163e-1",
+    "above": true
+   },
+   {
+    "n": 209,
+    "lane": "verified_upper_bound",
+    "basis": "exact",
+    "above_side_by": "1.375803959334e-1",
+    "above": true
+   },
+   {
+    "n": 209,
+    "lane": "reported_upper_bound",
+    "basis": "exact",
+    "above_side_by": "1.375803959334e-1",
+    "above": true
+   },
+   {
+    "n": 210,
+    "lane": "verified_upper_bound",
+    "basis": "exact",
+    "above_side_by": "1.643582860745e-1",
+    "above": true
+   },
+   {
+    "n": 210,
+    "lane": "reported_upper_bound",
+    "basis": "exact",
+    "above_side_by": "1.643582860745e-1",
+    "above": true
+   },
+   {
+    "n": 211,
+    "lane": "verified_upper_bound",
+    "basis": "exact",
+    "above_side_by": "1.849067957863e-1",
+    "above": true
+   },
+   {
+    "n": 211,
+    "lane": "reported_upper_bound",
+    "basis": "exact",
+    "above_side_by": "1.849067957863e-1",
+    "above": true
+   },
+   {
+    "n": 212,
+    "lane": "verified_upper_bound",
+    "basis": "exact",
+    "above_side_by": "1.913571694869e-1",
+    "above": true
+   },
+   {
+    "n": 212,
+    "lane": "reported_upper_bound",
+    "basis": "exact",
+    "above_side_by": "1.913571694869e-1",
+    "above": true
+   },
+   {
+    "n": 213,
+    "lane": "verified_upper_bound",
+    "basis": "exact",
+    "above_side_by": "1.913571694869e-1",
+    "above": true
+   },
+   {
+    "n": 213,
+    "lane": "reported_upper_bound",
+    "basis": "exact",
+    "above_side_by": "1.913571694869e-1",
+    "above": true
+   },
+   {
+    "n": 214,
+    "lane": "verified_upper_bound",
+    "basis": "exact",
+    "above_side_by": "1.913571694869e-1",
+    "above": true
+   },
+   {
+    "n": 214,
+    "lane": "reported_upper_bound",
+    "basis": "exact",
+    "above_side_by": "1.913571694869e-1",
+    "above": true
+   },
+   {
+    "n": 215,
+    "lane": "verified_upper_bound",
+    "basis": "exact",
+    "above_side_by": "1.913571694869e-1",
+    "above": true
+   },
+   {
+    "n": 215,
+    "lane": "reported_upper_bound",
+    "basis": "exact",
+    "above_side_by": "1.913571694869e-1",
+    "above": true
+   },
+   {
+    "n": 216,
+    "lane": "verified_upper_bound",
+    "basis": "exact",
+    "above_side_by": "1.913571694869e-1",
+    "above": true
+   },
+   {
+    "n": 216,
+    "lane": "reported_upper_bound",
+    "basis": "exact",
+    "above_side_by": "1.913571694869e-1",
+    "above": true
+   },
+   {
+    "n": 217,
+    "lane": "verified_upper_bound",
+    "basis": "exact",
+    "above_side_by": "1.913571694869e-1",
+    "above": true
+   },
+   {
+    "n": 217,
+    "lane": "reported_upper_bound",
+    "basis": "exact",
+    "above_side_by": "1.913571694869e-1",
+    "above": true
+   },
+   {
+    "n": 218,
+    "lane": "verified_upper_bound",
+    "basis": "exact",
+    "above_side_by": "1.913571694869e-1",
+    "above": true
+   },
+   {
+    "n": 218,
+    "lane": "reported_upper_bound",
+    "basis": "exact",
+    "above_side_by": "1.913571694869e-1",
+    "above": true
+   },
+   {
+    "n": 219,
+    "lane": "verified_upper_bound",
+    "basis": "exact",
+    "above_side_by": "1.913571694869e-1",
+    "above": true
+   },
+   {
+    "n": 219,
+    "lane": "reported_upper_bound",
+    "basis": "exact",
+    "above_side_by": "1.913571694869e-1",
+    "above": true
+   },
+   {
+    "n": 220,
+    "lane": "verified_upper_bound",
+    "basis": "exact",
+    "above_side_by": "1.913571694869e-1",
+    "above": true
+   },
+   {
+    "n": 220,
+    "lane": "reported_upper_bound",
+    "basis": "exact",
+    "above_side_by": "1.913571694869e-1",
+    "above": true
+   },
+   {
+    "n": 221,
+    "lane": "verified_upper_bound",
+    "basis": "exact",
+    "above_side_by": "1.913571694869e-1",
+    "above": true
+   },
+   {
+    "n": 221,
+    "lane": "reported_upper_bound",
+    "basis": "exact",
+    "above_side_by": "1.913571694869e-1",
+    "above": true
+   },
+   {
+    "n": 222,
+    "lane": "verified_upper_bound",
+    "basis": "exact",
+    "above_side_by": "1.913571694869e-1",
+    "above": true
+   },
+   {
+    "n": 222,
+    "lane": "reported_upper_bound",
+    "basis": "exact",
+    "above_side_by": "1.913571694869e-1",
+    "above": true
+   },
+   {
+    "n": 223,
+    "lane": "verified_upper_bound",
+    "basis": "exact",
+    "above_side_by": "1.913571694869e-1",
+    "above": true
+   },
+   {
+    "n": 223,
+    "lane": "reported_upper_bound",
+    "basis": "exact",
+    "above_side_by": "1.913571694869e-1",
+    "above": true
+   },
+   {
+    "n": 224,
+    "lane": "verified_upper_bound",
+    "basis": "exact",
+    "above_side_by": "1.913571694869e-1",
+    "above": true
+   },
+   {
+    "n": 224,
+    "lane": "reported_upper_bound",
+    "basis": "exact",
+    "above_side_by": "1.913571694869e-1",
+    "above": true
+   }
+  ],
+  "all_above": true,
+  "least": {
+   "n": 205,
+   "lane": "reported_upper_bound",
+   "basis": "print 14.82445114612408 less one unit in its last place",
+   "above_side_by": "1.580831561098e-2",
+   "above": true
+  },
+  "beyond_224": "every bound at m >= 225 is at least sqrt(m) >= 15 by area"
+ }
+}
