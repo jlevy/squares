@@ -7908,6 +7908,36 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "version."
         ),
     ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=("packing/devtools/site_navigation.py",),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The homepage keeps the name its renderer gives it, The Squares Project, as "
+            "its title and link-preview title instead of its menu label, Overview (the "
+            "owner, 23 October). `navigation_title` changes only for the site root's "
+            "address, which no paper has and no paper's trail reaches. Rendered on 23 "
+            "October from this tree into an empty site directory with source links "
+            "pinned to 44df28b07 (69 files): every paper's Markdown is byte-identical "
+            "to main 44df28b07's, and each paper's HTML is identical to the render of "
+            "PR 746's head but for that head's later compaction of the inlined "
+            "bootstrap. Every paper keeps its version."
+        ),
+    ),
 )
 
 

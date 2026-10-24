@@ -46,6 +46,7 @@ WHEEL = probe(PROBES, "site_atlas_follow/wheel")
 PREPAINT = probe(PROBES, "site_atlas_follow/prepaint")
 QUIET = probe(PROBES, "site_atlas_follow/quiet")
 FRAMES = probe(PROBES, "site_atlas_follow/frames")
+DRAG = probe(PROBES, "site_atlas_follow/drag")
 UNVEIL = probe(PROBES, "site_atlas_follow/unveil")
 ROWS = probe(PROBES, "site_atlas_follow/rows")
 SEEK = probe(PROBES, "site_atlas_follow/seek")
@@ -313,6 +314,37 @@ def test_the_pan_sets_off_from_rest_and_gathers_speed_smoothly(
     assert all(speed >= -0.01 for speed in speeds[first:launched]), speeds
     for one, other in pairwise(speeds):
         assert abs(other - one) < 0.1 * typical, (one, other, typical)
+
+
+@pytest.mark.parametrize("name", ["atlas.html", "index.html"])
+def test_the_triangle_at_rest_at_the_end_still_pans_by_hand(
+    browser: Any, site: str, name: str
+) -> None:
+    """At the end of its journey the triangle stands at its left edge, and a finger
+    dragged sideways still pans it (the owner, 2026-10-23: on a phone it could not be
+    panned once scrolled to the end). The pan holds while the reader waits, and never
+    passes the triangle's left edge."""
+    page = _open(browser, site + name, PHONE)
+    try:
+        down = _scroll(page, TURN)
+        rest = _read(page)
+        page.evaluate(DRAG, {"by": -150})
+        dragged = _read(page)
+        page.evaluate(FRAMES, {"count": 30})
+        waited = _read(page)
+        page.evaluate(DRAG, {"by": 400})
+        back = _read(page)
+    finally:
+        page.close()
+    assert down
+    assert rest["follow"] == "scroll"
+    assert abs(rest["lastLeft"]) < 0.005
+    # A finger moved left carries the triangle left past its slack, to show its right.
+    assert dragged["pan"] - rest["pan"] == pytest.approx(150 - 16, abs=2)
+    assert waited["pan"] == pytest.approx(dragged["pan"], abs=0.5)
+    # Moved right again, it comes back to its left edge and no further.
+    assert back["pan"] == pytest.approx(rest["pan"], abs=0.5)
+    assert abs(back["lastLeft"]) < 0.005
 
 
 def test_scrolling_back_up_retraces_the_zoom_and_the_pan(browser: Any, site: str) -> None:
