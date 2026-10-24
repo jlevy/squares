@@ -32678,9 +32678,9 @@ results:
     registered: '2026-10-24'
     landed: '2026-10-24'
     headline: >-
-      `s(2), s(3), s(4) = 2` and `s(5) = 2 + √2/2 = 2.70710678…`, the classical first cases
+      `s(2), s(3), s(4) = 2` and `s(5) = 2 + 1/√2 = 2.70710678…`, the classical first cases
     claim: >-
-      s(2) = s(3) = s(4) = 2 and s(5) = 2 + √2/2 = 2.70710678118654752440…, the exact values
+      s(2) = s(3) = s(4) = 2 and s(5) = 2 + 1/√2 = 2.70710678118654752440…, the exact values
       at the first four counts above one square, which the case records n-002 to n-005 hold
       on the published proofs they cite.
 
@@ -32713,7 +32713,7 @@ results:
       score: 3
       rationale: >-
         Scored as its claim, as the rubric reads a result by others: every exact value
-        closes a case, and Göbel's s(5) = 2 + √2/2, the first count at which a tilted square
+        closes a case, and Göbel's s(5) = 2 + 1/√2, the first count at which a tilted square
         beats the grid, is a substantive case result. s(2) to s(4), consequences of one
         unavoidable point and of area, would alone be S1, a routine consequence. The
         record's other published exact values take their theorem's score, T-006 and T-008
@@ -32740,8 +32740,9 @@ results:
       lower half is the side-2 bound Friedman's Theorem 1 states, replayed exactly here
       (E-side2-center-lower); at n = 4 it is the area bound, and at n = 2 to 4 the upper
       half is the grid, both replayed exactly by the basic-bounds checker (E-basic-area-lower,
-      E-basic-grid-upper). These are the evidence entries the four case records cite. The
-      entry stands at C0, the minimum over its parts, which is the lower half at n = 5: the
+      E-basic-grid-upper). These are the evidence entries the four case records cite.
+
+      The entry stands at C0, the minimum over its parts, which is the lower half at n = 5: the
       checker's claim pools also count the area bound there, and at n = 2 and 3, where it
       falls short of the value, and so derive more than that half holds. The Lean proofs
       are T-238's and are not cited here.
@@ -32775,9 +32776,9 @@ results:
     registered: '2026-10-24'
     landed: '2026-10-24'
     headline: >-
-      `s(2), s(3), s(4) = 2` and `s(5) = 2 + √2/2 = 2.70710678…`, in Lean, by chelokot and by Daniel
+      `s(2), s(3), s(4) = 2` and `s(5) = 2 + 1/√2 = 2.70710678…`, in Lean, by chelokot and by Daniel
     claim: >-
-      s(2) = s(3) = s(4) = 2 and s(5) = 2 + √2/2 = 2.70710678118654752440…, proved in Lean 4
+      s(2) = s(3) = s(4) = 2 and s(5) = 2 + 1/√2 = 2.70710678118654752440…, proved in Lean 4
       twice, by chelokot and by Evan Daniel: a formalization of T-237, the classical values
       the case records hold by published proofs, and the first proof-assistant routes to
       them the record holds.
@@ -32787,7 +32788,9 @@ results:
       (1, 1 + d), (1 + d, 1) and (1 + d, 1 + d) with d = √2/2, and s2_eq_two, s3_eq_two and
       s4_eq_two, IsMinimumSide n 2 for n = 2, 3 and 4, where IsMinimumSide n s says that n
       closed unit squares, each translated and rotated, fit in [0, s]^2 with pairwise
-      disjoint interiors and fit in no smaller side. This repository built the archive at
+      disjoint interiors and fit in no smaller side.
+
+      This repository built the archive at
       the pin on 2 October 2026 for T-086, and that build's log prints these theorems'
       axioms, propext, Classical.choice and Quot.sound; no receipt names them yet. chelokot,
       [square-packing-archive](https://github.com/chelokot/square-packing-archive/tree/753079eb37d8d16225a5dc1f56e493a3c3b243f4/formal/SquarePackingArchive/Records),
@@ -32878,8 +32881,8 @@ results:
       registered result then held s(2) to s(5) for a formalization to name. The owner
       decided on 24 October (think-4o9c) to register the published proofs first, as T-237,
       and this entry as a formalization naming it; c-land-750-1024 registered both on 24
-      October (think-ehx5). The published date is chelokot's s5_eq_goebel, 29 August 2026
-      (UTC); s2_eq_two to s4_eq_two are of 16 August and Daniel's route of 21 October.
+      October (think-ehx5). The published date is chelokot's s5_eq_goebel, 29 August 2026;
+      s2_eq_two to s4_eq_two are of 16 August and Daniel's route of 21 October.
 
       The triage said the 2 October build printed axioms for squareMinusTwo only; its
       retained build.log prints Audit.lean's axioms for all seven of these theorems (lines
