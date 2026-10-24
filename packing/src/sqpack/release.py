@@ -2583,6 +2583,11 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "gains the twin reader): rendered at link revision 3480b5fd into empty site "
             "directories, twice from this tree at 85c6cd7f and twice with that main's "
             "upper_bound_reports.py swapped in and the new module set aside (69 files "
+            "each), every file byte-identical across all four. Measured once more after "
+            "review A of #796 (the wall enlargement's expected margin, the row helper's name) "
+            "and the merge of main dd0061553 (#793): rendered at link revision dd006155, "
+            "twice from this tree at 4147f3f9 and twice with that main's "
+            "upper_bound_reports.py swapped in and the new module set aside (69 files "
             "each), every file byte-identical across all four. No PDF was printed; each "
             "prints from that HTML. Retain v0.4.27, v0.1.11, v0.1.4 and v0.2.7."
         ),
