@@ -702,6 +702,7 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [Feature: Beyond-Horizon Rows Above n = 1024](docs/project/specs/active/plan-2026-10-24-rows-above-1024.md) | implementation plan | current | transient | — |
 | [wand125’s Fine-Net Certificate for $s(31) \ge 2391/400$: Mathematical Review](docs/project/reviews/review-2026-10-23-wand125-n31-fine-net.md) | dated review record | record | retained | — |
 | [wand125’s Fine-Net Lower Bounds of #446 at n = 19, 20, 26 and 27: Mathematical Review](docs/project/reviews/review-2026-10-23-wand125-446-fine-net.md) | dated review record | record | retained | — |
 | [Feature: News Feed of Every Merged Pull Request](docs/project/specs/active/plan-2026-10-23-news-pr-feed.md) | implementation plan | current | transient | — |
