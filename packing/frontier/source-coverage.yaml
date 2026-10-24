@@ -3945,6 +3945,16 @@ sources:
     2026) and the square 10 + 7 sqrt(2) of 376 (less one square at 375), which the owner counts as
     an earlier report beyond 324 (jlevy/squares#613, think-8krd), so each stays listed as printed,
     marked above-classical-construction, and holds no count.
+    On 24 October 2026 its row at 335, 18.822875655543559, was decided exactly
+    (devtools.couzo_decimal_decisions, think-rx26; receipts/couzo-8-october-decisions.json in
+    the mishapolk-issue732-f1ceee4-2026-10-23 packet). Read literally, every printed centre and
+    angle, the poses are not a packing at the printed side: 21 squares cross a wall, the worst by
+    7.77e-16. With the 196 angles below 1e-10 read as 0, as the author's 9 October certificate
+    reads them, they pack exactly at it, so the row reports a packing that exists at its print
+    and stays listed as printed. Mykhailo Polkovskyi's f1ceee4 row there, at least 1.61e-12
+    below on either reading, supersedes it (mishapolk-issue732-f1ceee4-2026-10-23). At 336 and
+    337 neither reading packs at the print, and at 341, 373 and 374 the poses pack with the
+    near-axis angles at 0; 02f9690's rows had superseded all five.
 - id: couzo-extended-range-updates-2026-10-08
   title: Francisco Couzo's later decimal reports at n=375 and n=378
   role: source-repository
@@ -9716,6 +9726,183 @@ sources:
     constructions with no certificate file and deletions from Friedman's constructions
     (beyond_horizon_replay.WALKS). The 5,078 rows above 1024 wait on the owner (think-f2io).
   claims_record: resources/web/mishapolk-issue732-2026-10-22/acquisition/beyond-horizon-rows.json
+- id: mishapolk-issue732-f1ceee4-2026-10-23
+  title: Mykhailo Polkovskyi's 138 beyond-horizon certificates of issue 732's comment at f1ceee4
+  role: source-repository
+  url: https://github.com/Mishapolk/square-packing-records/tree/f1ceee4c1dd69f97d8e50e6ddaf1a14084dceda7/certificates/0000-0999
+  local: resources/web/mishapolk-issue732-f1ceee4-2026-10-23/
+  source_key: '[Mishapolk issue 732 f1ceee4 2026-10-23]'
+  scope:
+    n_values:
+    - 328
+    - 335
+    - 343
+    - 365
+    - 404
+    - 410
+    - 413
+    - 454
+    - 455
+    - 456
+    - 458
+    - 459
+    - 463
+    - 490
+    - 496
+    - 497
+    - 498
+    - 500
+    - 501
+    - 502
+    - 504
+    - 505
+    - 509
+    - 535
+    - 544
+    - 545
+    - 546
+    - 547
+    - 548
+    - 549
+    - 550
+    - 554
+    - 582
+    - 584
+    - 591
+    - 592
+    - 593
+    - 594
+    - 596
+    - 597
+    - 598
+    - 599
+    - 600
+    - 602
+    - 631
+    - 633
+    - 637
+    - 640
+    - 643
+    - 644
+    - 645
+    - 646
+    - 647
+    - 648
+    - 651
+    - 653
+    - 654
+    - 682
+    - 684
+    - 689
+    - 691
+    - 692
+    - 694
+    - 695
+    - 696
+    - 698
+    - 699
+    - 700
+    - 702
+    - 735
+    - 736
+    - 737
+    - 742
+    - 743
+    - 744
+    - 745
+    - 746
+    - 747
+    - 748
+    - 749
+    - 750
+    - 752
+    - 756
+    - 790
+    - 791
+    - 792
+    - 797
+    - 798
+    - 799
+    - 800
+    - 801
+    - 802
+    - 803
+    - 804
+    - 805
+    - 806
+    - 807
+    - 808
+    - 809
+    - 813
+    - 814
+    - 850
+    - 854
+    - 855
+    - 856
+    - 857
+    - 858
+    - 859
+    - 860
+    - 862
+    - 863
+    - 864
+    - 865
+    - 871
+    - 873
+    - 909
+    - 913
+    - 914
+    - 915
+    - 916
+    - 917
+    - 918
+    - 919
+    - 923
+    - 924
+    - 926
+    - 970
+    - 975
+    - 976
+    - 977
+    - 978
+    - 979
+    - 980
+    - 985
+    - 986
+    - 987
+    - 988
+    - 989
+  reviewed: '2026-10-24'
+  source_date: '2026-10-23'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/mishapolk-issue732-f1ceee4-2026-10-23/README.md
+  - resources/web/mishapolk-issue732-f1ceee4-2026-10-23/acquisition/beyond-horizon-rows.json
+  evidence:
+  - E-mishapolk-732-f1ceee4-beyond-horizon-report
+  notes: >-
+    The release the author's comment on issue 732 of 2026-10-23T20:35:12Z reports
+    (issuecomment-6374211504): the 138 certificates f1ceee4 rewrites at 328 to 989,
+    certificates/0000-0999/nN.cert, retained under the MIT licence of 17cc220 and held to
+    certified_bounds.json, the index the commit keeps current (it leaves manifest.json as
+    7b6366f wrote it). The ledger of 24 October for f1ceee4
+    (campaign/issue-intake/upper-bounds-issue732-f1ceee4-20261024), every count walked in
+    report order from starts frozen at main 0bbb0a2c4 with Göbel's construction beside each
+    row, records all 138, each the count's current row at its certificate's exact side
+    rounded up at 12 places, never the index's print, which rounds to the nearest place and
+    lies one unit below at 70 of them. They supersede issue 715's (59), issue 732's own
+    17cc220 rows (47), issue 719's (21), couzo-index-2026-10-15's (9),
+    couzo-verified-bounds-2026-10-14's (1) and couzo-extended-range-reports-2026-10-08's at 335 (whose decimal poses pack
+    exactly at their print with the near-axis angles read as 0,
+    receipts/couzo-8-october-decisions.json), by 8.09e-13 (924, at another 12-place print) to 8.59e-4 (747). The packet's filtered exact
+    replay decided every one on two routes with all six controls refused
+    (receipts/filtered-exact-replay.json, devtools.beyond_horizon_replay), and every side is
+    below Göbel's construction at its count. At 985 the walk
+    passes over Couzo's 4e4c8ce deletion bound, an earlier report with no row by the D6 answer
+    (think-f2io). The three later commits, 34e59f3, c0bf150 and 7e82c64, change only counts in
+    the corpus and are not recorded (receipts/later-commits.json).
+  claims_record: resources/web/mishapolk-issue732-f1ceee4-2026-10-23/acquisition/beyond-horizon-rows.json
 
 selected_overrides:
 - n: 29
@@ -12531,7 +12718,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '18.822875655543559'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-1545
 - n: 336
   source_id: couzo-extended-range-reports-2026-10-08
@@ -15172,7 +15360,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '31.920310217041'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-nj7h
 - n: 986
   source_id: couzo-verified-bounds-2026-10-14
@@ -16590,28 +16779,32 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '18.614368938513'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 343
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '18.977575126267'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 365
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '19.614368938513'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 404
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '20.614368938513'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 417
   source_id: couzo-issue715-2026-10-21
@@ -16626,7 +16819,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '21.848427413955'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 456
   source_id: couzo-issue715-2026-10-21
@@ -16641,14 +16835,16 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '21.903616797192'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 459
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '21.937022304151'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 461
   source_id: couzo-issue715-2026-10-21
@@ -16663,21 +16859,24 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '21.971254044975'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 496
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '22.822875655559'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 497
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '22.823102656285'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 499
   source_id: couzo-issue715-2026-10-21
@@ -16692,21 +16891,24 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '22.887841512273'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 501
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '22.887841512273'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 502
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '22.933269925480'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 503
   source_id: couzo-issue715-2026-10-21
@@ -16720,14 +16922,16 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '22.961828398888'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 505
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '22.964182800913'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 506
   source_id: couzo-issue715-2026-10-21
@@ -16742,49 +16946,56 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '22.993588501431'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 545
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '23.883414761903'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 546
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '23.887841512273'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 547
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '23.898819144794'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 548
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '23.943933771540'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 549
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '23.955501804754'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 550
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '23.960681444798'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 553
   source_id: couzo-issue715-2026-10-21
@@ -16799,28 +17010,32 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '23.986307325908'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 592
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '24.883414761903'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 593
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '24.887841512273'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 594
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '24.898819144794'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 595
   source_id: couzo-issue715-2026-10-21
@@ -16834,14 +17049,16 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '24.950690418637'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 598
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '24.954250129268'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 599
   source_id: couzo-issue715-2026-10-21
@@ -16856,7 +17073,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '24.978172747238'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 601
   source_id: couzo-issue715-2026-10-21
@@ -16871,14 +17089,16 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '24.988237878425'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 643
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '25.898819144794'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 645
   source_id: couzo-issue715-2026-10-21
@@ -16941,14 +17161,16 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '25.994801642508'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 694
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '26.898819144794'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 696
   source_id: couzo-issue715-2026-10-21
@@ -16979,7 +17201,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '26.963723854128'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 702
   source_id: couzo-issue715-2026-10-21
@@ -17002,21 +17225,24 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '27.884019388658'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 748
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '27.884019388658'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 749
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '27.884019388658'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 750
   source_id: couzo-issue715-2026-10-21
@@ -17063,42 +17289,48 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '28.825777528963'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 802
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '28.827439471389'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 803
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '28.827585222385'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 804
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '28.884019388658'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 805
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '28.902673974184'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 806
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '28.902673974184'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 807
   source_id: couzo-issue715-2026-10-21
@@ -17113,7 +17345,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '28.931498747933'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 809
   source_id: couzo-issue715-2026-10-21
@@ -17151,28 +17384,32 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '29.825571500168'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 859
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '29.825571500168'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 860
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '29.827585222385'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 863
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '29.902673974184'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 864
   source_id: couzo-issue715-2026-10-21
@@ -17187,7 +17424,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '29.931498747933'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 866
   source_id: couzo-issue715-2026-10-21
@@ -17249,28 +17487,32 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '29.992265777039'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 917
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '30.825571499902'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 918
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '30.825571499902'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 919
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '30.827585222385'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 923
   source_id: couzo-issue715-2026-10-21
@@ -17285,7 +17527,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '30.931498747933'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 925
   source_id: couzo-issue715-2026-10-21
@@ -17300,7 +17543,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '30.942070418091'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 927
   source_id: couzo-issue715-2026-10-21
@@ -17339,28 +17583,32 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '31.825090165859'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 979
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '31.825090165859'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 980
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '31.827585222385'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 987
   source_id: couzo-issue715-2026-10-21
   claim: upper-bound
   value: '31.941797078452'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-cyal
 - n: 989
   source_id: couzo-issue715-2026-10-21
@@ -19120,7 +19368,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '20.7781745930728796'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-xyhn
 - n: 412
   source_id: mishapolk-issue719-2026-10-22
@@ -19134,7 +19383,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '20.8316633653748782'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-xyhn
 - n: 417
   source_id: mishapolk-issue719-2026-10-22
@@ -19213,14 +19463,16 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '21.8284271247681022'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-xyhn
 - n: 456
   source_id: mishapolk-issue719-2026-10-22
   claim: upper-bound
   value: '21.8813062181121204'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-xyhn
 - n: 460
   source_id: mishapolk-issue719-2026-10-22
@@ -19241,14 +19493,16 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '22.6568542495151204'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-xyhn
 - n: 498
   source_id: mishapolk-issue719-2026-10-22
   claim: upper-bound
   value: '22.8284271247691329'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-xyhn
 - n: 499
   source_id: mishapolk-issue719-2026-10-22
@@ -19291,7 +19545,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '23.8284271247704797'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-xyhn
 - n: 551
   source_id: mishapolk-issue719-2026-10-22
@@ -19334,7 +19589,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '24.6776695296884534'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-xyhn
 - n: 591
   source_id: mishapolk-issue719-2026-10-22
@@ -19349,7 +19605,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '24.9497474683309116'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-xyhn
 - n: 601
   source_id: mishapolk-issue719-2026-10-22
@@ -19379,7 +19636,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '25.7781745930779883'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-xyhn
 - n: 640
   source_id: mishapolk-issue719-2026-10-22
@@ -19408,7 +19666,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '25.8994949366377160'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-xyhn
 - n: 649
   source_id: mishapolk-issue719-2026-10-22
@@ -19437,7 +19696,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '26.6568542495058909'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-xyhn
 - n: 684
   source_id: mishapolk-issue719-2026-10-22
@@ -19452,7 +19712,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '26.7781745930789777'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-xyhn
 - n: 691
   source_id: mishapolk-issue719-2026-10-22
@@ -19467,7 +19728,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '26.8284271247731456'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-xyhn
 - n: 693
   source_id: mishapolk-issue719-2026-10-22
@@ -19490,7 +19752,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '26.9497474683329111'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-xyhn
 - n: 701
   source_id: mishapolk-issue719-2026-10-22
@@ -19533,7 +19796,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '27.6568542495202669'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-xyhn
 - n: 737
   source_id: mishapolk-issue719-2026-10-22
@@ -19556,14 +19820,16 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '27.7989898732512834'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-xyhn
 - n: 744
   source_id: mishapolk-issue719-2026-10-22
   claim: upper-bound
   value: '27.7989898732513590'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-xyhn
 - n: 745
   source_id: mishapolk-issue719-2026-10-22
@@ -19578,7 +19844,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '27.8284271247742003'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-xyhn
 - n: 753
   source_id: mishapolk-issue719-2026-10-22
@@ -19643,7 +19910,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '28.6568542495212151'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-xyhn
 - n: 797
   source_id: mishapolk-issue719-2026-10-22
@@ -19674,7 +19942,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '28.7989898732523347'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-xyhn
 - n: 810
   source_id: mishapolk-issue719-2026-10-22
@@ -21532,7 +21801,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '29.656854249528'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-yfoo
 - n: 854
   source_id: couzo-index-2026-10-15
@@ -21579,7 +21849,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '29.899494936647'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-yfoo
 - n: 863
   source_id: couzo-index-2026-10-15
@@ -21692,7 +21963,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '30.656854249528'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-yfoo
 - n: 913
   source_id: couzo-index-2026-10-15
@@ -21707,7 +21979,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '30.778174593089'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-yfoo
 - n: 915
   source_id: couzo-index-2026-10-15
@@ -21844,21 +22117,24 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '31.656854249528'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-yfoo
 - n: 975
   source_id: couzo-index-2026-10-15
   claim: upper-bound
   value: '31.778174593089'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-yfoo
 - n: 976
   source_id: couzo-index-2026-10-15
   claim: upper-bound
   value: '31.778174593090'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-yfoo
 - n: 977
   source_id: couzo-index-2026-10-15
@@ -21918,7 +22194,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '31.920310216821'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-yfoo
 - n: 987
   source_id: couzo-index-2026-10-15
@@ -21933,7 +22210,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '31.949747468406'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-yfoo
 - n: 990
   source_id: couzo-index-2026-10-15
@@ -22369,7 +22647,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '23.656854249516'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 539
   source_id: mishapolk-issue732-2026-10-22
@@ -22390,7 +22669,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '24.656854249516'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 583
   source_id: mishapolk-issue732-2026-10-22
@@ -22411,21 +22691,24 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '24.828427124771'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 599
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '24.959619792263'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 631
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '25.656854249516'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 632
   source_id: mishapolk-issue732-2026-10-22
@@ -22439,42 +22722,48 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '25.677669529689'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 640
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '25.828427124771'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 645
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '25.946623458826'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 646
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '25.946653181671'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 647
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '25.946936912812'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 648
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '25.959619775225'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 649
   source_id: mishapolk-issue732-2026-10-22
@@ -22488,14 +22777,16 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '25.981703321304'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 653
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '25.992652674145'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 683
   source_id: mishapolk-issue732-2026-10-22
@@ -22509,14 +22800,16 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '26.677669529689'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 691
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '26.828427124771'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 693
   source_id: mishapolk-issue732-2026-10-22
@@ -22530,14 +22823,16 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '26.899494936638'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 696
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '26.946623458826'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 697
   source_id: mishapolk-issue732-2026-10-22
@@ -22551,49 +22846,56 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '26.946936912812'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 702
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '26.976011322963'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 735
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '27.656854249506'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 737
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '27.677669529689'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 742
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '27.778174593079'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 745
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '27.828427124774'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 750
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '27.911195756382'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 751
   source_id: mishapolk-issue732-2026-10-22
@@ -22607,63 +22909,72 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '27.931659253271'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 756
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '27.976780205512'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 790
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '28.656854249506'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 791
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '28.656854249521'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 797
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '28.778174593079'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 798
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '28.798989873252'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 799
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '28.798989873252'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 807
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '28.924694845693'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 809
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '28.933954128802'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 810
   source_id: mishapolk-issue732-2026-10-22
@@ -22677,49 +22988,56 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '28.979118512495'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 814
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '28.981388113792'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 854
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '29.778174593079'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 855
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '29.798989873252'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 856
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '29.798989873252'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 857
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '29.798989873253'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 864
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '29.924694842541'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 866
   source_id: mishapolk-issue732-2026-10-22
@@ -22747,35 +23065,40 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '29.981222446775'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 913
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '30.778174593079'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 915
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '30.798989873252'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 916
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '30.798989873253'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 923
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '30.924694841577'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 925
   source_id: mishapolk-issue732-2026-10-22
@@ -22803,14 +23126,16 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '31.798989873253'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 989
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '31.974133837950'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: mishapolk-issue732-f1ceee4-2026-10-23
   bead: think-0gp6
 - n: 990
   source_id: mishapolk-issue732-2026-10-22
@@ -22833,4 +23158,970 @@ beyond_horizon_claims:
   assurance: reported
   disposition: tracked-outside-case-corpus
   bead: think-0gp6
+- n: 328
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '18.614368938495'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 335
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '18.822875655542'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 343
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '18.977575126249'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 365
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '19.614368938496'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 404
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '20.614368938496'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 410
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '20.778174593057'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 413
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '20.831663365359'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 454
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '21.828427124751'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 455
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '21.848427413738'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 456
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '21.881306218098'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 458
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '21.903616795094'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 459
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '21.937022304130'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 463
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '21.971212864946'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 490
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '22.656854249498'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 496
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '22.822875655538'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 497
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '22.823102656263'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 498
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '22.828427124751'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 500
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '22.887841512251'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 501
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '22.887841512251'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 502
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '22.933269925449'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 504
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '22.961828398648'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 505
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '22.964182800891'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 509
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '22.993588501400'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 535
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '23.656854249498'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 544
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '23.828427124754'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 545
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '23.883414759605'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 546
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '23.887841512252'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 547
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '23.898819144772'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 548
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '23.943933771539'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 549
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '23.955501804732'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 550
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '23.960681444780'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 554
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '23.986307325878'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 582
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '24.656854249499'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 584
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '24.677669529669'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 591
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '24.828427124755'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 592
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '24.883414759605'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 593
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '24.887841512256'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 594
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '24.898819144772'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 596
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '24.949747468312'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 597
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '24.950690418604'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 598
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '24.954250129235'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 599
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '24.959619754596'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 600
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '24.978172747041'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 602
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '24.988237878176'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 631
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '25.656854249498'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 633
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '25.677669529670'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 637
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '25.778174593058'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 640
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '25.828427124757'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 643
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '25.898819144773'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 644
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '25.899494936618'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 645
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '25.946513932851'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 646
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '25.946569059464'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 647
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '25.946936319308'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 648
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '25.959619754592'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 651
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '25.981693875364'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 653
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '25.992652660227'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 654
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '25.994801642473'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 682
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '26.656854249498'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 684
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '26.677669529670'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 689
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '26.778174593058'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 691
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '26.828427124753'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 692
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '26.828427124752'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 694
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '26.898819144773'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 695
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '26.899494936618'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 696
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '26.946544919148'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 698
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '26.946936319309'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 699
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '26.949747468312'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 700
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '26.963723854102'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 702
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '26.976006198468'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 735
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '27.656854249499'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 736
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '27.656854249499'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 737
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '27.677669529670'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 742
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '27.778174593058'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 743
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '27.798989873230'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 744
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '27.798989873230'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 745
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '27.828427124753'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 746
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '27.828427124753'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 747
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '27.883160154733'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 748
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '27.884019388634'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 749
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '27.884019388634'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 750
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '27.911195491084'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 752
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '27.931658926825'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 756
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '27.976777716758'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 790
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '28.656854249499'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 791
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '28.656854249499'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 792
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '28.656854249499'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 797
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '28.778174593059'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 798
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '28.798989873230'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 799
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '28.798989873230'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 800
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '28.798989873230'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 801
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '28.825777526126'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 802
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '28.827439468623'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 803
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '28.827585222382'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 804
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '28.884019388632'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 805
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '28.902673974150'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 806
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '28.902673974145'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 807
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '28.924694338675'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 808
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '28.931498747905'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 809
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '28.933951500687'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 813
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '28.979106074255'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 814
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '28.981388046068'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 850
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '29.656854249499'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 854
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '29.778174593059'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 855
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '29.798989873230'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 856
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '29.798989873230'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 857
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '29.798989873230'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 858
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '29.825571499874'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 859
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '29.825571499869'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 860
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '29.827585222354'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 862
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '29.899494936619'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 863
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '29.902673974145'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 864
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '29.924694560082'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 865
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '29.931498747931'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 871
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '29.981222179337'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 873
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '29.992265777010'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 909
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '30.656854249499'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 913
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '30.778174593059'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 914
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '30.778174593059'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 915
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '30.798989873231'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 916
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '30.798989873231'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 917
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '30.825571499869'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 918
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '30.825571499869'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 919
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '30.827585222354'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 923
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '30.924694629713'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 924
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '30.931498747932'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 926
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '30.942070418062'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 970
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '31.656854249500'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 975
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '31.778174593059'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 976
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '31.778174593059'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 977
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '31.798989873231'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 978
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '31.825090165848'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 979
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '31.825090165819'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 980
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '31.827585222355'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 985
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '31.920310216790'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 986
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '31.920310216790'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 987
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '31.941797078293'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 988
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '31.949747468313'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
+- n: 989
+  source_id: mishapolk-issue732-f1ceee4-2026-10-23
+  claim: upper-bound
+  value: '31.974117146000'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-e3im
 pending_catalogue_intake: []

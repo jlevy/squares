@@ -43586,3 +43586,46 @@ evidence:
         Unchecked: T-124's Lean route, the 17 timeouts, and whether each configuration is its
         case's current packing.
     source_reviewed: '2026-10-23'
+  - id: E-mishapolk-732-f1ceee4-beyond-horizon-report
+    claim: upper-bound
+    scope:
+      n_values: [328, 335, 343, 365, 404, 410, 413, 454, 455, 456, 458, 459, 463, 490,
+        496, 497, 498, 500, 501, 502, 504, 505, 509, 535, 544, 545, 546, 547, 548, 549,
+        550, 554, 582, 584, 591, 592, 593, 594, 596, 597, 598, 599, 600, 602, 631, 633,
+        637, 640, 643, 644, 645, 646, 647, 648, 651, 653, 654, 682, 684, 689, 691, 692,
+        694, 695, 696, 698, 699, 700, 702, 735, 736, 737, 742, 743, 744, 745, 746, 747,
+        748, 749, 750, 752, 756, 790, 791, 792, 797, 798, 799, 800, 801, 802, 803, 804,
+        805, 806, 807, 808, 809, 813, 814, 850, 854, 855, 856, 857, 858, 859, 860, 862,
+        863, 864, 865, 871, 873, 909, 913, 914, 915, 916, 917, 918, 919, 923, 924, 926,
+        970, 975, 976, 977, 978, 979, 980, 985, 986, 987, 988, 989]
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Mishapolk issue 732 f1ceee4 2026-10-23]'
+    certificate: packing/resources/web/mishapolk-issue732-f1ceee4-2026-10-23/source/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-24'
+    limitations: >-
+      This atom records the source author's report, the comment on issue 732 of 23 October
+      (issuecomment-6374211504), of the 138 upper bounds beyond the n <= 324 corpus that the
+      ledger of 24 October for f1ceee4
+      (campaign/issue-intake/upper-bounds-issue732-f1ceee4-20261024) records in report
+      order: exact rational certificates certificates/0000-0999/nN.cert at f1ceee4, retained
+      under the author's MIT licence, each of n squares with its exact side in its header,
+      recorded at that side rounded up at 12 places. A separate complete repository replay
+      is retained (devtools.beyond_horizon_replay, receipts/filtered-exact-replay.json): the
+      filtered two-route decision of devtools.couzo_678_replay, the sqpack.verify predicates
+      and the independent rational corner checker's, over every wall and the pairs whose
+      centres are closer than sqrt 2, an exactly justified filter, accepted all 138 and
+      refused all 828 controls, in 125.6 positive CPU seconds; no square touches the box and
+      no pair touches, every wall clearing by at least 1e-16 and every pair by at least
+      7.38e-15. The all-pairs kernel at 335, 747 and 989 (823,142 pairs, 157.5 CPU seconds)
+      agreed exactly with it on each least gap and clearance. The two routes share
+      certificate parsing, half-angle conversion, the pair filter and Fraction arithmetic.
+      The source's own checker was not run here. Review and confirmation remain pending; no
+      stage 4 review is owed for a beyond-horizon row. No arrangement identity, local
+      minimum or optimum is established.

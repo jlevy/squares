@@ -1,0 +1,14 @@
+{
+  "environment": {"implementation":"CPython","machine":"x86_64","python":"3.14.7"},
+  "format": "beyond-horizon-exhaustive-sample-v1",
+  "kernel": "devtools.evand_arrangement_reports.run_case, positive job, every pair",
+  "rows": [
+    {"cpu_seconds":{"exact_verify":4.84132622,"independent":3.9701823860000003},"equals_filtered_least_gap":true,"equals_filtered_least_wall":true,"exact_verify_passed":true,"independent_passed":true,"least_pair_gap":"287583147904795655994937160712824414875275957355193/2582054857045879874819469363854857045879874819466781800000000000","least_wall_clearance":"1/10000000000000000","n":335,"pairs_tested":55945,"routes_agree_on_least_gap":true,"wall_seconds":11.4},
+    {"cpu_seconds":{"exact_verify":32.638761656999996,"independent":25.433823282999995},"equals_filtered_least_gap":true,"equals_filtered_least_wall":true,"exact_verify_passed":true,"independent_passed":true,"least_pair_gap":"105227517800990085362618021124789269971530870223789030231285008353305514054587/243740726249103575266261507494828195660109092615807196601946556533826354543442500000000000","least_wall_clearance":"1/10000000000000000","n":747,"pairs_tested":278631,"routes_agree_on_least_gap":true,"wall_seconds":67.5},
+    {"cpu_seconds":{"exact_verify":51.28283699,"independent":39.31059878800001},"equals_filtered_least_gap":true,"equals_filtered_least_wall":true,"exact_verify_passed":true,"independent_passed":true,"least_pair_gap":"3163532279305779378973996542635243928782969375105238212079700545466283429879700720376396125060536150499319337/346300151053506940791825750536771549703987665659629249011957550412238330744118983538896699680147814760600000000000000","least_wall_clearance":"1/10000000000000000","n":989,"pairs_tested":488566,"routes_agree_on_least_gap":true,"wall_seconds":98.2}
+  ],
+  "sample_cpu_seconds": 157.5,
+  "sample_pairs": 823142,
+  "started_utc": "2026-10-24T02:34:00Z",
+  "workers": 2
+}

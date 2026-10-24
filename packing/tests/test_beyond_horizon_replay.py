@@ -341,19 +341,20 @@ def test_the_coverage_register_reads_each_source_claims_record() -> None:
         assert set(rows) <= set(source["scope"]["n_values"])
 
 
-def _successor_at_682(
+def _successor_at_330(
     successor: str,
     added: tuple[str, str] | None = None,
     *,
     kind: str = "upper-bound",
     **changed: str,
 ) -> tuple[list[str], list[str]]:
-    """#719's row at 682 held superseded by ``successor``, with ``added`` (a value and a
-    date) as that source's row claiming ``kind``, and what the plan and
-    `check_source_coverage` say there."""
+    """#719's row at 330, still current, held superseded by ``successor``, with ``added`` (a
+    value and a date) as that source's row claiming ``kind``, and what the plan and
+    `check_source_coverage` say there. 682, where the test once held it, is f1ceee4's since
+    24 October."""
     coverage = safe_load(replay.COVERAGE.read_text(encoding="utf-8"))
     rows = {(row["n"], row["source_id"]): row for row in coverage["beyond_horizon_claims"]}
-    held = rows[682, MISHAPOLK]
+    held = rows[330, MISHAPOLK]
     held.update(disposition="superseded", superseded_by=successor, **changed)
     claims = {
         source["id"]: coverage_check.load_claims(coverage_check.ROOT / source["claims_record"])
@@ -364,11 +365,11 @@ def _successor_at_682(
         value, dated = added
         mine = next(source for source in coverage["sources"] if source["id"] == MISHAPOLK)
         coverage["sources"].append(
-            {**mine, "id": successor, "source_date": dated, "scope": {"n_values": [682]}}
+            {**mine, "id": successor, "source_date": dated, "scope": {"n_values": [330]}}
         )
         coverage["beyond_horizon_claims"].append(
             {
-                "n": 682,
+                "n": 330,
                 "source_id": successor,
                 "claim": kind,
                 "value": value,
@@ -377,12 +378,12 @@ def _successor_at_682(
                 "bead": "think-xyhn",
             }
         )
-        claims[successor] = {682: value}
-    plan = [problem for problem in replay.coverage_problems(coverage) if "n=682 " in problem]
+        claims[successor] = {330: value}
+    plan = [problem for problem in replay.coverage_problems(coverage) if "n=330 " in problem]
     gate = [
         error
         for error in coverage_check.beyond_horizon_errors(coverage, claims)[0]
-        if "682" in error
+        if "330" in error
     ]
     return plan, gate
 
@@ -399,13 +400,13 @@ def test_a_successor_outside_the_walk_holds_the_plan_only_with_a_later_smaller_r
     for n in (370, 452, 536):
         assert rows[n, "couzo-issue670-2026-10-17"]["superseded_by"] == MISHAPOLK
     assert replay.coverage_problems(coverage) == []
-    refused = "n=682 from mishapolk-issue719-2026-10-22: the register's row is not the plan's"
-    smaller, larger = "26.6568542495000000", "26.6568542496000000"
-    equal = rows[682, MISHAPOLK]["value"]
+    refused = "n=330 from mishapolk-issue719-2026-10-22: the register's row is not the plan's"
+    smaller, larger = "18.6926724444000000", "18.6926724445000000"
+    equal = rows[330, MISHAPOLK]["value"]
     assert Fraction(smaller) < Fraction(equal) < Fraction(larger)
-    later = _successor_at_682("x-later-2026-10-23", (smaller, "2026-10-23"))
+    later = _successor_at_330("x-later-2026-10-23", (smaller, "2026-10-23"))
     assert later == ([], [])
-    same_day = _successor_at_682("x-same-2026-10-22", (smaller, "2026-10-22"))
+    same_day = _successor_at_330("x-same-2026-10-22", (smaller, "2026-10-22"))
     assert same_day == ([], [])
     for successor, added, kind in (
         ("couzo-issue715-2026-10-21", None, "upper-bound"),
@@ -415,10 +416,10 @@ def test_a_successor_outside_the_walk_holds_the_plan_only_with_a_later_smaller_r
         ("x-equal-2026-10-23", (equal, "2026-10-23"), "upper-bound"),
         ("x-lower-2026-10-23", (smaller, "2026-10-23"), "lower-bound"),
     ):
-        plan, gate = _successor_at_682(successor, added, kind=kind)
+        plan, gate = _successor_at_330(successor, added, kind=kind)
         assert plan == [refused], successor
         assert gate, successor
-    changed, _ = _successor_at_682(
+    changed, _ = _successor_at_330(
         "x-later-2026-10-23", (smaller, "2026-10-23"), assurance="verified"
     )
     assert changed == [refused]
@@ -1448,9 +1449,19 @@ def test_732_declares_the_77_rows_its_walk_records_and_restates_499() -> None:
 
 
 def test_732_s_rows_are_current_and_supersede_the_rows_they_beat() -> None:
+    """#732's 77 rows supersede the rows they beat, and its walk plans each current. Since
+    24 October f1ceee4's rows, which a later walk records, supersede 47 of them in the
+    register, as a later import may (`_superseded_after`); the other 30 are current."""
     rows = [row for row in replay.planned_rows() if row["bead"] == "think-0gp6"]
     assert len(rows) == 77
     assert all("superseded_by" not in row for row in rows)
+    coverage = safe_load(replay.COVERAGE.read_text(encoding="utf-8"))
+    held = Counter(
+        row.get("superseded_by")
+        for row in coverage["beyond_horizon_claims"]
+        if row["source_id"] == "mishapolk-issue732-2026-10-22"
+    )
+    assert held == {None: 30, F1_SOURCE: 47}
     beaten = Counter(
         start
         for _, start, source in replay.planned_supersessions()
@@ -1508,6 +1519,222 @@ def test_the_732_ledger_transcribes_the_source_history_and_the_scan() -> None:
     )
     assert set(models) == {"exact", "print"}
     assert models["print"] < 5
+
+
+# --------------------------------------------------------------------------- f1ceee4
+
+F1 = "#732 comment 6374211504"
+F1_SOURCE = "mishapolk-issue732-f1ceee4-2026-10-23"
+ISSUE_732_F1 = replay.ROOT / "campaign/issue-intake/upper-bounds-issue732-f1ceee4-20261024"
+#: The commits after f1ceee4 and what each publishes in the corpus, none of it recorded.
+LATER_732_F1 = {
+    "Mishapolk/square-packing-records@34e59f3": {105: "equal", 204: "above"},
+    "Mishapolk/square-packing-records@c0bf150": 51,
+    "Mishapolk/square-packing-records@7e82c64": {303: "above"},
+}
+#: The rows f1ceee4 supersedes on entry, by the source that held each count.
+SUPERSEDED_BY_732_F1 = {
+    "couzo-issue715-2026-10-21": 59,
+    "mishapolk-issue732-2026-10-22": 47,
+    "mishapolk-issue719-2026-10-22": 21,
+    "couzo-index-2026-10-15": 9,
+    "couzo-verified-bounds-2026-10-14": 1,
+    "couzo-extended-range-reports-2026-10-08": 1,
+}
+
+
+def test_a_release_a_comment_reports_is_named_and_dated_by_the_comment() -> None:
+    """f1ceee4 is #732's second release, which a comment reports: the ledger names it
+    ``#732 comment ID``, its address is the comment, and it is found by that label."""
+    chosen = replay.release(F1)
+    assert (chosen.issue, chosen.comment, chosen.label) == (732, 6374211504, F1)
+    assert chosen.issue_url.endswith("/issues/732#issuecomment-6374211504")
+    assert chosen.report_key == "issue"
+    assert replay.release(732).label == "#732"
+    ledger = _read(ISSUE_732_F1 / "github-issues.json")
+    (item,) = [item for item in ledger["items"] if item["report"] == F1]
+    assert (item["kind"], item["created_at"]) == ("comment", "2026-10-23T20:35:12Z")
+
+
+def test_the_f1ceee4_source_history_holds_each_certificate_to_its_current_index() -> None:
+    """f1ceee4 left certificates/manifest.json as 7b6366f wrote it, so its 390 certificates
+    at 325 to 1024 are held to certified_bounds.json, which it rewrote; its claims are the
+    138 whose blobs it first holds, the files it changed."""
+    chosen = replay.release(F1)
+    history = _read(chosen.path(replay.SOURCE_HISTORY))
+    assert history["manifest"] == chosen.index == "certified_bounds.json"
+    assert len(history["at_commit"]) == 390
+    pinned = replay.manifest(chosen)
+    assert history["manifest_sha256"] == pinned["certified_bounds.json"]
+    assert all(pinned[row["certificate"]] == row["sha256"] for row in history["at_commit"])
+    changed = [row for row in history["at_commit"] if row["blob_first_commit"] == chosen.pin]
+    assert len(changed) == 138
+    assert {row["side_first_commit"] for row in changed} == {chosen.pin}
+
+
+def test_f1ceee4_declares_its_138_rows_each_at_its_exact_side_rounded_up() -> None:
+    """The walk records every claim the comment reports, each below the row that stood on
+    main 0bbb0a2c4 and below Göbel's construction. Each row prints the certificate's exact
+    side rounded up at 12 places, never the source index's print, which rounds to the
+    nearest place and lies one unit below at 70 of the 138."""
+    chosen = replay.release(F1)
+    rows = replay.decided_claims(chosen)
+    assert len(rows) == chosen.decided == 138
+    ledger = _read(ISSUE_732_F1 / "ledger.json")
+    steps = {
+        count["n"]: step
+        for count in ledger["counts"]
+        for step in count["steps"]
+        if step["report"] == F1
+    }
+    assert {n for n, step in steps.items() if step["verdict"] == replay.RECORDED} == {
+        row.n for row in rows
+    }
+    sides = replay.decided_sides(chosen)
+    for row in rows:
+        assert row.printed == replay.ceiling(sides[row.n])
+    record = _read(chosen.path(replay.RECORD))
+    assert [item["offered_side"] for item in record["results"]] == [row.printed for row in rows]
+    comparison = _read(chosen.path(replay.GOEBEL))["comparison"]
+    assert comparison["tally"] == {"above": 0, "equal": 0, "below": 138}
+
+
+def test_the_commits_after_f1ceee4_publish_only_in_the_corpus_and_none_is_recorded() -> None:
+    """34e59f3 restates T-229's two sides in its index, c0bf150 re-centres 51 certificates
+    in the corpus, and 7e82c64's 303 is above #755's, reported first: under report order
+    none is recorded. c0bf150's sides at 17 to 205 that the reported lanes' prints leave
+    undecided are decided exactly against the lanes' algebraic sides (`decide_later`)."""
+    chosen = replay.release(F1)
+    later = replay.later_publications(chosen)
+    assert max(later) <= 324
+    steps: dict[str, dict[int, Any]] = {}
+    for count in _read(ISSUE_732_F1 / "ledger.json")["counts"]:
+        for step in count["steps"]:
+            if step["report"] in LATER_732_F1:
+                steps.setdefault(step["report"], {})[count["n"]] = step
+    assert set(steps) == set(LATER_732_F1)
+    for report, expected in LATER_732_F1.items():
+        found = steps[report]
+        assert all(step["verdict"] == "not recorded" for step in found.values())
+        if isinstance(expected, int):
+            assert len(found) == expected
+        else:
+            assert {n: step["reason"] for n, step in found.items()} == expected
+    assert steps["Mishapolk/square-packing-records@7e82c64"][303]["decided_against"] == ["#755"]
+    resolved = _read(ISSUE_732_F1 / replay.LATER_RESOLVED)
+    assert resolved == replay.decide_later(F1)
+    assert {row["n"] for row in resolved["rows"]} == {17, 28, 39, 69, 87, 177, 205}
+    assert all(row["relation"] == "above" for row in resolved["rows"])
+
+
+def test_the_f1ceee4_ledger_transcribes_its_sources_from_starts_holding_goebel() -> None:
+    """sources.yaml is what `release_walk_sources` writes; the starts, frozen at main
+    0bbb0a2c4 on 24 October, hold Göbel's construction beside the row at every count beyond
+    the corpus, and earlier reports in the corpus are walked only where the start alone
+    leaves a later commit's claim undecided."""
+    from devtools import intake_ledger  # noqa: PLC0415
+
+    sources = safe_load((ISSUE_732_F1 / "sources.yaml").read_text(encoding="utf-8"))
+    assert sources == replay.release_walk_sources(F1, str(sources["read_on"]))
+    data, starts = intake_ledger.load_walk(ISSUE_732_F1)
+    assert data["read_at_main"] == replay.ISSUE_732_F1_READ_AT_MAIN
+    beyond = {n for n in intake_ledger.counts_of(data) if n > replay.reports.HORIZON}
+    assert len(beyond) == 138
+    assert beyond <= intake_ledger.construction_counts(starts)
+    earlier = {
+        report["report"]: sorted(claim["n"] for claim in report["claims"])
+        for report in sources["reports"]
+        if report["report"] in ("PR #574", "#639", "#755")
+    }
+    assert earlier == {
+        "PR #574": [55, 70, 83, 153, 207],
+        "#639": [70, 153, 207],
+        "#755": [303],
+    }
+
+
+def test_f1ceee4_s_rows_are_current_and_supersede_the_rows_they_beat() -> None:
+    rows = [row for row in replay.planned_rows() if row["source_id"] == F1_SOURCE]
+    assert len(rows) == 138
+    assert all("superseded_by" not in row for row in rows)
+    beaten = Counter(
+        start for _, start, source in replay.planned_supersessions() if source == F1_SOURCE
+    )
+    assert beaten == SUPERSEDED_BY_732_F1
+    walk = replay.WALKS[replay.ISSUE_732_F1]
+    (held,) = walk.held["franciscouzo/square-packing@4e4c8ce"]
+    assert (sorted(held.counts), held.answer) == ([985], replay.DELETION_ANSWER)
+    assert walk.resting == ()
+
+
+def test_the_later_commits_receipt_reads_only_what_each_commit_changes(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """`later_commits` reads each commit past the pin as the child of the one before: the
+    certificate files it adds or changes at a count to 1024, at their headers' sides, and
+    each index bound it changes. A commit that is not the next is refused."""
+    index = {"entries": {"303": {"bound": "18"}, "400": {"bound": "20"}}}
+    changed = {"entries": {"303": {"bound": "35/2"}, "400": {"bound": "20"}}}
+    repo = _repository(
+        tmp_path / "source",
+        [
+            (
+                "2026-10-23T20:00:00Z",
+                {
+                    "certificates/0000-0999/n400.cert": "400 20\n",
+                    "certified_bounds.json": json.dumps(index),
+                },
+            ),
+            (
+                "2026-10-23T21:00:00Z",
+                {
+                    "certificates/0000-0999/n303.cert": "303 35/2\n",
+                    "certificates/1000-1999/n1061.cert": "not a certificate\n",
+                    "certified_bounds.json": json.dumps(changed),
+                },
+            ),
+        ],
+    )
+
+    def git(*args: str) -> str:
+        return subprocess.run(
+            ["git", "-C", str(repo), *args], capture_output=True, text=True, check=True
+        ).stdout.strip()
+
+    pin, after = git("rev-list", "--reverse", "HEAD").split()
+    chosen = dataclasses.replace(
+        replay.release(F1), retained=pin, later_reads=((after, "2026-10-23T21:05:00Z"),)
+    )
+    monkeypatch.setitem(replay.RELEASES, F1, chosen)
+    record = replay.later_commits(F1, repo)
+    (commit,) = record["commits"]
+    assert (commit["parent"], commit["pushed"]) == (pin, "2026-10-23T21:05:00Z")
+    assert [(item["n"], item["kind"], item["side"]) for item in commit["publications"]] == [
+        (303, "certificate", "35/2"),
+        (303, "index", "35/2"),
+    ]
+    monkeypatch.setitem(
+        replay.RELEASES,
+        F1,
+        dataclasses.replace(chosen, later_reads=((pin, "2026-10-23T21:05:00Z"),)),
+    )
+    with pytest.raises(replay.ReplayError, match="not the child of"):
+        replay.later_commits(F1, repo)
+
+
+def test_the_eleven_counts_asking_sole_credit_are_measured_against_what_they_supersede() -> (
+    None
+):
+    """The comment asks sole credit at 11 counts. Each is measured, square by square, against
+    the retained certificate of the row it supersedes and against #715's at the count; the
+    measurement decides nothing."""
+    receipt = _read(replay.release(F1).path(replay.POSE_IDENTITY))
+    rows = {row["n"]: row for row in receipt["rows"]}
+    assert sorted(rows) == sorted(replay.SOLE_CREDIT[F1])
+    for row in rows.values():
+        superseded = [item for item in row["against"] if item["superseded_row"]]
+        assert len(superseded) == 1
+        assert {item["report"] for item in row["against"]} >= {"#715"}
 
 
 #: The register's rows above Göbel's construction at their count, each marked so with it.

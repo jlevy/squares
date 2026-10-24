@@ -21446,7 +21446,12 @@ issues:
       the mishapolk-issue732-2026-10-22 source, retained at 17cc220 and replayed on both exact
       routes, finds that 499 restates #719's row (think-fwa9, answered 23 October), and that 985
       ties Couzo's 4e4c8ce deletion bound, an earlier report (D6, think-f2io, answered 23 October).
-    read_through: '2026-10-23T01:53:19Z'
+      His comment of 23 October at 20:35:12Z (issuecomment-6374211504) reports f1ceee4, which
+      rewrites 138 certificates at 328 to 989; imported on 24 October (think-e3im,
+      c-import-732c-1024): the walk of 24 October records all 138 as current rows of the
+      mishapolk-issue732-f1ceee4-2026-10-23 source, and none of the three later commits' sides
+      in the corpus.
+    read_through: '2026-10-23T20:35:12Z'
     results:
     - key: rows-325-1024
       claim: >-
@@ -21510,6 +21515,44 @@ issues:
       bead: think-0gp6
       blocked_on:
       - think-f2io
+    - key: rows-f1ceee4
+      claim: >-
+        138 upper bounds at n = 328 to 989, each the exact side of
+        certificates/0000-0999/nN.cert at f1ceee4c1dd69f97d8e50e6ddaf1a14084dceda7, the files
+        that commit rewrites, which certified_bounds.json indexes; "138 standing records ...
+        strictly beaten".
+      source: https://github.com/jlevy/squares/issues/732#issuecomment-6374211504
+      not_registered: >-
+        Beyond the n <= 324 corpus: rows of source-coverage.yaml, not register entries. The
+        ledger of 24 October for f1ceee4 (upper-bounds-issue732-f1ceee4-20261024), every count
+        walked in report order from starts frozen at main 0bbb0a2c4 with Göbel's construction
+        beside each row, records all 138 as dated rows of the
+        mishapolk-issue732-f1ceee4-2026-10-23 source, each the count's current row, at its
+        certificate's exact side rounded up at 12 places (the index prints 70 of them one unit
+        lower, rounding to the nearest place). They supersede 59 of #715's rows, 47 of this
+        issue's 17cc220 rows, 21 of #719's, 9 of couzo-index-2026-10-15's, 1 of
+        couzo-verified-bounds-2026-10-14's and Couzo's 8 October row at 335, by 8.09e-13 (924, at
+        another 12-place print) to 8.59e-4 (747). The packet retains the 138 certificates, and both project exact routes
+        accept all 138 with all six controls refused at each
+        (receipts/filtered-exact-replay.json). Read literally, the 8 October decimal poses at
+        335 are not a packing at their printed side; with the 196 angles below 1e-10 read as 0,
+        as his 9 October certificate reads them, they pack exactly at it
+        (receipts/couzo-8-october-decisions.json).
+      queued: false
+    - key: rigidity-theorems
+      claim: >-
+        Theorem 1 (algebraic incompressibility of diagonal chains: a chain of edge-to-edge
+        contacts across opposite corners at angles 0 and pi/4 fixes S in Q(sqrt 2) with no
+        first-order descent) with a corollary that 33 diagonal counts (10, 11, 14, 18, 23, 27,
+        32, ...) have no continuous slack; and Theorem 2 (packings at general angles from a
+        solver with a feasibility tolerance admit a descent direction and an exact dilation).
+      source: https://github.com/jlevy/squares/issues/732#issuecomment-6374211504
+      not_registered: >-
+        Prose with no proof, and bounding no s(n). The corollary's own examples contradict its
+        hypothesis: the record's best packings at 11 and 18 tilt squares by about 40.18 and
+        24.3 degrees, angles neither 0 nor pi/4. Theorem 2 describes the author's method. No
+        entry is registered.
+      queued: false
     - key: issue-715-resolution
       claim: >-
         The release strictly improves all 1,285 rows of #715: 0 tied, 0 worse, 0 missing.
@@ -21548,6 +21591,21 @@ issues:
       state: queued
       note: A policy proposal; it joins the owner's decision whether counts above 1024 are tracked.
       bead: think-f2io
+    - what: >-
+        Credit 11 counts (463, 645, 646, 651, 696, 702, 747, 756, 809, 813 and 989) to
+        Mishapolk alone, as significant structural compressions, and the other 127 as
+        continuous refinements of Francisco Couzo's topologies with joint credit.
+      state: queued
+      note: >-
+        From the comment of 2026-10-23T20:35:12Z. The source's certified_bounds.json credits all
+        138, the 11 included, as refinements of Couzo topology, and the bibliography key keeps
+        that ("Polkovskyi after Couzo, Levy"). Measured here (receipts/pose-identity.json), each
+        of the 11 pairs one to one with Couzo's #715 certificate at its count under the box's
+        identity, every square within 0.23 of its counterpart, with 85 to 558 squares moved by
+        more than 1e-3 and rotations changed by up to 9 degrees; against the row it supersedes
+        it pairs the same way but at 696, where one square moves 0.96. The measurement decides
+        nothing; per-row credit beyond the corpus is the owner's open question (D5).
+      bead: think-f2io
     - what: Publish the review checkers and verification scripts, so that authors can test
         certificates before submitting them.
       state: done
@@ -21564,6 +21622,7 @@ issues:
     - think-f2io
     - think-fwa9
     - think-8m4k
+    - think-e3im
     answer_bead: think-0gp6
     replies:
     - url: https://github.com/jlevy/squares/issues/732#issuecomment-6355073019
@@ -21690,6 +21749,21 @@ issues:
       equal to Couzo's 4e4c8ce bound, stays unrecorded.
       No row of this source changes: the 77 stay current. The follow-up that says so is drafted on
       think-temp.
+
+      The author's comment of 2026-10-23T20:35:12Z (issuecomment-6374211504) reports f1ceee4
+      (committed 20:34:13Z, pushed 20:34:22Z), which rewrites 138 certificates at 328 to 989 by
+      "continuous SLP quench" and centres each in an open container, with certified_bounds.json
+      as the index it keeps current (it leaves manifest.json as 7b6366f wrote it). It credits 11
+      counts to Mishapolk alone and the rest jointly with Couzo, states two theorems on rigidity
+      and slack, and recommends one pre-flight checker. The import of 24 October (think-e3im,
+      c-import-732c-1024) pins f1ceee4 in the mishapolk-issue732-f1ceee4-2026-10-23 packet,
+      walks the 138 in report order from main 0bbb0a2c4 (upper-bounds-issue732-f1ceee4-20261024)
+      and records all 138, superseding 47 of this issue's own 77 rows among others; the other 30
+      stay current. The three commits after it change only counts in the corpus and are not
+      recorded (intake-watch.yaml). #763 (Couzo, 2026-10-23T23:35:51Z) is a later report at
+      overlapping counts, and Couzo's efef7d1 and fa6237e reached GitHub in its push of
+      23:38:42Z; both follow f1ceee4 and are the next import's (think-cnn7). The import reply is
+      drafted for after the merge.
   - number: 734
     title: 'Proposal: submit and fetch upper bounds by API (automated intake, reported the same day)'
     author: wand125

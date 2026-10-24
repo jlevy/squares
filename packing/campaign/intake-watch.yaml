@@ -1371,3 +1371,22 @@ repositories:
       says. It changes nothing at or below 1024, so the packet stays at 17cc220, whose
       indexes have the SHA-256 the issue states. 3426 is among the rows above 1024 that wait
       on the owner (think-f2io). Nothing else to import.
+  # The f1ceee4 import (think-e3im, c-import-732c-1024): the head past the 7b6366f read.
+  - url: https://github.com/Mishapolk/square-packing-records
+    read_through: 7e82c6408937c9a6fe2e11054ed716bba67922f0
+    read_on: '2026-10-24'
+    note: >-
+      Four commits of 23 October past the 7b6366f read, as the repository's activity log dates
+      their pushes. f1ceee4 (committed 20:34:13Z, pushed 20:34:22Z), which the author's comment
+      on #732 of 20:35:12Z reports, rewrites 138 certificates at 328 to 989 with
+      certified_bounds.json and upper_bounds.json and adds .gitignore: the
+      mishapolk-issue732-f1ceee4-2026-10-23 packet pins it and retains the 138, which the walk
+      of 24 October (campaign/issue-intake/upper-bounds-issue732-f1ceee4-20261024) records as
+      rows. 34e59f3 and c0bf150, pushed together at 21:28:42Z, and 7e82c64, pushed at
+      21:42:38Z, change only counts in the corpus, which the packet's
+      receipts/later-commits.json reads: 34e59f3 restates T-229's sides at 105 and 204 in the
+      two indexes, c0bf150 rewrites or adds 51 certificates at 17 to 301 (and edits
+      check_packing.py), and 7e82c64 rewrites 303. The walk takes each as a report from its
+      push and records none: 105 ties T-229, 204 is above T-231, each of the 51 is above the
+      case's reported lane (31), a register entry pending adoption (14), PR #574's row (5) or
+      T-126 (1), and 303 is above #755's, reported at 11:12:48Z. Nothing else to import.
