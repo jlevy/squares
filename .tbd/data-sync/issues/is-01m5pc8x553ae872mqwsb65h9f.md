@@ -5,7 +5,7 @@ title: "Import #763 (PR A, W1): Couzo's 964ee2b at or below 1024 — packet, led
 kind: task
 status: in_progress
 priority: 1
-version: 9
+version: 10
 delegate: c-import-763-1024b
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-24T07:16:16.676Z
-updated_at: 2026-10-24T13:37:35.841Z
+updated_at: 2026-10-24T15:43:29.363Z
 started_at: 2026-10-24T07:16:25.387Z
 ---
 Plan and verdicts: think-cnn7's notes (triage of 24 Oct). After #769 (PR C) and #757, both merged. Licence: the owner's presumption of permission (think-m8f4 follows up the exact licence). PR B (review, V3/C3, adoption and regularization at 268 and 303) follows.
@@ -66,3 +66,32 @@ Head c6617f3ee: Packing validation 40094477677 and Certificate page 40094477650 
 2026-10-24 coord-intake-1024: PR #789 merged 2026-10-24T13:22:46Z as 2ec489d1e after review A (senior), review B (correctness; B1 deferred to think-lyf9) and follow-up review C (approve; C1 to think-bgij, C3 fixed at 0329f73d6). T-240 on main as reported (V0/C0). #763 stays open (closingIssuesReferences empty). Next: the #763 acknowledgement after the deploy of 2ec489d1e is verified; T-240's stage 4 review (think-zjus) is running; PR B follows it and think-l49q.
 
 2026-10-24 coord-intake-1024: #763 acknowledgement posted 13:37:28Z (https://github.com/jlevy/squares/issues/763#issuecomment-6384882980) after the deploy of 2ec489d1e was verified (Pages run 40097882450 attempt 2: deploy 120885754751, verify-deployment 120885911221; attempt 1 failed only on the D-509 explainer PDF flake, think-6dle; live result/t-240.html S3 V0 C0 and cases 268/303 checked). It carries nine author questions and names the 99 Kaggle-credited sides (think-lyf9). Its record rides the next records PR (PR B or think-l49q's). #763 stays open for PR B, the rows above 1024 and the author's answers.
+
+2026-10-24 c-prb-763-1024 (PR B, think-bk9r, https://github.com/jlevy/squares/pull/794, draft): stage 4 review of T-240 mapped (V3/C3, S3 confirmed); houses adopted at 268 and 303 in the pass of 25 October and regularized. The reply below shares the review and the adoption.
+
+DRAFTED REPLY, PR B (#763; post on the owner's word after PR B merges and its deploy is verified; drafted by c-prb-763-1024 for think-bk9r, not posted). For the requests record when it is posted: this reply reports E-couzo-763-certificate-report, E-couzo-763-exact-feasibility and E-couzo-763-review-exact-feasibility at 268 and 303 (results n268 and n303, T-240), which check_requests lists as a reply due. If #792 has merged first, name Daniel's 268 as T-242 in the houses paragraph.
+
+REPLY TEXT:
+
+Francisco, the stage 4 review of your two certificates in the case corpus is done, and both are now the best packings this record holds at their counts.
+
+**The review.** [Review of 24 October 2026](https://github.com/jlevy/squares/blob/main/docs/project/reviews/review-2026-10-24-couzo-n268-n303.md) (code in `packing/resources/web/couzo-issue763-2026-10-23/review/review-2026-10-24/`). A checker written for the review from the mathematics and your certificates' format line, reading none of your, Evan Daniel's or this repository's checking code, accepts `certificates/best/n268.cert` and `n303.cert` at `964ee2b` in exact rational arithmetic on two routes (separating axes over every pair, and the exact clipped area of every pair within reach), with ten controls each, sharp at 1e-30 at the closest pair, the square nearest a wall and the box. It agrees with this repository's two maintained routes at all 24 numbers they share. The sides are the certificates' own, and your 12-place prints round them up correctly: s(268) <= 16.874361715874 and s(303) <= 17.906978233799. No finding is blocking or major.
+
+**T-240 is now V3/C3**, confirmed, independently re-implemented, by a Claude agent, a system family your commits also name; S3 is confirmed. The replay that runs this repository's maintained routes shares components with your pipeline (your manifest names `sqpack/verify.py` as its first checker), so the independent confirmation rests on the review's checker.
+
+**The houses.** Under the house rule, the case records at 268 and 303 adopt your certificates as their house best packings in the pass of 25 October 2026: at 268 from PingYou Ltd's T-174, 4.45e-3 above, and at 303 from Amund Kristiansen's T-239, 2.78e-3 above. Both strong generators ran on each new witness in the same pull request (their drawings are now regularized views at your sides; this project's run of Evan Daniel's regularizer also finds KKT local minima below both sides, which wait to be registered). At 268 Evan Daniel's later certificate, 4.48e-12 below yours, is being imported as reported; measured by the review it is Vladislav Lavrentev's placement of the same arrangement, the mirror image of yours, and once it is validated it becomes the house at 268 under the same rule.
+
+**What the record corrected.** The packet README now quotes your commits' `Co-Authored-By` trailers and `efef7d1`'s "Codex's reviewed intake" beside the verifier header's Codex note; it describes the manifest's top-level `previous_source` as the parent each search refined, with the previous record one level up; and it states that at 268 your packing, Tymchishin's v4 parent and Daniel's are one arrangement in three placements.
+
+**Questions**, which hold no rung (they merge with and extend the nine of the import reply):
+
+1. **Credit at 268.** Your 268 packing, Kirill Tymchishin's v4 packing and Vladislav Lavrentev's public packing, as Daniel's `8a8879a` certifies it, are one arrangement: no square moves beyond 0.1 between any two. Yours is the mirror image of the other two, and yours and Lavrentev's share the side to 4.4e-12 with 135 squares placed differently by more than 1e-3. Did your live search of 23 October start from the v4 notebook's packing, as the manifest says? Was Lavrentev's packing at this side public before 19:52:50Z that day? The parent's lineage begins at a public portfolio entry with source `cuda`: should the 268 credit name Lavrentev?
+2. **268 and 303 under one rule.** `43f666c` cedes 303 to pjmathematician's entry, submitted earlier and 3.47e-11 above your side. At 268 the board held Minal kharat123's entry 5.29e-11 above yours a day before your live record, and then panpanpanda's, 1.79e-12 below yours and five hours before it. Your README keeps 268. Does #763 claim both counts, one, or neither?
+3. **303 and pjmathematician.** Were pjmathematician's coordinates available to you, or is "our 3.5e-11 refinement" inferred from the two sides?
+4. **303 lineage.** Your push parent is one to one with Chris Deotte's public Kaggle packing, two squares beyond 0.1, and your 303 four. Which public packing, notebook version and run did the parent start from? The manifest names Lavrentev's v11 without a run. Is Deotte's packing in the lineage?
+5. **The unpublished 303 steps.** Can you publish the live record at 17.906978233798913 and the steps from the push parent to it, or say who ran the browser search and from which packing?
+6. **Notebook notices.** Please publish the `SOURCE_NOTICES.md` files the manifest names, or quote the earlier construction credits they carry.
+
+Notes for you, none of which changes the verdict: the certificates' comment line does not say which way t = tan(theta/2) turns a square (both hold counter-clockwise only; reversed, 94 and 106 pairs overlap), and `record_provenance.json` and `RECORD_PROVENANCE.md` at the pin still describe 268 and 303 by their earlier records.
+
+The rows above 1024 (think-llit) and the import's earlier questions stay open on this issue.
