@@ -5,13 +5,13 @@ title: "Slow registry: charge or refuse an aliased pytest mark in _slow_marked (
 kind: task
 status: open
 priority: 3
-version: 1
+version: 2
 labels:
   - validation
 dependencies: []
-parent_id: is-01m5ndfyhknd8p766m3pnpgn4a
+parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 created_at: 2026-10-24T03:33:39.223Z
-updated_at: 2026-10-24T03:33:39.223Z
+updated_at: 2026-10-24T03:48:35.124Z
 ---
 PR #745 review B4 (suggestion, Low; https://github.com/jlevy/squares/pull/745#issuecomment-6379074892), deferred by c-final-745-1024.
 

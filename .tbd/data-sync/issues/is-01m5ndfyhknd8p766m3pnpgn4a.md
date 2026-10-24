@@ -5,7 +5,7 @@ title: "Address PR #745 review A (A1-A8)"
 kind: task
 status: in_progress
 priority: 2
-version: 9
+version: 10
 delegate: c-final-745-1024
 labels: []
 dependencies: []
@@ -16,7 +16,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-23T22:18:21.615Z
-updated_at: 2026-10-24T03:33:39.223Z
+updated_at: 2026-10-24T03:45:41.936Z
 started_at: 2026-10-23T22:18:43.416Z
 ---
 
@@ -41,3 +41,10 @@ started_at: 2026-10-23T22:18:43.416Z
 - Hosted PR CI at d8138ad5f all green: Packing validation 40050482052, Certificate page 40050482071, Branch mergeability 40050476836; contiguity passes. Local: --records passes; check_release_impact every candidate disposed; release_pin --check last data commit b94b35886; --edit failed only on bead tree (think-tng3, open under a closed parent, tracker state) and one type-floor finding on unchanged packing/devtools/wall_owner_parent_experiment.py (import used at line 227; single-file basedpyright 0 errors; a rerun timed out at 900 s at host load ~11); hosted typecheck green.
 - PR body updated (cost, A2 and merge rows, Gates row, validation at head, next entry, News T-233 bullet, limits). News draft re-validated in a scratch copy. Revised #446 stage 7 draft appended to think-eth9's notes.
 - Not merged and not marked ready; review B is the coordinator's next step.
+2026-10-24 c-final-745-1024 (final lane of coord-intake-1023), PR #745 review B (https://github.com/jlevy/squares/pull/745#issuecomment-6379074892), worktree /home/user/wt-lower, final head 984f7e132 (git ls-remote agrees):
+- Merged origin/main 14b14f2d1 (#758, #764, #767, #765, #768) in b0d894546, clean; release.py keeps main's two four-paper no-change records beside v0.4.23. B3 in 8e5aaaf90 (seven-count #446 entry hands n19/n20/n26 to E-wand125-fine-net-446-n19-n20-n26-report; its pending blocker dropped at n-019, n-020, n-026). Re-pinned 984f7e132; release_pin --check last data commit 8e5aaaf90; check_release_impact --baseline-ref origin/main every candidate disposed, no re-measure asked; render_changelog --check --baseline-ref origin/main --announcement-base origin/main agrees, 0 owed.
+- Local: --records --jobs 2 --inner-jobs 1 passes (53 steps, 319 s); census PR lane 176 passed; six frontier record test files 340 passed; News draft validates in memory (NEWS_DRAFT_VALIDATES). stamp_landed not applied (landings.yaml not on main); dry run T-232, T-233 2026-10-23 -> 2026-10-24.
+- No new deep-gate dispatch: since d8138ad5f (dispatch 40050481868) the merge changes no slow-marked test and B3 is prose no deep job reads.
+- Hosted PR CI at 984f7e132 green: Packing validation 40058641827, Certificate page 40058641826, Branch mergeability 40058637599 (31 pass, 28 deep-gate skip); mergeable CLEAN.
+- B2: PR body News draft and think-eth9 notes (corrected stage 7 draft appended) say T-233's captures passed. B4 deferred as think-lfo0 (P3, child of this bead; re-parent before closing this one). PR body updated. Dispositions reply: https://github.com/jlevy/squares/pull/745#issuecomment-6379460703 (B1 deferred, beads updated; B2, B3 fixed; B4 deferred).
+- Not merged and not marked ready.
