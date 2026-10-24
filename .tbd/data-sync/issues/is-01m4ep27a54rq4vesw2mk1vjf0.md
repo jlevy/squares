@@ -5,18 +5,16 @@ title: Triage Couzo extended-range construction updates beyond the eight-case in
 kind: task
 status: closed
 priority: 1
-version: 15
+version: 16
 delegate: claude-code@spud10.local
 labels:
   - result-import
-dependencies:
-  - type: blocks
-    target: is-01m4h9p55gh7pe3zfsjyp83qbx
+dependencies: []
 parent_id: is-01m44qz0rxvkakmyqaj7qdgagv
 hold: null
 hold_until: null
 created_at: 2026-10-08T21:17:46.179Z
-updated_at: 2026-10-23T06:12:14.860Z
+updated_at: 2026-10-24T12:22:50.075Z
 started_at: 2026-10-09T00:19:50.892Z
 closed_at: 2026-10-23T06:12:14.860Z
 close_reason: "Tracker audit 2026-10-23 (c-audit-a-1023, think-s4ld), checked by coord-intake-1023: DONE; STALE-CLAIM. a91c70907 (#730, merged 2026-10-23) intake-watch.yaml comment: 'which held the outside-corpus updates ... for think-1545, was removed'; not a live deferral (check_bead_tree.deferrals)"
