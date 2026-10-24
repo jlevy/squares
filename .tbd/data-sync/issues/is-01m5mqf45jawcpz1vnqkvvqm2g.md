@@ -5,7 +5,7 @@ title: "PR #754 (merge): owner answers in the walks (restatements, withdrawn fil
 kind: task
 status: in_progress
 priority: 1
-version: 5
+version: 6
 delegate: c-sync-754-1024
 labels: []
 dependencies: []
@@ -15,7 +15,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-23T15:53:25.937Z
-updated_at: 2026-10-24T01:05:35.981Z
+updated_at: 2026-10-24T01:25:28.681Z
 started_at: 2026-10-23T15:53:27.712Z
 ---
 
@@ -47,3 +47,10 @@ started_at: 2026-10-23T15:53:27.712Z
   - check_source_coverage: reconciled;
   - ruff: clean;
   - reviewer scripts: verdict and register diffs, an exact Göbel recheck, and the reruns.
+
+2026-10-24 c-sync-754-1024: merged main 5f5294d82 (#753, #760) into PR #754 and re-pinned; CI green at the head. Not merged; still draft.
+
+- Head d4f73323b9b4a41b6725403a8076c9133a138e1a (git ls-remote agrees): merge 4d04e40e1 (parents bf28ab6dd, 5f5294d82), re-pin d4f73323b.
+- Six conflicts, all kept from both sides, none outside mechanical: DATA_REVISION (main's, then re-pinned); the #719 walk's sources.yaml (main's 204/T-231 note plus this branch's rulings; gather reproduces the merged ledger.yaml byte for byte; render rewrote README.md only; ledger.json unchanged); result-requests.yaml #715, #719 and #732 (main's reply paragraphs, then this branch's); resources/README.md (each row changed by one side only); test_upper_bound_reports.py (both new tests).
+- Local: packing-validate --records --jobs 2 --inner-jobs 1: 53 of 53 passed; 12 walks check and render --check: OK; beyond_horizon_replay check: OK, 713 rows; pytest of test_intake_ledger, test_beyond_horizon_replay, test_check_requests, test_bead_tree and test_upper_bound_reports: 551 passed, plus 5 for the two merged tests run explicitly (slow included); release_pin --check: pin 4d04e40e; check_release_impact --baseline-ref origin/main: exit 0, no re-measure asked.
+- Hosted at d4f73323b: 31 passed, 28 skipped, 0 failed, each on its first attempt; packing-required, pages-required and merges-into-base pass (runs 40048767717, 40048767835, 40048765054; 40048767650 skipped). PR body's Validation section updated.
