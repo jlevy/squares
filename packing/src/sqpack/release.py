@@ -8351,6 +8351,49 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "v0.2.7."
         ),
     ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/devtools/profile_records.py",
+            "packing/frontier/results.yaml",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "T-163's family assessment and the owner's answer “Credit both "
+            "(Recommended)” (think-rh4j, think-cwfi): the record index reads the stored "
+            "record_scope assessment, which the gate recomputes, and credits every entry "
+            "of one report registered twice; T-163's rationale, notes, next_rung and "
+            "composition name Ryu's Theorem 1.3 window, the published note and why V2 is "
+            "held; four entries name the beads that own their unfinished confirmations; "
+            "and the requests record gains the fourteen tracking issues #772 to #780 and "
+            "#782 to #786. Measured against main 5664ac1e8, 14b14f2d1 and 2c58b6373 "
+            "(#750), and last, after review A's fixes (think-q5sr) and the merges of main "
+            "c5697c2f2 (#757), 5f8f005a3 (#766) and 34eb8bb75 (#769), at link revisions "
+            "5f8f005a and then 34eb8bb7: each time rendered "
+            "into empty site directories, twice from this tree and once from it with that "
+            "main's profile_records.py, results.yaml and result-requests.yaml swapped in, "
+            "render_n11_lower_bounds_explainer, render_n11_optimality_review, "
+            "render_n11_threshold_bound_review and render_packing_methods write all 69 "
+            "files byte-identical across the three. No PDF was printed; each prints from "
+            "that HTML. Retain v0.4.25, main's explainer after T-239, v0.1.11, v0.1.4 and "
+            "v0.2.7."
+        ),
+    ),
 )
 
 

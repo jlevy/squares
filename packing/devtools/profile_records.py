@@ -7,10 +7,14 @@ Bounds need positive case/lane support or a stronger pending claim. Comparable c
 compete on their stated intervals; equal later certificates add no strict numeric record.
 Explicit first_certified_in attribution follows the original certificate. Publication
 priority is used only where its date precision proves an earlier date, never T order,
-registration time or a missing supersession field. Unordered ties remain diagnostic.
+registration time or a missing supersession field. A tie among entries that all carry
+one identical attribution, one report registered more than once, credits every entry,
+since no priority orders a report against itself. Unordered ties remain diagnostic.
 
 Typed record_scope references expose a finite registered projection's additional
-family scope as unassessed currentness, with its review bead. They neither create a
+family scope as unassessed currentness, with its review bead, until an assessment says
+whether that scope is current; the gate holds every assessment to the family's
+maintained comparison (`cases.asymptotic.deficiency_family`). They neither create a
 result nor change authorship, scope, assurance or significance in the result register.
 """
 
@@ -78,12 +82,14 @@ class BoundFacet:
 
 @dataclass(frozen=True)
 class FamilyFacet:
-    """An additional canonical family scope whose current comparison remains unassessed."""
+    """An additional canonical family scope, with its current comparison if assessed."""
 
     result: str
     family: str
     scope: str
     review_bead: str
+    #: Whether the scope is current, as a reproduced assessment says; None if unassessed.
+    current: bool | None = None
 
 
 def _date_interval(value: object) -> tuple[date, date] | None:
@@ -182,6 +188,18 @@ def classify_records(
             and len({item.low for item in frontier}) == 1
         ):
             dates = {identifier: _published(records[identifier]) for identifier in by_result}
+            # Entries that register one report, an identical attribution (the same source
+            # keys at the same date), hold its bound together: no priority orders a report
+            # against itself.
+            attributions = {
+                (tuple(attribution["source_keys"]), str(attribution["published"]))
+                for identifier in by_result
+                if (attribution := records[identifier].get("attribution"))
+            }
+            if len(attributions) == 1 and all(
+                records[identifier].get("attribution") for identifier in by_result
+            ):
+                winners.update(by_result)
             for identifier, published in dates.items():
                 if published is not None and all(
                     other is not None and published[1] < other[0]
@@ -207,10 +225,18 @@ def classify_records(
     for facet in family_facets:
         if facet.result not in records:
             raise ValueError(f"unknown result in family facet: {facet.result}")
-        uncertain[facet.result].add(
-            f"The {facet.family} theorem scope survives its finite case projection; "
-            f"current family comparison is unassessed ({facet.review_bead}): {facet.scope}"
-        )
+        if facet.current:
+            current[facet.result].add(
+                RecordFacet(
+                    str(records[facet.result]["kind"]), scope=f"{facet.family}: {facet.scope}"
+                )
+            )
+        elif facet.current is None:
+            uncertain[facet.result].add(
+                f"The {facet.family} theorem scope survives its finite case projection; "
+                f"current family comparison is unassessed ({facet.review_bead}): "
+                f"{facet.scope}"
+            )
     return RecordIndex(
         tuple(sorted(current)),
         {
@@ -293,7 +319,12 @@ def current_record_ids(authored_ids: Iterable[str], index: RecordIndex) -> tuple
 def family_record_facets(
     ledger: Mapping[str, Any], records: standing.Records
 ) -> tuple[FamilyFacet, ...]:
-    """Expose explicitly linked family scope, without inferring a global comparison."""
+    """Expose explicitly linked family scope, current only where an assessment says so.
+
+    This reads the assessment and recomputes nothing: `tests/test_deficiency_family.py`
+    holds every recorded assessment to `cases.asymptotic.deficiency_family`, which
+    recomputes it from every statement of its family on each pull request, so no current
+    window rests on a frozen comparison and the site's build reads no mathematics."""
     facets = []
     used: set[str] = set()
     for section, rows in ledger.items():
@@ -313,7 +344,11 @@ def family_record_facets(
             bead = link["review_bead"]
             if re.fullmatch(r"think-[a-z0-9]{4}", bead) is None:
                 raise ValueError(f"record scope needs a review bead: {identifier}")
-            facets.append(FamilyFacet(identifier, section, row["side_condition"], bead))
+            assessment = link.get("assessment")
+            current = None if assessment is None else bool(assessment["current"])
+            facets.append(
+                FamilyFacet(identifier, section, row["side_condition"], bead, current)
+            )
     return tuple(facets)
 
 
