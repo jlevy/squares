@@ -3,9 +3,9 @@ type: is
 id: is-01m5ndg7em7x0s0p5wehyfd90e
 title: "PR #754 follow-up review B"
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 4
+version: 5
 delegate: c-rev-754b-1023
 labels: []
 dependencies: []
@@ -15,8 +15,12 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-23T22:18:30.739Z
-updated_at: 2026-10-23T22:52:09.086Z
+updated_at: 2026-10-24T01:26:51.013Z
 started_at: 2026-10-23T22:18:44.276Z
+closed_at: 2026-10-24T01:26:51.012Z
+close_reason: "Fixed in #754 merged at 0bbb0a2c4 (head d4f73323b; review A dispositions 6372591445, review B dispositions 6377099959; CI green: 40048767717, 40048767835, 40048765054)"
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes

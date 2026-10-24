@@ -3,9 +3,9 @@ type: is
 id: is-01m5nfdtfyjpee1131zzb9g0w9
 title: "Address PR #754 review B (B1-B4)"
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 3
+version: 4
 delegate: c-fix-754b-1023
 labels: []
 dependencies: []
@@ -13,8 +13,12 @@ parent_id: is-01m5ndg7em7x0s0p5wehyfd90e
 hold: null
 hold_until: null
 created_at: 2026-10-23T22:52:09.086Z
-updated_at: 2026-10-23T23:53:48.266Z
+updated_at: 2026-10-24T01:26:50.320Z
 started_at: 2026-10-23T22:52:20.160Z
+closed_at: 2026-10-24T01:26:50.319Z
+close_reason: "Fixed in #754 merged at 0bbb0a2c4 (head d4f73323b; review A dispositions 6372591445, review B dispositions 6377099959; CI green: 40048767717, 40048767835, 40048765054)"
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes

@@ -3,9 +3,9 @@ type: is
 id: is-01m5mqf45jawcpz1vnqkvvqm2g
 title: "PR #754 (merge): owner answers in the walks (restatements, withdrawn files, Göbel, D6)"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 6
+version: 7
 delegate: c-sync-754-1024
 labels: []
 dependencies: []
@@ -15,8 +15,12 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-23T15:53:25.937Z
-updated_at: 2026-10-24T01:25:28.681Z
+updated_at: 2026-10-24T01:27:55.560Z
 started_at: 2026-10-23T15:53:27.712Z
+closed_at: 2026-10-24T01:27:55.560Z
+close_reason: "#754 merged at 0bbb0a2c4 (head d4f73323b), reviews A and B with dispositions, CI green. Deferrals think-q920 and think-52z9 stay under think-wd4c, and think-a75a under think-ezt8."
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes
