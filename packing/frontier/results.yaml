@@ -20745,7 +20745,9 @@ results:
       every n >= 15 rests on Lemma 3, the scaling lemma and the induction, which no machine
       replays, and on the 14 October review's reading of them, which sets the minimum: C1.
       The entry declares V2, the minimum over its parts: no evidence entry records that
-      reading as a proof audit. The review read the proof as recoverable from the public
+      reading as a proof audit.
+
+      The review read the proof as recoverable from the public
       repository, which would support V3, and the import plan read it as not publicly
       recoverable. The author has since published the note itself (v0.9, 18 October
       2026), so V2's premise, a proof not publicly recoverable, no longer holds; the rung
