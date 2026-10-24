@@ -5,7 +5,7 @@ title: "Apply the owner's D1 answer: track beyond-horizon rows above 1024 (#666,
 kind: task
 status: in_progress
 priority: 1
-version: 18
+version: 19
 spec_path: docs/project/specs/active/plan-2026-10-24-rows-above-1024.md
 delegate: c-w7-1024
 labels:
@@ -18,7 +18,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-23T05:04:35.342Z
-updated_at: 2026-10-24T16:32:45.347Z
+updated_at: 2026-10-24T17:47:40.860Z
 started_at: 2026-10-23T05:05:14.273Z
 ---
 Owner decision of 23 October (think-f2io note): yes, no ceiling. Needs a plan: the rows' walks above 1024 (report order), custody without Git blobs (D4 hosted-data manifest; OR-18), the replay price at thousands of certificates (compute cap), and the frontier README rule. Stage 1 triage and pricing first, read-only.
@@ -61,3 +61,5 @@ Two more obligations from review B1 (`intake_ledger.answer_problems`, #754): a l
 2026-10-24 coord-intake-1024 on W7's two stops (PR #793 at 6d44159fc): (1) RECIPE hold: confirmed as built. The owner's D2 answer is that recipes become rows via a maintained checker (think-f2io), so a decided recipe is a declared row and the RECIPE class holds only recipes the checker refuses; the plan's 'as Held.answer' wording is wrong against the code and is corrected in #793's review round. Not an owner question. (2) Fang composites: refusing every composite until a rule exists is the safe default; a bead holds the rule.
 
 2026-10-24 c-w7-1024, PR #793 round 1 (reviews A senior, B correctness, C security; one push). Fixed: A1 A2 A4 A10 (plan and rule text: a decided recipe is a declared row, RECIPE holds refused recipes only; composites wait on think-tj3x; a deletion is no recipe row, D6 or think-kzme; "capacity less the stated deletions"), A3 and B3 (one Hosting per call: acquisition record, manifest and receipts read once, tested at 5,000 hosted rows; one pinned-entry helper for side and blob; is_hosted is hosted_pins' predicate), A5 (byte-change refusals tested), A6 (recipe_pin_problems), A7 and C1 to C4 (hosted_shards: counting reader under tarfile stream mode bounds pax and long-name records; per-member bound 64 MiB; chunked hash before publish; DIR-members/STEM; ShardError at the root; members dir inside the repository; the unused `sizes` check dropped, no source states sizes), A8 with B2 (recipe certificate_n = source_n; claim_side tS + L in decided_sides and release_sides; a recipe row is dated by the index commit that first states its recipe, and first_commits refuses one until R1 reads index history), A9, A12 (evand_exact_certificates.header shared with header_side; release record amended, 51/51 renders identical), B1 (#719 sources read #666 above FROZEN_THROUGH; lifted-#666 test), B4 (later_publications refuses a receipt below its walk), B5, B6. Deferred: A11 -> think-z236 (R1), A13 -> think-j83l. Review C's out-of-diff load_manifest note -> think-eyrn. Each new test fails with its fix mutated out (13 of 13). No record changes.
+
+2026-10-24 c-w7-1024: #793 round 1 pushed as acb59dba11f98bf2b8331f00e6a7e32a9e8b7b1d (fixes c3bb93b47, 72e2eba50, ae6c93fe0, acb59dba1); main had not moved, no merge. CI green: Packing validation 40113441342 (attempt 1), Certificate page 40113441337 (attempt 5; earlier attempts failed on HTTP 502 from the jobs API in wait_for_run_artifact, think-nnk7). Dispositions replies: A issuecomment-6387505266, B -6387505446, C -6387505611. Open from this round: think-z236 (A11, R1), think-j83l (A13), think-eyrn (C, outside the diff), think-nnk7 (CI waiter).
