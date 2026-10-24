@@ -893,6 +893,7 @@ case or experiment separately.
 | [Regularization Runs After the 22 October Adoption of T-225 (think-ql4v)](packing/cases/regularized_drawings/think-ql4v-2026-10-22/README.md) | source retention and archive policy | record | retained | — |
 | [Regularization Runs After the 23 October Adoption of T-229 (think-4h23)](packing/cases/regularized_drawings/think-4h23-2026-10-23/README.md) | source retention and archive policy | record | retained | — |
 | [Regularization Runs After the 23 October Adoption of T-230 (think-icp1)](packing/cases/regularized_drawings/think-icp1-2026-10-23/README.md) | source retention and archive policy | record | retained | — |
+| [Regularization Runs After the 23 October Adoption of the Algebraic Houses (think-ot5c)](packing/cases/regularized_drawings/think-ot5c-2026-10-23/README.md) | source retention and archive policy | record | retained | — |
 | [Regularization Runs After the Adoption of T-239 (think-tqb5)](packing/cases/regularized_drawings/think-tqb5-2026-10-23/README.md) | source retention and archive policy | record | retained | — |
 | [Regularization Runs After the 24 October Adoption of T-231 (think-h01y)](packing/cases/regularized_drawings/think-h01y-2026-10-24/README.md) | source retention and archive policy | record | retained | — |
 | [Issue 422 Exact Feasibility Review](docs/project/reviews/review-2026-10-07-squish-second-update-mathematics.md) | dated review record | record | retained | — |

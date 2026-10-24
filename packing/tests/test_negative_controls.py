@@ -1978,8 +1978,10 @@ def test_no_control_loads_a_pruned_tool() -> None:
     """No control's program imports a pruned file as it loads (think-wtso, think-cmbx).
 
     A worker carries nothing in `PRUNE`, so such a control fails at import in the worker
-    rather than in review. `adopt_houses` is the standing case: it loads `select_houses`,
-    which loads `algebraic_witness_reports`, which loads the pruned `regularize_evand`.
+    rather than in review. `regularize_select` is the standing case: it loads the pruned
+    `regularize_evand` as it loads. `adopt_houses` was until 23 October 2026, through
+    `select_houses` and `algebraic_witness_reports`, which now loads the driver only where a
+    comparison needs it, so that a house check over a number field runs in a worker.
     Imports inside a function are left out, since `check_results` reaches the same tool
     through a call it never makes; so are the commands a validation step starts, which
     only a control's own run in a worker decides. A `python` or `pytest` invocation the
@@ -1992,17 +1994,17 @@ def test_no_control_loads_a_pruned_tool() -> None:
                 _pruned_loads(run)
         else:
             assert _pruned_loads(run) == [], run
-    adopt = "from devtools import adopt_houses"
+    adopt = "from devtools import regularize_select"
     for run in (
-        "python3 -m devtools.adopt_houses",
-        ".venv/bin/python3 -m devtools.adopt_houses",
-        "python3 devtools/adopt_houses.py",
+        "python3 -m devtools.regularize_select",
+        ".venv/bin/python3 -m devtools.regularize_select",
+        "python3 devtools/regularize_select.py",
         f'python3 -c "{adopt}"',
         f"python3 - <<'PY'\n{adopt}\nPY",
         f'python3 - <<"PY" > /dev/null\n{adopt}\nPY',
         f"set -e\npython3 - <<PY | tee out.txt\n{adopt}\nPY\necho done",
         "uv run --frozen --group dev pytest -q tests/test_exact_sides.py::test_x",
-        "uv run --frozen --group dev python -m pytest tests/test_house_adoption.py -q",
+        "uv run --frozen --group dev python -m pytest tests/test_exact_sides.py -q",
     ):
         assert "devtools/regularize_evand.py" in _pruned_loads(run), run
     assert _pruned_loads("python3 -m devtools.couzo_715_replay") == [

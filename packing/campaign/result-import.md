@@ -931,12 +931,15 @@ No adoption waits for the owner’s word, and each case that once did is decided
     [section 5](../../docs/project/policies/regularization-policy.md#5-manual-review-and-adjustment),
     and a view the owner admits is drawn on its review record, as at n = 211 on 16
     October 2026: “Admit it.”
-  - Where the house best packing has an algebraic side, the runs settle the count: no
-    rational view is `same` or `bound` at an irrational side, and no number-field view
-    is decided on two exact routes yet (the policy’s obligation 1; think-mbdw is that
-    second route). Keeping a rational view just above an algebraic U is a question 13
-    decision, put to the owner once with the counts it concerns, and it holds no
-    adoption.
+  - Where the house best packing has an algebraic side, the count draws its exact house
+    and its regularization stays owed under think-mbdw: its `SETTLED` entry’s state is
+    `regularization-owed`, not decided, and its `owed` names the bead: no rational view
+    is `same` or `bound` at an irrational side, and no number-field view is decided on
+    two exact routes yet (the policy’s obligation 1; think-mbdw is that second route).
+    A rational view just above an algebraic U is not drawn.
+    The owner answered question 13 so on 23 October 2026 (think-r8cn): the best record
+    is always the record, and a regularized drawing may change the side only as a strict
+    improvement.
 - **A conjectured optimum** that the new house best packing is below, wherever its print
   rounds, is withdrawn, and any other stays; the adoption goes ahead either way.
 
@@ -948,8 +951,12 @@ the open bead that adopts it and one of three reasons (`STAGING_REASONS`): the p
 next pull request; regularization runs over the item cap, which split the adoption
 ([stage 5’s adoption steps](#adopt-a-house-then-regularize-it)); or no writer, where
 `adopt_houses` cannot yet write the new house best packing.
-A house best packing with an algebraic side is the one such gap the rule names, and the
-writer’s bead, think-ot5c, owns its counts.
+A house best packing with an algebraic side was the one such gap the rule names until 23
+October 2026, when the writer took an algebraic side, written in both lanes as the one
+root of its minimal polynomial in an interval, or of degree two as its closed form
+(`exact_sides.form`). The gap now is an algebraic house that no derived number-field
+fact and receipt hold (`upper_bound_houses.FIELD_COUNTS`), and the writer’s bead,
+think-ot5c, owns its counts.
 `bead tree` holds each bead open, and the adopting pull request takes the count off.
 `--check` fails on a staged count where the selection no longer changes the house best
 packing, or would change it to a packing other than the one staged, and on a count
@@ -1062,7 +1069,7 @@ and holds this one to the base record ([The House Rule](#the-house-rule)). It ru
 reason, then the guide’s render step, and lists the drawings as above.
 
 The records tier’s
-`every drawn picture is regularized, regular as published, decided or exempt`
+`every drawn picture is regularized, regular as published, decided, owed to an open bead or exempt`
 (`default_drawings --check-state`) fails on a pending count that the list does not name,
 so an adoption cannot pass until its runs have decided every count it re-houses.
 It also fails on a listed count that is no longer pending and on a `SETTLED` entry

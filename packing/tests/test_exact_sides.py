@@ -213,3 +213,124 @@ def test_a_closed_form_no_route_here_certifies_is_refused() -> None:
     assert bound is not None
     with pytest.raises(exact.ExactSideError):
         exact.of_bound(bound)
+
+
+def test_an_algebraic_side_is_written_as_its_root_form_and_read_back_exactly() -> None:
+    """think-ot5c (#660 review A1): the house writer states an algebraic house in both lanes
+    as `form` writes it, its minimal polynomial in `s` as the register writes one and an
+    interval cut at forty places in which it is the one root; `read_form`, the selection's
+    `parse_case` and the layer's `verified_bound` read it back as that side."""
+    assert exact.polynomial_text((9, -96, 206)) == "9s^2-96s+206"
+    assert exact.polynomial_text((1, 0, -2)) == "s^2-2"
+    assert exact.polynomial_text((-1, 0, 2)) == "-s^2+2"
+    long = (4775, -190430, *([0] * 9), 1, -1)
+    assert exact.polynomial_text(long) == "4775s^{12}-190430s^{11}+s-1"
+    assert exact.read_polynomial("4775s^{12}-190430s^{11}+s-1=0") == long
+    assert exact.read_polynomial("s^8 - 20s^7 + 178s^6") == (1, -20, 178, 0, 0, 0, 0, 0, 0)
+    root = exact.algebraic([9, -96, 206], (Fraction(7), Fraction(8)))  # (16 + 5 sqrt 2)/3
+    assert isinstance(root, exact.Algebraic)
+    # A side of degree two is written in its closed form, as n = 51's lanes write it
+    # (review A14 of #756); one of higher degree as its root form.
+    form = exact.form(root)
+    assert form == "(16+5*sqrt(2))/3"
+    assert exact.read_form(form) == root
+    cube = exact.algebraic([1, 0, 0, -2], (Fraction(1), Fraction(2)))
+    assert isinstance(cube, exact.Algebraic)
+    assert exact.form(cube) == (
+        "root(s^3-2, 1.2599210498948731647672106072782283505702, "
+        "1.2599210498948731647672106072782283505703)"
+    )
+    assert exact.read_form(exact.form(cube)) == cube
+    bound = regularize_evand.verified_bound(
+        {"verified_upper_bound": exact.ceiling(root, 16), "exact_form": form}
+    )
+    assert bound is not None
+    assert bound.unread is None
+    assert bound.polynomial == (9, -96, 206)
+    assert exact.of_bound(bound) == root
+    assert bound.compare(Fraction(769, 100)) == -1
+    assert bound.compare(Fraction(77, 10)) == 1
+    # Another `root(` form, as n = 11's names its polynomial, is not this one, and stays
+    # unread as before.
+    assert exact.read_form("root(P_trump11, 3.877)") is None
+    assert exact.read_form("3 + 4 sqrt(2)") is None
+
+
+def test_a_root_form_that_states_no_isolated_irreducible_root_is_refused() -> None:
+    """A written form whose polynomial is reducible, whose interval holds no root or two,
+    or that states a rational, is no exact side: the reader refuses it and the layer reads
+    the bound as unread, so no comparison rests on it."""
+    for form in (
+        "root(s^2-4, 1, 3)",  # (s - 2)(s + 2)
+        "root(s^2-2, 2, 3)",  # no root there
+        "root(s^2-3s+1, 0, 3)",  # two
+        "root(2s-3, 1, 2)",  # the rational 3/2
+    ):
+        with pytest.raises(exact.ExactSideError):
+            exact.read_form(form)
+        bound = regularize_evand.verified_bound(
+            {"verified_upper_bound": "1.5", "exact_form": form}
+        )
+        assert bound is not None
+        assert bound.unread is not None, form
+        assert exact.of_bound(bound) is None
+
+
+@pytest.mark.parametrize(
+    ("written", "message"),
+    [
+        ("5s3", "not a polynomial in s"),  # read as 5s+3 before review A8 of #756
+        ("s^2s", "not a polynomial in s"),  # as s^2+s
+        ("2 3s", "a space inside a term"),  # as 23s
+        ("9 s^2-96s+206", "a space inside a term"),
+        ("s^{12-1", "not a polynomial in s"),  # a half-braced exponent
+        ("s^2+s^2-2", "written twice"),
+        ("9s^2-96s+206=1", "equated to 0"),
+    ],
+)
+def test_a_polynomial_written_otherwise_than_the_register_writes_one_is_refused(
+    written: str, message: str
+) -> None:
+    """The reader is strict (review A8 of #756): every term after the first opens with its
+    sign, no space sits inside a term, an exponent is braced whole or bare, no degree is
+    written twice, and a closing equation is `=0`. Spaces about the signs stay allowed, as
+    n = 11's register entry writes its polynomial."""
+    with pytest.raises(exact.ExactSideError, match=message):
+        exact.read_polynomial(written)
+    if "=" not in written:
+        # A root form names no equation, so its reader refuses the same polynomials.
+        with pytest.raises(exact.ExactSideError):
+            exact.read_form(f"root({written}, 7, 8)")
+    assert exact.read_polynomial(" 9s^2 - 96s + 206 = 0 ") == (9, -96, 206)
+
+
+def test_a_quadratic_side_is_written_in_its_closed_form_and_read_back_exactly() -> None:
+    """Review A14 of #756: a house of degree two reads as its closed form, as n = 51's
+    `(16+5*sqrt(2))/3` does: `(a+b*sqrt(d))/c`, `d` square-free, in lowest terms, with the
+    sign of the root the side is. n = 295's house is 22(1 + sqrt 2)/3, the larger root of
+    `9s^2-132s-484`; the smaller root takes the minus sign. A text written otherwise, not
+    square-free or not in lowest terms, or stating a rational, is refused; one in another
+    closed-form style, as n = 5's `2 + (1/2)sqrt(2)`, is not this form and stays unread."""
+    house = exact.read_form(
+        "root(9s^2-132s-484, 17.7042327907360303578790506442044525761775, "
+        "17.7042327907360303578790506442044525761776)"
+    )
+    assert isinstance(house, exact.Algebraic)
+    assert exact.form(house) == "(22+22*sqrt(2))/3"
+    assert exact.read_form("(22+22*sqrt(2))/3") == house
+    other = exact.algebraic([9, -132, -484], (Fraction(-4), Fraction(-3)))
+    assert isinstance(other, exact.Algebraic)
+    assert exact.form(other) == "(22-22*sqrt(2))/3"
+    assert exact.read_form("(22-22*sqrt(2))/3") == other
+    twice = exact.algebraic([1, 0, -8], (Fraction(2), Fraction(3)))
+    assert isinstance(twice, exact.Algebraic)
+    assert exact.form(twice) == "(0+2*sqrt(2))/1"
+    for written, message in (
+        ("(44+44*sqrt(2))/6", "lowest terms"),
+        ("(-1+sqrt(8))/2", "square-free"),
+        ("(1+sqrt(4))/1", "rational"),
+        ("(1+sqrt(2))/0", "divides by zero"),
+    ):
+        with pytest.raises(exact.ExactSideError, match=message):
+            exact.read_form(written)
+    assert exact.read_form("2 + (1/2)sqrt(2)") is None

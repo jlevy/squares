@@ -28,18 +28,6 @@ deferrals:
     reason: 'replay4d''s calibration replays 2 of the closed form''s 136 records, intervals 26 and 14
       top, and no count: a sample sets no rung. A case record cites it once a complete replay moves
       the closed form''s verified lane, which think-wu73 holds over the owner''s 40 CPU-hour cap.'
-  - evidence: E-pingyou-574-algebraic-feasibility
-    results:
-    - T-174
-    bead: think-ot5c
-    blocked_on: think-ot5c
-    recorded: '2026-10-16'
-    reason: PR 574's algebraic certificates at 70, 153, 207 and 302 are replayed on one route, sqpack's
-      exact witness verifier over each field, which is what stage 4 asks. At 70, 153 and 207 they are
-      the smallest sides known, and the house rule of 16 October 2026 makes them the houses there, which
-      ended RP-3's wait for the owner. Their adoption is staged in select_houses.PENDING_ADOPTION under
-      think-ot5c, until adopt_houses can write an algebraic side; at 302 the certificate is above the
-      case. A case record cites the evidence once a house adopts one.
   - evidence: E-bengreff-594-cover-replay
     results:
     - T-184

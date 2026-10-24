@@ -128,8 +128,10 @@ is its 36-digit rational promotion at centre dilation 1, whose exact side is `s_
 algebraic witness has no rational frame, so its identity is measured against a 55-digit
 rational approximation and no view of it can be `same`. `U` is the case record's
 `verified_upper_bound`, held exactly (`verified_bound`): its exact form where that is a
-fraction, its printed decimal where it has no exact form, and a closed form as the one
-root of its minimal polynomial in a rational interval. A view is `bound` only at a
+fraction, its printed decimal where it has no exact form, and a closed form, or an
+algebraic house's side as the house writer writes it (`root(p, low, high)`,
+`exact_sides.form`), as the one root of its minimal polynomial in a rational interval.
+A view is `bound` only at a
 rational `U`; row 3 compares a side with a closed form exactly; and a form the driver
 cannot read (n = 11's `root(P_trump11, ...)`) decides nothing, so a view there goes to
 review rather than being compared with a printed decimal.
@@ -723,8 +725,32 @@ def _closed_form_bound(form: str) -> VerifiedBound:
     return VerifiedBound(form, polynomial=coefficients, interval=found[0])
 
 
+@functools.cache
+def _root_form_bound(form: str) -> VerifiedBound | None:
+    """An algebraic house's written side, `root(p, low, high)` (`exact_sides.form`), held
+    as the one root of `p` there and narrowed to `BOUND_INTERVAL_WIDTH`; None where the
+    form is not that one, and unread where it states no isolated irreducible root."""
+    from devtools import exact_sides  # noqa: PLC0415 -- it reads this module's bounds
+
+    try:
+        side = exact_sides.read_form(form)
+    except exact_sides.ExactSideError as error:
+        return VerifiedBound(form, unread=f"the root form states no exact side: {error}")
+    if not isinstance(side, exact_sides.Algebraic):
+        return None
+    return VerifiedBound(
+        form,
+        polynomial=side.polynomial,
+        interval=exact_sides.enclosure(side, BOUND_INTERVAL_WIDTH),
+    )
+
+
 def verified_bound(facts: Mapping[str, Any]) -> VerifiedBound | None:
-    """The record's verified upper bound held exactly (`VerifiedBound`), None without one."""
+    """The record's verified upper bound held exactly (`VerifiedBound`), None without one.
+
+    Its exact form is a fraction, a closed form, or an algebraic house's side written as the
+    house writer writes it, `root(p, low, high)` (`exact_sides.form`), which is read without
+    SymPy."""
     value, form = facts["verified_upper_bound"], facts["exact_form"]
     if value is None:
         return None
@@ -733,7 +759,9 @@ def verified_bound(facts: Mapping[str, Any]) -> VerifiedBound | None:
     try:
         return VerifiedBound(str(form), rational=Fraction(str(form).replace(" ", "")))
     except ValueError:
-        return _closed_form_bound(str(form))
+        pass
+    rooted = _root_form_bound(str(form))
+    return rooted if rooted is not None else _closed_form_bound(str(form))
 
 
 def upper_bound(facts: Mapping[str, Any]) -> Fraction | None:
