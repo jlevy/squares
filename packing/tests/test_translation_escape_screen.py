@@ -116,8 +116,11 @@ def _rendering_entry(directory: Path) -> dict[str, Any]:
 #: 24 October 2026 (think-h01y) moved 204 to the release's lower 204 file (T-231), its least
 #: margins 5e-21 and 1e-20, and 204 stayed; the same pass (think-tqb5) moved 303 again, to
 #: Amund Kristiansen's dilation certificate of issue 755 (T-239): 303 stayed, its least
-#: margins 6.0e-13 and 1.2e-12 again. Re-screening the adopted counts with the screen's own
-#: `--update --n` rebuilds the retained screen byte for byte.
+#: margins 6.0e-13 and 1.2e-12 again. The adoption of 25 October 2026 (think-bk9r) moved
+#: 268 and 303 to Francisco Couzo's issue-763 certificates (T-240): 268 joined and 303
+#: stayed, each certificate's least margins 1e-15 against every wall and 2.1e-13 between
+#: pairs, below the screen's tightest tolerance of 1e-12. Re-screening the adopted counts
+#: with the screen's own `--update --n` rebuilds the retained screen byte for byte.
 GOLDEN_UNSTABLE = {
     "n=1..100": [
         68,
@@ -171,6 +174,7 @@ GOLDEN_UNSTABLE = {
         264,
         266,
         267,
+        268,
         269,
         273,
         297,
