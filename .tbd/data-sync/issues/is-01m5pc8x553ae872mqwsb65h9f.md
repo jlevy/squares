@@ -5,7 +5,7 @@ title: "Import #763 (PR A, W1): Couzo's 964ee2b at or below 1024 — packet, led
 kind: task
 status: in_progress
 priority: 1
-version: 11
+version: 12
 delegate: c-import-763-1024b
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-24T07:16:16.676Z
-updated_at: 2026-10-24T17:01:58.113Z
+updated_at: 2026-10-24T17:57:16.783Z
 started_at: 2026-10-24T07:16:25.387Z
 ---
 Plan and verdicts: think-cnn7's notes (triage of 24 Oct). After #769 (PR C) and #757, both merged. Licence: the owner's presumption of permission (think-m8f4 follows up the exact licence). PR B (review, V3/C3, adoption and regularization at 268 and 303) follows.
@@ -69,7 +69,7 @@ Head c6617f3ee: Packing validation 40094477677 and Certificate page 40094477650 
 
 2026-10-24 c-prb-763-1024 (PR B, think-bk9r, https://github.com/jlevy/squares/pull/794, draft): stage 4 review of T-240 mapped (V3/C3, S3 confirmed); houses adopted at 268 and 303 in the pass of 25 October and regularized. The reply below shares the review and the adoption.
 
-DRAFTED REPLY, PR B (#763; post on the owner's word after PR B merges and its deploy is verified; drafted by c-prb-763-1024 for think-bk9r, not posted). For the requests record when it is posted: this reply reports E-couzo-763-certificate-report, E-couzo-763-exact-feasibility and E-couzo-763-review-exact-feasibility at 268 and 303 (results n268 and n303, T-240), which check_requests lists as a reply due. If #792 has merged first, name Daniel's 268 as T-242 in the houses paragraph.
+DRAFTED REPLY, PR B (#763; post on the owner's word after PR B merges and its deploy is verified; drafted by c-prb-763-1024 for think-bk9r, not posted). For the requests record when it is posted: this reply reports E-couzo-763-certificate-report, E-couzo-763-exact-feasibility and E-couzo-763-review-exact-feasibility at 268 and 303 (results n268 and n303, T-240), which check_requests lists as a reply due. #792 merged first, so the reply names Daniel's 268 as T-242.
 
 REPLY TEXT:
 
@@ -79,7 +79,7 @@ Francisco, the stage 4 review of your two certificates in the case corpus is don
 
 **T-240 is now V3/C3**, confirmed, independently re-implemented, by a Claude agent, a system family your commits also name; S3 is confirmed. The replay that runs this repository's maintained routes shares components with your pipeline (your manifest names `sqpack/verify.py` as its first checker), so the independent confirmation rests on the review's checker.
 
-**The houses.** Under the house rule, the case records at 268 and 303 adopt your certificates as their house best packings in the pass of 25 October 2026: at 268 from PingYou Ltd's T-174, 4.45e-3 above, and at 303 from Amund Kristiansen's T-239, 2.78e-3 above. Both strong generators ran on each new witness in the same pull request (their drawings are now regularized views at your sides). This project's run of Evan Daniel's regularizer also gives views below both sides: at 268 a certified KKT local minimum at exactly the side of Daniel's later certificate there, so it states no new bound; and at 303, from a solve whose KKT certificate fails the regularizer's own gate, a view 3.63e-12 below yours that all three of this repository's exact routes accept, which waits to be registered (think-20oj). At 268 Evan Daniel's later certificate, 4.48e-12 below yours, is being imported as reported; measured by the review it is Vladislav Lavrentev's placement of the same arrangement, the mirror image of yours, and once it is validated it becomes the house at 268 under the same rule.
+**The houses.** Under the house rule, the case records at 268 and 303 adopt your certificates as their house best packings in the pass of 25 October 2026: at 268 from PingYou Ltd's T-174, 4.45e-3 above, and at 303 from Amund Kristiansen's T-239, 2.78e-3 above. Both strong generators ran on each new witness in the same pull request (their drawings are now regularized views at your sides). This project's run of Evan Daniel's regularizer also gives views below both sides: at 268 a certified KKT local minimum at exactly the side of Daniel's later certificate there, so it states no new bound; and at 303, from a solve whose KKT certificate fails the regularizer's own gate, a view 3.63e-12 below yours that all three of this repository's exact routes accept, which waits to be registered (think-20oj). At 268 Evan Daniel's later certificate, 4.48e-12 below yours, is now registered as reported (T-242); measured by the review it is Vladislav Lavrentev's placement of the same arrangement, the mirror image of yours, and once it is validated it becomes the house at 268 under the same rule.
 
 **What the record corrected.** The packet README now quotes your commits' `Co-Authored-By` trailers and `efef7d1`'s "Codex's reviewed intake" beside the verifier header's Codex note; it describes the manifest's top-level `previous_source` as the parent each search refined, with the previous record one level up; and it states that at 268 your packing, Tymchishin's v4 parent and Daniel's are one arrangement in three placements.
 
@@ -96,4 +96,4 @@ Notes for you, none of which changes the verdict: the certificates' comment line
 
 The rows above 1024 (think-llit) and the import's earlier questions stay open on this issue.
 
-2026-10-24 c-prb-763-1024, review A of #794 (A1): the reply above corrected: the 303 regularizer solve is not a certified KKT local minimum (certificate invalid at the relaxed gate; the view is accepted by the three exact routes), and only the 303 view waits to be registered; the 268 view reaches Daniel's side (T-242 once #792 merges).
+2026-10-24 c-prb-763-1024, review A of #794 (A1): the reply above corrected: the 303 regularizer solve is not a certified KKT local minimum (certificate invalid at the relaxed gate; the view is accepted by the three exact routes), and only the 303 view waits to be registered; the 268 view reaches Daniel's side (T-242, on main since #792).
