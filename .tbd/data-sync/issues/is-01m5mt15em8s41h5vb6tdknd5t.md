@@ -5,7 +5,7 @@ title: "Flip regularization: canonical pose stage for drawn packings (quadrant-w
 kind: feature
 status: closed
 priority: 2
-version: 16
+version: 17
 spec_path: docs/project/specs/active/plan-2026-10-23-flip-regularization.md
 delegate: claude-orientation-coordinator-u2p5tx
 labels: []
@@ -17,10 +17,11 @@ child_order_hints:
   - is-01m5mzk6r2extagk7j1b2vveve
   - is-01m5mzk7gtthm3xbdy8b1hggbn
   - is-01m5n2rhapespk8a2y6yjtnq4s
+  - is-01m5nrtdxf5sswwytj8g47m6m4
 hold: null
 hold_until: null
 created_at: 2026-10-23T16:38:14.228Z
-updated_at: 2026-10-23T22:22:22.474Z
+updated_at: 2026-10-24T01:36:19.374Z
 started_at: 2026-10-23T16:38:17.920Z
 closed_at: 2026-10-23T20:48:44.136Z
 close_reason: "Merged in https://github.com/jlevy/squares/pull/761 (merge 77aba4c02, 2026-10-23 20:22 UTC). Flip regularization: heaviest quadrant lower right, keeps 252/324 published poses, own record + 1.5 s check; posters (infographics v0.7.0) and site canonical; Original/As published unchanged. Deployed site: check_published_site --commit 77aba4c02 passed 5710/5710. Follow-up: think-rkg1 (registry dates)."
