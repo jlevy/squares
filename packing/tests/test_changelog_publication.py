@@ -132,7 +132,7 @@ def test_publication_audit_accepts_the_renderers_encoded_artifact_destinations(
     assert all(passed for passed, _line in check_published_site.changelog_checks(news))
 
 
-def test_news_has_one_card_per_entry_and_home_highlights_three_existing_s5_results(
+def test_news_has_one_card_per_entry_and_home_shows_the_newest_at_its_opening_levels(
     views: tuple[dict, str, str, str, str],
 ) -> None:
     document, news, _github, about, home = views
@@ -144,12 +144,27 @@ def test_news_has_one_card_per_entry_and_home_highlights_three_existing_s5_resul
     for day in {entry["date"] for entry in ordered}:
         assert news.count(f'id="changelog-date-{day}"') == 1
     selected = news_highlights.highlights(document)
+    levels = news_highlights.default_levels(document)
+    assert len(selected) == news_highlights.LIMIT
+    assert all(entry["significance"]["score"] in levels for entry in selected)
+    assert (
+        selected
+        == tuple(entry for entry in ordered if entry["significance"]["score"] in levels)[
+            : news_highlights.LIMIT
+        ]
+    )
+    carried = [entry["id"] for entry in news_highlights.carried(document)]
+    assert re.findall(r'data-news-entry="([^"]+)"', home) == carried
+    shown = re.findall(r'<section class="site-news-day" id="changelog-entry-([^"]+)"', home)
+    assert shown == [entry["id"] for entry in selected]
+    # Today News holds three S5 articles, so the box opens on S5 and leads with T-194's
+    # (16 October).
+    assert levels == (5,)
     assert [entry["result_ids"] for entry in selected] == [["T-194"], ["T-154"], ["T-153"]]
-    assert re.findall(r'data-news-entry="([^"]+)"', home) == [entry["id"] for entry in selected]
     for entry in selected:
         anchor = render_changelog.entry_anchor(entry["id"])
         assert f'href="news.html#{anchor}"' in home
-    assert '<a class="site-action" href="news.html">All News' in home
+    assert '<a class="site-action" href="news.html" data-news-carry>All News' in home
     assert 'id="news" class="site-title">News' in news
     assert re.search(
         r'<a(?=[^>]*data-page="news")(?=[^>]*aria-current="page")(?=[^>]*href="news.html")[^>]*>',

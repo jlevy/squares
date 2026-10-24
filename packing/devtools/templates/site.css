@@ -4063,11 +4063,30 @@ html[data-site-atlas-view="triangle"] .site-atlas-grid:where([data-atlas-grid]) 
   background: var(--site-wash);
   color: var(--kpress-doc-accent);
 }
+/* The compact filter, the home page's News box's: the same significance choices,
+   alone at the right above the cards and at a lighter weight, so they never compete
+   with the section's heading. Their size, height and padding are the shared small
+   chooser's (`site-nav.css`), which every chooser keeps (the owner, 23 October 2026;
+   `test_every_compact_chooser_centers_its_capitals`). */
+.kpress .site-news-filters-compact {
+  justify-content: flex-end;
+  margin-block: 0 0.5rem;
+}
+.site-news-filters-compact .site-tabs.site-chooser-small button {
+  font-weight: var(--site-font-weight-sans-light);
+}
+.site-news-filters-compact [data-news-empty] {
+  flex-basis: 100%;
+  margin: 0;
+  text-align: end;
+}
 
-/* The default first paint already shows S4/S5. Readers without scripting receive
-   the complete archive, as the Results table's progressive filters do. */
+/* The archive's default first paint already shows S4/S5. Readers without scripting
+   receive the complete archive, as the Results table's progressive filters do. A
+   preview (`data-news-limit`) keeps its first paint: it carries more articles than it
+   shows, for its filter. */
 @media (scripting: none) {
-  .kpress .site-news-day[hidden] {
+  .kpress [data-news]:not([data-news-limit]) > .site-news-day[hidden] {
     display: block;
   }
 }

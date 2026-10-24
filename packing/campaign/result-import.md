@@ -133,6 +133,9 @@ A lane writes it with each new entry, as the day it registers it
 ([stage 3](#stage-3-record)). When the owner gives the word to merge, the branch’s last
 two commits re-date the branch’s new entries to the merge day and re-pin
 ([stage 5](#stage-5-publish), Before merge).
+The same stamp dates a branch’s new house best packings and new sources of dated
+beyond-horizon rows in `packing/frontier/landings.yaml`, which the home page’s Recently
+Added places them by; a test fails until every adopted count and row source has its day.
 A forgotten re-date leaves that pull request’s entries a day or two early and turns
 nothing red. The sweep after a merge runs `python -m devtools.stamp_landed --audit` from
 `packing/`, which compares every entry on `main` with `main`’s first-parent history and
@@ -646,7 +649,7 @@ raise C beyond a qualifying read.
 An announcement, source scan, private run summary with unresolved build coverage, or
 partial build does not qualify as complete execution.
 
-The seven record rules are:
+The eight record rules are:
 
 - **`attribution.published` is the claim’s date, not the pin’s:** the date the source
   gives for it, or the UTC date of the first commit that contains the certificate; for
@@ -655,6 +658,14 @@ The seven record rules are:
 - **`landed` is written with the entry**, after `registered` and as the same day.
   The schema requires it, and the merge step re-dates it to the day the entry reaches
   `main` ([stage 5](#stage-5-publish)).
+- **A new house best packing or new beyond-horizon rows get a landing.** After changing
+  `upper_bound_houses.ADOPTED` or adding a source’s beyond-horizon rows to
+  `source-coverage.yaml`, run `python -m devtools.stamp_landed --apply` from `packing/`,
+  which dates them in `packing/frontier/landings.yaml`, the record the home page’s
+  Recently Added places them by.
+  `tests/test_stamp_landed.py` fails until every adopted count and row source has its
+  day, and the merge step re-dates them ([stage 5](#stage-5-publish)); run it again
+  after merging `main`.
 - **The claim states each bound it reports**, in a form `devtools.check_standing` reads:
   `s(n) <= v` for an upper bound, `s(n) >= v` for a lower bound and the same with `=`
   for an exact value, where $v$ is the value the source certifies, written as a fraction
@@ -1211,7 +1222,9 @@ Last, once the owner has given the word, re-date the branch’s new register ent
 the merge day.
 The branch’s last two commits are the stamp, `uv run --frozen --all-extras
 --group dev python -m devtools.stamp_landed --apply` from `packing/`, which sets
-`landed` on every entry `origin/main` lacks to today in UTC, and its re-pin, `python -m
+`landed` on every entry `origin/main` lacks to today in UTC and dates, in
+`packing/frontier/landings.yaml`, each house best packing and each source of
+beyond-horizon rows the branch adds to `main`’s tree, and its re-pin, `python -m
 devtools.release_pin --update`. If `main` moves, or the merge slips past midnight UTC,
 run both again after the re-merge: the stamp re-dates the same entries.
 `landed` is the day of the stamp, so the stamp is the last step before the merge.
