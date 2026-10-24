@@ -1104,15 +1104,16 @@ repositories:
   - url: https://github.com/TheSnakeFang/squarepack-certs
     read_through: 0e9be7961773aa78b879c4ee6ba584a67e2e5513
     read_on: '2026-10-19'
-    bead: think-494l
     note: >-
       One commit past 078789a changes only README and adds the v0.8 note at
       note/fang-2026-n2-n-1.md. #603 comment 6255103888 also announces the separate
-      public squarepack-lean project at 947bdae. Note and Lean review are owned by
-      think-494l under think-0esw. The note's mixed-step and announced Lean single-step
-      statements require separate binding checks; no new certificate in this commit
-      and no build, replay or assurance promotion here. Receipt:
-      packing/campaign/issue-intake/intake-20261019/fang-source-inventory.json.
+      public squarepack-lean project at 947bdae. The note's mixed-step and announced Lean
+      single-step statements required separate binding checks; no new certificate in this
+      commit. Receipt: packing/campaign/issue-intake/intake-20261019/fang-source-inventory.json.
+      Since #781 merged on 24 October the fang-excess-note-2026-10-19 packet pins 9ffba0f,
+      two commits later, and retains README.md and note/ there, the note at draft v0.9, and
+      T-163 rests on it at V3 (E-fang-excess-note-proof, think-494l), so this read holds
+      nothing back.
   # Continuation after #676 merged: source reads do not replay any certificate.
   - url: https://github.com/evand/square-packing
     read_through: 3a9948c781be668b1547cc2bf64a0d1e614f9bca
@@ -1171,7 +1172,6 @@ repositories:
   - url: https://github.com/TheSnakeFang/squarepack-certs
     read_through: 9ffba0f3a84b38f0c92790c1d3089f979ef53f0b
     read_on: '2026-10-21'
-    bead: think-494l
     note: >-
       The two commits of 19 October (03:29Z) past 0e9be79, the head. 6e26525 makes the note
       draft v0.9 with the Zenodo DOI 10.5281/zenodo.23463481, rewords its abstract and
@@ -1179,8 +1179,11 @@ repositories:
       record has since moved; no theorem, certificate or checker changes. 9ffba0f narrows
       the README's Lean statement from "Theorems 1 and 2" to "Theorem 1 and the unmixed
       bounds of Theorem 2", the scope think-494l compares with T-163 before any rung
-      change. New evidence for T-163, which think-494l holds (the DOI with think-0esw,
-      #603); no certificate to import.
+      change. New evidence for T-163; no certificate to import. Since #781 merged on 24
+      October the fang-excess-note-2026-10-19 packet pins this commit, retains README.md
+      and note/ and pins ATTRIBUTION.md, CHANGELOG.md, LICENSE, VERIFICATION.md and
+      MANIFEST.sha256 by digest, and T-163 rose to V3 on the note
+      (E-fang-excess-note-proof, think-494l), so this read holds nothing back.
   - url: https://github.com/wand125/square-packing
     read_through: a6c0dbbb259c26ed2ae5f429dbe68c9c3a27185d
     read_on: '2026-10-21'
