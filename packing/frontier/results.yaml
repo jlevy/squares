@@ -3270,6 +3270,7 @@ results:
           BC-240's audited prose steps, which the composition note judges load-bearing,
           mechanised or reviewed again by a distinct reviewer
         rung: C3
+        link: think-o9kd
     notes: >-
       2026-10-03: T-060, which confirms that s(11) is Trump's exact side U (its T), implies
       this result's first clause and not its equality clause (superseded_by), so this
@@ -4169,11 +4170,13 @@ results:
           the 2026-09-27 checker-scaling review recorded as an external_review on the
           report entries this result cites
         rung: C1
+        link: think-wcex
       - what: >-
           sqverify-fast's census of 3 October, which verified all 48 standing certificates
           at all 201 directions, recorded with its control receipts and a review of the
           census route that reads them
         rung: C3
+        link: think-sb7a
     notes: >-
       V0 because every cited entry is the source's public claim or a reported-lane transfer
       from it: assurance reported, replay not attempted. The source reports each standing
@@ -8774,6 +8777,7 @@ results:
           every unit square in the square of side x, or a formalization of the three-case
           reduction in Theorem 3's proof
         rung: C2
+        link: think-gtjq
     notes: >-
       Superseded as the verified lower bound at both of its cases when this line of the
       register merged with the replays recorded in parallel, on 2026-10-03: at n = 37 by
@@ -12088,6 +12092,7 @@ results:
           the step at S = T mechanised, or reviewed again by a distinct reviewer with the
           oversight record the ladder asks for
         rung: C3
+        link: think-ysr9
     notes: >-
       Registered on 6 October 2026 by the owner's decision, to state separately what
       the record had held only as a conditional corollary: the paper stated it from
@@ -20675,8 +20680,9 @@ results:
       rationale: >-
         A bound family for every n >= 15 with an explicit construction: the deficiency bound
         c*(k) <= k - 1 - F(k) improves Arslanov, Mustafin and Shangitbayev's k - 1 at every
-        k >= 15 and Ryu's at 15 <= k <= 78 and at k = 86; it settles no case n <= 324, and
-        its four in-corpus finite bounds trail the cases.
+        k >= 15 and Ryu's Theorem 1.4 at 15 <= k <= 78 and at k = 86, his Theorem 1.3 at its
+        best b at 15 <= k <= 68 and 70 <= k <= 75; it settles no case n <= 324, and its four
+        in-corpus finite bounds trail the cases.
       scored: '2026-10-14'
       by: >-
         the 14 October review
@@ -20761,13 +20767,13 @@ results:
       reported and not built here (think-57ei).
     next_rung: >-
       C3 needs a build here of a Lean proof of the theorem with its axiom receipt: Evan
-      Daniel's proof of both theorems (T-236, think-dgrc, about 2 to 3 CPU-hours and 10 GB of
-      disk), or Fang's own, about 0.25 CPU-hours, which covers Theorem 1 and the single-step
-      bounds of Theorem 2 only. C4 needs, beside that build, a second accepted adversarial
-      review by a distinct reviewer, which the stage 4 review of the note would be
-      (think-pxxi), and a retained human oversight record. The 70 inventory certificates
-      pinned by digest wait for a hosted-data release or a W7 route; they move no rung of
-      this entry.
+      Daniel's proof of both theorems (T-236, think-dgrc: about 1.5 to 3 CPU-hours, at most
+      about 8 GB per chunk, and 10 GB of disk, as T-236 prices it), or Fang's own, about
+      0.25 CPU-hours, which covers Theorem 1 and the single-step bounds of Theorem 2 only.
+      C4 needs, beside that build, a second accepted adversarial review by a distinct
+      reviewer, which the stage 4 review of the note would be (think-pxxi), and a retained
+      human oversight record. The 70 inventory certificates pinned by digest wait for a
+      hosted-data release or a W7 route; they move no rung of this entry.
     composition: >-
       Compound. The finite bounds at 211, 241, 273 and 307 rest on the two-route replay of
       the retained certificates (E-fang-excess-theorem-exact-feasibility). The theorem for
@@ -20777,6 +20783,13 @@ results:
       The 14 October review's reading of the argument, recorded on
       E-fang-excess-theorem-report, sets the theorem's C1; no Lean proof has been built
       here.
+
+      Until 24 October the entry held V2, as the rung nearest what the record then held and
+      not as a finding that the proof could not be recovered: V2's premise ended when the
+      author published the note on 18 October, and nothing the record cited was yet evidence
+      the V3 predicate reads. Retaining the note and citing it as a published proof
+      (think-494l) is what moved the rung; the stage 4 review of the note (think-pxxi) is
+      toward C4 and was not needed for V3.
     unfinished_confirmations:
       - what: >-
           a build here of Evan Daniel's Lean proof of Theorems 1 and 2, FangFinal from the 18
