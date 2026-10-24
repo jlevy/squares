@@ -690,7 +690,9 @@ def test_every_deep_gate_job_is_clocked_against_a_declared_wall() -> None:
     # A relaxation with no bead behind it is a permanent one.
     assert gate.reports_only
     assert gate.tracking_bead
-    assert gate.wall.history[-1].seconds == 2540.6
+    # Superseded walls stay, oldest first: the predecessor topology's eight-run record,
+    # then the first complete fanout's 1133s, before the slow lane took the critical path.
+    assert [record.seconds for record in gate.wall.history] == [2540.6, 1133.0]
 
 
 def test_the_deep_gate_aggregate_reads_the_walls_it_is_budgeted_against() -> None:
