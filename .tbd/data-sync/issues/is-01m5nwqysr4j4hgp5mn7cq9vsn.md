@@ -5,14 +5,14 @@ title: "Decision: how profiles count one report registered as two results (T-073
 kind: task
 status: open
 priority: 2
-version: 3
+version: 4
 labels:
   - decision
   - result-import
 dependencies: []
 parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 created_at: 2026-10-24T02:44:52.663Z
-updated_at: 2026-10-24T04:50:54.615Z
+updated_at: 2026-10-24T05:31:25.613Z
 ---
 Owner decision, raised by lane c-review-pending-1024 (think-rh4j) on 24 October 2026 from the owner's request to catch up every "Review pending" on the profiles.
 
@@ -46,3 +46,5 @@ Recommendation: A. It follows the register as it stands, uses no registration or
 ## Notes
 
 2026-10-24 coord-intake-1023: OWNER ANSWERS (in conversation). On a pair of register entries from one report (T-073/T-080, T-083/T-084), the owner selected "Credit both (Recommended)": when the tied entries carry identical attribution, both are credited as current (option A, the 11-line change to classify_records). On the nine pending results with no tracking issue (T-036, T-046, T-087, T-112, T-142, T-143, T-144, T-179, T-192), the owner selected "Open all nine (Recommended)": one issue per result, labelled intake, stating its current review state, updated at every change, and closed when the review lands.
+
+2026-10-24 c-fin-770-1024 (think-cwfi): applied in PR #770 at 3b4406002. classify_records credits every tied entry when all carry the identical attribution (the prepared 11-line change); the negative control (other key, overlapping date, compound key list, missing attribution) stays unresolved. load_record_index().unresolved is empty: 121 current, 0 unassessed (from 119 and 4) after the merge of main af9c9e850. Overview build before/after: 4 files differ (profiles/hiroaki-hosono.html 55 to 57 records, no Review pending, no awaiting-review list; profiles/index.html 117 to 119 records and his row 57; resources.html wand125/square-packing-bounds card 24 to 26; profiles/hakan-karakus.html awaiting-review list gone). The rule is recorded in result-import.md, Several Reports at One Count, quoting the label. Close this bead when #770 merges.
