@@ -2736,14 +2736,14 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "render_packing_methods write every file byte-identical across all four. The "
             "explainer counts the register (233 entries here, 230 on main) and differs "
             "only there; it takes its successor, v0.4.22, after merging main 77aba4c02. "
-            "Measured again at 2b064e103, after T-237, T-238, chelokot's coverage entry and "
-            "the [Friedman DS7] bibliography entry, against main 0bbb0a2c4 (#754): at link "
-            "revision 0bbb0a2c, twice from this tree and twice with main's version of each "
-            "of the 16 files the branch modifies swapped in, release.py and tests aside (69 "
-            "files each), the three write every file byte-identical, and the explainer "
-            "differs only in counting 236 results against main's 231, so it takes v0.4.23 "
-            "over main's v0.4.22. No PDF was printed; each prints from that HTML. Retain "
-            "v0.1.11, v0.1.4 and v0.2.7."
+            "Measured again at 2b064e103 and c1025d6f1, after T-237, T-238, chelokot's "
+            "coverage entry and the [Friedman DS7] bibliography entry, against main "
+            "0bbb0a2c4 (#754): at link revision 0bbb0a2c, twice from this tree and twice "
+            "with main's version of each of the 16 files the branch modifies swapped in, "
+            "release.py and tests aside (69 files each), the three write every file "
+            "byte-identical, and the explainer differs only in counting 236 results "
+            "against main's 231, so it takes v0.4.23 over main's v0.4.22. No PDF was "
+            "printed; each prints from that HTML. Retain v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
     ReleaseNoPublicChange(
