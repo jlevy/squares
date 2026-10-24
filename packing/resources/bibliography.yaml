@@ -3577,6 +3577,33 @@ sources:
       record keeps as a request beside the index's own word, with a measurement that decides
       nothing; per-row credit beyond the corpus is the owner's open question (D5,
       think-f2io). Upper bounds only; the comment's two theorems bound no s(n).
+  - key: '[Couzo issue 763 2026-10-23]'
+    authors: [Couzo]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-23'
+    lineage: builds-on-project
+    credit: Couzo after Lavrentev, Tymchishin, Muglich, Polkovskyi, Daniel, Fang, de Winter, Levy
+    short_credit: Couzo after Lavrentev et al.
+    note: >-
+      Francisco Couzo's issue 763 asks to register 436 upper bounds at 268 to 9802 from
+      franciscouzo/square-packing at 964ee2bdf301d0c8912d956d4010f478dcbbd5ea, committed 23
+      October 2026 and pushed with efef7d1 and fa6237e at 2026-10-23T23:38:42Z, after the
+      issue. The issue carries no table; the claim map is re-derived from the retained indexes
+      by the source README's rule (web/couzo-issue763-2026-10-23/receipts/claim-map.json): 203
+      at or below 1024, 268 and 303 in the corpus, and 233 above. The certificates, indexes,
+      README and construction checker are retained on the owner's presumption of permission
+      from submission (24 October 2026; the licence follow-up is think-m8f4). The manifest
+      credits Couzo at every row, after Vladislav Lavrentev's packings from his Kaggle notebook
+      CUDA Packing Search v11 at 253 rows, Kirill Tymchishin's notebook packings at 97 and
+      Darius Muglich's at 1; the other 85 keep the chains of the packings they refine, among
+      them Muglich's seeds, Evan Daniel's with Kevin Fang's two-wedge design at 343, Joost de
+      Winter's and Mykhailo Polkovskyi's f1ceee4 refinements. The issue names the notebooks'
+      source notices for their earlier credits; the source does not publish them. The key
+      also cites the index's 15 Couzo rows the selection rule leaves out, at 204, 335, 339,
+      344, 379, 380, 421, 452, 490, 507, 535, 792, 800, 935 and 998, which no issue reports:
+      the 10 below the record are the watched repository's publication of 964ee2b, the
+      couzo-964ee2b-2026-10-23 source. Upper bounds only; no optimality claim.
   - key: '[de Winter issue 666 2026-10-17]'
     authors: [de Winter]
     year: 2026

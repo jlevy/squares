@@ -33571,6 +33571,133 @@ results:
         verdict: accepted
         covers: [T-239]
 
+  - id: T-240
+    kind: upper-bound
+    registered: '2026-10-24'
+    landed: '2026-10-24'
+    headline: >-
+      Couzo's 268 and 303 of #763, below T-174 and T-239, from Kaggle notebook packings
+    claim: >-
+      Two complete rational source certificates of issue #763 report finite upper-bound
+      improvements at the exact sides they state: s(268) <=
+      78645658458105249171306580101/4660659750118000000000000000 = 16.87436171587383…, 4.45e-3
+      below T-174, and s(303) <=
+      55035101387261868285958438488216555614454417144023299/3073388523105741896887024831655729584500000000000000
+      = 17.90697823379890…, 2.78e-3 below T-239, the case's house best packings when they
+      were reported. Complete native feasibility outcomes are retained separately; the
+      selected standing cases are unchanged pending independent review and record review.
+
+      The issue states that both maintained exact geometry routes (the corner replay and the
+      projection check) accept each finite source witness, and the source's manifest records
+      the author's checker receipts with this repository's sqpack/verify.py and the source's
+      exact checker verify_bound_certificate.py (Evan Daniel's MIT verifier, with
+      modifications by Francisco Couzo with Codex, as its header says), pinned here by digest
+      and not run. The source's README selects its claims: each count credited to Couzo whose
+      exact side, rounded up at 12 places, is strictly below the reviewed comparison's 12-place
+      print where that comparison is Couzo's own, and more than 1e-10 below it where it is
+      another author's. Those statements are the author's; no source program ran here.
+
+      Credit Francisco Couzo (https://github.com/franciscouzo/square-packing), after the
+      packings his searches refined, as the source's manifest names them: at 268 Kirill
+      Tymchishin's packing from his Kaggle notebook "CPU/GPU/MPS EDA+Seam LP" v4, the parent
+      the manifest retains, and at 303 Couzo's own Kaggle push refinement of Vladislav
+      Lavrentev's packing from his Kaggle notebook "CUDA Packing Search" v11. The issue says
+      the notebooks' own source notices carry their earlier construction credits; the source
+      does not publish them, and the author is asked for them.
+    scope:
+      n_values: [268, 303]
+    verification: V0
+    confirmation: C0
+    significance:
+      score: 3
+      rationale: >-
+        Draft, from the stage 1 triage (think-cnn7): smaller finite construction sides at 268
+        and 303, 4.45e-03 and 2.78e-03 below the houses T-174 and T-239, far above T-226's
+        1.88e-05 at the low end of S3. Whether each is a new arrangement or a refinement of
+        the notebook packing it starts from is the stage 4 review's measurement, which
+        confirms or changes the score. No lower bound or optimum.
+      scored: '2026-10-24'
+      by: >-
+        the stage 1 triage of 24 October (c-triage-763-1024, think-cnn7) and the records lane
+        of think-ptkk
+    novelty: previously-published
+    attribution:
+      source_keys: ['[Couzo issue 763 2026-10-23]']
+      published: '2026-10-23'
+    evidence:
+      - E-couzo-763-certificate-report
+    artifacts:
+      - packing/resources/web/couzo-issue763-2026-10-23/README.md
+      - packing/resources/web/couzo-issue763-2026-10-23/acquisition/claims.json
+      - packing/resources/web/couzo-issue763-2026-10-23/source/certificates/best/n268.cert
+      - packing/resources/web/couzo-issue763-2026-10-23/source/certificates/best/n303.cert
+      - packing/resources/web/couzo-issue763-2026-10-23/receipts/exact-certification.json.xz
+      - packing/resources/web/couzo-issue763-2026-10-23/receipts/claim-map.json
+      - packing/campaign/issue-intake/upper-bounds-issue763-20261024/README.md
+      - packing/devtools/upper_bound_reports.py
+      - packing/devtools/couzo_763_claims.py
+    controls:
+      - packing/tests/test_upper_bound_reports.py
+      - packing/tests/test_couzo_763_claims.py
+    notes: >-
+      A separate complete repository replay is retained for n = 268 and 303: 2 positives and
+      4 duplicate-square and outside-container controls passed their required outcomes on
+      both routes, 489186 pair decisions; summed over the 6 jobs, the receipt records 59.47
+      route CPU seconds and 70.85 job wall seconds, the longest job 14.78 seconds. Every
+      positive clears every wall by at least 1.00e-15 and every pair by at least 2.07e-13.
+
+      In the packet's frozen comparison (acquisition/claims.json, read from main on 24
+      October 2026): at n = 268 the certificate is below the case's ceiling (PingYou Ltd, of
+      Francisco Couzo's packing as Evan Daniel improved it, T-174) by 4.45e-03, and below
+      T-098 (#375), Couzo's certificate of #476 and #593 by 4.45e-03; at n = 303 it is below
+      the case's ceiling (Amund Kristiansen, found from Evan Daniel's packing, T-239) by
+      2.78e-03, below T-230 (#728) and Mykhailo Polkovskyi's later certificate of 23 October
+      by 2.79e-03, below T-186, T-174, T-162 and #593 by 2.98e-03, and below every other
+      report there by 6.09e-03 or more. At that frozen read of main it is the smallest report
+      at each count.
+
+      The ledger of 24 October for issue 763
+      (campaign/issue-intake/upper-bounds-issue763-20261024) records both in report order. At
+      268 a later report, Evan Daniel's certificate pushed to his watched repository on 24
+      October 2026, is 4.48e-12 below this side; its import is pending (think-l49q), and 268
+      is adopted only once it is decided.
+
+      The issue carries no table. devtools.couzo_763_claims re-derives its claims from the
+      retained certified_bounds.json and public_bounds.json by the source README's rule and
+      reproduces the issue's counts: 436 rows, 203 at or below 1024 and 233 above
+      (receipts/claim-map.json). 268 and 303 are the two in the corpus; the 201 at 325 to
+      1024 are the source's beyond-horizon claims, 184 of them rows
+      (couzo-issue763-2026-10-23), and the 233 above 1024 wait on think-llit.
+
+      The certificates at 268 and 303 were first committed on 23 October 2026, in the commit
+      the issue names, and GitHub's activity log records it pushed the same day, minutes
+      after the issue, which dates the report. The packet
+      retains the manifest's two parents, the Kaggle notebook packing at 268
+      (certificates/parents/85dbd707…) and Couzo's own Kaggle push packing at 303
+      (certificates/parents/22f07a7c…), for the stage 4 review's identity measurement. The
+      manifest's previous_source at each count is the source's previous record, not lineage.
+
+      Couzo's later release of 24 October 2026 no longer lists 303 in its README, and its
+      commit message says "303 is pjmathematician's, submitted before our 3.5e-11
+      refinement": a Kaggle per-puzzle leaderboard entry submitted on 23 October 2026, a
+      side-only print, 17.906978233833611, 3.47e-11 above this side. A side-only leaderboard
+      entry never reached this repository and is no report, so the entry stands as the
+      release #763 names states it; whether #763 still claims 303, and whose the packing is,
+      is asked of the author. So is the credit at 268: Evan Daniel's later certificate there
+      names Vladislav Lavrentev's public Kaggle packing as the first at that side, and
+      whether the 268 credit should name him is asked of the author and measured by the stage
+      4 review.
+
+      The source's own checkers were not run here. The two maintained routes, the sqpack
+      rational witness verifier and the independent rational corner checker, share
+      certificate parsing, half-angle conversion, Fraction arithmetic and the separating-axis
+      method. No two independent methods, human oversight or optimality is claimed.
+    next_rung: >-
+      Independently review the retained replay and the two certificates (stage 4,
+      think-ptkk), a mapped review whose acceptance would raise both rungs, then adopt 303
+      with both strong generators' regularization of the new house. At 268 Evan Daniel's
+      later, smaller report (think-l49q) is decided before 268 is adopted.
+
 # Generated by python -m devtools.regularized_drawings from the regularized layer's
 # index (packing/atlas/known-best/regularized/index.json); do not edit by hand.
 regularized_drawings:

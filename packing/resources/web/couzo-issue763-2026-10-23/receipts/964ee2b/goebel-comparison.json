@@ -1,0 +1,23 @@
+{
+  "comparison": {
+    "above": [],
+    "detail": [
+      {"goebel":"10 + 13/2*sqrt(2)","goebel_family":"G\u00f6bel square","goebel_from_count":349,"margin":-0.36951249988898827,"n":335,"note":"certificates/best/n335.cert","relation":"below","side":"14004974988650278943846639000866424195115030029307572673/744040137380983885767969080468037064669000000000000000"},
+      {"goebel":"10 + 13/2*sqrt(2)","goebel_family":"G\u00f6bel square","goebel_from_count":349,"margin":-0.28503668426486733,"n":339,"note":"certificates/best/n339.cert","relation":"below","side":"110153703971338554929262145223/5825972196019000000000000000"},
+      {"goebel":"10 + 13/2*sqrt(2)","goebel_family":"G\u00f6bel square","goebel_from_count":349,"margin":-0.19966034607885028,"n":344,"note":"certificates/best/n344.cert","relation":"below","side":"189448689205939314688480327191/9974801466523000000000000000"},
+      {"goebel":"11 + 13/2*sqrt(2)","goebel_family":"G\u00f6bel square","goebel_from_count":389,"margin":-0.24149847394109686,"n":379,"note":"certificates/best/n379.cert","relation":"below","side":"193772188274407360022214661887/9712458510271000000000000000"},
+      {"goebel":"11 + 13/2*sqrt(2)","goebel_family":"G\u00f6bel square","goebel_from_count":389,"margin":-0.23103813160913295,"n":380,"note":"certificates/best/n380.cert","relation":"below","side":"150135582776408941185315209651/7521314069303000000000000000"},
+      {"goebel":"11 + 15/2*sqrt(2)","goebel_family":"G\u00f6bel square","goebel_from_count":445,"margin":-0.6303277198859754,"n":421,"note":"certificates/best/n421.cert","relation":"below","side":"64235479153826763656929395543248802530980627981509415362998190592217/3062292147796129200174447130622921477961292001744471000000000000000"},
+      {"goebel":"12 + 15/2*sqrt(2)","goebel_family":"G\u00f6bel square","goebel_from_count":489,"margin":-0.8284271247411091,"n":452,"note":"certificates/best/n452.cert","relation":"below","side":"8694923865596142956744322497/399249433346360000000000000"},
+      {"goebel":"12 + 8*sqrt(2)","goebel_family":"G\u00f6bel square","goebel_from_count":520,"margin":-0.3400113353439411,"n":507,"note":"certificates/best/n507.cert","relation":"below","side":"206991620855221497836692789163/9009939470379000000000000000"},
+      {"goebel":"16 + 11*sqrt(2)","goebel_family":"G\u00f6bel square","goebel_from_count":964,"margin":-0.5621751279855284,"n":935,"note":"certificates/best/n935.cert","relation":"below","side":"5931724681599557786191419461/191381924566750000000000000"},
+      {"goebel":"17 + 11*sqrt(2)","goebel_family":"G\u00f6bel square","goebel_from_count":1028,"margin":-0.5594732658451449,"n":998,"note":"certificates/best/n998.cert","relation":"below","side":"5585051978122154454120459727/174549915186750000000000000"}
+    ],
+    "rows": 10,
+    "set": "franciscouzo/square-packing@964ee2b at 964ee2bd",
+    "tally": {"above":0,"below":10,"equal":0}
+  },
+  "families": "G\u00f6bel squares, G\u00f6bel strips and corner-touching strips, with deletion",
+  "format": "beyond-horizon-goebel-comparison-v1",
+  "program": "packing/resources/web/couzo-verified-bounds-2026-10-14/review/goebel_beyond_horizon.py"
+}

@@ -1,0 +1,60 @@
+{
+ "format": "beyond-horizon-watched-release-v1",
+ "publication": "https://github.com/franciscouzo/square-packing/tree/964ee2bdf301d0c8912d956d4010f478dcbbd5ea",
+ "commit": "964ee2bdf301d0c8912d956d4010f478dcbbd5ea",
+ "committed": "2026-10-23T22:38:09Z",
+ "published": "2026-10-23T23:38:42Z",
+ "walk": "upper-bounds-issue763-20261024",
+ "rows": [
+  {
+   "n": 335,
+   "certificate": "certificates/best/n335.cert",
+   "printed": "18.822875655537"
+  },
+  {
+   "n": 339,
+   "certificate": "certificates/best/n339.cert",
+   "printed": "18.907351471161"
+  },
+  {
+   "n": 344,
+   "certificate": "certificates/best/n344.cert",
+   "printed": "18.992727809347"
+  },
+  {
+   "n": 379,
+   "certificate": "certificates/best/n379.cert",
+   "printed": "19.950889681485"
+  },
+  {
+   "n": 380,
+   "certificate": "certificates/best/n380.cert",
+   "printed": "19.961350023816"
+  },
+  {
+   "n": 421,
+   "certificate": "certificates/best/n421.cert",
+   "printed": "20.976273997913"
+  },
+  {
+   "n": 452,
+   "certificate": "certificates/best/n452.cert",
+   "printed": "21.778174593058"
+  },
+  {
+   "n": 507,
+   "certificate": "certificates/best/n507.cert",
+   "printed": "22.973697163641"
+  },
+  {
+   "n": 935,
+   "certificate": "certificates/best/n935.cert",
+   "printed": "30.994174058119"
+  },
+  {
+   "n": 998,
+   "certificate": "certificates/best/n998.cert",
+   "printed": "31.996875920259"
+  }
+ ]
+}

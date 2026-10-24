@@ -98,6 +98,12 @@ SUPERSEDED_BY_F1 = frozenset(
 F1_COUNTS = frozenset(
     row.n for row in horizon.decided_claims(horizon.release("#732 comment 6374211504"))
 )
+#: Issue 763's rows, reported on 23 October and recorded by the walk of 24 October
+#: (upper-bounds-issue763-20261024): each is current at its count and supersedes the row
+#: that was, this import's own at three counts.
+LATER_763 = "couzo-issue763-2026-10-23"
+SUPERSEDED_BY_763 = frozenset({503, 595, 815})
+COUNTS_763 = frozenset(row.n for row in horizon.decided_claims(horizon.release(763)))
 #: Issue 702's exact side at 343, which this import's row supersedes in report order.
 SIDE_702 = Fraction(18977682482404124568634475670459, 10**30)
 #: The certificates the issue restates that earlier packets already retain, byte for byte.
@@ -181,6 +187,14 @@ def test_the_recorded_rows_are_the_claims_record_and_supersede_the_rows_before_t
     coverage = _coverage()
     current = coverage_check.current_beyond_horizon(coverage)
     before: Counter[str] = Counter()
+
+    def standing(n: int, rows: dict[str, Any], expected: str) -> str:
+        """#763's row where it has one, superseding the row `expected` names."""
+        if n not in COUNTS_763:
+            return expected
+        assert rows[expected]["superseded_by"] == LATER_763
+        return LATER_763
+
     for n in recorded:
         rows = _rows_at(coverage, n)
         assert rows[SOURCE]["value"] == claims[n]
@@ -191,22 +205,28 @@ def test_the_recorded_rows_are_the_claims_record_and_supersede_the_rows_before_t
             assert rows[SOURCE]["disposition"] == "superseded"
             assert rows[SOURCE]["superseded_by"] == LATER
             after = LATER_732 if n in AFTER_LATER_732 else LATER
-            assert current[n]["source_id"] == (LATER_F1 if n in F1_COUNTS else after)
+            expected = LATER_F1 if n in F1_COUNTS else after
+            assert current[n]["source_id"] == standing(n, rows, expected)
             continue
         if n in SUPERSEDED_BY_732:
             assert rows[SOURCE]["disposition"] == "superseded"
             assert rows[SOURCE]["superseded_by"] == LATER_732
-            assert current[n]["source_id"] == (LATER_F1 if n in F1_COUNTS else LATER_732)
+            expected = LATER_F1 if n in F1_COUNTS else LATER_732
+            assert current[n]["source_id"] == standing(n, rows, expected)
             continue
         if n in SUPERSEDED_BY_F1:
             assert rows[SOURCE]["disposition"] == "superseded"
             assert rows[SOURCE]["superseded_by"] == LATER_F1
-            assert current[n]["source_id"] == LATER_F1
+            assert current[n]["source_id"] == standing(n, rows, LATER_F1)
+            continue
+        if n in SUPERSEDED_BY_763:
+            assert rows[SOURCE]["disposition"] == "superseded"
+            assert current[n]["source_id"] == standing(n, rows, SOURCE)
             continue
         assert rows[SOURCE]["disposition"] == "tracked-outside-case-corpus"
         assert current[n]["source_id"] == SOURCE
     assert dict(before) == SUPERSEDED
-    first = [n for n in recorded if set(_rows_at(coverage, n)) <= {SOURCE, LATER_F1}]
+    first = [n for n in recorded if set(_rows_at(coverage, n)) <= {SOURCE, LATER_F1, LATER_763}]
     assert first == GRID_COUNTS
     for n in replay.counts_in(replay.HELD) + replay.counts_in(replay.RESTATED):
         assert SOURCE not in _rows_at(coverage, n)

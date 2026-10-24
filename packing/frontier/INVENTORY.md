@@ -8,8 +8,8 @@ ours, which rest on someone else's argument, and how far each has been checked.
 
 ## The short version
 
-- **744** evidence records. **416** are formal; **407** of those were established here. **12** are samples, counted separately.
-- **310** rest on an argument made elsewhere, of which **8** have been read by nobody here.
+- **747** evidence records. **416** are formal; **407** of those were established here. **12** are samples, counted separately.
+- **313** rest on an argument made elsewhere, of which **8** have been read by nobody here.
 - **1** formal record proves a theorem only under a hypothesis nothing here has replayed, and is verified as that implication alone: `E-k2m4-evand-bentz4-lean-build` (ValidTilt9).
 - **43** claim to be first established here. **14** make no novelty statement at all - not assessed, which is not the same as not novel.
 
@@ -767,13 +767,16 @@ results, it is a statement about what this repository has itself examined.
 | `E-wand125-fine-net-n31-59775-sqverify-fast-replay` | 1 | lower-bound | verified | strict inequalities only | here | - | previously-published | shared components | full, 2,073 of 2,073: complete legal core-centre domains at every declared-net direction | `V-sqverify-fast` |
 | `E-wand125-fine-net-n31-59775-review-sample` | 0 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | sample, 122 of 2,073: net directions, each decided over its whole quadrant of centres | `V-review-1023-n31-premises`, `V-review-1023-n31-capture`, `V-review-1023-n31-poses` |
 | `E-mishapolk-732-f1ceee4-beyond-horizon-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-couzo-763-certificate-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-couzo-763-beyond-horizon-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-couzo-964ee2b-beyond-horizon-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
 
 ## What the register rests on
 
-- **assurance**: numerically-checked 5, reported 312, verified 427
-- **method**: exact-algebraic 234, interval-certified 175, numerical-multiprecision 5, proof-assistant-checked 6, proof-audited 4, published-proof 8, reported 312
-- **novelty**: apparently-novel 43, common-knowledge 4, not assessed 14, previously-published 683
-- **relationship to the producer's code**: generator 5, independent-implementation 259, not-applicable 34, same-implementation 406, shared-components 34, unknown-historical 6
+- **assurance**: numerically-checked 5, reported 315, verified 427
+- **method**: exact-algebraic 234, interval-certified 175, numerical-multiprecision 5, proof-assistant-checked 6, proof-audited 4, published-proof 8, reported 315
+- **novelty**: apparently-novel 43, common-knowledge 4, not assessed 14, previously-published 686
+- **relationship to the producer's code**: generator 5, independent-implementation 259, not-applicable 34, same-implementation 409, shared-components 34, unknown-historical 6
 
 The `cases` column is how many frontier records cite each piece of evidence, and it is the reason to read this table rather than count records. Ranked below are the *formal* records only: a `reported` record cited across the frontier may be a shared catalogue and is labelled as such, which is the register working rather than risk. The risk is a verified claim resting on an argument nobody has examined.
 
