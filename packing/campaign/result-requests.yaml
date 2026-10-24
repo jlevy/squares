@@ -2328,6 +2328,21 @@ issues:
             status: confirmed
         corrects:
           - https://github.com/jlevy/squares/issues/294#issuecomment-5972549384
+      - url: https://github.com/jlevy/squares/issues/294#issuecomment-6381479220
+        date: '2026-10-24'
+        by: jlevy
+        kind: follow-up
+        reported:
+          - result: n101
+            id: T-073
+            verification: V3
+            confirmation: C3
+            status: confirmed
+          - result: n101
+            id: T-080
+            verification: V3
+            confirmation: C3
+            status: confirmed
     close_when: T-073 is confirmed or refuted, and the n = 82 certificate is imported and settled.
 
   - number: 282
@@ -10052,6 +10067,16 @@ issues:
       by: jlevy
       kind: other
       reported: []
+    - url: https://github.com/jlevy/squares/issues/603#issuecomment-6381479105
+      date: '2026-10-24'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: excess-theorem
+        id: T-163
+        verification: V2
+        confirmation: C1
+        status: reviewed
     close_when: The import and its disposition are on main, the owner has posted the resulting state with
       the entry's id, and the review and replay that would raise its rungs are owned by its bead; optimality
       is outside this request.
@@ -22440,7 +22465,26 @@ issues:
     beads:
     - think-o9kd
     answer_bead: think-o9kd
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/772#issuecomment-6381477449
+      date: '2026-10-24'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: six-plus-five-restricted-optimality
+        id: T-036
+        verification: V3
+        confirmation: C2
+        status: confirmed
+      - result: six-plus-five-restricted-optimality
+        id: E-n011-h236-rung0-reduction
+        status: confirmed
+      - result: six-plus-five-restricted-optimality
+        id: E-n011-trump-local-theorem-first-clause
+        status: confirmed
+      - result: six-plus-five-restricted-optimality
+        id: E-n011-trump-isolation-radius
+        status: confirmed
     close_when: >-
       The review that its C3 needs has landed on main, by a distinct reviewer or a
       mechanisation of BC-240's prose steps, and the reply that reports the resulting rungs is
@@ -22478,7 +22522,26 @@ issues:
     - think-sb7a
     - think-wcex
     answer_bead: think-sb7a
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/773#issuecomment-6381477713
+      date: '2026-10-24'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: rectangle-density-48
+        id: T-046
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: rectangle-density-48
+        id: E-wand125-rectangle-report
+        status: recorded
+      - result: rectangle-density-48
+        id: E-wand125-rectangle-2026-09-28-report
+        status: recorded
+      - result: rectangle-density-48
+        id: E-wand125-rectangle-2026-09-28-monotone-report
+        status: recorded
     close_when: >-
       The confirmations its C1 and C3 need have landed on main, or the record says why they
       will not, and the reply that reports the resulting rungs is posted.
@@ -22509,7 +22572,20 @@ issues:
     beads:
     - think-gtjq
     answer_bead: think-gtjq
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/774#issuecomment-6381477862
+      date: '2026-10-24'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: piercing-lower-37-61
+        id: T-087
+        verification: V3
+        confirmation: C1
+        status: reviewed
+      - result: piercing-lower-37-61
+        id: E-basic-slivkova-piercing-lower
+        status: reviewed
     close_when: >-
       The replay of the geometry its C2 needs has landed on main, or the record says why it
       will not, and the reply that reports the resulting rungs is posted.
@@ -22542,7 +22618,20 @@ issues:
     beads:
     - think-ysr9
     answer_bead: think-ysr9
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/775#issuecomment-6381477972
+      date: '2026-10-24'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: n11-uniqueness
+        id: T-112
+        verification: V3
+        confirmation: C2
+        status: confirmed
+      - result: n11-uniqueness
+        id: E-n011-optimum-uniqueness
+        status: confirmed
     close_when: >-
       The review that its C3 needs has landed on main, by a distinct reviewer with the
       oversight record or a mechanisation of the step at S = T, and the reply that reports the
@@ -22575,7 +22664,20 @@ issues:
     - think-i85v
     - think-ux1v
     answer_bead: think-i85v
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/776#issuecomment-6381478097
+      date: '2026-10-24'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: mixed-n28-57425
+        id: T-142
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: mixed-n28-57425
+        id: E-wand125-fine-net-n28-57425-report
+        status: recorded
     close_when: >-
       The census, its control and the review its C3 needs have landed on main, and the reply
       that reports the resulting rungs is posted.
@@ -22607,7 +22709,20 @@ issues:
     - think-i85v
     - think-ux1v
     answer_bead: think-i85v
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/777#issuecomment-6381478206
+      date: '2026-10-24'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: mixed-n30-58925
+        id: T-143
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: mixed-n30-58925
+        id: E-wand125-fine-net-n30-58925-report
+        status: recorded
     close_when: >-
       The census, its control and the review its C3 needs have landed on main, and the reply
       that reports the resulting rungs is posted.
@@ -22639,7 +22754,20 @@ issues:
     - think-nd7g
     - think-ux1v
     answer_bead: think-nd7g
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/778#issuecomment-6381478328
+      date: '2026-10-24'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: linear-n122-1126
+        id: T-144
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: linear-n122-1126
+        id: E-wand125-linear-n122-1126-report
+        status: recorded
     close_when: >-
       The replay, its control and the review its C3 needs have landed on main, and the reply
       that reports the resulting rungs is posted.
@@ -22670,7 +22798,20 @@ issues:
     beads:
     - think-u0av
     answer_bead: think-u0av
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/779#issuecomment-6381478445
+      date: '2026-10-24'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: linear-n145-1224
+        id: T-179
+        verification: V0
+        confirmation: C1
+        status: reviewed
+      - result: linear-n145-1224
+        id: E-wand125-linear-n145-1224-report
+        status: reviewed
     close_when: >-
       The replay, its control and the review its C3 needs have landed on main, and the reply
       that reports the resulting rungs is posted.
@@ -22703,7 +22844,20 @@ issues:
     - think-8eo1
     - think-0arj
     answer_bead: think-zb5w
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/780#issuecomment-6381478547
+      date: '2026-10-24'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: continuous-n28-5745
+        id: T-192
+        verification: V0
+        confirmation: C1
+        status: reviewed
+      - result: continuous-n28-5745
+        id: E-wand125-continuous-n28-5745-report
+        status: reviewed
     close_when: >-
       A replay route, its controls and the review its C3 needs have landed on main, and the
       reply that reports the resulting rungs is posted.
@@ -22738,7 +22892,20 @@ issues:
     - think-f2bm
     - think-tpbd
     answer_bead: think-f2bm
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/782#issuecomment-6381478640
+      date: '2026-10-24'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: n21-zero-margin-lean
+        id: T-234
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: n21-zero-margin-lean
+        id: E-n021-wand125-zero-margin-lean-report
+        status: recorded
     close_when: >-
       The review its C1 needs and the build its C3 needs have landed on main, or the record
       says why they will not, and the reply that reports the resulting rungs is posted.
@@ -22773,7 +22940,20 @@ issues:
     - think-xk3f
     - think-cs9x
     answer_bead: think-xk3f
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/783#issuecomment-6381478743
+      date: '2026-10-24'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: n59-lean-kernel
+        id: T-235
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: n59-lean-kernel
+        id: E-n059-wand125-lean-kernel-report
+        status: recorded
     close_when: >-
       The review its C1 needs has landed on main, the build its C3 needs has landed or the
       record says why it will not, and the reply that reports the resulting rungs is posted.
@@ -22810,7 +22990,20 @@ issues:
     - think-57ei
     - think-dgrc
     answer_bead: think-57ei
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/784#issuecomment-6381478818
+      date: '2026-10-24'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: fang-theorems-daniel-lean
+        id: T-236
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fang-theorems-daniel-lean
+        id: E-fang-theorems-daniel-lean-report
+        status: recorded
     close_when: >-
       The review its C1 needs and the build its C3 needs have landed on main, or the record
       says why they will not, and the reply that reports the resulting rungs is posted.
@@ -22850,7 +23043,32 @@ issues:
     - think-wuo4
     - think-vvjk
     answer_bead: think-wuo4
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/785#issuecomment-6381478925
+      date: '2026-10-24'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: classical-s2-to-s5
+        id: T-237
+        verification: V3
+        confirmation: C0
+        status: recorded
+      - result: classical-s2-to-s5
+        id: E-n005-gobel-proof
+        status: recorded
+      - result: classical-s2-to-s5
+        id: E-n005-gobel-upper
+        status: confirmed
+      - result: classical-s2-to-s5
+        id: E-side2-center-lower
+        status: confirmed
+      - result: classical-s2-to-s5
+        id: E-basic-area-lower
+        status: confirmed
+      - result: classical-s2-to-s5
+        id: E-basic-grid-upper
+        status: confirmed
     close_when: >-
       The review its C1 needs and the audit its C3 needs have landed on main, or the record
       says why they will not, and the reply that reports the resulting rungs is posted.
@@ -22886,7 +23104,23 @@ issues:
     - think-7l2j
     - think-tq3g
     answer_bead: think-7l2j
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/786#issuecomment-6381479019
+      date: '2026-10-24'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: small-n-lean
+        id: T-238
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: small-n-lean
+        id: E-small-n-chelokot-lean-report
+        status: recorded
+      - result: small-n-lean
+        id: E-small-n-daniel-rect-lean-report
+        status: recorded
     close_when: >-
       The review its C1 needs and the builds its C3 needs have landed on main, or the record
       says why they will not, and the reply that reports the resulting rungs is posted.
