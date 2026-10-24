@@ -61,6 +61,10 @@ digest.
 - **Pinned by the commit alone:** the other 880 certificates under `certificates/best/`,
   the other 3,833 parents, `certificates/extended/`, the root `certificates/nN.cert` files,
   the drawings, the search programs and the Rust and CUDA sources. Nothing was run.
+- **Not imported here:** the same push also publishes sides credited to other authors’
+  Kaggle notebooks at 99 counts between 325 and 1024, each below the record (87
+  certificates and 12 recipes), which no issue reports; think-lyf9 imports them, before
+  think-gn29’s walk of `43f666c`.
 
 `check_added_blobs --base origin/main --staged` passed before the first commit, at 15.1 MB
 as a thin pack with every blob under the per-blob ceiling, so the packet is kept in Git, as
@@ -76,6 +80,10 @@ The certificates, indexes, README and construction checker are retained on that
 presumption, and the certificates are factual data under the
 [owner decision of 2026-10-09](../known-best-packings/README.md#retained-factual-data) as
 well. think-m8f4 follows up the exact licence without holding the import.
+The presumption covers Couzo’s own material only. The 268 parent is Kirill Tymchishin’s
+notebook packing, whose provenance in the manifest states the notebook’s licence as
+Apache-2.0, and it is retained as factual data under that decision; Evan Daniel’s verifier
+is pinned under its MIT licence.
 
 **AI assistance.** The source states it in one place, the header of
 `verify_bound_certificate.py`: “Copyright (c) 2026 Evan Daniel; modifications by Francisco
@@ -263,12 +271,16 @@ Drafted in think-ptkk’s notes for the reply after the merge:
    notebooks’ source notices credit?
 5. Does #763 extend to the rows of your later commit `43f666c` (think-gn29 holds them)?
 6. Who ran the CT105 store’s “browser searches” the manifest names?
-7. `43f666c`’s README cedes 303 to pjmathematician’s leaderboard entry, a side-only print
-   3.47e-11 above this side, and calls yours “our 3.5e-11 refinement”. Does #763 still
-   claim 303?
-8. Should the 268 credit name Lavrentev? Evan Daniel’s notes say the 268 packing first
-   appears in lightningv08’s CUDA Packing Search output, and it is measured as one packing
-   with #763’s and with Tymchishin’s v4 parent.
+7. `43f666c`’s README no longer lists 303, and its commit message says “303 is
+   pjmathematician’s, submitted before our 3.5e-11 refinement”: a per-puzzle leaderboard
+   entry submitted on 23 October 2026 at 11:56:49 UTC, a side-only print 3.47e-11 above
+   this side. Does #763 still claim 303?
+8. Should the 268 credit name Lavrentev? Evan Daniel’s commit `8a8879a` describes his 268
+   certificate as “Vladislav Lavrentev’s (Kaggle lightningv08) public packing … the first
+   public packing at that side”, and the manifest’s lineage for the 268 parent begins at
+   `kaggle-public-portfolio-20261022`, source `cuda`. The triage of 24 October measured the
+   three as one packing in a scratch measurement no retained tool holds; the stage 4 review
+   measures it.
 9. Is Tymchishin the finder of the packing at 304 (`certificates/best/n304.cert`, first
    committed at `fa6237e`), which #763 does not claim?
 

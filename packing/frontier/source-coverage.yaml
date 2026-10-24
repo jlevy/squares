@@ -10419,7 +10419,10 @@ sources:
     and 800 restate f1ceee4's rows below the print (think-fwa9), and 204 is above T-231. The
     packet's filtered exact replay decided all 10 on two routes with all six controls refused
     (receipts/964ee2b/filtered-exact-replay.json), and every side is below Göbel's
-    construction. The author is asked whether he claims them.
+    construction. The author is asked whether he claims them. The same push also publishes
+    sides credited to other authors' Kaggle notebooks at 99 counts between 325 and 1024, each
+    below the record (87 certificates and 12 recipes); they are not imported here, and
+    think-lyf9 imports them before think-gn29's walk of 43f666c.
   claims_record: resources/web/couzo-issue763-2026-10-23/acquisition/beyond-horizon-rows-964ee2b.json
 
 selected_overrides:

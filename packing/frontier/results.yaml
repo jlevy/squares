@@ -33575,9 +33575,9 @@ results:
       exact checker verify_bound_certificate.py (Evan Daniel's MIT verifier, with
       modifications by Francisco Couzo with Codex, as its header says), pinned here by digest
       and not run. The source's README selects its claims: each count credited to Couzo whose
-      exact side, rounded up at 12 places, is below the reviewed public comparison's print, or
-      more than 1e-10 below another author's. Those statements are the author's; no source
-      program ran here.
+      exact side, rounded up at 12 places, is strictly below the reviewed comparison's 12-place
+      print where that comparison is Couzo's own, and more than 1e-10 below it where it is
+      another author's. Those statements are the author's; no source program ran here.
 
       Credit Francisco Couzo (https://github.com/franciscouzo/square-packing), after the
       packings his searches refined, as the source's manifest names them: at 268 Kirill
@@ -33635,16 +33635,21 @@ results:
       the case's ceiling (Amund Kristiansen, found from Evan Daniel's packing, T-239) by
       2.78e-03, below T-230 (#728) and Mykhailo Polkovskyi's later certificate of 23 October
       by 2.79e-03, below T-186, T-174, T-162 and #593 by 2.98e-03, and below every other
-      report there by 6.09e-03 or more. It is the smallest report at each count. The ledger of 24
-      October for issue 763 (campaign/issue-intake/upper-bounds-issue763-20261024) records
-      both in report order.
+      report there by 6.09e-03 or more. At that frozen read of main it is the smallest report
+      at each count.
+
+      The ledger of 24 October for issue 763
+      (campaign/issue-intake/upper-bounds-issue763-20261024) records both in report order. At
+      268 a later report, Evan Daniel's certificate pushed to his watched repository on 24
+      October 2026, is 4.48e-12 below this side; its import is pending (think-l49q), and 268
+      is adopted only once it is decided.
 
       The issue carries no table. devtools.couzo_763_claims re-derives its claims from the
       retained certified_bounds.json and public_bounds.json by the source README's rule and
       reproduces the issue's counts: 436 rows, 203 at or below 1024 and 233 above
       (receipts/claim-map.json). 268 and 303 are the two in the corpus; the 201 at 325 to
-      1024 are the source's beyond-horizon rows (couzo-issue763-2026-10-23), and the 233
-      above 1024 wait on think-llit.
+      1024 are the source's beyond-horizon claims, 184 of them rows
+      (couzo-issue763-2026-10-23), and the 233 above 1024 wait on think-llit.
 
       The certificates at 268 and 303 were first committed on 23 October 2026, in the commit
       the issue names, and GitHub's activity log records it pushed the same day, minutes
@@ -33654,12 +33659,16 @@ results:
       (certificates/parents/22f07a7c…), for the stage 4 review's identity measurement. The
       manifest's previous_source at each count is the source's previous record, not lineage.
 
-      Couzo's later release of 24 October 2026 no longer claims 303 in its README and cedes
-      it to pjmathematician's Kaggle leaderboard entry, a side-only print,
-      17.906978233833611, 3.47e-11 above this side, calling his own "our 3.5e-11
-      refinement". A side-only leaderboard entry never reached this repository and is no
-      report, so the entry stands as the release #763 names states it; whether #763 still
-      claims 303, and whose the packing is, is asked of the author.
+      Couzo's later release of 24 October 2026 no longer lists 303 in its README, and its
+      commit message says "303 is pjmathematician's, submitted before our 3.5e-11
+      refinement": a Kaggle per-puzzle leaderboard entry submitted on 23 October 2026, a
+      side-only print, 17.906978233833611, 3.47e-11 above this side. A side-only leaderboard
+      entry never reached this repository and is no report, so the entry stands as the
+      release #763 names states it; whether #763 still claims 303, and whose the packing is,
+      is asked of the author. So is the credit at 268: Evan Daniel's later certificate there
+      names Vladislav Lavrentev's public Kaggle packing as the first at that side, and
+      whether the 268 credit should name him is asked of the author and measured by the stage
+      4 review.
 
       The source's own checkers were not run here. The two maintained routes, the sqpack
       rational witness verifier and the independent rational corner checker, share
@@ -33667,8 +33676,9 @@ results:
       method. No two independent methods, human oversight or optimality is claimed.
     next_rung: >-
       Independently review the retained replay and the two certificates (stage 4,
-      think-ptkk), a mapped review whose acceptance would raise both rungs, then adopt them
-      at 268 and 303 with both strong generators' regularization of the new houses.
+      think-ptkk), a mapped review whose acceptance would raise both rungs, then adopt 303
+      with both strong generators' regularization of the new house. At 268 Evan Daniel's
+      later, smaller report (think-l49q) is decided before 268 is adopted.
 
 # Generated by python -m devtools.regularized_drawings from the regularized layer's
 # index (packing/atlas/known-best/regularized/index.json); do not edit by hand.
