@@ -8301,7 +8301,10 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "writes every file byte-identical across all three. Measured again after the "
             "#670 and #734 final replies and the #719 follow-up were recorded, #734 "
             "closed: twice from this tree, 43 files each, byte-identical to each other "
-            "and to the render with main's file. No PDF was printed; it prints from that "
+            "and to the render with main's file. Measured once more after the merge of "
+            "main 34eb8bb75 (#769), at link revision 34eb8bb7, twice from this tree and "
+            "once with that main's result-requests.yaml swapped in: all 43 files "
+            "byte-identical across the three. No PDF was printed; it prints from that "
             "HTML. Retain v0.2.7."
         ),
     ),
