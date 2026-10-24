@@ -3,9 +3,9 @@ type: is
 id: is-01m5hz8hzg6602mmynjjdet7vd
 title: "Polkovskyi's unclaimed n204.cert (12fc4667) is 1.48e-11 below T-229 and equals the project's regularized view: record it under his credit"
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 7
+version: 8
 delegate: c-lane-719-records-1023
 labels:
   - result-import
@@ -13,8 +13,12 @@ dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-10-22T14:11:56.015Z
-updated_at: 2026-10-23T09:16:41.732Z
+updated_at: 2026-10-24T08:28:33.055Z
 started_at: 2026-10-23T04:56:11.671Z
+closed_at: 2026-10-24T08:28:33.054Z
+close_reason: "Polkovskyi's n204.cert registered as T-231 under his credit and T-229's lineage recorded in PR #753 (5f5294d82, 2026-10-24T01:03:07Z); T-231's stage 4 review landed (think-tetq); #719 follow-up posted 07:02:08Z, its record in PR #787."
+resolution: null
+duplicate_of: null
 ---
 Found by the stage 4 lane c-lane-stage4-1022 (22 October 2026) while regularizing T-229 after adoption.
 

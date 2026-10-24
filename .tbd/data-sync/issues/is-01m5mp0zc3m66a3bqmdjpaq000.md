@@ -5,14 +5,14 @@ title: "Decide: does a D6 deletion bound get a row (all 36, or where an issue cl
 kind: task
 status: open
 priority: 2
-version: 7
+version: 8
 labels:
   - decision
   - result-import
 dependencies: []
 parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 created_at: 2026-10-23T15:28:13.698Z
-updated_at: 2026-10-23T23:17:18.420Z
+updated_at: 2026-10-24T08:28:43.831Z
 ---
 **The question.** The owner answered D6 on 23 October (think-f2io) by selecting the option labelled "Yes, an earlier report (Recommended)". The rest is the question the coordinator asked, not the owner's words: as coord-intake-1023 relayed it, the question was "a side obtained by deleting a square from a neighbour's certificate (e.g. Couzo's 985 from his 986)", and the selected option's description read "A published deletion bound counts like any stated bound; a later equal or higher side is not recorded". The owner-answers branch (PR #754) applies that: each such bound is recorded in the walk, and a later equal or higher side is not recorded (#732's 985). It gives the bound no row of its own, which is think-f2io's recommendation ("no rows, except where an issue claims the count"), not the owner's word. Three questions follow:
 1. Does a one-square deletion bound get a row of its own, as a stated bound with a certificate has? The selected option's description, the coordinator's words, said it "counts like any stated bound".
@@ -52,3 +52,6 @@ Three 4e4c8ce bounds delete more than one square (certified_bounds.json at 4e4c8
 In #754 the 36 one-square bounds are settled (`beyond_horizon_replay.DELETION_ANSWER`). 751, 752 and 927 stay held on this bead: in beyond_horizon_replay.HISTORY_HELD's second 4e4c8ce entry, and in test_deletions_of_two_or_three_squares_stay_held_for_the_owner. No verdict or row changes.
 
 2026-10-23 c-fix-754b-1023 (PR https://github.com/jlevy/squares/pull/754, review B, "Not verified"). coord-intake-1023 confirmed that the owner answered D6 by selecting the option labelled "Yes, an earlier report (Recommended)" in a multiple-choice question; the question text and the option's description were the coordinator's, not the owner's. The description's first paragraph, question 1 and the "row for each of the 36" line now quote only the label as the owner's answer and attribute the rest to the question the coordinator asked. The questions themselves are unchanged. #754 corrects the repository the same way (commit 8775445cd; think-f2io's note).
+
+2026-10-24 coord-intake-1024: #754 merged (0bbb0a2c4). The question above is the owner's (listed in the pass's owner questions); #763's 683, 1646 and 1727 also wait on it.
+blocked_on: none

@@ -5,14 +5,14 @@ title: "Review T-112 to C3: the uniqueness step at S = T mechanised, or reviewed
 kind: task
 status: open
 priority: 3
-version: 2
+version: 3
 labels:
   - result-import
   - validation
 dependencies: []
 parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 created_at: 2026-10-24T05:06:17.284Z
-updated_at: 2026-10-24T05:26:23.200Z
+updated_at: 2026-10-24T08:28:53.346Z
 ---
 The pending review of T-112 (Trump's packing is the only optimal packing of eleven squares, up to symmetry), V3/C2, S3, opened on 24 October 2026 by lane c-fin-770-1024 under the owner's answer "Open all nine (Recommended)" (think-cwfi), because the result named no owner bead.
 
@@ -23,3 +23,6 @@ Its tracking issue is listed in packing/campaign/result-requests.yaml; post each
 ## Notes
 
 2026-10-24 c-fin-770-1024: tracking issue https://github.com/jlevy/squares/issues/775 (T-112), opened 24 October with the intake label and recorded in packing/campaign/result-requests.yaml on PR #770's branch (commit f28c0b00d); T-112's unfinished confirmation names this bead as its link there. The issue's acknowledgement is owed after #770 merges: render it from main with check_requests --draft 775, post it and record it under the issue's replies.
+
+2026-10-24 coord-intake-1024: think-cwfi closed and #775's acknowledgement was posted 07:31Z (record in PR #787). The mechanisation or second review is a later lane's.
+blocked_on: none

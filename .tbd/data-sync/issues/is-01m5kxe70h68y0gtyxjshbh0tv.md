@@ -5,14 +5,14 @@ title: "Decide: do Friedman's off-centre constructions count as earlier reports 
 kind: task
 status: open
 priority: 3
-version: 1
+version: 2
 labels:
   - decision
   - result-import
 dependencies: []
 parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 created_at: 2026-10-23T08:18:33.105Z
-updated_at: 2026-10-23T08:18:33.105Z
+updated_at: 2026-10-24T08:28:45.853Z
 ---
 **The question.** The owner answered #613 on 23 October (think-8krd): Göbel's classical constructions are earlier reports beyond n = 324, so a rational row above Göbel's exact side at its count is not recorded. Do Erich Friedman's off-centre constructions count the same way?
 
@@ -21,3 +21,8 @@ updated_at: 2026-10-23T08:18:33.105Z
 **The answer either way.**
 - No: the 61 wait on D2 (recipe rows through a maintained checker, answered yes) and D6 (deletion bounds, open) alone.
 - Yes: Friedman's construction at each count joins the start as Göbel's does (devtools.intake_ledger's classical-constructions ruling would need the family, read exactly), so 23aff0c's bare Friedman constructions and the deletions from them restate earlier reports; only extensions below them could be rows under D2.
+
+## Notes
+
+2026-10-24 coord-intake-1024: #730 merged. The question above is the owner's (listed in the pass's owner questions).
+blocked_on: none
