@@ -8444,6 +8444,36 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "v0.2.7."
         ),
     ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=("packing/campaign/result-requests.yaml",),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The stage 7 records of 24 October (think-9i18): the #446 follow-up and the "
+            "#755 final reply, #755 closed, #534's result mapped to T-232, #536's ask "
+            "done by T-235, and #603 read through a social comment, against main "
+            "5f8f005a3 (#766): rendered at link revision 5f8f005a into empty site "
+            "directories, twice from this tree and once from it with main's "
+            "result-requests.yaml swapped in (43 files each), render_packing_methods "
+            "writes every file byte-identical across all three. Measured again after the "
+            "#670 and #734 final replies and the #719 follow-up were recorded, #734 "
+            "closed: twice from this tree, 43 files each, byte-identical to each other "
+            "and to the render with main's file. Measured once more after the merge of "
+            "main 34eb8bb75 (#769), at link revision 34eb8bb7, twice from this tree and "
+            "once with that main's result-requests.yaml swapped in: all 43 files "
+            "byte-identical across the three, and again twice from this tree after the "
+            "#715 and #719 follow-ups and the #732 import reply were recorded, both "
+            "byte-identical to that render. Measured again after the merge of main "
+            "11d0ab06b (#770), at link revision 11d0ab06, and last after the merge of "
+            "main e5c1c64e3 (#756) and the sixteen replies posted after #770, at link "
+            "revision e5c1c64e: each time twice from this tree and once with that main's "
+            "result-requests.yaml swapped in, all 43 files byte-identical across the "
+            "three. No PDF was printed; it prints from that HTML. Retain v0.2.7."
+        ),
+    ),
 )
 
 
