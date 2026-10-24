@@ -40,16 +40,19 @@ from __future__ import annotations
 import argparse
 import json
 import time
+from dataclasses import dataclass
 from fractions import Fraction
 from pathlib import Path
 from typing import Any
 
+import mpmath as mp
 from strif import atomic_output_file
 
 from devtools import couzo_678_replay as base
 from devtools import decimal_pose_margins as margins
 from devtools import evand_exact_certificates as legacy
 from devtools.retained_data import read_retained_text
+from sqpack.promote.interval import decimal_string, from_endpoints, interval
 from sqpack.retained_json import dumps as retained_dumps
 from sqpack.yamlio import safe_load
 
@@ -114,18 +117,100 @@ def certificate(n: int) -> legacy.Certificate:
     )
 
 
+@dataclass(frozen=True)
+class _Turned:
+    """A square's rotation in radians, enclosed: its cosine, sine and half-width along the
+    axes, ``(|cos| + |sin|)/2``."""
+
+    cosine: Any
+    sine: Any
+    half_extent: Any
+
+
+def _turned(theta: Fraction) -> _Turned:
+    angle = margins.enclose(theta)
+    cosine, sine = mp.iv.cos(angle), mp.iv.sin(angle)
+    return _Turned(cosine, sine, (abs(cosine) + abs(sine)) / 2)
+
+
+def _wall(square: margins.Pose, turned: _Turned, side: Fraction) -> Any:
+    """The least clearance of a square's corners from the box of ``side`` centred at the
+    origin, as `devtools.decimal_pose_margins.wall_clearance` reads it."""
+    return margins.enclose(side / 2 - max(abs(square.x), abs(square.y))) - turned.half_extent
+
+
+def _gap(first: margins.Pose, second: margins.Pose, one: _Turned, two: _Turned) -> Any:
+    """The best separating-axis gap of two squares, as
+    `devtools.decimal_pose_margins.pair_separation` reads it at no dilation: negative
+    exactly when their interiors overlap."""
+    dx = margins.enclose(second.x - first.x)
+    dy = margins.enclose(second.y - first.y)
+    projections = [abs(t.cosine * dx + t.sine * dy) for t in (one, two)] + [
+        abs(t.cosine * dy - t.sine * dx) for t in (one, two)
+    ]
+    along = one.cosine * two.cosine + one.sine * two.sine
+    across = one.sine * two.cosine - one.cosine * two.sine
+    biggest = from_endpoints(
+        max(mp.mpf(value.a) for value in projections),
+        max(mp.mpf(value.b) for value in projections),
+    )
+    return biggest - interval("0.5") - (abs(along) + abs(across)) / 2
+
+
+def _shown(value: Any) -> list[str]:
+    """An enclosure's ends at eight significant digits, rounded outward."""
+    return [
+        decimal_string(mp.mpf(value.a), 8, upward=False),
+        decimal_string(mp.mpf(value.b), 8, upward=True),
+    ]
+
+
 def interval_reading(
     side_text: str, side: Fraction, squares: list[tuple[Fraction, Fraction, Fraction]]
 ) -> dict[str, Any]:
-    """Every wall and near pair of the pose, its angles enclosed in radians."""
+    """Every wall and every pair whose centres lie within 2 (`decimal_pose_margins.near_pairs`)
+    of the pose at its printed side, each rotation enclosed in radians at `DIGITS` digits,
+    the walls and pairs read by `decimal_pose_margins`' formulas: a pose is a packing when
+    every one is proved nonnegative and is not when one is proved negative."""
     poses = tuple(
         margins.Pose(index, x - side / 2, y - side / 2, Fraction(0))
         for index, (x, y, _) in enumerate(squares, start=1)
     )
-    pose = margins.PoseFile(side_text, side, poses)
     with margins.working_precision(DIGITS):
-        bases = margins.radian_bases([theta for _, _, theta in squares])
-        return margins.measurement(pose, bases, margins.near_pairs(poses), side)
+        turns = [_turned(theta) for _, _, theta in squares]
+        walls = [
+            (_wall(pose, turn, side), pose.label)
+            for pose, turn in zip(poses, turns, strict=True)
+        ]
+        gaps = [
+            (_gap(poses[i], poses[j], turns[i], turns[j]), poses[i].label, poses[j].label)
+            for i, j in margins.near_pairs(poses)
+        ]
+        negative = [item for item in walls if mp.mpf(item[0].b) < 0]
+        overlapping = [item for item in gaps if mp.mpf(item[0].b) < 0]
+        unsure = sum(
+            1 for value, *_ in [*walls, *gaps] if mp.mpf(value.a) < 0 <= mp.mpf(value.b)
+        )
+        least_wall = min(walls, key=lambda item: mp.mpf(item[0].a))
+        least_gap = min(gaps, key=lambda item: mp.mpf(item[0].a))
+        verdict = (
+            "not-a-packing" if negative or overlapping else "undecided" if unsure else "packing"
+        )
+        return {
+            "side": side_text,
+            "verdict": verdict,
+            "walls_outside": len(negative),
+            "worst_walls": [
+                {"square": label, "clearance": _shown(value)}
+                for value, label in sorted(negative, key=lambda item: mp.mpf(item[0].a))[:10]
+            ],
+            "least_wall_clearance": _shown(least_wall[0]),
+            "least_wall_square": least_wall[1],
+            "pairs_overlapping": len(overlapping),
+            "undecided": unsure,
+            "least_pair_separation": _shown(least_gap[0]),
+            "least_pair": [least_gap[1], least_gap[2]],
+        }
 
 
 def exact_reading(cert: legacy.Certificate) -> dict[str, Any]:

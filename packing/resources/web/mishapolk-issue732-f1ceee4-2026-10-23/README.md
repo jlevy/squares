@@ -120,7 +120,8 @@ CPU seconds:
 - **Read literally**, every printed centre and every angle in radians, the poses are not a
   packing at 335: 21 squares cross a wall, the worst, square 2, by 7.77 × 10⁻¹⁶, its angle
   −1.55 × 10⁻¹⁵ radians; no pair overlaps.
-  The interval arithmetic of `devtools.decimal_pose_margins` proves each such wall negative.
+  Outward-rounded interval arithmetic, with the wall and pair formulas of
+  `devtools.decimal_pose_margins` read in radians, proves each such wall negative.
 - **With the 196 angles below 10⁻¹⁰ read as 0**, the poses pack exactly at the printed side:
   every wall and pair is proved nonnegative, and the least pair separation is
   5.86 × 10⁻¹⁴.

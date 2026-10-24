@@ -2464,6 +2464,27 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "papers/square-packing-methods-survey.md",
         ),
         reason=(
+            "Issue #732's f1ceee4 release (think-e3im): its 138 beyond-horizon rows at 328 to "
+            "989 and their supersessions, the 8 October source's note on the 335 decision "
+            "(think-rx26) and the #732 request entry, against main c35b21a14 (#765): "
+            "rendered at link revision c35b21a1 into empty site directories, twice from "
+            "this tree and twice from it with main's result-requests.yaml and "
+            "source-coverage.yaml swapped in (43 files each), render_packing_methods writes "
+            "every file byte-identical across all four. No PDF was printed; it prints from "
+            "that HTML. Retain v0.2.7."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
             "The #545 grade-C review's request entry (think-7scz), against main c1115c095 "
             "(#749): rendered at link revision c1115c09 into empty site directories, twice "
             "from this tree and twice from it with main's result-requests.yaml swapped in "

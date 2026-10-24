@@ -254,18 +254,6 @@ def _bases(squares: Sequence[Pose]) -> list[_Basis]:
     return bases
 
 
-def radian_bases(angles: Sequence[Fraction]) -> list[_Basis]:
-    """Each square's basis from its exact angle in radians, for a source that prints radians
-    rather than degrees: the cosine and sine enclosed outward at the working precision, as
-    `_bases` encloses a degree pose's. Call it inside `working_precision`."""
-    bases: list[_Basis] = []
-    for angle in angles:
-        radians = enclose(angle)
-        cosine, sine = mp.iv.cos(radians), mp.iv.sin(radians)
-        bases.append(_Basis(cosine, sine, (abs(cosine) + abs(sine)) / 2))
-    return bases
-
-
 def near_pairs(squares: Sequence[Pose]) -> list[tuple[int, int]]:
     """Index pairs whose centres are at most 2 apart, decided exactly on the centres.
 
