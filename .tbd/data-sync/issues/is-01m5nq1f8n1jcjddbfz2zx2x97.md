@@ -5,17 +5,18 @@ title: "Records PR A: the authors' answers on #670, #675, #715 and #734, and T-2
 kind: task
 status: in_progress
 priority: 2
-version: 4
+version: 6
 delegate: c-records-a-1024
 labels: []
 dependencies: []
 parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 child_order_hints:
   - is-01m5nvf31dym5rjns3hp10xbdd
+  - is-01m5nwfyhk87j6dnr7fggzmpwp
 hold: null
 hold_until: null
 created_at: 2026-10-24T01:05:12.981Z
-updated_at: 2026-10-24T02:24:20.931Z
+updated_at: 2026-10-24T02:40:30.259Z
 started_at: 2026-10-24T01:05:24.492Z
 ---
 
@@ -34,3 +35,5 @@ Requests: #670 state closed, closed 2026-10-23, read_through 22:22:03Z, summary 
 Replies (not posted): scratchpad/triage-1023b/reply-670.md (final), reply-715.md (folds in #754's think-temp follow-up), reply-719.md (chain paragraph), reply-734.md (on hold; final comment as drafted).
 
 Validation at 6c833931e: packing-validate --records 52/53, the one failure check_bead_tree on an unrelated open bead from #756's review A7 under a closed parent; 513 affected tests passed. Deferral: think-tbwo (n-204.md history paragraphs). blocked_on: hosted CI on #766, then the coordinator's merge and stage 7.
+
+2026-10-24 02:55Z c-records-a-1024: merged main da117ad0b (#764) at 41d16f773 (one conflict in release.py's no-change records, both kept; #764 touches none of PR A's four candidate inputs; DATA_REVISION stays f84b9de8). Pushed; git ls-remote agrees at 41d16f773. Hosted CI at 41d16f773 green: Packing validation 40054135098, Certificate page 40054135108, Branch mergeability 40054131709 success; Deferred checkpoint 40054135088 skipped; 31 checks passed, 28 skipped, none failed. Tests: 1,487 of 1,489 in the importer, replay, house-writer and News modules passed; the 2 test_negative_controls failures ran while release.py held merge-conflict markers and pass at 41d16f773. The PR stays draft for the coordinator.
