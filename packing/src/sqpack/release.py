@@ -799,7 +799,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "caff8ddf1e8d213d0a593204124b5fe46dbc754a"
+DATA_REVISION = "e48b9127d4760c79827130c0078193e1e04271f7"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -896,6 +896,16 @@ FIRST_PUBLISHED = PUBLICATION_HISTORY[-1].first_published
 #:                                            day is the one recorded
 #: The leading entry is proposed for the next publication; confirm its date at first deployment.
 EXPLAINER_HISTORY = (
+    PublicationHistoryEntry(
+        version="v0.4.24",
+        first_published="October 24, 2026",
+        result_scope=(
+            "Update the registered result count after the registrations of the Lean "
+            "formalization reports of Hosono at 21 (T-234) and 59 (T-235) and of Daniel "
+            "for Fang's theorems (T-236), of the classical values at 2 to 5 (T-237) and "
+            "of chelokot's and Daniel's Lean routes to them (T-238)."
+        ),
+    ),
     PublicationHistoryEntry(
         version="v0.4.23",
         first_published="October 24, 2026",
@@ -1438,6 +1448,18 @@ class ReleaseImpactDecision(NamedTuple):
 # New component cuts append decisions here, newest first, alongside their own histories.
 # No impact is invented retrospectively for the published baseline editions.
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
+    ReleaseImpactDecision(
+        component="paper:n11-lower-bounds-explainer",
+        previous_version="v0.4.23",
+        version="v0.4.24",
+        impact="patch",
+        reason=(
+            "Update the registered result count after the registrations of the Lean "
+            "formalization reports of Hosono at 21 (T-234) and 59 (T-235) and of Daniel "
+            "for Fang's theorems (T-236), of the classical values at 2 to 5 (T-237) and "
+            "of chelokot's and Daniel's Lean routes to them (T-238)."
+        ),
+    ),
     ReleaseImpactDecision(
         component="paper:n11-lower-bounds-explainer",
         previous_version="v0.4.22",
@@ -2752,6 +2774,54 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "Measured before at 8625f55e against the same main, for the register alone, "
             "with the same outcome. The register stays at 230 results. No PDF was printed; "
             "each prints from that HTML. Retain v0.4.21, v0.1.11, v0.1.4 and v0.2.7."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The Lean formalization imports of 23 October (#750): T-234 to T-236, their "
+            "notes on T-055, T-066 and T-163, and four coverage entries, against main "
+            "c1115c095 (#749): rendered at link revision c1115c09 into empty site "
+            "directories, twice from this tree at 85512881 and twice from the same tree "
+            "with main's register and coverage register swapped in (69 files each), "
+            "render_n11_optimality_review, render_n11_threshold_bound_review and "
+            "render_packing_methods write every file byte-identical across all four. The "
+            "explainer counts the register (233 entries here, 230 on main) and differs "
+            "only there; it takes its successor, v0.4.22, after merging main 77aba4c02. "
+            "Measured again at 2b064e103 and c1025d6f1, after T-237, T-238, chelokot's "
+            "coverage entry and the [Friedman DS7] bibliography entry, against main "
+            "0bbb0a2c4 (#754): at link revision 0bbb0a2c, twice from this tree and twice "
+            "with main's version of each of the 16 files the branch modifies swapped in, "
+            "release.py and tests aside (69 files each), the three write every file "
+            "byte-identical, and the explainer differs only in counting 236 results "
+            "against main's 231, so it takes v0.4.23 over main's v0.4.22. Measured "
+            "again at 6b739f337, after review A's wording and credit fixes to T-234 to "
+            "T-238 and their keys: from that tree, and with d8d5c6774's register, "
+            "bibliography and credit manifest swapped in, all four papers write their 69 "
+            "files byte-identical, so the explainer keeps v0.4.23. Measured a fourth time "
+            "after merging main af9c9e850 (#745: T-232, T-233 and the explainer's v0.4.23 "
+            "for 233 results), at link revision af9c9e85, from this tree at e48b9127d and "
+            "with main's version of each of the 17 files the branch modifies swapped in, "
+            "release.py and tests aside (69 files each): the three write every file "
+            "byte-identical, and the explainer differs only in counting 238 results "
+            "against main's 233, so it takes v0.4.24 over main's v0.4.23. No PDF was "
+            "printed; each prints from that HTML. Retain v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
     ReleaseNoPublicChange(
@@ -8038,6 +8108,33 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "links pinned to da117ad0b (69 files each): every file, each paper's Markdown "
             "and HTML among them, is byte-identical. No PDF was printed; each prints from "
             "that HTML. Every paper keeps its version."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=("packing/devtools/templates/site-nav.css",),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "Only a comment in `site-nav.css` changes: the section-tab rules no longer "
+            "name the Film/Workbench switcher, gone since 2026-10-22. Rendered on 24 "
+            "October from this tree and with main 1aa953fad's stylesheet into empty site "
+            "directories with source links pinned to 1aa953fad (69 files each): every "
+            "paper's Markdown is byte-identical, and each paper's HTML differs only in "
+            "the hashed name of the stylesheet. Every paper keeps its version."
         ),
     ),
     ReleaseNoPublicChange(

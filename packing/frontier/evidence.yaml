@@ -43665,6 +43665,215 @@ evidence:
       half-angle conversion, the pair filter and Fraction arithmetic. The source's own checker
       was not run here. Review and confirmation remain pending; no stage 4 review is owed for a
       beyond-horizon row. No arrangement identity, local minimum or optimum is established.
+  - id: E-n021-wand125-zero-margin-lean-report
+    claim: exact-value
+    scope: {n_values: [21]}
+    assurance: reported
+    reported_method: proof-assistant-checked
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[wand125 n21 zero-margin Lean 2026-09-29]'
+    certificate: packing/resources/web/wand125-n21-zero-margin-lean-2026-09-29/square-packing-bounds/point_n21_L5/lean/zero-margin/N21PtsLower.lean
+    replay_status: not-attempted
+    verifiers: []
+    proof:
+      source: packing/resources/web/wand125-n21-zero-margin-lean-2026-09-29/square-packing-bounds/point_n21_L5/lean/zero-margin/N21PtsLower.lean
+      theorem: 'SquarePacking.n21pts_eq_5 : minSide 21 = 5, with n21pts_ge_5 : (5 : ℝ) ≤ minSide 21, and no
+        hypothesis. minSide n is sInf {s | Packs n s}, and Packs n s says that n closed unit squares, each
+        translated and rotated, lie in [0, s]^2 with pairwise disjoint interiors (S32.lean at evand/square-packing
+        6aa82ba4).'
+      scope: s(21) = 5 for closed unit squares with arbitrary rotations, boundary contact allowed and only
+        interiors required disjoint; the minimum is attained by the 5 x 5 grid (packs_grid).
+      pinpoints: 'point_n21_L5/lean/zero-margin/N21PtsLower.lean (the two theorems, BoxTree.le_minSide applied
+        to the generated cover N21PtsZ.cov_root); N21PtsAxiomsZ.lean (the axiom probe); build_zero_margin.sh
+        (the recipe, which pins the upstream commit and four SHA-256); data-sha256.txt (the 66 generated
+        files); the library closure in the packet''s receipts/evand-library-closure-6aa82ba4.json.'
+      assumptions:
+      - Lean v4.33.1's kernel and Mathlib at 0df444a3 are sound
+      - The 66 generated modules, which the source does not publish, are those its generator writes from the
+        certificate; the kernel checks whatever the generator writes, and data-sha256.txt names what the
+        source's run produced
+      - The build and its axiom set are as the source reports; nothing here built any module
+    limitations: 'wand125/square-packing-bounds at 77636c63 (2026-09-29T07:16:17Z) reports a hypothesis-free
+      Lean proof of s(21) = 5 for the point-only route of T-055: the certificate n21-capture-one.txt, the
+      point-only cover renormalised to capture threshold 1 (4,604 entries of [0,5]^2, total 20998900000168/999948000000
+      < 21), and a zero-margin box tree over the D4 roots that Evan Daniel''s gen_zmtree.py at 6aa82ba4
+      generates (59,433 Z leaves, 5,876 E leaves and 5,591 clips in 2,076 chunks over 64 files), each chunk
+      decide +kernel of ZMTree.check, proved sound once. It reports the axioms propext, Classical.choice and
+      Quot.sound and an end-to-end run of build_zero_margin.sh from an empty directory (generation 1,459 s
+      on 6 workers, the kernel check about 3.5 h with 2 parts at a time, near 6 GB a part, on an Apple M4)
+      whose generated data matched data-sha256.txt; no build log or axiom output is published. Every library
+      file the proof needs at 6aa82ba4 is retained here byte for byte in earlier evand packets, and the four
+      digests the recipe pins agree with them. Nothing here has built it: the complete build is priced at
+      6 to 12 CPU-hours (the packet README) and needs about 10 GB of disk this host lacked on 23 October.'
+    source_reviewed: '2026-10-23'
+  - id: E-n059-wand125-lean-kernel-report
+    claim: exact-value
+    scope: {n_values: [59]}
+    assurance: reported
+    reported_method: proof-assistant-checked
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[wand125 n59 Lean kernel 2026-10-11]'
+    certificate: packing/resources/web/wand125-n59-lean-kernel-2026-10-11/square-packing/problems/square-lower-bounds/certificates/k2m5_n59_L8/lean/Sqpack/S59Lower.lean
+    replay_status: not-attempted
+    verifiers: []
+    proof:
+      source: packing/resources/web/wand125-n59-lean-kernel-2026-10-11/square-packing/problems/square-lower-bounds/certificates/k2m5_n59_L8/lean/Sqpack/S59Lower.lean
+      theorem: 'SquarePacking.s59_eq_8 : minSide 59 = 8, with s59_ge_8 : (8 : ℝ) ≤ minSide 59, and no hypothesis.
+        minSide and Packs are S32.lean''s at evand/square-packing 1718a580: n closed unit squares, translated
+        and rotated, in [0, s]^2 with pairwise disjoint interiors.'
+      scope: s(59) = 8 for closed unit squares with arbitrary rotations, boundary contact allowed; the minimum
+        is attained by the 8 x 8 grid (packs_grid).
+      pinpoints: 'k2m5_n59_L8/lean/Sqpack/S59Lower.lean (le_minSide_mixed on the cover, then the grid); Sqpack/S59T/Pts.lean
+        (the cover as data, with pts_nodup, pts_d4, segs_d4 and wsum_lt by decide +kernel); Sqpack/S59T/Cov.lean
+        (the 6,400 root theorems glued); Axioms59.lean; README.md; receipts/kernel_tasks.jsonl.gz; the library
+        closure in the packet''s receipts/evand-library-closure-1718a580.json.'
+      assumptions:
+      - Lean v4.33.1's kernel and Mathlib at 0df444a3 are sound
+      - The 43,444 generated modules, which the source does not publish, are those its generator writes; the
+        kernel checks whatever it writes, and SOURCES.sha256 names what the source's run produced
+      - The build and its axiom set are as the source reports; its README's final_build.log is not in the tree,
+        and nothing here built any module
+    limitations: 'wand125/square-packing at f9a77b7 (2026-10-11T01:42:37Z) reports a Lean kernel proof of
+      s(59) = 8 on the mixed cover of T-066 (n59_mixed_cover_8.txt, SHA-256 6f4d2b64..., retained in the
+      1 October packet): Evan Daniel''s ZMTreeM.checkM, CovM and le_minSide_mixed at evand/square-packing
+      1718a580, used unchanged, over 80 x 80 root cells of the D4 region in 290 batches, 43,154 Part files
+      and 290 Roots files generated by gen_zmmtree_s59.py and not stored. It reports the axioms propext, Classical.choice
+      and Quot.sound, no sorry and no native_decide. Its retained per-task receipt gives 94.04 generation hours,
+      767.87 for the Part files at most 9.8 GiB each and 0.48 for the Roots files, with no exit status; Cov.lean
+      and S59Lower.lean took 35 GB each by the README. All 19 library modules of the closure at 1718a580 are
+      retained here byte for byte in the 7 October evand packet. Nothing here has built it: about 862 CPU-hours
+      and 35 GB of memory, above the 40 CPU-hour item cap and this host.'
+    source_reviewed: '2026-10-23'
+  - id: E-fang-theorems-daniel-lean-report
+    claim: upper-bound
+    scope: {n_values: [211, 241, 273, 307]}
+    assurance: reported
+    reported_method: proof-assistant-checked
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Daniel Fang and Ryu Lean 2026-10-18]'
+    certificate: packing/resources/web/evand-fang-ryu-lean-2026-10-18/square-packing/lean/Sqpack/FangFinal.lean
+    replay_status: not-attempted
+    verifiers: []
+    proof:
+      source: packing/resources/web/evand-fang-ryu-lean-2026-10-18/square-packing/lean/Sqpack/FangFinal.lean
+      theorem: 'UnitSquarePacking.FangGlue.theorem1 (n : ℕ) (hn : 15 ≤ n) : ∃ s < (n : ℝ), Packs (n * n -
+        n + 1) s, and theorem2 (n p q : ℕ) (hn : 15 ≤ n) (hpq : 16 * p + 21 * q ≤ n - 15) : ∃ s < (n : ℝ),
+        Packs (n * n - n + (1 + p + 2 * q)) s, with no other hypothesis. Packs is Spec.lean''s: n closed unit
+        squares, images of [-1/2, 1/2]^2 under a rotation and a translation, in [0, s]^2 with pairwise disjoint
+        interiors.'
+      scope: Fang's Theorems 1 and 2 for every n >= 15; at the counts this record holds, n = 15 to 18 with F(n)
+        = 1, they give s(211) < 15, s(241) < 16, s(273) < 17 and s(307) < 18.
+      pinpoints: 'lean/Sqpack/FangFinal.lean (fangPieces, theorem1, theorem2); FangTheorem.lean (Squeezable,
+        Excess, FangPieces and its induction); FangGlue.lean (glue, Lemma 3 on PacksIn); certificates/fang-gluing/
+        (the 18 pieces, README and SHA256SUMS); search/exact/fang_pieces.py and lean_cert.py (the piece-module
+        generator); the closure in the packet''s receipts/lean-closure.json.'
+      assumptions:
+      - Lean v4.33.1's kernel and Mathlib at 0df444a3 are sound
+      - The 18 generated piece modules, gitignored upstream, are those the retained generator writes from the
+        retained certificates; the kernel checks whatever it writes
+      - The build and its axiom set are as the source reports; nothing here built any module
+    limitations: 'evand/square-packing at f4883b41 (2026-10-18T02:08:26Z), unchanged at the pin 8475bdf4, reports
+      Lean proofs of Kevin Fang''s Theorems 1 and 2 (T-163) with no hypothesis: Fang''s Lemma 3, the gluing
+      of Arslanov, Mustafin and Shangitbayev''s decomposition, on PacksIn, the induction on n, and 18 exact
+      rational piece certificates, each checked by decide +kernel in a generated module (the rectangles R257
+      and R443, the bases r^2 - r + 1 for r = 15 to 26, and m^2 - m for m = 11 to 14). The pieces'' README
+      reports the axioms propext, Classical.choice and Quot.sound only, and the task note a build of the pieces
+      in about 19 minutes wall at 8 chunks in parallel, at most about 8 GB a chunk; no build log or axiom output
+      is published. The formalization is Evan Daniel''s, not Fang''s, and the theorems state s < n, not the
+      construction''s side n - 1/20000. Nothing here has built it: about 1.5 to 3 CPU-hours (the packet README),
+      and about 10 GB of disk this host lacked on 23 October.'
+    source_reviewed: '2026-10-23'
+  - id: E-small-n-chelokot-lean-report
+    claim: exact-value
+    scope: {n_values: [2, 3, 4, 5]}
+    assurance: reported
+    reported_method: proof-assistant-checked
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[chelokot small-n Lean 2026-09-05]'
+    certificate: packing/resources/web/chelokot-small-n-lean-2026-09-05/square-packing-archive/formal/SquarePackingArchive/Records/Square5.lean
+    replay_status: not-attempted
+    verifiers: []
+    proof:
+      source: packing/resources/web/chelokot-small-n-lean-2026-09-05/square-packing-archive/formal/SquarePackingArchive/Records/Square5.lean
+      theorem: 'Records.Square5.s5_eq_goebel : IsMinimumSide 5 (2 + Real.sqrt 2 / 2), from s5_le_goebel : HasPacking
+        5 (2 + Real.sqrt 2 / 2) and s5_ge_goebel : IsLowerBound 5 (2 + Real.sqrt 2 / 2); Records.NearSquare.s2_eq_two
+        : IsMinimumSide 2 2 and s3_eq_two : IsMinimumSide 3 2; Records.SquareNumbers.s4_eq_two : IsMinimumSide
+        4 2. IsMinimumSide n s holds when a packing of n placed squares in the closed square [0, s]^2, pairwise
+        interior-disjoint, exists, and s is at most every side with one (Geometry.lean).'
+      scope: s(2) = s(3) = s(4) = 2 and s(5) = 2 + sqrt 2 / 2, with the minimum attained, for closed unit squares
+        with arbitrary rotations, boundary contact allowed.
+      pinpoints: 'formal/SquarePackingArchive/Records/Square5.lean (unavoidable_points, the four points (1, 1),
+        (1, 1 + d), (1 + d, 1), (1 + d, 1 + d) with d = sqrt 2 / 2, and lowerBound_succ_of_unavoidable); Records/NearSquare.lean;
+        Records/SquareNumbers.lean; Geometry.lean (Packing, HasPacking, IsLowerBound, IsMinimumSide); Audit.lean
+        (the axiom probe); the closure in the packet''s receipts/lean-closure.json.'
+      assumptions:
+      - Lean v4.33.0's kernel and Mathlib at db584cd6 are sound
+      - IsMinimumSide states this register's s(n), as T-086's replay read it and Evan Daniel's SpecChelokot
+        restates it
+    limitations: 'chelokot/square-packing-archive at 753079eb (2026-09-05T21:42:12Z) proves s(2) = s(3) = s(4)
+      = 2 (16 August) and s(5) = 2 + sqrt 2 / 2 (29 August) in Lean, the lower bound of s(5) by Friedman''s
+      four unavoidable points; Square5.lean and NearSquare.lean are unchanged at the head e1e9ef5d, where s(4)''s
+      Lean proof has moved to Bend. This repository built the archive at this commit on 2 October 2026 for T-086
+      (devtools.replay_chelokot_lean), and that build''s retained log prints Audit.lean''s axioms for s2_eq_two,
+      s3_eq_two, s4_eq_two and the four Square5 theorems, each [propext, Classical.choice, Quot.sound] (build.log
+      lines 330 and 338 to 343). The modules they live in were compiled in the uninterrupted build before the
+      receipted run, whose log is not retained, and the receipt names only T-086''s theorem, so this entry stays
+      reported: a receipt-bound rebuild of the three modules here, minutes over Mathlib''s cache, is what would
+      make it a replay.'
+    source_reviewed: '2026-10-23'
+  - id: E-small-n-daniel-rect-lean-report
+    claim: exact-value
+    scope: {n_values: [2, 3, 4, 5]}
+    assurance: reported
+    reported_method: proof-assistant-checked
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Daniel small-n rectangles Lean 2026-10-22]'
+    certificate: packing/resources/web/evand-rect-small-n-lean-2026-10-22/square-packing/lean/Sqpack/Rect5Pts.lean
+    replay_status: not-attempted
+    verifiers: []
+    proof:
+      source: packing/resources/web/evand-rect-small-n-lean-2026-10-22/square-packing/lean/Sqpack/Rect5Pts.lean
+      theorem: 'SquarePacking.rect2_iff, rect3_iff and rect4_iff characterise RectPacks n w h, n closed unit
+        squares in [0, w] x [0, h] with pairwise disjoint interiors, for n = 2, 3 and 4; rect5_pts_lower {a b
+        : ℝ} (ha : 2 ≤ a) (hb : 2 ≤ b) (ha'' : a < 2 * Real.sqrt 2) (hb'' : b < 2 * Real.sqrt 2) (hab : a +
+        b < 4 + Real.sqrt 2) : ¬ RectPacks 5 a b; and rect5_upper packs five at w = h = 2 + 1/sqrt 2. No theorem
+        states minSide or s(n).'
+      scope: At w = h the theorems give s(2) = s(3) = s(4) = 2 and, for sides at least 2, s(5) = 2 + 1/sqrt 2;
+        that a side below 2 holds no five squares follows from rect2_iff applied to two of them, a step no theorem
+        in the closure states.
+      pinpoints: 'lean/Sqpack/Rect.lean (RectPacks, rect2_iff); RectChain.lean; Rect3.lean (rect3_iff); Rect4Core.lean
+        and Rect4.lean (Fried4, rect4_iff); Rect5Pts.lean (rect5_cover, rect5_pts_lower); Rect5Pack.lean (rect5_upper);
+        Axioms.lean (the axiom probe); search/rectfront/r5pts/R5PTS.md (the paper proofs); the closure in the
+        packet''s receipts/lean-closure.json.'
+      assumptions:
+      - Lean v4.33.1's kernel and Mathlib at 0df444a3 are sound
+      - RectPacks n s s states this register's s(n) at w = h, and the square-case reading, Fried4 at w = h <
+        2 included, is the review's to confirm
+      - The build and its axiom set are as the source reports; nothing here built any module
+    limitations: 'evand/square-packing at 7051f4e (2026-10-22T01:54:20Z) proves in Lean, by the source''s
+      account with standard axioms only, which rectangles hold two, three and four unit squares (21 October)
+      and that five squares need a + b >= 4 + sqrt 2 when 2 <= a, b < 2 sqrt 2, with the constructions; no build
+      log or axiom output is published. The square values are read here from those theorems at w = h, as the
+      packet README says, and no Lean theorem states them. The full rect5_iff rests on generated strip certificates
+      the square case does not need and is not retained. The source''s literature note credits chelokot''s
+      s5_eq_goebel as the earlier formalization. Nothing here has built it: under 0.5 CPU-hours, and about 10
+      GB of disk this host lacked on 23 October.'
+    source_reviewed: '2026-10-23'
 
   - id: E-evand-gradec-local-minima-233-report
     claim: derived-structure
