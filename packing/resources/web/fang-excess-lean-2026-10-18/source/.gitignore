@@ -1,0 +1,7 @@
+.lake/
+*.olean
+/build/
+certs/fetched/
+Sqlean/Data/N211.lean
+Sqlean/Data/N211/
+Sqlean/Pieces/N211.lean
