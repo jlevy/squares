@@ -5,7 +5,7 @@ title: "Import #763 (PR A, W1): Couzo's 964ee2b at or below 1024 — packet, led
 kind: task
 status: in_progress
 priority: 1
-version: 5
+version: 6
 delegate: c-import-763-1024b
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-24T07:16:16.676Z
-updated_at: 2026-10-24T09:51:46.656Z
+updated_at: 2026-10-24T11:05:39.802Z
 started_at: 2026-10-24T07:16:25.387Z
 ---
 Plan and verdicts: think-cnn7's notes (triage of 24 Oct). After #769 (PR C) and #757, both merged. Licence: the owner's presumption of permission (think-m8f4 follows up the exact licence). PR B (review, V3/C3, adoption and regularization at 268 and 303) follows.
@@ -78,3 +78,5 @@ Thank you, Francisco. This is the import of #763's rows at or below 1024; the ro
 The 233 rows above 1024 join the record's work on counts above 1024, as its latest report.
 
 REMAINS: PR B (stage 4 review of T-240, V3/C3, adoption and regularization at 268 and 303; Evan Daniel's 268 at evand 8a8879a, 4.48e-12 below, think-l49q); recipes (think-g2qy, after D2), 683 (think-2z2n, after think-kzme), rows above 1024 (think-llit), 304 and 43f666c (think-l49q, think-gn29), licence (think-m8f4), contributor profiles for Lavrentev and Tymchishin (their census spans are unresolved).
+
+STATUS 2026-10-24 (c-import-763-1024b): PR #789 (draft, labels intake and S3) head 3773d6025, main f354a34f5 (#736) merged in 7a2b1b3f5, stamp_landed --apply dated couzo-issue763-2026-10-23 and couzo-964ee2b-2026-10-23 to 2026-10-24 in landings.yaml (6c7e8b1af), DATA_REVISION re-pinned to it (3773d6025). Hosted: Packing validation 40087416456 and Certificate page 40087416434 succeeded; packing-required and pages-required pass. Local: records tier 53/53 after the merge; edit tier 68/69 (the browser floor's ESLint cannot load typescript-eslint from this worktree's node_modules; hosted frontend passes). Fixes after the first push: T-240's 268 decimal rounded (16.87436171587383), the synopsis count, the site-url register for result/t-240.html; the earlier imports' chain tests (#702, #715, #732, Goebel, ffd900d) now end at #763's rows; the receipts check runs per release (the whole crossed the 45 s per-test guard). Not merged; the coordinator stamps again and re-pins if main moves before merge.
