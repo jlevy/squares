@@ -1380,6 +1380,53 @@ def test_the_backlog_prices_each_unfinished_confirmation_and_totals_the_known_ho
     )
 
 
+def test_pending_reviews_name_each_result_its_issue_and_whether_the_issue_is_current() -> None:
+    """A result below V3 or C3, or with a comparison the record index leaves unassessed,
+    has a pending review; it is tracked where an issue maps it and owes it no reply, and a
+    comparison no reply field states keeps it untracked until it is settled."""
+    said = [
+        {
+            "result": "bound",
+            "id": "T-001",
+            "verification": "V3",
+            "confirmation": "C3",
+            "status": "confirmed",
+        }
+    ]
+    answered = issue(replies=[reply(1, reported=said)])
+    unanswered = issue(
+        number=8, results=[{"key": "lower", "claim": "c", "register": ["T-002"]}]
+    )
+    unresolved = {
+        "T-001": (
+            "Unordered verified lower bound priority at n=101: T-001, T-009",
+            "Unordered verified lower bound priority at n=102: T-001, T-009",
+        )
+    }
+    rows = {
+        row.id: row
+        for row in check_requests.pending_rows(
+            record(answered, unanswered), REGISTER, unresolved
+        )
+    }
+    assert sorted(rows) == ["T-001", "T-002", "T-003", "T-005"]
+    assert rows["T-001"].issues[0].due == ()
+    assert not rows["T-001"].tracked()
+    assert check_requests.comparison_lines("T-001", unresolved["T-001"]) == [
+        "unordered verified lower priority with T-009 at n = 101 to 102"
+    ]
+    assert rows["T-002"].issues[0].number == 8
+    assert rows["T-002"].issues[0].due
+    assert not rows["T-003"].issues
+    assert rows["T-005"].beads == ("think-abcd",)
+    lines = check_requests.pending(record(answered, unanswered), REGISTER, unresolved)
+    assert "| T-003 | S0 |" in "\n".join(lines)
+    assert lines[-1] == (
+        "4 results with a pending review; 2 with no tracking issue, 0 of them at S4 or "
+        "above; 2 whose tracking issue does not state its present state (T-001, T-002)."
+    )
+
+
 def test_the_live_backlog_and_report_render() -> None:
     live = check_requests.load_record()
     register = check_requests.load_register()
@@ -1392,6 +1439,8 @@ def test_the_live_backlog_and_report_render() -> None:
     assert all(f"| {rid} |" in backlog for rid in below)
     report = check_requests.report(live, register, None)
     assert report[0] == "# Result Requests"
+    pending = check_requests.pending(live, register, {})
+    assert all(f"| {rid} |" in "\n".join(pending) for rid in below)
     assert sum(line.startswith("## #") for line in report) == len(live["issues"])
 
 

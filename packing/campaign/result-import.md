@@ -1286,6 +1286,20 @@ What lets an agent post is the `github-workflows` grant, which covers issues.
   ([After the Merge](#after-the-merge)).
 - The reply that reports a confirmation names the programs that ran, and says whether
   they were the author’s own code re-run or a re-implementation.
+- **Every pending review is tracked on a GitHub issue**, and its state is posted there
+  at each change (the owner, 24 October 2026: “This state of all reviews should be
+  tracked in the GitHub issues.”). A review is pending while its result stands below
+  `V3` or `C3`, names an unfinished confirmation or an activity, or has a comparison the
+  record index leaves unassessed, which its author’s profile shows as Review pending.
+  The tracking issue is the one that reported the result, or, where none did, one the
+  project opens, as it does for every S4 or S5 result (#603 for T-163). Each change of
+  that state gets a follow-up there: the review or replay queued with its bead, run,
+  landed or held, a rung moved, a comparison settled.
+  `check_requests --pending` lists every pending review with its beads, its issues and
+  whether one of them states its present state; a comparison is a state no reply field
+  holds, so it stays listed until it is settled.
+  The pass answers every issue the view marks stale, and reports to the owner, before
+  opening any, the results it lists with no tracking issue.
 - **A settled issue is closed with its final comment**, after the verified deploy, once
   nothing the author asked for is queued and no question to the author would change the
   record: [Close a Settled Issue](#close-a-settled-issue).
@@ -1500,6 +1514,7 @@ Run each command from `packing/` as
 | none | The gate step: the schema holds and every id resolves; one line per issue |
 | `--report` | A table per issue: each result’s entries, rungs, state, how it was confirmed and whether its id is on `main`; the replies due; whether it is closeable |
 | `--backlog` | Every register entry below `V3` or `C3`, with its `next_rung`, its `activity`, the beads it names and the issues it serves |
+| `--pending` | Every pending review (stage 7): the backlog’s entries, any entry naming an unfinished confirmation or activity, and the record index’s unassessed comparisons, each with its beads, its tracking issues and whether one states its present state; then the count with no tracking issue |
 | `--draft N` | The status comment for issue N, ending in the Claude Code footer; it refuses unless `HEAD` is on `origin/main` |
 | `--github` | Read-only: the issues the record lacks, the replies missing from it, the comments created or edited after an entry’s `read_through`, and the `result-report` entries and entries marked `intake: true` whose issues lack the `intake` label |
 

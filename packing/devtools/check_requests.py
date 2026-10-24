@@ -43,6 +43,7 @@ Modes, from ``packing/`` with the project interpreter::
     .venv/bin/python3 -m devtools.check_requests            # the gate: ids and schema
     .venv/bin/python3 -m devtools.check_requests --report   # a table per issue
     .venv/bin/python3 -m devtools.check_requests --backlog  # entries below V3 or C3
+    .venv/bin/python3 -m devtools.check_requests --pending  # pending reviews and their issues
     .venv/bin/python3 -m devtools.check_requests --draft 282
     .venv/bin/python3 -m devtools.check_requests --github   # live issues, read-only
 
@@ -1146,6 +1147,203 @@ def backlog(record: Mapped, register: Register) -> list[str]:
     return lines
 
 
+#: The significance from which a result with no issue of its own gets a tracking issue
+#: the project opens (the owner, 14 October 2026, recorded in T-163's notes for #603).
+TRACKED_FROM = 4
+
+
+@dataclass(frozen=True, slots=True)
+class TrackingIssue:
+    """An issue a pending review is tracked on, and whether its replies are current."""
+
+    number: int
+    state: str
+    #: What a reply on it owes this result, as `replies_due` says it; empty if current.
+    due: tuple[str, ...]
+    #: The issue's hold for the owner, as `hold_text` says it, or empty.
+    held: str = ""
+
+
+_UNORDERED = re.compile(
+    r"Unordered (?P<lane>\w+) (?P<direction>\w+) bound priority at n=(?P<n>\d+): (?P<peers>.+)"
+)
+
+
+def comparison_lines(ident: str, reasons: Sequence[str]) -> list[str]:
+    """The record index's unassessed comparisons of one result, an unordered priority
+    gathered over its counts: `unordered verified lower priority with T-080 at n = 101 to
+    105`."""
+    gathered: dict[tuple[str, str, str], list[int]] = {}
+    lines: list[str] = []
+    for reason in reasons:
+        match = _UNORDERED.fullmatch(reason)
+        if match is None:
+            lines.append(reason)
+            continue
+        peers = ", ".join(peer for peer in match["peers"].split(", ") if peer != ident)
+        gathered.setdefault((match["lane"], match["direction"], peers), []).append(
+            int(match["n"])
+        )
+    for (lane, direction, peers), counts in sorted(gathered.items()):
+        runs = ", ".join(
+            f"{first}" if first == last else f"{first} to {last}"
+            for first, last in _count_runs(sorted(counts))
+        )
+        lines.append(f"unordered {lane} {direction} priority with {peers} at n = {runs}")
+    return lines
+
+
+def _count_runs(values: Sequence[int]) -> list[tuple[int, int]]:
+    runs: list[list[int]] = []
+    for value in values:
+        if runs and runs[-1][1] == value - 1:
+            runs[-1][1] = value
+        else:
+            runs.append([value, value])
+    return [(first, last) for first, last in runs]
+
+
+@dataclass(frozen=True, slots=True)
+class PendingRow:
+    """One result whose next rung or whose currentness waits on a review, a replay or a
+    comparison, with the beads that own it and the issues that track it."""
+
+    id: str
+    significance: int
+    rungs: str
+    pending: tuple[str, ...]
+    #: The record's comparisons still unassessed (`profile_records`), which profiles show
+    #: as Review pending and which no reply field states.
+    comparisons: tuple[str, ...]
+    beads: tuple[str, ...]
+    issues: tuple[TrackingIssue, ...]
+
+    def tracked(self) -> bool:
+        """Whether some issue tracks it and states its present state: every reply it is
+        owed has been posted, and no comparison is left that no reply can state."""
+        return any(not issue.due for issue in self.issues) and not self.comparisons
+
+
+def pending_rows(
+    record: Mapped, register: Register, unresolved: Mapping[str, Sequence[str]]
+) -> list[PendingRow]:
+    """Every result whose review is pending: below `V3` or `C3` (the backlog), with an
+    unfinished confirmation or activity, or with a comparison the record index leaves
+    unassessed (`unresolved`, `profile_records.load_record_index`). The issues are those
+    whose reported results map to it; a reason `replies_due` gives applies to it when it
+    names a result mapped to it or the issue as a whole."""
+    serving: dict[str, list[tuple[Mapped, set[str]]]] = {}
+    for issue in record["issues"]:
+        keys: dict[str, set[str]] = {}
+        for result in issue.get("results", ()):
+            for ident in result.get("register", ()):
+                keys.setdefault(str(ident), set()).add(str(result["key"]))
+        for ident, mapped in keys.items():
+            serving.setdefault(ident, []).append((issue, mapped))
+    backlog = {row.id: row for row in backlog_rows(record, register)}
+    named = {
+        ident
+        for ident, entry in register.results.items()
+        if entry.get("unfinished_confirmations") or entry.get("activity")
+    }
+    states: dict[int, IssueState] = {}
+    rows: list[PendingRow] = []
+    for ident in sorted({*backlog, *unresolved, *named}):
+        entry = register.results[ident]
+        rungs = f"{entry['verification']}/{entry['confirmation']}"
+        row = backlog.get(ident)
+        pending: list[str] = []
+        if row is not None:
+            pending.append(f"{rungs}, {row.status}: below V3 or C3")
+            pending += [f"unfinished {item}" for item in row.unfinished]
+            pending += [f"under way: {row.activity}"] if row.activity else []
+        else:
+            pending += [
+                f"unfinished {result_status.unfinished_label(item)}"
+                for item in entry.get("unfinished_confirmations") or ()
+            ]
+        comparisons = tuple(unresolved.get(ident, ()))
+        text = " ".join(
+            [str(entry.get("next_rung", "")), *comparisons, *(row.beads if row else ())]
+        )
+        issues = []
+        for issue, mapped in serving.get(ident, ()):
+            number = int(issue["number"])
+            if number not in states:
+                states[number] = issue_state(issue, register)
+            every = {str(result["key"]) for result in issue.get("results", ())}
+            due = tuple(
+                reason
+                for reason in states[number].replies_due
+                if reason.split(":", 1)[0] in mapped or reason.split(":", 1)[0] not in every
+            )
+            hold = held(issue)
+            issues.append(
+                TrackingIssue(number, str(issue["state"]), due, hold_text(hold) if hold else "")
+            )
+        rows.append(
+            PendingRow(
+                id=ident,
+                significance=int((entry.get("significance") or {}).get("score", 0)),
+                rungs=rungs,
+                pending=tuple(pending),
+                comparisons=comparisons,
+                beads=tuple(sorted(set(BEAD.findall(text)), key=text.index)),
+                issues=tuple(issues),
+            )
+        )
+    return rows
+
+
+def pending(
+    record: Mapped, register: Register, unresolved: Mapping[str, Sequence[str]]
+) -> list[str]:
+    """The pending reviews as a table, then what lacks a current tracking issue."""
+    rows = pending_rows(record, register, unresolved)
+    lines = [
+        "# Pending Reviews",
+        "",
+        "| result | S | pending | beads | tracking issue | current |",
+        "| --- | --- | --- | --- | --- | --- |",
+    ]
+    for row in rows:
+        issues = ", ".join(
+            f"#{issue.number} ({issue.state}{', ' + issue.held if issue.held else ''})"
+            for issue in row.issues
+        )
+        if not row.issues:
+            current = "no issue"
+        elif row.comparisons:
+            current = "no: no reply states the comparison"
+        elif row.tracked():
+            current = "yes"
+        else:
+            due = [reason for issue in row.issues for reason in issue.due]
+            more = f" (and {len(due) - 1} more)" if len(due) > 1 else ""
+            current = f"no: {due[0]}{more}"
+        what = [
+            *row.pending,
+            *(f"comparison: {line}" for line in comparison_lines(row.id, row.comparisons)),
+        ]
+        lines.append(
+            f"| {row.id} | S{row.significance} | {_cell('; '.join(what))} "
+            f"| {', '.join(row.beads)} | {issues} | {_cell(current)} |"
+        )
+    untracked = [row for row in rows if not row.issues]
+    major = [row.id for row in untracked if row.significance >= TRACKED_FROM]
+    stale = [row.id for row in rows if row.issues and not row.tracked()]
+    lines += [
+        "",
+        f"{len(rows)} results with a pending review; {len(untracked)} with no tracking "
+        f"issue, {len(major)} of them at S{TRACKED_FROM} or above"
+        + (f" ({', '.join(major)})" if major else "")
+        + f"; {len(stale)} whose tracking issue does not state its present state"
+        + (f" ({', '.join(stale)})" if stale else "")
+        + ".",
+    ]
+    return lines
+
+
 def _for_author(text: str) -> str:
     """Register prose with this project's bead references taken out."""
     text = _BEAD_PARENTHESIS.sub("", _BEAD_LEAD.sub("", text.strip()))
@@ -1570,6 +1768,9 @@ def main(argv: Sequence[str] | None = None) -> int:
     mode = parser.add_mutually_exclusive_group()
     mode.add_argument("--report", action="store_true", help="a table for each issue")
     mode.add_argument("--backlog", action="store_true", help="entries below V3 or C3")
+    mode.add_argument(
+        "--pending", action="store_true", help="pending reviews and their tracking issues"
+    )
     mode.add_argument("--draft", type=int, metavar="N", help="a status comment for issue N")
     mode.add_argument("--github", action="store_true", help="compare with the live issues")
     parser.add_argument("--record", type=Path, default=RECORD, help=argparse.SUPPRESS)
@@ -1594,6 +1795,11 @@ def main(argv: Sequence[str] | None = None) -> int:
         print("\n".join(report(record, register, on_main)))
     elif options.backlog:
         print("\n".join(backlog(record, register)))
+    elif options.pending:
+        # The record index reads every case record, so only this mode loads it.
+        from devtools.profile_records import load_record_index  # noqa: PLC0415
+
+        print("\n".join(pending(record, register, load_record_index().unresolved)))
     elif options.draft is not None:
         return _draft_mode(record, register, options.draft)
     elif options.github:
