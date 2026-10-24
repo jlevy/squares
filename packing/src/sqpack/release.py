@@ -8248,8 +8248,11 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "2c58b6373 (#750), at link revision 2d39f5ca with that main's three files "
             "swapped in: the same outcome, and the register stays at 238 results. After "
             "the two resource cards (site_resources.py), measured again at link revision "
-            "2821d8a6 with that main's four files swapped in: the same outcome. No PDF "
-            "was printed; each prints from that HTML. Every paper keeps its version."
+            "2821d8a6 with that main's four files swapped in: the same outcome. Measured "
+            "once more after merging main c5697c2f2 (#757), at link revision 0ffac35f "
+            "with that main's four files swapped in: the same outcome, the register at 239 "
+            "results. No PDF was printed; each prints from that HTML. Every paper keeps "
+            "its version."
         ),
     ),
 )
