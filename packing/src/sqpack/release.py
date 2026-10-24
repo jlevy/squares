@@ -8002,8 +8002,10 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "profile_records.py and results.yaml swapped in (69 files each), "
             "render_n11_lower_bounds_explainer, render_n11_optimality_review, "
             "render_n11_threshold_bound_review and render_packing_methods write every "
-            "file byte-identical across all three. No PDF was printed; each prints from "
-            "that HTML. Retain v0.4.22, v0.1.11, v0.1.4 and v0.2.7."
+            "file byte-identical across all three. Measured again after merging main "
+            "14b14f2d1 (#768), at link revision ba76f214 with that main's two files "
+            "swapped in: the same outcome. No PDF was printed; each prints from that "
+            "HTML. Retain v0.4.22, v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
 )
