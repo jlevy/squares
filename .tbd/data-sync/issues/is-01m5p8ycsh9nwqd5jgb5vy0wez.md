@@ -5,7 +5,7 @@ title: "Record Couzo's answers of 24 October: #672 (CT105 credit at 227, verify.
 kind: task
 status: in_progress
 priority: 1
-version: 6
+version: 7
 delegate: c-couzo-answers-1024b
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-24T06:18:06.513Z
-updated_at: 2026-10-24T10:35:52.140Z
+updated_at: 2026-10-24T11:37:52.326Z
 started_at: 2026-10-24T06:50:00.504Z
 ---
 Comments: #672 issuecomment-6380747582 (06:10:57Z), #678 issuecomment-6380752551 (06:11:30Z), #715 issuecomment-6380757758 (06:12:05Z), all 2026-10-24, by franciscouzo, all 'Claude Code assisted'. None reports a new result. Take each into the record as #766 did for #670/#675: read_through, the answers against the review's questions on #672, the source corrections against #678's packet, the credit lines against the bibliography at the counts named, then reply. Starts after #766 merges (shared rows). The #715 reply should be combined with the queued combined #715 reply (after #769).
@@ -24,19 +24,19 @@ Comments: #672 issuecomment-6380747582 (06:10:57Z), #678 issuecomment-6380752551
 
 2026-10-24 c-couzo-answers-1024b: records PR https://github.com/jlevy/squares/pull/790 (draft, labels intake and S2), branch claude/intake-2026-10-24-couzo-answers, head 296c593cd. #672: question 1 answered (Couzo made the CT105 submission; credit unchanged); the seed witness cdd08485 retained from af8cb79 and measured (not de Winter's certificate: his packing 7.26e-5 below T-196; #672's 227 one to one with it, 9.84e-5 below); verify.py call reproduced (58 boundary corners at 229, none at 227). #678: ask 1 done, read at 1c17153, no field changes. #715: restored credits at 1061/1413/1489 read in the 1c17153 manifest. check_requests: #672 and #678 closeable, #715 not (above-1024 queued). intake-watch: evand 659ee62 (think-l49q), franciscouzo 1c17153 (think-gn29), wand125 23e3186 no longer names think-wop1. #534 and #536 finals recorded and closed. Reply drafts below, for after #790 merges and its deploy is verified; replace {merge date}. #715's combined reply was already posted at 07:02:09Z (issuecomment-6381214428) and promised this follow-up, so the #715 draft stands alone.
 
-### Draft: #672 (final; closes the issue)
+### Draft: #672 (final; closes the issue; revised after review A of #790)
 
 @franciscouzo, thank you for answering both questions from [our follow-up of 23 October](https://github.com/jlevy/squares/issues/672#issuecomment-6354654824). [#790](https://github.com/jlevy/squares/pull/790) merged on {merge date} and added your answers to the record.
 
 - **The CT105 submission at 227.** You made it yourself, on CT105, the server behind your search web app, which only you run. So T-227's credit stands as your manifest gives it, *Couzo after de Winter, Daniel, Levy*. [T-227](https://squaremath.org/result/t-227.html) and [T-225](https://squaremath.org/result/t-225.html), Evan Daniel's view of your packing, now say the submission was yours.
 - **The seed of that task.** We retained `certificates/parents/cdd08485….cert` from `af8cb79` and measured it.
   - It is not de Winter's #668 certificate byte for byte: his `n227_record.cert` is `7d386887…`.
-  - It is de Winter's packing, one to one with his under a reflection, no square more than a tenth away (82 beyond 10⁻³, at most 0.0887), at a side 7.26·10⁻⁵ below his.
-  - Your #672 certificate is one to one with it under the identity (91 beyond 10⁻³, at most 0.0793), 9.84·10⁻⁵ below it.
-  - It was first committed at `af8cb79`, with #672's certificates. Your per-count JSON names de Winter's certificate as its source and Evan Daniel's `alt/n-227.cert.gz`, his exact form of de Winter's packing, as its seed.
+  - It is de Winter's packing, one to one with his under a reflection, no square more than a tenth away (82 beyond 10⁻³, at most 0.0887), at a side 7.26·10⁻⁵ below his and 9.84·10⁻⁵ above your #672 certificate.
+  - Your #672 certificate is one to one with it under the identity (91 beyond 10⁻³, at most 0.0793), and nearer still to de Winter's packing (59 beyond 10⁻³, at most 0.0796).
+  - It was first committed at `af8cb79`, with #672's certificates. Your per-count JSON names de Winter's certificate as its source and Evan Daniel's `alt/n-227.cert.gz`, his exact form of de Winter's packing, as its seed. Your `certificates/parents/manifest.json` credits it to de Winter and notes "Prior locally retained witness; seed/construction provenance is preserved without asserting an independently established browser trajectory", so your record keeps no trace of how it was made, and ours says so.
 
-  None of this changes the credit. If you can tell us how `cdd08485` was made, which run and from which file, we will add it to the record. An answer is welcome, but it holds nothing open.
-- **How you call `sqpack/verify.py`.** Thank you for the conversion and the call. The same call here, `verify_packing(corners, S, sign, bucket=True)` on exact corners in the closed box, counts 58 corner coordinates on the boundary at 229 and none at 227, with no touching pair at either, as you report. `main` still holds the same `verify.py` as `37e6757`.
+  None of this changes the credit. If you happen to recall how `cdd08485` was made, we would add it to the record, but nothing waits on it.
+- **How you call `sqpack/verify.py`.** Thank you for the conversion and the call, which [`exact_finish.py`, lines 68 to 70](https://github.com/franciscouzo/square-packing/blob/1c1715399709bc955e9b402947ab8b52bbacdfc3/exact_finish.py#L68-L70) shows. The same call here, `verify_packing(corners, S, sign, bucket=True)` on exact corners in the closed box, counts 58 corner coordinates on the boundary at 229 and none at 227, with no touching pair at either, as you report. `main` still holds the same `verify.py` as `37e6757`.
 
 The measurement is [`measure/answers-2026-10-24.json`](https://github.com/jlevy/squares/blob/main/packing/resources/web/couzo-issue672-2026-10-17/measure/answers-2026-10-24.json), written by the program beside it, and [the packet's README](https://github.com/jlevy/squares/blob/main/packing/resources/web/couzo-issue672-2026-10-17/README.md#the-authors-answers) describes it.
 
