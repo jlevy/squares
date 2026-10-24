@@ -26,6 +26,22 @@ intake directory such as ``campaign/issue-intake/upper-bounds-20261014/``:
 - **exceptions** come only from the input's ``exceptions`` list, each with a count, a
   report and the owner's reason; such a claim is shown as recorded by exception and
   moves nothing;
+- **the owner's rulings** come only from the input's ``rulings`` list (`Ruling`), each
+  an answer of the owner the walk then applies beyond the horizon (`RULINGS`). Under
+  ``restatement`` (23 October 2026, think-fwa9) a claim below every member of the
+  standing side, but within one unit in the 12th place of the member it is closest
+  below, a report rather than a construction, and rounding up to that member's 12-place
+  print, restates it and is not recorded (`restated`); a claim the ruling's words reach
+  that an earlier ledger recorded and the owner's answer did not name waits on the owner
+  (``awaiting_owner``) and is walked as before. Under ``classical-constructions`` (23
+  October 2026, think-8krd) Göbel's construction at the count, the least side of the
+  three families the Kingbird catalogue states at that count or by deletion from a larger
+  one, as the 15 October packet's retained program computes it (`GOEBEL_PROGRAM`), joins
+  the start as an earlier report (`construction_side`). A ledger read before the rulings
+  names none and renders as it did. One read from the day of the answers (`GOEBEL_FROM`)
+  with claims beyond the horizon applies both at every such count, Göbel's through its
+  ruling or a start member ``gather`` froze, or names each it does not apply under
+  ``rulings_not_applied`` with the reason, which the render shows (`answer_problems`);
 - **owner decisions** the render lists without deciding, none of them a house: the
   earlier report holds a count, an exception moves nothing, and the house is the
   smallest validated side by the house rule (result-import.md, "The House Rule"). They
@@ -81,13 +97,15 @@ file would change.
 from __future__ import annotations
 
 import argparse
+import functools
+import importlib.util
 import json
 import math
 import re
 import subprocess
 import sys
 from collections import Counter
-from collections.abc import Callable, Iterable, Iterator, Mapping, Sequence
+from collections.abc import Callable, Collection, Iterable, Iterator, Mapping, Sequence
 from contextlib import contextmanager
 from dataclasses import dataclass, field, replace
 from decimal import Decimal
@@ -142,6 +160,46 @@ BY_EXCEPTION = "recorded by exception"
 REFINEMENT, NEW, UNCLASSIFIED = "refinement", "new packing", "unclassified"
 BELOW, ABOVE, EQUAL = "below", "above", "equal"
 SHOWN_PLACES = 12
+#: The owner's rulings a ledger may apply beyond the horizon (`Ruling`), each answered on
+#: 23 October 2026: a re-certification below the 12-place print restates the report it
+#: beats (think-fwa9), and Göbel's classical constructions are earlier reports
+#: (think-8krd, jlevy/squares#613).
+RESTATEMENT, CLASSICAL = "restatement", "classical-constructions"
+RULINGS: Mapping[str, str] = {
+    RESTATEMENT: (
+        "A side below an earlier report at its count by less than one unit in the 12th "
+        "place, with both rounding up to the same 12-place print, restates that report: "
+        "the earlier report stays the row, and the later side is not recorded."
+    ),
+    CLASSICAL: (
+        "Göbel's classical constructions are earlier reports beyond n = 324: at each count "
+        "the least side of the three families the Kingbird catalogue states, at that count "
+        "or by deleting squares from a larger one, joins the start, so a side at or above "
+        "it is not recorded."
+    ),
+}
+#: Why a claim below every member of the standing side is not recorded (`RESTATEMENT`).
+RESTATES = "restates"
+#: How far below the side it restates a restatement lies, at most, and the places of the
+#: print both round up to (`RESTATEMENT`).
+RESTATEMENT_GAP = Fraction(1, 10**SHOWN_PLACES)
+#: The kind of a start member that is a classical construction (`CLASSICAL`), and its label.
+CONSTRUCTION = "construction"
+GOEBEL_LABEL = "Göbel's construction"
+#: The day of the owner's answer on #613 (think-8krd), that Göbel's constructions are the
+#: baseline beyond n = 324. A start `gather` freezes for a ledger read on or after it, a
+#: claims importer declaration read on or after it (`devtools.upper_bound_reports`) and
+#: a claim record so read (`devtools.beyond_horizon_replay.standing_sides`) take Göbel's
+#: construction into the standing side beyond the horizon (`goebel_baseline`); readings
+#: from before it stay as they were frozen (review A of #754, A2). A ledger read on or after
+#: it applies both answers of that day beyond the horizon, or says why not
+#: (`answer_problems`; review B of #754, B1).
+GOEBEL_FROM = "2026-10-23"
+#: The exact comparison with Göbel's families every Göbel reading in the record uses: the
+#: 15 October packet's retained program, read from its path unchanged.
+GOEBEL_PROGRAM = ROOT / (
+    "resources/web/couzo-verified-bounds-2026-10-14/review/goebel_beyond_horizon.py"
+)
 #: The common-doc footer every durable document carries (`check_documentation`).
 FOOTER = (
     "<!-- This document follows common-doc-guidelines.md.",
@@ -294,6 +352,37 @@ class KeyReason(TypedDict):
     proposed_as: NotRequired[str]
 
 
+class AwaitingOwner(TypedDict):
+    """A claim a ruling's words reach that the owner's answer did not name, and that an
+    earlier ledger recorded: the walk keeps the rule before the ruling for it until the
+    owner says, and the render lists it among the owner's decisions."""
+
+    n: int
+    report: str
+    bead: str
+    reason: str
+
+
+class Ruling(TypedDict):
+    """An owner's answer the walk applies (`RULINGS`): its id, the day and the bead, and
+    ``through``, the largest count at which this ledger applies it, where its work stops
+    short of every count the ledger walks."""
+
+    ruling: str
+    decided: str
+    bead: str
+    through: NotRequired[int]
+    awaiting_owner: NotRequired[list[AwaitingOwner]]
+
+
+class NotApplied(TypedDict):
+    """An owner's answer a ledger read from `GOEBEL_FROM` does not apply at some count it
+    walks beyond the horizon, and why (`answer_problems`)."""
+
+    ruling: str
+    reason: str
+
+
 class Ledger(TypedDict):
     format: str
     read_at_main: str
@@ -305,6 +394,8 @@ class Ledger(TypedDict):
     key_reason_candidates: NotRequired[list[KeyReason]]
     cross_check: NotRequired[list[str]]
     other_items: list[OtherItem]
+    rulings: NotRequired[list[Ruling]]
+    rulings_not_applied: NotRequired[list[NotApplied]]
 
 
 def _is_count(value: object) -> TypeIs[int]:
@@ -575,6 +666,106 @@ def problems(ledger: Mapping[str, Any]) -> list[str]:
             found.append(f"other item {item.get('issue')}: missing {sorted(absent)}")
     if not isinstance(ledger.get("cross_check", []), list):
         found.append("cross_check is not a list")
+    ruled = _ruling_problems(ledger.get("rulings"), claimed)
+    ruled += _not_applied_problems(ledger.get("rulings_not_applied"))
+    found.extend(ruled)
+    if not ruled:
+        found.extend(answer_problems(ledger, [n for _, n in claimed], None))
+    return found
+
+
+def _ruling_problems(rulings: Any, claimed: set[tuple[str, int]]) -> list[str]:
+    """Every way a ledger's rulings break their contract (`Ruling`, `AwaitingOwner`)."""
+    found: list[str] = []
+    seen: set[str] = set()
+    for ruling in _mappings(found, rulings, "rulings"):
+        name = str(ruling.get("ruling"))
+        where = f"ruling {name}"
+        if name not in RULINGS:
+            found.append(f"{where}: no such ruling")
+        if name in seen:
+            found.append(f"{where}: listed twice")
+        seen.add(name)
+        if not _DATE.fullmatch(str(ruling.get("decided"))):
+            found.append(f"{where}: decided is not a date")
+        if not _BEAD.fullmatch(str(ruling.get("bead"))):
+            found.append(f"{where}: bead is not a think-xxxx id")
+        if "through" in ruling and not (
+            _is_count(ruling["through"]) and ruling["through"] > HORIZON
+        ):
+            found.append(f"{where}: through is not a count beyond the horizon")
+        awaiting = _mappings(found, ruling.get("awaiting_owner"), f"{where} awaiting_owner")
+        if awaiting and name != RESTATEMENT:
+            found.append(f"{where}: only the restatement ruling keeps claims for the owner")
+        for item in awaiting:
+            key = _named(item)
+            if key not in claimed:
+                found.append(f"{where} awaiting {key}: names no claim of the ledger")
+            if not _BEAD.fullmatch(str(item.get("bead"))):
+                found.append(f"{where} awaiting {key}: bead is not a think-xxxx id")
+            if not str(item.get("reason") or "").strip():
+                found.append(f"{where} awaiting {key}: states no reason")
+    return found
+
+
+def _not_applied_problems(items: Any) -> list[str]:
+    """Every way a ledger's ``rulings_not_applied`` breaks its contract (`NotApplied`)."""
+    found: list[str] = []
+    seen: set[str] = set()
+    for item in _mappings(found, items, "rulings_not_applied"):
+        name = str(item.get("ruling"))
+        where = f"rulings_not_applied {name}"
+        if name not in RULINGS:
+            found.append(f"{where}: no such ruling")
+        if not str(item.get("reason") or "").strip():
+            found.append(f"{where}: states no reason")
+        if name in seen:
+            found.append(f"{where}: listed twice")
+        seen.add(name)
+    return found
+
+
+def answer_problems(
+    ledger: Mapping[str, Any], counts: Iterable[int], held: Collection[int] | None
+) -> list[str]:
+    """Where a ledger read from `GOEBEL_FROM` leaves an answer of that day unapplied at a
+    count it walks beyond the horizon, unsaid (review B of #754, B1).
+
+    The restatement answer is applied at a count its ``rulings`` entry reaches (`Ruling`,
+    ``through``). Göbel's baseline is applied where the ``classical-constructions`` entry
+    reaches, or where the start ``gather`` froze holds Göbel's construction: ``held`` are
+    those counts (`construction_counts`), None where the starts are not read, as in
+    `problems`, which leaves that half to `load_walk` and `gather`. An answer named under
+    ``rulings_not_applied`` with a reason (`NotApplied`) is not required. A ledger read
+    earlier, or with no claim beyond the horizon, has nothing to apply.
+    """
+    read_on = str(ledger.get("read_on"))
+    beyond = sorted({n for n in counts if n > HORIZON})
+    if not beyond or not _DATE.fullmatch(read_on) or not goebel_baseline(read_on):
+        return []
+    rulings = rulings_of(ledger)
+    said = {str(item.get("ruling")) for item in ledger.get("rulings_not_applied") or []}
+    asked = (
+        f"from {GOEBEL_FROM} a ledger beyond the horizon applies it at every count it walks "
+        "there, or says why under rulings_not_applied"
+    )
+    found: list[str] = []
+    unapplied = [n for n in beyond if not rulings.applies(rulings.restatement, n)]
+    if unapplied and RESTATEMENT not in said:
+        found.append(
+            f"read on {read_on}: the restatement answer is not applied at n = "
+            f"{_compress(unapplied)}, which no {RESTATEMENT} ruling reaches; {asked}"
+        )
+    if held is not None:
+        unapplied = [
+            n for n in beyond if not rulings.applies(rulings.classical, n) and n not in held
+        ]
+        if unapplied and CLASSICAL not in said:
+            found.append(
+                f"read on {read_on}: Göbel's baseline is not applied at n = "
+                f"{_compress(unapplied)}, which no {CLASSICAL} ruling reaches and no frozen "
+                f"start member holds; {asked}"
+            )
     return found
 
 
@@ -1171,11 +1362,13 @@ def display_names(sources: Mapping[str, Any]) -> dict[str, str]:
 
 
 def tree_members(
-    counts: Iterable[int], *, names: Mapping[str, str] | None = None
+    counts: Iterable[int], *, names: Mapping[str, str] | None = None, read_on: str = ""
 ) -> dict[int, list[StartMember]]:
     """Each count's start members, read from the records on the tree: both case lanes and
     any register entry pending adoption that states a smaller bound, or above the horizon
-    the beyond-horizon row or the grid. A lane's holders are credited by ``names``."""
+    the beyond-horizon row or the grid, and beside it Göbel's construction for a ledger
+    read on ``read_on`` from `GOEBEL_FROM` (`construction_member`, refused above 1073). A
+    lane's holders are credited by ``names``."""
     wanted = sorted(set(counts))
     members: dict[int, list[StartMember]] = {}
     inside = [n for n in wanted if n <= HORIZON]
@@ -1218,8 +1411,11 @@ def tree_members(
         coverage = load_yaml(coverage_check.COVERAGE)
         rows = coverage_check.current_beyond_horizon(coverage)
         exact = beyond_exact_sides(coverage, rows)
+        goebel = goebel_baseline(read_on)
         for n in outside:
             members[n] = [beyond_member(n, rows, exact)]
+            if goebel:
+                members[n].append(construction_member(n))
     return members
 
 
@@ -1235,6 +1431,9 @@ def side_of(member: StartMember) -> Side:
     value = (
         span.low if exact else (number(member["shown"]) if "." in member["shown"] else span.low)
     )
+    if member["kind"] == CONSTRUCTION:
+        # As `construction_side` reads it: the enclosure's upper end, not its print.
+        value = span.high
     prints = tuple((lane[0], lane[1], lane[2]) for lane in member["lanes"])
     stated = member.get("stated")
     if member["kind"] == "register" and stated:
@@ -1297,10 +1496,10 @@ _MEMBER_TYPES: Mapping[str, type] = {
 
 def recomputed(n: int, member: Mapping[str, Any]) -> list[dict[str, Any]]:
     """The span each of a frozen member's stored inputs gives: every case lane it stands
-    for (`lane_member`), a pending entry's stated bound, a beyond-horizon print, or the
-    grid. Each must equal the member's own. A beyond-horizon row read at its exact side
-    keeps that side as its one lane, and is recomputed by `beyond_member`, so the side
-    must still lie within the row's print."""
+    for (`lane_member`), a pending entry's stated bound, a beyond-horizon print, the grid,
+    or Göbel's construction from the retained program. Each must equal the member's own.
+    A beyond-horizon row read at its exact side keeps that side as its one lane, and is
+    recomputed by `beyond_member`, so the side must still lie within the row's print."""
     if member["lanes"]:
         found = []
         for lane in member["lanes"]:
@@ -1323,6 +1522,8 @@ def recomputed(n: int, member: Mapping[str, Any]) -> list[dict[str, Any]]:
         _require(len(stated) == 2, "a pending entry states [value, slack]")
         value, slack = (number(str(item)) for item in stated)
         found = [pending_member({"id": "-"}, check_standing.Stated(value, slack))]
+    elif member["kind"] == CONSTRUCTION:
+        found = [construction_member(n)]
     elif member["label"] == "the grid":
         found = [beyond_member(n, {})]
     else:
@@ -1396,6 +1597,11 @@ def load_starts(directory: Path, read_at_main: str) -> dict[int, list[Side]]:
     }
 
 
+def construction_counts(starts: Mapping[int, Sequence[Side]]) -> set[int]:
+    """The counts whose frozen start holds Göbel's construction (`construction_member`)."""
+    return {n for n, members in starts.items() if any(m.kind == CONSTRUCTION for m in members)}
+
+
 def starts_document(
     read_at_main: str, members: Mapping[int, list[StartMember]]
 ) -> dict[str, Any]:
@@ -1410,7 +1616,10 @@ def tree_drift(directory: Path) -> list[str]:
     """Where the records on the tree now give a start other than the frozen one."""
     frozen = load_yaml(directory / STARTS)
     counts = [int(count["n"]) for count in frozen["counts"]]
-    now = tree_members(counts, names=display_names(load_yaml(directory / SOURCES)))
+    sources = load_yaml(directory / SOURCES)
+    now = tree_members(
+        counts, names=display_names(sources), read_on=str(sources.get("read_on", ""))
+    )
     drift = []
     for count in frozen["counts"]:
         n = int(count["n"])
@@ -1510,7 +1719,8 @@ def compare(side: Side, other: Side) -> str:
 
 @dataclass
 class Step:
-    """One claim's verdict in the walk at one count."""
+    """One claim's verdict in the walk at one count. ``awaiting`` names the bead of an
+    owner's question that keeps a ruling from deciding the claim (`AwaitingOwner`)."""
 
     side: Side
     verdict: str
@@ -1518,6 +1728,137 @@ class Step:
     holders: list[Side]
     against: list[Side] = field(default_factory=list)
     exception: str = ""
+    awaiting: str = ""
+
+
+@dataclass(frozen=True)
+class Rulings:
+    """The owner's rulings a ledger applies (`RULINGS`), each by the largest count it
+    applies at (None: none; `NO_LIMIT`: every count), and the claims a ruling's words
+    reach that wait on the owner instead, by ``(n, report)`` with the question's bead."""
+
+    restatement: int | None = None
+    classical: int | None = None
+    awaiting: Mapping[tuple[int, str], str] = field(default_factory=dict)
+
+    def applies(self, through: int | None, n: int) -> bool:
+        """Whether a ruling that applies through ``through`` decides at ``n``."""
+        return through is not None and HORIZON < n <= through
+
+
+#: The count a ruling with no ``through`` applies through: every count.
+NO_LIMIT = 10**9
+
+
+def rulings_of(ledger: Mapping[str, Any]) -> Rulings:
+    """The rulings a ledger's input names (`Ruling`)."""
+    named = {str(item["ruling"]): item for item in ledger.get("rulings") or []}
+    restatement = named.get(RESTATEMENT) or {}
+
+    def through(name: str) -> int | None:
+        return int(named[name].get("through", NO_LIMIT)) if name in named else None
+
+    return Rulings(
+        restatement=through(RESTATEMENT),
+        classical=through(CLASSICAL),
+        awaiting={
+            (int(item["n"]), str(item["report"])): str(item["bead"])
+            for item in restatement.get("awaiting_owner") or []
+        },
+    )
+
+
+@functools.cache
+def _goebel() -> tuple[Any, tuple[Any, ...]]:
+    """The retained Göbel program (`GOEBEL_PROGRAM`) and its families to its ``LIMIT``."""
+    spec = importlib.util.spec_from_file_location("goebel_beyond_horizon", GOEBEL_PROGRAM)
+    if spec is None or spec.loader is None:
+        raise LedgerError("the Göbel program is missing")
+    program = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(program)
+    return program, tuple(program.families(program.LIMIT))
+
+
+def goebel_reach() -> int:
+    """The last count at which the retained program gives Göbel's side: the largest count
+    of any member it builds to its ``LIMIT`` of 1100, 1073. Above it the program states no
+    form. Builds of the same families to 3000 here, and to 5000 in review A of #754, give
+    the same least side at every count from 325 to 1073."""
+    _, forms = _goebel()
+    return max(form.count for form in forms)
+
+
+def goebel_form(n: int) -> Any:
+    """Göbel's construction at ``n`` beyond the horizon, as the retained program states it
+    (a ``Form``: ``p + q sqrt 2``, its family and the count it packs); None in the corpus.
+    A count above `goebel_reach` is refused, so a walk or check reaching past it fails
+    rather than reading no construction there."""
+    if n <= HORIZON:
+        return None
+    program, forms = _goebel()
+    reach = goebel_reach()
+    _require(n <= reach, f"n = {n}: the retained Göbel program gives no side above {reach}")
+    form = program.goebel_at(n, list(forms))
+    _require(form is not None, f"n = {n}: the Göbel program states no construction")
+    return form
+
+
+def goebel_baseline(read_on: str) -> bool:
+    """Whether a reading on ``read_on`` takes Göbel's construction into the standing side
+    beyond the horizon (`GOEBEL_FROM`)."""
+    return str(read_on) >= GOEBEL_FROM
+
+
+def construction_member(n: int) -> StartMember:
+    """Göbel's construction at ``n`` as a frozen start member (`construction_side`), which
+    `recomputed` reads again from the retained program; refused within the horizon and
+    above the program's reach (`goebel_reach`)."""
+    side = construction_side(n)
+    _require(side is not None, f"n = {n}: Göbel's construction is no start within the horizon")
+    assert side is not None
+    return _member(
+        side.label,
+        CONSTRUCTION,
+        side.holders,
+        model="closed form",
+        span=side.span,
+        display=side.shown,
+        decide="",
+        lanes=[],
+    )
+
+
+def construction_side(n: int) -> Side | None:
+    """Göbel's construction at ``n`` as a member of the start (`CLASSICAL`): a rigorous
+    `INTERVAL_DIGITS`-digit enclosure of ``p + q sqrt 2``, which no rational side equals."""
+    form = goebel_form(n)
+    if form is None:
+        return None
+    span = closed_form_span(form.text())
+    _require(span is not None, f"n = {n}: Göbel's form {form.text()} does not read")
+    assert span is not None
+    deleted = "" if form.count == n else f", less {form.count - n} of its squares"
+    return Side(
+        GOEBEL_LABEL,
+        f"Frits Göbel: the {form.family} {form.text()} of n = {form.count}{deleted}",
+        span,
+        shown(span.high),
+        span.high,
+        CONSTRUCTION,
+    )
+
+
+def restated(n: int, side: Side, standing: Sequence[Side], rulings: Rulings) -> Side | None:
+    """The report a claim below every member of the standing side restates (`RESTATEMENT`),
+    or None: the member it is closest below, a report rather than a construction, lies
+    above it by less than `RESTATEMENT_GAP` and rounds up to the same 12-place print."""
+    if not rulings.applies(rulings.restatement, n) or not standing:
+        return None
+    least = min(standing, key=lambda member: member.span.high)
+    if least.kind == CONSTRUCTION:
+        return None
+    close = least.span.high - side.value < RESTATEMENT_GAP
+    return least if close and shown(side.value) == shown(least.span.high) else None
 
 
 @dataclass
@@ -1558,6 +1899,7 @@ def walk(
     start: Side | Sequence[Side],
     entries: Sequence[Side],
     exceptions: Mapping[tuple[int, str], str] | None = None,
+    rulings: Rulings | None = None,
 ) -> Walk:
     """The owner's rule at one count: each claim in report order against the standing side.
 
@@ -1567,9 +1909,20 @@ def walk(
     it is above or exactly equal to one; otherwise it is undecided and joins the set. A
     claim recorded, or joining, through a lane's frozen relation below a member carries
     that relation in its span (`clamped`).
+
+    ``rulings`` (`Rulings`) may add Göbel's construction to the start beyond the horizon
+    (`CLASSICAL`), and may take a claim below every member out of the record as a
+    restatement of the report it is closest below (`RESTATEMENT`, `restated`), but for a
+    claim that waits on the owner.
     """
     exceptions = exceptions or {}
-    seeds = minimal([start] if isinstance(start, Side) else list(start))
+    rulings = rulings or Rulings()
+    members = [start] if isinstance(start, Side) else list(start)
+    # A start frozen from `GOEBEL_FROM` already holds the construction (`tree_members`).
+    held = any(member.kind == CONSTRUCTION for member in members)
+    classical = rulings.applies(rulings.classical, n) and not held
+    construction = construction_side(n) if classical else None
+    seeds = minimal([*members, construction] if construction is not None else members)
     standing = list(seeds)
     steps: list[Step] = []
     for side in sorted(entries, key=lambda item: (item.reported_at, item.label)):
@@ -1577,8 +1930,18 @@ def walk(
         above = [member for member, relation in relations if relation == ABOVE]
         equal = [member for member, relation in relations if relation == EQUAL]
         unsure = [member for member, relation in relations if relation == UNDECIDED]
-        if all(relation == BELOW for _, relation in relations):
-            step = Step(side, RECORDED, BELOW, [member for member, _ in relations])
+        restates = (
+            restated(n, side, standing, rulings)
+            if all(relation == BELOW for _, relation in relations)
+            else None
+        )
+        awaiting = rulings.awaiting.get((n, side.label), "") if restates else ""
+        if restates is not None and not awaiting:
+            step = Step(side, NOT_RECORDED, RESTATES, [restates])
+        elif all(relation == BELOW for _, relation in relations):
+            step = Step(
+                side, RECORDED, BELOW, [member for member, _ in relations], awaiting=awaiting
+            )
             standing = [clamped(side, standing)]
         elif above or equal:
             reason = ABOVE if above else EQUAL
@@ -1612,6 +1975,10 @@ def _difference(step: Step) -> str:
         return "equal"
     if step.reason == UNDECIDED or not step.holders:
         return ""
+    if step.reason == RESTATES:
+        (member,) = step.holders
+        gap, how = _gap(step.side, member, BELOW)
+        return f"restates, below by {how}{scientific(gap)} at the same 12-place print"
     word = "below" if step.reason == BELOW else "above"
     gaps = [_gap(step.side, member, step.reason) for member in step.holders]
     gap, how = min(gaps, key=lambda item: item[0])
@@ -1655,6 +2022,8 @@ def step_record(step: Step) -> dict[str, Any]:
         record["decide_by"] = decider(side, step.against)
     if step.exception:
         record["exception"] = step.exception
+    if step.awaiting:
+        record["awaiting_owner"] = step.awaiting
     if side.restates:
         record["restates"] = side.restates
     if side.measured is not None:
@@ -1706,11 +2075,14 @@ def evaluate(ledger: Ledger, starts: Mapping[int, Sequence[Side]]) -> dict[str, 
     exceptions = {
         (item["n"], item["report"]): item["reason"] for item in ledger.get("exceptions", [])
     }
+    rulings = rulings_of(ledger)
     entries, unknown = _entries(ledger, publications=True)
     alternative_entries, _ = _entries(ledger, publications=False)
-    walks = [walk(n, starts[n], entries.get(n, []), exceptions) for n in counts_of(ledger)]
+    walks = [
+        walk(n, starts[n], entries.get(n, []), exceptions, rulings) for n in counts_of(ledger)
+    ]
     alternative = {
-        n: walk(n, starts[n], alternative_entries.get(n, []), exceptions)
+        n: walk(n, starts[n], alternative_entries.get(n, []), exceptions, rulings)
         for n in counts_of(ledger)
     }
     candidates = {
@@ -1738,7 +2110,7 @@ def evaluate(ledger: Ledger, starts: Mapping[int, Sequence[Side]]) -> dict[str, 
             counts[-1]["best_now_without_publications"] = [
                 side_record(side) for side in alternative[result.n].standing
             ]
-    return {
+    verdicts: dict[str, Any] = {
         "format": VERDICTS_FORMAT,
         "read_at_main": ledger["read_at_main"],
         "read_on": ledger["read_on"],
@@ -1754,6 +2126,60 @@ def evaluate(ledger: Ledger, starts: Mapping[int, Sequence[Side]]) -> dict[str, 
         },
         "other_items": ledger.get("other_items", []),
     }
+    if ledger.get("rulings"):
+        verdicts["rulings"] = ruling_summaries(ledger, walks)
+    not_applied = ledger.get("rulings_not_applied") or []
+    if not_applied:
+        verdicts["rulings_not_applied"] = [
+            {"ruling": item["ruling"], "reason": item["reason"]} for item in not_applied
+        ]
+    return verdicts
+
+
+def ruling_summaries(ledger: Ledger, walks: Sequence[Walk]) -> list[dict[str, Any]]:
+    """Each ruling the ledger applies, with what it decided: the claims each takes out of
+    the record, by count and report, and the claims that wait on the owner instead."""
+    restating = [
+        {"n": result.n, "report": step.side.label, "restates": held_by(step)}
+        for result in walks
+        for step in result.steps
+        if step.reason == RESTATES
+    ]
+    beneath = [
+        {"n": result.n, "report": step.side.label}
+        for result in walks
+        for step in result.steps
+        if step.verdict == NOT_RECORDED
+        and any(member.kind == CONSTRUCTION for member in step.holders)
+    ]
+    seeded = [
+        result.n
+        for result in walks
+        if any(member.kind == CONSTRUCTION for member in result.start)
+    ]
+    waiting = [
+        {"n": result.n, "report": step.side.label, "bead": step.awaiting}
+        for result in walks
+        for step in result.steps
+        if step.awaiting
+    ]
+    summaries = []
+    for ruling in ledger.get("rulings") or []:
+        name = ruling["ruling"]
+        summary: dict[str, Any] = {
+            "ruling": name,
+            "decided": ruling["decided"],
+            "bead": ruling["bead"],
+            "text": RULINGS[name],
+        }
+        if "through" in ruling:
+            summary["through"] = ruling["through"]
+        if name == RESTATEMENT:
+            summary |= {"not_recorded": restating, "awaiting_owner": waiting}
+        else:
+            summary |= {"start": seeded, "not_recorded": beneath}
+        summaries.append(summary)
+    return summaries
 
 
 NOT_IN_WALK = "not in the walk"
@@ -2109,6 +2535,9 @@ def readme(ledger: Ledger, verdicts: Mapping[str, Any], *, retained: bool = True
             "otherwise."
         ),
         "",
+        *_ruling_lines(
+            verdicts.get("rulings") or [], verdicts.get("rulings_not_applied") or []
+        ),
         "## Counts",
         "",
         *_count_lines(verdicts["summary"]),
@@ -2190,6 +2619,11 @@ def readme(ledger: Ledger, verdicts: Mapping[str, Any], *, retained: bool = True
                 detail = f"{detail} {', '.join(step['decided_against'])}".strip()
             if step.get("exception"):
                 detail += f"; exception: {step['exception']}"
+            if step.get("awaiting_owner"):
+                detail = (
+                    f"{detail}; the restatement ruling waits on the owner "
+                    f"({step['awaiting_owner']})"
+                ).lstrip("; ")
             if step.get("restates"):
                 detail = f"{detail}; {step['restates']}".lstrip("; ")
             if step.get("measured"):
@@ -2233,6 +2667,65 @@ def readme(ledger: Ledger, verdicts: Mapping[str, Any], *, retained: bool = True
         )
     lines += ["", *FOOTER]
     return "\n".join(lines) + "\n"
+
+
+def _ruling_lines(
+    rulings: Sequence[Mapping[str, Any]], not_applied: Sequence[Mapping[str, Any]] = ()
+) -> list[str]:
+    """The owner's rulings the walk applies (`ruling_summaries`), and those it says why it
+    does not (`NotApplied`); nothing for a ledger that names none, so a ledger read before
+    them renders as it did."""
+    if not rulings and not not_applied:
+        return []
+    lines = ["## The Owner's Rulings", ""]
+    if rulings:
+        lines += [
+            (
+                "Beyond the corpus the walk applies these answers of the owner as part of the "
+                "rule, each from its day and with the bead that asked it (`rulings` in "
+                "`ledger.yaml`)."
+            ),
+            "",
+        ]
+    for ruling in rulings:
+        lines.append(f"- **{ruling['ruling']}** ({ruling['decided']}, {ruling['bead']}): ")
+        lines[-1] += ruling["text"]
+        if "through" in ruling:
+            lines[-1] += f" This ledger applies it through n = {ruling['through']}."
+        if ruling["ruling"] == RESTATEMENT:
+            counts = {item["n"] for item in ruling["not_recorded"]}
+            lines[-1] += (
+                f" It takes {len(ruling['not_recorded'])} claims out of the record here, at "
+                f"{len(counts)} counts: {_compress(counts)}."
+            )
+            for item in ruling["awaiting_owner"]:
+                lines[-1] += (
+                    f" At {item['n']}, {item['report']} is in its words and an earlier "
+                    "ledger recorded it, so the walk records it as before until the owner "
+                    f"says ({item['bead']})."
+                )
+        else:
+            lines[-1] += (
+                f" It joins the start at {len(ruling['start'])} counts, where it is below the "
+                f"record on `main`, and holds {len(ruling['not_recorded'])} claims out of "
+                "the record."
+            )
+    if not_applied:
+        if rulings:
+            lines.append("")
+        lines += [
+            (
+                "The walk does not apply these answers of the owner beyond the corpus, for "
+                "the reason its input gives (`rulings_not_applied` in `ledger.yaml`)."
+            ),
+            "",
+            *(
+                f"- **{item['ruling']}** is not applied here: "
+                f"{str(item['reason']).strip().rstrip('.')}."
+                for item in not_applied
+            ),
+        ]
+    return [*lines, ""]
 
 
 def _decision_lines(decisions: Mapping[str, Any]) -> list[str]:
@@ -2507,12 +3000,16 @@ def inert_relations(ledger: Ledger, starts: Mapping[int, Sequence[Side]]) -> lis
 
 
 def load_walk(directory: Path) -> tuple[Ledger, dict[int, list[Side]]]:
-    """The ledger and the starts ``gather`` froze, refused when a count has no start or a
-    record relation reads no member of its start (`inert_relations`)."""
+    """The ledger and the starts ``gather`` froze, refused when a count has no start, when
+    a ledger read from `GOEBEL_FROM` leaves an answer unapplied and unsaid
+    (`answer_problems`), or when a record relation reads no member of its start
+    (`inert_relations`)."""
     ledger = load_ledger(directory)
     starts = load_starts(directory, ledger["read_at_main"])
     missing = sorted(set(counts_of(ledger)) - set(starts))
     _require(not missing, f"{STARTS} has no start at n = {missing}")
+    unapplied = answer_problems(ledger, counts_of(ledger), construction_counts(starts))
+    _require(not unapplied, "; ".join(unapplied))
     inert = inert_relations(ledger, starts)
     _require(not inert, "; ".join(inert))
     return ledger, starts
@@ -2819,6 +3316,10 @@ def gather(
         "key_reason_candidates": sources.get("key_reason_candidates", []),
         "other_items": sources.get("other_items", []),
     }
+    if sources.get("rulings"):
+        ledger["rulings"] = sources["rulings"]
+    if sources.get("rulings_not_applied"):
+        ledger["rulings_not_applied"] = sources["rulings_not_applied"]
     warnings = cross_check(directory, ledger, sources)
     ledger["cross_check"] = warnings
     found = problems(ledger)
@@ -2828,18 +3329,27 @@ def gather(
         (LEDGER, yaml.safe_dump(ledger, sort_keys=False, allow_unicode=True, width=88)),
     ]
     if keep:
-        missing = sorted(set(counts_of(ledger)) - set(load_starts(directory, read_at_main)))
+        frozen = load_starts(directory, read_at_main)
+        missing = sorted(set(counts_of(ledger)) - set(frozen))
         _require(
             not missing,
             f"{STARTS} has no start at n = {missing}: gather --refresh-starts from a checkout "
             f"of read_at_main {read_at_main[:12]}",
         )
+        held = construction_counts(frozen)
     else:
-        members = tree_members(counts_of(ledger), names=display_names(sources))
+        members = tree_members(
+            counts_of(ledger), names=display_names(sources), read_on=str(sources["read_on"])
+        )
+        held = {
+            n for n, items in members.items() if any(m["kind"] == CONSTRUCTION for m in items)
+        }
         starts = starts_document(read_at_main, members)
         texts.append(
             (STARTS, yaml.safe_dump(starts, sort_keys=False, allow_unicode=True, width=88))
         )
+    unapplied = answer_problems(ledger, counts_of(ledger), held)
+    _require(not unapplied, "; ".join(unapplied))
     for name, text in texts:
         with atomic_output_file(directory / name) as temporary:
             Path(temporary).write_text(text, encoding="utf-8")
@@ -2951,7 +3461,11 @@ def main(argv: Sequence[str] | None = None) -> int:
             command.add_argument(
                 "--tree",
                 action="store_true",
-                help="also report where today's records give other starts (never fails)",
+                help=(
+                    "also report where today's records give other starts; drift is not a "
+                    "gate, but a start the records cannot give fails, as above 1073 for a "
+                    "ledger read from 23 October 2026"
+                ),
             )
         if name == "render":
             mode = command.add_mutually_exclusive_group()

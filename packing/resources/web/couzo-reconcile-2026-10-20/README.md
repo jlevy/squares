@@ -24,7 +24,7 @@ The [history walk of 22 October](../../../campaign/issue-intake/upper-bounds-cou
 
 ## Held Back
 
-The walk records the commit’s publications at 32 more counts and holds each back from a row: 31 re-certifications below the side they beat by less than 10⁻¹² with the same 12-place print (think-fwa9), 11 certificate files, pinned by digest here, and 20 L-border bounds of its index; and 331, above Göbel’s construction (think-8krd). Issue #715’s 30 re-certifications, whose files the commit also holds, are #715’s, which reported them two hours earlier; they are pinned here against the couzo-issue715-2026-10-21 packet’s identical copies. The index’s bounds above 1024 wait on the owner (D1, think-f2io).
+By the owner’s answers of 23 October 2026 the walk does not record the commit’s publications at 32 more counts: 31 re-certifications below the side they beat by less than 10⁻¹² with the same 12-place print, which restate those reports (think-fwa9), 11 certificate files, pinned by digest here, and 20 L-border bounds of its index; and 331, above Göbel’s construction there, an earlier report (think-8krd). Issue #715’s 30 re-certifications, whose files the commit also holds, are #715’s, which reported them two hours earlier; they are pinned here against the couzo-issue715-2026-10-21 packet’s identical copies. The index’s bounds above 1024 wait on the owner (D1, think-f2io).
 
 ## Credit
 
