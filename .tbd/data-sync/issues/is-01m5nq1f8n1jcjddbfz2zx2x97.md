@@ -5,7 +5,7 @@ title: "Records PR A: the authors' answers on #670, #675, #715 and #734, and T-2
 kind: task
 status: in_progress
 priority: 2
-version: 3
+version: 4
 delegate: c-records-a-1024
 labels: []
 dependencies: []
@@ -15,6 +15,22 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-24T01:05:12.981Z
-updated_at: 2026-10-24T02:22:33.517Z
+updated_at: 2026-10-24T02:24:20.931Z
 started_at: 2026-10-24T01:05:24.492Z
 ---
+
+## Notes
+
+2026-10-24 c-records-a-1024 (PR A): https://github.com/jlevy/squares/pull/766, draft, labels intake and S2, branch claude/intake-2026-10-24-author-answers. Base origin/main 5f5294d82, merged with 0bbb0a2c4 (#754) and 5664ac1e8 (#758), no conflicts.
+
+Commits: 9d5a79683 (the 204 seed retained in couzo-index-2026-10-15 at 4e4c8ce: n204.txt retained, certificates/best/n204.cert pinned, the same blob as 70a033f's square-204.cert; the #670 packet's measure/seed-identity.{py,json} and a test that rebuilds it), bccef9c3f (merge #754), 4090a4a36 (#719's stage 7 reply of 01:25:17Z recorded, from scratchpad/stage7-753/requests.patch, hand-merged after #754), f84b9de83 (the records change), 321133bbf (merge #758), 4c1d1ee03 (the #725 News story names T-186's line, Ostashev linked), f3154f214 (DATA_REVISION re-pinned to f84b9de8), 6c833931e (no-change record for the four papers).
+
+Established: every digest prefix Couzo's answers print is a packet manifest's SHA-256; 4e4c8ce's best/n204.cert is T-186's certificate byte for byte; n204.txt pairs one to one with T-186's packing under the identity, largest centre move 3.94e-12, printed side 2.78e-12 above T-186's exact side; the author's verify_packing(bucket=True) call counts 32 (#670) and 88 (#675) boundary corner coordinates and no touching pair, as his answers say.
+
+Chain credit (attribution.md, T-186's 204 lineage in T-186's order): T-226 and T-228 Couzo after Polkovskyi, Ostashev, PingYou Ltd, Daniel, Levy; T-223 Couzo after de Winter, Polkovskyi, Ostashev, Daniel, Fang, PingYou Ltd, Levy; T-225 Daniel after Couzo, de Winter, Polkovskyi, Ostashev, PingYou Ltd, Levy; T-229 Polkovskyi after Couzo, Muglich, Daniel, Xu, Ostashev, PingYou Ltd, Levy; T-231 Polkovskyi after Couzo, Ostashev, PingYou Ltd, Daniel, Levy. Short credits, rungs, S scores unchanged. Nakajima (T-162's method credit) is not carried, as T-186's credit does not carry it. 41 occurrence spans re-mapped (Ostashev joined; PingYou Ltd non-person).
+
+Requests: #670 state closed, closed 2026-10-23, read_through 22:22:03Z, summary and n370/n452/n536 fixed, awaiting_author answered; #675 read_through 22:22:34Z; #715 read_through 22:16:52Z, n335 facts under stage 1's exact rule (no owner question; the next import, #732's f1ceee4 rows, decides the row via think-rx26 and supersedes it), above-1024 lineage for think-llit; #734 triage done, on hold by the owner's "Not now" of 24 October (asks: 1 done, 2 and 3 declined). check_requests now marks #734 closeable: the coordinator decides whether reply-734 closes it. intake-watch: wand125/square-packing-tools read at 24ee7fc, nothing to import. chelokot: think-fddm already owns it, its read rides #750; no new bead.
+
+Replies (not posted): scratchpad/triage-1023b/reply-670.md (final), reply-715.md (folds in #754's think-temp follow-up), reply-719.md (chain paragraph), reply-734.md (on hold; final comment as drafted).
+
+Validation at 6c833931e: packing-validate --records 52/53, the one failure check_bead_tree on an unrelated open bead from #756's review A7 under a closed parent; 513 affected tests passed. Deferral: think-tbwo (n-204.md history paragraphs). blocked_on: hosted CI on #766, then the coordinator's merge and stage 7.
