@@ -5,7 +5,7 @@ title: Catch up every 'Review pending' result on the profiles (T-073/T-080, T-08
 kind: task
 status: in_progress
 priority: 2
-version: 4
+version: 5
 delegate: c-review-pending-1024
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-24T02:09:40.627Z
-updated_at: 2026-10-24T03:47:39.556Z
+updated_at: 2026-10-24T04:50:55.532Z
 started_at: 2026-10-24T02:09:50.200Z
 ---
 
@@ -27,3 +27,5 @@ At main 5664ac1e8, `profile_records.load_record_index().unresolved` holds 5 resu
 - T-163 settled: record_scope.assessment, recomputed by cases/asymptotic/deficiency_family.py on every read. Current: strictly the smallest at k = 15-68 and 70-75, tied with Ryu's earlier Theorem 1.3 at 69 and 76. The ledger's and the rationale's "15 <= k <= 78" were against Ryu's Theorem 1.4 only, and are now qualified. V2 kept: the note is public now (DOI 10.5281/zenodo.23463481), so V2's premise is gone, but V3 needs a cited entry (think-494l or think-dgrc). next_rung and composition now say so.
 - T-073/T-080 and T-083/T-084: one report each, so report order cannot decide. Decision bead think-33u4; option A patch saved in the lane's scratchpad.
 - check_requests --pending: 46 pending; 9 with no tracking issue (none at S4 or above); 6 with a stale or held issue. Stage 7 rule added. Drafts for #603, #294 and #295 are in the lane's scratchpad, not posted.
+
+2026-10-24 coord-intake-1023: OWNER ANSWERS (in conversation). On a pair of register entries from one report (T-073/T-080, T-083/T-084), the owner selected "Credit both (Recommended)": when the tied entries carry identical attribution, both are credited as current (option A, the 11-line change to classify_records). On the nine pending results with no tracking issue (T-036, T-046, T-087, T-112, T-142, T-143, T-144, T-179, T-192), the owner selected "Open all nine (Recommended)": one issue per result, labelled intake, stating its current review state, updated at every change, and closed when the review lands.

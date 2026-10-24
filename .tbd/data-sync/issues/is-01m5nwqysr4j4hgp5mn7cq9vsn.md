@@ -5,14 +5,14 @@ title: "Decision: how profiles count one report registered as two results (T-073
 kind: task
 status: open
 priority: 2
-version: 2
+version: 3
 labels:
   - decision
   - result-import
 dependencies: []
 parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 created_at: 2026-10-24T02:44:52.663Z
-updated_at: 2026-10-24T02:45:05.835Z
+updated_at: 2026-10-24T04:50:54.615Z
 ---
 Owner decision, raised by lane c-review-pending-1024 (think-rh4j) on 24 October 2026 from the owner's request to catch up every "Review pending" on the profiles.
 
@@ -42,3 +42,7 @@ Report order needs two reports. Each pair is one report, so neither entry is ear
 - **C. Retire the duplicate.** Fold T-080 into T-073. This is a register change to a bound entry, whose supersession today is only derived, never declared. It is the largest option, and it changes T-080's result page.
 
 Recommendation: A. It follows the register as it stands, uses no registration order, and is narrow: only candidates with the identical attribution are joined.
+
+## Notes
+
+2026-10-24 coord-intake-1023: OWNER ANSWERS (in conversation). On a pair of register entries from one report (T-073/T-080, T-083/T-084), the owner selected "Credit both (Recommended)": when the tied entries carry identical attribution, both are credited as current (option A, the 11-line change to classify_records). On the nine pending results with no tracking issue (T-036, T-046, T-087, T-112, T-142, T-143, T-144, T-179, T-192), the owner selected "Open all nine (Recommended)": one issue per result, labelled intake, stating its current review state, updated at every change, and closed when the review lands.
