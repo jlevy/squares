@@ -3,9 +3,9 @@ type: is
 id: is-01m5nrf6wk5p2ca76zdad9sw0d
 title: "Triage #763 (Couzo, 23 October 23:35Z): 436 improved upper bounds at 268-9802 (203 at or below 1024, 233 above), source franciscouzo/square-packing@964ee2b"
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 6
+version: 8
 delegate: c-triage-763-1024
 labels: []
 dependencies:
@@ -15,7 +15,7 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-24T01:30:11.731Z
-updated_at: 2026-10-24T07:16:24.873Z
+updated_at: 2026-10-24T08:22:27.655Z
 started_at: 2026-10-24T01:30:16.579Z
 ---
 
@@ -110,3 +110,5 @@ blocked_on: none
 2026-10-24 coord-intake-1023: OWNER on custody: "so Couzo's has submitted so the presumtion is permission from that. We should track a bead to follow up on the exact license, but it should not impair our ability to import things." The import retains the needed files on that presumption; the licence follow-up is think-m8f4. A general rule for the runbook, stage 2 "Retain": a source its author submitted to this repository carries a presumption of permission to retain and import, and its exact licence is followed up on its own bead without holding the import. It rides the #763 import PR.
 
 2026-10-24 coord-intake-1023, from #769 review A7 (https://github.com/jlevy/squares/pull/769#issuecomment-6380362746): franciscouzo/square-packing `fa6237e` was COMMITTED at 18:59Z on 23 October, before f1ceee4 (20:35:12Z), but PUSHED at 23:38:42Z with efef7d1 and 964ee2b. By its header sides it lies below f1ceee4 at 131 of 138 counts. `beyond_horizon_replay.PUSHED_LATER` (~:1942) holds one push per repository. Before the #763 import walks, it must date those commits by the 23:38:42Z push (publication), or they sort ahead of f1ceee4. The triage compared the pin's commit time and the push time, but not fa6237e's commit time. Add the push to PUSHED_LATER with its evidence (GitHub's activity API) first.
+
+2026-10-24 coord-intake-1024: closed. Stage 1 triage complete (verdicts, credit, price and plan above); its scratchpad data (triage-763/) was lost with the interrupted session's container, so think-ptkk's lane re-derives the claim map from these notes and the pinned source. Implementation continues in think-ptkk (PR A).

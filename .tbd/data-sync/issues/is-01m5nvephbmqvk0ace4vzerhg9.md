@@ -5,8 +5,8 @@ title: "Take over PR #736 (home page News box) on the owner's word: merge main, 
 kind: task
 status: in_progress
 priority: 2
-version: 6
-delegate: c-take-736-1024
+version: 7
+delegate: c-sync-736-1024
 labels: []
 dependencies: []
 parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
@@ -15,7 +15,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-24T02:22:20.715Z
-updated_at: 2026-10-24T04:52:43.974Z
+updated_at: 2026-10-24T08:22:17.785Z
 started_at: 2026-10-24T02:22:34.759Z
 ---
 
