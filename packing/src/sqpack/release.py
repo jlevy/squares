@@ -8298,8 +8298,10 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "2821d8a6 with that main's four files swapped in: the same outcome. Measured "
             "once more after merging main c5697c2f2 (#757), at link revision 0ffac35f "
             "with that main's four files swapped in: the same outcome, the register at 239 "
-            "results. No PDF was printed; each prints from that HTML. Every paper keeps "
-            "its version."
+            "results. Measured once more after merging main 5f8f005a3 (#766), at link "
+            "revision bba0bfff with that main's four files swapped in: the same outcome. "
+            "No PDF was printed; each prints from that HTML. Every paper keeps its "
+            "version."
         ),
     ),
 )
