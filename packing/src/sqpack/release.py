@@ -8004,7 +8004,9 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "render_n11_threshold_bound_review and render_packing_methods write every "
             "file byte-identical across all three. Measured again after merging main "
             "14b14f2d1 (#768), at link revision ba76f214 with that main's two files "
-            "swapped in: the same outcome. No PDF was printed; each prints from that "
+            "swapped in: the same outcome; and at bce22ded, after the record index "
+            "stopped recomputing the assessment, from this tree with links pinned to "
+            "ba76f214: the same 69 files. No PDF was printed; each prints from that "
             "HTML. Retain v0.4.22, v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
