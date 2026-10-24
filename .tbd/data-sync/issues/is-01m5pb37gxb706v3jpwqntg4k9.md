@@ -5,14 +5,14 @@ title: "Decision: news.html byte budget, no measured size passes the load checks
 kind: task
 status: open
 priority: 1
-version: 3
+version: 5
 spec_path: docs/project/specs/active/plan-2026-10-23-news-pr-feed.md
 labels:
   - decision
 dependencies: []
 parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 created_at: 2026-10-24T06:55:42.109Z
-updated_at: 2026-10-24T08:42:49.754Z
+updated_at: 2026-10-24T09:09:06.857Z
 ---
 The owner's decision is needed: the measurement that was to confirm a larger byte budget for news.html (plan #759, "Before Phase 1: The Budget Raise"; think-3oxz) found no size that passes the site's own load checks, and today's page fails one of them too. The budget stays at 600,000 bytes until the owner picks a step.
 
@@ -30,7 +30,7 @@ WHY (corrected 24 October after review A on PR #788; a third run with two contro
 - The longest task is news-cards.js's refresh, not the page's size. At load it folds each card, reads its line height and height, writes, and then reads its width, card after card (news-cards.js:47-66 and :95), so each card forces two layouts and two style recalculations: 31 layouts today, 81 at about 1.0 MB and 106 at about 1.3 MB (12, 37 and 49 visible cards). Style work grows with them, from about 85 ms to 470 to 480 ms of thread time.
 - Controls (measure_news_page project 1300000 --without SCRIPT, then load, 24 October 08:33-08:38Z): the 1,305,949-byte page without news-cards.js passes every limit (CLS at most 0.061, longest task at most 144 ms, blocking at most 103, LCP at most 1,064; 6 to 8 layouts), with the cards left at full height. Without news-filters.js it still fails the longest task (432 ms, 106 layouts) and the shift at 390 px (0.35), while its 1280 px shift drops to 0.097.
 
-WHAT IT MEANS. No raise can be confirmed by this measurement, so the 600,000-byte budget stands, and check_published_site will refuse to deploy a news.html above it. Today's page (319,181 bytes) reaches 600,000 in about 18 to 28 days and the plan's 450,000-byte watch point in about 9 to 13, depending on the window the pace is read over (measure_news_page bytes --pace-days N, 24 October): last 28 days 10,160 bytes a day, 12.9 and 27.6 days; last 21 days 13,217, 9.9 and 21.2; last 14 days 15,230, 8.6 and 18.4; last 7 days 12,947, 10.1 and 21.7; the plan's 14,400, 9.1 and 19.5. The 28-day figure is the long end: the window starts on 27 September, and the page's stories are one on 30 September and 49 from 9 October. The decision needs to land before the short end, about 18 days from 24 October.
+WHAT IT MEANS. No raise can be confirmed by this measurement, so the 600,000-byte budget stands, and check_published_site will refuse to deploy a news.html above it. Today's page (319,181 bytes) reaches 600,000 in about 18 to 28 days and the plan's 450,000-byte watch point in about 9 to 13, depending on the window the pace is read over (measure_news_page bytes --pace-days N, 24 October): last 28 days 10,160 bytes a day, 12.9 and 27.6 days; last 21 days 13,217, 9.9 and 21.2; last 14 days 15,230, 8.6 and 18.4; last 7 days 12,947, 10.1 and 21.7; the plan's 14,400, 9.1 and 19.5. The 28-day figure is the long end: the window starts on 27 September, and the page's stories are one on 30 September and 49 from 9 October. Update at main 6808d293a (24 October, after #787 added two S3 stories of 25,626 and 13,377 bytes): today's page is 358,186 bytes over 52 stories, and the runway is about 13 to 21 days to 600,000 and 5 to 8 to the 450,000 watch point (28 days 11,553 bytes a day, 7.9 and 20.9 days; 21 days 15,074, 6.1 and 16.0; 14 days 18,015, 5.1 and 13.4; 7 days 18,518, 5.0 and 13.1; the plan's 14,400, 6.4 and 16.8). The decision needs to land before the short end, about 13 days from 24 October.
 
 OPTIONS (none runs automatically):
 1. Have the site agent change news-cards.js and site.css so the cards are folded before the first paint (for example, the collapsed height set by a style that applies when scripts run, with the script only measuring), the filter bar's space is reserved before it is revealed, and the script reads every card's height before it writes any (the plan's batching remedy); then re-run the measurement. On the controls' evidence this one change addresses both failing limits; what a batched script costs is what the re-measurement settles. This changes news-cards.js and site.css (and news-filters.js or the filter bar's style), which the raise was not allowed to touch.
@@ -47,3 +47,4 @@ Evidence: the tool and its tests are on branch claude/intake-2026-10-24-news-bud
 ## Notes
 
 2026-10-24 c-fix-788-1024 (review A on PR #788, https://github.com/jlevy/squares/pull/788#issuecomment-6381675002): description corrected in place. WHY now names news-cards.js refresh's two forced layouts per visible card as the longest task's cause (A1) and the news-filters.js filter-bar reveal as the second layout shift (A2), with the retained tool's controls (project --without news-cards.js passes every limit at 1,305,949 bytes; without news-filters.js it still fails the longest task). WHAT IT MEANS gives the runway as 18 to 28 days to 600,000 and 9 to 13 to 450,000 by pace window (A3). Option 1 widened to fold before first paint, reserve the filter bar and batch reads before writes; option 3 notes it is not needed for the longest task. The stale 'no pull request opened' evidence line now points at #788. Before the edit the description said the long task grows with the page and gave about 28 days as the runway.
+2026-10-24 c-fix-788-1024: runway re-read at main 6808d293a after #787 (358,186 bytes, 52 stories): about 13 to 21 days to 600,000 and 5 to 8 to 450,000; added to WHAT IT MEANS.
