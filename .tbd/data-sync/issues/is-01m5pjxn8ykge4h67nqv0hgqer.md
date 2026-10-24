@@ -5,7 +5,7 @@ title: "Import evand and franciscouzo: s(268) <= 16.874361715870 and s(304) <= 1
 kind: task
 status: in_progress
 priority: 2
-version: 6
+version: 8
 delegate: c-import-l49q-1024
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-24T09:12:28.189Z
-updated_at: 2026-10-24T16:22:40.148Z
+updated_at: 2026-10-24T17:34:44.989Z
 started_at: 2026-10-24T13:38:16.088Z
 ---
 
@@ -46,3 +46,7 @@ A mapped review comes next, then adoption at 268 and 304 with both drawings regu
 2026-10-24 c-import-l49q-1024: #792 head 37ce67593 is green (Packing validation 40106027298, Certificate page 40106027300; 31 pass, 0 fail). The first push failed on three bookkeeping causes, fixed in 5890f261b: SYNOPSIS research-status count, eight census spans in packing/contributors/occurrences.yaml (Tymchishin and Lavrentev unresolved pending profiles), and T-241 coverage address as /tree/fa6237e. Still a draft; not merged.
 
 2026-10-24 c-import-l49q-1024, Review A round 1 of #792 (review https://github.com/jlevy/squares/pull/792#issuecomment-6386254744; dispositions https://github.com/jlevy/squares/pull/792#issuecomment-6386589923). Pushed once: 705ba44e7 (records and code), 546de8689 (papers' no-change record), c30dd33b1 (re-pin to 705ba44e); main 2ec489d1e had not moved, so no merge. 12 fixed, A6 deferred to think-jv2s (coordinator starts it next), A14 declined (merge order). A1: couzo-n304 pins certificates/best/manifest.json at fa6237e (SHA-256 31b0caef...); its witnesses/304 entry (identical at 964ee2b) gives previous_source Polkovskyi's 70a033f n304.cert (72fa0c89..., T-186's packing, construction_credit Chaoweeraprasit) and seed_credit Polkovskyi; T-241's key is now "Couzo after Tymchishin, Polkovskyi, Chaoweeraprasit, Levy". The "54 beyond 0.1" and the reviewer's "250 within 0.1" vs T-186 are one assignment (symmetry 7 = (x,y)->(y,x)). A2: the KKT padding is 1.687e-19 and 1.793e-19 (relative 1e-20); this bead's notes never carried the 1.7e-22 figure. A3: T-242's key "Daniel after Lavrentev, Tymchishin, Polkovskyi, Chaoweeraprasit, Levy". A4: announcement hand-corrected to credit Tymchishin's packing certified by Couzo; proposed bead: render_announcement should not announce a certifier as the finder. A5: ledger dated by push (fa6237e 23:38:42Z, 8a8879a 04:53:53Z); verdicts unchanged. A9: acquire_source.twin_bytes public, used by _upstream; new original-gzip twin test. A11: Daniel's Levy kept, citing the prior-best files' reads of this project's register and issues. A12: result-import.md stage 2 twin custody. Draft question for Couzo added to the couzo-n304 README (did the notebook start from Polkovskyi's 70a033f packing; what Chaoweeraprasit's construction credit covers; is Tymchishin the finder). The draft acknowledgement for Evan Daniel above gains question 3 already; its credit at 304 should now name the chain (Tymchishin after Polkovskyi and Chaoweeraprasit). Not synced, per the coordinator.
+
+2026-10-24 c-import-l49q-1024, Review B round 2 of #792 (review https://github.com/jlevy/squares/pull/792#issuecomment-6386952714; dispositions https://github.com/jlevy/squares/pull/792#issuecomment-6387227119). Pushed once: 3a9c5b606 (records and code), 5ed0de7e7 (papers' no-change record re-measured), 0bebe936c (re-pin); main 2ec489d1e unmoved. All six fixed. B1 by the coordinator's decision: the 304 parent link takes T-186's recorded chain exactly, since the record measures Polkovskyi's 70a033f 304 as Ostashev's T-175 packing (304 of 304 within 9.4e-16, mishapolk-kkt-refinements-2026-10-14/review/compare_lineage-output.txt:32). T-241 key: "Couzo after Tymchishin, Polkovskyi, Ostashev, Couzo, PingYou Ltd, Levy" (Couzo twice, the second as T-186's link); T-242 key: "Daniel after Lavrentev, Tymchishin, Polkovskyi, Ostashev, Couzo, PingYou Ltd, Levy". Chaoweeraprasit dropped from both; the manifest's construction_credit is quoted as the source's statement, unsupported by the measurement, and Couzo's question 1 asks why (the fa6237e manifest also names ry-xu at 129 and Chaoweeraprasit at 176, 302, 303). Announcement: "Kirill Tymchishin's packing, after Mykhailo Polkovskyi and Daniil Ostashev, certified by Francisco Couzo"; renderer bead think-2vi1. B2 twin_bytes limit; B3 runbook reworded (no walk dates 8a8879a); B4 Daniel's Levy via T-241's chain at 304, not stated at 268; B5 wording. Daniel's draft acknowledgement above must now name the 304 chain as T-241's (Tymchishin after Polkovskyi, Ostashev, Couzo, PingYou Ltd). Not synced.
+
+2026-10-24 coord-intake-1024: PR #792 merged 2026-10-24T17:34:21Z as 3480b5fd3 after review A (changes requested; addressed) and follow-up review B (B1 High, the 304 chain; decided by the record's chain and addressed at 0bebe936c). T-241 and T-242 on main as reported. Next: think-hx0e (stage 4 review of T-241/T-242, then re-housing at 268 and 304, on a pass day after 25 October). Daniel's acknowledgement (draft in these notes, 304 chain to update) is for the owner: he opened no issue.

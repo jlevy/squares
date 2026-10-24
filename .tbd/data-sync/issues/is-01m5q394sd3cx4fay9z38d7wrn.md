@@ -5,7 +5,7 @@ title: "PR B of #763: map T-240's stage 4 review (V3/C3), adopt and regularize a
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 5
 delegate: c-prb-763-1024
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-24T13:58:21.741Z
-updated_at: 2026-10-24T16:34:48.226Z
+updated_at: 2026-10-24T17:16:14.774Z
 started_at: 2026-10-24T13:58:27.438Z
 ---
 
@@ -45,3 +45,5 @@ REMAINS / FOR THE COORDINATOR
 - The #763 acknowledgement's requests-record entry (posted 13:37:28Z) is not recorded here.
 
 STATUS 2026-10-24 16:40Z (c-prb-763-1024): head 7b6410d83 (DATA_REVISION ff9e896e1). Hosted: Packing validation 40110977552 and Certificate page 40110977525 succeeded; packing-required and pages-required pass, 31 checks pass, none fail. Later fixes after the first notes: 95dca0137 (rigidity blocks), 5b663df70 (CI sweeps slice), 1c6be595f (tests), ff9e896e1 (composite figure record); papers re-measured at ff9e896e (69 files x3 identical). Not merged; main unchanged at 2ec489d1e. Not synced (the coordinator syncs).
+
+REVIEW A ROUND 2026-10-24 (c-prb-763-1024, #794 review A, comment 6386951475): approve once A1 fixed. One push 7b6410d83..89451b01c: 9ebc1357b (A1 the 303 solve is a failed certificate whose view the three exact routes accept, in T-240 notes, atlas README, run README; A3 why 268 moves now under the house rule, packet README and notes; A4 think-20oj named for both candidates, the 268 view with first_certified_in T-242), 465841f41 (papers re-measured at 9ebc1357, 69 files x3 identical), 89451b01c (re-pin). A1 also fixed in the reply draft (think-ptkk). A2: PR stays draft; coordinator merges on or after 2026-10-25T00:00Z; Limits line added. A5: News retitled and linked in the PR body. A6 VISUAL CHECK: site rendered from 9ebc1357b with render_overview into scratch; cases/268.html, cases/303.html and result/t-240.html inspected in the host Chrome for Testing headless shell at 1280 and 390 px: drawings whole, credits (Tymchishin and Couzo; Lavrentev and Couzo; confirmed T-240) and evidence links present, labels readable; at 390 px the interval line overruns at 303 as it does at 302 (untouched), a layout matter, not this change. A7: second merger resolves results.yaml and result-requests.yaml by hand; #792 not merged at push. A8 declined (shared writer template, 70 records). Local: records tier 53/53, house and drawing checks pass, 482 tests passed. stamp_landed not run this round.
