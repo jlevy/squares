@@ -1466,6 +1466,11 @@ def overview_page() -> Page:
     values = {
         "HERO": overview_sections.hero(),
         "NEWS_PREVIEW": news_highlights.render(render_changelog.load()),
+        # What reached the site over the seven days to its newest arrival, from the records
+        # (the owner, 22 October 2026): results, house best packings, dated rows.
+        "RECENTLY_ADDED": overview_sections.recently_added(overview),
+        "RECENT_SPAN": overview_sections.recent_span(overview),
+        "CORPUS_END": str(overview_sections.corpus_end()),
         "ATLAS_GRID": overview_sections.atlas_preview(),
         "PAPER_CARDS": overview_sections.homepage_paper_cards(),
         "PDF_CARDS": overview_sections.homepage_pdf_card(),
@@ -1485,9 +1490,11 @@ def overview_page() -> Page:
         description=OVERVIEW_DESCRIPTION,
         toc=False,
         rewrite_body=_case_links,
-        page_styles=(HOMEPAGE_CSS,),
+        # `results.css`'s rollup classes draw Recently Added.
+        page_styles=(HOMEPAGE_CSS, RESULTS_CSS),
         page_scripts=(
             NEWS_CARDS_SCRIPT,
+            NEWS_FILTERS_SCRIPT,
             FORWARD_SCRIPT,
             TABLE_SCRIPT,
             POPOVER_SCRIPT,

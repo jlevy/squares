@@ -1104,9 +1104,9 @@ contributor articles use their component sheets and the same text tokens.
   the project’s name, **The Squares Project** (the owner, 2026-10-23); its opening H1
   remains **The Square Packing Problem**. Two readable introductory paragraphs define
   the problem and explain upper and lower bounds.
-  The sections continue with Visual Atlas, News, Results, Profiles, Report a Result,
-  Learn, Visuals, About the Squares Project, and More Resources.
-  Learning cards preview the Papers and Tutorials catalogues.
+  The sections continue with Visual Atlas, Recently Added (`think-rqen`), News, Results,
+  Profiles, Report a Result, Learn, Visuals, About the Squares Project, and More
+  Resources. Learning cards preview the Papers and Tutorials catalogues.
   Visuals previews the poster and inline video, with actions to Posters, Videos and
   Workbench. About the Squares Project links directly to `about.html` without repeating
   the documentation catalogue, and retains the old `#squares-project-documentation`
@@ -1235,10 +1235,25 @@ contributor articles use their component sheets and the same text tokens.
   so parent headings cannot change their casing.
   The chip renderer preserves each consumer’s filter attribute.
   Full result records retain the result’s real kind, status, claim and credit.
-  The homepage highlights up to three newest eligible S5 News announcements that name
-  result IDs, ordered by the announcement’s frozen date and stable ID, followed by “All
-  news →”. Each preview uses the archive’s title, date, topic chips, complete article
-  and disclosure. Its title links to the stable News article anchor.
+  The homepage’s News box shows the three newest News articles at the levels it opens
+  on, ordered by the announcement’s frozen date and stable ID, followed by **All News**.
+  It opens on S5 alone where News holds at least three S5 articles, and otherwise on S4
+  and S5, decided at render time from the archive and from no date
+  (`news_highlights.default_levels`; the owner, 22 October 2026: “preselected to S5 when
+  there are enough S5 items for the box, else S4+S5”). An earlier reading that also
+  required the three to fall within 30 days was a coordinator’s answer to #736’s review
+  A, never the owner’s; review B retired it.
+  Above the cards, at the right, sits the archive’s own significance filter in its
+  compact form (`render_changelog.news_filters(compact=True)`): the same buttons, at the
+  shared small chooser’s size and height (Small choosers, below) and a lighter weight,
+  with no topics or reset, and the archive’s live count, hidden from sight but read by
+  screen readers. With no article to show, the box says “No news yet.”
+  and draws no filter.
+  A press shows the newest three at the chosen levels; the box carries the newest three
+  of each level for that, hidden until chosen, and keeps its opening levels without
+  scripts. **All News** carries a changed choice to the archive as `news-s`. Each preview
+  uses the archive’s title, date, topic chips, complete article and disclosure.
+  Its title links to the stable News article anchor.
   Keep claim qualifications in that shared article; result records carry the detailed
   verification, confirmation and status marks.
   The archive ends with a shared action button, “Full changelog”, using the
@@ -2980,8 +2995,28 @@ pointer and by keyboard, and measures its label at 1280, 768 and 390 pixels.
   `tests/test_overview.py` holds each section’s prose to one paragraph of its own where
   this applies, the cards to their pages, and the three pages to saying each thing once.
 
-- **Recent results.** The homepage’s **Recent Major Results** section sits directly
-  below the Atlas preview.
+- **Recently Added.** Directly below the Atlas preview, the homepage lists what reached
+  `main`, and with it the site, on the newest arrival day and the seven before it, one
+  native disclosure a day, newest first, the newest open
+  (`overview_sections.recently_added`, the owner, 22 October 2026, `think-rqen`). Each
+  day holds every result that arrived, at any significance, by its `landed`
+  (`added_entry`, its id linking to its row in All Results, and the day’s link opening
+  All Results on that day, `?added=`); each count whose house best packing changed,
+  under the result that holds it now; and each source’s dated beyond-horizon rows, one
+  line a source with its count, its span of counts, its credit and how many are since
+  superseded, linking to the source’s packet on GitHub, since no page of the site lists
+  those rows. Houses and rows are placed by the day `main` first held them, which
+  `devtools.stamp_landed` writes into `packing/frontier/landings.yaml` at the merge step
+  as it writes `landed`; nothing that renders reads Git (OR-18). One window bounds all
+  three, ending on the newest of those days (`arrival_reference`), and the introduction
+  names the days shown.
+  The summary tallies the three and wraps between them.
+  The section draws with `results.css`’s rollup classes, and its introduction links All
+  Results and News. `tests/test_home_recent.py` holds it to the records and to 40,000
+  bytes.
+
+- **Recent results.** The homepage’s **Recent Major Results** section sits below
+  Recently Added and News.
   It contains up to twelve current results of significance S4 or higher from the last
   180 days, newest first, excluding superseded results (`think-5c8r`). The preview has
   no count/scope sentence or introductory text explaining the links.
