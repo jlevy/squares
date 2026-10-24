@@ -10435,7 +10435,7 @@ sources:
 - id: couzo-n304-2026-10-23
   title: Francisco Couzo's 304 certificate of Kirill Tymchishin's Kaggle packing at fa6237e, no issue
   role: source-repository
-  url: https://github.com/franciscouzo/square-packing/blob/fa6237e288cf3fc53b53fc43438c91f3f59c40e9/certificates/best/n304.cert
+  url: https://github.com/franciscouzo/square-packing/tree/fa6237e288cf3fc53b53fc43438c91f3f59c40e9
   local: resources/web/couzo-n304-2026-10-23/
   source_key: '[Couzo n304 2026-10-23]'
   scope:
