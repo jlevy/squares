@@ -10432,6 +10432,61 @@ sources:
     below the record (87 certificates and 12 recipes); they are not imported here, and
     think-lyf9 imports them before think-gn29's walk of 43f666c.
   claims_record: resources/web/couzo-issue763-2026-10-23/acquisition/beyond-horizon-rows-964ee2b.json
+- id: couzo-n304-2026-10-23
+  title: Francisco Couzo's 304 certificate of Kirill Tymchishin's Kaggle packing at fa6237e, no issue
+  role: source-repository
+  url: https://github.com/franciscouzo/square-packing/tree/fa6237e288cf3fc53b53fc43438c91f3f59c40e9
+  local: resources/web/couzo-n304-2026-10-23/
+  source_key: '[Couzo n304 2026-10-23]'
+  scope:
+    n_values: [304]
+  reviewed: '2026-10-24'
+  source_date: '2026-10-23'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/couzo-n304-2026-10-23/acquisition/claims.json
+  evidence:
+  - E-couzo-n304-certificate-report
+  notes: >-
+    certificates/best/n304.cert, first committed at fa6237e and pushed on 23 October 2026 at
+    23:38:42Z with the release issue 763 names, which does not claim the count. The
+    issue-763 packet retains the file byte-identical at 964ee2b, and this packet pins it
+    against that copy and admits it at the side the source's catalogue prints. T-241
+    records it at V0/C0, pending stage 4; all 3 native jobs have full outcomes, and the
+    packet's sharp controls meet its 1e-15 wall margin on both routes. The ledger of 24
+    October for this import (campaign/issue-intake/upper-bounds-evand-20261024) records it
+    first at 304, before Evan Daniel's certificate of the same packing (T-242). No selected
+    override is created at this source-only stage; the case at 304 is unchanged.
+- id: evand-kaggle-descents-2026-10-24
+  title: Evan Daniel's exact descents of public Kaggle packings at 268 and 304, at 8a8879a, no issue
+  role: source-repository
+  url: https://github.com/evand/square-packing/tree/8a8879a2972c32cbd2d906049228cc9f0762b02a/search/packer/candidates
+  local: resources/web/evand-kaggle-descents-2026-10-24/
+  source_key: '[Daniel Kaggle descents 2026-10-24]'
+  scope:
+    n_values: [268, 304]
+  reviewed: '2026-10-24'
+  source_date: '2026-10-24'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/evand-kaggle-descents-2026-10-24/acquisition/claims.json
+  evidence:
+  - E-evand-kaggle-descents-certificate-report
+  notes: >-
+    The two certificates at 268 and 304 that 8a8879a adds under search/packer/candidates/,
+    pushed on 24 October 2026 at 04:53:53Z, retained as the source wrote them with the
+    source's JSON reports, binary64 inputs and comparison files, and admitted at their exact
+    sides. T-242 records both at V0/C0, pending stage 4; all 9 native jobs, the third the
+    commit's 303, have full outcomes, and the packet's sharp controls meet the 5e-21 margins
+    at 268 and 304 on both routes. The ledger of 24 October for this import
+    (campaign/issue-intake/upper-bounds-evand-20261024) records 268 below T-240 and 304
+    below T-241, and does not record 303, which is above T-240's 303; the 303 certificate is
+    retained as credit evidence. No selected override is created at this source-only stage;
+    the cases at 268 and 304 are unchanged.
 
 - id: couzo-efef7d1-2026-10-23
   title: Francisco Couzo's own sides at efef7d1 at the counts of the Kaggle notebook rows
