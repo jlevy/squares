@@ -7972,6 +7972,33 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "that HTML. Every paper keeps its version."
         ),
     ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=("packing/devtools/templates/site-nav.css",),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "Only a comment in `site-nav.css` changes: the section-tab rules no longer "
+            "name the Film/Workbench switcher, gone since 2026-10-22. Rendered on 24 "
+            "October from this tree and with main 1aa953fad's stylesheet into empty site "
+            "directories with source links pinned to 1aa953fad (69 files each): every "
+            "paper's Markdown is byte-identical, and each paper's HTML differs only in "
+            "the hashed name of the stylesheet. Every paper keeps its version."
+        ),
+    ),
 )
 
 

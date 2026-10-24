@@ -420,12 +420,13 @@
 }
 
 /* ---------- Section tabs ----------
-   A section of the site that spans pages, the Visualize section's Film and Workbench,
-   carries one small tab bar in the header slot under the navigation bar, in the same
-   place on each of its pages: a centred, bordered strip of links, one per page, the
-   current one filled with an accent tint. Each tab is a real link to its own page, so
-   the bar needs no script. It is here rather than in site.css because the workbench
-   carries only this stylesheet, and the tabs must look the same on both pages. The tint
+   A section of the site that spans pages can carry one small tab bar in the header slot
+   under the navigation bar, in the same place on each of its pages: a centred, bordered
+   strip of links, one per page, the current one filled with an accent tint. Each tab is
+   a real link to its own page, so the bar needs no script. No section carries one since
+   the Videos and Workbench pages lost their Film/Workbench switcher on 2026-10-22; the
+   bar's rules stay for the browser tests that check it. It is here rather than in
+   site.css because the workbench carries only this stylesheet. The tint
    is mixed in sRGB, since an oklch mix with the near-neutral page takes that page's
    hue and drew the light tab lavender rather than teal.
    The same strip also switches a view in place: there it is a tablist of buttons
