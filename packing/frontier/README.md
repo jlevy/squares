@@ -233,12 +233,15 @@ it (the owner, 23 October 2026, D1). `devtools.beyond_horizon_replay` holds ever
 beyond $n = 324$ to Göbel’s construction exactly, from the maintained module
 `devtools.goebel_construction`, which proves each side final by the area bound: a member
 at count $k$ packs $k$ unit squares, so its side is at least $\sqrt k$. A construction
-an index or table states with no certificate file of its own (a tiling, L-border or
-deletion recipe on a certificate) is a row once the maintained construction checker,
+an index or table states with no certificate file of its own (a tiling or L-border
+recipe on a certificate) is a row once the maintained construction checker,
 `devtools.construction_checker`, decides it exactly from the recipe and its parent
-certificate has been replayed on both routes (D2). A certificate kept as hosted data is
-read through its hosted-data manifest (`devtools.hosted_shards`), while its receipts and
-rows stay in Git
+certificate has been replayed on both routes (D2). A deletion bound is no such row: one
+square below the next count’s certificate is an earlier report (D6), and any other
+deletion, or one an issue claims, waits on the owner (think-kzme;
+[several reports at one count](../campaign/result-import.md#several-reports-at-one-count)).
+A certificate kept as hosted data is read through its hosted-data manifest
+(`devtools.hosted_shards`), while its receipts and rows stay in Git
 ([OR-18](../../operating-rules.md#or-18-keep-bulk-data-out-of-git-and-never-bind-code-or-verdicts-to-a-git-commit-or-blob)).
 Nine rows of 8 to 13 October at $n = 369, 375$ and $376$ are so marked, and 369 and 376
 have no current row.

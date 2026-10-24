@@ -305,13 +305,13 @@ digest), `tiles_per_side` t, `layers` L and `deleted_squares`. The #715 receipt�
 **The checker,** `packing/devtools/construction_checker.py`, decides a recipe exactly in
 `Fraction`s. It holds the parent to the index’s path and SHA-256 and requires the parent
 to have passed both routes with its controls refused.
-It requires the stated bound to equal `tS + L` and the count to be within the capacity.
-It refuses any recipe kind it does not read.
+It requires the stated bound to equal `tS + L` and the count to be the capacity less the
+stated deletions. It refuses any recipe kind it does not read.
 It refuses a parent that is a classical construction rather than a certificate the
 record replays; Friedman’s waits on think-zkxy.
-It refuses a Fang composite unless his table states the composite’s parts.
-Each release writes `receipts/recipe-decisions.json`: the count, recipe, parent,
-capacity, side and verdict.
+It refuses every Fang composite, naming unstated parts where his table states none; a
+rule for one whose parts are stated waits on think-tj3x. Each release writes
+`receipts/recipe-decisions.json`: the count, recipe, parent, capacity, side and verdict.
 `check` derives it again.
 
 **Parents that are not rows.** A recipe’s parent is often a certificate that no slice
@@ -331,9 +331,16 @@ counts, so about 13 are parents only: about 0.3 CPU-hours.
 R1 states its count before replaying, and stops for the coordinator if the parents would
 carry it past 5 CPU-hours.
 
-**The hold.** The `RECIPE` hold class (`beyond_horizon_replay.py:289`) becomes settled
-for every recipe the checker decides.
-D2’s answer applies as `Held.answer`, the way `DELETION_ANSWER` (`:316`) applies D6’s.
+**The hold.** In the code an answered `Held` has no row, and D2 makes a decided recipe a
+row, so D2 does not apply as `Held.answer` (the coordinator confirmed this on
+think-llit, 24 October):
+- a recipe the walk records and the checker decides is a declared row carrying its
+  recipe, decided into `receipts/recipe-decisions.json` (`recipe-decisions`);
+- the `RECIPE` hold class holds only the recipes the checker refuses: classical parents
+  (think-zkxy) and Fang’s composites (think-tj3x);
+- the frozen walks keep their `RECIPE` holds as written;
+- `HELD_CLASSES[RECIPE]` (`beyond_horizon_replay.py:346`) keeps its text, because the
+  frozen walks render it.
 
 ### Deletion Rows (D6)
 
@@ -493,10 +500,13 @@ W7 updates the rules where they live:
   ceiling, recorded as reported (D1). Göbel’s construction holds at every count, from
   the maintained module, each side final by the area bound.
   This replaces “holds every row from n = 325 to 1024”. A construction that an index or
-  table states with no certificate file of its own (a tiling, L-border or deletion
-  recipe on a certificate) is a row once the maintained checker decides it exactly from
-  the recipe and the parent is replayed (D2). A certificate kept as hosted data is read
-  through its manifest, while its receipts and rows stay in Git (`OR-18`).
+  table states with no certificate file of its own (a tiling or L-border recipe on a
+  certificate) is a row once the maintained checker decides it exactly from the recipe
+  and the parent is replayed (D2). A deletion bound is no recipe row: one square below
+  the next count’s certificate is an earlier report by D6, and any other deletion, or
+  one an issue claims, waits on think-kzme (`deletion_holds`). A certificate kept as
+  hosted data is read through its manifest, while its receipts and rows stay in Git
+  (`OR-18`).
 - **The frontier README, Adding or Reviewing a Result** (`:349`–`:355`): the same, in
   one sentence.
 - **`packing/campaign/result-import.md`, Several Reports at One Count** (`:498`–`:499`
@@ -631,8 +641,10 @@ its positives counts.
    - Refusals:
      - an object that is absent (`HostedDataMissingError` names the fetch);
      - an object that is truncated or altered (`require`’s size and SHA-256 checks);
-     - a member whose bytes are altered, or whose header size differs from the source
-       manifest’s; a missing or extra member; a member that repeats;
+     - a member whose bytes are altered, or that is larger than a member may be (the
+       source states no sizes, so a member’s size is bounded, not compared, #793’s
+       review A, A7); a missing or extra member; a member that repeats;
+     - a pax or long-name record that decompresses past the bound (review C, C1);
      - a link, or a `..` path;
      - a shard whose unpacked total passes its bound.
    - Positive: shards built from a clone at 17cc220 read back byte for byte on a sample.

@@ -550,8 +550,8 @@ record’s statement of the rule:
   or L-border recipe on a certificate, is decided by `devtools.construction_checker`
   from the recipe and its parent certificate.
   The parent must be the one the index names by path and SHA-256, and must have passed
-  both routes with its six controls refused; the bound must be tS + L and the count
-  within the construction’s capacity, exactly.
+  both routes with its six controls refused; the bound must be tS + L and the count the
+  construction’s capacity less the stated deletions, exactly.
   Each records slice replays the parents that are not rows and writes
   `receipts/recipe-decisions.json` (`beyond_horizon_replay recipe-decisions`), which
   `check` derives again.
