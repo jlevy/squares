@@ -1,0 +1,515 @@
+{
+  "program": "margins_t238.py",
+  "program_sha256": "a7890ce1fc06c30802be9592872cbb3dc0044cf1a54369f5ea07361e81ef7717",
+  "input_sha256": "9ec01059b35cc983cb28a1bb33bd215a2717228f7efd182e1724de6b22dc511b",
+  "ref": "c1115c0956104e40571d26de439c91917911d554",
+  "ref_commit": "c1115c0956104e40571d26de439c91917911d554",
+  "side": "223872029093440709529093216833/12500000000000000000000000000",
+  "side_terminating_decimal": "17.9097623274752567623274573466400000000000000000000000000",
+  "prints_rounded_up": {
+    "12": "17.909762327476",
+    "16": "17.9097623274752568",
+    "30": "17.909762327475256762327457346640"
+  },
+  "binary64_nearest": "17.909762327475256",
+  "binary64_nearest_exact": "17.90976232747525642707842052914202213287353515625",
+  "issue_bound": {
+    "printed": "17.909762327476",
+    "is_side_rounded_up_at_12": true,
+    "above_side_by": "7.432376725427e-13"
+  },
+  "issue_expansion": {
+    "printed": "17.909762327475256427...",
+    "side_truncated_at_18": "17.909762327475256762",
+    "agrees_with_side_to_places": 15,
+    "agrees_with_binary64_nearest_to_places": 19
+  },
+  "reports_at_303": [
+    {
+      "report": "the basic grid",
+      "date": "",
+      "read_from": "the grid side",
+      "how": "the grid side",
+      "side": "18/1",
+      "side_rounded_up_16": "18.0000000000000000",
+      "certificate_below_by": "9.023767252474e-2",
+      "certificate_below_by_exact": "1127970906559290470906783167/12500000000000000000000000000",
+      "below": true
+    },
+    {
+      "report": "Kingbird, David Ellsworth's catalogue (the capture of 22 August, a print)",
+      "date": "2026-08-22",
+      "read_from": "packing/resources/web/kingbird-squares-in-squares-2026-08-22.md",
+      "how": "the catalogue's printed side at 303 (a decimal print)",
+      "side": "1793127894394689/100000000000000",
+      "side_rounded_up_16": "17.9312789439468900",
+      "certificate_below_by": "2.151661647163e-2",
+      "certificate_below_by_exact": "268957705895415470906783167/12500000000000000000000000000",
+      "below": true
+    },
+    {
+      "report": "Kingbird, the same catalogue (the capture of 30 September, page of 24 September, a print)",
+      "date": "2026-09-24",
+      "read_from": "packing/resources/web/kingbird-squares-in-squares.md",
+      "how": "the catalogue's printed side at 303 (a decimal print)",
+      "side": "1793125509556197/100000000000000",
+      "side_rounded_up_16": "17.9312550955619700",
+      "certificate_below_by": "2.149276808671e-2",
+      "certificate_below_by_exact": "268659601083915470906783167/12500000000000000000000000000",
+      "below": true
+    },
+    {
+      "report": "Griffin Casson, griffcass/square-packing 82661bc",
+      "date": "2026-09-24",
+      "read_from": "packing/resources/web/casson-square-packing-2026-09-23/griffcass-square-packing/results/packings/n303.txt",
+      "how": "the retained packing's s: line (a decimal print)",
+      "side": "1793105636462953001/100000000000000000",
+      "side_rounded_up_16": "17.9310563646295301",
+      "certificate_below_by": "2.129403715427e-2",
+      "certificate_below_by_exact": "266175464428415595906783167/12500000000000000000000000000",
+      "below": true
+    },
+    {
+      "report": "Francisco Couzo's first, franciscouzo/square-packing 801915f (a priority note)",
+      "date": "2026-09-24",
+      "read_from": "the case record's priority note (a decimal print)",
+      "how": "the case record's priority note (a decimal print)",
+      "side": "4482140635253387/250000000000000",
+      "side_rounded_up_16": "17.9285625410135480",
+      "certificate_below_by": "1.880021353829e-2",
+      "certificate_below_by_exact": "235002669228640470906783167/12500000000000000000000000000",
+      "below": true
+    },
+    {
+      "report": "T-056, Couzo",
+      "date": "2026-09-27",
+      "read_from": "packing/resources/web/franciscouzo-square-packing-2026-09-27/facts/n-303.yaml",
+      "how": "the derived fact's side (a decimal print)",
+      "side": "4481087316386983/250000000000000",
+      "side_rounded_up_16": "17.9243492655479320",
+      "certificate_below_by": "1.458693807268e-2",
+      "certificate_below_by_exact": "182336725908440470906783167/12500000000000000000000000000",
+      "below": true
+    },
+    {
+      "report": "T-092, Couzo",
+      "date": "2026-10-03",
+      "read_from": "packing/resources/web/franciscouzo-square-packing-2026-10-03/facts/n-303.yaml",
+      "how": "the derived fact's side (a decimal print)",
+      "side": "71697364039441/4000000000000",
+      "side_rounded_up_16": "17.9243410098602500",
+      "certificate_below_by": "1.457868238499e-2",
+      "certificate_below_by_exact": "182233529812415470906783167/12500000000000000000000000000",
+      "below": true
+    },
+    {
+      "report": "T-098, Daniel's exact optima (#375)",
+      "date": "2026-10-05",
+      "read_from": "packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/batch/certs/n-303.cert",
+      "how": "the certificate's header side",
+      "side": "4481085252462782093277628653207/250000000000000000000000000000",
+      "side_rounded_up_16": "17.9243410098511284",
+      "certificate_below_by": "1.457868237587e-2",
+      "certificate_below_by_exact": "3644670593967902695764316547/250000000000000000000000000000",
+      "below": true
+    },
+    {
+      "report": "T-113, Chaoweeraprasit's SQUISH (#401)",
+      "date": "2026-10-07",
+      "read_from": "packing/resources/web/squish-401-2026-10-07/facts/n-303.json.gz",
+      "how": "the SQUISH fact's side",
+      "side": "1261029876953859/70368744177664",
+      "side_rounded_up_16": "17.9203123729203498",
+      "certificate_below_by": "1.055004544509e-2",
+      "certificate_below_by_exact": "138281555657922552702257853229567/13107200000000000000000000000000000",
+      "below": true
+    },
+    {
+      "report": "T-134, Couzo (#476)",
+      "date": "2026-10-09",
+      "read_from": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n303.cert",
+      "how": "the certificate's header side",
+      "side": "2239680490686779486489623667067/125000000000000000000000000000",
+      "side_rounded_up_16": "17.9174439254942359",
+      "certificate_below_by": "7.681598018979e-3",
+      "certificate_below_by_exact": "960199752372391198691498737/125000000000000000000000000000",
+      "below": true
+    },
+    {
+      "report": "T-136, Chaoweeraprasit's SQUISH (#481)",
+      "date": "2026-10-09",
+      "read_from": "packing/resources/web/squish-481-third-request-2026-10-09/facts/n-303.yaml.gz",
+      "how": "the derived fact's side",
+      "side": "162263195772134120155792974649693427899481189466645405582211912387896660025441601/9058371171012706945350582640902165821875350160207702968863672420698760940328800",
+      "side_rounded_up_16": "17.9130654627385328",
+      "certificate_below_by": "3.303135263276e-3",
+      "certificate_below_by_exact": "467516019418979890093504811270775177719958030697775228658857438666362831225314971898394131229059106637/141537049547073546021102853764096340966802346253245358888494881573418139692637500000000000000000000000000",
+      "below": true
+    },
+    {
+      "report": "T-138, Polkovskyi's decimal poses (#470)",
+      "date": "2026-10-09",
+      "read_from": "packing/resources/web/mishapolk-decimal-poses-2026-10-09/facts/n-303.yaml.gz",
+      "how": "the derived fact's side",
+      "side": "17920312372919/1000000000000",
+      "side_rounded_up_16": "17.9203123729190000",
+      "certificate_below_by": "1.055004544374e-2",
+      "certificate_below_by_exact": "131875568046790470906783167/12500000000000000000000000000",
+      "below": true
+    },
+    {
+      "report": "T-146, Daniel's regularized lists",
+      "date": "2026-10-10",
+      "read_from": "packing/resources/web/evand-regularized-2026-10-10/source/search/regularize/lists/certs/n-303.cert.gz",
+      "how": "the certificate's header side",
+      "side": "8956532731369266152919876895603/500000000000000000000000000000",
+      "side_rounded_up_16": "17.9130654627385324",
+      "certificate_below_by": "3.303135263276e-3",
+      "certificate_below_by_exact": "1651567631637771756148222283/500000000000000000000000000000",
+      "below": true
+    },
+    {
+      "report": "#488, Couzo",
+      "date": "2026-10-10",
+      "read_from": "packing/resources/web/couzo-certificates-2026-10-10/source/certificates/n303.cert",
+      "how": "the certificate's header side",
+      "side": "17917365675352360234901407948013/1000000000000000000000000000000",
+      "side_rounded_up_16": "17.9173656753523603",
+      "certificate_below_by": "7.603347877103e-3",
+      "certificate_below_by_exact": "7603347877103472573950601373/1000000000000000000000000000000",
+      "below": true
+    },
+    {
+      "report": "T-162, Ostashev (#562)",
+      "date": "2026-10-12",
+      "read_from": "packing/resources/web/dostashev-compositions-2026-10-12/source/records/n0303.sqcert",
+      "how": "the sqcert's s line",
+      "side": "179099582910699079815957410813987360800486270805270137352241179099582910699079815957410813987360800486270805270137352241/10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "side_rounded_up_16": "17.9099582910699080",
+      "certificate_below_by": "1.959635946512e-4",
+      "certificate_below_by_exact": "1959635946512192682837347587360800486270805270137352241179099582910699079815957410813987360800486270805270137352241/10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "below": true
+    },
+    {
+      "report": "#573, Polkovskyi",
+      "date": "2026-10-12",
+      "read_from": "packing/resources/web/mishapolk-exact-certificates-2026-10-12/facts/n-303.yaml.gz",
+      "how": "the derived fact's side",
+      "side": "17913065462741/1000000000000",
+      "side_rounded_up_16": "17.9130654627410000",
+      "certificate_below_by": "3.303135265743e-3",
+      "certificate_below_by_exact": "41289190821790470906783167/12500000000000000000000000000",
+      "below": true
+    },
+    {
+      "report": "T-174, PingYou Ltd (PR #574)",
+      "date": "2026-10-13",
+      "read_from": "packing/resources/web/pingyou-pr574-certificates-2026-10-13/facts/n-303.yaml.gz",
+      "how": "the derived fact's side",
+      "side": null,
+      "side_rounded_up_16": "17.9099582910699080",
+      "certificate_below_by": "1.959635946512e-4",
+      "certificate_below_by_exact": "425322799425494807808276657373480687857115093969202327828272612931734448627758792219004212891003008174690329509294316702476239744279224546379418292332898638642988373456256671697226709722448990971425779280527314553189084532873231778364633490526115621/2170417419533944415767166382660221284452599567690788169233053729036880895352527453116248646862403510725874022261280239673436630959909546110156797954654664775824273804353803641879656518204270429778989829138107236348025380979537500000000000000000000000000",
+      "below": true
+    },
+    {
+      "report": "#593, Polkovskyi",
+      "date": "2026-10-14",
+      "read_from": "packing/resources/web/mishapolk-records-2026-10-14/facts/n-303.yaml.gz",
+      "how": "the derived fact's side",
+      "side": "17909958291069907981595741081399/1000000000000000000000000000000",
+      "side_rounded_up_16": "17.9099582910699080",
+      "certificate_below_by": "1.959635946512e-4",
+      "certificate_below_by_exact": "195963594651219268283734759/1000000000000000000000000000000",
+      "below": true
+    },
+    {
+      "report": "T-186, Polkovskyi's KKT refinements (70a033f)",
+      "date": "2026-10-14",
+      "read_from": "packing/resources/web/mishapolk-kkt-refinements-2026-10-14/facts/n-303.yaml.gz",
+      "how": "the derived fact's side",
+      "side": "223874478638373849767708018731100462502930758319276667065271354307189968584331641646777792095999047220400719209/12500000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "side_rounded_up_16": "17.9099582910699080",
+      "certificate_below_by": "1.959635946512e-4",
+      "certificate_below_by_exact": "2449544933140238614801898100462502930758319276667065271354307189968584331641646777792095999047220400719209/12500000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "below": true
+    },
+    {
+      "report": "T-230, Daniel (#728), the house",
+      "date": "2026-10-22",
+      "read_from": "packing/resources/web/evand-n303-2026-10-22/source/search/packer/candidates/s303_r303w0.cert",
+      "how": "the certificate's header side",
+      "side": "447744305431858194305431410441/25000000000000000000000000000",
+      "side_rounded_up_16": "17.9097722172743278",
+      "certificate_below_by": "9.889799071010e-6",
+      "certificate_below_by_exact": "9889799071009889799071/1000000000000000000000000000",
+      "below": true
+    }
+  ],
+  "below_every_report_at_303": true,
+  "improvement_over_t230": "9.889799071010e-6",
+  "later_counts": [
+    {
+      "n": 304,
+      "reported": {
+        "value": "17.92942775807517497",
+        "read_as": "exact_form",
+        "certificate_below_by": "1.966543059992e-2",
+        "below": true
+      },
+      "verified": {
+        "value": "17.92942775807517497",
+        "read_as": "exact_form",
+        "certificate_below_by": "1.966543059992e-2",
+        "below": true
+      }
+    },
+    {
+      "n": 305,
+      "reported": {
+        "value": "17.95046648213771228",
+        "read_as": "exact_form",
+        "certificate_below_by": "4.070415466246e-2",
+        "below": true
+      },
+      "verified": {
+        "value": "17.95046648213771228",
+        "read_as": "exact_form",
+        "certificate_below_by": "4.070415466246e-2",
+        "below": true
+      }
+    },
+    {
+      "n": 306,
+      "reported": {
+        "value": "17.96343371749142574",
+        "read_as": "exact_form",
+        "certificate_below_by": "5.367139001617e-2",
+        "below": true
+      },
+      "verified": {
+        "value": "17.96343371749142574",
+        "read_as": "exact_form",
+        "certificate_below_by": "5.367139001617e-2",
+        "below": true
+      }
+    },
+    {
+      "n": 307,
+      "reported": {
+        "value": "17.98086278405469107",
+        "read_as": "exact_form",
+        "certificate_below_by": "7.110045657943e-2",
+        "below": true
+      },
+      "verified": {
+        "value": "17.98086278405469107",
+        "read_as": "exact_form",
+        "certificate_below_by": "7.110045657943e-2",
+        "below": true
+      }
+    },
+    {
+      "n": 308,
+      "reported": {
+        "value": "17.9971491212709088",
+        "read_as": "exact_form",
+        "certificate_below_by": "8.738679379565e-2",
+        "below": true
+      },
+      "verified": {
+        "value": "17.9971491212709088",
+        "read_as": "exact_form",
+        "certificate_below_by": "8.738679379565e-2",
+        "below": true
+      }
+    },
+    {
+      "n": 309,
+      "reported": {
+        "value": "18.0",
+        "read_as": "exact_form",
+        "certificate_below_by": "9.023767252474e-2",
+        "below": true
+      },
+      "verified": {
+        "value": "18",
+        "read_as": "exact_form",
+        "certificate_below_by": "9.023767252474e-2",
+        "below": true
+      }
+    },
+    {
+      "n": 310,
+      "reported": {
+        "value": "18.0",
+        "read_as": "exact_form",
+        "certificate_below_by": "9.023767252474e-2",
+        "below": true
+      },
+      "verified": {
+        "value": "18",
+        "read_as": "exact_form",
+        "certificate_below_by": "9.023767252474e-2",
+        "below": true
+      }
+    },
+    {
+      "n": 311,
+      "reported": {
+        "value": "18.0",
+        "read_as": "exact_form",
+        "certificate_below_by": "9.023767252474e-2",
+        "below": true
+      },
+      "verified": {
+        "value": "18",
+        "read_as": "exact_form",
+        "certificate_below_by": "9.023767252474e-2",
+        "below": true
+      }
+    },
+    {
+      "n": 312,
+      "reported": {
+        "value": "18.0",
+        "read_as": "exact_form",
+        "certificate_below_by": "9.023767252474e-2",
+        "below": true
+      },
+      "verified": {
+        "value": "18",
+        "read_as": "exact_form",
+        "certificate_below_by": "9.023767252474e-2",
+        "below": true
+      }
+    },
+    {
+      "n": 313,
+      "reported": {
+        "value": "18.0",
+        "read_as": "exact_form",
+        "certificate_below_by": "9.023767252474e-2",
+        "below": true
+      },
+      "verified": {
+        "value": "18",
+        "read_as": "exact_form",
+        "certificate_below_by": "9.023767252474e-2",
+        "below": true
+      }
+    },
+    {
+      "n": 314,
+      "reported": {
+        "value": "18.0",
+        "read_as": "exact_form",
+        "certificate_below_by": "9.023767252474e-2",
+        "below": true
+      },
+      "verified": {
+        "value": "18",
+        "read_as": "exact_form",
+        "certificate_below_by": "9.023767252474e-2",
+        "below": true
+      }
+    },
+    {
+      "n": 315,
+      "reported": {
+        "value": "18.0",
+        "read_as": "exact_form",
+        "certificate_below_by": "9.023767252474e-2",
+        "below": true
+      },
+      "verified": {
+        "value": "18",
+        "read_as": "exact_form",
+        "certificate_below_by": "9.023767252474e-2",
+        "below": true
+      }
+    },
+    {
+      "n": 316,
+      "reported": {
+        "value": "18.0",
+        "read_as": "exact_form",
+        "certificate_below_by": "9.023767252474e-2",
+        "below": true
+      },
+      "verified": {
+        "value": "18",
+        "read_as": "exact_form",
+        "certificate_below_by": "9.023767252474e-2",
+        "below": true
+      }
+    },
+    {
+      "n": 317,
+      "reported": {
+        "value": "18.0",
+        "read_as": "exact_form",
+        "certificate_below_by": "9.023767252474e-2",
+        "below": true
+      },
+      "verified": {
+        "value": "18",
+        "read_as": "exact_form",
+        "certificate_below_by": "9.023767252474e-2",
+        "below": true
+      }
+    },
+    {
+      "n": 318,
+      "reported": {
+        "value": "18.0",
+        "read_as": "exact_form",
+        "certificate_below_by": "9.023767252474e-2",
+        "below": true
+      },
+      "verified": {
+        "value": "18",
+        "read_as": "exact_form",
+        "certificate_below_by": "9.023767252474e-2",
+        "below": true
+      }
+    },
+    {
+      "n": 319,
+      "reported": {
+        "value": "18.0",
+        "read_as": "exact_form",
+        "certificate_below_by": "9.023767252474e-2",
+        "below": true
+      },
+      "verified": {
+        "value": "18",
+        "read_as": "exact_form",
+        "certificate_below_by": "9.023767252474e-2",
+        "below": true
+      }
+    },
+    {
+      "n": 320,
+      "reported": {
+        "value": "18.0",
+        "read_as": "exact_form",
+        "certificate_below_by": "9.023767252474e-2",
+        "below": true
+      },
+      "verified": {
+        "value": "18",
+        "read_as": "exact_form",
+        "certificate_below_by": "9.023767252474e-2",
+        "below": true
+      }
+    }
+  ],
+  "below_every_bound_304_to_320": true,
+  "least_margin_304_to_320": {
+    "margin": "1.966543059992e-2",
+    "n": 304,
+    "bound": "reported"
+  },
+  "area_floor_from_321": "17.916473"
+}

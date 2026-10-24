@@ -32151,7 +32151,9 @@ results:
       from T-186, which stays retained as history, and both strong generators decided the
       new witness in the same pull request: Evan Daniel's regularizer finds it not
       first-order jammed and draws no view, and grid-slack's view waits on the owner's
-      row-7 review (think-ykgh), so the axis tool's view of the new witness is drawn.
+      row-7 review (think-ykgh), so the axis tool's view of the new witness is drawn. On
+      24 October 2026 the case moved again, to T-239, another arrangement of this packing
+      found from it, and this certificate stays retained as history.
     next_rung: >-
       None for the bound. V4 and C4 need a second accepted adversarial review by a
       distinct reviewer and a retained human oversight record; one AI review, of 22
@@ -33262,6 +33264,167 @@ results:
       Bend, s4_eq_two leaving Lean, and proved s(5) in Bend too; think-fddm holds those
       routes. The case records are unchanged.
 
+  - id: T-239
+    kind: upper-bound
+    registered: '2026-10-23'
+    landed: '2026-10-24'
+    headline: >-
+      Kristiansen's smaller n303 packing, found from Daniel's packing, certified exactly
+    claim: >-
+      One complete rational source certificate of issue 755 reports a finite upper-bound
+      improvement at the exact side it states: s(303) <=
+      223872029093440709529093216833/12500000000000000000000000000 =
+      17.90976232747525676232745734664, 9.89e-6 below T-230, the case's house best packing
+      when it was reported.
+
+      The certificate and its duplicate-square and outside-container controls were decided
+      here on 23 October 2026 by both maintained exact routes, from a derived exact fact of
+      the certificate, and the frozen comparison rebuilt; both routes also meet the
+      kernel's sharp controls at exact contact and refuse them 1e-30 past it. No route here
+      is the source's code, but both read it through an adapter that carries two of Evan
+      Daniel's checkers' expressions transcribed, so the replay shares those components
+      with the producer (RF-7). The 23 October review decided the certificate again on a
+      clean-room checker of its own, by a Claude agent, a system family the producer also
+      used, and found no blocking defect, so the bound is confirmed, independently
+      re-implemented.
+
+      Issue 755 reports a packing found by Amund Kristiansen's search from Evan Daniel's
+      packing at 303 (#728, T-230, itself found from Daniil Ostashev's packing):
+      perturbed variants relaxed in float32 batches and polished with Daniel's fq quench.
+      Measured here pose by pose, it is another arrangement of T-230's packing, found from
+      it, not a refinement of it (RF-4).
+
+      The certificate is a dilation, by Daniel's
+      dilate_cert.py, of the binary64 packing the gist publishes beside it; its side and
+      centres are that program's output from that input to the last digit, and its
+      tangents to within one unit in the last place of the platform's tan (measured,
+      RF-3). The issue claims the upper bound only, and the search, the certificate and the
+      report were done by Claude (Anthropic) at Amund Kristiansen's direction.
+    scope: {n_values: [303]}
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 2
+      rationale: >-
+        A further arrangement of T-230's packing at 303, 9.89e-06 below it and every report
+        there, one to one with it under the identity and row for row, 12 squares beyond a
+        tenth (at most 0.547), five squares newly tilted and 47 of about 860 contacts
+        changed; T-188's case at its scale (9.29e-06, five squares beyond a tenth, S2), below
+        T-198's 1.15e-05 (S2) and well below T-226's 1.88e-05 at the low end of S3, an
+        arrangement no symmetry pairs one to one with the house's; no lower bound or optimum.
+      scored: '2026-10-23'
+      by: >-
+        the 23 October review (docs/project/reviews/review-2026-10-23-amundsk-n303.md), the
+        stage 4 mathematical review lane c-review-t238-math, changing the draft S3 of the
+        think-tqb5 import
+    novelty: previously-published
+    attribution:
+      source_keys: ['[Kristiansen n303 2026-10-23]']
+      published: '2026-10-23'
+    evidence:
+      [E-amundsk-755-n303-report, E-amundsk-755-n303-exact-feasibility, E-amundsk-755-n303-review-exact-feasibility]
+    artifacts:
+      - packing/resources/web/amundsk-n303-2026-10-23/README.md
+      - packing/resources/web/amundsk-n303-2026-10-23/acquisition/claims.json
+      - packing/resources/web/amundsk-n303-2026-10-23/facts/n-303.yaml.gz
+      - packing/resources/web/amundsk-n303-2026-10-23/receipts/exact-certification.json.xz
+      - packing/resources/web/amundsk-n303-2026-10-23/replay/sharp-controls.json
+      - packing/resources/web/amundsk-n303-2026-10-23/measure/identity.json
+      - packing/devtools/upper_bound_reports.py
+      - docs/project/reviews/review-2026-10-23-amundsk-n303.md
+      - packing/resources/web/amundsk-n303-2026-10-23/review/review-2026-10-23/README.md
+    controls:
+      - packing/tests/test_upper_bound_reports.py
+      - packing/tests/test_upper_bound_reports_755.py
+      - packing/resources/web/amundsk-n303-2026-10-23/receipts/exact-certification.json.xz
+      - packing/resources/web/amundsk-n303-2026-10-23/replay/sharp-controls.json
+      - packing/resources/web/amundsk-n303-2026-10-23/review/review-2026-10-23/outputs/sharp-controls.json
+    notes: >-
+      A complete repository replay is retained for n = 303: 1 positive and 2
+      duplicate-square and outside-container controls passed their required outcomes on
+      both routes, 274518 pair decisions; summed over the 3 jobs, the receipt records 28.73
+      route CPU seconds and 67.37 job wall seconds, the longest job 27.16 seconds. Every
+      wall is cleared by at least about 6.020e-13 (square 3 at the top, numbered from 0;
+      6.025e-13 at the right and 6.03e-13 at the left and bottom), and every pair by at
+      least 60250000000010249/(5*10^28), about 1.2050e-12, at six pairs, as a 1e-12 dilation
+      gives; no square touches a wall or another.
+
+      The issue reports a least wall clearance of 8.2e-13 from verify_cert.py, which is not
+      this file's: that checker, by its code (read, not run), gives the 6.020e-13 measured
+      here (RF-1). The kernel's two sharp controls
+      (replay/sharp-controls.json) and the review's 21 mutants are accepted at exact
+      contact and refused 1e-30 past it by both maintained routes.
+
+      In the packet's frozen comparison (acquisition/claims.json, read from main on 23
+      October 2026), at n = 303 the certificate is below the case's ceiling (Evan Daniel,
+      found from Daniil Ostashev's packing, T-230) by exactly 9889799071009889799071/10^27;
+      below T-186, T-174 (PR #574), T-162 (#562) and #593 by 1.96e-04; below T-146, T-136
+      (#481) and #573 by 3.30e-03; below #488 and T-134 (#476) by 7.60e-03 and 7.68e-03;
+      below T-138 (#470) and T-113 (#401) by 1.06e-02; and below T-098 (#375), T-092 and
+      T-056 by 1.46e-02. It is the smallest report at 303.
+
+      Measured pose by pose (measure/identity.json in the packet, with the #728 packet's
+      identity program, and the review's outputs/identity.json; measurements, which decide
+      nothing): another arrangement of T-230's packing, found from it, not a refinement of
+      it. It is one to one with T-230's packing under the identity and row for row, with 12
+      squares beyond a tenth (at most 0.547, square 166) and 31 beyond 1e-2; five squares
+      are newly tilted (57 and 164 to 167), eleven at one tilt turn by 1.04 degrees, and 38
+      contacts are released (30 as one row of eleven aligned squares slides) and 9 new. The
+      issue's figures, 0.547, 12, 31 and 96 tilted squares against 91, are reproduced. It
+      lists no regularization.
+
+      The side is quoted exactly or rounded up (17.909762327476 at 12 places,
+      17.9097623274752568 at 16); the issue's 17.909762327475256427... is the binary64
+      print of the side, not the side (RF-2). The packing is not rigid: five squares touch
+      nothing and keep at least 4.67e-3 to every other square and wall (RF-6); no
+      local-minimum, KKT or rigidity statement is made beyond that. The gist states no
+      licence, so the certificate is kept as a derived exact fact (RF-8).
+
+      The case at 303 adopted this certificate as its house best packing on 24 October 2026,
+      from T-230, which stays retained as history, and both strong generators decided the
+      new witness in the same pull request: grid-slack's view at the witness's side is
+      admitted and drawn, and Evan Daniel's regularizer solves the witness to a certified
+      KKT local minimum 2.17e-11 below its side, a view that waits to be registered
+      (think-8r5w).
+
+      The source's own checkers were not run here. The two maintained routes, the sqpack
+      rational witness verifier and the independent rational corner checker, share
+      certificate parsing, half-angle conversion, Fraction arithmetic and the
+      separating-axis method, and the two expressions RF-7 names with Daniel's checkers;
+      the review's checker shares no code with them. No human oversight or optimality is
+      claimed.
+
+      Registered as T-238 on the records branch of 23 October 2026 and renumbered to T-239
+      on 24 October, before it merged, when the owner gave T-237 and T-238 to #750 (the
+      classical s(2) to s(5) result and its Lean formalization, think-4o9c), in every
+      record, view, test and tool that names it. The 23 October review's programs are
+      stored as their reviewer wrote them, their digests bound, and are not edited: the
+      "T-238" in their docstrings and the "t238" in their names and in the lane name
+      c-review-t238-math mean this entry, T-239.
+    next_rung: >-
+      None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
+      reviewer and a retained human oversight record; one AI review, of 23 October, is
+      retained.
+    reviews:
+      - path: docs/project/reviews/review-2026-10-23-amundsk-n303.md
+        kind: adversarial
+        reviewer: >-
+          AI agent (Claude, strong sub-agent tier, max reasoning), the stage 4 review lane
+          c-review-t238-math of the 23 October intake, prompted separately from the records
+          lane, with no shared context
+        reviewer_kind: ai
+        relation: project
+        date: '2026-10-23'
+        scope: >-
+          Finite feasibility of the certificate issue 755 names: decided on a clean-room
+          checker of two exact routes, held to both maintained routes, the records lane's
+          receipt and its derived fact at 116 shared numbers, 21 controls on all four
+          deciders (sharp at 1e-30 at three walls and five pairs), the side and its prints,
+          the margins in report order, each route's trust boundary, the method statement
+          against the float input, and the identity, contacts and credit measured pose by
+          pose against T-230 and thirteen other packings at 303.
+        verdict: accepted
+        covers: [T-239]
 
 # Generated by python -m devtools.regularized_drawings from the regularized layer's
 # index (packing/atlas/known-best/regularized/index.json); do not edit by hand.
@@ -34451,17 +34614,18 @@ regularized_drawings:
         max_turn_deg: 2.2217
       view: packing/atlas/known-best/regularized/n-302-regularized.yaml.gz
     - n: 303
-      of: T-230
+      of: T-239
       by: project
-      method: regularize_axis_components/2
+      method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      modifications: ["port of his coincidence placement (regularize_grid_slack/1) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       identity:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 14
-        max_move: 0.3939059
-        max_turn_deg: 1.44906e-11
+        moved: 23
+        max_move: 0.3791248
+        max_turn_deg: 1.07083e-10
       view: packing/atlas/known-best/regularized/n-303-regularized.yaml.gz
     - n: 304
       of: T-186

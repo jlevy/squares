@@ -3274,6 +3274,22 @@ sources:
       it was dilated from and the source''s pipeline report are retained beside it. MIT-licensed; Claude
       assistance disclosed. The not-jammed verdict and the predicted descent of about 4.8e-7 are the author''s
       numerical statements; no local or global optimality claim.'
+  - key: '[Kristiansen n303 2026-10-23]'
+    authors:
+    - Kristiansen
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-23'
+    lineage: builds-on-project
+    credit: Kristiansen after Daniel, Ostashev, Levy
+    note: 'One complete exact dilation certificate in the gist amundsk/78f9f0e7b4669f2f509a281845081768 at
+      511f56bf6e6afb4eb22f12d31371c2a2fe7b4767, s(303) <= 223872029093440709529093216833/(125*10^26), found by
+      a perturb-and-polish search from Evan Daniel''s #728 packing (W-known-best-n303, found from Daniil
+      Ostashev''s packing), which the issue names as the start, with Daniel''s fq quench, dilate_cert.py and
+      checkers. Measured pose by pose in the packet (measure/identity.json), it is another arrangement of
+      T-230''s packing, found from it, not a refinement of it: one to one under the identity, 12 squares
+      beyond a tenth, 96 tilted squares against 91. No licence stated: derived exact fact only, no upstream
+      byte retained. Claude assistance disclosed. No local or global optimality claim.'
   - key: '[Muglich issue 686 2026-10-19]'
     authors:
     - Muglich
@@ -3761,3 +3777,4 @@ credited_names:
   Mishapolk: Mishapolk
   PingYou Ltd: PingYou Ltd
   Darius Muglich: Muglich
+  Amund Kristiansen: Kristiansen
