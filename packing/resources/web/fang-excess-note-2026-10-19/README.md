@@ -166,7 +166,11 @@ $15 \le n \le 51$. At $k = 37$, $n = 52$, $p = q = 1$ gives $G = 3$ against
 $H = \max(2, 2) = 2$, so `jExc 52` $= 3$ and $F(52) = 4$; the note’s Section 5 lists
 $F(n) = 4$ for $52 \le n \le 56$, where `jExc` is 3. The gap is never more than one:
 $p + 2q \le 2(16p + 21q)/21$ gives $G(k) \le 2k/21$, and $H(k) \ge 2\lfloor k/21 \rfloor
-\ge 2(k - 20)/21$, so $G - H \le 40/21 < 2$. Fang’s Lean proves Theorem 1 in full and
+\ge 2(k - 20)/21$, so $G - H \le 40/21 < 2$. The gap is not confined to $52 \le n \le 56$:
+`jExc` is one short exactly where $k \ge 37$ leaves 16 to 20 on division by 21, so at
+$n = 52$–56, 73–77, 94–98 and so on, 1,180 of the 4,986 values $15 \le n \le 5000$
+([`tests/test_fang_excess_theorem.py`](../../../tests/test_fang_excess_theorem.py)), and
+equal to $F(n)$ everywhere else. Fang’s Lean proves Theorem 1 in full and
 Theorem 2 with an excess of $F(n)$ or $F(n) - 1$; the note and the repository’s README at
 the pin say so. At the four counts `T-163`’s scope lists, $n = 15$ to 18, $F(n) = 1$ and
 every statement above gives $s(n^2 - n + 1) < n$.
@@ -186,14 +190,20 @@ The note is a published proof of both theorems for every $n \ge 15$, with its fi
 inputs given as certificates. The record’s
 [`E-fang-excess-note-proof`](../../../frontier/evidence.yaml) cites it as a
 `published-proof` with its `proof` block; that is the predicate `epistemics.md` gives
-`V3` for a proof that has been published. It is not a review: no stage 4 review has read
-the note’s proofs against the
-[14 October review](../../../../docs/project/reviews/review-2026-10-14-fang-excess-theorem-and-direct-certificates.md),
-which re-derived both theorems from the README and `tools/glue.py` before the note was
-public. The 18 pieces of Propositions 4 and 5 were decided strict-valid by that review’s
-own exact checker, and the six inventory certificates the record holds by both
-maintained exact routes (`E-fang-excess-theorem-exact-feasibility`).
-No program of the source was run here.
+`V3` for a proof that has been published. The proof is computer-assisted, so the entry
+names its finite premise, the 18 pieces of Propositions 4 and 5, as `proof.conditional_on`:
+by `epistemics.md`’s rule for conditional proofs a published proof of a premise is read,
+not run, and discharges nothing. `E-fang-excess-pieces-exact-replay` discharges it: the
+[14 October review](../../../../docs/project/reviews/review-2026-10-14-fang-excess-theorem-and-direct-certificates.md)’s
+own exact checker, run again here on 24 October on all 18 pieces, every one
+strict-valid above the uniform squeeze $1/10000$, with its receipt in the
+[13 October packet](../fang-excess-theorem-2026-10-13/receipts/pieces-exact-check.log).
+The six inventory certificates the record holds are decided by both maintained exact
+routes (`E-fang-excess-theorem-exact-feasibility`).
+
+None of this is a review: no stage 4 review has read the note’s proofs against the 14
+October review, which re-derived both theorems from the README and `tools/glue.py`
+before the note was public. No program of the source was run here.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

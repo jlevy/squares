@@ -3,16 +3,30 @@
 from __future__ import annotations
 
 import json
+import re
+import shlex
 from fractions import Fraction
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 
 import pytest
 
 from cases.asymptotic import fang_excess_inventory as inventory
-from devtools import acquire_source
+from devtools import acquire_source, check_results
 from devtools import upper_bound_reports as reports
+from sqpack.assurance import (
+    claim_support_level,
+    conditional_problems,
+    conditions,
+    undischarged,
+)
+from sqpack.yamlio import safe_load
 
 NAME = "fang-excess-theorem-2026-10-13"
+#: The 14 October review's checker run on the 18 pieces of Propositions 4 and 5, which
+#: E-fang-excess-pieces-exact-replay records and the note's proof takes as its premise.
+PIECES_RECEIPT = reports.packet_path(NAME) / "receipts" / "pieces-exact-check.log"
+NOTE_PROOF = "E-fang-excess-note-proof"
+PIECES_REPLAY = "E-fang-excess-pieces-exact-replay"
 
 
 def test_the_packet_matches_its_acquisition_record() -> None:
@@ -150,3 +164,84 @@ def test_the_sample_receipt_admits_every_job_on_both_routes() -> None:
     for margins in reports.margins(positives).values():
         assert Fraction(margins["exact_verify_best_pair_gap"]) > 0
         assert Fraction(margins["exact_verify_containment_clearance"]) > 0
+
+
+def lean_jexc(n: int) -> int:
+    """`jExc` of Fang's Sqlean/Theorem2.lean at 947bdae, in natural-number division."""
+    return max((n + 1) // 16, 1 + 2 * ((n - 15) // 21))
+
+
+def test_the_lean_excess_is_f_or_one_short_wherever_mixing_the_steps_gains() -> None:
+    # The records say where Fang's Lean theorem2 falls short of Theorem 2 (review A2 of
+    # PR 781): not at n = 52 to 56 alone, but wherever k = n - 15 >= 37 leaves 16 to 20
+    # on division by 21, by one and never more, and never above F(n).
+    counts = range(15, 5001)
+    excess = {n: inventory.excess(n) for n in counts}
+    assert all(excess[n] - 1 <= lean_jexc(n) <= excess[n] for n in counts)
+    short = {n for n in counts if lean_jexc(n) < excess[n]}
+    assert short == {n for n in counts if n - 15 >= 37 and (n - 15) % 21 >= 16}
+    assert (min(short), len(short), len(counts)) == (52, 1180, 4986)
+    below_100 = [*range(52, 57), *range(73, 78), *range(94, 99)]
+    assert sorted(n for n in short if n < 100) == below_100
+
+
+def theorem_pieces() -> set[str]:
+    """The certificate file of each piece theorem/PIECES.md gives the role `theorem`."""
+    names: set[str] = set()
+    for line in inventory.retained_text("theorem/PIECES.md").splitlines():
+        cells = [cell.strip() for cell in line.strip().strip("|").split("|")]
+        if len(cells) == 10 and cells[7] == "theorem":
+            path = cells[1].strip("`")
+            fetched = f"{cells[0]}.cert"  # n-211 is fetched, and its row names no path
+            names.add(PurePosixPath(path).name if path.endswith(".cert") else fetched)
+    return names
+
+
+def receipt_verdicts(text: str) -> dict[str, tuple[Fraction, str]]:
+    """Each certificate rectangle_check.py printed, with its exact squeeze and verdict."""
+    found: dict[str, tuple[Fraction, str]] = {}
+    name, squeeze = "", Fraction(0)
+    for line in text.splitlines():
+        if re.match(r"\S+\.cert: n = \d+", line):
+            name = line.split(":", 1)[0]
+        elif line.startswith("  squeeze "):
+            squeeze = Fraction(line.split(" = ", 1)[1].split()[0])
+        elif line.startswith("  verdict: "):
+            found[name] = (squeeze, line.removeprefix("  verdict: "))
+    return found
+
+
+def test_the_pieces_receipt_decides_the_eighteen_theorem_pieces_above_the_squeeze() -> None:
+    text = PIECES_RECEIPT.read_text(encoding="utf-8")
+    command = shlex.split(text.splitlines()[0].removeprefix("# command: "))
+    named = [argument for argument in command if argument.endswith(".cert")]
+    assert command[3].endswith("review/programs/rectangle_check.py")
+    assert all((inventory.ROOT / path).is_file() for path in named)
+    assert {PurePosixPath(path).name for path in named} == theorem_pieces()
+    verdicts = receipt_verdicts(text)
+    assert set(verdicts) == theorem_pieces()
+    assert len(verdicts) == 18
+    assert {verdict for _squeeze, verdict in verdicts.values()} == {"STRICT_VALID"}
+    assert all(squeeze > inventory.D0 for squeeze, _verdict in verdicts.values())
+    assert min(verdicts, key=lambda name: verdicts[name][0]) == "n0308.cert"
+    for stem, stated in inventory.STATED_SQUEEZE.items():
+        assert verdicts[f"{stem}.cert"][0] >= stated
+    assert "18 of 18 as required" in text
+    assert "; exit 0; " in text.splitlines()[-1]
+
+
+def test_the_note_s_finite_premise_is_discharged_by_the_pieces_replay() -> None:
+    by_id = {
+        entry["id"]: entry
+        for entry in safe_load(check_results.EVIDENCE.read_text(encoding="utf-8"))["evidence"]
+    }
+    note = by_id[NOTE_PROOF]
+    assert [refs for _hypothesis, refs in conditions(note)] == [[PIECES_REPLAY]]
+    assert undischarged(note, by_id, confirming=False) == []
+    problems = conditional_problems({key: by_id[key] for key in (NOTE_PROOF, PIECES_REPLAY)})
+    assert problems == []
+    # The published proof carries its V3 to the theorem only through the replay: without
+    # it the premise is open and the note supports the implication alone.
+    assert claim_support_level(note, by_id, lambda _: 3, confirming=False) == 3
+    assert claim_support_level(note, {NOTE_PROOF: note}, lambda _: 3, confirming=False) == 0
+    assert check_results.derive_verification([note]) == "V0"

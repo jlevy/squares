@@ -36,9 +36,16 @@ are “taken from Evan Daniel’s https://github.com/evand/square-packing, commi
 29d0cee87c1d717f7b4497b8fb0ee17ac9d0087d”, and that only `ExactPack.lean`’s import line
 was changed; `certs/daniel/NOTICE` credits Daniel’s certificates. The README’s
 certificate table names de Winter’s packing of 211 and Daniel’s certificates of 241, 273
-and the $m^2 - m$ bases. The pin’s commit carries a Claude (Anthropic) co-author trailer,
-and the note says the formalisation “reuses Evan Daniel’s specification and certificate
-lemmas (MIT)”; its acknowledgements, quoted in the
+and the $m^2 - m$ bases. The pin’s commit carries a Claude (Anthropic) co-author trailer.
+Fang states the Lean project’s AI assistance in his
+[comment of 18 October 2026 on issue 603](https://github.com/jlevy/squares/issues/603#issuecomment-6255103888),
+which announced this repository:
+
+> The search, checkers, bundle and Lean project were written with Claude as a coding and
+> research agent, directed and reviewed by me.
+
+The note says of the formalisation only that it “reuses Evan Daniel’s specification and
+certificate lemmas (MIT)”; its acknowledgements, quoted in the
 [note packet](../fang-excess-note-2026-10-19/README.md#credit-and-ai-assistance-as-the-source-states-them),
 say the search software, the verifiers, the gluing program and the bundle were written
 and run with Claude (Anthropic), directed and reviewed by the author.
@@ -147,8 +154,9 @@ the literal data.
 The [note packet](../fang-excess-note-2026-10-19/README.md#the-statements-against-t-163)
 compares these statements with `T-163`’s claim, the note’s theorems and Daniel’s:
 `theorem1` is Theorem 1, `main` is stronger, and `theorem2` is Theorem 2 with an excess of
-$F(n)$ or $F(n) - 1$, equal to it for $15 \le n \le 51$ and one short at $n = 52$ to 56,
-where mixing the two steps gains.
+$F(n)$ or $F(n) - 1$: equal to $F(n)$ for $15 \le n \le 51$, then one short wherever
+$n - 15$ leaves 16 to 20 on division by 21 ($n = 52$–56, 73–77, 94–98, …), where mixing
+the two steps gains, and equal otherwise.
 
 **What the source says of its axioms and build.** The README and `Sqlean/Axioms.lean`:
 `#print axioms` for `theorem1`, `main` and `theorem2` gives

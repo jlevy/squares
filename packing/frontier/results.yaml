@@ -20640,8 +20640,8 @@ results:
       s(n² − n + 1) < n for every n ≥ 15, and n² − n + F(n) squares below side n, from Kevin
       Fang
     claim: >-
-      Kevin Fang states and proves two theorems in a note, draft v0.9 of 18 October 2026,
-      published on Zenodo: Theorem 1, s(n^2 - n + 1) < n for every integer n >= 15; and
+      Kevin Fang states two theorems, with their proofs, in a note, draft v0.9 of 18 October
+      2026, published on Zenodo: Theorem 1, s(n^2 - n + 1) < n for every integer n >= 15; and
       Theorem 2, s(n^2 - n + F(n)) < n with F(n) = 1 + max{p + 2q : 16p + 21q <= n - 15}
       over integers p, q >= 0. The proof glues a squeezable 17 x 16 rectangle of 257
       squares, or a 22 x 21 rectangle of 443 that adds two, onto a square packing (Lemma 3)
@@ -20669,9 +20669,11 @@ results:
       P4.22, 2021); the base packings are Joost de Winter's 211, David Ellsworth's and Tej
       Stead's 241 and 273, the AMS21 and Ellsworth packings of m^2 - m squares, and the
       author's own; the rectangles grow from Ellsworth's, Stead's and Francisco Couzo's
-      packings; the certificate format and the pieces' certificates are Evan Daniel's. The
-      search, the verifier and the bundle were written and run with Claude (Anthropic),
-      directed and reviewed by the author.
+      packings; the certificate format and the pieces' certificates are Evan Daniel's.
+
+      The search, the verifiers, the gluing program and the bundle were written and run with
+      Claude (Anthropic), directed and reviewed by the author, the note says; his comment of
+      18 October on issue 603 says the Lean project was written with Claude too.
     scope: {n_values: [211, 241, 273, 307]}
     verification: V3
     confirmation: C1
@@ -20695,6 +20697,7 @@ results:
     evidence:
       - E-fang-excess-theorem-report
       - E-fang-excess-theorem-exact-feasibility
+      - E-fang-excess-pieces-exact-replay
       - E-fang-excess-note-proof
       - E-fang-excess-lean-report
     artifacts:
@@ -20715,25 +20718,40 @@ results:
       - packing/resources/web/fang-excess-theorem-2026-10-13/source/tools/glue.py
       - >-
         packing/resources/web/fang-excess-theorem-2026-10-13/receipts/inventory-and-deficiency.json
+      - >-
+        packing/resources/web/fang-excess-theorem-2026-10-13/receipts/pieces-exact-check.log
+      - >-
+        packing/resources/web/fang-excess-theorem-2026-10-13/review/programs/rectangle_check.py
       - packing/cases/asymptotic/fang_excess_inventory.py
       - >-
         docs/project/reviews/review-2026-10-14-fang-excess-theorem-and-direct-certificates.md
       - packing/devtools/upper_bound_reports.py
     controls: [packing/tests/test_upper_bound_reports.py]
     notes: >-
-      V3 since 24 October 2026, on the published note: E-fang-excess-note-proof records draft
-      v0.9 (18 October, DOI 10.5281/zenodo.23463481, issue 603) as a published proof with its
-      proof block, which is V3's structural support in epistemics.md's Verification table,
-      "method: published-proof or proof-audited with a proof block". From 14 to 24 October
-      the entry stood at V2, a proof asserted but not publicly recoverable, since the note
+      V3 since 24 October 2026, on the published note with its finite premise replayed here.
+      E-fang-excess-note-proof records draft v0.9 (18 October, DOI 10.5281/zenodo.23463481,
+      issue 603) as a published proof with its proof block, which is V3's structural support
+      in epistemics.md's Verification table, "method: published-proof or proof-audited with
+      a proof block".
+
+      The note's proof is computer-assisted, so the entry names Propositions 4 and 5, the
+      18 pieces, as proof.conditional_on, and E-fang-excess-pieces-exact-replay discharges
+      them: the 14 October review's exact checker run again here on all 18, each
+      strict-valid above the uniform squeeze 1/10000. Under epistemics.md's rule for
+      conditional proofs a premise needs a complete machine execution, and the published
+      text alone discharges nothing (review A of pull request 781).
+
+      From 14 to 24 October the entry stood at V2, a proof asserted but not publicly recoverable, since the note
       was not public until 18 October; the four finite bounds have had the two-route replay
       throughout.
 
       The intake audit of 24 October (think-494l) found the note's Theorems 1 and 2 equal to
       this claim, hypotheses and conclusions, and read no proof against another. Fang's own
       Lean proof (squarepack-lean, E-fang-excess-lean-report) states Theorem 1, its side n -
-      1/10000 form and the larger of the two single-step bounds of Theorem 2, one short of
-      F(n) at n = 52 to 56 where mixing the steps gains; it is reported and moves no rung.
+      1/10000 form and the larger of the two single-step bounds of Theorem 2. That excess is
+      F(n) for 15 <= n <= 51, then one short wherever n - 15 leaves 16 to 20 on division by
+      21 (n = 52-56, 73-77, 94-98, ...), where mixing the steps gains, and equal otherwise;
+      it is reported and moves no rung.
 
       The report is dated by the first commit of the theorem it states, Theorem 1's, on 12
       October 2026 (19:16Z), between issues 562 and 564; Theorem 2 took its present form on
@@ -20766,30 +20784,35 @@ results:
       certificates (evand/square-packing, 18 October 2026), are T-236, a formalization
       reported and not built here (think-57ei).
     next_rung: >-
-      C3 needs a build here of a Lean proof of the theorem with its axiom receipt: Evan
-      Daniel's proof of both theorems (T-236, think-dgrc: about 1.5 to 3 CPU-hours, at most
-      about 8 GB per chunk, and 10 GB of disk, as T-236 prices it), or Fang's own, about
-      0.25 CPU-hours, which covers Theorem 1 and the single-step bounds of Theorem 2 only.
-      C4 needs, beside that build, a second accepted adversarial review by a distinct
+      C3 needs a build here of Evan Daniel's Lean proof of both theorems with its axiom
+      receipt (T-236, think-dgrc: about 1.5 to 3 CPU-hours, at most about 8 GB per chunk,
+      and 10 GB of disk, as T-236 prices it). A build of Fang's own Lean proof, about 0.25
+      CPU-hours, would confirm Theorem 1 and the single-step bounds of Theorem 2 only, not
+      the mixed-step Theorem 2, and would not move this entry on its own. C4 needs, beside
+      the build of Daniel's, a second accepted adversarial review by a distinct
       reviewer, which the stage 4 review of the note would be (think-pxxi), and a retained
       human oversight record. The 70 inventory certificates pinned by digest wait for a
       hosted-data release or a W7 route; they move no rung of this entry.
     composition: >-
       Compound. The finite bounds at 211, 241, 273 and 307 rest on the two-route replay of
       the retained certificates (E-fang-excess-theorem-exact-feasibility). The theorem for
-      every n >= 15 rests on the published note (E-fang-excess-note-proof): Lemma 3, the
-      induction and the strict scaling, which no machine replays here, and the 18 finite
-      pieces, which the note gives as exact certificates. Both parts are V3, the minimum.
-      The 14 October review's reading of the argument, recorded on
-      E-fang-excess-theorem-report, sets the theorem's C1; no Lean proof has been built
-      here.
+      every n >= 15 rests on the published note (E-fang-excess-note-proof), a proof
+      conditional on its finite premise: Lemma 3, the induction and the strict scaling are
+      the published argument, which no machine replays here; Propositions 4 and 5, the 18
+      pieces the note gives as exact certificates, are its proof.conditional_on, discharged
+      by E-fang-excess-pieces-exact-replay, the 14 October review's exact checker run here on
+      all 18. Both parts are V3, the minimum. The 14 October review's reading of the
+      argument, recorded on E-fang-excess-theorem-report, sets the theorem's C1; no Lean
+      proof has been built here.
 
       Until 24 October the entry held V2, as the rung nearest what the record then held and
       not as a finding that the proof could not be recovered: V2's premise ended when the
       author published the note on 18 October, and nothing the record cited was yet evidence
-      the V3 predicate reads. Retaining the note and citing it as a published proof
-      (think-494l) is what moved the rung; the stage 4 review of the note (think-pxxi) is
-      toward C4 and was not needed for V3.
+      the V3 predicate reads. Retaining the note, citing it as a published proof and
+      recording the replay of its 18 pieces here (think-494l) is what moved the rung; the
+      published text alone would have left the theorem the implication from an unexecuted
+      premise. The stage 4 review of the note (think-pxxi) is toward C4 and was not needed
+      for V3.
     unfinished_confirmations:
       - what: >-
           a build here of Evan Daniel's Lean proof of Theorems 1 and 2, FangFinal from the 18

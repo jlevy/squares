@@ -36081,6 +36081,59 @@ evidence:
       and the separating-axis method. Finite feasibility of the six only: the theorem for
       every n rests on the review's reading of Lemma 3 and the induction.
     source_reviewed: '2026-10-14'
+  - id: E-fang-excess-pieces-exact-replay
+    claim: upper-bound
+    scope: {n_values: [211, 241, 273, 307]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Fang excess theorem 2026-10-13]'
+    certificate: packing/resources/web/fang-excess-theorem-2026-10-13/source/theorem/PIECES.md
+    replay: >-
+      From packing/ with the project interpreter: python -m devtools.replay_receipt --receipt
+      resources/web/fang-excess-theorem-2026-10-13/receipts/pieces-exact-check.log -- then
+      .venv/bin/python3 -I -B on the 14 October review's
+      resources/web/fang-excess-theorem-2026-10-13/review/programs/rectangle_check.py with
+      the 18 pieces theorem/PIECES.md gives the role theorem, at the retained paths the
+      receipt's command line names: R and R' in this packet's source/rectangles/, Evan
+      Daniel's certificates of 110, 132, 156, 182, 211, 241 and 273 in the 2026-10-05 evand
+      packet, n0308 and n0343 in the 2026-10-10 two-wedge packet, and n0381 to n0651 in the
+      2026-10-13 direct-certificates packet. It must print STRICT_VALID for each, end with
+      18 of 18 as required and exit 0; tests/test_fang_excess_theorem.py holds the receipt
+      to PIECES.md. Run on 24 October 2026 at 8f7214b7a, 4.9 CPU seconds.
+    replay_status: passed
+    verifiers: [V-fang-review-exact-checker]
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the 18 pieces of the note's Propositions 4 and 5, theorem/PIECES.md's role
+          theorem: the rectangles R and R', the twelve bases of n^2 - n + 1 squares for n =
+          15 to 26 and the four of m^2 - m squares for m = 11 to 14, every corner and every
+          pair decided exactly in its open box
+        checked: 18
+        of: 18
+    limitations: >-
+      The 14 October review's clean-room exact checker, the one program the review wrote
+      to decide the pieces, run again here on the 18 pieces the note's Theorems 1 and 2
+      use, which the note cites as exact certificates in TheSnakeFang/squarepack-certs at
+      078789a and does not reproduce. All 18 are strict-valid in the open box their header
+      states, with exact squeezes that agree with theorem/PIECES.md's rounded-down values
+      and with Propositions 4 and 5: 0.000743691554 for R in 17 x 16, 0.009439615924 for R'
+      in 22 x 21, and the least of the 18, 0.000690144837 for n0308, each above the uniform
+      squeeze 1/10000. Each certificate's output equals the review's retained
+      review/outputs/pieces.out and rectangles.out apart from CPU times. The scope is the theorem's own at the four counts the record
+      holds, which the premise's discharge must cover: there the pieces are the bases
+      themselves (211, 241, 273, and 308, whose first 307 squares are Proposition 5's base
+      for n = 18); the other fourteen are the theorem's premises past them, and R and R'
+      bound no s(n). One route, of the same system family as the author's assistant; the
+      inventory's six retained certificates are decided by both maintained routes in
+      E-fang-excess-theorem-exact-feasibility. It decides the finite premise only: Lemma
+      3, the induction and the strict scaling are the note's.
+    source_reviewed: '2026-10-24'
   - id: E-fang-excess-note-proof
     claim: upper-bound
     scope: {n_values: [211, 241, 273, 307]}
@@ -36114,14 +36167,15 @@ evidence:
         source/note/fang-2026-n2-n-1.md and zenodo/zenodo-23463481/main.tex in the packet.
       assumptions:
         - >-
-          Propositions 4 and 5, the rectangles R and R' and the sixteen square bases, are
-          established by exact rational certificates in TheSnakeFang/squarepack-certs at
-          078789a, which the note cites and its three exact checkers accept; its text does
-          not reproduce them.
-        - >-
-          Every piece of Propositions 4 and 5 is 1/10000-squeezable (Proposition 5;
-          theorem/PIECES.md in the 13 October packet).
+          The pieces of Propositions 4 and 5, the rectangles R and R' and the sixteen square
+          bases, are the exact rational certificates of TheSnakeFang/squarepack-certs at
+          078789a, which the note cites and does not reproduce; theorem/PIECES.md in the 13
+          October packet lists them, and the copies decided here are the retained ones it
+          names.
         - Packings permit arbitrary orientations and boundary contact.
+      conditional_on:
+        - hypothesis: Propositions 4 and 5 (the 18 pieces, each 1/10000-squeezable)
+          discharged_by: [E-fang-excess-pieces-exact-replay]
     external_review:
       state: not-reviewed
       date: '2026-10-24'
@@ -36138,12 +36192,14 @@ evidence:
       text in Markdown at TheSnakeFang/squarepack-certs 9ffba0f. Its proof is computer-
       assisted: Lemma 3 and the induction are written out, and the 18 finite pieces of
       Propositions 4 and 5 rest on exact certificates checked by the source's programs.
-      Here the six inventory certificates at 211, 241, 273, 307, 308 and 932 are replayed
-      by both maintained exact routes (E-fang-excess-theorem-exact-feasibility), and the
-      14 October review decided the 18 pieces strict-valid with an exact checker of its
-      own (V-fang-review-exact-checker), which no evidence entry records; neither Lean
-      proof of the theorems has been built here. This entry records the published
-      argument, not a read of it. The note states that its software, verifiers, gluing
+      That finite premise is proof.conditional_on, discharged here by
+      E-fang-excess-pieces-exact-replay: the 14 October review's exact checker
+      (V-fang-review-exact-checker), run again on 24 October on all 18 pieces, every one
+      strict-valid above the uniform squeeze 1/10000. The six inventory certificates at
+      211, 241, 273, 307, 308 and 932 are replayed by both maintained exact routes
+      (E-fang-excess-theorem-exact-feasibility); neither Lean proof of the theorems has
+      been built here. This entry records the published argument, not a read of it. The
+      note states that its software, verifiers, gluing
       program and bundle were written and run with Claude (Anthropic) as a coding and
       research agent, directed and reviewed by the author, and that two language-model
       reviews of earlier drafts found errors that were corrected.
@@ -36172,8 +36228,9 @@ evidence:
         rotation in [0, s]^2 with pairwise disjoint interiors, and sInf {s | Packs n s}.
       scope: >-
         Fang's Theorem 1 for every n >= 15, at side n - 1/10000; Theorem 2 with an excess of
-        jExc n, which is F(n) for 15 <= n <= 51 and F(n) or F(n) - 1 above, one short at
-        n = 52 to 56, since the mixed-step form is not stated. At the counts this record
+        jExc n, since the mixed-step form is not stated: equal to F(n) for 15 <= n <= 51,
+        then one short wherever n - 15 leaves 16 to 20 on division by 21 (n = 52-56, 73-77,
+        94-98, ...), and equal otherwise. At the counts this record
         holds, n = 15 to 18, it gives s(211) <= 14.9999, s(241) <= 15.9999, s(273) <=
         16.9999 and s(307) <= 17.9999.
       pinpoints: >-

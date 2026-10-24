@@ -26,7 +26,7 @@ second implementation agrees.
 ## The Short Version
 
 - **205** programs: **52** external and **153** first-party; **137** decide claims and **68** check premises.
-- **596** of **743** evidence entries name the programs that verified them: 283 reproduced with the producer’s code, 258 independently re-implemented, 34 re-implemented, sharing the producer’s components, 21 no relation: a proof, a derivation or a report.
+- **597** of **744** evidence entries name the programs that verified them: 283 reproduced with the producer’s code, 259 independently re-implemented, 34 re-implemented, sharing the producer’s components, 21 no relation: a proof, a derivation or a report.
 
 ## Programs
 
@@ -195,7 +195,7 @@ second implementation agrees.
 | [`V-wand125-lb-review-axis-sweep-emulation`](#v-wand125-lb-review-axis-sweep-emulation) | sweep_emulation.py | Squares Project (Levy) | first-party | premises | 0 | 0 |
 | [`V-wand125-lb-review-linear-premises`](#v-wand125-lb-review-linear-premises) | check_linear_candidate.py | Squares Project (Levy) | first-party | premises | 0 | 0 |
 | [`V-wand125-lb-review-linear-exact-capture`](#v-wand125-lb-review-linear-exact-capture) | linear_exact.capture | Squares Project (Levy) | first-party | decides | 0 | 0 |
-| [`V-fang-review-exact-checker`](#v-fang-review-exact-checker) | rectangle_check.py | Squares Project (Levy) | first-party | decides | 0 | 0 |
+| [`V-fang-review-exact-checker`](#v-fang-review-exact-checker) | rectangle_check.py | Squares Project (Levy) | first-party | decides | 1 | 1 |
 | [`V-fang-review-glue-rebuild`](#v-fang-review-glue-rebuild) | glue_rebuild.py | Squares Project (Levy) | first-party | decides | 0 | 0 |
 | [`V-fang-review-excess-arithmetic`](#v-fang-review-excess-arithmetic) | excess_arithmetic.py | Squares Project (Levy) | first-party | decides | 0 | 0 |
 | [`V-fang-review-receipt-summary`](#v-fang-review-receipt-summary) | receipt_summary.py | Squares Project (Levy) | first-party | premises | 0 | 0 |
@@ -3493,7 +3493,9 @@ Decides a square or rectangle certificate in Evan Daniel's text format strict-va
 - Independence: its authors read mathematics, specification, certificate-format, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the mathematical review lane of the fang-theorem intake, strong tier, max reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, The source states that its search, verifier and bundle were written with Claude (Anthropic). This program was written by a Claude agent prompted separately, in files of its own, from the README's statement of the certificate convention and the separating-axis theorem; the source's checkers verify.py, tools/rectcheck.py and verify_cert.py were not read.
 - Note: The mathematical review of 14 October 2026 wrote it and ran it on the six rectangles, the 25 square pieces, the 76 inventory certificates (six retained, 70 rebuilt byte-identical to the pinned files) and the fourteen direct certificates, all strict-valid, with the all-pairs route agreeing on R, R', 932 and 380 and the two controls refused. Kept as run in the packet's review/, with every output.
 
-No evidence entry names it yet.
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-fang-excess-pieces-exact-replay` | replayed here | independently re-implemented, clean-room | full, 18 of 18: the 18 pieces of the note's Propositions 4 and 5, theorem/PIECES.md's role theorem: the rectangles R and R', the twelve bases of n^2 - n + 1 squares for n = 15 to 26 and the four of m^2 - m squares for m = 11 to 14, every corner and every pair decided exactly in its open box | T-163 |
 
 ### `V-fang-review-glue-rebuild`
 

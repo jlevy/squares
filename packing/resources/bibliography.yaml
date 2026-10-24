@@ -1931,9 +1931,11 @@ sources:
       18 piece certificates by decide +kernel: de Winter's 211 (fetched, unlicensed),
       Daniel's certificates of 241, 273 and the m^2 - m bases after Arslanov, Mustafin and
       Shangitbayev and Ellsworth and Stead, and the author's rectangles and direct packings.
-      MIT. The pin's commit carries a Claude (Anthropic) co-author trailer, and the note
-      says the work was written with Claude, directed and reviewed by the author. Not built
-      here.
+      MIT. The pin's commit carries a Claude (Anthropic) co-author trailer, and Fang's
+      comment of 18 October on issue 603
+      (https://github.com/jlevy/squares/issues/603#issuecomment-6255103888) says "The
+      search, checkers, bundle and Lean project were written with Claude as a coding and
+      research agent, directed and reviewed by me." Not built here.
   - key: '[SQUISH third request 2026-10-09]'
     authors: [Chaoweeraprasit]
     year: 2026
