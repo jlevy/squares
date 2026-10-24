@@ -17536,6 +17536,20 @@ occurrences:
     matches the repository whose retained licence names Evan Daniel. Keep finder,
     improver and solver roles distinct.
 - origin:
+    path: packing/frontier/n-070.md
+    record_key: '70'
+    field: /reported_upper_bound/improved_by/1
+  expected_text: PingYou Ltd
+  start: 0
+  end: 11
+  label: PingYou Ltd
+  role: construction-improver
+  disposition: non-person
+  evidence: []
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
+- origin:
     path: packing/frontier/n-071.md
     record_key: '71'
     field: /reported_upper_bound/found_by/0
@@ -18367,6 +18381,20 @@ occurrences:
     matches the repository whose retained licence names Evan Daniel. Keep finder,
     improver and solver roles distinct.
 - origin:
+    path: packing/frontier/n-102.md
+    record_key: '102'
+    field: /reported_upper_bound/improved_by/1
+  expected_text: PingYou Ltd
+  start: 0
+  end: 11
+  label: PingYou Ltd
+  role: construction-improver
+  disposition: non-person
+  evidence: []
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
+- origin:
     path: packing/frontier/n-103.md
     record_key: '103'
     field: /reported_upper_bound/found_by/0
@@ -18987,6 +19015,20 @@ occurrences:
     span 0:11. The specific evand/square-packing certificate, fq solver or regularizer
     matches the repository whose retained licence names Evan Daniel. Keep finder,
     improver and solver roles distinct.
+- origin:
+    path: packing/frontier/n-123.md
+    record_key: '123'
+    field: /reported_upper_bound/improved_by/1
+  expected_text: PingYou Ltd
+  start: 0
+  end: 11
+  label: PingYou Ltd
+  role: construction-improver
+  disposition: non-person
+  evidence: []
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/frontier/n-124.md
     record_key: '124'
@@ -19838,22 +19880,6 @@ occurrences:
   note: Reviewed packing/frontier/n-153.md [153] /reported_lower_bound/proved_by/0
     span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
     metadata and owner confirmation bind wand125 to Hiroaki Hosono.
-- origin:
-    path: packing/frontier/n-153.md
-    record_key: '153'
-    field: /reported_upper_bound/improved_by/0
-  expected_text: Mishapolk
-  start: 0
-  end: 9
-  label: Mishapolk
-  role: construction-improver
-  disposition: resolved
-  evidence:
-  - source-intake
-  - bibliography
-  contributor_id: mykhailo-polkovskyi
-  note: Reviewed source credit matches the evidenced person and printed name; the
-    original credit role is retained.
 - origin:
     path: packing/frontier/n-154.md
     record_key: '154'
@@ -21367,22 +21393,6 @@ occurrences:
     span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
     metadata and owner confirmation bind wand125 to Hiroaki Hosono.
 - origin:
-    path: packing/frontier/n-207.md
-    record_key: '207'
-    field: /reported_upper_bound/improved_by/0
-  expected_text: Mishapolk
-  start: 0
-  end: 9
-  label: Mishapolk
-  role: construction-improver
-  disposition: resolved
-  evidence:
-  - source-intake
-  - bibliography
-  contributor_id: mykhailo-polkovskyi
-  note: Reviewed source credit matches the evidenced person and printed name; the
-    original credit role is retained.
-- origin:
     path: packing/frontier/n-208.md
     record_key: '208'
     field: /reported_upper_bound/found_by/0
@@ -22827,6 +22837,20 @@ occurrences:
     matches the repository whose retained licence names Evan Daniel. Keep finder,
     improver and solver roles distinct.
 - origin:
+    path: packing/frontier/n-258.md
+    record_key: '258'
+    field: /reported_upper_bound/improved_by/2
+  expected_text: PingYou Ltd
+  start: 0
+  end: 11
+  label: PingYou Ltd
+  role: construction-improver
+  disposition: non-person
+  evidence: []
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
+- origin:
     path: packing/frontier/n-259.md
     record_key: '259'
     field: /reported_upper_bound/found_by/0
@@ -22858,6 +22882,37 @@ occurrences:
   note: Reviewed 2026-10-21 against the named profile sources; the printed source
     text and credit role are retained.
   contributor_id: trevor-green
+- origin:
+    path: packing/frontier/n-259.md
+    record_key: '259'
+    field: /reported_upper_bound/improved_by/0
+  expected_text: PingYou Ltd
+  start: 0
+  end: 11
+  label: PingYou Ltd
+  role: construction-improver
+  disposition: non-person
+  evidence: []
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
+- origin:
+    path: packing/frontier/n-259.md
+    record_key: '259'
+    field: /reported_upper_bound/improved_by/1
+  expected_text: Evan Daniel
+  start: 0
+  end: 11
+  label: Evan Daniel
+  role: construction-improver
+  disposition: resolved
+  evidence:
+  - repository-license
+  - bibliography
+  contributor_id: evan-daniel
+  note: Reviewed packing/frontier/n-259.md [259] /reported_upper_bound/improved_by/1
+    span 0:11. The specific evand/square-packing exact form of issue 639 matches the repository
+    whose retained licence names Evan Daniel. Keep finder, improver and solver roles distinct.
 - origin:
     path: packing/frontier/n-260.md
     record_key: '260'
@@ -23941,6 +23996,20 @@ occurrences:
     matches the repository whose retained licence names Evan Daniel. Keep finder,
     improver and solver roles distinct.
 - origin:
+    path: packing/frontier/n-295.md
+    record_key: '295'
+    field: /reported_upper_bound/improved_by/1
+  expected_text: PingYou Ltd
+  start: 0
+  end: 11
+  label: PingYou Ltd
+  role: construction-improver
+  disposition: non-person
+  evidence: []
+  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
+    Credit section records the request to credit PingYou Ltd and identifies its unreleased
+    agentic AI offering. No individual identity is inferred from the company label.'
+- origin:
     path: packing/frontier/n-296.md
     record_key: '296'
     field: /reported_lower_bound/proved_by/0
@@ -24201,6 +24270,23 @@ occurrences:
   contributor_id: mykhailo-polkovskyi
   note: Reviewed source credit matches the evidenced person and printed name; the
     original credit role is retained.
+- origin:
+    path: packing/frontier/n-302.md
+    record_key: '302'
+    field: /reported_upper_bound/improved_by/2
+  expected_text: Evan Daniel
+  start: 0
+  end: 11
+  label: Evan Daniel
+  role: construction-improver
+  disposition: resolved
+  evidence:
+  - repository-license
+  - bibliography
+  contributor_id: evan-daniel
+  note: Reviewed packing/frontier/n-302.md [302] /reported_upper_bound/improved_by/2
+    span 0:11. The specific evand/square-packing exact form of issue 639 matches the repository
+    whose retained licence names Evan Daniel. Keep finder, improver and solver roles distinct.
 - origin:
     path: packing/frontier/n-303.md
     record_key: '303'

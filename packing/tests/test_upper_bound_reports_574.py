@@ -477,7 +477,29 @@ def test_the_574_algebraic_witnesses_are_admitted_in_their_declared_fields() -> 
 def test_the_574_algebraic_sides_against_the_case_records() -> None:
     rows = _algebraic()
     equal = sorted(n for n, row in rows.items() if row["case"]["verified_relation"] == "equal")
-    assert equal == [5, 10, 18, 19, 26, 27, 38, 40, 51, 52, 65, 66, 67, 82, 85, 89]
+    # 70, 153 and 207 since the adoption of 23 October 2026 made these sides their houses
+    # (think-ot5c).
+    assert equal == [
+        5,
+        10,
+        18,
+        19,
+        26,
+        27,
+        38,
+        40,
+        51,
+        52,
+        65,
+        66,
+        67,
+        70,
+        82,
+        85,
+        89,
+        153,
+        207,
+    ]
     # The record compares each side with the case as it now stands. The adoption of 15
     # October 2026 moved 302 to issue 583's certificate (T-181), smaller than the algebraic
     # side there, as the pending row for #583 already said, and that of 19 October 2026
@@ -486,7 +508,8 @@ def test_the_574_algebraic_sides_against_the_case_records() -> None:
     # issue-668 certificates (T-196), below the 17/2 + 5*sqrt(2) and 11 + 4*sqrt(2) PR #574
     # states there, and that of 21 October 2026 moved 260 on to Francisco Couzo's issue-678
     # certificate (T-223), and that of 22 October 2026 moved 227, 229 and 260 on to Evan
-    # Daniel's regularized views (T-225); every other side is at or below its case.
+    # Daniel's regularized views (T-225), and that of 23 October 2026 moved 302 on to issue
+    # 639's exact form (T-193); every other side is at or below its case.
     assert {n for n, row in rows.items() if row["case"]["verified_relation"] == "above"} == {
         227,
         229,
@@ -501,7 +524,8 @@ def test_the_574_algebraic_sides_against_the_case_records() -> None:
         for n, row in rows.items()
         if n not in {227, 229, 260, 302}
     )
-    assert sorted(n for n, row in rows.items() if row["below_every_other"]) == [207]
+    # 207 was below every other report until its side became the house there.
+    assert sorted(n for n, row in rows.items() if row["below_every_other"]) == []
     assert rows[302]["pending"]
     assert any(
         item["report"] == "#583" and item["relation"] == "above"

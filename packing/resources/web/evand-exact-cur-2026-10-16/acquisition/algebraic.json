@@ -1,0 +1,70 @@
+{
+  "format": "algebraic-witness-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/639",
+  "author": "Evan Daniel",
+  "source_key": "[Daniel exact current records 2026-10-16]",
+  "receipt_format": "evand-639-algebraic-route1-v1",
+  "witness_prefix": "W-evand-639-alg-n",
+  "claim_limitations": "Complete exact configuration over a number field of issue 639 at 7d1407a, the upstream gzip retained in the packet and bound to the SHA-256 its manifest pins; each square's basis computed here exactly in the field from the form's half-angle tangent and quarter turns. Decided here on sqpack exact_verify over the witness's field, beside the source's own checker run unchanged (T-193's replay); no second route over a number field is maintained. Finite construction feasibility only; an exact form of a packing others found, with no novelty, priority, local minimum, rigidity or global optimality claim.",
+  "read_on": "2026-10-23",
+  "read_at_main": "44df28b07b87bf131c4d1a5f3aebdc055cb20d61",
+  "witnesses": [
+    {
+      "n": 102,
+      "path": "search/exact/cur/data/n-102.minpoly.json.gz",
+      "form": "evand-exact-minpoly-v1",
+      "fact": "facts/alg-n-102.yaml",
+      "degree": 4,
+      "first_committed": "2026-10-16T03:30:10Z"
+    },
+    {
+      "n": 123,
+      "path": "search/exact/cur/data/n-123.minpoly.json.gz",
+      "form": "evand-exact-minpoly-v1",
+      "fact": "facts/alg-n-123.yaml",
+      "degree": 6,
+      "first_committed": "2026-10-16T03:30:10Z"
+    },
+    {
+      "n": 258,
+      "path": "search/exact/cur/data/n-258.minpoly.json.gz",
+      "form": "evand-exact-minpoly-v1",
+      "fact": "facts/alg-n-258.yaml",
+      "degree": 8,
+      "first_committed": "2026-10-16T03:30:10Z"
+    },
+    {
+      "n": 259,
+      "path": "search/exact/cur/data/n-259.minpoly.json.gz",
+      "form": "evand-exact-minpoly-v1",
+      "fact": "facts/alg-n-259.yaml",
+      "degree": 6,
+      "first_committed": "2026-10-16T03:30:10Z"
+    },
+    {
+      "n": 295,
+      "path": "search/exact/cur/data/n-295.minpoly.json.gz",
+      "form": "evand-exact-minpoly-v1",
+      "fact": "facts/alg-n-295.yaml",
+      "degree": 2,
+      "first_committed": "2026-10-16T03:30:10Z"
+    },
+    {
+      "n": 302,
+      "path": "search/exact/cur/data/n-302.minpoly.json.gz",
+      "form": "evand-exact-minpoly-v1",
+      "fact": "facts/alg-n-302.yaml",
+      "degree": 7,
+      "first_committed": "2026-10-16T03:30:10Z"
+    }
+  ],
+  "replayed": [
+    102,
+    123,
+    258,
+    259,
+    295,
+    302
+  ],
+  "pending": []
+}

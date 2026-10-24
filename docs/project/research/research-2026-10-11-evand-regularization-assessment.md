@@ -38,7 +38,11 @@ against `packing/atlas/known-best/regularized/index.json` at `5c9f4f2`, and stay
 written. The index has moved since with main’s records: on 12 October 2026, after #518
 and #553, it reads 71 regularized, 181 unchanged and 72 refused, 42 of them with every
 tilt at 45 degrees and 30 with another (`compare_evand_regularization refused-tilts`).
-The owner answered on 12 October 2026, question 3 first;
+Since 23 October 2026 the exact house at $n = 259$ holds square 229 at
+$5.21 \times 10^{-7}$ degrees from the axis, which the command neither rounds nor
+refuses: its `KNOWN_TILTS` records that tilt with the bead that owes the house’s
+regularization (think-mbdw), and the command reports the record as held and splits the
+rest. The owner answered on 12 October 2026, question 3 first;
 [section 9 of the regularization policy](../policies/regularization-policy.md#9-owner-decisions)
 records each answer, and the default it applies where none is recorded.
 think-ux1v is carried out in the stacked pull requests #509 to #559.

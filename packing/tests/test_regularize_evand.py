@@ -69,7 +69,9 @@ def test_decimal_input_carries_the_witness_strings_verbatim() -> None:
 
 
 def test_rational_input_is_its_exact_values_to_fifty_digits() -> None:
-    source = witness(70)
+    # n = 84, a rational certificate (T-174), since 70's house became algebraic on 23
+    # October 2026 (think-ot5c).
+    source = witness(84)
     assert source["scalar"]["kind"] == "rational"
     _n, side, rows = drive.read_input(drive.input_text(source))
     squares, exact_side = materialize_exact_witness(source)
@@ -113,12 +115,13 @@ def test_input_agrees_with_upstreams_batch_input(n: int) -> None:
 
 
 def test_witness_frame_is_the_exact_pose_at_s_w_to_eighty_digits() -> None:
-    """`--frame witness` hands the regularizer the policy's frame: here n = 70's exact pose."""
-    source = witness(70)
+    """`--frame witness` hands the regularizer the policy's frame: here n = 84's exact pose,
+    a rational certificate (T-174)."""
+    source = witness(84)
     frame = drive.source_frame(source)
     assert frame.side is not None
     n, side, rows = drive.read_input(drive.frame_text(source, frame))
-    assert n == 70
+    assert n == 84
     assert abs(Fraction(side) - frame.side) < Fraction(1, 10**78)
     for (x, y, _degrees), (cx, cy, _c, _s) in zip(rows, frame.placements, strict=True):
         assert abs(Fraction(x) - cx) < Fraction(1, 10**78)
