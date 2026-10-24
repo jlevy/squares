@@ -10124,6 +10124,35 @@ issues:
         verification: V2
         confirmation: C1
         status: reviewed
+    - url: https://github.com/jlevy/squares/issues/603#issuecomment-6383665237
+      date: '2026-10-24'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: excess-theorem
+        id: T-163
+        verification: V3
+        confirmation: C1
+        status: reviewed
+      - result: excess-theorem
+        id: E-fang-excess-pieces-exact-replay
+        status: confirmed
+      - result: note-v08-lean-2026-10-18
+        id: T-163
+        verification: V3
+        confirmation: C1
+        status: reviewed
+      - result: note-v08-lean-2026-10-18
+        id: E-fang-excess-lean-report
+        status: recorded
+      - result: note-v09-doi-2026-10-19
+        id: T-163
+        verification: V3
+        confirmation: C1
+        status: reviewed
+      - result: note-v09-doi-2026-10-19
+        id: E-fang-excess-note-proof
+        status: recorded
     close_when: The import and its disposition are on main, the owner has posted the resulting state with
       the entry's id, and the review and replay that would raise its rungs are owned by its bead; optimality
       is outside this request.
@@ -10131,6 +10160,19 @@ issues:
       Fang's comment of 2026-10-24T01:23:05Z (issuecomment-6378113855) answers the owner's
       question of 19 October with his X handle: it is social and carries no result content, so
       nothing is read into the record from it.
+
+      The follow-up posted at 2026-10-24T11:29:46Z (issuecomment-6383665237), after #781 merged
+      (830dfb470) and its Pages deployment was checked (run 40089385626, its deploy and
+      verify-deployment jobs included; result/t-163.html read against it), reported T-163 at
+      V3/C1, reviewed: the note, draft v0.9 (DOI 10.5281/zenodo.23463481), retained and
+      recorded as a published proof (E-fang-excess-note-proof), and its 18 pieces replayed here
+      on the 14 October review's exact checker, all strict-valid, the least squeeze 0.000690...
+      at 308 (E-fang-excess-pieces-exact-replay); the Lean proof at squarepack-lean 947bdae
+      retained and not built (E-fang-excess-lean-report); that the note's theorems match
+      T-163's statements; the gap between jExc and F(n) from n = 52; and two editorial points
+      for the author. It said C3 waits on a build of Evan Daniel's Lean proof (T-236, about
+      1.5 to 3 CPU-hours) and C4 on a stage 4 review of the note's proofs with that build and
+      a human oversight record, and that nothing is needed from him. The issue stays open.
   - number: 643
     title: 's(k² − 4) = k for every k ≥ 8 in the Lean kernel: ValidTilt9 (Hosono, after Daniel): tracking
       an unreported result'
