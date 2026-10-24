@@ -1,0 +1,92 @@
+{
+ "status": "VERIFIED",
+ "directions": 2073,
+ "failed": 0,
+ "candidate_digest": "7a292c496d287d9eeac7738a220baf8791743885285bafc7735dd00ab618e070",
+ "file_sha256": "20dcda3541e139f79a9aec6e3bd469bb5dc8ccbb2c837aa18d49a0e708e5fe90",
+ "receipt": {
+  "schema": "fine-net-check2-receipt/v1",
+  "status": "VERIFIED",
+  "exit": 0,
+  "n": 19,
+  "L": "4.8275",
+  "B": "0.9998",
+  "proof_net": {
+   "step": "1/5002",
+   "last": 2072
+  },
+  "total_mass": "1899999/100000",
+  "directions_expected": 2073,
+  "directions_checked": 2073,
+  "directions_verified": 2073,
+  "directions_failed": 0,
+  "candidate_digest": "7a292c496d287d9eeac7738a220baf8791743885285bafc7735dd00ab618e070",
+  "file_sha256": "20dcda3541e139f79a9aec6e3bd469bb5dc8ccbb2c837aa18d49a0e708e5fe90",
+  "input_sha256": "20dcda3541e139f79a9aec6e3bd469bb5dc8ccbb2c837aa18d49a0e708e5fe90",
+  "verifier": {
+   "name": "sqverify-fast",
+   "source_sha256": "ab6e33e164dbc5c32b40349ba55981b58e630b5eef59534196a69d259404fd7c",
+   "rustc": "rustc 1.98.0 (88d9e12ae 2026-08-18)",
+   "target": "x86_64-unknown-linux-gnu",
+   "binary_sha256": "ec04d332dd39c02ce4e6de86846f93345645e16c580b62bc1dc110deeef73230"
+  },
+  "threads": 6,
+  "started_utc": "2026-10-06T08:40:02+00:00",
+  "seconds": 671.3,
+  "control": {
+   "kind": "every mass times factor, 32 directions spread over the net",
+   "tries": [
+    {
+     "factor": "197/200",
+     "status": "REFUSED",
+     "exit": 1,
+     "directions": 32,
+     "refused": 32,
+     "exact_below_threshold": 31,
+     "seconds": 1.6
+    }
+   ],
+   "refused": true
+  },
+  "verdict": "PASS"
+ },
+ "candidate": "candidate.json",
+ "verifier_summary": {
+  "build": {
+   "profile": "release",
+   "rustc": "rustc 1.98.0 (88d9e12ae 2026-08-18)",
+   "source_sha256": "ab6e33e164dbc5c32b40349ba55981b58e630b5eef59534196a69d259404fd7c",
+   "target": "x86_64-unknown-linux-gnu"
+  },
+  "direction_cpu_seconds": 3583.9072331650063,
+  "direction_seconds": 4020.4308118219956,
+  "directions": 2073,
+  "fault_injected_at_box": null,
+  "kind": "sqverify-fast-summary/v1",
+  "nodes": 377472588,
+  "premises": {
+   "B": "4999/5000",
+   "D": "1/5002",
+   "L": "1931/400",
+   "angle_count": 2073,
+   "centre_domain": "per-bin",
+   "expanded_points": 0,
+   "expanded_rectangles": 2776,
+   "expanded_segments": 0,
+   "format": "M",
+   "input_sha256": "20dcda3541e139f79a9aec6e3bd469bb5dc8ccbb2c837aa18d49a0e708e5fe90",
+   "mass_below_n": "1/100000",
+   "mass_exact": "1899999/100000",
+   "n": 19,
+   "source_rectangles": 347
+  },
+  "refused_directions": [],
+  "status": "VERIFIED",
+  "threads": 6,
+  "threshold": "1",
+  "wall_seconds": 671.129503468
+ },
+ "verifier": "sqverify-fast (jlevy/squares packing/sqverify_fast, branch wand125/sqverify-proof-net, commit fe12e036c, with proof_net support; published as fine_net_verifier/ in wand125/square-packing-tools, commit 5fba675)",
+ "checked_by": "an independent second-system check (built from the certificate specification only, without reading the search code)",
+ "copied": "2026-10-06 17:52"
+}

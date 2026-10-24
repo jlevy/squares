@@ -85,6 +85,17 @@ Raw candidate, source, logs and complete release bytes remain outside live Git.
 This follow-up executes no author code and changes no standing bound or assurance
 rating.
 
+## Release Members, 23 October
+
+The release members of the four certificates T-233 registers, `mixed_n19_L48275`,
+`mixed_n20_L49125`, `mixed_n26_L5555` and the follow-up’s `mixed_n27_L5655`, are
+retained in the
+[release packet](../wand125-fine-net-lower-bounds-446-release-2026-10-08/README.md),
+pinned at `bf85d6b`: each asset’s candidate, receipts and logs, held to the stored sizes
+and digests this packet records, with the maintained premises receipts. This packet and
+its catalogue are unchanged; the n = 27 value of $2261/400$ and the n = 28, 29 and 31
+certificates stay here only.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

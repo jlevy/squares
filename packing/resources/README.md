@@ -958,6 +958,10 @@ n28, n29 and n31. The
 [authored factual packet](web/wand125-fine-net-lower-bounds-2026-10-08/README.md)
 records the reported bounds and complete source references.
 Independent whole-net replay and controls remain pending.
+The [release packet](web/wand125-fine-net-lower-bounds-446-release-2026-10-08/README.md)
+retains, at revision `bf85d6b` and under OR-18, the candidates, receipts and logs of the
+four certificates T-233 registers (n19, n20, n26 and the n27 follow-up), with their
+maintained premise checks.
 
 **[wand125 fine-net n29 2026-10-10]**: Hosono’s later n29 certificate, `mixed_n29_L582`,
 reports $s(29) \ge 291/50 = 5.82$ on the same 2,073-direction net, superseding the
@@ -975,6 +979,16 @@ revisions `36b85b9` and `ff9f269` and their release assets by digest, with the
 maintained premise checks and diagnostic eight-direction samples.
 T-142 and T-143 record them at V0/C0; a complete replay and whole-net controls remain
 pending.
+
+**[wand125 fine-net n31 2026-10-11]**: Hosono’s n31 certificate, `mixed_n31_L59775`,
+reports $s(31) \ge 2391/400 = 5.9775$ on the same 2,073-direction net, above both lower
+lanes’ $2381/400$ and #446’s unadopted $597/100$; no issue reports it.
+The [packet](web/wand125-fine-net-n31-2026-10-11/README.md) retains the directory’s MIT
+documents at revision `23e3186` and, under OR-18, the release asset’s candidate,
+receipts and logs, with the maintained premise check and a diagnostic eight-direction
+sample; the nested verifier archive is pinned by digest.
+T-232 records the bound at V3/C3 after the complete maintained replay, its whole-net
+controls and the mathematical review of 23 October, and n31’s lower lanes hold it.
 
 **[wand125 fine-net n37 n39 n44 2026-10-13]**: Hosono’s n37, n39 and n44 certificates,
 `mixed_n37_L64975`, `mixed_n39_L66625` and `mixed_n44_L69975`, report

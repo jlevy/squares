@@ -1,0 +1,15 @@
+{
+ "kind": "review-2026-10-23-n31-geometry-selftest/v1",
+ "status": "PASS",
+ "counts": {
+  "area": 18000,
+  "chord_sigma": 18000,
+  "chord_omega": 18000,
+  "nonzero_area": 4346,
+  "partial_area": 3570
+ },
+ "cases_per_direction": 2000,
+ "program_sha256": "ec99f2dc46183da03fdd3e0d041c15884c9b0c102af702ae2e9513ae60389b56",
+ "geometry_sha256": "c30893c2ad0389d910533f2f1a345aeec9c64897ba5a917ddedfc2448b628b8e",
+ "cpu_seconds": 2.65
+}

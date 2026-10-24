@@ -6099,7 +6099,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-16'
+  lastmod: '2026-10-23'
   status: live
 - path: cases/190.html
   canonical: cases/190.html
@@ -6195,7 +6195,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-07'
+  lastmod: '2026-10-23'
   status: live
 - path: cases/200.html
   canonical: cases/200.html
@@ -6723,7 +6723,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-06'
+  lastmod: '2026-10-23'
   status: live
 - path: cases/260.html
   canonical: cases/260.html
@@ -6811,7 +6811,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-06'
+  lastmod: '2026-10-23'
   status: live
 - path: cases/270.html
   canonical: cases/270.html
@@ -7171,7 +7171,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-07'
+  lastmod: '2026-10-23'
   status: live
 - path: cases/310.html
   canonical: cases/310.html
@@ -20761,6 +20761,94 @@ urls:
     - docs/project/reviews/review-2026-10-23-mishapolk-n204.md
     - packing/resources/web/mishapolk-n204-2026-10-22/review/review-2026-10-23/README.md
     - packing/resources/web/mishapolk-n204-2026-10-22/review/review-2026-10-23/outputs/lineage.json
+- path: result/t-232.html
+  canonical: result/t-232.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-23'
+  lastmod: '2026-10-23'
+  status: live
+  identity:
+    kind: lower-bound
+    scope:
+      n_values:
+      - 31
+    established: null
+    attribution:
+      source_keys:
+      - '[wand125 fine-net n31 2026-10-11]'
+      published: '2026-10-11'
+    builds_on: null
+    evidence:
+    - E-wand125-fine-net-n31-59775-report
+    - E-wand125-fine-net-n31-59775-sqverify-fast-replay
+    artifacts:
+    - packing/resources/web/wand125-fine-net-n31-2026-10-11/README.md
+    - packing/resources/web/wand125-fine-net-n31-2026-10-11/acquisition/sources.json
+    - packing/resources/web/wand125-fine-net-n31-2026-10-11/acquisition/release-assets.json
+    - packing/resources/web/wand125-fine-net-n31-2026-10-11/release/certificates/mixed_n31_L59775/candidate.json.gz
+    - packing/resources/web/wand125-fine-net-n31-2026-10-11/release/certificates/mixed_n31_L59775/check2/receipt.json
+    - packing/resources/web/wand125-fine-net-n31-2026-10-11/receipts/premises-n31.json
+    - packing/resources/web/wand125-fine-net-n31-2026-10-11/receipts/sample-diagnostic-n31.json
+    - packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/README.md
+    - docs/project/reviews/review-2026-10-23-wand125-n31-fine-net.md
+    - packing/benchmarks/measure-verifier/census-mixed/census.json
+    - packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-n31-2026-10-11/mixed_n31_L59775.jsonl.gz
+    - packing/devtools/fine_net_followup.py
+- path: result/t-233.html
+  canonical: result/t-233.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-23'
+  lastmod: '2026-10-23'
+  status: live
+  identity:
+    kind: lower-bound
+    scope:
+      n_values:
+      - 19
+      - 20
+      - 26
+      - 27
+    established: null
+    attribution:
+      source_keys:
+      - '[wand125 fine-net lower bounds 2026-10-08]'
+      published: '2026-10-08'
+    builds_on: null
+    evidence:
+    - E-wand125-fine-net-446-n19-n20-n26-report
+    - E-wand125-fine-net-n27-5655-followup-report
+    artifacts:
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-08/README.md
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-08/reported-catalogue.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-08/reported-n27-followup.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-08/source-manifest.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/README.md
+    - packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/acquisition/sources.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/acquisition/release-assets.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/release/certificates/mixed_n19_L48275/candidate.json.gz
+    - packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/release/certificates/mixed_n20_L49125/candidate.json.gz
+    - packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/release/certificates/mixed_n26_L5555/candidate.json.gz
+    - packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/release/certificates/mixed_n27_L5655/candidate.json.gz
+    - packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/receipts/premises-n19.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/receipts/premises-n20.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/receipts/premises-n26.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/receipts/premises-n27.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/README.md
+    - docs/project/reviews/review-2026-10-23-wand125-446-fine-net.md
+    - packing/devtools/fine_net_followup.py
+    - packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-446-release-2026-10-08/README.md
+    - packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-446-release-2026-10-08/mixed_n19_L48275.jsonl.gz
+    - packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-446-release-2026-10-08/mixed_n19_L48275.control.json
+    - packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-446-release-2026-10-08/mixed_n20_L49125.jsonl.gz
+    - packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-446-release-2026-10-08/mixed_n20_L49125.control.json
+    - packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-446-release-2026-10-08/mixed_n26_L5555.jsonl.gz
+    - packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-446-release-2026-10-08/mixed_n26_L5555.control-failed-v2.json
+    - packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-446-release-2026-10-08/mixed_n27_L5655.jsonl.gz
+    - packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-446-release-2026-10-08/mixed_n27_L5655.control.json
 - path: result/t-234.html
   canonical: result/t-234.html
   kind: result
