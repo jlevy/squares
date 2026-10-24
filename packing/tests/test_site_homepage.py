@@ -1172,11 +1172,11 @@ def test_home_news_box_opens_on_its_levels_and_its_compact_filter_widens_it(
     browser: Any, payloads: dict[str, bytes], width: int
 ) -> None:
     """The box opens on `news_highlights.default_levels`, the newest `LIMIT` there. Its
-    filter is the archive's significance widget, smaller, at the right and above the
-    cards. A keyboard press changes the levels and the box shows the newest `LIMIT` at
-    them, or says nothing matches; its "All News" link carries the choice to the archive,
-    which opens on it. In both schemes a pressed level reads apart from the others.
-    Without scripts the box shows its opening levels and no filter."""
+    filter is the archive's significance widget at the shared chooser size, lighter, at
+    the right and above the cards. A keyboard press changes the levels and the box shows
+    the newest `LIMIT` at them, or says nothing matches; its "All News" link carries the
+    choice to the archive, which opens on it. In both schemes a pressed level reads apart
+    from the others. Without scripts the box shows its opening levels and no filter."""
     document = render_changelog.load()
     carried = news_highlights.carried(document)
     levels = set(news_highlights.default_levels(document))
@@ -1273,9 +1273,10 @@ def test_home_news_box_opens_on_its_levels_and_its_compact_filter_widens_it(
         archive = page.evaluate(NEWS_FILTERS)
         assert archive["scores"] == ["3"]
         archive_look = look(page, 5)["appearance"]
-        assert float(compact["font-size"].removesuffix("px")) < float(
-            archive_look["font-size"].removesuffix("px")
-        )
+        # One small chooser size on every page (the owner, 23 October 2026); the box's
+        # form is quieter by its weight alone.
+        assert compact["font-size"] == archive_look["font-size"]
+        assert int(compact["font-weight"]) < int(archive_look["font-weight"])
         assert compact["font-family"] == archive_look["font-family"]
         static = browser.new_page(
             viewport={"width": width, "height": 900}, java_script_enabled=False

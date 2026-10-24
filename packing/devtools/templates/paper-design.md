@@ -1242,10 +1242,10 @@ contributor articles use their component sheets and the same text tokens.
   otherwise on S4 and S5, decided at render time and never from the clock
   (`news_highlights.default_levels`; the owner, 22 October 2026, and #736’s review A).
   Above the cards, at the right, sits the archive’s own significance filter in its
-  compact form (`render_changelog.news_filters(compact=True)`): the same buttons,
-  smaller and lighter through the `--site-chooser-compact-scale` token, with no topics
-  or reset, and the archive’s live count kept out of sight for screen readers.
-  With no article to show, the box says “No news yet.”
+  compact form (`render_changelog.news_filters(compact=True)`): the same buttons, at the
+  shared small chooser’s size and height (Small choosers, below) and a lighter weight,
+  with no topics or reset, and the archive’s live count kept out of sight for screen
+  readers. With no article to show, the box says “No news yet.”
   and draws no filter.
   A press shows the newest three at the chosen levels; the box carries the newest three
   of each level for that, hidden until chosen, and keeps its opening levels without
