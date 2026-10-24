@@ -23,9 +23,12 @@
     }
     // Only known optional controls/content may be absent initially. A generic
     // hidden ancestor is primary content and must remain in the readability sample.
+    // A preview's News card outside its opening levels is filtered as a table row is:
+    // the home page's box carries more articles than it shows, for its filter.
     const held = element.closest(
       ".site-table tbody tr[hidden], .site-table-tools[hidden], " +
-        ".site-table-tools label[hidden], .cert-figure[data-cert][hidden]",
+        ".site-table-tools label[hidden], .cert-figure[data-cert][hidden], " +
+        "[data-news-limit] > .site-news-day[hidden]",
     );
     // CSS may reveal a filtered row (including the no-script view) or certificate
     // while retaining its hidden attribute. Inspect that content when it has a box.
