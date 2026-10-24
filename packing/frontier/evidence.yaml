@@ -42310,7 +42310,15 @@ evidence:
       the sqpack rational witness verifier and the independent rational corner checker,
       share certificate parsing, half-angle conversion, Fraction arithmetic and the
       separating-axis method. No two independent methods, human oversight or optimality is
-      claimed.
+      claimed. The author's answer of 23 October 2026 on the issue
+      (issuecomment-6375905012), retained in the packet's declaration, adds two statements
+      of his own: the search began at T-186's certificate, Mykhailo Polkovskyi's
+      square-204.cert at 70a033f, through its decimal form n204.txt at 4e4c8ce and three hop
+      jobs, and he calls sqpack/verify.py's verify_packing with bucket=True on exact corners
+      in the closed box, which counts 32 boundary corner coordinates and no touching pair.
+      The packet's measure/seed-identity.json holds both to the retained files: the seed's
+      digests and its pairing with T-186's packing under the identity, within 3.94e-12, and
+      the same call's count of 32. It decides nothing about the bound.
   - id: E-couzo-672-certificate-report
     claim: upper-bound
     scope:
