@@ -5,14 +5,14 @@ title: "Explainer PDF: one KaTeX glyph's baseline moves between page loads, past
 kind: bug
 status: in_progress
 priority: 1
-version: 4
+version: 5
 delegate: ci-followups
 labels: []
 dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-09-27T08:02:16.543Z
-updated_at: 2026-10-23T05:06:48.068Z
+updated_at: 2026-10-24T13:29:20.785Z
 started_at: 2026-10-23T04:52:09.582Z
 ---
 PR 235 pull_request run 36126482461 (attempt 1, head de282a855, records-only) failed the Pages `pdf` job at `render_explainer_pdf --check-artifact`: `849931 then 849931 bytes, normalised; length delta 0 ... first difference at byte 514532, in object 144`, inside a FlateDecode stream. The unchanged rerun (attempt 2) passed, and `pages-required` then refused the partial rerun as unmeasurable, by design. D-509 records it; it recurs D-490 (think-ptit, think-a5qp).
@@ -30,3 +30,5 @@ Open: the cause of per-load placement of one glyph; whether the published artifa
 Coordinator authorized exactly one targeted retry on unchanged head after the workflow became terminal; gh run rerun39902176281 --job120246470385 succeeded. Attempt2 job120247726122 rendered 882657 bytes with two of two page loads agreeing, then --check-artifact passed: stored artifact and one fresh render agreed, 24 pages and19 embedded fonts. The job was subsequently cancelled at04:55:43UTC when the coordinator pushed disposition-only successor4f00b6f70e41a934ccada5438d9fb02ba8508107. Thus the draw/artifact checks passed in this retry, but the job/workflow has no terminal green verdict; no source or gate contract was changed and no additional retry was attempted. Retry: https://github.com/jlevy/squares/actions/runs/39902176281/job/120247726122 . Log retained at /Volumes/spud-ext2/agent-scratch/site-navigation-20261022/739e283b6-pages-pdf-retry.log . Coordinator has a separate read-only tier-audit lane for the user's request to move nondeterministic publication work out of routine fast checks; that policy decision does not alter frozen PR743 gates.
 
 Follow-on first-attempt outcome: disposition-only head 4f00b6f70e41a934ccada5438d9fb02ba8508107 passed the entire PDF job 120248890432 in Certificate page run 39902903136, including Draw PDF and check-artifact; the workflow's pages-required aggregate also passed. Job: https://github.com/jlevy/squares/actions/runs/39902903136/job/120248890432 . No retry or PDF/gate source change was made on this head. This passing observation does not resolve the concrete three-distinct-load failure above or its underlying cause.
+
+2026-10-24 coord-intake-1024: recurred on main's post-merge Pages run for #789's merge 2ec489d1e (run 40097882450, attempt 1, job 120884242250 pdf): 'no two of 3 page loads agreed' (887804, 887804 and 887805 normalised bytes; first differences at object 171 and object 88), so deploy and verify-deployment were skipped. The PR's own CI passed the pdf job at 0329f73d6; the change touched no explainer input. Failed jobs re-run once (attempt 2).
