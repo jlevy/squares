@@ -245,7 +245,9 @@ The record credits each packing to its finder, as T-146 did; at 227 the source�
 Francisco Couzo, whose #672 refines de Winter’s packing:
 
 - Francisco Couzo at 204 and 260, the packings of issue #678 (T-223); at 204 his source
-  credits Mykhailo Polkovskyi’s construction, and at 260 it says it seeded Joost de
+  credits Mykhailo Polkovskyi’s construction, which Couzo’s answer of 23 October on #670
+  traces to Polkovskyi’s T-186 packing, his refinement of Daniil Ostashev’s packing as
+  PingYou Ltd refined it, and at 260 it says it seeded Joost de
   Winter’s #668 packing from Evan Daniel’s exact-form certificate;
 - Joost de Winter at 227, his #668 packing (T-196) as refined in Francisco Couzo’s #672
   report (T-227), measured above, which Couzo’s manifest credits to him, retaining de

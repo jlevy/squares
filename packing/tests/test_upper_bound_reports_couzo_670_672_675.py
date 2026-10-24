@@ -15,6 +15,7 @@ only; none needs the network.
 from __future__ import annotations
 
 import hashlib
+import importlib.util
 import json
 from fractions import Fraction
 from pathlib import Path
@@ -181,6 +182,45 @@ def test_each_atom_says_which_positives_touch_the_box() -> None:
         replay = " ".join(planned["limitations"].split()).split(" Independent review")[0]
         assert recorded.startswith(replay), name
         assert "names this repository's sqpack/verify.py as its first checker" in recorded
+
+
+def test_the_seed_identity_receipt_rebuilds_from_the_retained_files(tmp_path: Path) -> None:
+    """Couzo's answers of 23 October on #670 and #675 (think-t5hc), held to the packets.
+    Every digest prefix the answers print is the SHA-256 a packet's manifest records, and
+    4e4c8ce's certificates/best/n204.cert is T-186's square-204.cert byte for byte; the
+    printed digits of T-186's side are its exact side's; n204.txt at 4e4c8ce, the seed the
+    answer on #670 names, pairs one to one with T-186's 204 packing under the identity,
+    every centre within 4e-12, at a printed side 2.78e-12 above T-186's; and the author's
+    call, verify_packing(..., bucket=True) on exact corners in the closed box, counts the
+    32 and 88 boundary corner coordinates the answers report, with no touching pair. The
+    packet's program rebuilds the committed receipt from the retained files, byte for
+    byte, in about a second."""
+    program = _packet("couzo-issue670-2026-10-17") / "measure/seed-identity.py"
+    spec = importlib.util.spec_from_file_location("couzo_670_seed_identity", program)
+    assert spec is not None
+    assert spec.loader is not None
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    out = tmp_path / "seed-identity.json"
+    assert module.main(["--out", str(out)]) == 0
+    committed = program.with_name("seed-identity.json")
+    assert out.read_bytes() == committed.read_bytes()
+    receipt = _json(committed)
+    assert all(row["matches"] for row in receipt["digests"])
+    assert receipt["t186_side"]["prefix_matches"]
+    assert receipt["seed"]["read_side_is_printed"]
+    (pair,) = receipt["pairs"]
+    nearest = pair["nearest_centre"]
+    assert nearest["one_to_one"]
+    assert nearest["symmetry"] == 0
+    assert float(nearest["largest_displacement"]) < 4e-12
+    assert nearest["moved_beyond"]["1e-9"] == 0
+    assert 0 < Fraction(pair["side_difference_exact"]) < Fraction(3, 10**12)
+    for call in receipt["checker_call"].values():
+        assert call["valid"]
+        assert call["failures"] == 0
+        assert call["touching_pairs"] == 0
+        assert call["container_contacts"] == call["reported_container_contacts"]
 
 
 @pytest.mark.slow

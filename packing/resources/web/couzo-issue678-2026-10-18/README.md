@@ -443,7 +443,9 @@ Francisco Couzo wrote the source, which states no licence for its data; the cert
 are kept as factual data and nothing of the source is relicensed.
 The manifest credits Couzo at every row and keeps seed and construction credits beside
 it: Joost de Winter’s constructions at 16 rows (260, 464, 555, 602, 652 to 654, 705,
-706, 760, 815, 872, 874, 933, 934 and 998), Mykhailo Polkovskyi’s at 204, Evan Daniel’s
+706, 760, 815, 872, 874, 933, 934 and 998), Mykhailo Polkovskyi’s at 204 (T-186’s
+packing, his refinement of Daniil Ostashev’s as PingYou Ltd refined it, by Couzo’s answer
+of 23 October on #670, since this 204 refines #670’s packing), Evan Daniel’s
 (after Kevin Fang) at 343, Kevin Fang’s rectangle and gluing with PingYou Ltd’s square
 input at 703, and Couzo’s own earlier packings elsewhere.
 The issue names de Winter’s Young-corner, slipped-ribbon and four-block families and

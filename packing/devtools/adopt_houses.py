@@ -1409,15 +1409,20 @@ CREDITS: dict[int, Credit] = {
     # issue 719 says the solve started from Couzo's #678 certificate, not from Evan Daniel's
     # view (T-225), so T-229's item names T-223 and Daniel is no antecedent here (think-xyhn).
     # The packing stays with Couzo, whose source's manifest credits Polkovskyi's own
-    # construction as its seed (A11 of #716). The pass of 24 October 2026 adopted the
+    # construction as its seed (A11 of #716); Couzo's answer of 23 October 2026 on #670
+    # traces that seed to T-186's packing, Polkovskyi's refinement of Ostashev's as PingYou
+    # Ltd refined it, three rounds of basin hopping before #670's certificate, and the
+    # #670 packet's seed measurement pairs the seed file with T-186's packing (think-t5hc).
+    # The pass of 24 October 2026 adopted the
     # release's other 204 file (T-231), T-229's packing at its solved side, which T-231's
     # item names, so the credit is the same; Evan Daniel's exact solver, measured as its
     # method by the 23 October review, is a method credit and no antecedent of the packing.
     204: Credit(
         (COUZO,),
         (POLKOVSKYI,),
-        "Mykhailo Polkovskyi’s re-solve of Francisco Couzo’s packing from a search Couzo’s "
-        "source seeded with Polkovskyi’s own n = 204 construction",
+        "Mykhailo Polkovskyi’s re-solve of Francisco Couzo’s packing from a search Couzo "
+        "says began at Polkovskyi’s own refinement of Daniil Ostashev’s n = 204 packing, as "
+        "PingYou Ltd refined it",
     ),
     # T-174's regularization of T-098's packing, measured one to one, no square moved
     # beyond 1e-12 (the 14 October review of PR 574).
