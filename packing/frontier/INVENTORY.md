@@ -8,8 +8,8 @@ ours, which rest on someone else's argument, and how far each has been checked.
 
 ## The short version
 
-- **732** evidence records. **412** are formal; **404** of those were established here. **12** are samples, counted separately.
-- **301** rest on an argument made elsewhere, of which **7** have been read by nobody here.
+- **737** evidence records. **412** are formal; **404** of those were established here. **12** are samples, counted separately.
+- **306** rest on an argument made elsewhere, of which **7** have been read by nobody here.
 - **1** formal record proves a theorem only under a hypothesis nothing here has replayed, and is verified as that implication alone: `E-k2m4-evand-bentz4-lean-build` (ValidTilt9).
 - **43** claim to be first established here. **14** make no novelty statement at all - not assessed, which is not the same as not novel.
 
@@ -747,6 +747,11 @@ results, it is a statement about what this repository has itself examined.
 | `E-couzo-23aff0c-beyond-horizon-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
 | `E-couzo-5a299b4-beyond-horizon-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
 | `E-mishapolk-732-beyond-horizon-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-n021-wand125-zero-margin-lean-report` | 0 | exact-value | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-n059-wand125-lean-kernel-report` | 0 | exact-value | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-fang-theorems-daniel-lean-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-small-n-chelokot-lean-report` | 0 | exact-value | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-small-n-daniel-rect-lean-report` | 0 | exact-value | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
 | `E-evand-gradec-local-minima-233-report` | 0 | derived-structure | reported | - | elsewhere | defect-found | previously-published | producer’s code | not recorded | `V-evand-gradec-py`, `V-evand-verify-exact` |
 | `E-wand125-fine-net-n31-59775-report` | 1 | lower-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | `V-wand125-sqverify-proof-net` |
 | `E-wand125-fine-net-446-n19-n20-n26-report` | 0 | lower-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | `V-wand125-sqverify-proof-net` |
@@ -758,10 +763,10 @@ results, it is a statement about what this repository has itself examined.
 
 ## What the register rests on
 
-- **assurance**: numerically-checked 5, reported 304, verified 423
-- **method**: exact-algebraic 231, interval-certified 175, numerical-multiprecision 5, proof-assistant-checked 6, proof-audited 4, published-proof 7, reported 304
-- **novelty**: apparently-novel 43, common-knowledge 4, not assessed 14, previously-published 671
-- **relationship to the producer's code**: generator 5, independent-implementation 257, not-applicable 33, same-implementation 398, shared-components 33, unknown-historical 6
+- **assurance**: numerically-checked 5, reported 309, verified 423
+- **method**: exact-algebraic 231, interval-certified 175, numerical-multiprecision 5, proof-assistant-checked 6, proof-audited 4, published-proof 7, reported 309
+- **novelty**: apparently-novel 43, common-knowledge 4, not assessed 14, previously-published 676
+- **relationship to the producer's code**: generator 5, independent-implementation 257, not-applicable 33, same-implementation 403, shared-components 33, unknown-historical 6
 
 The `cases` column is how many frontier records cite each piece of evidence, and it is the reason to read this table rather than count records. Ranked below are the *formal* records only: a `reported` record cited across the frontier may be a shared catalogue and is labelled as such, which is the register working rather than risk. The risk is a verified claim resting on an argument nobody has examined.
 

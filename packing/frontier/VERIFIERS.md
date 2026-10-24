@@ -26,7 +26,7 @@ second implementation agrees.
 ## The Short Version
 
 - **203** programs: **52** external and **151** first-party; **136** decide claims and **67** check premises.
-- **594** of **732** evidence entries name the programs that verified them: 283 reproduced with the producer’s code, 257 independently re-implemented, 33 re-implemented, sharing the producer’s components, 21 no relation: a proof, a derivation or a report.
+- **594** of **737** evidence entries name the programs that verified them: 283 reproduced with the producer’s code, 257 independently re-implemented, 33 re-implemented, sharing the producer’s components, 21 no relation: a proof, a derivation or a report.
 
 ## Programs
 
@@ -78,9 +78,9 @@ second implementation agrees.
 | [`V-overbeck-n17-capture-checkers`](#v-overbeck-n17-capture-checkers) | recompute_slice.py | Overbeck | external | decides | 2 | 1 |
 | [`V-overbeck-n17-tree-checkers`](#v-overbeck-n17-tree-checkers) | wxcheck_v30.py and wxcheck2_v30.js | Overbeck | external | decides | 2 | 1 |
 | [`V-fitzharding-n17-lean`](#v-fitzharding-n17-lean) | The sq17-lean Lean 4 development (Sq17Lean) | Fitzharding | external | decides | 2 | 1 |
-| [`V-check-basic-bounds`](#v-check-basic-bounds) | devtools.check_basic_bounds | Squares Project (Levy) | first-party | decides | 3 | 16 |
-| [`V-optimal-moduli`](#v-optimal-moduli) | cases.small_n.optimal_moduli | Squares Project (Levy) | first-party | decides | 1 | 0 |
-| [`V-sqpack-verify`](#v-sqpack-verify) | sqpack.verify | Squares Project (Levy) | first-party | decides | 90 | 79 |
+| [`V-check-basic-bounds`](#v-check-basic-bounds) | devtools.check_basic_bounds | Squares Project (Levy) | first-party | decides | 3 | 17 |
+| [`V-optimal-moduli`](#v-optimal-moduli) | cases.small_n.optimal_moduli | Squares Project (Levy) | first-party | decides | 1 | 1 |
+| [`V-sqpack-verify`](#v-sqpack-verify) | sqpack.verify | Squares Project (Levy) | first-party | decides | 90 | 80 |
 | [`V-check-rational-witness-independent`](#v-check-rational-witness-independent) | devtools.check_rational_witness_independent | Squares Project (Levy) | first-party | decides | 84 | 82 |
 | [`V-check-nagamochi-lemma1-counterexample`](#v-check-nagamochi-lemma1-counterexample) | devtools.check_nagamochi_lemma1_counterexample | Squares Project (Levy) | first-party | decides | 1 | 1 |
 | [`V-check-karakus-strip-measure`](#v-check-karakus-strip-measure) | devtools.check_karakus_strip_measure | Squares Project (Levy) | first-party | decides | 1 | 2 |
@@ -1193,8 +1193,8 @@ Derives and checks the elementary bounds exactly: the grid upper bound, the area
 
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
-| `E-basic-grid-upper` | replayed here | independently re-implemented | not recorded | T-008, T-051, T-052, T-053, T-054, T-055, T-062, T-063, T-064, T-066, T-067, T-081, T-084, T-086, T-184, T-191 |
-| `E-basic-area-lower` | replayed here | independently re-implemented | not recorded | - |
+| `E-basic-grid-upper` | replayed here | independently re-implemented | not recorded | T-008, T-051, T-052, T-053, T-054, T-055, T-062, T-063, T-064, T-066, T-067, T-081, T-084, T-086, T-184, T-191, T-237 |
+| `E-basic-area-lower` | replayed here | independently re-implemented | not recorded | T-237 |
 | `E-n012-monotonicity-lower` | replayed here | independently re-implemented | not recorded | - |
 
 ### `V-optimal-moduli`
@@ -1208,7 +1208,7 @@ Replays the exact optimal moduli for n = 2 to 4 and the side-2 lower bound.
 
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
-| `E-side2-center-lower` | replayed here | reproduced with the producer’s code | not recorded | - |
+| `E-side2-center-lower` | replayed here | reproduced with the producer’s code | not recorded | T-237 |
 
 ### `V-sqpack-verify`
 
@@ -1222,7 +1222,7 @@ Decides a packing pair by pair and wall by wall: by exact sign in a number field
 
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
-| `E-n005-gobel-upper` | replayed here | independently re-implemented | not recorded | - |
+| `E-n005-gobel-upper` | replayed here | independently re-implemented | not recorded | T-237 |
 | `E-n010-gobel-upper` | replayed here | independently re-implemented | not recorded | - |
 | `E-n040-gobel-upper` | replayed here | independently re-implemented | not recorded | - |
 | `E-gobel-family-upper` | replayed here | independently re-implemented | not recorded | - |
