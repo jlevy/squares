@@ -1683,6 +1683,22 @@ def held_reasons(record: Path = RECORD) -> dict[str, str]:
     }
 
 
+def owed_beads(record: Path = RECORD) -> dict[int, str]:
+    """By count, the bead that owes each `regularization-owed` count's regularization, as
+    its `SETTLED` entry's `owed` names it first, for the case record's note
+    (`regularized_drawings.case_note`, review A5 of #756). Read from the retained record
+    without measuring; a count whose entry names no bead is `--check-state`'s to fail."""
+    found = json.loads(record.read_text(encoding="utf-8"))
+    beads: dict[int, str] = {}
+    for row in found.get("states") or []:
+        held = SETTLED.get(int(row["n"]))
+        if row["state"] != OWED or held is None or held.owed is None:
+            continue
+        if bead := BEAD.match(held.owed):
+            beads[int(row["n"])] = bead[0]
+    return beads
+
+
 def _worse_words(goal: str) -> str:
     """What being worse on one goal of the improvement rule draws, in a reader's words."""
     name = improvement_rule.GOAL_NAMES[goal]

@@ -111,8 +111,11 @@ $defs:
       regularization of the house first, in the register's own terms (`by` the source's
       bibliography key, `of` the result that holds the packing it regularizes,
       `registered_in` the result whose `regularizations` records it, its `method` and
-      `side`), then this project's (`by: project`): the layer's generator, its credit
-      line, this project's `modifications` to Evan Daniel's regularizer where his method
+      `side`, and `kind: exact-solve` where the source's certificate is an exact solve of
+      that packing, a conversion to an exact packing and not a regularization, as issue
+      639's exact forms are, T-193's), then this project's (`by: project`): the layer's
+      generator, its credit line, this project's `modifications` to Evan Daniel's
+      regularizer where his method
       made the view (empty where none applied; absent for the project's own axis tool),
       the side relation, the registered result that holds the drawn packing (`of`, null
       where none does), the result that registers the drawn regularization itself where
@@ -145,6 +148,7 @@ $defs:
               items: {enum: [retry rungs]}
             method: {type: string, minLength: 1}
             side: {enum: [same, bound, solved]}
+            kind: {enum: [exact-solve]}
             of: {type: [string, 'null'], pattern: '^T-[0-9]{3}$'}
             registered_in: {type: string, pattern: '^T-[0-9]{3}$'}
             first_certified_in: {type: string, pattern: '^T-[0-9]{3}$'}

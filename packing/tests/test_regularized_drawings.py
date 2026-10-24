@@ -362,6 +362,52 @@ def test_a_case_note_credits_the_regularizer_and_is_never_a_result() -> None:
     )
 
 
+def test_an_exact_solve_of_the_house_is_called_one_and_an_owed_regularization_is_said() -> None:
+    """The owner, 23 October 2026: convert inexact packings to exact ones, then
+    regularize, and track regularization separately. Issue 639's exact forms (T-193) solve
+    T-174's or T-186's packing to its algebraic side and rearrange nothing, so the case
+    record calls the house an exact solve, not a regularization, and marks the item
+    `kind: exact-solve`, which the case page labels. Where the count's regularization is
+    owed (`default_drawings.owed_beads`), the note ends by saying so, with the bead
+    (review A5 of #756). The committed records hold both at the six T-193 houses: owed at
+    102, 123, 258, 259 and 302, and nothing owed at 295, which reads regular as
+    published; T-174's refinements at 153 and 207 keep the word and say what is owed."""
+    source = {
+        "by": "[Daniel exact current records 2026-10-16]",
+        "credit": "Daniel after Xu",
+        "of": "T-174",
+        "registered_in": "T-193",
+        "method": "exact solve",
+        "side": "solved",
+        "kind": drawings.EXACT_SOLVE,
+    }
+    assert drawings.case_note([source], owed="think-mbdw") == (
+        "The house is its source's exact solve of T-174's packing (Daniel after Xu), "
+        "registered as T-193 for the upper bound its exact side proves. An exact solve "
+        "converts the packing to an exact one and is not a regularization. The drawing is "
+        "not regularized, and its regularization is owed (think-mbdw)."
+    )
+    assert "owed" not in drawings.case_note([source])
+
+    from devtools import default_drawings  # noqa: PLC0415
+
+    owed = default_drawings.owed_beads()
+    assert owed == dict.fromkeys((102, 123, 153, 207, 258, 259, 302), "think-mbdw")
+    fields = drawings.case_fields(drawings.index_document())
+    for n in (102, 123, 258, 259, 295, 302):
+        (item,) = fields[n]["items"]
+        assert item["by"] in drawings.EXACT_SOLVES, n
+        assert item["kind"] == drawings.EXACT_SOLVE, n
+        assert fields[n]["note"].startswith("The house is its source's exact solve of "), n
+        assert "is not a regularization" in fields[n]["note"], n
+        assert fields[n]["note"].endswith("owed (think-mbdw).") == (n in owed), n
+    for n in (153, 207):
+        (item,) = fields[n]["items"]
+        assert "kind" not in item, n
+        assert fields[n]["note"].startswith("The house is itself its source's regularization")
+        assert fields[n]["note"].endswith("its regularization is owed (think-mbdw)."), n
+
+
 def test_a_drawing_whose_exact_side_is_registered_says_so() -> None:
     """Where the drawn packing's own result registers this very regularization (a
     `by: project` item at the count, by the drawn view's method, at its side relation),

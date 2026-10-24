@@ -223,6 +223,18 @@ SIDE_WORDS = {
     "solved": "solved to its side",
 }
 IDENTITY_FIELDS = ("basis", "measured_in", "one_to_one", "moved", "max_move", "max_turn_deg")
+#: A source item's `kind` where the source's certificate is an exact solve of the packing
+#: it names, a conversion to an exact packing that rearranges nothing, and not a
+#: regularization: the owner, 23 October 2026, "we should convert inexact packings to exact
+#: ones. And then we should always regularize as well. We should track regularization
+#: separately" (review A5 of #756). The register's `regularizations` item keeps the
+#: lineage; the case record says which it is, and the case page labels it so.
+EXACT_SOLVE = "exact-solve"
+#: The sources whose register items are exact solves (`EXACT_SOLVE`): issue 639's exact
+#: forms (T-193), each the contact system of T-174's or T-186's packing solved to its
+#: algebraic side (`exactsolve.py`, then `minpoly.py`). At 259 and 302 the house so solved
+#: holds 163 and 204 uneven squares, and its regularization is owed (think-mbdw).
+EXACT_SOLVES = frozenset({"[Daniel exact current records 2026-10-16]"})
 
 
 class RegularizedDrawingsError(ValueError):
@@ -849,6 +861,8 @@ def source_regularizations(
                 "method": str(record["method"]),
                 "side": str(record["side"]),
             }
+            if by in EXACT_SOLVES:
+                found[n]["kind"] = EXACT_SOLVE
     return found
 
 
@@ -1077,6 +1091,7 @@ def case_note(
     certificates: Mapping[str, str] | None = None,
     implied: Mapping[str, Mapping[str, Any]] | None = None,
     held: Mapping[str, str] | None = None,
+    owed: str | None = None,
 ) -> str:
     """The record's one paragraph: who regularized the drawing, with which modifications,
     and either that it is a pure regularization, proving no new bound, so no result, or
@@ -1092,7 +1107,12 @@ def case_note(
     `default_drawings.held_reasons`), the note opens by saying that the house drawing is
     drawn as published, and why, and credits the view as the view's rather than the
     drawing's: n = 176's note led with "Regularized by" while its page drew the raw house
-    (think-gvke)."""
+    (think-gvke).
+
+    A source's exact solve of the house (`EXACT_SOLVE`) is called that, a conversion to an
+    exact packing, and not a regularization. Where the count's regularization is owed
+    (`owed`, the bead `default_drawings.owed_beads` names), the note ends by saying the
+    drawing is not regularized and which bead owes it (review A5 of #756)."""
     certificates = certificates or {}
     implied = implied or {}
     held = held or {}
@@ -1140,10 +1160,22 @@ def case_note(
     for found in items:
         if found["by"] == PROJECT_REGULARIZER:
             continue
+        if found.get("kind") == EXACT_SOLVE:
+            sentences.append(
+                f"The house is its source's exact solve of {found['of']}'s packing "
+                f"({found['credit']}), registered as {found['registered_in']} for the upper "
+                "bound its exact side proves. An exact solve converts the packing to an exact "
+                "one and is not a regularization."
+            )
+            continue
         sentences.append(
             f"The house is itself its source's regularization of {found['of']}'s packing "
             f"({found['credit']}), registered as {found['registered_in']} for the upper "
             "bound its exact side proves."
+        )
+    if owed:
+        sentences.append(
+            f"The drawing is not regularized, and its regularization is owed ({owed})."
         )
     return " ".join(sentences)
 
@@ -1156,16 +1188,24 @@ def case_fields(
     register: Register | None = None,
     source_keys: dict[Path, str | None] | None = None,
     held: Mapping[str, str] | None = None,
+    owed: Mapping[int, str] | None = None,
 ) -> dict[int, dict[str, Any]]:
     """Each case record's `regularization` field, by count, for the records that carry
     one: the source's regularization of the house first, then this project's drawing,
     then this project's regularization a result registers where the layer does not draw
     it (`registered_case_items`). `held` gives, by view path, why a view is not its
-    count's default picture; by default the retained `default-drawings.json`'s reasons."""
+    count's default picture; by default the retained `default-drawings.json`'s reasons.
+    `owed` gives, by count, the bead that owes a regularization the drawing lacks; by
+    default the retained record's `regularization-owed` counts
+    (`default_drawings.owed_beads`)."""
     if held is None:
         from devtools.default_drawings import held_reasons  # noqa: PLC0415
 
         held = held_reasons()
+    if owed is None:
+        from devtools.default_drawings import owed_beads  # noqa: PLC0415
+
+        owed = owed_beads()
     register = load_register() if register is None else register
     by_source = source_regularizations(
         register.results, register.sources, repo, source_keys=source_keys
@@ -1210,7 +1250,10 @@ def case_fields(
             found for found in (by_source.get(n), projects.get(n), registered.get(n)) if found
         ]
         here = {rid: ceiling for (rid, count), ceiling in implied.items() if count == n}
-        fields[n] = {"note": case_note(items, certificates, here, held), "items": items}
+        fields[n] = {
+            "note": case_note(items, certificates, here, held, owed.get(n)),
+            "items": items,
+        }
     return fields
 
 

@@ -127,6 +127,16 @@ def test_a_case_page_prints_its_regularization_note_and_nothing_without_one() ->
     assert "(T-101), so it proves no new bound" in earlier
     assert "the upper bound it proves" not in earlier
 
+    # A source's exact solve of the house is labelled an exact solve, not a
+    # regularization: issue 639's exact form at 259 (T-193), whose regularization is owed
+    # (review A5 of #756).
+    solved = regularization(cases[259])
+    assert solved.startswith(
+        '<div class="site-case-note"><span class="site-card-label">Exact solve</span>'
+    )
+    assert "is not a regularization" in solved
+    assert "its regularization is owed (think-mbdw)" in solved
+
     assert "regularization" not in cases[1]
     assert regularization(cases[1]) == ""
 
