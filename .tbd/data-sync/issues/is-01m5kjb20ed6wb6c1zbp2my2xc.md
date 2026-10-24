@@ -5,7 +5,7 @@ title: "Apply the owner's D1 answer: track beyond-horizon rows above 1024 (#666,
 kind: task
 status: in_progress
 priority: 1
-version: 13
+version: 14
 spec_path: docs/project/specs/active/plan-2026-10-24-rows-above-1024.md
 delegate: c-w7-1024
 labels:
@@ -15,7 +15,7 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-23T05:04:35.342Z
-updated_at: 2026-10-24T14:33:08.947Z
+updated_at: 2026-10-24T15:22:56.271Z
 started_at: 2026-10-23T05:05:14.273Z
 ---
 Owner decision of 23 October (think-f2io note): yes, no ceiling. Needs a plan: the rows' walks above 1024 (report order), custody without Git blobs (D4 hosted-data manifest; OR-18), the replay price at thousands of certificates (compute cap), and the frontier README rule. Stage 1 triage and pricing first, read-only.
@@ -52,3 +52,5 @@ Two more obligations from review B1 (`intake_ledger.answer_problems`, #754): a l
 - The summary README threshold is 400 walked counts (intake_ledger.SUMMARY_FROM): above every retained walk (the history walk walks 392 counts, its README 339 kB), so every frozen README renders byte for byte.
 - Base finding, not W7's: the #678 Goebel receipt (couzo-issue678-2026-10-18/receipts/goebel-comparison.json) does not rebuild byte for byte at main 2ec489d1e: couzo_678_replay.goebel writes families "... and corner-touching strips ..." where the committed file says "... corner-touching Goebel strips ...". Left as committed; a one-line records fix for a later slice.
 - For R1: history-publications and earlier still scan HISTORY_COUNTS (325..1024); scanning the watched repositories above 1024 is R1's change, with the walk above 1024's name in WALKS (above=1024, through=None), Release.walk_above on each lifted release, CLAIM_MAP_WALKS/WALK_READ_AT_MAIN entries, and Barnett's repository in WATCHED_HOLDERS.
+
+2026-10-24 c-w7-1024: W7 is draft PR https://github.com/jlevy/squares/pull/793 at 6d44159fc (S2, project), every hosted check passed; records nothing.
