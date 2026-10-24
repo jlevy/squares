@@ -379,7 +379,7 @@ def margin_met(margin: Fraction, expected: Fraction, rule: str, edge: Fraction) 
     raise reports.ReportError(f"unknown margin rule {rule!r}")
 
 
-def _row(
+def decided_row(
     control: str,
     where: str,
     margin: str,
@@ -455,7 +455,7 @@ def control_rows(
             else:
                 actual = kernel.sharp_input(certificate, control, past=past)
             rows.append(
-                _row(
+                decided_row(
                     control,
                     where,
                     margin,
@@ -477,11 +477,11 @@ def control_rows(
             squares[index] = enlarge(certificate.poses[index], growth)
             failures = predicted_failures(squares, index, growth, certificate.side)
             edge = 1 + 2 * growth
+            # The grown square's clearance goes to exactly -excess, and every other wall
+            # and pair is as the admitted certificate states it, so the wall margin is
+            # `expect` whatever square was grown.
             if control == ENLARGED_WALL:
                 rule = EQUAL
-                expected_margin = min(
-                    _wall_clearance(square, certificate.side) for square in squares
-                )
                 detail = {"wall_clearance": found["clearance"]}
             else:
                 if OVERLAP not in failures:
@@ -490,16 +490,15 @@ def control_rows(
                     rule = WINDOW
                 else:
                     rule = AT_MOST
-                expected_margin = expect
                 detail = {"partner": _square(found["partner"]), "pair_gap": found["gap"]}
             rows.append(
-                _row(
+                decided_row(
                     control,
                     where,
                     margin,
                     verdicts=decide_corners(certificate, squares, profile),
                     failures=failures,
-                    expected_margin=expected_margin,
+                    expected_margin=expect,
                     detail={
                         "square": _square(index),
                         **detail,
@@ -515,7 +514,7 @@ def control_rows(
     started = time.process_time()
     duplicate = kernel.job_input(certificate, "duplicate-square-overlap")
     rows.append(
-        _row(
+        decided_row(
             DUPLICATE,
             "gross",
             "gap",

@@ -6,6 +6,10 @@ packet's holds the measures, and the mishapolk-n204-2026-10-22, evand-n303-2026-
 amundsk-n303-2026-10-23 packets load them from its file. This module is those measures
 once (OR-1). A measurement for credit; it decides nothing. The retained programs stay as
 they were written, since their receipts are bound to them, and later packets call this.
+It is not ``devtools.register_regularized_bounds.measure_identity``, the regularization
+driver's own check of a view against the checkout witness it was regularized from
+(`regularize_evand.identity`): that one decides a regularization's custody, and this one
+measures any two packings of a count for credit and lineage.
 
 **Inputs.** Each packing is named by a spec, ``[LABEL=]KIND:TARGET``:
 
@@ -27,9 +31,18 @@ The receipt names each file by its repository-relative path, or by its name alon
 it lies outside the repository, with the SHA-256 of the bytes read after any
 decompression.
 
-Anything else is refused (`MeasureError`): an unknown kind, a count other than ``n``, a
-row with other than three numbers, a token that is not a decimal number, a number that is
-not finite, a side that is not positive.
+Anything else is refused (`MeasureError`, and by the command with exit status 2): an
+unknown kind, a count other than ``n`` or above `MAX_COUNT`, a row with other than three
+numbers, a token that is not a decimal number, a number that is not finite, a side that
+is not positive, a file over `MAX_INPUT_BYTES` as stored or four times that read, and a
+``.gz`` that is truncated or not a deflate stream.
+
+**The count.** Each symmetry's assignment holds an ``n`` by ``n`` matrix of binary64
+distances and solves it in ``O(n^3)``, so the counts are bounded by `MAX_COUNT`. Measured
+on 24 October 2026 at 2,263, the largest count of any retained certificate (Francisco
+Couzo's ``n2263.cert``, couzo-issue763-2026-10-23), against itself under ``nice`` on a
+shared four-core host: 22 s of CPU and a peak of 573 MB resident, both growing with
+``n^2`` or faster.
 
 **The measures**, each of the first packing against the second, exactly as the retained
 programs computed them, so a receipt they wrote is reproduced key for key:
@@ -55,8 +68,10 @@ programs computed them, so a receipt they wrote is reproduced key for key:
   how many squares turn by more than a degree or have their tilt beyond a degree
   reversed.
 
-Exact sides and their differences are exact; everything a binary64 step reads is printed
-at six significant digits.
+Exact sides and their differences are exact. What a binary64 step reads is printed as the
+retained programs printed it, which is what lets their receipts reproduce: moves, totals
+and the bottleneck at six significant digits, the side difference at seven (``.6e``),
+turns at four, and the tilt range in full.
 
 From ``packing/``, with the project interpreter::
 
@@ -78,6 +93,7 @@ import json
 import math
 import re
 import sys
+import zlib
 from dataclasses import dataclass
 from fractions import Fraction
 from pathlib import Path
@@ -101,7 +117,10 @@ BINARY64 = "binary64-xyd"
 MAX_INPUT_BYTES = reports.MAX_SOURCE_BYTES
 SYMMETRIES = 8
 _DECIMAL = re.compile(r"[-+]?(?:[0-9]+\.?[0-9]*|\.[0-9]+)(?:[eE][-+]?[0-9]+)?")
-_COUNT = re.compile(r"[1-9][0-9]*")
+_COUNT = re.compile(r"[1-9][0-9]{0,8}")
+#: The largest count measured: the largest of any retained certificate, 2,263, with room;
+#: the module docstring gives what 2,263 cost.
+MAX_COUNT = 2500
 
 type Placed = tuple[Fraction, Fraction, Fraction, Fraction]
 type Measured = tuple[Fraction, list[Placed]]
@@ -138,11 +157,12 @@ def _decimal(token: str, where: str) -> float:
 
 
 def rotation_from_degrees(degrees: float) -> tuple[Fraction, Fraction]:
-    """The exact rotation nearest a binary64 angle, read modulo a quarter turn.
+    """An exact rotation for a binary64 angle in degrees, read modulo a quarter turn.
 
     The angle is reduced into ``[-45, 45)``, which draws the same square, and the rotation
-    is the one whose half-angle tangent is the binary64 tangent of half of it, so it lies
-    exactly on the unit circle, as `check_half_angle_area.rotation` requires.
+    is the one whose half-angle tangent is the binary64 tangent of half of it: not the
+    exact rotation nearest the angle, but one within a few units in the last place of it
+    that lies exactly on the unit circle, as `check_half_angle_area.rotation` requires.
     """
     folded = (degrees + 45.0) % 90.0 - 45.0
     return area.rotation(Fraction(math.tan(math.radians(folded) / 2)))
@@ -192,7 +212,7 @@ def _file_bytes(path: Path) -> bytes:
                 raise MeasureError(f"{path} exceeds {MAX_INPUT_BYTES} bytes")
             return retained_data.gunzip_bytes(stored, limit=4 * MAX_INPUT_BYTES, name=str(path))
         return retained_data.read_retained_bytes(path, limit=4 * MAX_INPUT_BYTES)
-    except (OSError, ValueError) as error:
+    except (OSError, ValueError, EOFError, zlib.error) as error:
         if isinstance(error, MeasureError):
             raise
         raise MeasureError(f"{path}: {error}") from error
@@ -224,6 +244,8 @@ def read_packing(spec: str, n: int) -> Packing:
     """One packing of ``n`` squares, from its spec (see the module docstring)."""
     if type(n) is not int or n < 1:
         raise MeasureError("the count must be a positive integer")
+    if n > MAX_COUNT:
+        raise MeasureError(f"{n} squares is above the {MAX_COUNT} this tool measures")
     label, kind, target = split_spec(spec)
     plain = spec if label is None else spec.partition("=")[2]
     if kind == PACKET:

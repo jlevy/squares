@@ -31,8 +31,10 @@ PROFILE = {
     "claim_limitations": kernel.CLAIM_LIMITATIONS,
 }
 #: Three unit squares with room between them and the walls, one turned by
-#: tan(theta/2) = 1/3, so every control can close its one pair or wall alone.
-ROOMY = legacy.parse("3 4\n1 1 0\n23/10 6/5 1/3\n3/2 3 1/7\n")
+#: tan(theta/2) = 1/3, so every control can close its one pair or wall alone. The least
+#: left clearance, 2/5, is below the least bottom one, 1/2, so the near-wall control has
+#: one wall to choose.
+ROOMY = legacy.parse("3 4\n9/10 1 0\n23/10 6/5 1/3\n3/2 3 1/7\n")
 #: Two unit squares filling a 2 by 1 strip of a box of side 2: they touch each other and
 #: three walls exactly, so no enlargement can close one pair or wall alone.
 TOUCHING = legacy.parse("2 2\n1/2 1/2 0\n3/2 1/2 0\n")
@@ -83,6 +85,70 @@ def test_the_helpers_refuse_what_they_do_not_know() -> None:
         sharp.failure_kinds("exact_verify", [("tolerance", "close enough")])
     with pytest.raises(reports.ReportError, match="unknown margin rule"):
         sharp.margin_met(Fraction(0), Fraction(0), "near", Fraction(1))
+
+
+def _verdicts(*, passed: bool, failures: list[str], gap: Fraction) -> dict[str, Any]:
+    verdict = {"passed": passed, "wall": "1", "gap": legacy.literal(gap), "failures": failures}
+    return {route: dict(verdict) for route in kernel.ROUTES}
+
+
+@pytest.mark.parametrize(
+    ("passed", "failures", "gap", "rule", "met"),
+    [
+        (False, ["overlap"], -EPSILON, sharp.EQUAL, True),
+        (True, ["overlap"], -EPSILON, sharp.EQUAL, False),
+        (False, ["overlap", "shape"], -EPSILON, sharp.EQUAL, False),
+        (False, [], -EPSILON, sharp.EQUAL, False),
+        (False, ["overlap"], -EPSILON - Fraction(1, 10**60), sharp.EQUAL, False),
+        (False, ["overlap"], -EPSILON * 2, sharp.WINDOW, True),
+        (False, ["overlap"], -EPSILON * 2 - Fraction(1, 10**60), sharp.WINDOW, False),
+        (False, ["overlap"], -EPSILON + Fraction(1, 10**60), sharp.WINDOW, False),
+        (False, ["overlap"], -EPSILON * 7, sharp.AT_MOST, True),
+        (False, ["overlap"], -EPSILON + Fraction(1, 10**60), sharp.AT_MOST, False),
+    ],
+)
+def test_a_route_that_misses_its_verdict_failures_or_margin_is_not_as_expected(
+    *, passed: bool, failures: list[str], gap: Fraction, rule: str, met: bool
+) -> None:
+    """`as_expected` is what turns a route that misses the certificate's scale into
+    ``all_as_expected: false`` and the command's exit status 1: the wrong verdict, a
+    failure the control does not make or misses, and a margin 1e-60 off its rule each
+    leave the row not as expected, on one route or both."""
+    for routes in (kernel.ROUTES, kernel.ROUTES[:1]):
+        verdicts = _verdicts(passed=False, failures=["overlap"], gap=-EPSILON)
+        for route in routes:
+            verdicts[route] = _verdicts(passed=passed, failures=failures, gap=gap)[route]
+        row = sharp.decided_row(
+            sharp.TIGHTEST_PAIR,
+            "past-contact",
+            "gap",
+            verdicts=verdicts,
+            failures=["overlap"],
+            expected_margin=-EPSILON,
+            detail={},
+            started=0.0,
+            rule=rule,
+            edge=Fraction(2),
+        )
+        assert row["as_expected"] is met, routes
+
+
+def test_the_command_exits_1_when_a_control_is_not_as_expected(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """The deciding replaced by a record one of whose rows is not as expected, and the
+    receipt kept in scratch space: the command writes it and exits 1."""
+    path = tmp_path / "sharp-controls.json"
+    monkeypatch.setattr(sharp, "receipt_path", lambda _packet, _roster, _n: path)
+    monkeypatch.setattr(sharp.reports, "ensure_private", lambda _path: None)
+    monkeypatch.setattr(
+        sharp,
+        "sharp_controls",
+        lambda _packet, _n: {"format": sharp.FORMAT, "controls": [], "all_as_expected": False},
+    )
+    assert reports.main([N204, "sharp-controls"]) == 1
+    assert json.loads(capsys.readouterr().out) == {"204": {"all_as_expected": False}}
+    assert json.loads(path.read_text("utf-8"))["all_as_expected"] is False
 
 
 def test_the_window_holds_a_margin_between_epsilon_and_epsilon_times_the_edge() -> None:
@@ -150,11 +216,25 @@ def test_an_enlargement_meets_contact_for_its_shape_alone_and_crosses_it_1e30_pa
         assert at["routes"][route]["failures"] == ["shape"]
         assert Fraction(at["routes"][route][margin]) == 0
         assert past["routes"][route]["failures"] == sorted({"shape", kind})
-        assert Fraction(past["routes"][route][margin]) <= -EPSILON
+        read = Fraction(past["routes"][route][margin])
+        if control == sharp.ENLARGED_WALL:
+            # Wall clearances are corner coordinates, so the routes read it exactly.
+            assert read == -EPSILON
+        else:
+            assert sharp.window(read, Fraction(past["detail"]["edge"]))
     unperturbed = sharp.decide(ROOMY, PROFILE)
     for route in kernel.ROUTES:
         assert unperturbed[route]["passed"] is True
         assert unperturbed[route]["failures"] == []
+
+
+def test_the_near_wall_control_moves_every_square_toward_the_nearer_wall() -> None:
+    """ROOMY's least left clearance, 2/5, is below its least bottom one, 1/2: every square
+    moves left by 2/5 at contact, and 1e-30 further past it, and none moves down."""
+    for past, step in ((False, Fraction(2, 5)), (True, Fraction(2, 5) + EPSILON)):
+        moved = sharp.near_wall(ROOMY, past=past)
+        for before, after in zip(ROOMY.poses, moved.poses, strict=True):
+            assert (before.x - after.x, after.y, after.t) == (step, before.y, before.t)
 
 
 def test_the_duplicate_square_is_refused_and_the_certificate_without_it_accepted(

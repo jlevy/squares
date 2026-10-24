@@ -13,6 +13,7 @@ only; none needs the network.
 
 from __future__ import annotations
 
+import gzip
 import json
 from fractions import Fraction
 from pathlib import Path
@@ -123,6 +124,52 @@ def test_the_command_refuses_a_malformed_input_and_writes_nothing(
     assert not out.exists()
 
 
+@pytest.mark.parametrize(
+    ("name", "stored", "message"),
+    [
+        ("truncated.txt.gz", gzip.compress(TWO.encode())[:-12], "end-of-stream"),
+        # A gzip header, then a deflate block of the reserved type 3.
+        ("corrupt.txt.gz", gzip.compress(TWO.encode())[:10] + b"\x07" + bytes(20), "invalid"),
+        ("digits.txt", ("9" * 5000 + " 3\n").encode(), "header is not 'n side'"),
+    ],
+    ids=["truncated-gzip", "corrupt-deflate", "5000-digit-count"],
+)
+def test_a_damaged_file_is_refused_with_exit_status_2(
+    tmp_path: Path, capsys: pytest.CaptureFixture[str], name: str, stored: bytes, message: str
+) -> None:
+    """A truncated gzip (EOFError), a deflate stream that is not one (zlib.error) and a
+    header count past Python's digit limit are refused like any other malformed input."""
+    path = tmp_path / name
+    path.write_bytes(stored)
+    with pytest.raises(identity.MeasureError, match=message):
+        identity.read_packing(f"binary64-xyd:{path}", 2)
+    good = _file(tmp_path, "good.cert", TWO)
+    assert identity.main(["--n", "2", f"evand-cert:{good}", f"binary64-xyd:{path}"]) == 2
+    assert capsys.readouterr().err.startswith("measure_identity: ")
+
+
+def test_a_stored_gzip_over_the_ceiling_is_refused_before_it_is_read(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    stored = gzip.compress(b"2 3\n0.5 0.5 0\n2 2 30\n")
+    path = tmp_path / "two.txt.gz"
+    path.write_bytes(stored)
+    assert identity.read_packing(f"binary64-xyd:{path}", 2).side == 3
+    monkeypatch.setattr(identity, "MAX_INPUT_BYTES", len(stored) - 1)
+    with pytest.raises(identity.MeasureError, match=f"exceeds {len(stored) - 1} bytes"):
+        identity.read_packing(f"binary64-xyd:{path}", 2)
+
+
+def test_a_count_above_the_ceiling_is_refused_before_anything_is_read(
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    count = identity.MAX_COUNT + 1
+    with pytest.raises(identity.MeasureError, match=f"{count} squares is above the"):
+        identity.read_packing("evand-cert:no-such-file.cert", count)
+    assert identity.main(["--n", str(count), "packet:a-2026-10-24", "packet:b-2026-10-24"]) == 2
+    assert f"above the {identity.MAX_COUNT}" in capsys.readouterr().err
+
+
 # --------------------------------------------------------------------------- known answers
 
 
@@ -185,49 +232,127 @@ def test_a_binary64_transcription_lies_within_its_rounding_of_the_exact_packing(
     assert pair["assignment"]["largest_move"] == "0"
 
 
+def _packing(label: str, rows: list[tuple[str, str, float]]) -> identity.Packing:
+    squares = tuple(
+        (Fraction(x), Fraction(y), *identity.rotation_from_degrees(degrees))
+        for x, y, degrees in rows
+    )
+    return identity.Packing(label, {}, Fraction(10), squares)
+
+
+def test_the_centred_measures_tell_the_bottleneck_shared_nearest_and_reversed_tilts_apart() -> (
+    None
+):
+    """Three anchors fix the identity as the best symmetry. Of two movers, the first
+    packing's at (5, 5) and (7.236, 7) and the second's at (5, 5) and (7.236, 3): the least
+    total squared assignment leaves (5, 5) and moves the other by 4 (16 against 18), while
+    crossing them moves each by 2.99995, the bottleneck; the second mover's nearest centre
+    is (5, 5), which the first mover's is too. A square at (8, 3/2) turned by 10 degrees in
+    one packing and by -10 in the other has its tilt reversed."""
+    anchors = [("1", "1", 0.0), ("5/2", "1", 0.0), ("1", "5/2", 0.0)]
+    first = _packing(
+        "first", [*anchors, ("5", "5", 0.0), ("1809/250", "7", 0.0), ("8", "3/2", 10.0)]
+    )
+    second = _packing(
+        "second", [*anchors, ("5", "5", 0.0), ("1809/250", "3", 0.0), ("8", "3/2", -10.0)]
+    )
+    centred = identity.compare(first, second)["centred"]
+    assert (centred["symmetry"], centred["total_squared"]) == (0, "16")
+    assert (centred["largest_move"], centred["bottleneck"]) == ("4", "2.99995")
+    assert centred["nearest_one_to_one"] is False
+    assert centred["tilts_reversed_beyond_1_degree"] == 1
+    assert centred["turned_beyond_1_degree"] == 1
+
+
 # --------------------------------------------------------------------------- the receipts
 
 
-def test_it_reproduces_the_amundsk_755_receipt_against_t230_key_for_key() -> None:
+@pytest.mark.parametrize(
+    ("label", "spec"),
+    [
+        ("T-230 (#728), the house", "packet:evand-n303-2026-10-22"),
+        (
+            "T-186 (70a033f)",
+            "witness-center-basis:"
+            + str(WEB / "mishapolk-kkt-refinements-2026-10-14/facts/n-303.yaml.gz"),
+        ),
+        (
+            "T-174 (PR 574)",
+            "witness-center-basis:"
+            + str(WEB / "pingyou-pr574-certificates-2026-10-13/facts/n-303.yaml.gz"),
+        ),
+        (
+            "T-162 (#562)",
+            "sqcert:"
+            + str(WEB / "dostashev-compositions-2026-10-12/source/records/n0303.sqcert"),
+        ),
+        ("T-146 (ea1a2f2)", "packet:evand-regularized-2026-10-10"),
+    ],
+    ids=["T-230", "T-186", "T-174", "T-162", "T-146"],
+)
+def test_it_reproduces_the_amundsk_755_receipt_key_for_key(label: str, spec: str) -> None:
     """The amundsk-n303-2026-10-23 packet's measure/identity.json, #755 (registered as
-    T-239) against T-230, the house it started from: every measure, the bands, and both
-    packings' tilt classes."""
+    T-239) against each of its five packings, T-230 the house it started from among them:
+    every measure, the bands, and both packings' tilt classes."""
     view = identity.read_packing(f"#755=packet:{AMUNDSK}", 303)
-    house = identity.read_packing("T-230 (#728), the house=packet:evand-n303-2026-10-22", 303)
+    other = identity.read_packing(f"{label}={spec}", 303)
     retained = json.loads((WEB / AMUNDSK / "measure/identity.json").read_text("utf-8"))
-    (expected,) = (pair for pair in retained["pairs"] if pair["against"] == house.label)
-    pair = identity.compare(view, house)
+    (expected,) = (pair for pair in retained["pairs"] if pair["against"] == label)
+    pair = identity.compare(view, other)
     for key in (*MEASURED, "bands"):
         assert pair[key] == expected[key], key
-    for packing in (view, house):
+    for packing in (view, other):
         assert identity.tilts(packing.measured) == retained["tilts"][packing.label]
 
 
+#: De Winter's #668 centre-basis witnesses, the packing T-196 registers at 227 and 260.
+DE_WINTER = "de-winter-upper-bounds-227-229-260-2026-10-17/source"
+
+
 @pytest.mark.parametrize(
-    ("n", "against", "path"),
+    ("n", "against", "kind", "path"),
     [
-        (204, "T-223 (#678)", "couzo-issue678-2026-10-18/source/certificates/best/n204.cert"),
+        (
+            204,
+            "T-223 (#678)",
+            "evand-cert",
+            "couzo-issue678-2026-10-18/source/certificates/best",
+        ),
+        (227, "T-196 (#668)", "center-basis-json", f"{DE_WINTER}/n227/n227_exact.json.gz"),
         (
             229,
             "T-199 (#674 update)",
+            "evand-cert",
             "evand-n229-dilation-update-2026-10-18/source/search/packer/candidates/s229_v2.cert",
         ),
+        (
+            260,
+            "T-223 (#678)",
+            "evand-cert",
+            "couzo-issue678-2026-10-18/source/certificates/best",
+        ),
+        (260, "T-196 (#668)", "center-basis-json", f"{DE_WINTER}/n260/n260_exact.json.gz"),
     ],
-    ids=["204", "229"],
+    ids=["204-T-223", "227-T-196", "229-T-199", "260-T-223", "260-T-196"],
 )
 def test_it_reproduces_the_evand_regularized_receipt_key_for_key(
-    n: int, against: str, path: str
+    n: int, against: str, kind: str, path: str
 ) -> None:
     """The evand-regularized-2026-10-20 packet's measure/identity.json, which holds the
-    measures the later packets loaded: its view at 0075967 against T-223 at 204 and T-199
-    at 229, the view read through the packet's own declaration."""
+    measures the later packets loaded: its view at 0075967 against every packing the
+    packet retains, the view read through the packet's own declaration. Its pairs against
+    #672's 227, which no packet retains, are not measured here."""
     view = identity.read_packing(f"packet:{REGULARIZED}", n)
-    other = identity.read_packing(f"evand-cert:{WEB / path}", n)
+    target = WEB / path
+    if target.name == "best":
+        target /= f"n{n}.cert"
+    other = identity.read_packing(f"{kind}:{target}", n)
     retained = json.loads((WEB / REGULARIZED / "measure/identity.json").read_text("utf-8"))
     (expected,) = (
-        pair for pair in retained["pairs"] if pair["n"] == n and pair["against"] == against
+        pair
+        for pair in retained["pairs"]
+        if (pair["n"], pair["view"], pair["against"]) == (n, "evand 0075967", against)
     )
-    assert expected["view"] == "evand 0075967"
     measured = identity.measure(view.measured, other.measured)
     for key in MEASURED:
         assert measured[key] == expected[key], key

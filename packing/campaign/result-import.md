@@ -777,10 +777,11 @@ import has needed are tools, and a packet calls them instead of keeping a copy (
 `python -m devtools.measure_identity` measures a packing pose by pose against each
 packing the record holds at its count, read from an import packet (`packet:NAME`), from
 a retained file through any `upper_bound_reports` adapter, or from a binary64
-`x y degrees` text, and writes the packet’s `measure/identity.json`: the nearest centre
-under the box’s eight symmetries and whether it pairs the squares one to one, the
-optimal assignment, the squares moved beyond $10^{-9}$ to $10^{-1}$, the largest move
-and its symmetry, and the box-centred assignment the T-240 review read.
+`x y degrees` text. It prints its receipt, and with `--out` writes it as the packet’s
+`measure/identity.json`: the nearest centre under the box’s eight symmetries and whether
+it pairs the squares one to one, the optimal assignment, the squares moved beyond
+$10^{-9}$ to $10^{-1}$, the largest move and its symmetry, and the box-centred
+assignment the T-240 review read.
 It is the measurement that decides a regularization’s or a refinement’s `identity`
 ([stage 3](#stage-3-record)), and it decides nothing about the bound.
 `python -m devtools.upper_bound_reports PACKET sharp-controls` takes the certificate to
