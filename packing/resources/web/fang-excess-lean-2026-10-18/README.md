@@ -104,6 +104,24 @@ at `29d0cee`, checks its SHA-256, `ca491d50bb17c976…`, and generates the modul
 [5 October Daniel packet](../evand-square-packing-2026-10-05/README.md), at
 `square-packing/s12/search/exact/batch/certs/n-211.cert`.
 
+**The closure.** [`receipts/lean-closure.json.gz`](receipts/lean-closure.json.gz),
+written by `devtools.lean_closure` from the Git objects at the pin with the targets
+`Sqlean` and `Sqlean.Axioms`, follows every import through the project’s own modules:
+109 modules, 1,237,547 bytes: the ten written by hand, the two vendored from Daniel among
+them, the 17 piece modules and the 82 data and chunk modules, with `Mathlib` the only
+import outside them (one import line, in `Spec.lean`). It counts no `sorry`, `axiom`, `native_decide`, `implemented_by`, `extern`,
+`unsafe`, `debug.skipKernelTC`, `+native`, `native := true`, `reduceBool`, `reduceNat`
+or `trustCompiler` in their code, comments removed. It lists one module as missing,
+`Sqlean.Pieces.N211`, the gitignored 211 piece. A token count is not a parse and not a
+build: it says what the text holds, and the axiom set stays the source’s report until a
+build prints it. From `packing/`, with a blobless clone of the source as `CHECKOUT`:
+
+```sh
+uv run --frozen --all-extras --group dev python -m devtools.lean_closure CHECKOUT \
+  --commit 947bdaec40ead1105cfb00c2968e2484b7d1b40b --root . Sqlean Sqlean.Axioms \
+  --source-url https://github.com/TheSnakeFang/squarepack-lean --json OUT
+```
+
 ## The Statements
 
 `Packs` and `minSide` are Daniel’s, from `Spec.lean`: `Packs n s` holds when $n$ closed
@@ -170,6 +188,12 @@ disk.
   stands, and whether each data module encodes its certificate is for the review or a
   rebuild to read.
 - **No review has read the proof.**
+
+## Compressed Files
+
+| Stored File | Origin | Git Blob of Original | SHA-256 of Original |
+| --- | --- | --- | --- |
+| `receipts/lean-closure.json.gz` | receipt | `e3e00e1ec9230fe76492869c32973228ba216520` | `f4d3a3c23f46849a219541dd32d1711618c485371d782ee82cfc07e79e4fb227` |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

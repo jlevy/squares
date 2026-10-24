@@ -36180,7 +36180,8 @@ evidence:
         Sqlean/Main.lean (base, small, step, main, theorem1); Sqlean/Theorem2.lean (stepR,
         stepR', packs_j16, packs_j21, jExc, main2, theorem2); Sqlean/Glue.lean (glue, Lemma
         3); Sqlean/Check.lean (check_sound); Sqlean/Pieces/ and Sqlean/Data/ (the 17
-        committed pieces); Sqlean/Axioms.lean (the axiom probe).
+        committed pieces); Sqlean/Axioms.lean (the axiom probe); the closure in the packet's
+        receipts/lean-closure.json.gz.
       assumptions:
         - Lean v4.33.1's kernel and Mathlib at 0df444a3 are sound
         - >-
@@ -36196,10 +36197,14 @@ evidence:
       generated module. The README and Sqlean/Axioms.lean report the axioms propext,
       Classical.choice and Quot.sound for theorem1, main and theorem2, and a clean build of
       765 CPU-seconds on top of the Mathlib cache; no build log or axiom output is
-      published. The README's first line says Theorems 1 and 2, and the note and the
-      certificate repository say Theorem 1 and the unmixed bounds; the mixed-step Theorem 2
-      is not stated. Nothing here has built it: about 0.25 CPU-hours and 9 GB of disk,
-      which this host lacked on 24 October.
+      published. The closure read here from the Git objects at the pin
+      (devtools.lean_closure: 109 project modules, Mathlib the only outside import) counts
+      no sorry, axiom, native_decide, implemented_by, extern, unsafe, skipKernelTC or native
+      evaluation token in their code; the gitignored 211 piece is its one missing module. A
+      token count is not a build. The README's first line says Theorems 1 and 2, and the
+      note and the certificate repository say Theorem 1 and the unmixed bounds; the
+      mixed-step Theorem 2 is not stated. Nothing here has built it: about 0.25 CPU-hours
+      and 9 GB of disk, which this host lacked on 24 October.
     source_reviewed: '2026-10-24'
   - id: E-wand125-linear-n145-1224-report
     claim: lower-bound
