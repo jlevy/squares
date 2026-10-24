@@ -1,0 +1,31 @@
+n = 268
+  EQUAL  268: side read by the maintained run
+  EQUAL  268: 268 poses read by the maintained run, as exact rationals
+  EQUAL  268: exact_verify accepted
+  EQUAL  268: exact_verify pairs tested = route A's pairs: 35778 and 35778
+  EQUAL  268: exact_verify least pair gap = route A's: 2.096281e-13
+  EQUAL  268: exact_verify least wall clearance = route A's and route B's: 1.000e-15
+  EQUAL  268: independent accepted
+  EQUAL  268: independent pairs tested = route A's pairs: 35778 and 35778
+  EQUAL  268: independent least pair gap = route A's: 2.096281e-13
+  EQUAL  268: independent least wall clearance = route A's and route B's: 1.000e-15
+  EQUAL  268: maintained control duplicate-square-overlap refused by both routes
+  EQUAL  268: maintained control square-translated-outside-container refused by both routes
+n = 303
+  EQUAL  303: side read by the maintained run
+  EQUAL  303: 303 poses read by the maintained run, as exact rationals
+  EQUAL  303: exact_verify accepted
+  EQUAL  303: exact_verify pairs tested = route A's pairs: 45753 and 45753
+  EQUAL  303: exact_verify least pair gap = route A's: 2.071756e-13
+  EQUAL  303: exact_verify least wall clearance = route A's and route B's: 1.000e-15
+  EQUAL  303: independent accepted
+  EQUAL  303: independent pairs tested = route A's pairs: 45753 and 45753
+  EQUAL  303: independent least pair gap = route A's: 2.071756e-13
+  EQUAL  303: independent least wall clearance = route A's and route B's: 1.000e-15
+  EQUAL  303: maintained control duplicate-square-overlap refused by both routes
+  EQUAL  303: maintained control square-translated-outside-container refused by both routes
+24 of 24 checks equal
+
+real	0m0.101s
+user	0m0.092s
+sys	0m0.008s

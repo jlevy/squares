@@ -23279,28 +23279,35 @@ occurrences:
     path: packing/frontier/n-268.md
     record_key: '268'
     field: /reported_upper_bound/found_by/0
-  expected_text: Francisco Couzo
+  expected_text: Kirill Tymchishin
   start: 0
-  end: 15
-  label: Francisco Couzo
+  end: 17
+  label: Kirill Tymchishin
   role: construction-finder
-  disposition: resolved
-  evidence:
-  - primary-byline
-  contributor_id: francisco-couzo
+  disposition: unresolved
+  evidence: []
+  note: 'Reviewed packing/frontier/n-268.md [268] /reported_upper_bound/found_by/0
+    span 0:17: the case''s house since the adoption of 25 October 2026 (T-240) refines
+    the packing of Kirill Tymchishin (kirilltym), Kaggle notebook "CPU/GPU/MPS EDA+Seam
+    LP" v4, as the source''s manifest credits it and the 24 October review measured
+    it (none beyond a tenth). No person record exists yet; identity review pending
+    (a profile by name, think-ptkk).'
 - origin:
     path: packing/frontier/n-268.md
     record_key: '268'
     field: /reported_upper_bound/improved_by/0
-  expected_text: Evan Daniel
+  expected_text: Francisco Couzo
   start: 0
-  end: 11
-  label: Evan Daniel
+  end: 15
+  label: Francisco Couzo
   role: construction-improver
   disposition: resolved
   evidence:
-  - repository-license
-  contributor_id: evan-daniel
+  - primary-byline
+  contributor_id: francisco-couzo
+  note: 'Reviewed packing/frontier/n-268.md [268] /reported_upper_bound/improved_by/0
+    span 0:15: issue 763, filed by franciscouzo, and the source''s manifest credit
+    Francisco Couzo''s live search with the refinement (T-240).'
 - origin:
     path: packing/frontier/n-268.md
     record_key: '268'
@@ -23318,20 +23325,6 @@ occurrences:
   note: Reviewed packing/frontier/n-268.md [268] /reported_lower_bound/proved_by/0
     span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
     metadata and owner confirmation bind wand125 to Hiroaki Hosono.
-- origin:
-    path: packing/frontier/n-268.md
-    record_key: '268'
-    field: /reported_upper_bound/improved_by/1
-  expected_text: PingYou Ltd
-  start: 0
-  end: 11
-  label: PingYou Ltd
-  role: construction-improver
-  disposition: non-person
-  evidence: []
-  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
-    Credit section records the request to credit PingYou Ltd and identifies its unreleased
-    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/frontier/n-269.md
     record_key: '269'
@@ -24298,21 +24291,20 @@ occurrences:
     path: packing/frontier/n-303.md
     record_key: '303'
     field: /reported_upper_bound/found_by/0
-  expected_text: Amund Kristiansen
+  expected_text: Vladislav Lavrentev
   start: 0
-  end: 17
-  label: Amund Kristiansen
+  end: 19
+  label: Vladislav Lavrentev
   role: construction-finder
-  disposition: resolved
-  evidence:
-  - source-intake
-  - bibliography
-  note: Reviewed packing/frontier/n-303.md [303] /reported_upper_bound/found_by/0
-    span 0:17. Issue 755's packing, credited to Amund Kristiansen (GitHub amundsk)
-    by the issue and the gist's README, the case's house since the adoption of 24
-    October 2026 (T-239), found from Evan Daniel's packing of issue 728 (T-230). Keep
-    finder, improver and solver roles distinct.
-  contributor_id: amund-kristiansen
+  disposition: unresolved
+  evidence: []
+  note: 'Reviewed packing/frontier/n-303.md [303] /reported_upper_bound/found_by/0
+    span 0:19: the case''s house since the adoption of 25 October 2026 (T-240) refines
+    Francisco Couzo''s Kaggle push packing, which the source''s manifest credits as
+    a refinement of the packing of Vladislav Lavrentev (lightningv08), Kaggle notebook
+    "CUDA Packing Search" v11; which public packing it started from is the author''s
+    question 4 of the 24 October review. No person record exists yet; identity review
+    pending (a profile by name, think-ptkk).'
 - origin:
     path: packing/frontier/n-303.md
     record_key: '303'
@@ -24330,6 +24322,22 @@ occurrences:
   note: Reviewed packing/frontier/n-303.md [303] /reported_lower_bound/proved_by/0
     span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
     metadata and owner confirmation bind wand125 to Hiroaki Hosono.
+- origin:
+    path: packing/frontier/n-303.md
+    record_key: '303'
+    field: /reported_upper_bound/improved_by/0
+  expected_text: Francisco Couzo
+  start: 0
+  end: 15
+  label: Francisco Couzo
+  role: construction-improver
+  disposition: resolved
+  evidence:
+  - primary-byline
+  contributor_id: francisco-couzo
+  note: 'Reviewed packing/frontier/n-303.md [303] /reported_upper_bound/improved_by/0
+    span 0:15: issue 763, filed by franciscouzo, and the source''s manifest credit
+    Francisco Couzo''s Kaggle push search and browser search with the refinement (T-240).'
 - origin:
     path: packing/frontier/n-304.md
     record_key: '304'

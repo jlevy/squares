@@ -1821,19 +1821,19 @@
       "url": "https://github.com/franciscouzo/square-packing/blob/02f969075f79d5e13fa21e09e381a44e8647b452/certificates/n267.cert"
     },
     {
-      "attribution": "PingYou Ltd, https://github.com/BuddenPing/squares/blob/4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde/numerical-refinements/certificates/n268.cert.json at 4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde",
+      "attribution": "Francisco Couzo, https://github.com/franciscouzo/square-packing/blob/964ee2bdf301d0c8912d956d4010f478dcbbd5ea/certificates/best/n268.cert at 964ee2bdf301d0c8912d956d4010f478dcbbd5ea",
       "kind": "packet-derived-facts",
       "license_status": "no-licence-published",
       "listed_n": [
         268
       ],
       "n": 268,
-      "path": "resources/web/pingyou-pr574-certificates-2026-10-13/facts/n-268.yaml.gz",
-      "raw_asset_retained": false,
-      "retention_policy": "Exact certificate retained as a derived fact, bound to the SHA-256 its packet pins upstream; no upstream byte is copied.",
-      "retrieved": "2026-10-14",
+      "path": "resources/web/couzo-issue763-2026-10-23/source/certificates/best/n268.cert",
+      "raw_asset_retained": true,
+      "retention_policy": "Complete source certificate retained losslessly and bound to the SHA-256 its packet pins upstream; no upstream program or prose is copied.",
+      "retrieved": "2026-10-24",
       "source_n": 268,
-      "url": "https://github.com/BuddenPing/squares/blob/4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde/numerical-refinements/certificates/n268.cert.json"
+      "url": "https://github.com/franciscouzo/square-packing/blob/964ee2bdf301d0c8912d956d4010f478dcbbd5ea/certificates/best/n268.cert"
     },
     {
       "attribution": "PingYou Ltd, https://github.com/BuddenPing/squares/blob/4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde/numerical-refinements/certificates/n269.cert.json at 4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde",
@@ -2101,19 +2101,19 @@
       "url": "https://github.com/evand/square-packing/blob/7d1407a0b66c46e32cdbcbd5619586fe2bdd52a1/search/exact/cur/data/n-302.minpoly.json.gz"
     },
     {
-      "attribution": "Amund Kristiansen, https://gist.github.com/amundsk/78f9f0e7b4669f2f509a281845081768/blob/511f56bf6e6afb4eb22f12d31371c2a2fe7b4767/s303_amund.cert at 511f56bf6e6afb4eb22f12d31371c2a2fe7b4767",
+      "attribution": "Francisco Couzo, https://github.com/franciscouzo/square-packing/blob/964ee2bdf301d0c8912d956d4010f478dcbbd5ea/certificates/best/n303.cert at 964ee2bdf301d0c8912d956d4010f478dcbbd5ea",
       "kind": "packet-derived-facts",
       "license_status": "no-licence-published",
       "listed_n": [
         303
       ],
       "n": 303,
-      "path": "resources/web/amundsk-n303-2026-10-23/facts/n-303.yaml.gz",
-      "raw_asset_retained": false,
-      "retention_policy": "Exact certificate retained as a derived fact, bound to the SHA-256 its packet pins upstream; no upstream byte is copied.",
-      "retrieved": "2026-10-23",
+      "path": "resources/web/couzo-issue763-2026-10-23/source/certificates/best/n303.cert",
+      "raw_asset_retained": true,
+      "retention_policy": "Complete source certificate retained losslessly and bound to the SHA-256 its packet pins upstream; no upstream program or prose is copied.",
+      "retrieved": "2026-10-24",
       "source_n": 303,
-      "url": "https://gist.github.com/amundsk/78f9f0e7b4669f2f509a281845081768/blob/511f56bf6e6afb4eb22f12d31371c2a2fe7b4767/s303_amund.cert"
+      "url": "https://github.com/franciscouzo/square-packing/blob/964ee2bdf301d0c8912d956d4010f478dcbbd5ea/certificates/best/n303.cert"
     },
     {
       "attribution": "Mykhailo Polkovskyi, https://github.com/Mishapolk/square-packing-records/blob/70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94/certificates/n304.cert at 70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94",
