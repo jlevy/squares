@@ -61,6 +61,8 @@ allowlist:
       packet pins and does not retain, kept as hosted data (`Release.hosted`), is read
       from the downloaded shards through devtools.hosted_shards, and the fast check
       holds the source-history receipt's entry for it to the digest the packet pins.
+      `recipe_pin_problems` holds each recipe's parent digest, as the downloaded index
+      states it, and each stored parent replay's digest to the packet's pin.
   - path: packing/devtools/construction_checker.py
     kind: download
     boundary: >-
