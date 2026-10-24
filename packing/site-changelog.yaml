@@ -18,7 +18,7 @@ entries:
         exact values s(2) to s(5), Göbel’s s(5) a substantive case result scored as its
         claim, as the register’s other published exact values are. Neither moves a bound,
         and the significance does not establish verification.
-    topics: [upper-bound, formalization]
+    topics: [upper-bound, optimality, formalization]
     categories: [records]
     pull_requests: [750]
     result_ids: [T-236, T-237]
