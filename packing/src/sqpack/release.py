@@ -8483,6 +8483,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         ),
         paths=(
             "packing/campaign/result-requests.yaml",
+            "packing/devtools/check_results.py",
             "packing/devtools/site_resources.py",
             "packing/frontier/results.yaml",
             "packing/frontier/source-coverage.yaml",
@@ -8526,9 +8527,10 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "byte-identical across the three; the explainer's math was prepared by the "
             "host's Chrome for Testing 153 headless shell through SQPACK_CHROMIUM, the same "
             "browser for every render. Main b2ea7b09c (#788), merged after, changes none "
-            "of the four files, so that measurement stands for it. After review B's fixes "
-            "and the merge of main f354a34f5 (#736), at link revision 480c4402: twice from "
-            "this tree and once with that main's four files swapped in, 69 files each, all "
+            "of the four files, so that measurement stands for it. After review B's fixes, "
+            "which add check_results.py (verification_level, a refactor of one atom), and "
+            "the merge of main f354a34f5 (#736), at link revision 3d96fba0: twice from this "
+            "tree and once with that main's five files swapped in, 69 files each, all "
             "byte-identical across the three, by the same browser. No PDF was printed; each "
             "prints from that HTML. Every paper keeps its version."
         ),
