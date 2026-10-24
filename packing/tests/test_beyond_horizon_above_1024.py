@@ -50,15 +50,16 @@ def _above(**fields: Any) -> replay.Walk:
 
 
 def test_every_frozen_release_and_walk_keeps_its_window() -> None:
-    """W7 sets no window above 1024: the 20 releases decide from the corpus to 1024 and
-    name no walk above or hosted manifest; every walk reaches to 1024, and the five that
-    apply the owner's rulings list both through 1024."""
-    assert len(replay.RELEASES) == 20
+    """W7 sets no window above 1024: the 29 releases, the push of 23:38:42Z's nine among
+    them (think-lyf9), decide from the corpus to 1024 and name no walk above or hosted
+    manifest; every walk reaches to 1024, and the six that apply the owner's rulings list
+    both through 1024."""
+    assert len(replay.RELEASES) == 29
     for chosen in replay.RELEASES.values():
         assert (chosen.decided_above, chosen.decided_through) == (324, replay.FROZEN_THROUGH)
         assert (chosen.walk_above, chosen.hosted, chosen.frozen) == ("", None, True)
     assert all(walk.through == replay.FROZEN_THROUGH for walk in replay.WALKS.values())
-    assert len(replay.WALK_RULINGS) == 5
+    assert len(replay.WALK_RULINGS) == 6
     for rulings in replay.WALK_RULINGS.values():
         assert [item["through"] for item in rulings] == [1024, 1024]
 
