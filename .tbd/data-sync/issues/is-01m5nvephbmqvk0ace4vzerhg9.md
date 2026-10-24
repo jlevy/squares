@@ -5,7 +5,7 @@ title: "Take over PR #736 (home page News box) on the owner's word: merge main, 
 kind: task
 status: closed
 priority: 2
-version: 10
+version: 11
 delegate: c-sync-736-1024
 labels: []
 dependencies: []
@@ -15,7 +15,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-24T02:22:20.715Z
-updated_at: 2026-10-24T10:48:04.270Z
+updated_at: 2026-10-24T10:59:31.261Z
 started_at: 2026-10-24T02:22:34.759Z
 closed_at: 2026-10-24T10:48:04.270Z
 close_reason: "PR #736 merged 2026-10-24T10:47:45Z (f354a34f5) at efd1d8e48 after review B's fixes and follow-up review C (approve: strict improvement, 710 of 711 pages identical, compatible with #746, #764, #771, #757 and the 22 October design); hosted CI green (31 pass, 28 skipped)."
@@ -45,3 +45,5 @@ duplicate_of: null
 - Open, outside the branch: tests/test_beyond_horizon_replay.py::test_the_receipts_records_and_coverage_rows_hold runs 42-45 s on most hosted runs against the 45 s backstop (failed suite-c at 5c71b2f94 at 45.07 s; 44.19 s on main's push at e5c1c64e3).
 
 2026-10-24 coord-intake-1024: c-sync-736-1024 finished at head 8e3692a31 (main b2ea7b09c merged): B1-B5 fixed in c0ce843f9 (dispositions https://github.com/jlevy/squares/pull/736#issuecomment-6382731191), papers' record re-measured (5c71b2f94), DATA_REVISION re-pinned (252c64ba4), landings backfill 11 entries in b3f67a02d; hosted CI green (Packing validation 40082304617 after a re-run of the bead-tree step the coordinator's closures had broken, Certificate page 40082304588, Branch mergeability 40082301179); 710 of 711 HTML pages identical to main's, index.html 579,134 bytes (budget 1,300,000), box 55,692 of 64,000. Because the owner asked for careful review, a follow-up review C (think-s2dw) checks the fixes and merges before the merge. Slow test found: think-zjls.
+
+2026-10-24 coord-intake-1024: #736's deploy verified: Pages run 40087328669 on f354a34f5, deploy job 120854074102 and verify-deployment job 120854118400 succeeded; squaremath.org's home page carries Recently Added and the News box.

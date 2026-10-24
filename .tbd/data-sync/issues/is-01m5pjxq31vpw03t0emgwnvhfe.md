@@ -5,13 +5,14 @@ title: "Import franciscouzo: 126 upper bounds at 330-997 (106 certificate rows) 
 kind: task
 status: open
 priority: 2
-version: 2
+version: 3
+spec_path: docs/project/specs/active/plan-2026-10-24-rows-above-1024.md
 labels:
   - result-import
 dependencies: []
 parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 created_at: 2026-10-24T09:12:30.049Z
-updated_at: 2026-10-24T09:12:51.094Z
+updated_at: 2026-10-24T10:53:17.641Z
 ---
 
 ## Notes

@@ -5,7 +5,8 @@ title: "Import Mishapolk: 5,468 certificates 328–10000 at 814fbe9, '#715 resol
 kind: task
 status: open
 priority: 1
-version: 11
+version: 12
+spec_path: docs/project/specs/active/plan-2026-10-24-rows-above-1024.md
 delegate: null
 labels:
   - result-import
@@ -13,7 +14,7 @@ dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-10-22T20:07:20.685Z
-updated_at: 2026-10-24T08:28:38.063Z
+updated_at: 2026-10-24T10:53:10.296Z
 started_at: 2026-10-23T02:12:17.764Z
 ---
 Issue #732 (https://github.com/jlevy/squares/issues/732), opened 2026-10-22T19:55:03Z by Mishapolk (Mykhailo Polkovskyi): "328–10000: Registration Request (5,468 Exact Rational Certificates), Complete Resolution of Couzo #715, and Algebraic Boundary Saturation Proof". Source Mishapolk/square-packing-records@814fbe9129b7abb301923cc50de621697a53940f (upper_bounds.json, certified_bounds.json, certificates/manifest.json, certificates/census.json with digests in the issue).
