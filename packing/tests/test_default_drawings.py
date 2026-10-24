@@ -410,6 +410,53 @@ def test_a_decision_names_what_it_still_owes_and_the_bead_that_owns_it() -> None
     assert found == [f"n={n}: SETTLED's owed names no bead first: 'later'"]
 
 
+#: The exact algebraic houses adopted on 23 October 2026 (think-ot5c), each drawn
+#: unregularized while its regularization is owed to think-mbdw (review A4 of #756).
+EXACT_HOUSES_OWED = (102, 123, 153, 207, 258, 259, 302)
+
+
+def test_a_regularization_owed_is_its_own_state_and_names_its_bead() -> None:
+    # In the owner's words of 23 October 2026, a drawing is regularized or it is not. At
+    # the seven exact houses the strong generators ran and drew no view the improvement
+    # rule could judge (grid-slack has no exact frame on a number-field witness, and Evan
+    # Daniel's solves are rational sides above the algebraic U), so nothing was judged no
+    # better: each is `regularization-owed`, counted apart from the decided counts, and
+    # its entry names the bead that owes the regularization, which the bead-tree gate
+    # holds open through `deferrals`. One that names no bead fails the gate.
+    record = _record()
+    rows = {row["n"]: row for row in record["states"]}
+    owed = sorted(n for n, row in rows.items() if row["state"] == defaults.OWED)
+    assert owed == list(EXACT_HOUSES_OWED)
+    for n in owed:
+        held = defaults.SETTLED[n]
+        assert held.state == defaults.OWED, n
+        assert held.owed is not None, n
+        assert held.owed.startswith("think-mbdw: "), n
+        assert rows[n]["drawn"] == defaults.HOUSE, n
+        assert rows[n]["why"].endswith(f"; still owed: {held.owed}"), n
+    totals = record["totals"]["states"]
+    assert totals[defaults.OWED] == len(EXACT_HOUSES_OWED)
+    assert totals[defaults.DECIDED] == sum(
+        1 for row in rows.values() if row["state"] == defaults.DECIDED
+    )
+    _found, listed = defaults.state_problems()
+    summary = listed[-1]
+    assert summary.startswith("regularization states: 324 counts: ")
+    assert f"{len(EXACT_HOUSES_OWED)} regularization owed" in summary
+    assert f"{totals[defaults.DECIDED]} decided no better" in summary
+    named = dict(defaults.deferrals())
+    for n in owed:
+        assert named[f"default_drawings.py SETTLED n={n} owed"] == "think-mbdw", n
+
+    n = EXACT_HOUSES_OWED[0]
+    unowned = {**defaults.SETTLED, n: defaults.SETTLED[n]._replace(owed=None)}
+    found, _listed = defaults.state_problems(settled=unowned)
+    assert found == [f"n={n}: a regularization owed names the bead that owes it in `owed`"]
+    unknown = {**defaults.SETTLED, n: defaults.SETTLED[n]._replace(state="owed")}
+    found, _listed = defaults.state_problems(settled=unknown)
+    assert f"n={n}: SETTLED gives state 'owed'" in found
+
+
 def test_a_settled_entry_the_layer_decides_unaided_fails_the_gate(tmp_path: Path) -> None:
     # Where the layer holds a strong generator's view of this witness and does not draw
     # it, the count is decided without SETTLED, so an entry there is redundant (review A10

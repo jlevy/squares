@@ -922,10 +922,10 @@ No adoption waits for the owner’s word, and each case that once did is decided
     and a view the owner admits is drawn on its review record, as at n = 211 on 16
     October 2026: “Admit it.”
   - Where the house best packing has an algebraic side, the count draws its exact house
-    and its regularization stays owed under think-mbdw, as the `owed` of its `SETTLED`
-    entry: no rational view is `same` or `bound` at an irrational side, and no
-    number-field view is decided on two exact routes yet (the policy’s obligation 1;
-    think-mbdw is that second route).
+    and its regularization stays owed under think-mbdw: its `SETTLED` entry’s state is
+    `regularization-owed`, not decided, and its `owed` names the bead: no rational view
+    is `same` or `bound` at an irrational side, and no number-field view is decided on
+    two exact routes yet (the policy’s obligation 1; think-mbdw is that second route).
     A rational view just above an algebraic U is not drawn.
     The owner answered question 13 so on 23 October 2026 (think-r8cn): the best record
     is always the record, and a regularized drawing may change the side only as a strict

@@ -767,10 +767,11 @@ The owner answered question 13 (think-r8cn) the same day: the best record is alw
 record, and a regularized drawing may change the side only as a strict improvement.
 So no view above $U$ is kept, the lapsed views at 153, 207, 259 and 302 among them, and
 each of the seven draws its exact house.
-`SETTLED` records the seven on their new witnesses as decided with the regularization of
-the exact house still owed, under think-mbdw, since no regularizer yet draws an exact
-view at or below the record’s side on a number-field witness.
-The evidence is retained in
+`SETTLED` records the seven on their new witnesses as `regularization-owed`, not as
+decided: no view was judged no better, and the exact house drawn is not regularized.
+Its regularization is owed under think-mbdw, which needs a regularizer that draws an
+exact view of a number-field witness at or below the record’s side, and a second exact
+route to admit it. The evidence is retained in
 [`cases/regularized_drawings/think-ot5c-2026-10-23/`](../../cases/regularized_drawings/think-ot5c-2026-10-23/README.md).
 After it the index draws 86 views: 30 by the axis tool, 37 by Evan Daniel’s regularizer
 and 19 by the grid-slack generator’s version 1.
@@ -837,8 +838,11 @@ The same file’s `states` says, for every count n = 1..324, whether the picture
 is regularized: `regularized` where a view of Evan Daniel’s regularizer or the
 grid-slack generator is drawn, `regular-as-published` where the house drawing has no
 uneven and no near-axis square, `decided-no-better` where the strong generators ran on
-that very witness and drew nothing better, `exempt` with the bead that owns it, and
-`pending` otherwise.
+that very witness and drew nothing better, `regularization-owed` where they ran and drew
+no view the improvement rule could judge, so the drawing is not regularized and its
+`SETTLED` entry names the bead that owes it (the exact algebraic houses, under
+think-mbdw), `exempt` with the bead that owns it, and `pending` otherwise.
+The totals count each state apart.
 Each state carries the drawn picture’s measures, the witness’s id, its source’s key,
 path and revision, and its side, and the runs that decided it.
 The index’s `status: regularized` means only that the layer holds a view: at n = 176 it

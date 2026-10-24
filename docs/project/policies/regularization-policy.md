@@ -676,9 +676,11 @@ regularized. So the same record states, for every count, whether the picture it 
 `regular-as-published` (the house drawing has no uneven and no near-axis square, no
 strong view of the count has lapsed, and `PENDING_ALLOWED` does not hold it for its
 bead’s runs), `decided-no-better` (the strong generators ran on that witness and drew
-nothing the improvement rule takes), `exempt` (with a reason and the bead that owns it)
-or `pending`, with the witness it was decided on (its source’s key, path and revision
-and its side, never a digest of the file, under OR-16) and the runs that decided it.
+nothing the improvement rule takes), `regularization-owed` (they ran and drew no view
+the rule could judge, so the drawing is not regularized and its regularization is owed
+to the open bead its entry names), `exempt` (with a reason and the bead that owns it) or
+`pending`, with the witness it was decided on (its source’s key, path and revision and
+its side, never a digest of the file, under OR-16) and the runs that decided it.
 The index’s `status: regularized` says only that the layer holds a view.
 A view that lapses with its witness is recorded on the axis tool’s record (`lapsed`),
 and the count is pending until the generators decide the new witness.

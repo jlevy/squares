@@ -61,8 +61,11 @@ item cap. No `layer` command followed, since the selection chose no view.
 | 259 | T-193 | As at 258, $1.66 \times 10^{-19}$ above $U$, not drawn; grid-slack draws no view | the exact house, regularization owed (think-mbdw) |
 | 302 | T-193 | As at 258, $1.79 \times 10^{-19}$ above $U$, not drawn; grid-slack draws no view | the exact house, regularization owed (think-mbdw) |
 
-Each is recorded in `default_drawings.SETTLED` on its new witness as decided, with the
-regularization of the exact house still owed (`owed`, naming think-mbdw).
+Each is recorded in `default_drawings.SETTLED` on its new witness as
+`regularization-owed`: not regularized, with the regularization of the exact house owed
+(`owed`, naming think-mbdw).
+It was first recorded as decided no better, and review A4 of #756 gave it a state of its
+own, since no view was judged.
 `PENDING_ALLOWED` cannot hold these counts: since the house rule it defers only a
 corrected witness, and an adoption moved these houses.
 At 70 and 295 the new house drawings have no uneven and no near-axis square, so they

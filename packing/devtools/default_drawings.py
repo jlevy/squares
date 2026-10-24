@@ -61,6 +61,14 @@ its side), the runs that decided that witness, and one state:
 - `decided-no-better`: the strong generators ran on this very witness and drew nothing
   the improvement rule takes: the layer holds a strong generator's view of it and does
   not draw it, or `SETTLED` says so, by the witness's source and side;
+- `regularization-owed`: the strong generators ran on this very witness and none drew a
+  view the improvement rule could judge, for want of a capability rather than by a
+  judgement, so the drawing is not regularized and its regularization is owed to the
+  open bead `owed` names (`SETTLED`, by the witness's source and side). The exact
+  algebraic houses are the case (review A4 of #756): grid-slack has no exact frame on a
+  number-field witness, and Evan Daniel's regularizer solves each to a rational side
+  above the algebraic `U`, which is not drawn, so the exact house is drawn until
+  think-mbdw's regularizer draws one;
 - `exempt`: the count is set aside with a reason and the bead that owns it (`SETTLED`);
 - `pending`: none of these, as at a count whose strong view lapsed with its witness
   (the index's `lapsed`, which `--update-atlas` writes) or that `PENDING_ALLOWED` names,
@@ -90,8 +98,9 @@ copies the block into the evidence (`SETTLED_RUNS`) while the index still has it
 the record lists the counts the run covered, a receipt's counts or the reports beside a
 block, the settled count must be one of them. A copy there that no `SETTLED` entry
 names fails too, since the directory holds the blocks settlements rest on (review G2 of
-#644). Each bead the list, an exemption or a decided count's `owed` names must be open,
-which `devtools.check_bead_tree` holds through `deferrals`. Since the house rule, each entry is
+#644). Each bead the list, an exemption, or a decided or regularization-owed count's
+`owed` names must be open, which `devtools.check_bead_tree` holds through `deferrals`, and
+a regularization-owed entry must name one. Since the house rule, each entry is
 a corrected witness's (`CORRECTED`), which names the witness it replaced; with
 `--base-ref REF` the gate reads the record of the commit the change is built on, the merge
 base of `REF` and `HEAD`, and holds each entry to it (`deferral_problems`), so a house moved
@@ -180,9 +189,13 @@ ABOVE_BOUND = "above U, not in the exceptions"
 REGULARIZED_STATE = "regularized"
 REGULAR_AS_PUBLISHED = "regular-as-published"
 DECIDED = "decided-no-better"
+#: Not regularized, with the runs done and no view the improvement rule could judge; its
+#: regularization is owed to the bead its `SETTLED` entry's `owed` names (review A4 of
+#: #756). Counted apart from `DECIDED`, since nothing judged a view no better.
+OWED = "regularization-owed"
 EXEMPT = "exempt"
 PENDING = "pending"
-STATES = (REGULARIZED_STATE, REGULAR_AS_PUBLISHED, DECIDED, EXEMPT, PENDING)
+STATES = (REGULARIZED_STATE, REGULAR_AS_PUBLISHED, DECIDED, OWED, EXEMPT, PENDING)
 #: The generators whose drawn view makes a count `regularized`: Evan Daniel's regularizer
 #: and the grid-slack port of his placement. The axis tool is the reference and fallback
 #: (policy section 4); a drawing it alone made waits for these to decide its witness.
@@ -195,7 +208,7 @@ BEAD = re.compile(r"\bthink-[0-9a-z]{4}\b")
 
 class Settled(NamedTuple):
     """A count the strong generators decided, or that is set aside, on one witness: its
-    state (`DECIDED` or `EXEMPT`); that witness as it identifies itself, exactly as it
+    state (`DECIDED`, `OWED` or `EXEMPT`); that witness as it identifies itself, exactly as it
     writes them -- its source's key, path and revision (`None` where the source pins
     none) and its side; the runs that decided it as (generator, run id); what they
     found; where the record says so; and, where a decision still owes runs or a recorded
@@ -424,9 +437,11 @@ _README_ICP1 = (
 #: 207, 259 and 302 a strong view of the earlier rational house lapsed just above the new
 #: `U`. The owner answered question 13 (think-r8cn) on 23 October 2026: the best record is
 #: always the record, and a regularized drawing may change the side only as a strict
-#: improvement. So no view above `U` is kept or drawn and `ABOVE_U` gains no entry, and
-#: each entry's `owed` names think-mbdw for the regularization of the exact house, which no
-#: regularizer yet does on a number-field witness. `PENDING_ALLOWED` cannot hold them:
+#: improvement. So no view above `U` is kept or drawn and `ABOVE_U` gains no entry. Each
+#: entry is `OWED`, not `DECIDED`: no view was judged no better, and the exact house drawn
+#: is not regularized (review A4 of #756). Its `owed` names think-mbdw for the
+#: regularization of the exact house, which needs a regularizer for number-field witnesses
+#: and a second exact route to admit its view. `PENDING_ALLOWED` cannot hold them:
 #: since the house rule it defers only a corrected witness (`deferral_problems`), and an
 #: adoption moved these. The runs' receipts, blocks, reports and the selection's report
 #: are in packing/cases/regularized_drawings/think-ot5c-2026-10-23/.
@@ -445,9 +460,9 @@ _README_OT5C = (
     "October 2026 (think-ot5c), beside the runs' receipts, blocks and reports"
 )
 _OWED_MBDW = (
-    "think-mbdw: the regularization of the exact house, since no regularizer yet draws an "
-    "exact view at or below the record's side on a number-field witness; until one does, "
-    "the exact house is drawn"
+    "think-mbdw: the regularization of the exact house, which needs a regularizer that "
+    "draws an exact view of a number-field witness at or below the record's side, and a "
+    "second exact route that admits it; until then the exact house is drawn"
 )
 _DANIEL_639 = "[Daniel exact current records 2026-10-16]"
 _DANIEL_639_REVISION = "7d1407a0b66c46e32cdbcbd5619586fe2bdd52a1"
@@ -593,7 +608,7 @@ SETTLED: dict[int, Settled] = {
         _README_3MRY,
     ),
     102: Settled(
-        DECIDED,
+        OWED,
         _DANIEL_639,
         "resources/web/evand-exact-cur-2026-10-16/facts/alg-n-102.yaml.gz",
         _DANIEL_639_REVISION,
@@ -651,7 +666,7 @@ SETTLED: dict[int, Settled] = {
         _README_3MRY,
     ),
     123: Settled(
-        DECIDED,
+        OWED,
         _DANIEL_639,
         "resources/web/evand-exact-cur-2026-10-16/facts/alg-n-123.yaml.gz",
         _DANIEL_639_REVISION,
@@ -731,7 +746,7 @@ SETTLED: dict[int, Settled] = {
         _README_3MRY,
     ),
     153: Settled(
-        DECIDED,
+        OWED,
         _PINGYOU_574,
         "resources/web/pingyou-pr574-certificates-2026-10-13/facts/alg-n-153.yaml.gz",
         _PINGYOU_574_REVISION,
@@ -817,7 +832,7 @@ SETTLED: dict[int, Settled] = {
         _README_3MRY,
     ),
     207: Settled(
-        DECIDED,
+        OWED,
         _PINGYOU_574,
         "resources/web/pingyou-pr574-certificates-2026-10-13/facts/alg-n-207.yaml.gz",
         _PINGYOU_574_REVISION,
@@ -964,7 +979,7 @@ SETTLED: dict[int, Settled] = {
         _README_3MRY,
     ),
     258: Settled(
-        DECIDED,
+        OWED,
         _DANIEL_639,
         "resources/web/evand-exact-cur-2026-10-16/facts/alg-n-258.yaml.gz",
         _DANIEL_639_REVISION,
@@ -976,7 +991,7 @@ SETTLED: dict[int, Settled] = {
         _OWED_MBDW,
     ),
     259: Settled(
-        DECIDED,
+        OWED,
         _DANIEL_639,
         "resources/web/evand-exact-cur-2026-10-16/facts/alg-n-259.yaml.gz",
         _DANIEL_639_REVISION,
@@ -1157,7 +1172,7 @@ SETTLED: dict[int, Settled] = {
         _README_3MRY,
     ),
     302: Settled(
-        DECIDED,
+        OWED,
         _DANIEL_639,
         "resources/web/evand-exact-cur-2026-10-16/facts/alg-n-302.yaml.gz",
         _DANIEL_639_REVISION,
@@ -1972,10 +1987,12 @@ def _settled_problems(
             f"n={n}: SETTLED names it, but the layer holds the {entry['generator']} view of "
             "this witness, which decides it unaided; take it off"
         )
-    if held.state not in (DECIDED, EXEMPT):
+    if held.state not in (DECIDED, OWED, EXEMPT):
         problems.append(f"n={n}: SETTLED gives state {held.state!r}")
     if held.state == EXEMPT and not BEAD.search(held.evidence):
         problems.append(f"n={n}: an exemption names the bead that owns it")
+    if held.state == OWED and held.owed is None:
+        problems.append(f"n={n}: a regularization owed names the bead that owes it in `owed`")
     if held.owed is not None and not BEAD.match(held.owed):
         problems.append(f"n={n}: SETTLED's owed names no bead first: {held.owed!r}")
     return problems
@@ -2287,8 +2304,9 @@ def check_state(base_ref: str | None = None) -> int:
         return 1
     print(
         "regularization state check passed: every count is regularized, regular as "
-        "published, decided or exempt, or pending and named in PENDING_ALLOWED, which "
-        "equals the pending set and grows only by a reviewed change naming its bead"
+        "published, decided, owed to an open bead or exempt, or pending and named in "
+        "PENDING_ALLOWED, which equals the pending set and grows only by a reviewed change "
+        "naming its bead"
     )
     return 0
 
