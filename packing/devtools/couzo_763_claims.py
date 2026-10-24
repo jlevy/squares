@@ -44,6 +44,28 @@ the competition scores.
 It runs no code of the source and decides nothing about the packings: whether a claim is
 recorded is the report-order walk's (``campaign/issue-intake/upper-bounds-issue763-20261024``).
 
+**The notebook rows** (``others``, think-lyf9). The same push published, in the same index,
+sides credited to the authors of Kaggle notebooks, not to Couzo. No issue reports them; a
+certificate in a watched repository is a report from its first commit (the owner, 14
+October 2026), so they are the push's publications, and an import of their own. The
+receipt's ``others`` lists each one the import takes: a certificate or a construction at
+``HORIZON < n <= LIMIT`` whose credit does not name Couzo, strictly below Göbel's classical
+construction at its count, decided exactly as ``p + q*sqrt(2)``
+(`devtools.intake_ledger.goebel_form`), and not an earlier publication, a count and exact
+side the history scan or f1ceee4's receipts already hold (`EARLIER`). Each keeps the
+notebook its packing comes from, as the source's manifest states it for the certificate the
+row reads (`notebook_of`): the notebook, its version where stated, the run, the licence and
+the source notices it cites. The rest of the rule, that each is strictly below the record
+on ``main`` at its count, is the walk's, from starts frozen at ``main`` 2ec489d1e
+(``campaign/issue-intake/upper-bounds-couzo-964ee2b-notebooks-20261024``), which records
+every one. Read on 24 October 2026, the two together give 99 sides, 87 certificates and 12
+L-border recipes (`OTHERS_CONTROLS`, the stage 1 triage's counts); of the 149 certificates
+and constructions credited to others there that are below Göbel's construction, the other 50
+are earlier publications. Each recipe has a certificate of its own: the source keeps the
+recipe's full n-square expansion under ``certificates/parents/`` at exactly its side, which
+the row names (``recipe_certificate``, `recipe_certificates`; #795's review A, A2), and the
+walk reads the push commit by commit (``devtools.beyond_horizon_replay push-publications``).
+
 From ``packing/``, with the project interpreter::
 
     python -m devtools.couzo_763_claims derive [--write]
@@ -109,6 +131,38 @@ CONTROLS = {
 }
 #: The issue's counts the derivation does not reproduce: reported beside it, not forced.
 STATED_ONLY = {"refines_another_author": 345, "leaderboard_smaller": 180}
+#: The source's certificate manifest, whose witnesses carry each packing's provenance.
+MANIFEST = "certificates/best/manifest.json"
+#: The receipts that hold every side published before the push of 23:38:42Z at these
+#: counts: the history scan of the watched repositories (to 6b7391d for Couzo's) and
+#: Polkovskyi's repository through f1ceee4 and the three commits after it.
+EARLIER = (
+    ROOT / "resources/web/couzo-index-2026-10-15/receipts/history-publications.json",
+    ROOT / "resources/web/mishapolk-issue732-f1ceee4-2026-10-23/receipts/source-history.json",
+    ROOT / "resources/web/mishapolk-issue732-f1ceee4-2026-10-23/receipts/later-commits.json",
+)
+#: The notebook rows the import takes (``others``), as the stage 1 triage counted them
+#: (think-lyf9): 99 sides, 87 certificates and 12 L-border recipes at these counts, each
+#: recipe with a certificate of its own at exactly its side (#795's review A, A2).
+OTHERS_CONTROLS: dict[str, Any] = {
+    "rows": 99,
+    "certificates": 87,
+    "constructions": [445, 488, 580, 679, 732, 787, 844, 859, 903, 913, 964, 967],
+    "recipe_certificates": 12,
+}
+#: Where the source keeps each certificate a later one replaced and each recipe's full
+#: n-square expansion, named by the SHA-256 of its bytes.
+PARENTS = "certificates/parents"
+#: What the receipt keeps of a notebook's provenance, as the manifest states it.
+NOTEBOOK_KEYS = (
+    "notebook",
+    "notebook_version",
+    "run",
+    "license",
+    "source_notices",
+    "kaggle_submission",
+    "original_credits",
+)
 _REFINES = re.compile(r"refines the packing of ([^;]+)")
 
 
@@ -380,10 +434,169 @@ def control_problems(record: Mapping[str, Any]) -> list[str]:
     ]
 
 
+# --------------------------------------------------------------------------- the notebook rows
+
+
+def read_witnesses(archive: Path = ARCHIVE) -> dict[str, Any]:
+    """The manifest's witnesses, read from the packet's retained copy."""
+    return json.loads(read_retained_text(archive / MANIFEST))["witnesses"]
+
+
+def earlier_sides(paths: tuple[Path, ...] = EARLIER) -> frozenset[tuple[int, Fraction]]:
+    """Every count and exact side the receipts in ``paths`` hold as published before the
+    push: each publication of the history scan and of f1ceee4's source history, and each of
+    the commits after f1ceee4."""
+    found: set[tuple[int, Fraction]] = set()
+    for path in paths:
+        document = json.loads(path.read_text(encoding="utf-8"))
+        items = list(document.get("publications", []))
+        items += [
+            item for commit in document.get("commits", []) for item in commit["publications"]
+        ]
+        found.update((int(item["n"]), Fraction(str(item["side"]))) for item in items)
+    return frozenset(found)
+
+
+def recipe_certificates(archive: Path = ARCHIVE) -> dict[tuple[int, Fraction], list[str]]:
+    """The retained certificates under ``certificates/parents/``, by the count and exact side
+    each one's header states (its first line that is not a comment)."""
+    found: dict[tuple[int, Fraction], list[str]] = {}
+    for path in sorted((archive / PARENTS).glob("*.cert")):
+        lines = read_retained_text(path).splitlines()
+        header = next(line for line in lines if line.strip() and not line.startswith("#"))
+        n, side = header.split()
+        found.setdefault((int(n), Fraction(side)), []).append(f"{PARENTS}/{path.name}")
+    return found
+
+
+def notebook_of(entry: Mapping[str, Any], witnesses: Mapping[str, Any]) -> dict[str, Any]:
+    """The notebook an entry's packing comes from, as the manifest states it for the
+    certificate the entry reads: the witness at its own count, or, for a construction, at
+    the count of the certificate it builds on. The witness must name that certificate's
+    path and state the notebook and its run."""
+    source_n = int((entry.get("construction") or {}).get("source_n") or entry["n"])
+    witness = witnesses.get(str(source_n))
+    _require(isinstance(witness, Mapping), f"{entry['n']}: no manifest witness at {source_n}")
+    assert isinstance(witness, Mapping)
+    _require(
+        witness.get("certificate") == entry["certificate"],
+        f"{entry['n']}: the manifest's witness at {source_n} names another certificate",
+    )
+    stated = (witness.get("provenance") or {}).get("source_provenance") or {}
+    _require(
+        bool(stated.get("notebook")) and bool(stated.get("run")),
+        f"{entry['n']}: the manifest names no notebook and run",
+    )
+    return {key: stated[key] for key in NOTEBOOK_KEYS if key in stated}
+
+
+def other_row(
+    n: int,
+    entry: Mapping[str, Any],
+    witnesses: Mapping[str, Any],
+    goebel: Bound,
+    recipes: Mapping[tuple[int, Fraction], list[str]],
+) -> dict[str, Any]:
+    """One notebook row as the receipt keeps it: the entry, its notebook, its margin below
+    Göbel's construction, and, for a recipe, the one retained certificate under
+    ``certificates/parents/`` that states exactly its count and side (`recipe_certificates`).
+    """
+    side = Fraction(str(entry["bound"]))
+    found: dict[str, Any] = {
+        "n": n,
+        "kind": kind_of(entry),
+        "certificate": entry["certificate"],
+        "certificate_sha256": entry["certificate_sha256"],
+        "source_n": int(entry["source_n"]),
+        "deleted_squares": int(entry["deleted_squares"]),
+        "exact": legacy.literal(side),
+        "ceiling_12": legacy.ceiling_decimal(side, PLACES),
+        "index_print": entry.get("rounded_up", ""),
+        "credit": entry["credit"],
+        "notebook": notebook_of(entry, witnesses),
+        "goebel": {"bound": goebel.literal(), "margin": goebel.minus(side)},
+    }
+    if "construction" in entry:
+        recipe = entry["construction"]
+        found["construction"] = {
+            key: recipe[key]
+            for key in ("kind", "source_n", "tiles_per_side", "layers", "capacity")
+        }
+        files = recipes.get((n, side), [])
+        _require(len(files) == 1, f"{n}: {len(files)} retained parents state the recipe's side")
+        found["recipe_certificate"] = files[0]
+    return found
+
+
+def others(
+    certified: Mapping[str, Any],
+    witnesses: Mapping[str, Any],
+    earlier: frozenset[tuple[int, Fraction]],
+    recipes: Mapping[tuple[int, Fraction], list[str]],
+) -> list[dict[str, Any]]:
+    """The notebook rows the import takes: each certificate or construction beyond the
+    corpus to ``LIMIT`` credited to another author, strictly below Göbel's construction at
+    its count, and not an earlier publication (``earlier``)."""
+    from devtools import intake_ledger  # noqa: PLC0415
+
+    found: list[dict[str, Any]] = []
+    for key in sorted(certified, key=int):
+        entry, n = certified[key], int(key)
+        if not HORIZON < n <= LIMIT or entry.get("kind") not in ("certificate", "construction"):
+            continue
+        if is_own(str(entry["credit"])):
+            continue
+        _require(int(entry["n"]) == n, f"{key}: the entry names n={entry['n']}")
+        side = Fraction(str(entry["bound"]))
+        form = intake_ledger.goebel_form(n)
+        _require(form is not None, f"{n}: no Göbel construction beyond the corpus")
+        assert form is not None
+        goebel = Bound(Fraction(form.p), Fraction(form.q))
+        if not goebel.above(side) or (n, side) in earlier:
+            continue
+        found.append(other_row(n, entry, witnesses, goebel, recipes))
+    return found
+
+
+def others_summary(rows: list[dict[str, Any]]) -> dict[str, Any]:
+    """The notebook rows' counts (`OTHERS_CONTROLS`) and how many each notebook run gives."""
+    return {
+        "rows": len(rows),
+        "certificates": sum(1 for item in rows if item["kind"] != "construction"),
+        "constructions": [item["n"] for item in rows if item["kind"] == "construction"],
+        "recipe_certificates": sum(1 for item in rows if "recipe_certificate" in item),
+        "deletions": [item["n"] for item in rows if item["deleted_squares"]],
+        "by_run": {
+            str(run): count
+            for run, count in sorted(Counter(item["notebook"]["run"] for item in rows).items())
+        },
+    }
+
+
+def others_problems(record: Mapping[str, Any]) -> list[str]:
+    """Where the notebook rows do not give the triage's counts (`OTHERS_CONTROLS`)."""
+    found = record["summary"]["others"]
+    return [
+        f"the notebook rows give {key} = {found[key]}, the triage {value}"
+        for key, value in OTHERS_CONTROLS.items()
+        if found[key] != value
+    ]
+
+
 def derive(archive: Path = ARCHIVE) -> dict[str, Any]:
-    """The claim map from the retained indexes, refused unless it gives the issue's counts."""
-    record = claim_map(*read_indexes(archive))
+    """The claim map from the retained indexes, refused unless it gives the issue's counts
+    and the notebook rows the triage's."""
+    certified, public = read_indexes(archive)
+    record = claim_map(certified, public)
     problems = control_problems(record)
+    _require(not problems, "; ".join(problems))
+    rows = others(
+        certified, read_witnesses(archive), earlier_sides(), recipe_certificates(archive)
+    )
+    record["others"] = rows
+    record["summary"]["others"] = others_summary(rows)
+    record["indexes"] = [*record["indexes"], MANIFEST]
+    problems = others_problems(record)
     _require(not problems, "; ".join(problems))
     return record
 

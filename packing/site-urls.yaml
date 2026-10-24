@@ -8574,6 +8574,14 @@ urls:
   first_published: '2026-10-13'
   lastmod: '2026-10-22'
   status: live
+- path: profiles/alexchilton.html
+  canonical: profiles/alexchilton.html
+  kind: page
+  generator: devtools.render_contributors:contributor_pages
+  producer: overview
+  first_published: '2026-10-13'
+  lastmod: '2026-10-22'
+  status: live
 - path: profiles/allen-chang.html
   canonical: profiles/allen-chang.html
   kind: page
@@ -8608,6 +8616,14 @@ urls:
   status: live
 - path: profiles/anna-slivkova.html
   canonical: profiles/anna-slivkova.html
+  kind: page
+  generator: devtools.render_contributors:contributor_pages
+  producer: overview
+  first_published: '2026-10-13'
+  lastmod: '2026-10-22'
+  status: live
+- path: profiles/aqibrazadev.html
+  canonical: profiles/aqibrazadev.html
   kind: page
   generator: devtools.render_contributors:contributor_pages
   producer: overview
@@ -8886,6 +8902,22 @@ urls:
   first_published: '2026-10-13'
   lastmod: '2026-10-22'
   status: live
+- path: profiles/kirill-tymchishin.html
+  canonical: profiles/kirill-tymchishin.html
+  kind: page
+  generator: devtools.render_contributors:contributor_pages
+  producer: overview
+  first_published: '2026-10-13'
+  lastmod: '2026-10-22'
+  status: live
+- path: profiles/kyleluecke.html
+  canonical: profiles/kyleluecke.html
+  kind: page
+  generator: devtools.render_contributors:contributor_pages
+  producer: overview
+  first_published: '2026-10-13'
+  lastmod: '2026-10-22'
+  status: live
 - path: profiles/magnus-thulin.html
   canonical: profiles/magnus-thulin.html
   kind: page
@@ -9136,6 +9168,14 @@ urls:
   status: live
 - path: profiles/trevor-green.html
   canonical: profiles/trevor-green.html
+  kind: page
+  generator: devtools.render_contributors:contributor_pages
+  producer: overview
+  first_published: '2026-10-13'
+  lastmod: '2026-10-22'
+  status: live
+- path: profiles/vladislav-lavrentev.html
+  canonical: profiles/vladislav-lavrentev.html
   kind: page
   generator: devtools.render_contributors:contributor_pages
   producer: overview

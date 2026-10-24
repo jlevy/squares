@@ -1,0 +1,31 @@
+{
+  "comparison": {
+    "above": [],
+    "detail": [
+      {"goebel":"11 + 13/2*sqrt(2)","goebel_family":"G\u00f6bel square","goebel_from_count":389,"margin":-0.28242985991755276,"n":377,"note":"certificates/best/n377.cert","relation":"below","side":"142791193915162334284242373567093871616121/7171847966521426353433185500000000000000"},
+      {"goebel":"11 + 13/2*sqrt(2)","goebel_family":"G\u00f6bel square","goebel_from_count":389,"margin":-0.26548925057086126,"n":378,"note":"certificates/best/n378.cert","relation":"below","side":"221223817630592333233184330208968914831482665572444550085149/11101768453128524727614717684531285247275037000000000000000"},
+      {"goebel":"20 + 1/2*sqrt(2)","goebel_family":"G\u00f6bel strip","goebel_from_count":408,"margin":-0.06135352504356643,"n":405,"note":"certificates/best/n405.cert","relation":"below","side":"54336482610730047065521843724837910388873/2631847912575563456129786500000000000000"},
+      {"goebel":"2 + 14*sqrt(2)","goebel_family":"corner-touching G\u00f6bel strip","goebel_from_count":450,"margin":-0.0658238611565144,"n":450,"note":"certificates/best/n450.cert","relation":"below","side":"224517575127240282229697999501283708673859/10330642806601776906195679500000000000000"},
+      {"goebel":"12 + 15/2*sqrt(2)","goebel_family":"G\u00f6bel square","goebel_from_count":489,"margin":-0.8505041523294034,"n":451,"note":"certificates/best/n451.cert","relation":"below","side":"1341608405641676464939461126634095959527/61665857197251768500344750000000000000"},
+      {"goebel":"23 + 1/2*sqrt(2)","goebel_family":"G\u00f6bel strip","goebel_from_count":538,"margin":-0.13733737862225462,"n":532,"note":"certificates/best/n532.cert","relation":"below","side":"24664581997079351269006689537187110964695718772392541161209/1046449864477500883416587756657679868668104500000000000000"},
+      {"goebel":"13 + 8*sqrt(2)","goebel_family":"G\u00f6bel square","goebel_from_count":568,"margin":-0.3782914152980765,"n":551,"note":"certificates/best/n551.cert","relation":"below","side":"787703213097107602502506329311293732519927/32909525258867166033953713500000000000000"},
+      {"goebel":"14 + 19/2*sqrt(2)","goebel_family":"G\u00f6bel square","goebel_from_count":725,"margin":-0.5468314532807957,"n":697,"note":"certificates/best/n697.cert","relation":"below","side":"50310688215820496829695563714778285411333/1871106771773009747247104000000000000000"},
+      {"goebel":"14 + 19/2*sqrt(2)","goebel_family":"G\u00f6bel square","goebel_from_count":725,"margin":-0.4396308344359794,"n":706,"note":"certificates/best/n706.cert","relation":"below","side":"1713284115278776748210770739633000121278630794155257848281/63465784603885791330190558789296078593015500000000000000"},
+      {"goebel":"15 + 19/2*sqrt(2)","goebel_family":"G\u00f6bel square","goebel_from_count":781,"margin":-0.6350297713606721,"n":745,"note":"certificates/best/n745.cert","relation":"below","side":"1163526915159769373634608969084181339651275871596529516448827/41853487555178760147544253083981193228139038500000000000000"},
+      {"goebel":"15 + 21/2*sqrt(2)","goebel_family":"G\u00f6bel square","goebel_from_count":861,"margin":-0.04955745389400438,"n":858,"note":"certificates/best/n858.cert","relation":"below","side":"42876888993155690929677252433/1438836989841500000000000000"},
+      {"goebel":"16 + 10*sqrt(2)","goebel_family":"G\u00f6bel square","goebel_from_count":880,"margin":-0.23409951962203088,"n":867,"note":"certificates/best/n867.cert","relation":"below","side":"96369086550898837502134688970094820146161/3222180360336637331426205500000000000000"},
+      {"goebel":"16 + 10*sqrt(2)","goebel_family":"G\u00f6bel square","goebel_from_count":880,"margin":-0.14987390128799072,"n":874,"note":"certificates/best/n874.cert","relation":"below","side":"897871003081144630498994351840454039222901242040974839862477/29936755400119599297539533215797529711832207250000000000000"},
+      {"goebel":"30 + 1/2*sqrt(2)","goebel_family":"G\u00f6bel strip","goebel_from_count":912,"margin":-0.08801857070887796,"n":907,"note":"certificates/best/n907.cert","relation":"below","side":"66216450368024237758015562712954159285855473988172550051783178729144162873935261/2162587269511355434171611467418152744697692677591060196133169005500000000000000"},
+      {"goebel":"16 + 21/2*sqrt(2)","goebel_family":"G\u00f6bel square","goebel_from_count":921,"margin":-0.04955753196772085,"n":918,"note":"certificates/best/n918.cert","relation":"below","side":"60933921092552459483577914371/1978394303185500000000000000"},
+      {"goebel":"16 + 11*sqrt(2)","goebel_family":"G\u00f6bel square","goebel_from_count":964,"margin":-0.6223094145360195,"n":929,"note":"certificates/best/n929.cert","relation":"below","side":"52665709013419712018283248868989741676241465742984126570791/1702516367158278922602298766773924382742420890625000000000"},
+      {"goebel":"31 + 1/2*sqrt(2)","goebel_family":"G\u00f6bel strip","goebel_from_count":974,"margin":-0.08801857913041267,"n":968,"note":"certificates/best/n968.cert","relation":"below","side":"4421863631480741923197919990593129239396493920207758239785977/139847917284129519787967592019794454816131138500000000000000"},
+      {"goebel":"17 + 11*sqrt(2)","goebel_family":"G\u00f6bel square","goebel_from_count":1028,"margin":-0.7471893117494626,"n":981,"note":"certificates/best/n981.cert","relation":"below","side":"119856020412372345584460975891/3767971895070500000000000000"}
+    ],
+    "rows": 18,
+    "set": "franciscouzo/square-packing@964ee2b, the kyleluecke-inos-2026-10-23 rows at 964ee2bd",
+    "tally": {"above":0,"below":18,"equal":0}
+  },
+  "families": "G\u00f6bel squares, G\u00f6bel strips and corner-touching strips, with deletion",
+  "format": "beyond-horizon-goebel-comparison-v1",
+  "program": "packing/resources/web/couzo-verified-bounds-2026-10-14/review/goebel_beyond_horizon.py"
+}

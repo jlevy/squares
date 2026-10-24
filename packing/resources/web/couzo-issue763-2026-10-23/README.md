@@ -334,6 +334,173 @@ pass that validates it, and an adoption waits only when it is staged in
 is a later report not yet validated. Daniel’s 268 is not validated yet, so its re-housing
 of 268 follows its own validation (think-hx0e).
 
+## The Notebook Rows
+
+Added on 24 October 2026 by the import of think-lyf9, and revised the same day for review A
+of #795, which reads the push commit by commit. The sections above describe #763’s import
+as it landed; where their counts of the retained files differ from this section’s, this
+section’s are current.
+
+The push of 2026-10-23T23:38:42Z that made `964ee2b` public also published, in its
+`certified_bounds.json`, sides credited to the authors of seven Kaggle notebooks, not to
+Couzo. #763 says the index’s notebook packings by other authors are not part of its
+request, and no other issue reports them. By the owner’s rule of 14 October 2026 a
+certificate in a watched repository is a report from its first commit, so they are the
+push’s publication, and an import of their own.
+
+**The selection.** [`devtools.couzo_763_claims`](../../../devtools/couzo_763_claims.py)
+lists them in [receipts/claim-map.json](receipts/claim-map.json) as `others`: each
+certificate or construction at 325 to 1024 whose credit does not name Couzo, strictly below
+Göbel’s construction at its count (decided exactly as p + q√2), and not an earlier
+publication, a count and side the history scan or f1ceee4’s receipts already hold.
+Of the 149 such entries, 50 are earlier publications. The other **99** are the stage 1
+triage’s set exactly: **87 certificates and 12 L-border recipes** (445, 488, 580, 679,
+732, 787, 844, 859, 903, 913, 964 and 967), the derivation’s controls. Each recipe has a
+certificate of its own: `964ee2b` keeps the recipe’s full n-square expansion under
+`certificates/parents/` at exactly its side, first committed at the recipe’s own commit,
+and the claim map names it (`recipe_certificate`). The walk below finds every one strictly
+below the record on `main`, the rest of the triage’s rule.
+
+**The push, commit by commit.** The push carried three commits, `efef7d1` (committed
+18:16:49Z), `fa6237e` (18:59:39Z) and `964ee2b` (22:38:09Z), and the repository reads a
+push as the history scan does, one publication a commit.
+`beyond_horizon_replay push-publications` writes
+[receipts/push/push-publications.json](receipts/push/push-publications.json): every
+certificate header and index bound each commit adds or changes at the 99 counts, and each
+commit’s least side there that no earlier commit or publication states, strictly below the
+frozen start. It refuses unless the commits are a chain and every claim is held by a
+certificate `964ee2b` keeps at the same Git blob, and its controls are the claims of each
+commit, 40, 90 and 60, and that the last at each count is the claim map’s row. Besides the
+99, `efef7d1` and `fa6237e` state **91 more sides at 63 of the counts**: 76 as Couzo’s own,
+37 of which the index says refine Lavrentev’s (33) or Tymchishin’s (4) packings, one at 994
+that the index credits to Mykhailo Polkovskyi, 9 of Lavrentev’s v11 and 5 of Tymchishin’s
+v3, all replaced at `964ee2b` and kept under `certificates/parents/` or as root
+certificates. A side the index credits to neither Couzo nor a notebook has no release, so
+the walk may only rule it out; the one at 994 restates Polkovskyi’s own #732 row.
+
+**Retained.** The 87 certificates `certificates/best/nN.cert`, 9,780,397 bytes, were added
+to this packet’s scope from a checkout of the same commit for the import, and the 103
+certificates that hold the other sides the push states, 12,720,179 bytes, for review A:
+69 under `certificates/parents/`, the 12 recipes’ expansions among them, and 34 root
+certificates `certificates/nN.cert`. Each is bound to its Git blob there. The parents’
+README and 2.9 MB manifest are pinned by digest. The packet now retains 407 of its 415
+files (108,485,319 bytes).
+
+**Licence.** The notebook certificates are the packings of other authors’ notebooks, so
+the presumption of permission from Couzo’s submission does not cover them. They are
+retained as factual data under the
+[owner decision of 2026-10-09](../known-best-packings/README.md#retained-factual-data), as
+the 268 parent is. The manifest states Apache-2.0 for the notebooks of Tymchishin’s “CPU
+Alternating Reclosure” v3 and Lavrentev’s “CUDA Packing Search” v11 and “per the notebook”
+for the other five, and the source notices it cites,
+`submissions/kaggle-public-portfolio-20261022/SOURCE_NOTICES.md`, are not in the tree at
+`964ee2b`. think-m8f4 follows up those licences and notices, and holds nothing. Of the 103
+added for review A, 76 are sides the index states as Couzo’s own, retained on the
+presumption as well, one is the side at 994 it credits to Polkovskyi, and 26 are notebook
+packings (Tymchishin’s v3 16, Lavrentev’s v11 9 and the 859 recipe of Lavrentev’s later
+run).
+
+**The releases.** Each holder at each commit is a coverage source with its own bibliography
+key, credited by name where the source states one and by handle where it gives only a
+handle; Couzo’s own sides cite #763’s key:
+
+| Holder, as the source names it | Run | Commit | Rows | Last rows | Recipes | Source |
+| --- | --- | --- | --- | --- | --- | --- |
+| Francisco Couzo, his own sides | - | `efef7d1` | 35 | 0 | - | `couzo-efef7d1-2026-10-23` |
+| Francisco Couzo, his own sides | - | `fa6237e` | 37 | 0 | - | `couzo-fa6237e-2026-10-23` |
+| Kirill Tymchishin (kirilltym), “CPU Alternating Reclosure” v3, Apache-2.0 | 361239073 | `fa6237e` | 42 | 37 | 11 | `tymchishin-reclosure-v3-2026-10-23` |
+| Vladislav Lavrentev (lightningv08), “CUDA Packing Search” v11, Apache-2.0 | 361263594 | `fa6237e` | 11 | 2 | - | `lavrentev-cuda-v11-2026-10-23` |
+| Kirill Tymchishin, “22-3662-cpu-cuda-mps-eda-union” | 361576574 | `964ee2b` | 15 | 15 | - | `tymchishin-22-3662-2026-10-23` |
+| kyleluecke, “inos-v0-6-k-mosh-squares-in-squares-22-366222” | 361592092 | `964ee2b` | 18 | 18 | - | `kyleluecke-inos-2026-10-23` |
+| alexchilton, “fault-line-dp-basin-hopping-lb-22-3747” | 361412241 | `964ee2b` | 11 | 11 | - | `alexchilton-fault-line-2026-10-23` |
+| aqibrazadev, “squares-in-squares-top-lb-blending-visualization” | 361516058 | `964ee2b` | 9 | 9 | - | `aqibrazadev-blending-2026-10-23` |
+| Vladislav Lavrentev, “squares-in-squares-cuda-packing-search”, a later run | 361589987 | `964ee2b` | 7 | 7 | 1 (859) | `lavrentev-cuda-run-361589987-2026-10-23` |
+
+“Last rows” are the current rows, the 99; the other 86 are each superseded by a later
+commit of the push. The five notebooks after the first two give a run and no version, and
+their licence is “per the notebook”. Kaggle’s public profile pages of the three handles,
+read on 24 October 2026, are titled “Kyle Luecke”, “alex chilton” and “Aqib Raza”; their
+profiles record those as the names the pages state, and whether each account is that person
+is asked of the publisher. Every notebook entry says its earlier construction credits are
+kept in the notebook, or in its source notices; neither is published here. The manifest
+records each certificate under `certificates/best/` as the publisher’s certificate of the
+notebook’s packing, dilated by 1+1e-12 (1+1e-11 at 340 and 1+1e-10 at 409 and 509).
+
+**Exact replay.**
+[`devtools.beyond_horizon_replay`](../../../devtools/beyond_horizon_replay.py) declares
+each release on this packet, with its declaration
+(`acquisition/watched-release-push-TAG.json`), record
+(`acquisition/beyond-horizon-rows-push-TAG.json`) and receipts under
+[receipts/push/](receipts/push/), the tag a notebook run or `couzo-` and the commit. The
+filtered two-route decision, reused unchanged with its six controls, **verified all 185**,
+every print the header side rounded up at 12 places: 293,710 candidate pairs of 48,049,913
+and every corner against every wall, in 213.8 positive CPU seconds. **All 1,110 controls
+are refused by both routes.** The 12 recipe expansions, Lavrentev’s v11 side at 411 and
+Couzo’s own sides at 594 (`fa6237e`) and at 21 counts of `efef7d1` touch the box, and all
+but 5 of `efef7d1`’s also have touching pairs, which the closed contract allows; every other
+row clears the box by at least `1e-15`, and no pair the filter decides there touches. The four releases whose
+rows did not change keep their run of 14:21:45Z (697 s of wall); the other five ran from
+17:22:00Z (731 s), both with two workers at `nice` on a four-core machine shared with other
+lanes. The all-pairs kernel, with no filter, decided every pair at 975 and 994 (968,346
+pairs, 225.2 CPU seconds): both routes accept both, and their least pair gaps and wall
+clearances equal the filtered decision’s exactly
+([receipts/push/361239073/exhaustive-sample.json](receipts/push/361239073/exhaustive-sample.json),
+[receipts/push/361516058/exhaustive-sample.json](receipts/push/361516058/exhaustive-sample.json)).
+Every side is below Göbel’s construction at its count (each release’s
+`goebel-comparison.json`). Each certificate’s blob first appears at the commit its release
+declares (`first-commits.json`): 35 at `efef7d1`, 90 at `fa6237e` and 60 at `964ee2b`. The
+source’s own checker was not run here.
+
+**In report order.** The
+[ledger of 24 October for the notebook rows](../../../campaign/issue-intake/upper-bounds-couzo-964ee2b-notebooks-20261024/README.md)
+walks the 99 counts from starts frozen at `main` `2ec489d1e` (#789’s merge), with Göbel’s
+construction beside each row, as three reports, `franciscouzo/square-packing@efef7d1` (40),
+`@fa6237e` (90) and `@964ee2b` (60). All three are dated by the push, and the walk takes
+them in commit order (`intake_ledger.walk` orders a tie in report time by each claim’s first
+commit). **It records 185**: all of `fa6237e`’s and `964ee2b`’s, and 35 of `efef7d1`’s; at
+633, 791, 856, 919 and 994 `efef7d1` restates an earlier publication below the 12-place
+print (think-fwa9). At 60 counts two or three of the push’s sides are recorded in turn, and
+the last is the count’s current row, below the record by 1.46e-4 (875, against Muglich’s
+#686 row) to 6.60e-2 (923, against f1ceee4’s); Göbel’s construction is the least member of
+the start at 11 counts. The push’s first row at each count supersedes the row that stood
+there, 86 in all: f1ceee4’s (32), `couzo-index-2026-10-15`’s (13), #719’s (12), #732’s
+`17cc220` rows (8), `couzo-reconcile-2026-10-20`’s (8), `couzo-verified-bounds-2026-10-14`’s
+(4), Muglich’s #686 rows (3) and 6 more of Couzo’s; at 13 counts (376, 445, 488, 537, 604,
+685, 738, 761, 793, 861, 920, 964 and 971) no row stood before them. At 16 counts the walk
+also records Couzo’s own `487b058`, `4e4c8ce` and `23aff0c` publications that the history
+walk holds, below the start, and the push’s rows are recorded below them at all 16.
+
+**Identity and credit.** At five counts the last row is within 1.1e-7 of the push’s earlier
+side, and `964ee2b`’s manifest names that earlier certificate as the row’s
+`previous_source`. `beyond_horizon_replay push-identity` measures each pair with the
+packet’s pose measure (`measured_identity`, as `pose-identity` does for #732’s comment;
+`devtools.measure_identity`, think-jv2s, had not landed) and writes
+[receipts/push/pose-identity.json](receipts/push/pose-identity.json):
+
+| n | Row | Earlier side of the push | Below by | Pairing | Beyond 1e-3 |
+| ---: | --- | --- | --- | --- | ---: |
+| 364 | aqibrazadev | Tymchishin’s v3, `fa6237e` | 1.35e-9 | not one to one | 116 |
+| 378 | kyleluecke | Lavrentev’s v11, `fa6237e` | 3.11e-8 | one to one, largest 4.42e-8 | 0 |
+| 405 | kyleluecke | Lavrentev’s v11, `fa6237e` | 1.89e-8 | one to one, largest 2.46e-8 | 0 |
+| 450 | kyleluecke | Tymchishin’s v3, `fa6237e` | 2.08e-9 | not one to one | 200 |
+| 874 | kyleluecke | Couzo’s, `fa6237e`, which the index says refines Lavrentev’s | 1.07e-7 | not one to one | 234 |
+
+Each row is credited by the record’s chain rule: every link the source’s files state is
+credited, and the manifest’s `previous_source` is the link at all five counts. At 378 and
+405 kyleluecke’s row is Lavrentev’s packing refined, every square within 5e-8 and every
+turn within 5e-8 degrees, so the ledger records a refinement and the row is credited to
+kyleluecke after Vladislav Lavrentev. At 364, 450 and 874 more than fifty squares move
+beyond 0.1: the search moved the arrangement it was seeded from, which does not contradict
+the seed link. The ledger records each as a new packing seeded from the earlier side, with
+the measurement beside it, and credits it after that side’s finders: aqibrazadev after
+Kirill Tymchishin at 364, kyleluecke after Kirill Tymchishin at 450, and kyleluecke after
+Francisco Couzo and Vladislav Lavrentev at 874, where the index credits Couzo’s side as a
+refinement of Lavrentev’s packing.
+
+**Later.** Couzo’s `43f666c`, pushed at 2026-10-24T06:10:44Z, is below the notebook side at
+46 of the 99 counts. think-gn29 walks it after this import, from these rows. The questions
+for the publisher are drafted in think-lyf9’s notes for the next reply on #763.
+
 ## Compressed Files
 
 | Stored File | Origin | Git Blob of Original | SHA-256 of Original |

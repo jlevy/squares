@@ -10519,6 +10519,622 @@ sources:
     retained as credit evidence. No selected override is created at this source-only stage;
     the cases at 268 and 304 are unchanged.
 
+- id: couzo-efef7d1-2026-10-23
+  title: Francisco Couzo's own sides at efef7d1 at the counts of the Kaggle notebook rows
+  role: source-repository
+  url: https://github.com/franciscouzo/square-packing/tree/efef7d1418d0cb629debc962c077740125ba7901
+  local: resources/web/couzo-issue763-2026-10-23/
+  source_key: '[Couzo issue 763 2026-10-23]'
+  scope:
+    n_values:
+    - 377
+    - 404
+    - 409
+    - 411
+    - 418
+    - 450
+    - 451
+    - 454
+    - 455
+    - 460
+    - 540
+    - 551
+    - 594
+    - 596
+    - 640
+    - 691
+    - 697
+    - 706
+    - 735
+    - 745
+    - 746
+    - 748
+    - 790
+    - 802
+    - 816
+    - 817
+    - 854
+    - 858
+    - 859
+    - 913
+    - 918
+    - 923
+    - 924
+    - 980
+    - 984
+  reviewed: '2026-10-24'
+  source_date: '2026-10-23'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/couzo-issue763-2026-10-23/README.md
+  - resources/web/couzo-issue763-2026-10-23/acquisition/beyond-horizon-rows-push-couzo-efef7d1.json
+  evidence:
+  - E-couzo-efef7d1-beyond-horizon-report
+  notes: >-
+    The push of 2026-10-23T23:38:42Z made franciscouzo/square-packing's efef7d1, fa6237e
+    and 964ee2bd public together. Read commit by commit, as the first-commit rule reads
+    a history (#795's review A; devtools.beyond_horizon_replay push-publications,
+    receipts/push/push-publications.json), efef7d1 first states sides at the counts of
+    the Kaggle notebook rows that certified_bounds.json at 964ee2bd credits to the
+    authors of seven notebooks, and these are the sides the index there states as
+    Couzo's own. No issue reports them: issue 763 says the index's notebook packings by
+    other authors are not part of its request. A certificate in a watched repository is
+    a report from its first commit, so each commit is a report from the push, taken in
+    commit order, and an import of their own (think-lyf9). The ledger of 24 October for
+    the push (campaign/issue-intake/upper-bounds-couzo-964ee2b-notebooks-20261024),
+    walked from starts frozen at main 2ec489d1e with Göbel's construction beside each
+    row, records 35 certificates of efef7d1 here at the exact side rounded up at 12
+    places, each below the side it was decided against by 6.21e-14 (746) to 2.49e-02
+    (923); each is superseded by a later commit of the same push: by
+    couzo-fa6237e-2026-10-23 (18), tymchishin-reclosure-v3-2026-10-23 (10),
+    lavrentev-cuda-v11-2026-10-23 (5) and alexchilton-fault-line-2026-10-23 (2); As the
+    push's first side at 35 of its counts they supersede the rows of
+    mishapolk-issue732-f1ceee4-2026-10-23 (21), mishapolk-issue732-2026-10-22 (6),
+    mishapolk-issue719-2026-10-22 (5), muglich-issue686-2026-10-19 (2) and
+    couzo-issue678-2026-10-18 (1). Its sides at 633, 791, 856 and 919, and its side at
+    994, which the index credits to Mykhailo Polkovskyi, restate earlier publications
+    below the print (think-fwa9) and have no row. The packet's filtered exact replay
+    decided every one on two routes with all six controls refused
+    (receipts/push/couzo-efef7d1/filtered-exact-replay.json,
+    devtools.beyond_horizon_replay), and every side is below Göbel's construction. The
+    certificates are retained on the presumption of Couzo's submission and as factual
+    data.
+  claims_record: resources/web/couzo-issue763-2026-10-23/acquisition/beyond-horizon-rows-push-couzo-efef7d1.json
+- id: couzo-fa6237e-2026-10-23
+  title: Francisco Couzo's own sides at fa6237e at the counts of the Kaggle notebook rows
+  role: source-repository
+  url: https://github.com/franciscouzo/square-packing/tree/fa6237e288cf3fc53b53fc43438c91f3f59c40e9
+  local: resources/web/couzo-issue763-2026-10-23/
+  source_key: '[Couzo issue 763 2026-10-23]'
+  scope:
+    n_values:
+    - 377
+    - 455
+    - 460
+    - 504
+    - 551
+    - 594
+    - 596
+    - 637
+    - 639
+    - 653
+    - 691
+    - 697
+    - 745
+    - 748
+    - 751
+    - 755
+    - 802
+    - 807
+    - 858
+    - 859
+    - 861
+    - 867
+    - 873
+    - 874
+    - 907
+    - 918
+    - 919
+    - 920
+    - 923
+    - 924
+    - 929
+    - 968
+    - 980
+    - 981
+    - 982
+    - 984
+    - 994
+  reviewed: '2026-10-24'
+  source_date: '2026-10-23'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/couzo-issue763-2026-10-23/README.md
+  - resources/web/couzo-issue763-2026-10-23/acquisition/beyond-horizon-rows-push-couzo-fa6237e.json
+  evidence:
+  - E-couzo-fa6237e-beyond-horizon-report
+  notes: >-
+    The push of 2026-10-23T23:38:42Z made franciscouzo/square-packing's efef7d1, fa6237e
+    and 964ee2bd public together. Read commit by commit, as the first-commit rule reads
+    a history (#795's review A; devtools.beyond_horizon_replay push-publications,
+    receipts/push/push-publications.json), fa6237e first states sides at the counts of
+    the Kaggle notebook rows that certified_bounds.json at 964ee2bd credits to the
+    authors of seven notebooks, and these are the sides the index there states as
+    Couzo's own. No issue reports them: issue 763 says the index's notebook packings by
+    other authors are not part of its request. A certificate in a watched repository is
+    a report from its first commit, so each commit is a report from the push, taken in
+    commit order, and an import of their own (think-lyf9). The ledger of 24 October for
+    the push (campaign/issue-intake/upper-bounds-couzo-964ee2b-notebooks-20261024),
+    walked from starts frozen at main 2ec489d1e with Göbel's construction beside each
+    row, records 37 certificates of fa6237e here at the exact side rounded up at 12
+    places, each below the side it was decided against by 3.92e-04 (874) to 5.98e-02
+    (596); each is superseded by a later commit of the same push: by
+    kyleluecke-inos-2026-10-23 (12), tymchishin-22-3662-2026-10-23 (9),
+    aqibrazadev-blending-2026-10-23 (7), lavrentev-cuda-run-361589987-2026-10-23 (6) and
+    alexchilton-fault-line-2026-10-23 (3); As the push's first side at 19 of its counts
+    they supersede the rows of mishapolk-issue732-f1ceee4-2026-10-23 (6),
+    couzo-index-2026-10-15 (5), mishapolk-issue719-2026-10-22 (3),
+    mishapolk-issue732-2026-10-22 (2) and couzo-issue715-2026-10-21 (1), and at 2 no row
+    stood before them; They supersede 18 rows of the push's earlier commits:
+    couzo-efef7d1-2026-10-23 (18). The index credits 37 of them to Couzo as refinements
+    of notebook packings (Vladislav Lavrentev (33) and Kirill Tymchishin (4)); those
+    statements are the source's. At 874 kyleluecke's 964ee2bd row, 1.07e-07 below this
+    commit's side, names it as its previous_source; the measurement does not pair them
+    one to one (receipts/push/pose-identity.json), so it is a new packing seeded from
+    this one, credited after Couzo and Lavrentev by the record's chain rule. The
+    packet's filtered exact replay decided every one on two routes with all six controls
+    refused (receipts/push/couzo-fa6237e/filtered-exact-replay.json,
+    devtools.beyond_horizon_replay), and every side is below Göbel's construction. The
+    certificates are retained on the presumption of Couzo's submission and as factual
+    data.
+  claims_record: resources/web/couzo-issue763-2026-10-23/acquisition/beyond-horizon-rows-push-couzo-fa6237e.json
+- id: tymchishin-reclosure-v3-2026-10-23
+  title: Kirill Tymchishin's Kaggle notebook packings ("CPU Alternating Reclosure" v3) at fa6237e
+  role: source-repository
+  url: https://github.com/franciscouzo/square-packing/tree/fa6237e288cf3fc53b53fc43438c91f3f59c40e9
+  local: resources/web/couzo-issue763-2026-10-23/
+  source_key: '[Tymchishin CPU Alternating Reclosure v3 2026-10-23]'
+  scope:
+    n_values:
+    - 327
+    - 340
+    - 364
+    - 404
+    - 406
+    - 409
+    - 445
+    - 446
+    - 450
+    - 454
+    - 488
+    - 533
+    - 537
+    - 540
+    - 541
+    - 579
+    - 580
+    - 589
+    - 628
+    - 633
+    - 640
+    - 679
+    - 685
+    - 732
+    - 735
+    - 738
+    - 787
+    - 790
+    - 791
+    - 793
+    - 844
+    - 846
+    - 854
+    - 856
+    - 903
+    - 906
+    - 913
+    - 964
+    - 965
+    - 967
+    - 971
+    - 975
+  reviewed: '2026-10-24'
+  source_date: '2026-10-23'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/couzo-issue763-2026-10-23/README.md
+  - resources/web/couzo-issue763-2026-10-23/acquisition/beyond-horizon-rows-push-361239073.json
+  evidence:
+  - E-tymchishin-reclosure-v3-beyond-horizon-report
+  notes: >-
+    The push of 2026-10-23T23:38:42Z made franciscouzo/square-packing's efef7d1, fa6237e
+    and 964ee2bd public together. Read commit by commit, as the first-commit rule reads
+    a history (#795's review A; devtools.beyond_horizon_replay push-publications,
+    receipts/push/push-publications.json), fa6237e first states sides at the counts of
+    the Kaggle notebook rows that certified_bounds.json at 964ee2bd credits to the
+    authors of seven notebooks, and these are the sides it credits to Kirill
+    Tymchishin's (kirilltym) Kaggle notebook "CPU Alternating Reclosure" v3, run
+    361239073. No issue reports them: issue 763 says the index's notebook packings by
+    other authors are not part of its request. A certificate in a watched repository is
+    a report from its first commit, so each commit is a report from the push, taken in
+    commit order, and an import of their own (think-lyf9). The ledger of 24 October for
+    the push (campaign/issue-intake/upper-bounds-couzo-964ee2b-notebooks-20261024),
+    walked from starts frozen at main 2ec489d1e with Göbel's construction beside each
+    row, records 42 certificates of fa6237e here at the exact side rounded up at 12
+    places, each below the side it was decided against by 1.66e-03 (454) to 5.08e-02
+    (967); 37 are the count's current row, and 5 are superseded by a later commit of the
+    same push: by aqibrazadev-blending-2026-10-23 (2), tymchishin-22-3662-2026-10-23 (2)
+    and kyleluecke-inos-2026-10-23 (1); As the push's first side at 32 of its counts
+    they supersede the rows of couzo-reconcile-2026-10-20 (7), couzo-index-2026-10-15
+    (6), couzo-verified-bounds-2026-10-14 (4), mishapolk-issue732-f1ceee4-2026-10-23
+    (4), couzo-extended-certificates-2026-10-11 (1),
+    couzo-extended-range-reports-2026-10-08 (1) and couzo-issue670-2026-10-17 (1), and
+    at 8 no row stood before them; They supersede 10 rows of the push's earlier commits:
+    couzo-efef7d1-2026-10-23 (10). At 445, 488, 580, 679, 732, 787, 844, 903, 913, 964
+    and 967 the index states an L-border recipe of the notebook's certificates; 964ee2bd
+    keeps each recipe's full n-square expansion under certificates/parents/ at exactly
+    its side, first committed at fa6237e, and the row is that certificate (#795's review
+    A, A2). At 364 and 450 the 964ee2bd rows of aqibrazadev and kyleluecke, 1.35e-09 and
+    2.08e-09 below these sides, name them as their previous_source; the measurement does
+    not pair them one to one (receipts/push/pose-identity.json), so they are new
+    packings seeded from these, credited after Tymchishin by the record's chain rule.
+    The packet's filtered exact replay decided every one on two routes with all six
+    controls refused (receipts/push/361239073/filtered-exact-replay.json,
+    devtools.beyond_horizon_replay), and every side is below Göbel's construction. The
+    certificates are retained as factual data; the notebook's licence is followed up on
+    think-m8f4.
+  claims_record: resources/web/couzo-issue763-2026-10-23/acquisition/beyond-horizon-rows-push-361239073.json
+- id: lavrentev-cuda-v11-2026-10-23
+  title: Vladislav Lavrentev's Kaggle notebook packings ("CUDA Packing Search" v11) at fa6237e
+  role: source-repository
+  url: https://github.com/franciscouzo/square-packing/tree/fa6237e288cf3fc53b53fc43438c91f3f59c40e9
+  local: resources/web/couzo-issue763-2026-10-23/
+  source_key: '[Lavrentev CUDA Packing Search v11 2026-10-23]'
+  scope:
+    n_values:
+    - 330
+    - 338
+    - 378
+    - 405
+    - 411
+    - 451
+    - 509
+    - 532
+    - 706
+    - 746
+    - 816
+  reviewed: '2026-10-24'
+  source_date: '2026-10-23'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/couzo-issue763-2026-10-23/README.md
+  - resources/web/couzo-issue763-2026-10-23/acquisition/beyond-horizon-rows-push-361263594.json
+  evidence:
+  - E-lavrentev-cuda-v11-beyond-horizon-report
+  notes: >-
+    The push of 2026-10-23T23:38:42Z made franciscouzo/square-packing's efef7d1, fa6237e and
+    964ee2bd public together. Read commit by commit, as the first-commit rule reads a
+    history (#795's review A; devtools.beyond_horizon_replay push-publications,
+    receipts/push/push-publications.json), fa6237e first states sides at the counts of the
+    Kaggle notebook rows that certified_bounds.json at 964ee2bd credits to the authors of
+    seven notebooks, and these are the sides it credits to Vladislav Lavrentev's
+    (lightningv08) Kaggle notebook "CUDA Packing Search" v11, run 361263594. No issue
+    reports them: issue 763 says the index's notebook packings by other authors are not part
+    of its request. A certificate in a watched repository is a report from its first commit,
+    so each commit is a report from the push, taken in commit order, and an import of their
+    own (think-lyf9). The ledger of 24 October for the push
+    (campaign/issue-intake/upper-bounds-couzo-964ee2b-notebooks-20261024), walked from
+    starts frozen at main 2ec489d1e with Göbel's construction beside each row, records 11
+    certificates of fa6237e here at the exact side rounded up at 12 places, each below the
+    side it was decided against by 2.84e-04 (330) to 2.20e-02 (451); 2 are the count's
+    current row, and 9 are superseded by a later commit of the same push: by
+    kyleluecke-inos-2026-10-23 (5), alexchilton-fault-line-2026-10-23 (3) and
+    lavrentev-cuda-run-361589987-2026-10-23 (1); As the push's first side at 6 of its counts
+    they supersede the rows of mishapolk-issue719-2026-10-22 (2),
+    couzo-certificates-2026-10-12 (1), couzo-index-2026-10-15 (1),
+    couzo-reconcile-2026-10-20 (1) and mishapolk-issue732-f1ceee4-2026-10-23 (1); They
+    supersede 5 rows of the push's earlier commits: couzo-efef7d1-2026-10-23 (5). At 378 and
+    405 kyleluecke's 964ee2bd rows are these packings refined, every square within 4.5e-08
+    (receipts/push/pose-identity.json), and are credited after Lavrentev. The packet's
+    filtered exact replay decided every one on two routes with all six controls refused
+    (receipts/push/361263594/filtered-exact-replay.json, devtools.beyond_horizon_replay),
+    and every side is below Göbel's construction. The certificates are retained as factual
+    data; the notebook's licence is followed up on think-m8f4.
+  claims_record: resources/web/couzo-issue763-2026-10-23/acquisition/beyond-horizon-rows-push-361263594.json
+- id: tymchishin-22-3662-2026-10-23
+  title: Kirill Tymchishin's Kaggle notebook packings ("22-3662-cpu-cuda-mps-eda-union") at 964ee2bd
+  role: source-repository
+  url: https://github.com/franciscouzo/square-packing/tree/964ee2bdf301d0c8912d956d4010f478dcbbd5ea
+  local: resources/web/couzo-issue763-2026-10-23/
+  source_key: '[Tymchishin 22-3662 2026-10-23]'
+  scope:
+    n_values:
+    - 376
+    - 419
+    - 540
+    - 543
+    - 639
+    - 640
+    - 691
+    - 755
+    - 761
+    - 861
+    - 873
+    - 920
+    - 980
+    - 982
+    - 984
+  reviewed: '2026-10-24'
+  source_date: '2026-10-23'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/couzo-issue763-2026-10-23/README.md
+  - resources/web/couzo-issue763-2026-10-23/acquisition/beyond-horizon-rows-push-361576574.json
+  evidence:
+  - E-tymchishin-22-3662-beyond-horizon-report
+  notes: >-
+    The push of 2026-10-23T23:38:42Z made franciscouzo/square-packing's efef7d1, fa6237e and
+    964ee2bd public together. Read commit by commit, as the first-commit rule reads a
+    history (#795's review A; devtools.beyond_horizon_replay push-publications,
+    receipts/push/push-publications.json), 964ee2b first states sides at the counts of the
+    Kaggle notebook rows that certified_bounds.json at 964ee2bd credits to the authors of
+    seven notebooks, and these are the sides it credits to Kirill Tymchishin's (kirilltym)
+    Kaggle notebook "22-3662-cpu-cuda-mps-eda-union", run 361576574. No issue reports them:
+    issue 763 says the index's notebook packings by other authors are not part of its
+    request. A certificate in a watched repository is a report from its first commit, so
+    each commit is a report from the push, taken in commit order, and an import of their own
+    (think-lyf9). The ledger of 24 October for the push
+    (campaign/issue-intake/upper-bounds-couzo-964ee2b-notebooks-20261024), walked from
+    starts frozen at main 2ec489d1e with Göbel's construction beside each row, records 15
+    certificates of 964ee2b here at the exact side rounded up at 12 places, each below the
+    side it was decided against by 2.79e-05 (540) to 1.07e-02 (640); each is the count's
+    current row; As the push's first side at 4 of its counts they supersede the rows of
+    couzo-index-2026-10-15 (1) and mishapolk-issue719-2026-10-22 (1), and at 2 no row stood
+    before them; They supersede 11 rows of the push's earlier commits:
+    couzo-fa6237e-2026-10-23 (9) and tymchishin-reclosure-v3-2026-10-23 (2). The packet's
+    filtered exact replay decided every one on two routes with all six controls refused
+    (receipts/push/361576574/filtered-exact-replay.json, devtools.beyond_horizon_replay),
+    and every side is below Göbel's construction. The certificates are retained as factual
+    data; the notebook's licence is followed up on think-m8f4.
+  claims_record: resources/web/couzo-issue763-2026-10-23/acquisition/beyond-horizon-rows-push-361576574.json
+- id: kyleluecke-inos-2026-10-23
+  title: The Kaggle account kyleluecke's notebook packings ("inos-v0-6-k-mosh-squares-in-squares-22-366222") at 964ee2bd
+  role: source-repository
+  url: https://github.com/franciscouzo/square-packing/tree/964ee2bdf301d0c8912d956d4010f478dcbbd5ea
+  local: resources/web/couzo-issue763-2026-10-23/
+  source_key: '[kyleluecke inos 2026-10-23]'
+  scope:
+    n_values:
+    - 377
+    - 378
+    - 405
+    - 450
+    - 451
+    - 532
+    - 551
+    - 697
+    - 706
+    - 745
+    - 858
+    - 867
+    - 874
+    - 907
+    - 918
+    - 929
+    - 968
+    - 981
+  reviewed: '2026-10-24'
+  source_date: '2026-10-23'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/couzo-issue763-2026-10-23/README.md
+  - resources/web/couzo-issue763-2026-10-23/acquisition/beyond-horizon-rows-push-361592092.json
+  evidence:
+  - E-kyleluecke-inos-beyond-horizon-report
+  notes: >-
+    The push of 2026-10-23T23:38:42Z made franciscouzo/square-packing's efef7d1, fa6237e
+    and 964ee2bd public together. Read commit by commit, as the first-commit rule reads
+    a history (#795's review A; devtools.beyond_horizon_replay push-publications,
+    receipts/push/push-publications.json), 964ee2b first states sides at the counts of
+    the Kaggle notebook rows that certified_bounds.json at 964ee2bd credits to the
+    authors of seven notebooks, and these are the sides it credits to the Kaggle
+    notebook "inos-v0-6-k-mosh-squares-in-squares-22-366222" of the account kyleluecke,
+    run 361592092. No issue reports them: issue 763 says the index's notebook packings
+    by other authors are not part of its request. A certificate in a watched repository
+    is a report from its first commit, so each commit is a report from the push, taken
+    in commit order, and an import of their own (think-lyf9). The ledger of 24 October
+    for the push (campaign/issue-intake/upper-bounds-couzo-964ee2b-notebooks-20261024),
+    walked from starts frozen at main 2ec489d1e with Göbel's construction beside each
+    row, records 18 certificates of 964ee2b here at the exact side rounded up at 12
+    places, each below the side it was decided against by 2.08e-09 (450) to 1.26e-02
+    (981); each is the count's current row; They supersede 18 rows of the push's earlier
+    commits: couzo-fa6237e-2026-10-23 (12), lavrentev-cuda-v11-2026-10-23 (5) and
+    tymchishin-reclosure-v3-2026-10-23 (1). At 378 and 405 the row is Vladislav
+    Lavrentev's fa6237e packing refined: every square pairs one to one within 4.5e-08
+    under the box's identity (receipts/push/pose-identity.json), and the manifest names
+    his certificate as the row's previous_source, so the ledger records a refinement and
+    the row is credited to kyleluecke after Vladislav Lavrentev. At 450 and 874 the
+    manifest names the push's earlier side as the row's previous_source, the packing
+    that seeded it: Tymchishin's v3, 2.08e-09 above, and Couzo's fa6237e side, 1.07e-07
+    above, which the index credits as a refinement of Lavrentev's packing. The
+    measurement does not pair them one to one (200 and 234 squares beyond 1e-3): the
+    search moved the arrangement, which does not contradict the seed link. By the
+    record's chain rule, every link the source's files state is credited, so the rows
+    are credited to kyleluecke after Kirill Tymchishin at 450 and after Francisco Couzo
+    and Vladislav Lavrentev at 874, new packings seeded from theirs. The packet's
+    filtered exact replay decided every one on two routes with all six controls refused
+    (receipts/push/361592092/filtered-exact-replay.json,
+    devtools.beyond_horizon_replay), and every side is below Göbel's construction. The
+    certificates are retained as factual data; the notebook's licence is followed up on
+    think-m8f4.
+  claims_record: resources/web/couzo-issue763-2026-10-23/acquisition/beyond-horizon-rows-push-361592092.json
+- id: alexchilton-fault-line-2026-10-23
+  title: The Kaggle account alexchilton's notebook packings ("fault-line-dp-basin-hopping-lb-22-3747") at 964ee2bd
+  role: source-repository
+  url: https://github.com/franciscouzo/square-packing/tree/964ee2bdf301d0c8912d956d4010f478dcbbd5ea
+  local: resources/web/couzo-issue763-2026-10-23/
+  source_key: '[alexchilton fault-line 2026-10-23]'
+  scope:
+    n_values:
+    - 338
+    - 411
+    - 418
+    - 460
+    - 504
+    - 508
+    - 594
+    - 604
+    - 816
+    - 817
+    - 875
+  reviewed: '2026-10-24'
+  source_date: '2026-10-23'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/couzo-issue763-2026-10-23/README.md
+  - resources/web/couzo-issue763-2026-10-23/acquisition/beyond-horizon-rows-push-361412241.json
+  evidence:
+  - E-alexchilton-fault-line-beyond-horizon-report
+  notes: >-
+    The push of 2026-10-23T23:38:42Z made franciscouzo/square-packing's efef7d1, fa6237e and
+    964ee2bd public together. Read commit by commit, as the first-commit rule reads a
+    history (#795's review A; devtools.beyond_horizon_replay push-publications,
+    receipts/push/push-publications.json), 964ee2b first states sides at the counts of the
+    Kaggle notebook rows that certified_bounds.json at 964ee2bd credits to the authors of
+    seven notebooks, and these are the sides it credits to the Kaggle notebook
+    "fault-line-dp-basin-hopping-lb-22-3747" of the account alexchilton, run 361412241. No
+    issue reports them: issue 763 says the index's notebook packings by other authors are
+    not part of its request. A certificate in a watched repository is a report from its
+    first commit, so each commit is a report from the push, taken in commit order, and an
+    import of their own (think-lyf9). The ledger of 24 October for the push
+    (campaign/issue-intake/upper-bounds-couzo-964ee2b-notebooks-20261024), walked from
+    starts frozen at main 2ec489d1e with Göbel's construction beside each row, records 11
+    certificates of 964ee2b here at the exact side rounded up at 12 places, each below the
+    side it was decided against by 1.46e-04 (875) to 1.05e-02 (411); each is the count's
+    current row; As the push's first side at 3 of its counts they supersede the rows of
+    mishapolk-issue719-2026-10-22 (1) and muglich-issue686-2026-10-19 (1), and at 1 no row
+    stood before them; They supersede 8 rows of the push's earlier commits:
+    couzo-fa6237e-2026-10-23 (3), lavrentev-cuda-v11-2026-10-23 (3) and
+    couzo-efef7d1-2026-10-23 (2). The packet's filtered exact replay decided every one on
+    two routes with all six controls refused
+    (receipts/push/361412241/filtered-exact-replay.json, devtools.beyond_horizon_replay),
+    and every side is below Göbel's construction. The certificates are retained as factual
+    data; the notebook's licence is followed up on think-m8f4.
+  claims_record: resources/web/couzo-issue763-2026-10-23/acquisition/beyond-horizon-rows-push-361412241.json
+- id: aqibrazadev-blending-2026-10-23
+  title: The Kaggle account aqibrazadev's notebook packings ("squares-in-squares-top-lb-blending-visualization") at 964ee2bd
+  role: source-repository
+  url: https://github.com/franciscouzo/square-packing/tree/964ee2bdf301d0c8912d956d4010f478dcbbd5ea
+  local: resources/web/couzo-issue763-2026-10-23/
+  source_key: '[aqibrazadev blending 2026-10-23]'
+  scope:
+    n_values:
+    - 364
+    - 455
+    - 596
+    - 637
+    - 738
+    - 751
+    - 807
+    - 924
+    - 994
+  reviewed: '2026-10-24'
+  source_date: '2026-10-23'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/couzo-issue763-2026-10-23/README.md
+  - resources/web/couzo-issue763-2026-10-23/acquisition/beyond-horizon-rows-push-361516058.json
+  evidence:
+  - E-aqibrazadev-blending-beyond-horizon-report
+  notes: >-
+    The push of 2026-10-23T23:38:42Z made franciscouzo/square-packing's efef7d1, fa6237e
+    and 964ee2bd public together. Read commit by commit, as the first-commit rule reads
+    a history (#795's review A; devtools.beyond_horizon_replay push-publications,
+    receipts/push/push-publications.json), 964ee2b first states sides at the counts of
+    the Kaggle notebook rows that certified_bounds.json at 964ee2bd credits to the
+    authors of seven notebooks, and these are the sides it credits to the Kaggle
+    notebook "squares-in-squares-top-lb-blending-visualization" of the account
+    aqibrazadev, run 361516058. No issue reports them: issue 763 says the index's
+    notebook packings by other authors are not part of its request. A certificate in a
+    watched repository is a report from its first commit, so each commit is a report
+    from the push, taken in commit order, and an import of their own (think-lyf9). The
+    ledger of 24 October for the push
+    (campaign/issue-intake/upper-bounds-couzo-964ee2b-notebooks-20261024), walked from
+    starts frozen at main 2ec489d1e with Göbel's construction beside each row, records 9
+    certificates of 964ee2b here at the exact side rounded up at 12 places, each below
+    the side it was decided against by 1.35e-09 (364) to 1.58e-03 (751); each is the
+    count's current row; They supersede 9 rows of the push's earlier commits:
+    couzo-fa6237e-2026-10-23 (7) and tymchishin-reclosure-v3-2026-10-23 (2). At 364 the
+    row is 1.35e-09 below Tymchishin's v3 side at fa6237e, which the manifest names as
+    its previous_source, the packing that seeded it; the measurement does not pair the
+    two one to one (116 squares beyond 1e-3; receipts/push/pose-identity.json): the
+    search moved the arrangement, which does not contradict the seed link. By the
+    record's chain rule, every link the source's files state is credited, so the row is
+    credited to aqibrazadev after Kirill Tymchishin, a new packing seeded from his. The
+    packet's filtered exact replay decided every one on two routes with all six controls
+    refused (receipts/push/361516058/filtered-exact-replay.json,
+    devtools.beyond_horizon_replay), and every side is below Göbel's construction. The
+    certificates are retained as factual data; the notebook's licence is followed up on
+    think-m8f4.
+  claims_record: resources/web/couzo-issue763-2026-10-23/acquisition/beyond-horizon-rows-push-361516058.json
+- id: lavrentev-cuda-run-361589987-2026-10-23
+  title: Vladislav Lavrentev's Kaggle notebook packings ("squares-in-squares-cuda-packing-search", run 361589987) at 964ee2bd
+  role: source-repository
+  url: https://github.com/franciscouzo/square-packing/tree/964ee2bdf301d0c8912d956d4010f478dcbbd5ea
+  local: resources/web/couzo-issue763-2026-10-23/
+  source_key: '[Lavrentev CUDA Packing Search run 361589987 2026-10-23]'
+  scope:
+    n_values:
+    - 653
+    - 746
+    - 748
+    - 802
+    - 859
+    - 919
+    - 923
+  reviewed: '2026-10-24'
+  source_date: '2026-10-23'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/couzo-issue763-2026-10-23/README.md
+  - resources/web/couzo-issue763-2026-10-23/acquisition/beyond-horizon-rows-push-361589987.json
+  evidence:
+  - E-lavrentev-cuda-run-361589987-beyond-horizon-report
+  notes: >-
+    The push of 2026-10-23T23:38:42Z made franciscouzo/square-packing's efef7d1, fa6237e and
+    964ee2bd public together. Read commit by commit, as the first-commit rule reads a
+    history (#795's review A; devtools.beyond_horizon_replay push-publications,
+    receipts/push/push-publications.json), 964ee2b first states sides at the counts of the
+    Kaggle notebook rows that certified_bounds.json at 964ee2bd credits to the authors of
+    seven notebooks, and these are the sides it credits to Vladislav Lavrentev's
+    (lightningv08) Kaggle notebook "squares-in-squares-cuda-packing-search", run 361589987.
+    No issue reports them: issue 763 says the index's notebook packings by other authors are
+    not part of its request. A certificate in a watched repository is a report from its
+    first commit, so each commit is a report from the push, taken in commit order, and an
+    import of their own (think-lyf9). The ledger of 24 October for the push
+    (campaign/issue-intake/upper-bounds-couzo-964ee2b-notebooks-20261024), walked from
+    starts frozen at main 2ec489d1e with Göbel's construction beside each row, records 7
+    certificates of 964ee2b here at the exact side rounded up at 12 places, each below the
+    side it was decided against by 1.37e-04 (653) to 2.11e-02 (746); each is the count's
+    current row; They supersede 7 rows of the push's earlier commits:
+    couzo-fa6237e-2026-10-23 (6) and lavrentev-cuda-v11-2026-10-23 (1). At 859 the index
+    states an L-border recipe of the notebook's certificates; 964ee2bd keeps each recipe's
+    full n-square expansion under certificates/parents/ at exactly its side, first committed
+    at 964ee2b, and the row is that certificate (#795's review A, A2). The packet's filtered
+    exact replay decided every one on two routes with all six controls refused
+    (receipts/push/361589987/filtered-exact-replay.json, devtools.beyond_horizon_replay),
+    and every side is below Göbel's construction. The certificates are retained as factual
+    data; the notebook's licence is followed up on think-m8f4.
+  claims_record: resources/web/couzo-issue763-2026-10-23/acquisition/beyond-horizon-rows-push-361589987.json
 selected_overrides:
 - n: 29
   source_id: pingyou-pr622-certificate-2026-10-15
@@ -13390,7 +14006,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '18.597249391205040'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: tymchishin-reclosure-v3-2026-10-23
   bead: think-1545
 - n: 332
   source_id: couzo-extended-range-reports-2026-10-08
@@ -13669,7 +14286,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '18.906332809853'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: lavrentev-cuda-v11-2026-10-23
   bead: think-rfce
 - n: 339
   source_id: couzo-issue583-2026-10-13
@@ -14484,7 +15102,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '23.606601717870'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: tymchishin-reclosure-v3-2026-10-23
   bead: think-nj7h
 - n: 534
   source_id: couzo-verified-bounds-2026-10-14
@@ -14659,7 +15278,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '24.606601717843'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: tymchishin-reclosure-v3-2026-10-23
   bead: think-nj7h
 - n: 581
   source_id: couzo-verified-bounds-2026-10-14
@@ -14714,7 +15334,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '24.828427124836'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: tymchishin-reclosure-v3-2026-10-23
   bead: think-nj7h
 - n: 590
   source_id: couzo-verified-bounds-2026-10-14
@@ -15926,7 +16547,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '31.606601717848'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: tymchishin-reclosure-v3-2026-10-23
   bead: think-nj7h
 - n: 966
   source_id: couzo-verified-bounds-2026-10-14
@@ -16717,7 +17339,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '31.914115712696'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-efef7d1-2026-10-23
   bead: think-xu4d
 - n: 987
   source_id: couzo-issue678-2026-10-18
@@ -17191,7 +17814,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '26.997919093469508'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-efef7d1-2026-10-23
 - n: 755
   source_id: muglich-issue686-2026-10-19
   claim: upper-bound
@@ -17287,7 +17911,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '28.997492020606608'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-efef7d1-2026-10-23
 - n: 868
   source_id: muglich-issue686-2026-10-19
   claim: upper-bound
@@ -17342,7 +17967,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '29.996974281851590'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: alexchilton-fault-line-2026-10-23
 - n: 927
   source_id: muglich-issue686-2026-10-19
   claim: upper-bound
@@ -18138,7 +18764,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '29.942070418091'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-fa6237e-2026-10-23
   bead: think-cyal
 - n: 868
   source_id: couzo-issue715-2026-10-21
@@ -18449,7 +19076,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '19.583782190152'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: tymchishin-reclosure-v3-2026-10-23
   bead: think-f28n
 - n: 370
   source_id: couzo-issue670-2026-10-17
@@ -19982,7 +20610,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '18.6926724444540696'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: lavrentev-cuda-v11-2026-10-23
   bead: think-xyhn
 - n: 339
   source_id: mishapolk-issue719-2026-10-22
@@ -20028,14 +20657,16 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '19.9254716539692624'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-efef7d1-2026-10-23
   bead: think-xyhn
 - n: 378
   source_id: mishapolk-issue719-2026-10-22
   claim: upper-bound
   value: '19.9420180574448565'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: lavrentev-cuda-v11-2026-10-23
   bead: think-xyhn
 - n: 379
   source_id: mishapolk-issue719-2026-10-22
@@ -20105,14 +20736,16 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '20.9391841282486939'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-efef7d1-2026-10-23
   bead: think-xyhn
 - n: 419
   source_id: mishapolk-issue719-2026-10-22
   claim: upper-bound
   value: '20.9578048362645837'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: tymchishin-22-3662-2026-10-23
   bead: think-xyhn
 - n: 420
   source_id: mishapolk-issue719-2026-10-22
@@ -20191,7 +20824,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '21.9509876879891580'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-efef7d1-2026-10-23
   bead: think-xyhn
 - n: 462
   source_id: mishapolk-issue719-2026-10-22
@@ -20238,7 +20872,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '22.9833093783497975'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: alexchilton-fault-line-2026-10-23
   bead: think-xyhn
 - n: 535
   source_id: mishapolk-issue719-2026-10-22
@@ -20269,7 +20904,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '23.9658016419622695'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-efef7d1-2026-10-23
   bead: think-xyhn
 - n: 552
   source_id: mishapolk-issue719-2026-10-22
@@ -20596,7 +21232,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '27.9514629577605835'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-fa6237e-2026-10-23
   bead: think-xyhn
 - n: 757
   source_id: mishapolk-issue719-2026-10-22
@@ -20707,7 +21344,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '28.9959445386864603'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-efef7d1-2026-10-23
   bead: think-xyhn
 - n: 868
   source_id: mishapolk-issue719-2026-10-22
@@ -20738,7 +21376,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '29.9926541962530775'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-fa6237e-2026-10-23
   bead: think-xyhn
 - n: 927
   source_id: mishapolk-issue719-2026-10-22
@@ -20761,7 +21400,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '30.9753932494690260'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-fa6237e-2026-10-23
   bead: think-xyhn
 - n: 930
   source_id: mishapolk-issue719-2026-10-22
@@ -20970,7 +21610,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '18.939649632892'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: tymchishin-reclosure-v3-2026-10-23
   bead: think-om5l
 - n: 378
   source_id: couzo-extended-certificates-2026-10-11
@@ -21240,14 +21881,16 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '20.656854249493'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: lavrentev-cuda-v11-2026-10-23
   bead: think-yfoo
 - n: 406
   source_id: couzo-index-2026-10-15
   claim: upper-bound
   value: '20.704232790737'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: tymchishin-reclosure-v3-2026-10-23
   bead: think-yfoo
 - n: 410
   source_id: couzo-index-2026-10-15
@@ -21356,7 +21999,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '21.656854249493'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: tymchishin-reclosure-v3-2026-10-23
   bead: think-yfoo
 - n: 447
   source_id: couzo-index-2026-10-15
@@ -21686,14 +22330,16 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '23.823014758318'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: tymchishin-reclosure-v3-2026-10-23
   bead: think-yfoo
 - n: 543
   source_id: couzo-index-2026-10-15
   claim: upper-bound
   value: '23.828427124774'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: tymchishin-22-3662-2026-10-23
   bead: think-yfoo
 - n: 544
   source_id: couzo-index-2026-10-15
@@ -21951,7 +22597,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '25.828427124774'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-fa6237e-2026-10-23
   bead: think-yfoo
 - n: 640
   source_id: couzo-index-2026-10-15
@@ -22530,7 +23177,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '29.606601717826'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: tymchishin-reclosure-v3-2026-10-23
   bead: think-yfoo
 - n: 847
   source_id: couzo-index-2026-10-15
@@ -22701,14 +23349,16 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '30.656854249519'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: tymchishin-reclosure-v3-2026-10-23
   bead: think-yfoo
 - n: 907
   source_id: couzo-index-2026-10-15
   claim: upper-bound
   value: '30.656854249525'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-fa6237e-2026-10-23
   bead: think-yfoo
 - n: 908
   source_id: couzo-index-2026-10-15
@@ -22855,14 +23505,16 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '31.656854249519'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: tymchishin-reclosure-v3-2026-10-23
   bead: think-yfoo
 - n: 968
   source_id: couzo-index-2026-10-15
   claim: upper-bound
   value: '31.656854249525'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-fa6237e-2026-10-23
   bead: think-yfoo
 - n: 969
   source_id: couzo-index-2026-10-15
@@ -22924,14 +23576,16 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '31.849242404954'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-fa6237e-2026-10-23
   bead: think-yfoo
 - n: 982
   source_id: couzo-index-2026-10-15
   claim: upper-bound
   value: '31.849242405004'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-fa6237e-2026-10-23
   bead: think-yfoo
 - n: 983
   source_id: couzo-index-2026-10-15
@@ -23217,21 +23871,24 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '23.583782190152'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: lavrentev-cuda-v11-2026-10-23
   bead: think-tmwt
 - n: 579
   source_id: couzo-reconcile-2026-10-20
   claim: upper-bound
   value: '24.583782190152'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: tymchishin-reclosure-v3-2026-10-23
   bead: think-tmwt
 - n: 628
   source_id: couzo-reconcile-2026-10-20
   claim: upper-bound
   value: '25.583782190152'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: tymchishin-reclosure-v3-2026-10-23
   bead: think-tmwt
 - n: 649
   source_id: couzo-reconcile-2026-10-20
@@ -23246,21 +23903,24 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '26.583782190152'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: tymchishin-reclosure-v3-2026-10-23
   bead: think-tmwt
 - n: 732
   source_id: couzo-reconcile-2026-10-20
   claim: upper-bound
   value: '27.583782190152'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: tymchishin-reclosure-v3-2026-10-23
   bead: think-tmwt
 - n: 787
   source_id: couzo-reconcile-2026-10-20
   claim: upper-bound
   value: '28.583782190152'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: tymchishin-reclosure-v3-2026-10-23
   bead: think-tmwt
 - n: 810
   source_id: couzo-reconcile-2026-10-20
@@ -23283,14 +23943,16 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '29.583782190152'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: tymchishin-reclosure-v3-2026-10-23
   bead: think-tmwt
 - n: 903
   source_id: couzo-reconcile-2026-10-20
   claim: upper-bound
   value: '30.583782190152'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: tymchishin-reclosure-v3-2026-10-23
   bead: think-tmwt
 - n: 933
   source_id: couzo-reconcile-2026-10-20
@@ -23345,28 +24007,32 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '20.767428349962'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-efef7d1-2026-10-23
   bead: think-0gp6
 - n: 411
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '20.822875655552'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-efef7d1-2026-10-23
   bead: think-0gp6
 - n: 450
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '21.767428349962'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-efef7d1-2026-10-23
   bead: think-0gp6
 - n: 451
   source_id: mishapolk-issue732-2026-10-22
   claim: upper-bound
   value: '21.778174593073'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-efef7d1-2026-10-23
   bead: think-0gp6
 - n: 453
   source_id: mishapolk-issue732-2026-10-22
@@ -23429,7 +24095,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '23.778174593074'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-efef7d1-2026-10-23
   bead: think-0gp6
 - n: 582
   source_id: mishapolk-issue732-2026-10-22
@@ -23610,7 +24277,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '26.946653181671'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-efef7d1-2026-10-23
   bead: think-0gp6
 - n: 698
   source_id: mishapolk-issue732-2026-10-22
@@ -23673,7 +24341,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '27.914175273217'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-fa6237e-2026-10-23
   bead: think-0gp6
 - n: 752
   source_id: mishapolk-issue732-2026-10-22
@@ -23928,7 +24597,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '31.990639611064'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-fa6237e-2026-10-23
   bead: think-0gp6
 - n: 995
   source_id: mishapolk-issue732-2026-10-22
@@ -23973,7 +24643,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '20.614368938496'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-efef7d1-2026-10-23
   bead: think-e3im
 - n: 410
   source_id: mishapolk-issue732-f1ceee4-2026-10-23
@@ -23996,14 +24667,16 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '21.828427124751'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-efef7d1-2026-10-23
   bead: think-e3im
 - n: 455
   source_id: mishapolk-issue732-f1ceee4-2026-10-23
   claim: upper-bound
   value: '21.848427413738'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-efef7d1-2026-10-23
   bead: think-e3im
 - n: 456
   source_id: mishapolk-issue732-f1ceee4-2026-10-23
@@ -24097,7 +24770,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '22.961828398648'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-fa6237e-2026-10-23
   bead: think-e3im
 - n: 505
   source_id: mishapolk-issue732-f1ceee4-2026-10-23
@@ -24112,7 +24786,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '22.993588501400'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: lavrentev-cuda-v11-2026-10-23
   bead: think-e3im
 - n: 535
   source_id: mishapolk-issue732-f1ceee4-2026-10-23
@@ -24229,14 +24904,16 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '24.898819144772'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-efef7d1-2026-10-23
   bead: think-e3im
 - n: 596
   source_id: mishapolk-issue732-f1ceee4-2026-10-23
   claim: upper-bound
   value: '24.949747468312'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-efef7d1-2026-10-23
   bead: think-e3im
 - n: 597
   source_id: mishapolk-issue732-f1ceee4-2026-10-23
@@ -24291,21 +24968,24 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '25.677669529670'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: tymchishin-reclosure-v3-2026-10-23
   bead: think-e3im
 - n: 637
   source_id: mishapolk-issue732-f1ceee4-2026-10-23
   claim: upper-bound
   value: '25.778174593058'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-fa6237e-2026-10-23
   bead: think-e3im
 - n: 640
   source_id: mishapolk-issue732-f1ceee4-2026-10-23
   claim: upper-bound
   value: '25.828427124757'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-efef7d1-2026-10-23
   bead: think-e3im
 - n: 643
   source_id: mishapolk-issue732-f1ceee4-2026-10-23
@@ -24368,7 +25048,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '25.992652660227'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-fa6237e-2026-10-23
   bead: think-e3im
 - n: 654
   source_id: mishapolk-issue732-f1ceee4-2026-10-23
@@ -24406,7 +25087,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '26.828427124753'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-efef7d1-2026-10-23
   bead: think-e3im
 - n: 692
   source_id: mishapolk-issue732-f1ceee4-2026-10-23
@@ -24477,7 +25159,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '27.656854249499'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-efef7d1-2026-10-23
   bead: think-e3im
 - n: 736
   source_id: mishapolk-issue732-f1ceee4-2026-10-23
@@ -24522,14 +25205,16 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '27.828427124753'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-efef7d1-2026-10-23
   bead: think-e3im
 - n: 746
   source_id: mishapolk-issue732-f1ceee4-2026-10-23
   claim: upper-bound
   value: '27.828427124753'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-efef7d1-2026-10-23
   bead: think-e3im
 - n: 747
   source_id: mishapolk-issue732-f1ceee4-2026-10-23
@@ -24544,7 +25229,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '27.884019388634'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-efef7d1-2026-10-23
   bead: think-e3im
 - n: 749
   source_id: mishapolk-issue732-f1ceee4-2026-10-23
@@ -24583,14 +25269,16 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '28.656854249499'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-efef7d1-2026-10-23
   bead: think-e3im
 - n: 791
   source_id: mishapolk-issue732-f1ceee4-2026-10-23
   claim: upper-bound
   value: '28.656854249499'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: tymchishin-reclosure-v3-2026-10-23
   bead: think-e3im
 - n: 792
   source_id: mishapolk-issue732-f1ceee4-2026-10-23
@@ -24643,7 +25331,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '28.827439468623'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-efef7d1-2026-10-23
   bead: think-e3im
 - n: 803
   source_id: mishapolk-issue732-f1ceee4-2026-10-23
@@ -24682,7 +25371,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '28.924694338675'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-fa6237e-2026-10-23
   bead: think-e3im
 - n: 808
   source_id: mishapolk-issue732-f1ceee4-2026-10-23
@@ -24728,7 +25418,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '29.778174593059'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-efef7d1-2026-10-23
   bead: think-e3im
 - n: 855
   source_id: mishapolk-issue732-f1ceee4-2026-10-23
@@ -24743,7 +25434,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '29.798989873230'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: tymchishin-reclosure-v3-2026-10-23
   bead: think-e3im
 - n: 857
   source_id: mishapolk-issue732-f1ceee4-2026-10-23
@@ -24758,14 +25450,16 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '29.825571499874'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-efef7d1-2026-10-23
   bead: think-e3im
 - n: 859
   source_id: mishapolk-issue732-f1ceee4-2026-10-23
   claim: upper-bound
   value: '29.825571499869'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-efef7d1-2026-10-23
   bead: think-e3im
 - n: 860
   source_id: mishapolk-issue732-f1ceee4-2026-10-23
@@ -24820,7 +25514,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '29.992265777010'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-fa6237e-2026-10-23
   bead: think-e3im
 - n: 909
   source_id: mishapolk-issue732-f1ceee4-2026-10-23
@@ -24834,7 +25529,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '30.778174593059'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-efef7d1-2026-10-23
   bead: think-e3im
 - n: 914
   source_id: mishapolk-issue732-f1ceee4-2026-10-23
@@ -24873,28 +25569,32 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '30.825571499869'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-efef7d1-2026-10-23
   bead: think-e3im
 - n: 919
   source_id: mishapolk-issue732-f1ceee4-2026-10-23
   claim: upper-bound
   value: '30.827585222354'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-fa6237e-2026-10-23
   bead: think-e3im
 - n: 923
   source_id: mishapolk-issue732-f1ceee4-2026-10-23
   claim: upper-bound
   value: '30.924694629713'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-efef7d1-2026-10-23
   bead: think-e3im
 - n: 924
   source_id: mishapolk-issue732-f1ceee4-2026-10-23
   claim: upper-bound
   value: '30.931498747932'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-efef7d1-2026-10-23
   bead: think-e3im
 - n: 926
   source_id: mishapolk-issue732-f1ceee4-2026-10-23
@@ -24916,7 +25616,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '31.778174593059'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: tymchishin-reclosure-v3-2026-10-23
   bead: think-e3im
 - n: 976
   source_id: mishapolk-issue732-f1ceee4-2026-10-23
@@ -24955,7 +25656,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '31.827585222355'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-efef7d1-2026-10-23
   bead: think-e3im
 - n: 985
   source_id: mishapolk-issue732-f1ceee4-2026-10-23
@@ -26355,4 +27057,1385 @@ beyond_horizon_claims:
   assurance: reported
   disposition: tracked-outside-case-corpus
   bead: think-ptkk
+- n: 377
+  source_id: couzo-efef7d1-2026-10-23
+  claim: upper-bound
+  value: '19.925471653955'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-fa6237e-2026-10-23
+  bead: think-lyf9
+- n: 404
+  source_id: couzo-efef7d1-2026-10-23
+  claim: upper-bound
+  value: '20.614368938495'
+  assurance: reported
+  disposition: superseded
+  superseded_by: tymchishin-reclosure-v3-2026-10-23
+  bead: think-lyf9
+- n: 409
+  source_id: couzo-efef7d1-2026-10-23
+  claim: upper-bound
+  value: '20.767428349946'
+  assurance: reported
+  disposition: superseded
+  superseded_by: tymchishin-reclosure-v3-2026-10-23
+  bead: think-lyf9
+- n: 411
+  source_id: couzo-efef7d1-2026-10-23
+  claim: upper-bound
+  value: '20.822875655537'
+  assurance: reported
+  disposition: superseded
+  superseded_by: lavrentev-cuda-v11-2026-10-23
+  bead: think-lyf9
+- n: 418
+  source_id: couzo-efef7d1-2026-10-23
+  claim: upper-bound
+  value: '20.939184128245'
+  assurance: reported
+  disposition: superseded
+  superseded_by: alexchilton-fault-line-2026-10-23
+  bead: think-lyf9
+- n: 450
+  source_id: couzo-efef7d1-2026-10-23
+  claim: upper-bound
+  value: '21.767428349946'
+  assurance: reported
+  disposition: superseded
+  superseded_by: tymchishin-reclosure-v3-2026-10-23
+  bead: think-lyf9
+- n: 451
+  source_id: couzo-efef7d1-2026-10-23
+  claim: upper-bound
+  value: '21.778174593057'
+  assurance: reported
+  disposition: superseded
+  superseded_by: lavrentev-cuda-v11-2026-10-23
+  bead: think-lyf9
+- n: 454
+  source_id: couzo-efef7d1-2026-10-23
+  claim: upper-bound
+  value: '21.824764034677'
+  assurance: reported
+  disposition: superseded
+  superseded_by: tymchishin-reclosure-v3-2026-10-23
+  bead: think-lyf9
+- n: 455
+  source_id: couzo-efef7d1-2026-10-23
+  claim: upper-bound
+  value: '21.846667192857'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-fa6237e-2026-10-23
+  bead: think-lyf9
+- n: 460
+  source_id: couzo-efef7d1-2026-10-23
+  claim: upper-bound
+  value: '21.950987687978'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-fa6237e-2026-10-23
+  bead: think-lyf9
+- n: 540
+  source_id: couzo-efef7d1-2026-10-23
+  claim: upper-bound
+  value: '23.778174593057'
+  assurance: reported
+  disposition: superseded
+  superseded_by: tymchishin-reclosure-v3-2026-10-23
+  bead: think-lyf9
+- n: 551
+  source_id: couzo-efef7d1-2026-10-23
+  claim: upper-bound
+  value: '23.964873439804'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-fa6237e-2026-10-23
+  bead: think-lyf9
+- n: 594
+  source_id: couzo-efef7d1-2026-10-23
+  claim: upper-bound
+  value: '24.896263780065'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-fa6237e-2026-10-23
+  bead: think-lyf9
+- n: 596
+  source_id: couzo-efef7d1-2026-10-23
+  claim: upper-bound
+  value: '24.948767393866'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-fa6237e-2026-10-23
+  bead: think-lyf9
+- n: 640
+  source_id: couzo-efef7d1-2026-10-23
+  claim: upper-bound
+  value: '25.828427124752'
+  assurance: reported
+  disposition: superseded
+  superseded_by: tymchishin-reclosure-v3-2026-10-23
+  bead: think-lyf9
+- n: 691
+  source_id: couzo-efef7d1-2026-10-23
+  claim: upper-bound
+  value: '26.828427124752'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-fa6237e-2026-10-23
+  bead: think-lyf9
+- n: 697
+  source_id: couzo-efef7d1-2026-10-23
+  claim: upper-bound
+  value: '26.946234972260'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-fa6237e-2026-10-23
+  bead: think-lyf9
+- n: 706
+  source_id: couzo-efef7d1-2026-10-23
+  claim: upper-bound
+  value: '26.997916874564'
+  assurance: reported
+  disposition: superseded
+  superseded_by: lavrentev-cuda-v11-2026-10-23
+  bead: think-lyf9
+- n: 735
+  source_id: couzo-efef7d1-2026-10-23
+  claim: upper-bound
+  value: '27.656854249498'
+  assurance: reported
+  disposition: superseded
+  superseded_by: tymchishin-reclosure-v3-2026-10-23
+  bead: think-lyf9
+- n: 745
+  source_id: couzo-efef7d1-2026-10-23
+  claim: upper-bound
+  value: '27.828427124752'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-fa6237e-2026-10-23
+  bead: think-lyf9
+- n: 746
+  source_id: couzo-efef7d1-2026-10-23
+  claim: upper-bound
+  value: '27.828427124752'
+  assurance: reported
+  disposition: superseded
+  superseded_by: lavrentev-cuda-v11-2026-10-23
+  bead: think-lyf9
+- n: 748
+  source_id: couzo-efef7d1-2026-10-23
+  claim: upper-bound
+  value: '27.883920294486'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-fa6237e-2026-10-23
+  bead: think-lyf9
+- n: 790
+  source_id: couzo-efef7d1-2026-10-23
+  claim: upper-bound
+  value: '28.656854249498'
+  assurance: reported
+  disposition: superseded
+  superseded_by: tymchishin-reclosure-v3-2026-10-23
+  bead: think-lyf9
+- n: 802
+  source_id: couzo-efef7d1-2026-10-23
+  claim: upper-bound
+  value: '28.827332635379'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-fa6237e-2026-10-23
+  bead: think-lyf9
+- n: 816
+  source_id: couzo-efef7d1-2026-10-23
+  claim: upper-bound
+  value: '28.995928899209'
+  assurance: reported
+  disposition: superseded
+  superseded_by: lavrentev-cuda-v11-2026-10-23
+  bead: think-lyf9
+- n: 817
+  source_id: couzo-efef7d1-2026-10-23
+  claim: upper-bound
+  value: '28.997492020580'
+  assurance: reported
+  disposition: superseded
+  superseded_by: alexchilton-fault-line-2026-10-23
+  bead: think-lyf9
+- n: 854
+  source_id: couzo-efef7d1-2026-10-23
+  claim: upper-bound
+  value: '29.778174593058'
+  assurance: reported
+  disposition: superseded
+  superseded_by: tymchishin-reclosure-v3-2026-10-23
+  bead: think-lyf9
+- n: 858
+  source_id: couzo-efef7d1-2026-10-23
+  claim: upper-bound
+  value: '29.824728376140'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-fa6237e-2026-10-23
+  bead: think-lyf9
+- n: 859
+  source_id: couzo-efef7d1-2026-10-23
+  claim: upper-bound
+  value: '29.824728376140'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-fa6237e-2026-10-23
+  bead: think-lyf9
+- n: 913
+  source_id: couzo-efef7d1-2026-10-23
+  claim: upper-bound
+  value: '30.778174593058'
+  assurance: reported
+  disposition: superseded
+  superseded_by: tymchishin-reclosure-v3-2026-10-23
+  bead: think-lyf9
+- n: 918
+  source_id: couzo-efef7d1-2026-10-23
+  claim: upper-bound
+  value: '30.824728376140'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-fa6237e-2026-10-23
+  bead: think-lyf9
+- n: 923
+  source_id: couzo-efef7d1-2026-10-23
+  claim: upper-bound
+  value: '30.899838977702'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-fa6237e-2026-10-23
+  bead: think-lyf9
+- n: 924
+  source_id: couzo-efef7d1-2026-10-23
+  claim: upper-bound
+  value: '30.928790966656'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-fa6237e-2026-10-23
+  bead: think-lyf9
+- n: 980
+  source_id: couzo-efef7d1-2026-10-23
+  claim: upper-bound
+  value: '31.827585222354'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-fa6237e-2026-10-23
+  bead: think-lyf9
+- n: 984
+  source_id: couzo-efef7d1-2026-10-23
+  claim: upper-bound
+  value: '31.895323373796'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-fa6237e-2026-10-23
+  bead: think-lyf9
+- n: 377
+  source_id: couzo-fa6237e-2026-10-23
+  claim: upper-bound
+  value: '19.918891242798'
+  assurance: reported
+  disposition: superseded
+  superseded_by: kyleluecke-inos-2026-10-23
+  bead: think-lyf9
+- n: 455
+  source_id: couzo-fa6237e-2026-10-23
+  claim: upper-bound
+  value: '21.825157900492'
+  assurance: reported
+  disposition: superseded
+  superseded_by: aqibrazadev-blending-2026-10-23
+  bead: think-lyf9
+- n: 460
+  source_id: couzo-fa6237e-2026-10-23
+  claim: upper-bound
+  value: '21.937369317827'
+  assurance: reported
+  disposition: superseded
+  superseded_by: alexchilton-fault-line-2026-10-23
+  bead: think-lyf9
+- n: 504
+  source_id: couzo-fa6237e-2026-10-23
+  claim: upper-bound
+  value: '22.930165198822'
+  assurance: reported
+  disposition: superseded
+  superseded_by: alexchilton-fault-line-2026-10-23
+  bead: think-lyf9
+- n: 551
+  source_id: couzo-fa6237e-2026-10-23
+  claim: upper-bound
+  value: '23.939464710057'
+  assurance: reported
+  disposition: superseded
+  superseded_by: kyleluecke-inos-2026-10-23
+  bead: think-lyf9
+- n: 594
+  source_id: couzo-fa6237e-2026-10-23
+  claim: upper-bound
+  value: '24.879220692701'
+  assurance: reported
+  disposition: superseded
+  superseded_by: alexchilton-fault-line-2026-10-23
+  bead: think-lyf9
+- n: 596
+  source_id: couzo-fa6237e-2026-10-23
+  claim: upper-bound
+  value: '24.888953762946'
+  assurance: reported
+  disposition: superseded
+  superseded_by: aqibrazadev-blending-2026-10-23
+  bead: think-lyf9
+- n: 637
+  source_id: couzo-fa6237e-2026-10-23
+  claim: upper-bound
+  value: '25.769621349979'
+  assurance: reported
+  disposition: superseded
+  superseded_by: aqibrazadev-blending-2026-10-23
+  bead: think-lyf9
+- n: 639
+  source_id: couzo-fa6237e-2026-10-23
+  claim: upper-bound
+  value: '25.802525786986'
+  assurance: reported
+  disposition: superseded
+  superseded_by: tymchishin-22-3662-2026-10-23
+  bead: think-lyf9
+- n: 653
+  source_id: couzo-fa6237e-2026-10-23
+  claim: upper-bound
+  value: '25.991265513275'
+  assurance: reported
+  disposition: superseded
+  superseded_by: lavrentev-cuda-run-361589987-2026-10-23
+  bead: think-lyf9
+- n: 691
+  source_id: couzo-fa6237e-2026-10-23
+  claim: upper-bound
+  value: '26.802453192395'
+  assurance: reported
+  disposition: superseded
+  superseded_by: tymchishin-22-3662-2026-10-23
+  bead: think-lyf9
+- n: 697
+  source_id: couzo-fa6237e-2026-10-23
+  claim: upper-bound
+  value: '26.889681452139'
+  assurance: reported
+  disposition: superseded
+  superseded_by: kyleluecke-inos-2026-10-23
+  bead: think-lyf9
+- n: 745
+  source_id: couzo-fa6237e-2026-10-23
+  claim: upper-bound
+  value: '27.806788989465'
+  assurance: reported
+  disposition: superseded
+  superseded_by: kyleluecke-inos-2026-10-23
+  bead: think-lyf9
+- n: 748
+  source_id: couzo-fa6237e-2026-10-23
+  claim: upper-bound
+  value: '27.845242229885'
+  assurance: reported
+  disposition: superseded
+  superseded_by: lavrentev-cuda-run-361589987-2026-10-23
+  bead: think-lyf9
+- n: 751
+  source_id: couzo-fa6237e-2026-10-23
+  claim: upper-bound
+  value: '27.889780769648'
+  assurance: reported
+  disposition: superseded
+  superseded_by: aqibrazadev-blending-2026-10-23
+  bead: think-lyf9
+- n: 755
+  source_id: couzo-fa6237e-2026-10-23
+  claim: upper-bound
+  value: '27.935151038081'
+  assurance: reported
+  disposition: superseded
+  superseded_by: tymchishin-22-3662-2026-10-23
+  bead: think-lyf9
+- n: 802
+  source_id: couzo-fa6237e-2026-10-23
+  claim: upper-bound
+  value: '28.824518961150'
+  assurance: reported
+  disposition: superseded
+  superseded_by: lavrentev-cuda-run-361589987-2026-10-23
+  bead: think-lyf9
+- n: 807
+  source_id: couzo-fa6237e-2026-10-23
+  claim: upper-bound
+  value: '28.888230041699'
+  assurance: reported
+  disposition: superseded
+  superseded_by: aqibrazadev-blending-2026-10-23
+  bead: think-lyf9
+- n: 858
+  source_id: couzo-fa6237e-2026-10-23
+  claim: upper-bound
+  value: '29.802446344800'
+  assurance: reported
+  disposition: superseded
+  superseded_by: kyleluecke-inos-2026-10-23
+  bead: think-lyf9
+- n: 859
+  source_id: couzo-fa6237e-2026-10-23
+  claim: upper-bound
+  value: '29.810784558747'
+  assurance: reported
+  disposition: superseded
+  superseded_by: lavrentev-cuda-run-361589987-2026-10-23
+  bead: think-lyf9
+- n: 861
+  source_id: couzo-fa6237e-2026-10-23
+  claim: upper-bound
+  value: '29.834244105301'
+  assurance: reported
+  disposition: superseded
+  superseded_by: tymchishin-22-3662-2026-10-23
+  bead: think-lyf9
+- n: 867
+  source_id: couzo-fa6237e-2026-10-23
+  claim: upper-bound
+  value: '29.908095427843'
+  assurance: reported
+  disposition: superseded
+  superseded_by: kyleluecke-inos-2026-10-23
+  bead: think-lyf9
+- n: 873
+  source_id: couzo-fa6237e-2026-10-23
+  claim: upper-bound
+  value: '29.987674023347'
+  assurance: reported
+  disposition: superseded
+  superseded_by: tymchishin-22-3662-2026-10-23
+  bead: think-lyf9
+- n: 874
+  source_id: couzo-fa6237e-2026-10-23
+  claim: upper-bound
+  value: '29.992261829511'
+  assurance: reported
+  disposition: superseded
+  superseded_by: kyleluecke-inos-2026-10-23
+  bead: think-lyf9
+- n: 907
+  source_id: couzo-fa6237e-2026-10-23
+  claim: upper-bound
+  value: '30.619460176442'
+  assurance: reported
+  disposition: superseded
+  superseded_by: kyleluecke-inos-2026-10-23
+  bead: think-lyf9
+- n: 918
+  source_id: couzo-fa6237e-2026-10-23
+  claim: upper-bound
+  value: '30.803910346360'
+  assurance: reported
+  disposition: superseded
+  superseded_by: kyleluecke-inos-2026-10-23
+  bead: think-lyf9
+- n: 919
+  source_id: couzo-fa6237e-2026-10-23
+  claim: upper-bound
+  value: '30.821724093995'
+  assurance: reported
+  disposition: superseded
+  superseded_by: lavrentev-cuda-run-361589987-2026-10-23
+  bead: think-lyf9
+- n: 920
+  source_id: couzo-fa6237e-2026-10-23
+  claim: upper-bound
+  value: '30.821724125995'
+  assurance: reported
+  disposition: superseded
+  superseded_by: tymchishin-22-3662-2026-10-23
+  bead: think-lyf9
+- n: 923
+  source_id: couzo-fa6237e-2026-10-23
+  claim: upper-bound
+  value: '30.866094302498'
+  assurance: reported
+  disposition: superseded
+  superseded_by: lavrentev-cuda-run-361589987-2026-10-23
+  bead: think-lyf9
+- n: 924
+  source_id: couzo-fa6237e-2026-10-23
+  claim: upper-bound
+  value: '30.877665942945'
+  assurance: reported
+  disposition: superseded
+  superseded_by: aqibrazadev-blending-2026-10-23
+  bead: think-lyf9
+- n: 929
+  source_id: couzo-fa6237e-2026-10-23
+  claim: upper-bound
+  value: '30.934561887031'
+  assurance: reported
+  disposition: superseded
+  superseded_by: kyleluecke-inos-2026-10-23
+  bead: think-lyf9
+- n: 968
+  source_id: couzo-fa6237e-2026-10-23
+  claim: upper-bound
+  value: '31.619416178875'
+  assurance: reported
+  disposition: superseded
+  superseded_by: kyleluecke-inos-2026-10-23
+  bead: think-lyf9
+- n: 980
+  source_id: couzo-fa6237e-2026-10-23
+  claim: upper-bound
+  value: '31.807256605352'
+  assurance: reported
+  disposition: superseded
+  superseded_by: tymchishin-22-3662-2026-10-23
+  bead: think-lyf9
+- n: 981
+  source_id: couzo-fa6237e-2026-10-23
+  claim: upper-bound
+  value: '31.821724094196'
+  assurance: reported
+  disposition: superseded
+  superseded_by: kyleluecke-inos-2026-10-23
+  bead: think-lyf9
+- n: 982
+  source_id: couzo-fa6237e-2026-10-23
+  claim: upper-bound
+  value: '31.829315279663'
+  assurance: reported
+  disposition: superseded
+  superseded_by: tymchishin-22-3662-2026-10-23
+  bead: think-lyf9
+- n: 984
+  source_id: couzo-fa6237e-2026-10-23
+  claim: upper-bound
+  value: '31.853001163230'
+  assurance: reported
+  disposition: superseded
+  superseded_by: tymchishin-22-3662-2026-10-23
+  bead: think-lyf9
+- n: 994
+  source_id: couzo-fa6237e-2026-10-23
+  claim: upper-bound
+  value: '31.960278551224'
+  assurance: reported
+  disposition: superseded
+  superseded_by: aqibrazadev-blending-2026-10-23
+  bead: think-lyf9
+- n: 327
+  source_id: tymchishin-reclosure-v3-2026-10-23
+  claim: upper-bound
+  value: '18.583782194361'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 340
+  source_id: tymchishin-reclosure-v3-2026-10-23
+  claim: upper-bound
+  value: '18.926898901624'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 364
+  source_id: tymchishin-reclosure-v3-2026-10-23
+  claim: upper-bound
+  value: '19.571428576644'
+  assurance: reported
+  disposition: superseded
+  superseded_by: aqibrazadev-blending-2026-10-23
+  bead: think-lyf9
+- n: 404
+  source_id: tymchishin-reclosure-v3-2026-10-23
+  claim: upper-bound
+  value: '20.591378149728'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 406
+  source_id: tymchishin-reclosure-v3-2026-10-23
+  claim: upper-bound
+  value: '20.656854250299'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 409
+  source_id: tymchishin-reclosure-v3-2026-10-23
+  claim: upper-bound
+  value: '20.740417290708'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 445
+  source_id: tymchishin-reclosure-v3-2026-10-23
+  claim: upper-bound
+  value: '21.591378149728'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 446
+  source_id: tymchishin-reclosure-v3-2026-10-23
+  claim: upper-bound
+  value: '21.645753254767'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 450
+  source_id: tymchishin-reclosure-v3-2026-10-23
+  claim: upper-bound
+  value: '21.733166014146'
+  assurance: reported
+  disposition: superseded
+  superseded_by: kyleluecke-inos-2026-10-23
+  bead: think-lyf9
+- n: 454
+  source_id: tymchishin-reclosure-v3-2026-10-23
+  claim: upper-bound
+  value: '21.823102658532'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 488
+  source_id: tymchishin-reclosure-v3-2026-10-23
+  claim: upper-bound
+  value: '22.591378149728'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 533
+  source_id: tymchishin-reclosure-v3-2026-10-23
+  claim: upper-bound
+  value: '23.583782194417'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 537
+  source_id: tymchishin-reclosure-v3-2026-10-23
+  claim: upper-bound
+  value: '23.692388159698'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 540
+  source_id: tymchishin-reclosure-v3-2026-10-23
+  claim: upper-bound
+  value: '23.756125423085'
+  assurance: reported
+  disposition: superseded
+  superseded_by: tymchishin-22-3662-2026-10-23
+  bead: think-lyf9
+- n: 541
+  source_id: tymchishin-reclosure-v3-2026-10-23
+  claim: upper-bound
+  value: '23.778174597323'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 579
+  source_id: tymchishin-reclosure-v3-2026-10-23
+  claim: upper-bound
+  value: '24.563448006414'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 580
+  source_id: tymchishin-reclosure-v3-2026-10-23
+  claim: upper-bound
+  value: '24.583782194417'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 589
+  source_id: tymchishin-reclosure-v3-2026-10-23
+  claim: upper-bound
+  value: '24.778174594028'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 628
+  source_id: tymchishin-reclosure-v3-2026-10-23
+  claim: upper-bound
+  value: '25.535533911216'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 633
+  source_id: tymchishin-reclosure-v3-2026-10-23
+  claim: upper-bound
+  value: '25.656854253781'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 640
+  source_id: tymchishin-reclosure-v3-2026-10-23
+  claim: upper-bound
+  value: '25.813708503286'
+  assurance: reported
+  disposition: superseded
+  superseded_by: tymchishin-22-3662-2026-10-23
+  bead: think-lyf9
+- n: 679
+  source_id: tymchishin-reclosure-v3-2026-10-23
+  claim: upper-bound
+  value: '26.535533911216'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 685
+  source_id: tymchishin-reclosure-v3-2026-10-23
+  claim: upper-bound
+  value: '26.692388159732'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 732
+  source_id: tymchishin-reclosure-v3-2026-10-23
+  claim: upper-bound
+  value: '27.535533911216'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 735
+  source_id: tymchishin-reclosure-v3-2026-10-23
+  claim: upper-bound
+  value: '27.617572177905'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 738
+  source_id: tymchishin-reclosure-v3-2026-10-23
+  claim: upper-bound
+  value: '27.691431135633'
+  assurance: reported
+  disposition: superseded
+  superseded_by: aqibrazadev-blending-2026-10-23
+  bead: think-lyf9
+- n: 787
+  source_id: tymchishin-reclosure-v3-2026-10-23
+  claim: upper-bound
+  value: '28.535533911216'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 790
+  source_id: tymchishin-reclosure-v3-2026-10-23
+  claim: upper-bound
+  value: '28.614368942839'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 791
+  source_id: tymchishin-reclosure-v3-2026-10-23
+  claim: upper-bound
+  value: '28.642135624899'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 793
+  source_id: tymchishin-reclosure-v3-2026-10-23
+  claim: upper-bound
+  value: '28.678779879669'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 844
+  source_id: tymchishin-reclosure-v3-2026-10-23
+  claim: upper-bound
+  value: '29.535533911216'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 846
+  source_id: tymchishin-reclosure-v3-2026-10-23
+  claim: upper-bound
+  value: '29.583782195484'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 854
+  source_id: tymchishin-reclosure-v3-2026-10-23
+  claim: upper-bound
+  value: '29.727922065706'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 856
+  source_id: tymchishin-reclosure-v3-2026-10-23
+  claim: upper-bound
+  value: '29.778174594233'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 903
+  source_id: tymchishin-reclosure-v3-2026-10-23
+  claim: upper-bound
+  value: '30.535533911216'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 906
+  source_id: tymchishin-reclosure-v3-2026-10-23
+  claim: upper-bound
+  value: '30.591378150840'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 913
+  source_id: tymchishin-reclosure-v3-2026-10-23
+  claim: upper-bound
+  value: '30.727922065706'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 964
+  source_id: tymchishin-reclosure-v3-2026-10-23
+  claim: upper-bound
+  value: '31.535533911216'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 965
+  source_id: tymchishin-reclosure-v3-2026-10-23
+  claim: upper-bound
+  value: '31.563625656683'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 967
+  source_id: tymchishin-reclosure-v3-2026-10-23
+  claim: upper-bound
+  value: '31.591378150840'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 971
+  source_id: tymchishin-reclosure-v3-2026-10-23
+  claim: upper-bound
+  value: '31.678779879703'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 975
+  source_id: tymchishin-reclosure-v3-2026-10-23
+  claim: upper-bound
+  value: '31.727922066728'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 330
+  source_id: lavrentev-cuda-v11-2026-10-23
+  claim: upper-bound
+  value: '18.692388156328'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 338
+  source_id: lavrentev-cuda-v11-2026-10-23
+  claim: upper-bound
+  value: '18.902603672778'
+  assurance: reported
+  disposition: superseded
+  superseded_by: alexchilton-fault-line-2026-10-23
+  bead: think-lyf9
+- n: 378
+  source_id: lavrentev-cuda-v11-2026-10-23
+  claim: upper-bound
+  value: '19.926898935994'
+  assurance: reported
+  disposition: superseded
+  superseded_by: kyleluecke-inos-2026-10-23
+  bead: think-lyf9
+- n: 405
+  source_id: lavrentev-cuda-v11-2026-10-23
+  claim: upper-bound
+  value: '20.645753275084'
+  assurance: reported
+  disposition: superseded
+  superseded_by: kyleluecke-inos-2026-10-23
+  bead: think-lyf9
+- n: 411
+  source_id: lavrentev-cuda-v11-2026-10-23
+  claim: upper-bound
+  value: '20.806167170776'
+  assurance: reported
+  disposition: superseded
+  superseded_by: alexchilton-fault-line-2026-10-23
+  bead: think-lyf9
+- n: 451
+  source_id: lavrentev-cuda-v11-2026-10-23
+  claim: upper-bound
+  value: '21.756125418986'
+  assurance: reported
+  disposition: superseded
+  superseded_by: kyleluecke-inos-2026-10-23
+  bead: think-lyf9
+- n: 509
+  source_id: lavrentev-cuda-v11-2026-10-23
+  claim: upper-bound
+  value: '22.993150623408'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 532
+  source_id: lavrentev-cuda-v11-2026-10-23
+  claim: upper-bound
+  value: '23.569782929749'
+  assurance: reported
+  disposition: superseded
+  superseded_by: kyleluecke-inos-2026-10-23
+  bead: think-lyf9
+- n: 706
+  source_id: lavrentev-cuda-v11-2026-10-23
+  claim: upper-bound
+  value: '26.996375081450'
+  assurance: reported
+  disposition: superseded
+  superseded_by: kyleluecke-inos-2026-10-23
+  bead: think-lyf9
+- n: 746
+  source_id: lavrentev-cuda-v11-2026-10-23
+  claim: upper-bound
+  value: '27.824123424660'
+  assurance: reported
+  disposition: superseded
+  superseded_by: lavrentev-cuda-run-361589987-2026-10-23
+  bead: think-lyf9
+- n: 816
+  source_id: lavrentev-cuda-v11-2026-10-23
+  claim: upper-bound
+  value: '28.993696421766'
+  assurance: reported
+  disposition: superseded
+  superseded_by: alexchilton-fault-line-2026-10-23
+  bead: think-lyf9
+- n: 376
+  source_id: tymchishin-22-3662-2026-10-23
+  claim: upper-bound
+  value: '19.897064162577'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 419
+  source_id: tymchishin-22-3662-2026-10-23
+  claim: upper-bound
+  value: '20.949984998042'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 540
+  source_id: tymchishin-22-3662-2026-10-23
+  claim: upper-bound
+  value: '23.756097566212'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 543
+  source_id: tymchishin-22-3662-2026-10-23
+  claim: upper-bound
+  value: '23.803053261145'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 639
+  source_id: tymchishin-22-3662-2026-10-23
+  claim: upper-bound
+  value: '25.799684810945'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 640
+  source_id: tymchishin-22-3662-2026-10-23
+  claim: upper-bound
+  value: '25.803053261947'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 691
+  source_id: tymchishin-22-3662-2026-10-23
+  claim: upper-bound
+  value: '26.799999051183'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 755
+  source_id: tymchishin-22-3662-2026-10-23
+  claim: upper-bound
+  value: '27.933868760801'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 761
+  source_id: tymchishin-22-3662-2026-10-23
+  claim: upper-bound
+  value: '27.998784458427'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 861
+  source_id: tymchishin-22-3662-2026-10-23
+  claim: upper-bound
+  value: '29.832000576669'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 873
+  source_id: tymchishin-22-3662-2026-10-23
+  claim: upper-bound
+  value: '29.985475579740'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 920
+  source_id: tymchishin-22-3662-2026-10-23
+  claim: upper-bound
+  value: '30.821593354959'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 980
+  source_id: tymchishin-22-3662-2026-10-23
+  claim: upper-bound
+  value: '31.800000616031'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 982
+  source_id: tymchishin-22-3662-2026-10-23
+  claim: upper-bound
+  value: '31.828000616591'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 984
+  source_id: tymchishin-22-3662-2026-10-23
+  claim: upper-bound
+  value: '31.851684895372'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 377
+  source_id: kyleluecke-inos-2026-10-23
+  claim: upper-bound
+  value: '19.909958295508'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 378
+  source_id: kyleluecke-inos-2026-10-23
+  claim: upper-bound
+  value: '19.926898904855'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 405
+  source_id: kyleluecke-inos-2026-10-23
+  claim: upper-bound
+  value: '20.645753256143'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 450
+  source_id: kyleluecke-inos-2026-10-23
+  claim: upper-bound
+  value: '21.733166012067'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 451
+  source_id: kyleluecke-inos-2026-10-23
+  claim: upper-bound
+  value: '21.756097565469'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 532
+  source_id: kyleluecke-inos-2026-10-23
+  claim: upper-bound
+  value: '23.569769402565'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 551
+  source_id: kyleluecke-inos-2026-10-23
+  claim: upper-bound
+  value: '23.935417083687'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 697
+  source_id: kyleluecke-inos-2026-10-23
+  claim: upper-bound
+  value: '26.888197389264'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 706
+  source_id: kyleluecke-inos-2026-10-23
+  claim: upper-bound
+  value: '26.995398008109'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 745
+  source_id: kyleluecke-inos-2026-10-23
+  claim: upper-bound
+  value: '27.799999071184'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 858
+  source_id: kyleluecke-inos-2026-10-23
+  claim: upper-bound
+  value: '29.799684951024'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 867
+  source_id: kyleluecke-inos-2026-10-23
+  claim: upper-bound
+  value: '29.908036104109'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 874
+  source_id: kyleluecke-inos-2026-10-23
+  claim: upper-bound
+  value: '29.992261722443'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 907
+  source_id: kyleluecke-inos-2026-10-23
+  claim: upper-bound
+  value: '30.619088210478'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 918
+  source_id: kyleluecke-inos-2026-10-23
+  claim: upper-bound
+  value: '30.799684872950'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 929
+  source_id: kyleluecke-inos-2026-10-23
+  claim: upper-bound
+  value: '30.934039771569'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 968
+  source_id: kyleluecke-inos-2026-10-23
+  claim: upper-bound
+  value: '31.619088202057'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 981
+  source_id: kyleluecke-inos-2026-10-23
+  claim: upper-bound
+  value: '31.809159874355'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 338
+  source_id: alexchilton-fault-line-2026-10-23
+  claim: upper-bound
+  value: '18.893658115438'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 411
+  source_id: alexchilton-fault-line-2026-10-23
+  claim: upper-bound
+  value: '20.795693819980'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 418
+  source_id: alexchilton-fault-line-2026-10-23
+  claim: upper-bound
+  value: '20.933868727956'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 460
+  source_id: alexchilton-fault-line-2026-10-23
+  claim: upper-bound
+  value: '21.933868736974'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 504
+  source_id: alexchilton-fault-line-2026-10-23
+  claim: upper-bound
+  value: '22.925987278335'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 508
+  source_id: alexchilton-fault-line-2026-10-23
+  claim: upper-bound
+  value: '22.982358327699'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 594
+  source_id: alexchilton-fault-line-2026-10-23
+  claim: upper-bound
+  value: '24.878125203750'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 604
+  source_id: alexchilton-fault-line-2026-10-23
+  claim: upper-bound
+  value: '24.996827861719'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 816
+  source_id: alexchilton-fault-line-2026-10-23
+  claim: upper-bound
+  value: '28.992261752627'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 817
+  source_id: alexchilton-fault-line-2026-10-23
+  claim: upper-bound
+  value: '28.996875956628'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 875
+  source_id: alexchilton-fault-line-2026-10-23
+  claim: upper-bound
+  value: '29.996827869334'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 364
+  source_id: aqibrazadev-blending-2026-10-23
+  claim: upper-bound
+  value: '19.571428575293'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 455
+  source_id: aqibrazadev-blending-2026-10-23
+  claim: upper-bound
+  value: '21.825061500508'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 596
+  source_id: aqibrazadev-blending-2026-10-23
+  claim: upper-bound
+  value: '24.888197391569'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 637
+  source_id: aqibrazadev-blending-2026-10-23
+  claim: upper-bound
+  value: '25.769289519260'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 738
+  source_id: aqibrazadev-blending-2026-10-23
+  claim: upper-bound
+  value: '27.691283629550'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 751
+  source_id: aqibrazadev-blending-2026-10-23
+  claim: upper-bound
+  value: '27.888197393173'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 807
+  source_id: aqibrazadev-blending-2026-10-23
+  claim: upper-bound
+  value: '28.888197393373'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 924
+  source_id: aqibrazadev-blending-2026-10-23
+  claim: upper-bound
+  value: '30.877654761160'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 994
+  source_id: aqibrazadev-blending-2026-10-23
+  claim: upper-bound
+  value: '31.960209732221'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 653
+  source_id: lavrentev-cuda-run-361589987-2026-10-23
+  claim: upper-bound
+  value: '25.991128755446'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 746
+  source_id: lavrentev-cuda-run-361589987-2026-10-23
+  claim: upper-bound
+  value: '27.803053268109'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 748
+  source_id: lavrentev-cuda-run-361589987-2026-10-23
+  claim: upper-bound
+  value: '27.844000201765'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 802
+  source_id: lavrentev-cuda-run-361589987-2026-10-23
+  claim: upper-bound
+  value: '28.809159596152'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 859
+  source_id: lavrentev-cuda-run-361589987-2026-10-23
+  claim: upper-bound
+  value: '29.809159596152'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 919
+  source_id: lavrentev-cuda-run-361589987-2026-10-23
+  claim: upper-bound
+  value: '30.809159596954'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
+- n: 923
+  source_id: lavrentev-cuda-run-361589987-2026-10-23
+  claim: upper-bound
+  value: '30.858737702974'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-lyf9
 pending_catalogue_intake: []

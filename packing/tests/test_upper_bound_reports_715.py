@@ -104,6 +104,14 @@ F1_COUNTS = frozenset(
 LATER_763 = "couzo-issue763-2026-10-23"
 SUPERSEDED_BY_763 = frozenset({503, 595, 815})
 COUNTS_763 = frozenset(row.n for row in horizon.decided_claims(horizon.release(763)))
+#: The sources of the push of 23:38:42Z read commit by commit (think-lyf9; #795's review
+#: A), whose rows it published after f1ceee4 and #763's, the next in report order there.
+NOTEBOOK_SOURCES = frozenset(
+    item.source for item in horizon.RELEASES.values() if item.claim_map == horizon.PUSH
+)
+#: This import's rows the push's first row supersedes directly: 867, Couzo's own at
+#: fa6237e, which the Kaggle account kyleluecke's row supersedes in turn.
+SUPERSEDED_BY_NOTEBOOKS = {867: "couzo-fa6237e-2026-10-23"}
 #: Issue 702's exact side at 343, which this import's row supersedes in report order.
 SIDE_702 = Fraction(18977682482404124568634475670459, 10**30)
 #: The certificates the issue restates that earlier packets already retain, byte for byte.
@@ -189,11 +197,15 @@ def test_the_recorded_rows_are_the_claims_record_and_supersede_the_rows_before_t
     before: Counter[str] = Counter()
 
     def standing(n: int, rows: dict[str, Any], expected: str) -> str:
-        """#763's row where it has one, superseding the row `expected` names."""
-        if n not in COUNTS_763:
-            return expected
-        assert rows[expected]["superseded_by"] == LATER_763
-        return LATER_763
+        """#763's row where it has one, superseding the row `expected` names, or the last row
+        of the push's chain where its rows supersede it (think-lyf9)."""
+        if n in COUNTS_763:
+            assert rows[expected]["superseded_by"] == LATER_763
+            return LATER_763
+        current = expected
+        while rows[current].get("superseded_by") in NOTEBOOK_SOURCES:
+            current = rows[current]["superseded_by"]
+        return current
 
     for n in recorded:
         rows = _rows_at(coverage, n)
@@ -221,6 +233,10 @@ def test_the_recorded_rows_are_the_claims_record_and_supersede_the_rows_before_t
             continue
         if n in SUPERSEDED_BY_763:
             assert rows[SOURCE]["disposition"] == "superseded"
+            assert current[n]["source_id"] == standing(n, rows, SOURCE)
+            continue
+        if n in SUPERSEDED_BY_NOTEBOOKS:
+            assert rows[SOURCE]["superseded_by"] == SUPERSEDED_BY_NOTEBOOKS[n]
             assert current[n]["source_id"] == standing(n, rows, SOURCE)
             continue
         assert rows[SOURCE]["disposition"] == "tracked-outside-case-corpus"

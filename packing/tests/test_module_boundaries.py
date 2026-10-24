@@ -1647,6 +1647,15 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
         "test_upper_bound_reports_regularized_1020.py": {
             "test_both_routes_meet_contact_and_refuse_1e30_past_it",
         },
+        # 134.20s of call time on 2026-10-24 (think-jv2s, the sharp-controls subcommand),
+        # locally under `nice` on a shared four-core host at a load average of 10 to 20: it
+        # admits #719's 204 certificate and decides the subcommand's eleven controls on
+        # both maintained exact routes over 20,706 pairs each, to reproduce the packet's
+        # retained receipt. The controls' known answers on small packings, the flips and
+        # every refusal stay on the pull-request surface.
+        "test_upper_bound_sharp_controls.py": {
+            "test_it_reproduces_the_retained_204_receipt_route_for_route",
+        },
         # 4s of call time across 2.
         "test_validation_cli.py": {
             "test_run_timeout_terminates_child_and_reports_captured_output",  # 2.3s

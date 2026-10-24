@@ -8,8 +8,8 @@ ours, which rest on someone else's argument, and how far each has been checked.
 
 ## The short version
 
-- **751** evidence records. **418** are formal; **409** of those were established here. **12** are samples, counted separately.
-- **315** rest on an argument made elsewhere, of which **8** have been read by nobody here.
+- **760** evidence records. **418** are formal; **409** of those were established here. **12** are samples, counted separately.
+- **324** rest on an argument made elsewhere, of which **8** have been read by nobody here.
 - **1** formal record proves a theorem only under a hypothesis nothing here has replayed, and is verified as that implication alone: `E-k2m4-evand-bentz4-lean-build` (ValidTilt9).
 - **43** claim to be first established here. **14** make no novelty statement at all - not assessed, which is not the same as not novel.
 
@@ -772,15 +772,24 @@ results, it is a statement about what this repository has itself examined.
 | `E-couzo-763-review-exact-feasibility` | 2 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | full, 2 of 2: the two certificates T-240 cites, at n = 268 and 303, every wall and every pair on route A, and every pair within the discs on route B | `V-couzo-763-review-check` |
 | `E-couzo-763-beyond-horizon-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
 | `E-couzo-964ee2b-beyond-horizon-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-couzo-efef7d1-beyond-horizon-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-couzo-fa6237e-beyond-horizon-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-tymchishin-reclosure-v3-beyond-horizon-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-lavrentev-cuda-v11-beyond-horizon-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-tymchishin-22-3662-beyond-horizon-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-kyleluecke-inos-beyond-horizon-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-alexchilton-fault-line-beyond-horizon-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-aqibrazadev-blending-beyond-horizon-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-lavrentev-cuda-run-361589987-beyond-horizon-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
 | `E-couzo-n304-certificate-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
 | `E-evand-kaggle-descents-certificate-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
 
 ## What the register rests on
 
-- **assurance**: numerically-checked 5, reported 317, verified 429
-- **method**: exact-algebraic 236, interval-certified 175, numerical-multiprecision 5, proof-assistant-checked 6, proof-audited 4, published-proof 8, reported 317
-- **novelty**: apparently-novel 43, common-knowledge 4, not assessed 14, previously-published 690
-- **relationship to the producer's code**: generator 5, independent-implementation 260, not-applicable 34, same-implementation 411, shared-components 35, unknown-historical 6
+- **assurance**: numerically-checked 5, reported 326, verified 429
+- **method**: exact-algebraic 236, interval-certified 175, numerical-multiprecision 5, proof-assistant-checked 6, proof-audited 4, published-proof 8, reported 326
+- **novelty**: apparently-novel 43, common-knowledge 4, not assessed 14, previously-published 699
+- **relationship to the producer's code**: generator 5, independent-implementation 260, not-applicable 34, same-implementation 420, shared-components 35, unknown-historical 6
 
 The `cases` column is how many frontier records cite each piece of evidence, and it is the reason to read this table rather than count records. Ranked below are the *formal* records only: a `reported` record cited across the frontier may be a shared catalogue and is labelled as such, which is the register working rather than risk. The risk is a verified claim resting on an argument nobody has examined.
 
