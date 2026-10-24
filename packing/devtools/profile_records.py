@@ -7,7 +7,9 @@ Bounds need positive case/lane support or a stronger pending claim. Comparable c
 compete on their stated intervals; equal later certificates add no strict numeric record.
 Explicit first_certified_in attribution follows the original certificate. Publication
 priority is used only where its date precision proves an earlier date, never T order,
-registration time or a missing supersession field. Unordered ties remain diagnostic.
+registration time or a missing supersession field. A tie among entries that all carry
+one identical attribution, one report registered more than once, credits every entry,
+since no priority orders a report against itself. Unordered ties remain diagnostic.
 
 Typed record_scope references expose a finite registered projection's additional
 family scope as unassessed currentness, with its review bead, until an assessment says
@@ -186,6 +188,18 @@ def classify_records(
             and len({item.low for item in frontier}) == 1
         ):
             dates = {identifier: _published(records[identifier]) for identifier in by_result}
+            # Entries that register one report, an identical attribution (the same source
+            # keys at the same date), hold its bound together: no priority orders a report
+            # against itself.
+            attributions = {
+                (tuple(attribution["source_keys"]), str(attribution["published"]))
+                for identifier in by_result
+                if (attribution := records[identifier].get("attribution"))
+            }
+            if len(attributions) == 1 and all(
+                records[identifier].get("attribution") for identifier in by_result
+            ):
+                winners.update(by_result)
             for identifier, published in dates.items():
                 if published is not None and all(
                     other is not None and published[1] < other[0]

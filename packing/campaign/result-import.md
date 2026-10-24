@@ -457,6 +457,16 @@ the inputs and the comparison:
   its finder after the finder of the packing it refines, as a regularization
   ([stage 3](#stage-3-record)), unless it restates the report below the print.
 
+**One report registered as two entries is credited in both.** A tie stays with the
+earlier report, but two register entries can carry one report: T-073 and T-080 register
+one certificate of wand125’s 2 October release, and T-083 and T-084 one paper of
+Karakuş’s. When every tied entry carries the identical attribution, the same source keys
+at the same date, each is credited as current: the owner’s answer of 24 October 2026,
+“Credit both (Recommended)” (think-33u4).
+[`devtools.profile_records`](../devtools/profile_records.py) applies it to the profiles’
+Records, and a tie between attributions that differ in any way is still ordered by
+publication date, or left unassessed.
+
 Beyond the corpus the owner’s answers of 23 October 2026 are rules of the walk.
 The ledger’s `rulings` list names each one it applies, and the module docstring of
 `devtools.intake_ledger` owns them.

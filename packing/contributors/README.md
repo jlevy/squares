@@ -87,6 +87,8 @@ fields to person records: these would duplicate data and drift after intake.
 - **Records:** the current subset of primary Results across all result kinds.
   Family-specific currentness and unresolved priority come from the shared record
   classifier, not profile fields or profile-specific supersession rules.
+  Tied entries that carry one identical attribution are each current
+  ([Several Reports at One Count](../campaign/result-import.md#several-reports-at-one-count)).
   Count each result once even when it retains several cases or kinds of contribution.
 - **Credits:** distinct results explicitly crediting the person in a non-primary role.
   Repeated mentions count once; someone primary on a result cannot also receive a

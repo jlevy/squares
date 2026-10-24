@@ -93,6 +93,69 @@ def test_exact_ties_require_proven_original_publication_priority() -> None:
         assert "priority" in uncertain.unresolved["first"][0]
 
 
+def tied(first: dict[str, Any] | None, second: dict[str, Any] | None) -> records.RecordIndex:
+    """Two lower bounds tied at one count, with these attributions; None is no
+    attribution, so that the entry's `established` date stands in."""
+    raw = {
+        name: result(name, "lower-bound", established="2026-10-02")
+        for name in ("first", "second")
+    }
+    for name, attribution in (("first", first), ("second", second)):
+        if attribution is None:
+            del raw[name]["attribution"]
+        else:
+            raw[name]["attribution"] = attribution
+    return records.classify_records(
+        raw, [facet(name, "4", direction="lower") for name in ("first", "second")]
+    )
+
+
+def test_tied_entries_with_different_attributions_stay_unresolved() -> None:
+    # The control for crediting one report's entries together: a tie between
+    # attributions that differ in any way is still left to publication priority.
+    day = "2026-10-02"
+    one = {"source_keys": ["[one]"], "published": day}
+    for first, second in [
+        (one, {"source_keys": ["[other]"], "published": day}),
+        ({"source_keys": ["[one]"], "published": "2026-10"}, one),
+        ({"source_keys": ["[one]", "[other]"], "published": day}, one),
+        (one, None),
+        (None, None),
+    ]:
+        index = tied(first, second)
+        assert index.current_results == ()
+        assert set(index.unresolved) == {"first", "second"}
+        assert index.unresolved["first"] == (
+            "Unordered reported lower bound priority at n=11: first, second",
+        )
+
+
+def test_one_report_registered_as_two_entries_credits_both() -> None:
+    # T-073 and T-080 register one certificate, T-083 and T-084 one paper: one source
+    # key at one date. The owner, 24 October 2026: "Credit both (Recommended)" (think-33u4).
+    one = {"source_keys": ["[one]"], "published": "2026-10-02"}
+    index = tied(dict(one), dict(one))
+    assert index.current_results == ("first", "second")
+    assert index.unresolved == {}
+    assert index.facets["second"] == (
+        records.RecordFacet("lower-bound", 11, "lower", "reported"),
+    )
+    raw = {
+        "first": result("first", "lower-bound", attribution=dict(one)),
+        "second": result("second", "lower-bound", attribution=dict(one)),
+        "earlier": result("earlier", "lower-bound", published="2026-09-01"),
+        "stronger": result("stronger", "lower-bound", published="2026-10-05"),
+    }
+    pair = [facet(name, "4", direction="lower") for name in ("first", "second")]
+    # An earlier report at the same bound still keeps the tie, and a stronger one
+    # supersedes both entries.
+    earlier = records.classify_records(raw, [*pair, facet("earlier", "4", direction="lower")])
+    assert earlier.current_results == ("earlier",)
+    assert earlier.unresolved == {}
+    stronger = records.classify_records(raw, [*pair, facet("stronger", "5", direction="lower")])
+    assert stronger.current_results == ("stronger",)
+
+
 def test_identical_or_overlapping_rounded_intervals_do_not_prove_equal_values() -> None:
     raw = {
         "first": result("first", published="2024"),
@@ -229,6 +292,19 @@ def test_live_current_families_pending_comparison_and_known_scope_gap() -> None:
         (204, "upper", lane) for lane in ("reported", "verified")
     }
     assert not {facet for facet in index.facets["T-174"] if facet.n == 105}
+    # One report registered twice is credited as current in both entries (think-33u4):
+    # T-073 and T-080 hold the verified lower bound at 101 to 105 together, and T-083
+    # and T-084 the verified lower bound at the counts k^2 - 1 from 8 to 323.
+    assert {"T-073", "T-080", "T-083", "T-084"}.isdisjoint(index.unresolved)
+    for identifier in ("T-073", "T-080"):
+        assert {(n, "lower", "verified") for n in range(101, 106)} <= {
+            (facet.n, facet.direction, facet.lane) for facet in index.facets[identifier]
+        }
+    squares = {(k * k - 1, "lower", "verified") for k in range(3, 19)}
+    for identifier in ("T-083", "T-084"):
+        assert squares <= {
+            (facet.n, facet.direction, facet.lane) for facet in index.facets[identifier]
+        }
 
 
 def test_cli_keeps_unassessed_distinct_from_known_current(
