@@ -3,11 +3,11 @@ type: is
 id: is-01m5kjb20ed6wb6c1zbp2my2xc
 title: "Apply the owner's D1 answer: track beyond-horizon rows above 1024 (#666, #715, #719, #732), with a hosted-data manifest for the bulk certificates (think-f2io, 2026-10-23)"
 kind: task
-status: in_progress
+status: open
 priority: 1
-version: 20
+version: 22
 spec_path: docs/project/specs/active/plan-2026-10-24-rows-above-1024.md
-delegate: c-w7-1024
+delegate: null
 labels:
   - result-import
 dependencies: []
@@ -18,7 +18,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-23T05:04:35.342Z
-updated_at: 2026-10-24T18:32:27.634Z
+updated_at: 2026-10-24T18:33:16.285Z
 started_at: 2026-10-23T05:05:14.273Z
 ---
 Owner decision of 23 October (think-f2io note): yes, no ceiling. Needs a plan: the rows' walks above 1024 (report order), custody without Git blobs (D4 hosted-data manifest; OR-18), the replay price at thousands of certificates (compute cap), and the frontier README rule. Stage 1 triage and pricing first, read-only.
@@ -65,3 +65,5 @@ Two more obligations from review B1 (`intake_ledger.answer_problems`, #754): a l
 2026-10-24 c-w7-1024: #793 round 1 pushed as acb59dba11f98bf2b8331f00e6a7e32a9e8b7b1d (fixes c3bb93b47, 72e2eba50, ae6c93fe0, acb59dba1); main had not moved, no merge. CI green: Packing validation 40113441342 (attempt 1), Certificate page 40113441337 (attempt 5; earlier attempts failed on HTTP 502 from the jobs API in wait_for_run_artifact, think-nnk7). Dispositions replies: A issuecomment-6387505266, B -6387505446, C -6387505611. Open from this round: think-z236 (A11, R1), think-j83l (A13), think-eyrn (C, outside the diff), think-nnk7 (CI waiter).
 
 2026-10-24 c-w7-1024, PR #793 round 2 (review D, follow-up; one push): head b28584668e4a55df4e6202694c959ae8be39c15c. Fixed in 4e7a218b3: D1 (stream allowance starts at MAX_HEADERS and grows per admitted member; C1 test at the shipped bounds; review C 512 MiB records refused at the defaults, peak RSS 55 MiB), D2 (member-read errors are ShardError), D3 (a link anywhere below the members directory refused), D4 (release_sides clone branch tested), D5 (receipt without limit refused), D6 (header_side in both branches). 5 of 5 mutations detected. Merged main 3480b5fd3 (#792) as 96bbef3b5: one conflict, two no-change records in release.py, both kept; W7 record re-measured in b28584668 (51/51 identical); release_pin current (3a9c5b60); site_urls --history-ref origin/main passes. Validation: 1,059 tests passed, rebuild driver clean, --records 53/53 (148 s). CI green first attempt: Packing validation 40120155316, Certificate page 40120155325, mergeability 40120151956; PR MERGEABLE. Reply D: issuecomment-6387969029.
+
+2026-10-24 coord-intake-1024: W7 landed as PR #793 (dd0061553, merged 2026-10-24T18:32:59Z) after review A (senior), B (correctness), C (security) and follow-up D, all dispositioned; hosted CI green first attempt at b28584668. Phase 1 done. Next: R1 (records: #666, #719, #715, Couzo 5a299b4, Fang, Barnett; owner to publish data/couzo-715-certificates-v1 first, D4), then R2 (#732 under N2, owner publishes the #732 shards), R3 (#763's 233 rows, 964ee2b's 6, 43f666c's 831 recipes after think-gn29), R4 (held rows after D5/kzme/N1/N5). Open: think-z236, think-j83l, think-eyrn, think-nnk7, think-tj3x.
