@@ -1,0 +1,10 @@
+{
+  "environment": {"implementation":"CPython","machine":"x86_64","python":"3.14.7"},
+  "format": "beyond-horizon-exhaustive-sample-v1",
+  "kernel": "devtools.evand_arrangement_reports.run_case, positive job, every pair",
+  "rows": [{"cpu_seconds":{"exact_verify":90.502741904,"independent":64.263588139},"equals_filtered_least_gap":true,"equals_filtered_least_wall":true,"exact_verify_passed":true,"independent_passed":true,"least_pair_gap":"6715938171298976072058709321023242899995784999947142908194314983618255118646147856375408188436992057/31852660121404064121426015601085255565956314826710945287594835434210736367714832634029497046308695750000000000000","least_wall_clearance":"1/1000000000000000","n":998,"pairs_tested":497503,"routes_agree_on_least_gap":true,"wall_seconds":157.0}],
+  "sample_cpu_seconds": 154.8,
+  "sample_pairs": 497503,
+  "started_utc": "2026-10-24T09:38:59Z",
+  "workers": 1
+}

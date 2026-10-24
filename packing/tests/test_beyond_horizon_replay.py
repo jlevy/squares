@@ -12,7 +12,9 @@ report order and the coverage register's rows that follow from it, each walked c
 one chain in report order, and the forged receipts a check must refuse. Mykhailo
 Polkovskyi's #732 has no table of rows: its packet declares the 77 its walk records, from
 the history of his own repository, which the walk reads beside every watched publication.
-Every test reads
+Francisco Couzo's #763 has no table either: its claims are re-derived from his indexes
+(`devtools.couzo_763_claims`), its packet declares the 184 rows its walk records, and the
+index's unrequested rows are a publication of their own. Every test reads
 the retained packets, the ledger and the source register only; none needs the network.
 """
 
@@ -1986,3 +1988,172 @@ def test_a_claim_record_read_from_23_october_stands_on_goebel_s_construction() -
     assert not earlier[369].covers(above)
     with pytest.raises(replay.ReplayError, match="no side above 1073"):
         replay.standing_sides({"read_on": "2026-10-23", "results": []}, [1074], {})
+
+
+# --------------------------------------------------------------------------- issue #763
+
+
+I763 = replay.ROOT / "campaign/issue-intake/upper-bounds-issue763-20261024"
+SOURCE_763 = "couzo-issue763-2026-10-23"
+SOURCE_964 = "couzo-964ee2b-2026-10-23"
+PUBLICATION_964 = "franciscouzo/square-packing@964ee2b"
+#: #763's 13 recipes the walk records, held for a construction checker (think-g2qy).
+RECIPES_763 = [365, 444, 487, 632, 733, 734, 737, 788, 789, 845, 910, 966, 970]
+#: The rows #763's 184 supersede, by the source that held each count; at 8 counts no row
+#: stood before them (Göbel's construction or the grid).
+SUPERSEDED_BY_763 = {
+    "mishapolk-issue732-f1ceee4-2026-10-23": 92,
+    "mishapolk-issue719-2026-10-22": 40,
+    "mishapolk-issue732-2026-10-22": 20,
+    "couzo-index-2026-10-15": 13,
+    "couzo-verified-bounds-2026-10-14": 4,
+    "couzo-issue715-2026-10-21": 3,
+    "couzo-issue670-2026-10-17": 2,
+    "evand-compositions-2026-10-13": 1,
+    "couzo-certificates-2026-10-14": 1,
+}
+
+
+def _steps_763() -> dict[str, dict[int, dict[str, Any]]]:
+    steps: dict[str, dict[int, dict[str, Any]]] = {}
+    for count in _read(I763 / "ledger.json")["counts"]:
+        for step in count["steps"]:
+            steps.setdefault(step["report"], {})[count["n"]] = step
+    return steps
+
+
+def test_763_s_claims_are_the_claim_map_s_and_its_rows_what_its_walk_records() -> None:
+    """Issue #763 has no table: its claims to 1024 are the claim map's (`CLAIM_MAP`), and
+    the walk records 200 of its 203. 268 and 303 are in the corpus and are the register's,
+    the 13 recipes and 683 are held, and the other 184 are declared rows at their exact
+    sides rounded up; 328, 850 and 909 restate f1ceee4's rows below the print."""
+    chosen = replay.release(763)
+    mapped = [item for item in replay.mapped_claims(chosen) if item["n"] <= replay.LIMIT]
+    assert len(mapped) == 203
+    steps = _steps_763()["#763"]
+    assert set(steps) == {item["n"] for item in mapped}
+    unrecorded = {
+        n: step["reason"] for n, step in steps.items() if step["verdict"] != "recorded"
+    }
+    assert unrecorded == {328: "restates", 850: "restates", 909: "restates"}
+    rows = replay.decided_claims(chosen)
+    assert len(rows) == chosen.decided == 184
+    held = {n for item in replay.WALKS[replay.ISSUE_763].held["#763"] for n in item.counts}
+    assert held == {*RECIPES_763, 683}
+    assert {row.n for row in rows} == set(steps) - set(unrecorded) - held - {268, 303}
+    sides = replay.decided_sides(chosen)
+    assert all(row.printed == replay.ceiling(sides[row.n]) for row in rows)
+    by_n = {item["n"]: item for item in mapped}
+    assert all(sides[row.n] == Fraction(by_n[row.n]["exact"]) for row in rows)
+
+
+def test_a_declared_release_declares_no_row_in_the_corpus() -> None:
+    """A count in the corpus the walk records is the register's: #763's 268 and 303 are
+    recorded and are no declared row, and the declaration check does not ask for one."""
+    chosen = replay.release(763)
+    steps = _steps_763()["#763"]
+    assert steps[268]["verdict"] == steps[303]["verdict"] == "recorded"
+    declared = replay.declared_rows(chosen)["rows"]
+    assert min(row["n"] for row in declared) > replay.reports.HORIZON
+    assert not [problem for problem in replay.declaration_problems() if "#763" in problem]
+
+
+def test_the_index_s_unrequested_rows_are_a_publication_of_their_own() -> None:
+    """The 15 rows the selection rule leaves out are the watched repository's publication,
+    dated by the push that made 964ee2b public; 10 are recorded, 490, 535, 792 and 800
+    restate f1ceee4's rows and 204 is above T-231."""
+    chosen = replay.release(PUBLICATION_964)
+    assert (chosen.issue, chosen.reported, chosen.source) == (
+        None,
+        "2026-10-23T23:38:42Z",
+        SOURCE_964,
+    )
+    pushes = replay.PUSHED_LATER["franciscouzo/square-packing"]
+    assert chosen.reported == pushes[-1].pushed
+    assert pushes[-1].head == chosen.pin
+    steps = _steps_763()[PUBLICATION_964]
+    assert sorted(steps) == [
+        204,
+        335,
+        339,
+        344,
+        379,
+        380,
+        421,
+        452,
+        490,
+        507,
+        535,
+        792,
+        800,
+        935,
+        998,
+    ]
+    assert {
+        n: step["reason"] for n, step in steps.items() if step["verdict"] != "recorded"
+    } == {
+        204: "above",
+        490: "restates",
+        535: "restates",
+        792: "restates",
+        800: "restates",
+    }
+    assert [row.n for row in replay.decided_claims(chosen)] == [
+        335,
+        339,
+        344,
+        379,
+        380,
+        421,
+        452,
+        507,
+        935,
+        998,
+    ]
+
+
+def test_the_763_walk_holds_its_recipes_and_683_and_names_what_rests_on_holds() -> None:
+    walk = replay.WALKS[replay.ISSUE_763]
+    recipes, deletion = walk.held["#763"]
+    assert (recipes.kind, recipes.bead, recipes.also) == (
+        replay.RECIPE,
+        "think-g2qy",
+        ("think-f2io",),
+    )
+    assert sorted(recipes.counts) == RECIPES_763
+    assert (deletion.kind, deletion.bead, deletion.also) == (
+        replay.CONSEQUENCE,
+        "think-2z2n",
+        ("think-kzme",),
+    )
+    assert sorted(deletion.counts) == [683]
+    assert not deletion.answer
+    assert set(replay.resting_on_holds(walk)) == set(walk.resting)
+    assert not [problem for problem in replay.resting_problems() if replay.ISSUE_763 in problem]
+
+
+def test_the_763_ledger_transcribes_its_sources_from_the_claim_map_and_the_scan() -> None:
+    """sources.yaml is what `claim_map_walk_sources` writes, from starts frozen at main
+    e5c1c64e3 on 24 October holding Göbel's construction beside each row."""
+    from devtools import intake_ledger  # noqa: PLC0415
+
+    sources = safe_load((I763 / "sources.yaml").read_text(encoding="utf-8"))
+    assert sources == replay.claim_map_walk_sources(763, str(sources["read_on"]))
+    data, starts = intake_ledger.load_walk(I763)
+    assert data["read_at_main"] == replay.ISSUE_763_READ_AT_MAIN
+    assert {report["report"] for report in sources["reports"]} >= {"#763", PUBLICATION_964}
+    beyond = {n for n in intake_ledger.counts_of(data) if n > replay.reports.HORIZON}
+    assert len(beyond) == 215
+    assert beyond & intake_ledger.construction_counts(starts)
+
+
+def test_763_s_rows_are_current_and_supersede_the_rows_they_beat() -> None:
+    rows = [
+        row for row in replay.planned_rows() if row["source_id"] in (SOURCE_763, SOURCE_964)
+    ]
+    assert Counter(row["source_id"] for row in rows) == {SOURCE_763: 184, SOURCE_964: 10}
+    assert all("superseded_by" not in row for row in rows)
+    beaten = Counter(
+        start for _, start, source in replay.planned_supersessions() if source == SOURCE_763
+    )
+    assert beaten == SUPERSEDED_BY_763

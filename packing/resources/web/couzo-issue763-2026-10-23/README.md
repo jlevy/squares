@@ -149,7 +149,12 @@ rows, about 43 CPU-minutes, at `nice` on a four-core machine shared with other l
 keep every row’s side, both routes’ counts, least clearance, least gap and failures, and
 the controls.
 
-SAMPLE-RESULTS
+**The all-pairs kernel**, `devtools.evand_arrangement_reports`’s two routes with no
+filter, decided every pair at 333, 684 and 997 (785,370 pairs, 328.5 CPU seconds) and at
+998 among the unrequested rows (497,503 pairs, 154.8 CPU seconds). Both routes accept all
+four, and their least pair gaps and wall clearances equal the filtered decision’s exactly
+([receipts/exhaustive-sample.json](receipts/exhaustive-sample.json),
+[receipts/964ee2b/exhaustive-sample.json](receipts/964ee2b/exhaustive-sample.json)).
 
 The two certificates in the corpus have
 [`devtools.upper_bound_reports`](../../../devtools/upper_bound_reports.py)’s complete

@@ -27479,6 +27479,192 @@ occurrences:
     this project's sqpack.verify in his testbench. The first-party jlevy/squares record is the
     Joshua Levy identity established by LICENSE and the retained ojoshe receipt; project
     credit does not imply sole personal authorship.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo issue 763 2026-10-23]'
+    field: /authors/0
+  expected_text: Couzo
+  start: 0
+  end: 5
+  label: Couzo
+  role: source-author
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - bibliography
+  contributor_id: francisco-couzo
+  note: >-
+    Reviewed author byline: issue 763 is filed by franciscouzo and names Francisco Couzo as
+    its credit name, and the couzo-issue763-2026-10-23 packet retains his repository at
+    964ee2bd, the source of every earlier Couzo key.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo issue 763 2026-10-23]'
+    field: /credit
+  expected_text: Couzo after Lavrentev, Tymchishin, Muglich, Polkovskyi, Daniel, Fang, de Winter, Levy
+  start: 0
+  end: 5
+  label: Couzo
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - bibliography
+  contributor_id: francisco-couzo
+  note: >-
+    Reviewed source credit matches the evidenced person and printed name; the issue's credit
+    name and the manifest credit Francisco Couzo at every row, and the original credit role
+    is retained.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo issue 763 2026-10-23]'
+    field: /credit
+  expected_text: Couzo after Lavrentev, Tymchishin, Muglich, Polkovskyi, Daniel, Fang, de Winter, Levy
+  start: 12
+  end: 21
+  label: Lavrentev
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: >-
+    Reviewed packing/resources/bibliography.yaml [[Couzo issue 763 2026-10-23]] /credit span
+    12:21: the source's certified_bounds.json and manifest credit 253 of the 436 rows as
+    refinements of the packing of Vladislav Lavrentev (lightningv08), Kaggle notebook "CUDA
+    Packing Search" v11, and the issue's legend names him. No person record exists yet;
+    identity review pending (a profile by name, think-ptkk).
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo issue 763 2026-10-23]'
+    field: /credit
+  expected_text: Couzo after Lavrentev, Tymchishin, Muglich, Polkovskyi, Daniel, Fang, de Winter, Levy
+  start: 23
+  end: 33
+  label: Tymchishin
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: >-
+    Reviewed packing/resources/bibliography.yaml [[Couzo issue 763 2026-10-23]] /credit span
+    23:33: the source credits 97 rows as refinements of packings of Kirill Tymchishin
+    (kirilltym), from his Kaggle notebooks "CPU Alternating Reclosure" v3, "CPU/GPU/MPS
+    EDA+Seam LP" v4 (at 268, whose parent the packet retains) and "22-3662-cpu-cuda-mps-eda-
+    union", and the issue's legend names him. No person record exists yet; identity review
+    pending (a profile by name, think-ptkk).
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo issue 763 2026-10-23]'
+    field: /credit
+  expected_text: Couzo after Lavrentev, Tymchishin, Muglich, Polkovskyi, Daniel, Fang, de Winter, Levy
+  start: 35
+  end: 42
+  label: Muglich
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - issue-byline
+  - source-intake
+  - bibliography
+  contributor_id: darius-muglich
+  note: >-
+    Reviewed packing/resources/bibliography.yaml [[Couzo issue 763 2026-10-23]] /credit span
+    35:42: the source credits 422 as a refinement of the packing of Darius Muglich (#686),
+    and the triage of 24 October (think-cnn7) reads Muglich's seeds in the chains of two of
+    Couzo's own rows. A chain through an intermediate author retains the link.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo issue 763 2026-10-23]'
+    field: /credit
+  expected_text: Couzo after Lavrentev, Tymchishin, Muglich, Polkovskyi, Daniel, Fang, de Winter, Levy
+  start: 44
+  end: 54
+  label: Polkovskyi
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: mykhailo-polkovskyi
+  note: >-
+    Reviewed packing/resources/bibliography.yaml [[Couzo issue 763 2026-10-23]] /credit span
+    44:54: the issue's legend names Mykhailo Polkovskyi (Mishapolk) as a packing refined,
+    and the triage of 24 October (think-cnn7) reads 970 and the rows built on 850 as
+    refinements of packings his f1ceee4 release refined first. A chain through an
+    intermediate author retains the link.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo issue 763 2026-10-23]'
+    field: /credit
+  expected_text: Couzo after Lavrentev, Tymchishin, Muglich, Polkovskyi, Daniel, Fang, de Winter, Levy
+  start: 56
+  end: 62
+  label: Daniel
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - intake-credit
+  - bibliography
+  contributor_id: evan-daniel
+  note: >-
+    Reviewed packing/resources/bibliography.yaml [[Couzo issue 763 2026-10-23]] /credit span
+    56:62: the claims include 343, whose packing Couzo's manifests credit to Evan Daniel
+    with Kevin Fang's two-wedge construction; the chain keeps the link (triage of 24
+    October, think-cnn7).
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo issue 763 2026-10-23]'
+    field: /credit
+  expected_text: Couzo after Lavrentev, Tymchishin, Muglich, Polkovskyi, Daniel, Fang, de Winter, Levy
+  start: 64
+  end: 68
+  label: Fang
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: kevin-fang
+  note: >-
+    Reviewed packing/resources/bibliography.yaml [[Couzo issue 763 2026-10-23]] /credit span
+    64:68: Couzo's manifests credit the packing at 343 to Evan Daniel with Kevin Fang's two-
+    wedge construction; the chain keeps the link (triage of 24 October, think-cnn7).
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo issue 763 2026-10-23]'
+    field: /credit
+  expected_text: Couzo after Lavrentev, Tymchishin, Muglich, Polkovskyi, Daniel, Fang, de Winter, Levy
+  start: 70
+  end: 79
+  label: de Winter
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: joost-de-winter
+  note: >-
+    Reviewed packing/resources/bibliography.yaml [[Couzo issue 763 2026-10-23]] /credit span
+    70:79: the triage of 24 October (think-cnn7) reads Joost de Winter's packing in the
+    chain of one of Couzo's own rows, which keeps the chain of the row it builds on. A chain
+    through an intermediate author retains the link.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo issue 763 2026-10-23]'
+    field: /credit
+  expected_text: Couzo after Lavrentev, Tymchishin, Muglich, Polkovskyi, Daniel, Fang, de Winter, Levy
+  start: 81
+  end: 85
+  label: Levy
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - announcement-account
+  contributor_id: joshua-levy
+  note: >-
+    Reviewed /credit span 81:85: the source's manifest names this project's sqpack/verify.py
+    as its first checker and compares with this project's register. The first-party
+    jlevy/squares record is the Joshua Levy identity established by LICENSE and the retained
+    ojoshe receipt; project credit does not imply sole personal authorship.
 inspections:
 - path: packing/resources/papers/addis-locatelli-schoen-2008-disk-packing-square.pdf
   status: pending

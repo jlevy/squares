@@ -1,0 +1,14 @@
+{
+  "environment": {"implementation":"CPython","machine":"x86_64","python":"3.14.7"},
+  "format": "beyond-horizon-exhaustive-sample-v1",
+  "kernel": "devtools.evand_arrangement_reports.run_case, positive job, every pair",
+  "rows": [
+    {"cpu_seconds":{"exact_verify":8.323591796,"independent":5.749904822000001},"equals_filtered_least_gap":true,"equals_filtered_least_wall":true,"exact_verify_passed":true,"independent_passed":true,"least_pair_gap":"2150030452099478964365666509/3627855284240782684667393850000000000000","least_wall_clearance":"1/1000000000000000","n":333,"pairs_tested":55278,"routes_agree_on_least_gap":true,"wall_seconds":14.3},
+    {"cpu_seconds":{"exact_verify":28.4109678,"independent":19.169986369999997},"equals_filtered_least_gap":true,"equals_filtered_least_wall":true,"exact_verify_passed":true,"independent_passed":true,"least_pair_gap":"3974490000662599189865058776794424037524743175864429/24768375946241228114808466247683759462412281148084660000000000000","least_wall_clearance":"1/1000000000000000","n":684,"pairs_tested":233586,"routes_agree_on_least_gap":true,"wall_seconds":48.5},
+    {"cpu_seconds":{"exact_verify":127.63335625600001,"independent":139.237761062},"equals_filtered_least_gap":true,"equals_filtered_least_wall":true,"exact_verify_passed":true,"independent_passed":true,"least_pair_gap":"27159825196863586109097253123275757913026909220633727845016853071513662211200157704782899200165258681137/135794121214322697220622358008756549166712399988141615504994240087876134234410937536945411439040502169600000000000","least_wall_clearance":"1/1000000000000000","n":997,"pairs_tested":496506,"routes_agree_on_least_gap":true,"wall_seconds":269.9}
+  ],
+  "sample_cpu_seconds": 328.5,
+  "sample_pairs": 785370,
+  "started_utc": "2026-10-24T09:33:18Z",
+  "workers": 1
+}
