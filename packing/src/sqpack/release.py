@@ -8633,6 +8633,53 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "three; each prints from that HTML. Retain v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/atlas/known-best/bound-citations.json",
+            "packing/atlas/known-best/composite-figure.json",
+            "packing/campaign/result-requests.yaml",
+            "packing/devtools/adopt_houses.py",
+            "packing/devtools/default_drawings.py",
+            "packing/devtools/upper_bound_houses.py",
+            "packing/devtools/upper_bound_reports.py",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+            "packing/src/sqpack/cli/validate.py",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "PR B of the #763 import (think-bk9r): T-240 from V0/C0 to V3/C3 after the 24 "
+            "October review, with three evidence entries, its claim, notes and next steps "
+            "rewritten, #763's requests entry, the adoption at 268 and 303 in the pass of 25 "
+            "October with the in-corpus coverage source, the house writer's prose and "
+            "credits, the reader, SETTLED[268] removed, the bound citations, the composite "
+            "records and the screen's findings, against main 2ec489d1e (#789): rendered at "
+            "link revision 8977b819 into empty site directories, twice from this tree and once "
+            "from it with main's ten candidate inputs swapped in (69 files each), "
+            "render_n11_lower_bounds_explainer with its math prepared by the host's Chrome "
+            "for Testing headless shell through SQPACK_CHROMIUM, the same browser for every "
+            "render, render_n11_optimality_review, render_n11_threshold_bound_review and "
+            "render_packing_methods write every file byte-identical across all three. No "
+            "result is registered, so the explainer's count is unchanged. No PDF was "
+            "printed; each prints from that HTML. Retain v0.4.26, v0.1.11, v0.1.4 and "
+            "v0.2.7."
+        ),
+    ),
 )
 
 
