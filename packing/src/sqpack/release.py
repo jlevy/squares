@@ -2956,11 +2956,12 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "explainer's one span aside. Re-measured after review A's second round and "
             "main 6c70d843f (#731), both trees at link revision 01e2ca3e: all 68 files "
             "byte-identical. After main 31584003e (#737) at link revision 947d2863, "
-            "after main 44df28b07 (#743) at d449eacc, and last after main da117ad0b (#742 "
-            "to #764), when the branch was taken over (think-xae5), at e1f1adc4: rendered "
-            "from the merge and from the merge with these five paths at main's, all 69 "
-            "files byte-identical each time. No PDF was printed; each prints from that "
-            "HTML. Retain main's v0.4.22, v0.1.11, v0.1.4 and v0.2.7."
+            "after main 44df28b07 (#743) at d449eacc, after main da117ad0b (#742 to #764), "
+            "when the branch was taken over (think-xae5), at e1f1adc4, and last after main "
+            "14b14f2d1 (#765, #767, #768) at 95ac0de5: rendered from the merge and from the "
+            "merge with these five paths at main's, all 69 files byte-identical each time. "
+            "No PDF was printed; each prints from that HTML. Retain main's v0.4.22, "
+            "v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
     ReleaseNoPublicChange(
