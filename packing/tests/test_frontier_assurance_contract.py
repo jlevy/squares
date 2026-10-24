@@ -550,9 +550,11 @@ def test_a_conditional_theorem_cites_what_discharges_its_hypothesis() -> None:
 
 
 def test_the_inventory_says_which_theorems_are_conditional() -> None:
-    """The register's two conditional Lean builds: s(k^2 - 3) = k under Valid7, which
-    the qx2 and wand125 replays discharge here, and s(k^2 - 4) = k under ValidTilt9,
-    which nothing here has replayed."""
+    """The register's conditional theorems: two Lean builds, s(k^2 - 3) = k under Valid7,
+    which the qx2 and wand125 replays discharge here, and s(k^2 - 4) = k under ValidTilt9,
+    which nothing here has replayed; and since 24 October 2026 Kevin Fang's published note
+    (T-163), whose finite premise, the 18 pieces of Propositions 4 and 5, the replay of the
+    14 October review's exact checker discharges here (review A of pull request 781)."""
     from devtools import render_evidence_inventory  # noqa: PLC0415
 
     path = Path(__file__).resolve().parent.parent / "frontier" / "evidence.yaml"
@@ -566,7 +568,11 @@ def test_the_inventory_says_which_theorems_are_conditional() -> None:
     assert conditional == {
         "E-k2m3-evand-bentz-lean-build": [],
         "E-k2m4-evand-bentz4-lean-build": ["ValidTilt9"],
+        "E-fang-excess-note-proof": [],
     }
+    assert render_evidence_inventory.claim_text(
+        by_id["E-fang-excess-note-proof"], by_id
+    ).endswith("discharged by `E-fang-excess-pieces-exact-replay`")
     assert render_evidence_inventory.claim_text(
         by_id["E-k2m4-evand-bentz4-lean-build"], by_id
     ) == ("exact-value, conditional on ValidTilt9, not replayed here")
