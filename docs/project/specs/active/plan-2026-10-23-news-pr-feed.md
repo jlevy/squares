@@ -1319,10 +1319,25 @@ One pull request, the next News work after this plan merges, and merged before `
 
 **24 October 2026:** the tool and its report landed on their own, with the budget
 unchanged. The measurement failed `check_site_rendering`’s load limits at all three
-sizes, today’s 318,950 bytes, 1,005,302 and 1,304,794: a layout shift above 0.1, present
-at today’s size, when `news-cards.js` collapses the first visible card after the first
-paint, and a longest task that grows with the page, past 300 ms at 1,304,794 bytes.
-The raise waits on the owner’s decision `think-lsam`.
+sizes, today’s 318,950 bytes, about 1,000,000 and about 1,300,000. Both failures come
+from the News scripts’ work at load, not from the page’s bytes alone:
+
+- **A layout shift above 0.1, present at today’s size.** `news-cards.js` folds the first
+  visible card after the first paint, a shift of about 0.09 at 1280 px and 0.34 to 0.35
+  at 390 px. When `news-filters.js` then reveals the filter bar (`news-filters.js:160`),
+  the stories move again, by 0.02 at 1280 px and 0.06 at 390 px.
+  At 1280 px each shift alone stays under 0.1, and together they pass it.
+- **A longest task past 300 ms at about 1,300,000 bytes.** `news-cards.js`’s `refresh`
+  forces two layouts for each visible card, one card after another: 31 layouts at load
+  today, 81 at about 1,000,000 bytes and 106 at about 1,300,000. This is the One cost to
+  watch above, and it grows with the story count.
+  The 1,305,949-byte page without `news-cards.js` passed every limit, its longest task
+  at most 144 ms, and without `news-filters.js` it still failed the longest task
+  (`measure_news_page project --without`, #788).
+
+The raise waits on the owner’s decision `think-lsam`. Its first option is to fold the
+cards before the first paint and read every card’s height before writing any, then
+measure again.
 
 ### Phase 1: The Record, Its Tool, the Backfill and the Gate
 
