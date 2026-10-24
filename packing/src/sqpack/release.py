@@ -8680,7 +8680,10 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "fixes (T-240's claim and notes, adopt_houses' prose rewrapped), at link revision "
             "dce05249 with the same ten files swapped in: twice from this tree and once "
             "swapped, 69 files each, all byte-identical across the three, by the same "
-            "browser. Retain v0.4.26, v0.1.11, v0.1.4 and v0.2.7."
+            "browser. Measured once more after the rigidity blocks and the composite "
+            "figure's record at 268 and 303, at link revision ff9e896e with the same ten "
+            "files swapped in: the same outcome. Retain v0.4.26, v0.1.11, v0.1.4 and "
+            "v0.2.7."
         ),
     ),
 )
