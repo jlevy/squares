@@ -3,9 +3,9 @@ type: is
 id: is-01m5prf1nx2jxx04pk04ghajkd
 title: "PR #790 (merge): senior review"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 3
+version: 4
 delegate: c-rev-790-1024
 labels: []
 dependencies: []
@@ -13,8 +13,12 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-24T10:49:20.829Z
-updated_at: 2026-10-24T11:13:22.590Z
+updated_at: 2026-10-24T11:14:19.535Z
 started_at: 2026-10-24T10:49:28.083Z
+closed_at: 2026-10-24T11:14:19.535Z
+close_reason: "Review A posted https://github.com/jlevy/squares/pull/790#issuecomment-6383513133 at b4fe44df2: approve after A1 (Medium, TAB in two math spans); A2-A4 Low; A5-A7 suggestions; addressed by c-couzo-answers-1024b with the main merge; A6 deferred to think-btyc."
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes
