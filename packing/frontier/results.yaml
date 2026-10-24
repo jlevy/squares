@@ -20666,8 +20666,9 @@ results:
       rationale: >-
         A bound family for every n >= 15 with an explicit construction: the deficiency bound
         c*(k) <= k - 1 - F(k) improves Arslanov, Mustafin and Shangitbayev's k - 1 at every
-        k >= 15 and Ryu's at 15 <= k <= 78 and at k = 86; it settles no case n <= 324, and
-        its four in-corpus finite bounds trail the cases.
+        k >= 15 and Ryu's Theorem 1.4 at 15 <= k <= 78 and at k = 86, his Theorem 1.3 at its
+        best b at 15 <= k <= 68 and 70 <= k <= 75; it settles no case n <= 324, and its four
+        in-corpus finite bounds trail the cases.
       scored: '2026-10-14'
       by: >-
         the 14 October review
@@ -20700,9 +20701,11 @@ results:
     notes: >-
       V2 because the theorem rests on the 14 October review's reading of its proof, which no
       evidence entry records as a proof audit; the four finite bounds have the two-route
-      replay. The report is dated by the first commit of the theorem it states, Theorem 1's,
-      on 12 October 2026 (19:16Z), between issues 562 and 564; Theorem 2 took its present
-      form on 13 October. Issue 603, which the project opened on 14 October to track this
+      replay. The note that holds the author's proof has been public since 18 October 2026
+      (v0.9, DOI 10.5281/zenodo.23463481, issue 603) and is not yet retained here. The
+      report is dated by the first commit of the theorem it states, Theorem 1's, on 12
+      October 2026 (19:16Z), between issues 562 and 564; Theorem 2 took its present form on
+      13 October. Issue 603, which the project opened on 14 October to track this
       result, as the owner asks for results at S4 and above, holds its intake, review and
       validation.
 
@@ -20728,19 +20731,25 @@ results:
       The deficiency bound c*(k) <= k - 1 - F(k) is listed in asymptotic-waste-bounds.yaml's
       deficiency_upper_bounds.
     next_rung: >-
-      C4 needs a second accepted adversarial review by a distinct reviewer and a retained
-      human oversight record; the note, draft v0.6, is asked of the author, and its own text
-      has not been read. The 70 inventory certificates pinned by digest wait for a
-      hosted-data release or a W7 route; they move no rung of this entry.
+      V3 needs an evidence entry the V3 predicate reads for the theorem: the published note
+      retained, bound to this claim and recorded as a published proof (think-494l), or a
+      build here of Evan Daniel's Lean proof of both theorems with its axiom receipt
+      (think-dgrc: about 2 to 3 CPU-hours, 8 GB of memory and 10 GB of disk), which would
+      also replay the theorem here for C3. C4 needs a second accepted adversarial review by
+      a distinct reviewer and a retained human oversight record. The 70 inventory
+      certificates pinned by digest wait for a hosted-data release or a W7 route; they move
+      no rung of this entry.
     composition: >-
       Compound. The finite bounds at 211, 241, 273 and 307 rest on the two-route replay of
       the retained certificates (E-fang-excess-theorem-exact-feasibility). The theorem for
       every n >= 15 rests on Lemma 3, the scaling lemma and the induction, which no machine
       replays, and on the 14 October review's reading of them, which sets the minimum: C1.
       The entry declares V2, the minimum over its parts: no evidence entry records that
-      reading as a proof audit. The review reads the proof as recoverable from the public
+      reading as a proof audit. The review read the proof as recoverable from the public
       repository, which would support V3, and the import plan read it as not publicly
-      recoverable; the owner decides between the two readings.
+      recoverable. The author has since published the note itself (v0.9, 18 October
+      2026), so V2's premise, a proof not publicly recoverable, no longer holds; the rung
+      moves when an entry for the theorem that the V3 predicate reads is cited (next_rung).
     reviews:
       - path: >-
           docs/project/reviews/review-2026-10-14-fang-excess-theorem-and-direct-certificates.md

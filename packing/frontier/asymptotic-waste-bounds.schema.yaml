@@ -123,12 +123,48 @@ properties:
           required: [result, review_bead]
           description: >-
             An explicit link from this theorem-family scope to its registered finite
-            case projection. It exposes unassessed family currentness under an open
-            review bead; it never asserts a current best window from a frozen comparison.
-            The linked result must attribute this row's source_key.
+            case projection. Without an assessment it exposes unassessed family
+            currentness under its review bead. An assessment records whether the scope
+            is current, and cases/asymptotic/deficiency_family.py recomputes it from
+            every statement of the family on each read (devtools.profile_records): an
+            assessment the recomputation does not reproduce is refused, so no current
+            window rests on a frozen comparison. The linked result must attribute this
+            row's source_key.
           properties:
             result: {type: string, pattern: '^T-[0-9]{3}$'}
             review_bead: {type: string, pattern: '^think-[a-z0-9]{4}$'}
+            assessment:
+              type: object
+              additionalProperties: false
+              required: [current, smallest, tied, compared, recomputed_by, assessed, note]
+              properties:
+                current:
+                  type: boolean
+                  description: >-
+                    Whether the row's bound is strictly the smallest statement of the
+                    family at some k; a tie counts only where every statement it ties
+                    was reported later.
+                smallest:
+                  type: array
+                  description: The [first, last] runs of k where it is strictly smallest.
+                  items: {type: array, minItems: 2, maxItems: 2, items: {type: integer, minimum: 1}}
+                tied:
+                  type: array
+                  description: The [first, last] runs of k where it ties the smallest other.
+                  items: {type: array, minItems: 2, maxItems: 2, items: {type: integer, minimum: 1}}
+                compared:
+                  type: array
+                  minItems: 1
+                  items:
+                    type: object
+                    additionalProperties: false
+                    required: [source_key, statement]
+                    properties:
+                      source_key: {type: string, pattern: '^\[.+\]$'}
+                      statement: {type: string, minLength: 1}
+                recomputed_by: {const: packing/cases/asymptotic/deficiency_family.py}
+                assessed: {type: string, pattern: '^\d{4}-\d{2}-\d{2}$'}
+                note: {type: string, minLength: 1}
   related_results:
     type: array
     items:

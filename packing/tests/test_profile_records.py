@@ -8,6 +8,7 @@ from typing import Any
 
 import pytest
 
+from cases.asymptotic import deficiency_family as family
 from devtools import profile_records as records
 from devtools import render_recent_results as standing
 from devtools.build_bound_citations import Register
@@ -157,9 +158,14 @@ def test_partial_currentness_and_independent_exact_value_proof_family() -> None:
     assert index.facets["proof"][0].family == "optimality"
 
 
-def context(raw: dict[str, dict[str, Any]]) -> standing.Records:
+def context(
+    raw: dict[str, dict[str, Any]], sources: dict[str, dict[str, Any]] | None = None
+) -> standing.Records:
     return standing.Records(
-        Register(evidence={}, results=list(raw.values()), sources={}, names={}), raw, {}, {}
+        Register(evidence={}, results=list(raw.values()), sources={}, names={}),
+        raw,
+        sources or {},
+        {},
     )
 
 
@@ -201,9 +207,19 @@ def test_live_current_families_pending_comparison_and_known_scope_gap() -> None:
     assert {"T-196", "T-199", "T-223", "T-226", "T-227", "T-228"}.isdisjoint(
         index.current_results
     )
-    assert "T-163" not in index.current_results
-    assert "think-kqi1" in " ".join(index.unresolved["T-163"])
-    assert records.current_record_ids(["T-037", "T-060", "T-163", "T-060"], index) == ("T-060",)
+    # Fang's theorem-wide scope is current by its reproduced family assessment, while its
+    # four finite bounds stay superseded (cases.asymptotic.deficiency_family).
+    assert index.facets["T-163"] == (
+        records.RecordFacet(
+            "upper-bound",
+            scope="deficiency_upper_bounds: Integer sides approached from below, k >= 15.",
+        ),
+    )
+    assert "T-163" not in index.unresolved
+    assert records.current_record_ids(["T-037", "T-060", "T-163", "T-060"], index) == (
+        "T-060",
+        "T-163",
+    )
     # T-229 (#719) states a smaller side at 105 and 204 than T-174 and T-225, and since
     # its adoption of 23 October 2026 holds both lanes at 105; T-174 and T-225 hold
     # neither lane at those counts. At 204 the release's lower file (T-231), adopted on 24
@@ -272,3 +288,32 @@ def test_proof_derivation_requires_own_lower_holder_and_the_correct_lane_status(
         f.scope == "exact-value proof" and f.lane == "reported"
         for f in closed_report.facets["proof"]
     )
+
+
+def test_an_assessed_family_scope_is_current_only_as_its_recomputation_says() -> None:
+    ledger, dated = family.load()
+    raw = {"T-163": result("T-163")}
+    raw["T-163"]["attribution"]["source_keys"] = ["[Fang excess theorem 2026-10-13]"]
+    sources = {key: {"key": key, "dated": day} for key, day in dated.items()}
+    facets = records.family_record_facets(ledger, context(raw, sources))
+    assert [(facet.result, facet.current) for facet in facets] == [("T-163", True)]
+    index = records.classify_records(raw, [], family_facets=facets)
+    assert index.current_results == ("T-163",)
+    assert index.unresolved == {}
+    row = next(item for item in ledger[family.SECTION] if item.get("record_scope"))
+    assessment = row["record_scope"]["assessment"]
+    assessment["smallest"] = [[15, 78]]
+    with pytest.raises(ValueError, match="smallest differ"):
+        records.family_record_facets(ledger, context(raw, sources))
+    assessment.update(family.assess(ledger, row, dated), current=False, smallest=[])
+    with pytest.raises(ValueError, match="current, smallest differ"):
+        records.family_record_facets(ledger, context(raw, sources))
+    stopped = records.classify_records(
+        raw,
+        [],
+        family_facets=[
+            records.FamilyFacet("T-163", "f", "k >= 15", "think-kqi1", current=False)
+        ],
+    )
+    assert stopped.current_results == ()
+    assert stopped.unresolved == {}

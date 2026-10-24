@@ -10,8 +10,10 @@ priority is used only where its date precision proves an earlier date, never T o
 registration time or a missing supersession field. Unordered ties remain diagnostic.
 
 Typed record_scope references expose a finite registered projection's additional
-family scope as unassessed currentness, with its review bead. They neither create a
-result nor change authorship, scope, assurance or significance in the result register.
+family scope as unassessed currentness, with its review bead, until an assessment that
+the family's maintained comparison reproduces on every read says whether that scope is
+current. They neither create a result nor change authorship, scope, assurance or
+significance in the result register.
 """
 
 from __future__ import annotations
@@ -28,6 +30,7 @@ from fractions import Fraction
 from pathlib import Path
 from typing import Any, Literal, NamedTuple
 
+from cases.asymptotic import deficiency_family
 from devtools import check_standing
 from devtools import render_recent_results as standing
 from devtools.check_results import BOUND_KINDS, scope_values
@@ -78,12 +81,14 @@ class BoundFacet:
 
 @dataclass(frozen=True)
 class FamilyFacet:
-    """An additional canonical family scope whose current comparison remains unassessed."""
+    """An additional canonical family scope, with its current comparison if assessed."""
 
     result: str
     family: str
     scope: str
     review_bead: str
+    #: Whether the scope is current, as a reproduced assessment says; None if unassessed.
+    current: bool | None = None
 
 
 def _date_interval(value: object) -> tuple[date, date] | None:
@@ -207,10 +212,18 @@ def classify_records(
     for facet in family_facets:
         if facet.result not in records:
             raise ValueError(f"unknown result in family facet: {facet.result}")
-        uncertain[facet.result].add(
-            f"The {facet.family} theorem scope survives its finite case projection; "
-            f"current family comparison is unassessed ({facet.review_bead}): {facet.scope}"
-        )
+        if facet.current:
+            current[facet.result].add(
+                RecordFacet(
+                    str(records[facet.result]["kind"]), scope=f"{facet.family}: {facet.scope}"
+                )
+            )
+        elif facet.current is None:
+            uncertain[facet.result].add(
+                f"The {facet.family} theorem scope survives its finite case projection; "
+                f"current family comparison is unassessed ({facet.review_bead}): "
+                f"{facet.scope}"
+            )
     return RecordIndex(
         tuple(sorted(current)),
         {
@@ -293,7 +306,12 @@ def current_record_ids(authored_ids: Iterable[str], index: RecordIndex) -> tuple
 def family_record_facets(
     ledger: Mapping[str, Any], records: standing.Records
 ) -> tuple[FamilyFacet, ...]:
-    """Expose explicitly linked family scope, without inferring a global comparison."""
+    """Expose explicitly linked family scope, current only where an assessment says so.
+
+    An assessment is recomputed here from every statement of its family
+    (`cases.asymptotic.deficiency_family`), and one the recomputation does not reproduce
+    is refused, so no current window rests on a frozen comparison."""
+    dated = {key: str(source.get("dated", "")) for key, source in records.sources.items()}
     facets = []
     used: set[str] = set()
     for section, rows in ledger.items():
@@ -313,13 +331,36 @@ def family_record_facets(
             bead = link["review_bead"]
             if re.fullmatch(r"think-[a-z0-9]{4}", bead) is None:
                 raise ValueError(f"record scope needs a review bead: {identifier}")
-            facets.append(FamilyFacet(identifier, section, row["side_condition"], bead))
+            current = None
+            assessment = link.get("assessment")
+            if assessment is not None:
+                if section != deficiency_family.SECTION:
+                    raise ValueError(f"no maintained comparison assesses {section}")
+                drift = deficiency_family.stale(
+                    assessment, deficiency_family.assess(ledger, row, dated)
+                )
+                if drift:
+                    raise ValueError(
+                        f"record scope of {identifier}: the recorded assessment's "
+                        f"{', '.join(drift)} differ from the family's recomputation"
+                    )
+                current = bool(assessment["current"])
+            facets.append(
+                FamilyFacet(identifier, section, row["side_condition"], bead, current)
+            )
     return tuple(facets)
 
 
 def record_input_paths() -> tuple[Path, ...]:
     """Additional inputs beyond already-declared register, evidence and case inputs."""
-    return (Path(__file__).resolve(), FAMILY_LEDGER, FAMILY_SCHEMA)
+    return (
+        Path(__file__).resolve(),
+        FAMILY_LEDGER,
+        FAMILY_SCHEMA,
+        Path(deficiency_family.__file__).resolve(),
+        Path(deficiency_family.fang.__file__).resolve(),
+        Path(deficiency_family.ryu.__file__).resolve(),
+    )
 
 
 def load_record_index() -> RecordIndex:
