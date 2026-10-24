@@ -1,0 +1,52 @@
+{
+  "submission": "PingYou Ltd exact algebraic certificate supplement",
+  "date": "2026-10-13",
+  "pull_request": "https://github.com/jlevy/squares/pull/574",
+  "release": "https://github.com/BuddenPing/square-packing-certificates/releases/tag/data/pingyou-exact-153-302-2026-10-13-v1",
+  "supersedes": "N153 and N302 rational witnesses in the immutable v2 release; other 145 submitted counts are unchanged",
+  "scope": "Complete feasible upper bounds. Exact attainment of existing construction values. No global optimality claim.",
+  "claims": [
+    {
+      "n": 153,
+      "parameter_polynomial": "t^7-9*t^6+3*t^5-t^4-t^3+t^2-3*t+1",
+      "root_isolating_interval": [
+        "7/20",
+        "9/25"
+      ],
+      "side_exact_expression": "12+(1+3*t^2)/(1+2*t-t^2)",
+      "side_decimal_approximation": "12.87001385040446434446015340078059...",
+      "gain_decimal_approximation": "2.302801065869619e-15",
+      "geometry": "n153/geometry.json",
+      "geometry_sha256": "b15616db97d7fd22757a5bdecbe41aa98c730861b4910c8bcc26899617e03c08",
+      "native_witness": "n153/native/pingyou-n153-algebraic.yaml",
+      "native_sha256": "1867a80b90d5bb50b45549cecece4a2dfe1dcd6f6da441952e0a118c9284b6c7",
+      "predecessor_sha256": "a35cdd78a0fa9a04c02b2300b465495859e6b0bfd29efa1ceedaff388fdfd62b",
+      "predecessor_side_exact": "1290871017207889356527373421291212888937039184596468543112755082539221907322625321371961283007106223/100300670396506300624847104529071602232698497896597372536767433583622893366614852009347422043067343",
+      "strict_improvement": true,
+      "verified_pairs": 11628,
+      "verified_walls": 612
+    },
+    {
+      "n": 302,
+      "parameter_polynomial": "2*t^3-3*t^2-2*t+1",
+      "root_isolating_interval": [
+        "7/20",
+        "9/25"
+      ],
+      "side_exact_expression": "33/2+(7/2)*t+t^2",
+      "side_decimal_approximation": "17.87027538255505966957269257339824...",
+      "gain_decimal_approximation": "3.438801434779458e-21",
+      "geometry": "n302/geometry.json",
+      "geometry_sha256": "4e889924633957d5716fc8c0d237468f2210940586d6563589e106f8e57dc076",
+      "native_witness": "n302/native/pingyou-n302-algebraic.yaml",
+      "native_sha256": "62d266786469b1a9f202a133430e6a1d86cf0822031844f8a384a11b9b0c9a45",
+      "predecessor_sha256": "67ebf46a0090dcc13ac2ac9c57c13c999ac9d3062b5fe3f6fde131a02b9c7d82",
+      "predecessor_side_exact": "4959942423842594231826776792341442704187223957276662889857374115884510892435602546579270309571182844492350712490077828810492525122015977086383064433358085649539/277552657564778424265073462532675760701404799421348937282720803554684502762684850929305578994209946694177453078591369628091304820393916468328457680492338000000",
+      "strict_improvement": true,
+      "verified_pairs": 45451,
+      "verified_walls": 1208
+    }
+  ],
+  "source_release": "https://github.com/BuddenPing/square-packing-certificates/releases/tag/data/pingyou-exact-153-302-2026-10-13",
+  "release_note": "Versioned mirror, byte-identical to the original source release retained in the archive."
+}
