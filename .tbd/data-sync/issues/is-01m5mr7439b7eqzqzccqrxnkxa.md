@@ -5,7 +5,7 @@ title: "Import Amund Kristiansen: s(303) <= 17.909762327476, 9.89e-6 below T-230
 kind: task
 status: in_progress
 priority: 1
-version: 9
+version: 10
 delegate: c-land-757-1024
 labels:
   - result-import
@@ -18,7 +18,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-23T16:06:32.296Z
-updated_at: 2026-10-24T02:38:20.187Z
+updated_at: 2026-10-24T03:01:33.885Z
 started_at: 2026-10-23T16:06:37.444Z
 ---
 Issue #755 (https://github.com/jlevy/squares/issues/755), opened 2026-10-23T11:12:48Z by amundsk (Amund Kristiansen): one upper bound at 303, a dilation certificate made with Evan Daniel's dilate_cert.py (evand 7982d7a), gist 78f9f0e7b4669f2f509a281845081768 at 511f56bf6e6afb4eb22f12d31371c2a2fe7b4767, s303_amund.cert SHA-256 9ec01059b35cc983cb28a1bb33bd215a2717228f7efd182e1724de6b22dc511b, side 223872029093440709529093216833/12500000000000000000000000000. Below the house T-230 (Daniel, #728) by 9.89e-6 if verified. Stages 1-3 then stage 4 (separate review lane), then adoption and regularization at 303 (think-ykgh owns 303's open row-7 review).
@@ -113,3 +113,12 @@ record quotes it exactly or rounded up.
 - afa83b456: merged main 0bbb0a2c4 (#754), clean. db562c8bd: synopsis count (232, 200 by others) and evidence inventory. 1cef5213f: re-pin to db562c8b. b6ae779b4: explainer v0.4.23 over main's v0.4.22 (316 edition tests). 01d5c60f5: the three papers' no-change record re-measured against 0bbb0a2c4 (byte-identical across four renders; the explainer differs only in its count and the profile link).
 - Not applied: stamp_landed (landings.yaml is not on main); its dry run lists T-239 2026-10-23 -> 2026-10-24 for the merge step.
 - For the record: Polkovskyi's later commit Mishapolk/square-packing-records@7e82c64 holds a 303 side above #755's; in report order #755's 11:12:48Z report stands and nothing changes here. Its intake-watch read belongs to a later PR (C).
+
+2026-10-24 coord-intake-1023: #757 review A (https://github.com/jlevy/squares/pull/757#issuecomment-6379038105) approves, with eight Low findings. Owed at the merge-day push, the one that merges main after #745 and #750 for contiguity:
+- A1: README:163 and the PR body omit #763 (2.784e-3 below T-239, a later report) and make "only report below T-230" accurate given 7e82c64.
+- A4: the diversity note in n-303.md.
+- A5: "holds" becomes the derived exact fact.
+- A6: "computes" becomes "was read, not run".
+- A7: RF-4 wording at README:194.
+- A8: merge on 24 October UTC, or re-date the pass.
+A2 is decided by the existing improvement rule (policy section 11), not an owner question: the 0.5 degree view stands. The trade-off was reported to the owner as information. A3: close think-ykgh as superseded once #757 merges (main still names it in SETTLED[303]).
