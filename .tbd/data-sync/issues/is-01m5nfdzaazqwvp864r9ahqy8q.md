@@ -5,7 +5,7 @@ title: "Triage the authors' new comments on #670, #675, #715, #719, #732 and #73
 kind: task
 status: in_progress
 priority: 2
-version: 3
+version: 4
 delegate: c-triage-1023b
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-23T22:52:14.026Z
-updated_at: 2026-10-23T23:27:36.312Z
+updated_at: 2026-10-24T01:14:45.364Z
 started_at: 2026-10-23T22:52:20.825Z
 ---
 
@@ -57,3 +57,7 @@ Commands: `check_requests --github` from a sparse worktree of 64b316b6c listed 1
 #734 (02:17:06Z): Mishapolk's support. No result; read in #753. Triage reply owed (reply-734.md). Owner question 1.
 
 Other: #755 is handled by PR #757. #470 and #533 are other lanes' recording. chelokot/square-packing-archive and wand125/square-packing-tools have been watched only since 8c26340d9 added them to the site's other-projects list, so their old commits now show as unread. chelokot's are Bend proofs of s(1..9), s(5) and s(6)>=3 (needs a triage bead). wand125/square-packing-tools moved to wand125/square-packing (a read).
+
+2026-10-24 coord-intake-1023: OWNER ANSWERS on the triage's two questions.
+(1) #734: the owner selected "Not now". The proposal is recorded as on hold, and the reply says so (records PR A, think-t5hc).
+(2) n335: the owner said "we should have clear defined process for this already, why are you asking? if it is replaced by another one, we could indicate that too". So it is not an owner question. Runbook stage 1, "Several Reports at One Count", decides it: the comparison reads a printed side as its exact side where a lane or the certificate gives one. PR C (#732's f1ceee4) runs think-rx26's exact check, keeps the 8 October print as a quote in the history, and records the supersession by Polkovskyi's lower 335. Lesson: before raising an owner question, check whether a stated rule already decides it. The process rules come first.
