@@ -1770,10 +1770,13 @@ contributor articles use their component sheets and the same text tokens.
   - Under `prefers-reduced-motion: reduce` the duration is 0ms and the token `none`, so
     colours and disclosure state change at once, with no animated arrow travel.
 
-- **Rating ladders.** Verification Ladders is a section of the Results page, under its
-  table, since 2026-10-02 (the owner, `think-hqb3`); it was the homepage’s section
-  between Recent Results and the atlas before that (**Results page**, below, for its
-  place and its lead).
+- **Rating ladders.** Verification Ladders is the first section of the Verification page
+  (`verification.html`) since 2026-10-22, when the site navigation plan
+  (`docs/project/specs/active/plan-2026-10-22-site-navigation.md`) took the rating,
+  evidence, credit and status guide off All Results; it was a section of the Results
+  page, under its table, from 2026-10-02 (the owner, `think-hqb3`), and the homepage’s
+  section between Recent Results and the atlas before that (**All Results**, below, for
+  the Verification page’s place).
   A table of results carries a legend of every rung’s mark right above it, which links
   this section (**Recent results**, below; `think-42dx`, in place of the key of the same
   grid the homepage kept under its table from 2026-10-02). Its diagram, `.site-ladders`,
@@ -1789,7 +1792,8 @@ contributor articles use their component sheets and the same text tokens.
   The section was Verification at a Glance until 2026-10-01; an empty anchor in its
   heading keeps the old fragment, `#verification-at-a-glance`, landing on it, and the
   homepage’s `overview/forward.js` sends both that fragment and `#verification-ladders`
-  to the Results page, fragment kept.
+  to the Results page, whose `overview/navigation.js` sends them on to the Verification
+  page, fragment kept.
   - **Rules.** One rule, in the text’s colour, stands under the column heads.
     No rule stands between the rows: 0.8rem between one rung’s description and the next
     rung (`--site-ladders-row-space`, 0.4rem, either side of a row) keeps them apart and

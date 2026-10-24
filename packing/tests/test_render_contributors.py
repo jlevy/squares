@@ -913,6 +913,7 @@ def test_profile_tally_and_sections_order_records_results_then_credits(
     assert re.sub(r"<[^>]+>", "", tally) == (
         "1 record (at S4) · Review pending · 2 results (1 at S4, 1 at S3) · 1 credit (at S5)"
     )
+    assert tally.count(TALLY_SEPARATOR) == 3
     assert re.findall(r'<a href="([^"]+)">', tally) == [
         target + "#records",
         target + "#records",
@@ -940,8 +941,10 @@ def test_profile_tally_and_sections_order_records_results_then_credits(
 
 
 def test_profile_tally_preserves_known_zero_counts_in_display_order() -> None:
+    # Each dot is the shared separator, as in every other tally.
     assert render_contributors.profile_tally("wolfram-bentz", (), results=()) == (
-        '<span class="site-credit-tally">0 records · 0 results · 0 credits</span>'
+        '<span class="site-credit-tally">'
+        f"0 records{TALLY_SEPARATOR}0 results{TALLY_SEPARATOR}0 credits</span>"
     )
 
 
