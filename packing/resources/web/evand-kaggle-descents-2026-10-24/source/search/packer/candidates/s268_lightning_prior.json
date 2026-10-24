@@ -1,0 +1,130 @@
+{
+ "store_id": 351,
+ "s": 16.878814821006763,
+ "sources": [
+  "pending:#375 (Evan Daniel (evand))",
+  "pending:#375 (Evan Daniel (evand))",
+  "pending:#476 (Francisco Couzo)",
+  "pending:#488 (Francisco Couzo)",
+  "pending:#506 (Francisco Couzo)",
+  "pending:#561 (Francisco Couzo)",
+  "pending:#570 (Francisco Couzo)",
+  "pending:#583 (Francisco Couzo)",
+  "pending:#586 (Francisco Couzo)",
+  "pending:#624 (mstrmg)",
+  "run:runs/ex2/explore/n268/explore0 (ours)",
+  "run:runs/ex2fill/eoth/n268/explore0 (ours)",
+  "run:runs/ex3/explore/n268/explore0 (ours)",
+  "run:runs/fault/b_kn_hopownr1 (None)",
+  "run:runs/fault/b_kn_hopownr2 (None)",
+  "run:runs/fault/b_kn_hopownr3 (None)",
+  "run:runs/fault/b_kn_hopownr4 (None)",
+  "run:runs/fault/b_kn_hopownr5 (None)",
+  "run:runs/fault/b_kn_hopownr6 (None)",
+  "run:runs/fault/b_kn_pc_own (None)",
+  "run:runs/fault/b_own2 (None)",
+  "run:runs/fault/b_own_lat1 (None)",
+  "run:runs/fault/b_own_latr1 (None)",
+  "run:runs/fault/b_own_strip1 (None)",
+  "run:runs/fault/b_own_strip1r (None)",
+  "run:runs/fault/b_store20 (None)",
+  "run:runs/fault/b_store3 (None)",
+  "run:runs/hunt1012/h5/r0090_n268 (ours)",
+  "run:runs/night1014/nh/r0115_n268 (ours)",
+  "run:runs/night1015/nh3/n268/explore0 (ours)",
+  "watch:franciscouzo/square-packing@23aff0c (lollipoll)",
+  "watch:franciscouzo/square-packing@43ac7d2 (Francisco Couzo)",
+  "watch:franciscouzo/square-packing@487b058 (Francisco Couzo)",
+  "watch:franciscouzo/square-packing@4e4c8ce (Francisco Couzo)",
+  "watch:franciscouzo/square-packing@58a7833 (Francisco Couzo)",
+  "watch:franciscouzo/square-packing@7b6c87e (lollipoll)",
+  "watch:franciscouzo/square-packing@af8cb79 (lollipoll)",
+  "watch:franciscouzo/square-packing@b85dee2 (Francisco Couzo)",
+  "watch:franciscouzo/square-packing@c6da0fc (lollipoll)",
+  "later copies of the same minimum: store ids [291680, 119]"
+ ],
+ "ok": true,
+ "S_exact": "16.87881482100676472457833290480743488009918266313975305685670701",
+ "S_cert": "16.878814821006764724747121053018",
+ "checkers": {
+  "verify_cert": {
+   "ok": true,
+   "line": "VALID: s(n) <= S"
+  },
+  "verify_cert2": {
+   "ok": true,
+   "line": "VALID: 268 closed unit squares pairwise disjoint inside the open box of side 16.878814821006763225 (653 close pairs checked)"
+  }
+ },
+ "optimality": {
+  "kkt": true,
+  "min_lambda": 7.891992434266243e-06,
+  "status": "local minimum of S, strict modulo 107 exact flat motions (PD on the rest of null(J_A)); the configuration is not isolated",
+  "flat_motions": 107,
+  "flat_realised": 107.0,
+  "flat_residual": 1.8109946804713085e-61,
+  "negative_eigs": 0,
+  "corner_corner": 115,
+  "vv_milp_dS": 0.0,
+  "rattlers": 7,
+  "min_pair": 9.99999999999999e-21,
+  "min_wall": 5e-21
+ },
+ "regularized": {
+  "ok": true,
+  "S_exact": "16.8788148210067647245783329048074348800991826631397530568567",
+  "S_cert": "8439407410503382362373560526509/500000000000000000000000000000",
+  "groups": [
+   20,
+   4
+  ],
+  "level": 2,
+  "level_text": "same packing: traversable without expansion (angle moves path-checked; slides by construction)",
+  "checkers": {
+   "verify_cert": {
+    "ok": true,
+    "line": "VALID: s(n) <= S"
+   },
+   "verify_cert2": {
+    "ok": true,
+    "line": "VALID: 268 closed unit squares pairwise disjoint inside the open box of side 16.878814821006763225 (539 close pairs checked)"
+   }
+  }
+ },
+ "verdict": "distinct minimum",
+ "difference": {
+  "side_gap": 0.004453105137418589,
+  "matching_distance_regularized": 0.43799484426540897,
+  "symmetry": 6,
+  "moved_gt_1e4": 242,
+  "moved_gt_1e2": 107,
+  "moved_gt_1e1": 107,
+  "moved_gt_1e1_all": 123,
+  "max_move": 1.0710479853969588,
+  "max_move_all": 1.0710479853969588,
+  "max_angle_change": 44.19848300977728,
+  "rattler_status_swaps": 26,
+  "shared_angles": [],
+  "ours_only_angles": [
+   "24.1620",
+   "24.1621",
+   "24.2724"
+  ],
+  "prior_only_angles": [
+   "19.3558",
+   "21.6394",
+   "5.7421"
+  ],
+  "contacts": {
+   "symmetry": 4,
+   "edges_ours": 487,
+   "edges_prior": 569,
+   "shared": 322,
+   "ours_only": 165,
+   "prior_only": 247,
+   "rattlers_ours": 19,
+   "rattlers_prior": 7,
+   "rattlers_shared": 0
+  }
+ }
+}

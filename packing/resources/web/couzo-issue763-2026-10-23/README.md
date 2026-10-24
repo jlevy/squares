@@ -322,8 +322,9 @@ notes, none blocking or major. Its programs and outputs are kept in
 
 T-240 is at V3/C3, and the cases at 268 and 303 adopt its certificates as their house best
 packings in the pass of 25 October 2026, regularized in the same pull request. Evan
-Daniel’s later 268, $4.48 \times 10^{-12}$ below, is a sibling placement whose import is
-think-l49q’s; once validated it re-houses 268 under the same rule.
+Daniel’s later 268, $4.48 \times 10^{-12}$ below, is a sibling placement, registered as
+reported as T-242; its validation and its re-housing of 268 under the same rule are
+think-hx0e’s.
 The review proposed adopting 268 only once Daniel’s certificate was decided, and the
 record adopts it now instead: under
 [the house rule](../../../campaign/result-import.md#the-house-rule) a smaller validated

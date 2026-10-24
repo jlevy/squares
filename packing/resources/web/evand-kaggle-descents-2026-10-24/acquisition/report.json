@@ -1,0 +1,335 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "(no issue)",
+  "author": "Evan Daniel",
+  "source_key": "[Daniel Kaggle descents 2026-10-24]",
+  "report_evidence": "E-evand-kaggle-descents-certificate-report",
+  "receipt_format": "evand-kaggle-descents-exact-replay-v1",
+  "witness_prefix": "W-evand-kaggle-descents-n",
+  "claim_limitations": "Complete 8a8879a rational centre/half-angle certificate of an exact descent of a public Kaggle packing, read exactly from the retained source file. Finite construction feasibility only; no KKT, local minimum, same-packing, rigidity, novelty, priority or global optimality claim.",
+  "read_on": "2026-10-24",
+  "read_at_main": "2ec489d1eede791bf0686ca1c524278c2bb80253",
+  "certificates": [
+    {
+      "n": 268,
+      "path": "search/packer/candidates/s268_lightning.cert",
+      "format": "evand-cert",
+      "offered": "8437180857934672912242411148233/500000000000000000000000000000",
+      "printed_in": "https://github.com/evand/square-packing/blob/8a8879a2972c32cbd2d906049228cc9f0762b02a/search/packer/candidates/s268_lightning.json",
+      "first_committed": "2026-10-24T04:49:33Z"
+    },
+    {
+      "n": 303,
+      "path": "search/packer/candidates/s303_cdeotte.cert",
+      "format": "evand-cert",
+      "offered": "17907238274538241192624181047171/1000000000000000000000000000000",
+      "printed_in": "https://github.com/evand/square-packing/blob/8a8879a2972c32cbd2d906049228cc9f0762b02a/search/packer/candidates/s303_cdeotte.json",
+      "first_committed": "2026-10-24T04:49:33Z"
+    },
+    {
+      "n": 304,
+      "path": "search/packer/candidates/s304_pub.cert",
+      "format": "evand-cert",
+      "offered": "1792689890035674158972360842897/100000000000000000000000000000",
+      "printed_in": "https://github.com/evand/square-packing/blob/8a8879a2972c32cbd2d906049228cc9f0762b02a/search/packer/candidates/s304_pub.json",
+      "first_committed": "2026-10-24T04:49:33Z"
+    }
+  ],
+  "requested": [
+    268,
+    304
+  ],
+  "replayed": [
+    268,
+    303,
+    304
+  ],
+  "houses": [
+    {
+      "n": 268,
+      "reader": "[PingYou PR 574 certificates 2026-10-13]",
+      "source_key": "[PingYou PR 574 certificates 2026-10-13]",
+      "holders": "PingYou Ltd, of Francisco Couzo's packing as Evan Daniel improved it",
+      "result": "T-174",
+      "reported_value": "16.8788148210067647246",
+      "verified_value": "16.8788148210067647246",
+      "evidence": [
+        "E-pingyou-574-exact-feasibility"
+      ]
+    },
+    {
+      "n": 303,
+      "reader": "[Kristiansen n303 2026-10-23]",
+      "source_key": "[Kristiansen n303 2026-10-23]",
+      "holders": "Amund Kristiansen, found from Evan Daniel's packing",
+      "result": "T-239",
+      "reported_value": "17.9097623274752568",
+      "verified_value": "17.9097623274752568",
+      "evidence": [
+        "E-amundsk-755-n303-exact-feasibility",
+        "E-amundsk-755-n303-review-exact-feasibility"
+      ]
+    },
+    {
+      "n": 304,
+      "reader": "[Mishapolk KKT refinements 2026-10-14]",
+      "source_key": "[Mishapolk KKT refinements 2026-10-14]",
+      "holders": "Daniil Ostashev, improved by Mishapolk",
+      "result": "T-186",
+      "reported_value": "17.92942775807517497",
+      "verified_value": "17.92942775807517497",
+      "evidence": [
+        "E-mishapolk-70a033f-exact-feasibility"
+      ]
+    }
+  ],
+  "pending": [
+    {
+      "n": 268,
+      "report": "T-240 (#763)",
+      "url": "https://github.com/jlevy/squares/issues/763",
+      "holders": "Francisco Couzo, after Kirill Tymchishin's packing",
+      "result": "T-240",
+      "reader": "[Couzo issue 763 2026-10-23]"
+    },
+    {
+      "n": 268,
+      "report": "T-098 (#375)",
+      "url": "https://github.com/evand/square-packing/tree/13ee36e5807727d12a5da36b9b90a96bdba272bf/s12/search/exact",
+      "holders": "Francisco Couzo, improved by Evan Daniel",
+      "result": "T-098",
+      "reader": "[evand exact optima 2026-10-05]"
+    },
+    {
+      "n": 268,
+      "report": "#476 (unnamed)",
+      "url": "https://github.com/franciscouzo/square-packing/blob/02f969075f79d5e13fa21e09e381a44e8647b452/certificates/n268.cert",
+      "holders": "Francisco Couzo",
+      "reader": "[Couzo exact certificates 2026-10-09]"
+    },
+    {
+      "n": 268,
+      "report": "#593",
+      "url": "https://github.com/jlevy/squares/issues/593",
+      "holders": "Mykhailo Polkovskyi (Mishapolk)",
+      "reader": "[Mishapolk records 2026-10-14]"
+    },
+    {
+      "n": 303,
+      "report": "T-240 (#763)",
+      "url": "https://github.com/jlevy/squares/issues/763",
+      "holders": "Francisco Couzo, after Vladislav Lavrentev's packing",
+      "result": "T-240",
+      "reader": "[Couzo issue 763 2026-10-23]"
+    },
+    {
+      "n": 303,
+      "report": "T-230 (#728)",
+      "url": "https://github.com/jlevy/squares/issues/728",
+      "holders": "Evan Daniel, found from Daniil Ostashev's packing",
+      "result": "T-230",
+      "reader": "[Daniel n303 2026-10-22]"
+    },
+    {
+      "n": 303,
+      "report": "T-186 (no issue)",
+      "url": "https://github.com/Mishapolk/square-packing-records/tree/70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94",
+      "holders": "Mykhailo Polkovskyi, after PingYou Ltd, of Daniil Ostashev's packing",
+      "result": "T-186",
+      "reader": "[Mishapolk KKT refinements 2026-10-14]"
+    },
+    {
+      "n": 303,
+      "report": "T-174 (PR #574)",
+      "url": "https://github.com/jlevy/squares/pull/574",
+      "holders": "PingYou Ltd, of Daniil Ostashev's packing",
+      "reader": "[PingYou PR 574 certificates 2026-10-13]",
+      "result": "T-174"
+    },
+    {
+      "n": 303,
+      "report": "T-162 (#562)",
+      "url": "https://github.com/jlevy/squares/issues/562",
+      "holders": "Daniil Ostashev",
+      "reader": "[Ostashev compositions 2026-10-12]",
+      "result": "T-162"
+    },
+    {
+      "n": 303,
+      "report": "T-146 (no issue)",
+      "url": "packing/frontier/results.yaml",
+      "holders": "Nate Chaoweeraprasit (itsnaka), improved by Evan Daniel",
+      "reader": "[Daniel regularized lists 2026-10-10]",
+      "result": "T-146"
+    },
+    {
+      "n": 303,
+      "report": "T-138 (#470)",
+      "url": "https://github.com/Mishapolk/square-packing-records/tree/dd3da5c753c5ded6cb3b89476193b7b801005415",
+      "holders": "Mishapolk after Stenlund, Friedman, Ellsworth, Chaoweeraprasit, Couzo, Xu, Levy",
+      "result": "T-138",
+      "reader": "[Mishapolk decimal poses 2026-10-09]"
+    },
+    {
+      "n": 303,
+      "report": "T-136 (#481)",
+      "url": "https://github.com/itsnaka/squish-certs/tree/d45669b48cc97ad3aa17a6c847a8d06630f66eac",
+      "holders": "Chaoweeraprasit after Couzo, Xu, Goebel, Schadt, Ellsworth, Hajba, Levy",
+      "result": "T-136",
+      "reader": "[SQUISH third request 2026-10-09]"
+    },
+    {
+      "n": 303,
+      "report": "T-134 (#476)",
+      "url": "https://github.com/franciscouzo/square-packing/tree/02f969075f79d5e13fa21e09e381a44e8647b452",
+      "holders": "Couzo after Mishapolk, Chaoweeraprasit, Gupta, Xu, Daniel, Ellsworth, Levy",
+      "result": "T-134",
+      "reader": "[Couzo exact certificates 2026-10-09]"
+    },
+    {
+      "n": 303,
+      "report": "T-113 (#401)",
+      "url": "https://github.com/itsnaka/squish-certs/tree/07fe6dde1e5b67405a3076719b90e58e2882b677/squish-submission-2026-10-06",
+      "holders": "Chaoweeraprasit after Ellsworth",
+      "result": "T-113",
+      "reader": "[SQUISH ten packings 2026-10-07]"
+    },
+    {
+      "n": 303,
+      "report": "T-098 (#375)",
+      "url": "https://github.com/evand/square-packing/tree/13ee36e5807727d12a5da36b9b90a96bdba272bf/s12/search/exact",
+      "holders": "Daniel after Couzo, de Winter, Ellsworth, Levy",
+      "result": "T-098",
+      "reader": "[evand exact optima 2026-10-05]"
+    },
+    {
+      "n": 303,
+      "report": "T-092 (no issue)",
+      "url": "https://github.com/franciscouzo/square-packing/tree/6042c56b43b64c09fe5a32c64879e698f399beaf",
+      "holders": "Couzo",
+      "result": "T-092",
+      "printed": "17.92434100986025",
+      "rounding": "up"
+    },
+    {
+      "n": 303,
+      "report": "T-056",
+      "url": "https://github.com/franciscouzo/square-packing",
+      "holders": "Francisco Couzo",
+      "result": "T-056",
+      "printed": "17.924349265547932",
+      "rounding": "up"
+    },
+    {
+      "n": 303,
+      "report": "#488 (unnamed)",
+      "url": "https://github.com/franciscouzo/square-packing/blob/3ef76349025bf4bfa99c9c3600bcc273f4c33e02/certificates/n303.cert",
+      "holders": "Francisco Couzo",
+      "reader": "[Couzo certificates 2026-10-10]"
+    },
+    {
+      "n": 303,
+      "report": "#573",
+      "url": "https://github.com/jlevy/squares/issues/573",
+      "holders": "Mykhailo Polkovskyi (Mishapolk)",
+      "reader": "[Mishapolk exact certificates 2026-10-12]"
+    },
+    {
+      "n": 303,
+      "report": "#593",
+      "url": "https://github.com/jlevy/squares/issues/593",
+      "holders": "Mykhailo Polkovskyi (Mishapolk)",
+      "reader": "[Mishapolk records 2026-10-14]"
+    },
+    {
+      "n": 303,
+      "report": "Mishapolk/square-packing-records@7e82c64",
+      "url": "https://github.com/Mishapolk/square-packing-records/tree/7e82c6408937c9a6fe2e11054ed716bba67922f0",
+      "holders": "Mykhailo Polkovskyi (Mishapolk)",
+      "printed": "17.9097722172562061",
+      "rounding": "up"
+    },
+    {
+      "n": 304,
+      "report": "T-241 (fa6237e)",
+      "url": "https://github.com/franciscouzo/square-packing/blob/fa6237e288cf3fc53b53fc43438c91f3f59c40e9/certificates/best/n304.cert",
+      "holders": "Kirill Tymchishin, certified by Francisco Couzo",
+      "result": "T-241",
+      "reader": "[Couzo n304 2026-10-23]"
+    },
+    {
+      "n": 304,
+      "report": "T-152 (#506)",
+      "url": "https://github.com/jlevy/squares/issues/506",
+      "holders": "Nate Chaoweeraprasit (itsnaka), improved by Francisco Couzo",
+      "result": "T-152",
+      "reader": "[Couzo certificates 2026-10-11]"
+    },
+    {
+      "n": 304,
+      "report": "#593",
+      "url": "https://github.com/jlevy/squares/issues/593",
+      "holders": "Mykhailo Polkovskyi (Mishapolk)",
+      "reader": "[Mishapolk records 2026-10-14]"
+    },
+    {
+      "n": 304,
+      "report": "T-175 (#575)",
+      "url": "https://github.com/jlevy/squares/issues/575",
+      "holders": "Daniil Ostashev",
+      "result": "T-175",
+      "reader": "[Ostashev merged bands 2026-10-13]"
+    },
+    {
+      "n": 304,
+      "report": "T-174 (PR #574)",
+      "url": "https://github.com/jlevy/squares/pull/574",
+      "holders": "PingYou Ltd (BuddenPing), numerical v2",
+      "result": "T-174",
+      "reader": "[PingYou PR 574 certificates 2026-10-13]"
+    },
+    {
+      "n": 304,
+      "report": "T-151 (#500)",
+      "url": "https://github.com/itsnaka/squish-certs/tree/aeacc6c124df339074f7370e1e010bb6e8c1b5ca",
+      "holders": "Chaoweeraprasit after Couzo, Gupta, Ellsworth, Friedman, Levy",
+      "result": "T-151",
+      "reader": "[SQUISH fourth request 2026-10-11]"
+    },
+    {
+      "n": 304,
+      "report": "T-098 (#375)",
+      "url": "https://github.com/evand/square-packing/tree/13ee36e5807727d12a5da36b9b90a96bdba272bf/s12/search/exact",
+      "holders": "Daniel after Couzo, de Winter, Ellsworth, Levy",
+      "result": "T-098",
+      "reader": "[evand exact optima 2026-10-05]"
+    },
+    {
+      "n": 304,
+      "report": "T-056",
+      "url": "https://github.com/franciscouzo/square-packing",
+      "holders": "Francisco Couzo",
+      "result": "T-056",
+      "printed": "17.934650018395903",
+      "rounding": "up"
+    }
+  ],
+  "register": {
+    "title": "Evan Daniel's exact descents of public Kaggle packings at 268 and 304, at 8a8879a, no issue",
+    "headline": "Daniel's exact descents of public Kaggle packings at 268 and 304, below the reports before them",
+    "significance": 2,
+    "source_checks": "Each certificate's JSON report states it valid (cert_valid) at 80 digits, its least wall and pair clearances (5e-21 and about 1e-20), and S_exact, the side of a Newton-converged KKT point of the descent. The certificates' headers name the source's verify_cert.py, byte-identical to the copy the n183 packet retains. Those statements are the author's; no source program ran here. From the two sides it states, the certificate's side lies above S_exact by about 1.7e-19 at 268 and 1.8e-19 at 304, a relative padding of 1e-20.",
+    "credit": "Credit at 268 Vladislav Lavrentev's public Kaggle packing, as the source credits it: 'Vladislav Lavrentev's (Kaggle lightningv08) public packing, exact descent (shrink-only) to 16.8743617159, the side a Kaggle per-puzzle side-only claim lists; the first public packing at that side'; and at 304 'the public Kaggle packing at 17.9268989004 (finder unknown; earliest public copy: kozykappa's notebook)', which Francisco Couzo's earlier certificate of the same packing (T-241) credits to Kirill Tymchishin's Kaggle notebook 'CPU Alternating Reclosure' v3, after Mykhailo Polkovskyi's packing, T-186's, and its recorded chain (Daniil Ostashev, Francisco Couzo, PingYou Ltd). Evan Daniel (https://github.com/evand/square-packing) descended each exactly to the side stated and wrote the certificate. The source's credits say its work was produced by Claude (Anthropic) under human direction.",
+    "next_rung": "Independently review the retained replay and the two certificates (stage 4), then decide the adoptions at 268 and 304, with both strong generators' regularization of each new house in the same change.",
+    "bead": "think-l49q",
+    "bibliography": {
+      "authors": [
+        "Daniel"
+      ],
+      "lineage": "builds-on-project",
+      "credit": "Daniel after Lavrentev, Tymchishin, Polkovskyi, Ostashev, Couzo, PingYou Ltd, Levy",
+      "short_credit": "Daniel after Lavrentev et al.",
+      "note": "Two complete exact certificates at 8a8879a2972c32cbd2d906049228cc9f0762b02a, pushed on 24 October 2026 with no issue: s(268) <= 8437180857934672912242411148233/(5*10^29), the exact descent of Vladislav Lavrentev's public Kaggle packing (lightningv08), and s(304) <= 1792689890035674158972360842897/10^29, the exact descent of a public Kaggle packing whose finder the source does not know, which Francisco Couzo's fa6237e certificate credits to Kirill Tymchishin. The source did not post them, since issue 763 already held the counts. A third, Chris Deotte's packing at 303, is above #763's and retained as credit evidence only. MIT-licensed; Claude assistance disclosed. The KKT statements are the author's; no local or global optimality claim."
+    }
+  }
+}

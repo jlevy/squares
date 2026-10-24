@@ -66,15 +66,15 @@ grid-slack’s view meanwhile.
 
 **The register candidates.** At 268 the regularizer’s certified solve reaches
 8437180857934672912242411148233/(5 × 10²⁹), exactly the side of Evan Daniel’s later
-certificate at `evand/square-packing@8a8879a`, whose import as reported is think-l49q’s:
-that report states this side first, so the view proves no bound beyond it.
+certificate at `evand/square-packing@8a8879a`, registered as reported as T-242: that
+report states this side first, so the view proves no bound beyond it.
 At 303 its first-pass solve, whose KKT certificate fails at the relaxed gate, gives a
 view at 8953489116897633490914356559681/(5 × 10²⁹), $3.63 \times 10^{-12}$ below T-240,
 which all three exact routes here accept: a smaller packing by the policy’s row 3.
 Registering either needs a register id this pull request does not hold, as think-8r5w’s
 did at 303 before. think-20oj registers both: the 303 view as a smaller packing, and the
-268 view with `first_certified_in: T-242`, Daniel’s certificate, once T-242 is on
-`main`, since that certificate states the side first.
+268 view with `first_certified_in: T-242`, Daniel’s certificate, since that certificate
+states the side first.
 The driver’s receipt and reports here record both, and the same commands reproduce the
 views.
 

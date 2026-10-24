@@ -28034,6 +28034,334 @@ occurrences:
     as its first checker and compares with this project's register. The first-party
     jlevy/squares record is the Joshua Levy identity established by LICENSE and the retained
     ojoshe receipt; project credit does not imply sole personal authorship.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo n304 2026-10-23]'
+    field: /authors/0
+  expected_text: Couzo
+  start: 0
+  end: 5
+  label: Couzo
+  role: source-author
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - bibliography
+  contributor_id: francisco-couzo
+  note: >-
+    Reviewed author byline: certificates/best/n304.cert is in franciscouzo/square-packing at
+    fa6237e, the repository of every earlier Couzo key, whose certified_bounds.json records
+    his certification of it; the couzo-n304-2026-10-23 packet reads it from the issue-763
+    packet's copy.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo n304 2026-10-23]'
+    field: /credit
+  expected_text: Couzo after Tymchishin, Polkovskyi, Ostashev, Couzo, PingYou Ltd, Levy
+  start: 0
+  end: 5
+  label: Couzo
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - bibliography
+  contributor_id: francisco-couzo
+  note: >-
+    Reviewed source credit: Francisco Couzo certified the packing at 304 in his repository;
+    he claims no refinement of it, and the original credit role is retained.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo n304 2026-10-23]'
+    field: /credit
+  expected_text: Couzo after Tymchishin, Polkovskyi, Ostashev, Couzo, PingYou Ltd, Levy
+  start: 12
+  end: 22
+  label: Tymchishin
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: >-
+    Reviewed packing/resources/bibliography.yaml [[Couzo n304 2026-10-23]] /credit span
+    12:22: at 304, Francisco Couzo's catalogue, certified_bounds.json and manifest credit
+    the packing at 304 to Kirill Tymchishin (kirilltym), Kaggle notebook "CPU Alternating
+    Reclosure" v3, run 361239073. No person record exists yet; identity review pending (a
+    profile by name, think-l49q).
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo n304 2026-10-23]'
+    field: /credit
+  expected_text: Couzo after Tymchishin, Polkovskyi, Ostashev, Couzo, PingYou Ltd, Levy
+  start: 24
+  end: 34
+  label: Polkovskyi
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: mykhailo-polkovskyi
+  note: >-
+    Reviewed /credit span 24:34: at 304, the manifest of the source names the notebook's
+    previous source and seed as Mykhailo Polkovskyi's 70a033f n304.cert (#593), T-186's
+    packing, which this record measures as Daniil Ostashev's T-175 packing re-solved
+    (mishapolk-kkt-refinements-2026-10-14/review/compare_lineage-output.txt:32, 304 of 304
+    centres within 9.4e-16); the line carries T-186's recorded chain, 'Polkovskyi after
+    Ostashev, Couzo, PingYou Ltd, Levy'. A chain through an intermediate author retains the
+    link.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo n304 2026-10-23]'
+    field: /credit
+  expected_text: Couzo after Tymchishin, Polkovskyi, Ostashev, Couzo, PingYou Ltd, Levy
+  start: 36
+  end: 44
+  label: Ostashev
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: daniil-ostashev
+  note: >-
+    Reviewed /credit span 36:44: at 304, the manifest of the source names the notebook's
+    previous source and seed as Mykhailo Polkovskyi's 70a033f n304.cert (#593), T-186's
+    packing, which this record measures as Daniil Ostashev's T-175 packing re-solved
+    (mishapolk-kkt-refinements-2026-10-14/review/compare_lineage-output.txt:32, 304 of 304
+    centres within 9.4e-16); the line carries T-186's recorded chain, 'Polkovskyi after
+    Ostashev, Couzo, PingYou Ltd, Levy'. Ostashev is T-186's first link at 304 (issue 575;
+    T-175).
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo n304 2026-10-23]'
+    field: /credit
+  expected_text: Couzo after Tymchishin, Polkovskyi, Ostashev, Couzo, PingYou Ltd, Levy
+  start: 46
+  end: 51
+  label: Couzo
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - bibliography
+  contributor_id: francisco-couzo
+  note: >-
+    Reviewed /credit span 46:51: carried from T-186's recorded chain, the manifest of the
+    source names the notebook's previous source and seed as Mykhailo Polkovskyi's 70a033f
+    n304.cert (#593), T-186's packing, which this record measures as Daniil Ostashev's T-175
+    packing re-solved (mishapolk-kkt-refinements-2026-10-14/review/compare_lineage-
+    output.txt:32, 304 of 304 centres within 9.4e-16); the line carries T-186's recorded
+    chain, 'Polkovskyi after Ostashev, Couzo, PingYou Ltd, Levy'. Keep finder, refinement
+    and certification roles distinct.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo n304 2026-10-23]'
+    field: /credit
+  expected_text: Couzo after Tymchishin, Polkovskyi, Ostashev, Couzo, PingYou Ltd, Levy
+  start: 53
+  end: 64
+  label: PingYou Ltd
+  role: prerequisite
+  disposition: non-person
+  evidence: []
+  note: >-
+    Corporate credit carried from T-186's recorded chain ([Mishapolk KKT refinements
+    2026-10-14]); the retained packing/resources/web/pingyou-
+    pr574-certificates-2026-10-13/README.md Credit section records the request to credit
+    PingYou Ltd. No individual identity is inferred from the company label.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo n304 2026-10-23]'
+    field: /credit
+  expected_text: Couzo after Tymchishin, Polkovskyi, Ostashev, Couzo, PingYou Ltd, Levy
+  start: 66
+  end: 70
+  label: Levy
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - announcement-account
+  contributor_id: joshua-levy
+  note: >-
+    Reviewed /credit span 66:70: at 304 the manifest of T-241's source names this project's
+    sqpack/verify.py at 37e6757e as its first checker, and T-186's recorded chain ends in
+    Levy. The first-party jlevy/squares record is the Joshua Levy identity established by
+    LICENSE and the retained ojoshe receipt; project credit does not imply sole personal
+    authorship.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel Kaggle descents 2026-10-24]'
+    field: /authors/0
+  expected_text: Daniel
+  start: 0
+  end: 6
+  label: Daniel
+  role: source-author
+  disposition: resolved
+  evidence:
+  - repository-license
+  - bibliography
+  contributor_id: evan-daniel
+  note: >-
+    Reviewed packing/resources/bibliography.yaml [[Daniel Kaggle descents 2026-10-24]]
+    /authors/0 span 0:6. The evand/square-packing certificates at 8a8879a match the
+    repository whose retained licence names Evan Daniel. Keep finder, improver and solver
+    roles distinct.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel Kaggle descents 2026-10-24]'
+    field: /credit
+  expected_text: Daniel after Lavrentev, Tymchishin, Polkovskyi, Ostashev, Couzo, PingYou Ltd, Levy
+  start: 0
+  end: 6
+  label: Daniel
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+  - repository-license
+  - bibliography
+  contributor_id: evan-daniel
+  note: >-
+    Reviewed packing/resources/bibliography.yaml [[Daniel Kaggle descents 2026-10-24]]
+    /credit span 0:6: Evan Daniel's exact descents at 268 and 304, in the repository whose
+    retained licence names him. Keep finder, improver and solver roles distinct.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel Kaggle descents 2026-10-24]'
+    field: /credit
+  expected_text: Daniel after Lavrentev, Tymchishin, Polkovskyi, Ostashev, Couzo, PingYou Ltd, Levy
+  start: 13
+  end: 22
+  label: Lavrentev
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: >-
+    Reviewed packing/resources/bibliography.yaml [[Daniel Kaggle descents 2026-10-24]]
+    /credit span 13:22: the source's commit credits the packing at 268 to Vladislav
+    Lavrentev (Kaggle lightningv08). No person record exists yet; identity review pending (a
+    profile by name, as for [Couzo issue 763 2026-10-23], think-l49q).
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel Kaggle descents 2026-10-24]'
+    field: /credit
+  expected_text: Daniel after Lavrentev, Tymchishin, Polkovskyi, Ostashev, Couzo, PingYou Ltd, Levy
+  start: 24
+  end: 34
+  label: Tymchishin
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: >-
+    Reviewed packing/resources/bibliography.yaml [[Daniel Kaggle descents 2026-10-24]]
+    /credit span 24:34: at 304, where T-242 regularizes T-241, Francisco Couzo's catalogue,
+    certified_bounds.json and manifest credit the packing at 304 to Kirill Tymchishin
+    (kirilltym), Kaggle notebook "CPU Alternating Reclosure" v3, run 361239073. No person
+    record exists yet; identity review pending (a profile by name, think-l49q).
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel Kaggle descents 2026-10-24]'
+    field: /credit
+  expected_text: Daniel after Lavrentev, Tymchishin, Polkovskyi, Ostashev, Couzo, PingYou Ltd, Levy
+  start: 36
+  end: 46
+  label: Polkovskyi
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: mykhailo-polkovskyi
+  note: >-
+    Reviewed /credit span 36:46: at 304, where T-242 regularizes T-241, the manifest of the
+    source names the notebook's previous source and seed as Mykhailo Polkovskyi's 70a033f
+    n304.cert (#593), T-186's packing, which this record measures as Daniil Ostashev's T-175
+    packing re-solved (mishapolk-kkt-refinements-2026-10-14/review/compare_lineage-
+    output.txt:32, 304 of 304 centres within 9.4e-16); the line carries T-186's recorded
+    chain, 'Polkovskyi after Ostashev, Couzo, PingYou Ltd, Levy'. A chain through an
+    intermediate author retains the link.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel Kaggle descents 2026-10-24]'
+    field: /credit
+  expected_text: Daniel after Lavrentev, Tymchishin, Polkovskyi, Ostashev, Couzo, PingYou Ltd, Levy
+  start: 48
+  end: 56
+  label: Ostashev
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: daniil-ostashev
+  note: >-
+    Reviewed /credit span 48:56: at 304, where T-242 regularizes T-241, the manifest of the
+    source names the notebook's previous source and seed as Mykhailo Polkovskyi's 70a033f
+    n304.cert (#593), T-186's packing, which this record measures as Daniil Ostashev's T-175
+    packing re-solved (mishapolk-kkt-refinements-2026-10-14/review/compare_lineage-
+    output.txt:32, 304 of 304 centres within 9.4e-16); the line carries T-186's recorded
+    chain, 'Polkovskyi after Ostashev, Couzo, PingYou Ltd, Levy'. Ostashev is T-186's first
+    link at 304 (issue 575; T-175).
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel Kaggle descents 2026-10-24]'
+    field: /credit
+  expected_text: Daniel after Lavrentev, Tymchishin, Polkovskyi, Ostashev, Couzo, PingYou Ltd, Levy
+  start: 58
+  end: 63
+  label: Couzo
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - bibliography
+  contributor_id: francisco-couzo
+  note: >-
+    Reviewed /credit span 58:63: carried from T-186's recorded chain, the manifest of the
+    source names the notebook's previous source and seed as Mykhailo Polkovskyi's 70a033f
+    n304.cert (#593), T-186's packing, which this record measures as Daniil Ostashev's T-175
+    packing re-solved (mishapolk-kkt-refinements-2026-10-14/review/compare_lineage-
+    output.txt:32, 304 of 304 centres within 9.4e-16); the line carries T-186's recorded
+    chain, 'Polkovskyi after Ostashev, Couzo, PingYou Ltd, Levy'. Keep finder, refinement
+    and certification roles distinct.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel Kaggle descents 2026-10-24]'
+    field: /credit
+  expected_text: Daniel after Lavrentev, Tymchishin, Polkovskyi, Ostashev, Couzo, PingYou Ltd, Levy
+  start: 65
+  end: 76
+  label: PingYou Ltd
+  role: prerequisite
+  disposition: non-person
+  evidence: []
+  note: >-
+    Corporate credit carried from T-186's recorded chain ([Mishapolk KKT refinements
+    2026-10-14]); the retained packing/resources/web/pingyou-
+    pr574-certificates-2026-10-13/README.md Credit section records the request to credit
+    PingYou Ltd. No individual identity is inferred from the company label.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel Kaggle descents 2026-10-24]'
+    field: /credit
+  expected_text: Daniel after Lavrentev, Tymchishin, Polkovskyi, Ostashev, Couzo, PingYou Ltd, Levy
+  start: 78
+  end: 82
+  label: Levy
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - announcement-account
+  contributor_id: joshua-levy
+  note: >-
+    Reviewed /credit span 78:82: at 304 the manifest of T-241's source names this project's
+    sqpack/verify.py at 37e6757e as its first checker, and T-186's recorded chain ends in
+    Levy; at 268 the source does not state that it builds on this project (its prior-best
+    files only compare with the register). The first-party jlevy/squares record is the
+    Joshua Levy identity established by LICENSE and the retained ojoshe receipt; project
+    credit does not imply sole personal authorship.
 inspections:
 - path: packing/resources/papers/addis-locatelli-schoen-2008-disk-packing-square.pdf
   status: pending

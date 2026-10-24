@@ -6,7 +6,9 @@ import declaration, ``acquisition/report.json`` (`Declaration`), beside the cust
 declaration ``devtools.acquire_source`` writes the packet from:
 
 - **custody.** ``read_facts`` admits nothing until ``acquire_source.check`` passes, so
-  every certificate it reads is a retained file bound to its upstream blob. Where the
+  every certificate it reads is a retained file bound to its upstream blob, or a file the
+  packet pins as ``identical_to`` another packet's retained copy, read from that copy and
+  held to the pinned digest (`_upstream`). Where the
   source states no licence and the packet retains no upstream byte, a row names a derived
   ``fact`` instead: the certificate as an exact rational Witness/v2, which ``derive``
   writes from a checkout once ``acquire_source.acquire`` shows the checkout yields this
@@ -1142,6 +1144,46 @@ def _read(source: Path, path: str) -> bytes:
         raise ReportError(f"{path}: {error}") from error
 
 
+def _upstream(source: Path, twins: Mapping[str, acquire_source.PinnedOnly], path: str) -> bytes:
+    """One upstream file's bytes: retained under ``source``, or, where the packet pins it
+    by digest because another packet already retains the same bytes, read from that copy.
+
+    Such a file is pinned only, ``identical_to`` the other copy (`acquire_source`), whose
+    custody check compares the two. The copy is read as that check reads it
+    (`acquire_source.twin_bytes`: an original gzip as stored, anything else plain or from
+    its ``.gz``), within the ``MAX_SOURCE_BYTES`` bound `_read` applies, and held to the
+    pinned digest again here; an upstream ``.gz`` is then
+    decompressed, as `_read` returns a retained one. Francisco Couzo's 304 at ``fa6237e``
+    is retained by the issue-763 packet and pinned so by the packet that imports it
+    (think-l49q).
+    """
+    item = twins.get(path)
+    if item is None:
+        return _read(source, path)
+    twin = item.get("identical_to", "")
+    target = REPO / twin
+    ensure_private(target if target.exists() else target.with_name(target.name + ".gz"))
+    try:
+        data = acquire_source.twin_bytes(twin, REPO, limit=MAX_SOURCE_BYTES)
+    except (OSError, ValueError) as error:
+        raise ReportError(f"{path}: {error}") from error
+    _require(
+        hashlib.sha256(data).hexdigest() == item["sha256"],
+        f"{path}: {twin} is not the bytes the packet pins",
+    )
+    if not path.endswith(retained_data.GZIP_SUFFIX):
+        return data
+    try:
+        return retained_data.gunzip_bytes(data, limit=MAX_SOURCE_BYTES, name=path)
+    except (OSError, ValueError) as error:
+        raise ReportError(f"{path}: {error}") from error
+
+
+def _twins(record: acquire_source.Source) -> dict[str, acquire_source.PinnedOnly]:
+    """The pinned-only files another packet retains, by upstream path."""
+    return {item["path"]: item for item in record["pinned_only"] if "identical_to" in item}
+
+
 def _record(packet: Path) -> acquire_source.Record:
     value = json.loads((packet / acquire_source.RECORD).read_text(encoding="utf-8"))
     return cast("acquire_source.Record", value)
@@ -1246,7 +1288,9 @@ def read_facts(
     """
     ensure_private(packet)
     declaration = load_declaration(packet)
-    source = REPO / acquisition(packet)["archived_path"]
+    record = acquisition(packet)
+    source = REPO / record["archived_path"]
+    twins = _twins(record)
     certificates = {}
     for row in declaration["certificates"]:
         n = row["n"]
@@ -1255,12 +1299,13 @@ def read_facts(
         if "fact" in row:
             certificate = read_fact(packet, declaration, row)
         else:
-            raw = _read(source, row["path"])
+            raw = _upstream(source, twins, row["path"])
             certificate = parse_certificate(raw, n, row["format"], row_options(row))
         admit(certificate, row["offered"])
         # Beside a derived fact the other files are not retained; ``derive`` compares them.
         for other in [] if "fact" in row else row.get("same_packing", []):
-            copy = parse_certificate(_read(source, other["path"]), n, other["format"])
+            raw = _upstream(source, twins, other["path"])
+            copy = parse_certificate(raw, n, other["format"])
             _require(copy == certificate, f"n={n}: {other['path']} states another packing")
         certificates[n] = certificate
     return certificates
@@ -1418,6 +1463,12 @@ HOUSES: dict[str, Callable[[int], Fraction]] = {
     # T-240: Francisco Couzo's two in-corpus certificates of issue 763, at 268 and 303,
     # retained at 964ee2bd; the packet's rows beyond the corpus are read by the ledger.
     "[Couzo issue 763 2026-10-23]": _import("couzo-issue763-2026-10-23"),
+    # Couzo's 304 at fa6237e, which issue 763 does not claim, read from the copy the
+    # issue-763 packet retains (think-l49q).
+    "[Couzo n304 2026-10-23]": _import("couzo-n304-2026-10-23"),
+    # Evan Daniel's exact descents at 268 and 304 of public Kaggle packings, at 8a8879a,
+    # which no issue reports (think-l49q).
+    "[Daniel Kaggle descents 2026-10-24]": _import("evand-kaggle-descents-2026-10-24"),
     # T-155: the side of the retained view of Evan Daniel's regularizer at each count.
     "[Daniel regularizer 2026-10-11]": regularized.view_side,
 }

@@ -22849,7 +22849,27 @@ issues:
     - think-llit
     - think-m8f4
     answer_bead: think-ptkk
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/763#issuecomment-6384882980
+      date: '2026-10-24'
+      by: jlevy
+      kind: import
+      reported:
+      - result: n268
+        id: T-240
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: n303
+        id: T-240
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: rows-325-1024
+      - result: recipes-325-1024
+      - result: n683
+      - result: rows-above-1024
+      - result: unrequested-index-rows
     close_when: >-
       T-240 is reviewed and adopted at 268 and 303 with both drawings regularized, the
       recipes, 683 and the rows above 1024 have rows or recorded dispositions, and the reply

@@ -449,7 +449,12 @@ the inputs and the comparison:
 - **The order** is the time each claim reached this repository: the issue, comment or
   pull request that made it, or the update comment or commit that added it later.
   A certificate published in a watched repository with no issue is a report from its
-  first commit (the owner, 2026-10-14).
+  first commit (the owner, 2026-10-14), dated by the push that made that commit public
+  where the push came later.
+  GitHub’s activity log for the repository is the evidence; a ledger gives the push time
+  as `reported_at` and keeps the commit time as `first_committed`, and the
+  beyond-horizon replay keeps the pushes its walks read in
+  `devtools.beyond_horizon_replay.PUSHED_LATER`.
 - **The comparison** reads each printed side as the span its rounding allows (`up`,
   `nearest`, `unstated`, `cut` or `binary64`), or as its exact side where a lane or the
   certificate gives one.
@@ -588,6 +593,16 @@ credit.
   [`devtools.acquire_source`](../devtools/acquire_source.py) writes a packet from a
   declaration kept in its `acquisition/` directory, and its `--check` re-derives the
   packet from its manifest.
+- **A file another packet already retains is pinned, not copied.** Where the certificate
+  a packet imports is byte-identical to a file another packet retains, as Francisco
+  Couzo’s 304 at `fa6237e` is to the copy the issue-763 packet keeps at `964ee2b`, the
+  packet may retain nothing of its own: its declaration pins the file `identical_to`
+  that copy, `devtools.acquire_source --check` compares the two, and
+  `devtools.upper_bound_reports` reads the certificate from the copy as the custody
+  check does and holds it to the pinned SHA-256 again.
+  The retaining packet’s basis (licence, presumption or factual data) is the importing
+  packet’s too, and both READMEs say so.
+  The example is `couzo-n304-2026-10-23`.
 - **A source its author submitted is presumed retainable.** Where the author submitted
   the source to this repository, in an issue, a comment or a pull request, the
   presumption is permission to retain and import the submitter’s own material, and its

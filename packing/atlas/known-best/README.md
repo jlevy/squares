@@ -820,9 +820,9 @@ from 736 to 848, worse on no goal at either.
 Evan Daniel’s regularizer (`evand-regularize-adopt-2026-10-25-n268-303-evand`, 1,708
 CPU-seconds) gives views below both witnesses’ sides, register candidates (row 3) that
 are never admitted: at 268 a certified KKT local minimum at exactly the side of Evan
-Daniel’s later certificate there, $4.48 \times 10^{-12}$ below, whose import is
-think-l49q’s; and at 303, on its first-pass rung, a solve whose KKT certificate fails at
-the relaxed gate, giving a view $3.63 \times 10^{-12}$ below that all three exact routes
+Daniel’s later certificate there, $4.48 \times 10^{-12}$ below, registered as reported
+as T-242; and at 303, on its first-pass rung, a solve whose KKT certificate fails at the
+relaxed gate, giving a view $3.63 \times 10^{-12}$ below that all three exact routes
 here accept.
 Their registration is think-20oj’s. Its same-side view at 268 goes to review
 (row 7: eight squares’ contact counts fall while no total does), and at 303 its
