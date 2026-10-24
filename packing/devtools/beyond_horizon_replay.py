@@ -1293,7 +1293,13 @@ class Release:
         return self.directory / kind
 
     def first_commit_of(self, n: int) -> tuple[str, str]:
-        """The commit that first holds the certificate a row at ``n`` reads, and its time."""
+        """The commit that first holds the certificate a row at ``n`` reads, and its time.
+
+        A recipe row has no file of its own, and its parent's file may be older than the
+        recipe: it is dated by the first commit whose index states its recipe (#793's review
+        A, A8). `first_commits` does not read index history yet, so it refuses a recipe row
+        until the records slice that declares one dates it so (R1, think-llit).
+        """
         later = self.later_commits or {}
         return later.get(n, (self.first_commit, self.committed))
 
@@ -1373,7 +1379,9 @@ def read_declared_rows(body: str, release: Release) -> list[Claim]:
     each count, the certificate the walk records there and its exact header side rounded
     up at 12 places, all of the publication's commit, and for a deletion the squares it
     deletes from that certificate (``deleted``), and for a recipe its parent's certificate
-    and the recipe (``recipe``); `declare_rows` writes them."""
+    and the recipe (``recipe``); `declare_rows` writes them. A row's ``certificate_n`` is
+    the count its certificate's header states: n plus the squares a deletion deletes, and
+    a recipe's parent count, ``source_n`` (#793's review A, A8)."""
     declared = json.loads(body)
     _require(declared.get("format") == WATCHED_FORMAT, f"{release.label}: not {WATCHED_FORMAT}")
     _require(
@@ -1388,7 +1396,9 @@ def read_declared_rows(body: str, release: Release) -> list[Claim]:
             "",
             str(row["printed"]),
             str(row["certificate"]),
-            int(row["n"]) + int(row.get("deleted", 0)),
+            int(row["recipe"]["source_n"])
+            if row.get("recipe")
+            else int(row["n"]) + int(row.get("deleted", 0)),
             int(row.get("deleted", 0)),
             row.get("recipe"),
         )
@@ -1867,35 +1877,88 @@ def manifest(chosen: Release) -> dict[str, str]:
     return acquire_source.read_manifest(chosen.directory / acquire_source.MANIFEST)
 
 
-def hosted_pins(chosen: Release) -> dict[str, str]:
+def hosted_pins(chosen: Release, root: Path | None = None) -> dict[str, str]:
     """The certificates a release's hosted shards hold: every file the packet pins and
-    does not retain whose path names a count above `FROZEN_THROUGH` (`named_count`), with
-    the SHA-256 the packet pins for it."""
+    does not retain under ``root`` (its `archive`), whose path names a count above
+    `FROZEN_THROUGH` (`named_count`), with the SHA-256 the packet pins for it."""
+    root = root or archive(chosen)
     return {
         path: digest
         for path, digest in manifest(chosen).items()
         if (n := named_count(path)) is not None
         and n > FROZEN_THROUGH
-        and not retained_exists(archive(chosen) / path)
+        and not retained_exists(root / path)
     }
 
 
-def is_hosted(chosen: Release, path: str) -> bool:
-    """Whether a certificate is read from the release's hosted shards, not its packet."""
-    return chosen.hosted is not None and not retained_exists(archive(chosen) / path)
+class Hosting:
+    """A release's hosted certificates as one call reads them (#793's reviews A, A3, and
+    B, B3): the packet's pins for the files its shards hold (`hosted_pins`), read once; the
+    source-history receipts' entries for them (`index_entries`), read once when first
+    asked; one reader of the shards (`devtools.hosted_shards.Hosted`); and the packet's
+    retained root (`archive`), read once. A call that reads many rows builds one and passes
+    it to each, so a check over thousands of rows parses the acquisition record, the
+    manifest and each receipt once. A release with no hosted manifest hosts nothing, and
+    reads neither the manifest nor a receipt."""
+
+    def __init__(self, chosen: Release) -> None:
+        self.chosen = chosen
+        self.archive = archive(chosen)
+        self.pins: Mapping[str, str] = (
+            hosted_pins(chosen, self.archive) if chosen.hosted else {}
+        )
+        self._entries: Mapping[str, Mapping[str, Any]] | None = None
+        self._reader: hosted_shards.Hosted | None = None
+
+    def hosts(self, path: str) -> bool:
+        """Whether ``path`` is read from the shards: one of `hosted_pins`."""
+        return path in self.pins
+
+    @property
+    def entries(self) -> Mapping[str, Mapping[str, Any]]:
+        """The source-history entries (`index_entries`), read on first use."""
+        if self._entries is None:
+            self._entries = index_entries(self.chosen)
+        return self._entries
+
+    def entry(self, path: str, n: int, where: str) -> Mapping[str, Any]:
+        """A hosted certificate's source-history entry, held to the packet's pin and to
+        the count ``n``: the one place the fast check reads a hosted side or blob from."""
+        found = self.entries.get(path)
+        _require(found is not None, f"{where}: hosted, and no source-history receipt lists it")
+        assert found is not None
+        _require(
+            found["sha256"] == self.pins[path] and found["n"] == n,
+            f"{where}: the source history's digest or count is not the packet's",
+        )
+        return found
+
+    def read(self, path: str) -> bytes:
+        """A hosted certificate's bytes from the shards, held to its pin."""
+        chosen = self.chosen
+        assert chosen.hosted is not None
+        try:
+            if self._reader is None:
+                self._reader = hosted_shards.hosted(REPO / chosen.hosted, self.pins, REPO)
+            return self._reader.read(path)
+        except hosted_shards.ShardError as error:
+            raise ReplayError(f"{chosen.label}: {error}") from error
 
 
-def certificate_bytes(chosen: Release, path: str) -> bytes:
+def is_hosted(chosen: Release, path: str, hosting: Hosting | None = None) -> bool:
+    """Whether a certificate is read from the release's hosted shards, not its packet: it
+    is one of `hosted_pins`, the same predicate (#793's review B, B3)."""
+    return (hosting or Hosting(chosen)).hosts(path)
+
+
+def certificate_bytes(chosen: Release, path: str, hosting: Hosting | None = None) -> bytes:
     """A certificate's bytes: retained in the packet, or, for one it pins and does not
     retain, read from the release's hosted shards through `sqpack.hosted_data.require`
     and held to the packet's pin (`devtools.hosted_shards`)."""
-    if not is_hosted(chosen, path):
-        return read_retained_bytes(archive(chosen) / path)
-    assert chosen.hosted is not None
-    try:
-        return hosted_shards.read(REPO / chosen.hosted, hosted_pins(chosen), path, REPO)
-    except hosted_shards.ShardError as error:
-        raise ReplayError(f"{chosen.label}: {error}") from error
+    hosting = hosting or Hosting(chosen)
+    if not hosting.hosts(path):
+        return read_retained_bytes(hosting.archive / path)
+    return hosting.read(path)
 
 
 def index_entries(chosen: Release) -> dict[str, Mapping[str, Any]]:
@@ -1911,30 +1974,27 @@ def index_entries(chosen: Release) -> dict[str, Mapping[str, Any]]:
     return found
 
 
-def certificate_side(chosen: Release, path: str, n: int, where: str) -> Fraction:
+def certificate_side(
+    chosen: Release, path: str, n: int, where: str, hosting: Hosting | None = None
+) -> Fraction:
     """A certificate's exact side: its header line (`header_side`), or for a hosted one
-    the side its source-history receipt states, held to the digest the packet pins."""
-    if not is_hosted(chosen, path):
-        return header_side(read_retained_bytes(archive(chosen) / path), n, where)
-    entry = index_entries(chosen).get(path)
-    _require(entry is not None, f"{where}: hosted, and no source-history receipt lists it")
-    assert entry is not None
-    _require(
-        entry["sha256"] == manifest(chosen).get(path) and entry["n"] == n,
-        f"{where}: the source history's digest or count is not the packet's",
-    )
-    return Fraction(str(entry["side"]))
+    the side its source-history receipt states, held to the digest the packet pins
+    (`Hosting.entry`)."""
+    hosting = hosting or Hosting(chosen)
+    if not hosting.hosts(path):
+        return header_side(read_retained_bytes(hosting.archive / path), n, where)
+    return Fraction(str(hosting.entry(path, n, where)["side"]))
 
 
-def blob_of(chosen: Release, path: str) -> str:
+def blob_of(chosen: Release, path: str, n: int, hosting: Hosting | None = None) -> str:
     """A certificate's Git blob: from its retained bytes, or for a hosted one from its
-    source-history receipt, which held it to the clone's tree."""
-    if not is_hosted(chosen, path):
-        return git_blob(read_retained_bytes(archive(chosen) / path))
-    entry = index_entries(chosen).get(path)
-    _require(entry is not None, f"{chosen.label} {path}: no source-history receipt lists it")
-    assert entry is not None
-    return str(entry["blob"])
+    source-history receipt, which held it to the clone's tree, the entry held to the
+    packet's pin and the count ``n`` as for its side (`Hosting.entry`, #793's review B,
+    B3)."""
+    hosting = hosting or Hosting(chosen)
+    if not hosting.hosts(path):
+        return git_blob(read_retained_bytes(hosting.archive / path))
+    return str(hosting.entry(path, n, f"{chosen.label} {path}")["blob"])
 
 
 def archive(chosen: Release) -> Path:
@@ -1976,17 +2036,12 @@ def certificate(chosen: Release, row: Claim) -> legacy.Certificate:
     return parsed
 
 
-#: A certificate's header and the rational literals it may state, as
-#: `devtools.evand_exact_certificates.parse` reads them (`header_side`).
-_HEADER_COUNT = re.compile(r"[1-9]\d*")
-_HEADER_SIDE = re.compile(r"-?\d+(?:/[1-9]\d*|\.\d+)?")
-
-
 def header_side(raw: bytes, expected_n: int, where: str) -> Fraction:
     """A certificate's side from its header line alone, ``n S``, the first line that is
     neither blank nor a comment, read by the rule `devtools.evand_exact_certificates.parse`
-    applies to it; the count must be ``expected_n``. The squares are not read: their parse
-    is what the replay decides, and the receipts hold."""
+    applies to it (`devtools.evand_exact_certificates.header`, #793's review A, A12); the
+    count must be ``expected_n``. The squares are not read: their parse is what the replay
+    decides, and the receipts hold."""
     start = 0
     while start <= len(raw):
         end = raw.find(b"\n", start)
@@ -1995,17 +2050,10 @@ def header_side(raw: bytes, expected_n: int, where: str) -> Fraction:
         start = end + 1
         if not line or line.startswith("#"):
             continue
-        parts = line.split()
-        _require(
-            len(parts) == 2
-            and _HEADER_COUNT.fullmatch(parts[0]) is not None
-            and _HEADER_SIDE.fullmatch(parts[1]) is not None,
-            f"{where}: the header is not `n S`",
-        )
-        _require(int(parts[0]) == expected_n, f"{where}: the header says n = {parts[0]}")
-        side = Fraction(parts[1])
-        _require(side > 0, f"{where}: the side must be positive")
-        return side
+        try:
+            return legacy.header(line.split(), expected_n=expected_n)[1]
+        except legacy.CertificateError as error:
+            raise ReplayError(f"{where}: {error}") from error
     raise ReplayError(f"{where}: no header")
 
 
@@ -2018,18 +2066,20 @@ def decided_sides(chosen: Release) -> dict[int, Fraction]:
     that check's time (think-llit, Gate Cost)."""
     rows = decided_claims(chosen)
     if not chosen.derived:
-        sides: dict[int, Fraction] = {}
-        for row in rows:
-            where = f"{chosen.label} n={row.n} {row.path}"
-            if row.recipe is None:
-                sides[row.n] = certificate_side(chosen, row.path, row.certificate_n, where)
-                continue
-            # A recipe row's side is its parent's times the tiles, plus its layers; the
-            # construction checker holds the recipe's stated bound to it.
-            parent = certificate_side(chosen, row.path, int(row.recipe["source_n"]), where)
-            tiles, layers = int(row.recipe["tiles_per_side"]), int(row.recipe["layers"])
-            sides[row.n] = tiles * parent + layers
-        return sides
+        hosting = Hosting(chosen)
+        return {
+            row.n: claim_side(
+                row,
+                certificate_side(
+                    chosen,
+                    row.path,
+                    row.certificate_n,
+                    f"{chosen.label} n={row.n} {row.path}",
+                    hosting,
+                ),
+            )
+            for row in rows
+        }
     stated = {
         item["n"]: Fraction(item["exact_side"])
         for item in _read(chosen.directory / reports.CLAIMS)["results"]
@@ -2039,6 +2089,16 @@ def decided_sides(chosen: Release) -> dict[int, Fraction]:
         f"{chosen.label}: the claim record does not state every decided side",
     )
     return {row.n: stated[row.certificate_n] for row in rows}
+
+
+def claim_side(row: Claim, parent: Fraction) -> Fraction:
+    """A row's exact side from its certificate's: a recipe row's is the parent's times
+    the tiles, plus the layers (the construction checker holds the recipe's stated bound
+    to it); any other row's is its certificate's, a deletion's too. `decided_sides` and
+    `release_sides` both read a row's side by this rule (#793's review B, B2)."""
+    if row.recipe is None:
+        return parent
+    return int(row.recipe["tiles_per_side"]) * parent + int(row.recipe["layers"])
 
 
 def ceiling(side: Fraction, places: int = PLACES) -> str:
@@ -2328,6 +2388,7 @@ def recipe_problems(chosen: Release, *, replay: bool, workers: int) -> list[str]
             c["refused_by_sqpack"] and c["refused_by_independent"] for c in item["controls"]
         )
     ]
+    problems += recipe_pin_problems(chosen, rows, receipt["parents"])
     if receipt["rows"] != recipe_decisions(chosen, {**_replayed_parents(chosen), **parents}):
         problems.append(f"{chosen.label}: the recipe decisions differ from their derivation")
     problems.extend(
@@ -2351,6 +2412,36 @@ def recipe_problems(chosen: Release, *, replay: bool, workers: int) -> list[str]
     return problems
 
 
+def recipe_pin_problems(
+    chosen: Release, rows: Sequence[Claim], parents: Sequence[Mapping[str, Any]]
+) -> list[str]:
+    """Where a recipe is not bound to the bytes the packet pins (#793's review A, A6): each
+    declared recipe's parent digest must be the packet's pin for its parent, and each stored
+    parent replay must have that pin and its certificate's header side (`certificate_side`),
+    so a stale parent that agrees with its recipe is refused without ``--replay``."""
+    pins = manifest(chosen)
+    hosting = Hosting(chosen)
+    problems = [
+        f"{chosen.label} n={row.n}: the recipe's parent digest is not the packet's pin for "
+        f"{row.path}"
+        for row in rows
+        if (row.recipe or {}).get("sha256") != pins.get(row.path)
+    ]
+    for item in parents:
+        where = f"{chosen.label}: the recipe parent {item['certificate']}"
+        if item["certificate_sha256"] != pins.get(item["certificate"]):
+            problems.append(f"{where} is not the certificate the packet pins")
+            continue
+        try:
+            side = certificate_side(chosen, item["certificate"], int(item["n"]), where, hosting)
+        except ReplayError as error:
+            problems.append(str(error))
+            continue
+        if Fraction(str(item["exact_side"])) != side:
+            problems.append(f"{where}: its side is not its certificate's header's")
+    return problems
+
+
 # --------------------------------------------------------------------------- first commits
 
 
@@ -2371,6 +2462,13 @@ def first_commits(issue: int | str, clone: Path) -> dict[str, Any]:
     """
     chosen = release(issue)
     custody(chosen)
+    listed = [*decided_claims(chosen), *held_claims(chosen)]
+    for row in listed:
+        _require(
+            row.recipe is None,
+            f"{chosen.label} n={row.n}: a recipe row is dated by the first commit whose index "
+            "states its recipe, which this module does not read yet (think-llit)",
+        )
     chain = _git(clone, "rev-list", "--reverse", chosen.retained).split()
     _require(chain and chain[-1] == chosen.retained, "the clone does not hold the commit")
     dates = dict(
@@ -2383,8 +2481,13 @@ def first_commits(issue: int | str, clone: Path) -> dict[str, Any]:
             meta, _, _path = line.partition("\t")
             first.setdefault(meta.split()[2], commit)
     rows = []
-    for row in [*decided_claims(chosen), *held_claims(chosen)]:
-        blob = _pinned_blob(chosen, row, clone) if chosen.derived else blob_of(chosen, row.path)
+    hosting = Hosting(chosen)
+    for row in listed:
+        blob = (
+            _pinned_blob(chosen, row, clone)
+            if chosen.derived
+            else blob_of(chosen, row.path, row.certificate_n, hosting)
+        )
         commit = first[blob]
         item = {
             "n": row.n,
@@ -2845,21 +2948,25 @@ def release_sides(chosen: Release, clone: Path | None) -> dict[int, Fraction]:
     record = _read(chosen.directory / reports.CLAIMS)
     stated = {item["n"]: Fraction(item["exact_side"]) for item in record["results"]}
     sides: dict[int, Fraction] = {}
+    hosting = Hosting(chosen)
     for row in claims(chosen):
         if row.n in stated:
             sides[row.n] = stated[row.n]
             continue
-        if is_hosted(chosen, row.path):
-            raw = certificate_bytes(chosen, row.path)
-            sides[row.n] = header_side(raw, row.certificate_n, f"{chosen.label} n={row.n}")
+        # Both branches read the certificate's header at its own count, and take the row's
+        # side from it as `decided_sides` does (`claim_side`, #793's review B, B2).
+        where = f"{chosen.label} n={row.n}"
+        if hosting.hosts(row.path):
+            raw = hosting.read(row.path)
+            sides[row.n] = claim_side(row, header_side(raw, row.certificate_n, where))
             continue
-        _require(clone is not None, f"{chosen.label} n={row.n}: no clone to read it from")
+        _require(clone is not None, f"{where}: no clone to read it from")
         assert clone is not None
         blob = _pinned_blob(chosen, row, clone)
         header = _header(_blobs(clone, [blob])[blob])
-        _require(header is not None and header[0] == row.n, f"n={row.n}: no header")
+        _require(header is not None and header[0] == row.certificate_n, f"{where}: no header")
         assert header is not None
-        sides[row.n] = header[1]
+        sides[row.n] = claim_side(row, header[1])
     return sides
 
 
@@ -3121,8 +3228,10 @@ def ledger_sources(issue: int | str, read_at_main: str, read_on: str) -> dict[st
             f"{row.path} (its header), retained in the {de_winter.packet} packet",
         )
         | {"printed": row.printed}
-        for row in held_claims(de_winter)
-        if row.n in counts
+        # By the constant, not #666's window, which a records slice lifts (#793's review
+        # B, B1): this frozen walk read #666's claims above 1024.
+        for row in claims(de_winter)
+        if row.n > FROZEN_THROUGH and row.n in counts
     ]
     own = []
     for row in claims(chosen):
@@ -3839,15 +3948,13 @@ def source_history(issue: int | str, clone: Path, walk: Walk | None = None) -> d
             first.setdefault((blob, path), commit)
             if commit == chosen.retained:
                 at_pin.setdefault(n, []).append((path, blob))
+    hosting = Hosting(chosen)
     hosted = {
-        blob: path
-        for items in at_pin.values()
-        for path, blob in items
-        if is_hosted(chosen, path)
+        blob: path for items in at_pin.values() for path, blob in items if hosting.hosts(path)
     }
     texts = _blobs(clone, sorted({blob for blob, _ in first} - set(hosted)))
     for blob, path in hosted.items():
-        raw = certificate_bytes(chosen, path)
+        raw = hosting.read(path)
         _require(git_blob(raw) == blob, f"{path}: the hosted bytes are not the clone's blob")
         texts[blob] = raw
     sides: dict[str, Fraction] = {}
@@ -4018,7 +4125,7 @@ def release_walk_sources(
         if walk.reaches(row["n"])
         and (not chosen.changed_only or row["blob_first_commit"] == chosen.retained)
     }
-    later = later_publications(chosen)
+    later = later_publications(chosen, walk)
     starts = _start_sides(walk, read_at_main, [*own, *later], read_on)
     highs = _least_highs(starts)
     claims = []
@@ -4310,16 +4417,28 @@ def write_later_commits(issue: int | str, clone: Path) -> dict[str, int]:
     return {item["commit"][:7]: len(item["publications"]) for item in record["commits"]}
 
 
-def later_publications(chosen: Release) -> dict[int, list[dict[str, Any]]]:
+def later_publications(
+    chosen: Release, walk: Walk | None = None
+) -> dict[int, list[dict[str, Any]]]:
     """A release's later commits' publications (`later_commits`), by count, each with its
-    commit and push; none for a release that names no later commits."""
+    commit and push; none for a release that names no later commits. The receipt must
+    cover every count ``walk`` reaches (its own walk by default): one written to 1024 is
+    refused for a walk above it, rather than passing over every later publication there
+    (#793's review B, B4)."""
     if not chosen.later_reads:
         return {}
+    walk = walk or walk_of(chosen)
     record = _read(chosen.path(LATER_COMMITS))
     _require(
         [(item["commit"], item["pushed"]) for item in record["commits"]]
         == list(chosen.later_reads),
         f"{chosen.label}: the later-commits receipt names other commits",
+    )
+    limit = record.get("limit")
+    _require(
+        limit is None or (walk.through is not None and limit >= walk.through),
+        f"{chosen.label}: the later-commits receipt reads to {limit}, and {walk.name} "
+        f"reaches {walk.reach}",
     )
     repository = repository_of(chosen.source_url)
     found: dict[int, list[dict[str, Any]]] = {}
@@ -6084,7 +6203,7 @@ def _cross_check_problems(
         expected = [(row.n, row.path, pinned[row.path]) for row in held]
         found = [(item["n"], item["certificate"], item["sha256"]) for item in commits["rows"]]
     else:
-        expected = [(row.n, row.path, blob_of(chosen, row.path)) for row in held]
+        expected = retained_blobs(chosen, held)
         found = [(item["n"], item["certificate"], item["blob"]) for item in commits["rows"]]
     if found != expected:
         problems.append(f"{chosen.label}: the first commits are not the retained certificates'")
@@ -6111,6 +6230,15 @@ def _cross_check_problems(
     if chosen.path(GOEBEL).read_text(encoding="utf-8") != rebuilt:
         problems.append(f"{chosen.label}: the Göbel receipt differs from its rebuild")
     return problems
+
+
+def retained_blobs(chosen: Release, rows: Sequence[Claim]) -> list[tuple[int, str, str]]:
+    """Each row's count, certificate and Git blob, as the first-commits receipt lists
+    them, from one `Hosting` for the whole list (#793's review A, A3)."""
+    hosting = Hosting(chosen)
+    return [
+        (row.n, row.path, blob_of(chosen, row.path, row.certificate_n, hosting)) for row in rows
+    ]
 
 
 def check(*, replay: bool, workers: int = 1, issues: Sequence[int | str] = ()) -> list[str]:

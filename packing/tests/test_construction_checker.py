@@ -239,3 +239,66 @@ def test_a_tiled_certificate_written_out_is_decided_on_both_routes() -> None:
     result = checker.decide(recipe, parent)
     assert (result["capacity"], Fraction(result["side"])) == (held, written.side)
     assert all(item["refused"] for item in checker.controls(recipe, parent))
+
+
+def test_three_tiles_and_two_layers_write_out_and_are_decided_on_both_routes() -> None:
+    """Review B, B6: no index entry tiles or adds two layers, so t = 3 and L = 2 are checked
+    by writing them out. The 68-square certificate becomes 720 squares at side 3S + 2,
+    which passes both routes, and the checker decides the recipe at the same capacity and
+    side; one square more than the capacity is refused. The parent's six controls are
+    decided by the t = 2 test above, so here they stand in, refused."""
+    text = read_retained_text(SMALL)
+    small = legacy.parse(text, expected_n=68)
+    row = _decided(small, "certificates/n68.cert", controls=False)
+    row["certificate_sha256"] = hashlib.sha256(text.encode()).hexdigest()
+    row["controls"] = [
+        {"refused_by_sqpack": True, "refused_by_independent": True} for _ in base.CONTROLS
+    ]
+    parent = checker.parent_from_replay(row)
+    recipe = checker.Recipe(
+        n=720,
+        kind=checker.TILING,
+        source_n=68,
+        parent=parent.path,
+        parent_sha256=parent.sha256,
+        bound=3 * small.side + 2,
+        tiles_per_side=3,
+        layers=2,
+    )
+    assert checker.capacity(recipe, small.side) == 720
+    written = checker.write_out(recipe, small)
+    assert (written.n, written.side) == (720, 3 * small.side + 2)
+    assert base.decide(base.geometry(written))["passed"]
+    assert Fraction(checker.decide(recipe, parent)["side"]) == written.side
+    with pytest.raises(checker.RecipeRefusedError, match="above the capacity 720"):
+        checker.decide(dataclasses.replace(recipe, n=721), parent)
+
+
+def test_every_recipe_in_763_s_claim_map_holds_the_lemma() -> None:
+    """Review A, A9: all 241 recipes in #763's claim map, its claims and its unrequested
+    rows, hold the lemma on their parents' header sides alone (OR-1): each parent is the
+    retained certificate the packet pins with the digest the claim map states, the stated
+    capacity is the lemma's, the count is the capacity less the stated deletions, and the
+    bound is tS + L."""
+    claim_map = _read(I763 / "receipts/claim-map.json")
+    items = [
+        item
+        for key in ("claims", "unrequested")
+        for item in claim_map.get(key, [])
+        if item.get("construction")
+    ]
+    pins = replay.manifest(replay.release(763))
+    sides: dict[str, Fraction] = {}
+    for item in items:
+        recipe = checker.recipe_from_index(item)
+        if recipe.parent not in sides:
+            raw = read_retained_bytes(I763 / "source" / recipe.parent)
+            assert (
+                hashlib.sha256(raw).hexdigest() == recipe.parent_sha256 == pins[recipe.parent]
+            )
+            sides[recipe.parent] = replay.header_side(raw, recipe.source_n, recipe.parent)
+        side = sides[recipe.parent]
+        held = checker.capacity(recipe, side)
+        assert (held, recipe.n + recipe.deleted) == (recipe.capacity, held), recipe.n
+        assert recipe.bound == recipe.tiles_per_side * side + recipe.layers, recipe.n
+    assert (len(items), len(sides)) == (241, 31)

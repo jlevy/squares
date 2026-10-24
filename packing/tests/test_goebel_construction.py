@@ -178,3 +178,12 @@ def test_a_comparison_reads_the_sign_exactly() -> None:
     assert result["tally"] == {"above": 1, "equal": 0, "below": 1}
     assert result["above"] == [2043]
     assert result["detail"][0]["goebel"] == form.text()
+
+
+def test_a_larger_build_picks_the_same_member_at_every_proved_count() -> None:
+    """Review B, B5: a side the build to `BUILD` proves final is the one twice that build
+    gives, member for member, at every count to `reach`: the same side, family and count,
+    so the member a receipt names does not depend on the build that proved it."""
+    first, second = goebel.table(goebel.BUILD), goebel.table(2 * goebel.BUILD)
+    for n in range(goebel.HORIZON + 1, goebel.reach() + 1):
+        assert first[n] == second[n], n

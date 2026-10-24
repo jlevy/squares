@@ -269,9 +269,10 @@ def test_a_recipe_row_is_decided_by_the_checker_and_held_to_its_receipt(
 def test_the_fast_check_reads_a_hosted_row_without_opening_a_shard(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    """A hosted row's side and Git blob come from the source-history receipt, held to the
-    packet's pin: no shard is opened, and a receipt whose digest is not the pin's is
-    refused."""
+    """A hosted row's side and Git blob come from the source-history receipt, each held to
+    the packet's pin and the row's count by one helper (`Hosting.entry`): no shard is
+    opened, and an entry whose digest is not the pin's is refused for its blob as for its
+    side (review B, B3)."""
     chosen = dataclasses.replace(replay.release(732), hosted=Path("packing/hosted/none.yaml"))
     row = replay.decided_claims(chosen)[0]
     raw = read_retained_bytes(replay.archive(chosen) / row.path)
@@ -282,21 +283,112 @@ def test_the_fast_check_reads_a_hosted_row_without_opening_a_shard(
         "blob": replay.git_blob(raw),
         "side": legacy_side(raw, row.n),
     }
-    monkeypatch.setattr(
-        replay, "retained_exists", lambda path: not str(path).endswith(row.path)
-    )
+    pin = entry["sha256"]
+    monkeypatch.setattr(replay, "hosted_pins", lambda _chosen, _root=None: {row.path: pin})
     monkeypatch.setattr(replay, "index_entries", lambda _chosen: {row.path: entry})
 
     def opened(*_args: object) -> bytes:
         raise AssertionError("the fast check opened a shard")
 
-    monkeypatch.setattr(hosted_shards, "read", opened)
+    monkeypatch.setattr(hosted_shards, "hosted", opened)
     assert replay.is_hosted(chosen, row.path)
     assert replay.decided_sides(chosen)[row.n] == Fraction(entry["side"])
-    assert replay.blob_of(chosen, row.path) == entry["blob"]
+    assert replay.blob_of(chosen, row.path, row.n) == entry["blob"]
     entry["sha256"] = "0" * 64
-    with pytest.raises(replay.ReplayError, match="digest or count is not the packet's"):
-        replay.decided_sides(chosen)
+    for read in (
+        lambda: replay.decided_sides(chosen),
+        lambda: replay.blob_of(chosen, row.path, row.n),
+        lambda: replay.retained_blobs(chosen, [row]),
+    ):
+        with pytest.raises(replay.ReplayError, match="digest or count is not the packet's"):
+            read()
+
+
+def test_hosted_and_its_pins_are_one_predicate(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Review B, B3: a certificate is hosted exactly when it is one of `hosted_pins`: a file
+    the packet pins and does not retain whose path names a count above 1024. An unretained
+    file at or below 1024 is neither, and is read from the packet, so its absence is the
+    packet's fault and says so; a release with no hosted manifest hosts nothing."""
+    pins = {
+        "certificates/0000-0999/n500.cert": "a" * 64,
+        "certificates/1000-1999/n1100.cert": "b" * 64,
+        "certificates/1000-1999/n1200.cert": "c" * 64,
+        "README.md": "d" * 64,
+    }
+    monkeypatch.setattr(replay, "manifest", lambda _chosen: pins)
+    monkeypatch.setattr(
+        replay, "retained_exists", lambda path: str(path).endswith("n1200.cert")
+    )
+    chosen = dataclasses.replace(replay.release(732), hosted=Path("packing/hosted/none.yaml"))
+    hosted = replay.hosted_pins(chosen)
+    assert hosted == {"certificates/1000-1999/n1100.cert": "b" * 64}
+    assert [path for path in pins if replay.is_hosted(chosen, path)] == list(hosted)
+    plain = replay.release(732)
+    assert replay.Hosting(plain).pins == {}
+    assert not any(replay.is_hosted(plain, path) for path in pins)
+
+
+def test_the_fast_check_reads_its_receipts_once_for_5000_hosted_rows(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Review A, A3: a check over a release's hosted rows parses the packet's manifest and
+    each source-history receipt once a call, not once a row. At R2's scale, 5,000 hosted
+    rows, `decided_sides` and the first-commit blob list each read the manifest once and
+    the receipt once."""
+    counts = range(1025, 6025)
+    paths = {
+        n: f"certificates/{n // 1000 * 1000:04d}-{n // 1000 * 1000 + 999}/n{n}.cert"
+        for n in counts
+    }
+    pins = {paths[n]: hashlib.sha256(str(n).encode()).hexdigest() for n in counts}
+    receipt = tmp_path / "source-history.json"
+    entries = [
+        {
+            "n": n,
+            "certificate": paths[n],
+            "sha256": pins[paths[n]],
+            "blob": f"{n:040x}",
+            "side": str(n),
+        }
+        for n in counts
+    ]
+    receipt.write_text(json.dumps({"at_commit": entries}), encoding="utf-8")
+    rows = [replay.Claim(n, "", str(n), paths[n], n, 0) for n in counts]
+    reads: dict[str, int] = {"manifest": 0, "receipt": 0, "archive": 0}
+    read = replay._read  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+    root = replay.archive(replay.release(732))
+
+    def archive(_chosen: replay.Release) -> Path:
+        reads["archive"] += 1
+        return root
+
+    def manifest(_chosen: replay.Release) -> dict[str, str]:
+        reads["manifest"] += 1
+        return pins
+
+    def counted(path: Path) -> Any:
+        reads["receipt"] += path == receipt
+        return read(path)
+
+    chosen = dataclasses.replace(replay.release(732), hosted=Path("packing/hosted/none.yaml"))
+    monkeypatch.setattr(replay, "manifest", manifest)
+    monkeypatch.setattr(replay, "archive", archive)
+    monkeypatch.setattr(replay, "_read", counted)
+    monkeypatch.setattr(replay, "retained_exists", lambda _path: False)
+    monkeypatch.setattr(replay, "source_history_path", lambda _chosen, _walk=None: receipt)
+    monkeypatch.setattr(replay, "decided_claims", lambda _chosen: rows)
+    sides = replay.decided_sides(chosen)
+    assert (len(sides), sides[6024], reads) == (
+        5000,
+        6024,
+        {"manifest": 1, "receipt": 1, "archive": 1},
+    )
+    blobs = replay.retained_blobs(chosen, rows)
+    assert (len(blobs), blobs[0][2], reads) == (
+        5000,
+        f"{1025:040x}",
+        {"manifest": 2, "receipt": 2, "archive": 2},
+    )
 
 
 def legacy_side(raw: bytes, n: int) -> str:
@@ -338,11 +430,13 @@ def test_source_history_above_1024_reads_the_retained_commit_from_the_shards(
     shard_bytes = {path: raw}
     read: list[str] = []
 
-    def from_shard(_chosen: replay.Release, wanted: str) -> bytes:
+    def from_shard(_hosting: replay.Hosting, wanted: str) -> bytes:
         read.append(wanted)
         return shard_bytes[wanted]
 
-    monkeypatch.setattr(replay, "certificate_bytes", from_shard)
+    pins = {path: hashlib.sha256(raw).hexdigest()}
+    monkeypatch.setattr(replay, "hosted_pins", lambda _chosen, _root=None: pins)
+    monkeypatch.setattr(replay.Hosting, "read", from_shard)
     pin_blob = replay.git_blob(raw)
     blobs = replay._blobs  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
 
@@ -383,10 +477,125 @@ def test_a_hosted_certificate_is_read_through_the_manifest(
     )
     chosen = dataclasses.replace(replay.release(732), hosted=manifest.relative_to(tmp_path))
     pins = {path: hashlib.sha256(raw).hexdigest()}
-    monkeypatch.setattr(replay, "hosted_pins", lambda _chosen: pins)
+    monkeypatch.setattr(replay, "hosted_pins", lambda _chosen, _root=None: pins)
     monkeypatch.setattr(replay, "REPO", tmp_path)
     monkeypatch.setattr(replay, "archive", lambda _chosen: tmp_path / "no-packet")
     assert replay.certificate_bytes(chosen, path) == raw
     pins[path] = "0" * 64
     with pytest.raises(replay.ReplayError, match="not the ones the packet pins"):
         replay.certificate_bytes(chosen, path)
+
+
+def test_a_recipe_bound_to_other_bytes_than_the_pin_is_refused(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Review A, A6: a stored parent replay must have the packet's pin and its certificate's
+    header side, and a declared recipe's parent digest must be the pin, so a stale parent
+    that agrees with its recipe is refused without ``--replay``. A copy of the replayed
+    403 stored as a parent holds; with another digest, another side, or a declared recipe
+    naming another digest, each is refused for what it is."""
+    chosen = _with_recipe(tmp_path)
+    monkeypatch.setitem(replay.RELEASES, chosen.label, chosen)
+    replay.write_recipe_decisions([763], workers=1)
+    receipt = json.loads(chosen.path(replay.RECIPES).read_text(encoding="utf-8"))
+    replayed = replay._replayed_parents(chosen)  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+    (row,) = replay.recipe_claims(chosen)
+    parent = dict(replayed[row.path])
+
+    def problems(stored: dict[str, Any]) -> list[str]:
+        written = receipt | {"parents": [stored]}
+        chosen.path(replay.RECIPES).write_text(json.dumps(written), encoding="utf-8")
+        return replay.recipe_problems(chosen, replay=False, workers=1)
+
+    assert problems(parent) == []
+    where = f"#763: the recipe parent {row.path}"
+    assert f"{where} is not the certificate the packet pins" in problems(
+        parent | {"certificate_sha256": "0" * 64}
+    )
+    assert f"{where}: its side is not its certificate's header's" in problems(
+        parent | {"exact_side": "20"}
+    )
+    declared = json.loads(Path(str(chosen.declared)).read_text(encoding="utf-8"))
+    for item in declared["rows"]:
+        if item["n"] == 444:
+            item["recipe"]["sha256"] = "0" * 64
+    Path(str(chosen.declared)).write_text(json.dumps(declared), encoding="utf-8")
+    assert (
+        f"#763 n=444: the recipe's parent digest is not the packet's pin for {row.path}"
+        in problems(parent)
+    )
+
+
+def test_a_recipe_row_s_side_is_read_one_way(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Review A, A8, as review B's B2 amends it: a recipe row's certificate count is its
+    parent's, 403 at 444, and `release_sides` reads its side as `decided_sides` does, tS + L,
+    not the parent's side one layer low. A recipe row is dated by the first commit whose
+    index states its recipe, which `first_commits` does not read yet, so it refuses one
+    before it reads a clone."""
+    chosen = _with_recipe(tmp_path)
+    monkeypatch.setitem(replay.RELEASES, chosen.label, chosen)
+    (row,) = replay.recipe_claims(chosen)
+    assert (row.certificate_n, row.recipe["source_n"] if row.recipe else None) == (403, 403)
+    with pytest.raises(replay.ReplayError, match="a recipe row is dated by the first commit"):
+        replay.first_commits(763, tmp_path / "no-clone")
+    decided = replay.decided_sides(chosen)[444]
+    raw = read_retained_bytes(replay.archive(chosen) / row.path)
+    hosted = dataclasses.replace(chosen, hosted=Path("packing/hosted/none.yaml"))
+    monkeypatch.setattr(replay, "hosted_pins", lambda _chosen, _root=None: {row.path: "pinned"})
+    monkeypatch.setattr(replay.Hosting, "read", lambda _hosting, _path: raw)
+    monkeypatch.setattr(replay, "claims", lambda _chosen: [row])
+    assert replay.release_sides(hosted, None) == {444: decided}
+    assert replay.ceiling(decided) == "21.571428571434"
+
+
+def test_a_changed_byte_in_a_record_or_goebel_receipt_is_refused(tmp_path: Path) -> None:
+    """Review A, A5: the fast check holds each release's claims record and Göbel receipt to
+    their rebuilds byte for byte. In a copy of #666's, one added byte in each is refused,
+    and the copy as written holds."""
+    chosen = replay.release(666)
+    receipts = tmp_path / "receipts"
+    receipts.mkdir()
+    for path in (chosen.directory / chosen.receipts).iterdir():
+        (receipts / path.name).write_bytes(path.read_bytes())
+    record = tmp_path / "record.json"
+    record.write_bytes(chosen.path(replay.RECORD).read_bytes())
+    copied = dataclasses.replace(chosen, receipts=receipts, record=record)
+    assert replay.release_problems(copied, replay=False, workers=1) == []
+    for path in (record, receipts / replay.GOEBEL.name):
+        path.write_text(path.read_text(encoding="utf-8") + "\n", encoding="utf-8")
+    assert replay.release_problems(copied, replay=False, workers=1) == [
+        "#666: the beyond-horizon record differs from its rebuild",
+        "#666: the Göbel receipt differs from its rebuild",
+    ]
+
+
+def test_lifting_666_leaves_the_frozen_719_walk_s_sources_as_written(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Review B, B1: the #719 walk's sources read #666's claims above 1024 by the constant,
+    not by #666's window. With #666's window lifted in memory, as R1 lifts it, the frozen
+    walk's sources.yaml still rebuilds as written."""
+    from sqpack.yamlio import safe_load  # noqa: PLC0415
+
+    directory = replay.WALKS[replay.ISSUE_719].directory
+    sources = safe_load((directory / "sources.yaml").read_text(encoding="utf-8"))
+    lifted = dataclasses.replace(replay.release(666), decided_through=None, decided=19)
+    monkeypatch.setitem(replay.RELEASES, lifted.label, lifted)
+    assert replay.held_claims(lifted) == []
+    rebuilt = replay.ledger_sources(719, sources["read_at_main"], str(sources["read_on"]))
+    assert rebuilt == sources
+
+
+def test_a_later_commits_receipt_that_stops_below_the_walk_is_refused(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Review B, B4: f1ceee4's later-commits receipt reads to 1024, its own walk's reach;
+    asked for the walk above 1024, which reaches every count above it, it is refused rather
+    than passing over every later publication there."""
+    chosen = replay.release("#732 comment 6374211504")
+    assert replay.later_publications(chosen)
+    monkeypatch.setitem(replay.WALKS, ABOVE, _above())
+    with pytest.raises(replay.ReplayError, match=f"reads to 1024, and {ABOVE} reaches above"):
+        replay.later_publications(chosen, replay.WALKS[ABOVE])
