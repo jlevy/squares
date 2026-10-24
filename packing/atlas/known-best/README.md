@@ -767,6 +767,21 @@ The evidence is retained in
 [`cases/regularized_drawings/think-h01y-2026-10-24/`](../../cases/regularized_drawings/think-h01y-2026-10-24/README.md).
 The index still draws 95 views.
 
+The same pass adopted Amund Kristiansen’s #755 certificate (T-239, think-tqb5) at 303,
+moving the house best packing from T-230 by $9.89 \times 10^{-6}$. Both generators ran
+on the new witness: grid-slack at 0.5, 1 and 5 degrees
+(`grid-slack-adopt-2026-10-24-n303-grid-deg05`, `-grid-deg1` and `-grid-deg5`, 77
+CPU-seconds) draws one view at the witness’s side, with the axis tool’s light, uneven
+and near-axis counts (9, 37 and 0) and 760 / 776 sides against 756 / 774, worse on no
+goal, so the selection admits the 0.5 degree view (row 10) and it is drawn.
+Evan Daniel’s regularizer (`evand-regularize-adopt-2026-10-24-n303-evand`, 240
+CPU-seconds) solves the witness to a certified KKT local minimum and gives a view
+$2.17 \times 10^{-11}$ below its side, which waits to be registered (row 3, think-8r5w).
+`SETTLED`’s entry at 303, made on T-230’s witness, is removed.
+The evidence is retained in
+[`cases/regularized_drawings/think-tqb5-2026-10-23/`](../../cases/regularized_drawings/think-tqb5-2026-10-23/README.md).
+The index still draws 95 views.
+
 ### The default picture
 
 On 13 October 2026 the owner made the regularized view the default picture, with the

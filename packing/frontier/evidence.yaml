@@ -39804,6 +39804,225 @@ evidence:
       not by this checker; its own controls are the review's eight mutants and its
       self-test. Finite feasibility only.
     source_reviewed: '2026-10-22'
+  - id: E-amundsk-755-n303-report
+    claim: upper-bound
+    scope: {n_values: [303]}
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Kristiansen n303 2026-10-23]'
+    certificate: packing/resources/web/amundsk-n303-2026-10-23/facts/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-23'
+    limitations: >-
+      This atom records the source author's report of 1 exact rational certificate in the
+      gist amundsk/78f9f0e7b4669f2f509a281845081768 at 511f56b, a dilation by 1 + 1e-12 of a
+      binary64 packing the packet pins by digest, kept as a derived exact fact with no
+      upstream byte retained. The author reports a least wall clearance of 8.2e-13 and a
+      least pair separation of 1.2e-12 from Evan Daniel's verify_cert.py; measured here on
+      this file, every wall is cleared by at least about 6.020e-13 (square 3 at the top)
+      and every pair by at least 1.205e-12, so the reported 8.2e-13 is not this file's
+      (RF-1 of the 23 October review). The replay is E-amundsk-755-n303-exact-feasibility
+      and the review's own checker E-amundsk-755-n303-review-exact-feasibility. The
+      source's own checkers were not run here. No two independent methods, human
+      oversight or optimality is claimed.
+    external_review:
+      state: informally-verified
+      date: '2026-10-23'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 mathematical review lane of #755
+        (c-review-t238-math, think-jdz0), strong sub-agent tier, maximum reasoning,
+        prompted separately from the records lane
+      note: >-
+        docs/project/reviews/review-2026-10-23-amundsk-n303.md accepted the certificate
+        T-239 cites for finite feasibility only, with nine non-blocking findings (RF-1
+        minor, RF-2 to RF-9 notes); the replay it reproduced is
+        E-amundsk-755-n303-exact-feasibility, and its own checker's run is
+        E-amundsk-755-n303-review-exact-feasibility.
+  - id: E-amundsk-755-n303-exact-feasibility
+    claim: upper-bound
+    scope: {n_values: [303]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: shared-components
+    shared_components:
+      - "devtools.evand_exact_certificates' line filter, which skips blank lines and lines beginning with #, transcribed from Evan Daniel's verify_cert.py and verify_cert2.py, the checkers issue 755 names as the author's"
+      - "devtools.evand_exact_certificates' Pose.corners, the corner construction the independent route decides on, transcribed term for term from verify_cert2.py's corners"
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Kristiansen n303 2026-10-23]'
+    certificate: packing/resources/web/amundsk-n303-2026-10-23/facts/n-303.yaml.gz
+    replay: >-
+      From packing/ with the project interpreter (Python 3.14.7) on a shared four-core
+      host: python -m devtools.upper_bound_reports amundsk-n303-2026-10-23 certify
+      --workers 2 wrote the receipt on 23 October 2026 (3003d81d5) from the derived fact,
+      and check --replay decided all 3 retained jobs, the certificate and its
+      duplicate-square and outside-container controls, again through both maintained
+      routes and held each to its retained row; check-claims rebuilt the frozen
+      comparison. replay/sharp_controls.py ran the kernel's two sharp controls on the
+      fact, each at exact contact and 1e-30 past it. The 23 October review ran the same
+      routes on the certificate's bytes as certify's child runs them, with the same
+      verdicts, least wall clearance and least pair gap
+      (docs/project/reviews/review-2026-10-23-amundsk-n303.md).
+    replay_status: passed
+    verifiers:
+      - V-sqpack-verify
+      - V-check-rational-witness-independent
+      - V-evand-arrangement-receipts
+      - V-upper-bound-reports
+      - V-evand-exact-certificates
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificate at n = 303 that T-239 cites, every wall and every pair decided by
+          both maintained routes; the kernel's controls are retained in the packet's
+          receipt and replay/sharp-controls.json
+        checked: 1
+        of: 1
+      read: [specification, certificate-format, producer-code]
+      clean_room: false
+      shares:
+        - "devtools.evand_exact_certificates' line filter, which skips blank lines and lines beginning with #, transcribed from Evan Daniel's verify_cert.py and verify_cert2.py, the checkers issue 755 names as the author's"
+        - "devtools.evand_exact_certificates' Pose.corners, the corner construction the independent route decides on, transcribed term for term from verify_cert2.py's corners"
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the project's verification lanes that wrote sqpack's exact verifier and the
+            independent rational corner checker over September and October 2026; each
+            lane's tier and reasoning setting is not retained here
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: false
+        note: >-
+          Issue 755 says the search, the certificate and the report were done by Claude
+          (Anthropic) in Claude Code at Amund Kristiansen's direction, with Evan Daniel's
+          engine, dilate_cert.py and checkers. The project's routes are Claude's too,
+          written from prompts of their own. Both maintained routes read the certificate
+          through devtools.evand_exact_certificates (V-evand-exact-certificates), whose
+          author read Daniel's verify_cert.py and verify_cert2.py before writing it, and
+          which carries two of their expressions transcribed: the reader's line filter and
+          Pose.corners, the corner construction the independent route decides on. A
+          transcription shares the producer's definitions (epistemics.md), so this replay
+          is shared-components, as T-230's is, and T-239's independent re-implementation
+          rests on the review's clean-room entry (RF-7 of the 23 October review).
+    independence_record: docs/project/reviews/review-2026-10-23-amundsk-n303.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-23'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 mathematical review lane of #755
+        (c-review-t238-math, think-jdz0), strong sub-agent tier, maximum reasoning,
+        prompted separately from the records lane
+      note: >-
+        Accepted for finite feasibility only. Both maintained routes, run on the
+        certificate's bytes as certify's child runs them, accepted the positive with
+        validate_job passing and refused both kernel controls; their side, poses, least
+        wall clearance and least pair gap equal the review's own checker's on both of its
+        routes and the records lane's receipt and fact
+        (E-amundsk-755-n303-review-exact-feasibility, 116 of 116 checks); the kernel's
+        run_sharp and the review's 21 mutants were accepted at exact contact and refused
+        1e-30 past it by both maintained routes. Findings RF-1 to RF-9, none blocking.
+    limitations: >-
+      A replay of the derived fact by two maintained exact routes that share certificate
+      parsing, half-angle conversion, Fraction arithmetic and the separating-axis method,
+      and with Daniel's checkers the two expressions named above. The receipt's 3 jobs hold
+      274518 pair decisions, 28.73 route CPU seconds and 67.37 job wall seconds, the
+      longest job 27.16 seconds. The positive clears every wall by at least about
+      6.020e-13 and every pair by at least 1.205e-12. The receipt's two controls are gross,
+      a duplicated square and a square moved outside, against margins near 1e-12; the
+      sharp controls are the packet's replay/sharp-controls.json and the review's 21
+      mutants and the kernel's run_sharp, kept with their receipts outputs/sharp-controls.json
+      and outputs/maintained/ in the packet's review/review-2026-10-23/
+      (V-amundsk-755-review-controls). The source's own checkers were not run here.
+      Finite feasibility only: no lower bound, optimum, local minimum, rigidity, novelty
+      or human oversight.
+    source_reviewed: '2026-10-23'
+  - id: E-amundsk-755-n303-review-exact-feasibility
+    claim: upper-bound
+    scope: {n_values: [303]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Kristiansen n303 2026-10-23]'
+    certificate: packing/resources/web/amundsk-n303-2026-10-23/facts/n-303.yaml.gz
+    replay: >-
+      From the packet's review/review-2026-10-23/, with the project interpreter and a
+      checkout of the gist amundsk/78f9f0e7b4669f2f509a281845081768 at 511f56b
+      (s303_amund.cert, SHA-256 9ec01059...511b): python -I programs/review_t238_check.py
+      s303_amund.cert --route Z, and again with --route E, as the 23 October review ran
+      them (0.31 and 8.7 CPU seconds): accepted on both routes, all 45,753 pairs decided on
+      each (route Z with no distance filter; route E 45,029 by discs and 724 by exact edge
+      and vertex tests), none touching, every wall cleared by at least
+      60200000000010299100000000000060300000000010299/(10^29 (10^30 + 1)), about
+      6.020e-13 (square 3 at the top, numbered from 0), the least pair gap
+      60250000000010249/(5*10^28) at six pairs, and the side equal to the claim's.
+      agree_t238.py found 116 of 116 shared numbers equal with both maintained routes, the
+      records lane's receipt and its derived fact; its 21 controls (sharp_controls_t238.py)
+      were as expected on both of its routes and both maintained routes; its self-test
+      passed 15 hand-built cases, 13 malformed texts and 2,000 random pairs; a second run
+      gave identical receipts apart from timing.
+    replay_status: passed
+    verifiers:
+      - V-amundsk-755-review-check
+      - V-amundsk-755-review-controls
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificate at n = 303 that T-239 cites, every wall and all 45,753 pairs, on
+          each of the checker's two routes
+        checked: 1
+        of: 1
+      read: [mathematics, specification, certificate-format]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of #755 (c-review-t238-math,
+            think-jdz0), strong sub-agent tier, maximum reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          Issue 755 says the search, the certificate and the report were done by Claude
+          (Anthropic) in Claude Code at Amund Kristiansen's direction, with Evan Daniel's
+          engine, dilate_cert.py and checkers. The review's checker is Claude's too,
+          written from a prompt of its own in a file that imports nothing from this
+          repository or the source, from the issue's method statement, the gist README and
+          the certificate; before writing it its author read the 23 October review of the
+          second 204 certificate, which describes that review's checker design. It had
+          decided the certificate, and its digest was recorded, before its author read any
+          maintained route or Evan Daniel's verify_cert.py, verify_cert2.py or
+          dilate_cert.py, and it did not change after. Route Z shares the separating-axis
+          method with sqpack and verify_cert.py; route E's disc test and its edge and vertex
+          tests are the mathematics of verify_cert.py's filter and verify_cert2.py, read
+          only after the checker decided.
+    independence_record: docs/project/reviews/review-2026-10-23-amundsk-n303.md
+    limitations: >-
+      The review's own checker, with a reader of its own and no code of the packet's
+      routes, the source or Evan Daniel's checkers; route E shares CPython's Fraction with
+      the maintained routes, and route Z uses integers alone and the separating-axis
+      method sqpack also uses. Its author read an earlier review's account of its checker
+      design before writing it. The certificate's bytes are not retained (no licence); the
+      checker reads them from a checkout of the gist at its pin, and agree_t238.py holds
+      the retained fact to them. The packet's two gross controls were decided by the
+      maintained routes, not by this checker; its own controls are the review's 21 mutants
+      and its self-test. Finite feasibility only.
+    source_reviewed: '2026-10-23'
   - id: E-evand-703-n270-report
     claim: upper-bound
     scope: {n_values: [270]}

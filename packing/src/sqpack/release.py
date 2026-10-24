@@ -799,7 +799,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "e48b9127d4760c79827130c0078193e1e04271f7"
+DATA_REVISION = "e63e8906d0bcf3c6bd165f77907fd5fc3b7f953a"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -896,6 +896,14 @@ FIRST_PUBLISHED = PUBLICATION_HISTORY[-1].first_published
 #:                                            day is the one recorded
 #: The leading entry is proposed for the next publication; confirm its date at first deployment.
 EXPLAINER_HISTORY = (
+    PublicationHistoryEntry(
+        version="v0.4.25",
+        first_published="October 24, 2026",
+        result_scope=(
+            "Update the registered result count after the registration of Amund "
+            "Kristiansen's #755 certificate at 303 (T-239)."
+        ),
+    ),
     PublicationHistoryEntry(
         version="v0.4.24",
         first_published="October 24, 2026",
@@ -1448,6 +1456,16 @@ class ReleaseImpactDecision(NamedTuple):
 # New component cuts append decisions here, newest first, alongside their own histories.
 # No impact is invented retrospectively for the published baseline editions.
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
+    ReleaseImpactDecision(
+        component="paper:n11-lower-bounds-explainer",
+        previous_version="v0.4.24",
+        version="v0.4.25",
+        impact="patch",
+        reason=(
+            "Update the registered result count after the registration of Amund "
+            "Kristiansen's #755 certificate at 303 (T-239)."
+        ),
+    ),
     ReleaseImpactDecision(
         component="paper:n11-lower-bounds-explainer",
         previous_version="v0.4.23",
@@ -2515,6 +2533,62 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "byte-identical. Measured once more after merging main 7335d0098 (#752), at "
             "link revision 7335d009 with that main's two files swapped in: the same "
             "outcome. No PDF was printed; it prints from that HTML. Retain v0.2.7."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/contributors/people/amund-kristiansen.md",
+            "packing/devtools/adopt_houses.py",
+            "packing/devtools/default_drawings.py",
+            "packing/devtools/overview_sections.py",
+            "packing/devtools/site_resources.py",
+            "packing/devtools/upper_bound_houses.py",
+            "packing/devtools/upper_bound_reports.py",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "T-239's registration (#755, Amund Kristiansen's s(303), registered as T-238 "
+            "and renumbered on 24 October 2026), its stage 4 review (V3/C3, S2), its "
+            "adoption at 303 in the pass of 24 October 2026 with its regularization, its "
+            "contributor profile, its house reader, the #755 request entry and its gist's "
+            "card in Other Square Packing Projects (OTHER_PROJECTS, and source_repository "
+            "dropping a gist's revision), against main 0bbb0a2c4 (#753, #760, #754): "
+            "rendered at link revision b6ae779b into empty site directories, twice from "
+            "this tree and twice from the same tree with main's register, requests record, "
+            "coverage record, upper_bound_reports.py, adopt_houses.py, default_drawings.py, "
+            "upper_bound_houses.py, overview_sections.py and site_resources.py swapped in "
+            "and the new profile set aside (69 files each), render_n11_optimality_review, "
+            "render_n11_threshold_bound_review and render_packing_methods write every file "
+            "byte-identical across all four. Measured before at ea8c6f10 against main "
+            "64b316b6c (51 files each), and at 956839d7 against main 7335d0098, at 1c333cfe "
+            "against 05e95db36, at 0f7eb786 against 769e441e1 and at 5617791b against "
+            "7cd0a94bf (69 files each) without the card, with the same outcome. The "
+            "explainer then counted the register (231 to 232 results), its Markdown and "
+            "HTML differing from main's inputs' render only there and, in the HTML, in its "
+            "version history's link to the new profile, and took v0.4.23. Measured once "
+            "more after review A's wording fixes (1f208dfb1: adopt_houses.py and the "
+            "register's notes) and the merge of main 2c58b6373 (#745, #750), at link "
+            "revision f54ecc25 into empty site directories, twice from this tree and twice "
+            "with main's nine candidate inputs swapped in and the new profile set aside "
+            "(51 files each): the three papers' files are byte-identical across all four. "
+            "The explainer, counting 238 to 239 results, takes v0.4.25 over main's "
+            "v0.4.24. No PDF was printed; each prints from that HTML. Retain v0.1.11, "
+            "v0.1.4 and v0.2.7."
         ),
     ),
     ReleaseNoPublicChange(
