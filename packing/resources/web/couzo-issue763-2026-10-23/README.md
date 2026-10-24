@@ -85,10 +85,15 @@ notebook packing, whose provenance in the manifest states the notebook’s licen
 Apache-2.0, and it is retained as factual data under that decision; Evan Daniel’s verifier
 is pinned under its MIT licence.
 
-**AI assistance.** The source states it in one place, the header of
-`verify_bound_certificate.py`: “Copyright (c) 2026 Evan Daniel; modifications by Francisco
-Couzo with Codex.” Neither the README nor the indexes say more about how the packings were
-found than their credits.
+**AI assistance.** The source states it in the header of `verify_bound_certificate.py`,
+“Copyright (c) 2026 Evan Daniel; modifications by Francisco Couzo with Codex”, and in its
+commits: the pin `964ee2b` and its parents `fa6237e` and `efef7d1` each end with the trailer
+`Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>`, and `efef7d1`’s message
+describes “Codex’s reviewed intake from the CT105 store”. Neither the README nor the indexes
+say more about how the packings were found than their credits. The stage 4 review’s checker
+is by a Claude agent too, so its independence is recorded as sharing the producer’s system
+family (RF-1 of the
+[24 October review](../../../../docs/project/reviews/review-2026-10-24-couzo-n268-n303.md)).
 
 ## The Claims
 
@@ -249,9 +254,11 @@ credits Couzo at every row, after the packing each search started from:
 - **85 rows credited to Couzo alone** (7 of the 184) keep the chain of the row or
   certificate they build on.
 
-The manifest’s `previous_source` at 268 and 303 is the source’s previous record (PingYou
-Ltd’s at 268, Daniel’s T-230 at 303), not the lineage; the stage 4 review measures the
-identity. The issue says the notebooks’ own source notices carry their earlier construction
+The manifest’s top-level `previous_source` at 268 and 303 is the retained parent, the
+packing each search refined (`certificates/parents/85dbd707…` and `22f07a7c…`); the
+source’s previous record, PingYou Ltd’s `733f7a5d…` at 268 and Daniel’s `929c2acf…` (T-230)
+at 303, is that parent’s own `previous_source` (RF-2 of the 24 October review). The stage 4
+review measured the identity (below). The issue says the notebooks’ own source notices carry their earlier construction
 credits; the source does not publish them, so they are asked of the author. The bibliography
 key is `[Couzo issue 763 2026-10-23]`, credit “Couzo after Lavrentev, Tymchishin, Muglich,
 Polkovskyi, Daniel, Fang, de Winter, Levy”.
@@ -278,11 +285,45 @@ Drafted in think-ptkk’s notes for the reply after the merge:
 8. Should the 268 credit name Lavrentev? Evan Daniel’s commit `8a8879a` describes his 268
    certificate as “Vladislav Lavrentev’s (Kaggle lightningv08) public packing … the first
    public packing at that side”, and the manifest’s lineage for the 268 parent begins at
-   `kaggle-public-portfolio-20261022`, source `cuda`. The triage of 24 October measured the
-   three as one packing in a scratch measurement no retained tool holds; the stage 4 review
-   measures it.
+   `kaggle-public-portfolio-20261022`, source `cuda`. The stage 4 review measured the
+   three, the 268 parent, #763’s packing and Daniel’s, as one arrangement, none beyond a
+   tenth of another, and three placements, 135 to 176 squares beyond `1e-3`, with #763’s the
+   mirror image of the other two (RF-3); its question 1 asks this with the measurement.
 9. Is Tymchishin the finder of the packing at 304 (`certificates/best/n304.cert`, first
    committed at `fa6237e`), which #763 does not claim?
+
+## Stage 4 Review
+
+The [review of 24 October 2026](../../../../docs/project/reviews/review-2026-10-24-couzo-n268-n303.md)
+accepted both certificates for finite feasibility, with six minor findings and six
+notes, none blocking or major. Its programs and outputs are kept in
+[review/review-2026-10-24/](review/review-2026-10-24/README.md), equal to the digests its
+`out/program-digests.sha256` records.
+
+- **Its own checker.** `check_certificates.py` decides both certificates on two exact
+  routes of its own in `Fraction`: separating axes over every pair (route A), and the
+  exact clipped area of every pair within reach (route B). Both accept both, with ten
+  controls per certificate as expected, sharp at $10^{-30}$ at the closest pair, the
+  square nearest a wall and the box. Its author read neither maintained route nor any
+  checker of the source or of Daniel’s, so it is a clean-room re-implementation
+  (`E-couzo-763-review-exact-feasibility`, `V-couzo-763-review-check`); `agree.py` holds it
+  to this packet’s receipt, 24 of 24 equal.
+- **RF-1 to RF-3** are fixed above: the commits’ co-author trailers and Codex’s intake,
+  what `previous_source` names, and one arrangement in three placements at 268.
+- **RF-4.** The maintained replay shares the producer’s first checker,
+  `sqpack/verify.py`, and the `evand-cert` reader with Daniel’s checkers, so it is
+  `shared-components` (`E-couzo-763-exact-feasibility`), and T-240’s independent
+  re-implementation rests on the review’s checker.
+- **Identity.** Each packing refines its manifest parent, none beyond a tenth at 268 and
+  three at 303, and is another arrangement than the houses, 118 squares beyond a tenth of
+  T-174’s and 133 of T-239’s, one to one under no symmetry. S3 is confirmed.
+- **RF-7 to RF-12** and the review’s six questions are the author’s; they merge with the
+  questions above in the reply.
+
+T-240 is at V3/C3, and the cases at 268 and 303 adopt its certificates as their house best
+packings in the pass of 25 October 2026, regularized in the same pull request. Evan
+Daniel’s later 268, $4.48 \times 10^{-12}$ below, is a sibling placement whose import is
+think-l49q’s; once validated it re-houses 268 under the same rule.
 
 ## Compressed Files
 
