@@ -549,6 +549,8 @@ def others(
         _require(int(entry["n"]) == n, f"{key}: the entry names n={entry['n']}")
         side = Fraction(str(entry["bound"]))
         form = intake_ledger.goebel_form(n)
+        _require(form is not None, f"{n}: no Göbel construction beyond the corpus")
+        assert form is not None
         goebel = Bound(Fraction(form.p), Fraction(form.q))
         if not goebel.above(side) or (n, side) in earlier:
             continue

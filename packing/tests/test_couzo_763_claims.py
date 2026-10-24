@@ -182,6 +182,7 @@ def test_a_notebook_row_is_below_goebel_and_no_earlier_publication() -> None:
 
     n = 400
     form = intake_ledger.goebel_form(n)
+    assert form is not None
     goebel = claims.Bound(Fraction(form.p), Fraction(form.q))
     below = Fraction(goebel.ceiling()) - Fraction(1, 10**6)
     above = Fraction(goebel.ceiling())
@@ -212,6 +213,7 @@ def test_a_notebook_row_needs_the_manifest_to_name_its_certificate() -> None:
 
     n = 400
     form = intake_ledger.goebel_form(n)
+    assert form is not None
     side = Fraction(claims.Bound(Fraction(form.p), Fraction(form.q)).ceiling()) - 1
     entry = _entry(n, side, "alexchilton")
     wrong = _notebook(n) | {"certificate": "certificates/best/n401.cert"}
@@ -230,6 +232,7 @@ def test_a_notebook_recipe_names_the_one_parent_certificate_at_its_side() -> Non
 
     n = 445
     form = intake_ledger.goebel_form(n)
+    assert form is not None
     side = Fraction(claims.Bound(Fraction(form.p), Fraction(form.q)).ceiling()) - 1
     recipe = {"kind": "square tiling and L-border", "source_n": 400, "tiles_per_side": 1}
     entry = _entry(n, side, "Kirill Tymchishin") | {
