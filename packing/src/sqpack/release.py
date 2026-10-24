@@ -799,7 +799,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "6d4cc24cb35da513f12dc2ba29421ffb3a9524a4"
+DATA_REVISION = "d7f02b637922fe330c00dfe6e8807a73df56ee32"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -8316,7 +8316,8 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "and the requests record gains the fourteen tracking issues #772 to #780 and "
             "#782 to #786. Measured against main 5664ac1e8, 14b14f2d1 and 2c58b6373 "
             "(#750), and last, after review A's fixes (think-q5sr) and the merges of main "
-            "c5697c2f2 (#757) and 5f8f005a3 (#766), at link revision 5f8f005a: rendered "
+            "c5697c2f2 (#757), 5f8f005a3 (#766) and 34eb8bb75 (#769), at link revisions "
+            "5f8f005a and then 34eb8bb7: each time rendered "
             "into empty site directories, twice from this tree and once from it with that "
             "main's profile_records.py, results.yaml and result-requests.yaml swapped in, "
             "render_n11_lower_bounds_explainer, render_n11_optimality_review, "
