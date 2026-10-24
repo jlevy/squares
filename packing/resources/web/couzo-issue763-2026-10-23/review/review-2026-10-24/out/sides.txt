@@ -1,0 +1,21 @@
+#763 at 268: 16.874361715873825479071598971469..., 12-place print 16.874361715874; record's decimal 16.87436171587383... is a truncation: False
+#763 at 303: 17.906978233798900159425719684496..., 12-place print 17.906978233799; record's decimal 17.90697823379890... is a truncation: True
+  268: T-174, the house (W-known-best-n268): 16.878814821006764724..., print 16.878814821007; 4.453e-03 above #763
+  268: parent: Tymchishin's EDA+Seam LP v4 (parents/85dbd707...): 16.875467950347430707..., print 16.875467950348; 1.106e-03 above #763
+  268: evand 8a8879a s268_lightning.cert: 16.874361715869345824..., print 16.874361715870; 4.480e-12 below #763
+  303: T-239, the house (W-known-best-n303): 17.909762327475256762..., print 17.909762327476; 2.784e-03 above #763
+  303: T-230 (s303_r303w0.cert): 17.909772217274327772..., print 17.909772217275; 2.794e-03 above #763
+  303: parent: Couzo's Kaggle push (parents/22f07a7c...): 17.907473001998488126..., print 17.907473001999; 4.948e-04 above #763
+  303: evand 8a8879a s303_cdeotte.cert: 17.907238274538241192..., print 17.907238274539; 2.600e-04 above #763
+  268: Kaggle board, side only: Minal kharat123, 2026-10-22 18:54:00 UTC (public_bounds.json at 964ee2b (retained, source/public_bounds.json.gz)): 16.874361715926692000..., print 16.874361715927; 5.287e-11 above #763
+  268: Kaggle board, side only: panpanpanda, 2026-10-23 14:48:22 UTC (public_bounds.json at 43f666c (not retained; read from the watched clone)): 16.874361715872031000..., print 16.874361715873; 1.794e-12 below #763
+  303: Kaggle board, side only: Lucas Boesen, 2026-10-22 22:51:05 UTC (public_bounds.json at 964ee2b (retained, source/public_bounds.json.gz)): 17.908331255816149000..., print 17.908331255817; 1.353e-03 above #763
+  303: Kaggle board, side only: pjmathematician, 2026-10-23 11:56:49 UTC (public_bounds.json at 43f666c (not retained; read from the watched clone)): 17.906978233833611000..., print 17.906978233834; 3.471e-11 above #763
+  later counts 269 to 288: every reported and verified bound is above #763's 268 side: True; least margin 2.715187e-02 at 269 (reported_upper_bound, exact)
+  later counts 304 to 320: every reported and verified bound is above #763's 303 side: True; least margin 2.244952e-02 at 304 (reported_upper_bound, exact)
+  the source's n304.cert (not claimed by #763): 17.926898903392643484..., 1.992067e-02 above #763's 303 side
+receipt resources/web/couzo-issue763-2026-10-23/review/review-2026-10-24/out/sides.json
+
+real	0m0.170s
+user	0m0.157s
+sys	0m0.013s
