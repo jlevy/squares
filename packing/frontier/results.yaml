@@ -33698,6 +33698,260 @@ results:
       with both strong generators' regularization of the new house. At 268 Evan Daniel's
       later, smaller report (think-l49q) is decided before 268 is adopted.
 
+  - id: T-241
+    kind: upper-bound
+    registered: '2026-10-24'
+    landed: '2026-10-24'
+    headline: >-
+      Couzo's certificate at 304 of Tymchishin's Kaggle notebook packing, 2.53e-3 below T-186
+    claim: >-
+      One complete rational source certificate reports a finite upper-bound improvement at
+      the exact side it states: s(304) <=
+      42654421699169959072564987841514227093543746926117736119087439/2379353056489745832681562849107891444171481219500000000000000
+      = 17.92689890339264…, 2.53e-3 below T-186, the case's house best packing when it was
+      reported. A complete native feasibility outcome is retained separately; the selected
+      standing case is unchanged pending independent review and record review.
+
+      It is certificates/best/n304.cert in Francisco Couzo's watched repository
+      (https://github.com/franciscouzo/square-packing), first committed on 23 October 2026
+      and pushed at 23:38:42Z with the release issue 763 names. The issue does not claim
+      this count, and no issue reports it, so it is a report from its publication (the
+      owner, 14 October 2026). The issue-763 packet retains the file byte-identical, and
+      this import reads it from there.
+
+      The source's certified_bounds.json records the certificate as verified, 'valid': true,
+      4297 pairs tested, with 'GMP exact rationals via gmpy2 2.3.2'. Those statements are the
+      author's; no source program ran here.
+
+      Credit Kirill Tymchishin's packing, as the source credits it: "Kirill Tymchishin
+      (kirilltym), Kaggle "CPU Alternating Reclosure" v3; earlier construction credits in its
+      source notices; earlier seed and construction credits retained in provenance",
+      certified by Francisco Couzo (https://github.com/franciscouzo/square-packing), who
+      claims no refinement of it. The notebook's source notices are not published, and Evan
+      Daniel's later certificate of the same packing (T-242) says its finder is unknown and
+      its earliest public copy is kozykappa's notebook; both authors are asked.
+    scope: {n_values: [304]}
+    verification: V0
+    confirmation: C0
+    significance:
+      score: 3
+      rationale: >-
+        Draft, from the stage 1 triage (think-6r5p): a smaller finite construction side at
+        304, 2.53e-03 below the house T-186 and every report there, an arrangement no symmetry
+        pairs one to one with the house's (an optimal assignment moves 54 squares beyond a
+        tenth, the largest 1.13), far above T-226's 1.88e-05 at the low end of S3. The stage 4
+        review confirms or changes the score. No lower bound or optimum.
+      scored: '2026-10-24'
+      by: >-
+        the stage 1 triage of 24 October (c-triage-watch-1024, think-6r5p) and the records
+        lane of think-l49q
+    novelty: previously-published
+    attribution:
+      source_keys: ['[Couzo n304 2026-10-23]']
+      published: '2026-10-23'
+    evidence:
+      - E-couzo-n304-certificate-report
+    artifacts:
+      - packing/resources/web/couzo-n304-2026-10-23/README.md
+      - packing/resources/web/couzo-n304-2026-10-23/acquisition/claims.json
+      - packing/resources/web/couzo-issue763-2026-10-23/source/certificates/best/n304.cert
+      - packing/resources/web/couzo-n304-2026-10-23/receipts/exact-certification.json.xz
+      - packing/resources/web/couzo-n304-2026-10-23/receipts/sharp-controls.json
+      - packing/resources/web/evand-kaggle-descents-2026-10-24/measure/identity.json
+      - packing/campaign/issue-intake/upper-bounds-evand-20261024/README.md
+      - packing/devtools/upper_bound_reports.py
+    controls:
+      - packing/tests/test_upper_bound_reports.py
+      - packing/tests/test_upper_bound_reports_l49q.py
+      - packing/resources/web/couzo-n304-2026-10-23/receipts/sharp-controls.json
+    notes: >-
+      A separate complete repository replay is retained for n = 304: 1 positive and 2
+      duplicate-square and outside-container controls passed their required outcomes on both
+      routes, 276336 pair decisions; summed over the 3 jobs, the receipt records 40.35 route
+      CPU seconds and 40.77 job wall seconds, the longest job 13.94 seconds. Every wall is
+      cleared by at least exactly 1e-15 and every pair by at least 8.18e-11. A wall clearance
+      of 1e-15 is below the binary64 spacing of the coordinates, so the packet's sharp
+      controls (receipts/sharp-controls.json) lowered the side by the least far-wall
+      clearance, closed the least-gap pair by its gap and moved every square toward the
+      nearer near wall by its least clearance: both routes accepted each at exact contact,
+      margin 0, and refused each 1e-30 past it.
+
+      In the packet's frozen comparison (acquisition/claims.json, read from main on 24
+      October 2026), at n = 304 the certificate is below the case's ceiling (Daniil Ostashev,
+      improved by Mishapolk, T-186), #593 and T-175 (#575) by 2.53e-03, below T-152 (#506)
+      and T-174 (PR #574) by 2.67e-03, below T-151 (#500) by 2.76e-03, and below T-098 (#375)
+      and T-056 by 7.75e-03. It is the smallest report at 304 when read. The ledger of 24
+      October for this import (campaign/issue-intake/upper-bounds-evand-20261024) records it
+      first at 304; Evan Daniel's later certificate of the same packing, 3.04e-9 below it, is
+      recorded after it (T-242).
+
+      Measured pose by pose (measure/identity.json in the evand-kaggle-descents-2026-10-24
+      packet; a measurement, which decides nothing): nearest centres pair it with T-186's
+      packing under no symmetry, and an optimal assignment moves 54 squares beyond a tenth,
+      the largest 1.13, and turns squares by up to 26.0 degrees, so it is another
+      arrangement than the house's. The binary64 packing Evan Daniel's source publishes as
+      the public Kaggle packing at 304 is this certificate's packing to 2.05e-9.
+
+      The source's own checkers were not run here. The two maintained routes, the sqpack
+      rational witness verifier and the independent rational corner checker, share
+      certificate parsing, half-angle conversion, Fraction arithmetic and the separating-axis
+      method. No two independent methods, human oversight or optimality is claimed.
+    next_rung: >-
+      Independently review the retained replay and the certificate (stage 4), a mapped review
+      whose acceptance would raise both rungs. The adoption at 304, with both strong
+      generators' regularization of the new house, follows that of T-242's smaller
+      certificate of the same packing, which is decided with it.
+
+  - id: T-242
+    kind: upper-bound
+    registered: '2026-10-24'
+    landed: '2026-10-24'
+    headline: >-
+      Daniel's exact descents of public Kaggle packings at 268 and 304, below the reports
+      before them
+    claim: >-
+      Two complete rational source certificates report finite upper-bound improvements at
+      the exact sides they state: s(268) <= 16.874361715869345824484822296466, 4.48e-12
+      below T-240 and 4.45e-3 below T-174, the case's house best packing, and s(304) <=
+      17.92689890035674158972360842897, 3.04e-9 below T-241 and 2.53e-3 below T-186, the
+      case's house best packing. Complete native feasibility outcomes are retained
+      separately; the selected standing cases are unchanged pending independent review and
+      record review.
+
+      They are search/packer/candidates/s268_lightning.cert and s304_pub.cert in Evan
+      Daniel's watched repository (https://github.com/evand/square-packing), pushed on 24
+      October 2026 at 04:53:53Z. No issue reports them, so they are a report from their
+      publication (the owner, 14 October 2026); the source says it did not post them because
+      issue 763 already held the counts. The same commit's certificate at 303, of Chris
+      Deotte's public Kaggle packing, is 2.60e-4 above T-240's 303 and is not recorded.
+
+      Each certificate's JSON report states it valid (cert_valid) at 80 digits, its least
+      wall and pair clearances (5e-21 and about 1e-20), and S_exact, the side of a
+      Newton-converged KKT point of the descent, which the certificate's side lies above by
+      about 1.7e-22 at 268 and 1.8e-22 at 304. Those statements are the author's; no source
+      program ran here.
+
+      Credit at 268 Vladislav Lavrentev's public Kaggle packing, as the source credits it:
+      "Vladislav Lavrentev's (Kaggle lightningv08) public packing, exact descent
+      (shrink-only) to 16.8743617159, the side a Kaggle per-puzzle side-only claim lists; the
+      first public packing at that side". Measured here, it is another placement of the
+      arrangement T-240 refines, not T-240's packing re-solved.
+
+      At 304 credit the packing T-241 certifies, which the source calls "the public Kaggle
+      packing at 17.9268989004 (finder unknown; earliest public copy: kozykappa's notebook)"
+      and Francisco Couzo's index credits to Kirill Tymchishin's Kaggle notebook "CPU
+      Alternating Reclosure" v3; measured here, the source's input is that packing to
+      2.05e-9. Evan Daniel descended each exactly to the side stated and wrote the
+      certificate. The source's credits say its work was produced by Claude (Anthropic) under
+      human direction.
+    scope: {n_values: [268, 304]}
+    verification: V0
+    confirmation: C0
+    significance:
+      score: 2
+      rationale: >-
+        Draft, from the stage 1 triage (think-6r5p): smaller finite construction sides at 268
+        and 304, 4.48e-12 and 3.04e-09 below the reports before them. At 304 it is the exact
+        descent of the packing T-241 certifies, the solved side of a reported packing, as
+        T-225 and T-231 are (S2); at 268 another placement of the arrangement T-240 refines,
+        at a side that moves the case's 12-place print (16.874361715874 to 16.874361715870),
+        S2 as T-231 is. A citable detail that moves no theorem; no lower bound or optimum.
+      scored: '2026-10-24'
+      by: >-
+        the stage 1 triage of 24 October (c-triage-watch-1024, think-6r5p) and the records
+        lane of think-l49q
+    novelty: previously-published
+    attribution:
+      source_keys: ['[Daniel Kaggle descents 2026-10-24]']
+      published: '2026-10-24'
+    evidence:
+      - E-evand-kaggle-descents-certificate-report
+    artifacts:
+      - packing/resources/web/evand-kaggle-descents-2026-10-24/README.md
+      - packing/resources/web/evand-kaggle-descents-2026-10-24/acquisition/claims.json
+      - packing/resources/web/evand-kaggle-descents-2026-10-24/source/search/packer/candidates/s268_lightning.cert
+      - packing/resources/web/evand-kaggle-descents-2026-10-24/source/search/packer/candidates/s304_pub.cert
+      - packing/resources/web/evand-kaggle-descents-2026-10-24/receipts/exact-certification.json.xz
+      - packing/resources/web/evand-kaggle-descents-2026-10-24/receipts/sharp-controls-n268.json
+      - packing/resources/web/evand-kaggle-descents-2026-10-24/receipts/sharp-controls-n304.json
+      - packing/resources/web/evand-kaggle-descents-2026-10-24/measure/identity.json
+      - packing/campaign/issue-intake/upper-bounds-evand-20261024/README.md
+      - packing/devtools/upper_bound_reports.py
+    controls:
+      - packing/tests/test_upper_bound_reports.py
+      - packing/tests/test_upper_bound_reports_l49q.py
+      - packing/resources/web/evand-kaggle-descents-2026-10-24/receipts/sharp-controls-n268.json
+      - packing/resources/web/evand-kaggle-descents-2026-10-24/receipts/sharp-controls-n304.json
+    notes: >-
+      A separate complete repository replay is retained for n = 268, 303 and 304: 3 positives
+      and 6 duplicate-square and outside-container controls passed their required outcomes on
+      both routes, 765522 pair decisions; summed over the 9 jobs, the receipt records 118.9
+      route CPU seconds and 120.14 job wall seconds, the longest job 15.69 seconds. Every wall
+      is cleared by at least exactly 5e-21 and every pair by at least 9.99e-21.
+
+      Those margins are below the binary64 spacing of the coordinates, so the packet's sharp
+      controls at 268 and 304 (receipts/sharp-controls-n268.json and -n304.json) lowered the
+      side by the least far-wall clearance, closed the least-gap pair by its gap and moved
+      every square toward the nearer near wall by its least clearance: both routes accepted
+      each at exact contact, margin 0, and refused each 1e-30 past it.
+
+      In the packet's frozen comparison (acquisition/claims.json, read from main on 24
+      October 2026), at n = 268 the certificate is below T-240 (#763, Francisco Couzo after
+      Kirill Tymchishin's packing, pending adoption) by 4.48e-12, and below the case's
+      ceiling (PingYou Ltd, of Francisco Couzo's packing as Evan Daniel improved it, T-174),
+      T-098 (#375), Couzo's certificate of #476 and #593 by 4.45e-03.
+
+      At n = 304 it is below Couzo's certificate (T-241) by 3.04e-09, below the case's
+      ceiling (Daniil Ostashev, improved by Mishapolk, T-186), #593 and T-175 by 2.53e-03,
+      below T-152 and T-174 by 2.67e-03, below T-151 by 2.76e-03, and below T-098 and T-056
+      by 7.75e-03. At 303 the commit's third certificate is 2.60e-04 above T-240 and below
+      every other report there. The ledger of 24 October for this import
+      (campaign/issue-intake/upper-bounds-evand-20261024) records 268 and 304 in report order
+      and 303 not, held by T-240.
+
+      Measured pose by pose (measure/identity.json in the packet; a measurement, which
+      decides nothing), at 268 the certificate is the source's input, Lavrentev's packing,
+      descended, no square moving beyond 1e-3 (largest 1.41e-4). Against T-240's packing it
+      is one arrangement and another placement: nearest centres pair the two one to one
+      under the mirror x to s - x, none beyond a tenth, 135 squares beyond 1e-3 and 165
+      beyond 1e-9 (largest 7.08e-2), largest turn 1.36 degrees, which the 24 October stage 4
+      review of T-240 measured alike (its RF-6).
+
+      Against #763's Kaggle parent at 268, Kirill Tymchishin's EDA+Seam LP v4 packing, it
+      pairs under the identity, none beyond a tenth (largest 2.49e-2). The source's
+      s268_lightning.predescent.txt is that parent to 2.5e-10, and its JSON reports 127
+      exact flat motions and 19 free squares at the solved side. At 304 nearest centres pair
+      it with T-241's packing under the identity, none beyond 1e-3 and 73 beyond 1e-6
+      (largest 4.60e-4), largest turn 0.019 degrees; the source's input is T-241's packing
+      to 2.05e-9.
+
+      The source's own checkers were not run here. The two maintained routes, the sqpack
+      rational witness verifier and the independent rational corner checker, share
+      certificate parsing, half-angle conversion, Fraction arithmetic and the separating-axis
+      method. No two independent methods, human oversight or optimality is claimed.
+    next_rung: >-
+      Independently review the retained replay and the two certificates (stage 4), a mapped
+      review whose acceptance would raise both rungs, then decide the adoptions at 268 and
+      304 with both strong generators' regularization of each new house in the same change.
+      At 268 T-240's packing and this one are two placements of one arrangement, so the
+      credit of the house follows the placement adopted.
+    regularizations:
+      - n: 304
+        of: T-241
+        by: '[Daniel Kaggle descents 2026-10-24]'
+        method: >-
+          the source's exact descent (shrink-only) of the public Kaggle packing its input
+          holds, which is T-241's packing to 2.05e-9 as measured here, to the side of a
+          Newton-converged KKT point its JSON reports
+        side: solved
+        identity:
+          basis: measured
+          measured_in: packing/resources/web/evand-kaggle-descents-2026-10-24/measure/identity.json
+          one_to_one: true
+          moved: 0
+          max_move: 4.6e-4
+          max_turn_deg: 0.019
+
 # Generated by python -m devtools.regularized_drawings from the regularized layer's
 # index (packing/atlas/known-best/regularized/index.json); do not edit by hand.
 regularized_drawings:
