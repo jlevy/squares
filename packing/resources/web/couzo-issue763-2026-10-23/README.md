@@ -324,6 +324,14 @@ T-240 is at V3/C3, and the cases at 268 and 303 adopt its certificates as their 
 packings in the pass of 25 October 2026, regularized in the same pull request. Evan
 Daniel’s later 268, $4.48 \times 10^{-12}$ below, is a sibling placement whose import is
 think-l49q’s; once validated it re-houses 268 under the same rule.
+The review proposed adopting 268 only once Daniel’s certificate was decided, and the
+record adopts it now instead: under
+[the house rule](../../../campaign/result-import.md#the-house-rule) a smaller validated
+packing, its register entry at V3 and C3 with an accepted review, is adopted in the intake
+pass that validates it, and an adoption waits only when it is staged in
+`select_houses.PENDING_ADOPTION` for one of `select_houses.STAGING_REASONS`, none of which
+is a later report not yet validated. Daniel’s 268 is not validated yet, so its re-housing
+of 268 follows its own validation (think-hx0e).
 
 ## Compressed Files
 

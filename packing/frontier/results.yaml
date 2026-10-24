@@ -33771,14 +33771,21 @@ results:
       the pass of 25 October 2026, at 268 from T-174 and at 303 from T-239, which stay
       retained as history, and both strong generators decided each new witness in the same
       pull request: grid-slack's view at the witness's side is admitted and drawn at both
-      counts, and Evan Daniel's regularizer solves each witness to a KKT local minimum below
-      its side, register candidates that are never admitted: at 268 exactly the side of
-      Daniel's later certificate, 4.48e-12 below, and at 303 a view 3.63e-12 below
-      (cases/regularized_drawings/think-bk9r-2026-10-24).
+      counts.
 
-      At 268 Daniel's later certificate,
-      a sibling placement, is imported as reported (think-l49q); once validated it re-houses
-      268 under the same rule, and the credit there follows the placement it holds.
+      Evan Daniel's regularizer gives views below both sides, register candidates
+      that are never admitted (cases/regularized_drawings/think-bk9r-2026-10-24): at 268 a
+      certified KKT local minimum at exactly the side of Daniel's later certificate, 4.48e-12
+      below, and at 303, on its first-pass rung, a solve whose KKT certificate fails at the
+      relaxed gate, giving a view 3.63e-12 below that all three exact routes here accept.
+      Their registration is think-20oj's, the 268 view with Daniel's later certificate as
+      the one that first states its side.
+
+      At 268 Daniel's later certificate, a sibling placement, is imported as reported
+      (think-l49q). The house rule adopts the smallest validated packing in the pass that
+      validates it, and no staging reason covers waiting for a later report not yet
+      validated, so 268 moved now; once Daniel's certificate is validated it re-houses 268
+      under the same rule, and the credit there follows the placement it holds.
 
       The source's own checkers were not run here. The two maintained routes, the sqpack
       rational witness verifier and the independent rational corner checker, share
