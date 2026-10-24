@@ -1304,19 +1304,19 @@
       "url": "https://kingbird.myphotos.cc/packing/square-203a.svg"
     },
     {
-      "attribution": "Mishapolk, https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/certificates/n-204.cert at 12fc46678fa8eefa3f156ff37dfffd84c8f3a580",
+      "attribution": "Mishapolk, https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/certificates/n204.cert at 12fc46678fa8eefa3f156ff37dfffd84c8f3a580",
       "kind": "packet-derived-facts",
       "license_status": "no-licence-published",
       "listed_n": [
         204
       ],
       "n": 204,
-      "path": "resources/web/mishapolk-issue719-2026-10-22/facts/n-204.yaml.gz",
-      "raw_asset_retained": false,
-      "retention_policy": "Exact certificate retained as a derived fact, bound to the SHA-256 its packet pins upstream; no upstream byte is copied.",
-      "retrieved": "2026-10-22",
+      "path": "resources/web/mishapolk-n204-2026-10-22/source/certificates/n204.cert",
+      "raw_asset_retained": true,
+      "retention_policy": "Complete source certificate retained losslessly and bound to the SHA-256 its packet pins upstream; no upstream program or prose is copied.",
+      "retrieved": "2026-10-23",
       "source_n": 204,
-      "url": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/certificates/n-204.cert"
+      "url": "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/certificates/n204.cert"
     },
     {
       "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",

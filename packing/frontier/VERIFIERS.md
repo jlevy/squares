@@ -145,6 +145,8 @@ second implementation agrees.
 | [`V-evand-regularized-1020-review-controls`](#v-evand-regularized-1020-review-controls) | sharp_controls_t225.py | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-couzo-670-672-675-review-controls`](#v-couzo-670-672-675-review-controls) | sharp_controls_0nse.py | Squares Project (Levy) | first-party | premises | 3 | 3 |
 | [`V-mishapolk-719-review-controls`](#v-mishapolk-719-review-controls) | sharp_controls_t229.py | Squares Project (Levy) | first-party | premises | 1 | 1 |
+| [`V-mishapolk-n204-review-check`](#v-mishapolk-n204-review-check) | review_t231_check.py | Squares Project (Levy) | first-party | decides | 1 | 1 |
+| [`V-mishapolk-n204-review-controls`](#v-mishapolk-n204-review-controls) | sharp_controls_t231.py | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-overbeck-review3-seed-packing`](#v-overbeck-review3-seed-packing) | seed_packing_check.py | Squares Project (Levy) | first-party | premises | 1 | 0 |
 | [`V-evand-728-review-controls`](#v-evand-728-review-controls) | sharp_controls_728.py | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-amundsk-755-review-check`](#v-amundsk-755-review-check) | review_t238_check.py | Squares Project (Levy) | first-party | decides | 1 | 1 |
@@ -1304,6 +1306,7 @@ Decides a packing pair by pair and wall by wall: by exact sign in a number field
 | `E-couzo-672-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 2 of 2: the certificates at n = 227 and 229 that T-227 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-227 |
 | `E-couzo-675-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 204 that T-228 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-228 |
 | `E-mishapolk-719-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 2 of 2: the certificates at n = 105 and 204 that T-229 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-229 |
+| `E-mishapolk-n204-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 204 that T-231 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-231 |
 
 ### `V-check-rational-witness-independent`
 
@@ -1402,6 +1405,7 @@ Decides a rational-corner witness pair by pair and wall by wall in Fraction arit
 | `E-couzo-672-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 2 of 2: the certificates at n = 227 and 229 that T-227 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-227 |
 | `E-couzo-675-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 204 that T-228 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-228 |
 | `E-mishapolk-719-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 2 of 2: the certificates at n = 105 and 204 that T-229 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-229 |
+| `E-mishapolk-n204-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 204 that T-231 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-231 |
 
 ### `V-check-nagamochi-lemma1-counterexample`
 
@@ -2424,6 +2428,37 @@ The 22 October review's sharp controls of the two certificates T-229 cites, buil
 | --- | --- | --- | --- | --- |
 | `E-mishapolk-719-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 2 of 2: the certificates at n = 105 and 204 that T-229 cites, every wall and every pair, on each of the checker's two routes, from the derived facts and from the source's files | T-229 |
 
+### `V-mishapolk-n204-review-check`
+
+**review_t231_check.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+The 23 October review's standard-library exact checker of the certificate T-231 cites, with a strict reader of its own, deciding it on two routes that share only the reader: route Z in integers alone (a Pythagorean triple per row, containment by half-extents and every pair by four separating-axis inequalities cleared of denominators, never loading fractions), and route C in Fraction (unit edges, right angles, orientation and corner mean, corner containment, every pair by the exact area one square's closed half-planes clip from the other and again by corner projections, and the exact squared distance of every pair whose centres lie within 2). Its --self-test runs 13 hand-built cases, 12 malformed texts and 1,500 random pairs.
+
+- Source: [`packing/resources/web/mishapolk-n204-2026-10-22/review/review-2026-10-23/programs/review_t231_check.py`](../../packing/resources/web/mishapolk-n204-2026-10-22/review/review-2026-10-23/programs/review_t231_check.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-23-mishapolk-n204.md`](../../docs/project/reviews/review-2026-10-23-mishapolk-n204.md)
+- Independence: its authors read mathematics, certificate-format, specification; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review lane of T-231 (c-review-t231-math, think-tetq), strong sub-agent tier, maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, As E-mishapolk-n204-review-exact-feasibility's: written in a file of its own that imports nothing from this repository or the source, from the certificate's format line, the mathematics and the #728 review's account of its checker, and run on the certificate before its author read any maintained or source code.
+- Note: Written and run on 23 October 2026 by the review; kept in the mishapolk-n204-2026-10-22 packet's review/review-2026-10-23/ with its README and receipts (RF-7), whose outputs/program-digests.sha256 lists the bytes that ran.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-mishapolk-n204-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 1 of 1: the certificate at n = 204 that T-231 cites, every wall and every pair, on each of the checker's two routes | T-231 |
+
+### `V-mishapolk-n204-review-controls`
+
+**sharp_controls_t231.py, maintained_routes_t231.py** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
+
+The 23 October review's controls of the certificate T-231 cites. sharp_controls_t231.py builds sixteen mutants (the side lowered by the least top-or-right clearance, every square moved by the least left and by the least bottom clearance, and the least-gap pairs between two tilted, a tilted and an aligned, and two aligned squares closed along their edge normal, each at exact contact and 1e-30 past it; a duplicated square; a square moved outside; a row dropped; a decimal literal) and decides each by the review's checker and by both maintained routes through the evand-cert adapter. maintained_routes_t231.py runs the kernel's positive and two gross jobs one per process, as certify's child does, with validate_job, and the kernel's run_sharp at contact and past it. They add the mutants and the expectations; the routes decide.
+
+- Source: [`packing/resources/web/mishapolk-n204-2026-10-22/review/review-2026-10-23/programs/sharp_controls_t231.py`](../../packing/resources/web/mishapolk-n204-2026-10-22/review/review-2026-10-23/programs/sharp_controls_t231.py), [`packing/resources/web/mishapolk-n204-2026-10-22/review/review-2026-10-23/programs/maintained_routes_t231.py`](../../packing/resources/web/mishapolk-n204-2026-10-22/review/review-2026-10-23/programs/maintained_routes_t231.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-23-mishapolk-n204.md`](../../docs/project/reviews/review-2026-10-23-mishapolk-n204.md)
+- Note: Written and run on 23 October 2026 by the review (c-review-t231-math); they import devtools.upper_bound_reports, devtools.evand_arrangement_reports and devtools.evand_exact_certificates to reach the maintained routes, and the review's checker. Kept with their receipts (outputs/sharp-controls.json, outputs/maintained-*.json).
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-mishapolk-n204-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 1 of 1: the certificate at n = 204 that T-231 cites, every wall and every pair, on each of the checker's two routes | T-231 |
+
 ### `V-overbeck-review3-seed-packing`
 
 **seed_packing_check.py** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
@@ -2597,6 +2632,7 @@ Reads Evan Daniel's rational certificates, refusing anything the format does not
 | `E-couzo-672-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 2 of 2: the certificates at n = 227 and 229 that T-227 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-227 |
 | `E-couzo-675-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 204 that T-228 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-228 |
 | `E-mishapolk-719-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 2 of 2: the certificates at n = 105 and 204 that T-229 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-229 |
+| `E-mishapolk-n204-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 204 that T-231 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-231 |
 
 ### `V-check-n11-final-composition`
 
@@ -3180,6 +3216,7 @@ Binds all three complete source certificates and all nine full deciding inputs/n
 | `E-couzo-672-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 2 of 2: the certificates at n = 227 and 229 that T-227 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-227 |
 | `E-couzo-675-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 204 that T-228 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-228 |
 | `E-mishapolk-719-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 2 of 2: the certificates at n = 105 and 204 that T-229 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-229 |
+| `E-mishapolk-n204-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 204 that T-231 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-231 |
 
 ### `V-algebraic-witness-reports`
 
@@ -3267,6 +3304,7 @@ Imports a report of rational upper-bound certificates by another author from its
 | `E-couzo-672-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 2 of 2: the certificates at n = 227 and 229 that T-227 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-227 |
 | `E-couzo-675-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 204 that T-228 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-228 |
 | `E-mishapolk-719-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 2 of 2: the certificates at n = 105 and 204 that T-229 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-229 |
+| `E-mishapolk-n204-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 204 that T-231 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-231 |
 
 ### `V-rehwaldt-n68-verify`
 

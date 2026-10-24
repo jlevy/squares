@@ -1548,6 +1548,7 @@ jobs:
             /packing/resources/web/couzo-issue678-2026-10-18/
             /packing/resources/web/evand-regularized-2026-10-20/
             /packing/resources/web/mishapolk-issue719-2026-10-22/
+            /packing/resources/web/mishapolk-n204-2026-10-22/
             /packing/resources/papers/
             !/packing/resources/papers/*
             /packing/resources/papers/kingbird-square-29-provenance.svg

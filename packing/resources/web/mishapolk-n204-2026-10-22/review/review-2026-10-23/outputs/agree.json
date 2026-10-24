@@ -1,0 +1,387 @@
+{
+ "program": "agree_t231.py",
+ "program_sha256": "3c262eb8f39b6c562215a71bf7adc728ef4efd6ee9ce051065269511255bc613",
+ "python": "3.14.7 (main, Sep 29 2026, 15:01:40) [Clang 22.1.3 ]",
+ "checks": [
+  {
+   "check": "side as read",
+   "equal": true,
+   "ours": "14808642830513087197802415708703/1000000000000000000000000000000",
+   "theirs": "14808642830513087197802415708703/1000000000000000000000000000000"
+  },
+  {
+   "check": "all 204 poses as read, literal by literal",
+   "equal": true,
+   "ours": "[['1430864283051308719779741570870231173/100000000000000000000000000000000000', '530864283051308719770741570870231173/100000000000000000000000000000000000', '0'], ['26616283132177330000266162831321773",
+   "theirs": "[['1430864283051308719779741570870231173/100000000000000000000000000000000000', '530864283051308719770741570870231173/100000000000000000000000000000000000', '0'], ['26616283132177330000266162831321773"
+  },
+  {
+   "check": "pairs tested (exact_verify)",
+   "equal": true,
+   "ours": "20706",
+   "theirs": "20706"
+  },
+  {
+   "check": "least wall clearance, route Z against exact_verify",
+   "equal": true,
+   "ours": "1/200000000000000000000",
+   "theirs": "1/200000000000000000000"
+  },
+  {
+   "check": "least wall clearance, route C against exact_verify",
+   "equal": true,
+   "ours": "1/200000000000000000000",
+   "theirs": "1/200000000000000000000"
+  },
+  {
+   "check": "least pair gap, route Z against exact_verify",
+   "equal": true,
+   "ours": "82541895235790714182044220504141977834799093428446189704607867361866276872708954451/8254189523579081975837371701336187856304747589645757681624187247640050000000000000000000000000000000000",
+   "theirs": "82541895235790714182044220504141977834799093428446189704607867361866276872708954451/8254189523579081975837371701336187856304747589645757681624187247640050000000000000000000000000000000000"
+  },
+  {
+   "check": "least pair gap, route C against exact_verify",
+   "equal": true,
+   "ours": "82541895235790714182044220504141977834799093428446189704607867361866276872708954451/8254189523579081975837371701336187856304747589645757681624187247640050000000000000000000000000000000000",
+   "theirs": "82541895235790714182044220504141977834799093428446189704607867361866276872708954451/8254189523579081975837371701336187856304747589645757681624187247640050000000000000000000000000000000000"
+  },
+  {
+   "check": "pairs tested (independent)",
+   "equal": true,
+   "ours": "20706",
+   "theirs": "20706"
+  },
+  {
+   "check": "least wall clearance, route Z against independent",
+   "equal": true,
+   "ours": "1/200000000000000000000",
+   "theirs": "1/200000000000000000000"
+  },
+  {
+   "check": "least wall clearance, route C against independent",
+   "equal": true,
+   "ours": "1/200000000000000000000",
+   "theirs": "1/200000000000000000000"
+  },
+  {
+   "check": "least pair gap, route Z against independent",
+   "equal": true,
+   "ours": "82541895235790714182044220504141977834799093428446189704607867361866276872708954451/8254189523579081975837371701336187856304747589645757681624187247640050000000000000000000000000000000000",
+   "theirs": "82541895235790714182044220504141977834799093428446189704607867361866276872708954451/8254189523579081975837371701336187856304747589645757681624187247640050000000000000000000000000000000000"
+  },
+  {
+   "check": "least pair gap, route C against independent",
+   "equal": true,
+   "ours": "82541895235790714182044220504141977834799093428446189704607867361866276872708954451/8254189523579081975837371701336187856304747589645757681624187247640050000000000000000000000000000000000",
+   "theirs": "82541895235790714182044220504141977834799093428446189704607867361866276872708954451/8254189523579081975837371701336187856304747589645757681624187247640050000000000000000000000000000000000"
+  },
+  {
+   "check": "pairs tested, route C",
+   "equal": true,
+   "ours": "20706",
+   "theirs": "20706"
+  },
+  {
+   "check": "least Euclidean pair (route C) against the least-gap pair (route Z)",
+   "equal": true,
+   "ours": "[63, 84]",
+   "theirs": "[63, 84]"
+  },
+  {
+   "check": "least squared Euclidean distance (route C) against the least gap squared (route Z)",
+   "equal": true,
+   "ours": "6813164469116249799575870762897937896694880272771561882133430624932347977913039220444463329703604953666759683999229767045545271380050630754587553694908130957592711401/681316446911626722851652812327914",
+   "theirs": "6813164469116249799575870762897937896694880272771561882133430624932347977913039220444463329703604953666759683999229767045545271380050630754587553694908130957592711401/681316446911626722851652812327914"
+  },
+  {
+   "check": "kernel's tightest pair against the least-gap pair",
+   "equal": true,
+   "ours": "[63, 84]",
+   "theirs": "[63, 84]"
+  },
+  {
+   "check": "kernel's tightest gap against the least gap",
+   "equal": true,
+   "ours": "82541895235790714182044220504141977834799093428446189704607867361866276872708954451/8254189523579081975837371701336187856304747589645757681624187247640050000000000000000000000000000000000",
+   "theirs": "82541895235790714182044220504141977834799093428446189704607867361866276872708954451/8254189523579081975837371701336187856304747589645757681624187247640050000000000000000000000000000000000"
+  },
+  {
+   "check": "kernel's closing normal against this review's P0 normal",
+   "equal": true,
+   "ours": "[Fraction(-74304233020323443063829916182121225000000000000000000000000000000000, 165083790471581639516747434026723757126094951792915153632483744952801), Fraction(14741620952841836048325256597327624287",
+   "theirs": "[Fraction(-74304233020323443063829916182121225000000000000000000000000000000000, 165083790471581639516747434026723757126094951792915153632483744952801), Fraction(14741620952841836048325256597327624287"
+  },
+  {
+   "check": "kernel's top_clearance against the least right-or-top clearance",
+   "equal": true,
+   "ours": "500000000068827/100000000000000000000000000000000000",
+   "theirs": "500000000068827/100000000000000000000000000000000000"
+  },
+  {
+   "check": "outside control's least wall (exact_verify) against G2 on route Z",
+   "equal": true,
+   "ours": "-1680864283051308719779741570870231173/100000000000000000000000000000000000",
+   "theirs": "-1680864283051308719779741570870231173/100000000000000000000000000000000000"
+  },
+  {
+   "check": "duplicate control's least gap (exact_verify) against G1 on route Z",
+   "equal": true,
+   "ours": "-1",
+   "theirs": "-1"
+  },
+  {
+   "check": "outside control's least wall (independent) against G2 on route Z",
+   "equal": true,
+   "ours": "-1680864283051308719779741570870231173/100000000000000000000000000000000000",
+   "theirs": "-1680864283051308719779741570870231173/100000000000000000000000000000000000"
+  },
+  {
+   "check": "duplicate control's least gap (independent) against G1 on route Z",
+   "equal": true,
+   "ours": "-1",
+   "theirs": "-1"
+  },
+  {
+   "check": "kernel's side-lowered-past-wall-contact (at contact) wall (exact_verify) against F0 on route C",
+   "equal": true,
+   "ours": "0",
+   "theirs": "0"
+  },
+  {
+   "check": "kernel's side-lowered-past-wall-contact (at contact) verdict (exact_verify) against F0",
+   "equal": true,
+   "ours": "True",
+   "theirs": "True"
+  },
+  {
+   "check": "kernel's side-lowered-past-wall-contact (at contact) wall (independent) against F0 on route C",
+   "equal": true,
+   "ours": "0",
+   "theirs": "0"
+  },
+  {
+   "check": "kernel's side-lowered-past-wall-contact (at contact) verdict (independent) against F0",
+   "equal": true,
+   "ours": "True",
+   "theirs": "True"
+  },
+  {
+   "check": "kernel's side-lowered-past-wall-contact wall (exact_verify) against F1 on route C",
+   "equal": true,
+   "ours": "-1/1000000000000000000000000000000",
+   "theirs": "-1/1000000000000000000000000000000"
+  },
+  {
+   "check": "kernel's side-lowered-past-wall-contact verdict (exact_verify) against F1",
+   "equal": true,
+   "ours": "False",
+   "theirs": "False"
+  },
+  {
+   "check": "kernel's side-lowered-past-wall-contact wall (independent) against F1 on route C",
+   "equal": true,
+   "ours": "-1/1000000000000000000000000000000",
+   "theirs": "-1/1000000000000000000000000000000"
+  },
+  {
+   "check": "kernel's side-lowered-past-wall-contact verdict (independent) against F1",
+   "equal": true,
+   "ours": "False",
+   "theirs": "False"
+  },
+  {
+   "check": "kernel's tightest-pair-closed-past-contact (at contact) gap (exact_verify) against P0 on route C",
+   "equal": true,
+   "ours": "0",
+   "theirs": "0"
+  },
+  {
+   "check": "kernel's tightest-pair-closed-past-contact (at contact) verdict (exact_verify) against P0",
+   "equal": true,
+   "ours": "True",
+   "theirs": "True"
+  },
+  {
+   "check": "kernel's tightest-pair-closed-past-contact (at contact) gap (independent) against P0 on route C",
+   "equal": true,
+   "ours": "0",
+   "theirs": "0"
+  },
+  {
+   "check": "kernel's tightest-pair-closed-past-contact (at contact) verdict (independent) against P0",
+   "equal": true,
+   "ours": "True",
+   "theirs": "True"
+  },
+  {
+   "check": "kernel's tightest-pair-closed-past-contact gap (exact_verify) against P1 on route C",
+   "equal": true,
+   "ours": "-1/1000000000000000000000000000000",
+   "theirs": "-1/1000000000000000000000000000000"
+  },
+  {
+   "check": "kernel's tightest-pair-closed-past-contact verdict (exact_verify) against P1",
+   "equal": true,
+   "ours": "False",
+   "theirs": "False"
+  },
+  {
+   "check": "kernel's tightest-pair-closed-past-contact gap (independent) against P1 on route C",
+   "equal": true,
+   "ours": "-1/1000000000000000000000000000000",
+   "theirs": "-1/1000000000000000000000000000000"
+  },
+  {
+   "check": "kernel's tightest-pair-closed-past-contact verdict (independent) against P1",
+   "equal": true,
+   "ours": "False",
+   "theirs": "False"
+  },
+  {
+   "check": "T-229 side: clone's n-204.cert against the packet's fact",
+   "equal": true,
+   "ours": "882663895519250432/59604644775390625",
+   "theirs": "882663895519250432/59604644775390625"
+  },
+  {
+   "check": "T-229 poses equal to the fact's, of 204",
+   "equal": true,
+   "ours": "204",
+   "theirs": "204"
+  },
+  {
+   "check": "records lane's receipt: side",
+   "equal": true,
+   "ours": "14808642830513087197802415708703/1000000000000000000000000000000",
+   "theirs": "14808642830513087197802415708703/1000000000000000000000000000000"
+  },
+  {
+   "check": "records lane's receipt: all 204 poses",
+   "equal": true,
+   "ours": "[['1430864283051308719779741570870231173/100000000000000000000000000000000000', '530864283051308719770741570870231173/100000000000000000000000000000000000', '0'], ['26616283132177330000266162831321773",
+   "theirs": "[['1430864283051308719779741570870231173/100000000000000000000000000000000000', '530864283051308719770741570870231173/100000000000000000000000000000000000', '0'], ['26616283132177330000266162831321773"
+  },
+  {
+   "check": "records lane's receipt against this lane's maintained run: exact_verify minimum_containment_clearance",
+   "equal": true,
+   "ours": "1/200000000000000000000",
+   "theirs": "1/200000000000000000000"
+  },
+  {
+   "check": "records lane's receipt against this lane's maintained run: exact_verify minimum_best_pair_gap",
+   "equal": true,
+   "ours": "82541895235790714182044220504141977834799093428446189704607867361866276872708954451/8254189523579081975837371701336187856304747589645757681624187247640050000000000000000000000000000000000",
+   "theirs": "82541895235790714182044220504141977834799093428446189704607867361866276872708954451/8254189523579081975837371701336187856304747589645757681624187247640050000000000000000000000000000000000"
+  },
+  {
+   "check": "records lane's receipt against this lane's maintained run: exact_verify pairs_tested",
+   "equal": true,
+   "ours": "20706",
+   "theirs": "20706"
+  },
+  {
+   "check": "records lane's receipt against this lane's maintained run: exact_verify verification_passed",
+   "equal": true,
+   "ours": "True",
+   "theirs": "True"
+  },
+  {
+   "check": "records lane's receipt against this lane's maintained run: duplicate-square-overlap exact_verify minimum_containment_clearance",
+   "equal": true,
+   "ours": "1/200000000000000000000",
+   "theirs": "1/200000000000000000000"
+  },
+  {
+   "check": "records lane's receipt against this lane's maintained run: duplicate-square-overlap exact_verify minimum_best_pair_gap",
+   "equal": true,
+   "ours": "-1",
+   "theirs": "-1"
+  },
+  {
+   "check": "records lane's receipt against this lane's maintained run: duplicate-square-overlap exact_verify verification_passed",
+   "equal": true,
+   "ours": "False",
+   "theirs": "False"
+  },
+  {
+   "check": "records lane's receipt against this lane's maintained run: square-translated-outside-container exact_verify minimum_containment_clearance",
+   "equal": true,
+   "ours": "-1680864283051308719779741570870231173/100000000000000000000000000000000000",
+   "theirs": "-1680864283051308719779741570870231173/100000000000000000000000000000000000"
+  },
+  {
+   "check": "records lane's receipt against this lane's maintained run: square-translated-outside-container exact_verify minimum_best_pair_gap",
+   "equal": true,
+   "ours": "82541895235790714182044220504141977834799093428446189704607867361866276872708954451/8254189523579081975837371701336187856304747589645757681624187247640050000000000000000000000000000000000",
+   "theirs": "82541895235790714182044220504141977834799093428446189704607867361866276872708954451/8254189523579081975837371701336187856304747589645757681624187247640050000000000000000000000000000000000"
+  },
+  {
+   "check": "records lane's receipt against this lane's maintained run: square-translated-outside-container exact_verify verification_passed",
+   "equal": true,
+   "ours": "False",
+   "theirs": "False"
+  },
+  {
+   "check": "records lane's receipt against this lane's maintained run: independent minimum_containment_clearance",
+   "equal": true,
+   "ours": "1/200000000000000000000",
+   "theirs": "1/200000000000000000000"
+  },
+  {
+   "check": "records lane's receipt against this lane's maintained run: independent minimum_best_pair_gap",
+   "equal": true,
+   "ours": "82541895235790714182044220504141977834799093428446189704607867361866276872708954451/8254189523579081975837371701336187856304747589645757681624187247640050000000000000000000000000000000000",
+   "theirs": "82541895235790714182044220504141977834799093428446189704607867361866276872708954451/8254189523579081975837371701336187856304747589645757681624187247640050000000000000000000000000000000000"
+  },
+  {
+   "check": "records lane's receipt against this lane's maintained run: independent pairs_tested",
+   "equal": true,
+   "ours": "20706",
+   "theirs": "20706"
+  },
+  {
+   "check": "records lane's receipt against this lane's maintained run: independent verification_passed",
+   "equal": true,
+   "ours": "True",
+   "theirs": "True"
+  },
+  {
+   "check": "records lane's receipt against this lane's maintained run: duplicate-square-overlap independent minimum_containment_clearance",
+   "equal": true,
+   "ours": "1/200000000000000000000",
+   "theirs": "1/200000000000000000000"
+  },
+  {
+   "check": "records lane's receipt against this lane's maintained run: duplicate-square-overlap independent minimum_best_pair_gap",
+   "equal": true,
+   "ours": "-1",
+   "theirs": "-1"
+  },
+  {
+   "check": "records lane's receipt against this lane's maintained run: duplicate-square-overlap independent verification_passed",
+   "equal": true,
+   "ours": "False",
+   "theirs": "False"
+  },
+  {
+   "check": "records lane's receipt against this lane's maintained run: square-translated-outside-container independent minimum_containment_clearance",
+   "equal": true,
+   "ours": "-1680864283051308719779741570870231173/100000000000000000000000000000000000",
+   "theirs": "-1680864283051308719779741570870231173/100000000000000000000000000000000000"
+  },
+  {
+   "check": "records lane's receipt against this lane's maintained run: square-translated-outside-container independent minimum_best_pair_gap",
+   "equal": true,
+   "ours": "82541895235790714182044220504141977834799093428446189704607867361866276872708954451/8254189523579081975837371701336187856304747589645757681624187247640050000000000000000000000000000000000",
+   "theirs": "82541895235790714182044220504141977834799093428446189704607867361866276872708954451/8254189523579081975837371701336187856304747589645757681624187247640050000000000000000000000000000000000"
+  },
+  {
+   "check": "records lane's receipt against this lane's maintained run: square-translated-outside-container independent verification_passed",
+   "equal": true,
+   "ours": "False",
+   "theirs": "False"
+  }
+ ],
+ "all_equal": true,
+ "count": 63
+}

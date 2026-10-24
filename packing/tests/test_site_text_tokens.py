@@ -30,6 +30,9 @@ EXPLAINER = {
     "--kpress-measure": "calc(18px * 35)",
     "--kpress-font-size-h2": "calc(18px * 1.2)",
 }
+#: A paragraph's own text width: the measure itself, 35 of the 18px base, with the column's
+#: padding outside it (`templates/paper-design.md`, Text, "Reading column").
+TEXT_WIDTH = "630px"
 SANS = '"Source Sans 3 Variable"'
 #: A face no page ships, as an embedding viewer's hook would name one.
 FOREIGN = "Comic Sans MS"
@@ -86,7 +89,7 @@ def test_a_report_resolves_the_explainers_text_tokens(
     roles = measured["roles"]
     assert roles["p"]["size"] == "18px"
     assert roles["p"]["line_height"] == "27px"
-    assert roles["p"]["text_width"] == "710px"
+    assert roles["p"]["text_width"] == TEXT_WIDTH
     assert roles["h2"]["size"] == "21.6px"
 
 

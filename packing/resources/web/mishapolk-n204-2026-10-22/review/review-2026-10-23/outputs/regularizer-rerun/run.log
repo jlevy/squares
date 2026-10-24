@@ -1,0 +1,7 @@
+warning: The `UV_NATIVE_TLS` environment variable is deprecated and will be removed in a future release. Use `UV_SYSTEM_CERTS` instead.
+n=204: ok, row 7 refuse
+receipt: /tmp/claude-0/-home-user-squares/f8504540-2b5a-5f78-8968-eb4ffa4c4b64/scratchpad/t231-regrun/receipt.json (112.73 s wall)
+
+real	1m55.074s
+user	0m0.814s
+sys	0m0.095s

@@ -2393,9 +2393,11 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     # lists still hold other counts, and Polkovskyi's name is already on the poster. The
     # same pass draws 303 from one more, Evan Daniel's issue 728 packet (T-230), with no new
     # name: Mishapolk's KKT refinements still hold other counts. The adoption of 24 October
-    # draws 303 from Amund Kristiansen's issue 755 packet (T-239) instead, and no longer from
-    # Daniel's issue 728 packet, which held nothing else: the same number of sources.
-    assert len(expected_sources) == 27
+    # draws 204 from one more, Polkovskyi's n204 packet (T-231), with no new name: his issue
+    # 719 packet still holds 105. The same pass draws 303 from Amund Kristiansen's issue 755
+    # packet (T-239) instead, and no longer from Daniel's issue 728 packet, which held
+    # nothing else, so that move leaves the number of sources as it was.
+    assert len(expected_sources) == 28
     assert set(json.loads(credit_block.attrib["data-credited-names"])) == expected_names
     assert set(json.loads(credit_block.attrib["data-source-keys"])) == expected_sources
     assert credit_block.find("svg:text[@data-feature='packing-credits-heading']", SVG) is None

@@ -176,9 +176,11 @@ SCREEN_EXCLUDED: dict[str, tuple[str, ...]] = {
 #: think-4h23): separating and translating squares 6 and 23 at 105 against T-174's 8 and
 #: 41, and 21 and 85 at 204 against T-225's 8 and 25; and the same pass the one it moved to
 #: Evan Daniel's issue-728 certificate (T-230, think-icp1), 303, 10 separating and 27
-#: translating squares against T-186's 4 and 24. The pass of 24 October 2026 moved 303
-#: again, to Amund Kristiansen's issue-755 certificate (T-239, think-tqb5): 12 separating
-#: and 37 translating squares against T-230's 10 and 27.
+#: translating squares against T-186's 4 and 24. The pass of 24 October 2026 moved 204 to
+#: the release's lower 204 file (T-231, think-h01y), the same packing at its solved side:
+#: 21 and 85 again, so the totals stand; and 303 again, to Amund Kristiansen's issue-755
+#: certificate (T-239, think-tqb5): 12 separating and 37 translating squares against
+#: T-230's 10 and 27.
 SCREEN_FINDINGS: dict[str, tuple[int, int, int, int]] = {
     "n=1..100": (28, 112, 86, 577),
     "n=1..200": (67, 431, 182, 2095),
