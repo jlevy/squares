@@ -3,9 +3,9 @@ type: is
 id: is-01m5nvephbmqvk0ace4vzerhg9
 title: "Take over PR #736 (home page News box) on the owner's word: merge main, resolve without redesign, verify a strict improvement compatible with later design choices, review, merge"
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 9
+version: 10
 delegate: c-sync-736-1024
 labels: []
 dependencies: []
@@ -15,8 +15,12 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-24T02:22:20.715Z
-updated_at: 2026-10-24T09:51:15.287Z
+updated_at: 2026-10-24T10:48:04.270Z
 started_at: 2026-10-24T02:22:34.759Z
+closed_at: 2026-10-24T10:48:04.270Z
+close_reason: "PR #736 merged 2026-10-24T10:47:45Z (f354a34f5) at efd1d8e48 after review B's fixes and follow-up review C (approve: strict improvement, 710 of 711 pages identical, compatible with #746, #764, #771, #757 and the 22 October design); hosted CI green (31 pass, 28 skipped)."
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes

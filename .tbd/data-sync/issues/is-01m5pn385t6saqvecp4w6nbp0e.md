@@ -3,9 +3,9 @@ type: is
 id: is-01m5pn385t6saqvecp4w6nbp0e
 title: "PR #736 (merge): follow-up review C of review B's fixes (c0ce843f9) and the main merges since 17a264be0"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 3
+version: 4
 delegate: c-rev-736c-1024
 labels: []
 dependencies: []
@@ -13,8 +13,12 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-24T09:50:28.538Z
-updated_at: 2026-10-24T10:31:32.496Z
+updated_at: 2026-10-24T10:48:03.522Z
 started_at: 2026-10-24T09:50:36.439Z
+closed_at: 2026-10-24T10:48:03.521Z
+close_reason: Review C posted https://github.com/jlevy/squares/pull/736#issuecomment-6383128770 (approve; C1 fixed in efd1d8e48, C2 noted on think-aqv8; dispositions issuecomment-6383148766).
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes
