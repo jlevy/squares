@@ -1936,13 +1936,43 @@ def claims_record() -> dict[str, int]:
 # --------------------------------------------------------------------------- earlier reports
 
 
-#: Watched repositories whose commits after a public head reached GitHub later, in one push:
-#: Couzo's three commits after 7b6c87e were pushed at 2026-10-21T22:56:37Z
-#: (`devtools.couzo_715_replay`), so each is dated by that push, not by its committer time.
-PUSHED_LATER: dict[str, tuple[str, str]] = {
+class Push(NamedTuple):
+    """A push that made a watched repository's commits public after their committer time:
+    every commit not reachable from ``before``, the public head until then, reached GitHub
+    at ``pushed`` or later, in the push that moved the branch to ``head``. ``evidence`` says
+    where the push is recorded."""
+
+    before: str
+    head: str
+    pushed: str
+    evidence: str
+
+
+#: Watched repositories whose commits reached GitHub later than their committer times, each
+#: push oldest first. A commit is a report from the push that made it public, not from its
+#: commit (`publication_times`). Couzo's three commits after 7b6c87e were pushed at
+#: 2026-10-21T22:56:37Z (`devtools.couzo_715_replay`). efef7d1 and fa6237e, committed at
+#: 18:16:49Z and 18:59:39Z on 23 October, before Polkovskyi's f1ceee4 (20:34:13Z, reported
+#: at 20:35:12Z), and 964ee2b were pushed at 23:38:42Z, after it (#769's review A, A7).
+PUSHED_LATER: dict[str, tuple[Push, ...]] = {
     "franciscouzo/square-packing": (
-        "7b6c87e129cf80b5ff9847b90b47fd30b4563c54",
-        "2026-10-21T22:56:37Z",
+        Push(
+            "7b6c87e129cf80b5ff9847b90b47fd30b4563c54",
+            "6b7391de820fd01f3ff6984e4a081e8c86845588",
+            "2026-10-21T22:56:37Z",
+            "GitHub's activity API (repos/franciscouzo/square-packing/activity): the push to "
+            "refs/heads/master by franciscouzo at 2026-10-21T22:56:37Z, from 7b6c87e to "
+            "6b7391d; devtools.couzo_715_replay",
+        ),
+        Push(
+            "6b7391de820fd01f3ff6984e4a081e8c86845588",
+            "964ee2bdf301d0c8912d956d4010f478dcbbd5ea",
+            "2026-10-23T23:38:42Z",
+            "GitHub's activity API (repos/franciscouzo/square-packing/activity), read "
+            "2026-10-24: the push to refs/heads/master by franciscouzo at "
+            "2026-10-23T23:38:42Z, from 6b7391d to 964ee2b, carrying efef7d1, fa6237e and "
+            "964ee2b, 2 min 51 s after issue #763 (think-cnn7)",
+        ),
     ),
 }
 #: The index files whose stated bounds are publications too: each count's verified bound.
@@ -1960,10 +1990,39 @@ def _header(raw: bytes) -> tuple[int, Fraction] | None:
     return None
 
 
+def publication_times(
+    name: str, times: Mapping[str, str], reachable: Callable[[str], set[str]]
+) -> dict[str, str]:
+    """Each commit's publication time, from its committer time in ``times``: for each push
+    `PUSHED_LATER` records for the repository ``name``, oldest first, a commit not reachable
+    from the push's ``before`` (``reachable(before)``, every commit its history holds) is
+    dated no earlier than the push. A commit is so dated by the first push that made it
+    public, and one public before every recorded push keeps its committer time."""
+    published = dict(times)
+    for push in PUSHED_LATER.get(name, ()):
+        public = reachable(push.before)
+        published = {
+            commit: (when if commit in public else max(when, push.pushed))
+            for commit, when in published.items()
+        }
+    return published
+
+
+def pushed_later_record() -> dict[str, list[dict[str, str]]]:
+    """`PUSHED_LATER` as a receipt states it: each repository's pushes, oldest first."""
+    return {
+        name: [
+            {"public_head": push.before, "head": push.head, "pushed": push.pushed}
+            for push in pushes
+        ]
+        for name, pushes in PUSHED_LATER.items()
+    }
+
+
 def _dated_commits(name: str, clone: Path, until: str) -> list[tuple[str, str]]:
     """Every commit of a clone's ``HEAD`` history oldest first, each with the time it was
-    published: its committer time, or the later push `PUSHED_LATER` records; only those
-    published before ``until``."""
+    published (`publication_times`): its committer time, or the later push `PUSHED_LATER`
+    records; only those published before ``until``."""
     chain = _git(clone, "rev-list", "--reverse", "--topo-order", "HEAD").split()
     times = {
         commit: _utc(stamp)
@@ -1972,10 +2031,9 @@ def _dated_commits(name: str, clone: Path, until: str) -> list[tuple[str, str]]:
             for line in _git(clone, "log", "--format=%H %cI", "HEAD").splitlines()
         )
     }
-    if name in PUSHED_LATER:
-        head, pushed = PUSHED_LATER[name]
-        public = set(_git(clone, "rev-list", head).split())
-        times = {c: (t if c in public else max(t, pushed)) for c, t in times.items()}
+    times = publication_times(
+        name, times, lambda head: set(_git(clone, "rev-list", head).split())
+    )
     return [(commit, times[commit]) for commit in chain if times[commit] < until]
 
 
@@ -2226,10 +2284,7 @@ def earlier_publications(
         "issue": chosen.issue_url,
         "until": until,
         "repositories": scanned,
-        "pushed_later": {
-            name: {"public_head": head, "pushed": time}
-            for name, (head, time) in PUSHED_LATER.items()
-        },
+        "pushed_later": pushed_later_record(),
         "indexes": {path: ".".join(keys) for path, keys in INDEXES.items()},
         "rows": result,
     }
@@ -2684,10 +2739,7 @@ def history_publications(clones: Mapping[str, Path], start_coverage: Path) -> di
         "read_at_main": HISTORY_READ_AT_MAIN,
         "counts": [HISTORY_COUNTS.start, HISTORY_COUNTS.stop - 1],
         "repositories": scanned,
-        "pushed_later": {
-            name: {"public_head": head, "pushed": time}
-            for name, (head, time) in PUSHED_LATER.items()
-        },
+        "pushed_later": pushed_later_record(),
         "indexes": {path: ".".join(keys) for path, keys in INDEXES.items()},
         "tables": {path: f"rounded up at {places} places" for path, places in TABLES.items()},
         "publications": sorted(
@@ -3167,28 +3219,24 @@ def write_source_history(issue: int | str, clone: Path) -> dict[str, int]:
     return {"at_commit": len(record["at_commit"]), "publications": len(record["publications"])}
 
 
-def _start_highs(
-    walk: Walk, read_at_main: str, counts: Iterable[int], read_on: str = ""
-) -> dict[int, Fraction]:
-    """The least high end of a member of each count's start in ``walk``: from its frozen
-    ``starts.yaml``, or, before ``gather`` has frozen one, from the checkout's records for a
-    ledger read on ``read_on``, which must then be those of ``read_at_main``
-    (`devtools.intake_ledger.tree_members`).
+def _least_highs(starts: Mapping[int, Sequence[Any]]) -> dict[int, Fraction]:
+    """The least high end of a member of each count's start (`_start_sides`).
 
     A side at or above that end is at or above a member of the start, every number of which
     it is at least, so the walk never records it and it never joins the standing side; only
     a side strictly below it can change a verdict. A start of one member, as every walk's
     before 23 October 2026, has the same end either way; one read from that day may hold
     Göbel's construction beside the row (`devtools.intake_ledger.GOEBEL_FROM`)."""
-    sides = _start_sides(walk, read_at_main, counts, read_on)
-    return {n: min(member.span.high for member in members) for n, members in sides.items()}
+    return {n: min(member.span.high for member in members) for n, members in starts.items()}
 
 
 def _start_sides(
     walk: Walk, read_at_main: str, counts: Iterable[int], read_on: str = ""
 ) -> dict[int, list[Any]]:
     """Each count's start in ``walk`` as the ledger's sides (`devtools.intake_ledger.Side`):
-    from its frozen ``starts.yaml``, else from the checkout's records (`_start_highs`)."""
+    from its frozen ``starts.yaml``, or, before ``gather`` has frozen one, from the
+    checkout's records for a ledger read on ``read_on``, which must then be those of
+    ``read_at_main`` (`devtools.intake_ledger.tree_members`)."""
     from devtools import intake_ledger  # noqa: PLC0415
 
     wanted = sorted(set(counts))
@@ -3222,7 +3270,7 @@ def release_walk_sources(issue: int | str, read_on: str) -> dict[str, Any]:
       restatements (think-fwa9); a publication of a side #715 re-certified is #715's report.
 
     Every earlier publication is walked only where it is strictly below the count's start
-    (`_start_highs`): at or above it, it could never be recorded or change a verdict. The
+    (`_least_highs`): at or above it, it could never be recorded or change a verdict. The
     start is frozen at the walk's ``read_at_main`` (`WALK_READ_AT_MAIN`).
 
     A later release a comment reports (`Release.comment`) is dated by that comment, and with
@@ -3245,7 +3293,7 @@ def release_walk_sources(issue: int | str, read_on: str) -> dict[str, Any]:
     }
     later = later_publications(chosen)
     starts = _start_sides(walk, read_at_main, [*own, *later], read_on)
-    highs = {n: min(member.span.high for member in members) for n, members in starts.items()}
+    highs = _least_highs(starts)
     claims = []
     for n, row in sorted(own.items()):
         side = Fraction(row["side"])
@@ -3678,7 +3726,7 @@ def ledger_reports(
     """The earlier reports at counts in the corpus a release walk takes beside its later
     commits: every report a retained report-order ledger walked at one of ``highs``'s counts
     before ``before``, with each claim strictly below the count's start (``highs``, as
-    `_start_highs` reads it), and the walk's reports whose import has not reached ``main``
+    `_least_highs` reads it), and the walk's reports whose import has not reached ``main``
     (`WALK_PENDING_REPORTS`). Where two ledgers transcribe a report at a count, the one
     read last stands. A claim keeps its print, rounding, exact side and times
     (`_LEDGER_CLAIM_FIELDS`), and those of the record relations its ledger froze that still

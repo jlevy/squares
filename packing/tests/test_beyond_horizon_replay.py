@@ -1735,6 +1735,104 @@ def test_the_eleven_counts_asking_sole_credit_are_measured_against_what_they_sup
         superseded = [item for item in row["against"] if item["superseded_row"]]
         assert len(superseded) == 1
         assert {item["report"] for item in row["against"]} >= {"#715"}
+    # #769's review A, A9: the receipt is what a fresh measurement writes.
+    assert receipt == replay.pose_identity(F1)
+
+
+#: A packing of five squares in a box of side 3 that no symmetry of the box maps to itself.
+_POSES = (
+    ("1/2", "1/2", "0"),
+    ("3/2", "1/2", "1/8"),
+    ("5/2", "1/2", "0"),
+    ("1/2", "3/2", "1/4"),
+    ("9/4", "5/2", "-1/16"),
+)
+
+
+def _certificate(poses: Any) -> Any:
+    legacy = replay.legacy
+    return legacy.Certificate(
+        len(poses),
+        Fraction(3),
+        tuple(legacy.Pose(Fraction(x), Fraction(y), Fraction(t)) for x, y, t in poses),
+    )
+
+
+def test_a_packing_pairs_one_to_one_with_its_image_under_the_right_symmetry() -> None:
+    """#769's review A, A9: `measured_identity` pairs a packing with its copy turned a
+    quarter about the box's centre at three further quarter turns, and with its mirror
+    image at the reflection, one to one, every square at distance 0 and every rotation
+    equal modulo 90 degrees; a copy with one square moved pairs at that distance."""
+    other = _certificate(_POSES)
+    side = Fraction(3)
+    turned = _certificate([(str(side - Fraction(y)), x, t) for x, y, t in _POSES])
+    mirrored = _certificate(
+        [(str(side - Fraction(x)), y, str(-Fraction(t))) for x, y, t in _POSES]
+    )
+    for ours, symmetry in ((other, 0), (turned, 3), (mirrored, 4)):
+        found = replay.measured_identity(ours, other)
+        assert (found["symmetry"], found["one_to_one"], found["paired"]) == (symmetry, True, 5)
+        assert float(found["largest_centre_distance"]) == 0.0
+        assert float(found["largest_rotation_difference_degrees"]) < 1e-9
+        assert set(found["beyond"].values()) == {0}
+        assert found["side_difference"] == "+0.000e+00"
+    moved = _certificate([*_POSES[:4], ("9/4", "21/8", "-1/16")])
+    found = replay.measured_identity(moved, other)
+    assert (found["symmetry"], found["one_to_one"]) == (0, True)
+    assert float(found["largest_centre_distance"]) == 0.125
+    assert found["beyond"] == {"1e-9": 1, "1e-6": 1, "1e-3": 1, "1e-1": 1}
+
+
+def test_a_commit_is_dated_by_the_push_that_made_it_public() -> None:
+    """#769's review A, A7: Couzo's fa6237e was committed at 18:59:39Z on 23 October, before
+    Polkovskyi's f1ceee4 (reported at 20:35:12Z), but reached GitHub only in his push of
+    23:38:42Z, from 6b7391d to 964ee2b, as GitHub's activity API records it, so it is a
+    report from that push. A commit of the 21 October push keeps that push's time, and one
+    public before both keeps its committer time."""
+    pushes = replay.PUSHED_LATER["franciscouzo/square-packing"]
+    assert [(push.before[:7], push.head[:7], push.pushed) for push in pushes] == [
+        ("7b6c87e", "6b7391d", "2026-10-21T22:56:37Z"),
+        ("6b7391d", "964ee2b", "2026-10-23T23:38:42Z"),
+    ]
+    old, public = "0" * 40, pushes[0].before
+    held = {
+        old: "2026-10-18T06:00:00Z",
+        public: "2026-10-18T23:23:41Z",
+        "5a299b4": "2026-10-21T20:00:00Z",
+        pushes[0].head: "2026-10-21T22:50:00Z",
+        "efef7d1418d0cb629debc962c077740125ba7901": "2026-10-23T18:16:49Z",
+        "fa6237e288cf3fc53b53fc43438c91f3f59c40e9": "2026-10-23T18:59:39Z",
+        pushes[1].head: "2026-10-23T22:38:09Z",
+    }
+    order = list(held)
+    history = {
+        public: set(order[:2]),
+        pushes[0].head: set(order[:4]),
+        pushes[1].head: set(order),
+    }
+    published = replay.publication_times(
+        "franciscouzo/square-packing", held, history.__getitem__
+    )
+    assert published == {
+        old: "2026-10-18T06:00:00Z",
+        public: "2026-10-18T23:23:41Z",
+        "5a299b4": "2026-10-21T22:56:37Z",
+        pushes[0].head: "2026-10-21T22:56:37Z",
+        "efef7d1418d0cb629debc962c077740125ba7901": "2026-10-23T23:38:42Z",
+        "fa6237e288cf3fc53b53fc43438c91f3f59c40e9": "2026-10-23T23:38:42Z",
+        pushes[1].head: "2026-10-23T23:38:42Z",
+    }
+    assert (
+        held["fa6237e288cf3fc53b53fc43438c91f3f59c40e9"]
+        < "2026-10-23T20:35:12Z"
+        < published["fa6237e288cf3fc53b53fc43438c91f3f59c40e9"]
+    )
+    assert replay.publication_times("evand/square-packing", held, history.__getitem__) == held
+    assert replay.pushed_later_record()["franciscouzo/square-packing"][1] == {
+        "public_head": pushes[1].before,
+        "head": pushes[1].head,
+        "pushed": "2026-10-23T23:38:42Z",
+    }
 
 
 #: The register's rows above Göbel's construction at their count, each marked so with it.
