@@ -3,9 +3,9 @@ type: is
 id: is-01m58w3jngtrtqbg6qxpy896y1
 title: Review Fang's public Lean formalization at 947bdae before T-163 rung change
 kind: task
-status: open
+status: closed
 priority: 2
-version: 10
+version: 11
 delegate: c-fang-note-1024
 labels: []
 dependencies: []
@@ -13,10 +13,10 @@ parent_id: is-01m4wv278cdppm9155311gb6y5
 hold: null
 hold_until: null
 created_at: 2026-10-19T01:23:37.262Z
-updated_at: 2026-10-24T11:19:42.977Z
+updated_at: 2026-10-24T12:08:10.501Z
 started_at: 2026-10-19T01:23:53.493Z
-closed_at: null
-close_reason: null
+closed_at: 2026-10-24T12:08:10.501Z
+close_reason: "Fang's note v0.9 and Lean proof retained; T-163 V3/C1 (PR #781, 830dfb470); #603 status reply posted 11:29:46Z and recorded, and the two squarepack-certs watch reads settled, in PR #790 (90a543771). C3 is think-dgrc, C4 think-pxxi."
 resolution: null
 duplicate_of: null
 ---

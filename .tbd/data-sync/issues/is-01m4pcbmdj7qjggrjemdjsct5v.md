@@ -3,9 +3,9 @@ type: is
 id: is-01m4pcbmdj7qjggrjemdjsct5v
 title: "Import wand125: s(31) >= 2391/400 = 5.9775 by the mixed_n31_L59775 fine-net certificate (no issue)"
 kind: task
-status: open
+status: closed
 priority: 2
-version: 13
+version: 14
 delegate: coord-intake-1024
 labels:
   - result-import
@@ -14,10 +14,10 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-11T21:02:04.210Z
-updated_at: 2026-10-24T09:44:04.592Z
+updated_at: 2026-10-24T12:08:09.946Z
 started_at: 2026-10-23T06:18:58.210Z
-closed_at: null
-close_reason: null
+closed_at: 2026-10-24T12:08:09.946Z
+close_reason: "#534 closed 09:16:28Z with its final reply (T-232 V3/C3); the record of the close and the settled wand125 23e3186 watch read landed in PR #790 (90a543771, 2026-10-24T12:07:47Z); M-1 to M-3 are think-nq5g's."
 resolution: null
 duplicate_of: null
 ---
