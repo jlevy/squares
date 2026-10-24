@@ -630,6 +630,44 @@ def test_the_719_ledger_transcribes_the_packets_receipts() -> None:
     }
 
 
+def test_the_719_ledger_takes_its_commits_least_side_at_204() -> None:
+    """#722's review A, A2, at #719's own commit: 1851c2c published both 204 files, the
+    issue names certificates/n-204.cert (T-229), and the ledger keeps one claim of a report
+    a count, the least side its commit states, certificates/n204.cert (T-231), which the
+    author claimed on 22 October after T-229 was registered (think-h01y). Only 204 is
+    transcribed so; 105, whose other file is above the named one, is not."""
+    chosen = replay.release(719)
+    assert set(chosen.same_commit_least or {}) == {204}
+    sources = safe_load((LEDGER_719 / "sources.yaml").read_text(encoding="utf-8"))
+    (own,) = (report for report in sources["reports"] if report["report"] == "#719")
+    claims = {claim["n"]: claim for claim in own["claims"]}
+    lower = Fraction(14808642830513087197802415708703, 10**30)
+    named = Fraction(882663895519250432, 59604644775390625)
+    assert Fraction(claims[204]["exact"]) == lower
+    assert claims[204]["exact_from"].startswith("certificates/n204.cert at 12fc4667")
+    assert (
+        "beside certificates/n-204.cert, the file the issue names"
+        in (claims[204]["exact_from"])
+    )
+    assert "T-231 registers the lower file" in own["note"]
+    assert claims[105]["exact_from"].endswith(
+        "certificates/n-105.cert at 12fc4667 (its header)"
+    )
+    ledger = _read(LEDGER_719 / "ledger.json")
+    (count,) = (row for row in ledger["counts"] if row["n"] == 204)
+    (step,) = count["steps"]
+    assert (step["report"], step["verdict"], step["side"]) == (
+        "#719",
+        "recorded",
+        "14.808642830514",
+    )
+    row = next(row for row in replay.claims(chosen) if row.n == 204)
+    other = (chosen.same_commit_least or {})[204]
+    with pytest.raises(replay.ReplayError, match="not below the file the issue names"):
+        replay.same_commit_claim(chosen, row, lower, other)
+    assert Fraction(replay.same_commit_claim(chosen, row, named, other)["exact"]) == lower
+
+
 def _watched(**changed: Any) -> replay.Release:
     """A publication no issue reports, shaped like #670's release (`Release`)."""
     return dataclasses.replace(

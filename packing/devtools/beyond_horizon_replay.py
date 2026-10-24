@@ -867,6 +867,25 @@ class Claim:
 
 
 @dataclass(frozen=True, slots=True)
+class SameCommitLeast:
+    """Another file of a release's commit at a count, with a smaller side than the row's.
+
+    ``path`` is its upstream path, ``packet`` the packet that retains it and whose import
+    declaration reads its exact side (`upper_bound_reports.import_side`), ``claimed`` the
+    comment in which the author claimed it, after the issue had named the row's file, and
+    ``note`` the sentence the ledger's note on the report adds for the count.
+    At #719's 204 the commit 1851c2c published both `certificates/n-204.cert`, which the
+    issue names and T-229 registers, and `certificates/n204.cert`, 1.48e-11 lower, which
+    the author claimed on 22 October and T-231 registers (think-h01y).
+    """
+
+    path: str
+    packet: str
+    claimed: str
+    note: str
+
+
+@dataclass(frozen=True, slots=True)
 class Release:
     """One report, as this module reads it from its packet.
 
@@ -880,7 +899,11 @@ class Release:
     that plans its rows, ``rounding`` how the issue prints a side (`UP`, `BINARY64`), and
     ``derived`` that the packet keeps derived facts and no upstream byte. ``claimed_at``
     dates the counts an edit of the issue first claimed, which the ledger walks at that
-    time rather than the issue's opening (#722's review A, A4).
+    time rather than the issue's opening (#722's review A, A4). ``same_commit_least`` names
+    the counts where the commit that first holds a row's certificate also states a smaller
+    side in another file the issue does not name (`SameCommitLeast`): the ledger keeps one
+    claim of a report per count, the least side its commit states there (#722's review A,
+    A2), so the row is transcribed at that file's side (`same_commit_claim`).
 
     **A publication no issue reports** (``issue`` None) is a watched repository's commit,
     ``pin``, reported from the time it reached GitHub, ``published``: its committer time,
@@ -910,6 +933,7 @@ class Release:
     derived: bool = False
     later_commits: Mapping[int, tuple[str, str]] | None = None
     claimed_at: Mapping[int, str] | None = None
+    same_commit_least: Mapping[int, SameCommitLeast] | None = None
     published: str | None = None
     source_id: str | None = None
     record: Path = RECORD
@@ -1282,6 +1306,35 @@ RELEASES: dict[str, Release] = {
             },
             # The issue's 06:05:31Z edit added 366 and 447 to the table it opened with.
             claimed_at={366: "2026-10-22T06:05:31Z", 447: "2026-10-22T06:05:31Z"},
+            # 1851c2c also published certificates/n204.cert, 1.48e-11 below n-204.cert, the
+            # file the issue names; the author claimed it on 22 October (think-h01y, T-231).
+            # Of the 122 claimed counts, the trees of 1851c2c and 12fc466 hold a second file
+            # (nN.cert beside n-N.cert, the same blobs in both) at seven: 105, 204, 753, 754
+            # and 790 to 792. Read from their headers on 23 October 2026, only 204's is
+            # lower; 105's is 4.64e-12 above, and the other five state the same side, so
+            # 204 is the one count this rule moves (#753's review A, A10).
+            same_commit_least={
+                204: SameCommitLeast(
+                    path="certificates/n204.cert",
+                    packet="mishapolk-n204-2026-10-22",
+                    claimed=(
+                        "https://github.com/jlevy/squares/issues/719#issuecomment-6350348588"
+                    ),
+                    note=(
+                        "At 204 the claim is the least side 1851c2c states there, "
+                        "certificates/n204.cert, since a report keeps one claim a count "
+                        "(#722's review A, A2); this ledger was re-gathered on 23 October "
+                        "2026 to read it (think-h01y). The issue names "
+                        "certificates/n-204.cert, which T-229 registered before the author "
+                        "claimed the lower file on 22 October at 20:15:57Z, and which the "
+                        "case adopted on 23 October; T-229 stands as registered, and T-231 "
+                        "registers the lower file, by the same author and from the same "
+                        "commit, and supersedes T-229 at 204. Of the 122 claimed counts, "
+                        "1851c2c holds a second file only at 105, 204, 753, 754 and 790 to "
+                        "792, and only 204's is lower. 105 is untouched."
+                    ),
+                )
+            },
         ),
         Release(
             issue=732,
@@ -2118,6 +2171,25 @@ def _least_claims(items: Sequence[Mapping[str, Any]]) -> list[dict[str, Any]]:
     return found
 
 
+def same_commit_claim(
+    chosen: Release, row: Claim, named: Fraction, lower: SameCommitLeast
+) -> dict[str, Any]:
+    """A row's claim at the least side its commit states at the count (#722's review A,
+    A2): the side of the other file `lower` names, read from the packet that retains it,
+    which must be below the side of the file the issue names. The claim says which file
+    it is, that the issue named the other, and where the author claimed this one."""
+    side = reports.import_side(lower.packet, row.n)
+    _require(side < named, f"n={row.n}: {lower.path} is not below the file the issue names")
+    where = (
+        f"{lower.path} at {chosen.retained[:8]} (its header), retained in the "
+        f"{lower.packet} packet: the least of the 2 sides the commit states at this count, "
+        f"beside {row.path}, the file the issue names (facts/n-{row.n:03d}.yaml.gz in the "
+        f"{chosen.packet} packet), which the record registered before the author claimed "
+        f"this one ({lower.claimed})"
+    )
+    return _claim(row.n, side, where)
+
+
 def _earlier_bead(walk: Walk, label: str, chosen: Release) -> str:
     """The bead that owned an earlier publication when ``walk`` was made: its pending
     import's, its own import's once it is a release here, else the walk's."""
@@ -2199,6 +2271,8 @@ def ledger_sources(issue: int | str, read_at_main: str, read_on: str) -> dict[st
             "exact": legacy.literal(side),
             "exact_from": where,
         }
+        if (lower := (chosen.same_commit_least or {}).get(row.n)) is not None:
+            claim = same_commit_claim(chosen, row, side, lower)
         if row.n in (chosen.claimed_at or {}):
             claim["reported_at"] = (chosen.claimed_at or {})[row.n]
         own.append(claim)
@@ -2251,6 +2325,10 @@ def ledger_sources(issue: int | str, read_at_main: str, read_on: str) -> dict[st
                 "the issue, and 447's at the pin (06:05:07Z). 366 and 447 are dated by the "
                 "06:05:31Z edit that first claimed them; the issue opened with the other 120. "
                 "No other report reached the repository at these counts between those times."
+                + "".join(
+                    f" {lower.note}"
+                    for _, lower in sorted((chosen.same_commit_least or {}).items())
+                )
             ),
         },
     ]
