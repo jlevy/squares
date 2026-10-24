@@ -757,6 +757,27 @@ is not a condition of it.
 - The receipts are committed and pushed when the run ends, on a branch the bead names.
   A replay that passed in scratch space and was never committed did not happen.
 
+**Measuring identity and sharp controls.** Two measurements that every upper-bound
+import has needed are tools, and a packet calls them instead of keeping a copy (OR-1).
+`python -m devtools.measure_identity` measures a packing pose by pose against each
+packing the record holds at its count, read from an import packet (`packet:NAME`), from
+a retained file through any `upper_bound_reports` adapter, or from a binary64
+`x y degrees` text, and writes the packet’s `measure/identity.json`: the nearest centre
+under the box’s eight symmetries and whether it pairs the squares one to one, the
+optimal assignment, the squares moved beyond $10^{-9}$ to $10^{-1}$, the largest move
+and its symmetry, and the box-centred assignment the T-240 review read.
+It is the measurement that decides a regularization’s or a refinement’s `identity`
+([stage 3](#stage-3-record)), and it decides nothing about the bound.
+`python -m devtools.upper_bound_reports PACKET sharp-controls` takes the certificate to
+exact contact and $10^{-30}$ past it on both maintained exact routes: the box at and
+below its extent, the tightest pair closed, every square moved to the near wall, a
+square enlarged past its pair and past a wall, and a duplicated square.
+It writes `receipts/sharp-controls.json`, or `receipts/sharp-controls-nNNN.json` per
+count of a longer roster, which shows that the routes meet a certificate whose margins
+lie below the binary64 spacing of its coordinates.
+The per-packet programs written before these tools stay as they are, since their
+receipts are bound to them.
+
 **The review** is a mapped document under `docs/project/reviews/`, a
 [review record](../../epistemics.md#review-records) like any other.
 It states the claim and each `T-NNN` it covers; re-derives the argument from the
