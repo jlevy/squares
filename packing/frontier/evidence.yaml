@@ -43621,9 +43621,13 @@ evidence:
       filtered two-route decision of devtools.couzo_678_replay, the sqpack.verify predicates
       and the independent rational corner checker's, over every wall and the pairs whose
       centres are closer than sqrt 2, an exactly justified filter, accepted all 138 and
-      refused all 828 controls, in 125.6 positive CPU seconds; no square touches the box and
-      no pair touches, every wall clearing by at least 1e-16 and every pair by at least
-      7.38e-15. The all-pairs kernel at 335, 747 and 989 (823,142 pairs, 157.5 CPU seconds)
+      refused all 828 controls, in 125.6 positive CPU seconds; no square touches the box,
+      every wall clearing by at least 1e-16, and no pair the filter decides touches, each
+      clearing by at least 7.38e-15. That pair claim rests on the filtered pairs, since a pair
+      exactly sqrt 2 apart could touch corner to corner; review A of PR 769
+      (issuecomment-6380362746) scanned exactly every pair closer than sqrt 2.01 in all 138 and
+      found none touching, the least gap outside the filter 1.64e-13 (at 554). The all-pairs
+      kernel at 335, 747 and 989 (823,142 pairs, 157.5 CPU seconds)
       agreed exactly with it on each least gap and clearance. The two routes share
       certificate parsing, half-angle conversion, the pair filter and Fraction arithmetic.
       The source's own checker was not run here. Review and confirmation remain pending; no

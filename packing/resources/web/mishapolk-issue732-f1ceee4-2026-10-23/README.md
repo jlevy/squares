@@ -92,8 +92,18 @@ Every print is the header side rounded up at 12 places.
 **All 828 controls are refused by both routes.**
 The run took 1,326 seconds of wall on two workers at `nice` on a shared host, the positive
 decisions 125.6 CPU seconds ([receipts/filtered-exact-replay.json](receipts/filtered-exact-replay.json)).
-No square touches the box and no pair touches: every wall clears by at least 10⁻¹⁶, the
-clearance the comment states, and every pair by at least 7.38 × 10⁻¹⁵ (919).
+No square touches the box: every wall clears by at least 10⁻¹⁶, the clearance the comment
+states.
+No pair the filter decides touches: each clears by at least 7.38 × 10⁻¹⁵ (919).
+That claim rests on the filtered pairs, whose centres are closer than √2; a pair at exactly √2
+could still touch corner to corner.
+[Review A of #769](https://github.com/jlevy/squares/pull/769#issuecomment-6380362746) scanned
+exactly every pair with centres closer than √2.01 in all 138: none touches, and outside the
+filter the least gap is 1.64 × 10⁻¹³ (554).
+At 582, 691, 798 and 924 the least gap overall lies outside the filter, below the receipt’s
+per-row `least_pair_gap` (at 924, 8.597 × 10⁻¹³ at squares 191 and 211 against the
+receipt’s 8.695 × 10⁻¹³).
+That scan is the review’s, not a receipt of this packet.
 
 The maintained all-pairs kernel of `devtools.evand_arrangement_reports`, every pair and no
 filter, decided the positives at 335, 747 and 989, the count whose 8 October row the release
@@ -109,6 +119,12 @@ classical construction at its count ([receipts/goebel-comparison.json](receipts/
 
 The record held Couzo’s 8 October decimal report at 335, `18.822875655543559`, with no exact
 side, and asked whether its poses pack at their printed side (D3 of think-f2io, think-rx26).
+Couzo answered on #715 at 22:16:52Z on 23 October
+([issuecomment-6375833547](https://github.com/jlevy/squares/issues/715#issuecomment-6375833547)):
+his 9 October certificate is that report’s packing in exact form, its centres dilated by
+exactly 1 + 10⁻¹² about (½, ½) and the three near-axis angles (4.73 × 10⁻¹¹, 9.02 × 10⁻¹² and
+1.10 × 10⁻¹² radians) set to 0; the print read literally overshoots a wall by up to
+7.8 × 10⁻¹⁶; and “the bound we stand behind is the certificate’s”.
 The owner answered on 24 October that the existing process decides it: “we should have clear
 defined process for this already, why are you asking? if it is replaced by another one, we
 could indicate that too”.
@@ -128,22 +144,29 @@ CPU seconds:
   These are the angles his 9 October certificate sets to 0: 193 binary64 roundings of zero,
   none above 3.1 × 10⁻¹⁵, and three near-axis angles, 1.1 × 10⁻¹², 9.0 × 10⁻¹² and
   4.7 × 10⁻¹¹.
+  The certificate sets to 0 exactly these and the 88 printed zeros, 284 rotations in all, and
+  keeps the next angle, 2.40 × 10⁻¹⁰.
 - **The printed centres with the 9 October certificate’s rational rotations** pack at the
   printed side on both exact routes of `devtools.couzo_678_replay`.
 - **The 9 October certificate** is that packing, 1.78 × 10⁻¹¹ larger, and packs at its own
   side on both routes.
 
-So the row reports a packing that exists at its print, read as its own certificate reads it,
-and lies within one unit of the print on either reading, which is how the ledger reads it.
-`f1ceee4`’s 335, `18.822875655542`, is below it by at least 1.61 × 10⁻¹² on every reading,
-and supersedes it.
+So the row reports a packing that exists at its print when it is read as its own
+certificate reads it, which is how Couzo’s answer reads it too.
+Read literally it does not: square 2 crosses the left wall by 7.77 × 10⁻¹⁶ and square 308 the
+right wall by 6.88 × 10⁻¹⁶, so the literal poses need a side of at least the print plus
+1.465 × 10⁻¹⁵, outside the span of one unit either side of the print that the walk’s start
+reads at 335.
+The verdict does not depend on the reading: `f1ceee4`’s 335, `18.822875655542`, is
+1.607 × 10⁻¹² below the print and 1.94 × 10⁻¹¹ below the certificate, and supersedes the row
+on either reading.
 The row stays listed as Couzo printed it.
 
 At 336 and 337 neither reading packs at the printed side: one wall fails by 4.0 × 10⁻¹⁶ and
 three by 1.0 × 10⁻¹⁶ with the near-axis angles at 0.
-At 341, 373 and 374 the poses pack with those angles at 0.
-Couzo’s 9 October certificates at the five are other packings, below the prints, and their
-rows already supersede the 8 October ones.
+At 341, 373 and 374 the poses pack with the angles below 10⁻¹⁰ read as 0, which is this
+decision’s reading and not a certificate’s: Couzo’s 9 October certificates at the five are
+other packings, below the prints, and their rows already supersede the 8 October ones.
 
 ## The Later Commits
 
@@ -169,12 +192,36 @@ Each changes only counts in the corpus, and the walk records none of them:
 
 ## Credit
 
-The index credits all 138 to “Mishapolk (continuous SLP quench refinement of Couzo
-topology)”, and 11 of them to “Mishapolk (major structural quench refinement of Couzo
+The index credits 127 of the 138 to “Mishapolk (continuous SLP quench refinement of Couzo
+topology)”, and the other 11 to “Mishapolk (major structural quench refinement of Couzo
 topology)”. The comment says the candidates were Couzo’s base topologies, re-quenched, and
 that the author verified them with this project’s `sqpack.verify` in his testbench.
-The key’s credit is therefore “Polkovskyi after Couzo, Levy”.
 Unlike `17cc220`’s, the certificates’ headers name no source file.
+
+Couzo’s own manifests credit the topologies at some of these counts to earlier work, and by
+[attribution.md](../../../../attribution.md)’s chain rule a chain through an intermediate
+author keeps every supported link:
+
+- **His #715 manifest at `6b7391d`** (SHA-256 `5b56aebd…`, pinned in the
+  [`couzo-issue715-2026-10-21` packet](../couzo-issue715-2026-10-21/README.md)) credits
+  Darius Muglich at 15 of the 138, as its own credit or its prior source credit: 328, 365,
+  404, 548, 554, 599, 602, 648, 651, 654, 700, 756, 813, 814 and 871.
+  It credits 343 to Evan Daniel with Kevin Fang’s two-wedge construction, and names Muglich,
+  Fang and PingYou Ltd in its provenance at 813.
+- **His `4e4c8ce` manifest** (SHA-256 `08f257e7…`, pinned in the
+  [`couzo-index-2026-10-15` packet](../couzo-index-2026-10-15/README.md)) credits PingYou Ltd at
+  328, Evan Daniel at 365, 404 and 455 and after Kevin Fang at 343, “refinement of Kevin
+  Fang’s packing” at 651, and Fang’s rectangle and gluing with PingYou Ltd’s square input at
+  813.
+
+The key’s credit is therefore “Polkovskyi after Couzo, Muglich, Daniel, Fang, PingYou Ltd,
+Levy”, with Levy for the checker.
+
+The source’s `README.md`, rewritten at `7b6366f` and retained here, says “Credit &
+Maintainer: Mishapolk / Mykhailo Polkovskyi”.
+It credits the index’s baselines at N ≤ 308 to Gardner, Erdős, Göbel, Friedman, Ellsworth
+and Daniel, and 3,734 classical L-border bounds to Frits Göbel; none of these is one of the
+138. Those statements are the source’s.
 
 The comment asks that 11 counts be credited to Mishapolk alone: 463, 645, 646, 651, 696, 702,
 747, 756, 809, 813 and 989, at margins of 2.5 × 10⁻⁶ to 8.59 × 10⁻⁴, with joint credit at the
@@ -185,7 +232,8 @@ Each is measured against the retained certificate of the row it supersedes (#715
 747, #732’s own at the other nine) and against #715’s at the count:
 
 - every one pairs one to one with Couzo’s #715 certificate under the box’s identity, every
-  square within 1.2 × 10⁻² (813) to 0.22 (696) of its counterpart;
+  square within 0.23 of its counterpart, the largest distance running from 1.2 × 10⁻² (813)
+  to 0.225 (696);
 - between 85 (463) and 558 (989) squares moved by more than 10⁻³, and rotations changed by up
   to 9.0 degrees (646);
 - against the row it supersedes each pairs the same way, but at 696, where one square
@@ -194,7 +242,7 @@ Each is measured against the retained certificate of the row it supersedes (#715
 The measurement decides nothing.
 Per-row credit beyond the corpus is the owner’s open question (D5, think-f2io), so the record
 keeps the request beside the index’s own word.
-The comment states no AI assistance.
+Neither the comment nor the source’s README states AI assistance.
 
 ## The Comment’s Theorems
 
@@ -213,10 +261,15 @@ dilation.
 ## A Later Report at Overlapping Counts
 
 Francisco Couzo’s issue #763 (2026-10-23T23:35:51Z) claims upper bounds at many of these
-counts. His commits `efef7d1` and `fa6237e`, committed at 18:16Z and 18:59Z, reached GitHub
-only in his push of 23:38:42Z.
-Both follow `f1ceee4` in report order, so this walk does not read them; the next import walks
-them from a `main` that holds these rows (think-cnn7).
+counts. His commits `efef7d1` and `fa6237e` were committed at 18:16Z and 18:59Z, before
+`f1ceee4` (20:34:13Z), but reached GitHub only in his push of 23:38:42Z, from `6b7391d` to
+`964ee2b`, as GitHub’s activity API for his repository records it.
+By their headers `fa6237e`’s sides lie below `f1ceee4`’s at 131 of the 138 counts.
+They follow `f1ceee4` in report order only by the push rule, which dates a commit by the push
+that made it public, not by its commit time (`beyond_horizon_replay.PUSHED_LATER`, which now
+holds that push, so the next import dates them by it).
+This walk does not read them; the next import walks them from a `main` that holds these rows
+(think-cnn7).
 
 ## Commands
 

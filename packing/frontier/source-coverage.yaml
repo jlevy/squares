@@ -3951,10 +3951,16 @@ sources:
     angle, the poses are not a packing at the printed side: 21 squares cross a wall, the worst by
     7.77e-16. With the 196 angles below 1e-10 read as 0, as the author's 9 October certificate
     reads them, they pack exactly at it, so the row reports a packing that exists at its print
-    and stays listed as printed. Mykhailo Polkovskyi's f1ceee4 row there, at least 1.61e-12
-    below on either reading, supersedes it (mishapolk-issue732-f1ceee4-2026-10-23). At 336 and
-    337 neither reading packs at the print, and at 341, 373 and 374 the poses pack with the
-    near-axis angles at 0; 02f9690's rows had superseded all five.
+    and stays listed as printed. The author's answer of 23 October on issue 715
+    (issuecomment-6375833547) says the same: the 9 October certificate is this report's packing
+    in exact form, its centres dilated by exactly 1 + 1e-12 and the three near-axis angles set
+    to 0, the print read literally overshoots a wall by up to 7.8e-16, and "the bound we stand
+    behind is the certificate's". Mykhailo Polkovskyi's f1ceee4 row there, 1.607e-12 below the
+    print and 1.94e-11 below the certificate, supersedes it on either reading
+    (mishapolk-issue732-f1ceee4-2026-10-23). At 336 and 337 neither reading packs at the
+    print, and at 341, 373 and 374 the poses pack with the angles below 1e-10 read as 0, the
+    decision's reading, since the 9 October certificates at those five are other packings;
+    02f9690's rows had superseded all five.
 - id: couzo-extended-range-updates-2026-10-08
   title: Francisco Couzo's later decimal reports at n=375 and n=378
   role: source-repository

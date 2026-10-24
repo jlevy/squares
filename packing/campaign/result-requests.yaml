@@ -17445,11 +17445,17 @@ issues:
       not_registered: >-
         Beyond the n <= 324 corpus: the certificate first published at 02f9690 on 2026-10-09,
         1.78e-11 or more above the 8 October decimal report the record holds at 335, so neither
-        it nor this restatement is recorded. The exact check of that report's poses (think-rx26,
-        24 October, devtools.couzo_decimal_decisions): read literally they are not a packing at
-        the printed side, a wall failing by 7.77e-16; with the 196 angles below 1e-10 read as 0,
-        as this certificate reads them, they pack exactly at it. The row stays as printed, and
-        Polkovskyi's f1ceee4 row there (#732's comment of 23 October) supersedes it.
+        it nor this restatement is recorded. The author's answer of 23 October 2026
+        (issuecomment-6375833547) says the certificate is that report's packing in exact form,
+        its centres dilated by exactly 1 + 1e-12 about (1/2, 1/2) and the three near-axis angles
+        (4.73e-11, 9.02e-12 and 1.10e-12 rad) set to 0, that the print read literally overshoots
+        a wall by up to 7.8e-16, and that "the bound we stand behind is the certificate's". The
+        record's exact check (think-rx26, 24 October, devtools.couzo_decimal_decisions) agrees:
+        read literally the poses are not a packing at the printed side, a wall failing by
+        7.77e-16; with the 196 angles below 1e-10 read as 0, the angles the certificate sets to
+        0, they pack exactly at it. The row stays listed as printed, and Polkovskyi's f1ceee4
+        row (#732's comment of 23 October), 1.607e-12 below the print and 1.94e-11 below the
+        certificate, supersedes it on either reading.
       queued: false
     - key: n336
       claim: s(336) <= 18.825571499862, rounded upward; exact certificate side is authoritative.
@@ -21602,7 +21608,8 @@ issues:
       note: >-
         From the comment of 2026-10-23T20:35:12Z. The source's certified_bounds.json credits all
         138, the 11 included, as refinements of Couzo topology, and the bibliography key keeps
-        that ("Polkovskyi after Couzo, Levy"). Measured here (receipts/pose-identity.json), each
+        that, with the antecedents Couzo's manifests name ("Polkovskyi after Couzo, Muglich,
+        Daniel, Fang, PingYou Ltd, Levy"). Measured here (receipts/pose-identity.json), each
         of the 11 pairs one to one with Couzo's #715 certificate at its count under the box's
         identity, every square within 0.23 of its counterpart, with 85 to 558 squares moved by
         more than 1e-3 and rotations changed by up to 9 degrees; against the row it supersedes
@@ -21764,9 +21771,12 @@ issues:
       and records all 138, superseding 47 of this issue's own 77 rows among others; the other 30
       stay current. The three commits after it change only counts in the corpus and are not
       recorded (intake-watch.yaml). #763 (Couzo, 2026-10-23T23:35:51Z) is a later report at
-      overlapping counts, and Couzo's efef7d1 and fa6237e reached GitHub in its push of
-      23:38:42Z; both follow f1ceee4 and are the next import's (think-cnn7). The import reply is
-      drafted for after the merge.
+      overlapping counts. Couzo's efef7d1 and fa6237e were committed at 18:16Z and 18:59Z,
+      before f1ceee4, but reached GitHub only in his push of 23:38:42Z (6b7391d to 964ee2b, as
+      GitHub's activity API records it), so they follow f1ceee4 by the push rule, which dates a
+      commit by the push that made it public, not by its commit time
+      (beyond_horizon_replay.PUSHED_LATER, which now holds that push); they are the next
+      import's (think-cnn7). The import reply is drafted for after the merge.
   - number: 734
     title: 'Proposal: submit and fetch upper bounds by API (automated intake, reported the same day)'
     author: wand125
