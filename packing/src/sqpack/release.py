@@ -8169,8 +8169,10 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "and coverage record swapped in (69 files each), "
             "render_n11_lower_bounds_explainer, render_n11_optimality_review, "
             "render_n11_threshold_bound_review and render_packing_methods write every file "
-            "byte-identical across all four. The register stays at 233 results. No PDF was "
-            "printed; each prints from that HTML. Every paper keeps its version."
+            "byte-identical across all four. Measured once more after merging main "
+            "2c58b6373 (#750), at link revision 2d39f5ca with that main's three files "
+            "swapped in: the same outcome, and the register stays at 238 results. No PDF "
+            "was printed; each prints from that HTML. Every paper keeps its version."
         ),
     ),
 )
