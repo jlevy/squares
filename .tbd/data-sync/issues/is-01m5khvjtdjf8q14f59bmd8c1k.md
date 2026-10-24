@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-23 (resumed): land #736 and #742, #719 records (204 
 kind: epic
 status: in_progress
 priority: 1
-version: 152
+version: 153
 delegate: coord-intake-1024
 labels:
   - result-import
@@ -157,7 +157,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-23T04:56:08.269Z
-updated_at: 2026-10-24T21:11:50.447Z
+updated_at: 2026-10-24T21:15:08.260Z
 started_at: 2026-10-23T04:56:10.325Z
 ---
 
@@ -173,3 +173,5 @@ Resumes coord-intake-1021b's pass of 21-23 October (no epic of its own). Lanes a
 2026-10-24 ~19:20Z coord-intake-1024 status. MERGED this session (each reviewed, dispositions posted, hosted CI green, merge commit): #787 09:02Z (stage 7 records), #788 09:26Z (measure_news_page), #736 10:47Z (home News box, owner's take-over; follow-up review C), #781 11:18Z (Fang note; T-163 V3/C1), #791 11:51Z (plan: rows above 1024), #790 12:07Z (Couzo's 24 Oct answers, watch reads), #789 13:22Z (#763 PR A: T-240 reported, 194 rows), #792 17:34Z (T-241 Couzo 304, T-242 Daniel 268/304), #793 18:32Z (W7 code: windows, Göbel module, construction checker, hosted shards), #796 19:06Z (OR-1 tools: measure_identity, sharp-controls). POSTED (after verified deploys): #534 and #536 finals + closed; #603 status; #672, #678 finals + closed; #715 follow-up; #763 acknowledgement; #446 reopened (closed by a commit message; think-ulc1). IN FLIGHT: #794 (#763 PR B: T-240 V3/C3, adopted and regularized at 268 and 303) dated 25 Oct, merges at 00:10Z via scheduled check-in trig_01DhTFUTDPGkUQQYuVtXQfPv; #795 (the 99 Kaggle-credited sides and the push's 86 intermediate sides, 185 rows) in follow-up review C. NEXT: think-hx0e (T-241/T-242 stage 4 and re-housing at 268/304, pass day after 25 Oct), think-gn29 (43f666c), think-20oj (regularizer views), R1 (owner publishes data/couzo-715-certificates-v1), R2 (owner publishes #732 shards), think-g2qy (recipes with best/ certificates). OWNER QUESTIONS: think-lsam (News budget; tool landed), think-kzme (D6 sub-question), think-zkxy (Friedman), think-nq5g (send wand125 M-1..M-3), D5/N1/N5 (plan #791), #789 A7 (stage 2 presumption rule's generality), row-7 view at 268 (#794), Daniel's acknowledgement (no issue; draft in think-l49q).
 
 2026-10-24 ~20:50Z coord-intake-1024 checkpoint. MERGED: #795 (2ed0ea740, 20:34Z; review C's C1 fixed in a65b63819, C2 -> think-yeol), deploy being verified. SWEEP 20:30Z (main 84d4a75af): new #797 (Fang, c*(k) < 4 sqrt(2k)+1; think-4tj5), #798 (Kristiansen, 14 bounds at 334-504; think-2l0q), #799 (Karimi, 683 bounds at 1184-3775; think-5dc3), #755 comment (amundsk answers + CC0; think-fc1n), squarepack-certs db1ed62 (in think-4tj5); all three issues labelled intake; think-xu4d closed (#678 done; think-0b6l moved here); think-z236's wait cleared (rides R1). LANES: c-triage-797-1024, c-triage-798-1024 (+fc1n), c-triage-799-1024 (read-only, scratch triage-797/798/799); c-review-t241-t242-math (think-vm3m under think-hx0e; worktree wt-rev241, files only); c-import-gn29-1024 (think-gn29 + think-g2qy, worktree wt-gn29, branch claude/intake-2026-10-24-couzo-43f666c); c-sync-794-1024 (think-acuz: merge main 2ed0ea740 into #794, 7 conflicts). Report order at 330-997: #763 -> push 23:38:42Z (#795) -> 43f666c (06:10:44Z, gn29) -> #798 (19:03Z), so #798's import follows gn29's. #794 merges at 00:10Z (trig_01DhTFUTDPGkUQQYuVtXQfPv) after a follow-up review of the merge.
+
+2026-10-24 ~21:20Z coord-intake-1024: stage 4 review of T-241/T-242 (think-vm3m) accepted for finite feasibility, all three certificates valid; M-1 (major): Couzo's manifest previous_source / previous_reference.seed_credit name the catalogue's previous record, not the seed (checked: at 303 seed_credit Lavrentev, previous_source Daniel's T-230). That reading error is also in #795's merged credits at 364, 450 and 874 ('seeded from', my call of 24 Oct): think-o4m0. Lane c-map-hx0e-1024 (wt-hx0e, branch claude/intake-2026-10-24-t241-t242-review): retain and map the review, M-1..M-5, think-o4m0, adopt T-242 at 304 (H1, after #794); T-242 at 268 is H2 on or after 2026-10-26T00:00Z. Told c-sync-794-1024 to narrow T-240's RF-2 sentence to 268/303, and c-import-gn29-1024 the reading rule. Lanes now: gn29, sync-794, 798, 797, hx0e. Queued: W8 two-strip checker (think-clgp), Fang's #797 stage 4 note review.
