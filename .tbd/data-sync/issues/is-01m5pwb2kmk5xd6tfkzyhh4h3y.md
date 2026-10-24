@@ -3,9 +3,9 @@ type: is
 id: is-01m5pwb2kmk5xd6tfkzyhh4h3y
 title: "Import the 99 Kaggle-credited sides franciscouzo/square-packing published at 964ee2b (pushed 2026-10-23T23:38:42Z): 87 certificates and 12 recipes at 325-1024, each 1.46e-4 to 6.60e-2 below main's record, credited to notebook authors (no issue)"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 14
+version: 15
 delegate: c-import-lyf9-1024
 labels:
   - result-import
@@ -16,8 +16,12 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-24T11:57:05.011Z
-updated_at: 2026-10-24T20:19:03.827Z
+updated_at: 2026-10-24T20:47:18.823Z
 started_at: 2026-10-24T13:38:16.607Z
+closed_at: 2026-10-24T20:47:18.822Z
+close_reason: "Merged as #795 (2ed0ea740, 2026-10-24T20:34:10Z) after reviews A, B and follow-up C; Pages run 40130369841 deployed and verified. 87 certificate rows and the 12 recipes as the PR records; 43f666c's later rows go to think-gn29, the generic README text to think-yeol, the notebook licences to think-m8f4."
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes
