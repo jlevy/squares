@@ -419,7 +419,9 @@ def test_every_external_proof_in_the_register_declares_its_review() -> None:
         and record.get("origin") in {"external", "independently-external"}
     ]
     # 7 since 2026-10-03: Bašić and Slivková's piercing bound (T-087) declares its read.
-    assert len(external) == 7, "the count moved; check the new record declares its review"
+    # 8 since 2026-10-24: Kevin Fang's note v0.9 (T-163) declares that no one here has
+    # read its proofs yet (not-reviewed).
+    assert len(external) == 8, "the count moved; check the new record declares its review"
     for record in external:
         assert record["external_review"]["state"] in {
             "not-reviewed",

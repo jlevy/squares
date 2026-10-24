@@ -128,6 +128,15 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         ),
     ),
     (
+        "https://github.com/TheSnakeFang/squarepack-lean",
+        "Kevin Fang",
+        (
+            "A Lean 4 proof of Fang\u2019s Theorem 1, s(n\u00b2 \u2212 n + 1) < n for every"
+            " n \u2265 15, and of the single-step bounds of his Theorem 2 (T-163); not built"
+            " here."
+        ),
+    ),
+    (
         "https://github.com/ebdeleeuw/square-packing-n70",
         "Eric Deleeuw",
         "An exact rational refinement of Ryan Xu's packing of 70 squares (T-137).",
@@ -363,8 +372,8 @@ CATALOGUE_SITES: tuple[tuple[str, str, str, str], ...] = (
 #: Other cited result pages, including first-party GitHub issue reports, ranked with the
 #: projects on GitHub: each one's address, its name (a post's is its title, as the post
 #: gives it), its author as the record credits them, and what it holds. They are the
-#: source-coverage register's two sources off GitHub that are not a catalogue,
-#: UnitSquare's release and Wang and Li's Zenodo record, and the two posts behind
+#: source-coverage register's three sources off GitHub that are not a catalogue,
+#: UnitSquare's release and Wang and Li's and Fang's Zenodo records, and the two posts behind
 #: Burns's and Massaccesi's n = 17 bound, whose key the register credits with T-015 and
 #: T-016 and the case records cite. A test holds every source the coverage register
 #: reviews to a card, here or in `OTHER_PROJECTS`, and every address here and in
@@ -416,6 +425,15 @@ OTHER_SITES: tuple[tuple[str, str, str, str], ...] = (
         (
             "An exact lower bound for eleven squares, a reweighting of Overbeck\u2019s"
             " certificate."
+        ),
+    ),
+    (
+        "https://doi.org/10.5281/zenodo.23463481",
+        "Zenodo 23463481",
+        "Kevin Fang",
+        (
+            "The note, draft v0.9, with the proof of Fang\u2019s Theorems 1 and 2 on n\u00b2"
+            " \u2212 n + 1 squares below side n (T-163)."
         ),
     ),
     (
