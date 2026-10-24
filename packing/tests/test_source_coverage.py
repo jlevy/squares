@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import copy
 import json
+from fractions import Fraction
 from pathlib import Path
 from typing import Any
 
@@ -724,6 +725,81 @@ def test_the_schema_names_a_successor_exactly_when_a_row_is_superseded() -> None
     ]
     assert not validator.is_valid(document)
     document["beyond_horizon_claims"] = [earlier, {**later, "superseded_by": "earlier"}]
+    assert not validator.is_valid(document)
+
+
+def _above(row: dict[str, Any], construction: str = "19 + 1/2*sqrt(2)") -> dict[str, Any]:
+    """A row marked above a classical construction (`ABOVE_CONSTRUCTION`)."""
+    kept = {key: value for key, value in row.items() if key != "superseded_by"}
+    return kept | {
+        "disposition": coverage_check.ABOVE_CONSTRUCTION,
+        "construction": construction,
+    }
+
+
+def test_a_row_above_a_classical_construction_is_kept_and_holds_no_count() -> None:
+    """The owner's answer of 23 October 2026 on #613 (think-8krd): Göbel's construction is
+    an earlier report, so a row above it stays listed as its source printed it, holds no
+    count and names no successor, and a count may then have no current row."""
+    coverage, claims = _beyond()
+    coverage["sources"].append(_dated_source("over", "2026-10-01", [369]))
+    coverage["beyond_horizon_claims"].append(_above(_row("over", 369, "19.740417287556077")))
+    claims = {**claims, "over": {369: "19.740417287556077"}}
+    assert _beyond_errors(coverage, claims) == []
+    assert 369 not in coverage_check.current_beyond_horizon(coverage)
+    rows = coverage["beyond_horizon_claims"]
+    rows[-1] = _above(rows[-1], "19 + 1/2*sqrt(3)")
+    rows.append(_above(_row("late", 401, "20.05")))
+    rows[3] = _row("first", 401, "20.1", superseded_by="late")
+    assert _beyond_errors(coverage, claims) == [
+        (
+            "beyond-horizon n=369 from over states no construction p + q*sqrt(2), only "
+            "'19 + 1/2*sqrt(3)'"
+        ),
+        "beyond-horizon n=401 from late is listed twice; a count has one row per source",
+    ]
+    rows.pop()
+    rows[-1] = _above(_row("over", 369, "19.740417287556077"), "20 + 1/2*sqrt(2)")
+    rows[4] = _above(rows[4], "19 + 1/2*sqrt(2)")
+    assert _beyond_errors(coverage, claims) == [
+        (
+            "beyond-horizon n=369 from over: 19.740417287556077 is not above its "
+            "construction 20 + 1/2*sqrt(2)"
+        ),
+        (
+            "beyond-horizon n=401 from first names successor late, whose row is above a "
+            "classical construction and holds no count"
+        ),
+    ]
+
+
+def test_a_construction_is_compared_exactly() -> None:
+    """``p + q sqrt 2`` against a rational, by exact sign; no rational equals it."""
+    sign = coverage_check.construction_sign
+    assert sign(Fraction("19.707106781187"), "19 + 1/2*sqrt(2)") == 1
+    assert sign(Fraction("19.707106781186"), "19 + 1/2*sqrt(2)") == -1
+    assert sign(Fraction(19), "19 + 0*sqrt(2)") == 0
+    assert sign(Fraction(19), "19 - 1/2*sqrt(2)") is None
+
+
+def test_the_schema_names_a_construction_exactly_when_a_row_is_above_one() -> None:
+    schema = safe_load(
+        coverage_check.COVERAGE.with_name("source-coverage.schema.yaml").read_text()
+    )
+    validator = Draft202012Validator(schema)
+    document = safe_load(coverage_check.COVERAGE.read_text(encoding="utf-8"))
+    document.pop("softschema")
+    above = {**_above(_row("over", 369, "19.75")), "bead": "think-ab12"}
+    document["beyond_horizon_claims"] = [above]
+    assert validator.is_valid(document)
+    document["beyond_horizon_claims"] = [{**above, "construction": "19 + sqrt(2)/2"}]
+    assert not validator.is_valid(document)
+    plain = {**_row("over", 369, "19.75"), "construction": "19 + 1/2*sqrt(2)"}
+    document["beyond_horizon_claims"] = [plain]
+    assert not validator.is_valid(document)
+    document["beyond_horizon_claims"] = [
+        {key: value for key, value in above.items() if key != "construction"}
+    ]
     assert not validator.is_valid(document)
 
 

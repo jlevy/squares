@@ -165,12 +165,14 @@ MOVED_AGAIN = {
 #: The counts of the seven that a later pass moved once more: the adoption of 19 October
 #: 2026 took 271 from T-186 to Evan Daniel's issue-664 certificate (T-219), and that of 20
 #: October 2026 took 204 from T-186 to Francisco Couzo's issue-678 certificate (T-223),
-#: which that of 22 October 2026 moved to Evan Daniel's view of its packing (T-225), and
-#: that of 23 October 2026 to Mykhailo Polkovskyi's re-solve of that view (T-229); the
-#: same pass took 303 from T-186 to Evan Daniel's issue-728 certificate (T-230).
+#: which that of 22 October 2026 moved to Evan Daniel's view of its packing (T-225), that
+#: of 23 October 2026 to Mykhailo Polkovskyi's re-solve of #678's packing (T-229), and that
+#: of 24 October 2026 to the release's lower 204 file, the same packing at its solved side
+#: (T-231); the pass of 23 October took 303 from T-186 to Evan Daniel's issue-728
+#: certificate (T-230).
 MOVED_LATER = {
     271: ("T-219", "2026-10-19"),
-    204: ("T-229", "2026-10-23"),
+    204: ("T-231", "2026-10-24"),
     303: ("T-230", "2026-10-23"),
 }
 
@@ -182,9 +184,10 @@ T193_BELOW_T186 = (175, 204, 232, 302)
 #: The staged counts a smaller validated packing took off T-193's staged adoption, with
 #: the result that took each: the adoption of 20 October 2026 took 204 to Francisco Couzo's
 #: issue 678 (T-223), 2.04e-5 below T-193's side there, that of 22 October 2026 to Evan
-#: Daniel's view of that packing (T-225), 1.39e-9 lower still, and that of 23 October 2026
-#: to Mykhailo Polkovskyi's re-solve of that view (T-229), 1.01e-8 lower again.
-OVERTAKEN = {204: "T-229"}
+#: Daniel's view of that packing (T-225), 1.39e-9 lower still, that of 23 October 2026 to
+#: Mykhailo Polkovskyi's re-solve of #678's packing (T-229), 1.01e-8 lower again, and that
+#: of 24 October 2026 to the release's lower 204 file (T-231), 1.48e-11 below T-229.
+OVERTAKEN = {204: "T-231"}
 #: The algebraic houses the pass of 23 October 2026 adopted once the writer wrote an
 #: algebraic side (think-ot5c): PR #574's at 70, 153 and 207 (T-174), and issue 639's exact
 #: forms at the six counts whose forms the packet retains and that owe no correction
@@ -1572,7 +1575,8 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
     # regularized views (T-225), and the adoption of 23 October 2026 moved 105 and 204 to
     # Mykhailo Polkovskyi's issue-719 re-solves (T-229), 303 to Evan Daniel's issue-728
     # certificate (T-230) and the nine algebraic houses to T-174 and T-193
-    # (`ALGEBRAIC_ADOPTED`, think-ot5c), after this receipt was retained.
+    # (`ALGEBRAIC_ADOPTED`, think-ot5c), and the adoption of 24 October 2026 moved 204 to
+    # the release's lower 204 file (T-231), after this receipt was retained.
     later = {
         **ALGEBRAIC_ADOPTED,
         105: "T-229",
@@ -1583,7 +1587,7 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
         236: "T-218",
         271: "T-219",
         154: "T-222",
-        204: "T-229",
+        204: "T-231",
         260: "T-225",
         308: "T-221",
         227: "T-225",
@@ -3348,12 +3352,12 @@ def test_issue_678s_reader_still_builds_t223s_source_at_both_counts() -> None:
     """`couzo_678_source` houses no count since T-225 took 204 and 260 on 22 October 2026.
     It stays for a pass that houses issue 678 again, so it is held to its packet here
     (review A6 of #718): each count's certificate, rebuilt from its pinned bytes, sits just
-    above the house's side, T-229's at 204 since 23 October 2026 and T-225's at 260, and
+    above the house's side, T-231's at 204 since 24 October 2026 and T-225's at 260, and
     its three jobs, origin, receipt and inputs all read."""
     source = houses.couzo_678_source()
     assert source.result == "T-223"
     assert "T-223" not in set(houses.ADOPTED.values())
-    margins = {204: Fraction(11453350568, 10**18), 260: Fraction(2514377, 10**17)}
+    margins = {204: Fraction(11468160026, 10**18), 260: Fraction(2514377, 10**17)}
     for n, margin in margins.items():
         certificate = source.certificate(n)
         assert certificate.n == n
@@ -3398,6 +3402,7 @@ def test_an_overtaken_staged_adoption_reads_as_history() -> None:
     assert 204 not in select.PENDING_ADOPTION
     assert 204 not in select.CORRECTIONS_OWED
     # On 22 October 2026 Evan Daniel's view of T-223's packing (T-225) moved both again,
-    # and on 23 October 2026 Mykhailo Polkovskyi's re-solve of that view (T-229) took 204.
+    # on 23 October 2026 Mykhailo Polkovskyi's re-solve of #678's packing (T-229) took 204,
+    # and on 24 October 2026 the release's lower 204 file (T-231) took it from T-229.
     assert houses.ADOPTED[260] == "T-225"
-    assert houses.ADOPTED[204] == "T-229"
+    assert houses.ADOPTED[204] == "T-231"

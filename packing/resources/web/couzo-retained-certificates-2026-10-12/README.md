@@ -22,7 +22,7 @@ The [history walk of 22 October](../../../campaign/issue-intake/upper-bounds-cou
 
 ## Held Back
 
-The walk records the commit’s 375 too and holds it back from a row: it is above Göbel’s construction (#613, think-8krd), pinned by digest here.
+The commit’s 375 is above Göbel’s construction there, an earlier report by the owner’s answer of 23 October 2026 (#613, think-8krd), so the walk does not record it; it is pinned by digest here.
 
 ## Credit
 

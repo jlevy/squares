@@ -167,6 +167,9 @@ MAX_INTEGER_DIGITS = kernel.MAX_INTEGER_DIGITS
 #: places, whose last places a double of that size does not determine (`printed_span`).
 ROUNDINGS = ("up", "unstated", "binary64")
 THIS = "this certificate"
+#: Göbel's construction among the reports beyond the horizon, for a declaration read from
+#: the day of the owner's answer on #613 (`goebel_construction`).
+GOEBEL = "Göbel's construction"
 _PRINTED = re.compile(r"[0-9]+\.[0-9]+")
 _FRACTION = re.compile(r"[1-9][0-9]*/[1-9][0-9]*")
 _LITERAL = re.compile(r"-?[0-9]+(?:/[1-9][0-9]*)?")
@@ -1408,6 +1411,9 @@ HOUSES: dict[str, Callable[[int], Fraction]] = {
     # Mykhailo Polkovskyi's issue-719 release (think-4h23), derived facts only: T-229 at
     # 105 and 204, beside the 112 rows beyond the corpus its packet also derives.
     "[Mishapolk issue 719 2026-10-22]": _import("mishapolk-issue719-2026-10-22"),
+    # T-231: the release's second 204 file, certificates/n204.cert, which the author
+    # claimed on issue 719 after T-229 was registered (think-h01y), under its own key.
+    "[Mishapolk n204 2026-10-22]": _import("mishapolk-n204-2026-10-22"),
     # T-155: the side of the retained view of Evan Daniel's regularizer at each count.
     "[Daniel regularizer 2026-10-11]": regularized.view_side,
 }
@@ -1611,12 +1617,61 @@ def smallest(candidates: list[tuple[str, Span]]) -> dict[str, Any]:
     return {"smallest": None, "undecided_among": labels}
 
 
-def _row(
+def goebel_construction(n: int, read_on: str) -> tuple[str, str, Span] | None:
+    """Göbel's construction at ``n`` for a declaration read on ``read_on``: its holders, its
+    form ``p + q*sqrt(2)`` and a rigorous enclosure, from the retained program
+    (`devtools.intake_ledger.construction_side`). None within the horizon and for a
+    declaration read before the owner's answer on #613 (think-8krd) that Göbel's
+    constructions are the baseline beyond 324 (`devtools.intake_ledger.GOEBEL_FROM`), so
+    the frozen claim records keep the reading of their day; refused above the program's
+    reach of 1073."""
+    # That module imports this one, so it is imported where it is first used.
+    from devtools import intake_ledger as ledger  # noqa: PLC0415
+
+    if n <= HORIZON or not ledger.goebel_baseline(read_on):
+        return None
+    try:
+        side, form = ledger.construction_side(n), ledger.goebel_form(n)
+    except ledger.LedgerError as error:
+        raise ReportError(str(error)) from error
+    _require(side is not None and form is not None, f"n={n}: no Göbel construction")
+    assert side is not None
+    assert form is not None
+    return side.holders, str(form.text()), side.span
+
+
+def _construction(side: Fraction, holders: str, form: str, span: Span) -> dict[str, Any]:
+    """The certificate against Göbel's construction ``form``, decided by the exact sign of
+    the difference (`check_source_coverage.construction_sign`), which the enclosure must
+    agree with; the difference is the enclosure's midpoint less the side, with its bounds."""
+    sign = coverage_check.construction_sign(side, form)
+    _require(sign in {-1, 1}, f"Göbel's form {form} is not p + q*sqrt(2), or equals {side}")
+    exact = "below" if sign == -1 else "above"
+    _require(
+        relation(side, span) == exact,
+        f"the enclosure of Göbel's {form} does not separate from {side}",
+    )
+    return {
+        "holders": holders,
+        "form": form,
+        "relation": exact,
+        "difference": legacy.literal((span.low + span.high) / 2 - side),
+        "difference_bounds": [
+            legacy.literal(span.low - side),
+            legacy.literal(span.high - side),
+        ],
+    }
+
+
+def claim_row(
     row: CertificateRow,
     certificate: legacy.Certificate,
     declaration: Declaration,
     read_side: Callable[[str, int], Fraction],
 ) -> dict[str, Any]:
+    """One certificate's result in the claim record: its sides, and how it stands against
+    the case's lanes in the corpus, or beyond it against the grid and, from the owner's
+    answer on #613, Göbel's construction (`goebel_construction`), and the other reports."""
     n, side = row["n"], certificate.side
     houses = {house["n"]: house for house in declaration["houses"]}
     pending = [report for report in declaration["pending"] if report["n"] == n]
@@ -1669,6 +1724,11 @@ def _row(
     else:
         result["case"] = None
         candidates.append(("grid", exact_span(grid_side(n))))
+        construction = goebel_construction(n, declaration["read_on"])
+        if construction is not None:
+            holders, form, span = construction
+            result["construction"] = _construction(side, holders, form, span)
+            candidates.append((GOEBEL, span))
     others = []
     for report in pending:
         entry: dict[str, Any] = {
@@ -1712,7 +1772,7 @@ def compare(
     source = acquisition(packet)
     read_side = comparison_reader(declaration)
     rows = [
-        _row(row, certificates[row["n"]], declaration, read_side)
+        claim_row(row, certificates[row["n"]], declaration, read_side)
         for row in declaration["certificates"]
     ]
     return {
@@ -2358,6 +2418,10 @@ def comparison(row: Mapping[str, Any]) -> str:
     if row["case"] is None:
         grid = Fraction(row["grid_side"]) - Fraction(row["exact_side"])
         parts = [f"beyond the horizon, with no case record, and {_sci(grid)} below the grid"]
+        construction = row.get("construction")
+        if construction is not None:
+            by = _sci(abs(Fraction(construction["difference"])))
+            parts.append(f"{construction['relation']} {GOEBEL} {construction['form']} by {by}")
     else:
         case = row["case"]
         held = f"{case['holders']}, {case['result']}" if "result" in case else case["holders"]

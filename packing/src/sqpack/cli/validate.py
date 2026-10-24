@@ -181,7 +181,9 @@ SCREEN_EXCLUDED: dict[str, tuple[str, ...]] = {
 #: and 7 at 70 against T-146's 4 and 7, 7 and 22 at 102 against its 6 and 15, 4 and 20 at
 #: 123 against its 4 and 15, 3 and 10 at 153 against T-173's 37 and 105, 5 and 11 at 207
 #: against its 9 and 19, 3 and 17 at 258 against T-146's 3 and 16, and 54 and 190 at 259
-#: against T-136's 37 and 177, with 295 and 302 unchanged.
+#: against T-136's 37 and 177, with 295 and 302 unchanged. The pass of 24 October 2026
+#: moved 204 to the release's lower 204 file (T-231, think-h01y), the same packing at its
+#: solved side: 21 and 85 again, so the totals stand.
 SCREEN_FINDINGS: dict[str, tuple[int, int, int, int]] = {
     "n=1..100": (28, 111, 86, 577),
     "n=1..200": (67, 397, 182, 2012),

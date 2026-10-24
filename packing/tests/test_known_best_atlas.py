@@ -2398,8 +2398,10 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     # one more, Evan Daniel's issue 639 packet (T-193), and 70, 153 and 207 from PingYou
     # Ltd's PR 574 certificates, already on the poster. It no longer draws from Mishapolk's
     # 12 October certificates (153, 207) or SQUISH's third request (259), which held nothing
-    # else: one source fewer, and no new name.
-    assert len(expected_sources) == 26
+    # else: one source fewer, and no new name. The adoption of 24 October draws 204 from one
+    # more, Polkovskyi's n204 packet (T-231), with no new name: his issue 719 packet still
+    # holds 105.
+    assert len(expected_sources) == 27
     assert set(json.loads(credit_block.attrib["data-credited-names"])) == expected_names
     assert set(json.loads(credit_block.attrib["data-source-keys"])) == expected_sources
     assert credit_block.find("svg:text[@data-feature='packing-credits-heading']", SVG) is None

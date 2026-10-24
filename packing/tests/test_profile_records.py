@@ -205,13 +205,17 @@ def test_live_current_families_pending_comparison_and_known_scope_gap() -> None:
     assert "think-kqi1" in " ".join(index.unresolved["T-163"])
     assert records.current_record_ids(["T-037", "T-060", "T-163", "T-060"], index) == ("T-060",)
     # T-229 (#719) states a smaller side at 105 and 204 than T-174 and T-225, and since
-    # its adoption of 23 October 2026 holds both lanes there; T-174 and T-225 hold
-    # neither lane at those counts.
+    # its adoption of 23 October 2026 holds both lanes at 105; T-174 and T-225 hold
+    # neither lane at those counts. At 204 the release's lower file (T-231), adopted on 24
+    # October 2026, holds both lanes, and T-229 neither.
     assert {(facet.n, facet.direction, facet.lane) for facet in index.facets["T-225"]} == {
         (n, "upper", lane) for n in (227, 229, 260) for lane in ("reported", "verified")
     }
     assert {(facet.n, facet.direction, facet.lane) for facet in index.facets["T-229"]} == {
-        (n, "upper", lane) for n in (105, 204) for lane in ("reported", "verified")
+        (105, "upper", lane) for lane in ("reported", "verified")
+    }
+    assert {(facet.n, facet.direction, facet.lane) for facet in index.facets["T-231"]} == {
+        (204, "upper", lane) for lane in ("reported", "verified")
     }
     assert not {facet for facet in index.facets["T-174"] if facet.n == 105}
 

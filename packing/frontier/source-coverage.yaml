@@ -3940,6 +3940,11 @@ sources:
     (couzo-02f9690-2026-10-09) at 11 counts: 332, 336, 337, 338, 339, 340, 341, 373, 374, 377
     and 379; Couzo's 4e4c8ce index of 15 October (couzo-index-2026-10-15) at 372. 7 of them had
     been current before it: 332, 336, 337, 340, 341, 373 and 374.
+    Its rows at 369, 375 and 376 are above Göbel's classical construction there, the strip 19 +
+    sqrt(2)/2 at 369 (3.33e-2 below the row, which was the count's current row until 23 October
+    2026) and the square 10 + 7 sqrt(2) of 376 (less one square at 375), which the owner counts as
+    an earlier report beyond 324 (jlevy/squares#613, think-8krd), so each stays listed as printed,
+    marked above-classical-construction, and holds no count.
 - id: couzo-extended-range-updates-2026-10-08
   title: Francisco Couzo's later decimal reports at n=375 and n=378
   role: source-repository
@@ -3972,6 +3977,10 @@ sources:
     325 to 1024 from starts frozen at main a97b712b9, records earlier reports that no row held,
     so one of these rows names the report that beat it first: Couzo's 02f9690 of 9 October
     (couzo-02f9690-2026-10-09) at 378.
+    Its row at 375 is above Göbel's classical construction there (10 + 7 sqrt(2), the square of 376
+    less one), which the owner counts as an earlier report beyond 324 (23 October 2026,
+    jlevy/squares#613, think-8krd), so it stays listed as printed, marked
+    above-classical-construction, and holds no count.
 - id: couzo-followup-refinements-2026-10-08
   title: Francisco Couzo's five follow-up rational refinements at 2d32a6e
   role: source-repository
@@ -4796,6 +4805,10 @@ sources:
     325 to 1024 from starts frozen at main a97b712b9, records earlier reports that no row held,
     so one of these rows names the report that beat it first: Couzo's a7067d7 of 12 October
     (couzo-updates-2026-10-12) at 344.
+    Its rows at 375 and 376 are above Göbel's classical construction there, the square 10 + 7
+    sqrt(2) of 376 (less one square at 375), which the owner counts as an earlier report beyond 324
+    (23 October 2026, jlevy/squares#613, think-8krd), so each stays listed as printed, marked
+    above-classical-construction, and holds no count.
   claims_record: resources/web/couzo-certificates-2026-10-11/acquisition/beyond-horizon-claims.json
 - id: overbeck-n17-candidate-2026
   title: Seventeen unit squares, verification edition of a candidate proof that s(17) = L
@@ -5019,6 +5032,10 @@ sources:
     325 to 1024 from starts frozen at main a97b712b9, records earlier reports that no row held,
     so 2 of these rows name the report that beat each first: Couzo's 93570ef of 12 October
     (couzo-retained-certificates-2026-10-12) at 2 counts: 344 and 378.
+    Its rows at 375 and 376 are above Göbel's classical construction there, the square 10 + 7
+    sqrt(2) of 376 (less one square at 375), which the owner counts as an earlier report beyond 324
+    (23 October 2026, jlevy/squares#613, think-8krd), so each stays listed as printed, marked
+    above-classical-construction, and holds no count.
   claims_record: resources/web/couzo-certificates-2026-10-12/acquisition/beyond-horizon-claims.json
 - id: dostashev-compositions-2026-10-12
   title: Daniil Ostashev's cut-out and composition packings at fe43a64, issue562
@@ -5155,6 +5172,11 @@ sources:
     325 to 1024 from starts frozen at main a97b712b9, records earlier reports that no row held,
     so one of these rows names the report that beat it first: Couzo's 4e4c8ce index of 15
     October (couzo-index-2026-10-15) at 344.
+    Its row at 376, the count's current row until 23 October 2026, is 4.57e-3 above Göbel's
+    classical construction there, the square 10 + 7 sqrt(2), which the owner counts as an earlier
+    report beyond 324 (jlevy/squares#613, think-8krd), so it stays listed as printed, marked
+    above-classical-construction, and holds no count. Its row at 375, below that construction, stays
+    superseded by evand-compositions-2026-10-13's.
   claims_record: resources/web/couzo-certificates-2026-10-13/acquisition/beyond-horizon-claims.json
 - id: pingyou-n153-refinement-2026-10-12
   title: PingYou Ltd's refined n153 certificate at 431186b, issue504
@@ -6837,8 +6859,9 @@ sources:
     (OR-18), and review/beyond-horizon-comparison.json compares each from its exact header
     side in report order. The claims record holds the 252 the per-count rule records, each a
     beyond-horizon row; 812 and 930 are above Kevin Fang's earlier composites, and the 42
-    rows above Göbel's classical constructions (408 to 974) wait on the owner's answer on
-    jlevy/squares#613 (think-8krd). Their replay is held (think-2d7f), and their bytes are
+    rows above Göbel's classical constructions (408 to 974) are not recorded: the owner answered
+    jlevy/squares#613 on 23 October 2026 that Göbel's constructions are earlier reports
+    (think-8krd). Their replay is held (think-2d7f), and their bytes are
     held only in the author's repository at the pin. Couzo's 4e4c8ce index of 15 October, a
     report not yet recorded (think-yfoo), is smaller at all 238 of the 252 rows still
     current, by 3.79e-12 to 2.38e-02 (the index's exact sides are in
@@ -8651,8 +8674,9 @@ sources:
     931 held no row. The issue's 64 other rows at or below 1024 are not this source's: 34
     restate certificates the source published from 9 to 15 October at an equal side, earlier
     reports owned by their own imports, and 30 re-certify its 4e4c8ce certificates below them
-    by 2.4e-23 to 3.2e-23, under the print's resolution, which wait on a decision
-    (think-fwa9); the 1112 rows above 1024 wait on the owner (think-f2io). The manifest
+    by 2.4e-23 to 3.2e-23, under the print's resolution, which restate them by the owner's answer of
+    23 October 2026 (think-fwa9); the 1112 rows above 1024 wait on the owner (think-f2io). The
+    manifest
     credits Couzo at every row, after Darius
     Muglich's packings at 28 counts, Evan Daniel's at 343 (Kevin Fang's two-wedge family),
     and Fang's rectangle and gluing at one; those credit statements are the source's.
@@ -8692,7 +8716,8 @@ sources:
     their own because the release's claims record, which the beyond-horizon rows of
     mishapolk-issue719-2026-10-22 are read against, holds the rows beyond the corpus only.
     On 23 October 2026 the cases at 105 and 204 adopted these certificates, the selected
-    overrides below.
+    overrides below, and on 24 October 2026 the case at 204 moved to T-231
+    (mishapolk-n204-2026-10-22).
 - id: mishapolk-issue719-2026-10-22
   title: Mykhailo Polkovskyi's 122 exact certificates of issue 719 at 12fc4667
   role: source-repository
@@ -8842,8 +8867,9 @@ sources:
     couzo-extended-range-reports-2026-10-08's at 372. At 51 of the 111 the report just
     before this source's in report order is one no row yet holds, each its own import's:
     Francisco Couzo's 4e4c8ce certificates (think-yfoo), his 5a299b4 and 23aff0c
-    certificates (think-tmwt) and issue 715's re-certifications (think-fwa9); each enters
-    below this source's row when it lands. Its 366 is not recorded: Couzo's 4e4c8ce
+    certificates (think-tmwt), each entering below this source's row when it lands, and issue 715's
+    re-certifications, which restate the 4e4c8ce certificates by the owner's answer of 23 October
+    2026 (think-fwa9). Its 366 is not recorded: Couzo's 4e4c8ce
     certificate, published 15 October, is 8.19e-2 below it. The 8 rows above 1024 are pinned
     by digest and wait on the owner (think-9vr8, think-f2io). Per-row lineage is not stated
     by the source; the issue credits Mishapolk (Mykhailo Polkovskyi) and names the earlier finders
@@ -8852,9 +8878,42 @@ sources:
     (campaign/issue-intake/upper-bounds-couzo-history-20261022) records his own certificates
     there: at 49 of the 111 the row just before this source's is his 4e4c8ce index's, at 38
     (couzo-index-2026-10-15), or his 5a299b4 reconciliation's, at 11
-    (couzo-reconcile-2026-10-20); the re-certifications below the 12-place print of issue 715
-    and of 5a299b4 stay held (think-fwa9), and the chain passes over them.
+    (couzo-reconcile-2026-10-20); the re-certifications below the 12-place print of issue 715 and of
+    5a299b4 restate the 4e4c8ce certificates by that answer, so the walk does not record them. This
+    source's own 631, 2.73e-13 below the 4e4c8ce certificate at the same print, is in the answer's
+    words too, and waits on the owner (think-oqjd).
   claims_record: resources/web/mishapolk-issue719-2026-10-22/acquisition/beyond-horizon-rows.json
+
+- id: mishapolk-n204-2026-10-22
+  title: Mykhailo Polkovskyi's lower n204 certificate at 12fc4667, issue 719
+  role: source-repository
+  url: https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/certificates/n204.cert
+  local: resources/web/mishapolk-n204-2026-10-22/
+  source_key: '[Mishapolk n204 2026-10-22]'
+  scope:
+    n_values: [204]
+  reviewed: '2026-10-23'
+  source_date: '2026-10-22'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/mishapolk-n204-2026-10-22/acquisition/claims.json
+  evidence:
+  - E-mishapolk-n204-certificate-report
+  - E-mishapolk-n204-exact-feasibility
+  - E-mishapolk-n204-review-exact-feasibility
+  notes: >-
+    The release's second 204 file, certificates/n204.cert, retained as the source wrote it
+    under the author's written grant on issue 719 and admitted at its exact side; T-231
+    records it at V3/C3 on the review of 23 October
+    (docs/project/reviews/review-2026-10-23-mishapolk-n204.md). All 3 native jobs have full
+    outcomes, and the packet's sharp controls meet the certificate's 5e-21 margins on both
+    routes. The same commit first published certificates/n-204.cert, the file the issue
+    names (T-229, mishapolk-issue719-2026-10-22-in-corpus); the ledger of 22 October for
+    issue 719 walks the issue's claim at 204 at this file's side, the least its commit
+    states there. On 24 October 2026 the case at 204 adopted this certificate from T-229, the
+    selected override below.
 
 - id: couzo-02f9690-2026-10-09
   title: Francisco Couzo's 12 beyond-horizon certificates at 02f9690, no issue
@@ -8899,9 +8958,8 @@ sources:
     couzo-3ef7634-2026-10-10's (2), couzo-extended-certificates-2026-10-11's (2),
     couzo-certificates-2026-10-11's (1) and issue 686's (1). Its rows supersede first
     couzo-extended-range-reports-2026-10-08's (11) and couzo-extended-range-updates-2026-10-08's
-    (1). The walk holds back the commit's publications at 369, 375 and 376, above Göbel's
-    construction (think-8krd), each with its decision's bead
-    (beyond_horizon_replay.HISTORY_HELD).
+    (1). Its publications at 369, 375 and 376 are above Göbel's construction there, an earlier
+    report by the owner's answer of 23 October 2026 (think-8krd), so the walk does not record them.
   claims_record: resources/web/couzo-exact-certificates-2026-10-09/acquisition/beyond-horizon-rows.json
 - id: evand-hunt3-first-hour-2026-10-10
   title: Evan Daniel's Hunt 3 first-hour certificate at f7a2325, no issue
@@ -8998,9 +9056,9 @@ sources:
     (receipts/filtered-exact-replay.json, devtools.beyond_horizon_replay), and every side is
     below Göbel's construction at its count. 1 is current (340); 3 are superseded on entry, by
     couzo-certificates-2026-10-11's (3). Its rows supersede first couzo-02f9690-2026-10-09's (2)
-    and couzo-3ef7634-2026-10-10's (1), and at 1 count no row stood before them. The walk holds
-    back the commit's publications at 376, above Göbel's construction (think-8krd), each with
-    its decision's bead (beyond_horizon_replay.HISTORY_HELD).
+    and couzo-3ef7634-2026-10-10's (1), and at 1 count no row stood before them. Its publications at
+    376 are above Göbel's construction there, an earlier report by the owner's answer of 23 October
+    2026 (think-8krd), so the walk does not record them.
   claims_record: resources/web/couzo-extended-certificates-2026-10-11/acquisition/beyond-horizon-rows.json
 - id: couzo-updates-2026-10-12
   title: Francisco Couzo's intermediate certificate at 344, a7067d7, no issue
@@ -9031,9 +9089,9 @@ sources:
     (receipts/filtered-exact-replay.json, devtools.beyond_horizon_replay), and every side is
     below Göbel's construction at its count. 1 is superseded on entry, by
     couzo-certificates-2026-10-12's (1). Its rows supersede first
-    couzo-certificates-2026-10-11's (1). The walk holds back the commit's publications at 375,
-    above Göbel's construction (think-8krd), each with its decision's bead
-    (beyond_horizon_replay.HISTORY_HELD).
+    couzo-certificates-2026-10-11's (1). Its publications at 375 are above Göbel's construction
+    there, an earlier report by the owner's answer of 23 October 2026 (think-8krd), so the walk does
+    not record them.
   claims_record: resources/web/couzo-updates-2026-10-12/acquisition/beyond-horizon-rows.json
 - id: fang-composites-2026-10-12
   title: Kevin Fang's composite certificates at 703 and 994, bef5c42, no issue
@@ -9097,9 +9155,9 @@ sources:
     refused (receipts/filtered-exact-replay.json, devtools.beyond_horizon_replay), and every
     side is below Göbel's construction at its count. 2 are superseded on entry, by
     couzo-certificates-2026-10-13's (1) and couzo-4596670-2026-10-13's (1). Its rows supersede
-    first couzo-certificates-2026-10-12's (2). The walk holds back the commit's publications at
-    375, above Göbel's construction (think-8krd), each with its decision's bead
-    (beyond_horizon_replay.HISTORY_HELD).
+    first couzo-certificates-2026-10-12's (2). Its publications at 375 are above Göbel's
+    construction there, an earlier report by the owner's answer of 23 October 2026 (think-8krd), so
+    the walk does not record them.
   claims_record: resources/web/couzo-retained-certificates-2026-10-12/acquisition/beyond-horizon-rows.json
 - id: couzo-4596670-2026-10-13
   title: Francisco Couzo's intermediate certificate at 378, 4596670
@@ -9419,11 +9477,16 @@ sources:
     couzo-verified-bounds-2026-10-14's (199), couzo-certificates-2026-10-14's (7),
     fang-composites-2026-10-12's (2), couzo-certificates-2026-10-13's (1),
     couzo-extended-range-reports-2026-10-08's (1), evand-fresh-compositions-2026-10-14's (1) and
-    fang-excess-theorem-2026-10-13's (1), and at 41 counts no row stood before them. The walk
-    holds back the commit's publications at 89 counts: 47 above Göbel's construction
-    (think-8krd), 39 index deletion bounds with no certificate file at their count (D6 proposed,
-    think-f2io) and 3 re-certifications below the 12-place print (327, 332, 542; think-fwa9),
-    each with its decision's bead (beyond_horizon_replay.HISTORY_HELD).
+    fang-excess-theorem-2026-10-13's (1), and at 41 counts no row stood before them. 36 of its 39
+    index deletion bounds, each deleting one square from the next count's certificate with no
+    certificate file at its own count, are earlier reports by the owner's answer of 23 October 2026
+    on D6 (think-f2io; beyond_horizon_replay.HISTORY_HELD), with no row of their own on that
+    decision's recommendation; the other three, at 751, 752 and 927, delete two or three squares and
+    stay held, and think-kzme asks about them, about the rows, and about the issues' claims at 743,
+    798, 855 and 985. By the owner's answers of 23 October 2026 it does not record the commit's
+    publications at 50 more counts: 47 above Göbel's construction there, an earlier report
+    (think-8krd), and 3 re-certifications below the 12-place print, at 327, 332 and 542, which
+    restate the reports they beat (think-fwa9).
     Of the 253 rows, the pinned manifest.json credits Couzo at 200, PingYou Ltd's pieces at 40,
     Kevin Fang's rectangles and gluing at 8 (with PingYou Ltd's square input at 7 and Couzo's at
     1) and Evan Daniel at 5; those statements are the source's.
@@ -9477,14 +9540,16 @@ sources:
     on two routes with all six controls refused (receipts/23aff0c/filtered-exact-replay.json,
     devtools.beyond_horizon_replay), and every side is below Göbel's construction at its count.
     21 are superseded on entry, by issue 672's (16) and issue 675's (5). Its rows supersede
-    first couzo-index-2026-10-15's (4), and at 17 counts no row stood before them. The walk
-    holds back the commit's publications at 71 counts: 10 re-certifications below the 12-place
-    print (think-fwa9), and 61 classical constructions its upper_bounds.json states with no
-    certificate file, which wait on #613 (think-8krd), whether a classical construction counts
-    as an earlier report, as well as on D2 and D6 (think-f2io): 46 constructions, Göbel's
-    squares (27) and Friedman's off-centre family (19), 41 of them L-border extensions, and 15
-    bounds deleting one or two squares from Friedman's constructions one or two counts above.
-    Each hold names its decisions' beads (beyond_horizon_replay.HISTORY_HELD).
+    first couzo-index-2026-10-15's (4), and at 17 counts no row stood before them. The walk holds
+    back the commit's 61 classical constructions its upper_bounds.json states with no certificate
+    file, each below Göbel's construction at its count, for D2 (think-f2io) and for whether
+    Friedman's constructions count as earlier reports as Göbel's do (think-zkxy); D6's answer covers
+    a square deleted from a published certificate, not these: 46 constructions, Göbel's squares (27)
+    and Friedman's off-centre family (19), 41 of them L-border extensions, and 15 bounds deleting
+    one or two squares from Friedman's constructions one or two counts above. Each hold names its
+    decisions' beads (beyond_horizon_replay.HISTORY_HELD). Its 10 re-certifications below the
+    12-place print restate the reports they beat, by the owner's answer of 23 October 2026
+    (think-fwa9), so the walk does not record them.
   claims_record: resources/web/couzo-issue670-2026-10-17/acquisition/beyond-horizon-rows-23aff0c.json
 - id: couzo-reconcile-2026-10-20
   title: Francisco Couzo's 20 beyond-horizon certificates of his 5a299b4 reconciliation, no issue
@@ -9535,11 +9600,11 @@ sources:
     below Göbel's construction at its count. 9 are current (487, 532, 579, 628, 679, 732, 787,
     844, 903); 11 are superseded on entry, by issue 719's (11). Its rows supersede first
     couzo-index-2026-10-15's (10), issue 686's (9) and couzo-certificates-2026-10-14's (1). The
-    walk holds back the commit's publications at 32 counts: 31 re-certifications below the
-    12-place print (think-fwa9), 11 certificates and 20 index L-borders, and 331, above Göbel's
-    construction (think-8krd); issue 715's 30 re-certifications, which the commit also holds,
-    are issue 715's (think-fwa9), each with its decision's bead
-    (beyond_horizon_replay.HISTORY_HELD).
+    walk does not record the commit's publications at 32 more counts, by the owner's answers of 23
+    October 2026: 31 re-certifications below the 12-place print, 11 certificates and 20 index
+    L-borders, which restate the reports they beat (think-fwa9), and 331, above Göbel's construction
+    there, an earlier report (think-8krd). Issue 715's 30 re-certifications, which the commit also
+    holds, are issue 715's and restate the 4e4c8ce certificates likewise.
   claims_record: resources/web/couzo-reconcile-2026-10-20/acquisition/beyond-horizon-rows.json
 - id: mishapolk-issue732-2026-10-22
   title: Mykhailo Polkovskyi's 77 beyond-horizon certificates of issue 732 at 17cc2201
@@ -9649,9 +9714,12 @@ sources:
     couzo-verified-bounds-2026-10-14's (4). The packet's filtered exact replay decided every one
     on two routes with all six controls refused (receipts/filtered-exact-replay.json,
     devtools.beyond_horizon_replay), and every side is below Göbel's construction at its count.
-    The walk holds 499, 8.66e-13 below issue 719's row at the same 12-place print, for
-    think-fwa9, and the author's own 1851c2c files at the nine other withdrawn counts for
-    think-8m4k; 129 of the 312 not recorded rest on held publications
+    Its 499, 8.66e-13 below issue 719's row at the same 12-place print, restates that row by the
+    owner's answer of 23 October 2026 (think-fwa9), and the author's own 1851c2c files at the nine
+    other withdrawn counts are not reports, by the owner's answer of the same day (think-8m4k). Of
+    the 313 not recorded, 43 are above Göbel's construction there (think-8krd), 985 ties Couzo's
+    4e4c8ce deletion bound, an earlier report by the D6 answer (think-f2io), and 54 rest on held
+    constructions with no certificate file and deletions from Friedman's constructions
     (beyond_horizon_replay.WALKS). The 5,078 rows above 1024 wait on the owner (think-f2io).
   claims_record: resources/web/mishapolk-issue732-2026-10-22/acquisition/beyond-horizon-rows.json
 
@@ -9872,11 +9940,11 @@ selected_overrides:
   reason: The complete rational precision refinement is strictly smaller than both previous exact
     upper lanes.
 - n: 204
-  source_id: mishapolk-issue719-2026-10-22-in-corpus
-  value: '14.8086428305278967'
-  evidence: E-mishapolk-719-certificate-report
+  source_id: mishapolk-n204-2026-10-22
+  value: '14.8086428305130872'
+  evidence: E-mishapolk-n204-certificate-report
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
-    a replay here and an accepted review, adopted on 2026-10-23 (T-229).
+    a replay here and an accepted review, adopted on 2026-10-24 (T-231).
 - n: 206
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '14.8601586633919032367'
@@ -10741,7 +10809,7 @@ superseded_reports:
 - n: 204
   source_id: evand-square-packing-2026-10-05
   value: '14.822875655532295295399036633375'
-  superseded_by: mishapolk-issue719-2026-10-22-in-corpus
+  superseded_by: mishapolk-n204-2026-10-22
   reason: Certifies the catalogue's packing at a side 5.3e-15 above the one it prints, which stays
     the report; since 2026-10-06 it is the verified upper bound, rounded up at the printed precision
     (T-101).
@@ -12080,8 +12148,8 @@ superseded_reports:
   source_id: dostashev-compositions-2026-10-12
   value: '14.8086632343869566'
   reason: The house from 2026-10-15 until 2026-10-16; its certificate stays retained and verified,
-    and T-229's exact side is smaller.
-  superseded_by: mishapolk-issue719-2026-10-22-in-corpus
+    and T-231's exact side is smaller.
+  superseded_by: mishapolk-n204-2026-10-22
 - n: 211
   source_id: couzo-certificates-2026-10-13-in-corpus
   value: '14.9935589139740062'
@@ -12374,8 +12442,8 @@ superseded_reports:
   source_id: mishapolk-kkt-refinements-2026-10-14
   value: '14.80866323438695657'
   reason: The house from 2026-10-16 until 2026-10-20; its certificate stays retained and verified,
-    and T-229's exact side is smaller.
-  superseded_by: mishapolk-issue719-2026-10-22-in-corpus
+    and T-231's exact side is smaller.
+  superseded_by: mishapolk-n204-2026-10-22
 - n: 154
   source_id: mishapolk-kkt-refinements-2026-10-14
   value: '12.92120657713263105'
@@ -12404,8 +12472,8 @@ superseded_reports:
   source_id: couzo-issue678-2026-10-18-in-corpus
   value: '14.8086428419812473'
   reason: The house from 2026-10-20 until 2026-10-22; its certificate stays retained and verified,
-    and T-229's exact side is smaller.
-  superseded_by: mishapolk-issue719-2026-10-22-in-corpus
+    and T-231's exact side is smaller.
+  superseded_by: mishapolk-n204-2026-10-22
 - n: 229
   source_id: evand-n229-dilation-update-2026-10-18
   value: '15.6501615138955532'
@@ -12434,8 +12502,8 @@ superseded_reports:
   source_id: evand-regularized-2026-10-20
   value: '14.8086428405914940'
   reason: The house from 2026-10-22 until 2026-10-23; its certificate stays retained and verified,
-    and T-229's exact side is smaller.
-  superseded_by: mishapolk-issue719-2026-10-22-in-corpus
+    and T-231's exact side is smaller.
+  superseded_by: mishapolk-n204-2026-10-22
 - n: 303
   source_id: mishapolk-kkt-refinements-2026-10-14
   value: '17.90995829106990799'
@@ -12496,6 +12564,12 @@ superseded_reports:
   reason: The house from 2026-10-16 until 2026-10-23; its certificate stays retained and verified,
     and T-193's exact side is smaller.
   superseded_by: evand-exact-cur-2026-10-16
+- n: 204
+  source_id: mishapolk-issue719-2026-10-22-in-corpus
+  value: '14.8086428305278967'
+  reason: The house from 2026-10-23 until 2026-10-24; its certificate stays retained and verified,
+    and T-231's exact side is smaller.
+  superseded_by: mishapolk-n204-2026-10-22
 beyond_horizon_claims:
 - n: 327
   source_id: couzo-extended-range-reports-2026-10-08
@@ -12644,7 +12718,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '19.740417287556077'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: above-classical-construction
+  construction: 19 + 1/2*sqrt(2)
   bead: think-1545
 - n: 372
   source_id: couzo-extended-range-reports-2026-10-08
@@ -12675,40 +12750,40 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '19.907052698737502'
   assurance: reported
-  disposition: superseded
-  superseded_by: couzo-extended-range-updates-2026-10-08
+  disposition: above-classical-construction
+  construction: 10 + 7*sqrt(2)
   bead: think-1545
 - n: 375
   source_id: couzo-extended-range-updates-2026-10-08
   claim: upper-bound
   value: '19.907024692022954'
   assurance: reported
-  disposition: superseded
-  superseded_by: couzo-certificates-2026-10-11
+  disposition: above-classical-construction
+  construction: 10 + 7*sqrt(2)
   bead: think-1545
 - n: 375
   source_id: couzo-certificates-2026-10-11
   claim: upper-bound
   value: '19.906335145009'
   assurance: verified
-  disposition: superseded
-  superseded_by: couzo-certificates-2026-10-12
+  disposition: above-classical-construction
+  construction: 10 + 7*sqrt(2)
   bead: think-om5l
 - n: 376
   source_id: couzo-extended-range-reports-2026-10-08
   claim: upper-bound
   value: '19.920279652318701'
   assurance: reported
-  disposition: superseded
-  superseded_by: couzo-certificates-2026-10-11
+  disposition: above-classical-construction
+  construction: 10 + 7*sqrt(2)
   bead: think-1545
 - n: 376
   source_id: couzo-certificates-2026-10-11
   claim: upper-bound
   value: '19.910276586885'
   assurance: verified
-  disposition: superseded
-  superseded_by: couzo-certificates-2026-10-12
+  disposition: above-classical-construction
+  construction: 10 + 7*sqrt(2)
   bead: think-om5l
 - n: 377
   source_id: couzo-extended-range-reports-2026-10-08
@@ -12850,8 +12925,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '19.901618621328'
   assurance: reported
-  disposition: superseded
-  superseded_by: couzo-certificates-2026-10-13
+  disposition: above-classical-construction
+  construction: 10 + 7*sqrt(2)
   bead: think-rfce
 - n: 375
   source_id: couzo-certificates-2026-10-13
@@ -12873,15 +12948,16 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '19.904949736499'
   assurance: reported
-  disposition: superseded
-  superseded_by: couzo-certificates-2026-10-13
+  disposition: above-classical-construction
+  construction: 10 + 7*sqrt(2)
   bead: think-rfce
 - n: 376
   source_id: couzo-certificates-2026-10-13
   claim: upper-bound
   value: '19.904068025747'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: above-classical-construction
+  construction: 10 + 7*sqrt(2)
   bead: think-rfce
 - n: 378
   source_id: couzo-certificates-2026-10-12

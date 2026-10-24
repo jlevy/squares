@@ -581,6 +581,7 @@ def _sources() -> dict[str, Source]:
         packet_source("T-225", "evand-regularized-2026-10-20"),
         packet_source("T-229", "mishapolk-issue719-2026-10-22"),
         packet_source("T-230", "evand-n303-2026-10-22"),
+        packet_source("T-231", "mishapolk-n204-2026-10-22"),
     ]
     found = {source.result: source for source in sources}
     # Two results may read one packet (T-181 and T-182 both read issue 586's), so the
@@ -620,6 +621,8 @@ def _sources() -> dict[str, Source]:
 #: 574's algebraic certificates (T-174) at 70 from T-146 and at 153 and 207 from T-173,
 #: and Evan Daniel's exact forms of issue 639 (T-193) at 102, 123, 258 and 295 from T-146,
 #: at 259 from T-136 and at 302 from T-186, which leaves T-136 and T-173 no house here.
+#: The pass of 24 October 2026 adopted Polkovskyi's lower 204 file (T-231) at 204 from
+#: T-229.
 ADOPTED: dict[int, str] = {
     29: "T-195",
     68: "T-174",
@@ -651,7 +654,7 @@ ADOPTED: dict[int, str] = {
     181: "T-174",
     182: "T-174",
     183: "T-220",
-    204: "T-229",
+    204: "T-231",
     206: "T-174",
     207: "T-174",
     208: "T-174",
@@ -758,6 +761,10 @@ NUMBERS = tuple(sorted(ADOPTED))
 #: 2.42e-12 below T-173; and issue 639's exact forms (T-193) at 102, 123, 258 and 295,
 #: 1.06e-19 to 1.77e-19 below T-146, at 259, 1.56e-31 below T-136, and at 302, 1.79e-39
 #: below T-186.
+#: The pass of 24 October 2026 adopted the release's other 204 file, which the author
+#: claimed after T-229 was registered (T-231), after the 23 October review of it, at 204
+#: from T-229, 1.48e-11 below it: the same packing at the solved side. It is dated by the
+#: day its pull request merges, since the pass of 23 October had already moved 204.
 #: A count a pass names keeps its place in the earlier passes' sets, which their archives
 #: hold; it was adopted on the latest day that names it.
 LATER_PASSES: dict[str, frozenset[int]] = {
@@ -834,6 +841,7 @@ LATER_PASSES: dict[str, frozenset[int]] = {
     "2026-10-21": frozenset({260, 270}),
     "2026-10-22": frozenset({204, 227, 229, 260}),
     "2026-10-23": frozenset({70, 102, 105, 123, 153, 204, 207, 258, 259, 295, 302, 303}),
+    "2026-10-24": frozenset({204}),
 }
 
 
