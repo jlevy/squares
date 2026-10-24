@@ -3,9 +3,9 @@ type: is
 id: is-01m5pg1gyc2xjj54pjyqcp530z
 title: "PR #788 (merge): address review A (A1-A9), update think-lsam, merge"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 3
+version: 5
 delegate: c-fix-788-1024
 labels: []
 dependencies: []
@@ -13,8 +13,12 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-24T08:22:09.100Z
-updated_at: 2026-10-24T08:56:56.214Z
+updated_at: 2026-10-24T09:26:33.018Z
 started_at: 2026-10-24T08:22:16.137Z
+closed_at: 2026-10-24T09:26:33.008Z
+close_reason: "PR #788 merged 2026-10-24T09:26:00Z (b2ea7b09c) at head 649037d11 after review A's A1-A10 were fixed (dispositions https://github.com/jlevy/squares/pull/788#issuecomment-6382521161); hosted CI green (Packing validation 40080838739, Certificate page 40080838757, Branch mergeability 40080836479)."
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes
@@ -31,3 +35,4 @@ started_at: 2026-10-24T08:22:16.137Z
 - A9 (Low) 1,005,302 row's fail mark.
 - A10 (suggestion) verdict test reads the checker's own failure text.
 Progress: main e5c1c64e3 merged (78e64e895); fixes 73b89cd1d (tool and tests) and 29b8eda2c (plan); pushed, head 29b8eda2c (ls-remote agrees). Third load run with two controls (project --without news-cards.js / news-filters.js), 175 navigations, 08:33-08:38Z, Chromium 151.0.7922.34 installed into the session scratch directory (the container had only build 1243). think-lsam description corrected and a note added. Local: 17 tests pass (9 fail on the round-1 tool); ruff, basedpyright clean on both files; packing-validate --edit 66/69 (type floor timed out at load 15-16; browser floor blocked by the shared node_modules lacking typescript-eslint; bead tree: 3 open beads under closed parents in the local tracker, not this branch's).
+Done: dispositions posted https://github.com/jlevy/squares/pull/788#issuecomment-6382521161 at head 649037d11 (main 6808d293a merged in, with #787); every finding A1-A10 fixed, none deferred; hosted CI green at 649037d11 (Packing validation 40080838739, Certificate page 40080838757, Branch mergeability 40080836479). Runway at 6808d293a: 358,186 bytes, 13 to 21 days to 600,000 and 5 to 8 to 450,000 (think-lsam updated).

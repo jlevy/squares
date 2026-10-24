@@ -3,18 +3,18 @@ type: is
 id: is-01m5p8babk5xj1t2jtfgv1qy88
 title: "News page budget raise: measure_news_page, the news.html exception and the trip check (plan #759, before Phase 1)"
 kind: task
-status: in_progress
+status: open
 priority: 1
-version: 5
+version: 7
 spec_path: docs/project/specs/active/plan-2026-10-23-news-pr-feed.md
-delegate: c-fix-788-1024
+delegate: null
 labels: []
 dependencies: []
 parent_id: is-01m5mwbn450xgwq4mgjnrpn0jm
 hold: null
 hold_until: null
 created_at: 2026-10-24T06:07:41.427Z
-updated_at: 2026-10-24T08:22:18.968Z
+updated_at: 2026-10-24T09:26:38.722Z
 started_at: 2026-10-24T06:08:00.514Z
 ---
 The plan docs/project/specs/active/plan-2026-10-23-news-pr-feed.md, section 'Before Phase 1: The Budget Raise' and 'The page budget'. One PR: devtools.measure_news_page (bytes, project, load), its report at today's size and the projected 1,300,000 bytes, PAGE_BUDGET_EXCEPTIONS['news.html'] with a measured reason, docs/project/site-urls.md re-rendered, NEWS_CEILING and NEWS_TRIP_BYTES and the trip check in render_changelog --check with its scopes, the room report and merge-step rule in the runbook, and the tests from the Testing Strategy. Must merge before main's news.html passes 450,000 bytes (318,655 on 24 Oct; about 9 days). Owner's answer: 'Keep all, raise the limit'.
@@ -34,3 +34,6 @@ Room now (bytes mode, main 34eb8bb75): 319,181 bytes; at the last 28 days' pace 
 Validation: test_measure_news_page 10 passed; ruff and basedpyright clean on both files; check_no_embedded_js, check_probes, site_urls --check and check_release_impact pass. packing-validate --edit: the whole-repo type floor timed out at 900 s on the loaded host (load average 11-13), and site_urls failed only because origin/main moved (#769) mid-run, passing after the branch moved to 34eb8bb75.
 
 2026-10-24 c-news-budget-1024 (on coord-intake-1023's instruction): draft PR #788 opened for the tool alone, https://github.com/jlevy/squares/pull/788, labels S1 and project, head 463f78d3f (commits 9d566b859, the tool and tests; 463f78d3f, the plan's tool and report items ticked and one dated line saying the raise waits on think-lsam). No exception, trip check or runbook change. Branch on main 34eb8bb75; no merge needed. Hosted CI is the full type check (local one timed out under load).
+
+2026-10-24 coord-intake-1024: the tool half landed as PR #788 (b2ea7b09c, merged 09:26:00Z), with review A's corrections: the longest task comes from news-cards.js's per-card forced layouts (2 per visible card), the layout shift is the fold plus the filter-bar reveal, and without news-cards.js a 1,305,949-byte page passes every limit. Runway at main 6808d293a (358,186 bytes): about 13 to 21 days to 600,000, 5 to 8 to 450,000. The raise itself (exception, NEWS_CEILING, trip check, runbook rules) waits on the owner's decision in think-lsam.
+blocked_on: think-lsam
