@@ -4,9 +4,10 @@ One dilation certificate in Evan Daniel's text format, in a gist with no licence
 as a derived exact fact and read by the `evand-cert` adapter: s(303) of #755 at
 ``511f56b``. The author's CC0 1.0 dedication of 24 October (issuecomment-6388401978) let
 the packet retain the gist's three files at the same pin; the fact stays, since the
-receipts are bound to it, and the importer holds it to the retained certificate. The general importer's checks run on the packet through
-``test_upper_bound_reports``; these hold what is particular to it, as the stage 4 review
-of 19 October asked of the imports before it (RV-1 of
+receipts are bound to it, and the importer holds it to the retained certificate. The
+general importer's checks run on the packet through ``test_upper_bound_reports``; these
+hold what is particular to it, as the stage 4 review of 19 October asked of the imports
+before it (RV-1 of
 docs/project/reviews/review-2026-10-19-upper-bound-imports-659-664-669-674.md): the
 digests the issue prints, that the derived fact names the certificate's, the side, that it
 is below every report at 303 by the margin the records state, that the house reader
@@ -66,7 +67,7 @@ def _manifest() -> dict[str, str]:
     }
 
 
-def test_the_packet_retains_the_gists_files_under_cc0_with_the_digests_the_issue_prints() -> None:
+def test_the_retained_files_are_cc0_and_have_the_digests_the_issue_prints() -> None:
     """Derived-only on 23 October for want of a licence; on 24 October the author
     dedicated the three files to the public domain under CC0 1.0 and asked that they be
     kept, so the packet was acquired again at the same pin, every digest unchanged."""

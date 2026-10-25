@@ -33473,7 +33473,6 @@ results:
       - packing/resources/web/amundsk-n303-2026-10-23/README.md
       - packing/resources/web/amundsk-n303-2026-10-23/acquisition/claims.json
       - packing/resources/web/amundsk-n303-2026-10-23/facts/n-303.yaml.gz
-      - packing/resources/web/amundsk-n303-2026-10-23/source/s303_amund.cert
       - packing/resources/web/amundsk-n303-2026-10-23/receipts/exact-certification.json.xz
       - packing/resources/web/amundsk-n303-2026-10-23/replay/sharp-controls.json
       - packing/resources/web/amundsk-n303-2026-10-23/measure/identity.json
