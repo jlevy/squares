@@ -5,7 +5,7 @@ title: "Import #797: Kevin Fang's c*(k) < 4√(2k)+1 for every k ≥ 6 (squarepa
 kind: task
 status: in_progress
 priority: 2
-version: 17
+version: 18
 delegate: c-import-797-1024
 labels:
   - result-import
@@ -19,7 +19,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-24T20:23:19.286Z
-updated_at: 2026-10-25T04:07:03.323Z
+updated_at: 2026-10-25T04:46:33.257Z
 started_at: 2026-10-24T20:24:12.105Z
 ---
 New 2026-10-24 issue https://github.com/jlevy/squares/issues/797 (TheSnakeFang, 18:52:48Z): for every k >= 6, k^2 - ceil(sqrt(32k)) - 1 unit squares fit in a square of side < k, so c*(k) < 4 sqrt(2k) + 1. Ryu's L packing (Theorem 1.3) with filled band ends, b the odd integer nearest sqrt(2k); a 5-page note. Source TheSnakeFang/squarepack-certs@b1b3f6b theorem-a/ (note PDF+TeX, lband.py exact construction, windowed_check.py, certificates k=6..40 and 101, SHA-256 for k=300 and 600 with regenerate.sh). The repository head db1ed62 (3 commits past the last read) adds note v0.2 crediting Evan Daniel's earlier bound (doi:10.5281/zenodo.23624565): read for priority and credit. Bears on the deficiency rows (Ryu's Theorems 1.2-1.4, T-163). Stage 0 owner; stage 1 triage is read-only first. Source claims are unverified.
@@ -115,3 +115,5 @@ The review is [review-2026-10-25-fang-theorem-a.md](https://github.com/jlevy/squ
 The two questions of our last comment, on the Section 6 certificates and the k = 300 and 600 certificates, hold nothing open either. An answer to any of them is welcome here.
 
 2026-10-25 c-map-qmqq-1024 (review A of #805): correction to the note above. The acknowledgement's two questions are no longer under awaiting_author (A2): they are informational, so the record notes them in the certificates and optimized-constructions dispositions, and the follow-up draft above carries both for the closing comment. The record now says it, not the issue, called the lemmas 1 and 2 (A1). Daniel's k^{2/5} crossover is decided exactly by fang_theorem_a (A3).
+
+2026-10-25 coord-intake-1024: #805 merged (bb756e193, 04:33:54Z), Pages 40162346008 verified; check_requests marked #797 closeable. Final comment posted https://github.com/jlevy/squares/issues/797#issuecomment-6393580476 and #797 closed 04:46:15Z. Recorded (final, state closed) by H2's PR (think-3anz); this bead closes after that merges.
