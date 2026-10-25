@@ -12,8 +12,8 @@ another arrangement than T-186’s, the house it replaces.
 
 T-242’s certificate at 268 is not adopted here: the same pass adopts T-240 there, and
 one day’s archive holds one prior state a count, so 268 is staged for the pass’s next
-pull request (`select_houses.PENDING_ADOPTION`, think-hx0e; H2 is think-3anz) and its
-runs are owed there.
+pull request, on or after 26 October, under the bead that adopts it
+(`select_houses.PENDING_ADOPTION`, think-3anz), and its runs are owed there.
 
 ## How They Were Run
 
@@ -52,7 +52,7 @@ No view was admitted, so no `layer` step ran; `default_drawings --update`,
 
 | n | Outcome | Drawn now |
 | --- | --- | --- |
-| 304 | Grid-slack’s view, the same at all three thresholds, is at the witness’s side, one to one with it, largest move 0.013. Evan Daniel’s regularizer solves the witness to a certified KKT local minimum; its exact solve lies about $1.8 \times 10^{-19}$ below the side, within the source’s own padding of $10^{-20}$, and its view is drawn at the side, one to one, largest move 0.58. Both go to review (row 7: 14 and 36 squares’ contact counts fall while no total does), and both draw more light squares than the axis tool’s view of the witness (4 and 5 against 2), with fewer uneven and near-axis squares (14 against 18, none against 9). No view is below the house, so there is no register candidate | the axis tool’s view, decided no better |
+| 304 | Grid-slack’s view, the same at all three thresholds, is at the witness’s side, one to one with it, largest move 0.013. Evan Daniel’s regularizer solves the witness to a certified KKT local minimum; its exact solve lies about $1.8 \times 10^{-19}$ below the side, within the source’s own relative padding of $10^{-20}$, and its view is drawn at the side, one to one, largest move 0.58. Both go to review (row 7: 14 and 36 squares’ contact counts fall while no total does), and both draw more light squares than the axis tool’s view of the witness (4 and 5 against 2), with fewer uneven and near-axis squares (14 against 18, none against 9). No view is below the house, so there is no register candidate | the axis tool’s view, decided no better |
 
 `default_drawings --compare` against `main`’s record: 304 was drawn by the axis tool’s
 view of T-186’s witness, decided no better (`SETTLED`), and is now drawn by the axis

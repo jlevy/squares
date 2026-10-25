@@ -10979,7 +10979,8 @@ sources:
     and the row's own provenance states no seed. The measurement does not pair them one
     to one (200 and 234 squares beyond 1e-3, 189 and 60 beyond 0.1), so they are other
     arrangements, new packings credited to kyleluecke alone; which packing each search
-    started from is asked of the publisher. The packet's
+    started from is asked of the publisher in the reply of 25 October on #763 (its
+    question 7). The packet's
     filtered exact replay decided every one on two routes with all six controls refused
     (receipts/push/361592092/filtered-exact-replay.json,
     devtools.beyond_horizon_replay), and every side is below Göbel's construction. The
@@ -11092,7 +11093,7 @@ sources:
     does not pair the two one to one (116 squares beyond 1e-3 and 115 beyond 0.1;
     receipts/push/pose-identity.json), so the row is another arrangement, a new packing
     credited to aqibrazadev alone; which packing the search started from is asked of
-    the publisher. The
+    the publisher in the reply of 25 October on #763 (its question 7). The
     packet's filtered exact replay decided every one on two routes with all six controls
     refused (receipts/push/361516058/filtered-exact-replay.json,
     devtools.beyond_horizon_replay), and every side is below Göbel's construction. The

@@ -58,8 +58,8 @@ manifest.
   `previous_reference.seed_credit` is “Mykhailo Polkovskyi (Mishapolk)”. Those two fields
   name the record the catalogue held at the count before, not the packing a notebook
   started from: at 303 the same manifest names Lavrentev in an entry’s own `seed_credit`
-  and Evan Daniel, the record it replaced, in both fields, and in all 182 of its entries
-  with a seed of their own the fields name someone else (M-1 of the
+  and Evan Daniel, the record it replaced, in both fields; of its 182 entries that carry
+  both seed fields, the two differ in all 182 and name another person in 178 (M-1 of the
   [stage 4 review](#stage-4-review)). So the manifest states no lineage from
   Polkovskyi’s packing. That certificate’s SHA-256, `72fa0c89…`, is the one the
   [mishapolk-kkt-refinements-2026-10-14 packet](../mishapolk-kkt-refinements-2026-10-14/README.md)
@@ -138,7 +138,8 @@ Couzo, who claims no refinement of it. No source states a link before Tymchishin
 credit carries none (M-1). The manifest’s construction credit to Nate Chaoweeraprasit
 describes the record this packing replaced and is not carried (M-3). Evan Daniel’s later
 certificate of the same packing says its finder is unknown and its earliest public copy is
-kozykappa’s notebook; both authors are asked.
+kozykappa’s notebook. Who found it is to be asked of Couzo in the next #763 reply, and a
+question to Daniel is drafted and unposted, held in think-hx0e.
 The source’s commits `fa6237e`, which first holds the certificate, `964ee2b` and
 `efef7d1` each end with a Co-Authored-By trailer naming Claude (M-5).
 The repository states no licence for its data or prose. The certificate is retained by
@@ -179,8 +180,12 @@ T-241 is at `V3`/`C3`. The case at 304 adopts T-242, Daniel’s descent of this 
 
 ## Questions for the Author
 
-Drafted for Francisco Couzo, for the next reply on #763 (the stage 4 review’s C1, C2 and
-C4, in think-hx0e’s notes):
+For Francisco Couzo, from the stage 4 review’s C1, C2 and C4 (think-hx0e’s notes). The
+reply of 25 October on #763
+([issuecomment-6391800383](https://github.com/jlevy/squares/issues/763#issuecomment-6391800383))
+asks question 1 as its question 7 and the notebooks’ source notices of question 3 as its
+question 6, and the record keeps question 7 as awaiting his answer. Question 2 and the
+finder in question 3 are drafted for the next #763 reply and not yet posted:
 
 1. In your manifest, do `previous_source` and `previous_reference.seed_credit` name the
    packing your catalogue held before at that count, or the packing a search started

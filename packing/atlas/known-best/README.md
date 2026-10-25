@@ -842,8 +842,8 @@ Grid-slack at 0.5, 1 and 5 degrees (`grid-slack-adopt-2026-10-25-n304-grid-deg05
 `-grid-deg1` and `-grid-deg5`, 118 CPU-seconds) draws one view at the witness’s side,
 and Evan Daniel’s regularizer (`evand-regularize-adopt-2026-10-25-n304-evand`, 208
 CPU-seconds) solves the witness to a certified KKT local minimum and draws a view at its
-side too; its exact solve lies within the source’s padding, about $1.8 \times 10^{-19}$
-below, so no view is below the house.
+side too; its exact solve lies within the source’s relative padding of $10^{-20}$, about
+$1.8 \times 10^{-19}$ below, so no view is below the house.
 Every view goes to review (row 7: the contact counts of 14 squares, and of 36 for the
 regularizer’s, fall while no total does) and draws more light squares than the axis
 tool’s view of the witness, 4 or 5 against 2, though each has fewer uneven and near-axis

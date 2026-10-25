@@ -239,13 +239,15 @@ equal to the digests its `outputs/program-digests.sha256` records.
   independent re-implementation rests on the review’s checker.
 - **M-1, M-2, M-4 and N-1** are fixed above and in the register: the credit at 304, the
   print the rationale names, the key’s lineage and Levy link, and the descent’s input at
-  268. S2 is confirmed at both counts. The questions D1 and D2 are below; C1 to C4 go to
-  Couzo with T-241’s.
+  268. S2 is confirmed at both counts. The questions D1 and D2 are below. Of Couzo’s, the
+  reply of 25 October on #763 asks C1 as its question 7 and covers C3 and C4 in its
+  questions 1 and 6; C2 is to be asked in the next #763 reply.
 
 ## Questions for the Author
 
-Drafted in think-l49q for Evan Daniel, who opened no issue, and in think-hx0e’s notes after
-the stage 4 review (its D1 and D2):
+Drafted in think-l49q for Evan Daniel, and in think-hx0e’s notes after the stage 4 review
+(its D1 and D2). None is posted: Daniel opened no issue, so the questions are held in
+think-hx0e until the coordinator decides where they go.
 
 1. Do you claim the 268 and 304 certificates at `8a8879a` as bounds, credited “Daniel
    after Lavrentev” at 268 and as your descent of the packing Couzo credits to Tymchishin

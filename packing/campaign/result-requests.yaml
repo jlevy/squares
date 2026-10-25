@@ -22910,6 +22910,39 @@ issues:
         #732 row it restates, and no release of the push holds it. Both project exact routes
         accept all 86 with every control refused.
       queued: false
+    awaiting_author:
+    - question: >-
+        Do the manifest's previous_source and previous_reference.seed_credit name the record
+        the catalogue held at the count before the entry, or the packing its search or
+        notebook started from? Where a notebook's packing replaced the previous record, as at
+        304 (Tymchishin's v3) and at the notebook rows 364, 450 and 874, which packing did the
+        notebook start from?
+      changes: credit
+      asked: https://github.com/jlevy/squares/issues/763#issuecomment-6391800383
+      state: awaiting
+      note: >-
+        Question 7 of the reply of 25 October 2026. The record reads both fields as the
+        previous record (M-1 of the 24 October review of T-241 and T-242), and on that
+        reading credits the packing at 304 to Kirill Tymchishin with no earlier link (T-241,
+        and T-242 through it) and the notebook rows at 364, 450 and 874 to their notebooks'
+        authors alone (think-o4m0). An answer that the fields name a seed would add those
+        links; no measurement here can settle it. At 874 kyleluecke's row matches 873 of 874
+        squares to Couzo's fa6237e packing under the best symmetry, with 60 beyond 0.1, the
+        row where a seed link is likeliest.
+    - question: >-
+        Should the credit at 268 name Vladislav Lavrentev? The 268 packing, Kirill
+        Tymchishin's v4 packing and Lavrentev's public packing are one arrangement, the
+        parent's lineage begins at a public portfolio entry with source cuda, and Lavrentev's
+        packing at this side may have been public before the live search of 23 October.
+      changes: credit
+      asked: https://github.com/jlevy/squares/issues/763#issuecomment-6391800383
+      state: awaiting
+      note: >-
+        Question 1 of the reply of 25 October 2026. T-240's credit at 268 follows the
+        manifest, Couzo after Tymchishin's v4 packing; an answer that the search started from
+        Lavrentev's packing, or that the cuda step is his, would add him to it. The house at
+        268 moves to Evan Daniel's descent of Lavrentev's placement (T-242) in the pass's next
+        pull request, credited Daniel after Lavrentev, whatever the answer.
     beads:
     - think-ptkk
     - think-cnn7
@@ -22918,6 +22951,8 @@ issues:
     - think-llit
     - think-m8f4
     - think-lyf9
+    - think-hx0e
+    - think-o4m0
     answer_bead: think-ptkk
     replies:
     - url: https://github.com/jlevy/squares/issues/763#issuecomment-6384882980

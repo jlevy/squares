@@ -33881,16 +33881,18 @@ results:
       T-186's packing, as the record its catalogue held at 304 before, as those fields do at
       every count (the 24 October stage 4 review, M-1). So the credit is Tymchishin's
       packing, certified by Couzo; whether the notebook started from a recorded packing is
-      asked of the author.
+      asked of Couzo in the reply of 25 October on #763 (its question 7), which awaits his
+      answer.
 
       The manifest also gives Polkovskyi's certificate a construction credit, "Nate
       Chaoweeraprasit (itsnaka)", where the source's own RECORD_PROVENANCE.md keeps Daniil
       Ostashev's packing credit for Polkovskyi's update at 304 and the record measures that
       certificate as Ostashev's T-175 packing re-solved (M-3). It describes the record this
-      packing replaced, not this packing, and Couzo is asked which he intends. The
-      notebook's own source notices are not published. Evan Daniel's later certificate of
-      the same packing (T-242) calls its finder unknown and its earliest public copy
-      kozykappa's notebook; both authors are asked.
+      packing replaced, not this packing; which Couzo intends is drafted for the next #763
+      reply (think-hx0e). The notebook's own source notices are not published. Evan
+      Daniel's later certificate of the same packing (T-242) calls its finder unknown and
+      its earliest public copy kozykappa's notebook; who found it is to be asked of Couzo in
+      the next #763 reply, and a question to Daniel is drafted and unposted (think-hx0e).
     scope: {n_values: [304]}
     verification: V3
     confirmation: C3
@@ -34026,7 +34028,7 @@ results:
       the exact sides they state: s(268) <= 16.874361715869345824484822296466, 4.48e-12
       below T-240 and 4.45e-3 below T-174, the case's house best packing when it was
       reported, and s(304) <= 17.92689890035674158972360842897, 3.04e-9 below T-241 and
-      2.53e-3 below T-186, the case's house best packing.
+      2.53e-3 below T-186, the case's house best packing when it was reported.
 
       Both certificates and their duplicate-square and outside-container controls were
       decided here on 24 October 2026 by both maintained exact routes. Those routes share
@@ -34081,10 +34083,10 @@ results:
 
         At 268 it descends Vladislav Lavrentev's placement of the arrangement #763's entry
         refines, one to one with that entry under the mirror x to S - x and none beyond a
-        tenth, and moves the 12-place print of that entry (16.874361715874, pending
-        adoption) to 16.874361715870: below T-239's case (S2, 12 squares beyond a tenth) and
-        above padding alone (S1, T-174, T-186). A citable detail that moves no theorem; no
-        lower bound or optimum.
+        tenth, and moves the 12-place print of that entry (16.874361715874), the case's
+        since 25 October, to 16.874361715870: below T-239's case (S2, 12 squares beyond a
+        tenth) and above padding alone (S1, T-174, T-186). A citable detail that moves no
+        theorem; no lower bound or optimum.
       scored: '2026-10-24'
       by: >-
         the 24 October stage 4 review
@@ -34167,17 +34169,18 @@ results:
       Against #763's Kaggle parent at 268, Kirill Tymchishin's EDA+Seam LP v4 packing, it
       pairs under the identity, none beyond a tenth (largest 2.49e-2). The source's
       s268_lightning.predescent.txt is that parent to 2.47e-10, and the certificate is
-      2.49e-2 from it; what the file is, and whether the descent used it, is asked of the
-      author (N-1). The source's JSON reports 127 exact flat motions and 19 free squares at
-      the solved side. At 304 nearest centres pair it with T-241's packing under the
-      identity, none beyond 1e-3 and 73 beyond 1e-6 (largest 4.60e-4), largest turn 0.019
-      degrees; the source's input is T-241's packing to 2.05e-9.
+      2.49e-2 from it; what the file is, and whether the descent used it, is a question for
+      the author (D1), drafted and unposted, held in think-hx0e (N-1). The source's JSON
+      reports 127 exact flat motions and 19 free squares at the solved side. At 304 nearest
+      centres pair it with T-241's packing under the identity, none beyond 1e-3 and 73
+      beyond 1e-6 (largest 4.60e-4), largest turn 0.019 degrees; the source's input is
+      T-241's packing to 2.05e-9.
 
       At 268 Couzo's manifest begins the lineage of Tymchishin's packing at a "cuda" step,
       which its 303 entry ties to Lavrentev's "CUDA Packing Search", and Daniel's own notes
       say the packing first appears in Lavrentev's output, as Tymchishin's input: both
       sources put Lavrentev before Tymchishin there (N-2). Whether that step is Lavrentev's
-      is asked of Couzo.
+      is asked of Couzo in the reply of 25 October on #763 (its question 1).
 
       The case at 304 adopted this certificate as its house best packing in the pass of 25
       October 2026, from T-186, 2.53e-03 above it, which stays retained as history, with
@@ -34190,7 +34193,7 @@ results:
 
       At 268 this certificate is 4.48e-12 below T-240, which the same pass adopted there,
       and one day's archive holds one prior state a count, so 268 is staged for the pass's
-      next pull request, dated 26 October 2026 (select_houses.PENDING_ADOPTION, think-hx0e,
+      next pull request, on or after 26 October 2026 (select_houses.PENDING_ADOPTION,
       think-3anz), where the house's credit follows the placement adopted, Daniel after
       Lavrentev.
 
@@ -34234,6 +34237,7 @@ results:
       - n: 304
         of: T-241
         by: '[Daniel Kaggle descents 2026-10-24]'
+        credit: Daniel after Tymchishin
         method: >-
           the source's exact descent (shrink-only) of the public Kaggle packing its input
           holds, which is T-241's packing to 2.05e-9 as measured here, to the side of a

@@ -790,8 +790,8 @@ NUMBERS = tuple(sorted(ADOPTED))
 #: Francisco Couzo certified (T-241), which Couzo's index credits to Kirill Tymchishin's Kaggle
 #: notebook, another arrangement than T-186's. Its pull request merged after T-240's, and 304
 #: joined that day's pass, whose archive takes a row for each count. T-242's 268, below
-#: T-240's there, waits for the pass of 26 October (`select_houses.PENDING_ADOPTION`), since
-#: this pass moves 268 to T-240 and one day's archive holds one prior state a count.
+#: T-240's there, waits for a pass on or after 26 October (`select_houses.PENDING_ADOPTION`),
+#: since this pass moves 268 to T-240 and one day's archive holds one prior state a count.
 #: A count a pass names keeps its place in the earlier passes' sets, which their archives
 #: hold; it was adopted on the latest day that names it.
 LATER_PASSES: dict[str, frozenset[int]] = {

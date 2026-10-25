@@ -181,8 +181,9 @@ MOVED_LATER = {
 #: The counts staged for the pass's next pull request, with the result each moves to and
 #: the bead that adopts it: the pass of 25 October 2026 validated Evan Daniel's 268 (T-242)
 #: below T-240's, which the same pass adopts there, and one day's archive holds one prior
-#: state a count, so 268 moves on 26 October (think-hx0e, whose H2 is think-3anz).
-STAGED_NEXT = {268: ("T-242", "think-hx0e")}
+#: state a count, so 268 moves on or after 26 October, under the bead that adopts it
+#: (think-3anz, H2 of think-hx0e).
+STAGED_NEXT = {268: ("T-242", "think-3anz")}
 
 #: Issue 639's exact algebraic sides (T-193), the smallest at all sixteen of its counts
 #: since its stage 4 exit (#658), each staged for the writer: below T-174's held sides at

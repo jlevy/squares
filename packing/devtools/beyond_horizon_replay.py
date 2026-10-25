@@ -5435,9 +5435,13 @@ def _push_identity_parts(chosen: Release, n: int) -> dict[str, Any]:
     ``certificates/best/`` names as the row's ``previous_source``. That field names the
     record the source's catalogue held at the count before the row, not the packing a
     notebook or search started from: at 303 at fa6237e it names Evan Daniel's record where
-    the entry's own ``seed_credit`` names Lavrentev, and in all 182 entries of that manifest
-    with a seed of their own it names someone else (M-1 of the 24 October review of T-241
-    and T-242, which corrects #795's review B, B1). So the field is no lineage, and the
+    the entry's own ``seed_credit`` names Lavrentev, and of the 182 entries of that manifest
+    that carry both seed fields, the two differ in all 182 and name another person in 178
+    (M-1 of the 24 October review of T-241 and T-242, which corrects #795's review B, B1).
+    At 964ee2b, which this walk reads, 11 of the 202 such entries differ, among them 794 and
+    910, whose own seed is Tymchishin's v3 and whose previous record is Goebel's family
+    formula; the other 191 are Couzo's refinements of his own previous records (review A,
+    A4, of #803). So the field is no lineage, and the
     measurement alone decides what the walk says: where the squares pair one to one with
     none beyond `PUSH_SAME_PACKING`, the row refines that packing (``refines``) and is
     credited after its finder; otherwise it is another arrangement, a new packing
@@ -5488,8 +5492,10 @@ def _push_identity_parts(chosen: Release, n: int) -> dict[str, Any]:
     else:
         parts["new_packing"] = {
             "source": (
-                f"{stated}; the index credits the row to the notebook run alone, and the "
-                "measurement does not pair them one to one "
+                f"{stated}; the index credits the row to the notebook run and defers earlier "
+                "credits to a provenance that states no seed of the row's own (\"earlier seed "
+                'and construction credits retained in provenance"), and the measurement does '
+                "not pair them one to one "
                 f"({nearest['beyond'][PUSH_SAME_PACKING]} squares beyond {PUSH_SAME_PACKING}"
                 f", {source}): another arrangement, whose search start no source states"
             ),

@@ -489,9 +489,12 @@ packet’s pose measure (`measured_identity`, as `pose-identity` does for #732�
 The manifest’s `previous_source` is no link of lineage. It names the record the source’s
 catalogue held at the count before the row, not the packing a notebook or search started
 from: at 303 at `fa6237e` it names Evan Daniel’s certificate while the entry’s own
-`seed_credit` names Lavrentev, and in all 182 entries of that manifest with a seed of
-their own it names someone else (M-1 of the
+`seed_credit` names Lavrentev, and of that manifest’s 182 entries that carry both seed
+fields, the two differ in all 182 and name another person in 178 (M-1 of the
 [24 October review of T-241 and T-242](../../../../docs/project/reviews/review-2026-10-24-couzo-evand-n268-n304.md)).
+At `964ee2b`, which this walk reads, 11 of the 202 such entries differ, among them 794 and
+910, whose own seed is Tymchishin’s v3 and whose previous record is Göbel’s family formula;
+the other 191 are Couzo’s refinements of his own previous records.
 None of the five rows’ own provenance states a seed. So the measurement alone says what
 each row is, and the credit keeps only the links a source states. At 378 and 405
 kyleluecke’s row is Lavrentev’s packing refined, every square within 5e-8 and every turn
@@ -500,7 +503,8 @@ kyleluecke after Vladislav Lavrentev. At 364, 450 and 874 more than fifty square
 beyond 0.1 (115, 189 and 60), so each row is another arrangement. The ledger records each
 as a new packing, with the measurement beside it and no packing it continues, credited to
 its notebook’s author alone: aqibrazadev at 364 and kyleluecke at 450 and 874. Which
-packing each search started from is asked of the publisher.
+packing each search started from is asked of the publisher in the reply of 25 October
+(its question 7), which awaits his answer.
 
 **Later.** Couzo’s `43f666c`, pushed at 2026-10-24T06:10:44Z, is below the notebook side at
 46 of the 99 counts. think-gn29 walks it after this import, from these rows. The questions
