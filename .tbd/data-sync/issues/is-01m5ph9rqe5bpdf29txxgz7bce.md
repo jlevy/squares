@@ -3,9 +3,9 @@ type: is
 id: is-01m5ph9rqe5bpdf29txxgz7bce
 title: "Hold #763's 13 L-border recipes at 325-1024 (365 444 487 632 733 734 737 788 789 845 910 966 970) until the D2 maintained construction checker"
 kind: task
-status: closed
+status: open
 priority: 2
-version: 6
+version: 8
 delegate: c-import-gn29-1024
 labels:
   - result-import
@@ -14,10 +14,10 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-24T08:44:07.790Z
-updated_at: 2026-10-25T03:02:07.765Z
+updated_at: 2026-10-25T03:02:34.344Z
 started_at: 2026-10-24T20:35:19.037Z
-closed_at: 2026-10-25T03:02:07.764Z
-close_reason: "#763's 13 recipes decided by W7's construction checker and recorded as rows of couzo-issue763-2026-10-23-recipes in #800 (merged 4089f9587)."
+closed_at: null
+close_reason: null
 resolution: null
 duplicate_of: null
 ---
@@ -32,3 +32,5 @@ blocked_on: think-f2io
 2026-10-25 c-import-gn29-1024 (in think-gn29's PR https://github.com/jlevy/squares/pull/800): DONE on the branch. devtools.construction_checker decides all 13 of #763's recipes (365 444 487 632 733 734 737 788 789 845 910 966 970) exactly from recipe + replayed parent, 117 controls refused (couzo-issue763 packet receipts/recipe-decisions.json); parents 328 and 850 (restate f1ceee4, not rows) replayed on both routes with 6 controls each. Dated by the first index stating each (recipe_first_commits): efef7d1 at 365/970, 964ee2b at the rest. Frozen #763 walk: only WALKS holds changed (_HELD_763 keeps 683); ledger.json unchanged; sources.yaml/ledger.yaml/README re-rendered for the hold sentence; release declares 197 rows. 13 rows of couzo-issue763-2026-10-23 in the register; at 444 487 632 733 737 788 845 43f666c's recipe supersedes them. Review A's push files at these counts: walked commit by commit in the 43f666c walk after the issue; each above or equal to #763's recipe (or restating f1ceee4), none recorded; at 683 they rest on the held deletion. Note: each recipe also has a full n-square expansion in certificates/parents/ at exactly its side (as #795 A2 found for the notebook recipes); decided by the checker per the brief, flagged for the coordinator. Can close when PR #800 merges.
 
 2026-10-25 c-import-gn29-1024, after PR #800's review A (A1, A3): the 13 rows are now the coverage source couzo-issue763-2026-10-23-recipes (bead think-g2qy, landed 2026-10-25), with their own claims record acquisition/beyond-horizon-rows-recipes.json; #763's record is main's byte for byte (beyond_horizon_replay.Split, RECIPES_763). The expansion question is settled by a rule in result-import.md's D2 bullet: a report claiming the index's recipe is decided by the checker; a release reading certificates (the push's notebook rows, #795 A2) reads the expansion. Head f1fedeb8e.
+
+2026-10-25 coord-intake-1024: the recipes landed in #800 (4089f9587); reopened because #763's request result recipes-325-1024 (queued: false) still names this bead and check_bead_tree reads it as a deferral on the open issue. Closes when a records change settles that result (its evidence or a non-deferral form) or names no bead.
