@@ -9139,7 +9139,10 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "render_packing_methods write all 51 files byte-identical across the three. "
             "The explainer, counting 242 to 243 results, takes v0.4.28 over main's "
             "v0.4.27. No PDF was printed for these three; each prints from that HTML. "
-            "Retain v0.1.11, v0.1.4 and v0.2.7."
+            "Measured again after the merge of main 886dddce6 (#808), at link revision "
+            "1307c2c8 with that main's five candidate inputs swapped in and jatloe.md "
+            "removed: twice from this tree and once swapped, 51 files each, all "
+            "byte-identical across the three. Retain v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
 )
