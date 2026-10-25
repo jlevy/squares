@@ -1,19 +1,10 @@
 """Shared account icons; brand marks and the KPress external-link glyph."""
 
+import base64
 import html
-
-# GitHub Octicons mark-github, MIT; the same path used by project resource cards.
-# https://github.com/primer/octicons/blob/main/icons/mark-github-16.svg
-_GITHUB_PATH = (
-    "M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27."
-    "01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59"
-    "-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0"
-    "-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1."
-    "28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33"
-    "-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.3"
-    "1 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 "
-    "3.58-8 8-8Z"
-)
+import re
+from functools import cache
+from pathlib import Path
 
 # Simple Icons X, CC0: https://github.com/simple-icons/simple-icons/blob/develop/icons/x.svg
 _X_PATH = (
@@ -25,9 +16,11 @@ _X_PATH = (
 
 def account_icon(kind: str, *, class_name: str = "site-account-icon") -> str:
     """A decorative brand or web icon; the enclosing link supplies its account label."""
-    if kind in {"github", "twitter"}:
-        size = 16 if kind == "github" else 24
-        path = _GITHUB_PATH if kind == "github" else _X_PATH
+    if kind == "github":
+        return _github_icon("github", class_name)
+    if kind == "twitter":
+        size = 24
+        path = _X_PATH
         return (
             f'<svg class="{html.escape(class_name)}" viewBox="0 0 {size} {size}" '
             'fill="currentColor" stroke="none" aria-hidden="true" focusable="false">'
@@ -43,33 +36,71 @@ def account_icon(kind: str, *, class_name: str = "site-account-icon") -> str:
     )
 
 
-# GitHub Octicons issue-opened-16 and git-pull-request-16, MIT; canonical paths:
-# https://github.com/primer/octicons/blob/main/icons/issue-opened-16.svg
-# https://github.com/primer/octicons/blob/main/icons/git-pull-request-16.svg
-_ISSUE_PATHS = (
-    "M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z",
-    "M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z",
+# The retained GitHub brand mark (Octicons, MIT) and Lucide 1.17.0 thread glyphs
+# (ISC) are shared by inline references and CSS link decoration.
+_ICON_ROOT = Path(__file__).with_name("overview") / "icons"
+_GITHUB_ICONS = {"github": "github", "issue": "circle-dot", "pull-request": "git-pull-request"}
+GITHUB_LINK_CSS = Path(__file__).with_name("templates") / "github-links.css"
+GITHUB_ICON_INPUTS = (
+    Path(__file__),
+    Path(__file__).with_name("site_github_links.py"),
+    Path(__file__).with_name("github_references.py"),
+    GITHUB_LINK_CSS,
+    *(_ICON_ROOT / f"{name}.svg" for name in _GITHUB_ICONS.values()),
 )
-_PULL_REQUEST_PATHS = (
-    (
-        "M1.5 3.25a2.25 2.25 0 1 1 3 2.122v5.256a2.251 2.251 0 1 1-1.5 0V5.372A2.25 2.25 "
-        "0 0 1 1.5 3.25Zm5.677-.177L9.573.677A.25.25 0 0 1 10 .854V2.5h1A2.5 2.5 0 0 1 13.5 "
-        "5v5.628a2.251 2.251 0 1 1-1.5 0V5a1 1 0 0 0-1-1h-1v1.646a.25.25 0 0 1-.427.177L7."
-        "177 3.427a.25.25 0 0 1 0-.354ZM3.75 2.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm0 "
-        "9.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm8.25.75a.75.75 0 1 0 1.5 0 .75.75 0 0 "
-        "0-1.5 0Z"
-    ),
-)
+
+
+@cache
+def _github_svg(kind: str) -> str:
+    return (_ICON_ROOT / f"{_GITHUB_ICONS[kind]}.svg").read_text(encoding="utf-8").strip()
+
+
+def _github_icon(kind: str, class_name: str) -> str:
+    attributes = (
+        f'<svg class="{html.escape(class_name, quote=True)}" '
+        'aria-hidden="true" focusable="false" '
+    )
+    return re.sub(r"<svg\s+", lambda _: attributes, _github_svg(kind), count=1)
 
 
 def github_reference_icon(kind: str, *, class_name: str = "site-account-icon") -> str:
-    """Decorative GitHub issue or PR glyph; its link supplies type and repository context."""
+    """A decorative Lucide issue or PR glyph; the link supplies its accessible name."""
     if kind not in {"issue", "pull-request"}:
         raise ValueError(f"unknown GitHub reference kind: {kind}")
-    paths = _ISSUE_PATHS if kind == "issue" else _PULL_REQUEST_PATHS
+    return _github_icon(kind, class_name)
+
+
+def github_link_css() -> str:
+    """One CSS-only link treatment, including inert content loaded into popovers."""
+    css = GITHUB_LINK_CSS.read_text(encoding="utf-8")
+    for kind in _GITHUB_ICONS:
+        url = (
+            "data:image/svg+xml;base64," + base64.b64encode(_github_svg(kind).encode()).decode()
+        )
+        css = css.replace(f"__SITE_GITHUB_{kind.upper().replace('-', '_')}__", url)
+    return css
+
+
+# Lucide maximize-2 and x paths, using the retained KPress stroke conventions.
+# Inline like account_icon's web glyph: lightweight standalone shells have no sprite.
+_POPOVER_PATHS = {
+    "maximize-2": ("M15 3h6v6", "m21 3-7 7", "M3 15v6h6", "m3 21 7-7"),
+    "x": ("M18 6 6 18", "m6 6 12 12"),
+}
+
+
+def popover_icon(name: str, *, sprite: bool = False) -> str:
+    """One retained Lucide glyph; the enclosing header control owns its accessible name."""
+    paths = _POPOVER_PATHS[name]
+    # The retained KPress sprite has no maximize-2 symbol. Inline its paths in both
+    # modes, so a sprite-backed Close never leaves the full-page glyph missing.
+    if sprite and name != "maximize-2":
+        return (
+            '<svg aria-hidden="true" focusable="false">'
+            f'<use href="#kpress-icon-{name}"></use></svg>'
+        )
     return (
-        f'<svg class="{html.escape(class_name, quote=True)}" viewBox="0 0 16 16" '
-        'fill="currentColor" stroke="none" aria-hidden="true" focusable="false">'
+        '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">'
         + "".join(f'<path d="{path}"/>' for path in paths)
         + "</svg>"
     )

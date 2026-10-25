@@ -7,7 +7,7 @@ from collections.abc import Iterable, Mapping
 from functools import cache
 
 from devtools.profile_records import RecordIndex, current_record_ids, load_record_index
-from devtools.site_tallies import render_tally, tally_results
+from devtools.site_tallies import TALLY_SEPARATOR, render_tally, tally_results
 
 
 @cache
@@ -24,6 +24,7 @@ def record_tally(
     total_href: str | None = None,
     pending_href: str | None = None,
     blank_zero: bool = False,
+    emphasize_total: bool = False,
 ) -> str:
     """Supported totals never absorb unresolved comparisons or imply a false zero."""
     index = record_index() if index is None else index
@@ -35,6 +36,7 @@ def record_tally(
             tally_results(current, measures, (5, 4, 3, 2, 1)),
             noun="record",
             total_href=total_href if current else None,
+            emphasize_total=emphasize_total,
         )
         if current or not (blank_zero or pending)
         else ""
@@ -52,5 +54,5 @@ def record_tally(
             f'<span class="site-record-pending" title="{html.escape(reasons, quote=True)}">'
             f"{label}</span>"
         )
-        rendered += (" · " if rendered else "") + pending_note
+        rendered += (TALLY_SEPARATOR if rendered else "") + pending_note
     return rendered

@@ -1,0 +1,17 @@
+evand_square-packing 8a8879a29 search/packer/candidates/s268_lightning.cert                 source=74bd5df5f7d1fbbda4cbe2b23eb2e9606a55b268 retained=74bd5df5f7d1fbbda4cbe2b23eb2e9606a55b268 SAME
+evand_square-packing 8a8879a29 search/packer/candidates/s304_pub.cert                       source=1616861f26f0a3546fd7f762c02383efe8e013c6 retained=1616861f26f0a3546fd7f762c02383efe8e013c6 SAME
+evand_square-packing 8a8879a29 search/packer/candidates/s268_lightning.input.txt            source=c5be851bc2007f8017add5b0a5d3d47c4c2a3efc retained=c5be851bc2007f8017add5b0a5d3d47c4c2a3efc SAME
+evand_square-packing 8a8879a29 search/packer/candidates/s268_lightning.predescent.txt       source=357d575cb3552b06bafe2ac014cee86372b8922d retained=357d575cb3552b06bafe2ac014cee86372b8922d SAME
+evand_square-packing 8a8879a29 search/packer/candidates/s304_pub.input.txt                  source=e8e006edd9f8fddb89c546865b9d8f3bda904b49 retained=e8e006edd9f8fddb89c546865b9d8f3bda904b49 SAME
+evand_square-packing 8a8879a29 search/packer/candidates/s268_lightning_regularized.cert     source=fa0dfb166ac63d0b6f69817eb34430679ed5a0ff retained=fa0dfb166ac63d0b6f69817eb34430679ed5a0ff SAME
+evand_square-packing 8a8879a29 CREDITS.md                                                   source=1d7dcb7853e58ba38a472c7c976c2c0e4eedbc0a retained=1d7dcb7853e58ba38a472c7c976c2c0e4eedbc0a SAME
+franciscouzo_square-packing fa6237e28 certificates/best/n304.cert                                  source=953dc2e58d03af347d3abb8dca19388e5d875b39 retained=953dc2e58d03af347d3abb8dca19388e5d875b39 SAME
+franciscouzo_square-packing 964ee2b   certificates/best/n304.cert                                  source=953dc2e58d03af347d3abb8dca19388e5d875b39 retained=953dc2e58d03af347d3abb8dca19388e5d875b39 SAME
+franciscouzo_square-packing 1c17153   certificates/best/n304.cert                                  source=953dc2e58d03af347d3abb8dca19388e5d875b39 retained=953dc2e58d03af347d3abb8dca19388e5d875b39 SAME
+franciscouzo_square-packing 964ee2b   certificates/best/n268.cert                                  source=7b9a04c2c072601a2a4d53de39fcc9c69ecd3b8f retained=7b9a04c2c072601a2a4d53de39fcc9c69ecd3b8f SAME
+franciscouzo_square-packing 964ee2b   certificates/parents/85dbd707746197d31f62dd52b4e580dfb90097498a4970c577f776ce7de2df46.cert source=160b1e9123315773f8b4bf3fb92c2153f36ffca5 retained=160b1e9123315773f8b4bf3fb92c2153f36ffca5 SAME
+franciscouzo_square-packing 964ee2b   certificates/parents/22f07a7c318328d257d1a7efd9c5acb05e3286650a94da751592b21014424244.cert source=80f9123cc00c3f3aa410052daa8fa844df090404 retained=80f9123cc00c3f3aa410052daa8fa844df090404 SAME
+n304.cert history: 4e4c8ce23 1a0be085044906a267ec777de90c3482dfdddc37 other
+n304.cert history: fa6237e28 953dc2e58d03af347d3abb8dca19388e5d875b39 RETAINED-BYTES
+manifest fa6237e28 49556d49eb07d581195712dbe361762db0b5af26
+manifest 964ee2b 38c5734575472e95fb9f17c25c6a590588ffa080

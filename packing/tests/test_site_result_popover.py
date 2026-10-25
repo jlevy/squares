@@ -160,6 +160,8 @@ def test_result_title_keeps_its_lines_when_the_sans_fonts_arrive(
         site_browser.api().expect(label).to_have_css(
             "display", "block" if width <= 640 else "inline"
         )
+        trail_probe = probe(Path(__file__).with_name("probes"), "site_navigation/font-arrival")
+        before_trail = page.evaluate(trail_probe)
         before_title = title.bounding_box()
         header = page.locator("article.site-result > header")
         before_header = header.bounding_box()
@@ -174,7 +176,14 @@ def test_result_title_keeps_its_lines_when_the_sans_fonts_arrive(
         assert after_title
         assert after_header
         assert after_title["height"] == pytest.approx(before_title["height"], abs=0.05)
-        assert after_header["y"] == pytest.approx(before_header["y"], abs=0.05)
+        if width <= 640:
+            assert after_title["y"] == pytest.approx(before_title["y"], abs=0.5), (
+                before_trail,
+                page.evaluate(trail_probe),
+            )
+        assert after_header["y"] - after_title["y"] == pytest.approx(
+            before_header["y"] - before_title["y"], abs=0.05
+        )
         math = title.locator(".kpress-math")
         site_browser.api().expect(math).to_have_css("text-transform", "none")
         site_browser.api().expect(math).to_have_css("letter-spacing", "normal")

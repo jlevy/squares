@@ -1,0 +1,5 @@
+PASS 24 cells least gap 6.796443483983797e-22 cpu 10.353 s
+
+real	0m13.376s
+user	0m10.542s
+sys	0m0.047s

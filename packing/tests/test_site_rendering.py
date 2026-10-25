@@ -245,13 +245,12 @@ def test_generic_hidden_math_wrapper_remains_in_the_readability_sample(
 @pytest.mark.parametrize(
     ("opening", "closing"),
     [
-        ('<div class="site-atlas-rest" data-atlas-rest hidden>', "</div>"),
         ('<table class="site-table"><tbody><tr hidden><td>', "</td></tr></tbody></table>"),
         ('<div class="site-table-tools" hidden>', "</div>"),
         ('<div class="site-table-tools"><label hidden>', "</label></div>"),
         ('<div class="cert-figure" data-cert="alternate" hidden>', "</div>"),
     ],
-    ids=["atlas-rest", "filtered-row", "filter-tools", "preset-control", "certificate"],
+    ids=["filtered-row", "filter-tools", "preset-control", "certificate"],
 )
 @pytest.mark.parametrize("override", [False, True], ids=["collapsed", "visible-override"])
 def test_optional_hidden_math_is_exempt_only_while_its_wrapper_is_collapsed(
@@ -320,38 +319,26 @@ def test_native_closed_optional_math_is_outside_the_initial_readability_sample(
         server.server_close()
 
 
-#: The results page with its overview taken out, served beside the page as shipped, so
-#: that its first screen is the prose the fallback faces were tuned on. With the overview
-#: first (think-2z22), a 390 by 900 screen ends inside its open blocks: the unadjusted
-#: face rewraps the overview's introduction and moves the blocks below it, CLS 0.014
-#: with the weekly prototype, and the Verification Ladders prose the negative control was
-#: written against is off the screen. A taller screen does not bring it back, since CLS
-#: divides each move by the screen's height (0.077 at 1800). Taken out, the control reads
-#: 0.105 again, its value before the overview. The control now sets both fallbacks'
-#: metrics wrong (`mismatched`, from `main`'s 2b67bb679) rather than relying on the
-#: unadjusted face, and it still runs here, on the prose it was written against.
-PROSE_FIRST = "results-prose-first.html"
-#: The overview's two sections, the last seven days' registrations and the weekly rollup
-#: under them, headings, introductions and blocks: to the next section's heading, which
-#: is the next `h2` at the top of the page or `All Results` if it moves above the table.
-_OVERVIEW = re.compile(
-    r'<h2 id="added-in-the-last-seven-days">.*?'
-    r'<h2 id="earlier-results-by-week-published">.*?(?=<h[12][ >])',
+#: The rating guide now lives on Verification. A test-only variant brings its
+#: mathematical evidence prose above the fold for the font-metric negative control.
+PROSE_FIRST = "verification-prose-first.html"
+_GUIDE_OPENING = re.compile(
+    r'<h2 id="verification-ladders"[^>]*>.*?(?=<h2 id="evidence-and-exactness"[^>]*>)',
     re.DOTALL,
 )
 
 
 @pytest.fixture(scope="module")
 def results_font_site(tmp_path_factory: pytest.TempPathFactory) -> Iterator[str]:
-    """One actual results page and its asset closure, without other producer trees,
-    and beside it the same page with its overview taken out (`PROSE_FIRST`)."""
+    """The actual Verification guide and its asset closure, plus a test-only
+    prose-first variant that retains the evidence/font negative control."""
     from devtools.render_frontier_page import packing_svg  # noqa: PLC0415
 
-    root = tmp_path_factory.mktemp("results-font-layout")
-    rendered = render_overview.results_page()
+    root = tmp_path_factory.mktemp("verification-font-layout")
+    rendered = render_overview.verification_page()
     (root / rendered.name).write_text(rendered.html, encoding="utf-8")
-    prose_first, taken = _OVERVIEW.subn("", rendered.html)
-    assert taken == 1, "the results page no longer has one overview to take out"
+    prose_first, taken = _GUIDE_OPENING.subn("", rendered.html)
+    assert taken == 1, "the guide no longer has one introductory ladder section"
     (root / PROSE_FIRST).write_text(prose_first, encoding="utf-8")
     assets = render_overview.asset_files([rendered])
     assert sum(map(len, assets.values())) + len(rendered.html.encode()) < 3 * 1024 * 1024
@@ -712,10 +699,10 @@ def test_native_frontier_readability_requires_visible_nonempty_math(
 @pytest.fixture(scope="module")
 def frontier_native_site(tmp_path_factory: pytest.TempPathFactory) -> Iterator[str]:
     root = tmp_path_factory.mktemp("frontier-native-layout")
-    site_renders.write(root, "atlas.html")
+    site_renders.write(root, "frontier.html", "atlas.html")
     server = preview_site.serve(root, 0, as_pages=True)
     try:
-        yield f"http://127.0.0.1:{server.server_port}/atlas.html"
+        yield f"http://127.0.0.1:{server.server_port}/frontier.html"
     finally:
         server.shutdown()
         server.server_close()
@@ -789,7 +776,9 @@ def test_atlas_startup_does_not_repeat_full_tile_restyles(
     page = browser.new_page(viewport={"width": 1280, "height": 900})
     stop_trace = check_site_rendering.record_native_trace(page, trace)
     try:
-        page.goto(frontier_native_site, wait_until="load")
+        page.goto(
+            frontier_native_site.replace("frontier.html", "atlas.html"), wait_until="load"
+        )
         check_site_rendering.wait_for_fonts(page)
         tiles = page.locator("[data-atlas-grid] .site-atlas-cell").count()
         assert tiles == 324
@@ -948,7 +937,7 @@ def test_native_frontier_diagnostic_never_replaces_the_original_verdict(
     arguments = (
         cast("Browser", Mock()),
         (271, 282),
-        "http://127.0.0.1/atlas.html",
+        "http://127.0.0.1/frontier.html",
         390,
         "dark",
     )
@@ -1015,13 +1004,17 @@ def test_frontier_preloads_every_pt_serif_face_it_draws(
 
 
 def _navigation_reading(page: Page) -> tuple[list[dict[str, float]], list[dict[str, Any]]]:
-    """The bar's link boxes and the faces Chromium actually draws their labels in."""
+    """Visible navigation controls and the faces Chromium draws their labels in."""
+    selector = ".site-nav a, .site-nav-disclosure, .site-nav-mobile-toggle"
     boxes = []
-    for link in page.locator(".site-nav-inner > a").all():
-        box = link.bounding_box()
+    for control in page.locator(selector).all():
+        if not control.is_visible():
+            continue
+        box = control.bounding_box()
         assert box is not None
         boxes.append(dict(box))
-    assert len(boxes) > 3
+    assert page.get_by_role("navigation", name="Site", exact=True).is_visible()
+    assert boxes
     session = page.context.new_cdp_session(page)
     try:
         session.send("DOM.enable")
@@ -1029,7 +1022,7 @@ def _navigation_reading(page: Page) -> tuple[list[dict[str, float]], list[dict[s
         document = session.send("DOM.getDocument")
         links = session.send(
             "DOM.querySelectorAll",
-            {"nodeId": document["root"]["nodeId"], "selector": ".site-nav-inner > a"},
+            {"nodeId": document["root"]["nodeId"], "selector": selector},
         )
         fonts = [
             face
@@ -1294,7 +1287,7 @@ def test_frontier_native_radical_paints_hook_and_bar_and_rejects_text_font(
                     )
                     route.fulfill(response=response, body=damaged)
 
-                context.route("**/atlas.html", text_font)
+                context.route("**/frontier.html", text_font)
             page = context.new_page()
             page.emulate_media(media=media)
             page.goto(frontier_native_site, wait_until="load")

@@ -1,0 +1,89 @@
+{
+ "name": "s303_r303w0",
+ "n": 303,
+ "input": "/home/evand/math/square-packing/public/search/packer/runs/r303/w0/b00260.txt",
+ "s_input": 17.909772217256418,
+ "descent": {
+  "s_before": 17.909772217256418,
+  "vv_milp_dS": -4.751298275965879e-07,
+  "why": "no equilibrium with smooth contacts (not first-order jammed).",
+  "ok": true,
+  "s_after": 17.909772217256418,
+  "rounds": 1
+ },
+ "why": "no equilibrium with smooth contacts (not first-order jammed).",
+ "S_cert": "17.909772217274327",
+ "cert_kind": "dilation (upper bound; local minimality unresolved)",
+ "minimality": "unresolved: no equilibrium with smooth contacts (not first-order jammed).",
+ "checkers": {
+  "verify_cert": {
+   "ok": true,
+   "line": "VALID: s(n) <= S"
+  },
+  "verify_cert2": {
+   "ok": true,
+   "line": "VALID: 303 closed unit squares pairwise disjoint inside the open box of side 17.909772217274326778 (695 close pairs checked)"
+  }
+ },
+ "live": {
+  "n": 303,
+  "S": 17.909772217274327,
+  "sources": {
+   "store frontier: pending:#562 (Daniil Ostashev (dostashev))": 17.90995829106991,
+   "store best any (dostashev,Daniil Ostashev,ours)": 17.90995829106991,
+   "store s(304) (envelope)": 17.929427758075175
+  },
+  "errors": [],
+  "stale": [],
+  "as_of": {
+   "register": "76496462 (main 76496462)",
+   "issues_updated": "2026-10-22T16:38:16Z",
+   "last_issue": 719,
+   "repos": 17
+  },
+  "register_main": "76496462 (main 76496462)",
+  "latest_issue": 719,
+  "best_other": 17.90995829106991,
+  "beaten": []
+ },
+ "distance": {
+  "store best 17.909958291070": 0.26601933488520296
+ },
+ "prior": {
+  "store_id": 291614,
+  "s": 17.90995829106991,
+  "sources": [
+   "pending:#501 (Daniil Ostashev (dostashev))",
+   "pending:#575 (dostashev)",
+   "watch:dostashev/square-packing@b909e1b (Daniil Ostashev (dostashev))",
+   "later copies of the same minimum: store ids [291605, 291681]"
+  ],
+  "ok": true,
+  "S_exact": "17.909958291069907981416641498488037000234460665542133365221708345",
+  "S_cert": "17.909958291069907981595741081399",
+  "checkers": {
+   "verify_cert": {
+    "ok": true,
+    "line": "VALID: s(n) <= S"
+   },
+   "verify_cert2": {
+    "ok": true,
+    "line": "VALID: 303 closed unit squares pairwise disjoint inside the open box of side 17.909958291069909109 (666 close pairs checked)"
+   }
+  },
+  "optimality": {
+   "kkt": true,
+   "min_lambda": 1.4235936102132479e-05,
+   "status": "local minimum of S, strict modulo 57 exact flat motions (PD on the rest of null(J_A)); the configuration is not isolated",
+   "flat_motions": 57,
+   "flat_realised": 57.0,
+   "flat_residual": 3.858020775428778e-37,
+   "negative_eigs": 0,
+   "corner_corner": 297,
+   "vv_milp_dS": 0.0,
+   "rattlers": 4,
+   "min_pair": 9.99999999999999e-21,
+   "min_wall": 5e-21
+  }
+ }
+}

@@ -1,0 +1,92 @@
+# What `python -m devtools.intake_ledger gather` reads: the watched-repository publications
+# at 268, 303 and 304 that think-l49q imports, which no issue reports. The starts, frozen
+# at main 2ec489d1, already hold T-240 (#763) at 268 and 303, pending adoption, so #763 is
+# not walked again. Francisco Couzo's 304 at fa6237e, which #763 does not claim, and Evan
+# Daniel's three certificates at 8a8879a are walked in the order of the pushes that made
+# them public (devtools.beyond_horizon_replay.PUSHED_LATER's rule), each first commit kept
+# beside it.
+# Each exact side is the certificate's header, as the packets' claim records read it.
+format: intake-ledger-sources-v1
+read_at_main: 2ec489d1eede791bf0686ca1c524278c2bb80253
+read_on: '2026-10-24'
+rule: If they are reported in order, then each one should be recorded as a result, as long as each one
+  is stronger than the last. If a stronger result is reported first, then the other one should not be
+  recorded since it is weaker after that, unless there is some key reason it should be recorded.
+lanes: []
+reports:
+- report: franciscouzo/square-packing@fa6237e
+  url: https://github.com/franciscouzo/square-packing/tree/fa6237e288cf3fc53b53fc43438c91f3f59c40e9
+  reported_at: '2026-10-23T23:38:42Z'
+  holders: Kirill Tymchishin, certified by Francisco Couzo
+  bead: think-l49q
+  claims:
+  - n: 304
+    printed: '17.926898903393'
+    rounding: up
+    exact: 42654421699169959072564987841514227093543746926117736119087439/2379353056489745832681562849107891444171481219500000000000000
+    exact_from: certificates/best/n304.cert at fa6237e (its header), retained in the couzo-issue763-2026-10-23
+      packet and read through the couzo-n304-2026-10-23 packet (acquisition/claims.json)
+    first_committed: '2026-10-23T18:59:39Z'
+    measured:
+      against: T-186
+      finding: no symmetry pairs it one to one by nearest centres; an optimal assignment, best under the diagonal
+        reflection, keeps 250 of 304 squares within 0.1 and moves 54 beyond it (largest 1.13), turning squares by
+        up to 26.0 degrees
+      source: packing/resources/web/evand-kaggle-descents-2026-10-24/measure/identity.json
+    note: >-
+      The source's index credits the packing to Kirill Tymchishin's Kaggle notebook "CPU Alternating Reclosure"
+      v3 and claims no refinement of it; #763 does not claim the count. Its manifest (certificates/best/manifest.json,
+      witnesses/304) names no seed of the packing, and its previous_source names Mykhailo Polkovskyi's 70a033f
+      n304.cert (#593), T-186's packing, as the record its catalogue held at 304 before, not as a seed (M-1 of the 24
+      October review of T-241 and T-242); its construction credit to Nate Chaoweeraprasit describes that earlier
+      record, where the source's RECORD_PROVENANCE.md keeps Daniil Ostashev's packing credit.
+  note: A publication in a watched repository with no issue (the owner, 2026-10-14), dated by the push that made
+    it public, 6b7391d..964ee2b at 2026-10-23T23:38:42Z in GitHub's activity log; committed at 18:59:39Z.
+- report: evand/square-packing@8a8879a
+  url: https://github.com/evand/square-packing/tree/8a8879a2972c32cbd2d906049228cc9f0762b02a
+  reported_at: '2026-10-24T04:53:53Z'
+  holders: Evan Daniel (evand)
+  bead: think-l49q
+  claims:
+  - n: 268
+    printed: 8437180857934672912242411148233/500000000000000000000000000000
+    rounding: exact
+    first_committed: '2026-10-24T04:49:33Z'
+    measured:
+      against: T-240
+      finding: one arrangement, another placement; nearest centres one to one under the mirror x to s - x, none
+        beyond 0.1, 69 beyond 1e-2, 135 beyond 1e-3 and 165 beyond 1e-9 (largest 7.08e-2), largest turn 1.36
+        degrees; against the source's own input, none beyond 1e-3 (largest 1.41e-4)
+      source: packing/resources/web/evand-kaggle-descents-2026-10-24/measure/identity.json
+    note: The source calls it the exact descent of Vladislav Lavrentev's public Kaggle packing (lightningv08),
+      which no report here holds; measured, a sibling placement of the arrangement T-240 also refines, not
+      T-240's packing re-solved (the 24 October review of T-240, RF-6).
+  - n: 303
+    printed: 17907238274538241192624181047171/1000000000000000000000000000000
+    rounding: exact
+    first_committed: '2026-10-24T04:49:33Z'
+    measured:
+      against: T-240
+      finding: nearest centres one to one under the anti-diagonal reflection; 4 squares beyond 0.1 (largest 0.238)
+        and 71 beyond 1e-3, largest turn 27.0 degrees
+      source: packing/resources/web/evand-kaggle-descents-2026-10-24/measure/identity.json
+    note: The source calls it the exact descent of Chris Deotte's public Kaggle packing.
+  - n: 304
+    printed: 1792689890035674158972360842897/100000000000000000000000000000
+    rounding: exact
+    first_committed: '2026-10-24T04:49:33Z'
+    measured:
+      against: franciscouzo/square-packing@fa6237e
+      finding: nearest centres one to one under the identity; none beyond 1e-3, 73 beyond 1e-6 (largest 4.60e-4),
+        largest turn 0.019 degrees; the source's input is that packing to 2.05e-9
+      source: packing/resources/web/evand-kaggle-descents-2026-10-24/measure/identity.json
+    note: >-
+      The source calls it the exact descent of "the public Kaggle packing at 17.9268989004 (finder unknown;
+      earliest public copy: kozykappa's notebook)". That the packing is fa6237e's is this record's measurement,
+      and its finder Couzo's attribution; T-242 lists it as a regularization of T-241 on that measured basis.
+  note: >-
+    A publication in a watched repository with no issue (the owner, 2026-10-14), dated by the push that made it
+    public, 5e862ac..8a8879a at 2026-10-24T04:53:53Z in GitHub's activity log; committed at 04:49:33Z. The source
+    did not post it, since #763 already held the counts.
+exceptions: []
+other_items: []

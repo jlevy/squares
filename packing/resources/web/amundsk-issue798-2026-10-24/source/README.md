@@ -1,0 +1,23 @@
+# Fourteen new upper bounds, n = 334–504 (Amund Kristiansen, 2026-10-24)
+
+Exact rational dilation certificates (δ = 1e-12) made with Evan Daniel's `search/packer/dilate_cert.py` at
+evand/square-packing `7982d7a9346e29e36cab3ce075274f3023114353` (macOS arm64, Python 3.14.6), each from the float64
+packing beside it (`n side`, then `x y angle_deg`). Check with that commit's `search/exact/verify_cert.py` and
+`search/exact/verify_cert2.py`.
+
+| n | certificate | SHA-256 | input | SHA-256 |
+|---:|---|---|---|---|
+| 334 | `s334_amund.cert` | `949c8c3603d8aaf8cc9f85c12b0c2aa41c49c90c42ab27460fec4993c76229f3` | `s334_amund.input.txt` | `a68ea899d7093bbb996572cc65d52c774917728f324b253b4c36039957b58a85` |
+| 338 | `s338_amund.cert` | `366881b432ae8ffd838173acfc08d437668570d5a89e6bbd5fcc3f7e184cf12b` | `s338_amund.input.txt` | `7589b08e00587f2030c83e38a71204d174c49c26e0c6dab37026f87e60d31db2` |
+| 343 | `s343_amund.cert` | `06280884d3d03a1a93544bdeb67b2416963b7b34b11aef2bf6e9293472f0b985` | `s343_amund.input.txt` | `8f4d05923d1eafefe2ef87e3f7273d5d69293a64bdbf91c6a300e4d4e7b8507f` |
+| 372 | `s372_amund.cert` | `6b92d1c7cecf95b3259a7add47add95b3f3909b461903de6101accaf34833913` | `s372_amund.input.txt` | `f6dcf1f5c35d8fa714dfeb25878a8d318fad3215b52aa1c994f12ea975de13e2` |
+| 376 | `s376_amund.cert` | `0f58c83894138ed879393ca2d0af3d920e86b5b1392a1b7e332d4ff90400b4a8` | `s376_amund.input.txt` | `2a495a4d7de04d4c3cef69aa85a1abeacbed9bdf6ecdf7ad619e7feabc029857` |
+| 377 | `s377_amund.cert` | `0374c1f474f9007b9b9d04c3607513b3dc6cd4a5d4571029c3a922e612f429af` | `s377_amund.input.txt` | `bb30bee4bca9e71fa284f524e494bd5c9d21da5db34f9b129e6f46f88ceff2c4` |
+| 379 | `s379_amund.cert` | `a998ef3d7ae591156e9ae6b6d81e98b258b2df8465d941e0913b21a7b478bd22` | `s379_amund.input.txt` | `c2701728fb2111ac100ad9348e149bb29f86633b103834c89ee9d489df807a30` |
+| 382 | `s382_amund.cert` | `6eae67f6e7d045451291020ffba4626ca81857fab99ac8baeb6fb3c902e81702` | `s382_amund.input.txt` | `a4c84f56251ab7f142af06afbbbd33b4cf3edf8c6ff3bc2c4072883cd22c8a24` |
+| 412 | `s412_amund.cert` | `98fd0b19afc13f6158cf1c1fdf7e0c89e80949ac1e24c6e0588a162bab23af07` | `s412_amund.input.txt` | `27024bb3fc3d51b01dcc1c51576ac3d4eb99a2de63f6fae6f2bfcae13d6246f7` |
+| 416 | `s416_amund.cert` | `3c53cbeb070be0db4643366471d62b697a642c6be9e9085aea587553a5da85d4` | `s416_amund.input.txt` | `3f16b2d534fddcc9fd119c2bbb927572a0192595c2355697238b23fc5b528076` |
+| 457 | `s457_amund.cert` | `a7cdca0abce9364664a2377cd205ac94bc19aa993c95d22a631a9266a2c42fb1` | `s457_amund.input.txt` | `6280d134f6b3aabce3ca3e9a08ec9df1909c9728871e1c9356d5b144c5cc0d06` |
+| 458 | `s458_amund.cert` | `c35b01829c294a0350f36581fff441cd8d3e9b9243f4a9b7e8f1853a53fdde3a` | `s458_amund.input.txt` | `c004e78290e7228c8b5f6bbd83ca913a97d82bbadad10f1e7c4695983726f75e` |
+| 502 | `s502_amund.cert` | `1b72579361aae418eb0ad536f2ce9c006ed10e367b723b663df20c5e85277b0e` | `s502_amund.input.txt` | `04258856eb04f94a7b92eb74d73f10b313f82a77b45ce8e8ba1d3e09acff2b31` |
+| 504 | `s504_amund.cert` | `269f51f7973d1242c0e866daaa678ccfc91ec0fa7d80a157ebee1f9767f8f1b4` | `s504_amund.input.txt` | `6447beb717807e7762c7f7c1b19bfc3e2757837aaf4355b3697f62a04fea6d5b` |

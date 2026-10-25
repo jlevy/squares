@@ -4,6 +4,7 @@ import re
 import shutil
 import subprocess
 from dataclasses import replace
+from html.parser import HTMLParser
 from pathlib import Path
 
 import pytest
@@ -11,6 +12,8 @@ import yaml
 
 from devtools import (
     check_published_site,
+    paper_structure,
+    record_presentation,
     render_changelog,
     render_contributors,
     render_overview,
@@ -22,6 +25,7 @@ from devtools.profile_records import RecordIndex
 from devtools.repo_links import RepositoryTree, repo_url
 from devtools.result_credit import PROJECT_AUTHOR_ORIGIN
 from devtools.site_resources import Resource
+from devtools.site_tallies import TALLY_SEPARATOR
 from sqpack.contributor_occurrences import SCHEMA_PATH as OCCURRENCES_SCHEMA
 from sqpack.contributor_occurrences import CreditOccurrence, CreditOrigin, load_occurrences
 from sqpack.contributors import (
@@ -41,16 +45,16 @@ def test_profiles_share_one_complete_article_and_directory() -> None:
     pages = {page.name: page.html for page in render_contributors.contributor_pages()}
     assert set(pages) == set(render_contributors.page_paths())
     index = pages["profiles/index.html"]
-    assert "<h1>Profiles</h1>" in index
+    assert "<h1>Contributor Profiles</h1>" in index
     assert 'class="kpress-table site-table site-profile-table"' in index
     assert re.findall(r"<th\b[^>]*>([^<]+)</th>", index) == [
         "Name",
+        "Accounts",
         "Records",
         "Results",
         "Credits",
         "Years active",
         "Resources",
-        "Accounts",
     ]
     assert index.count('data-sort="num"') == 4
     assert index.count('data-sort="text"') == 3
@@ -58,35 +62,73 @@ def test_profiles_share_one_complete_article_and_directory() -> None:
     assert re.search(r'src="../assets/js/table\.[a-f0-9]+\.js"', index)
     assert render_overview.TABLE_SCRIPT in render_contributors.inputs()
     assert '<div class="site-table-wrap site-wide">' in index
-    assert (
-        "Results count distinct registered results by their reviewed primary authors" in index
-    )
-    assert "Credits count distinct results that credit a person" in index
-    assert "<title>Profiles" in index
-    assert 'rel="canonical" href="https://jlevy.github.io/squares/profiles/"' in index
+    # The owner's three-paragraph introduction (2026-10-23) comes before the summary
+    # line, in order, as written.
+    intro = [
+        (
+            "<p>Below are people whose work is cited or credited in the square-packing "
+            "record.</p>"
+        ),
+        (
+            "<p>This list includes people with notable historic results on square packing "
+            "and all known current work, including everyone who has built on results in "
+            "the Squares Project.</p>"
+        ),
+        (
+            "<p>All original sources and all known repositories or publications of each "
+            "person are listed on their profile page.</p>"
+        ),
+    ]
+    positions = [index.index(paragraph) for paragraph in intro]
+    assert positions == sorted(positions)
+    assert positions[-1] < index.index('<p class="site-profile-summary">')
+    assert "People whose work is cited" not in index
+    assert "Results lists authored work" not in index
+    assert "<title>Contributor Profiles" in index
+    assert 'rel="canonical" href="https://squaremath.org/profiles/"' in index
     # The directory names cited authors as well as contributors, and calls none of them
-    # contributors in its own voice; the colophon links it by the same name.
+    # contributors in its own voice.
     assert "Contributors<" not in index
-    assert '<a href="index.html">Profiles</a></span>' in index
     assert "data-person" not in index
-    assert 'data-page="about" aria-current="page"' in index
-    assert '<a href="../about.html#profiles">About</a></nav>' in index
+    directory_tree = paper_structure.parse(index)
+    breadcrumb = directory_tree.find("nav", "site-breadcrumbs")
+    assert breadcrumb is not None
+    assert not breadcrumb.find_all("a")
+    assert [
+        (span.text(), span.attrs.get("aria-current")) for span in breadcrumb.find_all("span")
+    ] == [
+        ("About", None),
+        ("Contributor Profiles", "page"),
+    ]
+    for cell in directory_tree.find_all("td"):
+        if cell.classes.intersection(
+            {"site-profile-records", "site-profile-stats", "site-profile-credits"}
+        ):
+            assert all(number.text().isdigit() for number in cell.find_all("strong"))
+            if cell.attrs.get("data-value", "0") != "0":
+                assert cell.find("strong") is not None
     assert 'site-profile-table" data-contributor-plain' in index
     for contributor in registry.by_id.values():
         assert contributor.profile_path == f"profiles/{contributor.id}.html"
         assert f'href="{contributor.id}.html"' in index
         profile = pages[contributor.profile_path]
         assert '<article class="site-contributor"' in profile
-        assert 'data-page="about" aria-current="page"' in profile
-        assert '<a href="../about.html#profiles">About</a>' in profile
-        assert '<a href="index.html">Profiles</a></nav>' in profile
+        trail = paper_structure.parse(profile).find("nav", "site-breadcrumbs")
+        assert trail is not None
+        assert [(a.text(), a.attrs["href"]) for a in trail.find_all("a")] == [
+            ("Contributor Profiles", "./"),
+        ]
+        assert any(
+            span.text() == "About" and "aria-current" not in span.attrs
+            for span in trail.find_all("span")
+        )
         assert contributor.display_name in profile
-        assert "data-contributor-popover" in profile
-        assert 'aria-label="Profile"' in profile
+        assert "data-contributor-popover" not in profile
+        assert 'aria-label="Profile"' not in profile
         assert "data-case-popover" in profile
         assert re.search(r'src="../assets/js/article-loader\.[a-f0-9]+\.js"', profile)
-        assert re.search(r'src="../assets/js/contributor-popover\.[a-f0-9]+\.js"', profile)
-        assert "contributors/" not in profile
+        assert not re.search(r'src="../assets/js/contributor-popover\.[a-f0-9]+\.js"', profile)
+        assert not re.search(r'href="(?:\.\./|/)?contributors/[^"]*"', profile)
         sources = profile.split(
             '<details class="site-contributor-sources"><summary>Sources</summary>', 1
         )[1].split("</details>", 1)[0]
@@ -230,7 +272,7 @@ def test_credits_link_cases_and_results_preserving_roles_without_duplicates() ->
     )
     assert ">Full Public Name</a>" in directory
     assert 'class="site-credit-tally"' in directory
-    assert '>1 credit</a> <span class="site-tally-levels">(at S' in directory
+    assert '><strong>1</strong> credit</a> <span class="site-tally-levels">(at S' in directory
     assert "<details open>" not in rendered
     long_credits = tuple(
         replace(
@@ -592,7 +634,10 @@ def test_a_source_credit_lists_under_each_result_naming_it_with_its_roles(
     article = render_contributors.contributor_article(
         contributor, (author, credit, credit, again, unnamed, other), results=REGISTER
     )
-    assert '<section id="results"><h2>Results</h2>' in article
+    assert any(
+        section.attrs.get("id") == "results"
+        for section in paper_structure.parse(article).find_all("section")
+    )
     assert '<section id="other-reviewed-records">' in article
     section = "".join(
         render_contributors.credited_work(
@@ -756,7 +801,11 @@ def test_directory_summary_unions_work_and_years_exclude_import_dates(
     summary = render_contributors.profile_summary(
         people, (first, first, second, case), results=records, resources=(resource, resource)
     )
-    assert "2 people · 1 record · 1 result · 0 credits · 1 resource" in summary
+    assert re.sub(r"<[^>]+>", "", summary) == (
+        "2 people · 1 record · 1 result · 0 credits · 1 resource"
+    )
+    # Each dot is the shared separator, which the tally spacing tokens style.
+    assert summary.count(TALLY_SEPARATOR) == 4
     assert render_contributors.profile_years(people[0].id, (first,), records) is None
 
 
@@ -788,17 +837,49 @@ def test_credit_thread_references_stay_with_the_result_they_document(
         results=REGISTER,
     )
     section = article.split('<section id="credited-work">', 1)[1].split("</section>", 1)[0]
-    lines = re.findall(r"<li>.*?</li>", section)
-    first = next(line for line in lines if ">T-030</a>" in line)
-    second = next(line for line in lines if ">T-201</a>" in line)
-    assert "Source:" in first
-    assert "Registered in:" in first
-    assert "#8" in first
-    assert "Source:" in second
-    assert "Registered in:" not in second
-    assert "#8" not in second
-    assert "https://github.com/example/work/issues/7#issuecomment-1" in first
-    assert '<span class="site-contributor-references">' in first
+
+    class CreditItems(HTMLParser):
+        def __init__(self) -> None:
+            super().__init__()
+            self.items: list[tuple[list[str], list[str], list[str]]] = []
+            self.current: tuple[list[str], list[str], list[str]] | None = None
+
+        def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+            attributes = dict(attrs)
+            if tag == "li":
+                self.current = ([], [], [])
+                self.items.append(self.current)
+            if self.current is not None:
+                if tag == "a" and (href := attributes.get("href")):
+                    self.current[1].append(href)
+                self.current[2].extend((attributes.get("class") or "").split())
+
+        def handle_data(self, data: str) -> None:
+            if self.current is not None:
+                self.current[0].append(data)
+
+        def handle_endtag(self, tag: str) -> None:
+            if tag == "li":
+                self.current = None
+
+    parser = CreditItems()
+    parser.feed(section)
+    first = next(item for item in parser.items if "result/t-030.html" in item[1])
+    second = next(item for item in parser.items if "result/t-201.html" in item[1])
+    first_words, second_words = "".join(first[0]), "".join(second[0])
+    assert "Source:" in first_words
+    assert "Registered in:" in first_words
+    assert "#8" in first_words
+    assert "Source:" in second_words
+    assert "Registered in:" not in second_words
+    assert "#8" not in second_words
+    evidence = "https://github.com/example/work/issues/7#issuecomment-1"
+    registration = "https://github.com/jlevy/squares/pull/8"
+    assert evidence in first[1]
+    assert evidence in second[1]
+    assert registration in first[1]
+    assert registration not in second[1]
+    assert "site-contributor-references" in first[2]
 
 
 def test_directory_unknown_years_and_zero_work_cells_are_blank() -> None:
@@ -810,3 +891,109 @@ def test_directory_unknown_years_and_zero_work_cells_are_blank() -> None:
     assert '<td class="site-profile-records" data-value="0"></td>' in table
     assert "0 results" not in table
     assert "0 credits" not in table
+
+
+def test_profile_tally_and_sections_order_records_results_then_credits(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    identifier = "wolfram-bentz"
+    author = _credit("[A]", "/authors/0", "Bentz", "source-author", identifier)
+    credited = replace(
+        _credit("T-002", "/builds_on/credit/0", "Bentz", "credited-contributor", identifier),
+        origin=CreditOrigin("packing/frontier/results.yaml", "T-002", "/builds_on/credit/0"),
+    )
+    occurrences = (author, credited)
+    index = RecordIndex(("T-201",), {}, {"T-030": ("comparison pending",)})
+    monkeypatch.setattr(render_contributors, "record_index", lambda: index)
+    monkeypatch.setattr(record_presentation, "record_index", lambda: index)
+    target = "profiles/wolfram-bentz.html"
+    tally = render_contributors.profile_tally(
+        identifier, occurrences, target=target, results=REGISTER
+    )
+    assert re.sub(r"<[^>]+>", "", tally) == (
+        "1 record (at S4) · Review pending · 2 results (1 at S4, 1 at S3) · 1 credit (at S5)"
+    )
+    assert tally.count(TALLY_SEPARATOR) == 3
+    assert re.findall(r'<a href="([^"]+)">', tally) == [
+        target + "#records",
+        target + "#records",
+        target + "#results",
+        target + "#credited-work",
+    ]
+    work = render_contributors.credited_work(identifier, occurrences, results=REGISTER)
+    rendered = "".join(work.parts)
+    assert re.findall(r'<section id="([^"]+)"><h2[^>]*>', rendered) == [
+        "records",
+        "results",
+        "credited-work",
+    ]
+    assert work.count == 3
+    record_section = rendered.split('<section id="records">', 1)[1].split("</section>", 1)[0]
+    assert 'href="result/t-201.html"' in record_section
+    assert 'href="result/t-030.html">T-030</a>: comparison pending' in record_section
+    index = RecordIndex(
+        (), {}, {"T-201": ("priority unknown",), "T-030": ("comparison pending",)}
+    )
+    pending = render_contributors.profile_tally(identifier, occurrences, results=REGISTER)
+    assert re.sub(r"<[^>]+>", "", pending) == (
+        "Review pending · 2 results (1 at S4, 1 at S3) · 1 credit (at S5)"
+    )
+
+
+def test_profile_tally_preserves_known_zero_counts_in_display_order() -> None:
+    # Each dot is the shared separator, as in every other tally.
+    assert render_contributors.profile_tally("wolfram-bentz", (), results=()) == (
+        '<span class="site-credit-tally">'
+        f"0 records{TALLY_SEPARATOR}0 results{TALLY_SEPARATOR}0 credits</span>"
+    )
+
+
+def test_profile_directory_intro_is_serif_and_accounts_remain_whole_at_narrow_widths(
+    tmp_path: Path,
+) -> None:
+    from devtools import preview_site, site_assets  # noqa: PLC0415
+    from sqpack.probes import probe  # noqa: PLC0415
+    from tests import site_browser  # noqa: PLC0415
+
+    directory = next(
+        page
+        for page in render_contributors.contributor_pages()
+        if page.name == "profiles/index.html"
+    )
+    target = tmp_path / directory.name
+    target.parent.mkdir(parents=True)
+    target.write_text(directory.html)
+    site_assets.write_assets(tmp_path, render_overview.asset_files([directory]))
+    measure = probe(Path(__file__).with_name("probes"), "site_contributor/directory")
+    server = preview_site.serve(tmp_path, 0)
+    try:
+        with site_browser.api().sync_playwright() as driver:
+            browser = site_browser.launch(driver)
+            page = browser.new_page()
+            page.goto(f"http://127.0.0.1:{server.server_port}/profiles/", wait_until="load")
+            for width in (1280, 390, 320):
+                page.set_viewport_size({"width": width, "height": 900})
+                found = page.evaluate(measure)
+                assert found["intro"] == (
+                    "Below are people whose work is cited or credited in the "
+                    "square-packing record."
+                )
+                assert "PT Serif" in found["introFont"]
+                assert "Source Sans" in found["tableFont"]
+                assert found["names"]
+                assert all(name["weight"] == "680" for name in found["names"])
+                assert all(name["weight"] == "410" for name in found["otherLinks"])
+                assert found["overflow"] == 0
+                assert found["accounts"]
+                for account in found["accounts"]:
+                    assert account["width"] >= 16 * 16
+                    for label in account["links"]:
+                        assert label["nowrap"] == "nowrap"
+                        assert label["lines"] <= 1
+                        assert label["inside"]
+                if width < 768:
+                    assert found["tableWidth"] > found["wrapperWidth"]
+            browser.close()
+    finally:
+        server.shutdown()
+        server.server_close()

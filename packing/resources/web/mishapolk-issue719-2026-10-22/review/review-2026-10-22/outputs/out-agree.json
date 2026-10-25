@@ -1,0 +1,119 @@
+{
+ "receipt": "/tmp/claude-0/-home-user-squares/b4f98ade-a1fc-58c0-8f31-b56020d9544c/scratchpad/wt-t229r/packing/resources/web/mishapolk-issue719-2026-10-22/receipts/exact-certification.json.xz",
+ "receipt_format": "mishapolk-719-exact-replay-v1",
+ "routes": [
+  "exact_verify",
+  "independent"
+ ],
+ "counts": [
+  {
+   "label": "T-229@105:fact",
+   "n": 105,
+   "all_equal": true,
+   "checks": {
+    "side": true,
+    "poses": true,
+    "exact_verify: passed": true,
+    "exact_verify: pairs": true,
+    "exact_verify: least wall clearance": true,
+    "exact_verify: least pair gap": true,
+    "exact_verify: no failures": true,
+    "exact_verify: duplicate-square-overlap refused": true,
+    "exact_verify: square-translated-outside-container refused": true,
+    "independent: passed": true,
+    "independent: pairs": true,
+    "independent: least wall clearance": true,
+    "independent: least pair gap": true,
+    "independent: no failures": true,
+    "independent: duplicate-square-overlap refused": true,
+    "independent: square-translated-outside-container refused": true
+   },
+   "receipt_least_wall": "1/200000000000000000000",
+   "receipt_least_gap": "5257900307825346118929446398323967784357441589266863843220858216733491728542058030567/525790030782535236952614709334839796029062134330711585503511367004364050000000000000000000000000000000000",
+   "review_least_wall": "1/200000000000000000000",
+   "review_least_gap": "5257900307825346118929446398323967784357441589266863843220858216733491728542058030567/525790030782535236952614709334839796029062134330711585503511367004364050000000000000000000000000000000000"
+  },
+  {
+   "label": "T-229@105:cert",
+   "n": 105,
+   "all_equal": true,
+   "checks": {
+    "side": true,
+    "poses": true,
+    "exact_verify: passed": true,
+    "exact_verify: pairs": true,
+    "exact_verify: least wall clearance": true,
+    "exact_verify: least pair gap": true,
+    "exact_verify: no failures": true,
+    "exact_verify: duplicate-square-overlap refused": true,
+    "exact_verify: square-translated-outside-container refused": true,
+    "independent: passed": true,
+    "independent: pairs": true,
+    "independent: least wall clearance": true,
+    "independent: least pair gap": true,
+    "independent: no failures": true,
+    "independent: duplicate-square-overlap refused": true,
+    "independent: square-translated-outside-container refused": true
+   },
+   "receipt_least_wall": "1/200000000000000000000",
+   "receipt_least_gap": "5257900307825346118929446398323967784357441589266863843220858216733491728542058030567/525790030782535236952614709334839796029062134330711585503511367004364050000000000000000000000000000000000",
+   "review_least_wall": "1/200000000000000000000",
+   "review_least_gap": "5257900307825346118929446398323967784357441589266863843220858216733491728542058030567/525790030782535236952614709334839796029062134330711585503511367004364050000000000000000000000000000000000"
+  },
+  {
+   "label": "T-229@204:fact",
+   "n": 204,
+   "all_equal": true,
+   "checks": {
+    "side": true,
+    "poses": true,
+    "exact_verify: passed": true,
+    "exact_verify: pairs": true,
+    "exact_verify: least wall clearance": true,
+    "exact_verify: least pair gap": true,
+    "exact_verify: no failures": true,
+    "exact_verify: duplicate-square-overlap refused": true,
+    "exact_verify: square-translated-outside-container refused": true,
+    "independent: passed": true,
+    "independent: pairs": true,
+    "independent: least wall clearance": true,
+    "independent: least pair gap": true,
+    "independent: no failures": true,
+    "independent: duplicate-square-overlap refused": true,
+    "independent: square-translated-outside-container refused": true
+   },
+   "receipt_least_wall": "37251567/74505805969238281250",
+   "receipt_least_gap": "170100992101461805922690277325306140383727361777883/170427235989963867590529088261895419837072677910327911376953125",
+   "review_least_wall": "37251567/74505805969238281250",
+   "review_least_gap": "170100992101461805922690277325306140383727361777883/170427235989963867590529088261895419837072677910327911376953125"
+  },
+  {
+   "label": "T-229@204:cert",
+   "n": 204,
+   "all_equal": true,
+   "checks": {
+    "side": true,
+    "poses": true,
+    "exact_verify: passed": true,
+    "exact_verify: pairs": true,
+    "exact_verify: least wall clearance": true,
+    "exact_verify: least pair gap": true,
+    "exact_verify: no failures": true,
+    "exact_verify: duplicate-square-overlap refused": true,
+    "exact_verify: square-translated-outside-container refused": true,
+    "independent: passed": true,
+    "independent: pairs": true,
+    "independent: least wall clearance": true,
+    "independent: least pair gap": true,
+    "independent: no failures": true,
+    "independent: duplicate-square-overlap refused": true,
+    "independent: square-translated-outside-container refused": true
+   },
+   "receipt_least_wall": "37251567/74505805969238281250",
+   "receipt_least_gap": "170100992101461805922690277325306140383727361777883/170427235989963867590529088261895419837072677910327911376953125",
+   "review_least_wall": "37251567/74505805969238281250",
+   "review_least_gap": "170100992101461805922690277325306140383727361777883/170427235989963867590529088261895419837072677910327911376953125"
+  }
+ ],
+ "all_equal": true
+}

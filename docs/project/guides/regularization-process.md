@@ -152,16 +152,32 @@ So an admission never makes the drawn picture worse.
 ```bash
 python -m devtools.render_regularized_atlas --update
 python -m devtools.default_drawings --update
+python -m devtools.flip_regularization --update
 python -m devtools.regularized_drawings
 python -m devtools.render_results --update
 ```
 
-These redraw the views, decide each count’s default picture and regularization state,
-regenerate `results.yaml`’s `regularized_drawings` and each case record’s
-`regularization` note, and regenerate `frontier/RESULTS.md`. Run `default_drawings`
-before `regularized_drawings`: where a view is not its count’s default picture, the note
-opens by saying that the house drawing is drawn and why, read from the default record.
+These redraw the views, decide each count’s default picture and its regularization
+state, flip-regularize each default picture, regenerate `results.yaml`’s
+`regularized_drawings` and each case record’s `regularization` note, and regenerate
+`frontier/RESULTS.md`. Run `default_drawings` before `regularized_drawings`: where a
+view is not its count’s default picture, the note opens by saying that the house drawing
+is drawn and why, read from the default record.
 Update the layer’s counts in the atlas README’s regularized-views section by hand.
+
+Flip regularization is the last stage, separate from the others and fast, and it changes
+no file but its own record.
+After `default_drawings` has decided which picture each count draws,
+`flip_regularization --update` decides, from that picture’s retained rendering, the
+rotation and flip that put its heaviest quadrant lower right and the heavier of that
+quadrant’s neighbours lower left, by the rule of
+[policy section 13](../policies/regularization-policy.md#13-flip-regularization), and
+writes them to `atlas/known-best/flip-regularization.json` in a few seconds.
+The composites and the site apply the pose when they draw, and the house drawing as
+published keeps its source’s pose.
+`python -m devtools.flip_regularization --n N` prints a count’s quadrant weights and
+which stage decided its pose, and `--check` is the records-tier step
+`flip regularization record is current`.
 
 A drawn view is the count’s default picture, on the site, the atlas and the posters,
 where it improves on the house drawing under the same rule
@@ -181,9 +197,11 @@ view of Evan Daniel’s regularizer or the grid-slack generator is drawn),
 `regular-as-published` (the house drawing has no uneven and no near-axis square, no
 strong view of the count has lapsed, and `PENDING_ALLOWED` does not hold it for its
 bead’s runs), `decided-no-better` (the strong generators ran on this witness and drew
-nothing the improvement rule takes), `exempt` (set aside with the bead that owns it) or
-`pending`. The axis tool’s view alone never makes a count regularized: it is the
-reference and fallback.
+nothing the improvement rule takes), `regularization-owed` (they ran and drew no view
+the rule could judge, so the drawing is not regularized; the `SETTLED` entry’s `owed`
+names the open bead that owes the regularization, as at the exact algebraic houses),
+`exempt` (set aside with the bead that owns it) or `pending`. The axis tool’s view alone
+never makes a count regularized: it is the reference and fallback.
 A count is `decided-no-better` without an entry of its own where the layer holds a
 strong generator’s view of the current witness that the rule does not draw; otherwise
 the decision goes into `default_drawings.SETTLED` with the runs, the outcome, where it
@@ -267,13 +285,13 @@ python -m devtools.release_pin --check
 drawings, checks the register, and measures every drawn view against its house drawing
 again (`default pictures improve on their house drawings`), listing the counts that keep
 the house picture and why.
-`every drawn picture is regularized, regular as published, decided or exempt` reads each
-count’s state back without measuring, holds it to the index, and fails on a pending
-count that `PENDING_ALLOWED` does not name, on a named count that is no longer pending,
-on a `SETTLED` entry made on another witness or no longer needed, and on one naming a
-run the retained evidence does not hold, under another generator, or whose record shows
-it did not run that count, and on a copy in `settled-runs/` that no entry names; it
-prints the list’s size.
+`every drawn picture is regularized, regular as published, decided, owed to an open bead or exempt`
+reads each count’s state back without measuring, holds it to the index, and fails on a
+pending count that `PENDING_ALLOWED` does not name, on a named count that is no longer
+pending, on a `SETTLED` entry made on another witness or no longer needed, and on one
+naming a run the retained evidence does not hold, under another generator, or whose
+record shows it did not run that count, and on a copy in `settled-runs/` that no entry
+names; it prints the list’s size.
 `bead tree` fails a change to `default_drawings.py` whose list, exemptions or owed runs
 name a bead that is not open.
 Run it alone with `python -m devtools.default_drawings --check-state`. `--verify-atlas`

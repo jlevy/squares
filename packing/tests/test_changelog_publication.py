@@ -82,7 +82,7 @@ def test_news_links_named_contributors_directly_to_their_profiles(
     assert "wand125\N{RIGHT SINGLE QUOTATION MARK}s" not in history
     # The names stay plain links: the News container declares its profile links plain
     # once, and every one of them lies inside it.
-    plain = history.index('<div class="site-news sans-text" data-news data-contributor-plain>')
+    plain = history.index('<div class="site-news" data-news data-contributor-plain>')
     assert all(
         history.index(f'<a href="profiles/{identifier}.html">') > plain
         for _name, identifier in published_profiles
@@ -132,7 +132,7 @@ def test_publication_audit_accepts_the_renderers_encoded_artifact_destinations(
     assert all(passed for passed, _line in check_published_site.changelog_checks(news))
 
 
-def test_news_has_one_card_per_entry_and_home_highlights_three_existing_s5_results(
+def test_news_has_one_card_per_entry_and_home_shows_the_newest_at_its_opening_levels(
     views: tuple[dict, str, str, str, str],
 ) -> None:
     document, news, _github, about, home = views
@@ -144,14 +144,32 @@ def test_news_has_one_card_per_entry_and_home_highlights_three_existing_s5_resul
     for day in {entry["date"] for entry in ordered}:
         assert news.count(f'id="changelog-date-{day}"') == 1
     selected = news_highlights.highlights(document)
-    assert [entry["result_ids"] for entry in selected] == [["T-154"], ["T-153"], ["T-060"]]
-    assert re.findall(r'data-news-entry="([^"]+)"', home) == [entry["id"] for entry in selected]
+    levels = news_highlights.default_levels(document)
+    assert len(selected) == news_highlights.LIMIT
+    assert all(entry["significance"]["score"] in levels for entry in selected)
+    assert (
+        selected
+        == tuple(entry for entry in ordered if entry["significance"]["score"] in levels)[
+            : news_highlights.LIMIT
+        ]
+    )
+    carried = [entry["id"] for entry in news_highlights.carried(document)]
+    assert re.findall(r'data-news-entry="([^"]+)"', home) == carried
+    shown = re.findall(r'<section class="site-news-day" id="changelog-entry-([^"]+)"', home)
+    assert shown == [entry["id"] for entry in selected]
+    # Today News holds three S5 articles, so the box opens on S5 and leads with T-194's
+    # (16 October).
+    assert levels == (5,)
+    assert [entry["result_ids"] for entry in selected] == [["T-194"], ["T-154"], ["T-153"]]
     for entry in selected:
         anchor = render_changelog.entry_anchor(entry["id"])
         assert f'href="news.html#{anchor}"' in home
-    assert '<a class="site-action" href="news.html">All news' in home
+    assert '<a class="site-action" href="news.html" data-news-carry>All News' in home
     assert 'id="news" class="site-title">News' in news
-    assert 'data-page="news" aria-current="page" href="news.html"' in news
+    assert re.search(
+        r'<a(?=[^>]*data-page="news")(?=[^>]*aria-current="page")(?=[^>]*href="news.html")[^>]*>',
+        news,
+    )
     assert 'href="news.html"' in about
     assert "data-news-entry=" not in about
     assert 'class="site-news-day"' not in about
@@ -191,7 +209,8 @@ def test_news_cards_keep_the_actual_article_and_structured_math_once(
     assert 'href="https://example.com/proof"' in rendered
     formulas = site_math.formula_sources(rendered)
     assert [item.source for item in formulas].count(formula) == 1
-    assert all(item.profile == "sans" for item in formulas)
+    assert next(item for item in formulas if item.source == formula).profile == "prose"
+    assert all(item.profile == "sans" for item in formulas if item.source != formula)
 
 
 def test_publication_audit_refuses_lost_archives_or_reintroduced_maintenance(

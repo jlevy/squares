@@ -59,6 +59,15 @@ urls:
   lastmod: '2026-10-22'
   status: live
   pattern: assets/images/[a-zA-Z0-9_-]+\.[0-9a-f]{16}\.png
+- path: assets/images/tutorial-{trump11,kingbird29}-overview.{hash}.svg
+  canonical: ''
+  kind: asset-file
+  generator: devtools.site_documents:tutorial_packing_images
+  producer: overview
+  first_published: '2026-10-22'
+  lastmod: '2026-10-22'
+  status: live
+  pattern: assets/images/tutorial-(?:trump11|kingbird29)-overview\.[0-9a-f]{16}\.svg
 - path: assets/{css,js,fonts}/*.{hash}.{ext}
   canonical: ''
   kind: asset-file
@@ -2668,6 +2677,38 @@ urls:
   first_published: '2026-10-07'
   lastmod: '2026-10-22'
   status: live
+- path: atlas/regularized/n-1.svg
+  canonical: atlas/regularized/n-1.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-10.svg
+  canonical: atlas/regularized/n-10.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-100.svg
+  canonical: atlas/regularized/n-100.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-101.svg
+  canonical: atlas/regularized/n-101.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
 - path: atlas/regularized/n-102.svg
   canonical: atlas/regularized/n-102.svg
   kind: asset-file
@@ -2682,6 +2723,14 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-104.svg
+  canonical: atlas/regularized/n-104.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
   lastmod: '2026-10-22'
   status: live
 - path: atlas/regularized/n-105.svg
@@ -2716,6 +2765,22 @@ urls:
   first_published: '2026-10-07'
   lastmod: '2026-10-22'
   status: live
+- path: atlas/regularized/n-109.svg
+  canonical: atlas/regularized/n-109.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-11.svg
+  canonical: atlas/regularized/n-11.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
 - path: atlas/regularized/n-110.svg
   canonical: atlas/regularized/n-110.svg
   kind: asset-file
@@ -2724,12 +2789,132 @@ urls:
   first_published: '2026-10-07'
   lastmod: '2026-10-22'
   status: live
+- path: atlas/regularized/n-111.svg
+  canonical: atlas/regularized/n-111.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-112.svg
+  canonical: atlas/regularized/n-112.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-113.svg
+  canonical: atlas/regularized/n-113.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-114.svg
+  canonical: atlas/regularized/n-114.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-115.svg
+  canonical: atlas/regularized/n-115.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-116.svg
+  canonical: atlas/regularized/n-116.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-117.svg
+  canonical: atlas/regularized/n-117.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-118.svg
+  canonical: atlas/regularized/n-118.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-119.svg
+  canonical: atlas/regularized/n-119.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-12.svg
+  canonical: atlas/regularized/n-12.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-120.svg
+  canonical: atlas/regularized/n-120.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-121.svg
+  canonical: atlas/regularized/n-121.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-122.svg
+  canonical: atlas/regularized/n-122.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
 - path: atlas/regularized/n-123.svg
   canonical: atlas/regularized/n-123.svg
   kind: asset-file
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-124.svg
+  canonical: atlas/regularized/n-124.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-125.svg
+  canonical: atlas/regularized/n-125.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
   lastmod: '2026-10-22'
   status: live
 - path: atlas/regularized/n-126.svg
@@ -2748,12 +2933,28 @@ urls:
   first_published: '2026-10-07'
   lastmod: '2026-10-22'
   status: live
+- path: atlas/regularized/n-128.svg
+  canonical: atlas/regularized/n-128.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
 - path: atlas/regularized/n-129.svg
   canonical: atlas/regularized/n-129.svg
   kind: asset-file
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-13.svg
+  canonical: atlas/regularized/n-13.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
   lastmod: '2026-10-22'
   status: live
 - path: atlas/regularized/n-130.svg
@@ -2780,12 +2981,172 @@ urls:
   first_published: '2026-10-07'
   lastmod: '2026-10-22'
   status: live
+- path: atlas/regularized/n-133.svg
+  canonical: atlas/regularized/n-133.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-134.svg
+  canonical: atlas/regularized/n-134.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-135.svg
+  canonical: atlas/regularized/n-135.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-136.svg
+  canonical: atlas/regularized/n-136.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-137.svg
+  canonical: atlas/regularized/n-137.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-138.svg
+  canonical: atlas/regularized/n-138.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-139.svg
+  canonical: atlas/regularized/n-139.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-14.svg
+  canonical: atlas/regularized/n-14.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-140.svg
+  canonical: atlas/regularized/n-140.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-141.svg
+  canonical: atlas/regularized/n-141.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-142.svg
+  canonical: atlas/regularized/n-142.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-143.svg
+  canonical: atlas/regularized/n-143.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-144.svg
+  canonical: atlas/regularized/n-144.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-145.svg
+  canonical: atlas/regularized/n-145.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
 - path: atlas/regularized/n-146.svg
   canonical: atlas/regularized/n-146.svg
   kind: asset-file
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-147.svg
+  canonical: atlas/regularized/n-147.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-148.svg
+  canonical: atlas/regularized/n-148.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-149.svg
+  canonical: atlas/regularized/n-149.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-15.svg
+  canonical: atlas/regularized/n-15.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-150.svg
+  canonical: atlas/regularized/n-150.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-151.svg
+  canonical: atlas/regularized/n-151.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
   lastmod: '2026-10-22'
   status: live
 - path: atlas/regularized/n-152.svg
@@ -2828,6 +3189,134 @@ urls:
   first_published: '2026-10-07'
   lastmod: '2026-10-22'
   status: live
+- path: atlas/regularized/n-157.svg
+  canonical: atlas/regularized/n-157.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-158.svg
+  canonical: atlas/regularized/n-158.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-159.svg
+  canonical: atlas/regularized/n-159.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-16.svg
+  canonical: atlas/regularized/n-16.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-160.svg
+  canonical: atlas/regularized/n-160.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-161.svg
+  canonical: atlas/regularized/n-161.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-162.svg
+  canonical: atlas/regularized/n-162.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-163.svg
+  canonical: atlas/regularized/n-163.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-164.svg
+  canonical: atlas/regularized/n-164.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-165.svg
+  canonical: atlas/regularized/n-165.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-166.svg
+  canonical: atlas/regularized/n-166.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-167.svg
+  canonical: atlas/regularized/n-167.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-168.svg
+  canonical: atlas/regularized/n-168.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-169.svg
+  canonical: atlas/regularized/n-169.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-17.svg
+  canonical: atlas/regularized/n-17.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-170.svg
+  canonical: atlas/regularized/n-170.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
 - path: atlas/regularized/n-171.svg
   canonical: atlas/regularized/n-171.svg
   kind: asset-file
@@ -2842,6 +3331,22 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-173.svg
+  canonical: atlas/regularized/n-173.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-174.svg
+  canonical: atlas/regularized/n-174.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
   lastmod: '2026-10-22'
   status: live
 - path: atlas/regularized/n-175.svg
@@ -2924,6 +3429,126 @@ urls:
   first_published: '2026-10-08'
   lastmod: '2026-10-22'
   status: live
+- path: atlas/regularized/n-184.svg
+  canonical: atlas/regularized/n-184.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-185.svg
+  canonical: atlas/regularized/n-185.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-186.svg
+  canonical: atlas/regularized/n-186.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-187.svg
+  canonical: atlas/regularized/n-187.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-188.svg
+  canonical: atlas/regularized/n-188.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-189.svg
+  canonical: atlas/regularized/n-189.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-19.svg
+  canonical: atlas/regularized/n-19.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-190.svg
+  canonical: atlas/regularized/n-190.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-191.svg
+  canonical: atlas/regularized/n-191.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-192.svg
+  canonical: atlas/regularized/n-192.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-193.svg
+  canonical: atlas/regularized/n-193.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-194.svg
+  canonical: atlas/regularized/n-194.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-195.svg
+  canonical: atlas/regularized/n-195.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-196.svg
+  canonical: atlas/regularized/n-196.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-197.svg
+  canonical: atlas/regularized/n-197.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
 - path: atlas/regularized/n-198.svg
   canonical: atlas/regularized/n-198.svg
   kind: asset-file
@@ -2940,8 +3565,64 @@ urls:
   first_published: '2026-10-07'
   lastmod: '2026-10-22'
   status: live
+- path: atlas/regularized/n-2.svg
+  canonical: atlas/regularized/n-2.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-20.svg
+  canonical: atlas/regularized/n-20.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-200.svg
+  canonical: atlas/regularized/n-200.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-201.svg
+  canonical: atlas/regularized/n-201.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-202.svg
+  canonical: atlas/regularized/n-202.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-203.svg
+  canonical: atlas/regularized/n-203.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
 - path: atlas/regularized/n-204.svg
   canonical: atlas/regularized/n-204.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-205.svg
+  canonical: atlas/regularized/n-205.svg
   kind: asset-file
   generator: devtools.render_overview:support_files
   producer: overview
@@ -2980,6 +3661,14 @@ urls:
   first_published: '2026-10-07'
   lastmod: '2026-10-22'
   status: live
+- path: atlas/regularized/n-21.svg
+  canonical: atlas/regularized/n-21.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
 - path: atlas/regularized/n-210.svg
   canonical: atlas/regularized/n-210.svg
   kind: asset-file
@@ -2994,6 +3683,134 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-212.svg
+  canonical: atlas/regularized/n-212.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-213.svg
+  canonical: atlas/regularized/n-213.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-214.svg
+  canonical: atlas/regularized/n-214.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-215.svg
+  canonical: atlas/regularized/n-215.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-216.svg
+  canonical: atlas/regularized/n-216.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-217.svg
+  canonical: atlas/regularized/n-217.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-218.svg
+  canonical: atlas/regularized/n-218.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-219.svg
+  canonical: atlas/regularized/n-219.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-22.svg
+  canonical: atlas/regularized/n-22.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-220.svg
+  canonical: atlas/regularized/n-220.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-221.svg
+  canonical: atlas/regularized/n-221.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-222.svg
+  canonical: atlas/regularized/n-222.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-223.svg
+  canonical: atlas/regularized/n-223.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-224.svg
+  canonical: atlas/regularized/n-224.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-225.svg
+  canonical: atlas/regularized/n-225.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-226.svg
+  canonical: atlas/regularized/n-226.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
   lastmod: '2026-10-22'
   status: live
 - path: atlas/regularized/n-227.svg
@@ -3020,8 +3837,24 @@ urls:
   first_published: '2026-10-08'
   lastmod: '2026-10-22'
   status: live
+- path: atlas/regularized/n-23.svg
+  canonical: atlas/regularized/n-23.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
 - path: atlas/regularized/n-230.svg
   canonical: atlas/regularized/n-230.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-231.svg
+  canonical: atlas/regularized/n-231.svg
   kind: asset-file
   generator: devtools.render_overview:support_files
   producer: overview
@@ -3036,8 +3869,24 @@ urls:
   first_published: '2026-10-08'
   lastmod: '2026-10-22'
   status: live
+- path: atlas/regularized/n-233.svg
+  canonical: atlas/regularized/n-233.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
 - path: atlas/regularized/n-234.svg
   canonical: atlas/regularized/n-234.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-235.svg
+  canonical: atlas/regularized/n-235.svg
   kind: asset-file
   generator: devtools.render_overview:support_files
   producer: overview
@@ -3076,6 +3925,14 @@ urls:
   first_published: '2026-10-07'
   lastmod: '2026-10-22'
   status: live
+- path: atlas/regularized/n-24.svg
+  canonical: atlas/regularized/n-24.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
 - path: atlas/regularized/n-240.svg
   canonical: atlas/regularized/n-240.svg
   kind: asset-file
@@ -3090,6 +3947,142 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-242.svg
+  canonical: atlas/regularized/n-242.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-243.svg
+  canonical: atlas/regularized/n-243.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-244.svg
+  canonical: atlas/regularized/n-244.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-245.svg
+  canonical: atlas/regularized/n-245.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-246.svg
+  canonical: atlas/regularized/n-246.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-247.svg
+  canonical: atlas/regularized/n-247.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-248.svg
+  canonical: atlas/regularized/n-248.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-249.svg
+  canonical: atlas/regularized/n-249.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-25.svg
+  canonical: atlas/regularized/n-25.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-250.svg
+  canonical: atlas/regularized/n-250.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-251.svg
+  canonical: atlas/regularized/n-251.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-252.svg
+  canonical: atlas/regularized/n-252.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-253.svg
+  canonical: atlas/regularized/n-253.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-254.svg
+  canonical: atlas/regularized/n-254.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-255.svg
+  canonical: atlas/regularized/n-255.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-256.svg
+  canonical: atlas/regularized/n-256.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-257.svg
+  canonical: atlas/regularized/n-257.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
   lastmod: '2026-10-22'
   status: live
 - path: atlas/regularized/n-258.svg
@@ -3132,6 +4125,14 @@ urls:
   first_published: '2026-10-07'
   lastmod: '2026-10-22'
   status: live
+- path: atlas/regularized/n-262.svg
+  canonical: atlas/regularized/n-262.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
 - path: atlas/regularized/n-263.svg
   canonical: atlas/regularized/n-263.svg
   kind: asset-file
@@ -3142,6 +4143,14 @@ urls:
   status: live
 - path: atlas/regularized/n-264.svg
   canonical: atlas/regularized/n-264.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-265.svg
+  canonical: atlas/regularized/n-265.svg
   kind: asset-file
   generator: devtools.render_overview:support_files
   producer: overview
@@ -3180,6 +4189,14 @@ urls:
   first_published: '2026-10-07'
   lastmod: '2026-10-22'
   status: live
+- path: atlas/regularized/n-27.svg
+  canonical: atlas/regularized/n-27.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
 - path: atlas/regularized/n-270.svg
   canonical: atlas/regularized/n-270.svg
   kind: asset-file
@@ -3212,8 +4229,160 @@ urls:
   first_published: '2026-10-07'
   lastmod: '2026-10-22'
   status: live
+- path: atlas/regularized/n-274.svg
+  canonical: atlas/regularized/n-274.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-275.svg
+  canonical: atlas/regularized/n-275.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-276.svg
+  canonical: atlas/regularized/n-276.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-277.svg
+  canonical: atlas/regularized/n-277.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-278.svg
+  canonical: atlas/regularized/n-278.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-279.svg
+  canonical: atlas/regularized/n-279.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-28.svg
+  canonical: atlas/regularized/n-28.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-280.svg
+  canonical: atlas/regularized/n-280.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-281.svg
+  canonical: atlas/regularized/n-281.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-282.svg
+  canonical: atlas/regularized/n-282.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-283.svg
+  canonical: atlas/regularized/n-283.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-284.svg
+  canonical: atlas/regularized/n-284.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-285.svg
+  canonical: atlas/regularized/n-285.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-286.svg
+  canonical: atlas/regularized/n-286.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-287.svg
+  canonical: atlas/regularized/n-287.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-288.svg
+  canonical: atlas/regularized/n-288.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-289.svg
+  canonical: atlas/regularized/n-289.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
 - path: atlas/regularized/n-29.svg
   canonical: atlas/regularized/n-29.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-290.svg
+  canonical: atlas/regularized/n-290.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-291.svg
+  canonical: atlas/regularized/n-291.svg
   kind: asset-file
   generator: devtools.render_overview:support_files
   producer: overview
@@ -3236,6 +4405,14 @@ urls:
   first_published: '2026-10-08'
   lastmod: '2026-10-22'
   status: live
+- path: atlas/regularized/n-294.svg
+  canonical: atlas/regularized/n-294.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
 - path: atlas/regularized/n-295.svg
   canonical: atlas/regularized/n-295.svg
   kind: asset-file
@@ -3244,12 +4421,60 @@ urls:
   first_published: '2026-10-07'
   lastmod: '2026-10-22'
   status: live
+- path: atlas/regularized/n-296.svg
+  canonical: atlas/regularized/n-296.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
 - path: atlas/regularized/n-297.svg
   canonical: atlas/regularized/n-297.svg
   kind: asset-file
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-298.svg
+  canonical: atlas/regularized/n-298.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-299.svg
+  canonical: atlas/regularized/n-299.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-3.svg
+  canonical: atlas/regularized/n-3.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-30.svg
+  canonical: atlas/regularized/n-30.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-300.svg
+  canonical: atlas/regularized/n-300.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
   lastmod: '2026-10-22'
   status: live
 - path: atlas/regularized/n-301.svg
@@ -3316,8 +4541,216 @@ urls:
   first_published: '2026-10-08'
   lastmod: '2026-10-22'
   status: live
+- path: atlas/regularized/n-309.svg
+  canonical: atlas/regularized/n-309.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-31.svg
+  canonical: atlas/regularized/n-31.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-310.svg
+  canonical: atlas/regularized/n-310.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-311.svg
+  canonical: atlas/regularized/n-311.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-312.svg
+  canonical: atlas/regularized/n-312.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-313.svg
+  canonical: atlas/regularized/n-313.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-314.svg
+  canonical: atlas/regularized/n-314.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-315.svg
+  canonical: atlas/regularized/n-315.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-316.svg
+  canonical: atlas/regularized/n-316.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-317.svg
+  canonical: atlas/regularized/n-317.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-318.svg
+  canonical: atlas/regularized/n-318.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-319.svg
+  canonical: atlas/regularized/n-319.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-32.svg
+  canonical: atlas/regularized/n-32.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-320.svg
+  canonical: atlas/regularized/n-320.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-321.svg
+  canonical: atlas/regularized/n-321.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-322.svg
+  canonical: atlas/regularized/n-322.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-323.svg
+  canonical: atlas/regularized/n-323.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-324.svg
+  canonical: atlas/regularized/n-324.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-33.svg
+  canonical: atlas/regularized/n-33.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-34.svg
+  canonical: atlas/regularized/n-34.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-35.svg
+  canonical: atlas/regularized/n-35.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-36.svg
+  canonical: atlas/regularized/n-36.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
 - path: atlas/regularized/n-37.svg
   canonical: atlas/regularized/n-37.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-38.svg
+  canonical: atlas/regularized/n-38.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-39.svg
+  canonical: atlas/regularized/n-39.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-4.svg
+  canonical: atlas/regularized/n-4.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-40.svg
+  canonical: atlas/regularized/n-40.svg
   kind: asset-file
   generator: devtools.render_overview:support_files
   producer: overview
@@ -3332,8 +4765,104 @@ urls:
   first_published: '2026-10-08'
   lastmod: '2026-10-22'
   status: live
+- path: atlas/regularized/n-42.svg
+  canonical: atlas/regularized/n-42.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-43.svg
+  canonical: atlas/regularized/n-43.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-44.svg
+  canonical: atlas/regularized/n-44.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-45.svg
+  canonical: atlas/regularized/n-45.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-46.svg
+  canonical: atlas/regularized/n-46.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-47.svg
+  canonical: atlas/regularized/n-47.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-48.svg
+  canonical: atlas/regularized/n-48.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-49.svg
+  canonical: atlas/regularized/n-49.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-5.svg
+  canonical: atlas/regularized/n-5.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
 - path: atlas/regularized/n-50.svg
   canonical: atlas/regularized/n-50.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-51.svg
+  canonical: atlas/regularized/n-51.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-52.svg
+  canonical: atlas/regularized/n-52.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-53.svg
+  canonical: atlas/regularized/n-53.svg
   kind: asset-file
   generator: devtools.render_overview:support_files
   producer: overview
@@ -3348,8 +4877,112 @@ urls:
   first_published: '2026-10-08'
   lastmod: '2026-10-22'
   status: live
+- path: atlas/regularized/n-55.svg
+  canonical: atlas/regularized/n-55.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-56.svg
+  canonical: atlas/regularized/n-56.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-57.svg
+  canonical: atlas/regularized/n-57.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-58.svg
+  canonical: atlas/regularized/n-58.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-59.svg
+  canonical: atlas/regularized/n-59.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-6.svg
+  canonical: atlas/regularized/n-6.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-60.svg
+  canonical: atlas/regularized/n-60.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-61.svg
+  canonical: atlas/regularized/n-61.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-62.svg
+  canonical: atlas/regularized/n-62.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-63.svg
+  canonical: atlas/regularized/n-63.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-64.svg
+  canonical: atlas/regularized/n-64.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-65.svg
+  canonical: atlas/regularized/n-65.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
 - path: atlas/regularized/n-66.svg
   canonical: atlas/regularized/n-66.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-67.svg
+  canonical: atlas/regularized/n-67.svg
   kind: asset-file
   generator: devtools.render_overview:support_files
   producer: overview
@@ -3364,6 +4997,22 @@ urls:
   first_published: '2026-10-07'
   lastmod: '2026-10-22'
   status: live
+- path: atlas/regularized/n-69.svg
+  canonical: atlas/regularized/n-69.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-7.svg
+  canonical: atlas/regularized/n-7.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
 - path: atlas/regularized/n-70.svg
   canonical: atlas/regularized/n-70.svg
   kind: asset-file
@@ -3374,6 +5023,102 @@ urls:
   status: live
 - path: atlas/regularized/n-71.svg
   canonical: atlas/regularized/n-71.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-72.svg
+  canonical: atlas/regularized/n-72.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-73.svg
+  canonical: atlas/regularized/n-73.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-74.svg
+  canonical: atlas/regularized/n-74.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-75.svg
+  canonical: atlas/regularized/n-75.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-76.svg
+  canonical: atlas/regularized/n-76.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-77.svg
+  canonical: atlas/regularized/n-77.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-78.svg
+  canonical: atlas/regularized/n-78.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-79.svg
+  canonical: atlas/regularized/n-79.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-8.svg
+  canonical: atlas/regularized/n-8.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-80.svg
+  canonical: atlas/regularized/n-80.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-81.svg
+  canonical: atlas/regularized/n-81.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-82.svg
+  canonical: atlas/regularized/n-82.svg
   kind: asset-file
   generator: devtools.render_overview:support_files
   producer: overview
@@ -3426,6 +5171,102 @@ urls:
   generator: devtools.render_overview:support_files
   producer: overview
   first_published: '2026-10-07'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-89.svg
+  canonical: atlas/regularized/n-89.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-9.svg
+  canonical: atlas/regularized/n-9.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-90.svg
+  canonical: atlas/regularized/n-90.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-91.svg
+  canonical: atlas/regularized/n-91.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-92.svg
+  canonical: atlas/regularized/n-92.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-93.svg
+  canonical: atlas/regularized/n-93.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-94.svg
+  canonical: atlas/regularized/n-94.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-95.svg
+  canonical: atlas/regularized/n-95.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-96.svg
+  canonical: atlas/regularized/n-96.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-97.svg
+  canonical: atlas/regularized/n-97.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-98.svg
+  canonical: atlas/regularized/n-98.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
+- path: atlas/regularized/n-99.svg
+  canonical: atlas/regularized/n-99.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
   lastmod: '2026-10-22'
   status: live
 - path: atlas/trump11-overview.svg
@@ -3490,7 +5331,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-16'
+  lastmod: '2026-10-23'
   status: live
 - path: cases/103.html
   canonical: cases/103.html
@@ -3514,7 +5355,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-17'
+  lastmod: '2026-10-23'
   status: live
 - path: cases/106.html
   canonical: cases/106.html
@@ -3674,7 +5515,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-16'
+  lastmod: '2026-10-23'
   status: live
 - path: cases/124.html
   canonical: cases/124.html
@@ -3938,7 +5779,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-15'
+  lastmod: '2026-10-23'
   status: live
 - path: cases/154.html
   canonical: cases/154.html
@@ -4258,7 +6099,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-16'
+  lastmod: '2026-10-23'
   status: live
 - path: cases/190.html
   canonical: cases/190.html
@@ -4346,7 +6187,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-07'
+  lastmod: '2026-10-24'
   status: live
 - path: cases/20.html
   canonical: cases/20.html
@@ -4354,7 +6195,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-07'
+  lastmod: '2026-10-23'
   status: live
 - path: cases/200.html
   canonical: cases/200.html
@@ -4394,7 +6235,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-22'
+  lastmod: '2026-10-24'
   status: live
 - path: cases/205.html
   canonical: cases/205.html
@@ -4418,7 +6259,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-15'
+  lastmod: '2026-10-23'
   status: live
 - path: cases/208.html
   canonical: cases/208.html
@@ -4442,7 +6283,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-07'
+  lastmod: '2026-10-23'
   status: live
 - path: cases/210.html
   canonical: cases/210.html
@@ -4458,7 +6299,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-16'
+  lastmod: '2026-10-23'
   status: live
 - path: cases/212.html
   canonical: cases/212.html
@@ -4722,7 +6563,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-15'
+  lastmod: '2026-10-23'
   status: live
 - path: cases/242.html
   canonical: cases/242.html
@@ -4866,7 +6707,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-16'
+  lastmod: '2026-10-23'
   status: live
 - path: cases/259.html
   canonical: cases/259.html
@@ -4874,7 +6715,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-16'
+  lastmod: '2026-10-23'
   status: live
 - path: cases/26.html
   canonical: cases/26.html
@@ -4882,7 +6723,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-06'
+  lastmod: '2026-10-23'
   status: live
 - path: cases/260.html
   canonical: cases/260.html
@@ -4954,7 +6795,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-17'
+  lastmod: '2026-10-25'
   status: live
 - path: cases/269.html
   canonical: cases/269.html
@@ -4970,7 +6811,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-06'
+  lastmod: '2026-10-23'
   status: live
 - path: cases/270.html
   canonical: cases/270.html
@@ -5002,7 +6843,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-17'
+  lastmod: '2026-10-23'
   status: live
 - path: cases/274.html
   canonical: cases/274.html
@@ -5194,7 +7035,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-16'
+  lastmod: '2026-10-23'
   status: live
 - path: cases/296.html
   canonical: cases/296.html
@@ -5234,7 +7075,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-07'
+  lastmod: '2026-10-24'
   status: live
 - path: cases/30.html
   canonical: cases/30.html
@@ -5266,7 +7107,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-16'
+  lastmod: '2026-10-23'
   status: live
 - path: cases/303.html
   canonical: cases/303.html
@@ -5274,7 +7115,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-16'
+  lastmod: '2026-10-25'
   status: live
 - path: cases/304.html
   canonical: cases/304.html
@@ -5282,7 +7123,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-16'
+  lastmod: '2026-10-25'
   status: live
 - path: cases/305.html
   canonical: cases/305.html
@@ -5306,7 +7147,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-17'
+  lastmod: '2026-10-23'
   status: live
 - path: cases/308.html
   canonical: cases/308.html
@@ -5330,7 +7171,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-07'
+  lastmod: '2026-10-23'
   status: live
 - path: cases/310.html
   canonical: cases/310.html
@@ -5522,7 +7363,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-07'
+  lastmod: '2026-10-24'
   status: live
 - path: cases/40.html
   canonical: cases/40.html
@@ -5610,7 +7451,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-03'
+  lastmod: '2026-10-24'
   status: live
 - path: cases/50.html
   canonical: cases/50.html
@@ -5690,7 +7531,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-23'
   status: live
 - path: cases/6.html
   canonical: cases/6.html
@@ -5794,7 +7635,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-23'
   status: live
 - path: cases/71.html
   canonical: cases/71.html
@@ -6445,6 +8286,23 @@ urls:
   first_published: '2026-09-29'
   lastmod: '2026-10-22'
   status: live
+- path: documentation.html
+  canonical: documentation.html
+  kind: page
+  generator: devtools.render_overview:render_all
+  producer: overview
+  first_published: '2026-10-22'
+  lastmod: '2026-10-22'
+  status: live
+- path: downloads.html
+  canonical: posters.html
+  kind: forwarder
+  generator: devtools.render_overview:forwarder_pages
+  producer: overview
+  first_published: '2026-10-22'
+  lastmod: '2026-10-22'
+  status: forwarded
+  target: posters.html
 - path: epistemics.html
   canonical: epistemics.html
   kind: page
@@ -6479,14 +8337,13 @@ urls:
   lastmod: '2026-10-22'
   status: live
 - path: frontier.html
-  canonical: atlas.html
-  kind: forwarder
-  generator: devtools.render_overview:forwarder_pages
+  canonical: frontier.html
+  kind: page
+  generator: devtools.render_overview:render_all
   producer: overview
   first_published: '2026-09-29'
   lastmod: '2026-10-22'
-  status: forwarded
-  target: atlas.html
+  status: live
 - path: index.html
   canonical: ''
   kind: page
@@ -6611,7 +8468,7 @@ urls:
   generator: devtools.render_n11_lower_bounds_explainer:main
   producer: paper:n11-lower-bounds-explainer
   first_published: '2026-09-05'
-  lastmod: '2026-10-21'
+  lastmod: '2026-10-22'
   status: live
 - path: papers/n11-lower-bounds-explainer.md
   canonical: papers/n11-lower-bounds-explainer.md
@@ -6619,7 +8476,7 @@ urls:
   generator: devtools.render_n11_lower_bounds_explainer:main
   producer: paper:n11-lower-bounds-explainer
   first_published: '2026-09-05'
-  lastmod: '2026-10-21'
+  lastmod: '2026-10-22'
   status: live
 - path: papers/n11-lower-bounds-explainer.pdf
   canonical: papers/n11-lower-bounds-explainer.pdf
@@ -6627,7 +8484,7 @@ urls:
   generator: devtools.render_n11_lower_bounds_explainer:main
   producer: paper:n11-lower-bounds-explainer
   first_published: '2026-09-05'
-  lastmod: '2026-10-21'
+  lastmod: '2026-10-22'
   status: live
 - path: papers/n11-optimality-review.html
   canonical: papers/n11-optimality-review.html
@@ -6701,6 +8558,14 @@ urls:
   first_published: '2026-10-08'
   lastmod: '2026-10-17'
   status: live
+- path: posters.html
+  canonical: posters.html
+  kind: page
+  generator: devtools.render_overview:render_all
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: live
 - path: profiles/ahyangyi.html
   canonical: profiles/ahyangyi.html
   kind: page
@@ -6709,8 +8574,24 @@ urls:
   first_published: '2026-10-13'
   lastmod: '2026-10-22'
   status: live
+- path: profiles/alexchilton.html
+  canonical: profiles/alexchilton.html
+  kind: page
+  generator: devtools.render_contributors:contributor_pages
+  producer: overview
+  first_published: '2026-10-13'
+  lastmod: '2026-10-22'
+  status: live
 - path: profiles/allen-chang.html
   canonical: profiles/allen-chang.html
+  kind: page
+  generator: devtools.render_contributors:contributor_pages
+  producer: overview
+  first_published: '2026-10-13'
+  lastmod: '2026-10-22'
+  status: live
+- path: profiles/amund-kristiansen.html
+  canonical: profiles/amund-kristiansen.html
   kind: page
   generator: devtools.render_contributors:contributor_pages
   producer: overview
@@ -6735,6 +8616,14 @@ urls:
   status: live
 - path: profiles/anna-slivkova.html
   canonical: profiles/anna-slivkova.html
+  kind: page
+  generator: devtools.render_contributors:contributor_pages
+  producer: overview
+  first_published: '2026-10-13'
+  lastmod: '2026-10-22'
+  status: live
+- path: profiles/aqibrazadev.html
+  canonical: profiles/aqibrazadev.html
   kind: page
   generator: devtools.render_contributors:contributor_pages
   producer: overview
@@ -7013,6 +8902,22 @@ urls:
   first_published: '2026-10-13'
   lastmod: '2026-10-22'
   status: live
+- path: profiles/kirill-tymchishin.html
+  canonical: profiles/kirill-tymchishin.html
+  kind: page
+  generator: devtools.render_contributors:contributor_pages
+  producer: overview
+  first_published: '2026-10-13'
+  lastmod: '2026-10-22'
+  status: live
+- path: profiles/kyleluecke.html
+  canonical: profiles/kyleluecke.html
+  kind: page
+  generator: devtools.render_contributors:contributor_pages
+  producer: overview
+  first_published: '2026-10-13'
+  lastmod: '2026-10-22'
+  status: live
 - path: profiles/magnus-thulin.html
   canonical: profiles/magnus-thulin.html
   kind: page
@@ -7269,6 +9174,14 @@ urls:
   first_published: '2026-10-13'
   lastmod: '2026-10-22'
   status: live
+- path: profiles/vladislav-lavrentev.html
+  canonical: profiles/vladislav-lavrentev.html
+  kind: page
+  generator: devtools.render_contributors:contributor_pages
+  producer: overview
+  first_published: '2026-10-13'
+  lastmod: '2026-10-22'
+  status: live
 - path: profiles/walter-stromquist.html
   canonical: profiles/walter-stromquist.html
   kind: page
@@ -7315,6 +9228,31 @@ urls:
   generator: devtools.render_overview:render_all
   producer: overview
   first_published: '2026-09-29'
+  lastmod: '2026-10-22'
+  status: live
+- path: recent-results.html
+  canonical: results.html
+  kind: forwarder
+  generator: devtools.render_overview:forwarder_pages
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-22'
+  status: forwarded
+  target: results.html
+- path: report.html
+  canonical: report.html
+  kind: page
+  generator: devtools.render_overview:render_all
+  producer: overview
+  first_published: '2026-10-22'
+  lastmod: '2026-10-22'
+  status: live
+- path: resources.html
+  canonical: resources.html
+  kind: page
+  generator: devtools.render_overview:render_all
+  producer: overview
+  first_published: '2026-10-08'
   lastmod: '2026-10-22'
   status: live
 - path: result/t-001.html
@@ -13794,7 +15732,7 @@ urls:
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-10'
-  lastmod: '2026-10-10'
+  lastmod: '2026-10-23'
   status: live
   identity:
     kind: lower-bound
@@ -13812,6 +15750,7 @@ urls:
     - E-n040-guzhou-continuous-pose-kernel-replay
     - E-n040-guzhou-continuous-pose-finite-audit
     - E-n040-guzhou-continuous-pose-crate-axis
+    - E-n040-wand125-sqverify-continuous-6715-report
     artifacts:
     - packing/resources/web/guzhou-n40-continuous-pose-2026-10-10/README.md
     - packing/resources/web/guzhou-n40-continuous-pose-2026-10-10/source/PROOF.md
@@ -13829,6 +15768,47 @@ urls:
     - packing/resources/web/wand125-rectangle-certificates-2026-10-01/wand125-rectangles/certificates/rect_n40_L67/certified_candidate.json.gz
     - packing/devtools/audit_continuous_pose.py
     - docs/project/reviews/review-2026-10-10-guzhou-n40-continuous-pose-bound.md
+    - docs/project/reviews/review-2026-10-23-wand125-sqverify-continuous-soundness.md
+    - packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/README.md
+  amendments:
+  - date: '2026-10-23'
+    reason: The 23 October soundness review of wand125's sqverify_continuous, a second route for this
+      result's continuous cover, is added to its reviews and artifacts, with the source's reported
+      run of that route as a reported evidence entry; the bound, scope, attribution and rungs are
+      unchanged.
+    previous:
+      kind: lower-bound
+      scope:
+        n_values:
+        - 40
+      established: null
+      attribution:
+        source_keys:
+        - '[Guzhou0806 n40 continuous pose 2026-10-10]'
+        published: '2026-10-10'
+      builds_on: null
+      evidence:
+      - E-n040-guzhou-continuous-pose-report
+      - E-n040-guzhou-continuous-pose-kernel-replay
+      - E-n040-guzhou-continuous-pose-finite-audit
+      - E-n040-guzhou-continuous-pose-crate-axis
+      artifacts:
+      - packing/resources/web/guzhou-n40-continuous-pose-2026-10-10/README.md
+      - packing/resources/web/guzhou-n40-continuous-pose-2026-10-10/source/PROOF.md
+      - packing/resources/web/guzhou-n40-continuous-pose-2026-10-10/source/certificate/parameters.json
+      - packing/resources/web/guzhou-n40-continuous-pose-2026-10-10/source/verifier/continuous_pose.cpp
+      - packing/resources/web/guzhou-n40-continuous-pose-2026-10-10/source/verifier/axis_integer_grid.cpp
+      - packing/resources/web/guzhou-n40-continuous-pose-2026-10-10/source/results/verification.json
+      - packing/resources/web/guzhou-n40-continuous-pose-2026-10-10/release-ci/results/verification.json
+      - packing/resources/web/guzhou-n40-continuous-pose-2026-10-10/receipts/builds.json
+      - packing/resources/web/guzhou-n40-continuous-pose-2026-10-10/receipts/axis-run.json
+      - packing/resources/web/guzhou-n40-continuous-pose-2026-10-10/receipts/slabs.jsonl.gz
+      - packing/resources/web/guzhou-n40-continuous-pose-2026-10-10/receipts/crate-runs.json.gz
+      - packing/resources/web/guzhou-n40-continuous-pose-2026-10-10/receipts/replay-check.json
+      - packing/resources/web/guzhou-n40-continuous-pose-2026-10-10/receipts/finite-audit.json
+      - packing/resources/web/wand125-rectangle-certificates-2026-10-01/wand125-rectangles/certificates/rect_n40_L67/certified_candidate.json.gz
+      - packing/devtools/audit_continuous_pose.py
+      - docs/project/reviews/review-2026-10-10-guzhou-n40-continuous-pose-bound.md
 - path: result/t-146.html
   canonical: result/t-146.html
   kind: result
@@ -14396,7 +16376,7 @@ urls:
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-12'
-  lastmod: '2026-10-12'
+  lastmod: '2026-10-23'
   status: live
   identity:
     kind: lower-bound
@@ -14414,6 +16394,7 @@ urls:
     - E-n040-guzhou-new-supports-kernel-replay
     - E-n040-guzhou-new-supports-finite-audit
     - E-n040-guzhou-new-supports-crate-axis
+    - E-n040-wand125-sqverify-continuous-6718-report
     artifacts:
     - packing/resources/web/guzhou-n40-new-supports-2026-10-11/README.md
     - packing/resources/web/guzhou-n40-new-supports-2026-10-11/source/PROOF.md
@@ -14435,6 +16416,51 @@ urls:
     - packing/devtools/audit_n40_new_supports.py
     - packing/devtools/audit_continuous_pose.py
     - docs/project/reviews/review-2026-10-12-n40-new-supports-6718.md
+    - docs/project/reviews/review-2026-10-23-wand125-sqverify-continuous-soundness.md
+    - packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/README.md
+  amendments:
+  - date: '2026-10-23'
+    reason: The 23 October soundness review of wand125's sqverify_continuous, a second route for this
+      result's continuous cover, is added to its reviews and artifacts, with the source's reported
+      run of that route as a reported evidence entry; the bound, scope, attribution and rungs are
+      unchanged.
+    previous:
+      kind: lower-bound
+      scope:
+        n_values:
+        - 40
+      established: null
+      attribution:
+        source_keys:
+        - '[Guzhou0806 n40 new supports 2026-10-11]'
+        published: '2026-10-11'
+      builds_on: null
+      evidence:
+      - E-n040-guzhou-new-supports-report
+      - E-n040-guzhou-new-supports-kernel-replay
+      - E-n040-guzhou-new-supports-finite-audit
+      - E-n040-guzhou-new-supports-crate-axis
+      artifacts:
+      - packing/resources/web/guzhou-n40-new-supports-2026-10-11/README.md
+      - packing/resources/web/guzhou-n40-new-supports-2026-10-11/source/PROOF.md
+      - packing/resources/web/guzhou-n40-new-supports-2026-10-11/source/certificate/certified_candidate.json.gz
+      - packing/resources/web/guzhou-n40-new-supports-2026-10-11/source/certificate/parameters.json
+      - packing/resources/web/guzhou-n40-new-supports-2026-10-11/source/verifier/continuous_pose.cpp
+      - packing/resources/web/guzhou-n40-new-supports-2026-10-11/source/verifier/axis_integer_grid.cpp
+      - packing/resources/web/guzhou-n40-new-supports-2026-10-11/source/results/verification.json
+      - packing/resources/web/guzhou-n40-new-supports-2026-10-11/release-ci/results/verification.json
+      - packing/resources/web/guzhou-n40-new-supports-2026-10-11/receipts/finite-audit.json
+      - packing/resources/web/guzhou-n40-new-supports-2026-10-11/receipts/axis-stage.json
+      - packing/resources/web/guzhou-n40-new-supports-2026-10-11/receipts/axis-check.json
+      - packing/resources/web/guzhou-n40-new-supports-2026-10-11/receipts/builds.json
+      - packing/resources/web/guzhou-n40-new-supports-2026-10-11/receipts/axis-run.json
+      - packing/resources/web/guzhou-n40-new-supports-2026-10-11/receipts/slabs.jsonl.gz
+      - packing/resources/web/guzhou-n40-new-supports-2026-10-11/receipts/crate-runs.json.gz
+      - packing/resources/web/guzhou-n40-new-supports-2026-10-11/receipts/duals.json
+      - packing/resources/web/guzhou-n40-new-supports-2026-10-11/receipts/replay-check.json
+      - packing/devtools/audit_n40_new_supports.py
+      - packing/devtools/audit_continuous_pose.py
+      - docs/project/reviews/review-2026-10-12-n40-new-supports-6718.md
 - path: result/t-158.html
   canonical: result/t-158.html
   kind: result
@@ -14661,7 +16687,7 @@ urls:
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-14'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-24'
   status: live
   identity:
     kind: upper-bound
@@ -14680,7 +16706,16 @@ urls:
     evidence:
     - E-fang-excess-theorem-report
     - E-fang-excess-theorem-exact-feasibility
+    - E-fang-excess-pieces-exact-replay
+    - E-fang-excess-note-proof
+    - E-fang-excess-lean-report
     artifacts:
+    - packing/resources/web/fang-excess-note-2026-10-19/README.md
+    - packing/resources/web/fang-excess-note-2026-10-19/zenodo/fang-2026-n2-n-1.pdf
+    - packing/resources/web/fang-excess-note-2026-10-19/source/note/fang-2026-n2-n-1.md
+    - packing/resources/web/fang-excess-lean-2026-10-18/README.md
+    - packing/resources/web/fang-excess-lean-2026-10-18/source/Sqlean/Main.lean
+    - packing/resources/web/fang-excess-lean-2026-10-18/source/Sqlean/Theorem2.lean
     - packing/resources/web/fang-excess-theorem-2026-10-13/README.md
     - packing/resources/web/fang-excess-theorem-2026-10-13/acquisition/claims.json
     - packing/resources/web/fang-excess-theorem-2026-10-13/source/theorem/n015_F1.cert
@@ -14690,9 +16725,47 @@ urls:
     - packing/resources/web/fang-excess-theorem-2026-10-13/receipts/exact-certification.json.xz
     - packing/resources/web/fang-excess-theorem-2026-10-13/source/tools/glue.py
     - packing/resources/web/fang-excess-theorem-2026-10-13/receipts/inventory-and-deficiency.json
+    - packing/resources/web/fang-excess-theorem-2026-10-13/receipts/pieces-exact-check.log
+    - packing/resources/web/fang-excess-theorem-2026-10-13/review/programs/rectangle_check.py
     - packing/cases/asymptotic/fang_excess_inventory.py
     - docs/project/reviews/review-2026-10-14-fang-excess-theorem-and-direct-certificates.md
     - packing/devtools/upper_bound_reports.py
+  amendments:
+  - date: '2026-10-24'
+    reason: Cite Kevin Fang's published note, draft v0.9 (E-fang-excess-note-proof), and his Lean
+      proof (E-fang-excess-lean-report), with their packets, and the replay here of the note's 18
+      pieces that discharges its finite premise (E-fang-excess-pieces-exact-replay), with its receipt
+      and checker, beside the rung; scope, attribution and the stated bounds are unchanged.
+    previous:
+      kind: upper-bound
+      scope:
+        n_values:
+        - 211
+        - 241
+        - 273
+        - 307
+      established: null
+      attribution:
+        source_keys:
+        - '[Fang excess theorem 2026-10-13]'
+        published: '2026-10-12'
+      builds_on: null
+      evidence:
+      - E-fang-excess-theorem-report
+      - E-fang-excess-theorem-exact-feasibility
+      artifacts:
+      - packing/resources/web/fang-excess-theorem-2026-10-13/README.md
+      - packing/resources/web/fang-excess-theorem-2026-10-13/acquisition/claims.json
+      - packing/resources/web/fang-excess-theorem-2026-10-13/source/theorem/n015_F1.cert
+      - packing/resources/web/fang-excess-theorem-2026-10-13/source/theorem/n016_F1.cert
+      - packing/resources/web/fang-excess-theorem-2026-10-13/source/theorem/n017_F1.cert
+      - packing/resources/web/fang-excess-theorem-2026-10-13/source/theorem/n018_F1.cert
+      - packing/resources/web/fang-excess-theorem-2026-10-13/receipts/exact-certification.json.xz
+      - packing/resources/web/fang-excess-theorem-2026-10-13/source/tools/glue.py
+      - packing/resources/web/fang-excess-theorem-2026-10-13/receipts/inventory-and-deficiency.json
+      - packing/cases/asymptotic/fang_excess_inventory.py
+      - docs/project/reviews/review-2026-10-14-fang-excess-theorem-and-direct-certificates.md
+      - packing/devtools/upper_bound_reports.py
 - path: result/t-164.html
   canonical: result/t-164.html
   kind: result
@@ -16985,7 +19058,7 @@ urls:
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-15'
-  lastmod: '2026-10-15'
+  lastmod: '2026-10-23'
   status: live
   identity:
     kind: lower-bound
@@ -17006,6 +19079,32 @@ urls:
     - packing/resources/web/wand125-continuous-n28-2026-10-15/square-packing/problems/square-lower-bounds/certificates/continuous_n28_L5745/bundle.json
     - packing/devtools/continuous_pose_followup.py
     - packing/devtools/audit_continuous_pose.py
+    - docs/project/reviews/review-2026-10-23-wand125-sqverify-continuous-soundness.md
+    - packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/README.md
+  amendments:
+  - date: '2026-10-23'
+    reason: The 23 October soundness review of the first program, sqverify_continuous, read this certificate
+      and is added to the result's reviews and artifacts; the result rises from V0/C0 to V0/C1 on
+      that read, and the bound, scope and attribution are unchanged.
+    previous:
+      kind: lower-bound
+      scope:
+        n_values:
+        - 28
+      established: null
+      attribution:
+        source_keys:
+        - '[wand125 continuous n28 2026-10-15]'
+        published: '2026-10-15'
+      builds_on: null
+      evidence:
+      - E-wand125-continuous-n28-5745-report
+      artifacts:
+      - packing/resources/web/wand125-continuous-n28-2026-10-15/README.md
+      - packing/resources/web/wand125-continuous-n28-2026-10-15/acquisition/sources.json
+      - packing/resources/web/wand125-continuous-n28-2026-10-15/square-packing/problems/square-lower-bounds/certificates/continuous_n28_L5745/bundle.json
+      - packing/devtools/continuous_pose_followup.py
+      - packing/devtools/audit_continuous_pose.py
 - path: result/t-193.html
   canonical: result/t-193.html
   kind: result
@@ -17253,7 +19352,7 @@ urls:
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-18'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-23'
   status: live
   identity:
     kind: upper-bound
@@ -17269,6 +19368,7 @@ urls:
     evidence:
     - E-evand-669-n155-report
     - E-evand-669-n155-exact-feasibility
+    - E-evand-669-n155-source-checker-replay
     artifacts:
     - packing/resources/web/evand-n155-explorer-2026-10-17/README.md
     - packing/resources/web/evand-n155-explorer-2026-10-17/source/search/packer/candidates/s155_ex2.cert
@@ -17298,13 +19398,36 @@ urls:
       - packing/resources/web/evand-n155-explorer-2026-10-17/source/search/packer/candidates/s155_ex2.cert
       - packing/resources/web/evand-n155-explorer-2026-10-17/source/search/packer/candidates/s155_ex2_regularized.cert
       - packing/campaign/issue-intake/upper-bounds-20261018/README.md
+  - date: '2026-10-23'
+    reason: 'The source''s own checkers, verify_cert.py and verify_cert2.py, ran here unchanged on
+      23 October 2026 (review A2 of #747): the result cites that replay as same-implementation evidence
+      (E-evand-669-n155-source-checker-replay); the bound, scope, attribution and rungs are unchanged.'
+    previous:
+      kind: upper-bound
+      scope:
+        n_values:
+        - 155
+      established: null
+      attribution:
+        source_keys:
+        - '[Daniel n155 explorer 2026-10-17]'
+        published: '2026-10-17'
+      builds_on: null
+      evidence:
+      - E-evand-669-n155-report
+      - E-evand-669-n155-exact-feasibility
+      artifacts:
+      - packing/resources/web/evand-n155-explorer-2026-10-17/README.md
+      - packing/resources/web/evand-n155-explorer-2026-10-17/source/search/packer/candidates/s155_ex2.cert
+      - packing/resources/web/evand-n155-explorer-2026-10-17/source/search/packer/candidates/s155_ex2_regularized.cert
+      - docs/project/reviews/review-2026-10-19-upper-bound-imports-659-664-669-674.md
 - path: result/t-198.html
   canonical: result/t-198.html
   kind: result
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-18'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-23'
   status: live
   identity:
     kind: upper-bound
@@ -17320,6 +19443,7 @@ urls:
     evidence:
     - E-evand-674-n229-opening-report
     - E-evand-674-n229-opening-exact-feasibility
+    - E-evand-674-n229-opening-source-checker-replay
     artifacts:
     - packing/resources/web/evand-n229-dilation-2026-10-17/README.md
     - packing/resources/web/evand-n229-dilation-2026-10-17/source/search/packer/candidates/s229.cert
@@ -17347,13 +19471,36 @@ urls:
       - packing/resources/web/evand-n229-dilation-2026-10-17/README.md
       - packing/resources/web/evand-n229-dilation-2026-10-17/source/search/packer/candidates/s229.cert
       - packing/campaign/issue-intake/upper-bounds-20261018/README.md
+  - date: '2026-10-23'
+    reason: 'The source''s own checkers, verify_cert.py and verify_cert2.py, ran here unchanged on
+      23 October 2026 (review A2 of #747): the result cites that replay as same-implementation evidence
+      (E-evand-674-n229-opening-source-checker-replay); the bound, scope, attribution and rungs are
+      unchanged.'
+    previous:
+      kind: upper-bound
+      scope:
+        n_values:
+        - 229
+      established: null
+      attribution:
+        source_keys:
+        - '[Daniel n229 dilation 2026-10-17]'
+        published: '2026-10-17'
+      builds_on: null
+      evidence:
+      - E-evand-674-n229-opening-report
+      - E-evand-674-n229-opening-exact-feasibility
+      artifacts:
+      - packing/resources/web/evand-n229-dilation-2026-10-17/README.md
+      - packing/resources/web/evand-n229-dilation-2026-10-17/source/search/packer/candidates/s229.cert
+      - docs/project/reviews/review-2026-10-19-upper-bound-imports-659-664-669-674.md
 - path: result/t-199.html
   canonical: result/t-199.html
   kind: result
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-18'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-23'
   status: live
   identity:
     kind: upper-bound
@@ -17369,6 +19516,7 @@ urls:
     evidence:
     - E-evand-674-n229-update-report
     - E-evand-674-n229-update-exact-feasibility
+    - E-evand-674-n229-update-source-checker-replay
     artifacts:
     - packing/resources/web/evand-n229-dilation-update-2026-10-18/README.md
     - packing/resources/web/evand-n229-dilation-update-2026-10-18/source/search/packer/candidates/s229_v2.cert
@@ -17396,6 +19544,29 @@ urls:
       - packing/resources/web/evand-n229-dilation-update-2026-10-18/README.md
       - packing/resources/web/evand-n229-dilation-update-2026-10-18/source/search/packer/candidates/s229_v2.cert
       - packing/campaign/issue-intake/upper-bounds-20261018/README.md
+  - date: '2026-10-23'
+    reason: 'The source''s own checkers, verify_cert.py and verify_cert2.py, ran here unchanged on
+      23 October 2026 (review A2 of #747): the result cites that replay as same-implementation evidence
+      (E-evand-674-n229-update-source-checker-replay); the bound, scope, attribution and rungs are
+      unchanged.'
+    previous:
+      kind: upper-bound
+      scope:
+        n_values:
+        - 229
+      established: null
+      attribution:
+        source_keys:
+        - '[Daniel n229 dilation update 2026-10-18]'
+        published: '2026-10-18'
+      builds_on: null
+      evidence:
+      - E-evand-674-n229-update-report
+      - E-evand-674-n229-update-exact-feasibility
+      artifacts:
+      - packing/resources/web/evand-n229-dilation-update-2026-10-18/README.md
+      - packing/resources/web/evand-n229-dilation-update-2026-10-18/source/search/packer/candidates/s229_v2.cert
+      - docs/project/reviews/review-2026-10-19-upper-bound-imports-659-664-669-674.md
 - path: result/t-200.html
   canonical: result/t-200.html
   kind: result
@@ -18374,7 +20545,7 @@ urls:
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-22'
-  lastmod: '2026-10-22'
+  lastmod: '2026-10-24'
   status: live
   identity:
     kind: upper-bound
@@ -18389,21 +20560,83 @@ urls:
     builds_on: null
     evidence:
     - E-couzo-670-certificate-report
+    - E-couzo-670-exact-feasibility
+    - E-couzo-670-review-exact-feasibility
     artifacts:
     - packing/resources/web/couzo-issue670-2026-10-17/README.md
     - packing/resources/web/couzo-issue670-2026-10-17/acquisition/claims.json
     - packing/resources/web/couzo-issue670-2026-10-17/source/certificates/n204.cert
     - packing/resources/web/couzo-issue670-2026-10-17/receipts/exact-certification.json.xz
+    - packing/resources/web/couzo-issue670-2026-10-17/measure/seed-identity.json
     - packing/resources/web/couzo-issue672-2026-10-17/measure/identity.json
     - packing/campaign/issue-intake/upper-bounds-20261018/README.md
     - packing/devtools/upper_bound_reports.py
+    - docs/project/reviews/review-2026-10-22-couzo-670-672-675.md
+    - packing/resources/web/couzo-issue672-2026-10-17/review/review-2026-10-22/README.md
+  amendments:
+  - date: '2026-10-23'
+    reason: 'The 22 October stage 4 review of T-226 to T-228 accepts the replay: the result rises
+      to V3/C3 and cites its two confirming evidence entries, the packet''s replay (sharing the producer''s
+      named components) and the review''s clean-room checker, with the review and its retained programs
+      among its artifacts; the bound, scope and attribution are unchanged.'
+    previous:
+      kind: upper-bound
+      scope:
+        n_values:
+        - 204
+      established: null
+      attribution:
+        source_keys:
+        - '[Couzo issue 670 2026-10-17]'
+        published: '2026-10-17'
+      builds_on: null
+      evidence:
+      - E-couzo-670-certificate-report
+      artifacts:
+      - packing/resources/web/couzo-issue670-2026-10-17/README.md
+      - packing/resources/web/couzo-issue670-2026-10-17/acquisition/claims.json
+      - packing/resources/web/couzo-issue670-2026-10-17/source/certificates/n204.cert
+      - packing/resources/web/couzo-issue670-2026-10-17/receipts/exact-certification.json.xz
+      - packing/resources/web/couzo-issue672-2026-10-17/measure/identity.json
+      - packing/campaign/issue-intake/upper-bounds-20261018/README.md
+      - packing/devtools/upper_bound_reports.py
+  - date: '2026-10-24'
+    reason: 'Francisco Couzo''s answer of 23 October 2026 on #670 traces the 204 seed to T-186''s
+      packing: the result cites the packet''s seed measurement among its artifacts, which pairs the
+      seed with T-186''s packing and reproduces his checker call, and its credit line names T-186''s
+      lineage by the chain rule; the bound, scope, source and evidence are unchanged.'
+    previous:
+      kind: upper-bound
+      scope:
+        n_values:
+        - 204
+      established: null
+      attribution:
+        source_keys:
+        - '[Couzo issue 670 2026-10-17]'
+        published: '2026-10-17'
+      builds_on: null
+      evidence:
+      - E-couzo-670-certificate-report
+      - E-couzo-670-exact-feasibility
+      - E-couzo-670-review-exact-feasibility
+      artifacts:
+      - packing/resources/web/couzo-issue670-2026-10-17/README.md
+      - packing/resources/web/couzo-issue670-2026-10-17/acquisition/claims.json
+      - packing/resources/web/couzo-issue670-2026-10-17/source/certificates/n204.cert
+      - packing/resources/web/couzo-issue670-2026-10-17/receipts/exact-certification.json.xz
+      - packing/resources/web/couzo-issue672-2026-10-17/measure/identity.json
+      - packing/campaign/issue-intake/upper-bounds-20261018/README.md
+      - packing/devtools/upper_bound_reports.py
+      - docs/project/reviews/review-2026-10-22-couzo-670-672-675.md
+      - packing/resources/web/couzo-issue672-2026-10-17/review/review-2026-10-22/README.md
 - path: result/t-227.html
   canonical: result/t-227.html
   kind: result
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-22'
-  lastmod: '2026-10-22'
+  lastmod: '2026-10-24'
   status: live
   identity:
     kind: upper-bound
@@ -18419,6 +20652,8 @@ urls:
     builds_on: null
     evidence:
     - E-couzo-672-certificate-report
+    - E-couzo-672-exact-feasibility
+    - E-couzo-672-review-exact-feasibility
     artifacts:
     - packing/resources/web/couzo-issue672-2026-10-17/README.md
     - packing/resources/web/couzo-issue672-2026-10-17/acquisition/claims.json
@@ -18426,16 +20661,83 @@ urls:
     - packing/resources/web/couzo-issue672-2026-10-17/source/certificates/n229.cert
     - packing/resources/web/couzo-issue672-2026-10-17/receipts/exact-certification.json.xz
     - packing/resources/web/couzo-issue672-2026-10-17/measure/identity.json
+    - packing/resources/web/couzo-issue672-2026-10-17/measure/answers-2026-10-24.json
     - packing/resources/web/evand-regularized-2026-10-20/measure/identity.json
     - packing/campaign/issue-intake/upper-bounds-20261018/README.md
     - packing/devtools/upper_bound_reports.py
+    - docs/project/reviews/review-2026-10-22-couzo-670-672-675.md
+    - packing/resources/web/couzo-issue672-2026-10-17/review/review-2026-10-22/README.md
+  amendments:
+  - date: '2026-10-23'
+    reason: 'The 22 October stage 4 review of T-226 to T-228 accepts the replay: the result rises
+      to V3/C3 and cites its two confirming evidence entries, the packet''s replay (sharing the producer''s
+      named components) and the review''s clean-room checker, with the review and its retained programs
+      among its artifacts; the bound, scope and attribution are unchanged.'
+    previous:
+      kind: upper-bound
+      scope:
+        n_values:
+        - 227
+        - 229
+      established: null
+      attribution:
+        source_keys:
+        - '[Couzo issue 672 2026-10-17]'
+        published: '2026-10-17'
+      builds_on: null
+      evidence:
+      - E-couzo-672-certificate-report
+      artifacts:
+      - packing/resources/web/couzo-issue672-2026-10-17/README.md
+      - packing/resources/web/couzo-issue672-2026-10-17/acquisition/claims.json
+      - packing/resources/web/couzo-issue672-2026-10-17/source/certificates/n227.cert
+      - packing/resources/web/couzo-issue672-2026-10-17/source/certificates/n229.cert
+      - packing/resources/web/couzo-issue672-2026-10-17/receipts/exact-certification.json.xz
+      - packing/resources/web/couzo-issue672-2026-10-17/measure/identity.json
+      - packing/resources/web/evand-regularized-2026-10-20/measure/identity.json
+      - packing/campaign/issue-intake/upper-bounds-20261018/README.md
+      - packing/devtools/upper_bound_reports.py
+  - date: '2026-10-24'
+    reason: 'Francisco Couzo''s answers of 24 October 2026 on #672 say he made the 227 CT105 submission
+      himself and how he calls sqpack/verify.py: the result cites the packet''s measurement of the
+      answers among its artifacts, which holds the seed witness the source published with the report
+      to de Winter''s packing and reproduces his checker call, and its credit text says the submission
+      was his; the bound, scope, source, credit line and evidence are unchanged.'
+    previous:
+      kind: upper-bound
+      scope:
+        n_values:
+        - 227
+        - 229
+      established: null
+      attribution:
+        source_keys:
+        - '[Couzo issue 672 2026-10-17]'
+        published: '2026-10-17'
+      builds_on: null
+      evidence:
+      - E-couzo-672-certificate-report
+      - E-couzo-672-exact-feasibility
+      - E-couzo-672-review-exact-feasibility
+      artifacts:
+      - packing/resources/web/couzo-issue672-2026-10-17/README.md
+      - packing/resources/web/couzo-issue672-2026-10-17/acquisition/claims.json
+      - packing/resources/web/couzo-issue672-2026-10-17/source/certificates/n227.cert
+      - packing/resources/web/couzo-issue672-2026-10-17/source/certificates/n229.cert
+      - packing/resources/web/couzo-issue672-2026-10-17/receipts/exact-certification.json.xz
+      - packing/resources/web/couzo-issue672-2026-10-17/measure/identity.json
+      - packing/resources/web/evand-regularized-2026-10-20/measure/identity.json
+      - packing/campaign/issue-intake/upper-bounds-20261018/README.md
+      - packing/devtools/upper_bound_reports.py
+      - docs/project/reviews/review-2026-10-22-couzo-670-672-675.md
+      - packing/resources/web/couzo-issue672-2026-10-17/review/review-2026-10-22/README.md
 - path: result/t-228.html
   canonical: result/t-228.html
   kind: result
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-22'
-  lastmod: '2026-10-22'
+  lastmod: '2026-10-23'
   status: live
   identity:
     kind: upper-bound
@@ -18450,6 +20752,8 @@ urls:
     builds_on: null
     evidence:
     - E-couzo-675-certificate-report
+    - E-couzo-675-exact-feasibility
+    - E-couzo-675-review-exact-feasibility
     artifacts:
     - packing/resources/web/couzo-issue675-2026-10-18/README.md
     - packing/resources/web/couzo-issue675-2026-10-18/acquisition/claims.json
@@ -18458,6 +20762,649 @@ urls:
     - packing/resources/web/couzo-issue672-2026-10-17/measure/identity.json
     - packing/campaign/issue-intake/upper-bounds-20261018/README.md
     - packing/devtools/upper_bound_reports.py
+    - docs/project/reviews/review-2026-10-22-couzo-670-672-675.md
+    - packing/resources/web/couzo-issue672-2026-10-17/review/review-2026-10-22/README.md
+  amendments:
+  - date: '2026-10-23'
+    reason: 'The 22 October stage 4 review of T-226 to T-228 accepts the replay: the result rises
+      to V3/C3 and cites its two confirming evidence entries, the packet''s replay (sharing the producer''s
+      named components) and the review''s clean-room checker, with the review and its retained programs
+      among its artifacts; the bound, scope and attribution are unchanged.'
+    previous:
+      kind: upper-bound
+      scope:
+        n_values:
+        - 204
+      established: null
+      attribution:
+        source_keys:
+        - '[Couzo issue 675 2026-10-18]'
+        published: '2026-10-18'
+      builds_on: null
+      evidence:
+      - E-couzo-675-certificate-report
+      artifacts:
+      - packing/resources/web/couzo-issue675-2026-10-18/README.md
+      - packing/resources/web/couzo-issue675-2026-10-18/acquisition/claims.json
+      - packing/resources/web/couzo-issue675-2026-10-18/source/certificates/best/n204.cert
+      - packing/resources/web/couzo-issue675-2026-10-18/receipts/exact-certification.json.xz
+      - packing/resources/web/couzo-issue672-2026-10-17/measure/identity.json
+      - packing/campaign/issue-intake/upper-bounds-20261018/README.md
+      - packing/devtools/upper_bound_reports.py
+- path: result/t-229.html
+  canonical: result/t-229.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-22'
+  lastmod: '2026-10-23'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 105
+      - 204
+    established: null
+    attribution:
+      source_keys:
+      - '[Mishapolk issue 719 2026-10-22]'
+      published: '2026-10-22'
+    builds_on: null
+    evidence:
+    - E-mishapolk-719-certificate-report
+    - E-mishapolk-719-exact-feasibility
+    - E-mishapolk-719-review-exact-feasibility
+    artifacts:
+    - packing/resources/web/mishapolk-issue719-2026-10-22/README.md
+    - packing/resources/web/mishapolk-issue719-2026-10-22/acquisition/claims.json
+    - packing/resources/web/mishapolk-issue719-2026-10-22/facts/n-105.yaml.gz
+    - packing/resources/web/mishapolk-issue719-2026-10-22/facts/n-204.yaml.gz
+    - packing/resources/web/mishapolk-issue719-2026-10-22/receipts/exact-certification.json.xz
+    - packing/resources/web/mishapolk-issue719-2026-10-22/measure/identity.json
+    - packing/campaign/issue-intake/upper-bounds-issue719-20261022/README.md
+    - packing/devtools/upper_bound_reports.py
+    - docs/project/reviews/review-2026-10-22-mishapolk-719.md
+    - packing/resources/web/mishapolk-issue719-2026-10-22/review/review-2026-10-22/README.md
+  amendments:
+  - date: '2026-10-23'
+    reason: 'The 22 October stage 4 review of T-229 accepts the replay: the result rises to V3/C3
+      and cites its two confirming evidence entries, the packet''s replay (sharing the producer''s
+      named components) and the review''s clean-room checker, with the review and its retained programs
+      among its artifacts and controls; the bound, scope and attribution are unchanged.'
+    previous:
+      kind: upper-bound
+      scope:
+        n_values:
+        - 105
+        - 204
+      established: null
+      attribution:
+        source_keys:
+        - '[Mishapolk issue 719 2026-10-22]'
+        published: '2026-10-22'
+      builds_on: null
+      evidence:
+      - E-mishapolk-719-certificate-report
+      artifacts:
+      - packing/resources/web/mishapolk-issue719-2026-10-22/README.md
+      - packing/resources/web/mishapolk-issue719-2026-10-22/acquisition/claims.json
+      - packing/resources/web/mishapolk-issue719-2026-10-22/facts/n-105.yaml.gz
+      - packing/resources/web/mishapolk-issue719-2026-10-22/facts/n-204.yaml.gz
+      - packing/resources/web/mishapolk-issue719-2026-10-22/receipts/exact-certification.json.xz
+      - packing/resources/web/mishapolk-issue719-2026-10-22/measure/identity.json
+      - packing/campaign/issue-intake/upper-bounds-issue719-20261022/README.md
+      - packing/devtools/upper_bound_reports.py
+- path: result/t-230.html
+  canonical: result/t-230.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-22'
+  lastmod: '2026-10-22'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 303
+    established: null
+    attribution:
+      source_keys:
+      - '[Daniel n303 2026-10-22]'
+      published: '2026-10-22'
+    builds_on: null
+    evidence:
+    - E-evand-728-n303-report
+    - E-evand-728-n303-exact-feasibility
+    - E-evand-728-n303-review-exact-feasibility
+    artifacts:
+    - packing/resources/web/evand-n303-2026-10-22/README.md
+    - packing/resources/web/evand-n303-2026-10-22/acquisition/claims.json
+    - packing/resources/web/evand-n303-2026-10-22/source/search/packer/candidates/s303_r303w0.cert
+    - packing/resources/web/evand-n303-2026-10-22/receipts/exact-certification.json.xz
+    - packing/resources/web/evand-n303-2026-10-22/measure/identity.json
+    - packing/devtools/upper_bound_reports.py
+    - docs/project/reviews/review-2026-10-22-daniel-728.md
+    - packing/resources/web/evand-n303-2026-10-22/review/review-2026-10-22/README.md
+- path: result/t-231.html
+  canonical: result/t-231.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-23'
+  lastmod: '2026-10-23'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 204
+    established: null
+    attribution:
+      source_keys:
+      - '[Mishapolk n204 2026-10-22]'
+      published: '2026-10-22'
+    builds_on: null
+    evidence:
+    - E-mishapolk-n204-certificate-report
+    - E-mishapolk-n204-exact-feasibility
+    - E-mishapolk-n204-review-exact-feasibility
+    artifacts:
+    - packing/resources/web/mishapolk-n204-2026-10-22/README.md
+    - packing/resources/web/mishapolk-n204-2026-10-22/acquisition/claims.json
+    - packing/resources/web/mishapolk-n204-2026-10-22/source/certificates/n204.cert
+    - packing/resources/web/mishapolk-n204-2026-10-22/receipts/exact-certification.json.xz
+    - packing/resources/web/mishapolk-n204-2026-10-22/receipts/sharp-controls.json
+    - packing/resources/web/mishapolk-n204-2026-10-22/measure/identity.json
+    - packing/campaign/issue-intake/upper-bounds-issue719-20261022/README.md
+    - packing/devtools/upper_bound_reports.py
+    - docs/project/reviews/review-2026-10-23-mishapolk-n204.md
+    - packing/resources/web/mishapolk-n204-2026-10-22/review/review-2026-10-23/README.md
+    - packing/resources/web/mishapolk-n204-2026-10-22/review/review-2026-10-23/outputs/lineage.json
+- path: result/t-232.html
+  canonical: result/t-232.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-23'
+  lastmod: '2026-10-23'
+  status: live
+  identity:
+    kind: lower-bound
+    scope:
+      n_values:
+      - 31
+    established: null
+    attribution:
+      source_keys:
+      - '[wand125 fine-net n31 2026-10-11]'
+      published: '2026-10-11'
+    builds_on: null
+    evidence:
+    - E-wand125-fine-net-n31-59775-report
+    - E-wand125-fine-net-n31-59775-sqverify-fast-replay
+    artifacts:
+    - packing/resources/web/wand125-fine-net-n31-2026-10-11/README.md
+    - packing/resources/web/wand125-fine-net-n31-2026-10-11/acquisition/sources.json
+    - packing/resources/web/wand125-fine-net-n31-2026-10-11/acquisition/release-assets.json
+    - packing/resources/web/wand125-fine-net-n31-2026-10-11/release/certificates/mixed_n31_L59775/candidate.json.gz
+    - packing/resources/web/wand125-fine-net-n31-2026-10-11/release/certificates/mixed_n31_L59775/check2/receipt.json
+    - packing/resources/web/wand125-fine-net-n31-2026-10-11/receipts/premises-n31.json
+    - packing/resources/web/wand125-fine-net-n31-2026-10-11/receipts/sample-diagnostic-n31.json
+    - packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/README.md
+    - docs/project/reviews/review-2026-10-23-wand125-n31-fine-net.md
+    - packing/benchmarks/measure-verifier/census-mixed/census.json
+    - packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-n31-2026-10-11/mixed_n31_L59775.jsonl.gz
+    - packing/devtools/fine_net_followup.py
+- path: result/t-233.html
+  canonical: result/t-233.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-23'
+  lastmod: '2026-10-23'
+  status: live
+  identity:
+    kind: lower-bound
+    scope:
+      n_values:
+      - 19
+      - 20
+      - 26
+      - 27
+    established: null
+    attribution:
+      source_keys:
+      - '[wand125 fine-net lower bounds 2026-10-08]'
+      published: '2026-10-08'
+    builds_on: null
+    evidence:
+    - E-wand125-fine-net-446-n19-n20-n26-report
+    - E-wand125-fine-net-n27-5655-followup-report
+    artifacts:
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-08/README.md
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-08/reported-catalogue.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-08/reported-n27-followup.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-08/source-manifest.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/README.md
+    - packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/acquisition/sources.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/acquisition/release-assets.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/release/certificates/mixed_n19_L48275/candidate.json.gz
+    - packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/release/certificates/mixed_n20_L49125/candidate.json.gz
+    - packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/release/certificates/mixed_n26_L5555/candidate.json.gz
+    - packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/release/certificates/mixed_n27_L5655/candidate.json.gz
+    - packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/receipts/premises-n19.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/receipts/premises-n20.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/receipts/premises-n26.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/receipts/premises-n27.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/README.md
+    - docs/project/reviews/review-2026-10-23-wand125-446-fine-net.md
+    - packing/devtools/fine_net_followup.py
+    - packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-446-release-2026-10-08/README.md
+    - packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-446-release-2026-10-08/mixed_n19_L48275.jsonl.gz
+    - packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-446-release-2026-10-08/mixed_n19_L48275.control.json
+    - packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-446-release-2026-10-08/mixed_n20_L49125.jsonl.gz
+    - packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-446-release-2026-10-08/mixed_n20_L49125.control.json
+    - packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-446-release-2026-10-08/mixed_n26_L5555.jsonl.gz
+    - packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-446-release-2026-10-08/mixed_n26_L5555.control-failed-v2.json
+    - packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-446-release-2026-10-08/mixed_n27_L5655.jsonl.gz
+    - packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-446-release-2026-10-08/mixed_n27_L5655.control.json
+- path: result/t-234.html
+  canonical: result/t-234.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-23'
+  lastmod: '2026-10-23'
+  status: live
+  identity:
+    kind: formalization
+    scope:
+      n_values:
+      - 21
+    established: null
+    attribution:
+      source_keys:
+      - '[wand125 n21 zero-margin Lean 2026-09-29]'
+      published: '2026-09-29'
+    builds_on: null
+    evidence:
+    - E-n021-wand125-zero-margin-lean-report
+    artifacts:
+    - packing/resources/web/wand125-n21-zero-margin-lean-2026-09-29/README.md
+    - packing/resources/web/wand125-n21-zero-margin-lean-2026-09-29/square-packing-bounds/point_n21_L5/lean/zero-margin/N21PtsLower.lean
+    - packing/resources/web/wand125-n21-zero-margin-lean-2026-09-29/square-packing-bounds/point_n21_L5/lean/zero-margin/build_zero_margin.sh
+    - packing/resources/web/wand125-n21-zero-margin-lean-2026-09-29/square-packing-bounds/point_n21_L5/lean/zero-margin/data-sha256.txt
+    - packing/resources/web/wand125-n21-zero-margin-lean-2026-09-29/receipts/evand-library-closure-6aa82ba4.json
+    - packing/devtools/lean_closure.py
+- path: result/t-235.html
+  canonical: result/t-235.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-23'
+  lastmod: '2026-10-23'
+  status: live
+  identity:
+    kind: formalization
+    scope:
+      n_values:
+      - 59
+    established: null
+    attribution:
+      source_keys:
+      - '[wand125 n59 Lean kernel 2026-10-11]'
+      published: '2026-10-11'
+    builds_on: null
+    evidence:
+    - E-n059-wand125-lean-kernel-report
+    artifacts:
+    - packing/resources/web/wand125-n59-lean-kernel-2026-10-11/README.md
+    - packing/resources/web/wand125-n59-lean-kernel-2026-10-11/square-packing/problems/square-lower-bounds/certificates/k2m5_n59_L8/lean/Sqpack/S59Lower.lean
+    - packing/resources/web/wand125-n59-lean-kernel-2026-10-11/square-packing/problems/square-lower-bounds/certificates/k2m5_n59_L8/lean/Sqpack/S59T/Pts.lean
+    - packing/resources/web/wand125-n59-lean-kernel-2026-10-11/square-packing/problems/square-lower-bounds/certificates/k2m5_n59_L8/lean/README.md
+    - packing/resources/web/wand125-n59-lean-kernel-2026-10-11/square-packing/problems/square-lower-bounds/certificates/k2m5_n59_L8/lean/receipts/kernel_tasks.jsonl.gz
+    - packing/resources/web/wand125-n59-lean-kernel-2026-10-11/receipts/evand-library-closure-1718a580.json
+    - packing/devtools/lean_closure.py
+- path: result/t-236.html
+  canonical: result/t-236.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-23'
+  lastmod: '2026-10-23'
+  status: live
+  identity:
+    kind: formalization
+    scope:
+      n_values:
+      - 211
+      - 241
+      - 273
+      - 307
+    established: null
+    attribution:
+      source_keys:
+      - '[Daniel Fang and Ryu Lean 2026-10-18]'
+      published: '2026-10-18'
+    builds_on: null
+    evidence:
+    - E-fang-theorems-daniel-lean-report
+    artifacts:
+    - packing/resources/web/evand-fang-ryu-lean-2026-10-18/README.md
+    - packing/resources/web/evand-fang-ryu-lean-2026-10-18/square-packing/lean/Sqpack/FangFinal.lean
+    - packing/resources/web/evand-fang-ryu-lean-2026-10-18/square-packing/lean/Sqpack/FangTheorem.lean
+    - packing/resources/web/evand-fang-ryu-lean-2026-10-18/square-packing/lean/Sqpack/FangGlue.lean
+    - packing/resources/web/evand-fang-ryu-lean-2026-10-18/square-packing/certificates/fang-gluing/README.md
+    - packing/resources/web/evand-fang-ryu-lean-2026-10-18/square-packing/search/exact/fang_pieces.py
+    - packing/resources/web/evand-fang-ryu-lean-2026-10-18/receipts/lean-closure.json
+    - packing/devtools/lean_closure.py
+- path: result/t-237.html
+  canonical: result/t-237.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-24'
+  lastmod: '2026-10-24'
+  status: live
+  identity:
+    kind: optimality
+    scope:
+      n_values:
+      - 2
+      - 3
+      - 4
+      - 5
+    established: null
+    attribution:
+      source_keys:
+      - '[Göbel 1979]'
+      - '[Friedman DS7]'
+      published: '1979'
+    builds_on: null
+    evidence:
+    - E-n005-gobel-proof
+    - E-n005-gobel-upper
+    - E-side2-center-lower
+    - E-basic-area-lower
+    - E-basic-grid-upper
+    artifacts:
+    - packing/resources/papers/gobel-1979-geometrical-packing-and-covering-problems.pdf
+    - packing/resources/papers/friedman-ds7-packing-unit-squares-in-squares.md
+    - packing/cases/gobel5/packing.py
+    - packing/cases/gobel5/verify_exact.py
+    - packing/cases/small_n/optimal_moduli.py
+    - packing/campaign/series/series-000-smoke-and-calibration/results/exp-014-h-032-n3-optimal-moduli.json
+    - packing/devtools/check_basic_bounds.py
+- path: result/t-238.html
+  canonical: result/t-238.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-24'
+  lastmod: '2026-10-24'
+  status: live
+  identity:
+    kind: formalization
+    scope:
+      n_values:
+      - 2
+      - 3
+      - 4
+      - 5
+    established: null
+    attribution:
+      source_keys:
+      - '[chelokot small-n Lean 2026-09-05]'
+      - '[Daniel small-n rectangles Lean 2026-10-22]'
+      published: '2026-08-29'
+    builds_on: null
+    evidence:
+    - E-small-n-chelokot-lean-report
+    - E-small-n-daniel-rect-lean-report
+    artifacts:
+    - packing/resources/web/chelokot-small-n-lean-2026-09-05/README.md
+    - packing/resources/web/chelokot-small-n-lean-2026-09-05/square-packing-archive/formal/SquarePackingArchive/Records/Square5.lean
+    - packing/resources/web/chelokot-small-n-lean-2026-09-05/square-packing-archive/formal/SquarePackingArchive/Records/NearSquare.lean
+    - packing/resources/web/chelokot-small-n-lean-2026-09-05/square-packing-archive/formal/SquarePackingArchive/Records/SquareNumbers.lean
+    - packing/resources/web/chelokot-small-n-lean-2026-09-05/receipts/lean-closure.json
+    - packing/campaign/series/series-000-smoke-and-calibration/results/chelokot-lean-replay/build.log
+    - packing/resources/web/evand-rect-small-n-lean-2026-10-22/README.md
+    - packing/resources/web/evand-rect-small-n-lean-2026-10-22/square-packing/lean/Sqpack/Rect5Pts.lean
+    - packing/resources/web/evand-rect-small-n-lean-2026-10-22/receipts/lean-closure.json
+    - packing/devtools/lean_closure.py
+- path: result/t-239.html
+  canonical: result/t-239.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-23'
+  lastmod: '2026-10-23'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 303
+    established: null
+    attribution:
+      source_keys:
+      - '[Kristiansen n303 2026-10-23]'
+      published: '2026-10-23'
+    builds_on: null
+    evidence:
+    - E-amundsk-755-n303-report
+    - E-amundsk-755-n303-exact-feasibility
+    - E-amundsk-755-n303-review-exact-feasibility
+    artifacts:
+    - packing/resources/web/amundsk-n303-2026-10-23/README.md
+    - packing/resources/web/amundsk-n303-2026-10-23/acquisition/claims.json
+    - packing/resources/web/amundsk-n303-2026-10-23/facts/n-303.yaml.gz
+    - packing/resources/web/amundsk-n303-2026-10-23/receipts/exact-certification.json.xz
+    - packing/resources/web/amundsk-n303-2026-10-23/replay/sharp-controls.json
+    - packing/resources/web/amundsk-n303-2026-10-23/measure/identity.json
+    - packing/devtools/upper_bound_reports.py
+    - docs/project/reviews/review-2026-10-23-amundsk-n303.md
+    - packing/resources/web/amundsk-n303-2026-10-23/review/review-2026-10-23/README.md
+- path: result/t-240.html
+  canonical: result/t-240.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-24'
+  lastmod: '2026-10-25'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 268
+      - 303
+    established: null
+    attribution:
+      source_keys:
+      - '[Couzo issue 763 2026-10-23]'
+      published: '2026-10-23'
+    builds_on: null
+    evidence:
+    - E-couzo-763-certificate-report
+    - E-couzo-763-exact-feasibility
+    - E-couzo-763-review-exact-feasibility
+    artifacts:
+    - packing/resources/web/couzo-issue763-2026-10-23/README.md
+    - packing/resources/web/couzo-issue763-2026-10-23/acquisition/claims.json
+    - packing/resources/web/couzo-issue763-2026-10-23/source/certificates/best/n268.cert
+    - packing/resources/web/couzo-issue763-2026-10-23/source/certificates/best/n303.cert
+    - packing/resources/web/couzo-issue763-2026-10-23/receipts/exact-certification.json.xz
+    - packing/resources/web/couzo-issue763-2026-10-23/receipts/claim-map.json
+    - packing/campaign/issue-intake/upper-bounds-issue763-20261024/README.md
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/couzo_763_claims.py
+    - docs/project/reviews/review-2026-10-24-couzo-n268-n303.md
+    - packing/resources/web/couzo-issue763-2026-10-23/review/review-2026-10-24/README.md
+  amendments:
+  - date: '2026-10-25'
+    reason: 'The 24 October stage 4 review of T-240 accepts both certificates: the result rises to
+      V3/C3 and cites its two confirming evidence entries, the packet''s replay (sharing the producer''s
+      named components) and the review''s clean-room checker, with the review and its retained programs
+      among its artifacts and controls; the bounds, scope and attribution are unchanged.'
+    previous:
+      kind: upper-bound
+      scope:
+        n_values:
+        - 268
+        - 303
+      established: null
+      attribution:
+        source_keys:
+        - '[Couzo issue 763 2026-10-23]'
+        published: '2026-10-23'
+      builds_on: null
+      evidence:
+      - E-couzo-763-certificate-report
+      artifacts:
+      - packing/resources/web/couzo-issue763-2026-10-23/README.md
+      - packing/resources/web/couzo-issue763-2026-10-23/acquisition/claims.json
+      - packing/resources/web/couzo-issue763-2026-10-23/source/certificates/best/n268.cert
+      - packing/resources/web/couzo-issue763-2026-10-23/source/certificates/best/n303.cert
+      - packing/resources/web/couzo-issue763-2026-10-23/receipts/exact-certification.json.xz
+      - packing/resources/web/couzo-issue763-2026-10-23/receipts/claim-map.json
+      - packing/campaign/issue-intake/upper-bounds-issue763-20261024/README.md
+      - packing/devtools/upper_bound_reports.py
+      - packing/devtools/couzo_763_claims.py
+- path: result/t-241.html
+  canonical: result/t-241.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-24'
+  lastmod: '2026-10-25'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 304
+    established: null
+    attribution:
+      source_keys:
+      - '[Couzo n304 2026-10-23]'
+      published: '2026-10-23'
+    builds_on: null
+    evidence:
+    - E-couzo-n304-certificate-report
+    - E-couzo-n304-exact-feasibility
+    - E-couzo-n304-review-exact-feasibility
+    artifacts:
+    - packing/resources/web/couzo-n304-2026-10-23/README.md
+    - packing/resources/web/couzo-n304-2026-10-23/acquisition/claims.json
+    - packing/resources/web/couzo-issue763-2026-10-23/source/certificates/best/n304.cert
+    - packing/resources/web/couzo-n304-2026-10-23/receipts/exact-certification.json.xz
+    - packing/resources/web/couzo-n304-2026-10-23/receipts/sharp-controls.json
+    - packing/resources/web/evand-kaggle-descents-2026-10-24/measure/identity.json
+    - packing/campaign/issue-intake/upper-bounds-evand-20261024/README.md
+    - packing/devtools/upper_bound_reports.py
+    - docs/project/reviews/review-2026-10-24-couzo-evand-n268-n304.md
+    - packing/resources/web/evand-kaggle-descents-2026-10-24/review/review-2026-10-24/README.md
+  amendments:
+  - date: '2026-10-25'
+    reason: 'The 24 October stage 4 review of T-241 and T-242 accepts Couzo''s 304 certificate: the
+      result rises to V3/C3 and cites its two confirming evidence entries, the packet''s replay (sharing
+      the producer''s named components) and the review''s clean-room checker, with the review and
+      its retained programs among its artifacts and controls; its credit drops the chain after Tymchishin
+      that M-1 found the source does not state. The bound, scope and attribution key are unchanged.'
+    previous:
+      kind: upper-bound
+      scope:
+        n_values:
+        - 304
+      established: null
+      attribution:
+        source_keys:
+        - '[Couzo n304 2026-10-23]'
+        published: '2026-10-23'
+      builds_on: null
+      evidence:
+      - E-couzo-n304-certificate-report
+      artifacts:
+      - packing/resources/web/couzo-n304-2026-10-23/README.md
+      - packing/resources/web/couzo-n304-2026-10-23/acquisition/claims.json
+      - packing/resources/web/couzo-issue763-2026-10-23/source/certificates/best/n304.cert
+      - packing/resources/web/couzo-n304-2026-10-23/receipts/exact-certification.json.xz
+      - packing/resources/web/couzo-n304-2026-10-23/receipts/sharp-controls.json
+      - packing/resources/web/evand-kaggle-descents-2026-10-24/measure/identity.json
+      - packing/campaign/issue-intake/upper-bounds-evand-20261024/README.md
+      - packing/devtools/upper_bound_reports.py
+- path: result/t-242.html
+  canonical: result/t-242.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-24'
+  lastmod: '2026-10-25'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 268
+      - 304
+    established: null
+    attribution:
+      source_keys:
+      - '[Daniel Kaggle descents 2026-10-24]'
+      published: '2026-10-24'
+    builds_on: null
+    evidence:
+    - E-evand-kaggle-descents-certificate-report
+    - E-evand-kaggle-descents-exact-feasibility
+    - E-evand-kaggle-descents-review-exact-feasibility
+    artifacts:
+    - packing/resources/web/evand-kaggle-descents-2026-10-24/README.md
+    - packing/resources/web/evand-kaggle-descents-2026-10-24/acquisition/claims.json
+    - packing/resources/web/evand-kaggle-descents-2026-10-24/source/search/packer/candidates/s268_lightning.cert
+    - packing/resources/web/evand-kaggle-descents-2026-10-24/source/search/packer/candidates/s304_pub.cert
+    - packing/resources/web/evand-kaggle-descents-2026-10-24/receipts/exact-certification.json.xz
+    - packing/resources/web/evand-kaggle-descents-2026-10-24/receipts/sharp-controls-n268.json
+    - packing/resources/web/evand-kaggle-descents-2026-10-24/receipts/sharp-controls-n304.json
+    - packing/resources/web/evand-kaggle-descents-2026-10-24/measure/identity.json
+    - packing/campaign/issue-intake/upper-bounds-evand-20261024/README.md
+    - packing/devtools/upper_bound_reports.py
+    - docs/project/reviews/review-2026-10-24-couzo-evand-n268-n304.md
+    - packing/resources/web/evand-kaggle-descents-2026-10-24/review/review-2026-10-24/README.md
+  amendments:
+  - date: '2026-10-25'
+    reason: 'The 24 October stage 4 review of T-241 and T-242 accepts Daniel''s 268 and 304 certificates:
+      the result rises to V3/C3 and cites its two confirming evidence entries, the packet''s replay
+      (sharing the producer''s named components) and the review''s clean-room checker, with the review
+      and its retained programs among its artifacts and controls; its credit drops the 304 chain after
+      Tymchishin and the Levy link (M-1, M-4). The bounds, scope and attribution key are unchanged.'
+    previous:
+      kind: upper-bound
+      scope:
+        n_values:
+        - 268
+        - 304
+      established: null
+      attribution:
+        source_keys:
+        - '[Daniel Kaggle descents 2026-10-24]'
+        published: '2026-10-24'
+      builds_on: null
+      evidence:
+      - E-evand-kaggle-descents-certificate-report
+      artifacts:
+      - packing/resources/web/evand-kaggle-descents-2026-10-24/README.md
+      - packing/resources/web/evand-kaggle-descents-2026-10-24/acquisition/claims.json
+      - packing/resources/web/evand-kaggle-descents-2026-10-24/source/search/packer/candidates/s268_lightning.cert
+      - packing/resources/web/evand-kaggle-descents-2026-10-24/source/search/packer/candidates/s304_pub.cert
+      - packing/resources/web/evand-kaggle-descents-2026-10-24/receipts/exact-certification.json.xz
+      - packing/resources/web/evand-kaggle-descents-2026-10-24/receipts/sharp-controls-n268.json
+      - packing/resources/web/evand-kaggle-descents-2026-10-24/receipts/sharp-controls-n304.json
+      - packing/resources/web/evand-kaggle-descents-2026-10-24/measure/identity.json
+      - packing/campaign/issue-intake/upper-bounds-evand-20261024/README.md
+      - packing/devtools/upper_bound_reports.py
 - path: results.html
   canonical: results.html
   kind: page
@@ -18691,6 +21638,22 @@ urls:
   generator: devtools.render_overview:render_all
   producer: overview
   first_published: '2026-09-29'
+  lastmod: '2026-10-22'
+  status: live
+- path: tutorials.html
+  canonical: tutorials.html
+  kind: page
+  generator: devtools.render_overview:render_all
+  producer: overview
+  first_published: '2026-10-22'
+  lastmod: '2026-10-22'
+  status: live
+- path: verification.html
+  canonical: verification.html
+  kind: page
+  generator: devtools.render_overview:render_all
+  producer: overview
+  first_published: '2026-10-08'
   lastmod: '2026-10-22'
   status: live
 - path: visualize.html

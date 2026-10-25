@@ -6,20 +6,25 @@ read by the `evand-cert` adapter: s(204) of #670 (``23aff0c6``), s(227) and s(22
 on the packets through ``test_upper_bound_reports``; these hold what is particular to
 them: each certificate's digest and exact side, each frozen comparison's order at its
 count, the report order the 18 October ledger recorded, and the pose-by-pose measurement
-behind T-227's regularization items and the notes of T-226 and T-228. Every test reads
-the retained packets and the records only; none needs the network.
+behind T-227's regularization items and the notes of T-226 and T-228, and, after the
+22 October stage 4 review, that both maintained routes meet the kernel's sharp controls on
+#672's 227 certificate (its RF-6). Every test reads the retained packets and the records
+only; none needs the network.
 """
 
 from __future__ import annotations
 
 import hashlib
+import importlib.util
 import json
 from fractions import Fraction
 from pathlib import Path
 from typing import Any
 
+import pytest
 import yaml
 
+from devtools import evand_arrangement_reports as kernel
 from devtools import upper_bound_reports as reports
 
 PACKETS = {
@@ -155,7 +160,10 @@ def test_the_measurement_behind_the_regularization_items_and_notes() -> None:
 def test_each_atom_says_which_positives_touch_the_box() -> None:
     """#670's and #675's positives touch the box at 204; #672's touches at 229 and clears
     every wall at 227 by exactly 1e-15, so its atom names the count that touches rather
-    than saying every positive does (review A1 of #718)."""
+    than saying every positive does (review A1 of #718). Stage 4 (think-0nse) replaced the
+    plan's closing sentences, which said review was pending and the source's checkers had
+    not run, with the review's outcome and the source's first checker (RF-1 of the 22
+    October review); every sentence before them is still the plan's."""
     evidence = {
         row["id"]: row for row in _yaml(reports.ROOT / "frontier/evidence.yaml")["evidence"]
     }
@@ -170,5 +178,114 @@ def test_each_atom_says_which_positives_touch_the_box() -> None:
     for name, sentence in expected.items():
         planned = reports.register_plan(_packet(name))["evidence.yaml"]
         assert sentence in planned["limitations"], name
-        recorded = evidence[planned["id"]]["limitations"]
-        assert " ".join(recorded.split()) == " ".join(planned["limitations"].split()), name
+        recorded = " ".join(evidence[planned["id"]]["limitations"].split())
+        replay = " ".join(planned["limitations"].split()).split(" Independent review")[0]
+        assert recorded.startswith(replay), name
+        assert "names this repository's sqpack/verify.py as its first checker" in recorded
+
+
+def test_the_seed_identity_receipt_rebuilds_from_the_retained_files(tmp_path: Path) -> None:
+    """Couzo's answers of 23 October on #670 and #675 (think-t5hc), held to the packets.
+    Every digest prefix the answers print is the SHA-256 a packet's manifest records, and
+    4e4c8ce's certificates/best/n204.cert is T-186's square-204.cert byte for byte; the
+    printed digits of T-186's side are its exact side's; n204.txt at 4e4c8ce, the seed the
+    answer on #670 names, pairs one to one with T-186's 204 packing under the identity,
+    every centre within 4e-12, at a printed side 2.78e-12 above T-186's; and the author's
+    call, verify_packing(..., bucket=True) on exact corners in the closed box, counts the
+    32 and 88 boundary corner coordinates the answers report, with no touching pair. The
+    packet's program rebuilds the committed receipt from the retained files, byte for
+    byte, in about a second."""
+    program = _packet("couzo-issue670-2026-10-17") / "measure/seed-identity.py"
+    spec = importlib.util.spec_from_file_location("couzo_670_seed_identity", program)
+    assert spec is not None
+    assert spec.loader is not None
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    out = tmp_path / "seed-identity.json"
+    assert module.main(["--out", str(out)]) == 0
+    committed = program.with_name("seed-identity.json")
+    assert out.read_bytes() == committed.read_bytes()
+    receipt = _json(committed)
+    assert all(row["matches"] for row in receipt["digests"])
+    assert receipt["t186_side"]["prefix_matches"]
+    assert receipt["seed"]["read_side_is_printed"]
+    (pair,) = receipt["pairs"]
+    nearest = pair["nearest_centre"]
+    assert nearest["one_to_one"]
+    assert nearest["symmetry"] == 0
+    assert float(nearest["largest_displacement"]) < 4e-12
+    assert nearest["moved_beyond"]["1e-9"] == 0
+    assert 0 < Fraction(pair["side_difference_exact"]) < Fraction(3, 10**12)
+    for call in receipt["checker_call"].values():
+        assert call["valid"]
+        assert call["failures"] == 0
+        assert call["touching_pairs"] == 0
+        assert call["container_contacts"] == call["reported_container_contacts"]
+
+
+def test_the_672_answers_receipt_rebuilds_from_the_retained_files(tmp_path: Path) -> None:
+    """Couzo's answers of 24 October on #672 (think-mdfr), held to the packets. Every
+    digest prefix the comment prints is the SHA-256 the #672 packet's manifest records; the
+    227 seed it names, cdd08485, retained from af8cb79, is not de Winter's certificate but
+    a packing one to one with it, no square beyond a tenth, 7.26e-5 below T-196 and 9.84e-5
+    above #672's 227, which pairs with it one to one under the identity and with T-196 one
+    to one, 59 squares beyond 1e-3 as T-227's item records; and the author's
+    call, verify_packing(..., bucket=True) on exact corners in the closed box, counts the 58
+    boundary corner coordinates at 229 his answer reports and none at 227, with no touching
+    pair at either. The packet's program rebuilds the committed receipt from the retained
+    files, byte for byte, in a few seconds."""
+    program = _packet("couzo-issue672-2026-10-17") / "measure/answers-2026-10-24.py"
+    spec = importlib.util.spec_from_file_location("couzo_672_answers", program)
+    assert spec is not None
+    assert spec.loader is not None
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    out = tmp_path / "answers-2026-10-24.json"
+    assert module.main(["--out", str(out)]) == 0
+    committed = program.with_name("answers-2026-10-24.json")
+    assert out.read_bytes() == committed.read_bytes()
+    receipt = _json(committed)
+    assert all(row["matches"] for row in receipt["digests"])
+    seed = receipt["seed"]
+    assert not seed["is_de_winter_certificate"]
+    assert Fraction(7, 10**5) < Fraction(seed["below_t196"]["exact"]) < Fraction(8, 10**5)
+    assert Fraction(9, 10**5) < Fraction(seed["above_issue_672"]["exact"]) < Fraction(1, 10**4)
+    for pair in receipt["pairs"]:
+        nearest = pair["nearest_centre"]
+        assert nearest["one_to_one"]
+        assert nearest["moved_beyond"]["1e-1"] == 0
+    assert receipt["pairs"][2]["nearest_centre"]["moved_beyond"]["1e-3"] == 59
+    for count, call in receipt["checker_call"].items():
+        assert call["valid"]
+        assert call["failures"] == 0
+        assert call["touching_pairs"] == 0
+        assert (call["container_contacts"] == 0) is call["reported"]["strict_verdict"], count
+    assert receipt["checker_call"]["229"]["container_contacts"] == 58
+
+
+@pytest.mark.slow
+@pytest.mark.parametrize("where", ["at-contact", "past-contact"])
+@pytest.mark.parametrize("control", kernel.SHARP_CONTROLS)
+def test_both_routes_meet_contact_and_refuse_1e30_past_it_at_672s_227(
+    control: str, where: str
+) -> None:
+    """RF-6 of the 22 October stage 4 review: the receipts' two controls are gross (a
+    duplicated square, gap -1, and a square moved outside), while these certificates keep
+    margins of exactly 0 at the walls at 204 and 229, 1e-15 at 227's walls and about 1e-12
+    between pairs, so a route rounding at binary64 or tolerating 1e-9 would pass the
+    packets as retained. The kernel's two sharp controls on #672's 227 certificate, whose
+    walls clear by exactly 1e-15: the side lowered by its least far-wall clearance, or its
+    tightest pair closed along its best separating axis, is accepted by both maintained
+    routes at exact contact with the margin exactly 0, and refused by both 1e-30 past it at
+    exactly -1e-30, as the review's controls found at all four certificates
+    (review/review-2026-10-22/outputs/out-controls-T-NNN-nNNN.json in the #672 packet).
+    Each case runs both routes over 25,651 pairs, a few seconds a route, above the quick
+    lane's per-test ceiling, so it runs in the deep surface."""
+    name = "couzo-issue672-2026-10-17"
+    certificate = reports.read_facts(_packet(name), numbers=[227])[227]
+    margin = "wall" if control == "side-lowered-past-wall-contact" else "gap"
+    past = where == "past-contact"
+    verdicts = kernel.run_sharp(certificate, control, past=past)
+    for route in kernel.ROUTES:
+        assert verdicts[route]["passed"] is not past, route
+        assert verdicts[route][margin] == (-kernel.SHARP_EPSILON if past else 0), route

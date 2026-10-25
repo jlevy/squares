@@ -236,8 +236,8 @@ Run the roll-up in order:
    Link to the synopsis for current state rather than copying its volatile counts.
 4. Update the synopsis date only after the complete pass and format edited Markdown.
    Follow [the named validation tiers](../../development.md#validation-tiers): check and
-   render records, run the pre-push tier, push, then retain the exact-head full
-   checkpoint and hosted-check outcomes.
+   render records, run the records or edit tier and the directly affected tests, push,
+   then retain the exact-head full checkpoint and hosted-check outcomes.
 
 When two sources conflict, fix the record that owns the fact or file a defect; do not
 select the more convenient wording.

@@ -1,0 +1,532 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "franciscouzo-square-packing",
+  "source_url": "https://github.com/franciscouzo/square-packing",
+  "source_ref": "master",
+  "source_commit": "4e4c8ce23cb5e87f033021687010992c40575480",
+  "retrieved_at_utc": "2026-10-24T01:45Z",
+  "git_scope": "Bare clone of franciscouzo/square-packing (history to 6b7391de, fetched 22 October), checked out sparsely at 4e4c8ce (committed 2026-10-15T00:31:53Z, 'Update all verified bounds for n < 1024'), a commit no issue reports. Retained: the 253 certificates/best/nN.cert at 325 to 1023 that the report-order walk of Couzo's history (campaign/issue-intake/upper-bounds-couzo-history-20261022) records as reports with a row. Pinned by digest only: the 42 certificates it holds for a decision, the root README.md and index files, the certificate directory's README, manifest.json and SHA256SUMS, and the exact checker with its MIT licence against the issue-678 packet's identical copies. Added from the same pin on 24 October at 01:45Z (think-t5hc), from a blobless clone with a sparse checkout of the scope: n204.txt at the root, retained, the decimal 204 packing Couzo's comment of 2026-10-23T22:22:03Z on issue #670 names as the start of #670's 204 search, first committed here; and certificates/best/n204.cert, pinned by digest only, the same Git blob (301c930) as Mykhailo Polkovskyi's certificates/square-204.cert at Mishapolk/square-packing-records@70a033f, which the mishapolk-kkt-refinements-2026-10-14 packet pins by the same SHA-256. The rest of the tree is pinned by the commit alone; no source file was executed.",
+  "archived_dir": "source",
+  "license": "The repository states no licence for its data or prose: the tree has no LICENSE, and no README states reuse terms. The 253 certificates are retained as factual data under the owner decision of 2026-10-09 recorded in resources/web/known-best-packings/README.md (Retained Factual Data). verify_bound_certificate.py states that it is Evan Daniel's MIT-licensed verifier with modifications by Francisco Couzo with Codex, under the MIT licence in BOUND_VERIFIER_LICENSE.txt (Copyright (c) 2026 Evan Daniel); both are pinned against the byte-identical copies the couzo-issue678-2026-10-18 packet retains. Prose, the indexes and the manifest are hash-pinned and not copied.",
+  "claims": [
+    "franciscouzo/square-packing@4e4c8ce publishes certificates/best/nN.cert for n = 1 to 1023, each the exact rational side in its header, with manifest.json naming each count's credit and the author's two checker outcomes. Beyond the n <= 324 corpus, 253 of them are reports by the order they reached the repository; they are retained here as dated beyond-horizon rows, 91 current and 162 superseded on entry.",
+    "The manifest's credit and checker statements are the author's; no source program ran here.",
+    "n204.txt at 4e4c8ce, first committed there, gives 204 decimal poses (x, y and theta in radians) at s = 14.808663234389741. Francisco Couzo's comment on issue #670 of 2026-10-23T22:22:03Z (issuecomment-6375905012) says it is the decimal form of Mykhailo Polkovskyi's certificates/square-204.cert at Mishapolk/square-packing-records@70a033f, T-186's 204 certificate, and the seed of hop job 101216, the first of the three hop jobs (101216, 103222 and 105412) that led to #670's 204 certificate. Those statements are the author's; the #670 packet's measure/seed-identity.json measures the pairing."
+  ],
+  "scope": [
+    "BOUND_VERIFIER_LICENSE.txt",
+    "README.md",
+    "bound_sources.json",
+    "certificates/best/README.md",
+    "certificates/best/SHA256SUMS",
+    "certificates/best/manifest.json",
+    "certificates/best/n204.cert",
+    "certificates/best/n325.cert",
+    "certificates/best/n326.cert",
+    "certificates/best/n327.cert",
+    "certificates/best/n328.cert",
+    "certificates/best/n329.cert",
+    "certificates/best/n330.cert",
+    "certificates/best/n331.cert",
+    "certificates/best/n332.cert",
+    "certificates/best/n333.cert",
+    "certificates/best/n334.cert",
+    "certificates/best/n339.cert",
+    "certificates/best/n344.cert",
+    "certificates/best/n362.cert",
+    "certificates/best/n363.cert",
+    "certificates/best/n366.cert",
+    "certificates/best/n367.cert",
+    "certificates/best/n370.cert",
+    "certificates/best/n371.cert",
+    "certificates/best/n372.cert",
+    "certificates/best/n378.cert",
+    "certificates/best/n379.cert",
+    "certificates/best/n380.cert",
+    "certificates/best/n381.cert",
+    "certificates/best/n382.cert",
+    "certificates/best/n401.cert",
+    "certificates/best/n402.cert",
+    "certificates/best/n403.cert",
+    "certificates/best/n404.cert",
+    "certificates/best/n405.cert",
+    "certificates/best/n406.cert",
+    "certificates/best/n407.cert",
+    "certificates/best/n408.cert",
+    "certificates/best/n410.cert",
+    "certificates/best/n411.cert",
+    "certificates/best/n412.cert",
+    "certificates/best/n413.cert",
+    "certificates/best/n414.cert",
+    "certificates/best/n415.cert",
+    "certificates/best/n416.cert",
+    "certificates/best/n417.cert",
+    "certificates/best/n418.cert",
+    "certificates/best/n420.cert",
+    "certificates/best/n421.cert",
+    "certificates/best/n422.cert",
+    "certificates/best/n442.cert",
+    "certificates/best/n443.cert",
+    "certificates/best/n444.cert",
+    "certificates/best/n445.cert",
+    "certificates/best/n446.cert",
+    "certificates/best/n447.cert",
+    "certificates/best/n448.cert",
+    "certificates/best/n449.cert",
+    "certificates/best/n450.cert",
+    "certificates/best/n451.cert",
+    "certificates/best/n452.cert",
+    "certificates/best/n453.cert",
+    "certificates/best/n454.cert",
+    "certificates/best/n455.cert",
+    "certificates/best/n456.cert",
+    "certificates/best/n457.cert",
+    "certificates/best/n458.cert",
+    "certificates/best/n459.cert",
+    "certificates/best/n460.cert",
+    "certificates/best/n462.cert",
+    "certificates/best/n463.cert",
+    "certificates/best/n464.cert",
+    "certificates/best/n485.cert",
+    "certificates/best/n486.cert",
+    "certificates/best/n487.cert",
+    "certificates/best/n488.cert",
+    "certificates/best/n489.cert",
+    "certificates/best/n490.cert",
+    "certificates/best/n491.cert",
+    "certificates/best/n492.cert",
+    "certificates/best/n493.cert",
+    "certificates/best/n494.cert",
+    "certificates/best/n495.cert",
+    "certificates/best/n496.cert",
+    "certificates/best/n497.cert",
+    "certificates/best/n498.cert",
+    "certificates/best/n499.cert",
+    "certificates/best/n500.cert",
+    "certificates/best/n501.cert",
+    "certificates/best/n502.cert",
+    "certificates/best/n503.cert",
+    "certificates/best/n504.cert",
+    "certificates/best/n506.cert",
+    "certificates/best/n507.cert",
+    "certificates/best/n508.cert",
+    "certificates/best/n530.cert",
+    "certificates/best/n531.cert",
+    "certificates/best/n532.cert",
+    "certificates/best/n534.cert",
+    "certificates/best/n535.cert",
+    "certificates/best/n536.cert",
+    "certificates/best/n537.cert",
+    "certificates/best/n538.cert",
+    "certificates/best/n539.cert",
+    "certificates/best/n540.cert",
+    "certificates/best/n541.cert",
+    "certificates/best/n543.cert",
+    "certificates/best/n544.cert",
+    "certificates/best/n545.cert",
+    "certificates/best/n546.cert",
+    "certificates/best/n547.cert",
+    "certificates/best/n548.cert",
+    "certificates/best/n550.cert",
+    "certificates/best/n552.cert",
+    "certificates/best/n553.cert",
+    "certificates/best/n577.cert",
+    "certificates/best/n578.cert",
+    "certificates/best/n579.cert",
+    "certificates/best/n581.cert",
+    "certificates/best/n582.cert",
+    "certificates/best/n584.cert",
+    "certificates/best/n585.cert",
+    "certificates/best/n586.cert",
+    "certificates/best/n587.cert",
+    "certificates/best/n588.cert",
+    "certificates/best/n590.cert",
+    "certificates/best/n591.cert",
+    "certificates/best/n592.cert",
+    "certificates/best/n594.cert",
+    "certificates/best/n596.cert",
+    "certificates/best/n597.cert",
+    "certificates/best/n599.cert",
+    "certificates/best/n600.cert",
+    "certificates/best/n601.cert",
+    "certificates/best/n626.cert",
+    "certificates/best/n627.cert",
+    "certificates/best/n628.cert",
+    "certificates/best/n630.cert",
+    "certificates/best/n631.cert",
+    "certificates/best/n633.cert",
+    "certificates/best/n634.cert",
+    "certificates/best/n635.cert",
+    "certificates/best/n636.cert",
+    "certificates/best/n637.cert",
+    "certificates/best/n639.cert",
+    "certificates/best/n640.cert",
+    "certificates/best/n641.cert",
+    "certificates/best/n643.cert",
+    "certificates/best/n644.cert",
+    "certificates/best/n645.cert",
+    "certificates/best/n646.cert",
+    "certificates/best/n647.cert",
+    "certificates/best/n648.cert",
+    "certificates/best/n650.cert",
+    "certificates/best/n677.cert",
+    "certificates/best/n678.cert",
+    "certificates/best/n679.cert",
+    "certificates/best/n681.cert",
+    "certificates/best/n682.cert",
+    "certificates/best/n684.cert",
+    "certificates/best/n685.cert",
+    "certificates/best/n686.cert",
+    "certificates/best/n687.cert",
+    "certificates/best/n688.cert",
+    "certificates/best/n689.cert",
+    "certificates/best/n690.cert",
+    "certificates/best/n691.cert",
+    "certificates/best/n692.cert",
+    "certificates/best/n694.cert",
+    "certificates/best/n695.cert",
+    "certificates/best/n696.cert",
+    "certificates/best/n697.cert",
+    "certificates/best/n698.cert",
+    "certificates/best/n699.cert",
+    "certificates/best/n701.cert",
+    "certificates/best/n702.cert",
+    "certificates/best/n703.cert",
+    "certificates/best/n730.cert",
+    "certificates/best/n731.cert",
+    "certificates/best/n732.cert",
+    "certificates/best/n734.cert",
+    "certificates/best/n735.cert",
+    "certificates/best/n736.cert",
+    "certificates/best/n737.cert",
+    "certificates/best/n738.cert",
+    "certificates/best/n739.cert",
+    "certificates/best/n740.cert",
+    "certificates/best/n741.cert",
+    "certificates/best/n742.cert",
+    "certificates/best/n744.cert",
+    "certificates/best/n745.cert",
+    "certificates/best/n746.cert",
+    "certificates/best/n747.cert",
+    "certificates/best/n748.cert",
+    "certificates/best/n749.cert",
+    "certificates/best/n750.cert",
+    "certificates/best/n754.cert",
+    "certificates/best/n755.cert",
+    "certificates/best/n756.cert",
+    "certificates/best/n757.cert",
+    "certificates/best/n758.cert",
+    "certificates/best/n785.cert",
+    "certificates/best/n786.cert",
+    "certificates/best/n787.cert",
+    "certificates/best/n789.cert",
+    "certificates/best/n790.cert",
+    "certificates/best/n791.cert",
+    "certificates/best/n792.cert",
+    "certificates/best/n793.cert",
+    "certificates/best/n794.cert",
+    "certificates/best/n795.cert",
+    "certificates/best/n796.cert",
+    "certificates/best/n797.cert",
+    "certificates/best/n799.cert",
+    "certificates/best/n800.cert",
+    "certificates/best/n801.cert",
+    "certificates/best/n802.cert",
+    "certificates/best/n803.cert",
+    "certificates/best/n806.cert",
+    "certificates/best/n808.cert",
+    "certificates/best/n809.cert",
+    "certificates/best/n810.cert",
+    "certificates/best/n811.cert",
+    "certificates/best/n813.cert",
+    "certificates/best/n814.cert",
+    "certificates/best/n842.cert",
+    "certificates/best/n843.cert",
+    "certificates/best/n844.cert",
+    "certificates/best/n846.cert",
+    "certificates/best/n847.cert",
+    "certificates/best/n848.cert",
+    "certificates/best/n849.cert",
+    "certificates/best/n850.cert",
+    "certificates/best/n851.cert",
+    "certificates/best/n853.cert",
+    "certificates/best/n854.cert",
+    "certificates/best/n856.cert",
+    "certificates/best/n857.cert",
+    "certificates/best/n858.cert",
+    "certificates/best/n859.cert",
+    "certificates/best/n861.cert",
+    "certificates/best/n862.cert",
+    "certificates/best/n863.cert",
+    "certificates/best/n865.cert",
+    "certificates/best/n866.cert",
+    "certificates/best/n867.cert",
+    "certificates/best/n868.cert",
+    "certificates/best/n870.cert",
+    "certificates/best/n871.cert",
+    "certificates/best/n901.cert",
+    "certificates/best/n902.cert",
+    "certificates/best/n903.cert",
+    "certificates/best/n905.cert",
+    "certificates/best/n906.cert",
+    "certificates/best/n907.cert",
+    "certificates/best/n908.cert",
+    "certificates/best/n909.cert",
+    "certificates/best/n910.cert",
+    "certificates/best/n912.cert",
+    "certificates/best/n913.cert",
+    "certificates/best/n914.cert",
+    "certificates/best/n915.cert",
+    "certificates/best/n916.cert",
+    "certificates/best/n917.cert",
+    "certificates/best/n918.cert",
+    "certificates/best/n920.cert",
+    "certificates/best/n921.cert",
+    "certificates/best/n922.cert",
+    "certificates/best/n924.cert",
+    "certificates/best/n925.cert",
+    "certificates/best/n926.cert",
+    "certificates/best/n929.cert",
+    "certificates/best/n931.cert",
+    "certificates/best/n932.cert",
+    "certificates/best/n962.cert",
+    "certificates/best/n963.cert",
+    "certificates/best/n964.cert",
+    "certificates/best/n966.cert",
+    "certificates/best/n967.cert",
+    "certificates/best/n968.cert",
+    "certificates/best/n969.cert",
+    "certificates/best/n970.cert",
+    "certificates/best/n971.cert",
+    "certificates/best/n974.cert",
+    "certificates/best/n975.cert",
+    "certificates/best/n976.cert",
+    "certificates/best/n977.cert",
+    "certificates/best/n978.cert",
+    "certificates/best/n980.cert",
+    "certificates/best/n981.cert",
+    "certificates/best/n982.cert",
+    "certificates/best/n983.cert",
+    "certificates/best/n984.cert",
+    "certificates/best/n986.cert",
+    "certificates/best/n987.cert",
+    "certificates/best/n988.cert",
+    "certificates/best/n990.cert",
+    "certificates/best/n991.cert",
+    "certificates/best/n992.cert",
+    "certificates/best/n993.cert",
+    "certificates/best/n994.cert",
+    "certified_bounds.json",
+    "n204.txt",
+    "upper_bounds.json",
+    "verify_bound_certificate.py"
+  ],
+  "pinned_only": [
+    {
+      "match": "**/README.md",
+      "reason": "No licence for the source's prose. Hash-pinned, not copied or executed."
+    },
+    {
+      "match": "upper_bounds.json",
+      "reason": "The author's bound index for n = 1 to 1023 at the pin. Its verified bounds at counts with no certificate file of their own, which delete squares from the next count's certificate, are transcribed into the history ledger and held for the owner's answer (think-f2io, proposed D6); pinned for provenance."
+    },
+    {
+      "match": "certified_bounds.json",
+      "reason": "The author's certificate and construction index at the pin; its bounds are transcribed into the history ledger; pinned for provenance."
+    },
+    {
+      "match": "bound_sources.json",
+      "reason": "The author's list of the sources the index compares with; pinned for provenance, as no claim rests on it."
+    },
+    {
+      "match": "certificates/best/manifest.json",
+      "reason": "The source's provenance manifest: exact bounds, digests, per-count credits, parent hashes and the author's checker outcomes; each row's credit is read from it at the pin. Pinned for credit, as no claim rests on it."
+    },
+    {
+      "match": "certificates/best/SHA256SUMS",
+      "reason": "The source's digest list for certificates/best/; pinned for provenance."
+    },
+    {
+      "match": "verify_bound_certificate.py",
+      "reason": "The source's exact checker, byte-identical to the copy the 18 October packet retains under its MIT licence; never executed here.",
+      "identical_to": "packing/resources/web/couzo-issue678-2026-10-18/source/verify_bound_certificate.py"
+    },
+    {
+      "match": "BOUND_VERIFIER_LICENSE.txt",
+      "reason": "The checker's MIT licence, byte-identical to the copy the 18 October packet retains.",
+      "identical_to": "packing/resources/web/couzo-issue678-2026-10-18/source/BOUND_VERIFIER_LICENSE.txt"
+    },
+    {
+      "match": "certificates/best/n327.cert",
+      "reason": "Published at 4e4c8ce, below the side it beats by under 1e-12 with the same 12-place print, a sub-print re-certification held for the owner's answer (think-fwa9); pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/best/n331.cert",
+      "reason": "Published at 4e4c8ce, above Göbel's classical construction at its count, held for the owner's answer on #613 (think-8krd); pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/best/n332.cert",
+      "reason": "Published at 4e4c8ce, below the side it beats by under 1e-12 with the same 12-place print, a sub-print re-certification held for the owner's answer (think-fwa9); pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/best/n407.cert",
+      "reason": "Published at 4e4c8ce, above Göbel's classical construction at its count, held for the owner's answer on #613 (think-8krd); pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/best/n408.cert",
+      "reason": "Published at 4e4c8ce, above Göbel's classical construction at its count, held for the owner's answer on #613 (think-8krd); pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/best/n415.cert",
+      "reason": "Published at 4e4c8ce, above Göbel's classical construction at its count, held for the owner's answer on #613 (think-8krd); pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/best/n416.cert",
+      "reason": "Published at 4e4c8ce, above Göbel's classical construction at its count, held for the owner's answer on #613 (think-8krd); pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/best/n445.cert",
+      "reason": "Published at 4e4c8ce, above Göbel's classical construction at its count, held for the owner's answer on #613 (think-8krd); pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/best/n448.cert",
+      "reason": "Published at 4e4c8ce, above Göbel's classical construction at its count, held for the owner's answer on #613 (think-8krd); pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/best/n449.cert",
+      "reason": "Published at 4e4c8ce, above Göbel's classical construction at its count, held for the owner's answer on #613 (think-8krd); pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/best/n488.cert",
+      "reason": "Published at 4e4c8ce, above Göbel's classical construction at its count, held for the owner's answer on #613 (think-8krd); pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/best/n489.cert",
+      "reason": "Published at 4e4c8ce, above Göbel's classical construction at its count, held for the owner's answer on #613 (think-8krd); pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/best/n491.cert",
+      "reason": "Published at 4e4c8ce, above Göbel's classical construction at its count, held for the owner's answer on #613 (think-8krd); pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/best/n492.cert",
+      "reason": "Published at 4e4c8ce, above Göbel's classical construction at its count, held for the owner's answer on #613 (think-8krd); pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/best/n493.cert",
+      "reason": "Published at 4e4c8ce, above Göbel's classical construction at its count, held for the owner's answer on #613 (think-8krd); pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/best/n537.cert",
+      "reason": "Published at 4e4c8ce, above Göbel's classical construction at its count, held for the owner's answer on #613 (think-8krd); pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/best/n538.cert",
+      "reason": "Published at 4e4c8ce, above Göbel's classical construction at its count, held for the owner's answer on #613 (think-8krd); pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/best/n585.cert",
+      "reason": "Published at 4e4c8ce, above Göbel's classical construction at its count, held for the owner's answer on #613 (think-8krd); pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/best/n586.cert",
+      "reason": "Published at 4e4c8ce, above Göbel's classical construction at its count, held for the owner's answer on #613 (think-8krd); pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/best/n634.cert",
+      "reason": "Published at 4e4c8ce, above Göbel's classical construction at its count, held for the owner's answer on #613 (think-8krd); pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/best/n635.cert",
+      "reason": "Published at 4e4c8ce, above Göbel's classical construction at its count, held for the owner's answer on #613 (think-8krd); pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/best/n636.cert",
+      "reason": "Published at 4e4c8ce, above Göbel's classical construction at its count, held for the owner's answer on #613 (think-8krd); pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/best/n685.cert",
+      "reason": "Published at 4e4c8ce, above Göbel's classical construction at its count, held for the owner's answer on #613 (think-8krd); pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/best/n686.cert",
+      "reason": "Published at 4e4c8ce, above Göbel's classical construction at its count, held for the owner's answer on #613 (think-8krd); pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/best/n687.cert",
+      "reason": "Published at 4e4c8ce, above Göbel's classical construction at its count, held for the owner's answer on #613 (think-8krd); pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/best/n688.cert",
+      "reason": "Published at 4e4c8ce, above Göbel's classical construction at its count, held for the owner's answer on #613 (think-8krd); pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/best/n738.cert",
+      "reason": "Published at 4e4c8ce, above Göbel's classical construction at its count, held for the owner's answer on #613 (think-8krd); pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/best/n739.cert",
+      "reason": "Published at 4e4c8ce, above Göbel's classical construction at its count, held for the owner's answer on #613 (think-8krd); pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/best/n740.cert",
+      "reason": "Published at 4e4c8ce, above Göbel's classical construction at its count, held for the owner's answer on #613 (think-8krd); pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/best/n793.cert",
+      "reason": "Published at 4e4c8ce, above Göbel's classical construction at its count, held for the owner's answer on #613 (think-8krd); pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/best/n794.cert",
+      "reason": "Published at 4e4c8ce, above Göbel's classical construction at its count, held for the owner's answer on #613 (think-8krd); pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/best/n795.cert",
+      "reason": "Published at 4e4c8ce, above Göbel's classical construction at its count, held for the owner's answer on #613 (think-8krd); pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/best/n851.cert",
+      "reason": "Published at 4e4c8ce, above Göbel's classical construction at its count, held for the owner's answer on #613 (think-8krd); pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/best/n853.cert",
+      "reason": "Published at 4e4c8ce, above Göbel's classical construction at its count, held for the owner's answer on #613 (think-8krd); pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/best/n861.cert",
+      "reason": "Published at 4e4c8ce, above Göbel's classical construction at its count, held for the owner's answer on #613 (think-8krd); pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/best/n910.cert",
+      "reason": "Published at 4e4c8ce, above Göbel's classical construction at its count, held for the owner's answer on #613 (think-8krd); pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/best/n912.cert",
+      "reason": "Published at 4e4c8ce, above Göbel's classical construction at its count, held for the owner's answer on #613 (think-8krd); pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/best/n920.cert",
+      "reason": "Published at 4e4c8ce, above Göbel's classical construction at its count, held for the owner's answer on #613 (think-8krd); pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/best/n921.cert",
+      "reason": "Published at 4e4c8ce, above Göbel's classical construction at its count, held for the owner's answer on #613 (think-8krd); pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/best/n964.cert",
+      "reason": "Published at 4e4c8ce, above Göbel's classical construction at its count, held for the owner's answer on #613 (think-8krd); pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/best/n971.cert",
+      "reason": "Published at 4e4c8ce, above Göbel's classical construction at its count, held for the owner's answer on #613 (think-8krd); pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/best/n974.cert",
+      "reason": "Published at 4e4c8ce, above Göbel's classical construction at its count, held for the owner's answer on #613 (think-8krd); pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/best/n204.cert",
+      "reason": "Mykhailo Polkovskyi's 204 certificate, the same Git blob (301c930) as certificates/square-204.cert at Mishapolk/square-packing-records@70a033f, T-186's certificate, which the mishapolk-kkt-refinements-2026-10-14 packet pins by the same SHA-256 under derived-only custody; pinned by digest only here, as there."
+    }
+  ]
+}

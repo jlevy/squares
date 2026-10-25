@@ -171,11 +171,28 @@ SCREEN_EXCLUDED: dict[str, tuple[str, ...]] = {
 #: October 2026 the four it moved to Evan Daniel's regularized views (T-225, think-ql4v),
 #: whose least margins are 1e-20: separating and translating squares 8 and 25 at 204
 #: against T-223's 39 and 76, 2 and 9 at 227 against T-196's 22 and 26, 2 and 25 at 229
-#: against T-199's 90 and 134, and 0 and 16 at 260 against T-223's 17 and 53.
+#: against T-199's 90 and 134, and 0 and 16 at 260 against T-223's 17 and 53; and the pass
+#: of 23 October 2026 the two it moved to Mykhailo Polkovskyi's #719 re-solves (T-229,
+#: think-4h23): separating and translating squares 6 and 23 at 105 against T-174's 8 and
+#: 41, and 21 and 85 at 204 against T-225's 8 and 25; and the same pass the one it moved to
+#: Evan Daniel's issue-728 certificate (T-230, think-icp1), 303, 10 separating and 27
+#: translating squares against T-186's 4 and 24; and the same pass the nine it moved to
+#: algebraic houses (T-174 and T-193, think-ot5c): separating and translating squares 3
+#: and 7 at 70 against T-146's 4 and 7, 7 and 22 at 102 against its 6 and 15, 4 and 20 at
+#: 123 against its 4 and 15, 3 and 10 at 153 against T-173's 37 and 105, 5 and 11 at 207
+#: against its 9 and 19, 3 and 17 at 258 against T-146's 3 and 16, and 54 and 190 at 259
+#: against T-136's 37 and 177, with 295 and 302 unchanged. The pass of 24 October 2026
+#: moved 204 to the release's lower 204 file (T-231, think-h01y), the same packing at its
+#: solved side: 21 and 85 again, so the totals stand; and 303 again, to Amund Kristiansen's
+#: issue-755 certificate (T-239, think-tqb5): 12 separating and 37 translating squares
+#: against T-230's 10 and 27. The pass of 25 October 2026 moved 268 and 303 to Francisco
+#: Couzo's issue-763 certificates (T-240, think-bk9r): 28 separating and 100 translating
+#: squares at 268 against T-174's 10 and 22, and 57 and 92 at 303 against T-239's 12 and
+#: 37.
 SCREEN_FINDINGS: dict[str, tuple[int, int, int, int]] = {
-    "n=1..100": (28, 112, 86, 577),
-    "n=1..200": (67, 433, 182, 2113),
-    "n=1..324": (124, 1186, 302, 5132),
+    "n=1..100": (28, 111, 86, 577),
+    "n=1..200": (67, 397, 182, 2012),
+    "n=1..324": (124, 1317, 302, 5326),
 }
 UNDETERMINED_BY_MISS = (28,)
 #: The cases the two sampled sweeps re-derive on every pull request, computed here from
@@ -281,6 +298,9 @@ BROWSER_FLOOR_LIVENESS_TESTS = "tests/test_browser_floor_contract.py"
 #: Forwarder navigation follows the same Chromium owner and required-capability rule.
 SITE_FORWARDER_TEST = "tests/test_site_forwarders.py"
 SITE_LAYOUT_TESTS = (
+    "tests/test_site_navigation.py",
+    "tests/test_site_tutorial_design.py",
+    "tests/test_site_popover_controls.py",
     "tests/test_site_headroom.py",
     "tests/test_site_homepage.py",
     "tests/test_site_result_popover.py",
@@ -3681,11 +3701,13 @@ def _synopsis(context: Context) -> str:
     release_base = context.environment.get("PACKING_RELEASE_BASE_REF") or (
         f"origin/{pull_request_base}" if pull_request_base else "origin/main"
     )
-    impact_baseline = (
-        ("--base", "HEAD^1")
-        if _git("rev-parse", "HEAD").strip() == _git("rev-parse", "origin/main").strip()
-        else ("--baseline-ref", release_base)
-    )
+    on_main = _git("rev-parse", "HEAD").strip() == _git("rev-parse", "origin/main").strip()
+    impact_baseline = ("--base", "HEAD^1") if on_main else ("--baseline-ref", release_base)
+    # Every registered S4 or S5 result needs its News item. A News entry names only
+    # merged PRs, so a result registered or raised by the change under test -- since
+    # main, or on main since the merge before it -- is owed after the merge rather than
+    # failed; a stack's layers share that grace, measured from main, not the PR base.
+    announcement_base = "HEAD^1" if on_main else "origin/main"
     return _commands(
         context,
         (
@@ -3698,6 +3720,8 @@ def _synopsis(context: Context) -> str:
                 "--check",
                 "--baseline-ref",
                 "origin/main",
+                "--announcement-base",
+                announcement_base,
             ),
             (sys.executable, "-m", "devtools.check_release_impact", *impact_baseline),
         ),
@@ -3968,6 +3992,18 @@ def _regularization_state(context: Context) -> str:
     return output
 
 
+def _flip_regularization(context: Context) -> str:
+    # About 1.4 s of wall and 1.3 cpu-seconds, serial (2026-10-23, 324 counts on a
+    # four-core host): every count's default picture read from its retained rendering,
+    # the view's where `default-drawings.json` makes the view the default, and its
+    # canonical pose decided again in binary64 (regularization policy, section 13), then
+    # compared with the record the renderers read each pose from. A row the rule no longer
+    # gives fails it, naming the count; no frame is built, which is what keeps it fast.
+    output = _module(context, "devtools.flip_regularization", "--check")
+    _require_text(output, "flip regularization check passed")
+    return output
+
+
 def _vendored_evand(context: Context) -> str:
     # About 0.2s: `vendor/evand-regularize`, Evan Daniel's regularizer copied at a pin, is
     # held to its manifest -- each file's size, SHA-256 and mode at the upstream commit,
@@ -4104,7 +4140,12 @@ def _case_prose(context: Context) -> str:
     # record against itself, not the mathematics -- n-017, n-018, and n-019 all stated a
     # verified lower bound in prose that the front matter above it had already moved past,
     # and stayed that way for six hours; check_rung_figures never reads a case body.
-    return _module(context, "devtools.check_case_prose")
+    # About a second more: the AI-assistance sentence each record's citations owe, read
+    # from the bibliography's `ai_assistance` and the Kingbird capture's credit lines,
+    # which ran in no tier until think-j5so.
+    prose = _module(context, "devtools.check_case_prose")
+    assistance = _module(context, "devtools.state_ai_assistance", "--check")
+    return f"{prose}\n{assistance}"
 
 
 def _prose_ceremony(context: Context) -> str:
@@ -5809,7 +5850,8 @@ STEPS: tuple[Step, ...] = (
         ),
     ),
     Step(
-        "every drawn picture is regularized, regular as published, decided or exempt",
+        "every drawn picture is regularized, regular as published, decided, owed to an open "
+        "bead or exempt",
         _regularization_state,
         fast=True,
         records=True,
@@ -5826,6 +5868,24 @@ STEPS: tuple[Step, ...] = (
             "packing/cases/regularized_drawings/*",
             "packing/witnesses/known-best/*",
             "packing/devtools/select_houses.py",
+            *_RENDERER_HUB,
+        ),
+    ),
+    Step(
+        "flip regularization record is current",
+        _flip_regularization,
+        fast=True,
+        records=True,
+        # It reads `default-drawings.json` through `default_drawings.regularized_defaults`,
+        # which holds it to the layer's index, so it claims what that module imports.
+        touches=(
+            *_CORE,
+            "packing/atlas/known-best/flip-regularization.json",
+            "packing/atlas/known-best/flip-regularization.schema.yaml",
+            "packing/atlas/known-best/default-drawings.json",
+            "packing/atlas/known-best/rendering/*",
+            "packing/atlas/known-best/regularized/*",
+            "packing/devtools/flip_regularization.py",
             *_RENDERER_HUB,
         ),
     ),
@@ -6057,7 +6117,11 @@ STEPS: tuple[Step, ...] = (
             *_CORE,
             "packing/devtools/check_case_prose.py",
             "packing/devtools/check_rung_figures.py",
+            "packing/devtools/state_ai_assistance.py",
             "packing/frontier/n-*.md",
+            "packing/frontier/source-coverage.yaml",
+            "packing/resources/bibliography.yaml",
+            "packing/resources/web/kingbird-squares-in-squares*",
             # The checker imports `migrate_math`, which enters the renderer hub.
             *_RENDERER_HUB,
         ),
@@ -6452,6 +6516,27 @@ def _push_test_step(
         # subset keeps the shared cap, which is the guard against one hung test.
         budget_seconds=FAST_SUITE_BUDGET_SECONDS if everything else None,
     )
+
+
+def _push_storage_step(base: str) -> Step:
+    """The added-blob guard against the `--push` base, the local half of the PR gate.
+
+    The pull request runs `devtools.check_added_blobs` with its own base and head SHA;
+    this runs it against `--since` (default `origin/main`), which is that base once
+    fetched, so a bulk blob is refused before it is pushed rather than after (`OR-18`,
+    review A3 on #406). It has no `touches`: any path can carry a blob, so every change
+    selects it. It reads Git metadata, streams each new blob's content through zlib to
+    size it as Git stores it, and counts the thin pack of the branch's new objects for the
+    total (`OR-18`), which costs about a second on a routine branch and is bounded by the
+    guard's own 30-second deadline.
+    """
+
+    def action(context: Context) -> str:
+        return _run(
+            context, (sys.executable, "-m", "devtools.check_added_blobs", "--base", base)
+        )
+
+    return Step(name="added Git blob storage", action=action, fast=True)
 
 
 def _select_steps(
@@ -7899,11 +7984,11 @@ def main(argv: Sequence[str] | None = None) -> int:
                 and (step.broad or (step.reachable_test_files or 0) >= jobs)
             ):
                 exclusive_step_name = step.name
-            selected = [*selected, step]
+            selected = [*selected, _push_storage_step(base), step]
             scope = "the whole suite" if step.broad else "a reachable subset"
             _announce(
                 namespace,
-                f"== pre-push floor against {base}: tests select {scope} "
+                f"== pre-push floor against {base}: added-blob guard, and tests select {scope} "
                 f"({'quick + slow' if namespace.include_reachable_slow else 'quick'} lane) ==",
                 "",
             )

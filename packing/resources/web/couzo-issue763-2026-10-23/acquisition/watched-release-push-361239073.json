@@ -1,0 +1,220 @@
+{
+ "format": "beyond-horizon-watched-release-v1",
+ "publication": "https://github.com/franciscouzo/square-packing/tree/fa6237e288cf3fc53b53fc43438c91f3f59c40e9",
+ "commit": "fa6237e288cf3fc53b53fc43438c91f3f59c40e9",
+ "committed": "2026-10-23T18:59:39Z",
+ "published": "2026-10-23T23:38:42Z",
+ "walk": "upper-bounds-couzo-964ee2b-notebooks-20261024",
+ "rows": [
+  {
+   "n": 327,
+   "certificate": "certificates/best/n327.cert",
+   "printed": "18.583782194361"
+  },
+  {
+   "n": 340,
+   "certificate": "certificates/best/n340.cert",
+   "printed": "18.926898901624"
+  },
+  {
+   "n": 364,
+   "certificate": "certificates/parents/05df9ad756b3137f4e959fa32c7868476e8ea6bf55fe29005653fd279c410e51.cert",
+   "printed": "19.571428576644"
+  },
+  {
+   "n": 404,
+   "certificate": "certificates/best/n404.cert",
+   "printed": "20.591378149728"
+  },
+  {
+   "n": 406,
+   "certificate": "certificates/best/n406.cert",
+   "printed": "20.656854250299"
+  },
+  {
+   "n": 409,
+   "certificate": "certificates/best/n409.cert",
+   "printed": "20.740417290708"
+  },
+  {
+   "n": 445,
+   "certificate": "certificates/parents/c635120ea1972ac3904f244a8d2d0f4c7063838f13ec11bbd1b4905217abbbfe.cert",
+   "printed": "21.591378149728"
+  },
+  {
+   "n": 446,
+   "certificate": "certificates/best/n446.cert",
+   "printed": "21.645753254767"
+  },
+  {
+   "n": 450,
+   "certificate": "certificates/parents/a648ee3fb963efe1750a271bf38afede6a6eb7cba15d8afea15beac41e629e65.cert",
+   "printed": "21.733166014146"
+  },
+  {
+   "n": 454,
+   "certificate": "certificates/best/n454.cert",
+   "printed": "21.823102658532"
+  },
+  {
+   "n": 488,
+   "certificate": "certificates/parents/67df4acb584e77b56acb9aefb7d54ce6d55a697b03b37c725900dd931ebf043f.cert",
+   "printed": "22.591378149728"
+  },
+  {
+   "n": 533,
+   "certificate": "certificates/best/n533.cert",
+   "printed": "23.583782194417"
+  },
+  {
+   "n": 537,
+   "certificate": "certificates/best/n537.cert",
+   "printed": "23.692388159698"
+  },
+  {
+   "n": 540,
+   "certificate": "certificates/parents/aad943a6e63cdbaca40bb456b6b2b5634b88e5e5c40b7c2e29c9cbf638f2f68f.cert",
+   "printed": "23.756125423085"
+  },
+  {
+   "n": 541,
+   "certificate": "certificates/best/n541.cert",
+   "printed": "23.778174597323"
+  },
+  {
+   "n": 579,
+   "certificate": "certificates/best/n579.cert",
+   "printed": "24.563448006414"
+  },
+  {
+   "n": 580,
+   "certificate": "certificates/parents/95042f46efa5092e76ec4faf783b2ac127cc946175353e19d8d9ef25d6a823a0.cert",
+   "printed": "24.583782194417"
+  },
+  {
+   "n": 589,
+   "certificate": "certificates/best/n589.cert",
+   "printed": "24.778174594028"
+  },
+  {
+   "n": 628,
+   "certificate": "certificates/best/n628.cert",
+   "printed": "25.535533911216"
+  },
+  {
+   "n": 633,
+   "certificate": "certificates/best/n633.cert",
+   "printed": "25.656854253781"
+  },
+  {
+   "n": 640,
+   "certificate": "certificates/parents/d318b5616821caa84f8b4613785588758e2f24af52b4ff103eff9856f892511b.cert",
+   "printed": "25.813708503286"
+  },
+  {
+   "n": 679,
+   "certificate": "certificates/parents/ae4c7fc59f5f1d489b21e8c35978fa86ebffc4c474d0f9721e53dfb6adc34f5a.cert",
+   "printed": "26.535533911216"
+  },
+  {
+   "n": 685,
+   "certificate": "certificates/best/n685.cert",
+   "printed": "26.692388159732"
+  },
+  {
+   "n": 732,
+   "certificate": "certificates/parents/5bb844e20c41fc85f1ab880de0db3a4f094cbe94a24e30f1f9302867da1855a8.cert",
+   "printed": "27.535533911216"
+  },
+  {
+   "n": 735,
+   "certificate": "certificates/best/n735.cert",
+   "printed": "27.617572177905"
+  },
+  {
+   "n": 738,
+   "certificate": "certificates/parents/1c01767d5e2ef3cb809ef91114fb2f706ec31325ed86256b6cf2674610c0eff2.cert",
+   "printed": "27.691431135633"
+  },
+  {
+   "n": 787,
+   "certificate": "certificates/parents/d2b03e09b63cd8d8635b849c5cea45181d07b2dfb5f4d457814b2a7804acabfb.cert",
+   "printed": "28.535533911216"
+  },
+  {
+   "n": 790,
+   "certificate": "certificates/best/n790.cert",
+   "printed": "28.614368942839"
+  },
+  {
+   "n": 791,
+   "certificate": "certificates/best/n791.cert",
+   "printed": "28.642135624899"
+  },
+  {
+   "n": 793,
+   "certificate": "certificates/best/n793.cert",
+   "printed": "28.678779879669"
+  },
+  {
+   "n": 844,
+   "certificate": "certificates/parents/409be52c47ae715e3ba0c7b283300db5f2fea1c48dcb926febd202a9adfb4afd.cert",
+   "printed": "29.535533911216"
+  },
+  {
+   "n": 846,
+   "certificate": "certificates/best/n846.cert",
+   "printed": "29.583782195484"
+  },
+  {
+   "n": 854,
+   "certificate": "certificates/best/n854.cert",
+   "printed": "29.727922065706"
+  },
+  {
+   "n": 856,
+   "certificate": "certificates/best/n856.cert",
+   "printed": "29.778174594233"
+  },
+  {
+   "n": 903,
+   "certificate": "certificates/parents/1c7bb8aa03df2b4e637f4d158c472efb5f74bc94139bd0e5806666a5df3d7e94.cert",
+   "printed": "30.535533911216"
+  },
+  {
+   "n": 906,
+   "certificate": "certificates/best/n906.cert",
+   "printed": "30.591378150840"
+  },
+  {
+   "n": 913,
+   "certificate": "certificates/parents/7bfefb2ac5bb4778a4344c46c687bf91a74a61162c537c8bd6b9cd75e2bda20d.cert",
+   "printed": "30.727922065706"
+  },
+  {
+   "n": 964,
+   "certificate": "certificates/parents/bed12e3bf60237a8859b8c2e8d0eda241a2774a5db9ffe3c37772aa64a1e8717.cert",
+   "printed": "31.535533911216"
+  },
+  {
+   "n": 965,
+   "certificate": "certificates/best/n965.cert",
+   "printed": "31.563625656683"
+  },
+  {
+   "n": 967,
+   "certificate": "certificates/parents/6a491a5cb96bdaa066c3e1caf0f16d4ff94dca415f303082e1b18c80ef1b53d5.cert",
+   "printed": "31.591378150840"
+  },
+  {
+   "n": 971,
+   "certificate": "certificates/best/n971.cert",
+   "printed": "31.678779879703"
+  },
+  {
+   "n": 975,
+   "certificate": "certificates/best/n975.cert",
+   "printed": "31.727922066728"
+  }
+ ]
+}

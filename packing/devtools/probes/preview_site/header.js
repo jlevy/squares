@@ -1,6 +1,7 @@
 // Where a page's header stands, from the top of the document in CSS pixels: the
-// navigation bar, the rule under it, the section tabs a page of a section carries (the
-// Visualize section's Film and Workbench) and the first block of the page's content.
+// navigation bar, the rule under it, any section tabs in the header (`nav.site-tabs`;
+// no page carries them since the Film and Workbench tabs went on 2026-10-22, so `tabs`
+// is null on every page today) and the first block of the page's content.
 // The rule is the lower border of the header slot, or of the bar where the slot hands
 // its rule to the bar; the first block is an application's viewport, or whatever opens
 // a page's column, a title, a picture or a table, passing over what is out of the flow.
@@ -91,12 +92,16 @@
       }
     : null;
   probe.remove();
-  const links = [...document.querySelectorAll(".site-nav a[data-page]")];
+  const links = [...document.querySelectorAll(".site-nav a[data-page]")].filter(
+    (link) => link.getClientRects().length > 0,
+  );
   const lines = new Set(links.map((link) => Math.round(link.getBoundingClientRect().top)));
   const nameText = [...document.querySelectorAll(".site-nav .site-name-text")].find(
     (label) => label.getClientRects().length > 0,
   );
+  const breadcrumb = document.querySelector(".site-breadcrumbs");
   return {
+    breadcrumb: breadcrumb && breadcrumb.getClientRects().length > 0 ? box(breadcrumb) : null,
     nav: nav && box(nav),
     type: {
       body: size(document.querySelector(".kpress-long-text > p:not([class])")),

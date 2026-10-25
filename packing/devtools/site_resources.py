@@ -16,9 +16,10 @@ from devtools.profile_links import ProfileIndex, named_profile_ids, public_index
 from sqpack.contributors import record_metadata
 
 #: The other public square-packing projects on GitHub that the research frontier cites:
-#: each repository's home, its author as the record credits them (the GitHub handle
-#: where the record names no one), and what it holds. A test holds this list to cover
-#: every source repository in the source-coverage register.
+#: each repository's home (a gist's, at no revision, for a source published as a gist),
+#: its author as the record credits them (the GitHub handle where the record names no
+#: one), and what it holds. A test holds this list to cover every source repository in
+#: the source-coverage register.
 OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
     (
         "https://github.com/SidG2k1/square-packing-refinements",
@@ -47,6 +48,14 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         "https://github.com/wand125/square-packing",
         "Hiroaki Hosono",
         "Canonical certificate and checker repository; historical source pins remain valid.",
+    ),
+    (
+        "https://github.com/wand125/square-packing-tools",
+        "Hiroaki Hosono",
+        (
+            "Tools for Tokoharu's rectangle-density solver, and an exact point and "
+            "threshold-charge row checker."
+        ),
     ),
     (
         "https://github.com/lollipoll/couzo-five-exact-certificates",
@@ -120,6 +129,15 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         ),
     ),
     (
+        "https://github.com/TheSnakeFang/squarepack-lean",
+        "Kevin Fang",
+        (
+            "A Lean 4 proof of Fang\u2019s Theorem 1, s(n\u00b2 \u2212 n + 1) < n for every"
+            " n \u2265 15, and of the single-step bounds of his Theorem 2 (T-163); not built"
+            " here."
+        ),
+    ),
+    (
         "https://github.com/ebdeleeuw/square-packing-n70",
         "Eric Deleeuw",
         "An exact rational refinement of Ryan Xu's packing of 70 squares (T-137).",
@@ -130,6 +148,14 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         (
             "Decimal packings at 48 counts; exact witnesses derived here prove the printed"
             " sides at the 30 within the corpus (T-138)."
+        ),
+    ),
+    (
+        "https://github.com/Mishapolk/square-packing-records/blob/12fc46678fa8eefa3f156ff37dfffd84c8f3a580/certificates/n204.cert",
+        "Mykhailo Polkovskyi",
+        (
+            "The lower of the two 204 certificates issue 719's release published, retained"
+            " and replayed here, and the house best packing at 204 (T-231)."
         ),
     ),
     (
@@ -233,6 +259,19 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         "A certified lower bound for eleven squares.",
     ),
     (
+        "https://github.com/Esummins/packing",
+        "E. Summins",
+        (
+            "The n = 11 lab's simple-square stratification series, with a replay of "
+            "Overbeck's eleven-square certificate."
+        ),
+    ),
+    (
+        "https://github.com/chelokot/square-packing-archive",
+        "chelokot",
+        "A counterexample to Nagamochi's scoring lemma, and a Lean proof that s(k^2 - 2) = k.",
+    ),
+    (
         "https://github.com/Kleddamag/17-squares-certified-bound",
         "Marc Leonard Overbeck",
         "Certified lower bounds for seventeen squares.",
@@ -288,6 +327,23 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         "Thomas Schadt",
         "A record packing of 29 squares.",
     ),
+    (
+        "https://gist.github.com/amundsk/78f9f0e7b4669f2f509a281845081768",
+        "Amund Kristiansen",
+        (
+            "An exact certificate for 303 squares, another arrangement of Evan Daniel's"
+            " packing found from it, replayed and reviewed here (T-239)."
+        ),
+    ),
+    (
+        "https://gist.github.com/amundsk/e4df936fb09c68446598d4c8309d0166",
+        "Amund Kristiansen",
+        (
+            "Exact certificates for fourteen counts from 334 to 504, each, the author says,"
+            " found from the packing at the count in Francisco Couzo's 964ee2b index (#763);"
+            " twelve are rows beyond the corpus."
+        ),
+    ),
 )
 
 #: David Ellsworth's Squares in Squares catalogue, the record's `[Kingbird]`.
@@ -334,8 +390,8 @@ CATALOGUE_SITES: tuple[tuple[str, str, str, str], ...] = (
 #: Other cited result pages, including first-party GitHub issue reports, ranked with the
 #: projects on GitHub: each one's address, its name (a post's is its title, as the post
 #: gives it), its author as the record credits them, and what it holds. They are the
-#: source-coverage register's two sources off GitHub that are not a catalogue,
-#: UnitSquare's release and Wang and Li's Zenodo record, and the two posts behind
+#: source-coverage register's three sources off GitHub that are not a catalogue,
+#: UnitSquare's release and Wang and Li's and Fang's Zenodo records, and the two posts behind
 #: Burns's and Massaccesi's n = 17 bound, whose key the register credits with T-015 and
 #: T-016 and the case records cite. A test holds every source the coverage register
 #: reviews to a card, here or in `OTHER_PROJECTS`, and every address here and in
@@ -387,6 +443,24 @@ OTHER_SITES: tuple[tuple[str, str, str, str], ...] = (
         (
             "An exact lower bound for eleven squares, a reweighting of Overbeck\u2019s"
             " certificate."
+        ),
+    ),
+    (
+        "https://doi.org/10.5281/zenodo.23463481",
+        "Zenodo 23463481",
+        "Kevin Fang",
+        (
+            "The note, draft v0.9, with the proof of Fang\u2019s Theorems 1 and 2 on n\u00b2"
+            " \u2212 n + 1 squares below side n (T-163)."
+        ),
+    ),
+    (
+        "https://arxiv.org/abs/2609.37410",
+        "arXiv 2609.37410",
+        "Hakan Karaku\u015f",
+        (
+            "A counterexample to Nagamochi\u2019s scoring lemma, and a strip-measure lower"
+            " bound for every nonsquare count from eight."
         ),
     ),
     (

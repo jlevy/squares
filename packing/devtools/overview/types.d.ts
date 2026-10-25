@@ -10,7 +10,7 @@ interface SiteTableFilter {
    * reads), a number the row's list of numbers and ranges must hold, or a name the
    * row's list of names must have.
    */
-  kind: "equals" | "flag" | "min" | "max" | "since" | "covers" | "has";
+  kind: "equals" | "flag" | "min" | "max" | "since" | "covers" | "has" | "one-of";
   value: string;
 }
 
@@ -47,8 +47,8 @@ declare function enhanceMath(): Promise<void> | undefined;
 /** The atlas's two views (`atlas-view.js`): the grid, and the triangle of rows by k. */
 type AtlasView = "grid" | "triangle";
 
-/** The atlas's three sizes of tile (`atlas-view.js`), Small the default. */
-type AtlasSize = "small" | "medium" | "large";
+/** The atlas's four sizes of tile (`atlas-view.js`), Small the rendered default. */
+type AtlasSize = "small" | "medium" | "large" | "xlarge";
 
 /** Drawing scale within a reserved tile, Fixed the default. */
 type AtlasScale = "fixed" | "row" | "global";
@@ -90,6 +90,26 @@ interface SiteAtlasViewApi {
   widest(last: number): number;
   perLine(width: number, least: number, most: number, gap?: number): number;
   perLineAt(width: number, least: number, most: number, scale: number, gap?: number): number;
+  tileAt(width: number, least: number, scale: number, gap?: number): number;
+  smoothMin(a: number, b: number, bend: number): number;
+  smoothMax(a: number, b: number, bend: number): number;
+  curve(values: readonly number[], index: number, through: number): number;
+  smootherstep(t: number): number;
+  ramp(t: number, ease?: number): number;
+  zoomAlong(scrolled: number, from: number, length: number, least: number): number;
+  frameAt(point: number, start: number, settled: number, across: number): number;
+  settle(distance: number, bend: number): number;
+  launch(t: number): number;
+  sideways(
+    slack?: number,
+    share?: number,
+    recent?: number,
+  ): (x: number, y: number, time: number) => number;
+  journey(ys: readonly number[], us: readonly number[], scrolled: number): number;
+  followLeft(room: number, width: number, across: number, bend?: number, behind?: number): number;
+  nearestSize(tile: number, tiles: Readonly<Record<AtlasSize, number>>): AtlasSize;
+  between(from: number, to: number, through: number): number;
+  along(tops: readonly number[], at: number): { index: number; through: number };
   place(n: number, per: number, starts?: AtlasGridStarts): AtlasTrianglePlace;
   viewOf(search: string): AtlasView;
   searchFor(search: string, view: AtlasView): string;

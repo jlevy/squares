@@ -502,7 +502,7 @@ def test_structured_links_reject_decoded_markup_and_unsafe_authorities() -> None
 def test_structured_link_markdown_delimiters_cannot_create_html_links() -> None:
     injection = ")[Injected](https://evil.example/x)"
     target = "https://example.com/audit" + injection
-    artifact_target = "https://jlevy.github.io/squares/result/t-151.html#" + injection
+    artifact_target = "https://squaremath.org/result/t-151.html#" + injection
     for dated in (False, True):
         data = document()
         entry = data["entries"][0]
@@ -641,7 +641,7 @@ def test_publication_artifacts_and_historical_releases() -> None:
             {
                 "kind": "result",
                 "label": "Current result",
-                "target": "https://jlevy.github.io/squares/result/t-151.html",
+                "target": "https://squaremath.org/result/t-151.html",
             }
         ],
         publication={"evidence": "https://github.com/jlevy/squares/actions/runs/123"},
@@ -656,9 +656,7 @@ def test_publication_artifacts_and_historical_releases() -> None:
     data["entries"][0]["artifacts"][0]["target"] = "https://evil.example/result.html"
     with pytest.raises(ValueError, match="registered public"):
         render_changelog.validate(data)
-    data["entries"][0]["artifacts"][0]["target"] = (
-        "https://jlevy.github.io/squares/result/t-151.html"
-    )
+    data["entries"][0]["artifacts"][0]["target"] = "https://squaremath.org/result/t-151.html"
     data["entries"][0].pop("publication")
     with pytest.raises(ValueError, match="publication evidence"):
         render_changelog.validate(data)
@@ -1107,3 +1105,433 @@ def test_news_levels_are_described_by_the_rubric_that_scores_news() -> None:
     rating = render_changelog.news_rating({"score": 4, "rationale": "A private reason."})
     assert html.escape(render_changelog.news_significance_tooltip(4), quote=True) in rating
     assert "A private reason." not in rating
+
+
+def test_prior_domain_artifacts_remain_valid_for_retained_history() -> None:
+    current = render_changelog.load()
+    previous = copy.deepcopy(current)
+    for entry in previous["entries"]:
+        for artifact in entry.get("artifacts", []):
+            artifact["target"] = artifact["target"].replace(
+                "https://squaremath.org/", "https://jlevy.github.io/squares/"
+            )
+    render_changelog.validate(previous)
+    render_changelog.validate_frozen(current, previous)
+    artifact = next(
+        entry["artifacts"][0] for entry in previous["entries"] if entry.get("artifacts")
+    )
+    artifact["target"] = "https://unrelated.example/tutorial.html"
+    with pytest.raises(ValueError, match="not a registered public destination"):
+        render_changelog.validate(previous)
+
+
+def _result(identifier: str, score: int) -> dict:
+    return {"id": identifier, "significance": {"score": score, "by": "lane-x"}}
+
+
+def _news(identifier: str, score: int, *result_ids: str) -> dict:
+    return {
+        "id": identifier,
+        "date": "2026-10-20",
+        "significance": {"score": score, "rationale": "An announcement."},
+        "result_ids": list(result_ids),
+    }
+
+
+@pytest.fixture
+def no_exemptions(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Synthetic registers hold none of the real exempt results."""
+    monkeypatch.setattr(render_changelog, "ANNOUNCEMENT_EXEMPT", {})
+
+
+def _merged_at_42(identifier: str, score: int) -> render_changelog.Landing:
+    del identifier, score
+    return {"pull_request": 42, "commit": "b" * 40, "subject": "Merge pull request #42 from x"}
+
+
+#: The fifteen S4 and S5 results that landed before the News archive (6279bd0e6, 13
+#: October 2026), at the scores they are exempt at. The exemption may only shrink.
+FROZEN_EXEMPTIONS = {
+    "T-010": 4,
+    "T-017": 4,
+    "T-018": 5,
+    "T-019": 4,
+    "T-020": 4,
+    "T-022": 5,
+    "T-024": 5,
+    "T-025": 5,
+    "T-026": 5,
+    "T-037": 5,
+    "T-047": 4,
+    "T-051": 4,
+    "T-052": 4,
+    "T-064": 4,
+    "T-081": 4,
+}
+
+
+@pytest.mark.usefixtures("no_exemptions")
+def test_an_s4_or_s5_result_on_main_without_its_news_item_fails() -> None:
+    results = [_result("T-901", 5), _result("T-902", 3)]
+    failures, owed, unsettled = render_changelog.check_announcements(
+        {"entries": []}, results, results, locate=_merged_at_42
+    )
+    assert (owed, unsettled) == ([], [])
+    [failure] = failures
+    # The message names the result, its score, the merged PR the entry must name, the
+    # command that drafts it and who scored it: everything a passing author needs.
+    assert failure.startswith("T-901 (S5) is on main with no News item at S5, and this")
+    assert "add the item in this PR, or land the stage 7 follow-up" in failure
+    assert "naming PR #42, which registered or raised it (merge bbbbbbbbb)" in failure
+    assert "devtools.import_changelog --pr 42 " in failure
+    assert "Announce a Significant Result" in failure
+    assert "scored by lane-x" in failure
+    # Without a base, nothing is in grace.
+    assert render_changelog.check_announcements({"entries": []}, results).failures == [
+        failure.replace(
+            "PR #42, which registered or raised it (merge bbbbbbbbb)",
+            "the "
+            "merged PR that registered or raised it, which this checkout's history does not "
+            "reach",
+        ).replace("--pr 42 ", "--pr NNN ")
+    ]
+
+
+@pytest.mark.usefixtures("no_exemptions")
+def test_an_owed_item_fails_only_a_change_to_the_register_or_news() -> None:
+    results = [_result("T-901", 5)]
+    empty: dict = {"entries": []}
+    # An unrelated change, on a branch or merged to main, warns and passes.
+    failures, owed, [warning] = render_changelog.check_announcements(
+        empty, results, results, locate=_merged_at_42, records_changed=False
+    )
+    assert (failures, owed) == ([], [])
+    assert warning.startswith("T-901 (S5) is on main with no News item at S5. This change")
+    assert "naming PR #42" in warning
+    # A change to the register or the News record is the one that settles it.
+    assert render_changelog.check_announcements(
+        empty, results, results, locate=_merged_at_42, records_changed=True
+    ).failures
+    # A register change that carries the owed item passes.
+    carried = {"entries": [_news("item", 5, "T-901")]}
+    assert render_changelog.check_announcements(
+        carried, [*results, _result("T-902", 2)], results, records_changed=True
+    ) == ([], [], [])
+
+
+@pytest.mark.usefixtures("no_exemptions")
+def test_a_records_merge_on_main_warns_where_the_same_pr_fails() -> None:
+    # A records PR that went green before an S4/S5 merge, then merged after it: its PR
+    # CI enforced the rule, and main's run of the merge can no longer act on a failure.
+    results = [_result("T-901", 5)]
+    empty: dict = {"entries": []}
+    failures, owed, [warning] = render_changelog.check_announcements(
+        empty, results, results, locate=_merged_at_42, records_changed=True, on_main=True
+    )
+    assert (failures, owed) == ([], [])
+    assert warning.startswith("T-901 (S5) is on main with no News item at S5. On main")
+    assert "naming PR #42" in warning
+    # The same change in pull-request mode fails.
+    [failure] = render_changelog.check_announcements(
+        empty, results, results, locate=_merged_at_42, records_changed=True
+    ).failures
+    assert "settles the debt" in failure
+    # On main, a result the merge itself registered is still owed after it.
+    assert render_changelog.check_announcements(
+        empty, results, [], locate=_merged_at_42, on_main=True
+    ).owed
+
+
+@pytest.mark.usefixtures("no_exemptions")
+def test_a_news_item_at_the_result_score_satisfies_the_gate() -> None:
+    results = [_result("T-901", 5), _result("T-903", 4)]
+    document = {"entries": [_news("both", 5, "T-901", "T-903")]}
+    assert render_changelog.check_announcements(document, results, results) == ([], [], [])
+    # The highest showing score counts, in whatever order the entries come.
+    for order in (
+        [_news("a", 5, "T-901"), _news("b", 3, "T-901")],
+        [_news("b", 3, "T-901"), _news("a", 5, "T-901")],
+    ):
+        assert render_changelog.news_announced_scores({"entries": order}) == {"T-901": 5}
+    # Only an item News shows counts, at the result's own score or above.
+    low = {"entries": [_news("low", 4, "T-901", "T-903")]}
+    hidden = {"entries": [{**_news("hidden", 5, "T-901", "T-903"), "news_exclusion": "x"}]}
+    # An S2 entry is history News never shows, which is where T-064 and T-081 sat.
+    unshown = {"entries": [_news("attribution", 2, "T-901", "T-903")]}
+    assert [r["id"] for r in render_changelog.owed_announcements(low, results)] == ["T-901"]
+    assert len(render_changelog.owed_announcements(hidden, results)) == 2
+    assert len(render_changelog.owed_announcements(unshown, results)) == 2
+
+
+@pytest.mark.usefixtures("no_exemptions")
+def test_a_raise_to_s4_is_owed_after_its_merge_and_fails_once_on_main() -> None:
+    before = [_result("T-904", 3)]
+    raised = [_result("T-904", 4)]
+    empty: dict = {"entries": []}
+    assert render_changelog.check_announcements(empty, before, before) == ([], [], [])
+    # The raising branch: its entry can name only merged PRs, so the item is owed.
+    failures, [note], unsettled = render_changelog.check_announcements(
+        empty, raised, before, locate=_merged_at_42
+    )
+    assert (failures, unsettled) == ([], [])
+    assert note.startswith("T-904 (S4) is registered or raised on this branch")
+    # The next change to the register or News, with the raise on main, fails.
+    failures, owed, unsettled = render_changelog.check_announcements(
+        empty, raised, raised, locate=_merged_at_42
+    )
+    assert (owed, unsettled) == ([], [])
+    assert [f.split(" is on main")[0] for f in failures] == ["T-904 (S4)"]
+    # Exactly as a new registration: owed on its own branch, failed once on main.
+    assert render_changelog.check_announcements(empty, raised, [], locate=_merged_at_42) == (
+        [],
+        [note],
+        [],
+    )
+    # An S4 item does not announce a later raise to S5.
+    s4_item = {"entries": [_news("item", 4, "T-904")]}
+    to_five = [_result("T-904", 5)]
+    assert (
+        render_changelog.check_announcements(s4_item, to_five, to_five, locate=_merged_at_42)
+        .failures[0]
+        .startswith("T-904 (S5) is on main")
+    )
+
+
+def test_the_exemption_is_frozen_to_results_scored_and_landed_before_the_archive() -> None:
+    exempt = render_changelog.ANNOUNCEMENT_EXEMPT
+    assert exempt.items() <= FROZEN_EXEMPTIONS.items()
+    results = {result["id"]: result for result in render_changelog.load_results()}
+    for identifier, score in exempt.items():
+        result = results[identifier]
+        assert result["landed"] < "2026-10-13", identifier
+        assert result["significance"]["scored"] < "2026-10-13", identifier
+        assert result["significance"]["score"] == score, identifier
+    assert (
+        render_changelog.stale_exemptions(render_changelog.load(), list(results.values())) == []
+    )
+
+
+def test_stale_exemptions_fail_through_the_gate(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setattr(
+        render_changelog,
+        "ANNOUNCEMENT_EXEMPT",
+        {"T-905": 4, "T-906": 4, "T-907": 5, "T-908": 4, "T-909": 4},
+    )
+    register = [
+        _result("T-905", 3),
+        _result("T-907", 4),
+        _result("T-908", 5),
+        _result("T-909", 4),
+    ]
+    failures, owed, unsettled = render_changelog.check_announcements(
+        {"entries": [_news("item", 4, "T-909")]},
+        register,
+        register,
+        locate=_merged_at_42,
+        records_changed=False,
+    )
+    remove = ": remove it from render_changelog.ANNOUNCEMENT_EXEMPT"
+    assert failures == [
+        f"T-905 is S3 now, below the announcement threshold{remove}",
+        f"T-906 is not in the register{remove}",
+        f"T-907 is S4 now, not the S5 it is exempt at{remove}",
+        f"T-908 is S5 now, not the S4 it is exempt at{remove}",
+        f"T-909 now has its News item{remove}",
+    ]
+    # Raised above its exempt score, a result is also owed like any other.
+    assert owed == []
+    assert [w.split(" is on main")[0] for w in unsettled] == ["T-908 (S5)"]
+
+
+@pytest.mark.usefixtures("no_exemptions")
+def test_the_cli_fails_a_missing_item_and_notes_an_owed_one(
+    monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    monkeypatch.setattr(
+        render_changelog, "announcement_base", lambda _ref: ("b" * 40, [_result("T-901", 5)])
+    )
+    monkeypatch.setattr(
+        render_changelog, "load_results", lambda: [_result("T-901", 5), _result("T-902", 4)]
+    )
+    monkeypatch.setattr(render_changelog, "landing", lambda *_: None)
+    monkeypatch.setattr(render_changelog, "edits_announcement_records", lambda _base: True)
+    assert render_changelog.main(["--check", "--announcement-base", "origin/main"]) == 1
+    out, err = capsys.readouterr()
+    assert "announcement missing: T-901 (S5)" in err
+    assert "announcement owed after merge: T-902 (S4)" in out
+    # The same debt in a change that edits neither record is a warning, and passes.
+    monkeypatch.setattr(render_changelog, "edits_announcement_records", lambda _base: False)
+    assert render_changelog.main(["--check", "--announcement-base", "origin/main"]) == 0
+    out, err = capsys.readouterr()
+    assert "warning: announcement owed on main: T-901 (S5)" in out
+    assert "announcement missing" not in err
+    assert "1 owed after this merge, 1 owed on main and reported, 0 failing" in out
+    # Main's own delivery (HEAD^1) only warns, even for a records merge.
+    monkeypatch.setattr(render_changelog, "edits_announcement_records", lambda _base: True)
+    base = render_changelog.MAIN_DELIVERY_BASE
+    assert render_changelog.main(["--check", "--announcement-base", base]) == 0
+    out, err = capsys.readouterr()
+    assert "warning: announcement owed on main: T-901 (S5) is on main with no News item " in out
+    assert "On main the gate reports and never fails" in out
+    assert "announcement missing" not in err
+
+
+def test_committed_changes_to_either_record_are_seen_against_the_fork(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    # #738's review A: committed, as in CI, where the working tree is clean and only a
+    # diff against the base sees the change; and each record on its own.
+    def git(*arguments: str) -> str:
+        return subprocess.run(
+            ["git", "-c", "user.name=t", "-c", "user.email=t@example.org", *arguments],
+            cwd=tmp_path,
+            capture_output=True,
+            text=True,
+            check=True,
+        ).stdout.strip()
+
+    register = tmp_path / render_changelog.RESULTS_PATH
+    news = tmp_path / "packing/site-changelog.yaml"
+    register.parent.mkdir(parents=True)
+    register.write_text("results: []\n", encoding="utf-8")
+    news.write_text("entries: []\n", encoding="utf-8")
+    (tmp_path / "notes.md").write_text("a\n", encoding="utf-8")
+    git("init", "-q", "-b", "main")
+    git("add", "-A")
+    git("commit", "-q", "--no-gpg-sign", "-m", "root")
+    monkeypatch.setattr(render_changelog, "REPO", tmp_path)
+    for path, expected in ((register, True), (news, True), (tmp_path / "notes.md", False)):
+        git("checkout", "-q", "-B", "feature", "main")
+        path.write_text(path.read_text(encoding="utf-8") + "# edited\n", encoding="utf-8")
+        git("commit", "-q", "--no-gpg-sign", "-am", f"edit {path.name}")
+        base, _ = render_changelog.announcement_base("main")
+        assert render_changelog.edits_announcement_records(base) is expected, path.name
+
+
+def test_the_base_is_the_fork_point_and_record_changes_are_seen(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    def git(*arguments: str) -> str:
+        return subprocess.run(
+            ["git", "-c", "user.name=t", "-c", "user.email=t@example.org", *arguments],
+            cwd=tmp_path,
+            capture_output=True,
+            text=True,
+            check=True,
+        ).stdout
+
+    register = tmp_path / render_changelog.RESULTS_PATH
+
+    def commit(identifiers: list[str], message: str) -> str:
+        register.write_text(
+            yaml.safe_dump({"results": [_result(i, 5) for i in identifiers]}), encoding="utf-8"
+        )
+        git("add", "-A")
+        git("commit", "-q", "--no-gpg-sign", "-m", message)
+        return git("rev-parse", "HEAD").strip()
+
+    git("init", "-q", "-b", "main")
+    register.parent.mkdir(parents=True)
+    fork = commit(["T-901"], "register T-901")
+    git("checkout", "-q", "-b", "feature")
+    (tmp_path / "notes.md").write_text("unrelated\n", encoding="utf-8")
+    git("add", "-A")
+    git("commit", "-q", "--no-gpg-sign", "-m", "unrelated")
+    git("checkout", "-q", "main")
+    commit(["T-901", "T-902"], "main moves on: T-902")
+    git("checkout", "-q", "feature")
+    monkeypatch.setattr(render_changelog, "REPO", tmp_path)
+    # A branch is measured from where it left main, not from where main is now.
+    base, results = render_changelog.announcement_base("main")
+    assert (base, [r["id"] for r in results]) == (fork, ["T-901"])
+    assert not render_changelog.edits_announcement_records(base)
+    register.write_text(register.read_text(encoding="utf-8") + "# edited\n", encoding="utf-8")
+    assert render_changelog.edits_announcement_records(base)
+
+
+def test_a_score_is_read_from_its_own_block_only() -> None:
+    text = (
+        "results:\n  - id: T-907\n    kind: x\n  - id: T-999\n    significance:\n"
+        "      score: 5\n"
+    )
+    assert render_changelog.register_score(text, "T-907") == 0
+    assert render_changelog.register_score(text, "T-999") == 5
+    assert render_changelog.register_score(text, "T-123") == 0
+
+
+def test_the_landing_change_is_the_oldest_first_parent_merge_at_the_score(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    def register(score: int | None) -> str:
+        body = "results:\n  - id: T-001\n    significance:\n      score: 2\n"
+        if score is not None:
+            body += f"  - id: T-907\n    kind: x\n    significance:\n      score: {score}\n"
+        return body + "  - id: T-999\n    significance:\n      score: 1\n"
+
+    # Newest first, as `git log` lists them: S5 since #11, after a dip to S3 at #10.
+    history = {"c4": 5, "c3": 5, "c2": 3, "c1": 5, "c0": None}
+    subjects = {
+        commit: f"Merge pull request #{8 + int(commit[1])} from x" for commit in history
+    }
+
+    def git(*arguments: str) -> str:
+        if arguments[0] == "log":
+            return "".join(f"{commit}\0{subjects[commit]}\n" for commit in history)
+        return register(history[arguments[1].split(":")[0]])
+
+    monkeypatch.setattr(render_changelog, "_git", git)
+    assert render_changelog.landing("T-907", 5, "origin/main") == {
+        "pull_request": 11,
+        "commit": "c3",
+        "subject": subjects["c3"],
+    }
+    assert render_changelog.landing("T-907", 3, "origin/main") == {
+        "pull_request": 9,
+        "commit": "c1",
+        "subject": subjects["c1"],
+    }
+
+
+@pytest.mark.parametrize("limit", [None, 1], ids=["archive", "preview"])
+def test_news_metadata_puts_each_link_on_its_own_line(limit: int | None) -> None:
+    data = document()
+    entry = data["entries"][-1]
+    entry.update(
+        artifacts=[
+            {
+                "kind": "result",
+                "label": "Current result",
+                "target": "https://squaremath.org/result/t-151.html",
+            },
+            {"kind": "page", "label": "Atlas", "target": "https://squaremath.org/atlas.html"},
+        ],
+        publication={
+            "date": entry["date"],
+            "evidence": "https://github.com/jlevy/squares/actions/runs/123",
+        },
+        releases=[{"component": "site", "version": "v0.4.1"}],
+        references=[
+            {"label": "Source", "target": "packing/frontier/results.yaml"},
+            {"label": "Registration", "target": "packing/site-changelog.yaml"},
+        ],
+    )
+    markup = render_changelog.render_news(data, limit=limit)
+    article = markup.split('data-news-entry="later-delivery">', 1)[1].split("</article>", 1)[0]
+    assert 'class="site-news-prose kpress-prose"' in article
+    metadata = article.split('<div class="site-news-records sans-text">', 1)[1].split(
+        "</div>", 1
+    )[0]
+    paragraphs = re.findall(r"<p>(.*?)</p>", metadata, re.DOTALL)
+    assert paragraphs
+    rows = [row for paragraph in paragraphs for row in re.split(r"<br\s*/?>", paragraph)]
+    linked_rows = [row.strip() for row in rows if "<a " in row]
+    assert len(linked_rows) == 6
+    assert all(len(re.findall(r"<a\b", row)) == 1 for row in linked_rows)
+    assert all(row.startswith("<a ") and row.endswith("</a>") for row in linked_rows)
+    visible = html.unescape(re.sub(r"<[^>]+>", "", metadata))
+    assert "First public: 2026-10-14" in visible
+    assert "Publication evidence" in visible
+    assert " · " not in visible
+    assert "(" not in visible
+    assert ")" not in visible
+    assert not re.search(r"[.](?:\s|$)", visible)

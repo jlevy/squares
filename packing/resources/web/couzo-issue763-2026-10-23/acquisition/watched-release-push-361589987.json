@@ -1,0 +1,45 @@
+{
+ "format": "beyond-horizon-watched-release-v1",
+ "publication": "https://github.com/franciscouzo/square-packing/tree/964ee2bdf301d0c8912d956d4010f478dcbbd5ea",
+ "commit": "964ee2bdf301d0c8912d956d4010f478dcbbd5ea",
+ "committed": "2026-10-23T22:38:09Z",
+ "published": "2026-10-23T23:38:42Z",
+ "walk": "upper-bounds-couzo-964ee2b-notebooks-20261024",
+ "rows": [
+  {
+   "n": 653,
+   "certificate": "certificates/best/n653.cert",
+   "printed": "25.991128755446"
+  },
+  {
+   "n": 746,
+   "certificate": "certificates/best/n746.cert",
+   "printed": "27.803053268109"
+  },
+  {
+   "n": 748,
+   "certificate": "certificates/best/n748.cert",
+   "printed": "27.844000201765"
+  },
+  {
+   "n": 802,
+   "certificate": "certificates/best/n802.cert",
+   "printed": "28.809159596152"
+  },
+  {
+   "n": 859,
+   "certificate": "certificates/parents/fd3b49f57ca5ffe4d1629d670fbfd3265e38ac15f52292b193d251038e7dad08.cert",
+   "printed": "29.809159596152"
+  },
+  {
+   "n": 919,
+   "certificate": "certificates/best/n919.cert",
+   "printed": "30.809159596954"
+  },
+  {
+   "n": 923,
+   "certificate": "certificates/best/n923.cert",
+   "printed": "30.858737702974"
+  }
+ ]
+}

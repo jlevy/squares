@@ -6,6 +6,737 @@ softschema:
   status: enforced
 repository: https://github.com/jlevy/squares
 entries:
+  - id: couzo-two-sixty-eight-and-three-hundred-three-adopted
+    date: '2026-10-25'
+    title: Couzo’s Packings Become the House Best Packings at 268 and 303
+    significance:
+      score: 3
+      rationale: >-
+        T-240 is an S3 finite case result at two counts: new arrangements relative to the
+        record at 268 and 303, 4.45e-03 and 2.78e-03 below the packings they replace, one
+        to one with neither under any symmetry. Each refines a public Kaggle notebook
+        packing; it brings no new technique and claims no optimality.
+    topics: [upper-bound]
+    categories: [records]
+    pull_requests: [794]
+    result_ids: [T-240]
+    summary: |-
+      [Francisco Couzo](packing/contributors/people/francisco-couzo.md)’s certificates of
+      #763 at 268 and 303 pass a clean-room review here and become the house best packings
+      there, $4.45 \times 10^{-3}$ and $2.78 \times 10^{-3}$ below the packings they
+      replace, each regularized for display. T-240 is confirmed at V3/C3.
+    details: |-
+      - Each refines a public Kaggle notebook packing:
+        [Kirill Tymchishin](packing/contributors/people/kirill-tymchishin.md)’s at 268, and
+        at 303 Couzo’s own push packing, which his manifest credits after
+        [Vladislav Lavrentev](packing/contributors/people/vladislav-lavrentev.md)’s. Each is
+        a new arrangement relative to the record: 118 and 133 squares lie more than a tenth
+        from their places in the packings they replace.
+      - This project’s two maintained exact routes decided both certificates; they share
+        components with the source’s pipeline, whose manifest names this repository’s
+        `sqpack/verify.py` as its first checker. A separately prompted mathematical review
+        decided them again on a clean-room checker of its own, by a Claude agent, which is
+        the independent confirmation. No source program ran here.
+      - Both cases draw grid-slack’s views at the certificates’ sides.
+        [Evan Daniel](packing/contributors/people/evan-daniel.md)’s later 268,
+        $4.48 \times 10^{-12}$ lower, is another placement of the same arrangement,
+        validated separately; it re-houses 268 in a later change. Upper bounds only; no
+        optimality, rigidity or priority is claimed.
+    artifacts:
+      - kind: result
+        label: Couzo’s certificates at 268 and 303
+        target: https://squaremath.org/result/t-240.html
+    publication:
+      date: '2026-10-25'
+      evidence: https://github.com/jlevy/squares/actions/runs/40148939396
+    references:
+      - label: The case record at 268
+        target: packing/frontier/n-268.md
+      - label: The case record at 303
+        target: packing/frontier/n-303.md
+      - label: Mathematical review of 24 October
+        target: docs/project/reviews/review-2026-10-24-couzo-n268-n303.md
+      - label: Couzo’s registration request
+        target: https://github.com/jlevy/squares/issues/763
+  - id: daniel-fang-theorems-lean-and-small-n-register
+    date: '2026-10-24'
+    title: Daniel Reports Lean Proofs of Fang’s Theorems, and the Register Takes In s(2) to s(5)
+    significance:
+      score: 3
+      rationale: >-
+        Two S3 results. T-236 reports a machine-checked proof, by another author, of the
+        bound family T-163 holds on a reviewer’s reading of its proof: both of Fang’s
+        theorems, for every n ≥ 15 and with no hypothesis. T-237 registers the classical
+        exact values s(2) to s(5), Göbel’s s(5) a substantive case result scored as its
+        claim, as the register’s other published exact values are. Neither moves a bound,
+        and the significance does not establish verification.
+    topics: [upper-bound, optimality, formalization]
+    categories: [records]
+    pull_requests: [750]
+    result_ids: [T-236, T-237]
+    summary: |-
+      Daniel reports Lean 4 proofs of Fang’s Theorems 1 and 2 (T-163) with no hypothesis:
+      $s(n^2 - n + 1) < n$ for every integer $n \ge 15$, and, for Theorem 2, that
+      $n^2 - n + 1 + p + 2q$ unit squares fit in a square of side below $n$ whenever
+      $n \ge 15$ and $16p + 21q \le n - 15$. T-236 is a reported formalization at V0/C0:
+      it has not been built or reviewed here. The register also takes in the classical
+      values $s(2) = s(3) = s(4) = 2$ and $s(5) = 2 + 1/\sqrt{2}$ as T-237, on Göbel’s 1979
+      proof and Friedman’s survey, so that chelokot’s and Daniel’s Lean proofs of them
+      (T-238) formalize a registered result.
+    details: |-
+      - The proof formalizes Fang’s: the gluing lemma, which is Arslanov, Mustafin and
+        Shangitbayev’s decomposition, the induction on $n$, and 18 pieces held as exact
+        rational certificates, each checked by Lean’s kernel in a generated module. The
+        source reports the standard axioms only and publishes no build log, and the
+        generated modules are rebuilt from the certificates rather than published.
+      - The record holds Fang’s theorems on the 14 October review’s reading of their
+        proof. Fang’s own Lean statement covers Theorem 1 and the unmixed bounds of
+        Theorem 2; Daniel’s states Theorem 2 in full. At the counts the record holds, 211,
+        241, 273 and 307, the theorems give sides below $n$, which T-163’s construction
+        and the case bounds already improve on.
+      - The source says its work was produced by Claude (Anthropic) under human direction.
+        A stage 4 review and a build here, priced at 1.5 to 3 CPU-hours, come next.
+      - T-237 cites the evidence the case records of 2 to 5 already cite: the exact
+        replays here of the side-2 bound, the area bound, the grid and Göbel’s packing,
+        and Göbel’s published proof that no square of side below $2 + 1/\sqrt{2}$ holds
+        five unit squares, which no review here has read yet. The case records are
+        unchanged.
+      - The same change records three S2 Lean reports, none with a receipt-bound build
+        here: Hosono’s $s(21) = 5$ by the point-only route (T-234) and $s(59) = 8$ on
+        Daniel’s mixed-measure checker (T-235), and chelokot’s and Daniel’s proofs of
+        $s(2)$ to $s(5)$ (T-238).
+    artifacts:
+      - kind: result
+        label: Daniel’s Lean proof report for Fang’s theorems
+        target: https://squaremath.org/result/t-236.html
+      - kind: result
+        label: The classical values s(2) to s(5)
+        target: https://squaremath.org/result/t-237.html
+    publication:
+      date: '2026-10-24'
+      evidence: https://github.com/jlevy/squares/actions/runs/40065536417/job/120790587248
+    references:
+      - label: Retained source, build plan and verification limits
+        target: packing/resources/web/evand-fang-ryu-lean-2026-10-18/README.md
+      - label: Fang’s theorems as the record holds them
+        target: https://squaremath.org/result/t-163.html
+      - label: chelokot’s Lean proofs of s(2) to s(5), retained
+        target: packing/resources/web/chelokot-small-n-lean-2026-09-05/README.md
+  - id: hosono-thirty-one-fine-net-lower-bound
+    date: '2026-10-24'
+    title: Hosono Raises the Lower Bound for 31 Squares to 5.9775
+    significance:
+      score: 3
+      rationale: >-
+        T-232 is an S3 result at one count: the strongest lower bound on record at n = 31,
+        which more than halves the gap to the upper bound 6, by the existing fine-net
+        rectangle-measure method on its declared 2,073-direction net. T-233 is an S3
+        report of stronger bounds at four counts by the same method, reviewed and not yet
+        adopted. Neither brings a new technique or an optimality claim.
+    topics: [lower-bound, verification]
+    categories: [records]
+    pull_requests: [745]
+    result_ids: [T-232, T-233]
+    summary: |-
+      [Hiroaki Hosono](packing/contributors/people/hiroaki-hosono.md) (wand125) shows that 31 unit squares do not fit in a square of side $2391/400 = 5.9775$, by a measure certificate checked at every direction of a fine angle net. T-232 is confirmed at V3/C3 and is now the verified lower bound at 31, $1/40$ above the standing $2381/400$. Four more of his bounds, reported in issue 446, are registered as T-233 at V0/C1.
+    details: |-
+      - The certificate is a density of 536 rectangles, averaged over the square’s
+        symmetries, of total mass $31 - 1/100000$. Every unit square in the container
+        contains a slightly smaller concentric square, at one of 2,073 net angles, that
+        holds mass at least one, so 31 squares would need mass 31.
+      - The project replayed the certificate at all 2,073 directions with its reviewed
+        `sqverify-fast` verifier, which the source adapted for its own check, so the
+        replay re-implements the check sharing the producer’s components, and its controls
+        refused the scaled mutant at every direction. A mathematical review re-derived the
+        argument and decided 122 of the directions again with a clean-room exact checker
+        of its own. The gap to the upper bound 6 narrows from $19/400$ to $9/400$.
+      - T-233 reports $s(19) \ge 1931/400$, $s(20) \ge 393/80$, $s(26) \ge 1111/200$ and
+        $s(27) \ge 1131/200$, credited to Hosono after
+        [Tokoharu](packing/contributors/people/tokoharu.md) and
+        [Joshua Levy](packing/contributors/people/joshua-levy.md). T-233 stands as
+        reported (V0/C1): a review accepts their mathematics, and complete replays here
+        passed at all four counts, but the entry waits on a reviewed fix to a tolerance in
+        this project’s control, which failed closed at 26 on the control, not on the
+        certificate. Until then the four standing bounds are unchanged.
+    references:
+      - label: The case record at 31
+        target: packing/frontier/n-031.md
+      - label: Hosono’s certificate at 31
+        target: https://github.com/wand125/square-packing/tree/23e31862345c532d17ad2c896677a3a8d8821aa4/problems/square-lower-bounds/certificates/mixed_n31_L59775
+      - label: Retained report and verification limits at 31
+        target: packing/resources/web/wand125-fine-net-n31-2026-10-11/README.md
+      - label: Mathematical review of the bound at 31
+        target: docs/project/reviews/review-2026-10-23-wand125-n31-fine-net.md
+      - label: Mathematical review of the four bounds of issue 446
+        target: docs/project/reviews/review-2026-10-23-wand125-446-fine-net.md
+      - label: Hosono’s report of the four bounds
+        target: https://github.com/jlevy/squares/issues/446
+  - id: visual-atlas-follows-the-scroll
+    date: '2026-10-23'
+    title: The Visual Atlas Follows the Scroll
+    significance:
+      score: 2
+      rationale: >-
+        A modest refinement of the Visual Atlas and the shared choosers: the triangle follows
+        the scroll from XL, the Show More and Show Less expander is gone, the small choosers
+        are smaller with centred labels, a case record’s steps stand beside its count, and
+        the reference outline is lighter. The same change brings the All collection labels,
+        the group-chat invitation on About, the profiles directory introduction and tally
+        spacing. It adds no mathematical result and changes no paper’s content.
+    pull_requests: [746]
+    categories: [site]
+    topics: [project]
+    summary: |-
+      Scrolled from the top, the Visual Atlas opens at XL and follows the page: it zooms out
+      to Small along the rows and comes to rest at its left edge, and a sideways swipe pans
+      it. Both Atlas pages show all 324 cases without a Show More / Show Less expander, and
+      the shared small choosers are smaller.
+    details: |-
+      - A case record’s previous and next steps stand at the two ends of its count’s line,
+        at one height for every case.
+      - The gray reference square drawn around a smaller packing is lighter, one shade in
+        every tile and both themes, and perfect squares’ numbers are no longer bold.
+      - Every compact chooser centres its capitals, and the size tabs read S, M, L and XL.
+      - Collection links read “All News”, “All Results” and so on, without “View”.
+      - About, the homepage’s Report a Result section and the report page again invite
+        readers to the project’s group chat; the profiles directory opens with an
+        introduction; and every tally is spaced the same way.
+    references:
+      - label: The site design record
+        target: packing/devtools/templates/paper-design.md
+  - id: daniel-three-hundred-three-adopted
+    date: '2026-10-23'
+    title: Daniel’s Smaller Packing of 303 Squares Adopted
+    significance:
+      score: 3
+      rationale: >-
+        T-230 is an S3 finite case result: a new arrangement at 303, 1.86e-04 below the
+        case and every report there, found by a search from Ostashev’s packing, with 64
+        squares beyond a tenth of the packing it replaces and 24 tilts reversed. It brings
+        no new technique and claims no optimality.
+    topics: [upper-bound]
+    categories: [records]
+    pull_requests: [731]
+    result_ids: [T-230]
+    summary: |-
+      [Evan Daniel](packing/contributors/people/evan-daniel.md) packs 303 unit squares in
+      a square of side $17.909772217274\ldots$, about $1.86 \times 10^{-4}$ below the
+      earlier house packing,
+      [Mykhailo Polkovskyi](packing/contributors/people/mykhailo-polkovskyi.md)’s tighter
+      certificate, after PingYou Ltd’s, of
+      [Daniil Ostashev](packing/contributors/people/daniil-ostashev.md)’s packing
+      (T-186), and below every report at 303. T-230 is confirmed at V3/C3 and is now the
+      house at 303.
+    details: |-
+      - Daniel’s search started from Ostashev’s packing and ended in his arrangement of
+        Ostashev’s two-band design, not a refinement of the packing: 64 squares lie more
+        than a tenth from their places in the earlier house packing, and 24 tilts are
+        reversed. Its last step reflects one of the packing’s two tilted bands along its
+        wall.
+      - This project’s two maintained exact routes decided the certificate and refused
+        its duplicate-square and outside-container controls. They read it through an
+        adapter that transcribes two of the source checkers’ expressions, so that replay
+        shares components with the source. A separately prompted mathematical review
+        decided it again on a clean-room checker of its own, which is the independent
+        confirmation. No source program ran here.
+      - The case draws the axis tool’s view of the new packing; a straighter grid-slack
+        view at the same side waits for the owner’s review. The source leaves local
+        optimality open and predicts a further descent of about $4.8 \times 10^{-7}$. No
+        optimality, rigidity or priority is claimed.
+    references:
+      - label: The case record at 303
+        target: packing/frontier/n-303.md
+      - label: Retained certificate and verification limits
+        target: packing/resources/web/evand-n303-2026-10-22/README.md
+      - label: Mathematical review of 22 October
+        target: docs/project/reviews/review-2026-10-22-daniel-728.md
+      - label: Daniel’s registration request
+        target: https://github.com/jlevy/squares/issues/728
+  - id: couzo-and-polkovskyi-certificates-confirmed
+    date: '2026-10-23'
+    title: Couzo’s and Polkovskyi’s Certificates at Four Counts Confirmed
+    significance:
+      score: 3
+      rationale: >-
+        T-226 and T-227 are S3, as the 22 October review rescored them: T-226 first
+        reported the 204-square arrangement that Couzo’s later certificates refine, and
+        T-227 refines de Winter’s packing at 227 to a side 1.71e-04 below it. T-228 and
+        T-229 are S2. No result is new, and no optimality is claimed.
+    topics: [upper-bound]
+    categories: [records]
+    pull_requests: [725]
+    result_ids: [T-226, T-227, T-228, T-229]
+    summary: |-
+      [Francisco Couzo](packing/contributors/people/francisco-couzo.md)’s exact packings
+      of 204 squares (issues 670 and 675) and of 227 and 229 squares (issue 672), and
+      [Mykhailo Polkovskyi](packing/contributors/people/mykhailo-polkovskyi.md)’s
+      re-solves of the house packings at 105 and 204 (issue 719), are confirmed at V3/C3.
+      Polkovskyi’s re-solves, $5.18 \times 10^{-12}$ below the earlier house at 105 and
+      $1.006 \times 10^{-8}$ below it at 204, became the houses at both counts on 23
+      October. The packings stay credited to their finders:
+      [Ryan Xu](packing/contributors/people/ryan-xu.md)’s at 105, as Couzo and PingYou
+      Ltd refined it, and Couzo’s at 204, from whose issue 678 certificate Polkovskyi’s
+      solve started. Couzo’s own certificates are confirmed but no longer the smallest at
+      their counts.
+    details: |-
+      - Couzo’s issue 670 (T-226) first reported the 204-square arrangement that his
+        issues 675 and 678 refine one to one: no symmetry pairs it with the house packing
+        when it was reported, and 15 squares lie beyond a tenth of it. His source credits
+        the 204 seed to Polkovskyi, and his answer of 23 October names it: T-226 continues
+        the line of Polkovskyi’s refinement of
+        [Daniil Ostashev](packing/contributors/people/daniil-ostashev.md)’s packing, as
+        PingYou Ltd refined it (T-186), three rounds of basin hopping on. At 227 his issue
+        672 (T-227) refines
+        [Joost de Winter](packing/contributors/people/joost-de-winter.md)’s packing, by
+        way of [Evan Daniel](packing/contributors/people/evan-daniel.md)’s exact form of
+        it, to a side $1.71 \times 10^{-4}$ below it;
+        Daniel’s solved view of it (T-225) is smaller still, and at 229 Daniel’s later
+        certificates (T-198, T-199) are smaller.
+      - Each certificate passed this project’s maintained replay, which shares components
+        with its source, since each source names this project’s verifier as one of its
+        checkers; the other is Daniel’s exact checker, which Couzo’s sources run as he
+        modified it. The independence rests on the 22 October reviews, whose clean-room
+        checkers share no code with either maintained route or the sources and decided
+        every certificate again; sharp controls $10^{-30}$ past contact behaved as
+        required on all four exact checkers. No source program ran here.
+      - Both counts drew grid-slack’s view of the new packing, as 105 still does; there it
+        has one more uneven square than the earlier view, and the house rule keeps the
+        smaller packing. Polkovskyi’s release also held a 204-square certificate about
+        $1.48 \times 10^{-11}$ smaller, published in the same commit; it is his, and it was
+        not yet imported. No optimality, rigidity or priority is claimed.
+      - That second 204 file, the same packing at its solved side, was registered as T-231
+        and has been the house at 204 since 24 October; 204 draws grid-slack’s view of it.
+    references:
+      - label: The case record at 105
+        target: packing/frontier/n-105.md
+      - label: The case record at 204
+        target: packing/frontier/n-204.md
+      - label: Mathematical review of Couzo’s three reports
+        target: docs/project/reviews/review-2026-10-22-couzo-670-672-675.md
+      - label: Mathematical review of Polkovskyi’s re-solves
+        target: docs/project/reviews/review-2026-10-22-mishapolk-719.md
+      - label: Polkovskyi’s registration request
+        target: https://github.com/jlevy/squares/issues/719
+  - id: contributor-profiles-and-contribution-summaries
+    date: '2026-10-22'
+    title: Contributor Profiles With Records, Results and Credits
+    significance:
+      score: 3
+      rationale: >-
+        Key usable project tooling: sourced profiles for the 75 people the record cites or
+        credits, each counting the person’s records, results and credits by one shared
+        rule, with a sortable directory. It adds no mathematical result.
+    topics: [project]
+    categories: [site]
+    pull_requests: [578]
+    summary: |-
+      The profile directory lists the 75 people whose work the record cites or credits, in
+      a sortable table of records, results, credits, years active, resources and accounts.
+      Each profile separates the results a person authored from the credits they receive
+      for earlier work, counts each current record once, and lists linked resources ranked
+      by significance. Results by a company, such as PingYou Ltd’s, count for its project
+      without being assigned to a person.
+    details: |-
+      - The counts come from 1,470 reviewed credit spans joined to sourced identity
+        records; 78 spans name no person and eight remain unresolved.
+      - Years active count original work only, not later reuse or import dates. A
+        registering pull request records the project’s intake, not who found a
+        construction.
+      - Archive attribution is not complete; the rest of the population is tracked as
+        follow-up work.
+    references:
+      - label: Contributor records
+        target: packing/contributors/README.md
+      - label: Attribution rules
+        target: attribution.md
+  - id: daniel-two-hundred-seventy-adopted
+    date: '2026-10-21'
+    title: Daniel’s Smaller Packing of 270 Squares Adopted
+    significance:
+      score: 3
+      rationale: >-
+        T-224 is an S3 finite case result: another arrangement of the design at 270,
+        3.47e-05 below the case and every report there, with 15 squares moved beyond a
+        tenth and no tilt angle shared with the packing it replaces. It brings no new
+        technique and claims no optimality.
+    topics: [upper-bound]
+    categories: [records]
+    pull_requests: [708]
+    result_ids: [T-224]
+    summary: |-
+      [Evan Daniel](packing/contributors/people/evan-daniel.md) packs 270 unit squares in
+      a square of side $16.928162252196\ldots$, about $3.47 \times 10^{-5}$ below the
+      earlier house packing and every report at 270. T-224 is confirmed at V3/C3 and is
+      now the house at 270.
+    details: |-
+      - His search started from stored descendants of
+        [Nate Chaoweeraprasit](packing/contributors/people/nate-chaoweeraprasit.md)’s
+        issue 500 packing, which PingYou Ltd refined into the earlier house (T-174).
+        Measured pose by pose, the new packing is another arrangement of that design, not
+        a refinement: 15 squares lie beyond a tenth of their earlier places, and no tilt
+        angle is shared. The source is credited to Daniel after Chaoweeraprasit and
+        [Joshua Levy](packing/contributors/people/joshua-levy.md).
+      - This project’s two maintained exact routes, which share no code with the source,
+        decided the certificate and refused its duplicate-square and outside-container
+        controls. The 21 October mathematical review reproduced that replay and decided
+        the certificate again on its own exact route. The source’s KKT and second-order
+        statements are its numerical evidence, not proofs.
+      - No optimality, rigidity or priority is claimed.
+    references:
+      - label: The case record at 270
+        target: packing/frontier/n-270.md
+      - label: Retained certificate and verification limits
+        target: packing/resources/web/evand-n270-sweep-2026-10-20/README.md
+      - label: Mathematical review of 21 October
+        target: docs/project/reviews/review-2026-10-21-upper-bound-import-703.md
+      - label: Daniel’s registration request
+        target: https://github.com/jlevy/squares/issues/703
+  - id: daniel-one-fifty-four-and-three-hundred-eight-adopted
+    date: '2026-10-20'
+    title: Daniel’s Smaller Packings of 154 and 308 Squares Adopted
+    significance:
+      score: 3
+      rationale: >-
+        T-221 and T-222 are S3 finite case results: at 308 another arrangement of the
+        two-wedge design 1.12e-03 below the case and every report there, and at 154 Couzo’s
+        arrangement continued 1.06e-04 below the case. They bring no new technique and
+        claim no optimality.
+    topics: [upper-bound]
+    categories: [records]
+    pull_requests: [699]
+    result_ids: [T-221, T-222]
+    summary: |-
+      [Evan Daniel](packing/contributors/people/evan-daniel.md)’s exact packings of 308
+      and 154 unit squares, of sides $17.997149121270\ldots$ and $12.921100940761\ldots$,
+      lie about $1.12 \times 10^{-3}$ and $1.06 \times 10^{-4}$ below the earlier house
+      packings and every report at those counts. T-221 and T-222 are confirmed at V3/C3
+      and are now the house packings at both counts.
+    details: |-
+      - At 308 his search inserted one square into
+        [Nate Chaoweeraprasit](packing/contributors/people/nate-chaoweeraprasit.md)’s
+        307-square packing and descended to another arrangement of the two-wedge design
+        the earlier house holds. The case credits Daniel and names
+        [Kevin Fang](packing/contributors/people/kevin-fang.md)’s two-wedge design.
+      - At 154 the packing continues
+        [Francisco Couzo](packing/contributors/people/francisco-couzo.md)’s issue 586
+        arrangement, with three squares beyond a tenth of it; the source also names
+        [Daniil Ostashev](packing/contributors/people/daniil-ostashev.md)’s 156-square
+        packing as a start of its search.
+      - Both maintained exact routes decided each certificate and refused its controls,
+        and an accepted adversarial review decided both again on a third exact route and
+        a clipping-area route. The source’s KKT and second-order statements are its
+        numerical evidence; at 154 its local-minimum test is inconclusive. No optimality,
+        rigidity or priority is claimed.
+    references:
+      - label: The case record at 308
+        target: packing/frontier/n-308.md
+      - label: The case record at 154
+        target: packing/frontier/n-154.md
+      - label: Mathematical review of 20 October
+        target: docs/project/reviews/review-2026-10-20-upper-bound-imports-689-694.md
+      - label: Daniel’s registration request at 308
+        target: https://github.com/jlevy/squares/issues/689
+      - label: Daniel’s registration request at 154
+        target: https://github.com/jlevy/squares/issues/694
+  - id: daniel-four-packings-adopted
+    date: '2026-10-20'
+    title: Daniel’s Smaller Packings at 155, 229, 236 and 271 Squares Adopted
+    significance:
+      score: 3
+      rationale: >-
+        T-197, T-218 and T-219 are S3 finite case results: a new arrangement at 155,
+        another arrangement at 236 and a continuation at 271, 1.64e-04, 2.02e-03 and
+        4.46e-05 below the case. T-198 and T-199 at 229 are S2 arrangements of de Winter’s
+        design, 1.15e-05 and 1.32e-05 below de Winter’s and Couzo’s reports there. None
+        brings a new technique or claims optimality. #676, the 18 October registration, is
+        S3 for de Winter’s T-196, announced on 21 October.
+    topics: [upper-bound]
+    categories: [records]
+    grouping: related
+    pull_requests: [676, 692]
+    result_ids: [T-197, T-198, T-199, T-218, T-219]
+    summary: |-
+      [Evan Daniel](packing/contributors/people/evan-daniel.md)’s exact packings of 155,
+      229, 236 and 271 squares are confirmed at V3/C3 and became the house packings at
+      those counts. At 155, 236 and 271 they lie $1.64 \times 10^{-4}$,
+      $2.02 \times 10^{-3}$ and $4.46 \times 10^{-5}$ below the case ceilings then; at
+      229 his update lies $1.32 \times 10^{-5}$ below both
+      [Joost de Winter](packing/contributors/people/joost-de-winter.md)’s report and
+      [Francisco Couzo](packing/contributors/people/francisco-couzo.md)’s refinement of
+      it. The reports at 155 and 229 were registered at V0/C0 by the 18 October intake,
+      and those at 236 and 271 with this confirmation.
+    details: |-
+      - At 155 (T-197) a search from
+        [Daniil Ostashev](packing/contributors/people/daniil-ostashev.md)’s packing found
+        a new arrangement, below every report there. At 236 (T-218) Daniel finds another
+        arrangement of
+        [Nate Chaoweeraprasit](packing/contributors/people/nate-chaoweeraprasit.md)’s
+        issue 481 design; at 271 (T-219) he continues Couzo’s issue 561 arrangement, a
+        refinement of Chaoweeraprasit’s SQUISH packing (issue 500), to a packing the
+        source calls a different local minimum.
+      - At 229 his opening certificate (T-198) and its update the next day (T-199) come
+        from a search the source starts from Couzo’s issue 672 refinement of de Winter’s
+        packing. They lie $1.15 \times 10^{-5}$ and $1.32 \times 10^{-5}$ below both
+        reports; the update became the house. Both are dilation certificates, checked
+        exactly.
+      - Both maintained exact routes decided every certificate and refused its controls,
+        and an accepted adversarial review decided them again on a third exact route and
+        a clipping-area route. The source’s KKT, second-order and MILP statements are its
+        numerical evidence. The 18 October intake (#676) also registered de Winter’s
+        reports at 227, 229 and 260 (T-196), confirmed and adopted at 227 and 260 on 20
+        October (#704, merged 21 October). No optimality, rigidity or priority is
+        claimed.
+      - At 229, Daniel’s regularized view of his own packing (T-225) has been the house
+        since 22 October.
+    references:
+      - label: The case record at 155
+        target: packing/frontier/n-155.md
+      - label: The case record at 229
+        target: packing/frontier/n-229.md
+      - label: The case record at 236
+        target: packing/frontier/n-236.md
+      - label: The case record at 271
+        target: packing/frontier/n-271.md
+      - label: Mathematical review of 19 October
+        target: docs/project/reviews/review-2026-10-19-upper-bound-imports-659-664-669-674.md
+      - label: The 18 October intake audit
+        target: docs/project/reviews/review-2026-10-18-intake-audit.md
+      - label: De Winter’s adoption at 227 and 260 (#704)
+        target: https://squaremath.org/news.html#changelog-entry-de-winter-two-twenty-seven-and-two-sixty-adopted
+  - id: hosono-fine-net-lower-bounds
+    date: '2026-10-20'
+    title: Hosono Reports Stronger Lower Bounds at 18 Counts, Four Verified
+    significance:
+      score: 3
+      rationale: >-
+        The 18 reports each improve the lower bound the record held at its count, by the
+        established mixed rectangle-measure certificate kind on declared nets. They bring
+        no new technique and claim no optimality.
+    topics: [lower-bound, verification]
+    categories: [records]
+    grouping: related
+    pull_requests: [671, 688]
+    result_ids: [T-200, T-201, T-202, T-203, T-204, T-205, T-206, T-207, T-208, T-209, T-210, T-211, T-212, T-213, T-214, T-215, T-216, T-217]
+    summary: |-
+      [Hiroaki Hosono](packing/contributors/people/hiroaki-hosono.md) (wand125) reports
+      lower bounds at 18 counts from 38 to 110 squares, each above the bound the record
+      held, from mixed rectangle-measure certificates on declared nets of directions. Four
+      are verified here at V3/C3 and are now the cases’ verified lower bounds:
+      $s(68) \ge 8.53$, $s(84) \ge 9.4225$, $s(85) \ge 9.475$ and $s(108) \ge 10.62$. The
+      other 14 are recorded as reported, at V0/C0.
+    details: |-
+      - The certificates use a 2,073-direction net at 38, 40, 41, 43 and 51 squares and a
+        201-direction net from 68 to 110 (T-200 to T-217). The source is credited to
+        Hosono after [Tokoharu](packing/contributors/people/tokoharu.md) and
+        [Joshua Levy](packing/contributors/people/joshua-levy.md).
+      - At 68, 84, 85 and 108 the complete captures cover every declared direction at
+        threshold one, the whole-net controls at 99/100 refuse, and mapped mathematical
+        reviews accept each certificate’s net-and-shrink implication. The replay ran on
+        this project’s maintained fast verifier. Hosono’s checker, sqverify-proof-net, is
+        his adaptation of it, and the two share the crate apart from the net readers.
+        That makes this a confirmation sharing components with the producer, not an
+        independent implementation or a second method.
+      - The bound at 108 was verified on 19 October and those at 68, 84 and 85 on 20
+        October. The other 14 await their captures and reviews. No optimality or upper
+        bound is claimed.
+    references:
+      - label: Retained certificates and verification limits
+        target: packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
+      - label: Mathematical review at 108
+        target: docs/project/reviews/review-2026-10-18-wand125-n108-certificate-mathematics.md
+      - label: Mathematical review at 68
+        target: docs/project/reviews/review-2026-10-19-n68-fine-net-mathematics.md
+      - label: Mathematical review at 84 and 85
+        target: docs/project/reviews/review-2026-10-19-n84-n85-fine-net-mathematics.md
+      - label: Hosono’s registration request
+        target: https://github.com/jlevy/squares/issues/446
+  - id: fitzharding-seventeen-source-build-verified
+    date: '2026-10-19'
+    title: Fitzharding’s Reported 17-Square Proof Admitted on Its Own Build
+    significance:
+      score: 3
+      rationale: >-
+        A substantive verification policy: a producer’s own complete formal build can now
+        establish source verification but never independent confirmation, which moves
+        T-154 from V0 to V3 while it stays at C1. No proof was rebuilt here and no case
+        bound moves.
+    topics: [formalization, verification, project]
+    categories: [records, pipeline]
+    pull_requests: [645]
+    result_ids: [T-154]
+    summary: |-
+      The record now keeps two questions apart: whether a result’s own source verifies it,
+      and whether anyone else has confirmed it.
+      [Oscar Fitzharding](packing/contributors/people/oscar-fitzharding.md)’s retained clean
+      build of his reported Lean proof that $s(17) = 4.67553009360455\ldots$, all 4,951
+      modules, is admitted as source evidence, so T-154 moves from V0/C1 to V3/C1. Its
+      confirmation stays at C1: nothing here has rebuilt the proof.
+    details: |-
+      - A machine run carries a case’s verified bound, or backs a verified rigidity claim,
+        only when it was made here; neither the producer’s own run nor a third party’s
+        retained run does. The 17-square case’s verified bounds and status are unchanged.
+      - A confirming run needs the actor its origin names, a Lean build here counts as a
+        replay, and no build or axiom receipt may be cited by two actors. Other results
+        are confirmed through the same shared rules, so one conditional implication that
+        had read as confirmed no longer does.
+      - C3 for T-154 needs a complete build beyond the producer’s, and V4 needs the
+        owner’s oversight record.
+    references:
+      - label: Admission review of the source build
+        target: docs/project/reviews/review-2026-10-15-fitzharding-n17-source-build-admission.md
+      - label: The verification and confirmation ladder
+        target: epistemics.md
+      - label: The case record at 17
+        target: packing/frontier/n-017.md
+  - id: smaller-confirmed-packings-at-fifteen-counts
+    date: '2026-10-17'
+    title: Smaller Confirmed Packings Adopted at 15 Square Counts
+    significance:
+      score: 3
+      rationale: >-
+        T-189 is S3, as the 16 October review rescored it: Couzo’s refinement at 237,
+        1.01e-04 below the case ceiling and the smallest side known there when published.
+        The other five entries are S1 or S2 refinements, re-solves and further
+        arrangements; together they move the house packing at 15 counts. No optimality is
+        claimed.
+    topics: [upper-bound, verification]
+    categories: [records, regularization]
+    pull_requests: [657]
+    result_ids: [T-185, T-186, T-187, T-188, T-189, T-190]
+    summary: |-
+      Six upper-bound entries registered on 15 October, T-185 to T-190, are confirmed at
+      V3/C3 after the 16 October review, and 15 counts adopt smaller packings as their
+      houses: [Mykhailo Polkovskyi](packing/contributors/people/mykhailo-polkovskyi.md)’s
+      exact re-solves at 12 counts (T-186),
+      [Evan Daniel](packing/contributors/people/evan-daniel.md)’s packing at 146 (T-187),
+      and [Francisco Couzo](packing/contributors/people/francisco-couzo.md)’s at 211 and
+      237 (T-188, T-190). Each re-housed count drew a regularized view of its new packing,
+      or kept the axis tool’s view where no regularized view improved on it.
+    details: |-
+      - At 237 Couzo’s refinement of Polkovskyi’s packing (T-189) lies
+        $1.01 \times 10^{-4}$ below the earlier ceiling, and his later certificate
+        (T-190), $2.40 \times 10^{-11}$ smaller still, becomes the house. At 146 Daniel’s
+        packing is another arrangement of [Ryan Xu](packing/contributors/people/ryan-xu.md)’s
+        design, $1.38 \times 10^{-8}$ below the earlier ceiling; at 211 Couzo’s further
+        arrangement of [Daniil Ostashev](packing/contributors/people/daniil-ostashev.md)’s
+        design, with five squares beyond a tenth, lies $9.29 \times 10^{-6}$ below it.
+        Polkovskyi’s re-solves tighten packings the record already credits, by
+        $1.25 \times 10^{-94}$ to $1.79 \times 10^{-19}$.
+      - Daniel’s regularizer drew the new houses at 129, 146, 175 and 204, and at 211 by
+        the owner’s review; the grid-slack generator drew 154, 156, 232, 264, 271 and 302.
+        At 176, 237, 303 and 304 no view improved on the axis tool’s drawing, which stayed.
+        Where a new drawing read worse than the old view of the earlier packing, the
+        owner’s rule decided: “We should always be adopting the smallest packing and then
+        regularizing it.”
+      - The review reproduced every retained replay at the counts the entries cite and
+        decided the certificates again on a third exact route; where a source ran this
+        project’s verifier, the independence rests on the separate rational corner
+        checker. No optimality, rigidity or priority is claimed.
+      - Since then 271 (19 October, T-219), 154 (20 October, T-222), 303 (23 October,
+        T-230) and 204 (from 20 October; T-231 since 24 October) have been re-housed and
+        redrawn.
+    references:
+      - label: Mathematical review of 16 October
+        target: docs/project/reviews/review-2026-10-16-upper-bound-imports-506-607.md
+      - label: The case record at 237
+        target: packing/frontier/n-237.md
+      - label: Regularization selection at 211 to 304
+        target: packing/cases/regularized_drawings/think-z7wn-2026-10-16/selection-r3cl.md
+  - id: regularized-drawings-for-six-re-housed-counts
+    date: '2026-10-16'
+    title: Regularized Drawings for Six Re-Housed Counts, Including 176
+    significance:
+      score: 3
+      rationale: >-
+        A meaningful artifact delivery: the Atlas draws regularized views at six counts
+        whose packings were replaced on 15 October, including 176, which had shown its raw
+        packing. No bound, witness or result changes.
+    topics: [project]
+    categories: [regularization, site]
+    pull_requests: [644]
+    summary: |-
+      From 16 October the Atlas drew regularized views at 105, 129, 146, 156, 176 and 271,
+      whose packings were replaced on 15 October. At 176, which had shown its raw packing,
+      the light, uneven and near-axis squares fell from 70, 71 and 52 to 11, 24 and 0, and
+      the full shared sides rose from 33 to 457. At 204, 272 and 303 neither generator
+      drew a better view, and the drawings stayed.
+    details: |-
+      - [Evan Daniel](packing/contributors/people/evan-daniel.md)’s regularizer drew five
+        of the views and the grid-slack generator drew the one at 105. Each view was
+        exactly verified at its packing’s side, and each was reproduced byte for byte from
+        the witnesses then current, since the original runs never left their host.
+      - The drawings changed no bound and no witness. The downloadable posters were left
+        to their next edition.
+      - None of the six views is drawn now. #657, merged early on 17 October, re-housed
+        129, 146, 156, 176 and 271 and redrew each from its new packing; 176 draws the axis
+        tool’s view of its new house (T-186). 105 was re-housed on 17 October (T-174) and
+        23 October (T-229). The drawings kept at 204, 272 and 303 have been replaced too:
+        #657 re-housed 204 and 303, 272 was re-housed on 17 October (T-174), and each now
+        draws a view of a later house.
+    references:
+      - label: Regularization selection at 105, 129 and 146
+        target: packing/cases/regularized_drawings/think-la7h-2026-10-16/selection-3a.md
+      - label: Regularization selection at 156, 176 and 271
+        target: packing/cases/regularized_drawings/think-la7h-2026-10-16/selection-3a-d1.md
+      - label: Regularization process
+        target: docs/project/guides/regularization-process.md
+  - id: significance-levels-for-news-and-pull-requests
+    date: '2026-10-15'
+    title: Significance Levels for News and Pull Requests
+    significance:
+      score: 3
+      rationale: >-
+        A project policy and capability: one conservative five-level rubric now scores
+        every pull request and every News item, a week of merged work was scored and
+        backfilled, and News readers filter by level. No bound or rung changes.
+    topics: [project]
+    categories: [site, documentation]
+    pull_requests: [621]
+    summary: |-
+      Every pull request now carries one significance label, S1 to S5, scored by the same
+      conservative rubric that scores News items. News shows S3 to S5 with a filter by
+      level, opening on S4 and S5; S1 and S2 work stays in the full changelog. All 94 pull
+      requests merged in the week to 15 October were scored, and News gained items for the
+      noteworthy ones it lacked.
+    details: |-
+      - Of the 94, 9 were scored S1, 48 S2, 27 S3, 8 S4 and 2 S5; the separate project
+        label marks 24. Eleven changelog entries filled gaps in that week, nine of them
+        shown in News.
+      - Significance measures importance and is independent of verification: a reported
+        S5 proof stays unverified until its evidence meets the verification rules.
+      - The changelog importer takes its score from the single S label and refuses
+        conflicting or multiple labels.
+    references:
+      - label: The significance rubric
+        target: packing/campaign/result-import.md#label-the-pr-and-prepare-news
+      - label: Maintaining the project changelog
+        target: development.md#maintaining-the-project-changelog
+  - id: every-selected-validation-check-runs
+    date: '2026-10-15'
+    title: Every Selected Validation Check Now Runs
+    significance:
+      score: 3
+      rationale: >-
+        Key verification tooling: validation no longer reuses verdicts across runs, so an
+        unauthenticated artifact name or a legacy environment variable can no longer
+        suppress selected checks. It weakens no scientific assertion and does not make
+        validation faster.
+    topics: [project, engineering]
+    categories: [pipeline]
+    pull_requests: [620]
+    summary: |-
+      Validation now executes every check it selects. Before, a verdict could be reused
+      across runs, so an unauthenticated artifact name or a legacy environment variable
+      could suppress 86 checks. A change that touches only the News record selects its
+      checks exactly, while the schema and synopsis checks stay unconditional.
+    details: |-
+      - Hosted enforcement per call moves from 12 to 45 seconds; 12 seconds stays as a
+        diagnostic, and local and strict modes keep the strict budget.
+      - No scientific assertion, admission rule or mathematical tolerance is weakened.
+        This is a correctness and stability change, not a speed-up.
+    references:
+      - label: Validation tiers
+        target: development.md#validation-tiers
   - id: couzo-two-hundred-four-and-two-sixty-adopted
     date: '2026-10-21'
     title: Couzo’s Smaller Packings of 204 and 260 Squares Adopted
@@ -136,6 +867,52 @@ entries:
         target: docs/project/reviews/review-2026-10-19-evand-n183-subgrid.md
       - label: Daniel’s registration request
         target: https://github.com/jlevy/squares/issues/680
+  - id: fitzharding-n19-reported-proof
+    date: '2026-10-16'
+    title: Fitzharding Reports a Lean Proof for 19 Squares
+    significance:
+      score: 5
+      rationale: >-
+        This announces the S5 optimality report T-194; significance does not imply
+        independent verification of the complete claim.
+    topics: [optimality, verification]
+    categories: [records]
+    pull_requests: [651]
+    result_ids: [T-194]
+    summary: |-
+      [Oscar Fitzharding](packing/contributors/people/oscar-fitzharding.md) reports a Lean 4 proof that [Robert Wainwright](packing/contributors/people/robert-wainwright.md)’s 1979 packing of 19 unit
+      squares is optimal: $s(19) = 3 + 4\sqrt{2}/3 = 4.88561808316412\ldots$. It is the first
+      optimality claim the project’s records hold at 19; if the proof holds, it closes the
+      gap of about $0.0606$ between the verified lower bound, $193/40$, and Wainwright’s
+      side. T-194 remains reported at V0/C1; the Lean build has not been replayed here.
+    details: |-
+      - Lean’s kernel checks the geometric arguments, and 4,320 finite certificate facts are
+        decided by `native_decide`, so Lean’s compiler, its native evaluator and the C
+        toolchain are trusted. The source reports a kernel replay of the theorem’s import
+        closure that takes those facts as axioms, and says a complete rebuild from its
+        published sources has not yet been run.
+      - A separately prompted mathematical review of 16 October found no blocking or major
+        defect. It checked the statement and decided the endpoint packing exactly,
+        re-derived the six-step chain to the final theorem, and with programs of its own
+        re-established what each of the 2,328 native facts in the Git tree certifies. The
+        1,992 facts in the release archives were scanned but not re-run.
+      - The proof builds on Fitzharding’s 17-square formalization (T-154), whose checker
+        modules it compiles. The source says it was developed with substantial assistance
+        from Claude and Codex.
+    artifacts:
+      - kind: result
+        label: Current 19-square Lean proof report
+        target: https://squaremath.org/result/t-194.html
+    publication:
+      date: '2026-10-16'
+      evidence: https://github.com/jlevy/squares/actions/runs/38942623017/job/117129620456
+    references:
+      - label: Source and premise review
+        target: docs/project/reviews/review-2026-10-16-fitzharding-n19-lean.md
+      - label: Retained source and verification limits
+        target: packing/resources/web/fitzharding-n19-lean-2026-10-16/README.md
+      - label: Fitzharding’s registration request
+        target: https://github.com/jlevy/squares/issues/640
   - id: greff-ninety-five-optimality-report
     date: '2026-10-16'
     title: Greff Reports an Optimum for 95 Squares
@@ -287,13 +1064,13 @@ entries:
     artifacts:
       - kind: paper
         label: Current basic tutorial
-        target: https://jlevy.github.io/squares/tutorial.html
+        target: https://squaremath.org/tutorial.html
       - kind: paper
         label: Current advanced tutorial
-        target: https://jlevy.github.io/squares/tutorial-advanced.html
+        target: https://squaremath.org/tutorial-advanced.html
       - kind: page
         label: Current Explanations index
-        target: https://jlevy.github.io/squares/papers.html
+        target: https://squaremath.org/papers.html
     publication:
       date: '2026-10-14'
       evidence: https://github.com/jlevy/squares/actions/runs/38636016372/job/116103959611
@@ -364,10 +1141,10 @@ entries:
     artifacts:
       - kind: result
         label: Current Fang theorem record
-        target: https://jlevy.github.io/squares/result/t-163.html
+        target: https://squaremath.org/result/t-163.html
       - kind: result
         label: Current closed-form lower-bound record
-        target: https://jlevy.github.io/squares/result/t-180.html
+        target: https://squaremath.org/result/t-180.html
     publication:
       date: '2026-10-14'
       evidence: https://github.com/jlevy/squares/actions/runs/38644709027/job/116130903550
@@ -494,22 +1271,22 @@ entries:
     artifacts:
       - kind: result
         label: Current 40-square lower-bound record
-        target: https://jlevy.github.io/squares/result/t-157.html
+        target: https://squaremath.org/result/t-157.html
       - kind: result
         label: Current Ostashev certificate record
-        target: https://jlevy.github.io/squares/result/t-158.html
+        target: https://squaremath.org/result/t-158.html
       - kind: result
         label: Current Calle layout record
-        target: https://jlevy.github.io/squares/result/t-159.html
+        target: https://squaremath.org/result/t-159.html
       - kind: result
         label: Current Daniel 154-square certificate record
-        target: https://jlevy.github.io/squares/result/t-160.html
+        target: https://squaremath.org/result/t-160.html
       - kind: paper
         label: Current methods survey
-        target: https://jlevy.github.io/squares/papers/square-packing-methods-survey.html
+        target: https://squaremath.org/papers/square-packing-methods-survey.html
       - kind: pdf
         label: Current methods survey PDF
-        target: https://jlevy.github.io/squares/papers/square-packing-methods-survey.pdf
+        target: https://squaremath.org/papers/square-packing-methods-survey.pdf
     publication:
       date: '2026-10-14'
       evidence: https://github.com/jlevy/squares/actions/runs/38558844519/job/115838577096
@@ -553,16 +1330,16 @@ entries:
     artifacts:
       - kind: page
         label: Current About changelog
-        target: https://jlevy.github.io/squares/about.html#changelog
+        target: https://squaremath.org/about.html#changelog
       - kind: pdf
         label: Current 1–100 packing infographic
-        target: https://jlevy.github.io/squares/square-packings-100-20261008.pdf
+        target: https://squaremath.org/square-packings-100-20261008.pdf
       - kind: pdf
         label: Current 1–324 packing poster
-        target: https://jlevy.github.io/squares/square-packings-324-20261008.pdf
+        target: https://squaremath.org/square-packings-324-20261008.pdf
       - kind: paper
         label: Current lower-bounds explainer
-        target: https://jlevy.github.io/squares/papers/n11-lower-bounds-explainer.html
+        target: https://squaremath.org/papers/n11-lower-bounds-explainer.html
     publication:
       date: '2026-10-14'
       evidence: https://github.com/jlevy/squares/actions/runs/38552030866/job/115817992138
@@ -613,7 +1390,7 @@ entries:
     artifacts:
       - kind: page
         label: Current results, including the corrected significance scores
-        target: https://jlevy.github.io/squares/results.html
+        target: https://squaremath.org/results.html
     publication:
       date: '2026-10-14'
       evidence: https://github.com/jlevy/squares/actions/runs/38551948126/job/115813924621
@@ -663,13 +1440,13 @@ entries:
     artifacts:
       - kind: result
         label: Current Overbeck proof report
-        target: https://jlevy.github.io/squares/result/t-153.html
+        target: https://squaremath.org/result/t-153.html
       - kind: result
         label: Current Fitzharding formalization report
-        target: https://jlevy.github.io/squares/result/t-154.html
+        target: https://squaremath.org/result/t-154.html
       - kind: paper
         label: Current explainer, including the 17-square reports
-        target: https://jlevy.github.io/squares/papers/n11-lower-bounds-explainer.html
+        target: https://squaremath.org/papers/n11-lower-bounds-explainer.html
     publication:
       date: '2026-10-14'
       evidence: https://github.com/jlevy/squares/actions/runs/38536230832/job/115761676874
@@ -728,19 +1505,19 @@ entries:
     artifacts:
       - kind: page
         label: Current atlas with Regularized / Original comparison
-        target: https://jlevy.github.io/squares/atlas.html
+        target: https://squaremath.org/atlas.html
       - kind: pdf
         label: Current 1–100 packing infographic
-        target: https://jlevy.github.io/squares/square-packings-100-20261008.pdf
+        target: https://squaremath.org/square-packings-100-20261008.pdf
       - kind: pdf
         label: Current 1–324 packing poster
-        target: https://jlevy.github.io/squares/square-packings-324-20261008.pdf
+        target: https://squaremath.org/square-packings-324-20261008.pdf
       - kind: result
         label: Current exact-side batch record
-        target: https://jlevy.github.io/squares/result/t-155.html
+        target: https://squaremath.org/result/t-155.html
       - kind: result
         label: Current 290-square exact certificate record
-        target: https://jlevy.github.io/squares/result/t-156.html
+        target: https://squaremath.org/result/t-156.html
     publication:
       date: '2026-10-14'
       evidence: https://github.com/jlevy/squares/actions/runs/38527537367/job/115733950233
@@ -772,7 +1549,7 @@ entries:
     artifacts:
       - kind: result
         label: Current 17-square Lean proof report
-        target: https://jlevy.github.io/squares/result/t-154.html
+        target: https://squaremath.org/result/t-154.html
     publication:
       date: '2026-10-13'
       evidence: https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702
@@ -869,7 +1646,7 @@ entries:
     artifacts:
       - kind: result
         label: Current 17-square candidate-proof record
-        target: https://jlevy.github.io/squares/result/t-153.html
+        target: https://squaremath.org/result/t-153.html
     publication:
       evidence: https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702
     references:
@@ -916,10 +1693,10 @@ entries:
     artifacts:
       - kind: result
         label: Current 207-square PingYou record
-        target: https://jlevy.github.io/squares/result/t-147.html
+        target: https://squaremath.org/result/t-147.html
       - kind: result
         label: Current 153-square PingYou record
-        target: https://jlevy.github.io/squares/result/t-148.html
+        target: https://squaremath.org/result/t-148.html
     publication:
       evidence: https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702
   - id: replayed-upper-bound-admissions
@@ -958,10 +1735,10 @@ entries:
     artifacts:
       - kind: result
         label: Current SQUISH admission record
-        target: https://jlevy.github.io/squares/result/t-151.html
+        target: https://squaremath.org/result/t-151.html
       - kind: result
         label: Current Couzo refinement record
-        target: https://jlevy.github.io/squares/result/t-152.html
+        target: https://squaremath.org/result/t-152.html
     publication:
       evidence: https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702
     references:
@@ -997,19 +1774,19 @@ entries:
     artifacts:
       - kind: result
         label: Current PingYou 207-square admission
-        target: https://jlevy.github.io/squares/result/t-147.html
+        target: https://squaremath.org/result/t-147.html
       - kind: result
         label: Current PingYou 153-square admission
-        target: https://jlevy.github.io/squares/result/t-148.html
+        target: https://squaremath.org/result/t-148.html
       - kind: result
         label: Current Ostashev admission
-        target: https://jlevy.github.io/squares/result/t-149.html
+        target: https://squaremath.org/result/t-149.html
       - kind: result
         label: Current Barnett refinement admission
-        target: https://jlevy.github.io/squares/result/t-150.html
+        target: https://squaremath.org/result/t-150.html
       - kind: page
         label: Current atlas of adopted packings
-        target: https://jlevy.github.io/squares/atlas.html
+        target: https://squaremath.org/atlas.html
     publication:
       evidence: https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702
     references:
@@ -1054,10 +1831,10 @@ entries:
     artifacts:
       - kind: page
         label: Current project overview
-        target: https://jlevy.github.io/squares/
+        target: https://squaremath.org/
       - kind: page
         label: Current About page
-        target: https://jlevy.github.io/squares/about.html
+        target: https://squaremath.org/about.html
     publication:
       evidence: https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702
     references:
@@ -1090,7 +1867,7 @@ entries:
     artifacts:
       - kind: page
         label: Current contributor and result overview
-        target: https://jlevy.github.io/squares/about.html
+        target: https://squaremath.org/about.html
     publication:
       evidence: https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702
   - id: website-front-door-and-result-reports
@@ -1114,10 +1891,10 @@ entries:
     artifacts:
       - kind: page
         label: Project homepage
-        target: https://jlevy.github.io/squares/
+        target: https://squaremath.org/
       - kind: page
         label: Reporting results on About
-        target: https://jlevy.github.io/squares/about.html
+        target: https://squaremath.org/about.html
     publication:
       evidence: https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702
   - id: bounded-publication-audits
@@ -1165,13 +1942,13 @@ entries:
     artifacts:
       - kind: result
         label: Current 40-square continuous-pose admission
-        target: https://jlevy.github.io/squares/result/t-145.html
+        target: https://squaremath.org/result/t-145.html
       - kind: result
         label: Current Daniel regularized-certificate admission
-        target: https://jlevy.github.io/squares/result/t-146.html
+        target: https://squaremath.org/result/t-146.html
       - kind: page
         label: Current result register
-        target: https://jlevy.github.io/squares/results.html
+        target: https://squaremath.org/results.html
     publication:
       evidence: https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702
     references:
@@ -1207,16 +1984,16 @@ entries:
     artifacts:
       - kind: page
         label: Overview
-        target: https://jlevy.github.io/squares/
+        target: https://squaremath.org/
       - kind: page
         label: Atlas
-        target: https://jlevy.github.io/squares/atlas.html
+        target: https://squaremath.org/atlas.html
       - kind: page
         label: Results
-        target: https://jlevy.github.io/squares/results.html
+        target: https://squaremath.org/results.html
       - kind: page
         label: Papers and downloads
-        target: https://jlevy.github.io/squares/papers.html
+        target: https://squaremath.org/papers.html
     publication:
       evidence: https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702
   - id: paper-typography-and-title-case
@@ -1240,28 +2017,28 @@ entries:
     artifacts:
       - kind: paper
         label: Current Part I paper
-        target: https://jlevy.github.io/squares/papers/n11-lower-bounds-explainer.html
+        target: https://squaremath.org/papers/n11-lower-bounds-explainer.html
       - kind: pdf
         label: Current Part I PDF
-        target: https://jlevy.github.io/squares/papers/n11-lower-bounds-explainer.pdf
+        target: https://squaremath.org/papers/n11-lower-bounds-explainer.pdf
       - kind: paper
         label: Current Part II paper
-        target: https://jlevy.github.io/squares/papers/n11-threshold-bound-review.html
+        target: https://squaremath.org/papers/n11-threshold-bound-review.html
       - kind: pdf
         label: Current Part II PDF
-        target: https://jlevy.github.io/squares/papers/n11-threshold-bound-review.pdf
+        target: https://squaremath.org/papers/n11-threshold-bound-review.pdf
       - kind: paper
         label: Current Part III paper
-        target: https://jlevy.github.io/squares/papers/n11-optimality-review.html
+        target: https://squaremath.org/papers/n11-optimality-review.html
       - kind: pdf
         label: Current Part III PDF
-        target: https://jlevy.github.io/squares/papers/n11-optimality-review.pdf
+        target: https://squaremath.org/papers/n11-optimality-review.pdf
       - kind: paper
         label: Current methods tutorial
-        target: https://jlevy.github.io/squares/papers/square-packing-methods-survey.html
+        target: https://squaremath.org/papers/square-packing-methods-survey.html
       - kind: pdf
         label: Current methods tutorial PDF
-        target: https://jlevy.github.io/squares/papers/square-packing-methods-survey.pdf
+        target: https://squaremath.org/papers/square-packing-methods-survey.pdf
     publication:
       evidence: https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702
     releases:
@@ -1293,10 +2070,10 @@ entries:
     artifacts:
       - kind: paper
         label: Current methods tutorial
-        target: https://jlevy.github.io/squares/papers/square-packing-methods-survey.html
+        target: https://squaremath.org/papers/square-packing-methods-survey.html
       - kind: pdf
         label: Current methods tutorial PDF
-        target: https://jlevy.github.io/squares/papers/square-packing-methods-survey.pdf
+        target: https://squaremath.org/papers/square-packing-methods-survey.pdf
     publication:
       evidence: https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702
     releases:
@@ -1336,19 +2113,19 @@ entries:
     artifacts:
       - kind: page
         label: Current interactive atlas
-        target: https://jlevy.github.io/squares/atlas.html
+        target: https://squaremath.org/atlas.html
       - kind: pdf
         label: Current 100-packing infographic PDF
-        target: https://jlevy.github.io/squares/square-packings-100-20261008.pdf
+        target: https://squaremath.org/square-packings-100-20261008.pdf
       - kind: pdf
         label: Current 324-packing infographic PDF
-        target: https://jlevy.github.io/squares/square-packings-324-20261008.pdf
+        target: https://squaremath.org/square-packings-324-20261008.pdf
       - kind: graphic
         label: Current 100-packing SVG
-        target: https://jlevy.github.io/squares/known-best-1-100.svg
+        target: https://squaremath.org/known-best-1-100.svg
       - kind: graphic
         label: Current 324-packing SVG
-        target: https://jlevy.github.io/squares/known-best-1-324.svg
+        target: https://squaremath.org/known-best-1-324.svg
     publication:
       evidence: https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702
   - id: daniel-record-hunt-source-intake
@@ -1369,7 +2146,7 @@ entries:
     artifacts:
       - kind: result
         label: Current 132-square record-hunt record
-        target: https://jlevy.github.io/squares/result/t-131.html
+        target: https://squaremath.org/result/t-131.html
     publication:
       evidence: https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702
     references:
@@ -1391,6 +2168,92 @@ entries:
     references:
       - label: Beyond-horizon source coverage
         target: packing/frontier/source-coverage.yaml
+  - id: couzo-eight-exact-refinements-reported
+    date: '2026-10-09'
+    title: Couzo Reports Eight Smaller Exact Packings
+    significance:
+      score: 3
+      rationale: >-
+        T-128 is an S3 finite case result as reported: eight complete rational
+        certificates, each 9.79e-07 to 6.60e-04 below its case ceiling, refining earlier
+        packings. It brings no new technique and claims no optimality.
+    topics: [upper-bound]
+    categories: [records]
+    pull_requests: [460]
+    result_ids: [T-128]
+    summary: |-
+      [Francisco Couzo](packing/contributors/people/francisco-couzo.md) reports exact
+      rational packings of 105, 108, 127, 131, 155, 180, 228 and 306 unit squares, each
+      below the ceiling its case held. They are registered as T-128, a reported result at
+      V0/C0 pending adoption.
+    details: |-
+      - Each refines an earlier packing:
+        [Ryan Xu](packing/contributors/people/ryan-xu.md)’s at 105, 108, 127 and 131,
+        [Nate Chaoweeraprasit](packing/contributors/people/nate-chaoweeraprasit.md)’s
+        SQUISH packings at 155 and 180 (180 through
+        [Siddharth Gupta](packing/contributors/people/siddharth-gupta.md)), and Couzo’s
+        own at 228 and 306. He refined them by his basin hopping with
+        [David Ellsworth](packing/contributors/people/david-ellsworth.md)’s
+        refine_packing and [Evan Daniel](packing/contributors/people/evan-daniel.md)’s
+        fq, and Daniel’s exact contact solver wrote every certificate.
+      - Both maintained exact routes accepted all eight and refused their 16
+        duplicate-square and outside-container controls. The source copied this
+        project’s exact verifier, so one of the two routes shares checker lineage with
+        the source.
+      - The same change set the rule that a smaller bound not yet adopted reads as
+        pending adoption, not superseded.
+      - The 10 October intake (#487) later replayed and confirmed them at V3/C3, as
+        announced in Exact Certificates and a Stronger 40-Square Bound, and on 11
+        October the case records adopted five of them as the house, at 108, 127, 180,
+        228 and 306.
+    references:
+      - label: The later replay and confirmation (#487)
+        target: https://squaremath.org/news.html#changelog-entry-october-ten-intake-replays
+      - label: Retained certificates and verification limits
+        target: packing/resources/web/couzo-exact-refinements-2026-10-08/README.md
+      - label: Couzo’s report
+        target: https://github.com/jlevy/squares/issues/451
+  - id: couzo-five-follow-up-refinements-reported
+    date: '2026-10-09'
+    title: Couzo Reports Five Further Exact Packings
+    significance:
+      score: 3
+      rationale: >-
+        T-130 is an S3 finite case result as reported: five complete rational
+        certificates, 3.03e-05 to 1.74e-03 below the case ceilings then, refining earlier
+        packings. It brings no new technique and claims no optimality.
+    topics: [upper-bound]
+    categories: [records]
+    pull_requests: [469]
+    result_ids: [T-130]
+    summary: |-
+      [Francisco Couzo](packing/contributors/people/francisco-couzo.md) reports exact
+      rational packings of 84, 86, 105, 175 and 270 unit squares, each below the ceiling
+      its case held. They are registered as T-130, a reported result at V0/C0 pending
+      adoption.
+    details: |-
+      - He refines [Ryan Xu](packing/contributors/people/ryan-xu.md)’s packings at 84,
+        86, 105 and 175 and [Evan Daniel](packing/contributors/people/evan-daniel.md)’s
+        at 270; at 105 the new side is also $1.31 \times 10^{-3}$ below his own T-128.
+        He used his basin hopping and, at 175,
+        [David Ellsworth](packing/contributors/people/david-ellsworth.md)’s
+        refine_packing and Daniel’s fq; Daniel’s exact contact solver wrote the
+        certificates.
+      - Both maintained exact routes accepted all five and refused their ten controls.
+        The source’s own check used a copy of this project’s verifier, so one of the two
+        routes shares checker lineage with the source.
+      - The source carries no licence, so the record keeps derived exact facts that
+        rebuild each certificate, not the source’s files.
+      - The 10 October intake (#487) later replayed and confirmed them at V3/C3, as
+        announced in Exact Certificates and a Stronger 40-Square Bound, and on 11
+        October the case records adopted three of them as the house, at 84, 86 and 105.
+    references:
+      - label: The later replay and confirmation (#487)
+        target: https://squaremath.org/news.html#changelog-entry-october-ten-intake-replays
+      - label: Retained certificates and verification limits
+        target: packing/resources/web/couzo-followup-refinements-2026-10-08/README.md
+      - label: Couzo’s report, a comment on #460
+        target: https://github.com/jlevy/squares/pull/460#issuecomment-6070798890
   - id: ryu-polynomial-deficiency-reports
     date: '2026-10-09'
     title: Ryu Reports Polynomial Deficiency Bounds
@@ -1570,7 +2433,7 @@ entries:
       - engineering
     references:
       - label: Frontier table
-        target: https://jlevy.github.io/squares/frontier.html
+        target: https://squaremath.org/frontier.html
       - label: Static rendering and deployment work
         target: https://github.com/jlevy/squares/pull/456
   - id: packing-methods-survey-first-publication
@@ -1593,7 +2456,7 @@ entries:
       - verification
     references:
       - label: Methods survey
-        target: https://jlevy.github.io/squares/papers/square-packing-methods-survey.html
+        target: https://squaremath.org/papers/square-packing-methods-survey.html
       - label: Initial publication
         target: https://github.com/jlevy/squares/pull/458
   - id: couzo-twenty-beyond-corpus-reports
@@ -1679,7 +2542,7 @@ entries:
       - label: Second adversarial review and its dated corrections
         target: docs/project/reviews/review-2026-10-13-overbeck-n17-candidate-second.md
       - label: Candidate proof record
-        target: https://jlevy.github.io/squares/result/t-153.html
+        target: https://squaremath.org/result/t-153.html
     result_ids:
       - T-153
   - id: atlas-posters-october-results-update
@@ -1724,13 +2587,13 @@ entries:
     artifacts:
       - kind: pdf
         label: Current 1–100 packing infographic
-        target: https://jlevy.github.io/squares/square-packings-100-20261008.pdf
+        target: https://squaremath.org/square-packings-100-20261008.pdf
       - kind: pdf
         label: Current 1–324 packing poster
-        target: https://jlevy.github.io/squares/square-packings-324-20261008.pdf
+        target: https://squaremath.org/square-packings-324-20261008.pdf
       - kind: paper
         label: Lower-bounds paper
-        target: https://jlevy.github.io/squares/papers/n11-lower-bounds-explainer.html
+        target: https://squaremath.org/papers/n11-lower-bounds-explainer.html
   - id: ahmed-eleven-square-optimality
     date: '2026-09-30'
     title: Ahmed Proves Trump’s Eleven-Square Packing Optimal
@@ -1761,9 +2624,9 @@ entries:
         needed for V4/C4.
     references:
       - label: Current eleven-square result
-        target: https://jlevy.github.io/squares/result/t-060.html
+        target: https://squaremath.org/result/t-060.html
       - label: Current eleven-square optimality explainer
-        target: https://jlevy.github.io/squares/papers/n11-optimality-review.html
+        target: https://squaremath.org/papers/n11-optimality-review.html
       - label: Ahmed’s original proof
         target: https://github.com/Queuingtheorydotcom/11SquaresOptimal/tree/f9e0de713a0949d1bc6a0fa6b59d96edf6c3d65c
       - label: Retained verification and reproduction limits
@@ -1773,6 +2636,109 @@ entries:
       - label: Revised verification and confirmation ladder
         target: https://github.com/jlevy/squares/pull/262
 deliveries:
+- number: 794
+  title: 'records(#763): T-240 reviewed at V3/C3, adopted at 268 and 303 and regularized'
+  merged_at: '2026-10-25T01:00:47Z'
+  base_ref: main
+  merge_commit: 755ef426b81cf2d5223bf26372905083fbb59552
+- number: 750
+  title: 'records(intake): five Lean formalization sources retained; T-234 to T-238 registered, with the classical s(2) to s(5)'
+  merged_at: '2026-10-24T05:15:20Z'
+  base_ref: main
+  merge_commit: 2c58b6373cb2683e200344ae14eae537bdfa895b
+- number: 745
+  title: 'records(think-wop1, #446): T-232 at n31 and T-233 at n19, 20, 26, 27, lower bounds from wand125'
+  merged_at: '2026-10-24T04:49:58Z'
+  base_ref: main
+  merge_commit: af9c9e8509fd0d1622a7654de1b1b58740339d12
+- number: 764
+  title: 'fix(site): pan the Atlas by hand at the end; title the homepage The Squares Project'
+  merged_at: '2026-10-24T02:12:47Z'
+  base_ref: main
+  merge_commit: da117ad0b8e17164a8296f2fc4d30646446660ac
+- number: 760
+  title: 'test(site): bring main''s integration site tests to the 22 October design'
+  merged_at: '2026-10-24T01:02:21Z'
+  base_ref: main
+  merge_commit: 74f0edb9bf2cadb10dc2ea2fab1b876e75aa1176
+- number: 746
+  title: 'feat(site): atlas follows the scroll; case steps beside the count; drop Show More/Less; smaller choosers'
+  merged_at: '2026-10-23T17:56:05Z'
+  base_ref: main
+  merge_commit: cc91ee1b81cd590fc9318b2ec6e594edfc8095fc
+- number: 731
+  title: 'records(#728): Evan Daniel''s s(303) as T-230, reviewed, adopted at 303 and regularized'
+  merged_at: '2026-10-23T03:21:15Z'
+  base_ref: main
+  merge_commit: 6c70d843fb263b064abcf5855f3b2cd382892d9d
+- number: 725
+  title: 'records(stage 4): T-226 to T-229 at V3/C3 after the 22 October reviews; T-229 adopted at 105 and 204'
+  merged_at: '2026-10-23T00:23:18Z'
+  base_ref: main
+  merge_commit: e929137a8d9801035745357c8751f417b2239840
+- number: 578
+  title: 'feat: add linked profiles and shared contribution summaries'
+  merged_at: '2026-10-22T09:14:53Z'
+  base_ref: main
+  merge_commit: d660905ec81383d7ca89830ff23a68e1832426e5
+- number: 708
+  title: 'records(#703): register Evan Daniel''s 270 as T-224, V3/C3 on its stage 4 review; adopted as the house best packing at 270'
+  merged_at: '2026-10-21T05:07:58Z'
+  base_ref: main
+  merge_commit: d640ad8fbf8a637ab0a5edb95d7911a2353a2c08
+- number: 699
+  title: 'records(#689, #694): register Evan Daniel''s 308 and 154 as T-221 and T-222 at V0/C0'
+  merged_at: '2026-10-20T23:38:39Z'
+  base_ref: main
+  merge_commit: 99cfcc8a07802e758853888c01f4a8a4a43ffbd6
+- number: 692
+  title: 'records(#659, #664, #669, #673, #674): Evan Daniel''s 155, 229, 236 and 271 to V3/C3, four houses adopted and regularized'
+  merged_at: '2026-10-20T15:09:34Z'
+  base_ref: main
+  merge_commit: 012dcf9e5f2846fae78b90d3ba1cbd9584939f75
+- number: 688
+  title: 'records(#446): confirm the n68, n84 and n85 fine-net lower bounds (T-205 to T-207, V3/C3)'
+  merged_at: '2026-10-20T06:12:13Z'
+  base_ref: main
+  merge_commit: 476049de1b9475b2aeab1f0d6ba60fec6b682d97
+- number: 645
+  title: 'fix(assurance): separate source verification from independent confirmation'
+  merged_at: '2026-10-19T21:57:31Z'
+  base_ref: main
+  merge_commit: 9fb8e147c8b74001f15a2a2a31ad113dc2059cb3
+- number: 671
+  title: 'research(#446): retain 18 fine-net lower bounds and adopt n108'
+  merged_at: '2026-10-19T10:25:26Z'
+  base_ref: main
+  merge_commit: 6833d05aa44f48140170e631b7766cb295876c31
+- number: 676
+  title: 'research: register six reported bounds from October intake'
+  merged_at: '2026-10-19T06:22:13Z'
+  base_ref: claude/intake-2026-10-16-n29-622
+  merge_commit: d167d4b86ec46f9af6fb37591794cecc3b31eb64
+  delivery_to_main:
+    commit: d167d4b86ec46f9af6fb37591794cecc3b31eb64
+    evidence: https://github.com/jlevy/squares/commit/d167d4b86ec46f9af6fb37591794cecc3b31eb64
+- number: 657
+  title: 'records: T-185 to T-190 to V3/C3 after the 16 October review, fifteen houses adopted, eleven re-housed counts regularized'
+  merged_at: '2026-10-17T01:42:04Z'
+  base_ref: main
+  merge_commit: c593e2bfd0a5da50d0d69a93b6897722a54ddb82
+- number: 644
+  title: 'feat(atlas): regularize nine re-housed counts, 176 first (think-la7h)'
+  merged_at: '2026-10-16T22:35:56Z'
+  base_ref: main
+  merge_commit: b35a6289fa42df427044d80bf1997e45112fd23e
+- number: 620
+  title: 'fix(ci): execute selected checks and stabilize validation policy'
+  merged_at: '2026-10-15T18:53:30Z'
+  base_ref: main
+  merge_commit: 4c9af6902e517bfff7d9f50d7cd6a042a15f60ed
+- number: 621
+  title: 'feat(news): backfill weekly highlights and define PR significance'
+  merged_at: '2026-10-15T18:30:50Z'
+  base_ref: main
+  merge_commit: 73d254272da7168f6d4c2e341c009849b5e63b46
 - number: 716
   title: 'records(think-ql4v): Daniel''s regularized views as T-225 (no issue); #668, #678 and #702 replies; T-196 and T-223 News; site v0.8.17'
   merged_at: '2026-10-22T00:31:09Z'
@@ -1793,6 +2759,11 @@ deliveries:
   merged_at: '2026-10-20T17:15:02Z'
   base_ref: main
   merge_commit: d588ad987bd8de53361d087b8961a7f2bf157c41
+- number: 651
+  title: 'records: register #639''s exact sides (T-193) and #640''s Lean proof of s(19) (T-194), with #639''s replay (think-mdnn)'
+  merged_at: '2026-10-16T17:49:19Z'
+  base_ref: main
+  merge_commit: 26d8bb335611e06ab62465c7f2c89fe1b4d7c675
 - number: 627
   title: 'research: the 15 October intake records, T-188 to T-192 in report order (supersedes #616)'
   merged_at: '2026-10-16T01:17:35Z'
@@ -2425,10 +3396,31 @@ stacks:
   evidence: https://github.com/jlevy/squares/pull/518
 coverage:
   pull_requests:
+  - 794
+  - 750
+  - 745
+  - 764
+  - 760
+  - 746
+  - 731
+  - 725
+  - 578
+  - 708
+  - 699
+  - 692
+  - 688
+  - 645
+  - 671
+  - 676
+  - 657
+  - 644
+  - 620
+  - 621
   - 716
   - 706
   - 704
   - 687
+  - 651
   - 246
   - 627
   - 628
@@ -2608,10 +3600,6 @@ coverage:
   - pull_request: 454
     reason: 'S2: Reconciles attributed contributor pattern counts and updates an internal proof strategy.
       All contributor classes remain unadmitted; no new exclusion or mathematical result is established.'
-  - pull_request: 460
-    reason: 'S3: Introduces S3 T-128, eight smaller reported exact packings. Later #487’s existing News
-      already covers these certificates and their completed replay; retain that subject coverage rather
-      than duplicate it. Related News: october-ten-intake-replays.'
   - pull_request: 461
     reason: 'S2: Implements an exact positive relaxation control with an explicit frame action. All
       exclusion/admission/global-proof flags are false, and no first-eight target protocol ran. Useful
@@ -2625,10 +3613,6 @@ coverage:
   - pull_request: 468
     reason: 'S2: Adds an optional pinned diagnostic for historical font behavior. It neither changes
       the public page nor supplies a new result; ordinary internal reliability tooling.'
-  - pull_request: 469
-    reason: 'S3: Introduces S3 T-130, five smaller reported rational certificates. Existing october-ten-intake-replays
-      already announces their replay/confirmation. Later 375/378 metadata are separately covered by
-      #479. Related News: october-ten-intake-replays, dated-beyond-horizon-reports.'
   - pull_request: 473
     reason: "S2: The W3 slice proposes hypotheses and reviews routes without running a target experiment, certifying a result or changing the census. Its accompanying test/gate repairs make the PR routine S2 maintenance; its planning component alone would be S1."
   - pull_request: 571
@@ -2653,6 +3637,12 @@ coverage:
     reason: 'S2: Registers Daniel’s regularized views at 204, 227, 229 and 260 as T-225 at V0/C0 with
       their replay, records the #668, #678 and #702 replies, and carries T-196’s and T-223’s News.
       It confirms and adopts nothing; T-225’s review and adoption follow in a later PR.'
+  - pull_request: 760
+    reason: 'S1: Test maintenance: brings three of main’s integration site test files to the 22 October
+      design and corrects two sentences of the design record. No reader-visible change.'
+  - pull_request: 764
+    reason: 'S1: A fix to a just-shipped interaction and a page title: the following Atlas pans by hand
+      again at the end of its journey, and the homepage is titled The Squares Project. No new capability.'
 frozen_entries:
 - id: october-fourteen-reviewed-packing-adoptions
   date: '2026-10-15'

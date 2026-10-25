@@ -4,11 +4,11 @@
 
 **Author:** Codex, for Joshua Levy
 
-**Status:** Data-model spike, initial population, website and `/profiles/` URLs
-implemented; continued from [PR #490](https://github.com/jlevy/squares/pull/490) in
-[PR #578](https://github.com/jlevy/squares/pull/578), under final integration and review
-on 2026-10-21. The current integration bead is `think-lqk2`; the final upstream merge
-and validation are in progress.
+**Status:** Core profiles, attribution model, and website shipped in
+[PR #578](https://github.com/jlevy/squares/pull/578). Presentation follow-ups on
+2026-10-22 are tracked under `think-zpzg`: narrative full-name labels, consistent
+Records → Results → Credits ordering, News body typography, shared popover expand
+controls, and consistent GitHub link icons.
 Dated validation receipts below apply only to the revisions they name.
 
 **Workflow:** W7 pipeline improvement, entered through `tbd shortcut new-plan-spec`.
@@ -36,28 +36,61 @@ Linking a person must not turn an acknowledgment into authorship.
 
 ## Current Integration: 2026-10-22
 
-Continue through `think-lqk2` and [PR #578](https://github.com/jlevy/squares/pull/578).
-The active checkout is `/Volumes/spud-ext2/worktrees/squares-profiles-final-20261021`;
-source `/Volumes/spud-ext2/agent-scratch/about-profiles-20261020/integration-env.sh`
-before build or test commands.
-The latest upstream integration incorporates origin/main `0281e7763` (PR #720) into the
-reviewed profile candidate `086c44ec0`. It retains 205 dated beyond-horizon rows, the
-T-225 attribution and narrative corrections, the new Joost de Winter source, and the
-published `v0.8.20` history.
-The proposed profile release remains `v0.9.0`, following `v0.8.20`; the profile-link
-explainer patch remains `v0.4.16`, following upstream’s `v0.4.15`. The upstream paper
-no-public-change receipts and claim-document link revision `cadf73fd` are retained
-alongside the proposed profile-link paper patches.
-Historical registrations add authored Results, not current Records.
-Beyond-horizon rows without registered result IDs do not inflate either tally.
-The K1 corporate-attribution correction and the L1 README and ink-portability fixes
-remain in the candidate.
-The earlier preview at `9939b62a7` has not yet been rebuilt for this integration; final
-review, validation and a normal website rebuild are pending.
-PR #578 and `think-18ic` maintain the authoritative final-head review, CI and merge
-receipt; this plan does not assert final hosted acceptance or a completed merge.
-Earlier dated receipts below are historical, including their counts, environments and
-preview ports.
+The core implementation is merged.
+The domain migration in [PR #727](https://github.com/jlevy/squares/pull/727) publishes
+at `squaremath.org`; its live HTTPS and redirect acceptance passed under `think-juq7`.
+
+Presentation work continues on `codex/profile-naming-and-tally-order`, under
+`think-zpzg`, in `/Volumes/spud-ext2/worktrees/squares-profiles-final-20261021`. Source
+`/Volumes/spud-ext2/agent-scratch/about-profiles-20261020/integration-env.sh` before
+build and test commands.
+The follow-up preserves reviewed identities and the Results, Records, and Credits
+counting definitions.
+Main through `59b1ec594` is integrated, including T-229, the archive/intake work and
+[PR #729](https://github.com/jlevy/squares/pull/729), which retires site editions.
+The site deploys continuously from `main`; its frozen history ends at `v0.9.2`, and its
+claim-document link pin remains at upstream’s `7ff5b129`. The four paper successors
+remain lower-bounds `v0.4.19`, optimality review `v0.1.10`, threshold review `v0.1.3`
+and methods survey `v0.2.6`; all incoming histories and impact decisions are retained.
+It changes their presentation:
+
+- Technical records and credit labels use the evidenced surname with existing
+  disambiguation; resource bylines and explanatory narrative use full public names.
+- Resource cards, profile summaries and sections, and directory columns present Records,
+  Results, Credits in that order.
+- News exposition uses serif typography with modest vertical spacing; metadata and
+  titles retain sans-serif typography.
+  Supporting metadata uses the shared muted color with a 1rem gap above the post-body
+  metadata.
+- Popovers with standalone pages offer the same destination through a header expand icon
+  and their existing bottom action.
+- GitHub issue and pull-request links use the corresponding Lucide-style symbols;
+  repository and document links use the shared GitHub mark.
+  Shared decoration avoids duplicate icons and includes dynamically loaded popover
+  content (`think-fxvk`).
+
+[Attribution policy](../../../../attribution.md) and the
+[design system](../../../../packing/devtools/templates/paper-design.md) define these
+shared conventions. Senior integration review found no remaining issues, including the
+final GitHub-link pass.
+Focused News, naming, tally, popover, and GitHub-link checks passed.
+The complete rebuild passed all 7,341 assembled-site checks; all 68 edit-tier checks
+passed. The broader pre-push behavioral suite hit its 1,800-second timeout; all 67 other
+push checks passed.
+`think-5umf` tracks diagnosis and completion before commit, push, and
+PR acceptance. Popover header links retain the bottom action and use existing KPress
+sprite glyphs on repeated rows/cards.
+At 228 results, the complete Results page was 1,324,108 bytes, 75,893 above main before
+the final icon integration; sprite reuse saved 80,940 bytes.
+Its measured ceiling is 1,400,000 bytes, leaving 75,892 bytes before integration of
+main’s updated 238-result runway target, which this branch retains.
+Under concurrent build load, three-run desktop/mobile light/dark and no-JS checks had no
+structural failures or timing exceedances: CLS 0; maximum median LCP 444 ms, longest
+task 197 ms, blocking 155 ms.
+These are advisory timings, not a controlled regression comparison; `think-xgqg` retains
+the measurement receipt.
+The final icon-integrated Results page is 1,324,147 bytes and remains below that
+ceiling. The counts and integration receipts below describe the completed core feature.
 
 The frozen identity batch contains 75 profiles.
 The structured census reports 1,470 resolved spans, 78 non-person spans and eight
@@ -160,6 +193,8 @@ Its limit is 255 MiB, the least whole MiB above the measured surface, leaving 88
 bytes at that measurement.
 Three portable workers are bounded at 765 MiB. Source selection and the oversized
 pre-clone refusal are unchanged.
+Later on 22 October the owner reset the limit to 512 MiB, a coarse bound rather than a
+per-branch raise; the measurement above stands.
 The new head needs fresh push, full-checkpoint and website-build evidence; earlier green
 heads do not validate this integration.
 

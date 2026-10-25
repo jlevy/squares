@@ -28,7 +28,12 @@ into a scratch tree to run the source's ``verify_all.sh``.
 **What its author read.** The format as the source's README states it, and the source's
 ``verify_cert.py`` and ``verify_cert2.py``, read before this module was written to
 confirm that the corners it builds from ``(x, y, t)`` are the squares those checkers
-decide; nothing of theirs, nor of the source's solver, is imported or copied. The two
+decide. Nothing of theirs, nor of the source's solver, is imported, but two expressions
+are theirs, transcribed (RF-1 of the 22 October 2026 review of issue #728): the reader's
+line filter in `parse`, which skips blank lines and lines beginning with ``#``, is the
+filter of both checkers, and `Pose.corners`, from which the independent checker decides,
+is ``verify_cert2.py``'s ``corners`` term for term. The corner construction is the
+format's definition, and a clean-room checker derived it without reading theirs. The two
 deciders predate this import: ``sqpack.witness`` is this repository's own, and
 ``devtools.check_rational_witness_independent`` was written to share no geometry or
 verification code with it.
@@ -206,6 +211,21 @@ def _rational(text: str, where: str) -> Fraction:
     return Fraction(text)
 
 
+def header(fields: Sequence[str], *, expected_n: int | None = None) -> tuple[int, Fraction]:
+    """A certificate's header line ``n S``, split into its fields, read as `parse` reads
+    it: the count and the positive side. `devtools.beyond_horizon_replay.header_side`
+    reads a side by this rule alone, so the two cannot drift apart."""
+    if len(fields) != 2 or _COUNT.fullmatch(fields[0]) is None:
+        raise CertificateError("the header must be `n S` with n a positive integer")
+    n = int(fields[0])
+    if expected_n is not None and n != expected_n:
+        raise CertificateError(f"the header says n = {n}, the file name says {expected_n}")
+    side = _rational(fields[1], "side")
+    if side <= 0:
+        raise CertificateError("the side must be positive")
+    return n, side
+
+
 def parse(text: str, *, expected_n: int | None = None) -> Certificate:
     """Read a certificate, refusing anything the format does not state.
 
@@ -219,14 +239,9 @@ def parse(text: str, *, expected_n: int | None = None) -> Certificate:
         for line in text.splitlines()
         if line.strip() and not line.lstrip().startswith("#")
     ]
-    if not rows or len(rows[0]) != 2 or _COUNT.fullmatch(rows[0][0]) is None:
+    if not rows:
         raise CertificateError("the header must be `n S` with n a positive integer")
-    n = int(rows[0][0])
-    if expected_n is not None and n != expected_n:
-        raise CertificateError(f"the header says n = {n}, the file name says {expected_n}")
-    side = _rational(rows[0][1], "side")
-    if side <= 0:
-        raise CertificateError("the side must be positive")
+    n, side = header(rows[0], expected_n=expected_n)
     body = rows[1:]
     if len(body) != n:
         raise CertificateError(f"{len(body)} square rows for n = {n}")

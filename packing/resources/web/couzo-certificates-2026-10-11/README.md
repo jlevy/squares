@@ -173,6 +173,10 @@ count except 344: `3ef7634`’s at 338, `02f9690`’s at 339 and 375, and `f311f
 rational witness). Those are not the rows the register tracks, so its margins are smaller
 than the ones above. No packet retains the `f311f08` versions, and think-a4wq holds the
 `02f9690` update of the tracked rows.
+The [history walk of Couzo’s watched publications](../../../campaign/issue-intake/upper-bounds-couzo-history-20261022/README.md)
+records both where they were first to report their sides: the `02f9690` certificates as
+couzo-02f9690-2026-10-09’s rows and the `f311f08` ones as
+couzo-extended-certificates-2026-10-11’s, a packet that retains them.
 
 The four certificates the issue does not name are each an import of their own
 (`result-import.md`, stage 1). This import compares them here, and the 12 October import

@@ -153,7 +153,8 @@ Usage, from `packing/`:
     uv run --frozen --all-extras --group dev python -m devtools.measure_site_pages cards SITE \
         --page index.html --width 1280 --width 390 --markdown
     uv run --frozen --all-extras --group dev python -m devtools.measure_site_pages \
-        ladders SITE --page index.html --width 1280 --width 768 --width 390 --markdown
+        ladders SITE --page verification.html --width 1280 --width 768 --width 390 \
+        --markdown
     uv run --frozen --all-extras --group dev python -m devtools.measure_site_pages math SITE \
         --page index.html --press '[data-atlas-n="11"]' --markdown
     uv run --frozen --all-extras --group dev python -m devtools.measure_site_pages space SITE \
@@ -175,7 +176,7 @@ Usage, from `packing/`:
         --page papers/n11-optimality-review.html \
         --width 1280 --width 390 --scheme light --scheme dark --view differences --markdown
     uv run --frozen --all-extras --group dev python -m devtools.measure_site_pages glyphs \
-        https://jlevy.github.io/squares --page papers/n11-lower-bounds-explainer.html \
+        https://squaremath.org --page papers/n11-lower-bounds-explainer.html \
         --view problems --markdown
     uv run --frozen --all-extras --group dev python -m devtools.measure_site_pages figures \
         SITE --page papers/n11-lower-bounds-explainer.html \
@@ -1231,7 +1232,11 @@ def _role_rules(entry: dict[str, Any]) -> dict[str, tuple[float | None, float | 
         "footnote": (note, regular),
         "colophon": (sans * tokens["--paper-colophon-scale"], regular),
         "nav name": (sans, bold),
+        "nav ancestor": (note, bold),
         "nav link": (note, medium),
+        "breadcrumb": (note, regular),
+        "introduction": (base, 400),
+        "navigation heading": (tokens["--kpress-font-size-h2"], medium),
         "section tab": (note * tokens["--paper-button-label-scale"], medium),
         "compact chooser": (tokens.get("--site-chooser-small-size"), medium),
     }
@@ -1316,7 +1321,12 @@ def glyph_problems(entry: dict[str, Any], *, katex: str | None = None) -> list[s
     if not entry["reading"]:
         return problems
     rules = _role_rules(entry)
-    faces = {"prose": entry["prose"], "list item": entry["prose"], "h2": entry["prose"]}
+    faces = {
+        "prose": entry["prose"],
+        "list item": entry["prose"],
+        "h2": entry["prose"],
+        "introduction": entry["prose"],
+    }
     tokens = entry["tokens"]
     weights = {
         regular,

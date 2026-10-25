@@ -22,6 +22,7 @@ from collections.abc import Iterator, Sequence
 from dataclasses import replace
 from datetime import date
 from decimal import Decimal
+from fractions import Fraction
 from functools import partial
 from itertools import pairwise
 from pathlib import Path
@@ -77,7 +78,7 @@ from sqpack.release import (
     infographic_edition_at,
 )
 from sqpack.render.color import ANGLE_CLASS_CONTRACT
-from sqpack.render.model import RenderSpec
+from sqpack.render.model import PackingFrame, RenderSpec, ScalarKind, ScalarSource
 from sqpack.render.style import FIRST_PARTY_ACCENT_COLOR
 from sqpack.render.svg import PRINT_FONT_MARKER, element, serialize_svg, sub
 from sqpack.witness import load_witness
@@ -1795,6 +1796,213 @@ def test_composite_tiles_draw_each_case_s_default_picture_and_credit_it() -> Non
             assert printed == " ".join(" ".join(atoms) for atoms in sentences)
 
 
+type ExactPoint = tuple[tuple[Fraction, ...], tuple[Fraction, ...]]
+
+
+def _exact_value(value: ScalarSource) -> tuple[Fraction, ...]:
+    """A frame coordinate's exact value, parsed back from the scalar's source: a rational
+    or a decimal as itself, a number-field element as its power-basis coefficients."""
+    match value.kind:
+        case ScalarKind.RATIONAL:
+            return (Fraction(value.exact_source or value.source),)
+        case ScalarKind.DECIMAL:
+            return (Fraction(Decimal(value.source)),)
+        case ScalarKind.EXACT:
+            return tuple(Fraction(c) for c in json.loads(value.source)["coefficients"])
+        case _:
+            raise AssertionError(f"a witness frame has no {value.kind} scalars")
+
+
+def _exact_corners(frame: PackingFrame) -> list[list[ExactPoint]]:
+    return [
+        [(_exact_value(point.x), _exact_value(point.y)) for point in square.corners]
+        for square in frame.squares
+    ]
+
+
+def _mapped_corners(frame: PackingFrame, pose: Any) -> list[list[ExactPoint]]:
+    """The reference map: each square's exact corners turned by `pose` with
+    `orient_polygon` over `Fraction`s, which reverses a mirrored square's corners. A
+    number-field element is mapped coefficient by coefficient, since `side - v` is
+    linear in the power basis."""
+    from devtools.flip_regularization import orient_polygon  # noqa: PLC0415
+
+    side = _exact_value(frame.container_side)
+    mapped: list[list[ExactPoint]] = []
+    for corners in _exact_corners(frame):
+        by_coefficient = [
+            orient_polygon(pose, [(x[index], y[index]) for x, y in corners], side[index])
+            for index in range(len(side))
+        ]
+        mapped.append(
+            [
+                (
+                    tuple(points[corner][0] for points in by_coefficient),
+                    tuple(points[corner][1] for points in by_coefficient),
+                )
+                for corner in range(len(corners))
+            ]
+        )
+    return mapped
+
+
+def test_a_pose_maps_each_kind_of_witness_exactly_as_its_frame_is_built() -> None:
+    """Flip regularization (regularization policy, section 13) turns a composite card's
+    picture as its frame is built: `frame_from_witness(pose=)` maps the exact corners in
+    their own arithmetic before any scalar is made, rather than mapping a finished frame.
+    For a witness of each kind, under each of the eight poses, every corner is exactly
+    the identity frame's corner under the reference map (`_mapped_corners`), read back
+    from the scalars' sources: rational corners (n = 3 and 62), rational centres and bases
+    (n = 68), decimal centres and angles (n = 5 and 11), the same decimals given as
+    corners, the number field (n = 51), and a regularized view, which `regularized_frame`
+    turns while its source frame gives only the tier and check. The side, square ids,
+    labels and order and every other field are the identity frame's, and `IDENTITY` is
+    the default."""
+    from devtools.flip_regularization import IDENTITY, POSES  # noqa: PLC0415
+    from devtools.render_regularized_atlas import regularized_frame  # noqa: PLC0415
+
+    witnesses = {
+        case.frontier.n: case.witness
+        for case in known_best_builder.retained_cases((3, 5, 11, 51, 62, 68))
+    }
+    kinds = {
+        n: (witness["scalar"]["kind"], witness["representation"])
+        for n, witness in witnesses.items()
+    }
+    assert kinds == {
+        3: ("rational", "corners"),
+        5: ("decimal", "center-angle"),
+        11: ("decimal", "center-angle"),
+        51: ("algebraic-number-field", "center-basis"),
+        62: ("rational", "corners"),
+        # 68, not 70: the adoption of 23 October 2026 took 70 to PR #574's algebraic
+        # certificate (T-174, think-ot5c), a kind n = 51 already covers.
+        68: ("rational", "center-basis"),
+    }
+    # The decimal corners branch, which no retained witness takes: n = 11's projection
+    # given as corners, one coordinate spelled with a trailing zero.
+    projection = known_best_builder.frame_from_witness(witnesses[11])
+    corners = [
+        [[point.x.source, point.y.source] for point in square.corners]
+        for square in projection.squares
+    ]
+    corners[0][0][0] += "0"
+    decimal_corners = {
+        **witnesses[11],
+        "representation": "corners",
+        "squares": [{"corners": square} for square in corners],
+    }
+    builders: dict[str, Any] = {
+        f"n = {n}": partial(known_best_builder.frame_from_witness, witness)
+        for n, witness in witnesses.items()
+    }
+    builders["n = 11 as decimal corners"] = partial(
+        known_best_builder.frame_from_witness, decimal_corners
+    )
+    view = min(known_best_builder._regularized_tiles())  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+    entry = known_best_builder._regularized_tiles()[view]  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+    builders[f"n = {view}'s regularized view"] = partial(regularized_frame, entry)
+
+    for name, build in builders.items():
+        identity = build()
+        assert build(pose=IDENTITY) == identity, name
+        kind = identity.container_side.kind
+        for pose in POSES:
+            frame = build(pose=pose)
+            assert _exact_corners(frame) == _mapped_corners(identity, pose), (name, pose)
+            assert replace(frame, squares=identity.squares) == identity, (name, pose)
+            for square, source in zip(frame.squares, identity.squares, strict=True):
+                assert replace(square, corners=source.corners) == source, (name, pose)
+                assert {point.x.kind for point in square.corners} == {kind}, (name, pose)
+                assert {point.y.kind for point in square.corners} == {kind}, (name, pose)
+            if kind is ScalarKind.EXACT:
+                fields = {
+                    json.dumps(json.loads(value.source)["field"], sort_keys=True)
+                    for square in frame.squares
+                    for point in square.corners
+                    for value in (point.x, point.y)
+                }
+                assert fields == {
+                    json.dumps(
+                        json.loads(identity.container_side.source)["field"], sort_keys=True
+                    )
+                }, pose
+
+
+def test_a_card_draws_its_case_in_its_recorded_flip_regularization(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Regularization policy, section 13 (the owner, 23 October 2026): a composite's card
+    draws its case's default picture in the pose its flip regularization record states
+    (`flip_regularization.poses`). `tile_frame` applies it, and only for the card, so
+    `frame_from_witness` keeps the source's pose for every measure, overlay and rendering
+    that reads it. Every square keeps its id, and its colour and
+    `data-orientation-radians` are the oriented picture's: a mirror changes a tilted
+    square's orientation. Each of the eight poses is set here rather than read, turns
+    each square's exact corners as the reference map does (`_mapped_corners`), and moves
+    each square's centre on the card exactly as `Pose.point` moves it in the drawing's
+    own frame, y up."""
+    from devtools import flip_regularization  # noqa: PLC0415
+    from devtools.flip_regularization import IDENTITY, POSES, Pose  # noqa: PLC0415
+    from sqpack.render.color import assign_square_colors  # noqa: PLC0415
+
+    canvas = known_best_builder.PRIMARY_COMPOSITE
+    spec = RenderSpec(overlays=frozenset())
+    append = known_best_builder._append_summary_card  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+
+    def card(case: Any, pose: Pose) -> tuple[ET.Element, dict[str, ET.Element]]:
+        monkeypatch.setattr(
+            flip_regularization, "poses", dict.fromkeys(range(1, 325), pose).copy
+        )
+        root = ET.Element("svg")
+        append(root, case, spec=spec, canvas=canvas)
+        squares = {
+            node.attrib["data-square"]: node for node in root.iter(f"{{{SVG['svg']}}}polygon")
+        }
+        outline = root.find(".//svg:rect[@data-feature='container-outline']", SVG)
+        assert outline is not None
+        return outline, squares
+
+    def centre(outline: ET.Element, square: ET.Element) -> tuple[Decimal, Decimal]:
+        x, y, size = (Decimal(outline.attrib[key]) for key in ("x", "y", "width"))
+        points = [
+            tuple(map(Decimal, pair.split(","))) for pair in square.attrib["points"].split()
+        ]
+        count = Decimal(len(points))
+        return (
+            (sum((px for px, _ in points), Decimal(0)) / count - x) / size,
+            (y + size - sum((py for _, py in points), Decimal(0)) / count) / size,
+        )
+
+    for case in known_best_builder.retained_cases((3, 11)):
+        n = case.frontier.n
+        witness_frame = known_best_builder.frame_from_witness(case.witness)
+        outline, drawn = card(case, IDENTITY)
+        source = known_best_builder.tile_frame(case)
+        turned_any = False
+        for pose in POSES:
+            posed_outline, posed = card(case, pose)
+            frame = known_best_builder.tile_frame(case)
+            assert _exact_corners(frame) == _mapped_corners(source, pose), (n, pose)
+            assert known_best_builder.frame_from_witness(case.witness) == witness_frame
+            colors = assign_square_colors(frame, spec)
+            assert list(posed) == list(drawn)
+            for name, square in posed.items():
+                color = colors[name.removeprefix(f"n-{n:03d}-")]
+                assert square.attrib["fill"] == color.fill
+                assert square.attrib["data-orientation-radians"] == str(
+                    color.orientation_radians
+                )
+                turned_any |= (
+                    square.attrib["data-orientation-radians"]
+                    != drawn[name].attrib["data-orientation-radians"]
+                )
+                expected = pose.point(*centre(outline, drawn[name]), Decimal(1))
+                for got, want in zip(centre(posed_outline, square), expected, strict=True):
+                    assert got == pytest.approx(want, abs=Decimal("1e-9")), (pose, name)
+        assert turned_any is (n == 11)
+
+
 def test_a_composite_trailing_the_pin_may_show_defaults_the_record_has_changed(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
@@ -2164,8 +2372,12 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     # source asks; Kevin Fang's two-wedge construction, which no other count credits,
     # is named in that case's credit sentence and leaves this list. On 20 October 2026 the
     # adoption at 227 and 260 (T-196) drew the poster's first de Winter packings, and his
-    # name joined it.
-    assert len(expected_names) == 26
+    # name joined it. On 24 October 2026 the adoption at 303 (T-239) drew the poster's first
+    # Kristiansen packing, and his name joined it. On 25 October 2026 the adoption at 268 and
+    # 303 (T-240) credits Kirill Tymchishin's and Vladislav Lavrentev's Kaggle notebook
+    # packings as Francisco Couzo refined them, so both names join it, and Kristiansen's,
+    # which held only 303, leaves.
+    assert len(expected_names) == 28
     # The adoption of 19 October draws from five more, Evan Daniel's packets at 155, 183
     # (T-220, think-jh4w), 229, 236 and 271, with no new name, and every source it
     # re-housed still holds another count. The adoption of 20 October draws from three
@@ -2180,8 +2392,27 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     # draws 204, 227, 229 and 260 from one packet, Evan Daniel's regularized lists of 20
     # October (T-225), and no longer from Couzo's issue 678 packet, de Winter's issue 668
     # packet or Daniel's n229 update, which held nothing else: two sources fewer, and no new
-    # name, since the credit at 227 keeps de Winter as the packing's finder.
-    assert len(expected_sources) == 25
+    # name, since the credit at 227 keeps de Winter as the packing's finder. The adoption of
+    # 23 October draws 105 and 204 from one more, Mykhailo Polkovskyi's issue 719 packet
+    # (T-229), with no new name: PingYou Ltd's PR 574 certificates and Daniel's regularized
+    # lists still hold other counts, and Polkovskyi's name is already on the poster. The
+    # same pass draws 303 from one more, Evan Daniel's issue 728 packet (T-230), with no new
+    # name: Mishapolk's KKT refinements still hold other counts. The adoption of the nine
+    # algebraic houses the same day (think-ot5c) draws 102, 123, 258, 259, 295 and 302 from
+    # one more, Evan Daniel's issue 639 packet (T-193), and 70, 153 and 207 from PingYou
+    # Ltd's PR 574 certificates, already on the poster. It no longer draws from Mishapolk's
+    # 12 October certificates (153, 207) or SQUISH's third request (259), which held nothing
+    # else: one source fewer, and no new name. The adoption of 24 October draws 204 from one
+    # more, Polkovskyi's n204 packet (T-231), with no new name: his issue 719 packet still
+    # holds 105. The same pass draws 303 from Amund Kristiansen's issue 755 packet (T-239)
+    # instead, and no longer from Daniel's issue 728 packet, which held nothing else, so
+    # that move leaves the number of sources as it was. The adoption of 25 October draws 268
+    # and 303 from Couzo's issue 763 packet (T-240), and no longer from Kristiansen's issue
+    # 755 packet, which held nothing else; PingYou Ltd's PR 574 certificates still hold
+    # other counts, so the number of sources stays. The same pass draws 304 from Evan
+    # Daniel's Kaggle descents packet (T-242), one more source with no new name, and no
+    # longer from Mishapolk's KKT refinements there, which still hold other counts.
+    assert len(expected_sources) == 28
     assert set(json.loads(credit_block.attrib["data-credited-names"])) == expected_names
     assert set(json.loads(credit_block.attrib["data-source-keys"])) == expected_sources
     assert credit_block.find("svg:text[@data-feature='packing-credits-heading']", SVG) is None
@@ -2211,8 +2442,10 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
         "Daniel",
         "de Winter",
         "Gupta",
+        "Lavrentev",
         "Ostashev",
         "PingYou Ltd",
+        "Tymchishin",
         "Xu",
         "Barnett",
         "Chang",
@@ -2474,6 +2707,9 @@ def test_primary_composite_routes_contributions_to_cards_and_legend(
         66,
         67,
         69,
+        # Degree 5 since the adoption of 23 October 2026 took 70 to PR #574's algebraic
+        # certificate (T-174, think-ot5c).
+        70,
         82,
         83,
         85,
@@ -4374,10 +4610,10 @@ def test_print_information_shares_content_style_and_measured_block_gaps(data_dat
         for block in blocks
     ]
     assert credit_text[0] == credit_text[1]
-    # 26 since the adoption at 227 and 260 of 20 October 2026 (see the credits test above).
+    # 28 since the adoption at 268 and 303 of 25 October 2026 (see the credits test above).
     assert (
         len(credit_text[0].removeprefix("Best packings due to ").removesuffix(".").split(", "))
-        == 26
+        == 28
     )
 
 

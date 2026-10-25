@@ -175,11 +175,27 @@
           child.style.left = "0";
           child.style.top = "0";
         }
+        // Font readiness temporarily sets visibility. Its empty style attribute can
+        // precede or follow the source attributes depending on runtime scheduling;
+        // omit that residue only in the publication clone, preserving real styles.
+        if (!copy.getAttribute("style")?.trim()) {
+          copy.removeAttribute("style");
+        }
         copy.dataset.kpressMathPrepared = "true";
         delete copy.dataset.squaresMathReady;
         delete copy.dataset.done;
       }
       clone.removeAttribute("data-squares-math-key");
+      // Chromium adds a `style` written through CSSOM (the runtime's visibility gate, KaTeX's
+      // nodes, the boxes above) to its element's attribute list only when something first
+      // reads that list, so where it serializes depends on timing: one render put a gate's
+      // `style=""` before its `data-kpress-math-*` and the concurrent twin after them
+      // (think-qa8b). Serialize it last, where it lands when nothing reads the list early.
+      for (const element of clone.querySelectorAll("[style]")) {
+        const style = /** @type {string} */ (element.getAttribute("style"));
+        element.removeAttribute("style");
+        element.setAttribute("style", style);
+      }
       /** @type {Record<string, string>} */
       const attributes = {};
       for (const name of attributeNames) {

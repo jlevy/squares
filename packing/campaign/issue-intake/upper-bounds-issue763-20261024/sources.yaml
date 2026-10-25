@@ -1,0 +1,2279 @@
+format: intake-ledger-sources-v1
+read_at_main: e5c1c64e39caaff6386eaa6720bdbe932d19b415
+read_on: '2026-10-24'
+rule: If they are reported in order, then each one should be recorded as a result, as long as each one
+  is stronger than the last. If a stronger result is reported first, then the other one should not be
+  recorded since it is weaker after that, unless there is some key reason it should be recorded.
+lanes: []
+reports:
+- report: '#763'
+  issue: 763
+  holders: Francisco Couzo
+  bead: think-ptkk
+  claims:
+  - n: 268
+    printed: '16.874361715874'
+    rounding: up
+    exact: 78645658458105249171306580101/4660659750118000000000000000
+    exact_from: 'certificates/best/n268.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 303
+    printed: '17.906978233799'
+    rounding: up
+    exact: 55035101387261868285958438488216555614454417144023299/3073388523105741896887024831655729584500000000000000
+    exact_from: 'certificates/best/n303.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 328
+    printed: '18.614368938495'
+    rounding: up
+    exact: 157108007457079003558899729471/8440146855163000000000000000
+    exact_from: 'certificates/best/n328.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T18:16:49Z'
+  - n: 333
+    printed: '18.774735132399'
+    rounding: up
+    exact: 139267100848398833328663629023/7417793106869000000000000000
+    exact_from: 'certificates/best/n333.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 334
+    printed: '18.795693769192'
+    rounding: up
+    exact: 566503356787286650479845752938875806389408438589016997661629582951688048691505541887172377479/30140061002475132701428917738761685848381747994743490959223600345064804193672000000000000000
+    exact_from: 'certificates/best/n334.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 343
+    printed: '18.977171584758'
+    rounding: up
+    exact: 32883980704980814977264654333/1732817799434000000000000000
+    exact_from: 'certificates/best/n343.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 365
+    printed: '19.614368938495'
+    rounding: up
+    exact: 165548154312242003558899729471/8440146855163000000000000000
+    exact_from: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
+      packet (receipts/claim-map.json) states for its square tiling and L-border recipe of the n328 certificate
+      (certificates/best/n328.cert; 1 a side, 1 L-border layer), with no certificate file at this count
+  - n: 370
+    printed: '19.764174317499'
+    rounding: up
+    exact: 44913994340897930959980565343/2272495355454000000000000000
+    exact_from: 'certificates/best/n370.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 371
+    printed: '19.778174593058'
+    rounding: up
+    exact: 137022760092619814803776266161/6927978082503000000000000000
+    exact_from: 'certificates/best/n371.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 372
+    printed: '19.806121988461'
+    rounding: up
+    exact: 71141159509681182676576883293/3591877276689000000000000000
+    exact_from: 'certificates/best/n372.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 375
+    printed: '19.870013850410'
+    rounding: up
+    exact: 62125744174174096244577778223/3126607995439000000000000000
+    exact_from: 'certificates/best/n375.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 403
+    printed: '20.571428571434'
+    rounding: up
+    exact: 26611081298605755762059147711/1293594229793000000000000000
+    exact_from: 'certificates/best/n403.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 410
+    printed: '20.774735132393'
+    rounding: up
+    exact: 169487716777200129610307541193/8158357528849000000000000000
+    exact_from: 'certificates/best/n410.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 412
+    printed: '20.822878556795'
+    rounding: up
+    exact: 81538337355798284056931487671/3915805258788000000000000000
+    exact_from: 'certificates/best/n412.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 413
+    printed: '20.824764038662'
+    rounding: up
+    exact: 91240396922163617818392050153/4381341212451500000000000000
+    exact_from: 'certificates/best/n413.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T18:59:39Z'
+  - n: 414
+    printed: '20.840687358090'
+    rounding: up
+    exact: 20707186800065699123114125403/993594234406500000000000000
+    exact_from: 'certificates/best/n414.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 415
+    printed: '20.872029849615'
+    rounding: up
+    exact: 16211673094904682148578177673801282272111807094061056209410006042733/776717607808730983444422832436829123152785034539484000000000000000
+    exact_from: 'certificates/best/n415.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 416
+    printed: '20.889947557884'
+    rounding: up
+    exact: 131936536388143049914602198839810884109750906143284031477298848565705839308309669025295685451/6315790694187350503211356595558103749851302078008852598538658492724177852606000000000000000
+    exact_from: 'certificates/best/n416.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 417
+    printed: '20.905466137174'
+    rounding: up
+    exact: 9953639197620429316167921879117655767841805103569617376466791571207889369148716652409208079/476126154389884415045217825152516167016475840860806927729174632388464801019500000000000000
+    exact_from: 'certificates/best/n417.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 420
+    printed: '20.966577898708'
+    rounding: up
+    exact: 6984999048372209495153230051451290381458140444136228721/333149218824243425064894337609322364543000000000000000
+    exact_from: 'certificates/best/n420.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T18:16:49Z'
+  - n: 422
+    printed: '20.983570193585'
+    rounding: up
+    exact: 13406210865635628950981906443/638890843739000000000000000
+    exact_from: 'certificates/best/n422.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 444
+    printed: '21.571428571434'
+    rounding: up
+    exact: 27904675528398755762059147711/1293594229793000000000000000
+    exact_from: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
+      packet (receipts/claim-map.json) states for its square tiling and L-border recipe of the n403 certificate
+      (certificates/best/n403.cert; 1 a side, 1 L-border layer), with no certificate file at this count
+  - n: 447
+    printed: '21.656854249506'
+    rounding: up
+    exact: 7916218656025576237950726251/365529479250500000000000000
+    exact_from: 'certificates/best/n447.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 453
+    printed: '21.808663234398'
+    rounding: up
+    exact: 9969155544294796169602334610557505329089906569339091143/457119055723283516634606370197117539009000000000000000
+    exact_from: 'certificates/best/n453.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 456
+    printed: '21.860400549177'
+    rounding: up
+    exact: 1044435127966664839880609378266576352525100621313379533/47777492714150000000000000477774927141500000000000000
+    exact_from: 'certificates/best/n456.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 457
+    printed: '21.887038105268'
+    rounding: up
+    exact: 11131387678746107245208336221/508583556404875000000000000
+    exact_from: 'certificates/best/n457.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 458
+    printed: '21.889913759628'
+    rounding: up
+    exact: 162025975605876561044913137/7401855365218750000000000
+    exact_from: 'certificates/best/n458.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 459
+    printed: '21.905182432784'
+    rounding: up
+    exact: 7239015704663449746393370389/330470459530600000000000000
+    exact_from: 'certificates/best/n459.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 461
+    printed: '21.941809028101'
+    rounding: up
+    exact: 8020242650519929030784902906412756706187413342654956908913663437064927930331093954508178118223/365523309415760039103493909881509735878707024559229605959685879097600849631261500000000000000
+    exact_from: 'certificates/best/n461.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 462
+    printed: '21.965358248123'
+    rounding: up
+    exact: 100371308601378467156865999487/4569527501786000000000000000
+    exact_from: 'certificates/best/n462.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 463
+    printed: '21.970200289020'
+    rounding: up
+    exact: 197699955011857405011146768163/8998550418799000000000000000
+    exact_from: 'certificates/best/n463.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 465
+    printed: '21.999896124646'
+    rounding: up
+    exact: 11381963121791634297027591853202848406820941591819292633723829868728208613327540197717763909/517364402872842820091676921462723497551810647082106513813856525534732746752000000000000000
+    exact_from: 'certificates/best/n465.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 487
+    printed: '22.571428571434'
+    rounding: up
+    exact: 29198269758191755762059147711/1293594229793000000000000000
+    exact_from: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
+      packet (receipts/claim-map.json) states for its square tiling and L-border recipe of the n403 certificate
+      (certificates/best/n403.cert; 1 a side, 2 L-border layers), with no certificate file at this count
+  - n: 494
+    printed: '22.737532875219'
+    rounding: up
+    exact: 219084108059405613758273321419/9635350909077000000000000000
+    exact_from: 'certificates/best/n494.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 495
+    printed: '22.774735132402'
+    rounding: up
+    exact: 44012326852677924663215412019/1932506639344500000000000000
+    exact_from: 'certificates/best/n495.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 496
+    printed: '22.782823856527'
+    rounding: up
+    exact: 17189272382923191305236922054247885449594158568531255199/754483837963700000000000007544838379637000000000000000
+    exact_from: 'certificates/best/n496.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 497
+    printed: '22.802431260043'
+    rounding: up
+    exact: 90365033375975484959047049645884468359685014157580384991568349068998257716750873878247547/3962956070141779008099819055173236912988136351131378165720638738875277696000000000000000
+    exact_from: 'certificates/best/n497.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 498
+    printed: '22.824100748637'
+    rounding: up
+    exact: 12343731470750052048025644018558772567802057770460457134261817/540820057126992517841853762227868327515416658500000000000000
+    exact_from: 'certificates/best/n498.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T18:59:39Z'
+  - n: 499
+    printed: '22.829299843398'
+    rounding: up
+    exact: 227521707906613695487359988491/9966214884703000000000000000
+    exact_from: 'certificates/best/n499.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 500
+    printed: '22.870013850418'
+    rounding: up
+    exact: 704985666628997816861505438841599018856947342850311021/30825764743300000000000000308257647433000000000000000
+    exact_from: 'certificates/best/n500.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 501
+    printed: '22.880960371570'
+    rounding: up
+    exact: 1141694293833614521758791141645983471107485683453371293/49897131732819885157996958495488231451000000000000000
+    exact_from: 'certificates/best/n501.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 502
+    printed: '22.892369983241'
+    rounding: up
+    exact: 74634987086921220267822696277/3260256021616000000000000000
+    exact_from: 'certificates/best/n502.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 503
+    printed: '22.899951089256'
+    rounding: up
+    exact: 6867996486837204233839833829846941551068661553630965091773002019177487340767754055534665607/299913150908846166376698936636676536308829835201286199820243373470873926896000000000000000
+    exact_from: 'certificates/best/n503.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 505
+    printed: '22.939236263595'
+    rounding: up
+    exact: 728350436198958987904027035401659026125830504946122758544141370297/31751294063563776013383962877138558027539033651229750000000000000
+    exact_from: 'certificates/best/n505.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 506
+    printed: '22.953204934736'
+    rounding: up
+    exact: 6268934166546314708155032072384619375858861514186676340463675494999/273118032290970671722543555877503993305752824406198250000000000000
+    exact_from: 'certificates/best/n506.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 536
+    printed: '23.656854249521'
+    rounding: up
+    exact: 22158202675453314088823324611/936650428740000000000000000
+    exact_from: 'certificates/best/n536.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 539
+    printed: '23.736669673811'
+    rounding: up
+    exact: 23874660298708270458321292451270013658117933162732742368849424232364433902903535355852255293/1005813394498629446911402566803117476520018662217068507100715868337767905696500000000000000
+    exact_from: 'certificates/best/n539.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 542
+    printed: '23.802320953638'
+    rounding: up
+    exact: 6802375230759214960628719684220860633957/285786215722783921378427718750000000000
+    exact_from: 'certificates/best/n542.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 544
+    printed: '23.824484938716'
+    rounding: up
+    exact: 134061277051919444296117514726908279978471877900428937942458839735491383109919403876508492997/5627037788928884642967924633675084587013615889705618113329801422924313421800500000000000000
+    exact_from: 'certificates/best/n544.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 545
+    printed: '23.839435749956'
+    rounding: up
+    exact: 47962269089747406627496788445925008998607602829556345881875710297512825182756771297088957633/2011887764157174210024727283192133381056238188784664435517592203134619496449000000000000000
+    exact_from: 'certificates/best/n545.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 546
+    printed: '23.870013852333'
+    rounding: up
+    exact: 8726502160226321530898425255343239528592588013859044481169525527921/365584293926736171083128053655842939267361710831280500000000000000
+    exact_from: 'certificates/best/n546.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 547
+    printed: '23.879127653315'
+    rounding: up
+    exact: 17995648519567463570176601022200786596229798662666425689/753614151271964462353179419364114908257000000000000000
+    exact_from: 'certificates/best/n547.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 548
+    printed: '23.888388276405'
+    rounding: up
+    exact: 1102603297247915515649422308719800322237189862267319468870832451333/46156454110258649065934150461564541102586490659341500000000000000
+    exact_from: 'certificates/best/n548.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 549
+    printed: '23.908613480982'
+    rounding: up
+    exact: 8432729523154728229611416878964958464547319785242403850666896536117/352706756912630980411485153527067569126309804114851500000000000000
+    exact_from: 'certificates/best/n549.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 550
+    printed: '23.913405774100'
+    rounding: up
+    exact: 55956915408123375626158446188918861204871180249404989337826175774701301866024929387149/2339981010514643982426836329523398890095814144775559403633816659697517000000000000000
+    exact_from: 'certificates/best/n550.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 552
+    printed: '23.946652263780'
+    rounding: up
+    exact: 29850248138483371247641167101336161312715703769174003096078538075763/1246531156408590782246242412465311564085907822462424000000000000000
+    exact_from: 'certificates/best/n552.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 553
+    printed: '23.969774299704'
+    rounding: up
+    exact: 2597406560146678819901071115736086882929393879264361039/108361744573406395433405418056411470679500000000000000
+    exact_from: 'certificates/best/n553.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 554
+    printed: '23.980410803450'
+    rounding: up
+    exact: 14078800186125636091234887071/587095871773000000000000000
+    exact_from: 'certificates/best/n554.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 555
+    printed: '23.990765763662'
+    rounding: up
+    exact: 325965820003944814103136664737372576275385356686929007288199945335296061377270227221410679/13587136951571788398232201348476285774325848513320178027689300068903482952000000000000000
+    exact_from: 'certificates/best/n555.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 582
+    printed: '24.646771924493'
+    rounding: up
+    exact: 9087791455234087928143610141/368721367774875000000000000
+    exact_from: 'certificates/best/n582.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 583
+    printed: '24.656854249507'
+    rounding: up
+    exact: 9360454399403590567512812463/379628897696500000000000000
+    exact_from: 'certificates/best/n583.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 587
+    printed: '24.756097560991'
+    rounding: up
+    exact: 7920977008630744952918407027938788551206407225356657437051931435601/319960647639082234317977303199606476390822343179773000000000000000
+    exact_from: 'certificates/best/n587.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 588
+    printed: '24.778174593062'
+    rounding: up
+    exact: 108975564320540554571271116563/4398046511104000000000000000
+    exact_from: 'certificates/best/n588.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 590
+    printed: '24.802527132871'
+    rounding: up
+    exact: 6894450933587132247606682291629254547057303078381510912980830047659768060567201564923397/277973728106522633592868384142824582995752674850942909572944810567424951000000000000000
+    exact_from: 'certificates/best/n590.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 591
+    printed: '24.819590560295'
+    rounding: up
+    exact: 728012325529870401712480825918038254471333630431903563404803578783/29332164999309628799046140029001713420566838884379000000000000000
+    exact_from: 'certificates/best/n591.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 592
+    printed: '24.824728380928'
+    rounding: up
+    exact: 47553617372746037666912152655031750090901/1915574528875015792754688000000000000000
+    exact_from: 'certificates/best/n592.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T18:59:39Z'
+  - n: 593
+    printed: '24.851666731969'
+    rounding: up
+    exact: 225850993363223685806240701167/9087961616381000000000000000
+    exact_from: 'certificates/best/n593.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 595
+    printed: '24.878273620340'
+    rounding: up
+    exact: 238602735444320809300893729529/9590807589207000000000000000
+    exact_from: 'certificates/best/n595.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 597
+    printed: '24.901150566387'
+    rounding: up
+    exact: 957621120106308570258243553378037054845852992035237519767578057969/38456902525579938725681935602632440480096012550183000000000000000
+    exact_from: 'certificates/best/n597.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 598
+    printed: '24.912634480747'
+    rounding: up
+    exact: 444700043244698589741830121784461870935320787333249779/17850382045639500534843505210213007995000000000000000
+    exact_from: 'certificates/best/n598.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 599
+    printed: '24.937296174353'
+    rounding: up
+    exact: 36015875265190648604693217911/1444257429249000000000000000
+    exact_from: 'certificates/best/n599.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 600
+    printed: '24.951414939457'
+    rounding: up
+    exact: 79528029362962540818092324042208591568897895134526641/3187315411007066053201851101379562941400000000000000
+    exact_from: 'certificates/best/n600.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 601
+    printed: '24.958452262518'
+    rounding: up
+    exact: 651317585643635622547810789713007873603743348768261386351761081819190973227510559714049830671/26096072736921641322062554006194438233646722551614956880675505429793681399058000000000000000
+    exact_from: 'certificates/best/n601.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 602
+    printed: '24.981485660049'
+    rounding: up
+    exact: 191041477242382041225906782842695980001677618252480333/7647322494830915465067197032609191249000000000000000
+    exact_from: 'certificates/best/n602.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 629
+    printed: '25.583782191957'
+    rounding: up
+    exact: 5468118382677809658902128201604913363205531586921393401/213733776407653486983046190803230180253000000000000000
+    exact_from: 'certificates/best/n629.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 630
+    printed: '25.604601475737'
+    rounding: up
+    exact: 6686819004951314778934643983/261156925691187500000000000
+    exact_from: 'certificates/best/n630.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 631
+    printed: '25.627416997975'
+    rounding: up
+    exact: 98626146714085455473769193173/3848462243459000000000000000
+    exact_from: 'certificates/best/n631.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 632
+    printed: '25.656854249507'
+    rounding: up
+    exact: 9740083297100090567512812463/379628897696500000000000000
+    exact_from: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
+      packet (receipts/claim-map.json) states for its square tiling and L-border recipe of the n583 certificate
+      (certificates/best/n583.cert; 1 a side, 1 L-border layer), with no certificate file at this count
+  - n: 638
+    printed: '25.778174593068'
+    rounding: up
+    exact: 1108740756149030743320899451/43010832754900000000000000
+    exact_from: 'certificates/best/n638.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 641
+    printed: '25.823989202604'
+    rounding: up
+    exact: 213073660986998140933301528362725429671910599633024321321825144756831813189430504178481725963/8250997137402784581929723477168879406013603099321588665610239888316508416066500000000000000
+    exact_from: 'certificates/best/n641.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 642
+    printed: '25.833072972404'
+    rounding: up
+    exact: 21241932958684630408843401297598311882619312298571179957/822276659899372875756557914389384165131000000000000000
+    exact_from: 'certificates/best/n642.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 643
+    printed: '25.851666731970'
+    rounding: up
+    exact: 247655913331467917161457697/9579881866000000000000000
+    exact_from: 'certificates/best/n643.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 644
+    printed: '25.877408476145'
+    rounding: up
+    exact: 17954525153655673994610661459/693830109387000000000000000
+    exact_from: 'certificates/best/n644.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 645
+    printed: '25.883109225944'
+    rounding: up
+    exact: 29476183760281785651283379063/1138819277969000000000000000
+    exact_from: 'certificates/best/n645.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 646
+    printed: '25.892014038160'
+    rounding: up
+    exact: 9498577260308592050944205013/366853549759000000000000000
+    exact_from: 'certificates/best/n646.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 647
+    printed: '25.899276594081'
+    rounding: up
+    exact: 2612702594054985300702492313835407735209621202729434671/100879365667382792962559512314233084863000000000000000
+    exact_from: 'certificates/best/n647.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 648
+    printed: '25.908836705326'
+    rounding: up
+    exact: 249300964549957916031750309467/9622236898761000000000000000
+    exact_from: 'certificates/best/n648.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 649
+    printed: '25.939913887038'
+    rounding: up
+    exact: 126412704320352725140728947931/4873289281948000000000000000
+    exact_from: 'certificates/best/n649.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 650
+    printed: '25.956098976263'
+    rounding: up
+    exact: 11128299142735085821887670919427712069822105619685877547/428735425647442498988527526651632787521000000000000000
+    exact_from: 'certificates/best/n650.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 651
+    printed: '25.963953973576'
+    rounding: up
+    exact: 121179805765942928151179179512269998219907453907277795358851891842133/4667232344090289656991290446672323440902896569912904000000000000000
+    exact_from: 'certificates/best/n651.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 652
+    printed: '25.982243468092'
+    rounding: up
+    exact: 47057833282576956089104183021/1811153580343000000000000000
+    exact_from: 'certificates/best/n652.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 680
+    printed: '26.571428571436'
+    rounding: up
+    exact: 133794498039399797662765930521/5035276807933000000000000000
+    exact_from: 'certificates/best/n680.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 681
+    printed: '26.591378145504'
+    rounding: up
+    exact: 262776117047084048705134906439/9882004445547000000000000000
+    exact_from: 'certificates/best/n681.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 682
+    printed: '26.621275501321'
+    rounding: up
+    exact: 18029347895572332045442670424813912779294627735743077415119035310723432757539799750854965023/677253345531019726244697316997670876710333968765514121857701433821965051884937500000000000
+    exact_from: 'certificates/best/n682.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 683
+    printed: '26.656854249501'
+    rounding: up
+    exact: 89602713304242369136424194151/3361338606033000000000000000
+    exact_from: 'certificates/best/n684.cert at 964ee2bd less its last square: the bound certified_bounds.json
+      at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet (receipts/claim-map.json) states,
+      with no certificate file at this count'
+  - n: 684
+    printed: '26.656854249501'
+    rounding: up
+    exact: 89602713304242369136424194151/3361338606033000000000000000
+    exact_from: 'certificates/best/n684.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 689
+    printed: '26.774735132404'
+    rounding: up
+    exact: 3938853718237759445023409007333515324115435289001830222955825759177/147110837838721205039442076471108378387212050394420750000000000000
+    exact_from: 'certificates/best/n689.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 690
+    printed: '26.789303783750'
+    rounding: up
+    exact: 235738825532104786990359971433/8799736918699000000000000000
+    exact_from: 'certificates/best/n690.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 692
+    printed: '26.819198945560'
+    rounding: up
+    exact: 43455058935703921588215939719/1620296677164500000000000000
+    exact_from: 'certificates/best/n692.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 693
+    printed: '26.824728376140'
+    rounding: up
+    exact: 15849842170635476219955012865255744117476476509587114387177593432797/590866828114239482313489855908668281142394823134898500000000000000
+    exact_from: 'certificates/best/n693.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 694
+    printed: '26.831812064399'
+    rounding: up
+    exact: 124133028281386704319579851727/4626337870266000000000000000
+    exact_from: 'certificates/best/n694.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 695
+    printed: '26.851666731970'
+    rounding: up
+    exact: 17268210385342267537332600981/643096406555000000000000000
+    exact_from: 'certificates/best/n695.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 696
+    printed: '26.878731242895'
+    rounding: up
+    exact: 13300404810162629045407438129/494830082937000000000000000
+    exact_from: 'certificates/best/n696.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 698
+    printed: '26.892086967325'
+    rounding: up
+    exact: 51171294417674996490237369393/1902838350919000000000000000
+    exact_from: 'certificates/best/n698.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 699
+    printed: '26.907571868006'
+    rounding: up
+    exact: 381806913449303071686120597895340703696222462095228624415011286693526229816179742768366777/14189571445623318393916975439930479591165835261729704759103138068026952693500000000000000
+    exact_from: 'certificates/best/n699.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 700
+    printed: '26.908095391467'
+    rounding: up
+    exact: 7101657419037510725626072988554051329801439200844739337153286295137767866894816433478321091/263922708602020662036415034259284667705390047905623738815777407399998055863000000000000000
+    exact_from: 'certificates/best/n700.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 701
+    printed: '26.941437942799'
+    rounding: up
+    exact: 3441462583331923711779774799363157321773031957477102390617399162879/127738637805403830348132735214934580829064726401137000000000000000
+    exact_from: 'certificates/best/n701.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 702
+    printed: '26.948221671728'
+    rounding: up
+    exact: 9825311520553335892408961033450547817765810678701282063/364599625171607796874982121130323506299000000000000000
+    exact_from: 'certificates/best/n702.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 703
+    printed: '26.961863453727'
+    rounding: up
+    exact: 50852111708274793432512603887/1886075559857000000000000000
+    exact_from: 'certificates/best/n703.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 704
+    printed: '26.965244421265'
+    rounding: up
+    exact: 285835818447793989634635767070508175928477340806413441120239846749054265838875766028691467/10600156778938142755076137559124460414455199673909808231303438926520940814375000000000000
+    exact_from: 'certificates/best/n704.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 705
+    printed: '26.986058408352'
+    rounding: up
+    exact: 151068948344115965905188956001/5598036810643000000000000000
+    exact_from: 'certificates/best/n705.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 733
+    printed: '27.571428571436'
+    rounding: up
+    exact: 138829774847332797662765930521/5035276807933000000000000000
+    exact_from: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
+      packet (receipts/claim-map.json) states for its square tiling and L-border recipe of the n680 certificate
+      (certificates/best/n680.cert; 1 a side, 1 L-border layer), with no certificate file at this count
+  - n: 734
+    printed: '27.591378145504'
+    rounding: up
+    exact: 272658121492631048705134906439/9882004445547000000000000000
+    exact_from: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
+      packet (receipts/claim-map.json) states for its square tiling and L-border recipe of the n681 certificate
+      (certificates/best/n681.cert; 1 a side, 1 L-border layer), with no certificate file at this count
+  - n: 736
+    printed: '27.652543263833'
+    rounding: up
+    exact: 18779565847313943054512348313630665933166876347460019/679126171800478338981200594575773327000000000000000
+    exact_from: 'certificates/best/n736.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 737
+    printed: '27.656854249501'
+    rounding: up
+    exact: 92964051910275369136424194151/3361338606033000000000000000
+    exact_from: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
+      packet (receipts/claim-map.json) states for its square tiling and L-border recipe of the n684 certificate
+      (certificates/best/n684.cert; 1 a side, 1 L-border layer), with no certificate file at this count
+  - n: 739
+    printed: '27.691450272099'
+    rounding: up
+    exact: 658290871827926942852528885980705788575996060638590068590350470259689430510611455661304729669/23772350864959986626309620934634286617878983232100517631927077771969191210984500000000000000
+    exact_from: 'certificates/best/n739.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 742
+    printed: '27.764050055204'
+    rounding: up
+    exact: 122125375866261686064259832733/4398687353734000000000000000
+    exact_from: 'certificates/best/n742.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 743
+    printed: '27.778174593058'
+    rounding: up
+    exact: 122169703853835686512666449513/4398046511104000000000000000
+    exact_from: 'certificates/best/n743.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 747
+    printed: '27.824728381532'
+    rounding: up
+    exact: 227256666241760471527519197371071649211661/8167435208194183256479180500000000000000
+    exact_from: 'certificates/best/n747.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T18:59:39Z'
+  - n: 749
+    printed: '27.846045890572'
+    rounding: up
+    exact: 1629133238593882159925956289/58505011627000000000000000
+    exact_from: 'certificates/best/n749.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 750
+    printed: '27.874585541193'
+    rounding: up
+    exact: 245960136669749889010860860171/8823813229663000000000000000
+    exact_from: 'certificates/best/n750.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 752
+    printed: '27.898764406578'
+    rounding: up
+    exact: 14598465781197317102149602104272903913483956190875441905862113/523265674724845391559925367737177640182399994000000000000000
+    exact_from: 'certificates/best/n752.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T18:59:39Z'
+  - n: 753
+    printed: '27.907984230435'
+    rounding: up
+    exact: 2775723436668939561752547443444306217395794222724656093/99459832489152912006455223097563321419000000000000000
+    exact_from: 'certificates/best/n753.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 754
+    printed: '27.920621682790'
+    rounding: up
+    exact: 123284656408254697522234185039/4415541237187000000000000000
+    exact_from: 'certificates/best/n754.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 756
+    printed: '27.949646347575'
+    rounding: up
+    exact: 25669747468719749350047918499/918428346087000000000000000
+    exact_from: 'certificates/best/n756.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 757
+    printed: '27.956217594876'
+    rounding: up
+    exact: 63690086166988172660508957325248501182594313105622704206521248191381289517039765877971911/2278208271589056772136515159082967490477245431213811992197801149642095205500000000000000
+    exact_from: 'certificates/best/n757.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 758
+    printed: '27.971371820028'
+    rounding: up
+    exact: 1099761891404415524689241827490418526776268484864945810529655169074573049839848528468767551/39317409903256744982206731219803061466338745592272946661902320824626789132000000000000000
+    exact_from: 'certificates/best/n758.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 759
+    printed: '27.976916267949'
+    rounding: up
+    exact: 391929894919907113431912392462308986266536854957198746954336068167/14009045570505740466920470177326394824369813561166000000000000000
+    exact_from: 'certificates/best/n759.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 788
+    printed: '28.571428571436'
+    rounding: up
+    exact: 143865051655265797662765930521/5035276807933000000000000000
+    exact_from: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
+      packet (receipts/claim-map.json) states for its square tiling and L-border recipe of the n680 certificate
+      (certificates/best/n680.cert; 1 a side, 2 L-border layers), with no certificate file at this count
+  - n: 789
+    printed: '28.591378145504'
+    rounding: up
+    exact: 282540125938178048705134906439/9882004445547000000000000000
+    exact_from: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
+      packet (receipts/claim-map.json) states for its square tiling and L-border recipe of the n681 certificate
+      (certificates/best/n681.cert; 1 a side, 2 L-border layers), with no certificate file at this count
+  - n: 794
+    printed: '28.691448980966'
+    rounding: up
+    exact: 10353348278409613763202859731400844496438538309955407918168277/360851356279649166394747363562796491663911388500000000000000
+    exact_from: 'certificates/best/n794.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T18:59:39Z'
+  - n: 797
+    printed: '28.756097560985'
+    rounding: up
+    exact: 10521628454553836140395301129801601688618064050314293669/365892083661210829435055131267575998707000000000000000
+    exact_from: 'certificates/best/n797.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 798
+    printed: '28.774735132398'
+    rounding: up
+    exact: 132654291031033789662142394813/4610095989439000000000000000
+    exact_from: 'certificates/best/n798.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 799
+    printed: '28.784664365231'
+    rounding: up
+    exact: 32588542888498816828233018463/1132149483315250000000000000
+    exact_from: 'certificates/best/n799.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 801
+    printed: '28.802428716951'
+    rounding: up
+    exact: 245018146587707882126608699399/8506857147207000000000000000
+    exact_from: 'certificates/best/n801.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 803
+    printed: '28.827585222354'
+    rounding: up
+    exact: 60088499878328084209720735571/2084409755963000000000000000
+    exact_from: 'certificates/best/n803.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T18:16:49Z'
+  - n: 804
+    printed: '28.845430623594'
+    rounding: up
+    exact: 2558464449246212621272218584024017606377443463787716001/88695657992833250227106000495143345508000000000000000
+    exact_from: 'certificates/best/n804.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 805
+    printed: '28.858216341607'
+    rounding: up
+    exact: 71679201646518604945817642491404698279132653566262849747749218925483208427977539087849/2483840331572200720548461645773024669582670855383088524750010962326329500000000000000
+    exact_from: 'certificates/best/n805.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 806
+    printed: '28.863739105779'
+    rounding: up
+    exact: 452127833702922360363751423770758571468795161880229467/15664215646004158343839865203018768264000000000000000
+    exact_from: 'certificates/best/n806.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 808
+    printed: '28.899273101064'
+    rounding: up
+    exact: 63304318650103115519058906889/2190515949267000000000000000
+    exact_from: 'certificates/best/n808.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 809
+    printed: '28.908036098650'
+    rounding: up
+    exact: 255844303659436987640771705409/8850283111117000000000000000
+    exact_from: 'certificates/best/n809.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 810
+    printed: '28.910451045451'
+    rounding: up
+    exact: 61792554009616100826518316807/2137377722418500000000000000
+    exact_from: 'certificates/best/n810.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 811
+    printed: '28.925426763361'
+    rounding: up
+    exact: 234585906468410780978872350173/8110024041739000000000000000
+    exact_from: 'certificates/best/n811.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 812
+    printed: '28.948221671728'
+    rounding: up
+    exact: 10616758209088290869183856205435101440149253841603911273/366749927836055645727138846037771893689000000000000000
+    exact_from: 'certificates/best/n812.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 813
+    printed: '28.956254112324'
+    rounding: up
+    exact: 1561353421784771363337931257899370330205234057397890234241220086064464312167824771676388014987/53921112023957191677226249853730674831519053447599746656933169047377513027951000000000000000
+    exact_from: 'certificates/best/n813.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 814
+    printed: '28.961440808824'
+    rounding: up
+    exact: 283609442683041257753174527321/9792656537883000000000000000
+    exact_from: 'certificates/best/n814.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 815
+    printed: '28.985552499024'
+    rounding: up
+    exact: 7467107169687412610153335579/257614795161800000000000000
+    exact_from: 'certificates/best/n815.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 845
+    printed: '29.571428571436'
+    rounding: up
+    exact: 148900328463198797662765930521/5035276807933000000000000000
+    exact_from: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
+      packet (receipts/claim-map.json) states for its square tiling and L-border recipe of the n680 certificate
+      (certificates/best/n680.cert; 1 a side, 3 L-border layers), with no certificate file at this count
+  - n: 847
+    printed: '29.606601717805'
+    rounding: up
+    exact: 49042249090842977170784533397/1656463296878500000000000000
+    exact_from: 'certificates/best/n847.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 850
+    printed: '29.656854249499'
+    rounding: up
+    exact: 5067207364951307925873256989/170861255962000000000000000
+    exact_from: 'certificates/best/n850.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T18:16:49Z'
+  - n: 851
+    printed: '29.691448975560'
+    rounding: up
+    exact: 18885444475818312618265736958382877855152343240338271982547268675612808635102771054855643353/636056680540035842535017883048659696652660107881665617064851100947974864839000000000000000
+    exact_from: 'certificates/best/n851.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 855
+    printed: '29.748737341547'
+    rounding: up
+    exact: 212332791057716566227593714641/7137539607813000000000000000
+    exact_from: 'certificates/best/n855.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 857
+    printed: '29.792820520757'
+    rounding: up
+    exact: 17429376826489730165991489612584768782689410388438931882955321645363/585019361102341210351599255779977904813056955652106500000000000000
+    exact_from: 'certificates/best/n857.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 860
+    printed: '29.825090165816'
+    rounding: up
+    exact: 17052653737180265952494874729/571755312134000000000000000
+    exact_from: 'certificates/best/n860.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 862
+    printed: '29.845229290996'
+    rounding: up
+    exact: 4309230411069718845489586866394069244519700216436067/144385903993367187871649232448729792500000000000000
+    exact_from: 'certificates/best/n862.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 863
+    printed: '29.858737702544'
+    rounding: up
+    exact: 20751093533574701951130700921/694975579353000000000000000
+    exact_from: 'certificates/best/n863.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 864
+    printed: '29.873880250030'
+    rounding: up
+    exact: 1088109711380589365476305547982501886741428169994135619800162353438480231371224521967212108091/36423447582759792354397653881459750780477040101998335172252749528791165580218000000000000000
+    exact_from: 'certificates/best/n864.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 865
+    printed: '29.886279332517'
+    rounding: up
+    exact: 2835788938224511013957093275804517123546996022733742776377647031868384846213682704897316143829/94885981177962957313608699991564591221096629950489360146307916199527581277792000000000000000
+    exact_from: 'certificates/best/n865.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 866
+    printed: '29.898931337721'
+    rounding: up
+    exact: 1973033695330493161417833476742233326923338128402277921188454032657/65990107574223050805163334197154441995264664272896000000000000000
+    exact_from: 'certificates/best/n866.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 868
+    printed: '29.908292315958'
+    rounding: up
+    exact: 35811702374042398120796588865469472375189393841509979084264585171077/1197383722070108998273383611973837220701089982733836000000000000000
+    exact_from: 'certificates/best/n868.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 869
+    printed: '29.913238532580'
+    rounding: up
+    exact: 7481374196023939616342312956575311463680597628922626113570047081808676598509377056144371169/250102448381696133564499691567944371254650047631690881753368115983792772253250000000000000
+    exact_from: 'certificates/best/n869.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 870
+    printed: '29.938828739805'
+    rounding: up
+    exact: 304822501922356348861744353008001717007487/10181510591865159825326618500000000000000
+    exact_from: 'certificates/best/n870.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T18:59:39Z'
+  - n: 871
+    printed: '29.951737420200'
+    rounding: up
+    exact: 169015077729299145007465475527/5642913977181000000000000000
+    exact_from: 'certificates/best/n871.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 872
+    printed: '29.962147755539'
+    rounding: up
+    exact: 23127897036780385811153821927661659752407027733675470578988662409403/771903844326547418715753540873056975827640582188009000000000000000
+    exact_from: 'certificates/best/n872.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 904
+    printed: '30.563629816722'
+    rounding: up
+    exact: 21357210961085009378796199318186444038014976243495345775185974197151369120593784001501685751/698778616583052857721048252794483604912604963284266674212699430379196134006500000000000000
+    exact_from: 'certificates/best/n904.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 905
+    printed: '30.583782191753'
+    rounding: up
+    exact: 71463491498404195941741968259/2336646626972000000000000000
+    exact_from: 'certificates/best/n905.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 909
+    printed: '30.656854249499'
+    rounding: up
+    exact: 5238068620913307925873256989/170861255962000000000000000
+    exact_from: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
+      packet (receipts/claim-map.json) states for its square tiling and L-border recipe of the n850 certificate
+      (certificates/best/n850.cert; 1 a side, 1 L-border layer), with no certificate file at this count
+  - n: 910
+    printed: '30.691448975560'
+    rounding: up
+    exact: 19521501156358348460800754841431537551805003348219937599612119776560783499941771054855643353/636056680540035842535017883048659696652660107881665617064851100947974864839000000000000000
+    exact_from: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
+      packet (receipts/claim-map.json) states for its square tiling and L-border recipe of the n851 certificate
+      (certificates/best/n851.cert; 1 a side, 1 L-border layer), with no certificate file at this count
+  - n: 914
+    printed: '30.746670724582'
+    rounding: up
+    exact: 6935590240447767551325823793/225572072585500000000000000
+    exact_from: 'certificates/best/n914.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 915
+    printed: '30.765987666896'
+    rounding: up
+    exact: 149112814058848589884186990087067661673167449687640607/4846677300702933849746304805820542166000000000000000
+    exact_from: 'certificates/best/n915.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 916
+    printed: '30.776452019646'
+    rounding: up
+    exact: 4056673762198846583140456512926237815205829317653903/131810962472521304705443592756129909000000000000000
+    exact_from: 'certificates/best/n916.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 917
+    printed: '30.795318768598'
+    rounding: up
+    exact: 229682149688291737154727030199/7458346231587000000000000000
+    exact_from: 'certificates/best/n917.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 921
+    printed: '30.839621660274'
+    rounding: up
+    exact: 14894320033569661254052406104667388926041526465411805221984356333527/482960530373687394321629914882607101485236965941461000000000000000
+    exact_from: 'certificates/best/n921.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 922
+    printed: '30.842386800019'
+    rounding: up
+    exact: 55777460281691750556337765441326738510154805480528968606393441373465913935046880154085874353/1808467698798776396950376288808173071523940397148788958554506905942529280552000000000000000
+    exact_from: 'certificates/best/n922.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 925
+    printed: '30.888224555898'
+    rounding: up
+    exact: 71379830266813195311042544089/2310907515504500000000000000
+    exact_from: 'certificates/best/n925.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 926
+    printed: '30.903410087838'
+    rounding: up
+    exact: 110456533218903575971327086041/3574250637873000000000000000
+    exact_from: 'certificates/best/n926.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 927
+    printed: '30.908093779964'
+    rounding: up
+    exact: 2648460611075311826331452602482125280107134200934122221606501429725208687169431619640224861/85688254666555707345218988670256810634221222133989138386069145253871896797000000000000000
+    exact_from: 'certificates/best/n927.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 928
+    printed: '30.913067418613'
+    rounding: up
+    exact: 9722428879777774656636417286818765627772702892905437700672925574348373948829302514070015349/314508707535251498480056204198188735743008062067791681278333426396325163556000000000000000
+    exact_from: 'certificates/best/n928.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 930
+    printed: '30.940199320916'
+    rounding: up
+    exact: 128656976437592753303792142667/4158246529156000000000000000
+    exact_from: 'certificates/best/n930.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 931
+    printed: '30.950488164151'
+    rounding: up
+    exact: 7892293532499558278493853132760019016855940960297730405326251/254997384553081737625872117868681769021863125500000000000000
+    exact_from: 'certificates/best/n931.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T18:59:39Z'
+  - n: 932
+    printed: '30.960209722012'
+    rounding: up
+    exact: 1043614902577994081340314201835774143042297358814958827/33708263346679771164938037060684637641000000000000000
+    exact_from: 'certificates/best/n932.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 933
+    printed: '30.972258702441'
+    rounding: up
+    exact: 133536578251042800873863910879/4311489824942000000000000000
+    exact_from: 'certificates/best/n933.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 934
+    printed: '30.987571925313'
+    rounding: up
+    exact: 136284782593706827663453848223/4398046511104000000000000000
+    exact_from: 'certificates/best/n934.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 966
+    printed: '31.583782191753'
+    rounding: up
+    exact: 73800138125376195941741968259/2336646626972000000000000000
+    exact_from: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
+      packet (receipts/claim-map.json) states for its square tiling and L-border recipe of the n905 certificate
+      (certificates/best/n905.cert; 1 a side, 1 L-border layer), with no certificate file at this count
+  - n: 970
+    printed: '31.656854249499'
+    rounding: up
+    exact: 5408929876875307925873256989/170861255962000000000000000
+    exact_from: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
+      packet (receipts/claim-map.json) states for its square tiling and L-border recipe of the n850 certificate
+      (certificates/best/n850.cert; 1 a side, 2 L-border layers), with no certificate file at this count
+  - n: 972
+    printed: '31.692388155445'
+    rounding: up
+    exact: 138027277330139845431024764633/4355218567094000000000000000
+    exact_from: 'certificates/best/n972.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 976
+    printed: '31.747519554837'
+    rounding: up
+    exact: 205476561773966502987950783573/6472208369509000000000000000
+    exact_from: 'certificates/best/n976.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 977
+    printed: '31.765989508190'
+    rounding: up
+    exact: 4924744224122718916395126682030286011031015089577828452172668873131113641545765800418383573/155031979181793149012385074244088061596802647595297948692195424208970317824000000000000000
+    exact_from: 'certificates/best/n977.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 978
+    printed: '31.779516944583'
+    rounding: up
+    exact: 8213394297017540066348472413/258449312220200000000000000
+    exact_from: 'certificates/best/n978.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 979
+    printed: '31.792971073052'
+    rounding: up
+    exact: 1192201650511256689400923580677475606843696071930618848722595156831480350805067232770834883/37498906527858451835346283601943069220983996215473481182079353712284372801500000000000000
+    exact_from: 'certificates/best/n979.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 983
+    printed: '31.832540815543'
+    rounding: up
+    exact: 18394396084377062357244872088191937660939657768063768106548729471371803811940676114005724019/577848818005618845604822938488243008119585188849999348016189488082962212532000000000000000
+    exact_from: 'certificates/best/n983.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 985
+    printed: '31.858728049404'
+    rounding: up
+    exact: 502866337509704902389322541/15784256569500000000000000
+    exact_from: 'certificates/best/n985.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 986
+    printed: '31.866815272521'
+    rounding: up
+    exact: 7066711275734201569150211113603902179863887595610512537666788471773587028375064421771682339/221757687905133501145918983959901428076653954889444600121725786034868624481250000000000000
+    exact_from: 'certificates/best/n986.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 987
+    printed: '31.888224555908'
+    rounding: up
+    exact: 21965356625513859013064377654824067009457638387878168004295419555939/688823442866916291932273956888234428669162919322739500000000000000
+    exact_from: 'certificates/best/n987.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 988
+    printed: '31.896086560755'
+    rounding: up
+    exact: 479904139446929129086762153296190015741586053888856328100670632355812795390281555840722224047/15045862712117561860770583482223261192497262981866235668026966770852014065233000000000000000
+    exact_from: 'certificates/best/n988.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 989
+    printed: '31.909775968518'
+    rounding: up
+    exact: 14025294569981236736708021723/439529709761000000000000000
+    exact_from: 'certificates/best/n989.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 990
+    printed: '31.910156904043'
+    rounding: up
+    exact: 413466306708942532608328103659216490676624583917414930721578228710432521210481542760095996269/12957200679153197753971041638716151483900579177305417502530357504073277652042000000000000000
+    exact_from: 'certificates/best/n990.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 991
+    printed: '31.934594193723'
+    rounding: up
+    exact: 7935638495571777368412051491/248496613028250000000000000
+    exact_from: 'certificates/best/n991.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 992
+    printed: '31.942875568527'
+    rounding: up
+    exact: 2991185127178077719243948014335585817966441601655428008598118284666034622155884025394497623/93641698624193541184401759086502821257210403803517581500858350152749919595000000000000000
+    exact_from: 'certificates/best/n992.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 993
+    printed: '31.953213739929'
+    rounding: up
+    exact: 33234801643980769152753675112518565216366110719482593097997363176740595830858338408607119817/1040108263115043341702826468433099222105018144614977012685794673914817030886000000000000000
+    exact_from: 'certificates/best/n993.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 995
+    printed: '31.967892522875'
+    rounding: up
+    exact: 7373709861370246053826921882926068000960419459098358797/230659867743676934013225631153299338718500000000000000
+    exact_from: 'certificates/best/n995.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 996
+    printed: '31.987263130334'
+    rounding: up
+    exact: 169926396069884709104118111655884481444471834907854898048483001729020392155767547511344337097/5312314322657489787605167911909738662568420477912120354072584346708431999003000000000000000
+    exact_from: 'certificates/best/n996.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 997
+    printed: '31.995520170690'
+    rounding: up
+    exact: 1500985592865268213094568131019584732343983180384184614507981670429122283004655210625421351909/46912367258223742043426446828026132756597175197131469404963625314263667880811500000000000000
+    exact_from: 'certificates/best/n997.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  note: 'The issue''s 203 claims at or below 1024 (188 certificates, 14 constructions and 1 deletion),
+    re-derived from the source''s indexes at 964ee2bd by its README''s rule (couzo-issue763-2026-10-23
+    packet, receipts/claim-map.json), since the issue carries no table; each at the exact bound certified_bounds.json
+    states, dated by the issue. first_committed is the committer time of the commit that first holds the
+    certificate; the push of 23:38:42Z made efef7d1, fa6237e and 964ee2b public together, after the issue.
+    Its claims above 1024 are not walked here (think-llit). The walk holds its publications at 1 count
+    back from a row, each waiting on an owner decision (beyond_horizon_replay.WALKS[''upper-bounds-issue763-20261024''].held):
+    1 index deletion bound, 684''s certificate less one square, which the issue claims (think-2z2n, think-kzme).'
+- report: franciscouzo/square-packing@964ee2b
+  url: https://github.com/franciscouzo/square-packing/tree/964ee2bdf301d0c8912d956d4010f478dcbbd5ea
+  reported_at: '2026-10-23T23:38:42Z'
+  holders: Francisco Couzo
+  bead: think-ptkk
+  claims:
+  - n: 204
+    printed: '14.808642830517'
+    rounding: up
+    exact: 20527998730501694190247905967/1386217424881000000000000000
+    exact_from: 'certificates/best/n204.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 335
+    printed: '18.822875655537'
+    rounding: up
+    exact: 14004974988650278943846639000866424195115030029307572673/744040137380983885767969080468037064669000000000000000
+    exact_from: 'certificates/best/n335.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 339
+    printed: '18.907351471161'
+    rounding: up
+    exact: 110153703971338554929262145223/5825972196019000000000000000
+    exact_from: 'certificates/best/n339.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 344
+    printed: '18.992727809347'
+    rounding: up
+    exact: 189448689205939314688480327191/9974801466523000000000000000
+    exact_from: 'certificates/best/n344.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T18:16:49Z'
+  - n: 379
+    printed: '19.950889681485'
+    rounding: up
+    exact: 193772188274407360022214661887/9712458510271000000000000000
+    exact_from: 'certificates/best/n379.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 380
+    printed: '19.961350023816'
+    rounding: up
+    exact: 150135582776408941185315209651/7521314069303000000000000000
+    exact_from: 'certificates/best/n380.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 421
+    printed: '20.976273997913'
+    rounding: up
+    exact: 64235479153826763656929395543248802530980627981509415362998190592217/3062292147796129200174447130622921477961292001744471000000000000000
+    exact_from: 'certificates/best/n421.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 452
+    printed: '21.778174593058'
+    rounding: up
+    exact: 8694923865596142956744322497/399249433346360000000000000
+    exact_from: 'certificates/best/n452.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T18:16:49Z'
+  - n: 490
+    printed: '22.656854249498'
+    rounding: up
+    exact: 381992799841303685048620849/16859922195500000000000000
+    exact_from: 'certificates/best/n490.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T18:16:49Z'
+  - n: 507
+    printed: '22.973697163641'
+    rounding: up
+    exact: 206991620855221497836692789163/9009939470379000000000000000
+    exact_from: 'certificates/best/n507.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 535
+    printed: '23.656854249498'
+    rounding: up
+    exact: 398852722036803685048620849/16859922195500000000000000
+    exact_from: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23
+      packet (receipts/claim-map.json) states for its square tiling and L-border recipe of the n490 certificate
+      (certificates/best/n490.cert; 1 a side, 1 L-border layer), with no certificate file at this count
+  - n: 792
+    printed: '28.656854249499'
+    rounding: up
+    exact: 142929060809159889389770528673/4987604695364000000000000000
+    exact_from: 'certificates/best/n792.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 800
+    printed: '28.798989873230'
+    rounding: up
+    exact: 71069730200401190955017843833/2467785520021500000000000000
+    exact_from: 'certificates/best/n800.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  - n: 935
+    printed: '30.994174058119'
+    rounding: up
+    exact: 5931724681599557786191419461/191381924566750000000000000
+    exact_from: 'certificates/best/n935.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T18:16:49Z'
+  - n: 998
+    printed: '31.996875920259'
+    rounding: up
+    exact: 5585051978122154454120459727/174549915186750000000000000
+    exact_from: 'certificates/best/n998.cert at 964ee2bd (its header), retained in the couzo-issue763-2026-10-23
+      packet: the bound certified_bounds.json at 964ee2bd, retained in the couzo-issue763-2026-10-23 packet
+      (receipts/claim-map.json) states'
+    first_committed: '2026-10-23T22:38:09Z'
+  note: 'The 15 rows certified_bounds.json publishes at 964ee2bd at or below 1024 (14 certificates and
+    1 construction) that the issue''s selection rule leaves out: each is below the comparison''s 12-place
+    print, but by 1e-10 or less where the comparison is another author''s. No issue reports them, so they
+    are the watched repository''s publication, dated by the push that made 964ee2b public (PUSHED_LATER),
+    and an import of their own (couzo-issue763-2026-10-23 packet, receipts/claim-map.json, unrequested).'
+- report: franciscouzo/square-packing@4e4c8ce
+  url: https://github.com/franciscouzo/square-packing/tree/4e4c8ce23cb5e87f033021687010992c40575480
+  reported_at: '2026-10-15T00:31:53Z'
+  holders: Francisco Couzo
+  bead: think-yfoo
+  claims:
+  - n: 542
+    printed: '23.828427124774'
+    rounding: up
+    exact: 31089324337518787218011864777/1304715757138500000000000000
+    exact_from: certified_bounds.json at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (the bound it states)
+  - n: 629
+    printed: '25.606601717826'
+    rounding: up
+    exact: 3179477643018594726999266652477643018594726999263473/124166325467750000000000000000000000000000000000000
+    exact_from: certified_bounds.json at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (the bound it states); the least of the 2 sides the commit states at this count, beside certificates/best/n629.cert
+  - n: 638
+    printed: '25.828427124774'
+    rounding: up
+    exact: 33698755851795787218011898475755851795787218011864777/1304715757138500000000000000000000000000000000000000
+    exact_from: certified_bounds.json at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (the bound it states); the least of the 2 sides the commit states at this count, beside certificates/best/n638.cert
+  - n: 680
+    printed: '26.606601717826'
+    rounding: up
+    exact: 3303643968486344726999266776643968486344726999263473/124166325467750000000000000000000000000000000000000
+    exact_from: certified_bounds.json at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (the bound it states); the least of the 2 sides the commit states at this count, beside certificates/best/n680.cert
+  - n: 733
+    printed: '27.606601717826'
+    rounding: up
+    exact: 3427810293954094726999266900810293954094726999263473/124166325467750000000000000000000000000000000000000
+    exact_from: certified_bounds.json at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (the bound it states); the least of the 2 sides the commit states at this count, beside certificates/best/n733.cert
+  - n: 788
+    printed: '28.606601717826'
+    rounding: up
+    exact: 3551976619421844726999267024976619421844726999263473/124166325467750000000000000000000000000000000000000
+    exact_from: certified_bounds.json at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (the bound it states); the least of the 2 sides the commit states at this count, beside certificates/best/n788.cert
+  - n: 845
+    printed: '29.606601717826'
+    rounding: up
+    exact: 3676142944889594726999267149142944889594726999263473/124166325467750000000000000000000000000000000000000
+    exact_from: certified_bounds.json at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (the bound it states); the least of the 2 sides the commit states at this count, beside certificates/best/n845.cert
+  - n: 904
+    printed: '30.606601717826'
+    rounding: up
+    exact: 3800309270357344726999267273309270357344726999263473/124166325467750000000000000000000000000000000000000
+    exact_from: certified_bounds.json at franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480
+      (the bound it states); the least of the 2 sides the commit states at this count, beside certificates/best/n904.cert
+  note: 'A publication in a watched repository that no issue reports, dated by its commit, or by the later
+    push that made it public; transcribed from the history scan (resources/web/couzo-index-2026-10-15/receipts/history-publications.json)
+    at each count #763 claims where it states a side strictly below the start, at the least side the commit
+    states there. Its 7 index deletion bounds, each deleting one square from the next count''s 4e4c8ce
+    certificate, at 629, 638, 680, 733, 788, 845 and 904, have no row by the owner''s answer of 23 October
+    2026 on D6 (think-f2io), the option labelled "Yes, an earlier report (Recommended)" in the question
+    the coordinator asked, whether a side obtained by deleting a square from a neighbour''s certificate
+    is an earlier report; so a later equal or higher side is not recorded, and on the decision''s recommendation,
+    which the owner has not confirmed (think-kzme), it has no row of its own (beyond_horizon_replay.WALKS[''upper-bounds-issue763-20261024''].held).'
+- report: franciscouzo/square-packing@23aff0c
+  url: https://github.com/franciscouzo/square-packing/tree/23aff0c6f992271e1ad13a148d44f392c4b386c0
+  reported_at: '2026-10-17T18:00:09Z'
+  holders: Francisco Couzo
+  bead: think-tmwt
+  claims:
+  - n: 333
+    printed: '18.778174593053'
+    rounding: up
+    exact: 234727182413150284605116099789416742901664941432165180030896731986862857894269859/12500000000000000000000000000000000000000000000000000000000000000000000000000000
+    exact_from: upper_bounds.json at franciscouzo/square-packing@23aff0c6f992271e1ad13a148d44f392c4b386c0
+      (the bound it states)
+  - n: 457
+    printed: '21.899494936612'
+    rounding: up
+    exact: 136871843353822908385073881684174290937423144547741478201479738537094545932717183/6250000000000000000000000000000000000000000000000000000000000000000000000000000
+    exact_from: upper_bounds.json at franciscouzo/square-packing@23aff0c6f992271e1ad13a148d44f392c4b386c0
+      (the bound it states)
+  - n: 542
+    printed: '23.813708498985'
+    rounding: up
+    exact: 18604459764831844055010554526310612991060449221105925457354248362442077990388169/781250000000000000000000000000000000000000000000000000000000000000000000000000
+    exact_from: upper_bounds.json at franciscouzo/square-packing@23aff0c6f992271e1ad13a148d44f392c4b386c0
+      (the bound it states); the least of the 2 sides the commit states at this count, beside certificates/n542.cert
+  - n: 588
+    printed: '24.813708498985'
+    rounding: up
+    exact: 19385709764831844055010554526310612991060449221105925457354248362442077990388169/781250000000000000000000000000000000000000000000000000000000000000000000000000
+    exact_from: upper_bounds.json at franciscouzo/square-packing@23aff0c6f992271e1ad13a148d44f392c4b386c0
+      (the bound it states); the least of the 2 sides the commit states at this count, beside certificates/best/n588.cert
+  - n: 590
+    printed: '24.813708498985'
+    rounding: up
+    exact: 19385709764831844055010554526310612991060449221105925457354248362442077990388169/781250000000000000000000000000000000000000000000000000000000000000000000000000
+    exact_from: upper_bounds.json at franciscouzo/square-packing@23aff0c6f992271e1ad13a148d44f392c4b386c0
+      (the bound it states); the least of the 2 sides the commit states at this count, beside certificates/best/n590.cert
+  - n: 629
+    printed: '25.606601717799'
+    rounding: up
+    exact: 64016504294495532165031663578931838973181347663317776372062745087326233971164507/2500000000000000000000000000000000000000000000000000000000000000000000000000000
+    exact_from: upper_bounds.json at franciscouzo/square-packing@23aff0c6f992271e1ad13a148d44f392c4b386c0
+      (the bound it states)
+  - n: 630
+    printed: '25.606601717799'
+    rounding: up
+    exact: 64016504294495532165031663578931838973181347663317776372062745087326233971164507/2500000000000000000000000000000000000000000000000000000000000000000000000000000
+    exact_from: upper_bounds.json at franciscouzo/square-packing@23aff0c6f992271e1ad13a148d44f392c4b386c0
+      (the bound it states)
+  - n: 638
+    printed: '25.813708498985'
+    rounding: up
+    exact: 20166959764831844055010554526310612991060449221105925457354248362442077990388169/781250000000000000000000000000000000000000000000000000000000000000000000000000
+    exact_from: upper_bounds.json at franciscouzo/square-packing@23aff0c6f992271e1ad13a148d44f392c4b386c0
+      (the bound it states); the least of the 2 sides the commit states at this count, beside certificates/best/n638.cert
+  - n: 680
+    printed: '26.606601717799'
+    rounding: up
+    exact: 66516504294495532165031663578931838973181347663317776372062745087326233971164507/2500000000000000000000000000000000000000000000000000000000000000000000000000000
+    exact_from: upper_bounds.json at franciscouzo/square-packing@23aff0c6f992271e1ad13a148d44f392c4b386c0
+      (the bound it states)
+  - n: 681
+    printed: '26.606601717799'
+    rounding: up
+    exact: 66516504294495532165031663578931838973181347663317776372062745087326233971164507/2500000000000000000000000000000000000000000000000000000000000000000000000000000
+    exact_from: upper_bounds.json at franciscouzo/square-packing@23aff0c6f992271e1ad13a148d44f392c4b386c0
+      (the bound it states)
+  - n: 690
+    printed: '26.813708498985'
+    rounding: up
+    exact: 20948209764831844055010554526310612991060449221105925457354248362442077990388169/781250000000000000000000000000000000000000000000000000000000000000000000000000
+    exact_from: upper_bounds.json at franciscouzo/square-packing@23aff0c6f992271e1ad13a148d44f392c4b386c0
+      (the bound it states); the least of the 2 sides the commit states at this count, beside certificates/best/n690.cert
+  - n: 733
+    printed: '27.606601717799'
+    rounding: up
+    exact: 69016504294495532165031663578931838973181347663317776372062745087326233971164507/2500000000000000000000000000000000000000000000000000000000000000000000000000000
+    exact_from: upper_bounds.json at franciscouzo/square-packing@23aff0c6f992271e1ad13a148d44f392c4b386c0
+      (the bound it states)
+  - n: 734
+    printed: '27.606601717799'
+    rounding: up
+    exact: 69016504294495532165031663578931838973181347663317776372062745087326233971164507/2500000000000000000000000000000000000000000000000000000000000000000000000000000
+    exact_from: upper_bounds.json at franciscouzo/square-packing@23aff0c6f992271e1ad13a148d44f392c4b386c0
+      (the bound it states)
+  - n: 788
+    printed: '28.606601717799'
+    rounding: up
+    exact: 71516504294495532165031663578931838973181347663317776372062745087326233971164507/2500000000000000000000000000000000000000000000000000000000000000000000000000000
+    exact_from: upper_bounds.json at franciscouzo/square-packing@23aff0c6f992271e1ad13a148d44f392c4b386c0
+      (the bound it states)
+  - n: 789
+    printed: '28.606601717799'
+    rounding: up
+    exact: 71516504294495532165031663578931838973181347663317776372062745087326233971164507/2500000000000000000000000000000000000000000000000000000000000000000000000000000
+    exact_from: upper_bounds.json at franciscouzo/square-packing@23aff0c6f992271e1ad13a148d44f392c4b386c0
+      (the bound it states)
+  - n: 845
+    printed: '29.606601717799'
+    rounding: up
+    exact: 74016504294495532165031663578931838973181347663317776372062745087326233971164507/2500000000000000000000000000000000000000000000000000000000000000000000000000000
+    exact_from: upper_bounds.json at franciscouzo/square-packing@23aff0c6f992271e1ad13a148d44f392c4b386c0
+      (the bound it states)
+  - n: 847
+    printed: '29.642135623731'
+    rounding: up
+    exact: 18526334764831844055010554526310612991060449221105925457354248362442077990388169/625000000000000000000000000000000000000000000000000000000000000000000000000000
+    exact_from: upper_bounds.json at franciscouzo/square-packing@23aff0c6f992271e1ad13a148d44f392c4b386c0
+      (the bound it states); the least of the 2 sides the commit states at this count, beside certificates/n847.cert
+  - n: 904
+    printed: '30.606601717799'
+    rounding: up
+    exact: 76516504294495532165031663578931838973181347663317776372062745087326233971164507/2500000000000000000000000000000000000000000000000000000000000000000000000000000
+    exact_from: upper_bounds.json at franciscouzo/square-packing@23aff0c6f992271e1ad13a148d44f392c4b386c0
+      (the bound it states)
+  - n: 905
+    printed: '30.606601717799'
+    rounding: up
+    exact: 76516504294495532165031663578931838973181347663317776372062745087326233971164507/2500000000000000000000000000000000000000000000000000000000000000000000000000000
+    exact_from: upper_bounds.json at franciscouzo/square-packing@23aff0c6f992271e1ad13a148d44f392c4b386c0
+      (the bound it states)
+  - n: 966
+    printed: '31.606601717799'
+    rounding: up
+    exact: 79016504294495532165031663578931838973181347663317776372062745087326233971164507/2500000000000000000000000000000000000000000000000000000000000000000000000000000
+    exact_from: upper_bounds.json at franciscouzo/square-packing@23aff0c6f992271e1ad13a148d44f392c4b386c0
+      (the bound it states)
+  note: 'A publication in a watched repository that no issue reports, dated by its commit, or by the later
+    push that made it public; transcribed from the history scan (resources/web/couzo-index-2026-10-15/receipts/history-publications.json)
+    at each count #763 claims where it states a side strictly below the start, at the least side the commit
+    states there. The walk holds its publications at 19 counts back from a row, each waiting on an owner
+    decision (beyond_horizon_replay.WALKS[''upper-bounds-issue763-20261024''].held): 4 index deletion
+    bounds, deletions from Friedman''s off-centre constructions, which no certificate file states, so
+    D6''s answer on deletions from certificates does not reach them (think-f2io, think-zkxy) and 15 constructions
+    with no certificate file, Göbel''s squares and Friedman''s off-centre family, 41 of them as L-border
+    extensions (think-f2io, think-zkxy).'
+- report: franciscouzo/square-packing@5a299b4
+  url: https://github.com/franciscouzo/square-packing/tree/5a299b4708ab1ae4870d0fc1ab155738144f6ab8
+  reported_at: '2026-10-21T22:56:37Z'
+  holders: Francisco Couzo
+  bead: think-tmwt
+  claims:
+  - n: 333
+    printed: '18.778174593053'
+    rounding: up
+    exact: 85937500000000000000859374999999999999819682724134643912089012702382574384562442525774924304640642425397/4576456543960194931282571407551335685804336062596184387988797828552996622120775298799573100710767469181
+    exact_from: certified_bounds.json at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8
+      (the bound it states)
+  - n: 334
+    printed: '18.822875655533'
+    rounding: up
+    exact: 787799650382775842532902465696197219810597551178013285235110810879714980471924373808558400767879813786710560375373367758451722093896091961861587359762381295637337241189254268545108294050596841608822781558646449470356813853732478974486403420242405955535804350182404205900292796684428348/41853310025518389502193497713079814654039836745200885682340720725314332031461624813903893384524975329657796659574994344078040353302398943321234712183616764431161127654885696295344376087002790140690381061228317945958678520079136675055951856494431858868083594406688103316723769440161075
+    exact_from: certified_bounds.json at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8
+      (the bound it states)
+  - n: 371
+    printed: '19.822875655533'
+    rounding: up
+    exact: 829652960408294232035095963409277034464637387923214170917451531605029312503385998622462294152404789116368357034948362102529762447198490905182822071945998060068498368844139964840452670137599631749513162619874767416315492373811615649542355276736837814403887944589092309217016566124589423/41853310025518389502193497713079814654039836745200885682340720725314332031461624813903893384524975329657796659574994344078040353302398943321234712183616764431161127654885696295344376087002790140690381061228317945958678520079136675055951856494431858868083594406688103316723769440161075
+    exact_from: certified_bounds.json at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8
+      (the bound it states)
+  - n: 414
+    printed: '20.882451030482'
+    rounding: up
+    exact: 20882451030481246819527281665997/1000000000000000000000000000000
+    exact_from: certificates/n414.cert at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8
+      (its header)
+  - n: 457
+    printed: '21.899494936636'
+    rounding: up
+    exact: 3082079913632315604936918859/140737488355328000000000000
+    exact_from: certificates/n457.cert at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8
+      (its header)
+  - n: 588
+    printed: '24.813708499013'
+    rounding: up
+    exact: 349221901093223674403421837/14073748835532800000000000
+    exact_from: certificates/n588.cert at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8
+      (its header)
+  - n: 590
+    printed: '24.813708499013'
+    rounding: up
+    exact: 349221901093223674403421837/14073748835532800000000000
+    exact_from: certificates/n590.cert at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8
+      (its header)
+  - n: 629
+    printed: '25.606601717823'
+    rounding: up
+    exact: 1801904405540817060684651047/70368744177664000000000000
+    exact_from: certificates/n629.cert at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8
+      (its header)
+  - n: 630
+    printed: '25.606601717825'
+    rounding: up
+    exact: 72076176221636057177153149/2814749767106560000000000
+    exact_from: certificates/n630.cert at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8
+      (its header)
+  - n: 638
+    printed: '25.813708499013'
+    rounding: up
+    exact: 363295649928756474403421837/14073748835532800000000000
+    exact_from: certificates/n638.cert at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8
+      (its header)
+  - n: 680
+    printed: '26.606601717823'
+    rounding: up
+    exact: 1872273149718481060684651047/70368744177664000000000000
+    exact_from: certificates/n680.cert at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8
+      (its header)
+  - n: 681
+    printed: '26.606601717825'
+    rounding: up
+    exact: 74890925988742617177153149/2814749767106560000000000
+    exact_from: certificates/n681.cert at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8
+      (its header)
+  - n: 690
+    printed: '26.813708499013'
+    rounding: up
+    exact: 377369398764289274403421837/14073748835532800000000000
+    exact_from: certificates/n690.cert at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8
+      (its header)
+  - n: 733
+    printed: '27.606601717823'
+    rounding: up
+    exact: 1942641893896145060684651047/70368744177664000000000000
+    exact_from: certificates/n733.cert at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8
+      (its header)
+  - n: 734
+    printed: '27.606601717825'
+    rounding: up
+    exact: 77705675755849177177153149/2814749767106560000000000
+    exact_from: certificates/n734.cert at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8
+      (its header)
+  - n: 788
+    printed: '28.606601717823'
+    rounding: up
+    exact: 2013010638073809060684651047/70368744177664000000000000
+    exact_from: certificates/n788.cert at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8
+      (its header)
+  - n: 789
+    printed: '28.606601717825'
+    rounding: up
+    exact: 80520425522955737177153149/2814749767106560000000000
+    exact_from: certificates/n789.cert at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8
+      (its header)
+  - n: 845
+    printed: '29.606601717823'
+    rounding: up
+    exact: 2083379382251473060684651047/70368744177664000000000000
+    exact_from: certificates/n845.cert at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8
+      (its header)
+  - n: 904
+    printed: '30.606601717823'
+    rounding: up
+    exact: 2153748126429137060684651047/70368744177664000000000000
+    exact_from: certificates/n904.cert at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8
+      (its header)
+  - n: 905
+    printed: '30.606601717825'
+    rounding: up
+    exact: 86149925057168857177153149/2814749767106560000000000
+    exact_from: certificates/n905.cert at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8
+      (its header)
+  - n: 966
+    printed: '31.606601717825'
+    rounding: up
+    exact: 88964674824275417177153149/2814749767106560000000000
+    exact_from: certificates/n966.cert at franciscouzo/square-packing@5a299b4708ab1ae4870d0fc1ab155738144f6ab8
+      (its header)
+  note: 'A publication in a watched repository that no issue reports, dated by its commit, or by the later
+    push that made it public; transcribed from the history scan (resources/web/couzo-index-2026-10-15/receipts/history-publications.json)
+    at each count #763 claims where it states a side strictly below the start, at the least side the commit
+    states there. Its verdicts at 17 counts are decided only against held publications (beyond_horizon_replay.WALKS[''upper-bounds-issue763-20261024''].resting):
+    2 against index deletion bounds and 15 against constructions with no certificate file. An answer that
+    leaves a hold out reruns this walk.'
+- report: Mishapolk/square-packing-records@1851c2c
+  url: https://github.com/Mishapolk/square-packing-records/tree/1851c2c70a77085f2deb87978f10d40e0f0e86a6
+  reported_at: '2026-10-22T05:29:48Z'
+  holders: Mykhailo Polkovskyi
+  bead: think-ptkk
+  claims:
+  - n: 457
+    printed: '21.899494936634'
+    rounding: up
+    exact: 1305311616458514432/59604644775390625
+    exact_from: certificates/n-457.cert at Mishapolk/square-packing-records@1851c2c70a77085f2deb87978f10d40e0f0e86a6
+      (its header)
+  - n: 542
+    printed: '23.813708499009'
+    rounding: up
+    exact: 7097038179340570624/298023223876953125
+    exact_from: certificates/n-542.cert at Mishapolk/square-packing-records@1851c2c70a77085f2deb87978f10d40e0f0e86a6
+      (its header)
+  - n: 588
+    printed: '24.813708499010'
+    rounding: up
+    exact: 7395061403217818624/298023223876953125
+    exact_from: certificates/n-588.cert at Mishapolk/square-packing-records@1851c2c70a77085f2deb87978f10d40e0f0e86a6
+      (its header)
+  - n: 590
+    printed: '24.813708499010'
+    rounding: up
+    exact: 7395061403217826816/298023223876953125
+    exact_from: certificates/n-590.cert at Mishapolk/square-packing-records@1851c2c70a77085f2deb87978f10d40e0f0e86a6
+      (its header)
+  - n: 629
+    printed: '25.606601717825'
+    rounding: up
+    exact: 1526272399295807488/59604644775390625
+    exact_from: certificates/n-629.cert at Mishapolk/square-packing-records@1851c2c70a77085f2deb87978f10d40e0f0e86a6
+      (its header)
+  - n: 630
+    printed: '25.606601717824'
+    rounding: up
+    exact: 7631361996479010816/298023223876953125
+    exact_from: certificates/n-630.cert at Mishapolk/square-packing-records@1851c2c70a77085f2deb87978f10d40e0f0e86a6
+      (its header)
+  - n: 638
+    printed: '25.813708499011'
+    rounding: up
+    exact: 7693084627095095296/298023223876953125
+    exact_from: certificates/n-638.cert at Mishapolk/square-packing-records@1851c2c70a77085f2deb87978f10d40e0f0e86a6
+      (its header)
+  - n: 680
+    printed: '26.606601717826'
+    rounding: up
+    exact: 7929385220356293632/298023223876953125
+    exact_from: certificates/n-680.cert at Mishapolk/square-packing-records@1851c2c70a77085f2deb87978f10d40e0f0e86a6
+      (its header)
+  - n: 681
+    printed: '26.606601717826'
+    rounding: up
+    exact: 7929385220356297728/298023223876953125
+    exact_from: certificates/n-681.cert at Mishapolk/square-packing-records@1851c2c70a77085f2deb87978f10d40e0f0e86a6
+      (its header)
+  - n: 690
+    printed: '26.813708499012'
+    rounding: up
+    exact: 7991107850972350464/298023223876953125
+    exact_from: certificates/n-690.cert at Mishapolk/square-packing-records@1851c2c70a77085f2deb87978f10d40e0f0e86a6
+      (its header)
+  - n: 733
+    printed: '27.606601717813'
+    rounding: up
+    exact: 1645481688845886464/59604644775390625
+    exact_from: certificates/n-733.cert at Mishapolk/square-packing-records@1851c2c70a77085f2deb87978f10d40e0f0e86a6
+      (its header)
+  - n: 734
+    printed: '27.606601717813'
+    rounding: up
+    exact: 8227408444229435392/298023223876953125
+    exact_from: certificates/n-734.cert at Mishapolk/square-packing-records@1851c2c70a77085f2deb87978f10d40e0f0e86a6
+      (its header)
+  - n: 788
+    printed: '28.606601717813'
+    rounding: up
+    exact: 8525431668106504192/298023223876953125
+    exact_from: certificates/n-788.cert at Mishapolk/square-packing-records@1851c2c70a77085f2deb87978f10d40e0f0e86a6
+      (its header)
+  - n: 789
+    printed: '28.606601717813'
+    rounding: up
+    exact: 8525431668106539008/298023223876953125
+    exact_from: certificates/n-789.cert at Mishapolk/square-packing-records@1851c2c70a77085f2deb87978f10d40e0f0e86a6
+      (its header)
+  - n: 845
+    printed: '29.606601717814'
+    rounding: up
+    exact: 8823454891983644672/298023223876953125
+    exact_from: certificates/n-845.cert at Mishapolk/square-packing-records@1851c2c70a77085f2deb87978f10d40e0f0e86a6
+      (its header)
+  - n: 847
+    printed: '29.642135623761'
+    rounding: up
+    exact: 8834044821191098368/298023223876953125
+    exact_from: certificates/n-847.cert at Mishapolk/square-packing-records@1851c2c70a77085f2deb87978f10d40e0f0e86a6
+      (its header)
+  note: 'A publication in Mykhailo Polkovskyi''s watched repository, dated by its commit, or by the push
+    that made it public; transcribed from the mishapolk-issue732-f1ceee4-2026-10-23 packet''s receipts
+    (source-history.json through f1ceee4 and later-commits.json after it) at each count #763 claims where
+    it states a side strictly below the start, at the least side the commit states there. Its verdicts
+    at 16 counts are decided only against held publications (beyond_horizon_replay.WALKS[''upper-bounds-issue763-20261024''].resting):
+    4 against index deletion bounds and 12 against constructions with no certificate file. An answer that
+    leaves a hold out reruns this walk.'
+- report: Mishapolk/square-packing-records@8a488a1
+  url: https://github.com/Mishapolk/square-packing-records/tree/8a488a10e994f13c706b651ddaaa9727600c96e5
+  reported_at: '2026-10-22T19:08:59Z'
+  holders: Mykhailo Polkovskyi
+  bead: think-ptkk
+  claims:
+  - n: 499
+    printed: '22.881306218113'
+    rounding: up
+    exact: 125791311227587839610773231265274177573/5497558138880000000000000000000000000
+    exact_from: certificates/n-499.cert at Mishapolk/square-packing-records@8a488a10e994f13c706b651ddaaa9727600c96e5
+      (its header)
+  note: 'A publication in Mykhailo Polkovskyi''s watched repository, dated by its commit, or by the push
+    that made it public; transcribed from the mishapolk-issue732-f1ceee4-2026-10-23 packet''s receipts
+    (source-history.json through f1ceee4 and later-commits.json after it) at each count #763 claims where
+    it states a side strictly below the start, at the least side the commit states there.'
+- report: Mishapolk/square-packing-records@3285fac
+  url: https://github.com/Mishapolk/square-packing-records/tree/3285facefb2c03deb078dae03d73e3abacf3c6cf
+  reported_at: '2026-10-22T19:29:30Z'
+  holders: Mykhailo Polkovskyi
+  bead: think-ptkk
+  claims:
+  - n: 542
+    printed: '23.813708501269'
+    rounding: up
+    exact: 80868335682754037989/3395873250000000000
+    exact_from: certificates/0000-0999/n542.cert at Mishapolk/square-packing-records@3285facefb2c03deb078dae03d73e3abacf3c6cf
+      (its header)
+  - n: 588
+    printed: '24.813708501269'
+    rounding: up
+    exact: 1554400296756104011543864061115374378213/62642804749506294602268672000000000000
+    exact_from: certificates/0000-0999/n588.cert at Mishapolk/square-packing-records@3285facefb2c03deb078dae03d73e3abacf3c6cf
+      (its header)
+  - n: 590
+    printed: '24.813708501269'
+    rounding: up
+    exact: 1554400296756104011543864061115374378213/62642804749506294602268672000000000000
+    exact_from: certificates/0000-0999/n590.cert at Mishapolk/square-packing-records@3285facefb2c03deb078dae03d73e3abacf3c6cf
+      (its header)
+  - n: 638
+    printed: '25.813708501269'
+    rounding: up
+    exact: 1617043101505610306149528606365374378213/62642804749506294602268672000000000000
+    exact_from: certificates/0000-0999/n638.cert at Mishapolk/square-packing-records@3285facefb2c03deb078dae03d73e3abacf3c6cf
+      (its header)
+  - n: 690
+    printed: '26.813708501269'
+    rounding: up
+    exact: 1679685906255116600755193151615374378213/62642804749506294602268672000000000000
+    exact_from: certificates/0000-0999/n690.cert at Mishapolk/square-packing-records@3285facefb2c03deb078dae03d73e3abacf3c6cf
+      (its header)
+  - n: 847
+    printed: '29.642135626598'
+    rounding: up
+    exact: 402643741788933191861/13583493000000000000
+    exact_from: certificates/0000-0999/n847.cert at Mishapolk/square-packing-records@3285facefb2c03deb078dae03d73e3abacf3c6cf
+      (its header)
+  note: 'A publication in Mykhailo Polkovskyi''s watched repository, dated by its commit, or by the push
+    that made it public; transcribed from the mishapolk-issue732-f1ceee4-2026-10-23 packet''s receipts
+    (source-history.json through f1ceee4 and later-commits.json after it) at each count #763 claims where
+    it states a side strictly below the start, at the least side the commit states there. Its verdicts
+    at 6 counts are decided only against held publications (beyond_horizon_replay.WALKS[''upper-bounds-issue763-20261024''].resting):
+    4 against index deletion bounds and 2 against constructions with no certificate file. An answer that
+    leaves a hold out reruns this walk.'
+rulings:
+- ruling: restatement
+  decided: '2026-10-23'
+  bead: think-fwa9
+  through: 1024
+- ruling: classical-constructions
+  decided: '2026-10-23'
+  bead: think-8krd
+  through: 1024

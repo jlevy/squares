@@ -70,6 +70,7 @@ from devtools.migrate_math import plain
 from devtools.profile_links import link_prose
 from devtools.render_overview import (
     N11_LOWER_BOUNDS_EXPLAINER,
+    NAVIGATION_SCRIPT,
     PAPER_TYPE_CSS,
     PAPERS_ROOT,
     SITE_NAV,
@@ -84,6 +85,8 @@ from devtools.render_overview import (
     paper_path,
 )
 from devtools.repo_links import repo_url
+from devtools.site_icons import GITHUB_ICON_INPUTS
+from devtools.site_navigation import breadcrumbs_html
 from sqpack.fractional.certificate import (
     Certificate,
     closed_form_conditions,
@@ -137,6 +140,7 @@ INLINE_SCRIPT_ASSETS = {
     "FINISH_MATH": EXPLAINER_SCRIPTS / "finish-math.js",
     "SITE_EMBED": PACKING / "devtools" / "overview" / "embed.js",
     "SITE_THEME": PACKING / "devtools" / "overview" / "theme.js",
+    "SITE_NAVIGATION": NAVIGATION_SCRIPT,
     "SITE_HEADROOM": PACKING / "devtools" / "overview" / "headroom.js",
     "SITE_TOOLTIPS": PACKING / "devtools" / "overview" / "rating-tooltips.js",
 }
@@ -419,8 +423,9 @@ def edition_file(path: Path) -> str:
     The verifiable-claim documents and the proof card are generated, committed, and
     compared byte for byte with a fresh render, and they are not site pages: each pins
     the verifier and the evidence a reported run used, so their links name
-    `sqpack.release.PUBLICATION_REVISION`, a commit on `main` that is bumped when an
-    edition is cut. Every link on the site itself names `main` (`repo_links`).
+    `sqpack.release.PUBLICATION_REVISION`, a commit on `main` that each site edition
+    used to move and that is frozen since site editions were retired on 22 October 2026
+    (think-wdqo). Every link on the site itself names `main` (`repo_links`).
     """
     return repo_url(path, ref=PUBLICATION_REVISION)
 
@@ -725,6 +730,9 @@ def kpress_css(static: Path, faces: FaceSink = inline_face) -> str:
         # Each stylesheet resolves its own references, from its own directory, so
         # a kpress stylesheet added outside `css/` would still find its faces.
         parts.append(resolve_font_urls(pruned, (static / name).parent, faces))
+    from devtools.site_icons import github_link_css  # noqa: PLC0415
+
+    parts.append(github_link_css())
     return "\n".join(parts)
 
 
@@ -2654,12 +2662,13 @@ def shell_substitutions(static: Path, shared: dict[str, str], body: str) -> dict
         },
         "KPRESS_CLIENT_SCRIPT": kpress_client_js(static),
         "SITE_NAV_CSS": SITE_NAV_CSS.read_text(encoding="utf-8"),
-        "SITE_NAV": nav_html("papers", root=SITE_ROOT),
+        "SITE_NAV": nav_html(SITE_PATH, root=SITE_ROOT)
+        + breadcrumbs_html(SITE_PATH, TITLE, root=SITE_ROOT),
         # A paper's closing credit carries no version: its own is in its credits, and
         # the site's goes on no paper.
         "COLOPHON": colophon_lines(edition=""),
         **shared,
-        "BODY_HTML": link_prose(body, prefix=SITE_ROOT),
+        "BODY_HTML": link_prose(body, prefix=SITE_ROOT, full_names=True),
     }
 
 
@@ -2930,6 +2939,7 @@ RENDER_INPUTS = (
     THRESHOLD_CASE,
     Path(__file__),
     PACKING / "devtools/site_assets.py",
+    *GITHUB_ICON_INPUTS,
     EXPLAINER_SCRIPTS,
     # The front of the paper is written by the component both papers share.
     PACKING / "devtools" / "paper_front.py",
@@ -2954,6 +2964,8 @@ RENDER_INPUTS = (
     MARKDOWN,
     SITE_NAV,
     SITE_NAV_CSS,
+    NAVIGATION_SCRIPT,
+    PACKING / "devtools/site_navigation.py",
     INLINE_SCRIPT_ASSETS["SITE_HEADROOM"],
     INLINE_SCRIPT_ASSETS["SITE_TOOLTIPS"],
     PAPER_TYPE_CSS,

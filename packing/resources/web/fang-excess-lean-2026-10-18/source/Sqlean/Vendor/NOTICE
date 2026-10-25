@@ -1,0 +1,7 @@
+Spec.lean and ExactPack.lean in this directory are taken from Evan Daniel's
+https://github.com/evand/square-packing, commit 29d0cee87c1d717f7b4497b8fb0ee17ac9d0087d,
+directory lean/Sqpack/, under the MIT License (LICENSE-evand, copied from the repository root,
+Copyright (c) 2026 Evan Daniel).
+
+Changes: ExactPack.lean's `import Sqpack.Spec` became `import Sqlean.Vendor.Spec`. Nothing else
+was modified; the namespace `UnitSquarePacking` is kept.

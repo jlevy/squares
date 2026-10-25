@@ -1,0 +1,28 @@
+{
+ "kind": "review-2026-10-23-n31-net/v1",
+ "status": "NET_COVERS",
+ "checks": {
+  "last_tangent_past_tan_pi_8": true,
+  "last_bin_reaches_past_tan_pi_8": true,
+  "bins_abut": true,
+  "bin_0_starts_at_0": true,
+  "core_strictly_inside_at_every_bin_end": true,
+  "uniform_bound_B_1_plus_2z_at_most_B_1_plus_D": true,
+  "every_a_j_below_tan_pi_8": true,
+  "per_bin_domain_nonempty": true,
+  "quarter_turn_images_tile_domain_at_every_node": true
+ },
+ "facts": {
+  "largest_extent": "500400014977/500400085000",
+  "largest_extent_margin": "70023/500400085000",
+  "largest_extent_at": [
+   0,
+   "1/10004"
+  ],
+  "least_domain_width": "42801606283/9379557200"
+ },
+ "program_sha256": "80e48ff755fff04270a49f0092f48c6efff4177c6cb0873f4e9682ad8ef0ca3e",
+ "module_sha256": "ddb9655ed8cd95a74dc5c32b51844ce2f91671f631d88fc16efdbfa01b1c11dc",
+ "candidate_sha256": "4a7df269037a6449ba2d4bee2b6a76962df097c1515025545d4ca4cfcc39be3b",
+ "cpu_seconds": 0.311
+}

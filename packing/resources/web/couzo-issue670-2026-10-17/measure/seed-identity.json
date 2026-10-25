@@ -1,0 +1,119 @@
+{
+ "format": "couzo-670-seed-identity-v1",
+ "comments": {
+  "670": "https://github.com/jlevy/squares/issues/670#issuecomment-6375905012",
+  "675": "https://github.com/jlevy/squares/issues/675#issuecomment-6375912099"
+ },
+ "digests": [
+  {
+   "file": "70a033f certificates/square-204.cert",
+   "packet": "mishapolk-kkt-refinements-2026-10-14",
+   "path": "certificates/square-204.cert",
+   "printed_prefix": "f0885fa8",
+   "recorded_sha256": "f0885fa8498cc2575aefcbb6fb7771006386b87e45a00c2f515e34065d215b40",
+   "matches": true
+  },
+  {
+   "file": "4e4c8ce n204.txt",
+   "packet": "couzo-index-2026-10-15",
+   "path": "n204.txt",
+   "printed_prefix": "3e7c2456",
+   "recorded_sha256": "3e7c245696ee8c25d639bcf90cef7524ac2ba959350baf34639065ca6e8734a3",
+   "matches": true
+  },
+  {
+   "file": "#670 certificates/n204.cert",
+   "packet": "couzo-issue670-2026-10-17",
+   "path": "certificates/n204.cert",
+   "printed_prefix": "f317d0c0",
+   "recorded_sha256": "f317d0c0b04b947b9199ed47c998ff221d05e4d01849b942545364a173bc73dc",
+   "matches": true
+  },
+  {
+   "file": "#675 certificates/best/n204.cert",
+   "packet": "couzo-issue675-2026-10-18",
+   "path": "certificates/best/n204.cert",
+   "printed_prefix": "761af9ec",
+   "recorded_sha256": "761af9ec961d812a313b9b119845af6f8d2befa79ca770d0d919a09673a97543",
+   "matches": true
+  },
+  {
+   "file": "4e4c8ce certificates/best/n204.cert as 70a033f square-204.cert",
+   "packet": "couzo-index-2026-10-15",
+   "path": "certificates/best/n204.cert",
+   "recorded_sha256": "f0885fa8498cc2575aefcbb6fb7771006386b87e45a00c2f515e34065d215b40",
+   "matches": true
+  }
+ ],
+ "t186_side": {
+  "exact": "740433161719347828316145172430104761481126338872178671530915993369069066972891707484286255665843382616078162213/50000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+  "printed_in_comment": "14.80866323438695656632",
+  "prefix_matches": true
+ },
+ "seed": {
+  "source": "franciscouzo/square-packing@4e4c8ce23cb5e87f033021687010992c40575480:n204.txt",
+  "sha256": "3e7c245696ee8c25d639bcf90cef7524ac2ba959350baf34639065ca6e8734a3",
+  "squares": 204,
+  "printed_side": "14808663234389741/1000000000000000",
+  "printed_side_above_t186": "2.784434e-12",
+  "printed_side_above_t186_exact": "139221683854827569895238518873661127821328469084006630930933027108292515713744334156617383921837787/50000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+  "reader": "upper_bound_reports calle-txt, half_angle_places 40",
+  "read_side_is_printed": true
+ },
+ "pairs": [
+  {
+   "n": 204,
+   "view": "4e4c8ce n204.txt",
+   "against": "T-186 (70a033f square-204.cert)",
+   "side_difference": "2.784434e-12",
+   "side_difference_exact": "139221683854827569895238518873661127821328469084006630930933027108292515713744334156617383921837787/50000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+   "nearest_centre": {
+    "one_to_one": true,
+    "symmetry": 0,
+    "largest_displacement": "3.936016e-12",
+    "largest_turn_degrees": "2.807e-15",
+    "moved_beyond": {
+     "1e-9": 0,
+     "1e-6": 0,
+     "1e-3": 0,
+     "1e-2": 0,
+     "1e-1": 0
+    },
+    "turned_beyond_1e-6": 0
+   },
+   "assignment": {
+    "symmetry": 0,
+    "largest_move": "3.93528e-12",
+    "moved_beyond": {
+     "1e-9": 0,
+     "1e-6": 0,
+     "1e-3": 0,
+     "1e-2": 0,
+     "1e-1": 0
+    },
+    "largest_turn_degrees": "2.807e-15",
+    "turned_beyond_1e-6": 0
+   }
+  }
+ ],
+ "checker_call": {
+  "#670": {
+   "valid": true,
+   "container_contacts": 32,
+   "touching_pairs": 0,
+   "strict_pairs": 2608,
+   "pairs_tested": 2608,
+   "failures": 0,
+   "reported_container_contacts": 32
+  },
+  "#675": {
+   "valid": true,
+   "container_contacts": 88,
+   "touching_pairs": 0,
+   "strict_pairs": 2622,
+   "pairs_tested": 2622,
+   "failures": 0,
+   "reported_container_contacts": 88
+  }
+ }
+}

@@ -39,11 +39,16 @@ The sources, one section of the report each:
   command reads, with the day each was last reviewed.
 - **Record-side queues**: counts pending catalogue intake, deferred conflicts, the
   results and asks queued on open issues (each needs its own bead; the answer bead owns
-  the reply, not the import), triage and replies owed, and the validation backlog.
+  the reply, not the import), triage and replies owed, the questions awaiting an author
+  that hold an issue open (the answer bead owns them; one awaited longer than
+  `AWAITED_DAYS` is listed for a decision), every closeable issue still open, each issue
+  held for the owner (listed for the owner: no pass posts on it or closes it), and the
+  validation backlog.
 - **Regularization owed**: from `atlas/known-best/default-drawings.json`, each count
   whose drawing is `pending` regularization, with the bead its
   `default_drawings.PENDING_ALLOWED` entry names; each decision that still owes runs or
-  an outcome, and each exemption, with its bead; and whatever else the records tier's
+  an outcome, each count whose regularization is owed (`regularization-owed`), and each
+  exemption, with its bead; and whatever else the records tier's
   regularization-state gate fails on. Every new house leaves its count pending until the
   strong generators decide it or a bead owns the runs, so this is where a pass sees what
   its adoptions owe (`campaign/result-import.md`, Adopt a House, Then Regularize It).
@@ -57,9 +62,15 @@ The sources, one section of the report each:
   labelled `result-import` first, so the open ones are listed as the bead queue.
 
 An item **needs action** when the record is behind a source and no open bead owns the
-difference, when the bead a deferral names is no longer open, or when a wait's blocker
-has resolved. The command then exits 1. Items an open bead owns, the backlog and the bead
-queue are listed and do not fail it. A source this run could not read is listed under
+difference, when the bead a deferral names is no longer open, when a wait's blocker
+has resolved, or when an open issue is closeable: settled, with nothing its author asked
+for queued and no question awaiting the author's answer, so its final comment and close
+are owed (`campaign/result-import.md`, stage 7). The owner's instruction of 23 October
+2026 put that last one here, after twelve closeable issues were found open with nothing
+listing them; where GitHub already shows such an issue closed, the step is to record the
+close, not to post it again. The command then exits 1. Items an open bead owns, an issue
+held for the owner, a question awaited for a decision, the backlog and the bead queue are
+listed and do not fail it. A source this run could not read is listed under
 **Not Checked**, so a quiet report is not mistaken for a clean one.
 
 Usage, from `packing/`, or `make intake` at the root, which captures the catalogue first::
@@ -108,11 +119,20 @@ WATCH = ROOT / "campaign" / "intake-watch.yaml"
 PACKETS = ROOT / "resources" / "web"
 
 NEEDS_OWNER = "needs an owner"
+#: An open issue `check_requests` derives closeable: its final comment and close are owed.
+CLOSEABLE = "closeable, still open"
 RESOLVED = "blocker resolved"
 OWNED = "owned"
 LISTED = "listed"
-#: The states that make the sweep exit 1: work nobody owns, or a wait that is over.
-ACTION = frozenset({NEEDS_OWNER, RESOLVED})
+#: A question to an author awaited longer than `AWAITED_DAYS`: listed for a decision to
+#: chase it, withdraw it with a note, or keep waiting. It does not fail the sweep.
+STALE = "awaited, for a decision"
+#: How long a question may await its author before the sweep lists it for a decision
+#: (review A9 of #747: #470's question had waited since 12 October, listed as owned).
+AWAITED_DAYS = 14
+#: The states that make the sweep exit 1: work nobody owns, a wait that is over, or an
+#: issue owed its close.
+ACTION = frozenset({NEEDS_OWNER, RESOLVED, CLOSEABLE})
 
 #: The register's roles for a source that publishes many results and is read as a whole.
 CATALOGUE_ROLES = frozenset({"current-catalogue", "first-party-release"})
@@ -421,7 +441,25 @@ def _github_step(difference: str) -> str:
         return "read it: map any result it reports, then move the entry's read_through"
     if "reply missing" in difference:
         return "record the reply under the issue's replies"
+    if _CLOSED_THERE.match(difference):
+        return (
+            "record the close: the final comment under replies as final, and the entry's "
+            "state and closed; post nothing"
+        )
     return "reconcile result-requests.yaml with the issue"
+
+
+#: How `check_requests.compare_github` says an issue open in the record is closed there.
+_CLOSED_THERE = re.compile(r"#(\d+) is closed there and open here$")
+
+
+def closed_on_github(section: Section) -> frozenset[int]:
+    """The issues the GitHub section found closed there and open in the record."""
+    return frozenset(
+        int(match.group(1))
+        for item in section.items
+        if (match := _CLOSED_THERE.match(item.what)) is not None
+    )
 
 
 # -- Watched repositories -------------------------------------------------------------
@@ -556,7 +594,8 @@ class RepoHistory:
     `count` commits, dated `first` to `last`, are past every pin and read in the head's
     history (`pins_in_history` of them are in it). `unretained` are commits the pins
     already contain whose changes no packet at or after them retains and no read covers,
-    each as its short id and subject.
+    each as its short id and subject. `held_by_head_read` are those `unretained` would
+    list without a read through the head: what that read covers and no packet retains.
     """
 
     count: int
@@ -565,6 +604,7 @@ class RepoHistory:
     subjects: tuple[str, ...]
     pins_in_history: int
     unretained: tuple[str, ...] = ()
+    held_by_head_read: tuple[str, ...] = ()
 
 
 def read_history(
@@ -601,13 +641,20 @@ def read_history(
         stops = sorted({packet.pin for packet in pinned} | set(read))
         listed = git("log", "--format=%cI%x09%s", head, "--not", *stops, "--")
         lines = [line.split("\t", 1) for line in listed.splitlines() if "\t" in line]
+        unretained = _unretained(git, pinned, read)
+        held: tuple[str, ...] = ()
+        if head in read and any(packet.pin == head for packet in pinned):
+            # A read through the head covers every commit the pins reach, so `unretained`
+            # is empty here, and what the history lists without it is what it alone holds.
+            held = _unretained(git, pinned, [commit for commit in read if commit != head])
         return RepoHistory(
             count=len(lines),
             first=lines[-1][0][:10] if lines else "",
             last=lines[0][0][:10] if lines else "",
             subjects=tuple(subject for _, subject in lines[:3]),
             pins_in_history=len({packet.pin for packet in pinned}),
-            unretained=_unretained(git, pinned, read),
+            unretained=unretained,
+            held_by_head_read=held,
         )
 
 
@@ -700,11 +747,12 @@ def repositories_section(
         matching = [r for r in reads.get(key, ()) if str(r["read_through"]) == head]
         if head in entry.pins:
             current += 1
-            section.notes.extend(
-                f"{entry.url}: a packet now pins {head[:12]}, so intake-watch.yaml's read of "
-                "it can be removed."
-                for _ in matching
-            )
+            # With no history read, nothing says whether the read can go.
+            if isinstance(commits, RepoHistory):
+                section.notes.extend(
+                    _pinned_read_note(entry.url, head, commits.held_by_head_read)
+                    for _ in matching
+                )
         elif matching:
             section.items.extend(_read_item(entry.url, head, read, beads) for read in matching)
         else:
@@ -713,6 +761,24 @@ def repositories_section(
             section.items.append(_unretained_item(entry.url, commits.unretained))
     section.notes.insert(0, f"{current} of {len(repos)} heads are a commit a packet pins.")
     return section
+
+
+def _pinned_read_note(url: str, head: str, held: Sequence[str]) -> str:
+    """Whether a read through a pinned head can go: only when the history read without it
+    finds no commit left unretained (think-bspk). A packet that pins the head can retain
+    part of its tree, and the read is then what covers the rest."""
+    if not held:
+        return (
+            f"{url}: a packet now pins {head[:12]}, so intake-watch.yaml's read of it can "
+            "be removed."
+        )
+    count = len(held)
+    shown = "; ".join(held[:3]) + ("; …" if count > 3 else "")
+    return (
+        f"{url}: a packet pins {head[:12]}, but intake-watch.yaml's read of it stays: "
+        f"{count} commit{'' if count == 1 else 's'} it covers "
+        f"change{'s' if count == 1 else ''} paths no packet retains: {shown}"
+    )
 
 
 def _try(function: Callable[[str], str]) -> Callable[[str], str | Exception]:
@@ -894,7 +960,9 @@ def queues_section(
     *,
     today: date,
     blockers: Blockers,
+    closed_there: frozenset[int] = frozenset(),
 ) -> Section:
+    """The record's own queues. `closed_there` is the open issues GitHub shows closed."""
     section = Section("Record-side queues")
     for entry in coverage.get("pending_catalogue_intake") or ():
         section.items.append(
@@ -947,12 +1015,19 @@ def queues_section(
                         since=str(issue["opened"]),
                     )
                 )
+        section.items.extend(
+            _awaited(issue, question, beads, today)
+            for question in check_requests.awaited(issue)
+        )
         state = check_requests.issue_state(issue, register)
         owed = [
             *(["triage"] if issue["triage"] == "pending" else []),
             *(["a reply"] if state.replies_due else []),
         ]
-        if owed:
+        hold = check_requests.held(issue)
+        if hold is not None:
+            section.items.append(_held(issue, hold, owed, state, beads))
+        elif owed:
             section.items.append(
                 owned(
                     f"#{number} owes {' and '.join(owed)}",
@@ -962,7 +1037,101 @@ def queues_section(
                     step="triage by stage 1; draft the reply with check_requests --draft",
                 )
             )
+        if state.closeable:
+            section.items.append(_closeable(issue, beads, closed_there=number in closed_there))
     return section
+
+
+def _asked_on(issue: Mapped, url: str) -> str:
+    """The date of the recorded reply at `url`, or the issue's own when none is."""
+    dates = [str(reply["date"]) for reply in issue.get("replies") or () if reply["url"] == url]
+    return dates[0] if dates else str(issue["opened"])
+
+
+def _awaited(issue: Mapped, question: Mapped, beads: Beads | None, today: date) -> Item:
+    """A question awaiting the author, owned by the answer bead; one awaited longer than
+    `AWAITED_DAYS` is listed for a decision instead, so it does not wait indefinitely."""
+    asked = _asked_on(issue, str(question["asked"]))
+    item = owned(
+        f"#{issue['number']} awaits the author ({question['changes']}): {question['question']}",
+        str(issue["answer_bead"]),
+        beads,
+        since=asked,
+        step="read the answer into the record, or withdraw the question with a note",
+    )
+    try:
+        days = (today - date.fromisoformat(asked[:10])).days
+    except ValueError:
+        return item
+    if item.state != OWNED or days <= AWAITED_DAYS:
+        return item
+    return replace(
+        item,
+        what=f"{item.what} (awaited {days} days)",
+        state=STALE,
+        step=(
+            "decide: chase the author, withdraw the question with a note (a measurement "
+            "here may settle it), or keep waiting"
+        ),
+    )
+
+
+def _held(
+    issue: Mapped,
+    hold: Mapped,
+    owed: Sequence[str],
+    state: check_requests.IssueState,
+    beads: Beads | None,
+) -> Item:
+    """An issue held for the owner: listed for the owner, never as a reply or close owed.
+
+    What a pass would otherwise owe it is named, for the owner to decide; nothing is
+    posted on it or closed while the hold stands (review A1 of #747).
+    """
+    unheld = {key: value for key, value in issue.items() if key != "held"}
+    settled, _ = check_requests.closeable(unheld, state.results)
+    would = [*owed, *(["its close"] if settled else [])]
+    alias = str(issue["answer_bead"])
+    return Item(
+        f"#{issue['number']} is {check_requests.hold_text(hold)}"
+        + (f" ({' and '.join(would)} otherwise owed)" if would else "")
+        + ": listed for the owner, nothing posted or closed",
+        LISTED,
+        alias,
+        beads.state(alias) if beads is not None else "unconfirmed: no bead store",
+        since=str(hold["since"]),
+        step=f"for the owner: {hold['note']}",
+    )
+
+
+def _closeable(issue: Mapped, beads: Beads | None, *, closed_there: bool = False) -> Item:
+    """An open issue that is closeable, owed its final comment and close (stage 7).
+
+    It needs action whoever owns it: every result is settled, nothing its author asked for
+    is queued and no question awaits the author, so nothing but the close is left. Where
+    GitHub already shows the issue closed (`closed_there`), the close was posted and the
+    record lacks it, so the step is to record it, not to post a second final comment.
+    """
+    alias = str(issue["answer_bead"])
+    replies = issue.get("replies") or ()
+    number = issue["number"]
+    return Item(
+        f"#{number} is closed on GitHub and open in the record"
+        if closed_there
+        else f"#{number} is closeable and still open",
+        CLOSEABLE,
+        alias,
+        beads.state(alias) if beads is not None else "unconfirmed: no bead store",
+        since=str(replies[-1]["date"]) if replies else str(issue["opened"]),
+        step=(
+            "post nothing: record the final comment under replies as final, and the "
+            "entry's state and closed"
+            if closed_there
+            else "check GitHub, main and the deployed site; if the issue is still open "
+            "there, post the final comment from check_requests --draft N and close it; "
+            "then record the reply and the close"
+        ),
+    )
 
 
 def _queued(
@@ -1095,6 +1264,7 @@ def _regularization_owed(
     rows = document.get("states") or []
     pending: list[Item] = []
     decided: list[Item] = []
+    owing: list[Item] = []
     exempt: list[Item] = []
     itemized: set[int] = set()
     for row in rows:
@@ -1131,6 +1301,16 @@ def _regularization_owed(
                     step="run or record what the decision owes, then drop its `owed`",
                 )
             )
+        elif row["state"] == default_drawings.OWED and held is not None and held.owed:
+            bead, owed = _owner(held.owed)
+            owing.append(
+                owned(
+                    f"n = {n} not regularized on its witness, regularization owed: {owed}",
+                    bead,
+                    beads,
+                    step="run the regularization its bead owes, then settle the count again",
+                )
+            )
         elif row["state"] == default_drawings.EXEMPT and held is not None:
             found = default_drawings.BEAD.search(held.evidence)
             exempt.append(
@@ -1141,7 +1321,7 @@ def _regularization_owed(
                     step="decide it once its bead's blocker is resolved",
                 )
             )
-    section.items.extend([*pending, *decided, *exempt])
+    section.items.extend([*pending, *decided, *owing, *exempt])
     problems, listed = gate
     itemized_problem = re.compile(r"n=(\d+)(?: is pending:|: PENDING_ALLOWED names no bead)")
     for problem in problems:
@@ -1271,14 +1451,23 @@ def sweep(
     register = check_requests.load_register()
     blockers = Blockers(beads, None if offline else fetch)
     repository = str(record["repository"])
+    github = github_section(record, offline=offline, compare_github=compare_github)
     return [
-        github_section(record, offline=offline, compare_github=compare_github),
+        github,
         repositories_section(
             coverage, watch, beads, offline=offline, heads=heads, history=history
         ),
         kingbird_section(coverage, beads, today, capture=capture),
         catalogues_section(coverage, today),
-        queues_section(coverage, record, register, beads, today=today, blockers=blockers),
+        queues_section(
+            coverage,
+            record,
+            register,
+            beads,
+            today=today,
+            blockers=blockers,
+            closed_there=closed_on_github(github),
+        ),
         regularization_section(beads),
         blocked_section(beads, blockers, repository),
         backlog_section(record, register, beads),
@@ -1302,11 +1491,14 @@ def markdown(sections: Sequence[Section], today: date) -> str:
     """The report: what needs action and what was not checked first, then each source."""
     action = [(s.title, i) for s in sections for i in s.items if i.state in ACTION]
     orphans = sum(item.state == NEEDS_OWNER for _, item in action)
+    resolved = sum(item.state == RESOLVED for _, item in action)
+    closeable = sum(item.state == CLOSEABLE for _, item in action)
     owned_count = sum(item.state == OWNED for s in sections for item in s.items)
     unchecked = [line for section in sections for line in section.unchecked]
     summary = (
         f"{_count(orphans, 'item')} without an open bead to own it, "
-        f"{_count(len(action) - orphans, 'item')} whose blocker has resolved, "
+        f"{_count(resolved, 'item')} whose blocker has resolved, "
+        f"{_count(closeable, 'closeable issue')} still open, "
         f"{_count(owned_count, 'item')} owned by an open bead, and "
         f"{_count(len(unchecked), 'source')} not checked."
     )

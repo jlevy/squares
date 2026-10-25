@@ -280,6 +280,10 @@ The `4e4c8ce` index, not yet recorded (think-yfoo), is smaller in turn at 7 of t
 rows, at 339, 382, 450, 552, 599, 648 and 757, by $2.88 \times 10^{-11}$ to
 $1.13 \times 10^{-3}$ (its exact sides are in
 [couzo-verified-bounds-2026-10-14’s review/goebel-beyond-horizon.json](../couzo-verified-bounds-2026-10-14/review/goebel-beyond-horizon.json)).
+The [history walk of Couzo’s watched publications](../../../campaign/issue-intake/upper-bounds-couzo-history-20261022/README.md)
+records it (couzo-index-2026-10-15), and those 7 rows name it as their successor; the row
+at 409 names Couzo’s `5a299b4` of 20 October, public on 21 October
+(couzo-reconcile-2026-10-20).
 
 ## What Is Not Established
 

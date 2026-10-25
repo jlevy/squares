@@ -1,6 +1,6 @@
 """The other projects' order, their tallies of results, and the links the tallies carry.
 
-The overview and profile resources rank catalogues, repositories and websites together
+The directory and profile resources rank catalogues, repositories and websites together
 by the significance of the primary results the register attributes to each. A card
 with registered results ends with a tally, `6 results (3 at S4, 3 at
 S3)`, whose total opens the results table on that project's results and whose counts
@@ -50,7 +50,7 @@ from tests import site_renders
 PROBES = Path(__file__).resolve().parent / "probes"
 PRESETS = probe(PROBES, "site_result_filters/presets")
 LEVELS = (5, 4, 3, 2, 1)
-SECTION = 'id="other-square-packing-projects"'
+SECTION = 'id="resources"'
 
 
 def _order(results: list[Cited], projects: str) -> str:
@@ -116,7 +116,7 @@ def test_projects_level_on_every_count_stand_newest_first_then_by_name() -> None
     assert project_order(tallies, renamed) == ["c", "a", "b", "d", "Y", "z"]
 
 
-@pytest.mark.parametrize("on_profile", [False, True], ids=["homepage", "profile"])
+@pytest.mark.parametrize("on_profile", [False, True], ids=["directory", "profile"])
 def test_shared_resource_cards_rank_every_kind_and_ignore_inventory_order(
     monkeypatch: pytest.MonkeyPatch, *, on_profile: bool
 ) -> None:
@@ -198,13 +198,16 @@ def test_project_bylines_link_known_people_and_keep_organizations_plain(
     )
     monkeypatch.setattr(overview_sections, "public_index", lambda: index)
     assert overview_sections.project_author("Nate Chaoweeraprasit") == (
-        'By <a href="profiles/nate-chaoweeraprasit.html">Chaoweeraprasit</a>'
+        'By <a href="profiles/nate-chaoweeraprasit.html" '
+        'data-profile-name="full">Nate Chaoweeraprasit</a>'
     )
     assert overview_sections.project_author("Mishapolk") == (
-        'By <a href="profiles/mykhailo-polkovskyi.html">Polkovskyi</a>'
+        'By <a href="profiles/mykhailo-polkovskyi.html" '
+        'data-profile-name="full">Mykhailo Polkovskyi</a>'
     )
     assert overview_sections.project_author("Ke Wang and Can Li") == (
-        'By <a href="profiles/ke-wang.html">Wang</a> and <a href="profiles/can-li.html">Li</a>'
+        'By <a href="profiles/ke-wang.html" data-profile-name="full">Ke Wang</a> '
+        'and <a href="profiles/can-li.html" data-profile-name="full">Can Li</a>'
     )
     assert overview_sections.project_author("PingYou Ltd") == "By PingYou Ltd"
     assert overview_sections.project_author("Unlisted & Associates") == (
@@ -258,8 +261,11 @@ def test_shared_resources_match_homepage_bylines_and_profile_counts() -> None:
     assert any("/blob/" in record.url for record in xu)
     assert any(record.url == "https://github.com/ry-xu/square_packing" for record in xu)
     gupta = render_contributors.resource_list("siddharth-gupta")
-    assert 'href="profiles/nate-chaoweeraprasit.html">Chaoweeraprasit</a>' in gupta
-    assert 'href="profiles/evan-daniel.html">Daniel</a>' in gupta
+    assert (
+        'href="profiles/nate-chaoweeraprasit.html" data-profile-name="full">Nate '
+        "Chaoweeraprasit</a>" in gupta
+    )
+    assert 'href="profiles/evan-daniel.html" data-profile-name="full">Evan Daniel</a>' in gupta
     assert 'href="profiles/siddharth-gupta.html"' not in gupta
 
 
@@ -313,7 +319,7 @@ def overview() -> overview_data.Overview:
 
 @pytest.fixture(scope="module")
 def page() -> str:
-    return site_renders.html("index.html")
+    return site_renders.html("resources.html")
 
 
 @pytest.fixture(scope="module")
@@ -347,6 +353,15 @@ def project_inputs() -> _ProjectInputs:
     )
 
 
+def _project_address(url: str) -> str:
+    """A source's address as its project's, derived here and not by the page's
+    `source_repository`: a repository's `/tree/…` names the repository, and a gist's
+    pinned revision, its last path segment, names the gist."""
+    address = re.sub(r"/tree/.*", "", url).rstrip("/")
+    gist = re.fullmatch(r"(https://gist\.github\.com/[^/]+/[0-9a-f]+)/[0-9a-f]{40}", address)
+    return gist[1] if gist else address
+
+
 def _attributed(
     overview: overview_data.Overview, url: str, inputs: _ProjectInputs
 ) -> list[overview_data.Result]:
@@ -359,7 +374,7 @@ def _attributed(
         {
             source["source_key"]
             for source in inputs.coverage
-            if re.sub(r"/tree/.*", "", source["url"]).rstrip("/") == url.rstrip("/")
+            if _project_address(source["url"]) == url.rstrip("/")
         }
         | set(overview_sections.PROJECT_EXTRA_KEYS.get(url, ()))
         | {
@@ -547,7 +562,7 @@ def test_each_card_ends_with_its_tally_linked_to_its_results(
             [result.id for result in own], measures, blank_zero=True
         )
         if records:
-            expected += " · " + records
+            expected = records + " · " + expected
         if associations:
             expected += " · " + site_tallies.render_tally(
                 site_tallies.tally_credits(associations, measures, LEVELS), noun="credit"
@@ -596,7 +611,13 @@ def test_a_tally_link_selects_exactly_its_projects_rows(
     assert not re.search(r"<tr id=\"t-\d+\"[^>]*\shidden", results)
     bar = results.split('<div class="site-table-tools site-result-filters">', 1)[1]
     bar = bar.split("</div>", 1)[0]
-    assert bar.count("<label hidden>") == 4
+    preset_labels = re.findall(r"<label hidden>(.*?)</label>", bar)
+    assert {label.split(" <", 1)[0] for label in preset_labels if "data-preset" in label} == {
+        "Project",
+        "At significance",
+        "Added on",
+        "Added since",
+    }
     assert (
         '<label hidden>Project <select data-filter="project" data-bound="has" data-preset>'
         in bar
@@ -673,7 +694,7 @@ def browser() -> Iterator[Any]:
 def site(tmp_path_factory: pytest.TempPathFactory) -> Path:
     """The project catalogue and results page, so a tally link between them works."""
     root = tmp_path_factory.mktemp("site")
-    site_renders.write(root, "index.html", render_overview.RESULTS_PAGE)
+    site_renders.write(root, "resources.html", render_overview.RESULTS_PAGE)
     return root
 
 
@@ -683,7 +704,7 @@ def _follow(browser: Any, site: Path, overview: overview_data.Overview, link: st
     opened = browser.new_page(viewport={"width": 1280, "height": 900})
     noon = datetime.combine(overview_sections.reference_date(overview), time(12))
     opened.clock.set_fixed_time(noon)
-    opened.goto((site / "index.html").as_uri(), wait_until="load")
+    opened.goto((site / "resources.html").as_uri(), wait_until="load")
     target = opened.locator(f'.site-card-foot a[href="{link}"]')
     assert target.count() == 1, link
     target.scroll_into_view_if_needed()
@@ -702,7 +723,7 @@ def test_following_a_cards_links_shows_the_rows_they_count(
     """In Chromium: the total of the first card that has two levels opens the results
     page on exactly that project's rows, with the count saying how many of the register
     they are and the Project control in the bar, naming the project; a level's count
-    opens the same rows at that level alone, with At significance in the bar beside it.
+    opens the same rows at that level alone, with only its visible S segment selected.
     Setting Project back to All takes it out of the bar and shows the other projects'
     rows at that level again."""
     url, tally = next(
@@ -760,10 +781,15 @@ def test_following_a_cards_links_shows_the_rows_they_count(
         assert found["count"] == overview_sections.count_text(len(at_level), total)
         assert [(preset["value"], preset["out"]) for preset in found["presets"]] == [
             (slug, False),
-            (str(level), False),
+            (str(level), True),
             ("", True),
         ]
-        assert found["presets"][1]["choice"] == f"S{level}"
+        assert {
+            int(button.get_attribute("data-site-score") or "0")
+            for button in opened.locator(
+                '[data-site-significance] button[aria-pressed="true"]'
+            ).all()
+        } == {level}
         opened.select_option('select[data-filter="project"]', "")
         cleared = opened.evaluate(PRESETS)
     finally:
@@ -777,7 +803,7 @@ def test_following_a_cards_links_shows_the_rows_they_count(
     assert len(everyone) > len(at_level)
     assert [(preset["value"], preset["out"]) for preset in cleared["presets"]] == [
         ("", True),
-        (str(level), False),
+        (str(level), True),
         ("", True),
     ]
 
@@ -816,4 +842,6 @@ def test_formalization_resource_names_mixed_contributors_without_claiming_author
     assert rendered.startswith("Contributors: ")
     assert "profiles/ctjlewis.html" not in rendered
     assert "profiles/julian-jj.html" in rendered
-    assert "profiles/manasseh-ahmed.html" in rendered
+    assert (
+        'profiles/manasseh-ahmed.html" data-profile-name="full">Manasseh Ahmed</a>' in rendered
+    )

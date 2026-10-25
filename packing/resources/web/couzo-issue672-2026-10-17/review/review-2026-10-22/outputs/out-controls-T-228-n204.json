@@ -1,0 +1,479 @@
+{
+ "label": "T-228@204",
+ "n": 204,
+ "side": "101859759444979981360793459/6878398651426000000000000",
+ "least_wall_clearances": {
+  "x>=0": [
+   "0",
+   "0.000000e+00",
+   48
+  ],
+  "y>=0": [
+   "0",
+   "0.000000e+00",
+   4
+  ],
+  "x<=S": [
+   "0",
+   "0.000000e+00",
+   0
+  ],
+  "y<=S": [
+   "0",
+   "0.000000e+00",
+   48
+  ]
+ },
+ "far_wall": [
+  "x<=S",
+  "0",
+  0
+ ],
+ "near_wall": [
+  "x>=0",
+  "0",
+  48
+ ],
+ "least_pair": [
+  67,
+  72
+ ],
+ "least_gap": [
+  "91398668545939839174110628589699018896483577538074222201412022813501997700048200009403/76102140010047966699726868969732711265961230376239208614690752719502087905913658663636250000000000",
+  "1.200999978895104e-12"
+ ],
+ "best_axis": {
+  "owner": 67,
+  "axis": "u",
+  "vector": [
+   "80849938688311687881/90434777426271844169",
+   "40518346242604330480/90434777426271844169"
+  ],
+  "projection_sign": 1
+ },
+ "mutants": {
+  "F0_side_lowered_by_far_clearance": {
+   "expect": "accept",
+   "margin_expected": "0",
+   "review": {
+    "accepted": true,
+    "routes_agree": true,
+    "Z": {
+     "accepted": true,
+     "wall": "0",
+     "gap": "91398668545939839174110628589699018896483577538074222201412022813501997700048200009403/76102140010047966699726868969732711265961230376239208614690752719502087905913658663636250000000000",
+     "gap_pair": [
+      67,
+      72,
+      0
+     ],
+     "overlaps": 0,
+     "touching": 0,
+     "failures": []
+    },
+    "C": {
+     "accepted": true,
+     "wall": "0",
+     "positive_area_pairs": 0,
+     "touching": 0,
+     "failures": []
+    }
+   },
+   "maintained": {
+    "adapter": "read",
+    "exact_verify": {
+     "passed": true,
+     "wall": "0",
+     "gap": "91398668545939839174110628589699018896483577538074222201412022813501997700048200009403/76102140010047966699726868969732711265961230376239208614690752719502087905913658663636250000000000",
+     "failures": [],
+     "cpu_s": 2.92
+    },
+    "independent": {
+     "passed": true,
+     "wall": "0",
+     "gap": "91398668545939839174110628589699018896483577538074222201412022813501997700048200009403/76102140010047966699726868969732711265961230376239208614690752719502087905913658663636250000000000",
+     "failures": [],
+     "cpu_s": 2.03
+    }
+   },
+   "as_expected": true
+  },
+  "F1_side_lowered_by_far_clearance_plus_1e-30": {
+   "expect": "refuse",
+   "margin_expected": "-1/1000000000000000000000000000000",
+   "review": {
+    "accepted": false,
+    "routes_agree": true,
+    "Z": {
+     "accepted": false,
+     "wall": "-1/1000000000000000000000000000000",
+     "gap": "91398668545939839174110628589699018896483577538074222201412022813501997700048200009403/76102140010047966699726868969732711265961230376239208614690752719502087905913658663636250000000000",
+     "gap_pair": [
+      67,
+      72,
+      0
+     ],
+     "overlaps": 0,
+     "touching": 0,
+     "failures": [
+      "square 0 violates x<=S",
+      "square 4 violates x<=S",
+      "square 11 violates x<=S"
+     ]
+    },
+    "C": {
+     "accepted": false,
+     "wall": "-1/1000000000000000000000000000000",
+     "positive_area_pairs": 0,
+     "touching": 0,
+     "failures": [
+      "square 0 has a corner outside the box",
+      "square 4 has a corner outside the box",
+      "square 11 has a corner outside the box"
+     ]
+    }
+   },
+   "maintained": {
+    "adapter": "read",
+    "exact_verify": {
+     "passed": false,
+     "wall": "-1/1000000000000000000000000000000",
+     "gap": "91398668545939839174110628589699018896483577538074222201412022813501997700048200009403/76102140010047966699726868969732711265961230376239208614690752719502087905913658663636250000000000",
+     "failures": [
+      "('container', 'square 0 violates x<=s')",
+      "('container', 'square 0 violates x<=s')",
+      "('container', 'square 4 violates x<=s')"
+     ],
+     "cpu_s": 3.11
+    },
+    "independent": {
+     "passed": false,
+     "wall": "-1/1000000000000000000000000000000",
+     "gap": "91398668545939839174110628589699018896483577538074222201412022813501997700048200009403/76102140010047966699726868969732711265961230376239208614690752719502087905913658663636250000000000",
+     "failures": [
+      "container penetration -1/1000000000000000000000000000000"
+     ],
+     "cpu_s": 1.97
+    }
+   },
+   "as_expected": true
+  },
+  "N0_moved_to_near_wall_by_clearance": {
+   "expect": "accept",
+   "margin_expected": "0",
+   "review": {
+    "accepted": true,
+    "routes_agree": true,
+    "Z": {
+     "accepted": true,
+     "wall": "0",
+     "gap": "91398668545939839174110628589699018896483577538074222201412022813501997700048200009403/76102140010047966699726868969732711265961230376239208614690752719502087905913658663636250000000000",
+     "gap_pair": [
+      67,
+      72,
+      0
+     ],
+     "overlaps": 0,
+     "touching": 0,
+     "failures": []
+    },
+    "C": {
+     "accepted": true,
+     "wall": "0",
+     "positive_area_pairs": 0,
+     "touching": 0,
+     "failures": []
+    }
+   },
+   "maintained": {
+    "adapter": "read",
+    "exact_verify": {
+     "passed": true,
+     "wall": "0",
+     "gap": "91398668545939839174110628589699018896483577538074222201412022813501997700048200009403/76102140010047966699726868969732711265961230376239208614690752719502087905913658663636250000000000",
+     "failures": [],
+     "cpu_s": 2.95
+    },
+    "independent": {
+     "passed": true,
+     "wall": "0",
+     "gap": "91398668545939839174110628589699018896483577538074222201412022813501997700048200009403/76102140010047966699726868969732711265961230376239208614690752719502087905913658663636250000000000",
+     "failures": [],
+     "cpu_s": 1.92
+    }
+   },
+   "as_expected": true
+  },
+  "N1_moved_to_near_wall_by_clearance_plus_1e-30": {
+   "expect": "refuse",
+   "margin_expected": "-1/1000000000000000000000000000000",
+   "review": {
+    "accepted": false,
+    "routes_agree": true,
+    "Z": {
+     "accepted": false,
+     "wall": "-1/1000000000000000000000000000000",
+     "gap": "91398668545939839174110628589699018896483577538074222201412022813501997700048200009403/76102140010047966699726868969732711265961230376239208614690752719502087905913658663636250000000000",
+     "gap_pair": [
+      67,
+      72,
+      0
+     ],
+     "overlaps": 0,
+     "touching": 0,
+     "failures": [
+      "square 48 violates x>=0",
+      "square 49 violates x>=0",
+      "square 50 violates x>=0"
+     ]
+    },
+    "C": {
+     "accepted": false,
+     "wall": "-1/1000000000000000000000000000000",
+     "positive_area_pairs": 0,
+     "touching": 0,
+     "failures": [
+      "square 48 has a corner outside the box",
+      "square 49 has a corner outside the box",
+      "square 50 has a corner outside the box"
+     ]
+    }
+   },
+   "maintained": {
+    "adapter": "read",
+    "exact_verify": {
+     "passed": false,
+     "wall": "-1/1000000000000000000000000000000",
+     "gap": "91398668545939839174110628589699018896483577538074222201412022813501997700048200009403/76102140010047966699726868969732711265961230376239208614690752719502087905913658663636250000000000",
+     "failures": [
+      "('container', 'square 48 violates x>=0')",
+      "('container', 'square 48 violates x>=0')",
+      "('container', 'square 49 violates x>=0')"
+     ],
+     "cpu_s": 3.81
+    },
+    "independent": {
+     "passed": false,
+     "wall": "-1/1000000000000000000000000000000",
+     "gap": "91398668545939839174110628589699018896483577538074222201412022813501997700048200009403/76102140010047966699726868969732711265961230376239208614690752719502087905913658663636250000000000",
+     "failures": [
+      "container penetration -1/1000000000000000000000000000000"
+     ],
+     "cpu_s": 2.45
+    }
+   },
+   "as_expected": true
+  },
+  "P0_pair_closed_by_gap": {
+   "expect": "accept",
+   "margin_expected": "0",
+   "review": {
+    "accepted": true,
+    "routes_agree": true,
+    "Z": {
+     "accepted": true,
+     "wall": "0",
+     "gap": "0",
+     "gap_pair": [
+      67,
+      72,
+      0
+     ],
+     "overlaps": 0,
+     "touching": 1,
+     "failures": []
+    },
+    "C": {
+     "accepted": true,
+     "wall": "0",
+     "positive_area_pairs": 0,
+     "touching": 1,
+     "failures": []
+    }
+   },
+   "maintained": {
+    "adapter": "read",
+    "exact_verify": {
+     "passed": true,
+     "wall": "0",
+     "gap": "0",
+     "failures": [],
+     "cpu_s": 2.83
+    },
+    "independent": {
+     "passed": true,
+     "wall": "0",
+     "gap": "0",
+     "failures": [],
+     "cpu_s": 1.8
+    }
+   },
+   "as_expected": true
+  },
+  "P1_pair_closed_by_gap_plus_1e-30": {
+   "expect": "refuse",
+   "margin_expected": "-1/1000000000000000000000000000000",
+   "review": {
+    "accepted": false,
+    "routes_agree": true,
+    "Z": {
+     "accepted": false,
+     "wall": "0",
+     "gap": "-1/1000000000000000000000000000000",
+     "gap_pair": [
+      67,
+      72,
+      0
+     ],
+     "overlaps": 1,
+     "touching": 0,
+     "failures": [
+      "squares 67 and 72 overlap"
+     ]
+    },
+    "C": {
+     "accepted": false,
+     "wall": "0",
+     "positive_area_pairs": 1,
+     "touching": 0,
+     "failures": [
+      "squares 67 and 72 overlap with area 1.759e-58"
+     ]
+    }
+   },
+   "maintained": {
+    "adapter": "read",
+    "exact_verify": {
+     "passed": false,
+     "wall": "0",
+     "gap": "-1/1000000000000000000000000000000",
+     "failures": [
+      "('overlap', 'squares 67 and 72 overlap')"
+     ],
+     "cpu_s": 2.87
+    },
+    "independent": {
+     "passed": false,
+     "wall": "0",
+     "gap": "-1/1000000000000000000000000000000",
+     "failures": [
+      "1 overlapping pairs; worst exact gap -1/1000000000000000000000000000000"
+     ],
+     "cpu_s": 2.25
+    }
+   },
+   "as_expected": true
+  },
+  "R1_one_row_dropped": {
+   "expect": "refuse-read",
+   "margin_expected": null,
+   "review": {
+    "reader": "refused: 203 square rows for n = 204"
+   },
+   "maintained": {
+    "adapter": "refused: ReportError: n=204: 203 square rows for n = 204"
+   },
+   "as_expected": true
+  },
+  "R2_decimal_literal": {
+   "expect": "reader-difference",
+   "margin_expected": null,
+   "review": {
+    "reader": "refused: not a rational literal: '14.3086443672267904503314639'"
+   },
+   "maintained": {
+    "adapter": "read",
+    "exact_verify": {
+     "passed": false,
+     "wall": "-25921323887622282012607/34391993257130000000000000000000000000",
+     "gap": "91398668545939839174110628589699018896483577538074222201412022813501997700048200009403/76102140010047966699726868969732711265961230376239208614690752719502087905913658663636250000000000",
+     "failures": [
+      "('container', 'square 0 violates x<=s')",
+      "('container', 'square 0 violates x<=s')"
+     ],
+     "cpu_s": 3.31
+    },
+    "independent": {
+     "passed": false,
+     "wall": "-25921323887622282012607/34391993257130000000000000000000000000",
+     "gap": "91398668545939839174110628589699018896483577538074222201412022813501997700048200009403/76102140010047966699726868969732711265961230376239208614690752719502087905913658663636250000000000",
+     "failures": [
+      "container penetration -25921323887622282012607/34391993257130000000000000000000000000"
+     ],
+     "cpu_s": 1.92
+    }
+   },
+   "as_expected": true
+  }
+ },
+ "pair_mover": 72,
+ "pair_mover_probes_at_gap_plus_1e-30": {
+  "72": [
+   [
+    67,
+    72
+   ]
+  ],
+  "67": [
+   [
+    67,
+    72
+   ]
+  ]
+ },
+ "kernel_run_sharp": {
+  "side-lowered-past-wall-contact (contact)": {
+   "exact_verify": {
+    "passed": true,
+    "wall": "0",
+    "gap": "91398668545939839174110628589699018896483577538074222201412022813501997700048200009403/76102140010047966699726868969732711265961230376239208614690752719502087905913658663636250000000000"
+   },
+   "independent": {
+    "passed": true,
+    "wall": "0",
+    "gap": "91398668545939839174110628589699018896483577538074222201412022813501997700048200009403/76102140010047966699726868969732711265961230376239208614690752719502087905913658663636250000000000"
+   }
+  },
+  "side-lowered-past-wall-contact (contact) as expected": true,
+  "side-lowered-past-wall-contact": {
+   "exact_verify": {
+    "passed": false,
+    "wall": "-1/1000000000000000000000000000000",
+    "gap": "91398668545939839174110628589699018896483577538074222201412022813501997700048200009403/76102140010047966699726868969732711265961230376239208614690752719502087905913658663636250000000000"
+   },
+   "independent": {
+    "passed": false,
+    "wall": "-1/1000000000000000000000000000000",
+    "gap": "91398668545939839174110628589699018896483577538074222201412022813501997700048200009403/76102140010047966699726868969732711265961230376239208614690752719502087905913658663636250000000000"
+   }
+  },
+  "side-lowered-past-wall-contact as expected": true,
+  "tightest-pair-closed-past-contact (contact)": {
+   "exact_verify": {
+    "passed": true,
+    "wall": "0",
+    "gap": "0"
+   },
+   "independent": {
+    "passed": true,
+    "wall": "0",
+    "gap": "0"
+   }
+  },
+  "tightest-pair-closed-past-contact (contact) as expected": true,
+  "tightest-pair-closed-past-contact": {
+   "exact_verify": {
+    "passed": false,
+    "wall": "0",
+    "gap": "-1/1000000000000000000000000000000"
+   },
+   "independent": {
+    "passed": false,
+    "wall": "0",
+    "gap": "-1/1000000000000000000000000000000"
+   }
+  },
+  "tightest-pair-closed-past-contact as expected": true
+ },
+ "kernel_sharp_epsilon": "1/1000000000000000000000000000000"
+}

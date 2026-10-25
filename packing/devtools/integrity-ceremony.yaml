@@ -54,6 +54,31 @@ allowlist:
       row, whose root metadata may describe another file than the certificates/best/ file
       the issue links, is bound to the bytes it is about. The retained certificates are
       read from Git and compared with nothing; their custody is acquire_source --check's.
+      A derived packet (#719's) retains no upstream byte, so `first-commits` and `earlier`
+      read each certificate a row names from a clone of the source and hold its bytes to
+      the SHA-256 the packet's manifest pins before taking its Git blob or header; the
+      derived facts' own custody is devtools.upper_bound_reports'. A certificate the
+      packet pins and does not retain, kept as hosted data (`Release.hosted`), is read
+      from the downloaded shards through devtools.hosted_shards, and the fast check
+      holds the source-history receipt's entry for it to the digest the packet pins.
+      `recipe_pin_problems` holds each recipe's parent digest, as the downloaded index
+      states it, and each stored parent replay's digest to the packet's pin.
+  - path: packing/devtools/construction_checker.py
+    kind: download
+    boundary: >-
+      A source's index (Couzo's certified_bounds.json, as a packet's claim map
+      transcribes it) names each recipe's parent certificate by path and SHA-256;
+      `decide` holds the parent the filtered replay decided, by the digest of the bytes
+      it read, to that stated digest, so a recipe row is bound to the certificate the
+      downloaded index names. One control alters the digest to show the refusal.
+  - path: packing/devtools/hosted_shards.py
+    kind: download
+    boundary: >-
+      Certificates kept as hosted data (OR-18) are downloaded as tar.xz shards whose
+      size and SHA-256 sqpack.hosted_data.require holds to the committed manifest; each
+      member is then held to the SHA-256 the packet's acquisition manifest pinned at
+      review before it is written or read, so the bytes a replay decides are the ones
+      the packet pinned.
   - path: packing/devtools/couzo_715_replay.py
     kind: download
     boundary: >-

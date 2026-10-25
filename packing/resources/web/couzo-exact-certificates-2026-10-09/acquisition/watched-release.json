@@ -1,0 +1,70 @@
+{
+ "format": "beyond-horizon-watched-release-v1",
+ "publication": "https://github.com/franciscouzo/square-packing/tree/02f969075f79d5e13fa21e09e381a44e8647b452",
+ "commit": "02f969075f79d5e13fa21e09e381a44e8647b452",
+ "committed": "2026-10-09T20:28:52Z",
+ "published": "2026-10-09T20:28:52Z",
+ "walk": "upper-bounds-couzo-history-20261022",
+ "rows": [
+  {
+   "n": 332,
+   "certificate": "certificates/n332.cert",
+   "printed": "18.740417287544"
+  },
+  {
+   "n": 336,
+   "certificate": "certificates/n336.cert",
+   "printed": "18.825571499862"
+  },
+  {
+   "n": 337,
+   "certificate": "certificates/n337.cert",
+   "printed": "18.858391767637"
+  },
+  {
+   "n": 338,
+   "certificate": "certificates/n338.cert",
+   "printed": "18.908632939038"
+  },
+  {
+   "n": 339,
+   "certificate": "certificates/n339.cert",
+   "printed": "18.930103647689"
+  },
+  {
+   "n": 340,
+   "certificate": "certificates/n340.cert",
+   "printed": "18.939747870130"
+  },
+  {
+   "n": 341,
+   "certificate": "certificates/n341.cert",
+   "printed": "18.951882408720"
+  },
+  {
+   "n": 373,
+   "certificate": "certificates/n373.cert",
+   "printed": "19.823062082838"
+  },
+  {
+   "n": 374,
+   "certificate": "certificates/n374.cert",
+   "printed": "19.832356217033"
+  },
+  {
+   "n": 377,
+   "certificate": "certificates/n377.cert",
+   "printed": "19.925720814331"
+  },
+  {
+   "n": 378,
+   "certificate": "certificates/n378.cert",
+   "printed": "19.946461040107"
+  },
+  {
+   "n": 379,
+   "certificate": "certificates/n379.cert",
+   "printed": "19.957538882104"
+  }
+ ]
+}

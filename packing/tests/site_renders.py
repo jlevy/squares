@@ -183,7 +183,7 @@ def count_frontier_math(source: str) -> tuple[int, int]:
 @cache
 def frontier_math_counts() -> tuple[int, int]:
     """Native and total formulas from every canonical frontier row and its prose."""
-    return count_frontier_math(html("atlas.html"))
+    return count_frontier_math(html("frontier.html"))
 
 
 def served(name: str) -> str:

@@ -29,7 +29,7 @@ from xml.etree import ElementTree as ET
 
 from devtools import repo_links
 from devtools.artifact_dates import long_date, written_date
-from devtools.check_results import KINDS, kind_label
+from devtools.check_results import KINDS
 from devtools.contributor_credit import occurrence_registry
 from devtools.github_references import parse_github_reference
 from devtools.overview_data import (
@@ -60,10 +60,19 @@ from devtools.render_overview import (
     paper_path,
 )
 from devtools.render_overview import PAPERS as PAPER_RECORDS
-from devtools.render_recent_results import REPORTED_MARK, SUPERSEDED, listed, superseded
+from devtools.render_recent_results import (
+    REPORTED_MARK,
+    SUPERSEDED,
+    Records,
+    lane_holders,
+    listed,
+    load_records,
+    superseded,
+)
 from devtools.repo_links import branch_file
 from devtools.result_status import CONFIRMED, STATUSES, recent_contributions_by_case
 from devtools.site_icons import account_icon, github_reference_icon
+from devtools.site_popovers import popover_controls
 
 # The curated source tuples remain exported here for recorded evidence locators;
 # site_resources owns their shared homepage/profile projection.
@@ -77,14 +86,15 @@ from devtools.site_resources import (
     resources,
 )
 from devtools.site_tallies import (
-    ResultTally as ProjectTally,
-)
-from devtools.site_tallies import (
+    TALLY_SEPARATOR,
     project_credit_associations,
     project_primary_results,
     render_tally,
     tally_credits,
     tally_results,
+)
+from devtools.site_tallies import (
+    ResultTally as ProjectTally,
 )
 from devtools.site_topics import topic_chip, topic_label
 from sqpack import release
@@ -173,7 +183,7 @@ def standing_chip(standing: str, words: str | None = None) -> str:
 def kind_chip(result: Result) -> str:
     """What a result is, as a chip: its `kind` in the rubric's words, `lower bound` or
     `case exclusion` (epistemics.md, Result Kinds). Every result has one; bound kinds
-    use the same semantic hues as the corresponding bounds."""
+    share News topic ink and the neutral topic surface."""
     kind = str(result.record["kind"])
     return topic_chip(kind, attribute="data-kind")
 
@@ -471,8 +481,7 @@ def card(
         f'<span class="site-card-note">{note}</span></button>'
         f'<div class="site-popover" id="{_esc(target)}" popover '
         f'data-go="{kind}">'
-        f'<button type="button" class="site-popover-close" popovertarget="{_esc(target)}" '
-        'popovertargetaction="hide" aria-label="Close">\u00d7</button>'
+        f"{popover_controls(target, destination=(href, action), sprite=True)}"
         f'<span class="site-card-label">{_esc(label)}</span>'
         f'<p class="site-popover-value"{face}>{value}</p>{body}'
         f'<p class="site-popover-actions"><a class="site-popover-action" href="{_esc(href)}" '
@@ -564,6 +573,7 @@ def row_detail(
             f"<noscript>{fallback}</noscript>" if fallback else ""
         )
     fetched = f' data-row-pop-src="{_esc(source)}"' if source else ""
+    controls = popover_controls(target, destination=action, sprite=True)
     target = _esc(target)
     attributes = f'data-row-popover="{target}" aria-label="{_esc(name)}"'
     button = (
@@ -581,8 +591,7 @@ def row_detail(
     popover = (
         f'<div class="site-popover site-row-pop" id="{target}" popover role="dialog" '
         f'aria-labelledby="{target}-title">'
-        f'<button type="button" class="site-popover-close" popovertarget="{target}" '
-        'popovertargetaction="hide" aria-label="Close">\u00d7</button>'
+        f"{controls}"
         f'<span class="site-card-label">{_esc(label)}</span>'
         f'<p class="site-popover-value"{headline_math_face(title)} id="{target}-title">'
         f"{title}</p>"
@@ -883,7 +892,7 @@ def result_filters(
     HTML and starts at all. A link sets them, `results.html?project=…&s=4`, as the
     tallies on the other projects' cards do (`project_tally`), each day of the
     overview's seven does (`?added=2026-10-12`) and its arrival link does
-    (`?added-since=2026-10-06`, `recent_added`), and the script shows a preset control
+    (`?added-since=2026-10-06`), and the script shows a preset control
     while it filters, so the reader sees what narrows the table and can set it back to
     All. A preset value no option offers is kept and applied, so it shows no row.
 
@@ -905,8 +914,26 @@ def result_filters(
     age = "" if defaults.max_age is None else f' value="{defaults.max_age}"'
     hide = " checked" if defaults.hide_superseded else ""
     reference = reference_date(overview)
+    default_scores = {
+        level
+        for level in range(1, 6)
+        if defaults.significance is None or level >= defaults.significance
+    }
+    score_buttons = "".join(
+        f'<button type="button" data-site-score="{level}" '
+        f'aria-pressed="{str(level in default_scores).lower()}" '
+        f'title="{_esc(rung_meanings()[f"S{level}"])}">S{level}</button>'
+        for level in range(1, 6)
+    )
+    significance_choices = (
+        '<fieldset class="site-result-significance"><legend class="site-visually-hidden">'
+        'Significance</legend><span class="site-tabs site-chooser-small" '
+        'role="group" aria-label="Significance" data-site-significance '
+        f'data-default-floor="{floor}">{score_buttons}</span></fieldset>'
+    )
     rungs = "".join(
-        f'<label>{label} <select data-filter="{scale.lower()}" data-bound="min">'
+        f"<label{' hidden' if scale == 'S' else ''}>{label} "
+        f'<select data-filter="{scale.lower()}" data-bound="min">'
         f"{_options(rung_options(scale), floor if scale == 'S' else '')}"
         "</select></label>"
         for scale, label in RUNG_FILTERS
@@ -921,7 +948,7 @@ def result_filters(
     shown = sum(shown_by_default(result, defaults, reference) for result in listed)
     return (
         '<div class="site-table-tools site-result-filters">'
-        f"{rungs}"
+        f"{significance_choices}{rungs}"
         f'<label>Kind <select data-filter="kind">{_options(kinds)}</select></label>'
         f'<label>Status <select data-filter="status">{_options(statuses)}</select></label>'
         f'<label><input type="checkbox" data-filter="current"{hide}> Hide superseded</label>'
@@ -1030,13 +1057,15 @@ def credit_cell(credit: str, markup: str = "") -> str:
     return f'{finder} <span class="site-cell-quiet">after {after}</span>'
 
 
-def date_cell(result: Result, *, recent_label: str = "") -> str:
+def date_cell(
+    result: Result, *, recent_label: str = "", arrival_date: date | None = None
+) -> str:
     """What a result's date cell holds, in both tables of results: the date first, then
     what it dates, `published` or `established`, quiet (`.site-date-kind`). The cell
     sorts and filters on the date alone, its `data-value` and the row's `data-date`.
     A result's overview sets its date, and each date of its chain, with this too
     (`result_overview.head`, `step`), so the order has one definition."""
-    kind, dated = result.dated
+    kind, dated = ("added", arrival_date.isoformat()) if arrival_date else result.dated
     shown = _esc(dated)
     if recent_label:
         shown = f'<span title="{_esc(recent_label)}">{shown}</span>'
@@ -1049,6 +1078,7 @@ def result_cells(
     detail: RowDetail,
     *,
     replacement_dates: Mapping[str, str],
+    arrival_date: date | None = None,
 ) -> str:
     """A result's cells, one for each column of `result_head`, the same on both tables:
     its date (`date_cell`), with a tooltip for a recent result; its significance
@@ -1062,9 +1092,12 @@ def result_cells(
         '<span class="site-standing">'
         f"{status_marks(result, replacement_dates=replacement_dates)}</span>"
     )
+    dated = arrival_date.isoformat() if arrival_date else result.dated[1]
+    date_markup = date_cell(
+        result, recent_label=new_result_label(result, overview), arrival_date=arrival_date
+    )
     return (
-        f'<td class="site-col-date" data-value="{_esc(result.dated[1])}">'
-        f"{date_cell(result, recent_label=new_result_label(result, overview))}</td>"
+        f'<td class="site-col-date" data-value="{_esc(dated)}">{date_markup}</td>'
         f"{significance_cell(result)}"
         f'<td class="site-col-result">{result_text(result)}</td>'
         f'<td class="{case_cell_class(result)}" data-value="{result.first_n}">'
@@ -1086,6 +1119,7 @@ def result_table_row(
     here: bool,
     shown: bool,
     replacement_dates: Mapping[str, str] | None = None,
+    arrival_date: date | None = None,
 ) -> tuple[str, str]:
     """One result's row in a table of results, and the popover the row opens: the one
     row both tables write, the same cells and the same popover. On the results page
@@ -1098,10 +1132,17 @@ def result_table_row(
     starred = bool(new_result_label(result, overview))
     detail = result_row(result, trigger=_esc(result.id), starred=starred)
     key = "id" if here else "data-result"
+    cells = result_cells(
+        result,
+        overview,
+        detail,
+        replacement_dates=replacement_dates,
+        arrival_date=arrival_date,
+    )
     row = (
         f'<tr {key}="{_esc(result.id.lower())}" {result_facets(result)} '
         f"{detail.attributes}{'' if shown else ' hidden'}>"
-        f"{result_cells(result, overview, detail, replacement_dates=replacement_dates)}</tr>"
+        f"{cells}</tr>"
     )
     return row, detail.popover
 
@@ -1195,90 +1236,10 @@ def results_table(overview: Overview, defaults: FilterDefaults = RESULTS_DEFAULT
     return table_of_results(overview, defaults, here=True)
 
 
-# ---------- Recent results: the results page's overview above its table ----------
-#
-# Two parts, both read from the register at render time (`think-2z22`): what the
-# register took in over the last seven days, a block for each day it took anything in and
-# every result of that day at any significance (`recent_added`); and under it the weekly
-# rollup of S3 and above by publication, for the weeks before those days
-# (`recent_rollup`).
+# ---------- Result arrival dates ----------
 
-#: How far back "Added in the Last Seven Days" reaches: every result that reached the
-#: site at most this many days before the newest arrival (`added_since`), which is what
-#: `results.html?added-age=7` shows when read on that day (`age_cutoff`), and what the
-#: arrival link's `?added-since=` shows on any day.
+#: The seven-day arrival filter window used by the results table.
 ADDED_DAYS = 7
-#: The count of days as the section's heading and introduction write it.
-ADDED_DAYS_WORD = {7: "seven"}
-#: How many of the newest day blocks start open; every older block starts closed.
-ADDED_OPEN = 2
-#: The longest list of cases an entry writes whole (`added_cases`). A longer one, T-124's
-#: 178 counts among them, is written as how many and its first and last.
-ADDED_CASES = 40
-#: The id of the table's Browse Results heading, where a filter link lands.
-ALL_RESULTS = "all-results"
-#: The lowest significance the weekly rollup lists: `S3`, "a substantive case result
-#: or machine audit" (epistemics.md, Significance and Novelty), and above. The owner
-#: asked for S3 and above on 2026-10-11 (`think-2z22`).
-ROLLUP_FLOOR = 3
-#: How many calendar weeks the weekly rollup covers before the seven days: about a month.
-ROLLUP_WEEKS = 4
-#: The weekly rollup's count of weeks as its introduction writes it.
-ROLLUP_WEEKS_WORD = {1: "week", 2: "two weeks", 3: "three weeks", 4: "four weeks"}
-#: The bound kinds a line names as nouns of their own; every other kind is "a ... result".
-_KIND_NOUNS = {"lower-bound": "lower bound", "upper-bound": "upper bound"}
-
-
-class RollupCredit(NamedTuple):
-    """One line of a week in the weekly rollup: whose results they are, as the credit
-    line names its finder (`credit_finder`); those results, oldest first; and the listed
-    projects the record attributes any of them to (`finder_projects`), by address."""
-
-    finder: str
-    results: tuple[Result, ...]
-    projects: tuple[str, ...]
-
-
-class RollupWeek(NamedTuple):
-    """One calendar week, from its Monday to `last`, its Sunday or, for a week the
-    seven days above begin inside, the day before they do; and its lines, the most
-    significant first (`rollup_order`)."""
-
-    monday: date
-    last: date
-    credits: tuple[RollupCredit, ...]
-
-    @property
-    def total(self) -> int:
-        """How many results the week lists."""
-        return sum(len(credit.results) for credit in self.credits)
-
-
-class AddedDay(NamedTuple):
-    """One day results reached the site, and every result that arrived that day, the
-    most significant first and then by id (`added_order`)."""
-
-    day: date
-    results: tuple[Result, ...]
-
-
-def credit_finder(credit: str) -> str:
-    """Whose a result is, as a credit line names it: the finder, before any "after …",
-    which names the work it rests on (`credit_cell` sets the two apart the same way)."""
-    return credit.partition(" after ")[0]
-
-
-def week_start(day: date) -> date:
-    """The Monday of `day`'s calendar week, the ISO week (ISO 8601) the rollup groups
-    by."""
-    return day - timedelta(days=day.weekday())
-
-
-def result_day(result: Result) -> date:
-    """The day a result's row shows (`Result.dated`): its publication for a result by
-    others, its establishment for this project's, a year or a month read as its first
-    day (`first_day`). The weekly rollup places a result by it."""
-    return date.fromisoformat(first_day(result.dated[1]))
 
 
 def registered_day(result: Result) -> date:
@@ -1288,28 +1249,55 @@ def registered_day(result: Result) -> date:
 
 
 def landed_day(result: Result) -> date:
-    """The day a result reached `main`, and with it the site, its `landed`: what the seven
-    days group by and the table's Added filters read (`data-added`), as against the day
-    its row shows (`result_day`), which can be years earlier, and the day a lane wrote it
-    (`registered_day`), up to two days before (#514's review A, finding A1). The schema
-    requires it, a lane writes it with the entry, and the merge step re-dates it
-    (`devtools.stamp_landed`); a record without one, as a test's may be, is placed by
-    `registered`."""
+    """The recorded arrival date used by Added filters, falling back to registration.
+
+    This differs from the result's publication date, which may be years earlier.
+    """
     return date.fromisoformat(str(result.record.get("landed") or result.record["registered"]))
 
 
 def added_reference(overview: Overview) -> date:
-    """The newest day a result reached the site: the last day "Added in the Last Seven
-    Days" covers. It is the register's and never the clock's, so a render of one tree is
-    the same bytes on any day, and the page names dates, never "today"."""
+    """The latest recorded arrival, a deterministic reference for date filters."""
     return max(landed_day(result) for result in overview.results)
 
 
-def added_since(overview: Overview, days: int = ADDED_DAYS) -> date:
-    """The first day "Added in the Last Seven Days" covers: `days` before the newest
-    arrival (`added_reference`), the cutoff `?added-age=7` holds a row to when read on
-    that day (`age_cutoff`) and the day the arrival link's `?added-since=` names."""
-    return added_reference(overview) - timedelta(days=days)
+def day_label(day: date) -> str:
+    """A day as its block's summary names it, never relative to the reader's day: `12
+    October 2026`."""
+    return f"{day.day} {day:%B %Y}"
+
+
+# ---------- Recently Added: the home page's last seven days of arrivals ----------
+#
+# The owner, 22 October 2026: "It should be clear if you come to the site and see all
+# the things that have recently merged now." The home page's Recently Added lists what
+# reached `main`, and with it the site, over the newest arrival day and the seven before
+# it (`arrival_reference`, `recent_days`), one disclosure a day, newest first: every
+# result at any significance, by its `landed` (`added_entry`), linked to its row in All
+# Results; each count whose house best packing changed, by the day `main` first held its
+# current house (`house_moves`); and each source's dated beyond-horizon rows, by the day
+# `main` first held them (`beyond_rows`). All three are merge days stamped into the
+# record (`devtools.stamp_landed`, `frontier/landings.yaml`; #736's review A, finding
+# A2), so nothing here reads Git (OR-18) and one window bounds them all (finding A3).
+# The helpers below are the ones the results page's retired day and week blocks shared
+# with this section; #743 removed the rest with those blocks.
+
+#: The longest list of cases an entry writes whole (`added_cases`). A longer one, T-124's
+#: 178 counts among them, is written as how many and its first and last.
+ADDED_CASES = 40
+#: The anchor All Results' table opens on, where a filter link lands (`added_link`).
+ALL_RESULTS = "all-results"
+#: The lowest S rung an entry's score is set in the significance ink for: S4 and S5
+#: (`added_entry`); S3 and below stay plain.
+INKED_SIGNIFICANCE = 4
+
+
+class AddedDay(NamedTuple):
+    """One day results reached the site, and every result that arrived that day, the
+    most significant first and then by id (`added_order`)."""
+
+    day: date
+    results: tuple[Result, ...]
 
 
 def added_order(result: Result) -> tuple[int, str]:
@@ -1333,65 +1321,6 @@ def added_days(results: Iterable[Result], since: date) -> list[AddedDay]:
     ]
 
 
-def finder_projects(results: Iterable[Result]) -> tuple[str, ...]:
-    """The listed projects the record attributes any of `results` to (`result_projects`),
-    by address, the one holding most of them first and the list's order breaking a tie."""
-    held = Counter(slug for result in results for slug in result_projects(result))
-    addresses = {project_slug(url): url for url in project_urls()}
-    # `sorted` is stable, so projects holding as many stay in the list's order.
-    ranked = sorted((slug for slug in addresses if slug in held), key=lambda slug: -held[slug])
-    return tuple(addresses[slug] for slug in ranked)
-
-
-def rollup_order(credit: RollupCredit) -> tuple[int, int, int, str]:
-    """A week's lines in the order the projects' cards take (`project_order`, the owner,
-    2026-10-01): the highest significance first, then more results, then the newest, then
-    by name."""
-    return (
-        -max(significance(result) for result in credit.results),
-        -len(credit.results),
-        -max(result_day(result) for result in credit.results).toordinal(),
-        credit.finder.lower(),
-    )
-
-
-def rollup_weeks(
-    results: Iterable[Result],
-    last: date,
-    *,
-    weeks: int = ROLLUP_WEEKS,
-    floor: int = ROLLUP_FLOOR,
-) -> list[RollupWeek]:
-    """The weekly rollup's weeks, newest first: the `weeks` calendar weeks up to and
-    including `last`'s, the newest ending on `last`, each holding every result at
-    `floor` or above whose row's date falls in it (`result_day`), one line for each
-    finder (`credit_finder`).
-
-    Every result at the floor counts, whatever else is true of it: a superseded one was
-    new in its week, and the line marks it (`rollup_ids`); one pending adoption, one
-    only recorded, and a score that is still the registering lane's draft count as the
-    table shows them. The rows are the register's entries, so a claim outside the case
-    corpus, which the source-coverage register tracks and no entry holds, is in none.
-    """
-    newest = week_start(last)
-    mondays = [newest - timedelta(weeks=back) for back in range(weeks)]
-    found: dict[date, dict[str, list[Result]]] = {monday: {} for monday in mondays}
-    for result in results:
-        day = result_day(result)
-        finders = found.get(week_start(day))
-        if finders is not None and day <= last and significance(result) >= floor:
-            finders.setdefault(credit_finder(result.credit), []).append(result)
-    weekly = []
-    for monday in mondays:
-        lines = []
-        for finder, own in found[monday].items():
-            own.sort(key=lambda result: (result_day(result), result.id))
-            lines.append(RollupCredit(finder, tuple(own), finder_projects(own)))
-        ends = min(monday + timedelta(days=6), last)
-        weekly.append(RollupWeek(monday, ends, tuple(sorted(lines, key=rollup_order))))
-    return weekly
-
-
 def span_label(first: date, last: date) -> str:
     """A run of days as a summary names it, joined by an en dash, closed up within a
     month and spaced across two: `5-11 October 2026`, `28 September - 4 October 2026`
@@ -1406,28 +1335,33 @@ def span_label(first: date, last: date) -> str:
     return f"{first.day}{EN_DASH}{last.day} {last:%B %Y}"
 
 
-def week_label(monday: date) -> str:
-    """A whole week as its summary names it, Monday to Sunday (`span_label`)."""
-    return span_label(monday, monday + timedelta(days=6))
+def counted(count: int) -> str:
+    """A block's count as its summary ends: `1 result`, `14 results`, `no results`."""
+    return f"{count} result{'' if count == 1 else 's'}" if count else "no results"
 
 
-def day_label(day: date) -> str:
-    """A day as its block's summary names it, never relative to the reader's day: `12
-    October 2026`."""
-    return f"{day.day} {day:%B %Y}"
+def tallied_summary(label: str, tally: Sequence[str]) -> str:
+    """A day's summary with its tally (`recent_tally`), each part a count of its own
+    (`.site-rollup-count`): a summary that wraps breaks between parts, never inside
+    one."""
+    counts = " ".join(f'<span class="site-rollup-count">· {part}</span>' for part in tally)
+    return f"<summary><span>{_esc(label)} {counts}</span></summary>"
 
 
-def kind_phrase(results: Sequence[Result]) -> str:
-    """What a line's results are, counted by kind in the rubric's order: `15 lower
-    bounds`, `2 upper bounds and 1 optimality result`."""
-    held = [str(result.record["kind"]) for result in results]
-    parts = []
-    for kind in KINDS:
-        count = held.count(kind)
-        if count:
-            noun = _KIND_NOUNS.get(kind, f"{kind_label(kind)} result")
-            parts.append(f"{count} {noun}{'' if count == 1 else 's'}")
-    return listed(parts)
+def credit_finder(credit: str) -> str:
+    """Whose a result is, as a credit line names it: the finder, before any "after …",
+    which names the work it rests on (`credit_cell` sets the two apart the same way)."""
+    return credit.partition(" after ")[0]
+
+
+def finder_projects(results: Iterable[Result]) -> tuple[str, ...]:
+    """The listed projects the record attributes any of `results` to (`result_projects`),
+    by address, the one holding most of them first and the list's order breaking a tie."""
+    held = Counter(slug for result in results for slug in result_projects(result))
+    addresses = {project_slug(url): url for url in project_urls()}
+    # `sorted` is stable, so projects holding as many stay in the list's order.
+    ranked = sorted((slug for slug in addresses if slug in held), key=lambda slug: -held[slug])
+    return tuple(addresses[slug] for slug in ranked)
 
 
 def external_link(url: str, text: str) -> str:
@@ -1458,88 +1392,19 @@ def credit_link(finder: str, projects: Sequence[str], *, results: Sequence[Resul
     return external_link(projects[0], name) if projects else name
 
 
-def rollup_who(credit: RollupCredit) -> str:
-    """A line's credit (`credit_link`), linked to the project holding most of its
-    results, in the medium weight that opens the line."""
-    linked = credit_link(credit.finder, credit.projects, results=credit.results)
-    return f'<span class="site-rollup-who">{linked}</span>'
-
-
-#: What a muted id in the weekly lines says to a screen reader, which the grey cannot.
-SUPERSEDED_SPOKEN = '<span class="site-visually-hidden"> (superseded)</span>'
-
-
-def rollup_ids(results: Sequence[Result]) -> str:
-    """A line's results, each its id as a link to its row of the table below (`#t-018`,
-    the row's own address on this page), oldest first. A result above the floor, S4 or
-    S5, carries its rung after its id in the significance ink; one since superseded
-    (`is_superseded`) is muted, underlined so it still reads as a link, and says so to a
-    screen reader and in its title (#514's review A, finding A4)."""
-    links = []
-    for result in results:
-        superseded = is_superseded(result)
-        attributes = ' class="site-rollup-superseded" title="Superseded"' if superseded else ""
-        said = SUPERSEDED_SPOKEN if superseded else ""
-        link = f'<a href="#{_esc(result.id.lower())}"{attributes}>{_esc(result.id)}{said}</a>'
-        level = significance(result)
-        if level > ROLLUP_FLOOR:
-            link += f'<span class="site-rollup-s">S{level}</span>'
-        links.append(link)
-    return f'<span class="site-rollup-ids">{", ".join(links)}</span>'
-
-
-def rollup_line(credit: RollupCredit) -> str:
-    """One finder's line in a week: who, what kinds and how many, and the results' ids."""
-    return (
-        f"<li>{rollup_who(credit)} "
-        f'<span class="site-cell-quiet">{kind_phrase(credit.results)}:</span> '
-        f"{rollup_ids(credit.results)}</li>"
-    )
-
-
-def counted(count: int) -> str:
-    """A block's count as its summary ends: `1 result`, `14 results`, `no results`."""
-    return f"{count} result{'' if count == 1 else 's'}" if count else "no results"
-
-
-def disclosure_summary(label: str, count: int) -> str:
-    """A block's summary: its days and its count, one run of text beside the
-    disclosure's chevron, so a summary that wraps wraps as a line does, before its
-    count."""
-    return (
-        f"<summary><span>{_esc(label)} "
-        f'<span class="site-rollup-count">· {counted(count)}</span></span></summary>'
-    )
-
-
-def recent_rollup(overview: Overview, *, weeks: int = ROLLUP_WEEKS) -> str:
-    """The results page's weekly rollup (`rollup_weeks`), under the seven days: one
-    disclosure a week, newest first, the newest ending the day before the seven days
-    begin (`added_since`), its summary the week and its count, its body one line a
-    finder. Every week starts closed, since the seven days above open on the newest
-    days; without scripts every disclosure still works. It is generated from the
-    register at render time and holds no list of its own."""
-    last = added_since(overview) - timedelta(days=1)
-    blocks = []
-    for week in rollup_weeks(overview.results, last, weeks=weeks):
-        body = (
-            f"<ul>{''.join(rollup_line(credit) for credit in week.credits)}</ul>"
-            if week.total
-            else f"<p>No result at S{ROLLUP_FLOOR} or above.</p>"
-        )
-        blocks.append(
-            f'<details data-week="{week.monday.isoformat()}">'
-            f"{disclosure_summary(span_label(week.monday, week.last), week.total)}"
-            f"{body}</details>"
-        )
-    return f'<div class="site-rollup">{"".join(blocks)}</div>'
-
-
 def added_link(query: str) -> str:
-    """The results table opened by a filter link from this page (`overview/table.js`,
-    `presetFilters`), landing on the table's heading:
-    `results.html?added-since=2026-10-06#all-results`."""
+    """All Results opened by a filter link (`overview/table.js`, `presetFilters`), landing
+    on its table: `results.html?added=2026-10-23#all-results`."""
     return f"{RESULTS_PAGE}?{query}#{ALL_RESULTS}"
+
+
+def added_day_link(day: date, count: int) -> str:
+    """A day's link to All Results on that day alone (`?added=`), closing its block."""
+    query = f"added={day.isoformat()}"
+    return (
+        f'<p><a href="{_esc(added_link(query))}">'
+        f"Show {'it' if count == 1 else f'these {count}'} in the table</a></p>"
+    )
 
 
 def added_cases(result: Result) -> str:
@@ -1554,16 +1419,17 @@ def added_cases(result: Result) -> str:
 
 
 def added_entry(result: Result) -> str:
-    """One result in a day's block: its id, linking to its row of the table below; its
-    headline as plain text (`plain_text`), the math as written; then, on a quieter line,
-    its cases (`added_cases`), its V and C rungs and its S score, and its credit
+    """One result in a day's block: its id, linking to its row in All Results
+    (`result_url`); its headline as plain text (`plain_text`), the math as written; then,
+    on a quieter line, its cases (`added_cases`), its V and C rungs and its S score, and
+    its credit
     (`credit_link`). An S4 or S5 score is set in the significance ink. A result since
     superseded (`is_superseded`) is muted, its id titled so, and its quiet line ends
     "superseded", where touch screens and screen readers see it too; its links keep their
     colour (#514's review A, finding A4)."""
     record = result.record
     level = significance(result)
-    score = f"<b>S{level}</b>" if level > ROLLUP_FLOOR else f"S{level}"
+    score = f"<b>S{level}</b>" if level >= INKED_SIGNIFICANCE else f"S{level}"
     superseded = is_superseded(result)
     mark = ' class="site-rollup-superseded"' if superseded else ""
     title = ' title="Superseded"' if superseded else ""
@@ -1574,28 +1440,283 @@ def added_entry(result: Result) -> str:
     )
     note = " · superseded" if superseded else ""
     return (
-        f'<li{mark}><a href="#{_esc(result.id.lower())}"{title}>{_esc(result.id)}</a> '
+        f'<li{mark}><a href="{_esc(result_url(result.id))}"{title}>{_esc(result.id)}</a> '
         f"{headline}<small>{_esc(added_cases(result))} · {rungs} · {who}{note}</small></li>"
     )
 
 
-def recent_added(overview: Overview, *, days: int = ADDED_DAYS) -> str:
-    """The results page's top section: every result that reached the site over the
-    `days` to the newest arrival (`added_days`), one disclosure a day, newest first, its
-    summary the date and its count, its body every entry (`added_entry`) and a link that
-    opens the table on that day alone (`?added=`). The `ADDED_OPEN` newest days start open
-    and the others closed."""
+#: How many of the newest days start open on the home page: the newest alone, so the
+#: section stays a few lines long.
+RECENT_OPEN = 1
+#: The day each house best packing and each source's rows reached `main`, as `landed` is
+#: for a register entry (`devtools.stamp_landed`).
+LANDINGS = FRONTIER / "landings.yaml"
+#: A beyond-horizon row's claim as a line counts it.
+_CLAIM_NOUNS = {
+    "upper-bound": "upper bound",
+    "lower-bound": "lower bound",
+    "exact-value": "exact value",
+}
+
+
+class HouseMove(NamedTuple):
+    """The counts whose house best packing became one result on one day: the day `main`
+    first held it, the result, and those counts."""
+
+    day: date
+    result: str
+    counts: tuple[int, ...]
+
+
+class BeyondRows(NamedTuple):
+    """One source's dated rows beyond the case corpus: the day `main` first held them,
+    the source's entry, and its rows."""
+
+    day: date
+    source: Mapping[str, Any]
+    rows: tuple[Mapping[str, Any], ...]
+
+
+class RecentDay(NamedTuple):
+    """One day of Recently Added: the results, house best packings and rows that
+    reached `main` that day."""
+
+    day: date
+    results: tuple[Result, ...]
+    houses: tuple[HouseMove, ...]
+    rows: tuple[BeyondRows, ...]
+
+
+@cache
+def _coverage() -> Mapping[str, Any]:
+    return safe_load(SOURCE_COVERAGE.read_text(encoding="utf-8"))
+
+
+@cache
+def _landings() -> Mapping[str, Any]:
+    return safe_load(LANDINGS.read_text(encoding="utf-8"))
+
+
+def house_landings() -> dict[int, tuple[str, date]]:
+    """Each adopted count's house result and the day `main` first held it."""
+    return {
+        int(entry["n"]): (str(entry["result"]), date.fromisoformat(str(entry["landed"])))
+        for entry in _landings()["houses"]
+    }
+
+
+def source_landings() -> dict[str, date]:
+    """Each row source and the day `main` first held its rows."""
+    return {
+        str(entry["id"]): date.fromisoformat(str(entry["landed"]))
+        for entry in _landings()["sources"]
+    }
+
+
+def arrival_reference(overview: Overview) -> date:
+    """The newest day anything reached `main` by the record: a result's `landed`, a house
+    best packing's or a source's rows' landing. It is the newest merge the build's
+    records were stamped by, never the clock's or Git's, so two renders of one tree are
+    the same bytes. Recently Added's window ends on it."""
+    return max(
+        added_reference(overview),
+        *(day for _, day in house_landings().values()),
+        *source_landings().values(),
+    )
+
+
+@cache
+def _house_records() -> Records:
+    """The register and the case records, read once, for `house_moves` to ask which
+    results a count's verified upper bound rests on."""
+    return load_records()
+
+
+def house_moves(since: date, until: date) -> list[HouseMove]:
+    """The counts whose house best packing reached `main` from `since` to `until`, newest
+    first and then by result: each under the result that houses it now, on the day `main`
+    first held that house (`landings.yaml`). A count whose house changed again is listed
+    on the later day alone.
+
+    A landing whose result no longer holds the count's verified upper bound is left out,
+    as a count with no landing is: `main` holds one when a pull request moved a house
+    without stamping it. The landing test turns CI red, and the page never says a
+    superseded result "is now the house best packing" (#736's review B, finding B2)."""
+    records = _house_records()
+    moved: dict[tuple[date, str], list[int]] = {}
+    for n, (result, day) in house_landings().items():
+        if (
+            since <= day <= until
+            and n in records.cases
+            and result in lane_holders(n, records, "upper", ["verified"])
+        ):
+            moved.setdefault((day, result), []).append(n)
+    ordered = sorted(moved, key=lambda key: (-key[0].toordinal(), int(key[1].split("-")[1])))
+    return [
+        HouseMove(day, result, tuple(sorted(moved[day, result]))) for day, result in ordered
+    ]
+
+
+def beyond_rows(since: date, until: date) -> list[BeyondRows]:
+    """The dated beyond-horizon rows that reached `main` from `since` to `until`, one
+    entry a source, newest first, then the source with more rows first, then by id. A row
+    carries no date of its own; its source's landing is the day `main` first held its
+    rows, which so far have always come in one merge. A source with no landing yet is
+    left out, as `house_moves` leaves out a count with none."""
+    coverage = _coverage()
+    landed = source_landings()
+    held: dict[str, list[Mapping[str, Any]]] = {}
+    for row in coverage["beyond_horizon_claims"]:
+        held.setdefault(str(row["source_id"]), []).append(row)
+    # A source the merge step has not stamped yet is left out, as an unstamped house is:
+    # `test_every_house_and_row_source_carries_the_day_it_landed` turns CI red, and a
+    # render never fails on it (#736's review A, finding A10).
+    found = [
+        BeyondRows(landed[source["id"]], source, tuple(held[source["id"]]))
+        for source in coverage["sources"]
+        if source["id"] in held
+        and source["id"] in landed
+        and since <= landed[source["id"]] <= until
+    ]
+    return sorted(
+        found, key=lambda found: (-found.day.toordinal(), -len(found.rows), found.source["id"])
+    )
+
+
+def recent_days(overview: Overview, *, days: int = ADDED_DAYS) -> list[RecentDay]:
+    """Every day from `days` before the newest arrival (`arrival_reference`) to it on
+    which a result, a house best packing or rows reached `main`, newest first."""
+    until = arrival_reference(overview)
+    since = until - timedelta(days=days)
+    results = {added.day: added.results for added in added_days(overview.results, since)}
+    houses: dict[date, list[HouseMove]] = {}
+    for move in house_moves(since, until):
+        houses.setdefault(move.day, []).append(move)
+    rows: dict[date, list[BeyondRows]] = {}
+    for found in beyond_rows(since, until):
+        rows.setdefault(found.day, []).append(found)
+    return [
+        RecentDay(
+            day, results.get(day, ()), tuple(houses.get(day, ())), tuple(rows.get(day, ()))
+        )
+        for day in sorted({*results, *houses, *rows}, reverse=True)
+    ]
+
+
+def recent_span(overview: Overview, *, days: int = ADDED_DAYS) -> str:
+    """The days Recently Added shows, as its introduction names them: its oldest shown day
+    to its newest (`span_label`), so no block can sit outside the span."""
+    shown = [recent.day for recent in recent_days(overview, days=days)]
+    if not shown:
+        return day_label(arrival_reference(overview))
+    return span_label(min(shown), max(shown))
+
+
+def corpus_end() -> int:
+    """The largest count the case corpus holds, past which a row is beyond the horizon."""
+    return int(_coverage()["case_corpus"]["n_max"])
+
+
+def recent_tally(recent: RecentDay) -> tuple[str, ...]:
+    """A day's summary counts: its results, its counts with a new house best packing and
+    its rows beyond the corpus, each where it has any: `5 results`, `4 house best
+    packings`, `425 bounds beyond 324`. A summary is set in capitals, so no count names
+    a variable."""
+    moved = sum(len(move.counts) for move in recent.houses)
+    rows = sum(len(found.rows) for found in recent.rows)
+    parts = (
+        counted(len(recent.results)) if recent.results else "",
+        f"{moved} house best packing{'' if moved == 1 else 's'}" if moved else "",
+        f"{rows} bound{'' if rows == 1 else 's'} beyond {corpus_end()}" if rows else "",
+    )
+    return tuple(part for part in parts if part)
+
+
+def house_entry(move: HouseMove) -> str:
+    """A day's house move: the result, linking to its row on the results page, and the
+    counts whose house best packing it now is, each linking to its case."""
+    from devtools.render_case_pages import case_link  # noqa: PLC0415
+
+    counts = listed([case_link(n, str(n)) for n in move.counts])
+    return (
+        f'<li><a href="{_esc(result_url(move.result))}">{_esc(move.result)}</a> '
+        f"is now the house best packing at {counts}</li>"
+    )
+
+
+def claims_phrase(rows: Sequence[Mapping[str, Any]]) -> str:
+    """What a source's rows claim, counted by claim: `111 upper bounds`."""
+    held = Counter(str(row["claim"]) for row in rows)
+    return listed(
+        [
+            f"{held[claim]} {noun}{'' if held[claim] == 1 else 's'}"
+            for claim, noun in _CLAIM_NOUNS.items()
+            if held[claim]
+        ]
+    )
+
+
+def source_readme(source: Mapping[str, Any]) -> str:
+    """Where a reader sees a source's rows: its packet's README on GitHub, the first
+    README the register says represents it, or else its packet's directory."""
+    readme = next(
+        (path for path in source["represented_by"] if str(path).endswith("README.md")),
+        None,
+    )
+    if readme is not None:
+        return branch_file(f"packing/{readme}")
+    return repo_links.repo_url(f"packing/{source['local']}", kind="tree")
+
+
+def beyond_entry(found: BeyondRows, sources: Mapping[str, Mapping[str, Any]]) -> str:
+    """A source's rows on their day: how many and of what, linking to the source's
+    packet on GitHub, which lists them; then, on the quieter line, their counts, the
+    source's credit (`credit_link`) and how many a later row has since superseded."""
+    from devtools.result_credit import credit_line  # noqa: PLC0415
+
+    counts = [int(row["n"]) for row in found.rows]
+    span = f"{min(counts)}{EN_DASH}{max(counts)}" if len(set(counts)) > 1 else f"{counts[0]}"
+    finder = credit_finder(
+        credit_line({"attribution": {"source_keys": [found.source["source_key"]]}}, sources)
+    )
+    superseded = sum(row["disposition"] == "superseded" for row in found.rows)
+    note = ""
+    if superseded:
+        note = (
+            " · all since superseded"
+            if superseded == len(counts)
+            else (f" · {superseded} since superseded")
+        )
+    link = external_link(source_readme(found.source), _esc(claims_phrase(found.rows)))
+    return (
+        f"<li>{link} beyond n = {corpus_end()}"
+        f"<small>n = {span} · {credit_link(finder, ())}{note}</small></li>"
+    )
+
+
+def recently_added(overview: Overview, *, days: int = ADDED_DAYS) -> str:
+    """The home page's Recently Added (`recent_days`): one disclosure a day, newest
+    first, the `RECENT_OPEN` newest open, its summary the date and its tally
+    (`recent_tally`), its body the day's results (`added_entry`, each linked to its row
+    in All Results), then its house moves (`house_entry`) and its sources' rows
+    (`beyond_entry`), and, for a day with results, the link that opens All Results on
+    that day (`added_day_link`). It draws with `results.css`'s rollup classes."""
+    from devtools.render_results import load_sources  # noqa: PLC0415
+
+    sources = load_sources()
     blocks = []
-    for index, added in enumerate(added_days(overview.results, added_since(overview, days))):
-        state = " open" if index < ADDED_OPEN else ""
-        count = len(added.results)
-        day = added.day.isoformat()
+    for index, recent in enumerate(recent_days(overview, days=days)):
+        state = " open" if index < RECENT_OPEN else ""
+        entries = [
+            *(added_entry(result) for result in recent.results),
+            *(house_entry(move) for move in recent.houses),
+            *(beyond_entry(found, sources) for found in recent.rows),
+        ]
+        shown = added_day_link(recent.day, len(recent.results)) if recent.results else ""
         blocks.append(
-            f'<details data-day="{day}"{state}>'
-            f"{disclosure_summary(day_label(added.day), count)}"
-            f"<ul>{''.join(added_entry(result) for result in added.results)}</ul>"
-            f'<p><a href="{_esc(added_link(f"added={day}"))}">'
-            f"Show {'it' if count == 1 else f'these {count}'} in the table</a></p></details>"
+            f'<details data-day="{recent.day.isoformat()}"{state}>'
+            f"{tallied_summary(day_label(recent.day), recent_tally(recent))}"
+            f"<ul>{''.join(entries)}</ul>{shown}</details>"
         )
     return f'<div class="site-rollup site-added">{"".join(blocks)}</div>'
 
@@ -1993,11 +2114,12 @@ PROFILES_DIRECTORY = "profiles/index.html"
 
 
 def documentation_block() -> str:
-    """The shared repository introduction and reader-document cards on Home and About."""
+    """The repository introduction and complete reader-document cards on About."""
     lead = (
-        "<p>The code, the certificates, the literature archive and the documents that "
-        "record all of this live in the Squares Project\u2019s "
-        f'<a href="{repo_links.REPO_URL}">repository</a>.</p>'
+        '<p class="site-navigation-copy">Everything for this site, the full archive of '
+        "all historic and current research, and an extensive set of tools and research "
+        f'workflows are in <a href="{repo_links.REPO_URL}">'
+        "the Squares Project repository</a>.</p>"
     )
     return f"{lead}\n\n{document_cards()}"
 
@@ -2145,6 +2267,12 @@ def paper_cards(*, papers: Sequence[Paper] | None = None) -> str:
     )
 
 
+def homepage_paper_cards() -> str:
+    """Three starting points from the learning collections."""
+    starting_points = (*PAPERS[-2:], PAPERS[0])
+    return paper_cards(papers=starting_points)
+
+
 #: The site's reading and working pages, as the overview's cards under The Squares
 #: Project show them: the page, a label, its title, and one line on what a reader finds
 #: there. Both are register prose, so a bound in either is written in ASCII
@@ -2158,7 +2286,7 @@ def paper_cards(*, papers: Sequence[Paper] | None = None) -> str:
 #: The Results page is reached from Recent Results, whose pointer is its own.
 PAGES: tuple[tuple[str, str, str, str], ...] = (
     (
-        "atlas.html#the-frontier-survey",
+        "frontier.html",
         "Frontier Survey",
         "Every Case from n = 1 to 324",
         "Reported and verified bounds side by side, with their sources.",
@@ -2206,14 +2334,15 @@ HERO_CASES = (HERO_CASE,)
 
 
 def hero() -> str:
-    """The representative native packing with its shared case popover."""
+    """The representative native packing with its shared case popover, drawn as its
+    default picture in its canonical pose (`render_frontier_page.default_svg`)."""
     from devtools.render_case_pages import case_url  # noqa: PLC0415
-    from devtools.render_frontier_page import default_root, packing_svg  # noqa: PLC0415
+    from devtools.render_frontier_page import default_svg  # noqa: PLC0415
 
     links = "".join(
         f'<a href="{case_url(n)}" data-case="{n}" '
         f'aria-label="The best packing known for {n} squares: packing and bounds">'
-        f"{packing_svg(n, units=1000, root=default_root(n))}</a>"
+        f"{default_svg(n, units=1000)}</a>"
         for n in HERO_CASES
     )
     return (
@@ -2392,7 +2521,8 @@ PROJECT_EXTRA_KEYS: dict[str, tuple[str, ...]] = {
 SOURCE_VENUES: dict[str, str] = {KINGBIRD: "Squares in Squares"}
 
 #: The source-coverage register: each source repository the record reviews, with the
-#: bibliography key its results are attributed under.
+#: bibliography key its results are attributed under, and the dated rows beyond the case
+#: corpus (`beyond_horizon_claims`) that Recently Added lists.
 SOURCE_COVERAGE = FRONTIER / "source-coverage.yaml"
 
 
@@ -2419,9 +2549,16 @@ def project_slug(url: str) -> str:
     return re.sub(r"[^a-z0-9]+", "-", project_name(url).lower()).strip("-")
 
 
+#: A gist's address at a pinned revision, `https://gist.github.com/<owner>/<id>/<sha>`:
+#: the gist itself is the part before the revision.
+_GIST_REVISION = re.compile(r"(https://gist\.github\.com/[\w.-]+/[0-9a-f]+)/[0-9a-f]{40}/?")
+
+
 def source_repository(url: str) -> str:
     """A source's address as its repository's: a revision or a directory under it,
-    `/tree/…`, names the same project."""
+    `/tree/…`, names the same project, and a gist's revision names the gist."""
+    if gist := _GIST_REVISION.fullmatch(url):
+        return gist[1]
     return re.sub(r"/tree/.*", "", url).rstrip("/")
 
 
@@ -2605,7 +2742,7 @@ def _tally_records() -> tuple[tuple[Mapping[str, Any], ...], dict[str, tuple[int
 
 
 def project_tally(url: str, tally: ProjectTally) -> str:
-    """The shared result/credit components scoped to this project's explicit sources."""
+    """Records, Results and Credits scoped to this project's explicit sources."""
     slug = project_slug(url)
     records, measures = _tally_records()
     authors = next(
@@ -2615,7 +2752,7 @@ def project_tally(url: str, tally: ProjectTally) -> str:
         authors, project_source_keys().get(url, ()), occurrence_registry().occurrences, records
     )
     credit_markup = (
-        " · "
+        TALLY_SEPARATOR
         + render_tally(
             tally_credits(associations, measures, significance_levels()), noun="credit"
         )
@@ -2625,12 +2762,12 @@ def project_tally(url: str, tally: ProjectTally) -> str:
     records_markup = record_tally(tally.results, measures, blank_zero=True)
     return (
         '<span class="site-credit-tally">'
+        + (records_markup + TALLY_SEPARATOR if records_markup else "")
         + render_tally(
             tally,
             total_href=results_filter_url(slug) if tally.results else None,
             level_hrefs={level: results_filter_url(slug, level) for level, _ in tally.counts},
         )
-        + (" · " + records_markup if records_markup else "")
         + credit_markup
         + "</span>"
     )
@@ -2646,12 +2783,14 @@ def project_author(author: str, *, current_profile: str | None = None) -> str:
     if len(matches) == 1 and key in index.personal_labels[matches[0]]:
         identifier = matches[0]
         if identifier == current_profile:
-            return "By " + _esc(index.people[identifier].label)
+            return "By " + _esc(index.people[identifier].full_name)
         return (
-            f'By <a href="profiles/{identifier}.html">'
-            f"{_esc(index.people[identifier].label)}</a>"
+            f'By <a href="profiles/{identifier}.html" data-profile-name="full">'
+            f"{_esc(index.people[identifier].full_name)}</a>"
         )
-    return "By " + link_prose(_esc(author), index=index, current_profile=current_profile)
+    return "By " + link_prose(
+        _esc(author), index=index, current_profile=current_profile, full_names=True
+    )
 
 
 def resource_byline(resource: Resource, *, current_profile: str | None = None) -> str:
@@ -2660,9 +2799,12 @@ def resource_byline(resource: Resource, *, current_profile: str | None = None) -
         return project_author(resource.byline, current_profile=current_profile)
     names = public_index().people
     labels = [
-        _esc(names[identifier].label)
+        _esc(names[identifier].full_name)
         if identifier == current_profile
-        else f'<a href="profiles/{identifier}.html">{_esc(names[identifier].label)}</a>'
+        else (
+            f'<a href="profiles/{identifier}.html" data-profile-name="full">'
+            f"{_esc(names[identifier].full_name)}</a>"
+        )
         for identifier in resource.profile_ids
     ]
     return "Contributors: " + ", ".join(labels)
@@ -2677,13 +2819,15 @@ def _profile_resource_tallies() -> dict[str, ProjectTally]:
 def resource_card(
     resource: Resource, tally: ProjectTally, *, current_profile: str | None = None
 ) -> str:
-    """One shared external-resource card on Home and the credited person's profile."""
+    """One shared external-resource card in the directory and a credited person's profile."""
     url = resource.url
     return link_card(
         url,
         "Repository" if resource.kind == "repository" else "Website",
         _esc(resource.title) if resource.kind == "repository" else tex_bounds(resource.title),
-        link_prose(tex_bounds(resource.description), current_profile=current_profile),
+        link_prose(
+            tex_bounds(resource.description), current_profile=current_profile, full_names=True
+        ),
         size=SECTION_CARD_SIZES["projects"],
         foot=f'<span class="site-project-tally">{project_tally(url, tally)}</span>',
         byline=(
@@ -2700,7 +2844,7 @@ def resource_cards(
     overview: Overview | None = None,
     current_profile: str | None = None,
 ) -> str:
-    """The same card grid and resource projection across homepage and profile contexts."""
+    """The same card grid and resource projection in the directory and profiles."""
     tallies = (
         _profile_resource_tallies() if overview is None else dict(listed_projects(overview))
     )
@@ -2810,10 +2954,10 @@ def homepage_video(film_url: str) -> str:
 
 
 def pdf_note() -> str:
-    """Retained SVG/source links, for the Papers page's PDFs."""
+    """Retained SVG/source links for the packing posters."""
     atlas = REPO / "packing" / "atlas" / "known-best"
     return (
-        '<p class="site-wide site-atlas-note">Each poster is also an SVG '
+        '<p class="site-atlas-note site-navigation-copy">Each poster is also an SVG '
         f'(<a href="{branch_file(atlas / "known-best-1-100.svg")}">1 to 100</a>, '
         f'<a href="{branch_file(atlas / "known-best-1-324.svg")}">1 to 324</a>), '
         f'and the <a href="{branch_file(atlas / "README.md")}">atlas README</a> '
@@ -2825,10 +2969,6 @@ def pdf_note() -> str:
 #: the popover, which shows it about four hundred pixels across: at 100 units the
 #: rounding shows there as uneven gaps, and 400 costs about 26 kB more gzipped.
 ATLAS_UNITS = 400
-
-#: How many cases the atlas grid shows until the reader asks for the rest: the first
-#: hundred, the cases of the smaller poster.
-ATLAS_FIRST = 100
 
 #: The film's panel labels, keyed by the composite record's badge (glyph, style): the
 #: words `packages/workbench/src/view/facts.ts` draws under each badge (`BADGE_LABELS`).
@@ -2959,16 +3099,26 @@ ATLAS_VIEWS: tuple[tuple[str, str], ...] = (("grid", "Grid"), ("triangle", "Tria
 ATLAS_DEFAULT = "triangle"
 ATLAS_VIEW = ATLAS_DEFAULT
 
-#: The atlas's three sizes of tile, in tab order: the key the block's `data-atlas-size`
-#: and the address's `?size=` take, and the tab's label. Medium is the size the atlas had
-#: before it offered a choice; Small is now the rendered default. site.css
-#: scales a tile by each (`--site-atlas-scale`), and `overview/atlas-view.js` rearranges
-#: the tiles for it (think-ht8t).
+#: The atlas's four sizes of tile, in tab order: the key the block's `data-atlas-size`
+#: and the address's `?size=` take, and the tab's short label, S, M, L and XL, each
+#: named in full (`ATLAS_SIZE_NAMES`) by its tab's title and in its accessible name,
+#: "Small (S)", which keeps the letter it shows (WCAG 2.5.3). Medium is the size the
+#: atlas had before it offered a choice; Small is the rendered default, and a Triangle
+#: that follows the scroll opens at XL. site.css scales a tile by each
+#: (`--site-atlas-scale`), and `overview/atlas-view.js` rearranges the tiles for it
+#: (think-ht8t, think-apqd).
 ATLAS_SIZES: tuple[tuple[str, str], ...] = (
-    ("small", "Small"),
-    ("medium", "Medium"),
-    ("large", "Large"),
+    ("small", "S"),
+    ("medium", "M"),
+    ("large", "L"),
+    ("xlarge", "XL"),
 )
+ATLAS_SIZE_NAMES: dict[str, str] = {
+    "small": "Small",
+    "medium": "Medium",
+    "large": "Large",
+    "xlarge": "Extra large",
+}
 
 #: The size the page is rendered in.
 ATLAS_SIZE = "small"
@@ -3136,7 +3286,15 @@ def atlas_frame_ink_inset() -> float:
 
 
 def _atlas_drawing(n: int, *, regularized: bool, side: float) -> str:
-    """One lazy image, with current-source credit and the approved comparison pair."""
+    """One lazy image, with current-source credit and the approved comparison pair.
+
+    Every tile starts in Regularized mode, drawing its default picture in its canonical
+    pose (`render_frontier_page.default_svg`; regularization policy, sections 12 and 13),
+    and carries both drawings, so Original switches every tile to its house drawing as
+    published, in its source's pose. `regularized` says whether the default picture is
+    the case's regularized view, whose generator's credit the Regularized title adds;
+    `side` is the default picture's. Where the pose turns the default picture, the
+    Regularized title says so, since the tile then does not draw it as published."""
     from devtools import render_frontier_page as frontier  # noqa: PLC0415
     from devtools.build_bound_citations import load_case  # noqa: PLC0415
     from devtools.default_drawings import credit_line  # noqa: PLC0415
@@ -3145,25 +3303,23 @@ def _atlas_drawing(n: int, *, regularized: bool, side: float) -> str:
     upper = load_case(n)["reported_upper_bound"]
     credit = html.unescape(frontier.credit(upper.get("found_by"), upper.get("found_year")))
     source = pictured_source_key(n, str(upper.get("source_key") or ""))
-    original_credit = ", ".join(
-        part for part in ("Packing as published", credit, source) if part
+    attribution = [part for part in (credit, source) if part]
+    original_credit = ", ".join(["Packing as published", *attribution])
+    turned = [] if frontier.default_pose(n).identity else ["turned to its canonical pose"]
+    shown = ", ".join(["Packing as published", *turned, *attribution])
+    title = f"{shown}. {credit_line(n)}" if regularized else shown
+    choices = (
+        f' data-atlas-original-src="{frontier.drawing_path(n)}"'
+        f' data-atlas-regularized-src="{frontier.drawing_path(n, regularized=True)}"'
+        f' data-atlas-original-side="{atlas_enclosing_sides(original=True)[n]}"'
+        f' data-atlas-regularized-side="{side}"'
+        f' data-atlas-original-credit="{_esc(original_credit)}"'
+        f' data-atlas-regularized-credit="{_esc(title)}"'
     )
-    mode = "Regularized" if regularized else "Original"
-    title = f"{original_credit}. {credit_line(n)}" if regularized else original_credit
-    choices = ""
-    if regularized:
-        choices = (
-            f' data-atlas-original-src="{frontier.drawing_path(n)}"'
-            f' data-atlas-regularized-src="{frontier.drawing_path(n, regularized=True)}"'
-            f' data-atlas-original-side="{atlas_enclosing_sides(original=True)[n]}"'
-            f' data-atlas-regularized-side="{side}"'
-            f' data-atlas-original-credit="{_esc(original_credit)}"'
-            f' data-atlas-regularized-credit="{_esc(title)}"'
-        )
     return (
-        f'<img src="{frontier.drawing_path(n, regularized=regularized)}" width="{ATLAS_UNITS}" '
+        f'<img src="{frontier.drawing_path(n, regularized=True)}" width="{ATLAS_UNITS}" '
         f'height="{ATLAS_UNITS}" loading="lazy" decoding="async" '
-        f'alt="{mode} packing of {n} unit squares" title="{_esc(title)}"{choices}>'
+        f'alt="Regularized packing of {n} unit squares" title="{_esc(title)}"{choices}>'
     )
 
 
@@ -3225,22 +3381,28 @@ def _atlas_tablist(
     name: str,
     extra: str = "",
     descriptions: Mapping[str, str] | None = None,
+    names: Mapping[str, str] | None = None,
     panel: str = ATLAS_PANEL,
 ) -> str:
     """One strip of the atlas's tabs: a tablist of buttons, `default` selected and the
-    strip's one stop in the tab order, each controlling the static box of tiles."""
+    strip's one stop in the tab order, each controlling the static box of tiles. A tab
+    with a description carries it as its `aria-description` and title; a tab whose label
+    abbreviates a name (`names`) is named in full, its accessible name the name with the
+    label it shows, "Small (S)", and its title the name."""
 
-    def description(key: str) -> str:
-        return (
-            f' aria-description="{_esc(descriptions[key])}" title="{_esc(descriptions[key])}"'
-            if descriptions is not None
-            else ""
-        )
+    def described(key: str, label: str) -> str:
+        if names is not None:
+            full = f"{names[key]} ({label})"
+            return f' aria-label="{_esc(full)}" title="{_esc(names[key])}"'
+        if descriptions is not None:
+            text = _esc(descriptions[key])
+            return f' aria-description="{text}" title="{text}"'
+        return ""
 
     tabs = "".join(
         f'<button type="button" role="tab" id="{ids}-{key}" {data}="{key}" '
         f'aria-selected="{"true" if key == default else "false"}" '
-        f'aria-controls="{panel}"{description(key)}'
+        f'aria-controls="{panel}"{described(key, label)}'
         f"{'' if key == default else ' tabindex="-1"'}>"
         f"{_esc(label)}</button>"
         for key, label in choices
@@ -3292,11 +3454,12 @@ def atlas_drawing_tabs(panel: str = ATLAS_PANEL) -> str:
 
 
 def atlas_size_tabs(panel: str = ATLAS_PANEL) -> str:
-    """The tabs beside the view tabs that choose the size of the tiles, Small, Medium
-    or Large (think-ht8t): the view tabs' strip, a tablist of three buttons that resize
-    the one set of tiles in place, in either view. Small is selected and is the strip's
-    one stop in the tab order; the arrow keys move between the three
-    (`overview/atlas-view.js`). The strip is present in the first response."""
+    """The tabs beside the view tabs that choose the size of the tiles, S, M, L and XL
+    (think-ht8t, think-apqd): the view tabs' strip, a tablist of four buttons that resize
+    the one set of tiles in place, in either view, each named in full by its title and
+    its accessible name, "Small (S)", which keeps the letter it shows (WCAG 2.5.3). Small
+    is selected and is the strip's one stop in the tab order; the arrow keys move between
+    the four (`overview/atlas-view.js`). The strip is present in the first response."""
     return _atlas_tablist(
         ATLAS_SIZES,
         default=ATLAS_SIZE,
@@ -3305,6 +3468,7 @@ def atlas_size_tabs(panel: str = ATLAS_PANEL) -> str:
         classes="site-atlas-sizes",
         name="Atlas tile size",
         extra="data-atlas-sizes ",
+        names=ATLAS_SIZE_NAMES,
         panel=panel,
     )
 
@@ -3378,8 +3542,12 @@ def atlas_legend() -> str:
     )
 
 
-def _atlas_rows(first: int) -> tuple[list[str], str]:
-    """Canonical split rows and their drawing geometry for either Atlas surface."""
+def _atlas_rows() -> tuple[list[str], str]:
+    """Canonical split rows and their drawing geometry for either Atlas surface. The
+    geometry is the box of tiles' own style: whether the triangle's widest row, the
+    last, keeps the extra gap before its grid suffix (`--site-atlas-extra`), the largest
+    enclosing side of all, which Global scale draws against until the script counts the
+    tiles shown (`--site-atlas-global-side`), and the drawing frame's fractions."""
     from devtools import render_frontier_page as frontier  # noqa: PLC0415
 
     cases = frontier.frontier_cases()
@@ -3422,12 +3590,9 @@ def _atlas_rows(first: int) -> tuple[list[str], str]:
             f"{''.join(groups)}</div>"
         )
     frame_inset, frame_span = atlas_frame_fractions()
-    first_rows = math.isqrt(first)
     positions = (
-        f"--site-atlas-first-extra:{int(transitions[first_rows - 1].has_irregular_prefix)};"
-        f"--site-atlas-last-extra:{int(transitions[-1].has_irregular_prefix)};"
-        f"--site-atlas-first-side:{max(sides[n] for n in tracked if n <= first)};"
-        f"--site-atlas-last-side:{max(sides[n] for n in tracked)};"
+        f"--site-atlas-extra:{int(transitions[-1].has_irregular_prefix)};"
+        f"--site-atlas-global-side:{max(sides[n] for n in tracked)};"
         f"--site-atlas-frame-inset:{frame_inset};--site-atlas-frame-span:{frame_span};"
         f"--site-atlas-ink-inset:{atlas_frame_ink_inset()}"
     )
@@ -3446,7 +3611,7 @@ def atlas_grid(*, homepage: bool = False) -> str:
     uses positions supplied by the static markup and stylesheet, so a tile's markup is
     the same in both.
     A perfect square's tile is marked `data-atlas-square`: it ends its row of the
-    triangle, and the triangle numbers it in bold gray. The
+    triangle, and is numbered at the same weight as every other tile. The
     block is rendered at the small size (`data-atlas-size`), under tabs beside the view
     tabs that make every tile smaller or larger (`atlas_size_tabs`), in either view.
     Scale changes only the drawing within each tile: Fixed gives every frame the
@@ -3454,23 +3619,22 @@ def atlas_grid(*, homepage: bool = False) -> str:
     grid side; Global uses the largest currently shown actual enclosing side.
     Slots, number type and the grid separator stay fixed.
 
-    The first `ATLAS_FIRST` cells arrive as static markup with reserved, lazy-loaded
-    SVG images; the rest are already present in a hidden container. The script shows
-    them only when the reader presses the button under the grid, "Show More" with the
-    double chevron down. The button then reads "Show Less" with the chevron up and
-    collapses the grid again; its name for assistive
-    technology says what each does and how many cases that is (`data-name-more`,
-    `data-name-less`), it controls the box of tiles (`ATLAS_PANEL`), and it is the site's
-    one action under a table or grid (`.site-action`, with "See all results"). Ordinary
-    links give readers without scripting all case records and the frontier survey. The atlas
-    popover, filled by the script from a JSON of the film's facts, stood after the block until
-    2026-10-03; the case popover took its place.
+    Every case arrives as static markup with reserved, lazy-loaded SVG images, and both
+    surfaces show all of them, with scripts or without. The homepage's copy is marked
+    `data-atlas-preview`, which keeps its controls out of the address. An expander, "Show
+    More" and "Show Less" under the tiles with the cases after the first hundred in a
+    hidden box, stood here until 2026-10-22 (the owner). Ordinary links give readers
+    without scripting all case records and the frontier survey. The atlas popover, filled
+    by the script from a JSON of the film's facts, stood after the block until 2026-10-03;
+    the case popover took its place.
 
     A case whose default picture is its regularized view (`atlas_regularized`) is drawn
-    from it directly, and every other case from its house rendering: one tile a case.
+    from it directly, and every other case from its house rendering: one tile a case,
+    each in its canonical pose (flip regularization, section 13).
     Regularized is the initial drawing choice on each page, using only views that
     improve on their house drawings (regularization policy, sections 11 and 12).
-    Original switches these images to the current house packings as published.
+    Original switches every tile to the current house packing as published, in its
+    source's pose.
     The drawing choice stays local to the page. Drawing, Layout, Size and Scale strips and
     the key (`atlas_legend`) share the controls box (`.site-atlas-controls`) above the
     tiles.
@@ -3478,56 +3642,30 @@ def atlas_grid(*, homepage: bool = False) -> str:
     from devtools.render_case_pages import case_popover  # noqa: PLC0415
 
     panel = "homepage-atlas-cells" if homepage else ATLAS_PANEL
-    preview = ' data-atlas-preview data-atlas-count="100"' if homepage else ""
+    preview = " data-atlas-preview" if homepage else ""
     home_class = " site-homepage-atlas" if homepage else ""
-    toggle_hook = " data-homepage-atlas-toggle" if homepage else ""
-    label_hook = " data-homepage-atlas-label" if homepage else ""
-    hidden = " hidden" if homepage else ""
-    rows, positions = _atlas_rows(ATLAS_FIRST)
-    first_rows = math.isqrt(ATLAS_FIRST)
-    more, less = "Show More", "Show Less"
-    name_more = f"Show more: all {len(rows) ** 2} cases"
-    name_less = f"Show less: the first {ATLAS_FIRST}"
+    rows, positions = _atlas_rows()
+    # The triangle's one-line key ("Each row ends at a perfect square…") stood after the
+    # tiles, and the line under the expander ("Every case from n = 1 to 324 is also in
+    # the frontier survey, and each has a case record.") after that, until 2026-10-02
+    # (the owner, think-l38m): each tile opens its case record, and the Frontier page is
+    # a page card. The tiles end the block.
+    fallback = (
+        ""
+        if homepage
+        else '<noscript><p><a href="frontier.html">Every packing and bound in the frontier '
+        "survey</a></p></noscript>"
+    )
     return (
         f'<div class="site-wide site-atlas-grid{home_class}" data-atlas-view="{ATLAS_VIEW}" '
         f'data-atlas-size="{ATLAS_SIZE}" data-atlas-scale="{ATLAS_SCALE}" '
-        'data-atlas-drawing="regularized" '
-        f'data-atlas-first="{ATLAS_FIRST}" data-atlas-grid{preview}>'
+        f'data-atlas-drawing="regularized" data-atlas-grid{preview}>'
         '<div class="site-atlas-controls" data-atlas-controls>'
         f"{atlas_view_tabs(panel)}{atlas_size_tabs(panel)}{atlas_scale_tabs(panel)}"
         f"{atlas_drawing_tabs(panel)}"
         f"{atlas_legend()}</div>"
         f'<div class="site-atlas-cells" id="{panel}" style="{positions}">'
-        f"{''.join(rows[:first_rows])}"
-        '<div class="site-atlas-rest" data-atlas-rest hidden>'
-        f"{''.join(rows[first_rows:])}</div></div>"
-        + (
-            '<p class="site-homepage-atlas-status" data-homepage-atlas-status '
-            'role="status" hidden></p>'
-            if homepage
-            else "<noscript><style>[data-atlas-grid] .site-atlas-rest[hidden]{display:contents}"
-            ".kpress .site-page [data-atlas-grid] .site-atlas-cells{--site-atlas-widest:35;"
-            "--site-atlas-extra:var(--site-atlas-last-extra);"
-            "--site-atlas-global-side:var(--site-atlas-last-side)}"
-            "[data-atlas-grid] .site-atlas-toggle-row{display:none}</style>"
-            "<p>"
-            '<a href="atlas.html#the-frontier-survey">Every packing and bound in the frontier '
-            "survey</a></p></noscript>"
-        )
-        +
-        # The triangle's one-line key ("Each row ends at a perfect square…") stood here
-        # and the line under the expander ("Every case from n = 1 to 324 is also in the
-        # frontier survey, and each has a case record.") after it, until 2026-10-02 (the
-        # owner, think-l38m): each tile opens its case record, and the Frontier page is a
-        # page card. The expander's row ends the block.
-        '<p class="site-action-row site-atlas-toggle-row">'
-        '<button type="button" class="site-action site-atlas-toggle" '
-        f'data-atlas-toggle{toggle_hook} aria-expanded="false" aria-controls="{panel}" '
-        f'aria-label="{name_more}" data-label-more="{more}" data-label-less="{less}" '
-        f'data-name-more="{name_more}" data-name-less="{name_less}"{hidden}>'
-        f"<span data-atlas-label{label_hook}>{more}</span>"
-        f"{arrow_icon('double-down')}</button></p>"
-        f"</div>{case_popover()}"
+        f"{''.join(rows)}</div>{fallback}</div>{case_popover()}"
     )
 
 

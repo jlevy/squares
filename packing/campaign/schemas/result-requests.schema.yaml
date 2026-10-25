@@ -114,6 +114,13 @@ $defs:
           type: object
           additionalProperties: false
           required: [what, state]
+          # A queued ask is work, and the answer bead owns only the reply, so the ask
+          # names the bead that does it (think-du1e).
+          if:
+            properties: {state: {const: queued}}
+            required: [state]
+          then:
+            required: [bead]
           properties:
             what: {type: string, minLength: 1}
             state: {enum: [queued, done, declined]}
@@ -121,9 +128,64 @@ $defs:
             bead:
               $ref: '#/$defs/bead'
               description: >-
-                The open bead that does what a queued ask asks. The answer bead owns the
-                reply, not the work, so a queued ask without one is reported as unowned.
+                The open bead that does what a queued ask asks, required while it is
+                queued. The answer bead owns the reply, not the work, and
+                `check_bead_tree` fails a queued ask whose bead has closed.
             blocked_on: {$ref: '#/$defs/blocked_on'}
+      awaiting_author:
+        type: array
+        description: >-
+          Questions a reply put to the issue's author that hold the issue open. One is
+          recorded here only when the record asserts something the answer could falsify
+          (who is credited with a result, what the record says it was derived from, or
+          which file or commit a claim names) and no measurement here can settle it. A
+          question the record already answers, or that a measurement here could answer,
+          is not: it goes in the closing comment, which says that an answer is still
+          welcome and holds nothing open (campaign/result-import.md, stage 7), and a
+          measurement that would settle it is made instead. An issue is closeable only
+          when none is awaited, and the answer bead owns each one. The owner's
+          instruction of 23 October 2026 is why; review A3 of #747 narrowed the test from
+          "whose answer would change the record", which almost any provenance question
+          meets.
+        items: {$ref: '#/$defs/question'}
+      held:
+        type: object
+        additionalProperties: false
+        required: [by, basis, since, beads, note]
+        description: >-
+          The issue is held for the owner: no pass posts on it or closes it, whatever the
+          record derives, until the owner lifts the hold, which removes this.
+          `check_requests` counts it against closeable and refuses to draft a comment for
+          it, `intake_comments --out` refuses a draft for it, and `intake_sweep` lists the
+          issue for the owner instead of as a reply or a close owed. Review A1 of #747 is
+          why: the owner's reservation of #557, #565, #570 and #574 lived only in beads, and
+          the closing step listed #570 for closing.
+        properties:
+          by:
+            const: owner
+            description: Whose decision the issue waits on.
+          basis:
+            enum: [owner-instruction, recorded-reservation]
+            description: >-
+              `owner-instruction` when the owner's own words reserving the issue are
+              recorded, which `note` quotes with where; `recorded-reservation` when earlier
+              lanes reserved the issue for the owner's own handling, as the beads in
+              `beads` record, and the hold awaits the owner's confirmation. Review B1 of
+              #747 is why the second exists: the four holds of 23 October rest on such
+              beads, and no instruction in the owner's words is recorded.
+          since:
+            type: string
+            format: date
+            description: >-
+              The day the hold was recorded in this file; `note` gives the days the
+              reservation was first recorded in the beads.
+          beads:
+            type: array
+            minItems: 1
+            uniqueItems: true
+            items: {$ref: '#/$defs/bead'}
+            description: The beads that record the reservation or the instruction.
+          note: {type: string, minLength: 1}
       beads:
         type: array
         uniqueItems: true
@@ -150,6 +212,47 @@ $defs:
           required: [kind]
         then:
           not: {required: [intake]}
+  question:
+    type: object
+    additionalProperties: false
+    required: [question, changes, asked, state]
+    description: >-
+      One question to the author: what was asked, what in the record its answer could
+      falsify, the reply that asked it, and whether it is still awaited.
+    properties:
+      question: {type: string, minLength: 1}
+      changes:
+        enum: [credit, lineage, file]
+        description: >-
+          What the record asserts that the answer could falsify: who is credited with a
+          result, what it was derived from, or which file or commit a claim names.
+      asked:
+        $ref: '#/$defs/comment_url'
+        description: The recorded reply on this issue that asked it.
+      state:
+        enum: [awaiting, answered, withdrawn]
+        description: >-
+          `answered` once the author's answer is read into the record, naming the comment
+          in `answer`; `withdrawn` when the record no longer needs it, saying why in
+          `note`.
+      answer:
+        $ref: '#/$defs/comment_url'
+        description: The author's comment that answered it.
+      note: {type: string, minLength: 1}
+    allOf:
+      - if:
+          properties: {state: {const: answered}}
+          required: [state]
+        then:
+          required: [answer]
+      - if:
+          properties: {state: {const: withdrawn}}
+          required: [state]
+        then:
+          required: [note]
+  comment_url:
+    type: string
+    pattern: "^https://github\\.com/[\\w.-]+/[\\w.-]+/issues/[0-9]+#issuecomment-[0-9]+$"
   result:
     type: object
     additionalProperties: false
@@ -192,10 +295,16 @@ $defs:
       bead:
         $ref: '#/$defs/bead'
         description: >-
-          The open bead that imports a queued result. The issue's `beads` may name several
-          and its answer bead owns only the reply, so a queued result without one is
-          reported as unowned, and `check_bead_tree` fails one whose bead has closed.
+          The open bead that imports a queued result, required while it is queued. The
+          issue's `beads` may name several and its answer bead owns only the reply, and
+          `check_bead_tree` fails a queued result whose bead has closed.
       blocked_on: {$ref: '#/$defs/blocked_on'}
+    # A queued result is work, so it names the bead that imports it (think-du1e).
+    if:
+      properties: {queued: {const: true}}
+      required: [queued]
+    then:
+      required: [bead]
     oneOf:
       - anyOf:
           - required: [register]

@@ -1,0 +1,74 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "evand-n303-2026-10-22",
+  "source_url": "https://github.com/evand/square-packing",
+  "source_ref": "f06521f4bde9e379a91c1ea88053f3e43df8ede5",
+  "source_commit": "f06521f4bde9e379a91c1ea88053f3e43df8ede5",
+  "retrieved_at_utc": "2026-10-22T19:23Z",
+  "git_scope": "Blobless clone of evand/square-packing and a sparse checkout of the issue #728 pin f06521f, the commit that adds the three s303_r303w0 files under search/packer/candidates/ and nothing else; the head 7982d7a holds the same certificate blob. All three are retained: the dilation certificate the claim rests on (s303_r303w0.cert), the binary64 packing it was made from and the pipeline's report, with the licence, credits and the root, exact-format and packer READMEs. The two source checkers and the dilation producer are pinned by digest against the identical copies the n229 packet retains, the exact solver against the n183 packet's identical copy, and the report's producer, the basin explorer, the near-record sweep, the band flip and the matching-distance definition by digest only. The rest of the tree is pinned by the commit and was not retained or executed.",
+  "archived_dir": "source",
+  "license": "MIT, copyright (c) 2026 Evan Daniel (LICENSE retained). CREDITS.md states Claude (Anthropic) under human direction, no peer review; the pinned commit names Claude Opus 5.5 as co-author and says the record claim was approved by Evan in chat on 22 October 2026. Issue #728 credits Evan Daniel and names Daniil Ostashev's packing (#562) as the search's start.",
+  "claims": [
+    "Issue #728 reports s(303) <= 17.909772217275, the exact rational side 447744305431858194305431410441/25000000000000000000000000000 = 17.90977221727432777221725641764 of search/packer/candidates/s303_r303w0.cert rounded up at 12 places, 1.86e-4 below the register's 17.909958291070 (Daniil Ostashev, #501/#562); it prints the SHA-256 of the certificate and of its binary64 input.",
+    "The issue says the certificate is a dilation of the binary64 packing in s303_r303w0.input.txt (search/packer/dilate_cert.py): centres and box scaled by 1 + 10^-12, coordinates rounded to rationals and each angle to a rational half-angle tangent, so every square is exactly unit; it certifies the upper bound only.",
+    "The author reports that his two standard-library exact checkers, verify_cert.py (separating axes) and verify_cert2.py (polygon intersection), accept it, with least pair separation 1.2e-12; they share an author and the certificate format.",
+    "The issue leaves local optimality unresolved: the author's exact solver finds no equilibrium with smooth contacts (not first-order jammed), and its corner-corner MILP predicts a further first-order descent of about 4.8e-7 (vv_milp_dS = -4.751298275965879e-07 in the report) that the descent step did not realise.",
+    "The issue calls it a new packing, not a refinement of Ostashev's #562 packing: matching distance 0.266 under the best of the 8 box symmetries, 91 tilted squares against 92. It gives the lineage: the basin explorer started from Ostashev's packing on 17 October, near-record sweeps with crossovers followed on 20 to 22 October, and the last move was a band flip, one of the two tilted bands reflected along its wall, re-polished to 17.909772."
+  ],
+  "scope": [
+    "LICENSE",
+    "CREDITS.md",
+    "README.md",
+    "search/exact/README.md",
+    "search/exact/verify_cert.py",
+    "search/exact/verify_cert2.py",
+    "search/exact/exactsolve.py",
+    "search/packer/README.md",
+    "search/packer/dilate_cert.py",
+    "search/packer/candidate.py",
+    "search/packer/explore.py",
+    "search/packer/dgen.py",
+    "search/packer/bandflip.py",
+    "search/packer/pk/crossing.py",
+    "search/packer/candidates/s303_r303w0.cert",
+    "search/packer/candidates/s303_r303w0.input.txt",
+    "search/packer/candidates/s303_r303w0.json"
+  ],
+  "pinned_only": [
+    {
+      "match": "search/exact/verify_cert*.py",
+      "reason": "The source's two standalone exact checkers, byte-identical to the copies the n229 packet retains at e0338c7; never executed by this acquisition.",
+      "identical_to": "packing/resources/web/evand-n229-dilation-2026-10-17/source/search/exact"
+    },
+    {
+      "match": "search/packer/dilate_cert.py",
+      "reason": "The dilation producer the issue names, byte-identical to the copy the n229 packet retains at e0338c7; a replay consumes the completed certificate without it.",
+      "identical_to": "packing/resources/web/evand-n229-dilation-2026-10-17/source/search/packer"
+    },
+    {
+      "match": "search/exact/exactsolve.py",
+      "reason": "Numerical high-precision solver whose not-jammed verdict and corner-corner MILP the issue reports, byte-identical to the copy the n183 packet retains at 3a9948c; a replay consumes the completed certificate without this solver or its dependencies.",
+      "identical_to": "packing/resources/web/evand-n183-subgrid-2026-10-19/source/search/exact"
+    },
+    {
+      "match": "search/packer/candidate.py",
+      "reason": "The pipeline that wrote s303_r303w0.json (exact solve, descent, checkers, live comparison, prior record and matching distance); numerical and networked tooling, pinned for provenance and not executed."
+    },
+    {
+      "match": "search/packer/explore.py",
+      "reason": "The basin explorer the issue names for the first lineage step; numerical discovery code, pinned for provenance and not executed."
+    },
+    {
+      "match": "search/packer/dgen.py",
+      "reason": "The near-record sweep the issue names for the second and third lineage steps; numerical discovery code, pinned for provenance and not executed."
+    },
+    {
+      "match": "search/packer/bandflip.py",
+      "reason": "The band flip, the last move the issue names (one tilted band reflected along its wall); numerical discovery code, pinned for provenance and not executed."
+    },
+    {
+      "match": "search/packer/pk/crossing.py",
+      "reason": "Defines the matching distance the issue prints (minimum over the 8 box symmetries of the optimal-matching RMS corner displacement); pinned for provenance and not executed."
+    }
+  ]
+}

@@ -1,4 +1,9 @@
-// Facets enhance the complete archive; without scripts no article is filtered out.
+// Facets enhance a News list. The archive filters every article and keeps the choice in
+// its address; without scripts no article is filtered out there. A preview, the home
+// page's News box (`data-news-limit`), shows the newest articles that match, up to its
+// limit, says how many in its live count, keeps no address and carries the choice on
+// its "All News" link (`data-news-carry`). Either opens on the levels its markup
+// presses.
 (() => {
   const controls = document.querySelector("[data-news-filters]");
   const news = document.querySelector("[data-news]");
@@ -12,7 +17,13 @@
   const topicButtons = [...controls.querySelectorAll("button[data-news-topic]")];
   const allScores = scoreButtons.map((button) => button.getAttribute("data-news-score") || "");
   const allTopics = topicButtons.map((button) => button.getAttribute("data-news-topic") || "");
-  let scores = new Set(["4", "5"]);
+  // The levels the page opens on, which an address without `news-s` means.
+  const initial = scoreButtons
+    .filter((button) => button.getAttribute("aria-pressed") === "true")
+    .map((button) => button.getAttribute("data-news-score") || "");
+  const limit = Number.parseInt(news.dataset.newsLimit || "", 10);
+  const preview = limit > 0;
+  let scores = new Set(initial);
   let topics = new Set(allTopics);
   /** @param {string} name @param {string[]} allowed @param {string[]} fallback */
   const read = (name, allowed, fallback) => {
@@ -22,7 +33,7 @@
     );
   };
   const restore = () => {
-    scores = read("news-s", allScores, ["4", "5"]);
+    scores = read("news-s", allScores, initial);
     topics = read("news-topics", allTopics, allTopics);
   };
   /** @param {HTMLElement} card */
@@ -42,12 +53,33 @@
     const card = document.getElementById(id)?.closest("[data-news-day]");
     return card instanceof HTMLElement && news.contains(card) ? card : null;
   };
+  // A preview's "All News" link opens the archive on the reader's choice, once
+  // they have made one; the archive reads it as its own address.
+  const carry = () => {
+    const levels = allScores.filter((value) => scores.has(value)).join(",");
+    for (const link of document.querySelectorAll("a[data-news-carry]")) {
+      if (!(link instanceof HTMLAnchorElement)) {
+        continue;
+      }
+      const url = new URL(link.href);
+      if (levels === initial.join(",")) {
+        url.searchParams.delete("news-s");
+      } else {
+        url.searchParams.set("news-s", levels || "none");
+      }
+      link.href = url.href;
+    }
+  };
   /** @param {"push" | "replace"} mode */
   const persist = (mode) => {
+    if (preview) {
+      carry();
+      return;
+    }
     const url = new URL(location.href);
     const levels = allScores.filter((value) => scores.has(value)).join(",");
     const selectedTopics = allTopics.filter((value) => topics.has(value)).join(",");
-    if (levels === "4,5") {
+    if (levels === initial.join(",")) {
       url.searchParams.delete("news-s");
     } else {
       url.searchParams.set("news-s", levels || "none");
@@ -69,6 +101,14 @@
       }
     }
   };
+  // A preview's live count says what it shows, not what it carries for its filter.
+  /** @param {number} shown */
+  const previewCount = (shown) => {
+    const levels = allScores.filter((value) => scores.has(value)).map((value) => `S${value}`);
+    return shown
+      ? `Showing ${shown} news item${shown === 1 ? "" : "s"} at ${levels.join(", ")}`
+      : "No news matches these filters";
+  };
   const apply = () => {
     const scored = cards.filter((card) => scores.has(card.dataset.newsScore || ""));
     for (const button of scoreButtons) {
@@ -87,18 +127,19 @@
     }
     let shown = 0;
     for (const card of cards) {
-      card.hidden = !matches(card);
+      card.hidden = !matches(card) || (preview && shown >= limit);
       shown += Number(!card.hidden);
     }
     const count = controls.querySelector("[data-news-count]");
     if (count) {
-      count.textContent = `${shown} of ${cards.length} news items`;
+      count.textContent = preview ? previewCount(shown) : `${shown} of ${cards.length} news items`;
     }
     const empty = controls.querySelector("[data-news-empty]");
     if (empty instanceof HTMLElement) {
       empty.hidden = shown !== 0;
     }
     document.dispatchEvent(new Event("news:filter"));
+    controls.dispatchEvent(new CustomEvent("squares:filterschange", { bubbles: true }));
   };
   // A bookmarked item widens its facets, so the address never names a hidden card.
   const revealTarget = () => {
@@ -139,8 +180,10 @@
         return;
       }
     }
-    if (button.hasAttribute("data-news-reset")) {
-      scores = new Set(["4", "5"]);
+    if (button.hasAttribute("data-site-filter-all")) {
+      topics = new Set(allTopics);
+    } else if (button.hasAttribute("data-news-reset")) {
+      scores = new Set(initial);
       topics = new Set(allTopics);
     } else {
       return;
@@ -155,6 +198,10 @@
     apply();
   };
   controls.hidden = false;
+  if (preview) {
+    apply();
+    return;
+  }
   fromAddress();
   window.addEventListener("popstate", fromAddress);
   window.addEventListener("hashchange", fromAddress);

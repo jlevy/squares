@@ -1,0 +1,715 @@
+{
+ "axis": {
+  "argmin": [
+   "70013/20000",
+   "70013/20000"
+  ],
+  "in_domain": true,
+  "certified_bound": 1.0012987504282507,
+  "exact_capture": "69412955573359037071999315594516419982932357275431307918297149490149500163588345168109365651467607576990689718585515358958727686917021294287831245601167706852924026928268681582038652104054388803272893143208921045677574003173686140859626509736834913591466081406738888118720673760150939949628886342046311837/69322922392982903936741613940760630203346451323837179315654078729459581429679705768084015155884027637371818956451247932264124143594586355264240953572726013553649777106054497190108534951965215034528181654476954902963665222365808806754069733144185214963426004118487068905924022070707075500333649172635520000",
+  "exact_capture_float": 1.001298750503704,
+  "bound_below_exact": true,
+  "control_197_200_exact": 0.9862792692461486,
+  "control_below_one": true
+ },
+ "tightest": [
+  {
+   "j": 676,
+   "certified_bound": 1.000000000022577,
+   "points": [
+    {
+     "point": [
+      3.3481007840649033,
+      3.3793990781608785
+     ],
+     "exact_capture": 1.0288321705828254,
+     "at_least_certified_bound": true,
+     "in_domain": true
+    },
+    {
+     "point": [
+      3.349259980142532,
+      3.379978676199693
+     ],
+     "exact_capture": 1.027491310137099,
+     "at_least_certified_bound": true,
+     "in_domain": true
+    }
+   ]
+  },
+  {
+   "j": 1799,
+   "certified_bound": 1.000000000043549,
+   "points": [
+    {
+     "point": [
+      4.299630334468933,
+      3.6971832020321465
+     ],
+     "exact_capture": 1.0133094068372588,
+     "at_least_certified_bound": true,
+     "in_domain": true
+    },
+    {
+     "point": [
+      4.300188155887856,
+      3.6977410234510697
+     ],
+     "exact_capture": 1.0133723751390724,
+     "at_least_certified_bound": true,
+     "in_domain": true
+    }
+   ]
+  },
+  {
+   "j": 1925,
+   "certified_bound": 1.000000000058912,
+   "points": [
+    {
+     "point": [
+      3.5022694262011997,
+      3.753317176069502
+     ],
+     "exact_capture": 1.0034211627421465,
+     "at_least_certified_bound": true,
+     "in_domain": true
+    },
+    {
+     "point": [
+      3.5024087423775976,
+      3.754431705480682
+     ],
+     "exact_capture": 1.003260562559683,
+     "at_least_certified_bound": true,
+     "in_domain": true
+    }
+   ]
+  },
+  {
+   "j": 441,
+   "certified_bound": 1.0000000000613618,
+   "points": [
+    {
+     "point": [
+      4.523230973394837,
+      3.548373858254192
+     ],
+     "exact_capture": 1.0043619464182483,
+     "at_least_certified_bound": true,
+     "in_domain": true
+    },
+    {
+     "point": [
+      4.523525047939374,
+      3.548520895526461
+     ],
+     "exact_capture": 1.0042730899171273,
+     "at_least_certified_bound": true,
+     "in_domain": true
+    }
+   ]
+  },
+  {
+   "j": 1181,
+   "certified_bound": 1.0000000000771683,
+   "points": [
+    {
+     "point": [
+      4.616299209070609,
+      3.5025937697622087
+     ],
+     "exact_capture": 1.0736482058742505,
+     "at_least_certified_bound": true,
+     "in_domain": true
+    },
+    {
+     "point": [
+      4.617431023541451,
+      3.5037255842330506
+     ],
+     "exact_capture": 1.0731249691662725,
+     "at_least_certified_bound": true,
+     "in_domain": true
+    }
+   ]
+  },
+  {
+   "j": 1216,
+   "certified_bound": 1.0000000001753244,
+   "points": [
+    {
+     "point": [
+      3.028313917148017,
+      3.5406666442148333
+     ],
+     "exact_capture": 1.00210421437605,
+     "at_least_certified_bound": true,
+     "in_domain": true
+    },
+    {
+     "point": [
+      3.0288791159644175,
+      3.5408079439189337
+     ],
+     "exact_capture": 1.0021067997606554,
+     "at_least_certified_bound": true,
+     "in_domain": true
+    }
+   ]
+  },
+  {
+   "j": 1820,
+   "certified_bound": 1.0000000001917337,
+   "points": [
+    {
+     "point": [
+      3.697592380635532,
+      3.5715511705461296
+     ],
+     "exact_capture": 1.0029312232589562,
+     "at_least_certified_bound": true,
+     "in_domain": true
+    },
+    {
+     "point": [
+      3.697871232870243,
+      3.5718300227808406
+     ],
+     "exact_capture": 1.0029287862480156,
+     "at_least_certified_bound": true,
+     "in_domain": true
+    }
+   ]
+  },
+  {
+   "j": 776,
+   "certified_bound": 1.0000000001918095,
+   "points": [
+    {
+     "point": [
+      4.440633537299298,
+      3.363392437175285
+     ],
+     "exact_capture": 1.0062447073232512,
+     "at_least_certified_bound": true,
+     "in_domain": true
+    },
+    {
+     "point": [
+      4.440921723789433,
+      3.363968810155555
+     ],
+     "exact_capture": 1.0063944261316236,
+     "at_least_certified_bound": true,
+     "in_domain": true
+    }
+   ]
+  },
+  {
+   "j": 1851,
+   "certified_bound": 1.0000000002144145,
+   "points": [
+    {
+     "point": [
+      3.502810772922215,
+      3.2429926382348477
+     ],
+     "exact_capture": 1.0354757032840565,
+     "at_least_certified_bound": true,
+     "in_domain": true
+    },
+    {
+     "point": [
+      3.503368322567467,
+      3.2452228368158553
+     ],
+     "exact_capture": 1.0352499443703083,
+     "at_least_certified_bound": true,
+     "in_domain": true
+    }
+   ]
+  },
+  {
+   "j": 1157,
+   "certified_bound": 1.0000000002342795,
+   "points": [
+    {
+     "point": [
+      4.308487499013201,
+      4.584896039579057
+     ],
+     "exact_capture": 1.085695967386735,
+     "at_least_certified_bound": true,
+     "in_domain": true
+    },
+    {
+     "point": [
+      4.309053909956984,
+      4.58546245052284
+     ],
+     "exact_capture": 1.085199242610143,
+     "at_least_certified_bound": true,
+     "in_domain": true
+    }
+   ]
+  },
+  {
+   "j": 1736,
+   "certified_bound": 1.0000000002566953,
+   "points": [
+    {
+     "point": [
+      3.4515239079331463,
+      4.282730601434299
+     ],
+     "exact_capture": 1.005357148340688,
+     "at_least_certified_bound": true,
+     "in_domain": true
+    },
+    {
+     "point": [
+      3.4518030236797888,
+      4.283288832927584
+     ],
+     "exact_capture": 1.0055052592824723,
+     "at_least_certified_bound": true,
+     "in_domain": true
+    }
+   ]
+  },
+  {
+   "j": 494,
+   "certified_bound": 1.00000000027997,
+   "points": [
+    {
+     "point": [
+      3.5549261432931427,
+      3.495729672824605
+     ],
+     "exact_capture": 1.0108716947782694,
+     "at_least_certified_bound": true,
+     "in_domain": true
+    },
+    {
+     "point": [
+      3.555512246961148,
+      3.4960227246586077
+     ],
+     "exact_capture": 1.0108091217003623,
+     "at_least_certified_bound": true,
+     "in_domain": true
+    }
+   ]
+  }
+ ],
+ "control_witnesses": [
+  {
+   "j": 401,
+   "witness": [
+    3.432232105450395,
+    3.2152089474640313
+   ],
+   "in_domain": true,
+   "scaled_capture": 0.9997151584058479,
+   "scaled_below_one": true,
+   "equals_logged_exact_coverage": true,
+   "original_capture": 1.014939247112536,
+   "original_at_least_one": true
+  },
+  {
+   "j": 468,
+   "witness": [
+    3.418506262094306,
+    3.2329830669825563
+   ],
+   "in_domain": true,
+   "scaled_capture": 0.9998728904179539,
+   "scaled_below_one": true,
+   "equals_logged_exact_coverage": true,
+   "original_capture": 1.0150993811349787,
+   "original_at_least_one": true
+  },
+  {
+   "j": 267,
+   "witness": [
+    3.4650102939386884,
+    3.21735494109057
+   ],
+   "in_domain": true,
+   "scaled_capture": 0.9988962815723329,
+   "scaled_below_one": true,
+   "equals_logged_exact_coverage": true,
+   "original_capture": 1.0141079000734343,
+   "original_at_least_one": true
+  },
+  {
+   "j": 602,
+   "witness": [
+    3.1843507767633934,
+    3.3741301018374
+   ],
+   "in_domain": true,
+   "scaled_capture": 0.9993154693358591,
+   "scaled_below_one": true,
+   "equals_logged_exact_coverage": true,
+   "original_capture": 1.0145334714069636,
+   "original_at_least_one": true
+  },
+  {
+   "j": 535,
+   "witness": [
+    3.180488155898371,
+    3.4011624054460396
+   ],
+   "in_domain": true,
+   "scaled_capture": 0.9999630067465638,
+   "scaled_below_one": true,
+   "equals_logged_exact_coverage": true,
+   "original_capture": 1.0151908697934657,
+   "original_at_least_one": true
+  },
+  {
+   "j": 201,
+   "witness": [
+    3.4813892688442314,
+    3.2878630958374204
+   ],
+   "in_domain": true,
+   "scaled_capture": 0.9999990534217003,
+   "scaled_below_one": true,
+   "equals_logged_exact_coverage": true,
+   "original_capture": 1.0152274654027413,
+   "original_at_least_one": true
+  },
+  {
+   "j": 668,
+   "witness": [
+    3.174307393889298,
+    3.36914265747306
+   ],
+   "in_domain": true,
+   "scaled_capture": 0.9994428787620625,
+   "scaled_below_one": true,
+   "equals_logged_exact_coverage": true,
+   "original_capture": 1.014662821078236,
+   "original_at_least_one": true
+  },
+  {
+   "j": 334,
+   "witness": [
+    3.4433253971710767,
+    3.2919515530666135
+   ],
+   "in_domain": true,
+   "scaled_capture": 0.9999999994317297,
+   "scaled_below_one": true,
+   "equals_logged_exact_coverage": true,
+   "original_capture": 1.015228425819015,
+   "original_at_least_one": true
+  },
+  {
+   "j": 134,
+   "witness": [
+    3.450523403724151,
+    3.450523403724151
+   ],
+   "in_domain": true,
+   "scaled_capture": 0.995987852808164,
+   "scaled_below_one": true,
+   "equals_logged_exact_coverage": true,
+   "original_capture": 1.0111551805159025,
+   "original_at_least_one": true
+  },
+  {
+   "j": 869,
+   "witness": [
+    3.465985299603741,
+    3.135591630647305
+   ],
+   "in_domain": true,
+   "scaled_capture": 0.994545959241578,
+   "scaled_below_one": true,
+   "equals_logged_exact_coverage": true,
+   "original_capture": 1.009691329179267,
+   "original_at_least_one": true
+  },
+  {
+   "j": 1136,
+   "witness": [
+    3.405961670984847,
+    3.061308551475625
+   ],
+   "in_domain": true,
+   "scaled_capture": 0.9998628317068686,
+   "scaled_below_one": true,
+   "equals_logged_exact_coverage": true,
+   "original_capture": 1.015089169245552,
+   "original_at_least_one": true
+  },
+  {
+   "j": 802,
+   "witness": [
+    3.504465826571227,
+    3.1360973790203506
+   ],
+   "in_domain": true,
+   "scaled_capture": 0.999381207665919,
+   "scaled_below_one": true,
+   "equals_logged_exact_coverage": true,
+   "original_capture": 1.0146002108283443,
+   "original_at_least_one": true
+  },
+  {
+   "j": 1003,
+   "witness": [
+    3.4435233588309115,
+    2.9887589061230013
+   ],
+   "in_domain": true,
+   "scaled_capture": 0.9999985450958436,
+   "scaled_below_one": true,
+   "equals_logged_exact_coverage": true,
+   "original_capture": 1.0152269493358819,
+   "original_at_least_one": true
+  },
+  {
+   "j": 1404,
+   "witness": [
+    3.347254919422361,
+    2.990997679745594
+   ],
+   "in_domain": true,
+   "scaled_capture": 0.9999348779915644,
+   "scaled_below_one": true,
+   "equals_logged_exact_coverage": true,
+   "original_capture": 1.0151623126817912,
+   "original_at_least_one": true
+  },
+  {
+   "j": 1337,
+   "witness": [
+    3.3580697086165276,
+    3.0067655955422694
+   ],
+   "in_domain": true,
+   "scaled_capture": 0.9999675039394942,
+   "scaled_below_one": true,
+   "equals_logged_exact_coverage": true,
+   "original_capture": 1.0151954354715675,
+   "original_at_least_one": true
+  },
+  {
+   "j": 1470,
+   "witness": [
+    3.351434445585487,
+    2.98875438262879
+   ],
+   "in_domain": true,
+   "scaled_capture": 0.999999395301396,
+   "scaled_below_one": true,
+   "equals_logged_exact_coverage": true,
+   "original_capture": 1.0152278124887268,
+   "original_at_least_one": true
+  },
+  {
+   "j": 1270,
+   "witness": [
+    3.3667415462069856,
+    3.002289995685026
+   ],
+   "in_domain": true,
+   "scaled_capture": 0.9999241652465115,
+   "scaled_below_one": true,
+   "equals_logged_exact_coverage": true,
+   "original_capture": 1.0151514367984888,
+   "original_at_least_one": true
+  },
+  {
+   "j": 1537,
+   "witness": [
+    3.358293818948101,
+    2.9890300635232645
+   ],
+   "in_domain": true,
+   "scaled_capture": 0.9999680242777245,
+   "scaled_below_one": true,
+   "equals_logged_exact_coverage": true,
+   "original_capture": 1.0151959637337304,
+   "original_at_least_one": true
+  },
+  {
+   "j": 936,
+   "witness": [
+    3.45793053769028,
+    2.9887500010905046
+   ],
+   "in_domain": true,
+   "scaled_capture": 0.9999999999299273,
+   "scaled_below_one": true,
+   "equals_logged_exact_coverage": true,
+   "original_capture": 1.0152284263247993,
+   "original_at_least_one": true
+  },
+  {
+   "j": 67,
+   "witness": [
+    3.4529314471147523,
+    3.4529314471147523
+   ],
+   "in_domain": true,
+   "scaled_capture": 0.9938040374142258,
+   "scaled_below_one": true,
+   "equals_logged_exact_coverage": true,
+   "original_capture": 1.0089381090499756,
+   "original_at_least_one": true
+  },
+  {
+   "j": 1604,
+   "witness": [
+    3.366754532643567,
+    2.9888898462939855
+   ],
+   "in_domain": true,
+   "scaled_capture": 0.9999982958184092,
+   "scaled_below_one": true,
+   "equals_logged_exact_coverage": true,
+   "original_capture": 1.0152266962623444,
+   "original_at_least_one": true
+  },
+  {
+   "j": 1738,
+   "witness": [
+    3.274557154072114,
+    3.274557154072114
+   ],
+   "in_domain": true,
+   "scaled_capture": 0.9995602780043413,
+   "scaled_below_one": true,
+   "equals_logged_exact_coverage": true,
+   "original_capture": 1.0147820081262349,
+   "original_at_least_one": true
+  },
+  {
+   "j": 1805,
+   "witness": [
+    3.274336946567784,
+    3.274336946567784
+   ],
+   "in_domain": true,
+   "scaled_capture": 0.9962044849501166,
+   "scaled_below_one": true,
+   "equals_logged_exact_coverage": true,
+   "original_capture": 1.0113751116244838,
+   "original_at_least_one": true
+  },
+  {
+   "j": 1871,
+   "witness": [
+    3.274170001285151,
+    3.274170001285151
+   ],
+   "in_domain": true,
+   "scaled_capture": 0.9918269324054156,
+   "scaled_below_one": true,
+   "equals_logged_exact_coverage": true,
+   "original_capture": 1.0069308958430616,
+   "original_at_least_one": true
+  },
+  {
+   "j": 1938,
+   "witness": [
+    3.27405012003099,
+    3.27405012003099
+   ],
+   "in_domain": true,
+   "scaled_capture": 0.9907338329653278,
+   "scaled_below_one": true,
+   "equals_logged_exact_coverage": true,
+   "original_capture": 1.005821150218607,
+   "original_at_least_one": true
+  },
+  {
+   "j": 735,
+   "witness": [
+    3.412899244725735,
+    3.1181108123029597
+   ],
+   "in_domain": true,
+   "scaled_capture": 0.9999999997411396,
+   "scaled_below_one": true,
+   "equals_logged_exact_coverage": true,
+   "original_capture": 1.0152284261331366,
+   "original_at_least_one": true
+  },
+  {
+   "j": 2005,
+   "witness": [
+    3.273979004957988,
+    3.5592080099159764
+   ],
+   "in_domain": true,
+   "scaled_capture": 0.997334164124682,
+   "scaled_below_one": true,
+   "equals_logged_exact_coverage": true,
+   "original_capture": 1.0125219940352101,
+   "original_at_least_one": true
+  },
+  {
+   "j": 2072,
+   "witness": [
+    3.2739554031599165,
+    3.2739554031599165
+   ],
+   "in_domain": true,
+   "scaled_capture": 0.9878649953482321,
+   "scaled_below_one": true,
+   "equals_logged_exact_coverage": true,
+   "original_capture": 1.0029086247190173,
+   "original_at_least_one": true
+  },
+  {
+   "j": 1671,
+   "witness": [
+    3.382790377674227,
+    2.9887587304554804
+   ],
+   "in_domain": true,
+   "scaled_capture": 0.9999992736109281,
+   "scaled_below_one": true,
+   "equals_logged_exact_coverage": true,
+   "original_capture": 1.0152276889451046,
+   "original_at_least_one": true
+  },
+  {
+   "j": 1203,
+   "witness": [
+    3.4049049542493774,
+    3.033562570156847
+   ],
+   "in_domain": true,
+   "scaled_capture": 0.9999999994962437,
+   "scaled_below_one": true,
+   "equals_logged_exact_coverage": true,
+   "original_capture": 1.0152284258845115,
+   "original_at_least_one": true
+  },
+  {
+   "j": 1069,
+   "witness": [
+    3.4155575886391407,
+    3.052408910875755
+   ],
+   "in_domain": true,
+   "scaled_capture": 0.9999999998515684,
+   "scaled_below_one": true,
+   "equals_logged_exact_coverage": true,
+   "original_capture": 1.0152284262452471,
+   "original_at_least_one": true
+  }
+ ],
+ "status": "CONSISTENT",
+ "kind": "review-2026-10-23-n31-source-log-points/v1",
+ "program_sha256": "ac7c53611211fadf31cf9a9df56b08058570542c610ef60704a3c1a7cefe7128",
+ "brute_sha256": "9d836e14c22f996b2e13805e53b9041a89d694047aa99e1a3a79a41a070d70ae",
+ "cpu_seconds": 3.146
+}

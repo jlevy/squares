@@ -22,7 +22,10 @@ $t = \tan(\theta/2)$, in Evan Daniel’s certificate format.
 Their per-count JSON names a CT105 web submission at 227 (`f0ca7a65…`, method `fq`,
 received 2026-10-17T20:28:22Z) seeded from de Winter’s #668 certificate by way of Evan
 Daniel’s exact form of it, and at 229 an `slp` refinement (search job 106640) of de
-Winter’s #668 certificate. Who made the 227 submission is not stated.
+Winter’s #668 certificate. The source’s manifest credits the 227 certificate to
+Couzo, retaining de Winter’s seed credit; the CT105 web submission it names as its
+provenance names no submitter (RF-3 of the 22 October review), and Couzo’s answer of 24
+October says he made it himself ([The Author’s Answers](#the-authors-answers)).
 
 ## Retained Here
 
@@ -32,9 +35,12 @@ every file is bound to its Git blob at the pin.
 [acquisition/sources.json](acquisition/sources.json) is the acquisition record and
 [acquisition/upstream-subtree.sha256](acquisition/upstream-subtree.sha256) the manifest.
 Retained: every certificate the issue links, `source/certificates/nN.cert` at its 46
-counts, each with its per-count JSON `nN.json`, 92 files, 5,631,984 bytes (2.04 MB as
-Git’s zlib stores them): the 227 and 229 pairs at 01:24Z on 22 October for T-227, and
-the 44 beyond the corpus from the same pin at 04:41Z.
+counts, each with its per-count JSON `nN.json`, and one 227 certificate the per-count
+JSON names as the 227 submission’s seed, 93 files, 5,656,441 bytes (2.05 MB as Git’s
+zlib stores them): the 227 and 229 pairs at 01:24Z on 22 October for T-227, the 44
+beyond the corpus from the same pin at 04:41Z, and the seed
+`certificates/parents/cdd08485….cert` from the same pin on 24 October at 09:40Z, for the
+author’s answers.
 The repository states no licence for its data or prose, so the certificates and their
 JSON are retained as factual data under the owner decision of 9 October 2026 recorded in
 [known-best-packings/README.md](../known-best-packings/README.md).
@@ -43,6 +49,8 @@ directory’s `README.md`, `manifest.json` and `SHA256SUMS`, and the source’s 
 `verify_bound_certificate.py` with its MIT licence `BOUND_VERIFIER_LICENSE.txt`, which are
 byte-identical to the copies the [issue-678 packet](../couzo-issue678-2026-10-18/README.md)
 retains and were not run.
+Since 24 October `certificates/parents/manifest.json`, the source’s record of the parent
+certificates it retains, is pinned by digest too, for its entry on the 227 witness.
 The rest of the tree is pinned by the commit alone.
 
 ## Exact Replay
@@ -58,8 +66,10 @@ Both positives pass both routes, and both routes refuse all four controls. At 22
 [receipts/exact-certification.json.xz](receipts/exact-certification.json.xz) keeps every
 deciding input and both routes’ complete outputs.
 The two routes share certificate parsing, the half-angle conversion, Python’s rational
-arithmetic and the separating-axis method. No source program ran here, and the entry
-awaits a stage 4 review (think-0nse).
+arithmetic and the separating-axis method. No source script ran here. The source’s
+manifest names this repository’s `sqpack/verify.py` as its first checker, and the `sqpack`
+route decides through that file, so the replay shares the producer’s components (RF-1 of
+the [22 October review](../../../../docs/project/reviews/review-2026-10-22-couzo-670-672-675.md)).
 
 ## Against the Record
 
@@ -103,6 +113,57 @@ regularization of the packing T-227 holds, as its source says: nearest centres p
 two one to one under a half turn, 194 of its 227 squares lie within $10^{-6}$ of #672’s,
 16 move beyond $10^{-3}$ and 3 beyond a tenth, at most 0.168. That the two are one
 packing is the source’s claim, measured here and not decided.
+
+## The Author’s Answers
+
+Francisco Couzo’s [comment of 24 October](https://github.com/jlevy/squares/issues/672#issuecomment-6380747582)
+answers the two questions of the 22 October review; it says Claude Code assisted with it.
+He made the 227 CT105 submission himself: CT105 is the server behind his search web app,
+which only he runs, so the credit is his, after de Winter, as the manifest says.
+He says the task was seeded from the source’s retained 227 witness `cdd08485…`, “which
+is de Winter’s #668 certificate”, and that his record lists Evan Daniel’s
+`alt/n-227.cert.gz` as that certificate’s seed.
+His `verify.py`, he says, is this repository’s `packing/src/sqpack/verify.py` at
+`37e6757`, byte for byte (`main` still holds the same Git blob). The source does not
+publish its `verify.py`, but it publishes the call, in
+[`exact_finish.py`, lines 68 to 70](https://github.com/franciscouzo/square-packing/blob/1c1715399709bc955e9b402947ab8b52bbacdfc3/exact_finish.py#L68-L70)
+at `1c17153`: `verify_packing([corners(*q) for q in squares], side, lambda v: (v > 0)-(v < 0), bucket=True)`,
+exact rational corners from each `x y t` line in the closed box. His strict verdict is
+false at 229 only because squares touch the walls, and true at 227.
+The source’s record of the witness, `certificates/parents/manifest.json` at the pin, which
+this packet pins by digest, credits it to “Joost de Winter (JoostdeWinter)” and notes:
+“Prior locally retained witness; seed/construction provenance is preserved without
+asserting an independently established browser trajectory.”
+So the source keeps no record of how the witness was made.
+
+[measure/answers-2026-10-24.py](measure/answers-2026-10-24.py) holds the answers to the
+retained files and writes [measure/answers-2026-10-24.json](measure/answers-2026-10-24.json),
+in about 3 seconds; it decides nothing:
+
+- **The digests.** The three prefixes the comment prints, `cdd08485`, `65b03df8` and
+  `9ab667ec`, are the SHA-256 this packet’s manifest records for the witness and the 227
+  and 229 certificates.
+- **The witness.** `certificates/parents/cdd08485….cert`, first committed at the pin with
+  the issue’s certificates, is not de Winter’s certificate (SHA-256 `7d386887…`). Its
+  exact side, `8556247787153006491973257/549755813888000000000000`, is
+  $7.26 \times 10^{-5}$ below T-196’s and below the side the per-count JSON records for
+  Daniel’s `alt/n-227.cert.gz`, which the 22 October review measured as Daniel’s exact
+  form of de Winter’s certificate, and $9.84 \times 10^{-5}$ above #672’s 227: its side
+  lies between the two.
+- **The pairings.** By nearest centres, each pair is one to one with no square beyond a
+  tenth. The witness pairs with T-196’s packing under a reflection, 82 squares beyond
+  $10^{-3}$, at most 0.0887; #672’s 227 pairs with the witness under the identity, 91
+  beyond $10^{-3}$, at most 0.0793; and #672’s 227 pairs with T-196’s packing under the
+  same reflection, 59 beyond $10^{-3}$, at most 0.0796, as T-227’s regularization item
+  records. So #672’s packing is nearer de Winter’s than the witness is. That the witness
+  is a step from de Winter’s certificate to #672’s is the source’s statement, in the
+  per-count JSON and the comment, and not a measurement here.
+- **The call.** The same call here counts 58 corner coordinates on the boundary at 229
+  and none at 227, with no touching pair at either, as the comment says and as the
+  replay’s least wall clearances, exactly 0 and $10^{-15}$, imply.
+
+The answers change no credit: T-227 stays credited to Couzo after de Winter, Daniel and
+this project, and its claim, T-225’s and this README now say he made the submission.
 
 ## Beyond the Corpus
 
@@ -152,6 +213,22 @@ report order.
 [acquisition/beyond-horizon-rows.json](acquisition/beyond-horizon-rows.json) is the record
 the source register reads them from.
 
+## Stage 4 Review
+
+The [review of 22 October 2026](../../../../docs/project/reviews/review-2026-10-22-couzo-670-672-675.md)
+accepted #672’s two certificates for finite feasibility, with eight findings, none blocking,
+covering T-226, T-227 and T-228 together.
+It reproduced this packet’s replay and frozen comparison, decided both certificates again on a
+clean-room checker of its own, on an integer route and a `Fraction` route with exact
+clipping area, and ran sharp controls at $10^{-30}$ through both maintained routes and
+that checker: each route accepted exact contact at the far wall, the near wall and the
+least-gap pair, and refused $10^{-30}$ past it, where the certificates keep $10^{-15}$ at 227’s walls, exactly 0 at 229’s and about $1.2 \times 10^{-12}$ between pairs.
+Its programs, receipts and logs are kept with the #672 packet, in
+[`review/review-2026-10-22/`](review/review-2026-10-22/README.md),
+and `tests/test_upper_bound_reports_couzo_670_672_675.py` runs the kernel’s two sharp
+controls on #672’s 227 certificate (RF-6).
+T-227 rests at `V3`/`C3` on that review, the replay it reproduced and its checker’s run.
+
 ## Credit
 
 Francisco Couzo, with refinements of Joost de Winter’s #668 packings, as his comment
@@ -176,6 +253,8 @@ python -m devtools.beyond_horizon_replay check --issue 672
 python -m devtools.beyond_horizon_replay check --issue 672 --replay --workers 2
 python resources/web/couzo-issue672-2026-10-17/measure/identity.py \
     --out resources/web/couzo-issue672-2026-10-17/measure/identity.json
+python resources/web/couzo-issue672-2026-10-17/measure/answers-2026-10-24.py \
+    --out resources/web/couzo-issue672-2026-10-17/measure/answers-2026-10-24.json
 ```
 
 <!-- This document follows common-doc-guidelines.md.

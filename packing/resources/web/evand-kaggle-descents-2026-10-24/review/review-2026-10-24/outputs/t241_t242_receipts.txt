@@ -1,0 +1,16 @@
+T-241 n=304: receipt resources/web/couzo-n304-2026-10-23/receipts/sharp-controls.json
+  side as in the receipt: True; receipt all_as_expected: True
+  least pair gap: mine 8.183942414461258e-11; receipt ['8.183942414461258e-11']; exactly equal: True
+  least wall clearance: mine 1/1000000000000000 (1.000000e-15); receipt ['1/1000000000000000']; exactly equal: True
+  least far-wall clearance (the side the receipt lowers to contact): 1/1000000000000000 = 1.000000000000000e-15
+T-242 n=268: receipt resources/web/evand-kaggle-descents-2026-10-24/receipts/sharp-controls-n268.json
+  side as in the receipt: True; receipt all_as_expected: True
+  least pair gap: mine 9.999999999999989e-21; receipt ['9.999999999999989e-21']; exactly equal: True
+  least wall clearance: mine 1/200000000000000000000 (5.000000e-21); receipt ['1/200000000000000000000']; exactly equal: True
+  least far-wall clearance (the side the receipt lowers to contact): 250000000023039/50000000000000000000000000000000000 = 5.000000000460780e-21
+T-242 n=304: receipt resources/web/evand-kaggle-descents-2026-10-24/receipts/sharp-controls-n304.json
+  side as in the receipt: True; receipt all_as_expected: True
+  least pair gap: mine 9.999999999999995e-21; receipt ['9.999999999999995e-21']; exactly equal: True
+  least wall clearance: mine 1/200000000000000000000 (5.000000e-21); receipt ['1/200000000000000000000']; exactly equal: True
+  least far-wall clearance (the side the receipt lowers to contact): 250000000030471/50000000000000000000000000000000000 = 5.000000000609420e-21
+all agree: True

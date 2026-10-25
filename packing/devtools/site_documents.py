@@ -162,7 +162,7 @@ DOCUMENTS: tuple[SiteDocument, ...] = (
     _document(
         repo_links.EPISTEMICS,
         "epistemics.html",
-        "Epistemics",
+        "Project Epistemics",
         "How square packing claims are verified and independently confirmed, "
         "with the evidence and significance levels used in the result register.",
     ),
@@ -198,7 +198,7 @@ _BY_SOURCE = {doc.source.relative_to(REPO).as_posix(): doc for doc in DOCUMENTS}
 #: page that shows what it holds.
 RECORD_PAGES: dict[str, str] = {
     repo_links.RESULTS: render_overview.RESULTS_PAGE,
-    repo_links.STATUS: "atlas.html",
+    repo_links.STATUS: "frontier.html",
     repo_links.CHANGELOG: "news.html#changelog",
 }
 #: Where every case's record is served, one address per case (`render_case_pages`).
@@ -436,6 +436,31 @@ def element_ids(page: str) -> frozenset[str]:
     )
 
 
+def tutorial_packing_images(page: str, *, page_path: str) -> str:
+    """Publish the papers' container crop as a shared image after source-link rewriting."""
+    from devtools import site_assets  # noqa: PLC0415
+    from devtools.render_n11_lower_bounds_explainer import crop_to_container  # noqa: PLC0415
+
+    def cropped(match: re.Match[str]) -> str:
+        source = REPO / "packing/atlas/rendering" / match["name"]
+        svg = crop_to_container(source.read_text(encoding="utf-8"), name=source.name)
+        ref = site_assets.shared().assets.image("tutorial-" + source.name, svg.encode())
+        return (
+            match[0]
+            .replace(match["url"], site_assets.asset_href(ref, page_path), 1)
+            .replace('class="kpress-image"', 'class="kpress-image site-packing-diagram"', 1)
+        )
+
+    source_root = re.escape(repo_url("packing/atlas/rendering", kind="raw") + "/")
+    return re.sub(
+        r'<img\b[^>]*src="(?P<url>'
+        + source_root
+        + r'(?P<name>(?:trump11|kingbird29)-overview\.svg))"[^>]*>',
+        cropped,
+        page,
+    )
+
+
 def tutorial_front(page: str) -> str:
     """Present the source's credit list with the shared publication component."""
     pattern = re.compile(
@@ -463,7 +488,7 @@ def _reader_profile_links(page: str) -> str:
 
     return re.sub(
         r"(<article\b[^>]*>)(.*?)(</article>)",
-        lambda match: match[1] + link_prose(match[2]) + match[3],
+        lambda match: match[1] + link_prose(match[2], full_names=True) + match[3],
         page,
         flags=re.DOTALL,
     )
@@ -473,6 +498,8 @@ def render_document(
     document: SiteDocument, *, tree: RepositoryTree, report: LinkReport
 ) -> Page:
     """One reader document as a kpress page with its links rewritten."""
+    from devtools.paper_front import source_actions  # noqa: PLC0415
+
     base = posixpath.dirname(document.source.relative_to(REPO).as_posix())
     context = LinkContext(
         document.name,
@@ -481,8 +508,20 @@ def render_document(
         served=served_pages(),
         aliases=record_aliases(tree),
     )
+
+    def rewrite(page: str) -> str:
+        tutorial = document.source in (TUTORIAL, TUTORIAL_ADVANCED)
+        page = rewrite_article(
+            tutorial_front(page) if tutorial else page, context=context, report=report
+        )
+        if tutorial:
+            page = tutorial_packing_images(page, page_path=document.name)
+        return _reader_profile_links(page) if document in DOCUMENTS else page
+
     return render_overview.kpress_page(
-        without_alert_markers(
+        source_actions(document.source)
+        + "\n\n"
+        + without_alert_markers(
             without_manual_contents(document.source.read_text(encoding="utf-8"))
         ),
         name=document.name,
@@ -500,17 +539,7 @@ def render_document(
         toc=False if document.name == "synopsis.html" else "auto",
         trust_mode="sanitized",
         strict_anchors=True,
-        rewrite_body=lambda page: (
-            _reader_profile_links if document in DOCUMENTS else lambda value: value
-        )(
-            rewrite_article(
-                tutorial_front(page)
-                if document.source in (TUTORIAL, TUTORIAL_ADVANCED)
-                else page,
-                context=context,
-                report=report,
-            )
-        ),
+        rewrite_body=rewrite,
     )
 
 
@@ -670,6 +699,8 @@ def synopsis_parts(full: Page) -> tuple[Page, list[Page]]:
     Splitting rendered HTML preserves kpress's heading and footnote identifiers. Each
     historic anchor on synopsis.html names its chapter link, so it works without script.
     """
+    from devtools.paper_front import source_actions  # noqa: PLC0415
+
     article = _ARTICLE.search(full.html)
     if article is None:
         raise SystemExit("synopsis.html has no article")
@@ -719,7 +750,10 @@ def synopsis_parts(full: Page) -> tuple[Page, list[Page]]:
         )
         # Footnotes keep their body in the last source section. A cross-chapter target
         # is resolved after every chapter's anchor map has been collected below.
-        body = f"<article><h1>{html.escape(title)}</h1>{nav}{content}{nav}</article>"
+        body = (
+            f"<article>{source_actions(REPO / repo_links.SYNOPSIS)}"
+            f"<h1>{html.escape(title)}</h1>{nav}{content}{nav}</article>"
+        )
         meta = render_overview.PageMeta(
             f"Synopsis: {title}",
             (

@@ -1,7 +1,8 @@
 /* The results page's overview above its table, two stacks of KPress's own disclosure:
    the last seven days' registrations, one a day (overview_sections.recent_added), then
    the weekly rollup before them, one a week (recent_rollup). Two blocks of a stack share
-   one rule. */
+   one rule. The home page's Recently Added is the first stack again, with its house best
+   packings and dated rows (recently_added). */
 .kpress .site-rollup {
   margin-block: 1rem var(--site-table-space);
 }
@@ -98,8 +99,49 @@
   padding-block-end: 0;
 }
 
+/* A day with no results, on the home page, has no link to close it: its list keeps the
+   space the link would take. */
+.kpress .site-added details > ul:last-child {
+  padding-block-end: 0.75rem;
+}
+
 .kpress .site-added details > p {
   font-size: var(--site-font-size-note);
   margin-block: 0;
   padding-block: 0.35rem 0.75rem;
+}
+
+/* Recent Results remains one table. Before enhancement all rows are available;
+   the existing head marker reserves its collapsed geometry before first paint. */
+.kpress [data-recent-results] [data-recent-toggle-row] {
+  display: none;
+}
+:root[data-site-nav-enhanced] .kpress [data-recent-results] [data-recent-toggle-row],
+.kpress [data-recent-results][data-recent-ready] [data-recent-toggle-row] {
+  display: table-row;
+}
+[data-recent-results][data-recent-ready]:not([data-recent-expanded="true"]) > [data-recent-older],
+.kpress [data-recent-results] [data-recent-older][hidden],
+.kpress [data-recent-results][data-recent-ready] [data-recent-toggle-row][hidden],
+:root[data-site-nav-enhanced]
+  [data-recent-results]:not([data-recent-expanded="true"])
+  > [data-recent-older] {
+  display: none;
+}
+
+.kpress [data-recent-results] [data-recent-toggle-row] > td {
+  padding-block: 1rem;
+  text-align: center;
+}
+@media (width < 48rem) {
+  :root[data-site-nav-enhanced] .kpress [data-recent-results] [data-recent-toggle-row],
+  .kpress [data-recent-results][data-recent-ready] [data-recent-toggle-row] {
+    display: block;
+  }
+  .kpress [data-recent-results] [data-recent-toggle-row] > td {
+    display: block;
+  }
+  .kpress [data-recent-results][data-recent-ready] [data-recent-toggle-row][hidden] {
+    display: none;
+  }
 }

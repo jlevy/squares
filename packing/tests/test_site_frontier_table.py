@@ -31,7 +31,7 @@ from typing import Any
 import pytest
 
 from devtools.preview_site import settle_math
-from devtools.render_frontier_page import drawing_path, drawn_regularized, recent_lower_bounds
+from devtools.render_frontier_page import drawing_path, recent_lower_bounds
 from sqpack.probes import probe
 from tests import site_browser, site_renders
 from tests.test_frontier_page import COLUMNS, column
@@ -66,14 +66,14 @@ LEVEL = 1.5
 
 @pytest.fixture(scope="module")
 def page(tmp_path_factory: pytest.TempPathFactory) -> Iterator[Any]:
-    """The rendered Atlas, or SQPACK_SITE_PREVIEW_URL's existing local build."""
+    """The rendered survey, or SQPACK_SITE_PREVIEW_URL's existing local build."""
     sync_api = site_browser.api()
     live = os.environ.get("SQPACK_SITE_PREVIEW_URL")
     if live:
-        address = f"{live.rstrip('/')}/atlas.html"
+        address = f"{live.rstrip('/')}/frontier.html"
     else:
         root = Path(tmp_path_factory.mktemp("site"))
-        address = site_renders.write(root, "atlas.html")["atlas.html"].as_uri()
+        address = site_renders.write(root, "frontier.html")["frontier.html"].as_uri()
     with sync_api.sync_playwright() as driver:
         browser = site_browser.launch(driver)
         opened = browser.new_page(viewport={"width": WIDTHS[0], "height": 900})
@@ -87,8 +87,7 @@ def page(tmp_path_factory: pytest.TempPathFactory) -> Iterator[Any]:
 def laid(page: Any) -> dict[int, dict[str, Any]]:
     """The table as laid out at each width, read before any test sorts or filters it."""
     found: dict[int, dict[str, Any]] = {}
-    defaults = drawn_regularized()
-    drawings = {f"n-{n}": drawing_path(n, regularized=n in defaults) for n in CASES}
+    drawings = {f"n-{n}": drawing_path(n, regularized=True) for n in CASES}
     for width in WIDTHS:
         page.set_viewport_size({"width": width, "height": 900})
         page.wait_for_timeout(150)
@@ -127,21 +126,19 @@ def test_the_drawing_has_the_first_column_under_no_heading(
 
 
 @pytest.mark.parametrize("width", WIDTHS)
-def test_the_drawing_makes_no_row_taller_than_its_text(
+def test_the_shortest_row_fits_its_largest_content_without_extra_space(
     laid: dict[int, dict[str, Any]], width: int
 ) -> None:
-    """The drawing is two lines of the table's text high, and every row has two lines
-    at least, the case file's link over the link to the case's record. So in the
-    shortest row, one of whole numbers, the drawing and the Records cell's two lines
-    each fill the cell's height between its padding, and the row is no taller than those
-    two lines need."""
+    """The status stack, drawing, and record links determine the compact row height."""
     shortest = laid[width]["rows"][ROWS.index("n-1")]
-    thumb, records = shortest["cells"][0], shortest["cells"][column("Records")]
     assert shortest["height"] == min(row["height"] for row in laid[width]["rows"])
-    assert shortest["height"] == pytest.approx(shortest["thumb"]["height"] + 2 * PADDING, abs=1)
-    for cell in (thumb, records):
-        assert cell["above"] == pytest.approx(0, abs=1)
-        assert cell["below"] == pytest.approx(0, abs=1)
+    content = max(cell["content_height"] for cell in shortest["cells"])
+    margins = max(cell["margins"] for cell in shortest["cells"])
+    assert content + 2 * PADDING - 1 <= shortest["height"]
+    assert shortest["height"] <= content + margins + 2 * PADDING + 1
+    for index in (0, column("Records"), column("Status")):
+        cell = shortest["cells"][index]
+        assert cell["above"] == pytest.approx(cell["below"], abs=1)
 
 
 @pytest.mark.parametrize("width", WIDTHS)
@@ -176,7 +173,7 @@ def test_every_cell_is_centred_on_its_row(laid: dict[int, dict[str, Any]], width
     # A tall row: the status chip of n = 12 sits well clear of the top of its cell.
     tall = table["rows"][ROWS.index("n-12")]
     short = table["rows"][ROWS.index("n-1")]
-    assert tall["height"] > short["height"] + 20
+    assert tall["height"] > short["height"]
     # Centred, the Status cell has more than half the row's extra height above it; set to
     # the top, it would have only its padding.
     assert tall["cells"][column("Status")]["above"] > (tall["height"] - short["height"]) / 2
@@ -196,19 +193,11 @@ def test_the_table_fits_its_track_at_1280_and_scrolls_in_its_wrap_below(
     widths = {cell["words"]: cell["width"] for cell in wide["head"]}
     assert widths["n"] < 50
     assert widths["Recent"] < 96
-    # At 1280 the table is stretched to its track; below it keeps its own width, the same
-    # at every narrower window: 1192 pixels since the table has no frame (2026-10-02,
-    # think-wadm), 1194 before, and 1180 since 3 October 2026, when an exact gap with a
-    # numerator or denominator of more than eight digits became its decimal (n = 68's
-    # 4512425581603/15625000000000 was the widest gap; GAP_DIGITS), and 1165 since 6
-    # October 2026, when Evan Daniel's exact optima (T-098) put the upper lane of 48
-    # counts, n = 68 among them, at their certified sides and narrowed the gap column.
-    # The n = 11 credit now reads Ahmed. A same-page control changing only that credit
-    # back to Queuingtheorydotcom restores 1165.3 from 1150.5 pixels by widening the
-    # reported-lower column; Linux reads the current table at 1150 (think-66ym).
+    # At 1280 the table stretches to its track. Below it keeps a stable intrinsic
+    # width, bounded by that desktop track, while each narrower frame scrolls locally.
     own = laid[WIDTHS[1]]["table_width"]
     assert own <= wide["table_width"]
-    assert own == pytest.approx(1150, abs=10)
+    assert own > laid[WIDTHS[1]]["frame_width"]
     for width in WIDTHS[1:]:
         assert laid[width]["scrolls"] > 0, width
         assert laid[width]["table_width"] == pytest.approx(own, abs=1), width

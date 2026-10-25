@@ -2,7 +2,7 @@
 
 A **regularization** redraws a packing the record already holds so that it reads
 cleanly: near-axis squares straightened, contacts closed, sub-blocks aligned, symmetric
-where the packing allows it.
+where the packing allows it, and turned into a canonical pose by flip regularization.
 This policy governs every regularized drawing and every regularization the register
 records, whichever generator made it: this project’s `regularize_axis_components/2`,
 Evan Daniel’s regularizer as vendored here, or a reviewed adjustment of either.
@@ -208,7 +208,7 @@ where there is one.
 | Admit a view row 7 sent to review (a square’s count falls while no total does) | A review record naming that very view: its count, generator and version, run, output and row, and the source witness as it identifies itself; `layer` then draws it, and the entry names the record |
 | Admit a row 8 alternate | Only once question 2 is answered yes, and then labelled an alternate, never the credited packing |
 | Choose symmetry or contact, attached or separate sub-blocks, or a placement style | A per-count generator parameter in the review record, which the driver reads on every later run |
-| Choose an orientation | A recorded isometry of the witness’s frame, as `devtools/atlas_orientation.py` records them |
+| Choose an orientation | None: [flip regularization](#13-flip-regularization) draws every default picture in its canonical pose, and the witness’s frame is never changed; the one isometry `devtools/atlas_orientation.py` records, at n = 211, is history |
 | Choose between the two generators | A per-count choice in the review record |
 | Reject a view | The review record; the previous view or the witness stands |
 | Change how the generator works | A reviewed patch ([section 6](#6-forking-the-vendored-generator)) |
@@ -338,7 +338,7 @@ says how the runs fit the compute cap and which deferrals `--check-state` allows
 | `regularized atlas views match their index` | The index against the manifest, the witnesses and the views, by digest; with the layer’s contract, also the generator, method, side relation, identity and review-record fields; every drawn view’s exact side against $s_W$ and against the case record’s $U$, decided exactly, with the views above $U$ named in `ABOVE_U` | Records tier, every pull request |
 | `regularized atlas drawings match their index` | Every drawing re-rendered from its retained view | Records tier, every pull request |
 | `default pictures improve on their house drawings` | Every drawn view measured against its house drawing again, each count’s default picture decided under the improvement rule ([section 11](#11-the-improvement-rule)) and held to `default-drawings.json` | Records tier, every pull request |
-| `every drawn picture is regularized, regular as published, decided or exempt` | Every count’s regularization state in `default-drawings.json` against the index; no count pending unless `default_drawings.PENDING_ALLOWED` names it with its bead, and no named count that is no longer pending ([section 12](#12-the-default-picture)) | Records tier, every pull request |
+| `every drawn picture is regularized, regular as published, decided, owed to an open bead or exempt` | Every count’s regularization state in `default-drawings.json` against the index; no count pending unless `default_drawings.PENDING_ALLOWED` names it with its bead, and no named count that is no longer pending ([section 12](#12-the-default-picture)) | Records tier, every pull request |
 | `results rungs are earned and the view agrees` | `devtools.check_results` on each register result’s `regularizations` items, and on `regularized_drawings` and every case record’s `regularization` note against the layer’s index | Records tier, every pull request |
 | `regularized atlas views re-derive exactly` | Every `regularize_axis_components/2` view re-derived byte for byte; every other generator’s view decided again over $\mathbb{Q}$ on the maintained routes, its square count, identity and shades re-measured and its digests held | Deferred: the `regularized-views` job, whose 450 s ceiling bead think-uomm revisits |
 | The generator run | The views reproduced from the pinned code and inputs | On request only, with a receipt |
@@ -371,8 +371,11 @@ policy applies until there is one.
    are a follow-up, $\mathbb{Q}(\sqrt{2})$ first; $n = 11$, whose proved optimum lies in
    a field of degree 8, stays drawn from its witness.
 
-5. **Orientation:** the source’s; any isometry is recorded as `atlas_orientation`
-   records one.
+5. **Orientation:** every witness and view keeps its source’s frame; any isometry of a
+   frame is recorded as `atlas_orientation` records one.
+   *Answered by the owner on 23 October 2026:* the default picture is drawn in the
+   canonical pose that [flip regularization](#13-flip-regularization) chooses, and the
+   house drawing as published keeps its source’s pose.
 
 6. **Tie-breaks of taste:** the generator’s defaults, flagged in the gallery for the
    reviewer.
@@ -673,9 +676,11 @@ regularized. So the same record states, for every count, whether the picture it 
 `regular-as-published` (the house drawing has no uneven and no near-axis square, no
 strong view of the count has lapsed, and `PENDING_ALLOWED` does not hold it for its
 bead’s runs), `decided-no-better` (the strong generators ran on that witness and drew
-nothing the improvement rule takes), `exempt` (with a reason and the bead that owns it)
-or `pending`, with the witness it was decided on (its source’s key, path and revision
-and its side, never a digest of the file, under OR-16) and the runs that decided it.
+nothing the improvement rule takes), `regularization-owed` (they ran and drew no view
+the rule could judge, so the drawing is not regularized and its regularization is owed
+to the open bead its entry names), `exempt` (with a reason and the bead that owns it) or
+`pending`, with the witness it was decided on (its source’s key, path and revision and
+its side, never a digest of the file, under OR-16) and the runs that decided it.
 The index’s `status: regularized` says only that the layer holds a view.
 A view that lapses with its witness is recorded on the axis tool’s record (`lapsed`),
 and the count is pending until the generators decide the new witness.
@@ -691,6 +696,73 @@ reviewed change drops its entry, which the gate accepts where the count then rea
 regular as published; and a count joins it with its bead, whatever its house reads.
 The gate cannot tell a dropped entry from a decided one, so the pull request that drops
 one shows its bead’s runs or what the count draws before and after.
+
+## 13. Flip Regularization
+
+**Owner decisions, 23 October 2026.** Packings arrive in their sources’ poses, rotated
+or mirrored against one another, “so they look a little chaotic”.
+The owner asked that each drawing be rotated and flipped by quadrant weight, “first
+rotate to put the heaviest quadrant, and then flip if necessary”, with ties broken in
+“some other arbitrary way to make it deterministic”, in floating point, “since this is
+only for the purposes of regularization”.
+The original source is not adjusted, the regularized picture is “fully canonical pose”,
+and the pose is kept as “a separate piece of metadata” rather than as a second copy of
+the packing. The owner then put the heaviest quadrant at the lower right, so that “the
+really well-known ones should not change, like n = 11”, and the rule matches “what the
+conventions are for the common ones as much as possible”; and asked that the stage be
+“completely separate from the other regularization” and fast.
+
+The owner named the stage **flip regularization**; it is the last of the regularization
+process. It turns every count’s default picture ([section 12](#12-the-default-picture))
+into a canonical pose: one of the container’s eight symmetries, chosen from where its
+squares lie.
+
+1. Split the container down the middle into four quadrants, and weigh each by the area
+   of the squares inside it over its own area, in binary64.
+2. Rotate the heaviest quadrant to the lower right.
+   Then, if the upper right is heavier than the lower left, mirror across the diagonal
+   through the lower-right corner, the one flip that keeps that quadrant in place.
+   The quadrant opposite the heaviest ends upper left, and the upper right takes what is
+   left, so empty space gathers at the upper right, as the catalogues draw the integer
+   grids: rows filled from the bottom, the empty cells at the top right.
+   Equivalently, of the eight poses keep those whose weights, read lower right, lower
+   left, upper left, upper right, are lexicographically greatest, weights within
+   $10^{-9}$ counting as equal.
+3. Where poses tie, compare the same weights inside each quadrant, and inside each of
+   those, on grids of 4×4, 8×8 and 16×16 cells taken quadrant by quadrant in the same
+   order; then the squares themselves, each as its centre and its tilt, sorted from the
+   bottom row and the right, the least list kept.
+4. After each of those stages, the quadrants included, the poses still tied are matched
+   square for square. Once they all draw the same picture, the packing having that
+   symmetry, the comparison stops: that stage decided the pose, and the first of them in
+   a fixed order is kept, the identity first and the rotations before the flips, so a
+   symmetric packing keeps its source’s pose.
+   Poses that draw different pictures after the last stage stop the stage with an error,
+   rather than a symmetry being assumed.
+
+On the 324 default pictures of 23 October 2026 the rule keeps the published pose at 252
+counts, n = 11 among them, and turns 72; no rule that puts the heaviest quadrant lower
+left keeps more than 195. No packing catalogue states an orientation convention, as the
+[plan](../specs/active/plan-2026-10-23-flip-regularization.md#prior-practice) records,
+and the turned counts are mostly larger tilted packings whose sources publish them in no
+common pose.
+
+The pose is kept as metadata, in its own record,
+`packing/atlas/known-best/flip-regularization.json`: for each count, the picture drawn
+(the view where a view is drawn, the house elsewhere) and its retained rendering;
+`rotate`, 0, 90, 180 or 270 degrees counter-clockwise, and `flip`, whether the mirror
+across the upper-left to lower-right diagonal follows; the stage that decided it; and
+the turned picture’s quadrant weights.
+`python -m devtools.flip_regularization --update` decides every count from that
+rendering’s coordinates in a few seconds, and `--check`, the records-tier step
+`flip regularization record is current`, decides them again.
+Every surface that draws the default picture applies the pose when it draws: both
+composites, the homepage and atlas tiles in Regularized mode, the frontier survey’s
+thumbnails, the drawing that heads a case page, and the social card.
+No witness, view, certificate, side, tier or credit changes, and no turned copy of a
+packing is stored. The house drawing as published, in Original mode and under a case
+page’s *As published*, keeps its source’s pose; the recorded pose, or its inverse, can
+be applied to it later with nothing new stored.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

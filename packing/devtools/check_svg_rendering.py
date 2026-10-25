@@ -13,7 +13,12 @@ from collections.abc import Iterator
 from dataclasses import replace
 from decimal import Decimal
 from fractions import Fraction
+from functools import cache
+from html.parser import HTMLParser
 from pathlib import Path
+from urllib.parse import unquote, urlsplit
+
+from markdown_it import MarkdownIt
 
 from devtools.repo_scope import is_vendored
 
@@ -40,6 +45,44 @@ REPO = ROOT.parent
 #: will be. Being gitignored is not what excludes it: this sweep walks files git does
 #: not track, which is the blind spot D-455 was about.
 FOREIGN_DIRECTORY_NAMES = frozenset({"resources", "node_modules", "site"})
+
+
+class _SVGImages(HTMLParser):
+    def __init__(self) -> None:
+        super().__init__(convert_charrefs=True)
+        self.images: list[tuple[str, str]] = []
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        if tag != "img":
+            return
+        source = next((value or "" for name, value in attrs if name == "src"), "")
+        if urlsplit(source).path.lower().endswith(".svg"):
+            alt = next((value or "" for name, value in attrs if name == "alt"), "")
+            self.images.append((source, alt))
+
+
+def svg_image_targets(document: Path) -> tuple[tuple[Path | None, str], ...]:
+    """Resolve actual SVG images in Markdown or raw HTML, excluding code and comments."""
+    text = document.read_text(encoding="utf-8")
+    if ".svg" not in text.lower():
+        return ()
+    parser = _SVGImages()
+    parser.feed(MarkdownIt("commonmark", {"html": True}).render(text))
+    targets: list[tuple[Path | None, str]] = []
+    for source, alt in parser.images:
+        if (
+            document
+            == REPO / "packing/devtools/templates/n11-lower-bounds-explainer-article.md"
+            and source == "{{SITE_ROOT}}known-best-1-100.svg"
+        ):
+            # The renderer copies this exact retained composite beside its page.
+            # Other template sources must still resolve and pass corpus ownership.
+            target = ROOT / "atlas/known-best/known-best-1-100.svg"
+        else:
+            url = urlsplit(source)
+            target = None if url.scheme or url.netloc else document.parent / unquote(url.path)
+        targets.append((target.resolve() if target is not None else None, alt))
+    return tuple(targets)
 
 
 def repository_documents() -> Iterator[Path]:
@@ -811,12 +854,15 @@ def run_gallery_controls() -> dict[str, bool]:
     cases = [ROOT / example["frontier_case"] for example in examples]
     artifacts = [ROOT / example["artifact"] for example in examples]
 
+    @cache
+    def images(document_path: Path) -> tuple[tuple[Path | None, str], ...]:
+        return svg_image_targets(document_path)
+
     def embeds(document: str, artifact: str) -> bool:
-        document_path = REPO / document
-        relative = os.path.relpath(ROOT / artifact, document_path.parent)
-        text = document_path.read_text(encoding="utf-8")
-        pattern = rf"!\[[^\]]+\]\({re.escape(relative)}\)"
-        return re.search(pattern, text) is not None
+        expected = (ROOT / artifact).resolve()
+        return any(
+            target == expected and alt.strip() for target, alt in images(REPO / document)
+        )
 
     def references(document: str, target: str) -> bool:
         document_path = REPO / document
@@ -836,15 +882,11 @@ def run_gallery_controls() -> dict[str, bool]:
         ),
     }
 
-    inline_svg_targets = []
-    for document_path in repository_documents():
-        inline_svg_targets.extend(
-            (document_path.parent / target).resolve()
-            for target in re.findall(
-                r"!\[[^\]]*\]\(([^)]+\.svg)\)",
-                document_path.read_text(encoding="utf-8"),
-            )
-        )
+    inline_svg_targets = [
+        target
+        for document_path in repository_documents()
+        for target, _alt in images(document_path)
+    ]
 
     kingbird_root = ET.fromstring(
         (ROOT / by_id["n29-kingbird-overview"]["artifact"]).read_text(encoding="utf-8")
@@ -879,7 +921,10 @@ def run_gallery_controls() -> dict[str, bool]:
     comparison_embeds = {
         document_path.relative_to(REPO).as_posix()
         for document_path in repository_documents()
-        if embeds(document_path.relative_to(REPO).as_posix(), comparison_artifact)
+        if any(
+            target == (ROOT / comparison_artifact).resolve()
+            for target, _alt in images(document_path)
+        )
     }
     return {
         "gallery_has_five_known_answers": len(examples) == 5,
@@ -925,7 +970,7 @@ def run_gallery_controls() -> dict[str, bool]:
         and kingbird_metadata.get("check-kind") == "numerical"
         and kingbird_metadata.get("check-result") == "passed",
         "all_inline_svg_targets_exist": bool(inline_svg_targets)
-        and all(path.is_file() for path in inline_svg_targets),
+        and all(path is not None and path.is_file() for path in inline_svg_targets),
         "all_inline_svg_targets_are_owned_artifacts": set(inline_svg_targets)
         <= document_svg_artifacts,
         "five_point_obstruction_svg_replays": SVG_ARTIFACT.is_file()

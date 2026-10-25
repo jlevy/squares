@@ -1,0 +1,141 @@
+{
+ "format": "think-l49q-sharp-controls-v1",
+ "packet": "couzo-n304-2026-10-23",
+ "n": 304,
+ "certificate": "certificates/best/n304.cert",
+ "side": "42654421699169959072564987841514227093543746926117736119087439/2379353056489745832681562849107891444171481219500000000000000",
+ "epsilon": "1/1000000000000000000000000000000",
+ "routes": [
+  "exact_verify",
+  "independent"
+ ],
+ "controls": [
+  {
+   "control": "side-lowered-past-wall-contact",
+   "where": "at-contact",
+   "margin": "wall",
+   "expected_margin": "0",
+   "expected": "accepted",
+   "routes": {
+    "exact_verify": {
+     "passed": true,
+     "wall": "0",
+     "gap": "5787427125212248315636723446790347998647301071/70716860311549861524081902603115498615233747340000000000"
+    },
+    "independent": {
+     "passed": true,
+     "wall": "0",
+     "gap": "5787427125212248315636723446790347998647301071/70716860311549861524081902603115498615233747340000000000"
+    }
+   },
+   "as_expected": true,
+   "cpu_seconds": 14.538
+  },
+  {
+   "control": "side-lowered-past-wall-contact",
+   "where": "past-contact",
+   "margin": "wall",
+   "expected_margin": "-1/1000000000000000000000000000000",
+   "expected": "refused",
+   "routes": {
+    "exact_verify": {
+     "passed": false,
+     "wall": "-1/1000000000000000000000000000000",
+     "gap": "5787427125212248315636723446790347998647301071/70716860311549861524081902603115498615233747340000000000"
+    },
+    "independent": {
+     "passed": false,
+     "wall": "-1/1000000000000000000000000000000",
+     "gap": "5787427125212248315636723446790347998647301071/70716860311549861524081902603115498615233747340000000000"
+    }
+   },
+   "as_expected": true,
+   "cpu_seconds": 12.758
+  },
+  {
+   "control": "tightest-pair-closed-past-contact",
+   "where": "at-contact",
+   "margin": "gap",
+   "expected_margin": "0",
+   "expected": "accepted",
+   "routes": {
+    "exact_verify": {
+     "passed": true,
+     "wall": "1/1000000000000000",
+     "gap": "0"
+    },
+    "independent": {
+     "passed": true,
+     "wall": "1/1000000000000000",
+     "gap": "0"
+    }
+   },
+   "as_expected": true,
+   "cpu_seconds": 13.771
+  },
+  {
+   "control": "tightest-pair-closed-past-contact",
+   "where": "past-contact",
+   "margin": "gap",
+   "expected_margin": "-1/1000000000000000000000000000000",
+   "expected": "refused",
+   "routes": {
+    "exact_verify": {
+     "passed": false,
+     "wall": "1/1000000000000000",
+     "gap": "-1/1000000000000000000000000000000"
+    },
+    "independent": {
+     "passed": false,
+     "wall": "1/1000000000000000",
+     "gap": "-1/1000000000000000000000000000000"
+    }
+   },
+   "as_expected": true,
+   "cpu_seconds": 13.716
+  },
+  {
+   "control": "squares-moved-past-near-wall-contact",
+   "where": "at-contact",
+   "margin": "wall",
+   "expected_margin": "0",
+   "expected": "accepted",
+   "routes": {
+    "exact_verify": {
+     "passed": true,
+     "wall": "0",
+     "gap": "5787427125212248315636723446790347998647301071/70716860311549861524081902603115498615233747340000000000"
+    },
+    "independent": {
+     "passed": true,
+     "wall": "0",
+     "gap": "5787427125212248315636723446790347998647301071/70716860311549861524081902603115498615233747340000000000"
+    }
+   },
+   "as_expected": true,
+   "cpu_seconds": 12.789
+  },
+  {
+   "control": "squares-moved-past-near-wall-contact",
+   "where": "past-contact",
+   "margin": "wall",
+   "expected_margin": "-1/1000000000000000000000000000000",
+   "expected": "refused",
+   "routes": {
+    "exact_verify": {
+     "passed": false,
+     "wall": "-1/1000000000000000000000000000000",
+     "gap": "5787427125212248315636723446790347998647301071/70716860311549861524081902603115498615233747340000000000"
+    },
+    "independent": {
+     "passed": false,
+     "wall": "-1/1000000000000000000000000000000",
+     "gap": "5787427125212248315636723446790347998647301071/70716860311549861524081902603115498615233747340000000000"
+    }
+   },
+   "as_expected": true,
+   "cpu_seconds": 14.577
+  }
+ ],
+ "all_as_expected": true
+}

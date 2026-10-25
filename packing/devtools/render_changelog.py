@@ -11,13 +11,13 @@ import html
 import re
 import subprocess
 import sys
-from collections.abc import Sequence
+from collections.abc import Callable, Sequence
 from datetime import date, datetime
 from functools import cache
 from html.parser import HTMLParser
 from ipaddress import IPv6Address
 from pathlib import Path, PurePosixPath
-from typing import Any, Literal, TypedDict, override
+from typing import Any, Literal, NamedTuple, TypedDict, override
 from urllib.parse import SplitResult, quote, unquote, urlsplit
 
 import yaml
@@ -71,13 +71,18 @@ NEWS_CHECK = (
     'stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" '
     'focusable="false"><path d="M20 6 9 17l-5-5"/></svg>'
 )
+#: The lowest significance News announces (`news_entries`); lower scores stay in the
+#: GitHub history.
+NEWS_FLOOR = 3
+#: The levels the News archive opens on, and what an address without `news-s` means
+#: there (`news-filters.js`).
+NEWS_LEVELS = (4, 5)
 
 
 def news_rubric_meanings(text: str) -> dict[int, str]:
     """Each level's short meaning in the text of the News rubric's document: all the site
-    reads of it, so `check_release_impact` compares an edit to the document by this too.
-    A document without the section or without a `Short` meaning for S1 to S5 raises
-    `ValueError`."""
+    reads of it. A document without the section or without a `Short` meaning for S1 to S5
+    raises `ValueError`."""
     if NEWS_RUBRIC_SECTION not in text:
         raise ValueError(f"{NEWS_RUBRIC.name} has no {NEWS_RUBRIC_SECTION!r} section")
     section = text.split(NEWS_RUBRIC_SECTION, 1)[1].split("\n#", 1)[0]
@@ -455,8 +460,11 @@ def _public_targets() -> frozenset[str]:
     from devtools.render_overview import SITE_URL  # noqa: PLC0415
 
     registry = load_yaml((ROOT / "site-urls.yaml").read_text(encoding="utf-8"))
+    # Previous main records retain their published host when the freeze check reads
+    # them. Recognize that explicit alias without accepting arbitrary hostnames.
     return frozenset(
-        SITE_URL + row["canonical"]
+        root + row["canonical"]
+        for root in (SITE_URL, "https://jlevy.github.io/squares/")
         for row in registry["urls"]
         if row.get("status") == "live" and not row.get("pattern")
     )
@@ -693,6 +701,286 @@ def load(path: Path = SRC) -> Document:
     return document
 
 
+#: The register whose significant results News must announce.
+RESULTS = ROOT / "frontier" / "results.yaml"
+RESULTS_PATH = "packing/frontier/results.yaml"
+#: The two records a change can settle an owed announcement in: the register, and News.
+ANNOUNCEMENT_RECORDS = (RESULTS_PATH, "packing/site-changelog.yaml")
+#: The `--announcement-base` that means main's own delivery: the records tier passes it
+#: on a push to main and on the scheduled run, and only there (`validate._synopsis`).
+#: The merge under test can no longer act on a failure, so main only reports.
+MAIN_DELIVERY_BASE = "HEAD^1"
+
+#: The lowest significance at which a registered result must have a News item: the
+#: owner's decision of 22 October 2026, "We need a systematic process for the
+#: significant results", then "Let's have it do S4 and S5 then". S3 News stays optional.
+ANNOUNCED_FROM = 4
+
+#: S4 and S5 results that landed before the News archive existed, each mapped to its
+#: register score, at which it is exempt. `packing/site-changelog.yaml` was created on
+#: 13 October 2026 (6279bd0e6), and the first S4 or S5 result with a News item, T-060
+#: (30 September), was backfilled on 16 October UTC (#638). These fifteen landed 1
+#: September to 3 October and have no item; T-064 and T-081 are named only by an S2
+#: entry, which News does not show. Under the decision of 22 October they are exempt
+#: rather than given invented backdated News; backfilling them as dated News, as T-060
+#: was, is a separate decision. The list only shrinks: an exemption whose result changes
+#: score, leaves the register or gains its item is stale, and the gate fails until it
+#: is removed (a raised result is then owed like any other).
+ANNOUNCEMENT_EXEMPT: dict[str, int] = {
+    "T-010": 4,
+    "T-017": 4,
+    "T-018": 5,
+    "T-019": 4,
+    "T-020": 4,
+    "T-022": 5,
+    "T-024": 5,
+    "T-025": 5,
+    "T-026": 5,
+    "T-037": 5,
+    "T-047": 4,
+    "T-051": 4,
+    "T-052": 4,
+    "T-064": 4,
+    "T-081": 4,
+}
+
+_RESULT_SCORE = re.compile(r"\n    significance:\n      score: (\d)\b")
+_PULL_REQUEST_MERGE = re.compile(r"^Merge pull request #(\d+) ")
+
+
+class Landing(TypedDict):
+    """The first-parent change that registered a result or raised it to its score."""
+
+    pull_request: int | None
+    commit: str
+    subject: str
+
+
+class AnnouncementFindings(NamedTuple):
+    """What the announcement gate found, by what it does about each."""
+
+    failures: list[str]
+    """Fail the check: an owed item the change can settle, or a stale exemption."""
+    owed: list[str]
+    """Registered or raised by the change under test, so owed after its merge."""
+    unsettled: list[str]
+    """Owed on main by an earlier merge; a warning, since this change edits neither
+    the register nor News."""
+
+
+def load_results(path: Path = RESULTS) -> list[Document]:
+    """The register's results, read offline."""
+    return load_yaml(path.read_text(encoding="utf-8"))["results"]
+
+
+def news_announced_scores(document: Document) -> dict[str, int]:
+    """The highest News significance at which each result is announced.
+
+    Only an entry News shows counts: one with an S3 or higher score and no
+    `news_exclusion`, which lists the result in `result_ids`.
+    """
+    announced: dict[str, int] = {}
+    for entry in news_entries(document):
+        score = entry_significance(entry)["score"]
+        for identifier in entry.get("result_ids", []):
+            announced[identifier] = max(announced.get(identifier, 0), score)
+    return announced
+
+
+def owed_announcements(document: Document, results: Sequence[Document]) -> list[Document]:
+    """Registered S4 and S5 results that no News entry announces at their own score.
+
+    A result and its announcement share a score (`result-import.md`, "Label the PR and
+    Prepare News"), so an S5 result announced only at S4 is still owed. Exempt results
+    are owed only once raised above their exempt score.
+    """
+    announced = news_announced_scores(document)
+    return [
+        result
+        for result in results
+        if (score := result["significance"]["score"]) >= ANNOUNCED_FROM
+        and announced.get(result["id"], 0) < score
+        and ANNOUNCEMENT_EXEMPT.get(result["id"], 0) < score
+    ]
+
+
+def stale_exemptions(document: Document, results: Sequence[Document]) -> list[str]:
+    """Exemptions that no longer describe an unannounced result at its exempt score."""
+    scores = {result["id"]: result["significance"]["score"] for result in results}
+    announced = news_announced_scores(document)
+    problems: list[str] = []
+    for identifier, exempt in ANNOUNCEMENT_EXEMPT.items():
+        score = scores.get(identifier)
+        if score is None:
+            reason = "is not in the register"
+        elif score < ANNOUNCED_FROM:
+            reason = f"is S{score} now, below the announcement threshold"
+        elif score != exempt:
+            reason = f"is S{score} now, not the S{exempt} it is exempt at"
+        elif announced.get(identifier, 0) >= score:
+            reason = "now has its News item"
+        else:
+            continue
+        problems.append(
+            f"{identifier} {reason}: remove it from render_changelog.ANNOUNCEMENT_EXEMPT"
+        )
+    return problems
+
+
+def register_score(text: str, identifier: str) -> int:
+    """A result's significance score in one revision of the register's text, or 0."""
+    start = text.find(f"\n  - id: {identifier}\n")
+    if start < 0:
+        return 0
+    end = text.find("\n  - id: ", start + 1)
+    match = _RESULT_SCORE.search(text, start, end if end >= 0 else len(text))
+    return int(match.group(1)) if match else 0
+
+
+def _git(*arguments: str) -> str:
+    return subprocess.run(
+        ["git", *arguments], cwd=REPO, capture_output=True, text=True, check=True
+    ).stdout
+
+
+def landing(identifier: str, score: int, ref: str) -> Landing | None:
+    """The first-parent change on `ref` from which `identifier` has held `score` or more.
+
+    It is the merged PR a News entry announcing the result names. Read from local
+    history only; `None` when the history at hand does not reach it.
+    """
+    found: Landing | None = None
+    log = _git("log", "--first-parent", "--format=%H%x00%s", ref, "--", RESULTS_PATH)
+    for line in log.splitlines():
+        commit, subject = line.split("\0", 1)
+        if register_score(_git("show", f"{commit}:{RESULTS_PATH}"), identifier) < score:
+            break
+        number = _PULL_REQUEST_MERGE.match(subject)
+        found = {
+            "pull_request": int(number.group(1)) if number else None,
+            "commit": commit,
+            "subject": subject,
+        }
+    return found
+
+
+def _owed_message(
+    result: Document,
+    change: Landing | None,
+    *,
+    context: Literal["settle", "unrelated", "main"],
+) -> str:
+    identifier = result["id"]
+    score = result["significance"]["score"]
+    if change is None:
+        source = (
+            "the merged PR that registered or raised it, which this checkout's history "
+            "does not reach"
+        )
+        number = "NNN"
+    elif change["pull_request"] is None:
+        source = (
+            f"commit {change['commit'][:9]} ({change['subject']}), which registered or "
+            "raised it"
+        )
+        number = "NNN"
+    else:
+        number = str(change["pull_request"])
+        source = f"PR #{number}, which registered or raised it (merge {change['commit'][:9]})"
+    scored_by = result["significance"].get("by", "the register")
+    remedy = (
+        f"Its item is an entry in packing/site-changelog.yaml scored {score}, listing "
+        f"{identifier} in result_ids and naming {source}; draft it from packing/ with "
+        f"`uv run --frozen --all-extras --group dev python -m devtools.import_changelog "
+        f'--pr {number} --significance-rationale "..." --output '
+        '"$TMPDIR/changelog-candidate.yaml"`, then bring in its delivery and the edited '
+        "entry (packing/campaign/result-import.md, stage 7, Announce a Significant "
+        f"Result). It was scored by {scored_by}; ask its intake coordinator if the item "
+        "is not yours to write."
+    )
+    owed = f"{identifier} (S{score}) is on main with no News item at S{score}"
+    if context == "settle":
+        return (
+            f"{owed}, and this change edits the register or the News record, so it "
+            "settles the debt: add the item in this PR, or land the stage 7 follow-up "
+            "first and merge main. " + remedy
+        )
+    if context == "main":
+        return (
+            f"{owed}. On main the gate reports and never fails, since the merge under "
+            "test can no longer act on it; pull-request CI enforces it, and the next "
+            "pull request that changes the register or the News record fails until the "
+            "item lands. " + remedy
+        )
+    return (
+        f"{owed}. This change edits neither the register nor the News record, so it is "
+        "not failed; the next pull request that does fails until the item lands. " + remedy
+    )
+
+
+def check_announcements(
+    document: Document,
+    results: Sequence[Document],
+    base_results: Sequence[Document] | None = None,
+    *,
+    locate: Callable[[str, int], Landing | None] | None = None,
+    records_changed: bool = True,
+    on_main: bool = False,
+) -> AnnouncementFindings:
+    """Every S4 and S5 result without its News item, sorted by what the gate does.
+
+    An entry can name only merged PRs, so a result registered or raised by the change
+    under test (absent from `base_results`, or below its score there) is owed after the
+    merge and reported, not failed. A result already owed on main fails only a change
+    that edits the register or the News record (`records_changed`), the one change that
+    can settle it, since the PR that owes it has merged and its item now validates.
+    Any other change gets a warning. On main (`on_main`, a push or the scheduled run),
+    an owed result is only ever a warning, records change or not: pull-request CI is
+    where the rule is enforced, and the one way main sees an owed result is a records
+    merge that raced the S4/S5 merge, which must not turn main red (#738's review A).
+    This is option (b) of the decision of 22 October (#735's review A); option (a), an
+    item that names its own PR and is stamped at merge, is think-n51k. A stale
+    exemption always fails. `locate(identifier, score)` finds the PR that owes an item;
+    without `base_results` nothing is in grace.
+    """
+    base = (
+        None
+        if base_results is None
+        else {result["id"]: result["significance"]["score"] for result in base_results}
+    )
+    findings = AnnouncementFindings(stale_exemptions(document, results), [], [])
+    for result in owed_announcements(document, results):
+        identifier, score = result["id"], result["significance"]["score"]
+        if base is not None and base.get(identifier, 0) < score:
+            findings.owed.append(
+                f"{identifier} (S{score}) is registered or raised on this branch and owes "
+                "a News item after the merge: draft it in the PR description now, and land "
+                "it in the first change after the merge (result-import.md, stage 7). The "
+                "next pull request that changes the register or the News record fails "
+                "until it does."
+            )
+            continue
+        change = locate(identifier, score) if locate is not None else None
+        if on_main:
+            findings.unsettled.append(_owed_message(result, change, context="main"))
+        elif records_changed:
+            findings.failures.append(_owed_message(result, change, context="settle"))
+        else:
+            findings.unsettled.append(_owed_message(result, change, context="unrelated"))
+    return findings
+
+
+def announcement_base(ref: str) -> tuple[str, list[Document]]:
+    """The fork point of HEAD and `ref`, and the register there."""
+    base = _git("merge-base", "HEAD", ref).strip()
+    return base, load_yaml(_git("show", f"{base}:{RESULTS_PATH}"))["results"]
+
+
+def edits_announcement_records(base: str) -> bool:
+    """Whether the working tree's register or News record differs from `base`'s."""
+    return bool(_git("diff", "--name-only", base, "--", *ANNOUNCEMENT_RECORDS).strip())
+
+
 def _text(value: str) -> str:
     escaped = html.escape(value, quote=True)
     return re.sub(r"([\\`*_{}\[\]#!|])", r"\\\1", escaped)
@@ -730,9 +1018,13 @@ def _entry_lines(
     *,
     include_significance: bool = True,
     include_prose: bool = True,
+    multiline_metadata: bool = False,
 ) -> list[str]:
     """Shared contribution prose and evidence for the complete GitHub and News views."""
     rating = entry_significance(entry)
+    label_separator = "  \n" if multiline_metadata else " "
+    link_separator = "  \n" if multiline_metadata else " · "
+    ending = "" if multiline_metadata else "."
     out: list[str] = []
     if destination == "github" and include_significance:
         out.extend([f"Significance S{rating['score']}: {_text(rating['rationale'])}", ""])
@@ -745,24 +1037,39 @@ def _entry_lines(
             _markdown_link(item["label"], item["target"], destination=destination)
             for item in entry["artifacts"]
         ]
-        out.extend(["Published artifacts: " + " · ".join(links) + ".", ""])
+        out.extend(
+            ["Published artifacts:" + label_separator + link_separator.join(links) + ending, ""]
+        )
     if entry.get("releases"):
         versions = [
             f"{_text(_component_label(item['component']))} {_text(item['version'])}"
             for item in entry["releases"]
         ]
-        out.extend(["Component editions: " + "; ".join(versions) + ".", ""])
+        separator = "  \n" if multiline_metadata else "; "
+        out.extend(
+            ["Component editions:" + label_separator + separator.join(versions) + ending, ""]
+        )
     publication = entry.get("publication", {})
     if publication:
         evidence = _markdown_link(
-            "publication evidence" if "date" in publication else "Publication evidence",
+            "publication evidence"
+            if "date" in publication and not multiline_metadata
+            else "Publication evidence",
             publication["evidence"],
             destination=destination,
         )
         if "date" in publication:
-            out.extend([f"First public: {publication['date']} ({evidence}).", ""])
+            first = f"First public: {publication['date']}"
+            out.extend(
+                [
+                    first + "  \n" + evidence
+                    if multiline_metadata
+                    else f"{first} ({evidence}).",
+                    "",
+                ]
+            )
         else:
-            out.extend([evidence + ".", ""])
+            out.extend([evidence + ending, ""])
     links = [
         _markdown_link(
             f"#{number}", f"{document['repository']}/pull/{number}", destination=destination
@@ -773,7 +1080,15 @@ def _entry_lines(
         _markdown_link(item["label"], item["target"], destination=destination)
         for item in entry.get("references", [])
     )
-    out.extend(["PRs and supporting records: " + " · ".join(links) + ".", ""])
+    out.extend(
+        [
+            "PRs and supporting records:"
+            + label_separator
+            + link_separator.join(links)
+            + ending,
+            "",
+        ]
+    )
     return out
 
 
@@ -848,7 +1163,7 @@ def news_entries(document: Document) -> list[Document]:
     return [
         entry
         for entry in ordered_entries(document)
-        if "news_exclusion" not in entry and entry_significance(entry)["score"] >= 3
+        if "news_exclusion" not in entry and entry_significance(entry)["score"] >= NEWS_FLOOR
     ]
 
 
@@ -916,37 +1231,85 @@ def news_article_header(
     )
 
 
-def news_filters(topics_present: set[str] | None = None) -> str:
-    """Progressive controls: without the enhancement every article stays visible."""
+def news_significance_filter(selected: Sequence[int] = NEWS_LEVELS) -> str:
+    """The significance choices, one button a level News has, pressed for each level in
+    `selected`: the one widget both the archive's filters and the home page's News box
+    draw (`news_filters`), and the selection `news-filters.js` starts from."""
     scores = "".join(
         f'<button type="button" data-news-score="{score}" '
         f'title="{html.escape(news_significance_tooltip(score), quote=True)}" '
-        f'aria-pressed="{str(score >= 4).lower()}">S{score}</button>'
-        for score in range(3, 6)
+        f'aria-pressed="{str(score in selected).lower()}">S{score}</button>'
+        for score in range(NEWS_FLOOR, 6)
     )
+    return (
+        '<fieldset><legend class="site-visually-hidden" id="news-significance-label">'
+        'Significance</legend><div class="site-tabs site-chooser-small" role="group" '
+        f'aria-labelledby="news-significance-label">{scores}</div></fieldset>'
+    )
+
+
+#: What a filtered list says when nothing matches its choices.
+NEWS_EMPTY = "<p data-news-empty hidden>No news matches these filters.</p>"
+#: What a preview says when News holds no article for it to show (#736's review A,
+#: finding A8).
+NEWS_NONE = "<p>No news yet.</p>"
+
+
+def news_filters(
+    topics_present: set[str] | None = None,
+    *,
+    selected: Sequence[int] = NEWS_LEVELS,
+    compact: bool = False,
+) -> str:
+    """Progressive controls, hidden until `news-filters.js` shows them. The archive's
+    are the significance choices (`news_significance_filter`), the topics, a reset and a
+    count; without the enhancement every article stays visible. The `compact` form, the
+    home page's News box's, is the significance choices alone, at the right above the
+    cards and quieter than the archive's (`.site-news-filters-compact`), with the
+    archive's live count kept for screen readers and hidden from sight (#736's review A,
+    finding A5)."""
+    if compact:
+        return (
+            '<div class="site-news-filters site-news-filters-compact sans-text" '
+            "data-news-filters data-site-tooltip-outside hidden>"
+            f"{news_significance_filter(selected)}{NEWS_EMPTY}"
+            '<span class="site-visually-hidden" data-news-count role="status" '
+            'aria-live="polite"></span></div>'
+        )
     topics = "".join(
-        f'<button type="button" class="site-chip" data-news-topic="{topic}" '
-        f'aria-pressed="true">{NEWS_CHECK}<span data-news-topic-label>{label}</span>'
+        f'<button type="button" class="site-filter-option site-chip" '
+        f'data-site-filter-option data-news-topic="{topic}" aria-pressed="true">'
+        f"{NEWS_CHECK}<span data-news-topic-label data-site-filter-label>{label}</span>"
         '<span class="site-cell-quiet" data-news-tally> (0)</span></button>'
         for topic, label in NEWS_TOPICS.items()
         if topics_present is None or topic in topics_present
     )
+    chevron = (
+        '<svg class="site-nav-icon site-filter-chevron" viewBox="0 0 24 24" '
+        'fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" '
+        'stroke-linejoin="round" aria-hidden="true" focusable="false">'
+        '<path d="m6 9 6 6 6-6"/></svg>'
+    )
     return (
         '<div class="site-news-filters sans-text" data-news-filters '
         "data-site-tooltip-outside hidden>"
-        '<fieldset><legend class="site-visually-hidden" id="news-significance-label">'
-        'Significance</legend><div class="site-tabs site-chooser-small" role="group" '
-        'aria-labelledby="news-significance-label">'
-        f'{scores}</div></fieldset><fieldset><legend class="site-visually-hidden" '
+        f"{news_significance_filter(selected)}"
+        '<fieldset><legend class="site-visually-hidden" '
         'id="news-topics-label">Topics</legend>'
-        '<div class="site-tabs site-chooser-small" role="group" '
-        f'aria-labelledby="news-topics-label">{topics}</div></fieldset>'
+        '<div class="site-filter-menu" data-site-filter-menu>'
+        '<button type="button" class="site-filter-trigger" data-site-filter-trigger '
+        'aria-expanded="false" aria-controls="news-topics-options">'
+        "<span>Topics</span> <span data-site-filter-summary>All</span>"
+        f'{chevron}</button><div class="site-filter-options" id="news-topics-options" '
+        'data-site-filter-options role="group" aria-labelledby="news-topics-label" hidden>'
+        '<button type="button" class="site-filter-option" data-site-filter-all '
+        'aria-pressed="true">All topics</button>'
+        f"{topics}</div></div></fieldset>"
         '<div class="site-table-tools">'
         '<button type="button" class="site-news-reset" data-news-reset>'
         "Reset filters</button>"
         '<span class="site-count" data-news-count role="status" '
-        'aria-live="polite"></span></div>'
-        "<p data-news-empty hidden>No news matches these filters.</p></div>"
+        f'aria-live="polite"></span></div>{NEWS_EMPTY}</div>'
     )
 
 
@@ -969,9 +1332,22 @@ def news_card(anchor: str, day_text: str, body: str) -> str:
 
 
 def render_news(
-    document: Document, *, limit: int | None = None, entry_ids: set[str] | None = None
+    document: Document,
+    *,
+    limit: int | None = None,
+    entry_ids: set[str] | None = None,
+    selected: Sequence[int] | None = None,
 ) -> str:
     """Complete canonical cards, optionally selected by ID and limited for a preview.
+
+    The archive (no `limit`) opens on `selected`, by default `NEWS_LEVELS`, under its full
+    filters pressed at those levels, and hides the cards at any other until a reader
+    chooses them. A preview shows `limit` cards. Given `selected` levels, it carries every
+    card `entry_ids` names under the compact significance filter preselected to those
+    levels, and shows the newest `limit` of them at those levels; the rest are hidden, with
+    or without scripts, until a reader widens the choice (`news-filters.js`,
+    `data-news-limit`). With no card to carry it says "No news yet." and draws no filter.
+    Without `selected` a preview carries its newest `limit` cards alone, unfiltered.
 
     Their names are plain profile links (`data-contributor-plain`): News navigates to a
     profile rather than opening it in the profile popover (`paper-design.md`).
@@ -984,13 +1360,29 @@ def render_news(
         for entry in news_entries(document)
         if entry_ids is None or entry["id"] in entry_ids
     ]
-    if limit is not None:
+    filtered = limit is not None and selected is not None
+    if limit is not None and not filtered:
         entries = entries[:limit]
+    levels = NEWS_LEVELS if selected is None else tuple(selected)
+    # A filtered preview first shows the newest `limit` cards at its levels.
+    first = [entry["id"] for entry in entries if entry_significance(entry)["score"] in levels]
+    shown = set(first[:limit]) if filtered else None
+    filters, limited = "", ""
+    if limit is None:
+        filters = news_filters(
+            {topic for entry in entries for topic in entry.get("topics", [])}, selected=levels
+        )
+    elif filtered:
+        if not entries:
+            return (
+                f'<div class="site-news" data-news data-news-limit="{limit}" '
+                f"data-contributor-plain>{NEWS_NONE}</div>"
+            )
+        filters = news_filters(selected=levels, compact=True)
+        limited = f' data-news-limit="{limit}"'
     out = [
-        news_filters({topic for entry in entries for topic in entry.get("topics", [])})
-        if limit is None
-        else "",
-        '<div class="site-news sans-text" data-news data-contributor-plain>',
+        filters,
+        f'<div class="site-news" data-news{limited} data-contributor-plain>',
     ]
     seen_dates: set[str] = set()
     for entry in entries:
@@ -1011,16 +1403,25 @@ def render_news(
         )
         from devtools.profile_links import link_prose  # noqa: PLC0415
 
+        article.append('<div class="site-news-prose kpress-prose">')
         article.append(link_prose(_prose(entry["summary"], destination="site")))
         if "details" in entry:
             article.append(link_prose(_prose(entry["details"], destination="site")))
+        article.append("</div>")
+        article.append('<div class="site-news-records sans-text">')
         article.extend(
             _prose(field, destination="site")
             for field in _entry_lines(
-                document, entry, "github", include_significance=False, include_prose=False
+                document,
+                entry,
+                "github",
+                include_significance=False,
+                include_prose=False,
+                multiline_metadata=True,
             )
             if field
         )
+        article.append("</div>")
         article.append("</article>")
         card = news_card(anchor, entry["date"], "\n".join(article))
         card = card.replace(
@@ -1029,7 +1430,12 @@ def render_news(
             f'data-news-topics="{" ".join(entry.get("topics", []))}" data-news-day=',
             1,
         )
-        if limit is None and entry_significance(entry)["score"] < 4:
+        hidden = (
+            entry["id"] not in shown
+            if shown is not None
+            else limit is None and entry_significance(entry)["score"] not in levels
+        )
+        if hidden:
             card = card.replace(
                 '<section class="site-news-day"', '<section hidden class="site-news-day"', 1
             )
@@ -1106,6 +1512,13 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument(
         "--baseline-ref", help="Local main reference whose published entries are frozen"
     )
+    parser.add_argument(
+        "--announcement-base",
+        metavar="REF",
+        help="Require a News item for every registered S4 and S5 result; results new or "
+        "raised since HEAD's merge base with REF are owed after the merge, not failed, "
+        f"and with {MAIN_DELIVERY_BASE}, main's own delivery, owed results only warn",
+    )
     options = parser.parse_args(argv)
     try:
         document = load(options.source)
@@ -1113,6 +1526,34 @@ def main(argv: Sequence[str] | None = None) -> int:
             validate_frozen(document, load(options.baseline))
         if options.baseline_ref:
             validate_previous_ref(document, options.baseline_ref)
+        if options.announcement_base:
+            base, base_results = announcement_base(options.announcement_base)
+            results = load_results()
+            findings = check_announcements(
+                document,
+                results,
+                base_results,
+                locate=lambda identifier, score: landing(identifier, score, base),
+                records_changed=edits_announcement_records(base),
+                on_main=options.announcement_base == MAIN_DELIVERY_BASE,
+            )
+            significant = sum(
+                result["significance"]["score"] >= ANNOUNCED_FROM for result in results
+            )
+            print(
+                f"announcements: {significant} registered S4 and S5 results, "
+                f"{len(ANNOUNCEMENT_EXEMPT)} exempt from before the News archive, "
+                f"{len(findings.owed)} owed after this merge, {len(findings.unsettled)} "
+                f"owed on main and reported, {len(findings.failures)} failing"
+            )
+            for note in findings.owed:
+                print(f"announcement owed after merge: {note}")
+            for warning in findings.unsettled:
+                print(f"warning: announcement owed on main: {warning}")
+            if findings.failures:
+                for failure in findings.failures:
+                    print(f"changelog: announcement missing: {failure}", file=sys.stderr)
+                return 1
         rendered = render(document)
         if options.check:
             current = (

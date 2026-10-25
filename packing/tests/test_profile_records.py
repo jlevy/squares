@@ -8,6 +8,7 @@ from typing import Any
 
 import pytest
 
+from cases.asymptotic import deficiency_family as family
 from devtools import profile_records as records
 from devtools import render_recent_results as standing
 from devtools.build_bound_citations import Register
@@ -90,6 +91,69 @@ def test_exact_ties_require_proven_original_publication_priority() -> None:
         assert uncertain.current_results == ()
         assert set(uncertain.unresolved) == {"first", "later"}
         assert "priority" in uncertain.unresolved["first"][0]
+
+
+def tied(first: dict[str, Any] | None, second: dict[str, Any] | None) -> records.RecordIndex:
+    """Two lower bounds tied at one count, with these attributions; None is no
+    attribution, so that the entry's `established` date stands in."""
+    raw = {
+        name: result(name, "lower-bound", established="2026-10-02")
+        for name in ("first", "second")
+    }
+    for name, attribution in (("first", first), ("second", second)):
+        if attribution is None:
+            del raw[name]["attribution"]
+        else:
+            raw[name]["attribution"] = attribution
+    return records.classify_records(
+        raw, [facet(name, "4", direction="lower") for name in ("first", "second")]
+    )
+
+
+def test_tied_entries_with_different_attributions_stay_unresolved() -> None:
+    # The control for crediting one report's entries together: a tie between
+    # attributions that differ in any way is still left to publication priority.
+    day = "2026-10-02"
+    one = {"source_keys": ["[one]"], "published": day}
+    for first, second in [
+        (one, {"source_keys": ["[other]"], "published": day}),
+        ({"source_keys": ["[one]"], "published": "2026-10"}, one),
+        ({"source_keys": ["[one]", "[other]"], "published": day}, one),
+        (one, None),
+        (None, None),
+    ]:
+        index = tied(first, second)
+        assert index.current_results == ()
+        assert set(index.unresolved) == {"first", "second"}
+        assert index.unresolved["first"] == (
+            "Unordered reported lower bound priority at n=11: first, second",
+        )
+
+
+def test_one_report_registered_as_two_entries_credits_both() -> None:
+    # T-073 and T-080 register one certificate, T-083 and T-084 one paper: one source
+    # key at one date. The owner, 24 October 2026: "Credit both (Recommended)" (think-33u4).
+    one = {"source_keys": ["[one]"], "published": "2026-10-02"}
+    index = tied(dict(one), dict(one))
+    assert index.current_results == ("first", "second")
+    assert index.unresolved == {}
+    assert index.facets["second"] == (
+        records.RecordFacet("lower-bound", 11, "lower", "reported"),
+    )
+    raw = {
+        "first": result("first", "lower-bound", attribution=dict(one)),
+        "second": result("second", "lower-bound", attribution=dict(one)),
+        "earlier": result("earlier", "lower-bound", published="2026-09-01"),
+        "stronger": result("stronger", "lower-bound", published="2026-10-05"),
+    }
+    pair = [facet(name, "4", direction="lower") for name in ("first", "second")]
+    # An earlier report at the same bound still keeps the tie, and a stronger one
+    # supersedes both entries.
+    earlier = records.classify_records(raw, [*pair, facet("earlier", "4", direction="lower")])
+    assert earlier.current_results == ("earlier",)
+    assert earlier.unresolved == {}
+    stronger = records.classify_records(raw, [*pair, facet("stronger", "5", direction="lower")])
+    assert stronger.current_results == ("stronger",)
 
 
 def test_identical_or_overlapping_rounded_intervals_do_not_prove_equal_values() -> None:
@@ -201,12 +265,46 @@ def test_live_current_families_pending_comparison_and_known_scope_gap() -> None:
     assert {"T-196", "T-199", "T-223", "T-226", "T-227", "T-228"}.isdisjoint(
         index.current_results
     )
-    assert "T-163" not in index.current_results
-    assert "think-kqi1" in " ".join(index.unresolved["T-163"])
-    assert records.current_record_ids(["T-037", "T-060", "T-163", "T-060"], index) == ("T-060",)
+    # Fang's theorem-wide scope is current by its reproduced family assessment, while its
+    # four finite bounds stay superseded (cases.asymptotic.deficiency_family).
+    assert index.facets["T-163"] == (
+        records.RecordFacet(
+            "upper-bound",
+            scope="deficiency_upper_bounds: Integer sides approached from below, k >= 15.",
+        ),
+    )
+    assert "T-163" not in index.unresolved
+    assert records.current_record_ids(["T-037", "T-060", "T-163", "T-060"], index) == (
+        "T-060",
+        "T-163",
+    )
+    # T-229 (#719) states a smaller side at 105 and 204 than T-174 and T-225, and since
+    # its adoption of 23 October 2026 holds both lanes at 105; T-174 and T-225 hold
+    # neither lane at those counts. At 204 the release's lower file (T-231), adopted on 24
+    # October 2026, holds both lanes, and T-229 neither.
     assert {(facet.n, facet.direction, facet.lane) for facet in index.facets["T-225"]} == {
-        (n, "upper", lane) for n in (204, 227, 229, 260) for lane in ("reported", "verified")
+        (n, "upper", lane) for n in (227, 229, 260) for lane in ("reported", "verified")
     }
+    assert {(facet.n, facet.direction, facet.lane) for facet in index.facets["T-229"]} == {
+        (105, "upper", lane) for lane in ("reported", "verified")
+    }
+    assert {(facet.n, facet.direction, facet.lane) for facet in index.facets["T-231"]} == {
+        (204, "upper", lane) for lane in ("reported", "verified")
+    }
+    assert not {facet for facet in index.facets["T-174"] if facet.n == 105}
+    # One report registered twice is credited as current in both entries (think-33u4):
+    # T-073 and T-080 hold the verified lower bound at 101 to 105 together, and T-083
+    # and T-084 the verified lower bound at the counts k^2 - 1 from 8 to 323.
+    assert {"T-073", "T-080", "T-083", "T-084"}.isdisjoint(index.unresolved)
+    for identifier in ("T-073", "T-080"):
+        assert {(n, "lower", "verified") for n in range(101, 106)} <= {
+            (facet.n, facet.direction, facet.lane) for facet in index.facets[identifier]
+        }
+    squares = {(k * k - 1, "lower", "verified") for k in range(3, 19)}
+    for identifier in ("T-083", "T-084"):
+        assert squares <= {
+            (facet.n, facet.direction, facet.lane) for facet in index.facets[identifier]
+        }
 
 
 def test_cli_keeps_unassessed_distinct_from_known_current(
@@ -261,3 +359,26 @@ def test_proof_derivation_requires_own_lower_holder_and_the_correct_lane_status(
         f.scope == "exact-value proof" and f.lane == "reported"
         for f in closed_report.facets["proof"]
     )
+
+
+def test_an_assessed_family_scope_is_current_only_as_its_assessment_says() -> None:
+    ledger, _ = family.load()
+    raw = {"T-163": result("T-163")}
+    raw["T-163"]["attribution"]["source_keys"] = ["[Fang excess theorem 2026-10-13]"]
+    facets = records.family_record_facets(ledger, context(raw))
+    assert [(facet.result, facet.current) for facet in facets] == [("T-163", True)]
+    index = records.classify_records(raw, [], family_facets=facets)
+    assert index.current_results == ("T-163",)
+    assert index.unresolved == {}
+    row = next(item for item in ledger[family.SECTION] if item.get("record_scope"))
+    row["record_scope"]["assessment"]["current"] = False
+    stopped = records.classify_records(
+        raw, [], family_facets=records.family_record_facets(ledger, context(raw))
+    )
+    assert stopped.current_results == ()
+    assert stopped.unresolved == {}
+    del row["record_scope"]["assessment"]
+    unassessed = records.classify_records(
+        raw, [], family_facets=records.family_record_facets(ledger, context(raw))
+    )
+    assert "think-kqi1" in unassessed.unresolved["T-163"][0]

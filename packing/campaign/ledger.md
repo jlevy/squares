@@ -202,6 +202,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-186](agent-sessions/session-186-n17-mathematics-and-efficiency.md) | stopped | contemporaneous | `insight-iteration` (insight) | `review-planning-oversight` (process) | 12 | think-2mzl | think-7hy3 |
 | [session-187](agent-sessions/session-187-canonical-rust-multiplication.md) | stopped | contemporaneous | `efficiency-loop` (efficiency) | `efficiency-loop` (efficiency) | 8 | think-1ozu | Complete PR 679 review A1-A3 through think-hv53, obtain passing ordinary and deferred hosted gates on matching final source and base, then submit think-1ozu for acceptance. Keep the separately claimed follow-up experiment pending. |
 | [session-188](agent-sessions/session-188-durable-pytest-phase-timings.md) | stopped | contemporaneous | `efficiency-loop` (efficiency) | `efficiency-loop` (efficiency) | 7 | think-uhxt | think-uhxt remains the open certification owner. Resume only on a subsequent operator instruction: refresh upstream and ownership, review the retained exact source and failed HTTP observation, and obtain the required source/base-bound qualification before public acceptance. No new research is authorized by this closeout. |
+| [session-189](agent-sessions/session-189-phase-timing-qualification.md) | in_progress | contemporaneous | `efficiency-loop` (efficiency) | `efficiency-loop` (efficiency) | 1 | think-uhxt | Continue think-uhxt through reviewed current-main integration and direct qualification; retain independent audit under think-2hbd and record failed, incomplete or pending outcomes accurately. |
 
 ### Workflow summary
 
@@ -213,7 +214,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `factual-review` | 11 | 1 | 67 | 3 |
 | `insight-iteration` | 31 | 1 | 96 | 4 |
 | `process-review` | 16 | 4 | 64 | 6 |
-| `efficiency-loop` | 13 | 1 | 62 | 1 |
+| `efficiency-loop` | 14 | 1 | 63 | 1 |
 | `research-loop` | 37 | 4 | 154 | 9 |
 | `pipeline-improvement` | 42 | 2 | 216 | 7 |
 | `documentation-pass` | 1 | 0 | 31 | 3 |

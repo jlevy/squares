@@ -69,9 +69,11 @@ def test_the_retained_packet_rebuilds_both_later_reports_byte_for_byte() -> None
 def test_the_ffd900d_reports_stay_pinned_and_become_dated_rows() -> None:
     """The earlier packet still prints its sides; the register supersedes, never rewrites.
 
-    Each report keeps its own row at its own print when a later one beats it: ffd900d's by
-    2d32a6e's on 8 October, 2d32a6e's by issue 506's certificates on 12 October, and
-    issue 506's by issue 561's in the intake of 14 October.
+    Each report keeps its own row at its own print when a later one beats it: at 378
+    ffd900d's by 2d32a6e's on 8 October, 2d32a6e's by Couzo's 02f9690 certificate of 9
+    October, and issue 506's by issue 561's in the intake of 14 October. At 375 all three
+    are above Göbel's construction, which the owner counts as an earlier report since 23
+    October 2026, so they are marked so and hold no count.
     """
     claims = earlier.read_json(earlier.PACKET / "acquisition/sources.json")
     printed = {row["n"]: row["side"] for row in claims["sources"][0]["cases"]}
@@ -90,26 +92,53 @@ def test_the_ffd900d_reports_stay_pinned_and_become_dated_rows() -> None:
     }
     for n in updates.COUNTS:
         first, later = rows[n, earlier.SOURCE_ID], rows[n, updates.SOURCE_ID]
-        assert first["value"] == FFD900D[n]
+        current = rows[n, ISSUE_506]
+        assert (first["value"], later["value"], current["value"]) == (
+            FFD900D[n],
+            LATER[n],
+            CERTIFIED[n],
+        )
+        assert Fraction(CERTIFIED[n]) < Fraction(LATER[n]) < Fraction(FFD900D[n])
+        if n == 375:
+            # All three are above Göbel's square 10 + 7 sqrt(2) of 376 less one square, an
+            # earlier report by the owner's answer of 23 October 2026 (#613): each stays
+            # listed as printed and holds no count.
+            for row in (first, later, current):
+                assert row["disposition"] == check_source_coverage.ABOVE_CONSTRUCTION
+                assert row["construction"] == "10 + 7*sqrt(2)"
+                assert "superseded_by" not in row
+            continue
         assert first["disposition"] == "superseded"
         assert first["superseded_by"] == updates.SOURCE_ID
-        assert later["value"] == LATER[n]
         assert later["disposition"] == "superseded"
-        assert later["superseded_by"] == ISSUE_506
-        current = rows[n, ISSUE_506]
-        assert current["value"] == CERTIFIED[n]
+        # At 378 Couzo's 02f9690 certificate of 9 October came first, a dated row since the
+        # history walk of 22 October, and issue 506's certificate beat it in turn.
+        assert later["superseded_by"] == "couzo-02f9690-2026-10-09"
         # Issue 561's certificates, reported on 12 October, are the next in report order.
         assert current["disposition"] == "superseded"
         assert current["superseded_by"] == "couzo-certificates-2026-10-12"
-        assert Fraction(CERTIFIED[n]) < Fraction(LATER[n]) < Fraction(FFD900D[n])
-    # The last reports stand: evand's composition at 375, which beats Couzo's certificate
-    # of 13 October, and at 378 issue 686's certificate of 19 October, which beats Couzo's
-    # 487b058 of 14 October (T-188's source), which beat that certificate in turn.
+    # The last reports stand: at 375 issue 763's certificate of 23 October, which beats
+    # evand's composition, which beat Couzo's certificate of 13 October, and at 378 the
+    # Kaggle account kyleluecke's notebook certificate, published at 964ee2b on 23 October
+    # (think-lyf9), a refinement of Vladislav Lavrentev's v11 packing at fa6237e, which beat
+    # issue 719's certificate of 22 October, which beat issue 686's of 19 October, which
+    # beat Couzo's 487b058 of 14 October (T-188's source), which beat that certificate in
+    # turn.
     standing = check_source_coverage.current_beyond_horizon(coverage)
     assert {n: standing[n]["source_id"] for n in updates.COUNTS} == {
-        375: "evand-compositions-2026-10-13",
-        378: "muglich-issue686-2026-10-19",
+        375: "couzo-issue763-2026-10-23",
+        378: "kyleluecke-inos-2026-10-23",
     }
+    assert rows[378, "mishapolk-issue719-2026-10-22"]["superseded_by"] == (
+        "lavrentev-cuda-v11-2026-10-23"
+    )
+    assert rows[378, "lavrentev-cuda-v11-2026-10-23"]["superseded_by"] == (
+        "kyleluecke-inos-2026-10-23"
+    )
+    assert (
+        rows[375, "evand-compositions-2026-10-13"]["superseded_by"]
+        == standing[375]["source_id"]
+    )
     source = check_source_coverage.source_by_id(coverage, updates.SOURCE_ID)
     assert check_source_coverage.load_claims(updates.ROOT / source["claims_record"]) == LATER
 

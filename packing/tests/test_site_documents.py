@@ -7,7 +7,7 @@ import re
 
 import pytest
 
-from devtools import check_published_site, render_overview, site_documents
+from devtools import check_published_site, render_overview, site_assets, site_documents
 from devtools.repo_links import RAW_URL, REPO_URL, RepositoryTree
 from devtools.site_documents import (
     INTRO,
@@ -206,8 +206,8 @@ def test_changelog_alias_preserves_and_checks_the_news_landing(url: str, anchor:
         ),
         # Any other text is the page that shows what the register or the table holds.
         ('<a href="packing/frontier/RESULTS.md">results register</a>', "", "results.html"),
-        ('<a href="packing/frontier/STATUS.md">status table</a>', "", "atlas.html"),
-        ('<a href="STATUS.md">the status table</a>', "packing/frontier", "atlas.html"),
+        ('<a href="packing/frontier/STATUS.md">status table</a>', "", "frontier.html"),
+        ('<a href="STATUS.md">the status table</a>', "packing/frontier", "frontier.html"),
         # A code span naming the file is about the file, which is on `main`.
         (
             '<a href="packing/frontier/RESULTS.md"><code>frontier/RESULTS.md</code></a>',
@@ -410,7 +410,12 @@ def test_no_relative_repository_link_survives(pages: dict[str, render_overview.P
         for url in re.findall(r'\s(?:href|src)="([^"]*)"', article.group(0)):
             if url.startswith(("#", "https://", "http://", "data:", "mailto:")):
                 continue
-            assert url.split("#")[0] in served, f"{name}: {url}"
+            if url.startswith("assets/"):
+                assert url.removeprefix("assets/") in site_assets.shared().assets.referenced(
+                    [page.html]
+                ), f"{name}: {url}"
+            else:
+                assert url.split("#")[0] in served, f"{name}: {url}"
 
 
 def test_the_tutorial_math_is_kpress_math(pages: dict[str, render_overview.Page]) -> None:
@@ -615,7 +620,7 @@ def test_the_introductions_links_reach_the_sites_own_pages(
     assert re.findall(r'<a href="([^"]+)">([^<]+)</a>', intro) == [
         ("results.html#t-060", "T-060"),
         ("results.html", "results register"),
-        ("atlas.html", "frontier"),
+        ("frontier.html", "frontier"),
         ("cases/11.html", "case record"),
         ("epistemics.html", "the rungs"),
         (f"{REPO_URL}/blob/{BRANCH}/docs/review.md", "review"),
@@ -635,7 +640,7 @@ def test_only_the_shared_block_has_its_links_rewritten(
         _overview('<p><a href="packing/frontier/STATUS.md">frontier</a></p>')
     )
     intro = out.split(OVERVIEW_INTRO_OPEN, 1)[1].split(OVERVIEW_INTRO_CLOSE, 1)[0]
-    assert intro == '<p><a href="atlas.html">frontier</a></p>'
+    assert intro == '<p><a href="frontier.html">frontier</a></p>'
     assert out.count('<a href="packing/frontier/RESULTS.md">outside the block</a>') == 3
     assert "recent-progress" not in out
 

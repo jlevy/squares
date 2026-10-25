@@ -1,0 +1,17 @@
+{
+  "format": "beyond-horizon-first-commits-v1",
+  "history_commits": 44,
+  "retained_commit": "964ee2bdf301d0c8912d956d4010f478dcbbd5ea",
+  "rows": [
+    {"blob":"5abd7672a0e69fca5a7020f0182034deee3cd49f","certificate":"certificates/best/n364.cert","committed":"2026-10-23T22:38:09Z","first_commit":"964ee2bdf301d0c8912d956d4010f478dcbbd5ea","n":364},
+    {"blob":"d0b724663c3edaed85ce6962117ad350d811039f","certificate":"certificates/best/n455.cert","committed":"2026-10-23T22:38:09Z","first_commit":"964ee2bdf301d0c8912d956d4010f478dcbbd5ea","n":455},
+    {"blob":"1a6d9b04bb6e270d0e9d159ef135f80b23e9a415","certificate":"certificates/best/n596.cert","committed":"2026-10-23T22:38:09Z","first_commit":"964ee2bdf301d0c8912d956d4010f478dcbbd5ea","n":596},
+    {"blob":"1b46701b8e82ffa19022ef4f6f12752a952ce68d","certificate":"certificates/best/n637.cert","committed":"2026-10-23T22:38:09Z","first_commit":"964ee2bdf301d0c8912d956d4010f478dcbbd5ea","n":637},
+    {"blob":"18444b7eb50696ae8a33aaef7b603332bc3073d3","certificate":"certificates/best/n738.cert","committed":"2026-10-23T22:38:09Z","first_commit":"964ee2bdf301d0c8912d956d4010f478dcbbd5ea","n":738},
+    {"blob":"9bf33cbffaf5ce7d28ac9e64f20a527467fe60f7","certificate":"certificates/best/n751.cert","committed":"2026-10-23T22:38:09Z","first_commit":"964ee2bdf301d0c8912d956d4010f478dcbbd5ea","n":751},
+    {"blob":"6ddf5a712c6d4d50ea6128fc09e7ba9576158eda","certificate":"certificates/best/n807.cert","committed":"2026-10-23T22:38:09Z","first_commit":"964ee2bdf301d0c8912d956d4010f478dcbbd5ea","n":807},
+    {"blob":"053f3c4a5d9b9f0c8114a864810de0a2dd9953da","certificate":"certificates/best/n924.cert","committed":"2026-10-23T22:38:09Z","first_commit":"964ee2bdf301d0c8912d956d4010f478dcbbd5ea","n":924},
+    {"blob":"ca98985e05fbb349b39d2da910c8d45cfbdb8fc9","certificate":"certificates/best/n994.cert","committed":"2026-10-23T22:38:09Z","first_commit":"964ee2bdf301d0c8912d956d4010f478dcbbd5ea","n":994}
+  ],
+  "source": "https://github.com/franciscouzo/square-packing"
+}

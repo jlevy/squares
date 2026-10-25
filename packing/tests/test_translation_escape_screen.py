@@ -107,8 +107,20 @@ def _rendering_entry(directory: Path) -> dict[str, Any]:
 #: above every tolerance, and 260 stayed on Couzo's certificate (T-223, think-xu4d). The
 #: adoption of 22 October 2026 (think-ql4v) moved it at its four, to Evan Daniel's
 #: regularized views (T-225), least margins 1e-20: 260 left, and 204, 227 and 229 stayed.
-#: Re-screening the adopted
-#: counts with the screen's own `--update --n` rebuilds the retained screen byte for byte.
+#: The adoption of 23 October 2026 (think-4h23) moved it at its two, to Mykhailo
+#: Polkovskyi's #719 re-solves (T-229): 105 joined, its least margins 5e-21 against every
+#: wall and 1e-20 between pairs, and 204 stayed. The same pass (think-icp1) moved it at
+#: 303, to Evan Daniel's dilation certificate of issue 728 (T-230): 303 joined, the
+#: dilation of a binary64 packing, as 229 did, its least margins 6.0e-13 against every wall
+#: and 1.2e-12 between pairs, at the screen's tightest tolerance of 1e-12. The adoption of
+#: 24 October 2026 (think-h01y) moved 204 to the release's lower 204 file (T-231), its least
+#: margins 5e-21 and 1e-20, and 204 stayed; the same pass (think-tqb5) moved 303 again, to
+#: Amund Kristiansen's dilation certificate of issue 755 (T-239): 303 stayed, its least
+#: margins 6.0e-13 and 1.2e-12 again. The adoption of 25 October 2026 (think-bk9r) moved
+#: 268 and 303 to Francisco Couzo's issue-763 certificates (T-240): 268 joined and 303
+#: stayed, each certificate's least margins 1e-15 against every wall and 2.1e-13 between
+#: pairs, below the screen's tightest tolerance of 1e-12. Re-screening the adopted counts
+#: with the screen's own `--update --n` rebuilds the retained screen byte for byte.
 GOLDEN_UNSTABLE = {
     "n=1..100": [
         68,
@@ -121,6 +133,7 @@ GOLDEN_UNSTABLE = {
         84,
         86,
         88,
+        105,
         106,
         129,
         132,
@@ -137,6 +150,7 @@ GOLDEN_UNSTABLE = {
         84,
         86,
         88,
+        105,
         106,
         129,
         132,
@@ -149,7 +163,8 @@ GOLDEN_UNSTABLE = {
         199,
         204,
         206,
-        207,
+        # 207 left on 23 October 2026: T-174's algebraic witness there is stable across
+        # tolerances (think-ot5c).
         227,
         229,
         232,
@@ -159,10 +174,12 @@ GOLDEN_UNSTABLE = {
         264,
         266,
         267,
+        268,
         269,
         273,
         297,
         301,
+        303,
         304,
         307,
     ],

@@ -70,6 +70,18 @@ jobs:
       - name: Synchronize the locked development environment
         run: uv sync --frozen --all-extras --group dev
 
+      - name: Refuse added bulk Git blobs
+        if: "github.event_name == 'pull_request'"
+        # OR-17: the guard refuses past its own 30 s deadline, and the largest merge into
+        # main to date took 18 s on a shared host; this bounds the step if uv or Git hangs.
+        timeout-minutes: 1
+        env:
+          PR_STORAGE_BASE: ${{ github.event.pull_request.base.sha }}
+          PR_STORAGE_HEAD: ${{ github.event.pull_request.head.sha }}
+        run: >-
+          uv run --frozen --all-extras --group dev python -m devtools.check_added_blobs
+          --base "$PR_STORAGE_BASE" --head "$PR_STORAGE_HEAD"
+
       # The browser floor's tools. Node is on the runner already, but pinned here for the
       # same reason the Python version is: a floor that moves under you is not a floor. The
       # version is the one the vendored kpress pins, so the repository has one answer to
@@ -99,11 +111,30 @@ jobs:
           path: ~/.cache/ms-playwright
           key: playwright-${{ runner.os }}-chromium-${{ hashFiles('packing/uv.lock') }}
 
+      - name: Record the runner image for system-package caches
+        if: "github.event_name != 'pull_request'"
+        id: image
+        run: echo "image=${ImageOS}-${ImageVersion}" >> "$GITHUB_OUTPUT"
+
+      - name: Cache Chromium system-package archives
+        if: "github.event_name != 'pull_request'"
+        uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.2.4
+        with:
+          path: ~/apt-archives
+          key: apt-chromium-${{ steps.image.outputs.image }}-${{ hashFiles('packing/uv.lock') }}
+          restore-keys: |
+            apt-chromium-${{ steps.image.outputs.image }}-
+            apt-chromium-
+
+      # Cache hits still run the installer. Each install has a 180 s ceiling;
+      # the outer bound leaves one minute for archive setup, cleanup and receipts.
       - name: Install Chromium for the complete post-merge gate
         if: "github.event_name != 'pull_request'"
+        timeout-minutes: 4
         run: >-
           uv run --frozen --all-extras --group dev
-          python -m playwright install --with-deps --only-shell chromium
+          python -m devtools.browser_setup
+          --artifacts "$PACKING_VALIDATION_ARTIFACT_DIR"
 
       # Only this job builds the engine, and `_build_engine` runs it *before* the executor
       # rather than inside it, so `cargo build --locked --release` is a serial prefix on
@@ -531,10 +562,27 @@ jobs:
           path: ~/.cache/ms-playwright
           key: playwright-${{ runner.os }}-chromium-${{ hashFiles('packing/uv.lock') }}
 
+      - name: Record the runner image for system-package caches
+        id: image
+        run: echo "image=${ImageOS}-${ImageVersion}" >> "$GITHUB_OUTPUT"
+
+      - name: Cache Chromium system-package archives
+        uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.2.4
+        with:
+          path: ~/apt-archives
+          key: apt-chromium-${{ steps.image.outputs.image }}-${{ hashFiles('packing/uv.lock') }}
+          restore-keys: |
+            apt-chromium-${{ steps.image.outputs.image }}-
+            apt-chromium-
+
+      # Cache hits still run the installer. Each install has a 180 s ceiling;
+      # the outer bound leaves one minute for archive setup, cleanup and receipts.
       - name: Install Chromium for the complete post-merge gate
+        timeout-minutes: 4
         run: >-
           uv run --frozen --all-extras --group dev
-          python -m playwright install --with-deps --only-shell chromium
+          python -m devtools.browser_setup
+          --artifacts "$PACKING_VALIDATION_ARTIFACT_DIR"
 
       - name: Bind the receipt to the immutable tree
         env:
@@ -1255,27 +1303,27 @@ jobs:
           path: ~/.cache/ms-playwright
           key: playwright-${{ runner.os }}-chromium-${{ hashFiles('packing/uv.lock') }}
 
-      # npm ci and Chromium apt are independent after uv sync. Serializing them was
-      # 15-20 s of Node plus 13-19 s of apt on the frontend wall; overlapping them
-      # is the same work on the same runner.
+      - name: Record the runner image for system-package caches
+        id: image
+        run: echo "image=${ImageOS}-${ImageVersion}" >> "$GITHUB_OUTPUT"
+
+      - name: Cache Chromium system-package archives
+        uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.2.4
+        with:
+          path: ~/apt-archives
+          key: apt-chromium-${{ steps.image.outputs.image }}-${{ hashFiles('packing/uv.lock') }}
+          restore-keys: |
+            apt-chromium-${{ steps.image.outputs.image }}-
+            apt-chromium-
+
+      # Cache hits still run the installer. Each install has a 180 s ceiling;
+      # the outer bound leaves one minute for archive setup, cleanup and receipts.
       - name: Install the npm toolchain and the pinned Chromium shell
-        working-directory: .
-        run: |
-          set -euo pipefail
-          npm ci --ignore-scripts &
-          npm_pid=$!
-          (
-            cd packing
-            uv run --frozen --all-extras --group dev \
-              python -m playwright install --with-deps --only-shell chromium
-          ) &
-          playwright_pid=$!
-          npm_status=0
-          playwright_status=0
-          wait "$npm_pid" || npm_status=$?
-          wait "$playwright_pid" || playwright_status=$?
-          test "$npm_status" -eq 0
-          test "$playwright_status" -eq 0
+        timeout-minutes: 4
+        run: >-
+          uv run --frozen --all-extras --group dev
+          python -m devtools.browser_setup --npm
+          --artifacts "$PACKING_VALIDATION_ARTIFACT_DIR"
 
       - name: Run the frontend source and built-page contracts
         # think-9dhb: shared-runner load timing is advisory until controlled baseline
@@ -1493,10 +1541,17 @@ jobs:
             /packing/resources/web/evand-n183-subgrid-2026-10-19/
             /packing/resources/web/evand-n308-2026-10-19/
             /packing/resources/web/evand-n154-sweep-2026-10-20/
+            /packing/resources/web/evand-n303-2026-10-22/
+            /packing/resources/web/amundsk-n303-2026-10-23/
             /packing/resources/web/de-winter-upper-bounds-227-229-260-2026-10-17/
             /packing/resources/web/evand-n270-sweep-2026-10-20/
             /packing/resources/web/couzo-issue678-2026-10-18/
             /packing/resources/web/evand-regularized-2026-10-20/
+            /packing/resources/web/mishapolk-issue719-2026-10-22/
+            /packing/resources/web/evand-exact-cur-2026-10-16/
+            /packing/resources/web/mishapolk-n204-2026-10-22/
+            /packing/resources/web/couzo-issue763-2026-10-23/
+            /packing/resources/web/evand-kaggle-descents-2026-10-24/
             /packing/resources/papers/
             !/packing/resources/papers/*
             /packing/resources/papers/kingbird-square-29-provenance.svg

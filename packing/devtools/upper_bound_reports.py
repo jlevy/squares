@@ -6,12 +6,17 @@ import declaration, ``acquisition/report.json`` (`Declaration`), beside the cust
 declaration ``devtools.acquire_source`` writes the packet from:
 
 - **custody.** ``read_facts`` admits nothing until ``acquire_source.check`` passes, so
-  every certificate it reads is a retained file bound to its upstream blob. Where the
+  every certificate it reads is a retained file bound to its upstream blob, or a file the
+  packet pins as ``identical_to`` another packet's retained copy, read from that copy and
+  held to the pinned digest (`_upstream`). Where the
   source states no licence and the packet retains no upstream byte, a row names a derived
   ``fact`` instead: the certificate as an exact rational Witness/v2, which ``derive``
   writes from a checkout once ``acquire_source.acquire`` shows the checkout yields this
   packet's own acquisition record, so its bytes have the digests the packet pins. The
-  fact names those digests, and ``read_facts`` holds it to its own rebuild. A pinned file
+  fact names those digests, and ``read_facts`` holds it to its own rebuild. Where a
+  licence given later lets the packet retain the file at the same pin, as #755's author
+  gave on 24 October 2026, the row keeps its fact, which the receipts name, and
+  ``read_facts`` also holds the fact to the retained bytes (`_fact_file`). A pinned file
   the row names as stating the same packing, such as the source's own Witness/v2, is
   compared with the certificate by ``derive``, from the same checkout. Where the source
   keeps its geometry in release assets and pins them by digest in a manifest of its tree,
@@ -35,6 +40,10 @@ declaration ``devtools.acquire_source`` writes the packet from:
   ``receipts/exact-certification.json.xz``, or one ``receipts/exact-certification-nNNN.json.xz``
   per count where the whole would exceed the kernel's ceiling on uncompressed evidence;
   ``check`` admits the receipt, and ``check --replay`` decides it again;
+- **sharp controls.** ``sharp-controls`` takes each count's certificate to exact contact
+  and 1e-30 past it, on both routes, and writes ``receipts/sharp-controls.json``, or one
+  ``receipts/sharp-controls-nNNN.json`` per count of a longer roster; its controls and
+  their expectations are ``devtools.upper_bound_sharp_controls``'s;
 - **registration.** ``register-plan`` prints, and writes nowhere, the register, evidence,
   coverage, bibliography and resources entries the ``requested`` counts need. A release
   whose requested counts all lie beyond the horizon, as #584's do, plans no register
@@ -52,6 +61,7 @@ From ``packing/``, with the project interpreter::
     python -m devtools.upper_bound_reports PACKET check-claims [--write]
     python -m devtools.upper_bound_reports PACKET certify --jobs-dir SCRATCH/jobs --workers 2
     python -m devtools.upper_bound_reports PACKET check [--n N ...] [--replay]
+    python -m devtools.upper_bound_reports PACKET sharp-controls [--n N ...] [--check]
     python -m devtools.upper_bound_reports PACKET register-plan
 
 **Adding a format.** An adapter is a function ``(raw, n, options) -> Certificate`` (the
@@ -167,6 +177,9 @@ MAX_INTEGER_DIGITS = kernel.MAX_INTEGER_DIGITS
 #: places, whose last places a double of that size does not determine (`printed_span`).
 ROUNDINGS = ("up", "unstated", "binary64")
 THIS = "this certificate"
+#: Göbel's construction among the reports beyond the horizon, for a declaration read from
+#: the day of the owner's answer on #613 (`goebel_construction`).
+GOEBEL = "Göbel's construction"
 _PRINTED = re.compile(r"[0-9]+\.[0-9]+")
 _FRACTION = re.compile(r"[1-9][0-9]*/[1-9][0-9]*")
 _LITERAL = re.compile(r"-?[0-9]+(?:/[1-9][0-9]*)?")
@@ -1139,9 +1152,57 @@ def _read(source: Path, path: str) -> bytes:
         raise ReportError(f"{path}: {error}") from error
 
 
+def _upstream(source: Path, twins: Mapping[str, acquire_source.PinnedOnly], path: str) -> bytes:
+    """One upstream file's bytes: retained under ``source``, or, where the packet pins it
+    by digest because another packet already retains the same bytes, read from that copy.
+
+    Such a file is pinned only, ``identical_to`` the other copy (`acquire_source`), whose
+    custody check compares the two. The copy is read as that check reads it
+    (`acquire_source.twin_bytes`: an original gzip as stored, anything else plain or from
+    its ``.gz``), within the ``MAX_SOURCE_BYTES`` bound `_read` applies, and held to the
+    pinned digest again here; an upstream ``.gz`` is then
+    decompressed, as `_read` returns a retained one. Francisco Couzo's 304 at ``fa6237e``
+    is retained by the issue-763 packet and pinned so by the packet that imports it
+    (think-l49q).
+    """
+    item = twins.get(path)
+    if item is None:
+        return _read(source, path)
+    twin = item.get("identical_to", "")
+    target = REPO / twin
+    ensure_private(target if target.exists() else target.with_name(target.name + ".gz"))
+    try:
+        data = acquire_source.twin_bytes(twin, REPO, limit=MAX_SOURCE_BYTES)
+    except (OSError, ValueError) as error:
+        raise ReportError(f"{path}: {error}") from error
+    _require(
+        hashlib.sha256(data).hexdigest() == item["sha256"],
+        f"{path}: {twin} is not the bytes the packet pins",
+    )
+    if not path.endswith(retained_data.GZIP_SUFFIX):
+        return data
+    try:
+        return retained_data.gunzip_bytes(data, limit=MAX_SOURCE_BYTES, name=path)
+    except (OSError, ValueError) as error:
+        raise ReportError(f"{path}: {error}") from error
+
+
+def _twins(record: acquire_source.Source) -> dict[str, acquire_source.PinnedOnly]:
+    """The pinned-only files another packet retains, by upstream path."""
+    return {item["path"]: item for item in record["pinned_only"] if "identical_to" in item}
+
+
 def _record(packet: Path) -> acquire_source.Record:
     value = json.loads((packet / acquire_source.RECORD).read_text(encoding="utf-8"))
     return cast("acquire_source.Record", value)
+
+
+def _fact_file(packet: Path, row: CertificateRow) -> bool:
+    """Whether a fact's row names a file the packet retains rather than pins only: the file
+    came to be retained after the fact was derived, once a licence allowed it, as at #755's
+    303, so the fact stays beside it, its receipts bound to it."""
+    pinned = {item["path"] for item in _record(packet)["sources"][0]["pinned_only"]}
+    return "fact" in row and "archive" not in row and row["path"] not in pinned
 
 
 def fact_witness(
@@ -1150,21 +1211,32 @@ def fact_witness(
     """A derived fact: the positive job's deciding witness, with the pinned file it is from.
 
     ``revision_sha256`` is the digest the packet's acquisition record pins for the file,
-    which is not retained; ``derive`` writes the fact only from bytes that have it. For a
-    member of a release asset it is the member's own digest, the file the manifest pinned
-    at ``revision`` binds through the asset's, and the address is the asset's, with the
-    member as its fragment.
+    which is not retained; ``derive`` writes the fact only from bytes that have it. A file
+    retained later, under a licence given after the fact was derived (`_fact_file`), keeps
+    the same digest, the manifest's, so the fact is unchanged. For a member of a release
+    asset it is the member's own digest, the file the manifest pinned at ``revision`` binds
+    through the asset's, and the address is the asset's, with the member as its fragment.
     """
     record = _record(packet)
     source = record["sources"][0]
     pinned = {item["path"]: item for item in source["pinned_only"]}
     archive = row.get("archive")
     bound = row["path"] if archive is None else archive["manifest"]
-    _require(bound in pinned, f"n={row['n']}: a fact for a file the packet does not pin")
+    # Only a file retained beside its fact reads the manifest; a pinned file's digest is
+    # the record's, so a packet's facts read as before wherever its manifest is absent.
+    retained = (
+        {}
+        if bound in pinned or archive is not None
+        else acquire_source.read_manifest(packet / acquire_source.MANIFEST)
+    )
+    _require(
+        bound in pinned or bound in retained,
+        f"n={row['n']}: a fact for a file the packet does not pin",
+    )
     witness = kernel.to_witness(certificate, **_profile(declaration))
     if archive is None:
         url = f"{source['source_url']}/blob/{source['source_commit']}/{row['path']}"
-        digest = pinned[row["path"]]["sha256"]
+        digest = pinned[bound]["sha256"] if bound in pinned else retained[bound]
     else:
         url = (
             f"https://github.com/{archive['repository']}/releases/download/{archive['tag']}/"
@@ -1243,7 +1315,9 @@ def read_facts(
     """
     ensure_private(packet)
     declaration = load_declaration(packet)
-    source = REPO / acquisition(packet)["archived_path"]
+    record = acquisition(packet)
+    source = REPO / record["archived_path"]
+    twins = _twins(record)
     certificates = {}
     for row in declaration["certificates"]:
         n = row["n"]
@@ -1251,13 +1325,20 @@ def read_facts(
             continue
         if "fact" in row:
             certificate = read_fact(packet, declaration, row)
+            if _fact_file(packet, row):
+                raw = _upstream(source, twins, row["path"])
+                _require(
+                    parse_certificate(raw, n, row["format"], row_options(row)) == certificate,
+                    f"n={n}: the derived fact is not the retained {row['path']}",
+                )
         else:
-            raw = _read(source, row["path"])
+            raw = _upstream(source, twins, row["path"])
             certificate = parse_certificate(raw, n, row["format"], row_options(row))
         admit(certificate, row["offered"])
         # Beside a derived fact the other files are not retained; ``derive`` compares them.
         for other in [] if "fact" in row else row.get("same_packing", []):
-            copy = parse_certificate(_read(source, other["path"]), n, other["format"])
+            raw = _upstream(source, twins, other["path"])
+            copy = parse_certificate(raw, n, other["format"])
             _require(copy == certificate, f"n={n}: {other['path']} states another packing")
         certificates[n] = certificate
     return certificates
@@ -1279,17 +1360,26 @@ def _sides(loader: Callable[[], Mapping[int, legacy.Certificate]]) -> dict[int, 
 
 
 @functools.cache
-def _import_sides(packet: Path) -> dict[int, Fraction]:
-    """Every exact side of one packet this module imports, read once after its custody check.
+def _import_sides(packet: Path, *, in_corpus: bool) -> dict[int, Fraction]:
+    """The exact sides of one packet this module imports, inside the case corpus or beyond
+    it, read once after its custody check.
 
-    Keyed on the packet's path, so a private copy is read as itself.
+    Keyed on the packet's path, so a private copy is read as itself. A house is read
+    inside the corpus, so a release whose packet also derives its rows beyond it, as issue
+    719's derives 112, admits its two in-corpus facts for a house and not the other 112
+    (21.6 s of admission on 22 October 2026).
     """
-    return {n: certificate.side for n, certificate in read_facts(packet).items()}
+    numbers = [
+        row["n"]
+        for row in load_declaration(packet)["certificates"]
+        if (row["n"] <= HORIZON) is in_corpus
+    ]
+    return {n: certificate.side for n, certificate in read_facts(packet, numbers).items()}
 
 
 def import_side(name: str, n: int) -> Fraction:
     """One exact side of the import packet named ``name``, its directory name."""
-    return _import_sides(packet_path(name))[n]
+    return _import_sides(packet_path(name), in_corpus=n <= HORIZON)[n]
 
 
 def _import(name: str) -> Callable[[int], Fraction]:
@@ -1382,6 +1472,8 @@ HOUSES: dict[str, Callable[[int], Fraction]] = {
     "[Daniel n183 subgrid 2026-10-19]": _import("evand-n183-subgrid-2026-10-19"),
     "[Daniel n308 2026-10-19]": _import("evand-n308-2026-10-19"),
     "[Daniel n154 sweep 2026-10-20]": _import("evand-n154-sweep-2026-10-20"),
+    "[Daniel n303 2026-10-22]": _import("evand-n303-2026-10-22"),
+    "[Kristiansen n303 2026-10-23]": _import("amundsk-n303-2026-10-23"),
     # T-223: issue 678's packet has no import declaration; its replay module reads its two
     # counts of the case corpus, each certificate held to the digest its manifest pins.
     "[Couzo issue 678 2026-10-18]": lambda n: couzo_678.house_certificate(n).side,
@@ -1395,6 +1487,21 @@ HOUSES: dict[str, Callable[[int], Fraction]] = {
     "[Couzo issue 670 2026-10-17]": _import("couzo-issue670-2026-10-17"),
     "[Couzo issue 672 2026-10-17]": _import("couzo-issue672-2026-10-17"),
     "[Couzo issue 675 2026-10-18]": _import("couzo-issue675-2026-10-18"),
+    # Mykhailo Polkovskyi's issue-719 release (think-4h23), derived facts only: T-229 at
+    # 105 and 204, beside the 112 rows beyond the corpus its packet also derives.
+    "[Mishapolk issue 719 2026-10-22]": _import("mishapolk-issue719-2026-10-22"),
+    # T-231: the release's second 204 file, certificates/n204.cert, which the author
+    # claimed on issue 719 after T-229 was registered (think-h01y), under its own key.
+    "[Mishapolk n204 2026-10-22]": _import("mishapolk-n204-2026-10-22"),
+    # T-240: Francisco Couzo's two in-corpus certificates of issue 763, at 268 and 303,
+    # retained at 964ee2bd; the packet's rows beyond the corpus are read by the ledger.
+    "[Couzo issue 763 2026-10-23]": _import("couzo-issue763-2026-10-23"),
+    # Couzo's 304 at fa6237e, which issue 763 does not claim, read from the copy the
+    # issue-763 packet retains (think-l49q).
+    "[Couzo n304 2026-10-23]": _import("couzo-n304-2026-10-23"),
+    # Evan Daniel's exact descents at 268 and 304 of public Kaggle packings, at 8a8879a,
+    # which no issue reports (think-l49q).
+    "[Daniel Kaggle descents 2026-10-24]": _import("evand-kaggle-descents-2026-10-24"),
     # T-155: the side of the retained view of Evan Daniel's regularizer at each count.
     "[Daniel regularizer 2026-10-11]": regularized.view_side,
 }
@@ -1598,12 +1705,61 @@ def smallest(candidates: list[tuple[str, Span]]) -> dict[str, Any]:
     return {"smallest": None, "undecided_among": labels}
 
 
-def _row(
+def goebel_construction(n: int, read_on: str) -> tuple[str, str, Span] | None:
+    """Göbel's construction at ``n`` for a declaration read on ``read_on``: its holders, its
+    form ``p + q*sqrt(2)`` and a rigorous enclosure, from the maintained module
+    (`devtools.intake_ledger.construction_side`, `devtools.goebel_construction`). None
+    within the horizon and for a declaration read before the owner's answer on #613
+    (think-8krd) that Göbel's constructions are the baseline beyond 324
+    (`devtools.intake_ledger.GOEBEL_FROM`), so the frozen claim records keep the reading of
+    their day; refused at a count whose side no build proves final."""
+    # That module imports this one, so it is imported where it is first used.
+    from devtools import intake_ledger as ledger  # noqa: PLC0415
+
+    if n <= HORIZON or not ledger.goebel_baseline(read_on):
+        return None
+    try:
+        side, form = ledger.construction_side(n), ledger.goebel_form(n)
+    except ledger.LedgerError as error:
+        raise ReportError(str(error)) from error
+    _require(side is not None and form is not None, f"n={n}: no Göbel construction")
+    assert side is not None
+    assert form is not None
+    return side.holders, str(form.text()), side.span
+
+
+def _construction(side: Fraction, holders: str, form: str, span: Span) -> dict[str, Any]:
+    """The certificate against Göbel's construction ``form``, decided by the exact sign of
+    the difference (`check_source_coverage.construction_sign`), which the enclosure must
+    agree with; the difference is the enclosure's midpoint less the side, with its bounds."""
+    sign = coverage_check.construction_sign(side, form)
+    _require(sign in {-1, 1}, f"Göbel's form {form} is not p + q*sqrt(2), or equals {side}")
+    exact = "below" if sign == -1 else "above"
+    _require(
+        relation(side, span) == exact,
+        f"the enclosure of Göbel's {form} does not separate from {side}",
+    )
+    return {
+        "holders": holders,
+        "form": form,
+        "relation": exact,
+        "difference": legacy.literal((span.low + span.high) / 2 - side),
+        "difference_bounds": [
+            legacy.literal(span.low - side),
+            legacy.literal(span.high - side),
+        ],
+    }
+
+
+def claim_row(
     row: CertificateRow,
     certificate: legacy.Certificate,
     declaration: Declaration,
     read_side: Callable[[str, int], Fraction],
 ) -> dict[str, Any]:
+    """One certificate's result in the claim record: its sides, and how it stands against
+    the case's lanes in the corpus, or beyond it against the grid and, from the owner's
+    answer on #613, Göbel's construction (`goebel_construction`), and the other reports."""
     n, side = row["n"], certificate.side
     houses = {house["n"]: house for house in declaration["houses"]}
     pending = [report for report in declaration["pending"] if report["n"] == n]
@@ -1656,6 +1812,11 @@ def _row(
     else:
         result["case"] = None
         candidates.append(("grid", exact_span(grid_side(n))))
+        construction = goebel_construction(n, declaration["read_on"])
+        if construction is not None:
+            holders, form, span = construction
+            result["construction"] = _construction(side, holders, form, span)
+            candidates.append((GOEBEL, span))
     others = []
     for report in pending:
         entry: dict[str, Any] = {
@@ -1699,7 +1860,7 @@ def compare(
     source = acquisition(packet)
     read_side = comparison_reader(declaration)
     rows = [
-        _row(row, certificates[row["n"]], declaration, read_side)
+        claim_row(row, certificates[row["n"]], declaration, read_side)
         for row in declaration["certificates"]
     ]
     return {
@@ -1873,9 +2034,14 @@ def checkout_problems(packet: Path, checkout: Path) -> list[str]:
 
 
 def _checkout_bytes(packet: Path, checkout: Path, path: str) -> bytes:
-    """A file the packet pins, read from a checkout that `checkout_problems` admitted."""
+    """A file the packet pins, or retains beside its fact (`_fact_file`), read from a
+    checkout that `checkout_problems` admitted."""
     pinned = {item["path"] for item in _record(packet)["sources"][0]["pinned_only"]}
-    _require(path in pinned, f"{path}: not a file this packet pins")
+    _require(
+        path in pinned
+        or path in acquire_source.read_manifest(packet / acquire_source.MANIFEST),
+        f"{path}: not a file this packet pins",
+    )
     upstream = checkout / path
     _require(
         not upstream.is_symlink() and upstream.resolve().is_relative_to(checkout.resolve()),
@@ -2345,6 +2511,10 @@ def comparison(row: Mapping[str, Any]) -> str:
     if row["case"] is None:
         grid = Fraction(row["grid_side"]) - Fraction(row["exact_side"])
         parts = [f"beyond the horizon, with no case record, and {_sci(grid)} below the grid"]
+        construction = row.get("construction")
+        if construction is not None:
+            by = _sci(abs(Fraction(construction["difference"])))
+            parts.append(f"{construction['relation']} {GOEBEL} {construction['form']} by {by}")
     else:
         case = row["case"]
         held = f"{case['holders']}, {case['result']}" if "result" in case else case["holders"]
@@ -2637,6 +2807,9 @@ def main(argv: list[str] | None = None) -> int:
     check.add_argument("--n", type=int, nargs="+")
     check.add_argument("--replay", action="store_true")
     sub.add_parser("register-plan")
+    sharp = sub.add_parser("sharp-controls")
+    sharp.add_argument("--n", type=int, nargs="+")
+    sharp.add_argument("--check", action="store_true")
     job = sub.add_parser("decide-job")
     job.add_argument("--n", type=int, required=True)
     job.add_argument("--control", choices=JOBS, required=True)
@@ -2669,6 +2842,13 @@ def main(argv: list[str] | None = None) -> int:
     elif args.action == "register-plan":
         plan = register_plan(packet)
         print(yaml.safe_dump(plan, sort_keys=False, allow_unicode=True, width=100), end="")
+    elif args.action == "sharp-controls":
+        # Imported here: the controls read certificates through this module.
+        from devtools import upper_bound_sharp_controls as sharp_controls  # noqa: PLC0415
+
+        met = sharp_controls.run(packet, args.n, check=args.check)
+        print(_json_text({str(n): {"all_as_expected": ok} for n, ok in met.items()}), end="")
+        return 0 if all(met.values()) else 1
     else:
         decide_job(packet, args.n, args.control, args.output)
     return 0

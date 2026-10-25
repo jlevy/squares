@@ -12,8 +12,8 @@ from typing import Any
 import pytest
 from kpress.format import markdown
 
+from devtools import paper_structure, render_overview, site_assets
 from devtools import render_frontier_page as frontier
-from devtools import render_overview, site_assets
 from devtools import render_research_tables as tables
 from devtools.render_overview import assert_fetches_only_assets
 from sqpack.assurance import bounds_agree_at_declared_precision
@@ -80,10 +80,14 @@ class Rows(HTMLParser):
         super().__init__()
         self.rows: list[tuple[dict[str, str | None], list[dict[str, str | None]]]] = []
         self.head: list[dict[str, str | None]] = []
+        self.popovers: list[dict[str, str | None]] = []
         self._body = False
         self._cell: dict[str, str | None] | None = None
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        attributes = dict(attrs)
+        if "popover" in attributes:
+            self.popovers.append(attributes)
         if tag == "tbody":
             self._body = True
         elif tag == "tr" and self._body:
@@ -115,14 +119,14 @@ def frontier_math_counts() -> tuple[int, int]:
 
 @pytest.fixture(scope="module")
 def page() -> str:
-    return site_renders.html("atlas.html")
+    return site_renders.html("frontier.html")
 
 
 @pytest.fixture(scope="module")
 def served() -> str:
     """The page as a reader's browser assembles it, with every shared asset it links put
     back in it (`tests.site_renders.served`)."""
-    return site_renders.served("atlas.html")
+    return site_renders.served("frontier.html")
 
 
 @pytest.fixture(scope="module")
@@ -150,7 +154,7 @@ def test_every_case_file_is_a_row_and_every_row_a_case_file(rows) -> None:
 
 
 def test_every_row_is_its_cases_anchor(rows) -> None:
-    """`atlas.html#n-11` lands on its survey row; the old Frontier address forwards here."""
+    """`frontier.html#n-11` lands on its canonical survey row."""
     for attributes, _ in rows:
         assert attributes["id"] == f"n-{attributes['data-n']}"
 
@@ -269,28 +273,30 @@ def test_a_correcting_bound_keeps_its_recency_and_names_what_it_corrects(
     assert all("title" not in cell for cell in parsed.head if cell is not recent)
 
 
-def test_the_page_says_once_what_the_tag_means_and_links_the_corrected_result(
+def test_the_survey_key_explains_bounds_without_audits_or_case_history(
     page: str,
 ) -> None:
-    """The rows repeat the tag without a link; the Recent results paragraph says what it
-    means once, with the count from the citation record, the register's record of the
-    corrected work linked to its row, and the register's words for what failed."""
-    sentence = frontier.corrections_prose()
-    assert sentence == (
-        "For 218 recent verified bounds, *corrects Nagamochi 2005* says the bound "
-        "stands in for "
-        "a published result found unsound, the register\u2019s "
-        "[T-007](results.html#t-007): "
-        "Lemma 1, on which Theorem 2\u2019s proof rests, is false."
-    )
-    prose = page[: page.index('id="frontier-table"')]
-    assert (
-        "For 218 recent verified bounds, <em>corrects Nagamochi 2005</em> "
-        "says the bound stands in"
-    ) in prose
-    assert '<a href="results.html#t-007">T-007</a>' in prose
-    table = page[page.index("<tbody>") : page.index("</tbody>")]
-    assert "results.html#t-007" not in table
+    """Keep the reading key beside the actual table; detailed evidence is in each row."""
+    prose = page[
+        page.index('<h1 id="the-frontier-survey"') : page.index('id="best-known-results"')
+    ]
+    for term in (
+        "reported lower",
+        "verified",
+        "certificate",
+        "gap",
+        "Polynomial roots",
+        "Records",
+    ):
+        assert term in prose
+    for removed in (
+        "Audited sources",
+        "Seventeen squares",
+        "n-NNN.md",
+        "nothing on it is typed",
+    ):
+        assert removed not in prose
+    assert len(re.sub(r"<[^>]*>", "", prose).split()) < 250
 
 
 #: The cases whose verified lower bound rests only on a published proof nobody here has
@@ -546,7 +552,7 @@ def test_an_invalid_record_fails_the_render(tmp_path: Path, monkeypatch) -> None
 
 
 def test_the_page_fetches_only_assets_and_the_survey_retains_its_ceiling(page: str) -> None:
-    assert_fetches_only_assets("atlas.html", page)
+    assert_fetches_only_assets("frontier.html", page)
     # Each file it names is one the build writes beside it.
     assert site_assets.shared().assets.referenced([page])
     start = page.index('<h1 id="the-frontier-survey"')
@@ -560,31 +566,36 @@ def test_the_page_fetches_only_assets_and_the_survey_retains_its_ceiling(page: s
 
 def test_the_page_carries_the_table_script_and_its_controls(page: str, served: str) -> None:
     table = site_assets.shared().assets.script_file(frontier.TABLE_SCRIPT)
-    assert page.count(site_assets.script_tag(table, "atlas.html")) == 1
+    assert page.count(site_assets.script_tag(table, "frontier.html")) == 1
     assert frontier.TABLE_SCRIPT.read_text(encoding="utf-8") in served
     assert 'class="site-table-tools" data-table="frontier" hidden' in page
-    assert 'aria-current="page" href="atlas.html"' in page
-    assert 'data-page="frontier"' not in page
+    navigation = paper_structure.parse(page).find("nav", "site-nav")
+    assert navigation is not None
+    assert [
+        (link.text(), link.attrs.get("href"))
+        for link in navigation.find_all("a")
+        if link.attrs.get("aria-current") == "page"
+    ] == [("Frontier Survey", "frontier.html")]
 
 
-def test_the_complete_survey_follows_the_graphics_and_shares_one_case_popover(
+def test_the_complete_survey_has_its_own_page_and_one_case_popover(
     page: str,
 ) -> None:
-    graphic = page.index("data-atlas-grid")
     survey = page.index('<h1 id="the-frontier-survey"')
     table = page.index('id="frontier-table"')
-    assert graphic < survey < table
+    assert survey < table
+    assert "data-atlas-grid" not in page
     assert 'id="the-survey"' in page
     assert page.count('id="pop-case"') == 1
     ids = re.findall(r'\bid="([^"]+)"', page)
     assert len(ids) == len(set(ids))
     assert {f"n-{n}" for n in range(1, 325)} <= set(ids)
-    assert {f"atlas-n-{n}" for n in range(1, 325)} <= set(ids)
+    assert not {f"atlas-n-{n}" for n in range(1, 325)} & set(ids)
     total = len(page.encode("utf-8"))
     survey_size = len(page[survey : page.index("</article>", survey)].encode("utf-8"))
     print(
-        f"Prepared Atlas HTML: {total:,} bytes; Frontier Survey: {survey_size:,}; "
-        f"graphics and shared shell: {total - survey_size:,}."
+        f"Prepared Frontier HTML: {total:,} bytes; survey: {survey_size:,}; "
+        f"shared shell: {total - survey_size:,}."
     )
 
 
@@ -627,7 +638,11 @@ def test_a_row_opens_its_case_record(cases: dict[int, dict[str, Any]]) -> None:
     assert ">n-011.md</a>" in row
     assert '<a class="site-cell-quiet" href="cases/11.html" data-case="11">Record</a>' in row
     table = frontier.table_html([cases[11], cases[12]])
-    assert table.count('<div class="site-popover') == 1
+    parser = Rows()
+    parser.feed(table)
+    assert [(item["id"], item["role"], item["aria-label"]) for item in parser.popovers] == [
+        ("pop-case", "dialog", "Case record")
+    ]
     assert table.index("</table>") < table.index('id="pop-case"')
     assert "<details" not in table
 
@@ -704,12 +719,184 @@ def test_a_polynomial_root_has_no_closed_form() -> None:
 
 
 def test_every_thumbnail_draws_its_cases_squares() -> None:
+    """A thumbnail is the case's default picture in its canonical pose (regularization
+    policy, section 13), at the address every case's Regularized-mode picture has."""
     image = frontier.thumbnail_svg(11)
-    assert 'src="atlas/house/n-11.svg" width="50" height="50"' in image
-    svg = frontier.drawing_files()[frontier.drawing_path(11)].decode()
-    assert svg.count("z") == 11
-    assert 'xmlns="http://www.w3.org/2000/svg"' in svg
-    assert "id=" not in svg
+    assert 'src="atlas/regularized/n-11.svg" width="50" height="50"' in image
+    for path in (frontier.drawing_path(11), frontier.drawing_path(11, regularized=True)):
+        svg = frontier.drawing_files()[path].decode()
+        assert svg.count("z") == 11
+        assert 'xmlns="http://www.w3.org/2000/svg"' in svg
+        assert "id=" not in svg
+
+
+def _drawn_squares(svg: str) -> dict[str, list[tuple[int, int]]]:
+    """Each fill's one square, as `packing_svg` draws it: its corners in whole units, y
+    down, read back from the path's absolute move and relative steps."""
+    found: dict[str, list[tuple[int, int]]] = {}
+    for fill, path in re.findall(r'<path fill="(#[0-9a-f]{6})" d="([^"]+)"/>', svg):
+        tokens = re.findall(r"[Mhvl]|-?\d+", path.removesuffix("z"))
+        corners: list[tuple[int, int]] = []
+        x = y = 0
+        while tokens:
+            match tokens.pop(0):
+                case "M":
+                    x, y = int(tokens.pop(0)), int(tokens.pop(0))
+                case "h":
+                    x += int(tokens.pop(0))
+                case "v":
+                    y += int(tokens.pop(0))
+                case _:
+                    x, y = x + int(tokens.pop(0)), y + int(tokens.pop(0))
+            corners.append((x, y))
+        found[fill] = corners
+    return found
+
+
+def _shoelace(corners: list[tuple[int, int]]) -> int:
+    """Twice a polygon's signed area, whose sign is its winding."""
+    return sum(
+        x * next_y - next_x * y
+        for (x, y), (next_x, next_y) in zip(corners, corners[1:] + corners[:1], strict=True)
+    )
+
+
+#: A unit square's corners from its lower-left one, y up, in the order a rendering lists
+#: them.
+UNIT_SQUARE = ((0, 0), (1, 0), (1, 1), (0, 1))
+
+
+def _grid_rendering(root: Path, n: int, squares: dict[str, tuple[int, int]], side: int) -> None:
+    """A house rendering of unit squares, each named by its fill and placed by its
+    lower-left corner, y up, in a `side`-wide container: 100 SVG units a square's side,
+    the frame offset in the SVG, as `packing_svg` reads a rendering."""
+
+    def svg_point(x: int, y: int) -> str:
+        return f"{10 + 100 * x},{20 + 100 * (side - y)}"
+
+    polygons = "".join(
+        f'<polygon data-feature="square-fill" points="'
+        f'{" ".join(svg_point(left + dx, bottom + dy) for dx, dy in UNIT_SQUARE)}" '
+        f'fill="{fill}"/>'
+        for fill, (left, bottom) in squares.items()
+    )
+    width = 100 * side
+    (root / f"n-{n:03d}.svg").write_text(
+        f'<svg><rect data-feature="container-outline" x="10" y="20" width="{width}" '
+        f'height="{width}"/>{polygons}</svg>',
+        encoding="utf-8",
+    )
+
+
+def test_a_pose_turns_the_drawing_exactly_and_keeps_each_square_s_winding(
+    tmp_path: Path,
+) -> None:
+    """`packing_svg(pose=)` maps each corner exactly and then rounds it: y up from the
+    frame's lower-left corner, `Pose.point`, then y down again, a mirrored square's
+    corners reversed so its winding is kept (regularization policy, section 13).
+
+    The rendering is an L of three unit squares in a 2 x 2 container, its frame offset in
+    the SVG, its empty cell lower left. Under each of the eight poses every square lands
+    where `Pose.point` puts its centre, with its winding. Under the pose flip
+    regularization decides for it, the drawing's quadrant weights, read lower right,
+    lower left, upper left, upper right, are the decision's, the empty cell upper right
+    as the owner's rule orders them."""
+    from devtools.flip_regularization import IDENTITY, POSES, decide  # noqa: PLC0415
+
+    corners = {"#000001": (1, 0), "#000002": (0, 1), "#000003": (1, 1)}
+    _grid_rendering(tmp_path, 3, corners, 2)
+    source = frontier.packing_svg(3, units=2, root=tmp_path)
+    assert frontier.packing_svg(3, units=2, root=tmp_path, pose=IDENTITY) == source
+    windings = {fill: _shoelace(drawn) for fill, drawn in _drawn_squares(source).items()}
+    for pose in POSES:
+        drawn = _drawn_squares(frontier.packing_svg(3, units=2, root=tmp_path, pose=pose))
+        assert set(drawn) == set(corners), pose
+        for fill, (left, bottom) in corners.items():
+            xs, ys = zip(*drawn[fill], strict=True)
+            centre = (Fraction(sum(xs), 4), 2 - Fraction(sum(ys), 4))
+            half = Fraction(1, 2)
+            assert centre == pose.point(left + half, bottom + half, Fraction(2)), (pose, fill)
+            assert _shoelace(drawn[fill]) == windings[fill], (pose, fill)
+
+    decision = decide(
+        [
+            [(float(left + dx), float(bottom + dy)) for dx, dy in UNIT_SQUARE]
+            for left, bottom in corners.values()
+        ],
+        2.0,
+    )
+    assert not decision.pose.identity
+    drawn = _drawn_squares(frontier.packing_svg(3, units=2, root=tmp_path, pose=decision.pose))
+    cells = {
+        (min(x for x, _ in square), min(y for _, y in square)) for square in drawn.values()
+    }
+    # Each cell by its upper-left corner, y down: lower right, lower left, upper left,
+    # upper right.
+    weights = tuple(float(cell in cells) for cell in ((1, 1), (0, 1), (0, 0), (1, 0)))
+    assert weights == decision.quadrants == (1.0, 1.0, 1.0, 0.0)
+
+
+def test_a_turned_drawing_is_the_rounding_of_the_exactly_turned_picture(
+    tmp_path: Path,
+) -> None:
+    """`packing_svg(pose=)` rounds each corner after mapping it, so a turned drawing is
+    the rounding of the turned picture at any `units`. Mapping the rounded corners
+    instead is wrong at an exact half when `units` is odd: rounding takes halves to even,
+    so `units - round(v)` and `round(units - v)` differ there.
+
+    The rendering is a 2 x 2 grid of unit squares drawn 101 units wide, so its seams fall
+    at 50.5. Under each of the eight poses each square's drawn corners, in order, are its
+    exact corners mapped by `orient_polygon` and then rounded, y down. The grid has all
+    eight symmetries, so every pose draws the same four squares as the source's pose;
+    the rounded corners mapped would draw a half turn's seams at 51 rather than 50."""
+    from devtools.flip_regularization import POSES, orient_polygon  # noqa: PLC0415
+
+    units = 101
+    grid = {"#000001": (0, 0), "#000002": (1, 0), "#000003": (0, 1), "#000004": (1, 1)}
+    _grid_rendering(tmp_path, 4, grid, 2)
+
+    def shapes(drawn: dict[str, list[tuple[int, int]]]) -> set[frozenset[tuple[int, int]]]:
+        return {frozenset(corners) for corners in drawn.values()}
+
+    source = _drawn_squares(frontier.packing_svg(4, units=units, root=tmp_path))
+    assert {x for corners in source.values() for x, _y in corners} == {0, 50, 101}
+    for pose in POSES:
+        drawn = _drawn_squares(frontier.packing_svg(4, units=units, root=tmp_path, pose=pose))
+        for fill, (left, bottom) in grid.items():
+            exact = [
+                (Fraction((left + dx) * units, 2), Fraction((bottom + dy) * units, 2))
+                for dx, dy in UNIT_SQUARE
+            ]
+            turned = orient_polygon(pose, exact, Fraction(units))
+            assert drawn[fill] == [(round(x), round(units - y)) for x, y in turned], (
+                pose,
+                fill,
+            )
+        assert shapes(drawn) == shapes(source), pose
+
+
+def test_both_addresses_of_every_case_are_published() -> None:
+    """Every case has two standalone drawings and no more: `atlas/house/`, its house
+    drawing as published, in its source's pose (Original mode, a case page's *As
+    published*), and `atlas/regularized/`, its Regularized-mode picture, the default
+    picture in its canonical pose: its regularized view where that is the default, else
+    its house drawing, turned by its flip regularization (policy, sections 12 and 13). A
+    view that is not the default has no address of its own."""
+    files = frontier.drawing_files()
+    counts = range(1, 325)
+    expected = [frontier.drawing_path(n) for n in counts] + [
+        frontier.drawing_path(n, regularized=True) for n in counts
+    ]
+    assert list(frontier.drawing_paths()) == expected
+    assert list(files) == expected
+    header = '<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1000" '
+    for n in (11, 53, min(frontier.drawn_regularized())):
+        house = frontier.packing_svg(n, units=1000, ink="#17202a", paper="#ffffff")
+        assert files[frontier.drawing_path(n)].decode() == house.replace("<svg ", header, 1)
+        canonical = frontier.default_svg(n, units=1000, ink="#17202a", paper="#ffffff")
+        assert files[frontier.drawing_path(n, regularized=True)].decode() == (
+            canonical.replace("<svg ", header, 1)
+        ), n
 
 
 def test_a_minimal_polynomial_with_radical_coefficients_renders_as_latex() -> None:

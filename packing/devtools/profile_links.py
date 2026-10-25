@@ -17,7 +17,7 @@ from functools import cache
 from html.parser import HTMLParser
 from pathlib import Path
 from typing import Any, override
-from urllib.parse import unquote, urlsplit
+from urllib.parse import SplitResult, unquote, urlsplit
 
 from sqpack.contributors import PROFILES_DIR, record_metadata
 
@@ -99,31 +99,45 @@ def public_names() -> dict[str, ProfileName]:
     return profile_names(record_metadata())
 
 
+def _profile_site_root(address: SplitResult) -> str | None:
+    """Use the configured site root and the explicit pre-domain Pages alias."""
+    from devtools.render_overview import SITE_URL  # noqa: PLC0415
+
+    canonical = urlsplit(SITE_URL)
+    if address.netloc:
+        if address.scheme != "https":
+            return None
+        if address.netloc == canonical.netloc:
+            return canonical.path
+        return "/squares/" if address.netloc == "jlevy.github.io" else None
+    return None if address.scheme else canonical.path
+
+
 def profile_identifier(
     address: str, people: Mapping[str, ProfileName] | None = None
 ) -> str | None:
-    """Recognize only local or canonical own-site profile destinations."""
+    """Recognize local, canonical and retained legacy profile destinations."""
     people = public_names() if people is None else people
     parsed = urlsplit(address)
-    path = parsed.path
-    if parsed.netloc:
-        if (
-            parsed.scheme != "https"
-            or parsed.netloc != "jlevy.github.io"
-            or not path.startswith("/squares/")
-        ):
-            return None
-        path = path.removeprefix("/squares/")
-    elif parsed.scheme:
+    site_root = _profile_site_root(parsed)
+    if site_root is None:
         return None
+    path = unquote(parsed.path)
+    if parsed.netloc or path.startswith("/"):
+        if not path.startswith(site_root):
+            return None
+        path = path.removeprefix(site_root)
     match = re.fullmatch(r"(?:\.\./)*profiles/([a-z0-9-]+)\.html", path)
     return match[1] if match and match[1] in people else None
 
 
-def person_label(name: str, address: str) -> str:
+def person_label(name: str, address: str, *, full_names: bool = False) -> str:
     """Paper-front identities already have a reviewed profile destination."""
     identifier = profile_identifier(address)
-    return public_names()[identifier].label if identifier is not None else name
+    if identifier is None:
+        return name
+    person = public_names()[identifier]
+    return person.full_name if full_names else person.label
 
 
 @dataclass(frozen=True)
@@ -310,6 +324,8 @@ class _Prose(HTMLParser):
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         attributes = dict(attrs)
         classes = (attributes.get("class") or "").split()
+        if attributes.get("data-profile-name") == "full":
+            classes.append("site-profile-full-names")
         if tag == "a" and self.enabled() and sum(name == "href" for name, _ in attrs) == 1:
             address = attributes.get("href") or ""
             identifier = profile_identifier(address, self.index.people)
@@ -395,6 +411,14 @@ class _Prose(HTMLParser):
                     for first, last, replacement in sorted(changes, reverse=True):
                         original = original[:first] + replacement + original[last:]
                     self.parts[start] = original
+                if self.full_names and "data-profile-name=" not in self.parts[start]:
+                    self.parts[start] = re.sub(
+                        r"(<a\b)",
+                        r'\1 data-profile-name="full"',
+                        self.parts[start],
+                        count=1,
+                        flags=re.IGNORECASE,
+                    )
                 for position in self.anchor_data:
                     self.parts[position] = ""
                 if self.anchor_data:
@@ -446,7 +470,8 @@ class _Prose(HTMLParser):
                 self.contexts.setdefault(context, Counter())[name] += 1
                 return name
             label = html.escape(self.label(identifier))
-            return f'<a href="{self.prefix}{PROFILES_DIR}/{identifier}.html">{label}</a>'
+            style = ' data-profile-name="full"' if self.full_names else ""
+            return f'<a href="{self.prefix}{PROFILES_DIR}/{identifier}.html"{style}>{label}</a>'
 
         self.parts.append(self.pattern.sub(replace, data))
 
@@ -510,29 +535,19 @@ class _ProfileTargets(HTMLParser):
         if tag != "a" or not address:
             return
         parsed = urlsplit(address)
-        if parsed.netloc:
-            if parsed.scheme != "https" or parsed.netloc != "jlevy.github.io":
-                return
-            path = unquote(parsed.path)
-            if not path.startswith("/squares/"):
+        site_root = _profile_site_root(parsed)
+        if site_root is None:
+            return
+        path = unquote(parsed.path)
+        if parsed.netloc or path.startswith("/"):
+            if not path.startswith(site_root):
                 if "/profiles/" in path:
                     self.broken[address] = "outside canonical project path"
                 return
-            path = path.removeprefix("/squares/")
+            path = path.removeprefix(site_root)
             target = (self.root / path).resolve()
-        elif parsed.scheme:
-            return
         else:
-            path = unquote(parsed.path)
-            if path.startswith("/"):
-                if not path.startswith("/squares/"):
-                    if "/profiles/" in path:
-                        self.broken[address] = "outside canonical project path"
-                    return
-                path = path.removeprefix("/squares/")
-                target = (self.root / path).resolve()
-            else:
-                target = (self.page.parent / path).resolve()
+            target = (self.page.parent / path).resolve()
         if not re.search(r"(?:^|/)profiles/[^/]+\.html$", path) and not (
             self.page.parent == self.root / PROFILES_DIR
             and "/" not in path

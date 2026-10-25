@@ -89,7 +89,13 @@ def test_independent_builds_keep_each_others_assets(tmp_path: Path) -> None:
 
 def test_a_page_put_back_whole_carries_its_assets(tmp_path: Path) -> None:
     assets, _, page = _bundle()
+    image = assets.image("packing.svg", b'<svg xmlns="http://www.w3.org/2000/svg"/>')
+    page = page.replace(
+        "</body>",
+        f'<img src="{site_assets.asset_href(image, "index.html")}" alt="Packing"></body>',
+    )
     whole = assets.inlined(page)
+    assert 'src="data:image/svg+xml;base64,' in whole
     assert PROGRAM in whole
     assert 'url("data:font/woff2;base64,' in whole
     assert "assets/" not in whole

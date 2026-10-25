@@ -1,0 +1,22 @@
+{
+  "n": 933,
+  "packing": "n933.txt",
+  "packing_sha256": "f154249c7afa8fcd83b519a2df9dc27922f186658b1db7ad626dae85d6a6d0f5",
+  "certificate": "certificates/n933.cert",
+  "certificate_sha256": "9aeb2a8cf7e0204bc381d70fb31f996219e5baaa3692b07c952e1be8a0ffa909",
+  "rational_side": "154979779274169601234769816827136411957663/5000000000000000000000000000000000000000",
+  "kind": "verified source certificate",
+  "origin": {
+    "seed_credit": "Joost de Winter",
+    "category": "reviewed public submission",
+    "source_url": "https://github.com/JoostdeWinter/joostdewinter.github.io/blob/b3152f526f23bc3ae450e51b6e906841233086d1/square-packing-above-324/n0935.cert",
+    "request": "https://github.com/jlevy/squares/issues/666",
+    "construction_credit": [
+      "Arslanov, Mustafin and Shangitbayev (four-block method)"
+    ],
+    "source_n": 935,
+    "deleted_squares": 2,
+    "source_certificate_sha256": "954cd212be981fc39f6e1450a03964737107f7a2b5c49acfb674e606767450c0"
+  },
+  "preview_note": "Certificate geometry is authoritative; the decimal preview is separately checked."
+}

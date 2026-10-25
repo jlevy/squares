@@ -72,7 +72,7 @@ from devtools.audit_wand125_rectangles import (
 from devtools.generate_frontier_case import display_gap
 from devtools.migrate_math import markdown_math
 from devtools.retained_data import read_retained_text, retained_exists
-from devtools.state_ai_assistance import WAND125
+from devtools.state_ai_assistance import wand125
 from sqpack.yamlio import safe_load
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -762,7 +762,7 @@ def intake(plan: Plan, registration: Registration, payload: Mapping[str, Any]) -
         sentences.append(verified)
     # The first paragraph describing Hosono is where `devtools.state_ai_assistance` says
     # what Hosono's README says of AI assistance; this paragraph is that one.
-    sentences.append(WAND125.sentence)
+    sentences.append(wand125().sentence)
     return " ".join(sentences)
 
 

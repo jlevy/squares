@@ -28,9 +28,10 @@ FIGURE = probe(PROBES, "case_popover_figure/figure")
 CROSS = probe(PROBES, "case_popover_head/cross")
 TABLE_DOM = probe(PROBES, "case_pages/table_dom")
 LAYOUT = probe(PROBES, "case_layout/read")
+LINE = probe(PROBES, "case_title_line/read")
 OVERFLOW = probe(PROBES, "case_layout/overflow")
 NAVIGATION = probe(PROBES, "case_navigation/read")
-EXERCISED_CASES = (5, 10, 11, 12, 13, 14, 15, 16, 17, 29, 32, 53, 291, 324)
+EXERCISED_CASES = (1, 5, 10, 11, 12, 13, 14, 15, 16, 17, 29, 32, 53, 291, 324)
 
 
 def _free_port() -> int:
@@ -49,6 +50,7 @@ def served(tmp_path_factory: pytest.TempPathFactory) -> Iterator[str]:
     files = [
         site_renders.page("index.html"),
         site_renders.page("atlas.html"),
+        site_renders.page("frontier.html"),
         *(
             render_overview.Page(
                 render_case_pages.case_url(n),
@@ -91,8 +93,11 @@ def test_a_case_page_prints_its_regularization_note_and_nothing_without_one() ->
     assert "retry rung force-kkt" in drawn
     assert "a pure regularization, which proves no new bound, so not a result" in drawn
 
-    housed = regularization(cases[70])
-    drawn_here = 70 in render_frontier_page.drawn_regularized()
+    # 84, T-174's rational certificate, whose view is held; 70 was the example until
+    # the adoption of 23 October 2026 gave it an algebraic house no view is held of
+    # (think-ot5c).
+    housed = regularization(cases[84])
+    drawn_here = 84 in render_frontier_page.drawn_regularized()
     assert ("Regularized drawing" in housed) == drawn_here
     assert ('<span class="site-card-label">Regularization</span>' in housed) != drawn_here
     assert "The house is itself its source" in housed
@@ -121,6 +126,25 @@ def test_a_case_page_prints_its_regularization_note_and_nothing_without_one() ->
     )
     assert "(T-101), so it proves no new bound" in earlier
     assert "the upper bound it proves" not in earlier
+
+    # A source's exact solve of the house is labelled an exact solve, not a
+    # regularization: issue 639's exact form at 259 (T-193), whose regularization is owed
+    # (review A5 of #756).
+    solved = regularization(cases[259])
+    assert solved.startswith(
+        '<div class="site-case-note"><span class="site-card-label">Exact solve</span>'
+    )
+    assert "is not a regularization" in solved
+    assert "its regularization is owed (think-mbdw)" in solved
+    # So is PR 574's exact solve of PingYou's own packing at 153 (T-174): the page no
+    # longer calls the house a regularization and then says the drawing is not
+    # regularized (review B1 of #756).
+    refined = regularization(cases[153])
+    assert refined.startswith(
+        '<div class="site-case-note"><span class="site-card-label">Exact solve</span>'
+    )
+    assert "regularization of T-148" not in refined
+    assert "its regularization is owed (think-mbdw)" in refined
 
     assert "regularization" not in cases[1]
     assert regularization(cases[1]) == ""
@@ -168,7 +192,7 @@ def _case_actions(popover: Any, served: str, n: int) -> None:
         f"{served}cases/{n}.html"
     )
     assert popover.locator("[data-case-frontier]").get_attribute("href") == (
-        f"{served}atlas.html#n-{n}"
+        f"{served}frontier.html#n-{n}"
     )
     assert popover.locator("[data-case-atlas]").get_attribute("href") == (
         f"{served}atlas.html#atlas-n-{n}"
@@ -183,7 +207,6 @@ def _revealed_diagram(page: Any, n: int, *, scripts: bool = True) -> None:
     assert state["outlineWidth"] == "2px", state
     assert state["targeted"], state
     if scripts:
-        assert state["expanded"] == "true", state
         assert state["focused"], state
 
 
@@ -197,7 +220,7 @@ def test_a_frontier_row_opens_its_record_and_steps_to_the_next(
     on the row that opened it. Enter on a row opens it too."""
     sync_api = site_browser.api()
     with _page(browser) as page:
-        page.goto(f"{served}atlas.html", wait_until="load")
+        page.goto(f"{served}frontier.html", wait_until="load")
         row = page.locator("#n-12")
         row.scroll_into_view_if_needed()
         row.locator("td.site-thumb img").click()
@@ -215,7 +238,7 @@ def test_a_frontier_row_opens_its_record_and_steps_to_the_next(
         _case_actions(popover, served, 12)
         # The record's links were written from its own directory and are rebased here.
         frontier_link = popover.locator('.site-case-links a:has-text("In the frontier")')
-        assert (frontier_link.get_attribute("href") or "").endswith("atlas.html#n-12")
+        assert (frontier_link.get_attribute("href") or "").endswith("frontier.html#n-12")
         page.keyboard.press("ArrowRight")
         popover.locator('[data-case-body] article.site-case[data-case="13"]').wait_for()
         _case_actions(popover, served, 13)
@@ -242,7 +265,7 @@ def test_a_record_opens_a_case_its_prose_links_in_place(browser: Any, served: st
     (`mark_case_links`): in the popover it loads that case in place, and the page stays
     where it is."""
     with _page(browser) as page:
-        page.goto(f"{served}atlas.html", wait_until="load")
+        page.goto(f"{served}frontier.html", wait_until="load")
         page.locator("#n-13 td.site-col-n a").click()
         popover = page.locator("#pop-case")
         popover.locator('[data-case-body] article.site-case[data-case="13"]').wait_for()
@@ -250,7 +273,7 @@ def test_a_record_opens_a_case_its_prose_links_in_place(browser: Any, served: st
         prose.scroll_into_view_if_needed()
         prose.click()
         popover.locator('[data-case-body] article.site-case[data-case="32"]').wait_for()
-        assert page.url == f"{served}atlas.html"
+        assert page.url == f"{served}frontier.html"
 
 
 def test_an_atlas_cell_opens_the_same_record(browser: Any, served: str) -> None:
@@ -297,11 +320,11 @@ def test_case_page_survey_links_resolve_from_the_site_root_and_distinguish_rows_
     with _page(browser) as page:
         page.goto(f"{served}cases/13.html", wait_until="load")
         link = page.locator('.site-case-links a:has-text("In the frontier survey")')
-        assert link.get_attribute("href") == "../atlas.html#n-13"
+        assert link.get_attribute("href") == "../frontier.html#n-13"
         link.click()
-        page.wait_for_url(f"{served}atlas.html#n-13", wait_until="load")
+        page.wait_for_url(f"{served}frontier.html#n-13", wait_until="load")
         site_browser.api().expect(page.locator("#n-13")).to_be_in_viewport()
-        assert page.locator("[data-atlas-toggle]").get_attribute("aria-expanded") == "false"
+        assert page.locator("[data-atlas-grid]").count() == 0
         page.locator("#n-13 td.site-col-n a").click()
         popover = page.locator("#pop-case")
         popover.locator('[data-case-body] article.site-case[data-case="13"]').wait_for()
@@ -327,8 +350,6 @@ def test_atlas_diagram_fragments_survive_same_fragment_clicks_and_history(
     with _page(browser, width=390) as page:
         page.goto(f"{served}atlas.html#atlas-n-53", wait_until="load")
         _revealed_diagram(page, 53)
-        page.locator("[data-atlas-toggle]").click()
-        assert page.locator("[data-atlas-toggle]").get_attribute("aria-expanded") == "false"
         page.locator("#atlas-n-53").click()
         popover = page.locator("#pop-case")
         popover.locator('[data-case-body] article.site-case[data-case="53"]').wait_for()
@@ -338,7 +359,7 @@ def test_atlas_diagram_fragments_survive_same_fragment_clicks_and_history(
         _revealed_diagram(page, 53)
 
         # A different same-page action updates the browser's :target, not just the URL.
-        page.locator("#n-12 td.site-col-n a").click()
+        page.locator("#atlas-n-12").click()
         popover.locator('[data-case-body] article.site-case[data-case="12"]').wait_for()
         popover.locator("[data-case-atlas]").click()
         page.wait_for_url(f"{served}atlas.html#atlas-n-12")
@@ -352,7 +373,6 @@ def test_atlas_diagram_fragments_survive_same_fragment_clicks_and_history(
             f"{served}atlas.html?atlas=triangle&size=large#atlas-n-324", wait_until="load"
         )
         _revealed_diagram(page, 324)
-        page.locator("[data-atlas-toggle]").click()
         page.go_back(wait_until="load")
         page.wait_for_url(f"{served}atlas.html?atlas=triangle&size=large#atlas-n-291")
         _revealed_diagram(page, 291)
@@ -366,17 +386,19 @@ def test_atlas_diagram_fragments_survive_same_fragment_clicks_and_history(
 def test_the_popovers_compact_drawing_keeps_its_own_line_weight(
     browser: Any, served: str, opener: str, width: int
 ) -> None:
-    """Canonical and fetched records share a compact square drawing. Its frame and
-    outlines retain their non-scaling strokes, and the caption's radical stays visible.
+    """Fetched drawings fill their content track without scaling up line weight.
+
+    The caption's radical stays visible at desktop and mobile widths.
     """
     with _page(browser, width=width) as page:
         if opener == "frontier":
-            page.goto(f"{served}atlas.html", wait_until="load")
+            page.goto(f"{served}frontier.html", wait_until="load")
             row = page.locator("#n-10")
             row.scroll_into_view_if_needed()
             row.locator("td.site-thumb img").click()
         else:
-            page.goto(f"{served}atlas.html", wait_until="load")
+            # A named size: this reads the popover, not a triangle following the scroll.
+            page.goto(f"{served}atlas.html?size=small", wait_until="load")
             page.locator("[data-atlas-grid]").scroll_into_view_if_needed()
             cell = page.locator('.site-atlas-cell[data-case="10"]')
             cell.wait_for()
@@ -389,8 +411,10 @@ def test_the_popovers_compact_drawing_keeps_its_own_line_weight(
         assert drawn is not None
         assert drawn["caption_math"], drawn
         assert min(drawn["caption_math"]) > 0.5 * drawn["rem"], drawn
-        limit = 20 if width == 1280 else 18
-        assert drawn["width"] == pytest.approx(min(drawn["body"], limit * drawn["rem"]), abs=1)
+        article = popover.locator("article.site-case").bounding_box()
+        assert article is not None
+        assert drawn["width"] == pytest.approx(article["width"], abs=1)
+        assert drawn["width"] == pytest.approx(drawn["body"], abs=1)
         assert drawn["height"] == pytest.approx(drawn["width"], abs=0.5), drawn
         assert drawn["frame_effect"] == drawn["outline_effect"] == "non-scaling-stroke"
         lines = min(drawn["width"], 12 * drawn["rem"])
@@ -400,32 +424,48 @@ def test_the_popovers_compact_drawing_keeps_its_own_line_weight(
         assert drawn["popover_right"] <= drawn["window_width"], drawn
 
 
-@pytest.mark.parametrize("width", [1280, 390])
-def test_the_popovers_cross_stands_in_its_corner_clear_of_the_steps(
+@pytest.mark.parametrize("width", [1280, 390, 320])
+def test_the_popovers_cross_stands_in_its_corner_above_the_record(
     browser: Any, served: str, width: int
 ) -> None:
     """On a laptop's window and a phone's, the case popover's close cross stands inside
-    the panel at its corner, and the record's steps end before it: the next case's link
-    once ended under the cross, which the card's horizontal inset, read by the sticky
-    cross as a second limit, had set a padding's width in from the corner
-    (`think-0dxa`)."""
+    the panel at its corner, and the record starts below its icons: the record's label
+    shares their line, and its drawing, its count and the steps beside the count stand
+    under them. The steps were once the record's first line, beside the cross, and the
+    next case's link ended under it, which the card's horizontal inset, read by the
+    sticky cross as a second limit, had set a padding's width in from the corner
+    (`think-0dxa`); since 2026-10-23 they flank the count (the owner)."""
     with _page(browser, width=width) as page:
-        page.goto(f"{served}atlas.html", wait_until="load")
-        row = page.locator("#n-10")
-        row.scroll_into_view_if_needed()
-        row.locator("td.site-thumb img").click()
+        # A named size: this reads the popover, not a triangle following the scroll.
+        page.goto(f"{served}atlas.html?size=small", wait_until="load")
+        row = page.locator('.site-atlas-cell[data-case="5"]')
+        row.click()
         popover = page.locator("#pop-case")
-        popover.locator('[data-case-body] article.site-case[data-case="10"]').wait_for()
+        popover.locator('[data-case-body] article.site-case[data-case="5"]').wait_for()
         head = page.evaluate(CROSS)
         assert head is not None
         assert head["cross_right"] <= head["panel_right"] + 0.5, head
         assert head["panel_right"] - head["cross_right"] <= 16, head
-        assert head["next_right"] <= head["cross_left"] + 0.5, head
+        assert head["controls_top"] == pytest.approx(
+            head["panel_top"] + head["panel_right"] - head["cross_right"] + 1, abs=0.5
+        ), head
+        assert head["expand_right"] <= head["cross_left"] + 0.5, head
         assert head["cross_width"] == head["cross_height"] >= 44, head
         assert head["hit"], head
+        line = page.evaluate(LINE)
+        assert line is not None
+        controls = line["controls"]
+        assert line["figure"]["top"] >= controls["bottom"] - 0.5, line
+        assert line["line"]["top"] >= controls["bottom"], line
+        assert all(line[rel]["top"] >= controls["bottom"] for rel in ("prev", "next")), line
+        drawn = page.evaluate(FIGURE)
+        assert drawn["width"] == pytest.approx(drawn["body"], abs=1), drawn
+        assert drawn["height"] == pytest.approx(drawn["width"], abs=0.5), drawn
+        assert drawn["page_width"] <= width, drawn
+        assert drawn["popover_right"] <= width, drawn
         popover.hover()
         page.mouse.wheel(0, 1200)
-        site_browser.api().expect(popover.locator(".site-case-steps")).not_to_be_in_viewport()
+        site_browser.api().expect(popover.locator(".site-case-eyebrow")).not_to_be_in_viewport()
         scrolled = page.evaluate(CROSS)
         assert scrolled["scroll_top"] > 0, scrolled
         assert scrolled["panel_top"] <= scrolled["cross_top"], scrolled
@@ -434,6 +474,70 @@ def test_the_popovers_cross_stands_in_its_corner_clear_of_the_steps(
         popover.locator(".site-popover-close").click()
         assert not popover.is_visible()
         site_browser.api().expect(row).to_be_focused()
+
+
+#: The arrow icon's ink stands 1.7 of its 16 units in from each side of its box.
+ARROW_INSET = 1.7 / 16
+
+
+def _title_line(line: dict[str, Any] | None, n: int) -> None:
+    """Case `n`'s title line holds its count centred on the record and on the drawing's
+    frame, with an arrow step to each neighbour that exists, its ink meeting the frame's
+    left or right edge."""
+    assert line is not None
+    count, title, frame = line["count"], line["title"], line["frame"]
+    centre = (line["article"]["left"] + line["article"]["right"]) / 2
+    assert (count["left"] + count["right"]) / 2 == pytest.approx(centre, abs=0.5), line
+    assert (frame["left"] + frame["right"]) / 2 == pytest.approx(centre, abs=0.5), line
+    assert line["titleHit"], line
+    middle = (title["top"] + title["bottom"]) / 2
+    for rel, neighbour, word in (("prev", n - 1, "Previous"), ("next", n + 1, "Next")):
+        step = line[rel]
+        if not 1 <= neighbour <= 324:
+            assert step is None, line
+            continue
+        assert step is not None, line
+        assert step["label"] == f"{word} case, n = {neighbour}", step
+        assert step["tooltip"] == f"n = {neighbour}", step
+        assert step["text"] == "", step
+        assert step["color"] == line["ink"], (step, line["ink"])
+        assert step["width"] == step["height"] >= 2.25 * line["rem"], step
+        assert (step["top"] + step["bottom"]) / 2 == pytest.approx(middle, abs=0.5), step
+        assert step["hit"], step
+        arrow = step["arrow"]
+        inset = arrow["width"] * ARROW_INSET
+        if rel == "prev":
+            assert arrow["left"] + inset == pytest.approx(frame["left"], abs=0.5), step
+            assert arrow["right"] < count["left"], step
+        else:
+            assert arrow["right"] - inset == pytest.approx(frame["right"], abs=0.5), step
+            assert arrow["left"] > count["right"], step
+
+
+@pytest.mark.parametrize("width", [1280, 390, 320])
+def test_a_records_count_stands_between_its_two_steps(
+    browser: Any, served: str, width: int
+) -> None:
+    """A record's steps are on its title's line, an arrow alone at either end, each
+    meeting the left or right edge of the drawing's frame below (the owner, 2026-10-23).
+    Each arrow is in the link ink, a target of at least 2.25rem on the count's middle,
+    and names the case it loads in its accessible name and its tooltip; the count, which
+    the steps lie over, still takes a press. The count stays centred on the record with
+    two neighbours or one, on the record's own page and in the case popover."""
+    with _page(browser, width=width) as page:
+        for n in (17, 1, 324):
+            page.goto(f"{served}cases/{n}.html", wait_until="load")
+            page.locator(".site-case-title-line").scroll_into_view_if_needed()
+            _title_line(page.evaluate(LINE), n)
+        # A named size: this reads the popover, not a triangle following the scroll.
+        page.goto(f"{served}atlas.html?size=small", wait_until="load")
+        page.locator('.site-atlas-cell[data-case="17"]').click()
+        popover = page.locator("#pop-case")
+        popover.locator('[data-case-body] article.site-case[data-case="17"]').wait_for()
+        # Off the panel, so no arrow is nudged by the pointer the tile's press left there.
+        page.mouse.move(0, 0)
+        popover.locator(".site-case-title-line").scroll_into_view_if_needed()
+        _title_line(page.evaluate(LINE), 17)
 
 
 def _canonical_case(page: Any, n: int) -> None:
@@ -488,17 +592,17 @@ def test_a_record_file_serves_its_complete_page_and_navigates_ordinary_links(
         _canonical_case(page, 11)
         assert page.locator("article.site-case a[data-case-index]").count() == 0
         page.locator('.site-case-links a:has-text("In the frontier survey")').click()
-        page.wait_for_url(f"{served}atlas.html#n-11", wait_until="load")
-        assert page.locator(".site-atlas-cell[data-case]").count() == 324
+        page.wait_for_url(f"{served}frontier.html#n-11", wait_until="load")
+        assert page.locator("tr[data-case-row]").count() == 324
         assert page.locator('link[rel="canonical"]').get_attribute("href") == (
-            render_overview.canonical_url("atlas.html")
+            render_overview.canonical_url("frontier.html")
         )
 
 
-def test_the_old_one_page_address_arrives_at_the_atlas_row(browser: Any, served: str) -> None:
+def test_old_one_page_address_arrives_at_the_frontier_row(browser: Any, served: str) -> None:
     with _page(browser) as page:
         page.goto(f"{served}cases.html#n-17", wait_until="load")
-        page.wait_for_url(f"{served}atlas.html#n-17", wait_until="load")
+        page.wait_for_url(f"{served}frontier.html#n-17", wait_until="load")
         site_browser.api().expect(page.locator("#n-17")).to_be_in_viewport()
 
 
@@ -538,10 +642,14 @@ def test_without_scripts_a_record_file_is_read_where_it_is(browser: Any, served:
         assert page.url == f"{served}cases/29.html"
         _canonical_case(page, 29)
         assert page.locator("article.site-case .site-case-head > figure svg").count() == 1
-        # Where the default picture is the regularized view, the house drawing waits in a
-        # closed disclosure, as published (regularization policy, section 12).
+        # Where the default picture is the regularized view, or its pose turns it, the
+        # house drawing waits in a closed disclosure, as published (regularization
+        # policy, sections 12 and 13).
         published = page.locator("article.site-case details.site-case-published")
-        expected = int(29 in render_frontier_page.drawn_regularized())
+        expected = int(
+            29 in render_frontier_page.drawn_regularized()
+            or not render_frontier_page.default_pose(29).identity
+        )
         assert published.count() == expected
         if expected:
             assert published.get_attribute("open") is None
@@ -570,7 +678,7 @@ def test_case_layout_keeps_overflow_diagnostics_with_fewer_ancestor_style_reads(
 ) -> None:
     """A cached reading retains self/ancestor clipping, DOM order and all diagnostics."""
     with _page(browser) as page:
-        page.goto(f"{served}atlas.html", wait_until="load")
+        page.goto(f"{served}frontier.html", wait_until="load")
         page.locator("#n-53 td.site-col-n a").click()
         page.locator('#pop-case article.site-case[data-case="53"]').wait_for(state="visible")
         page.evaluate(OVERFLOW, {"mode": "install"})
@@ -609,7 +717,7 @@ def test_case_headers_keep_the_prominent_math_count_and_shared_action_arrows(
     try:
         direct_page = context.new_page()
         page = context.new_page()
-        page.goto(f"{served}atlas.html", wait_until="load")
+        page.goto(f"{served}frontier.html", wait_until="load")
         for n in (15, 53, 291, 324):
             direct_page.goto(f"{served}cases/{n}.html", wait_until="load")
             direct = direct_page.evaluate(LAYOUT)
@@ -700,7 +808,7 @@ def test_the_case_diagram_precedes_its_number_line_with_balanced_footer_padding(
         for n in (15, 291):
             page.goto(f"{served}cases/{n}.html", wait_until="load")
             direct = page.evaluate(LAYOUT)
-            page.goto(f"{served}atlas.html", wait_until="load")
+            page.goto(f"{served}frontier.html", wait_until="load")
             page.locator(f"#n-{n} td.site-col-n a").click()
             popover = page.locator("#pop-case")
             popover.locator(f'article.site-case[data-case="{n}"]').wait_for(state="visible")
@@ -735,7 +843,7 @@ def test_case_summaries_keep_math_and_layout_when_fetched(
     try:
         direct_page = context.new_page()
         page = context.new_page()
-        page.goto(f"{served}atlas.html", wait_until="load")
+        page.goto(f"{served}frontier.html", wait_until="load")
         for n in (291, 5, 11, 17, 324):
             direct_page.goto(f"{served}cases/{n}.html", wait_until="load")
             direct_page.locator(f'article.site-case[data-case="{n}"]').wait_for(state="visible")
@@ -745,7 +853,7 @@ def test_case_summaries_keep_math_and_layout_when_fetched(
                 direct_page.set_viewport_size({"width": width, "height": 900})
                 # The article can resize before its drawing leaves the narrow query.
                 site_browser.api().expect(
-                    direct_page.locator(".site-case-figure > svg")
+                    direct_page.locator(".site-case-head > figure.site-case-figure > svg")
                 ).to_have_css("width", f"{desktop_drawing_width:g}px")
             direct = direct_page.evaluate(LAYOUT)
             if n == 291:
@@ -764,7 +872,6 @@ def test_case_summaries_keep_math_and_layout_when_fetched(
                 assert layout["articleRight"] <= width + 1, (n, layout)
                 assert layout["errors"] == layout["unprepared"] == 0, (n, layout)
                 assert layout["formulas"] > 0, (n, layout)
-                assert layout["drawingWidth"] <= 20 * layout["rem"] + 1, (n, layout)
                 assert layout["drawingHeight"] == pytest.approx(layout["drawingWidth"], abs=1)
                 assert not layout["gapValuesOverlap"], (n, layout)
                 assert layout["figureBottom"] < layout["gapTop"] < layout["provenTop"], (
@@ -781,9 +888,8 @@ def test_case_summaries_keep_math_and_layout_when_fetched(
                 assert layout["titleSize"] == pytest.approx(
                     layout["titleScale"] * layout["sansBase"], abs=0.01
                 ), n
-            if width == 1280:
-                assert fetched["articleWidth"] == pytest.approx(direct["articleWidth"], abs=1)
-                assert fetched["drawingWidth"] == pytest.approx(direct["drawingWidth"], abs=1)
+            assert direct["drawingWidth"] <= 20 * direct["rem"] + 1, (n, direct)
+            assert fetched["drawingWidth"] == pytest.approx(fetched["articleWidth"], abs=1)
             if n == 291:
                 assert "data-kpress-math-rendered" in direct["generalBound"]
                 assert "sqrt(" not in direct["generalBound"]

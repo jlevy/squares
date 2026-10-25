@@ -19,23 +19,40 @@ register together and stores none of it:
   the last reply that stated that rung or status of the entry, or past the last reply
   that named it, or no reply has named it: a new id, a moved rung, a renumbered id, a
   defect, or a statement the record marks out of date;
-- **closeable**, when every result is confirmed or refuted (a reported defect: recorded)
-  and nothing the author asked for is queued.
+- **closeable**, when every result is confirmed or refuted (a reported defect: recorded),
+  nothing the author asked for is queued, no question put to the author awaits an answer
+  that could falsify what the record asserts and that no measurement here can settle
+  (`awaiting_author`: credit, lineage, or which file), and the issue is not held for the
+  owner (`held`).
+
+A closeable issue still open is owed its final comment and its close, at stage 7 after
+the verified deploy. The owner's instruction of 23 October 2026 made that the standard
+step, after twelve closeable issues were found open: nothing ran the close, and lanes held
+issues open for questions to the author that the record did not track and whose answers
+would change nothing in it. A question is recorded under `awaiting_author`, and holds
+its issue open, only when the record asserts something its answer could falsify (credit,
+lineage, or which file) and no measurement here can settle it; any other question goes
+in the closing comment. An issue reserved for the owner carries `held`, on the owner's
+recorded instruction or on a reservation for the owner that beads record, pending the
+owner's confirmation: no pass posts on it or closes it, so it is never closeable and
+``--draft`` refuses it. Review A1 of #747 added the hold, when the reservation of #557,
+#565, #570 and #574 lived only in beads and the closing step listed #570 for closing.
 
 Modes, from ``packing/`` with the project interpreter::
 
     .venv/bin/python3 -m devtools.check_requests            # the gate: ids and schema
     .venv/bin/python3 -m devtools.check_requests --report   # a table per issue
     .venv/bin/python3 -m devtools.check_requests --backlog  # entries below V3 or C3
+    .venv/bin/python3 -m devtools.check_requests --pending  # pending reviews and their issues
     .venv/bin/python3 -m devtools.check_requests --draft 282
     .venv/bin/python3 -m devtools.check_requests --github   # live issues, read-only
 
 The default mode reads two files and the register and touches no clock, network or
 history, so its verdict is a function of the tree. Only the ids, the schema and a value
 an unquoted `` #`` cuts short (`comment_cut_scalars`) can fail it: a reply that is due is
-owed after the merge, not a broken record. ``--draft``
-refuses unless ``HEAD`` is on ``origin/main``, because a `T-NNN` is provisional until it
-merges and a reply links only to `main`. ``--github`` reads the live issues through
+owed after the merge, not a broken record. ``--draft`` refuses an issue held for the
+owner, and refuses unless ``HEAD`` is on ``origin/main``, because a `T-NNN` is provisional until
+it merges and a reply links only to `main`. ``--github`` reads the live issues through
 ``gh api`` and writes nothing anywhere.
 """
 
@@ -108,6 +125,14 @@ DEFECT = "defect recorded"
 OPEN = "open"
 QUEUED = "queued"
 NOT_REGISTERED = "not registered"
+#: The state of a question to the author (`awaiting_author`) whose answer has not come.
+AWAITING = "awaiting"
+#: What an awaited answer would change in the record, as a reply to the author says it.
+CHANGES = {
+    "credit": "the credit the record gives",
+    "lineage": "the lineage the record states",
+    "file": "which file or commit the record names",
+}
 
 BEAD = re.compile(r"\bthink-[a-z0-9]{4}\b")
 _ID_ON_MAIN = re.compile(r"\bid: (T-\d{3}|E-[A-Za-z0-9.-]+)")
@@ -675,14 +700,48 @@ def replies_due(issue: Mapped, states: Sequence[ResultState]) -> list[str]:
     return due
 
 
+def awaited(issue: Mapped) -> list[Mapped]:
+    """The questions put to the author that still await an answer: each would change the
+    record, so each holds the issue open."""
+    return [
+        question
+        for question in issue.get("awaiting_author", ())
+        if question["state"] == AWAITING
+    ]
+
+
+def held(issue: Mapped) -> Mapped | None:
+    """The issue's hold for the owner, if any: no pass posts on it or closes it."""
+    hold = issue.get("held")
+    return hold if isinstance(hold, Mapping) else None
+
+
+def hold_text(hold: Mapped) -> str:
+    """The hold as every output states it: since when, and whether the owner's
+    confirmation is still awaited."""
+    pending = (
+        ", pending the owner's confirmation"
+        if hold.get("basis") == "recorded-reservation"
+        else ""
+    )
+    return f"held for the owner since {hold['since']}{pending}"
+
+
 def closeable(issue: Mapped, states: Sequence[ResultState]) -> tuple[bool, list[str]]:
     """Whether the issue can be closed with a final comment, and what stops it."""
     blockers: list[str] = []
+    hold = held(issue)
+    if hold is not None:
+        blockers.append(hold_text(hold))
     if issue["triage"] == "pending":
         blockers.append("triage is pending")
     blockers.extend(f"{state.key} is {state.state}" for state in states if not state.settled)
     blockers.extend(
         f"asked: {ask['what']}" for ask in issue.get("asks", ()) if ask["state"] == "queued"
+    )
+    blockers.extend(
+        f"awaiting the author ({question['changes']}): " + str(question["question"]).rstrip(".")
+        for question in awaited(issue)
     )
     return not blockers, blockers
 
@@ -736,6 +795,35 @@ def _reply_problems(issue: Mapped, repository: str, ids: dict[str, set[str]]) ->
     return problems
 
 
+def _question_problems(issue: Mapped, repository: str) -> list[str]:
+    """Each question to the author must have been asked in a reply recorded here, and
+    answered, if at all, on this issue; and no closed issue may still await one, or still
+    carry the owner's hold."""
+    number = issue["number"]
+    recorded = {str(reply["url"]) for reply in issue.get("replies", ())}
+    problems: list[str] = []
+    for question in issue.get("awaiting_author", ()):
+        asked = str(question["asked"])
+        if asked not in recorded:
+            problems.append(
+                f"#{number}: the question {question['question']!r} was asked in {asked}, "
+                "which is not a reply recorded here"
+            )
+        answer = question.get("answer")
+        match = _REPLY_URL.match(str(answer)) if answer else None
+        if answer and (
+            not match or match.group(1) != repository or int(match.group(2)) != number
+        ):
+            problems.append(f"#{number}: the answer {answer} is not a comment on this issue")
+        if question["state"] == AWAITING and issue["state"] == "closed":
+            problems.append(
+                f"#{number}: closed while a question awaits the author: {question['question']}"
+            )
+    if held(issue) is not None and issue["state"] == "closed":
+        problems.append(f"#{number}: closed while held for the owner; remove the hold")
+    return problems
+
+
 def problems(record: Mapped, register: Register) -> list[str]:
     """What is wrong with the record: its schema, and every id it names.
 
@@ -772,6 +860,7 @@ def problems(record: Mapped, register: Register) -> list[str]:
                 if ident not in register.evidence
             )
         found.extend(_reply_problems(issue, repository, ids))
+        found.extend(_question_problems(issue, repository))
     return found
 
 
@@ -821,6 +910,8 @@ def summary_lines(record: Mapped, register: Register) -> list[str]:
         marks = [
             "reply due" if state.replies_due else "",
             "closeable" if state.closeable and issue["state"] == "open" else "",
+            "awaiting the author" if awaited(issue) else "",
+            "held for the owner" if held(issue) is not None else "",
         ]
         lines.append(
             f"  #{issue['number']:<4} {issue['state']:<7}{progress:<16}"
@@ -914,6 +1005,25 @@ def _issue_section(issue: Mapped, state: IssueState, on_main: set[str] | None) -
     else:
         lines.append("Reply due: no.")
     lines.append("")
+    questions = issue.get("awaiting_author", ())
+    if questions:
+        lines.append("Questions to the author:")
+        lines += [
+            f"- {question['state']}, the answer could falsify the record's "
+            f"{question['changes']}: "
+            f"{_cell(str(question['question']))} ([asked]({question['asked']}))"
+            for question in questions
+        ]
+        lines.append("")
+    hold = held(issue)
+    if hold is not None:
+        lines += [
+            (
+                f"{hold_text(hold).capitalize()}: post nothing and close nothing until the "
+                f"owner lifts the hold. {_cell(str(hold['note']))}"
+            ),
+            "",
+        ]
     if issue["state"] == "closed":
         lines.append("Closeable: the issue is closed.")
     elif state.closeable:
@@ -1034,6 +1144,233 @@ def backlog(record: Mapped, register: Register) -> list[str]:
     ]
     for row in rows:
         lines += [f"**{row.id}.** {_cell(row.next_rung)}", ""]
+    return lines
+
+
+#: The significance from which a result with no issue of its own gets a tracking issue
+#: the project opens (the owner, 14 October 2026, recorded in T-163's notes for #603).
+TRACKED_FROM = 4
+
+
+@dataclass(frozen=True, slots=True)
+class TrackingIssue:
+    """An issue a pending review is tracked on, and whether its replies are current."""
+
+    number: int
+    state: str
+    #: What a reply on it owes this result, as `replies_due` says it; empty if current.
+    due: tuple[str, ...]
+    #: The issue's hold for the owner, as `hold_text` says it, or empty.
+    held: str = ""
+
+
+_UNORDERED = re.compile(
+    r"Unordered (?P<lane>\w+) (?P<direction>\w+) bound priority at n=(?P<n>\d+): (?P<peers>.+)"
+)
+
+
+def comparison_lines(ident: str, reasons: Sequence[str]) -> list[str]:
+    """The record index's unassessed comparisons of one result, an unordered priority
+    gathered over its counts: `unordered verified lower priority with T-080 at n = 101 to
+    105`."""
+    gathered: dict[tuple[str, str, str], list[int]] = {}
+    lines: list[str] = []
+    for reason in reasons:
+        match = _UNORDERED.fullmatch(reason)
+        if match is None:
+            lines.append(reason)
+            continue
+        peers = ", ".join(peer for peer in match["peers"].split(", ") if peer != ident)
+        gathered.setdefault((match["lane"], match["direction"], peers), []).append(
+            int(match["n"])
+        )
+    for (lane, direction, peers), counts in sorted(gathered.items()):
+        runs = ", ".join(
+            f"{first}" if first == last else f"{first} to {last}"
+            for first, last in _count_runs(sorted(counts))
+        )
+        lines.append(f"unordered {lane} {direction} priority with {peers} at n = {runs}")
+    return lines
+
+
+def _count_runs(values: Sequence[int]) -> list[tuple[int, int]]:
+    runs: list[list[int]] = []
+    for value in values:
+        if runs and runs[-1][1] == value - 1:
+            runs[-1][1] = value
+        else:
+            runs.append([value, value])
+    return [(first, last) for first, last in runs]
+
+
+@dataclass(frozen=True, slots=True)
+class PendingRow:
+    """One result whose next rung or whose currentness waits on a review, a replay or a
+    comparison, with the beads that own it and the issues that track it."""
+
+    id: str
+    significance: int
+    rungs: str
+    pending: tuple[str, ...]
+    #: The record's comparisons still unassessed (`profile_records`), which profiles show
+    #: as Review pending and which no reply field states.
+    comparisons: tuple[str, ...]
+    beads: tuple[str, ...]
+    issues: tuple[TrackingIssue, ...]
+
+    def tracked(self) -> bool:
+        """Whether some issue tracks it and states its present state: every reply it is
+        owed has been posted, and no comparison is left that no reply can state."""
+        return any(not issue.due for issue in self.issues) and not self.comparisons
+
+    def held(self) -> bool:
+        """Whether every issue that owes it a reply is held for the owner, where no pass
+        posts: it is listed as held, not among the stale a pass answers."""
+        owing = [issue for issue in self.issues if issue.due]
+        return (
+            bool(owing)
+            and not self.tracked()
+            and not self.comparisons
+            and all(issue.held for issue in owing)
+        )
+
+    def closed_only(self) -> bool:
+        """Whether every issue that tracks it is closed: it still counts as tracked, and
+        the view says so."""
+        return bool(self.issues) and all(issue.state == "closed" for issue in self.issues)
+
+
+def pending_rows(
+    record: Mapped, register: Register, unresolved: Mapping[str, Sequence[str]]
+) -> list[PendingRow]:
+    """Every result whose review is pending: below `V3` or `C3` (the backlog), with an
+    unfinished confirmation or activity, or with a comparison the record index leaves
+    unassessed (`unresolved`, `profile_records.load_record_index`). The issues are those
+    whose reported results map to it; a reason `replies_due` gives applies to it when it
+    names a result mapped to it or the issue as a whole."""
+    serving: dict[str, list[tuple[Mapped, set[str]]]] = {}
+    for issue in record["issues"]:
+        keys: dict[str, set[str]] = {}
+        for result in issue.get("results", ()):
+            for ident in result.get("register", ()):
+                keys.setdefault(str(ident), set()).add(str(result["key"]))
+        for ident, mapped in keys.items():
+            serving.setdefault(ident, []).append((issue, mapped))
+    backlog = {row.id: row for row in backlog_rows(record, register)}
+    named = {
+        ident
+        for ident, entry in register.results.items()
+        if entry.get("unfinished_confirmations") or entry.get("activity")
+    }
+    states: dict[int, IssueState] = {}
+    rows: list[PendingRow] = []
+    for ident in sorted({*backlog, *unresolved, *named}):
+        entry = register.results[ident]
+        rungs = f"{entry['verification']}/{entry['confirmation']}"
+        row = backlog.get(ident)
+        pending: list[str] = []
+        if row is not None:
+            pending.append(f"{rungs}, {row.status}: below V3 or C3")
+            pending += [f"unfinished {item}" for item in row.unfinished]
+            pending += [f"under way: {row.activity}"] if row.activity else []
+        else:
+            pending += [
+                f"unfinished {result_status.unfinished_label(item)}"
+                for item in entry.get("unfinished_confirmations") or ()
+            ]
+        comparisons = tuple(unresolved.get(ident, ()))
+        text = " ".join(
+            [str(entry.get("next_rung", "")), *comparisons, *(row.beads if row else ())]
+        )
+        issues = []
+        for issue, mapped in serving.get(ident, ()):
+            number = int(issue["number"])
+            if number not in states:
+                states[number] = issue_state(issue, register)
+            every = {str(result["key"]) for result in issue.get("results", ())}
+            due = tuple(
+                reason
+                for reason in states[number].replies_due
+                if reason.split(":", 1)[0] in mapped or reason.split(":", 1)[0] not in every
+            )
+            hold = held(issue)
+            issues.append(
+                TrackingIssue(number, str(issue["state"]), due, hold_text(hold) if hold else "")
+            )
+        rows.append(
+            PendingRow(
+                id=ident,
+                significance=int((entry.get("significance") or {}).get("score", 0)),
+                rungs=rungs,
+                pending=tuple(pending),
+                comparisons=comparisons,
+                beads=tuple(sorted(set(BEAD.findall(text)), key=text.index)),
+                issues=tuple(issues),
+            )
+        )
+    return rows
+
+
+def pending(
+    record: Mapped, register: Register, unresolved: Mapping[str, Sequence[str]]
+) -> list[str]:
+    """The pending reviews as a table, then what lacks a current tracking issue, apart
+    from what is held for the owner, and what is tracked only on closed issues."""
+    rows = pending_rows(record, register, unresolved)
+    lines = [
+        "# Pending Reviews",
+        "",
+        "| result | S | pending | beads | tracking issue | current |",
+        "| --- | --- | --- | --- | --- | --- |",
+    ]
+    for row in rows:
+        issues = ", ".join(
+            f"#{issue.number} ({issue.state}{', ' + issue.held if issue.held else ''})"
+            for issue in row.issues
+        )
+        if not row.issues:
+            current = "no issue"
+        elif row.comparisons:
+            current = "no: no reply states the comparison"
+        elif row.tracked():
+            current = "yes, on a closed issue" if row.closed_only() else "yes"
+        else:
+            due = [reason for issue in row.issues for reason in issue.due]
+            more = f" (and {len(due) - 1} more)" if len(due) > 1 else ""
+            current = f"{'held for the owner' if row.held() else 'no'}: {due[0]}{more}"
+        what = [
+            *row.pending,
+            *(f"comparison: {line}" for line in comparison_lines(row.id, row.comparisons)),
+        ]
+        lines.append(
+            f"| {row.id} | S{row.significance} | {_cell('; '.join(what))} "
+            f"| {', '.join(row.beads)} | {issues} | {_cell(current)} |"
+        )
+    untracked = [row for row in rows if not row.issues]
+    major = [row.id for row in untracked if row.significance >= TRACKED_FROM]
+    stale = [row.id for row in rows if row.issues and not row.tracked() and not row.held()]
+    held_rows = [row.id for row in rows if row.held()]
+    closed = [row.id for row in rows if row.tracked() and row.closed_only()]
+    lines += [
+        "",
+        f"{len(rows)} results with a pending review; {len(untracked)} with no tracking "
+        f"issue, {len(major)} of them at S{TRACKED_FROM} or above"
+        + (f" ({', '.join(major)})" if major else "")
+        + f"; {len(stale)} whose tracking issue does not state its present state"
+        + (f" ({', '.join(stale)})" if stale else "")
+        + (
+            f"; {len(held_rows)} held for the owner, whose issues no pass posts on "
+            f"({', '.join(held_rows)})"
+            if held_rows
+            else ""
+        )
+        + (
+            f"; {len(closed)} tracked only on a closed issue ({', '.join(closed)})"
+            if closed
+            else ""
+        )
+        + ".",
+    ]
     return lines
 
 
@@ -1202,6 +1539,15 @@ def draft(issue: Mapped, register: Register, repository: str) -> str:
         lines += ["**What is still queued, and how it will be completed.**", ""]
         lines += [f"- {line}" for line in queued]
         lines.append("")
+    questions = awaited(issue) if issue["state"] == "open" else []
+    if questions:
+        lines += ["**Waiting on your answer.**", ""]
+        lines += [
+            f"- {question['question']} ([asked]({question['asked']})) The answer would "
+            f"change {CHANGES[str(question['changes'])]}."
+            for question in questions
+        ]
+        lines.append("")
     links = _links(state.results, register, base)
     if links:
         lines += ["**On `main`.** " + ", ".join(links) + ".", ""]
@@ -1210,6 +1556,14 @@ def draft(issue: Mapped, register: Register, repository: str) -> str:
     elif state.closeable:
         lines += [
             "Nothing you asked for is queued, so this issue is closed with this comment.",
+            "",
+        ]
+    elif questions:
+        lines += [
+            (
+                "This issue stays open while anything above is queued or waits on your "
+                "answer, and a reply follows each change in the record."
+            ),
             "",
         ]
     else:
@@ -1400,6 +1754,15 @@ def _draft_mode(record: Mapped, register: Register, number: int) -> int:
     if issue is None:
         print(f"issue #{number} is not in the record", file=sys.stderr)
         return 2
+    hold = held(issue)
+    if hold is not None:
+        print(
+            f"refusing to draft: #{number} is {hold_text(hold)}, so no pass posts on it "
+            "or closes it (campaign/result-import.md, Close a Settled Issue). "
+            f"{hold['note']}",
+            file=sys.stderr,
+        )
+        return 2
     if not head_on_main():
         print(
             "refusing to draft: HEAD is not contained in origin/main. A T-NNN is "
@@ -1435,6 +1798,9 @@ def main(argv: Sequence[str] | None = None) -> int:
     mode = parser.add_mutually_exclusive_group()
     mode.add_argument("--report", action="store_true", help="a table for each issue")
     mode.add_argument("--backlog", action="store_true", help="entries below V3 or C3")
+    mode.add_argument(
+        "--pending", action="store_true", help="pending reviews and their tracking issues"
+    )
     mode.add_argument("--draft", type=int, metavar="N", help="a status comment for issue N")
     mode.add_argument("--github", action="store_true", help="compare with the live issues")
     parser.add_argument("--record", type=Path, default=RECORD, help=argparse.SUPPRESS)
@@ -1459,6 +1825,11 @@ def main(argv: Sequence[str] | None = None) -> int:
         print("\n".join(report(record, register, on_main)))
     elif options.backlog:
         print("\n".join(backlog(record, register)))
+    elif options.pending:
+        # The record index reads every case record, so only this mode loads it.
+        from devtools.profile_records import load_record_index  # noqa: PLC0415
+
+        print("\n".join(pending(record, register, load_record_index().unresolved)))
     elif options.draft is not None:
         return _draft_mode(record, register, options.draft)
     elif options.github:

@@ -290,14 +290,15 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
     # states its side cut where its root interval's ends agree. T-120's lies above the
     # ceiling T-125 holds at n = 102, so it is superseded; T-121..T-123's lie below the
     # outward-rounded rationals of the same configurations that T-098 holds, by about
-    # 1e-19, so they are pending adoption and not superseded (think-h0d1). Since the house
-    # adoption of 11 October 2026 the ceiling at n = 102 is T-146's.
+    # 1e-19, so they are pending adoption and not superseded (think-h0d1). The ceiling at
+    # n = 102 was T-146's from the house adoption of 11 October 2026, and is T-193's since
+    # that of 23 October 2026 (think-ot5c).
     assert "T-120" in derived
     for entry in ("T-121", "T-122", "T-123"):
         assert entry not in marked
         assert view.standing(records.results[entry], records) == view.PENDING_ADOPTION
     assert view.position_marks(records.results["T-120"], view.SUPERSEDED, records) == [
-        "superseded by T-146"
+        "superseded by T-193"
     ]
     # Gupta's confirmed fourteen-case refinement supersedes T-114's final ceiling.
     expected = {
@@ -404,6 +405,11 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
         "T-226",
         "T-227",
         "T-228",
+        "T-136",
+        "T-173",
+        "T-230",
+        "T-239",
+        "T-241",
     }
     # The house adoption of 11 October 2026 moved 42 case records to the smallest
     # confirmed and reviewed side the register held (think-fvz4): SQUISH's earlier packets
@@ -443,6 +449,18 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
     # regularized views (T-225), the last houses of Joost de Winter's T-196, Daniel's
     # T-199 and Francisco Couzo's T-223; Couzo's #670, #672 and #675 rows (T-226 to
     # T-228), registered the same day, are superseded from registration.
+    # The adoption of 23 October 2026 took 105 and 204 to Mykhailo Polkovskyi's re-solves
+    # (T-229); T-174 and T-225 keep their other houses, so it supersedes no more entries.
+    # The same pass's adoption of the nine algebraic houses (think-ot5c) took 259 from
+    # SQUISH's third request (T-136) and 153 and 207 from Mishapolk's exact certificates
+    # (T-173), the last houses of both; T-146 keeps 292 and T-186 its other houses.
+    # The adoption of 24 October 2026 took 303 to Amund Kristiansen's certificate (T-239),
+    # the only house of Evan Daniel's #728 certificate (T-230), which it supersedes.
+    # The adoption of 25 October 2026 took 303 to Francisco Couzo's #763 certificate
+    # (T-240), the only house of T-239, which it supersedes, and 268 from T-174, which keeps
+    # its other houses. The same pass took 304 from T-186, which keeps its other houses, to
+    # Evan Daniel's descent (T-242) of the packing Francisco Couzo certified at 304 (T-241),
+    # which held no house; T-242's smaller side at its only count supersedes T-241.
     for entry in ("T-128", "T-130"):
         assert view.position_marks(
             records.results[entry], view.standing(records.results[entry], records), records
@@ -631,19 +649,22 @@ def test_a_bound_better_than_its_cases_hold_is_pending_adoption_not_superseded()
     adopted = records.results["T-186"]
     assert view.standing(adopted, records) == view.HOLDS
     assert status_line(adopted, evidence) == CONFIRMED
-    # A dated report above both ceilings is superseded by their current holder, T-174.
+    # A dated report above both ceilings is superseded by their current holders: T-174 at
+    # 108 and, since the adoption of 23 October 2026, T-229 at 105.
     worse = stating(
         records,
         {105: "10.80607786551970463257490535044771520398745274", 108: "10.9048210123203566"},
     )
     assert view.standing(worse, records) == view.SUPERSEDED
-    assert view.position_marks(worse, view.SUPERSEDED, records) == ["superseded by T-174"]
+    assert view.position_marks(worse, view.SUPERSEDED, records) == [
+        "superseded by T-174 and T-229"
+    ]
     # A tie is no improvement: use the case's complete current exact side.
     tie = stating(records, {105: records.cases[105]["verified_upper_bound"]["exact_form"]})
     assert view.standing(tie, records) == view.SUPERSEDED
     # Better at one count and beaten at another: pending adoption as a whole, as a result
     # that holds one case of several stands; superseded on the beaten case alone.
-    mixed = stating(records, {105: "10.789303783748158830", 108: "10.95"})
+    mixed = stating(records, {105: "10.789303783742975", 108: "10.95"})
     assert view.standing(mixed, records) == view.PENDING_ADOPTION
     assert view.position_marks(mixed, view.PENDING_ADOPTION, records) == []
     alone = {**mixed, "scope": {"n_values": [108]}}
@@ -745,7 +766,8 @@ def test_a_superseded_bound_names_only_the_lanes_that_replaced_it() -> None:
     replaces it, it is superseded by that lane's holder alone, and not by the holder of a
     verified ceiling it is still below. Held on n = 105 with its reported ceiling put at
     10.789 under T-117's report and its verified one left with its house, T-130's until 15
-    October 2026 and T-170's since (think-h0d1)."""
+    October 2026, then T-170's (think-h0d1) and T-174's, and T-229's since 23 October
+    2026."""
     view = render_recent_results
     records = view.load_records()
     case = records.cases[105]
@@ -763,9 +785,9 @@ def test_a_superseded_bound_names_only_the_lanes_that_replaced_it() -> None:
     assert view.standing(report, split) == view.SUPERSEDED
     assert view.lane_holders(105, split, "upper", ["verified", "reported"]) == {
         "T-117",
-        "T-174",
+        "T-229",
     }
     assert view.superseding(report, split) == ("T-117",)
     # A bound whose words state nothing at the case is named by both lanes' holders.
     silent = {**report, "claim": "Reported an improvement at n = 105."}
-    assert view.superseding(silent, split) == ("T-117", "T-174")
+    assert view.superseding(silent, split) == ("T-117", "T-229")

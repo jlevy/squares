@@ -25,19 +25,20 @@ second implementation agrees.
 
 ## The Short Version
 
-- **182** programs: **51** external and **131** first-party; **126** decide claims and **56** check premises.
-- **569** of **691** evidence entries name the programs that verified them: 277 reproduced with the producer’s code, 247 independently re-implemented, 26 re-implemented, sharing the producer’s components, 19 no relation: a proof, a derivation or a report.
+- **207** programs: **52** external and **155** first-party; **139** decide claims and **68** check premises.
+- **603** of **767** evidence entries name the programs that verified them: 283 reproduced with the producer’s code, 262 independently re-implemented, 37 re-implemented, sharing the producer’s components, 21 no relation: a proof, a derivation or a report.
 
 ## Programs
 
 | id | program | author | provenance | role | evidence | results |
 | --- | --- | --- | --- | --- | ---: | ---: |
-| [`V-evand-verify-exact`](#v-evand-verify-exact) | verify_exact.py | Evan Daniel | external | decides | 1 | 1 |
+| [`V-evand-verify-exact`](#v-evand-verify-exact) | verify_exact.py | Evan Daniel | external | decides | 2 | 1 |
+| [`V-evand-gradec-py`](#v-evand-gradec-py) | gradec.py | Evan Daniel | external | decides | 1 | 0 |
 | [`V-evand-639-replay-driver`](#v-evand-639-replay-driver) | replay_verify_exact.py | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-tokoharu-verify-cpp`](#v-tokoharu-verify-cpp) | verify.cpp | Tokoharu | external | decides | 13 | 7 |
 | [`V-wand125-mixed-rotated-verify-cpp`](#v-wand125-mixed-rotated-verify-cpp) | mixed_rotated_verify.cpp | Hosono | external | decides | 89 | 14 |
 | [`V-wand125-verify-mixed-full-proof-py`](#v-wand125-verify-mixed-full-proof-py) | verify_mixed_full_proof.py | Hosono | external | decides | 66 | 11 |
-| [`V-wand125-sqverify-proof-net`](#v-wand125-sqverify-proof-net) | sqverify-proof-net | Hosono, adapting this repository's sqverify_fast | external | decides | 33 | 33 |
+| [`V-wand125-sqverify-proof-net`](#v-wand125-sqverify-proof-net) | sqverify-proof-net | Hosono, adapting this repository's sqverify_fast | external | decides | 35 | 35 |
 | [`V-wand125-unified-linear-verify-cpp`](#v-wand125-unified-linear-verify-cpp) | unified_linear_verify.cpp | Hosono | external | decides | 8 | 5 |
 | [`V-wand125-verify-portable-py`](#v-wand125-verify-portable-py) | verify_portable.py | Hosono | external | decides | 2 | 1 |
 | [`V-wand125-check-with-sqpack`](#v-wand125-check-with-sqpack) | check_with_sqpack.py | Hosono | external | decides | 5 | 1 |
@@ -49,8 +50,8 @@ second implementation agrees.
 | [`V-evand-xcheck-py`](#v-evand-xcheck-py) | xcheck.py | Evan Daniel | external | decides | 4 | 2 |
 | [`V-evand-zmcheck`](#v-evand-zmcheck) | zmcheck (verify2/src/main.rs) | Evan Daniel | external | decides | 3 | 2 |
 | [`V-evand-qx2-zm-py`](#v-evand-qx2-zm-py) | qx2_zm.py | Evan Daniel | external | decides | 4 | 2 |
-| [`V-evand-verify-cert-py`](#v-evand-verify-cert-py) | verify_cert.py (s12/search/exact/) | Evan Daniel | external | decides | 5 | 3 |
-| [`V-evand-verify-cert2-py`](#v-evand-verify-cert2-py) | verify_cert2.py (s12/search/exact/) | Evan Daniel | external | decides | 5 | 3 |
+| [`V-evand-verify-cert-py`](#v-evand-verify-cert-py) | verify_cert.py (s12/search/exact/) | Evan Daniel | external | decides | 8 | 6 |
+| [`V-evand-verify-cert2-py`](#v-evand-verify-cert2-py) | verify_cert2.py (s12/search/exact/) | Evan Daniel | external | decides | 8 | 6 |
 | [`V-couzo-verify-bound-certificate`](#v-couzo-verify-bound-certificate) | verify_bound_certificate.py | Evan Daniel, modified by Francisco Couzo with Codex | external | decides | 1 | 1 |
 | [`V-evand-lean`](#v-evand-lean) | The source's Lean development (lean/) | Evan Daniel | external | decides | 8 | 5 |
 | [`V-chelokot-lean`](#v-chelokot-lean) | The source's Lean development (formal/) | chelokot | external | decides | 1 | 1 |
@@ -77,10 +78,10 @@ second implementation agrees.
 | [`V-overbeck-n17-capture-checkers`](#v-overbeck-n17-capture-checkers) | recompute_slice.py | Overbeck | external | decides | 2 | 1 |
 | [`V-overbeck-n17-tree-checkers`](#v-overbeck-n17-tree-checkers) | wxcheck_v30.py and wxcheck2_v30.js | Overbeck | external | decides | 2 | 1 |
 | [`V-fitzharding-n17-lean`](#v-fitzharding-n17-lean) | The sq17-lean Lean 4 development (Sq17Lean) | Fitzharding | external | decides | 2 | 1 |
-| [`V-check-basic-bounds`](#v-check-basic-bounds) | devtools.check_basic_bounds | Squares Project (Levy) | first-party | decides | 3 | 16 |
-| [`V-optimal-moduli`](#v-optimal-moduli) | cases.small_n.optimal_moduli | Squares Project (Levy) | first-party | decides | 1 | 0 |
-| [`V-sqpack-verify`](#v-sqpack-verify) | sqpack.verify | Squares Project (Levy) | first-party | decides | 84 | 73 |
-| [`V-check-rational-witness-independent`](#v-check-rational-witness-independent) | devtools.check_rational_witness_independent | Squares Project (Levy) | first-party | decides | 78 | 76 |
+| [`V-check-basic-bounds`](#v-check-basic-bounds) | devtools.check_basic_bounds | Squares Project (Levy) | first-party | decides | 3 | 17 |
+| [`V-optimal-moduli`](#v-optimal-moduli) | cases.small_n.optimal_moduli | Squares Project (Levy) | first-party | decides | 1 | 1 |
+| [`V-sqpack-verify`](#v-sqpack-verify) | sqpack.verify | Squares Project (Levy) | first-party | decides | 94 | 84 |
+| [`V-check-rational-witness-independent`](#v-check-rational-witness-independent) | devtools.check_rational_witness_independent | Squares Project (Levy) | first-party | decides | 88 | 86 |
 | [`V-check-nagamochi-lemma1-counterexample`](#v-check-nagamochi-lemma1-counterexample) | devtools.check_nagamochi_lemma1_counterexample | Squares Project (Levy) | first-party | decides | 1 | 1 |
 | [`V-check-karakus-strip-measure`](#v-check-karakus-strip-measure) | devtools.check_karakus_strip_measure | Squares Project (Levy) | first-party | decides | 1 | 2 |
 | [`V-upper-bound-promotion`](#v-upper-bound-promotion) | devtools.upper_bound_packets | Squares Project (Levy) | first-party | decides | 6 | 5 |
@@ -136,12 +137,23 @@ second implementation agrees.
 | [`V-overbeck-review2-duality-bounds`](#v-overbeck-review2-duality-bounds) | replay.py | Squares Project (Levy) | first-party | decides | 1 | 0 |
 | [`V-couzo-678-replay`](#v-couzo-678-replay) | devtools.couzo_678_replay | Squares Project (Levy) | first-party | decides | 1 | 1 |
 | [`V-couzo-678-review-check`](#v-couzo-678-review-check) | review_678_check.py | Squares Project (Levy) | first-party | decides | 1 | 1 |
+| [`V-evand-728-review-check`](#v-evand-728-review-check) | review_728_check.py | Squares Project (Levy) | first-party | decides | 1 | 1 |
 | [`V-evand-regularized-1020-review-check`](#v-evand-regularized-1020-review-check) | review_t225_check.py | Squares Project (Levy) | first-party | decides | 1 | 1 |
+| [`V-couzo-670-672-675-review-check`](#v-couzo-670-672-675-review-check) | review_0nse_check.py | Squares Project (Levy) | first-party | decides | 3 | 3 |
+| [`V-mishapolk-719-review-check`](#v-mishapolk-719-review-check) | review_t229_check.py | Squares Project (Levy) | first-party | decides | 1 | 1 |
+| [`V-evand-gradec-review-check`](#v-evand-gradec-review-check) | check_theorem_c.py | Squares Project (Levy) | first-party | decides | 0 | 0 |
 | [`V-evand-regularized-1020-review-controls`](#v-evand-regularized-1020-review-controls) | sharp_controls_t225.py | Squares Project (Levy) | first-party | premises | 1 | 1 |
+| [`V-couzo-670-672-675-review-controls`](#v-couzo-670-672-675-review-controls) | sharp_controls_0nse.py | Squares Project (Levy) | first-party | premises | 3 | 3 |
+| [`V-mishapolk-719-review-controls`](#v-mishapolk-719-review-controls) | sharp_controls_t229.py | Squares Project (Levy) | first-party | premises | 1 | 1 |
+| [`V-mishapolk-n204-review-check`](#v-mishapolk-n204-review-check) | review_t231_check.py | Squares Project (Levy) | first-party | decides | 1 | 1 |
+| [`V-mishapolk-n204-review-controls`](#v-mishapolk-n204-review-controls) | sharp_controls_t231.py | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-overbeck-review3-seed-packing`](#v-overbeck-review3-seed-packing) | seed_packing_check.py | Squares Project (Levy) | first-party | premises | 1 | 0 |
+| [`V-evand-728-review-controls`](#v-evand-728-review-controls) | sharp_controls_728.py | Squares Project (Levy) | first-party | premises | 1 | 1 |
+| [`V-amundsk-755-review-check`](#v-amundsk-755-review-check) | review_t238_check.py | Squares Project (Levy) | first-party | decides | 1 | 1 |
+| [`V-amundsk-755-review-controls`](#v-amundsk-755-review-controls) | sharp_controls_t238.py | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-overbeck-review3-spec-lemmas`](#v-overbeck-review3-spec-lemmas) | spec_lemmas_numeric.py | Squares Project (Levy) | first-party | premises | 1 | 0 |
 | [`V-overbeck-review3-parallel-rows`](#v-overbeck-review3-parallel-rows) | parallel_row_check.py | Squares Project (Levy) | first-party | premises | 0 | 0 |
-| [`V-evand-exact-certificates`](#v-evand-exact-certificates) | devtools.evand_exact_certificates | Squares Project (Levy) | first-party | premises | 62 | 60 |
+| [`V-evand-exact-certificates`](#v-evand-exact-certificates) | devtools.evand_exact_certificates | Squares Project (Levy) | first-party | premises | 72 | 70 |
 | [`V-check-n11-final-composition`](#v-check-n11-final-composition) | devtools.check_n11_final_composition | Squares Project (Levy) | first-party | premises | 2 | 2 |
 | [`V-audit-n11-lean`](#v-audit-n11-lean) | devtools.audit_n11_lean | Squares Project (Levy) | first-party | premises | 2 | 1 |
 | [`V-fitzharding-n17-source-manifest`](#v-fitzharding-n17-source-manifest) | check_source_manifest.py | Squares Project (Levy) | first-party | premises | 1 | 1 |
@@ -152,7 +164,7 @@ second implementation agrees.
 | [`V-audit-wand125-point-and-mixed`](#v-audit-wand125-point-and-mixed) | devtools.audit_wand125_point_and_mixed | Squares Project (Levy) | first-party | premises | 17 | 7 |
 | [`V-audit-wand125-declared-net`](#v-audit-wand125-declared-net) | devtools.audit_wand125_declared_net | Squares Project (Levy) | first-party | premises | 2 | 2 |
 | [`V-audit-wand125-linear`](#v-audit-wand125-linear) | devtools.audit_wand125_linear | Squares Project (Levy) | first-party | premises | 3 | 3 |
-| [`V-sqverify-fast`](#v-sqverify-fast) | sqverify-fast | Squares Project (Levy) | first-party | decides | 115 | 27 |
+| [`V-sqverify-fast`](#v-sqverify-fast) | sqverify-fast | Squares Project (Levy) | first-party | decides | 116 | 28 |
 | [`V-replay-chelokot-lean`](#v-replay-chelokot-lean) | devtools.replay_chelokot_lean | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-replay-evand-zmx2`](#v-replay-evand-zmx2) | devtools.replay_evand_zmx2 | Squares Project (Levy) | first-party | premises | 7 | 7 |
 | [`V-audit-evand-mixed-covers`](#v-audit-evand-mixed-covers) | devtools.audit_evand_mixed_covers | Squares Project (Levy) | first-party | premises | 11 | 10 |
@@ -168,9 +180,9 @@ second implementation agrees.
 | [`V-squish-upper-bound-packets`](#v-squish-upper-bound-packets) | devtools.squish_upper_bound_packets | Squares Project (Levy) | first-party | premises | 2 | 2 |
 | [`V-squish-followup-packets`](#v-squish-followup-packets) | devtools.squish_followup_packets | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-squish-second-update-confirmation`](#v-squish-second-update-confirmation) | devtools.squish_second_update_confirmation | Squares Project (Levy) | first-party | premises | 1 | 1 |
-| [`V-evand-arrangement-receipts`](#v-evand-arrangement-receipts) | devtools.evand_arrangement_reports | Squares Project (Levy) | first-party | premises | 59 | 59 |
+| [`V-evand-arrangement-receipts`](#v-evand-arrangement-receipts) | devtools.evand_arrangement_reports | Squares Project (Levy) | first-party | premises | 69 | 69 |
 | [`V-algebraic-witness-reports`](#v-algebraic-witness-reports) | devtools.algebraic_witness_reports | Squares Project (Levy) | first-party | premises | 1 | 1 |
-| [`V-upper-bound-reports`](#v-upper-bound-reports) | devtools.upper_bound_reports | Squares Project (Levy) | first-party | premises | 54 | 54 |
+| [`V-upper-bound-reports`](#v-upper-bound-reports) | devtools.upper_bound_reports | Squares Project (Levy) | first-party | premises | 64 | 64 |
 | [`V-rehwaldt-n68-verify`](#v-rehwaldt-n68-verify) | verify.py | Seth Rehwaldt | external | decides | 1 | 1 |
 | [`V-rehwaldt-n68-independent-support-check`](#v-rehwaldt-n68-independent-support-check) | independent_support_check.py | Seth Rehwaldt | external | decides | 1 | 1 |
 | [`V-refinement-custody`](#v-refinement-custody) | devtools.refinement_custody | Squares Project (Levy) | first-party | premises | 2 | 2 |
@@ -183,7 +195,7 @@ second implementation agrees.
 | [`V-wand125-lb-review-axis-sweep-emulation`](#v-wand125-lb-review-axis-sweep-emulation) | sweep_emulation.py | Squares Project (Levy) | first-party | premises | 0 | 0 |
 | [`V-wand125-lb-review-linear-premises`](#v-wand125-lb-review-linear-premises) | check_linear_candidate.py | Squares Project (Levy) | first-party | premises | 0 | 0 |
 | [`V-wand125-lb-review-linear-exact-capture`](#v-wand125-lb-review-linear-exact-capture) | linear_exact.capture | Squares Project (Levy) | first-party | decides | 0 | 0 |
-| [`V-fang-review-exact-checker`](#v-fang-review-exact-checker) | rectangle_check.py | Squares Project (Levy) | first-party | decides | 0 | 0 |
+| [`V-fang-review-exact-checker`](#v-fang-review-exact-checker) | rectangle_check.py | Squares Project (Levy) | first-party | decides | 1 | 1 |
 | [`V-fang-review-glue-rebuild`](#v-fang-review-glue-rebuild) | glue_rebuild.py | Squares Project (Levy) | first-party | decides | 0 | 0 |
 | [`V-fang-review-excess-arithmetic`](#v-fang-review-excess-arithmetic) | excess_arithmetic.py | Squares Project (Levy) | first-party | decides | 0 | 0 |
 | [`V-fang-review-receipt-summary`](#v-fang-review-receipt-summary) | receipt_summary.py | Squares Project (Levy) | first-party | premises | 0 | 0 |
@@ -196,7 +208,10 @@ second implementation agrees.
 | [`V-closed-form-review-replay-receipt`](#v-closed-form-review-replay-receipt) | review/replay_receipt_pieces.py | Squares Project (Levy) | first-party | premises | 0 | 0 |
 | [`V-closed-form-review-family-probe`](#v-closed-form-review-family-probe) | review/family_probe.py | Squares Project (Levy) | first-party | premises | 0 | 0 |
 | [`V-wand125-cfcheck`](#v-wand125-cfcheck) | cfcheck (indep-checker) | wand125 | external | decides | 2 | 1 |
-| [`V-wand125-sqverify-continuous`](#v-wand125-sqverify-continuous) | sqverify-fast --continuous | wand125, adapting this repository's sqverify_fast | external | decides | 1 | 1 |
+| [`V-wand125-sqverify-continuous`](#v-wand125-sqverify-continuous) | sqverify-fast --continuous | wand125, adapting this repository's sqverify_fast | external | decides | 3 | 3 |
+| [`V-sqverify-continuous-review-premises`](#v-sqverify-continuous-review-premises) | premises.py | Squares Project (Levy) | first-party | premises | 0 | 0 |
+| [`V-sqverify-continuous-review-probe`](#v-sqverify-continuous-review-probe) | bounds_probe.py and probe_suite.py | Squares Project (Levy) | first-party | premises | 0 | 0 |
+| [`V-sqverify-continuous-review-judge`](#v-sqverify-continuous-review-judge) | judge_run.py | Squares Project (Levy) | first-party | premises | 0 | 0 |
 | [`V-wand125-contpose-check3`](#v-wand125-contpose-check3) | contpose_check3 v1.2 | wand125 (the driver, written to a specification for Codex), around Guzhou0806's kernels | external | decides | 1 | 1 |
 | [`V-continuous-pose-followup`](#v-continuous-pose-followup) | devtools.continuous_pose_followup | Squares Project (Levy) | first-party | premises | 0 | 0 |
 | [`V-pingyou-622-exact-review`](#v-pingyou-622-exact-review) | review/programs/n29_exact_review.py | Squares Project (Levy) | first-party | decides | 1 | 1 |
@@ -212,8 +227,18 @@ second implementation agrees.
 | [`V-sq19-review-endgame`](#v-sq19-review-endgame) | check_endgame.py | Squares Project (Levy) | first-party | decides | 1 | 0 |
 | [`V-sq19-review-archive-scan`](#v-sq19-review-archive-scan) | scan_archives.py | Squares Project (Levy) | first-party | decides | 1 | 0 |
 | [`V-sq19-review-native-count`](#v-sq19-review-native-count) | count_native.py | Squares Project (Levy) | first-party | decides | 1 | 0 |
-| [`V-acquire-source`](#v-acquire-source) | devtools.acquire_source | Squares Project (Levy) | first-party | premises | 3 | 2 |
+| [`V-acquire-source`](#v-acquire-source) | devtools.acquire_source | Squares Project (Levy) | first-party | premises | 6 | 5 |
 | [`V-couzo-678-review-identity`](#v-couzo-678-review-identity) | identity_260.py | Squares Project (Levy) | first-party | premises | 0 | 0 |
+| [`V-evand-gradec-review-compare`](#v-evand-gradec-review-compare) | compare_certificates.py | Squares Project (Levy) | first-party | premises | 0 | 0 |
+| [`V-evand-gradec-review-derivatives`](#v-evand-gradec-review-derivatives) | test_derivatives.py | Squares Project (Levy) | first-party | premises | 0 | 0 |
+| [`V-wand125-446-review-premises`](#v-wand125-446-review-premises) | premises.py | Squares Project (Levy) | first-party | premises | 1 | 0 |
+| [`V-wand125-446-review-axis-decision`](#v-wand125-446-review-axis-decision) | axis_decide.py (with t233lib.py) | Squares Project (Levy) | first-party | decides | 1 | 0 |
+| [`V-wand125-446-review-exact-capture`](#v-wand125-446-review-exact-capture) | t233lib.exact_capture | Squares Project (Levy) | first-party | decides | 1 | 0 |
+| [`V-review-1023-n31-premises`](#v-review-1023-n31-premises) | premises.py and net.py | Squares Project (Levy) | first-party | premises | 1 | 0 |
+| [`V-review-1023-n31-capture`](#v-review-1023-n31-capture) | capture.py | Squares Project (Levy) | first-party | decides | 1 | 0 |
+| [`V-kaggle-268-304-review-check`](#v-kaggle-268-304-review-check) | t241_t242_exact.py | Squares Project (Levy) | first-party | decides | 2 | 2 |
+| [`V-review-1023-n31-poses`](#v-review-1023-n31-poses) | source_log_points.py | Squares Project (Levy) | first-party | decides | 1 | 0 |
+| [`V-couzo-763-review-check`](#v-couzo-763-review-check) | check_certificates.py | Squares Project (Levy) | first-party | decides | 1 | 1 |
 
 ## By Program
 
@@ -230,6 +255,21 @@ The source's standard-library checker of an exact configuration over a number fi
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
 | `E-evand-639-verify-exact-replay` | replayed here | reproduced with the producer’s code | full: the source's exact forms, one exact configuration a count: all 23 files of search/exact/cur/data at 7d1407a, the 16 in scope among them, each decided whole | T-193 |
+| `E-evand-gradec-local-minima-233-report` | the source’s own run | reproduced with the producer’s code | not recorded | - |
+
+### `V-evand-gradec-py`
+
+**gradec.py** · Evan Daniel · external · decides · Python · exact-algebraic
+
+The source's grade-C certificate builder and checker in one program: rows from a contacts file, each tight and classed exactly in Q[t]/f; the flat family and null L0 by exact sparse elimination; affine null vectors for hypothesis 2 of Theorem C; exact multipliers from a linear program's candidate; and the reduced Hessian's leading minors as sums over all permutations, with signs by interval arithmetic at t*. It does not decide that the record is a packing.
+
+- Source: [`packing/resources/web/evand-exact-and-local-reports-2026-10-12/source/search/exact/gradec.py`](../../packing/resources/web/evand-exact-and-local-reports-2026-10-12/source/search/exact/gradec.py)
+- Versions run: SHA-256 `61dcf21c2c05…`, revision `ad86d42d0f74` (Git blob 93374b5a4296bfb6d99dd29aa574febcd356e273, byte-identical at 31523f8, the release's tag commit; it imports localmin.py, verify_exact.py and geom.py from its directory, retained beside it.)
+- Note: Run here once, at n = 10, from a copy outside the repository on 12 October 2026 (receipts/gradec-n10-recompute.json in the evand-exact-data-2026-10-12 packet), with output byte-identical to the published certificate. The source ran it on all 250 configurations of field degree at most 4 (gradec_runs/run.sh).
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-evand-gradec-local-minima-233-report` | the source’s own run | reproduced with the producer’s code | not recorded | - |
 
 ### `V-evand-639-replay-driver`
 
@@ -496,6 +536,8 @@ The source's copy of this repository's sqverify_fast with one change, reading a 
 | `E-wand125-fine-net-n107-1058-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-215 |
 | `E-wand125-fine-net-n108-1062-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-216 |
 | `E-wand125-fine-net-n110-1073-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-217 |
+| `E-wand125-fine-net-n31-59775-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-232 |
+| `E-wand125-fine-net-446-n19-n20-n26-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-233 |
 
 ### `V-wand125-unified-linear-verify-cpp`
 
@@ -717,7 +759,7 @@ The source's exact-rational checker of Valid7, the finite statement its k^2 - 3 
 
 The source's exact checker of its rational packing certificates, in Fraction arithmetic: each square strictly inside the open box, and each pair with centre distance squared at most 2 strictly separated along one of its four face normals, the others by disjoint circumscribed discs.
 
-- Source: [`packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/verify_cert.py`](../../packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/verify_cert.py), [`packing/resources/web/evand-n183-subgrid-2026-10-19/source/search/exact/verify_cert.py`](../../packing/resources/web/evand-n183-subgrid-2026-10-19/source/search/exact/verify_cert.py)
+- Source: [`packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/verify_cert.py`](../../packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/verify_cert.py), [`packing/resources/web/evand-n183-subgrid-2026-10-19/source/search/exact/verify_cert.py`](../../packing/resources/web/evand-n183-subgrid-2026-10-19/source/search/exact/verify_cert.py), [`packing/resources/web/evand-n155-explorer-2026-10-17/source/search/exact/verify_cert.py`](../../packing/resources/web/evand-n155-explorer-2026-10-17/source/search/exact/verify_cert.py), [`packing/resources/web/evand-n229-dilation-2026-10-17/source/search/exact/verify_cert.py`](../../packing/resources/web/evand-n229-dilation-2026-10-17/source/search/exact/verify_cert.py), [`packing/resources/web/evand-n229-dilation-update-2026-10-18/source/search/exact/verify_cert.py`](../../packing/resources/web/evand-n229-dilation-update-2026-10-18/source/search/exact/verify_cert.py)
 - Versions run: SHA-256 `3299ca0c0f02…`
 
 | evidence | run | code | coverage | results |
@@ -726,6 +768,9 @@ The source's exact checker of its rational packing certificates, in Fraction ari
 | `E-evand-exact-optima-2026-10-05-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-098 |
 | `E-evand-exact-ceilings-2026-10-05-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-101 |
 | `E-evand-exact-ceilings-2026-10-05-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-101 |
+| `E-evand-669-n155-source-checker-replay` | replayed here | reproduced with the producer’s code | full, 2 of 2: the certificate at n = 155 that T-197 cites and its same-side display view, each with its four controls | T-197 |
+| `E-evand-674-n229-opening-source-checker-replay` | replayed here | reproduced with the producer’s code | full, 1 of 1: the certificate at n = 229 that T-198 cites, with its four controls | T-198 |
+| `E-evand-674-n229-update-source-checker-replay` | replayed here | reproduced with the producer’s code | full, 1 of 1: the certificate at n = 229 that T-199 cites, with its four controls | T-199 |
 | `E-evand-680-n183-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-220 |
 
 ### `V-evand-verify-cert2-py`
@@ -734,7 +779,7 @@ The source's exact checker of its rational packing certificates, in Fraction ari
 
 The source's second exact checker of the same certificates, written to share no geometry with the first: each pair disjoint when no vertex of either lies in the other closed square and no two closed edges meet, every corner strictly inside the open box, in Fraction arithmetic.
 
-- Source: [`packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/verify_cert2.py`](../../packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/verify_cert2.py), [`packing/resources/web/evand-n183-subgrid-2026-10-19/source/search/exact/verify_cert2.py`](../../packing/resources/web/evand-n183-subgrid-2026-10-19/source/search/exact/verify_cert2.py)
+- Source: [`packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/verify_cert2.py`](../../packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/verify_cert2.py), [`packing/resources/web/evand-n183-subgrid-2026-10-19/source/search/exact/verify_cert2.py`](../../packing/resources/web/evand-n183-subgrid-2026-10-19/source/search/exact/verify_cert2.py), [`packing/resources/web/evand-n155-explorer-2026-10-17/source/search/exact/verify_cert2.py`](../../packing/resources/web/evand-n155-explorer-2026-10-17/source/search/exact/verify_cert2.py), [`packing/resources/web/evand-n229-dilation-2026-10-17/source/search/exact/verify_cert2.py`](../../packing/resources/web/evand-n229-dilation-2026-10-17/source/search/exact/verify_cert2.py), [`packing/resources/web/evand-n229-dilation-update-2026-10-18/source/search/exact/verify_cert2.py`](../../packing/resources/web/evand-n229-dilation-update-2026-10-18/source/search/exact/verify_cert2.py)
 - Versions run: SHA-256 `55140a35d95d…`
 
 | evidence | run | code | coverage | results |
@@ -743,6 +788,9 @@ The source's second exact checker of the same certificates, written to share no 
 | `E-evand-exact-optima-2026-10-05-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-098 |
 | `E-evand-exact-ceilings-2026-10-05-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-101 |
 | `E-evand-exact-ceilings-2026-10-05-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-101 |
+| `E-evand-669-n155-source-checker-replay` | replayed here | reproduced with the producer’s code | full, 2 of 2: the certificate at n = 155 that T-197 cites and its same-side display view, each with its four controls | T-197 |
+| `E-evand-674-n229-opening-source-checker-replay` | replayed here | reproduced with the producer’s code | full, 1 of 1: the certificate at n = 229 that T-198 cites, with its four controls | T-198 |
+| `E-evand-674-n229-update-source-checker-replay` | replayed here | reproduced with the producer’s code | full, 1 of 1: the certificate at n = 229 that T-199 cites, with its four controls | T-199 |
 | `E-evand-680-n183-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-220 |
 
 ### `V-couzo-verify-bound-certificate`
@@ -1149,8 +1197,8 @@ Derives and checks the elementary bounds exactly: the grid upper bound, the area
 
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
-| `E-basic-grid-upper` | replayed here | independently re-implemented | not recorded | T-008, T-051, T-052, T-053, T-054, T-055, T-062, T-063, T-064, T-066, T-067, T-081, T-084, T-086, T-184, T-191 |
-| `E-basic-area-lower` | replayed here | independently re-implemented | not recorded | - |
+| `E-basic-grid-upper` | replayed here | independently re-implemented | not recorded | T-008, T-051, T-052, T-053, T-054, T-055, T-062, T-063, T-064, T-066, T-067, T-081, T-084, T-086, T-184, T-191, T-237 |
+| `E-basic-area-lower` | replayed here | independently re-implemented | not recorded | T-237 |
 | `E-n012-monotonicity-lower` | replayed here | independently re-implemented | not recorded | - |
 
 ### `V-optimal-moduli`
@@ -1164,7 +1212,7 @@ Replays the exact optimal moduli for n = 2 to 4 and the side-2 lower bound.
 
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
-| `E-side2-center-lower` | replayed here | reproduced with the producer’s code | not recorded | - |
+| `E-side2-center-lower` | replayed here | reproduced with the producer’s code | not recorded | T-237 |
 
 ### `V-sqpack-verify`
 
@@ -1178,7 +1226,7 @@ Decides a packing pair by pair and wall by wall: by exact sign in a number field
 
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
-| `E-n005-gobel-upper` | replayed here | independently re-implemented | not recorded | - |
+| `E-n005-gobel-upper` | replayed here | independently re-implemented | not recorded | T-237 |
 | `E-n010-gobel-upper` | replayed here | independently re-implemented | not recorded | - |
 | `E-n040-gobel-upper` | replayed here | independently re-implemented | not recorded | - |
 | `E-gobel-family-upper` | replayed here | independently re-implemented | not recorded | - |
@@ -1258,10 +1306,20 @@ Decides a packing pair by pair and wall by wall: by exact sign in a number field
 | `E-evand-664-n271-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 271 that T-219 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-219 |
 | `E-evand-689-n308-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 308 that T-221 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-221 |
 | `E-evand-694-n154-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 154 that T-222 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-222 |
+| `E-evand-728-n303-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 303 that T-230 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-230 |
+| `E-amundsk-755-n303-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 303 that T-239 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt and replay/sharp-controls.json | T-239 |
 | `E-evand-703-n270-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 270 that T-224 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-224 |
 | `E-evand-680-n183-primary-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 1 of 1: the original n183 rational certificate, all 183 squares, every wall and all 16653 unordered pairs in each of three jobs through both maintained routes; positive plus two sensitive invalid controls | T-220 |
 | `E-couzo-678-filtered-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 2 of 2: the certificates at n = 204 and 260 that T-223 cites: every wall and every pair whose centres are closer than sqrt 2 decided by both routes, the others excluded by the filter's lemma, and every pair decided again by the all-pairs kernel; the receipt decides all 85 rows of the issue | T-223 |
 | `E-evand-regularized-1020-exact-feasibility` | replayed here | independently re-implemented | full, 4 of 4: the certificates at n = 204, 227, 229 and 260 that T-225 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-225 |
+| `E-couzo-670-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 204 that T-226 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-226 |
+| `E-couzo-672-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 2 of 2: the certificates at n = 227 and 229 that T-227 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-227 |
+| `E-couzo-675-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 204 that T-228 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-228 |
+| `E-mishapolk-719-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 2 of 2: the certificates at n = 105 and 204 that T-229 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-229 |
+| `E-mishapolk-n204-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 204 that T-231 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-231 |
+| `E-couzo-763-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 2 of 2: the two certificates at n = 268 and 303 that T-240 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-240 |
+| `E-couzo-n304-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 304 that T-241 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-241 |
+| `E-evand-kaggle-descents-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 2 of 2: the two certificates at n = 268 and 304 that T-242 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-242 |
 
 ### `V-check-rational-witness-independent`
 
@@ -1350,10 +1408,20 @@ Decides a rational-corner witness pair by pair and wall by wall in Fraction arit
 | `E-evand-664-n271-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 271 that T-219 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-219 |
 | `E-evand-689-n308-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 308 that T-221 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-221 |
 | `E-evand-694-n154-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 154 that T-222 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-222 |
+| `E-evand-728-n303-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 303 that T-230 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-230 |
+| `E-amundsk-755-n303-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 303 that T-239 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt and replay/sharp-controls.json | T-239 |
 | `E-evand-703-n270-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 270 that T-224 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-224 |
 | `E-evand-680-n183-primary-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 1 of 1: the original n183 rational certificate, all 183 squares, every wall and all 16653 unordered pairs in each of three jobs through both maintained routes; positive plus two sensitive invalid controls | T-220 |
 | `E-couzo-678-filtered-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 2 of 2: the certificates at n = 204 and 260 that T-223 cites: every wall and every pair whose centres are closer than sqrt 2 decided by both routes, the others excluded by the filter's lemma, and every pair decided again by the all-pairs kernel; the receipt decides all 85 rows of the issue | T-223 |
 | `E-evand-regularized-1020-exact-feasibility` | replayed here | independently re-implemented | full, 4 of 4: the certificates at n = 204, 227, 229 and 260 that T-225 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-225 |
+| `E-couzo-670-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 204 that T-226 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-226 |
+| `E-couzo-672-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 2 of 2: the certificates at n = 227 and 229 that T-227 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-227 |
+| `E-couzo-675-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 204 that T-228 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-228 |
+| `E-mishapolk-719-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 2 of 2: the certificates at n = 105 and 204 that T-229 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-229 |
+| `E-mishapolk-n204-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 204 that T-231 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-231 |
+| `E-couzo-763-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 2 of 2: the two certificates at n = 268 and 303 that T-240 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-240 |
+| `E-couzo-n304-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 304 that T-241 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-241 |
+| `E-evand-kaggle-descents-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 2 of 2: the two certificates at n = 268 and 304 that T-242 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-242 |
 
 ### `V-check-nagamochi-lemma1-counterexample`
 
@@ -2249,6 +2317,22 @@ The 20 October review's standard-library exact checker of issue 678's certificat
 | --- | --- | --- | --- | --- |
 | `E-couzo-678-review-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 2 of 2: the certificates at n = 204 and 260 that T-223 cites, every wall and every pair; the run decides all 85 rows of the issue | T-223 |
 
+### `V-evand-728-review-check`
+
+**review_728_check.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+The 22 October review's standard-library exact checker of the certificate T-230 cites, with a reader of its own that admits only integer and p/q literals, deciding the certificate on two routes that share only that reader: route Z in integers alone, never loading fractions (a Pythagorean triple per row, containment by half-extents and every pair by four separating-axis inequalities cleared of denominators, giving each pair's exact gap), and route C in Fraction (unit edges, right angles, orientation and corner mean, corner containment, every pair by the exact area one square's closed half-planes clip from the other, with no distance filter, and the exact squared distance of every pair whose centres are closer than 2).
+
+- Source: [`packing/resources/web/evand-n303-2026-10-22/review/review-2026-10-22/programs/review_728_check.py`](../../packing/resources/web/evand-n303-2026-10-22/review/review-2026-10-22/programs/review_728_check.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-22-daniel-728.md`](../../docs/project/reviews/review-2026-10-22-daniel-728.md)
+- Independence: its authors read mathematics, specification, certificate-format; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review lane of #728 (c-review-728-math, think-icp1), strong sub-agent tier, maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, The source's CREDITS.md says the repository's work was produced by Claude (Anthropic) under human direction, and the pinned commit names Claude Opus 5.5 as co-author. Written in a file of its own that imports nothing from this repository or the source, from the issue and the certificate's format, after its author had read the 22 October review of T-226 to T-228's account of its own checker's design; it had decided the certificate, and its digest was recorded, before its author read the source's report, input or checkers or any maintained route, and it did not change after.
+- Note: Written and run on 22 October 2026 by the review; kept in the evand-n303-2026-10-22 packet's review/review-2026-10-22/ with its README and receipts (RF-6).
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-evand-728-n303-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 1 of 1: the certificate at n = 303 that T-230 cites, every wall and all 45,753 pairs, on each of the checker's two routes | T-230 |
+
 ### `V-evand-regularized-1020-review-check`
 
 **review_t225_check.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
@@ -2265,6 +2349,54 @@ The 21 October review's standard-library exact checker of the four regularized c
 | --- | --- | --- | --- | --- |
 | `E-evand-regularized-1020-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 4 of 4: the certificates at n = 204, 227, 229 and 260 that T-225 cites, every wall and every pair, on each of the checker's two routes | T-225 |
 
+### `V-couzo-670-672-675-review-check`
+
+**review_0nse_check.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+The 22 October review's standard-library exact checker of the four certificates T-226, T-227 and T-228 cite, with a reader of its own that admits only integer and p/q literals, deciding each certificate on two routes that share only that reader: route Z in integers alone (a Pythagorean triple per row, containment by half-extents and every one of the n(n-1)/2 pairs by four separating-axis inequalities cleared of denominators, giving each pair's exact gap), and route C in Fraction (unit edges, right angles, orientation and corner mean on the corners, corner containment, and every pair, with no distance filter, by the exact area one square's four closed half-planes clip from the other).
+
+- Source: [`packing/resources/web/couzo-issue672-2026-10-17/review/review-2026-10-22/programs/review_0nse_check.py`](../../packing/resources/web/couzo-issue672-2026-10-17/review/review-2026-10-22/programs/review_0nse_check.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-22-couzo-670-672-675.md`](../../docs/project/reviews/review-2026-10-22-couzo-670-672-675.md)
+- Independence: its authors read mathematics, certificate-format, producer-output, earlier-review; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review lane of T-226 to T-228 (c-review-t226-t228-math, think-0nse), strong sub-agent tier, reasoning setting xhigh), with its own prompt and code; authorship in common with the producer’s: system-family, The source's manifests name this repository's sqpack/verify.py, which Claude agents wrote, as their first checker. Written in a file of its own that imports nothing from this repository or the source, from the certificates' format line, the mathematics, the per-count JSON and manifests and the 21 October review of T-225's account of its checker, before its author read either maintained route; its author never read sqpack/verify.py, check_rational_witness_independent or the source's verify_bound_certificate.py. Route C uses CPython's Fraction, as the maintained routes do; route Z uses integers only.
+- Note: Written and run on 22 October 2026 by the review; kept in the couzo-issue672-2026-10-17 packet's review/review-2026-10-22/ with its README and receipts, which the #670 and #675 packets point to (RF-7).
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-couzo-670-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 1 of 1: the certificate at n = 204 that T-226 cites, every wall and every pair, on each of the checker's two routes | T-226 |
+| `E-couzo-672-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 2 of 2: the certificates at n = 227 and 229 that T-227 cites, every wall and every pair, on each of the checker's two routes | T-227 |
+| `E-couzo-675-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 1 of 1: the certificate at n = 204 that T-228 cites, every wall and every pair, on each of the checker's two routes | T-228 |
+
+### `V-mishapolk-719-review-check`
+
+**review_t229_check.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+The 22 October review's standard-library exact checker of the two certificates T-229 cites, with readers of its own for the source's certificate text and for the packet's Witness/v2 center-basis fact, deciding each on two routes that share only the reader: route Z in integers alone (a Pythagorean triple per row, containment by half-extents and every pair by four separating-axis inequalities cleared of denominators), and route C in Fraction (unit edges, right angles, orientation and corner mean, corner containment, every pair by the exact area one square's closed half-planes clip from the other, and the exact squared distance of every pair whose centres are closer than 2). Its same command decides that each fact states exactly its certificate's squares.
+
+- Source: [`packing/resources/web/mishapolk-issue719-2026-10-22/review/review-2026-10-22/programs/review_t229_check.py`](../../packing/resources/web/mishapolk-issue719-2026-10-22/review/review-2026-10-22/programs/review_t229_check.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-22-mishapolk-719.md`](../../docs/project/reviews/review-2026-10-22-mishapolk-719.md)
+- Independence: its authors read mathematics, certificate-format, producer-output, earlier-review; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review lane of T-229 (c-review-t229-math, think-4h23), strong sub-agent tier, maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, The issue names this repository's sqpack/verify.py, whose first revisions are Claude-authored commits, as one of its checkers, and discloses Gemini assistance with the author's scripting. Written in a file of its own that imports nothing from this repository or the source, from the certificates' format line, the packet README and receipts and the 22 October review of T-226 to T-228's account of its checker, and frozen and run on both certificates before its author read any maintained or source code; its author never read sqpack/verify.py's deciding code, check_rational_witness_independent or the source's named checkers.
+- Note: Written and run on 22 October 2026 by the review; kept in the mishapolk-issue719-2026-10-22 packet's review/review-2026-10-22/ with its README and receipts (RF-8).
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-mishapolk-719-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 2 of 2: the certificates at n = 105 and 204 that T-229 cites, every wall and every pair, on each of the checker's two routes, from the derived facts and from the source's files | T-229 |
+
+### `V-evand-gradec-review-check`
+
+**check_theorem_c.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+For Evan Daniel's grade-C configurations, decides exactly in Q[t]/f, with signs by interval arithmetic at t*, the hypotheses of Theorem C as the 23 October review repairs it: the record is a packing in [0, S]^2; every kept row is tight and is a wall row, an interior incidence or one of a complete side-end pair; exact multipliers are positive and balance e_S; the flat family F and a complement W of it span null L0; affine null vectors exist, found one linear system per null vector and flat direction from each row's tangential slip; the F x W block of the Lagrangian Hessian vanishes; and the Hessian is positive definite on W by an exact LDL^T.
+
+- Source: [`packing/resources/web/evand-exact-data-2026-10-12/review/check_theorem_c.py`](../../packing/resources/web/evand-exact-data-2026-10-12/review/check_theorem_c.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-23-evand-grade-c-theorem-c.md`](../../docs/project/reviews/review-2026-10-23-evand-grade-c-theorem-c.md)
+- Independence: its authors read mathematics, proof-text, certificate-format, producer-code, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review lane of the #545 import (c-review-thmc-1023, think-7scz), strong sub-agent tier (tbd-strong-max), maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, The source's CREDITS.md says its work was produced by Claude (Anthropic) under human direction, and its commits credit Claude as co-author. Written by a Claude agent prompted separately from the source and from the import and records lanes, in a file of its own that imports none of the source and does its arithmetic with CPython's int and fractions.Fraction, not python-flint.
+- Note: Written and run on 23 October 2026 by the review, on all 233 configurations; kept in the evand-exact-data-2026-10-12 packet's review/ with its README, the receipts in its receipts/. It is the review lane's own checker, so its run is a second route beside the rung, and the claim's C3 waits on gradec.py's replay (think-mtah). No evidence entry cites it yet: the run's entry is drafted in think-7scz for the registration, since devtools.check_certificate_citations needs a case record to cite a verified certificate, or a deferral naming the register entry that cites it, which lapses after 30 days, and no case record has a block for local minimality (think-8xy2).
+
+No evidence entry names it yet.
+
 ### `V-evand-regularized-1020-review-controls`
 
 **sharp_controls_t225.py** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
@@ -2279,6 +2411,69 @@ The 21 October review's sharp controls of T-225's four certificates: eight mutan
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
 | `E-evand-regularized-1020-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 4 of 4: the certificates at n = 204, 227, 229 and 260 that T-225 cites, every wall and every pair, on each of the checker's two routes | T-225 |
+
+### `V-couzo-670-672-675-review-controls`
+
+**sharp_controls_0nse.py** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
+
+The 22 October review's sharp controls of the four certificates T-226, T-227 and T-228 cite: eight mutants a certificate at the scale of the margins (the side lowered by the least far-wall clearance, every square moved by the least near-wall clearance, the least-gap pair closed along its best separating axis, each at exact contact and 1e-30 past it; a row dropped; a decimal literal), each decided by the review's checker and by both maintained routes through the packets' evand-cert adapter, and the kernel's run_sharp at contact and past it. It adds the mutants and the expectations; the routes decide.
+
+- Source: [`packing/resources/web/couzo-issue672-2026-10-17/review/review-2026-10-22/programs/sharp_controls_0nse.py`](../../packing/resources/web/couzo-issue672-2026-10-17/review/review-2026-10-22/programs/sharp_controls_0nse.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-22-couzo-670-672-675.md`](../../docs/project/reviews/review-2026-10-22-couzo-670-672-675.md)
+- Note: Written and run on 22 October 2026 by the review (c-review-t226-t228-math); it imports devtools.evand_arrangement_reports, devtools.evand_exact_certificates and devtools.upper_bound_reports to reach the maintained routes, and the review's checker. Kept with its receipts out-controls-T-NNN-nNNN.json in the couzo-issue672-2026-10-17 packet's review/review-2026-10-22/ (RF-6, RF-7).
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-couzo-670-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 1 of 1: the certificate at n = 204 that T-226 cites, every wall and every pair, on each of the checker's two routes | T-226 |
+| `E-couzo-672-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 2 of 2: the certificates at n = 227 and 229 that T-227 cites, every wall and every pair, on each of the checker's two routes | T-227 |
+| `E-couzo-675-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 1 of 1: the certificate at n = 204 that T-228 cites, every wall and every pair, on each of the checker's two routes | T-228 |
+
+### `V-mishapolk-719-review-controls`
+
+**sharp_controls_t229.py** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
+
+The 22 October review's sharp controls of the two certificates T-229 cites, built from the packet's derived facts written back in the source's certificate format with the round trip checked exactly: eight mutants a certificate (the side lowered by the least far-wall clearance, every square moved by the least near-wall clearance, the least-gap pair closed along the first square's edge normal, each at exact contact and 1e-30 past it; a row dropped; a decimal literal), each decided by the review's checker and by both maintained routes through the evand-cert adapter, and the kernel's run_sharp at contact and past it. It also checks that the adapter's certificate equals the packet's fact as read_facts admits it. It adds the mutants and the expectations; the routes decide.
+
+- Source: [`packing/resources/web/mishapolk-issue719-2026-10-22/review/review-2026-10-22/programs/sharp_controls_t229.py`](../../packing/resources/web/mishapolk-issue719-2026-10-22/review/review-2026-10-22/programs/sharp_controls_t229.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-22-mishapolk-719.md`](../../docs/project/reviews/review-2026-10-22-mishapolk-719.md)
+- Note: Written and run on 22 October 2026 by the review (c-review-t229-math); it imports devtools.evand_arrangement_reports, devtools.evand_exact_certificates and devtools.upper_bound_reports to reach the maintained routes, and the review's checker. Kept with its receipts out-controls-T-229-n105.json and -n204.json in the mishapolk-issue719-2026-10-22 packet's review/review-2026-10-22/ (RF-7, RF-8).
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-mishapolk-719-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 2 of 2: the certificates at n = 105 and 204 that T-229 cites, every wall and every pair, on each of the checker's two routes, from the derived facts and from the source's files | T-229 |
+
+### `V-mishapolk-n204-review-check`
+
+**review_t231_check.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+The 23 October review's standard-library exact checker of the certificate T-231 cites, with a strict reader of its own, deciding it on two routes that share only the reader: route Z in integers alone (a Pythagorean triple per row, containment by half-extents and every pair by four separating-axis inequalities cleared of denominators, never loading fractions), and route C in Fraction (unit edges, right angles, orientation and corner mean, corner containment, every pair by the exact area one square's closed half-planes clip from the other and again by corner projections, and the exact squared distance of every pair whose centres lie within 2). Its --self-test runs 13 hand-built cases, 12 malformed texts and 1,500 random pairs.
+
+- Source: [`packing/resources/web/mishapolk-n204-2026-10-22/review/review-2026-10-23/programs/review_t231_check.py`](../../packing/resources/web/mishapolk-n204-2026-10-22/review/review-2026-10-23/programs/review_t231_check.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-23-mishapolk-n204.md`](../../docs/project/reviews/review-2026-10-23-mishapolk-n204.md)
+- Independence: its authors read mathematics, certificate-format, specification; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review lane of T-231 (c-review-t231-math, think-tetq), strong sub-agent tier, maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, As E-mishapolk-n204-review-exact-feasibility's: written in a file of its own that imports nothing from this repository or the source, from the certificate's format line, the mathematics and the #728 review's account of its checker, and run on the certificate before its author read any maintained or source code.
+- Note: Written and run on 23 October 2026 by the review; kept in the mishapolk-n204-2026-10-22 packet's review/review-2026-10-23/ with its README and receipts (RF-7), whose outputs/program-digests.sha256 lists the bytes that ran.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-mishapolk-n204-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 1 of 1: the certificate at n = 204 that T-231 cites, every wall and every pair, on each of the checker's two routes | T-231 |
+
+### `V-mishapolk-n204-review-controls`
+
+**sharp_controls_t231.py, maintained_routes_t231.py** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
+
+The 23 October review's controls of the certificate T-231 cites. sharp_controls_t231.py builds sixteen mutants (the side lowered by the least top-or-right clearance, every square moved by the least left and by the least bottom clearance, and the least-gap pairs between two tilted, a tilted and an aligned, and two aligned squares closed along their edge normal, each at exact contact and 1e-30 past it; a duplicated square; a square moved outside; a row dropped; a decimal literal) and decides each by the review's checker and by both maintained routes through the evand-cert adapter. maintained_routes_t231.py runs the kernel's positive and two gross jobs one per process, as certify's child does, with validate_job, and the kernel's run_sharp at contact and past it. They add the mutants and the expectations; the routes decide.
+
+- Source: [`packing/resources/web/mishapolk-n204-2026-10-22/review/review-2026-10-23/programs/sharp_controls_t231.py`](../../packing/resources/web/mishapolk-n204-2026-10-22/review/review-2026-10-23/programs/sharp_controls_t231.py), [`packing/resources/web/mishapolk-n204-2026-10-22/review/review-2026-10-23/programs/maintained_routes_t231.py`](../../packing/resources/web/mishapolk-n204-2026-10-22/review/review-2026-10-23/programs/maintained_routes_t231.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-23-mishapolk-n204.md`](../../docs/project/reviews/review-2026-10-23-mishapolk-n204.md)
+- Note: Written and run on 23 October 2026 by the review (c-review-t231-math); they import devtools.upper_bound_reports, devtools.evand_arrangement_reports and devtools.evand_exact_certificates to reach the maintained routes, and the review's checker. Kept with their receipts (outputs/sharp-controls.json, outputs/maintained-*.json).
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-mishapolk-n204-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 1 of 1: the certificate at n = 204 that T-231 cites, every wall and every pair, on each of the checker's two routes | T-231 |
 
 ### `V-overbeck-review3-seed-packing`
 
@@ -2295,6 +2490,52 @@ Checks exactly that the candidate's rational seed upper-packing-certificate.json
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
 | `E-n017-overbeck-jq-tree-review3` | replayed here | independently re-implemented after reading the producer’s code | sample, 1 of 13: tree certificates of the candidate's step 4, JQ decided in full by a checker that handles one-node trees only | - |
+
+### `V-evand-728-review-controls`
+
+**sharp_controls_728.py, with maintained_routes_728.py** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
+
+The 22 October review's sharp controls of T-230's certificate: eight mutants at the scale of its margins (the side lowered by the least top-or-right clearance, every square moved by the least left clearance, square 296 moved onto square 284 along its edge normal by the least gap, each at exact contact and 1e-30 past it; a row dropped; a decimal literal), each decided by the review's checker and by both maintained routes through maintained_routes_728.py, which runs them as certify's child does, through the evand-cert adapter and the kernel's run_case and validate_job, and runs the kernel's run_sharp. It adds the mutants and the expectations; the routes decide.
+
+- Source: [`packing/resources/web/evand-n303-2026-10-22/review/review-2026-10-22/programs/sharp_controls_728.py`](../../packing/resources/web/evand-n303-2026-10-22/review/review-2026-10-22/programs/sharp_controls_728.py), [`packing/resources/web/evand-n303-2026-10-22/review/review-2026-10-22/programs/maintained_routes_728.py`](../../packing/resources/web/evand-n303-2026-10-22/review/review-2026-10-22/programs/maintained_routes_728.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-22-daniel-728.md`](../../docs/project/reviews/review-2026-10-22-daniel-728.md)
+- Note: Written and run on 22 October 2026 by the review (c-review-728-math); it imports devtools.evand_arrangement_reports and devtools.upper_bound_reports to reach the maintained routes, and the review's checker. Kept with its receipts outputs/sharp-controls.json and outputs/maintained-*.json in the packet's review/review-2026-10-22/ (RF-2, RF-6).
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-evand-728-n303-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 1 of 1: the certificate at n = 303 that T-230 cites, every wall and all 45,753 pairs, on each of the checker's two routes | T-230 |
+
+### `V-amundsk-755-review-check`
+
+**review_t238_check.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+The 23 October review's standard-library exact checker of the certificate T-239 cites, with a reader of its own that admits only integer and p/q literals, deciding the certificate on two routes that share only that reader: route Z in integers alone, never loading fractions (a Pythagorean triple per row, containment by half-extents and every pair, with no distance filter, by four separating-axis inequalities cleared of denominators, giving each pair's exact gap), and route E in Fraction (unit edges, right angles, orientation and corner mean, corner containment, pairs whose centres lie more than sqrt(2) apart by their circumscribed discs, every other pair by exact edge intersection and vertex containment with its exact squared Euclidean distance and the region one square's closed half-planes clip from the other as a check, and every pair's separating-axis gap again from corner projections, as a comparison).
+
+- Source: [`packing/resources/web/amundsk-n303-2026-10-23/review/review-2026-10-23/programs/review_t238_check.py`](../../packing/resources/web/amundsk-n303-2026-10-23/review/review-2026-10-23/programs/review_t238_check.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-23-amundsk-n303.md`](../../docs/project/reviews/review-2026-10-23-amundsk-n303.md)
+- Independence: its authors read mathematics, specification, certificate-format; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review lane of #755 (c-review-t238-math, think-jdz0), strong sub-agent tier, maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, Issue 755 says the search, the certificate and the report were done by Claude (Anthropic) at Amund Kristiansen's direction. Written in a file of its own that imports nothing from this repository or the source, from the issue, the gist README and the certificate, after its author had read the 23 October review of the second 204 certificate's account of its own checker's design; it had decided the certificate, and its digest was recorded, before its author read any maintained route or Evan Daniel's verify_cert.py, verify_cert2.py or dilate_cert.py, and it did not change after. Its disc test and its edge and vertex tests are the mathematics of verify_cert.py's filter and verify_cert2.py, read only after it decided.
+- Note: Written and run on 23 October 2026 by the review; kept in the amundsk-n303-2026-10-23 packet's review/review-2026-10-23/ with its README and receipts (RF-9).
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-amundsk-755-n303-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 1 of 1: the certificate at n = 303 that T-239 cites, every wall and all 45,753 pairs, on each of the checker's two routes | T-239 |
+
+### `V-amundsk-755-review-controls`
+
+**sharp_controls_t238.py, with maintained_routes_t238.py** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
+
+The 23 October review's controls of T-239's certificate: 21 mutants (the side lowered by the least top-or-right clearance, every square moved by the least left and the least bottom clearance, and five pairs closed along the normal or the corner vector that separates them: the least-gap pair, a tilted and an aligned square, two squares tilted alike, two tilted 0.5 degree or more apart, and a corner-to-corner pair whose centres lie more than sqrt(2) apart, each at exact contact and 1e-30 past it; a duplicated square; a square moved outside; every tangent negated; a row dropped; a decimal literal), each decided by the review's checker on both routes and by both maintained routes through the evand-cert adapter and the kernel's run_case; and maintained_routes_t238.py, which runs the kernel's three jobs on the certificate's bytes as certify's child does (run_case and validate_job) and the kernel's run_sharp. It adds the mutants and the expectations; the routes decide.
+
+- Source: [`packing/resources/web/amundsk-n303-2026-10-23/review/review-2026-10-23/programs/sharp_controls_t238.py`](../../packing/resources/web/amundsk-n303-2026-10-23/review/review-2026-10-23/programs/sharp_controls_t238.py), [`packing/resources/web/amundsk-n303-2026-10-23/review/review-2026-10-23/programs/maintained_routes_t238.py`](../../packing/resources/web/amundsk-n303-2026-10-23/review/review-2026-10-23/programs/maintained_routes_t238.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-23-amundsk-n303.md`](../../docs/project/reviews/review-2026-10-23-amundsk-n303.md)
+- Note: Written and run on 23 October 2026 by the review (c-review-t238-math); it imports devtools.evand_arrangement_reports and devtools.upper_bound_reports to reach the maintained routes, and loads the review's checker by path. Kept with its receipts outputs/sharp-controls.json and outputs/maintained/ in the packet's review/review-2026-10-23/ (RF-9).
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-amundsk-755-n303-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 1 of 1: the certificate at n = 303 that T-239 cites, every wall and all 45,753 pairs, on each of the checker's two routes | T-239 |
 
 ### `V-overbeck-review3-spec-lemmas`
 
@@ -2333,9 +2574,9 @@ No evidence entry names it yet.
 Reads Evan Daniel's rational certificates, refusing anything the format does not state, converts each without rounding to a rational center-basis witness for sqpack.witness.exact_verify and to rational corners for devtools.check_rational_witness_independent, which decide it; runs the source's two checkers as retained; compares each side and pose with the register; and makes the negative controls.
 
 - Source: [`packing/devtools/evand_exact_certificates.py`](../../packing/devtools/evand_exact_certificates.py)
-- Versions run: SHA-256 `52073811e61d…` (The source the n183 primary batch ran, unchanged since; the retained seven-file provenance identifies the historical run; of `evand_exact_certificates.py`)
+- Versions run: SHA-256 `52073811e61d…` (The source the n183 primary batch ran, and the source T-230's replay ran at 52d89bf04; the retained seven-file provenance identifies the historical run; of `evand_exact_certificates.py`); SHA-256 `56340bd7f743…` (The source after its module statement was corrected on 22 October 2026 (RF-1 of the review of #728, 3213910d5): docstring only, no code changed from 52073811..., so a replay at this digest decides as one at 52073811... does; of `evand_exact_certificates.py`)
 - What its authors read and used: [`packing/devtools/evand_exact_certificates.py`](../../packing/devtools/evand_exact_certificates.py)
-- Note: Written from the certificate format the source's README states and from the geometry. Its author read the source's verify_cert.py and verify_cert2.py before writing it, to check that the conversion means what they mean, and imports or copies none of their code; it runs them only as separate processes.
+- Note: Written from the certificate format the source's README states and from the geometry. Its author read the source's verify_cert.py and verify_cert2.py before writing it, to check that the conversion means what they mean, and imports none of their code; it runs them only as separate processes. Two of its expressions are theirs, transcribed (RF-1 of the 22 October review of #728): the reader's line filter, which skips blank lines and lines beginning with #, and Pose.corners, the corner construction the independent route decides on, which is verify_cert2.py's corners term for term. The earlier evand replay entries that read through it are brought into line by a later records pass (think-ysif).
 
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
@@ -2397,10 +2638,20 @@ Reads Evan Daniel's rational certificates, refusing anything the format does not
 | `E-evand-664-n271-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 271 that T-219 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-219 |
 | `E-evand-689-n308-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 308 that T-221 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-221 |
 | `E-evand-694-n154-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 154 that T-222 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-222 |
+| `E-evand-728-n303-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 303 that T-230 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-230 |
+| `E-amundsk-755-n303-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 303 that T-239 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt and replay/sharp-controls.json | T-239 |
 | `E-evand-703-n270-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 270 that T-224 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-224 |
 | `E-evand-680-n183-primary-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 1 of 1: the original n183 rational certificate, all 183 squares, every wall and all 16653 unordered pairs in each of three jobs through both maintained routes; positive plus two sensitive invalid controls | T-220 |
 | `E-couzo-678-filtered-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 2 of 2: the certificates at n = 204 and 260 that T-223 cites: every wall and every pair whose centres are closer than sqrt 2 decided by both routes, the others excluded by the filter's lemma, and every pair decided again by the all-pairs kernel; the receipt decides all 85 rows of the issue | T-223 |
 | `E-evand-regularized-1020-exact-feasibility` | replayed here | independently re-implemented | full, 4 of 4: the certificates at n = 204, 227, 229 and 260 that T-225 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-225 |
+| `E-couzo-670-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 204 that T-226 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-226 |
+| `E-couzo-672-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 2 of 2: the certificates at n = 227 and 229 that T-227 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-227 |
+| `E-couzo-675-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 204 that T-228 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-228 |
+| `E-mishapolk-719-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 2 of 2: the certificates at n = 105 and 204 that T-229 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-229 |
+| `E-mishapolk-n204-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 204 that T-231 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-231 |
+| `E-couzo-763-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 2 of 2: the two certificates at n = 268 and 303 that T-240 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-240 |
+| `E-couzo-n304-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 304 that T-241 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-241 |
+| `E-evand-kaggle-descents-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 2 of 2: the two certificates at n = 268 and 304 that T-242 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-242 |
 
 ### `V-check-n11-final-composition`
 
@@ -2685,6 +2936,7 @@ Decides a measure-capture lower-bound certificate of format T, M or L on the 201
 | `E-wand125-fine-net-n68-853-sqverify-fast-replay` | replayed here | re-implemented, sharing named components | full, 201 of 201: complete legal core-centre domains at every declared-net direction | T-205 |
 | `E-wand125-fine-net-n84-94225-sqverify-fast-replay` | replayed here | re-implemented, sharing named components | full, 201 of 201: complete legal core-centre domains at every declared-net direction | T-206 |
 | `E-wand125-fine-net-n85-9475-sqverify-fast-replay` | replayed here | re-implemented, sharing named components | full, 201 of 201: complete legal core-centre domains at every declared-net direction | T-207 |
+| `E-wand125-fine-net-n31-59775-sqverify-fast-replay` | replayed here | re-implemented, sharing named components | full, 2,073 of 2,073: complete legal core-centre domains at every declared-net direction | T-232 |
 
 ### `V-replay-chelokot-lean`
 
@@ -2974,10 +3226,20 @@ Binds all three complete source certificates and all nine full deciding inputs/n
 | `E-evand-664-n271-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 271 that T-219 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-219 |
 | `E-evand-689-n308-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 308 that T-221 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-221 |
 | `E-evand-694-n154-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 154 that T-222 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-222 |
+| `E-evand-728-n303-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 303 that T-230 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-230 |
+| `E-amundsk-755-n303-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 303 that T-239 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt and replay/sharp-controls.json | T-239 |
 | `E-evand-703-n270-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 270 that T-224 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-224 |
 | `E-evand-680-n183-primary-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 1 of 1: the original n183 rational certificate, all 183 squares, every wall and all 16653 unordered pairs in each of three jobs through both maintained routes; positive plus two sensitive invalid controls | T-220 |
 | `E-couzo-678-filtered-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 2 of 2: the certificates at n = 204 and 260 that T-223 cites: every wall and every pair whose centres are closer than sqrt 2 decided by both routes, the others excluded by the filter's lemma, and every pair decided again by the all-pairs kernel; the receipt decides all 85 rows of the issue | T-223 |
 | `E-evand-regularized-1020-exact-feasibility` | replayed here | independently re-implemented | full, 4 of 4: the certificates at n = 204, 227, 229 and 260 that T-225 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-225 |
+| `E-couzo-670-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 204 that T-226 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-226 |
+| `E-couzo-672-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 2 of 2: the certificates at n = 227 and 229 that T-227 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-227 |
+| `E-couzo-675-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 204 that T-228 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-228 |
+| `E-mishapolk-719-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 2 of 2: the certificates at n = 105 and 204 that T-229 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-229 |
+| `E-mishapolk-n204-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 204 that T-231 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-231 |
+| `E-couzo-763-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 2 of 2: the two certificates at n = 268 and 303 that T-240 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-240 |
+| `E-couzo-n304-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 304 that T-241 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-241 |
+| `E-evand-kaggle-descents-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 2 of 2: the two certificates at n = 268 and 304 that T-242 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-242 |
 
 ### `V-algebraic-witness-reports`
 
@@ -3056,9 +3318,19 @@ Imports a report of rational upper-bound certificates by another author from its
 | `E-evand-664-n271-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 271 that T-219 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-219 |
 | `E-evand-689-n308-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 308 that T-221 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-221 |
 | `E-evand-694-n154-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 154 that T-222 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-222 |
+| `E-evand-728-n303-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 303 that T-230 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-230 |
+| `E-amundsk-755-n303-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 303 that T-239 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt and replay/sharp-controls.json | T-239 |
 | `E-evand-703-n270-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 270 that T-224 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-224 |
 | `E-evand-680-n183-primary-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 1 of 1: the original n183 rational certificate, all 183 squares, every wall and all 16653 unordered pairs in each of three jobs through both maintained routes; positive plus two sensitive invalid controls | T-220 |
 | `E-evand-regularized-1020-exact-feasibility` | replayed here | independently re-implemented | full, 4 of 4: the certificates at n = 204, 227, 229 and 260 that T-225 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-225 |
+| `E-couzo-670-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 204 that T-226 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-226 |
+| `E-couzo-672-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 2 of 2: the certificates at n = 227 and 229 that T-227 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-227 |
+| `E-couzo-675-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 204 that T-228 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-228 |
+| `E-mishapolk-719-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 2 of 2: the certificates at n = 105 and 204 that T-229 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-229 |
+| `E-mishapolk-n204-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 204 that T-231 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-231 |
+| `E-couzo-763-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 2 of 2: the two certificates at n = 268 and 303 that T-240 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-240 |
+| `E-couzo-n304-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 304 that T-241 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-241 |
+| `E-evand-kaggle-descents-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 2 of 2: the two certificates at n = 268 and 304 that T-242 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-242 |
 
 ### `V-rehwaldt-n68-verify`
 
@@ -3238,7 +3510,9 @@ Decides a square or rectangle certificate in Evan Daniel's text format strict-va
 - Independence: its authors read mathematics, specification, certificate-format, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the mathematical review lane of the fang-theorem intake, strong tier, max reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, The source states that its search, verifier and bundle were written with Claude (Anthropic). This program was written by a Claude agent prompted separately, in files of its own, from the README's statement of the certificate convention and the separating-axis theorem; the source's checkers verify.py, tools/rectcheck.py and verify_cert.py were not read.
 - Note: The mathematical review of 14 October 2026 wrote it and ran it on the six rectangles, the 25 square pieces, the 76 inventory certificates (six retained, 70 rebuilt byte-identical to the pinned files) and the fourteen direct certificates, all strict-valid, with the all-pairs route agreeing on R, R', 932 and 380 and the two controls refused. Kept as run in the packet's review/, with every output.
 
-No evidence entry names it yet.
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-fang-excess-pieces-exact-replay` | replayed here | independently re-implemented, clean-room | full, 18 of 18: the 18 pieces of the note's Propositions 4 and 5, theorem/PIECES.md's role theorem: the rectangles R and R', the twelve bases of n^2 - n + 1 squares for n = 15 to 26 and the four of m^2 - m squares for m = 11 to 14, every corner and every pair decided exactly in its open box | T-163 |
 
 ### `V-fang-review-glue-rebuild`
 
@@ -3412,17 +3686,63 @@ Decides one interval of the closed-form certificate from SPEC.md: the input dige
 
 ### `V-wand125-sqverify-continuous`
 
-**sqverify-fast --continuous, the source's sqverify_continuous v4** · wand125, adapting this repository's sqverify_fast · external · decides · Rust · interval-certified, exact-algebraic
+**sqverify-fast --continuous, the source's sqverify_continuous (v3 and v4)** · wand125, adapting this repository's sqverify_fast · external · decides · Rust · interval-certified, exact-algebraic
 
-The source's copy of this repository's sqverify_fast with a continuous-angle mode (src/slab.rs): for a format M candidate, a core side B and a threshold tau, it covers t = tan(theta/2) over [10^-7, 83/200] in 86 root ranges by outward-rounded binary64 branch and bound over (u, v, t), with concave-section bounds and translation derivatives, and the band [0, 10^-7] by the crate's exact axis sweep at a side A with A W(10^-7) <= B, and checks n tau > M exactly.
+The source's copy of this repository's sqverify_fast with a continuous-angle mode (src/slab.rs): for a candidate, a core side B and a threshold tau, it covers t = tan(theta/2) over [10^-7, 83/200] in 86 root ranges by outward-rounded binary64 branch and bound over (u, v, t), with interval-only classification, concave-section bounds at the path centre and translation derivatives, and the band [0, 10^-7] by the crate's exact axis sweep at a side A with A W(10^-7) <= B, and checks n tau > M exactly, concluding s(n) > L/B.
 
-- Source: [`packing/resources/web/wand125-continuous-n28-2026-10-15/square-packing/problems/square-lower-bounds/certificates/continuous_n28_L5745/bundle.json`](../../packing/resources/web/wand125-continuous-n28-2026-10-15/square-packing/problems/square-lower-bounds/certificates/continuous_n28_L5745/bundle.json)
-- Versions run: revision `d4a19815e2b0` (tools/sqverify_continuous at d4a1981, byte for byte the asset's check1/src/sqverify_continuous_v4.tgz (113,578 bytes, SHA-256 720869758013ac3cc86343f0603817ee36298be7696e40bb1d164a511f383a08), whose build reports source_sha256 619b3c00bd918b329b4141c24ee30b027af7f88b86bcf2886e3c18855a61c7f5; built here with rustc 1.98.0 (cargo build --release --locked) into 31936c4dcfac398b729990f51820fd5a5b70e23a2e809b71de1ca5864e6de618. Neither retained nor yet reviewed (think-xzob, #533).)
-- Note: It keeps this repository's interval.rs, exact.rs, axis.rs, oracle.rs and rotated.rs byte for byte; its certificate.rs is the source's proof_net admission. Its author read Guzhou0806's kernel before writing the mode, so it is independent code, not an independent method (think-xzob).
+- Source: [`packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/src/slab.rs`](../../packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/src/slab.rs), [`packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/src/main.rs`](../../packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/src/main.rs), [`packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/src/certificate.rs`](../../packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/src/certificate.rs), [`packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/src/lib.rs`](../../packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/src/lib.rs), [`packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/src/interval.rs`](../../packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/src/interval.rs), [`packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/src/exact.rs`](../../packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/src/exact.rs), [`packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/src/axis.rs`](../../packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/src/axis.rs), [`packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/src/oracle.rs`](../../packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/src/oracle.rs), [`packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/Cargo.toml`](../../packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/Cargo.toml), [`packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/Cargo.lock`](../../packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/Cargo.lock), [`packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/build.rs`](../../packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/build.rs), [`packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/CONTINUOUS.md`](../../packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/CONTINUOUS.md), [`packing/resources/web/wand125-sqverify-continuous-v3-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/src/slab.rs`](../../packing/resources/web/wand125-sqverify-continuous-v3-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/src/slab.rs), [`packing/resources/web/wand125-sqverify-continuous-v3-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/src/main.rs`](../../packing/resources/web/wand125-sqverify-continuous-v3-2026-10-12/square-packing/tools/sqverify_continuous/sqverify_fast/src/main.rs)
+- Versions run: revision `f30cc2cf345a` (v3, source_sha256 1266a8b90f9a355d74772e211a7b9a52d0236b0d33cc4113d2f897d8a1044f33 by build.rs's rule, recomputed here from the v3 packet and the v4 packet's byte-identical files: the version the source's n = 40 examples ran (README.md, no run output published). Not built here; its run_root and every function it calls are v4's text (the review's custody receipt).); revision `d4a19815e2b0` (v4, tools/sqverify_continuous at d4a1981, the same tree at 8530baf and at the head e48de243, and byte for byte the n = 28 asset's check1/src/sqverify_continuous_v4.tgz (113,578 bytes, SHA-256 720869758013ac3cc86343f0603817ee36298be7696e40bb1d164a511f383a08), whose build reports source_sha256 619b3c00bd918b329b4141c24ee30b027af7f88b86bcf2886e3c18855a61c7f5; built here with rustc 1.98.0 (cargo build --release --locked) on 15 and on 23 October into 31936c4dcfac398b729990f51820fd5a5b70e23a2e809b71de1ca5864e6de618.)
+- What its authors read and used: [`packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/PROVENANCE.md`](../../packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/square-packing/tools/sqverify_continuous/PROVENANCE.md)
+- Independence: its authors read mathematics, certificate-format, producer-code; it shares none of the producer’s code; written by Hiroaki Hosono (wand125); Claude (Anthropic) (named co-author of the commits that add it; its role, tier and reasoning are not stated), with its own code; authorship in common with the producer’s: unknown, Recorded against the producer of T-145 and T-157, Guzhou0806, whose kernel verifier/continuous_pose.cpp this mode's author read while reviewing T-145 before writing it (PROVENANCE.md): no file or line in common (Rust against C++), the same method, and the same twelve knot expressions in the same order, which only set accuracy (measured by the 23 October review, docs/project/reviews/review-2026-10-23-wand125-sqverify-continuous-soundness.md, section 10). Guzhou0806's AI assistance is disclosed without a system family, so the overlap of authorship is unknown. For T-192 the mode is the producer's own checker, and a run of it is reproduced with the producer's code. Against this repository's sqverify_fast it keeps interval.rs, exact.rs, axis.rs, oracle.rs and rotated.rs byte for byte and a certificate.rs that adds a proof_net reading to the 3 October source (657ef08f).
+- Note: Reviewed for soundness on 23 October 2026 (docs/project/reviews/review-2026-10-23-wand125-sqverify-continuous-soundness.md): lemmas C1 to C6 re-derived, slab.rs and the continuous path read line by line, no blocking or major finding; minor SC-1 (--resume counts lines from any file with the public run_key) and SC-2 (the y-derivative enclosure is untested). Its decisions share this repository's interval arithmetic, exact enclosure, admission, D4 expansion and exact axis sweep with V-sqverify-fast. Independent code, not an independent method.
 
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
+| `E-n040-wand125-sqverify-continuous-6715-report` | reported by a third party, not replayed here | independently re-implemented after reading the producer’s code | full: root ranges of t and the near-axis patch | T-145 |
+| `E-n040-wand125-sqverify-continuous-6718-report` | reported by a third party, not replayed here | independently re-implemented after reading the producer’s code | full: root ranges of t and the near-axis patch | T-157 |
 | `E-wand125-continuous-n28-5745-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-192 |
+
+### `V-sqverify-continuous-review-premises`
+
+**premises.py, candidates.py and custody.py, the 23 October review's exact checks of sqverify_continuous's premises, certificates and custody** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
+
+Decides in exact rationals, for T-145's, T-157's and T-192's parameters and a control's, every premise of the continuous mode's argument (the counting margin, L^2 > 2 B^2, the ends of t, the default near-axis side and its containment margin, the 86 default root ranges and their binary64 enclosures) and recomputes T-192's run_key against the source's two summaries; builds the n = 40 candidates from this repository's copies of the two densities in the source's row order and decides their and T-192's certificate facts; and records the verifier's custody (source digests by build.rs's rule, Git blobs against this repository's crate, the functions v4 changes). It decides no coverage.
+
+- Source: [`packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/review/programs/premises.py`](../../packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/review/programs/premises.py), [`packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/review/programs/candidates.py`](../../packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/review/programs/candidates.py), [`packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/review/programs/custody.py`](../../packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/review/programs/custody.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/review/README.md`](../../packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/review/README.md)
+- Independence: its authors read mathematics, specification, certificate-format, producer-code, producer-output; it shares the default cut, near-axis side and run_key rules of main.rs and slab.rs, re-typed to recompute what the source prints; written by Claude (Anthropic) (the stage 4 validation lane c-review-sqvc-1023 of the 23 October 2026 intake pass (think-xzob), tier tbd-strong-max, maximum reasoning), with its own prompt; authorship in common with the producer’s: system-family, Written after reading the source of wand125's sqverify_continuous, whose commits name Claude as co-author, and this repository's copies of the modules it reuses; for T-192 that source is the producer's code. In files of its own, importing nothing of it; it re-types the definitions its shares name, to test or recompute them, so its code is not separate in the registry's sense.
+- Note: Kept in the review's packet with its receipts; cited by the review and by no evidence entry, since what it decides is premises that the registered audits and the review already carry.
+
+No evidence entry names it yet.
+
+### `V-sqverify-continuous-review-probe`
+
+**bounds_probe.py and probe_suite.py, the 23 October review's adversarial probe of sqverify_continuous's box bound** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
+
+Holds a transcription of slab.rs's box bound (angles, pose, classify, section_lo, area_lo, chord, gradient and bound, over interval.rs's directed steps) to an exact rational oracle written here, Sutherland-Hodgman clipping of a rationally rotated square, at poses sampled in adversarial boxes: lemmas C2 to C5's enclosures, both gradient components and the whole-box bound; and shows the probe's power by ten deliberate mutations of the transcription. A diagnostic of the bound's implementation; it decides no coverage.
+
+- Source: [`packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/review/programs/bounds_probe.py`](../../packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/review/programs/bounds_probe.py), [`packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/review/programs/probe_suite.py`](../../packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/review/programs/probe_suite.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/review/README.md`](../../packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/review/README.md)
+- Independence: its authors read mathematics, specification, certificate-format, producer-code, producer-output; it shares a transcription of slab.rs's box bound and interval.rs's directed steps, which is what it tests; written by Claude (Anthropic) (the stage 4 validation lane c-review-sqvc-1023 of the 23 October 2026 intake pass (think-xzob), tier tbd-strong-max, maximum reasoning), with its own prompt; authorship in common with the producer’s: system-family, Written after reading the source of wand125's sqverify_continuous, whose commits name Claude as co-author, and this repository's copies of the modules it reuses; for T-192 that source is the producer's code. In files of its own, importing nothing of it; it re-types the definitions its shares name, to test or recompute them, so its code is not separate in the registry's sense.
+- Note: Kept in the review's packet with its receipt; cited by the review and by no evidence entry. The oracle is its own; the transcription is the thing under test, so a misreading the transcription shares with slab.rs is outside what it can find.
+
+No evidence entry names it yet.
+
+### `V-sqverify-continuous-review-judge`
+
+**judge_run.py, the 23 October review's exact judge of one sqverify-fast --continuous run** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
+
+Holds one run's output to exact arithmetic: the premises line to the review's values, every root line to its default cut and, when verified, to nodes = 2 leaves - 1 and a least bound at least tau, the summary to its lines, no inherited line, and every refusal witness to an exact re-evaluation (the pose's legality decided exactly and its capture computed with the probe's oracle and compared with the run's exact_capture). It judged the review's toy and control runs; it decides no claim.
+
+- Source: [`packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/review/programs/judge_run.py`](../../packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/review/programs/judge_run.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/review/README.md`](../../packing/resources/web/wand125-sqverify-continuous-v4-2026-10-12/review/README.md)
+- Independence: its authors read mathematics, specification, certificate-format, producer-code, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 validation lane c-review-sqvc-1023 of the 23 October 2026 intake pass (think-xzob), tier tbd-strong-max, maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, Written after reading the source of wand125's sqverify_continuous, whose commits name Claude as co-author, and this repository's copies of the modules it reuses; for T-192 that source is the producer's code. In files of its own, importing and copying nothing of it.
+- Note: Kept in the review's packet with its receipts; cited by the review and by no evidence entry. Written to judge a replay of the mode as well (the review's section 11).
+
+No evidence entry names it yet.
 
 ### `V-wand125-contpose-check3`
 
@@ -3676,6 +3996,9 @@ Admits retained source custody, declared members and manifest bytes; decides no 
 
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
+| `E-evand-669-n155-source-checker-replay` | replayed here | reproduced with the producer’s code | full, 2 of 2: the certificate at n = 155 that T-197 cites and its same-side display view, each with its four controls | T-197 |
+| `E-evand-674-n229-opening-source-checker-replay` | replayed here | reproduced with the producer’s code | full, 1 of 1: the certificate at n = 229 that T-198 cites, with its four controls | T-198 |
+| `E-evand-674-n229-update-source-checker-replay` | replayed here | reproduced with the producer’s code | full, 1 of 1: the certificate at n = 229 that T-199 cites, with its four controls | T-199 |
 | `E-evand-680-n183-primary-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 1 of 1: the original n183 rational certificate, all 183 squares, every wall and all 16653 unordered pairs in each of three jobs through both maintained routes; positive plus two sensitive invalid controls | T-220 |
 | `E-couzo-678-filtered-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 2 of 2: the certificates at n = 204 and 260 that T-223 cites: every wall and every pair whose centres are closer than sqrt 2 decided by both routes, the others excluded by the filter's lemma, and every pair decided again by the all-pairs kernel; the receipt decides all 85 rows of the issue | T-223 |
 | `E-couzo-678-source-checker-replay` | replayed here | reproduced with the producer’s code | full, 2 of 2: the certificates at n = 204 and 260 that T-223 cites, each with its four controls; the receipt holds all 85 rows | T-223 |
@@ -3693,6 +4016,163 @@ Compares three n = 260 packings, T-196's, the evand 14a9af8 seed and issue 678's
 - Note: Measures the identity statement of issue 678's comment of 19 October; no evidence entry cites it. Its log is the records lane's rerun of 20 October 2026, unchanged.
 
 No evidence entry names it yet.
+
+### `V-evand-gradec-review-compare`
+
+**compare_certificates.py** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
+
+Compares check_theorem_c.py's receipts with the source's 233 published n-N.gradec.json, read in memory from gradec-233.tar.zst: the row set, the rank of L0, dim F, dim W, the moving squares and the number of load-bearing squares exactly, and the interior margin and least multiplier numerically. It decides nothing about a packing.
+
+- Source: [`packing/resources/web/evand-exact-data-2026-10-12/review/compare_certificates.py`](../../packing/resources/web/evand-exact-data-2026-10-12/review/compare_certificates.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-23-evand-grade-c-theorem-c.md`](../../docs/project/reviews/review-2026-10-23-evand-grade-c-theorem-c.md)
+- Independence: its authors read certificate-format, producer-code, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review lane of the #545 import (c-review-thmc-1023, think-7scz), strong sub-agent tier (tbd-strong-max), maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, The source's CREDITS.md says its work was produced by Claude (Anthropic) under human direction, and its commits credit Claude as co-author. Written by a Claude agent prompted separately from the source and from the import and records lanes, in a file of its own that imports none of the source.
+- Note: Written and run on 23 October 2026 by the grade-C review (think-7scz); its output is receipts/review-compare-233.json in the evand-exact-data-2026-10-12 packet. No evidence entry cites it until the grade-C claim is registered, as for V-evand-gradec-review-check.
+
+No evidence entry names it yet.
+
+### `V-evand-gradec-review-derivatives`
+
+**test_derivatives.py** · Squares Project (Levy) · first-party · checks premises · Python · numerical-f64
+
+Tests the closed-form gradients and Hessians of the rows that check_theorem_c.py uses against central differences of the row functions written from their definitions, in binary64, on every row of fifteen grade-C configurations. It decides nothing about a packing.
+
+- Source: [`packing/resources/web/evand-exact-data-2026-10-12/review/test_derivatives.py`](../../packing/resources/web/evand-exact-data-2026-10-12/review/test_derivatives.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-23-evand-grade-c-theorem-c.md`](../../docs/project/reviews/review-2026-10-23-evand-grade-c-theorem-c.md)
+- Independence: its authors read mathematics, certificate-format, producer-code, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review lane of the #545 import (c-review-thmc-1023, think-7scz), strong sub-agent tier (tbd-strong-max), maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, The source's CREDITS.md says its work was produced by Claude (Anthropic) under human direction, and its commits credit Claude as co-author. Written by a Claude agent prompted separately from the source and from the import and records lanes, in a file of its own that imports none of the source.
+- Note: Written and run on 23 October 2026 by the grade-C review (think-7scz); its output is receipts/review-derivatives.json in the evand-exact-data-2026-10-12 packet. No evidence entry cites it until the grade-C claim is registered, as for V-evand-gradec-review-check.
+
+No evidence entry names it yet.
+
+### `V-wand125-446-review-premises`
+
+**premises.py, custody.py, crate_identity.py and net_cover.py (with t233lib.py)** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
+
+Recomputes, apart from the crate, the tools and the source, every exact premise of a format M candidate on its declared net, re-derives the release packet's custody records from the bytes, compares the source's archived verifier with this repository's crate by file digest, and checks the net's orientation coverage by direct exact geometry.
+
+- Source: [`packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/programs/t233lib.py`](../../packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/programs/t233lib.py), [`packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/programs/premises.py`](../../packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/programs/premises.py), [`packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/programs/custody.py`](../../packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/programs/custody.py), [`packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/programs/crate_identity.py`](../../packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/programs/crate_identity.py), [`packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/programs/net_cover.py`](../../packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/programs/net_cover.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/README.md`](../../packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/README.md)
+- Independence: its authors read mathematics, specification, certificate-format, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review lane c-review-t233-math of the 23 October intake pass (think-bwis), tbd-strong-max tier, maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, The source's commits 7400660, 61e37d5 and bf85d6b carry Co-Authored-By trailers naming Claude, and the crate the source adapted was written by a Claude agent of this project (lane W2). Written in files of their own that import nothing from the crate, the tools or the source.
+- Note: Written and run on 23 October 2026 by the stage 4 review of T-233; kept in the release packet's review/review-2026-10-23/ with its README, which records each program's SHA-256 as it ran, and receipts.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-wand125-fine-net-446-review-premises` | audited here | not applicable | full: the exact premises of each of the four candidates: custody, the claim, the field order, the measure and its D4 expansion, lemma N0 (a) to (e), the sharp extent, the last bin, the per-bin domains, F3's caps and the semantic digest; the net's coverage at 10,363 exact orientations; the archived verifier's files against this repository's crate by digest | - |
+
+### `V-wand125-446-review-axis-decision`
+
+**axis_decide.py (with t233lib.py)** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic, interval-certified
+
+Decides net index 0 of a format M rectangle measure completely: the least capture of the axis-parallel core over the per-bin quadrant is a least value over the event grid's vertices, evaluated from exact int64 overlaps by one binary64 matrix product under an a priori error bound and compared with the threshold exactly, the smallest vertices again in fractions.
+
+- Source: [`packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/programs/axis_decide.py`](../../packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/programs/axis_decide.py), [`packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/programs/t233lib.py`](../../packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/programs/t233lib.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/README.md`](../../packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/README.md)
+- Independence: its authors read mathematics, specification, certificate-format, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review lane c-review-t233-math of the 23 October intake pass (think-bwis), tbd-strong-max tier, maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, The source's commits 7400660, 61e37d5 and bf85d6b carry Co-Authored-By trailers naming Claude, and the crate the source adapted was written by a Claude agent of this project (lane W2). Written in files of their own that import nothing from the crate, the tools or the source.
+- Note: Written and run on 23 October 2026 by the stage 4 review of T-233; kept in the release packet's review/review-2026-10-23/ with its README, which records each program's SHA-256 as it ran, and receipts.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-wand125-fine-net-446-review-axis-direction` | replayed here | independently re-implemented, clean-room | sample, 4 of 8,292: net directions (index 0 of each of the four certificates, decided over its whole per-bin quadrant) | - |
+
+### `V-wand125-446-review-exact-capture`
+
+**t233lib.exact_capture, driven by receipts_check.py and direction_sample.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+The exact mass a closed core at a given centre and net angle captures from a format M measure, by Sutherland-Hodgman clipping of the core against each D4 image in fractions. Decides the capture at the poses it evaluates: every least-bound box centre and axis argmin of the source's runs, the source's control witnesses (equal to its exact values as fractions at 124 of 124 oblique poses), and the end points of an independent search at 32 sampled directions per certificate.
+
+- Source: [`packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/programs/t233lib.py`](../../packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/programs/t233lib.py), [`packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/programs/receipts_check.py`](../../packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/programs/receipts_check.py), [`packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/programs/direction_sample.py`](../../packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/programs/direction_sample.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/README.md`](../../packing/resources/web/wand125-fine-net-lower-bounds-446-release-2026-10-08/review/review-2026-10-23/README.md)
+- Independence: its authors read mathematics, specification, certificate-format, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review lane c-review-t233-math of the 23 October intake pass (think-bwis), tbd-strong-max tier, maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, The source's commits 7400660, 61e37d5 and bf85d6b carry Co-Authored-By trailers naming Claude, and the crate the source adapted was written by a Claude agent of this project (lane W2). Written in files of their own that import nothing from the crate, the tools or the source.
+- Note: Written and run on 23 October 2026 by the stage 4 review of T-233; kept in the release packet's review/review-2026-10-23/ with its README, which records each program's SHA-256 as it ran, and receipts.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-wand125-fine-net-446-review-captures` | audited here | not applicable | full, 10,596 of 10,596: exact captures at the listed poses only: every rotated direction's least-bound box centre (8,288), the axis argmins (4), the 197/200 control witnesses (128, 124 equal to the source's fractions) and the end points of the searches at 128 sampled directions; no direction's domain | - |
+
+### `V-review-1023-n31-premises`
+
+**premises.py and net.py, with n31_exact.py** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
+
+Recomputes, apart from the crate, the source and the tools, every exact premise of mixed_n31_L59775 (identity, claim, the 536 rows inside the container with positive masses summing exactly to 3099999/100000, the merged D4 expansion's 4,244 rows, its exact integral and invariance under all eight symmetries, lemma N0's (a) to (e), the last bin, the per-bin domains), and re-derives the reduction from a packing to the capture condition node by node: the core strictly inside at both ends of all 2,073 bins with exact z, the monotonicity of r at every a_j, and the quadrant's four quarter-turn images tiling every node's domain.
+
+- Source: [`packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/programs/n31_exact.py`](../../packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/programs/n31_exact.py), [`packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/programs/premises.py`](../../packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/programs/premises.py), [`packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/programs/net.py`](../../packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/programs/net.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-23-wand125-n31-fine-net.md`](../../docs/project/reviews/review-2026-10-23-wand125-n31-fine-net.md)
+- Independence: its authors read mathematics, specification, certificate-format, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review lane of think-wop1 (think-oc25), tbd-strong-max tier, maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, The source's commit names Claude as co-author. Written by a Claude agent prompted separately from the source and from the records lane, in files of its own that import nothing of the source, the crate or devtools.
+- Note: Written and run on 23 October 2026 by the stage 4 review of T-232; kept in the n31 packet's review/review-2026-10-23/ with its README and outputs, whose program-digests.sha256 records each program's SHA-256 as it ran.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-wand125-fine-net-n31-59775-review-sample` | replayed here | independently re-implemented, clean-room | sample, 122 of 2,073: net directions, each decided over its whole quadrant of centres | - |
+
+### `V-review-1023-n31-capture`
+
+**capture.py, with n31_geometry.py, n31_exact.py and n31_brute.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+Decides the capture condition of a format M measure on a declared net at the directions it is given, over the whole quadrant [L/2, L - r(a_j)]^2 of centres: a branch and bound on the kernel-and-slab cell bound (exact to first order in the cell's size), chosen by a float64 pass and decided leaf by leaf in exact integers (densities rounded down to 2^-64, the domain's upper end rounded up), with the leaves checked to partition the quadrant. Refuses with an exact witness, by Sutherland-Hodgman clipping in Fractions, when the measure fails. Ran at the review's stratified sample of 122 directions of mixed_n31_L59775 and on its mutants.
+
+- Source: [`packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/programs/capture.py`](../../packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/programs/capture.py), [`packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/programs/n31_geometry.py`](../../packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/programs/n31_geometry.py), [`packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/programs/n31_exact.py`](../../packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/programs/n31_exact.py), [`packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/programs/n31_brute.py`](../../packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/programs/n31_brute.py), [`packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/programs/geometry_selftest.py`](../../packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/programs/geometry_selftest.py), [`packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/programs/sample_plan.py`](../../packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/programs/sample_plan.py), [`packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/programs/bound_selftest.py`](../../packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/programs/bound_selftest.py), [`packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/programs/run_after_sample.sh`](../../packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/programs/run_after_sample.sh)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-23-wand125-n31-fine-net.md`](../../docs/project/reviews/review-2026-10-23-wand125-n31-fine-net.md)
+- Independence: its authors read mathematics, specification, certificate-format, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review lane of think-wop1 (think-oc25), tbd-strong-max tier, maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, The source's commit names Claude as co-author. Written by a Claude agent prompted separately from the source and from the records lane, in files of its own that import nothing of the source, the crate or devtools.
+- Note: Written and run on 23 October 2026 by the stage 4 review of T-232; kept in the n31 packet's review/review-2026-10-23/ with its README and outputs, whose program-digests.sha256 records each program's SHA-256 as it ran.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-wand125-fine-net-n31-59775-review-sample` | replayed here | independently re-implemented, clean-room | sample, 122 of 2,073: net directions, each decided over its whole quadrant of centres | - |
+
+### `V-kaggle-268-304-review-check`
+
+**t241_t242_exact.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+The 24 October review's standard-library exact checker of the three certificates T-241 and T-242 cite (Francisco Couzo's 304 at fa6237e, Evan Daniel's 268 and 304 at 8a8879a), with a reader of its own that admits only integer and p/q literals and the stated row count, deciding each certificate in Fraction arithmetic by two methods: separating axes (every corner against the walls, and every pair whose centres lie within 2 of each other, chosen exactly, on the four edge normals; the rest disjoint by their circumscribed discs) and clipped areas (Sutherland-Hodgman: each square clipped to the box keeps area 1, each near pair's intersection has area 0), with a third pass of separating axes over every pair. It checks each file's SHA-256 against the packets' pins, its header side against the register's claim and the 12-place prints, and the register's stated margins; it decides nine hand-built packings and twelve controls per certificate: the side at far-wall contact (accepted), 1e-30 past it and at twice the clearance; the least-gap pair at contact (accepted) and 1e-30 past it; a square moved 1e-3 toward its neighbour, enlarged past its pair and past its wall, duplicated, and moved past its near wall; every centre drawn in by the factor 1 - 1e-9; and a square turned by about 2e-9 radians.
+
+- Source: [`packing/resources/web/evand-kaggle-descents-2026-10-24/review/review-2026-10-24/programs/t241_t242_exact.py`](../../packing/resources/web/evand-kaggle-descents-2026-10-24/review/review-2026-10-24/programs/t241_t242_exact.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-24-couzo-evand-n268-n304.md`](../../docs/project/reviews/review-2026-10-24-couzo-evand-n268-n304.md)
+- Independence: its authors read mathematics, certificate-format, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review lane of T-241 and T-242 (c-review-t241-t242-math, think-vm3m), strongest sub-agent tier, maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, Couzo's commits fa6237e, 964ee2b and efef7d1 and Daniel's 8a8879a each carry a Co-Authored-By trailer naming Claude, and Daniel's CREDITS.md says the repository's work was produced by Claude (Anthropic) under human direction. The review's checker is Claude's too, written from a prompt of its own in a file that imports nothing from this repository or the sources, from the mathematics and the certificates' header lines. Its author never read Couzo's verify_bound_certificate.py, sqpack/verify.py, Daniel's verify_cert.py or verify_cert2.py, the maintained routes or sharp_controls.py. Before it decided, its author had read the register's and the packets' summaries of the producers' stated outputs (Daniel's JSON clearances, Couzo's pairs tested); it read those outputs themselves, and the packets' sharp-control receipts, after it decided. It shares the separating-axis method with the maintained routes and the sources' checkers; its clipped area is a second method.
+- Note: Written and run on 24 October 2026 by the review (SHA-256 a4d32ac9d0e3b0dcca4a5886e12bf6ce8360c14470601fbb1572b35b427f5da9 as run); kept in the evand-kaggle-descents-2026-10-24 packet's review/review-2026-10-24/ with its README and receipt outputs/t241_t242_exact.json, whose outputs/program-digests.sha256 records each program's SHA-256 as it ran. t241_t242_identity.py, t241_t242_credits.py, t241_t242_receipts.py, t241_t242_sense.py and the two shell scripts, kept beside it, decide nothing and are not registered.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-couzo-n304-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 1 of 1: the certificate at n = 304 that T-241 cites, every wall and all 46,056 pairs by separating axes, and the 1,170 pairs within 2 by clipped area as well | T-241 |
+| `E-evand-kaggle-descents-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 2 of 2: the two certificates T-242 cites, at n = 268 and 304, every wall and every pair by separating axes, and every pair within 2 by clipped area as well | T-242 |
+
+### `V-review-1023-n31-poses`
+
+**source_log_points.py, with n31_brute.py and n31_exact.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+Decides the exact capture at single poses the source's logs name: the axis row's argmin, two points of each of the twelve tightest rows' least-bound boxes, and every control witness of the 197/200 mutant, against the logged bounds and exact rationals. Decides those poses only, and no coverage.
+
+- Source: [`packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/programs/source_log_points.py`](../../packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/programs/source_log_points.py), [`packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/programs/n31_brute.py`](../../packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/programs/n31_brute.py), [`packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/programs/n31_exact.py`](../../packing/resources/web/wand125-fine-net-n31-2026-10-11/review/review-2026-10-23/programs/n31_exact.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-23-wand125-n31-fine-net.md`](../../docs/project/reviews/review-2026-10-23-wand125-n31-fine-net.md)
+- Independence: its authors read mathematics, specification, certificate-format, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review lane of think-wop1 (think-oc25), tbd-strong-max tier, maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, The source's commit names Claude as co-author. Written by a Claude agent prompted separately from the source and from the records lane, in files of its own that import nothing of the source, the crate or devtools.
+- Note: Written and run on 23 October 2026 by the stage 4 review of T-232; kept in the n31 packet's review/review-2026-10-23/ with its README and outputs, whose program-digests.sha256 records each program's SHA-256 as it ran.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-wand125-fine-net-n31-59775-review-sample` | replayed here | independently re-implemented, clean-room | sample, 122 of 2,073: net directions, each decided over its whole quadrant of centres | - |
+
+### `V-couzo-763-review-check`
+
+**check_certificates.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+The 24 October review's standard-library exact checker of the two certificates T-240 cites, at 268 and 303, with a reader of its own that admits only integer and p/q literals and the stated row count, deciding each certificate on two routes in Fraction arithmetic: route A by the separating-axis test over every pair, with no distance filter, and every corner against the walls; route B by the exact area of each pair's clipped intersection (Sutherland-Hodgman) over the pairs whose centres lie within sqrt(2)(h_i + h_j), the rest disjoint by their circumscribed discs, and each square's support against the walls. It checks each file's digest against the source manifest, its header side against the claim and its 12-place print, and decides ten controls per certificate: a duplicated square, a square moved halfway to its neighbour, the closest pair closed to exact contact (accepted) and 1e-30 past it, that square enlarged by the pair's gap plus 1e-30, the square nearest a wall enlarged by its clearance plus 1e-30, the box at the packing's extent (accepted) and 1e-30 below it, and two malformed texts.
+
+- Source: [`packing/resources/web/couzo-issue763-2026-10-23/review/review-2026-10-24/check_certificates.py`](../../packing/resources/web/couzo-issue763-2026-10-23/review/review-2026-10-24/check_certificates.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-24-couzo-n268-n303.md`](../../docs/project/reviews/review-2026-10-24-couzo-n268-n303.md)
+- Independence: its authors read mathematics, certificate-format; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review lane of #763 at 268 and 303 (c-review-t240-math, think-zjus), strongest sub-agent tier, maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, The source's commit 964ee2b, which issue 763 names, and its parents fa6237e and efef7d1 end with a Co-Authored-By trailer naming Claude; efef7d1's message describes "Codex's reviewed intake", and the source's verify_bound_certificate.py is Evan Daniel's verifier "with modifications by Francisco Couzo with Codex". The review's checker is Claude's, written from a prompt of its own in a file that imports nothing from this repository or the source, from the mathematics and the certificates' format line ("unit squares, centre (x, y), rotation t = tan(theta/2)"). Its author never read the source's checkers, Daniel's checkers, sqpack/verify.py, check_rational_witness_independent, upper_bound_reports or evand_exact_certificates. Route A shares the separating-axis method with the maintained routes and with the source's checkers; route B's clipped area is a second method.
+- Note: Written and run on 24 October 2026 by the review, twice, with receipts identical apart from their CPU times; kept in the couzo-issue763-2026-10-23 packet's review/review-2026-10-24/ with its README and receipts out/check-certificates.json and out/second-run/, whose out/program-digests.sha256 records each program's SHA-256 as it ran. agree.py, identity.py and sides.py, kept beside it, decide nothing and are not registered.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-couzo-763-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 2 of 2: the two certificates T-240 cites, at n = 268 and 303, every wall and every pair on route A, and every pair within the discs on route B | T-240 |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

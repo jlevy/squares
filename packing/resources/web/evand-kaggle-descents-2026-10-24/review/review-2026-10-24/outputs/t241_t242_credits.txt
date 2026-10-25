@@ -1,0 +1,291 @@
+input manifest-fa6237e.json: sha256 31b0caef3c213b9390165520b6676d3003e8236f7c5cf35db1ed5be930f44f30 (matches the pin)
+input manifest-964ee2b (packet, decompressed): sha256 d95f2bd6410abf07d568cbed937afb066de7ed6b01a35f74e6b461ac6a44c5ae (matches the pin)
+first_checker fa6237e: https://github.com/jlevy/squares/blob/37e6757ed4c51a1d93f2f999814c2a5efbe2a223/packing/src/sqpack/verify.py
+first_checker 964ee2b: https://github.com/jlevy/squares/blob/37e6757ed4c51a1d93f2f999814c2a5efbe2a223/packing/src/sqpack/verify.py
+
+manifest fa6237e witnesses/268:
+{
+ "certificate_sha256": "85dbd707746197d3",
+ "credit": "Kirill Tymchishin (kirilltym), Kaggle \"CPU/GPU/MPS EDA+Seam LP\" v4; earlier construction credits in its source notices; earlier seed and construction credits retained in provenance",
+ "category": "Kaggle notebook packing (CPU/GPU/MPS EDA+Seam LP)",
+ "source_provenance": {
+  "category": "public submission",
+  "lineage": [
+   [
+    "kaggle-public-portfolio-20261022",
+    "cuda"
+   ],
+   [
+    "kaggle-push-20261022-a",
+    "kirilltym-seam-lp"
+   ]
+  ],
+  "seed_credit": null,
+  "notebook": "https://www.kaggle.com/code/kirilltym/22-3857-cpu-gpu-mps-eda-seam-lp",
+  "notebook_version": 4,
+  "source_notices": "experiments/kaggle-push-20261022/downloads/kirilltym__22-3857-cpu-gpu-mps-eda-seam-lp/SOURCE_NOTICES.md",
+  "original_credits": "Earlier construction credits retained in the notebook and its source notices.",
+  "witness_dilation": "1+1e-12"
+ },
+ "previous_source": {
+  "certificate_sha256": "733f7a5d1d7f986e",
+  "credit": "PingYou Ltd (BuddenPing)",
+  "category": "native",
+  "construction_credit": [
+   "Francisco Couzo"
+  ]
+ },
+ "previous_reference": {
+  "seed_credit": "PingYou Ltd (BuddenPing)",
+  "source_certificate_sha256": "733f7a5d1d7f986e"
+ }
+}
+
+manifest 964ee2b witnesses/268:
+{
+ "certificate_sha256": "e9833bf26e1bf7e4",
+ "credit": "Francisco Couzo (square-packing live search); refines the packing of Kirill Tymchishin (kirilltym), Kaggle \"CPU/GPU/MPS EDA+Seam LP\" v4; earlier construction credits retained; earlier seed and construction credits retained in provenance",
+ "category": "CT105 live record",
+ "source_provenance": {
+  "category": "own refinement",
+  "lineage": [],
+  "seed_credit": "Kirill Tymchishin (kirilltym), Kaggle \"CPU/GPU/MPS EDA+Seam LP\" v4; earlier construction credits in its source notices; earlier seed and construction credits retained in provenance",
+  "notebook": null,
+  "notebook_version": null,
+  "source_notices": null,
+  "original_credits": "Construction credits of the starting packing are retained.",
+  "witness_dilation": null
+ },
+ "previous_source": {
+  "certificate_sha256": "85dbd707746197d3",
+  "credit": "Kirill Tymchishin (kirilltym), Kaggle \"CPU/GPU/MPS EDA+Seam LP\" v4; earlier construction credits in its source notices; earlier seed and construction credits retained in provenance",
+  "category": "Kaggle notebook packing (CPU/GPU/MPS EDA+Seam LP)",
+  "construction_credit": null
+ },
+ "previous_reference": {
+  "seed_credit": "Kirill Tymchishin (kirilltym), Kaggle \"CPU/GPU/MPS EDA+Seam LP\" v4; earlier construction credits in its source notices; earlier seed and construction credits retained in provenance",
+  "source_certificate_sha256": "85dbd707746197d3"
+ }
+}
+witnesses/268 identical at fa6237e and 964ee2b: False
+
+manifest fa6237e witnesses/303:
+{
+ "certificate_sha256": "22f07a7c318328d2",
+ "credit": "Francisco Couzo (Kaggle push search); refines the packing of Vladislav Lavrentev (lightningv08), Kaggle \"CUDA Packing Search\" v11; earlier construction credits retained; earlier seed and construction credits retained in provenance",
+ "category": "Kaggle push refinement",
+ "source_provenance": {
+  "category": "own refinement",
+  "lineage": [
+   [
+    "kaggle-public-portfolio-20261022",
+    "cuda"
+   ],
+   [
+    "kaggle-push-20261022-h",
+    "cycle"
+   ],
+   [
+    "kaggle-push-20261022-k",
+    "cycle"
+   ],
+   [
+    "kaggle-push-20261022-m",
+    "cycle"
+   ]
+  ],
+  "seed_credit": "Vladislav Lavrentev (lightningv08), Kaggle \"CUDA Packing Search\" v11",
+  "notebook": null,
+  "notebook_version": null,
+  "source_notices": null,
+  "original_credits": "Construction credits of the starting packing are retained.",
+  "witness_dilation": "1+1e-12"
+ },
+ "previous_source": {
+  "certificate_sha256": "929c2acf72ee54a1",
+  "credit": "Evan Daniel; earlier seed and construction credits retained in provenance",
+  "category": "Evan Daniel public certificate",
+  "construction_credit": null
+ },
+ "previous_reference": {
+  "seed_credit": "Evan Daniel; earlier seed and construction credits retained in provenance",
+  "source_certificate_sha256": "929c2acf72ee54a1"
+ }
+}
+
+manifest 964ee2b witnesses/303:
+{
+ "certificate_sha256": "39a150f4cce7e435",
+ "credit": "Francisco Couzo (square-packing live search); refines the packing of Vladislav Lavrentev (lightningv08), Kaggle \"CUDA Packing Search\" v11; earlier construction credits retained; earlier seed and construction credits retained in provenance",
+ "category": "CT105 live record",
+ "source_provenance": {
+  "category": "own refinement",
+  "lineage": [],
+  "seed_credit": "Francisco Couzo (Kaggle push search); refines the packing of Vladislav Lavrentev (lightningv08), Kaggle \"CUDA Packing Search\" v11; earlier construction credits retained; earlier seed and construction credits retained in provenance",
+  "notebook": null,
+  "notebook_version": null,
+  "source_notices": null,
+  "original_credits": "Construction credits of the starting packing are retained.",
+  "witness_dilation": null
+ },
+ "previous_source": {
+  "certificate_sha256": "22f07a7c318328d2",
+  "credit": "Francisco Couzo (Kaggle push search); refines the packing of Vladislav Lavrentev (lightningv08), Kaggle \"CUDA Packing Search\" v11; earlier construction credits retained; earlier seed and construction credits retained in provenance",
+  "category": "Kaggle push refinement",
+  "construction_credit": null
+ },
+ "previous_reference": {
+  "seed_credit": "Francisco Couzo (Kaggle push search); refines the packing of Vladislav Lavrentev (lightningv08), Kaggle \"CUDA Packing Search\" v11; earlier construction credits retained; earlier seed and construction credits retained in provenance",
+  "source_certificate_sha256": "22f07a7c318328d2"
+ }
+}
+witnesses/303 identical at fa6237e and 964ee2b: False
+
+manifest fa6237e witnesses/304:
+{
+ "certificate_sha256": "c8433dd798aef6f1",
+ "credit": "Kirill Tymchishin (kirilltym), Kaggle \"CPU Alternating Reclosure\" v3; earlier construction credits in its source notices; earlier seed and construction credits retained in provenance",
+ "category": "Kaggle notebook packing (CPU Alternating Reclosure)",
+ "source_provenance": {
+  "category": "public submission",
+  "lineage": [
+   [
+    "kaggle-public-portfolio-20261022",
+    "alternating"
+   ]
+  ],
+  "seed_credit": null,
+  "notebook": "https://www.kaggle.com/code/kirilltym/22-408512-cpu-alternating-reclosure",
+  "notebook_version": 3,
+  "source_notices": "submissions/kaggle-public-portfolio-20261022/SOURCE_NOTICES.md",
+  "original_credits": "Earlier construction credits retained in the notebook and its source notices.",
+  "witness_dilation": "1+1e-10"
+ },
+ "previous_source": {
+  "certificate_sha256": "72fa0c89b01fe546",
+  "credit": "Mykhailo Polkovskyi (Mishapolk)",
+  "category": "mishapolk",
+  "construction_credit": [
+   "Nate Chaoweeraprasit (itsnaka)"
+  ]
+ },
+ "previous_reference": {
+  "seed_credit": "Mykhailo Polkovskyi (Mishapolk)",
+  "source_certificate_sha256": "72fa0c89b01fe546"
+ }
+}
+
+manifest 964ee2b witnesses/304:
+{
+ "certificate_sha256": "c8433dd798aef6f1",
+ "credit": "Kirill Tymchishin (kirilltym), Kaggle \"CPU Alternating Reclosure\" v3; earlier construction credits in its source notices; earlier seed and construction credits retained in provenance",
+ "category": "Kaggle notebook packing (CPU Alternating Reclosure)",
+ "source_provenance": {
+  "category": "public submission",
+  "lineage": [
+   [
+    "kaggle-public-portfolio-20261022",
+    "alternating"
+   ]
+  ],
+  "seed_credit": null,
+  "notebook": "https://www.kaggle.com/code/kirilltym/22-408512-cpu-alternating-reclosure",
+  "notebook_version": 3,
+  "source_notices": "submissions/kaggle-public-portfolio-20261022/SOURCE_NOTICES.md",
+  "original_credits": "Earlier construction credits retained in the notebook and its source notices.",
+  "witness_dilation": "1+1e-10"
+ },
+ "previous_source": {
+  "certificate_sha256": "72fa0c89b01fe546",
+  "credit": "Mykhailo Polkovskyi (Mishapolk)",
+  "category": "mishapolk",
+  "construction_credit": [
+   "Nate Chaoweeraprasit (itsnaka)"
+  ]
+ },
+ "previous_reference": {
+  "seed_credit": "Mykhailo Polkovskyi (Mishapolk)",
+  "source_certificate_sha256": "72fa0c89b01fe546"
+ }
+}
+witnesses/304 identical at fa6237e and 964ee2b: True
+
+census of the fa6237e manifest's 1087 witnesses:
+    683  no previous_reference
+    222  no seed_credit in source_provenance
+    144  previous_reference names another certificate
+    260  previous_reference names the previous_source certificate
+    182  source_provenance.seed_credit differs from previous_reference.seed_credit
+
+census of the 964ee2b manifest's 1089 witnesses:
+    677  no previous_reference
+    210  no seed_credit in source_provenance
+     82  previous_reference names another certificate
+    330  previous_reference names the previous_source certificate
+     11  source_provenance.seed_credit differs from previous_reference.seed_credit
+    191  source_provenance.seed_credit equals previous_reference.seed_credit
+
+input certified_bounds.json (964ee2b, packet): sha256 f368786a706a6911f087b11b9cb0fe4f81edcb441f66b88467fa253217a3f263
+certified_bounds 268: {"certificate": "certificates/best/n268.cert", "certificate_sha256": "e9833bf26e1bf7e4", "credit": "Francisco Couzo (square-packing live search); refines the packing of Kirill Tymchishin (kirilltym), Kaggle \"CPU/GPU/MPS EDA+Seam LP\" v4; earlier construction credits retained; earlier seed and construction credits retained in provenance", "rounded_up": "16.874361715874", "valid": true, "pairs_tested": 3606, "arithmetic_backend": "GMP exact rationals via gmpy2 2.3.2"}
+certified_bounds 303: {"certificate": "certificates/best/n303.cert", "certificate_sha256": "39a150f4cce7e435", "credit": "Francisco Couzo (square-packing live search); refines the packing of Vladislav Lavrentev (lightningv08), Kaggle \"CUDA Packing Search\" v11; earlier construction credits retained; earlier seed and construction credits retained in provenance", "rounded_up": "17.906978233799", "valid": true, "pairs_tested": 4292, "arithmetic_backend": "GMP exact rationals via gmpy2 2.3.2"}
+certified_bounds 304: {"certificate": "certificates/best/n304.cert", "certificate_sha256": "c8433dd798aef6f1", "credit": "Kirill Tymchishin (kirilltym), Kaggle \"CPU Alternating Reclosure\" v3; earlier construction credits in its source notices; earlier seed and construction credits retained in provenance", "rounded_up": "17.926898903393", "valid": true, "pairs_tested": 4297, "arithmetic_backend": "GMP exact rationals via gmpy2 2.3.2"}
+input catalogue-fa6237e.md: sha256 13c4fc9828b6dd2cc0088eb38ce4ffc945b714dc38830ea6cfe9c818e47b687d (no pin)
+  catalogue fa6237e: | [268](n268.cert) | 16.875467950348 | Kirill Tymchishin (kirilltym), Kaggle "CPU/GPU/MPS EDA+Seam LP" v4; earlier construction credits in its source notices; earlier seed and construction credits retained in provenance |
+  catalogue fa6237e: | [303](n303.cert) | 17.907473001999 | Francisco Couzo (Kaggle push search); refines the packing of Vladislav Lavrentev (lightningv08), Kaggle "CUDA Packing Search" v11; earlier construction credits retained; earlier seed and construction credits retained in provenance |
+  catalogue fa6237e: | [304](n304.cert) | 17.926898903393 | Kirill Tymchishin (kirilltym), Kaggle "CPU Alternating Reclosure" v3; earlier construction credits in its source notices; earlier seed and construction credits retained in provenance |
+input catalogue-964ee2b.md: sha256 59fe57183b78a892d614bc1e37c2d1935d07ebc127ee09c42f39d951aa2fa31d (matches the pin)
+  catalogue 964ee2b: | [268](n268.cert) | 16.874361715874 | Francisco Couzo (square-packing live search); refines the packing of Kirill Tymchishin (kirilltym), Kaggle "CPU/GPU/MPS EDA+Seam LP" v4; earlier construction credits retained; earlier seed and construction credits retained in provenance |
+  catalogue 964ee2b: | [303](n303.cert) | 17.906978233799 | Francisco Couzo (square-packing live search); refines the packing of Vladislav Lavrentev (lightningv08), Kaggle "CUDA Packing Search" v11; earlier construction credits retained; earlier seed and construction credits retained in provenance |
+  catalogue 964ee2b: | [304](n304.cert) | 17.926898903393 | Kirill Tymchishin (kirilltym), Kaggle "CPU Alternating Reclosure" v3; earlier construction credits in its source notices; earlier seed and construction credits retained in provenance |
+input catalogue-1c17153.md: sha256 eeb1c7f6e16aa2ec08c5c4cac6a4cd950ac841cb60adb91c6177deb7613ffab3 (no pin)
+  catalogue 1c17153: | [268](n268.cert) | 16.874361715874 | Francisco Couzo (square-packing live search); refines the packing of Kirill Tymchishin (kirilltym), Kaggle "CPU/GPU/MPS EDA+Seam LP" v4; earlier construction credits retained; earlier seed and construction credits retained in provenance |
+  catalogue 1c17153: | [303](n303.cert) | 17.906978233799 | Francisco Couzo (square-packing live search); refines the packing of Vladislav Lavrentev (lightningv08), Kaggle "CUDA Packing Search" v11; earlier construction credits retained; earlier seed and construction credits retained in provenance |
+  catalogue 1c17153: | [304](n304.cert) | 17.926898903393 | Kirill Tymchishin (kirilltym), Kaggle "CPU Alternating Reclosure" v3; earlier construction credits in its source notices; earlier seed and construction credits retained in provenance |
+input RECORD_PROVENANCE.md: sha256 caa6050ec1a1ca3f902be0bb544d116bb0236affb54fa5d979bebd35e6e800c8 (matches the pin)
+  RECORD_PROVENANCE.md: Mishapolk's `70a033f` update has twelve further exact refinements at 129, 154, 156, 175, 176, 204, 232, 264, 271, 302, 303 and 304. Jlevy's [per-count explanation](https://github.com/jlevy/squares/issues/593#issuecomment-6185872048) preserves Ostashev's packing credit at 129/175/176/204/232/264/303/304 and our arrangement/refinement credit at 154/156/271/302, together with the seed lineages preceding our work. A smaller exact certificate earns precision credit without becoming a new construction discovery.
+
+commits on any ref of the Couzo clone touching a SOURCE_NOTICES file: none
+  couzo fa6237e: Land the Kaggle intake certificates and restore held records below 324
+  couzo fa6237e: Exact certificates for the 285 packings of the reviewed Kaggle submission
+  couzo fa6237e: from our searches and 102 public notebook packings credited to their authors.
+  couzo fa6237e: They improve 685 verified or reported bounds. n=303 is now 17.907473001999,
+  couzo fa6237e: an improvement over the best per-puzzle Kaggle side (17.908331255817).
+  couzo fa6237e: The reviewed public comparison now includes the Kaggle notebook packings and
+  couzo 964ee2b: Land the 23 October live records, notebook packings and Mishapolk certificates
+  couzo 964ee2b: - 60 public Kaggle notebook packings (kirilltym, kyleluecke, alexchilton,
+  couzo 964ee2b: The reviewed public comparison adds the certified notebook packings and the
+  couzo 964ee2b: The README keeps 71 counts. 268, 459, 552 and 648 are now ours: 459, 552
+  couzo 964ee2b: and 648 beat the per-puzzle board, and 268 is held within rounding. 596 is
+  couzo 964ee2b: superseded by aqibrazadev's notebook packing. 127, 180 and 209 leave because
+  couzo 43f666c: The reviewed public comparison adds the Kaggle per-puzzle leaderboard of
+  couzo 43f666c: The README lists 56 counts. 21 leave because Kaggle teams now report smaller
+  couzo 43f666c: Prathamesh Chavan); 303 is pjmathematician's, submitted before our 3.5e-11
+
+evand 8a8879a commit message:
+8a8879a2972c32cbd2d906049228cc9f0762b02a 2026-10-23T22:38:50-06:00 2026-10-23T22:49:33-06:00
+Candidates s(268), s(303), s(304): certificates for three posts beyond the register
+
+s268_lightning: Vladislav Lavrentev's (Kaggle lightningv08) public packing, exact descent (shrink-only) to
+16.8743617159, the side a Kaggle per-puzzle side-only claim lists; the first public packing at that side.
+s303_cdeotte: Chris Deotte's public Kaggle packing, exact descent to 17.9072382745.  s304_pub: the public Kaggle
+packing at 17.9268989004 (finder unknown; earliest public copy: kozykappa's notebook).  Posting approved by Evan in
+chat 10-23 (304 on behalf, 268 first public; 303 cdeotte's).
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+
+
+input evand 659ee62 Completed.md: sha256 f22e8d0c2c95b4ee07750cd044205b323963ba764b36d8fa5b7f26e801bdb6ca
+  Completed.md: - 2026-10-23 Beyond-the-register check for 268 / 303 / 304: certified the public Kaggle packings (8a8879a2; 268 and 303 by exact descent of lightningv08's / cdeotte's packings) but did not post: franciscouzo's open #763 already held all three.  Imported #763's 350 certificates for n <= 1000 (234 new packings).  Lessons in `search/packer/SUBMITTING.md` checklist.
+  Completed.md: - 2026-10-20 **Submission style guide + draft generator** (`search/packer/SUBMITTING.md`, `submission.py`): *refinement* only for the same local minimum, else *a new packing found from X*; template, checklist, audit of past issues; regularized views' `"by"` now names the finder (was the 10-05 batch holder).
+input evand 659ee62 TODO.md: sha256 156d79cb4f591f5d26ad7e95818c332cb34d10c78cb773deebbe888ecd1063c0
+  TODO.md: - [ ] Optional, Evan: a credit note on jlevy #763 (n = 268: Couzo credits kirilltym's Seam LP notebook; the packing first appears in lightningv08's CUDA Packing Search output, kirilltym's input).  Our tighter 268 / 304 certificates are at 8a8879a2 if useful.
+  TODO.md: - [ ] jlevy #702 (our s(343) ≤ 18.977682482405, beyond the corpus, posted 10-20, cert 88385ab), #703 (our s(270) ≤ 16.928162252197, posted 10-20, cert 88385ab), replies 10-20 on #664 (271: a different minimum, finder us), #669 ("by" bug), #674 (229 questions); #680 (our s(183) ≤ 13.999580178737, first 183 below the grid, posted 10-18, cert 3a9948c; lineage Couzo 182 -> insertion -> explorer), #674 (our s(229) ≤ 15.650163254859, posted 10-17, dilation cert e0338c7; updated same day to ≤ 15.650161513896, cert 00e68df; start: #672 / #668), #673 (credit correction: found_by at 146 and 308 to us, per the same-minimum rule; posted 10-17), #669 (our s(155) ≤ 12.952260944651, posted 10-17, cert 59326b8), #664 (our s(271) ≤ 16.948947733714, posted 10-16, cert 757b40b), #659 (our s(236) ≤ 15.861934390608, posted 10-16, cert 5ad0069), #639 (exact forms, 22 current records), #606 (our 146: T-187 V0/C0 10-15, awaiting their replay review), #545 (s29 / grade-C retained 10-15; their replays wait on budget; they note exact-point non-overlap for s(29) open), #596, #584, #552, #489, #465, #419 / #420 (exact forms, no reply), #375, #3 (preprint, left open); chelokot#18 (repo unknown: not under bend / bend-math).
+  TODO.md: - [ ] Live check misses franciscouzo's claims (10-23): `pk.py watch` can't fetch his repo ("files over 1073741824 bytes"), so #763 (436 bounds, exact certificates in `upper_bounds.json` / `certificates/` at 964ee2b) never reached the store; we nearly posted 268 / 303 / 304 duplicates.  Fetch his `upper_bounds.json` (15 MB) + the certificates it names instead of the whole repo, and have `candidate.py --live` read it.
+  TODO.md: - [ ] Kaggle CSV imports have no finder (sighting finder NULL; the notebook author is only in the source path): record the author as finder in `kaggle_import.py` so PUBLIC posts credit the right person.
+input evand CREDITS.md (packet): sha256 778884d09f88ce159ea2cea2134d30fb14bf01bf58fc9e69c6f3d77433da8168
+  CREDITS.md: * **Joshua Levy (jlevy), the Squares Project**, https://github.com/jlevy/squares — weighted and
+  CREDITS.md: `s(11) > 31/8 = 3.875` (2026-09-22), developed from jlevy's T-026 certificate with a checker adapted
+  CREDITS.md: `466001/100000 = 4.66001` (2026-09-27), building on Mira, Guzhou0806 and jlevy.
+  CREDITS.md: Our `s(11) ≥ 3040/797` was found on 2026-08-26 but published on 2026-09-22, after jlevy's `3.8264`;
+  CREDITS.md: it is superseded by jlevy's `3.827` and Kleddamag's `3.875`.  Our `s(12) ≥ 15680/3951` (public
+  CREDITS.md: Produced by Claude (Anthropic) in a single session under human direction, in the same spirit of

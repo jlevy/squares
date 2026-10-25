@@ -1,0 +1,312 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "franciscouzo-square-packing",
+  "source_url": "https://github.com/franciscouzo/square-packing",
+  "source_ref": "master",
+  "source_commit": "5a299b4708ab1ae4870d0fc1ab155738144f6ab8",
+  "retrieved_at_utc": "2026-10-22T19:10Z",
+  "git_scope": "Bare clone of franciscouzo/square-packing (history to 6b7391de, fetched 22 October), checked out sparsely at 5a299b4 (committed 2026-10-20T22:35:41Z, 'Reconcile packing bounds through 10000 and current record claims'), a commit no issue reports that reached GitHub in the push of 2026-10-21T22:56:37Z with d09edd7 and 6b7391d. Retained: the 20 root certificates/nN.cert that the report-order walk of Couzo's history records as reports with a row. Pinned by digest only: the 41 certificates it holds for a decision (sub-print re-certifications and one above Göbel's construction), the root README.md and index files, the 20 October submission's manifest and README, and the exact checker with its MIT licence against the issue-678 packet's identical copies. The rest of the tree is pinned by the commit alone; no source file was executed.",
+  "archived_dir": "source",
+  "license": "The repository states no licence for its data or prose: the tree has no LICENSE, and no README states reuse terms. The 20 certificates are retained as factual data under the owner decision of 2026-10-09 recorded in resources/web/known-best-packings/README.md (Retained Factual Data). verify_bound_certificate.py and BOUND_VERIFIER_LICENSE.txt are pinned against the byte-identical copies the couzo-issue678-2026-10-18 packet retains under the MIT licence. Prose, the indexes and the manifest are hash-pinned and not copied.",
+  "claims": [
+    "franciscouzo/square-packing@5a299b4 publishes root certificates/nN.cert, each the exact rational side in its header. Beyond the n <= 324 corpus and at or below 1024, 20 of them are reports by the order they reached the repository (dated by the push of 2026-10-21T22:56:37Z); they are retained here as dated beyond-horizon rows, 9 current and 11 superseded on entry.",
+    "The commit's index states bounds through n = 10000; those above 1024 wait on the owner (think-f2io, D1). The checker statements are the author's; no source program ran here."
+  ],
+  "scope": [
+    "BOUND_VERIFIER_LICENSE.txt",
+    "README.md",
+    "bound_sources.json",
+    "certificates/n327.cert",
+    "certificates/n332.cert",
+    "certificates/n372.cert",
+    "certificates/n409.cert",
+    "certificates/n414.cert",
+    "certificates/n450.cert",
+    "certificates/n451.cert",
+    "certificates/n453.cert",
+    "certificates/n487.cert",
+    "certificates/n494.cert",
+    "certificates/n532.cert",
+    "certificates/n535.cert",
+    "certificates/n539.cert",
+    "certificates/n540.cert",
+    "certificates/n579.cert",
+    "certificates/n582.cert",
+    "certificates/n587.cert",
+    "certificates/n591.cert",
+    "certificates/n628.cert",
+    "certificates/n631.cert",
+    "certificates/n632.cert",
+    "certificates/n633.cert",
+    "certificates/n640.cert",
+    "certificates/n649.cert",
+    "certificates/n679.cert",
+    "certificates/n682.cert",
+    "certificates/n683.cert",
+    "certificates/n684.cert",
+    "certificates/n691.cert",
+    "certificates/n695.cert",
+    "certificates/n732.cert",
+    "certificates/n735.cert",
+    "certificates/n737.cert",
+    "certificates/n742.cert",
+    "certificates/n745.cert",
+    "certificates/n787.cert",
+    "certificates/n790.cert",
+    "certificates/n791.cert",
+    "certificates/n797.cert",
+    "certificates/n798.cert",
+    "certificates/n799.cert",
+    "certificates/n810.cert",
+    "certificates/n812.cert",
+    "certificates/n844.cert",
+    "certificates/n854.cert",
+    "certificates/n855.cert",
+    "certificates/n856.cert",
+    "certificates/n857.cert",
+    "certificates/n903.cert",
+    "certificates/n909.cert",
+    "certificates/n913.cert",
+    "certificates/n915.cert",
+    "certificates/n916.cert",
+    "certificates/n933.cert",
+    "certificates/n934.cert",
+    "certificates/n970.cert",
+    "certificates/n975.cert",
+    "certificates/n977.cert",
+    "certificates/n990.cert",
+    "certificates/n991.cert",
+    "certificates/n997.cert",
+    "certified_bounds.json",
+    "submissions/2026-10-20/README.md",
+    "submissions/2026-10-20/manifest.json",
+    "upper_bounds.json",
+    "verify_bound_certificate.py"
+  ],
+  "pinned_only": [
+    {
+      "match": "**/README.md",
+      "reason": "No licence for the source's prose. Hash-pinned, not copied or executed."
+    },
+    {
+      "match": "upper_bounds.json",
+      "reason": "The author's bound index through n = 10000 at the commit; its L-border and tiling bounds at or below 1024 are transcribed into the history ledger and held (think-fwa9, think-f2io), and those above 1024 wait on the owner's D1 (think-f2io); pinned for provenance."
+    },
+    {
+      "match": "certified_bounds.json",
+      "reason": "The author's certificate and construction index through n = 10000 at the commit; pinned for provenance."
+    },
+    {
+      "match": "bound_sources.json",
+      "reason": "The author's list of the sources the index compares with; pinned for provenance, as no claim rests on it."
+    },
+    {
+      "match": "submissions/2026-10-20/manifest.json",
+      "reason": "The author's 135-row registration package of 20 October, which issue #715 supersedes; pinned for provenance, as no claim rests on it."
+    },
+    {
+      "match": "verify_bound_certificate.py",
+      "reason": "The source's exact checker, byte-identical to the copy the 18 October packet retains under its MIT licence; never executed here.",
+      "identical_to": "packing/resources/web/couzo-issue678-2026-10-18/source/verify_bound_certificate.py"
+    },
+    {
+      "match": "BOUND_VERIFIER_LICENSE.txt",
+      "reason": "The checker's MIT licence, byte-identical to the copy the 18 October packet retains.",
+      "identical_to": "packing/resources/web/couzo-issue678-2026-10-18/source/BOUND_VERIFIER_LICENSE.txt"
+    },
+    {
+      "match": "certificates/n327.cert",
+      "reason": "Published at 5a299b4, below the side it beats by under 1e-12 with the same 12-place print, a sub-print re-certification held for the owner's answer (think-fwa9); pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/n332.cert",
+      "reason": "Published at 5a299b4, below the side it beats by under 1e-12 with the same 12-place print, a sub-print re-certification held for the owner's answer (think-fwa9); pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/n372.cert",
+      "reason": "Published at 5a299b4, below the side it beats by under 1e-12 with the same 12-place print, a sub-print re-certification held for the owner's answer (think-fwa9); pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/n414.cert",
+      "reason": "Published at 5a299b4, below the side it beats by under 1e-12 with the same 12-place print, a sub-print re-certification held for the owner's answer (think-fwa9); pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/n451.cert",
+      "reason": "Published at 5a299b4, below the side it beats by under 1e-12 with the same 12-place print, a sub-print re-certification held for the owner's answer (think-fwa9); pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/n494.cert",
+      "reason": "Published at 5a299b4, below the side it beats by under 1e-12 with the same 12-place print, a sub-print re-certification held for the owner's answer (think-fwa9); pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/n535.cert",
+      "reason": "One of issue #715's 30 re-certifications of the 4e4c8ce certificates below the 12-place print, held for the owner's answer (think-fwa9); byte-identical to the copy the couzo-issue715-2026-10-21 packet retains.",
+      "identical_to": "packing/resources/web/couzo-issue715-2026-10-21/source/certificates"
+    },
+    {
+      "match": "certificates/n539.cert",
+      "reason": "Published at 5a299b4, below the side it beats by under 1e-12 with the same 12-place print, a sub-print re-certification held for the owner's answer (think-fwa9); pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/n540.cert",
+      "reason": "Published at 5a299b4, below the side it beats by under 1e-12 with the same 12-place print, a sub-print re-certification held for the owner's answer (think-fwa9); pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/n582.cert",
+      "reason": "One of issue #715's 30 re-certifications of the 4e4c8ce certificates below the 12-place print, held for the owner's answer (think-fwa9); byte-identical to the copy the couzo-issue715-2026-10-21 packet retains.",
+      "identical_to": "packing/resources/web/couzo-issue715-2026-10-21/source/certificates"
+    },
+    {
+      "match": "certificates/n587.cert",
+      "reason": "Published at 5a299b4, below the side it beats by under 1e-12 with the same 12-place print, a sub-print re-certification held for the owner's answer (think-fwa9); pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/n591.cert",
+      "reason": "One of issue #715's 30 re-certifications of the 4e4c8ce certificates below the 12-place print, held for the owner's answer (think-fwa9); byte-identical to the copy the couzo-issue715-2026-10-21 packet retains.",
+      "identical_to": "packing/resources/web/couzo-issue715-2026-10-21/source/certificates"
+    },
+    {
+      "match": "certificates/n631.cert",
+      "reason": "One of issue #715's 30 re-certifications of the 4e4c8ce certificates below the 12-place print, held for the owner's answer (think-fwa9); byte-identical to the copy the couzo-issue715-2026-10-21 packet retains.",
+      "identical_to": "packing/resources/web/couzo-issue715-2026-10-21/source/certificates"
+    },
+    {
+      "match": "certificates/n632.cert",
+      "reason": "Published at 5a299b4, below the side it beats by under 1e-12 with the same 12-place print, a sub-print re-certification held for the owner's answer (think-fwa9); pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/n633.cert",
+      "reason": "One of issue #715's 30 re-certifications of the 4e4c8ce certificates below the 12-place print, held for the owner's answer (think-fwa9); byte-identical to the copy the couzo-issue715-2026-10-21 packet retains.",
+      "identical_to": "packing/resources/web/couzo-issue715-2026-10-21/source/certificates"
+    },
+    {
+      "match": "certificates/n640.cert",
+      "reason": "One of issue #715's 30 re-certifications of the 4e4c8ce certificates below the 12-place print, held for the owner's answer (think-fwa9); byte-identical to the copy the couzo-issue715-2026-10-21 packet retains.",
+      "identical_to": "packing/resources/web/couzo-issue715-2026-10-21/source/certificates"
+    },
+    {
+      "match": "certificates/n682.cert",
+      "reason": "One of issue #715's 30 re-certifications of the 4e4c8ce certificates below the 12-place print, held for the owner's answer (think-fwa9); byte-identical to the copy the couzo-issue715-2026-10-21 packet retains.",
+      "identical_to": "packing/resources/web/couzo-issue715-2026-10-21/source/certificates"
+    },
+    {
+      "match": "certificates/n683.cert",
+      "reason": "Published at 5a299b4, below the side it beats by under 1e-12 with the same 12-place print, a sub-print re-certification held for the owner's answer (think-fwa9); pinned by digest, not replayed or recorded."
+    },
+    {
+      "match": "certificates/n684.cert",
+      "reason": "One of issue #715's 30 re-certifications of the 4e4c8ce certificates below the 12-place print, held for the owner's answer (think-fwa9); byte-identical to the copy the couzo-issue715-2026-10-21 packet retains.",
+      "identical_to": "packing/resources/web/couzo-issue715-2026-10-21/source/certificates"
+    },
+    {
+      "match": "certificates/n691.cert",
+      "reason": "One of issue #715's 30 re-certifications of the 4e4c8ce certificates below the 12-place print, held for the owner's answer (think-fwa9); byte-identical to the copy the couzo-issue715-2026-10-21 packet retains.",
+      "identical_to": "packing/resources/web/couzo-issue715-2026-10-21/source/certificates"
+    },
+    {
+      "match": "certificates/n695.cert",
+      "reason": "One of issue #715's 30 re-certifications of the 4e4c8ce certificates below the 12-place print, held for the owner's answer (think-fwa9); byte-identical to the copy the couzo-issue715-2026-10-21 packet retains.",
+      "identical_to": "packing/resources/web/couzo-issue715-2026-10-21/source/certificates"
+    },
+    {
+      "match": "certificates/n735.cert",
+      "reason": "One of issue #715's 30 re-certifications of the 4e4c8ce certificates below the 12-place print, held for the owner's answer (think-fwa9); byte-identical to the copy the couzo-issue715-2026-10-21 packet retains.",
+      "identical_to": "packing/resources/web/couzo-issue715-2026-10-21/source/certificates"
+    },
+    {
+      "match": "certificates/n737.cert",
+      "reason": "One of issue #715's 30 re-certifications of the 4e4c8ce certificates below the 12-place print, held for the owner's answer (think-fwa9); byte-identical to the copy the couzo-issue715-2026-10-21 packet retains.",
+      "identical_to": "packing/resources/web/couzo-issue715-2026-10-21/source/certificates"
+    },
+    {
+      "match": "certificates/n742.cert",
+      "reason": "One of issue #715's 30 re-certifications of the 4e4c8ce certificates below the 12-place print, held for the owner's answer (think-fwa9); byte-identical to the copy the couzo-issue715-2026-10-21 packet retains.",
+      "identical_to": "packing/resources/web/couzo-issue715-2026-10-21/source/certificates"
+    },
+    {
+      "match": "certificates/n745.cert",
+      "reason": "One of issue #715's 30 re-certifications of the 4e4c8ce certificates below the 12-place print, held for the owner's answer (think-fwa9); byte-identical to the copy the couzo-issue715-2026-10-21 packet retains.",
+      "identical_to": "packing/resources/web/couzo-issue715-2026-10-21/source/certificates"
+    },
+    {
+      "match": "certificates/n790.cert",
+      "reason": "One of issue #715's 30 re-certifications of the 4e4c8ce certificates below the 12-place print, held for the owner's answer (think-fwa9); byte-identical to the copy the couzo-issue715-2026-10-21 packet retains.",
+      "identical_to": "packing/resources/web/couzo-issue715-2026-10-21/source/certificates"
+    },
+    {
+      "match": "certificates/n791.cert",
+      "reason": "One of issue #715's 30 re-certifications of the 4e4c8ce certificates below the 12-place print, held for the owner's answer (think-fwa9); byte-identical to the copy the couzo-issue715-2026-10-21 packet retains.",
+      "identical_to": "packing/resources/web/couzo-issue715-2026-10-21/source/certificates"
+    },
+    {
+      "match": "certificates/n797.cert",
+      "reason": "One of issue #715's 30 re-certifications of the 4e4c8ce certificates below the 12-place print, held for the owner's answer (think-fwa9); byte-identical to the copy the couzo-issue715-2026-10-21 packet retains.",
+      "identical_to": "packing/resources/web/couzo-issue715-2026-10-21/source/certificates"
+    },
+    {
+      "match": "certificates/n798.cert",
+      "reason": "One of issue #715's 30 re-certifications of the 4e4c8ce certificates below the 12-place print, held for the owner's answer (think-fwa9); byte-identical to the copy the couzo-issue715-2026-10-21 packet retains.",
+      "identical_to": "packing/resources/web/couzo-issue715-2026-10-21/source/certificates"
+    },
+    {
+      "match": "certificates/n799.cert",
+      "reason": "One of issue #715's 30 re-certifications of the 4e4c8ce certificates below the 12-place print, held for the owner's answer (think-fwa9); byte-identical to the copy the couzo-issue715-2026-10-21 packet retains.",
+      "identical_to": "packing/resources/web/couzo-issue715-2026-10-21/source/certificates"
+    },
+    {
+      "match": "certificates/n854.cert",
+      "reason": "One of issue #715's 30 re-certifications of the 4e4c8ce certificates below the 12-place print, held for the owner's answer (think-fwa9); byte-identical to the copy the couzo-issue715-2026-10-21 packet retains.",
+      "identical_to": "packing/resources/web/couzo-issue715-2026-10-21/source/certificates"
+    },
+    {
+      "match": "certificates/n855.cert",
+      "reason": "One of issue #715's 30 re-certifications of the 4e4c8ce certificates below the 12-place print, held for the owner's answer (think-fwa9); byte-identical to the copy the couzo-issue715-2026-10-21 packet retains.",
+      "identical_to": "packing/resources/web/couzo-issue715-2026-10-21/source/certificates"
+    },
+    {
+      "match": "certificates/n856.cert",
+      "reason": "One of issue #715's 30 re-certifications of the 4e4c8ce certificates below the 12-place print, held for the owner's answer (think-fwa9); byte-identical to the copy the couzo-issue715-2026-10-21 packet retains.",
+      "identical_to": "packing/resources/web/couzo-issue715-2026-10-21/source/certificates"
+    },
+    {
+      "match": "certificates/n857.cert",
+      "reason": "One of issue #715's 30 re-certifications of the 4e4c8ce certificates below the 12-place print, held for the owner's answer (think-fwa9); byte-identical to the copy the couzo-issue715-2026-10-21 packet retains.",
+      "identical_to": "packing/resources/web/couzo-issue715-2026-10-21/source/certificates"
+    },
+    {
+      "match": "certificates/n909.cert",
+      "reason": "One of issue #715's 30 re-certifications of the 4e4c8ce certificates below the 12-place print, held for the owner's answer (think-fwa9); byte-identical to the copy the couzo-issue715-2026-10-21 packet retains.",
+      "identical_to": "packing/resources/web/couzo-issue715-2026-10-21/source/certificates"
+    },
+    {
+      "match": "certificates/n913.cert",
+      "reason": "One of issue #715's 30 re-certifications of the 4e4c8ce certificates below the 12-place print, held for the owner's answer (think-fwa9); byte-identical to the copy the couzo-issue715-2026-10-21 packet retains.",
+      "identical_to": "packing/resources/web/couzo-issue715-2026-10-21/source/certificates"
+    },
+    {
+      "match": "certificates/n915.cert",
+      "reason": "One of issue #715's 30 re-certifications of the 4e4c8ce certificates below the 12-place print, held for the owner's answer (think-fwa9); byte-identical to the copy the couzo-issue715-2026-10-21 packet retains.",
+      "identical_to": "packing/resources/web/couzo-issue715-2026-10-21/source/certificates"
+    },
+    {
+      "match": "certificates/n916.cert",
+      "reason": "One of issue #715's 30 re-certifications of the 4e4c8ce certificates below the 12-place print, held for the owner's answer (think-fwa9); byte-identical to the copy the couzo-issue715-2026-10-21 packet retains.",
+      "identical_to": "packing/resources/web/couzo-issue715-2026-10-21/source/certificates"
+    },
+    {
+      "match": "certificates/n970.cert",
+      "reason": "One of issue #715's 30 re-certifications of the 4e4c8ce certificates below the 12-place print, held for the owner's answer (think-fwa9); byte-identical to the copy the couzo-issue715-2026-10-21 packet retains.",
+      "identical_to": "packing/resources/web/couzo-issue715-2026-10-21/source/certificates"
+    },
+    {
+      "match": "certificates/n975.cert",
+      "reason": "One of issue #715's 30 re-certifications of the 4e4c8ce certificates below the 12-place print, held for the owner's answer (think-fwa9); byte-identical to the copy the couzo-issue715-2026-10-21 packet retains.",
+      "identical_to": "packing/resources/web/couzo-issue715-2026-10-21/source/certificates"
+    },
+    {
+      "match": "certificates/n977.cert",
+      "reason": "One of issue #715's 30 re-certifications of the 4e4c8ce certificates below the 12-place print, held for the owner's answer (think-fwa9); byte-identical to the copy the couzo-issue715-2026-10-21 packet retains.",
+      "identical_to": "packing/resources/web/couzo-issue715-2026-10-21/source/certificates"
+    }
+  ]
+}

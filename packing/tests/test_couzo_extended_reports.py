@@ -631,22 +631,44 @@ def test_retained_outside_horizon_packet_has_twenty_complete_source_reports(
     ]
     assert {row["n"]: row["value"] for row in own} == claims
     assert all(row["assurance"] == "reported" for row in own)
-    # Later reports supersede nine of these dated rows, which keep their ffd900d facts:
-    # 2d32a6e's at n = 375 and 378 on 8 October, issue 506's exact certificates at 338,
-    # 339, 376 and 379 on 12 October, evand's composition at 364, reported on 13 October,
-    # issue 607's precision refinement at 342, reported on 14 October, and issue 686's
-    # certificate at 377, reported on 19 October. The other eleven are still current.
+    # Later reports supersede 15 of these dated rows, which keep their ffd900d facts:
+    # 2d32a6e's at n = 378 on 8 October, Couzo's 02f9690 certificates at 11 counts on 9
+    # October (dated rows since the history walk of 22 October), evand's composition at
+    # 364, reported on 13 October, issue 607's precision refinement at 342, reported on 14
+    # October, and Couzo's 4e4c8ce certificate at 372, of 15 October. The rows at 369, 375
+    # and 376 are above Göbel's classical construction there, an earlier report by the
+    # owner's answer of 23 October 2026 (#613), so they hold no count. Since 24 October
+    # Polkovskyi's f1ceee4 row supersedes the one at 335, whose poses pack at their print
+    # with the near-axis angles read as 0 (think-rx26), and Kirill Tymchishin's notebook
+    # row, published at fa6237e on 23 October (think-lyf9), the one at 327. None is
+    # current.
     superseded = {row["n"]: row["superseded_by"] for row in own if "superseded_by" in row}
+    above = {
+        row["n"]: row["construction"]
+        for row in own
+        if row["disposition"] == check_source_coverage.ABOVE_CONSTRUCTION
+    }
+    assert above == {369: "19 + 1/2*sqrt(2)", 375: "10 + 7*sqrt(2)", 376: "10 + 7*sqrt(2)"}
     assert superseded == {
-        **dict.fromkeys((375, 378), "couzo-extended-range-updates-2026-10-08"),
-        **dict.fromkeys((338, 339, 376, 379), "couzo-certificates-2026-10-11"),
+        378: "couzo-extended-range-updates-2026-10-08",
+        **dict.fromkeys(
+            (332, 336, 337, 338, 339, 340, 341, 373, 374, 377, 379), "couzo-02f9690-2026-10-09"
+        ),
         364: "evand-compositions-2026-10-13",
         342: "couzo-certificates-2026-10-14",
-        377: "muglich-issue686-2026-10-19",
+        372: "couzo-index-2026-10-15",
+        335: "mishapolk-issue732-f1ceee4-2026-10-23",
+        327: "tymchishin-reclosure-v3-2026-10-23",
     }
     assert all(
         row["disposition"]
-        == ("superseded" if row["n"] in superseded else "tracked-outside-case-corpus")
+        == (
+            "superseded"
+            if row["n"] in superseded
+            else check_source_coverage.ABOVE_CONSTRUCTION
+            if row["n"] in above
+            else "tracked-outside-case-corpus"
+        )
         for row in own
     )
     assert coverage["case_corpus"]["n_max"] == 324

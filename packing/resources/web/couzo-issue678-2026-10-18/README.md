@@ -315,6 +315,12 @@ has recorded the rows of #666, #670, #672 and #675, which come before #678 in re
 order. Where one of them beat the start first, the start now names that report as its
 successor, so each count is one chain: 46 of the 57 and both of the two, while 11 of
 `couzo-verified-bounds-2026-10-14`’s rows and the 343 row still name #678.
+Since 22 October Mykhailo Polkovskyi’s #719 rows
+([`mishapolk-issue719-2026-10-22`](../mishapolk-issue719-2026-10-22/README.md)),
+recorded by the [ledger of 22 October for issue
+719](../../../campaign/issue-intake/upper-bounds-issue719-20261022/README.md), supersede
+seven of this packet’s rows that were current, at 507, 555, 641, 642, 693, 753 and 754;
+one, at 984, remains current.
 
 ### Per Row
 
@@ -437,7 +443,9 @@ Francisco Couzo wrote the source, which states no licence for its data; the cert
 are kept as factual data and nothing of the source is relicensed.
 The manifest credits Couzo at every row and keeps seed and construction credits beside
 it: Joost de Winter’s constructions at 16 rows (260, 464, 555, 602, 652 to 654, 705,
-706, 760, 815, 872, 874, 933, 934 and 998), Mykhailo Polkovskyi’s at 204, Evan Daniel’s
+706, 760, 815, 872, 874, 933, 934 and 998), Mykhailo Polkovskyi’s at 204 (T-186’s
+packing, his refinement of Daniil Ostashev’s as PingYou Ltd refined it, by Couzo’s answer
+of 23 October on #670, since this 204 refines #670’s packing), Evan Daniel’s
 (after Kevin Fang) at 343, Kevin Fang’s rectangle and gluing with PingYou Ltd’s square
 input at 703, and Couzo’s own earlier packings elsewhere.
 The issue names de Winter’s Young-corner, slipped-ribbon and four-block families and

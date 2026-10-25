@@ -33,11 +33,19 @@ FAMILIES = {
     ),
     "homepage-atlas": (
         "input-response",
-        "Prepare inert tiles and expand the existing static Atlas preview on input.",
+        "Prepare inert tiles; change view, size or zoom on input and scroll.",
     ),
     "news-cards": (
         "input-response",
         "Click or tap expands the existing News article; hover never changes its height.",
+    ),
+    "navigation": (
+        "input-response",
+        "Disclose navigation links while keeping every destination available without scripts.",
+    ),
+    "filter-menu": (
+        "input-response",
+        "Disclose prepared filter choices and summarize their existing selection state.",
     ),
     "news-filters": (
         "input-response",
@@ -108,6 +116,10 @@ FAMILIES = {
 # stable source markers give each retained program its own reviewed declaration.
 PAPER_PROGRAMS = (
     (
+        "Ordinary site links keep their browser behavior.",
+        *FAMILIES["navigation"],
+    ),
+    (
         "Every shell keeps its whole header in the document flow.",
         *FAMILIES["headroom"],
     ),
@@ -154,7 +166,7 @@ HEAD_PROGRAMS = (
         "Set persisted reader attributes before body paint.",
     ),
     (
-        "A site page shown inside another page",
+        "Head bootstrap: preserve layout queries and navigation geometry before first paint.",
         "pre-paint",
         "Set embed and allowlisted atlas attributes before body paint.",
     ),
@@ -277,7 +289,13 @@ def inventory(directory: Path) -> tuple[list[Script], list[str]]:
         parsed = _Scripts()
         parsed.feed(page.read_text(encoding="utf-8"))
         for index, (attributes, text) in enumerate(parsed.items):
-            if attributes.get("type") in {"application/json", "application/ld+json"}:
+            # Data a browser reads, not a program: page data, structured data, and the
+            # speculation rules every site page carries (`render_overview.SPECULATION_RULES`).
+            if attributes.get("type") in {
+                "application/json",
+                "application/ld+json",
+                "speculationrules",
+            }:
                 continue
             if src := attributes.get("src"):
                 linked(page, src)

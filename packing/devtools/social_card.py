@@ -5,8 +5,9 @@ Every page of the site names one image in its link preview
 (`render_overview.head_tags`): the homepage's hero, the best packing known of
 `overview_sections.HERO_CASE` squares, at 1200 by 630, the size every consumer shows as
 a large card without cropping it. This draws that image when the site is built. It is
-the hero's own drawing, `render_frontier_page.packing_svg` at the hero's 1000 units, so
-its squares, its colours and its line weights are the page's, in the page's ink on the
+the hero's own drawing, `render_frontier_page.default_svg` at the hero's 1000 units, so
+its squares, its pose (the case's flip regularization, regularization policy section 13),
+its colours and its line weights are the page's, in the page's ink on the
 page's background as the light theme has them (`rung_scale.page_colours`, read from
 kpress's tokens). Under it is the project's name as the bar sets the site's: the bar's
 sans in capitals, at the bar's weight and letter spacing.
@@ -48,7 +49,7 @@ from pathlib import Path
 
 from devtools import rung_scale
 from devtools.overview_sections import HERO_CASE
-from devtools.render_frontier_page import packing_svg
+from devtools.render_frontier_page import default_svg
 from devtools.render_n11_lower_bounds_explainer import kpress_static
 from devtools.render_overview import (
     OUTPUT,
@@ -144,7 +145,7 @@ def card_svg(*, named: bool = True) -> str:
             f'<path transform="translate({(width - name_width) / 2:.2f} {top + block:.2f})" '
             f'fill="{ink}" d="{outline}"/>'
         )
-    packing = packing_svg(HERO_CASE, units=HERO_UNITS, ink=ink).replace(
+    packing = default_svg(HERO_CASE, units=HERO_UNITS, ink=ink).replace(
         "<svg ",
         f'<svg x="{(width - side) / 2:g}" y="{top:.2f}" width="{side}" height="{side}" ',
         1,

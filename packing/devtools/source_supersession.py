@@ -7,6 +7,7 @@ from collections.abc import Collection, Mapping
 from copy import deepcopy
 from decimal import Decimal, localcontext
 from fractions import Fraction
+from functools import lru_cache
 from pathlib import Path
 from typing import Any
 
@@ -30,9 +31,21 @@ def superseded_counts(coverage: Mapping[str, Any], source_ids: Collection[str]) 
     }
 
 
+@lru_cache(maxsize=2)
+def _parsed_coverage(text: str) -> Mapping[str, Any]:
+    """The coverage register parsed once per text, for callers that only read it.
+
+    An apply run asks `preserve_selected_case` once per count it writes, and each ask
+    parsed the whole register again: 190 parses, 88 of the 108 seconds
+    `test_the_records_are_what_the_apply_tool_writes` took under profile on 23 October,
+    which put it over the 45-second per-test backstop once the register grew by its seven
+    coverage sources (#748). Keyed by the text, so a write between asks is read anew."""
+    return safe_load(text)
+
+
 def preserve_selected_case(n: int, text: str, source_ids: Collection[str]) -> bool:
     """Preserve an adopted later report, while still admitting earlier drafting inputs."""
-    coverage = safe_load(COVERAGE.read_text())
+    coverage = _parsed_coverage(COVERAGE.read_text())
     if n not in superseded_counts(coverage, source_ids):
         return False
     selected = next(row for row in coverage["selected_overrides"] if row["n"] == n)
@@ -465,11 +478,24 @@ def _coverage_line_end(text: str, node: Node) -> int:
     return len(text) if newline < 0 else newline + 1
 
 
+@lru_cache(maxsize=4)
+def _composed(text: str) -> Node | None:
+    """The coverage register's YAML node tree, composed once per text and only read.
+
+    `preserve_other_coverage` locates both of its lists in the register before and after
+    each replacement, and a replacement that changes nothing leaves the text as it was:
+    `apply_upper_bound_packets --check` composed 13 times on 23 October, 4 distinct texts,
+    and caching them took its CPU time from 2.6-2.7 s to 2.0 s. Four entries hold those
+    four, at about 14 MB each. Keyed by the text, as `_parsed_coverage` is, so a changed
+    register is composed anew."""
+    return yaml.compose(text, Loader=FastSafeLoader)
+
+
 def coverage_list_span(
     text: str, name: str, *, identifier: str | None = None
 ) -> tuple[int, int] | None:
     """Locate a block coverage list or an id-keyed row from YAML marks, keeping comments."""
-    document = yaml.compose(text, Loader=FastSafeLoader)
+    document = _composed(text)
     if not isinstance(document, MappingNode):
         raise TypeError("coverage record must be a YAML mapping")
     for key, value in document.value:

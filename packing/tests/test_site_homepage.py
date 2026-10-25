@@ -1,4 +1,4 @@
-"""The homepage's bounded previews, shared expansion and card geometry in Chromium.
+"""The homepage's bounded previews, its complete atlas and card geometry in Chromium.
 
 Real rendered pages and their assets are served through request routes in memory, so
 the fixture writes no site output. One desktop and one mobile session exercise the
@@ -23,8 +23,10 @@ from urllib.parse import parse_qs, urlsplit
 import pytest
 
 from devtools import (
+    check_site_rendering,
     news_highlights,
     overview_sections,
+    preview_site,
     render_changelog,
     render_overview,
     site_assets,
@@ -49,12 +51,12 @@ NEWS_FILTERS = probe(PROBES, "site_homepage/news-filters")
 TOOLTIP_WATCH = probe(PROBES, "site_homepage/tooltip-watch")
 TOOLTIP_CLEAR = probe(PROBES, "site_homepage/tooltip-clear")
 SCROLL_FILTERS = probe(PROBES, "site_homepage/scroll-filters")
+CHOOSER_LABELS = probe(PROBES, "site_homepage/chooser-labels")
 ORIGIN = "http://homepage.test/"
-TOGGLE = "[data-homepage-atlas-toggle]"
 CELLS = "#homepage-atlas-cells"
 TILES = f"{CELLS} .site-atlas-cell:visible"
+GRID_TAB, TRIANGLE_TAB = '[data-atlas-tab="grid"]', '[data-atlas-tab="triangle"]'
 GRAPHIC = "known-best-1-324.svg"
-STATUS = "[data-homepage-atlas-status]"
 EXPLORE = '.site-homepage-atlas-actions a[href="atlas.html"]'
 WIDTHS = (1280, 390)
 NAV_WIDTHS = (*WIDTHS, 320)
@@ -86,11 +88,17 @@ def payloads() -> dict[str, bytes]:
 
 
 @pytest.fixture(scope="module")
-def browser() -> Iterator[Any]:
-    with site_browser.api().sync_playwright() as driver:
-        launched = site_browser.launch(driver)
-        yield launched
-        launched.close()
+def driver() -> Iterator[Any]:
+    """The module's one Playwright session, which every Chromium it launches shares."""
+    with site_browser.api().sync_playwright() as started:
+        yield started
+
+
+@pytest.fixture(scope="module")
+def browser(driver: Any) -> Iterator[Any]:
+    launched = site_browser.launch(driver)
+    yield launched
+    launched.close()
 
 
 def _serve(page: Any, payloads: dict[str, bytes]) -> None:
@@ -116,12 +124,12 @@ def _requests(page: Any) -> list[str]:
 
 @pytest.fixture(scope="module")
 def film_payloads() -> dict[str, bytes]:
-    """Only the homepage and local poster assets, without rendering the case records."""
-    html = site_renders.html("index.html")
-    files = site_assets.shared().assets.referenced([html])
+    """Homepage and standalone Videos, without rendering the case records."""
+    documents = {name: site_renders.html(name) for name in ("index.html", "visualize.html")}
+    files = site_assets.shared().assets.referenced(documents.values())
     posters = {hero for _, hero, *_ in overview_sections.ATLAS_CARDS}
     return {
-        "index.html": html.encode("utf-8"),
+        **{name: html.encode("utf-8") for name, html in documents.items()},
         **{f"assets/{name}": data for name, data in files.items()},
         **render_overview.support_files(),
         **{path.name: path.read_bytes() for path in COMPOSITE_ASSETS if path.name in posters},
@@ -129,11 +137,11 @@ def film_payloads() -> dict[str, bytes]:
 
 
 @pytest.mark.parametrize("width", WIDTHS)
-def test_native_homepage_film_waits_for_click_and_main_headings_share_spacing(
+def test_homepage_links_to_native_videos_and_reduced_motion_waits_for_click(
     browser: Any, request: pytest.FixtureRequest, width: int
 ) -> None:
     requests = []
-    page = browser.new_page(viewport={"width": width, "height": 900})
+    page = browser.new_page(viewport={"width": width, "height": 900}, reduced_motion="reduce")
     live = os.environ.get("SQPACK_SITE_PREVIEW_URL")
     origin = f"{live.rstrip('/')}/" if live else ORIGIN
     if not live:
@@ -146,7 +154,13 @@ def test_native_homepage_film_waits_for_click_and_main_headings_share_spacing(
     page.route(render_overview.FILM_URL, intercept)
     try:
         page.goto(f"{origin}index.html", wait_until="load")
-        film = page.locator(".site-homepage-film video")
+        assert page.locator("video").count() == 0
+        videos = page.locator('a.site-action[href="visualize.html"]').filter(
+            has_text=re.compile("^Videos$")
+        )
+        assert videos.count() == 1
+        videos.click()
+        film = page.locator(".site-film-frame video")
         film.scroll_into_view_if_needed()
         state = page.evaluate(FILM)
         assert requests == [], "preload=none must wait for the reader"
@@ -154,7 +168,7 @@ def test_native_homepage_film_waits_for_click_and_main_headings_share_spacing(
         assert state["inline"]
         assert state["preload"] == "none"
         assert not state["autoplay"]
-        assert not state["marked_autoplay"]
+        assert state["marked_autoplay"]
         assert state["paused"]
         assert state["play_icon"]["content"] == '""'
         assert state["play_icon"]["width"] > 0
@@ -167,26 +181,11 @@ def test_native_homepage_film_waits_for_click_and_main_headings_share_spacing(
         assert state["label"]
         assert state["codec"] == "probably"
         assert abs(state["center_offset"]) <= 1
-        assert state["width"] <= state["max_width"] + 1
+        assert state["height"] <= 900
         assert state["left"] >= 0
         assert state["right"] <= width
         assert state["overflow"] <= 0
         assert state["width"] / state["height"] == pytest.approx(16 / 9, abs=0.01)
-        assert [heading["id"] for heading in state["headings"]] == [
-            "the-problem",
-            "the-atlas-of-square-packings",
-            "news",
-            "recent-results",
-            "profiles",
-            "report-your-results",
-            "papers",
-            "visuals",
-            "squares-project-documentation",
-            "more-resources",
-        ]
-        for heading in state["headings"]:
-            assert heading["above"] == pytest.approx(state["title_above"], abs=0.01)
-            assert heading["below"] == pytest.approx(state["title_below"], abs=0.01)
         overlay = page.get_by_role("button", name="Play video", exact=True)
         with page.expect_request(render_overview.FILM_URL, timeout=5000):
             overlay.click()
@@ -240,14 +239,13 @@ def _pointer_cases(page: Any, cases: tuple[int, ...]) -> list[dict[str, Any]]:
 
 
 def _themes(page: Any) -> list[dict[str, Any]]:
-    """Switch the actual theme controls and OS scheme through all three SVG states."""
+    """Switch the actual theme controls and OS scheme in each view of every case."""
     sync_api = site_browser.api()
     readings = []
-    for phase, count in (("preview", 100), ("expanded", 324), ("collapsed", 100)):
-        while page.locator(TILES).count() != count:
-            page.locator(TOGGLE).click()
-            page.evaluate(TRANSITION, {"install": False, "settle": True})
-        sync_api.expect(page.locator(TILES)).to_have_count(count)
+    for phase, tab in (("triangle", TRIANGLE_TAB), ("grid", GRID_TAB)):
+        page.locator(tab).click()
+        page.evaluate(TRANSITION, {"install": False, "settle": True})
+        sync_api.expect(page.locator(TILES)).to_have_count(324)
         for mode, scheme in (
             ("system", "light"),
             ("system", "dark"),
@@ -269,20 +267,26 @@ def _themes(page: Any) -> list[dict[str, Any]]:
                     **page.evaluate(THEME, {"scroll_top": False}),
                 }
             )
+    page.locator(TRIANGLE_TAB).click()
+    page.evaluate(TRANSITION, {"install": False, "settle": True})
     return readings
 
 
 @pytest.fixture(scope="module")
-def seen(toggle_seen: dict[int, dict[str, Any]]) -> dict[int, dict[str, Any]]:
+def seen(atlas_seen: dict[int, dict[str, Any]]) -> dict[int, dict[str, Any]]:
     """Share the retained interaction session with the geometry and content checks."""
-    return toggle_seen
+    return atlas_seen
 
 
 @pytest.mark.parametrize("width", WIDTHS)
-def test_keyboard_expansion_uses_the_shared_triangle_without_click_time_preparation(
-    toggle_seen: dict[int, dict[str, Any]], width: int
+def test_the_homepage_atlas_shows_every_case_in_the_shared_triangle(
+    atlas_seen: dict[int, dict[str, Any]], width: int
 ) -> None:
-    report = toggle_seen[width]
+    """The homepage's atlas shows all 324 cases from the first response, as the Atlas
+    page does, and its controls move the same tiles with the shared layout and motion
+    and no click-time preparation. Its Show More button, which revealed the cases after
+    the first hundred, went on 2026-10-22 (the owner)."""
+    report = atlas_seen[width]
     initial = report["initial"]
     assert initial["h1_spacing"]
     assert report["about"]["h1_spacing"]
@@ -311,19 +315,19 @@ def test_keyboard_expansion_uses_the_shared_triangle_without_click_time_preparat
         for href in report["hero_case"]["actions"]
     ] == [
         "cases/53.html",
-        "atlas.html#n-53",
+        "frontier.html#n-53",
         "atlas.html#atlas-n-53",
     ]
     assert report["static_hero"]["drawings"][0]["href"] == "cases/53.html"
-    assert initial["cases"] == list(range(1, 101))
-    assert initial["visible_cases"] == 100
-    assert initial["drawings"]["cards"] == 100
-    assert initial["drawings"]["rows"] == list(range(1, 11))
-    assert initial["drawings"]["size"] == ("medium" if width >= 1200 else "small")
+    assert initial["cases"] == list(range(1, 325))
+    assert initial["visible_cases"] == 324
+    assert initial["drawings"]["cards"] == 324
+    assert initial["drawings"]["rows"] == list(range(1, 19))
+    # Opened from the top, the homepage's triangle follows the scroll from XL
+    # (`tests/test_site_atlas_follow.py`).
+    assert initial["drawings"]["size"] == "xlarge"
     assert initial["drawings"]["scale"] == "row"
-    assert initial["stage"] == 100
     assert initial["view"] == "triangle"
-    assert initial["toggle"]["name"] == "Show more: all 324 cases"
     assert initial["prepared_cases"] == 324
     assert initial["images"] == {"decoded": 324, "loaded": 324, "failed": 0}
     assert initial["control_groups"] == [
@@ -336,38 +340,21 @@ def test_keyboard_expansion_uses_the_shared_triangle_without_click_time_preparat
     for control in initial["control_type"]:
         assert 0.75 <= control["size"] / control["base"] <= 0.9
     assert initial["cells_role"] == "tabpanel"
-    assert initial["toggle"]["expanded"] == "false"
-    assert initial["toggle"]["label"] == "Show More"
-    assert initial["toggle"]["arrow"] == "double-down"
-    assert initial["toggle"]["controls"] == "homepage-atlas-cells"
-    for name in ("expanded", "cached"):
+    for name, view in (("grid", "grid"), ("triangle", "triangle")):
         state = report[name]
         assert state["cases"] == list(range(1, 325)), name
         assert state["visible_cases"] == 324, name
-        assert state["toggle"]["expanded"] == "true", name
-        assert state["toggle"]["label"] == "Show Less", name
-        assert state["toggle"]["name"] == "Show less: the first 100"
-        assert state["toggle"]["arrow"] == "double-up", name
-        assert not state["toggle"]["disabled"], name
         assert state["busy"] is None, name
         assert state["drawings"]["cards"] == 324
-        assert state["drawings"]["rows"] == list(range(1, 19))
-        assert state["view"] == "triangle"
-    collapsed = report["collapsed"]
-    assert collapsed["cases"] == initial["cases"]
-    assert collapsed["drawings"] == initial["drawings"]
-    assert collapsed["toggle"]["expanded"] == "false"
-    assert collapsed["toggle"]["label"] == "Show More"
-    assert collapsed["toggle"]["arrow"] == "double-down"
-    assert collapsed["toggle"]["focused"]
-    assert collapsed["prepared_cases"] == 324
-    assert collapsed["view"] == "triangle"
-    for name in ("initial", "expanded", "collapsed", "cached", "static_labels"):
+        assert state["view"] == view
+    assert report["triangle"]["drawings"] == initial["drawings"]
+    assert report["triangle"]["prepared_cases"] == 324
+    for name in ("initial", "grid", "triangle", "static_labels"):
         center = report[name]["centering"]
         assert center["page_overflow"] == 0, name
         if center["fits"]:
             assert abs(center["offset"]) <= 0.5, (name, center)
-    for name in ("initial", "expanded", "collapsed", "cached"):
+    for name in ("initial", "grid", "triangle"):
         state = report[name]
         assert state["label_errors"] == [], name
         assert state["mark_errors"] == [], name
@@ -378,33 +365,19 @@ def test_keyboard_expansion_uses_the_shared_triangle_without_click_time_preparat
         assert report[name]["raw_markup"] == 0, name
         assert state["star_cases"] == [], name
     assert report["atlas_requests"] == 0
-    for name in ("initial", "expanded", "collapsed", "cached"):
-        assert report[name]["toggle"]["arrow_hidden"] == "true"
-        assert report[name]["toggle"]["arrow_mask"] != "none"
-        assert report[name]["toggle"]["arrow_width"] > 0
-    for name, count in (
-        ("expanded_move", 324),
-        ("cached_move", 324),
-    ):
+    for name, view in (("grid_move", "grid"), ("triangle_move", "triangle")):
         transition = report[name]
         response = transition["input"]
-        assert response["view"] == "triangle"
-        assert response["count"] == count
+        assert response["view"] == view
+        assert response["count"] == 324
         assert response["same_nodes"]
         assert response["scroll_delta"] == 0
         assert transition["placement_errors"] == []
         assert transition["drawing_errors"] == []
         assert transition["row_alignment_errors"] == []
         assert transition["duration"] == 360
-        if name == "expanded_move" and initial["centering"]["fits"]:
-            # Growing the centered visible canvas moves retained tiles horizontally.
-            assert any(
-                abs(float(animation["first_transform"].split("(", 1)[1].split("px", 1)[0]))
-                > 0.5
-                for animation in response["animations"]
-            )
-        if response["layout_changed"]:
-            assert response["animations"]
+        assert response["layout_changed"]
+        assert response["animations"]
         for animation in response["animations"]:
             assert animation["duration"] == transition["duration"]
             assert animation["delay"] == 0
@@ -415,28 +388,23 @@ def test_keyboard_expansion_uses_the_shared_triangle_without_click_time_preparat
         assert transition["panel_id"] == "homepage-atlas-cells"
         assert transition["panel_role"] == "tabpanel"
         assert all(aspect == pytest.approx(1, abs=0.002) for aspect in transition["aspects"])
-    assert report["collapsed_move"]["input"]["same_nodes"]
-    assert report["collapsed_move"]["toggle_in_view"]
-    reduced = report["reduced_move"]
-    assert reduced["input"]["count"] == 324
-    assert reduced["input"]["same_nodes"]
-    assert reduced["input"]["animations"] == []
-    assert reduced["duration"] == 0
-    assert reduced["placement_errors"] == []
-    assert report["reduced_collapsed"]["input"]["count"] == 100
-    assert report["reduced_collapsed"]["input"]["same_nodes"]
-    assert report["reduced_collapsed"]["input"]["animations"] == []
-    assert report["reduced_collapsed"]["toggle_in_view"]
-    assert report["rapid"]["counts"][-4:] == [324, 100, 324, 100]
+    for name in ("reduced_move", "reduced_back"):
+        reduced = report[name]
+        assert reduced["input"]["count"] == 324, name
+        assert reduced["input"]["same_nodes"], name
+        assert reduced["input"]["animations"] == [], name
+        assert reduced["duration"] == 0, name
+        assert reduced["placement_errors"] == [], name
+    assert report["rapid"]["counts"][-4:] == [324] * 4
+    assert report["rapid"]["input"]["view"] == "triangle"
     assert report["rapid"]["input"]["same_nodes"]
     assert report["rapid"]["placement_errors"] == []
-    assert report["rapid"]["toggle_in_view"]
     assert report["static"]["page_overflow"] == 0
     static = report["static"]["tiles"]
     assert report["static_labels"]["raw_markup"] == 0
     assert report["static_labels"]["label_errors"] == []
     assert report["static_labels"]["star_cases"] == []
-    assert [tile["n"] for tile in static] == list(range(1, 101))
+    assert [tile["n"] for tile in static] == list(range(1, 325))
     for index, tile in enumerate(static):
         assert tile["left"] >= report["static"]["canvas"]["left"] - 0.5
         assert tile["right"] <= report["static"]["canvas"]["right"] + 0.5
@@ -447,8 +415,13 @@ def test_keyboard_expansion_uses_the_shared_triangle_without_click_time_preparat
                 or tile["top"] + tile["height"] <= other["top"] + 0.5
                 or other["top"] + other["height"] <= tile["top"] + 0.5
             ), (tile["n"], other["n"])
-    assert [themed["cases"] for themed in report["staged_themes"]] == [100, 324, 100]
+    assert [themed["view"] for themed in report["staged_themes"]] == [
+        "triangle",
+        "grid",
+        "triangle",
+    ]
     for themed in report["staged_themes"]:
+        assert themed["cases"] == 324
         assert themed["resolved"] == themed["expected"]
         assert themed["background"] == themed["page_background"]
         assert themed["palette_unchanged"]
@@ -470,7 +443,7 @@ def test_keyboard_expansion_uses_the_shared_triangle_without_click_time_preparat
 
 
 @pytest.fixture(scope="module")
-def toggle_seen(browser: Any, request: pytest.FixtureRequest) -> dict[int, dict[str, Any]]:
+def atlas_seen(browser: Any, request: pytest.FixtureRequest) -> dict[int, dict[str, Any]]:
     """One shared session keeps every keyboard, pointer, theme and fallback reading."""
     sync_api = site_browser.api()
     reports = {}
@@ -484,8 +457,8 @@ def toggle_seen(browser: Any, request: pytest.FixtureRequest) -> dict[int, dict[
         requests = _requests(page)
         try:
             page.goto(f"{origin}index.html", wait_until="load")
-            sync_api.expect(page.locator(TOGGLE)).to_be_visible()
-            # The ordinary reader expansion reuses already decoded, authored images.
+            sync_api.expect(page.locator(TILES)).to_have_count(324)
+            # Every row's authored images are decoded after first paint.
             sync_api.expect(page.locator("[data-atlas-preview]")).to_have_attribute(
                 "data-atlas-images-ready", "324", timeout=15000
             )
@@ -529,7 +502,15 @@ def toggle_seen(browser: Any, request: pytest.FixtureRequest) -> dict[int, dict[
                         "height": video["y"] + video["height"] - pdfs["y"] + 80,
                     },
                 )
-            report["preview_pointer"] = _pointer_cases(page, (18, 36))
+            # A reader who chooses a view ends the following, and the triangle takes its
+            # own layout, where a tile is clicked where its layout puts it. The homepage
+            # writes no view to its address.
+            page.locator(GRID_TAB).click()
+            page.locator(TRIANGLE_TAB).click()
+            sync_api.expect(page.locator("[data-atlas-preview]")).to_have_attribute(
+                "data-atlas-follow", "held"
+            )
+            report["pointer"] = _pointer_cases(page, (18, 36, 306, 324))
             report["hero"] = page.evaluate(HERO)
             hero = page.locator('.site-hero-figure a[data-case="53"]')
             hero.click()
@@ -550,64 +531,58 @@ def toggle_seen(browser: Any, request: pytest.FixtureRequest) -> dict[int, dict[
                     path=str(Path(screenshot_dir) / f"homepage-hero-53-{width}.png")
                 )
                 page.locator("[data-atlas-preview]").screenshot(
-                    path=str(Path(screenshot_dir) / f"homepage-triangle-100-{width}.png")
+                    path=str(Path(screenshot_dir) / f"homepage-triangle-324-{width}.png")
                 )
             baseline = page.evaluate(TRANSITION, {"install": True, "settle": False})
             report["root_view"] = baseline["root_view"]
             report["root_size"] = baseline["root_size"]
-            toggle = page.locator(TOGGLE)
-            toggle.focus()
+            # The keyboard presses the layout tabs, as a reader does.
+            page.locator(GRID_TAB).focus()
             page.evaluate(TRANSITION, {"install": False, "settle": True, "position": True})
             page.keyboard.press("Enter")
-            report["expanded_move"] = page.evaluate(
-                TRANSITION, {"install": False, "settle": True}
-            )
+            report["grid_move"] = page.evaluate(TRANSITION, {"install": False, "settle": True})
             sync_api.expect(page.locator(TILES)).to_have_count(324)
-            sync_api.expect(toggle).to_be_enabled()
-            report["expanded"] = page.evaluate(STATE)
+            report["grid"] = page.evaluate(STATE)
             if screenshot_dir:
                 page.locator("[data-atlas-preview]").screenshot(
-                    path=str(Path(screenshot_dir) / f"homepage-triangle-324-{width}.png")
+                    path=str(Path(screenshot_dir) / f"homepage-grid-324-{width}.png")
                 )
-            toggle.focus()
-            page.keyboard.press("Space")
-            report["collapsed_move"] = page.evaluate(
-                TRANSITION, {"install": False, "settle": True}
-            )
-            sync_api.expect(page.locator(TILES)).to_have_count(100)
-            report["collapsed"] = page.evaluate(STATE)
+            page.locator(TRIANGLE_TAB).focus()
             page.evaluate(TRANSITION, {"install": False, "settle": True, "position": True})
-            page.keyboard.press("Enter")
-            report["cached_move"] = page.evaluate(
+            page.keyboard.press("Space")
+            report["triangle_move"] = page.evaluate(
                 TRANSITION, {"install": False, "settle": True}
             )
             sync_api.expect(page.locator(TILES)).to_have_count(324)
-            report["cached"] = page.evaluate(STATE)
+            report["triangle"] = page.evaluate(STATE)
             page.emulate_media(reduced_motion="reduce")
-            page.keyboard.press("Space")
-            page.evaluate(TRANSITION, {"install": False, "settle": True})
+            page.locator(GRID_TAB).focus()
             page.keyboard.press("Enter")
             report["reduced_move"] = page.evaluate(
                 TRANSITION, {"install": False, "settle": True}
             )
-            page.keyboard.press("Space")
-            report["reduced_collapsed"] = page.evaluate(
+            page.locator(TRIANGLE_TAB).focus()
+            page.keyboard.press("Enter")
+            report["reduced_back"] = page.evaluate(
                 TRANSITION, {"install": False, "settle": True}
             )
             page.emulate_media(reduced_motion="no-preference")
             report["rapid"] = page.evaluate(
-                TRANSITION, {"install": False, "settle": True, "rapid": True}
+                TRANSITION,
+                {
+                    "install": False,
+                    "settle": True,
+                    "rapid": [GRID_TAB, TRIANGLE_TAB, GRID_TAB, TRIANGLE_TAB],
+                },
             )
             report["staged_themes"] = []
-            for stage, mode, scheme in (
-                (100, "system", "dark"),
-                (324, "light", "dark"),
-                (100, "dark", "light"),
+            for view, mode, scheme in (
+                ("triangle", "system", "dark"),
+                ("grid", "light", "dark"),
+                ("triangle", "dark", "light"),
             ):
-                if page.locator(TILES).count() != stage:
-                    toggle.click()
-                    page.evaluate(TRANSITION, {"install": False, "settle": True})
-                sync_api.expect(page.locator(TILES)).to_have_count(stage)
+                page.locator(f'[data-atlas-tab="{view}"]').click()
+                page.evaluate(TRANSITION, {"install": False, "settle": True})
                 page.emulate_media(color_scheme=scheme)
                 page.evaluate(THEME, {"scroll_top": True})
                 page.locator(".site-theme-button").click()
@@ -615,12 +590,10 @@ def toggle_seen(browser: Any, request: pytest.FixtureRequest) -> dict[int, dict[
                 report["staged_themes"].append(
                     {
                         **page.evaluate(THEME, {"scroll_top": False}),
+                        "view": view,
                         "expected": scheme if mode == "system" else mode,
                     }
                 )
-            toggle.click()
-            page.evaluate(TRANSITION, {"install": False, "settle": True})
-            report["expanded_pointer"] = _pointer_cases(page, (306, 324))
             late = page.locator(f'{TILES}[data-case="291"]')
             late.focus()
             page.keyboard.press("Enter")
@@ -650,8 +623,7 @@ def toggle_seen(browser: Any, request: pytest.FixtureRequest) -> dict[int, dict[
                 _serve(static_page, files)
             try:
                 static_page.goto(f"{origin}index.html", wait_until="load")
-                sync_api.expect(static_page.locator(TOGGLE)).to_be_hidden()
-                sync_api.expect(static_page.locator(TILES)).to_have_count(100)
+                sync_api.expect(static_page.locator(TILES)).to_have_count(324)
                 sync_api.expect(static_page.locator(EXPLORE)).to_be_visible()
                 report["static"] = static_page.evaluate(INITIAL_LAYOUT)
                 report["static_labels"] = static_page.evaluate(STATE)
@@ -682,19 +654,18 @@ def toggle_seen(browser: Any, request: pytest.FixtureRequest) -> dict[int, dict[
 def test_native_svg_case_links_align_with_drawings_and_open_by_pointer_after_scroll(
     seen: dict[int, dict[str, Any]], width: int
 ) -> None:
-    for phase, cases in (("preview_pointer", (18, 36)), ("expanded_pointer", (306, 324))):
-        readings = seen[width][phase]
-        assert [reading["n"] for reading in readings] == list(cases)
-        for reading in readings:
-            assert reading["opened"] == str(reading["n"])
-            assert reading["drawing_width"] > 0
-            assert reading["drawing_width"] == pytest.approx(reading["drawing_height"], abs=0.1)
-            assert reading["row"] == int((reading["n"] - 1) ** 0.5) + 1
-            assert reading["segment"] in ("grid", "non-grid")
-            assert reading["source"].endswith(f"/n-{reading['n']}.svg")
-            assert 0 <= reading["center_x"] <= reading["viewport_width"]
-            assert reading["contained"]
-            assert reading["page_overflow"] == 0, (phase, reading)
+    readings = seen[width]["pointer"]
+    assert [reading["n"] for reading in readings] == [18, 36, 306, 324]
+    for reading in readings:
+        assert reading["opened"] == str(reading["n"])
+        assert reading["drawing_width"] > 0
+        assert reading["drawing_width"] == pytest.approx(reading["drawing_height"], abs=0.1)
+        assert reading["row"] == int((reading["n"] - 1) ** 0.5) + 1
+        assert reading["segment"] in ("grid", "non-grid")
+        assert reading["source"].endswith(f"/n-{reading['n']}.svg")
+        assert 0 <= reading["center_x"] <= reading["viewport_width"]
+        assert reading["contained"]
+        assert reading["page_overflow"] == 0, reading
 
 
 @pytest.mark.parametrize("width", WIDTHS)
@@ -716,32 +687,33 @@ def test_homepage_order_chrome_and_single_card_rows_keep_the_shared_design(
     home = seen[width]["initial"]
     assert home["headings"] == [
         "the-atlas-of-square-packings",
+        "recently-added",
         "news",
         "recent-results",
-        "report-your-results",
         "papers",
+        "report-your-results",
     ]
     assert home["main_titles"] == [
         "the-problem",
         "profiles",
         "visuals",
-        "squares-project-documentation",
         "more-resources",
+        "about-the-squares-project",
     ]
-    assert len(home["section_title_styles"]) == 9
-    selected = news_highlights.highlights(render_changelog.load())
+    assert len(home["section_title_styles"]) == 10
+    carried = news_highlights.carried(render_changelog.load())
     assert [heading["entry"] for heading in home["news_headings"]] == [
-        entry["id"] for entry in selected
+        entry["id"] for entry in carried
     ]
-    assert len(home["news_headings"]) == len(selected)
+    assert len(home["news_headings"]) == len(carried)
     assert all(heading["title"] for heading in home["news_headings"])
     assert [heading["href"] for heading in home["paper_headings"]] == [
-        paper.href for paper in overview_sections.PAPERS
+        paper.href for paper in (*overview_sections.PAPERS[-2:], overview_sections.PAPERS[0])
     ]
     assert all(heading["title"] for heading in home["paper_headings"])
     assert home["other_lower_headings"] == []
     assert all(style == home["main_title_style"] for style in home["section_title_styles"])
-    assert home["recent_title"] == "Recent Major Results"
+    assert home["recent_title"] == "Results"
     assert home["media"] == {
         "visuals": ["square-packings-324-20261008.pdf"],
     }
@@ -751,7 +723,7 @@ def test_homepage_order_chrome_and_single_card_rows_keep_the_shared_design(
     for action in home["actions"]:
         assert action["transform"] == "uppercase", action
     download = seen[width]["download"]
-    assert download["order"] == ["Download PDF", "Explore the atlas"]
+    assert download["order"] == ["Download PDF", "Visual Atlas"]
     assert download["href"] == overview_sections.PDF_CARD_SPECS[1][0]
     assert download["download"]
     assert download["uppercase"] == "uppercase"
@@ -762,12 +734,12 @@ def test_homepage_order_chrome_and_single_card_rows_keep_the_shared_design(
     assert home["solo_cards"]
     for card in home["solo_cards"]:
         assert abs(card["center_offset"]) <= 1, card
-    assert "squares-project-documentation" in seen[width]["about"]["main_titles"]
+    assert seen[width]["about"]["main_titles"] == ["the-squares-project"]
 
 
 @pytest.fixture(scope="module")
 def results_navigation_seen(browser: Any) -> dict[int, dict[str, Any]]:
-    """Use the two real Results actions without repeating Atlas interactions."""
+    """Follow the one complete Results action by keyboard and pointer."""
     sync_api = site_browser.api()
     readings = {}
     live = os.environ.get("SQPACK_SITE_PREVIEW_URL")
@@ -792,32 +764,33 @@ def results_navigation_seen(browser: Any) -> dict[int, dict[str, Any]]:
         try:
             page.goto(f"{origin}index.html?s=4", wait_until="load")
             initial = page.evaluate(STATE)
-            verification = page.get_by_role(
-                "link", name=re.compile("^About Result Verification$", re.IGNORECASE)
+            all_results = page.locator("a[data-all-results]")
+            sync_api.expect(all_results).to_have_text(
+                re.compile("^All Results$", re.IGNORECASE)
             )
-            bounds = verification.bounding_box()
+            bounds = all_results.bounding_box()
             assert bounds is not None
             assert bounds["x"] >= 0
             assert bounds["x"] + bounds["width"] <= width
-            verification.focus()
+            all_results.focus()
             with page.expect_navigation(wait_until="load"):
                 page.keyboard.press("Enter")
-            destination = f"{origin}results.html#verification-ladders"
+            destination = f"{origin}results.html?s=4#all-results"
             sync_api.expect(page).to_have_url(destination)
-            sync_api.expect(page.locator("#verification-ladders")).to_be_in_viewport()
-            sync_api.expect(page.locator("div.site-rung-legend[role=note]")).to_have_count(0)
+            sync_api.expect(
+                page.get_by_role("heading", name="All Results", exact=True)
+            ).to_be_visible()
+            sync_api.expect(page.locator("#all-results")).to_be_in_viewport()
             keyboard_destination = page.url
             page.goto(f"{origin}index.html?s=4", wait_until="load")
-            all_results = page.get_by_role(
-                "link", name=re.compile("^All Results$", re.IGNORECASE)
-            )
+            all_results = page.locator("a[data-all-results]")
             bounds = all_results.bounding_box()
             assert bounds is not None
             assert bounds["x"] >= 0
             assert bounds["x"] + bounds["width"] <= width
             with page.expect_navigation(wait_until="load"):
                 all_results.click()
-            sync_api.expect(page).to_have_url(f"{origin}results.html?s=4#all-results")
+            sync_api.expect(page).to_have_url(destination)
             sync_api.expect(page.locator("#all-results")).to_be_in_viewport()
             readings[width] = {
                 "initial": initial,
@@ -831,7 +804,7 @@ def results_navigation_seen(browser: Any) -> dict[int, dict[str, Any]]:
 
 
 @pytest.mark.parametrize("width", NAV_WIDTHS)
-def test_results_actions_reach_verification_and_the_complete_table(
+def test_results_action_reaches_complete_archive_by_keyboard_and_pointer(
     results_navigation_seen: dict[int, dict[str, Any]], width: int
 ) -> None:
     reading = results_navigation_seen[width]
@@ -845,14 +818,14 @@ def test_results_actions_reach_verification_and_the_complete_table(
 
 
 @pytest.mark.parametrize("width", WIDTHS)
-def test_native_svg_follows_live_system_light_dark_choices_in_all_cached_states(
+def test_native_svg_follows_live_system_light_dark_choices_in_both_views(
     seen: dict[int, dict[str, Any]], width: int
 ) -> None:
     readings = seen[width]["themes"]
-    assert len(readings) == 12
+    assert len(readings) == 8
     for state in readings:
         assert state["resolved"] == state["expected"]
-        assert state["cases"] == (324 if state["phase"] == "expanded" else 100)
+        assert state["cases"] == 324
         assert state["background"] == state["page_background"]
         assert state["white_samples"] > 0, state
         assert state["colored_samples"] > 0, state
@@ -860,7 +833,7 @@ def test_native_svg_follows_live_system_light_dark_choices_in_all_cached_states(
         assert state["palette_samples"] >= 5
         assert state["palette_unchanged"]
         assert state["filter"] == "none"
-    for phase in ("preview", "expanded", "collapsed"):
+    for phase in ("triangle", "grid"):
         colors = {tuple(state["background"]) for state in readings if state["phase"] == phase}
         assert len(colors) == 2, phase
         pixels = {state["palette_signature"] for state in readings if state["phase"] == phase}
@@ -868,9 +841,13 @@ def test_native_svg_follows_live_system_light_dark_choices_in_all_cached_states(
 
 
 @pytest.mark.parametrize("width", WIDTHS)
-def test_missing_shared_engine_keeps_native_preview_and_explore_usable(
+def test_missing_shared_engine_keeps_every_case_and_the_atlas_link_usable(
     browser: Any, payloads: dict[str, bytes], width: int
 ) -> None:
+    """Without the views' script the homepage keeps its static atlas, every case shown
+    and each a link, with no error; Visual Atlas still opens the Atlas page. The
+    status line that pointed a reader there, because the cases after the first hundred
+    could not be shown, went with the expander on 2026-10-22."""
     sync_api = site_browser.api()
     page = browser.new_page(viewport={"width": width, "height": 900})
     _serve(page, payloads)
@@ -884,15 +861,11 @@ def test_missing_shared_engine_keeps_native_preview_and_explore_usable(
     page.on("pageerror", record_error)
     try:
         page.goto(f"{ORIGIN}index.html", wait_until="load")
-        sync_api.expect(page.locator(STATUS)).to_be_visible()
-        sync_api.expect(page.locator(TOGGLE)).to_be_hidden()
+        sync_api.expect(page.locator(TILES)).to_have_count(324)
         failed = page.evaluate(STATE)
-        assert failed["visible_cases"] == 100
-        assert failed["toggle"]["expanded"] == "false"
+        assert failed["visible_cases"] == 324
         assert failed["prepared_cases"] == 324
         assert failed["busy"] is None
-        assert failed["status"]["role"] == "status"
-        assert "Explore the atlas" in failed["status"]["text"]
         assert page.url == f"{ORIGIN}index.html"
 
         assert errors == []
@@ -904,7 +877,7 @@ def test_missing_shared_engine_keeps_native_preview_and_explore_usable(
 
 
 @pytest.mark.parametrize("width", WIDTHS)
-def test_explore_stays_usable_without_javascript_and_the_expander_stays_hidden(
+def test_every_case_and_the_atlas_link_stay_usable_without_javascript(
     browser: Any, payloads: dict[str, bytes], width: int
 ) -> None:
     sync_api = site_browser.api()
@@ -912,8 +885,7 @@ def test_explore_stays_usable_without_javascript_and_the_expander_stays_hidden(
     _serve(page, payloads)
     try:
         page.goto(f"{ORIGIN}index.html", wait_until="load")
-        sync_api.expect(page.locator(TOGGLE)).to_be_hidden()
-        sync_api.expect(page.locator(TILES)).to_have_count(100)
+        sync_api.expect(page.locator(TILES)).to_have_count(324)
         sync_api.expect(page.locator(EXPLORE)).to_be_visible()
         page.locator(EXPLORE).click()
         sync_api.expect(page).to_have_url(f"{ORIGIN}atlas.html")
@@ -937,8 +909,14 @@ def test_news_cards_expand_only_on_press_and_legacy_bookmarks_forward(
         page.goto(ORIGIN, wait_until="load")
         preview = page.evaluate(NEWS)
         selected = news_highlights.highlights(render_changelog.load())
-        assert preview["entries"] == [entry["id"] for entry in selected]
-        title_link = page.locator(".site-news-header > h3 > a").first
+        carried = news_highlights.carried(render_changelog.load())
+        assert preview["entries"] == [entry["id"] for entry in carried]
+        assert [day["id"] for day in preview["days"] if not day["hidden"]] == [
+            render_changelog.entry_anchor(entry["id"]) for entry in selected
+        ]
+        title_link = page.locator(
+            "[data-news-day]:not([hidden]) .site-news-header > h3 > a"
+        ).first
         anchor = render_changelog.entry_anchor(selected[0]["id"])
         sync_api.expect(title_link).to_have_attribute("href", f"news.html#{anchor}")
         title_link.click()
@@ -963,12 +941,30 @@ def test_news_cards_expand_only_on_press_and_legacy_bookmarks_forward(
         assert footer["href"] == f"{document['repository']}/blob/main/CHANGELOG.md"
         assert preview["reference_article_title"] is not None
         for surface in (preview, news):
+            assert surface["reference_prose"] is not None
             assert surface["overflow"] == 0
             for day in surface["days"]:
+                if day["hidden"]:
+                    # The box's cards outside its opening levels wait for its filter.
+                    assert surface is preview
+                    continue
                 assert day["border"] == 1
                 assert 0 <= day["left"] < day["right"] <= width
                 assert day["family"] == surface["family"]
-                assert day["body_family"] == surface["family"]
+                assert day["body_family"] == surface["reference_prose"]["family"]
+                assert day["body_family"] != surface["family"]
+                for role in ("size", "weight", "leading"):
+                    assert day["body_style"][role] == surface["reference_prose"][role]
+                assert day["metadata_families"]
+                assert set(day["metadata_families"]) == {surface["family"]}
+                assert day["date_family"] == surface["family"]
+                assert set(day["metadata_colors"]) == {day["date_color"]}
+                assert day["date_color"] != surface["text_color"]
+                assert day["body_style"]["color"] == surface["text_color"]
+                if day["prose_records_gap"] is not None:
+                    assert 16 <= day["prose_records_gap"] <= 20
+                for padding in day["prose_padding"].values():
+                    assert 0 < padding <= 6
                 assert day["date_transform"] == "none"
                 assert day["title_style"] == preview["reference_article_title"]
                 assert day["headline_style"] == day["title_style"]
@@ -976,8 +972,9 @@ def test_news_cards_expand_only_on_press_and_legacy_bookmarks_forward(
                 assert day["title_before_date"]
                 assert day["date_before_topics"]
                 assert day["metadata_after_date"]
-                for gap in ("title_date_gap", "date_metadata_gap", "metadata_body_gap"):
+                for gap in ("title_date_gap", "date_metadata_gap"):
                     assert 0 <= day[gap] <= 7, (day["id"], gap, day[gap])
+                assert 8 <= day["metadata_body_gap"] <= 12
                 if day["paragraph_gap"] is not None:
                     assert 4 <= day["paragraph_gap"] <= 12
                 assert day["meter_count"] == 1
@@ -992,7 +989,7 @@ def test_news_cards_expand_only_on_press_and_legacy_bookmarks_forward(
                     assert float(topic["size"].removesuffix("px")) < day["title_size"]
                     assert topic["family"] == day["title_style"]["family"]
         archive_days = {day["id"]: day for day in news["days"]}
-        for day in preview["days"]:
+        for day in (day for day in preview["days"] if not day["hidden"]):
             assert day["topic_styles"] == archive_days[day["id"]]["topic_styles"]
             assert day["headline_style"] == archive_days[day["id"]]["headline_style"]
         card = page.locator("[data-news-day].is-collapsed").first
@@ -1055,6 +1052,8 @@ def test_news_cards_expand_only_on_press_and_legacy_bookmarks_forward(
         opened = reading()
         assert opened["body_height"] >= opened["body_scroll"] - 1
         assert opened["fade"] == "0"
+        if screenshot_dir := os.environ.get("SQPACK_NEWS_SCREENSHOT_DIR"):
+            card.screenshot(path=str(Path(screenshot_dir) / f"news-card-expanded-{width}.png"))
         page.mouse.move(0, 0)
         assert reading()["height"] == opened["height"]
         button.press("Space")
@@ -1168,6 +1167,182 @@ def test_news_cards_expand_only_on_press_and_legacy_bookmarks_forward(
                 context.close()
 
 
+@pytest.mark.parametrize("width", WIDTHS)
+def test_home_news_box_opens_on_its_levels_and_its_compact_filter_widens_it(
+    browser: Any, payloads: dict[str, bytes], width: int
+) -> None:
+    """The box opens on `news_highlights.default_levels`, the newest `LIMIT` there. Its
+    filter is the archive's significance widget at the shared chooser size, lighter, at
+    the right and above the cards. A keyboard press changes the levels and the box shows
+    the newest `LIMIT` at them, or says nothing matches; its "All News" link carries the
+    choice to the archive, which opens on it. In both schemes a pressed level reads apart
+    from the others. Without scripts the box shows its opening levels and no filter."""
+    document = render_changelog.load()
+    carried = news_highlights.carried(document)
+    levels = set(news_highlights.default_levels(document))
+    limit = news_highlights.LIMIT
+    significance = '[aria-labelledby="news-significance-label"]'
+
+    def newest(chosen: set[int]) -> list[str]:
+        return [
+            render_changelog.entry_anchor(entry["id"])
+            for entry in carried
+            if entry["significance"]["score"] in chosen
+        ][:limit]
+
+    def spoken(chosen: set[int]) -> str:
+        shown = len(newest(chosen))
+        named = ", ".join(f"S{score}" for score in sorted(chosen))
+        return f"Showing {shown} news item{'' if shown == 1 else 's'} at {named}"
+
+    def look(page: Any, score: int) -> dict[str, Any]:
+        choice = {"chooser": significance, "choice": f'[data-news-score="{score}"]'}
+        return page.evaluate(NEWS_FILTERS, choice)["chooser"]
+
+    page = browser.new_page(
+        viewport={"width": width, "height": 900},
+        reduced_motion="reduce",
+        has_touch=width == 390,
+    )
+    _serve(page, payloads)
+    try:
+        page.goto(ORIGIN, wait_until="load")
+
+        def visible() -> list[str]:
+            return [
+                card["id"] for card in page.evaluate(NEWS_FILTERS)["cards"] if card["visible"]
+            ]
+
+        seen = page.evaluate(NEWS_FILTERS)
+        assert not seen["controls_hidden"]
+        assert {int(score) for score in seen["scores"]} == levels
+        assert [group["name"] for group in seen["groups"]] == ["Significance"]
+        assert seen["groups"][0]["hidden_legend"]
+        assert seen["resets"] == []
+        # The archive's live count, out of sight, says what the box shows.
+        assert seen["count"] == spoken(levels)
+        assert not seen["empty"]
+        assert seen["overflow"] == 0
+        assert visible() == newest(levels)
+        for score, meaning in seen["score_tooltips"].items():
+            description = render_changelog.news_significance_tooltip(int(score))
+            assert meaning == f"Significance S{score}: {description}"
+        group = page.locator(f"[data-news-filters] {significance}").bounding_box()
+        card = page.locator("[data-news-day]:not([hidden])").first.bounding_box()
+        assert abs(group["x"] + group["width"] - card["x"] - card["width"]) <= 1
+        assert group["y"] + group["height"] <= card["y"]
+        compact = look(page, 5)["appearance"]
+        for scheme in ("light", "dark"):
+            page.emulate_media(color_scheme=scheme)
+            pressed, other = (look(page, score)["appearance"] for score in (5, 3))
+            assert pressed["background-color"] != other["background-color"], scheme
+            if screenshot_dir := os.environ.get("SQPACK_NEWS_SCREENSHOT_DIR"):
+                page.locator("#news").scroll_into_view_if_needed()
+                page.screenshot(
+                    path=str(Path(screenshot_dir) / f"home-news-{scheme}-{width}.png"),
+                    clip={
+                        "x": 0,
+                        "y": page.locator("#news").bounding_box()["y"],
+                        "width": width,
+                        "height": 420,
+                    },
+                )
+        page.emulate_media(color_scheme="light")
+        widened = levels | {3}
+        page.locator('[data-news-filters] button[data-news-score="3"]').focus()
+        page.keyboard.press("Enter")
+        assert visible() == newest(widened)
+        assert page.evaluate(NEWS_FILTERS)["count"] == spoken(widened)
+        carry = page.locator("a[data-news-carry]").get_attribute("href")
+        query = parse_qs(urlsplit(carry).query)
+        assert query["news-s"] == [",".join(str(score) for score in sorted(widened))]
+        for score in sorted(widened):
+            page.locator(f'[data-news-filters] button[data-news-score="{score}"]').focus()
+            page.keyboard.press(" ")
+        seen = page.evaluate(NEWS_FILTERS)
+        assert seen["scores"] == []
+        assert seen["count"] == "No news matches these filters"
+        assert seen["empty"]
+        assert not visible()
+        page.locator('[data-news-filters] button[data-news-score="3"]').focus()
+        page.keyboard.press("Enter")
+        assert visible() == newest({3})
+        assert urlsplit(page.url).query == ""
+        page.locator("a[data-news-carry]").click()
+        page.wait_for_url(f"{ORIGIN}news.html?news-s=3")
+        archive = page.evaluate(NEWS_FILTERS)
+        assert archive["scores"] == ["3"]
+        archive_look = look(page, 5)["appearance"]
+        # One small chooser size on every page (the owner, 23 October 2026); the box's
+        # form is quieter by its weight alone.
+        assert compact["font-size"] == archive_look["font-size"]
+        assert int(compact["font-weight"]) < int(archive_look["font-weight"])
+        assert compact["font-family"] == archive_look["font-family"]
+        static = browser.new_page(
+            viewport={"width": width, "height": 900}, java_script_enabled=False
+        )
+        _serve(static, payloads)
+        try:
+            static.goto(ORIGIN, wait_until="load")
+            plain = static.evaluate(NEWS_FILTERS)
+            assert plain["controls_hidden"]
+            assert [card["id"] for card in plain["cards"] if card["visible"]] == newest(levels)
+            assert plain["overflow"] == 0
+        finally:
+            static.close()
+    finally:
+        page.close()
+
+
+@pytest.mark.parametrize("width", WIDTHS)
+def test_recently_added_reads_as_the_results_pages_days_with_and_without_scripts(
+    browser: Any, payloads: dict[str, bytes], width: int
+) -> None:
+    """Recently Added sits above News, opens on its newest day and keeps every line
+    inside the page at both widths, in both schemes and without scripts; its days are
+    native disclosures, so the older ones open by keyboard with or without scripts."""
+    overview = site_renders.overview()
+    days = [recent.day.isoformat() for recent in overview_sections.recent_days(overview)]
+    for scripts in (True, False):
+        page = browser.new_page(
+            viewport={"width": width, "height": 900},
+            reduced_motion="reduce",
+            java_script_enabled=scripts,
+        )
+        _serve(page, payloads)
+        try:
+            page.goto(ORIGIN, wait_until="load")
+            section = page.locator("#recently-added")
+            news = page.locator("#news")
+            assert section.bounding_box()["y"] < news.bounding_box()["y"]
+            blocks = page.locator(".site-added details[data-day]")
+            assert blocks.count() == len(days)
+            shown = [blocks.nth(index).get_attribute("data-day") for index in range(len(days))]
+            assert shown == days
+            first = blocks.first.locator("li").first
+            assert first.is_visible()
+            assert not blocks.nth(1).locator("li").first.is_visible()
+            blocks.nth(1).locator("summary").focus()
+            page.keyboard.press("Enter")
+            site_browser.api().expect(blocks.nth(1).locator("li").first).to_be_visible()
+            for scheme in ("light", "dark"):
+                page.emulate_media(color_scheme=scheme)
+                assert page.evaluate(NEWS_FILTERS)["overflow"] == 0, (scheme, scripts)
+                if scripts and (screenshot_dir := os.environ.get("SQPACK_NEWS_SCREENSHOT_DIR")):
+                    section.scroll_into_view_if_needed()
+                    page.screenshot(
+                        path=str(Path(screenshot_dir) / f"home-recent-{scheme}-{width}.png"),
+                        clip={
+                            "x": 0,
+                            "y": section.bounding_box()["y"] - 8,
+                            "width": width,
+                            "height": 900,
+                        },
+                    )
+        finally:
+            page.close()
+
+
 def test_excluded_news_bookmarks_reach_the_retained_changelog(
     browser: Any, payloads: dict[str, bytes]
 ) -> None:
@@ -1247,11 +1422,8 @@ def test_news_facets_history_bookmarks_and_shared_meters(
         return seen
 
     def pressed_under_pointer(button: Any, topic: str, scheme: str) -> None:
-        """A press on a topic shows at once, with the pointer still on it: pale turns
-        full and full turns pale, or on a touch screen gray turns full and back. The
-        selected state carries a visible check against its fill, so selection never
-        rests on hue alone, and holding the check's place keeps the button where it was
-        (`think-slt2`)."""
+        """A topic retains its neutral surface and colored ink when pressed. The
+        visible check carries selection without moving the button (`think-slt2`)."""
         choice = {
             "chooser": '[aria-labelledby="news-topics-label"]',
             "choice": f'[data-news-topic="{topic}"]',
@@ -1265,22 +1437,20 @@ def test_news_facets_history_bookmarks_and_shared_meters(
             states.append(page.evaluate(NEWS_FILTERS, choice)["chooser"])
             assert button.bounding_box() == box, (scheme, topic)
         fills = [state["appearance"]["background-color"] for state in states]
-        assert fills[0] != fills[1] != fills[2], (scheme, topic, fills)
-        assert fills[0] == fills[2], (scheme, topic, fills)
+        assert len(set(fills)) == 1, (scheme, topic, fills)
         for state in states:
             pressed = state["pressed"] == "true"
             assert state["check_visible"] is pressed, (scheme, topic, state["pressed"])
+            assert (
+                state["appearance"]["background-color"] == state["chip"]["background-color"]
+            ), (scheme, topic)
             if pressed:
-                assert (
-                    state["appearance"]["background-color"]
-                    == (state["chip"]["background-color"])
-                ), (scheme, topic)
                 assert state["check_contrast"] >= 4.5, (scheme, topic, state["check_contrast"])
-            elif width == 390:
-                assert (
-                    state["appearance"]["background-color"]
-                    == (state["neutral"]["background-color"])
-                ), (scheme, topic)
+
+    def open_topics() -> None:
+        trigger = page.locator("[data-site-filter-trigger]")
+        if trigger.get_attribute("aria-expanded") != "true":
+            trigger.click()
 
     def score_explanations_leave_the_filters_free() -> None:
         """An S button's explanation never lies over a filter control or the shown
@@ -1305,8 +1475,8 @@ def test_news_facets_history_bookmarks_and_shared_meters(
             clear = page.evaluate(TOOLTIP_CLEAR)
             assert clear["covers"] == clear["covers_header"] == [], ("focus", score, clear)
             page.keyboard.press("Escape")
-            topics = page.locator("button[data-news-topic]").all()
-            for topic in topics if width == 1280 else topics[:1]:
+            topics = page.locator("[data-site-filter-trigger]").all()
+            for topic in topics:
                 page.mouse.move(0, 0)
                 button.hover()
                 sync_api.expect(tooltip).to_be_visible()
@@ -1314,11 +1484,11 @@ def test_news_facets_history_bookmarks_and_shared_meters(
                 assert clear["covers"] == clear["covers_header"] == [], ("hover", score, clear)
                 box = topic.bounding_box()
                 assert box is not None
-                pressed = topic.get_attribute("aria-pressed")
+                expanded = topic.get_attribute("aria-expanded")
                 page.mouse.click(box["x"] + box["width"] / 2, box["y"] + box["height"] / 2)
-                assert topic.get_attribute("aria-pressed") != pressed, (score, clear)
+                assert topic.get_attribute("aria-expanded") != expanded, (score, clear)
                 topic.click()
-                assert topic.get_attribute("aria-pressed") == pressed
+                assert topic.get_attribute("aria-expanded") == expanded
         if width != 1280:
             return
         # Scrolled down and then back up, the header shows, and with the filters 120 px
@@ -1357,23 +1527,12 @@ def test_news_facets_history_bookmarks_and_shared_meters(
                     '[data-news-score="4"]',
                     '[data-news-score="3"]',
                 ),
-                (
-                    "topics",
-                    "news.html",
-                    '[aria-labelledby="news-topics-label"]',
-                    '[data-news-topic][aria-pressed="true"]',
-                    '[data-news-topic][aria-pressed="false"]',
-                ),
             ):
                 page.goto(f"{ORIGIN}{surface}", wait_until="load")
-                if name == "topics":
-                    page.locator(group).locator("[data-news-topic]").first.click()
                 samples = {}
                 for selection, choice in (("selected", chosen), ("unselected", other)):
                     control = page.locator(group).locator(choice).first
                     for interaction in ("normal", "hover", "focus"):
-                        # A score's explanation opens above the filters, over the
-                        # heading: dismiss it before the heading takes focus back.
                         page.keyboard.press("Escape")
                         page.locator("h1").first.click()
                         page.mouse.move(0, 0)
@@ -1395,118 +1554,81 @@ def test_news_facets_history_bookmarks_and_shared_meters(
                                 sync_api.expect(
                                     page.locator(".site-rating-tooltip.kpress-tooltip-visible")
                                 ).to_have_text(f"Significance S{score}: {level}")
-                        if name == "topics":
-                            assert sample["label"] == sample["chip_label"]
-                            for property_name in (
-                                "color",
-                                "text-transform",
-                                "font-variant-caps",
-                                "letter-spacing",
-                            ):
-                                assert (
-                                    sample["appearance"][property_name]
-                                    == sample["chip"][property_name]
-                                ), (
-                                    scheme,
-                                    selection,
-                                    interaction,
-                                    property_name,
-                                )
-                            fill = sample["appearance"]["background-color"]
-                            # Only an unselected topic under a hovering pointer turns
-                            # pale; a touch screen has no hover (`think-slt2`).
-                            pale = interaction == "hover" and selection == "unselected"
-                            if pale and width != 390:
-                                assert fill != sample["chip"]["background-color"]
-                                assert fill != sample["neutral"]["background-color"]
-                                if scheme == "light":
-                                    assert sample["brightness"] > sample["chip_brightness"]
-                                else:
-                                    assert sample["brightness"] < sample["chip_brightness"]
-                            elif selection == "selected":
-                                assert fill == sample["chip"]["background-color"]
-                            else:
-                                assert fill == sample["neutral"]["background-color"]
                         samples[selection, interaction] = {
                             key: sample[key]
                             for key in ("appearance", "border", "gap", "height")
                         }
                 appearances[name] = samples
             assert appearances["scores"] == appearances["home"], scheme
-            topic_properties = {
-                "background-color",
-                "color",
-                "text-transform",
-                "font-variant-caps",
-                "letter-spacing",
-                "box-shadow",
-                "outline-color",
-                "text-decoration-line",
-            }
-            for key, topic in appearances["topics"].items():
-                home = appearances["home"][key]
-                assert {
-                    name: value
-                    for name, value in topic["appearance"].items()
-                    if name not in topic_properties
-                } == {
-                    name: value
-                    for name, value in home["appearance"].items()
-                    if name not in topic_properties
-                }, (scheme, key)
-                assert topic["appearance"]["text-transform"] == "none"
-                assert topic["appearance"]["font-variant-caps"] == "normal"
-                if key[1] == "focus":
-                    assert topic["appearance"]["outline-style"] != "none"
-                    assert topic["appearance"]["outline-width"] != "0px"
-                assert topic["appearance"]["box-shadow"] == "none"
-                assert topic["appearance"]["text-decoration-line"] == "none"
-                assert topic["border"] == home["border"] == "0px"
-                assert topic["appearance"]["border-top-width"] == "1px"
-                assert topic["appearance"]["border-right-width"] == "1px"
-                assert topic["gap"] == home["gap"] == "normal"
-                assert topic["height"] == pytest.approx(home["height"], abs=0.1)
-            topic_group = page.locator('[aria-labelledby="news-topics-label"]')
-            group_box = topic_group.bounding_box()
-            assert group_box is not None
-            rows = set()
-            for button in topic_group.locator("button").all():
-                box = button.bounding_box()
-                assert box is not None
-                rows.add(round(box["y"], 1))
-                assert group_box["x"] <= box["x"]
-                assert box["x"] + box["width"] <= group_box["x"] + group_box["width"]
-                assert group_box["y"] <= box["y"]
-                assert box["y"] + box["height"] <= group_box["y"] + group_box["height"]
-                sync_api.expect(button).to_have_css("white-space", "nowrap")
-                sync_api.expect(button).to_have_css("border-right-width", "1px")
-                if topic := button.get_attribute("data-news-topic"):
-                    sample = page.evaluate(
-                        NEWS_FILTERS,
-                        {
-                            "chooser": '[aria-labelledby="news-topics-label"]',
-                            "choice": f'[data-news-topic="{topic}"]',
-                        },
-                    )["chooser"]
-                    assert sample["label"] == sample["chip_label"]
-                    pressed_under_pointer(button, topic, scheme)
-            if width == 390:
-                assert len(rows) > 1
             request.node.user_properties.append(
                 (f"chooser-{scheme}", str(appearances["home"]["selected", "normal"]))
             )
+            page.keyboard.press("Escape")
+            trigger = page.locator("[data-site-filter-trigger]")
+            panel = page.locator("[data-site-filter-options]")
+            assert trigger.get_attribute("aria-controls") == panel.get_attribute("id")
+            sync_api.expect(panel).to_have_css("transition-duration", "0s")
+            sync_api.expect(panel).to_be_hidden()
+            assert page.locator("[data-site-filter-summary]").text_content() == "All"
+            trigger.focus()
+            page.keyboard.press("ArrowDown")
+            all_topics = panel.locator("[data-site-filter-all]")
+            sync_api.expect(all_topics).to_be_focused()
+            page.keyboard.press("End")
+            sync_api.expect(panel.locator("button").last).to_be_focused()
+            page.keyboard.press("Home")
+            sync_api.expect(all_topics).to_be_focused()
+            page.keyboard.press("ArrowDown")
+            first = panel.locator("button[data-news-topic]").first
+            sync_api.expect(first).to_be_focused()
+            page.keyboard.press("Space")
+            assert first.get_attribute("aria-pressed") == "false"
+            assert trigger.get_attribute("aria-expanded") == "true"
+            page.keyboard.press("Space")
+            assert first.get_attribute("aria-pressed") == "true"
+            for button in panel.locator("button[data-news-topic]").all():
+                topic = button.get_attribute("data-news-topic")
+                assert topic
+                pressed_under_pointer(button, topic, scheme)
+            panel_box = panel.bounding_box()
+            assert panel_box is not None
+            assert panel_box["x"] >= 15
+            assert panel_box["x"] + panel_box["width"] <= width - 15
+            page.keyboard.press("Escape")
+            sync_api.expect(panel).to_be_hidden()
+            sync_api.expect(trigger).to_be_focused()
+            open_topics()
+            page.locator("h1").first.click()
+            sync_api.expect(panel).to_be_hidden()
+            open_topics()
+            panel.locator("button").last.focus()
+            page.keyboard.press("Tab")
+            sync_api.expect(panel).to_be_hidden()
+            sync_api.expect(page.locator("[data-news-reset]")).to_be_focused()
+            palette = state()["news_topic_palette"]
+            assert palette
+            assert len({chip["background"] for chip in palette}) == 1
+            assert all(chip["contrast"] >= 4.5 for chip in palette), palette
+            assert len({chip["color"] for chip in palette}) > 1
+            page.goto(f"{ORIGIN}news.html?news-topics=verification", wait_until="load")
+            assert page.locator("[data-site-filter-summary]").text_content() == "Verification"
+            open_topics()
+            panel.locator('button[data-news-topic="optimality"]').click()
+            assert page.locator("[data-site-filter-summary]").text_content().endswith("+1")
+            assert trigger.get_attribute("aria-expanded") == "true"
+            all_topics.click()
+            assert page.locator("[data-site-filter-summary]").text_content() == "All"
+            assert "news-topics" not in parse_qs(urlsplit(page.url).query)
+            page.goto(f"{ORIGIN}news.html?news-topics=none", wait_until="load")
+            assert page.locator("[data-site-filter-summary]").text_content() == "None"
+            open_topics()
+            all_topics.click()
+            assert page.locator("[data-site-filter-summary]").text_content() == "All"
             seen = state()
-            if screenshot_dir := os.environ.get("SQPACK_NEWS_SCREENSHOT_DIR"):
-                page.locator(".site-news-filters").screenshot(
-                    path=str(Path(screenshot_dir) / f"news-chooser-{scheme}-{width}.png")
-                )
-            palette = seen["topic_palette"]
-            assert len(set(palette.values())) == len(palette)
             assert seen["groups"] == [
                 {"name": "Significance", "hidden_legend": True, "tabs": 0},
                 {"name": "Topics", "hidden_legend": True, "tabs": 0},
             ]
-            assert abs(seen["count_right_gap"]) <= 0.5
             assert abs(seen["count_card_right_gap"]) <= 0.5
             assert seen["count_above_cards"]
             news_count = seen["count_style"]
@@ -1522,13 +1644,16 @@ def test_news_facets_history_bookmarks_and_shared_meters(
                 broken["appearance"]["font-size"]
                 != appearances["home"]["selected", "normal"]["appearance"]["font-size"]
             ), "the contract must reject a page-specific chooser override"
+            if screenshot_dir := os.environ.get("SQPACK_NEWS_SCREENSHOT_DIR"):
+                page.locator(".site-news-filters").screenshot(
+                    path=str(Path(screenshot_dir) / f"news-chooser-{scheme}-{width}.png")
+                )
             page.goto(f"{ORIGIN}results.html", wait_until="load")
             results_state = state()
-            results_count = results_state["count_style"]
-            for topic in set(palette) & set(results_state["topic_palette"]):
-                assert palette[topic] == results_state["topic_palette"][topic]
+            # Results and News topics share a neutral surface with distinct ink hues.
+            assert len(set(results_state["topic_palette"].values())) > 1
             for key in ("font-family", "font-size", "font-weight", "line-height", "color"):
-                assert news_count[key] == results_count[key], (scheme, key)
+                assert news_count[key] == results_state["count_style"][key], (scheme, key)
         page.emulate_media(color_scheme="light")
 
     try:
@@ -1555,14 +1680,18 @@ def test_news_facets_history_bookmarks_and_shared_meters(
         sync_api.expect(
             page.locator(".site-rating-tooltip.kpress-tooltip-visible")
         ).to_have_count(0)
+        open_topics()
         for topic in used_topics:
             if topic != "optimality":
                 page.locator(f'button[data-news-topic="{topic}"]').click()
         check({3, 4, 5}, {"optimality"})
         page.locator('button[data-news-topic="verification"]').click()
         check({3, 4, 5}, {"optimality", "verification"})
+        page.keyboard.press("Escape")
+        sync_api.expect(page.locator("[data-site-filter-options]")).to_be_hidden()
         page.locator("[data-news-reset]").click()
         check({4, 5})
+        open_topics()
         for topic in used_topics:
             page.locator(f'button[data-news-topic="{topic}"]').click()
         check({4, 5}, set())
@@ -1679,5 +1808,71 @@ def test_significance_meter_spacing_rejects_oversized_boxes(
             or item["side_space"] < 2 * (item["border"] + item["padding"]) - 0.5
             for item in crowded
         ), ("the spacing probe must reject a meter its label and bars overflow", crowded)
+    finally:
+        page.close()
+
+
+#: Every page that sets a compact chooser, and the kinds of control each must show. The
+#: atlases are opened at a named size, which keeps the scroll from resizing their tiles.
+CHOOSER_SURFACES = {
+    "atlas.html?size=medium": {"tab"},
+    "index.html?size=medium": {"tab"},
+    "news.html": {"tab", "trigger", "reset"},
+    "results.html": {"tab"},
+}
+
+
+@pytest.fixture(scope="module")
+def doubled(driver: Any) -> Iterator[Any]:
+    """The same Chromium laid out for a 2x screen. `--force-device-scale-factor` lays a
+    page out in device pixels, as a Retina display does, so a font's ascent and the
+    leading round there as they do for a reader on one; a context's
+    `device_scale_factor` draws the 1x layout larger and rounds nothing differently.
+    It is launched as `site_browser.launch` launches the 1x one, with that one switch
+    more: where none can be launched the test skips, or fails where the run requires a
+    Chromium."""
+    sync_api = site_browser.api()
+    try:
+        launched = preview_site.launch_chromium(driver, args=["--force-device-scale-factor=2"])
+    except sync_api.Error as error:
+        site_browser.unavailable(
+            f"no Chromium to launch at 2x: {error.message.splitlines()[0]}"
+        )
+    yield launched
+    launched.close()
+
+
+@pytest.mark.parametrize("scale", [1, 2])
+def test_every_compact_chooser_centers_its_capitals(
+    browser: Any, payloads: dict[str, bytes], scale: int, request: pytest.FixtureRequest
+) -> None:
+    """Every compact chooser's words stand in the middle of their control, on the Atlas,
+    the homepage, News and Results, at both widths and at 1x and 2x. The labels are set
+    in capitals, so the middle of the capitals is what reads as the text's middle, and
+    it is held to a quarter pixel.
+
+    Set by the leading and the padding, the capitals sat 0.35px high at 1x and 0.86px
+    high on a 2x screen, where the browser rounds the font's ascent and the half leading
+    in device pixels (the owner, 2026-10-23). Each line is now trimmed to its capitals
+    (`text-box`) and centered in a control 24px tall, the floor a tap target needs."""
+    chromium = browser if scale == 1 else request.getfixturevalue("doubled")
+    page = chromium.new_page(viewport={"width": WIDTHS[0], "height": 900})
+    _serve(page, payloads)
+    try:
+        for path, kinds in CHOOSER_SURFACES.items():
+            page.goto(f"{ORIGIN}{path}", wait_until="load")
+            check_site_rendering.wait_for_fonts(page)
+            for width in WIDTHS:
+                page.set_viewport_size({"width": width, "height": 900})
+                controls = page.evaluate(CHOOSER_LABELS)
+                where = (path, width, scale)
+                assert {control["kind"] for control in controls} == kinds, where
+                for control in controls:
+                    assert control["fontSize"] == pytest.approx(15.2 * 0.875, abs=0.01), where
+                    assert control["height"] >= 24 - 0.01, (where, control)
+                    assert control["words"], (where, control)
+                    for word in control["words"]:
+                        assert word["transform"] == "uppercase", (where, control)
+                        assert abs(word["offset"]) <= 0.25, (where, control)
     finally:
         page.close()

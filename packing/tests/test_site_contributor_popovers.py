@@ -1,4 +1,4 @@
-"""Canonical article loading, contributor transitions and native link fallbacks."""
+"""Native profile navigation, profile design, and retained case/result loading races."""
 
 from __future__ import annotations
 
@@ -26,7 +26,6 @@ from tests import site_browser
 
 PROBES = Path(__file__).parent / "probes"
 LAYOUT = probe(PROBES, "contributor_popovers/layout")
-NATIVE_CLICK = probe(PROBES, "contributor_popovers/native_click")
 SETTLED = probe(PROBES, "contributor_popovers/settled")
 DESIGN = probe(PROBES, "contributor_popovers/design")
 HEADING = probe(PROBES, "contributor_popovers/heading")
@@ -71,20 +70,10 @@ def served(tmp_path_factory: pytest.TempPathFactory) -> Iterator[str]:
         "popover.js",
         "row-popover.js",
         "case-popover.js",
-        "contributor-popover.js",
     )
     for name in scripts:
         (root / name).write_text((render_overview.BROWSER / name).read_text())
     (root / "site.css").write_text(render_overview.SITE_CSS.read_text())
-    contributor = (
-        '<div id="pop-contributor" class="site-popover site-contributor-popover" '
-        'popover="auto" data-contributor-popover role="dialog" '
-        'aria-label="Profile">'
-        '<button class="site-popover-close" popovertarget="pop-contributor" '
-        'popovertargetaction="hide">Close</button><div data-contributor-body></div>'
-        '<a data-contributor-open href="profiles/walter-stromquist.html">'
-        "Open profile</a></div>"
-    )
     body = (
         '<h1 id="title">Host title</h1><main><a id="profile-link" '
         'href="profiles/walter-stromquist.html">Walter Stromquist</a>'
@@ -110,7 +99,6 @@ def served(tmp_path_factory: pytest.TempPathFactory) -> Iterator[str]:
         'popovertargetaction="hide">Close</button><div data-row-pop-src="result/test.html">'
         '<a href="result/test.html">Read result</a></div></div>'
         + render_case_pages.case_popover()
-        + contributor
         + "</main>"
     )
     document = (
@@ -223,77 +211,16 @@ def _page(browser: Any, **options: Any) -> Iterator[Any]:
 
 @pytest.mark.parametrize("width", [1280, 390])
 @pytest.mark.parametrize("theme", ["light", "dark"])
-def test_profile_content_scoped_links_and_focus(
-    browser: Any, served: str, width: int, theme: str
-) -> None:
-    with _page(browser, viewport={"width": width, "height": 900}, color_scheme=theme) as page:
-        requests: list[str] = []
-        page.on("request", lambda request: requests.append(request.url))
-        page.goto(served)
-        link = page.locator("#profile-link")
-        # The script names each link it enhances as opening a dialog; the HTML does not.
-        site_browser.api().expect(link).to_have_attribute("aria-haspopup", "dialog")
-        link.focus()
-        page.keyboard.press("Enter")
-        panel = page.locator("#pop-contributor")
-        article = panel.locator("article.site-contributor")
-        article.wait_for(state="visible")
-        canonical = page.context.new_page()
-        canonical.goto(f"{served}profiles/walter-stromquist.html")
-        assert (
-            article.inner_text() == canonical.locator("article.site-contributor").inner_text()
-        )
-        canonical.close()
-        heading_id = article.locator("h1").get_attribute("id")
-        assert heading_id != "title"
-        assert article.get_attribute("aria-labelledby") == heading_id
-        assert panel.get_attribute("aria-labelledby") == heading_id
-        site_browser.api().expect(panel).to_have_accessible_name("Walter Stromquist")
-        assert (
-            article.locator('[data-case="11"]').get_attribute("href")
-            == f"{served}cases/11.html"
-        )
-        assert (
-            panel.locator("[data-contributor-open]").get_attribute("href")
-            == f"{served}profiles/walter-stromquist.html"
-        )
-        article.locator('a:has-text("Biography")').click()
-        assert panel.is_visible()
-        # The scoped target is this load's alone, so the address keeps no fragment for it.
-        assert page.url == served
-        layout = page.evaluate(LAYOUT)
-        assert layout["duplicateIds"] == []
-        assert layout["left"] >= 0
-        assert layout["right"] <= width
-        assert layout["pageWidth"] <= width
-        page.keyboard.press("Escape")
-        site_browser.api().expect(link).to_be_focused()
-        link.click()
-        article.wait_for(state="visible")
-        assert article.locator("h1").get_attribute("id") != heading_id
-        assert requests.count(f"{served}profiles/walter-stromquist.html") == 1
-
-
-@pytest.mark.parametrize("width", [1280, 390])
-@pytest.mark.parametrize("theme", ["light", "dark"])
-@pytest.mark.parametrize("overlay", [False, True], ids=["standalone", "popover"])
 def test_generated_profile_uses_shared_roles_without_overflow(
     browser: Any,
     design_generated: str,
     tmp_path: Path,
     width: int,
     theme: str,
-    *,
-    overlay: bool,
 ) -> None:
     with _page(browser, viewport={"width": width, "height": 900}, color_scheme=theme) as page:
-        if overlay:
-            page.goto(f"{design_generated}title-reference.html", wait_until="load")
-            page.locator('main a[href$="profiles/evan-daniel.html"]').click()
-            selector = "#pop-contributor article.site-contributor"
-        else:
-            page.goto(f"{design_generated}profiles/evan-daniel.html", wait_until="load")
-            selector = "main article.site-contributor"
+        page.goto(f"{design_generated}profiles/evan-daniel.html", wait_until="load")
+        selector = "main article.site-contributor"
         article = page.locator(selector)
         article.wait_for(state="visible")
         assert page.locator("html").get_attribute("data-kpress-resolved-theme") == theme
@@ -317,20 +244,8 @@ def test_generated_profile_uses_shared_roles_without_overflow(
         for heading in styles["headings"]:
             assert heading["size"] == pytest.approx(styles["section"]["size"])
             assert heading["leading"] == pytest.approx(styles["section"]["leading"])
-        if overlay:
-            assert styles["title"]["size"] == pytest.approx(styles["headline"]["size"])
-            assert styles["title"]["weight"] == styles["medium"]
-            assert styles["title"]["leading"] == pytest.approx(styles["headline"]["leading"])
-            assert styles["title"]["family"] == styles["note"]["family"]
-            assert styles["title"]["transform"] == "none"
-            assert styles["body"]["family"] == styles["note"]["family"]
-            assert styles["body"]["weight"] == styles["note"]["weight"]
-            assert styles["left"] == pytest.approx(styles["right"], abs=1)
-            assert styles["bodyClearance"] == "0px"
-            assert styles["titleClearance"] == "0px"
-            assert styles["panelWidth"] <= min(36 * 16, width - 32) + 1
-        else:
-            assert styles["body"]["family"] != styles["note"]["family"]
+        assert styles["body"]["family"] != styles["note"]["family"]
+        assert styles["breadcrumbGap"] == pytest.approx(2.5 * 16, abs=1)
         assert styles["overflow"] == []
         for bounds in styles["wideBounds"]:
             assert bounds["left"] >= 0
@@ -338,9 +253,8 @@ def test_generated_profile_uses_shared_roles_without_overflow(
         assert styles["pageWidth"] <= width
         shots = Path(os.environ.get("SQPACK_CONTRIBUTOR_DESIGN_SHOTS", str(tmp_path)))
         shots.mkdir(parents=True, exist_ok=True)
-        mode = "popover" if overlay else "standalone"
-        article.locator(".site-contributor-breadcrumb").scroll_into_view_if_needed()
-        page.screenshot(path=str(shots / f"profile-{mode}-{width}-{theme}.png"))
+        article.locator("h1").scroll_into_view_if_needed()
+        page.screenshot(path=str(shots / f"profile-{width}-{theme}.png"))
 
 
 @pytest.mark.parametrize("width", [1280, 390])
@@ -375,189 +289,6 @@ def test_generated_contributor_page_titles_match_the_shared_page_role(
             Path(directory).mkdir(parents=True, exist_ok=True)
             name = "directory" if record.endswith("index.html") else "profile"
             page.screenshot(path=str(Path(directory) / f"page-title-{name}.png"))
-
-
-@pytest.mark.parametrize("opener", ["case", "result"])
-def test_overlay_replacement_retains_page_focus(browser: Any, served: str, opener: str) -> None:
-    with _page(browser) as page:
-        page.goto(served)
-        origin = page.locator("#case-link" if opener == "case" else "#result-row")
-        origin.click()
-        source = page.locator("#pop-case" if opener == "case" else "#pop-result")
-        name = source.locator('a[href$="/profiles/walter-stromquist.html"]')
-        name.wait_for()
-        # A name in an article cloned after start-up is announced as a dialog opener too.
-        site_browser.api().expect(name).to_have_attribute("aria-haspopup", "dialog")
-        name.click()
-        profile = page.locator("#pop-contributor")
-        profile.locator("article.site-contributor").wait_for(state="visible")
-        assert not source.is_visible()
-        assert page.url == served
-        profile.locator('a[data-case="11"]').click()
-        page.locator("#pop-case article.site-case").wait_for(state="visible")
-        assert not profile.is_visible()
-        page.keyboard.press("Escape")
-        site_browser.api().expect(origin).to_be_focused()
-
-
-def test_pressing_a_name_in_a_row_fetches_only_the_profile(browser: Any, served: str) -> None:
-    """A name in a row is the name's link, not the row: pressing it opens the profile
-    and starts no fetch of the row's whole result page beside it."""
-    with _page(browser) as page:
-        requests: list[str] = []
-        page.on("request", lambda request: requests.append(request.url))
-        page.goto(served)
-        page.locator("#row-name").click()
-        page.locator("#pop-contributor article.site-contributor").wait_for(state="visible")
-        assert f"{served}profiles/evan-daniel.html" in requests
-        assert f"{served}result/test.html" not in requests
-        assert not page.locator("#pop-named").is_visible()
-        page.keyboard.press("Escape")
-        page.locator("#named-row td").first.click()
-        page.locator("#pop-named article.site-result").wait_for(state="visible")
-        assert requests.count(f"{served}result/test.html") == 1
-
-
-def test_native_navigation_and_modified_clicks(browser: Any, served: str) -> None:
-    with _page(browser, java_script_enabled=False) as page:
-        page.goto(served)
-        assert page.locator("#profile-link").get_attribute("aria-haspopup") is None
-        page.locator("#profile-link").click()
-        page.wait_for_url(f"{served}profiles/walter-stromquist.html")
-        assert (
-            page.locator("article.site-contributor")
-            .inner_text()
-            .startswith("Walter Stromquist")
-        )
-    with _page(browser) as page:
-        page.goto(served)
-        for modifier in ("ctrlKey", "metaKey", "shiftKey", "altKey"):
-            assert page.evaluate(NATIVE_CLICK, modifier) is False
-            assert not page.locator("#pop-contributor").is_visible()
-
-
-def test_failed_fetch_follows_the_canonical_link(browser: Any, served: str) -> None:
-    with _page(browser) as page:
-        page.route(
-            "**/profiles/walter-stromquist.html",
-            lambda route: (
-                route.abort() if route.request.resource_type == "fetch" else route.continue_()
-            ),
-        )
-        page.goto(served)
-        page.locator("#profile-link").click()
-        page.wait_for_url(f"{served}profiles/walter-stromquist.html")
-        assert page.locator("article.site-contributor h1").inner_text() == "Walter Stromquist"
-
-
-def test_plain_profile_links_and_the_open_action_navigate(browser: Any, served: str) -> None:
-    """A profile link is known by its address, so a container that keeps its names plain
-    (News, the directory) says so once, and the panel's own **Open profile** action
-    reaches the complete page rather than opening the panel again."""
-    with _page(browser) as page:
-        page.goto(served)
-        # The script has run once the ordinary name beside the plain one is announced.
-        site_browser.api().expect(page.locator("#profile-link")).to_have_attribute(
-            "aria-haspopup", "dialog"
-        )
-        plain = page.locator("#plain-link")
-        assert plain.get_attribute("aria-haspopup") is None
-        plain.click()
-        page.wait_for_url(f"{served}profiles/walter-stromquist.html")
-    with _page(browser) as page:
-        page.goto(served)
-        page.locator("#profile-link").click()
-        panel = page.locator("#pop-contributor")
-        panel.locator("article.site-contributor").wait_for(state="visible")
-        action = panel.locator("[data-contributor-open]")
-        assert action.get_attribute("aria-haspopup") is None
-        action.click()
-        page.wait_for_url(f"{served}profiles/walter-stromquist.html")
-
-
-def test_late_response_cannot_replace_newer_profile_or_reopen_after_escape(
-    browser: Any, served: str
-) -> None:
-    with _page(browser) as page:
-        held: list[Any] = []
-
-        def hold(route: Any) -> None:
-            # Playwright attaches metadata to callbacks; built-in list.append cannot hold it.
-            held.append(route)
-
-        page.route("**/profiles/walter-stromquist.html", hold)
-        page.goto(served)
-        page.locator("#profile-link").click()
-        page.locator("#second-link").click()
-        panel = page.locator("#pop-contributor")
-        panel.locator('h1:has-text("Evan Daniel")').wait_for(state="visible")
-        assert len(held) == 1
-        held.pop().fulfill(status=200, content_type="text/html", body=PROFILE)
-        page.evaluate(SETTLED)
-        assert panel.locator("h1").inner_text() == "Evan Daniel"
-        assert panel.get_attribute("aria-labelledby") == panel.locator("h1").get_attribute("id")
-        site_browser.api().expect(panel).to_have_accessible_name("Evan Daniel")
-        page.keyboard.press("Escape")
-        page.locator("#profile-link").click()
-        panel.locator('h1:has-text("Walter Stromquist")').wait_for(state="visible")
-        site_browser.api().expect(panel).to_have_accessible_name("Walter Stromquist")
-        page.keyboard.press("Escape")
-        # A separate page gives the second request its own empty cache.
-        page.goto(served)
-        page.locator("#profile-link").click()
-        page.keyboard.press("Escape")
-        assert len(held) == 1
-        with page.expect_response("**/profiles/walter-stromquist.html"):
-            held.pop().fulfill(status=200, content_type="text/html", body=PROFILE)
-        page.evaluate(SETTLED)
-        assert not panel.is_visible()
-
-
-@pytest.mark.parametrize("status", [200, 503], ids=["success", "failure"])
-def test_native_panel_cancels_pending_profile_response(
-    browser: Any, served: str, status: int
-) -> None:
-    with _page(browser) as page:
-        held: list[Any] = []
-
-        def hold(route: Any) -> None:
-            if route.request.resource_type == "fetch":
-                held.append(route)
-            else:
-                route.continue_()
-
-        page.route("**/profiles/walter-stromquist.html", hold)
-        page.goto(served)
-        page.locator("#profile-link").click()
-        page.locator("#native-opener").click()
-        native = page.locator("#pop-native")
-        site_browser.api().expect(native).to_be_visible()
-        assert len(held) == 1
-        with page.expect_response("**/profiles/walter-stromquist.html"):
-            held.pop().fulfill(status=status, content_type="text/html", body=PROFILE)
-        page.evaluate(SETTLED)
-        assert page.url == served
-        assert native.is_visible()
-        assert not page.locator("#pop-contributor").is_visible()
-
-
-def test_closing_source_cancels_pending_profile_failure(browser: Any, served: str) -> None:
-    with _page(browser) as page:
-        held: list[Any] = []
-
-        def hold(route: Any) -> None:
-            held.append(route)
-
-        page.route("**/profiles/walter-stromquist.html", hold)
-        page.goto(served)
-        page.locator("#case-link").click()
-        page.locator('#pop-case a[href*="/profiles/"]').click()
-        page.keyboard.press("Escape")
-        assert len(held) == 1
-        held.pop().fulfill(status=503, content_type="text/html", body="Unavailable")
-        page.evaluate(SETTLED)
-        assert page.url == served
-        assert not page.locator("#pop-contributor").is_visible()
 
 
 def test_late_result_body_waits_for_next_opening(browser: Any, served: str) -> None:
@@ -626,8 +357,13 @@ def test_generated_standalone_pages_enhance_article_links(
             article = "article.site-case"
         else:
             link = page.locator('main a[href$="profiles/walter-stromquist.html"]')
-            panel = page.locator("#pop-contributor")
-            article = "article.site-contributor"
+            assert link.get_attribute("aria-haspopup") is None
+            link.click()
+            site_browser.api().expect(page).to_have_url(
+                f"{generated}profiles/walter-stromquist.html"
+            )
+            assert page.locator("[data-contributor-popover]").count() == 0
+            return
         site_browser.api().expect(link).to_be_visible(timeout=2000)
         link.click()
         site_browser.api().expect(panel).to_be_visible(timeout=2000)
@@ -650,7 +386,9 @@ def test_generated_profile_keeps_its_own_anchors_and_breadcrumb_plain(
         assert anchors.count() > 0
         for index in range(anchors.count()):
             assert anchors.nth(index).get_attribute("aria-haspopup") is None
-        breadcrumb = article.locator('.site-contributor-breadcrumb a[href="index.html"]')
+        breadcrumb = page.get_by_role("navigation", name="Breadcrumb").get_by_role(
+            "link", name="Contributor Profiles", exact=True
+        )
         assert breadcrumb.get_attribute("aria-haspopup") is None
         for disclosure in article.locator("details").all():
             if disclosure.get_attribute("open") is None:
@@ -676,12 +414,12 @@ def test_generated_directory_keeps_native_profile_navigation(
         directory = page.evaluate(LAYOUT)["directory"]
         assert directory["headers"] == [
             "Name",
+            "Accounts",
             "Records",
             "Results",
             "Credits",
             "Years active",
             "Resources",
-            "Accounts",
         ]
         name_keys = [row["keys"][0] for row in directory["rows"]]
         assert name_keys == sorted(name_keys)
@@ -702,7 +440,7 @@ def test_generated_directory_keeps_native_profile_navigation(
                 )
                 == "ascending"
             )
-            for column, label in ((1, "Records"), (2, "Results"), (3, "Credits")):
+            for column, label in ((2, "Records"), (3, "Results"), (4, "Credits")):
                 heading = page.get_by_role("columnheader", name=label, exact=True)
                 heading.focus()
                 heading.press("Enter")
@@ -715,7 +453,7 @@ def test_generated_directory_keeps_native_profile_navigation(
                 values = [int(row["keys"][column]) for row in rows]
                 assert values == sorted(values, reverse=True), label
                 assert heading.get_attribute("aria-sort") == "descending"
-            for label, column in (("Years active", 4), ("Resources", 5), ("Accounts", 6)):
+            for label, column in (("Years active", 5), ("Resources", 6), ("Accounts", 1)):
                 heading = page.get_by_role("columnheader", name=label, exact=True)
                 for _ in range(2):
                     heading.click()
@@ -743,5 +481,24 @@ def test_generated_directory_keeps_native_profile_navigation(
             page.locator("main article.site-contributor h1").text_content()
             == "Walter Stromquist"
         )
-        page.locator('nav[aria-label="Breadcrumb"] a[href="index.html"]').click()
-        page.wait_for_url(f"{generated}profiles/index.html")
+        page.get_by_role("navigation", name="Breadcrumb").get_by_role(
+            "link", name="Contributor Profiles", exact=True
+        ).click()
+        page.wait_for_url(f"{generated}profiles/")
+
+
+@pytest.mark.parametrize("selector", ["#profile-link", "#row-name"])
+@pytest.mark.parametrize("javascript", [False, True])
+def test_person_links_navigate_instead_of_opening_panels(
+    browser: Any, served: str, selector: str, *, javascript: bool
+) -> None:
+    with _page(browser, java_script_enabled=javascript) as page:
+        page.goto(served)
+        link = page.locator(selector)
+        href = link.get_attribute("href")
+        assert href
+        assert href.startswith("profiles/")
+        assert link.get_attribute("aria-haspopup") is None
+        link.focus()
+        page.keyboard.press("Enter")
+        site_browser.api().expect(page).to_have_url(served + href)

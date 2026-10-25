@@ -197,9 +197,23 @@ class Prose:
     #: reads it (`verifier_registry.LABELS`). T-223's two routes share the corner verifier
     #: its source reports running, so its replay shares the producer's components.
     confirmation: str = "independently re-implemented"
+    #: Whose re-implementation it is, where its author's system family is also the
+    #: producer's: epistemics.md's confidence order states that diversity after the level
+    #: (rule 4). T-239's review checker is by a Claude agent, as its search was (review A4
+    #: of #757).
+    diversity: str = ""
+    #: What the retained packet holds of the certificate: the certificate, or, where the
+    #: packet is derived-only, the exact fact derived from it (T-239, review A5 of #757).
+    retained: str = "it"
     #: How the certificate states each square. T-196's states a rational centre and the
     #: rotation's cosine and sine, which the adapter turns into a half-angle tangent.
     squares: str = "a rational centre and the tangent of its half-angle"
+    #: For an algebraic house, what decided it here, in place of the two rational routes'
+    #: sentence (`section`). Unset, `sqpack`'s exact verifier over the field alone, as for
+    #: PR #574's algebraic certificates (T-174).
+    field_routes: str = ""
+    #: For an algebraic house, how its witness states each square in the field.
+    field_squares: str = "its centre and the cosine and sine of its rotation"
 
 
 #: Each adopted result, as its register entry and its review describe it.
@@ -579,6 +593,31 @@ RESULTS: dict[str, Prose] = {
             "the work."
         ),
     ),
+    "T-193": Prose(
+        author="Evan Daniel",
+        reported="on [jlevy/squares#639](https://github.com/jlevy/squares/issues/639)",
+        producer_route=True,
+        ai=(
+            "The issue says the solver, checkers and this batch were written and run with "
+            "Claude (Anthropic) as a coding and research agent, directed and reviewed by the "
+            "author."
+        ),
+        confirmation="reproduced with the producer’s code",
+        field_squares=(
+            "its centre, and the tangent of its half-angle with its quarter turns, from which "
+            "the packet computes the cosine and sine of its rotation"
+        ),
+        field_routes=(
+            "The source’s own checker, `verify_exact.py`, read first and run unchanged here, "
+            "decided the form with four mutated controls refused: a reproduction with the "
+            "producer’s code, on one route (T-193’s replay). The house’s witness is the "
+            "packet’s derived fact of the retained form, each square’s basis computed "
+            "exactly in the field, and `sqpack`’s exact separating-axis verifier, the one "
+            "route over a number field maintained here, decided it over that field when the "
+            "house was drawn, with its duplicate-square and outside-container controls (the "
+            "packet’s receipts, which no evidence entry registers)."
+        ),
+    ),
     "T-195": Prose(
         author="PingYou Ltd",
         reported="in [pull request #622](https://github.com/jlevy/squares/pull/622)",
@@ -891,6 +930,278 @@ RESULTS: dict[str, Prose] = {
             "pair"
         ),
     ),
+    "T-229": Prose(
+        author="Mykhailo Polkovskyi",
+        reported="on [jlevy/squares#719](https://github.com/jlevy/squares/issues/719)",
+        producer_route=True,
+        ai=(
+            "The issue says Gemini assisted with solver scripting, precision checks and "
+            "formatting."
+        ),
+        routes=(
+            "One maintained route, `sqpack`’s exact verifier, is this repository’s "
+            "`sqpack/verify.py`, which the issue names as one of its two checkers, so the "
+            "replay shares the producer’s components; as the issue writes its command, that "
+            "file reads no certificate, so the issue’s statement is no evidence of a check. "
+            "The review’s checker shares no code with either maintained route or the source."
+        ),
+        lineage_at={
+            105: (
+                "The issue names the house it improves and no parent packing. Measured by the "
+                "import and again by the 22 October review under the box’s symmetries, the "
+                "nearest centres pair it one to one under the identity with T-174’s packing, "
+                "the house best packing here before this adoption: 63 of the 105 squares lie "
+                "within $10^{-6}$ of T-174’s, 42 move beyond $10^{-3}$ and none beyond a "
+                "tenth, at most 0.049, and squares turn by up to 2.41°. It is T-174’s packing "
+                "re-solved to a smaller side, a refinement that is not padding (T-229)."
+            ),
+            204: (
+                "The author’s comment of 23 October on the issue says his continuous SQP "
+                "optimization started from Francisco Couzo’s #678 certificate (T-223), in "
+                "Couzo’s own frame, and not from Evan Daniel’s regularized view of it "
+                "(T-225). Measured by the import and again by the 22 October review, the "
+                "nearest centres pair it one to one with #678’s packing under the identity, "
+                "keeping that certificate’s frame and tilt pattern: 60 squares move beyond "
+                "$10^{-3}$ of T-223’s and 7 beyond a tenth, at most 0.237. It pairs with "
+                "T-225’s packing, the house best packing here before this adoption, only under "
+                "a half turn. Every square turns by less than 1° but square 38, which T-223 "
+                "and T-225 hold by four neighbours and which this packing releases and turns "
+                "by 25.64°, so that nothing lies within $1.25 \\times 10^{-2}$ of it (T-229): "
+                "a release the author says his relaxation made."
+            ),
+        },
+        third_route=(
+            ", and the 22 October review’s clean-room checker decided it again on two routes "
+            "of its own, in integers alone and in rationals with exact clipping area on every "
+            "pair, from the source’s certificate and from the packet’s derived fact; its sharp "
+            "controls at $10^{-30}$ found both maintained routes exact at the far wall, the "
+            "near wall and the least-gap pair"
+        ),
+    ),
+    "T-230": Prose(
+        author="Evan Daniel",
+        reported="on [jlevy/squares#728](https://github.com/jlevy/squares/issues/728)",
+        producer_route=False,
+        ai=(
+            "The source’s credits say its work was done with Claude (Anthropic) under human "
+            "direction, and the commit that publishes the certificate names Claude Opus 5.5 "
+            "as co-author and says Evan Daniel approved the record claim."
+        ),
+        routes=(
+            "No route here is the source’s code, but both read the certificate through an "
+            "adapter whose author read the source’s two checkers and which carries two of "
+            "their expressions transcribed, its line filter and its corner construction (RF-1 "
+            "of the 22 October review), so the replay shares those components with the "
+            "producer. The review’s checker shares no code with either maintained route or the "
+            "source, and the independent re-implementation rests on it."
+        ),
+        lineage=(
+            "The author’s basin explorer started from Daniil Ostashev’s n = 303 packing of "
+            "#562, the packing this case’s house best packing certified before this adoption "
+            "(T-186), and near-record sweeps, crossovers and a final band flip, which reflects "
+            "one of the packing’s two tilted bands along its wall, reached this packing; the "
+            "issue calls it a new packing, not a refinement of Ostashev’s. Measured by the 22 "
+            "October review, square by square, no symmetry of the box pairs nearest centres "
+            "one to one with T-186’s packing, and the best assignment, the identity, moves 64 "
+            "squares beyond a tenth, at most 0.910, keeps 180 within $10^{-3}$ and reverses 24 "
+            "tilts. So it is another arrangement of Ostashev’s two-band design with one band’s "
+            "tilt reversed, not a refinement in this record’s sense, found from Ostashev’s "
+            "packing by the source’s account (T-230). The source leaves local optimality "
+            "unresolved: it finds the packing not first-order jammed and predicts a further "
+            "descent of about $5 \\times 10^{-7}$."
+        ),
+        third_route=(
+            ", and the 22 October review’s clean-room checker decided it again on two routes "
+            "of its own, in integers alone and in rationals with the exact clipped area of "
+            "every pair; its sharp controls at $10^{-30}$ found both maintained routes exact "
+            "at a wall and at the least-gap pair"
+        ),
+    ),
+    "T-231": Prose(
+        author="Mykhailo Polkovskyi",
+        reported=(
+            "on [jlevy/squares#719](https://github.com/jlevy/squares/issues/719), the "
+            "release’s second 204 file, which he claimed after T-229 was registered"
+        ),
+        producer_route=True,
+        ai=(
+            "The issue says Gemini assisted with solver scripting, precision checks and "
+            "formatting."
+        ),
+        routes=(
+            "One maintained route, `sqpack`’s exact verifier, is this repository’s "
+            "`sqpack/verify.py`, which the author says he imported as a module in his batch "
+            "harness, so the replay shares the producer’s components. The review’s checker "
+            "shares no code with either maintained route or the source."
+        ),
+        lineage=(
+            "The release published it in the same commit as T-229’s certificate, and the "
+            "author’s comment of 23 October says his continuous SQP optimization at 204 "
+            "started from Francisco Couzo’s #678 certificate (T-223), in Couzo’s own frame. "
+            "Measured by the 23 October review, it is T-229’s packing at its solved side: "
+            "nearest centres pair the two one to one under the identity, no square moving "
+            "beyond $2.02 \\times 10^{-11}$, and T-229’s certificate is this one dilated by "
+            "$1 + 10^{-12}$. Its side and the rows that Evan Daniel’s exact solver "
+            "determines equal that solver’s output for T-229’s arrangement, row for row, a "
+            "method the source does not name (T-231). The packing is not rigid: its 21 free "
+            "squares keep clearances of $5.774 \\times 10^{-9}$ to $1.25 \\times 10^{-2}$."
+        ),
+        third_route=(
+            ", and the 23 October review’s clean-room checker decided it again on two routes "
+            "of its own, in integers alone and in rationals with exact clipping area and "
+            "Euclidean distance on every pair; its sharp controls at $10^{-30}$ found both "
+            "maintained routes exact at every wall and at three kinds of least-gap pair"
+        ),
+    ),
+    "T-239": Prose(
+        author="Amund Kristiansen",
+        reported="on [jlevy/squares#755](https://github.com/jlevy/squares/issues/755)",
+        producer_route=False,
+        ai=(
+            "Issue 755 says the search, the certificate and the report were done by Claude "
+            "(Anthropic), working in Claude Code at Amund Kristiansen’s direction, with Evan "
+            "Daniel’s engine and checkers."
+        ),
+        routes=(
+            "No route here is the source’s code. Both read the certificate, kept here as a "
+            "derived exact fact since the source states no licence, through an adapter whose "
+            "author read Evan Daniel’s two checkers and which carries two of their "
+            "expressions, its line filter and its corner construction (RF-7 of the 23 October "
+            "review), so the replay is re-implemented sharing those components; the review’s "
+            "checker shares no code with either maintained route or the source."
+        ),
+        lineage=(
+            "The issue says the search started from Evan Daniel’s n = 303 packing of #728, "
+            "this case’s house best packing before this adoption (T-230), itself found from "
+            "Daniil Ostashev’s packing, and relaxed perturbed variants of it in float32 "
+            "batches, polished in binary64 with Daniel’s quench; it calls the result a new "
+            "packing, not a refinement. Measured by the 23 October review, square by square, "
+            "it pairs one to one with T-230’s packing under the identity and row for row: 12 "
+            "squares lie beyond a tenth, at most 0.547, five are newly tilted and 47 of about "
+            "860 contacts change. So it is another arrangement of T-230’s packing, found from "
+            "it, not a refinement in this record’s sense (T-239). The certificate is a "
+            "dilation by $1 + 10^{-12}$ of a binary64 packing; the issue claims the upper "
+            "bound only, and the packing is not rigid: five squares touch nothing."
+        ),
+        third_route=(
+            ", and the 23 October review’s clean-room checker decided it again on two routes "
+            "of its own, in integers alone and in rationals with exact edge and vertex tests; "
+            "its controls at $10^{-30}$ found both maintained routes exact at three walls and "
+            "five pairs"
+        ),
+        diversity="by a Claude agent, a system family the producer also used",
+        retained="its derived exact fact",
+    ),
+    "T-240": Prose(
+        author="Francisco Couzo",
+        reported="on [jlevy/squares#763](https://github.com/jlevy/squares/issues/763)",
+        producer_route=True,
+        ai=(
+            "The source’s commit that publishes the certificate and its two parents end with "
+            "a co-author trailer naming Claude (Anthropic), the earlier parent’s message "
+            "describes Codex’s reviewed intake, and the header of the source’s second checker "
+            "says Francisco Couzo modified Evan Daniel’s verifier with Codex."
+        ),
+        routes=(
+            "The source’s manifest names this repository’s `sqpack/verify.py`, through which "
+            "one maintained route decides, as its first checker, and both routes read the "
+            "certificate through an adapter transcribed from Evan Daniel’s checkers, from "
+            "which the source’s second checker derives (RF-4 of the 24 October review), so "
+            "the replay shares the producer’s components. The review’s checker shares no code "
+            "with either maintained route or the source, and the independent "
+            "re-implementation rests on it."
+        ),
+        lineage_at={
+            268: (
+                "The source’s manifest says Francisco Couzo’s live search refined Kirill "
+                "Tymchishin’s packing from his Kaggle notebook “CPU/GPU/MPS EDA+Seam LP” v4, "
+                "which the packet retains as the parent. Measured by the 24 October review, "
+                "square by square, nearest centres pair it one to one with that parent under "
+                "a reflection of the box, no square moving beyond a tenth (at most 0.059) or "
+                "turning beyond a degree: a refinement of the notebook packing. Against "
+                "T-174’s packing, the house best packing here before this adoption, no "
+                "symmetry pairs nearest centres one to one and 118 squares lie beyond a tenth, "
+                "so it is "
+                "another arrangement than T-174’s (T-240). Vladislav Lavrentev’s public Kaggle "
+                "packing, which Evan Daniel later certified $4.48 \\times 10^{-12}$ below this "
+                "side, is the same arrangement in another placement, the mirror image of this "
+                "one; whether the credit should name Lavrentev is asked of the author."
+            ),
+            303: (
+                "The source’s manifest says Francisco Couzo’s browser search refined his own "
+                "Kaggle push packing, itself credited as a refinement of Vladislav Lavrentev’s "
+                "packing from his Kaggle notebook “CUDA Packing Search” v11, and the packet "
+                "retains the push packing as the parent. Measured by the 24 October review, "
+                "square by square, it pairs one to one with that parent under the identity, "
+                "three squares moving beyond a tenth, at most 0.309, one of them turned from "
+                "27° to upright: a refinement of the push packing. Against T-239’s packing, "
+                "the house best packing here before this adoption, no symmetry pairs nearest "
+                "centres one to one and 133 squares lie beyond a tenth, so it is another "
+                "arrangement than T-239’s and T-230’s (T-240). The push packing also pairs one "
+                "to one with Chris Deotte’s public Kaggle packing, two squares beyond a tenth; "
+                "which public packing it started from is asked of the author."
+            ),
+        },
+        third_route=(
+            ", and the 24 October review’s clean-room checker decided it again on two routes "
+            "of its own, in rationals by separating axes over every pair and by the exact "
+            "clipped area of every pair within reach; its controls at $10^{-30}$ refused the "
+            "closest pair moved past exact contact, the square nearest a wall enlarged past "
+            "its clearance and the box shrunk below the packing’s extent"
+        ),
+        diversity="by a Claude agent, a system family the producer also used",
+    ),
+    "T-242": Prose(
+        author="Evan Daniel",
+        reported=(
+            "in [his repository](https://github.com/evand/square-packing) on 24 October 2026, "
+            "with no issue"
+        ),
+        producer_route=False,
+        ai=(
+            "The source’s commit names Claude as co-author, and its credits say the "
+            "repository’s work was produced by Claude (Anthropic) under human direction."
+        ),
+        routes=(
+            "Both routes read the certificate through an adapter whose line filter and corner "
+            "construction are transcribed from Evan Daniel’s own checkers, the ones the "
+            "certificate names (RF-4 of the 24 October review of issue 763, which holds here), "
+            "so the replay shares the producer’s components. The review’s checker shares no "
+            "code with either maintained route or the source, and the independent "
+            "re-implementation rests on it."
+        ),
+        lineage_at={
+            268: (
+                "The source credits Vladislav Lavrentev’s public Kaggle packing and descends "
+                "it exactly; its report gives the descent’s input side as that of Lavrentev’s "
+                "placement, which the certificate is to $1.41 \\times 10^{-4}$. Measured by "
+                "the 24 October review, square by square, it is one arrangement with T-240’s "
+                "packing and another placement: nearest centres pair the two one to one under "
+                "a reflection of the box, none beyond a tenth and 135 beyond $10^{-3}$, so the "
+                "house’s credit follows the placement adopted."
+            ),
+            304: (
+                "The source calls the packing it descends “the public Kaggle packing at "
+                "17.9268989004 (finder unknown; earliest public copy: kozykappa’s notebook)”, "
+                "and Francisco Couzo’s earlier certificate of it (T-241) credits it to Kirill "
+                "Tymchishin’s Kaggle notebook “CPU Alternating Reclosure” v3; no source states "
+                "where that notebook started. Measured by the 24 October review, square by "
+                "square, it pairs one to one with T-241’s packing under the identity, no "
+                "square moving beyond $4.60 \\times 10^{-4}$: Daniel’s exact descent of that "
+                "packing. Against T-186’s packing, the house best packing here before this "
+                "adoption, no symmetry pairs nearest centres one to one and 54 squares lie "
+                "beyond a tenth, so it is another arrangement than T-186’s."
+            ),
+        },
+        third_route=(
+            ", and the 24 October review’s clean-room checker decided it again in rationals, "
+            "by separating axes over every pair and by the exact clipped area of every pair "
+            "within reach; its controls at $10^{-30}$ refused the least-gap pair moved past "
+            "exact contact, every square moved past its near wall and the side lowered past "
+            "the far wall"
+        ),
+        diversity="by a Claude agent, a system family the producer also used",
+    ),
 }
 
 XU = "Ryan Xu"
@@ -903,6 +1214,9 @@ OSTASHEV = "Daniil Ostashev"
 BARNETT = "Robert Barnett"
 #: Mykhailo Polkovskyi, by the handle his earlier credits use (T-173, T-183).
 POLKOVSKYI = "Mishapolk"
+KRISTIANSEN = "Amund Kristiansen"
+TYMCHISHIN = "Kirill Tymchishin"
+LAVRENTEV = "Vladislav Lavrentev"
 
 
 @dataclass(frozen=True)
@@ -948,6 +1262,20 @@ def _regularized(
     )
 
 
+def _exact_form(
+    finder: str, improved: tuple[str, ...], whose: str, *, refined: str = ""
+) -> Credit:
+    """Evan Daniel's exact algebraic form (T-193) of PingYou Ltd's tighter certificate (T-174)
+    of `whose` packing, as T-193's item names T-174 and T-174's names the packing before it.
+    The clause carries no comma of its own, as `_regularized`'s does not."""
+    return Credit(
+        (finder,),
+        improved,
+        f"Evan Daniel’s exact form of PingYou Ltd’s tighter certificate of {whose} "
+        f"packing{refined}",
+    )
+
+
 #: The credit of each adopted count, from the register's credit lines and the adoption
 #: tables of the reviews that recommended each house; a regularization leaves the packing
 #: with its finder (`T-146`'s `regularizations`).
@@ -971,7 +1299,15 @@ CREDITS: dict[int, Credit] = {
         ("Seth Rehwaldt", PINGYOU),
         "PingYou Ltd’s refinement of Seth Rehwaldt’s refinement of Francisco Couzo’s packing",
     ),
-    70: _regularized(XU, "Ryan Xu’s"),
+    # PingYou Ltd's algebraic certificate of T-146's regularization of Ryan Xu's packing
+    # (T-174's regularization of T-146, by the source's statement), the one root of a
+    # degree-5 polynomial; issue 639's exact form at 70 is the same number (T-193's notes).
+    70: Credit(
+        (XU,),
+        (DANIEL, PINGYOU),
+        "PingYou Ltd’s exact algebraic certificate of Evan Daniel’s display regularization of "
+        "Ryan Xu’s packing",
+    ),
     # T-174's regularization of T-130's packing, 45 squares moved beyond 1e-3, one to one;
     # that it is that packing is the source's statement (the 14 October review of PR 574).
     84: Credit(
@@ -986,7 +1322,10 @@ CREDITS: dict[int, Credit] = {
         (COUZO, PINGYOU),
         "PingYou Ltd’s refinement of Francisco Couzo’s refinement of Ryan Xu’s packing",
     ),
-    102: _regularized(XU, "Ryan Xu’s"),
+    # Evan Daniel's exact form (T-193, of T-174 by its item) of PingYou Ltd's tighter
+    # certificate of his own display regularization of Ryan Xu's packing (T-174, of T-146,
+    # measured with no square moved); the stage 4 review of issue 639 measured that route.
+    102: _exact_form(XU, (DANIEL, PINGYOU), "his display regularization of Ryan Xu’s"),
     # T-174's regularization of T-146's view, measured one to one, no square moved beyond
     # 1e-12 (the 14 October review of PR 574).
     103: Credit(
@@ -995,13 +1334,15 @@ CREDITS: dict[int, Credit] = {
         "PingYou Ltd’s tighter certificate of Evan Daniel’s display regularization of Ryan "
         "Xu’s packing as Mykhailo Polkovskyi refined it",
     ),
-    # T-174's regularization of T-130's packing, as T-170 padded it, measured one to one,
-    # no square moved beyond 1e-12 (the 14 October review of PR 574).
+    # Mykhailo Polkovskyi's re-solve (T-229, adopted on 23 October 2026) of T-174's packing,
+    # T-174's regularization of T-130's packing as T-170 padded it: one to one with T-174's,
+    # 42 squares moved beyond 1e-3 and none beyond a tenth (the import's measurement and the
+    # 22 October review's), so the packing stays with Xu and Polkovskyi joins the refiners.
     105: Credit(
         (XU,),
-        (COUZO, PINGYOU),
-        "PingYou Ltd’s tighter certificate of Francisco Couzo’s refinement of Ryan Xu’s "
-        "packing",
+        (COUZO, PINGYOU, POLKOVSKYI),
+        "Mykhailo Polkovskyi’s re-solve of PingYou Ltd’s tighter certificate of Francisco "
+        "Couzo’s refinement of Ryan Xu’s packing",
     ),
     # T-174's regularization of T-128's packing, 13 squares moved beyond 1e-3, one to one;
     # that it is that packing is the source's statement (the 14 October review of PR 574).
@@ -1017,7 +1358,7 @@ CREDITS: dict[int, Credit] = {
         (DANIEL, PINGYOU),
         "PingYou Ltd’s refinement of Evan Daniel’s exact optimum of Francisco Couzo’s packing",
     ),
-    123: _regularized(XU, "Ryan Xu’s"),
+    123: _exact_form(XU, (DANIEL, PINGYOU), "his display regularization of Ryan Xu’s"),
     126: Credit(
         (XU,),
         (DANIEL,),
@@ -1069,13 +1410,13 @@ CREDITS: dict[int, Credit] = {
         (),
         "Evan Daniel’s packing from a chain search started from Ryan Xu’s n = 146 packing",
     ),
-    # PingYou Ltd's design rearranged by Mykhailo Polkovskyi, as the 14 October review
-    # measured it (RQ-5); whether it is a new arrangement is the owner's decision 1 on
-    # pull request 602 (T-173).
+    # PingYou Ltd's algebraic certificate of its own n = 153 packing (T-174's regularization
+    # of T-148, by the source's statement), the one root of a degree-7 polynomial; issue
+    # 639's exact form at 153 is the same number (T-193's notes).
     153: Credit(
         (PINGYOU,),
-        ("Mishapolk",),
-        "Mykhailo Polkovskyi’s arrangement of PingYou Ltd’s n = 153 design, after Ryan "
+        (),
+        "PingYou Ltd’s exact algebraic certificate of its own n = 153 packing, built from Ryan "
         "Xu’s n = 70 packing and Evan Daniel’s exact certificate of it",
     ),
     # Evan Daniel's continuation of issue 586's arrangement, three squares beyond a tenth
@@ -1172,16 +1513,28 @@ CREDITS: dict[int, Credit] = {
         (),
         "Evan Daniel’s basin-explorer packing after Francisco Couzo’s n = 182 packing",
     ),
-    # Evan Daniel's display regularization (T-225, adopted on 22 October 2026) of issue
-    # 678's packing (T-223), solved to its exact side 1.39e-9 below #678's certificate:
-    # T-225's item names T-223, and the packing stays with Couzo, whose source's manifest
-    # credits Polkovskyi's construction as its seed, which is that source's account, not
-    # measured here (A11 of #716 asked to keep Polkovskyi in the line).
+    # Mykhailo Polkovskyi's re-solve (T-229, adopted on 23 October 2026) of Francisco
+    # Couzo's packing, which Couzo first reported in issue 670 and refined in 675 and 678
+    # (T-226, T-228, T-223): one to one with #678's under the identity and with T-225's under
+    # a half turn, one square released and turned by 25.64 degrees (the import's measurement
+    # and the 22 October review's, its RF-3 and RF-4). The author's comment of 23 October on
+    # issue 719 says the solve started from Couzo's #678 certificate, not from Evan Daniel's
+    # view (T-225), so T-229's item names T-223 and Daniel is no antecedent here (think-xyhn).
+    # The packing stays with Couzo, whose source's manifest credits Polkovskyi's own
+    # construction as its seed (A11 of #716); Couzo's answer of 23 October 2026 on #670
+    # traces that seed to T-186's packing, Polkovskyi's refinement of Ostashev's as PingYou
+    # Ltd refined it, three rounds of basin hopping before #670's certificate, and the
+    # #670 packet's seed measurement pairs the seed file with T-186's packing (think-t5hc).
+    # The pass of 24 October 2026 adopted the
+    # release's other 204 file (T-231), T-229's packing at its solved side, which T-231's
+    # item names, so the credit is the same; Evan Daniel's exact solver, measured as its
+    # method by the 23 October review, is a method credit and no antecedent of the packing.
     204: Credit(
         (COUZO,),
-        (DANIEL,),
-        "Evan Daniel’s display regularization of Francisco Couzo’s packing from a search "
-        "Couzo’s source seeded with Mykhailo Polkovskyi’s n = 204 construction",
+        (POLKOVSKYI,),
+        "Mykhailo Polkovskyi’s re-solve of Francisco Couzo’s packing from a search Couzo "
+        "says began at Polkovskyi’s own refinement of Daniil Ostashev’s n = 204 packing, as "
+        "PingYou Ltd refined it",
     ),
     # T-174's regularization of T-098's packing, measured one to one, no square moved
     # beyond 1e-12 (the 14 October review of PR 574).
@@ -1191,12 +1544,14 @@ CREDITS: dict[int, Credit] = {
         "PingYou Ltd’s tighter certificate of Evan Daniel’s exact optimum of Francisco "
         "Couzo’s packing",
     ),
-    # By pose an exact re-solve of PingYou Ltd's packing (RQ-5 of the 14 October review).
+    # PingYou Ltd's algebraic certificate of its own n = 207 packing (T-174's regularization
+    # of T-147, by the source's statement), the one root of a degree-5 polynomial; issue
+    # 639's exact form at 207 is the same number (T-193's notes).
     207: Credit(
         (PINGYOU,),
-        ("Mishapolk",),
-        "Mykhailo Polkovskyi’s exact re-solve of PingYou Ltd’s assembly of two placed "
-        "patches of Ryan Xu’s n = 70 packing, from Evan Daniel’s exact certificate of it",
+        (),
+        "PingYou Ltd’s exact algebraic certificate of its own assembly of two placed patches "
+        "of Ryan Xu’s n = 70 packing, from Evan Daniel’s exact certificate of it",
     ),
     # T-174's regularization of T-127's packing, 20 squares moved beyond 1e-3, one to one;
     # that it is that packing is the source's statement (the 14 October review of PR 574).
@@ -1236,8 +1591,10 @@ CREDITS: dict[int, Credit] = {
     # credited with the refinement and Daniel with the regularization, as at 258. The house
     # it replaced was de Winter's packing of issue 668 (T-196), from a search the issue says
     # started from this repository's catalogue.
-    # #672 reports the refinement; who made its CT105 submission the source does not say,
-    # and the #672 reply asks (review A4 of #718).
+    # #672 reports the refinement; the source's manifest credits it to Couzo, retaining de
+    # Winter's seed credit, and the CT105 web submission it names as provenance names no
+    # submitter (RF-3 of the 22 October review of T-226 to T-228). Couzo's answer of 24
+    # October 2026 on #672 says he made it himself (think-mdfr), so the credit stands.
     227: _regularized(
         DE_WINTER,
         "Joost de Winter’s",
@@ -1317,8 +1674,15 @@ CREDITS: dict[int, Credit] = {
         (COUZO,),
         "Francisco Couzo’s continuation of Daniil Ostashev’s n = 241 packing",
     ),
-    258: _regularized(SQUISH, "Nate Chaoweeraprasit’s SQUISH", via="Mishapolk"),
-    259: Credit((SQUISH,), (), "Nate Chaoweeraprasit’s SQUISH packing"),
+    # T-193 of T-174 of T-146, which regularized SQUISH's packing as Mishapolk refined it.
+    258: _exact_form(
+        SQUISH,
+        ("Mishapolk", DANIEL, PINGYOU),
+        "his display regularization of Nate Chaoweeraprasit’s SQUISH",
+        refined=" as Mishapolk refined it",
+    ),
+    # T-193 of T-174 of T-136, SQUISH's own packing (T-174's item measured, none moved).
+    259: _exact_form(SQUISH, (PINGYOU, DANIEL), "Nate Chaoweeraprasit’s SQUISH"),
     # Evan Daniel's display regularization (T-225, adopted on 22 October 2026) of issue
     # 678's packing (T-223), solved to its exact side 2.51e-11 below #678's certificate:
     # T-225's item names T-223, and the packing stays with Couzo. T-223 was adopted here on
@@ -1358,13 +1722,15 @@ CREDITS: dict[int, Credit] = {
         "Daniel’s exact optimum of Joost de Winter’s n = 126 packing",
     ),
     267: _couzo("Xu"),
-    # T-174's regularization of T-098's packing, 117 squares moved beyond 1e-3, one to
-    # one; that it is that packing is the source's statement (the 14 October review of PR
-    # 574).
+    # Issue 763's packing at 268 (T-240, adopted on 25 October 2026), a refinement of Kirill
+    # Tymchishin's Kaggle notebook packing, the parent the source's manifest names: one to
+    # one with it under a reflection, no square beyond a tenth (the 24 October review), and
+    # another arrangement than T-174's. Whether the credit should name Vladislav Lavrentev,
+    # whose public packing is the same arrangement, is the author's question 1 of that review.
     268: Credit(
+        (TYMCHISHIN,),
         (COUZO,),
-        (DANIEL, PINGYOU),
-        "PingYou Ltd’s refinement of Evan Daniel’s exact optimum of Francisco Couzo’s packing",
+        "Francisco Couzo’s refinement of Kirill Tymchishin’s Kaggle notebook packing",
     ),
     # T-174's regularization of T-146's view, measured one to one, no square moved beyond
     # 1e-12 (the 14 October review of PR 574).
@@ -1413,7 +1779,7 @@ CREDITS: dict[int, Credit] = {
         "PingYou Ltd’s refinement of Evan Daniel’s exact optimum of Francisco Couzo’s packing",
     ),
     292: _regularized(SQUISH, "Nate Chaoweeraprasit’s SQUISH"),
-    295: _regularized(XU, "Ryan Xu’s"),
+    295: _exact_form(XU, (DANIEL, PINGYOU), "his display regularization of Ryan Xu’s"),
     # T-174's regularization of T-098's packing, 119 squares moved beyond 1e-3, one to
     # one; that it is that packing is the source's statement (the 14 October review of PR
     # 574).
@@ -1422,27 +1788,35 @@ CREDITS: dict[int, Credit] = {
         (DANIEL, PINGYOU),
         "PingYou Ltd’s refinement of Evan Daniel’s exact optimum of Francisco Couzo’s packing",
     ),
-    # Issue 583's continuation of PingYou Ltd's arrangement, padded (T-186's
-    # regularization of T-181; RT-4).
+    # Evan Daniel's exact form (T-193, of T-186 by its item) of issue 583's continuation of
+    # PingYou Ltd's arrangement, padded (T-186's regularization of T-181; RT-4).
     302: Credit(
         (PINGYOU,),
-        (COUZO, POLKOVSKYI),
-        "Mykhailo Polkovskyi’s tighter certificate of Francisco Couzo’s continuation of "
-        "PingYou Ltd’s n = 302 arrangement",
+        (COUZO, POLKOVSKYI, DANIEL),
+        "Evan Daniel’s exact form of Mykhailo Polkovskyi’s tighter certificate of Francisco "
+        "Couzo’s continuation of PingYou Ltd’s n = 302 arrangement",
     ),
-    # PR 574's padding of issue 562's packing, padded again (T-186's regularization of
-    # T-174).
+    # Issue 763's packing at 303 (T-240, adopted on 25 October 2026), a refinement of
+    # Couzo's own Kaggle push packing, the parent the source's manifest names: one to one
+    # with it, three squares beyond a tenth (the 24 October review), and another arrangement
+    # than T-239's. The manifest credits the push packing as a refinement of Vladislav
+    # Lavrentev's notebook packing, which is not retained; which public packing it started
+    # from is the author's question 4 of that review.
     303: Credit(
-        (OSTASHEV,),
-        (PINGYOU, POLKOVSKYI),
-        "Mykhailo Polkovskyi’s tighter certificate, after PingYou Ltd’s, of Daniil "
-        "Ostashev’s n = 303 packing",
+        (LAVRENTEV,),
+        (COUZO,),
+        "Francisco Couzo’s refinement of his own refinement of Vladislav Lavrentev’s Kaggle "
+        "notebook packing",
     ),
-    # Issue 575's packing padded (T-186's regularization of T-175).
+    # T-242 (adopted on 25 October 2026), Evan Daniel's exact descent of the packing T-241
+    # certifies, which Francisco Couzo's index credits to Kirill Tymchishin's Kaggle
+    # notebook: one to one with it, no square beyond 4.60e-4 (the 24 October review), and
+    # another arrangement than T-186's. No source states where the notebook started; the
+    # manifest's previous_source names the catalogue's previous record (M-1 of that review).
     304: Credit(
-        (OSTASHEV,),
-        (POLKOVSKYI,),
-        "Mykhailo Polkovskyi’s tighter certificate of Daniil Ostashev’s n = 304 packing",
+        (TYMCHISHIN,),
+        (DANIEL,),
+        "Evan Daniel’s exact descent of Kirill Tymchishin’s Kaggle notebook packing",
     ),
     # T-174's regularization of T-152's packing, measured one to one, no square moved
     # beyond 1e-12 (the 14 October review of PR 574).
@@ -1617,20 +1991,48 @@ class Move:
         return self.selection.n
 
     @property
-    def side(self) -> Fraction:
-        """The house's exact side, which this writer states: a fraction (`rational`)."""
-        return rational(self.house.side)
+    def side(self) -> exact_sides.Side:
+        """The house's exact side, which this writer states: a fraction, or since 23 October
+        2026 an algebraic side, the one root of its minimal polynomial (`exact_form`)."""
+        return self.house.side
+
+    @property
+    def algebraic(self) -> bool:
+        return isinstance(self.house.side, exact_sides.Algebraic)
 
 
 def rational(side: exact_sides.Side) -> Fraction:
-    """A side this writer states. It writes rational houses only, and `plan` refuses an
-    algebraic one; a certificate the prose quotes beside a house is rational wherever the
-    rule of 15 October wrote it, which left every algebraic certificate out."""
+    """A side the rule of 15 October's prose quotes beside a house: rational wherever that
+    rule wrote it, since it left every algebraic certificate out."""
     if isinstance(side, exact_sides.Algebraic):
         raise AdoptionError(
-            f"the writer states rational sides, not {exact_sides.literal(side)}"
+            f"the rule of 15 October quoted rational sides, not {exact_sides.literal(side)}"
         )
     return side
+
+
+def exact_form(side: exact_sides.Side) -> str:
+    """A house's side as its two lanes write it exactly: the fraction, or an algebraic side
+    as `exact_sides.form` writes it, `root(p, low, high)` or, of degree two, its closed
+    form `(a+b*sqrt(d))/c`, which `select_houses.parse_case` and
+    `regularize_evand.verified_bound` read back as that side."""
+    if isinstance(side, exact_sides.Algebraic):
+        return exact_sides.form(side)
+    return houses.legacy.literal(side)
+
+
+def form_side(form: object) -> exact_sides.Side | None:
+    """The side a lane's exact form states, where it is a fraction or a house's root form;
+    None for any other form, such as a closed form a case wrote before its adoption."""
+    text = str(form or "").strip()
+    try:
+        return Fraction(text)
+    except ValueError:
+        pass
+    try:
+        return exact_sides.read_form(text)
+    except exact_sides.ExactSideError:
+        return None
 
 
 @cache
@@ -1648,7 +2050,7 @@ def _claims(path: Path) -> Mapping[int, str]:
 MAX_PLACES = 72
 
 
-def shown(side: Fraction, above: object = None) -> str:
+def shown(side: exact_sides.Side, above: object = None) -> str:
     """A house's side rounded up at sixteen places, or at the fewest more that print it
     strictly below `above`, the reported value of the house it replaces, where sixteen
     would tie the two: PingYou Ltd's n = 105 re-solve (T-170) is 1.08e-19 below Francisco
@@ -1664,7 +2066,7 @@ def shown(side: Fraction, above: object = None) -> str:
     return printed
 
 
-def printed_at(value: object, side: Fraction) -> bool:
+def printed_at(value: object, side: exact_sides.Side) -> bool:
     """Whether `value` prints `side`: the side itself, or rounded up at its own places, at
     sixteen or more (`shown`)."""
     text = str(value)
@@ -1694,7 +2096,7 @@ def _value(candidate: select_houses.Candidate, above: object = None) -> str:
                 f"n={candidate.n}: {source['id']}'s claims record does not print the exact side"
             )
         return printed
-    return shown(rational(candidate.side), above)
+    return shown(candidate.side, above)
 
 
 def words(iso: str) -> str:
@@ -1847,11 +2249,12 @@ def plan(
                 f"packing it solves, which {owed.measured_in} measured to be {owed.measured}; "
                 f"correct the item first ({owed.bead}, select_houses.CORRECTIONS_OWED)"
             )
-        if house.algebraic:
+        if house.algebraic and not select_houses.writable(house):
             raise AdoptionError(
-                f"n={n}: the house is {house.result}'s algebraic side, and this writes a "
-                "rational exact form and witness only; stage the count with the bead that "
-                "adds the algebraic writer (select_houses.PENDING_ADOPTION)"
+                f"n={n}: the house is {house.result}'s algebraic side, and no derived "
+                "number-field fact and receipt hold it (upper_bound_houses.FIELD_COUNTS); "
+                "stage the count as no writer under the writer's bead "
+                "(select_houses.PENDING_ADOPTION)"
             )
         if houses.ADOPTED.get(n) != house.result:
             raise AdoptionError(
@@ -1884,12 +2287,16 @@ def reported_bound(move: Move) -> dict[str, Any]:
     }
     if credit.same_packing:
         known = {field: replaced.get(field, known[field]) for field in PACKING_FACTS}
+    side = move.side
+    algebraic = isinstance(side, exact_sides.Algebraic)
     return {
         "value": _value(house, _above(move)),
-        "exact_form": houses.legacy.literal(move.side),
+        "exact_form": exact_form(side),
         "evidence": list(house.report_evidence),
-        "algebraic_degree": 1,
-        "minimal_polynomial": None,
+        "algebraic_degree": side.degree if algebraic else 1,
+        "minimal_polynomial": (
+            f"{exact_sides.polynomial_text(side.polynomial)}=0" if algebraic else None
+        ),
         "analytically_optimized": known["analytically_optimized"],
         "catalogue_rigid": "not-stated",
         "construction_method": known["construction_method"],
@@ -1912,7 +2319,7 @@ def reported_bound(move: Move) -> dict[str, Any]:
 def verified_bound(move: Move) -> dict[str, Any]:
     return {
         "value": shown(move.side, _above(move)),
-        "exact_form": houses.legacy.literal(move.side),
+        "exact_form": exact_form(move.side),
         "evidence": list(move.house.confirming_evidence),
     }
 
@@ -2104,17 +2511,17 @@ def _reported_apart(move: Move) -> str:
         return ""
     upper = move.packing["reported_upper_bound"]
     printed = Decimal(str(upper["value"]))
-    bound, side = Fraction(printed), Fraction(move.side)
+    bound, side = Fraction(printed), move.side
     unit = Fraction(Decimal(1).scaleb(int(printed.as_tuple().exponent)))
     if side < bound:
-        relation = f"lies `{_sci(bound - side)}` above the new side"
+        relation = f"lies `{_sci(exact_sides.lower_gap(bound, side))}` above the new side"
     elif side < bound + unit and printed != printed.to_integral_value():
         relation = (
-            f"is a print `{_sci(side - bound)}` below the new side, within one unit of its "
-            "last place, so it does not order them"
+            f"is a print `{_sci(exact_sides.lower_gap(side, bound))}` below the new side, "
+            "within one unit of its last place, so it does not order them"
         )
     else:
-        relation = f"lies `{_sci(side - bound)}` below the new side"
+        relation = f"lies `{_sci(exact_sides.lower_gap(side, bound))}` below the new side"
     return (
         f"; the reported upper bound it replaces, ${upper['value']}$ from "
         f"{upper['source_key']}, {relation}"
@@ -2155,8 +2562,10 @@ def section(move: Move) -> str:
     prose = RESULTS[house.result]
     packet = houses.source_for(n).packet.name
     review, reviewed = _review(house.result)
-    fraction = _math_fraction(move.side)
     ceiling = shown(move.side, _above(move))
+    if isinstance(move.side, exact_sides.Algebraic):
+        return _field_section(move, ceiling, review, reviewed)
+    fraction = _math_fraction(move.side)
     side = (
         f"at exact side {fraction}, displayed upward as ${ceiling}$"
         if fraction
@@ -2189,8 +2598,8 @@ def section(move: Move) -> str:
             f"{credit.phrase[0].upper()}{credit.phrase[1:]}, {verb} {prose.reported}, "
             f"{side} ({house.result}). The certificate gives a rational side and, for each "
             f"of the {n} unit squares, {prose.squares}; "
-            f"the [retained packet](../resources/web/{packet}/README.md) holds it with the "
-            "complete native jobs that decided it."
+            f"the [retained packet](../resources/web/{packet}/README.md) holds "
+            f"{prose.retained} with the complete native jobs that decided it."
         ),
         (
             "Both maintained exact routes decided it here, `sqpack`’s exact separating-axis "
@@ -2198,10 +2607,72 @@ def section(move: Move) -> str:
             f"and outside-container controls{third}. {routes} The {reviews} "
             "accepted the replay for finite feasibility. "
             f"That proves $s({n}) \\le {ceiling}$, the verified upper bound: confirmed, "
-            f"{prose.confirmation}. It says nothing about "
+            f"{prose.confirmation}{f', {prose.diversity}' if prose.diversity else ''}. "
+            "It says nothing about "
             "optimality, rigidity or a local minimum."
         ),
     ]
+    paragraphs.extend(_closing(move))
+    return "\n\n".join(paragraphs) + "\n"
+
+
+def _field_degree(move: Move) -> int:
+    """The degree of the number field the algebraic house's witness states its squares in."""
+    witness = houses.field_witness(houses.source_for(move.n).packet, move.n)
+    return len(witness["scalar"]["minimal_polynomial"]) - 1
+
+
+def _field_section(move: Move, ceiling: str, review: str, reviewed: str) -> str:
+    """The section of an algebraic house: its side the one root of an integer polynomial,
+    its squares in a real number field, decided on one exact route over that field, which
+    the house rule's validation asks (result-import.md, "The House Rule")."""
+    n, house, credit = move.n, move.house, CREDITS[move.n]
+    prose = RESULTS[house.result]
+    packet = houses.source_for(n).packet.name
+    side = move.side
+    assert isinstance(side, exact_sides.Algebraic)
+    reviews = f"[review of {reviewed}](../../{review})"
+    if _finally_reviewed(house.result):
+        reviews = f"{reviews} and the [final review of 11 October 2026](../../{FINAL_REVIEW})"
+    routes = prose.field_routes or (
+        "`sqpack`’s exact separating-axis verifier decided it here over the witness’s "
+        "field, with its duplicate-square and outside-container controls, on one route: "
+        "the independent rational corner checker reads rational corners only, and no second "
+        "route over a number field is maintained here."
+    )
+    verb = "published" if credit.phrase.endswith(" report") else "reported"
+    paragraphs = [
+        f"## {_title(move)}",
+        (
+            f"{credit.phrase[0].upper()}{credit.phrase[1:]}, {verb} {prose.reported}, at an "
+            f"exact algebraic side, the one root of a degree-{side.degree} integer polynomial "
+            f"in a rational interval, displayed upward as ${ceiling}$ ({house.result}). The "
+            f"certificate gives the side and, for each of the {n} unit squares, "
+            f"{prose.field_squares}, in a real number field of degree "
+            f"{_field_degree(move)}; the [retained packet](../resources/web/{packet}/"
+            "README.md) holds it as a derived fact with the complete native jobs that decided "
+            "it over the field."
+        ),
+        (
+            f"{routes} The {reviews} accepted the replay for finite feasibility, and the "
+            f"owner’s house rule of {words(select_houses.RULE_SET_ON)} adopts a certificate "
+            "decided on one exact route like any other. "
+            f"That proves $s({n}) \\le {ceiling}$, the verified upper bound: confirmed, "
+            f"{prose.confirmation}. Both lanes state the side exactly as the root of its "
+            "minimal polynomial in an interval it alone lies in. It says nothing about "
+            "optimality, rigidity or a local minimum."
+        ),
+        *_closing(move),
+    ]
+    return "\n\n".join(paragraphs) + "\n"
+
+
+def _closing(move: Move) -> list[str]:
+    """What a section says after its routes: the packing's credit, the AI statement, the
+    lineage, and the house it replaces with what else is confirmed at the count."""
+    house = move.house
+    prose = RESULTS[house.result]
+    paragraphs: list[str] = []
     if house.regularizes and house.result not in DISPLAY_REGULARIZERS:
         paragraphs.append(_regularization(move, prose.author))
     elif house.regularizes:
@@ -2254,7 +2725,7 @@ def section(move: Move) -> str:
     if waiting:
         history += " " + " ".join(waiting)
     paragraphs.append(history)
-    return "\n\n".join(paragraphs) + "\n"
+    return paragraphs
 
 
 def _reason(result: str) -> str:
@@ -2392,7 +2863,9 @@ def held_history(text: str) -> str:
     return text
 
 
-def algebraic_sentences(selection: select_houses.Selection, side: Fraction) -> list[str]:
+def algebraic_sentences(
+    selection: select_houses.Selection, side: exact_sides.Side
+) -> list[str]:
     """What a record says of an algebraic certificate below its house: decided on one exact
     route, which the rule of 15 October left out for the owner (RP-3 of PR 574's review),
     and which the house rule adopts, staged until the writer takes an algebraic side
@@ -2875,8 +3348,7 @@ def adopted(move: Move) -> bool:
     upper = move.packing["reported_upper_bound"]
     return (
         upper.get("source_key") == move.house.source_key
-        and Fraction(str(move.packing["verified_upper_bound"].get("exact_form")))
-        == move.house.side
+        and form_side(move.packing["verified_upper_bound"].get("exact_form")) == move.house.side
     )
 
 
@@ -3234,6 +3706,8 @@ def retain_history(day: str, texts: Mapping[int, str]) -> None:
 # ------------------------------------------------------------------------- redrafting
 
 LOWER_LANES = ("reported_lower_bound", "verified_lower_bound", "reported_status", "status")
+#: The lanes a house writes, which a refresh brings to the writer's text of the same side.
+UPPER_LANES = ("reported_upper_bound", "verified_upper_bound")
 LOWER_SECTION = r"\n## The lower bound\n.*?(?=\n<!-- BEGIN verification code)"
 
 
@@ -3424,6 +3898,19 @@ def refreshed(move: Move, committed: str) -> str:
     for key in ("evidence", "priority_notes"):
         if _packing(front).get(key) != packing.get(key):
             front = _replace(front, key, packing[key])
+    for key in UPPER_LANES:
+        # How the writer writes a side's exact form: a lane that states the same side,
+        # and differs from what the writer writes now in nothing but that text, takes the
+        # writer's text, as 295's root form became its closed form (review A14 of #756).
+        held, wanted = current.get(key) or {}, packing.get(key) or {}
+        same = form_side(held.get("exact_form"))
+        if (
+            held.get("exact_form") != wanted.get("exact_form")
+            and {**held, "exact_form": wanted.get("exact_form")} == wanted
+            and same is not None
+            and form_side(wanted.get("exact_form")) == same
+        ):
+            front = _replace(front, key, wanted)
     if move.n not in HAND_MARKED:
         rest = _with_history(rest, _split(written)[2])
     text = fence + front + rest
@@ -3521,7 +4008,7 @@ def adopt_case(n: int, existing: str, generated: str) -> str:
     source = houses.source_for(n)
     side = houses.side(n)
     for lane in ("reported_upper_bound", "verified_upper_bound"):
-        if Fraction(str(packing[lane].get("exact_form"))) != side:
+        if form_side(packing[lane].get("exact_form")) != side:
             raise AdoptionError(f"n={n}: the {lane} is not {source.result}'s exact side")
     _, draft_front, draft_rest = _split(generated)
     draft = _packing(draft_front)
@@ -3582,7 +4069,7 @@ def check() -> list[str]:
         if upper.get("source_key") != source.key:
             problems.append(f"n={n}: reported source is not {result}'s {source.key}")
         for lane, bound in (("reported", upper), ("verified", verified)):
-            if Fraction(str(bound.get("exact_form"))) != side:
+            if form_side(bound.get("exact_form")) != side:
                 problems.append(f"n={n}: the {lane} exact form is not {result}'s exact side")
             if not printed_at(bound["value"], side):
                 problems.append(f"n={n}: the {lane} value is not the side, exact or rounded up")

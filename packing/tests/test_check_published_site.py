@@ -40,7 +40,6 @@ from devtools.check_published_site import (
     OPTIMALITY_PAPER_FILES,
     OPTIMALITY_PAPER_MARKDOWN,
     PAPER_VERSIONS,
-    PAPERS_CURRENT,
     RECORD_FILE_SAMPLE,
     RECORD_LINK_PAGES,
     RECORD_LINK_SAMPLE,
@@ -74,6 +73,12 @@ from devtools.repo_links import DEFAULT_BRANCH, REPO_URL, RepositoryTree, branch
 from sqpack.release import EXPLAINER_VERSION, OPTIMALITY_REVIEW_EDITION, PUBLICATION_EDITION
 from tests import site_renders
 from tests.site_renders import prepared_forwarders
+
+LEARN_CURRENT = (
+    '<span class="site-nav-fallback" data-page="learn" aria-current="true">Learn</span>'
+)
+PAPERS_CURRENT = '<a data-page="papers" href="../papers.html" aria-current="true">Papers</a>'
+PAPER_NAVIGATION = '<ul id="site-nav-links">' + LEARN_CURRENT + PAPERS_CURRENT + "</ul>"
 
 pytestmark = pytest.mark.usefixtures(prepared_forwarders.__name__)
 
@@ -137,7 +142,7 @@ def head(path: str, *, description: str | None = None) -> str:
     )
     if description is not None:
         meta = meta._replace(description=description)
-    tags = f"{render_overview.head_tags(meta)}{render_overview.favicon_html(root='/squares/')}"
+    tags = f"{render_overview.head_tags(meta)}{render_overview.favicon_html(root='/')}"
     return f'<!doctype html><html lang="en"><head>{tags}</head>'
 
 
@@ -159,7 +164,7 @@ def source_receipt(page: bytes) -> bytes:
     return f"\n%sqpack-source-html-sha256: {hashlib.sha256(page).hexdigest()}\n".encode()
 
 
-#: How many canonical case records the fake deploy's Atlas indexes.
+#: How many canonical case records the fake deploy's Frontier Survey indexes.
 CASE_COUNT = 324
 
 
@@ -172,8 +177,8 @@ def page(
     bar: str = "",
 ) -> bytes:
     """A served page as the check reads one: the head of the page served at `canonical`,
-    with its canonical link, then for a paper its bar's current entry (`bar`), the stamp
-    and a repository link; Atlas also indexes every canonical case record."""
+    with its canonical link, then for a paper its shared navigation state (`bar`), the
+    stamp and a repository link; Frontier indexes every canonical case record."""
     path = canonical.removeprefix(render_overview.SITE_URL) or "index.html"
     index = (
         "".join(
@@ -181,7 +186,7 @@ def page(
             f'<td><a href="cases/{n}.html" data-case="{n}">{n}</a></td></tr>'
             for n in range(1, CASE_COUNT + 1)
         )
-        if path == "atlas.html"
+        if path == "frontier.html"
         else ""
     )
     return (
@@ -192,11 +197,9 @@ def page(
 
 
 def explainer_page(canonical: str = PAGE_URL, **kwargs: str) -> bytes:
-    """The lower-bounds explainer as the check reads it: a page with Papers current in
-    its bar, linked from a level below the root, carrying the paper's own version and
-    not the site's edition."""
+    """The explainer has active Learn/Papers navigation and its own paper edition."""
     kwargs.setdefault("stamp", EXPLAINER_VERSION)
-    return page(canonical, bar=PAPERS_CURRENT + "Papers</a>", **kwargs)
+    return page(canonical, bar=PAPER_NAVIGATION, **kwargs)
 
 
 #: The result overviews the fixture's results table names, by address beside the pages.
@@ -294,13 +297,12 @@ def results_table(*, here: bool) -> bytes:
 
 
 def review_paper(review: str, *, ref: str = COMMIT, link: str = "README.md") -> bytes:
-    """A review's page as the check reads one: the bar with Papers current, its own
-    version, and one citation, which the paper pins to the commit it was built from."""
+    """A review's page has active Learn/Papers navigation, version and citation."""
     slug = review.removeprefix("papers/").removesuffix(".html")
     return (
         head(review)
-        + PAPERS_CURRENT
-        + f"Papers</a><p>({PAPER_VERSIONS[slug]})</p>"
+        + PAPER_NAVIGATION
+        + f"<p>({PAPER_VERSIONS[slug]})</p>"
         + f'<a href="{REPO_URL}/blob/{ref}/{link}#anchor">Receipt</a>'
     ).encode()
 
@@ -503,7 +505,7 @@ def test_the_checked_pages_are_every_page_the_site_serves_but_the_workbench() ->
     """
     assert tuple(render_overview.PAGES) == SITE_PAGES
     assert SITE_PAGES.index("index.html") == 0
-    assert PAGE_URL.endswith(f"/squares/{EXPLAINER}")
+    assert f"https://squaremath.org/{EXPLAINER}" == PAGE_URL
     assert EXPLAINER == "papers/n11-lower-bounds-explainer.html"
     assert {*SITE_PAGES, EXPLAINER, "workbench/index.html"} <= set(render_overview.SITE_PAGES)
     assert {
@@ -514,10 +516,12 @@ def test_the_checked_pages_are_every_page_the_site_serves_but_the_workbench() ->
         "results.html",
     } == LINK_CHECKED_PAGES
     assert render_overview.canonical_url("index.html") == check_published_site.SITE_URL
-    assert render_overview.canonical_url("tutorial.html").endswith("/squares/tutorial.html")
+    assert (
+        render_overview.canonical_url("tutorial.html") == "https://squaremath.org/tutorial.html"
+    )
     # The papers page was added to the renderer alone, and is checked here for it.
     assert "papers.html" in SITE_PAGES
-    assert render_overview.canonical_url("papers.html").endswith("/squares/papers.html")
+    assert render_overview.canonical_url("papers.html") == "https://squaremath.org/papers.html"
 
 
 def test_live_source_check_accepts_the_receipt_written_by_the_pdf_exporter(
@@ -571,6 +575,36 @@ def test_check_accepts_the_requested_build_and_rejects_a_stale_stamp(
     assert failure == f"version {OPTIMALITY_REVIEW_EDITION!r} is not on {OPTIMALITY_PAPER}"
 
 
+def test_check_requires_active_learn_and_papers_on_the_explainer(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """The paper must expose both its active category and submenu destination."""
+    for marker in (LEARN_CURRENT, PAPERS_CURRENT):
+        unmarked = marker.replace(' aria-current="true"', "")
+        bare = site_pages(
+            **{EXPLAINER: explainer_page().replace(marker.encode(), unmarked.encode())}
+        )
+        (failure,) = failures(monkeypatch, fake_site(bare))
+        assert failure == (
+            f"{EXPLAINER}: Learn/Papers is not current in the shared navigation, "
+            "linked from a level below"
+        )
+
+
+def test_paper_navigation_checks_attributes_independent_of_order() -> None:
+    reordered = PAPER_NAVIGATION.replace(
+        'class="site-nav-fallback" data-page="learn" aria-current="true"',
+        'aria-current="true" data-page="learn" class="site-nav-fallback"',
+    ).replace(
+        'data-page="papers" href="../papers.html" aria-current="true"',
+        'aria-current="true" href="../papers.html" data-page="papers"',
+    )
+    assert check_published_site.paper_navigation_current(reordered)
+    assert not check_published_site.paper_navigation_current(
+        reordered.replace('href="../papers.html"', 'href="../learn.html"')
+    )
+
+
 def test_check_requires_each_page_to_name_its_own_canonical_url(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
@@ -587,25 +621,26 @@ def test_check_requires_each_page_to_name_its_own_canonical_url(
         wrong = site_pages(**{name: page(PAGE_URL)})
         found = failures(monkeypatch, fake_site(wrong))
         assert any(f"{name} names canonical URL" in line for line in found), name
-        # Serving another page as Atlas also loses its canonical-record index.
-        assert len(found) == (2 if name == "atlas.html" else 1), found
+        # Serving another page as Frontier also loses its canonical-record index.
+        assert len(found) == (2 if name == "frontier.html" else 1), found
 
     missing = site_pages(**{"index.html": b"<p>(" + PUBLICATION_EDITION.encode() + b")</p>"})
     found = failures(monkeypatch, fake_site(missing))
     assert any("index.html names canonical URL None" in line for line in found), found
 
 
-def test_check_requires_the_atlas_to_link_every_registered_case_record(
+def test_check_requires_frontier_to_link_every_registered_case_record(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    complete = page(render_overview.canonical_url("atlas.html"))
+    complete = page(render_overview.canonical_url("frontier.html"))
     for n in (17, CASE_COUNT):
         lost = re.sub(
             rf'<tr id="n-{n}"[^>]*>.*?</tr>', "", complete.decode(), flags=re.DOTALL
         ).encode()
-        found = failures(monkeypatch, fake_site(site_pages(**{"atlas.html": lost})))
+        found = failures(monkeypatch, fake_site(site_pages(**{"frontier.html": lost})))
         assert any(
-            "atlas.html indexes 323 registered case records in order" in line for line in found
+            "frontier.html indexes 323 registered case records in order" in line
+            for line in found
         )
 
 
@@ -1825,7 +1860,7 @@ def test_check_requires_each_review_where_its_papers_card_points(
     monkeypatch: pytest.MonkeyPatch, review: str, label: str
 ) -> None:
     """The Papers page's cards open each review, which a build of its own writes under
-    `papers/`: a deploy without it, or with a page there whose bar does not mark Papers,
+    `papers/`: a deploy without it, or without active Learn/Papers navigation,
     or that lacks its own version, fails, and so does one without its Markdown or its
     PDF."""
     assert review in REVIEW_PAPERS
@@ -1843,12 +1878,16 @@ def test_check_requires_each_review_where_its_papers_card_points(
 
     (failure,) = failures(monkeypatch, fake_site(site_pages(), lost=(review,)))
     assert failure.startswith(f"{label} {review}: HTTP 404, ")
-    assert failure.endswith("Papers is not the bar's current entry")
+    assert failure.endswith("Learn/Papers is not current in the shared navigation")
 
-    bare = site_pages(**{review: review_paper(review).replace(b' aria-current="page"', b"")})
-    (failure,) = failures(monkeypatch, fake_site(bare))
-    assert failure.startswith(f"{label} {review}: HTTP 200, ")
-    assert failure.endswith("Papers is not the bar's current entry")
+    for marker in (LEARN_CURRENT, PAPERS_CURRENT):
+        unmarked = marker.replace(' aria-current="true"', "")
+        bare = site_pages(
+            **{review: review_paper(review).replace(marker.encode(), unmarked.encode())}
+        )
+        (failure,) = failures(monkeypatch, fake_site(bare))
+        assert failure.startswith(f"{label} {review}: HTTP 200, ")
+        assert failure.endswith("Learn/Papers is not current in the shared navigation")
 
     slug = review.removeprefix("papers/").removesuffix(".html")
     unversioned = site_pages(
@@ -2266,10 +2305,12 @@ def test_check_requires_a_forwarder_at_every_address_a_page_used_to_have(
             for old, new in render_overview.LEGACY_PROFILES.items()
         },
     }
+    assert moved["downloads.html"] == "posters.html"
     assert set(moved) == {
+        "downloads.html",
         "all-results.html",
+        "recent-results.html",
         "status.html",
-        "frontier.html",
         "defects.html",
         "explainer.html",
         "n11-optimality/t-060-explainer.html",
@@ -2279,6 +2320,7 @@ def test_check_requires_a_forwarder_at_every_address_a_page_used_to_have(
         *profiles,
     }
     assert {old: moved[old] for old in profiles} == profiles
+    assert "frontier.html" in render_overview.SITE_PAGES
     assert not set(moved) & set(render_overview.SITE_PAGES)
     pages = site_pages()
     requested: list[str] = []
@@ -2511,7 +2553,7 @@ def test_check_fails_a_page_whose_head_is_not_the_sites(
     # was: every other tag is named as missing.
     bare = '<html lang="en"><head><title>A Review</title><meta name="description" content="A.">'
     body = (
-        f"</head>{PAPERS_CURRENT}Papers</a><p>({OPTIMALITY_REVIEW_EDITION})</p>"
+        f"</head>{PAPER_NAVIGATION}<p>({OPTIMALITY_REVIEW_EDITION})</p>"
         f'<a href="{REPO_URL}/blob/{COMMIT}/README.md">R</a>'
     )
     (failure,) = found(**{OPTIMALITY_PAPER: (bare + body).encode()})
@@ -2523,10 +2565,12 @@ def test_check_fails_a_page_whose_head_is_not_the_sites(
     assert "0 og:image tags, not one" in failure
     assert "0 twitter:card tags, not one" in failure
 
-    old = page(render_overview.canonical_url("papers.html")).replace(
-        b'og:title" content="Page papers.html',
-        b'og:title" content="Papers \xc2\xb7 Square Packing',
+    good = page(render_overview.canonical_url("papers.html"))
+    old = good.replace(
+        b'og:title" content="Papers"',
+        b'og:title" content="Papers \xc2\xb7 Square Packing"',
     )
+    assert old != good
     (failure,) = found(**{"papers.html": old})
     assert failure.startswith("papers.html: head: og:title is 'Papers · Square Packing', not")
 

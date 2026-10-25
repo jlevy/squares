@@ -48,11 +48,12 @@ import re
 from collections.abc import Sequence
 from datetime import datetime
 from html import escape
+from pathlib import Path
 from typing import NamedTuple
 
 from devtools import render_overview
 from devtools.profile_links import person_label
-from devtools.repo_links import REPO_URL
+from devtools.repo_links import REPO_URL, repo_url
 from sqpack.release import PublicationHistoryEntry
 
 #: The placeholder an article carries where its front goes, exactly once.
@@ -270,7 +271,7 @@ def _shown(address: str) -> str:
 
 def _linked_name(person: Person) -> str:
     """A name in bold, linking its address."""
-    label = escape(person_label(person.name, person.url))
+    label = escape(person_label(person.name, person.url, full_names=True))
     return f'<a href="{escape(person.url, quote=True)}"><strong>{label}</strong></a>'
 
 
@@ -285,11 +286,9 @@ def chips(front: PaperFront) -> tuple[tuple[str, str, str], ...]:
     )
 
 
-def formats_row(front: PaperFront) -> str:
-    """The row of chips at the top corner of the page, and only the page: it is
-    navigation, so the Markdown edition drops it."""
+def _formats_row(links: Sequence[tuple[str, str, str]]) -> str:
     lines = ['<div class="doc-links screen-only">']
-    for label, href, title in chips(check(front)):
+    for label, href, title in links:
         mark = GITHUB_MARK if label == "GITHUB" else ""
         lines.append(
             f'  <a class="chip" href="{escape(href, quote=True)}" '
@@ -297,6 +296,19 @@ def formats_row(front: PaperFront) -> str:
         )
     lines.append("</div>")
     return "\n".join(lines)
+
+
+def formats_row(front: PaperFront) -> str:
+    """The paper's format actions, omitted from its Markdown edition."""
+    return _formats_row(chips(check(front)))
+
+
+def source_actions(source: Path) -> str:
+    """The same corner actions for an actual repository document, without a PDF."""
+    links = [("GITHUB", repo_url(source), "Original source on GitHub")]
+    if source.suffix.lower() == ".md":
+        links.append(("MD", repo_url(source, kind="raw"), "Raw Markdown source"))
+    return _formats_row(links)
 
 
 def _display_dates(front: PaperFront) -> tuple[Dated, ...]:
@@ -321,7 +333,9 @@ def _credit_lines(front: PaperFront) -> list[tuple[str, str, str]]:
     """Each line of the credits: its class, its HTML and its Markdown, in order."""
     lines: list[tuple[str, str, str]] = []
     if front.source is not None:
-        author = escape(person_label(front.source.author, front.source.author_url))
+        author = escape(
+            person_label(front.source.author, front.source.author_url, full_names=True)
+        )
         address = front.source.address
         author_html = f"<strong>{author}</strong>"
         author_markdown = f"**{author}**"
@@ -349,7 +363,10 @@ def _credit_lines(front: PaperFront) -> list[tuple[str, str, str]]:
             "Human oversight: " + _names(tuple(_linked_name(p) for p in front.oversight)),
             "Human oversight: "
             + _names(
-                tuple(f"[**{person_label(p.name, p.url)}**]({p.url})" for p in front.oversight)
+                tuple(
+                    f"[**{person_label(p.name, p.url, full_names=True)}**]({p.url})"
+                    for p in front.oversight
+                )
             ),
         )
     )

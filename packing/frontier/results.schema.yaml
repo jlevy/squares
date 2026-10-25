@@ -443,6 +443,12 @@ $defs:
           counts where its side is that of Evan Daniel's certificate (T-101); at its
           other 26 the side is new. `devtools.regularized_drawings` holds it to the case
           record, whose verified upper bound then rests on both results.
+          `credit` is the credit line at `n` where `by`'s key spans counts whose antecedents
+          differ, as T-242's does (Lavrentev at 268, Tymchishin at 304; review A, A3, of
+          #803): the key's authors after the antecedents its source supports at this count,
+          every name one the key's own credit carries. Absent, the key's credit stands.
+          `devtools.regularized_drawings` prints it in the case record and holds its names
+          to the key's.
           `devtools.check_results` holds `n` to this result's scope, once each; `of` and
           `first_certified_in` to a registered result other than this one whose scope
           holds `n` and whose date is no later than this result's; `by` to this result's
@@ -462,6 +468,7 @@ $defs:
               minItems: 1
               items: {enum: [retry rungs]}
             side: {enum: [same, solved]}
+            credit: {type: string, minLength: 1}
             first_certified_in: {type: string, pattern: '^T-[0-9]{3}$'}
             changes:
               type: object

@@ -294,6 +294,9 @@ def test_the_history_reads_commits_past_the_pins_and_changes_no_packet_retains(
     assert found.unretained == (f"{second[:7]} change certificates/b/cert.txt",)
     read = sweep.read_history(f"file://{repo}", head, packets, (second,))
     assert read.unretained == ()
+    # No packet pins this head, so no note reads what its read holds, and none is computed.
+    unpinned = sweep.read_history(f"file://{repo}", head, packets, (head,))
+    assert (unpinned.unretained, unpinned.held_by_head_read) == ((), ())
 
 
 def _upstream(tmp_path: Path) -> tuple[Path, tuple[str, str, str, str]]:
@@ -329,6 +332,60 @@ def test_a_register_pin_beside_a_scoped_packet_does_not_hide_what_the_packet_lef
     entry = watched["https://github.com/someone/packings"]
     found = sweep.read_history(f"file://{repo}", head, entry.packets, ())
     assert found.unretained == (f"{second[:7]} change certificates/b/cert.txt",)
+
+
+@pytest.mark.parametrize("scope", [["certificates/a", "README.md"], None])
+def test_a_read_through_a_pinned_head_goes_only_when_nothing_it_covers_is_left_unretained(
+    tmp_path: Path, scope: list[str] | None
+) -> None:
+    """think-bspk, franciscouzo's case in small. couzo-issue678-2026-10-18 pins 7b6c87e,
+    the head, but retains 90 of its 543 changed paths, so the read through it is what
+    covers the rest and removing it as the sweep advised left 7b6c87e unretained. A
+    packet at the head that omits one changed path keeps the read; one that retains the
+    whole tree frees it. With no history read, nothing says either way."""
+    repo, (first, second, _pinned, head) = _upstream(tmp_path)
+    packets = tmp_path / "web"
+    _acquisition(packets, "early", first, None)
+    _acquisition(packets, "at-head", head, scope)
+    url = "https://github.com/someone/packings"
+    read = {"url": url, "read_through": head, "read_on": "2026-10-05", "note": "no change"}
+
+    def section(history: sweep.History) -> sweep.Section:
+        return sweep.repositories_section(
+            {"sources": []},
+            {"repositories": [read]},
+            None,
+            offline=False,
+            heads=lambda _url: head,
+            history=history,
+            packets=packets,
+            projects=[],
+        )
+
+    def local(_url: str, at: str, pinned: Any, reads: Any) -> sweep.RepoHistory:
+        return sweep.read_history(f"file://{repo}", at, pinned, reads)
+
+    found = section(local)
+    assert found.items == []
+    (note,) = found.notes[1:]
+    if scope is None:
+        assert note == (
+            f"{url}: a packet now pins {head[:12]}, so intake-watch.yaml's read of it can "
+            "be removed."
+        )
+    else:
+        assert note == (
+            f"{url}: a packet pins {head[:12]}, but intake-watch.yaml's read of it stays: "
+            f"1 commit it covers changes paths no packet retains: {second[:7]} change "
+            "certificates/b/cert.txt"
+        )
+
+    def unreadable(_url: str, _at: str, _pinned: Any, _reads: Any) -> sweep.RepoHistory:
+        raise RuntimeError("no history")
+
+    failed = section(unreadable)
+    assert failed.notes == ["1 of 1 heads are a commit a packet pins."]
+    assert failed.unchecked == [f"{url}: its history could not be read: no history"]
 
 
 def test_github_differences_each_need_an_owner_and_a_failure_is_not_checked() -> None:
@@ -754,6 +811,7 @@ def test_the_report_leads_with_what_needs_action() -> None:
             items=[
                 sweep.Item("orphan", sweep.NEEDS_OWNER, step="open a bead"),
                 sweep.Item("stalled", sweep.RESOLVED, step="resume it"),
+                sweep.Item("settled", sweep.CLOSEABLE, step="close it"),
                 sweep.Item("held", sweep.OWNED, bead="think-aaaa", bead_state="open"),
             ],
             unchecked=["a source: skipped"],
@@ -762,13 +820,174 @@ def test_the_report_leads_with_what_needs_action() -> None:
     report = sweep.markdown(sections, TODAY)
     assert (
         "1 item without an open bead to own it, 1 item whose blocker has resolved, "
-        "1 item owned by an open bead, and 1 source not checked." in report
+        "1 closeable issue still open, 1 item owned by an open bead, and 1 source not "
+        "checked." in report
     )
     assert report.index("## Needs Action") < report.index("## Not Checked")
     assert report.index("## Not Checked") < report.index("## Source")
     assert "| Source | orphan | needs an owner |  | open a bead |" in report
+    assert "| Source | settled | closeable, still open |  | close it |" in report
     assert "| held | owned | think-aaaa (open) |  |" in report
-    assert sweep.needing_action(sections) == sections[0].items[:2]
+    assert sweep.needing_action(sections) == sections[0].items[:3]
+
+
+def _settled(**extra: Any) -> dict[str, Any]:
+    """An open issue with every result settled and nothing queued: closeable."""
+    return _issue(
+        results=[
+            {"key": "beyond", "claim": "a bound", "not_registered": "a row", "queued": False}
+        ],
+        asks=[],
+        replies=[
+            {
+                "url": "https://github.com/jlevy/squares/issues/300#issuecomment-1",
+                "date": "2026-10-03",
+                "kind": "import",
+                "reported": [{"result": "beyond"}],
+            }
+        ],
+        **extra,
+    )
+
+
+def test_every_closeable_issue_still_open_needs_action() -> None:
+    """The owner's instruction of 23 October 2026: twelve closeable issues were open and
+    nothing listed them, so a settled issue's close is owed until it is done."""
+    beads = _beads(**{"think-bbbb": "in_progress"})
+    (item,) = _queues([_settled()], beads).items
+    assert (item.what, item.state, item.bead, item.since) == (
+        "#300 is closeable and still open",
+        sweep.CLOSEABLE,
+        "think-bbbb",
+        "2026-10-03",
+    )
+    assert "check_requests --draft N" in item.step
+    assert sweep.needing_action([sweep.Section("queues", items=[item])]) == [item]
+    assert _queues([_settled(state="closed")], beads).items == []
+
+
+def test_a_question_awaiting_the_author_holds_the_issue_open_and_the_answer_bead_owns_it() -> (
+    None
+):
+    asked = {
+        "question": "Was the seed T-186's packing?",
+        "changes": "lineage",
+        "asked": "https://github.com/jlevy/squares/issues/300#issuecomment-1",
+        "state": "awaiting",
+    }
+    beads = _beads(**{"think-bbbb": "in_progress"})
+    (item,) = _queues([_settled(awaiting_author=[asked])], beads).items
+    assert (item.what, item.state, item.bead, item.since) == (
+        "#300 awaits the author (lineage): Was the seed T-186's packing?",
+        sweep.OWNED,
+        "think-bbbb",
+        "2026-10-03",
+    )
+    orphaned = _queues([_settled(awaiting_author=[asked])], _beads(**{"think-bbbb": "closed"}))
+    assert [i.state for i in orphaned.items] == [sweep.NEEDS_OWNER]
+    withdrawn = {**asked, "state": "withdrawn", "note": "The manifest settles it."}
+    (close,) = _queues([_settled(awaiting_author=[withdrawn])], beads).items
+    assert close.state == sweep.CLOSEABLE
+
+
+HOLD = {
+    "by": "owner",
+    "basis": "recorded-reservation",
+    "since": "2026-10-04",
+    "beads": ["think-cccc"],
+    "note": "Reserved for the owner (think-cccc).",
+}
+
+
+def test_an_issue_held_for_the_owner_is_listed_for_the_owner_and_never_as_a_close() -> None:
+    """Review A1 of #747: the owner reserved #570, and the sweep told every pass to post
+    on it and close it. Held, it is listed for the owner and fails nothing."""
+    beads = _beads(**{"think-bbbb": "in_progress"})
+    (item,) = _queues([_settled(held=HOLD)], beads).items
+    assert (item.what, item.state, item.bead, item.since) == (
+        (
+            "#300 is held for the owner since 2026-10-04, pending the owner's confirmation "
+            "(its close otherwise owed): listed for the owner, nothing posted or closed"
+        ),
+        sweep.LISTED,
+        "think-bbbb",
+        "2026-10-04",
+    )
+    assert item.step == "for the owner: Reserved for the owner (think-cccc)."
+    assert sweep.needing_action([sweep.Section("queues", items=[item])]) == []
+    unanswered = {**_settled(held=HOLD), "replies": []}
+    (owed,) = _queues([unanswered], beads).items
+    assert "confirmation (a reply and its close otherwise owed)" in owed.what
+    _result, queued_ask, held = _queues([_issue(held=HOLD)], beads).items
+    assert queued_ask.what == "#300 queued ask: a correction"
+    assert "confirmation (a reply otherwise owed)" in held.what
+
+
+def test_a_close_github_already_shows_is_recorded_not_posted_again() -> None:
+    """Review A5 of #747: until the change recording a close merged, the sweep still
+    asked for the final comment, and a check-in could post it twice."""
+    beads = _beads(**{"think-bbbb": "in_progress"})
+    (open_there,) = _queues([_settled()], beads).items
+    assert "if the issue is still open there, post the final comment" in open_there.step
+    register = check_requests.Register(results={}, evidence={})
+    (closed,) = sweep.queues_section(
+        _coverage(),
+        {"repository": "jlevy/squares", "issues": [_settled()]},
+        register,
+        beads,
+        today=TODAY,
+        blockers=_blockers(beads),
+        closed_there=frozenset({300}),
+    ).items
+    assert (closed.what, closed.state) == (
+        "#300 is closed on GitHub and open in the record",
+        sweep.CLOSEABLE,
+    )
+    assert closed.step.startswith("post nothing: record the final comment")
+    github = sweep.github_section(
+        {"repository": "jlevy/squares"},
+        offline=False,
+        compare_github=lambda _: ["#300 is closed there and open here", "#301 is open there"],
+    )
+    assert sweep.closed_on_github(github) == frozenset({300})
+    assert github.items[0].step.startswith("record the close")
+
+
+def test_a_question_awaited_past_the_bound_is_listed_for_a_decision() -> None:
+    """Review A9 of #747: an awaited question had no age, so #470's waited eleven days
+    listed as owned. Past `AWAITED_DAYS` it is listed for a decision; it fails nothing."""
+    asked = {
+        "question": "Which packing did 180 start from?",
+        "changes": "lineage",
+        "asked": "https://github.com/jlevy/squares/issues/300#issuecomment-1",
+        "state": "awaiting",
+    }
+    beads = _beads(**{"think-bbbb": "in_progress"})
+    entry = _settled(awaiting_author=[asked])
+    later = TODAY + timedelta(days=sweep.AWAITED_DAYS + 3)
+
+    def queues(today: date, store: sweep.Beads) -> list[sweep.Item]:
+        return sweep.queues_section(
+            _coverage(),
+            {"repository": "jlevy/squares", "issues": [entry]},
+            check_requests.Register(results={}, evidence={}),
+            store,
+            today=today,
+            blockers=_blockers(store),
+        ).items
+
+    (fresh,) = queues(TODAY, beads)
+    assert fresh.state == sweep.OWNED
+    (stale,) = queues(later, beads)
+    assert (stale.what, stale.state, stale.bead) == (
+        "#300 awaits the author (lineage): Which packing did 180 start from? (awaited 19 days)",
+        sweep.STALE,
+        "think-bbbb",
+    )
+    assert stale.step.startswith("decide: chase the author, withdraw the question")
+    assert sweep.needing_action([sweep.Section("queues", items=[stale])]) == []
+    (orphan,) = queues(later, _beads(**{"think-bbbb": "closed"}))
+    assert orphan.state == sweep.NEEDS_OWNER
 
 
 def test_a_capture_holds_the_page_its_transcription_under_the_archive_header_and_a_receipt(
@@ -966,10 +1185,11 @@ def test_every_pending_count_is_owned_by_the_bead_its_allowlist_entry_names(
 
 def test_each_decision_and_exemption_is_owned_by_the_bead_it_names() -> None:
     """Review A2 of #650: the sweep exists to catch a bead that closes while it still owns
-    a count. Each decision whose `SETTLED` entry still owes runs or an outcome, and each
-    exemption, is listed once with the bead its entry names (`owed` first, the exemption's
-    evidence anywhere, as `default_drawings.deferrals` reads them), owned while that bead
-    is open; closing those beads leaves exactly their items needing an owner."""
+    a count. Each decision whose `SETTLED` entry still owes runs or an outcome, each count
+    whose regularization is owed (review A4 of #756), and each exemption, is listed once
+    with the bead its entry names (`owed` first, the exemption's evidence anywhere, as
+    `default_drawings.deferrals` reads them), owned while that bead is open; closing those
+    beads leaves exactly their items needing an owner."""
     from devtools import default_drawings as defaults  # noqa: PLC0415
 
     rows = {
@@ -977,22 +1197,27 @@ def test_each_decision_and_exemption_is_owned_by_the_bead_it_names() -> None:
         for row in json.loads(defaults.RECORD.read_text(encoding="utf-8"))["states"]
     }
     owes: dict[int, str] = {}
+    unregularized: dict[int, str] = {}
     exempt: dict[int, str] = {}
     what: dict[int, str] = {}
     for n, held in defaults.SETTLED.items():
-        if held.owed and rows[n]["state"] == defaults.DECIDED:
+        if held.owed and rows[n]["state"] in (defaults.DECIDED, defaults.OWED):
             bead = defaults.BEAD.match(held.owed)
             assert bead is not None, n
-            owes[n] = bead[0]
             owed = held.owed[bead.end() :].lstrip(":; ").strip()
-            what[n] = f"n = {n} decided no better on its witness, still owed: {owed}"
+            if rows[n]["state"] == defaults.DECIDED:
+                owes[n] = bead[0]
+                what[n] = f"n = {n} decided no better on its witness, still owed: {owed}"
+            else:
+                unregularized[n] = bead[0]
+                what[n] = f"n = {n} not regularized on its witness, regularization owed: {owed}"
         if held.state == defaults.EXEMPT and rows[n]["state"] == defaults.EXEMPT:
             bead = defaults.BEAD.search(held.evidence)
             assert bead is not None, n
             exempt[n] = bead[0]
             what[n] = f"n = {n} exempt: {held.outcome}"
-    if not owes or not exempt:
-        pytest.skip("the data holds no decision that owes runs, or no exemption")
+    if not owes or not unregularized or not exempt:
+        pytest.skip("the data holds no decision that owes runs, no owed one, or no exemption")
     states = _deferral_beads()
 
     def listed(section: sweep.Section, words: str) -> dict[int, sweep.Item]:
@@ -1003,14 +1228,16 @@ def test_each_decision_and_exemption_is_owned_by_the_bead_it_names() -> None:
 
     section = sweep.regularization_section(_beads(**states))
     decided = listed(section, " decided no better on its witness, still owed: ")
+    owing = listed(section, " not regularized on its witness, regularization owed: ")
     exempted = listed(section, " exempt: ")
     assert {n: item.bead for n, item in decided.items()} == owes
+    assert {n: item.bead for n, item in owing.items()} == unregularized
     assert {n: item.bead for n, item in exempted.items()} == exempt
-    for n, item in [*decided.items(), *exempted.items()]:
+    for n, item in [*decided.items(), *owing.items(), *exempted.items()]:
         assert (item.what, item.state, item.bead_state) == (what[n], sweep.OWNED, "in_progress")
     assert sweep.needing_action([section]) == []
 
-    closing = {*owes.values(), *exempt.values()}
+    closing = {*owes.values(), *unregularized.values(), *exempt.values()}
     assert not closing & {
         found[0]
         for entry in defaults.PENDING_ALLOWED.values()
@@ -1021,7 +1248,7 @@ def test_each_decision_and_exemption_is_owned_by_the_bead_it_names() -> None:
     )
     orphaned = sweep.needing_action([closed])
     assert sorted(item.what for item in orphaned) == sorted(
-        item.what for item in [*decided.values(), *exempted.values()]
+        item.what for item in [*decided.values(), *owing.values(), *exempted.values()]
     )
     assert {item.bead_state for item in orphaned} == {"closed"}
 

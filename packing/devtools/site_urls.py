@@ -72,6 +72,14 @@ PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
         350_000,
         "Complete n=18 certificate record; prepared HTML measures 326,548 bytes.",
     ),
+    "cases/204.html": (
+        350_000,
+        (
+            "Ten verified certificates and a section for each of the six that have been "
+            "the house, each listing every other side; prepared HTML measures 320,903 "
+            "bytes on 23 October 2026 after T-231's adoption."
+        ),
+    ),
     "result/t-007.html": (
         800_000,
         "Complete broad scope history and prepared exact bounds measure 711,115 bytes.",
@@ -104,33 +112,40 @@ PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
         ),
     ),
     "atlas.html": (
-        1_050_000,
+        400_000,
         (
-            "Combined 324-case Atlas measures 862,357 bytes: 688,112 for the complete "
-            "Frontier Survey and 174,245 for graphics and the shared shell. With the "
-            "person profiles (#578) it measured 1,005,866 bytes on 21 October 2026: its "
-            "344 reviewed credit links to profiles cost 14,692 bytes, recognised by "
-            "address with no per-link marker, and the page is 991,174 without them. No "
-            "timing was re-measured for this change."
+            "On 22 October 2026 the standalone 324-case Visual Atlas measures 295,318 "
+            "bytes with every drawing visible by default and one shared case popover. "
+            "The 400,000-byte ceiling leaves 104,682 bytes above this measurement. "
+            "The complete bounds table has its own Frontier Survey budget."
+        ),
+    ),
+    "frontier.html": (
+        900_000,
+        (
+            "On 22 October 2026 the standalone Frontier Survey measures 731,612 bytes "
+            "for all 324 rows, exact native MathML, credit links, the concise reading "
+            "key and the shared shell. The 900,000-byte ceiling leaves 168,388 bytes "
+            "above that measurement; row details remain fetched on demand. "
+            "Timing has not been re-measured for the split."
         ),
     ),
     "results.html": (
-        1_250_000,
+        1_400_000,
         (
-            "The complete 212-result table with prepared math measured 1,141,207 bytes "
-            "on 18 October 2026, with no section above it. Each row links its full "
-            "record; no record body is repeated in the table. Three-run "
-            "desktop/mobile, light/dark and no-JS checks of that table-only page pass: "
-            "CLS <=0.001, LCP <=576 ms, longest task <=153 ms and blocking <=123 ms. "
-            "The seven days' arrivals and the weekly rollup above the table (#514) "
-            "cost 45,886 bytes at 217 results, 1,157,668 without them and 1,203,554 "
-            "with them, which halves the headroom from 92,332 to 46,446 bytes: about 9 "
-            "results at today's 90th-percentile row and seven-day entry, so "
-            "`test_overview` holds the page through 225. No timing has been measured "
-            "on the page with the sections. `think-v1qe` owns that measurement and the "
-            "runway: the intake that passes 225 re-measures the page, its "
-            "timing included, and either lightens the table or moves the ceiling as a "
-            "measured choice."
+            "On 22 October 2026 the complete 228-result page measured 1,324,108 bytes "
+            "with shared popover expand/close controls, versus 1,248,215 on main. "
+            "Reusing KPress sprite glyphs removes 80,940 bytes compared with repeating "
+            "their SVG paths. Full result bodies remain fetched on demand. The "
+            "1,400,000-byte ceiling leaves 75,892 bytes, about 15 more rows at the "
+            "measured P90 row plus recent-arrival entry cost of 4,917 bytes. The upstream "
+            "238-result runway target is retained. "
+            "Three-run desktop/mobile light/dark and no-JS checks passed with CLS 0, "
+            "maximum per-scenario medians of 444 ms LCP, 197 ms longest task and "
+            "155 ms blocking. "
+            "Concurrent builds make these advisory measurements, not a controlled "
+            "performance comparison. Evidence is tracked in think-xgqg; future runway "
+            "work remains under think-v1qe."
         ),
     ),
     "result/t-174.html": (
@@ -188,10 +203,19 @@ HASHED_ASSET_PATTERN = (
     r"|fonts/[a-zA-Z0-9_-]+\.[0-9a-f]{16}\.woff2)"
 )
 IMAGE_ASSET_PATTERN = r"assets/images/[a-zA-Z0-9_-]+\.[0-9a-f]{16}\.png"
+TUTORIAL_IMAGE_ASSET_PATTERN = (
+    r"assets/images/tutorial-(?:trump11|kingbird29)-overview\.[0-9a-f]{16}\.svg"
+)
 WORKBENCH_ASSET_PATTERN = "workbench/" + HASHED_ASSET_PATTERN
 WORKBENCH_DATA_PATTERN = r"workbench/data/corpus\.[0-9a-f]{16}\.json"
 ALLOWED_PATTERNS = frozenset(
-    {HASHED_ASSET_PATTERN, IMAGE_ASSET_PATTERN, WORKBENCH_ASSET_PATTERN, WORKBENCH_DATA_PATTERN}
+    {
+        HASHED_ASSET_PATTERN,
+        IMAGE_ASSET_PATTERN,
+        TUTORIAL_IMAGE_ASSET_PATTERN,
+        WORKBENCH_ASSET_PATTERN,
+        WORKBENCH_DATA_PATTERN,
+    }
 )
 Checks = list[tuple[bool, str]]
 
@@ -289,6 +313,16 @@ def hashed_asset_rows(day: str) -> list[SiteURL]:
             day,
             day,
             pattern=IMAGE_ASSET_PATTERN,
+        ),
+        SiteURL(
+            "assets/images/tutorial-{trump11,kingbird29}-overview.{hash}.svg",
+            "",
+            "asset-file",
+            "devtools.site_documents:tutorial_packing_images",
+            "overview",
+            day,
+            day,
+            pattern=TUTORIAL_IMAGE_ASSET_PATTERN,
         ),
     ]
 

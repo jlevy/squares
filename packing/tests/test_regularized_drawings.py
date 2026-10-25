@@ -362,6 +362,102 @@ def test_a_case_note_credits_the_regularizer_and_is_never_a_result() -> None:
     )
 
 
+def test_an_exact_solve_of_the_house_is_called_one_and_an_owed_regularization_is_said() -> None:
+    """The owner, 23 October 2026: convert inexact packings to exact ones, then
+    regularize, and track regularization separately. Issue 639's exact forms (T-193) solve
+    T-174's or T-186's packing to its algebraic side and rearrange nothing, so the case
+    record calls the house an exact solve, not a regularization, and marks the item
+    `kind: exact-solve`, which the case page labels. Where the count's regularization is
+    owed (`default_drawings.owed_beads`), the note ends by saying so, with the bead
+    (review A5 of #756). The committed records hold both at the six T-193 houses: owed at
+    102, 123, 258, 259 and 302, and nothing owed at 295, which reads regular as
+    published. PR 574's algebraic certificates at 153 and 207 (T-174) attain PingYou's
+    own packings exactly and are exact solves too, owed alike (review B1 of #756); its
+    other houses keep the register's word until think-xqpq decides their vocabulary, so
+    70's algebraic house, which reads regular as published, keeps the word."""
+    source = {
+        "by": "[Daniel exact current records 2026-10-16]",
+        "credit": "Daniel after Xu",
+        "of": "T-174",
+        "registered_in": "T-193",
+        "method": "exact solve",
+        "side": "solved",
+        "kind": drawings.EXACT_SOLVE,
+    }
+    assert drawings.case_note([source], owed="think-mbdw") == (
+        "The house is its source's exact solve of T-174's packing (Daniel after Xu), "
+        "registered as T-193 for the upper bound its exact side proves. An exact solve "
+        "converts the packing to an exact one and is not a regularization. The drawing is "
+        "not regularized, and its regularization is owed (think-mbdw)."
+    )
+    assert "owed" not in drawings.case_note([source])
+
+    from devtools import default_drawings  # noqa: PLC0415
+
+    owed = default_drawings.owed_beads()
+    assert owed == dict.fromkeys((102, 123, 153, 207, 258, 259, 302), "think-mbdw")
+    fields = drawings.case_fields(drawings.index_document())
+    for n in (102, 123, 258, 259, 295, 302):
+        (item,) = fields[n]["items"]
+        assert item["by"] in drawings.EXACT_SOLVES, n
+        assert item["kind"] == drawings.EXACT_SOLVE, n
+        assert fields[n]["note"].startswith("The house is its source's exact solve of "), n
+        assert "is not a regularization" in fields[n]["note"], n
+        assert fields[n]["note"].endswith("owed (think-mbdw).") == (n in owed), n
+    for n, of in ((153, "T-148"), (207, "T-147")):
+        (item,) = fields[n]["items"]
+        assert item["by"] == "[PingYou PR 574 certificates 2026-10-13]", n
+        assert item["registered_in"] == "T-174", n
+        assert item["kind"] == drawings.EXACT_SOLVE, n
+        assert fields[n]["note"].startswith(
+            f"The house is its source's exact solve of {of}'s packing (PingYou Ltd after "
+        ), n
+        assert "regularization of" not in fields[n]["note"], n
+        assert "is not a regularization" in fields[n]["note"], n
+        assert fields[n]["note"].endswith("its regularization is owed (think-mbdw)."), n
+    # PR 574's other houses keep the register's word: the exact solves are named by
+    # count, not by source.
+    (item,) = (found for found in fields[70]["items"] if found["by"] != "project")
+    assert item["by"] == "[PingYou PR 574 certificates 2026-10-13]"
+    assert "kind" not in item
+    assert "The house is itself its source's regularization of" in fields[70]["note"]
+    assert drawings.exact_solve("[PingYou PR 574 certificates 2026-10-13]", 153)
+    assert not drawings.exact_solve("[PingYou PR 574 certificates 2026-10-13]", 70)
+    assert drawings.exact_solve("[Daniel exact current records 2026-10-16]", 70)
+    assert not drawings.exact_solve("[Daniel regularized lists 2026-10-10]", 153)
+
+
+def test_a_house_its_source_regularized_owes_no_regularization() -> None:
+    """Negative control for review B1 of #756. A house that is its source's
+    regularization is a regularized drawing, so a note that calls it one and then says its
+    regularization is owed contradicts itself, as 153's and 207's did while T-174's
+    refinements kept the register's word there. `case_note` refuses that pairing; an exact
+    solve, which is no regularization, may owe one."""
+    source = {
+        "by": "[A]",
+        "credit": "A after B",
+        "of": "T-002",
+        "registered_in": "T-003",
+        "method": "certificate refinement",
+        "side": "solved",
+    }
+    with pytest.raises(drawings.RegularizedDrawingsError, match=r"owed \(think-mbdw\)"):
+        drawings.case_note([source], owed="think-mbdw")
+    assert drawings.case_note([source]).startswith(
+        "The house is itself its source's regularization of T-002's packing"
+    )
+    solved = {**source, "kind": drawings.EXACT_SOLVE}
+    assert drawings.case_note([solved], owed="think-mbdw").endswith(
+        "its regularization is owed (think-mbdw)."
+    )
+    # The committed records hold the rule at every owed count.
+    from devtools import default_drawings  # noqa: PLC0415
+
+    fields = drawings.case_fields(drawings.index_document())
+    for n in default_drawings.owed_beads():
+        assert "its source's regularization" not in fields[n]["note"], n
+
+
 def test_a_drawing_whose_exact_side_is_registered_says_so() -> None:
     """Where the drawn packing's own result registers this very regularization (a
     `by: project` item at the count, by the drawn view's method, at its side relation),
@@ -1013,3 +1109,25 @@ def test_witness_source_reuse_distinguishes_repository_roots(tmp_path: Path) -> 
             json.dumps({"witness": {"source": {"key": key}}}), encoding="utf-8"
         )
         assert drawings.witness_source_key(witness, root, source_keys=source_keys) == key
+
+
+def test_an_item_credit_narrows_its_key_and_never_adds_to_it() -> None:
+    """A regularization item may state the credit at its own count where its source's key
+    spans counts whose antecedents differ: T-242's key credits Daniel after Lavrentev at
+    268 and after Tymchishin at 304, and its item at 304 says so (review A, A3, of #803).
+    A line that names anyone the key does not is refused."""
+    key = "Daniel after Lavrentev, Tymchishin"
+    assert drawings.item_credit({"n": 304}, key) == key
+    assert drawings.item_credit({"n": 304, "credit": "Daniel after Tymchishin"}, key) == (
+        "Daniel after Tymchishin"
+    )
+    with pytest.raises(ValueError, match="Polkovskyi"):
+        drawings.item_credit({"n": 304, "credit": "Daniel after Polkovskyi"}, key)
+    register = safe_load((drawings.ROOT / "frontier/results.yaml").read_text(encoding="utf-8"))
+    (item,) = [
+        record
+        for result in register["results"]
+        if result["id"] == "T-242"
+        for record in result.get("regularizations") or []
+    ]
+    assert (item["n"], item["credit"]) == (304, "Daniel after Tymchishin")

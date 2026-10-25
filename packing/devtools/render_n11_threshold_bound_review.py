@@ -56,6 +56,7 @@ from devtools.render_overview import (
     KPRESS_CLIENT_FRAME,
     MATH_SCRIPT,
     N11_THRESHOLD_BOUND_REVIEW,
+    NAVIGATION_SCRIPT,
     PAPER_TYPE_CSS,
     PAPERS_ROOT,
     SITE_NAV,
@@ -72,6 +73,8 @@ from devtools.render_overview import (
     nav_html,
     paper_path,
 )
+from devtools.site_icons import GITHUB_ICON_INPUTS
+from devtools.site_navigation import breadcrumbs_html
 from sqpack.release import (
     THRESHOLD_PROOF_PUBLISHED,
     THRESHOLD_REVIEW_EDITION,
@@ -296,6 +299,7 @@ RENDER_INPUTS = tuple(
             # links between papers by the shared placeholder.
             PACKING / "devtools" / "paper_front.py",
             PACKING / "devtools/profile_links.py",
+            *GITHUB_ICON_INPUTS,
             PACKING / "contributors/people",
             PACKING / "devtools" / "paper_links.py",
             render_n11_lower_bounds_explainer.PUBLICATION_STYLE,
@@ -310,6 +314,8 @@ RENDER_INPUTS = tuple(
             PAPER_TYPE_CSS,
             SITE_NAV,
             SITE_NAV_CSS,
+            NAVIGATION_SCRIPT,
+            PACKING / "devtools/site_navigation.py",
             THEME_SCRIPT,
             HEADROOM_SCRIPT,
             KPRESS_CLIENT_FRAME,
@@ -562,17 +568,19 @@ def render(
         "PAPER_CSS": STYLE.read_text(encoding="utf-8"),
         "SITE_FAVICON": favicon_html(inline=True),
         "SITE_NAV_CSS": SITE_NAV_CSS.read_text(encoding="utf-8"),
-        "SITE_NAV": nav_html("papers", root=SITE_ROOT),
+        "SITE_NAV": nav_html(SITE_PATH, root=SITE_ROOT)
+        + breadcrumbs_html(SITE_PATH, TITLE, root=SITE_ROOT),
         # A paper's closing credit carries no version: its own is in its credits, and
         # the site's goes on no paper.
         "COLOPHON": colophon_lines(edition=""),
         "SITE_EMBED": EMBED_SCRIPT.read_text(encoding="utf-8"),
         "SITE_THEME": THEME_SCRIPT.read_text(encoding="utf-8"),
+        "SITE_NAVIGATION": NAVIGATION_SCRIPT.read_text(encoding="utf-8"),
         "SITE_HEADROOM": HEADROOM_SCRIPT.read_text(encoding="utf-8"),
         "SITE_KPRESS_CLIENT": kpress_client_script(),
         "SITE_TOOLTIPS": TOOLTIP_SCRIPT.read_text(encoding="utf-8"),
         "THEME_BOOTSTRAP": render_n11_lower_bounds_explainer.theme_bootstrap(static),
-        "BODY_HTML": link_prose(document.html, prefix=SITE_ROOT),
+        "BODY_HTML": link_prose(document.html, prefix=SITE_ROOT, full_names=True),
         **(math_scripts(static) if document.has_math else {"KATEX_JS": "", "SITE_MATH": ""}),
         "DIAGRAM_LABEL_SCRIPT": render_n11_lower_bounds_explainer.INLINE_SCRIPT_ASSETS[
             "DIAGRAM_LABEL_SCRIPT"

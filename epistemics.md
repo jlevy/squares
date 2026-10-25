@@ -730,8 +730,9 @@ to credit it as carefully as this project’s own.
 - **Upper bounds count too.** A parallel packing that improves a best-known side enters
   its case’s reported upper lane from a retained source, with the same credit.
   It reaches the verified upper lane only after an exact or interval witness replay.
-  The coverage gate below checks lower bounds only, so the register entry for an upper
-  bound by others is kept by hand.
+  The register’s coverage gate holds it as it holds a lower bound: a case bound from a
+  source dated from 22 August 2026 needs a register entry that cites its evidence and
+  covers its count (`devtools.check_results`).
 
 ### Import, Integration, and Reply
 
@@ -748,7 +749,9 @@ Its three end points are fixed here.
 3. **Answered.** An author who asked for the registration, on an issue here or
    otherwise, has been told what was registered, at which rung, what was replayed, and
    what remains. The answer goes on their issue, which stays open while work they asked
-   for is still queued.
+   for is still queued, while a question put to them awaits an answer that could falsify
+   what the record asserts and that no measurement here can settle, or while the issue
+   is held for the owner, and closes with a final comment once none of these holds.
    Every issue an intake pass touches is answered, and every later change of its state
    gets a follow-up until the issue closes with a final comment (stage 7 of
    [result-import.md](packing/campaign/result-import.md#stage-7-answer) says what
@@ -762,18 +765,18 @@ Its three end points are fixed here.
 
 Each fact about the frontier has one home, and reader-facing lists of results are
 generated from these files (`OR-1`): `RESULTS.md`, `STATUS.md`, `INVENTORY.md`, and the
-project site’s [overview](https://jlevy.github.io/squares/), whose recent results,
-results table and frontier survey are rendered from them by `devtools.render_overview`.
-A `T-NNN` named in the README or the synopsis must be a registered result; the register
-gate checks it.
+project site’s [overview](https://squaremath.org/), whose recent results, results table
+and frontier survey are rendered from them by `devtools.render_overview`. A `T-NNN`
+named in the README or the synopsis must be a registered result; the register gate
+checks it.
 
 | Record | Holds | Reader view |
 | --- | --- | --- |
-| [`n-NNN.md`](packing/frontier/README.md) case records | Both lanes’ bounds for each case, with their evidence | [`STATUS.md`](packing/frontier/STATUS.md); the site’s [recent results](https://jlevy.github.io/squares/#recent-results) and [frontier survey](https://jlevy.github.io/squares/atlas.html#the-frontier-survey); the superseded mark in `RESULTS.md` and in the site’s [results table](https://jlevy.github.io/squares/results.html) |
+| [`n-NNN.md`](packing/frontier/README.md) case records | Both lanes’ bounds for each case, with their evidence | [`STATUS.md`](packing/frontier/STATUS.md); the site’s [recent results](https://squaremath.org/#recent-results) and [frontier survey](https://squaremath.org/atlas.html#the-frontier-survey); the superseded mark in `RESULTS.md` and in the site’s [results table](https://squaremath.org/results.html) |
 | [`evidence.yaml`](packing/frontier/evidence.yaml) | Who performed each check, by which method, within which limits, with which programs | [`INVENTORY.md`](packing/frontier/INVENTORY.md); each case record’s Verification Code section |
 | [`verifiers.yaml`](packing/frontier/verifiers.yaml) | Each verification program, external or first-party, with the versions that ran and where its source is retained | [`VERIFIERS.md`](packing/frontier/VERIFIERS.md); the Verification Code section of `RESULTS.md` |
-| [`results.yaml`](packing/frontier/results.yaml) | Each result’s kind, headline, claim, date, `V`/`C`/`S`, novelty, attribution, `activity` and `regularizations` | [`RESULTS.md`](packing/frontier/RESULTS.md), grouped by lineage; the site’s [results table](https://jlevy.github.io/squares/results.html), each with the derived status |
-| [`bibliography.yaml`](packing/resources/bibliography.yaml) | Each source’s date, credit and lineage | The atlas citation line; the holders, credit and relation in `RESULTS.md` and on the site’s [overview](https://jlevy.github.io/squares/#recent-results) |
+| [`results.yaml`](packing/frontier/results.yaml) | Each result’s kind, headline, claim, date, `V`/`C`/`S`, novelty, attribution, `activity` and `regularizations` | [`RESULTS.md`](packing/frontier/RESULTS.md), grouped by lineage; the site’s [results table](https://squaremath.org/results.html), each with the derived status |
+| [`bibliography.yaml`](packing/resources/bibliography.yaml) | Each source’s date, credit and lineage | The atlas citation line; the holders, credit and relation in `RESULTS.md` and on the site’s [overview](https://squaremath.org/#recent-results) |
 | [`source-coverage.yaml`](packing/frontier/source-coverage.yaml) | Which sources were read, and when | None |
 
 ## Enforcement and Register

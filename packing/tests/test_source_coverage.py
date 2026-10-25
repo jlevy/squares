@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import copy
 import json
+from fractions import Fraction
 from pathlib import Path
 from typing import Any
 
@@ -725,3 +726,159 @@ def test_the_schema_names_a_successor_exactly_when_a_row_is_superseded() -> None
     assert not validator.is_valid(document)
     document["beyond_horizon_claims"] = [earlier, {**later, "superseded_by": "earlier"}]
     assert not validator.is_valid(document)
+
+
+def _above(row: dict[str, Any], construction: str = "19 + 1/2*sqrt(2)") -> dict[str, Any]:
+    """A row marked above a classical construction (`ABOVE_CONSTRUCTION`)."""
+    kept = {key: value for key, value in row.items() if key != "superseded_by"}
+    return kept | {
+        "disposition": coverage_check.ABOVE_CONSTRUCTION,
+        "construction": construction,
+    }
+
+
+def test_a_row_above_a_classical_construction_is_kept_and_holds_no_count() -> None:
+    """The owner's answer of 23 October 2026 on #613 (think-8krd): Göbel's construction is
+    an earlier report, so a row above it stays listed as its source printed it, holds no
+    count and names no successor, and a count may then have no current row."""
+    coverage, claims = _beyond()
+    coverage["sources"].append(_dated_source("over", "2026-10-01", [369]))
+    coverage["beyond_horizon_claims"].append(_above(_row("over", 369, "19.740417287556077")))
+    claims = {**claims, "over": {369: "19.740417287556077"}}
+    assert _beyond_errors(coverage, claims) == []
+    assert 369 not in coverage_check.current_beyond_horizon(coverage)
+    rows = coverage["beyond_horizon_claims"]
+    rows[-1] = _above(rows[-1], "19 + 1/2*sqrt(3)")
+    rows.append(_above(_row("late", 401, "20.05")))
+    rows[3] = _row("first", 401, "20.1", superseded_by="late")
+    assert _beyond_errors(coverage, claims) == [
+        (
+            "beyond-horizon n=369 from over states no construction p + q*sqrt(2), only "
+            "'19 + 1/2*sqrt(3)'"
+        ),
+        "beyond-horizon n=401 from late is listed twice; a count has one row per source",
+    ]
+    rows.pop()
+    rows[-1] = _above(_row("over", 369, "19.740417287556077"), "20 + 1/2*sqrt(2)")
+    rows[4] = _above(rows[4], "19 + 1/2*sqrt(2)")
+    assert _beyond_errors(coverage, claims) == [
+        (
+            "beyond-horizon n=369 from over: 19.740417287556077 is not above its "
+            "construction 20 + 1/2*sqrt(2)"
+        ),
+        (
+            "beyond-horizon n=401 from first names successor late, whose row is above a "
+            "classical construction and holds no count"
+        ),
+    ]
+
+
+def test_a_construction_is_compared_exactly() -> None:
+    """``p + q sqrt 2`` against a rational, by exact sign; no rational equals it."""
+    sign = coverage_check.construction_sign
+    assert sign(Fraction("19.707106781187"), "19 + 1/2*sqrt(2)") == 1
+    assert sign(Fraction("19.707106781186"), "19 + 1/2*sqrt(2)") == -1
+    assert sign(Fraction(19), "19 + 0*sqrt(2)") == 0
+    assert sign(Fraction(19), "19 - 1/2*sqrt(2)") is None
+
+
+def test_the_schema_names_a_construction_exactly_when_a_row_is_above_one() -> None:
+    schema = safe_load(
+        coverage_check.COVERAGE.with_name("source-coverage.schema.yaml").read_text()
+    )
+    validator = Draft202012Validator(schema)
+    document = safe_load(coverage_check.COVERAGE.read_text(encoding="utf-8"))
+    document.pop("softschema")
+    above = {**_above(_row("over", 369, "19.75")), "bead": "think-ab12"}
+    document["beyond_horizon_claims"] = [above]
+    assert validator.is_valid(document)
+    document["beyond_horizon_claims"] = [{**above, "construction": "19 + sqrt(2)/2"}]
+    assert not validator.is_valid(document)
+    plain = {**_row("over", 369, "19.75"), "construction": "19 + 1/2*sqrt(2)"}
+    document["beyond_horizon_claims"] = [plain]
+    assert not validator.is_valid(document)
+    document["beyond_horizon_claims"] = [
+        {key: value for key, value in above.items() if key != "construction"}
+    ]
+    assert not validator.is_valid(document)
+
+
+def _live_register() -> tuple[
+    dict[str, Any], list[dict[str, Any]], dict[str, Any], dict[str, Any]
+]:
+    """The live coverage record, register, evidence index and bibliography."""
+    coverage = safe_load(coverage_check.COVERAGE.read_text(encoding="utf-8"))
+    results = safe_load(coverage_check.RESULTS.read_text(encoding="utf-8"))["results"]
+    evidence = {
+        entry["id"]: entry
+        for entry in safe_load(coverage_check.EVIDENCE.read_text(encoding="utf-8"))["evidence"]
+    }
+    bibliography = {
+        source["key"]: source
+        for source in safe_load(coverage_check.BIBLIOGRAPHY.read_text(encoding="utf-8"))[
+            "sources"
+        ]
+    }
+    return coverage, results, evidence, bibliography
+
+
+def test_every_recent_source_the_register_cites_has_a_coverage_source() -> None:
+    """Stage 3 records a reported claim with a coverage entry that cites it; the import
+    review of 2026-10-01 found two wand125 keys without one, and the gate passed."""
+    coverage, results, evidence, bibliography = _live_register()
+    assert (
+        coverage_check.register_source_errors(coverage, results, evidence, bibliography) == []
+    )
+
+
+def test_a_cited_recent_source_with_no_coverage_source_is_refused() -> None:
+    """The negative control: the live record with the tools' coverage source taken out."""
+    coverage, results, evidence, bibliography = _live_register()
+    coverage["sources"] = [
+        source
+        for source in coverage["sources"]
+        if source["source_key"] != "[wand125 tools 2026]"
+    ]
+    assert coverage_check.register_source_errors(coverage, results, evidence, bibliography) == [
+        (
+            "[wand125 tools 2026], dated 2026-09-29 and cited by T-058, T-059, has no coverage "
+            "source: none carries the key or cites evidence that does"
+        )
+    ]
+
+
+def test_a_coverage_source_that_cites_a_keys_evidence_holds_the_key() -> None:
+    """The Kingbird catalogue's entry holds each finder's own key by citing its evidence:
+    without those citations, Chang's n = 83 key is unheld."""
+    coverage, results, evidence, bibliography = _live_register()
+    (kingbird,) = [s for s in coverage["sources"] if s["id"] == "kingbird-current"]
+    kingbird["evidence"] = [
+        ref for ref in kingbird["evidence"] if not ref.startswith("E-n083-")
+    ]
+    (problem,) = coverage_check.register_source_errors(
+        coverage, results, evidence, bibliography
+    )
+    assert problem.startswith("[Chang n83 2026-09-24], dated 2026-09-24 and cited by T-089,")
+
+
+#: The key of Burns's and Massaccesi's August 2026 posts, spelled with its en dash.
+BURNS_MASSACCESI = "[Burns\N{EN DASH}Massaccesi n17]"
+
+
+def test_a_source_dated_before_the_project_began_needs_no_coverage_source() -> None:
+    """The register's rule for results by others starts on 22 August 2026; Nagamochi 2005
+    and the Burns and Massaccesi posts of August are cited and are not coverage sources."""
+    coverage, results, evidence, bibliography = _live_register()
+    keys = {
+        key
+        for record in results
+        for key in coverage_check.register_source_keys(record, evidence)
+    }
+    held = {source["source_key"] for source in coverage["sources"]}
+    assert {"[Nagamochi 2005]", BURNS_MASSACCESI} <= keys - held
+    assert bibliography[BURNS_MASSACCESI]["dated"] == "2026-08-21"
+    bibliography[BURNS_MASSACCESI]["dated"] = "2026-08-22"
+    (problem,) = coverage_check.register_source_errors(
+        coverage, results, evidence, bibliography
+    )
+    assert problem.startswith(f"{BURNS_MASSACCESI}, dated 2026-08-22")

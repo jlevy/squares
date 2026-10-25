@@ -58,9 +58,9 @@ already linked below the name.
 Matching ignores case and an initial `@`. An account’s transient display name need not
 become the preferred credit name.
 
-Inline profile links use one registry-wide naming rule: an evidenced surname when
-unique, the full public name when surnames collide, then an evidenced handle or stable
-ID if the full names also collide.
+Technical prose and credit links use one registry-wide naming rule: an evidenced surname
+when unique, the full public name when surnames collide, then an evidenced handle or
+stable ID if the full names also collide.
 The optional `surname` field names the family name explicitly and requires provenance;
 word position never establishes it.
 A person without an established surname uses their public account handle, preferring
@@ -70,9 +70,16 @@ names beside distinct reviewed-result tallies, separate reviewed-credit counts,
 cited-resource counts and public account links.
 Full profile headings and identity metadata also retain the full public name.
 Home and About invite readers to the directory without listing names.
-About’s narrative introduction uses full public names with profile links.
-This is a presentation exception for explanatory prose; compact credits and official
-result records retain the surname rule.
+Resource bylines and descriptions, explanatory papers and reader documents, and About’s
+narrative introduction use full public names with profile links.
+Technical result and case records, News reports, and compact credits retain the surname
+rule.
+The naming context is retained in rendered markup so the profile-link audit applies
+the same rule as the renderer.
+
+Present contribution tallies in the order **Records, Results, Credits** across resource
+cards, profile summaries and sections, and directory columns.
+Resources and account links follow these contribution measures.
 
 Identity evidence may include the person’s public account or publication, linked
 profiles, retained account identifiers, and an explicit confirmation recorded by the
@@ -145,8 +152,9 @@ Retained PR titles, quotations and source identifiers keep their original wordin
 Authored site introductions, case narratives and open-question notes, result claims,
 summaries and explanatory notes, declared reader-document articles, News summaries and
 details, and profile biographies link exact full names that identify one published
-profile. Soft-wrapped names match across whitespace; linked labels use the shared
-surname-or-handle rule, with possessive punctuation retained outside the link.
+profile.
+Soft-wrapped names match across whitespace; linked labels use the naming context
+above, with possessive punctuation retained outside the link.
 Existing account links may lead to that profile only when both their exact verified URL
 and visible name or handle identify the same person.
 This presentation pass does not match surnames or raw aliases, infer missing identities,
@@ -206,9 +214,9 @@ profile or source packet.
 | Ryu Sungjoon / squarepacker | Recorded 2026-10-20, applying the handle rule above. One person, credited by name: `Ryu`, his family name, in compact credits, and `Ryu Sungjoon` on his profile and in unlinked prose. `squarepacker`, the GitHub account that publishes his repositories, is his handle: an alias, not a second author. Bibliography keys, identifiers, packet paths, URLs, repository names, quotations and archived text keep the handle. | The Credits section of his [s(12) edition’s README](packing/resources/web/squarepacker-s12-lower-bound-2026-10-05/s12-lower-bound/README.md) reads “Author: Ryu Sungjoon (@squarepacker)”; its [Zenodo record](packing/resources/web/squarepacker-s12-lower-bound-2026-10-05/zenodo-23157015.json) lists the creator as “Ryu, Sungjoon”; his preprints print the name given name first, “Sungjoon Ryu”; [profile](packing/contributors/people/ryu-sungjoon.md). Credits that still print `squarepacker` are migration work. | `think-m7il` |
 | Historical first-party atlas/PDF lines | Migrate project-as-person credit to the preferred person name from the generating records. Do not edit archived third-party sources. | The existing `Squares Project (Levy)` display is a migration target, not the naming rule for new work. Rebuild and review affected figures and PDF credits together. | `think-vix3`, `think-jn87` |
 
-| Collective-project labels rendered as Levy | Reviewed 2026-10-21. The `/credit` occurrences in `[Fitzharding n19 Lean 2026]`, `[PingYou PR 622 certificate 2026-10-15]` and `[de Winter upper bounds 2026-10-17]` remain unresolved personal joins. Their retained notes identify collective project/catalogue credit, despite the compact printed label. | Preserve the original credit and review the specific source before counting it as Joshua Levy’s personal credit. The person-name display policy does not itself prove the credited role. | `think-sb9n`, `think-nd1y` |
+| Collective-project labels rendered as Levy | Updated 2026-10-22. The four exact printed `Levy` credit spans reviewed in the dated audit link to Joshua Levy under the owner’s explicit confirmation, including T-194. This supersedes their earlier unresolved personal joins. | Owner-confirmed curated attribution is distinct from an upstream personal byline. Preserve collective source wording, input-data roles and collaborators; do not infer sole authorship or globally join project names. See the [scoped audit](packing/contributors/reviews/2026-10-22-credit-link-audit.md). | `think-os86` |
 | S. El Moumni / Said El Moumni | Reviewed 2026-10-21. One person: the paper prints `S. El Moumni`, while Friedman’s published survey explicitly names Said El Moumni and cites that same 1999 paper. Keep the stable `s-el-moumni` profile ID and retain the initial spelling as an alias. | The retained DS7 Introduction and reference [12] support the expanded name and the exact case joins; the expansion does not come from guessing an initial. | `think-8wj0`, `think-eigy` |
-| hmbelvedere / UnitSquare Project | Reviewed 2026-10-21. Preserve the printed catalogue credit, but do not create a person profile until human identity is evidenced. | The retained catalogue uses `hmbelvedere`, while the associated page identifies UnitSquare Project as an organization. A missing GitHub account does not settle whether the credited identity is a person. | `think-2ccx` |
+| hmbelvedere / UnitSquare Project | Updated 2026-10-22. Preserve the printed catalogue label as a non-person project credit for publishing; do not create a person profile without human-identity evidence. | Kingbird prints `hmbelvedere`; the associated retained release identifies UnitSquare Project as author. This does not establish a human identity behind the domain. See the [scoped audit](packing/contributors/reviews/2026-10-22-credit-link-audit.md). | `think-2ccx`, `think-os86` |
 
 | PingYou Ltd / BuddenPing | Reviewed 2026-10-21. PingYou Ltd is corporate attribution,
 not a person. BuddenPing identifies a submission account whose human operator has not

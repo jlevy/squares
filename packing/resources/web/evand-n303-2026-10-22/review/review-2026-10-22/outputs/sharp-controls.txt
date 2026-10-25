@@ -1,0 +1,38 @@
+{
+ "far_wall": "y<=S",
+ "far_clearance": "43786014365936855375134504637169481557151474219/72115234146316898274669480058100000000000000000000000000000",
+ "near_wall": "x>=0",
+ "near_clearance": "60480000000010479/100000000000000000000000000000",
+ "pair": [
+  284,
+  296
+ ],
+ "axis": "u_i",
+ "gap": "120450000000020377549999999979562250000000010249/99999999999999900000000000000050000000000000000000000000000",
+ "moved_square": 296,
+ "direction_sign": 1,
+ "r2_decimal": "0.50000000000060480000000010479"
+}
+F0 expected accept: this review: Z: accept wall 0 gap 1.204e-12 touch 0 over 0 | C: accept wall 0 touch 0 over 0
+    exact_verify: accept wall 0 gap 120450000000020377549999999979562250000000010249/99999999999 failures []
+    independent: accept wall 0 gap 120450000000020377549999999979562250000000010249/99999999999 failures []
+F1 expected refuse: this review: Z: refuse wall -1.000e-30 gap 1.204e-12 touch 0 over 0 | C: refuse wall -1.000e-30 touch 0 over 0
+    exact_verify: refuse wall -1/1000000000000000000000000000000 gap 120450000000020377549999999979562250000000010249/99999999999 failures [['container', 'square 6 violates y<=s']]
+    independent: refuse wall -1/1000000000000000000000000000000 gap 120450000000020377549999999979562250000000010249/99999999999 failures ['container penetration -1/1000000000000000000000000000000']
+N0 expected accept: this review: Z: accept wall 0 gap 1.204e-12 touch 0 over 0 | C: accept wall 0 touch 0 over 0
+    exact_verify: accept wall 0 gap 120450000000020377549999999979562250000000010249/99999999999 failures []
+    independent: accept wall 0 gap 120450000000020377549999999979562250000000010249/99999999999 failures []
+N1 expected refuse: this review: Z: refuse wall -1.000e-30 gap 1.204e-12 touch 0 over 0 | C: refuse wall -1.000e-30 touch 0 over 0
+    exact_verify: refuse wall -1/1000000000000000000000000000000 gap 120450000000020377549999999979562250000000010249/99999999999 failures [['container', 'square 0 violates x>=0'], ['container', 'square 0 violates x>=0']]
+    independent: refuse wall -1/1000000000000000000000000000000 gap 120450000000020377549999999979562250000000010249/99999999999 failures ['container penetration -1/1000000000000000000000000000000']
+P0 expected accept: this review: Z: accept wall 6.048e-13 gap 0 touch 1 over 0 | C: accept wall 6.048e-13 touch 1 over 0
+    exact_verify: accept wall 60480000000010479/100000000000000000000000000000 gap 0 failures []
+    independent: accept wall 60480000000010479/100000000000000000000000000000 gap 0 failures []
+P1 expected refuse: this review: Z: refuse wall 6.048e-13 gap -1.000e-30 touch 0 over 1 | C: refuse wall 6.048e-13 touch 0 over 1
+    exact_verify: refuse wall 60480000000010479/100000000000000000000000000000 gap -1/1000000000000000000000000000000 failures [['overlap', 'squares 284 and 296 overlap']]
+    independent: refuse wall 60480000000010479/100000000000000000000000000000 gap -1/1000000000000000000000000000000 failures ['1 overlapping pairs; worst exact gap -1/1000000000000000000000000000000']
+R1 expected reader-refuse: this review: refused: 302 square rows for n = 303
+    maintained: adapter refused: ReportError: n=303: 302 square rows for n = 303
+R2 expected reader-difference: this review: refused: line 3: not a rational literal: '0.50000000000060480000000010479'
+    exact_verify: accept wall 60480000000010479/100000000000000000000000000000 gap 120450000000020377549999999979562250000000010249/99999999999 failures []
+    independent: accept wall 60480000000010479/100000000000000000000000000000 gap 120450000000020377549999999979562250000000010249/99999999999 failures []

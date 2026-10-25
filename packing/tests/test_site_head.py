@@ -12,6 +12,7 @@ their modules' tests (`test_n11_lower_bounds_explainer`, `test_render_n11_optima
 from __future__ import annotations
 
 import html
+import json
 import re
 from collections.abc import Iterator
 from html.parser import HTMLParser
@@ -22,6 +23,7 @@ import pytest
 
 from devtools import (
     check_published_site,
+    flip_regularization,
     overview_sections,
     pytest_tmp,
     render_overview,
@@ -39,7 +41,8 @@ from devtools.check_published_site import (
     read_head,
     shared_descriptions,
 )
-from devtools.render_frontier_page import packing_svg
+from devtools.flip_regularization import Pose
+from devtools.render_frontier_page import default_svg, packing_svg
 from devtools.render_overview import (
     DESCRIPTION_LIMIT,
     PROJECT_NAME,
@@ -62,7 +65,7 @@ pytestmark = pytest.mark.usefixtures(prepared_forwarders.__name__)
 RESULTS = PageMeta(
     name="Every Result",
     description="Every reviewed result, with its claim, its credit and its ratings.",
-    path="results.html",
+    path="example-results.html",
 )
 
 
@@ -89,7 +92,7 @@ def test_head_tags_writes_each_tag_once_from_a_page_record() -> None:
     """One record gives the whole set: the title, the description, the canonical link,
     Open Graph and Twitter, each once, the addresses in full under the published root."""
     head = read_head(document(head_tags(RESULTS)))
-    url = SITE_URL + "results.html"
+    url = SITE_URL + RESULTS.path
     assert head.titles == ("Every Result · The Squares Project",)
     assert head.link("canonical") == [url]
     assert [key for key, _ in head.metas] == ["description", "robots", *REQUIRED_META[1:]]
@@ -127,17 +130,19 @@ def test_the_title_helper_does_not_repeat_the_formal_project_name() -> None:
     assert page_title("Papers") == "Papers · The Squares Project"
     assert page_title(PROJECT_NAME) == PROJECT_NAME == "The Squares Project"
     head = read_head(
-        document(head_tags(PageMeta(PROJECT_NAME, "The front door.", "index.html")))
+        document(
+            head_tags(PageMeta(PROJECT_NAME, "Project identity.", "project-identity.html"))
+        )
     )
     assert head.titles == (PROJECT_NAME,)
     assert head.meta("og:title") == head.meta("og:site_name") == [PROJECT_NAME]
-    assert head.link("canonical") == head.meta("og:url") == [SITE_URL]
+    assert head.link("canonical") == head.meta("og:url") == [SITE_URL + "project-identity.html"]
 
 
 def test_a_page_is_canonical_at_the_address_it_is_served_at() -> None:
     """A directory's `index.html` is served as the directory: the overview at the root,
     the workbench at `workbench/`. Every other page is served under its own name."""
-    assert canonical_url("index.html") == SITE_URL == "https://jlevy.github.io/squares/"
+    assert canonical_url("index.html") == SITE_URL == "https://squaremath.org/"
     assert canonical_url("workbench/index.html") == SITE_URL + "workbench/"
     assert canonical_url("papers.html") == SITE_URL + "papers.html"
     nested = "papers/n11-optimality-review.html"
@@ -199,12 +204,46 @@ def test_every_page_of_the_site_carries_the_set_once_at_its_own_address(
         assert "Square Packing Project" not in title, name
         # kpress's own four tags are gone, not added to.
         assert len(head.meta("og:type")) == len(head.meta("twitter:card")) == 1, name
-    assert read_head(pages["index.html"]).titles == ("The Squares Project",)
+    # The homepage is Overview in the bar and the project's name everywhere it is
+    # previewed (the owner, 2026-10-23): the tab, Open Graph and X's card.
+    home = read_head(pages["index.html"])
+    assert home.titles == ("The Squares Project",)
+    assert home.meta("og:title") == home.meta("twitter:title") == ["The Squares Project"]
     assert read_head(pages["tutorial.html"]).meta("og:type") == ["article"]
     kinds = {name: read_head(page).meta("og:type") for name, page in pages.items()}
     assert [name for name, kind in kinds.items() if kind != ["website"]] == [
         "tutorial.html",
         "tutorial-advanced.html",
+    ]
+
+
+_SPECULATION_RULES = re.compile(r'<script type="speculationrules">(.*?)</script>', re.DOTALL)
+
+
+def test_every_page_prerenders_a_hovered_site_link(pages: dict[str, str]) -> None:
+    """Each site page's head carries the speculation rules once (think-gr4c): Chromium
+    prerenders another page of the site when a reader rests on or presses its link
+    ("moderate"), and leaves files, downloads and other sites alone. The rules are read
+    back from the rendered head, so a page whose head is not written by `head_tags`, or an
+    escape that breaks the JSON, fails here."""
+    rules = render_overview.SPECULATION_RULES
+    (prerender,) = rules["prerender"]
+    assert prerender["eagerness"] == "moderate"
+    # Pages only, so a hover never fetches a linked file such as the 8 MB poster SVG.
+    assert prerender["where"]["and"] == [
+        {"href_matches": ["/", "/*/", "/*.html"]},
+        {"not": {"selector_matches": "[download]"}},
+    ]
+    assert set(rules) == {"prerender"}, "prefetch-only or immediate rules are a new choice"
+    for name, page in pages.items():
+        head = page[: page.find("<body")]
+        found = _SPECULATION_RULES.findall(head)
+        assert len(found) == 1, (name, len(found))
+        assert json.loads(found[0]) == rules, name
+    # The papers' and forwarders' heads are `head_tags` alone, so they are unchanged.
+    assert _SPECULATION_RULES.findall(head_tags(RESULTS)) == []
+    assert _SPECULATION_RULES.findall(render_overview.speculation_rules_tag()) == [
+        json.dumps(rules, separators=(",", ":"))
     ]
 
 
@@ -286,20 +325,20 @@ OG_TITLE = '<meta property="og:title" content="Every Result">'
         ),
         (
             (
-                'og:url" content="https://jlevy.github.io/squares/results.html',
-                'og:url" content="https://jlevy.github.io/squares/all-results.html',
+                'og:url" content="https://squaremath.org/example-results.html',
+                'og:url" content="https://squaremath.org/all-results.html',
             ),
             "og:url is",
         ),
         (
             (
-                'rel="canonical" href="https://jlevy.github.io/squares/',
+                'rel="canonical" href="https://squaremath.org/',
                 'rel="canonical" href="',
             ),
-            "the canonical link is 'results.html'",
+            "the canonical link is 'example-results.html'",
         ),
         (
-            ('og:image" content="https://jlevy.github.io/squares/', 'og:image" content="'),
+            ('og:image" content="https://squaremath.org/', 'og:image" content="'),
             "og:image is 'social-card.png'",
         ),
         (('og:image:width" content="1200', 'og:image:width" content="2400'), "og:image:width"),
@@ -564,8 +603,11 @@ def test_a_forwarder_previewing_its_page_by_another_name_kind_or_sentence_is_nam
     for old, new, finding in (
         (
             render_overview.RESULTS_META.name,
-            "All Results",
-            "its og:title is ['All Results'], and the page's own is ['Results']",
+            "Wrong Result Collection",
+            (
+                "its og:title is ['Wrong Result Collection'], and the page's own is "
+                f"[{render_overview.RESULTS_META.name!r}]"
+            ),
         ),
         (
             'og:type" content="website"',
@@ -658,22 +700,34 @@ def test_result_overviews_are_complete_canonical_documents(
         ), path
 
 
-def test_the_card_is_the_heros_drawing_on_the_pages_background() -> None:
+def test_the_card_is_the_heros_drawing_on_the_pages_background(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
     """The card is the homepage's hero and no second drawing: the same case at the same
     resolution through the same function, so its squares, colours and line weights are
-    the page's, in the light theme's ink on its background, with the project's name."""
-    hero = overview_sections.hero()
+    the page's, in the light theme's ink on its background, with the project's name.
+    Both draw the case's default picture in its canonical pose (regularization policy,
+    section 13), so the card turns with the hero. The record leaves the hero's case in
+    its source's pose, so a turning pose is set here, where the drawing as published
+    would be told from the canonical one."""
     case = overview_sections.HERO_CASE
     assert case == 53
+    assert default_svg(case, units=social_card.HERO_UNITS) in overview_sections.hero()
+    turned = Pose(rotate=90, flip=True)
+    monkeypatch.setattr(flip_regularization, "poses", dict.fromkeys(range(1, 325), turned).copy)
+    hero = overview_sections.hero()
     assert f"The best packing known for {case} squares" in hero
-    assert packing_svg(case, units=social_card.HERO_UNITS) in hero
+    assert default_svg(case, units=social_card.HERO_UNITS) in hero
+    assert packing_svg(case, units=social_card.HERO_UNITS) not in hero
     light = rung_scale.page_colours()["light"]
     ink, paper = rung_scale.hex_colour(light["text"]), rung_scale.hex_colour(light["bg"])
     assert social_card.page_colours() == (ink, paper) == ("#111827", "#ffffff")
-    drawing = packing_svg(case, units=social_card.HERO_UNITS, ink=ink)
+    drawing = default_svg(case, units=social_card.HERO_UNITS, ink=ink)
     svg = social_card.card_svg()
     body = drawing.split(">", 1)[1]
     assert svg.count(body) == 1, "the hero's drawing, in the page's ink, is in the card whole"
+    published = packing_svg(case, units=social_card.HERO_UNITS, ink=ink).split(">", 1)[1]
+    assert published not in svg, "the card is turned with the hero"
     assert svg.startswith(
         '<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" '
         'viewBox="0 0 1200 630"><rect width="1200" height="630" fill="#ffffff"/>'
@@ -968,12 +1022,13 @@ def test_a_page_added_later_or_a_record_that_loses_a_tag_fails_the_check(
     )
     (tmp_path / "status.html").write_text(forwarder, encoding="utf-8")
     assert all(passed for passed, _ in local_head_checks(tmp_path))
-    renamed = forwarder.replace("The Atlas of Square Packings", "The Frontier Atlas")
+    renamed = forwarder.replace(render_overview.ATLAS_META.name, "The Frontier Atlas")
+    assert renamed != forwarder
     (tmp_path / "status.html").write_text(renamed, encoding="utf-8")
     (failure,) = [line for passed, line in local_head_checks(tmp_path) if not passed]
     assert failure == (
         "forwarder status.html: head: its og:title is ['The Frontier Atlas'], and the "
-        "page's own is ['The Atlas of Square Packings']"
+        f"page's own is [{render_overview.ATLAS_META.name!r}]"
     )
 
 
@@ -994,7 +1049,7 @@ def test_head_checks_report_one_line_a_page_a_forwarder_and_the_card(card: bytes
         == f"forwarder all-results.html: previews {target} as that page's own head does"
     )
     # The same forwarder under another name fails beside the page, and passes alone.
-    renamed = forwarder.replace(render_overview.RESULTS_META.name, "All Results")
+    renamed = forwarder.replace(render_overview.RESULTS_META.name, "Wrong Result Collection")
     results = head_checks({"results.html": page}, {"all-results.html": (renamed, target)}, card)
     assert [passed for passed, _ in results] == [True, True, False, True]
     results = head_checks({}, {"all-results.html": (renamed, target)}, card)

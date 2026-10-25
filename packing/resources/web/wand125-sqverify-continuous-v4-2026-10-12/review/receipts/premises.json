@@ -1,0 +1,293 @@
+{
+  "eps": "1/10000000",
+  "T": "83/200",
+  "claims": [
+    {
+      "claim": "c6715 (T-145)",
+      "n": 40,
+      "L": "67/10",
+      "B": "199529/200000",
+      "tau": "4999/5000",
+      "M": "3999/100",
+      "X = L/B": "1340000/199529",
+      "X decimal": "6.715815746082",
+      "counting_margin": "1/500",
+      "A (default)": "77941/78125",
+      "axis_containment_margin B - A W(eps)": "235529976449/500000000000005000000",
+      "axis_containment_margin decimal": "4.7106e-10",
+      "L^2 - 2 B^2": "857988178159/20000000000",
+      "first roots": [
+        [
+          "1/10000000",
+          "1/100000"
+        ],
+        [
+          "1/100000",
+          "1/10000"
+        ],
+        [
+          "1/10000",
+          "1/1000"
+        ],
+        [
+          "1/1000",
+          "1/200"
+        ],
+        [
+          "1/200",
+          "1/100"
+        ]
+      ],
+      "last root": [
+        "41/100",
+        "83/200"
+      ],
+      "first enclosed root": [
+        "1e-07",
+        "1e-05"
+      ],
+      "last enclosed root": [
+        "0.41",
+        "0.41500000000000004"
+      ],
+      "checks": {
+        "counting margin n tau - M > 0": true,
+        "0 < M < n (admission)": true,
+        "L^2 > 2 B^2": true,
+        "0 < eps < T <= 1/2": true,
+        "T^2 + 2T - 1 > 0": true,
+        "eps^2 + 2 eps - 1 < 0": true,
+        "0 < A <= B": true,
+        "A W(eps) <= B": true,
+        "B W(0) >= A, so B W(t) >= A on [0, eps]": true,
+        "86 roots, ends strictly increasing": true,
+        "outward enclosures cover each root": true,
+        "neighbouring enclosed roots overlap": true
+      },
+      "all_hold": true
+    },
+    {
+      "claim": "c6718 (T-157)",
+      "n": 40,
+      "L": "67/10",
+      "B": "3350/3359",
+      "tau": "4999/5000",
+      "M": "3999/100",
+      "X = L/B": "3359/500",
+      "X decimal": "6.718000000000",
+      "counting_margin": "1/500",
+      "A (default)": "997320431/1000000000",
+      "axis_containment_margin B - A W(eps)": "227120145419327729/335900000000003359000000000",
+      "axis_containment_margin decimal": "6.7615e-10",
+      "L^2 - 2 B^2": "48404352809/1128288100",
+      "first roots": [
+        [
+          "1/10000000",
+          "1/100000"
+        ],
+        [
+          "1/100000",
+          "1/10000"
+        ],
+        [
+          "1/10000",
+          "1/1000"
+        ],
+        [
+          "1/1000",
+          "1/200"
+        ],
+        [
+          "1/200",
+          "1/100"
+        ]
+      ],
+      "last root": [
+        "41/100",
+        "83/200"
+      ],
+      "first enclosed root": [
+        "1e-07",
+        "1e-05"
+      ],
+      "last enclosed root": [
+        "0.41",
+        "0.41500000000000004"
+      ],
+      "checks": {
+        "counting margin n tau - M > 0": true,
+        "0 < M < n (admission)": true,
+        "L^2 > 2 B^2": true,
+        "0 < eps < T <= 1/2": true,
+        "T^2 + 2T - 1 > 0": true,
+        "eps^2 + 2 eps - 1 < 0": true,
+        "0 < A <= B": true,
+        "A W(eps) <= B": true,
+        "B W(0) >= A, so B W(t) >= A on [0, eps]": true,
+        "86 roots, ends strictly increasing": true,
+        "outward enclosures cover each root": true,
+        "neighbouring enclosed roots overlap": true
+      },
+      "all_hold": true
+    },
+    {
+      "claim": "c6718_B3348 (control)",
+      "n": 40,
+      "L": "67/10",
+      "B": "3348/3359",
+      "tau": "4999/5000",
+      "M": "3999/100",
+      "X = L/B": "225053/33480",
+      "X decimal": "6.722013142174",
+      "counting_margin": "1/500",
+      "A (default)": "124590627/125000000",
+      "axis_containment_margin B - A W(eps)": "20702515139916093/41987500000000419875000000",
+      "axis_containment_margin decimal": "4.9306e-10",
+      "L^2 - 2 B^2": "48407032009/1128288100",
+      "first roots": [
+        [
+          "1/10000000",
+          "1/100000"
+        ],
+        [
+          "1/100000",
+          "1/10000"
+        ],
+        [
+          "1/10000",
+          "1/1000"
+        ],
+        [
+          "1/1000",
+          "1/200"
+        ],
+        [
+          "1/200",
+          "1/100"
+        ]
+      ],
+      "last root": [
+        "41/100",
+        "83/200"
+      ],
+      "first enclosed root": [
+        "1e-07",
+        "1e-05"
+      ],
+      "last enclosed root": [
+        "0.41",
+        "0.41500000000000004"
+      ],
+      "checks": {
+        "counting margin n tau - M > 0": true,
+        "0 < M < n (admission)": true,
+        "L^2 > 2 B^2": true,
+        "0 < eps < T <= 1/2": true,
+        "T^2 + 2T - 1 > 0": true,
+        "eps^2 + 2 eps - 1 < 0": true,
+        "0 < A <= B": true,
+        "A W(eps) <= B": true,
+        "B W(0) >= A, so B W(t) >= A on [0, eps]": true,
+        "86 roots, ends strictly increasing": true,
+        "outward enclosures cover each root": true,
+        "neighbouring enclosed roots overlap": true
+      },
+      "all_hold": true
+    },
+    {
+      "claim": "n28 (T-192)",
+      "n": 28,
+      "L": "573351/100000",
+      "B": "499/500",
+      "tau": "1",
+      "M": "2799999/100000",
+      "X = L/B": "1149/200",
+      "X decimal": "5.745000000000",
+      "counting_margin": "1/100000",
+      "A (default)": "4989999/5000000",
+      "axis_containment_margin B - A W(eps)": "200029979999/500000000000005000000",
+      "axis_containment_margin decimal": "4.0006e-10",
+      "L^2 - 2 B^2": "308811289201/10000000000",
+      "first roots": [
+        [
+          "1/10000000",
+          "1/100000"
+        ],
+        [
+          "1/100000",
+          "1/10000"
+        ],
+        [
+          "1/10000",
+          "1/1000"
+        ],
+        [
+          "1/1000",
+          "1/200"
+        ],
+        [
+          "1/200",
+          "1/100"
+        ]
+      ],
+      "last root": [
+        "41/100",
+        "83/200"
+      ],
+      "first enclosed root": [
+        "1e-07",
+        "1e-05"
+      ],
+      "last enclosed root": [
+        "0.41",
+        "0.41500000000000004"
+      ],
+      "checks": {
+        "counting margin n tau - M > 0": true,
+        "0 < M < n (admission)": true,
+        "L^2 > 2 B^2": true,
+        "0 < eps < T <= 1/2": true,
+        "T^2 + 2T - 1 > 0": true,
+        "eps^2 + 2 eps - 1 < 0": true,
+        "0 < A <= B": true,
+        "A W(eps) <= B": true,
+        "B W(0) >= A, so B W(t) >= A on [0, eps]": true,
+        "86 roots, ends strictly increasing": true,
+        "outward enclosures cover each root": true,
+        "neighbouring enclosed roots overlap": true
+      },
+      "all_hold": true,
+      "source_summaries": [
+        {
+          "file": "summary.json",
+          "recomputed_run_key": "5b9984a6c776af958dca54b6f90c18a5d7c12d340b61eff941a100aa0cece5bc",
+          "equal": {
+            "A": true,
+            "X": true,
+            "mass": true,
+            "counting_margin": true,
+            "axis_containment_margin": true,
+            "source_sha256": true,
+            "run_key": true,
+            "roots": true
+          }
+        },
+        {
+          "file": "control-summary.json",
+          "recomputed_run_key": "56505cf5a0c28da21a70122338b9b906cd56a85b559ec5245d94a64e86300645",
+          "equal": {
+            "A": true,
+            "X": true,
+            "mass": true,
+            "counting_margin": true,
+            "axis_containment_margin": true,
+            "source_sha256": true,
+            "run_key": true,
+            "roots": true
+          }
+        }
+      ]
+    }
+  ],
+  "all_hold": true
+}

@@ -11,7 +11,8 @@ Two composites are drawn from it: the published figure of the first hundred, wit
 10-by-10 layout, and a poster of the whole corpus beside it.
 Each tile of both, like every drawing of a count on the site, shows the count’s default
 picture: its [regularized view](#the-regularized-views) where that view improves on the
-packing as published, and the house rendering of its witness everywhere else
+packing as published, and the house rendering of its witness everywhere else, turned
+into its canonical pose by flip regularization
 ([the default picture](#the-default-picture)). The calibration annotations further down
 stay pinned to the first hundred by design.
 
@@ -711,6 +712,147 @@ The evidence is retained in
 After it the index draws 95 views: 36 by the axis tool, 40 by Evan Daniel’s regularizer
 and 19 by the grid-slack generator’s version 1.
 
+On 23 October 2026 the adoption of Mykhailo Polkovskyi’s #719 re-solves (T-229,
+think-4h23) moved the house best packing at 105 from T-174, by $5.18 \times 10^{-12}$,
+and at 204 from T-225, by $1.006 \times 10^{-8}$. Both generators ran on the two
+witnesses: Evan Daniel’s regularizer
+(`evand-regularize-adopt-2026-10-23-n105-204-evand`, 166 CPU-seconds) and grid-slack at
+0.5, 1 and 5 degrees (`grid-slack-adopt-2026-10-23-n105-204-grid-deg05`, `-grid-deg1`
+and `-grid-deg5`, 69 CPU-seconds, retained under those names though they ran as
+`-grid-0.5`, `-grid-1` and `-grid-5`). The selection draws grid-slack’s 1-degree view at
+105 (223 / 241 sides against 215 / 233 for the axis tool’s view of the new witness, and
+one angle class fewer) and its half-degree view at 204 (6 light, 34 uneven and 6
+near-axis squares against 14, 59 and 11, and 505 / 543 sides against 421 / 511). His
+views at both counts are refused at row 7, where a house or stage total of shared sides
+falls. At 105 grid-slack’s view of T-174, which the adoption of 17 October drew, lapses
+with its witness, and at 204 the settlement on T-225’s witness leaves `SETTLED`. At 204
+his regularizer solved the witness $1.48 \times 10^{-11}$ lower, to exactly the side of
+the release’s other 204 file, `certificates/n204.cert`, which the #719 packet pins by
+digest: Polkovskyi’s own publication, in the same commit as T-229’s certificate
+(`1851c2c7`), not drawn.
+think-h01y registered it under his credit as T-231, and the pass of 24 October adopted
+it (below). The evidence is retained in
+[`cases/regularized_drawings/think-4h23-2026-10-23/`](../../cases/regularized_drawings/think-4h23-2026-10-23/README.md).
+After it the index draws 95 views: 35 by the axis tool, 40 by Evan Daniel’s regularizer
+and 20 by the grid-slack generator’s version 1.
+
+The same pass of 23 October 2026 adopted Evan Daniel’s #728 certificate (T-230,
+think-icp1) at 303, moving the house best packing from T-186 by $1.86 \times 10^{-4}$.
+Both generators ran on the new witness: Evan Daniel’s regularizer
+(`evand-regularize-adopt-2026-10-23-n303-evand`, 50 CPU-seconds) finds it not
+first-order jammed and draws no view (row 1), and grid-slack at 0.5, 1 and 5 degrees
+(`grid-slack-adopt-2026-10-23-n303-grid-deg05`, `-grid-deg1` and `-grid-deg5`, 50
+CPU-seconds) draws one view at the witness’s side, straightening its 15 near-upright
+squares. Against the axis tool’s view of the new witness it has 0 near-axis squares
+against 2, 40 angle classes against 42 and 766 / 782 sides against 758 / 776, and 13
+light squares against 12, so the selection sends it to review at row 7 (think-ykgh), and
+the axis tool’s view is drawn.
+`SETTLED` records 303 decided on the new witness.
+The evidence is retained in
+[`cases/regularized_drawings/think-icp1-2026-10-23/`](../../cases/regularized_drawings/think-icp1-2026-10-23/README.md).
+The index still draws 95 views.
+
+The same pass of 23 October 2026, once the house writer took an algebraic side
+(think-ot5c), adopted PR #574’s algebraic certificates (T-174) at 70, 153 and 207 and
+Evan Daniel’s exact forms of issue 639 (T-193) at 102, 123, 258, 259, 295 and 302. Each
+new witness states its squares in a real number field, which the axis tool refuses
+(`unsupported-scalar-kind`), so its views of the nine earlier houses leave the index,
+and the strong views at 153, 207 and 259 (Evan Daniel’s regularizer) and 302
+(grid-slack) lapse. At 70 and 295 the new house drawings read regular as published.
+At the other seven both generators ran on the new witness: grid-slack at 0.5, 1 and 5
+degrees has no exact frame on a number-field witness and draws no view, and Evan
+Daniel’s regularizer solves each to a rational side $1.06 \times 10^{-19}$ to
+$1.79 \times 10^{-19}$ above the algebraic $U$, which is not drawn.
+The owner answered question 13 (think-r8cn) the same day: the best record is always the
+record, and a regularized drawing may change the side only as a strict improvement.
+So no view above $U$ is kept, the lapsed views at 153, 207, 259 and 302 among them, and
+each of the seven draws its exact house.
+`SETTLED` records the seven on their new witnesses as `regularization-owed`, not as
+decided: no view was judged no better, and the exact house drawn is not regularized.
+Its regularization is owed under think-mbdw, which needs a regularizer that draws an
+exact view of a number-field witness at or below the record’s side, and a second exact
+route to admit it. The evidence is retained in
+[`cases/regularized_drawings/think-ot5c-2026-10-23/`](../../cases/regularized_drawings/think-ot5c-2026-10-23/README.md).
+After it the index draws 86 views: 30 by the axis tool, 37 by Evan Daniel’s regularizer
+and 19 by the grid-slack generator’s version 1.
+
+The pass of 24 October 2026 adopted that other 204 file, which the author claimed on
+#719 and the record registers as T-231 (think-h01y), at 204, moving the house best
+packing from T-229 by $1.48 \times 10^{-11}$ to the same packing at its solved side.
+Both generators ran on the new witness: Evan Daniel’s regularizer
+(`evand-regularize-adopt-2026-10-24-n204-evand`, 93 CPU-seconds) solves it to its own
+side, digit for digit, and its same-side view is refused at row 7, and grid-slack at
+0.5, 1 and 5 degrees (`grid-slack-adopt-2026-10-24-n204-grid-deg05`, `-grid-deg1` and
+`-grid-deg5`, 95 CPU-seconds) draws views at the witness’s side with the figures it had
+on T-229’s: 6 light, 34 uneven and 6 near-axis squares and 505 / 543 sides, against 14,
+59, 11 and 421 / 511 for the axis tool’s view of the new witness.
+The half-degree view is admitted at row 10 and drawn.
+The evidence is retained in
+[`cases/regularized_drawings/think-h01y-2026-10-24/`](../../cases/regularized_drawings/think-h01y-2026-10-24/README.md).
+The index still draws 86 views.
+
+The same pass adopted Amund Kristiansen’s #755 certificate (T-239, think-tqb5) at 303,
+moving the house best packing from T-230 by $9.89 \times 10^{-6}$. Both generators ran
+on the new witness: grid-slack at 0.5, 1 and 5 degrees
+(`grid-slack-adopt-2026-10-24-n303-grid-deg05`, `-grid-deg1` and `-grid-deg5`, 77
+CPU-seconds) draws one view at the witness’s side, with the axis tool’s light, uneven
+and near-axis counts (9, 37 and 0) and 760 / 776 sides against 756 / 774, worse on no
+goal, so the selection admits the 0.5 degree view (row 10) and it is drawn.
+Evan Daniel’s regularizer (`evand-regularize-adopt-2026-10-24-n303-evand`, 240
+CPU-seconds) solves the witness to a certified KKT local minimum and gives a view
+$2.17 \times 10^{-11}$ below its side, which waits to be registered (row 3, think-8r5w).
+`SETTLED`’s entry at 303, made on T-230’s witness, is removed.
+The evidence is retained in
+[`cases/regularized_drawings/think-tqb5-2026-10-23/`](../../cases/regularized_drawings/think-tqb5-2026-10-23/README.md).
+The index still draws 95 views.
+
+The pass of 25 October 2026 adopted Francisco Couzo’s #763 certificates (T-240,
+think-bk9r) at 268 and 303, moving the house best packings from T-174 by
+$4.45 \times 10^{-3}$ and from T-239 by $2.78 \times 10^{-3}$; each refines a Kaggle
+notebook packing and is another arrangement than the house it replaces.
+Both generators ran on both new witnesses.
+Grid-slack at 0.5, 1 and 5 degrees (`grid-slack-adopt-2026-10-25-n268-303-grid-deg05`,
+`-grid-deg1` and `-grid-deg5`, 73 CPU-seconds) draws views at the witnesses’ sides, and
+the selection admits the 0.5 degree view at both counts (row 10): at 268 it takes the
+axis tool’s light, uneven and near-axis counts from 20, 37 and 6 to 5, 19 and 0, and its
+sides from 676 / 729 to 751 / 753; at 303 from 14, 28 and 8 to none, and its house sides
+from 736 to 848, worse on no goal at either.
+Evan Daniel’s regularizer (`evand-regularize-adopt-2026-10-25-n268-303-evand`, 1,708
+CPU-seconds) gives views below both witnesses’ sides, register candidates (row 3) that
+are never admitted: at 268 a certified KKT local minimum at exactly the side of Evan
+Daniel’s later certificate there, $4.48 \times 10^{-12}$ below, registered as reported
+as T-242; and at 303, on its first-pass rung, a solve whose KKT certificate fails at the
+relaxed gate, giving a view $3.63 \times 10^{-12}$ below that all three exact routes
+here accept.
+Their registration is think-20oj’s. Its same-side view at 268 goes to review
+(row 7: eight squares’ contact counts fall while no total does), and at 303 its
+same-side view is refused for overlap.
+`SETTLED`’s entry at 268, made on T-174’s witness, is removed.
+The evidence is retained in
+[`cases/regularized_drawings/think-bk9r-2026-10-24/`](../../cases/regularized_drawings/think-bk9r-2026-10-24/README.md).
+The index still draws 86 views: 28 by the axis tool, 37 by Evan Daniel’s regularizer and
+21 by the grid-slack generator’s version 1.
+
+The same pass of 25 October 2026 adopted Evan Daniel’s certificate at 304 (T-242,
+think-hx0e), his exact descent of the packing Francisco Couzo certified there (T-241),
+which Couzo’s index credits to Kirill Tymchishin’s Kaggle notebook.
+It moves the house best packing from T-186 by $2.53 \times 10^{-3}$, another arrangement
+than T-186’s. Both generators ran on the new witness.
+Grid-slack at 0.5, 1 and 5 degrees (`grid-slack-adopt-2026-10-25-n304-grid-deg05`,
+`-grid-deg1` and `-grid-deg5`, 118 CPU-seconds) draws one view at the witness’s side,
+and Evan Daniel’s regularizer (`evand-regularize-adopt-2026-10-25-n304-evand`, 208
+CPU-seconds) solves the witness to a certified KKT local minimum and draws a view at its
+side too; its exact solve lies within the source’s relative padding of $10^{-20}$, about
+$1.8 \times 10^{-19}$ below, so no view is below the house.
+Every view goes to review (row 7: the contact counts of 14 squares, and of 36 for the
+regularizer’s, fall while no total does) and draws more light squares than the axis
+tool’s view of the witness, 4 or 5 against 2, though each has fewer uneven and near-axis
+squares (14 against 18, none against 9). So the count is decided no better on the axis
+tool’s view, and `SETTLED`’s entry at 304 is made again on the new witness.
+The evidence is retained in
+[`cases/regularized_drawings/think-hx0e-2026-10-25/`](../../cases/regularized_drawings/think-hx0e-2026-10-25/README.md).
+The index still draws 86 views.
+
 ### The default picture
 
 On 13 October 2026 the owner made the regularized view the default picture, with the
@@ -725,6 +867,18 @@ policy’s
 worse on none of its goals and better on at least one, exactness included.
 The case page keeps the house drawing one click away, under *As published*, with its
 source’s credit; everywhere else the house drawing is the picture.
+
+Every default picture is drawn in its canonical pose, which
+[flip regularization](../../../docs/project/policies/regularization-policy.md#13-flip-regularization)
+chooses: turned by one of the container’s eight symmetries so that its heaviest quadrant
+is lower right and the heavier of that quadrant’s neighbours lower left, which keeps the
+published pose of 252 counts, n = 11 and the integer grids among them.
+The pose is kept in its own record,
+[`flip-regularization.json`](flip-regularization.json), as `rotate` and `flip`, and is
+applied to the drawn picture’s coordinates when the composites and the site draw it; the
+witnesses, the views and their renderings under `rendering/` and
+`regularized/rendering/` keep their sources’ frames, and the house drawing as published
+keeps its source’s pose.
 
 [`default-drawings.json`](default-drawings.json)
 ([schema](default-drawings.schema.yaml)), written by
@@ -746,8 +900,11 @@ The same file’s `states` says, for every count n = 1..324, whether the picture
 is regularized: `regularized` where a view of Evan Daniel’s regularizer or the
 grid-slack generator is drawn, `regular-as-published` where the house drawing has no
 uneven and no near-axis square, `decided-no-better` where the strong generators ran on
-that very witness and drew nothing better, `exempt` with the bead that owns it, and
-`pending` otherwise.
+that very witness and drew nothing better, `regularization-owed` where they ran and drew
+no view the improvement rule could judge, so the drawing is not regularized and its
+`SETTLED` entry names the bead that owes it (the exact algebraic houses, under
+think-mbdw), `exempt` with the bead that owns it, and `pending` otherwise.
+The totals count each state apart.
 Each state carries the drawn picture’s measures, the witness’s id, its source’s key,
 path and revision, and its side, and the runs that decided it.
 The index’s `status: regularized` means only that the layer holds a view: at n = 176 it
@@ -755,10 +912,10 @@ held the axis tool’s view while the raw house was drawn.
 A view that lapses with its witness is now recorded on the axis tool’s record (`lapsed`)
 rather than only printed.
 The records-tier step
-`every drawn picture is regularized, regular as published, decided or exempt` fails on a
-pending count that `devtools.default_drawings.PENDING_ALLOWED` does not name with its
-bead, and on a named count that is no longer pending; `bead tree` holds each bead the
-list names open.
+`every drawn picture is regularized, regular as published, decided, owed to an open bead or exempt`
+fails on a pending count that `devtools.default_drawings.PENDING_ALLOWED` does not name
+with its bead, and on a named count that is no longer pending; `bead tree` holds each
+bead the list names open.
 
 `--check-atlas` runs in the records tier on every pull request: it holds the index to
 the manifest, the witnesses and the views by digest, and reads each other generator’s

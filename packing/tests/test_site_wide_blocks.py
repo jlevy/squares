@@ -8,10 +8,13 @@ were cut. `preview_site.clipped` finds any such block, and this holds the site's
 none, at the widths a tablet and a phone have, with and without a scrollbar's width
 taken from the layout (`templates/paper-design.md`, Spacing).
 
-The same browser holds the Explanations section's tabs to their place on its pages:
-under the rule that runs under the navigation bar, never over it, with the content the
-shared space under them (`preview_site.tabs_problems`, `templates/paper-design.md`,
-Section tabs).
+The same browser holds Videos and the Workbench to the header every page has: the bar,
+the rule under it, the trail, the content. They are separate destinations in the Learn
+menu, and neither carries the Film | Workbench switcher it once had under the bar
+(`templates/paper-design.md`, Videos and Workbench). The controls put the switcher back,
+through the header slot `render_overview.kpress_page` still offers (`tabs`), to show the
+header's report would find it and `preview_site.tabs_problems` would name tabs standing
+over the rule.
 
 It also holds the header's type to the body's, by relation and not by pixel value: a
 link in the bar is one step under the prose, section tabs apply the shared button-label
@@ -19,8 +22,8 @@ scale, and the site's name is no smaller than the prose (`preview_site.type_prob
 `templates/paper-design.md`, Navigation bar).
 
 And it holds the header's labels to their baselines, measured and not read from a
-box: the site's name stands on the baseline of the bar's links, and the tabs on one of
-their own (`preview_site.baseline_problems`).
+box: the site's name stands on the baseline of the bar's links
+(`preview_site.baseline_problems`).
 
 Every page that may be the film's is opened as for a reader who asks for reduced motion
 (`preview_site.REDUCED_MOTION`), so its film stands at its poster and no test starts the
@@ -34,11 +37,14 @@ from __future__ import annotations
 
 import os
 from collections.abc import Iterator
+from functools import partial
 from pathlib import Path
 from typing import Any
+from unittest.mock import patch
 
 import pytest
 
+from devtools import render_overview
 from devtools.preview_site import (
     BASELINE_TOLERANCE,
     BASELINES,
@@ -71,10 +77,18 @@ FROM_THE_WINDOW = ".site-page .site-wide { --site-wide-room: calc(100vw - 2rem) 
 RULE_UNDER_THE_TABS = (
     ".kpress-site-header:has(> .site-tabs) { border-block-end: 1px solid !important; }"
 )
-#: A root em in CSS pixels, and the two spaces the tabs stand in, in rem: under the rule
-#: (`--site-tabs-space`) and over a page's first block (`--site-page-top`).
+#: The Film | Workbench switcher Videos and the Workbench carried under the bar, as the
+#: retired `render_overview.visualize_tabs` wrote it on the film's page; the controls put
+#: it back.
+SWITCHER = (
+    '<nav class="site-tabs" aria-label="Visuals">'
+    '<a data-tab="film" aria-current="page" href="visualize.html">Film</a>'
+    '<a data-tab="workbench" href="workbench/">Workbench</a></nav>'
+)
+#: A root em in CSS pixels, and the trail's spaces, in rem: under the rule and over a
+#: page's first block (`.site-breadcrumbs`, `margin-block`, in `site-nav.css`).
 REM = 16
-TABS_SPACE, PAGE_TOP = 0.7, 4
+TRAIL_ABOVE, TRAIL_BELOW = 1, 2.5
 #: The sizes the bar had before its type was tied to the body's: 16px links and name,
 #: 14.4px tabs, under 18px prose.
 OLD_BAR_TYPE = (
@@ -83,9 +97,8 @@ OLD_BAR_TYPE = (
 )
 #: A name displaced above the other links, as a control for the baseline check.
 NAME_ABOVE_LINKS = ".site-nav .site-name { transform: translateY(-4px) !important; }"
-#: The widths the bar is measured at, and how many lines its links may take at each: one
-#: on a desktop and a tablet, two on a phone.
-BAR_WIDTHS = {1280: 1, 768: 1, 390: 2}
+#: Desktop, tablet and phone widths exercise both navigation presentations.
+BAR_WIDTHS = (1280, 768, 390)
 
 
 @pytest.fixture(scope="module")
@@ -148,36 +161,58 @@ def test_a_block_sized_from_the_window_is_caught(browser: Any, pages: dict[str, 
         assert {row["frame"] for row in found} == {"article.kpress"}
 
 
-@pytest.fixture(scope="module")
-def section_pages(pages: dict[str, Path]) -> dict[str, tuple[Path, str, float]]:
-    """The Explanations pages, each with its current tab and the space its content
-    starts under the tabs, in rem: papers and the film as the site renders them, and
-    the workbench's shell on its template with its own stylesheet and no program, which
-    is all of that page the header's place needs."""
+def _workbench_shell(path: Path) -> Path:
+    """The workbench's shell, written at `path`: its template with its own stylesheet and
+    no program, which is all of that page the header's place needs."""
     from workbench_tools import build_site  # noqa: PLC0415
 
     assets = build_site.WORKBENCH_PACKAGE / "assets"
     shell = build_site.with_nav((assets / "template.html").read_text(encoding="utf-8"))
     styles = (assets / "workbench.css").read_text(encoding="utf-8")
     assert shell.count("__WORKBENCH_CSS__") == 1
-    workbench = pages["visualize.html"].with_name("workbench.html")
-    workbench.write_text(shell.replace("__WORKBENCH_CSS__", styles), encoding="utf-8")
-    return {
-        "visualize.html": (pages["visualize.html"], "Film", PAGE_TOP),
-        "workbench/": (workbench, "Workbench", TABS_SPACE),
-    }
+    path.write_text(shell.replace("__WORKBENCH_CSS__", styles), encoding="utf-8")
+    return path
+
+
+@pytest.fixture(scope="module")
+def media_pages(pages: dict[str, Path]) -> dict[str, Path]:
+    """Videos and the Workbench: the film's page as the site renders it, and the
+    workbench's shell (`_workbench_shell`)."""
+    film = pages["visualize.html"]
+    workbench = _workbench_shell(film.with_name("workbench.html"))
+    return {"visualize.html": film, "workbench/": workbench}
+
+
+@pytest.fixture(scope="module")
+def switcher_pages(pages: dict[str, Path]) -> dict[str, Path]:
+    """The same two pages with `SWITCHER` put back after the bar, in the header slot each
+    still offers: `tabs` of `render_overview.kpress_page`, which renders the film's page,
+    and of `render_overview.nav_shell`, which gives the workbench's shell its bar."""
+    from workbench_tools import build_site  # noqa: PLC0415
+
+    beside = pages["visualize.html"]
+    film = beside.with_name("film-switcher.html")
+    with patch.object(
+        render_overview, "kpress_page", partial(render_overview.kpress_page, tabs=SWITCHER)
+    ):
+        film.write_text(render_overview.visualize_page().html, encoding="utf-8")
+    with patch.object(
+        build_site, "nav_shell", partial(render_overview.nav_shell, tabs=SWITCHER)
+    ):
+        workbench = _workbench_shell(beside.with_name("workbench-switcher.html"))
+    return {"visualize.html": film, "workbench/": workbench}
 
 
 @pytest.mark.parametrize("width", [1280, 390])
-def test_the_section_tabs_stand_under_the_bars_rule(
-    browser: Any, section_pages: dict[str, tuple[Path, str, float]], width: int
+def test_videos_and_the_workbench_have_no_tabs_under_the_bars_rule(
+    browser: Any, media_pages: dict[str, Path], width: int
 ) -> None:
-    """On papers, the film and the workbench, from the top: the bar, the rule under it,
-    the tabs, the content. The rule is the bar's own, at the bar's foot and as long as
-    the bar, where it is on every other page; the tabs start `--site-tabs-space` under
-    it with their own tab current; the film starts `--site-page-top` under the tabs, and
-    the application the tabs' own space under them."""
-    for name, (path, current, below) in section_pages.items():
+    """On the film's page and the workbench, from the top: the bar, the rule under it,
+    the trail, the content, as on every page, with no switcher between the rule and the
+    trail. The rule is the header slot's, at the bar's foot and as long as the bar; the
+    trail starts `TRAIL_ABOVE` under it, and the film or the application `TRAIL_BELOW`
+    under the trail."""
+    for name, path in media_pages.items():
         page = browser.new_page(
             viewport={"width": width, "height": 900}, reduced_motion=REDUCED_MOTION
         )
@@ -187,14 +222,16 @@ def test_the_section_tabs_stand_under_the_bars_rule(
         finally:
             page.close()
         where = f"{name} at {width}"
-        assert tabs_problems(found) == [], where
-        nav, rule, tabs, first = (found[part] for part in ("nav", "rule", "tabs", "first"))
-        assert rule["on"] == "nav.site-nav", where
-        assert rule["bottom"] == nav["bottom"], where
+        assert found["tabs"] is None, where
+        parts = ("nav", "rule", "breadcrumb", "first")
+        nav, rule, trail, first = (found[part] for part in parts)
+        assert rule["on"].partition(".")[0] == "header", where
+        assert rule["top"] == pytest.approx(nav["bottom"], abs=0.05), where
         assert (rule["left"], rule["right"]) == (nav["left"], nav["right"]), where
-        assert tabs["current"] == current, where
-        assert tabs["top"] - rule["bottom"] == pytest.approx(TABS_SPACE * REM, abs=0.05), where
-        assert first["top"] - tabs["bottom"] == pytest.approx(below * REM, abs=0.05), where
+        assert trail is not None, where
+        above, below = trail["top"] - rule["bottom"], first["top"] - trail["bottom"]
+        assert above == pytest.approx(TRAIL_ABOVE * REM, abs=0.05), where
+        assert below == pytest.approx(TRAIL_BELOW * REM, abs=0.05), where
 
 
 def test_inline_visuals_choices_are_not_header_tabs(browser: Any) -> None:
@@ -233,12 +270,12 @@ def test_baseline_labels_use_visible_text_or_the_icon_links_accessible_name(
     assert [link["label"] for link in found["links"]] == ["Overview", "GitHub"]
 
 
-def test_tabs_over_the_rule_are_caught(
-    browser: Any, section_pages: dict[str, tuple[Path, str, float]]
-) -> None:
-    """The control: give the header that holds the tabs its lower border back, as it had
-    while the tabs stood over the rule, and the check names the tabs on both pages."""
-    for name, (path, _, _) in section_pages.items():
+def test_tabs_over_the_rule_are_caught(browser: Any, switcher_pages: dict[str, Path]) -> None:
+    """The control: put the switcher back after the bar, and the header's report finds
+    it, with Film current, so the pages above have none for it to miss; give the header
+    that holds it its lower border back, as it had while the tabs stood over the rule,
+    and the check names the tabs on both pages."""
+    for name, path in switcher_pages.items():
         page = browser.new_page(
             viewport={"width": 1280, "height": 900}, reduced_motion=REDUCED_MOTION
         )
@@ -248,10 +285,14 @@ def test_tabs_over_the_rule_are_caught(
                 # ResizeObserver can add site-headroom after load; the workbench
                 # fixture deliberately has no program.
                 page.locator("header.site-headroom").wait_for(state="attached")
+            found = page.evaluate(HEADER)
             page.add_style_tag(content=RULE_UNDER_THE_TABS)
             problems = tabs_problems(page.evaluate(HEADER))
         finally:
             page.close()
+        assert found["tabs"] is not None, name
+        assert found["tabs"]["current"] == "Film", name
+        assert tabs_problems(found) == [], name
         assert len(problems) == 1, name
         assert problems[0].startswith("the section tabs start "), name
         owner = "header" if name == "workbench/" else "header.site-headroom"
@@ -276,23 +317,19 @@ def _header(browser: Any, path: Path, width: int, *, style: str = "") -> dict[st
 def test_the_bars_type_is_one_step_under_the_bodys(
     browser: Any,
     pages: dict[str, Path],
-    section_pages: dict[str, tuple[Path, str, float]],
+    media_pages: dict[str, Path],
 ) -> None:
     """At a desktop, a tablet and a phone width, on a page of prose, on the film's page
     and on the workbench: a link in the bar is smaller than the body's
-    prose and no smaller than the first step of the paper's scale under it; section tabs
-    apply the shared button-label scale. The site's name is at least the body's size.
+    prose and no smaller than the first step of the paper's scale under it, and no page
+    has a section tab to size. The site's name is at least the body's size.
     Nothing here is a pixel
     value: the body is the prose base the page resolves, which a prose paragraph is set
     at, and the step is read from the same scale. The larger type leaves the bar's links
-    on one line on a desktop and a tablet and two on a phone, and no page wider than its
-    window."""
-    opened = {
-        "atlas.html": pages["atlas.html"],
-        **{name: path for name, (path, _, _) in section_pages.items()},
-    }
+    reachable at desktop, tablet and phone widths, with no page wider than its window."""
+    opened = {"atlas.html": pages["atlas.html"], **media_pages}
     seen: dict[str, set[tuple[float, float | None, float]]] = {name: set() for name in opened}
-    for width, rows in BAR_WIDTHS.items():
+    for width in BAR_WIDTHS:
         for name, path in opened.items():
             sizes = _header(browser, path, width)["type"]
             where = f"{name} at {width}"
@@ -304,12 +341,11 @@ def test_the_bars_type_is_one_step_under_the_bodys(
             assert sizes["name_label"] == (
                 "The Squares Project" if width == 1280 else "Squares"
             )
-            assert (sizes["links_rows"], sizes["overflow"]) == (rows, 0), where
+            assert sizes["links_rows"] >= 1, where
+            assert sizes["overflow"] == 0, where
             if name == "atlas.html":
                 assert sizes["body"] == body, where
-                assert sizes["tab"] is None, where
-            else:
-                assert sizes["tab"] == round(sizes["link"] * sizes["tab_scale"], 2), where
+            assert sizes["tab"] is None, where
             seen[name].add((sizes["link"], sizes["tab"], sizes["name"]))
     # One size at every width, and the same bar on every page.
     assert all(len(found) == 1 for found in seen.values()), seen
@@ -317,11 +353,12 @@ def test_the_bars_type_is_one_step_under_the_bodys(
 
 
 def test_a_bar_set_smaller_than_one_step_under_the_body_is_caught(
-    browser: Any, section_pages: dict[str, tuple[Path, str, float]]
+    browser: Any, switcher_pages: dict[str, Path]
 ) -> None:
-    """The control: give the bar and the tabs the sizes they had, in rem and not from the
-    body's scale, and the check names the links, the tabs and the name."""
-    path = section_pages["visualize.html"][0]
+    """The control: on the film's page with the switcher put back, give the bar and the
+    tabs the sizes they had, in rem and not from the body's scale, and the check names
+    the links, the tabs and the name."""
+    path = switcher_pages["visualize.html"]
     problems = type_problems(_header(browser, path, 1280, style=OLD_BAR_TYPE))
     assert [problem.split(":")[0] for problem in problems] == [
         "a link in the header is 16px",
@@ -348,48 +385,33 @@ def _baselines(browser: Any, path: Path, width: int, *, style: str = "") -> dict
 def test_the_name_stands_on_the_links_baseline(
     browser: Any,
     pages: dict[str, Path],
-    section_pages: dict[str, tuple[Path, str, float]],
+    media_pages: dict[str, Path],
 ) -> None:
     """At a desktop, a tablet and a phone width, on a page of prose, on the film's page
-    and on the workbench: every link on a line of the bar stands on one baseline, the
-    section tabs on one of theirs, and the full or compact site name on the
-    links', each within half a pixel. The current link's baseline is as far over the rule
-    with the full name as with the compact one,
-    and the current tab's as far over the foot of its strip at every width."""
-    opened = {
-        "atlas.html": pages["atlas.html"],
-        **{name: path for name, (path, _, _) in section_pages.items()},
-    }
+    and on the workbench: every link on a line of the bar stands on one baseline, and
+    the full or compact site name on the links', each within half a pixel, with no
+    section tab under the bar. The current link's baseline is as far over the rule
+    with the full name as with the compact one."""
+    opened = {"atlas.html": pages["atlas.html"], **media_pages}
     over_rule: dict[int, set[float]] = {}
-    over_foot: set[float] = set()
-    for width, rows in BAR_WIDTHS.items():
+    for width in BAR_WIDTHS:
         for name, path in opened.items():
             found = _baselines(browser, path, width)
             where = f"{name} at {width}"
             assert baseline_problems(found) == [], where
-            lines = {link["top"] for link in found["links"]}
-            assert len(lines) == rows, where
-            assert [link["label"] for link in found["links"]] == [
-                "Overview",
-                "News",
-                "Atlas",
-                "Results",
-                "Explanations",
-                "About",
-                "GitHub",
-            ], where
+            labels = [link["label"] for link in found["links"]]
+            assert labels == (
+                ["Menu", "GitHub"]
+                if width < 768
+                else ["Overview", "News", "Results", "Learn", "About", "GitHub"]
+            ), where
             first = min(found["links"], key=lambda link: link["top"])
             assert abs(found["name"] - first["baseline"]) <= BASELINE_TOLERANCE, where
-            assert [tab["label"] for tab in found["tabs"]] == (
-                [] if name == "atlas.html" else ["Film", "Workbench"]
-            ), where
-            if rows == 1:
+            assert found["tabs"] == [], where
+            if found["current_above_rule"] is not None:
                 over_rule.setdefault(width, set()).add(found["current_above_rule"])
-            if found["tabs"]:
-                over_foot.add(round(found["current_tab_above_foot"], 1))
     # With the full name (1280) and the compact one (768), on every page: one distance.
     assert len(set().union(*over_rule.values())) == 1, over_rule
-    assert len(over_foot) == 1, over_foot
 
 
 def test_a_name_above_the_links_is_caught(browser: Any, pages: dict[str, Path]) -> None:

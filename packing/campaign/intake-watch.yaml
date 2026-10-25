@@ -303,29 +303,10 @@ repositories:
       TODO, task and draft notes, including s(12) wall-strip notes that claim no bound.
 
   # The intake pass of 2026-10-10 (think-apri) read these heads. Each commit holds a
-  # result an open import bead owns, so each read names it until a packet pins the commit;
-  # the franciscouzo read stays after its packets, for the reason its note gives.
-  - url: https://github.com/franciscouzo/square-packing
-    read_through: 9bf90e74973027e8b609b3be6992e1b5e3391aeb
-    read_on: '2026-10-10'
-    bead: think-1545
-    note: >-
-      The beyond-horizon half of 02f9690 (9 October): certificates for the 20 packings at n =
-      327, 332, 335 to 342, 364, 369 and 372 to 379, 15 at exact optima whose pose files and
-      SVGs it rewrites and 5 rational witnesses (327, 335, 342, 364, 372). Against the rows
-      the record tracks as current, n = 375 drops to 9953490883645300797660281830293/(5*10^29)
-      = 19.906981767290601..., 4.29e-5 below 2d32a6e's 19.907024692022954 and the same exact
-      side as Evan Daniel's big1_n375.cert of 41fc9ec, and n = 378 to
-      9973230520053043026984980967643/(5*10^29) = 19.946461040106..., 4.0e-4 below
-      19.946861170999796; n = 376, 377 and 379 move by 2.3e-8 or less. 3ef7634 (10 October)
-      rewrites two of them again, 338 and 340, 1.48e-3 and 4.67e-5 below their 02f9690
-      certificates. The couzo-exact-certificates-2026-10-09 packet pins all 20 at 02f9690 and
-      the couzo-certificates-2026-10-10 packet the two at 3ef7634, and both compare them with
-      the tracked rows, but no other record names their owner: the beyond_horizon_claims rows
-      of source-coverage.yaml still hold the ffd900d and 2d32a6e values. So this read stays,
-      after the packets that pin these commits, as the record that think-1545 owns the
-      outside-corpus updates of 02f9690 and 3ef7634 (think-a4wq holds the dated rows for it),
-      until those rows are registered. 9bf90e7 touches none of them.
+  # result an open import bead owns, so each read names it until a packet pins the commit.
+  # The franciscouzo read through 9bf90e7, which held the outside-corpus updates of 02f9690
+  # and 3ef7634 for think-1545, was removed when the history walk of Couzo's watched
+  # publications recorded them; the read through 7b6c87e covers it.
   - url: https://github.com/wand125/square-packing
     read_through: 22a23c8a99aa4e9616d596bc2f28555bacbee3dd
     read_on: '2026-10-10'
@@ -350,8 +331,8 @@ repositories:
       says "No claim here". The evand-trio126-2026-10-09 packet pins 268af52 and T-139
       registers n126_xu, so think-ilwc's hold is released. 41fc9ec adds big1_n375 (s(375)
       <= 9953490883645300797660281830293/(5*10^29), beyond the horizon, the side of Couzo's
-      02f9690 certificate, whose outside-corpus update think-1545 owns through the
-      franciscouzo read), polish_n375 and hunt2_n270, whose side equals T-130's n = 270
+      02f9690 certificate, which the history walk of 22 October 2026 holds, above Goebel's
+      construction, for #613 (think-8krd)), polish_n375 and hunt2_n270, whose side equals T-130's n = 270
       side. e059b1e releases slack-separated pairs in exactsolve; the rest is packer
       tooling, the s(110) census of certified minima above the record (493 to 683), a site
       page and TODO, NEEDS and DESIGN notes. Nothing else to import.
@@ -411,33 +392,31 @@ repositories:
       One commit of 10 October past the 9bf90e7 read: 3ef7634, the pin of #488 and of the
       couzo-certificates-2026-10-10 packet, which retains the nine certificates it adds or
       changes and pins the other 54. It rewrites certificates/n132, n175, n237, n270 and
-      n305.cert and adds n209.cert, the six values #488 reports (T-140), and rewrites n303,
-      n338 and n340.cert, which #488 does not name; the packet's claim record compares those
-      three, and each is an import of its own, the outside-corpus updates at 338 and 340
-      think-1545's (the 9bf90e7 read). The commit's pose files, SVGs and both README tables
-      follow the same certificates; the standing table now marks 131, 259, 263, 269, 292, 303
-      and 307 as superseded by #481, and the certificates README marks n = 375, whose
-      certificate is unchanged, as tied with Evan Daniel's big1_n375. This read stays although
-      a packet pins the head, which the sweep notes as removable: it is the read that covers
-      the changed paths no packet retains in 3ef7634 and the two commits before it. Read on
-      2026-10-10 with devtools.intake_sweep.read_history, the sweep reports all three as
-      commits a pin contains whose paths no packet retains when no read covers them, and
-      3ef7634 alone with only the 9bf90e7 read; with this one, none. Those paths are
-      drawings and removed files: the nine SVGs 3ef7634 adds or rewrites (132, 175, 209, 237,
-      270, 303, 305, 338, 340), the 56 SVGs 02f9690 adds or rewrites, and the pose files and
-      SVGs of 102, 103 and 272 that 9bf90e7 deletes as superseded in this record (Ryan Xu's
-      #432 packings at 102 and 103, Evan Daniel's #399 packing at 272), which the history
-      keeps. Each drawing shows a pose file or certificate a packet retains or pins; the
-      source states no licence, so the record keeps the drawings outside Git under the
-      retention policy. No record entry changes, and nothing else to import.
-
-  # The closing sweep of 2026-10-10 (about 19:50 UTC) found evand/square-packing four
-  # commits past the 76a529b read, and seven more followed by 20:37 UTC. 346c6ed's
-  # certificates hold new upper-bound values at 15 counts, which think-8k76 owned until the
-  # evand-regularized-2026-10-10 packet pinned ea1a2f2, the head at 21:42 UTC, and T-146
-  # registered them. The read stays although a packet pins the head: without it,
-  # devtools.intake_sweep.read_history reports all eleven as commits a pin contains whose
-  # changed paths no packet retains, and with it none.
+      n305.cert and adds n209.cert, the six values #488 reports (T-140), and rewrites n303, n338
+      and n340.cert, which #488 does not name; the packet's claim record compares those three,
+      and each is an import of its own; the outside-corpus updates at 338 and 340 are rows of
+      couzo-3ef7634-2026-10-10. The commit's pose files, SVGs and both README tables follow the
+      same certificates; the standing table now marks 131, 259, 263, 269, 292, 303 and 307 as
+      superseded by #481, and the certificates README marks n = 375, whose certificate is
+      unchanged, as tied with Evan Daniel's big1_n375. This read stays although a packet pins
+      the head, which the sweep notes as removable: it is the read that covers the changed paths
+      no packet retains in 3ef7634 and the two commits before it. Read on 2026-10-10 with
+      devtools.intake_sweep.read_history, the sweep reports all three as commits a pin contains
+      whose paths no packet retains when no read covers them, and 3ef7634 alone with only the
+      9bf90e7 read; with this one, none. Those paths are drawings and removed files: the nine
+      SVGs 3ef7634 adds or rewrites (132, 175, 209, 237, 270, 303, 305, 338, 340), the 56 SVGs
+      02f9690 adds or rewrites, and the pose files and SVGs of 102, 103 and 272 that 9bf90e7
+      deletes as superseded in this record (Ryan Xu's #432 packings at 102 and 103, Evan
+      Daniel's #399 packing at 272), which the history keeps. Each drawing shows a pose file or
+      certificate a packet retains or pins; the source states no licence, so the record keeps
+      the drawings outside Git under the retention policy. No record entry changes, and nothing
+      else to import.  # The closing sweep of 2026-10-10 (about 19:50 UTC) found
+      evand/square-packing four # commits past the 76a529b read, and seven more followed by
+      20:37 UTC. 346c6ed's # certificates hold new upper-bound values at 15 counts, which
+      think-8k76 owned until the # evand-regularized-2026-10-10 packet pinned ea1a2f2, the head
+      at 21:42 UTC, and T-146 # registered them. The read stays although a packet pins the head:
+      without it, # devtools.intake_sweep.read_history reports all eleven as commits a pin
+      contains whose # changed paths no packet retains, and with it none.
   - url: https://github.com/evand/square-packing
     read_through: ea1a2f23678a13bd1d252f9f4c95ca5dd2ffd2b7
     read_on: '2026-10-10'
@@ -539,24 +518,27 @@ repositories:
   - url: https://github.com/wand125/square-packing
     read_through: 23e31862345c532d17ad2c896677a3a8d8821aa4
     read_on: '2026-10-11'
-    bead: think-wop1
     note: >-
       The commits of 10 and 11 October (UTC) from b4743cf to 23e3186 past the 27ed168 read. 23e3186
       adds problems/square-lower-bounds/certificates/mixed_n31_L59775/, a fine-net check2 bundle
       reporting s(31) >= 2391/400 = 5.9775 on the 2,073-direction net (candidate and receipts in the
-      data release), above n = 31's registered 2381/400 and #446's reported 597/100, which
-      think-wop1 owns. 24ccf8e adds certified constructions of squares in rectangles
+      data release), above n = 31's registered 2381/400 and #446's reported 597/100. Since #745
+      merged on 24 October the wand125-fine-net-n31-2026-10-11 packet pins 23e3186 and retains
+      that directory with the problem's LICENSE, and T-232 registers the bound, confirmed at
+      V3/C3 (think-wop1); #534, which tracked it, closed that day. So this read holds nothing
+      back. 24ccf8e adds certified constructions of squares in rectangles
       (problems/rectangles), outside this record's square container; b4743cf, c269dd6, 334f360,
-      69499e8 and 2067e5f are site and editorial data.
+      69499e8 and 2067e5f are site and editorial data. Nothing else to import.
   - url: https://github.com/wand125/square-packing
     read_through: 04fbef0d4e8fc33d628c7fe626605e7fbbbf3250
     read_on: '2026-10-11'
-    bead: think-xk3f
     note: >-
       The commits of 11 October (UTC) from f9a77b7 to 04fbef0 past the 23e3186 read. f9a77b7 adds
       problems/square-lower-bounds/certificates/k2m5_n59_L8/lean/, a generated Lean kernel proof of
-      s(59) = 8 on Evan Daniel's mixed-measure checker at 1718a58, new evidence for T-066 that
-      think-xk3f owns. cac504b adds packing-certificate files with two exact checkers
+      s(59) = 8 on Evan Daniel's mixed-measure checker at 1718a58; since 23 October the
+      wand125-n59-lean-kernel-2026-10-11 packet pins f9a77b7 and retains that directory but
+      SOURCES.sha256, and T-235 registers the proof as a formalization of T-066 (think-xk3f).
+      cac504b adds packing-certificate files with two exact checkers
       (tools/packing_check/) for upper bounds the record already holds as grid packings (k2m4_n77_L9
       at 77 and 78, point_n21_L5 at 22 to 25, point_n45_L7 at 45, point_n61_L8 at 61) and for other
       containers; 0f289d0 runs those checks in CI. The triangle, domino, hexagon and right-isosceles
@@ -616,7 +598,7 @@ repositories:
   - url: https://github.com/wand125/square-packing
     read_through: f30cc2cf345a3a3f6af778925f354d9ec979868b
     read_on: '2026-10-12'
-    bead: think-xzob
+    bead: think-flxm
     note: >-
       One commit of 12 October (01:00 UTC) past the 04fbef0 read: f30cc2c adds
       tools/sqverify_continuous/, this repository's sqverify-fast with a continuous-angle mode
@@ -667,7 +649,7 @@ repositories:
   - url: https://github.com/wand125/square-packing
     read_through: d4a19815e2b0cca5faa562f00c7a80b93d3402ef
     read_on: '2026-10-12'
-    bead: think-xzob
+    bead: think-flxm
     note: >-
       One commit of 12 October (01:29 UTC) past the f30cc2c read: d4a1981 makes
       tools/sqverify_continuous v4 (source_sha256 619b3c00...), adding --resume, which takes
@@ -752,7 +734,7 @@ repositories:
   - url: https://github.com/wand125/square-packing
     read_through: 9a28a84bd55dc124bfa2919bb6c4fb504dda3149
     read_on: '2026-10-14'
-    bead: think-xzob
+    bead: think-flxm
     note: >-
       The 21 commits of 12 to 14 October (UTC) from d4a1981 to 9a28a84 past the f30cc2c read.
       d4a1981 makes tools/sqverify_continuous v4, with --resume, the continuous-angle route for
@@ -843,15 +825,25 @@ repositories:
   - url: https://github.com/franciscouzo/square-packing
     read_through: 58a783368d4b7e70bb800f0009ea9ca03e578739
     read_on: '2026-10-15'
-    bead: think-yfoo
+    bead: think-kzme
     note: >-
       The head. 43ac7d2 is #607's pin (T-189). 4e4c8ce rewrites the index for n < 1024: its
       certificates/n237.cert is T-190, retained by the couzo-n237-2026-10-15 packet at this
-      head, and its 341 rows beyond 324, below 487b058's and #607's, are think-yfoo's import;
-      the other in-corpus files are copies of certificates the record holds, or larger.
-      58a7833 adds Göbel's square and strip bounds (gobel_bounds.json, GOBEL_COMPARISON.md,
-      gobel_comparison.csv), classical closed forms with no discovery claimed, which #613
-      asks the owner about.
+      head, and its 341 rows beyond 324, below 487b058's and #607's, were think-yfoo's import;
+      the other in-corpus files are copies of certificates the record holds, or larger. 58a7833
+      adds Göbel's square and strip bounds (gobel_bounds.json, GOBEL_COMPARISON.md,
+      gobel_comparison.csv), classical closed forms with no discovery claimed, which #613 asks
+      the owner about. The couzo-index-2026-10-15 packet pins 4e4c8ce and retains the 253
+      certificates its rows record, and the history walk of Couzo's watched publications holds the
+      rest: the rows above Göbel's construction, which waited with 58a7833's bounds on #613
+      (think-8krd), the sub-print re-certifications (think-fwa9) and the index deletion bounds
+      (think-f2io). The owner answered all three on 23 October 2026: Göbel's constructions are
+      earlier reports, so neither those rows nor 58a7833's bounds, rational enclosures of Göbel's
+      sides, are recorded; the re-certifications restate the reports they beat; and a bound one
+      square below the next count's certificate is an earlier report (D6). Whether such a bound has
+      a row of its own, whether an issue's claim at 743, 798, 855 or 985 gives it one, and the three
+      bounds at 751, 752 and 927 that delete two or three squares wait, so this read now names
+      think-kzme.
   - url: https://github.com/wand125/square-packing
     read_through: b57e66712b5f722b39fcb703692006062c7d9eb7
     read_on: '2026-10-15'
@@ -1035,7 +1027,11 @@ repositories:
       Read all 17 commits past 757b40b, through 5ca0dc3. #669 s155 is think-n1ga; #674 both s229
       certificates are think-5ij2; #673 credit clarification and PathCert theorem are think-gzvu.
       Fang gluing formalization f4883b4 is think-57ei (coordinate think-0esw); Ryu formalization
-      8475bdf is think-ahr2; improved filled L-shape bound a645fe3 is think-f8py. The exact 3-angle
+      8475bdf is think-ahr2; since 23 October the evand-fang-ryu-lean-2026-10-18 packet pins
+      8475bdf and retains both proofs, T-236 registers Fang's and the asymptotic register's row
+      notes Ryu's. Improved filled L-shape bound a645fe3 is think-f8py; since 25 October the
+      evand-k2-minus-c-lean-2026-10-18 packet pins aa12b98, which holds a645fe3's RyuFill.lean,
+      and the asymptotic register records the bound as a reported row. The exact 3-angle
       n232 witness/Lean proof at 5ca0dc3 is evidence for T-193, held by think-phyb. Other commits
       change search tooling, status, site/provenance and displays; the complete changed-path
       inventory is retained in campaign/issue-intake/intake-20261018/source-commit-files.json. Full
@@ -1071,8 +1067,9 @@ repositories:
     bead: think-pf37
     note: >-
       Five commits past 5ca0dc3. 4b456fe reports the stronger filled L-shape deficiency
-      bound, owned by think-f8py; 13da782 reports the staircase/Ryu threshold, owned by
-      think-pf37. The other three package the proof route and update pages, viewer and
+      bound, owned by think-f8py, which since 25 October the evand-k2-minus-c-lean-2026-10-18
+      packet retains at aa12b98 and the asymptotic register records as a reported row;
+      13da782 reports the staircase/Ryu threshold, owned by think-pf37. The other three package the proof route and update pages, viewer and
       credit presentation. Commit messages and changed paths are retained in
       packing/campaign/issue-intake/intake-20261019/evand-source-inventory.json.
       Source-content review and theorem custody remain with those owners; no build,
@@ -1110,15 +1107,16 @@ repositories:
   - url: https://github.com/TheSnakeFang/squarepack-certs
     read_through: 0e9be7961773aa78b879c4ee6ba584a67e2e5513
     read_on: '2026-10-19'
-    bead: think-494l
     note: >-
       One commit past 078789a changes only README and adds the v0.8 note at
       note/fang-2026-n2-n-1.md. #603 comment 6255103888 also announces the separate
-      public squarepack-lean project at 947bdae. Note and Lean review are owned by
-      think-494l under think-0esw. The note's mixed-step and announced Lean single-step
-      statements require separate binding checks; no new certificate in this commit
-      and no build, replay or assurance promotion here. Receipt:
-      packing/campaign/issue-intake/intake-20261019/fang-source-inventory.json.
+      public squarepack-lean project at 947bdae. The note's mixed-step and announced Lean
+      single-step statements required separate binding checks; no new certificate in this
+      commit. Receipt: packing/campaign/issue-intake/intake-20261019/fang-source-inventory.json.
+      Since #781 merged on 24 October the fang-excess-note-2026-10-19 packet pins 9ffba0f,
+      two commits later, and retains README.md and note/ there, the note at draft v0.9, and
+      T-163 rests on it at V3 (E-fang-excess-note-proof, think-494l), so this read holds
+      nothing back.
   # Continuation after #676 merged: source reads do not replay any certificate.
   - url: https://github.com/evand/square-packing
     read_through: 3a9948c781be668b1547cc2bf64a0d1e614f9bca
@@ -1155,7 +1153,6 @@ repositories:
   - url: https://github.com/evand/square-packing
     read_through: a435c970774403bf5c6f94815997b1cfd77dcf44
     read_on: '2026-10-21'
-    bead: think-f8py
     note: >-
       a435c97 (20 October, 21:47Z) commits the packer's work of 17 to 20 October: the fill
       module, relax schedules, a CPU-limit watchdog, bulbgen and BULB.md, SUBMITTING.md and
@@ -1172,12 +1169,17 @@ repositories:
       checked exactly by the source (the whole packing for k <= 100, every pair with a
       corner-fill square beyond) and not in Lean. At k <= 31 every count k^2 - c it reaches
       already has a beyond-horizon row below k, so it moves no count the record tracks. A
-      claim in the c*(k) family think-f8py imports, which think-f8py holds until a packet
-      pins this commit or its import declines it. Nothing else to import.
+      claim in the c*(k) family think-f8py imports, which think-f8py held until a packet
+      pinned this commit or its import declined it. Its import of 25 October declines it,
+      for two reasons the register applies: the junction variant is a finite table of
+      values checked by the source's own programs, not a statement for every k in a range,
+      which is what the register's deficiency rows hold and the deficiency gate compares;
+      and it moves no count the record tracks. That holds at k = 32 too: the counts it could
+      reach there, 993 and 994, already have current beyond-horizon rows below 32
+      (31.953213739929 and 31.960209732221). Nothing else to import.
   - url: https://github.com/TheSnakeFang/squarepack-certs
     read_through: 9ffba0f3a84b38f0c92790c1d3089f979ef53f0b
     read_on: '2026-10-21'
-    bead: think-494l
     note: >-
       The two commits of 19 October (03:29Z) past 0e9be79, the head. 6e26525 makes the note
       draft v0.9 with the Zenodo DOI 10.5281/zenodo.23463481, rewords its abstract and
@@ -1185,8 +1187,11 @@ repositories:
       record has since moved; no theorem, certificate or checker changes. 9ffba0f narrows
       the README's Lean statement from "Theorems 1 and 2" to "Theorem 1 and the unmixed
       bounds of Theorem 2", the scope think-494l compares with T-163 before any rung
-      change. New evidence for T-163, which think-494l holds (the DOI with think-0esw,
-      #603); no certificate to import.
+      change. New evidence for T-163; no certificate to import. Since #781 merged on 24
+      October the fang-excess-note-2026-10-19 packet pins this commit, retains README.md
+      and note/ and pins ATTRIBUTION.md, CHANGELOG.md, LICENSE, VERIFICATION.md and
+      MANIFEST.sha256 by digest, and T-163 rose to V3 on the note
+      (E-fang-excess-note-proof, think-494l), so this read holds nothing back.
   - url: https://github.com/wand125/square-packing
     read_through: a6c0dbbb259c26ed2ae5f429dbe68c9c3a27185d
     read_on: '2026-10-21'
@@ -1203,3 +1208,327 @@ repositories:
       records-v1 replay unchanged: no change for T-064. 1f70ab3 and a6c0dbb correct the
       wording of eight papers, the closed-form paper now citing cfcheck's replay of
       intervals 1 and 34, which T-180 already records. Nothing to import.
+  # The #719 import (think-xyhn, c-lane-719-import): what the intake sweep of 12:20Z on 22
+  # October listed for the repository whose release #719 reports.
+  - url: https://github.com/Mishapolk/square-packing-records
+    read_through: dc440a8804565b4beaabc489df38345cada8cad1
+    read_on: '2026-10-22'
+    note: >-
+      The three commits of 22 October past the 70a033f pin, 1851c2c, 12fc466 and dc440a8, the head.
+      1851c2c and 12fc466 are the release issue 719 reports: 1851c2c adds 507 certificates and
+      SIGNIFICANT_VICTORIES.jsonl and updates LEGAL_VICTORIES.jsonl and six certificates, and
+      12fc466 replaces n-447.cert. The mishapolk-issue719-2026-10-22 packet pins 12fc466 and binds
+      173 of its files by blob: the README, the two indexes, the 122 certificates the issue names,
+      and the 48 the #719 reply asks the author about (the ten rows the issue's edit withdrew that
+      are still below every earlier report, at 411, 451, 494, 495, 539, 540, 583, 587, 632 and 683;
+      files below the case only beyond the twelfth decimal place, or undecided against it, at 34
+      in-corpus counts; the second 204 file; and three files that fail both exact routes). None of
+      the 48 is an import until he answers. The triage of #719 (think-xyhn) read every certificate
+      at the pin, and the rest are at or above an earlier report. dc440a8 adds only
+      ISSUE_SUBMISSION_122.md, issue 719's body. Nothing else to import.
+  # The intake sweep of 12:20Z on 22 October 2026 listed three watched repositories that
+  # needed an owner; the read-only triage c-triage-1022b read each at its head.
+  - url: https://github.com/evand/square-packing
+    read_through: 7051f4eabf7f9b2509ad1e7cc296f57d19482027
+    read_on: '2026-10-22'
+    note: >-
+      The 75 commits from b64d5ab (20 October, 22:21Z) to 7051f4e (22 October, 01:54Z), the
+      head, past 88385ab, the pin of the evand-n270-sweep-2026-10-20 and
+      evand-n343-sweep-2026-10-20 packets. None adds or changes a certificate. Most are unit
+      squares in rectangles: search/rectfront/, docs/rect.html, two literature notes and
+      lean/Sqpack/Rect*.lean, which prove in Lean, with standard axioms by the source's
+      account, exactly which w x h rectangles hold two to five unit squares (rect2_iff to
+      rect5_iff; boundaries credited to Friedman's Math Magic of June 2010). Rectangles are
+      outside this record, which is squares in a square, but at w = h rect2_iff to
+      rect4_iff give s(2) = s(3) = s(4) = 2 and rect5_pts_lower (e96ab69) gives
+      s(5) >= 2 + 1/sqrt 2: a proof-assistant route to values the record holds by published
+      proofs. Since 23 October the evand-rect-small-n-lean-2026-10-22 packet pins this commit
+      and retains those theorems' closure and notes, and think-7l2j imports them, registered
+      with chelokot's as T-238, a formalization of T-237 (think-4o9c); the rest of the R_5 development is rectangles only. The note
+      literature/s5-proofs-2026-10-21.md points to chelokot's s5_eq_goebel, in the 753079eb
+      tree, which the chelokot-small-n-lean-2026-09-05 packet now retains. The rest is the packer's store hygiene, deduplication and
+      allocator design, and runs at 157, 273, 274 and 308 whose best sides (13.009188 at
+      157, 17.000299455 at 274) are above the register's, with no certificate. Nothing else
+      to import.
+  - url: https://github.com/wand125/square-packing
+    read_through: 2ed00b2ecd6b1178883f2fe3b2460ec7b5ea11c7
+    read_on: '2026-10-22'
+    note: >-
+      The three commits of 22 October (05:44Z to 12:01Z) past the a6c0dbb read. 1cedabe and
+      fbd2152 put the paper cubes-n4-upper, upper bounds for unit 4-cubes in a 4-cube at
+      k = 17 to 30, on the source's site. 2ed00b2 adds problems/cubes-in-cube/closed-measure/:
+      s3(25) = s3(26) = 3 for unit cubes in a cube, by a closed counting measure (sigma =
+      27/20, total 24.9123 < 25) whose main lemma two interval branch-and-bound checkers
+      decide, with their receipts (72,779,027 and 387,289,685 boxes; about 230,000 and 2.7
+      million seconds at the source). Cubes are outside this record, which is squares in a
+      square, as the reads of eb22671 and fbc5fc4 said, and no record entry tracks one.
+      Nothing to import.
+  - url: https://github.com/franciscouzo/square-packing
+    read_through: 6b7391de820fd01f3ff6984e4a081e8c86845588
+    read_on: '2026-10-22'
+    note: >-
+      The three commits past 7b6c87e, pushed together at 2026-10-21T22:56:37Z after issue
+      715: d09edd7, 5a299b4 and 6b7391d, the head and #715's pin. The
+      couzo-issue715-2026-10-21 packet pins 6b7391d and the couzo-reconcile-2026-10-20
+      packet pins 5a299b4 and retains its 20 certificates at 325 to 1024 that no earlier row
+      held: 9 current (487, 532, 579, 628, 679, 732, 787, 844, 903) and 11 later superseded
+      by #719 (409, 450, 453, 649, 810, 812, 933, 934, 990, 991, 997), which the history walk
+      of Couzo's watched publications records. The walk holds the
+      commit's 61 re-certifications below an earlier side only past its 12-place print (30 of
+      them #715's) for think-fwa9 and its side at 331, above Goebel's construction, for #613
+      (think-8krd). d09edd7's other paths hold nothing to import:
+      certificates/best/n183.cert is byte for byte the s183_h183b.cert T-220 registers
+      (SHA-256 279e70d1...), lower_bounds.json takes this register's s(108) >= 531/50
+      (T-216) back, and the rest are indexes and code. 6b7391d's 1,788 unretained paths
+      hold nothing to import either: it deletes 263 root certificates with their poses,
+      keeps best/ files that equal #715's root files or lie above #715's rows, and adds 463
+      parent seeds, every one at or below 1024 above #715's row. 5a299b4's others: in the
+      corpus, tighter rationalizations of exact sides the register already states (first
+      published at 4e4c8ce); above 1024, the index's 5,078 non-grid bounds, which wait on
+      the owner (D1, think-f2io); a superseded registration package and indexes. The read
+      stays, since the two packets retain a few of the commits' changed paths (think-bspk).
+      Nothing else to import.
+  # The intake sweep of 18:45Z on 22 October 2026 listed three watched repositories past
+  # their reads; the read-only triage c-triage-1022c read each at its head.
+  - url: https://github.com/evand/square-packing
+    read_through: 7982d7a9346e29e36cab3ce075274f3023114353
+    read_on: '2026-10-22'
+    note: >-
+      The ten commits of 22 October past the 7051f4e read, 3ee3aeb to 7982d7a, the head,
+      authored 16:11Z to 17:12Z and all committed at 17:14Z. f06521f adds search/packer/candidates/s303_r303w0.cert, its
+      binary64 input and the pipeline's report, issue 728's certificate, which the
+      evand-n303-2026-10-22 packet pins and T-230 registers; the head holds the same
+      certificate blob. 3ee3aeb, d350394, 8875444, 4f4e609, b4a9652, 267403b, 059e17b
+      and 7982d7a are unit squares in a strip [0, L] x [0, H] with H < 2:
+      search/rectfront/chainn/ (a min-plus chain relaxation to n = 30, slope-walk kernels,
+      failed charge LPs, a closed-form E5 certificate checked numerically for
+      1.87 <= H < 2) and lean/Sqpack/Strip{Low,Kernel,Walk,Pot,Odd}.lean (strip_low for
+      every n, the step cost kap with kap_ge_zigzag, kap_wall, kap_mirror and kap_B, the
+      slope walk strip_walk, and strip_odd_of for odd n, which assumes the per-square
+      inequalities KapS and KapC). Strips are rectangles, outside this record, which is
+      squares in a square, and at L = H < 2 they bound nothing the record holds.
+      593391f edits CLAUDE.md. No other certificate changes. e96ab69's rect5_pts_lower
+      (s(5) >= 2 + 1/sqrt 2 in Lean) and the chelokot s5_eq_goebel pointer are retained since
+      23 October, as the 7051f4e read says. Nothing else to import.
+  - url: https://github.com/wand125/square-packing
+    read_through: e48de243d7f5e348f1baa111b19265eb02f0d4a1
+    read_on: '2026-10-22'
+    note: >-
+      The four commits of 22 October (14:08Z to 14:15Z) past the 2ed00b2 read, all under
+      site/. 92be9a5 adds the results rows for s3(25) = s3(26) = 3 (unit cubes in a cube,
+      the closed counting measure 2ed00b2 added) and 7b25776 links the 4-cube survey to its
+      paper. ff06e5f revises nine papers after a further review, each with a dated
+      revision note. In closed-form (v5) the abstract and section 1 say the bound is one
+      square root on each interval except where the cap applies, where it is constant, and
+      r and W are defined at first use; no constant, interval or claim changes, so T-180
+      stands. valid7 (v5) states in its abstract what check_record.py re-checks (the record
+      structure in full, a random sample of the other leaves) and that Valid7 and
+      ValidTilt9 are also verified in the Lean 4 kernel, the evidence think-0ayk (T-064,
+      #537) and think-jh0n (#643) already hold. triangle (v4) narrows the scope its lead
+      gives the Lean check, and domino, hexagon-n3, right-isosceles and the three cube
+      papers change wording only: other containers and cubes, outside this record.
+      e48de24 fills the commit field of eight of those revision notes. Nothing to import.
+  - url: https://github.com/Esummins/packing
+    read_through: 0b0a0727d8bf8fcf8ea91747bb702bb5372bd348
+    read_on: '2026-10-22'
+    note: >-
+      The sixteen commits past the eb3ae15 read. Eight are dated 12 October (04:33Z to
+      05:50Z), and the 18 October head read still found eb3ae15: the A243 n = 17
+      four-corner descent, with level k = 13 done (91 classes: 13 DEAD, 77 ALIVE, 1
+      REDUCES) and k = 12 begun (64 classes: 63 ALIVE at the wall, 1 REDUCES), with
+      logs, rows and two spine certificates. That is the author's own run of part of
+      #523's queued ask (think-j891, whose n = 17 part the owner suspended on 13
+      October): class verdicts by an unreviewed engine with no verifier clause, which
+      bound nothing, a ledger note at most, as for the k = 14 to 16 levels #523 reports.
+      The eight of 22 October (17:00Z to 17:10Z) answer the record's replies. 429bcda
+      restates the frozen verifiers' digests in the outreach notes as the committed LF
+      files' (1574ddbd... and 87fa3d31..., which the esummins-packing-2026-10-12 manifest
+      records; #522). 9dc9be3 to e5ebaa6 append section 15 to docs/proofs/k0_knowledge.md,
+      a status compilation of the k = 0 programme on 22 October that states no new
+      mathematics (the STRIP2-IN-JAM drop tree complete, pair3 never run, the A263
+      indices, the slab jobs, nest279 without a witness, thirteen source contradictions),
+      with LOG.md, the registry and the ledger. 0b0a072 corrects the compilation's path in
+      outreach note 03 (#526). n = 11 is settled by T-060 and T-112, so these are
+      structural statements at a settled count, as #526's entry records; the packet keeps
+      the compilation as it stood at the pin, 1,277 lines. Nothing to import.
+  # The intake sweep of 00:10Z on 23 October 2026 listed the repository whose release #732
+  # reports; lane c-lane-sweep-1023a read it at its head.
+  - url: https://github.com/Mishapolk/square-packing-records
+    read_through: 17cc220131360ef290750eb845a3544c30ccb389
+    read_on: '2026-10-23'
+    bead: think-0gp6
+    note: >-
+      The four commits of 22 October past the dc440a8 read. 8a488a1 (19:08:59Z), 3285fac
+      (19:29:30Z) and 814fbe9 (19:37:33Z, tag v1.0.0) are the release issue 732 reports: they
+      shard certificates/ into folders by thousands holding files at 5,594 counts up to 9,913
+      (126 in the corpus, 390 at 328 to 998, 5,078 above 1024), add manifest.json, SHA256SUMS,
+      certified_bounds.json, upper_bounds.json, Couzo's copy of Daniel's verifier with its
+      licence and ISSUE_SUBMISSION_221.md, change README.md, check_packing.py and the two
+      victory indexes, and remove the three files that failed both exact routes and the lower
+      certificates/n204.cert, which #719's packet pins at 12fc466. The triage of #732 read
+      them at 814fbe9, and think-0gp6 holds them until a packet pins that commit or a later
+      one. 17cc220 (20:15:36Z), the head, adds only LICENSE: the MIT licence,
+      copyright Mykhailo Polkovskyi (Mishapolk), which the author's comment on #719
+      (issuecomment-6350348588) says covers every certificate, catalogue, manifest and tool, so
+      a packet pinned at 17cc220 holds the same certificates with their licence.
+  # The #732 import (think-0gp6, c-lane-732-import-1023): the head past the 17cc220 read.
+  - url: https://github.com/Mishapolk/square-packing-records
+    read_through: 7b6366fb5e7643772541da21329cda4705be57d5
+    read_on: '2026-10-23'
+    bead: think-0gp6
+    note: >-
+      The mishapolk-issue732-2026-10-22 packet pins 17cc220 and retains the 77 certificates
+      the walk of issue 732 records as rows, pinning the other 313 at 325 to 1024 by digest.
+      7b6366f (2026-10-23T01:50:22Z), the head, removes certificates/3000-3999/n3426.cert,
+      whose side was above its grid side, and sets 3426 to the grid in upper_bounds.json,
+      certified_bounds.json, manifest.json and census.json, with its SHA256SUMS line and the
+      README's counts (5,467), as the author's comment on #732 (issuecomment-6355486108)
+      says. It changes nothing at or below 1024, so the packet stays at 17cc220, whose
+      indexes have the SHA-256 the issue states. 3426 is among the rows above 1024 that wait
+      on the owner (think-f2io). Nothing else to import.
+  # The intake pass of 2026-10-23, lane c-lean-1023 (think-7l2j): the repository the
+  # chelokot-small-n-lean-2026-09-05 packet's acquisition record now makes watched.
+  - url: https://github.com/chelokot/square-packing-archive
+    read_through: e1e9ef5de4cf419f62cd7971f7a8faaffaa7771e
+    read_on: '2026-10-23'
+    bead: think-fddm
+    note: >-
+      The 34 commits of 4 to 7 October 2026 past 753079eb, the pin of the
+      chelokot-small-n-lean-2026-09-05 and chelokot-nagamochi-counterexample-2026-09-05
+      packets, through e1e9ef5, the head (21 commits and 13 merges of pull requests up to
+      #33). They add a Bend development under bend/ (a bend-math submodule and 20 files) with
+      its generators under scripts/generate-bend-*.py, bend_proof.py and bend-certificates.json, and
+      docs/bend-formalization.md: proofs of s(1) to s(9) in Bend, s(5) = 2 + sqrt 2 / 2 among
+      them (9309180, 4a98d63), s(6) >= 3 (defcf46) and the grid and area bounds. 878596b moves
+      s(1) to s(4) and s(6) to s(9) from Lean to Bend, deleting Records/Basic.lean,
+      GridBounds.lean, Square6Exact.lean and the six StromquistSix*.lean modules and the
+      s4_eq_two theorem; Records/Square5.lean and NearSquare.lean keep their blobs, so
+      s2_eq_two, s3_eq_two and s5_eq_goebel stay in Lean. The rest changes the web app,
+      the domain package, the archive manifest, CI and two formalization notes. Routes in a
+      second proof checker to values the record holds, which think-fddm holds until its
+      triage imports or declines them. Nothing else to import.
+  # The intake pass of 2026-10-23, lane c-records-a-1024 (think-t5hc): a repository the
+  # site's other-projects list makes watched (8c26340d9), read at its archived head.
+  - url: https://github.com/wand125/square-packing-tools
+    read_through: 24ee7fc9ac1bca45470d29610d33d41d279115a2
+    read_on: '2026-10-24'
+    note: >-
+      The eight commits of 29 September to 7 October 2026 past 0d33ab6, the
+      wand125-tools-2026-09-29 packet's pin, through 24ee7fc, the head. 6f5b151, 98436ed,
+      1b51883 and 3eb08e6 are the four that packet's update-3eb08e6 archive retains. d32a0c9
+      changes two CI action versions. 5fba675 adds fine_net_verifier (sqverify_fast with a
+      declared angle net, with its patch, soundness and independence notes) and
+      fine_net_witnesses, and 18561cd adds n17_bb_verifier, the exact verifier of the n = 17
+      branch-and-bound certificates, n = 17 tooling under think-x4v4's hold. 24ee7fc adds
+      MOVED.json, which maps every path at 18561cd to wand125/square-packing, and a README
+      notice that the repository is archived. The three tool trees equal tools/fine_net_verifier,
+      tools/fine_net_witnesses and tools/n17_bb_verifier at 61e37d5, the wand125/square-packing
+      commit the wand125-fine-net-lower-bounds-2026-10-08 packet pins (whose manifest names
+      5fba675's fine_net_verifier as an unacquired alternative source), and at that
+      repository's head e48de24, tree for tree. No certificate or claim changes. Nothing to
+      import.
+  # The f1ceee4 import (think-e3im, c-import-732c-1024): the head past the 7b6366f read.
+  - url: https://github.com/Mishapolk/square-packing-records
+    read_through: 7e82c6408937c9a6fe2e11054ed716bba67922f0
+    read_on: '2026-10-24'
+    note: >-
+      Four commits of 23 October past the 7b6366f read, as the repository's activity log dates
+      their pushes. f1ceee4 (committed 20:34:13Z, pushed 20:34:22Z), which the author's comment
+      on #732 of 20:35:12Z reports, rewrites 138 certificates at 328 to 989 with
+      certified_bounds.json and upper_bounds.json and adds .gitignore: the
+      mishapolk-issue732-f1ceee4-2026-10-23 packet pins it and retains the 138, which the walk
+      of 24 October (campaign/issue-intake/upper-bounds-issue732-f1ceee4-20261024) records as
+      rows. 34e59f3 and c0bf150, pushed together at 21:28:42Z, and 7e82c64, pushed at
+      21:42:38Z, change only counts in the corpus, which the packet's
+      receipts/later-commits.json reads: 34e59f3 restates T-229's sides at 105 and 204 in the
+      two indexes, c0bf150 rewrites or adds 51 certificates at 17 to 301 (and edits
+      check_packing.py), and 7e82c64 rewrites 303. The walk takes each as a report from its
+      push and records none: 105 ties T-229, 204 is above T-231, each of the 51 is above the
+      case's reported lane (31), a register entry pending adoption (14), PR #574's row (5) or
+      T-126 (1), and 303 is above #755's, reported at 11:12:48Z. Nothing else to import.
+  # The intake pass of 2026-10-24, records lane c-couzo-answers-1024b (think-mdfr): the two
+  # heads the sweep listed past their reads, from the read-only triage of think-6r5p and
+  # think-cncq.
+  - url: https://github.com/evand/square-packing
+    read_through: 659ee62e4a9d39542a1146e8b011cc3ab6407ede
+    read_on: '2026-10-24'
+    note: >-
+      The 15 commits past the 7982d7a read, c1572fc to 659ee62, pushed on 24 October at
+      03:58:45Z, 04:53:53Z and 05:02:45Z. 8a8879a (pushed 04:53:53Z) adds
+      search/packer/candidates/ certificates for three public Kaggle packings, which the
+      source did not post because #763 already held the counts: s268_lightning.cert,
+      s(268) <= 8437180857934672912242411148233/(5*10^29), the exact descent of Vladislav
+      Lavrentev's packing, 4.48e-12 below #763's side and another placement of its
+      arrangement;
+      s304_pub.cert, s(304) <= 1792689890035674158972360842897/10^29, a public packing
+      whose finder the source does not know, 3.04e-9 below the same packing's certificate
+      at franciscouzo@fa6237e; and s303_cdeotte.cert, Chris Deotte's packing at
+      17.907238274539, above #763's 303, so not recorded. The 268 and 304 certificates
+      are later reports the record takes: the evand-kaggle-descents-2026-10-24 packet
+      pins 8a8879a, retaining all three, and T-242 registers 268 and 304 (think-l49q). c1572fc, d47d17a, f3ea419, d28be37 and 6bc50ea prove in Lean
+      (strip_odd_iff, standard axioms) that for odd n >= 3 and 1.87 <= H < 2, n unit
+      squares fit in an L x H strip iff L >= n or L >= (n - 2)(2 sqrt 2 - H) + 4 - H, and
+      8b2f214 adds notes on that theorem (README.md, TODO.md and
+      search/rectfront/RECTFRONT.md); strips are rectangles, outside this record, and bound
+      no s(n). c185697 adds the
+      source's register-check and Kaggle import tools and its "Beyond the register" posting
+      policy; f5fbf7b, 9a8d502, a9cdd63, 5e862ac, fd90f09, 2aae1b6 and 659ee62 are packer
+      framework, TODO, CLAUDE.md and submission checklist edits. Nothing else to import.
+  - url: https://github.com/franciscouzo/square-packing
+    read_through: 1c1715399709bc955e9b402947ab8b52bbacdfc3
+    read_on: '2026-10-24'
+    bead: think-gn29
+    note: >-
+      The six commits past the 6b7391d read. efef7d1, fa6237e and 964ee2b, pushed together
+      at 2026-10-23T23:38:42Z, are #763's, whose import (think-ptkk) pins 964ee2b. fa6237e
+      also first publishes certificates/best/n304.cert, which #763 does not claim: the
+      couzo-n304-2026-10-23 packet pins it against the issue-763 packet's copy, and T-241
+      registers it, dated by that push (think-l49q).
+      43f666c, 73eac5b and 1c17153 were pushed together at 2026-10-24T06:10:44Z. 43f666c
+      lowers certified_bounds.json at 957 counts, each below #763's side and every bound
+      this record held: at or below 1024, 108 own-count certificates at 330 to 997, a
+      deletion at 690 and 17 L-border recipes; above 1024, 831 L-border recipes on 14 of
+      those certificates. Two of the 108, at 797 and 847, are below #763's side by only
+      8.43e-13 and 2.49e-14 and round up to the same 12-place print, so under the print
+      rule of Several Reports at One Count they restate #763 and are not rows: 106
+      certificate rows to record. No issue or comment claims them, so they are the
+      watched repository's publication, imported by think-gn29: the couzo-43f666c-2026-10-24
+      packet pins 1c17153, and the ledger of 24 October for 43f666c
+      (campaign/issue-intake/upper-bounds-couzo-43f666c-20261024), walked after #763's claims
+      with no row on main and the push of 23:38:42Z, records 106 certificates and 16 recipes
+      as rows of the couzo-43f666c-2026-10-24 source. 367, an L-border of 330, is above
+      23aff0c's deletion from Friedman's construction at 368, which the walks hold
+      (think-zkxy), and 690 has no row by the owner's D6 answer (think-kzme). The 831 above
+      1024 wait on the slice above 1024 (think-llit).
+      43f666c also adds the Kaggle per-puzzle leaderboard of 24 October to its public
+      comparison, after which its README cedes 303 to pjmathematician's side-only entry,
+      3.47e-11 above #763's side, and holds 340, 679, 732, 787, 844 and 903. It and
+      73eac5b replace 227 and 260 by T-225's certificates, credited "Evan Daniel; start:
+      Francisco Couzo", and restore the construction credits of Couzo's assemblies at 1061,
+      1413 and 1489; the three commits state the kind of every external gzip hash; and
+      73eac5b and 1c17153 change no bound. Couzo's comments of 24 October on #678 and #715
+      report these corrections, which the records change of think-mdfr reads. Nothing else
+      to import besides fa6237e's 304, imported as T-241.
+  # The import of #797 and of Evan Daniel's c*(k) bound (think-4tj5, think-f8py,
+  # c-import-797-1024, 25 October): the head past the 9ffba0f read.
+  - url: https://github.com/TheSnakeFang/squarepack-certs
+    read_through: db1ed6220731fce432fa3b1ef3b994b5ab6c3663
+    read_on: '2026-10-24'
+    note: >-
+      The three commits of 24 October past 9ffba0f, the head, each pushed on its own:
+      b1b3f6b (18:48:24Z) adds theorem-a/, Theorem A, c*(k) < 4 sqrt(2k) + 1 for every
+      k >= 6 (#797), with lband.py, windowed_check.py, 36 certificates (k = 6 to 40 and
+      101), LARGE.sha256 and regenerate.sh for k = 300 and 600, and the note v0.1 as PDF
+      and TeX, and adds a VERIFICATION.md addendum, ATTRIBUTION, CHANGELOG, README and
+      MANIFEST lines; no file outside theorem-a/ changes otherwise, and no earlier
+      certificate. 31bdc2d (18:59:08Z) puts the Zenodo DOI 10.5281/zenodo.23624412 and the
+      pin b1b3f6b into the note's front matter and the READMEs; the PDF and TeX are the
+      Zenodo v0.1 files byte for byte. db1ed62 (19:12:52Z) makes the note v0.2, Zenodo
+      10.5281/zenodo.23624565, byte-identical: it credits Evan Daniel's earlier
+      c*(k) <= 4 ceil(sqrt(2k - 7)) - 1 (evand/square-packing aa12b98, 18 October), adds
+      the comparison with it and drops v0.1's claim to be the smallest explicit bound for
+      42 <= k < 1.6*10^7; ATTRIBUTION, CHANGELOG and both READMEs say the same. Theorems,
+      lemmas, proofs, code and certificates are unchanged from b1b3f6b. Since #797's import
+      the fang-theorem-a-2026-10-24 packet pins db1ed62, retains theorem-a/ and the four
+      root text files and both Zenodo records, and the asymptotic register records Theorem A
+      as a reported row after Daniel's, so this read holds nothing back.

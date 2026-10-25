@@ -119,6 +119,7 @@ name: Certificate page
       - packing/devtools/templates/paper-type.css
       - packing/devtools/templates/site-math.css
       - packing/devtools/templates/site.css
+      - packing/devtools/templates/github-links.css
       - packing/devtools/templates/site-result.css
       - packing/devtools/templates/site-contributor.css
       - packing/devtools/templates/overview-article.md
@@ -127,13 +128,23 @@ name: Certificate page
       - packing/devtools/templates/news-article.md
       - packing/devtools/templates/report-results.md
       - packing/devtools/templates/all-results-article.md
+      - packing/devtools/templates/verification-article.md
+      - packing/devtools/templates/recent-results-article.md
       - packing/devtools/templates/visualize-article.md
       - packing/devtools/templates/papers-article.md
+      - packing/devtools/templates/resources-article.md
+      - packing/devtools/templates/tutorials-article.md
+      - packing/devtools/templates/posters-article.md
+      - packing/devtools/templates/documentation-article.md
+      - packing/devtools/templates/report-article.md
       - packing/devtools/templates/site-forwarder.html
       - packing/devtools/render_overview.py
       - packing/devtools/render_contributors.py
       - packing/devtools/profile_links.py
       - packing/devtools/site_icons.py
+      - packing/devtools/site_github_links.py
+      - packing/devtools/site_popovers.py
+      - packing/devtools/site_navigation.py
       - packing/devtools/site_resources.py
       - packing/devtools/site_tallies.py
       - packing/devtools/profile_records.py
@@ -147,6 +158,8 @@ name: Certificate page
       - packing/devtools/build_known_best_atlas.py
       - packing/devtools/atlas_print_font.py
       - packing/devtools/default_drawings.py
+      - packing/devtools/flip_regularization.py
+      - packing/atlas/known-best/flip-regularization.json
       - packing/devtools/improvement_rule.py
       - packing/devtools/pictured_source.py
       - packing/devtools/evand_exact_certificates.py
@@ -252,6 +265,7 @@ name: Certificate page
       - packing/devtools/templates/n11-optimality-review-shell.html
       - packing/devtools/templates/n11-optimality-review.css
       - packing/atlas/rendering/trump11-overview.svg
+      - packing/atlas/rendering/kingbird29-overview.svg
       - packing/cases/trump11/**
       - packing/resources/web/n11-optimality-2026-09-29/**
       - packing/resources/papers/kingbird-square-11-provenance.svg

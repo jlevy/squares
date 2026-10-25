@@ -202,21 +202,68 @@ The advisory `Deferred checkpoint` workflow runs those steps.
 checks. The deferred workflow does not pass `--deep`; its filename and label remain
 `deep-gate`.
 
-Run focused/edit checks during ordinary work and the change-reachable push check before
-pushing.
-Obtain a full checkpoint when the PR is ready for final review and repeat checks
-whose evidence later changes invalidate.
+Run focused/edit checks during ordinary work.
+Before a push to a draft pull request, run the edit or records tier and the tests the
+change directly affects, then let hosted CI gate the draft
+([below](#hosted-ci-gates-a-draft-pull-request)). Use the hosted checkpoint when the PR
+is ready for final review and repeat checks whose evidence later changes invalidate.
 Record the checked source and base, selected steps, and failures or skips.
 Expensive final evidence must not delay every editing cycle, but a green fast surface
 alone is not full pre-merge evidence.
+
+### Hosted CI gates a draft pull request
+
+**For a draft pull request, hosted CI is the full test gate.** The owner decided this on
+22 October 2026, in conversation with the coordinator, in place of the rule that the
+local `--push` tier runs before any push:
+
+- **Before a push to a draft:** run `--edit` for a code change or `--records` for a
+  record change, plus the tests the change directly affects.
+  Those take minutes. Then push.
+- **Hosted CI is the gate.** A draft may be red.
+  Marking a pull request ready for review, and merging it, both need green hosted CI on
+  the head: `packing-required` and `pages-required`.
+- **Full local validation is selected work**, for a research checkpoint, reproduction,
+  or evidence absent from hosted CI. Do not repeat the hosted gate locally merely
+  because a PR is ready to merge or a session is ending.
+  Record the missing evidence that justifies a local full run.
+- **`--push` stays available** as a local option, and is recommended before a push
+  straight to a non-draft branch, where no draft stage absorbs a red run.
+
+During hosted validation, review changes and monitor the PR’s base and mergeability as
+well as its check statuses.
+Resolve conflicts as soon as they appear.
+A green check on an older head is not evidence for the current branch.
+After merge, distinguish artifact publication from the live deployment audit; report a
+failed audit even if pages load.
+The
+[release latency audit](docs/project/reviews/review-2026-10-22-ci-release-latency.md)
+records measured setup, rendering, deployment, and verification costs.
+
+The reason is what the two routes cost on the same suites.
+On the shared four-core host the `--push` tier took 30 to 65 minutes and often reached
+its 30-minute step ceiling, so a push waited on a local run that could end in a timeout
+rather than a verdict.
+Hosted CI runs those suites as four parallel shards beside the other six jobs, and took
+a median 12.5 minutes over the 32 runs from 21 October to the decision.
+Running the local tier first paid the longer cost and then the shorter one, the
+serialisation
+[OR-3](operating-rules.md#or-3-never-wait-on-a-gate-with-nothing-else-in-flight-run-ci-beside-the-research)
+already warns against, at the iteration-rate price
+[OR-14](operating-rules.md#or-14-a-development-cycle-is-never-artificially-slow) counts.
+
+The decision moves where a draft’s tests run, not what a merge needs.
+The pull-request surface is unchanged, and the full checkpoint before final review still
+stands, as [the deep gate](#the-deep-gate-the-deferred-surface-before-the-merge) and
+`OR-13` say.
 
 ### The tiers
 
 | Tier | Who runs it, and when | Steps | Ceiling | Cost when last measured |
 | --- | --- | ---: | ---: | --- |
-| `--records` | contributor, before touching a registry; also every pull request | 51 of 109 | 300 s | 11.0 s |
-| `--edit` | contributor, in the edit loop | 67 of 109 | 240 s | 59.4 s |
-| `--push` | contributor, once before a push — affected edit-tier prerequisites and reachable quick tests (`--since`); add `--include-reachable-slow` for selected slow tests | varies with the diff | 1800 s | new quick default not yet measured; large implicit selections run after prerequisites, subject to the load lock, see below |
+| `--records` | contributor, before touching a registry, and before a draft push of a record change; also every pull request | 51 of 109 | 300 s | 11.0 s |
+| `--edit` | contributor, in the edit loop, and before a draft push of a code change | 67 of 109 | 240 s | 59.4 s |
+| `--push` | contributor, optional: not required before a draft push, which hosted CI gates; recommended before a push straight to a non-draft branch — affected edit-tier prerequisites and reachable quick tests (`--since`), and the added-blob guard against that base; add `--include-reachable-slow` for selected slow tests | varies with the diff | 1800 s | 30 to 65 minutes on the shared four-core host by 2026-10-22, often at its ceiling ([above](#hosted-ci-gates-a-draft-pull-request)); large implicit selections run after prerequisites, subject to the load lock, see below |
 | `--fast` | contributor, at a block boundary; the union of the ten tiers below | 96 of 109 | 600 s | record cleared 2026-09-07 when the corpus widened; 229.1 s locally, only the ceiling applies |
 | `--checks` | **CI, on every pull request**, in the `validate` job | 70 of 109 | 150 s | 103.70 s, the geometric mean of thirty-three hosted readings on 2026-09-30 and 10-01, with the band 59.4–137.1 s (2.31x) the runner pool spanned on unchanged steps; the 114.34 s two-attempt record stays in the register as history |
 | `--frontend` | **CI, on every pull request**, in the `frontend` job, concurrently | 4 of 109 | 165 s | 104.74 s, the geometric mean of 32 hosted readings from 27 to 30 September (70.97–134.86 s, 1.90x); 85.25 s from two readings stays in the register as history |
@@ -228,6 +275,7 @@ alone is not full pre-merge evidence.
 | `--suite-d` | **CI, on every pull request**, in the `suite-d` job, concurrently | 1 of 109 | 335 s | 183.08 s, the geometric mean of 167 hosted readings on 2026-10-09, 90.60–288.47 s (3.18x), a point record; the 104.95 s first four-shard reading of 2026-10-01 stays as history |
 | `--sweeps` | **CI, on every pull request**, in the `sweeps` job, concurrently | 5 of 109 | 200 s | 101.51 s, the geometric mean of six 4-of-80 hosted readings (66.36–130.77 s, spread 1.97x); the 119.72 s seven-reading mean and PR 180’s 138.84 s predecessor remain in the register as history |
 | `--measure-verifier` | **CI, on every pull request**, in the `measure-verifier` job, concurrently | 3 of 109 | 90 s | 72.83 s, the geometric mean of ten hosted readings on 2026-10-11, 59.12–90.06 s (1.52x), the first cohort of the three-step tier (`think-th8p`); the native n17 branch-and-bound step joined it after a cold 52.83 s inside `--checks` |
+| *(workflow step)* | **CI, on every pull request**, in the `validate` job before `--checks`: the added-blob guard with the pull request’s own base and head SHA (`OR-18`); `--push` runs the same guard locally | 1, outside the registry | 30 s, the guard’s one deadline for the whole check, with `timeout-minutes: 1` on the step | locally on 2026-10-22 at load 2, compressing each new blob and packing the range: 3.5 s for #665 (102 MiB of new content), 7.8 s for #580 (196 MiB), 9.6 s for #474 (the largest pack, 45.4 MiB) and 18.0 s for #461 (446 MiB, the largest merge into `main`); the pack is 0.3 to 2 s of it on every CPU, and pinning it to one thread adds at most 1.5 s, on #474 (review K of #406). With a branch’s objects still loose in a working clone, #474 took 17.8 s, so run `git gc` before `--push` on a large branch. `--census 150` replays the merges back to #426 in 214 s. Hosted, 1.35 s and 232,934 bytes for #406 at `9b9f77c` (run 39854000601) |
 | *(no flag)* | Full checkpoint before final review and at block close; main, dispatch, and daily CI | 109 of 109 | 3600 s | integration, serial quick suites and ten deferred workers; new whole-wall measurement pending |
 
 Step counts describe the current 109-step registry, read from the validator’s canonical
@@ -787,8 +835,10 @@ uv run --frozen --all-extras --group dev packing-validate --records
 # Edit loop: everything fast except the broad test suite. Seconds, runs during a gate.
 uv run --frozen --all-extras --group dev packing-validate --edit
 
-# Pre-push floor: affected edit prerequisites plus reachable quick tests
+# Change-reachable push tier: affected edit prerequisites plus reachable quick tests
 # (against origin/main, or --since REF). Broad changes may select every quick test.
+# Optional before a draft push, which hosted CI gates; recommended before a push
+# straight to a non-draft branch.
 uv run --frozen --all-extras --group dev packing-validate --push
 
 # Deliberately include reachable slow tests; exhaustive checks retain their checkpoint.
@@ -875,9 +925,11 @@ Checks run concurrently, but their captured output is replayed in declared order
 workers.
 Strict mode cannot be combined with a partial selection and fails on every skip.
 
-`--push` is the pre-push floor (`BC-086`). It scopes edit-tier prerequisites and
-reachable behavioral tests from one changed-path snapshot, including old and new rename
-paths and deleted files.
+`--push` is the change-reachable push tier, built as the pre-push floor `BC-086` asked
+for. Since 22 October 2026 it is optional before a draft push
+([Hosted CI gates a draft pull request](#hosted-ci-gates-a-draft-pull-request)). It
+scopes edit-tier prerequisites and reachable behavioral tests from one changed-path
+snapshot, including old and new rename paths and deleted files.
 Unclaimed inputs and an empty diff retain the complete prerequisite floor; checks
 without declared inputs always run.
 Scoping is only as sound as each check’s declared inputs (`Step.touches`), so a contract
@@ -901,7 +953,7 @@ contracts seed the same import, text and walker closure.
 A scheduling edit does not mark every module in an unchanged library directory as
 changed. Unreadable or unknown first-party entrypoints select the whole suite.
 
-**Ordinary pushes run reachable quick tests.** File selection remains conservative:
+**`--push` runs reachable quick tests by default.** File selection remains conservative:
 unknown workflows, empty or unresolved changes and suite configuration still select all
 test files. Execution uses the same `QUICK_TESTS` predicate as the PR fast lane, so a
 mixed source or record change does not silently start the slow suite.
@@ -1055,7 +1107,13 @@ The screen, regularized-views and exhaustive shard jobs use `--jobs 1 --inner-jo
 the hosted four-CPU runners.
 The slow lane also has its own job, using `--jobs 1 --inner-jobs 2`: xdist supplies four
 test workers, while tests that create their own pools retain two inner workers.
-Each hosted deferred-check group runs one whole step at a time on its own runner with
+Since PR #745 it also runs the four whole 2,073-direction fine-net census sweeps, 953
+test-seconds on
+[run 40033801674](https://github.com/jlevy/squares/actions/runs/40033801674), which make
+it the deep gate’s longest job and set the gate’s wall.
+Its band in `devtools/gate-budgets.yaml` was raised for them on purpose (`think-znx8`);
+a job of their own or a cheaper exact evaluator is `think-o8to`. Each hosted
+deferred-check group runs one whole step at a time on its own runner with
 `--jobs 1 --inner-jobs 2`, preserving PR #120’s response to the concurrent corpus-pool
 timeout in [run 34181619739](https://github.com/jlevy/squares/actions/runs/34181619739).
 The workflow tests derive selections through the CLI and require complete, disjoint
@@ -1315,9 +1373,10 @@ A squash or a rebase lands the branch as new commits, and leaves the branch’s 
 commits on no branch once it is deleted.
 The record names those commits:
 
-- A release cut sets `PUBLICATION_REVISION` to the commit it runs on, the branch’s head
-  at the cut ([Cutting an edition](#cutting-an-edition)), and the claim documents link
-  to it, so it has to stay reachable from `main`.
+- The claim documents link to `PUBLICATION_REVISION`. Each site cut used to set it to
+  the branch’s head, which only a merge commit keeps reachable from `main`; site
+  editions are retired, and it is now frozen at a commit on `main`
+  ([Cutting an edition](#cutting-an-edition)).
 - Recorded engine and provenance commits, which `check_provenance` resolves, and the
   claim documents’ verifier pins name branch commits.
 - A stacked or dependent branch loses its ancestry: its base’s commits are no longer in
@@ -1344,6 +1403,10 @@ An intake pass adds `intake` and any case label under the `github-workflows` gra
 ([the runbook’s stage 0](packing/campaign/result-import.md#stage-0-sweep)).
 
 ## The Published Site
+
+[Site Deployment](docs/project/guides/site-deployment.md) is the operator guide for
+packaging, GitHub Pages, domain and DNS configuration, HTTPS, deployment verification,
+and recovery.
 
 Every content page is complete in its first HTML response: navigation, headings,
 records, drawings and server-rendered math.
@@ -1761,14 +1824,18 @@ asks it the same questions; a local address is the one kind that is not https an
 still asked. It is how the links between papers are checked before a new paper is live,
 since only a build that holds every paper can answer them; `--local DIR` asks them of a
 built directory too.
-A preview has the first paper’s PDF only if one is put there: that PDF is drawn from
-`packing/site/` by `render_n11_lower_bounds_explainer_pdf`, which a preview never
-writes.
+The preview also invokes `render_n11_lower_bounds_explainer_pdf --site DIR --update` to
+draw the first paper’s PDF into the selected output directory.
 
-**One version, shared by the site and its data** (the owner, 2026-09-22): every site
-page’s footer and the workbench stage print `PUBLICATION_EDITION` from
-`src/sqpack/release.py`, written like `v0.4.1-3b50e2`. The version comes from the first
-entry in `PUBLICATION_HISTORY`, and the six characters after it name the data.
+**One version, shared by the site and its data** (the owner, 2026-09-22), **frozen since
+site editions were retired** (the owner, 2026-10-22: “We don’t have any real value in
+committing a synthetic version for the site”; `think-wdqo`): every site page’s footer
+and the workbench stage print `PUBLICATION_EDITION` from `src/sqpack/release.py`,
+written like `v0.9.2-3b50e2`. The version is the last site edition, the first entry in
+the frozen `PUBLICATION_HISTORY`, and the six characters after it name the data.
+No edition follows it: the site deploys continuously from `main`, and until its footer
+names the deployed commit it prints this frozen version beside the current data
+revision, which is still true of the data.
 The atlas posters use the independent `INFOGRAPHIC_VERSION` with the data revision they
 were drawn from. Both poster families share that edition; the films retain the stamp of
 their capture. See
@@ -1779,12 +1846,14 @@ atlas data), so artifacts built from the same data carry the same version whatev
 commit built them. Nothing reads git for it at build time, which is why a shallow deploy
 clone stamps correctly.
 The claim documents still link to the pinned `PUBLICATION_REVISION` (`edition_file()`),
-which moves only when an edition is cut.
+which moved only when a site edition was cut and is frozen with the history.
 
-**`PUBLICATION_HISTORY` is the site’s edition record.** It lists every edition ever
-published, newest first, and an edition never comes off it — a new one goes on the
-front. It used to keep “the two retained editions”, and adding v0.4.1 under that rule
-dropped v0.3.0, the proof of s(11) ≥ 381/100 the publication began with.
+**`PUBLICATION_HISTORY` is the site’s edition record, kept as history.** It lists every
+site edition that was published, newest first, and is frozen: an edition never comes off
+it, and since 22 October 2026 none goes on the front
+([Cutting an edition](#cutting-an-edition)). It used to keep “the two retained
+editions”, and adding v0.4.1 under that rule dropped v0.3.0, the proof of s(11) ≥
+381/100 the publication began with.
 Each date is when that edition was first *live on the public page*, read from the
 repository’s GitHub Pages deployments, not when its version label first appeared in Git.
 The two differ in both directions — v0.3.0 went live on September 5 and was named on
@@ -1837,17 +1906,17 @@ and the site-only ones out.
 Each entry’s sentence says what changed in the paper, and the explainer’s Version
 History is written from the list.
 
-**A release is cut only to host generated assets.** The site’s version is complete when
-the merge deploys and `check_published_site` passes; no tag and no GitHub release follow
-a version bump (the owner, 2026-10-01: releases “are only important for the assets that
-are generated, like the PDFs or the videos”). A release exists to give an asset a
-download address, which only the films need: they are linked through
+**A release is cut only to host generated assets.** A paper’s or the posters’ version is
+complete when the merge deploys and `check_published_site` passes; no tag and no GitHub
+release follow a version bump (the owner, 2026-10-01: releases “are only important for
+the assets that are generated, like the PDFs or the videos”). A release exists to give
+an asset a download address, which only the films need: they are linked through
 `render_overview.FILM_RELEASE` (currently `v0.4.2`) and stay on the release that carries
 them until they are cut again.
 The posters are served from the site itself, and the papers’ PDFs are built by Pages
 from the merge. A release tag carries the version alone, without the data revision:
-`v0.4.2` is `PUBLICATION_VERSION`; the stamp in a frame’s corner is
-`PUBLICATION_EDITION`, which appends the data revision.
+`v0.4.2` was `PUBLICATION_VERSION` when the films were cut; the stamp in a frame’s
+corner is `PUBLICATION_EDITION`, which appends the data revision.
 A tag names a release; a stamp names the evidence one artifact was drawn from, and a
 release may carry assets drawn from different revisions.
 
@@ -1934,6 +2003,18 @@ its source and whether it is what the rule gives:
 
 ### Cutting an edition
 
+**Site editions are retired** as of 22 October 2026 (the owner: “Going through the
+needless ceremony of assigning a version number to every deployment of the site is going
+to slow down all work, and that’s not necessary”; `think-wdqo`). The site deploys
+continuously from `main` and takes no cut, no release-impact decision and no no-change
+record. `PUBLICATION_HISTORY` stays in `release.py` as the record of the site editions
+that were published, frozen together with `PUBLICATION_REVISION`, the commit the claim
+documents link to: `check_release_impact` refuses an edit to either, and `cut_release
+--component site` refuses to cut, both with a message naming `think-wdqo`. A pull
+request that still carries a site cut drops it.
+The papers and the art keep their versions: the infographic posters and each paper are
+cut as below.
+
 Bumping a component’s version is editorial.
 Select patch for an ordinary correction or refresh, and minor for substantial new
 capability or coverage.
@@ -1944,38 +2025,36 @@ From `packing/`, on a clean tree whose pin is current:
 
 ```bash
 uv run --frozen --all-extras --group dev python -m devtools.cut_release v0.7.0 \
-    --component site --impact minor \
+    --component infographics --impact minor \
     --scope "One sentence on what the edition adds."
 ```
 
 It does these, and `--dry-run` lists them without doing any:
 
-1. Adds the edition to the front of `PUBLICATION_HISTORY`, dated by `--date` (today in
-   UTC by default; correct it if the deployment lands on another day), and sets
-   `PUBLICATION_REVISION`, the commit the claim documents link to, to `HEAD`.
+1. Adds the edition to the front of the component’s own history (`INFOGRAPHIC_HISTORY`
+   or the paper’s), dated by `--date` (today in UTC by default; correct it if the
+   deployment lands on another day).
    `DATA_REVISION` follows the data, not the edition.
 2. Records the component’s patch or minor release-impact decision.
-3. Regenerates the claim documents (`render_verifiable_claim`) for a site cut.
+3. Regenerates the component’s outputs: an `infographics` cut redraws both posters and
+   their complete exports, and a paper cut that paper’s HTML, Markdown and PDF.
 4. Runs the relevant release and artifact checks.
-   An `infographics` cut redraws both posters and their complete exports; a site cut
-   keeps those editions.
 
 Each cut runs the shared release/date contracts and its component’s quick tests, using
 the same quick predicate as ordinary validation.
-A site cut checks claim documents; it does not start the whole-atlas composite or
-exhaustive proof sweeps.
+A paper cut does not start the whole-atlas composite or exhaustive proof sweeps.
 Add `--include-deep-tests` to run the selected component’s slow and exhaustive tests
 deliberately. Generation stays component-owned: an infographic cut still redraws and
 checks both posters.
 Neither test selection replaces the full matching-source/base checkpoint required for
 final review.
 
-It commits nothing and publishes nothing, and it moves no paper: a site bump adds no
-entry to any paper’s history and changes no paper’s version line.
+It commits nothing and publishes nothing, and it moves no other component: a cut adds an
+entry to its own component’s history alone and changes no other version line.
 Commit the release module and the generated outputs selected by the cut together, with
-README’s edition sentence updated; wait for the “Certificate page” workflow and run
-`check_published_site`, which completes the version; correct the date and record the
-deployment above the history.
+README’s edition sentence updated where it names the component; wait for the
+“Certificate page” workflow and run `check_published_site`, which completes the version;
+correct the date and record the deployment above the history.
 No tag and no GitHub release: a release is cut only when there are generated assets that
 need a download address, the films, and they stay on `render_overview.FILM_RELEASE`
 until they are cut again
@@ -2005,8 +2084,8 @@ remains immutable.
 ### Bumping a paper’s version
 
 A paper’s version moves when the paper changes in a way its author calls a new version,
-and only then; a site bump, a re-pin, a redraw of the posters and a change to the page’s
-chrome are not versions of the paper.
+and only then; a site change, a re-pin, a redraw of the posters and a change to the
+page’s chrome are not versions of the paper.
 Prepare the article revision, then cut the paper’s own patch or minor successor from a
 clean tree. For example, a patch to Part I’s current edition:
 
@@ -2075,24 +2154,35 @@ A moving download URL must be labeled as the current artifact, rather than an ar
 edition.
 
 Release references name entries in the component’s retained history.
-The site, shared infographic family and each paper have distinct histories; changelog
-bookkeeping alone does not cut a release.
-Review the release-impact decision for every externally changed component: an ordinary
-correction or refresh advances patch, while a substantial new capability or coverage
-expansion advances minor and resets patch.
+The shared infographic family and each paper have distinct histories; the site’s frozen
+history still validates the site editions that earlier entries name, and a new entry
+names none, since site editions are retired ([Cutting an edition](#cutting-an-edition)).
+Changelog bookkeeping alone does not cut a release.
+Review the release-impact decision for every externally changed paper and for the
+infographic family: an ordinary correction or refresh advances patch, while a
+substantial new capability or coverage expansion advances minor and resets patch.
 Both infographic families and every advertised export advance together.
 Paper content and typesetting revisions advance the affected paper’s edition; a site
-navigation or footer update keeps the paper’s content edition.
+navigation or footer update keeps the paper’s content edition and needs no release.
 
 The ordinary documentation gate runs `devtools.check_release_impact`. It compares
 producer-owned inputs against the comparison merge base and requires a disposition for
 each candidate component: a valid owning successor, or a fresh `ReleaseNoPublicChange`
 review in `release.py` naming the exact changed paths, outputs examined and reason.
+The site is never a candidate: it deploys continuously from `main`, so a change only the
+site reads needs no disposition.
+The gate refuses any edit to the frozen `PUBLICATION_HISTORY` and
+`PUBLICATION_REVISION`, and a fresh site release-impact decision, with a message naming
+`think-wdqo`; the remedy is to drop the site cut.
+A fresh no-change record names no site and none of the site’s outputs.
+One written under the old rules that names the site beside papers still covers those
+papers: the gate ignores its site part and prints a warning, and holds the rest to every
+rule above. A record that names only the site is refused.
 A prior no-change review cannot excuse another batch.
 Tests and checker changes do not independently select a public component; broad builder
 inputs can select one even when the changed code does not run in that output.
-Changelog-only maintenance can use the explicit bookkeeping exception; its reason should
-acknowledge the updated changelog rather than claim identical output.
+Changelog-only maintenance needs no disposition, since the changelog is read by the site
+alone.
 
 This gate verifies ownership, coverage and successor arithmetic.
 Reviewers decide whether the public output changed and whether patch or minor is
@@ -2110,8 +2200,10 @@ continues to compare against `origin/main`. The validator uses `HEAD^1` on a mai
 checkout whose head already equals `origin/main`, so it checks the preceding delivery
 rather than comparing a commit with itself.
 
-Validate with the change-reachable push tier, review both reader views, and verify the
-published News page with the normal deployment audit after merging.
+Validate as
+[Hosted CI gates a draft pull request](#hosted-ci-gates-a-draft-pull-request) says,
+review both reader views, and verify the published News page with the normal deployment
+audit after merging.
 The
 [initial backfill review](docs/project/reviews/review-2026-10-13-site-changelog-backfill.md)
 records the disposition of the first 36 PRs.
@@ -2448,10 +2540,54 @@ The step `integrity ceremony never grows` runs it in the edit tier.
 is the rule; this is how to follow it.
 
 - **Size.** Before committing retained data, check what it adds:
-  `git diff --cached --stat`, or `git rev-list --objects origin/main..HEAD` piped to
-  `git cat-file --batch-check` for the whole branch.
+  `git diff --cached --stat` for the index, or the guard below for the whole branch,
+  which sizes each new blob as Git stores it.
   A binary or dump over a few megabytes, or data totalling tens of megabytes, is hosted
   outside the repository, for example as a release asset on `jlevy/squares`.
+- **The guard.** `devtools.check_added_blobs` enforces that rule.
+  Every pull request runs it with its own base and head SHA, a stacked layer’s lower
+  branch included, and `packing-validate --push` runs it against the `--since` base.
+  To check staged data before committing, run `git fetch origin`, then from `packing/`
+  `uv run --frozen --all-extras --group dev python -m devtools.check_added_blobs --base origin/main --staged`.
+  For a stacked pull request, pass `origin/<lower branch>`; a stale local base charges
+  the branch for everything the base gained since.
+  The two ceilings, 5 MiB per blob and 48 MiB in total, are data in
+  [`added-blobs.yaml`](packing/devtools/added-blobs.yaml), sized by the tool’s own
+  `--census` replay of the merges into `main`; re-measure with it before changing one.
+  Both are in `OR-18`’s units.
+  The per-blob ceiling holds a blob as Git stores it: the guard streams each new blob’s
+  content through zlib once (`devtools.git_storage`), so a text file is charged a
+  fraction of its checkout bytes and a compressed dump about its own size.
+  Every blob version the branch adds is checked, so committing then deleting a dump
+  still fails. The total holds what the branch adds to the repository: the thin pack of
+  its new objects against the base (`git pack-objects --revs --thin`), commits and trees
+  included, which is what a fetch downloads and the merge commit keeps.
+  A version the head deleted or reverted is in it, but a version that differs a little
+  from another packs as a small delta, so rewriting a register many times costs about
+  its edits, and identical copies pack once.
+  A blob in the base’s tree, such as a copy of a base file, is held to the per-blob
+  ceiling but adds nothing to the pack, and so does a mode-only change.
+  The delta search runs on one thread, so a clone gives the same figure on every run.
+  Git reuses the deltas a clone already holds, so clones packed differently give
+  different figures, and CI’s is the reference: the pull request’s check packs in a
+  fresh full clone of GitHub’s packs.
+  On the ranges measured, CI read 12% (#578: about 2.7 MiB against 2.39) to 37% (this
+  PR’s own range) more than a working clone on text-heavy ranges, and 0 to 2.4% more on
+  bulk-dominated ones.
+  So a `--push` of a bulk-dominated range that passes within a few percent of the total
+  can still be refused by CI, and a text-heavy range needs a wider margin; the PASS line
+  prints it. A working clone also packs a branch’s loose objects afresh, so `--push` on a
+  large branch is faster after `git gc`. A path already over 5 MiB at the base is
+  grandfathered from the per-blob ceiling until `think-xeav` moves it to hosted data; a
+  new path, a copy or an edited rename is not.
+  A Git LFS pointer is refused, since the repository does not use LFS. `--help` has the
+  rest. `GUARD_REFUSED` is never a pass, and its message names the remedy: fetch a
+  missing base or a shallow clone’s history; after the base is force-pushed, recheck
+  once the pull request re-synchronizes; check a shorter range when one is too long or
+  too large for the gate, which reads at most 512 MiB of new blob content and gives the
+  whole check one 30-second deadline.
+  Git IDs identify repository storage being sized here, not scientific input identity or
+  research verdicts.
 - **Manifest.** The repository keeps a small committed manifest with the name, size,
   location, and SHA-256 of each hosted object.
   A tool that needs the bytes downloads them on request and checks them against the

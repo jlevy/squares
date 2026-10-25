@@ -18,6 +18,8 @@ The certificate gives 204 unit squares, each a rational centre and a rational
 $t = \tan(\theta/2)$, in Evan Daniel’s certificate format, which the header names.
 Its per-count JSON, `certificates/n204.json`, names its digest and exact side and credits
 the seed to Mykhailo Polkovskyi (Mishapolk), search job 105412 (`hop`).
+The author’s answer of 23 October names the whole chain behind that credit
+([The Author’s Answers of 23 October](#the-authors-answers-of-23-october)).
 
 ## Retained Here
 
@@ -29,7 +31,11 @@ every file is bound to its Git blob at the pin.
 Retained: every certificate the issue links, `source/certificates/nN.cert` at its 73
 counts, each with its per-count JSON `nN.json`, 146 files, 7,453,248 bytes (2.65 MB as
 Git’s zlib stores them): the 204 pair at 01:24Z on 22 October for T-226, and the 72
-beyond the corpus from the same pin at 04:41Z.
+beyond the corpus from the same pin at 04:41Z. On 22 October at 19:10Z the 21
+certificates the pin publishes beyond the corpus and the issue does not claim were added
+from the same pin, 8 under `certificates/best/` and 13 at the root with their per-count
+JSON ([The Pin’s Unclaimed Certificates](#the-pins-unclaimed-certificates)): 180 files,
+13,835,156 bytes in all.
 The repository states no licence for its data or prose, so the certificates and their
 JSON are retained as factual data under the owner decision of 9 October 2026 recorded in
 [known-best-packings/README.md](../known-best-packings/README.md).
@@ -53,8 +59,10 @@ The positive passes both routes, and both routes refuse both controls. In the po
 [receipts/exact-certification.json.xz](receipts/exact-certification.json.xz) keeps every
 deciding input and both routes’ complete outputs.
 The two routes share certificate parsing, the half-angle conversion, Python’s rational
-arithmetic and the separating-axis method. No source program ran here, and the entry
-awaits a stage 4 review (think-0nse).
+arithmetic and the separating-axis method. No source script ran here. The source’s
+manifest names this repository’s `sqpack/verify.py` as its first checker, and the `sqpack`
+route decides through that file, so the replay shares the producer’s components (RF-1 of
+the [22 October review](../../../../docs/project/reviews/review-2026-10-22-couzo-670-672-675.md)).
 
 ## Against the Record
 
@@ -122,13 +130,97 @@ superseded in turn; the start there, 50 of `couzo-verified-bounds-2026-10-14`’
 of `couzo-certificates-2026-10-14`’s and `evand-fresh-compositions-2026-10-14`’s at 460,
 now names #670 as its successor instead of the #678, #686 or #715 row that had superseded
 it on `main`, so each count is one chain in report order.
+Since 22 October Mykhailo Polkovskyi’s #719 rows
+([`mishapolk-issue719-2026-10-22`](../mishapolk-issue719-2026-10-22/README.md)),
+recorded by the [ledger of 22 October for issue
+719](../../../campaign/issue-intake/upper-bounds-issue719-20261022/README.md), supersede
+three of the eight, at 370, 452 and 536, by 2.88e-12 to 1.27e-11; five remain current.
 [acquisition/beyond-horizon-rows.json](acquisition/beyond-horizon-rows.json) is the record
 the source register reads them from.
+
+## Stage 4 Review
+
+The [review of 22 October 2026](../../../../docs/project/reviews/review-2026-10-22-couzo-670-672-675.md)
+accepted #670’s certificate for finite feasibility, with eight findings, none blocking,
+covering T-226, T-227 and T-228 together.
+It reproduced this packet’s replay and frozen comparison, decided the certificate again on a
+clean-room checker of its own, on an integer route and a `Fraction` route with exact
+clipping area, and ran sharp controls at $10^{-30}$ through both maintained routes and
+that checker: each route accepted exact contact at the far wall, the near wall and the
+least-gap pair, and refused $10^{-30}$ past it, where the certificate keeps exactly 0 at the walls and $5.47 \times 10^{-11}$ between pairs.
+Its programs, receipts and logs are kept with the #672 packet, in
+[`couzo-issue672-2026-10-17/review/review-2026-10-22/`](../couzo-issue672-2026-10-17/review/review-2026-10-22/README.md),
+and `tests/test_upper_bound_reports_couzo_670_672_675.py` runs the kernel’s two sharp
+controls on #672’s 227 certificate (RF-6).
+T-226 rests at `V3`/`C3` on that review, the replay it reproduced and its checker’s run.
+
+## The Pin’s Unclaimed Certificates
+
+Issue #670 claims 72 of the pin’s certificates beyond the corpus. The pin publishes 21 more at 325 to 1024 that the issue does not claim, at 547, 554, 602, 652, 653, 704, 705, 759, 814, 815, 816, 872, 873, 874, 932, 933, 934, 994, 995, 996 and 997: 8 under `certificates/best/` and 13 at the root. A publication in a watched repository is a report from its first commit (the owner, 14 October 2026), so they are rows of their own, as the source `couzo-23aff0c-2026-10-17`, which the [history walk of Couzo’s watched publications](../../../campaign/issue-intake/upper-bounds-couzo-history-20261022/README.md) records in report order (think-tmwt).
+
+[`devtools.beyond_horizon_replay`](../../../devtools/beyond_horizon_replay.py) declares this publication a release with no issue, `franciscouzo/square-packing@23aff0c`, and reads the rows the history walk records from [acquisition/watched-release-23aff0c.json](acquisition/watched-release-23aff0c.json), which `declare-rows` writes from the walk.
+
+Each certificate was first committed at the commit itself ([receipts/23aff0c/first-commits.json](receipts/23aff0c/first-commits.json)).
+
+**All 21 are verified.** The filtered two-route decision of `devtools.couzo_678_replay`, reused unchanged, accepts every packing on both routes (40,608 candidate pairs of 7,113,182, and every corner against every wall), and every side is its header side rounded up at 12 places. **All 126 controls are refused by both routes.** The positive decisions took 138.9 CPU seconds ([receipts/23aff0c/filtered-exact-replay.json](receipts/23aff0c/filtered-exact-replay.json)). 13 touch the box and 12 have touching pairs, which the closed contract allows. Every side is below Göbel’s classical construction at its count ([receipts/23aff0c/goebel-comparison.json](receipts/23aff0c/goebel-comparison.json)).
+
+The [history walk of 22 October](../../../campaign/issue-intake/upper-bounds-couzo-history-20261022/README.md) walks every count from 325 to 1024 in report order from starts frozen at `main` `a97b712b9` and records all 21. **All 21 are superseded on entry**, by Couzo’s #672 (16) and Couzo’s #675 (5). The rows supersede first Couzo’s 4e4c8ce (4); at 17 counts no row stood before them.
+
+[acquisition/beyond-horizon-rows-23aff0c.json](acquisition/beyond-horizon-rows-23aff0c.json) is the record the source register reads them from, as the source `couzo-23aff0c-2026-10-17`.
+
+The pin’s 10 re-certifications below the side they beat by less than 10⁻¹² with the same 12-place print, at 325, 333, 362, 401, 442, 456, 485, 499, 530 and 577, restate those reports by the owner’s answer of 23 October 2026 (think-fwa9), so the walk does not record them. It records the pin’s 61 classical constructions `upper_bounds.json` states with no certificate file of their own and holds each back from a row for its decision. Of these, 46 are Göbel’s squares (27) and Friedman’s off-centre family (19), 41 of them L-border extensions and 368, 543, 626, 752 and 849 bare (D2, think-f2io); 15, 447 among them, delete one or two squares from Friedman’s constructions at 368, 407, 448, 543, 590, 639, 752, 849, 908 and 969 (D6, proposed on think-f2io). Each is below Göbel’s construction at its count, so #613’s answer (think-8krd) leaves them to D2 and D6; whether Friedman’s constructions count as earlier reports as Göbel’s do is think-zkxy.
+
+## The Author’s Answers of 23 October
+
+Francisco Couzo answered the [22 October review](../../../../docs/project/reviews/review-2026-10-22-couzo-670-672-675.md)’s
+two questions on the issue at 2026-10-23T22:22:03Z
+([issuecomment-6375905012](https://github.com/jlevy/squares/issues/670#issuecomment-6375905012)),
+and the answer is retained as a claim in [acquisition/declaration.json](acquisition/declaration.json).
+It says Claude Code assisted with the reply.
+
+- **The seed.** The per-count JSON reduced the chain to its first and last links.
+  In full, the search began at Mykhailo Polkovskyi’s `certificates/square-204.cert` at
+  `Mishapolk/square-packing-records@70a033f` (SHA-256 `f0885fa8…`), T-186’s
+  certificate, which the source published in decimals as `n204.txt` at `4e4c8ce`
+  (`3e7c2456…`). Hop jobs 101216, 103222 and 105412 followed, each from the last one’s
+  output, none of them published, and a quarter turn made the certificate.
+  The answer concludes that the construction lineage is T-186’s: Polkovskyi’s refinement
+  of Daniil Ostashev’s packing, as PingYou Ltd refined it.
+- **The checker call.** The source passes exact rational corners built from (x, y, t)
+  to this repository’s `sqpack/verify.py`, byte-identical to its `verify.py` at
+  `37e6757`, as `verify_packing(..., bucket=True)` with an exact rational sign, in the
+  closed box $[0, S]^2$. Its strict verdict at 204 is false only because squares touch
+  the walls, and `sqpack.verify` counts 32 corner coordinates on the boundary and no
+  touching pairs.
+
+[measure/seed-identity.py](measure/seed-identity.py) holds both to this record’s files in
+about a second, and [measure/seed-identity.json](measure/seed-identity.json) is its
+receipt. It is a measurement and decides nothing:
+
+- every digest the answers on #670 and #675 print is the SHA-256 a packet’s manifest
+  records, and `4e4c8ce`’s `certificates/best/n204.cert` is T-186’s certificate byte for
+  byte;
+- `n204.txt`, retained in [`couzo-index-2026-10-15`](../couzo-index-2026-10-15/README.md#the-204-seed)
+  and read by `devtools.upper_bound_reports`’ `calle-txt` adapter, pairs one to one
+  with T-186’s packing under the identity, every centre within $3.94 \times 10^{-12}$,
+  at a printed side $2.78 \times 10^{-12}$ above T-186’s exact side;
+- the same call on this packet’s certificate counts the same 32 boundary corner
+  coordinates and no touching pair, as the replay’s least wall clearance of exactly 0
+  and least pair gap of $5.47 \times 10^{-11}$ say.
+
+The hop jobs’ outputs were never published, so the steps between T-186’s packing and
+this one are the author’s account. They agree with the review’s measurement that no
+symmetry of the box pairs the two.
+By [attribution.md](../../../../attribution.md#credit-text-and-lineage)’s chain rule,
+T-226’s credit line names T-186’s lineage at 204.
 
 ## Credit
 
 Francisco Couzo, whose issue keeps every seed, construction and certificate credit in
-the source’s manifest; the per-count JSON credits the seed to Mykhailo Polkovskyi.
+the source’s manifest; the per-count JSON credits the seed to Mykhailo Polkovskyi, and
+the author’s answer of 23 October traces it to T-186’s packing, Polkovskyi’s refinement
+of Daniil Ostashev’s packing as PingYou Ltd refined it. The credit line is *Couzo after
+Polkovskyi, Ostashev, PingYou Ltd, Daniel, Levy*.
 The source discloses OpenAI Codex assistance with its checker.
 Beyond the corpus the per-count JSON credits Couzo’s seeds at most counts, Evan Daniel’s
 at 364 and his seed or construction at 403 and 444, Kevin Fang’s at 382, and Fang’s
@@ -148,6 +240,7 @@ python -m devtools.upper_bound_reports couzo-issue670-2026-10-17 check --replay
 python -m devtools.upper_bound_reports couzo-issue670-2026-10-17 register-plan
 python -m devtools.beyond_horizon_replay check --issue 670
 python -m devtools.beyond_horizon_replay check --issue 670 --replay --workers 2
+python resources/web/couzo-issue670-2026-10-17/measure/seed-identity.py --out resources/web/couzo-issue670-2026-10-17/measure/seed-identity.json
 ```
 
 <!-- This document follows common-doc-guidelines.md.

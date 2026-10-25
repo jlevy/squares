@@ -132,12 +132,24 @@ The ones that carry the most weight:
   `bounds_agree_at_declared_precision` accepts a ceiling within one unit of the printed
   side’s last place as the same displayed bound.
   An `exact_form` on the ceiling is the exact form of the ceiling; $s(n)$ is known
-  exactly only when `status` is `proved`.
+  exactly only when `status` is `proved`. An algebraic ceiling the house writer writes
+  is `root(p, low, high)`: $p$ its minimal polynomial in $s$, highest degree first, as
+  `minimal_polynomial` writes it, and `low` and `high` the side cut down and rounded up
+  at forty places, an interval in which it is $p$’s one root
+  ([`exact_sides.form`](../devtools/exact_sides.py), which `exact_sides.read_form` reads
+  back exactly). A side of degree two is written in its closed form instead,
+  `(a+b*sqrt(d))/c` with $d$ square-free and the fraction in lowest terms, as n = 51’s
+  `(16+5*sqrt(2))/3` and n = 295’s `(22+22*sqrt(2))/3` are.
+  n = 11’s `root(P_trump11, …)`, which names its polynomial, is not this form.
 - Both upper lanes hold the certificate of the case’s **house best packing**, as the
   [synopsis](../../SYNOPSIS.md#the-measurements) defines it.
   By the import runbook’s [house rule](../campaign/result-import.md#the-house-rule), the
   pass that validates a smaller packing, whoever found it, adopts it as the house best
   packing and regularizes it in the same pull request.
+  Where the house has an algebraic side and does not read regular as published, its
+  count draws its exact house and its regularization stays owed to a bead
+  (`regularization-owed`), since no regularizer yet draws an exact view of a
+  number-field witness (the house rule’s algebraic bullet).
   `devtools.select_houses` derives it from the register and `devtools.adopt_houses`
   writes it.
 - `reported_status` is the source-set view; `status` is `proved` only when the verified
@@ -184,7 +196,10 @@ verification.
 [`source-coverage.yaml`](source-coverage.yaml) is a dated claim about a named source
 set, not a claim that a web search exhausted every publication.
 It records each source’s scope, review date, retained first-party material, evidence,
-replay disposition, in-horizon overrides, and relevant claims beyond $n = 324$.
+replay disposition, in-horizon overrides, and relevant claims beyond $n = 324$. Every
+source dated from 22 August 2026 that a registered result or the evidence it cites names
+has an entry here, which carries its key or cites that evidence, papers and tools
+included; `devtools.check_source_coverage` refuses one without.
 
 The current baseline reparses the retained Kingbird catalogue through $n = 324$, applies
 Francisco Couzo’s certified packings at 49 counts from $n = 68$ to $307$ (T-056), seven
@@ -205,8 +220,33 @@ Claims beyond $n = 324$ are listed by count and source.
 A count has at most one current row; an earlier dated report that a later one beats
 stays listed as its source printed it, marked superseded and naming the source of the
 row that beats it, which must be dated no earlier and strictly better by exact
-comparison. The check is local and deterministic; refreshing a public source is a dated
-W1 research survey, not a network operation hidden inside ordinary validation.
+comparison. Göbel’s classical constructions are earlier reports beyond $n = 324$ (the
+owner, 23 October 2026, [#613](https://github.com/jlevy/squares/issues/613)), so a row
+above Göbel’s construction at its count also stays listed as its source printed it.
+It is marked `above-classical-construction`, states the construction $p + q\sqrt 2$ it
+is above, and holds no count.
+The standing side there is the construction, which has no row: in the walks, and from 23
+October 2026 in every start, claim record and replay reading beyond the horizon
+([several reports at one count](../campaign/result-import.md#several-reports-at-one-count)).
+Rows are tracked beyond $n = 324$ with no ceiling, each recorded as its source reported
+it (the owner, 23 October 2026, D1). `devtools.beyond_horizon_replay` holds every row
+beyond $n = 324$ to Göbel’s construction exactly, from the maintained module
+`devtools.goebel_construction`, which proves each side final by the area bound: a member
+at count $k$ packs $k$ unit squares, so its side is at least $\sqrt k$. A construction
+an index or table states with no certificate file of its own (a tiling or L-border
+recipe on a certificate) is a row once the maintained construction checker,
+`devtools.construction_checker`, decides it exactly from the recipe and its parent
+certificate has been replayed on both routes (D2). A deletion bound is no such row: one
+square below the next count’s certificate is an earlier report (D6), and any other
+deletion, or one an issue claims, waits on the owner (think-kzme;
+[several reports at one count](../campaign/result-import.md#several-reports-at-one-count)).
+A certificate kept as hosted data is read through its hosted-data manifest
+(`devtools.hosted_shards`), while its receipts and rows stay in Git
+([OR-18](../../operating-rules.md#or-18-keep-bulk-data-out-of-git-and-never-bind-code-or-verdicts-to-a-git-commit-or-blob)).
+Nine rows of 8 to 13 October at $n = 369, 375$ and $376$ are so marked, and 369 and 376
+have no current row.
+The check is local and deterministic; refreshing a public source is a dated W1 research
+survey, not a network operation hidden inside ordinary validation.
 
 SQUISH’s ten-packing release and its later $n = 153$ supplement, published on 7 October
 2026, carry the upper bounds at eleven counts (T-113 and T-114). Nate Chaoweeraprasit
@@ -312,8 +352,25 @@ The process relies on these rules of the records:
   For a result by others, that is a complete replay here and a review of its mathematics
   under [`docs/project/reviews/`](../../docs/project/reviews/). External evidence and a
   local replay are recorded as separate entries.
-  An upper bound that passes them below the case’s house best packing replaces it
-  ([the house rule](../campaign/result-import.md#the-house-rule)).
+  The case-lane check refuses a machine run not made here, and
+  [`devtools.check_results`](../devtools/check_results.py) a verified bound on a result
+  by others dated from 22 August 2026 that no register entry covering it lists an
+  accepting review of the mathematics for (`accepted` or `defects-resolved`, by a kind
+  other than `oversight`), and whose evidence records no defect-free read in a mapped
+  review document. An upper bound that passes them below the case’s house best packing
+  replaces it ([the house rule](../campaign/result-import.md#the-house-rule)).
+- **Beyond the corpus, the report-order ledger decides the rows**
+  ([several reports at one count](../campaign/result-import.md#several-reports-at-one-count)),
+  with the owner’s answers of 23 October 2026. A side below an earlier report by less
+  than the 12-place print, at the same print, restates it and is no row; a side at or
+  above Göbel’s classical construction at its count is above an earlier report; a
+  certificate its author withdrew from an issue is not a report; and a side obtained by
+  deleting one square from the next count’s published certificate is an earlier report,
+  which on the D6 decision’s recommendation, not yet confirmed, has no row of its own.
+  Rows are tracked with no ceiling: Göbel’s construction comes from the maintained
+  module at every count, a recipe with no certificate file is a row once the maintained
+  construction checker decides it from a replayed parent, and a hosted certificate is
+  read through its manifest.
 
 ## Registering a First-Party Result
 
@@ -587,17 +644,17 @@ most 2.
 ### Smallest Open Gaps
 
 Ranked by gap—the best-known packing minus the verified lower bound, which is what
-`devtools.gap_ranking` computes—the six smallest open cases at $n \le 100$, $76$ and
-$95$ tied, are:
+`devtools.gap_ranking` computes—the six smallest open cases at $n \le 100$ are below;
+$n = 95$ ties $n = 76$ at $0.0350$ and follows it in the tool’s order:
 
 | $n$ | gap | record | note |
 | --- | --- | --- | --- |
 | 17 | 0.0151 | Bidwell | carried to $\frac{18641771}{4000000}$ by Guzhou0806 after Overbeck |
+| 31 | 0.0225 | grid | $6^2 - 5$, carried to $\frac{2391}{400}$ by Hosono after Tokoharu and Levy (T-232) |
 | 44 | 0.0275 | grid | $7^2 - 5$, carried to $\frac{2789}{400}$ by Hosono after Tokoharu |
 | 12 | 0.0285 | grid | $4^2 - 4$, carried to $\frac{7943}{2000}$ by squarepacker after Daniel |
 | 96 | 0.0300 | grid | $10^2 - 4$, carried to $\frac{997}{100}$ by Hosono after Tokoharu; reported proved by Evan Daniel (T-081) |
 | 76 | 0.0350 | grid | $9^2 - 5$, carried to $\frac{1793}{200}$ by Hosono after Tokoharu |
-| 95 | 0.0350 | grid | $10^2 - 5$, carried to $\frac{1993}{200}$ by Hosono after Tokoharu |
 
 The $n = 17$ bound is Guzhou0806 / N17 project’s R071, continuing Overbeck’s charge
 (Overbeck building on Squares Project (Joshua Levy), Mira and Guzhou0806): an exact
@@ -619,6 +676,8 @@ later that day, when another proved $s(77) = 9$ and with it $s(78) = 9$. $n = 97
 $0.0557$, left it on 2026-10-03, when Evan Daniel’s family $s(m^2 - 3) = m$ was proved
 here for every $m \ge 6$ (T-064): his exact checker of the finite premise `Valid7` was
 replayed in full and his Lean reduction from it was built.
+$n = 31$ entered it second, at $0.0225$, when T-232 landed and raised its verified floor
+to $2391/400$, and moved $n = 95$ to seventh.
 With Bentz’s $s(6)$, $s(13)$ and $s(22)$ the family is now **proved exactly for every
 $m \ge 3$**.
 

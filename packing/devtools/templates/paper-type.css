@@ -111,12 +111,14 @@
   }
 }
 
-/* The reading measure: thirty-five of the base, 630px at 18px before column insets.
+/* The text itself reads at 35em of the shared prose base (630px at 18px).
+   Use the host base, not the consuming element’s font size: a sans breadcrumb or
+   heading must resolve the same width as prose. Column padding is outside this measure.
    Declared on the scopes KPress declares its own on, so it wins there. */
 :root,
 .kpress,
 .kpress-page-main {
-  --kpress-measure: calc(var(--kpress-font-size-base) * 35);
+  --kpress-measure: calc(var(--kpress-host-font-size-base) * 35);
 }
 
 /* Section headings at 1.2 of the prose at every width. KPress steps its h2 up to 1.4
@@ -165,9 +167,13 @@
   --paper-note-scale: 0.92;
   --paper-colophon-scale: 0.85;
   --paper-note-inset: 1.4rem;
+  --paper-caption-space-above: 0.85rem;
+  --paper-caption-space-below: 1rem;
+  --paper-packing-diagram-width: 24rem;
   --paper-support-leading: 1.4;
   --paper-button-label-case: uppercase;
   --paper-button-label-scale: 0.9;
+  --paper-button-letter-spacing: var(--kpress-caps-spacing, 0.021em);
   --paper-popover-title-scale: 1.25;
   --paper-popover-section-scale: 1.1;
 }
@@ -179,10 +185,12 @@ button:not(.site-card),
 a.site-action,
 a.site-popover-action,
 .site-tabs a {
+  letter-spacing: var(--paper-button-letter-spacing);
   text-transform: var(--paper-button-label-case);
 }
 :is(button, a.site-action, a.site-popover-action, .site-tabs a)
   :is(.kpress-math, .katex, .tex, math) {
+  letter-spacing: normal;
   text-transform: none;
 }
 @media print {
@@ -322,4 +330,35 @@ ul.credits > li {
 }
 ul.credits > .publication-date {
   margin-block-start: 1lh;
+}
+
+/* Semantic captions share the paper's note role on papers and reader documents.
+   Markdown paragraphs inside a caption keep that role instead of prose emphasis. */
+.kpress .kpress-figcaption {
+  border-block-start: 0;
+  color: var(--kpress-doc-muted);
+  font-family: var(--kpress-font-sans);
+  font-size: calc(
+    var(--kpress-font-size-base) *
+    var(--paper-font-scale-sans) *
+    var(--paper-note-scale)
+  );
+  font-style: normal;
+  font-weight: var(--kpress-font-weight-sans-regular);
+  line-height: var(--paper-support-leading);
+  margin-block-start: 0;
+  padding-block: var(--paper-caption-space-above) var(--paper-caption-space-below);
+  padding-inline: var(--paper-note-inset);
+}
+.site-page .kpress-figcaption {
+  text-align: start;
+}
+.site-page .kpress-figcaption p {
+  font: inherit;
+  margin-block: 0;
+}
+
+/* A packing's paper view is the cropped container, independent of its atlas canvas. */
+.kpress .kpress-figure .site-packing-diagram {
+  inline-size: min(100%, var(--paper-packing-diagram-width));
 }

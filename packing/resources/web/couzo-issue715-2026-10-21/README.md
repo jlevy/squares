@@ -53,13 +53,15 @@ Each count falls in one of three sets:
   (90), and its side is below every earlier public side by at least 2.90e-07 (at 931,
   against a `c6da0fc` certificate), so the print alone decides it. These are the issue’s
   own reports.
-- **30 held.** The certificate was first committed at `5a299b4`, and its side is below
-  the `4e4c8ce` certificate of the same count, published on 15 October, by 2.37e-23 to
-  3.18e-23: both round up to the issue’s print. Each is one of the index’s L-border
-  constructions, written out in full. Whether such a re-certification of the author’s
-  own earlier publication is a
-  new report depends on reading below the print, and it is left to a decision
-  (think-fwa9); nothing is recorded for these counts.
+- **30 re-certified.** The certificate was first committed at `5a299b4`, and its side is
+  below the `4e4c8ce` side of the same count, published on 15 October, by 2.37e-23 to
+  3.18e-23: both round up to the issue’s print. At 28 counts that side is a certificate;
+  at 798 and 855 it is an index deletion bound, the next count’s certificate less one
+  square, an earlier report by D6 (think-f2io) with no row on that decision’s
+  recommendation (think-kzme). Each is one of the index’s L-border
+  constructions, written out in full. By the owner’s answer of 23 October 2026
+  (think-fwa9) such a re-certification of the author’s own earlier publication restates
+  it, so nothing is recorded for these counts.
 - **34 restated.** The side equals that of a certificate first published at `02f9690`
   (6), `a7067d7` (1), `f311f08` (1) or `4e4c8ce` (26, two of them the index’s deletion
   bounds), 32 of them byte for byte. Each is an earlier report, owned by its own import,
@@ -210,7 +212,14 @@ order. At ten counts one of them is the row this packet’s row now supersedes: 
 row the table names now names the backlog report that beat it first, so each count is one
 chain in report order and 21 of the 29 still name #715. Only 860 still holds this
 packet’s row alone.
-The table below keeps the rows that stood on `main` when this packet was written.
+
+Since 22 October Mykhailo Polkovskyi’s #719 rows
+([`mishapolk-issue719-2026-10-22`](../mishapolk-issue719-2026-10-22/README.md)),
+recorded by the [ledger of 22 October for issue
+719](../../../campaign/issue-intake/upper-bounds-issue719-20261022/README.md), supersede
+16 of this packet’s rows, at 417, 456, 499, 553, 601, 652, 705, 758, 868, 869, 872, 927,
+928, 932, 994 and 996; 93 remain current. The table below keeps the rows that stood on
+`main` when this packet was written.
 
 ### The 109 Recorded Rows
 
@@ -339,6 +348,10 @@ every control refused; the ledger leaves each undecided against the `4e4c8ce`
 publication. Recording them would add 30 rows to the claims record, superseding the
 `487b058` rows that stand at those counts, and `4e4c8ce`’s rows when that import
 (think-yfoo) lands.
+`4e4c8ce`’s rows are recorded (couzo-index-2026-10-15), by the
+[history walk of Couzo’s watched publications](../../../campaign/issue-intake/upper-bounds-couzo-history-20261022/README.md), which
+decides these 30 as restatements of them, by the owner’s answer of 23 October 2026
+(think-fwa9).
 
 | n | Printed, up | 4e4c8ce side, up at 16 | This certificate below it by | Index |
 | ---: | --- | --- | --- | --- |
@@ -380,6 +393,12 @@ think-1545), `f311f08`’s by think-om5l, `4e4c8ce`’s by think-yfoo, and `a706
 already the row the record holds (`couzo-certificates-2026-10-12`). At 335 the
 certificate is 1.78e-11 or more above the 8 October decimal report the record holds, so
 neither it nor the issue is recorded there.
+The [history walk of Couzo’s watched publications](../../../campaign/issue-intake/upper-bounds-couzo-history-20261022/README.md)
+records 30 of these earlier certificates, the ones `02f9690`, `f311f08` and `4e4c8ce`
+first published. The index deletion bounds at 743 and 985 are earlier reports by the
+owner’s answer of 23 October 2026 on D6 (think-f2io), so this issue’s restatements there
+are not recorded; that the bounds have no row of their own is the decision’s
+recommendation (think-kzme).
 
 | n | Printed | First published | Earlier certificate | Here |
 | ---: | --- | --- | --- | --- |

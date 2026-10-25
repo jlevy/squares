@@ -9,11 +9,30 @@ scope: >
   excluded because its role and lifecycle come from resources/README.md rather than
   current project documentation rules.
 documents:
+  - {path: docs/project/specs/active/plan-2026-10-24-rows-above-1024.md, role: plan, authority: current, lifecycle: transient}
+  - {path: docs/project/reviews/review-2026-10-23-wand125-n31-fine-net.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-23-wand125-446-fine-net.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/specs/active/plan-2026-10-23-news-pr-feed.md, role: plan, authority: current, lifecycle: transient}
+  - {path: docs/project/reviews/review-2026-10-23-wand125-sqverify-continuous-soundness.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-23-evand-grade-c-theorem-c.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-22-ci-release-latency.md, role: review, authority: record, lifecycle: retained}
+  - {path: packing/contributors/reviews/2026-10-22-credit-link-audit.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/specs/active/plan-2026-10-22-site-navigation.md, role: plan, authority: current, lifecycle: transient}
+  - {path: docs/project/reviews/review-2026-10-23-mishapolk-n204.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/specs/active/plan-2026-10-23-flip-regularization.md, role: plan, authority: current, lifecycle: transient}
+  - {path: docs/project/reviews/review-2026-10-22-mishapolk-719.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-22-couzo-670-672-675.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-24-couzo-evand-n268-n304.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-21-profile-coverage.md, role: review, authority: record, lifecycle: retained}
   - {path: packing/contributors/reviews/2026-10-21-pdf-credit-coverage.md, role: review, authority: record, lifecycle: retained}
   - {path: attribution.md, role: conventions, authority: definitive, lifecycle: maintained}
   - {path: packing/contributors/README.md, role: component-guide, authority: current, lifecycle: maintained}
+  - {path: docs/project/guides/site-deployment.md, role: component-guide, authority: current, lifecycle: maintained}
+  - {path: docs/project/specs/active/plan-2026-10-22-squaremath-domain.md, role: plan, authority: current, lifecycle: transient}
   - {path: docs/project/specs/active/plan-2026-10-10-contributor-profiles.md, role: plan, authority: current, lifecycle: transient}
+  - {path: docs/project/reviews/review-2026-10-22-daniel-728.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-23-amundsk-n303.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-24-couzo-n268-n303.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-21-evand-regularized-views.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-20-upper-bound-imports-678.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-21-upper-bound-import-703-erratum.md, role: review, authority: record, lifecycle: retained}
@@ -47,6 +66,15 @@ documents:
   - {path: packing/campaign/issue-intake/upper-bounds-20261022/lane-claims/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: packing/campaign/issue-intake/upper-bounds-backlog-20261022/README.md, role: generated-view, authority: generated, lifecycle: generated}
   - {path: packing/campaign/issue-intake/upper-bounds-backlog-20261022/lane-claims/README.md, role: source-index, authority: record, lifecycle: retained}
+  - {path: packing/campaign/issue-intake/upper-bounds-issue719-20261022/README.md, role: generated-view, authority: generated, lifecycle: generated}
+  - {path: packing/campaign/issue-intake/upper-bounds-couzo-history-20261022/README.md, role: generated-view, authority: generated, lifecycle: generated}
+  - {path: packing/campaign/issue-intake/upper-bounds-issue732-20261023/README.md, role: generated-view, authority: generated, lifecycle: generated}
+  - {path: packing/campaign/issue-intake/upper-bounds-issue732-f1ceee4-20261024/README.md, role: generated-view, authority: generated, lifecycle: generated}
+  - {path: packing/campaign/issue-intake/upper-bounds-issue763-20261024/README.md, role: generated-view, authority: generated, lifecycle: generated}
+  - {path: packing/campaign/issue-intake/upper-bounds-couzo-964ee2b-notebooks-20261024/README.md, role: generated-view, authority: generated, lifecycle: generated}
+  - {path: packing/campaign/issue-intake/upper-bounds-couzo-43f666c-20261024/README.md, role: generated-view, authority: generated, lifecycle: generated}
+  - {path: packing/campaign/issue-intake/upper-bounds-evand-20261024/README.md, role: generated-view, authority: generated, lifecycle: generated}
+  - {path: packing/campaign/issue-intake/upper-bounds-issue798-20261024/README.md, role: generated-view, authority: generated, lifecycle: generated}
   - {path: docs/project/reviews/review-2026-10-18-n108-fine-net-mathematics-max.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-18-wand125-n108-certificate-mathematics.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-16-upper-bound-imports-506-607.md, role: review, authority: record, lifecycle: retained}
@@ -178,6 +206,13 @@ documents:
   - {path: packing/cases/regularized_drawings/think-ip1p-2026-10-19/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: packing/cases/regularized_drawings/think-xu4d-2026-10-20/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: packing/cases/regularized_drawings/think-ql4v-2026-10-22/README.md, role: source-index, authority: record, lifecycle: retained}
+  - {path: packing/cases/regularized_drawings/think-4h23-2026-10-23/README.md, role: source-index, authority: record, lifecycle: retained}
+  - {path: packing/cases/regularized_drawings/think-icp1-2026-10-23/README.md, role: source-index, authority: record, lifecycle: retained}
+  - {path: packing/cases/regularized_drawings/think-ot5c-2026-10-23/README.md, role: source-index, authority: record, lifecycle: retained}
+  - {path: packing/cases/regularized_drawings/think-tqb5-2026-10-23/README.md, role: source-index, authority: record, lifecycle: retained}
+  - {path: packing/cases/regularized_drawings/think-bk9r-2026-10-24/README.md, role: source-index, authority: record, lifecycle: retained}
+  - {path: packing/cases/regularized_drawings/think-hx0e-2026-10-25/README.md, role: source-index, authority: record, lifecycle: retained}
+  - {path: packing/cases/regularized_drawings/think-h01y-2026-10-24/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-07-squish-second-update-mathematics.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-07-squish-second-update-semantic-binding.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-07-squish-update-mathematics.md, role: review, authority: record, lifecycle: retained}
@@ -538,6 +573,8 @@ documents:
   - {path: packing/benchmarks/measure-verifier/census/README.md, role: generated-view, authority: generated, lifecycle: generated}
   - {path: packing/benchmarks/measure-verifier/census-mixed/README.md, role: generated-view, authority: generated, lifecycle: generated}
   - {path: packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-2026-10-16/README.md, role: source-index, authority: record, lifecycle: retained}
+  - {path: packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-446-release-2026-10-08/README.md, role: source-index, authority: record, lifecycle: retained}
+  - {path: packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-n31-2026-10-11/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: packing/benchmarks/measure-verifier/census-summary.md, role: generated-view, authority: generated, lifecycle: generated}
   - {path: packing/benchmarks/measure-verifier/experiments/exp-006-whole-certificate-n32.md, role: research-report, authority: record, lifecycle: retained}
   - {path: packing/benchmarks/measure-verifier/experiments/exp-007-h005-error-budget.md, role: research-report, authority: record, lifecycle: retained}
@@ -1264,6 +1301,7 @@ documents:
     superseded_by: SYNOPSIS.md
   - {path: docs/project/postmortems/postmortem-2026-08-23-soundness-class.md, role: postmortem, authority: supporting, lifecycle: maintained}
   - {path: docs/project/postmortems/postmortem-2026-10-05-orphaned-catalogue-intake.md, role: postmortem, authority: record, lifecycle: retained}
+  - {path: docs/project/postmortems/postmortem-2026-10-22-results-without-news.md, role: postmortem, authority: record, lifecycle: retained}
   - {path: docs/project/specs/active/plan-2026-09-29-proof-verification-consolidation.md, role: plan, authority: current, lifecycle: transient}
   - {path: docs/project/specs/future/plan-2026-10-10-n17-eight-hour-proof-block.md, role: plan, authority: current, lifecycle: transient}
   - {path: docs/project/specs/future/plan-2026-10-10-n17-three-block-session.md, role: plan, authority: current, lifecycle: transient}

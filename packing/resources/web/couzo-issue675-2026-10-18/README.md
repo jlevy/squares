@@ -56,8 +56,10 @@ The positive passes both routes, and both routes refuse both controls. In the po
 [receipts/exact-certification.json.xz](receipts/exact-certification.json.xz) keeps every
 deciding input and both routes’ complete outputs.
 The two routes share certificate parsing, the half-angle conversion, Python’s rational
-arithmetic and the separating-axis method. No source program ran here, and the entry
-awaits a stage 4 review (think-0nse).
+arithmetic and the separating-axis method. No source script ran here. The source’s
+manifest names this repository’s `sqpack/verify.py` as its first checker, and the `sqpack`
+route decides through that file, so the replay shares the producer’s components (RF-1 of
+the [22 October review](../../../../docs/project/reviews/review-2026-10-22-couzo-670-672-675.md)).
 
 ## Against the Record
 
@@ -124,10 +126,46 @@ report order.
 [acquisition/beyond-horizon-rows.json](acquisition/beyond-horizon-rows.json) is the record
 the source register reads them from.
 
+## Stage 4 Review
+
+The [review of 22 October 2026](../../../../docs/project/reviews/review-2026-10-22-couzo-670-672-675.md)
+accepted #675’s certificate for finite feasibility, with eight findings, none blocking,
+covering T-226, T-227 and T-228 together.
+It reproduced this packet’s replay and frozen comparison, decided the certificate again on a
+clean-room checker of its own, on an integer route and a `Fraction` route with exact
+clipping area, and ran sharp controls at $10^{-30}$ through both maintained routes and
+that checker: each route accepted exact contact at the far wall, the near wall and the
+least-gap pair, and refused $10^{-30}$ past it, where the certificate keeps exactly 0 at the walls and $1.20 \times 10^{-12}$ between pairs.
+Its programs, receipts and logs are kept with the #672 packet, in
+[`couzo-issue672-2026-10-17/review/review-2026-10-22/`](../couzo-issue672-2026-10-17/review/review-2026-10-22/README.md),
+and `tests/test_upper_bound_reports_couzo_670_672_675.py` runs the kernel’s two sharp
+controls on #672’s 227 certificate (RF-6).
+T-228 rests at `V3`/`C3` on that review, the replay it reproduced and its checker’s run.
+
+## The Author’s Answer of 23 October
+
+Francisco Couzo answered the [22 October review](../../../../docs/project/reviews/review-2026-10-22-couzo-670-672-675.md)’s
+question on the issue at 2026-10-23T22:22:34Z
+([issuecomment-6375912099](https://github.com/jlevy/squares/issues/675#issuecomment-6375912099)),
+retained as a claim in [acquisition/declaration.json](acquisition/declaration.json); he says
+Claude Code assisted with it.
+The source calls this repository’s `sqpack/verify.py` as it described on #672: at 204 the
+strict verdict is false only because squares touch the walls, and `sqpack.verify` counts 88
+corner coordinates on the boundary and no touching pairs.
+The [#670 packet’s seed measurement](../couzo-issue670-2026-10-17/measure/seed-identity.json)
+makes that call, `verify_packing(..., bucket=True)` on exact corners in the closed box, and
+counts the same 88 with no touching pair, as the replay’s least wall clearance of exactly 0
+and least pair gap of $1.20 \times 10^{-12}$ say.
+It decides nothing about the bound.
+
 ## Credit
 
 Francisco Couzo, whose issue keeps every seed, construction and certificate credit in
 the source’s manifest; the per-count JSON credits the seed to Mykhailo Polkovskyi.
+This packing refines #670’s one to one, and Couzo’s answer of 23 October on #670 traces
+that search to T-186’s packing, Polkovskyi’s refinement of Daniil Ostashev’s packing as
+PingYou Ltd refined it, so T-228’s credit line is *Couzo after Polkovskyi, Ostashev,
+PingYou Ltd, Daniel, Levy*.
 The source discloses OpenAI Codex assistance with its checker.
 Beyond the corpus the per-count JSON credits Joost de Winter’s seeds or constructions at
 21 counts, Fang’s rectangle and gluing with PingYou Ltd’s square input at 813 and 931, and

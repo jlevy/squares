@@ -65,8 +65,9 @@ W1 phase on one branch:
    may defer its runs, in `default_drawings.PENDING_ALLOWED` with the open bead that
    owns them, naming the witness it replaced in `default_drawings.CORRECTED`. The sweep
    then lists each count still owed.
-4. **Validate** from `packing/` with `packing-validate --records`, then `--push`, and
-   leave `--fast` to CI ([stage 5](#stage-5-publish)).
+4. **Validate** from `packing/` with `packing-validate --records`, `--edit` too where
+   the pass changed code, and the tests the change directly affects; leave `--fast` to
+   CI, which gates the draft pull request ([stage 5](#stage-5-publish)).
 5. **Open one draft pull request** with `tbd shortcut create-or-update-pr-simple`,
    labelled `intake`. It lists each item with its bead and the stage it reached, and
    every source under Not Checked.
@@ -81,16 +82,24 @@ W1 phase on one branch:
    it left out and where each handle came from.
    Put its output in the pull request description under **Announcement**, for the owner
    to post; an agent never posts it.
+   **A result the pass registers at S4 or S5, or raises to either, also owes a News
+   item**: draft it in the description under **News**, and land it in the first change
+   after the merge ([Announce a Significant Result](#announce-a-significant-result)).
+   Until it does, the records tier fails the next pull request that changes the register
+   or News, and warns on any other change.
 7. **Draft the replies** in each issue’s answer bead: every issue the pass touches gets
    one. Once the pull request merges, render each from `main`, check that `main` and the
    deployed site say what it says, post it, and record it under the issue’s `replies` in
    the next change ([stage 7](#stage-7-answer)). Where a ledger decided the pass’s
    counts, each result issue also gets a
    [report-order verdict comment](#report-order-verdict-comments).
+   Once the deploy is verified, run `check_requests --report` and close each closeable
+   issue with its final comment ([Close a Settled Issue](#close-a-settled-issue)).
 8. **Sweep again** with `make intake`, after the branch’s changes to the records and
    again after the merge.
    The sweep, like `check_requests --report`, is what finds the replies due: it lists
-   `#N owes a reply` until a recorded reply covers the issue’s state.
+   `#N owes a reply` until a recorded reply covers the issue’s state, and lists each
+   closeable issue still open under **Needs Action** until it is closed.
    Each new item it finds is triaged read-only, with a proposed disposition, before any
    of it is worked ([stage 1](#stage-1-triage)). The pass is done when nothing needs
    action, every count it re-housed is regularized or owned by an open bead under
@@ -124,6 +133,9 @@ A lane writes it with each new entry, as the day it registers it
 ([stage 3](#stage-3-record)). When the owner gives the word to merge, the branch’s last
 two commits re-date the branch’s new entries to the merge day and re-pin
 ([stage 5](#stage-5-publish), Before merge).
+The same stamp dates a branch’s new house best packings and new sources of dated
+beyond-horizon rows in `packing/frontier/landings.yaml`, which the home page’s Recently
+Added places them by; a test fails until every adopted count and row source has its day.
 A forgotten re-date leaves that pull request’s entries a day or two early and turns
 nothing red. The sweep after a merge runs `python -m devtools.stamp_landed --audit` from
 `packing/`, which compares every entry on `main` with `main`’s first-parent history and
@@ -178,7 +190,8 @@ claude/intake-YYYY-MM-DD, with today's date.
    corrected or re-solved with its source and exact side unchanged may defer its runs,
    naming the witness it replaced in default_drawings.CORRECTED.
 5. From packing/, run `uv run --frozen --all-extras --group dev packing-validate
-   --records`, then `--push`, and fix what fails.
+   --records`, `--edit` too where the pass changed code, and the tests the change
+   directly affects, and fix what fails. Hosted CI is the draft's full test gate.
 6. Commit, push the branch, and open one draft pull request, labelled intake, with
    `tbd shortcut create-or-update-pr-simple`. List every item with its bead and the
    stage it reached, and every source the sweep could not check. Before merge, assign
@@ -189,14 +202,23 @@ claude/intake-YYYY-MM-DD, with today's date.
    devtools.render_announcement --ids T-NNN ... --github` with the T-NNN this pass
    registered (not --since, which also picks up other passes' results), and add its
    output to the pull request description under "Announcement", for the owner to
-   post. Do not post it.
+   post. Do not post it. For each result registered at S4 or S5, or raised to
+   either, draft its News entry under "News" too, and land it in the first change
+   after the merge (stage 7, "Announce a Significant Result"); until it does, the
+   records tier fails the next pull request that changes the register or News.
 8. Draft the reply each issue the pass touches is owed in its answer bead; every one
    gets a comment. Once the pull request merges, render each from main with
    `check_requests --draft N`, check that main and the deployed site say what it says
    (runbook stage 5, "Verify the Published Result"), post it, and record it under the
    issue's replies in result-requests.yaml in the next change. Where the ledger
    decided the pass's counts, draft each result issue's verdict comment with
-   devtools.intake_comments (stage 7, "Report-Order Verdict Comments").
+   devtools.intake_comments (stage 7, "Report-Order Verdict Comments"). Once the
+   deploy is verified, run `check_requests --report` and close each closeable issue
+   with its final comment (stage 7, "Close a Settled Issue"). A question to the
+   author goes under the issue's awaiting_author and holds it open only when the
+   record asserts something the answer could falsify and no measurement here can
+   settle it; any other goes in the closing comment. Post nothing on, and close
+   nothing of, an issue held for the owner (held in result-requests.yaml).
 9. Run `make intake` again, and again after the merge: it and
    `check_requests --report` list the replies still due, and its "Regularization
    owed" lists every count still pending where this pass changed the house best
@@ -251,7 +273,7 @@ steps, and `--json` prints the whole sweep.
 | 4. Validate | W2 | Replay evidence, a mapped review and the rungs they derive: status `confirmed`, or `incomplete` |
 | 5. Publish | The change that moves the record | The reader documents state the result, and each count it re-houses is regularized in the same change; once stage 4 has passed, *integrated* |
 | 6. Explain | W8, with a W2 review | A review paper, for the results that warrant one |
-| 7. Answer | After each merge, by the pass | A reply on the issue for each change of its state, to the final comment: *answered* |
+| 7. Answer | After each merge, by the pass | A reply on the issue for each change of its state, to the final comment, and a News item for each S4 or S5 result: *answered* |
 
 Stage 0 finds the inputs, stages 1 to 3 are the import, stage 4 is the correctness part,
 and stages 5 to 7 are the publication.
@@ -427,7 +449,12 @@ the inputs and the comparison:
 - **The order** is the time each claim reached this repository: the issue, comment or
   pull request that made it, or the update comment or commit that added it later.
   A certificate published in a watched repository with no issue is a report from its
-  first commit (the owner, 2026-10-14).
+  first commit (the owner, 2026-10-14), dated by the push that made that commit public
+  where the push came later.
+  GitHub’s activity log for the repository is the evidence; a ledger gives the push time
+  as `reported_at` and keeps the commit time as `first_committed`, and the
+  beyond-horizon replay keeps the pushes its walks read in
+  `devtools.beyond_horizon_replay.PUSHED_LATER`.
 - **The comparison** reads each printed side as the span its rounding allows (`up`,
   `nearest`, `unstated`, `cut` or `binary64`), or as its exact side where a lane or the
   certificate gives one.
@@ -436,7 +463,116 @@ the inputs and the comparison:
   cannot decide is undecided, never guessed.
 - **A refinement** of a standing packing is recorded like a new packing and credited to
   its finder after the finder of the packing it refines, as a regularization
-  ([stage 3](#stage-3-record)).
+  ([stage 3](#stage-3-record)), unless it restates the report below the print.
+
+**One report registered as two entries is credited in both.** A tie stays with the
+earlier report, but two register entries can carry one report: T-073 and T-080 register
+one certificate of wand125’s 2 October release, and T-083 and T-084 one paper of
+Karakuş’s. When every tied entry carries the identical attribution, the same source keys
+at the same date, each is credited as current: the owner’s answer of 24 October 2026,
+“Credit both (Recommended)” (think-33u4).
+[`devtools.profile_records`](../devtools/profile_records.py) applies it to the profiles’
+Records, and a tie between attributions that differ in any way is still ordered by
+publication date, or left unassessed.
+
+Beyond the corpus the owner’s answers of 23 October 2026 are rules of the walk.
+The ledger’s `rulings` list names each one it applies, and the module docstring of
+`devtools.intake_ledger` owns them.
+The answers are quoted as the decision beads record them; the rest of each item is the
+record’s statement of the rule:
+
+- **A restatement is not recorded** (think-fwa9): “sub-print re-certifications are
+  RESTATEMENTS, not new rows.
+  The earlier certificate stays the row”.
+  The record reads a sub-print re-certification as a side below an earlier report at its
+  count by less than one unit in the 12th place, with both rounding up to the same
+  12-place print. The walk measures the distance to the member of the standing side the
+  claim is closest below, a report and not a construction; whether the answer also
+  reaches a side within the print below a construction is open (think-oqjd), and no such
+  side exists to 1024. A claim in the ruling’s words that an earlier ledger recorded and
+  the answer did not name waits on the owner (`awaiting_owner`). #719’s 631 is the one
+  such claim to 1024: another holder’s re-certification of Couzo’s `4e4c8ce`
+  certificate, which #722 recorded (think-oqjd).
+- **Göbel’s classical constructions are earlier reports** (think-8krd,
+  [#613](https://github.com/jlevy/squares/issues/613)): “Goebel’s classical
+  constructions count as earlier reports beyond n = 324 (the baseline): a rational row
+  above Goebel’s exact side is not recorded.”
+  At each count the least side of the three families the Kingbird catalogue states, at
+  that count or by deleting squares from a larger one, joins the start, so a rational
+  side at or above it is not recorded.
+  The maintained module `devtools.goebel_construction` computes it exactly at every
+  count, and proves each side final by the area bound: a member at count k packs k unit
+  squares, so its side is at least √k. A count no build proves is refused.
+  The 15 October packet’s retained program agrees with it at every count to 1073, where
+  its own reach ends, and stays the program every frozen receipt names.
+  A register row above it stays listed and is marked
+  ([frontier README](../frontier/README.md#source-coverage-and-freshness)). From the day
+  of the answer (`intake_ledger.GOEBEL_FROM`) every reading takes it beyond 324: a start
+  `gather` freezes holds it as a member, the claims importer compares each certificate
+  with it (`upper_bound_reports.goebel_construction`), and so does the replay’s standing
+  side. `intake_ledger check`, `render` and `gather` hold a ledger read from that day
+  with claims beyond 324 to both of that day’s answers (`answer_problems`). It lists the
+  `restatement` ruling through every such count, and takes Göbel’s construction at each
+  one through its `classical-constructions` ruling or a member of its frozen start.
+  Otherwise it names the answer it leaves out under `rulings_not_applied` with the
+  reason, which its README shows, or the check fails.
+  A reading from before keeps what it froze, so the earlier ledgers and claim records
+  stand as written. #732’s walk, read on the day of the answer, is the one frozen before
+  the rule: its `starts.yaml` holds no Göbel member, its `classical-constructions`
+  ruling seeds the construction at each count it walks instead, and `check --tree`
+  reports those counts as drift.
+  The Fang inventory stays on recorded rows, since it measures the excess over what the
+  record holds (think-a75a).
+- **A certificate its author withdrew from an issue is not a report** (think-8m4k): “a
+  watched certificate its author withdrew from an issue, claiming a lower file later, is
+  NOT a report.” A file in the author’s watched repository that his issue withdrew, where
+  his later release claims a lower side at that count, stays among the walk’s
+  publications. The walk keeps it out of the record
+  (`beyond_horizon_replay.Held.answer`), and no verdict rests on it.
+- **A deletion bound is an earlier report** (D6 on think-f2io). The owner selected the
+  option labelled “Yes, an earlier report (Recommended)”. The rest is the question the
+  coordinator asked, not the owner’s words: whether a side obtained by deleting a square
+  from a neighbour’s certificate, as Couzo’s 985 from his 986, is an earlier report,
+  with that option described as “A published deletion bound counts like any stated
+  bound; a later equal or higher side is not recorded”.
+  So a bound one square below the next count’s published certificate is a report from
+  the publication that states it, and #732’s 985, which ties Couzo’s `4e4c8ce` bound
+  there, is not recorded.
+  The walk records the bound and the chain passes over it.
+  That it has no row of its own is the decision’s recommendation, not yet the owner’s
+  word; think-kzme asks that, whether an issue claiming the count (743, 798, 855, 985)
+  gives it a row, and about the three bounds that delete two or three squares (751, 752
+  and 927), which stay held.
+  Above 1024 the walk applies the answer the same way
+  (`beyond_horizon_replay.deletion_holds`): a bound one square below the next count’s
+  certificate is settled, and one deleting two or more squares, or one an issue claims,
+  waits on think-kzme.
+  A deletion from a construction no certificate file states, as 23aff0c’s from
+  Friedman’s, waits with that construction (D2, think-zkxy).
+- **A recipe is a row once the maintained checker decides it** (D2 on think-f2io):
+  “decided exactly from the recipe by a checker this project maintains”.
+  A construction an index or table states with no certificate file of its own, a tiling
+  or L-border recipe on a certificate, is decided by `devtools.construction_checker`
+  from the recipe and its parent certificate.
+  The parent must be the one the index names by path and SHA-256, and must have passed
+  both routes with its six controls refused; the bound must be tS + L and the count the
+  construction’s capacity less the stated deletions, exactly.
+  Each records slice replays the parents that are not rows and writes
+  `receipts/recipe-decisions.json` (`beyond_horizon_replay recipe-decisions`), which
+  `check` derives again.
+  The checker refuses a classical parent, as Friedman’s (think-zkxy), and Kevin Fang’s
+  composites, so those stay held.
+  **A recipe the source also expands**, its full n-square expansion kept under
+  `certificates/parents/` at exactly the recipe’s side, is read as the release reads its
+  claims (#800’s review A, A3). Where the report claims the index’s recipe, as an
+  issue’s claim map (#763’s) or a watched publication’s own entries (`43f666c`’s) do,
+  the checker decides it from its parent and the expansion is not read.
+  Where the release reads certificates, as the push of 23:38:42Z’s notebook releases
+  read the rows the index credits to a notebook, the row is the expansion, read whole on
+  both routes (`couzo_763_claims.recipe_certificates`; #795’s review A, A2). The two
+  readings agree: the expansion has the recipe’s side and is first committed with it, as
+  #800’s review A confirmed at all 29 of `43f666c`’s and #763’s recipes, so neither
+  import re-decides the other’s rows.
 
 Transcribe each report’s claims into the directory’s `sources.yaml`, then, from
 `packing/`, run `python -m devtools.intake_ledger gather DIR` (`--snapshot` reuses the
@@ -488,6 +624,60 @@ credit.
   [`devtools.acquire_source`](../devtools/acquire_source.py) writes a packet from a
   declaration kept in its `acquisition/` directory, and its `--check` re-derives the
   packet from its manifest.
+- **A file another packet already retains is pinned, not copied.** Where the certificate
+  a packet imports is byte-identical to a file another packet retains, as Francisco
+  Couzo’s 304 at `fa6237e` is to the copy the issue-763 packet keeps at `964ee2b`, the
+  packet may retain nothing of its own: its declaration pins the file `identical_to`
+  that copy, `devtools.acquire_source --check` compares the two, and
+  `devtools.upper_bound_reports` reads the certificate from the copy as the custody
+  check does and holds it to the pinned SHA-256 again.
+  The retaining packet’s basis (licence, presumption or factual data) is the importing
+  packet’s too, and both READMEs say so.
+  The example is `couzo-n304-2026-10-23`.
+- **A source its author submitted is presumed retainable.** Where the author submitted
+  the source to this repository, in an issue, a comment or a pull request, the
+  presumption is permission to retain and import the submitter’s own material, and its
+  exact licence is followed up on a bead of its own that does not hold the import.
+  Files of others inside the source keep their own basis, such as their stated licence
+  or the retained-factual-data decision.
+  The packet’s declaration and README say which files rest on that presumption and name
+  the bead. The owner, on Francisco Couzo’s #763, 24 October 2026: “so Couzo’s has
+  submitted so the presumtion is permission from that.
+  We should track a bead to follow up on the exact license, but it should not impair our
+  ability to import things” (think-cnn7; the licence follow-up is think-m8f4). The
+  owner’s words are about Couzo’s submission; reading them as a rule for any submitting
+  author is the coordinator’s, and is put to the owner on #789.
+- **Bulk goes to hosted data, decided before the first commit.** Size what the packet
+  and the pass retain as
+  [OR-18](../../operating-rules.md#or-18-keep-bulk-data-out-of-git-and-never-bind-code-or-verdicts-to-a-git-commit-or-blob)
+  counts it. By OR-18’s threshold, a certificate, dump or evidence file of more than a
+  few megabytes, or a set of them totalling tens of megabytes, goes into no commit.
+  The per-pull-request added-blob check enforces it, with its limits in
+  `packing/devtools/added-blobs.yaml`: stage the packet, run `git fetch origin` so the
+  base is current, and run
+  `python -m devtools.check_added_blobs --base origin/main --staged` from `packing/`
+  before the first commit, so the decision is made before the bytes are in history.
+  Publish such data as a hosted data release by
+  [Publishing Hosted Data](../../development.md#publishing-hosted-data): ignore the
+  directory that will hold it, stage a manifest in `packing/hosted/` with
+  `python -m devtools.hosted_data stage`, publish it under a `data/<subject>-v<N>` tag
+  with `python -m devtools.hosted_data publish`, and commit the manifest and the code
+  that reads through `sqpack.hosted_data.require`, never the bytes.
+  A hosted upstream file is declared pinned-only in the packet’s acquisition
+  declaration, with the manifest as its reason, and fetched outside the packet’s
+  archived directory: the packet `squarepacker-k2-minus-c-upper-2026-10-09` pins Ryu’s
+  two largest certificates that way, and their manifest fetches them to
+  `packing/cases/asymptotic/hosted/`. Inside the packet,
+  `devtools.acquire_source --check` would read such a file as a retained one its record
+  does not list. The packet’s README lists each hosted file with its manifest, the
+  receipts, verdicts and summaries the record cites stay in Git, and the pull request
+  gives the release URL, the manifest path and the total size.
+  This is decided at retention, not at review: once a blob is in a branch’s history,
+  taking it out means rebuilding the branch.
+  An import never raises the mutation workers’ snapshot cap or prunes their inputs to
+  make room. That cap (`SNAPSHOT_MAX_BYTES` in
+  [`devtools/run_negative_controls.py`](../devtools/run_negative_controls.py)) is a
+  coarse bound against accidents, which the owner reset to 512 MiB on 22 October 2026.
 - **The bibliography key** carries the date of the pinned revision as `dated`, and is
   defined in the [resources README](../resources/README.md) as well.
   Credit is read from the source’s own files, now and not after the review, and names
@@ -509,7 +699,7 @@ raise C beyond a qualifying read.
 An announcement, source scan, private run summary with unresolved build coverage, or
 partial build does not qualify as complete execution.
 
-The seven record rules are:
+The eight record rules are:
 
 - **`attribution.published` is the claim’s date, not the pin’s:** the date the source
   gives for it, or the UTC date of the first commit that contains the certificate; for
@@ -518,6 +708,14 @@ The seven record rules are:
 - **`landed` is written with the entry**, after `registered` and as the same day.
   The schema requires it, and the merge step re-dates it to the day the entry reaches
   `main` ([stage 5](#stage-5-publish)).
+- **A new house best packing or new beyond-horizon rows get a landing.** After changing
+  `upper_bound_houses.ADOPTED` or adding a source’s beyond-horizon rows to
+  `source-coverage.yaml`, run `python -m devtools.stamp_landed --apply` from `packing/`,
+  which dates them in `packing/frontier/landings.yaml`, the record the home page’s
+  Recently Added places them by.
+  `tests/test_stamp_landed.py` fails until every adopted count and row source has its
+  day, and the merge step re-dates them ([stage 5](#stage-5-publish)); run it again
+  after merging `main`.
 - **The claim states each bound it reports**, in a form `devtools.check_standing` reads:
   `s(n) <= v` for an upper bound, `s(n) >= v` for a lower bound and the same with `=`
   for an exact value, where $v$ is the value the source certifies, written as a fraction
@@ -546,8 +744,12 @@ The seven record rules are:
   across branches, so take it in the commit that registers the result, merge that day,
   and quote it to no author until it is on `main`.
 
-The record checks pass without a packet, a coverage entry or evidence over the whole
-scope. The reviewer of the pull request looks for those.
+The record checks pass without a packet, and the reviewer of the pull request looks for
+one. `devtools.check_source_coverage` refuses a source dated from 22 August 2026 that a
+register entry or its evidence cites and no coverage entry holds, by its key or by
+citing its evidence (think-g6d5), and `devtools.check_results` an entry whose scope its
+evidence does not cover, or a recent case bound, upper or lower, that no entry covers
+(think-506q).
 
 ## Stage 4: Validate
 
@@ -601,6 +803,28 @@ is not a condition of it.
 - The receipts are committed and pushed when the run ends, on a branch the bead names.
   A replay that passed in scratch space and was never committed did not happen.
 
+**Measuring identity and sharp controls.** Two measurements that every upper-bound
+import has needed are tools, and a packet calls them instead of keeping a copy (OR-1).
+`python -m devtools.measure_identity` measures a packing pose by pose against each
+packing the record holds at its count, read from an import packet (`packet:NAME`), from
+a retained file through any `upper_bound_reports` adapter, or from a binary64
+`x y degrees` text. It prints its receipt, and with `--out` writes it as the packet’s
+`measure/identity.json`: the nearest centre under the box’s eight symmetries and whether
+it pairs the squares one to one, the optimal assignment, the squares moved beyond
+$10^{-9}$ to $10^{-1}$, the largest move and its symmetry, and the box-centred
+assignment the T-240 review read.
+It is the measurement that decides a regularization’s or a refinement’s `identity`
+([stage 3](#stage-3-record)), and it decides nothing about the bound.
+`python -m devtools.upper_bound_reports PACKET sharp-controls` takes the certificate to
+exact contact and $10^{-30}$ past it on both maintained exact routes: the box at and
+below its extent, the tightest pair closed, every square moved to the near wall, a
+square enlarged past its pair and past a wall, and a duplicated square.
+It writes `receipts/sharp-controls.json`, or `receipts/sharp-controls-nNNN.json` per
+count of a longer roster, which shows that the routes meet a certificate whose margins
+lie below the binary64 spacing of its coordinates.
+The per-packet programs written before these tools stay as they are, since their
+receipts are bound to them.
+
 **The review** is a mapped document under `docs/project/reviews/`, a
 [review record](../../epistemics.md#review-records) like any other.
 It states the claim and each `T-NNN` it covers; re-derives the argument from the
@@ -649,6 +873,13 @@ defect open, rewrites the entry’s `claim`, `notes` and `next_rung` together an
 its `activity`, so that no field says a replay is pending while another says it passed.
 The reviewer also confirms or changes the draft significance score.
 An open defect goes to the author with the review.
+For a result by others, `devtools.check_results` (`verified_lane_review_problems`)
+refuses the verified bound until the review is recorded in one of two forms: a `reviews`
+item on a register entry that cites the evidence and covers the count, of kind
+`adversarial`, `confirming` or `formalization` with verdict `accepted` or
+`defects-resolved`; or, on the evidence entry, an `external_review` in state
+`informally-verified`, or a `proof.audit_record`, that names the review by its full
+path, `docs/project/reviews/review-….md`. A bare file name is not found.
 
 The reviewer of the pull request checks one thing in every sentence the stage writes:
 where the claim, the case record, the review or the reply says the result is
@@ -698,10 +929,22 @@ The pull request that registers or raises a result runs
 rendered in the commit that changes the record, and the data pin moves in the next.
 No documentation phase is opened for it.
 
+It cuts no site edition.
+Site editions are retired as of 22 October 2026
+([Cutting an edition](../../development.md#cutting-an-edition); `think-wdqo`): the site
+deploys continuously from `main`, and `check_release_impact` asks it for no disposition
+and refuses an edit to the frozen `PUBLICATION_HISTORY` or `PUBLICATION_REVISION`, so
+the claim documents are not regenerated for an intake either.
+A paper or the posters still take their own cut, or a no-change record, when the import
+changes what they print.
+
 The pull request’s `--fast` surface runs on CI’s runners, not on a machine that is also
 running a replay, where a tier’s wall measures the contention rather than the branch
 ([What each tier costs](../../development.md#what-each-tier-costs-and-where-its-ceiling-lives)).
-It merges on the owner’s word, by
+That hosted run is the draft’s full test gate: marking the pull request ready for
+review, and merging it, both need `packing-required` and `pages-required` green on the
+head ([development.md](../../development.md#hosted-ci-gates-a-draft-pull-request)). It
+merges on the owner’s word, by
 [the merge policy](../../development.md#merging-a-pull-request).
 
 ### The House Rule
@@ -780,12 +1023,15 @@ No adoption waits for the owner’s word, and each case that once did is decided
     [section 5](../../docs/project/policies/regularization-policy.md#5-manual-review-and-adjustment),
     and a view the owner admits is drawn on its review record, as at n = 211 on 16
     October 2026: “Admit it.”
-  - Where the house best packing has an algebraic side, the runs settle the count: no
-    rational view is `same` or `bound` at an irrational side, and no number-field view
-    is decided on two exact routes yet (the policy’s obligation 1; think-mbdw is that
-    second route). Keeping a rational view just above an algebraic U is a question 13
-    decision, put to the owner once with the counts it concerns, and it holds no
-    adoption.
+  - Where the house best packing has an algebraic side, the count draws its exact house
+    and its regularization stays owed under think-mbdw: its `SETTLED` entry’s state is
+    `regularization-owed`, not decided, and its `owed` names the bead: no rational view
+    is `same` or `bound` at an irrational side, and no number-field view is decided on
+    two exact routes yet (the policy’s obligation 1; think-mbdw is that second route).
+    A rational view just above an algebraic U is not drawn.
+    The owner answered question 13 so on 23 October 2026 (think-r8cn): the best record
+    is always the record, and a regularized drawing may change the side only as a strict
+    improvement.
 - **A conjectured optimum** that the new house best packing is below, wherever its print
   rounds, is withdrawn, and any other stays; the adoption goes ahead either way.
 
@@ -797,8 +1043,12 @@ the open bead that adopts it and one of three reasons (`STAGING_REASONS`): the p
 next pull request; regularization runs over the item cap, which split the adoption
 ([stage 5’s adoption steps](#adopt-a-house-then-regularize-it)); or no writer, where
 `adopt_houses` cannot yet write the new house best packing.
-A house best packing with an algebraic side is the one such gap the rule names, and the
-writer’s bead, think-ot5c, owns its counts.
+A house best packing with an algebraic side was the one such gap the rule names until 23
+October 2026, when the writer took an algebraic side, written in both lanes as the one
+root of its minimal polynomial in an interval, or of degree two as its closed form
+(`exact_sides.form`). The gap now is an algebraic house that no derived number-field
+fact and receipt hold (`upper_bound_houses.FIELD_COUNTS`), and the writer’s bead,
+think-ot5c, owns its counts.
 `bead tree` holds each bead open, and the adopting pull request takes the count off.
 `--check` fails on a staged count where the selection no longer changes the house best
 packing, or would change it to a packing other than the one staged, and on a count
@@ -911,7 +1161,7 @@ and holds this one to the base record ([The House Rule](#the-house-rule)). It ru
 reason, then the guide’s render step, and lists the drawings as above.
 
 The records tier’s
-`every drawn picture is regularized, regular as published, decided or exempt`
+`every drawn picture is regularized, regular as published, decided, owed to an open bead or exempt`
 (`default_drawings --check-state`) fails on a pending count that the list does not name,
 so an adoption cannot pass until its runs have decided every count it re-houses.
 It also fails on a listed count that is no longer pending and on a `SETTLED` entry
@@ -982,10 +1232,13 @@ Engineering and Verification remain available topics, alongside the precise resu
 kinds. News excludes Correction and Audit topic labels; Results keeps those registered
 kinds.
 
-For S3–S5, draft a concise News entry before merge, or record an editorial omission when
-the PR is an intermediate research checkpoint without a distinct reader-facing
-development. Name what changed, why it matters, the source PR and relevant `result_ids`,
-direct public artifact links where available, and the actual verification or publication
+For S4 and S5 results a News entry is required, by the step and the gate in
+[Announce a Significant Result](#announce-a-significant-result).
+For other S3–S5 work, S3 results included, News stays optional, as before: draft a
+concise News entry before merge, or record an editorial omission when the PR is an
+intermediate research checkpoint without a distinct reader-facing development.
+Name what changed, why it matters, the source PR and relevant `result_ids`, direct
+public artifact links where available, and the actual verification or publication
 limits.
 Use surnames throughout News titles, summaries, details and display labels unless
 two distinct people share one; retain handles, organization names and literal cited
@@ -1041,7 +1294,9 @@ Last, once the owner has given the word, re-date the branch’s new register ent
 the merge day.
 The branch’s last two commits are the stamp, `uv run --frozen --all-extras
 --group dev python -m devtools.stamp_landed --apply` from `packing/`, which sets
-`landed` on every entry `origin/main` lacks to today in UTC, and its re-pin, `python -m
+`landed` on every entry `origin/main` lacks to today in UTC and dates, in
+`packing/frontier/landings.yaml`, each house best packing and each source of
+beyond-horizon rows the branch adds to `main`’s tree, and its re-pin, `python -m
 devtools.release_pin --update`. If `main` moves, or the merge slips past midnight UTC,
 run both again after the re-merge: the stamp re-dates the same entries.
 `landed` is the day of the stamp, so the stamp is the last step before the merge.
@@ -1076,6 +1331,8 @@ After merge:
    owner.
 6. Complete the prepared News/changelog disposition in the next change, following
    [Label the PR and Prepare News](#label-the-pr-and-prepare-news).
+   For an S4 or S5 result that change is required, and stage 7’s
+   [Announce a Significant Result](#announce-a-significant-result) says who opens it.
    Retain the actual merge date, source PR, `result_ids`, artifact links and limits.
    After that change deploys, check the live News entry and its public artifact links
    against the merged record, and retain the deployment receipt.
@@ -1140,7 +1397,142 @@ What lets an agent post is the `github-workflows` grant, which covers issues.
   ([After the Merge](#after-the-merge)).
 - The reply that reports a confirmation names the programs that ran, and says whether
   they were the author’s own code re-run or a re-implementation.
-- The issue is closed with a final comment when nothing the author asked for is queued.
+- **Every pending review is tracked on a GitHub issue**, and its state is posted there
+  at each change (the owner, 24 October 2026: “This state of all reviews should be
+  tracked in the GitHub issues.”). A review is pending while its result stands below
+  `V3` or `C3`, names an unfinished confirmation or an activity, or has a comparison the
+  record index leaves unassessed, which its author’s profile shows as Review pending.
+  The tracking issue is the one that reported the result, or, where none did, one the
+  project opens, as it does for every S4 or S5 result (#603 for T-163). Each change of
+  that state gets a follow-up there: the review or replay queued with its bead, run,
+  landed or held, a rung moved, a comparison settled.
+  `check_requests --pending` lists every pending review with its beads, its issues and
+  whether one of them states its present state; a comparison is a state no reply field
+  holds, so it stays listed until it is settled.
+  The pass answers every issue the view marks stale, and reports to the owner, before
+  opening any, the results it lists with no tracking issue.
+  The view lists apart a result whose owing issues are all held for the owner, since no
+  pass posts on a held issue until the owner lifts the hold, and marks one tracked only
+  on closed issues, which still count as tracking it.
+  Two follow-ups it cannot see are the pass’s to post by hand: the one a comparison owes
+  once settled, since it leaves the view as it settles (#603 for T-163), and those owed
+  where an issue names a result only in an ask, not in its `results` (#532 for T-142 to
+  T-144).
+- **A settled issue is closed with its final comment**, after the verified deploy, once
+  nothing the author asked for is queued and no question to the author would change the
+  record: [Close a Settled Issue](#close-a-settled-issue).
+- **Every S4 or S5 result gets a News item** in the first change after the merge that
+  registered or raised it:
+  [Announce a Significant Result](#announce-a-significant-result).
+
+### Close a Settled Issue
+
+The owner’s instruction of 23 October 2026: “if we have actually imported something,
+it’s already on the website, and we validated that, we should close the issues.
+That should be our standard process.”
+What is unresolved, or needs the reporter’s answer, stays open.
+That morning twelve issues were closeable and open: nothing ran the closing step, the
+sweep did not list them, and lanes had kept issues open for questions to their authors
+that the record did not track and whose answers would change nothing in it.
+
+1. **After the verified deploy**
+   ([Verify the Published Result](#verify-the-published-result)), run
+   `check_requests --report` from `main` and take each issue it marks closeable that is
+   still open on GitHub.
+   An issue held for the owner (`held` in the record) is never closeable: no pass posts
+   on it or closes it, `check_requests --draft` and `intake_comments --out` refuse it,
+   and the sweep lists it for the owner with what would otherwise be owed.
+   A hold is set on the owner’s recorded instruction (`basis: owner-instruction`), or on
+   a reservation for the owner that beads record (`basis: recorded-reservation`, pending
+   the owner’s confirmation), with those beads in `beads` and a note saying what each
+   records; only the owner lifts it.
+   An issue GitHub already shows closed is not posted on again: record its final comment
+   and its close (step 4).
+2. **Check that `main` and the deployed site say what the final comment will say**,
+   render the comment with `check_requests --draft N`, and edit it to the house style:
+   what is settled and where, linked into `main` and the site, then that nothing the
+   author asked for is queued, so the comment closes the issue.
+3. **Put an informational question in the closing comment**, saying that an answer is
+   still welcome and holds nothing open.
+   A question holds the issue open only when the record asserts something the answer
+   could falsify (who is credited with a result, what the record says it was derived
+   from, or which file or commit a claim names) and no measurement here can settle it.
+   Almost any provenance answer would change some sentence, so that is not the test.
+   A question the record already answers is informational, and one a measurement here
+   could settle is measured instead, as review A3 of #747 measured #470’s counts pose by
+   pose against the packings published before it.
+   A question that passes is recorded under the issue’s `awaiting_author`, naming the
+   reply that asked it and what the answer could falsify.
+   It holds the issue open: `check_requests` counts it against closeable, and the sweep
+   lists it under the answer bead, and for a decision (chase, withdraw or keep waiting)
+   once it has waited more than 14 days.
+   When the answer comes, read it into the record and mark the question `answered`,
+   naming the comment; when the record no longer needs it, mark it `withdrawn`, with a
+   note saying why.
+4. **Post the comment and close the issue** under the `github-workflows` grant, then
+   record the comment under the issue’s `replies` as `final` and set the entry’s `state`
+   and `closed` in the next change.
+   Close the answer bead once the record no longer names it on an open issue, which
+   `check_bead_tree` checks.
+
+Each six-hourly check-in of a running pass does the same.
+Until an issue is closed, `make intake` lists it under **Needs Action** and exits 1;
+once GitHub shows it closed and the record does not, the item says to record the close
+and post nothing. An issue held for the owner is listed for the owner and fails nothing.
+
+### Announce a Significant Result
+
+The owner’s decision of 22 October 2026: “We need a systematic process for the
+significant results”, then “Let’s have it do S4 and S5 then”.
+Every registered result at S4 or S5 has a News item: an entry in
+[`site-changelog.yaml`](../site-changelog.yaml) that News shows, scored at the result’s
+own score, with the result in its `result_ids`. S3 News stays optional, as
+[Label the PR and Prepare News](#label-the-pr-and-prepare-news) says.
+
+1. **Before the merge**, the pull request that registers a result at S4 or S5, or raises
+   one to either (a stage 4 rescoring included), drafts the entry in its description
+   under **News**, beside the announcement.
+   An entry names only merged pull requests, by their retained merge date and commit, so
+   it cannot land in the change it announces.
+2. **Right after the deploy of that merge is verified**
+   ([Verify the Published Result](#verify-the-published-result)), the pass’s coordinator
+   opens the News follow-up, or the next records pull request carries it.
+   From `packing/`, run
+   `uv run --frozen --all-extras --group dev python -m devtools.import_changelog --pr NNN
+   --significance-rationale "..." --output "$TMPDIR/changelog-candidate.yaml"` with the
+   merged pull request’s number.
+   Bring its delivery row, its coverage number and the reviewed entry into
+   `site-changelog.yaml`, dated the delivery’s merge day as the record requires, and
+   render with `python -m devtools.render_changelog`.
+3. **The gate is the backstop.** The records tier’s “synopsis agrees with the artifacts”
+   step, which pull-request CI runs, passes `--announcement-base` to
+   `devtools.render_changelog`. A result registered or raised on the branch under test
+   is reported as owed after the merge.
+   Once it is on `main` without its item, the gate fails any pull request that edits
+   `packing/frontier/results.yaml` or `packing/site-changelog.yaml`, measured against
+   its merge base. That pull request is the one that can settle the debt, since the pull
+   request that owes it has merged and its item now validates: add the item in it, or
+   land this step’s follow-up first and merge `main`. The failure names the result, its
+   score, the merged pull request the entry must name, the command that drafts it and
+   who scored the result.
+   Any other pull request gets a warning naming the result and the pull request that
+   owes it, and passes.
+   On `main` itself, a push or the scheduled run (`--announcement-base HEAD^1`), an owed
+   item is only ever a warning, records change or not: pull-request CI enforces the
+   rule, and a merged change can no longer act on a failure.
+   The one way `main` sees an owed item is a records pull request that went green before
+   an S4 or S5 merge and merged after it, and that must not turn `main` red.
+   Letting the registering pull request carry its own item, which names that pull
+   request and is stamped at merge as `landed` is, is `think-n51k`.
+
+The fifteen S4 and S5 results that landed before the News archive existed, on 13 October
+2026 (6279bd0e6), are exempt, listed with the score each is exempt at in
+`render_changelog.ANNOUNCEMENT_EXEMPT`, which may only shrink.
+Backfilling them as dated News, as T-060’s item was on 16 October (UTC), is a separate
+decision. The gate exists because T-194, the S5 report of a Lean proof that
+$s(19) = 3 + 4\sqrt{2}/3$, landed on 16 October and had no News item until 22 October:
+completing the item “in the next change” was a step nothing checked, and its pull
+request, #651, was never imported into the changelog.
 
 ### Report-Order Verdict Comments
 
@@ -1215,7 +1607,15 @@ stating a field, leaves the earlier statement standing.
 Each reason quotes the one reply it holds a field to, by its date, and by its kind or
 its address where the issue has another reply that day.
 An issue is **closeable** when triage is done, every result is confirmed or refuted (a
-reported defect: recorded against the entry it names), and no `ask` is queued.
+reported defect: recorded against the entry it names), no `ask` is queued, and no
+question under `awaiting_author` awaits the author’s answer, and the owner does not hold
+it (`held`). `awaiting_author` holds only the questions whose answers could falsify what
+the record asserts and that no measurement here can settle: `changes` says whether the
+credit, the lineage, or which file or commit a claim names, and `asked` is the recorded
+reply that asked it.
+`held` holds an issue for the owner, on the owner’s recorded instruction or on a
+reservation for the owner that beads record, with its `basis`, the day it was recorded
+here, the beads and a note: while it stands no pass posts on the issue or closes it.
 
 A confirmation is described from the confirming evidence’s `relationship_to_generator`:
 *reproduced with the author’s own checker* for `same-implementation`, *re-verified by an
@@ -1232,6 +1632,7 @@ Run each command from `packing/` as
 | none | The gate step: the schema holds and every id resolves; one line per issue |
 | `--report` | A table per issue: each result’s entries, rungs, state, how it was confirmed and whether its id is on `main`; the replies due; whether it is closeable |
 | `--backlog` | Every register entry below `V3` or `C3`, with its `next_rung`, its `activity`, the beads it names and the issues it serves |
+| `--pending` | Every pending review (stage 7): the backlog’s entries, any entry naming an unfinished confirmation or activity, and the record index’s unassessed comparisons, each with its beads, its tracking issues and whether one states its present state; then the count with no tracking issue, the stale, those held for the owner and those tracked only on closed issues. It does not see the follow-up a settled comparison owes, nor a result an issue names only in an ask |
 | `--draft N` | The status comment for issue N, ending in the Claude Code footer; it refuses unless `HEAD` is on `origin/main` |
 | `--github` | Read-only: the issues the record lacks, the replies missing from it, the comments created or edited after an entry’s `read_through`, and the `result-report` entries and entries marked `intake: true` whose issues lack the `intake` label |
 
@@ -1253,7 +1654,8 @@ broken record.
    kind, and in `reported` the id, rungs and status it stated for each result.
    Name in `corrects` any earlier reply whose `outdated` statements it corrects.
 4. When `--report` says an issue is closeable, close it with the final comment and set
-   the entry’s `state` and `closed`.
+   the entry’s `state` and `closed`, as [Close a Settled Issue](#close-a-settled-issue)
+   says.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
