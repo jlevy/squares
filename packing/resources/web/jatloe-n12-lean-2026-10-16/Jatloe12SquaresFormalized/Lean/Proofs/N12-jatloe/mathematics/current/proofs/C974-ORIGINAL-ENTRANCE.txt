@@ -1,0 +1,491 @@
+C974: COMPLETE MATHEMATICAL ENTRANCE AND OWNERSHIP TABLE
+11 October 2026
+
+WHAT THIS ENTRANCE PROVES
+
+The original case C974 is reduced to an explicit cover of 2720 labelled
+contexts: two missing-corner alternatives, sixteen closed wall-center
+sign alternatives, and eighty-five auxiliary ownership alternatives.
+The companion exact selector table eliminates that entire cover by the
+continuous-domain theorem and its dynamic-hull/parallel-strip extensions.
+This is a finite rational mathematical proof for the original C974
+family. It does not replace the earlier global marker classification.
+
+All coordinates are exact. Open squares have common side 1<a<=1001/1000,
+closures in [0,4]^2, and pairwise disjoint open interiors. Ownership means
+strict interior containment. The original marker classification supplies
+the groups below; every marker absent from a group is excluded from that
+owner's open square. In particular marker 11 is excluded from all twelve
+owners in this case.
+
+The proof uses three already established geometric entrances: the
+six-pair avoidance theorem for the ten-point sets F and G, the singleton
+corner and paired-corner compulsory-point lemmas, and the local
+four/five/six-point obstructions. Their exact uses are specified below.
+The only additional published local fact is Bentz's Lemma 11, with its
+missing-corner premise stated in Section 4. No thirteen-square counting
+argument is imported.
+
+
+1. MARKERS, OWNERS, AND INITIAL SEED HULLS
+
+Marker indices are zero-based:
+
+    M_0 = (1,457/500)
+    M_1 = (457/500,1)
+    M_2 = (3,457/500)
+    M_3 = (1543/500,1)
+    M_4 = (3,1543/500)
+    M_5 = (1543/500,3)
+    M_6 = (1,1543/500)
+    M_7 = (457/500,3)
+    M_8 = (33/20,33/20)
+    M_9 = (47/20,33/20)
+    M_10 = (47/20,47/20)
+    M_11 = (33/20,47/20)
+    M_12 = (457/500,2)
+    M_13 = (2,457/500)
+    M_14 = (1543/500,2)
+    M_15 = (2,1543/500)
+
+Owner i strictly owns exactly the following original marker group:
+    i=0: {0}
+    i=1: {1}
+    i=2: {2,3}
+    i=3: {4,5}
+    i=4: {6,7}
+    i=5: {8}
+    i=6: {9}
+    i=7: {10}
+    i=8: {12}
+    i=9: {13}
+    i=10: {14}
+    i=11: {15}
+
+The compulsory seed hulls below are listed in counterclockwise order
+from their lexicographically least vertices. A singleton or segment has
+the convention in the continuous-domain theorem. All these vertices are
+strictly owned; hence the entire displayed convex hull is strict.
+Owners 0 and 1 use the corrected singleton-corner lemma. Owners 2,3,4
+use the paired-corner inner-point lemma. The other seeds are just markers.
+
+    B_0 = Hull((1,457/500),(187/100,19/25),(87/50,1),(28/25,1))
+    B_1 = Hull((19/25,187/100),(457/500,1),(1,28/25),(1,87/50))
+    B_2 = Hull((3,457/500),(1543/500,1),(3,1))
+    B_3 = Hull((3,3),(1543/500,3),(3,1543/500))
+    B_4 = Hull((457/500,3),(1,3),(1,1543/500))
+    B_5 = Hull((33/20,33/20))
+    B_6 = Hull((47/20,33/20))
+    B_7 = Hull((47/20,47/20))
+    B_8 = Hull((457/500,2))
+    B_9 = Hull((2,457/500))
+    B_10 = Hull((1543/500,2))
+    B_11 = Hull((2,1543/500))
+
+For clarity, the singleton seed for owner 0 includes (1.74,1). This is
+the corrected coordinate in the inherited handout; the printed paper's
+Lemma 10 has the transposed typographical coordinate. The later set S_A
+in that paper and the recovered prerequisite proof use (1.74,1).
+
+
+2. EXACT AUXILIARY SUBSETS AND THE FINITE ENUMERATION
+
+Both auxiliary lists are in lexicographic coordinate order:
+
+    F_0 = (1,87/50)
+    F_1 = (1,113/50)
+    F_2 = (8/5,1)
+    F_3 = (8/5,3)
+    F_4 = (2,87/50)
+    F_5 = (2,113/50)
+    F_6 = (12/5,1)
+    F_7 = (12/5,3)
+    F_8 = (3,87/50)
+    F_9 = (3,113/50)
+    G_0 = (1,8/5)
+    G_1 = (1,12/5)
+    G_2 = (87/50,1)
+    G_3 = (87/50,2)
+    G_4 = (87/50,3)
+    G_5 = (113/50,1)
+    G_6 = (113/50,2)
+    G_7 = (113/50,3)
+    G_8 = (3,8/5)
+    G_9 = (3,12/5)
+
+A ten-bit integer f denotes the exact subset {F_j: bit j of f is 1}.
+Likewise g denotes an exact subset of G. The combined label is
+
+    m = f + 1024*g.
+
+Equivalently use the ordered twenty-point list S=(F_0,...,F_9,G_0,...,G_9)
+and m=sum 2^j over the owned S_j. Labels of distinct owners are disjoint
+as subsets. Zero is an allowed exact empty subset when the covering
+budget permits it. Unowned auxiliary points need not acquire an owner.
+
+For F, an avoiding square must own a complete pair from
+
+    {0,1},{2,3},{4,5},{6,7},{8,11},{9,10}.
+
+For G, the final two pairs are instead {8,9},{10,11}. In C974 the only
+exceptional owners, for either covering, are 2,3,4. Thus there are nine
+ordinary owners and one spare incidence among ten covering points.
+Each ordinary owner owns one or two points of each covering; each
+exceptional owner owns zero or one. A subset must also include every
+covering point already in its seed hull. These are bounds on the actual
+full owned subset, so every omitted covering point is an exclusion.
+
+Here is a complete arithmetic definition of the preliminary subset test.
+For a group and a proposed owned subset T of F, G, or F union G, let
+H=Hull(B_i union T), and let E consist of all original markers outside
+the group and all points of the chosen covering set outside T. Retain T
+unless at least one of the following explicitly forbidden patterns occurs.
+
+(a) Some point of E belongs to H.
+
+(b) There are vertices A,B of H and distinct P,Q in E such that
+    |P-Q|^2<1, (P-A).(Q-A)>0, (P-B).(Q-B)>0, and P,A,Q,B is a strictly
+    convex cyclic quadrilateral. The last condition means all four
+    consecutive oriented cross products have the same nonzero sign.
+
+(c) H contains both (1.65,1.65) and either (1,2.26) or (2,2.26), while
+    E contains (1,1.74),(1.65,2.35),(2,1.74); or the image of this entire
+    pattern under any reflection in x=2, reflection in y=2, or exchange
+    of coordinates occurs.
+
+(d) H contains (.914,2),(1,1.74),(1.74,2), while E contains
+    (1,1.6),(1,2.4),(1.65,1.65); or any of the same eight container
+    symmetries of this entire pattern occurs.
+
+These are respectively convexity, the four-point obstruction, the
+five-point obstruction, and the six-point side obstruction. Their
+strict required points are legitimate because every vertex of H is
+strict. All tests use only rational dot products, cross products and
+closed hull membership. They reject only impossible actual subsets.
+
+Apply the size bounds and this test separately to F and G. The resulting
+complete single-cover lists, encoded as ten-bit integers, are:
+
+    owner 0: F {4}; G {4,5}
+    owner 1: F {1,5}; G {1}
+    owner 2: F {0,64,256}; G {0,32,256}
+    owner 3: F {0,128,512}; G {0,128,512}
+    owner 4: F {0,2,8}; G {0,2,16}
+    owner 5: F {1,3,4,5,16,17,18,20,33,48,80}; G {1,4,5,8,9,10,12,36,40,68,72}
+    owner 6: F {16,20,48,64,80,256,272,288,320,528,768}; G {32,36,40,64,68,72,96,256,288,320,576}
+    owner 7: F {32,40,48,128,160,288,512,528,544,640,768}; G {64,72,80,128,136,144,192,320,512,576,640}
+    owner 8: F {1,2,3,5,10}; G {1,2,3,8,9,10}
+    owner 9: F {4,16,20,64,68,80}; G {4,5,32,36,288}
+    owner 10: F {256,320,512,640,768}; G {64,256,320,512,576,768}
+    owner 11: F {8,32,40,128,136,160}; G {16,18,128,144,640}
+
+For each owner combine every surviving F label and G label and apply the
+same test to their union. Next use forced-point propagation: in owner
+order 0,...,11, take the intersection of all its remaining labels and
+discard from every other owner each label meeting that intersection.
+Visit the other owners in increasing order and repeat complete sweeps
+until no label changes. Every true label survives this operation.
+The resulting exact combined lists are:
+
+    owner 0: {4100}
+    owner 1: {1025}
+    owner 2: {0,262144}
+    owner 3: {0,128,131200}
+    owner 4: {0,8,16392}
+    owner 5: {8208,73744,8240,73776}
+    owner 6: {65792,262400,327936,65824,327968}
+    owner 7: {65568,81952,131104,147488,196640,147496,65664,131200,196736,65696,131232,147616,196768}
+    owner 8: {2050,2058}
+    owner 9: {32832,294976}
+    owner 10: {524800,590336,524928}
+    owner 11: {16392,147464,16424,147496,131200,147584,147592,131232,147616}
+
+Finally form all twelve-component vectors choosing one label per owner
+from these lists and having pairwise disjoint labels. Sort these vectors
+lexicographically as integer tuples. The following table is the exact
+result: all eighty-five alternatives, with no symmetry quotient. Thus
+this is a finite equality between the explicitly defined set and the
+listed set, not an assumption that an old survivor list was exhaustive.
+All preliminary lists and this final equality were reconstructed afresh
+from the authentic geometric predicates and original case table.
+
+    vector id | (m_0,m_1,m_2,m_3,m_4,m_5,m_6,m_7,m_8,m_9,m_10,m_11)
+     0 | (4100,1025,0,0,0,8208,65792,131104,2050,32832,524800,16392)
+     1 | (4100,1025,0,0,0,8208,65792,131104,2050,32832,524928,16392)
+     2 | (4100,1025,0,0,0,8208,65792,131104,2050,294976,524800,16392)
+     3 | (4100,1025,0,0,0,8208,65792,131104,2050,294976,524928,16392)
+     4 | (4100,1025,0,0,0,8208,65792,131200,2050,32832,524800,16392)
+     5 | (4100,1025,0,0,0,8208,65792,131200,2050,32832,524800,16424)
+     6 | (4100,1025,0,0,0,8208,65792,131200,2050,294976,524800,16392)
+     7 | (4100,1025,0,0,0,8208,65792,131200,2050,294976,524800,16424)
+     8 | (4100,1025,0,0,0,8208,65792,131232,2050,32832,524800,16392)
+     9 | (4100,1025,0,0,0,8208,65792,131232,2050,294976,524800,16392)
+    10 | (4100,1025,0,0,0,8208,65824,131200,2050,32832,524800,16392)
+    11 | (4100,1025,0,0,0,8208,65824,131200,2050,294976,524800,16392)
+    12 | (4100,1025,0,0,0,8208,262400,65568,2050,32832,524800,16392)
+    13 | (4100,1025,0,0,0,8208,262400,65568,2050,32832,524800,131200)
+    14 | (4100,1025,0,0,0,8208,262400,65568,2050,32832,524800,147464)
+    15 | (4100,1025,0,0,0,8208,262400,65568,2050,32832,524800,147584)
+    16 | (4100,1025,0,0,0,8208,262400,65568,2050,32832,524800,147592)
+    17 | (4100,1025,0,0,0,8208,262400,65568,2050,32832,524928,16392)
+    18 | (4100,1025,0,0,0,8208,262400,65568,2050,32832,524928,147464)
+    19 | (4100,1025,0,0,0,8208,262400,65568,2058,32832,524800,131200)
+    20 | (4100,1025,0,0,0,8208,262400,65568,2058,32832,524800,147584)
+    21 | (4100,1025,0,0,0,8208,262400,65664,2050,32832,524800,16392)
+    22 | (4100,1025,0,0,0,8208,262400,65664,2050,32832,524800,16424)
+    23 | (4100,1025,0,0,0,8208,262400,65664,2050,32832,524800,147464)
+    24 | (4100,1025,0,0,0,8208,262400,65664,2050,32832,524800,147496)
+    25 | (4100,1025,0,0,0,8208,262400,65696,2050,32832,524800,16392)
+    26 | (4100,1025,0,0,0,8208,262400,65696,2050,32832,524800,147464)
+    27 | (4100,1025,0,0,0,8208,262400,81952,2050,32832,524800,131200)
+    28 | (4100,1025,0,0,0,8208,262400,81952,2058,32832,524800,131200)
+    29 | (4100,1025,0,0,0,8208,262400,131104,2050,32832,524800,16392)
+    30 | (4100,1025,0,0,0,8208,262400,131104,2050,32832,524928,16392)
+    31 | (4100,1025,0,0,0,8208,262400,131104,2050,32832,590336,16392)
+    32 | (4100,1025,0,0,0,8208,262400,131200,2050,32832,524800,16392)
+    33 | (4100,1025,0,0,0,8208,262400,131200,2050,32832,524800,16424)
+    34 | (4100,1025,0,0,0,8208,262400,131200,2050,32832,590336,16392)
+    35 | (4100,1025,0,0,0,8208,262400,131200,2050,32832,590336,16424)
+    36 | (4100,1025,0,0,0,8208,262400,131232,2050,32832,524800,16392)
+    37 | (4100,1025,0,0,0,8208,262400,131232,2050,32832,590336,16392)
+    38 | (4100,1025,0,0,0,8208,262400,196640,2050,32832,524800,16392)
+    39 | (4100,1025,0,0,0,8208,262400,196640,2050,32832,524928,16392)
+    40 | (4100,1025,0,0,0,8208,262400,196736,2050,32832,524800,16392)
+    41 | (4100,1025,0,0,0,8208,262400,196736,2050,32832,524800,16424)
+    42 | (4100,1025,0,0,0,8208,262400,196768,2050,32832,524800,16392)
+    43 | (4100,1025,0,0,0,8208,327936,131104,2050,32832,524800,16392)
+    44 | (4100,1025,0,0,0,8208,327936,131104,2050,32832,524928,16392)
+    45 | (4100,1025,0,0,0,8208,327936,131200,2050,32832,524800,16392)
+    46 | (4100,1025,0,0,0,8208,327936,131200,2050,32832,524800,16424)
+    47 | (4100,1025,0,0,0,8208,327936,131232,2050,32832,524800,16392)
+    48 | (4100,1025,0,0,0,8208,327968,131200,2050,32832,524800,16392)
+    49 | (4100,1025,0,0,0,8240,65792,131200,2050,32832,524800,16392)
+    50 | (4100,1025,0,0,0,8240,65792,131200,2050,294976,524800,16392)
+    51 | (4100,1025,0,0,0,8240,262400,65664,2050,32832,524800,16392)
+    52 | (4100,1025,0,0,0,8240,262400,65664,2050,32832,524800,147464)
+    53 | (4100,1025,0,0,0,8240,262400,131200,2050,32832,524800,16392)
+    54 | (4100,1025,0,0,0,8240,262400,131200,2050,32832,590336,16392)
+    55 | (4100,1025,0,0,0,8240,262400,196736,2050,32832,524800,16392)
+    56 | (4100,1025,0,0,0,8240,327936,131200,2050,32832,524800,16392)
+    57 | (4100,1025,0,0,0,73744,262400,131104,2050,32832,524800,16392)
+    58 | (4100,1025,0,0,0,73744,262400,131104,2050,32832,524928,16392)
+    59 | (4100,1025,0,0,0,73744,262400,131200,2050,32832,524800,16392)
+    60 | (4100,1025,0,0,0,73744,262400,131200,2050,32832,524800,16424)
+    61 | (4100,1025,0,0,0,73744,262400,131232,2050,32832,524800,16392)
+    62 | (4100,1025,0,0,0,73776,262400,131200,2050,32832,524800,16392)
+    63 | (4100,1025,0,0,8,8208,262400,65568,2050,32832,524800,131200)
+    64 | (4100,1025,0,0,8,8208,262400,65568,2050,32832,524800,147584)
+    65 | (4100,1025,0,0,8,8208,262400,81952,2050,32832,524800,131200)
+    66 | (4100,1025,0,0,16392,8208,262400,65568,2050,32832,524800,131200)
+    67 | (4100,1025,0,128,0,8208,65792,131104,2050,32832,524800,16392)
+    68 | (4100,1025,0,128,0,8208,65792,131104,2050,294976,524800,16392)
+    69 | (4100,1025,0,128,0,8208,262400,65568,2050,32832,524800,16392)
+    70 | (4100,1025,0,128,0,8208,262400,65568,2050,32832,524800,147464)
+    71 | (4100,1025,0,128,0,8208,262400,131104,2050,32832,524800,16392)
+    72 | (4100,1025,0,128,0,8208,262400,131104,2050,32832,590336,16392)
+    73 | (4100,1025,0,128,0,8208,262400,196640,2050,32832,524800,16392)
+    74 | (4100,1025,0,128,0,8208,327936,131104,2050,32832,524800,16392)
+    75 | (4100,1025,0,128,0,73744,262400,131104,2050,32832,524800,16392)
+    76 | (4100,1025,0,131200,0,8208,262400,65568,2050,32832,524800,16392)
+    77 | (4100,1025,262144,0,0,8208,65792,131104,2050,32832,524800,16392)
+    78 | (4100,1025,262144,0,0,8208,65792,131104,2050,32832,524928,16392)
+    79 | (4100,1025,262144,0,0,8208,65792,131200,2050,32832,524800,16392)
+    80 | (4100,1025,262144,0,0,8208,65792,131200,2050,32832,524800,16424)
+    81 | (4100,1025,262144,0,0,8208,65792,131232,2050,32832,524800,16392)
+    82 | (4100,1025,262144,0,0,8208,65824,131200,2050,32832,524800,16392)
+    83 | (4100,1025,262144,0,0,8240,65792,131200,2050,32832,524800,16392)
+    84 | (4100,1025,262144,128,0,8208,65792,131104,2050,32832,524800,16392)
+
+The compact ordered table has the recovered identification digest
+
+    b787b1fd0a4ce01e9f88be7e656e4c482fbfa3ed2fc9edb2145c4282dd591910.
+
+The digest identifies the table; the subset construction and the displayed
+vectors are the mathematical data. A digest alone does not prove the set
+identity or geometric admissibility.
+
+
+3. THE LOCAL GEOMETRIC JUSTIFICATION OF THE SUBSET TESTS
+
+For completeness, the four-point obstruction in (b) has a short proof.
+If P,Q are excluded, their excluding edges cannot be the same, because
+PQ crosses the strict interior segment AB, and cannot be opposite,
+because |P-Q|<1<a. They are therefore adjacent. Put their common corner
+O at the origin with the square in the positive quadrant, P outside the
+left edge and Q outside the bottom edge. The crossing gives P_y>0 and
+Q_x>0, so OP.OQ<=0. Thus O lies in the closed disk with diameter PQ.
+Whichever of A,B lies on O's side of PQ lies in triangle OPQ, hence in
+that convex disk. Its angle subtended by PQ is at least a right angle,
+contrary to the positive dot product in (b).
+
+The short-cluster principle behind (c),(d) is equally simple: excluded
+points at pairwise distance at most 1 cannot use opposite excluding
+edges of a side-a square, so they use at most two adjacent edges.
+Segments of excluded points crossing a segment of required strict
+points cannot share an excluding edge.
+
+For (c), translate by (1,1.74). The excluded points are
+A=(0,0), B=(.65,.61), C=(1,0), and the required points are
+D=(.65,-.09), Q=(1,.52), or Q=(0,.52). The excluded squared distances
+are 1,.7946,.4946. The segments AC and BC cross DQ in the first version.
+Hence A,B share one excluding normal u and C uses a perpendicular normal
+v. Comparing their exclusions with strict D,Q gives u_y>0,u_x<0 and
+v_y<0,v_x>0. Then u.v<0, a contradiction. Reflection across the vertical
+midline gives the version Q=(0,.52). All eight container images follow.
+
+For (d), label the required points P=(.914,2), Q=(1,1.74), R=(1.74,2),
+and the excluded points A=(1,1.6), B=(1,2.4), C=(1.65,1.65). Their
+excluded squared distances are .64,.425,.985. Both AB and BC cross PR;
+the latter intersection is (101/75,2). Thus A,C share normal u and B
+uses a perpendicular normal v. Comparing A,B with the strict point
+(1,2) gives u_y<0,v_y>0. The two possible signed directions are
+
+    u=(c,-s), v=(s,c), c,s>0; or
+    u=(-c,-s), v=(-s,c), c,s>0.
+
+In the first case, comparisons with R give 37c<20s and 37s<20c,
+which contradict 37>20. In the second case comparisons with Q and P
+give 65c<9s and 43s<200c, contradicting 65*43=2795>1800=9*200.
+The remaining zero-coordinate case already contradicts v_y>0.
+This proves all uses of (c),(d) in the finite subset construction.
+
+
+4. THE TWO EXHAUSTIVE MISSING-CORNER ROOTS
+
+Put E=(1,1). The two roots are:
+
+    root 0: E is excluded from owner 0;
+    root 1: E is strict in owner 0 and excluded from owner 1.
+
+Every actual packing satisfies one root. If owner 0 does not contain E
+strictly, root 0 applies, including equality on its boundary. If it
+contains E strictly, disjointness excludes E from owner 1 and root 1
+applies. No assumption that one of these squares owns E is made.
+
+The extra local theorem used for a missing corner is the following
+published Lemma 11 of Wolfram Bentz (2010). A square of side greater than
+one, in [0,4]^2, containing (1,.914) and excluding
+
+    (.914,1), (.914,2), (1.65,1.65), (1,1)
+
+contains both (1.82,1) and (1.96,.76). The hypotheses and both conclusions
+were checked directly against the primary paper, printed page 7.
+
+Thus root 0 adds these two strict points to owner 0. Root 1 applies the
+coordinate-exchanged version to owner 1, adding (1,1.82),(.76,1.96), and
+adds the declared strict point E to owner 0. Every required exclusion
+other than E follows directly from the original marker groups above.
+The other corner owners require no extra missing-corner alternative.
+
+Published source: Wolfram Bentz, Optimal Packings of 13 and 46 Unit
+Squares in a Square, Electronic Journal of Combinatorics 17 (2010),
+R126, Lemma 11, printed page 7.
+https://www.combinatorics.org/ojs/index.php/eljc/article/download/v17i1r126/pdf
+
+This is a named inherited local lemma. The remainder of C974, including
+its complete context cover, initialization, continuous-angle operations
+and terminal arithmetic, is explicitly supplied in this package.
+
+
+5. THE SIXTEEN WALL-CENTER SIGNS
+
+For a sign index s in {0,...,15}, let epsilon_j=+1 if bit j of s is 1,
+and epsilon_j=-1 otherwise. For j=0,1,2,3 respectively, constrain the
+following owner's center coordinate:
+
+    j=0: owner 8,  y coordinate;
+    j=1: owner 9,  x coordinate;
+    j=2: owner 10, y coordinate;
+    j=3: owner 11, x coordinate.
+
+The constraint is epsilon_j*(coordinate-2)<=0. Thus the + sign means
+coordinate<=2 and the - sign means coordinate>=2. All inequalities are
+closed. These sixteen alternatives cover every possible choice of real
+centers, including all centers on the midlines. A physical boundary
+configuration may occur in more than one alternative; that is harmless.
+
+The labelled universe is exactly
+
+    {0,1} x {0,...,15} x {0,...,84},
+
+of size 2*16*85=2720. The selector table uses zero-based root, sign,
+vector and owner indices consistently. Its only nontrivial surviving
+wall sign after the first stage is 8, namely (-,-,-,+).
+
+
+6. PRECISE INITIAL DOMAINS FOR EACH SELECTED CONTEXT
+
+A context specifies a root, sign, resolution N, and nonempty sorted
+subset I of the eighty-five vector indices. Freshly form, for each owner,
+
+    M_i={r_i: r is a vector selected by I},
+    H_i=Hull(B_i union all auxiliaries common to every m in M_i),
+
+then add the root's strict points from Section 4 to H. These root-enhanced
+hulls are common to every selected vector. The context is initialized
+freshly from these data; a later single-vector context does not copy the
+rounded domains of a preceding multi-vector context.
+
+For each owner i, angle cell k and label m in M_i, first form the local
+own hull Hull(B_i union owned auxiliaries of m). Apply the exact initial
+rectangle, four wall clips and absent-point removals of Sections 2--4
+of 03_exact_continuous_domain_theorem.txt, with alpha=1, beta=1001/1000,
+G=100000000. Absent original markers and absent auxiliaries are processed
+in lexicographic point order; the four point-square inequalities are in
+the order u_k,v_k,-u_k,-v_k. The four wall clips have normals
+(-1,0),(1,0),(0,-1),(0,1), in that order.
+
+Next subtract each foreign root-enhanced hull plus the inner square.
+The foreign hull vertex lists are sorted lexicographically for this
+initialization; each Minkowski hull has the canonical vertex order.
+There is no intermediate grid rounding during these initial removals.
+For each surviving polygon also impose its own root-enhanced hull bounds
+
+    n.z <= min_{h in H_i} n.h + (1001/1000)b_k/2,
+    n=u_k,v_k,-u_k,-v_k in that order.
+
+If this owner is the root's missing-corner owner, additionally subtract
+the open inner-square Minkowski neighborhood of E. Convert final pieces
+to the outward integer grid and merge states with equal cell and label.
+
+Finally clip the four wall-marker owner domains by the prescribed signed
+midline inequalities of Section 5, round each clipped polygon outward
+in grid units, and merge. This completes the initial domains D_i.
+The true state for every selected actual vector and angle survives.
+
+Subsequent selectors use the common theorem and
+05_dynamic_hulls_refinement_parallel_strips.txt. In particular, dynamic
+refresh uses owner order and rounds after EACH foreign hull. Its order
+is intentionally distinguished from this fresh initialization.
+
+
+7. HOW PARTIAL SUPPORT AND THE TERMINAL COVER COMPOSE
+
+A terminal contradiction for a context eliminates every vector selected
+by that context, at its specified root and sign. At two contexts the
+full owner domains remain nonempty. For either such context let C_i be
+the set of labels still represented in D_i. It eliminates precisely
+those selected vector indices j for which
+
+    some i satisfies (vector j)_i not in C_i.                (C974-S)
+
+This criterion is sound: the true full vector must retain its component
+in every owner domain. It does not require simultaneous consistency of
+all surviving components, so surviving extra vectors are simply left
+for further contexts.
+
+The first thirty-two contexts cover each root and wall sign once using
+all eighty-five vectors. For each root, fifteen wall signs close
+completely; sign 8 leaves forty-seven vectors after (C974-S). The table
+then initializes and eliminates those forty-seven vectors separately
+for each root, using ninety-four additional contexts. Three of these
+single-vector contexts use a two-child center split; every child is
+closed. Thus the total is 32+94=126 contexts.
+
+The detailed terminal equalities and the exact union of eliminated
+labels are in 03_fresh_arithmetic_and_coverage.txt. Every action selector,
+parallel-strip point, angle refinement and tree is recorded in
+02_exact_context_selectors.txt. Those files constitute the finite
+calculation part; the common continuous-domain and geometric lemmas
+prove that its exclusions apply to arbitrary real square poses.
+

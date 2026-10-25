@@ -1,0 +1,27 @@
+C700 RIGHT-WALL INPUT BOUNDARY, 2026-10-15
+
+A proposed two-square ending with only the actual right bar, right marker and
+right container wall has a rational local counterexample. It must retain the
+genuine paired southeast corner as well. This diagnostic concerns the weaker
+input, not C700 or its full original family. It is not a Lean theorem.
+
+Use coordinates centered at(2,2), common side a=1001/1000, and bands
+U=c*x+s*y in(loU,loU+a), V=-s*x+c*y in(loV,loV+a).
+  B: c=15/17, s=8/17, loU=1/1000, loV=-19/40.
+  R: c=4/5, s=-3/5, loU=217/250, loV=-349/1000.
+Both are exact unit normals and all vertices lie within[-2,2]^2.
+
+B strictly owns(.35,-.35),(.35,.35),(0,.26),(.26,0); omits(-.05,-.05),
+(.26,1),(1,-.26) and the whole singleton right bar{1}x[.26,.88]. It has
+positive lower-U and both upper faces U+a<=c+.26s and V+a<=c-.26s.
+R strictly owns(1.086,0) and{1}x[-.8,-.26], and has rightmost x=1.8864<2.
+Its upper support in B's V direction is-10841/21250, strictly below B.loV
+=-19/40, with exact separation gap2989/85000. Endpoint checks establish
+the full strict bars by linear interpolation. These calculations were checked
+with exact Fraction arithmetic only; no search or compiler was used.
+
+The missing genuine input is decisive: this R strictly owns(1,-1), since its
+bands are(7/5,-1/5). In C700 that point belongs strictly to the paired actual
+corner12 at original(3,1), so R must omit it. The actual corner also supplies
+the separate marker(1.086,-1). Both omissions must be retained in a stronger
+right-wall ending. The weaker local witness is not a legal full C700 packing.

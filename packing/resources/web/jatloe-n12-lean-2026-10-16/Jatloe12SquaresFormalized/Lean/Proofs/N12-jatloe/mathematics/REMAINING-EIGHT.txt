@@ -1,0 +1,23 @@
+ORIGINAL-CASE SOURCE STATUS, 2026-10-15
+
+All117 original case contracts are written and registered. Exact pending set:empty.
+The historical filename is retained for existing links.
+
+C972 closes every support-axis alternative of its actual SE/NE pair.
+C700 closes because actual singleton1 and singleton2 must both contain(1,1).
+See research/C700-TWO-CORNER-ENDING-2026-10-15.txt for the simplified last case.
+
+Compact/Assembly/Final.lean exposes the unconditional source theorem
+N12Compact.Final.optimality : S12.packingConstant12 = 4.
+No new mathematical premise remains in its public statement. The original
+normalization, all117-case classification and attaining construction are used.
+
+The new source is UNCOMPILED. No final type/axiom replay or CI run is claimed.
+All259 original supplied mathematical documents are preserved unchanged.
+The remaining verification work is elaboration and final type/axiom auditing
+when the user requests compilation, repairing source errors without weakening
+any statement. See handoff/COMPLETE-SOURCE-2026-10-15.txt and GITHUB-REPLAY.txt.
+
+Final closure: 8609 proof modules; 8739 including libraries,
+cache/setup/configuration and the final audit. Broader saved selection:
+8890 including setup/audit. Hard10000 cap met; preferred8000 exceeded.

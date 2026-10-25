@@ -1,0 +1,66 @@
+C700: TWO ACTUAL SINGLETONS FORCED TO THE SAME CORNER
+2026-10-15 -- source-complete, not compiled
+
+C700 has exact original family
+{1,2,12,16,32,192,256,1536,4096,8192,16384,32768} (original row381).
+Write O=owner1, P=owner2, A=SW256, D=bottom8192, L=left4096,
+R=right16384, T=top32768, K=pairedSE12, H=pairedNW192.
+All are the actual squares of one arbitrary normalized packing, with common
+side a>1, a<=1.001, in the unchanged [0,4]^2 container.
+
+1. ACTUAL WALL ORIGINS
+The already-proved wall reaches put D on{y=1,x in[2.26,2.8]},
+R on{x=3,y in[1.2,1.74]}, L on{x=1,y in[2.26,2.8]}, and
+T on{y=3,x in[1.2,1.74]}, all strict interior segments.
+BoundaryOrigin applied to the full paired corner K and the actual R/D bars
+forces D(2,1) and R(3,2). Applying the same lemma after a genuine coordinate
+rotation to H and actual T/L forces L(1,2) and T(2,3).
+Every forbidden corner halfpoint belongs strictly to the perpendicular actual
+wall owner. Both container walls and whole physical corner are retained.
+
+2. IF O OMITTED(1,1)
+O's exact singleton{0}, side cap, actual container and corner omission force
+O(1.82,1) and O(1.96,.76), using the supplied C580 Appendix A.3 argument
+formalized in CommonCases.SingletonMissing.zero_missing_points.
+Apply the complete C974 local three-square theorem to O,D,K after subtracting
+(1,1) from coordinates. Its genuine input ledger is:
+  singleton marker(1,.914), strong points(1.82,1),(1.96,.76), missing(1,1);
+  D origin(2,1), marker(2,.914), far point(2.8,1);
+  D omits SEmarker(2.35,1.65) by its exact marker signature;
+  D omits middle(2,1.5), strictly owned by actual A;
+  D omits outer(3,1.5), strictly owned by actual R;
+  K owns corner(3,1), lies within its real right/bottom container walls,
+    and omits(3,1.5), strictly owned by the same actual R;
+  O,D,K have the common side and are pairwise interior-disjoint.
+These are exactly the20 fields of C974LocalData.Input. Its theorem gives
+False, so the actual O contains(1,1) strictly.
+
+3. IF P OMITTED(1,1)
+Exact singleton{1} similarly forces P(1,1.82),P(.76,1.96).
+Exchange coordinates and subtract(1,1); apply the same local theorem to P,L,H.
+The literal counterpart ledger is:
+  singleton marker(.914,1), strong points(1,1.82),(.76,1.96), missing(1,1);
+  L origin(1,2), marker(.914,2), far point(1,2.8);
+  L omits NWmarker(1.65,2.35) by its own exact marker signature;
+  L omits middle(1.5,2), strictly owned by actual A;
+  L omits outer(1.5,3), strictly owned by actual T;
+  H owns corner(1,3), lies within its real top/left container walls,
+    and omits(1.5,3), strictly owned by the same actual T;
+  P,L,H have the common side and are pairwise interior-disjoint.
+No owner for the globally absent NWmarker is asserted. The theorem needs
+only the displayed omission. Hence P contains(1,1) strictly.
+
+4. CONTRADICTION AND ORIGINAL ROW
+The distinct actual owners O and P cannot both contain(1,1) strictly.
+This excludes the entire original family, without central-angle assumptions.
+RowIdentity.family_at381 binds every retained row with original ID700 to
+this literal family. C700Completion.case700_excluded is therefore a full
+original-case contract and is registered in NewCases.
+
+The local three-square theorem already treats all its orientations and weak
+boundary alternatives. The two adapter proofs introduce no angle restriction,
+extra marker ownership, strong-seed assumption, admission or numerical search.
+The earlier C700 angle reductions and local counterexamples remain useful
+historical work; the two-corner ending bypasses their unresolved coupling.
+Independent source reviews checked the ledgers and coordinate transports.
+Compilation and final axiom acceptance have deliberately not been run.

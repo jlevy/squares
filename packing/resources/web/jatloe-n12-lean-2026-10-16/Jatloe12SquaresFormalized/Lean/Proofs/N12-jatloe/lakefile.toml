@@ -1,0 +1,17 @@
+name = "n12_compact"
+version = "0.1.0"
+defaultTargets = ["Compact"]
+
+[[require]]
+name = "mathlib"
+path = ".lake/packages/mathlib"
+
+[[lean_lib]]
+name = "Compact"
+
+[[lean_lib]]
+name = "S12"
+srcDir = "source"
+
+[[lean_lib]]
+name = "Completion"
