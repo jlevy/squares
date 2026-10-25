@@ -1,0 +1,862 @@
+{
+  "program": "t241_t242_exact.py",
+  "program_sha256": "a4d32ac9d0e3b0dcca4a5886e12bf6ce8360c14470601fbb1572b35b427f5da9",
+  "python": "3.14.7",
+  "selftests": [
+    {
+      "case": "two squares in edge contact",
+      "expected": "accept",
+      "outcome": "accept",
+      "methods_agree": true,
+      "passed": true
+    },
+    {
+      "case": "a duplicated square",
+      "expected": "refuse",
+      "outcome": "refuse",
+      "methods_agree": true,
+      "passed": true
+    },
+    {
+      "case": "a square shifted half along its neighbour's edge",
+      "expected": "refuse",
+      "outcome": "refuse",
+      "methods_agree": true,
+      "passed": true
+    },
+    {
+      "case": "two squares touching corner to corner",
+      "expected": "accept",
+      "outcome": "accept",
+      "methods_agree": true,
+      "passed": true
+    },
+    {
+      "case": "a turned square (c, s) = (3/5, 4/5) touching all four walls",
+      "expected": "accept",
+      "outcome": "accept",
+      "methods_agree": true,
+      "passed": true
+    },
+    {
+      "case": "the same square 1e-30 past the left wall",
+      "expected": "refuse",
+      "outcome": "refuse",
+      "methods_agree": true,
+      "passed": true
+    },
+    {
+      "case": "a turned square's corner touching an edge",
+      "expected": "accept",
+      "outcome": "accept",
+      "methods_agree": true,
+      "passed": true
+    },
+    {
+      "case": "the same corner 1e-30 into the edge",
+      "expected": "refuse",
+      "outcome": "refuse",
+      "methods_agree": true,
+      "passed": true
+    },
+    {
+      "case": "a square outside the box",
+      "expected": "refuse",
+      "outcome": "refuse",
+      "methods_agree": true,
+      "passed": true
+    }
+  ],
+  "certificates": [
+    {
+      "key": "T-241 n=304",
+      "path": "resources/web/couzo-issue763-2026-10-23/source/certificates/best/n304.cert",
+      "sha256": "c8433dd798aef6f190790c6c78c63b4ab5c26baabe372405f8ff9029d175231d",
+      "sha256_matches_pin": true,
+      "n": 304,
+      "n_as_stated": true,
+      "header_comment": [
+        "# rational witness: unit squares, centre (x, y), rotation t = tan(theta/2); check with verify_cert.py"
+      ],
+      "tilted_squares": 135,
+      "side": {
+        "header_side": "42654421699169959072564987841514227093543746926117736119087439/2379353056489745832681562849107891444171481219500000000000000",
+        "header_side_decimal": "17.92689890339264348406340994207914169248",
+        "equals_the_side_the_record_states": true,
+        "print_rounded_up_12": "17.926898903393",
+        "stated_print_up_12": "17.926898903393",
+        "print_matches": true,
+        "cut_decimals_match": true
+      },
+      "decision": {
+        "valid": true,
+        "methods_agree": true,
+        "method_a_separating_axes": {
+          "contained": true,
+          "pairs_disjoint": true,
+          "valid": true
+        },
+        "method_b_clipped_areas": {
+          "every_square_area_in_box_whole": true,
+          "squares_with_area_outside": [],
+          "near_pairs_with_positive_overlap_area": 0,
+          "first_overlapping_pairs": [],
+          "valid": true
+        },
+        "least_near_wall_slack": "1/1000000000000000",
+        "least_near_wall_slack_decimal": "1E-15",
+        "least_near_wall_square": 263,
+        "squares_at_least_near_wall_slack": 2,
+        "least_far_wall_slack": "1/1000000000000000",
+        "least_far_wall_slack_decimal": "1E-15",
+        "least_far_wall_square": 298,
+        "squares_at_least_far_wall_slack": 1,
+        "pairs_total": 46056,
+        "pairs_decided_both_methods": 1170,
+        "pairs_far_by_exact_distance": 3127,
+        "pairs_far_by_grid_cell": 41759,
+        "least_pair_gaps": [
+          {
+            "squares": [
+              67,
+              68
+            ],
+            "sat_gap": "5787427125212248315636723446790347998647301071/70716860311549861524081902603115498615233747340000000000",
+            "sat_gap_decimal": "8.18394241446125726760502575632E-11",
+            "axis": "u_i",
+            "euclidean_distance_decimal": "8.18394241446E-11"
+          },
+          {
+            "squares": [
+              68,
+              104
+            ],
+            "sat_gap": "47969953893515356368740862549427216834753452240162410355752293286878042433518290868756680809/484806309264291959701665812233223298805588045860267678388203200398772443745961170017150838250000000000",
+            "sat_gap_decimal": "9.89466369905771085429746368674E-11",
+            "axis": "v_i",
+            "euclidean_distance_decimal": "9.89466369906E-11"
+          },
+          {
+            "squares": [
+              65,
+              99
+            ],
+            "sat_gap": "1071007746665874954358876487571772216960147231/9725517969228899213782967179692288992136857120000000000",
+            "sat_gap_decimal": "1.10123465922791487630440893154E-10",
+            "axis": "v_j",
+            "euclidean_distance_decimal": "1.10123465923E-10"
+          },
+          {
+            "squares": [
+              98,
+              103
+            ],
+            "sat_gap": "4319789228926305806184207014153854723355301551450226883453609873577/36750341617761026831835108593796241894195335182152021173838666080780000000000",
+            "sat_gap_decimal": "1.17544192482787704198401898091E-10",
+            "axis": "v_i",
+            "euclidean_distance_decimal": "1.17544192483E-10"
+          },
+          {
+            "squares": [
+              68,
+              69
+            ],
+            "sat_gap": "138739680433676656305398819806321064000117665927134970408402299590471/1169362817245919563830989871913527777594201200963610685819560082385262000000000",
+            "sat_gap_decimal": "1.18645537883987119609666468747E-10",
+            "axis": "u_i",
+            "euclidean_distance_decimal": "1.18645537884E-10"
+          }
+        ],
+        "pairs_with_gap_below_1e-9": 783,
+        "pairs_with_gap_below_1e-18": 0,
+        "all_pairs_method_a_least_gap": "5787427125212248315636723446790347998647301071/70716860311549861524081902603115498615233747340000000000",
+        "all_pairs_method_a_least_gap_decimal": "8.18394241446125726760502575632E-11"
+      },
+      "cpu_seconds_decision": 9.64,
+      "controls": [
+        {
+          "control": "side-to-far-contact",
+          "note": "side lowered by the least far-wall slack: exact contact, which touching allows",
+          "expected": "accept",
+          "outcome": "accept",
+          "methods_agree": true,
+          "passed": true,
+          "least_wall_slack": "0",
+          "least_pair_gap": "5787427125212248315636723446790347998647301071/70716860311549861524081902603115498615233747340000000000",
+          "cpu_seconds": 0.58
+        },
+        {
+          "control": "side-past-far-contact",
+          "note": "side lowered by the least far-wall slack and 1e-30 more",
+          "expected": "refuse",
+          "outcome": "refuse",
+          "methods_agree": true,
+          "passed": true,
+          "least_wall_slack": "-1/1000000000000000000000000000000",
+          "least_pair_gap": "5787427125212248315636723446790347998647301071/70716860311549861524081902603115498615233747340000000000",
+          "cpu_seconds": 0.57
+        },
+        {
+          "control": "side-shrunk-by-twice-least-far-slack",
+          "note": "side lowered by twice the least far-wall slack",
+          "expected": "refuse",
+          "outcome": "refuse",
+          "methods_agree": true,
+          "passed": true,
+          "least_wall_slack": "-1/1000000000000000",
+          "least_pair_gap": "5787427125212248315636723446790347998647301071/70716860311549861524081902603115498615233747340000000000",
+          "cpu_seconds": 0.6
+        },
+        {
+          "control": "pair-to-contact",
+          "note": "square 68 moved toward square 67 along their separating axis by their gap",
+          "expected": "either",
+          "outcome": "accept",
+          "methods_agree": true,
+          "passed": true,
+          "least_wall_slack": "1/1000000000000000",
+          "least_pair_gap": "0",
+          "cpu_seconds": 0.59
+        },
+        {
+          "control": "pair-past-contact",
+          "note": "square 68 moved toward square 67 along their separating axis by their gap and 1e-30",
+          "expected": "refuse",
+          "outcome": "refuse",
+          "methods_agree": true,
+          "passed": true,
+          "least_wall_slack": "1/1000000000000000",
+          "least_pair_gap": "-1/1000000000000000000000000000000",
+          "cpu_seconds": 0.59
+        },
+        {
+          "control": "square-perturbed",
+          "note": "square 68 moved toward the centre of square 67 by 1e-3 in its larger coordinate",
+          "expected": "refuse",
+          "outcome": "refuse",
+          "methods_agree": true,
+          "passed": true,
+          "least_wall_slack": "1/1000000000000000",
+          "least_pair_gap": "-70716854524122736311833586966392051824885748692698929/70716860311549861524081902603115498615233747340000000000",
+          "cpu_seconds": 0.59
+        },
+        {
+          "control": "square-enlarged-past-pair",
+          "note": "square 68 enlarged to side 1 + 2(gap + 1e-30), past its least-gap pair",
+          "expected": "refuse",
+          "outcome": "refuse",
+          "methods_agree": true,
+          "passed": true,
+          "least_wall_slack": "1/1000000000000000",
+          "least_pair_gap": "-1929142374995696634914654927718366395164116057912783344361692657469746104211/117861433852583102541315118677051662050790943943385258310253895789000000000000000000000000000000",
+          "cpu_seconds": 0.59
+        },
+        {
+          "control": "square-enlarged-past-wall",
+          "note": "square 298 enlarged by the least far-wall slack and 1e-30 on each side",
+          "expected": "refuse",
+          "outcome": "refuse",
+          "methods_agree": true,
+          "passed": true,
+          "least_wall_slack": "-1/1000000000000000000000000000000",
+          "least_pair_gap": "5787427125212248315636723446790347998647301071/70716860311549861524081902603115498615233747340000000000",
+          "cpu_seconds": 0.6
+        },
+        {
+          "control": "square-duplicated",
+          "note": "the last square replaced by a copy of the first",
+          "expected": "refuse",
+          "outcome": "refuse",
+          "methods_agree": true,
+          "passed": true,
+          "least_wall_slack": "1/1000000000000000",
+          "least_pair_gap": "-1",
+          "cpu_seconds": 0.64
+        },
+        {
+          "control": "square-past-near-wall",
+          "note": "square 263 moved toward its nearest near wall by its slack and 1e-30",
+          "expected": "refuse",
+          "outcome": "refuse",
+          "methods_agree": true,
+          "passed": true,
+          "least_wall_slack": "-1/1000000000000000000000000000000",
+          "least_pair_gap": "5787427125212248315636723446790347998647301071/70716860311549861524081902603115498615233747340000000000",
+          "cpu_seconds": 0.62
+        },
+        {
+          "control": "centres-drawn-in",
+          "note": "every centre drawn toward the box centre by the factor 1 - 1e-9, squares kept unit, side kept",
+          "expected": "refuse",
+          "outcome": "refuse",
+          "methods_agree": true,
+          "passed": true,
+          "least_wall_slack": "4323195834439056756414570917328238562320254456730955019514484887421299767216638427435990389002205383/519292719956320477174878862450202513244204392717963048231170495099211125338946537209104760000000000000000000",
+          "least_pair_gap": "-796989449790677918125757083866997538262546500000672016875266737070097326956736197197153824429179/774785886829475997180164343223871100593922992221413209014550018594812781337994551847210000000000000000000",
+          "cpu_seconds": 1.0
+        },
+        {
+          "control": "square-rotated",
+          "note": "square 68 turned by about 2e-9 radians (t + 1e-9); both methods must agree",
+          "expected": "either",
+          "outcome": "refuse",
+          "methods_agree": true,
+          "passed": true,
+          "least_wall_slack": "1/1000000000000000",
+          "least_pair_gap": "-64929433101477380818447240938367892163676570409/70716860311549861608942134976975332443283428140000000000",
+          "cpu_seconds": 0.62
+        }
+      ]
+    },
+    {
+      "key": "T-242 n=268",
+      "path": "resources/web/evand-kaggle-descents-2026-10-24/source/search/packer/candidates/s268_lightning.cert",
+      "sha256": "c87da316589dd3843e9344e5461add99c4f80ca495ba862f302bf958bc154a49",
+      "sha256_matches_pin": true,
+      "n": 268,
+      "n_as_stated": true,
+      "header_comment": [
+        "# exact certificate: unit squares, centre (x, y), rotation (c, s) = ((1-t^2)/(1+t^2), 2t/(1+t^2)); check with verify_cert.py"
+      ],
+      "tilted_squares": 110,
+      "side": {
+        "header_side": "8437180857934672912242411148233/500000000000000000000000000000",
+        "header_side_decimal": "16.874361715869345824484822296466",
+        "equals_the_side_the_record_states": true,
+        "print_rounded_up_12": "16.874361715870",
+        "equals_the_fraction_the_packet_states": true,
+        "stated_print_up_12": "16.874361715870",
+        "print_matches": true
+      },
+      "decision": {
+        "valid": true,
+        "methods_agree": true,
+        "method_a_separating_axes": {
+          "contained": true,
+          "pairs_disjoint": true,
+          "valid": true
+        },
+        "method_b_clipped_areas": {
+          "every_square_area_in_box_whole": true,
+          "squares_with_area_outside": [],
+          "near_pairs_with_positive_overlap_area": 0,
+          "first_overlapping_pairs": [],
+          "valid": true
+        },
+        "least_near_wall_slack": "1/200000000000000000000",
+        "least_near_wall_slack_decimal": "5E-21",
+        "least_near_wall_square": 1,
+        "squares_at_least_near_wall_slack": 23,
+        "least_far_wall_slack": "250000000023039/50000000000000000000000000000000000",
+        "least_far_wall_slack_decimal": "5.00000000046078E-21",
+        "least_far_wall_square": 116,
+        "squares_at_least_far_wall_slack": 15,
+        "pairs_total": 35778,
+        "pairs_decided_both_methods": 1018,
+        "pairs_far_by_exact_distance": 2598,
+        "pairs_far_by_grid_cell": 32162,
+        "least_pair_gaps": [
+          {
+            "squares": [
+              239,
+              241
+            ],
+            "sat_gap": "1276624599720051885611359074429252307559637925698214397588029219613785774977701053/127662459972005330738974187176695601669954814177609570759673077080450000000000000000000000000000000000",
+            "sat_gap_decimal": "9.99999999999998886298773257922E-21",
+            "axis": "v_i",
+            "euclidean_distance_decimal": "1.000000E-20"
+          },
+          {
+            "squares": [
+              173,
+              175
+            ],
+            "sat_gap": "2614528018661491448040450811431293233374394882273131796482641628262914847678512975837/261452801866149414024102558941967224663140751761395506253599399783608100000000000000000000000000000000000",
+            "sat_gap_decimal": "9.99999999999998970291939668614E-21",
+            "axis": "v_i",
+            "euclidean_distance_decimal": "1.000000E-20"
+          },
+          {
+            "squares": [
+              163,
+              164
+            ],
+            "sat_gap": "1307264009330745738731350507967680752107932829197726141592964696464483994462754509533/130726400933074707012051279470983612331570375880697753126799699891804050000000000000000000000000000000000",
+            "sat_gap_decimal": "9.99999999999998981545309299576E-21",
+            "axis": "u_i",
+            "euclidean_distance_decimal": "1.000000E-20"
+          },
+          {
+            "squares": [
+              179,
+              181
+            ],
+            "sat_gap": "1307264009330745738731350507967680752107932829197726141592964696464483994462754509533/130726400933074707012051279470983612331570375880697753126799699891804050000000000000000000000000000000000",
+            "sat_gap_decimal": "9.99999999999998981545309299576E-21",
+            "axis": "u_i",
+            "euclidean_distance_decimal": "1.000000E-20"
+          },
+          {
+            "squares": [
+              160,
+              165
+            ],
+            "sat_gap": "2614528018661491524067198536056059385947988089848810261639178808731496485291802104909/261452801866149414024102558941967224663140751761395506253599399783608100000000000000000000000000000000000",
+            "sat_gap_decimal": "9.99999999999998999370514150117E-21",
+            "axis": "u_i",
+            "euclidean_distance_decimal": "1.000000E-20"
+          }
+        ],
+        "pairs_with_gap_below_1e-9": 612,
+        "pairs_with_gap_below_1e-18": 611,
+        "all_pairs_method_a_least_gap": "1276624599720051885611359074429252307559637925698214397588029219613785774977701053/127662459972005330738974187176695601669954814177609570759673077080450000000000000000000000000000000000",
+        "all_pairs_method_a_least_gap_decimal": "9.99999999999998886298773257922E-21"
+      },
+      "cpu_seconds_decision": 9.17,
+      "controls": [
+        {
+          "control": "side-to-far-contact",
+          "note": "side lowered by the least far-wall slack: exact contact, which touching allows",
+          "expected": "accept",
+          "outcome": "accept",
+          "methods_agree": true,
+          "passed": true,
+          "least_wall_slack": "0",
+          "least_pair_gap": "1276624599720051885611359074429252307559637925698214397588029219613785774977701053/127662459972005330738974187176695601669954814177609570759673077080450000000000000000000000000000000000",
+          "cpu_seconds": 0.55
+        },
+        {
+          "control": "side-past-far-contact",
+          "note": "side lowered by the least far-wall slack and 1e-30 more",
+          "expected": "refuse",
+          "outcome": "refuse",
+          "methods_agree": true,
+          "passed": true,
+          "least_wall_slack": "-1/1000000000000000000000000000000",
+          "least_pair_gap": "1276624599720051885611359074429252307559637925698214397588029219613785774977701053/127662459972005330738974187176695601669954814177609570759673077080450000000000000000000000000000000000",
+          "cpu_seconds": 0.59
+        },
+        {
+          "control": "side-shrunk-by-twice-least-far-slack",
+          "note": "side lowered by twice the least far-wall slack",
+          "expected": "refuse",
+          "outcome": "refuse",
+          "methods_agree": true,
+          "passed": true,
+          "least_wall_slack": "-250000000023039/50000000000000000000000000000000000",
+          "least_pair_gap": "1276624599720051885611359074429252307559637925698214397588029219613785774977701053/127662459972005330738974187176695601669954814177609570759673077080450000000000000000000000000000000000",
+          "cpu_seconds": 0.56
+        },
+        {
+          "control": "pair-to-contact",
+          "note": "square 241 moved toward square 239 along their separating axis by their gap",
+          "expected": "either",
+          "outcome": "accept",
+          "methods_agree": true,
+          "passed": true,
+          "least_wall_slack": "1/200000000000000000000",
+          "least_pair_gap": "0",
+          "cpu_seconds": 0.59
+        },
+        {
+          "control": "pair-past-contact",
+          "note": "square 241 moved toward square 239 along their separating axis by their gap and 1e-30",
+          "expected": "refuse",
+          "outcome": "refuse",
+          "methods_agree": true,
+          "passed": true,
+          "least_wall_slack": "1/200000000000000000000",
+          "least_pair_gap": "-1/1000000000000000000000000000000",
+          "cpu_seconds": 0.61
+        },
+        {
+          "control": "square-perturbed",
+          "note": "square 241 moved toward the centre of square 239 by 1e-3 in its larger coordinate",
+          "expected": "refuse",
+          "outcome": "refuse",
+          "methods_agree": true,
+          "passed": true,
+          "least_wall_slack": "1/200000000000000000000",
+          "least_pair_gap": "-12766245997200532957622140906131220664745812127667255635484760375944552112777049639728225276908432329591642985950706396299194818161211/11640294027151047432890818196359031653290683150880096863405767560969977538794217538156677019577416560850000000000000000000000000000000000",
+          "cpu_seconds": 0.55
+        },
+        {
+          "control": "square-enlarged-past-pair",
+          "note": "square 241 enlarged to side 1 + 2(gap + 1e-30), past its least-gap pair",
+          "expected": "refuse",
+          "outcome": "refuse",
+          "methods_agree": true,
+          "passed": true,
+          "least_wall_slack": "1/200000000000000000000",
+          "least_pair_gap": "-1/1000000000000000000000000000000",
+          "cpu_seconds": 0.55
+        },
+        {
+          "control": "square-enlarged-past-wall",
+          "note": "square 116 enlarged by the least far-wall slack and 1e-30 on each side",
+          "expected": "refuse",
+          "outcome": "refuse",
+          "methods_agree": true,
+          "passed": true,
+          "least_wall_slack": "-1/1000000000000000000000000000000",
+          "least_pair_gap": "249999999926961/50000000000000000000000000000000000",
+          "cpu_seconds": 0.63
+        },
+        {
+          "control": "square-duplicated",
+          "note": "the last square replaced by a copy of the first",
+          "expected": "refuse",
+          "outcome": "refuse",
+          "methods_agree": true,
+          "passed": true,
+          "least_wall_slack": "1/200000000000000000000",
+          "least_pair_gap": "-1",
+          "cpu_seconds": 0.57
+        },
+        {
+          "control": "square-past-near-wall",
+          "note": "square 1 moved toward its nearest near wall by its slack and 1e-30",
+          "expected": "refuse",
+          "outcome": "refuse",
+          "methods_agree": true,
+          "passed": true,
+          "least_wall_slack": "-1/1000000000000000000000000000000",
+          "least_pair_gap": "1276624599720051885611359074429252307559637925698214397588029219613785774977701053/127662459972005330738974187176695601669954814177609570759673077080450000000000000000000000000000000000",
+          "cpu_seconds": 0.58
+        },
+        {
+          "control": "centres-drawn-in",
+          "note": "every centre drawn toward the box centre by the factor 1 - 1e-9, squares kept unit, side kept",
+          "expected": "refuse",
+          "outcome": "refuse",
+          "methods_agree": true,
+          "passed": true,
+          "least_wall_slack": "1016571046982870098690745622614186500496594000217968604913929564575182961958494782423665532372734639921853/130726400933074707012051279470983612331570375880697753126799699891804050000000000000000000000000000000000000000000",
+          "least_pair_gap": "-46311799899834738788802098058697262079692703812252370535320373347339780939076343554219068770265959048645254943038315261601640464859574576103953724064449130973067254168539/39894518741496084696560439730202375562209943122850656220402490168066454510772936193742094330676776785795612724126173795200605373664452225000000000000000000000000000000000000000000",
+          "cpu_seconds": 0.85
+        },
+        {
+          "control": "square-rotated",
+          "note": "square 241 turned by about 2e-9 radians (t + 1e-9); both methods must agree",
+          "expected": "either",
+          "outcome": "refuse",
+          "methods_agree": true,
+          "passed": true,
+          "least_wall_slack": "1/200000000000000000000",
+          "least_pair_gap": "-623351854857066399253699971421950763011840848388801473494483230814251965496661228278120226569054640017008117157786534494641309358066036247947084777647324310633/651908147710992443945635624475182328222628783028725284768526608746033040072966117960334351140538374651174014292473754155173083830888100000000000000000000000000000000000",
+          "cpu_seconds": 0.57
+        }
+      ]
+    },
+    {
+      "key": "T-242 n=304",
+      "path": "resources/web/evand-kaggle-descents-2026-10-24/source/search/packer/candidates/s304_pub.cert",
+      "sha256": "5dd7436a0f658d360c643a3465bf5ac39382fd682cd10f354b2f046ed7656f21",
+      "sha256_matches_pin": true,
+      "n": 304,
+      "n_as_stated": true,
+      "header_comment": [
+        "# exact certificate: unit squares, centre (x, y), rotation (c, s) = ((1-t^2)/(1+t^2), 2t/(1+t^2)); check with verify_cert.py"
+      ],
+      "tilted_squares": 120,
+      "side": {
+        "header_side": "1792689890035674158972360842897/100000000000000000000000000000",
+        "header_side_decimal": "17.92689890035674158972360842897",
+        "equals_the_side_the_record_states": true,
+        "print_rounded_up_12": "17.926898900357",
+        "equals_the_fraction_the_packet_states": true
+      },
+      "decision": {
+        "valid": true,
+        "methods_agree": true,
+        "method_a_separating_axes": {
+          "contained": true,
+          "pairs_disjoint": true,
+          "valid": true
+        },
+        "method_b_clipped_areas": {
+          "every_square_area_in_box_whole": true,
+          "squares_with_area_outside": [],
+          "near_pairs_with_positive_overlap_area": 0,
+          "first_overlapping_pairs": [],
+          "valid": true
+        },
+        "least_near_wall_slack": "1/200000000000000000000",
+        "least_near_wall_slack_decimal": "5E-21",
+        "least_near_wall_square": 263,
+        "squares_at_least_near_wall_slack": 11,
+        "least_far_wall_slack": "250000000030471/50000000000000000000000000000000000",
+        "least_far_wall_slack_decimal": "5.00000000060942E-21",
+        "least_far_wall_square": 244,
+        "squares_at_least_far_wall_slack": 30,
+        "pairs_total": 46056,
+        "pairs_decided_both_methods": 1170,
+        "pairs_far_by_exact_distance": 3127,
+        "pairs_far_by_grid_cell": 41759,
+        "least_pair_gaps": [
+          {
+            "squares": [
+              57,
+              58
+            ],
+            "sat_gap": "10394246667222288039491100439394578643102044107167056613672033511545544895818440024441/1039424666722229337471161627908249715153263218631971359908709022439920100000000000000000000000000000000000",
+            "sat_gap_decimal": "9.99999999999999486714074944553E-21",
+            "axis": "v_i",
+            "euclidean_distance_decimal": "1.000000E-20"
+          },
+          {
+            "squares": [
+              88,
+              89
+            ],
+            "sat_gap": "10394246667222288039491100439394578643102044107167056613672033511545544895818440024441/1039424666722229337471161627908249715153263218631971359908709022439920100000000000000000000000000000000000",
+            "sat_gap_decimal": "9.99999999999999486714074944553E-21",
+            "axis": "v_i",
+            "euclidean_distance_decimal": "1.000000E-20"
+          },
+          {
+            "squares": [
+              124,
+              130
+            ],
+            "sat_gap": "10394246667222288039491100439394578643102044107167056613672033511545544895818440024441/1039424666722229337471161627908249715153263218631971359908709022439920100000000000000000000000000000000000",
+            "sat_gap_decimal": "9.99999999999999486714074944553E-21",
+            "axis": "v_i",
+            "euclidean_distance_decimal": "1.000000E-20"
+          },
+          {
+            "squares": [
+              174,
+              175
+            ],
+            "sat_gap": "10394246667222288039491100439394578643102044107167056613672033511545544895818440024441/1039424666722229337471161627908249715153263218631971359908709022439920100000000000000000000000000000000000",
+            "sat_gap_decimal": "9.99999999999999486714074944553E-21",
+            "axis": "v_i",
+            "euclidean_distance_decimal": "1.000000E-20"
+          },
+          {
+            "squares": [
+              226,
+              227
+            ],
+            "sat_gap": "10394246667222288039491100439394578643102044107167056613672033511545544895818440024441/1039424666722229337471161627908249715153263218631971359908709022439920100000000000000000000000000000000000",
+            "sat_gap_decimal": "9.99999999999999486714074944553E-21",
+            "axis": "v_i",
+            "euclidean_distance_decimal": "1.000000E-20"
+          }
+        ],
+        "pairs_with_gap_below_1e-9": 678,
+        "pairs_with_gap_below_1e-18": 676,
+        "all_pairs_method_a_least_gap": "10394246667222288039491100439394578643102044107167056613672033511545544895818440024441/1039424666722229337471161627908249715153263218631971359908709022439920100000000000000000000000000000000000",
+        "all_pairs_method_a_least_gap_decimal": "9.99999999999999486714074944553E-21"
+      },
+      "cpu_seconds_decision": 11.41,
+      "controls": [
+        {
+          "control": "side-to-far-contact",
+          "note": "side lowered by the least far-wall slack: exact contact, which touching allows",
+          "expected": "accept",
+          "outcome": "accept",
+          "methods_agree": true,
+          "passed": true,
+          "least_wall_slack": "0",
+          "least_pair_gap": "10394246667222288039491100439394578643102044107167056613672033511545544895818440024441/1039424666722229337471161627908249715153263218631971359908709022439920100000000000000000000000000000000000",
+          "cpu_seconds": 0.72
+        },
+        {
+          "control": "side-past-far-contact",
+          "note": "side lowered by the least far-wall slack and 1e-30 more",
+          "expected": "refuse",
+          "outcome": "refuse",
+          "methods_agree": true,
+          "passed": true,
+          "least_wall_slack": "-1/1000000000000000000000000000000",
+          "least_pair_gap": "10394246667222288039491100439394578643102044107167056613672033511545544895818440024441/1039424666722229337471161627908249715153263218631971359908709022439920100000000000000000000000000000000000",
+          "cpu_seconds": 0.67
+        },
+        {
+          "control": "side-shrunk-by-twice-least-far-slack",
+          "note": "side lowered by twice the least far-wall slack",
+          "expected": "refuse",
+          "outcome": "refuse",
+          "methods_agree": true,
+          "passed": true,
+          "least_wall_slack": "-250000000030471/50000000000000000000000000000000000",
+          "least_pair_gap": "10394246667222288039491100439394578643102044107167056613672033511545544895818440024441/1039424666722229337471161627908249715153263218631971359908709022439920100000000000000000000000000000000000",
+          "cpu_seconds": 0.67
+        },
+        {
+          "control": "pair-to-contact",
+          "note": "square 58 moved toward square 57 along their separating axis by their gap",
+          "expected": "either",
+          "outcome": "accept",
+          "methods_agree": true,
+          "passed": true,
+          "least_wall_slack": "1/200000000000000000000",
+          "least_pair_gap": "0",
+          "cpu_seconds": 0.66
+        },
+        {
+          "control": "pair-past-contact",
+          "note": "square 58 moved toward square 57 along their separating axis by their gap and 1e-30",
+          "expected": "refuse",
+          "outcome": "refuse",
+          "methods_agree": true,
+          "passed": true,
+          "least_wall_slack": "1/200000000000000000000",
+          "least_pair_gap": "-1/1000000000000000000000000000000",
+          "cpu_seconds": 0.66
+        },
+        {
+          "control": "square-perturbed",
+          "note": "square 58 moved toward the centre of square 57 by 1e-3 in its larger coordinate",
+          "expected": "refuse",
+          "outcome": "refuse",
+          "methods_agree": true,
+          "passed": true,
+          "least_wall_slack": "1/200000000000000000000",
+          "least_pair_gap": "-960575333277770652134591704869462245355636341973449996989246870393023286327966488454455104181559975559/1039424666722229337471161627908249715153263218631971359908709022439920100000000000000000000000000000000000",
+          "cpu_seconds": 0.67
+        },
+        {
+          "control": "square-enlarged-past-pair",
+          "note": "square 58 enlarged to side 1 + 2(gap + 1e-30), past its least-gap pair",
+          "expected": "refuse",
+          "outcome": "refuse",
+          "methods_agree": true,
+          "passed": true,
+          "least_wall_slack": "1/200000000000000000000",
+          "least_pair_gap": "-16540550849252607065152904762389516845471092460061256990809848398721252637909717341886765115731823685358621314337003487167775371421454086750034318662193843/10804036377906175322743421353451305471455765764975558678001744267970879602361872305126181724362551326499587658973512903605470118518140943840100000000000000000000000000000000000",
+          "cpu_seconds": 0.67
+        },
+        {
+          "control": "square-enlarged-past-wall",
+          "note": "square 244 enlarged by the least far-wall slack and 1e-30 on each side",
+          "expected": "refuse",
+          "outcome": "refuse",
+          "methods_agree": true,
+          "passed": true,
+          "least_wall_slack": "-1/1000000000000000000000000000000",
+          "least_pair_gap": "249999999919529/50000000000000000000000000000000000",
+          "cpu_seconds": 0.68
+        },
+        {
+          "control": "square-duplicated",
+          "note": "the last square replaced by a copy of the first",
+          "expected": "refuse",
+          "outcome": "refuse",
+          "methods_agree": true,
+          "passed": true,
+          "least_wall_slack": "1/200000000000000000000",
+          "least_pair_gap": "-1",
+          "cpu_seconds": 0.69
+        },
+        {
+          "control": "square-past-near-wall",
+          "note": "square 263 moved toward its nearest near wall by its slack and 1e-30",
+          "expected": "refuse",
+          "outcome": "refuse",
+          "methods_agree": true,
+          "passed": true,
+          "least_wall_slack": "-1/1000000000000000000000000000000",
+          "least_pair_gap": "10394246667222288039491100439394578643102044107167056613672033511545544895818440024441/1039424666722229337471161627908249715153263218631971359908709022439920100000000000000000000000000000000000",
+          "cpu_seconds": 0.68
+        },
+        {
+          "control": "centres-drawn-in",
+          "note": "every centre drawn toward the box centre by the factor 1 - 1e-9, squares kept unit, side kept",
+          "expected": "refuse",
+          "outcome": "refuse",
+          "methods_agree": true,
+          "passed": true,
+          "least_wall_slack": "2159496583383647780618624891292571158448239892557206770373815326916575274666367424096497152522581703053171/259856166680557334367790406977062428788315804657992839977177255609980025000000000000000000000000000000000000000000",
+          "least_pair_gap": "-74606716023650285280717983374551710013435038462591119932435293188773592648660730802406400209972187577/64052879903488855822238977887306229582712294876711385947186029180100000000000000000000000000000000000000000000",
+          "cpu_seconds": 0.94
+        },
+        {
+          "control": "square-rotated",
+          "note": "square 58 turned by about 2e-9 radians (t + 1e-9); both methods must agree",
+          "expected": "either",
+          "outcome": "refuse",
+          "methods_agree": true,
+          "passed": true,
+          "least_wall_slack": "1/200000000000000000000",
+          "least_pair_gap": "-2078849331025737687661736594644420231520164738243607780396785745816349242248413347809067521307307966228956028973586927449522719960045506734381475486488483930370354353/2160807274755697148948358529245644096714911470015533371668793647692381542435108037446911382666752334815719894024906580721094023703628188768020000000000000000000000000000000000",
+          "cpu_seconds": 0.66
+        }
+      ]
+    }
+  ],
+  "sides": {
+    "values": {
+      "T-241 n=304": {
+        "exact": "42654421699169959072564987841514227093543746926117736119087439/2379353056489745832681562849107891444171481219500000000000000",
+        "decimal": "17.92689890339264348406341",
+        "print_up_12": "17.926898903393"
+      },
+      "T-242 n=268": {
+        "exact": "8437180857934672912242411148233/500000000000000000000000000000",
+        "decimal": "16.87436171586934582448482",
+        "print_up_12": "16.874361715870"
+      },
+      "T-242 n=304": {
+        "exact": "1792689890035674158972360842897/100000000000000000000000000000",
+        "decimal": "17.92689890035674158972361",
+        "print_up_12": "17.926898900357"
+      },
+      "#763's entry at 268 (964ee2b n268.cert)": {
+        "exact": "78645658458105249171306580101/4660659750118000000000000000",
+        "decimal": "16.87436171587382547907160",
+        "print_up_12": "16.874361715874"
+      },
+      "T-174, the house at 268 (known-best witness)": {
+        "exact": "233270980632039540411435419500234711630560155576630993915611543452774739703722952929556646506050679237827213781742529692622682547843177659465028768064414144931073857091973918513911796469530253808279283824665291827193594194760245545948876956412126275759753119941151135458159232318443962/13820341244677848083924813816260807677337124572759119046734684346629144601651358267843383787847827349194959910412847847999665748703540707032408725232782401407917969030977642092448911296381546041810733285455019634473955659876261312467110209743680075779870696203555758879668577135424641",
+        "decimal": "16.87881482100676472457833",
+        "print_up_12": "16.878814821007"
+      },
+      "T-186, the house at 304 (known-best witness)": {
+        "exact": "1792942775807517496548703186140836311278604266912137/100000000000000000000000000000000000000000000000000",
+        "decimal": "17.92942775807517496548703",
+        "print_up_12": "17.929427758076"
+      }
+    },
+    "stated_margins": [
+      {
+        "certificate": "T-242 n=268",
+        "below": "#763's entry at 268 (964ee2b n268.cert)",
+        "exact_difference_decimal": "4.47965E-12",
+        "stated": "4.48e-12",
+        "stated_matches_to_its_digits": true
+      },
+      {
+        "certificate": "T-242 n=268",
+        "below": "T-174, the house at 268 (known-best witness)",
+        "exact_difference_decimal": "0.00445311",
+        "stated": "4.45e-3",
+        "stated_matches_to_its_digits": true
+      },
+      {
+        "certificate": "T-241 n=304",
+        "below": "T-186, the house at 304 (known-best witness)",
+        "exact_difference_decimal": "0.00252885",
+        "stated": "2.53e-3",
+        "stated_matches_to_its_digits": true
+      },
+      {
+        "certificate": "T-242 n=304",
+        "below": "T-241 n=304",
+        "exact_difference_decimal": "3.03590E-9",
+        "stated": "3.04e-9",
+        "stated_matches_to_its_digits": true
+      },
+      {
+        "certificate": "T-242 n=304",
+        "below": "T-186, the house at 304 (known-best witness)",
+        "exact_difference_decimal": "0.00252886",
+        "stated": "2.53e-3",
+        "stated_matches_to_its_digits": true
+      }
+    ]
+  },
+  "cpu_seconds_total": 53.41
+}
