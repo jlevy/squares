@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-23 (resumed): land #736 and #742, #719 records (204 
 kind: epic
 status: in_progress
 priority: 1
-version: 159
+version: 163
 delegate: coord-intake-1024
 labels:
   - result-import
@@ -159,10 +159,13 @@ child_order_hints:
   - is-01m5re1rjde9214mm9wbncb69g
   - is-01m5re8ps95t49ek0prw8rjacm
   - is-01m5rh3m44f1gvpbpff571xcwh
+  - is-01m5rr1szcsazmt86mavzs7555
+  - is-01m5rr1xq0hjnz6409nrc5kd8h
+  - is-01m5rr21pm1cpb0ryp0pyvmkvy
 hold: null
 hold_until: null
 created_at: 2026-10-23T04:56:08.269Z
-updated_at: 2026-10-25T04:28:02.766Z
+updated_at: 2026-10-25T05:22:08.690Z
 started_at: 2026-10-23T04:56:10.325Z
 ---
 
@@ -182,3 +185,5 @@ Resumes coord-intake-1021b's pass of 21-23 October (no epic of its own). Lanes a
 2026-10-24 ~21:20Z coord-intake-1024: stage 4 review of T-241/T-242 (think-vm3m) accepted for finite feasibility, all three certificates valid; M-1 (major): Couzo's manifest previous_source / previous_reference.seed_credit name the catalogue's previous record, not the seed (checked: at 303 seed_credit Lavrentev, previous_source Daniel's T-230). That reading error is also in #795's merged credits at 364, 450 and 874 ('seeded from', my call of 24 Oct): think-o4m0. Lane c-map-hx0e-1024 (wt-hx0e, branch claude/intake-2026-10-24-t241-t242-review): retain and map the review, M-1..M-5, think-o4m0, adopt T-242 at 304 (H1, after #794); T-242 at 268 is H2 on or after 2026-10-26T00:00Z. Told c-sync-794-1024 to narrow T-240's RF-2 sentence to 268/303, and c-import-gn29-1024 the reading rule. Lanes now: gn29, sync-794, 798, 797, hx0e. Queued: W8 two-strip checker (think-clgp), Fang's #797 stage 4 note review.
 
 2026-10-25 ~04:40Z coord-intake-1024 checkpoint. MERGED today: #794 (01:00Z, T-240 houses 268/303), #801 (02:35Z, Daniel's and Fang's deficiency rows), #800 (03:01Z, 43f666c's 122 rows + #763's 13 recipes), #802 (03:41Z, #798's 12 rows + #755 answers), #803 (04:14Z, T-241/T-242 V3/C3, T-242 house at 304, M-1 credit corrections incl. #795's 364/450/874). Every deploy verified. POSTED: #763 (PR B reply 6391800383; 43f666c follow-up 6392829915; notebook rows 6393433847), #797 ack 6392638719, #798 import reply 6393163824, #755 follow-up 6393163946. OPEN: #805 (Fang Theorem A review mapped to V3/C1; #797 ack, #798/#755 reply records), H2 (think-3anz, wt-h2: T-242 at 268, merges on or after 2026-10-26T00:00Z; records the notebook-rows reply), W8 (think-clgp, wt-w8: two-strip checker + #799 packet). NEW BEADS: think-x565 (OR-1 papers no-change tool), think-tfdn (A7 template wording), think-0tdd (Q2 measurement), think-fqp6 (Daniel Lean build), think-yeol (walk README credit preamble). OWNER QUESTIONS added: #799 O1 (theorem-wide k^2-c statements as earlier reports beyond 324); R1 still waits on the owner publishing data/couzo-715-certificates-v1.
+
+2026-10-25 ~05:30Z coord-intake-1024: sweep of main bb756e193 (scratch sweep-0525.txt): new #806 (Daniel, s(182) <= 13.970916436215, in corpus; think-2lzo, with evand's 28 commits to d99925d), #804 (Kim, exact minimal polynomials at 88/126/172/199/263; think-9vai), #565 comment (maximusrufus T-154 rebuild; owner-held; think-z2mj), #799 V2 (2,824 rows) and preprint (think-5dc3, via think-z2mj); #806 and #804 labelled intake. Reply/close records for #763/#797/#798 ride #807 (H2); #799's entry rides #808 (W8). think-gn29 now waits on think-llit/think-kzme; think-tfdn unblocked. Three triage lanes running; reviews of #807 and #808 running; H2 merges at the 26 Oct 00:10Z check-in (trig_0178kD4FUDrHjrZmrqD5uc12).

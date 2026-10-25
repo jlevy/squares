@@ -5,7 +5,7 @@ title: "Import franciscouzo: 126 upper bounds at 330-997 (106 certificate rows) 
 kind: task
 status: in_progress
 priority: 2
-version: 10
+version: 11
 spec_path: docs/project/specs/active/plan-2026-10-24-rows-above-1024.md
 delegate: c-import-gn29-1024
 labels:
@@ -17,7 +17,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-24T09:12:30.049Z
-updated_at: 2026-10-25T03:13:10.069Z
+updated_at: 2026-10-25T05:20:48.024Z
 started_at: 2026-10-24T20:35:18.503Z
 ---
 
@@ -67,3 +67,6 @@ LEFT
 2026-10-25 coord-intake-1024: #800 MERGED as 4089f9587 at 03:01:36Z after review A (issuecomment-6392173409) and its dispositions (issuecomment-6392414804, head 82295bce6, CI green 40155651193/40155651191). #802 re-chains 376/377/416/458/502/504 next. The #763 follow-up for this import (author questions in gn29/author-questions.md: scope of #763, the 18 near-identical counts, 377's credit, recipe expansions, 303/268/304) is posted after the deploy, with C2 from think-hx0e.
 
 2026-10-25 coord-intake-1024: #800's deploy verified (Pages 40156677119). #763 follow-up posted https://github.com/jlevy/squares/issues/763#issuecomment-6392829915 (43f666c rows, #763's recipes as rows, credit by stated lineage, CT105 settled, six questions incl. 377 credit, 304 finder, Chaoweeraprasit vs Ostashev). Recorded in H1 (#803) with awaiting items.
+
+2026-10-25 coord-intake-1024: the rows at or below 1024 landed in #800; what remains is 43f666c's 831 recipes above 1024 (R3 of think-llit) and 690 (think-kzme).
+blocked_on: think-llit, think-kzme

@@ -5,7 +5,7 @@ title: Adopt T-242 at 268 (H2 of think-hx0e), on or after 2026-10-26T00:00Z, and
 kind: task
 status: in_progress
 priority: 2
-version: 4
+version: 5
 delegate: c-h2-268-1025
 labels:
   - result-import
@@ -19,7 +19,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-25T00:39:01.456Z
-updated_at: 2026-10-25T05:07:29.710Z
+updated_at: 2026-10-25T05:38:56.517Z
 started_at: 2026-10-25T04:15:45.960Z
 ---
 H2 of think-hx0e: adopt T-242 (Evan Daniel's s268_lightning.cert at evand/square-packing@8a8879a, 16.874361715869345824484822296466, 4.48e-12 below T-240) at 268 as the house, under the house rule, and regularize the new house with both strong generators in the same pull request.
@@ -41,3 +41,5 @@ House credit at 268 follows the placement adopted: Daniel after Lavrentev (revie
 ## Notes
 
 2026-10-25, c-h2-268-1025: draft PR https://github.com/jlevy/squares/pull/807 (branch claude/intake-2026-10-26-t242-at-268), to merge on or after 2026-10-26T00:00Z. T-242 adopted at 268 in the pass of 26 October (LATER_PASSES['2026-10-26'] = {268}, prior-state archive 2026-10-26, stamp_landed --apply --date 2026-10-26), credit Daniel after Lavrentev; 268 off PENDING_ADOPTION. Regularized: grid-slack 1-degree view admitted (row 10) and drawn; Evan Daniel's same-side view at row 7 (review queue); no register candidate; about 4 CPU-minutes (packing/cases/regularized_drawings/think-3anz-2026-10-25/). Drawing before/after: grid-slack view of T-240 (19 uneven, 0 near-axis, 751 sides, 9 classes) to grid-slack view of T-242 (19, 0, 751, 12 classes). Also records #763's notebook-rows follow-up (issuecomment-6393433847) and the #797/#798 finals and closes. If main moves before the merge: merge it, stamp_landed --apply --date 2026-10-26, release_pin --update last.
+
+2026-10-25 coord-intake-1024: #807 review A (issuecomment-6393871835) addressed; dispositions issuecomment-6393996400; head 9d1c4a357 (pin db18b3bcb), CI running (suite C pending at handback). Merges on 26 October UTC at the 00:10Z check-in (trig_0178kD4FUDrHjrZmrqD5uc12): if main moved, merge main, stamp_landed --apply (no --date), release_pin --update, CI, then merge. After the deploy: post the #763 follow-up (T-242 the house at 268; think-ptkk note) and record it.
