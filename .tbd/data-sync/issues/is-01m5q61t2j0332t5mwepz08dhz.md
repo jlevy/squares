@@ -5,7 +5,7 @@ title: "Stage 4: review T-241 (Couzo's 304) and T-242 (Daniel's 268 and 304), th
 kind: task
 status: in_progress
 priority: 2
-version: 8
+version: 9
 delegate: c-map-hx0e-1024
 labels:
   - result-import
@@ -19,7 +19,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-24T14:46:47.122Z
-updated_at: 2026-10-25T02:00:20.732Z
+updated_at: 2026-10-25T02:32:57.162Z
 started_at: 2026-10-24T21:11:59.708Z
 ---
 Stage 4 of the think-l49q import (PR #792, records lane c-import-l49q-1024). T-241 registers Francisco Couzo's certificates/best/n304.cert at franciscouzo/square-packing@fa6237e (Kirill Tymchishin's Kaggle packing, 2.53e-3 below T-186) and T-242 Evan Daniel's exact descents at evand/square-packing@8a8879a (268, 4.48e-12 below T-240, another placement of #763's arrangement; 304, 3.04e-9 below T-241, T-241's packing descended), both at V0/C0, drafts S3 and S2.
@@ -38,7 +38,7 @@ AUTHOR QUESTIONS (drafts, not posted; from the stage 4 review docs/project/revie
 
 For Francisco Couzo, for the next reply on #763 (C1, C3 and C4 overlap the #763 review's questions 1 and 6 and the packets' drafted questions; merge them):
 
-C1. In your manifest, do `previous_source` and `previous_reference.seed_credit` name the packing your catalogue held before at that count, or the packing a search started from? At 303 they name Evan Daniel's certificate while `seed_credit` names Lavrentev. Did Tymchishin's "CPU Alternating Reclosure" v3 start from Polkovskyi's `70a033f` packing at 304? And at 364, 450 and 874, which packing did aqibrazadev's and kyleluecke's notebooks start from? (The record now reads the field as the catalogue's previous record and credits those three rows to the notebook authors alone; think-o4m0.)
+C1. In your manifest, do `previous_source` and `previous_reference.seed_credit` name the packing your catalogue held before at that count, or the packing a search started from? At 303 they name Evan Daniel's certificate while `seed_credit` names Lavrentev. Did Tymchishin's "CPU Alternating Reclosure" v3 start from Polkovskyi's `70a033f` packing at 304? And at 364, 450 and 874, which packing did aqibrazadev's and kyleluecke's notebooks start from? Name 874 specifically: under the best symmetry kyleluecke's 874 row matches 873 of 874 squares to your fa6237e packing, turns at most 8.1e-6 degrees and 60 squares beyond 0.1 (against 115 at 364 and 189 at 450), so it is the row where an answer is most likely to add a link (review A, A9, of #803). (The record now reads the field as the catalogue's previous record and credits those three rows to the notebook authors alone; think-o4m0.)
 
 C2. Your manifest credits the construction of Polkovskyi's `70a033f` 304 to Nate Chaoweeraprasit, and your `RECORD_PROVENANCE.md` keeps Daniil Ostashev's packing credit there. Which do you intend?
 
@@ -46,15 +46,15 @@ C3. At 268, is the `cuda` step before `kirilltym-seam-lp` in your lineage Lavren
 
 C4. Could you publish the notebooks' `SOURCE_NOTICES.md` files your manifest names at 268 and 304? No commit of the repository holds them.
 
-For Evan Daniel (he has no issue; the coordinator decides where these go):
+For Evan Daniel (he has no issue; the coordinator decides where these go). D1 and D2 are drafted and unposted, held here; no channel yet (review A, A1, of #803):
 
 D1. What is `s268_lightning.predescent.txt`, Tymchishin's v4 packing to 2.47e-10, and did any step of the descent use it? Your JSON's input side is `.input.txt`'s.
 
 D2. Is "finder unknown" at 304 the missing finder field your `TODO.md` notes for Kaggle imports? Do you know who first published that packing, and which notebook versions and dates hold Lavrentev's 268 and kozykappa's 304?
 
-STAGING: select_houses.PENDING_ADOPTION[268] names think-hx0e (open and synced) as the bead that adopts T-242 at 268, reason "next pull request". Keep think-hx0e open until H2 (think-3anz) lands, or re-point the entry to think-3anz once it is synced; H2 takes 268 off the list.
+STAGING: select_houses.PENDING_ADOPTION[268] names think-3anz (H2, open and synced to tbd-sync) as the bead that adopts T-242 at 268, reason "next pull request" (review A, A6, of #803; it named think-hx0e before). think-hx0e can close at H1's merge; H2 takes 268 off the list.
 
-The posted #763 reply of 25 October (issuecomment-6391800383) already asks C1 as its question 7 and covers C3 and C4 in its questions 1 and 6; C2 (construction credit of Polkovskyi's 70a033f 304 vs RECORD_PROVENANCE.md) is the one still to ask.
+The posted #763 reply of 25 October (issuecomment-6391800383) already asks C1 as its question 7 and covers C3 and C4 in its questions 1 and 6; C2 (construction credit of Polkovskyi's 70a033f 304 vs RECORD_PROVENANCE.md) and Couzo's packet question 3 (the finder at 304) are drafted for the next #763 reply, not posted. result-requests.yaml now records two awaiting_author items on #763 that ask URL issuecomment-6391800383: question 7 (previous_source, changes credit at 304, 364, 450, 874) and question 1 (Lavrentev at 268, changes credit); check_requests holds #763 open for them (review A, A1).
 
 STATUS 2026-10-25 c-map-hx0e-1024: PR https://github.com/jlevy/squares/pull/803 (draft; labels intake, S3), branch claude/intake-2026-10-24-t241-t242-review, head c9ae6f746.
 - e1e9f55d5 review retained byte for byte (programs = outputs/program-digests.sha256); mapped in the document map.
@@ -69,3 +69,5 @@ REMAINS: H2 think-3anz (268, on or after 2026-10-26T00:00Z); keep think-hx0e ope
 HOSTED at c9ae6f746: Packing validation 40151925943 (packing-required pass), Certificate page 40151926001 (pages-required pass), merges-into-base 40151908351 pass; no check fails. Local: records tier 53/53; 30 affected modules 1731 passed, 1 skipped. Main unmoved at 755ef426b. PR stays draft; merge on 25 October UTC (pass date), else merge main, stamp_landed --apply and release_pin --update again.
 
 2026-10-25 coord-intake-1024: H1 is PR https://github.com/jlevy/squares/pull/803 at c9ae6f746 (CI green: 40151925943, 40151926001). T-241/T-242 V3/C3; M-1 credits; think-o4m0 (364 aqibrazadev, 450/874 kyleluecke alone); T-242 the house at 304 (25 Oct); 268 staged in select_houses.PENDING_ADOPTION under think-hx0e for H2 (think-3anz), so think-hx0e stays open until H2 merges. #763 reply recorded, #794's News landed. Only C2 (Chaoweeraprasit vs Ostashev) still to ask Couzo; D1/D2 for Daniel in these notes. Senior review A: c-rev-803-1024 (think-101k).
+
+2026-10-25 c-map-hx0e-1024, review A round (https://github.com/jlevy/squares/pull/803#issuecomment-6392411606): A1 awaiting_author items for Q7 and Q1 on #763, and T-241's claim, the couzo-n304 packet, coverage and the report declaration reworded to "drafted for the next #763 reply"; D1/D2 held here unposted. A2 T-242's stale claim and rationale. A3 a per-item `credit` on regularizations (results.schema.yaml; regularized_drawings.item_credit narrows the key's credit and refuses an added name): the 304 item reads "Daniel after Tymchishin". A4 182 -> "differ in all 182, another person in 178", and 964ee2b's 11 of 202 (794, 910). A5 the index's "earlier seed and construction credits retained in provenance" quoted; walk regenerated. A6 PENDING_ADOPTION[268] -> think-3anz. A7 declined here (pre-existing template, 56 sentences in 46 records): bead think-tfdn under think-ezt8. A8 "on or after 26 October". A9 874 named in C1 above. A10 "relative padding".
