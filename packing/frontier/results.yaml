@@ -22865,6 +22865,11 @@ results:
       Kaggle notebook packing 4.45e-03 below this entry's side there, another arrangement
       (T-240). After the 24 October review of it, the case at 268 adopted it on 25 October
       2026, and this entry's certificate there stays retained as history.
+
+      Evan Daniel's issue 806 reports at 182 a new arrangement, found from an L-cut of
+      Francisco Couzo's 211 packing, 3.17e-03 below this entry's side there (T-243). After
+      the 25 October review of it, the case at 182 adopted it on 25 October 2026, and this
+      entry's certificate there stays retained as history.
     next_rung: >-
       V4 and C4 need a second accepted adversarial review by a distinct reviewer and a retained
       human oversight record; one AI review, of 14 October, is retained. The house rule of 16
@@ -34429,13 +34434,24 @@ results:
       separating-axis method with each other, and with the producer the evand-cert reader's
       line filter and corner construction; the review's checker shares no code with them.
       No human oversight or optimality is claimed.
+
+      The case at 182 adopted this certificate as its house best packing in the pass of 25
+      October 2026, from T-174, 3.17e-03 above it, which stays retained as history, with the
+      credit of Evan Daniel's packing from an L-cut of Francisco Couzo's 211 packing. Both
+      strong generators decided the new witness in the same pull request
+      (cases/regularized_drawings/think-2lzo-2026-10-25): grid-slack's view at 0.5, 1 and 5
+      degrees and Evan Daniel's regularizer's same-side view were both admitted at row 10,
+      and the selection draws the regularizer's, which moves 49 squares, the largest by
+      0.381, at the witness's side. It is the source's own display view,
+      s182-1024_regularized.cert, to 1.9e-19, so the drawing proves no other bound; no view
+      is below the side.
     next_rung: >-
       None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
       reviewer and a retained human oversight record; one AI review, of 25 October, is
       retained. The review's questions for the author (the start's credit, the cut, an
       enclosure of the KKT point and the certificate's format line) hold no rung. It is the
-      smallest validated side at 182, so the case adopts it under the house rule, with both
-      strong generators' regularization of the new house in the same change.
+      smallest validated side at 182, and the case adopted it there on 25 October 2026
+      under the house rule, with both strong generators' regularization of the new house.
     reviews:
       - path: docs/project/reviews/review-2026-10-25-evand-n182.md
         kind: adversarial
@@ -35007,17 +35023,19 @@ regularized_drawings:
         max_turn_deg: 0.0
       view: packing/atlas/known-best/regularized/n-181-regularized.yaml.gz
     - n: 182
-      of: T-174
+      of: T-243
       by: project
-      method: regularize_axis_components/2
+      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
+      changes: {re_angled: 5}
       identity:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 0
-        max_move: 9.207591e-95
-        max_turn_deg: 0.0
+        moved: 37
+        max_move: 0.3806931
+        max_turn_deg: 0.364276
       view: packing/atlas/known-best/regularized/n-182-regularized.yaml.gz
     - n: 183
       of: T-220
