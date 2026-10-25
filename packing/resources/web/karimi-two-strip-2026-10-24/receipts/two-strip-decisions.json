@@ -1,8 +1,8 @@
 {
   "certificates": "written out by write_out and serialized in the n S / x y t format; not retained, each pinned here by its SHA-256 and size",
   "checker": "packing/devtools/two_strip_checker.py",
-  "controls": ["count above the capacity","side below the binding fit","H strip one row deeper","no tilt","a right angle","grid one larger","unknown kind"],
-  "cpu_seconds": 6.8,
+  "controls": ["count above the capacity","side below the binding fit","both strips one row deeper","no tilt","a right angle","grid one larger","unknown kind"],
+  "cpu_seconds": 7.4,
   "doi": "10.5281/zenodo.23624433",
   "environment": {"implementation":"CPython","machine":"x86_64","python":"3.14.7"},
   "format": "two-strip-decisions-v1",
@@ -695,6 +695,17 @@
     {"capacity":3781,"certificate_bytes":125976,"certificate_sha256":"82e7659049fde6fd4d077a9f9fa2e9af908edf8b257efe876bd97a6add9d35c0","controls_refused":7,"grid":2444,"h_slack":"1000477/2650000000","h_strip":443,"k":62,"k_is_ceil_sqrt_n":true,"kind":"two-strip","n":3774,"side":"3095000009/50000000","side_below_k":true,"surplus":7,"v_slack":"1015031653/175850000000","v_strip":894,"verdict":"decided"},
     {"capacity":3781,"certificate_bytes":126002,"certificate_sha256":"b8c3ea460362e660cdbc5c00b16ffa02edb088d6b87326827606790b8ca5e5b7","controls_refused":7,"grid":2444,"h_slack":"1000477/2650000000","h_strip":443,"k":62,"k_is_ceil_sqrt_n":true,"kind":"two-strip","n":3775,"side":"3095000009/50000000","side_below_k":true,"surplus":6,"v_slack":"1015031653/175850000000","v_strip":894,"verdict":"decided"}
   ],
-  "started_utc": "2026-10-25T04:45:55Z",
-  "summary": {"controls":{"H strip one row deeper":{"first_reason":"n = 1184 is above the capacity 1182","refused":683},"a right angle":{"first_reason":"tV = 1: a strip's tan(a/2) must lie in (0, 1)","refused":683},"count above the capacity":{"first_reason":"n = 1185 is above the capacity 1184","refused":683},"grid one larger":{"first_reason":"the H strip, 6.89389920424 high, overlaps the grid by 9.857e-01: mH cH + sH > S - (K - mH)","refused":683},"no tilt":{"first_reason":"tH = 0: a strip's tan(a/2) must lie in (0, 1)","refused":683},"side below the binding fit":{"first_reason":"the V strip, 13.9082352941 wide, overlaps the grid by 1.000e-15: K - mV > S - (mV cV + sV)","refused":683},"unknown kind":{"first_reason":"kind 'three-strip': not a two-strip packing","refused":683}},"decided":683,"k_is_ceil_sqrt_n":683,"least_h_slack":"1.132260e-08","least_v_slack":"1.358106e-08","rows":683,"side_below_k":683,"squares":1749915,"surplus_most":19,"surplus_zero":403}
+  "started_utc": "2026-10-25T05:39:50Z",
+  "summary": {
+    "controls": {"a right angle":{"first_reason":"tV = 1: a strip's tan(a/2) must lie in (0, 1)","refused":683},"both strips one row deeper":{"first_reason":"the H strip, 7.8275862069 high, overlaps the grid by 9.194e-01: mH cH + sH > S - (K - mH)","refused":683},"count above the capacity":{"first_reason":"n = 1185 is above the capacity 1184","refused":683},"grid one larger":{"first_reason":"the H strip, 6.89389920424 high, overlaps the grid by 9.857e-01: mH cH + sH > S - (K - mH)","refused":683},"no tilt":{"first_reason":"tH = 0: a strip's tan(a/2) must lie in (0, 1)","refused":683},"side below the binding fit":{"first_reason":"the V strip, 13.9082352941 wide, overlaps the grid by 1.000e-15: K - mV > S - (mV cV + sV)","refused":683},"unknown kind":{"first_reason":"kind 'three-strip': not a two-strip packing","refused":683}},
+    "decided": 683,
+    "k_is_ceil_sqrt_n": 683,
+    "least_h_slack": "1.132260e-08",
+    "least_v_slack": "1.358106e-08",
+    "rows": 683,
+    "side_below_k": 683,
+    "squares": 1749915,
+    "surplus_most": 19,
+    "surplus_zero": 403
+  }
 }

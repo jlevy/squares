@@ -24012,16 +24012,16 @@ issues:
     opened: '2026-10-24'
     state: open
     kind: result-report
-    triage: pending
+    triage: done
     summary: >-
       Mohsen Karimi (ORCID 0009-0004-1055-8267) reports 683 upper bounds for s(n) at n = 1184
       to 3775, each below the grid side ceil(sqrt n), 85 of them at counts where the least
-      earlier statement is the grid. The construction is two strips of squares tilted by
-      a small angle with rational tan(a/2): mH rows on the bottom wall and mV columns on
-      the right wall, around a (K - mV) x (K - mH) axis-parallel grid. Each square has an
-      exact side S < K = ceil(sqrt n), a decimal of at most ten places. The publication is
-      Zenodo record 10.5281/zenodo.23624433 v1.0 (2026-10-24T19:32:47Z; CC BY 4.0 data,
-      MIT code). Its karimi_two_strip_records_v1_lite.zip (13,329 bytes, SHA-256
+      earlier numeric statement is the grid. The construction is two strips of squares
+      tilted by a small angle with rational tan(a/2): mH rows on the bottom wall and mV
+      columns on the right wall, around a (K - mV) x (K - mH) axis-parallel grid. Each
+      row states an exact side S < K = ceil(sqrt n), a decimal of at most ten places. The
+      publication is Zenodo record 10.5281/zenodo.23624433 v1.0 (2026-10-24T19:32:47Z;
+      CC BY 4.0 data, MIT code). Its karimi_two_strip_records_v1_lite.zip (13,329 bytes, SHA-256
       0d4f89b0...78c5) holds records.csv, the 683 exact sides with their seven
       construction parameters, together with regenerate.py and a README, and no
       certificate. The issue's attachment of 20:08:23Z is the same file, byte for byte.

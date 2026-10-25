@@ -14,6 +14,7 @@ every count's digest are in the slow lane.
 from __future__ import annotations
 
 import json
+import re
 import shutil
 from dataclasses import replace
 from fractions import Fraction
@@ -74,8 +75,9 @@ def _routes(cert: legacy.Certificate) -> tuple[bool, bool]:
 
 def test_every_control_at_every_row_is_refused_for_the_reason_it_names() -> None:
     """At each of #799's 683 rows the seven controls are refused, and at 1184 each for
-    its own reason: the capacity, the V fit 10^-15 short, the capacity again with a
-    deeper H strip, the tilt's range twice, the H fit a whole row short, and the kind."""
+    its own reason: the capacity, the V fit 10^-15 short, the H fit a strip row's pitch
+    short with both strips deeper around the same grid, the tilt's range twice, the H fit
+    a whole row short, and the kind."""
     rows = checker.records()
     assert len(rows) == checker.ROWS
     for row in rows:
@@ -86,7 +88,8 @@ def test_every_control_at_every_row_is_refused_for_the_reason_it_names() -> None
     assert found["count above the capacity"] == "n = 1185 is above the capacity 1184"
     assert found["side below the binding fit"].startswith("the V strip")
     assert "overlaps the grid by 1.000e-15" in found["side below the binding fit"]
-    assert found["H strip one row deeper"] == "n = 1184 is above the capacity 1182"
+    assert found["both strips one row deeper"].startswith("the H strip")
+    assert "overlaps the grid by 9.194e-01" in found["both strips one row deeper"]
     assert found["no tilt"].startswith("tH = 0: ")
     assert found["a right angle"].startswith("tV = 1: ")
     assert found["grid one larger"].startswith("the H strip")
@@ -113,6 +116,7 @@ def test_parameters_the_lemma_does_not_state_are_refused() -> None:
         "phV = -1/4: ": replace(row, phase_v=Fraction(-1, 4)),
         "the H strip": replace(row, side=fit_h - checker.FIT_MARGIN),
         "the V strip": replace(row, side=fit_v - checker.FIT_MARGIN),
+        "K = 1001: the checker decides 2 <= K <= 1000": replace(row, k=1001),
     }
     for reason, changed in refused.items():
         with pytest.raises(checker.TwoStripRefusedError, match=reason):
@@ -121,20 +125,127 @@ def test_parameters_the_lemma_does_not_state_are_refused() -> None:
         checker.write_out(replace(row, n=row.n + 1))
 
 
-def test_a_control_the_checker_would_accept_is_reported_not_passed_over() -> None:
-    """The deeper H strip is refused only while the V fit is tight. Half a unit of slack
-    lets a strip row of length S - wV hold the K - mV squares of the grid row it
-    replaces, so the control keeps the capacity, `decide` accepts it, and `controls` says
-    so rather than listing it as refused."""
+def test_the_h_strip_one_row_deeper_alone_is_no_control() -> None:
+    """One more H row is a genuine two-strip packing by the same lemma: its H fit loosens
+    by 1 - c, so `decide` accepts it at its own capacity. At 1192 that capacity is one
+    square below the row's, which says only that the row's parameters were locally better;
+    with half a unit of slack it keeps the capacity, and `decide` accepts it at the
+    original count. Both strips one row deeper around the same grid, the control, is
+    refused at both, by the H fit."""
+    row = next(row for row in checker.records() if row.n == 1192)
+    deeper = replace(row, rows_h=row.rows_h + 1)
+    held = checker.capacity(row)
+    assert checker.capacity(deeper) == held - 1
+    assert checker.decide(replace(deeper, n=held - 1))["verdict"] == checker.DECIDED
     loose = replace(SMALL, tilt_h=Fraction(1, 50), tilt_v=Fraction(1, 50), rows_h=2)
     loose = replace(loose, side=checker.binding_side(loose) + Fraction(1, 2))
     loose = replace(loose, n=checker.capacity(loose))
-    found = {item["control"]: item for item in checker.controls(loose)}
-    assert not found["H strip one row deeper"]["refused"]
-    assert found["H strip one row deeper"]["reason"] == ""
-    assert all(
-        item["refused"] for name, item in found.items() if name != "H strip one row deeper"
-    )
+    assert checker.capacity(replace(loose, rows_h=loose.rows_h + 1)) == loose.n
+    for case in (replace(row, n=held), loose):
+        found = {item["control"]: item for item in checker.controls(case)}
+        assert all(item["refused"] for item in found.values())
+        assert found["both strips one row deeper"]["reason"].startswith("the H strip")
+
+
+def test_a_control_the_checker_accepts_is_reported_not_passed_over() -> None:
+    """Two controls are refused only while the fits are tight: the grid one larger needs
+    a slack below 1, and both strips deeper a slack below a strip's c. With a full unit of
+    slack in both fits each is a packing, so `decide` accepts it and `controls` says so
+    rather than listing it as refused; the other five are still refused."""
+    roomy = replace(SMALL, side=checker.binding_side(SMALL) + 1)
+    roomy = replace(roomy, n=checker.capacity(roomy))
+    found = {item["control"]: item for item in checker.controls(roomy)}
+    loose = ("both strips one row deeper", "grid one larger")
+    assert [(found[name]["refused"], found[name]["reason"]) for name in loose] == [
+        (False, ""),
+        (False, ""),
+    ]
+    assert all(item["refused"] for name, item in found.items() if name not in loose)
+
+
+def _csv(*rows: tuple[str, ...], header: tuple[str, ...] = checker.COLUMNS) -> str:
+    return "\n".join(",".join(fields) for fields in (header, *rows)) + "\n"
+
+
+#: #799's first row, as records.csv states it.
+FIRST = (
+    "1184",
+    "1745411771/50000000",
+    "34.9082354200",
+    "34.909679351448",
+    "35",
+    "7",
+    "5/27",
+    "0",
+    "14",
+    "3/29",
+    "0",
+)
+
+
+def test_the_ingest_refuses_every_malformed_deposit_as_custody() -> None:
+    """`parse_records` reads a deposit as untrusted data and refuses, as a
+    `CustodyError` and never a bare KeyError, TypeError or ValueError: a duplicated,
+    missing or extra column; a short, long or blank row; a K above the checker's bound
+    (10^12 with n = 1) or not ceil(sqrt(n)); a literal past `MAX_DIGITS`, one of 5,000
+    digits, and a malformed comparison column; a decimal side that is not the exact
+    side; a count given twice; and a field past the csv module's size limit. The row
+    reader refuses a missing field and a field that is not text. #799's first row, as
+    stated, parses."""
+    assert checker.parse_records(_csv(FIRST)) == [checker.records()[0]]
+
+    def changed(index: int, value: str) -> tuple[str, ...]:
+        return (*FIRST[:index], value, *FIRST[index + 1 :])
+
+    refused = {
+        "the header is": _csv((*FIRST, "1/2"), header=(*checker.COLUMNS, "tV")),
+        "the header is ": _csv(FIRST[:-1], header=checker.COLUMNS[:-1]),
+        "row 1: 10 fields, not 11": _csv(FIRST[:-1]),
+        "row 1: 12 fields, not 11": _csv((*FIRST, "")),
+        "row 2: 0 fields, not 11": _csv(FIRST, (), changed(0, "1186")),
+        "K = 1000000000000 is above the checker's bound 1000": _csv(
+            (
+                "1",
+                "999999999999/1",
+                "999999999999.0",
+                "1.0",
+                "1000000000000",
+                "1",
+                "1/10",
+                "0",
+                "1",
+                "1/10",
+                "0",
+            )
+        ),
+        "K = 36 is not ceil": _csv(changed(4, "36")),
+        "'1745411771/1" + "0" * 30 + "' is not the literal": _csv(
+            changed(1, "1745411771/1" + "0" * 30)
+        ),
+        "is not the literal": _csv(changed(6, "1/" + "7" * 5000)),
+        "'none' is not the literal": _csv(changed(3, "none")),
+        "the decimal side is not the exact side": _csv(changed(2, "34.9082354201")),
+        "a count appears in more than one row": _csv(FIRST, FIRST),
+        "field larger than field limit": _csv(changed(9, "1" * 200_000)),
+    }
+    for reason, text in refused.items():
+        with pytest.raises(checker.CustodyError, match=re.escape(reason)):
+            checker.parse_records(text)
+    item: dict[str, object] = dict(zip(checker.COLUMNS, FIRST, strict=True))
+    for broken in ({**item, "tV": None}, {key: item[key] for key in checker.COLUMNS[1:]}):
+        with pytest.raises(checker.CustodyError, match=r"records\.csv n="):
+            checker.row_from_record(broken)
+
+
+def test_write_out_builds_no_square_past_n() -> None:
+    """At K = 1000, the checker's bound, the construction holds about a million squares;
+    written out at n = 1 it builds one, since `poses` places them one at a time."""
+    row = replace(SMALL, k=checker.MAX_K, rows_h=1, rows_v=1)
+    row = replace(row, side=checker.binding_side(row))
+    assert checker.capacity(row) > 990_000
+    cert = checker.write_out(row)
+    assert len(cert.poses) == 1
+    assert cert.poses[0] == next(checker.poses(row))
 
 
 def test_ryu_s_theorem_1_3_packings_are_decided_at_his_count() -> None:
@@ -170,7 +281,7 @@ def test_a_small_packing_written_out_agrees_with_both_routes() -> None:
     lowered = replace(row, side=row.side - checker.FIT_MARGIN)
     with pytest.raises(checker.TwoStripRefusedError, match="overlaps the grid"):
         checker.decide(lowered)
-    placed = checker.poses(lowered)
+    placed = list(checker.poses(lowered))
     assert len(placed) >= row.n - 1
     shrunk = base.decide(
         base.geometry(legacy.Certificate(len(placed), lowered.side, tuple(placed)))
@@ -199,9 +310,8 @@ def test_an_altered_receipt_or_packet_is_refused(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     """A receipt row with another capacity is named; a replayed certificate that is not
-    the one the decisions receipt names is refused; a packet keeping a file the capture
-    does not name fails custody before any row is read; and a row whose decimal side is
-    not its exact side is refused."""
+    the one the decisions receipt names is refused; and a packet keeping a file the
+    capture does not name fails custody before any row is read."""
     receipt = json.loads(checker.DECISIONS.read_text(encoding="utf-8"))
     receipt["rows"][5]["capacity"] += 1
     altered = tmp_path / "decisions.json"
@@ -223,27 +333,6 @@ def test_an_altered_receipt_or_packet_is_refused(
     monkeypatch.setattr(checker, "EXTRACTED", copied)
     with pytest.raises(checker.CustodyError, match="the packet keeps"):
         checker.records()
-    item = {
-        "n": "1184",
-        "new_side_exact": "1745411771/50000000",
-        "new_side": "34.9082354201",
-        "K": "35",
-        "mH": "7",
-        "tH": "5/27",
-        "phH": "0",
-        "mV": "14",
-        "tV": "3/29",
-        "phV": "0",
-    }
-    with pytest.raises(checker.CustodyError, match="the decimal side is not the exact side"):
-        checker.row_from_record(item)
-    item["new_side"] = "34.9082354200"
-    row = checker.row_from_record(item)
-    assert (row.n, row.side, row.tilt_v) == (
-        1184,
-        Fraction(1745411771, 50000000),
-        Fraction(3, 29),
-    )
 
 
 @pytest.mark.slow

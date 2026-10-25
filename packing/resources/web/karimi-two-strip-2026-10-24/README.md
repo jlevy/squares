@@ -94,6 +94,12 @@ capture held each download to the MD5 Zenodo states, and the digests above are t
 `two_strip_checker.custody` checks only that the packet keeps exactly the files the
 capture names.
 
+The checker reads `records.csv` as untrusted data (`parse_records`). The header must be
+the eleven columns exactly, and each row eleven fields. Each literal is matched whole,
+with at most 30 digits in any part (the longest here has 12). $K$ must be at most 1,000
+and equal $\lceil\sqrt n\,\rceil$, and each count may appear once. Every refusal is a
+`CustodyError`.
+
 ## What the Rows Claim
 
 683 counts from 1184 to 3775, with $K$ from 35 to 62 and $K = \lceil\sqrt n\,\rceil$ at
@@ -115,7 +121,7 @@ Two receipts under [`receipts/`](receipts/), each written by
 [`devtools.two_strip_checker`](../../../devtools/two_strip_checker.py). Everything in it is
 exact, in integers and fractions.
 
-- **[`two-strip-decisions.json`](receipts/two-strip-decisions.json)**, `decide-all` (6.8
+- **[`two-strip-decisions.json`](receipts/two-strip-decisions.json)**, `decide-all` (7.4
   CPU-seconds). Every row is decided by the checker’s lemma: no two squares of a strip
   overlap, the three regions are disjoint inside $[0, S]^2$ by the two fit inequalities,
   and the count is at most the capacity. The capacity equals $n$ at 403 rows and exceeds
@@ -124,14 +130,19 @@ exact, in integers and fractions.
   controls, and all 4,781 are refused:
   - one square above the capacity;
   - the side $10^{-15}$ below the binding fit inequality;
-  - the bottom strip one row deeper at the capacity;
+  - both strips one row deeper around the same grid ($K$, $m_H$ and $m_V$ each one
+    more) at the capacity;
   - no tilt;
   - a right angle;
   - the grid one column and row larger;
   - an unknown kind.
 
   A side $10^{-12}$ lower is no control here, since every side sits at least
-  $1.13 \cdot 10^{-8}$ above its fit. The receipt records each written-out certificate’s
+  $1.13 \cdot 10^{-8}$ above its fit. Nor is the bottom strip one row deeper alone: that
+  is a genuine two-strip packing by the same lemma, whose capacity falls only because
+  the row’s parameters were locally better. The grid one larger and both strips deeper
+  are refused while the slacks are below 1 and below each strip’s $c$ (about 0.98);
+  the largest here is 0.025. The receipt records each written-out certificate’s
   SHA-256 and size, and records no row of the coverage register.
 - **[`replay-sample.json`](receipts/replay-sample.json)**, `replay-sample` (49 seconds
   wall at two workers; 8.4 CPU-seconds of positives and 64.9 of controls). It is the

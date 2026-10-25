@@ -9079,7 +9079,10 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "against main bb756e193 (#805). Rendered by render_packing_methods at link "
             "revision 52c7b2ce into empty site directories, twice from this tree and once "
             "with main's result-requests.yaml and frontier README swapped in, 43 files each, "
-            "all byte-identical across the three. No register entry changes. Retain v0.2.7."
+            "all byte-identical across the three. Measured again after review A of #808 set "
+            "the entry's triage to done and reworded its summary, at link revision ff752564 "
+            "with the same two inputs of main swapped in: the same outcome. No register "
+            "entry changes. Retain v0.2.7."
         ),
     ),
 )

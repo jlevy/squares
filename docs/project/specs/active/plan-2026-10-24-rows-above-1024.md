@@ -608,7 +608,11 @@ not need R2 or R3: the chain passes over their unlanded rows, which are written 
 superseded when they land.
 The triage priced it at about 0.8 CPU-hours, an item of its own outside N2’s 36: the
 checker on every row, the written-out positives on both routes, and six controls at one
-count per K.
+count per K. That scope and price are for version 1’s 683 rows.
+Version 2 of the deposit (10.5281/zenodo.23628190, 2,824 rows to 9944) and the author’s
+preprint arrived on #799 after the triage.
+Their triage decides whether R5 covers 683 or 2,824 rows, and at 2,824 rows reaching
+larger counts the price is at least four times as much.
 
 **The stratified 10% (R2).** Within each thousands folder, the recorded rows are sorted
 by count. Every tenth row is taken from a start the code fixes, about 432 of 4,319 in
