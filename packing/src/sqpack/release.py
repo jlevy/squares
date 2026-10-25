@@ -9244,7 +9244,6 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "packing/contributors/people/jatloe.md",
             "packing/contributors/people/manasseh-ahmed.md",
             "packing/devtools/check_results.py",
-            "packing/devtools/render_n11_lower_bounds_explainer_pdf.py",
             "packing/devtools/site_resources.py",
             "packing/frontier/n-029.md",
             "packing/frontier/results.yaml",
@@ -9298,6 +9297,16 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "(render_n11_lower_bounds_explainer_pdf.py), at link revision bbc8c864: "
             "twice from this tree and once with main's copy of that module swapped in, "
             "51 files each, all byte-identical across the three. "
+            "Main 01e2b5295 (#813) then registered T-244 at 172 and 263 and took the "
+            "explainer's v0.4.29 and its page count of 25, so after the merge of that main "
+            "the explainer, counting 244 to 246 results, takes v0.4.30 over main's v0.4.29, "
+            "and the page-count module, main's own again, is no longer a candidate input. "
+            "Measured a seventh time after that merge, at link revision 8a36268c against "
+            "main 01e2b5295, with that main's result-requests.yaml, ctjlewis.md, "
+            "evan-daniel.md, manasseh-ahmed.md, check_results.py, site_resources.py, "
+            "n-029.md, results.yaml and source-coverage.yaml swapped in and jatloe.md "
+            "removed: twice from this tree and once swapped, 51 files each, all "
+            "byte-identical across the three. "
             "Retain v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
