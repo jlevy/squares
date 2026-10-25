@@ -9370,6 +9370,22 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "Retain v0.4.30, v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=("packing/campaign/result-requests.yaml",),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The s(29) exact-side validation (think-10m1, #816): the requests record "
+            "enters #816, the owner's tracker of T-246's validation, against main "
+            "2f974835a (#818). Rendered at link revision a1bf7a77 into empty site "
+            "directories, twice from this tree and once with main's result-requests.yaml "
+            "swapped in: render_packing_methods writes all 43 files byte-identical across "
+            "the three. No PDF was printed; it prints from that HTML. Retain v0.2.7."
+        ),
+    ),
 )
 
 
