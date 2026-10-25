@@ -5,7 +5,7 @@ title: "Import #797: Kevin Fang's c*(k) < 4√(2k)+1 for every k ≥ 6 (squarepa
 kind: task
 status: in_progress
 priority: 2
-version: 14
+version: 15
 delegate: c-import-797-1024
 labels:
   - result-import
@@ -18,7 +18,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-24T20:23:19.286Z
-updated_at: 2026-10-25T02:49:50.326Z
+updated_at: 2026-10-25T03:09:36.371Z
 started_at: 2026-10-24T20:24:12.105Z
 ---
 New 2026-10-24 issue https://github.com/jlevy/squares/issues/797 (TheSnakeFang, 18:52:48Z): for every k >= 6, k^2 - ceil(sqrt(32k)) - 1 unit squares fit in a square of side < k, so c*(k) < 4 sqrt(2k) + 1. Ryu's L packing (Theorem 1.3) with filled band ends, b the odd integer nearest sqrt(2k); a 5-page note. Source TheSnakeFang/squarepack-certs@b1b3f6b theorem-a/ (note PDF+TeX, lband.py exact construction, windowed_check.py, certificates k=6..40 and 101, SHA-256 for k=300 and 600 with regenerate.sh). The repository head db1ed62 (3 commits past the last read) adds note v0.2 crediting Evan Daniel's earlier bound (doi:10.5281/zenodo.23624565): read for priority and credit. Bears on the deficiency rows (Ryu's Theorems 1.2-1.4, T-163). Stage 0 owner; stage 1 triage is read-only first. Source claims are unverified.
@@ -68,3 +68,47 @@ Two questions, neither of which holds anything up:
 2026-10-25 (c-import-797-1024): review A of #801 (issuecomment-6392315606) addressed in one round, dispositions https://github.com/jlevy/squares/pull/801#issuecomment-6392419441; new head a716db43c (fixes 25f021693, re-pin a716db43c). Significance relabelled S3 by review A2 (supersedes the S2 draft above); News draft in the PR body. The stage 4 review of Fang's note is think-qmqq.
 
 2026-10-25 coord-intake-1024: #801 merged (3e1349802, 02:35:38Z; S3 by review A, dispositions issuecomment-6392419441); Pages 40155040155 verified. #797 acknowledgement posted https://github.com/jlevy/squares/issues/797#issuecomment-6392638719; recorded by c-map-qmqq-1024 (think-vfz9) with the stage 4 review of the note (accept with findings). The review's six author questions follow after that PR merges.
+
+2026-10-25 c-map-qmqq-1024 (think-vfz9): the stage 4 review of the note is mapped in draft PR https://github.com/jlevy/squares/pull/805 (intake, S2), head 21fec119c: the review retained byte for byte; Theorem A's row REVIEWED, V3/C1 by the epistemics ladder, bound still REPORTED; no evidence entry (count-scoped, no case record would cite it, as for Ryu's rows); three verifiers registered; lemma numbers as the PDF prints them (N-2) in the row, deficiency_family, the packet README, the #797 claim and fang_theorem_a.py (construction.json regenerated); the k^{2/5} crossover stated as 735,988 / 736,595. #797: the acknowledgement issuecomment-6392638719 recorded under replies; read_through 2026-10-25T00:49:19Z (the author's comment correcting his comparison, consistent with the record); the acknowledgement's two questions recorded as awaiting_author items in state withdrawn (informational, coord-intake-1024's decision). check_requests marks #797 closeable once #805 is on main, so the follow-up below can go up as the final comment, with the close, under "Close a Settled Issue"; record it under #797's replies as `final` (or `follow-up` if the issue is left open). It names no T-NNN.
+
+Stage 7 follow-up draft for #797 (post after #805 merges and its deploy is verified; the review link resolves only on main):
+
+Thank you again, Kevin. The mathematical review of your note is done, and the record now carries it.
+
+**The verdict: accepted with findings.** The proof in Sections 2 to 5 is complete and correct for every k ≥ 6. Every identity and polynomial inequality it uses was re-derived and decided symbolically, including (E1), (E3), the floor pairing of Lemma 2, the rearrangement of Lemma 3 and the final 6b⁴ − b³ − 2b² − b > 0. Programs written for the review from the note alone, without reading or running `lband.py` or your checkers, decided:
+
+- the bound at every k from 6 to 250,000, at both odd widths where there are two;
+- every square of 46 packings up to k = 101, with 49 mutated packings refused;
+- your least slack, 8019401/78023840599 at k = 19,705;
+- the ties k = 2m² for m up to 1000, and the sharpness remark in the limit t → 1/b for every odd b from 5 to 2001;
+- every comparison of Section 7 and the abstract.
+
+The review is [review-2026-10-25-fang-theorem-a.md](https://github.com/jlevy/squares/blob/main/docs/project/reviews/review-2026-10-25-fang-theorem-a.md), and its programs and receipts are in [the packet](https://github.com/jlevy/squares/tree/main/packing/resources/web/fang-theorem-a-2026-10-24/review/review-2026-10-25). It is one AI reader's re-derivation, by Claude, the system family your tools also used, and not a referee's report.
+
+**How it is recorded.** Theorem A's row in the asymptotic register now says that the proof was re-derived and accepted, and what the review's programs decided. It stays credited as an independent second proof after Evan Daniel's earlier bound, and the record now cites your theorem and lemmas by the numbers the PDF prints: Theorem 1, Lemma 2 for the fill of a band end and Lemma 3 for the band.
+
+**Two sentences to change, neither in the proof.**
+
+- **M-1, the fixed-squeeze example of Section 6.** The first bullet defines the squeeze as k − S. With k − S = 10⁻⁷ at k = 43,218, the construction has waste 1176 at both odd widths, 293 and 295, not 1178. Waste 1178 appears with t − 1/b = 10⁻⁷ at b = 293, where k − S is about 2.0·10⁻⁷, and there t fails conditions (c) and (d). The point of the example, that a fixed squeeze leaves the close interval, whose width is about b⁻³, is sound. The text should say which quantity is 10⁻⁷ and that t is not close there.
+- **M-2, "not a new record for any range of k" (Section 7).** By your own counts, ⌈√(32k)⌉ is strictly below 4⌈√(2k − 7)⌉ − 1 at 495,210 of the k with 7 ≤ k < 10⁶, in runs of hundreds of consecutive k (one of 703, from 996,876 to 997,578). Against every statement the register holds, Theorem A is strictly the smallest at 346,919 of the k with 42 ≤ k ≤ 702,000. What is true is that its asymptotic strength is Daniel's and that neither integer bound is the smaller at every k.
+
+**Smaller points.**
+
+- The abstract's "rounding loss below 3/2" is not defined in the body. Measured as the uncovered length of the levels, the near end loses less than 1/2, but the far end can lose up to 3/2 + η, and it loses more than 3/2 at 1,058 of 500,694 far band ends with k ≤ 250,000 (most, 1.5664, at k = 14, b = 5). What stays below 3/2 is Lemma 2's deficit 1 + 2η.
+- The sharpness remark is stated without proof. It holds in every case the review computed.
+- At k = 2m², "the odd integer nearest √(2k)" is two integers, 2m ± 1. Section 5's |b − √(2k)| ≤ 1 is the precise form, and both widths work at every such k checked.
+- N, c and s each carry two meanings, and that s is nondecreasing is used at line 48 without being stated. The derivative argument for W < b does not cover t ≥ 1, while W − b = 2t(1 − bt)/(1 + t²) covers every t > 1/b in one line.
+- "Certificates for k ≤ 600" means 38 values, two of them unpublished. The two checkers called independently written were both written with Claude, by your acknowledgement and Daniel's CREDITS.md.
+- On credit: right-justified axis-parallel layers in a band end already appear in Ryu's Section 7 staircase (S5), after Bui. What Daniel's construction and yours add is an end made of such layers alone, at b ≈ √(2k).
+- The TeX comment on line 2 names a v0.3 built from docs/theorem-a.md, while the note is draft v0.2.
+
+**Six questions, none of which holds anything up:**
+
+1. In Section 6's second bullet, is the fixed squeeze 10⁻⁷ the quantity k − S of the first bullet, or t − 1/b, and which width does the example use?
+2. What does "rounding loss of each filled end" in the abstract measure?
+3. Would you restate the last sentence of Section 7 as a per-k comparison?
+4. Is there a proof of the sharpness remark for every odd b ≥ 5? If it is computational, over which b?
+5. How does `lband.py` obtain a rational t from a chosen squeeze?
+6. Is there a v0.3 of the note, and does its mathematics differ from v0.2's?
+
+The two questions of our last comment, on the Section 6 certificates and the k = 300 and 600 certificates, hold nothing open either. An answer to any of them is welcome here.
