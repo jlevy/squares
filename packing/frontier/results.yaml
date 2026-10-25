@@ -33800,9 +33800,8 @@ results:
       certified KKT local minimum at exactly the side of Daniel's later certificate, 4.48e-12
       below, and at 303, on its first-pass rung, a solve whose KKT certificate fails at the
       relaxed gate, giving a view 3.63e-12 below that all three exact routes here accept.
-      Their registration is think-20oj's, the 268 view with Daniel's later certificate
-      (T-242) as the one that first states its side; since 268 moved to T-242, that view
-      is at the house's side, not below it.
+      think-20oj registers the 303 view; the 268 view, at the house's side since 268 moved to
+      T-242 on 26 October 2026, is no register candidate.
 
       At 268 Daniel's later certificate, a sibling placement, was registered as reported as
       T-242 when this pass adopted T-240 there. The house rule adopts the smallest validated
@@ -34224,7 +34223,8 @@ results:
       the witness's side, is admitted (row 10) and drawn, and Evan Daniel's
       certified KKT re-solve at the witness's side goes to review at row 7; no view is below
       the side. The regularizer's view of T-240's witness at 268, which #794's runs found at
-      exactly this certificate's side (think-20oj), is at the house's side now, not below it.
+      exactly this certificate's side, is at the house's side now, not below it, so it is no
+      register candidate; think-20oj keeps the 303 view.
 
       The source's own checkers were not run here. The two maintained routes, the sqpack
       rational witness verifier and the independent rational corner checker, share
