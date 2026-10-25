@@ -5,7 +5,7 @@ title: "Import #804: Hyukdong Kim's exact minimal polynomials of the record side
 kind: task
 status: in_progress
 priority: 2
-version: 13
+version: 14
 delegate: c-import-804-1025
 labels:
   - result-import
@@ -17,7 +17,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-25T05:20:39.648Z
-updated_at: 2026-10-25T10:47:51.929Z
+updated_at: 2026-10-25T11:31:45.412Z
 started_at: 2026-10-25T05:21:00.185Z
 ---
 New 2026-10-25 issue https://github.com/jlevy/squares/issues/804 (HyukdongKim, 01:57:25Z): the record side at each of 88, 126, 172, 199 and 263 is a root of a stated irreducible polynomial (degrees 7, 2, 24, 16, 17; 126 = 15/2 + 3 sqrt 2), the register having minimal_polynomial: null there; exact_forms.json. Claude-assisted. Stage 1 triage read-only first: which houses the polynomials describe today (the record has moved since 2ec489d1e at some counts?), how to verify (exact KKT/rigidity system, PSLQ is not a proof), and the register action (new exact-value entries, or evidence on the houses).
@@ -77,3 +77,4 @@ Update 07:30Z: merged main 886dddce6 (#808) at 77c978716; fixed the first hosted
 Update 09:50Z: merged main 46e355582 (#814) at 20c2a2fe4 (T-243 before T-244, ids contiguous); explainer re-cut v0.4.29 (dd5fc01db); #806 final comment recorded and entry closed (9d8bed3dd); #814 News landed (4c8f83bd1); hosted findings fixed (1b75d2f78: explainer PDF 25 pages, T-174 page test reads its 350,000-byte registered budget); papers re-measured at 1b75d2f7; DATA_REVISION 20c2a2fe4. Head 63de0bc6a: every hosted check passes (Packing validation 40180900830, Certificate page 40180900864, Branch mergeability 40180896050). The acknowledgement draft above names T-244, now on the branch with contiguous ids; still post only after the merge.
 
 Update 10:40Z (review A of #813, issuecomment-6396307905): A1 to A5 fixed at 6997281dd; both author comments read (07:22:16Z concession at 88/126/199 and withdrawn 126 paragraph; 09:06:23Z configurations zip 16e6ad9d...9a2d), kept in packet hyukdongkim-t244-configurations-2026-10-25 as derived facts (no licence); #804 read_through 09:06:23Z, queued result configurations-172-263 on think-4rzl; think-4rzl re-scoped to deciding them on both routes, not deferred, builder only as fallback. Acknowledgement draft above rewritten: two informational questions (licence, 297), no awaiting_author item.
+Update 11:55Z (review B, issuecomment-6396781432): B1 to B5 fixed at d5dcd2d0e; dispositions issuecomment-6396944532; head 3bf9b6455, every hosted check passes (Packing validation 40188144019, Certificate page 40188143967). think-4rzl step 1 is now the reader of the configurations packet facts (about half an agent-day).
