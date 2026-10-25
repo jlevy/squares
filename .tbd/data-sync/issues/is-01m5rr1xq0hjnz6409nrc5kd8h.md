@@ -5,7 +5,7 @@ title: "Import #804: Hyukdong Kim's exact minimal polynomials of the record side
 kind: task
 status: in_progress
 priority: 2
-version: 6
+version: 8
 delegate: c-import-804-1025
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-25T05:20:39.648Z
-updated_at: 2026-10-25T05:42:29.566Z
+updated_at: 2026-10-25T06:26:22.886Z
 started_at: 2026-10-25T05:21:00.185Z
 ---
 New 2026-10-25 issue https://github.com/jlevy/squares/issues/804 (HyukdongKim, 01:57:25Z): the record side at each of 88, 126, 172, 199 and 263 is a root of a stated irreducible polynomial (degrees 7, 2, 24, 16, 17; 126 = 15/2 + 3 sqrt 2), the register having minimal_polynomial: null there; exact_forms.json. Claude-assisted. Stage 1 triage read-only first: which houses the polynomials describe today (the record has moved since 2ec489d1e at some counts?), how to verify (exact KKT/rigidity system, PSLQ is not a proof), and the register action (new exact-value entries, or evidence on the houses).
@@ -38,3 +38,93 @@ Action proposed: 88/126/199 not registered (second derivation of T-193's values;
 Drafts: scratchpad triage-804/drafts/{result-requests-804.yaml (triage: pending, schema-valid), result-requests-804-results-after-triage.yaml (schema-valid), register-entry-172-263.yaml (schema-valid), import-plan-804.md, ack-804.md}.
 
 2026-10-25 coord-intake-1024 on c-triage-9vai-1025's report: decided by stated rules (stage 1 table; T-120..T-123 and T-193 precedent), not owner questions. 88, 126, 199: no entry (a second derivation of T-193's values, #639 exact-side-51 precedent). 172, 263: one new reported upper-bound entry, V0/C0, S2, phrased 's(n) <= <root>' never 's(n) =', credited to Hyukdong Kim after T-174's finders; nothing recorded on T-193. The configuration builder (W7-style, 10-100 CPU-h at 172) is a later bead, priced against the 40 CPU-h item cap before it runs. Records lane c-import-804-1025 (wt-804).
+2026-10-25 c-import-804-1025 (wt-804, branch claude/intake-2026-10-25-issue804-exact-sides): import done as decided. Packet hyukdongkim-exact-forms-2026-10-25 (derived fact + digests, no archive byte; attachment re-downloaded with gh, SHA-256 matches). Ledger campaign/issue-intake/upper-bounds-issue804-20261025 (walks 172, 263; records both). T-244 upper bound V0/C0 S2 at 172 and 263, claim cut at 100 places (a 40-place cut reads as equal to T-174, which agrees to 88/93 places, and check_standing fails), regularizations of T-174 with identity source-claim; unfinished C3 links think-4rzl. 88/126/199: no entry, T-193 unchanged. Builder bead think-4rzl opened under think-ezt8, deferred to 2026-11-08. Requests entry #804 triage done. Question rule: Q1 (configurations at 172 and 263) goes under awaiting_author with changes: file once the acknowledgement is posted and has a URL; Q2 (licence) and Q3 (297) are informational.
+
+ACKNOWLEDGEMENT DRAFT (post after the import PR merges; check the T-number on main first, it is T-244 only if #806's T-243 merged before):
+@HyukdongKim, thank you for these exact sides and for the bundle that comes with them.
+
+**What we received.** We have the issue and its attachment `squares-exact-forms.zip`
+(14,112 bytes). Its SHA-256 is `c770f9c37dee6b248543f3e661318630a0f279bc6a8c7663cb2efc53e2814ee7`,
+the digest you state. It holds seven files, among them `exact_forms.json` (SHA-256
+`531e7077…9202`). We pinned the inputs you name, `evand/square-packing@659ee62`
+`site/www/data/p/best-<n>.json`, by their digests as well.
+
+**What we checked.** We did not run the bundle's code, and we wrote our own checks:
+
+- Each of the five polynomials is primitive and irreducible over Q, by SymPy's
+  `factor_list` and again by this repository's number-field code.
+- Each root you name is the one we isolate exactly: the 4th of five real roots at 88, the
+  larger of two at 126, the least of four at 172, the 2nd of two at 199, and the only one
+  at 263.
+- Your 100-digit values lie within 1e-99 of those roots, and your polynomials in the issue
+  text match `exact_forms.json`.
+- At 172 and 263 the atlas files you read are the record's witnesses at those counts, to
+  binary64 at every square.
+
+**Where the record already has them.** At 88, 126 and 199 your polynomials are exactly
+Evan Daniel's. He published exact configurations at these sides in #639 on 16 October
+(`evand/square-packing@7d1407a`, `search/exact/cur/`), and the record registered them
+that day, after checking each configuration exactly here. The case pages still show the
+rational certificates at these counts because the adoption of the algebraic sides there
+is waiting on a correction to how their credit is recorded. Your result at these three
+counts is therefore an independent second derivation of values the record holds, and we
+record no new entry for it. The `EXACT_FORMS.md` you compared against is Daniel's table of
+7 October. It says it covers the register as of 6 October, and it is unchanged at his
+current head.
+
+**Where they are new.** At 172 and 263, Daniel's #639 forms have degree 12, and their
+roots lie 1.18e-62 and 9.23e-63 above yours. The record did not take them, because
+PingYou Ltd's rational certificates from #574 are smaller. Your roots are smaller still:
+below those certificates by 3.90e-89 at 172 and 2.13e-94 at 263, a comparison we decided
+exactly. So your sides at 172 and 263 are values the record did not hold. They also
+answer the question our reply on #639 asked Daniel, why his sides stopped above #574's.
+
+**What we recorded.** The sides at 172 and 263 are registered as
+[T-244](https://github.com/jlevy/squares/blob/main/packing/frontier/RESULTS.md), recorded as
+reported (V0/C0): s(172) ≤ 13.6189889568993984288635016293504898995040… and
+s(263) ≤ 16.7331660078993789705122814839596734462471…, cut at 100 places in the entry. It
+credits you with the exact sides, after the packings' finders: Francisco Couzo's at 172 and
+Nate Chaoweeraprasit's at 263, as Evan Daniel and PingYou Ltd improved them. They are
+upper bounds, the sides of those packings, not values of s(n), and the entry says that
+feasibility at each side is not shown until an exact configuration exists. Because the
+bundle states no licence, we keep the polynomials and printed sides with the attachment's
+digests, not the files themselves.
+
+**Two corrections.**
+
+- At 126, 15/2 + 3√2 lies 1.174e-19 below the rational bound, not 1.2e-22. The
+  certificate there is the exact side scaled by 1 + 10⁻²⁰, as the ones at 88 and 199 are.
+- Daniel's `exactsolve.py` also solves the KKT system on the load-bearing contacts at
+  high precision and searches for an integer relation; the record's exact ceilings of 5
+  October came from it. We credit you with the values, not with a new method.
+
+**What will be checked.** A match at 3,000 digits, however close, does not prove that
+the side equals the root. What would prove s(n) ≤ S\* is an exact configuration at S\*.
+Every centre and angle would lie in a number field, every contact would hold as an
+identity there, and every other pair and wall would be separated exactly. We would decide
+it on this repository's exact verifier over number fields and on a second route. We record
+no local minimality: the least multiplier is about −6·10⁻¹⁶, and no second-order condition
+was checked.
+
+Three questions:
+
+1. Could you publish exact configurations at 172 and 263? Daniel's `n-N.minpoly.json.gz`
+   format is one this repository already reads: a field polynomial with an isolating
+   interval, and each centre and tan(θ/2) as an element of the field. If that is not
+   practical, the 3,000-digit KKT points (coordinates, angles and side) with the active
+   set and sign branches would let us build them. Without one of these, the two sides can
+   only be recorded as reported. If we hear nothing in two weeks we may try to build them
+   here.
+2. Would you dedicate the bundle to the public domain (CC0 1.0) or license it (CC BY
+   4.0)? Then we can keep the files themselves. Until then we keep only the polynomials
+   and values, as facts, with the attachment's digest. This one holds nothing open.
+3. At 297, Daniel's degree-12 form is also above #574's certificate, by 6.62e-63. Does
+   your method give the stationary side there? This one is for interest only and holds
+   nothing up.
+
+We will reply here as each step lands.
+
+---
+_Generated by [Claude Code](https://claude.ai/code)_
+
+PR: https://github.com/jlevy/squares/pull/813 (draft, labels intake and S2), head 37e0f43a6. Hosted check_results fails on the T-243 gap until #806 merges; then merge main, re-cut the explainer at the next patch, re-pin.

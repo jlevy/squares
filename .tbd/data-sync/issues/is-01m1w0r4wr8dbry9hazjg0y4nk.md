@@ -5,7 +5,7 @@ title: "W5: retain incremental pytest phase timings through CI termination"
 kind: task
 status: in_progress
 priority: 2
-version: 9
+version: 11
 spec_path: docs/project/specs/active/plan-2026-09-06-validation-efficiency-and-checkpoints.md
 delegate: codex-phase-timings-20261019
 labels: []
@@ -16,7 +16,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-09-06T18:47:32.501Z
-updated_at: 2026-10-25T05:39:02.291Z
+updated_at: 2026-10-25T06:37:04.037Z
 started_at: 2026-10-19T01:26:10.067Z
 ---
 Real cancellation audit of PR98 run34052435218 retained three command starts/partial logs and117 completed controls, but zero pytest per-case phase timings because JUnit/durations emit at exit. Add bounded incremental case/phase JSONL to the existing timing instrument, joining run/worker/node identity and preserving known completed phases after termination. Do not invent elapsed durations for unmatched starts. Test worker failures, xdist concurrency and hard process termination; bound overhead and retain current normal-run JUnit equivalence. Evidence: /tmp/pr98-cancelled-checkpoint-audit.json and run artifacts9995012355/9995012176. This addresses the documented incomplete-termination timing limit without another competing recorder.
@@ -46,3 +46,9 @@ Continue the smallest unfinished contribution: durable completed-phase timing, c
 
 2026-10-25 draft PR809 checkpoint:
 Draft https://github.com/jlevy/squares/pull/809, branch codex/phase-timings-20261025, head80e6fd6057617b9799d0764f04401276b3d9c137, basebb756e1935b4d6280bb41877e8c829a8e4c0e9e3, S2. Independently reviewed exact source and actual hooks;158 direct tests and69/69 EDIT steps (108 commands), then53/53 RECORDS steps (64 commands) passed under unchanged local limits. The immutable data archive was published, served-byte verified, freshly fetched and replayed successfully. Actual ordinary run40165439909, Pages40165439940 and dispatched deferred40165460033 target qualification merge dcf948fd48a381209f762dd677c7bbca0d5a9b21; final acceptance is still pending. Historical Session188 failure/certification debt is unchanged, so think-uhxt remains open. No auto-merge or automatic continuation is authorized. Protected closeout06:10UTC; hard stop06:40UTC.
+
+2026-10-25 terminal-source qualification checkpoint:
+Draft PR809 now contains independently audited terminal source36edb5755bba603f6483c27257ea0ea0e6d83f29 on basebb756e1935b4d6280bb41877e8c829a8e4c0e9e3. Actual merge6bcc8a3498338114ed362f3d7c4a89a314a7cba5 has exactly the same tree3d248657de5a2883415322c2195091618fc3896c. Actual earlier merge dcf948fd48a381209f762dd677c7bbca0d5a9b21 passed ordinary40165439909,Pages40165439940 and complete deferred40165460033; all27 successful checkout logs independently agree. The seven-path terminal delta passed53/53 RECORDS steps and64/64 child commands,zero skips,156.48s; actual hooks preserved every reviewed byte and normal push was verified. Its first51/53 record failure is retained; only the stale selected-bead destructive-control anchor and prose inside a CLI declaration were repaired, with no weakened checks. Final ordinary40167930966,Pages40167930988 and explicit complete deferred40167938834 are running; current terminal acceptance is pending. Keep Draft/S2 until actual current-source outcomes and independent final audit. Historical Session188 remains stopped/uncertified, so think-uhxt remains open regardless of this engineering PR outcome. The final pending-decision checkpoint is06:28UTC, retaining12minutes for bounded fallback validation and handoff before the user's06:40UTC hard stop. No auto-merge or automatic continuation is authorized.
+
+2026-10-25 stopped/pending final handoff:
+PR809 remains Draft/S2, with final independently audited stopped-handoff sourcec0054cf01836b4cdb4bb3aeebc407db4c76ad869 on basebb756e1935b4d6280bb41877e8c829a8e4c0e9e3. Session189 is stopped with certification_pending:think-uhxt. Actual earlier Mdcf948fd full checkpoint passed; laterT36ed ordinary40167930966 andPages40167930988 passed on their verified identical source tree. At06:28:20UTC, complete deferred40167938834 still had10successful jobs,slow behavioural jobin_progress and noaggregate; independent final acceptance was withheld. Coordinator requested cancellation during fixed-window closeout; missing/cancelled coverage is incomplete, not a scientific failure. The five-path stopped-record delta passed all53 RECORDS steps in152.185s with unchanged source and resource limits; actualc0054hooks/patches were independently accepted and normalpush verified. A private post-gate parser rejected the human stdout prefix after every maintained command exited0; its failed supervisor receipt is preserved separately and the actual complete JSON result was independently extracted without rerunning or weakening the gate. The new final record source is not fully qualified; draft status and both original delegates remain open for a newly authorized window. Historical Session188 debt underthink-uhxt is unchanged; no paused mathematical agenda is reopened. Native source, allfailed/passing/partiallogs, immutablefreezes and exactcontinuation are retained in the coordinator's formal-20261025-01 handoff. No auto-merge, automatic continuation or cleanup is authorized. New automatic CI is being canceled for the user's06:40UTC hardstop, with actual final cancellation/readback retained separately.
