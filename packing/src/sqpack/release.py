@@ -8903,6 +8903,22 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "Retain v0.2.7."
         ),
     ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=("packing/campaign/result-requests.yaml",),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The mapping of the stage 4 review of Kevin Fang's Theorem A (think-vfz9): "
+            "#797's requests entry, with the acknowledgement, the review and two withdrawn "
+            "questions, against main 3e1349802 (#801). Rendered by render_packing_methods at "
+            "link revision 8ceeb75d into empty site directories, twice from this tree and "
+            "once with main's result-requests.yaml swapped in, 43 files each, all "
+            "byte-identical across the three. No register entry changes. Retain v0.2.7."
+        ),
+    ),
 )
 
 
