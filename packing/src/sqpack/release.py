@@ -9180,6 +9180,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "packing/contributors/people/jatloe.md",
             "packing/contributors/people/manasseh-ahmed.md",
             "packing/devtools/check_results.py",
+            "packing/devtools/render_n11_lower_bounds_explainer_pdf.py",
             "packing/devtools/site_resources.py",
             "packing/frontier/n-029.md",
             "packing/frontier/results.yaml",
@@ -9229,6 +9230,10 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "site_resources.py, n-029.md, results.yaml and source-coverage.yaml swapped in "
             "and jatloe.md removed: twice from this tree and once swapped, 51 files each, "
             "all byte-identical across the three. "
+            "Measured a sixth time after the explainer's page count moved to 25 "
+            "(render_n11_lower_bounds_explainer_pdf.py), at link revision bbc8c864: "
+            "twice from this tree and once with main's copy of that module swapped in, "
+            "51 files each, all byte-identical across the three. "
             "Retain v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
