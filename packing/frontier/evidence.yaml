@@ -44682,11 +44682,179 @@ evidence:
       passed their required outcomes on both routes, 489186 pair decisions; summed over the 6
       jobs, the receipt records 59.47 route CPU seconds and 70.85 job wall seconds, the
       longest job 14.78 seconds. Every positive clears every wall by at least 1.00e-15 and
-      every pair by at least 2.07e-13. Independent review and confirmation remain pending.
-      The source's own checkers were not run here. The two maintained routes, the sqpack
-      rational witness verifier and the independent rational corner checker, share
-      certificate parsing, half-angle conversion, Fraction arithmetic and the separating-axis
-      method. No two independent methods, human oversight or optimality is claimed.
+      every pair by at least 2.07e-13. The replay is E-couzo-763-exact-feasibility and the
+      24 October review's own checker E-couzo-763-review-exact-feasibility. The source's own
+      checkers were not run here. The source's commits 964ee2b, fa6237e and efef7d1 each
+      end with a Co-Authored-By trailer naming Claude, efef7d1's message describes "Codex's
+      reviewed intake", and verify_bound_certificate.py's header says Couzo modified Evan
+      Daniel's verifier with Codex (RF-1 of the 24 October review). No two independent
+      methods, human oversight or optimality is claimed.
+    external_review:
+      state: informally-verified
+      date: '2026-10-24'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 mathematical review lane of #763 at 268 and 303
+        (c-review-t240-math, think-zjus), strongest sub-agent tier, maximum reasoning,
+        prompted separately from the records lane
+      note: >-
+        docs/project/reviews/review-2026-10-24-couzo-n268-n303.md accepted the two
+        certificates the #763 entry cites, at 268 and 303, for finite feasibility only, with
+        no blocking or major finding; the replay it held to its own checker is
+        E-couzo-763-exact-feasibility, and its own checker's run is
+        E-couzo-763-review-exact-feasibility.
+  - id: E-couzo-763-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values: [268, 303]
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: shared-components
+    shared_components:
+      - >-
+        sqpack.verify's unit-shape and separating-axis predicates (verify_packing, which
+        sqpack.witness.exact_verify calls), the jlevy/squares checker the source's manifest
+        names as its first checker, at 37e6757, byte-identical on main
+      - >-
+        the certificate parser and half-angle map of devtools.evand_exact_certificates (the
+        evand-cert adapter the packet's acquisition/report.json names for both
+        certificates), through which both maintained routes read each certificate,
+        transcribed from Evan Daniel's checkers, from whose verify_cert.py the source's
+        verify_bound_certificate.py derives
+      - CPython's fractions.Fraction arithmetic
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Couzo issue 763 2026-10-23]'
+    certificate: packing/resources/web/couzo-issue763-2026-10-23/source/certificates/best/
+    replay: >-
+      From packing/ with the project interpreter (Python 3.14.7) on a shared four-core
+      host: python -m devtools.upper_bound_reports couzo-issue763-2026-10-23 certify
+      --workers 2 wrote the receipt on 24 October 2026 (389111970) from the retained
+      certificates, and check --replay decides all 6 retained jobs, each certificate and its
+      duplicate-square and outside-container controls, again through both maintained routes
+      and holds each to its retained row; check-claims rebuilds the frozen comparison. The
+      24 October stage 4 review held its own clean-room checker to the receipt
+      (docs/project/reviews/review-2026-10-24-couzo-n268-n303.md): the same sides and poses,
+      literal for literal, every pair tested on both routes, and least pair gaps and least
+      wall clearances equal, 24 of 24 checks.
+    replay_status: passed
+    verifiers:
+      - V-sqpack-verify
+      - V-check-rational-witness-independent
+      - V-evand-arrangement-receipts
+      - V-upper-bound-reports
+      - V-evand-exact-certificates
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the two certificates at n = 268 and 303 that T-240 cites, every wall and every
+          pair decided by both maintained routes; the kernel's controls are retained in the
+          packet's receipt
+        checked: 2
+        of: 2
+    independence_record: docs/project/reviews/review-2026-10-24-couzo-n268-n303.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-24'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 mathematical review lane of #763 at 268 and 303
+        (c-review-t240-math, think-zjus), strongest sub-agent tier, maximum reasoning,
+        prompted separately from the records lane
+      note: >-
+        docs/project/reviews/review-2026-10-24-couzo-n268-n303.md accepted both
+        certificates for finite feasibility, with no blocking or major finding (RF-1 to
+        RF-4, RF-7 and RF-8 minor; RF-5, RF-6 and RF-9 to RF-12 notes). Its clean-room
+        checker's run is E-couzo-763-review-exact-feasibility, and its agree.py found the
+        maintained receipt's sides, poses, pairs tested, least pair gaps and least wall
+        clearances equal to the checker's (24 of 24). The replay shares the producer's
+        first checker and the evand-cert reader (RF-4), so T-240's independent
+        re-implementation rests on the review's entry.
+    limitations: >-
+      A replay of the two retained certificates by two maintained exact routes that share
+      certificate parsing, half-angle conversion, Fraction arithmetic and the
+      separating-axis method, and with the producer its first checker: the sqpack route
+      decides through sqpack/verify.py, which the source's manifest names, and both routes
+      read the certificates through the evand-cert adapter, whose reader is transcribed
+      from Evan Daniel's checkers, from which the source's second checker derives (RF-4 of
+      the 24 October review). The receipt's 6 jobs hold 489186 pair decisions, 59.47 route
+      CPU seconds and 70.85 job wall seconds, the longest job 14.78 seconds. Each positive
+      clears every wall by at least 1e-15 and every pair by at least 2.07e-13. The receipt's
+      two controls are gross, a duplicated square and a square moved outside, against
+      margins near 1e-13; the sharp controls are the review's, ten per certificate, decided
+      by its own checker (E-couzo-763-review-exact-feasibility). The source's own checkers
+      were not run here. Finite feasibility only: no lower bound, optimum, local minimum,
+      rigidity, novelty or human oversight.
+    source_reviewed: '2026-10-24'
+  - id: E-couzo-763-review-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values: [268, 303]
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Couzo issue 763 2026-10-23]'
+    certificate: packing/resources/web/couzo-issue763-2026-10-23/source/certificates/best/
+    replay: >-
+      From packing/ with the project interpreter (Python 3.14.7) on a shared four-core
+      host: python -I
+      resources/web/couzo-issue763-2026-10-23/review/review-2026-10-24/check_certificates.py
+      --out OUT, as the 24 October review ran it twice (34.6 and 34.4 CPU seconds, receipts
+      identical apart from CPU times): both certificates accepted on both routes, their
+      SHA-256 equal to the manifest's (e9833bf2...e07e and 39a150f4...791a), their header
+      sides equal to the claim's and rounded up at 12 places to 16.874361715874 and
+      17.906978233799; route A decided all 35,778 and 45,753 pairs, route B the 668 and 701
+      within the discs; none touching, every wall cleared by at least 1/10^15 (squares 3
+      and 4, numbered from 0), the least pair gaps about 2.0963e-13 (squares 101 and 223)
+      and 2.0718e-13 (46 and 58); every one of the ten controls per certificate as
+      expected on both routes. agree.py found 24 of 24 shared numbers equal with both
+      maintained routes' receipt.
+    replay_status: passed
+    verifiers:
+      - V-couzo-763-review-check
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the two certificates T-240 cites, at n = 268 and 303, every wall and every pair on
+          route A, and every pair within the discs on route B
+        checked: 2
+        of: 2
+      read: [mathematics, certificate-format]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of #763 at 268 and 303
+            (c-review-t240-math, think-zjus), strongest sub-agent tier, maximum reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The source's commits 964ee2b, fa6237e and efef7d1 name Claude as co-author, and
+          its second checker is Evan Daniel's verifier modified with Codex. The review's
+          checker is Claude's too, written from a prompt of its own in a file that imports
+          nothing from this repository or the source, from the mathematics and the
+          certificates' format line; its author read none of the source's, Daniel's or
+          the maintained routes' code. Before writing it, its author had read T-239's
+          register entry, which says that replay met sharp controls at exact contact and
+          refused them 1e-30 past it, and the controls here take that form.
+    independence_record: docs/project/reviews/review-2026-10-24-couzo-n268-n303.md
+    limitations: >-
+      The review's own checker, with a reader of its own and no code of the packet's
+      routes, the source or Daniel's checkers; it shares CPython's Fraction with the
+      maintained routes, and route A the separating-axis method with them and with the
+      source's checkers. The packet's two gross controls were decided by the maintained
+      routes, not by this checker; its own controls are its ten per certificate. Finite
+      feasibility only: no lower bound, optimum, local minimum, rigidity, novelty or human
+      oversight.
+    source_reviewed: '2026-10-24'
   - id: E-couzo-763-beyond-horizon-report
     claim: upper-bound
     scope:

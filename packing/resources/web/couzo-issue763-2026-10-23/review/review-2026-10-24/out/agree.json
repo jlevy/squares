@@ -1,0 +1,127 @@
+{
+ "program": "agree.py",
+ "equal": 24,
+ "checks_total": 24,
+ "checks": [
+  {
+   "check": "268: side read by the maintained run",
+   "equal": true,
+   "detail": ""
+  },
+  {
+   "check": "268: 268 poses read by the maintained run, as exact rationals",
+   "equal": true,
+   "detail": ""
+  },
+  {
+   "check": "268: exact_verify accepted",
+   "equal": true,
+   "detail": ""
+  },
+  {
+   "check": "268: exact_verify pairs tested = route A's pairs",
+   "equal": true,
+   "detail": "35778 and 35778"
+  },
+  {
+   "check": "268: exact_verify least pair gap = route A's",
+   "equal": true,
+   "detail": "2.096281e-13"
+  },
+  {
+   "check": "268: exact_verify least wall clearance = route A's and route B's",
+   "equal": true,
+   "detail": "1.000e-15"
+  },
+  {
+   "check": "268: independent accepted",
+   "equal": true,
+   "detail": ""
+  },
+  {
+   "check": "268: independent pairs tested = route A's pairs",
+   "equal": true,
+   "detail": "35778 and 35778"
+  },
+  {
+   "check": "268: independent least pair gap = route A's",
+   "equal": true,
+   "detail": "2.096281e-13"
+  },
+  {
+   "check": "268: independent least wall clearance = route A's and route B's",
+   "equal": true,
+   "detail": "1.000e-15"
+  },
+  {
+   "check": "268: maintained control duplicate-square-overlap refused by both routes",
+   "equal": true,
+   "detail": ""
+  },
+  {
+   "check": "268: maintained control square-translated-outside-container refused by both routes",
+   "equal": true,
+   "detail": ""
+  },
+  {
+   "check": "303: side read by the maintained run",
+   "equal": true,
+   "detail": ""
+  },
+  {
+   "check": "303: 303 poses read by the maintained run, as exact rationals",
+   "equal": true,
+   "detail": ""
+  },
+  {
+   "check": "303: exact_verify accepted",
+   "equal": true,
+   "detail": ""
+  },
+  {
+   "check": "303: exact_verify pairs tested = route A's pairs",
+   "equal": true,
+   "detail": "45753 and 45753"
+  },
+  {
+   "check": "303: exact_verify least pair gap = route A's",
+   "equal": true,
+   "detail": "2.071756e-13"
+  },
+  {
+   "check": "303: exact_verify least wall clearance = route A's and route B's",
+   "equal": true,
+   "detail": "1.000e-15"
+  },
+  {
+   "check": "303: independent accepted",
+   "equal": true,
+   "detail": ""
+  },
+  {
+   "check": "303: independent pairs tested = route A's pairs",
+   "equal": true,
+   "detail": "45753 and 45753"
+  },
+  {
+   "check": "303: independent least pair gap = route A's",
+   "equal": true,
+   "detail": "2.071756e-13"
+  },
+  {
+   "check": "303: independent least wall clearance = route A's and route B's",
+   "equal": true,
+   "detail": "1.000e-15"
+  },
+  {
+   "check": "303: maintained control duplicate-square-overlap refused by both routes",
+   "equal": true,
+   "detail": ""
+  },
+  {
+   "check": "303: maintained control square-translated-outside-container refused by both routes",
+   "equal": true,
+   "detail": ""
+  }
+ ]
+}

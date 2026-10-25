@@ -799,7 +799,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "df7c42cdf8845fe1a979379de5a54c1d10b9a475"
+DATA_REVISION = "be46a31a428f76686e4a6c1f84430f670ddc426f"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -8832,10 +8832,15 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "paper:square-packing-methods-survey",
         ),
         paths=(
+            "packing/atlas/known-best/bound-citations.json",
+            "packing/atlas/known-best/composite-figure.json",
             "packing/campaign/result-requests.yaml",
-            "packing/devtools/upper_bound_reports.py",
+            "packing/devtools/adopt_houses.py",
+            "packing/devtools/default_drawings.py",
+            "packing/devtools/upper_bound_houses.py",
             "packing/frontier/results.yaml",
             "packing/frontier/source-coverage.yaml",
+            "packing/src/sqpack/cli/validate.py",
         ),
         outputs=(
             "papers/n11-lower-bounds-explainer.html",
@@ -8848,19 +8853,38 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "papers/square-packing-methods-survey.md",
         ),
         reason=(
-            "The import of #798's twelve beyond-horizon rows and #755's answers "
-            "(think-2l0q, think-fc1n): a new coverage source with 12 rows superseding 12 of "
-            "main's, the #798 request entry and #755's, T-239's notes, claim and artifacts, "
-            "and upper_bound_reports admitting a derived fact beside a file its packet "
-            "retains, against main 2ed0ea740 (#795): rendered at link revision bda51090 "
-            "into empty site directories, twice from this tree and once from it with "
-            "main's result-requests.yaml, upper_bound_reports.py, results.yaml and "
-            "source-coverage.yaml swapped in, render_n11_lower_bounds_explainer, with its "
-            "pinned Chromium math pass, render_n11_optimality_review, "
-            "render_n11_threshold_bound_review and render_packing_methods write all 69 "
-            "files byte-identical across the three. No register entry is added, so the "
-            "explainer's result count is unchanged. No PDF was printed; each prints from "
-            "that HTML. Retain v0.4.27, v0.1.11, v0.1.4 and v0.2.7."
+            "PR B of the #763 import (think-bk9r): T-240 from V0/C0 to V3/C3 after the 24 "
+            "October review, with three evidence entries, its claim, notes and next steps "
+            "rewritten, #763's requests entry, the adoption at 268 and 303 in the pass of 25 "
+            "October with the in-corpus coverage source, the house writer's prose and "
+            "credits, the reader, SETTLED[268] removed, the bound citations, the composite "
+            "records and the screen's findings, against main 2ec489d1e (#789): rendered at "
+            "link revision 8977b819 into empty site directories, twice from this tree and once "
+            "from it with main's ten candidate inputs swapped in (69 files each), "
+            "render_n11_lower_bounds_explainer with its math prepared by the host's Chrome "
+            "for Testing headless shell through SQPACK_CHROMIUM, the same browser for every "
+            "render, render_n11_optimality_review, render_n11_threshold_bound_review and "
+            "render_packing_methods write every file byte-identical across all three. No "
+            "result is registered, so the explainer's count is unchanged. No PDF was "
+            "printed; each prints from that HTML. Measured again after the records tier's "
+            "fixes (T-240's claim and notes, adopt_houses' prose rewrapped), at link revision "
+            "dce05249 with the same ten files swapped in: twice from this tree and once "
+            "swapped, 69 files each, all byte-identical across the three, by the same "
+            "browser. Measured once more after the rigidity blocks and the composite "
+            "figure's record at 268 and 303, at link revision ff9e896e with the same ten "
+            "files swapped in: the same outcome. After review A's fixes to T-240's notes, at "
+            "link revision 9ebc1357 with the same ten files swapped in: the same outcome. "
+            "After the merge of main 3480b5fd3 (#792), which cut the explainer at v0.4.27, "
+            "at link revision 180587e4 with that main's nine candidate inputs swapped in: "
+            "twice from this tree and once swapped, 69 files each, all byte-identical "
+            "across the three, by the same browser; both sides count 242 results. After the "
+            "merge of main 2ed0ea740 (#793, #796, #795), at link revision 5adbe808 with "
+            "that main's nine candidate inputs swapped in: twice from this tree and once "
+            "swapped, 69 files each, all byte-identical across the three, by the same "
+            "browser; both sides count 242 results. After T-240's notes said previous_source "
+            "is the parent only at 268 and 303 (think-vm3m), at link revision be46a31a with "
+            "the same nine files swapped in: the same outcome. Retain v0.4.27, v0.1.11, "
+            "v0.1.4 and v0.2.7."
         ),
     ),
 )

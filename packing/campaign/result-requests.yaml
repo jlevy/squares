@@ -22747,8 +22747,11 @@ issues:
       October 2026 (think-cnn7) and imported the same day (think-ptkk, PR A):
       devtools.couzo_763_claims re-derives the claims from the retained indexes by the source
       README's rule and reproduces the issue's 436, 203 and 233. The two in-corpus
-      certificates, at 268 and 303, are registered as reported as T-240 (V0/C0), 4.45e-3 and
-      2.78e-3 below the houses, with their complete replay retained. At 325 to 1024 the ledger
+      certificates, at 268 and 303, are registered as T-240, 4.45e-3 and 2.78e-3 below the
+      houses, with their complete replay retained; the stage 4 review of 24 October
+      (think-zjus) accepted both with no blocking or major finding, so T-240 is at V3/C3 and
+      S3 is confirmed, and PR B (think-bk9r) adopts both as the house best packings at 268 and
+      303 and regularizes them. At 325 to 1024 the ledger
       of 24 October for issue 763 records 198 of 201: 184 certificates are current
       beyond-horizon rows, replayed on two exact routes with every control refused; 13
       L-border recipes and the deletion bound at 683 are held; 328, 850 and 909 restate
@@ -22770,6 +22773,8 @@ issues:
       - T-240
       evidence:
       - E-couzo-763-certificate-report
+      - E-couzo-763-exact-feasibility
+      - E-couzo-763-review-exact-feasibility
     - key: n303
       claim: >-
         s(303) <= 17.906978233799, rounded up; the exact side of certificates/best/n303.cert
@@ -22780,6 +22785,8 @@ issues:
       - T-240
       evidence:
       - E-couzo-763-certificate-report
+      - E-couzo-763-exact-feasibility
+      - E-couzo-763-review-exact-feasibility
     - key: rows-325-1024
       claim: >-
         201 upper bounds at n = 325 to 1024, each the exact bound certified_bounds.json states

@@ -31,6 +31,7 @@ documents:
   - {path: docs/project/specs/active/plan-2026-10-10-contributor-profiles.md, role: plan, authority: current, lifecycle: transient}
   - {path: docs/project/reviews/review-2026-10-22-daniel-728.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-23-amundsk-n303.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-24-couzo-n268-n303.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-21-evand-regularized-views.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-20-upper-bound-imports-678.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-21-upper-bound-import-703-erratum.md, role: review, authority: record, lifecycle: retained}
@@ -207,6 +208,7 @@ documents:
   - {path: packing/cases/regularized_drawings/think-icp1-2026-10-23/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: packing/cases/regularized_drawings/think-ot5c-2026-10-23/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: packing/cases/regularized_drawings/think-tqb5-2026-10-23/README.md, role: source-index, authority: record, lifecycle: retained}
+  - {path: packing/cases/regularized_drawings/think-bk9r-2026-10-24/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: packing/cases/regularized_drawings/think-h01y-2026-10-24/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-07-squish-second-update-mathematics.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-07-squish-second-update-semantic-binding.md, role: review, authority: record, lifecycle: retained}
