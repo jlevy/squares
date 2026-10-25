@@ -900,8 +900,9 @@ EXPLAINER_HISTORY = (
         version="v0.4.28",
         first_published="October 25, 2026",
         result_scope=(
-            "Update the registered result count after the registration of Jatloe's "
-            "reported Lean proof that s(12) = 4 (T-243)."
+            "Update the registered result count after the registrations of Jatloe's "
+            "reported Lean proof that s(12) = 4 (T-243) and Evan Daniel's reported "
+            "minimal polynomial of the s(29) record side (T-244)."
         ),
     ),
     PublicationHistoryEntry(
@@ -1487,8 +1488,9 @@ RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
         version="v0.4.28",
         impact="patch",
         reason=(
-            "Update the registered result count after the registration of Jatloe's "
-            "reported Lean proof that s(12) = 4 (T-243)."
+            "Update the registered result count after the registrations of Jatloe's "
+            "reported Lean proof that s(12) = 4 (T-243) and Evan Daniel's reported "
+            "minimal polynomial of the s(29) record side (T-244)."
         ),
     ),
     ReleaseImpactDecision(
@@ -9114,8 +9116,12 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         paths=(
             "packing/campaign/result-requests.yaml",
             "packing/contributors/people/ctjlewis.md",
+            "packing/contributors/people/evan-daniel.md",
             "packing/contributors/people/jatloe.md",
             "packing/contributors/people/manasseh-ahmed.md",
+            "packing/devtools/check_results.py",
+            "packing/devtools/site_resources.py",
+            "packing/frontier/n-029.md",
             "packing/frontier/results.yaml",
             "packing/frontier/source-coverage.yaml",
         ),
@@ -9142,7 +9148,15 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "Measured again after the merge of main 886dddce6 (#808), at link revision "
             "1307c2c8 with that main's five candidate inputs swapped in and jatloe.md "
             "removed: twice from this tree and once swapped, 51 files each, all "
-            "byte-identical across the three. Retain v0.1.11, v0.1.4 and v0.2.7."
+            "byte-identical across the three. Measured a third time after the merge of "
+            "T-244's registration of Daniel's s(29) minimal polynomial as the new kind exact "
+            "side (results.yaml, check_results.py, evan-daniel.md, n-029.md, "
+            "result-requests.yaml and source-coverage.yaml) and the overview's card for "
+            "Jatloe12SquaresFormalized (site_resources.py), at link revision 9b8b004c "
+            "against main 886dddce6, with that main's nine candidate inputs swapped in and "
+            "jatloe.md removed: twice from this tree and once swapped, 51 files each, all "
+            "byte-identical across the three. The explainer's v0.4.28 counts 244 results. "
+            "Retain v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
 )
