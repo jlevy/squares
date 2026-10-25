@@ -58,6 +58,7 @@ import sys
 import time
 from collections.abc import Iterator, Sequence
 from dataclasses import dataclass, field
+from decimal import Decimal, localcontext
 from fractions import Fraction
 from pathlib import Path
 from typing import Any
@@ -855,21 +856,49 @@ def polynomial_system(system: ExportedSystem) -> Any:
 
 
 def independent_krawczyk(
-    system: ExportedSystem, certificate: dict[str, Any], digits: int
+    system: ExportedSystem,
+    certificate: dict[str, Any],
+    digits: int,
+    compare: Fraction | None = None,
 ) -> dict[str, Any]:
-    """Re-certify the source's box with the project's own operator (mpmath intervals)."""
+    """Re-certify the source's box with the project's own operator (mpmath intervals).
+
+    The operator contracts the box as far as its working precision allows, and ``Sn/Sd``
+    over the contracted box (the elimination shows ``S = Sn/Sd`` identically) encloses
+    the decided side ``S*`` that tightly; with ``compare``, ``S*`` is ordered against it.
+    """
     started = time.process_time()
     box = PoseBox.around(system.names, certificate["tstar"], str(certificate["radius"]))
     root = certify(polynomial_system(system), box, digits=digits)
-    return {
+    previous = mp.mp.dps, IV.dps
+    mp.mp.dps = IV.dps = digits + 20
+    try:
+        tight = [IV.mpf([lo, hi]) for lo, hi in zip(root.box.lo, root.box.hi, strict=True)]
+        side = Evaluator(system.ring, tight).ratio(
+            system.side_numerator, system.side_denominator
+        )
+        enclosure = outward(side, digits)
+    finally:
+        mp.mp.dps, IV.dps = previous
+    result: dict[str, Any] = {
         "tool": "sqpack.promote.krawczyk.certify",
         "exists": root.exists,
         "unique": root.unique,
         "iterations": root.iterations,
         "working_digits": root.working_precision,
         "contracted_radius": root.max_radius,
-        "cpu_seconds": round(time.process_time() - started, 1),
+        "side_enclosure": enclosure,
     }
+    if compare is not None:
+        low, high = Fraction(enclosure[0]), Fraction(enclosure[1])
+        order = "below" if high < compare else "above" if low > compare else "undecided"
+        result["against_rational"] = {
+            "side_is": order,
+            # Decimal, not float: the gap can lie far below binary64's range.
+            "rational_minus_side": [scientific(compare - high), scientific(compare - low)],
+        }
+    result["cpu_seconds"] = round(time.process_time() - started, 1)
+    return result
 
 
 # --- the decision ----------------------------------------------------------------------
@@ -881,6 +910,9 @@ def decide(
     reference: list[tuple[int, Fraction, Fraction, Fraction, Fraction]],
     digits: int,
     cpu_limit: float = 900.0,
+    *,
+    side_digits: int = 80,
+    compare: Fraction | None = None,
 ) -> dict[str, Any]:
     started = time.process_time()
     mp.mp.dps = digits
@@ -893,7 +925,7 @@ def decide(
     tstar = [mp.mpf(v) for v in certificate["tstar"]]
     box = [IV.mpf([t - radius, t + radius]) for t in tstar]
 
-    krawczyk = independent_krawczyk(system, certificate, digits=80)
+    krawczyk = independent_krawczyk(system, certificate, digits=side_digits, compare=compare)
     mp.mp.dps = digits
     IV.dps = digits
     basis = choose_basis(system, tstar)
@@ -1091,6 +1123,23 @@ def decide(
     }
 
 
+def scientific(value: Fraction, digits: int = 12) -> str:
+    """A rational in scientific notation to ``digits`` places, at any exponent."""
+    if value == 0:
+        return "0"
+    with localcontext() as context:
+        context.prec = digits
+        context.Emin = -(10**9)
+        context.Emax = 10**9
+        return f"{Decimal(value.numerator) / Decimal(value.denominator):.{digits - 1}e}"
+
+
+def case_exact_form(path: Path) -> Fraction:
+    """The ``packing.verified_upper_bound.exact_form`` a case record's front matter states."""
+    front = path.read_text().split("---", 2)[1]
+    return Fraction(str(load_yaml(front)["packing"]["verified_upper_bound"]["exact_form"]))
+
+
 def outward(value: Interval, digits: int = 70) -> list[str]:
     """An enclosure's endpoints as decimals rounded outward, so the print still encloses."""
     return [
@@ -1124,6 +1173,14 @@ def main(argv: Sequence[str] | None = None) -> int:
     )
     parser.add_argument("--digits", type=int, default=120)
     parser.add_argument(
+        "--side-digits", type=int, default=80, help="precision of the re-certified box"
+    )
+    parser.add_argument(
+        "--compare-case",
+        type=Path,
+        help="a case record whose verified_upper_bound.exact_form to order S* against",
+    )
+    parser.add_argument(
         "--cpu-limit",
         type=float,
         default=900.0,
@@ -1132,8 +1189,15 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--out", type=Path)
     args = parser.parse_args(argv)
     sys.set_int_max_str_digits(0)
+    compare = case_exact_form(args.compare_case) if args.compare_case else None
     receipt = decide(
-        args.system, args.box, reference_poses(args.witness), args.digits, args.cpu_limit
+        args.system,
+        args.box,
+        reference_poses(args.witness),
+        args.digits,
+        args.cpu_limit,
+        side_digits=args.side_digits,
+        compare=compare,
     )
     receipt["reference_witness"] = str(args.witness)
     text = json.dumps(receipt, indent=2) + "\n"

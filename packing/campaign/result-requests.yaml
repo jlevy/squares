@@ -24551,8 +24551,8 @@ issues:
       report, it tabulates six steps, irreducibility, the root of p that matches the packing,
       the Monte Carlo identities made deterministic, the packing's non-overlap at the exact
       side, the comparison with T-195's verified ceiling and a review of N29.md, under the
-      owner's 10 CPU-hour cap of that day, and leaves re-classifying T-246 and moving n = 29's
-      verified lane to the owner once the evidence is in.
+      owner's cap of that day, set at 10 CPU-hours and revised to 5, and leaves re-classifying
+      T-246 and moving n = 29's verified lane to the owner once the evidence is in.
     read_through: '2026-10-25T15:46:48Z'
     results:
     - key: s29-minimal-polynomial
@@ -24565,7 +24565,7 @@ issues:
       evidence:
       - E-n029-evand-minpoly-7213-report
     asks:
-    - what: The six steps run within the 10 CPU-hour cap, each reported with what it proves and its
+    - what: The six steps run within the 5 CPU-hour cap, each reported with what it proves and its
         price, with the re-classification of T-246 left to the owner.
       state: queued
       bead: think-10m1

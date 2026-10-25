@@ -44,6 +44,14 @@ allowlist:
       digest is compared with the one the packet pinned, so the bound it states is bound
       to the retained bytes. The retained certificates are read from Git and compared
       with nothing; their custody is acquire_source --check's.
+  - path: packing/devtools/evand_s29_replay.py
+    kind: download
+    boundary: >-
+      The replay reads Evan Daniel's s29-minpoly.tar.zst, which the
+      evand-exact-data-2026-10-12 packet pins by digest and does not retain (87 MB, OR-18),
+      from a scratch unpacking of the release asset; `check_members` holds each of its 21
+      members to the size and SHA-256 that acquisition/release.json pinned at review before
+      any script runs. The retained scripts are copied, not compared: Git holds them.
   - path: packing/devtools/beyond_horizon_replay.py
     kind: download
     boundary: >-

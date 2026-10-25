@@ -47,7 +47,7 @@ from typing import Any
 import gmpy2 as _gmpy2
 import numpy as np
 
-from devtools.check_exact_side_packing import parse_system
+from devtools.check_exact_side_packing import case_exact_form, parse_system, scientific
 
 #: GMP through gmpy2; its local stubs omit shifts, byte conversion and the number
 #: theory functions used here, so the module is reached through an untyped alias.
@@ -173,6 +173,56 @@ def compare(
         "rational_minus_root": [f"{gap_lo:.25e}", f"{gap_hi:.25e}"],
         "cpu_seconds": round(time.process_time() - started, 1),
     }
+
+
+def bracket(
+    coeffs: Sequence[Any],
+    approximation: str,
+    places: int,
+    hull: tuple[Fraction, Fraction],
+    rational: Fraction | None,
+    *,
+    sign_at_rational: bool,
+) -> dict[str, Any]:
+    """Bracket the root isolated in ``hull`` to ``10^-(places-2)``; order it against a rational.
+
+    ``approximation`` is only a guess (the source's digits); the exact signs at the two
+    decimal endpoints decide that the bracket holds a root, and the bracket lying in a hull
+    where ``isolate`` proved exactly one root makes it that root.
+    """
+    started = time.process_time()
+    whole, _, fraction = approximation.strip().partition(".")
+    centre = Fraction(int(whole + fraction[:places]), 10**places)
+    half = Fraction(1, 10 ** (places - 2))
+    low, high = centre - half, centre + half
+    inside = hull[0] <= low and high <= hull[1]
+    signs = [rational_sign(coeffs, low), rational_sign(coeffs, high)]
+    holds = inside and signs[0] * signs[1] < 0
+    result: dict[str, Any] = {
+        "places": places,
+        "bracket_half_width": f"1e-{places - 2}",
+        "inside_isolating_hull": inside,
+        "signs_at_ends": signs,
+        "brackets_the_root": holds,
+    }
+    if rational is not None:
+        order = "undecided"
+        if holds and rational > high:
+            order = "root below rational"
+        elif holds and rational < low:
+            order = "root above rational"
+        gap = sorted([rational - high, rational - low])
+        result["against_rational"] = {
+            "order": order,
+            "rational_minus_root": [scientific(gap[0]), scientific(gap[1])],
+            "rational_denominator_digits": len(str(rational.denominator)),
+        }
+        if sign_at_rational:
+            result["against_rational"]["sign_of_p_at_rational"] = rational_sign(
+                coeffs, rational
+            )
+    result["cpu_seconds"] = round(time.process_time() - started, 1)
+    return result
 
 
 # --- arithmetic modulo a small prime ------------------------------------------------------
@@ -616,6 +666,21 @@ def main(argv: Sequence[str] | None = None) -> int:
         help="Taylor terms available to the monotonicity bound",
     )
     one.add_argument("--out", type=Path)
+    bracketing = sub.add_parser("bracket")
+    bracketing.add_argument("--poly", type=Path, required=True)
+    bracketing.add_argument(
+        "--approximation", type=Path, required=True, help="a file of decimal digits"
+    )
+    bracketing.add_argument("--places", type=int, default=300)
+    bracketing.add_argument(
+        "--lo", required=True, help="the isolating hull's ends, as isolate printed"
+    )
+    bracketing.add_argument("--hi", required=True)
+    bracketing.add_argument(
+        "--case", type=Path, help="order against this case's verified exact_form"
+    )
+    bracketing.add_argument("--sign-at-rational", action="store_true")
+    bracketing.add_argument("--out", type=Path)
     two = sub.add_parser("irreducible")
     two.add_argument("--poly", type=Path, required=True)
     two.add_argument("--primes", type=int, default=12)
@@ -648,6 +713,17 @@ def main(argv: Sequence[str] | None = None) -> int:
         if args.rational:
             result["comparison"] = compare(coeffs, result["isolation"], Fraction(args.rational))
         ok = result["isolation"]["exactly_one_root"]
+    elif args.command == "bracket":
+        rational = case_exact_form(args.case) if args.case else None
+        result = bracket(
+            coeffs,
+            args.approximation.read_text().split()[0],
+            args.places,
+            (Fraction(args.lo), Fraction(args.hi)),
+            rational,
+            sign_at_rational=args.sign_at_rational,
+        )
+        ok = result["brackets_the_root"]
     elif args.command == "irreducible":
         result = irreducible(
             coeffs, args.primes, args.start, sys.stdout, stop_when_empty=args.stop_when_empty

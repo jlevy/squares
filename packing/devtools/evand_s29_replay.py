@@ -107,22 +107,17 @@ def check_members(data: Path) -> list[dict[str, object]]:
 
 
 def check_scripts(destination: Path) -> dict[str, str]:
-    """Hold the retained scripts to the packet's digests and copy them out."""
-    pinned: dict[str, str] = {}
-    for line in (
-        (SCRIPTS_PACKET / "acquisition/upstream-subtree.sha256").read_text().splitlines()
-    ):
-        digest, _, path = line.partition("  ")
-        pinned[path.removeprefix("./")] = digest
+    """Copy the retained scripts out, recording what ran.
+
+    Git holds the retained copies (OR-16): the digests go to the receipt as a record of
+    what ran, and nothing here compares them with the repository's own listing.
+    """
     destination.mkdir(parents=True, exist_ok=False)
     digests = {}
     for script in SCRIPTS:
         source = SCRIPTS_DIR / script
-        actual = sha256_file(source)
-        if pinned.get(f"search/exact/homotopy/{script}") != actual:
-            raise SystemExit(f"{script}: digest differs from upstream-subtree.sha256")
         shutil.copyfile(source, destination / script)
-        digests[script] = actual
+        digests[script] = sha256_file(destination / script)
     return digests
 
 

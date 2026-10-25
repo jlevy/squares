@@ -9383,7 +9383,10 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "2f974835a (#818). Rendered at link revision a1bf7a77 into empty site "
             "directories, twice from this tree and once with main's result-requests.yaml "
             "swapped in: render_packing_methods writes all 43 files byte-identical across "
-            "the three. No PDF was printed; it prints from that HTML. Retain v0.2.7."
+            "the three. Measured again at link revision 064b9534 after the entry's cap "
+            "wording changed (10 CPU-hours revised to 5): twice from this tree and once "
+            "with main's file swapped in, all 43 files byte-identical across the three. No "
+            "PDF was printed; it prints from that HTML. Retain v0.2.7."
         ),
     ),
 )
