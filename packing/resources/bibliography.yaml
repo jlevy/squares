@@ -1913,6 +1913,28 @@ sources:
       directed and reviewed by the author; two language-model reviews of earlier drafts
       (GPT-6 Astra; OpenAI Codex) found errors that were corrected, which is not an
       external mathematical review."
+  - key: '[Fang Theorem A 2026-10-24]'
+    authors: [Fang]
+    year: 2026
+    venue: Zenodo
+    dated: '2026-10-24'
+    lineage: credits-project
+    credit: Fang after Ryu, Daniel, Levy
+    note: >-
+      Kevin Fang, "Packing k^2 - ceil(sqrt(32k)) - 1 unit squares in a square of side less
+      than k", draft v0.2 of 24 October 2026, DOI 10.5281/zenodo.23624565 (v0.1,
+      10.5281/zenodo.23624412, earlier the same day; both CC BY 4.0), and theorem-a/ of
+      TheSnakeFang/squarepack-certs at db1ed6220731fce432fa3b1ef3b994b5ab6c3663
+      (2026-10-24T19:12:51Z): Theorem A, c*(k) < 4 sqrt(2k) + 1 for every k >= 6, with
+      lband.py, windowed_check.py and 36 certificates (CC0), in
+      web/fang-theorem-a-2026-10-24/. Issue 797. The note credits the L-shaped packing and
+      its end framework to Ryu, and the axis-layer fill of the band ends and the bound
+      4 ceil(sqrt(2k - 7)) - 1 to Daniel, first; it calls Theorem A an independent second
+      proof, and thanks the Squares Project for the register in which the bounds are
+      compared. It states that the construction code, checkers and certificates were
+      written and run with Claude (Anthropic), directed and reviewed by the author, and that
+      two blind language-model reviews of the proof are not an external mathematical
+      review.
   - key: '[Fang excess Lean 2026-10-18]'
     authors: [Fang]
     year: 2026
@@ -3972,6 +3994,26 @@ sources:
       name. CREDITS.md, byte-identical to the 12 October exact-data packet's, reads
       "Produced by Claude (Anthropic) in a single session under human direction". Not built
       here.
+  - key: '[Daniel k2-minus-c Lean 2026-10-18]'
+    authors: [Daniel]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-18'
+    credit: Daniel after Ryu, Levy
+    lineage: credits-project
+    note: >-
+      Evan Daniel's Lean proof of c*(k) <= 4 ceil(sqrt(2k - 7)) - 1 for every k >= 7,
+      packs_sub_4sqrt2_layers of lean/Sqpack/RyuLayers.lean, first committed at 4b456fe
+      (2026-10-18T05:44:46Z), with its +5 milestone packs_sub_4sqrt2 (RyuFill.lean, a645fe3),
+      retained in web/evand-k2-minus-c-lean-2026-10-18/ at the pin
+      aa12b989aa7d4244c57ea6c3b06bb36318bd41ea (2026-10-18T06:49:22Z), which adds
+      certificates/k2-minus-c/ and the write-up "Short of a Square"
+      (evand.github.io/square-packing/k2c/). Its README credits the L-shape and the waste
+      identity to Sungjoon Ryu's preprint, with Bui and Erdos-Graham behind them, and the
+      two bounds to the repository; it checked their novelty against this project's
+      asymptotic register, the second-hand credit that makes the lineage credits-project.
+      CREDITS.md says the work was produced by Claude (Anthropic) under human direction.
+      Standard axioms by the source's account; not built here.
   - key: '[Daniel small-n rectangles Lean 2026-10-22]'
     authors: [Daniel]
     year: 2026

@@ -799,7 +799,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "3aa75ff251061107bb1d88e2009474faeeaf96ea"
+DATA_REVISION = "25f0216939f117132d790a2085e5843acfaa4afc"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -8885,6 +8885,22 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "is the parent only at 268 and 303 (think-vm3m), at link revision be46a31a with "
             "the same nine files swapped in: the same outcome. Retain v0.4.27, v0.1.11, "
             "v0.1.4 and v0.2.7."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=("packing/campaign/result-requests.yaml",),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The #797 and Daniel deficiency-rows import (think-4tj5, think-f8py): #797's "
+            "requests entry, against main 755ef426b (#794). Rendered by "
+            "render_packing_methods at link revision 541a19d4 into empty site directories, "
+            "twice from this tree and once with main's result-requests.yaml swapped in, 43 "
+            "files each, all byte-identical across the three. No register entry changes. "
+            "Retain v0.2.7."
         ),
     ),
     ReleaseNoPublicChange(

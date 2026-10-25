@@ -1029,7 +1029,9 @@ repositories:
       Fang gluing formalization f4883b4 is think-57ei (coordinate think-0esw); Ryu formalization
       8475bdf is think-ahr2; since 23 October the evand-fang-ryu-lean-2026-10-18 packet pins
       8475bdf and retains both proofs, T-236 registers Fang's and the asymptotic register's row
-      notes Ryu's. Improved filled L-shape bound a645fe3 is think-f8py. The exact 3-angle
+      notes Ryu's. Improved filled L-shape bound a645fe3 is think-f8py; since 25 October the
+      evand-k2-minus-c-lean-2026-10-18 packet pins aa12b98, which holds a645fe3's RyuFill.lean,
+      and the asymptotic register records the bound as a reported row. The exact 3-angle
       n232 witness/Lean proof at 5ca0dc3 is evidence for T-193, held by think-phyb. Other commits
       change search tooling, status, site/provenance and displays; the complete changed-path
       inventory is retained in campaign/issue-intake/intake-20261018/source-commit-files.json. Full
@@ -1065,8 +1067,9 @@ repositories:
     bead: think-pf37
     note: >-
       Five commits past 5ca0dc3. 4b456fe reports the stronger filled L-shape deficiency
-      bound, owned by think-f8py; 13da782 reports the staircase/Ryu threshold, owned by
-      think-pf37. The other three package the proof route and update pages, viewer and
+      bound, owned by think-f8py, which since 25 October the evand-k2-minus-c-lean-2026-10-18
+      packet retains at aa12b98 and the asymptotic register records as a reported row;
+      13da782 reports the staircase/Ryu threshold, owned by think-pf37. The other three package the proof route and update pages, viewer and
       credit presentation. Commit messages and changed paths are retained in
       packing/campaign/issue-intake/intake-20261019/evand-source-inventory.json.
       Source-content review and theorem custody remain with those owners; no build,
@@ -1150,7 +1153,6 @@ repositories:
   - url: https://github.com/evand/square-packing
     read_through: a435c970774403bf5c6f94815997b1cfd77dcf44
     read_on: '2026-10-21'
-    bead: think-f8py
     note: >-
       a435c97 (20 October, 21:47Z) commits the packer's work of 17 to 20 October: the fill
       module, relax schedules, a CPU-limit watchdog, bulbgen and BULB.md, SUBMITTING.md and
@@ -1167,8 +1169,14 @@ repositories:
       checked exactly by the source (the whole packing for k <= 100, every pair with a
       corner-fill square beyond) and not in Lean. At k <= 31 every count k^2 - c it reaches
       already has a beyond-horizon row below k, so it moves no count the record tracks. A
-      claim in the c*(k) family think-f8py imports, which think-f8py holds until a packet
-      pins this commit or its import declines it. Nothing else to import.
+      claim in the c*(k) family think-f8py imports, which think-f8py held until a packet
+      pinned this commit or its import declined it. Its import of 25 October declines it,
+      for two reasons the register applies: the junction variant is a finite table of
+      values checked by the source's own programs, not a statement for every k in a range,
+      which is what the register's deficiency rows hold and the deficiency gate compares;
+      and it moves no count the record tracks. That holds at k = 32 too: the counts it could
+      reach there, 993 and 994, already have current beyond-horizon rows below 32
+      (31.953213739929 and 31.960209732221). Nothing else to import.
   - url: https://github.com/TheSnakeFang/squarepack-certs
     read_through: 9ffba0f3a84b38f0c92790c1d3089f979ef53f0b
     read_on: '2026-10-21'
@@ -1494,3 +1502,26 @@ repositories:
       73eac5b and 1c17153 change no bound. Couzo's comments of 24 October on #678 and #715
       report these corrections, which the records change of think-mdfr reads. Nothing else
       to import besides fa6237e's 304, imported as T-241.
+  # The import of #797 and of Evan Daniel's c*(k) bound (think-4tj5, think-f8py,
+  # c-import-797-1024, 25 October): the head past the 9ffba0f read.
+  - url: https://github.com/TheSnakeFang/squarepack-certs
+    read_through: db1ed6220731fce432fa3b1ef3b994b5ab6c3663
+    read_on: '2026-10-24'
+    note: >-
+      The three commits of 24 October past 9ffba0f, the head, each pushed on its own:
+      b1b3f6b (18:48:24Z) adds theorem-a/, Theorem A, c*(k) < 4 sqrt(2k) + 1 for every
+      k >= 6 (#797), with lband.py, windowed_check.py, 36 certificates (k = 6 to 40 and
+      101), LARGE.sha256 and regenerate.sh for k = 300 and 600, and the note v0.1 as PDF
+      and TeX, and adds a VERIFICATION.md addendum, ATTRIBUTION, CHANGELOG, README and
+      MANIFEST lines; no file outside theorem-a/ changes otherwise, and no earlier
+      certificate. 31bdc2d (18:59:08Z) puts the Zenodo DOI 10.5281/zenodo.23624412 and the
+      pin b1b3f6b into the note's front matter and the READMEs; the PDF and TeX are the
+      Zenodo v0.1 files byte for byte. db1ed62 (19:12:52Z) makes the note v0.2, Zenodo
+      10.5281/zenodo.23624565, byte-identical: it credits Evan Daniel's earlier
+      c*(k) <= 4 ceil(sqrt(2k - 7)) - 1 (evand/square-packing aa12b98, 18 October), adds
+      the comparison with it and drops v0.1's claim to be the smallest explicit bound for
+      42 <= k < 1.6*10^7; ATTRIBUTION, CHANGELOG and both READMEs say the same. Theorems,
+      lemmas, proofs, code and certificates are unchanged from b1b3f6b. Since #797's import
+      the fang-theorem-a-2026-10-24 packet pins db1ed62, retains theorem-a/ and the four
+      root text files and both Zenodo records, and the asymptotic register records Theorem A
+      as a reported row after Daniel's, so this read holds nothing back.

@@ -28450,6 +28450,157 @@ occurrences:
   note: Identity review pending.
 - origin:
     path: packing/resources/bibliography.yaml
+    record_key: '[Fang Theorem A 2026-10-24]'
+    field: /authors/0
+  expected_text: Fang
+  start: 0
+  end: 4
+  label: Fang
+  role: source-author
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: kevin-fang
+  note: Reviewed 2026-10-25 (think-4tj5) /authors/0 span 0:4, Kevin Fang's Theorem A note
+    and theorem-a/ in TheSnakeFang/squarepack-certs, the repository of his earlier keys,
+    reported on issue 797 by its owner; the note's byline is Kevin Fang.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Fang Theorem A 2026-10-24]'
+    field: /credit
+  expected_text: Fang after Ryu, Daniel, Levy
+  start: 0
+  end: 4
+  label: Fang
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: kevin-fang
+  note: Reviewed 2026-10-25 (think-4tj5) /credit span 0:4, the author of the note and of theorem-a/
+    at db1ed62, as for /authors/0.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Fang Theorem A 2026-10-24]'
+    field: /credit
+  expected_text: Fang after Ryu, Daniel, Levy
+  start: 11
+  end: 14
+  label: Ryu
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - bibliography
+  contributor_id: ryu-sungjoon
+  note: Reviewed 2026-10-25 (think-4tj5) /credit span 11:14, the note credits the L-shaped
+    packing and its end framework to Sungjoon Ryu's k^2 - c upper-bound preprint (version
+    1.1), the squarepacker editions whose byline is Sungjoon Ryu.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Fang Theorem A 2026-10-24]'
+    field: /credit
+  expected_text: Fang after Ryu, Daniel, Levy
+  start: 16
+  end: 22
+  label: Daniel
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - repository-license
+  - bibliography
+  contributor_id: evan-daniel
+  note: Reviewed 2026-10-25 (think-4tj5) /credit span 16:22, the note credits the axis-layer
+    fill of the band ends and the earlier bound 4 ceil(sqrt(2k - 7)) - 1 to Evan Daniel, evand/square-packing
+    aa12b98, the repository whose retained licence names him.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Fang Theorem A 2026-10-24]'
+    field: /credit
+  expected_text: Fang after Ryu, Daniel, Levy
+  start: 24
+  end: 28
+  label: Levy
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - announcement-account
+  contributor_id: joshua-levy
+  note: Reviewed 2026-10-25 (think-4tj5) /credit span 24:28, the note thanks 'The Squares
+    Project (Joshua Levy)' for the register in which the bounds are compared; project credit,
+    not sole personal authorship.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel k2-minus-c Lean 2026-10-18]'
+    field: /authors/0
+  expected_text: Daniel
+  start: 0
+  end: 6
+  label: Daniel
+  role: source-author
+  disposition: resolved
+  evidence:
+  - repository-license
+  - bibliography
+  contributor_id: evan-daniel
+  note: Reviewed 2026-10-25 (think-f8py) /authors/0 span 0:6, evand/square-packing at aa12b98,
+    whose retained licence names Evan Daniel and whose k2-minus-c README names him for the
+    formalization.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel k2-minus-c Lean 2026-10-18]'
+    field: /credit
+  expected_text: Daniel after Ryu, Levy
+  start: 0
+  end: 6
+  label: Daniel
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+  - repository-license
+  - bibliography
+  contributor_id: evan-daniel
+  note: Reviewed 2026-10-25 (think-f8py) /credit span 0:6, the author of packs_sub_4sqrt2_layers
+    in evand/square-packing, as for /authors/0.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel k2-minus-c Lean 2026-10-18]'
+    field: /credit
+  expected_text: Daniel after Ryu, Levy
+  start: 13
+  end: 16
+  label: Ryu
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - bibliography
+  contributor_id: ryu-sungjoon
+  note: Reviewed 2026-10-25 (think-f8py) /credit span 13:16, the k2-minus-c README credits
+    the L-shape and the waste identity to Sungjoon Ryu's k^2 - c upper-bound preprint (v1.1),
+    the squarepacker editions whose byline is Sungjoon Ryu.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel k2-minus-c Lean 2026-10-18]'
+    field: /credit
+  expected_text: Daniel after Ryu, Levy
+  start: 18
+  end: 22
+  label: Levy
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - announcement-account
+  contributor_id: joshua-levy
+  note: Reviewed 2026-10-25 (think-f8py) /credit span 18:22, the k2-minus-c README says novelty
+    was checked against jlevy's register (packing/frontier/asymptotic-waste-bounds.yaml);
+    project credit, not sole personal authorship.
+- origin:
+    path: packing/resources/bibliography.yaml
     record_key: '[Kristiansen issue 798 2026-10-24]'
     field: /authors/0
   expected_text: Kristiansen
