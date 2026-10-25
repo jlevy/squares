@@ -1,0 +1,32 @@
+{
+ "subcommand": "ties",
+ "mmax": 1000,
+ "pairs": 1998,
+ "failures": [],
+ "all_hold": true,
+ "least_bound_minus_B": {
+  "m": 1000,
+  "k": 2000000,
+  "b": 2001,
+  "w": 8000,
+  "bound": 8002,
+  "B_minus_w": 1.9930050002463784,
+  "bound_minus_B": 0.006994999753621564,
+  "divisions": 0,
+  "failed": [],
+  "w_lim": 8000
+ },
+ "largest_w_relative_to_bound": {
+  "m": 3,
+  "k": 18,
+  "b": 7,
+  "w": 24,
+  "bound": 26,
+  "B_minus_w": 0.19908571428571428,
+  "bound_minus_B": 1.8009142857142857,
+  "divisions": 0,
+  "failed": [],
+  "w_lim": 24
+ },
+ "cpu_seconds": 1.9
+}

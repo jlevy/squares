@@ -97,7 +97,7 @@ in it is exact, in integers and fractions.
   host). For every $k$ from 6 to 60,000 and every odd $b$ with $|b - \sqrt{2k}| \le 1$,
   both where there are two, it finds a rational $t$ just above $1/b$ satisfying the note’s
   conditions (a) to (d) with $H(t) < 4\sqrt{2k} + 2$, and decides
-  $w = k^2 - N < 4\sqrt{2k} + 2$, $w < H(t)$ (Lemma 2 with equation 1) and
+  $w = k^2 - N < 4\sqrt{2k} + 2$, $w < H(t)$ (Lemma 3 with equation 1) and
   $B(k) < 4\sqrt{2k} + 2$: 60,167 pairs, no failure. The least $B(k) - w$ for
   $k \le 20{,}000$ is $8019401/78023840599$ at $k = 19{,}705$, as the note states. It
   decides the identities that carry $B(k)$ below the bound to every $k$, lays out every
@@ -126,7 +126,10 @@ in it is exact, in integers and fractions.
   $42 \le k \le 702{,}000$ (below Daniel’s at 346,920, less $k = 10^5$, where Ryu’s
   certificate gives 1583). It is smaller than Ryu’s Theorem 1.4 at $k = 6$ and from 9, than
   his Theorem 1.3 at its best $b$ from 14, and than T-163 from 42; Ryu’s Theorem 1.2 is
-  smaller at every $k \ge 1.6 \cdot 10^7$. At every $n \le 324$ the case records already
+  smaller at every $k \ge 1.6 \cdot 10^7$. Daniel’s unregistered
+  $c^*(k) < 18.9k^{2/5} + 35.7k^{1/5} + 122$ ($k \ge 3 \cdot 10^5$) is first smaller at
+  735,988 and smaller at every $k$ from 736,595, with $k^{1/5}$ bracketed between rationals
+  until the comparison is decided. At every $n \le 324$ the case records already
   hold both bounds’ implications. Each comparison is decided one $k$ at a time and beyond
   by a tail lemma the receipt names.
 
@@ -144,12 +147,32 @@ python -m cases.asymptotic.fang_theorem_a check [--replay K ...]
 construction’s checks on a bounded range with the identities as the tail, the mutation
 controls, and the receipts’ checks, in the pull-request tier.
 
+Theorem and lemma numbers here are the note’s as printed: Theorem A is its Theorem 1,
+Lemma 2 fills a band end and Lemma 3 bounds a band.
+This README and the register row called them Lemmas 1 and 2 until the review below
+(its N-2).
+
+## The Mathematical Review
+
+The stage 4 review of 25 October 2026,
+[review-2026-10-25-fang-theorem-a.md](../../../../docs/project/reviews/review-2026-10-25-fang-theorem-a.md),
+re-derived the proof of Lemmas 2 and 3 and of Theorem A and accepted it with findings,
+none blocking or major: two minor findings on the note’s Section 6 squeeze example and
+the last sentence of its Section 7, and twelve notes.
+Its programs, written from the note by a Claude agent prompted separately, and their
+receipts are in [`review/review-2026-10-25/`](review/review-2026-10-25/README.md).
+They decided every identity and inequality of Sections 2 to 5 symbolically, the bound
+with both lemmas at every $k$ from 6 to 250,000, every square at 46 packings to
+$k = 101$, and the note’s comparisons, including the first $k$ at which Daniel’s
+unregistered $k^{2/5}$ bound is smaller, 735,988.
+
 ## Limitations
 
-- **No mathematical review yet.** The proof of Lemmas 1 and 2 and of Theorem A is the
-  stage 4 review’s, which runs in its own lane after this import. The checks above decide
-  the construction one $k$ at a time to 60,000 and the identities for every $k$; that some
-  close $t$ gives $H(t) < 4\sqrt{2k} + 2$ at every $k$ is the note’s continuity argument.
+- **One AI review, not a referee.** The review is one AI reader’s re-derivation, of the
+  system family the source also used. The checks above decide the construction one $k$ at
+  a time to 60,000 and the identities for every $k$; that some close $t$ gives
+  $H(t) < 4\sqrt{2k} + 2$ at every $k$ is the note’s continuity argument, which the
+  review read.
 - **No source program ran.** The source’s `lband.py --bound`, its three checkers and its
   windowed driver are retained or pinned and were not run; `VERIFICATION.md` reports them.
 - **$k = 300$ and $600$ are the author’s statement**, by digest only. The optimized

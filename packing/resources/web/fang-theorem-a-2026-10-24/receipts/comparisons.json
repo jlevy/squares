@@ -14,6 +14,6 @@
   "daniel_tails": {"ryu_theorem_1_4_from_14":true,"ryu_theorem_1_3_from_59":true,"t163_from_47":true},
   "ryu_theorem_1_2_at_1.6e7": {"A":22628,"ryu_at_most":"15749639/1000","ryu_smaller":true},
   "ryu_theorem_1_6": {"100000":{"ryu":1583,"A":1789,"daniel":1791},"1000000":{"ryu":3972,"A":5657,"daniel":5659},"10000000":{"ryu":10039,"A":17889,"daniel":17891},"38250000":{"ryu":16988,"A":34986,"daniel":34987},"100000000":{"ryu":24790,"A":56569,"daniel":56571}},
-  "daniel_k25_crossover": {"last_sampled_k_not_smaller":702000,"first_sampled_k_surely_smaller":748000},
+  "daniel_k25_crossover": {"k_range":[300000,999999],"smaller_at":263695,"first_k_where_smaller":735988,"last_k_where_not_smaller":736594,"smaller_at_every_k_from":736595,"tail_from_next_k_holds":true},
   "case_records": {"theorem_a":{"counts_reached":324,"case_bound_not_below_k":[]},"daniel":{"counts_reached":324,"case_bound_not_below_k":[]}}
 }

@@ -1,0 +1,51 @@
+{
+ "program": "fang_a_review.py",
+ "program_sha256": "6b0e079306dad85d239e46aa5bfdebcfffbbd9506800172febc71c5dc8c721bf",
+ "python": "3.14.7",
+ "subcommand": "construction",
+ "range": [
+  60001,
+  250000
+ ],
+ "pairs_k_b": 190180,
+ "failures": [],
+ "all_checks_hold": true,
+ "delta_rule": "t = 1/b + delta, delta = 1/(b(b^2+1)(6 k_hi + 4b)), k_hi = floor((b+1)^2/2), divided by 8 until (a)-(d) and H(t) < 4 sqrt(2k) + 2 hold",
+ "pairs_needing_a_smaller_delta": 0,
+ "most_divisions_by_8": 0,
+ "least_bound_minus_w_float": {
+  "value": 0.021939051429399115,
+  "k": 249575,
+  "b": 707
+ },
+ "least_bound_minus_B_float": {
+  "value": 0.019789897365171782,
+  "k": 249218,
+  "b": 707
+ },
+ "near_end_rounding_loss_max": {
+  "value": "113184266274893791193063574098836456968523903890098148001/227333168384377280460480032517931888523087233364643898000",
+  "float": 0.4978783653933009,
+  "k": 249218,
+  "b": 707
+ },
+ "far_end_rounding_loss_max": {
+  "value": "466577208910211124318576077626767953489140555367257/310752982606167568678499831340525531120295765738000",
+  "float": 1.5014408067694307,
+  "k": 60035,
+  "b": 347,
+  "band": "top"
+ },
+ "far_end_losses_above_3/2": 542,
+ "limit": {
+  "kmax": 0,
+  "pairs": 0,
+  "series_orders_used": {},
+  "least_B_minus_w_lim": null,
+  "B_minus_w_lim_nonpositive": [],
+  "w_lim_equals_w_at_chosen_t": 0,
+  "w_lim_differs_from_w_at_chosen_t": [],
+  "w_lim_differs_count": 0
+ },
+ "cpu_seconds": 65.1
+}

@@ -1,0 +1,304 @@
+{
+ "program": "fang_a_identities.py",
+ "program_sha256": "4fc91df0eae975160014929bccbe318f198f2d33114c4e578dfd6ae03322e2c3",
+ "python": "3.14.7",
+ "sympy": "1.14.0",
+ "checks": [
+  {
+   "check": "c^2 + s^2 = 1",
+   "note": "S2, l.66",
+   "holds": true,
+   "detail": ""
+  },
+  {
+   "check": "c0 = (b^2-1)/(b^2+1)",
+   "note": "S2, l.70",
+   "holds": true,
+   "detail": ""
+  },
+  {
+   "check": "s0 = 2b/(b^2+1)",
+   "note": "S2, l.70",
+   "holds": true,
+   "detail": ""
+  },
+  {
+   "check": "tau0 = (b^2-1)/(2b)",
+   "note": "S2, l.70",
+   "holds": true,
+   "detail": ""
+  },
+  {
+   "check": "W0 = b",
+   "note": "S2, l.70",
+   "holds": true,
+   "detail": ""
+  },
+  {
+   "check": "h0 = (3b^2-1)/(b^2+1)",
+   "note": "S2, l.70",
+   "holds": true,
+   "detail": ""
+  },
+  {
+   "check": "3 - h0 = 4/(b^2+1) > 0",
+   "note": "S2, l.70",
+   "holds": true,
+   "detail": ""
+  },
+  {
+   "check": "W - b = 2t(1 - bt)/(1+t^2), so W < b for every t > 1/b",
+   "note": "S2, l.70",
+   "holds": true,
+   "detail": "a direct form of the note's derivative argument"
+  },
+  {
+   "check": "dW/dtheta = c - b s",
+   "note": "S2, l.70",
+   "holds": true,
+   "detail": ""
+  },
+  {
+   "check": "(R1) X - s = uc - vs",
+   "note": "S2, l.74",
+   "holds": true,
+   "detail": ""
+  },
+  {
+   "check": "(R1) X - s = -s at (u,v)=(0,1) and = bc at (b,0)",
+   "note": "S2, l.74",
+   "holds": true,
+   "detail": ""
+  },
+  {
+   "check": "(R2) the shift (0, sec) moves v by 1",
+   "note": "S2, l.74",
+   "holds": true,
+   "detail": ""
+  },
+  {
+   "check": "(R2) the shift (0, sec) moves u by tan",
+   "note": "S2, l.74",
+   "holds": true,
+   "detail": ""
+  },
+  {
+   "check": "(R3) highest point of a row is y + h (u=b, v=1)",
+   "note": "S2, l.74",
+   "holds": true,
+   "detail": ""
+  },
+  {
+   "check": "(E1) Y - y - (X - s)T = v c + v s^2/c = v/c",
+   "note": "S2, l.76",
+   "holds": true,
+   "detail": ""
+  },
+  {
+   "check": "(E1) Y - y - (s - X)/T = u s + u c^2/s = u/s",
+   "note": "S2, l.76",
+   "holds": true,
+   "detail": ""
+  },
+  {
+   "check": "(E2) l(a_i) = y + (a_i - s)T = i + 1",
+   "note": "S2, l.78",
+   "holds": true,
+   "detail": ""
+  },
+  {
+   "check": "(E3) rotated row j has X = s + u'c - v's with u'=b-u, v'=1-v",
+   "note": "S2, l.80",
+   "holds": true,
+   "detail": ""
+  },
+  {
+   "check": "(E3) rotated row j has Y = y1 + (R-1-j)sec + u's + v'c",
+   "note": "S2, l.80",
+   "holds": true,
+   "detail": ""
+  },
+  {
+   "check": "(1) k^2 - [(k-b)^2 + C(S) + C(k-b)] equals the right side of (1)",
+   "note": "S3, l.94-96",
+   "holds": true,
+   "detail": ""
+  },
+  {
+   "check": "W0 - s0 - tau0 = (b-1)/2 + delta_b",
+   "note": "S4, l.108",
+   "holds": true,
+   "detail": ""
+  },
+  {
+   "check": "2b(b^2+1) delta_b = b^3 - 3b^2 + b + 1 = (b-1)(b^2-2b-1)",
+   "note": "S4, l.108",
+   "holds": true,
+   "detail": "for b >= 3: b - 1 >= 2 and b^2 - 2b - 1 = (b-1)^2 - 2 >= 2, so delta_b > 0"
+  },
+  {
+   "check": "delta_b < 1 for b >= 1 (delta_b < 1/2 + 1/(2b) <= 1)",
+   "note": "S4, l.108",
+   "holds": true,
+   "detail": ""
+  },
+  {
+   "check": "eta0 = 1/(2b)",
+   "note": "S4, l.101",
+   "holds": true,
+   "detail": ""
+  },
+  {
+   "check": "2 tau0 - b c0 = (b^2-1)/(b(b^2+1))",
+   "note": "S4, l.108",
+   "holds": true,
+   "detail": ""
+  },
+  {
+   "check": "s + (1 - sec) tau = c(1-c)/s",
+   "note": "Lemma 2, l.120",
+   "holds": true,
+   "detail": ""
+  },
+  {
+   "check": "W - a_0(y) = z + tau and W - a_1(y) = z",
+   "note": "Lemma 2, l.122",
+   "holds": true,
+   "detail": ""
+  },
+  {
+   "check": "tau = (b-1)/2 + 1/2 - eta",
+   "note": "Lemma 2, l.122",
+   "holds": true,
+   "detail": ""
+  },
+  {
+   "check": "floor pairing, case f < 1/2+eta: 2n - (2z-1-2eta) = 1 + 2eta - 2f > 0",
+   "note": "Lemma 2, l.122",
+   "holds": true,
+   "detail": ""
+  },
+  {
+   "check": "floor pairing, case f >= 1/2+eta: (2n+1) - (2z-1) = 2 - 2f > 0",
+   "note": "Lemma 2, l.122",
+   "holds": true,
+   "detail": ""
+  },
+  {
+   "check": "floor pairing on 240 x 120 rational grid (with f = 1/2+eta and just below)",
+   "note": "Lemma 2, l.122",
+   "holds": true,
+   "detail": "0 failures"
+  },
+  {
+   "check": "bR = b + bc(L - h - F) when F = L - (R-1)sec - h",
+   "note": "Lemma 3, l.136",
+   "holds": true,
+   "detail": ""
+  },
+  {
+   "check": "Lemma 3: bL - C_lower - RHS(2) = F(bc - 2tau), as a polynomial identity",
+   "note": "Lemma 3, l.130-136",
+   "holds": true,
+   "detail": "so (c) 2tau - bc >= 0 and F >= 0 give bL - C(L) < RHS(2)"
+  },
+  {
+   "check": "RHS(2) at t0 = 2bL/(b^2+1) + b + 2 - kappa_b",
+   "note": "Lemma 3, l.132",
+   "holds": true,
+   "detail": ""
+  },
+  {
+   "check": "1 - c0 = 2/(b^2+1)",
+   "note": "Lemma 3, l.136",
+   "holds": true,
+   "detail": ""
+  },
+  {
+   "check": "b c0 h0 = 3b - b(10b^2+2)/(b^2+1)^2",
+   "note": "Lemma 3, l.136",
+   "holds": true,
+   "detail": ""
+  },
+  {
+   "check": "W0 - s0 - 2tau0 = -(b^2-1)/(b(b^2+1))",
+   "note": "Lemma 3, l.136",
+   "holds": true,
+   "detail": ""
+  },
+  {
+   "check": "H(t0) = B(k) (H is a rational function of t, continuous at t0)",
+   "note": "S5, l.143-145",
+   "holds": true,
+   "detail": ""
+  },
+  {
+   "check": "S(t0) = k",
+   "note": "S5, l.143",
+   "holds": true,
+   "detail": ""
+  },
+  {
+   "check": "4k/b - 4kb/(b^2+1) = 4k/(b(b^2+1)) > 0",
+   "note": "S5, l.147",
+   "holds": true,
+   "detail": ""
+  },
+  {
+   "check": "4k/b + 2b = 4 sqrt(2k) + (2/b)(b - sqrt(2k))^2, with x = sqrt(2k)",
+   "note": "S5, l.147",
+   "holds": true,
+   "detail": ""
+  },
+  {
+   "check": "B(k) = 4x + (2/b)(b-x)^2 + 2 + 2/(b^2+1) - 2 kappa_b - 4k/(b(b^2+1)), x = sqrt(2k)",
+   "note": "S5, l.147-149",
+   "holds": true,
+   "detail": "with (b-x)^2 <= 1: B(k) <= 4x + 2 - 2(kappa - 1/b - 1/(b^2+1)) - 4k/(b(b^2+1))"
+  },
+  {
+   "check": "b(b^2+1)^2 (kappa - 1/b - 1/(b^2+1)) = 6b^4 - b^3 - 2b^2 - b",
+   "note": "S5, l.151",
+   "holds": true,
+   "detail": ""
+  },
+  {
+   "check": "6b^4 - b^3 - 2b^2 - b = b(b-1)(6b^2+5b+3) + 2b > 0 for b >= 1",
+   "note": "S5, l.151",
+   "holds": true,
+   "detail": ""
+  },
+  {
+   "check": "k - sqrt(2k) - 1 >= 3 iff (k-2)(k-8) >= 0 (k >= 4)",
+   "note": "S5, l.141",
+   "holds": true,
+   "detail": ""
+  },
+  {
+   "check": "4 sqrt(2k) + 2 - 4b = 31/(2b) + O(b^-2) at k = (b^2-b+8)/2",
+   "note": "Remark, l.154",
+   "holds": true,
+   "detail": "series in 1/b: 31*m**2/4 + 31*m/2"
+  }
+ ],
+ "controls": [
+  {
+   "control": "kappa with 7b^4 - 1 in place of 7b^4 + 1",
+   "refused": true
+  },
+  {
+   "control": "Lemma 3 with the F term's sign flipped",
+   "refused": true
+  },
+  {
+   "control": "W0 = b - 1/b",
+   "refused": true
+  },
+  {
+   "control": "6b^4 - b^3 - 2b^2 + b in place of ... - b",
+   "refused": true
+  }
+ ],
+ "all_hold": true,
+ "count": 46
+}

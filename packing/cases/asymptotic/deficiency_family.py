@@ -188,9 +188,12 @@ STATEMENTS: tuple[Statement, ...] = (
         ),
         constant=(
             "4 sqrt 2 with additive 1: w(k) <= b(k - S) plus two band terms (equation 1), each "
-            "below 2bL/(b^2+1) + b + 2 - kappa_b, kappa_b = (7b^4+1)/(b(b^2+1)^2), as t -> 1/b "
-            "(Lemma 2); sharp for this construction, whose waste is exactly 4b at k = (b^2 - b "
-            "+ 8)/2 for odd b >= 5."
+            "below the right side of equation 2 at t (Lemma 3), whose limit as t -> 1/b is "
+            "2bL/(b^2+1) + b + 2 - kappa_b, kappa_b = (7b^4+1)/(b(b^2+1)^2). Theorem and lemma "
+            "numbers are the note's as printed: Theorem A is its Theorem 1, Lemma 2 the fill "
+            "of a band end, Lemma 3 the band. By the note's remark, stated without proof, the "
+            "bound is sharp for this construction, whose waste is exactly 4b at k = (b^2 - b + "
+            "8)/2 for odd b >= 5."
         ),
     ),
     Statement(
