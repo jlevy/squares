@@ -9063,6 +9063,30 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "Retain v0.2.7."
         ),
     ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/frontier/README.md",
+        ),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "W8 of think-clgp: #799's requests entry with triage pending, and a sentence "
+            "beside D2's recipe rule in the frontier README naming the two-strip checker, "
+            "against main bb756e193 (#805). Rendered by render_packing_methods at link "
+            "revision 52c7b2ce into empty site directories, twice from this tree and once "
+            "with main's result-requests.yaml and frontier README swapped in, 43 files each, "
+            "all byte-identical across the three. Measured again after review A of #808 set "
+            "the entry's triage to done and reworded its summary, at link revision ff752564 "
+            "with the same two inputs of main swapped in: the same outcome. After the second "
+            "triage of #799 (think-z2mj) rebuilt the entry with version 2's results and "
+            "the preprint, at link revision 6bc19ea4 with the same two inputs of main "
+            "swapped in: the same outcome. No register entry changes. Retain v0.2.7."
+        ),
+    ),
 )
 
 

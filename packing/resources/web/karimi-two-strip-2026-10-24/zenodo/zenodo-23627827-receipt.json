@@ -1,0 +1,15 @@
+{
+  "format": "zenodo-capture-v1",
+  "record": 23627827,
+  "doi": "10.5281/zenodo.23627827",
+  "conceptdoi": "10.5281/zenodo.23627826",
+  "title": "Packing unit squares in a square of side just below an integer: a two-strip construction with O(√K) deficit",
+  "version": "V1.0",
+  "publication_date": "2026-10-24",
+  "created": "2026-10-24T22:06:19.440017+00:00",
+  "updated": "2026-10-24T22:06:19.733862+00:00",
+  "api": "https://zenodo.org/api/records/23627827",
+  "retrieved_utc": "2026-10-25T05:46:28Z",
+  "files": [{"key":"karimi_near_integer.pdf","bytes":224724,"checksum_stated":"md5:3f51d3e5a5b9c2a7aa81ffeef5626901","md5":"3f51d3e5a5b9c2a7aa81ffeef5626901","sha256":"abb4f0b83c45711a6c9b6061e000d3437fa98eed8126b21e00986f455e700a4a","same_bytes_as":{}}],
+  "extracted": []
+}
