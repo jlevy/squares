@@ -9156,6 +9156,9 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "against main 886dddce6, with that main's nine candidate inputs swapped in and "
             "jatloe.md removed: twice from this tree and once swapped, 51 files each, all "
             "byte-identical across the three. The explainer's v0.4.28 counts 244 results. "
+            "Measured a fourth time after T-243's citation of its statement audit "
+            "(results.yaml), at link revision bfacba5a against the same main, swapped the "
+            "same way: 51 files each, all byte-identical across the three. "
             "Retain v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
