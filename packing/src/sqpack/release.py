@@ -8922,9 +8922,10 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "directories, twice from this tree and once with main's result-requests.yaml and "
             "source-coverage.yaml swapped in, render_packing_methods writes all 43 files "
             "byte-identical across the three; measured again after merging main 755ef426b "
-            "(#794) at link revision 61602a47, and after review A's source split at link "
-            "revision 00f19d7f, with the same result. No register entry is added. No PDF was "
-            "printed; it prints from that HTML. Retain v0.2.7."
+            "(#794) at link revision 61602a47, after review A's source split at link "
+            "revision 00f19d7f, and after merging main 3e1349802 (#801) at link revision "
+            "5239214a with that main's two files swapped in, with the same result. No register "
+            "entry is added. No PDF was printed; it prints from that HTML. Retain v0.2.7."
         ),
     ),
 )
