@@ -1,0 +1,51 @@
+{
+ "program": "fang_a_squeeze_conditions.py",
+ "program_sha256": "5dd24f79d375ac2c00bc7409226f293df65773bdff88c659148799ca6ec2815b",
+ "imports": {
+  "fang_a_review.py": "6b0e079306dad85d239e46aa5bfdebcfffbbd9506800172febc71c5dc8c721bf"
+ },
+ "python": "3.14.7",
+ "k": 43218,
+ "rows": [
+  {
+   "b": 293,
+   "k_minus_S_1e-7": {
+    "failing": [
+     "c"
+    ],
+    "w": 1176
+   },
+   "t_minus_1/b_1e-7": {
+    "failing": [
+     "c",
+     "d"
+    ],
+    "w": 1178
+   },
+   "scan_points_with_w_at_least_1178": 171,
+   "failing_sets_at_those_points": {
+    "c,d": 171
+   }
+  },
+  {
+   "b": 295,
+   "k_minus_S_1e-7": {
+    "failing": [
+     "c"
+    ],
+    "w": 1176
+   },
+   "t_minus_1/b_1e-7": {
+    "failing": [
+     "c",
+     "d"
+    ],
+    "w": 1176
+   },
+   "scan_points_with_w_at_least_1178": 151,
+   "failing_sets_at_those_points": {
+    "c,d": 151
+   }
+  }
+ ]
+}

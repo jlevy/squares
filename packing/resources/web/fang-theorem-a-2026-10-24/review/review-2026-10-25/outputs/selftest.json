@@ -1,0 +1,22 @@
+{
+ "program": "fang_a_review.py",
+ "program_sha256": "6b0e079306dad85d239e46aa5bfdebcfffbbd9506800172febc71c5dc8c721bf",
+ "python": "3.14.7",
+ "subcommand": "selftest",
+ "results": {
+  "odd_widths(6) == [3]": true,
+  "odd_widths(7) == [3]": true,
+  "odd_widths(8) == [3, 5]": true,
+  "odd_widths(18) == [5, 7]": true,
+  "odd_widths(59) == [11]": true,
+  "below_bound exact tie refused (k=43218, x=1178)": true,
+  "below_bound 1177 at k=43218": true,
+  "below_bound negative side": true,
+  "floor of negatives": true,
+  "remark's example: k=59, b=11, limit waste 44": true,
+  "k=59 at a chosen t: waste 44": true,
+  "even b = 10: the odd-b Lemma 2 bound fails at some lift": true,
+  "limit waste equals waste at delta = 1e-40 (k=1000, b=45)": true
+ },
+ "all_pass": true
+}

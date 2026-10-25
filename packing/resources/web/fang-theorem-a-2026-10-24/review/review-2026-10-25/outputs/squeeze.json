@@ -1,0 +1,212 @@
+{
+ "program": "fang_a_review.py",
+ "program_sha256": "6b0e079306dad85d239e46aa5bfdebcfffbbd9506800172febc71c5dc8c721bf",
+ "python": "3.14.7",
+ "subcommand": "squeeze",
+ "k": 43218,
+ "sqrt_2k": 294,
+ "bound": 1178,
+ "rows_k_minus_S": [
+  {
+   "b": 293,
+   "squeeze_target": "1e-7",
+   "squeeze": 1e-07,
+   "close": false,
+   "w": 1176,
+   "H": 1177.9780369192165,
+   "w_below_bound": true,
+   "H_below_bound": true,
+   "w_below_H": true
+  },
+  {
+   "b": 293,
+   "squeeze_target": "1e-8",
+   "squeeze": 1e-08,
+   "close": true,
+   "w": 1176,
+   "H": 1177.9547803253272,
+   "w_below_bound": true,
+   "H_below_bound": true,
+   "w_below_H": true
+  },
+  {
+   "b": 293,
+   "squeeze_target": "1e-9",
+   "squeeze": 1e-09,
+   "close": true,
+   "w": 1176,
+   "H": 1177.9524546546945,
+   "w_below_bound": true,
+   "H_below_bound": true,
+   "w_below_H": true
+  },
+  {
+   "b": 293,
+   "squeeze_target": "1e-10",
+   "squeeze": 1e-10,
+   "close": true,
+   "w": 1176,
+   "H": 1177.9522220875187,
+   "w_below_bound": true,
+   "H_below_bound": true,
+   "w_below_H": true
+  },
+  {
+   "b": 293,
+   "squeeze_target": "1e-12",
+   "squeeze": 1e-12,
+   "close": true,
+   "w": 1176,
+   "H": 1177.9521965051283,
+   "w_below_bound": true,
+   "H_below_bound": true,
+   "w_below_H": true
+  },
+  {
+   "b": 295,
+   "squeeze_target": "1e-7",
+   "squeeze": 1e-07,
+   "close": false,
+   "w": 1176,
+   "H": 1177.9785704827993,
+   "w_below_bound": true,
+   "H_below_bound": true,
+   "w_below_H": true
+  },
+  {
+   "b": 295,
+   "squeeze_target": "1e-8",
+   "squeeze": 1e-08,
+   "close": true,
+   "w": 1176,
+   "H": 1177.9552082273117,
+   "w_below_bound": true,
+   "H_below_bound": true,
+   "w_below_H": true
+  },
+  {
+   "b": 295,
+   "squeeze_target": "1e-9",
+   "squeeze": 1e-09,
+   "close": true,
+   "w": 1176,
+   "H": 1177.9528719904426,
+   "w_below_bound": true,
+   "H_below_bound": true,
+   "w_below_H": true
+  },
+  {
+   "b": 295,
+   "squeeze_target": "1e-10",
+   "squeeze": 1e-10,
+   "close": true,
+   "w": 1176,
+   "H": 1177.9526383666425,
+   "w_below_bound": true,
+   "H_below_bound": true,
+   "w_below_H": true
+  },
+  {
+   "b": 295,
+   "squeeze_target": "1e-12",
+   "squeeze": 1e-12,
+   "close": true,
+   "w": 1176,
+   "H": 1177.9526126680232,
+   "w_below_bound": true,
+   "H_below_bound": true,
+   "w_below_H": true
+  }
+ ],
+ "rows_t_minus_1/b": [
+  {
+   "b": 293,
+   "t_minus_1/b": 1e-07,
+   "k_minus_S": 2.0000353015049063e-07,
+   "close_fails": [
+    "c",
+    "d"
+   ],
+   "w": 1178,
+   "H": 1178.003878251535,
+   "w_below_bound": false
+  },
+  {
+   "b": 293,
+   "t_minus_1/b": 1e-08,
+   "k_minus_S": 1.9999825633479336e-08,
+   "close_fails": [],
+   "w": 1176,
+   "H": 1177.9573643563529,
+   "w_below_bound": true
+  },
+  {
+   "b": 295,
+   "t_minus_1/b": 1e-07,
+   "k_minus_S": 2.0000360163284092e-07,
+   "close_fails": [
+    "c",
+    "d"
+   ],
+   "w": 1176,
+   "H": 1178.0045292379625,
+   "w_below_bound": true
+  },
+  {
+   "b": 295,
+   "t_minus_1/b": 1e-08,
+   "k_minus_S": 1.999982918158942e-08,
+   "close_fails": [],
+   "w": 1176,
+   "H": 1177.9578039992998,
+   "w_below_bound": true
+  }
+ ],
+ "log_scan": [
+  {
+   "b": 293,
+   "first_k_minus_S_at_each_waste": {
+    "1176": {
+     "k_minus_S": 1.0232929922807495e-09,
+     "close": true,
+     "H": 1177.9524606737891
+    },
+    "1177": {
+     "k_minus_S": 1.584893192461111e-07,
+     "close": false,
+     "H": 1177.9931508356708
+    },
+    "1178": {
+     "k_minus_S": 1.9952623149688827e-07,
+     "close": false,
+     "H": 1178.0037549161573
+    },
+    "1180": {
+     "k_minus_S": 8.128305161640995e-06,
+     "close": false,
+     "H": 1180.0517824524563
+    }
+   }
+  },
+  {
+   "b": 295,
+   "first_k_minus_S_at_each_waste": {
+    "1176": {
+     "k_minus_S": 1.0232929922807495e-09,
+     "close": true,
+     "H": 1177.952878036884
+    },
+    "1178": {
+     "k_minus_S": 3.162277660168379e-07,
+     "close": false,
+     "H": 1178.034698178381
+    },
+    "1180": {
+     "k_minus_S": 7.94328234724279e-06,
+     "close": false,
+     "H": 1180.0137449133213
+    }
+   }
+  }
+ ]
+}

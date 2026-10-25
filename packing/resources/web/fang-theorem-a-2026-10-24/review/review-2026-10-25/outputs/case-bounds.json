@@ -1,0 +1,143 @@
+{
+ "program": "fang_a_case_bounds.py",
+ "program_sha256": "3d2db3f6c2ba518d80bea93bde681871dda6732177bb4c10355b8c1bca45c395",
+ "python": "3.14.7",
+ "rows": [
+  {
+   "k": 6,
+   "n": 26,
+   "case": "n-026.md",
+   "sha256": "2eb42da585966cb29b6866b44fd8b00b90525af9b3ab9d1e9d083fd83106396d",
+   "reported_upper_bound": "5.62132034355964",
+   "verified_upper_bound": "5.62132034355964257320253308631455",
+   "both_below_k": true
+  },
+  {
+   "k": 7,
+   "n": 38,
+   "case": "n-038.md",
+   "sha256": "1a2aca3f7231387718f2f5e18112116296fda281de81768ce66e308a4e333438",
+   "reported_upper_bound": "6.70710678118654",
+   "verified_upper_bound": "6.70710678118654752440084436210485",
+   "both_below_k": true
+  },
+  {
+   "k": 8,
+   "n": 50,
+   "case": "n-050.md",
+   "sha256": "e81e68746a3aef2161213f509e8ea73cb253706c89739c407c5aabee9f2cf063",
+   "reported_upper_bound": "7.57142857142857",
+   "verified_upper_bound": "7.57142857142858",
+   "both_below_k": true
+  },
+  {
+   "k": 8,
+   "n": 52,
+   "case": "n-052.md",
+   "sha256": "feb785e634fb6c077c6555167b890b3a1827a381ffa488edcf48a8620003ce9f",
+   "reported_upper_bound": "7.70710678118654",
+   "verified_upper_bound": "7.70710678118654752440084436210485",
+   "both_below_k": true
+  },
+  {
+   "k": 9,
+   "n": 66,
+   "case": "n-066.md",
+   "sha256": "4c36ac4067b989884e51b25198ef34d5907e15d085dabf195cc57886b71c50ec",
+   "reported_upper_bound": "8.65685424949238",
+   "verified_upper_bound": "8.65685424949238019520675489683879",
+   "both_below_k": true
+  },
+  {
+   "k": 10,
+   "n": 84,
+   "case": "n-084.md",
+   "sha256": "a7c028b118951ce727487c90f95ad95282a148a658d5c32224a1d21aaa733c5b",
+   "reported_upper_bound": "9.69793479901492131",
+   "verified_upper_bound": "9.69793479901492131",
+   "both_below_k": true
+  },
+  {
+   "k": 11,
+   "n": 105,
+   "case": "n-105.md",
+   "sha256": "5af5cdef7aab40eed96457b117b389435562231ea764d4804cc8d616a793d7fb",
+   "reported_upper_bound": "10.7893037837429754",
+   "verified_upper_bound": "10.7893037837429754",
+   "both_below_k": true
+  },
+  {
+   "k": 12,
+   "n": 126,
+   "case": "n-126.md",
+   "sha256": "237d7bc29a6119354d39395e013136d4d2615222df420d77734b908abea853c5",
+   "reported_upper_bound": "11.7426406871192852",
+   "verified_upper_bound": "11.7426406871192852",
+   "both_below_k": true
+  },
+  {
+   "k": 13,
+   "n": 151,
+   "case": "n-151.md",
+   "sha256": "32c870207a1890302989b69c2e829bc43a7cec476c1057359c844c33476e50ba",
+   "reported_upper_bound": "12.82287565553229",
+   "verified_upper_bound": "12.82287565553230",
+   "both_below_k": true
+  },
+  {
+   "k": 14,
+   "n": 176,
+   "case": "n-176.md",
+   "sha256": "447d68c206dcad3d767f4c575bfdebc5ef250ef7b71a8147dd5f0ecbdc850a89",
+   "reported_upper_bound": "13.7958723184364073",
+   "verified_upper_bound": "13.7958723184364073",
+   "both_below_k": true
+  },
+  {
+   "k": 15,
+   "n": 205,
+   "case": "n-205.md",
+   "sha256": "2bd3629d480f87cfe34913c2c9ce4efd4cc7bebccdf371020194c4db80316fca",
+   "reported_upper_bound": "14.82445114612408",
+   "verified_upper_bound": "14.82445114612409",
+   "both_below_k": true
+  },
+  {
+   "k": 16,
+   "n": 236,
+   "case": "n-236.md",
+   "sha256": "b4c13d15eee2963c829623bbdf319c7684b4e349b33c61675348db170647297b",
+   "reported_upper_bound": "15.8619343906073587",
+   "verified_upper_bound": "15.8619343906073587",
+   "both_below_k": true
+  },
+  {
+   "k": 17,
+   "n": 268,
+   "case": "n-268.md",
+   "sha256": "a083bbf22b8b41b943e5ccb6d7b7b08fab9b029666dc9ed20d2724a0dd39aba2",
+   "reported_upper_bound": "16.8743617158738255",
+   "verified_upper_bound": "16.8743617158738255",
+   "both_below_k": true
+  },
+  {
+   "k": 18,
+   "n": 300,
+   "case": "n-300.md",
+   "sha256": "d30045b25eb6865808e34d1448c5ab37ea30859cdea2910c2a16328d688ff14a",
+   "reported_upper_bound": "17.82412338847854",
+   "verified_upper_bound": "17.82412338847855",
+   "both_below_k": true
+  },
+  {
+   "k": 18,
+   "n": 302,
+   "case": "n-302.md",
+   "sha256": "28bf2d007fe2ae8c1765563959c47d0a72221accbcf486c7675416f61674336e",
+   "reported_upper_bound": "17.870013850404464345",
+   "verified_upper_bound": "17.870013850404464345",
+   "both_below_k": true
+  }
+ ],
+ "all_below_k": true
+}

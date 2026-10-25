@@ -1,0 +1,56 @@
+{
+ "subcommand": "construction",
+ "range": [
+  6,
+  60000
+ ],
+ "pairs_k_b": 60167,
+ "all_checks_hold": true,
+ "delta_rule": "t = 1/b + delta, delta = 1/(b(b^2+1)(6 k_hi + 4b)), k_hi = floor((b+1)^2/2), divided by 8 until (a)-(d) and H(t) < 4 sqrt(2k) + 2 hold",
+ "pairs_needing_a_smaller_delta": 0,
+ "most_divisions_by_8": 0,
+ "least_bound_minus_w_float": {
+  "value": 0.04499200860641395,
+  "k": 59344,
+  "b": 345
+ },
+ "least_bound_minus_B_float": {
+  "value": 0.040295321439771215,
+  "k": 59858,
+  "b": 347
+ },
+ "near_end_rounding_loss_max": {
+  "value": "154033194800728178501866787218480731374279844348001/310752982606167568678499831340525531120295765738000",
+  "float": 0.49567728524730514,
+  "k": 59858,
+  "b": 347
+ },
+ "far_end_rounding_loss_max": {
+  "value": "49974014155586533/31904146849169920",
+  "float": 1.5663798938690865,
+  "k": 14,
+  "b": 5,
+  "band": "top"
+ },
+ "far_end_losses_above_3/2": 516,
+ "limit": {
+  "kmax": 20000,
+  "pairs": 20094,
+  "series_orders_used": {
+   "3": 20094
+  },
+  "least_B_minus_w_lim": {
+   "value": "8019401/78023840599",
+   "float": 0.00010278141832591078,
+   "k": 19705,
+   "b": 199,
+   "w_lim": 796
+  },
+  "B_minus_w_lim_nonpositive": [],
+  "w_lim_equals_w_at_chosen_t": 20094,
+  "w_lim_differs_from_w_at_chosen_t": [],
+  "w_lim_differs_count": 0
+ },
+ "cpu_seconds": 29.1
+}
+failures: 0
