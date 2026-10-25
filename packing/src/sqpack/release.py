@@ -9362,8 +9362,12 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "README.md swapped in: render_n11_optimality_review, "
             "render_n11_threshold_bound_review, render_packing_methods and "
             "render_n11_lower_bounds_explainer, with its pinned Chromium math pass, write "
-            "all 69 files byte-identical across the three. No PDF was printed; each prints "
-            "from that HTML. Retain v0.4.30, v0.1.11, v0.1.4 and v0.2.7."
+            "all 69 files byte-identical across the three. Measured again after merging "
+            "main 0785626cc (#815), at link revision a2a5748e: twice from this tree and "
+            "once with that main's three files swapped in, all 69 files byte-identical "
+            "across the three, and identical to the first measurement apart from the link "
+            "revision in source links. No PDF was printed; each prints from that HTML. "
+            "Retain v0.4.30, v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
 )
