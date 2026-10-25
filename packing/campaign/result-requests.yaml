@@ -8191,6 +8191,18 @@ issues:
       reported:
       - result: s29-minimal-polynomial
       - result: grade-c-local-minima
+    - url: https://github.com/jlevy/squares/issues/545#issuecomment-6399450535
+      date: '2026-10-25'
+      by: jlevy
+      kind: import
+      reported:
+      - result: s29-minimal-polynomial
+        id: T-246
+        verification: V0
+        confirmation: C0
+      - result: s29-minimal-polynomial
+        id: E-n029-evand-minpoly-7213-report
+      - result: grade-c-local-minima
     close_when: Both reports are recorded on main, and the replay and review are either run or
       priced with an owner decision.
   - number: 550
@@ -24447,7 +24459,18 @@ issues:
     - think-4l14
     - think-dd3v
     answer_bead: think-4l14
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/810#issuecomment-6399449157
+      date: '2026-10-25'
+      by: jlevy
+      kind: import
+      reported:
+      - result: n12-lean
+        id: T-245
+        verification: V0
+        confirmation: C0
+      - result: n12-lean
+        id: E-n012-jatloe-lean-report
     close_when: >-
       The import is on main and the resulting state is posted with the entry's id and rungs,
       and the statement audit, the mathematical review and the build that would raise its
@@ -24493,7 +24516,18 @@ issues:
     - think-10m1
     - think-jmb4
     answer_bead: think-jmb4
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/811#issuecomment-6399451997
+      date: '2026-10-25'
+      by: jlevy
+      kind: import
+      reported:
+      - result: s29-minimal-polynomial
+        id: T-246
+        verification: V0
+        confirmation: C0
+      - result: s29-minimal-polynomial
+        id: E-n029-evand-minpoly-7213-report
     close_when: Every item the tracker lists has landed, been declined or moved to an issue of its
       own.
     notes: >-
