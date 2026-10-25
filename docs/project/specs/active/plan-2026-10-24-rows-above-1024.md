@@ -576,6 +576,19 @@ nothing.
 - **Price:** under 0.1 CPU-hours (tests, the gate measurements, and the build to 10,500,
   which takes 0.01 CPU-seconds).
 
+**W8, the two-strip checker (think-clgp).** #799 reports Mohsen Karimi’s 683 rows at
+1184 to 3775 as parameters of a two-strip L-packing, with no certificate file and no
+parent, so `construction_checker` cannot read them.
+
+- [x] `devtools.two_strip_checker` decides such a row exactly from its parameters, with
+  seven controls and a write-out builder.
+  It agrees with both routes at five written-out counts and with Ryu’s Theorem 1.3
+  packings.
+- [x] #799’s packet `karimi-two-strip-2026-10-24` and its requests entry, triage
+  pending.
+- **Price:** about 0.02 CPU-hours: 7 CPU-seconds to decide all 683 with their controls,
+  and 73 for the five counts on both routes with six controls each.
+
 ### Phase 2: The Records, in Report Order
 
 Each records slice is one pull request, opened after the one before it merges.
@@ -588,6 +601,14 @@ Each is one item under the cap (think-lh7d).
 | R3 | Lifts #763’s and `964ee2b`’s windows. #763’s 233, `964ee2b`’s 6 unrequested rows below every earlier report, and `43f666c`’s 831 recipes. Replays 850 and any other parent that is not a row | R2 merged; #789 and think-gn29’s import to 1024 merged, since they retain the parents and replay the parents that are rows | about 0.1 | 6 certificates, 0.06 CPU-hours (think-cnn7); 850, about 10 CPU-seconds; recipes take seconds |
 | R4 | Held rows after the answers: deletions (think-kzme), the four catalogue counts (N1), recipe kinds the checker does not read (think-zkxy, Fang’s composites), and per-row credit (D5) | the answers | seconds | R1 decided the positives; otherwise about 12 CPU-seconds per certificate above 1024, the triage’s average, so under 0.6 for all 160 deletions |
 | **Total** |  |  | **about 36** | within N2 |
+
+**R5, #799’s rows (think-5dc3).** #799 enters R1’s walk as a report, and its rows land
+in a slice of their own after R1 and W8, each decided by `two_strip_checker`. R5 does
+not need R2 or R3: the chain passes over their unlanded rows, which are written as
+superseded when they land.
+The triage priced it at about 0.8 CPU-hours, an item of its own outside N2’s 36: the
+checker on every row, the written-out positives on both routes, and six controls at one
+count per K.
 
 **The stratified 10% (R2).** Within each thousands folder, the recorded rows are sorted
 by count. Every tenth row is taken from a start the code fixes, about 432 of 4,319 in

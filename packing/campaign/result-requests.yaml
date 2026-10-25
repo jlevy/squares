@@ -23962,3 +23962,72 @@ issues:
       The twelve rows are recorded in report order with their replay, 372 and 412 have their
       disposition with 43f666c's rows there on main (#800, think-gn29), and the reply on main says
       so; nothing the author asked for is queued.
+  - number: 799
+    title: 'Result registration: 683 new upper bounds, n in [1184, 3775] — Karimi two-strip construction'
+    author: mohsensbu-jpg
+    opened: '2026-10-24'
+    state: open
+    kind: result-report
+    triage: pending
+    summary: >-
+      Mohsen Karimi (ORCID 0009-0004-1055-8267) reports 683 upper bounds for s(n) at n = 1184
+      to 3775, each below the grid side ceil(sqrt n), 85 of them at counts where the least
+      earlier statement is the grid. The construction is two strips of squares tilted by
+      a small angle with rational tan(a/2): mH rows on the bottom wall and mV columns on
+      the right wall, around a (K - mV) x (K - mH) axis-parallel grid. Each square has an
+      exact side S < K = ceil(sqrt n), a decimal of at most ten places. The publication is
+      Zenodo record 10.5281/zenodo.23624433 v1.0 (2026-10-24T19:32:47Z; CC BY 4.0 data,
+      MIT code). Its karimi_two_strip_records_v1_lite.zip (13,329 bytes, SHA-256
+      0d4f89b0...78c5) holds records.csv, the 683 exact sides with their seven
+      construction parameters, together with regenerate.py and a README, and no
+      certificate. The issue's attachment of 20:08:23Z is the same file, byte for byte.
+      The same text was opened as Mishapolk/square-packing-records#1 at 19:44:35Z, five
+      minutes before this issue; that repository's main is still 7e82c64. The construction
+      is Sungjoon Ryu's L-shaped packing (his Theorem 1.3) with independent strip widths,
+      angles and phases, which the source does not cite. Triaged on 24 October 2026
+      (think-5dc3), read-only. Every side is below Göbel's construction and below every
+      earlier report the walk above 1024 reads: #715; Couzo's indexes at 5a299b4 and
+      6b7391d, 964ee2b and 43f666c; #732 at 17cc220; #763; Fang's bef5c42 and #797. The
+      margins run from 5.6e-4 (2363) to 8.8e-2, with no restatement and nothing
+      undecided. Kaggle leaderboard sides below it at 26 counts state no coordinates, so
+      they are not reports. Retained on 25 October 2026 (think-clgp) as the
+      karimi-two-strip-2026-10-24 packet: v1.0's three archive members and its
+      issue_text-1.md, with the issue. The maintained devtools.two_strip_checker decides
+      all 683 rows exactly from their parameters, each with its seven controls refused
+      (receipts/two-strip-decisions.json), and the certificates it writes out at 1184,
+      1193, 1813, 2363 and 3775 pass both maintained exact routes with all six controls of
+      each refused (receipts/replay-sample.json). The rows wait on think-llit's walk above
+      1024. Claude assistance disclosed.
+    read_through: '2026-10-24T20:08:23Z'
+    results:
+    - key: rows-1184-3775
+      claim: >-
+        683 upper bounds s(n) <= S at n = 1184 to 3775, each at the exact side records.csv
+        states in Zenodo 10.5281/zenodo.23624433 v1.0, by the two-strip construction with
+        the parameters K, mH, tH, phH, mV, tV and phV in the same row. The issue's
+        six-place prints round to nearest and are not upper bounds (2342: 48.900000
+        against 48.90000012).
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus and above 1024: rows of source-coverage.yaml once
+        think-llit's walk above 1024 records them, not register entries. By the triage of
+        24 October, every side is below Göbel's construction and every earlier report at
+        its count, so the walk would record all 683, each superseding the row recorded
+        before it. The source publishes parameters and no certificate file. By the
+        owner's D2 answer (think-f2io), each is a row once a checker this project
+        maintains decides it, and devtools.two_strip_checker decides all 683 from their
+        parameters (the karimi-two-strip-2026-10-24 packet, receipts/two-strip-decisions.json).
+      queued: true
+      bead: think-5dc3
+      blocked_on:
+      - think-llit
+    beads:
+    - think-5dc3
+    - think-llit
+    - think-clgp
+    answer_bead: think-5dc3
+    replies: []
+    close_when: >-
+      The 683 rows are recorded in report order by the walk above 1024, each decided
+      exactly by a maintained checker of the two-strip construction, and the reply on main
+      says so; nothing the author asked for is queued.

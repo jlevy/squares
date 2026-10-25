@@ -1,0 +1,702 @@
+"""Decide a two-strip L-packing exactly from its parameters (#799, think-clgp).
+
+Mohsen Karimi's issue #799 reports 683 upper bounds at n = 1184 to 3775, published as
+Zenodo record 10.5281/zenodo.23624433, V1.0. No row has a certificate file: each states
+a side S, the integer K just above it, and the parameters of one packing. A box of side S
+holds two strips of unit squares tilted by small angles, mH rows on the bottom wall and
+mV rows standing on the right wall, and the rest is an axis-parallel grid. This is
+Sungjoon Ryu's L-shaped packing (his Theorem 1.3, `cases.asymptotic.ryu_upper_l_packing`)
+with the two strips' widths, angles and phases chosen independently. By the owner's D2
+answer (think-f2io) such a row is a row once "decided exactly from the recipe by a
+checker this project maintains"; this module is that checker for the two-strip kind.
+`devtools.construction_checker` decides the recipes that build on a replayed parent, and
+a two-strip packing has no parent.
+
+**The construction.** For a strip tilted by a with t = tan(a/2), 0 < t < 1, let
+c = (1 - t^2)/(1 + t^2), s = 2t/(1 + t^2), e = (c + s)/2 and p = 1/c. A strip of m rows
+and length W holds, in row j = 0 .. m - 1, unit squares turned by -a with centres
+(x0_j + k p, e + j c) for k = 0, 1, ... while x0_j + k p + e <= W, where
+x0_j = e + ((ph p + j s) mod p) and ph in [0, 1) is the strip's phase.
+
+- The H strip: mH rows of tilt tH and phase phH, length S - wV, on the bottom wall.
+- The V strip: mV rows of tilt tV and phase phV, length S, the same construction turned
+  by 90 degrees, (x, y) -> (S - y, x), on the right wall; wV = mV cV + sV.
+- The grid: K - mV columns and K - mH rows of axis-parallel unit squares, centres
+  (i + 1/2, S - j - 1/2), in [0, K - mV] x [S - (K - mH), S].
+
+**The lemma** (`LEMMA`).
+
+- *Within a strip.* Two of its squares have centres differing by dj (s, c) + N (p, 0)
+  for integers dj and N, since the rows' first centres differ by dj s modulo p. Along
+  the squares' own axes (c, -s) and (s, c) that difference is (N, dj + N s/c), so two
+  distinct squares are interior-disjoint: |N| >= 1 when N != 0, and |dj| >= 1 when
+  N = 0. A unit square turned by a has half-width e in x and in y, so every square lies
+  in [0, W] x [0, m c + s]: x0_j - e >= 0, the last centre plus e is at most W, and row
+  j spans heights j c to (j + 1) c + s.
+- *Between regions.* The H strip lies in [0, S - wV] x [0, hH], hH = mH cH + sH; the V
+  strip in [S - wV, S] x [0, S]; the grid in [0, K - mV] x [S - (K - mH), S]. Their
+  interiors are disjoint, and all three lie in [0, S]^2, when hH <= S - (K - mH) and
+  K - mV <= S - wV (the fit inequalities), with 1 <= mH, mV <= K - 1.
+- *Capacity.* Row j of a strip holds floor((W - e - x0_j) c) + 1 squares when
+  W - e - x0_j >= 0 and none otherwise; the grid holds (K - mV)(K - mH). Deleting
+  squares from a packing leaves a packing, so every n up to the capacity is packed.
+
+`decide` holds a row to the lemma in `Fraction`s and returns the capacity, each part's
+count, the two slacks of the fit inequalities and the verdict, or raises
+`TwoStripRefusedError` saying why not. It refuses any other kind; a tilt outside (0, 1);
+a strip of no rows or of K or more; a phase outside [0, 1); a side that fails either fit
+inequality; and a count above the capacity. Whether S < K and whether K is the ceiling
+of sqrt(n) are reported, not required: they say whether the bound beats the grid, not
+whether the packing is one.
+
+`mutants` are a row's negative controls (`CONTROLS`), each of which `decide` must
+refuse, and `controls` decides them: the count one above the capacity; the side
+10^-15 below the binding fit inequality (W7's "one unit below" carries no meaning here,
+since #799's sides sit at least 1.13e-8 above the fit, and a side 10^-12 lower is still
+a packing); the H strip one row deeper at the original capacity, which loses squares
+whenever the V fit is tight, as in every #799 row (an added strip row of length
+S - wV holds fewer than the K - mV squares of the grid row it replaces when
+(S - wV - K + mV) c < (K - mV)(1 - c) + s (c - s)); no tilt (tH = 0); a right angle
+(tV = 1); the grid one column and row larger at the same side; and an unknown kind. A
+control `decide` accepts is reported, ``refused`` False, so a check fails rather than
+passing it over.
+
+`write_out` builds the packing the lemma states, as a certificate in Evan Daniel's
+``n S`` / ``x y t`` format with t = tan(theta/2): the H strip's squares row by row, the V
+strip's, then the grid's column by column, the surplus over n dropped from the end of
+the grid, as the source's README says its program does. The record does not run the
+source's ``regenerate.py``; `write_out` is this module's own builder, written from the
+README and the issue.
+
+**#799's packet.** ``karimi-two-strip-2026-10-24`` retains the record's three zip members
+and its ``issue_text-1.md``, written by ``devtools.capture_web_source zenodo``; `custody`
+holds them to the capture's digests, and `records` reads the 683 rows. The receipts are:
+
+- ``receipts/two-strip-decisions.json`` (``decide-all``): every row decided, every
+  control refused, and the SHA-256 and size of each written-out certificate, which the
+  record does not retain (OR-18: they are derived, and `write_out` writes them again
+  byte for byte). It records no row of the coverage register.
+- ``receipts/replay-sample.json`` (``replay-sample``): the cross-check. At five counts,
+  1184, 1193, 1813, 2363 and 3775, the written-out certificate is decided on both exact
+  routes of `devtools.couzo_678_replay` with its six controls, as
+  `beyond_horizon_replay.decide_row` decides a row, so the lemma's verdict and the
+  routes' agree where both are run.
+
+``check`` reads both receipts back: every decision and control derived again, the
+digests at the sample written out again (every count's with ``--digests``), and with
+``--replay`` the sample decided again on both routes.
+
+From ``packing/``, with the project interpreter::
+
+    python -m devtools.two_strip_checker decide-all
+    python -m devtools.two_strip_checker replay-sample [--n 1184 ...] [--workers 2]
+    python -m devtools.two_strip_checker check [--digests] [--replay]
+
+A finite packing certifies an upper bound and nothing more. Whether a row is below every
+earlier report at its count is the walk's to decide, not this module's.
+"""
+
+from __future__ import annotations
+
+import argparse
+import csv
+import hashlib
+import io
+import json
+import math
+import platform
+import re
+import time
+from collections.abc import Callable, Mapping, Sequence
+from concurrent.futures import ProcessPoolExecutor
+from dataclasses import dataclass, replace
+from datetime import UTC, datetime
+from fractions import Fraction
+from pathlib import Path
+from typing import Any
+
+from strif import atomic_output_file
+
+from devtools import evand_exact_certificates as legacy
+from devtools.retained_data import read_retained_bytes
+from sqpack.retained_json import dumps as retained_dumps
+
+ROOT = Path(__file__).resolve().parents[1]
+REPO = ROOT.parent
+
+KIND = "two-strip"
+DECIDED = "decided"
+#: The lemma a decision rests on, as a receipt states it.
+LEMMA = (
+    "Two squares of one strip, turned by -a with t = tan(a/2), c = (1 - t^2)/(1 + t^2), "
+    "s = 2t/(1 + t^2), have centres differing by dj (s, c) + N (1/c, 0), which along "
+    "their axes is (N, dj + N s/c), so distinct squares are interior-disjoint; a strip of "
+    "m rows of length W lies in [0, W] x [0, m c + s] when each centre is at least "
+    "e = (c + s)/2 from both ends; the H strip in [0, S - wV] x [0, hH], the V strip in "
+    "[S - wV, S] x [0, S] and the (K - mV) x (K - mH) grid in [0, K - mV] x "
+    "[S - (K - mH), S] have disjoint interiors inside [0, S]^2 when hH <= S - (K - mH) and "
+    "K - mV <= S - wV; row j holds floor((W - e - x0_j) c) + 1 squares, and deleting "
+    "squares leaves a packing"
+)
+#: The controls every row carries (`mutants`), in order.
+CONTROLS = (
+    "count above the capacity",
+    "side below the binding fit",
+    "H strip one row deeper",
+    "no tilt",
+    "a right angle",
+    "grid one larger",
+    "unknown kind",
+)
+#: How far below the binding fit inequality the side control puts the side.
+FIT_MARGIN = Fraction(1, 10**15)
+
+# --------------------------------------------------------------------------- #799's packet
+
+PACKET = ROOT / "resources/web/karimi-two-strip-2026-10-24"
+RECORD = 23624433
+DOI = "10.5281/zenodo.23624433"
+ISSUE = "https://github.com/jlevy/squares/issues/799"
+CAPTURE = PACKET / f"zenodo/zenodo-{RECORD}-receipt.json"
+MEMBERS = PACKET / f"zenodo/zenodo-{RECORD}.sha256"
+EXTRACTED = PACKET / f"zenodo/zenodo-{RECORD}"
+RECORDS = EXTRACTED / "records.csv"
+#: The deposit's one archive, and the member holding the rows, by the digests the stage 1
+#: triage read (think-5dc3) and the capture of 25 October 2026 read again.
+ARCHIVE = "karimi_two_strip_records_v1_lite.zip"
+ARCHIVE_SHA256 = "0d4f89b0b9353af405139cbb249831edd4f480cece86e219431ac924546978c5"
+RECORDS_SHA256 = "81f315616838e083b2db2af59220c8f52c76e537b09a6778948f723672fcfa69"
+#: The deposit's issue text, kept beside the members (not an archive member).
+ISSUE_TEXT = "issue_text-1.md"
+ROWS = 683
+DECISIONS = PACKET / "receipts/two-strip-decisions.json"
+REPLAY = PACKET / "receipts/replay-sample.json"
+DECISIONS_FORMAT = "two-strip-decisions-v1"
+REPLAY_FORMAT = "two-strip-replay-sample-v1"
+#: The counts the stage 1 triage replayed, from 1184 to 3775: the cross-check's sample.
+SAMPLE = (1184, 1193, 1813, 2363, 3775)
+
+_RATIONAL = re.compile(r"[0-9]+(/[1-9][0-9]*)?")
+_INTEGER = re.compile(r"[1-9][0-9]*")
+_DECIMAL = re.compile(r"[0-9]+\.[0-9]+")
+
+
+class TwoStripRefusedError(ValueError):
+    """A row the checker does not decide, with the reason."""
+
+
+class CustodyError(ValueError):
+    """The packet's files are not the ones the capture pinned."""
+
+
+def _refuse(condition: object, message: str) -> None:
+    if not condition:
+        raise TwoStripRefusedError(message)
+
+
+@dataclass(frozen=True, slots=True)
+class TwoStrip:
+    """One two-strip packing as a row states it: the count, the side, the integer K, and
+    each strip's rows, tilt t = tan(a/2) and phase (``h`` the bottom strip, ``v`` the
+    right-hand one). ``k`` is the record's K."""
+
+    n: int
+    side: Fraction
+    k: int
+    rows_h: int
+    tilt_h: Fraction
+    phase_h: Fraction
+    rows_v: int
+    tilt_v: Fraction
+    phase_v: Fraction
+    kind: str = KIND
+
+
+@dataclass(frozen=True, slots=True)
+class StripRow:
+    """One row of a strip, in the strip's own frame: the first centre along the strip,
+    the centres' height across it, and how many squares the row holds."""
+
+    first: Fraction
+    height: Fraction
+    count: int
+
+
+def basis(tilt: Fraction) -> tuple[Fraction, Fraction]:
+    """``(cos a, sin a)`` for ``tilt = tan(a/2)``, exactly."""
+    square = tilt * tilt
+    return (1 - square) / (1 + square), 2 * tilt / (1 + square)
+
+
+def thickness(tilt: Fraction, rows: int) -> Fraction:
+    """How far a strip of ``rows`` rows reaches from its wall: m c + s."""
+    cos, sin = basis(tilt)
+    return rows * cos + sin
+
+
+def strip(tilt: Fraction, rows: int, length: Fraction, phase: Fraction) -> tuple[StripRow, ...]:
+    """A strip's rows by the construction: row j's first centre is
+    e + ((ph p + j s) mod p) along the strip, at height e + j c, and the row holds every
+    square whose centre is at most ``length`` - e along."""
+    cos, sin = basis(tilt)
+    half, pitch = (cos + sin) / 2, 1 / cos
+    found = []
+    for row in range(rows):
+        first = half + (phase * pitch + row * sin) % pitch
+        room = length - half - first
+        count = math.floor(room * cos) + 1 if room >= 0 else 0
+        found.append(StripRow(first, half + row * cos, count))
+    return tuple(found)
+
+
+def binding_side(row: TwoStrip) -> Fraction:
+    """The least side at which both fit inequalities hold, for the row's K and strips."""
+    return max(
+        row.k - row.rows_h + thickness(row.tilt_h, row.rows_h),
+        row.k - row.rows_v + thickness(row.tilt_v, row.rows_v),
+    )
+
+
+def decide(row: TwoStrip) -> dict[str, Any]:
+    """The row decided exactly by the lemma; `TwoStripRefusedError` says why not."""
+    _refuse(row.kind == KIND, f"kind {row.kind!r}: not a two-strip packing")
+    _refuse(row.n >= 1, f"n = {row.n}: no squares to pack")
+    _refuse(row.side > 0, f"the side {row.side} is not positive")
+    for name, tilt in (("tH", row.tilt_h), ("tV", row.tilt_v)):
+        _refuse(0 < tilt < 1, f"{name} = {tilt}: a strip's tan(a/2) must lie in (0, 1)")
+    for name, rows in (("mH", row.rows_h), ("mV", row.rows_v)):
+        _refuse(0 < rows < row.k, f"{name} = {rows}: a strip has 1 to K - 1 = {row.k - 1} rows")
+    for name, phase in (("phH", row.phase_h), ("phV", row.phase_v)):
+        _refuse(0 <= phase < 1, f"{name} = {phase}: a phase lies in [0, 1)")
+    high = thickness(row.tilt_h, row.rows_h)
+    wide = thickness(row.tilt_v, row.rows_v)
+    slack_h = row.side - (row.k - row.rows_h) - high
+    slack_v = row.side - wide - (row.k - row.rows_v)
+    _refuse(
+        slack_h >= 0,
+        f"the H strip, {float(high):.12g} high, overlaps the grid by {float(-slack_h):.3e}: "
+        "mH cH + sH > S - (K - mH)",
+    )
+    _refuse(
+        slack_v >= 0,
+        f"the V strip, {float(wide):.12g} wide, overlaps the grid by {float(-slack_v):.3e}: "
+        "K - mV > S - (mV cV + sV)",
+    )
+    held_h = sum(
+        item.count for item in strip(row.tilt_h, row.rows_h, row.side - wide, row.phase_h)
+    )
+    held_v = sum(item.count for item in strip(row.tilt_v, row.rows_v, row.side, row.phase_v))
+    grid = (row.k - row.rows_v) * (row.k - row.rows_h)
+    held = held_h + held_v + grid
+    _refuse(row.n <= held, f"n = {row.n} is above the capacity {held}")
+    return {
+        "n": row.n,
+        "kind": row.kind,
+        "side": legacy.literal(row.side),
+        "k": row.k,
+        "capacity": held,
+        "h_strip": held_h,
+        "v_strip": held_v,
+        "grid": grid,
+        "surplus": held - row.n,
+        "h_slack": legacy.literal(slack_h),
+        "v_slack": legacy.literal(slack_v),
+        "side_below_k": row.side < row.k,
+        "k_is_ceil_sqrt_n": row.k == math.isqrt(row.n - 1) + 1,
+        "verdict": DECIDED,
+    }
+
+
+def capacity(row: TwoStrip) -> int:
+    """The row's capacity, by `decide` at its own count."""
+    return int(decide(replace(row, n=1))["capacity"])
+
+
+def mutants(row: TwoStrip) -> list[tuple[str, TwoStrip]]:
+    """A row's negative controls, each a change `decide` must refuse (`CONTROLS`)."""
+    held = capacity(row)
+    changed = [
+        replace(row, n=held + 1),
+        replace(row, side=binding_side(row) - FIT_MARGIN),
+        replace(row, rows_h=row.rows_h + 1, n=held),
+        replace(row, tilt_h=Fraction(0)),
+        replace(row, tilt_v=Fraction(1)),
+        replace(row, k=row.k + 1),
+        replace(row, kind="three-strip"),
+    ]
+    return list(zip(CONTROLS, changed, strict=True))
+
+
+def controls(row: TwoStrip) -> list[dict[str, Any]]:
+    """Each control (`mutants`) and the reason `decide` refused it; ``refused`` False
+    marks one it accepted, which a check refuses."""
+    found = []
+    for name, changed in mutants(row):
+        try:
+            decide(changed)
+        except TwoStripRefusedError as error:
+            found.append({"control": name, "refused": True, "reason": str(error)})
+        else:
+            found.append({"control": name, "refused": False, "reason": ""})
+    return found
+
+
+def poses(row: TwoStrip) -> list[legacy.Pose]:
+    """Every square the construction places, decided or not: the H strip row by row,
+    the V strip turned onto the right wall, then the grid column by column."""
+    wide = thickness(row.tilt_v, row.rows_v)
+    placed: list[legacy.Pose] = []
+    pitch_h = 1 / basis(row.tilt_h)[0]
+    for item in strip(row.tilt_h, row.rows_h, row.side - wide, row.phase_h):
+        placed += [
+            legacy.Pose(item.first + k * pitch_h, item.height, -row.tilt_h)
+            for k in range(item.count)
+        ]
+    pitch_v = 1 / basis(row.tilt_v)[0]
+    for item in strip(row.tilt_v, row.rows_v, row.side, row.phase_v):
+        placed += [
+            legacy.Pose(row.side - item.height, item.first + k * pitch_v, -row.tilt_v)
+            for k in range(item.count)
+        ]
+    half = Fraction(1, 2)
+    placed += [
+        legacy.Pose(half + i, row.side - half - j, Fraction(0))
+        for i in range(row.k - row.rows_v)
+        for j in range(row.k - row.rows_h)
+    ]
+    return placed
+
+
+def write_out(row: TwoStrip) -> legacy.Certificate:
+    """The packing the lemma states for a row it decides: the first n squares `poses`
+    places, so the surplus is dropped from the end of the grid."""
+    decide(row)
+    return legacy.Certificate(row.n, row.side, tuple(poses(row)[: row.n]))
+
+
+def certificate_text(row: TwoStrip) -> str:
+    """A decided row's written-out certificate, ``n S`` then ``x y t`` rows."""
+    return legacy.serialize(write_out(row))
+
+
+# --------------------------------------------------------------------------- the packet
+
+
+def _sha256(data: bytes) -> str:
+    return hashlib.sha256(data).hexdigest()
+
+
+def _read(path: Path) -> Any:
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def custody() -> None:
+    """Hold the packet to the capture: the archive and the issue text by the record's
+    files, each kept member by the archive's member list and the capture's digest, and
+    the rows' member by the digest the triage read."""
+    capture = _read(CAPTURE)
+    if (capture.get("record"), capture.get("doi")) != (RECORD, DOI):
+        raise CustodyError(f"the capture is not record {RECORD}")
+    files = {item["key"]: item for item in capture["files"]}
+    if files.get(ARCHIVE, {}).get("sha256") != ARCHIVE_SHA256:
+        raise CustodyError(f"{ARCHIVE} is not the archive the triage pinned")
+    listed = {}
+    for line in MEMBERS.read_text(encoding="utf-8").splitlines():
+        digest, _, name = line.partition("  ")
+        listed[name.removeprefix("./")] = digest
+    kept = {item["member"]: item["sha256"] for item in capture["extracted"]}
+    if kept.get(RECORDS.name) != RECORDS_SHA256:
+        raise CustodyError(f"{RECORDS.name} is not the member the triage pinned")
+    kept[ISSUE_TEXT] = files.get(ISSUE_TEXT, {}).get("sha256", "")
+    for name, digest in kept.items():
+        if name != ISSUE_TEXT and listed.get(name) != digest:
+            raise CustodyError(f"{name}: the capture and the archive's member list differ")
+        if _sha256(read_retained_bytes(EXTRACTED / name)) != digest:
+            raise CustodyError(f"{name}: the retained bytes are not the captured ones")
+    present = sorted(path.name for path in EXTRACTED.iterdir())
+    if present != sorted(kept):
+        raise CustodyError(f"the packet keeps {present}, the capture {sorted(kept)}")
+
+
+def _literal(text: str, pattern: re.Pattern[str], where: str) -> str:
+    if pattern.fullmatch(text) is None:
+        raise CustodyError(f"{where}: {text!r} is not the literal the format states")
+    return text
+
+
+def row_from_record(item: Mapping[str, str]) -> TwoStrip:
+    """A row of ``records.csv``: ``n``, ``new_side_exact`` and ``K``, ``mH``, ``tH``,
+    ``phH``, ``mV``, ``tV``, ``phV``, each literal matched whole first. The decimal
+    ``new_side`` must be the exact side written out, so the table states one side."""
+    where = f"records.csv n={item.get('n')}"
+
+    def whole(name: str) -> int:
+        return int(_literal(item[name], _INTEGER, where))
+
+    def rational(name: str) -> Fraction:
+        return Fraction(_literal(item[name], _RATIONAL, where))
+
+    side = rational("new_side_exact")
+    if Fraction(_literal(item["new_side"], _DECIMAL, where)) != side:
+        raise CustodyError(f"{where}: the decimal side is not the exact side")
+    return TwoStrip(
+        n=whole("n"),
+        side=side,
+        k=whole("K"),
+        rows_h=whole("mH"),
+        tilt_h=rational("tH"),
+        phase_h=rational("phH"),
+        rows_v=whole("mV"),
+        tilt_v=rational("tV"),
+        phase_v=rational("phV"),
+    )
+
+
+def records() -> list[TwoStrip]:
+    """#799's rows, from the retained ``records.csv`` once `custody` holds."""
+    custody()
+    text = read_retained_bytes(RECORDS).decode("utf-8")
+    rows = [row_from_record(item) for item in csv.DictReader(io.StringIO(text, newline=""))]
+    if len(rows) != ROWS or len({row.n for row in rows}) != ROWS:
+        raise CustodyError(f"records.csv holds {len(rows)} rows, not {ROWS} distinct counts")
+    return rows
+
+
+# --------------------------------------------------------------------------- the receipts
+
+
+def _write(path: Path, value: Any) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with atomic_output_file(path) as temporary:
+        temporary.write_text(retained_dumps(value, sort_keys=True), encoding="utf-8")
+
+
+def _environment() -> dict[str, str]:
+    return {
+        "python": platform.python_version(),
+        "implementation": platform.python_implementation(),
+        "machine": platform.machine(),
+    }
+
+
+def _now() -> str:
+    return datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+
+def decision_row(row: TwoStrip, *, digest: bool = True) -> dict[str, Any]:
+    """One row of the decisions receipt: the decision, whether every control was refused,
+    and, with ``digest``, the written-out certificate's SHA-256 and size."""
+    found = decide(row)
+    checked = controls(row)
+    found["controls_refused"] = sum(1 for item in checked if item["refused"])
+    if digest:
+        text = certificate_text(row).encode("utf-8")
+        found["certificate_sha256"] = _sha256(text)
+        found["certificate_bytes"] = len(text)
+    return found
+
+
+def decisions_summary(
+    rows: Sequence[TwoStrip], found: Sequence[dict[str, Any]]
+) -> dict[str, Any]:
+    """Counts over the decisions, and each control's refusals with its reason at the
+    first row."""
+    first = controls(rows[0])
+    tallies: dict[str, int] = dict.fromkeys(CONTROLS, 0)
+    for row in rows:
+        for item in controls(row):
+            tallies[item["control"]] += item["refused"]
+    return {
+        "rows": len(found),
+        "decided": sum(1 for item in found if item["verdict"] == DECIDED),
+        "squares": sum(item["n"] for item in found),
+        "surplus_zero": sum(1 for item in found if item["surplus"] == 0),
+        "surplus_most": max(item["surplus"] for item in found),
+        "side_below_k": sum(1 for item in found if item["side_below_k"]),
+        "k_is_ceil_sqrt_n": sum(1 for item in found if item["k_is_ceil_sqrt_n"]),
+        "least_h_slack": f"{min(Fraction(item['h_slack']) for item in found):.6e}",
+        "least_v_slack": f"{min(Fraction(item['v_slack']) for item in found):.6e}",
+        "controls": {
+            item["control"]: {
+                "refused": tallies[item["control"]],
+                "first_reason": item["reason"],
+            }
+            for item in first
+        },
+    }
+
+
+def decide_all() -> dict[str, Any]:
+    """Decide every row of #799 with its controls and write the decisions receipt."""
+    rows = records()
+    started, cpu = _now(), time.process_time()
+    found = [decision_row(row) for row in rows]
+    receipt = {
+        "format": DECISIONS_FORMAT,
+        "issue": ISSUE,
+        "doi": DOI,
+        "packet": PACKET.relative_to(REPO).as_posix(),
+        "records": RECORDS.relative_to(REPO).as_posix(),
+        "records_sha256": RECORDS_SHA256,
+        "checker": "packing/devtools/two_strip_checker.py",
+        "lemma": LEMMA,
+        "controls": list(CONTROLS),
+        "certificates": (
+            "written out by write_out and serialized in the n S / x y t format; not "
+            "retained, each pinned here by its SHA-256 and size"
+        ),
+        "environment": _environment(),
+        "started_utc": started,
+        "cpu_seconds": round(time.process_time() - cpu, 1),
+        "rows": found,
+        "summary": decisions_summary(rows, found),
+    }
+    _write(DECISIONS, receipt)
+    return receipt
+
+
+def replay_row(n: int) -> dict[str, Any]:
+    """One count of the sample: the row decided by the lemma, its certificate written out
+    and decided on both routes of `devtools.couzo_678_replay`, and the six controls."""
+    # The replay module costs about two seconds to import; the checker needs none of it.
+    from devtools import couzo_678_replay as base  # noqa: PLC0415
+
+    row = next(row for row in records() if row.n == n)
+    found = decide(row)
+    cert = write_out(row)
+    text = legacy.serialize(cert).encode("utf-8")
+    started = time.process_time()
+    result = base.decide(base.geometry(cert))
+    positive = time.process_time()
+    checked = base.decide_controls(cert)
+    ended = time.process_time()
+    return {
+        "n": n,
+        "capacity": found["capacity"],
+        "certificate_sha256": _sha256(text),
+        "certificate_bytes": len(text),
+        "exact_side": legacy.literal(cert.side),
+        "verified": result["passed"],
+        "decision": result,
+        "controls": checked,
+        "cpu_seconds": {
+            "positive": round(positive - started, 2),
+            "controls": round(ended - positive, 2),
+        },
+    }
+
+
+def replay_sample(counts: Sequence[int], workers: int) -> dict[str, Any]:
+    """Replay the sample's certificates on both routes and write the replay receipt."""
+    from devtools import couzo_678_replay as base  # noqa: PLC0415
+
+    started, wall = _now(), time.monotonic()
+    with ProcessPoolExecutor(max_workers=workers) as pool:
+        rows = list(pool.map(replay_row, counts))
+    receipt = {
+        "format": REPLAY_FORMAT,
+        "issue": ISSUE,
+        "doi": DOI,
+        "packet": PACKET.relative_to(REPO).as_posix(),
+        "checker": "packing/devtools/two_strip_checker.py",
+        "routes": "packing/devtools/couzo_678_replay.py (decide and decide_controls)",
+        "filter_lemma": base.FILTER_LEMMA,
+        "controls": list(base.CONTROLS),
+        "environment": _environment(),
+        "started_utc": started,
+        "wall_seconds": round(time.monotonic() - wall, 1),
+        "workers": workers,
+        "rows": rows,
+    }
+    _write(REPLAY, receipt)
+    return receipt
+
+
+def stable(row: Mapping[str, Any]) -> dict[str, Any]:
+    """A replay row without its timings."""
+    copy = json.loads(json.dumps(row))
+    copy.pop("cpu_seconds", None)
+    copy["decision"].pop("cpu_seconds", None)
+    return copy
+
+
+def check(*, digests: bool = False, replay: bool = False) -> list[str]:
+    """Problems with the two receipts against the packet; empty when they hold."""
+    from devtools import couzo_678_replay as base  # noqa: PLC0415
+
+    rows = records()
+    receipt = _read(DECISIONS)
+    problems = []
+    if (receipt["format"], receipt["records_sha256"], receipt["lemma"]) != (
+        DECISIONS_FORMAT,
+        RECORDS_SHA256,
+        LEMMA,
+    ) or receipt["controls"] != list(CONTROLS):
+        problems.append("the decisions receipt's header is not this checker's")
+    stored = receipt["rows"]
+    if [item["n"] for item in stored] != [row.n for row in rows]:
+        return [*problems, "the decisions receipt's rows are not the records'"]
+    for row, kept in zip(rows, stored, strict=True):
+        wanted = decision_row(row, digest=digests or row.n in SAMPLE)
+        if {key: kept.get(key) for key in wanted} != wanted:
+            problems.append(f"n={row.n}: the decision differs from the receipt")
+        if kept["controls_refused"] != len(CONTROLS):
+            problems.append(f"n={row.n}: a control was accepted")
+    if receipt["summary"] != decisions_summary(rows, stored):
+        problems.append("the decisions summary does not match the rows")
+    sample = _read(REPLAY)
+    if [item["n"] for item in sample["rows"]] != list(SAMPLE):
+        return [*problems, "the replay receipt's counts are not the sample"]
+    if sample["controls"] != list(base.CONTROLS):
+        problems.append("the replay receipt's controls are not the routes' six")
+    by_n = {item["n"]: item for item in stored}
+    for kept in sample["rows"]:
+        n = kept["n"]
+        if not kept["verified"]:
+            problems.append(f"n={n}: the written-out certificate failed a route")
+        if [item["control"] for item in kept["controls"]] != list(base.CONTROLS) or not all(
+            item["refused_by_sqpack"] and item["refused_by_independent"]
+            for item in kept["controls"]
+        ):
+            problems.append(f"n={n}: a route accepted a control")
+        decided = by_n[n]
+        if (kept["certificate_sha256"], kept["capacity"]) != (
+            decided["certificate_sha256"],
+            decided["capacity"],
+        ):
+            problems.append(f"n={n}: the replayed certificate is not the decided one")
+        if replay and stable(replay_row(n)) != stable(kept):
+            problems.append(f"n={n}: the replay differs from the receipt")
+    return problems
+
+
+def main(argv: Sequence[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description=(__doc__ or "").split("\n", 1)[0])
+    commands = parser.add_subparsers(dest="command", required=True)
+    commands.add_parser("decide-all")
+    sample = commands.add_parser("replay-sample")
+    sample.add_argument("--n", type=int, nargs="+", default=list(SAMPLE))
+    sample.add_argument("--workers", type=int, default=2)
+    audit = commands.add_parser("check")
+    audit.add_argument("--digests", action="store_true")
+    audit.add_argument("--replay", action="store_true")
+    args = parser.parse_args(argv)
+    if args.command == "check":
+        problems = check(digests=args.digests, replay=args.replay)
+        for problem in problems:
+            print(problem)
+        print("FAILED" if problems else f"OK: {ROWS} rows decided, every control refused")
+        return 1 if problems else 0
+    actions: dict[str, Callable[[], Any]] = {
+        "decide-all": lambda: decide_all()["summary"],
+        "replay-sample": lambda: [
+            {key: row[key] for key in ("n", "verified", "certificate_sha256", "cpu_seconds")}
+            for row in replay_sample(args.n, args.workers)["rows"]
+        ],
+    }
+    print(json.dumps(actions[args.command](), indent=1))
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
