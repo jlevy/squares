@@ -8916,6 +8916,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "packing/campaign/result-requests.yaml",
             "packing/devtools/adopt_houses.py",
             "packing/devtools/default_drawings.py",
+            "packing/devtools/regularized_drawings.py",
             "packing/devtools/select_houses.py",
             "packing/devtools/upper_bound_houses.py",
             "packing/frontier/results.yaml",
@@ -8948,8 +8949,13 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "render_n11_optimality_review, render_n11_threshold_bound_review and "
             "render_packing_methods write all 69 files byte-identical across the three. No "
             "result is registered, so the explainer's count is unchanged. No PDF was "
-            "printed; each prints from that HTML. Retain v0.4.27, v0.1.11, v0.1.4 and "
-            "v0.2.7."
+            "printed; each prints from that HTML. Measured again after review A's fixes "
+            "(#763's awaiting-author items, T-241's and T-242's claims and notes, a "
+            "regularization item's own credit, the staging bead) and the merge of main "
+            "3e1349802 (#801), at link revision 1881510f with that main's eleven candidate "
+            "inputs, regularized_drawings.py among them, swapped in: twice from this tree "
+            "and once swapped, 69 files each, all byte-identical across the three, by the "
+            "same browser. Retain v0.4.27, v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
 )
