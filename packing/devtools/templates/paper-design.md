@@ -231,6 +231,7 @@ themes.
 | `rigidity` | `oklch(95.0% 0.004 265)` `#edeef1` | 7.0:1 | `oklch(29.0% 0.008 265)` `#292b2f` | 7.6:1 |
 | `case-exclusion` | `oklch(95.0% 0.004 265)` `#edeef1` | 7.0:1 | `oklch(29.0% 0.008 265)` `#292b2f` | 7.6:1 |
 | `restricted-optimality` | `oklch(95.0% 0.004 265)` `#edeef1` | 7.0:1 | `oklch(29.0% 0.008 265)` `#292b2f` | 7.6:1 |
+| `exact-side` | `oklch(95.0% 0.004 265)` `#edeef1` | 7.0:1 | `oklch(29.0% 0.008 265)` `#292b2f` | 7.6:1 |
 | `method-limit` | `oklch(95.0% 0.004 265)` `#edeef1` | 7.0:1 | `oklch(29.0% 0.008 265)` `#292b2f` | 7.6:1 |
 | `correction` | `oklch(95.0% 0.004 265)` `#edeef1` | 7.0:1 | `oklch(29.0% 0.008 265)` `#292b2f` | 7.6:1 |
 | `audit` | `oklch(95.0% 0.004 265)` `#edeef1` | 7.0:1 | `oklch(29.0% 0.008 265)` `#292b2f` | 7.6:1 |
@@ -259,6 +260,7 @@ the neutral surface in both themes, measured below.
 | `rigidity` | `oklch(43.0% 0.000 265)` `#505050` | 7.0:1 | `oklch(80.0% 0.000 265)` `#bebebe` | 7.6:1 |
 | `case-exclusion` | `oklch(43.0% 0.000 265)` `#505050` | 7.0:1 | `oklch(80.0% 0.000 265)` `#bebebe` | 7.6:1 |
 | `restricted-optimality` | `oklch(43.0% 0.000 265)` `#505050` | 7.0:1 | `oklch(80.0% 0.000 265)` `#bebebe` | 7.6:1 |
+| `exact-side` | `oklch(43.0% 0.000 265)` `#505050` | 7.0:1 | `oklch(80.0% 0.000 265)` `#bebebe` | 7.6:1 |
 | `method-limit` | `oklch(43.0% 0.000 265)` `#505050` | 7.0:1 | `oklch(80.0% 0.000 265)` `#bebebe` | 7.6:1 |
 | `project` | `oklch(43.0% 0.080 70)` `#6b4716` | 7.1:1 | `oklch(80.0% 0.090 70)` `#e3b47d` | 7.5:1 |
 | `engineering` | `oklch(43.0% 0.080 45)` `#744029` | 7.2:1 | `oklch(80.0% 0.090 45)` `#efac8d` | 7.4:1 |

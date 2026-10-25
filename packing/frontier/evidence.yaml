@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:FrontierEvidenceSet/v1
   schema: frontier-evidence.schema.yaml
   status: enforced
-last_reviewed: '2026-10-24'
+last_reviewed: '2026-10-25'
 evidence:
   - id: E-n017-kleddamag-rational-upper
     claim: upper-bound
@@ -45833,3 +45833,49 @@ evidence:
       verifier and the independent rational corner checker, share certificate parsing,
       half-angle conversion, Fraction arithmetic and the separating-axis method. No two
       independent methods, human oversight or optimality is claimed.
+  - id: E-n029-evand-minpoly-7213-report
+    claim: derived-structure
+    scope: {n_values: [29]}
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Daniel exact and local reports 2026-10-12]'
+    certificate: packing/resources/web/evand-exact-data-2026-10-12/acquisition/release.json
+    replay_status: not-attempted
+    verifiers: []
+    limitations: >-
+      evand/square-packing 169a827 (2026-10-11T23:01:11Z; search/exact/homotopy/N29.md,
+      retained at ad86d42 by the evand-exact-and-local-reports-2026-10-12 packet) reports
+      that the side sigma of the s(29) record configuration, Thomas Schadt's packing as David
+      Ellsworth improved it, is a root of an irreducible integer polynomial p of degree 7213,
+      so p is its minimal polynomial. Five consistency polynomials in the class angles t1 to
+      t5, eliminated from the 152-row contact system, were solved by polyhedral homotopy
+      continuation (44,448 paths, 7,209 regular roots, and 4 more near the singular S = 5
+      grid recovered algebraically from a K = 4 lattice), and p was reconstructed from all
+      7,213. The source rates three steps rigorous: irreducibility (degree patterns modulo 12
+      primes near 2^61), the Krawczyk enclosure of the unique zero t* of the five
+      polynomials (radius 1e-50), and the link sigma = S(t*). It rates two Monte Carlo: the
+      identities F_k(tau) = 0 and Sn = x Sd in Q[x]/(p), modulo 50 random 62-bit primes, and
+      the full contact system's consistency at tau, modulo 21. It does not check the
+      packing's non-overlap at sigma, so it claims no bound. The release
+      exact-data-2026-10-12 (tag commit 31523f87316bdfda00f5459dd9077928e264f133) publishes
+      p in s29-minpoly.tar.zst (87,237,962 bytes, SHA-256
+      708e1b8b45894667f90a0d18b55bb35ed6079b84d33f9656976fd5cfa6f3729c), which this
+      certificate record pins by digest with every member's size and digest; its README,
+      SHA256SUMS and n29_krawczyk.json are retained beside it. Read here on 12 October 2026
+      from n29_poly_q4.json (SHA-256
+      0cba5ea250da54d67741803e86f1e46a2010f60fbf6b85be34fe69640e28ee5e): 7,214 integer
+      coefficients, so degree 7,213, a positive leading coefficient of 325 digits and a
+      height of 5,074 digits. The Krawczyk box gives S to radius 1.07e-48, so sigma =
+      5.93383346267692918968946061635201913843383418107... T-195's exact rational side, the
+      case's house, agrees with sigma to all 68 places N29.md prints and lies inside that
+      enclosure; which is larger is not decided here. Nothing else was run here: the
+      source's five-step replay is about 2.5 CPU-hours by its author's measure (think-6gti).
+      The author announced the result on X on 13 October 2026
+      (https://x.com/evanbd/status/2110154454817448106), retained in the exact-data
+      packet's receipts/announcement/. CREDITS.md says the work was produced by Claude
+      (Anthropic) under human direction.
+    source_reviewed: '2026-10-25'

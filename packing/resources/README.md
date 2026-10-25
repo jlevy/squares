@@ -1479,7 +1479,10 @@ certificates read. The
 [review of 23 October](../../docs/project/reviews/review-2026-10-23-evand-grade-c-theorem-c.md)
 found Theorem C true under its hypotheses, repaired a gap in its proof, and decided all
 233 configurations again with a checker written here.
-Neither report bounds anything, and neither is registered.
+Neither report bounds anything.
+The s(29) polynomial is registered as T-244, the exact side of the record configuration,
+and the packet retains the first post of its announcement on X of 13 October; the
+grade-C report is not registered yet.
 MIT; Claude assistance disclosed.
 
 ## E. Summins’ stratification series, 12 October 2026

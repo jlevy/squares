@@ -21,7 +21,7 @@ softschema:
   status: enforced
 repository: jlevy/squares
 owner: jlevy
-last_reviewed: '2026-10-24'
+last_reviewed: '2026-10-25'
 issues:
   - number: 420
     title: 'Lean proofs that 178 best-known packings are local minima (n ≤ 324): registration request'
@@ -8138,8 +8138,11 @@ issues:
       both matching the digests the release, GitHub and the author's comment state. The evand-exact-data-2026-10-12 packet pins the s(29) archive by digest, with each
       of its 21 members' size and digest, its README and its Krawczyk box, and reads degree 7213
       from the polynomial; it keeps the grade-C archive as published, and gradec.py recomputed
-      the n = 10 certificate byte-identical to the published one. The s(29) replay (about 2.5
-      CPU-hours) waits for an owner budget. The grade-C review of 23 October
+      the n = 10 certificate byte-identical to the published one. The s(29) polynomial is
+      registered as T-244 (25 October 2026, think-6gti), an exact side: the exact value of the
+      record configuration's side, with no bound, V0/C0, citing the author's announcement thread
+      of 13 October on X; its replay (about 2.5 CPU-hours, think-10m1) waits for an owner budget,
+      and issue 811 tracks it with the record's other exact side polynomials. The grade-C review of 23 October
       (docs/project/reviews/review-2026-10-23-evand-grade-c-theorem-c.md) found Theorem C true
       under its hypotheses, repaired a gap in its proof at side-end rows, and decided all 233
       configurations again with a checker written here, retaining the 233 exact forms they read.
@@ -8153,12 +8156,10 @@ issues:
         polynomial of degree 7213, found by homotopy continuation; irreducibility, a Krawczyk
         enclosure and the root link are rated rigorous by the source.
       source: body
-      not_registered: Not a bound. Published 12 October in the release exact-data-2026-10-12 and
-        pinned by digest; a records decision on its shape (an algebraic_degree evidence update and
-        a paragraph in n-029.md) is pending, and the source's replay, about 2.5 CPU-hours with two
-        Monte Carlo steps and no non-overlap check at the exact point, waits for a budget.
-      queued: true
-      bead: think-6gti
+      register:
+      - T-244
+      evidence:
+      - E-n029-evand-minpoly-7213-report
     - key: grade-c-local-minima
       claim: gradec.py's Theorem C local-minimality check is VALID for 233 of the source's 250
         configurations of field degree at most 4.
@@ -8180,6 +8181,7 @@ issues:
     - think-01y3
     - think-3ppi
     - think-mtah
+    - think-10m1
     answer_bead: think-6gti
     replies:
     - url: https://github.com/jlevy/squares/issues/545#issuecomment-6200841270
@@ -24223,3 +24225,53 @@ issues:
       The import is on main and the resulting state is posted with the entry's id and rungs,
       and the statement audit, the mathematical review and the build that would raise its
       rungs are done or owned by their beads with nothing the issue asks for queued.
+  - number: 811
+    title: 'Exact side polynomials: tracking updates to the minimal polynomials of record sides'
+    author: jlevy
+    opened: '2026-10-25'
+    state: open
+    kind: other
+    intake: true
+    triage: done
+    summary: >-
+      The owner's tracker, opened on 25 October 2026 with the labels intake and tracker, of the
+      project's work on exact side values: the minimal polynomials of record sides, the exact
+      forms built from them, and the code that carries them into the record and onto the site.
+      It names Evan Daniel's degree-7213 polynomial of the s(29) record side "a result in its
+      own right", linking his announcement thread on X of 13 October, the release
+      exact-data-2026-10-12 and the derivation commit 169a827, and lists six more items, each
+      owned by an issue or bead of its own: Hyukdong Kim's exact minimal polynomials at 88, 126,
+      172, 199 and 263 (#804, think-9vai), the draft pull-request stack #403 to #435, the numeric
+      sides at 29, 55 and 71 (think-je8y, think-phh8, think-1blg), n = 83's degree-672 polynomial
+      (think-chsu), the reported roots at 106, 152 and 177 (#419, #420) and the algebraic house
+      writer (think-ot5c). The s(29) polynomial is registered as T-244 (think-6gti).
+    read_through: '2026-10-25T05:41:58Z'
+    results:
+    - key: s29-minimal-polynomial
+      claim: The side of the best known s(29) packing is a root of an irreducible integer polynomial
+        of degree 7213 whose coefficients have up to 5,074 digits (Evan Daniel, evand/square-packing
+        169a827 and the release exact-data-2026-10-12).
+      source: body
+      register:
+      - T-244
+      evidence:
+      - E-n029-evand-minpoly-7213-report
+    asks:
+    - what: Every item the tracker lists landed on main, declined or moved to an issue of its own,
+        with a follow-up on the issue as each lands.
+      state: queued
+      bead: think-jmb4
+    beads:
+    - think-6gti
+    - think-10m1
+    - think-jmb4
+    answer_bead: think-jmb4
+    replies: []
+    close_when: Every item the tracker lists has landed, been declined or moved to an issue of its
+      own.
+    notes: >-
+      The project opened this issue; it reports no result of the project's own, and no
+      acknowledgement is owed on it. It is marked intake, as #613 is, as the project's own issue
+      tracking the intake of a reported item, Daniel's polynomial, which #545 has tracked since 12
+      October; its other items are tracked where the table names them. The issue says it will be
+      updated as each item lands on main, so a follow-up is owed when T-244 reaches main.
