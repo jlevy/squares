@@ -8887,6 +8887,22 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "v0.1.4 and v0.2.7."
         ),
     ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=("packing/campaign/result-requests.yaml",),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The #797 and Daniel deficiency-rows import (think-4tj5, think-f8py): #797's "
+            "requests entry, against main 755ef426b (#794). Rendered by "
+            "render_packing_methods at link revision 541a19d4 into empty site directories, "
+            "twice from this tree and once with main's result-requests.yaml swapped in, 43 "
+            "files each, all byte-identical across the three. No register entry changes. "
+            "Retain v0.2.7."
+        ),
+    ),
 )
 
 
