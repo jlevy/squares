@@ -9372,7 +9372,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
     ),
     ReleaseNoPublicChange(
         components=("paper:square-packing-methods-survey",),
-        paths=("packing/campaign/result-requests.yaml",),
+        paths=("packing/campaign/result-requests.yaml", "packing/frontier/n-029.md"),
         outputs=(
             "papers/square-packing-methods-survey.html",
             "papers/square-packing-methods-survey.md",
@@ -9385,8 +9385,12 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "swapped in: render_packing_methods writes all 43 files byte-identical across "
             "the three. Measured again at link revision 064b9534 after the entry's cap "
             "wording changed (10 CPU-hours revised to 5): twice from this tree and once "
-            "with main's file swapped in, all 43 files byte-identical across the three. No "
-            "PDF was printed; it prints from that HTML. Retain v0.2.7."
+            "with main's file swapped in, all 43 files byte-identical across the three. "
+            "Measured a third time at link revision 70738f16, after n-029.md's dated "
+            "sentence was reworded (its printed value is T-009's interval endpoint): twice "
+            "from this tree and once with main's result-requests.yaml and n-029.md swapped "
+            "in, all 43 files byte-identical across the three. No PDF was printed; it prints "
+            "from that HTML. Retain v0.2.7."
         ),
     ),
 )
