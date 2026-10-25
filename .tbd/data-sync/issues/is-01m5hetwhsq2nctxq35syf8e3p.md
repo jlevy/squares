@@ -5,7 +5,7 @@ title: Independent audit of durable pytest phase timing continuation
 kind: task
 status: in_progress
 priority: 2
-version: 4
+version: 5
 spec_path: docs/project/specs/active/plan-2026-09-06-validation-efficiency-and-checkpoints.md
 delegate: codex-phase-auditor-20261022-01a14e4c
 labels: []
@@ -14,7 +14,7 @@ parent_id: is-01m1w0r4wr8dbry9hazjg0y4nk
 hold: null
 hold_until: null
 created_at: 2026-10-22T09:24:50.872Z
-updated_at: 2026-10-25T04:44:07.240Z
+updated_at: 2026-10-25T05:39:03.802Z
 started_at: 2026-10-22T09:25:04.958Z
 ---
 Independently audit think-uhxt's current-main continuation on codex/phase-timings-20261022, Session188. Review actual completed-phase durations, current plugin capability/origin admission, worker failure and hard-termination evidence, same-run JUnit/phase correspondence, retained v2 experiment semantics and bounded whole-CLI overhead, OR16/OR18 compliance, all final source and source-bound validation evidence. Keep old v1 producer observations and failed gates separate. Do not author implementation, run concurrent project compute, modify tracker state or publish. Coordinator owns compute, integration, all tracker writes and external updates. User window2026-10-22T09:05:03Z to14:05:03Z, final30minutes reserved; unchanged4GiB/no swap/two CPUs/one workload. Reviewer uses explicit GPT-6 Astra/xhigh. Independent acceptance is required before submission; pending CI remains pending.
@@ -32,3 +32,6 @@ A separate GPT-6.1 Sol/high reviewer independently rechecked the original retain
 2026-10-25 authorized continuation:
 Guzhou authorized work from 2026-10-25T04:30:32Z until06:40:00Z, with finalization from06:10:00Z. The canonical branch is codex/phase-timings-20261025, integrating current main3699ce15ee119beb0c4714cab4b0692c4bb44f1f while retaining producered63f11c and the exact stopped Session188 history. Resource limits remain4GiB hard memory, no task swap, two visible CPUs and one owned workload. Current upstream requires edit plus directly affected tests before a draft push; hosted acceptance remains separate and exact-head. No auto-merge is authorized. Historical HTTP339ms/300ms failure and900-second incomplete lane remain retained; changed current page/probe inputs do not explain that observation.
 Current independent reviewer: GPT-6.1 Sol / xhigh, read-only source and evidence review. Coordinator retains integration, serial compute, tracker writes and public updates. Review actual merged diff, commit hooks, direct/edit receipts and the served archive before submission claims. Reuse unchanged historical evidence only within its measured scope.
+
+2026-10-25 draft PR809 checkpoint:
+Draft https://github.com/jlevy/squares/pull/809, branch codex/phase-timings-20261025, head80e6fd6057617b9799d0764f04401276b3d9c137, basebb756e1935b4d6280bb41877e8c829a8e4c0e9e3, S2. Independently reviewed exact source and actual hooks;158 direct tests and69/69 EDIT steps (108 commands), then53/53 RECORDS steps (64 commands) passed under unchanged local limits. The immutable data archive was published, served-byte verified, freshly fetched and replayed successfully. Actual ordinary run40165439909, Pages40165439940 and dispatched deferred40165460033 target qualification merge dcf948fd48a381209f762dd677c7bbca0d5a9b21; final acceptance is still pending. Historical Session188 failure/certification debt is unchanged, so think-uhxt remains open. No auto-merge or automatic continuation is authorized. Protected closeout06:10UTC; hard stop06:40UTC.

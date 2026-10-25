@@ -5,7 +5,7 @@ title: "W5: retain incremental pytest phase timings through CI termination"
 kind: task
 status: in_progress
 priority: 2
-version: 8
+version: 9
 spec_path: docs/project/specs/active/plan-2026-09-06-validation-efficiency-and-checkpoints.md
 delegate: codex-phase-timings-20261019
 labels: []
@@ -16,7 +16,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-09-06T18:47:32.501Z
-updated_at: 2026-10-25T04:44:05.696Z
+updated_at: 2026-10-25T05:39:02.291Z
 started_at: 2026-10-19T01:26:10.067Z
 ---
 Real cancellation audit of PR98 run34052435218 retained three command starts/partial logs and117 completed controls, but zero pytest per-case phase timings because JUnit/durations emit at exit. Add bounded incremental case/phase JSONL to the existing timing instrument, joining run/worker/node identity and preserving known completed phases after termination. Do not invent elapsed durations for unmatched starts. Test worker failures, xdist concurrency and hard process termination; bound overhead and retain current normal-run JUnit equivalence. Evidence: /tmp/pr98-cancelled-checkpoint-audit.json and run artifacts9995012355/9995012176. This addresses the documented incomplete-termination timing limit without another competing recorder.
@@ -43,3 +43,6 @@ Next action, only on subsequent operator authorization: refresh upstream/TBD and
 2026-10-25 authorized continuation:
 Guzhou authorized work from 2026-10-25T04:30:32Z until06:40:00Z, with finalization from06:10:00Z. The canonical branch is codex/phase-timings-20261025, integrating current main3699ce15ee119beb0c4714cab4b0692c4bb44f1f while retaining producered63f11c and the exact stopped Session188 history. Resource limits remain4GiB hard memory, no task swap, two visible CPUs and one owned workload. Current upstream requires edit plus directly affected tests before a draft push; hosted acceptance remains separate and exact-head. No auto-merge is authorized. Historical HTTP339ms/300ms failure and900-second incomplete lane remain retained; changed current page/probe inputs do not explain that observation.
 Continue the smallest unfinished contribution: durable completed-phase timing, current-source qualification, independent audit and provisional draft if ready. Do not repeat the fixed v2 experiment or claim final certification from a records-tier or draft pass. Keep the task open until its actual acceptance contract is satisfied.
+
+2026-10-25 draft PR809 checkpoint:
+Draft https://github.com/jlevy/squares/pull/809, branch codex/phase-timings-20261025, head80e6fd6057617b9799d0764f04401276b3d9c137, basebb756e1935b4d6280bb41877e8c829a8e4c0e9e3, S2. Independently reviewed exact source and actual hooks;158 direct tests and69/69 EDIT steps (108 commands), then53/53 RECORDS steps (64 commands) passed under unchanged local limits. The immutable data archive was published, served-byte verified, freshly fetched and replayed successfully. Actual ordinary run40165439909, Pages40165439940 and dispatched deferred40165460033 target qualification merge dcf948fd48a381209f762dd677c7bbca0d5a9b21; final acceptance is still pending. Historical Session188 failure/certification debt is unchanged, so think-uhxt remains open. No auto-merge or automatic continuation is authorized. Protected closeout06:10UTC; hard stop06:40UTC.
