@@ -799,7 +799,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "6997281dd2d243dd902f0c79ecd0a9b7b058c1be"
+DATA_REVISION = "d5dcd2d0e66e8d6dc3da6fd789a9387545b24854"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -9208,8 +9208,9 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "revision 1b75d2f7 with that main's four inputs and "
             "render_n11_lower_bounds_explainer_pdf.py swapped in, and after review A's "
             "fixes, at link revision 6997281d, and review B's, at d5dcd2d0, each with the "
-            "same five inputs of main swapped in: the same outcome each time, the explainer counting 244 results against "
-            "main's 243, which its v0.4.29 carries. Retain v0.1.11, v0.1.4 and v0.2.7."
+            "same five inputs of main swapped in: the same outcome each time, the "
+            "explainer counting 244 results against main's 243, which its v0.4.29 "
+            "carries. Retain v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
 )
