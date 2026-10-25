@@ -21,6 +21,9 @@ function that gives its value there:
   8 ceil(sqrt(k - 4)) - 1, at b = ceil(sqrt(k - 4)), never undercuts;
 - Kevin Fang's Theorem 2, k - 1 - F(k) for k >= 15 (``fang_excess_inventory.theorem_two``),
   his Theorem 1's k - 2 being never smaller;
+- Evan Daniel's 4 ceil(sqrt(2k - 7)) - 1 for k >= 7, in Lean (`daniel_layers`), and Kevin
+  Fang's later Theorem A, ceil(sqrt(32k)) for k >= 6 (``fang_theorem_a.theorem_a``), two
+  rows of kernel sqrt k reported on 18 and 24 October 2026;
 - Ryu's k^{2/5} and k^{3/8} rows, which speak only from k = 1.6*10^7, 4*10^26 and
   2.48*10^12, beyond every k this comparison decides one by one.
 
@@ -63,6 +66,7 @@ from pathlib import Path
 from typing import Any
 
 from cases.asymptotic import fang_excess_inventory as fang
+from cases.asymptotic import fang_theorem_a
 from cases.asymptotic import ryu_upper_l_packing as ryu
 from sqpack.yamlio import safe_load
 
@@ -76,6 +80,8 @@ AMS = "[Arslanov et al.]"
 FANG = "[Fang excess theorem 2026-10-13]"
 RYU = "[squarepacker k2-minus-c-upper 2026]"
 RYU_V11 = "[squarepacker k2-minus-c-upper v1.1 2026]"
+DANIEL = "[Daniel k2-minus-c Lean 2026-10-18]"
+FANG_A = "[Fang Theorem A 2026-10-24]"
 #: A day-precision bibliography date, the only kind that orders a tie.
 DAY = re.compile(r"\d{4}-\d{2}-\d{2}")
 
@@ -83,6 +89,11 @@ DAY = re.compile(r"\d{4}-\d{2}-\d{2}")
 def ryu_theorem_1_3(k: int) -> int:
     """Ryu's Theorem 1.3 at its best b: the least k^2 - N(k, b) - 1 over 2 <= b <= k."""
     return min(k * k - ryu.count(k, b) - 1 for b in range(2, k + 1))
+
+
+def daniel_layers(k: int) -> int:
+    """Evan Daniel's c*(k) <= 4 ceil(sqrt(2k - 7)) - 1 for every k >= 7 (RyuLayers)."""
+    return fang_theorem_a.daniel(k)
 
 
 def ams(k: int) -> int:
@@ -136,6 +147,48 @@ STATEMENTS: tuple[Statement, ...] = (
             "k^2 - N(k,b) = 6b + b(floor(eta) + floor(eta')) when k - b >= 2, with eta = "
             "(2k-10)/(b^2+1) + 8/(b^2+1)^2 and eta' = eta - 2b/(b^2+1) (equation 5.1); "
             "Corollary 5.1 gives c*(k) < 4 sqrt(6) sqrt(k) for k >= 6."
+        ),
+    ),
+    Statement(
+        DANIEL,
+        "packs_sub_4sqrt2_layers",
+        7,
+        "sqrt k, at integer sides approached from below",
+        "k >= 7",
+        daniel_layers,
+        bound=(
+            "REPORTED: c*(k) <= 4 ceil(sqrt(2k-7)) - 1 < 4 sqrt(2k-7) + 3 for every integer "
+            "k >= 7, where c*(k) = max{c : s(k^2-c) = k}, proved in Lean: k^2 - 4b unit "
+            "squares pack in a square of side less than k with b = ceil(sqrt(2k-7)) "
+            "(packs_sub_4sqrt2_layers). The packing is Ryu's L with L - 3 rows in each band "
+            "of length L and 2b axis-parallel squares in the four band ends."
+        ),
+        constant=(
+            "4 sqrt 2, with b = ceil(sqrt(2k-7)) and the additive -1. The four band ends hold "
+            "floor((b-1)/2) axis squares twice, floor(b/2) and floor(b/2) + 2, 2b in all, at "
+            "the angle t = 1/b + delta with delta b (b^2+1)(6k+4b) = 1. The +5 milestone, 4 "
+            "ceil(sqrt(2k-7)) + 5 (packs_sub_4sqrt2, a645fe3), fills each end with one layer."
+        ),
+    ),
+    Statement(
+        FANG_A,
+        "Theorem A",
+        6,
+        "sqrt k, at integer sides approached from below",
+        "k >= 6",
+        fang_theorem_a.theorem_a,
+        bound=(
+            "REPORTED: c*(k) < 4 sqrt(2k) + 1, so c*(k) <= ceil(sqrt(32k)), for every integer "
+            "k >= 6 (Theorem A): s(n) < k for every n <= k^2 - ceil(sqrt(32k)) - 1. Ryu's "
+            "L-shaped packing with both ends of each band filled by axis-parallel rows (lift 0 "
+            "at one end, the whole free length at the other) and b an odd integer with |b - "
+            "sqrt(2k)| <= 1."
+        ),
+        constant=(
+            "4 sqrt 2 with additive 1: w(k) <= b(k - S) plus two band terms (equation 1), each "
+            "below 2bL/(b^2+1) + b + 2 - kappa_b, kappa_b = (7b^4+1)/(b(b^2+1)^2), as t -> 1/b "
+            "(Lemma 2); sharp for this construction, whose waste is exactly 4b at k = (b^2 - b "
+            "+ 8)/2 for odd b >= 5."
         ),
     ),
     Statement(
