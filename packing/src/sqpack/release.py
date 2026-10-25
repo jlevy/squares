@@ -8887,6 +8887,55 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "v0.1.4 and v0.2.7."
         ),
     ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/atlas/known-best/bound-citations.json",
+            "packing/atlas/known-best/composite-figure.json",
+            "packing/campaign/result-requests.yaml",
+            "packing/devtools/adopt_houses.py",
+            "packing/devtools/default_drawings.py",
+            "packing/devtools/select_houses.py",
+            "packing/devtools/upper_bound_houses.py",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+            "packing/src/sqpack/cli/validate.py",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "H1 of think-hx0e and think-o4m0: T-241 and T-242 from V0/C0 to V3/C3 after the 24 "
+            "October review, with four evidence entries, their claims, notes and next steps "
+            "rewritten and the review's credit finding M-1 applied; #795's notebook rows at "
+            "364, 450 and 874 credited to their finders alone in the coverage notes and "
+            "#763's requests entry; the #763 reply of 25 October recorded; T-242 adopted at "
+            "304 in the pass of 25 October with its house prose and credit, SETTLED[304] made "
+            "again on the new witness, 268 staged for the next pull request, and the bound "
+            "citations, composite records and the screen's findings, against main 755ef426b "
+            "(#794): rendered at link revision d0c132c3 into empty site directories, twice "
+            "from this tree and once from it with main's ten candidate inputs swapped in, "
+            "render_n11_lower_bounds_explainer with its math prepared by the host's Chrome "
+            "for Testing headless shell through SQPACK_CHROMIUM, "
+            "render_n11_optimality_review, render_n11_threshold_bound_review and "
+            "render_packing_methods write all 69 files byte-identical across the three. No "
+            "result is registered, so the explainer's count is unchanged. No PDF was "
+            "printed; each prints from that HTML. Retain v0.4.27, v0.1.11, v0.1.4 and "
+            "v0.2.7."
+        ),
+    ),
 )
 
 
