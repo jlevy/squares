@@ -10524,8 +10524,9 @@ sources:
     decided both again. The ledger of 24 October for this import
     (campaign/issue-intake/upper-bounds-evand-20261024) records 268 below T-240 and 304
     below T-241, and does not record 303, which is above T-240's 303; the 303 certificate is
-    retained as credit evidence. No selected override is created at this source-only stage;
-    the cases at 268 and 304 are unchanged.
+    retained as credit evidence. The case at 304 adopted the 304 certificate on 25 October
+    2026, the selected override there; 268 is staged for the pass's next pull request
+    (select_houses.PENDING_ADOPTION), since the same pass adopted T-240 there.
 
 - id: couzo-efef7d1-2026-10-23
   title: Francisco Couzo's own sides at efef7d1 at the counts of the Kaggle notebook rows
@@ -11587,11 +11588,11 @@ selected_overrides:
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
     a replay here and an accepted review, adopted on 2026-10-25 (T-240).
 - n: 304
-  source_id: mishapolk-kkt-refinements-2026-10-14
-  value: '17.92942775807517497'
-  evidence: E-mishapolk-70a033f-certificate-report
+  source_id: evand-kaggle-descents-2026-10-24
+  value: '17.9268989003567416'
+  evidence: E-evand-kaggle-descents-certificate-report
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
-    a replay here and an accepted review, adopted on 2026-10-16 (T-186).
+    a replay here and an accepted review, adopted on 2026-10-25 (T-242).
 - n: 305
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '17.95046648213771228'
@@ -12766,14 +12767,14 @@ superseded_reports:
 - n: 304
   source_id: casson-square-packing-2026
   value: '17.94880191214547338'
-  superseded_by: mishapolk-kkt-refinements-2026-10-14
+  superseded_by: evand-kaggle-descents-2026-10-24
   reason: Larger than Francisco Couzo's side at this count; the case record states both sources' dates
     and values; since 2026-10-05 the selected report is Evan Daniel's exact optimum of that packing
     (T-098).
 - n: 304
   source_id: franciscouzo-square-packing-2026
   value: '17.934650018395903'
-  superseded_by: mishapolk-kkt-refinements-2026-10-14
+  superseded_by: evand-kaggle-descents-2026-10-24
   reason: Superseded on 2026-10-05 by Evan Daniel's exact optimum of the same packing, certified here
     (T-098).
 - n: 305
@@ -13398,9 +13399,9 @@ superseded_reports:
 - n: 304
   source_id: evand-square-packing-2026-10-05
   value: '17.934650018390681724105084929881'
-  reason: The house until 2026-10-12; its certificate stays retained and verified, and T-186's exact
+  reason: The house until 2026-10-12; its certificate stays retained and verified, and T-242's exact
     side is smaller.
-  superseded_by: mishapolk-kkt-refinements-2026-10-14
+  superseded_by: evand-kaggle-descents-2026-10-24
 - n: 270
   source_id: couzo-certificates-2026-10-10
   value: '16.9297753535413596'
@@ -13477,8 +13478,8 @@ superseded_reports:
   source_id: couzo-certificates-2026-10-11-in-corpus
   value: '17.9295659468485010'
   reason: The house from 2026-10-12 until 2026-10-15; its certificate stays retained and verified,
-    and T-186's exact side is smaller.
-  superseded_by: mishapolk-kkt-refinements-2026-10-14
+    and T-242's exact side is smaller.
+  superseded_by: evand-kaggle-descents-2026-10-24
 - n: 105
   source_id: couzo-followup-refinements-2026-10-08
   value: '10.7893037837481589'
@@ -13621,8 +13622,8 @@ superseded_reports:
   source_id: dostashev-merged-bands-2026-10-13
   value: '17.9294277580751750'
   reason: The house from 2026-10-15 until 2026-10-16; its certificate stays retained and verified,
-    and T-186's exact side is smaller.
-  superseded_by: mishapolk-kkt-refinements-2026-10-14
+    and T-242's exact side is smaller.
+  superseded_by: evand-kaggle-descents-2026-10-24
 - n: 68
   source_id: rehwaldt-n68-refinement-2026-10-07
   value: '8.79879523721828390257668096702139408352101903022787926324037'
@@ -14013,6 +14014,12 @@ superseded_reports:
   reason: The house from 2026-10-24 until 2026-10-25; its certificate stays retained and verified,
     and T-240's exact side is smaller.
   superseded_by: couzo-issue763-2026-10-23-in-corpus
+- n: 304
+  source_id: mishapolk-kkt-refinements-2026-10-14
+  value: '17.92942775807517497'
+  reason: The house from 2026-10-16 until 2026-10-25; its certificate stays retained and verified,
+    and T-242's exact side is smaller.
+  superseded_by: evand-kaggle-descents-2026-10-24
 beyond_horizon_claims:
 - n: 327
   source_id: couzo-extended-range-reports-2026-10-08

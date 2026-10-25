@@ -833,6 +833,26 @@ The evidence is retained in
 The index still draws 86 views: 28 by the axis tool, 37 by Evan Daniel’s regularizer and
 21 by the grid-slack generator’s version 1.
 
+The same pass of 25 October 2026 adopted Evan Daniel’s certificate at 304 (T-242,
+think-hx0e), his exact descent of the packing Francisco Couzo certified there (T-241),
+which Couzo’s index credits to Kirill Tymchishin’s Kaggle notebook.
+It moves the house best packing from T-186 by $2.53 \times 10^{-3}$, another arrangement
+than T-186’s. Both generators ran on the new witness.
+Grid-slack at 0.5, 1 and 5 degrees (`grid-slack-adopt-2026-10-25-n304-grid-deg05`,
+`-grid-deg1` and `-grid-deg5`, 118 CPU-seconds) draws one view at the witness’s side,
+and Evan Daniel’s regularizer (`evand-regularize-adopt-2026-10-25-n304-evand`, 208
+CPU-seconds) solves the witness to a certified KKT local minimum and draws a view at its
+side too; its exact solve lies within the source’s padding, about $1.8 \times 10^{-19}$
+below, so no view is below the house.
+Every view goes to review (row 7: the contact counts of 14 squares, and of 36 for the
+regularizer’s, fall while no total does) and draws more light squares than the axis
+tool’s view of the witness, 4 or 5 against 2, though each has fewer uneven and near-axis
+squares (14 against 18, none against 9). So the count is decided no better on the axis
+tool’s view, and `SETTLED`’s entry at 304 is made again on the new witness.
+The evidence is retained in
+[`cases/regularized_drawings/think-hx0e-2026-10-25/`](../../cases/regularized_drawings/think-hx0e-2026-10-25/README.md).
+The index still draws 86 views.
+
 ### The default picture
 
 On 13 October 2026 the owner made the regularized view the default picture, with the

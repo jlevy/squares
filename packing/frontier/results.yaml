@@ -25854,6 +25854,12 @@ results:
       At 271 the record's own rule would leave the packing with SQUISH, T-161's 271 being a
       refinement of T-151 by pose, but T-161 lists no regularizations; whether it should is
       a question for the owner, and T-161 is left as it is.
+
+      Francisco Couzo's certificate at 304 of Kirill Tymchishin's Kaggle notebook packing
+      (T-241) is 2.53e-03 below this entry's side there, another arrangement, and Evan
+      Daniel's exact descent of it (T-242) 3.04e-09 lower still. After the 24 October review
+      of both, the case at 304 adopted T-242 on 25 October 2026, and this entry's
+      certificate there stays retained as history.
     next_rung: >-
       V4 and C4 need a second accepted adversarial review by a distinct reviewer and a
       retained human oversight record; one AI review, of 16 October, is retained.
@@ -33984,8 +33990,8 @@ results:
       retained. The review's questions for the author (what the manifest's previous_source
       names, the construction credit of Polkovskyi's certificate, and the notebooks' source
       notices) hold no rung. Evan Daniel's descent of this packing (T-242), 3.04e-9 below
-      this side, is the smallest validated side at 304, so the case adopts it there under
-      the house rule.
+      this side, is the smallest validated side at 304, and the case adopted it there on 25
+      October 2026 under the house rule.
     reviews:
       - path: docs/project/reviews/review-2026-10-24-couzo-evand-n268-n304.md
         kind: adversarial
@@ -34173,6 +34179,21 @@ results:
       sources put Lavrentev before Tymchishin there (N-2). Whether that step is Lavrentev's
       is asked of Couzo.
 
+      The case at 304 adopted this certificate as its house best packing in the pass of 25
+      October 2026, from T-186, 2.53e-03 above it, which stays retained as history, with
+      the credit of T-241's packing: Kirill Tymchishin's, descended by Evan Daniel. Both
+      strong generators decided the new witness in the same pull request
+      (cases/regularized_drawings/think-hx0e-2026-10-25): grid-slack's views at 0.5, 1 and
+      5 degrees and Evan Daniel's certified KKT re-solve at the witness's side each go to
+      review at row 7 and draw more light squares than the axis tool's view, which stays
+      drawn, so the count is decided no better; no view is below the side.
+
+      At 268 this certificate is 4.48e-12 below T-240, which the same pass adopted there,
+      and one day's archive holds one prior state a count, so 268 is staged for the pass's
+      next pull request, dated 26 October 2026 (select_houses.PENDING_ADOPTION, think-hx0e,
+      think-3anz), where the house's credit follows the placement adopted, Daniel after
+      Lavrentev.
+
       The source's own checkers were not run here. The two maintained routes, the sqpack
       rational witness verifier and the independent rational corner checker, share
       certificate parsing, half-angle conversion, Fraction arithmetic and the
@@ -34185,8 +34206,9 @@ results:
       retained. The review's questions for the author (what the 268 predescent file is, and
       who first published the packing at 304) hold no rung. Both counts are the smallest
       validated sides, so the cases adopt them under the house rule, with both strong
-      generators' regularization of each new house; the house credit at 268 follows the
-      placement adopted, Daniel after Lavrentev, and at 304 follows T-241's packing.
+      generators' regularization of each new house: 304 was adopted on 25 October 2026, and
+      268 is staged for the pass's next pull request, where the house credit follows the
+      placement adopted, Daniel after Lavrentev.
     reviews:
       - path: docs/project/reviews/review-2026-10-24-couzo-evand-n268-n304.md
         kind: adversarial
@@ -35304,7 +35326,7 @@ regularized_drawings:
         max_turn_deg: 0.033049
       view: packing/atlas/known-best/regularized/n-303-regularized.yaml.gz
     - n: 304
-      of: T-186
+      of: T-242
       by: project
       method: regularize_axis_components/2
       side: same
@@ -35312,9 +35334,9 @@ regularized_drawings:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 32
-        max_move: 0.05031548
-        max_turn_deg: 0.0
+        moved: 0
+        max_move: 0.0003952843
+        max_turn_deg: 0.00453227
       view: packing/atlas/known-best/regularized/n-304-regularized.yaml.gz
     - n: 305
       of: T-174

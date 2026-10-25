@@ -214,9 +214,16 @@ class Pending:
 #: and 1.88 MB as Git stores it, and its jobs are priced at about 2 CPU-hours each from a
 #: 66-pair sample (14.6 CPU s), about 6 for the three and about 2 more at each atlas rebuild
 #: of the witness: over the lanes' 2 CPU-hour limit on one run, so 267 waits, not run.
+#: Evan Daniel's 268 (T-242), validated on 24 October 2026 with his 304, is smaller than
+#: T-240's 268 by 4.48e-12, but the pass of 25 October that adopts his 304 also moves 268 to
+#: T-240, and one day's archive holds one prior state a count: 268 moves to T-242 in the
+#: pass's next pull request, dated 26 October (think-hx0e, whose H2 is think-3anz).
 PENDING_ADOPTION: dict[int, Pending] = {
-    n: Pending(house="T-193", bead=WRITER_BEAD, why=NO_WRITER)
-    for n in (88, 126, 175, 199, 232, 266, 267, 292, 301)
+    **{
+        n: Pending(house="T-193", bead=WRITER_BEAD, why=NO_WRITER)
+        for n in (88, 126, 175, 199, 232, 266, 267, 292, 301)
+    },
+    268: Pending(house="T-242", bead="think-hx0e", why=NEXT_PULL_REQUEST),
 }  # fmt: skip
 
 
