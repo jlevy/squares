@@ -24006,3 +24006,52 @@ issues:
       The twelve rows are recorded in report order with their replay, 372 and 412 have their
       disposition with 43f666c's rows there on main (#800, think-gn29), and the reply on main says
       so; nothing the author asked for is queued.
+  - number: 810
+    title: "s(12) = 4 in Lean: Jatloe12SquaresFormalized (Jatloe's proof; Gurevitch, Lewis, Ahmed): tracking
+      an unreported result"
+    author: jlevy
+    opened: '2026-10-25'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      The project opened this issue to track Jatloe's Lean 4 proof that s(12) = 4,
+      N12Compact.Final.optimality : S12.packingConstant12 = 4, which reached the project
+      through Manasseh Ahmed's post on X of 22 October 2026 and its reply naming the
+      repository, Queuingtheorydotcom/Jatloe12SquaresFormalized at d0caf45 (tag
+      n12-verified-2026-10-16), rather than an issue, as the owner asks for results at S4 and
+      above. Its README credits Jatloe with the full mathematical proof and a partial
+      formalization, Ben Gurevitch with aid in formalization and CTJLewis with refactoring and
+      compiling; Ahmed published it. The source trusts Lean's compiler for 1,624 native_decide
+      facts and reports a run, in a repository that is not public, that accepted all 5,377
+      modules on reused compiled objects. Imported on 25 October 2026: the
+      jatloe-n12-lean-2026-10-16 packet retains the statement closure, the assembly, the run's
+      evidence and the written mathematics, and the result is registered as reported, with
+      n-012's reported lower lane and reported status taking it and its verified lanes
+      unchanged. A complete build is priced by the source's receipts at about 28 CPU-hours, 17
+      to 40, within the owner's 40 CPU-hour item cap at its high reading and gated on a
+      machine (think-dd3v); the issue's text calls it far above the cap. The statement audit
+      and the mathematical review are stage 4's.
+    read_through: '2026-10-25T05:38:24Z'
+    results:
+    - key: n12-lean
+      claim: >-
+        A Lean 4 proof, N12Compact.Final.optimality : S12.packingConstant12 = 4, that the
+        infimum of the sides L > 0 at which twelve open unit squares at arbitrary rotation
+        and translation lie in [0, L]^2 with pairwise disjoint interiors is 4, attained by
+        the 4 x 3 grid: s(12) = 4, with the three standard axioms and 1,624 native_decide
+        axioms.
+      source: body
+      register:
+      - T-243
+      evidence:
+      - E-n012-jatloe-lean-report
+    beads:
+    - think-4l14
+    - think-dd3v
+    answer_bead: think-4l14
+    replies: []
+    close_when: >-
+      The import is on main and the resulting state is posted with the entry's id and rungs,
+      and the statement audit, the mathematical review and the build that would raise its
+      rungs are done or owned by their beads with nothing the issue asks for queued.

@@ -8,8 +8,8 @@ ours, which rest on someone else's argument, and how far each has been checked.
 
 ## The short version
 
-- **767** evidence records. **422** are formal; **413** of those were established here. **12** are samples, counted separately.
-- **327** rest on an argument made elsewhere, of which **8** have been read by nobody here.
+- **768** evidence records. **422** are formal; **413** of those were established here. **12** are samples, counted separately.
+- **328** rest on an argument made elsewhere, of which **8** have been read by nobody here.
 - **1** formal record proves a theorem only under a hypothesis nothing here has replayed, and is verified as that implication alone: `E-k2m4-evand-bentz4-lean-build` (ValidTilt9).
 - **43** claim to be first established here. **14** make no novelty statement at all - not assessed, which is not the same as not novel.
 
@@ -227,10 +227,11 @@ results, it is a statement about what this repository has itself examined.
 | `E-n012-levy-15680000-3949423-source-replay` | 0 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel | producer’s code | not recorded | `V-evand-angle-net-verify` |
 | `E-n012-levy-15680000-3949423-native-parent-core` | 0 | lower-bound | verified | strict inequalities only | here | - | apparently-novel | independent | not recorded | `V-sqpack-parent-core-native` |
 | `E-n012-levy-15680000-3949423-audit` | 0 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | apparently-novel | not applicable | not recorded | `V-audit-s12-reweighted` |
-| `E-n012-squarepacker-7943-2000-report` | 1 | lower-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | `V-evand-angle-net-verify`, `V-squarepacker-indep-check-cpp` |
+| `E-n012-squarepacker-7943-2000-report` | 0 | lower-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | `V-evand-angle-net-verify`, `V-squarepacker-indep-check-cpp` |
 | `E-n012-squarepacker-7943-2000-source-replay` | 1 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published | producer’s code | not recorded | `V-evand-angle-net-verify`, `V-squarepacker-indep-check-cpp` |
 | `E-n012-squarepacker-7943-2000-native-parent-core` | 1 | lower-bound | verified | strict inequalities only | here | - | previously-published | independent | not recorded | `V-sqpack-parent-core-native` |
 | `E-n012-squarepacker-7943-2000-audit` | 0 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | previously-published | not applicable | not recorded | `V-audit-s12-v11` |
+| `E-n012-jatloe-lean-report` | 1 | exact-value | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
 | `E-n021-evand-5000-1001-report` | 0 | lower-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | `V-evand-angle-net-verify`, `V-evand-xcheck-py` |
 | `E-n021-evand-5000-1001-source-replay` | 0 | lower-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | producer’s code | not recorded | `V-evand-angle-net-verify`, `V-evand-xcheck-py` |
 | `E-n013-evand-casefree-cover-report` | 0 | lower-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | `V-evand-zeromargin-py`, `V-evand-zmcheck` |
@@ -793,10 +794,10 @@ results, it is a statement about what this repository has itself examined.
 
 ## What the register rests on
 
-- **assurance**: numerically-checked 5, reported 329, verified 433
-- **method**: exact-algebraic 240, interval-certified 175, numerical-multiprecision 5, proof-assistant-checked 6, proof-audited 4, published-proof 8, reported 329
-- **novelty**: apparently-novel 43, common-knowledge 4, not assessed 14, previously-published 706
-- **relationship to the producer's code**: generator 5, independent-implementation 262, not-applicable 34, same-implementation 423, shared-components 37, unknown-historical 6
+- **assurance**: numerically-checked 5, reported 330, verified 433
+- **method**: exact-algebraic 240, interval-certified 175, numerical-multiprecision 5, proof-assistant-checked 6, proof-audited 4, published-proof 8, reported 330
+- **novelty**: apparently-novel 43, common-knowledge 4, not assessed 14, previously-published 707
+- **relationship to the producer's code**: generator 5, independent-implementation 262, not-applicable 34, same-implementation 424, shared-components 37, unknown-historical 6
 
 The `cases` column is how many frontier records cite each piece of evidence, and it is the reason to read this table rather than count records. Ranked below are the *formal* records only: a `reported` record cited across the frontier may be a shared catalogue and is labelled as such, which is the register working rather than risk. The risk is a verified claim resting on an argument nobody has examined.
 

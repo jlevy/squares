@@ -5483,7 +5483,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-07'
+  lastmod: '2026-10-25'
   status: live
 - path: cases/120.html
   canonical: cases/120.html
@@ -8824,6 +8824,14 @@ urls:
   status: live
 - path: profiles/index.html
   canonical: profiles/
+  kind: page
+  generator: devtools.render_contributors:contributor_pages
+  producer: overview
+  first_published: '2026-10-13'
+  lastmod: '2026-10-22'
+  status: live
+- path: profiles/jatloe.html
+  canonical: profiles/jatloe.html
   kind: page
   generator: devtools.render_contributors:contributor_pages
   producer: overview
@@ -21405,6 +21413,39 @@ urls:
       - packing/resources/web/evand-kaggle-descents-2026-10-24/measure/identity.json
       - packing/campaign/issue-intake/upper-bounds-evand-20261024/README.md
       - packing/devtools/upper_bound_reports.py
+- path: result/t-243.html
+  canonical: result/t-243.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-25'
+  lastmod: '2026-10-25'
+  status: live
+  identity:
+    kind: optimality
+    scope:
+      n_values:
+      - 12
+    established: null
+    attribution:
+      source_keys:
+      - '[Jatloe n12 Lean 2026-10-16]'
+      published: '2026-10-16'
+    builds_on: null
+    evidence:
+    - E-n012-jatloe-lean-report
+    artifacts:
+    - packing/resources/web/jatloe-n12-lean-2026-10-16/README.md
+    - packing/resources/web/jatloe-n12-lean-2026-10-16/Jatloe12SquaresFormalized/Lean/Proofs/N12-jatloe/Compact/Assembly/Final.lean
+    - packing/resources/web/jatloe-n12-lean-2026-10-16/Jatloe12SquaresFormalized/Lean/Proofs/N12-jatloe/Compact/Assembly/SourceAssembly.lean
+    - packing/resources/web/jatloe-n12-lean-2026-10-16/Jatloe12SquaresFormalized/Lean/Proofs/N12-jatloe/source/S12/PackingConstant.lean
+    - packing/resources/web/jatloe-n12-lean-2026-10-16/Jatloe12SquaresFormalized/Lean/Proofs/N12-jatloe/source/S12/Normalization.lean
+    - packing/resources/web/jatloe-n12-lean-2026-10-16/Jatloe12SquaresFormalized/Lean/Proofs/N12-jatloe/source/S12/Diagonal.lean
+    - packing/resources/web/jatloe-n12-lean-2026-10-16/Jatloe12SquaresFormalized/verification/run-38849916588/global-type-axiom-audit.log.gz
+    - packing/resources/web/jatloe-n12-lean-2026-10-16/Jatloe12SquaresFormalized/verification/run-38849916588/github-replay.json.gz
+    - packing/resources/web/jatloe-n12-lean-2026-10-16/receipts/lean-closure.json.gz
+    - packing/resources/web/jatloe-n12-lean-2026-10-16/receipts/statement-closure.json.gz
+    - packing/devtools/lean_closure.py
 - path: results.html
   canonical: results.html
   kind: page

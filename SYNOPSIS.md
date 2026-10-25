@@ -179,6 +179,7 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 | [T-153](packing/frontier/RESULTS.md) | 17 | `V0` | `C1` | `S5` | `previously-published` | Marc Leonard Overbeck (Kleddamag) claims, as a candidate proof, that `s(17) = L = 4.67553009360455095163…`, the side of John Bidwell’s 1998 packing of seventeen unit squares, with the squares closed, independently rotated and allowed to touch. |
 | [T-154](packing/frontier/RESULTS.md) | 17 | `V3` | `C1` | `S5` | `previously-published` | Oscar Fitzharding reports a Lean 4 proof that John Bidwell’s 1998 packing of seventeen unit squares is optimal: `s(17) = 4.67553009360455095163…`, T-153’s value L. |
 | [T-194](packing/frontier/RESULTS.md) | 19 | `V0` | `C1` | `S5` | `previously-published` | Oscar Fitzharding reports a Lean 4 proof that Robert Wainwright’s 1979 packing of nineteen unit squares is optimal: s(19) = 3 + (4/3)√2 = 4.885618083164126731735584965612…. |
+| [T-243](packing/frontier/RESULTS.md) | 12 | `V0` | `C0` | `S5` | `previously-published` | Jatloe reports a Lean 4 proof that twelve unit squares need a square of side 4, so that the 4 x 3 grid is optimal: s(12) = 4. |
 | [T-010](packing/frontier/RESULTS.md) | 11 | `V3` | `C3` | `S4` | `apparently-novel` | s(11) >= 2 + 4/sqrt(5), by a source-distinct repair of Stromquist 2003’s Figure 14 point set: the replacement G' = (79/100, 37/20) restores the complete Figure 13 localization, A-triple forcing, repaired unavoidability, and 3+9 capacity chain, certified exactly. |
 | [T-017](packing/frontier/RESULTS.md) | 12 | `V3` | `C3` | `S4` | `apparently-novel` | s(12) >= 99/25, by this project’s weighted fractional unavoidable-set certificate at container side 99/25 = 3.96. |
 | [T-019](packing/frontier/RESULTS.md) | 17, 18, 19 | `V3` | `C3` | `S4` | `apparently-novel` | s(17) >= 459/100, and s(18) >= 459/100 and s(19) >= 459/100, from this project’s weighted fractional unavoidable-set certificate at container side 459/100 = 4.59. |
@@ -445,7 +446,7 @@ hypothesis status and summarizes experiment verdicts, and the
 | Explorations | 50 | 30 linked to proposed hypotheses; 20 uncodified |
 | Hypotheses | 283 | 74 confirmed; 48 refuted; 75 blocked; 24 unresolved; 20 open; 37 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
 | Experiments | 246 | 94 accepted; 53 rejected; 63 unresolved; 12 baseline; 18 blocked; 5 abandoned; 0 in progress; 1 exhausted |
-| Frontier results | 242 | 242 registered, 210 by others |
+| Frontier results | 243 | 243 registered, 211 by others |
 
 <!-- END CURRENT-RESEARCH-STATUS -->
 

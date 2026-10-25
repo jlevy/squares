@@ -52,6 +52,10 @@ contributor:
     - id: intake-identity
       archive_path: packing/resources/web/queuingtheorydotcom-n11-lean-2026-10-06/README.md
       locator: 'Opening identity account and Source and Pin table record the owner-confirmed GitHub/X join, former MathCompSciFTW handle, and curated Mannaseh Ahmed spelling; primary receipts expose only the account display name.'
+    - id: n12-publication
+      archive_path: packing/resources/web/jatloe-n12-lean-2026-10-16/receipts/announcement/tweet-2113097037306569124.json
+      url: https://x.com/ManassehA06/status/2113097037306569124
+      locator: 'The announcement of the twelve-square formalization, 22 October 2026: user.id_str 1499452114313129988, the account of the n = 11 announcements, screen_name ManassehA06. Every commit of Queuingtheorydotcom/Jatloe12SquaresFormalized, which the jatloe-n12-lean-2026-10-16 packet pins, is by Queuingtheorydotcom.'
   provenance:
     - field: /surname
       sources: [bibliography]

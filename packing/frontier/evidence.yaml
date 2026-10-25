@@ -11918,6 +11918,72 @@ evidence:
       the bound; Daniel's verifier and the native interval run decide it.
     source_reviewed: '2026-10-05'
 
+  - id: E-n012-jatloe-lean-report
+    claim: exact-value
+    scope: {n_values: [12]}
+    assurance: reported
+    reported_method: proof-assistant-checked
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Jatloe n12 Lean 2026-10-16]'
+    certificate: packing/resources/web/jatloe-n12-lean-2026-10-16/Jatloe12SquaresFormalized/Lean/Proofs/N12-jatloe/Compact/Assembly/Final.lean
+    replay_status: not-attempted
+    verifiers: []
+    axioms_receipt: packing/resources/web/jatloe-n12-lean-2026-10-16/Jatloe12SquaresFormalized/verification/run-38849916588/global-type-axiom-audit.log.gz
+    proof:
+      source: packing/resources/web/jatloe-n12-lean-2026-10-16/Jatloe12SquaresFormalized/Lean/Proofs/N12-jatloe/Compact/Assembly/Final.lean
+      theorem: >-
+        N12Compact.Final.optimality : S12.packingConstant12 = 4, with no hypothesis, where
+        packingConstant12 := sInf feasibleSides, feasibleSides := {L | 0 < L and Nonempty
+        (UnitPacking L)}, and UnitPacking L is twelve OpenSquare of side 1, each with c^2 +
+        s^2 = 1 and Inside x y the open band loU < c x + s y < loU + side, loV < -s x + c y <
+        loV + side, every point Inside one in [0, L]^2 and no point Inside two.
+      scope: >-
+        s(12) = 4 for twelve unit squares with independent translations and arbitrary
+        rotations, interiors open and pairwise disjoint, boundary contact allowed. The
+        upper half is gridPacking, the 4 x 3 grid of axis-parallel squares, so the infimum
+        is attained; the lower half normalizes any packing below side 4 and excludes it
+        through marker ownership and 117 original cases. No uniqueness of the optimal
+        packing is stated.
+      pinpoints: >-
+        Lean/Proofs/N12-jatloe/Compact/Assembly/Final.lean (optimality and its #print
+        axioms); Compact/Assembly/SourceAssembly.lean (Pending, pending_closed, optimality);
+        source/S12/PackingConstant.lean (gridPacking, feasibleSides, packingConstant12,
+        packingConstant12_eq_four_of_exclusion); source/S12/Normalization.lean (UnitPacking,
+        the normalization); source/S12/Packing.lean (NormalizedPacking, markerOwners);
+        source/S12/Diagonal.lean (OpenSquare, Inside, InBands); verification/run-38849916588/
+        (GlobalTypeAudit.lean, global-type-axiom-audit.log, github-replay.json,
+        verified-source-manifest.json); the packet's receipts/lean-closure.json.gz and
+        receipts/statement-closure.json.gz.
+      assumptions:
+        - Lean v4.35.0's kernel and Mathlib at 56a00585 are sound, and so are Lean's compiler and the evaluator the 1,624 native_decide facts are decided by
+        - The run passed as the source reports. Its upstream repository, EvolvingPrograms/SquaresLean at 1f60d41, and run 38849916588 are not public, the run reused all 5,377 compiled objects from earlier runs, and nothing here built or elaborated any module
+        - The proof sources at d0caf45 are the ones the run accepted, as README.md and SOURCE-PROVENANCE.json say and verified-source-manifest.json lists; nothing here compared them
+    limitations: >-
+      Queuingtheorydotcom/Jatloe12SquaresFormalized at d0caf45 (2026-10-16T05:12:49Z, the tag
+      n12-verified-2026-10-16) reports a Lean 4 proof of s(12) = 4, credited to Jatloe for
+      the mathematical proof and a partial formalization, Ben Gurevitch for aid in
+      formalization and CTJLewis for refactoring and compiling it, and published by
+      Manasseh Ahmed, who announced it on X on 22 October 2026. Its README says the proof
+      sources are copied byte for byte from EvolvingPrograms/SquaresLean at 1f60d41, whose
+      run 38849916588 authenticated all 5,377 project modules against their cached objects
+      and receipts (0 compiled afresh) and ran a fresh final type and axiom audit: propext,
+      Classical.choice, Quot.sound and 1,624 native_decide axioms, no sorryAx. The
+      checkpoint of those objects comes from run 38847898861, which failed later, and no
+      full rebuild has been run by anyone; the source says so. The closure read here from
+      the Git objects (devtools.lean_closure) has 5,377 modules, none missing, with no sorry
+      or axiom declaration and 2,572 uses of native_decide in 42 modules. The source's
+      per-module receipts in its release's evidence archive (SHA-256 db3447b2..., checked
+      on download) sum to 16.6 serial wall-hours and 38.5 Lean-thread-hours, all exit 0,
+      so a complete build here is about 17 to 39 CPU-hours, near the owner's 40 CPU-hour
+      item cap, with its memory unrecorded (T-243's unfinished_confirmations). No source
+      build entry is added: the accepting run compiled nothing, and no audit has read its
+      receipts. The statement, its definitions and the written proof have not been
+      reviewed here.
+    source_reviewed: '2026-10-25'
+
   - id: E-n021-evand-5000-1001-report
     claim: lower-bound
     scope: {n_values: [21]}

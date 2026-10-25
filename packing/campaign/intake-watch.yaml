@@ -1533,3 +1533,19 @@ repositories:
       the fang-theorem-a-2026-10-24 packet pins db1ed62, retains theorem-a/ and the four
       root text files and both Zenodo records, and the asymptotic register records Theorem A
       as a reported row after Daniel's, so this read holds nothing back.
+  # The import of #810 (think-4l14, w-n12-records-1025, 25 October): Jatloe's Lean proof
+  # that s(12) = 4, a repository new to the record.
+  - url: https://github.com/Queuingtheorydotcom/Jatloe12SquaresFormalized
+    read_through: d0caf4532a7ead68be1389ef87387b126fc2e0ab
+    read_on: '2026-10-25'
+    note: >-
+      All six commits on main, from e294e45 (2026-10-15T16:26:13Z) to d0caf45, the head and
+      the tag n12-verified-2026-10-16 (2026-10-16T05:12:49Z), which the
+      jatloe-n12-lean-2026-10-16 packet pins and T-243 cites. The first five built the
+      publication under projects/n12-refactored/: its source with credits and resumable
+      verification, a retry for Mathlib's cache, and three fixes of replay failures and of
+      decidability in the finite checks. d0caf45 moves the project to
+      Lean/Proofs/N12-jatloe/, brings in the proof sources the accepted run checked (1,199 of
+      its 5,462 Lean blobs are new in it) and adds the run's evidence, so no earlier tree
+      holds the proof the record cites and nothing in them is to import. The release
+      n12-verified-2026-10-16 adds two archives, pinned by size and SHA-256 in the packet.

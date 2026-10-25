@@ -691,7 +691,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | cases/117.html | cases/117.html | record | overview | 2026-10-03 | 2026-10-14 | live |
 | cases/118.html | cases/118.html | record | overview | 2026-10-03 | 2026-10-14 | live |
 | cases/119.html | cases/119.html | record | overview | 2026-10-03 | 2026-10-14 | live |
-| cases/12.html | cases/12.html | record | overview | 2026-10-03 | 2026-10-07 | live |
+| cases/12.html | cases/12.html | record | overview | 2026-10-03 | 2026-10-25 | live |
 | cases/120.html | cases/120.html | record | overview | 2026-10-03 | 2026-10-14 | live |
 | cases/121.html | cases/121.html | record | overview | 2026-10-03 | 2026-10-07 | live |
 | cases/122.html | cases/122.html | record | overview | 2026-10-03 | 2026-10-14 | live |
@@ -1084,6 +1084,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | profiles/hiroshi-nagamochi.html | profiles/hiroshi-nagamochi.html | page | overview | 2026-10-13 | 2026-10-22 | live |
 | profiles/hong-duc-bui.html | profiles/hong-duc-bui.html | page | overview | 2026-10-13 | 2026-10-22 | live |
 | profiles/index.html | profiles/ | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/jatloe.html | profiles/jatloe.html | page | overview | 2026-10-13 | 2026-10-22 | live |
 | profiles/joe-devincentis.html | profiles/joe-devincentis.html | page | overview | 2026-10-13 | 2026-10-22 | live |
 | profiles/john-bidwell.html | profiles/john-bidwell.html | page | overview | 2026-10-13 | 2026-10-22 | live |
 | profiles/joost-de-winter.html | profiles/joost-de-winter.html | page | overview | 2026-10-13 | 2026-10-22 | live |
@@ -1379,6 +1380,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | result/t-240.html | result/t-240.html | result | overview | 2026-10-24 | 2026-10-25 | live |
 | result/t-241.html | result/t-241.html | result | overview | 2026-10-24 | 2026-10-25 | live |
 | result/t-242.html | result/t-242.html | result | overview | 2026-10-24 | 2026-10-25 | live |
+| result/t-243.html | result/t-243.html | result | overview | 2026-10-25 | 2026-10-25 | live |
 | results.html | results.html | page | overview | 2026-09-29 | 2026-10-22 | live |
 | sitemap.xml | sitemap.xml | site-file | overview | 2026-10-07 | 2026-10-22 | live |
 | social-card.png | social-card.png | asset-file | overview | 2026-09-29 | 2026-10-22 | live |
