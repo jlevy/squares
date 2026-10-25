@@ -862,13 +862,13 @@ Grid-slack at 0.5, 1 and 5 degrees (`grid-slack-adopt-2026-10-25-n182-grid-deg05
 `-grid-deg1` and `-grid-deg5`, 322 CPU-seconds) draws one view at the witness’s side,
 and Evan Daniel’s regularizer (`evand-regularize-adopt-2026-10-25-n182-evand`, 263
 CPU-seconds) solves the witness to a certified KKT local minimum and draws a same-side
-view, moving 49 squares, the largest by 0.381. Both are admitted at row 10, and the
-selection draws the regularizer’s: against the axis tool’s view it keeps 2 light, 4
-uneven and no near-axis squares, with fewer angle classes and hues (15 and 15 against 20
-and 19) and more full shared sides (429 and 455 against 409 and 441). The drawn view is
-the display view the source published beside the certificate,
-`s182-1024_regularized.cert`, to $1.9 \times 10^{-19}$. `SETTLED`’s entry at 182, made
-on T-174’s witness, is removed.
+view, moving 49 squares beyond $10^{-9}$ (37 beyond $10^{-3}$), the largest by 0.381.
+Both are admitted at row 10, and the selection draws the regularizer’s: against the axis
+tool’s view it keeps 2 light, 4 uneven and no near-axis squares, with fewer angle
+classes and hues (15 and 15 against 20 and 19) and more full shared sides (429 and 455
+against 409 and 441). The drawn view is the display view the source published beside the
+certificate, `s182-1024_regularized.cert`, to $1.9 \times 10^{-19}$. `SETTLED`’s entry
+at 182, made on T-174’s witness, is removed.
 The evidence is retained in
 [`cases/regularized_drawings/think-2lzo-2026-10-25/`](../../cases/regularized_drawings/think-2lzo-2026-10-25/README.md).
 The index draws 86 views: 27 by the axis tool, 38 by Evan Daniel’s regularizer and 21 by

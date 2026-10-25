@@ -34279,7 +34279,7 @@ results:
     registered: '2026-10-25'
     landed: '2026-10-25'
     headline: >-
-      Daniel's new arrangement at 182, 3.17e-3 below the house
+      Daniel's new arrangement at 182, 3.17e-3 below T-174
     claim: >-
       One complete rational source certificate reports a finite upper-bound improvement at
       the exact side it states: s(182) <= 13.970916436214678735385725854133, 3.17e-3 below
@@ -34415,7 +34415,8 @@ results:
       the squares' motion (N-4).
 
       The source's s182-1024_regularized.cert is a display view at the same side, one to one
-      with the certificate under the identity: it moves 49 squares, 5 beyond a tenth
+      with the certificate under the identity: it moves 49 squares beyond 1e-9 (37 beyond
+      1e-3), 5 beyond a tenth
       (largest 0.381), and the review's checker accepts it. It proves no other bound and is
       not registered.
 
@@ -34437,12 +34438,14 @@ results:
 
       The case at 182 adopted this certificate as its house best packing in the pass of 25
       October 2026, from T-174, 3.17e-03 above it, which stays retained as history, with the
-      credit of Evan Daniel's packing from an L-cut of Francisco Couzo's 211 packing. Both
-      strong generators decided the new witness in the same pull request
+      credit of Evan Daniel's packing from an L-cut of Francisco Couzo's 211 packing.
+
+      Both strong generators decided the new witness in the same pull request
       (cases/regularized_drawings/think-2lzo-2026-10-25): grid-slack's view at 0.5, 1 and 5
       degrees and Evan Daniel's regularizer's same-side view were both admitted at row 10,
-      and the selection draws the regularizer's, which moves 49 squares, the largest by
-      0.381, at the witness's side. It is the source's own display view,
+      and the selection draws the regularizer's, which moves 49 squares beyond 1e-9 (37
+      beyond 1e-3, the count the regularized_drawings item below gives as moved), the
+      largest by 0.381, at the witness's side. It is the source's own display view,
       s182-1024_regularized.cert, to 1.9e-19, so the drawing proves no other bound; no view
       is below the side.
     next_rung: >-

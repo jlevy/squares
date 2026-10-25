@@ -4169,12 +4169,12 @@ sources:
       arrangement of Daniil Ostashev's design (T-175), which the certificate follows where
       the two differ (M-1 of the 25 October review). The source names this project's
       register as where the start came from, so the key builds on the project and credits
-      the Levy link, as the 22 October key of Daniel's 303 does. The binary64 packing it was solved from, its
-      80-digit KKT point, the solver's report, the comparison with the source store's prior
-      best and a regularized display view at the same side are retained beside it.
-      MIT-licensed; Claude assistance disclosed. The KKT and local-minimum statements are the
-      author's numerical evidence; no global optimality claim. Retained in
-      web/evand-n182-2026-10-25/.
+      the Levy link, as the 22 October key of Daniel's 303 does. The binary64 packing it was
+      solved from, its 80-digit KKT point, the solver's report, the comparison with the
+      source store's prior best and a regularized display view at the same side are
+      retained beside it. MIT-licensed; Claude assistance disclosed. The KKT and
+      local-minimum statements are the author's numerical evidence; no global optimality
+      claim. Retained in web/evand-n182-2026-10-25/.
 credited_names:
   Benjamin Greff: Greff
   Hiroaki Hosono: Hosono
