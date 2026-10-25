@@ -129,6 +129,11 @@ DECLARED_CONSUMERS = {
         "(`rational_bound`): a closed form's evaluation is not U; U is the ceiling the "
         "view's side is held to, never s(n)"
     ),
+    "packing/devtools/check_exact_side_packing.py": (
+        "the s(29) exact-side check reads a case record's verified bound as the rational "
+        "ceiling the decided side S* is ordered against, exactly (T-246, #816); a ceiling it "
+        "compares with, never s(n)"
+    ),
     "packing/devtools/regularize_select.py": (
         "the selection among finished regularization runs reads each case's verified bound "
         "as U through the driver: a view whose exact side is above it is not drawn, one "
