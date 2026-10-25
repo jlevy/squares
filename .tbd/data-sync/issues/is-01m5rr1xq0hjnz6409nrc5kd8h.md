@@ -5,8 +5,8 @@ title: "Import #804: Hyukdong Kim's exact minimal polynomials of the record side
 kind: task
 status: in_progress
 priority: 2
-version: 3
-delegate: c-triage-9vai-1025
+version: 6
+delegate: c-import-804-1025
 labels:
   - result-import
 dependencies: []
@@ -14,7 +14,7 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-25T05:20:39.648Z
-updated_at: 2026-10-25T05:41:16.813Z
+updated_at: 2026-10-25T05:42:29.566Z
 started_at: 2026-10-25T05:21:00.185Z
 ---
 New 2026-10-25 issue https://github.com/jlevy/squares/issues/804 (HyukdongKim, 01:57:25Z): the record side at each of 88, 126, 172, 199 and 263 is a root of a stated irreducible polynomial (degrees 7, 2, 24, 16, 17; 126 = 15/2 + 3 sqrt 2), the register having minimal_polynomial: null there; exact_forms.json. Claude-assisted. Stage 1 triage read-only first: which houses the polynomials describe today (the record has moved since 2ec489d1e at some counts?), how to verify (exact KKT/rigidity system, PSLQ is not a proof), and the register action (new exact-value entries, or evidence on the houses).
@@ -36,3 +36,5 @@ No house/case record moved since 2ec489d1e. Atlas input = T-174 witness to binar
 Action proposed: 88/126/199 not registered (second derivation of T-193's values; #639 exact-side-51 precedent). 172/263 one new upper-bound entry V0/C0 S2 as reported (T-121/T-193 precedent); validation needs an exact number-field configuration (ask author; else W7 KKT builder, priced ~1 agent-day + 10-100 CPU-h at 172 without python-flint). Decision of a supplied config ~2 CPU-h (up to ~8) for both counts on two routes.
 
 Drafts: scratchpad triage-804/drafts/{result-requests-804.yaml (triage: pending, schema-valid), result-requests-804-results-after-triage.yaml (schema-valid), register-entry-172-263.yaml (schema-valid), import-plan-804.md, ack-804.md}.
+
+2026-10-25 coord-intake-1024 on c-triage-9vai-1025's report: decided by stated rules (stage 1 table; T-120..T-123 and T-193 precedent), not owner questions. 88, 126, 199: no entry (a second derivation of T-193's values, #639 exact-side-51 precedent). 172, 263: one new reported upper-bound entry, V0/C0, S2, phrased 's(n) <= <root>' never 's(n) =', credited to Hyukdong Kim after T-174's finders; nothing recorded on T-193. The configuration builder (W7-style, 10-100 CPU-h at 172) is a later bead, priced against the 40 CPU-h item cap before it runs. Records lane c-import-804-1025 (wt-804).
