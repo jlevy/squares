@@ -14,6 +14,13 @@ files in it are pinned by their digests and never opened as code.
   measured at triage, and writes the packet's ``acquisition/sources.json`` (the attachment,
   every member's path, size and SHA-256, and the source's inputs pinned by Git blob, size
   and SHA-256) and ``facts/exact-forms.json`` (each count's polynomial and printed side).
+- ``configurations --archive ZIP [--check]`` holds the author's later attachment,
+  ``t244-exact-configurations.zip`` (2026-10-25T09:06:23Z), to the SHA-256 his comment
+  states and the size measured when it was read, and each of its two certificates to its
+  stated digest, and writes the ``hyukdongkim-t244-configurations-2026-10-25`` packet's
+  ``acquisition/sources.json`` and one derived fact per count, ``facts/nN.json.gz``: the
+  certificate's content, read as JSON data. Nothing here decides it, and no file of the
+  archive is run.
 - ``sides [--check]`` is offline. For each count it decides the polynomial primitive and
   irreducible over Q twice, by SymPy's ``factor_list`` and by ``sqpack.field`` through
   ``devtools.exact_sides.algebraic``; counts its real roots by Sturm's theorem; isolates
@@ -38,6 +45,8 @@ From ``packing/``, with the project interpreter::
     python campaign/issue-intake/upper-bounds-issue804-20261025/review/exact_forms.py \\
         derive --archive ZIP [--check]
     python campaign/issue-intake/upper-bounds-issue804-20261025/review/exact_forms.py \\
+        configurations --archive ZIP [--check]
+    python campaign/issue-intake/upper-bounds-issue804-20261025/review/exact_forms.py \\
         sides [--check]
     python campaign/issue-intake/upper-bounds-issue804-20261025/review/exact_forms.py \\
         poses --atlas DIR [--check]
@@ -46,6 +55,7 @@ From ``packing/``, with the project interpreter::
 from __future__ import annotations
 
 import argparse
+import gzip
 import hashlib
 import json
 import math
@@ -84,6 +94,26 @@ ATTACHMENT = "https://github.com/user-attachments/files/33917140/squares-exact-f
 ARCHIVE_SHA256 = "c770f9c37dee6b248543f3e661318630a0f279bc6a8c7663cb2efc53e2814ee7"
 ARCHIVE_BYTES = 14_112
 FORMS_MEMBER = "squares-exact-forms/exact_forms.json"
+#: The configurations the author attached to issue 804 at 2026-10-25T09:06:23Z, the
+#: digests the comment states for the archive and its two certificates, and the size
+#: measured when they were read; and where the second packet keeps what is derived.
+CONFIGURATIONS_COMMENT = "https://github.com/jlevy/squares/issues/804#issuecomment-6395743853"
+CONFIGURATIONS = (
+    "https://github.com/user-attachments/files/33922338/t244-exact-configurations.zip"
+)
+CONFIGURATIONS_SHA256 = "16e6ad9d04f1def897478e59260880320bc7c06ae89e41fa83837c7dc29c9a2d"
+CONFIGURATIONS_BYTES = 96_347
+CONFIGURATION_MEMBERS = {
+    172: (
+        "t244-exact-configurations/n172.minpoly.json",
+        "9230aa7aa4c6d4f4e31de4543b87e19db1e57bf4f8e105974c8bd45b203f02db",
+    ),
+    263: (
+        "t244-exact-configurations/n263.minpoly.json",
+        "de646870e0ecd0d6c042e4742de023ebbcdddb28aac4aa51469dbf53dc264686",
+    ),
+}
+CONFIGURATIONS_PACKET = PACKING / "resources/web/hyukdongkim-t244-configurations-2026-10-25"
 ATLAS_REPOSITORY = "evand/square-packing"
 ATLAS_COMMIT = "659ee62e4a9d39542a1146e8b011cc3ab6407ede"
 ATLAS_PATH = "site/www/data/p"
@@ -243,6 +273,99 @@ def derive(archive: Path, *, check: bool) -> int:
         },
     }
     return written(FACT, fact, check=check) | written(SOURCES, sources, check=check)
+
+
+def written_gzip(path: Path, document: Any, *, check: bool) -> int:
+    """Write ``document`` as deterministic gzip JSON, or with ``check`` compare it."""
+    data = gzip.compress(text_of(document).encode("utf-8"), mtime=0)
+    if check:
+        if not path.is_file() or path.read_bytes() != data:
+            print(f"{path.relative_to(REPO)} differs from a fresh computation")
+            return 1
+        print(f"{path.relative_to(REPO)} matches")
+        return 0
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_bytes(data)
+    print(f"wrote {path.relative_to(REPO)}")
+    return 0
+
+
+def configurations(archive: Path, *, check: bool) -> int:
+    """Keep the author's two configurations as derived exact facts, read as JSON data.
+
+    The archive is held to the digest the comment states and the size measured when it
+    was read, and each certificate to its stated digest, before anything in it is parsed.
+    Each fact keeps the certificate's content, the field polynomial, the root's interval,
+    the side and every square's centre and half-angle tangent as elements of the field,
+    with its source's digests; nothing here decides it.
+    """
+    data = archive.read_bytes()
+    digest = hashlib.sha256(data).hexdigest()
+    if digest != CONFIGURATIONS_SHA256 or len(data) != CONFIGURATIONS_BYTES:
+        sys.exit(
+            f"{archive}: SHA-256 {digest}, {len(data)} bytes; not the comment's attachment"
+        )
+    members: list[dict[str, Any]] = []
+    status = 0
+    with zipfile.ZipFile(archive) as bundle:
+        for info in bundle.infolist():
+            if info.is_dir():
+                continue
+            body = bundle.read(info)
+            members.append(
+                {
+                    "path": info.filename,
+                    "bytes": len(body),
+                    "sha256": hashlib.sha256(body).hexdigest(),
+                    "retained": False,
+                }
+            )
+        stated = {member["path"]: member["sha256"] for member in members}
+        for n, (member, sha) in CONFIGURATION_MEMBERS.items():
+            if stated.get(member) != sha:
+                sys.exit(f"{member}: SHA-256 {stated.get(member)}, not the stated {sha}")
+            content = json.loads(bundle.read(member).decode("utf-8"))
+            if int(content["n"]) != n or len(content["squares"]) != n:
+                sys.exit(f"{member}: n = {content['n']} with {len(content['squares'])} squares")
+            fact = {
+                "format": "issue-804-configuration-fact-v1",
+                "derived_by": TOOL,
+                "source": {
+                    "comment": CONFIGURATIONS_COMMENT,
+                    "attachment": CONFIGURATIONS,
+                    "archive_sha256": CONFIGURATIONS_SHA256,
+                    "member": member,
+                    "member_sha256": sha,
+                },
+                "note": (
+                    "The certificate's content in evand/square-packing's minpoly.json "
+                    "format (verify_exact.py), read as JSON data; the archive states no "
+                    "licence, so its bytes are not retained. Not decided here."
+                ),
+                "field_degree": len(content["field"]["f"]) - 1,
+                "squares": len(content["squares"]),
+                "configuration": content,
+            }
+            status |= written_gzip(
+                CONFIGURATIONS_PACKET / f"facts/n{n}.json.gz", fact, check=check
+            )
+    sources = {
+        "format": "issue-attachment-sources-v1",
+        "issue": ISSUE,
+        "comment": CONFIGURATIONS_COMMENT,
+        "attachment": {
+            "url": CONFIGURATIONS,
+            "bytes": CONFIGURATIONS_BYTES,
+            "sha256": CONFIGURATIONS_SHA256,
+            "sha256_stated_by_comment": True,
+            "raw_asset_retained": False,
+            "licence": "none stated",
+        },
+        "members": members,
+    }
+    return status | written(
+        CONFIGURATIONS_PACKET / "acquisition/sources.json", sources, check=check
+    )
 
 
 def forms() -> list[dict[str, Any]]:
@@ -512,6 +635,9 @@ def main(argv: list[str] | None = None) -> int:
     derive_parser = commands.add_parser("derive")
     derive_parser.add_argument("--archive", type=Path, required=True)
     derive_parser.add_argument("--check", action="store_true")
+    configurations_parser = commands.add_parser("configurations")
+    configurations_parser.add_argument("--archive", type=Path, required=True)
+    configurations_parser.add_argument("--check", action="store_true")
     sides_parser = commands.add_parser("sides")
     sides_parser.add_argument("--check", action="store_true")
     poses_parser = commands.add_parser("poses")
@@ -520,6 +646,8 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
     if args.command == "derive":
         return derive(args.archive, check=args.check)
+    if args.command == "configurations":
+        return configurations(args.archive, check=args.check)
     if args.command == "sides":
         return sides(check=args.check)
     return poses(args.atlas, check=args.check)

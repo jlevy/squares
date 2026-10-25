@@ -45981,9 +45981,11 @@ evidence:
       squares-exact-forms.zip, that the side of the record packing at 172 and at 263 is a
       stated root of an integer polynomial of degree 24 and 17, determined numerically: a
       KKT system on the active contacts of evand/square-packing's atlas packings at
-      659ee62, solved to 1,500 and 3,000 digits, and LLL. No exact configuration is
-      supplied, so no packing at either side has been decided here, and the source's code
-      was not run. Decided here from the derived fact: each polynomial is primitive and
+      659ee62, solved to 1,500 and 3,000 digits, and LLL. The issue supplies no exact
+      configuration; the author's configurations, attached to a later comment the same day,
+      are retained as derived facts (hyukdongkim-t244-configurations-2026-10-25) and not
+      yet decided, so no packing at either side has been decided here, and none of the
+      source's code was run. Decided here from the derived fact: each polynomial is primitive and
       irreducible over Q (SymPy and sqpack.field), each side is the root the source's
       100-digit print names, and each lies below T-174's rational certificate at its count,
       by 3.898e-89 and 2.126e-94, and below issue 639's degree-12 side there, by 1.185e-62

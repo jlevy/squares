@@ -24206,18 +24206,24 @@ issues:
       record holds. At 172 and 263 the sides are new: below T-174's rational certificates, the
       houses, by 3.898e-89 and 2.126e-94, and below #639's degree-12 sides there by 1.185e-62 and
       9.234e-63. The ledger of 25 October for the issue (upper-bounds-issue804-20261025) records
-      them, and T-244 registers them as reported, V0/C0; until an exact configuration exists at
-      each side, feasibility there is not shown. The issue's margin of 1.2e-22 at 126 is 1.174e-19.
+      them, and T-244 registers them as reported, V0/C0. The author's comment of 07:22:16Z
+      concedes 88, 126 and 199 to Daniel and withdraws the issue's paragraph claiming a margin of
+      1.2e-22 at 126 (it is 1.174e-19). His comment of 09:06:23Z attaches exact configurations at
+      172 and 263, in the minpoly.json format of Daniel's verify_exact.py, which the
+      hyukdongkim-t244-configurations-2026-10-25 packet keeps as derived facts; deciding them
+      exactly is queued (think-4rzl), and until then feasibility at either side is not shown.
       Claude assistance disclosed.
-    read_through: '2026-10-25T01:57:25Z'
+    read_through: '2026-10-25T09:06:23Z'
     results:
     - key: exact-sides-held
       claim: >-
-        s(88), s(126) and s(199) are roots of the stated polynomials: the 4th of five real roots of
-        s^7 - 50s^6 + 934s^5 - 7232s^4 + 3189s^3 + 301350s^2 - 1756847s + 3164362,
-        9.8824510304812468193284571556918969668693…; the larger root of 4s^2 - 60s + 153,
-        15/2 + 3√2 = 11.7426406871192851464050661726290942357090…; and the 2nd of two real roots of
-        the degree-16 polynomial in exact_forms.json, 14.6175721735928068435558612724500328081986….
+        s(88) <= S*, s(126) <= 15/2 + 3√2 and s(199) <= S*, each S* the stated root of its
+        polynomial: at 88 the 4th of five real roots of s^7 - 50s^6 + 934s^5 - 7232s^4 + 3189s^3 +
+        301350s^2 - 1756847s + 3164362, 9.8824510304812468193284571556918969668693…; at 126 the
+        larger root of 4s^2 - 60s + 153, 11.7426406871192851464050661726290942357090…; and at 199
+        the 2nd of two real roots of the degree-16 polynomial in exact_forms.json,
+        14.6175721735928068435558612724500328081986…. Each is the side of the record packing at
+        the count, as the source reports it.
       source: body
       not_registered: >-
         These are the polynomials, and so the numbers, of Evan Daniel's #639 exact sides at these
@@ -24230,16 +24236,39 @@ issues:
       queued: false
     - key: exact-sides-new
       claim: >-
-        s(172) <= 13.6189889568993984288635016293504898995040…, the least of the four real roots of
-        the degree-24 polynomial in exact_forms.json, and s(263) <=
-        16.7331660078993789705122814839596734462471…, the only real root of the degree-17
-        polynomial there. The source says each is the side of the record packing at its KKT point,
+        s(172) <= S*, the least of the four real roots of the degree-24 polynomial in
+        exact_forms.json, 13.6189889568993984288635016293504898995040150521961793814779549035630128682876859236484103034563728798…, and s(263) <= S*, the only real root of the degree-17
+        polynomial there, 16.7331660078993789705122814839596734462471472483871051710853314027161147491596783918785611086390994182…, each cut at 100 places. The source says each is the side of the record packing at its KKT point,
         determined numerically at 3,000 digits, and gives no exact configuration.
       source: body
       register:
       - T-244
       evidence:
       - E-hyukdongkim-804-exact-forms-report
+    - key: configurations-172-263
+      claim: >-
+        Exact configurations realizing s(172) <= S* and s(263) <= S*, T-244's sides: every centre
+        and half-angle tangent in a number field K holding S*, of degree 24 and 17, every contact
+        an identity in K and every other pair and wall separated exactly, in
+        t244-exact-configurations.zip (n172.minpoly.json and n263.minpoly.json, in the
+        minpoly.json format of evand/square-packing's verify_exact.py). The comment reports both
+        VALID on verify_exact.py at 659ee62 and on a FLINT/Arb checker of the author's, and
+        their controls refused; the configurations are the records' own arrangements, within
+        1.8e-12 and 3.5e-13 of T-174's witnesses.
+      source: https://github.com/jlevy/squares/issues/804#issuecomment-6395743853
+      not_registered: >-
+        Evidence for T-244, received and not yet decided. The attachment
+        (https://github.com/user-attachments/files/33922338/t244-exact-configurations.zip,
+        96,347 bytes, SHA-256 16e6ad9d04f1def897478e59260880320bc7c06ae89e41fa83837c7dc29c9a2d,
+        the comment's digest) states no licence, so the hyukdongkim-t244-configurations-2026-10-25
+        packet keeps both certificates' content as derived facts with every member's digest,
+        and none of its checker, controls or scripts ran. Deciding them exactly is think-4rzl's:
+        devtools.algebraic_witness_reports derive-forms reads Daniel's format for
+        sqpack.witness.exact_verify over each field, and the retained verify_exact.py decides
+        them as well, about 2 CPU-hours for both counts on both routes, up to about 8. That
+        would take T-244 to C3.
+      queued: true
+      bead: think-4rzl
     - key: negative-searches
       claim: >-
         LLL at 1,500 digits on the KKT-solved side found no relation of degree <= 80 at 55, 130 and
@@ -24257,10 +24286,10 @@ issues:
     answer_bead: think-9vai
     replies: []
     close_when: >-
-      The 88, 126 and 199 sides have been answered as values T-193 holds. T-244 is validated, or
-      declined with a reason, once an exact configuration at 172 and 263 is decided (think-4rzl).
-      The reply on main says so, and nothing the author asked for is queued and no question
-      awaits him.
+      The 88, 126 and 199 sides have been answered as values T-193 holds. The author's
+      configurations at 172 and 263 are decided exactly (think-4rzl), and T-244 is validated, or
+      declined with a reason. The reply on main says so, and nothing the author asked for is
+      queued and no question awaits him.
     notes: >-
       The pin is the issue's attachment
       https://github.com/user-attachments/files/33917140/squares-exact-forms.zip, 14,112 bytes,
@@ -24274,13 +24303,17 @@ issues:
       at every square; at 88, 126 and 199 they are other poses at the same side, moved by up to
       0.150, 0.137 and 0.611 under the box's best symmetry. The EXACT_FORMS.md the issue compares
       against is Daniel's table of 7 October (1b7e2cb), which covers the register as of 6
-      October; search/exact/cur/ (7d1407a, #639) holds the newer forms. The acknowledgement,
-      drafted in think-9vai's notes and posted after the import merges, asks three questions. The
-      first, for exact configurations at 172 and 263, goes under awaiting_author when it is posted
-      (changes: file): only a configuration at each side shows the packing T-244 asserts, and no
-      measurement here can stand in for it, though think-4rzl may build one here after 14 days.
-      The second, a licence for the bundle, and the third, the stationary side at 297, could
-      falsify nothing the record asserts, so they are informational and hold nothing open.
+      October; search/exact/cur/ (7d1407a, #639) holds the newer forms. Two comments of the
+      author followed, read on 25 October at 10:08Z and kept in the configurations packet. At
+      07:22:16Z (issuecomment-6394831482) he concedes the sides at 88, 126 and 199 to Daniel
+      (#639, T-193), whose second derivation his values are, withdraws the issue's paragraph
+      claiming a margin of 1.2e-22 at 126, and says he will supply configurations. At 09:06:23Z
+      (issuecomment-6395743853) he attaches them (the configurations-172-263 result). The
+      acknowledgement, drafted in think-9vai's notes and posted after the import merges, thanks
+      him for both comments and asks two questions: a licence for the two bundles, and the
+      stationary side at 297. Neither could falsify anything the record asserts, so both are
+      informational and hold nothing open. The question the first draft asked for
+      configurations is dropped, since the comment of 09:06:23Z answers it.
   - number: 806
     title: 's(182) ≤ 13.970916436215: registration request'
     author: evand

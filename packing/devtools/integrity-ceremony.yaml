@@ -126,8 +126,12 @@ allowlist:
       triage measured before `derive` reads a member; and each atlas file the source
       read, evand/square-packing site/www/data/p/best-<n>.json at 659ee62, fetched into a
       scratch directory, is held to its pinned Git blob, size and SHA-256 before `poses`
-      reads it. The derived fact and the receipts are this repository's files, read from
-      Git and compared with nothing.
+      reads it; and the author's later t244-exact-configurations.zip, which the
+      hyukdongkim-t244-configurations-2026-10-25 packet keeps none of either, is held to
+      the SHA-256 his comment states and the measured size, and each of its two
+      certificates to its stated digest, before `configurations` parses one. The derived
+      facts and the receipts are this repository's files, read from Git and compared with
+      nothing.
   - path: packing/devtools/couzo_refinement_reports.py
     kind: download
     boundary: >-

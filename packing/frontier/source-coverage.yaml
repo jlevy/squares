@@ -11496,9 +11496,13 @@ sources:
     which T-193 records, so they are a second derivation and are not recorded. At 172 and 263
     the sides are new, 3.898e-89 and 2.126e-94 below T-174's certificates, the houses, and
     1.185e-62 and 9.234e-63 below issue 639's degree-12 sides; the ledger of 25 October for
-    issue 804 records them and T-244 registers them as reported. No exact configuration is
-    supplied, so no packing at either side has been decided here. The case records are
-    unchanged until adoption.
+    issue 804 records them and T-244 registers them as reported. The issue supplied no exact
+    configuration; the author's configurations at both sides, attached to a comment of
+    2026-10-25T09:06:23Z, are kept as derived facts in
+    resources/web/hyukdongkim-t244-configurations-2026-10-25/ and not yet decided
+    (think-4rzl), so no packing at either side has been decided here. The author's comment of
+    07:22:16Z concedes 88, 126 and 199 to issue 639. The case records are unchanged until
+    adoption.
 selected_overrides:
 - n: 29
   source_id: pingyou-pr622-certificate-2026-10-15

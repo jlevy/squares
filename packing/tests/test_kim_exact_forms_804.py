@@ -10,6 +10,7 @@ the root each print names, the three sides that are T-193's, and the two below T
 
 from __future__ import annotations
 
+import gzip
 import hashlib
 import importlib.util
 import json
@@ -110,3 +111,24 @@ def test_the_register_states_cuts_of_the_roots() -> None:
         stated = Fraction(cut.rstrip("…"))
         assert stated <= low
         assert high < stated + Fraction(1, 10**100)
+
+
+CONFIGURATIONS = PACKING / "resources/web/hyukdongkim-t244-configurations-2026-10-25"
+
+
+@pytest.mark.parametrize(("n", "degree"), [(172, 24), (263, 17)])
+def test_the_configuration_facts_name_the_comment_attachment(n: int, degree: int) -> None:
+    """The author's configurations of 09:06:23Z are kept as derived facts, not bytes."""
+    sources = json.loads((CONFIGURATIONS / "acquisition/sources.json").read_text("utf-8"))
+    assert sources["attachment"]["sha256"] == (
+        "16e6ad9d04f1def897478e59260880320bc7c06ae89e41fa83837c7dc29c9a2d"
+    )
+    assert sources["attachment"]["raw_asset_retained"] is False
+    assert not any(member["retained"] for member in sources["members"])
+    fact = json.loads(gzip.decompress((CONFIGURATIONS / f"facts/n{n}.json.gz").read_bytes()))
+    member = f"t244-exact-configurations/n{n}.minpoly.json"
+    assert fact["source"]["member"] == member
+    stated = {item["path"]: item["sha256"] for item in sources["members"]}
+    assert fact["source"]["member_sha256"] == stated[member]
+    assert fact["field_degree"] == degree
+    assert fact["squares"] == n == len(fact["configuration"]["squares"])

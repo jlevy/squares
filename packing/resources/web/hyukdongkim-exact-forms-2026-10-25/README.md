@@ -19,7 +19,7 @@ It is a numerical determination with no exact configuration, and the issue says 
 
 | Field | Value |
 | --- | --- |
-| Issue | [jlevy/squares#804](https://github.com/jlevy/squares/issues/804), opened 2026-10-25T01:57:25Z by HyukdongKim; no comments and never edited when read at 05:50:06Z |
+| Issue | [jlevy/squares#804](https://github.com/jlevy/squares/issues/804), opened 2026-10-25T01:57:25Z by HyukdongKim; no comments and never edited when read at 05:50:06Z. The author’s two later comments, of 07:22:16Z and 09:06:23Z, are kept in the [configurations packet](../hyukdongkim-t244-configurations-2026-10-25/README.md) |
 | Evidence | The attachment [`squares-exact-forms.zip`](https://github.com/user-attachments/files/33917140/squares-exact-forms.zip) |
 | Pin | SHA-256 `c770f9c37dee6b248543f3e661318630a0f279bc6a8c7663cb2efc53e2814ee7`, which the issue states, and 14,112 bytes; an attachment has no commit or DOI |
 | Bibliography key | **[Kim exact forms 2026-10-25]** |
@@ -56,7 +56,8 @@ It is a numerical determination with no exact configuration, and the issue says 
 - **At 126** the issue says $15/2 + 3\sqrt{2}$ lies about $1.2 \times 10^{-22}$ below the
   verified bound $11742640687119285146522492579501/10^{30}$. Decided exactly here, the
   gap is $1.174 \times 10^{-19}$; that bound is the side times $1 + 10^{-20}$, as at 88 and
-  199.
+  199. The author withdrew that paragraph at 07:22:16Z, conceding the sides at 88, 126 and
+  199 to Daniel’s T-193.
 - **Negative searches.** No relation of degree up to 80 at 55, 130 and 179, and none up to
   70 at 110, 131, 132, 155, 156, 180 to 182, 208 to 211, 228 and 235 to 241; at 105 the
   KKT iteration did not converge, and at 154, 270 and 303 the atlas lagged the register.
@@ -141,13 +142,15 @@ side; the value is T-193’s either way. A measurement, which decides nothing.
 
 ## What Is Not Established
 
-- **Feasibility at the stated root.** No exact configuration exists at 172 or 263. Until
-  one does, that a packing has the side $S^*$ is the source’s numerical claim:
-  $s(172) \le S^*$ and $s(263) \le S^*$ are reported, not shown. What would show them is a
-  configuration with every centre and half-angle tangent in a number field holding
-  $S^*$, every contact an identity there and every other pair and wall separated
-  exactly. The acknowledgement asks the author for one, and think-4rzl prices a builder
-  here.
+- **Feasibility at the stated root.** The issue supplied no exact configuration at 172
+  or 263, so $s(172) \le S^*$ and $s(263) \le S^*$ are reported, not shown. What would
+  show them is a configuration with every centre and half-angle tangent in a number field
+  holding $S^*$, every contact an identity there and every other pair and wall separated
+  exactly. The author attached such configurations on 25 October at 09:06:23Z; they are
+  kept in the
+  [configurations packet](../hyukdongkim-t244-configurations-2026-10-25/README.md) and
+  not yet decided here. Deciding them on this repository’s two exact routes is
+  think-4rzl’s.
 - **Stationarity and local minimality.** The multipliers are not unique, the least is
   about $-6 \times 10^{-16}$, and no second-order condition was checked, so nothing is
   recorded about either.

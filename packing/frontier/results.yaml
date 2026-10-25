@@ -34273,6 +34273,7 @@ results:
           moved: 0
           max_move: 4.6e-4
           max_turn_deg: 0.019
+
   - id: T-243
     kind: upper-bound
     registered: '2026-10-25'
@@ -34473,6 +34474,7 @@ results:
           source's KKT point read against the certificate; credit, and the significance.
         verdict: accepted
         covers: [T-243]
+
   - id: T-244
     kind: upper-bound
     registered: '2026-10-25'
@@ -34492,11 +34494,13 @@ results:
       These are upper bounds as reported, and not shown. The source determined each side
       numerically: it solved the KKT system on the active contacts to 3,000 digits from the
       binary64 packings of Evan Daniel's atlas, and found each polynomial as an LLL relation
-      at 1,500 digits. It supplies no exact configuration, and says the nonnegativity of its
-      multipliers is not certified. Feasibility at either side is not
-      shown until an exact configuration at that side exists: every centre and half-angle
-      tangent in a number field holding the side, every contact an identity there and every
-      other pair and wall separated exactly.
+      at 1,500 digits. The issue supplies no exact configuration, and says the nonnegativity
+      of its multipliers is not certified. Feasibility at either side is not shown until an
+      exact configuration at that side is decided: every centre and half-angle tangent in a
+      number field holding the side, every contact an identity there and every other pair
+      and wall separated exactly. The author attached such configurations at both counts in
+      a later comment on the issue, the same day; they are retained here and not yet
+      decided.
 
       Here SymPy and sqpack.field found each polynomial primitive and irreducible, and each
       side is the root the source's 100-digit print names, decided exactly. Each lies below
@@ -34521,8 +34525,8 @@ results:
         Exact algebraic sides of packings the record already credits, 3.9e-89 and 2.1e-94
         below the houses' rational certificates: a citable detail of each case that changes
         no theorem, S2 as T-193's and T-120 to T-123's exact forms are. It also places the
-        stationary side of both packings below issue 639's sides, which the record's final
-        reply there asked about. No lower bound or optimum.
+        reported stationary side of both packings below issue 639's sides, which the
+        record's final reply there asked about. No lower bound or optimum.
       scored: '2026-10-25'
       by: think-9vai triage (draft), adopted by the #804 import (c-import-804-1025)
     novelty: previously-published
@@ -34534,28 +34538,33 @@ results:
       - packing/resources/web/hyukdongkim-exact-forms-2026-10-25/README.md
       - packing/resources/web/hyukdongkim-exact-forms-2026-10-25/facts/exact-forms.json
       - packing/resources/web/hyukdongkim-exact-forms-2026-10-25/acquisition/sources.json
+      - packing/resources/web/hyukdongkim-t244-configurations-2026-10-25/README.md
+      - packing/resources/web/hyukdongkim-t244-configurations-2026-10-25/facts/n172.json.gz
+      - packing/resources/web/hyukdongkim-t244-configurations-2026-10-25/facts/n263.json.gz
       - packing/campaign/issue-intake/upper-bounds-issue804-20261025/README.md
       - packing/campaign/issue-intake/upper-bounds-issue804-20261025/exact-sides.json
       - packing/campaign/issue-intake/upper-bounds-issue804-20261025/atlas-poses.json
       - packing/campaign/issue-intake/upper-bounds-issue804-20261025/review/exact_forms.py
     controls: [packing/tests/test_kim_exact_forms_804.py]
     next_rung: >-
-      An exact configuration at each side: every centre and half-angle tangent in a stated
-      number field, with the field's root isolated, from the author (the acknowledgement's
-      first question) or built here (think-4rzl, a W7 slice priced at 10 to 100 CPU-hours at
-      172 without python-flint, against the 40 CPU-hour item cap, which waits 14 days for the
-      author).
+      The author's exact configurations at both sides, received on 25 October in the
+      minpoly.json format of Evan Daniel's verify_exact.py and retained as derived facts
+      (the hyukdongkim-t244-configurations-2026-10-25 packet), decided exactly here
+      (think-4rzl): devtools.algebraic_witness_reports derive-forms reads them for
+      sqpack.witness.exact_verify over each field, with the duplicate-square and
+      outside-container controls, and the retained verify_exact.py decides them as well, a
+      second route. That would take C to C3, and a stage 4 review of the configurations and
+      the claim would take V to V3.
 
-      sqpack.witness.exact_verify then decides it over its field with the
-      duplicate-square and outside-container controls, and a second route decides it as
-      well: Daniel's verify_exact.py where the form is in his format. That would take C to
-      C3, and a stage 4 review of the configuration and the claim would take V to V3. The
-      house rule would then adopt both sides, with their regularization items naming T-174. Local minimality of
-      either packing at its side is a separate claim and is not registered.
+      The house rule would then adopt both sides, with their regularization items naming
+      T-174, measured against its witnesses. Only if the configurations fail would a builder
+      here be the route (think-4rzl's fallback). Local minimality of either packing at its
+      side is a separate claim and is not registered.
     unfinished_confirmations:
       - what: >-
-          The exact configuration at each side decided on sqpack.witness.exact_verify over
-          its number field, a positive and two controls a count, and on a second route.
+          The author's exact configuration at each side decided on
+          sqpack.witness.exact_verify over its number field, a positive and two controls a
+          count, and on the retained verify_exact.py, a second route.
         rung: C3
         link: think-4rzl
         estimated_cost:
@@ -34566,8 +34575,9 @@ results:
             adoption, where 302 at degree 7 took 230.72 s a job, a scale that reproduces the
             price of about 2 CPU-hours a job at 267, degree 41. It assumes the field degree
             equals the side's, 24 and 17; the upper end allows a field of twice that degree
-            and Daniel's verify_exact.py as the second route. Getting the configuration is
-            think-4rzl's, priced apart.
+            and Daniel's verify_exact.py as the second route. The author's configurations
+            are of degree 24 and 17, so the central estimate applies; under the 40
+            CPU-hour item cap.
           priced: '2026-10-25'
     notes: >-
       Source assertions only. Nothing of the source's code was executed here; the archive
@@ -34587,6 +34597,12 @@ results:
       The same issue reports the sides at 88, 126 and 199, whose polynomials and roots are
       those of issue 639's, which T-193 records at V3/C3: a second derivation of values the
       record holds, not recorded here, as issue 639's side at 51 was not.
+
+      The author's comment of 07:22:16Z concedes 88, 126 and 199 to issue 639 and withdraws
+      the issue's paragraph claiming a gap of 1.2e-22 at 126; his comment of 09:06:23Z
+      attaches the exact configurations at 172 and 263, which no licence covers, so the
+      configurations packet keeps their content as derived facts with the attachment's
+      digests, and none of their checker, controls or scripts ran here.
 
       Each side is stated cut at 100 places: T-174's certificate agrees with it to 88 places at
       172 and to 93 at 263, so a shorter cut, such as the 40 places T-193 prints, would not
@@ -34613,7 +34629,6 @@ results:
         credit: Kim after Chaoweeraprasit, Daniel, PingYou Ltd, Levy
         identity:
           basis: source-claim
-
 
 # Generated by python -m devtools.regularized_drawings from the regularized layer's
 # index (packing/atlas/known-best/regularized/index.json); do not edit by hand.
