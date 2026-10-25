@@ -3,9 +3,9 @@ type: is
 id: is-01m5ph9rqe5bpdf29txxgz7bce
 title: "Hold #763's 13 L-border recipes at 325-1024 (365 444 487 632 733 734 737 788 789 845 910 966 970) until the D2 maintained construction checker"
 kind: task
-status: open
+status: closed
 priority: 2
-version: 8
+version: 9
 delegate: c-import-gn29-1024
 labels:
   - result-import
@@ -14,10 +14,10 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-24T08:44:07.790Z
-updated_at: 2026-10-25T03:02:34.344Z
+updated_at: 2026-10-25T04:14:54.378Z
 started_at: 2026-10-24T20:35:19.037Z
-closed_at: null
-close_reason: null
+closed_at: 2026-10-25T04:14:54.377Z
+close_reason: "#763's 13 recipes are rows (#800); the recipes-325-1024 result is settled and names no bead since #803."
 resolution: null
 duplicate_of: null
 ---

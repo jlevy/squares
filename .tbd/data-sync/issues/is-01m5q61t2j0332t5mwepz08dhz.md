@@ -3,9 +3,9 @@ type: is
 id: is-01m5q61t2j0332t5mwepz08dhz
 title: "Stage 4: review T-241 (Couzo's 304) and T-242 (Daniel's 268 and 304), then adopt 268 and 304"
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 10
+version: 13
 delegate: c-map-hx0e-1024
 labels:
   - result-import
@@ -19,8 +19,12 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-24T14:46:47.122Z
-updated_at: 2026-10-25T03:21:13.971Z
+updated_at: 2026-10-25T04:14:53.901Z
 started_at: 2026-10-24T21:11:59.708Z
+closed_at: 2026-10-25T04:14:53.900Z
+close_reason: "H1 (#803, 3699ce15e): T-241/T-242 reviewed and V3/C3, T-242 adopted at 304; the 268 adoption is H2, think-3anz (PENDING_ADOPTION names it)."
+resolution: null
+duplicate_of: null
 ---
 Stage 4 of the think-l49q import (PR #792, records lane c-import-l49q-1024). T-241 registers Francisco Couzo's certificates/best/n304.cert at franciscouzo/square-packing@fa6237e (Kirill Tymchishin's Kaggle packing, 2.53e-3 below T-186) and T-242 Evan Daniel's exact descents at evand/square-packing@8a8879a (268, 4.48e-12 below T-240, another placement of #763's arrangement; 304, 3.04e-9 below T-241, T-241's packing descended), both at V0/C0, drafts S3 and S2.
 
@@ -75,3 +79,9 @@ HOSTED at c9ae6f746: Packing validation 40151925943 (packing-required pass), Cer
 
 
 2026-10-25 c-map-hx0e-1024, after review A: main merged twice (#801 3e1349802 at 1881510f7; #800 4089f9587 at 4b6f4bd27, both sides kept; #800's 43f666c walk reads no notebook row at 364, 450 or 874, so think-o4m0's three rows stay current; it supersedes 46 others, 377 and 405 among them). The coordinator's import reply on #763 (issuecomment-6392829915) is recorded (kind import; reports 43f666c-rows-325-1024 and recipes-325-1024). It asks C2 as its question 6 and the 304 finder as its question 5, so C2 is no longer to ask; only D1 and D2 (Daniel) stay drafted and unposted here. awaiting_author on #763 now: confirmation reply Q7 and Q1; import reply Q3 (377 credit), Q5 (304 finder), Q6 (Chaoweeraprasit vs Ostashev), all changes credit. Q1 (scope) and Q4 (expansions, which agree exactly) informational; Q2 (new packing or tighter certificate at 18 counts) settled by measurement: think-0tdd under think-ezt8. recipes-325-1024 settled (no bead), so think-g2qy is not a deferral (simulated closed: no bead-tree problem).
+
+
+
+STATUS 2026-10-25 ~04:15Z c-map-hx0e-1024: #802 (3bdff2443) merged at 3287d38dc too. PR #803 head 9cc28fce0 (draft; intake, S3): Packing validation 40160076326 pass (packing-required), Certificate page 40160076401 pass (pages-required), mergeability 40160073388 pass. Dispositions for review A: https://github.com/jlevy/squares/pull/803#issuecomment-6392708981 (edited to the head). Papers no-change record re-measured at 3287d38d vs main 3bdff2443; DATA_REVISION 3287d38dc. Not merged. Merge before 2026-10-26T00:00Z, else merge main, stamp_landed --apply and release_pin --update again.
+
+2026-10-25 coord-intake-1024: H1 #803 MERGED as 3699ce15e at 04:14:30Z (review A issuecomment-6392411606; dispositions issuecomment-6392708981; head 9cc28fce0, CI green 40160076326/40160076401). T-241/T-242 V3/C3; T-242 the house at 304 from 25 Oct; #795 credits corrected (think-o4m0); both #763 replies recorded with awaiting items (Q3 377 credit, Q5 304 finder, Q6 Chaoweeraprasit/Ostashev); think-tfdn (A7 template) and think-0tdd (Q2 measurement) opened. H2 (think-3anz): adopt T-242 at 268 on or after 2026-10-26T00:00Z.
