@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-23 (resumed): land #736 and #742, #719 records (204 
 kind: epic
 status: in_progress
 priority: 1
-version: 167
+version: 168
 delegate: coord-intake-1024
 labels:
   - result-import
@@ -166,7 +166,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-23T04:56:08.269Z
-updated_at: 2026-10-25T09:41:44.221Z
+updated_at: 2026-10-25T11:45:21.357Z
 started_at: 2026-10-23T04:56:10.325Z
 ---
 
@@ -192,3 +192,5 @@ Resumes coord-intake-1021b's pass of 21-23 October (no epic of its own). Lanes a
 2026-10-25 08:50Z, coord-n12-1025: result ids T-244 and T-245 are reserved for PR #812 (n = 12 Lean proof, #810; s(29) minimal polynomial, #545/#811). #814 registered T-243 while #812 also used it, so #812 is being renumbered. The next free id after #812 is T-246.
 
 2026-10-25 09:35Z, coord-n12-1025: correction to the note above. #813 holds T-244 (Kim at 172 and 263), so #812 registers T-245 (n = 12) and T-246 (s(29)). Whichever of #813 and #812 merges second must re-cut the explainer, since both take the version after v0.4.28.
+
+2026-10-25 ~11:50Z coord-intake-1024 checkpoint. MERGED since 04:40Z: #805 (Fang review mapped), #808 (W8 two-strip checker, #799 packet V1+V2), #814 (T-243, Daniel's s(182), V3/C3, house at 182 on 25 Oct), #813 (T-244, Kim's exact sides at 172/263, reported; configurations received). CLOSED: #797, #798, #806 (finals posted and recorded). POSTED: #799 ack, #804 ack, #806 final, #763 notebook-rows note. OPEN: #807 (H2, T-242 at 268) merges at the 26 Oct 00:10Z check-in (trig_0178kD4FUDrHjrZmrqD5uc12; needs main merged, stamp without --date, re-pin, CI); think-4rzl lane (c-decide-4rzl-1025, wt-4rzl) decides T-244's configurations and records #804's ack and #799's 08:11Z/08:17Z answers. OWNER QUESTIONS: #565 rebuild of T-154 (Form A C1->C3 or Form B, with think-6t6q); #799 O1 (theorem-wide k^2-c statements as earlier reports beyond 324); R1 waits on the owner publishing data/couzo-715-certificates-v1 (and R2 on #732 shards); the earlier list (think-lsam, think-kzme, think-zkxy, think-nq5g, D5/N1/N5, #789 A7). NEXT: R1-R5 above 1024 once hosted data exists; think-hx0e done; think-20oj (303 view); think-x565, think-yeol, think-tfdn, think-0tdd, think-fqp6, think-pf37, think-f8py (Daniel's row review).
