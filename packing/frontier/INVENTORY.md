@@ -8,8 +8,8 @@ ours, which rest on someone else's argument, and how far each has been checked.
 
 ## The short version
 
-- **766** evidence records. **422** are formal; **413** of those were established here. **12** are samples, counted separately.
-- **326** rest on an argument made elsewhere, of which **8** have been read by nobody here.
+- **767** evidence records. **422** are formal; **413** of those were established here. **12** are samples, counted separately.
+- **327** rest on an argument made elsewhere, of which **8** have been read by nobody here.
 - **1** formal record proves a theorem only under a hypothesis nothing here has replayed, and is verified as that implication alone: `E-k2m4-evand-bentz4-lean-build` (ValidTilt9).
 - **43** claim to be first established here. **14** make no novelty statement at all - not assessed, which is not the same as not novel.
 
@@ -789,13 +789,14 @@ results, it is a statement about what this repository has itself examined.
 | `E-couzo-n304-review-exact-feasibility` | 0 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | full, 1 of 1: the certificate at n = 304 that T-241 cites, every wall and all 46,056 pairs by separating axes, and the 1,170 pairs within 2 by clipped area as well | `V-kaggle-268-304-review-check` |
 | `E-evand-kaggle-descents-exact-feasibility` | 1 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | shared components | full, 2 of 2: the two certificates at n = 268 and 304 that T-242 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-evand-arrangement-receipts`, `V-upper-bound-reports`, `V-evand-exact-certificates` |
 | `E-evand-kaggle-descents-review-exact-feasibility` | 1 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | full, 2 of 2: the two certificates T-242 cites, at n = 268 and 304, every wall and every pair by separating axes, and every pair within 2 by clipped area as well | `V-kaggle-268-304-review-check` |
+| `E-amundsk-798-beyond-horizon-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
 
 ## What the register rests on
 
-- **assurance**: numerically-checked 5, reported 328, verified 433
-- **method**: exact-algebraic 240, interval-certified 175, numerical-multiprecision 5, proof-assistant-checked 6, proof-audited 4, published-proof 8, reported 328
-- **novelty**: apparently-novel 43, common-knowledge 4, not assessed 14, previously-published 705
-- **relationship to the producer's code**: generator 5, independent-implementation 262, not-applicable 34, same-implementation 422, shared-components 37, unknown-historical 6
+- **assurance**: numerically-checked 5, reported 329, verified 433
+- **method**: exact-algebraic 240, interval-certified 175, numerical-multiprecision 5, proof-assistant-checked 6, proof-audited 4, published-proof 8, reported 329
+- **novelty**: apparently-novel 43, common-knowledge 4, not assessed 14, previously-published 706
+- **relationship to the producer's code**: generator 5, independent-implementation 262, not-applicable 34, same-implementation 423, shared-components 37, unknown-historical 6
 
 The `cases` column is how many frontier records cite each piece of evidence, and it is the reason to read this table rather than count records. Ranked below are the *formal* records only: a `reported` record cited across the frontier may be a shared catalogue and is labelled as such, which is the register working rather than risk. The risk is a verified claim resting on an argument nobody has examined.
 

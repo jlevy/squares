@@ -111,6 +111,9 @@ COUNTS_763 = frozenset(row.n for row in horizon.decided_claims(horizon.release(7
 NOTEBOOK_SOURCES = frozenset(
     item.source for item in horizon.RELEASES.values() if item.claim_map == horizon.PUSH
 )
+#: Reports after #763 and the push whose rows supersede theirs at some of these counts:
+#: #798's (think-2l0q).
+LATER_REPORTS = frozenset({"amundsk-issue798-2026-10-24"})
 #: This import's rows the push's first row supersedes directly: 867, Couzo's own at
 #: fa6237e, which the Kaggle account kyleluecke's row supersedes in turn.
 SUPERSEDED_BY_NOTEBOOKS = {867: "couzo-fa6237e-2026-10-23"}
@@ -201,8 +204,9 @@ def test_the_recorded_rows_are_the_claims_record_and_supersede_the_rows_before_t
     def standing(n: int, rows: dict[str, Any], expected: str) -> str:
         """#763's row where it has one (its recipes' source at a recipe, `Split`), superseding
         the row `expected` names, or the last row of the push's chain where its rows
-        supersede it (think-lyf9); and 43f666c's where its row supersedes that one in turn
-        (think-gn29)."""
+        supersede it (think-lyf9); 43f666c's where its row supersedes that one in turn
+        (think-gn29); then the row of a later report that supersedes that one, as #798's
+        does (think-2l0q)."""
         if n in COUNTS_763:
             later = horizon.release(763).source_at(n)
             assert rows[expected]["superseded_by"] == later
@@ -213,6 +217,8 @@ def test_the_recorded_rows_are_the_claims_record_and_supersede_the_rows_before_t
                 current = rows[current]["superseded_by"]
         if rows[current].get("superseded_by") == LATER_43F:
             current = LATER_43F
+        while rows[current].get("superseded_by") in LATER_REPORTS:
+            current = rows[current]["superseded_by"]
         return current
 
     for n in recorded:

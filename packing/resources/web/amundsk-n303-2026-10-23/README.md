@@ -44,6 +44,9 @@ The claim rests on `s303_amund.cert`.
   least pair separation $1.2 \times 10^{-12}$ over 724 close pairs, and `verify_cert2.py`
   (polygon intersection). A third check, “a local packing workbench’s rational certifier
   on the float packing”, is unpublished. No source program ran here.
+  The author’s answer of 24 October says the $8.2 \times 10^{-13}$ is the least wall
+  clearance of an earlier, unsubmitted certificate (side 17.909763172478), and that
+  `verify_cert.py` prints $6.020 \times 10^{-13}$ on this file.
 - **What the checkers share.** The issue says the two public checkers share an author and
   the certificate format, and that the certificate was made with the same author’s
   `dilate_cert.py`.
@@ -65,17 +68,25 @@ October: never edited, no comments, and the `intake` label added at 16:06:30Z.
 
 ## Source Custody
 
-Neither the gist nor the issue states a licence or reuse terms. Under the derived-only
-form of the [existing retention policy](../known-best-packings/README.md), this packet
-keeps no upstream byte. No redistribution permission or licence determination is
-asserted.
+The gist states no licence. The author dedicated its three files to the public domain
+under CC0 1.0 on 24 October 2026, in a
+[comment on #755](https://github.com/jlevy/squares/issues/755#issuecomment-6388401978),
+and asked that the certificate and its input be kept, so the packet retains all three
+under [source/](source/), bound to their Git blobs at the pin.
+[acquisition/answer.json](acquisition/answer.json) keeps the comment as read at 21:03Z on
+24 October, never edited. Until then the packet kept no upstream byte, under the
+derived-only form of the [existing retention policy](../known-best-packings/README.md),
+and the derived fact of 23 October stays as written, since its receipts are bound to it.
 
 `devtools.acquire_source` wrote the custody record from a blobless clone of the gist
 checked out at the pin, from [acquisition/declaration.json](acquisition/declaration.json);
 [acquisition/sources.json](acquisition/sources.json) is the record and
 [acquisition/upstream-subtree.sha256](acquisition/upstream-subtree.sha256) the manifest.
-Its scope is the gist’s three files, 57,364 bytes, each pinned by digest and bound to its
-Git blob at the pin:
+It was first written on 23 October and written again at the same pin at 20:56Z on 24
+October to retain the files, with the digests unchanged; the record keeps the first
+retrieval time, which the derived fact names.
+Its scope is the gist’s three files, 57,364 bytes, each retained and bound to its Git
+blob at the pin:
 
 | Upstream path | Git blob | Bytes | SHA-256 |
 | --- | --- | --- | --- |
@@ -97,8 +108,10 @@ the digests the manifest pins. It wrote it as an exact rational `center-basis`
 Witness/v2, [facts/n-303.yaml.gz](facts/n-303.yaml.gz), naming the certificate’s SHA-256
 as `revision_sha256`, from the declaration in
 [acquisition/report.json](acquisition/report.json). Offline, the fact must rebuild
-itself from the certificate it states; `derive --check` against a checkout compares it
-with the certificate again.
+itself from the certificate it states. Since the certificate is retained as well, the
+importer also holds the fact to `source/s303_amund.cert` whenever it admits it, with no
+checkout; `derive --check` against a checkout compares it with the certificate again.
+The row keeps its fact, since the receipts below are bound to it.
 
 ## Exact Replay
 
@@ -213,7 +226,8 @@ source’s account, which the measurement supports: it is far nearer T-230’s p
 any other the record holds.
 
 **The dilation.** Given `--checkout`, the program also reads the binary64 input, held to
-the digest the manifest pins, and finds that the input side times $1 + \delta$, with
+the digest the manifest pins (retained since 24 October as `source/s303_amund.input.txt`,
+so a checkout of the packet’s own `source/` serves), and finds that the input side times $1 + \delta$, with
 $\delta$ the double nearest $10^{-12}$, rounded up at 30 places is the certificate’s
 side; every centre lies within $4.9 \times 10^{-31}$ of the dilated input, and every
 angle within $5.7 \times 10^{-14}$ degrees of the input’s, as the issue says.
@@ -273,12 +287,14 @@ its `outputs/program-digests.sha256` records.
 - **RF-1, the wall clearance.** The issue’s least wall clearance, $8.2 \times 10^{-13}$,
   is not this file’s: by its code at `7982d7a` (read, not run), `verify_cert.py` gives
   $6.020 \times 10^{-13}$ on it, at square 3 and the top wall, as measured here. Its pair
-  figure and its 724 close pairs are this file’s.
+  figure and its 724 close pairs are this file’s. (Answered 24 October: an earlier,
+  unsubmitted certificate’s.)
 - **RF-2, the long decimal.** “17.909762327475256427…” is the binary64 print of the
   side, not the side; the record quotes the exact side or its ceiling.
 - **RF-3, the method.** `dilate_cert.py`’s formulas reproduce the side and all 606 centre
   coordinates from the input, and each tangent to within one unit in the last place of
-  the platform’s `tan`; the factor is $1 + \mathrm{fl}(10^{-12})$.
+  the platform’s `tan`; the factor is $1 + \mathrm{fl}(10^{-12})$. (Answered 24 October:
+  made on macOS 26 arm64 with Python 3.14.6, so with Apple’s libm.)
 - **RF-4, identity.** Another arrangement of T-230’s packing, found from it, not a
   refinement of it: one to one with it, 12 squares beyond a tenth, five newly tilted and
   47 of about 860 contacts changed.
@@ -289,7 +305,14 @@ its `outputs/program-digests.sha256` records.
   Daniel’s checkers, so it is `shared-components`, as T-230’s is
   (`E-amundsk-755-n303-exact-feasibility`).
 - **RF-8 and RF-9.** Custody as recorded above, and the review’s programs retained and
-  registered (`V-amundsk-755-review-check`, `V-amundsk-755-review-controls`).
+  registered (`V-amundsk-755-review-check`, `V-amundsk-755-review-controls`). (RF-8
+  answered 24 October: CC0 1.0; the files are now retained.)
+
+The review is a dated record and stays as written. Its three Questions for the Author are
+answered by the author’s comment of 24 October, which the record reads in T-239’s notes
+and here: the first confirms RF-1 as the correction it made and gives its cause, the
+second confirms RF-3’s reading that the tangents differ by platform libm, and the third
+is yes, by retention under CC0. None was held open.
 
 ## Compressed Files
 

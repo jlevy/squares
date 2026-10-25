@@ -81,8 +81,12 @@ EVAND_596 = "evand-fresh-compositions-2026-10-14"
 #: Evan Daniel's issue #702, its one count beyond the corpus, retained under MIT by the
 #: #702 lane of 21 October (`test_upper_bound_reports_702`).
 DANIEL_702 = "evand-n343-sweep-2026-10-20"
+#: Amund Kristiansen's issue #798, fourteen dilation certificates beyond the corpus retained
+#: under his CC0 1.0 dedication, twelve of them rows, by the #798 import lane of 24 October
+#: (`test_upper_bound_reports_798`).
+KRISTIANSEN_798 = "amundsk-issue798-2026-10-24"
 #: The packets that request nothing inside the corpus, so plan no register entry.
-BEYOND_ONLY = (EVAND_584, EVAND_596, DANIEL_702)
+BEYOND_ONLY = (EVAND_584, EVAND_596, DANIEL_702, KRISTIANSEN_798)
 #: Issue #528, Ostashev's three compositions in sqcert, and issue #529, Rio Calle's n = 102
 #: layout, whose exact certificate is derived here (`test_upper_bound_reports_528_529`).
 OSTASHEV_528 = "dostashev-records-2026-10-12"
@@ -187,6 +191,7 @@ EVERY = (
     KRISTIANSEN_755,
     COUZO_N304,
     DANIEL_KAGGLE,
+    KRISTIANSEN_798,
 )
 
 
@@ -1397,6 +1402,26 @@ def test_the_driver_refuses_duplicate_keys_and_incomplete_rows(
 
 
 # --------------------------------------------------------------------------- register plan
+
+
+def test_only_755s_fact_stands_beside_a_retained_file() -> None:
+    """A derived fact names a file its packet pins, except where a licence given later let
+    the packet retain the file at the same pin: #755's 303 alone. Every other fact row of
+    the roster reads as it did, and only that row's admission reads the retained bytes
+    (`_fact_file`)."""
+    facts = [
+        (name, row)
+        for name in EVERY
+        for row in reports.load_declaration(_packet(name))["certificates"]
+        if "fact" in row
+    ]
+    assert len(facts) > 100
+    beside = [
+        (name, row["n"])
+        for name, row in facts
+        if reports._fact_file(_packet(name), row)  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+    ]
+    assert beside == [(KRISTIANSEN_755, 303)]
 
 
 def test_every_import_reader_is_the_packet_whose_source_key_names_it() -> None:

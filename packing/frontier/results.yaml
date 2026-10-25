@@ -33454,8 +33454,9 @@ results:
       dilate_cert.py, of the binary64 packing the gist publishes beside it; its side and
       centres are that program's output from that input to the last digit, and its
       tangents to within one unit in the last place of the platform's tan (measured,
-      RF-3). The issue claims the upper bound only, and the search, the certificate and the
-      report were done by Claude (Anthropic) at Amund Kristiansen's direction.
+      RF-3); the author says it was made on macOS arm64 with Apple's libm. The issue claims
+      the upper bound only, and the search, the certificate and the report were done by
+      Claude (Anthropic) at Amund Kristiansen's direction.
     scope: {n_values: [303]}
     verification: V3
     confirmation: C3
@@ -33507,7 +33508,10 @@ results:
 
       The issue reports a least wall clearance of 8.2e-13 from verify_cert.py, which is not
       this file's: that checker, by its code (read, not run), gives the 6.020e-13 measured
-      here (RF-1). The kernel's two sharp controls
+      here (RF-1). The author's answer of 24 October (#755, issuecomment-6388401978) says
+      the 8.2e-13 is the least wall clearance of an earlier, unsubmitted certificate from
+      the same search (side 17.909763172478), and that verify_cert.py prints 6.020e-13 at
+      square #3 on this file. The kernel's two sharp controls
       (replay/sharp-controls.json) and the review's 21 mutants are accepted at exact
       contact and refused 1e-30 past it by both maintained routes.
 
@@ -33533,8 +33537,19 @@ results:
       17.9097623274752568 at 16); the issue's 17.909762327475256427... is the binary64
       print of the side, not the side (RF-2). The packing is not rigid: five squares touch
       nothing and keep at least 4.67e-3 to every other square and wall (RF-6); no
-      local-minimum, KKT or rigidity statement is made beyond that. The gist states no
-      licence, so the certificate is kept as a derived exact fact (RF-8).
+      local-minimum, KKT or rigidity statement is made beyond that. The gist stated no
+      licence, so the certificate was kept as a derived exact fact (RF-8). The author's CC0
+      1.0 dedication of 24 October lets the packet retain the certificate, its input and the
+      README as well.
+
+      The retained certificate is named by the packet and these notes, not in artifacts:
+      the bound, its receipts and its evidence rest on the derived fact, and adding the
+      file would change result/t-239.html's recorded identity, which takes a dated
+      amendment in site-urls.yaml, as result/t-113.html's of 8 October did, if the owner
+      wants the page to link it. The case's section on this certificate, written by its
+      adoption at 303 on 24 October and kept as history since T-240's of 25 October, says
+      the certificate is kept as a derived exact fact since the source states no licence;
+      that held on 24 October, and the section stays as written.
 
       The case at 303 adopted this certificate as its house best packing on 24 October 2026,
       from T-230, which stays retained as history, and both strong generators decided the
