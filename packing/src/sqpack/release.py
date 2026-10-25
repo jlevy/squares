@@ -9081,8 +9081,10 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "with main's result-requests.yaml and frontier README swapped in, 43 files each, "
             "all byte-identical across the three. Measured again after review A of #808 set "
             "the entry's triage to done and reworded its summary, at link revision ff752564 "
-            "with the same two inputs of main swapped in: the same outcome. No register "
-            "entry changes. Retain v0.2.7."
+            "with the same two inputs of main swapped in: the same outcome. After the second "
+            "triage of #799 (think-z2mj) rebuilt the entry with version 2's results and "
+            "the preprint, at link revision 6bc19ea4 with the same two inputs of main "
+            "swapped in: the same outcome. No register entry changes. Retain v0.2.7."
         ),
     ),
 )

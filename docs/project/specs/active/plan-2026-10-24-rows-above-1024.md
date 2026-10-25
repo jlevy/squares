@@ -584,10 +584,13 @@ parent, so `construction_checker` cannot read them.
   seven controls and a write-out builder.
   It agrees with both routes at five written-out counts and with Ryu’s Theorem 1.3
   packings.
-- [x] #799’s packet `karimi-two-strip-2026-10-24` and its requests entry, triage
-  pending.
-- **Price:** about 0.02 CPU-hours: 7 CPU-seconds to decide all 683 with their controls,
-  and 73 for the five counts on both routes with six controls each.
+- [x] It reads each deposit’s `records.csv` as untrusted data, with every refusal a
+  custody error.
+- [x] #799’s packet `karimi-two-strip-2026-10-24` with both versions of the deposit and
+  the preprint pinned by digest, and its requests entry.
+- **Price:** about 0.04 CPU-hours: 7 CPU-seconds to decide version 1’s 683 rows with
+  their controls and 67 for version 2’s 2,824, and 73 for the five counts on both routes
+  with six controls each.
 
 ### Phase 2: The Records, in Report Order
 
@@ -602,17 +605,32 @@ Each is one item under the cap (think-lh7d).
 | R4 | Held rows after the answers: deletions (think-kzme), the four catalogue counts (N1), recipe kinds the checker does not read (think-zkxy, Fang’s composites), and per-row credit (D5) | the answers | seconds | R1 decided the positives; otherwise about 12 CPU-seconds per certificate above 1024, the triage’s average, so under 0.6 for all 160 deletions |
 | **Total** |  |  | **about 36** | within N2 |
 
-**R5, #799’s rows (think-5dc3).** #799 enters R1’s walk as a report, and its rows land
-in a slice of their own after R1 and W8, each decided by `two_strip_checker`. R5 does
-not need R2 or R3: the chain passes over their unlanded rows, which are written as
+**R5, #799’s rows (think-5dc3).** #799 enters R1’s walk as two reports, and its rows
+land in a slice of their own after R1 and W8, each decided by `two_strip_checker`. R5
+does not need R2 or R3: the chain passes over their unlanded rows, which are written as
 superseded when they land.
-The triage priced it at about 0.8 CPU-hours, an item of its own outside N2’s 36: the
-checker on every row, the written-out positives on both routes, and six controls at one
-count per K. That scope and price are for version 1’s 683 rows.
-Version 2 of the deposit (10.5281/zenodo.23628190, 2,824 rows to 9944) and the author’s
-preprint arrived on #799 after the triage.
-Their triage decides whether R5 covers 683 or 2,824 rows, and at 2,824 rows reaching
-larger counts the price is at least four times as much.
+
+- **Scope: 2,825 rows at 2,824 counts.** This was set by the second triage (think-z2mj),
+  after version 2 of the deposit (10.5281/zenodo.23628190, 2,824 rows to 9944) arrived
+  on #799.
+  - Version 1 is dated by the issue and keeps its 683 rows; version 2 ties it at 682
+    counts, and a tie stays with the earlier report.
+  - At 2459 version 2 is a refinement, 4e-8 lower, recorded after version 1’s row.
+  - Version 2’s 2,141 rows at 3776 to 9944 are new reports, dated by its comment of
+    22:34:47Z.
+  - The author’s preprint takes no row.
+
+- **Price: about 6.8 CPU-hours,** one item under the 40 CPU-hour cap and outside N2’s
+  36:
+  - the checker on every row, which W8’s receipts already hold for both versions;
+  - the written-out positives on both routes, about 5.95;
+  - six controls at one count per K (66 values of K), about 0.89.
+
+  Six controls at every count would cost about 53 CPU-hours, over the cap.
+
+- **Measure first.** The positives’ price is extrapolated past W8’s replay sample, which
+  stops at 3775. Measure one count near 9944 on both routes with its six controls, and
+  re-price, before running the rest.
 
 **The stratified 10% (R2).** Within each thousands folder, the recorded rows are sorted
 by count. Every tenth row is taken from a start the code fixes, about 432 of 4,319 in

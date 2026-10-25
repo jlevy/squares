@@ -79,7 +79,7 @@ def test_every_control_at_every_row_is_refused_for_the_reason_it_names() -> None
     short with both strips deeper around the same grid, the tilt's range twice, the H fit
     a whole row short, and the kind."""
     rows = checker.records()
-    assert len(rows) == checker.ROWS
+    assert len(rows) == checker.V1.rows
     for row in rows:
         assert checker.decide(row)["verdict"] == checker.DECIDED
         assert all(item["refused"] for item in checker.controls(row)), row.n
@@ -291,17 +291,32 @@ def test_a_small_packing_written_out_agrees_with_both_routes() -> None:
 
 
 def test_the_receipts_hold_with_the_sample_s_digests() -> None:
-    """Both receipts read back: every decision and control derived again, the five
-    sample certificates written out again to the digests both receipts state, and each
-    replayed on both routes with its six controls refused."""
+    """The three receipts read back: every decision and control of both deposits derived
+    again; the sample certificates written out again to the digests the receipts state,
+    the five of version 1, which are also version 2's rows there, and version 2's 2459 and
+    9944; and the five replayed on both routes with their six controls refused."""
     assert checker.check() == []
-    receipt = json.loads(checker.DECISIONS.read_text(encoding="utf-8"))
-    summary = receipt["summary"]
-    assert (summary["rows"], summary["decided"], summary["squares"]) == (683, 683, 1749915)
-    assert (summary["surplus_zero"], summary["surplus_most"]) == (403, 19)
-    assert summary["side_below_k"] == summary["k_is_ceil_sqrt_n"] == 683
-    assert all(item["refused"] == 683 for item in summary["controls"].values())
-    sample = json.loads(checker.REPLAY.read_text(encoding="utf-8"))
+    expected = {
+        checker.V1: (683, 1749915, 403, 19),
+        checker.V2: (2824, 16603112, 1366, 42),
+    }
+    for deposit, (rows, squares, tight, most) in expected.items():
+        summary = json.loads(deposit.decisions.read_text(encoding="utf-8"))["summary"]
+        assert (summary["rows"], summary["decided"], summary["squares"]) == (
+            rows,
+            rows,
+            squares,
+        )
+        assert (summary["surplus_zero"], summary["surplus_most"]) == (tight, most)
+        assert summary["side_below_k"] == summary["k_is_ceil_sqrt_n"] == rows
+        assert all(item["refused"] == rows for item in summary["controls"].values())
+    first = {row.n: row for row in checker.records(checker.V1)}
+    later = {row.n: row for row in checker.records(checker.V2)}
+    changed = sorted(n for n, row in first.items() if later[n] != row)
+    assert changed == [2459]
+    assert later[2459].side == first[2459].side - Fraction(4, 10**8)
+    assert all(later[n] == first[n] for n in checker.SAMPLE)
+    sample = json.loads(checker.replay_path().read_text(encoding="utf-8"))
     pairs = [row["decision"]["candidate_pairs"] for row in sample["rows"]]
     assert pairs == [2850, 2754, 4228, 5436, 8688]
 
@@ -309,44 +324,48 @@ def test_the_receipts_hold_with_the_sample_s_digests() -> None:
 def test_an_altered_receipt_or_packet_is_refused(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    """A receipt row with another capacity is named; a replayed certificate that is not
-    the one the decisions receipt names is refused; and a packet keeping a file the
-    capture does not name fails custody before any row is read."""
-    receipt = json.loads(checker.DECISIONS.read_text(encoding="utf-8"))
-    receipt["rows"][5]["capacity"] += 1
-    altered = tmp_path / "decisions.json"
-    altered.write_text(json.dumps(receipt), encoding="utf-8")
-    sample = json.loads(checker.REPLAY.read_text(encoding="utf-8"))
+    """In a copy of the packet, a receipt row with another capacity is named, in either
+    deposit; a replayed certificate that is not the one the decisions receipt names is
+    refused; and a deposit's files keeping one its capture does not name fail custody
+    before any row is read."""
+    copied = tmp_path / "packet"
+    shutil.copytree(checker.PACKET, copied)
+    monkeypatch.setattr(checker, "PACKET", copied)
+    for deposit, index in ((checker.V1, 5), (checker.V2, 2000)):
+        receipt = json.loads(deposit.decisions.read_text(encoding="utf-8"))
+        receipt["rows"][index]["capacity"] += 1
+        deposit.decisions.write_text(json.dumps(receipt), encoding="utf-8")
+    sample = json.loads(checker.replay_path().read_text(encoding="utf-8"))
     sample["rows"][2]["certificate_sha256"] = "0" * 64
-    replayed = tmp_path / "replay.json"
-    replayed.write_text(json.dumps(sample), encoding="utf-8")
-    monkeypatch.setattr(checker, "DECISIONS", altered)
-    monkeypatch.setattr(checker, "REPLAY", replayed)
-    problems = checker.check()
-    n = receipt["rows"][5]["n"]
-    assert f"n={n}: the decision differs from the receipt" in problems
-    assert "n=1813: the replayed certificate is not the decided one" in problems
-    assert len(problems) == 2, problems
-    copied = tmp_path / "extracted"
-    shutil.copytree(checker.EXTRACTED, copied)
-    (copied / "certificates.txt").write_text("", encoding="utf-8")
-    monkeypatch.setattr(checker, "EXTRACTED", copied)
+    checker.replay_path().write_text(json.dumps(sample), encoding="utf-8")
+    first = json.loads(checker.V1.decisions.read_text(encoding="utf-8"))["rows"][5]["n"]
+    later = json.loads(checker.V2.decisions.read_text(encoding="utf-8"))["rows"][2000]["n"]
+    assert checker.check() == [
+        f"V1.0 n={first}: the decision differs from the receipt",
+        f"version 2 n={later}: the decision differs from the receipt",
+        "n=1813: the replayed certificate is not the decided one",
+    ]
+    (checker.V2.extracted / "regenerate.py").write_text("", encoding="utf-8")
     with pytest.raises(checker.CustodyError, match="the packet keeps"):
-        checker.records()
+        checker.records(checker.V2)
+    assert len(checker.records(checker.V1)) == 683
 
 
 @pytest.mark.slow
 def test_a_sample_count_replays_as_its_receipt_states() -> None:
     """1184, the first count, written out and decided again on both routes with its six
-    controls (about 7 CPU-seconds), is the receipt's row, timings aside."""
-    stored = json.loads(checker.REPLAY.read_text(encoding="utf-8"))["rows"][0]
+    controls (about 8 CPU-seconds), is the receipt's row, timings aside."""
+    stored = json.loads(checker.replay_path().read_text(encoding="utf-8"))["rows"][0]
     assert stored["n"] == 1184
     assert checker.stable(checker.replay_row(1184)) == checker.stable(stored)
 
 
 @pytest.mark.slow
-def test_every_written_out_certificate_has_the_digest_its_receipt_states() -> None:
-    """All 683 certificates written out again (about 8 CPU-seconds) have the SHA-256 and
-    size the decisions receipt records, which is how the record holds bytes it does not
-    keep."""
-    assert checker.check(digests=True) == []
+@pytest.mark.parametrize("deposit", [checker.V1, checker.V2], ids=["v1", "v2"])
+def test_every_written_out_certificate_has_the_digest_its_receipt_states(
+    deposit: checker.Deposit,
+) -> None:
+    """Every certificate of a deposit written out again, 683 in about 8 CPU-seconds and
+    2,824 in about 70, has the SHA-256 and size its decisions receipt records, which is
+    how the record holds bytes it does not keep."""
+    assert checker.decisions_problems(deposit, digests=True)[0] == []

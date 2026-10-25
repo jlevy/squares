@@ -566,8 +566,10 @@ record’s statement of the rule:
   from its side, K and the two strips’ rows, tilts and phases.
   It requires both fit inequalities and a count at most the capacity, exactly, and
   refuses each row’s seven controls.
-  Its packet’s `receipts/two-strip-decisions.json` pins each written-out certificate by
-  SHA-256, and `receipts/replay-sample.json` replays five of them on both routes.
+  It reads a deposit’s `records.csv` as untrusted data, refusing any malformed table as
+  a custody error. Its packet keeps one decisions receipt per version of the deposit,
+  which pins each written-out certificate by SHA-256, and `receipts/replay-sample.json`
+  replays five of them on both routes.
   **A recipe the source also expands**, its full n-square expansion kept under
   `certificates/parents/` at exactly the recipe’s side, is read as the release reads its
   claims (#800’s review A, A3). Where the report claims the index’s recipe, as an
