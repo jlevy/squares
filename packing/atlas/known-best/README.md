@@ -853,6 +853,27 @@ The evidence is retained in
 [`cases/regularized_drawings/think-hx0e-2026-10-25/`](../../cases/regularized_drawings/think-hx0e-2026-10-25/README.md).
 The index still draws 86 views.
 
+The pass of 26 October 2026 adopted Evan Daniel’s certificate at 268 (T-242,
+think-3anz), his exact descent of Vladislav Lavrentev’s public Kaggle packing, which the
+pass of 25 October could not adopt there, since it moved 268 to T-240 and one day’s
+archive holds one prior state a count.
+It moves the house best packing from T-240 by $4.48 \times 10^{-12}$: one arrangement
+with T-240’s packing and another placement of it.
+Both generators ran on the new witness.
+Grid-slack at 0.5, 1 and 5 degrees (`grid-slack-adopt-2026-10-26-n268-grid-deg05`,
+`-grid-deg1` and `-grid-deg5`, 28 CPU-seconds) draws views at the witness’s side, and
+the selection admits the 1 degree view (row 10): it takes the axis tool’s light, uneven
+and near-axis counts from 18, 30 and 23 to 5, 19 and 0, and its sides from 611 / 721 to
+751 / 759, worse on no goal.
+Evan Daniel’s regularizer (`evand-regularize-adopt-2026-10-26-n268-evand`, 132
+CPU-seconds) solves the witness to a certified KKT local minimum within the source’s
+relative padding of $10^{-20}$, about $1.7 \times 10^{-19}$ below its side, and its view
+at the side goes to review (row 7: two squares’ contact counts fall while no total
+does); no view is below the house.
+The evidence is retained in
+[`cases/regularized_drawings/think-3anz-2026-10-25/`](../../cases/regularized_drawings/think-3anz-2026-10-25/README.md).
+The index still draws 86 views.
+
 ### The default picture
 
 On 13 October 2026 the owner made the regularized view the default picture, with the

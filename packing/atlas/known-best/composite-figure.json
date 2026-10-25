@@ -7132,12 +7132,12 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"78645658458105249171306580101/4660659750118000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"8437180857934672912242411148233/500000000000000000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
         "lower": {"correction":true,"display":"s(268) ≥ 16.382380","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"16.3823801742"},
         "n": 268,
         "optimality": {"provenance":"frontier","status":"open"},
         "rigidity": {
-          "assessed_geometry": {"reported_side":"16.8743617158738255","source_url":"https://github.com/franciscouzo/square-packing/blob/964ee2bdf301d0c8912d956d4010f478dcbbd5ea/certificates/best/n268.cert","witness_id":"W-known-best-n268","witness_path":"packing/witnesses/known-best/n-268.yaml"},
+          "assessed_geometry": {"reported_side":"16.8743617158693459","source_url":"https://github.com/evand/square-packing/blob/8a8879a2972c32cbd2d906049228cc9f0762b02a/search/packer/candidates/s268_lightning.cert","witness_id":"W-known-best-n268","witness_path":"packing/witnesses/known-best/n-268.yaml"},
           "assessments": [
             {
               "assurance": "numerically-checked",
@@ -7154,7 +7154,7 @@
           "provenance": "absent",
           "state": "not-established"
         },
-        "side": {"display":"s(268) ≤ 16.874362","provenance":"frontier","relation":"upper-bound","value":"16.8743617158738255"}
+        "side": {"display":"s(268) ≤ 16.874362","provenance":"frontier","relation":"upper-bound","value":"16.8743617158693459"}
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],

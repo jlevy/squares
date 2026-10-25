@@ -1722,15 +1722,15 @@ CREDITS: dict[int, Credit] = {
         "Daniel’s exact optimum of Joost de Winter’s n = 126 packing",
     ),
     267: _couzo("Xu"),
-    # Issue 763's packing at 268 (T-240, adopted on 25 October 2026), a refinement of Kirill
-    # Tymchishin's Kaggle notebook packing, the parent the source's manifest names: one to
-    # one with it under a reflection, no square beyond a tenth (the 24 October review), and
-    # another arrangement than T-174's. Whether the credit should name Vladislav Lavrentev,
-    # whose public packing is the same arrangement, is the author's question 1 of that review.
+    # T-242 (adopted on 26 October 2026), Evan Daniel's exact descent of Vladislav
+    # Lavrentev's public Kaggle packing, the source's input, which the certificate is to
+    # 1.41e-4: one arrangement with T-240's packing under a reflection and another placement,
+    # none beyond a tenth (the 24 October review). The credit follows the placement adopted,
+    # Daniel after Lavrentev, the chain both sources support (N-2 of that review).
     268: Credit(
-        (TYMCHISHIN,),
-        (COUZO,),
-        "Francisco Couzo’s refinement of Kirill Tymchishin’s Kaggle notebook packing",
+        (LAVRENTEV,),
+        (DANIEL,),
+        "Evan Daniel’s exact descent of Vladislav Lavrentev’s public Kaggle packing",
     ),
     # T-174's regularization of T-146's view, measured one to one, no square moved beyond
     # 1e-12 (the 14 October review of PR 574).

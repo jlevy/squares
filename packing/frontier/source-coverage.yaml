@@ -10583,8 +10583,9 @@ sources:
     (campaign/issue-intake/upper-bounds-evand-20261024) records 268 below T-240 and 304
     below T-241, and does not record 303, which is above T-240's 303; the 303 certificate is
     retained as credit evidence. The case at 304 adopted the 304 certificate on 25 October
-    2026, the selected override there; 268 is staged for the pass's next pull request
-    (select_houses.PENDING_ADOPTION), since the same pass adopted T-240 there.
+    2026, and the case at 268 the 268 certificate on 26 October 2026, staged for the pass's
+    next pull request since the pass of 25 October adopted T-240 there; each is the selected
+    override at its count.
 
 - id: couzo-efef7d1-2026-10-23
   title: Francisco Couzo's own sides at efef7d1 at the counts of the Kaggle notebook rows
@@ -11806,11 +11807,11 @@ selected_overrides:
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
     a replay here and an accepted review, adopted on 2026-10-11 (T-134).
 - n: 268
-  source_id: couzo-issue763-2026-10-23-in-corpus
-  value: '16.8743617158738255'
-  evidence: E-couzo-763-certificate-report
+  source_id: evand-kaggle-descents-2026-10-24
+  value: '16.8743617158693459'
+  evidence: E-evand-kaggle-descents-certificate-report
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
-    a replay here and an accepted review, adopted on 2026-10-25 (T-240).
+    a replay here and an accepted review, adopted on 2026-10-26 (T-242).
 - n: 269
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '16.901513582189132199'
@@ -12856,14 +12857,14 @@ superseded_reports:
 - n: 268
   source_id: casson-square-packing-2026
   value: '16.87895510935973675'
-  superseded_by: couzo-issue763-2026-10-23-in-corpus
+  superseded_by: evand-kaggle-descents-2026-10-24
   reason: Larger than Francisco Couzo's side at this count; the case record states both sources' dates
     and values; since 2026-10-05 the selected report is Evan Daniel's exact optimum of that packing
     (T-098).
 - n: 268
   source_id: franciscouzo-square-packing-2026
   value: '16.878814821018413'
-  superseded_by: couzo-issue763-2026-10-23-in-corpus
+  superseded_by: evand-kaggle-descents-2026-10-24
   reason: Superseded on 2026-10-05 by Evan Daniel's exact optimum of the same packing, certified here
     (T-098).
 - n: 269
@@ -14079,9 +14080,9 @@ superseded_reports:
 - n: 268
   source_id: evand-square-packing-2026-10-05
   value: '16.878814821006764724747121053018'
-  reason: The house until 2026-10-17; its certificate stays retained and verified, and T-240's exact
+  reason: The house until 2026-10-17; its certificate stays retained and verified, and T-242's exact
     side is smaller.
-  superseded_by: couzo-issue763-2026-10-23-in-corpus
+  superseded_by: evand-kaggle-descents-2026-10-24
 - n: 269
   source_id: evand-regularized-2026-10-10
   value: '16.9015135821891322'
@@ -14296,8 +14297,8 @@ superseded_reports:
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '16.8788148210067647246'
   reason: The house from 2026-10-17 until 2026-10-25; its certificate stays retained and verified,
-    and T-240's exact side is smaller.
-  superseded_by: couzo-issue763-2026-10-23-in-corpus
+    and T-242's exact side is smaller.
+  superseded_by: evand-kaggle-descents-2026-10-24
 - n: 303
   source_id: amundsk-n303-2026-10-23
   value: '17.9097623274752568'
@@ -14308,6 +14309,12 @@ superseded_reports:
   source_id: mishapolk-kkt-refinements-2026-10-14
   value: '17.92942775807517497'
   reason: The house from 2026-10-16 until 2026-10-25; its certificate stays retained and verified,
+    and T-242's exact side is smaller.
+  superseded_by: evand-kaggle-descents-2026-10-24
+- n: 268
+  source_id: couzo-issue763-2026-10-23-in-corpus
+  value: '16.8743617158738255'
+  reason: The house from 2026-10-25 until 2026-10-26; its certificate stays retained and verified,
     and T-242's exact side is smaller.
   superseded_by: evand-kaggle-descents-2026-10-24
 beyond_horizon_claims:
