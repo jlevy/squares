@@ -9176,6 +9176,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         paths=(
             "packing/campaign/result-requests.yaml",
             "packing/contributors/people/hyukdong-kim.md",
+            "packing/devtools/render_n11_lower_bounds_explainer_pdf.py",
             "packing/devtools/site_resources.py",
             "packing/frontier/results.yaml",
             "packing/frontier/source-coverage.yaml",
@@ -9202,8 +9203,11 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "card in site_resources, T-244's headline by surname and #799's "
             "acknowledgement recorded, at link revision 5e08f28c, with that main's four "
             "inputs swapped in, and after merging main 46e355582 (#814, T-243), at link "
-            "revision dd5fc01d with that main's four inputs swapped in: the same outcome "
-            "each time, the explainer counting 244 results against main's 243, which its "
+            "revision dd5fc01d with that main's four inputs swapped in, and after #806's "
+            "final comment, #814's News and the explainer PDF's page count of 25, at link "
+            "revision 1b75d2f7 with that main's four inputs and "
+            "render_n11_lower_bounds_explainer_pdf.py swapped in: the same outcome each "
+            "time, the explainer counting 244 results against main's 243, which its "
             "v0.4.29 carries. Retain v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
