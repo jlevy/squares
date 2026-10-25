@@ -22940,6 +22940,39 @@ issues:
       - result: n683
       - result: rows-above-1024
       - result: unrequested-index-rows
+    - url: https://github.com/jlevy/squares/issues/763#issuecomment-6391800383
+      date: '2026-10-25'
+      by: jlevy
+      kind: confirmation
+      reported:
+      - result: n268
+        id: T-240
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: n268
+        id: E-couzo-763-certificate-report
+        status: reviewed
+      - result: n268
+        id: E-couzo-763-exact-feasibility
+        status: confirmed
+      - result: n268
+        id: E-couzo-763-review-exact-feasibility
+        status: confirmed
+      - result: n303
+        id: T-240
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: n303
+        id: E-couzo-763-certificate-report
+        status: reviewed
+      - result: n303
+        id: E-couzo-763-exact-feasibility
+        status: confirmed
+      - result: n303
+        id: E-couzo-763-review-exact-feasibility
+        status: confirmed
     close_when: >-
       T-240 is reviewed and adopted at 268 and 303 with both drawings regularized, the
       recipes, 683 and the rows above 1024 have rows or recorded dispositions, and the reply
