@@ -1,0 +1,96 @@
+k=   6 b=  3 squares=    26 N=    26 w= 10 sat=    41 overlaps=0 outside=0 valid=True
+k=   7 b=  3 squares=    38 N=    38 w= 11 sat=    70 overlaps=0 outside=0 valid=True
+k=   8 b=  3 squares=    52 N=    52 w= 12 sat=    97 overlaps=0 outside=0 valid=True
+k=   8 b=  5 squares=    50 N=    50 w= 14 sat=    96 overlaps=0 outside=0 valid=True
+k=   9 b=  5 squares=    66 N=    66 w= 15 sat=   137 overlaps=0 outside=0 valid=True
+k=  10 b=  5 squares=    84 N=    84 w= 16 sat=   178 overlaps=0 outside=0 valid=True
+k=  11 b=  5 squares=   105 N=   105 w= 16 sat=   229 overlaps=0 outside=0 valid=True
+k=  12 b=  5 squares=   126 N=   126 w= 18 sat=   276 overlaps=0 outside=0 valid=True
+k=  13 b=  5 squares=   151 N=   151 w= 18 sat=   334 overlaps=0 outside=0 valid=True
+k=  14 b=  5 squares=   176 N=   176 w= 20 sat=   388 overlaps=0 outside=0 valid=True
+k=  15 b=  5 squares=   205 N=   205 w= 20 sat=   454 overlaps=0 outside=0 valid=True
+k=  16 b=  5 squares=   236 N=   236 w= 20 sat=   524 overlaps=0 outside=0 valid=True
+k=  17 b=  5 squares=   268 N=   268 w= 21 sat=   596 overlaps=0 outside=0 valid=True
+k=  18 b=  5 squares=   302 N=   302 w= 22 sat=   665 overlaps=0 outside=0 valid=True
+k=  18 b=  7 squares=   300 N=   300 w= 24 sat=   699 overlaps=0 outside=0 valid=True
+k=  19 b=  7 squares=   337 N=   337 w= 24 sat=   785 overlaps=0 outside=0 valid=True
+k=  20 b=  7 squares=   376 N=   376 w= 24 sat=   878 overlaps=0 outside=0 valid=True
+k=  21 b=  7 squares=   417 N=   417 w= 24 sat=   974 overlaps=0 outside=0 valid=True
+k=  22 b=  7 squares=   458 N=   458 w= 26 sat=  1064 overlaps=0 outside=0 valid=True
+k=  23 b=  7 squares=   503 N=   503 w= 26 sat=  1166 overlaps=0 outside=0 valid=True
+k=  24 b=  7 squares=   550 N=   550 w= 26 sat=  1271 overlaps=0 outside=0 valid=True
+k=  25 b=  7 squares=   597 N=   597 w= 28 sat=  1373 overlaps=0 outside=0 valid=True
+k=  26 b=  7 squares=   648 N=   648 w= 28 sat=  1487 overlaps=0 outside=0 valid=True
+k=  27 b=  7 squares=   701 N=   701 w= 28 sat=  1605 overlaps=0 outside=0 valid=True
+k=  28 b=  7 squares=   756 N=   756 w= 28 sat=  1727 overlaps=0 outside=0 valid=True
+k=  29 b=  7 squares=   812 N=   812 w= 29 sat=  1849 overlaps=0 outside=0 valid=True
+k=  30 b=  7 squares=   870 N=   870 w= 30 sat=  1967 overlaps=0 outside=0 valid=True
+k=  31 b=  7 squares=   931 N=   931 w= 30 sat=  2101 overlaps=0 outside=0 valid=True
+k=  32 b=  7 squares=   993 N=   993 w= 31 sat=  2234 overlaps=0 outside=0 valid=True
+k=  32 b=  9 squares=   992 N=   992 w= 32 sat=  2327 overlaps=0 outside=0 valid=True
+k=  33 b=  9 squares=  1057 N=  1057 w= 32 sat=  2474 overlaps=0 outside=0 valid=True
+k=  34 b=  9 squares=  1124 N=  1124 w= 32 sat=  2625 overlaps=0 outside=0 valid=True
+k=  35 b=  9 squares=  1193 N=  1193 w= 32 sat=  2781 overlaps=0 outside=0 valid=True
+k=  36 b=  9 squares=  1262 N=  1262 w= 34 sat=  2932 overlaps=0 outside=0 valid=True
+k=  37 b=  9 squares=  1335 N=  1335 w= 34 sat=  3093 overlaps=0 outside=0 valid=True
+k=  38 b=  9 squares=  1410 N=  1410 w= 34 sat=  3260 overlaps=0 outside=0 valid=True
+k=  39 b=  9 squares=  1487 N=  1487 w= 34 sat=  3429 overlaps=0 outside=0 valid=True
+k=  40 b=  9 squares=  1564 N=  1564 w= 36 sat=  3595 overlaps=0 outside=0 valid=True
+k=  50 b=  9 squares=  2460 N=  2460 w= 40 sat=  5523 overlaps=0 outside=0 valid=True
+k=  50 b= 11 squares=  2460 N=  2460 w= 40 sat=  5692 overlaps=0 outside=0 valid=True
+k=  59 b= 11 squares=  3437 N=  3437 w= 44 sat=  7822 overlaps=0 outside=0 valid=True
+k=  72 b= 11 squares=  5136 N=  5136 w= 48 sat= 11450 overlaps=0 outside=0 valid=True
+k=  72 b= 13 squares=  5136 N=  5136 w= 48 sat= 11704 overlaps=0 outside=0 valid=True
+k=  98 b= 13 squares=  9548 N=  9548 w= 56 sat= 21111 overlaps=0 outside=0 valid=True
+k=  98 b= 15 squares=  9548 N=  9548 w= 56 sat= 21469 overlaps=0 outside=0 valid=True
+k= 101 b= 15 squares= 10145 N= 10145 w= 56 sat= 22752 overlaps=0 outside=0 valid=True
+control k=6 b=3 near_plus_one: refused=True
+control k=6 b=3 far_plus_one: refused=True
+control k=6 b=3 far_level1_plus_one: refused=True
+control k=6 b=3 extra_row: refused=True
+control k=6 b=3 rows_down: refused=True
+control k=6 b=3 grid_shift_right: refused=True
+control k=6 b=3 duplicate: refused=True
+control k=8 b=3 near_plus_one: refused=True
+control k=8 b=3 far_plus_one: refused=True
+control k=8 b=3 far_level1_plus_one: refused=True
+control k=8 b=3 extra_row: refused=True
+control k=8 b=3 rows_down: refused=True
+control k=8 b=3 grid_shift_right: refused=True
+control k=8 b=3 duplicate: refused=True
+control k=8 b=5 near_plus_one: refused=True
+control k=8 b=5 far_plus_one: refused=True
+control k=8 b=5 far_level1_plus_one: refused=True
+control k=8 b=5 extra_row: refused=True
+control k=8 b=5 rows_down: refused=True
+control k=8 b=5 grid_shift_right: refused=True
+control k=8 b=5 duplicate: refused=True
+control k=18 b=5 near_plus_one: refused=True
+control k=18 b=5 far_plus_one: refused=True
+control k=18 b=5 far_level1_plus_one: refused=True
+control k=18 b=5 extra_row: refused=True
+control k=18 b=5 rows_down: refused=True
+control k=18 b=5 grid_shift_right: refused=True
+control k=18 b=5 duplicate: refused=True
+control k=18 b=7 near_plus_one: refused=True
+control k=18 b=7 far_plus_one: refused=True
+control k=18 b=7 far_level1_plus_one: refused=True
+control k=18 b=7 extra_row: refused=True
+control k=18 b=7 rows_down: refused=True
+control k=18 b=7 grid_shift_right: refused=True
+control k=18 b=7 duplicate: refused=True
+control k=40 b=9 near_plus_one: refused=True
+control k=40 b=9 far_plus_one: refused=True
+control k=40 b=9 far_level1_plus_one: refused=True
+control k=40 b=9 extra_row: refused=True
+control k=40 b=9 rows_down: refused=True
+control k=40 b=9 grid_shift_right: refused=True
+control k=40 b=9 duplicate: refused=True
+control k=101 b=15 near_plus_one: refused=True
+control k=101 b=15 far_plus_one: refused=True
+control k=101 b=15 far_level1_plus_one: refused=True
+control k=101 b=15 extra_row: refused=True
+control k=101 b=15 rows_down: refused=True
+control k=101 b=15 grid_shift_right: refused=True
+control k=101 b=15 duplicate: refused=True
+cpu 5.6 s; valid=True; controls refused=True

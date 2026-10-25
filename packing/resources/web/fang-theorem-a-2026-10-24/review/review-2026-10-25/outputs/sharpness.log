@@ -1,0 +1,16 @@
+{'b': 5, 'k': 14, 'widths': [5], 'w_lim': 20, 'four_b': 20, 'bound_minus_4b': 3.1660104885167257, 'times_b': 15.830052442583629, 'series_order': 3, 'w_over_close_t': [20]}
+{'b': 7, 'k': 25, 'widths': [7], 'w_lim': 28, 'four_b': 28, 'bound_minus_4b': 2.284271247461902, 'times_b': 15.989898732233314, 'series_order': 3, 'w_over_close_t': [28]}
+{'b': 9, 'k': 40, 'widths': [9], 'w_lim': 36, 'four_b': 36, 'bound_minus_4b': 1.7770876399966369, 'times_b': 15.993788759969732, 'series_order': 3, 'w_over_close_t': [36]}
+{'b': 11, 'k': 59, 'widths': [11], 'w_lim': 44, 'four_b': 44, 'bound_minus_4b': 1.451121964800862, 'times_b': 15.962341612809482, 'series_order': 3, 'w_over_close_t': [44]}
+{'b': 13, 'k': 82, 'widths': [13], 'w_lim': 52, 'four_b': 52, 'bound_minus_4b': 1.2249938994627882, 'times_b': 15.924920693016247, 'series_order': 3, 'w_over_close_t': [52]}
+{'b': 15, 'k': 109, 'widths': [15], 'w_lim': 60, 'four_b': 60, 'bound_minus_4b': 1.0592922409336012, 'times_b': 15.889383614004018, 'series_order': 3, 'w_over_close_t': [60]}
+{'b': 17, 'k': 140, 'widths': [17], 'w_lim': 68, 'four_b': 68, 'bound_minus_4b': 0.932802122726045, 'times_b': 15.857636086342765, 'series_order': 3, 'w_over_close_t': [68]}
+{'b': 19, 'k': 175, 'widths': [19], 'w_lim': 76, 'four_b': 76, 'bound_minus_4b': 0.8331477354788319, 'times_b': 15.829806974097806, 'series_order': 3, 'w_over_close_t': [76]}
+{'b': 21, 'k': 214, 'widths': [21], 'w_lim': 84, 'four_b': 84, 'bound_minus_4b': 0.7526434623088107, 'times_b': 15.805512708485026, 'series_order': 3, 'w_over_close_t': [84]}
+{'b': 23, 'k': 257, 'widths': [23], 'w_lim': 92, 'four_b': 92, 'bound_minus_4b': 0.6862723900370753, 'times_b': 15.784264970852732, 'series_order': 3, 'w_over_close_t': [92]}
+{'b': 25, 'k': 304, 'widths': [25], 'w_lim': 100, 'four_b': 100, 'bound_minus_4b': 0.6306240475036162, 'times_b': 15.765601187590406, 'series_order': 3, 'w_over_close_t': [100]}
+{'b': 27, 'k': 355, 'widths': [27], 'w_lim': 108, 'four_b': 108, 'bound_minus_4b': 0.5833007557938288, 'times_b': 15.749120406433377, 'series_order': 3, 'w_over_close_t': [108]}
+{'b': 1997, 'k': 1993010, 'widths': [1997], 'w_lim': 7988, 'four_b': 7988, 'bound_minus_4b': 0.00776358250186604, 'times_b': 15.503874256226482, 'series_order': 3}
+{'b': 1999, 'k': 1997005, 'widths': [1999], 'w_lim': 7996, 'four_b': 7996, 'bound_minus_4b': 0.007755813100629894, 'times_b': 15.503870388159157, 'series_order': 3}
+{'b': 2001, 'k': 2001004, 'widths': [2001], 'w_lim': 8004, 'four_b': 8004, 'bound_minus_4b': 0.007748059233563254, 'times_b': 15.50386652636007, 'series_order': 3}
+failures 0; cpu 1.3
