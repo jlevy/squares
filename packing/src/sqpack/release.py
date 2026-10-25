@@ -8896,6 +8896,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         ),
         paths=(
             "packing/campaign/result-requests.yaml",
+            "packing/devtools/site_resources.py",
             "packing/devtools/upper_bound_reports.py",
             "packing/frontier/results.yaml",
             "packing/frontier/source-coverage.yaml",
@@ -8923,8 +8924,11 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "render_n11_optimality_review, render_n11_threshold_bound_review and "
             "render_packing_methods write all 69 files byte-identical across the three; "
             "measured first against main 2ed0ea740 (#795) at link revision bda51090, with "
-            "the same result. No register entry is added, so the explainer's result count "
-            "is unchanged. No PDF was printed; each prints from that HTML. Retain v0.4.27, "
+            "the same result. With the other-projects card for #798's gist added to "
+            "site_resources.py, measured again at link revision 23bd0a0f with main's five "
+            "changed inputs swapped in: twice from this tree and once swapped, 69 files "
+            "each, all byte-identical across the three. No register entry is added, so the "
+            "explainer's result count is unchanged. No PDF was printed; each prints from that HTML. Retain v0.4.27, "
             "v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
