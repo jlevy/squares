@@ -71,6 +71,15 @@ allowlist:
       `decide` holds the parent the filtered replay decided, by the digest of the bytes
       it read, to that stated digest, so a recipe row is bound to the certificate the
       downloaded index names. One control alters the digest to show the refusal.
+  - path: packing/devtools/two_strip_checker.py
+    kind: generated-artifact
+    boundary: >-
+      The 683 certificates `write_out` builds from #799's parameters are derived and not
+      retained (OR-18), so no Git revision names them: the decisions receipt names each
+      by its SHA-256 and size, and `check` holds the certificate the replay receipt
+      decided on both routes to the one the decisions receipt names, so the cross-check
+      is of the packing the lemma decided. The retained packet files are read from Git
+      and compared with nothing.
   - path: packing/devtools/hosted_shards.py
     kind: download
     boundary: >-
