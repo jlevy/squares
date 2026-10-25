@@ -50,16 +50,16 @@ def _above(**fields: Any) -> replay.Walk:
 
 
 def test_every_frozen_release_and_walk_keeps_its_window() -> None:
-    """W7 sets no window above 1024: the 29 releases, the push of 23:38:42Z's nine among
-    them (think-lyf9), decide from the corpus to 1024 and name no walk above or hosted
-    manifest; every walk reaches to 1024, and the six that apply the owner's rulings list
-    both through 1024."""
-    assert len(replay.RELEASES) == 29
+    """W7 sets no window above 1024: the 30 releases, the push of 23:38:42Z's nine among
+    them (think-lyf9) and 43f666c (think-gn29), decide from the corpus to 1024 and name no
+    walk above or hosted manifest; every walk reaches to 1024, and the seven that apply the
+    owner's rulings list both through 1024."""
+    assert len(replay.RELEASES) == 30
     for chosen in replay.RELEASES.values():
         assert (chosen.decided_above, chosen.decided_through) == (324, replay.FROZEN_THROUGH)
         assert (chosen.walk_above, chosen.hosted, chosen.frozen) == ("", None, True)
     assert all(walk.through == replay.FROZEN_THROUGH for walk in replay.WALKS.values())
-    assert len(replay.WALK_RULINGS) == 6
+    assert len(replay.WALK_RULINGS) == 7
     for rulings in replay.WALK_RULINGS.values():
         assert [item["through"] for item in rulings] == [1024, 1024]
 
@@ -195,8 +195,10 @@ def test_a_catalogue_side_declared_as_a_row_before_n1_is_refused(
 
 
 def _with_recipe(tmp_path: Path) -> replay.Release:
-    """#763's release with its recipe at 444 declared as a row, in a copy of its packet's
-    declaration and receipts: the parent, 403, is a replayed row of the release."""
+    """#763's release with its recipe at 444 its one recipe row, in a copy of its packet's
+    declaration and receipts: the parent, 403, is a replayed row of the release. #763's
+    packet declares all 13 of its recipes since 43f666c's import (think-g2qy); the copy
+    keeps its 184 certificates and 444 alone, so each control below changes one recipe."""
     chosen = replay.release(763)
     item = next(
         claim
@@ -210,7 +212,8 @@ def _with_recipe(tmp_path: Path) -> replay.Release:
         "printed": replay.ceiling(Fraction(item["exact"])),
         "recipe": replay.declared_recipe(item),
     }
-    declared["rows"] = sorted([*declared["rows"], recipe], key=lambda row: row["n"])
+    certificates = [row for row in declared["rows"] if "recipe" not in row]
+    declared["rows"] = sorted([*certificates, recipe], key=lambda row: row["n"])
     (tmp_path / "declared-rows.json").write_text(json.dumps(declared), encoding="utf-8")
     receipts = tmp_path / "receipts"
     receipts.mkdir()
@@ -533,14 +536,12 @@ def test_a_recipe_row_s_side_is_read_one_way(
     """Review A, A8, as review B's B2 amends it: a recipe row's certificate count is its
     parent's, 403 at 444, and `release_sides` reads its side as `decided_sides` does, tS + L,
     not the parent's side one layer low. A recipe row is dated by the first commit whose
-    index states its recipe, which `first_commits` does not read yet, so it refuses one
-    before it reads a clone."""
+    index states its recipe (`recipe_first_commits`), which 964ee2b's is at 444."""
     chosen = _with_recipe(tmp_path)
     monkeypatch.setitem(replay.RELEASES, chosen.label, chosen)
     (row,) = replay.recipe_claims(chosen)
     assert (row.certificate_n, row.recipe["source_n"] if row.recipe else None) == (403, 403)
-    with pytest.raises(replay.ReplayError, match="a recipe row is dated by the first commit"):
-        replay.first_commits(763, tmp_path / "no-clone")
+    assert chosen.first_commit_of(444) == (replay.COUZO_763_PIN, chosen.committed)
     decided = replay.decided_sides(chosen)[444]
     raw = read_retained_bytes(replay.archive(chosen) / row.path)
     hosted = dataclasses.replace(chosen, hosted=Path("packing/hosted/none.yaml"))

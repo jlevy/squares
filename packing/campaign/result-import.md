@@ -562,6 +562,17 @@ record’s statement of the rule:
   `check` derives again.
   The checker refuses a classical parent, as Friedman’s (think-zkxy), and Kevin Fang’s
   composites, so those stay held.
+  **A recipe the source also expands**, its full n-square expansion kept under
+  `certificates/parents/` at exactly the recipe’s side, is read as the release reads its
+  claims (#800’s review A, A3). Where the report claims the index’s recipe, as an
+  issue’s claim map (#763’s) or a watched publication’s own entries (`43f666c`’s) do,
+  the checker decides it from its parent and the expansion is not read.
+  Where the release reads certificates, as the push of 23:38:42Z’s notebook releases
+  read the rows the index credits to a notebook, the row is the expansion, read whole on
+  both routes (`couzo_763_claims.recipe_certificates`; #795’s review A, A2). The two
+  readings agree: the expansion has the recipe’s side and is first committed with it, as
+  #800’s review A confirmed at all 29 of `43f666c`’s and #763’s recipes, so neither
+  import re-decides the other’s rows.
 
 Transcribe each report’s claims into the directory’s `sources.yaml`, then, from
 `packing/`, run `python -m devtools.intake_ledger gather DIR` (`--snapshot` reuses the

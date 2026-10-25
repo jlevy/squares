@@ -15,9 +15,11 @@ below 1024 (think-ptkk):
   [ledger of 24 October for issue 763](../../../campaign/issue-intake/upper-bounds-issue763-20261024/README.md)
   records 198 of the 201 claims in report order. 184 certificates are dated
   beyond-horizon rows of the `couzo-issue763-2026-10-23` source in
-  [source-coverage.yaml](../../../frontier/source-coverage.yaml); 13 L-border recipes and
-  the deletion bound at 683 are held for decisions; 328, 850 and 909 restate the f1ceee4
-  rows the record already holds.
+  [source-coverage.yaml](../../../frontier/source-coverage.yaml). Since `43f666c`’s import
+  the 13 L-border recipes are rows too, of a source of their own,
+  `couzo-issue763-2026-10-23-recipes` ([The Recipes, Decided](#the-recipes-decided)); the
+  deletion bound at 683 is held for a decision; 328, 850 and 909 restate the f1ceee4 rows
+  the record already holds.
 - **The 233 above 1024** are retained where they are certificates and wait on think-llit,
   which applies the owner’s answer that rows above 1024 are tracked.
 - **15 further index rows** at or below 1024, which the issue’s selection rule leaves out,
@@ -208,19 +210,74 @@ commits after it, and #715’s re-certifications.
   #732’s `17cc220` rows (20), `couzo-index-2026-10-15`’s (13), `couzo-verified-bounds`’s
   (4), #715’s (3), #670’s (2), `evand-compositions`’ (1) and `couzo-certificates-2026-10-14`’s
   (1); at 8 counts no row stood before them (Göbel’s construction at 7, the grid at 465).
-- **Held:** the 13 recipes, which wait on a maintained construction checker (think-g2qy,
-  after D2 on think-f2io), and 683, which the issue claims, on think-kzme’s question whether
-  an issue-claimed deletion bound gets a row (think-2z2n). The walk records them, so they
-  stand at their counts, and no row holds them.
+- **Held:** 683, which the issue claims, on think-kzme’s question whether an issue-claimed
+  deletion bound gets a row (think-2z2n). The walk records it, so it stands at its count, and
+  no row holds it. The walk held the 13 recipes too, on a maintained construction checker
+  (think-g2qy, after D2 on think-f2io), until `43f666c`’s import decided them; they are rows
+  now ([The Recipes, Decided](#the-recipes-decided)).
 - **Not recorded:** 328, 850 and 909 are below f1ceee4’s rows by 3.16e-13, 6.75e-14 and
   2.57e-13 at the same 12-place print, so by the owner’s answer of 23 October (think-fwa9)
   they restate those rows. 365 and 970, 8.25e-13 and 4.85e-13 below f1ceee4’s rows, are
-  recorded only because those rows’ exact sides round up to a higher print; both are held
+  recorded only because those rows’ exact sides round up to a higher print; both are
   recipes.
 - At 19 counts the walk records Couzo’s own `23aff0c` constructions, and at 7 of them his
   `4e4c8ce` deletion bounds, which the history walk holds, below the start; #763 is
   recorded below them at all 19. The earlier publications whose verdicts rest on those holds
   are declared in `beyond_horizon_replay.WALKS`.
+
+## The Recipes, Decided
+
+Added on 25 October 2026 by the import of Couzo’s later `43f666c` (think-gn29), for
+think-g2qy.
+
+The walk of 24 October recorded #763’s 13 L-border recipes, at 365, 444, 487, 632, 733,
+734, 737, 788, 789, 845, 910, 966 and 970, and held them from rows: a construction with no
+certificate file of its own waited on a checker this project maintains (the owner’s D2
+answer on think-f2io). [`devtools.construction_checker`](../../../devtools/construction_checker.py)
+landed with the code for rows above 1024 (#793), so `43f666c`’s import decides them:
+
+- **Each recipe is decided exactly.** The checker reads each from the claim map: its parent
+  certificate by path and SHA-256, one tile (t = 1) and one to three L-border layers, and
+  its bound. In `Fraction`s it requires the parent to have passed both routes with its six
+  controls refused, the stated bound to be tS + L, and the count to be the construction’s
+  capacity. It decides all 13 and refuses all nine of its controls at each, 117 in all
+  ([receipts/recipe-decisions.json](receipts/recipe-decisions.json)). Seven of the nine parents
+  are rows of this release. 328 and 850, which restate f1ceee4’s rows and so are not rows, are
+  replayed on both routes for the purpose, each with its six controls refused.
+- **Each is dated by its index.** A recipe has no file of its own, so it is dated by the
+  first commit whose `certified_bounds.json` states it (`recipe_first_commits`): `efef7d1`
+  at 365 and 970, `964ee2b` at the other 11
+  ([receipts/first-commits.json](receipts/first-commits.json)). The issue dates the claims.
+- **What changed in the frozen walk.** The walk’s ledger and its verdicts are as they were;
+  only its declared holds changed. `beyond_horizon_replay.WALKS` no longer holds the 13
+  (`_HELD_763` keeps 683 alone), so the release declares them as rows with their recipes
+  ([acquisition/declared-rows.json](acquisition/declared-rows.json), 197 rows), and
+  the walk’s `sources.yaml`, `ledger.yaml` and README say so. The first commits and the
+  Göbel receipt gain the 13, and every side is below Göbel’s construction. The release’s
+  claims record keeps its 184 rows as before; the 13 have a claims record of their own,
+  [acquisition/beyond-horizon-rows-recipes.json](acquisition/beyond-horizon-rows-recipes.json).
+- **The rows.** Each is a row of the `couzo-issue763-2026-10-23-recipes` source, which
+  names think-g2qy, at the recipe’s exact side rounded up at 12 places. A source carries the
+  one day `main` first held its rows, and these reach `main` a day after the 184, so they are
+  a source of their own (`beyond_horizon_replay.Split`; #800’s review A, A1). Each is below
+  the standing side by 4.85e-13 (970) to 3.52e-2 (733, 788 and 845). They supersede
+  f1ceee4’s rows at 365, 737 and 970,
+  `couzo-verified-bounds-2026-10-14`’s at 733, 788 and 845, `couzo-index-2026-10-15`’s at
+  734, 789 and 966, #670’s at 444, `couzo-reconcile-2026-10-20`’s at 487 and #732’s at
+  632; at 910 the grid stood. At 444, 487, 632, 733, 737, 788 and 845 `43f666c`’s own
+  recipe, a later report, supersedes them in turn.
+- **The push after the issue.** #795’s review A noted that the push of 23:38:42Z also put
+  `best/` certificates and notebook recipes at these counts. The
+  [ledger of 24 October for 43f666c](../../../campaign/issue-intake/upper-bounds-couzo-43f666c-20261024/README.md)
+  reads that push commit by commit after the issue: each of its sides there is above or
+  equal to the issue’s recipe, so none is recorded.
+- **The expansions.** Each recipe also has its full n-square expansion under
+  `certificates/parents/` at exactly its side, which the parents’ manifest records. The
+  issue claims the recipe, so the checker decides it and the expansion is not read, by the
+  runbook’s rule for a recipe the source also expands
+  ([result-import.md, D2](../../../campaign/result-import.md#several-reports-at-one-count)), as the push’s
+  notebook rows read theirs because the index credits them to a notebook (#795’s review A,
+  A2). The author is asked about them.
 
 ## The Unrequested Rows
 
