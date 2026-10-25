@@ -5,16 +5,19 @@ title: "Import #797: Kevin Fang's c*(k) < 4√(2k)+1 for every k ≥ 6 (squarepa
 kind: task
 status: in_progress
 priority: 2
-version: 7
+version: 10
 delegate: c-import-797-1024
 labels:
   - result-import
 dependencies: []
 parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
+child_order_hints:
+  - is-01m5rbw9b5qbj55pjw1pewd6b2
+  - is-01m5rbwekd4y8cvxgnqx3xdsj1
 hold: null
 hold_until: null
 created_at: 2026-10-24T20:23:19.286Z
-updated_at: 2026-10-25T01:15:39.995Z
+updated_at: 2026-10-25T01:47:57.420Z
 started_at: 2026-10-24T20:24:12.105Z
 ---
 New 2026-10-24 issue https://github.com/jlevy/squares/issues/797 (TheSnakeFang, 18:52:48Z): for every k >= 6, k^2 - ceil(sqrt(32k)) - 1 unit squares fit in a square of side < k, so c*(k) < 4 sqrt(2k) + 1. Ryu's L packing (Theorem 1.3) with filled band ends, b the odd integer nearest sqrt(2k); a 5-page note. Source TheSnakeFang/squarepack-certs@b1b3f6b theorem-a/ (note PDF+TeX, lband.py exact construction, windowed_check.py, certificates k=6..40 and 101, SHA-256 for k=300 and 600 with regenerate.sh). The repository head db1ed62 (3 commits past the last read) adds note v0.2 crediting Evan Daniel's earlier bound (doi:10.5281/zenodo.23624565): read for priority and credit. Bears on the deficiency rows (Ryu's Theorems 1.2-1.4, T-163). Stage 0 owner; stage 1 triage is read-only first. Source claims are unverified.
@@ -56,3 +59,5 @@ Two questions, neither of which holds anything up:
 2. Would you publish the k = 300 and 600 certificates, for example on the Zenodo record? Then they could be checked without rebuilding them. Until then we record their SHA-256 values as your statement.
 
 🤖 Generated with [Claude Code](https://claude.com/claude-code)
+
+2026-10-25 01:50Z (c-import-797-1024): PR #801 head a3e826606, hosted CI green (packing-required and pages-required pass; runs 40151160097, 40151160004); still a draft. The first head 7fff8acc7 failed three tests in suites A and C (credits-project keys must name Levy; nine new credit spans resolved in contributors/occurrences.yaml; fang_theorem_a declared as a verified_upper_bound consumer), answered in a3e826606.
