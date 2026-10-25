@@ -7702,8 +7702,9 @@ sources:
   notes: The 1 complete certificate is kept as a derived exact fact, admitted only where its exact side
     equals, or rounds up to, the side its source prints; from 24 October 2026 the author's CC0 1.0
     dedication (issue 755, issuecomment-6388401978) lets the packet retain the certificate, its input and
-    the README beside the fact. T-239 records the in-horizon report. All 3 native jobs have full outcomes. No selected override or superseded claim
-    is created at this source-only stage; current cases and earlier source ownership remain unchanged.
+    the README beside the fact. T-239 records the in-horizon report. All 3 native jobs have full
+    outcomes. No selected override or superseded claim is created at this source-only stage; current
+    cases and earlier source ownership remain unchanged.
 
 - id: evand-n343-sweep-2026-10-20
   title: Evan Daniel's n343 certificate at 88385ab, issue702
