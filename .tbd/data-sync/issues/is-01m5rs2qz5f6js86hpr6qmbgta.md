@@ -5,7 +5,7 @@ title: "Import Jatloe et al.: Lean proof s(12) = 4, Jatloe12SquaresFormalized d0
 kind: task
 status: in_progress
 priority: 1
-version: 7
+version: 8
 delegate: coord-n12-1025
 labels:
   - result-import
@@ -15,7 +15,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-25T05:38:35.108Z
-updated_at: 2026-10-25T07:07:43.605Z
+updated_at: 2026-10-25T09:39:51.053Z
 started_at: 2026-10-25T05:38:38.919Z
 ---
 Owner report 2026-10-25 (X post https://x.com/ManassehA06/status/2113097037306569124 and its reply naming the repo); tracking issue https://github.com/jlevy/squares/issues/810. Source: Queuingtheorydotcom/Jatloe12SquaresFormalized at d0caf4532a7ead68be1389ef87387b126fc2e0ab (tag n12-verified-2026-10-16), Lean/Proofs/N12-jatloe, theorem N12Compact.Final.optimality : S12.packingConstant12 = 4. Triage 2026-10-25: closure 5377 modules, 0 missing, 0 sorry, 0 axiom decls, 2572 native_decide; source audit 3 standard + 1624 native axioms; accepting run reused cached objects. Upstream EvolvingPrograms/SquaresLean@1f60d41 not publicly reachable. Stages: packet, register as reported (S4/S5 candidate), statement audit, math review, replay priced (above cap).
@@ -31,3 +31,4 @@ Owner report 2026-10-25 (X post https://x.com/ManassehA06/status/211309703730656
 - Found, not fixed: devtools.render_announcement.load_profiles globs packing/contributors/*.md, but profiles live in packing/contributors/people/ since a7b61b25a (2026-10-21), so no profile handle (@jatloe, @ctjlewis, ...) is ever used; only RECORD_HANDLES (Ahmed's @ManassehA06) applies. Its line also prints "Benjamin Gurevitch" from credited_names.
 - Validation at 1f6a8d184 (2026-10-25): packing-validate --records exit 0 (53 of 111 steps, the records tier); --edit --jobs 2: 68 of 69 steps pass, the type floor (basedpyright) timed out at 900 s on this 4-core 15 GB host (its earlier run at --jobs 4 hit the node heap limit); basedpyright on the two changed Python files (release.py, cli/validate.py): 0 errors; ruff clean; tests/test_contributor_occurrences.py 25 passed; tests/test_release.py 20 passed; acquire_source --check PACKET_MATCHES_ITS_CONTRACT.
 - 2026-10-25 merge of origin/main 886dddce6 (#808): 1307c2c8c (result-requests.yaml keeps #799 and #810 in issue order; release.py keeps W8's and #810's no-change records); 1b4ba62ac re-measure at link 1307c2c8, 51 files byte-identical x3; release_pin --check: 'the pin is the last data commit, 015f1a19c123' (no re-pin needed). --records exit 0 (53 of 111); test_contributor_occurrences 25 passed. Statement audit (40e15dbb, worktree-agent-aa8ad7d72a4de3571) not merged, per the coordinator.
+- 2026-10-25 w-renumber-1025: this result is now **T-245** (was T-243). Merge of origin/main 46e355582 (#814, which registered T-243 = Daniel at n = 182 and took explainer v0.4.28): ab33e3bd7 (merge; this branch's ids renumbered by a three-way merge of the branch with T-244 -> T-246 and T-243 -> T-245 applied first, so main's T-243 is untouched; open PR #813 holds T-244, Kim at 172/263, and no open branch goes past it), 45775072d (no-change record for the other three papers re-measured at link ab33e3bd against main 46e355582, nine inputs swapped, jatloe.md removed: 51 files byte-identical x3; explainer v0.4.29 over main's v0.4.28, counting 245), 5c28c3ba4 (DATA_REVISION -> ab33e3bd). check_release_impact passes; release_pin --check: the pin is the last data commit. Validation at 5c28c3ba4: --records 52/53 and --edit --jobs 2 --inner-jobs 1 68/69, the one failure in both being check_results' id contiguity (T-244 is #813's; it clears when #813 lands and this branch merges main); with ids made contiguous in a throwaway working tree check_results is clean and the 7 register tests that fail on the gap pass. Old ids still on GitHub: PR #812 title, body and comments 6394755774, 6394770005, 6394781451, 6395591062; bead titles think-dd3v (T-243) and think-10m1/think-vgsw (T-244), descriptions think-jmb4/think-vt31, think-ezt8 notes.
