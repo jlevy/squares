@@ -799,7 +799,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "0ed9f670d23f2dfba586b682592d20df9dfe0c0f"
+DATA_REVISION = "b909d2b5a23350128cb154f925c998444b37f261"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -900,8 +900,8 @@ EXPLAINER_HISTORY = (
         version="v0.4.28",
         first_published="October 25, 2026",
         result_scope=(
-            "Update the registered result count after the registration of Hyukdong Kim's "
-            "exact sides at 172 and 263 (T-244)."
+            "Update the registered result count after the registration of Evan Daniel's "
+            "#806 certificate at 182 (T-243)."
         ),
     ),
     PublicationHistoryEntry(
@@ -1487,8 +1487,8 @@ RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
         version="v0.4.28",
         impact="patch",
         reason=(
-            "Update the registered result count after the registration of Hyukdong Kim's "
-            "exact sides at 172 and 263 (T-244)."
+            "Update the registered result count after the registration of Evan Daniel's "
+            "#806 certificate at 182 (T-243), adopted as the house best packing there."
         ),
     ),
     ReleaseImpactDecision(
@@ -9103,6 +9103,50 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "triage of #799 (think-z2mj) rebuilt the entry with version 2's results and "
             "the preprint, at link revision 6bc19ea4 with the same two inputs of main "
             "swapped in: the same outcome. No register entry changes. Retain v0.2.7."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/devtools/adopt_houses.py",
+            "packing/devtools/default_drawings.py",
+            "packing/devtools/upper_bound_houses.py",
+            "packing/devtools/upper_bound_reports.py",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The #806 import (think-2lzo, think-meci): T-243's registration of Evan "
+            "Daniel's certificate at 182, its coverage source, the importer's reader for "
+            "its packet and #806's requests entry; the 25 October review mapped, T-243 at "
+            "V3/C3; and its adoption at 182 in the pass of 25 October with its "
+            "regularization (upper_bound_houses, adopt_houses, SETTLED[182] removed from "
+            "default_drawings). Against main bb756e193 (#805): rendered at link revision "
+            "f8cca02c into empty site directories, twice from this tree and once from it "
+            "with main's result-requests.yaml, upper_bound_reports.py, results.yaml and "
+            "source-coverage.yaml swapped in, render_n11_optimality_review, "
+            "render_n11_threshold_bound_review and render_packing_methods write all 51 "
+            "files byte-identical across the three. After the review's mapping, the "
+            "adoption and the merge of main 886dddce6 (#808), at link revision a8184fe4 "
+            "with that main's seven candidate inputs swapped in, and after review A's "
+            "fixes (T-243's headline and notes), at link revision b909d2b5 with the same "
+            "seven inputs of main swapped in: the same outcome. The "
+            "explainer, counting 242 to 243 results, takes v0.4.28 over main's v0.4.27. No "
+            "PDF was printed for these three; each prints from that HTML. Retain v0.1.11, "
+            "v0.1.4 and v0.2.7."
         ),
     ),
     ReleaseNoPublicChange(

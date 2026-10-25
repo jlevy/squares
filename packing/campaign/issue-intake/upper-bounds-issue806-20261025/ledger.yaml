@@ -1,0 +1,43 @@
+format: intake-ledger-v1
+read_at_main: bb756e1935b4d6280bb41877e8c829a8e4c0e9e3
+read_on: '2026-10-25'
+rule: If they are reported in order, then each one should be recorded as a result, as long
+  as each one is stronger than the last. If a stronger result is reported first, then the
+  other one should not be recorded since it is weaker after that, unless there is some key
+  reason it should be recorded.
+lanes: []
+reports:
+- report: '#806'
+  url: https://github.com/jlevy/squares/issues/806
+  kind: issue
+  holders: Evan Daniel
+  reported_at: '2026-10-25T04:16:24Z'
+  bead: think-2lzo
+  claims:
+  - n: 182
+    printed: '13.970916436215'
+    rounding: up
+    exact: 13970916436214678735385725854133/1000000000000000000000000000000
+    exact_from: search/packer/candidates/s182-1024.cert at d99925d (its header), retained
+      in the evand-n182-2026-10-25 packet (acquisition/claims.json)
+    first_committed: '2026-10-25T04:11:15Z'
+    measured:
+      against: T-174
+      finding: no symmetry pairs it one to one by nearest centres; the optimal assignment,
+        best under the identity, moves 44 squares beyond 0.1 and 79 beyond 1e-2 (largest 0.813),
+        turns 74 squares, reverses 16 tilts beyond a degree and shares no tilt angle within
+        1e-4 degrees; against the source's own binary64 input, one to one, none beyond 1e-6
+        (largest 2.55e-7)
+      source: packing/resources/web/evand-n182-2026-10-25/measure/identity.json
+    new_packing:
+      source: '#806''s credit section: ''a new packing (a different local minimum from the
+        register''s 13.974090713), found by our explore loop from a start at n = 211'''
+      continues: 'the register''s s(211) packing, T-188: Francisco Couzo''s arrangement of
+        Daniil Ostashev''s design (T-175), by an L-cut of 29 squares, as the issue states
+        and the 25 October review measured'
+  note: The issue names d99925d1, which its author pushed at 2026-10-25T04:16:05Z (3c335fe..d99925d
+    in GitHub's activity log), 19 seconds before the issue; committed at 04:11:15Z.
+exceptions: []
+key_reason_candidates: []
+other_items: []
+cross_check: []

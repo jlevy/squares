@@ -1,0 +1,20 @@
+== commit d99925d1298262c4ddb81c95abbb6f45adca8d3d
+author Evan Daniel <evanbd@gmail.com>
+authored 2026-10-24T22:11:15-06:00
+committed 2026-10-24T22:11:15-06:00
+parents ae60995d158349fe989a73c2708f074097ca2756
+-- message
+candidates: s(182) = 13.97091643621468 (polished and certified; distinct minimum from the register's 13.974090713)
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+
+== blobs at d99925d1298262c4ddb81c95abbb6f45adca8d3d (path, blob, bytes, sha256)
+search/packer/candidates/s182-1024.cert a1c01bdf689044decbc7bdabf1c38d4d676c6abd 30648 9e12e0a42b05c4fcd2181c5255a4a19ab1aeb9a9f8c95f9943a20998a415fe97
+search/packer/candidates/s182-1024_regularized.cert 0048693767a496140ab70f03b9edab04af250eab 30526 f1ec415a194b9c0d01d86d23d917a90375779dbd0739966287f189109fd2fabf
+search/packer/candidates/s182-1024.exact.txt 7be3094042ee78a684d63755e88310d2e2569c03 35915 3ed2a8a82d30612b378ec23cc205d2194222580ddade133d4c59f79d2dc76893
+search/packer/candidates/s182-1024.input.txt 196b7b14980fdddc79d909b9ce19bc22376cd303 8838 e79897cb13a1fd29c472acec01b07a56e85f5f3c708212e889f71a362d52f45c
+search/packer/candidates/s182-1024.json 33773e85cf94982f53f0d5d46e5a4a9ecfcfb20d 4376 e5491852a87029b8e3b871a481925ae345470a87878ac570724db8cca8f18461
+search/packer/candidates/s182-1024_prior.json 4a42f983bbec9e1af69cfb99615d18d0a6385963 5985 3724f2e7ff553d776417c22537277cac6009107212e5406bb8a2358fb7f284d9
+search/packer/candidates/s182-1024_vs_prior.json 54f6986306daef6ade15e9c0ef83f1f40535456e 23087 37b0b50b4a9e3112e68f3be00a43ed8c9ff201d0894687876f0fdff7dcf4f44e
+search/packer/candidates/s182-1024_regularized.json 23396b33ed1554dbb3811a87faf4f806b3f798da 28540 bc4e0840406248bc42a06cc077e43d8934acfdb30c9023f67cd3ebfcc7ac2c2a
+CREDITS.md 1d7dcb7853e58ba38a472c7c976c2c0e4eedbc0a 7501 778884d09f88ce159ea2cea2134d30fb14bf01bf58fc9e69c6f3d77433da8168

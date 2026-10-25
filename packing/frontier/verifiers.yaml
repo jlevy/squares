@@ -6227,3 +6227,56 @@ verifiers:
       Written and run on 25 October 2026 by the stage 4 review of Kevin Fang's Theorem A;
       kept in the packet's review/review-2026-10-25/. SHA-256 that ran for the retained
       receipt: 0e3a7d566a568f2c09d73892f877f5ea2f63b1e38b838a53a48e507a1e786031.
+  - id: V-evand-n182-review-check
+    program: exact_check.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      The 25 October review's standard-library exact checker of Evan Daniel's n = 182
+      certificate of issue 806 (s182-1024.cert at evand/square-packing d99925d), with a
+      strict reader of its own that admits only integer and integer-fraction tokens: every
+      square's frame on the unit circle exactly, its corners (x, y) + u (c, s) + v (-s, c),
+      every wall by its corners, and all 16,471 pairs twice, by separating axes on the
+      squares' unit edge normals and by the exact area one square clips from the other
+      (Sutherland-Hodgman over Q). It prints the side, its upward 12-place print and the
+      least slacks, and decides fourteen mutations by both methods, sharp at 1e-30 past
+      exact contact: the box below its extent, the packing past the near walls, the
+      closest pair closed, a square enlarged past a wall and past its neighbour, a square
+      moved past its wall, a duplicated square, the reversed rotation sense and the mirror
+      image.
+    source:
+      - packing/resources/web/evand-n182-2026-10-25/review/review-2026-10-25/programs/exact_check.py
+      - packing/resources/web/evand-n182-2026-10-25/review/review-2026-10-25/programs/run_review.sh
+    independence_record: packing/resources/web/evand-n182-2026-10-25/review/review-2026-10-25/README.md
+    independence:
+      read: [mathematics, certificate-format, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of issue 806 (c-review-806-math,
+            think-meci), strongest tier, maximum reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The source's commit d99925d carries a Co-Authored-By trailer naming Claude, and
+          its CREDITS.md says the repository's work was produced by Claude under the
+          author's direction. The program was written from the separating axis theorem,
+          exact convex clipping and the certificate's own format line, and decided the
+          certificate before any earlier work on the result was read. The source's solver
+          report (s182-1024.json) and comparison files were read beforehand, to compare.
+          None of the source's programs (verify_cert.py, verify_cert2.py, exactsolve.py)
+          and none of this repository's maintained exact routes was opened.
+    note: >-
+      Written and run on 25 October 2026 for
+      docs/project/reviews/review-2026-10-25-evand-n182.md (SHA-256
+      242a77a9affc9d1e9ef7baba232850053c28413892857d31b956afe269b58f2d as run, which its
+      receipt out/check-s182-1024.json records), and kept with everything it printed in the
+      evand-n182-2026-10-25 packet's review/review-2026-10-25/.

@@ -20775,28 +20775,21 @@ occurrences:
     path: packing/frontier/n-182.md
     record_key: '182'
     field: /reported_upper_bound/found_by/0
-  expected_text: Francisco Couzo
-  start: 0
-  end: 15
-  label: Francisco Couzo
-  role: construction-finder
-  disposition: resolved
-  evidence:
-  - primary-byline
-  contributor_id: francisco-couzo
-- origin:
-    path: packing/frontier/n-182.md
-    record_key: '182'
-    field: /reported_upper_bound/improved_by/0
   expected_text: Evan Daniel
   start: 0
   end: 11
   label: Evan Daniel
-  role: construction-improver
+  role: construction-finder
   disposition: resolved
   evidence:
   - repository-license
+  - bibliography
   contributor_id: evan-daniel
+  note: 'Reviewed packing/frontier/n-182.md [182] /reported_upper_bound/found_by/0 span 0:11:
+    the case''s house since the adoption of 25 October 2026 (T-243) is Evan Daniel''s packing
+    of issue 806, found by his explore loop from an L-cut of Francisco Couzo''s 211 packing
+    (T-188), at evand/square-packing@d99925d, in the repository whose retained licence names
+    him. The start''s credit is the bibliography key''s.'
 - origin:
     path: packing/frontier/n-182.md
     record_key: '182'
@@ -20814,20 +20807,6 @@ occurrences:
   note: Reviewed packing/frontier/n-182.md [182] /reported_lower_bound/proved_by/0
     span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
     metadata and owner confirmation bind wand125 to Hiroaki Hosono.
-- origin:
-    path: packing/frontier/n-182.md
-    record_key: '182'
-    field: /reported_upper_bound/improved_by/1
-  expected_text: PingYou Ltd
-  start: 0
-  end: 11
-  label: PingYou Ltd
-  role: construction-improver
-  disposition: non-person
-  evidence: []
-  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
-    Credit section records the request to credit PingYou Ltd and identifies its unreleased
-    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/frontier/n-183.md
     record_key: '183'
@@ -28735,6 +28714,80 @@ occurrences:
   - primary-byline
   - announcement-account
   note: Reviewed packing/resources/bibliography.yaml [[Kristiansen issue 798 2026-10-24]] /credit span 87:91. The specific first-party jlevy/squares method or source is the Joshua Levy identity established by LICENSE and the retained ojoshe receipt; the link is kept from issue 763's credit chain, and project credit does not imply sole personal authorship.
+  contributor_id: joshua-levy
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel n182 2026-10-25]'
+    field: /authors/0
+  expected_text: Daniel
+  start: 0
+  end: 6
+  label: Daniel
+  role: source-author
+  disposition: resolved
+  evidence:
+  - repository-license
+  - bibliography
+  note: Reviewed packing/resources/bibliography.yaml [[Daniel n182 2026-10-25]] /authors/0 span 0:6. The evand/square-packing certificate of issue 806 matches the repository whose retained licence names Evan Daniel. Keep finder, improver and solver roles distinct.
+  contributor_id: evan-daniel
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel n182 2026-10-25]'
+    field: /credit
+  expected_text: Daniel after Couzo, Ostashev, Levy
+  start: 0
+  end: 6
+  label: Daniel
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+  - repository-license
+  - bibliography
+  note: 'Reviewed packing/resources/bibliography.yaml [[Daniel n182 2026-10-25]] /credit span 0:6: Evan Daniel''s new packing at 182, in the repository whose retained licence names him. Keep finder, improver and solver roles distinct.'
+  contributor_id: evan-daniel
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel n182 2026-10-25]'
+    field: /credit
+  expected_text: Daniel after Couzo, Ostashev, Levy
+  start: 20
+  end: 28
+  label: Ostashev
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  note: Reviewed source credit matches the evidenced person and printed name; issue 806 names the register's s(211) packing as the start its L-cut search began from and asks that Daniil Ostashev be credited; that packing, T-188, is Francisco Couzo's arrangement of Ostashev's design (T-175), and the original credit role is retained.
+  contributor_id: daniil-ostashev
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel n182 2026-10-25]'
+    field: /credit
+  expected_text: Daniel after Couzo, Ostashev, Levy
+  start: 13
+  end: 18
+  label: Couzo
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  note: Reviewed source credit matches the evidenced person and printed name; the register's s(211) packing that issue 806 names as its start is T-188, Francisco Couzo's arrangement of Daniil Ostashev's design (T-175) at franciscouzo/square-packing 487b058, which the issue's lineage table names beside Ostashev, and the certificate follows T-188 where the two differ (M-1 of the 25 October review).
+  contributor_id: francisco-couzo
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel n182 2026-10-25]'
+    field: /credit
+  expected_text: Daniel after Couzo, Ostashev, Levy
+  start: 30
+  end: 34
+  label: Levy
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - announcement-account
+  note: Reviewed packing/resources/bibliography.yaml [[Daniel n182 2026-10-25]] /credit span 30:34. The issue names this project's register as where its start came from; the first-party jlevy/squares record is the Joshua Levy identity established by LICENSE and the retained ojoshe receipt, and project credit does not imply sole personal authorship.
   contributor_id: joshua-levy
 - origin:
     path: packing/resources/bibliography.yaml

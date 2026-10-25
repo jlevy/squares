@@ -11439,6 +11439,36 @@ sources:
     identity measurements support this (measure/identity-nNNN.json), except at 376, where
     the packing lies nearer 43f666c's and the author is asked. Claude assistance disclosed.
   claims_record: resources/web/amundsk-issue798-2026-10-24/acquisition/beyond-horizon-claims.json
+- id: evand-n182-2026-10-25
+  title: Evan Daniel's new packing at 182, at d99925d, issue 806
+  role: source-repository
+  url: https://github.com/evand/square-packing/tree/d99925d1298262c4ddb81c95abbb6f45adca8d3d/search/packer/candidates
+  local: resources/web/evand-n182-2026-10-25/
+  source_key: '[Daniel n182 2026-10-25]'
+  scope:
+    n_values: [182]
+  reviewed: '2026-10-25'
+  source_date: '2026-10-25'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/evand-n182-2026-10-25/acquisition/claims.json
+  evidence:
+  - E-evand-n182-certificate-report
+  - E-evand-n182-exact-feasibility
+  - E-evand-n182-review-exact-feasibility
+  notes: >-
+    The certificate at 182 that d99925d adds under search/packer/candidates/, committed on
+    25 October 2026 at 04:11:15Z and pushed at 04:16:05Z, 19 seconds before issue 806
+    reported it, retained as the source wrote it with the source's KKT point, binary64
+    input, JSON report, comparison files and regularized display view, and admitted at its
+    exact side. All 3 native jobs have full outcomes, and the packet's sharp controls meet
+    its 5e-21 margins on both routes. The ledger of 25 October for this import
+    (campaign/issue-intake/upper-bounds-issue806-20261025) records it 3.17e-03 below T-174,
+    a new packing. T-243 records it at V3/C3 since the 25 October review
+    (E-evand-n182-exact-feasibility, E-evand-n182-review-exact-feasibility), and the case
+    at 182 adopted it as its house best packing in the pass of 25 October 2026.
 - id: hyukdongkim-exact-forms-2026-10-25
   title: Hyukdong Kim's exact sides at 88, 126, 172, 199 and 263 in the issue 804 attachment
   role: first-party-release
@@ -11668,11 +11698,11 @@ selected_overrides:
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
     a replay here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 182
-  source_id: pingyou-pr574-certificates-2026-10-13
-  value: '13.9740907131214390071'
-  evidence: E-pingyou-574-certificate-report
+  source_id: evand-n182-2026-10-25
+  value: '13.9709164362146788'
+  evidence: E-evand-n182-certificate-report
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
-    a replay here and an accepted review, adopted on 2026-10-17 (T-174).
+    a replay here and an accepted review, adopted on 2026-10-25 (T-243).
 - n: 183
   source_id: evand-n183-subgrid-2026-10-19
   value: '13.9995801787362526'
@@ -12494,14 +12524,14 @@ superseded_reports:
 - n: 182
   source_id: casson-square-packing-2026
   value: '13.97409071444282525'
-  superseded_by: pingyou-pr574-certificates-2026-10-13
+  superseded_by: evand-n182-2026-10-25
   reason: Larger than Francisco Couzo's side at this count; the case record states both sources' dates
     and values; since 2026-10-05 the selected report is Evan Daniel's exact optimum of that packing
     (T-098).
 - n: 182
   source_id: franciscouzo-square-packing-2026
   value: '13.974090713124822'
-  superseded_by: pingyou-pr574-certificates-2026-10-13
+  superseded_by: evand-n182-2026-10-25
   reason: Superseded on 2026-10-05 by Evan Daniel's exact optimum of the same packing, certified here
     (T-098).
 - n: 197
@@ -14043,9 +14073,9 @@ superseded_reports:
 - n: 182
   source_id: evand-square-packing-2026-10-05
   value: '13.974090713121439007150130032772'
-  reason: The house until 2026-10-17; its certificate stays retained and verified, and T-174's exact
+  reason: The house until 2026-10-17; its certificate stays retained and verified, and T-243's exact
     side is smaller.
-  superseded_by: pingyou-pr574-certificates-2026-10-13
+  superseded_by: evand-n182-2026-10-25
 - n: 206
   source_id: evand-square-packing-2026-10-05
   value: '14.860158663391903236840250629824'
@@ -14340,6 +14370,12 @@ superseded_reports:
   reason: The house from 2026-10-16 until 2026-10-25; its certificate stays retained and verified,
     and T-242's exact side is smaller.
   superseded_by: evand-kaggle-descents-2026-10-24
+- n: 182
+  source_id: pingyou-pr574-certificates-2026-10-13
+  value: '13.9740907131214390071'
+  reason: The house from 2026-10-17 until 2026-10-25; its certificate stays retained and verified,
+    and T-243's exact side is smaller.
+  superseded_by: evand-n182-2026-10-25
 beyond_horizon_claims:
 - n: 327
   source_id: couzo-extended-range-reports-2026-10-08

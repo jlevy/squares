@@ -4152,6 +4152,29 @@ sources:
       credit evidence only. MIT-licensed; Claude assistance disclosed. The KKT statements
       are the author's; no local or global optimality claim. Retained in
       web/evand-kaggle-descents-2026-10-24/.
+  - key: '[Daniel n182 2026-10-25]'
+    authors: [Daniel]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-25'
+    lineage: builds-on-project
+    credit: Daniel after Couzo, Ostashev, Levy
+    short_credit: Daniel after Couzo et al.
+    note: >-
+      One complete exact certificate at evand/square-packing@d99925d1298262c4ddb81c95abbb6f45adca8d3d,
+      reported on issue 806: s(182) <= 13970916436214678735385725854133/10^30, a new packing
+      the source calls a different local minimum from the register's, found by its explore
+      loop from an L-cut of 29 squares of the register's s(211) packing, which the issue
+      names as the start, and a local search: Francisco Couzo's 211 packing (T-188), an
+      arrangement of Daniil Ostashev's design (T-175), which the certificate follows where
+      the two differ (M-1 of the 25 October review). The source names this project's
+      register as where the start came from, so the key builds on the project and credits
+      the Levy link, as the 22 October key of Daniel's 303 does. The binary64 packing it was
+      solved from, its 80-digit KKT point, the solver's report, the comparison with the
+      source store's prior best and a regularized display view at the same side are
+      retained beside it. MIT-licensed; Claude assistance disclosed. The KKT and
+      local-minimum statements are the author's numerical evidence; no global optimality
+      claim. Retained in web/evand-n182-2026-10-25/.
   - key: '[Kim exact forms 2026-10-25]'
     authors: [Kim]
     year: 2026
