@@ -1551,6 +1551,7 @@ jobs:
             /packing/resources/web/evand-exact-cur-2026-10-16/
             /packing/resources/web/mishapolk-n204-2026-10-22/
             /packing/resources/web/couzo-issue763-2026-10-23/
+            /packing/resources/web/evand-kaggle-descents-2026-10-24/
             /packing/resources/papers/
             !/packing/resources/papers/*
             /packing/resources/papers/kingbird-square-29-provenance.svg

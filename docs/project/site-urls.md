@@ -896,7 +896,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | cases/301.html | cases/301.html | record | overview | 2026-10-03 | 2026-10-16 | live |
 | cases/302.html | cases/302.html | record | overview | 2026-10-03 | 2026-10-23 | live |
 | cases/303.html | cases/303.html | record | overview | 2026-10-03 | 2026-10-25 | live |
-| cases/304.html | cases/304.html | record | overview | 2026-10-03 | 2026-10-24 | live |
+| cases/304.html | cases/304.html | record | overview | 2026-10-03 | 2026-10-25 | live |
 | cases/305.html | cases/305.html | record | overview | 2026-10-03 | 2026-10-17 | live |
 | cases/306.html | cases/306.html | record | overview | 2026-10-03 | 2026-10-17 | live |
 | cases/307.html | cases/307.html | record | overview | 2026-10-03 | 2026-10-23 | live |

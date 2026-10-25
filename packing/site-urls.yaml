@@ -7123,7 +7123,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-24'
+  lastmod: '2026-10-25'
   status: live
 - path: cases/305.html
   canonical: cases/305.html

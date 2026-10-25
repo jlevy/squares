@@ -178,6 +178,12 @@ MOVED_LATER = {
     303: ("T-240", "2026-10-25"),
 }
 
+#: The counts staged for the pass's next pull request, with the result each moves to and
+#: the bead that adopts it: the pass of 25 October 2026 validated Evan Daniel's 268 (T-242)
+#: below T-240's, which the same pass adopts there, and one day's archive holds one prior
+#: state a count, so 268 moves on 26 October (think-hx0e, whose H2 is think-3anz).
+STAGED_NEXT = {268: ("T-242", "think-hx0e")}
+
 #: Issue 639's exact algebraic sides (T-193), the smallest at all sixteen of its counts
 #: since its stage 4 exit (#658), each staged for the writer: below T-174's held sides at
 #: twelve, which think-3mry held before, and below the T-186 houses #657 adopted at four.
@@ -244,7 +250,8 @@ def test_the_records_of_the_lifted_hold_keep_their_next_candidates_until_adopted
     previous_t174 = {n for n in previous if houses.ADOPTED[n] == "T-174"}
     # T-193's adopted counts below T-174's held sides left the hold with their adoption.
     t193 = {n for n, house in ALGEBRAIC_ADOPTED.items() if house == "T-193"}
-    assert held_counts | {70, 153, 207} | set(T193_BELOW_T186) | t193 == (
+    # 268, which T-240 took from the hold, is staged again, for T-242 (`STAGED_NEXT`).
+    assert held_counts | {70, 153, 207} | set(T193_BELOW_T186) | t193 | set(STAGED_NEXT) == (
         set(select.PENDING_ADOPTION) | previous_t174 | set(OVERTAKEN) | set(ALGEBRAIC_ADOPTED)
     )
     assert {n: houses.ADOPTED[n] for n in OVERTAKEN} == OVERTAKEN
@@ -1583,10 +1590,17 @@ def test_the_staged_adoptions_name_their_beads_and_reasons() -> None:
     certificate and 155 to issue 669's, the adoption of 20 October 2026 took 308 to issue
     689's, the adoption of 21 October 2026 took 270 to issue 703's, the adoption of 23
     October 2026 took 105 to issue 719's, and the adoption of 25 October 2026 took 268 to
-    issue 763's."""
+    issue 763's. The same pass validated Evan Daniel's 268 (T-242) and stages it for its next
+    pull request under the bead that adopts it (`STAGED_NEXT`)."""
     for n, pending in select.PENDING_ADOPTION.items():
         assert pending.why in select.STAGING_REASONS, n
         algebraic = pending.house == "T-193"
+        if n in STAGED_NEXT:
+            assert (pending.house, pending.bead, pending.why) == (
+                *STAGED_NEXT[n],
+                select.NEXT_PULL_REQUEST,
+            ), n
+            continue
         assert (pending.bead, pending.why) == (
             (select.WRITER_BEAD, select.NO_WRITER)
             if algebraic
@@ -1605,7 +1619,9 @@ def test_the_staged_adoptions_name_their_beads_and_reasons() -> None:
     assert all(houses.algebraic(n) for n in ALGEBRAIC_ADOPTED)
     assert set(ALGEBRAIC_ADOPTED) <= houses.LATER_PASSES["2026-10-23"]
     assert not set(ALGEBRAIC_ADOPTED) & set(select.PENDING_ADOPTION)
-    assert sorted(select.PENDING_ADOPTION) == [88, 126, 175, 199, 232, 266, 267, 292, 301]
+    assert sorted(select.PENDING_ADOPTION) == sorted(
+        [88, 126, 175, 199, 232, 266, 267, 292, 301, *STAGED_NEXT]
+    )
 
 
 def test_the_retained_integration_diagnostic_keeps_its_executed_bytes() -> None:
@@ -1666,12 +1682,14 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
     # (`ALGEBRAIC_ADOPTED`, think-ot5c), and the adoption of 24 October 2026 moved 204 to
     # the release's lower 204 file (T-231) and 303 again, to Amund Kristiansen's issue-755
     # certificate (T-239), and the adoption of 25 October 2026 moved 268 and 303 to
-    # Francisco Couzo's issue-763 certificates (T-240), after this receipt was retained.
+    # Francisco Couzo's issue-763 certificates (T-240), and 304 to Evan Daniel's exact descent
+    # of the packing T-241 certifies (T-242), after this receipt was retained.
     later = {
         **ALGEBRAIC_ADOPTED,
         105: "T-229",
         268: "T-240",
         303: "T-240",
+        304: "T-242",
         155: "T-197",
         183: "T-220",
         229: "T-225",
@@ -1694,6 +1712,7 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
         268: "T-174",
         271: "T-186",
         303: "T-186",
+        304: "T-186",
         308: "T-174",
         270: "T-174",
         70: "T-146",
