@@ -23829,7 +23829,8 @@ issues:
     title: 'c*(k) < 4√(2k) + 1 for every k ≥ 6: registration request'
     author: TheSnakeFang
     opened: '2026-10-24'
-    state: open
+    state: closed
+    closed: '2026-10-25'
     kind: result-report
     triage: done
     summary: >-
@@ -23928,6 +23929,14 @@ issues:
       - result: theorem-a
       - result: certificates
       - result: optimized-constructions
+    - url: https://github.com/jlevy/squares/issues/797#issuecomment-6393580476
+      date: '2026-10-25'
+      by: jlevy
+      kind: final
+      reported:
+      - result: theorem-a
+      - result: certificates
+      - result: optimized-constructions
     close_when: >-
       The reported row and its credit to Evan Daniel's earlier bound are on main, the
       replay and review disposition are recorded, and the reply that reports them is posted.
@@ -23936,7 +23945,8 @@ issues:
       457, 458, 502, 504): registration request'
     author: amundsk
     opened: '2026-10-24'
-    state: open
+    state: closed
+    closed: '2026-10-25'
     kind: result-report
     triage: done
     summary: >-
@@ -24007,6 +24017,13 @@ issues:
       date: '2026-10-25'
       by: jlevy
       kind: import
+      reported:
+      - result: rows-12
+      - result: n372-n412
+    - url: https://github.com/jlevy/squares/issues/798#issuecomment-6393580703
+      date: '2026-10-25'
+      by: jlevy
+      kind: final
       reported:
       - result: rows-12
       - result: n372-n412
