@@ -1220,17 +1220,23 @@ def fact_witness(
     record = _record(packet)
     source = record["sources"][0]
     pinned = {item["path"]: item for item in source["pinned_only"]}
-    scope = acquire_source.read_manifest(packet / acquire_source.MANIFEST)
     archive = row.get("archive")
     bound = row["path"] if archive is None else archive["manifest"]
+    # Only a file retained beside its fact reads the manifest; a pinned file's digest is
+    # the record's, so a packet's facts read as before wherever its manifest is absent.
+    retained = (
+        {}
+        if bound in pinned or archive is not None
+        else acquire_source.read_manifest(packet / acquire_source.MANIFEST)
+    )
     _require(
-        bound in pinned or (archive is None and bound in scope),
+        bound in pinned or bound in retained,
         f"n={row['n']}: a fact for a file the packet does not pin",
     )
     witness = kernel.to_witness(certificate, **_profile(declaration))
     if archive is None:
         url = f"{source['source_url']}/blob/{source['source_commit']}/{row['path']}"
-        digest = scope[row["path"]]
+        digest = pinned[bound]["sha256"] if bound in pinned else retained[bound]
     else:
         url = (
             f"https://github.com/{archive['repository']}/releases/download/{archive['tag']}/"
@@ -2031,8 +2037,11 @@ def _checkout_bytes(packet: Path, checkout: Path, path: str) -> bytes:
     """A file the packet pins, or retains beside its fact (`_fact_file`), read from a
     checkout that `checkout_problems` admitted."""
     pinned = {item["path"] for item in _record(packet)["sources"][0]["pinned_only"]}
-    scope = acquire_source.read_manifest(packet / acquire_source.MANIFEST)
-    _require(path in pinned or path in scope, f"{path}: not a file this packet pins")
+    _require(
+        path in pinned
+        or path in acquire_source.read_manifest(packet / acquire_source.MANIFEST),
+        f"{path}: not a file this packet pins",
+    )
     upstream = checkout / path
     _require(
         not upstream.is_symlink() and upstream.resolve().is_relative_to(checkout.resolve()),
