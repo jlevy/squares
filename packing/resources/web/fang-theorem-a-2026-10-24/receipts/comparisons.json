@@ -1,0 +1,19 @@
+{
+  "range": [7,999999],
+  "A_vs_daniel": {"A_smaller":495210,"tied":249568,"daniel_smaller":255215,"k_below_89_daniel_smaller_by_3_or_more":[[7,4],[8,5],[10,3],[11,4],[14,3],[15,3],[16,4],[20,3],[21,3],[27,3],[28,3],[35,3],[43,3],[44,3],[53,3],[64,3],[88,3]],"largest_difference_from_89":2,"tail_from_100_differs_by_at_most_2":true},
+  "A_strictly_least_in_window": {"window":[42,702000],"below_daniel":346920,"strictly_least":346919,"note":"Ryu's Theorem 1.3 at its best b is larger from k = 14 and T-163 from 42; Ryu's Theorem 1.6 value 1583 at k = 10^5 is the one other statement below it"},
+  "A_vs_ryu_theorem_1_4": {"smaller":[[6,6],[9,999999]],"tied":[[7,7]],"larger":[[8,8]]},
+  "A_vs_ryu_theorem_1_4_tail_from_16": true,
+  "A_vs_ryu_theorem_1_3": {"smaller":[[14,600]],"tied":[[12,13]],"larger":[[6,11]]},
+  "A_vs_ryu_theorem_1_3_tail_from_47": true,
+  "A_vs_t163": {"smaller":[[42,5000]],"tied":[[40,41]],"larger":[[15,39]]},
+  "A_vs_t163_tail_from_43": true,
+  "daniel_vs_ryu_theorem_1_4": {"smaller":[[7,999999]],"tied":[],"larger":[]},
+  "daniel_vs_ryu_theorem_1_3": {"smaller":[[7,8],[10,600]],"tied":[[9,9]],"larger":[]},
+  "daniel_vs_t163": {"smaller":[[35,35],[40,5000]],"tied":[[34,34],[39,39]],"larger":[[15,33],[36,38]]},
+  "daniel_tails": {"ryu_theorem_1_4_from_14":true,"ryu_theorem_1_3_from_59":true,"t163_from_47":true},
+  "ryu_theorem_1_2_at_1.6e7": {"A":22628,"ryu_at_most":"15749639/1000","ryu_smaller":true},
+  "ryu_theorem_1_6": {"100000":{"ryu":1583,"A":1789,"daniel":1791},"1000000":{"ryu":3972,"A":5657,"daniel":5659},"10000000":{"ryu":10039,"A":17889,"daniel":17891},"38250000":{"ryu":16988,"A":34986,"daniel":34987},"100000000":{"ryu":24790,"A":56569,"daniel":56571}},
+  "daniel_k25_crossover": {"last_sampled_k_not_smaller":702000,"first_sampled_k_surely_smaller":748000},
+  "case_records": {"theorem_a":{"counts_reached":324,"case_bound_not_below_k":[]},"daniel":{"counts_reached":324,"case_bound_not_below_k":[]}}
+}

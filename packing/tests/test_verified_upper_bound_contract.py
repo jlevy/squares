@@ -407,6 +407,12 @@ DECLARED_CONSUMERS = {
         "the verified one read as a ceiling the record proves exactly, so a later report "
         "is recorded only when it is decidably below both; it never reads the field as s(n)"
     ),
+    "packing/cases/asymptotic/fang_theorem_a.py": (
+        "the Theorem A module's case_records reads both upper lanes of each case as a "
+        "ceiling, its printed decimal plus one unit in the last place, to show that a "
+        "theorem-wide deficiency bound giving s(n) < k moves no case whose ceiling is already "
+        "below k; it compares only with an integer k and never reads the field as s(n)"
+    ),
     "packing/devtools/intake_ledger.py": (
         "the report-order ledger starts each count from both upper lanes of its case record: "
         "the verified lane as a ceiling the record proves (an exact rational, a closed form "

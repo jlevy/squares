@@ -8,6 +8,7 @@ import pytest
 
 from cases.asymptotic import deficiency_family as family
 from cases.asymptotic import fang_excess_inventory as fang
+from cases.asymptotic import fang_theorem_a
 
 
 def fang_row(ledger: dict) -> dict:
@@ -22,8 +23,8 @@ def test_the_recorded_assessment_is_what_the_family_recomputes() -> None:
     ((result, recorded, recomputed),) = family.recorded_assessments(ledger, dated)
     assert result == "T-163"
     assert family.stale(recorded, recomputed) == []
-    assert recomputed["smallest"] == [[15, 68], [70, 75]]
-    assert recomputed["tied"] == [[69, 69], [76, 76]]
+    assert recomputed["smallest"] == [[15, 34], [36, 39]]
+    assert recomputed["tied"] == [[34, 34], [39, 39]]
 
 
 def test_the_tail_lemma_starts_where_its_quadratic_turns_positive() -> None:
@@ -66,11 +67,41 @@ def test_a_stale_assessment_fails_the_comparison() -> None:
 
 
 def test_a_tie_stays_with_the_earlier_report() -> None:
+    """T-163 ties Daniel's bound, reported on 18 October, at 34 and 39: the ties are T-163's.
+    Dated before T-163, Daniel's report would take them."""
     ledger, dated = family.load()
     row = fang_row(ledger)
-    assert family.assess(ledger, row, dated)["smallest"] == [[15, 68], [70, 75]]
+    assert family.assess(ledger, row, dated)["smallest"] == [[15, 34], [36, 39]]
+    earlier = {**dated, family.DANIEL: "2026-10-12"}
+    assert family.assess(ledger, row, earlier)["smallest"] == [[15, 33], [36, 38]]
+
+
+def test_without_the_two_sqrt_k_rows_the_earlier_window_returns() -> None:
+    """The window before Daniel's and Fang's rows, with Ryu's earlier ties at 69 and 76."""
+    ledger, dated = family.load()
+    ledger[family.SECTION] = [
+        row
+        for row in ledger[family.SECTION]
+        if row["source_key"] not in {family.DANIEL, family.FANG_A}
+    ]
+    found = family.assess(ledger, fang_row(ledger), dated)
+    assert found["smallest"] == [[15, 68], [70, 75]]
+    assert found["tied"] == [[69, 69], [76, 76]]
     later = {**dated, family.RYU: "2026-10-30"}
-    assert family.assess(ledger, row, later)["smallest"] == [[15, 76]]
+    assert family.assess(ledger, fang_row(ledger), later)["smallest"] == [[15, 76]]
+
+
+def test_the_two_sqrt_k_statements_are_their_integer_bounds() -> None:
+    for k in range(7, 400):
+        b = fang_theorem_a.ceil_sqrt(2 * k - 7)
+        assert (b - 1) ** 2 < 2 * k - 7 <= b * b
+        assert family.daniel_layers(k) == 4 * b - 1
+        a = fang_theorem_a.theorem_a(k)
+        assert (a - 1) ** 2 < 32 * k <= a * a
+    with pytest.raises(ValueError, match="k >= 7"):
+        family.daniel_layers(6)
+    with pytest.raises(ValueError, match="k >= 6"):
+        fang_theorem_a.theorem_a(5)
 
 
 @pytest.mark.parametrize(
@@ -78,17 +109,17 @@ def test_a_tie_stays_with_the_earlier_report() -> None:
     [
         (family.FANG, ""),
         (family.FANG, None),
-        (family.RYU, ""),
-        (family.RYU, None),
-        (family.RYU, "None"),
-        (family.RYU, "2026-10"),
+        (family.DANIEL, ""),
+        (family.DANIEL, None),
+        (family.DANIEL, "None"),
+        (family.DANIEL, "2026-10"),
     ],
 )
 def test_an_undated_source_orders_no_tie(key: str, date: str | None) -> None:
     """Review A4 on #770: a tie is ordered by the bibliography's dates compared as days,
     so the assessed row's key, or the key of a statement it ties, with no day-precision
-    date refuses the assessment instead of winning every tie. Ryu's key is the one T-163
-    ties at k = 69 and 76."""
+    date refuses the assessment instead of winning every tie. Daniel's key is the one
+    T-163 ties, at k = 34 and 39."""
     ledger, dated = family.load()
     with pytest.raises(family.FamilyError, match="no day-precision date"):
         family.assess(ledger, fang_row(ledger), {**dated, key: date})
@@ -99,11 +130,11 @@ def test_dates_are_compared_as_days() -> None:
     row = fang_row(ledger)
     # As strings "2026-9-30" would sort after "2026-10-13"; it is no date the gate reads.
     with pytest.raises(family.FamilyError, match="no day-precision date"):
-        family.assess(ledger, row, {**dated, family.RYU: "2026-9-30"})
-    earlier = {**dated, family.RYU: "2026-10-12"}
-    assert family.assess(ledger, row, earlier)["smallest"] == [[15, 68], [70, 75]]
-    same_day = {**dated, family.RYU: dated[family.FANG]}
-    assert family.assess(ledger, row, same_day)["smallest"] == [[15, 68], [70, 75]]
+        family.assess(ledger, row, {**dated, family.DANIEL: "2026-9-30"})
+    earlier = {**dated, family.DANIEL: "2026-10-12"}
+    assert family.assess(ledger, row, earlier)["smallest"] == [[15, 33], [36, 38]]
+    same_day = {**dated, family.DANIEL: dated[family.FANG]}
+    assert family.assess(ledger, row, same_day)["smallest"] == [[15, 33], [36, 38]]
 
 
 def _rows(ledger: dict) -> list[tuple[int, str]]:
@@ -142,4 +173,4 @@ def test_reflowing_a_row_is_not_a_restatement() -> None:
         for field in family.STATED:
             if isinstance(row.get(field), str):
                 row[field] = "\n  ".join(row[field].split())
-    assert family.assess(ledger, fang_row(ledger), dated)["smallest"] == [[15, 68], [70, 75]]
+    assert family.assess(ledger, fang_row(ledger), dated)["smallest"] == [[15, 34], [36, 39]]
