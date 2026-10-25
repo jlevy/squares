@@ -169,7 +169,7 @@ def _scan(paths: dict[str, Path]) -> dict:
 
 def test_the_instance_class_is_the_word_after_the_last_top_level_colon() -> None:
     assert audit.instance_class("instance (a : Nat) : Decidable (P a)") == "Decidable"
-    assert audit.instance_class("instance : DecidableRel (fun a b : Nat => a < b)") == (
+    assert audit.instance_class("instance : DecidableRel (fun (a b : Nat) ↦ a < b)") == (
         "DecidableRel"
     )
     assert audit.instance_class("instance foo") == "?"
