@@ -8887,6 +8887,47 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "v0.1.4 and v0.2.7."
         ),
     ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/devtools/upper_bound_reports.py",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The import of #798's twelve beyond-horizon rows and #755's answers "
+            "(think-2l0q, think-fc1n): a new coverage source with 12 rows superseding 12 of "
+            "main's, the #798 request entry and #755's, T-239's notes and claim, and "
+            "upper_bound_reports admitting a derived fact beside a file its packet retains, "
+            "against main 755ef426b (#794): rendered at link revision a2a4953a into empty "
+            "site directories, twice from this tree and once from it with main's "
+            "result-requests.yaml, upper_bound_reports.py, results.yaml and "
+            "source-coverage.yaml swapped in, render_n11_lower_bounds_explainer, with its "
+            "math prepared by Playwright's pinned headless shell, "
+            "render_n11_optimality_review, render_n11_threshold_bound_review and "
+            "render_packing_methods write all 69 files byte-identical across the three; "
+            "measured first against main 2ed0ea740 (#795) at link revision bda51090, with "
+            "the same result. No register entry is added, so the explainer's result count "
+            "is unchanged. No PDF was printed; each prints from that HTML. Retain v0.4.27, "
+            "v0.1.11, v0.1.4 and v0.2.7."
+        ),
+    ),
 )
 
 
