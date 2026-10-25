@@ -113,6 +113,28 @@ to the pure-YAML datasets, so `status: enforced` reflects an executed check.
 Negative controls reject wrong fields, invalid enumerations, inconsistent counts,
 known-invalid exponents, and case statuses outside `{proved, open}`.
 
+## The Exact-Side Register
+
+[`exact-side-register.json`](exact-side-register.json) is a generated view, not a
+source. Each entry is one exact side fact the record stands behind:
+
+- its degree;
+- its minimal polynomial, inline in `exact_sides.polynomial_text` notation or held by a
+  digest-pinned asset with the facts measured from it;
+- its interval;
+- who states it;
+- whether it is about the house, a staged house or a named configuration, such as
+  T-246’s s(29).
+
+`devtools.exact_side_register` derives it from the case records, `select_houses`, the
+intake ledgers and the retained packets.
+On every run it decides each inline polynomial irreducible and its root isolated.
+`--check`, the records-tier step `exact-side register is current`, fails when the
+register differs from its inputs, so a change that moves a house runs `--update`. Case
+records keep what `adopt_houses` writes; the register writes nothing on them.
+The plan and its later slices are in
+[plan-2026-10-25-exact-side-register.md](../../docs/project/specs/active/plan-2026-10-25-exact-side-register.md).
+
 ## What Is in a Case
 
 The payload fields are documented in the schema.
