@@ -3,15 +3,19 @@ type: is
 id: is-01m5rtjypv9b36ww3nn7rc9ejt
 title: Replay Daniel's s(29) degree-7213 minimal polynomial checks from the pinned release (T-246, C3, about 2.5 CPU-hours)
 kind: task
-status: open
+status: in_progress
 priority: 3
-version: 2
+version: 3
+delegate: w-s29-validate-1025
 labels:
   - result-import
 dependencies: []
 parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
+hold: null
+hold_until: null
 created_at: 2026-10-25T06:04:54.875Z
-updated_at: 2026-10-25T09:41:26.918Z
+updated_at: 2026-10-25T15:41:58.506Z
+started_at: 2026-10-25T15:41:58.506Z
 ---
 The C3 confirmation that T-244 lists: the source's five-step replay of Evan Daniel's degree-7213 minimal polynomial of the s(29) record side, from the release exact-data-2026-10-12 of evand/square-packing (tag commit 31523f87316bdfda00f5459dd9077928e264f133).
 
