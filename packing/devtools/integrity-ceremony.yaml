@@ -132,6 +132,16 @@ allowlist:
       certificates to its stated digest, before `configurations` parses one. The derived
       facts and the receipts are this repository's files, read from Git and compared with
       nothing.
+  - path: packing/devtools/kingbird_root_polynomial.py
+    kind: download
+    boundary: >-
+      A Kingbird catalogue picture, square-83.svg for n = 83, fetched into memory or
+      read from a copy the operator names, which the Kingbird retention policy keeps no
+      byte of: `held` holds it to the size and SHA-256 the pictures receipt of
+      5 October 2026 pinned at review before the `Root` polynomial is read from it. A
+      changed picture is refused as a new reading. The receipt it writes is this
+      repository's file, read from Git by the exact-side register and compared with
+      nothing.
   - path: packing/devtools/couzo_refinement_reports.py
     kind: download
     boundary: >-

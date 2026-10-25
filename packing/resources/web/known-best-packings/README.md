@@ -195,6 +195,27 @@ exact certificates of the same packings, refined on their active contacts, took 
 place above each printed side (T-101; the
 [exact-optima packet](../evand-square-packing-2026-10-05/README.md#the-77-ceiling-counts)).
 
+### The Degree-672 Polynomial Measured, 25 October
+
+On 2026-10-25 [`devtools.kingbird_root_polynomial`](../../../devtools/kingbird_root_polynomial.py)
+fetched `square-83.svg` into memory again. Its 350,947 bytes still have the SHA-256 the
+5 October receipt pins, so this is the picture read then. The tool read the side’s
+`Root[p, 27]` from the picture’s comment and measured `p`, without retaining the picture
+or its coefficients:
+[`kingbird-n083-root-polynomial.json`](receipts/kingbird-n083-root-polynomial.json).
+`p` has 673 coefficients, all nonzero, so degree 672, the catalogue’s degree. It is
+primitive, with a positive leading coefficient of 94 digits, a height of 724 digits and
+a constant term of 710 digits.
+It changes sign across the picture’s 99-place side
+$9.6347576486310820292600837937953\ldots340$ widened by one unit of its last place.
+Descartes’ rule of signs, in exact integers, finds exactly one root in that interval.
+The measurement took about 80 seconds.
+Not measured: whether `p` is irreducible over $\mathbb{Q}$, and how many real roots lie
+below the side, which the source’s index 27 states (`think-chsu`).
+The [exact-side register](../../../frontier/exact-side-register.json) holds n = 83’s
+side by this picture’s pin and these facts. That root lies below T-101’s rational house
+by about $9.6 \times 10^{-20}$.
+
 ## Retained UnitSquare Renderings
 
 The `unitsquare/` files are retained public evidence renderings for the `n = 68` and
