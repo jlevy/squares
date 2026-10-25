@@ -5,7 +5,7 @@ title: "Import Jatloe et al.: Lean proof s(12) = 4, Jatloe12SquaresFormalized d0
 kind: task
 status: in_progress
 priority: 1
-version: 6
+version: 7
 delegate: coord-n12-1025
 labels:
   - result-import
@@ -15,7 +15,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-25T05:38:35.108Z
-updated_at: 2026-10-25T07:01:10.545Z
+updated_at: 2026-10-25T07:07:43.605Z
 started_at: 2026-10-25T05:38:38.919Z
 ---
 Owner report 2026-10-25 (X post https://x.com/ManassehA06/status/2113097037306569124 and its reply naming the repo); tracking issue https://github.com/jlevy/squares/issues/810. Source: Queuingtheorydotcom/Jatloe12SquaresFormalized at d0caf4532a7ead68be1389ef87387b126fc2e0ab (tag n12-verified-2026-10-16), Lean/Proofs/N12-jatloe, theorem N12Compact.Final.optimality : S12.packingConstant12 = 4. Triage 2026-10-25: closure 5377 modules, 0 missing, 0 sorry, 0 axiom decls, 2572 native_decide; source audit 3 standard + 1624 native axioms; accepting run reused cached objects. Upstream EvolvingPrograms/SquaresLean@1f60d41 not publicly reachable. Stages: packet, register as reported (S4/S5 candidate), statement audit, math review, replay priced (above cap).
@@ -30,3 +30,4 @@ Owner report 2026-10-25 (X post https://x.com/ManassehA06/status/211309703730656
 - Backlog row for the pass's backlog bead (no 2026-10-25 backlog bead found; not added to think-lh7d/think-ve84): | think-dd3v | Jatloe s(12) = 4 Lean, full build of 5,377 modules + axiom check (under think-4l14; T-243) | ~28 (17-40) | gated on decision | a machine with known memory; the statement audit |
 - Found, not fixed: devtools.render_announcement.load_profiles globs packing/contributors/*.md, but profiles live in packing/contributors/people/ since a7b61b25a (2026-10-21), so no profile handle (@jatloe, @ctjlewis, ...) is ever used; only RECORD_HANDLES (Ahmed's @ManassehA06) applies. Its line also prints "Benjamin Gurevitch" from credited_names.
 - Validation at 1f6a8d184 (2026-10-25): packing-validate --records exit 0 (53 of 111 steps, the records tier); --edit --jobs 2: 68 of 69 steps pass, the type floor (basedpyright) timed out at 900 s on this 4-core 15 GB host (its earlier run at --jobs 4 hit the node heap limit); basedpyright on the two changed Python files (release.py, cli/validate.py): 0 errors; ruff clean; tests/test_contributor_occurrences.py 25 passed; tests/test_release.py 20 passed; acquire_source --check PACKET_MATCHES_ITS_CONTRACT.
+- 2026-10-25 merge of origin/main 886dddce6 (#808): 1307c2c8c (result-requests.yaml keeps #799 and #810 in issue order; release.py keeps W8's and #810's no-change records); 1b4ba62ac re-measure at link 1307c2c8, 51 files byte-identical x3; release_pin --check: 'the pin is the last data commit, 015f1a19c123' (no re-pin needed). --records exit 0 (53 of 111); test_contributor_occurrences 25 passed. Statement audit (40e15dbb, worktree-agent-aa8ad7d72a4de3571) not merged, per the coordinator.
