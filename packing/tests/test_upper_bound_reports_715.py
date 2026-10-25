@@ -102,6 +102,8 @@ F1_COUNTS = frozenset(
 #: (upper-bounds-issue763-20261024): each is current at its count and supersedes the row
 #: that was, this import's own at three counts.
 LATER_763 = "couzo-issue763-2026-10-23"
+#: Couzo's 43f666c, the next report after #763's and the push's at its counts (think-gn29).
+LATER_43F = "couzo-43f666c-2026-10-24"
 SUPERSEDED_BY_763 = frozenset({503, 595, 815})
 COUNTS_763 = frozenset(row.n for row in horizon.decided_claims(horizon.release(763)))
 #: The sources of the push of 23:38:42Z read commit by commit (think-lyf9; #795's review
@@ -200,16 +202,21 @@ def test_the_recorded_rows_are_the_claims_record_and_supersede_the_rows_before_t
     before: Counter[str] = Counter()
 
     def standing(n: int, rows: dict[str, Any], expected: str) -> str:
-        """#763's row where it has one, superseding the row `expected` names, or the last row
-        of the push's chain where its rows supersede it (think-lyf9); then the row of a
-        later report that supersedes that one, as #798's does (think-2l0q)."""
+        """#763's row where it has one (its recipes' source at a recipe, `Split`), superseding
+        the row `expected` names, or the last row of the push's chain where its rows
+        supersede it (think-lyf9); 43f666c's where its row supersedes that one in turn
+        (think-gn29); then the row of a later report that supersedes that one, as #798's
+        does (think-2l0q)."""
         if n in COUNTS_763:
-            assert rows[expected]["superseded_by"] == LATER_763
-            current = LATER_763
+            later = horizon.release(763).source_at(n)
+            assert rows[expected]["superseded_by"] == later
+            current = later
         else:
             current = expected
             while rows[current].get("superseded_by") in NOTEBOOK_SOURCES:
                 current = rows[current]["superseded_by"]
+        if rows[current].get("superseded_by") == LATER_43F:
+            current = LATER_43F
         while rows[current].get("superseded_by") in LATER_REPORTS:
             current = rows[current]["superseded_by"]
         return current
@@ -249,7 +256,11 @@ def test_the_recorded_rows_are_the_claims_record_and_supersede_the_rows_before_t
         assert rows[SOURCE]["disposition"] == "tracked-outside-case-corpus"
         assert current[n]["source_id"] == SOURCE
     assert dict(before) == SUPERSEDED
-    first = [n for n in recorded if set(_rows_at(coverage, n)) <= {SOURCE, LATER_F1, LATER_763}]
+    first = [
+        n
+        for n in recorded
+        if set(_rows_at(coverage, n)) <= {SOURCE, LATER_F1, LATER_763, LATER_43F}
+    ]
     assert first == GRID_COUNTS
     for n in replay.counts_in(replay.HELD) + replay.counts_in(replay.RESTATED):
         assert SOURCE not in _rows_at(coverage, n)

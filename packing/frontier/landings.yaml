@@ -232,6 +232,8 @@ sources:
     landed: '2026-10-23'
   - id: couzo-3ef7634-2026-10-10
     landed: '2026-10-23'
+  - id: couzo-43f666c-2026-10-24
+    landed: '2026-10-25'
   - id: couzo-4596670-2026-10-13
     landed: '2026-10-23'
   - id: couzo-964ee2b-2026-10-23
@@ -270,6 +272,8 @@ sources:
     landed: '2026-10-22'
   - id: couzo-issue763-2026-10-23
     landed: '2026-10-24'
+  - id: couzo-issue763-2026-10-23-recipes
+    landed: '2026-10-25'
   - id: couzo-reconcile-2026-10-20
     landed: '2026-10-23'
   - id: couzo-retained-certificates-2026-10-12

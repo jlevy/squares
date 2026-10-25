@@ -205,8 +205,9 @@ def problems(register: Mapping[str, Any]) -> list[str]:
 # held any of them. The last two have no field of their own in their records, so the
 # landing record `frontier/landings.yaml` holds them, written here as `landed` is: the
 # merge step stamps what a branch adds, and `--audit` and `--backfill` read `main`'s
-# first-parent history. Every source's rows have so far reached `main` in one merge, so a
-# source carries one day.
+# first-parent history. Every source's rows reach `main` in one merge, so a source carries
+# one day: rows a later merge adds to a landed release are declared under a source of their
+# own (`beyond_horizon_replay.Split`; #800's review A, A1), as #763's 13 recipes are.
 
 LANDINGS = ROOT / "frontier" / "landings.yaml"
 LANDINGS_PATH = "packing/frontier/landings.yaml"

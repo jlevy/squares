@@ -21,6 +21,20 @@
    "printed": "18.977171584758"
   },
   {
+   "n": 365,
+   "certificate": "certificates/best/n328.cert",
+   "printed": "19.614368938495",
+   "recipe": {
+    "kind": "square tiling and L-border",
+    "source_n": 328,
+    "tiles_per_side": 1,
+    "layers": 1,
+    "capacity": 365,
+    "bound": "165548154312242003558899729471/8440146855163000000000000000",
+    "sha256": "e84b87d229218d8b14106bd1e056aa5d473324935bdb5958caf54b3092f5d562"
+   }
+  },
+  {
    "n": 370,
    "certificate": "certificates/best/n370.cert",
    "printed": "19.764174317499"
@@ -91,6 +105,20 @@
    "printed": "20.983570193585"
   },
   {
+   "n": 444,
+   "certificate": "certificates/best/n403.cert",
+   "printed": "21.571428571434",
+   "recipe": {
+    "kind": "square tiling and L-border",
+    "source_n": 403,
+    "tiles_per_side": 1,
+    "layers": 1,
+    "capacity": 444,
+    "bound": "27904675528398755762059147711/1293594229793000000000000000",
+    "sha256": "9e2ce261ae6badb28ebb6f8f2df10978a364499f9377f0c9e5cef6ce7719b631"
+   }
+  },
+  {
    "n": 447,
    "certificate": "certificates/best/n447.cert",
    "printed": "21.656854249506"
@@ -139,6 +167,20 @@
    "n": 465,
    "certificate": "certificates/best/n465.cert",
    "printed": "21.999896124646"
+  },
+  {
+   "n": 487,
+   "certificate": "certificates/best/n403.cert",
+   "printed": "22.571428571434",
+   "recipe": {
+    "kind": "square tiling and L-border",
+    "source_n": 403,
+    "tiles_per_side": 1,
+    "layers": 2,
+    "capacity": 487,
+    "bound": "29198269758191755762059147711/1293594229793000000000000000",
+    "sha256": "9e2ce261ae6badb28ebb6f8f2df10978a364499f9377f0c9e5cef6ce7719b631"
+   }
   },
   {
    "n": 494,
@@ -361,6 +403,20 @@
    "printed": "25.627416997975"
   },
   {
+   "n": 632,
+   "certificate": "certificates/best/n583.cert",
+   "printed": "25.656854249507",
+   "recipe": {
+    "kind": "square tiling and L-border",
+    "source_n": 583,
+    "tiles_per_side": 1,
+    "layers": 1,
+    "capacity": 632,
+    "bound": "9740083297100090567512812463/379628897696500000000000000",
+    "sha256": "4fa50fb8f0d264d4810a4221b159223a22b360a0d2d440d6138d4f3bc99f7510"
+   }
+  },
+  {
    "n": 638,
    "certificate": "certificates/best/n638.cert",
    "printed": "25.778174593068"
@@ -521,9 +577,51 @@
    "printed": "26.986058408352"
   },
   {
+   "n": 733,
+   "certificate": "certificates/best/n680.cert",
+   "printed": "27.571428571436",
+   "recipe": {
+    "kind": "square tiling and L-border",
+    "source_n": 680,
+    "tiles_per_side": 1,
+    "layers": 1,
+    "capacity": 733,
+    "bound": "138829774847332797662765930521/5035276807933000000000000000",
+    "sha256": "b14784c52de71c0eea9950ddba310ec5a3887b6c0e1fc96752d4f5cfbaa5a5bf"
+   }
+  },
+  {
+   "n": 734,
+   "certificate": "certificates/best/n681.cert",
+   "printed": "27.591378145504",
+   "recipe": {
+    "kind": "square tiling and L-border",
+    "source_n": 681,
+    "tiles_per_side": 1,
+    "layers": 1,
+    "capacity": 734,
+    "bound": "272658121492631048705134906439/9882004445547000000000000000",
+    "sha256": "968acfab4771ab65e7df28c9e8136051208ca6c2ab8a0c06893d57094fc9ca27"
+   }
+  },
+  {
    "n": 736,
    "certificate": "certificates/best/n736.cert",
    "printed": "27.652543263833"
+  },
+  {
+   "n": 737,
+   "certificate": "certificates/best/n684.cert",
+   "printed": "27.656854249501",
+   "recipe": {
+    "kind": "square tiling and L-border",
+    "source_n": 684,
+    "tiles_per_side": 1,
+    "layers": 1,
+    "capacity": 737,
+    "bound": "92964051910275369136424194151/3361338606033000000000000000",
+    "sha256": "fac3446c638a7a0ad00d0b1b5d0c3873c9f71ca6b66bb242202a5689e0b68013"
+   }
   },
   {
    "n": 739,
@@ -589,6 +687,34 @@
    "n": 759,
    "certificate": "certificates/best/n759.cert",
    "printed": "27.976916267949"
+  },
+  {
+   "n": 788,
+   "certificate": "certificates/best/n680.cert",
+   "printed": "28.571428571436",
+   "recipe": {
+    "kind": "square tiling and L-border",
+    "source_n": 680,
+    "tiles_per_side": 1,
+    "layers": 2,
+    "capacity": 788,
+    "bound": "143865051655265797662765930521/5035276807933000000000000000",
+    "sha256": "b14784c52de71c0eea9950ddba310ec5a3887b6c0e1fc96752d4f5cfbaa5a5bf"
+   }
+  },
+  {
+   "n": 789,
+   "certificate": "certificates/best/n681.cert",
+   "printed": "28.591378145504",
+   "recipe": {
+    "kind": "square tiling and L-border",
+    "source_n": 681,
+    "tiles_per_side": 1,
+    "layers": 2,
+    "capacity": 789,
+    "bound": "282540125938178048705134906439/9882004445547000000000000000",
+    "sha256": "968acfab4771ab65e7df28c9e8136051208ca6c2ab8a0c06893d57094fc9ca27"
+   }
   },
   {
    "n": 794,
@@ -676,6 +802,20 @@
    "printed": "28.985552499024"
   },
   {
+   "n": 845,
+   "certificate": "certificates/best/n680.cert",
+   "printed": "29.571428571436",
+   "recipe": {
+    "kind": "square tiling and L-border",
+    "source_n": 680,
+    "tiles_per_side": 1,
+    "layers": 3,
+    "capacity": 845,
+    "bound": "148900328463198797662765930521/5035276807933000000000000000",
+    "sha256": "b14784c52de71c0eea9950ddba310ec5a3887b6c0e1fc96752d4f5cfbaa5a5bf"
+   }
+  },
+  {
    "n": 847,
    "certificate": "certificates/best/n847.cert",
    "printed": "29.606601717805"
@@ -761,6 +901,20 @@
    "printed": "30.583782191753"
   },
   {
+   "n": 910,
+   "certificate": "certificates/best/n851.cert",
+   "printed": "30.691448975560",
+   "recipe": {
+    "kind": "square tiling and L-border",
+    "source_n": 851,
+    "tiles_per_side": 1,
+    "layers": 1,
+    "capacity": 910,
+    "bound": "19521501156358348460800754841431537551805003348219937599612119776560783499941771054855643353/636056680540035842535017883048659696652660107881665617064851100947974864839000000000000000",
+    "sha256": "eda98bf81737ca2ca1736e81e0e4bdbad3e089bfd5ed497073d5786d2c7f2bdd"
+   }
+  },
+  {
    "n": 914,
    "certificate": "certificates/best/n914.cert",
    "printed": "30.746670724582"
@@ -834,6 +988,34 @@
    "n": 934,
    "certificate": "certificates/best/n934.cert",
    "printed": "30.987571925313"
+  },
+  {
+   "n": 966,
+   "certificate": "certificates/best/n905.cert",
+   "printed": "31.583782191753",
+   "recipe": {
+    "kind": "square tiling and L-border",
+    "source_n": 905,
+    "tiles_per_side": 1,
+    "layers": 1,
+    "capacity": 966,
+    "bound": "73800138125376195941741968259/2336646626972000000000000000",
+    "sha256": "e93b279863744dcb8669b9aaf7242ea931852c34edd2019bf605883efd630338"
+   }
+  },
+  {
+   "n": 970,
+   "certificate": "certificates/best/n850.cert",
+   "printed": "31.656854249499",
+   "recipe": {
+    "kind": "square tiling and L-border",
+    "source_n": 850,
+    "tiles_per_side": 1,
+    "layers": 2,
+    "capacity": 970,
+    "bound": "5408929876875307925873256989/170861255962000000000000000",
+    "sha256": "6f005673962cf31d28bcd6646a00a3f4314622307d373e6705c5c032a02b6b90"
+   }
   },
   {
    "n": 972,

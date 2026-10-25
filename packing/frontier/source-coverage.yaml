@@ -10397,29 +10397,85 @@ sources:
   - E-couzo-763-beyond-horizon-report
   notes: >-
     Issue 763 (2026-10-23T23:35:51Z) asks to register 436 upper bounds at 268 to 9802 from
-    franciscouzo/square-packing at 964ee2bd, pushed with efef7d1 and fa6237e at 23:38:42Z,
-    after the issue. It carries no table: devtools.couzo_763_claims re-derives the claims
-    from the retained certified_bounds.json and public_bounds.json by the source README's
-    rule and reproduces the issue's 436, 203 at or below 1024 and 233 above
-    (receipts/claim-map.json). The two in-corpus certificates, at 268 and 303, are retained
-    as the source wrote them and admitted where their exact sides round up to the prints; the
-    register records them, and all 6 native jobs have full outcomes; they are the entry
-    couzo-issue763-2026-10-23-in-corpus since T-240's adoption. The ledger of 24 October
-    for issue 763 (campaign/issue-intake/upper-bounds-issue763-20261024), every count to 1024
-    walked in report order from starts frozen at main e5c1c64e3 with Göbel's construction
-    beside each row, records 198 of the 201 claims at 325 to 1024: 184 certificates are the
-    count's current row at the exact side rounded up at 12 places, and the 13 L-border
-    recipes and the deletion bound at 683 are held for decisions (think-g2qy, think-2z2n);
-    328, 850 and 909 restate f1ceee4's rows below the 12-place print (think-fwa9). The 184
-    supersede f1ceee4's rows (92), issue 719's (40), issue 732's 17cc220 rows (20),
-    couzo-index-2026-10-15's (13), couzo-verified-bounds-2026-10-14's (4), issue 715's (3),
-    issue 670's (2), evand-compositions-2026-10-13's (1) and couzo-certificates-2026-10-14's
-    (1), and at 8 counts no row stood before them; each is below the standing side by 2.80e-11
-    (803) to 6.78e-2 (696). The packet's filtered exact replay decided every one on two routes
-    with all six controls refused (receipts/filtered-exact-replay.json,
-    devtools.beyond_horizon_replay), and every side is below Göbel's construction at its count.
-    The 233 rows above 1024 are not walked here (think-llit).
+    franciscouzo/square-packing at 964ee2bd, pushed with efef7d1 and fa6237e at 23:38:42Z, after
+    the issue. It carries no table: devtools.couzo_763_claims re-derives the claims from the
+    retained certified_bounds.json and public_bounds.json by the source README's rule and
+    reproduces the issue's 436, 203 at or below 1024 and 233 above (receipts/claim-map.json).
+    The two in-corpus certificates, at 268 and 303, are retained as the source wrote them and
+    admitted where their exact sides round up to the prints; the register records them, and all
+    6 native jobs have full outcomes; they are the entry couzo-issue763-2026-10-23-in-corpus
+    since T-240's adoption. The ledger of 24 October for issue 763
+    (campaign/issue-intake/upper-bounds-issue763-20261024), every count to 1024 walked in report
+    order from starts frozen at main e5c1c64e3 with Göbel's construction beside each row,
+    records 198 of the 201 claims at 325 to 1024: 184 certificates are rows here at the exact
+    side rounded up at 12 places; the 13 L-border recipes, which the walk held until a
+    maintained construction checker existed, are rows of a source of their own since 43f666c's
+    import decided them a day later (couzo-issue763-2026-10-23-recipes, think-g2qy); and the
+    deletion bound at 683 is held for a decision (think-2z2n). 328, 850 and 909 restate
+    f1ceee4's rows below the 12-place print (think-fwa9). The 184 supersede f1ceee4's rows (92),
+    issue 719's (40), issue 732's 17cc220 rows (20), couzo-index-2026-10-15's (13),
+    couzo-verified-bounds-2026-10-14's (4), issue 715's (3), issue 670's (2),
+    evand-compositions-2026-10-13's (1) and couzo-certificates-2026-10-14's (1), and at 8 counts
+    no row stood before them; each is below the standing side by 2.80e-11 (803) to 6.78e-2
+    (696). 43f666c's rows supersede 65 of them (couzo-43f666c-2026-10-24). The packet's filtered
+    exact replay decided every one on two routes with all six controls refused
+    (receipts/filtered-exact-replay.json, devtools.beyond_horizon_replay), and every side is
+    below Göbel's construction at its count. The 233 rows above 1024 are not walked here
+    (think-llit).
   claims_record: resources/web/couzo-issue763-2026-10-23/acquisition/beyond-horizon-rows.json
+- id: couzo-issue763-2026-10-23-recipes
+  title: Francisco Couzo's L-border recipes of issue 763 at 964ee2bd, decided by the construction checker
+  role: source-repository
+  url: https://github.com/franciscouzo/square-packing/tree/964ee2bdf301d0c8912d956d4010f478dcbbd5ea
+  local: resources/web/couzo-issue763-2026-10-23/
+  source_key: '[Couzo issue 763 2026-10-23]'
+  scope:
+    n_values:
+    - 365
+    - 444
+    - 487
+    - 632
+    - 733
+    - 734
+    - 737
+    - 788
+    - 789
+    - 845
+    - 910
+    - 966
+    - 970
+  reviewed: '2026-10-25'
+  source_date: '2026-10-23'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/couzo-issue763-2026-10-23/README.md
+  - resources/web/couzo-issue763-2026-10-23/receipts/recipe-decisions.json
+  - resources/web/couzo-issue763-2026-10-23/acquisition/beyond-horizon-rows-recipes.json
+  evidence:
+  - E-couzo-763-recipe-report
+  notes: >-
+    The 13 upper bounds issue 763 (2026-10-23T23:35:51Z) claims at 365, 444, 487, 632, 733, 734,
+    737, 788, 789, 845, 910, 966 and 970 by square tiling and L-border recipes that
+    certified_bounds.json at 964ee2bd states on certificates at smaller counts. The ledger of 24
+    October for issue 763 (campaign/issue-intake/upper-bounds-issue763-20261024) records each
+    below the standing side, by 4.85e-13 (970) to 3.52e-2 (733, 788 and 845), and held it from a
+    row until a maintained construction checker existed (D2, think-f2io). 43f666c's import
+    (think-gn29) decides each exactly from its recipe and its parent certificate with
+    devtools.construction_checker, its bound tS + L and its count the construction's capacity,
+    every parent replayed on both routes with its six controls refused and all 117 recipe
+    controls refused (receipts/recipe-decisions.json; think-g2qy). Each row is the recipe's
+    exact side rounded up at 12 places, dated by the first commit whose index states it: efef7d1
+    at 365 and 970, 964ee2b at the rest. The rows reached main a day after the issue's 184
+    certificate rows (couzo-issue763-2026-10-23), so they are a coverage source of their own,
+    dated by the merge that adds them, with a claims record that holds exactly them
+    (devtools.beyond_horizon_replay Split; #800's review A, A1). They supersede 12 rows,
+    f1ceee4's (3), couzo-index-2026-10-15's (3), couzo-verified-bounds-2026-10-14's (3), issue
+    670's (1), couzo-reconcile-2026-10-20's (1) and issue 732's 17cc220 row (1), and at 910 no
+    row stood before them. At 444, 487, 632, 733, 737, 788 and 845, 43f666c's later recipe
+    supersedes them (couzo-43f666c-2026-10-24). Every side is below Göbel's construction at its
+    count.
+  claims_record: resources/web/couzo-issue763-2026-10-23/acquisition/beyond-horizon-rows-recipes.json
 - id: couzo-964ee2b-2026-10-23
   title: Francisco Couzo's index rows at 964ee2bd that issue 763 does not request
   role: source-repository
@@ -11137,6 +11193,184 @@ sources:
     and every side is below Göbel's construction. The certificates are retained as factual
     data; the notebook's licence is followed up on think-m8f4.
   claims_record: resources/web/couzo-issue763-2026-10-23/acquisition/beyond-horizon-rows-push-361589987.json
+- id: couzo-43f666c-2026-10-24
+  title: Francisco Couzo's live records at 43f666c below 964ee2bd's index, which no issue reports
+  role: source-repository
+  url: https://github.com/franciscouzo/square-packing/tree/43f666c23933fbc5cc418fa4e851218268fed0ed
+  local: resources/web/couzo-43f666c-2026-10-24/
+  source_key: '[Couzo 43f666c 2026-10-24]'
+  scope:
+    n_values:
+    - 330
+    - 340
+    - 371
+    - 372
+    - 376
+    - 377
+    - 403
+    - 405
+    - 411
+    - 412
+    - 415
+    - 416
+    - 417
+    - 444
+    - 447
+    - 451
+    - 453
+    - 455
+    - 456
+    - 458
+    - 459
+    - 463
+    - 487
+    - 488
+    - 501
+    - 502
+    - 504
+    - 506
+    - 508
+    - 509
+    - 546
+    - 583
+    - 592
+    - 593
+    - 594
+    - 596
+    - 604
+    - 629
+    - 632
+    - 637
+    - 641
+    - 649
+    - 650
+    - 653
+    - 679
+    - 680
+    - 683
+    - 684
+    - 689
+    - 691
+    - 692
+    - 693
+    - 696
+    - 697
+    - 702
+    - 706
+    - 732
+    - 733
+    - 737
+    - 738
+    - 742
+    - 744
+    - 745
+    - 746
+    - 748
+    - 751
+    - 752
+    - 754
+    - 755
+    - 756
+    - 757
+    - 759
+    - 761
+    - 787
+    - 788
+    - 792
+    - 798
+    - 800
+    - 801
+    - 806
+    - 807
+    - 808
+    - 812
+    - 813
+    - 815
+    - 816
+    - 844
+    - 845
+    - 856
+    - 857
+    - 858
+    - 864
+    - 865
+    - 867
+    - 870
+    - 871
+    - 872
+    - 903
+    - 916
+    - 917
+    - 918
+    - 919
+    - 924
+    - 929
+    - 930
+    - 931
+    - 932
+    - 933
+    - 964
+    - 975
+    - 981
+    - 984
+    - 987
+    - 988
+    - 989
+    - 991
+    - 992
+    - 993
+    - 994
+    - 995
+    - 996
+    - 997
+  reviewed: '2026-10-24'
+  source_date: '2026-10-24'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/couzo-43f666c-2026-10-24/README.md
+  - resources/web/couzo-43f666c-2026-10-24/acquisition/beyond-horizon-rows.json
+  evidence:
+  - E-couzo-43f666c-beyond-horizon-report
+  notes: >-
+    franciscouzo/square-packing's 43f666c ("Land the 24 October per-puzzle board and the live
+    records since 964ee2b", committed 2026-10-24T00:55:44Z) was pushed with 73eac5b and 1c17153
+    at 2026-10-24T06:10:44Z, as GitHub's activity log records it; the two later commits change
+    no bound. No issue or comment reports it, so it is a watched repository's publication, a
+    report from its first commit dated by the push, and an import of its own (think-gn29).
+    devtools.couzo_43f666c_claims re-derives its claims from certified_bounds.json at 1c17153
+    against 964ee2bd's (receipts/claim-map.json): 126 counts at 325 to 1024 that 43f666c lowers,
+    108 certificates, 690 as 691's certificate less one square and 17 L-border recipes of those
+    certificates, and 831 recipes above 1024, which the records slice above 1024 walks
+    (think-llit). The ledger of 24 October for 43f666c
+    (campaign/issue-intake/upper-bounds-couzo-43f666c-20261024), walked from starts frozen at
+    main 2ed0ea740 with Göbel's construction beside each row, after issue 763's claims that have
+    no row there and the push of 23:38:42Z read commit by commit at its counts, records 106
+    certificates and 16 recipes here at the exact side rounded up at 12 places, each below the
+    side it was decided against by 8.53e-14 (459) to 1.33e-02 (691); each is the count's current
+    row. They supersede the rows of couzo-issue763-2026-10-23 (65) and of
+    couzo-issue763-2026-10-23-recipes (7, the L-border recipes the same import decides), of
+    the push's notebook sources at 46 counts
+    (kyleluecke-inos-2026-10-23 11, tymchishin-reclosure-v3-2026-10-23 10,
+    aqibrazadev-blending-2026-10-23 8, alexchilton-fault-line-2026-10-23 6,
+    tymchishin-22-3662-2026-10-23 5, lavrentev-cuda-run-361589987-2026-10-23 4 and
+    lavrentev-cuda-v11-2026-10-23 2), of mishapolk-issue732-f1ceee4-2026-10-23 (3) and of
+    mishapolk-issue732-2026-10-22 (1). 797 and 847 restate issue 763's rows below the 12-place
+    print (think-fwa9). 367, an L-border of 330's certificate, is 3.83e-12 above 23aff0c's
+    deletion from Friedman's construction at 368, which the walks hold (think-f2io, think-zkxy),
+    so it is not recorded and rests on that hold. 690 is an earlier report with no row of its
+    own by the owner's D6 answer (think-kzme). The index credits every row to Couzo's
+    square-packing live search, 121 of them as refinements of a packing it names: Vladislav
+    Lavrentev's Kaggle notebook CUDA Packing Search v11 (74), Kirill Tymchishin's CPU
+    Alternating Reclosure v3 (38) and 22-3662-cpu-cuda-mps-eda-union (2), the notebooks of the
+    Kaggle accounts kyleluecke (3), alexchilton (2) and aqibrazadev (1), each the run the push
+    of 23:38:42Z published, and Mykhailo Polkovskyi (1); those statements are the source's. The
+    packet's filtered exact replay decided every certificate on two routes with all six controls
+    refused (receipts/filtered-exact-replay.json, devtools.beyond_horizon_replay),
+    devtools.construction_checker decided each recipe exactly from its replayed parent with all
+    nine controls refused (receipts/recipe-decisions.json), and every side is below Göbel's
+    construction. The certificates are retained as factual data.
+  claims_record: resources/web/couzo-43f666c-2026-10-24/acquisition/beyond-horizon-rows.json
 - id: amundsk-issue798-2026-10-24
   title: Amund Kristiansen's twelve beyond-horizon certificates at c9be7b7, issue798
   role: source-repository
@@ -11174,15 +11408,14 @@ sources:
     entry records them. The ledger of 24 October for the issue
     (campaign/issue-intake/upper-bounds-issue798-20261024), walked from starts frozen at main
     2ed0ea740 with Göbel's construction beside each row, and with Francisco Couzo's 43f666c,
-    pushed at 2026-10-24T06:10:44Z and not yet imported (think-gn29), as an earlier
-    publication, records 12 as current rows at the exact side rounded up at 12 places, each
-    below every earlier report at its count by 1.24e-05 (457) to 8.75e-03 (334). They
-    supersede the rows of couzo-issue763-2026-10-23 (6), alexchilton-fault-line-2026-10-23
-    (2), tymchishin-22-3662-2026-10-23 (1), kyleluecke-inos-2026-10-23 (1),
-    couzo-964ee2b-2026-10-23 (1) and couzo-issue670-2026-10-17 (1). At 376, 377, 416, 458,
-    502 and 504 they are decided against 43f666c's sides, whose rows will stand between once
-    that import lands. 372 and 412 are above 43f666c, so not recorded; the packet keeps both
-    certificates, compared in its claim record. Both maintained routes accept all twelve and
+    pushed at 2026-10-24T06:10:44Z, as an earlier publication, records 12 as current rows at
+    the exact side rounded up at 12 places, each below every earlier report at its count by
+    1.24e-05 (457) to 8.75e-03 (334). They supersede the rows of couzo-43f666c-2026-10-24
+    (6: 376, 377, 416, 458, 502 and 504), whose import (think-gn29) recorded them after
+    main's rows there, couzo-issue763-2026-10-23 (3: 334, 343 and 457),
+    alexchilton-fault-line-2026-10-23 (338), couzo-964ee2b-2026-10-23 (379) and
+    couzo-issue670-2026-10-17 (382). 372 and 412 are above 43f666c, whose rows hold them;
+    the packet keeps both certificates, compared in its claim record. Both maintained routes accept all twelve and
     refuse their duplicate-square and outside-container controls
     (receipts/exact-certification.json.xz), the sharp controls at exact contact and
     1e-30 past it are as expected on both (receipts/sharp-controls-nNNN.json), and every side
@@ -15862,7 +16095,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '27.606601717855'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-issue763-2026-10-23-recipes
   bead: think-nj7h
 - n: 734
   source_id: couzo-verified-bounds-2026-10-14
@@ -16061,7 +16295,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '28.606601717871'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-issue763-2026-10-23-recipes
   bead: think-nj7h
 - n: 789
   source_id: couzo-verified-bounds-2026-10-14
@@ -16260,7 +16495,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '29.606601717842'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-issue763-2026-10-23-recipes
   bead: think-nj7h
 - n: 846
   source_id: couzo-verified-bounds-2026-10-14
@@ -19220,7 +19456,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '21.583782190152'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-issue763-2026-10-23-recipes
   bead: think-f28n
 - n: 452
   source_id: couzo-issue670-2026-10-17
@@ -22906,7 +23143,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '27.606601717826'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-issue763-2026-10-23-recipes
   bead: think-yfoo
 - n: 735
   source_id: couzo-index-2026-10-15
@@ -23070,7 +23308,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '28.606601717826'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-issue763-2026-10-23-recipes
   bead: think-yfoo
 - n: 790
   source_id: couzo-index-2026-10-15
@@ -23555,7 +23794,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '31.606601717826'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-issue763-2026-10-23-recipes
   bead: think-yfoo
 - n: 967
   source_id: couzo-index-2026-10-15
@@ -23921,7 +24161,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '22.583782190152'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-issue763-2026-10-23-recipes
   bead: think-tmwt
 - n: 532
   source_id: couzo-reconcile-2026-10-20
@@ -24208,7 +24449,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '25.677669529688'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-issue763-2026-10-23-recipes
   bead: think-0gp6
 - n: 633
   source_id: mishapolk-issue732-2026-10-22
@@ -24287,7 +24529,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '26.677669529688'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-0gp6
 - n: 684
   source_id: mishapolk-issue732-2026-10-22
@@ -24693,7 +24936,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '19.614368938496'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-issue763-2026-10-23-recipes
   bead: think-e3im
 - n: 404
   source_id: mishapolk-issue732-f1ceee4-2026-10-23
@@ -25232,7 +25476,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '27.677669529670'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-issue763-2026-10-23-recipes
   bead: think-e3im
 - n: 742
   source_id: mishapolk-issue732-f1ceee4-2026-10-23
@@ -25255,7 +25500,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '27.798989873230'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-e3im
 - n: 745
   source_id: mishapolk-issue732-f1ceee4-2026-10-23
@@ -25342,7 +25588,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '28.656854249499'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-e3im
 - n: 797
   source_id: mishapolk-issue732-f1ceee4-2026-10-23
@@ -25373,7 +25620,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '28.798989873230'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-e3im
 - n: 801
   source_id: mishapolk-issue732-f1ceee4-2026-10-23
@@ -25666,7 +25914,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '31.656854249500'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-issue763-2026-10-23-recipes
   bead: think-e3im
 - n: 975
   source_id: mishapolk-issue732-f1ceee4-2026-10-23
@@ -25791,14 +26040,16 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '19.778174593058'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-ptkk
 - n: 372
   source_id: couzo-issue763-2026-10-23
   claim: upper-bound
   value: '19.806121988461'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-ptkk
 - n: 375
   source_id: couzo-issue763-2026-10-23
@@ -25812,7 +26063,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '20.571428571434'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-ptkk
 - n: 410
   source_id: couzo-issue763-2026-10-23
@@ -25826,7 +26078,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '20.822878556795'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-ptkk
 - n: 413
   source_id: couzo-issue763-2026-10-23
@@ -25847,7 +26100,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '20.872029849615'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-ptkk
 - n: 416
   source_id: couzo-issue763-2026-10-23
@@ -25855,14 +26109,15 @@ beyond_horizon_claims:
   value: '20.889947557884'
   assurance: reported
   disposition: superseded
-  superseded_by: amundsk-issue798-2026-10-24
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-ptkk
 - n: 417
   source_id: couzo-issue763-2026-10-23
   claim: upper-bound
   value: '20.905466137174'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-ptkk
 - n: 420
   source_id: couzo-issue763-2026-10-23
@@ -25883,21 +26138,24 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '21.656854249506'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-ptkk
 - n: 453
   source_id: couzo-issue763-2026-10-23
   claim: upper-bound
   value: '21.808663234398'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-ptkk
 - n: 456
   source_id: couzo-issue763-2026-10-23
   claim: upper-bound
   value: '21.860400549177'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-ptkk
 - n: 457
   source_id: couzo-issue763-2026-10-23
@@ -25913,14 +26171,15 @@ beyond_horizon_claims:
   value: '21.889913759628'
   assurance: reported
   disposition: superseded
-  superseded_by: amundsk-issue798-2026-10-24
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-ptkk
 - n: 459
   source_id: couzo-issue763-2026-10-23
   claim: upper-bound
   value: '21.905182432784'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-ptkk
 - n: 461
   source_id: couzo-issue763-2026-10-23
@@ -25941,7 +26200,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '21.970200289020'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-ptkk
 - n: 465
   source_id: couzo-issue763-2026-10-23
@@ -26004,7 +26264,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '22.880960371570'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-ptkk
 - n: 502
   source_id: couzo-issue763-2026-10-23
@@ -26012,7 +26273,7 @@ beyond_horizon_claims:
   value: '22.892369983241'
   assurance: reported
   disposition: superseded
-  superseded_by: amundsk-issue798-2026-10-24
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-ptkk
 - n: 503
   source_id: couzo-issue763-2026-10-23
@@ -26033,7 +26294,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '22.953204934736'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-ptkk
 - n: 536
   source_id: couzo-issue763-2026-10-23
@@ -26075,7 +26337,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '23.870013852333'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-ptkk
 - n: 547
   source_id: couzo-issue763-2026-10-23
@@ -26145,7 +26408,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '24.656854249507'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-ptkk
 - n: 587
   source_id: couzo-issue763-2026-10-23
@@ -26180,14 +26444,16 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '24.824728380928'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-ptkk
 - n: 593
   source_id: couzo-issue763-2026-10-23
   claim: upper-bound
   value: '24.851666731969'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-ptkk
 - n: 595
   source_id: couzo-issue763-2026-10-23
@@ -26243,7 +26509,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '25.583782191957'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-ptkk
 - n: 630
   source_id: couzo-issue763-2026-10-23
@@ -26271,7 +26538,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '25.823989202604'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-ptkk
 - n: 642
   source_id: couzo-issue763-2026-10-23
@@ -26327,14 +26595,16 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '25.939913887038'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-ptkk
 - n: 650
   source_id: couzo-issue763-2026-10-23
   claim: upper-bound
   value: '25.956098976263'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-ptkk
 - n: 651
   source_id: couzo-issue763-2026-10-23
@@ -26355,7 +26625,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '26.571428571436'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-ptkk
 - n: 681
   source_id: couzo-issue763-2026-10-23
@@ -26376,14 +26647,16 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '26.656854249501'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-ptkk
 - n: 689
   source_id: couzo-issue763-2026-10-23
   claim: upper-bound
   value: '26.774735132404'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-ptkk
 - n: 690
   source_id: couzo-issue763-2026-10-23
@@ -26397,14 +26670,16 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '26.819198945560'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-ptkk
 - n: 693
   source_id: couzo-issue763-2026-10-23
   claim: upper-bound
   value: '26.824728376140'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-ptkk
 - n: 694
   source_id: couzo-issue763-2026-10-23
@@ -26425,7 +26700,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '26.878731242895'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-ptkk
 - n: 698
   source_id: couzo-issue763-2026-10-23
@@ -26460,7 +26736,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '26.948221671728'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-ptkk
 - n: 703
   source_id: couzo-issue763-2026-10-23
@@ -26502,7 +26779,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '27.764050055204'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-ptkk
 - n: 743
   source_id: couzo-issue763-2026-10-23
@@ -26537,7 +26815,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '27.898764406578'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-ptkk
 - n: 753
   source_id: couzo-issue763-2026-10-23
@@ -26551,21 +26830,24 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '27.920621682790'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-ptkk
 - n: 756
   source_id: couzo-issue763-2026-10-23
   claim: upper-bound
   value: '27.949646347575'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-ptkk
 - n: 757
   source_id: couzo-issue763-2026-10-23
   claim: upper-bound
   value: '27.956217594876'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-ptkk
 - n: 758
   source_id: couzo-issue763-2026-10-23
@@ -26579,7 +26861,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '27.976916267949'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-ptkk
 - n: 794
   source_id: couzo-issue763-2026-10-23
@@ -26600,7 +26883,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '28.774735132398'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-ptkk
 - n: 799
   source_id: couzo-issue763-2026-10-23
@@ -26614,7 +26898,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '28.802428716951'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-ptkk
 - n: 803
   source_id: couzo-issue763-2026-10-23
@@ -26642,14 +26927,16 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '28.863739105779'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-ptkk
 - n: 808
   source_id: couzo-issue763-2026-10-23
   claim: upper-bound
   value: '28.899273101064'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-ptkk
 - n: 809
   source_id: couzo-issue763-2026-10-23
@@ -26677,14 +26964,16 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '28.948221671728'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-ptkk
 - n: 813
   source_id: couzo-issue763-2026-10-23
   claim: upper-bound
   value: '28.956254112324'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-ptkk
 - n: 814
   source_id: couzo-issue763-2026-10-23
@@ -26698,7 +26987,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '28.985552499024'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-ptkk
 - n: 847
   source_id: couzo-issue763-2026-10-23
@@ -26726,7 +27016,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '29.792820520757'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-ptkk
 - n: 860
   source_id: couzo-issue763-2026-10-23
@@ -26754,14 +27045,16 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '29.873880250030'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-ptkk
 - n: 865
   source_id: couzo-issue763-2026-10-23
   claim: upper-bound
   value: '29.886279332517'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-ptkk
 - n: 866
   source_id: couzo-issue763-2026-10-23
@@ -26789,21 +27082,24 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '29.938828739805'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-ptkk
 - n: 871
   source_id: couzo-issue763-2026-10-23
   claim: upper-bound
   value: '29.951737420200'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-ptkk
 - n: 872
   source_id: couzo-issue763-2026-10-23
   claim: upper-bound
   value: '29.962147755539'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-ptkk
 - n: 904
   source_id: couzo-issue763-2026-10-23
@@ -26838,14 +27134,16 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '30.776452019646'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-ptkk
 - n: 917
   source_id: couzo-issue763-2026-10-23
   claim: upper-bound
   value: '30.795318768598'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-ptkk
 - n: 921
   source_id: couzo-issue763-2026-10-23
@@ -26894,28 +27192,32 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '30.940199320916'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-ptkk
 - n: 931
   source_id: couzo-issue763-2026-10-23
   claim: upper-bound
   value: '30.950488164151'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-ptkk
 - n: 932
   source_id: couzo-issue763-2026-10-23
   claim: upper-bound
   value: '30.960209722012'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-ptkk
 - n: 933
   source_id: couzo-issue763-2026-10-23
   claim: upper-bound
   value: '30.972258702441'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-ptkk
 - n: 934
   source_id: couzo-issue763-2026-10-23
@@ -26985,21 +27287,24 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '31.888224555908'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-ptkk
 - n: 988
   source_id: couzo-issue763-2026-10-23
   claim: upper-bound
   value: '31.896086560755'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-ptkk
 - n: 989
   source_id: couzo-issue763-2026-10-23
   claim: upper-bound
   value: '31.909775968518'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-ptkk
 - n: 990
   source_id: couzo-issue763-2026-10-23
@@ -27013,42 +27318,48 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '31.934594193723'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-ptkk
 - n: 992
   source_id: couzo-issue763-2026-10-23
   claim: upper-bound
   value: '31.942875568527'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-ptkk
 - n: 993
   source_id: couzo-issue763-2026-10-23
   claim: upper-bound
   value: '31.953213739929'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-ptkk
 - n: 995
   source_id: couzo-issue763-2026-10-23
   claim: upper-bound
   value: '31.967892522875'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-ptkk
 - n: 996
   source_id: couzo-issue763-2026-10-23
   claim: upper-bound
   value: '31.987263130334'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-ptkk
 - n: 997
   source_id: couzo-issue763-2026-10-23
   claim: upper-bound
   value: '31.995520170690'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-ptkk
 - n: 335
   source_id: couzo-964ee2b-2026-10-23
@@ -27709,7 +28020,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '18.926898901624'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-lyf9
 - n: 364
   source_id: tymchishin-reclosure-v3-2026-10-23
@@ -27774,7 +28086,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '22.591378149728'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-lyf9
 - n: 533
   source_id: tymchishin-reclosure-v3-2026-10-23
@@ -27853,7 +28166,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '26.535533911216'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-lyf9
 - n: 685
   source_id: tymchishin-reclosure-v3-2026-10-23
@@ -27867,7 +28181,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '27.535533911216'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-lyf9
 - n: 735
   source_id: tymchishin-reclosure-v3-2026-10-23
@@ -27889,7 +28204,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '28.535533911216'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-lyf9
 - n: 790
   source_id: tymchishin-reclosure-v3-2026-10-23
@@ -27917,7 +28233,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '29.535533911216'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-lyf9
 - n: 846
   source_id: tymchishin-reclosure-v3-2026-10-23
@@ -27938,14 +28255,16 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '29.778174594233'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-lyf9
 - n: 903
   source_id: tymchishin-reclosure-v3-2026-10-23
   claim: upper-bound
   value: '30.535533911216'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-lyf9
 - n: 906
   source_id: tymchishin-reclosure-v3-2026-10-23
@@ -27966,7 +28285,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '31.535533911216'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-lyf9
 - n: 965
   source_id: tymchishin-reclosure-v3-2026-10-23
@@ -27994,14 +28314,16 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '31.727922066728'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-lyf9
 - n: 330
   source_id: lavrentev-cuda-v11-2026-10-23
   claim: upper-bound
   value: '18.692388156328'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-lyf9
 - n: 338
   source_id: lavrentev-cuda-v11-2026-10-23
@@ -28048,7 +28370,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '22.993150623408'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-lyf9
 - n: 532
   source_id: lavrentev-cuda-v11-2026-10-23
@@ -28088,7 +28411,7 @@ beyond_horizon_claims:
   value: '19.897064162577'
   assurance: reported
   disposition: superseded
-  superseded_by: amundsk-issue798-2026-10-24
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-lyf9
 - n: 419
   source_id: tymchishin-22-3662-2026-10-23
@@ -28130,21 +28453,24 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '26.799999051183'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-lyf9
 - n: 755
   source_id: tymchishin-22-3662-2026-10-23
   claim: upper-bound
   value: '27.933868760801'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-lyf9
 - n: 761
   source_id: tymchishin-22-3662-2026-10-23
   claim: upper-bound
   value: '27.998784458427'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-lyf9
 - n: 861
   source_id: tymchishin-22-3662-2026-10-23
@@ -28186,7 +28512,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '31.851684895372'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-lyf9
 - n: 377
   source_id: kyleluecke-inos-2026-10-23
@@ -28194,7 +28521,7 @@ beyond_horizon_claims:
   value: '19.909958295508'
   assurance: reported
   disposition: superseded
-  superseded_by: amundsk-issue798-2026-10-24
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-lyf9
 - n: 378
   source_id: kyleluecke-inos-2026-10-23
@@ -28208,7 +28535,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '20.645753256143'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-lyf9
 - n: 450
   source_id: kyleluecke-inos-2026-10-23
@@ -28222,7 +28550,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '21.756097565469'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-lyf9
 - n: 532
   source_id: kyleluecke-inos-2026-10-23
@@ -28243,35 +28572,40 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '26.888197389264'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-lyf9
 - n: 706
   source_id: kyleluecke-inos-2026-10-23
   claim: upper-bound
   value: '26.995398008109'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-lyf9
 - n: 745
   source_id: kyleluecke-inos-2026-10-23
   claim: upper-bound
   value: '27.799999071184'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-lyf9
 - n: 858
   source_id: kyleluecke-inos-2026-10-23
   claim: upper-bound
   value: '29.799684951024'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-lyf9
 - n: 867
   source_id: kyleluecke-inos-2026-10-23
   claim: upper-bound
   value: '29.908036104109'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-lyf9
 - n: 874
   source_id: kyleluecke-inos-2026-10-23
@@ -28292,14 +28626,16 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '30.799684872950'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-lyf9
 - n: 929
   source_id: kyleluecke-inos-2026-10-23
   claim: upper-bound
   value: '30.934039771569'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-lyf9
 - n: 968
   source_id: kyleluecke-inos-2026-10-23
@@ -28313,7 +28649,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '31.809159874355'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-lyf9
 - n: 338
   source_id: alexchilton-fault-line-2026-10-23
@@ -28328,7 +28665,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '20.795693819980'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-lyf9
 - n: 418
   source_id: alexchilton-fault-line-2026-10-23
@@ -28350,35 +28688,39 @@ beyond_horizon_claims:
   value: '22.925987278335'
   assurance: reported
   disposition: superseded
-  superseded_by: amundsk-issue798-2026-10-24
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-lyf9
 - n: 508
   source_id: alexchilton-fault-line-2026-10-23
   claim: upper-bound
   value: '22.982358327699'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-lyf9
 - n: 594
   source_id: alexchilton-fault-line-2026-10-23
   claim: upper-bound
   value: '24.878125203750'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-lyf9
 - n: 604
   source_id: alexchilton-fault-line-2026-10-23
   claim: upper-bound
   value: '24.996827861719'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-lyf9
 - n: 816
   source_id: alexchilton-fault-line-2026-10-23
   claim: upper-bound
   value: '28.992261752627'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-lyf9
 - n: 817
   source_id: alexchilton-fault-line-2026-10-23
@@ -28406,77 +28748,88 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '21.825061500508'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-lyf9
 - n: 596
   source_id: aqibrazadev-blending-2026-10-23
   claim: upper-bound
   value: '24.888197391569'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-lyf9
 - n: 637
   source_id: aqibrazadev-blending-2026-10-23
   claim: upper-bound
   value: '25.769289519260'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-lyf9
 - n: 738
   source_id: aqibrazadev-blending-2026-10-23
   claim: upper-bound
   value: '27.691283629550'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-lyf9
 - n: 751
   source_id: aqibrazadev-blending-2026-10-23
   claim: upper-bound
   value: '27.888197393173'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-lyf9
 - n: 807
   source_id: aqibrazadev-blending-2026-10-23
   claim: upper-bound
   value: '28.888197393373'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-lyf9
 - n: 924
   source_id: aqibrazadev-blending-2026-10-23
   claim: upper-bound
   value: '30.877654761160'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-lyf9
 - n: 994
   source_id: aqibrazadev-blending-2026-10-23
   claim: upper-bound
   value: '31.960209732221'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-lyf9
 - n: 653
   source_id: lavrentev-cuda-run-361589987-2026-10-23
   claim: upper-bound
   value: '25.991128755446'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-lyf9
 - n: 746
   source_id: lavrentev-cuda-run-361589987-2026-10-23
   claim: upper-bound
   value: '27.803053268109'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-lyf9
 - n: 748
   source_id: lavrentev-cuda-run-361589987-2026-10-23
   claim: upper-bound
   value: '27.844000201765'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-lyf9
 - n: 802
   source_id: lavrentev-cuda-run-361589987-2026-10-23
@@ -28497,7 +28850,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '30.809159596954'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
   bead: think-lyf9
 - n: 923
   source_id: lavrentev-cuda-run-361589987-2026-10-23
@@ -28506,6 +28860,964 @@ beyond_horizon_claims:
   assurance: reported
   disposition: tracked-outside-case-corpus
   bead: think-lyf9
+- n: 365
+  source_id: couzo-issue763-2026-10-23-recipes
+  claim: upper-bound
+  value: '19.614368938495'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-g2qy
+- n: 444
+  source_id: couzo-issue763-2026-10-23-recipes
+  claim: upper-bound
+  value: '21.571428571434'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
+  bead: think-g2qy
+- n: 487
+  source_id: couzo-issue763-2026-10-23-recipes
+  claim: upper-bound
+  value: '22.571428571434'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
+  bead: think-g2qy
+- n: 632
+  source_id: couzo-issue763-2026-10-23-recipes
+  claim: upper-bound
+  value: '25.656854249507'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
+  bead: think-g2qy
+- n: 733
+  source_id: couzo-issue763-2026-10-23-recipes
+  claim: upper-bound
+  value: '27.571428571436'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
+  bead: think-g2qy
+- n: 734
+  source_id: couzo-issue763-2026-10-23-recipes
+  claim: upper-bound
+  value: '27.591378145504'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-g2qy
+- n: 737
+  source_id: couzo-issue763-2026-10-23-recipes
+  claim: upper-bound
+  value: '27.656854249501'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
+  bead: think-g2qy
+- n: 788
+  source_id: couzo-issue763-2026-10-23-recipes
+  claim: upper-bound
+  value: '28.571428571436'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
+  bead: think-g2qy
+- n: 789
+  source_id: couzo-issue763-2026-10-23-recipes
+  claim: upper-bound
+  value: '28.591378145504'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-g2qy
+- n: 845
+  source_id: couzo-issue763-2026-10-23-recipes
+  claim: upper-bound
+  value: '29.571428571436'
+  assurance: reported
+  disposition: superseded
+  superseded_by: couzo-43f666c-2026-10-24
+  bead: think-g2qy
+- n: 910
+  source_id: couzo-issue763-2026-10-23-recipes
+  claim: upper-bound
+  value: '30.691448975560'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-g2qy
+- n: 966
+  source_id: couzo-issue763-2026-10-23-recipes
+  claim: upper-bound
+  value: '31.583782191753'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-g2qy
+- n: 970
+  source_id: couzo-issue763-2026-10-23-recipes
+  claim: upper-bound
+  value: '31.656854249499'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-g2qy
+- n: 330
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '18.692388155429'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 340
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '18.926898900361'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 371
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '19.778174593057'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 372
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '19.806121548578'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 376
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '19.890228421694'
+  assurance: reported
+  disposition: superseded
+  superseded_by: amundsk-issue798-2026-10-24
+  bead: think-gn29
+- n: 377
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '19.909958295503'
+  assurance: reported
+  disposition: superseded
+  superseded_by: amundsk-issue798-2026-10-24
+  bead: think-gn29
+- n: 403
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '20.571428571433'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 405
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '20.645753256126'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 411
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '20.795693819960'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 412
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '20.822875655538'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 415
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '20.872029849087'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 416
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '20.889675804154'
+  assurance: reported
+  disposition: superseded
+  superseded_by: amundsk-issue798-2026-10-24
+  bead: think-gn29
+- n: 417
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '20.904742825318'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 444
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '21.571428571433'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 447
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '21.656854249500'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 451
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '21.756097560981'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 453
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '21.808663234395'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 455
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '21.825061500487'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 456
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '21.860400549171'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 458
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '21.889909897514'
+  assurance: reported
+  disposition: superseded
+  superseded_by: amundsk-issue798-2026-10-24
+  bead: think-gn29
+- n: 459
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '21.905182432783'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 463
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '21.970185423250'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 487
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '22.571428571433'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 488
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '22.591378145503'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 501
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '22.880960371562'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 502
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '22.892030646456'
+  assurance: reported
+  disposition: superseded
+  superseded_by: amundsk-issue798-2026-10-24
+  bead: think-gn29
+- n: 504
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '22.925114765344'
+  assurance: reported
+  disposition: superseded
+  superseded_by: amundsk-issue798-2026-10-24
+  bead: think-gn29
+- n: 506
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '22.952939819366'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 508
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '22.982358327677'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 509
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '22.992979579252'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 546
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '23.870013850411'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 583
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '24.656854249498'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 592
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '24.824721479650'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 593
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '24.851666731961'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 594
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '24.877824614688'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 596
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '24.888197391546'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 604
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '24.996827861695'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 629
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '25.583782191638'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 632
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '25.656854249498'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 637
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '25.769289510287'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 641
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '25.823330269068'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 649
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '25.939670792893'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 650
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '25.955983899813'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 653
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '25.991128755422'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 679
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '26.535533905939'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 680
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '26.571428571435'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 683
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '26.656854249498'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 684
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '26.656854249498'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 689
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '26.774735132395'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 691
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '26.786715806974'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 692
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '26.817577259867'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 693
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '26.824724219783'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 696
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '26.878730119727'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 697
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '26.888197389255'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 702
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '26.948221671718'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 706
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '26.995398008083'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 732
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '27.535533905939'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 733
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '27.571428571435'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 737
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '27.656854249498'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 738
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '27.691283629524'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 742
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '27.764050051550'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 744
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '27.786715806974'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 745
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '27.793823491120'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 746
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '27.803053268083'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 748
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '27.844000201738'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 751
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '27.888197382779'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 752
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '27.898203035527'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 754
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '27.920422831462'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 755
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '27.931358508016'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 756
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '27.949602638227'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 757
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '27.956115722042'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 759
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '27.975659133684'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 761
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '27.998784458401'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 787
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '28.535533905939'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 788
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '28.571428571435'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 792
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '28.656854249498'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 798
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '28.774735132394'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 800
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '28.793823491120'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 801
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '28.802428716943'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 806
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '28.863706009321'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 807
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '28.888197393351'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 808
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '28.899222011397'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 812
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '28.948221671719'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 813
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '28.954990077044'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 815
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '28.985087410892'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 816
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '28.992261752599'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 844
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '29.535533905939'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 845
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '29.571428571435'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 856
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '29.778174593064'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 857
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '29.792820520755'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 858
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '29.796030772955'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 864
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '29.873870986621'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 865
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '29.883815809125'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 867
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '29.908036097699'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 870
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '29.938679429308'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 871
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '29.950496452438'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 872
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '29.961116417981'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 903
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '30.535533905939'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 916
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '30.776257218046'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 917
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '30.795318768594'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 918
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '30.796057688423'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 919
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '30.809159596925'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 924
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '30.870828693406'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 929
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '30.934039765539'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 930
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '30.940199320906'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 931
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '30.948221671729'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 932
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '30.960209722011'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 933
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '30.971709633544'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 964
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '31.535533905939'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 975
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '31.727922061365'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 981
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '31.807266445914'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 984
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '31.851684895342'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 987
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '31.888224555900'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 988
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '31.893149351640'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 989
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '31.909679351448'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 991
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '31.934561612655'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 992
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '31.942833975517'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 993
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '31.951849460978'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 994
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '31.960209722004'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 995
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '31.964234466738'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 996
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '31.983269063457'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
+- n: 997
+  source_id: couzo-43f666c-2026-10-24
+  claim: upper-bound
+  value: '31.995178354071'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-gn29
 - n: 334
   source_id: amundsk-issue798-2026-10-24
   claim: upper-bound
