@@ -146,8 +146,8 @@ side; the value is T-193’s either way. A measurement, which decides nothing.
   or 263, so $s(172) \le S^*$ and $s(263) \le S^*$ are reported, not shown. What would
   show them is a configuration with every centre and half-angle tangent in a number field
   holding $S^*$, every contact an identity there and every other pair and wall separated
-  exactly. The author attached such configurations on 25 October at 09:06:23Z; they are
-  kept in the
+  exactly. On 25 October at 09:06:23Z the author attached configurations he reports to be
+  of this kind; they are kept in the
   [configurations packet](../hyukdongkim-t244-configurations-2026-10-25/README.md) and
   not yet decided here. Deciding them on this repository’s two exact routes is
   think-4rzl’s.

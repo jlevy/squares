@@ -320,10 +320,10 @@ def configurations(archive: Path, *, check: bool) -> int:
                     "retained": False,
                 }
             )
-        stated = {member["path"]: member["sha256"] for member in members}
+        measured = {member["path"]: member["sha256"] for member in members}
         for n, (member, sha) in CONFIGURATION_MEMBERS.items():
-            if stated.get(member) != sha:
-                sys.exit(f"{member}: SHA-256 {stated.get(member)}, not the stated {sha}")
+            if measured.get(member) != sha:
+                sys.exit(f"{member}: SHA-256 {measured.get(member)}, not the stated {sha}")
             content = json.loads(bundle.read(member).decode("utf-8"))
             if int(content["n"]) != n or len(content["squares"]) != n:
                 sys.exit(f"{member}: n = {content['n']} with {len(content['squares'])} squares")

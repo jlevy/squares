@@ -21474,6 +21474,7 @@ urls:
     - packing/resources/web/hyukdongkim-exact-forms-2026-10-25/facts/exact-forms.json
     - packing/resources/web/hyukdongkim-exact-forms-2026-10-25/acquisition/sources.json
     - packing/resources/web/hyukdongkim-t244-configurations-2026-10-25/README.md
+    - packing/resources/web/hyukdongkim-t244-configurations-2026-10-25/acquisition/sources.json
     - packing/resources/web/hyukdongkim-t244-configurations-2026-10-25/facts/n172.json.gz
     - packing/resources/web/hyukdongkim-t244-configurations-2026-10-25/facts/n263.json.gz
     - packing/campaign/issue-intake/upper-bounds-issue804-20261025/README.md

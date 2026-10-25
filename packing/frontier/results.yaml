@@ -34495,12 +34495,14 @@ results:
       numerically: it solved the KKT system on the active contacts to 3,000 digits from the
       binary64 packings of Evan Daniel's atlas, and found each polynomial as an LLL relation
       at 1,500 digits. The issue supplies no exact configuration, and says the nonnegativity
-      of its multipliers is not certified. Feasibility at either side is not shown until an
-      exact configuration at that side is decided: every centre and half-angle tangent in a
+      of its multipliers is not certified.
+
+      Feasibility at either side is not shown until an exact configuration at that side is
+      decided: every centre and half-angle tangent in a
       number field holding the side, every contact an identity there and every other pair
-      and wall separated exactly. The author attached such configurations at both counts in
-      a later comment on the issue, the same day; they are retained here and not yet
-      decided.
+      and wall separated exactly. In a later comment on the issue the same day, the author
+      attached configurations at both counts that he reports to be of this kind; they are
+      retained here and not yet decided.
 
       Here SymPy and sqpack.field found each polynomial primitive and irreducible, and each
       side is the root the source's 100-digit print names, decided exactly. Each lies below
@@ -34539,6 +34541,7 @@ results:
       - packing/resources/web/hyukdongkim-exact-forms-2026-10-25/facts/exact-forms.json
       - packing/resources/web/hyukdongkim-exact-forms-2026-10-25/acquisition/sources.json
       - packing/resources/web/hyukdongkim-t244-configurations-2026-10-25/README.md
+      - packing/resources/web/hyukdongkim-t244-configurations-2026-10-25/acquisition/sources.json
       - packing/resources/web/hyukdongkim-t244-configurations-2026-10-25/facts/n172.json.gz
       - packing/resources/web/hyukdongkim-t244-configurations-2026-10-25/facts/n263.json.gz
       - packing/campaign/issue-intake/upper-bounds-issue804-20261025/README.md
@@ -34550,9 +34553,14 @@ results:
       The author's exact configurations at both sides, received on 25 October in the
       minpoly.json format of Evan Daniel's verify_exact.py and retained as derived facts
       (the hyukdongkim-t244-configurations-2026-10-25 packet), decided exactly here
-      (think-4rzl): devtools.algebraic_witness_reports derive-forms reads them for
-      sqpack.witness.exact_verify over each field, with the duplicate-square and
-      outside-container controls, and the retained verify_exact.py decides them as well, a
+      (think-4rzl).
+
+      A small reader of the packet's facts comes first: derive-forms needs a
+      declaration and retained upstream bytes, which the packet keeps neither of, so the
+      reader feeds each fact's configuration to
+      devtools.algebraic_witness_reports.evand_minpoly_geometry. sqpack.witness.exact_verify
+      then decides each over its field, with the duplicate-square and outside-container
+      controls, and the retained verify_exact.py decides each form rebuilt from its fact, a
       second route. That would take C to C3, and a stage 4 review of the configurations and
       the claim would take V to V3.
 
@@ -34577,7 +34585,8 @@ results:
             equals the side's, 24 and 17; the upper end allows a field of twice that degree
             and Daniel's verify_exact.py as the second route. The author's configurations
             are of degree 24 and 17, so the central estimate applies; under the 40
-            CPU-hour item cap.
+            CPU-hour item cap. The reader of the packet's facts that comes first is tooling,
+            about half an agent-day, and adds no compute to speak of.
           priced: '2026-10-25'
     notes: >-
       Source assertions only. Nothing of the source's code was executed here; the archive

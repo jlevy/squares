@@ -128,7 +128,7 @@ def test_the_configuration_facts_name_the_comment_attachment(n: int, degree: int
     fact = json.loads(gzip.decompress((CONFIGURATIONS / f"facts/n{n}.json.gz").read_bytes()))
     member = f"t244-exact-configurations/n{n}.minpoly.json"
     assert fact["source"]["member"] == member
-    stated = {item["path"]: item["sha256"] for item in sources["members"]}
-    assert fact["source"]["member_sha256"] == stated[member]
+    measured = {item["path"]: item["sha256"] for item in sources["members"]}
+    assert fact["source"]["member_sha256"] == measured[member]
     assert fact["field_degree"] == degree
     assert fact["squares"] == n == len(fact["configuration"]["squares"])

@@ -3,14 +3,19 @@
 Hyukdong Kim attached exact configurations at 172 and 263 to
 [jlevy/squares#804](https://github.com/jlevy/squares/issues/804) in a
 [comment of 2026-10-25T09:06:23Z](https://github.com/jlevy/squares/issues/804#issuecomment-6395743853),
-after T-244 registered his exact sides there as reported. Each places the record packing
-of n unit squares in the square of side $S^*$, T-244’s side, with every centre and every
-half-angle tangent in a number field $K = \mathbb{Q}[t]/f$ that holds $S^*$. They are in
+after T-244 registered his exact sides there as reported. Each is reported to place the
+record packing of n unit squares in the square of side $S^*$, T-244’s side, with every
+centre and every half-angle tangent in a number field $K = \mathbb{Q}[t]/f$ that holds
+$S^*$. They are in
 the `minpoly.json` format of Evan Daniel’s `verify_exact.py`, the checker reviewed for
 T-193.
 
 **Nothing here decides them.** This packet keeps them; deciding them exactly on this
-repository’s two routes is the next step, owned by think-4rzl. Until then T-244 stays
+repository’s two routes is the next step, owned by think-4rzl. It first needs a small
+reader of these facts: `devtools.algebraic_witness_reports derive-forms` reads a packet’s
+declaration and retained upstream bytes, which this packet keeps neither of, so the reader
+feeds each fact’s `configuration` to `evand_minpoly_geometry`, with
+`configurations --check` against the zip as the facts’ custody. Until then T-244 stays
 reported, and the comment’s statements, below, are the author’s.
 
 | n | Field | Certificate | SHA-256, as the comment states it |
@@ -25,7 +30,7 @@ reported, and the comment’s statements, below, are the author’s.
 | Comment | [issuecomment-6395743853](https://github.com/jlevy/squares/issues/804#issuecomment-6395743853), 2026-10-25T09:06:23Z, by HyukdongKim; never edited when read at 10:08:46Z |
 | Evidence | The attachment [`t244-exact-configurations.zip`](https://github.com/user-attachments/files/33922338/t244-exact-configurations.zip) |
 | Pin | SHA-256 `16e6ad9d04f1def897478e59260880320bc7c06ae89e41fa83837c7dc29c9a2d`, which the comment states, and 96,347 bytes, measured here |
-| Bibliography key | **[Kim exact forms 2026-10-25]**, the key of the sides these configurations realize ([first packet](../hyukdongkim-exact-forms-2026-10-25/README.md)) |
+| Bibliography key | **[Kim exact forms 2026-10-25]**, the key of T-244’s sides, which these configurations are reported to realize ([first packet](../hyukdongkim-exact-forms-2026-10-25/README.md)) |
 | Human credit | Hyukdong Kim, for the configurations of the records’ own arrangements, T-174’s packings |
 | AI assistance | The comment says the construction, the second checker and the controls were produced by Claude (Anthropic) at the author’s direction, and that he reviewed and reran them |
 | Licence | None stated, in the comment or the archive |

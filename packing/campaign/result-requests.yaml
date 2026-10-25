@@ -24237,9 +24237,12 @@ issues:
     - key: exact-sides-new
       claim: >-
         s(172) <= S*, the least of the four real roots of the degree-24 polynomial in
-        exact_forms.json, 13.6189889568993984288635016293504898995040150521961793814779549035630128682876859236484103034563728798…, and s(263) <= S*, the only real root of the degree-17
-        polynomial there, 16.7331660078993789705122814839596734462471472483871051710853314027161147491596783918785611086390994182…, each cut at 100 places. The source says each is the side of the record packing at its KKT point,
-        determined numerically at 3,000 digits, and gives no exact configuration.
+        exact_forms.json,
+        13.6189889568993984288635016293504898995040150521961793814779549035630128682876859236484103034563728798…,
+        and s(263) <= S*, the only real root of the degree-17 polynomial there,
+        16.7331660078993789705122814839596734462471472483871051710853314027161147491596783918785611086390994182…,
+        each cut at 100 places. The source says each is the side of the record packing at its
+        KKT point, determined numerically at 3,000 digits, and gives no exact configuration.
       source: body
       register:
       - T-244
@@ -24262,11 +24265,14 @@ issues:
         96,347 bytes, SHA-256 16e6ad9d04f1def897478e59260880320bc7c06ae89e41fa83837c7dc29c9a2d,
         the comment's digest) states no licence, so the hyukdongkim-t244-configurations-2026-10-25
         packet keeps both certificates' content as derived facts with every member's digest,
-        and none of its checker, controls or scripts ran. Deciding them exactly is think-4rzl's:
-        devtools.algebraic_witness_reports derive-forms reads Daniel's format for
-        sqpack.witness.exact_verify over each field, and the retained verify_exact.py decides
-        them as well, about 2 CPU-hours for both counts on both routes, up to about 8. That
-        would take T-244 to C3.
+        and none of its checker, controls or scripts ran. Deciding them exactly is think-4rzl's.
+        It first adds a small reader of the packet's facts: derive-forms needs a declaration and
+        retained upstream bytes, which the packet keeps neither of, so the reader feeds each
+        fact's configuration to devtools.algebraic_witness_reports.evand_minpoly_geometry, with
+        configurations --check against the zip as the facts' custody, about half an agent-day
+        of tooling. sqpack.witness.exact_verify then decides each over its field, and the
+        retained verify_exact.py decides each form rebuilt from its fact as a second route,
+        about 2 CPU-hours for both counts, up to about 8. That would take T-244 to C3.
       queued: true
       bead: think-4rzl
     - key: negative-searches
