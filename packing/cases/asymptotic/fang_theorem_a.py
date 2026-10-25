@@ -69,7 +69,7 @@ import platform
 import re
 import sys
 import time
-from collections.abc import Iterable, Sequence
+from collections.abc import Callable, Iterable, Sequence
 from concurrent.futures import ProcessPoolExecutor
 from dataclasses import asdict, dataclass
 from fractions import Fraction
@@ -234,9 +234,17 @@ def kappa(b: int) -> Fraction:
 
 
 def limit(k: int, b: int) -> Fraction:
-    """B(k) = 4kb/(b^2 + 1) + 2b + 2 + 2/(b^2 + 1) - 2 kappa_b, the limit of H(t) at 1/b."""
+    """B(k) = 4kb/(b^2 + 1) + 2b + 2 + 2/(b^2 + 1) - 2 kappa_b, the note's limit of H(t)
+    as t -> 1/b; `check_bound` holds it to `lemma_bound(k, b, 1/b)` at every (k, b)."""
     d = b * b + 1
     return Fraction(4 * k * b, d) + 2 * b + 2 + Fraction(2, d) - 2 * kappa(b)
+
+
+def lemma_bound(k: int, b: int, t: Fraction) -> Fraction:
+    """H(t): b(k - S) plus the right sides of Lemma 2 for the bands of length S and k - b."""
+    band = Band(b, t)
+    side = k - b + band.width
+    return b * (k - side) + band.lemma_two(side) + band.lemma_two(Fraction(k - b))
 
 
 @dataclass(frozen=True)
@@ -260,7 +268,7 @@ def construct(k: int, b: int, t: Fraction) -> Construction | None:
     if not k - b > band.height:
         return None
     count = (k - b) ** 2 + band.capacity(side) + band.capacity(Fraction(k - b))
-    bound = b * (k - side) + band.lemma_two(side) + band.lemma_two(Fraction(k - b))
+    bound = lemma_bound(k, b, t)
     return Construction(k, b, t, side, count, k * k - count, bound, all(band.close().values()))
 
 
@@ -292,6 +300,7 @@ def check_bound(
     bound: list[tuple[int, int, int]] = []
     lemma: list[tuple[int, int]] = []
     limits: list[tuple[int, int]] = []
+    unequal: list[tuple[int, int]] = []
     least: tuple[Fraction, int, int] | None = None
     least_note: tuple[Fraction, int, int] | None = None
     ties: list[int] = []
@@ -308,6 +317,8 @@ def check_bound(
             if not found.waste < found.lemma_bound:
                 lemma.append((k, b))
             ceiling = limit(k, b)
+            if ceiling != lemma_bound(k, b, Fraction(1, b)):
+                unequal.append((k, b))
             if not below_bound(ceiling, k):
                 limits.append((k, b))
             slack = (ceiling - found.waste, k, b)
@@ -328,6 +339,12 @@ def check_bound(
             "Lemma 2 and equation (1)",
             not lemma,
             f"failures {lemma[:5] or 'none'}",
+        ),
+        Check(
+            f"B(k) = H(1/b), the value of Lemma 2's bound at t0, {span}",
+            "proof of Theorem A",
+            not unequal,
+            f"failures {unequal[:5] or 'none'}",
         ),
         Check(
             f"B(k) < 4 sqrt(2k) + 2, {span}",
@@ -762,11 +779,17 @@ LEAST_WINDOW = (42, 702_000)
 RYU_THEOREM_1_6 = {10**5: 1583, 10**6: 3972, 10**7: 10039, 38_250_000: 16988, 10**8: 24790}
 
 
-def daniel(k: int) -> int:
-    """Evan Daniel's c*(k) <= 4 ceil(sqrt(2k - 7)) - 1, for every k >= 7."""
-    if k < 7:
-        raise ValueError(f"Daniel's bound is stated for k >= 7, not k = {k}")
-    return 4 * ceil_sqrt(2 * k - 7) - 1
+def daniel_tail_holds(k: int) -> bool:
+    """Whether sqrt(2k) + sqrt(2k - 7) >= 28, decided exactly.
+
+    With x = sqrt(2k), y = sqrt(2k - 7) and delta = x - y = 7/(x + y), Theorem A's
+    ceil(sqrt(32k)) lies in [4x, 4x + 1) and Daniel's 4 ceil(y) - 1 in [4y - 1, 4y + 3), so
+    their difference lies in (4 delta - 3, 4 delta + 2). Once x + y >= 28, 4 delta <= 1 and
+    the integers differ by at most 2; x + y grows with k, so this at k decides every larger
+    k. (x + y)^2 = 4k - 7 + 2 sqrt(2k(2k - 7)), compared with 28^2 by squaring.
+    """
+    rest = 28 * 28 - (4 * k - 7)
+    return rest <= 0 or 4 * (2 * k) * (2 * k - 7) >= rest * rest
 
 
 def runs(values: Iterable[int]) -> list[list[int]]:
@@ -779,7 +802,9 @@ def runs(values: Iterable[int]) -> list[list[int]]:
     return out
 
 
-def classify(mine: Any, other: Any, first: int, last: int) -> dict[str, list[list[int]]]:
+def classify(
+    mine: Callable[[int], int], other: Callable[[int], int], first: int, last: int
+) -> dict[str, list[list[int]]]:
     """Where ``mine(k)`` is smaller than, equal to or larger than ``other(k)``, as runs."""
     groups: dict[str, list[int]] = {"smaller": [], "tied": [], "larger": []}
     for k in range(first, last + 1):
@@ -834,6 +859,8 @@ def comparisons(
     from cases.asymptotic import deficiency_family as family  # noqa: PLC0415
     from cases.asymptotic import fang_excess_inventory as fang  # noqa: PLC0415
 
+    daniel = family.daniel_layers
+
     ryu_1_3 = {k: family.ryu_theorem_1_3(k) for k in range(6, 601)}.__getitem__
     counts = {"A_smaller": 0, "tied": 0, "daniel_smaller": 0}
     close_below = []
@@ -852,9 +879,8 @@ def comparisons(
         if theorem_a(k) < daniel(k) and theorem_a(k) < RYU_THEOREM_1_6.get(k, theorem_a(k) + 1)
     )
     below_daniel = sum(1 for k in range(first, last + 1) if theorem_a(k) < daniel(k))
-    # For k >= 100, sqrt(2k) + sqrt(2k - 7) >= 28, so the two bounds differ by at most 2:
-    # A - D lies in (4 delta - 3, 4 delta + 2) with delta = 7/(sqrt(2k) + sqrt(2k - 7)).
-    tail_100 = 4 * 200 - 7 + 2 * isqrt(200 * 193) >= 28 * 28
+    # From k = 100 the two bounds differ by at most 2 (`daniel_tail_holds`).
+    tail_100 = daniel_tail_holds(100)
     # Ryu's Theorem 1.2 for k >= 1.6*10^7, c*(k) < 20.668 k^{2/5} + 0.623: sufficient is
     # sqrt(32k) >= 20.668 m + 1.623 with m = ceil(k^{2/5}); sqrt(32k) - 20.668 k^{2/5} grows
     # for k > 4.5*10^4, so it then holds at every larger k.
@@ -928,7 +954,9 @@ def _print_ceiling(printed: str) -> Fraction:
     return Fraction(printed) + Fraction(1, 10 ** len(places))
 
 
-def case_records(statements: Sequence[tuple[str, Any, int]] = ()) -> dict[str, Any]:
+def case_records(
+    statements: Sequence[tuple[str, Callable[[int], int], int]] = (),
+) -> dict[str, Any]:
     """Whether a statement would move a case: every n <= 324 it bounds below k, against
     the case record's reported and verified upper bounds, each read as a ceiling: its
     printed decimal plus one unit in the last place (`_print_ceiling`), never as s(n).
@@ -937,7 +965,9 @@ def case_records(statements: Sequence[tuple[str, Any, int]] = ()) -> dict[str, A
     corpus the least such k is found, and the case's two upper bounds must already lie
     below it; a count no k reaches is not bounded by the statement at all.
     """
-    # Imported here: the case parser reads the frontier, which the checks above do not.
+    # Imported here: the case parser reads the frontier, which the checks above do not,
+    # and the family module imports this one for Theorem A's value.
+    from cases.asymptotic.deficiency_family import daniel_layers as daniel  # noqa: PLC0415
     from devtools import check_source_coverage as coverage  # noqa: PLC0415
 
     chosen = statements or (("theorem_a", theorem_a, 6), ("daniel", daniel, 7))

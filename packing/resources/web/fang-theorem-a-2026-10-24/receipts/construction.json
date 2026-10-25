@@ -8,6 +8,7 @@
   "checks": [
     {"name":"w(k) < 4 sqrt(2k) + 2 at every odd b with |b - sqrt(2k)| <= 1, 6 <= k <= 60000","pinpoint":"Theorem A","holds":true,"value":"60167 (k, b) decided, failures none; two widths at 172 k"},
     {"name":"w < H(t) at a close t, 6 <= k <= 60000","pinpoint":"Lemma 2 and equation (1)","holds":true,"value":"failures none"},
+    {"name":"B(k) = H(1/b), the value of Lemma 2's bound at t0, 6 <= k <= 60000","pinpoint":"proof of Theorem A","holds":true,"value":"failures none"},
     {"name":"B(k) < 4 sqrt(2k) + 2, 6 <= k <= 60000","pinpoint":"proof of Theorem A","holds":true,"value":"failures none"},
     {"name":"least B(k) - w for k <= 20000","pinpoint":"Section 6","holds":true,"value":"8019401/78023840599 at k = 19705"},
     {"name":"least B(k) - w, 6 <= k <= 60000","pinpoint":"Section 6","holds":true,"value":"41480557/1221920023305 at k = 59344, b = 345"},
@@ -64,5 +65,5 @@
     {"k":600,"b":35,"waste":140,"theorem_a":139}
   ],
   "python": "3.14.7",
-  "cpu_seconds": 39.9
+  "cpu_seconds": 46.1
 }

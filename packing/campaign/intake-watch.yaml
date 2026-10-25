@@ -1170,11 +1170,13 @@ repositories:
       corner-fill square beyond) and not in Lean. At k <= 31 every count k^2 - c it reaches
       already has a beyond-horizon row below k, so it moves no count the record tracks. A
       claim in the c*(k) family think-f8py imports, which think-f8py held until a packet
-      pinned this commit or its import declined it. Its import of 25 October declines it:
-      the junction variant is a finite set of values checked by the source's own programs,
-      not a statement for every k in a range, and it is not in Lean, so the register's
-      deficiency rows, which hold theorem-wide statements, have no row for it, and it moves
-      no count the record tracks. Nothing else to import.
+      pinned this commit or its import declined it. Its import of 25 October declines it,
+      for two reasons the register applies: the junction variant is a finite table of
+      values checked by the source's own programs, not a statement for every k in a range,
+      which is what the register's deficiency rows hold and the deficiency gate compares;
+      and it moves no count the record tracks. That holds at k = 32 too: the counts it could
+      reach there, 993 and 994, already have current beyond-horizon rows below 32
+      (31.953213739929 and 31.960209732221). Nothing else to import.
   - url: https://github.com/TheSnakeFang/squarepack-certs
     read_through: 9ffba0f3a84b38f0c92790c1d3089f979ef53f0b
     read_on: '2026-10-21'

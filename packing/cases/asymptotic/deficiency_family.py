@@ -93,7 +93,9 @@ def ryu_theorem_1_3(k: int) -> int:
 
 def daniel_layers(k: int) -> int:
     """Evan Daniel's c*(k) <= 4 ceil(sqrt(2k - 7)) - 1 for every k >= 7 (RyuLayers)."""
-    return fang_theorem_a.daniel(k)
+    if k < 7:
+        raise ValueError(f"Daniel's bound is stated for k >= 7, not k = {k}")
+    return 4 * fang_theorem_a.ceil_sqrt(2 * k - 7) - 1
 
 
 def ams(k: int) -> int:

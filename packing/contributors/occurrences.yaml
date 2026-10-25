@@ -28463,8 +28463,8 @@ occurrences:
   - bibliography
   contributor_id: kevin-fang
   note: Reviewed 2026-10-25 (think-4tj5) /authors/0 span 0:4, Kevin Fang's Theorem A note
-    and theorem-a/ in TheSnakeFang/squarepack-certs, the repository of his earlier keys, reported
-    on
+    and theorem-a/ in TheSnakeFang/squarepack-certs, the repository of his earlier keys,
+    reported on issue 797 by its owner; the note's byline is Kevin Fang.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Fang Theorem A 2026-10-24]'

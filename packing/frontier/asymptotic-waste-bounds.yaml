@@ -514,9 +514,9 @@ deficiency_upper_bounds:
     complementary_case: >-
       Kevin Fang's later Theorem A (next row), ceil(sqrt(32k)), is smaller at 495,210 of
       7 <= k < 10^6; this row is smaller at 255,215 and keeps the 249,568 ties as the earlier
-      report, and from k = 89 the two never differ by more than 2. T-163 is smaller below 40
-      but at 35, and Ryu's Theorem 1.6 values, his Theorem 1.2 from 1.6*10^7 and his
-      k^{3/8} rows are smaller where they apply. Daniel's own c*(k) < 18.9 k^{2/5} +
+      report, and from k = 89 the two never differ by more than 2. T-163 is smaller at 15 to
+      33 and 36 to 38 and holds the ties at 34 and 39, and Ryu's Theorem 1.6 values, his
+      Theorem 1.2 from 1.6*10^7 and his k^{3/8} rows are smaller where they apply. Daniel's own c*(k) < 18.9 k^{2/5} +
       35.7 k^{1/5} + 122 for k >= 3*10^5, in Lean at 13da782 and smaller from about
       7.4*10^5, is not registered (think-pf37).
     note: >-
@@ -577,7 +577,9 @@ deficiency_upper_bounds:
       346,919 of 42 <= k <= 702,000.
     complementary_case: >-
       Evan Daniel's earlier bound (previous row) is smaller at 255,215 of the k below 10^6
-      and keeps the 249,568 ties as the earlier report; T-163 is smaller below 40; Ryu's
+      and keeps the 249,568 ties as the earlier report; T-163 is smaller at 15 to 39 and
+      keeps the ties at 40 and 41; Ryu's Theorem 1.3 at its best b is smaller at k = 6 to
+      11 and ties at 12 and 13, and his Theorem 1.4 is smaller at 8 and ties at 7; his
       Theorem 1.6 values at 10^5, 10^6 and 10^7, his Theorem 1.2 from 1.6*10^7 and his
       k^{3/8} rows where they apply; and Daniel's unregistered k^{2/5} bound from about
       7.4*10^5 (think-pf37), which a sampled integer check here finds not smaller at

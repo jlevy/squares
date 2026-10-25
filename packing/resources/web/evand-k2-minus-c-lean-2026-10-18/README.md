@@ -159,9 +159,10 @@ and this host had about 13 GB free, shared by four lanes, on 24 October.
   the gates `think-f8py` and `think-fqp6` hold.
 - **Later and related work is not here.** The staircase bound of `13da782` is
   `think-pf37`’s. The junction variant of `search/ryu/junction.py` at `a435c97`, which the
-  source reports lowers $c$ by 1 or 2 at most $k$ from 15 to 400, is a finite set of values
-  checked by the source’s programs and not in Lean; the import declined it (the 21 October
-  `a435c97` read in `packing/campaign/intake-watch.yaml`).
+  source reports lowers $c$ by 1 or 2 at most $k$ from 15 to 400, is a finite table of
+  values checked by the source’s programs, not a statement for every $k$, and moves no
+  count the record tracks; the import declined it (the 21 October `a435c97` read in
+  `packing/campaign/intake-watch.yaml`).
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

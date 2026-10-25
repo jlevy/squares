@@ -64,6 +64,14 @@ def test_the_limiting_angle_itself_gives_no_packing_below_k() -> None:
     at_limit = theorem.construct(20, 7, Fraction(1, 7))
     assert at_limit is not None
     assert at_limit.side == 20
+    # B(k), the note's limit of H(t), is H at t0 = 1/b (review A7 on #801).
+    assert at_limit.lemma_bound == theorem.limit(20, 7)
+    for k in range(6, 400):
+        for b in theorem.odd_widths(k):
+            assert theorem.limit(k, b) == theorem.lemma_bound(k, b, Fraction(1, b)), (k, b)
+    assert theorem.limit(20, 7) != theorem.lemma_bound(
+        20, 7, Fraction(1, 7) + Fraction(1, 10**6)
+    )
     assert theorem.witness(20, 7).side < 20
 
 
@@ -128,8 +136,11 @@ def test_the_comparisons_on_a_short_range() -> None:
     assert found["case_records"]["daniel"]["case_bound_not_below_k"] == []
 
 
-def test_the_retained_comparisons_are_the_notes_counts() -> None:
+def test_the_retained_comparisons_are_what_the_code_computes() -> None:
+    """The register cites the receipt as CHECKED BY COMPUTATION HERE, so the full-range
+    comparisons (about 3 s) are recomputed and held to it, every key (review A3 on #801)."""
     receipt = json.loads((theorem.RECEIPTS / "comparisons.json").read_text(encoding="utf-8"))
+    assert json.loads(json.dumps(theorem.comparisons())) == receipt
     counts = receipt["A_vs_daniel"]
     assert (counts["A_smaller"], counts["tied"], counts["daniel_smaller"]) == (
         495_210,
@@ -137,9 +148,24 @@ def test_the_retained_comparisons_are_the_notes_counts() -> None:
         255_215,
     )
     assert receipt["A_strictly_least_in_window"]["strictly_least"] == 346_919
-    short = theorem.comparisons(3000, (42, 3000))
-    for key in ("A_vs_ryu_theorem_1_3", "A_vs_t163", "daniel_vs_t163", "case_records"):
-        assert receipt[key] == short[key], key
+
+
+def test_the_daniel_tail_starts_at_100_and_not_before() -> None:
+    """sqrt(2k) + sqrt(2k - 7) >= 28 first at k = 100 (review A1 on #801): the check
+    decides the inequality it names, so it fails at 99 and at 70."""
+    assert theorem.daniel_tail_holds(100)
+    assert not theorem.daniel_tail_holds(99)
+    assert not theorem.daniel_tail_holds(70)
+    assert all(theorem.daniel_tail_holds(k) for k in range(100, 2000))
+    for k in range(7, 2000):
+        # The float sum agrees with the exact decision wherever it is not near 28.
+        total = (2 * k) ** 0.5 + (2 * k - 7) ** 0.5
+        if abs(total - 28) > 1e-9:
+            assert theorem.daniel_tail_holds(k) == (total >= 28), k
+    found = theorem.comparisons(3000, (42, 3000))
+    for k in range(100, 3000):
+        assert abs(theorem.theorem_a(k) - (4 * theorem.ceil_sqrt(2 * k - 7) - 1)) <= 2
+    assert found["A_vs_daniel"]["tail_from_100_differs_by_at_most_2"]
 
 
 def test_the_retained_construction_report_covers_the_notes_ranges() -> None:
