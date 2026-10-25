@@ -1,0 +1,41 @@
+n = 268: n268.cert sha256 e9833bf26e1bf7e4... (expected e9833bf26e1bf7e4...: match)
+  header n = 268, squares parsed = 268
+  header side == claimed exact side: True
+  side = 16.8743617158738254790715989714695545671117...; rounded up at 12 places 16.874361715874; claimed print 16.874361715874: match
+  route A (every pair): accepted=True pairs=35778/35778 least gap 2.0963e-13 at squares [101, 223], least wall clearance 1.0000e-15 (square 3), cpu 1.621 s
+  route B (pairs within the discs): accepted=True pairs=668/35778, least wall clearance 1.0000e-15, cpu 0.718 s
+  extent: side - tight side = 2.0000e-15; min x 1.000e-15, min y 1.000e-15
+  control duplicate-square: accepted=False routes_agree=True expected=False -> MET
+  control moved-halfway: accepted=False routes_agree=True expected=False -> MET
+  control sharp-contact-touching: accepted=True routes_agree=True expected=True -> MET
+  control sharp-contact-past: accepted=False routes_agree=True expected=False -> MET
+  control enlarged-square-pair: accepted=False routes_agree=True expected=False -> MET
+  control enlarged-square-wall: accepted=False routes_agree=True expected=False -> MET
+  control box-at-extent: accepted=True routes_agree=True expected=True -> MET
+  control box-below-extent: accepted=False routes_agree=True expected=False -> MET
+  control mirrored-rotations (reported): accepted=False overlapping pairs A=94 B=94
+  parse control header-count-plus-one: refused (header says 269 squares, the text has 268 square lines)
+  parse control decimal-token: refused (not an integer or p/q rational: '10.374361715872345')
+n = 303: n303.cert sha256 39a150f4cce7e435... (expected 39a150f4cce7e435...: match)
+  header n = 303, squares parsed = 303
+  header side == claimed exact side: True
+  side = 17.9069782337989001594257196844962300410891...; rounded up at 12 places 17.906978233799; claimed print 17.906978233799: match
+  route A (every pair): accepted=True pairs=45753/45753 least gap 2.0718e-13 at squares [46, 58], least wall clearance 1.0000e-15 (square 4), cpu 1.902 s
+  route B (pairs within the discs): accepted=True pairs=701/45753, least wall clearance 1.0000e-15, cpu 0.938 s
+  extent: side - tight side = 2.0000e-15; min x 1.000e-15, min y 1.000e-15
+  control duplicate-square: accepted=False routes_agree=True expected=False -> MET
+  control moved-halfway: accepted=False routes_agree=True expected=False -> MET
+  control sharp-contact-touching: accepted=True routes_agree=True expected=True -> MET
+  control sharp-contact-past: accepted=False routes_agree=True expected=False -> MET
+  control enlarged-square-pair: accepted=False routes_agree=True expected=False -> MET
+  control enlarged-square-wall: accepted=False routes_agree=True expected=False -> MET
+  control box-at-extent: accepted=True routes_agree=True expected=True -> MET
+  control box-below-extent: accepted=False routes_agree=True expected=False -> MET
+  control mirrored-rotations (reported): accepted=False overlapping pairs A=106 B=106
+  parse control header-count-plus-one: refused (header says 304 squares, the text has 303 square lines)
+  parse control decimal-token: refused (not an integer or p/q rational: '0.5006365240640259')
+verdict: all positives accepted and all controls met; cpu 34.4 s; receipt resources/web/couzo-issue763-2026-10-23/review/review-2026-10-24/out/second-run/check-certificates.json
+
+real	0m34.774s
+user	0m34.397s
+sys	0m0.097s

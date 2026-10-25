@@ -367,16 +367,17 @@ def test_its_centred_assignment_reproduces_the_t240_review_of_t230_against_t239(
     at 22.29062185443106; the largest move 0.5473247224491699 (anchored
     0.5473306947705245) and the RMS move 0.04950771060143781; squares moved beyond 0.1,
     1e-2, 1e-3, 1e-6 and 1e-9: 12, 31, 72, 303 and 303 (anchored 12, 31, 72, 266 and 266);
-    16 squares turned beyond a degree and none reversed; nearest centres one to one."""
+    16 squares turned beyond a degree and none reversed; nearest centres one to one.
+
+    The review read T-239 from the house witness at 303, which held it then; the house
+    there is T-240 from 25 October 2026, so T-239 is read from its own packet,
+    amundsk-n303-2026-10-23, whose declared facts the witness copied square for square."""
     t230 = identity.read_packing(
         "T-230=evand-cert:"
         + str(WEB / "evand-n303-2026-10-22/source/search/packer/candidates/s303_r303w0.cert"),
         303,
     )
-    t239 = identity.read_packing(
-        "T-239=witness-center-basis:" + str(reports.ROOT / "witnesses/known-best/n-303.yaml"),
-        303,
-    )
+    t239 = identity.read_packing("T-239=packet:amundsk-n303-2026-10-23", 303)
     pair = identity.compare(t230, t239)
     centred = pair["centred"]
     assert (centred["symmetry"], centred["total_squared"]) == (0, "0.742657")

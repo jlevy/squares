@@ -10157,6 +10157,38 @@ sources:
     (think-f2io). The three later commits, 34e59f3, c0bf150 and 7e82c64, change only counts in
     the corpus and are not recorded (receipts/later-commits.json).
   claims_record: resources/web/mishapolk-issue732-f1ceee4-2026-10-23/acquisition/beyond-horizon-rows.json
+- id: couzo-issue763-2026-10-23-in-corpus
+  title: Francisco Couzo's certificates of issue 763 at 964ee2bd, n268 and n303
+  role: source-repository
+  url: https://github.com/franciscouzo/square-packing/tree/964ee2bdf301d0c8912d956d4010f478dcbbd5ea
+  local: resources/web/couzo-issue763-2026-10-23/
+  source_key: '[Couzo issue 763 2026-10-23]'
+  scope:
+    n_values: [268, 303]
+  reviewed: '2026-10-24'
+  source_date: '2026-10-23'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/couzo-issue763-2026-10-23/acquisition/claims.json
+  - resources/web/couzo-issue763-2026-10-23/README.md
+  evidence:
+  - E-couzo-763-certificate-report
+  - E-couzo-763-exact-feasibility
+  - E-couzo-763-review-exact-feasibility
+  notes: >-
+    The two in-corpus certificates of issue 763, at 268 and 303, retained as the source wrote
+    them and admitted where their exact sides round up to the prints; T-240 records them at
+    V3/C3 on the review of 24 October
+    (docs/project/reviews/review-2026-10-24-couzo-n268-n303.md). They are a source entry of
+    their own because the release's claims record, which the rows of
+    couzo-issue763-2026-10-23 beyond the corpus are read against, holds the claims beyond the
+    corpus only. The cases at 268 and 303 adopt these certificates in the pass of 25 October
+    2026, from T-174 and T-239, the selected overrides below: at 268 Francisco Couzo's
+    refinement of Kirill Tymchishin's Kaggle notebook packing, and at 303 his refinement of
+    his own refinement of Vladislav Lavrentev's Kaggle notebook packing, as the source's
+    manifest credits them.
 - id: couzo-issue763-2026-10-23
   title: Francisco Couzo's certificates of issue 763 at 964ee2bd, at or below 1024
   role: source-repository
@@ -10165,8 +10197,6 @@ sources:
   source_key: '[Couzo issue 763 2026-10-23]'
   scope:
     n_values:
-    - 268
-    - 303
     - 333
     - 334
     - 343
@@ -10385,7 +10415,8 @@ sources:
     reproduces the issue's 436, 203 at or below 1024 and 233 above (receipts/claim-map.json).
     The two in-corpus certificates, at 268 and 303, are retained as the source wrote them and
     admitted where their exact sides round up to the prints; the register records them, and all
-    6 native jobs have full outcomes. The ledger of 24 October for issue 763
+    6 native jobs have full outcomes; they are the entry couzo-issue763-2026-10-23-in-corpus
+    since T-240's adoption. The ledger of 24 October for issue 763
     (campaign/issue-intake/upper-bounds-issue763-20261024), every count to 1024 walked in report
     order from starts frozen at main e5c1c64e3 with Göbel's construction beside each row,
     records 198 of the 201 claims at 325 to 1024: 184 certificates and 13 L-border recipes are
@@ -11666,11 +11697,11 @@ selected_overrides:
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
     a replay here and an accepted review, adopted on 2026-10-11 (T-134).
 - n: 268
-  source_id: pingyou-pr574-certificates-2026-10-13
-  value: '16.8788148210067647246'
-  evidence: E-pingyou-574-certificate-report
+  source_id: couzo-issue763-2026-10-23-in-corpus
+  value: '16.8743617158738255'
+  evidence: E-couzo-763-certificate-report
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
-    a replay here and an accepted review, adopted on 2026-10-17 (T-174).
+    a replay here and an accepted review, adopted on 2026-10-25 (T-240).
 - n: 269
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '16.901513582189132199'
@@ -11732,11 +11763,11 @@ selected_overrides:
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
     a replay here and an accepted review, adopted on 2026-10-23 (T-193).
 - n: 303
-  source_id: amundsk-n303-2026-10-23
-  value: '17.9097623274752568'
-  evidence: E-amundsk-755-n303-report
+  source_id: couzo-issue763-2026-10-23-in-corpus
+  value: '17.9069782337989002'
+  evidence: E-couzo-763-certificate-report
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
-    a replay here and an accepted review, adopted on 2026-10-24 (T-239).
+    a replay here and an accepted review, adopted on 2026-10-25 (T-240).
 - n: 304
   source_id: mishapolk-kkt-refinements-2026-10-14
   value: '17.92942775807517497'
@@ -12716,14 +12747,14 @@ superseded_reports:
 - n: 268
   source_id: casson-square-packing-2026
   value: '16.87895510935973675'
-  superseded_by: pingyou-pr574-certificates-2026-10-13
+  superseded_by: couzo-issue763-2026-10-23-in-corpus
   reason: Larger than Francisco Couzo's side at this count; the case record states both sources' dates
     and values; since 2026-10-05 the selected report is Evan Daniel's exact optimum of that packing
     (T-098).
 - n: 268
   source_id: franciscouzo-square-packing-2026
   value: '16.878814821018413'
-  superseded_by: pingyou-pr574-certificates-2026-10-13
+  superseded_by: couzo-issue763-2026-10-23-in-corpus
   reason: Superseded on 2026-10-05 by Evan Daniel's exact optimum of the same packing, certified here
     (T-098).
 - n: 269
@@ -12902,17 +12933,17 @@ superseded_reports:
 - n: 303
   source_id: casson-square-packing-2026
   value: '17.93105636462953001'
-  superseded_by: amundsk-n303-2026-10-23
+  superseded_by: couzo-issue763-2026-10-23-in-corpus
   reason: The SQUISH reported new packing is smaller than this retained earlier claim.
 - n: 303
   source_id: franciscouzo-square-packing-2026
   value: '17.924349265547932'
-  superseded_by: amundsk-n303-2026-10-23
+  superseded_by: couzo-issue763-2026-10-23-in-corpus
   reason: The SQUISH reported new packing is smaller than this retained earlier claim.
 - n: 303
   source_id: franciscouzo-square-packing-2026-10-03
   value: '17.924341009860250'
-  superseded_by: amundsk-n303-2026-10-23
+  superseded_by: couzo-issue763-2026-10-23-in-corpus
   reason: The SQUISH reported new packing is smaller than this retained earlier claim.
 - n: 304
   source_id: casson-square-packing-2026
@@ -13010,7 +13041,7 @@ superseded_reports:
 - n: 303
   source_id: evand-square-packing-2026-10-05
   value: '17.924341009851128373110514612828'
-  superseded_by: amundsk-n303-2026-10-23
+  superseded_by: couzo-issue763-2026-10-23-in-corpus
   reason: The SQUISH reported new packing is smaller than this retained earlier claim.
 - n: 88
   source_id: kingbird-current
@@ -13471,9 +13502,9 @@ superseded_reports:
 - n: 303
   source_id: squish-ten-packings-2026-10-07
   value: '17.9203123729203498'
-  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-239's exact
+  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-240's exact
     side is smaller.
-  superseded_by: amundsk-n303-2026-10-23
+  superseded_by: couzo-issue763-2026-10-23-in-corpus
 - n: 305
   source_id: evand-square-packing-2026-10-05
   value: '17.952959459015527962875662582531'
@@ -13682,8 +13713,8 @@ superseded_reports:
   source_id: evand-regularized-2026-10-10
   value: '17.9130654627385324'
   reason: The house from 2026-10-11 until 2026-10-15; its certificate stays retained and verified,
-    and T-239's exact side is smaller.
-  superseded_by: amundsk-n303-2026-10-23
+    and T-240's exact side is smaller.
+  superseded_by: couzo-issue763-2026-10-23-in-corpus
 - n: 129
   source_id: dostashev-compositions-2026-10-12
   value: '11.8700138504044644'
@@ -13766,8 +13797,8 @@ superseded_reports:
   source_id: dostashev-compositions-2026-10-12
   value: '17.9099582910699080'
   reason: The house from 2026-10-15 until 2026-10-16; its certificate stays retained and verified,
-    and T-239's exact side is smaller.
-  superseded_by: amundsk-n303-2026-10-23
+    and T-240's exact side is smaller.
+  superseded_by: couzo-issue763-2026-10-23-in-corpus
 - n: 304
   source_id: dostashev-merged-bands-2026-10-13
   value: '17.9294277580751750'
@@ -13939,9 +13970,9 @@ superseded_reports:
 - n: 268
   source_id: evand-square-packing-2026-10-05
   value: '16.878814821006764724747121053018'
-  reason: The house until 2026-10-17; its certificate stays retained and verified, and T-174's exact
+  reason: The house until 2026-10-17; its certificate stays retained and verified, and T-240's exact
     side is smaller.
-  superseded_by: pingyou-pr574-certificates-2026-10-13
+  superseded_by: couzo-issue763-2026-10-23-in-corpus
 - n: 269
   source_id: evand-regularized-2026-10-10
   value: '16.9015135821891322'
@@ -14084,8 +14115,8 @@ superseded_reports:
   source_id: mishapolk-kkt-refinements-2026-10-14
   value: '17.90995829106990799'
   reason: The house from 2026-10-16 until 2026-10-23; its certificate stays retained and verified,
-    and T-239's exact side is smaller.
-  superseded_by: amundsk-n303-2026-10-23
+    and T-240's exact side is smaller.
+  superseded_by: couzo-issue763-2026-10-23-in-corpus
 - n: 70
   source_id: evand-regularized-2026-10-10
   value: '8.8809603715555796'
@@ -14150,8 +14181,20 @@ superseded_reports:
   source_id: evand-n303-2026-10-22
   value: '17.9097722172743278'
   reason: The house from 2026-10-23 until 2026-10-24; its certificate stays retained and verified,
-    and T-239's exact side is smaller.
-  superseded_by: amundsk-n303-2026-10-23
+    and T-240's exact side is smaller.
+  superseded_by: couzo-issue763-2026-10-23-in-corpus
+- n: 268
+  source_id: pingyou-pr574-certificates-2026-10-13
+  value: '16.8788148210067647246'
+  reason: The house from 2026-10-17 until 2026-10-25; its certificate stays retained and verified,
+    and T-240's exact side is smaller.
+  superseded_by: couzo-issue763-2026-10-23-in-corpus
+- n: 303
+  source_id: amundsk-n303-2026-10-23
+  value: '17.9097623274752568'
+  reason: The house from 2026-10-24 until 2026-10-25; its certificate stays retained and verified,
+    and T-240's exact side is smaller.
+  superseded_by: couzo-issue763-2026-10-23-in-corpus
 beyond_horizon_claims:
 - n: 327
   source_id: couzo-extended-range-reports-2026-10-08

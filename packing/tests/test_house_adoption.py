@@ -170,11 +170,12 @@ MOVED_AGAIN = {
 #: of 24 October 2026 to the release's lower 204 file, the same packing at its solved side
 #: (T-231); the pass of 23 October took 303 from T-186 to Evan Daniel's issue-728
 #: certificate (T-230), which that of 24 October 2026 moved to Amund Kristiansen's
-#: issue-755 certificate (T-239).
+#: issue-755 certificate (T-239) and that of 25 October 2026 to Francisco Couzo's issue-763
+#: certificate (T-240).
 MOVED_LATER = {
     271: ("T-219", "2026-10-19"),
     204: ("T-231", "2026-10-24"),
-    303: ("T-239", "2026-10-24"),
+    303: ("T-240", "2026-10-25"),
 }
 
 #: Issue 639's exact algebraic sides (T-193), the smallest at all sixteen of its counts
@@ -236,8 +237,10 @@ def test_the_records_of_the_lifted_hold_keep_their_next_candidates_until_adopted
     # 46 since the adoption of 21 October 2026 moved 270 to his issue-703 one (T-224), and
     # 45 since the adoption of 23 October 2026 moved 105 to issue 719's re-solve (T-229);
     # 40 since the same pass moved 102, 123, 258, 259 and 295 to issue 639's exact forms
-    # (T-193), below T-174's sides there, once the writer wrote an algebraic side.
-    assert len(held_counts) == 40
+    # (T-193), below T-174's sides there, once the writer wrote an algebraic side; 39
+    # since the adoption of 25 October 2026 moved 268 to Francisco Couzo's issue-763
+    # certificate (T-240), below T-174's side there.
+    assert len(held_counts) == 39
     previous_t174 = {n for n in previous if houses.ADOPTED[n] == "T-174"}
     # T-193's adopted counts below T-174's held sides left the hold with their adoption.
     t193 = {n for n, house in ALGEBRAIC_ADOPTED.items() if house == "T-193"}
@@ -249,6 +252,7 @@ def test_the_records_of_the_lifted_hold_keep_their_next_candidates_until_adopted
         29: "T-195",
         105: "T-229",
         155: "T-197",
+        268: "T-240",
         270: "T-224",
         308: "T-221",
     }
@@ -1577,8 +1581,9 @@ def test_the_staged_adoptions_name_their_beads_and_reasons() -> None:
     The adoption of 17 October 2026 (think-3mry) took 37 rational counts off; twelve
     others are staged for T-193, the adoption of 19 October 2026 took 236 to issue 659's
     certificate and 155 to issue 669's, the adoption of 20 October 2026 took 308 to issue
-    689's, the adoption of 21 October 2026 took 270 to issue 703's, and the adoption of 23
-    October 2026 took 105 to issue 719's."""
+    689's, the adoption of 21 October 2026 took 270 to issue 703's, the adoption of 23
+    October 2026 took 105 to issue 719's, and the adoption of 25 October 2026 took 268 to
+    issue 763's."""
     for n, pending in select.PENDING_ADOPTION.items():
         assert pending.why in select.STAGING_REASONS, n
         algebraic = pending.house == "T-193"
@@ -1592,7 +1597,7 @@ def test_the_staged_adoptions_name_their_beads_and_reasons() -> None:
     assert adopted == {
         n for n in houses.LATER_PASSES["2026-10-17"] if houses.ADOPTED[n] == "T-174"
     }
-    assert len(adopted) == 33
+    assert len(adopted) == 32
     assert not adopted & set(select.PENDING_ADOPTION)
     # The pass of 23 October 2026 took the writer's twelve off once it wrote an algebraic
     # side, at the nine counts a derived number-field fact holds (think-ot5c).
@@ -1660,11 +1665,13 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
     # certificate (T-230) and the nine algebraic houses to T-174 and T-193
     # (`ALGEBRAIC_ADOPTED`, think-ot5c), and the adoption of 24 October 2026 moved 204 to
     # the release's lower 204 file (T-231) and 303 again, to Amund Kristiansen's issue-755
-    # certificate (T-239), after this receipt was retained.
+    # certificate (T-239), and the adoption of 25 October 2026 moved 268 and 303 to
+    # Francisco Couzo's issue-763 certificates (T-240), after this receipt was retained.
     later = {
         **ALGEBRAIC_ADOPTED,
         105: "T-229",
-        303: "T-239",
+        268: "T-240",
+        303: "T-240",
         155: "T-197",
         183: "T-220",
         229: "T-225",
@@ -1684,6 +1691,7 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
         155: "T-174",
         204: "T-186",
         236: "T-146",
+        268: "T-174",
         271: "T-186",
         303: "T-186",
         308: "T-174",
@@ -1705,7 +1713,7 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
     assert {n: houses.ADOPTED[n] for n in later} == later
     assert historical["houses"] == {str(n): result for n, result in before.items() if n != 29}
     assert {int(n) for n, result in historical["houses"].items() if result == "T-174"} == (
-        set(houses.numbers_of("T-174")) - {70, 153, 207} | {105, 155, 270, 308}
+        set(houses.numbers_of("T-174")) - {70, 153, 207} | {105, 155, 268, 270, 308}
     )
 
 
