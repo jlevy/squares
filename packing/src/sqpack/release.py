@@ -8980,7 +8980,10 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "3e1349802 (#801), at link revision 1881510f with that main's eleven candidate "
             "inputs, regularized_drawings.py among them, swapped in: twice from this tree "
             "and once swapped, 69 files each, all byte-identical across the three, by the "
-            "same browser. Retain v0.4.27, v0.1.11, v0.1.4 and v0.2.7."
+            "same browser. After the merge of main 4089f9587 (#800) and the import reply of "
+            "25 October recorded on #763, at link revision 37f9fc79 with that main's eleven "
+            "candidate inputs swapped in: the same outcome. Retain v0.4.27, v0.1.11, v0.1.4 "
+            "and v0.2.7."
         ),
     ),
 )
