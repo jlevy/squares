@@ -5,7 +5,7 @@ title: Independent audit of durable pytest phase timing continuation
 kind: task
 status: in_progress
 priority: 2
-version: 5
+version: 6
 spec_path: docs/project/specs/active/plan-2026-09-06-validation-efficiency-and-checkpoints.md
 delegate: codex-phase-auditor-20261022-01a14e4c
 labels: []
@@ -14,7 +14,7 @@ parent_id: is-01m1w0r4wr8dbry9hazjg0y4nk
 hold: null
 hold_until: null
 created_at: 2026-10-22T09:24:50.872Z
-updated_at: 2026-10-25T05:39:03.802Z
+updated_at: 2026-10-25T06:09:52.492Z
 started_at: 2026-10-22T09:25:04.958Z
 ---
 Independently audit think-uhxt's current-main continuation on codex/phase-timings-20261022, Session188. Review actual completed-phase durations, current plugin capability/origin admission, worker failure and hard-termination evidence, same-run JUnit/phase correspondence, retained v2 experiment semantics and bounded whole-CLI overhead, OR16/OR18 compliance, all final source and source-bound validation evidence. Keep old v1 producer observations and failed gates separate. Do not author implementation, run concurrent project compute, modify tracker state or publish. Coordinator owns compute, integration, all tracker writes and external updates. User window2026-10-22T09:05:03Z to14:05:03Z, final30minutes reserved; unchanged4GiB/no swap/two CPUs/one workload. Reviewer uses explicit GPT-6 Astra/xhigh. Independent acceptance is required before submission; pending CI remains pending.
@@ -35,3 +35,6 @@ Current independent reviewer: GPT-6.1 Sol / xhigh, read-only source and evidence
 
 2026-10-25 draft PR809 checkpoint:
 Draft https://github.com/jlevy/squares/pull/809, branch codex/phase-timings-20261025, head80e6fd6057617b9799d0764f04401276b3d9c137, basebb756e1935b4d6280bb41877e8c829a8e4c0e9e3, S2. Independently reviewed exact source and actual hooks;158 direct tests and69/69 EDIT steps (108 commands), then53/53 RECORDS steps (64 commands) passed under unchanged local limits. The immutable data archive was published, served-byte verified, freshly fetched and replayed successfully. Actual ordinary run40165439909, Pages40165439940 and dispatched deferred40165460033 target qualification merge dcf948fd48a381209f762dd677c7bbca0d5a9b21; final acceptance is still pending. Historical Session188 failure/certification debt is unchanged, so think-uhxt remains open. No auto-merge or automatic continuation is authorized. Protected closeout06:10UTC; hard stop06:40UTC.
+
+2026-10-25 terminal-source qualification checkpoint:
+Draft PR809 now contains independently audited terminal source36edb5755bba603f6483c27257ea0ea0e6d83f29 on basebb756e1935b4d6280bb41877e8c829a8e4c0e9e3. Actual merge6bcc8a3498338114ed362f3d7c4a89a314a7cba5 has exactly the same tree3d248657de5a2883415322c2195091618fc3896c. Actual earlier merge dcf948fd48a381209f762dd677c7bbca0d5a9b21 passed ordinary40165439909,Pages40165439940 and complete deferred40165460033; all27 successful checkout logs independently agree. The seven-path terminal delta passed53/53 RECORDS steps and64/64 child commands,zero skips,156.48s; actual hooks preserved every reviewed byte and normal push was verified. Its first51/53 record failure is retained; only the stale selected-bead destructive-control anchor and prose inside a CLI declaration were repaired, with no weakened checks. Final ordinary40167930966,Pages40167930988 and explicit complete deferred40167938834 are running; current terminal acceptance is pending. Keep Draft/S2 until actual current-source outcomes and independent final audit. Historical Session188 remains stopped/uncertified, so think-uhxt remains open regardless of this engineering PR outcome. The final pending-decision checkpoint is06:28UTC, retaining12minutes for bounded fallback validation and handoff before the user's06:40UTC hard stop. No auto-merge or automatic continuation is authorized.
