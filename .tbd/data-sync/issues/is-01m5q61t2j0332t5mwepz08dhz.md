@@ -5,7 +5,7 @@ title: "Stage 4: review T-241 (Couzo's 304) and T-242 (Daniel's 268 and 304), th
 kind: task
 status: in_progress
 priority: 2
-version: 9
+version: 10
 delegate: c-map-hx0e-1024
 labels:
   - result-import
@@ -19,7 +19,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-24T14:46:47.122Z
-updated_at: 2026-10-25T02:32:57.162Z
+updated_at: 2026-10-25T03:21:13.971Z
 started_at: 2026-10-24T21:11:59.708Z
 ---
 Stage 4 of the think-l49q import (PR #792, records lane c-import-l49q-1024). T-241 registers Francisco Couzo's certificates/best/n304.cert at franciscouzo/square-packing@fa6237e (Kirill Tymchishin's Kaggle packing, 2.53e-3 below T-186) and T-242 Evan Daniel's exact descents at evand/square-packing@8a8879a (268, 4.48e-12 below T-240, another placement of #763's arrangement; 304, 3.04e-9 below T-241, T-241's packing descended), both at V0/C0, drafts S3 and S2.
@@ -71,3 +71,7 @@ HOSTED at c9ae6f746: Packing validation 40151925943 (packing-required pass), Cer
 2026-10-25 coord-intake-1024: H1 is PR https://github.com/jlevy/squares/pull/803 at c9ae6f746 (CI green: 40151925943, 40151926001). T-241/T-242 V3/C3; M-1 credits; think-o4m0 (364 aqibrazadev, 450/874 kyleluecke alone); T-242 the house at 304 (25 Oct); 268 staged in select_houses.PENDING_ADOPTION under think-hx0e for H2 (think-3anz), so think-hx0e stays open until H2 merges. #763 reply recorded, #794's News landed. Only C2 (Chaoweeraprasit vs Ostashev) still to ask Couzo; D1/D2 for Daniel in these notes. Senior review A: c-rev-803-1024 (think-101k).
 
 2026-10-25 c-map-hx0e-1024, review A round (https://github.com/jlevy/squares/pull/803#issuecomment-6392411606): A1 awaiting_author items for Q7 and Q1 on #763, and T-241's claim, the couzo-n304 packet, coverage and the report declaration reworded to "drafted for the next #763 reply"; D1/D2 held here unposted. A2 T-242's stale claim and rationale. A3 a per-item `credit` on regularizations (results.schema.yaml; regularized_drawings.item_credit narrows the key's credit and refuses an added name): the 304 item reads "Daniel after Tymchishin". A4 182 -> "differ in all 182, another person in 178", and 964ee2b's 11 of 202 (794, 910). A5 the index's "earlier seed and construction credits retained in provenance" quoted; walk regenerated. A6 PENDING_ADOPTION[268] -> think-3anz. A7 declined here (pre-existing template, 56 sentences in 46 records): bead think-tfdn under think-ezt8. A8 "on or after 26 October". A9 874 named in C1 above. A10 "relative padding".
+
+
+
+2026-10-25 c-map-hx0e-1024, after review A: main merged twice (#801 3e1349802 at 1881510f7; #800 4089f9587 at 4b6f4bd27, both sides kept; #800's 43f666c walk reads no notebook row at 364, 450 or 874, so think-o4m0's three rows stay current; it supersedes 46 others, 377 and 405 among them). The coordinator's import reply on #763 (issuecomment-6392829915) is recorded (kind import; reports 43f666c-rows-325-1024 and recipes-325-1024). It asks C2 as its question 6 and the 304 finder as its question 5, so C2 is no longer to ask; only D1 and D2 (Daniel) stay drafted and unposted here. awaiting_author on #763 now: confirmation reply Q7 and Q1; import reply Q3 (377 credit), Q5 (304 finder), Q6 (Chaoweeraprasit vs Ostashev), all changes credit. Q1 (scope) and Q4 (expansions, which agree exactly) informational; Q2 (new packing or tighter certificate at 18 counts) settled by measurement: think-0tdd under think-ezt8. recipes-325-1024 settled (no bead), so think-g2qy is not a deferral (simulated closed: no bead-tree problem).
