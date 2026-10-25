@@ -33732,10 +33732,11 @@ results:
       placement re-solved, not this packing re-solved (RF-3, RF-6), so the credit of the
       house at 268 follows the placement adopted.
 
-      The manifest's top-level previous_source at each count is the retained parent, the
-      packing each search refined (the packet's certificates/parents/); the source's previous
-      record, PingYou Ltd's certificate at 268 and Evan Daniel's T-230 at 303, is that
-      parent's own previous_source (RF-2).
+      At 268 and 303 the manifest's top-level previous_source, the record the source held
+      before, is the retained parent, the packing each search refined (the packet's
+      certificates/parents/); the source's previous record before that, PingYou Ltd's
+      certificate at 268 and Evan Daniel's T-230 at 303, is that parent's own previous_source
+      (RF-2).
 
       At 303 the live
       record's predecessor, 17.906978233798913 from a browser search, and the steps from

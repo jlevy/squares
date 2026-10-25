@@ -254,10 +254,11 @@ credits Couzo at every row, after the packing each search started from:
 - **85 rows credited to Couzo alone** (7 of the 184) keep the chain of the row or
   certificate they build on.
 
-The manifest’s top-level `previous_source` at 268 and 303 is the retained parent, the
-packing each search refined (`certificates/parents/85dbd707…` and `22f07a7c…`); the
-source’s previous record, PingYou Ltd’s `733f7a5d…` at 268 and Daniel’s `929c2acf…` (T-230)
-at 303, is that parent’s own `previous_source` (RF-2 of the 24 October review). The stage 4
+The manifest’s top-level `previous_source` at 268 and 303, the record the source held
+before, is the retained parent, the packing each search refined
+(`certificates/parents/85dbd707…` and `22f07a7c…`); the source’s previous record before
+that, PingYou Ltd’s `733f7a5d…` at 268 and Daniel’s `929c2acf…` (T-230) at 303, is that
+parent’s own `previous_source` (RF-2 of the 24 October review). The stage 4
 review measured the identity (below). The issue says the notebooks’ own source notices carry their earlier construction
 credits; the source does not publish them, so they are asked of the author. The bibliography
 key is `[Couzo issue 763 2026-10-23]`, credit “Couzo after Lavrentev, Tymchishin, Muglich,
