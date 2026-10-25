@@ -427,7 +427,7 @@ hypothesis status and summarizes experiment verdicts, and the
 | --- | ---: | --- |
 | Agendas | 43 | 20 active; 16 completed; 6 paused; 1 superseded |
 | Commitments | 443 | 233 complete; 65 stopped; 72 blocked; 31 ready; 22 tentative; 20 in progress |
-| Sessions | 186 | 105 completed; 81 stopped; all terminal |
+| Sessions | 187 | 105 completed; 82 stopped; all terminal |
 | Explorations | 50 | 30 linked to proposed hypotheses; 20 uncodified |
 | Hypotheses | 283 | 74 confirmed; 48 refuted; 75 blocked; 24 unresolved; 20 open; 37 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
 | Experiments | 246 | 94 accepted; 53 rejected; 63 unresolved; 12 baseline; 18 blocked; 5 abandoned; 0 in progress; 1 exhausted |
@@ -6567,6 +6567,7 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session184-through-20261007T165726Z.yaml` | session-184 | 6,609 | 39.2 h | 9.81 h | 9.81 h | yes |
 | `codex-task-tree-session185-final-checkpoint.yaml` | session-185 | 2,405 | 14.34 h | 3.78 h | 3.78 h | yes |
 | `codex-task-tree-session186-final-checkpoint.yaml` | session-186 | 4,425 | 21.42 h | 5.83 h | 5.83 h | yes |
+| `codex-task-tree-session188-checkpoint.yaml` | session-188 | 683 | 3.44 h | 1.65 h | 1.65 h | yes |
 | `session-142-stack-correctness.yaml` | session-142 | 1,186 | 5.01 h | 2.29 h | 2.3 h | yes |
 | `session-162-codex-task-tree.yaml` | session-162 | 434 | 1.57 h | 0.64 h | 0.64 h | yes |
 | `session-163-codex-task-tree.yaml` | session-163 | 763 | 4.27 h | 2.53 h | 2.63 h | yes |
@@ -6584,9 +6585,9 @@ in separate tables: their units differ, and the same work can appear in both.
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 130 |
+| measured | 131 |
 | unmeasured | 56 |
-| **total** | **186** |
+| **total** | **187** |
 
 <!-- END GENERATED: session-close-report -->
 

@@ -215,18 +215,72 @@ Emit a readable slowest-work summary and retain machine-readable records with th
 artifacts or experiment receipt.
 Record timing coverage so missing units cannot look measured.
 
-Session 188 continues `think-uhxt` by extending the existing progress writer and
-timing/report tools with completed pytest phase records that survive process
-termination. The [development guide](../../../../development.md#performance-work)
-describes native artifact capture, the standalone `--phase-timings` option and the fixed
-`phase-overhead-v2` comparison.
-Its six whole-CLI observations must preserve the selected case identities and outcomes,
-complete enabled-phase coverage and same-run JUnit totals, with median overhead at most
-5 percent and 3 seconds.
-Current-source control, target and integration evidence remain outstanding; no
-performance result is claimed here.
-Session 187’s measurements retain their original source and protocol, and Phase 2’s
-historical closeout evidence remains separate.
+### Session 188: completed pytest phase timing overhead, 2026-10-22
+
+One prospective `phase-overhead-v2` comparison ran on clean source
+`ed63f11c46daea340eed3c03840e2acd9bdb5110`, using Python 3.14.7, pytest 9.1.1, xdist
+3.8.0 and execnet 2.1.2 on Linux/WSL2. Each observation used two pytest workers, one
+inner worker and one native thread.
+The external supervisor enforced 4 GiB hard memory, 3686 MiB memory-high, no swap, two
+visible CPUs and one owned workload; cleanup was confirmed.
+The fixed budgets were 30 seconds for pytest, 45 seconds for each complete timing CLI
+and 300 seconds for supervised capture.
+
+All six whole-CLI wall observations are retained in their declared order:
+
+| Observation | Phase timing | Wall seconds | Completed phase rows | Original journal bytes |
+| --- | --- | ---: | ---: | ---: |
+| 0 | off | 1.772984138 | 0 | 0 |
+| 1 | on | 1.124989778 | 3,000 | 2,793,709 |
+| 2 | on | 1.172201634 | 3,000 | 2,793,761 |
+| 3 | off | 1.086268589 | 0 | 0 |
+| 4 | off | 1.088027226 | 0 | 0 |
+| 5 | on | 1.140533240 | 3,000 | 2,793,779 |
+
+The off median was **1.088027226 seconds**, range 1.086268589–1.772984138; the on median
+was **1.140533240 seconds**, range 1.124989778–1.172201634. The ratio of medians was
+**1.048257996441**, with **0.052506014 seconds** added.
+Both preregistered caps pass: ratio ≤ 1.05 and added median ≤ 3 seconds.
+The ratio is close to its threshold.
+The first off observation is longer than the other five; its cause was not isolated.
+No sample was discarded, warmed away, retried or replaced.
+
+Every observation selected the same 1,000 successful cases.
+Each on observation retained exactly 3,000 completed setup/call/teardown records whose
+per-case sums matched that observation’s own JUnit within 0.001 seconds.
+Live capture checked source/module origin, clean Git state, complete current input
+bytes, runtime versions and the fixed fixture before and after observations.
+Pre-target focused qualification passed **158 tests, zero skips**, including real
+pytest/recorder hard kills, worker death/startup failure and nonzero-exit preservation.
+Separate mutation controls rejected source/fixture drift, substituted run/artifact
+identities, symlinked output, incomplete censuses and invalid JUnit/phase durations.
+Completed phases survive; unfinished durations are not invented.
+
+This is an exploratory, near-threshold cost screen for the recorded fixture and regime,
+not a CI speedup or statistical confirmation of a general overhead bound.
+It compares uninstrumented pytest with full phase instrumentation; it does not isolate
+the incremental duration cost of native validation, which already emits phase progress.
+Complete contribution gates and hosted acceptance are not established by this
+measurement. An earlier unchanged-source type-check diagnostic remains a retained
+failure; later unchanged-source follow-ups passed, with cause and recurrence unresolved
+and no permanent checker fix claimed.
+
+The prepared
+[hosted-data manifest](../../../../packing/hosted/pytest-phase-overhead-v2-20261022.yaml)
+names the separate public evidence archive.
+Publication and served-byte verification are reported separately in the contribution
+review; this local preparation does not claim them.
+Original unredacted bytes stay private.
+The archive’s `REDACTION.md` describes the six hostname substitutions and consistent
+source/output-path mappings.
+The maintained reader has replayed the exact redacted copy: all timings, case outcomes,
+phase counts and the source commit agree with the originals.
+Its rederived journal byte counts are [0, 2793691, 2793743, 0, 0, 2793761]; these
+describe the served copy, not the bytes originally captured in the table above.
+No private coordinator records, caches or pytest temporary directories enter the
+archive.
+
+Session 187 retains its original source/protocol and uncertified historical closeout.
 
 Register each candidate’s criterion before timing it.
 Exploratory comparisons use at least three runs per condition, interleaved order,
