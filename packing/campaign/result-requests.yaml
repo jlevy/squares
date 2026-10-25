@@ -23798,11 +23798,15 @@ issues:
         packing, 1.91e-11 below this one) and 20.822875655538 at 412 (1.25e-9 below), so by the
         report-order rule neither is recorded. The packet retains both certificates and
         compares them in its claim record (acquisition/claims.json); they are not replayed.
+        think-gn29 imports 43f666c's rows at both counts; should it close without them, the
+        two counts are reopened here.
       queued: false
+      bead: think-gn29
     beads:
     - think-2l0q
     answer_bead: think-2l0q
     replies: []
     close_when: >-
       The twelve rows are recorded in report order with their replay, 372 and 412 have their
-      disposition, and the reply on main says so; nothing the author asked for is queued.
+      disposition with 43f666c's rows there on main (think-gn29), and the reply on main says
+      so; nothing the author asked for is queued.

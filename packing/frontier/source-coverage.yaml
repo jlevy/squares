@@ -11186,9 +11186,10 @@ sources:
     refuse their duplicate-square and outside-container controls
     (receipts/exact-certification.json.xz), the sharp controls at exact contact and
     1e-30 past it are as expected on both (receipts/sharp-controls-nNNN.json), and every side
-    is below Göbel's construction. The issue says each packing was found from Couzo's 964ee2b
-    packing at the count and credits it as issue 763 does, which the packet's identity
-    measurements support (measure/identity-nNNN.json). Claude assistance disclosed.
+    is below Göbel's construction. The issue says each packing was found from the packing at
+    the count in Couzo's 964ee2b index and credits it as that index does; the packet's
+    identity measurements support this (measure/identity-nNNN.json), except at 376, where
+    the packing lies nearer 43f666c's and the author is asked. Claude assistance disclosed.
   claims_record: resources/web/amundsk-issue798-2026-10-24/acquisition/beyond-horizon-claims.json
 selected_overrides:
 - n: 29

@@ -3375,9 +3375,9 @@ sources:
     short_credit: Kristiansen after Couzo et al.
     note: 'Fourteen exact dilation certificates in the gist amundsk/e4df936fb09c68446598d4c8309d0166 at
       c9be7b70e2220c2eccb2c5ea746094bc85dda405, beyond the case corpus at 334, 338, 343, 372, 376, 377, 379,
-      382, 412, 416, 457, 458, 502 and 504, each found from Francisco Couzo''s 964ee2b packing at the count
-      (#763), which the issue names as the start, credited as #763 credits it, with Evan Daniel''s fq quench
-      or basin explorer, dilate_cert.py and checkers. Twelve are beyond-horizon rows; 372 and 412, refinements
+      382, 412, 416, 457, 458, 502 and 504, each, the issue says, found from the packing at the count in
+      Francisco Couzo''s 964ee2b index (#763) and credited as that index credits it, with Evan Daniel''s fq
+      quench or basin explorer, dilate_cert.py and checkers. Twelve are beyond-horizon rows; 372 and 412, refinements
       of 964ee2b''s packings, are above Couzo''s 43f666c and are not recorded. Retained under the author''s
       CC0 1.0 dedication (#755, issuecomment-6388401978). Claude assistance disclosed. No local or global
       optimality claim.'

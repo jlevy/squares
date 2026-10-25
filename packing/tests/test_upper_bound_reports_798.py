@@ -86,6 +86,10 @@ SUPERSEDED = {
     502: "couzo-issue763-2026-10-23",
     504: "alexchilton-fault-line-2026-10-23",
 }
+#: The one report that may stand between a count's row on main and this packet's: Couzo's
+#: 43f666c, the earlier publication at 376, 377, 416, 458, 502 and 504, whose import
+#: (think-gn29) supersedes those rows in turn once it lands.
+BETWEEN = frozenset({"couzo-43f666c-2026-10-24"})
 #: The issue's lineage table: squares moved beyond 0.1 against #763's packing at the count.
 LINEAGE_BEYOND_TENTH = {
     334: 20,
@@ -189,6 +193,9 @@ def test_the_comparison_finds_43f666c_below_only_at_372_and_412() -> None:
 
 
 def test_the_rows_supersede_each_counts_row_and_read_their_claims_record() -> None:
+    """Each count's row on main 2ed0ea740 leads to this packet's row in report order:
+    directly, or through Couzo's 43f666c row where that import has landed (`BETWEEN`),
+    since 43f666c is the earlier report at six of the counts."""
     claims = coverage_check.load_claims(_packet() / reports.BEYOND)
     assert claims == {n: ISSUE[n][0] for n in RECORDED}
     coverage = safe_load(COVERAGE.read_text(encoding="utf-8"))
@@ -196,12 +203,15 @@ def test_the_rows_supersede_each_counts_row_and_read_their_claims_record() -> No
     for n in RECORDED:
         assert current[n]["source_id"] == PACKET
         assert current[n]["value"] == ISSUE[n][0]
-        (earlier,) = (
-            row
-            for row in coverage["beyond_horizon_claims"]
-            if row["n"] == n and row["source_id"] == SUPERSEDED[n]
-        )
-        assert (earlier["disposition"], earlier["superseded_by"]) == ("superseded", PACKET)
+        rows = {
+            row["source_id"]: row for row in coverage["beyond_horizon_claims"] if row["n"] == n
+        }
+        link = SUPERSEDED[n]
+        while rows[link]["superseded_by"] != PACKET:
+            assert rows[link]["disposition"] == "superseded"
+            link = rows[link]["superseded_by"]
+            assert link in BETWEEN, (n, link)
+        assert rows[link]["disposition"] == "superseded"
     assert not any(
         row["source_id"] == PACKET and row["n"] in ABOVE_43F
         for row in coverage["beyond_horizon_claims"]

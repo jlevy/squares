@@ -33534,7 +33534,14 @@ results:
       local-minimum, KKT or rigidity statement is made beyond that. The gist stated no
       licence, so the certificate was kept as a derived exact fact (RF-8). The author's CC0
       1.0 dedication of 24 October lets the packet retain the certificate, its input and the
-      README as well.
+      README as well. The retained certificate is named by the packet and these notes, not
+      in artifacts: the bound, its receipts and its evidence rest on the derived fact, and
+      adding the file would change result/t-239.html's recorded identity, which takes a
+      dated amendment in site-urls.yaml, as result/t-113.html's of 8 October did, if the
+      owner wants the page to link it. The case's section on this certificate, written by
+      its adoption at 303 on 24 October and kept as history since T-240's of 25 October,
+      says the certificate is kept as a derived exact fact since the source states no
+      licence; that held on 24 October, and the section stays as written.
 
       The case at 303 adopted this certificate as its house best packing on 24 October 2026,
       from T-230, which stays retained as history, and both strong generators decided the

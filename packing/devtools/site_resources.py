@@ -339,8 +339,9 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         "https://gist.github.com/amundsk/e4df936fb09c68446598d4c8309d0166",
         "Amund Kristiansen",
         (
-            "Exact certificates for fourteen counts from 334 to 504, each found from"
-            " Francisco Couzo's packing at the count; twelve are rows beyond the corpus."
+            "Exact certificates for fourteen counts from 334 to 504, each, the author says,"
+            " found from the packing at the count in Francisco Couzo's 964ee2b index (#763);"
+            " twelve are rows beyond the corpus."
         ),
     ),
 )

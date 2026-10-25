@@ -220,7 +220,7 @@ The issue and the gist’s README credit Amund Kristiansen (GitHub @amundsk).
 The issue says each search started from Francisco Couzo’s certified packing at the count
 at `964ee2b` (#763), credited as #763 credits it, and used Evan Daniel’s `fq` quench or
 basin explorer, `dilate_cert.py` and checkers.
-#763’s credits for those packings are Couzo’s own at 343, 379 and 412; Couzo refining
+`964ee2b`’s index credits those packings to Couzo’s own search at 343, 379 and 412; Couzo refining
 Kirill Tymchishin’s notebook packing at 334, and refining Vladislav Lavrentev’s “CUDA
 Packing Search” v11 packings at 372, 416, 457, 458 and 502; Tymchishin’s notebook at 376;
 kyleluecke’s at 377; alexchilton’s at 338 and 504; and Couzo with Kevin Fang’s seed and

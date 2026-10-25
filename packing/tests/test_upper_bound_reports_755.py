@@ -98,6 +98,37 @@ def test_the_derived_fact_is_the_retained_certificate() -> None:
     assert reports.read_facts(_packet())[N] == retained
 
 
+def test_a_retained_certificate_that_is_not_the_fact_is_refused(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """The one check that binds the fact's geometry to the retained bytes: with the first
+    centre moved by one unit of its own denominator, the rest of the file unchanged,
+    admission refuses the fact rather than reading either. The custody check is not what
+    refuses it, since only the importer's read of the retained file is altered."""
+    upstream = reports._upstream  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+
+    def moved(source: Path, twins: Any, path: str) -> bytes:
+        raw = upstream(source, twins, path)
+        if path != CERT:
+            return raw
+        lines = raw.decode("ascii").split("\n")
+        first = next(
+            index
+            for index, line in enumerate(lines)
+            if line and not line.startswith("#") and len(line.split()) == 3
+        )
+        x, y, t = lines[first].split()
+        shifted = Fraction(x) + Fraction(1, Fraction(x).denominator)
+        lines[first] = f"{shifted.numerator}/{shifted.denominator} {y} {t}"
+        return "\n".join(lines).encode("ascii")
+
+    monkeypatch.setattr(reports, "_upstream", moved)
+    with pytest.raises(
+        reports.ReportError, match=f"the derived fact is not the retained {CERT}"
+    ):
+        reports.read_facts(_packet())
+
+
 def test_the_derived_fact_names_the_certificates_digest_and_states_its_side() -> None:
     raw = gzip.decompress((_packet() / "facts/n-303.yaml.gz").read_bytes()).decode("utf-8")
     witness = load_yaml(raw)["witness"]

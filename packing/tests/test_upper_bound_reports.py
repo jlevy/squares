@@ -1404,6 +1404,26 @@ def test_the_driver_refuses_duplicate_keys_and_incomplete_rows(
 # --------------------------------------------------------------------------- register plan
 
 
+def test_only_755s_fact_stands_beside_a_retained_file() -> None:
+    """A derived fact names a file its packet pins, except where a licence given later let
+    the packet retain the file at the same pin: #755's 303 alone. Every other fact row of
+    the roster reads as it did, and only that row's admission reads the retained bytes
+    (`_fact_file`)."""
+    facts = [
+        (name, row)
+        for name in EVERY
+        for row in reports.load_declaration(_packet(name))["certificates"]
+        if "fact" in row
+    ]
+    assert len(facts) > 100
+    beside = [
+        (name, row["n"])
+        for name, row in facts
+        if reports._fact_file(_packet(name), row)  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+    ]
+    assert beside == [(KRISTIANSEN_755, 303)]
+
+
 def test_every_import_reader_is_the_packet_whose_source_key_names_it() -> None:
     """A reader under the wrong key would fail only when a later packet used it (B9)."""
     readers = {
