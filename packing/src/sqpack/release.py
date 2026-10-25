@@ -8973,7 +8973,10 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "files swapped in: the same outcome. After the merge of main 3e1349802 (#801) "
             "and review A's fixes, at link revision a2e585e7 with that main's five candidate "
             "inputs swapped in: twice from this tree and once swapped, 69 files each, all "
-            "byte-identical across the three. No register entry is added, so the "
+            "byte-identical across the three. After the merge of main 4089f9587 (#800) and "
+            "the re-chain through 43f666c's rows, at link revision 5db7c5f6 with that main's "
+            "five candidate inputs swapped in: the same outcome, 69 files each. No register "
+            "entry is added, so the "
             "explainer's result count is unchanged. No PDF was printed; each prints from "
             "that HTML. Retain v0.4.27, v0.1.11, v0.1.4 and v0.2.7."
         ),
