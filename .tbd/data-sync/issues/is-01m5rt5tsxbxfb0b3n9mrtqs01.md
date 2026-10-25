@@ -5,7 +5,7 @@ title: Decide Kim's exact configurations for T-244 at 172 and 263 on both exact 
 kind: task
 status: in_progress
 priority: 3
-version: 6
+version: 7
 delegate: c-decide-4rzl-1025
 labels:
   - result-import
@@ -15,7 +15,7 @@ deferred_until: null
 hold: null
 hold_until: null
 created_at: 2026-10-25T05:57:44.893Z
-updated_at: 2026-10-25T11:43:46.221Z
+updated_at: 2026-10-25T15:13:35.782Z
 started_at: 2026-10-25T11:43:46.219Z
 ---
 Decide Hyukdong Kim's exact configurations for T-244 (issue #804) at 172 and 263 on both exact routes. T-244 registers s(172) <= S*_172 and s(263) <= S*_263 as reported (V0/C0); each S* is the root of #804's irreducible polynomial of degree 24 and 17.
@@ -38,3 +38,5 @@ Done when: both configurations are decided on both routes and recorded on T-244,
 ## Notes
 
 2026-10-25, review B of #813 (issuecomment-6396781432), B2: derive-forms cannot read this packet (no declaration, no retained upstream bytes, forms wrapped under 'configuration'), so step 1 is a small reader that feeds each fact's configuration to algebraic_witness_reports.evand_minpoly_geometry, with exact_forms.py configurations --check as custody; about half an agent-day of tooling before the 2 CPU-hour (up to 8) decision.
+
+2026-10-25 15:25Z, coord-n12-1025 (triage w-triage-1025b, read-only): HyukdongKim's #804 comments of 12:00:41Z and 12:23:57Z put both earlier bundles under CC0, so the packets can retain the files themselves (step 1's small reader may be unnecessary), and report a new exact configuration at 297 (s297-exact-configuration.zip e08b5d0a, CC0; degree-21 side 3.36e-90 below T-174, checked here with SymPy). The 297 import is opened as think-ozx8, unclaimed, to share this bead's tooling. Not taken over; findings in coord-n12-1025's scratchpad triage-1025b.md.
