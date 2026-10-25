@@ -2373,8 +2373,11 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     # is named in that case's credit sentence and leaves this list. On 20 October 2026 the
     # adoption at 227 and 260 (T-196) drew the poster's first de Winter packings, and his
     # name joined it. On 24 October 2026 the adoption at 303 (T-239) drew the poster's first
-    # Kristiansen packing, and his name joined it.
-    assert len(expected_names) == 27
+    # Kristiansen packing, and his name joined it. On 25 October 2026 the adoption at 268 and
+    # 303 (T-240) credits Kirill Tymchishin's and Vladislav Lavrentev's Kaggle notebook
+    # packings as Francisco Couzo refined them, so both names join it, and Kristiansen's,
+    # which held only 303, leaves.
+    assert len(expected_names) == 28
     # The adoption of 19 October draws from five more, Evan Daniel's packets at 155, 183
     # (T-220, think-jh4w), 229, 236 and 271, with no new name, and every source it
     # re-housed still holds another count. The adoption of 20 October draws from three
@@ -2403,7 +2406,10 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     # more, Polkovskyi's n204 packet (T-231), with no new name: his issue 719 packet still
     # holds 105. The same pass draws 303 from Amund Kristiansen's issue 755 packet (T-239)
     # instead, and no longer from Daniel's issue 728 packet, which held nothing else, so
-    # that move leaves the number of sources as it was.
+    # that move leaves the number of sources as it was. The adoption of 25 October draws 268
+    # and 303 from Couzo's issue 763 packet (T-240), and no longer from Kristiansen's issue
+    # 755 packet, which held nothing else; PingYou Ltd's PR 574 certificates still hold
+    # other counts, so the number of sources stays.
     assert len(expected_sources) == 27
     assert set(json.loads(credit_block.attrib["data-credited-names"])) == expected_names
     assert set(json.loads(credit_block.attrib["data-source-keys"])) == expected_sources
@@ -2434,9 +2440,10 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
         "Daniel",
         "de Winter",
         "Gupta",
-        "Kristiansen",
+        "Lavrentev",
         "Ostashev",
         "PingYou Ltd",
+        "Tymchishin",
         "Xu",
         "Barnett",
         "Chang",
@@ -4601,10 +4608,10 @@ def test_print_information_shares_content_style_and_measured_block_gaps(data_dat
         for block in blocks
     ]
     assert credit_text[0] == credit_text[1]
-    # 27 since the adoption at 303 of 24 October 2026 (see the credits test above).
+    # 28 since the adoption at 268 and 303 of 25 October 2026 (see the credits test above).
     assert (
         len(credit_text[0].removeprefix("Best packings due to ").removesuffix(".").split(", "))
-        == 27
+        == 28
     )
 
 

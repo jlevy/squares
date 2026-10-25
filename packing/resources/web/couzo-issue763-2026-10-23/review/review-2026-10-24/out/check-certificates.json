@@ -1,0 +1,1446 @@
+{
+ "program": "check_certificates.py",
+ "python": "3.14.7",
+ "verdict": "all positives accepted and all controls met",
+ "cpu_seconds_total": 34.57,
+ "results": [
+  {
+   "n": 268,
+   "file": "source/certificates/best/n268.cert",
+   "sha256": "e9833bf26e1bf7e4719ee983c91979ba51f7319d6caa8dd1911fce820903e07e",
+   "sha256_matches_manifest": true,
+   "comments": [
+    "# rational witness: unit squares, centre (x, y), rotation t = tan(theta/2)"
+   ],
+   "header_n": 268,
+   "squares": 268,
+   "side": "78645658458105249171306580101/4660659750118000000000000000",
+   "side_decimal_40": "16.8743617158738254790715989714695545671117",
+   "side_equals_claim": true,
+   "print_rounded_up_12": "16.874361715874",
+   "print_claimed": "16.874361715874",
+   "print_matches": true,
+   "side_times_1e12_is_integer": false,
+   "extent": {
+    "min_x": 1e-15,
+    "max_x_slack": 1e-15,
+    "min_y": 1e-15,
+    "max_y_slack": 1e-15,
+    "tight_side_after_translation": "16.874361715873823479071598971469",
+    "side_minus_tight": 2e-15,
+    "box_at_extent": "78645658458105244510646829983/4660659750118000000000000000",
+    "extent_from_origin_is_inside_box": true
+   },
+   "positive": {
+    "accepted": true,
+    "routes_agree": true,
+    "route_a": {
+     "accepted": true,
+     "pairs": 35778,
+     "pairs_decided": 35778,
+     "overlapping_pairs": [],
+     "overlapping_pair_count": 0,
+     "squares_outside": [],
+     "squares_outside_count": 0,
+     "least_pair_gap": "38091579385690259331801802233686709255785528560389310323064678828381701649795102312624000872859729/181710279648369391795297350559109995136070680047714314907265544166771543279202356234358874820410000000000000000",
+     "least_pair_gap_float": 2.096280929147317e-13,
+     "least_pair_gap_squares": [
+      101,
+      223
+     ],
+     "pairs_at_zero_gap": 0,
+     "least_wall_clearance": "1/1000000000000000",
+     "least_wall_clearance_float": 1e-15,
+     "least_wall_clearance_square": 3,
+     "cpu_seconds": 1.679
+    },
+    "route_b": {
+     "accepted": true,
+     "pairs": 35778,
+     "pairs_decided": 668,
+     "overlapping_pairs": [],
+     "overlapping_pair_count": 0,
+     "squares_outside": [],
+     "squares_outside_count": 0,
+     "least_pair_gap": null,
+     "least_pair_gap_float": null,
+     "least_pair_gap_squares": null,
+     "pairs_at_zero_gap": 0,
+     "least_wall_clearance": "1/1000000000000000",
+     "least_wall_clearance_float": 1e-15,
+     "least_wall_clearance_square": 3,
+     "cpu_seconds": 0.701
+    }
+   },
+   "controls": [
+    {
+     "control": "duplicate-square",
+     "rule": "square 223 replaced by a copy of square 101, the closest pair",
+     "expected_accepted": false,
+     "met": true,
+     "accepted": false,
+     "routes_agree": true,
+     "route_a": {
+      "accepted": false,
+      "pairs": 35778,
+      "pairs_decided": 668,
+      "overlapping_pairs": [
+       [
+        101,
+        223
+       ]
+      ],
+      "overlapping_pair_count": 1,
+      "squares_outside": [],
+      "squares_outside_count": 0,
+      "least_pair_gap": "2937473573573330467426771598436677677605120617161001872730253271069802581059705404773743506581149317/13643364715268514224733597844215156908921249480855089589676026835213207725037433845800724451708868400000000000000",
+      "least_pair_gap_float": 2.1530418887695317e-13,
+      "least_pair_gap_squares": [
+       7,
+       17
+      ],
+      "pairs_at_zero_gap": 0,
+      "least_wall_clearance": "1/1000000000000000",
+      "least_wall_clearance_float": 1e-15,
+      "least_wall_clearance_square": 3,
+      "cpu_seconds": 0.603
+     },
+     "route_b": {
+      "accepted": false,
+      "pairs": 35778,
+      "pairs_decided": 668,
+      "overlapping_pairs": [
+       [
+        101,
+        223
+       ]
+      ],
+      "overlapping_pair_count": 1,
+      "squares_outside": [],
+      "squares_outside_count": 0,
+      "least_pair_gap": null,
+      "least_pair_gap_float": null,
+      "least_pair_gap_squares": null,
+      "pairs_at_zero_gap": 0,
+      "least_wall_clearance": "1/1000000000000000",
+      "least_wall_clearance_float": 1e-15,
+      "least_wall_clearance_square": 3,
+      "cpu_seconds": 0.667
+     }
+    },
+    {
+     "control": "moved-halfway",
+     "rule": "square 223 moved halfway to square 101's centre",
+     "expected_accepted": false,
+     "met": true,
+     "accepted": false,
+     "routes_agree": true,
+     "route_a": {
+      "accepted": false,
+      "pairs": 35778,
+      "pairs_decided": 667,
+      "overlapping_pairs": [
+       [
+        101,
+        223
+       ]
+      ],
+      "overlapping_pair_count": 1,
+      "squares_outside": [],
+      "squares_outside_count": 0,
+      "least_pair_gap": "2937473573573330467426771598436677677605120617161001872730253271069802581059705404773743506581149317/13643364715268514224733597844215156908921249480855089589676026835213207725037433845800724451708868400000000000000",
+      "least_pair_gap_float": 2.1530418887695317e-13,
+      "least_pair_gap_squares": [
+       7,
+       17
+      ],
+      "pairs_at_zero_gap": 0,
+      "least_wall_clearance": "1/1000000000000000",
+      "least_wall_clearance_float": 1e-15,
+      "least_wall_clearance_square": 3,
+      "cpu_seconds": 0.579
+     },
+     "route_b": {
+      "accepted": false,
+      "pairs": 35778,
+      "pairs_decided": 667,
+      "overlapping_pairs": [
+       [
+        101,
+        223
+       ]
+      ],
+      "overlapping_pair_count": 1,
+      "squares_outside": [],
+      "squares_outside_count": 0,
+      "least_pair_gap": null,
+      "least_pair_gap_float": null,
+      "least_pair_gap_squares": null,
+      "pairs_at_zero_gap": 0,
+      "least_wall_clearance": "1/1000000000000000",
+      "least_wall_clearance_float": 1e-15,
+      "least_wall_clearance_square": 3,
+      "cpu_seconds": 0.802
+     }
+    },
+    {
+     "control": "sharp-contact-touching",
+     "rule": "square 223 moved toward square 101's centre by lam = 2.096281e-13 of the centre distance (move 2.096e-13), to exact contact",
+     "expected_accepted": true,
+     "met": true,
+     "accepted": true,
+     "routes_agree": true,
+     "route_a": {
+      "accepted": true,
+      "pairs": 35778,
+      "pairs_decided": 668,
+      "overlapping_pairs": [],
+      "overlapping_pair_count": 0,
+      "squares_outside": [],
+      "squares_outside_count": 0,
+      "least_pair_gap": "0",
+      "least_pair_gap_float": 0.0,
+      "least_pair_gap_squares": [
+       101,
+       223
+      ],
+      "pairs_at_zero_gap": 1,
+      "least_wall_clearance": "1/1000000000000000",
+      "least_wall_clearance_float": 1e-15,
+      "least_wall_clearance_square": 3,
+      "cpu_seconds": 0.708
+     },
+     "route_b": {
+      "accepted": true,
+      "pairs": 35778,
+      "pairs_decided": 668,
+      "overlapping_pairs": [],
+      "overlapping_pair_count": 0,
+      "squares_outside": [],
+      "squares_outside_count": 0,
+      "least_pair_gap": null,
+      "least_pair_gap_float": null,
+      "least_pair_gap_squares": null,
+      "pairs_at_zero_gap": 0,
+      "least_wall_clearance": "1/1000000000000000",
+      "least_wall_clearance_float": 1e-15,
+      "least_wall_clearance_square": 3,
+      "cpu_seconds": 0.716
+     }
+    },
+    {
+     "control": "sharp-contact-past",
+     "rule": "square 223 moved toward square 101's centre by lam = 2.096281e-13 of the centre distance (move 2.096e-13), plus 1e-30 of it, past contact",
+     "expected_accepted": false,
+     "met": true,
+     "accepted": false,
+     "routes_agree": true,
+     "route_a": {
+      "accepted": false,
+      "pairs": 35778,
+      "pairs_decided": 668,
+      "overlapping_pairs": [
+       [
+        101,
+        223
+       ]
+      ],
+      "overlapping_pair_count": 1,
+      "squares_outside": [],
+      "squares_outside_count": 0,
+      "least_pair_gap": "2937473573573330467426771598436677677605120617161001872730253271069802581059705404773743506581149317/13643364715268514224733597844215156908921249480855089589676026835213207725037433845800724451708868400000000000000",
+      "least_pair_gap_float": 2.1530418887695317e-13,
+      "least_pair_gap_squares": [
+       7,
+       17
+      ],
+      "pairs_at_zero_gap": 0,
+      "least_wall_clearance": "1/1000000000000000",
+      "least_wall_clearance_float": 1e-15,
+      "least_wall_clearance_square": 3,
+      "cpu_seconds": 0.691
+     },
+     "route_b": {
+      "accepted": false,
+      "pairs": 35778,
+      "pairs_decided": 668,
+      "overlapping_pairs": [
+       [
+        101,
+        223
+       ]
+      ],
+      "overlapping_pair_count": 1,
+      "squares_outside": [],
+      "squares_outside_count": 0,
+      "least_pair_gap": null,
+      "least_pair_gap_float": null,
+      "least_pair_gap_squares": null,
+      "pairs_at_zero_gap": 0,
+      "least_wall_clearance": "1/1000000000000000",
+      "least_wall_clearance_float": 1e-15,
+      "least_wall_clearance_square": 3,
+      "cpu_seconds": 0.745
+     }
+    },
+    {
+     "control": "enlarged-square-pair",
+     "rule": "square 223's half-edge enlarged by the closest pair's gap (2.096e-13) plus 1e-30",
+     "expected_accepted": false,
+     "met": true,
+     "accepted": false,
+     "routes_agree": true,
+     "route_a": {
+      "accepted": false,
+      "pairs": 35778,
+      "pairs_decided": 668,
+      "overlapping_pairs": [
+       [
+        101,
+        223
+       ]
+      ],
+      "overlapping_pair_count": 1,
+      "squares_outside": [],
+      "squares_outside_count": 0,
+      "least_pair_gap": "192408849416687758725647882753969261423407743974311537462710839493689500593106634173866600820794591674429297059394853105510540415481927427329209716806610328796114837426221209319783338191/14751351093287168321495304848413024079820773037929499830526477152329036864863560879540511985192063197130404289620275090791672390270403925381634782678552016015402401672765000000000000000000000000000000",
+      "least_pair_gap_float": 1.3043472980874708e-14,
+      "least_pair_gap_squares": [
+       170,
+       223
+      ],
+      "pairs_at_zero_gap": 0,
+      "least_wall_clearance": "1/1000000000000000",
+      "least_wall_clearance_float": 1e-15,
+      "least_wall_clearance_square": 3,
+      "cpu_seconds": 0.604
+     },
+     "route_b": {
+      "accepted": false,
+      "pairs": 35778,
+      "pairs_decided": 668,
+      "overlapping_pairs": [
+       [
+        101,
+        223
+       ]
+      ],
+      "overlapping_pair_count": 1,
+      "squares_outside": [],
+      "squares_outside_count": 0,
+      "least_pair_gap": null,
+      "least_pair_gap_float": null,
+      "least_pair_gap_squares": null,
+      "pairs_at_zero_gap": 0,
+      "least_wall_clearance": "1/1000000000000000",
+      "least_wall_clearance_float": 1e-15,
+      "least_wall_clearance_square": 3,
+      "cpu_seconds": 0.677
+     }
+    },
+    {
+     "control": "enlarged-square-wall",
+     "rule": "square 3's half-edge enlarged by its wall clearance (1.000e-15) plus 1e-30",
+     "expected_accepted": false,
+     "met": true,
+     "accepted": false,
+     "routes_agree": true,
+     "route_a": {
+      "accepted": false,
+      "pairs": 35778,
+      "pairs_decided": 668,
+      "overlapping_pairs": [],
+      "overlapping_pair_count": 0,
+      "squares_outside": [
+       3
+      ],
+      "squares_outside_count": 1,
+      "least_pair_gap": "38091579385690259331801802233686709255785528560389310323064678828381701649795102312624000872859729/181710279648369391795297350559109995136070680047714314907265544166771543279202356234358874820410000000000000000",
+      "least_pair_gap_float": 2.096280929147317e-13,
+      "least_pair_gap_squares": [
+       101,
+       223
+      ],
+      "pairs_at_zero_gap": 0,
+      "least_wall_clearance": "-1/1000000000000000000000000000000",
+      "least_wall_clearance_float": -1e-30,
+      "least_wall_clearance_square": 3,
+      "cpu_seconds": 0.593
+     },
+     "route_b": {
+      "accepted": false,
+      "pairs": 35778,
+      "pairs_decided": 668,
+      "overlapping_pairs": [],
+      "overlapping_pair_count": 0,
+      "squares_outside": [
+       3
+      ],
+      "squares_outside_count": 1,
+      "least_pair_gap": null,
+      "least_pair_gap_float": null,
+      "least_pair_gap_squares": null,
+      "pairs_at_zero_gap": 0,
+      "least_wall_clearance": "-1/1000000000000000000000000000000",
+      "least_wall_clearance_float": -1e-30,
+      "least_wall_clearance_square": 3,
+      "cpu_seconds": 0.754
+     }
+    },
+    {
+     "control": "box-at-extent",
+     "rule": "box side set to the largest corner coordinate, exactly",
+     "expected_accepted": true,
+     "met": true,
+     "accepted": true,
+     "routes_agree": true,
+     "route_a": {
+      "accepted": true,
+      "pairs": 35778,
+      "pairs_decided": 668,
+      "overlapping_pairs": [],
+      "overlapping_pair_count": 0,
+      "squares_outside": [],
+      "squares_outside_count": 0,
+      "least_pair_gap": "38091579385690259331801802233686709255785528560389310323064678828381701649795102312624000872859729/181710279648369391795297350559109995136070680047714314907265544166771543279202356234358874820410000000000000000",
+      "least_pair_gap_float": 2.096280929147317e-13,
+      "least_pair_gap_squares": [
+       101,
+       223
+      ],
+      "pairs_at_zero_gap": 0,
+      "least_wall_clearance": "0",
+      "least_wall_clearance_float": 0.0,
+      "least_wall_clearance_square": 39,
+      "cpu_seconds": 0.634
+     },
+     "route_b": {
+      "accepted": true,
+      "pairs": 35778,
+      "pairs_decided": 668,
+      "overlapping_pairs": [],
+      "overlapping_pair_count": 0,
+      "squares_outside": [],
+      "squares_outside_count": 0,
+      "least_pair_gap": null,
+      "least_pair_gap_float": null,
+      "least_pair_gap_squares": null,
+      "pairs_at_zero_gap": 0,
+      "least_wall_clearance": "0",
+      "least_wall_clearance_float": 0.0,
+      "least_wall_clearance_square": 39,
+      "cpu_seconds": 0.828
+     }
+    },
+    {
+     "control": "box-below-extent",
+     "rule": "box side 1e-30 below the largest corner coordinate",
+     "expected_accepted": false,
+     "met": true,
+     "accepted": false,
+     "routes_agree": true,
+     "route_a": {
+      "accepted": false,
+      "pairs": 35778,
+      "pairs_decided": 668,
+      "overlapping_pairs": [],
+      "overlapping_pair_count": 0,
+      "squares_outside": [
+       39,
+       47,
+       53,
+       71,
+       78,
+       95,
+       97,
+       99,
+       118,
+       122,
+       175,
+       192,
+       203,
+       254,
+       268
+      ],
+      "squares_outside_count": 15,
+      "least_pair_gap": "38091579385690259331801802233686709255785528560389310323064678828381701649795102312624000872859729/181710279648369391795297350559109995136070680047714314907265544166771543279202356234358874820410000000000000000",
+      "least_pair_gap_float": 2.096280929147317e-13,
+      "least_pair_gap_squares": [
+       101,
+       223
+      ],
+      "pairs_at_zero_gap": 0,
+      "least_wall_clearance": "-1/1000000000000000000000000000000",
+      "least_wall_clearance_float": -1e-30,
+      "least_wall_clearance_square": 39,
+      "cpu_seconds": 0.624
+     },
+     "route_b": {
+      "accepted": false,
+      "pairs": 35778,
+      "pairs_decided": 668,
+      "overlapping_pairs": [],
+      "overlapping_pair_count": 0,
+      "squares_outside": [
+       39,
+       47,
+       53,
+       71,
+       78,
+       95,
+       97,
+       99,
+       118,
+       122,
+       175,
+       192,
+       203,
+       254,
+       268
+      ],
+      "squares_outside_count": 15,
+      "least_pair_gap": null,
+      "least_pair_gap_float": null,
+      "least_pair_gap_squares": null,
+      "pairs_at_zero_gap": 0,
+      "least_wall_clearance": "-1/1000000000000000000000000000000",
+      "least_wall_clearance_float": -1e-30,
+      "least_wall_clearance_square": 39,
+      "cpu_seconds": 0.79
+     }
+    },
+    {
+     "control": "mirrored-rotations (reported)",
+     "expected_accepted": null,
+     "rule": "every t replaced by -t (the opposite rotation sense)",
+     "accepted": false,
+     "routes_agree": true,
+     "route_a": {
+      "accepted": false,
+      "pairs": 35778,
+      "pairs_decided": 668,
+      "overlapping_pairs": [
+       [
+        6,
+        261
+       ],
+       [
+        7,
+        17
+       ],
+       [
+        7,
+        167
+       ],
+       [
+        7,
+        240
+       ],
+       [
+        9,
+        247
+       ],
+       [
+        11,
+        23
+       ],
+       [
+        11,
+        157
+       ],
+       [
+        12,
+        134
+       ],
+       [
+        12,
+        196
+       ],
+       [
+        14,
+        59
+       ],
+       [
+        15,
+        119
+       ],
+       [
+        15,
+        241
+       ],
+       [
+        16,
+        62
+       ],
+       [
+        16,
+        165
+       ],
+       [
+        17,
+        48
+       ],
+       [
+        17,
+        75
+       ],
+       [
+        19,
+        267
+       ],
+       [
+        23,
+        230
+       ],
+       [
+        26,
+        59
+       ],
+       [
+        26,
+        223
+       ]
+      ],
+      "overlapping_pair_count": 94,
+      "squares_outside": [],
+      "squares_outside_count": 0,
+      "least_pair_gap": "1499513985350274125709473934257216459030404290622102461800090465279447280576840583208906657433213/6538751819107123547805963655432686082344350716083939948596486360032800119776154536816248681227000000000000000",
+      "least_pair_gap_float": 2.293272518722136e-13,
+      "least_pair_gap_squares": [
+       187,
+       223
+      ],
+      "pairs_at_zero_gap": 0,
+      "least_wall_clearance": "1/1000000000000000",
+      "least_wall_clearance_float": 1e-15,
+      "least_wall_clearance_square": 3,
+      "cpu_seconds": 0.559
+     },
+     "route_b": {
+      "accepted": false,
+      "pairs": 35778,
+      "pairs_decided": 668,
+      "overlapping_pairs": [
+       [
+        6,
+        261
+       ],
+       [
+        7,
+        17
+       ],
+       [
+        7,
+        167
+       ],
+       [
+        7,
+        240
+       ],
+       [
+        9,
+        247
+       ],
+       [
+        11,
+        23
+       ],
+       [
+        11,
+        157
+       ],
+       [
+        12,
+        134
+       ],
+       [
+        12,
+        196
+       ],
+       [
+        14,
+        59
+       ],
+       [
+        15,
+        119
+       ],
+       [
+        15,
+        241
+       ],
+       [
+        16,
+        62
+       ],
+       [
+        16,
+        165
+       ],
+       [
+        17,
+        48
+       ],
+       [
+        17,
+        75
+       ],
+       [
+        19,
+        267
+       ],
+       [
+        23,
+        230
+       ],
+       [
+        26,
+        59
+       ],
+       [
+        26,
+        223
+       ]
+      ],
+      "overlapping_pair_count": 94,
+      "squares_outside": [],
+      "squares_outside_count": 0,
+      "least_pair_gap": null,
+      "least_pair_gap_float": null,
+      "least_pair_gap_squares": null,
+      "pairs_at_zero_gap": 0,
+      "least_wall_clearance": "1/1000000000000000",
+      "least_wall_clearance_float": 1e-15,
+      "least_wall_clearance_square": 3,
+      "cpu_seconds": 0.803
+     }
+    }
+   ],
+   "parse_controls": [
+    {
+     "control": "header-count-plus-one",
+     "refused": true,
+     "reason": "header says 269 squares, the text has 268 square lines"
+    },
+    {
+     "control": "decimal-token",
+     "refused": true,
+     "reason": "not an integer or p/q rational: '10.374361715872345'"
+    }
+   ]
+  },
+  {
+   "n": 303,
+   "file": "source/certificates/best/n303.cert",
+   "sha256": "39a150f4cce7e435b0b7d6d82dbf15d172611e07c413e1abe9d61cf90822791a",
+   "sha256_matches_manifest": true,
+   "comments": [
+    "# rational witness: unit squares, centre (x, y), rotation t = tan(theta/2)"
+   ],
+   "header_n": 303,
+   "squares": 303,
+   "side": "55035101387261868285958438488216555614454417144023299/3073388523105741896887024831655729584500000000000000",
+   "side_decimal_40": "17.9069782337989001594257196844962300410891",
+   "side_equals_claim": true,
+   "print_rounded_up_12": "17.906978233799",
+   "print_claimed": "17.906978233799",
+   "print_matches": true,
+   "side_times_1e12_is_integer": false,
+   "extent": {
+    "min_x": 1e-15,
+    "max_x_slack": 1.650346771376116e-15,
+    "min_y": 1e-15,
+    "max_y_slack": 1e-15,
+    "tight_side_after_translation": "17.906978233798898159425719684496",
+    "side_minus_tight": 2e-15,
+    "box_at_extent": "110070202774523730425139830764949317454859170976587429/6146777046211483793774049663311459169000000000000000",
+    "extent_from_origin_is_inside_box": true
+   },
+   "positive": {
+    "accepted": true,
+    "routes_agree": true,
+    "route_a": {
+     "accepted": true,
+     "pairs": 45753,
+     "pairs_decided": 45753,
+     "overlapping_pairs": [],
+     "overlapping_pair_count": 0,
+     "squares_outside": [],
+     "squares_outside_count": 0,
+     "least_pair_gap": "33663026733791961785075141/162485472436164140335504670000000000000",
+     "least_pair_gap_float": 2.0717560917341208e-13,
+     "least_pair_gap_squares": [
+      46,
+      58
+     ],
+     "pairs_at_zero_gap": 0,
+     "least_wall_clearance": "1/1000000000000000",
+     "least_wall_clearance_float": 1e-15,
+     "least_wall_clearance_square": 4,
+     "cpu_seconds": 2.113
+    },
+    "route_b": {
+     "accepted": true,
+     "pairs": 45753,
+     "pairs_decided": 701,
+     "overlapping_pairs": [],
+     "overlapping_pair_count": 0,
+     "squares_outside": [],
+     "squares_outside_count": 0,
+     "least_pair_gap": null,
+     "least_pair_gap_float": null,
+     "least_pair_gap_squares": null,
+     "pairs_at_zero_gap": 0,
+     "least_wall_clearance": "1/1000000000000000",
+     "least_wall_clearance_float": 1e-15,
+     "least_wall_clearance_square": 4,
+     "cpu_seconds": 0.901
+    }
+   },
+   "controls": [
+    {
+     "control": "duplicate-square",
+     "rule": "square 58 replaced by a copy of square 46, the closest pair",
+     "expected_accepted": false,
+     "met": true,
+     "accepted": false,
+     "routes_agree": true,
+     "route_a": {
+      "accepted": false,
+      "pairs": 45753,
+      "pairs_decided": 701,
+      "overlapping_pairs": [
+       [
+        46,
+        58
+       ]
+      ],
+      "overlapping_pair_count": 1,
+      "squares_outside": [],
+      "squares_outside_count": 0,
+      "least_pair_gap": "738098836804886009198335391963249224992122491875780663268576021376194110619/3551887420068202054639892063425744511757254011136895339991157240406247039600000000000000",
+      "least_pair_gap_float": 2.078046822752939e-13,
+      "least_pair_gap_squares": [
+       17,
+       31
+      ],
+      "pairs_at_zero_gap": 0,
+      "least_wall_clearance": "1/1000000000000000",
+      "least_wall_clearance_float": 1e-15,
+      "least_wall_clearance_square": 4,
+      "cpu_seconds": 0.724
+     },
+     "route_b": {
+      "accepted": false,
+      "pairs": 45753,
+      "pairs_decided": 701,
+      "overlapping_pairs": [
+       [
+        46,
+        58
+       ]
+      ],
+      "overlapping_pair_count": 1,
+      "squares_outside": [],
+      "squares_outside_count": 0,
+      "least_pair_gap": null,
+      "least_pair_gap_float": null,
+      "least_pair_gap_squares": null,
+      "pairs_at_zero_gap": 0,
+      "least_wall_clearance": "1/1000000000000000",
+      "least_wall_clearance_float": 1e-15,
+      "least_wall_clearance_square": 4,
+      "cpu_seconds": 1.007
+     }
+    },
+    {
+     "control": "moved-halfway",
+     "rule": "square 58 moved halfway to square 46's centre",
+     "expected_accepted": false,
+     "met": true,
+     "accepted": false,
+     "routes_agree": true,
+     "route_a": {
+      "accepted": false,
+      "pairs": 45753,
+      "pairs_decided": 699,
+      "overlapping_pairs": [
+       [
+        45,
+        58
+       ],
+       [
+        46,
+        58
+       ],
+       [
+        58,
+        59
+       ]
+      ],
+      "overlapping_pair_count": 3,
+      "squares_outside": [],
+      "squares_outside_count": 0,
+      "least_pair_gap": "738098836804886009198335391963249224992122491875780663268576021376194110619/3551887420068202054639892063425744511757254011136895339991157240406247039600000000000000",
+      "least_pair_gap_float": 2.078046822752939e-13,
+      "least_pair_gap_squares": [
+       17,
+       31
+      ],
+      "pairs_at_zero_gap": 0,
+      "least_wall_clearance": "1/1000000000000000",
+      "least_wall_clearance_float": 1e-15,
+      "least_wall_clearance_square": 4,
+      "cpu_seconds": 0.754
+     },
+     "route_b": {
+      "accepted": false,
+      "pairs": 45753,
+      "pairs_decided": 699,
+      "overlapping_pairs": [
+       [
+        45,
+        58
+       ],
+       [
+        46,
+        58
+       ],
+       [
+        58,
+        59
+       ]
+      ],
+      "overlapping_pair_count": 3,
+      "squares_outside": [],
+      "squares_outside_count": 0,
+      "least_pair_gap": null,
+      "least_pair_gap_float": null,
+      "least_pair_gap_squares": null,
+      "pairs_at_zero_gap": 0,
+      "least_wall_clearance": "1/1000000000000000",
+      "least_wall_clearance_float": 1e-15,
+      "least_wall_clearance_square": 4,
+      "cpu_seconds": 0.86
+     }
+    },
+    {
+     "control": "sharp-contact-touching",
+     "rule": "square 58 moved toward square 46's centre by lam = 2.071756e-13 of the centre distance (move 2.930e-13), to exact contact",
+     "expected_accepted": true,
+     "met": true,
+     "accepted": true,
+     "routes_agree": true,
+     "route_a": {
+      "accepted": true,
+      "pairs": 45753,
+      "pairs_decided": 701,
+      "overlapping_pairs": [],
+      "overlapping_pair_count": 0,
+      "squares_outside": [],
+      "squares_outside_count": 0,
+      "least_pair_gap": "0",
+      "least_pair_gap_float": 0.0,
+      "least_pair_gap_squares": [
+       46,
+       58
+      ],
+      "pairs_at_zero_gap": 1,
+      "least_wall_clearance": "1/1000000000000000",
+      "least_wall_clearance_float": 1e-15,
+      "least_wall_clearance_square": 4,
+      "cpu_seconds": 0.762
+     },
+     "route_b": {
+      "accepted": true,
+      "pairs": 45753,
+      "pairs_decided": 701,
+      "overlapping_pairs": [],
+      "overlapping_pair_count": 0,
+      "squares_outside": [],
+      "squares_outside_count": 0,
+      "least_pair_gap": null,
+      "least_pair_gap_float": null,
+      "least_pair_gap_squares": null,
+      "pairs_at_zero_gap": 0,
+      "least_wall_clearance": "1/1000000000000000",
+      "least_wall_clearance_float": 1e-15,
+      "least_wall_clearance_square": 4,
+      "cpu_seconds": 0.828
+     }
+    },
+    {
+     "control": "sharp-contact-past",
+     "rule": "square 58 moved toward square 46's centre by lam = 2.071756e-13 of the centre distance (move 2.930e-13), plus 1e-30 of it, past contact",
+     "expected_accepted": false,
+     "met": true,
+     "accepted": false,
+     "routes_agree": true,
+     "route_a": {
+      "accepted": false,
+      "pairs": 45753,
+      "pairs_decided": 701,
+      "overlapping_pairs": [
+       [
+        46,
+        58
+       ]
+      ],
+      "overlapping_pair_count": 1,
+      "squares_outside": [],
+      "squares_outside_count": 0,
+      "least_pair_gap": "19402004344856048602289745265952934824745966726451923507899051242701380389005021097982847569/2730578993741499211708349771840676064106801381793175142666660840000000000000000000000000000000000000000000",
+      "least_pair_gap_float": 7.10545433379717e-15,
+      "least_pair_gap_squares": [
+       58,
+       59
+      ],
+      "pairs_at_zero_gap": 0,
+      "least_wall_clearance": "1/1000000000000000",
+      "least_wall_clearance_float": 1e-15,
+      "least_wall_clearance_square": 4,
+      "cpu_seconds": 0.708
+     },
+     "route_b": {
+      "accepted": false,
+      "pairs": 45753,
+      "pairs_decided": 701,
+      "overlapping_pairs": [
+       [
+        46,
+        58
+       ]
+      ],
+      "overlapping_pair_count": 1,
+      "squares_outside": [],
+      "squares_outside_count": 0,
+      "least_pair_gap": null,
+      "least_pair_gap_float": null,
+      "least_pair_gap_squares": null,
+      "pairs_at_zero_gap": 0,
+      "least_wall_clearance": "1/1000000000000000",
+      "least_wall_clearance_float": 1e-15,
+      "least_wall_clearance_square": 4,
+      "cpu_seconds": 0.979
+     }
+    },
+    {
+     "control": "enlarged-square-pair",
+     "rule": "square 58's half-edge enlarged by the closest pair's gap (2.072e-13) plus 1e-30",
+     "expected_accepted": false,
+     "met": true,
+     "accepted": false,
+     "routes_agree": true,
+     "route_a": {
+      "accepted": false,
+      "pairs": 45753,
+      "pairs_decided": 701,
+      "overlapping_pairs": [
+       [
+        46,
+        58
+       ]
+      ],
+      "overlapping_pair_count": 1,
+      "squares_outside": [],
+      "squares_outside_count": 0,
+      "least_pair_gap": "1038639338975919852342829385078289739626616746439362173/146175491874017831509688383253560637827000000000000000000000000000000",
+      "least_pair_gap_float": 7.10542735762488e-15,
+      "least_pair_gap_squares": [
+       57,
+       58
+      ],
+      "pairs_at_zero_gap": 0,
+      "least_wall_clearance": "1/1000000000000000",
+      "least_wall_clearance_float": 1e-15,
+      "least_wall_clearance_square": 4,
+      "cpu_seconds": 0.732
+     },
+     "route_b": {
+      "accepted": false,
+      "pairs": 45753,
+      "pairs_decided": 701,
+      "overlapping_pairs": [
+       [
+        46,
+        58
+       ]
+      ],
+      "overlapping_pair_count": 1,
+      "squares_outside": [],
+      "squares_outside_count": 0,
+      "least_pair_gap": null,
+      "least_pair_gap_float": null,
+      "least_pair_gap_squares": null,
+      "pairs_at_zero_gap": 0,
+      "least_wall_clearance": "1/1000000000000000",
+      "least_wall_clearance_float": 1e-15,
+      "least_wall_clearance_square": 4,
+      "cpu_seconds": 1.167
+     }
+    },
+    {
+     "control": "enlarged-square-wall",
+     "rule": "square 4's half-edge enlarged by its wall clearance (1.000e-15) plus 1e-30",
+     "expected_accepted": false,
+     "met": true,
+     "accepted": false,
+     "routes_agree": true,
+     "route_a": {
+      "accepted": false,
+      "pairs": 45753,
+      "pairs_decided": 701,
+      "overlapping_pairs": [],
+      "overlapping_pair_count": 0,
+      "squares_outside": [
+       4
+      ],
+      "squares_outside_count": 1,
+      "least_pair_gap": "33663026733791961785075141/162485472436164140335504670000000000000",
+      "least_pair_gap_float": 2.0717560917341208e-13,
+      "least_pair_gap_squares": [
+       46,
+       58
+      ],
+      "pairs_at_zero_gap": 0,
+      "least_wall_clearance": "-1/1000000000000000000000000000000",
+      "least_wall_clearance_float": -1e-30,
+      "least_wall_clearance_square": 4,
+      "cpu_seconds": 0.843
+     },
+     "route_b": {
+      "accepted": false,
+      "pairs": 45753,
+      "pairs_decided": 701,
+      "overlapping_pairs": [],
+      "overlapping_pair_count": 0,
+      "squares_outside": [
+       4
+      ],
+      "squares_outside_count": 1,
+      "least_pair_gap": null,
+      "least_pair_gap_float": null,
+      "least_pair_gap_squares": null,
+      "pairs_at_zero_gap": 0,
+      "least_wall_clearance": "-1/1000000000000000000000000000000",
+      "least_wall_clearance_float": -1e-30,
+      "least_wall_clearance_square": 4,
+      "cpu_seconds": 0.977
+     }
+    },
+    {
+     "control": "box-at-extent",
+     "rule": "box side set to the largest corner coordinate, exactly",
+     "expected_accepted": true,
+     "met": true,
+     "accepted": true,
+     "routes_agree": true,
+     "route_a": {
+      "accepted": true,
+      "pairs": 45753,
+      "pairs_decided": 701,
+      "overlapping_pairs": [],
+      "overlapping_pair_count": 0,
+      "squares_outside": [],
+      "squares_outside_count": 0,
+      "least_pair_gap": "33663026733791961785075141/162485472436164140335504670000000000000",
+      "least_pair_gap_float": 2.0717560917341208e-13,
+      "least_pair_gap_squares": [
+       46,
+       58
+      ],
+      "pairs_at_zero_gap": 0,
+      "least_wall_clearance": "0",
+      "least_wall_clearance_float": 0.0,
+      "least_wall_clearance_square": 172,
+      "cpu_seconds": 0.711
+     },
+     "route_b": {
+      "accepted": true,
+      "pairs": 45753,
+      "pairs_decided": 701,
+      "overlapping_pairs": [],
+      "overlapping_pair_count": 0,
+      "squares_outside": [],
+      "squares_outside_count": 0,
+      "least_pair_gap": null,
+      "least_pair_gap_float": null,
+      "least_pair_gap_squares": null,
+      "pairs_at_zero_gap": 0,
+      "least_wall_clearance": "0",
+      "least_wall_clearance_float": 0.0,
+      "least_wall_clearance_square": 172,
+      "cpu_seconds": 0.952
+     }
+    },
+    {
+     "control": "box-below-extent",
+     "rule": "box side 1e-30 below the largest corner coordinate",
+     "expected_accepted": false,
+     "met": true,
+     "accepted": false,
+     "routes_agree": true,
+     "route_a": {
+      "accepted": false,
+      "pairs": 45753,
+      "pairs_decided": 701,
+      "overlapping_pairs": [],
+      "overlapping_pair_count": 0,
+      "squares_outside": [
+       172
+      ],
+      "squares_outside_count": 1,
+      "least_pair_gap": "33663026733791961785075141/162485472436164140335504670000000000000",
+      "least_pair_gap_float": 2.0717560917341208e-13,
+      "least_pair_gap_squares": [
+       46,
+       58
+      ],
+      "pairs_at_zero_gap": 0,
+      "least_wall_clearance": "-1/1000000000000000000000000000000",
+      "least_wall_clearance_float": -1e-30,
+      "least_wall_clearance_square": 172,
+      "cpu_seconds": 0.769
+     },
+     "route_b": {
+      "accepted": false,
+      "pairs": 45753,
+      "pairs_decided": 701,
+      "overlapping_pairs": [],
+      "overlapping_pair_count": 0,
+      "squares_outside": [
+       172
+      ],
+      "squares_outside_count": 1,
+      "least_pair_gap": null,
+      "least_pair_gap_float": null,
+      "least_pair_gap_squares": null,
+      "pairs_at_zero_gap": 0,
+      "least_wall_clearance": "-1/1000000000000000000000000000000",
+      "least_wall_clearance_float": -1e-30,
+      "least_wall_clearance_square": 172,
+      "cpu_seconds": 0.98
+     }
+    },
+    {
+     "control": "mirrored-rotations (reported)",
+     "expected_accepted": null,
+     "rule": "every t replaced by -t (the opposite rotation sense)",
+     "accepted": false,
+     "routes_agree": true,
+     "route_a": {
+      "accepted": false,
+      "pairs": 45753,
+      "pairs_decided": 701,
+      "overlapping_pairs": [
+       [
+        17,
+        31
+       ],
+       [
+        23,
+        239
+       ],
+       [
+        26,
+        237
+       ],
+       [
+        31,
+        32
+       ],
+       [
+        32,
+        45
+       ],
+       [
+        45,
+        57
+       ],
+       [
+        95,
+        298
+       ],
+       [
+        134,
+        296
+       ],
+       [
+        158,
+        172
+       ],
+       [
+        186,
+        213
+       ],
+       [
+        186,
+        214
+       ],
+       [
+        187,
+        188
+       ],
+       [
+        187,
+        190
+       ],
+       [
+        187,
+        221
+       ],
+       [
+        188,
+        189
+       ],
+       [
+        188,
+        191
+       ],
+       [
+        189,
+        192
+       ],
+       [
+        190,
+        191
+       ],
+       [
+        190,
+        225
+       ],
+       [
+        191,
+        192
+       ]
+      ],
+      "overlapping_pair_count": 106,
+      "squares_outside": [],
+      "squares_outside_count": 0,
+      "least_pair_gap": "33663026733791961785075141/162485472436164140335504670000000000000",
+      "least_pair_gap_float": 2.0717560917341208e-13,
+      "least_pair_gap_squares": [
+       46,
+       58
+      ],
+      "pairs_at_zero_gap": 0,
+      "least_wall_clearance": "1/1000000000000000",
+      "least_wall_clearance_float": 1e-15,
+      "least_wall_clearance_square": 4,
+      "cpu_seconds": 0.727
+     },
+     "route_b": {
+      "accepted": false,
+      "pairs": 45753,
+      "pairs_decided": 701,
+      "overlapping_pairs": [
+       [
+        17,
+        31
+       ],
+       [
+        23,
+        239
+       ],
+       [
+        26,
+        237
+       ],
+       [
+        31,
+        32
+       ],
+       [
+        32,
+        45
+       ],
+       [
+        45,
+        57
+       ],
+       [
+        95,
+        298
+       ],
+       [
+        134,
+        296
+       ],
+       [
+        158,
+        172
+       ],
+       [
+        186,
+        213
+       ],
+       [
+        186,
+        214
+       ],
+       [
+        187,
+        188
+       ],
+       [
+        187,
+        190
+       ],
+       [
+        187,
+        221
+       ],
+       [
+        188,
+        189
+       ],
+       [
+        188,
+        191
+       ],
+       [
+        189,
+        192
+       ],
+       [
+        190,
+        191
+       ],
+       [
+        190,
+        225
+       ],
+       [
+        191,
+        192
+       ]
+      ],
+      "overlapping_pair_count": 106,
+      "squares_outside": [],
+      "squares_outside_count": 0,
+      "least_pair_gap": null,
+      "least_pair_gap_float": null,
+      "least_pair_gap_squares": null,
+      "pairs_at_zero_gap": 0,
+      "least_wall_clearance": "1/1000000000000000",
+      "least_wall_clearance_float": 1e-15,
+      "least_wall_clearance_square": 4,
+      "cpu_seconds": 0.987
+     }
+    }
+   ],
+   "parse_controls": [
+    {
+     "control": "header-count-plus-one",
+     "refused": true,
+     "reason": "header says 304 squares, the text has 303 square lines"
+    },
+    {
+     "control": "decimal-token",
+     "refused": true,
+     "reason": "not an integer or p/q rational: '0.5006365240640259'"
+    }
+   ]
+  }
+ ]
+}

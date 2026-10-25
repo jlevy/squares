@@ -3625,7 +3625,9 @@ sources:
       also cites the index's 15 Couzo rows the selection rule leaves out, at 204, 335, 339,
       344, 379, 380, 421, 452, 490, 507, 535, 792, 800, 935 and 998, which no issue reports:
       the 10 below the record are the watched repository's publication of 964ee2b, the
-      couzo-964ee2b-2026-10-23 source. Upper bounds only; no optimality claim.
+      couzo-964ee2b-2026-10-23 source. The source's commits name Claude as co-author and its
+      second checker was modified with Codex (RF-1 of the review of 24 October 2026). Upper
+      bounds only; no optimality claim.
   - key: '[Tymchishin CPU Alternating Reclosure v3 2026-10-23]'
     authors: [Tymchishin]
     year: 2026

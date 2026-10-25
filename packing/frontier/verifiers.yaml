@@ -5946,3 +5946,63 @@ verifiers:
       Written and run on 23 October 2026 by the stage 4 review of T-232; kept in the n31
       packet's review/review-2026-10-23/ with its README and outputs, whose
       program-digests.sha256 records each program's SHA-256 as it ran.
+
+  - id: V-couzo-763-review-check
+    program: check_certificates.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      The 24 October review's standard-library exact checker of the two certificates T-240
+      cites, at 268 and 303, with a reader of its own that admits only integer and p/q
+      literals and the stated row count, deciding each certificate on two routes in
+      Fraction arithmetic: route A by the separating-axis test over every pair, with no
+      distance filter, and every corner against the walls; route B by the exact area of
+      each pair's clipped intersection (Sutherland-Hodgman) over the pairs whose centres
+      lie within sqrt(2)(h_i + h_j), the rest disjoint by their circumscribed discs, and
+      each square's support against the walls. It checks each file's digest against the
+      source manifest, its header side against the claim and its 12-place print, and
+      decides ten controls per certificate: a duplicated square, a square moved halfway to
+      its neighbour, the closest pair closed to exact contact (accepted) and 1e-30 past
+      it, that square enlarged by the pair's gap plus 1e-30, the square nearest a wall
+      enlarged by its clearance plus 1e-30, the box at the packing's extent (accepted) and
+      1e-30 below it, and two malformed texts.
+    source:
+      - packing/resources/web/couzo-issue763-2026-10-23/review/review-2026-10-24/check_certificates.py
+    independence_record: docs/project/reviews/review-2026-10-24-couzo-n268-n303.md
+    independence:
+      read: [mathematics, certificate-format]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of #763 at 268 and 303
+            (c-review-t240-math, think-zjus), strongest sub-agent tier, maximum reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The source's commit 964ee2b, which issue 763 names, and its parents fa6237e and
+          efef7d1 end with a Co-Authored-By trailer naming Claude; efef7d1's message
+          describes "Codex's reviewed intake", and the source's verify_bound_certificate.py
+          is Evan Daniel's verifier "with modifications by Francisco Couzo with Codex". The
+          review's checker is Claude's, written from a prompt of its own in a file that
+          imports nothing from this repository or the source, from the mathematics and the
+          certificates' format line ("unit squares, centre (x, y), rotation t =
+          tan(theta/2)"). Its author never read the source's checkers, Daniel's checkers,
+          sqpack/verify.py, check_rational_witness_independent, upper_bound_reports or
+          evand_exact_certificates. Route A shares the separating-axis method with the
+          maintained routes and with the source's checkers; route B's clipped area is a
+          second method.
+    note: >-
+      Written and run on 24 October 2026 by the review, twice, with receipts identical
+      apart from their CPU times; kept in the couzo-issue763-2026-10-23 packet's
+      review/review-2026-10-24/ with its README and receipts out/check-certificates.json and
+      out/second-run/, whose out/program-digests.sha256 records each program's SHA-256 as it
+      ran. agree.py, identity.py and sides.py, kept beside it, decide nothing and are not
+      registered.

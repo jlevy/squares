@@ -5,13 +5,13 @@
   "command": "python -m devtools.upper_bound_houses custody",
   "runtime": "CPython 3.14.7",
   "host": "vm",
-  "setup_seconds": 11.48,
-  "call_seconds": 24.36,
+  "setup_seconds": 70.56,
+  "call_seconds": 31.18,
   "child_timeout_seconds": 120,
   "snapshot_cap_bytes": 536870912,
-  "snapshot_source_bytes": 288963441,
+  "snapshot_source_bytes": 293995002,
   "fresh_geometric_deciders": false,
-  "houses": {"29":"T-195","68":"T-174","70":"T-174","84":"T-174","86":"T-174","102":"T-193","103":"T-174","105":"T-229","108":"T-174","110":"T-174","123":"T-193","126":"T-139","127":"T-174","129":"T-186","130":"T-174","131":"T-174","132":"T-174","146":"T-187","153":"T-174","154":"T-222","155":"T-197","156":"T-186","172":"T-174","175":"T-186","176":"T-186","179":"T-174","180":"T-174","181":"T-174","182":"T-174","183":"T-220","204":"T-231","206":"T-174","207":"T-174","208":"T-174","209":"T-174","210":"T-174","211":"T-188","227":"T-225","228":"T-174","229":"T-225","232":"T-186","236":"T-218","237":"T-190","238":"T-174","239":"T-174","240":"T-174","241":"T-182","258":"T-193","259":"T-193","260":"T-225","261":"T-174","263":"T-174","264":"T-186","267":"T-134","268":"T-174","269":"T-174","270":"T-224","271":"T-219","272":"T-174","273":"T-174","292":"T-146","295":"T-193","297":"T-174","302":"T-193","303":"T-239","304":"T-186","305":"T-174","306":"T-174","307":"T-174","308":"T-221"},
+  "houses": {"29":"T-195","68":"T-174","70":"T-174","84":"T-174","86":"T-174","102":"T-193","103":"T-174","105":"T-229","108":"T-174","110":"T-174","123":"T-193","126":"T-139","127":"T-174","129":"T-186","130":"T-174","131":"T-174","132":"T-174","146":"T-187","153":"T-174","154":"T-222","155":"T-197","156":"T-186","172":"T-174","175":"T-186","176":"T-186","179":"T-174","180":"T-174","181":"T-174","182":"T-174","183":"T-220","204":"T-231","206":"T-174","207":"T-174","208":"T-174","209":"T-174","210":"T-174","211":"T-188","227":"T-225","228":"T-174","229":"T-225","232":"T-186","236":"T-218","237":"T-190","238":"T-174","239":"T-174","240":"T-174","241":"T-182","258":"T-193","259":"T-193","260":"T-225","261":"T-174","263":"T-174","264":"T-186","267":"T-134","268":"T-240","269":"T-174","270":"T-224","271":"T-219","272":"T-174","273":"T-174","292":"T-146","295":"T-193","297":"T-174","302":"T-193","303":"T-240","304":"T-186","305":"T-174","306":"T-174","307":"T-174","308":"T-221"},
   "inputs": [
     {"path":"packing/resources/web/couzo-exact-certificates-2026-10-09/acquisition/report.json","bytes":49302,"sha256":"6735177e5ddb0889a750ddae56170633a4e18edc3cdcc0d315b0bbef934a7da8"},
     {"path":"packing/resources/web/couzo-exact-certificates-2026-10-09/acquisition/sources.json","bytes":24094,"sha256":"95cf78c879d9ca1b9da6d2c85df58e191e2f69b446bbf0e07254c4eda2f030d7"},
@@ -55,7 +55,6 @@
     {"path":"packing/resources/web/pingyou-pr574-certificates-2026-10-13/facts/n-240.yaml.gz","bytes":86234,"sha256":"ac5305ac93c67e34e83d07009861773a57b57d929ea2fb4725e528e1e47b9064"},
     {"path":"packing/resources/web/pingyou-pr574-certificates-2026-10-13/facts/n-261.yaml.gz","bytes":55477,"sha256":"0c1884ab527f3b15d41443c37325f433f1e22c22504438a938b02f3eeaa0a705"},
     {"path":"packing/resources/web/pingyou-pr574-certificates-2026-10-13/facts/n-263.yaml.gz","bytes":63634,"sha256":"2253b3b81fdc0ec3efaaaa59acebc3ea76229ff4ef6c5a03c82eb211ff1e5ddf"},
-    {"path":"packing/resources/web/pingyou-pr574-certificates-2026-10-13/facts/n-268.yaml.gz","bytes":30109,"sha256":"d5df5e6e5b67698c1859453c3b3fb2690ae15ca4ba0eed5e78abd97d852746cd"},
     {"path":"packing/resources/web/pingyou-pr574-certificates-2026-10-13/facts/n-269.yaml.gz","bytes":39892,"sha256":"89a37f3c7cba3a41de386472599ea587721d72c1b901d41691b1e0724d7b7622"},
     {"path":"packing/resources/web/pingyou-pr574-certificates-2026-10-13/facts/n-272.yaml.gz","bytes":101061,"sha256":"56057ff69ef0bf5e61f71385adaea0b4b52beb07b092d169ae5d780af4a81678"},
     {"path":"packing/resources/web/pingyou-pr574-certificates-2026-10-13/facts/n-273.yaml.gz","bytes":48158,"sha256":"c678606ba878a2786489500514d338f1d05eb3247fe2fefdbe587261983faf9a"},
@@ -88,7 +87,6 @@
     {"path":"packing/resources/web/pingyou-pr574-certificates-2026-10-13/receipts/exact-certification-n240.json.xz","bytes":59992,"sha256":"9e8d65e91346145969ffd9d07f7bacf5b746a85ec57fd3b1a5d63fc46659b345"},
     {"path":"packing/resources/web/pingyou-pr574-certificates-2026-10-13/receipts/exact-certification-n261.json.xz","bytes":32540,"sha256":"7cdaddfd74cbe1c574b64e8a1e97a608a699f1836ff52aacad963868e146b9a7"},
     {"path":"packing/resources/web/pingyou-pr574-certificates-2026-10-13/receipts/exact-certification-n263.json.xz","bytes":42488,"sha256":"b0b2183776e4800c00bfc85fd8054f3e8f79579d26761ef512be11a4c25932d0"},
-    {"path":"packing/resources/web/pingyou-pr574-certificates-2026-10-13/receipts/exact-certification-n268.json.xz","bytes":20044,"sha256":"620db87b3bdcf274d208340590aae1952164b28886e7bbf301c4a346bebd9e9b"},
     {"path":"packing/resources/web/pingyou-pr574-certificates-2026-10-13/receipts/exact-certification-n269.json.xz","bytes":20784,"sha256":"af748b4dc2ce7040a94465d24f6dc578c34a23e999fc1257559491a769c474f1"},
     {"path":"packing/resources/web/pingyou-pr574-certificates-2026-10-13/receipts/exact-certification-n272.json.xz","bytes":59016,"sha256":"b4c186d93666fcce7ef40c3ced54e787ce6f14e500f8ea891de98713e500b053"},
     {"path":"packing/resources/web/pingyou-pr574-certificates-2026-10-13/receipts/exact-certification-n273.json.xz","bytes":31080,"sha256":"6b72a28a91d04d4ac46f40e9f533d233e428cd96af70dd9fc0edb53e3c09dfe3"},
@@ -209,14 +207,16 @@
     {"path":"packing/resources/web/mishapolk-n204-2026-10-22/acquisition/upstream-subtree.sha256","bytes":351,"sha256":"d98352bb4b12babf01c5e7fb62ad07ba2760fa38b255592b5001a446a6853392"},
     {"path":"packing/resources/web/mishapolk-n204-2026-10-22/source/certificates/n204.cert","bytes":33336,"sha256":"9c5dabc8f2456b0c90650eac5794918c5e52ff90d9e817bd215c9816a88f3e7d"},
     {"path":"packing/resources/web/mishapolk-n204-2026-10-22/receipts/exact-certification.json.xz","bytes":5616,"sha256":"fd3094417769088d5f05c87ee787e0f354db37929f49648ebb0bb315a4eb570d"},
-    {"path":"packing/resources/web/amundsk-n303-2026-10-23/acquisition/report.json","bytes":9024,"sha256":"65a6ad89bb8351ce4349b4d516c9b39c1cd218e0f5914cb4b0a70b2ce4d45b00"},
-    {"path":"packing/resources/web/amundsk-n303-2026-10-23/acquisition/sources.json","bytes":5344,"sha256":"255a8da07d3d0af37d6542370b7d1a7a95c2fa4a7b114f787186f46e4c925985"},
-    {"path":"packing/resources/web/amundsk-n303-2026-10-23/facts/n-303.yaml.gz","bytes":11379,"sha256":"8ef6e34f56d5f88595d4974e93d9f81f420c30ba1d3d35c063d474e090c8f11d"},
-    {"path":"packing/resources/web/amundsk-n303-2026-10-23/receipts/exact-certification.json.xz","bytes":6364,"sha256":"b58422beab15ec24be9a8de4e5178eeb2453e9a9490cea0f87fdd7fb7a5b787b"}
+    {"path":"packing/resources/web/couzo-issue763-2026-10-23/acquisition/report.json","bytes":10895,"sha256":"58637a0a435b19b742a2d60017015f17fbc61f6a7846b45edeff6bc275122fae"},
+    {"path":"packing/resources/web/couzo-issue763-2026-10-23/acquisition/sources.json","bytes":31365,"sha256":"1ef4dfa6e152c67c0a92f852c9998720a327105b9ef9e99a994b71ba64b8ae06"},
+    {"path":"packing/resources/web/couzo-issue763-2026-10-23/acquisition/upstream-subtree.sha256","bytes":44109,"sha256":"4fd3e0fdae5e881b64f18bdf222072194a41e9c4354297fa282b9fdf8d20abe0"},
+    {"path":"packing/resources/web/couzo-issue763-2026-10-23/source/certificates/best/n268.cert","bytes":33356,"sha256":"e9833bf26e1bf7e4719ee983c91979ba51f7319d6caa8dd1911fce820903e07e"},
+    {"path":"packing/resources/web/couzo-issue763-2026-10-23/source/certificates/best/n303.cert","bytes":38623,"sha256":"39a150f4cce7e435b0b7d6d82dbf15d172611e07c413e1abe9d61cf90822791a"},
+    {"path":"packing/resources/web/couzo-issue763-2026-10-23/receipts/exact-certification.json.xz","bytes":19936,"sha256":"94be124c7e2782722c91504373e5f0e5663ed8ac7e053fc2b4fecaf556c6516a"}
   ],
   "mutations_refused_and_restored": [
     "T-195 n=29: outside-control verdict","T-195 n=29: certificate bytes","T-174 n=68: outside-control verdict","T-174 n=68: certificate bytes","T-193 n=102: outside-control verdict","T-193 n=102: certificate bytes","T-229 n=105: outside-control verdict","T-229 n=105: certificate bytes","T-139 n=126: outside-control verdict","T-139 n=126: certificate bytes","T-186 n=129: outside-control verdict","T-186 n=129: certificate bytes","T-187 n=146: outside-control verdict","T-187 n=146: certificate bytes","T-222 n=154: outside-control verdict","T-222 n=154: certificate bytes","T-197 n=155: outside-control verdict","T-197 n=155: certificate bytes","T-220 n=183: outside-control verdict","T-220 n=183: certificate bytes","T-231 n=204: outside-control verdict","T-231 n=204: certificate bytes","T-188 n=211: outside-control verdict","T-188 n=211: certificate bytes","T-225 n=227: outside-control verdict","T-225 n=227: certificate bytes","T-218 n=236: outside-control verdict",
-    "T-218 n=236: certificate bytes","T-190 n=237: outside-control verdict","T-190 n=237: certificate bytes","T-182 n=241: outside-control verdict","T-182 n=241: certificate bytes","T-134 n=267: outside-control verdict","T-134 n=267: certificate bytes","T-224 n=270: outside-control verdict","T-224 n=270: certificate bytes","T-219 n=271: outside-control verdict","T-219 n=271: certificate bytes","T-146 n=292: outside-control verdict","T-146 n=292: certificate bytes","T-239 n=303: outside-control verdict","T-239 n=303: certificate bytes","T-221 n=308: outside-control verdict","T-221 n=308: certificate bytes"
+    "T-218 n=236: certificate bytes","T-190 n=237: outside-control verdict","T-190 n=237: certificate bytes","T-182 n=241: outside-control verdict","T-182 n=241: certificate bytes","T-134 n=267: outside-control verdict","T-134 n=267: certificate bytes","T-240 n=268: outside-control verdict","T-240 n=268: certificate bytes","T-224 n=270: outside-control verdict","T-224 n=270: certificate bytes","T-219 n=271: outside-control verdict","T-219 n=271: certificate bytes","T-146 n=292: outside-control verdict","T-146 n=292: certificate bytes","T-221 n=308: outside-control verdict","T-221 n=308: certificate bytes"
   ],
   "original_inputs_byte_equal": true,
   "restored_worker_inputs_byte_equal": true
