@@ -24154,7 +24154,16 @@ issues:
     - think-clgp
     - think-z2mj
     answer_bead: think-5dc3
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/799#issuecomment-6394514727
+      date: '2026-10-25'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: rows-1184-3775
+      - result: row-2459-v2
+      - result: rows-3776-9944
+      - result: theorem-near-integer
     close_when: >-
       Version 1's 683 rows, version 2's 2459 refinement and its 2,141 rows at 3776 to 9944
       are recorded in report order by the walk above 1024, each decided exactly by a
