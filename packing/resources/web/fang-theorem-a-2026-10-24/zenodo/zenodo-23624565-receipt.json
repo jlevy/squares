@@ -1,0 +1,28 @@
+{
+  "format": "zenodo-capture-v1",
+  "record": 23624565,
+  "doi": "10.5281/zenodo.23624565",
+  "conceptdoi": "10.5281/zenodo.23624411",
+  "title": "Packing k² − ⌈√(32k)⌉ − 1 unit squares in a square of side less than k",
+  "version": "0.2",
+  "publication_date": "2026-10-24",
+  "created": "2026-10-24T19:12:19.185446+00:00",
+  "updated": "2026-10-24T19:12:19.582728+00:00",
+  "api": "https://zenodo.org/api/records/23624565",
+  "retrieved_utc": "2026-10-24T21:09:14Z",
+  "files": [{"key":"fang-2026-theorem-a-tex.zip","bytes":7521,"checksum_stated":"md5:01d411a080beb97801140e1b342ba63f","md5":"01d411a080beb97801140e1b342ba63f","sha256":"6ab4efba7447ebe623bb911d46d35319df6b99b2f969586aba9ef3c15b5bb348","top_directory":null,"members":1,"member_bytes":17781,"member_manifest":"zenodo-23624565.sha256"},{"key":"fang-2026-theorem-a.pdf","bytes":100203,"checksum_stated":"md5:5f371481ef6722251698303dee902fdb","md5":"5f371481ef6722251698303dee902fdb","sha256":"fdc87cb608efe836cd6da8dc40e1de8879bac4dc4cc844a794b68c8be027257a","same_bytes_as":{"packing/resources/web/fang-theorem-a-2026-10-24/acquisition/upstream-subtree.sha256":["theorem-a/note/main.pdf"]}}],
+  "extracted": [{"member":"main.tex","path":"zenodo-23624565/main.tex","bytes":17781,"sha256":"f6f26d7b75eb30509e2117344d5e4d3e4cccdb2772bc48f1329ee719f3e01152"}],
+  "comparisons": [
+    {
+      "archive": "fang-2026-theorem-a-tex.zip",
+      "against": "packing/resources/web/fang-theorem-a-2026-10-24/acquisition/upstream-subtree.sha256",
+      "same": 0,
+      "differs": [],
+      "only_in_archive": ["main.tex"],
+      "only_in_manifest": [
+        "ATTRIBUTION.md","CHANGELOG.md","LICENSE","MANIFEST.sha256","README.md","VERIFICATION.md","theorem-a/LARGE.sha256","theorem-a/README.md","theorem-a/certs/SHA256SUMS","theorem-a/certs/k006.cert","theorem-a/certs/k007.cert","theorem-a/certs/k008.cert","theorem-a/certs/k009.cert","theorem-a/certs/k010.cert","theorem-a/certs/k011.cert","theorem-a/certs/k012.cert","theorem-a/certs/k013.cert","theorem-a/certs/k014.cert","theorem-a/certs/k015.cert","theorem-a/certs/k016.cert","theorem-a/certs/k017.cert","theorem-a/certs/k018.cert","theorem-a/certs/k019.cert","theorem-a/certs/k020.cert","theorem-a/certs/k021.cert","theorem-a/certs/k022.cert","theorem-a/certs/k023.cert","theorem-a/certs/k024.cert","theorem-a/certs/k025.cert","theorem-a/certs/k026.cert","theorem-a/certs/k027.cert","theorem-a/certs/k028.cert","theorem-a/certs/k029.cert","theorem-a/certs/k030.cert","theorem-a/certs/k031.cert","theorem-a/certs/k032.cert","theorem-a/certs/k033.cert","theorem-a/certs/k034.cert",
+        "theorem-a/certs/k035.cert","theorem-a/certs/k036.cert","theorem-a/certs/k037.cert","theorem-a/certs/k038.cert","theorem-a/certs/k039.cert","theorem-a/certs/k040.cert","theorem-a/certs/k101.cert","theorem-a/lband.py","theorem-a/note/main.pdf","theorem-a/note/main.tex","theorem-a/regenerate.sh","theorem-a/windowed_check.py","tools/NOTICE-verify_cert_daniel","tools/rectcheck.py","tools/verify_cert_daniel.py","verify.py"
+      ]
+    }
+  ]
+}

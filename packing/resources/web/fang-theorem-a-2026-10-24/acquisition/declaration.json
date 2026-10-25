@@ -1,0 +1,64 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "thesnakefang-squarepack-certs",
+  "source_url": "https://github.com/TheSnakeFang/squarepack-certs",
+  "source_ref": "main",
+  "source_commit": "db1ed6220731fce432fa3b1ef3b994b5ab6c3663",
+  "retrieved_at_utc": "2026-10-24T20:26Z",
+  "git_scope": "A full clone of TheSnakeFang/squarepack-certs, whose head is the pin db1ed62 (2026-10-24T19:12:51Z, 'theorem-a: note v0.2 crediting Evan Daniel's earlier bound'), read by the stage 1 triage of jlevy/squares#797. Past the 21 October read at 9ffba0f the head has three commits, each pushed on its own: b1b3f6b (18:47:49Z) adds theorem-a/ and the root README, ATTRIBUTION, CHANGELOG, VERIFICATION and MANIFEST lines; 31bdc2d (18:59:07Z) puts the Zenodo DOI 10.5281/zenodo.23624412 and the pin b1b3f6b into the note and the READMEs; db1ed62 makes the note v0.2 (10.5281/zenodo.23624565) and credits Evan Daniel's earlier bound in the note, both READMEs, ATTRIBUTION and CHANGELOG. lband.py, windowed_check.py, regenerate.sh, LARGE.sha256 and certs/ have the same bytes at all three commits. The scope is theorem-a/ whole, the four root text files that state its credit, licence and checks, the root licence and manifest, and the three checkers windowed_check.py runs, which other packets already retain. Nothing in the tree was executed.",
+  "archived_dir": "source",
+  "license": "MIT, copyright 2026 Kevin Fang (LICENSE), for verify.py, tools/rectcheck.py, theorem-a/lband.py and theorem-a/windowed_check.py; ATTRIBUTION.md releases theorem-a/certs/ under CC0 1.0 and puts the note in theorem-a/note/ under CC BY 4.0, as its Zenodo records do; tools/verify_cert_daniel.py is Evan Daniel's, MIT (tools/NOTICE-verify_cert_daniel). ATTRIBUTION.md credits the L-shaped packing and its end-region framework to Sungjoon Ryu (version 1.1, 10.5281/zenodo.23278927), and the axis-layer filling of the band ends and the bound c*(k) <= 4 ceil(sqrt(2k - 7)) - 1 to Evan Daniel first (evand/square-packing, certificates/k2-minus-c/, 18 October 2026), calling Theorem A an independent second proof. The bundle was written and run with Claude (Anthropic), directed and reviewed by Kevin Fang; two blind language-model reviews of the proof are reported, which ATTRIBUTION.md says is not an external mathematical review.",
+  "claims": [
+    "theorem-a/note/main.tex (v0.2, 2026-10-24, 10.5281/zenodo.23624565), Theorem 1 (Theorem A): for every integer k >= 6, w(k) < 4 sqrt(2k) + 2; equivalently c*(k) < 4 sqrt(2k) + 1, so c*(k) <= ceil(sqrt(32k)), and s(n) < k for every integer n <= k^2 - ceil(sqrt(32k)) - 1, where w(k) = k^2 - max{N : s(N) < k} and c*(k) = max{c : s(k^2 - c) = k} = w(k) - 1.",
+    "The construction: Ryu's L-shaped packing of side S = k - b + W < k, an aligned (k - b)^2 grid and two bands of b tilted rows at t = tan(theta/2) just above 1/b, with both ends of each band filled by axis-parallel rows (lift 0 at one end, the whole free length at the other) and b the odd integer with |b - sqrt(2k)| <= 1; t is 'close' when the conditions (a)-(d) of Section 4 hold. Lemma 1 (fill), Lemma 2 (band), equation (1) and the proof of Theorem A in Sections 2 to 5.",
+    "Remark (sharpness): for odd b >= 5 and k = (b^2 - b + 8)/2 the construction at close t has waste exactly 4b.",
+    "Section 6: lband.py decides the bound for 6 <= k <= 60000 and every inequality of the proof for 6 <= k <= 20000, exactly, with least slack B(k) - w = 8019401/78023840599 at k = 19705; a fixed squeeze of 10^-7 fails at k = 43218; strict certificates for 6 <= k <= 40 and k = 101, 300, 600 pass the author's checker and Evan Daniel's; the optimized constructions (waste at most 4 sqrt(2k) + 1.18 for 15 <= k <= 300, 9946 squares below side 100, gains at k = 25, 30, 40) are stated without certificates.",
+    "Section 7: comparisons with Daniel's 4 ceil(sqrt(2k - 7)) - 1 (ours smaller at 495210 of 7 <= k < 10^6, his at 255215, tied at 249568), Ryu's Theorems 1.2, 1.3, 1.4 and 1.6, and the author's earlier k - 1 - F(k); 'Theorem A is of the same strength as Daniel's earlier bound, not a new record for any range of k.'",
+    "theorem-a/certs/: 36 certificates k006.cert to k040.cert and k101.cert in Evan Daniel's text format, each the closed packing scaled once about the origin by 1 + (k - S)/(2S), side (S + k)/2 < k; SHA256SUMS. LARGE.sha256 states the SHA-256 of the unshipped k = 300 and 600 certificates (89,902 and 359,860 squares), which regenerate.sh rebuilds with lband.py.",
+    "VERIFICATION.md, addendum of 2026-10-24: k = 6 to 40 pass verify.py --strict, tools/verify_cert_daniel.py and tools/rectcheck.py on all pairs; all 36 pass both exact checkers through windowed_check.py; k = 300 and 600 rebuild to the stated digests and pass both checkers windowed; failures 0."
+  ],
+  "scope": [
+    "theorem-a",
+    "README.md",
+    "ATTRIBUTION.md",
+    "CHANGELOG.md",
+    "VERIFICATION.md",
+    "LICENSE",
+    "MANIFEST.sha256",
+    "verify.py",
+    "tools/verify_cert_daniel.py",
+    "tools/NOTICE-verify_cert_daniel",
+    "tools/rectcheck.py"
+  ],
+  "pinned_only": [
+    {
+      "match": "LICENSE",
+      "reason": "Unchanged since 078789a; the 13 October direct-certificates packet retains the same bytes",
+      "identical_to": "packing/resources/web/fang-direct-certificates-2026-10-13/source/LICENSE"
+    },
+    {
+      "match": "MANIFEST.sha256",
+      "reason": "The whole repository's digest list, 34,612 bytes; its theorem-a/ lines name the retained files, which this packet's own manifest binds"
+    },
+    {
+      "match": "verify.py",
+      "reason": "The author's square checker, which windowed_check.py runs, unchanged since c75bebd; another packet already retains the same bytes",
+      "identical_to": "packing/resources/web/fang-two-wedge-certificates-2026-10-10/source/verify.py"
+    },
+    {
+      "match": "tools/verify_cert_daniel.py",
+      "reason": "Evan Daniel's verify_cert.py, which windowed_check.py runs; the 7 October batch-wrapper packet retains the same bytes",
+      "identical_to": "packing/resources/web/evand-batch-wrapper-2026-10-07/source/s12/search/exact/verify_cert.py"
+    },
+    {
+      "match": "tools/NOTICE-verify_cert_daniel",
+      "reason": "The notice of Daniel's checker; the 13 October direct-certificates packet retains the same bytes",
+      "identical_to": "packing/resources/web/fang-direct-certificates-2026-10-13/source/tools/NOTICE-verify_cert_daniel"
+    },
+    {
+      "match": "tools/rectcheck.py",
+      "reason": "The author's rectangle checker, which VERIFICATION.md runs on k = 6 to 40; the 13 October direct-certificates packet retains the same bytes",
+      "identical_to": "packing/resources/web/fang-direct-certificates-2026-10-13/source/tools/rectcheck.py"
+    }
+  ]
+}

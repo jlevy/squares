@@ -1,0 +1,140 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-24T21:02Z",
+  "git_scope": "A blobless clone of evand/square-packing, whose head is 659ee62 (23 October 2026), with a sparse checkout of the pin aa12b98 (2026-10-18T06:49:22Z, 'k\u00b2 \u2212 c package: Lean bundle, write-up page /k2c/, index and notes'). The bound c*(k) <= 4 ceil(sqrt(2k - 7)) - 1 is first committed at 4b456fe (2026-10-18T05:44:46Z, which adds lean/Sqpack/RyuEnds.lean and RyuLayers.lean); its +5 milestone a645fe3 (2026-10-18T02:28:04Z) adds RyuFill.lean and changes RyuBand.lean; 13da782 (06:40:31Z) adds the staircase modules of the k^{2/5} bound, which this packet does not retain; aa12b98 adds certificates/k2-minus-c/ and the write-up site/www/k2c/. Every module of the closure of RyuLayers has the same bytes at 4b456fe and at the pin. The scope is that import closure, read by devtools.lean_closure at the pin, the three build pins, the root module and the axiom probe, the k2-minus-c README and its verify.sh, the write-up, the two numerical companions search/ryu/r1prime.py and endcost.py, and the root LICENSE, CREDITS.md and README.md. Nothing in the tree was executed.",
+  "sources": [
+    {
+      "id": "evand-square-packing",
+      "source_url": "https://github.com/evand/square-packing",
+      "source_ref": "aa12b989aa7d4244c57ea6c3b06bb36318bd41ea",
+      "source_commit": "aa12b989aa7d4244c57ea6c3b06bb36318bd41ea",
+      "committed_utc": "2026-10-18T06:49:22Z",
+      "git_tree": "31fd5f6efc25c2e3f479570bf283256e7d69adc8",
+      "archived_path": "packing/resources/web/evand-k2-minus-c-lean-2026-10-18/square-packing",
+      "subtree_manifest": "packing/resources/web/evand-k2-minus-c-lean-2026-10-18/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "LICENSE",
+        "CREDITS.md",
+        "README.md",
+        "certificates/k2-minus-c",
+        "site/www/k2c",
+        "search/ryu/r1prime.py",
+        "search/ryu/endcost.py",
+        "lean/lean-toolchain",
+        "lean/lakefile.toml",
+        "lean/lake-manifest.json",
+        "lean/Sqpack.lean",
+        "lean/Axioms.lean",
+        "lean/Sqpack/Spec.lean",
+        "lean/Sqpack/Conjectures.lean",
+        "lean/Sqpack/ConjecturesProofs.lean",
+        "lean/Sqpack/ExactPack.lean",
+        "lean/Sqpack/FangGlue.lean",
+        "lean/Sqpack/RyuBand.lean",
+        "lean/Sqpack/RyuBound.lean",
+        "lean/Sqpack/RyuFill.lean",
+        "lean/Sqpack/RyuEnds.lean",
+        "lean/Sqpack/RyuLayers.lean"
+      ],
+      "subtree_file_count": 23,
+      "subtree_total_bytes": 209303,
+      "retained_file_count": 11,
+      "retained_total_bytes": 129116,
+      "compressed": [],
+      "pinned_only": [
+        {
+          "path": "CREDITS.md",
+          "bytes": 7501,
+          "sha256": "778884d09f88ce159ea2cea2134d30fb14bf01bf58fc9e69c6f3d77433da8168",
+          "reason": "Retained byte-identical by the 12 October exact-data packet",
+          "identical_to": "packing/resources/web/evand-exact-data-2026-10-12/source/CREDITS.md"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1068,
+          "sha256": "c51886c0f7e6724a7d89fc22cb237a1688ba1bbff04cb21a13b8e1a01fb15578",
+          "reason": "Retained byte-identical by the 12 October exact-data packet",
+          "identical_to": "packing/resources/web/evand-exact-data-2026-10-12/source/LICENSE"
+        },
+        {
+          "path": "README.md",
+          "bytes": 7093,
+          "sha256": "e86b1f3549cfa0e0ab5e359697c99b28b4f53087032d574846a45223f505108f",
+          "reason": "Retained byte-identical by the 19 October n308 packet",
+          "identical_to": "packing/resources/web/evand-n308-2026-10-19/source/README.md"
+        },
+        {
+          "path": "lean/Sqpack/Conjectures.lean",
+          "bytes": 13789,
+          "sha256": "51eb4edcbef44a1647bb2f75a5cf94168c8b0a6f377df7b0a72902ade9bd5b95",
+          "reason": "Unchanged since 8475bdf; retained byte-identical by the 18 October Fang and Ryu Lean packet",
+          "identical_to": "packing/resources/web/evand-fang-ryu-lean-2026-10-18/square-packing/lean/Sqpack/Conjectures.lean"
+        },
+        {
+          "path": "lean/Sqpack/ConjecturesProofs.lean",
+          "bytes": 15187,
+          "sha256": "bb28b7fc690f5aa4d5bb5f456d29af2a55d504ab97f9139867f40733e29a04fc",
+          "reason": "Unchanged since 8475bdf; retained byte-identical by the 18 October Fang and Ryu Lean packet",
+          "identical_to": "packing/resources/web/evand-fang-ryu-lean-2026-10-18/square-packing/lean/Sqpack/ConjecturesProofs.lean"
+        },
+        {
+          "path": "lean/Sqpack/ExactPack.lean",
+          "bytes": 10099,
+          "sha256": "8870c8b01270e9b7392609bbbc94e201b28e6fc108e752222e0167c85220d8bf",
+          "reason": "Retained byte-identical by the 7 October exact-and-local-reports packet",
+          "identical_to": "packing/resources/web/evand-exact-and-local-reports-2026-10-07/source/s12/lean/Sqpack/ExactPack.lean"
+        },
+        {
+          "path": "lean/Sqpack/FangGlue.lean",
+          "bytes": 6740,
+          "sha256": "ad0eec5c49418ac94337de65981b68ea614a1c6950110befc745060f90273bee",
+          "reason": "Unchanged since 8475bdf; retained byte-identical by the 18 October Fang and Ryu Lean packet",
+          "identical_to": "packing/resources/web/evand-fang-ryu-lean-2026-10-18/square-packing/lean/Sqpack/FangGlue.lean"
+        },
+        {
+          "path": "lean/Sqpack/RyuBound.lean",
+          "bytes": 10386,
+          "sha256": "cad7f67c2a7871ce9725540f83972dcd97115d79ce680ef8e0ec05c4dea650ad",
+          "reason": "Unchanged since 8475bdf; retained byte-identical by the 18 October Fang and Ryu Lean packet",
+          "identical_to": "packing/resources/web/evand-fang-ryu-lean-2026-10-18/square-packing/lean/Sqpack/RyuBound.lean"
+        },
+        {
+          "path": "lean/Sqpack/Spec.lean",
+          "bytes": 4812,
+          "sha256": "e0d7e50626b1ad7559a0823030fca6559a072e211d90e7079e95b498cfd564a0",
+          "reason": "Retained byte-identical by the 7 October exact-and-local-reports packet",
+          "identical_to": "packing/resources/web/evand-exact-and-local-reports-2026-10-07/source/s12/lean/Sqpack/Spec.lean"
+        },
+        {
+          "path": "lean/lake-manifest.json",
+          "bytes": 3140,
+          "sha256": "b9b5f5bed3f50b33689db9c81ab08edde808022c86cd35f0f97f6e860902c672",
+          "reason": "Retained byte-identical by the 7 October exact-and-local-reports packet",
+          "identical_to": "packing/resources/web/evand-exact-and-local-reports-2026-10-07/source/s12/lean/lake-manifest.json"
+        },
+        {
+          "path": "lean/lakefile.toml",
+          "bytes": 347,
+          "sha256": "87f83bdcb6d964d664cc1a06604c847c13c430e9505d0cae41d73e31c338bb5a",
+          "reason": "Retained byte-identical by the 7 October exact-and-local-reports packet",
+          "identical_to": "packing/resources/web/evand-exact-and-local-reports-2026-10-07/source/s12/lean/lakefile.toml"
+        },
+        {
+          "path": "lean/lean-toolchain",
+          "bytes": 25,
+          "sha256": "3aac669c7a910ec2389f4e4f921b605adf6ebf2d1e0c9b9cd0be4d33f3f5db71",
+          "reason": "Retained byte-identical by the 7 October exact-and-local-reports packet",
+          "identical_to": "packing/resources/web/evand-exact-and-local-reports-2026-10-07/source/s12/lean/lean-toolchain"
+        }
+      ],
+      "license": "MIT, Copyright (c) 2026 Evan Daniel (LICENSE). certificates/k2-minus-c/README.md credits the L-shape, the waste identity and the staircase to Sungjoon Ryu's preprint (squarepacker/k2-minus-c-upper v1.1), with H. D. Bui's construction behind the staircase and Erdos-Graham behind the L-shape, and credits the bounds c*(k) <= 4 ceil(sqrt(2k - 7)) + 5 and 4 ceil(sqrt(2k - 7)) - 1 to 'this repository'; it says the axis-filled ends were suggested by a literature-reading agent of the repository (2026-10-17) and that the formalization is Evan Daniel's, with Claude, 2026-10-17/18. CREDITS.md says the repository's work was produced by Claude (Anthropic) under human direction. The README says 'Not peer reviewed.'",
+      "claims": [
+        "lean/Sqpack/RyuLayers.lean (first committed at 4b456fe, 2026-10-18T05:44:46Z; unchanged at the pin) states theorem UnitSquarePacking.Ryu.packs_sub_4sqrt2_layers (k : \u2115) (hk : 7 \u2264 k) : \u2203 s < (k : \u211d), Packs (k * k - 4 * (Nat.sqrt (2 * k - 8) + 1)) s, that is k^2 - 4b unit squares in a square of side less than k with b = ceil(sqrt(2k - 7)) = Nat.sqrt (2k - 8) + 1, so c*(k) <= 4 ceil(sqrt(2k - 7)) - 1 for every k >= 7; and packs_layers (k b : \u2115) (hb : 3 \u2264 b) (hkb : b + 4 \u2264 k) (hk : 2 * k \u2264 b ^ 2 + 7) : \u2203 s < (k : \u211d), Packs (k * k - 4 * b) s.",
+        "The construction: Ryu's L-shaped packing with b = ceil(sqrt(2k - 7)), L - 3 rows per band of length L, and floor((b - 1)/2), floor((b - 1)/2), floor(b/2) and floor(b/2) + 1 + 1 axis squares in the four band ends, 2b in all (RyuEnds.band_ends: Ryu's Lemma 5.1 in general form, the rotation by pi, half-plane separation and axis layers); the angle t = 1/b + delta with delta * b D (6k + 4b) = 1, D = b^2 + 1. The commit message and certificates/k2-minus-c/README.md say standard axioms only (propext, Classical.choice, Quot.sound) and that for 7 <= k <= 3*10^5 no other b or axis layering of this construction does better (search/ryu/r1prime.py).",
+        "lean/Sqpack/RyuFill.lean (a645fe3, 2026-10-18T02:28:04Z) states packs_sub_4sqrt2: c*(k) <= 4 ceil(sqrt(2k - 7)) + 5 for every k >= 7, one axis layer of floor(b/2) - 1 squares at each band end.",
+        "certificates/k2-minus-c/README.md: the table of bounds and the Lean name of each, with 'Fang's Theorem 2 for 15 <= k <= 39 (ties at 34 and 39 ...); 4 ceil(sqrt(2k - 7)) - 1 from k = 40 to about 7.4*10^5 (below Ryu's 8 ceil(sqrt(k - 4)) - 1 at every k >= 7)'; verify.sh rebuilds the Ryu-line modules and accepts each theorem only if #print axioms lists exactly propext, Classical.choice and Quot.sound. No build log is published.",
+        "site/www/k2c/index.html, the write-up 'Short of a Square' (evand.github.io/square-packing/k2c/), explains the constructions and the comparisons."
+      ]
+    }
+  ]
+}
