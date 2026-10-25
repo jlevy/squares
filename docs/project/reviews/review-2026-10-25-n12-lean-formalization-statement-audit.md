@@ -64,7 +64,7 @@ Lean paths below are relative to the project directory `Lean/Proofs/N12-jatloe/`
 | Claim | Repository `README.md` lines 5–11: `N12Compact.Final.optimality : S12.packingConstant12 = 4`, arbitrary orientations and translations, disjoint interiors, boundary contact allowed, a 4-by-3 grid attaining side 4 |
 | Credits | Jatloe, the mathematical proof and a partial formalization; Ben Gurevitch, help with the formalization; CTJLewis, refactoring and compiling (`README.md` lines 13–15) |
 | Read in full | The statement: `source/S12/Diagonal.lean`, `Normalization.lean`, `PackingConstant.lean`, and `NormalizedPacking` in `Packing.lean`. The assembly: `Compact/Assembly/Final.lean`, `SourceAssembly.lean`, `Remaining117.lean`, `Completion/Contracts.lean`, `source/S12/To117.lean`. The definitions behind each family of native sites (§4) and every `macro_rules` and `elab_rules` pattern (§5). The pins: `lakefile.toml`, `lake-manifest.json`, `lean-toolchain`, `verification/toolchain-lock.json`. The record: repository `README.md`, `AGENTS.md`, `SOURCE-PROVENANCE.json`; `run/README.txt`, `GlobalTypeAudit.lean`, `global-type-axiom-audit.log`, `global-native-axiom-audit.json`, `github-replay.json`, `verified-source-manifest.json`. As data: `scripts/audit_native_axioms.py` and `scripts/bootstrap_sources.py` |
-| Run here | [`devtools.lean_closure`](../../../packing/devtools/lean_closure.py), the triage’s receipt of the import closure of `Compact.Assembly.Final` at the commit. Programs written for this audit over the closure’s bytes, reusing [`devtools.audit_n11_lean`](../../../packing/devtools/audit_n11_lean.py)’s token patterns and its comment and string stripping: a token scan, an instance classifier, a search for declarations that could shadow the statement’s names, the mapping of native axioms to their owners (§4), and the comparison with the source’s manifest (§5). Those programs are not retained ([For the Records Lane](#for-the-records-lane)) |
+| Run here | [`devtools.lean_closure`](../../../packing/devtools/lean_closure.py), the triage’s receipt of the import closure of `Compact.Assembly.Final` at the commit. [`devtools.audit_n12_lean`](../../../packing/devtools/audit_n12_lean.py) over the closure’s bytes, each module read by the Git blob that receipt names, reusing [`devtools.audit_n11_lean`](../../../packing/devtools/audit_n11_lean.py)’s token patterns and its comment and string stripping: a token scan, an instance classifier, a search for declarations that could shadow the statement’s names, the mapping of native axioms to their owners (§4), and the comparison with the source’s manifest (§5), written as the packet’s [`receipts/statement-audit.json`](../../../packing/resources/web/jatloe-n12-lean-2026-10-16/receipts/statement-audit.json). The audit first counted with programs in its scratch space; the tool, written the same day, reproduces every count cited here, and its `check` recomputes the statement closure’s part from the packet’s retained bytes |
 | Not done here | Any Lean build, elaboration or `#print axioms`; reading the release’s evidence ZIP or its compiled checkpoint; any part of the mathematics |
 
 ## 2. The Claim Against the Theorem, Line by Line
@@ -228,7 +228,7 @@ arithmetic of `Nat` and `Int` that exact rational arithmetic reduces to, and any
 evaluated code reaches.
 The project adds none (§5). The decided propositions are about natural numbers, finite
 sets of them and rationals; no floating-point or fixed-width integer type appears in any
-Lean file of the project.
+module of the closure.
 That is the trust model the source names (`README.md` lines 28–33, `AGENTS.md` lines
 8–10). It is weaker than a kernel-only check, and the record must not describe this
 theorem as using the standard axioms only (M-1). The rest of the proof decides its
@@ -241,7 +241,7 @@ r'\._native\.native_decide\.ax_[1-9][0-9]*(?:_[0-9]+)*'`
 (`scripts/audit_native_axioms.py` line 184). A hand-written axiom given such a name
 would pass that test.
 The same script refuses the word `axiom` in the lexed source (line 146). The scan here
-finds the word nowhere in the code of any Lean file of the project, only in eight
+finds the word nowhere in the code of the closure’s 5,377 modules, only six times in
 comments, and finds no `addDecl`, `modifyEnv` or `setEnv` by which a metaprogram could
 add one (§5). For this property the scan is load-bearing, as it was for the
 eleven-square formalization.
@@ -249,10 +249,13 @@ eleven-square formalization.
 ## 5. Kernel Escapes on the Critical Path
 
 Counted here over the code of the 5,377 modules of the closure of
-`Compact.Assembly.Final`, with comments, strings and character literals blanked by
-`devtools.audit_n11_lean.strip_code`, using that tool’s token patterns plus a few added
-for this audit. The statement closure is the 109 modules that `S12.PackingConstant`
-imports (§6).
+`Compact.Assembly.Final` by
+[`devtools.audit_n12_lean`](../../../packing/devtools/audit_n12_lean.py), with comments,
+strings and character literals blanked by `devtools.audit_n11_lean.strip_code`, using
+that tool’s token patterns plus the few `EXTRA_TOKENS` adds; every figure below is in
+[`receipts/statement-audit.json`](../../../packing/resources/web/jatloe-n12-lean-2026-10-16/receipts/statement-audit.json),
+with the place of each hit for a token with at most 100 of them.
+The statement closure is the 109 modules that `S12.PackingConstant` imports (§6).
 
 | Token | Whole closure | Statement closure | Load-bearing |
 | --- | --- | --- | --- |
@@ -268,6 +271,7 @@ imports (§6).
 | `set_option` | 8,969: `Elab.async` (4,103), `linter.unnecessarySeqFocus` (1,846), `maxRecDepth` (1,794), `maxHeartbeats` (1,225, some `0`), `synthInstance.maxSize` (1) | 177, of the first, third and fourth kinds | No: none weakens checking |
 | `noncomputable` | 3,661 in 2,685 modules | 112 | No: it only stops code generation, so no `native_decide` can evaluate such a definition. In the statement it marks `packingConstant12`, a real infimum, and the scaling in `Normalization.lean` |
 | `Float`, `UInt8` to `UInt64`, `USize` | 0 | 0 | — |
+| `@[reducible]` or `@[irreducible]`, `OfNat` | 1 each: `@[irreducible] def queryAt` (`source/S12/DomainSpecs.lean` 10), and `OfNat.ofNat` matched by a metaprogram (`Compact/Core/SparseLiteral.lean` 40) | `@[irreducible]` 1, the same; `OfNat` 0 | No: `irreducible` only keeps a definition from unfolding, and the metaprogram reads numerals and declares no instance |
 
 Outside code, `native_decide` occurs twice more in comments, and `unsafe` and `opaque`
 occur only in comments.
@@ -463,18 +467,22 @@ This audit is neither: its reviewer is an AI.
   with `E-n011-lean-formalization-report`: `reported`, `reported_method:
   proof-assistant-checked`, replay `not-attempted`. Every sentence that mentions it says
   the proof is checked by the kernel and the compiler.
-- **Turn this audit’s programs into a tool.** The counts of §2, §4 and §5 beyond
-  `devtools.lean_closure`’s own (the instance classes, the syntax-extension and
+- **Cite the tool’s receipt, not the audit’s programs.** The counts of §2, §4 and §5
+  beyond `devtools.lean_closure`’s own (the instance classes, the syntax-extension and
   `set_option` census, the shadowing search, the mapping of 1,624 axioms to 1,525 owners
-  and the manifest comparison) came from programs written for this audit in its scratch
-  space and not retained.
+  and the manifest comparison) first came from programs written for this audit in its
+  scratch space.
   [OR-1](../../../operating-rules.md#or-1-build-the-tool-never-leave-a-measurement-in-one-off-code),
   and the second finding of the
   [eleven-square adversarial review](review-2026-10-06-n11-lean-formalization-adversarial.md),
-  ask for such receipts to come from a kept tool before an entry cites them.
-- **Retain the record’s inputs** in the packet: the closure receipt, the run directory
-  `verification/run-38849916588/` and `SOURCE-PROVENANCE.json`.
-- **Map this review** in [`document-map.yaml`](../document-map.yaml); this lane did not.
+  ask for such receipts to come from a kept tool before an entry cites them, so the
+  integration lane made them
+  [`devtools.audit_n12_lean`](../../../packing/devtools/audit_n12_lean.py), whose
+  receipt is
+  [`receipts/statement-audit.json`](../../../packing/resources/web/jatloe-n12-lean-2026-10-16/receipts/statement-audit.json).
+- **The record’s inputs are retained** in the packet: the closure receipts, the run
+  directory `verification/run-38849916588/` and `SOURCE-PROVENANCE.json`.
+- **This review is mapped** in [`document-map.yaml`](../document-map.yaml).
 - **“Confirmed”.** Nothing here confirms the proof.
   The statement audit is a reading of the source, and the counts are of its bytes.
 

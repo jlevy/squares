@@ -172,7 +172,7 @@ rebuilds the packet from a checkout at the pin; `--check` re-derives it without 
 
 ## Receipts
 
-Both closure receipts were written here on 25 October 2026 by
+The two closure receipts were written here on 25 October 2026 by
 [`devtools.lean_closure`](../../../devtools/lean_closure.py), which reads Git objects at
 the pin and runs nothing from the source.
 A token count is not a parse and not a build: it says what the text holds, and the axiom
@@ -204,6 +204,28 @@ uv run --frozen --all-extras --group dev python -m devtools.lean_closure CHECKOU
 ```
 
 and the same with `S12.PackingConstant` for the statement closure.
+
+- [`receipts/statement-audit.json`](receipts/statement-audit.json), written the same day
+  by [`devtools.audit_n12_lean`](../../../devtools/audit_n12_lean.py) for the
+  [statement audit](../../../../docs/project/reviews/review-2026-10-25-n12-lean-formalization-statement-audit.md),
+  which cites its counts. It reads every module of the closure receipt by its Git blob
+  and counts, in code and in the raw text, the eleven-square audit’s escape tokens and a
+  few more (`set_option` names, instance classes, `decide +kernel`, `noncomputable`), over
+  the whole closure and over the statement closure; it lists every declaration of the
+  statement’s names; it matches each of the 1,624 `native_decide` axioms of
+  `global-type-axiom-audit.log` to the calls of its owner, 1,525 declarations, and lists
+  by module the 948 calls in 749 declarations that no axiom of the final theorem
+  reaches; and it holds every module’s bytes to the SHA-256 the run’s
+  `verified-source-manifest.json` states, and the log and the manifest to the digests
+  `SOURCE-PROVENANCE.json` records. None differs.
+
+From `packing/`, with the same checkout, and then from the packet alone, which recomputes
+the statement closure’s part and the run evidence:
+
+```sh
+uv run --frozen --all-extras --group dev python -m devtools.audit_n12_lean scan CHECKOUT
+uv run --frozen --all-extras --group dev python -m devtools.audit_n12_lean check
+```
 
 ## The Build Plan, Priced
 
