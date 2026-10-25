@@ -5,7 +5,7 @@ title: "Import #804: Hyukdong Kim's exact minimal polynomials of the record side
 kind: task
 status: in_progress
 priority: 2
-version: 15
+version: 16
 delegate: c-import-804-1025
 labels:
   - result-import
@@ -17,7 +17,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-25T05:20:39.648Z
-updated_at: 2026-10-25T11:32:44.397Z
+updated_at: 2026-10-25T11:44:44.880Z
 started_at: 2026-10-25T05:21:00.185Z
 ---
 New 2026-10-25 issue https://github.com/jlevy/squares/issues/804 (HyukdongKim, 01:57:25Z): the record side at each of 88, 126, 172, 199 and 263 is a root of a stated irreducible polynomial (degrees 7, 2, 24, 16, 17; 126 = 15/2 + 3 sqrt 2), the register having minimal_polynomial: null there; exact_forms.json. Claude-assisted. Stage 1 triage read-only first: which houses the polynomials describe today (the record has moved since 2ec489d1e at some counts?), how to verify (exact KKT/rigidity system, PSLQ is not a proof), and the register action (new exact-value entries, or evidence on the houses).
@@ -80,3 +80,5 @@ Update 10:40Z (review A of #813, issuecomment-6396307905): A1 to A5 fixed at 699
 Update 11:55Z (review B, issuecomment-6396781432): B1 to B5 fixed at d5dcd2d0e; dispositions issuecomment-6396944532; head 3bf9b6455, every hosted check passes (Packing validation 40188144019, Certificate page 40188143967). think-4rzl step 1 is now the reader of the configurations packet facts (about half an agent-day).
 
 2026-10-25 coord-intake-1024: #813 MERGED as 01e2b5295 at 11:32:19Z (review A issuecomment-6396307905 / dispositions issuecomment-6396537425; follow-up B issuecomment-6396781432 / dispositions issuecomment-6396944532; head 3bf9b6455, CI green). T-244 reported at 172/263; configurations received (think-4rzl, not deferred). The acknowledgement above is posted after the deploy verifies.
+
+2026-10-25 coord-intake-1024: #813 deployed (Pages 40189291622 verified; live result/t-244.html 200). #804 acknowledgement posted https://github.com/jlevy/squares/issues/804#issuecomment-6397201800; recorded by think-4rzl's PR (c-decide-4rzl-1025, wt-4rzl), which decides the configurations.
