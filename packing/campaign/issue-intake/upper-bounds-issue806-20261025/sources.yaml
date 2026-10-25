@@ -40,8 +40,8 @@ reports:
     new_packing:
       source: '#806''s credit section: ''a new packing (a different local minimum from the register''s
         13.974090713), found by our explore loop from a start at n = 211'''
-      continues: 'the register''s s(211) packing, T-188: Daniil Ostashev''s design as Francisco Couzo continued it
-        at 487b058, by an L-cut of 29 squares, as the issue states'
+      continues: 'the register''s s(211) packing, T-188: Francisco Couzo''s arrangement of Daniil Ostashev''s design
+        (T-175), by an L-cut of 29 squares, as the issue states and the 25 October review measured'
   note: >-
     The issue names d99925d1, which its author pushed at 2026-10-25T04:16:05Z (3c335fe..d99925d in GitHub's
     activity log), 19 seconds before the issue; committed at 04:11:15Z.

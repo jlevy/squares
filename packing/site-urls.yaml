@@ -21426,6 +21426,8 @@ urls:
     builds_on: null
     evidence:
     - E-evand-n182-certificate-report
+    - E-evand-n182-exact-feasibility
+    - E-evand-n182-review-exact-feasibility
     artifacts:
     - packing/resources/web/evand-n182-2026-10-25/README.md
     - packing/resources/web/evand-n182-2026-10-25/acquisition/claims.json
@@ -21435,6 +21437,8 @@ urls:
     - packing/resources/web/evand-n182-2026-10-25/measure/identity.json
     - packing/campaign/issue-intake/upper-bounds-issue806-20261025/README.md
     - packing/devtools/upper_bound_reports.py
+    - docs/project/reviews/review-2026-10-25-evand-n182.md
+    - packing/resources/web/evand-n182-2026-10-25/review/review-2026-10-25/README.md
 - path: results.html
   canonical: results.html
   kind: page

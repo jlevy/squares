@@ -34278,67 +34278,68 @@ results:
     claim: >-
       One complete rational source certificate reports a finite upper-bound improvement at
       the exact side it states: s(182) <= 13.970916436214678735385725854133, 3.17e-3 below
-      T-174, the case's house best packing, and below every report at 182. Complete native
-      feasibility outcomes are retained separately; the selected standing case is unchanged
-      pending independent review and record review.
+      T-174, the case's house best packing when it was reported, and below every report at
+      182.
+
+      The certificate and its duplicate-square and outside-container controls were decided
+      here on 25 October 2026 by both maintained exact routes. Those routes share components
+      with the producer: both read the certificate through the evand-cert adapter, whose
+      reader's line filter and corner construction are transcribed from Evan Daniel's own
+      checkers, the ones the certificate names. The 25 October review decided it again on a
+      clean-room checker of its own, by separating axes and by exact clipped areas with
+      fourteen controls, by a Claude agent, a system family the producer also used, and
+      found no blocking defect, so the bound is confirmed, independently re-implemented.
 
       It is search/packer/candidates/s182-1024.cert in Evan Daniel's watched repository
       (https://github.com/evand/square-packing), committed on 25 October 2026 at 04:11:15Z
       and pushed at 04:16:05Z, 19 seconds before issue 806 reported it as 13.970916436215,
       its side rounded up at 12 places.
 
-      The certificate's JSON report states S_input 13.970916436217552 and S_exact
-      13.97091643621467873524…, the side of a Newton-converged KKT point at 80 digits, and
-      the issue reports that the source's two exact checkers, verify_cert.py and
-      verify_cert2.py, both print VALID; the certificate's header names verify_cert.py,
-      byte-identical to the copy the n183 packet retains. The issue states a local minimum of
-      the side, strict modulo 43 exact flat motions, with 68 corner-corner contacts, 6
-      rattlers and no corner-corner MILP descent, as numerical evidence at 80 digits, not
-      interval proofs. Those statements are the author's; no source program ran here. From
-      the two sides it states, the certificate's side lies above S_exact by about 1.40e-19,
-      a relative padding of 1e-20.
-
-      Credit Evan Daniel (https://github.com/evand/square-packing), who reports a new
-      packing, "a different local minimum from the register's 13.974090713", found by his
-      explore loop from a start at 211, and asks that the start be credited: "the register's
-      s(211) packing (Daniil Ostashev; also in Francisco Couzo's repository)". That packing
-      is T-188's, Daniil Ostashev's design as Francisco Couzo continued and certified it.
+      Credit Evan Daniel (https://github.com/evand/square-packing), from an L-cut of
+      Francisco Couzo's 211 packing (T-188), an arrangement of Daniil Ostashev's design
+      (T-175). The issue asks that "the register's s(211) packing (Daniil Ostashev; also in
+      Francisco Couzo's repository)" be credited as the start; the register's packing at the
+      side the issue gives for it is T-188's, and where T-188 differs from Ostashev's own 211
+      packing the certificate follows T-188 (M-1 of the 25 October review).
 
       The issue says one L-cut job removed a strip of 29 squares, a row and a column along
-      two walls, from it and relaxed the rest to 182 squares at 13.971254466, and a local
-      search took that to this side. That lineage is the author's statement; which copy of
-      the 211 packing the source's store held is asked of the author. Measured here, the
-      certificate is another arrangement than T-174's packing.
+      two walls, and relaxed the rest, and a local search took that to this side. Measured
+      square for square by the review, the 29 squares the 182 do not use are T-188's right
+      column and top row, and of the other 182, 17 move beyond 0.1 (largest 0.464), 156
+      beyond 1e-2 and 173 beyond 1e-3. Against T-174's packing no symmetry pairs it one to
+      one, so it is another arrangement.
 
       Two Kaggle per-puzzle leaderboard entries the issue quotes state a side and no
-      packing, so neither is a report: Subramanya N's 13.9709164362306 of 24 October, 1.59e-11
-      above this side, which the issue calls very likely the same local minimum, and
-      Prathamesh Chavan's 13.9727613470647 of 23 October. The source's credits say its work
-      was produced by Claude (Anthropic) under human direction, and the commit carries a
-      Co-Authored-By trailer naming Claude.
+      packing, so neither is a report: Subramanya N's 13.9709164362306 of 24 October,
+      1.59e-11 above this side and listed before the source's search found the packing, by
+      the issue's account, and Prathamesh Chavan's 13.9727613470647 of 23 October. The
+      source's credits say its work was produced by Claude (Anthropic) under human
+      direction, and the commit carries a Co-Authored-By trailer naming Claude.
     scope: {n_values: [182]}
-    verification: V0
-    confirmation: C0
+    verification: V3
+    confirmation: C3
     significance:
       score: 3
       rationale: >-
-        Draft, from the stage 1 triage (think-2lzo): a new arrangement at 182, 3.17e-03
-        below T-174, the house, and every report there. No symmetry pairs it one to one with
-        the house's packing by nearest centres, the best assignment moves 44 squares beyond a
-        tenth and 79 beyond a hundredth, and no tilt angle is shared, as T-240's 4.45e-03 and
-        2.78e-03 (S3) and T-162's 2.02e-03 to 1.42e-02 (S3) are. T-098 and T-174 refine one
-        packing at 182, Francisco Couzo's of September (T-056); this is the first other
-        arrangement the register holds there. No lower bound or optimum.
+        A new arrangement at 182, 3.17e-03 below the house (T-174) and every packing
+        reported there: no symmetry pairs it one to one with the house's packing by nearest
+        centres, and the optimal assignment moves 44 squares beyond a tenth and 79 beyond a
+        hundredth, as T-158's 2.95e-03 to 3.44e-03, T-164's 1.75e-03 and T-240's 4.45e-03
+        and 2.78e-03 (S3) are; well above T-188's further arrangement (S2). No lower bound
+        or optimum; the cross-count construction is the source's search method, not a
+        result here.
       scored: '2026-10-25'
       by: >-
-        the stage 1 triage of 25 October (c-triage-2lzo-1025, think-2lzo) and the records
-        lane of think-2lzo
+        the 25 October review (docs/project/reviews/review-2026-10-25-evand-n182.md), lane
+        c-review-806-math, confirming the draft S3 of the stage 1 triage (think-2lzo)
     novelty: previously-published
     attribution:
       source_keys: ['[Daniel n182 2026-10-25]']
       published: '2026-10-25'
     evidence:
       - E-evand-n182-certificate-report
+      - E-evand-n182-exact-feasibility
+      - E-evand-n182-review-exact-feasibility
     artifacts:
       - packing/resources/web/evand-n182-2026-10-25/README.md
       - packing/resources/web/evand-n182-2026-10-25/acquisition/claims.json
@@ -34348,10 +34349,14 @@ results:
       - packing/resources/web/evand-n182-2026-10-25/measure/identity.json
       - packing/campaign/issue-intake/upper-bounds-issue806-20261025/README.md
       - packing/devtools/upper_bound_reports.py
+      - docs/project/reviews/review-2026-10-25-evand-n182.md
+      - packing/resources/web/evand-n182-2026-10-25/review/review-2026-10-25/README.md
     controls:
       - packing/tests/test_upper_bound_reports.py
       - packing/tests/test_upper_bound_reports_806.py
       - packing/resources/web/evand-n182-2026-10-25/receipts/sharp-controls.json
+      - packing/resources/web/evand-n182-2026-10-25/review/review-2026-10-25/out/check-s182-1024.json
+      - packing/resources/web/evand-n182-2026-10-25/review/review-2026-10-25/out/controls-s182-1024.json
     notes: >-
       A separate complete repository replay is retained for n = 182: 1 positive and 2
       duplicate-square and outside-container controls passed their required outcomes on both
@@ -34367,6 +34372,17 @@ results:
       and one to its wall at contact for its shape alone and 1e-30 past it for the overlap or
       the wall as well, and refused a duplicated square.
 
+      The 25 October review's clean-room checker (E-evand-n182-review-exact-feasibility)
+      decided every wall and all 16,471 pairs by separating axes and again by exact clipped
+      areas. Its least wall clearance, exactly 5e-21, and least pair gap, about
+      9.999999999999992e-21 (squares 99 and 100, numbered from 0), are the replay's; the
+      register's "at least 9.99e-21" is that gap cut at three places. Its fourteen
+      controls, sharp at 1e-30 at the far and near walls, the closest pair and two enlarged
+      squares, were decided as expected by both of its methods. With every rotation
+      reversed, 80 pairs overlap, so the certificate holds under the counter-clockwise
+      reading of the half-angle tangent, which its format line implies and does not state
+      (N-1).
+
       In the packet's frozen comparison (acquisition/claims.json, read from main on 25
       October 2026), at n = 182 the certificate is below the case's ceiling (PingYou Ltd, of
       Francisco Couzo's packing as Evan Daniel improved it, T-174), T-098 (#375), Couzo's
@@ -34376,53 +34392,69 @@ results:
       dated by the issue; the push of the certificate 19 seconds before it is the same
       author's publication of the same file, and nothing reached 182 between them.
 
-      Measured pose by pose (measure/identity.json in the packet; a measurement, which
-      decides nothing), no symmetry pairs it one to one with T-174's packing by nearest
-      centres; the optimal assignment, best under the identity, moves 44 of 182 squares
-      beyond a tenth and 79 beyond a hundredth (largest 0.813), turns 74 squares, pairs 16
-      tilted squares with squares tilted the other way, and shares no tilt angle within 1e-4
-      degrees. It has 68 tilted squares, all turned one way, against T-174's 59. T-098's
-      packing and the house witness measure the same. Against the source's binary64 input
-      it is one to one under the identity, none beyond 1e-6 (largest 2.55e-7).
+      Measured pose by pose (measure/identity.json in the packet, and again by the review; a
+      measurement, which decides nothing), no symmetry pairs it one to one with T-174's
+      packing by nearest centres; the optimal assignment, best under the identity, moves 44
+      of 182 squares beyond a tenth and 79 beyond a hundredth (largest 0.813), turns 74
+      squares, pairs 16 tilted squares with squares tilted the other way, and shares no tilt
+      angle within 1e-4 degrees. It has 68 tilted squares, all turned one way, against
+      T-174's 59. T-098's packing, T-056's and the house witness measure the same. Against
+      the source's binary64 input it is one to one under the identity, none beyond 1e-6
+      (largest 2.55e-7).
+
+      The review placed the start at T-188 rather than at Ostashev's T-175 or Couzo's T-181
+      and T-182, which differ from T-188 at the same five squares: at T-188's tilted square
+      141 the certificate lies 0.015 from T-188's pose and 0.442 from T-175's, and at square
+      9 0.024 against 0.175 (M-1). The issue's own account of the start gives T-188's side,
+      14.993549626299. "The lineage from the start is short" counts the search's steps, not
+      the squares' motion (N-4).
 
       The source's s182-1024_regularized.cert is a display view at the same side, one to one
       with the certificate under the identity: it moves 49 squares, 5 beyond a tenth
-      (largest 0.381). It proves no other bound and is not registered; the adoption's
-      regularization may offer it to the selection as a candidate drawing.
+      (largest 0.381), and the review's checker accepts it. It proves no other bound and is
+      not registered.
+
+      The source reports, from numerical checks at 80 digits that are not interval proofs, a
+      KKT point and a local minimum of the side, strict modulo 43 exact flat motions, with
+      six free squares, 68 corner-corner contacts and no corner-corner MILP descent. That is
+      the source's report: it is not verified here and bears on the packing, not on s(182)
+      (N-3). The source's S_exact, 13.97091643621467873524..., is a numerical value of that
+      KKT system's solution, which no certificate attains; the bound is the certificate's
+      side, 1.40e-19 above it (N-2). The commit's title gives the side as an equality; the
+      record states the upper bound only (M-2).
 
       The source's own checkers were not run here. The two maintained routes, the sqpack
       rational witness verifier and the independent rational corner checker, share
-      certificate parsing, half-angle conversion, Fraction arithmetic and the separating-axis
-      method, and read the certificate through the evand-cert adapter, whose line filter and
-      corner construction are transcribed from Evan Daniel's checkers. No two independent
-      methods, human oversight or optimality is claimed.
+      certificate parsing, half-angle conversion, Fraction arithmetic and the
+      separating-axis method with each other, and with the producer the evand-cert reader's
+      line filter and corner construction; the review's checker shares no code with them.
+      No human oversight or optimality is claimed.
     next_rung: >-
-      Independently review the retained replay and the certificate (stage 4): a clean-room
-      exact checker, the identity against T-174 and the lineage the issue states from
-      T-188's packing at 211, a mapped review whose acceptance would raise both rungs. Then
-      adopt it at 182 under the house rule, with both strong generators' regularization of
-      the new house in the same change.
-    activity:
-      state: in-analysis
-      what: >-
-        The stage 4 mathematical review of this certificate, in a lane of its own sharing no
-        context with the records lane.
-      since: '2026-10-25'
-      link: think-meci
-    unfinished_confirmations:
-      - what: >-
-          The stage 4 review: a clean-room exact checker of the certificate with sharp
-          controls, the identity against T-174 and the lineage against T-188's packing at 211,
-          mapped as an adversarial review
-        rung: C3
-        link: think-meci
-        estimated_cost:
-          cpu_hours: 0.02
-          cpu_hours_high: 0.04
-          basis: >-
-            The stage 1 triage's price: 1 to 2 CPU-minutes of programs, as the T-241 and
-            T-242 review used about 140 CPU-seconds for three certificates at 268 to 304
-          priced: '2026-10-25'
+      None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
+      reviewer and a retained human oversight record; one AI review, of 25 October, is
+      retained. The review's questions for the author (the start's credit, the cut, an
+      enclosure of the KKT point and the certificate's format line) hold no rung. It is the
+      smallest validated side at 182, so the case adopts it under the house rule, with both
+      strong generators' regularization of the new house in the same change.
+    reviews:
+      - path: docs/project/reviews/review-2026-10-25-evand-n182.md
+        kind: adversarial
+        reviewer: >-
+          AI agent (Claude, strongest tier, maximum reasoning), the stage 4 mathematical
+          review lane of issue 806 (c-review-806-math, think-meci), prompted separately from
+          the triage, records and replay lanes, with no shared context beyond its brief
+        reviewer_kind: ai
+        relation: project
+        date: '2026-10-25'
+        scope: >-
+          Finite feasibility at n = 182 of #806's certificate: decided again by a clean-room
+          exact checker by two methods with fourteen sharp controls; the side, its 12-place
+          print and the rotation sense; the identity against T-174, the house witness, T-098,
+          T-056, the source's binary64 input and its regularized view; the L-cut lineage
+          measured square for square against T-188, T-175, T-181 and T-182 at 211; the
+          source's KKT point read against the certificate; credit, and the significance.
+        verdict: accepted
+        covers: [T-243]
 
 # Generated by python -m devtools.regularized_drawings from the regularized layer's
 # index (packing/atlas/known-best/regularized/index.json); do not edit by hand.

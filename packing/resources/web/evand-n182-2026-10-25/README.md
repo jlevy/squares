@@ -12,17 +12,21 @@ opened 19 seconds later at 04:16:24Z, reports it:
   13.970916436214678735385725854133$, which the issue prints rounded up at 12 places as
   13.970916436215: 3.17e-3 below T-174, the case’s house, and below every report at 182.
 
-T-243 registers it at `V0`/`C0`. The stage 4 review runs in a lane of its own
-(think-meci); the adoption at 182 under the house rule, with the regularization of the
-new house by both strong generators, follows its acceptance.
+T-243 registers it at `V3`/`C3` since the
+[stage 4 review of 25 October](#stage-4-review), which accepted it with no blocking or
+major finding. It is the smallest validated side at 182, so the case adopts it under the
+house rule, with the regularization of the new house by both strong generators in the
+same pull request.
 
 The source was read on 25 October 2026 from a blobless clone fetched at 05:22Z, whose head
 was `d99925d`, as it still was when this packet was written.
 
 ## What the Author Claims
 
-The commit message, apart from its trailer: “candidates: s(182) = 13.97091643621468
-(polished and certified; distinct minimum from the register’s 13.974090713)”.
+The commit’s title gives the certificate’s side rounded up at 14 places, 13.97091643621468,
+as an equality, and calls the packing “polished and certified” and a “distinct minimum
+from the register’s 13.974090713”. The result is an upper bound, as the issue’s title and
+table state it, and the record states it so (M-2 of the review).
 
 Issue #806 claims one new upper bound, the certificate’s exact rational side rounded up at
 12 places, and prints the SHA-256 of `s182-1024.cert` and of
@@ -157,26 +161,64 @@ source’s checkers were not run.
 
 A finite packing certifies an upper bound and nothing more.
 No KKT, local-minimum, rigidity or optimality statement is replayed: the source’s
-`S_exact`, free squares, flat motions and second-order report are its own. No lineage is
-measured here: the L-cut from 211 is the author’s statement, which the stage 4 review
-checks. Whether Subramanya N published a packing at the Kaggle side is for the author or
-Subramanya N to say.
+`S_exact`, free squares, flat motions and second-order report are its own numerical
+report at 80 digits, with no interval enclosure (N-2 and N-3 of the review). The search
+history, the relaxation’s side 13.971254466 and the explorer’s moves, is the source’s
+account; the lineage rests on the review’s geometry alone. Whether Subramanya N
+published a packing at the Kaggle side is for the author or Subramanya N to say, and the
+record does not call this side the first known at its value (N-7).
 
 ## Credit and Licence
 
 - **The packing:** Evan Daniel’s, a new arrangement found by his explore loop.
-- **The start:** the register’s s(211) packing, as the issue asks: T-188’s, Daniil
-  Ostashev’s design as Francisco Couzo continued and certified it at `487b058`. Which copy
-  the source’s store held, this project’s witness at 211, Couzo’s `487b058` certificate
-  or his `43ac7d2` file, is asked of the author; the packing is the same.
+- **The start:** the register’s s(211) packing, as the issue asks, which is T-188’s:
+  Francisco Couzo’s 211 packing, an arrangement of Daniil Ostashev’s design (T-175). The
+  issue’s own account gives the start T-188’s side, 14.993549626299, and where T-188
+  differs from Ostashev’s own 211 packing the certificate follows T-188 (M-1 of the
+  review). So the credit is *Evan Daniel, from an L-cut of Francisco Couzo’s 211 packing
+  (T-188), an arrangement of Daniil Ostashev’s design (T-175)*.
 - **Licence and assistance:** MIT, copyright (c) 2026 Evan Daniel ([LICENSE](source/LICENSE)).
   [CREDITS.md](source/CREDITS.md) says the repository’s work was “Produced by Claude
   (Anthropic) in a single session under human direction”, the commit carries a
   Co-Authored-By trailer naming Claude, and the issue discloses Claude assistance.
 
-The bibliography key is **[Daniel n182 2026-10-25]**, credited *Daniel after Ostashev,
-Couzo, Levy*. Its lineage is `builds-on-project`: the issue names this project’s register
-as where its start came from, as Daniel’s issue-728 key does for his 303.
+The bibliography key is **[Daniel n182 2026-10-25]**, credited *Daniel after Couzo,
+Ostashev, Levy*. Its lineage is `builds-on-project`: the issue names this project’s
+register as where its start came from, as Daniel’s issue-728 key does for his 303.
+
+## Stage 4 Review
+
+The [review of 25 October 2026](../../../../docs/project/reviews/review-2026-10-25-evand-n182.md)
+accepted the certificate for finite feasibility, with no blocking or major finding, two
+minor findings and eight notes. Its programs and outputs are kept here in
+[review/review-2026-10-25/](review/review-2026-10-25/README.md).
+
+- **Its own checker.** `exact_check.py` decides the certificate in `Fraction` over all 182
+  walls and 16,471 pairs, by separating axes and again by exact clipped areas, with
+  fourteen controls sharp at $10^{-30}$, all as expected under both methods. Its least
+  wall clearance, exactly 5e-21, and least pair gap, about 9.999999999999992e-21 (squares
+  99 and 100), are the replay’s. Its author read neither maintained route nor any checker
+  of Daniel’s, so it is a clean-room re-implementation
+  (`E-evand-n182-review-exact-feasibility`, `V-evand-n182-review-check`).
+- **The maintained replay** reads the certificate through the `evand-cert` reader, whose
+  line filter and corner construction are transcribed from Daniel’s `verify_cert.py` and
+  `verify_cert2.py`, so it is `shared-components` (`E-evand-n182-exact-feasibility`), and
+  T-243’s independent re-implementation rests on the review’s checker.
+- **The lineage.** Measured square for square, T-188’s 211 packing fits in its own frame,
+  and the 29 squares the 182 do not use are exactly its right column and top row of 15,
+  sharing the corner square. Of the other 182, 17 move beyond 0.1 (largest 0.464), 156
+  beyond 1e-2 and 173 beyond 1e-3 (N-4). At T-188’s tilted square 141 the certificate lies
+  0.015 from T-188’s pose and 0.442 from T-175’s, which places the start at T-188 (M-1).
+- **The KKT point.** The certificate is the source’s 80-digit point dilated about the
+  corner by $1 + 10^{-20}$, its centres within $4.97 \times 10^{-36}$; the point is a
+  packing at $S^*$ only to its precision (N-2). The local-minimality statement is the
+  source’s numerical report (N-3).
+- **The rest.** M-1, M-2, N-2, N-3, N-4 and N-7 are applied above and in the register;
+  S3 is confirmed. N-8, the case record’s rigidity statement, is derived again on the new
+  witness at the adoption. The author’s four questions (the start’s credit, the cut, an
+  enclosure of the KKT point, the format line’s corner formula) are drafted for the
+  acknowledgement in think-2lzo and hold nothing open: the issue’s own start side and the
+  review’s measurement settle the start, and the others change nothing the record asserts.
 
 ## Commands
 

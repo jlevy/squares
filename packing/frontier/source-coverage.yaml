@@ -11456,16 +11456,19 @@ sources:
   - resources/web/evand-n182-2026-10-25/acquisition/claims.json
   evidence:
   - E-evand-n182-certificate-report
+  - E-evand-n182-exact-feasibility
+  - E-evand-n182-review-exact-feasibility
   notes: >-
     The certificate at 182 that d99925d adds under search/packer/candidates/, committed on
     25 October 2026 at 04:11:15Z and pushed at 04:16:05Z, 19 seconds before issue 806
     reported it, retained as the source wrote it with the source's KKT point, binary64
     input, JSON report, comparison files and regularized display view, and admitted at its
-    exact side. T-243 records it at V0/C0, pending stage 4; all 3 native jobs have full
-    outcomes, and the packet's sharp controls meet its 5e-21 margins on both routes. The
-    ledger of 25 October for this import (campaign/issue-intake/upper-bounds-issue806-20261025)
-    records it 3.17e-03 below T-174, a new packing. No selected override is created at this
-    source-only stage; the case at 182 is unchanged.
+    exact side. All 3 native jobs have full outcomes, and the packet's sharp controls meet
+    its 5e-21 margins on both routes. The ledger of 25 October for this import
+    (campaign/issue-intake/upper-bounds-issue806-20261025) records it 3.17e-03 below T-174,
+    a new packing. T-243 records it at V3/C3 since the 25 October review
+    (E-evand-n182-exact-feasibility, E-evand-n182-review-exact-feasibility), and the case
+    at 182 adopted it as its house best packing in the pass of 25 October 2026.
 selected_overrides:
 - n: 29
   source_id: pingyou-pr622-certificate-2026-10-15

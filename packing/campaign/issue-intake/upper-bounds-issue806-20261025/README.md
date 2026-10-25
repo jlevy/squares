@@ -35,7 +35,7 @@ Each report at the count in report order, with its side and verdict; a verdict n
 
 | n | Record on main | Reports in order | Best now |
 | ---: | --- | --- | --- |
-| 182 | 13.974090713122 (record T-174; Francisco Couzo, improved by Evan Daniel, PingYou Ltd) | #806 13.970916436215: recorded (new packing, continuing the register's s(211) packing, T-188: Daniil Ostashev's design as Francisco Couzo continued it at 487b058, by an L-cut of 29 squares, as the issue states) (below by 3.17e-03; measured: no symmetry pairs it one to one by nearest centres; the optimal assignment, best under the identity, moves 44 squares beyond 0.1 and 79 beyond 1e-2 (largest 0.813), turns 74 squares, reverses 16 tilts beyond a degree and shares no tilt angle within 1e-4 degrees; against the source's own binary64 input, one to one, none beyond 1e-6 (largest 2.55e-7)) | #806 13.970916436215 |
+| 182 | 13.974090713122 (record T-174; Francisco Couzo, improved by Evan Daniel, PingYou Ltd) | #806 13.970916436215: recorded (new packing, continuing the register's s(211) packing, T-188: Francisco Couzo's arrangement of Daniil Ostashev's design (T-175), by an L-cut of 29 squares, as the issue states and the 25 October review measured) (below by 3.17e-03; measured: no symmetry pairs it one to one by nearest centres; the optimal assignment, best under the identity, moves 44 squares beyond 0.1 and 79 beyond 1e-2 (largest 0.813), turns 74 squares, reverses 16 tilts beyond a degree and shares no tilt angle within 1e-4 degrees; against the source's own binary64 input, one to one, none beyond 1e-6 (largest 2.55e-7)) | #806 13.970916436215 |
 
 ## Owner Decisions Needed
 
@@ -59,7 +59,7 @@ Claims whose certificate a measurement compares with another packing. The measur
 
 | n | Report | Verdict | The source says | Measured against | Finding | Measured by |
 | ---: | --- | --- | --- | --- | --- | --- |
-| 182 | #806 | recorded | a new packing seeded from the register's s(211) packing, T-188: Daniil Ostashev's design as Francisco Couzo continued it at 487b058, by an L-cut of 29 squares, as the issue states | T-174 | no symmetry pairs it one to one by nearest centres; the optimal assignment, best under the identity, moves 44 squares beyond 0.1 and 79 beyond 1e-2 (largest 0.813), turns 74 squares, reverses 16 tilts beyond a degree and shares no tilt angle within 1e-4 degrees; against the source's own binary64 input, one to one, none beyond 1e-6 (largest 2.55e-7) | packing/resources/web/evand-n182-2026-10-25/measure/identity.json |
+| 182 | #806 | recorded | a new packing seeded from the register's s(211) packing, T-188: Francisco Couzo's arrangement of Daniil Ostashev's design (T-175), by an L-cut of 29 squares, as the issue states and the 25 October review measured | T-174 | no symmetry pairs it one to one by nearest centres; the optimal assignment, best under the identity, moves 44 squares beyond 0.1 and 79 beyond 1e-2 (largest 0.813), turns 74 squares, reverses 16 tilts beyond a degree and shares no tilt angle within 1e-4 degrees; against the source's own binary64 input, one to one, none beyond 1e-6 (largest 2.55e-7) | packing/resources/web/evand-n182-2026-10-25/measure/identity.json |
 
 ### Refinement Chains
 

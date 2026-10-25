@@ -24188,9 +24188,10 @@ issues:
       12 places: 3.17e-3 below T-174, the house at 182 (PingYou Ltd's certificate of
       Francisco Couzo's packing), and below every report there. The source calls it a new
       packing, a different local minimum from the register's, found by its explore loop
-      from an L-cut of 29 squares of the register's s(211) packing (T-188: Daniil Ostashev's
-      design as Couzo continued it) and a local search, and claims the upper bound, with KKT
-      and local-minimum statements as numerical evidence. The commit d99925d was pushed at
+      from an L-cut of 29 squares of the register's s(211) packing and a local search, and
+      claims the upper bound, with KKT and local-minimum statements as numerical evidence.
+      That start is T-188's, Couzo's 211 packing, an arrangement of Daniil Ostashev's design
+      (T-175). The commit d99925d was pushed at
       2026-10-25T04:16:05Z, 19 seconds before the issue. The issue quotes two Kaggle
       per-puzzle side-only entries, Prathamesh Chavan's 13.9727613470647 (23 October) and
       Subramanya N's 13.9709164362306 (24 October, 18:41 UTC), neither with a packing, so
@@ -24200,10 +24201,15 @@ issues:
       the two digests the issue prints are theirs, the side is the certificate's header and
       rounds up to the issue's print, both maintained exact routes accept it and refuse its
       gross and sharp controls, and the ledger of 25 October for the issue
-      (upper-bounds-issue806-20261025) records it, a new packing. Registered as T-243 at
-      V0/C0; measured pose by pose, no symmetry pairs it one to one with the house's packing
-      (44 squares beyond a tenth under the best assignment), another arrangement. The stage 4
-      review runs in think-meci. Claude assistance disclosed.
+      (upper-bounds-issue806-20261025) records it, a new packing. Registered as T-243;
+      measured pose by pose, no symmetry pairs it one to one with the house's packing (44
+      squares beyond a tenth under the best assignment), another arrangement. The stage 4
+      review of 25 October (think-meci) accepted it with no blocking or major finding, so
+      T-243 is at V3/C3, scored S3, credited to Daniel from an L-cut of Couzo's T-188 (M-1),
+      and the case at 182 adopted it as its house best packing in the pass of 25 October,
+      with both strong generators' regularization in the same pull request. Its four
+      questions for the author are informational: the issue's own start side and the
+      review's measurement settle the start. Claude assistance disclosed.
     read_through: '2026-10-25T04:16:24Z'
     results:
     - key: n182
@@ -24219,6 +24225,8 @@ issues:
       - T-243
       evidence:
       - E-evand-n182-certificate-report
+      - E-evand-n182-exact-feasibility
+      - E-evand-n182-review-exact-feasibility
     beads:
     - think-2lzo
     - think-meci
