@@ -117,6 +117,21 @@ allowlist:
       (OR-18), fetched from evand/square-packing at 7d1407a into a scratch directory;
       each is held to the packet manifest's digest before it is parsed. The 19 retained
       forms are read from Git and compared with nothing.
+  - path: packing/campaign/issue-intake/upper-bounds-issue804-20261025/review/exact_forms.py
+    kind: download
+    boundary: >-
+      Issue 804's attachment squares-exact-forms.zip, which the
+      hyukdongkim-exact-forms-2026-10-25 packet keeps none of (no licence), downloaded
+      into a scratch directory, is held to the SHA-256 the issue states and the size
+      triage measured before `derive` reads a member; and each atlas file the source
+      read, evand/square-packing site/www/data/p/best-<n>.json at 659ee62, fetched into a
+      scratch directory, is held to its pinned Git blob, size and SHA-256 before `poses`
+      reads it; and the author's later t244-exact-configurations.zip, which the
+      hyukdongkim-t244-configurations-2026-10-25 packet keeps none of either, is held to
+      the SHA-256 his comment states and the measured size, and each of its two
+      certificates to its stated digest, before `configurations` parses one. The derived
+      facts and the receipts are this repository's files, read from Git and compared with
+      nothing.
   - path: packing/devtools/couzo_refinement_reports.py
     kind: download
     boundary: >-

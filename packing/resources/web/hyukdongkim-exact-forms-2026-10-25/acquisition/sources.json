@@ -1,0 +1,93 @@
+{
+ "format": "issue-attachment-sources-v1",
+ "issue": "https://github.com/jlevy/squares/issues/804",
+ "attachment": {
+  "url": "https://github.com/user-attachments/files/33917140/squares-exact-forms.zip",
+  "bytes": 14112,
+  "sha256": "c770f9c37dee6b248543f3e661318630a0f279bc6a8c7663cb2efc53e2814ee7",
+  "sha256_stated_by_issue": true,
+  "raw_asset_retained": false,
+  "licence": "none stated"
+ },
+ "members": [
+  {
+   "path": "squares-exact-forms/kkt.py",
+   "bytes": 6048,
+   "sha256": "78bf71539627f2c32ef72106e049abb4a14ab57269234601cba5134af3c4b0e6",
+   "retained": false
+  },
+  {
+   "path": "squares-exact-forms/README.md",
+   "bytes": 1533,
+   "sha256": "d11e8534c3404bdcf507138ef5a6017f2fe29e3e77ba9d4bea49ffdd9b1ebe14",
+   "retained": false
+  },
+  {
+   "path": "squares-exact-forms/exactform.py",
+   "bytes": 6893,
+   "sha256": "f21f38ed4a712c3fbf74dd3f14d21b85c04506639dfd702e6acc0884901ecd26",
+   "retained": false
+  },
+  {
+   "path": "squares-exact-forms/kkt_fast.py",
+   "bytes": 4348,
+   "sha256": "110e6aad52c6328d9e5d883642904f331a9de3f1105cdfa17383576b19ee47ee",
+   "retained": false
+  },
+  {
+   "path": "squares-exact-forms/verify_exact_forms.py",
+   "bytes": 3056,
+   "sha256": "7ffaa7f7f566499e1909175d3bd84801226242ac227281c1ae1929ae0ad22ccc",
+   "retained": false
+  },
+  {
+   "path": "squares-exact-forms/exact_forms.json",
+   "bytes": 2833,
+   "sha256": "531e7077b3242aa56e959031824fb435693deaf8d73f7e33016d49c9e1709202",
+   "retained": false
+  },
+  {
+   "path": "squares-exact-forms/lppolish.py",
+   "bytes": 7878,
+   "sha256": "bef07562fe4f9d2002e3d5806033f5b30913da08eec04b34daaca1e8ce6043e4",
+   "retained": false
+  }
+ ],
+ "inputs": {
+  "repository": "evand/square-packing",
+  "commit": "659ee62e4a9d39542a1146e8b011cc3ab6407ede",
+  "retained": false,
+  "files": [
+   {
+    "path": "site/www/data/p/best-88.json",
+    "blob": "af223f022c11a6973f2e5f0db1147d175ad16590",
+    "bytes": 41556,
+    "sha256": "f02441637e4a5fa4d9fc613e4fb9b2eab6f945e85bfbaa080cdb0f37f5d9cc63"
+   },
+   {
+    "path": "site/www/data/p/best-126.json",
+    "blob": "fefd52c9cf42fa54df02042678ff6cc2a61da19f",
+    "bytes": 62690,
+    "sha256": "861d0ab5db3d6bdda716f22063a02778ac93ab5ca2e371581f7ebb65def6bf0d"
+   },
+   {
+    "path": "site/www/data/p/best-172.json",
+    "blob": "9778b097541fa19dc4d394d4eab9b202bf977a70",
+    "bytes": 85344,
+    "sha256": "5c581ee5794dada18183038f1075630c0202d22cedf95ab84fc10bbeb6ddee8a"
+   },
+   {
+    "path": "site/www/data/p/best-199.json",
+    "blob": "07891977090660b7f9e730fbdc4e00d245877e6e",
+    "bytes": 97939,
+    "sha256": "633ec9d3b46b1cceb3111e11f57a9c4c37969b5acccbd02ee8f12a12e204fde6"
+   },
+   {
+    "path": "site/www/data/p/best-263.json",
+    "blob": "ad6fb297df432d8694f68a2f84d57f8c1cba6d1b",
+    "bytes": 134188,
+    "sha256": "9114dbc58b84852264c4186c954c535aec0afec5d9445d9b212264e88a801842"
+   }
+  ]
+ }
+}

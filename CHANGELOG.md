@@ -47,6 +47,33 @@ First public: 2026-10-25 ([publication evidence](https://github.com/jlevy/square
 
 PRs and supporting records: [\#794](https://github.com/jlevy/squares/pull/794) · [The case record at 268](packing/frontier/n-268.md) · [The case record at 303](packing/frontier/n-303.md) · [Mathematical review of 24 October](docs/project/reviews/review-2026-10-24-couzo-n268-n303.md) · [Couzo’s registration request](https://github.com/jlevy/squares/issues/763).
 
+<a id="changelog-entry-daniel-one-eighty-two-adopted"></a>
+
+#### Daniel’s New Arrangement Becomes the House Best Packing at 182
+
+Significance S3: T-243 is an S3 finite case result: a new arrangement at 182, 3.17e-03 below the packing it replaces, which no symmetry pairs one to one with it. It is cut from Couzo’s 211 packing of Ostashev’s design and polished; it brings no new technique and claims no optimality.
+
+[Evan Daniel](packing/contributors/people/evan-daniel.md)’s packing at 182, cut from
+[Francisco Couzo](packing/contributors/people/francisco-couzo.md)’s 211 packing, an
+arrangement of [Daniil Ostashev](packing/contributors/people/daniil-ostashev.md)’s
+design, and polished, passes a clean-room review here. At 13.970916436215,
+$3.17 \times 10^{-3}$ below the packing it replaces and a new arrangement relative to
+the record, it becomes the house best packing at 182. T-243 is confirmed at V3/C3.
+
+- This project’s two maintained exact routes decided the certificate, and a separately
+  prompted mathematical review decided it again on a clean-room checker of its own, by
+  a Claude agent, which is the independent confirmation. No source program ran here.
+- The case draws the regularizer’s view at the certificate’s side, which is Daniel’s
+  own regularized certificate, square for square.
+- Upper bounds only; no optimality is claimed. Local minimality is the source’s
+  numerical report.
+
+Published artifacts: [Daniel’s certificate at 182](https://squaremath.org/result/t-243.html).
+
+First public: 2026-10-25 ([publication evidence](https://github.com/jlevy/squares/actions/runs/40177916608)).
+
+PRs and supporting records: [\#814](https://github.com/jlevy/squares/pull/814) · [The case record at 182](packing/frontier/n-182.md) · [Mathematical review of 25 October](docs/project/reviews/review-2026-10-25-evand-n182.md) · [Daniel’s registration request](https://github.com/jlevy/squares/issues/806).
+
 <a id="changelog-date-2026-10-24"></a>
 
 ### 2026-10-24

@@ -430,6 +430,15 @@ OTHER_SITES: tuple[tuple[str, str, str, str], ...] = (
         ),
     ),
     (
+        "https://github.com/jlevy/squares/issues/804",
+        "Exact Sides of Five Record Packings",
+        "Hyukdong Kim",
+        (
+            "Minimal polynomials of the record sides at n = 88, 126, 172, 199 and 263,"
+            " found numerically, in an archive attached to the issue."
+        ),
+    ),
+    (
         "https://sam-burns.com/posts/proposing-better-lower-bound-for-n17-square-packing/",
         "Proposing a Better Lower Bound for n = 17 Square Packing",
         "Sam Burns",

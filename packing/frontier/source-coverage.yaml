@@ -11479,6 +11479,40 @@ sources:
     a new packing. T-243 records it at V3/C3 since the 25 October review
     (E-evand-n182-exact-feasibility, E-evand-n182-review-exact-feasibility), and the case
     at 182 adopted it as its house best packing in the pass of 25 October 2026.
+- id: hyukdongkim-exact-forms-2026-10-25
+  title: Hyukdong Kim's exact sides at 88, 126, 172, 199 and 263 in the issue 804 attachment
+  role: first-party-release
+  url: https://github.com/jlevy/squares/issues/804
+  local: resources/web/hyukdongkim-exact-forms-2026-10-25/
+  source_key: '[Kim exact forms 2026-10-25]'
+  scope:
+    n_values: [88, 126, 172, 199, 263]
+  reviewed: '2026-10-25'
+  source_date: '2026-10-25'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - campaign/issue-intake/upper-bounds-issue804-20261025/ledger.json
+  evidence:
+  - E-hyukdongkim-804-exact-forms-report
+  notes: >-
+    The attachment's exact_forms.json gives five polynomials and the side each names to 100
+    digits; the archive states no licence, so the packet keeps them as a derived exact fact
+    with the archive's address, size, SHA-256 and member digests, and no byte of it. Each
+    polynomial is irreducible over Q by SymPy and by sqpack.field, and each side is the root
+    its print names (campaign/issue-intake/upper-bounds-issue804-20261025/exact-sides.json).
+    At 88, 126 and 199 the polynomials and roots are those of Evan Daniel's issue 639 sides,
+    which T-193 records, so they are a second derivation and are not recorded. At 172 and 263
+    the sides are new, 3.898e-89 and 2.126e-94 below T-174's certificates, the houses, and
+    1.185e-62 and 9.234e-63 below issue 639's degree-12 sides; the ledger of 25 October for
+    issue 804 records them and T-244 registers them as reported. The issue supplied no exact
+    configuration; the author's configurations at both sides, attached to a comment of
+    2026-10-25T09:06:23Z, are kept as derived facts in
+    resources/web/hyukdongkim-t244-configurations-2026-10-25/ and not yet decided
+    (think-4rzl), so no packing at either side has been decided here. The author's comment of
+    07:22:16Z concedes 88, 126 and 199 to issue 639. The case records are unchanged until
+    adoption.
 - id: jatloe-n12-lean-2026-10-16
   title: Jatloe12SquaresFormalized, a Lean 4 proof that s(12) = 4
   role: source-repository

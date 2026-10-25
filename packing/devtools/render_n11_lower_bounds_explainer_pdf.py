@@ -112,9 +112,9 @@ OUTPUT = PAGE.with_suffix(".pdf")
 #: reference and colophon page. The v0.4.13 publication draws 24 on the pinned Linux
 #: build: its version history no longer fits under the document-tooling block on page
 #: 21, so the history moves whole to page 22 and the notes and colophon end on page 24.
-#: The v0.4.29 publication draws 25 on the hosted Linux build (pdf job 121136267504 at
-#: f3af1c49): its one-line history entry no longer fits the page v0.4.28 filled, which
-#: v0.4.28 had kept at 24 only by cutting its own entry to one sentence.
+#: The v0.4.29 publication draws 25: its history entry pushes the history's tail onto
+#: page 23 a row further, and the notes and colophon end on page 25 (pages 1 to 22 start
+#: as v0.4.28's do).
 EXPECTED_PAGE_COUNT = 25
 
 #: The two fields Chromium stamps from the clock, and the only two that move between

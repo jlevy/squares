@@ -28842,6 +28842,123 @@ occurrences:
   contributor_id: joshua-levy
 - origin:
     path: packing/resources/bibliography.yaml
+    record_key: '[Kim exact forms 2026-10-25]'
+    field: /authors/0
+  expected_text: Kim
+  start: 0
+  end: 3
+  label: Kim
+  role: source-author
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  note: Reviewed packing/resources/bibliography.yaml [[Kim exact forms 2026-10-25]] /authors/0 span 0:3. Issue
+    804, filed by the GitHub account HyukdongKim, gives the credit name Hyukdong Kim with
+    ORCID 0000-0001-5787-8066; the exact sides are his, found with Claude's assistance at
+    his direction.
+  contributor_id: hyukdong-kim
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Kim exact forms 2026-10-25]'
+    field: /credit
+  expected_text: Kim after Couzo, Chaoweeraprasit, Daniel, PingYou Ltd, Levy
+  start: 0
+  end: 3
+  label: Kim
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  note: Reviewed packing/resources/bibliography.yaml [[Kim exact forms 2026-10-25]] /credit span 0:3. Issue 804
+    credits Hyukdong Kim (GitHub HyukdongKim) with the exact sides.
+  contributor_id: hyukdong-kim
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Kim exact forms 2026-10-25]'
+    field: /credit
+  expected_text: Kim after Couzo, Chaoweeraprasit, Daniel, PingYou Ltd, Levy
+  start: 10
+  end: 15
+  label: Couzo
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - bibliography
+  note: Reviewed source credit matches the evidenced person and printed name; issue 804
+    credits the packing at 172 to Francisco Couzo, as Evan Daniel and PingYou Ltd improved
+    it, as the case record credits it, and the original credit role is retained.
+  contributor_id: francisco-couzo
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Kim exact forms 2026-10-25]'
+    field: /credit
+  expected_text: Kim after Couzo, Chaoweeraprasit, Daniel, PingYou Ltd, Levy
+  start: 17
+  end: 32
+  label: Chaoweeraprasit
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  note: Reviewed source credit matches the evidenced person and printed name; issue 804
+    credits the packing at 263 to Nate Chaoweeraprasit (itsnaka), as Evan Daniel and PingYou
+    Ltd improved it, as the case record credits it; original source label retained.
+  contributor_id: nate-chaoweeraprasit
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Kim exact forms 2026-10-25]'
+    field: /credit
+  expected_text: Kim after Couzo, Chaoweeraprasit, Daniel, PingYou Ltd, Levy
+  start: 34
+  end: 40
+  label: Daniel
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - repository-license
+  - bibliography
+  note: Reviewed source credit matches the evidenced person and printed name; issue 804
+    reads its packings from Evan Daniel's atlas at evand/square-packing 659ee62 and names
+    him among the improvers at 172 and 263, and the original credit role is retained.
+  contributor_id: evan-daniel
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Kim exact forms 2026-10-25]'
+    field: /credit
+  expected_text: Kim after Couzo, Chaoweeraprasit, Daniel, PingYou Ltd, Levy
+  start: 42
+  end: 53
+  label: PingYou Ltd
+  role: prerequisite
+  disposition: non-person
+  evidence: []
+  note: 'Corporate credit: issue 804 names PingYou Ltd among the improvers at 172 and 263,
+    whose certificates there are T-174''s (PR 574); the prior reviewed corporate identity is
+    retained. No individual is inferred.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Kim exact forms 2026-10-25]'
+    field: /credit
+  expected_text: Kim after Couzo, Chaoweeraprasit, Daniel, PingYou Ltd, Levy
+  start: 55
+  end: 59
+  label: Levy
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - announcement-account
+  note: Reviewed packing/resources/bibliography.yaml [[Kim exact forms 2026-10-25]] /credit span 55:59. The
+    specific first-party jlevy/squares method or source is the Joshua Levy identity
+    established by LICENSE and the retained ojoshe receipt; project credit does not imply
+    sole personal authorship.
+  contributor_id: joshua-levy
+- origin:
+    path: packing/resources/bibliography.yaml
     record_key: '[Jatloe n12 Lean 2026-10-16]'
     field: /authors/0
   expected_text: Jatloe
