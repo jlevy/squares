@@ -901,7 +901,7 @@ EXPLAINER_HISTORY = (
         first_published="October 25, 2026",
         result_scope=(
             "Update the registered result count after the registration of Evan Daniel's "
-            "#806 certificate at 182 (T-243)."
+            "#806 certificate at 182 (T-243), adopted as the house best packing there."
         ),
     ),
     PublicationHistoryEntry(
@@ -1488,7 +1488,7 @@ RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
         impact="patch",
         reason=(
             "Update the registered result count after the registration of Evan Daniel's "
-            "#806 certificate at 182 (T-243)."
+            "#806 certificate at 182 (T-243), adopted as the house best packing there."
         ),
     ),
     ReleaseImpactDecision(
@@ -9113,6 +9113,9 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         ),
         paths=(
             "packing/campaign/result-requests.yaml",
+            "packing/devtools/adopt_houses.py",
+            "packing/devtools/default_drawings.py",
+            "packing/devtools/upper_bound_houses.py",
             "packing/devtools/upper_bound_reports.py",
             "packing/frontier/results.yaml",
             "packing/frontier/source-coverage.yaml",
@@ -9126,17 +9129,22 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "papers/square-packing-methods-survey.md",
         ),
         reason=(
-            "The #806 import (think-2lzo): T-243's registration of Evan Daniel's "
-            "certificate at 182 as reported, its coverage source, the importer's reader "
-            "for its packet and #806's requests entry, against main bb756e193 (#805): "
-            "rendered at link revision f8cca02c into empty site directories, twice from "
-            "this tree and once from it with main's result-requests.yaml, "
-            "upper_bound_reports.py, results.yaml and source-coverage.yaml swapped in, "
-            "render_n11_optimality_review, render_n11_threshold_bound_review and "
-            "render_packing_methods write all 51 files byte-identical across the three. "
-            "The explainer, counting 242 to 243 results, takes v0.4.28 over main's "
-            "v0.4.27. No PDF was printed for these three; each prints from that HTML. "
-            "Retain v0.1.11, v0.1.4 and v0.2.7."
+            "The #806 import (think-2lzo, think-meci): T-243's registration of Evan "
+            "Daniel's certificate at 182, its coverage source, the importer's reader for "
+            "its packet and #806's requests entry; the 25 October review mapped, T-243 at "
+            "V3/C3; and its adoption at 182 in the pass of 25 October with its "
+            "regularization (upper_bound_houses, adopt_houses, SETTLED[182] removed from "
+            "default_drawings). Against main bb756e193 (#805): rendered at link revision "
+            "f8cca02c into empty site directories, twice from this tree and once from it "
+            "with main's result-requests.yaml, upper_bound_reports.py, results.yaml and "
+            "source-coverage.yaml swapped in, render_n11_optimality_review, "
+            "render_n11_threshold_bound_review and render_packing_methods write all 51 "
+            "files byte-identical across the three. After the review's mapping, the "
+            "adoption and the merge of main 886dddce6 (#808), at link revision a8184fe4 "
+            "with that main's seven candidate inputs swapped in: the same outcome. The "
+            "explainer, counting 242 to 243 results, takes v0.4.28 over main's v0.4.27. No "
+            "PDF was printed for these three; each prints from that HTML. Retain v0.1.11, "
+            "v0.1.4 and v0.2.7."
         ),
     ),
 )
