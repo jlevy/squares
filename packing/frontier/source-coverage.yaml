@@ -10650,9 +10650,11 @@ sources:
     couzo-efef7d1-2026-10-23 (18). The index credits 37 of them to Couzo as refinements
     of notebook packings (Vladislav Lavrentev (33) and Kirill Tymchishin (4)); those
     statements are the source's. At 874 kyleluecke's 964ee2bd row, 1.07e-07 below this
-    commit's side, names it as its previous_source; the measurement does not pair them
-    one to one (receipts/push/pose-identity.json), so it is a new packing seeded from
-    this one, credited after Couzo and Lavrentev by the record's chain rule. The
+    commit's side, names it as its previous_source, the record the source's catalogue
+    held at the count before and not a seed (M-1 of the 24 October review of T-241 and
+    T-242); the measurement does not pair them one to one
+    (receipts/push/pose-identity.json), so it is another arrangement, credited to
+    kyleluecke alone. The
     packet's filtered exact replay decided every one on two routes with all six controls
     refused (receipts/push/couzo-fa6237e/filtered-exact-replay.json,
     devtools.beyond_horizon_replay), and every side is below Göbel's construction. The
@@ -10747,9 +10749,11 @@ sources:
     keeps each recipe's full n-square expansion under certificates/parents/ at exactly
     its side, first committed at fa6237e, and the row is that certificate (#795's review
     A, A2). At 364 and 450 the 964ee2bd rows of aqibrazadev and kyleluecke, 1.35e-09 and
-    2.08e-09 below these sides, name them as their previous_source; the measurement does
-    not pair them one to one (receipts/push/pose-identity.json), so they are new
-    packings seeded from these, credited after Tymchishin by the record's chain rule.
+    2.08e-09 below these sides, name them as their previous_source, the record the
+    source's catalogue held at the count before and not a seed (M-1 of the 24 October
+    review of T-241 and T-242); the measurement does not pair them one to one
+    (receipts/push/pose-identity.json), so they are other arrangements, credited to
+    their notebooks' authors alone.
     The packet's filtered exact replay decided every one on two routes with all six
     controls refused (receipts/push/361239073/filtered-exact-replay.json,
     devtools.beyond_horizon_replay), and every side is below Göbel's construction. The
@@ -10926,17 +10930,16 @@ sources:
     commits: couzo-fa6237e-2026-10-23 (12), lavrentev-cuda-v11-2026-10-23 (5) and
     tymchishin-reclosure-v3-2026-10-23 (1). At 378 and 405 the row is Vladislav
     Lavrentev's fa6237e packing refined: every square pairs one to one within 4.5e-08
-    under the box's identity (receipts/push/pose-identity.json), and the manifest names
-    his certificate as the row's previous_source, so the ledger records a refinement and
-    the row is credited to kyleluecke after Vladislav Lavrentev. At 450 and 874 the
-    manifest names the push's earlier side as the row's previous_source, the packing
-    that seeded it: Tymchishin's v3, 2.08e-09 above, and Couzo's fa6237e side, 1.07e-07
-    above, which the index credits as a refinement of Lavrentev's packing. The
-    measurement does not pair them one to one (200 and 234 squares beyond 1e-3): the
-    search moved the arrangement, which does not contradict the seed link. By the
-    record's chain rule, every link the source's files state is credited, so the rows
-    are credited to kyleluecke after Kirill Tymchishin at 450 and after Francisco Couzo
-    and Vladislav Lavrentev at 874, new packings seeded from theirs. The packet's
+    under the box's identity (receipts/push/pose-identity.json), so the ledger records a
+    refinement and the row is credited to kyleluecke after Vladislav Lavrentev. At 450
+    and 874 the manifest names the push's earlier side as the row's previous_source:
+    Tymchishin's v3, 2.08e-09 above, and Couzo's fa6237e side, 1.07e-07 above. That
+    field names the record the source's catalogue held at the count before, not the
+    packing a notebook started from (M-1 of the 24 October review of T-241 and T-242),
+    and the row's own provenance states no seed. The measurement does not pair them one
+    to one (200 and 234 squares beyond 1e-3, 189 and 60 beyond 0.1), so they are other
+    arrangements, new packings credited to kyleluecke alone; which packing each search
+    started from is asked of the publisher. The packet's
     filtered exact replay decided every one on two routes with all six controls refused
     (receipts/push/361592092/filtered-exact-replay.json,
     devtools.beyond_horizon_replay), and every side is below Göbel's construction. The
@@ -11043,11 +11046,13 @@ sources:
     count's current row; They supersede 9 rows of the push's earlier commits:
     couzo-fa6237e-2026-10-23 (7) and tymchishin-reclosure-v3-2026-10-23 (2). At 364 the
     row is 1.35e-09 below Tymchishin's v3 side at fa6237e, which the manifest names as
-    its previous_source, the packing that seeded it; the measurement does not pair the
-    two one to one (116 squares beyond 1e-3; receipts/push/pose-identity.json): the
-    search moved the arrangement, which does not contradict the seed link. By the
-    record's chain rule, every link the source's files state is credited, so the row is
-    credited to aqibrazadev after Kirill Tymchishin, a new packing seeded from his. The
+    its previous_source. That field names the record the source's catalogue held at the
+    count before, not the packing a notebook started from (M-1 of the 24 October review
+    of T-241 and T-242), and the row's own provenance states no seed. The measurement
+    does not pair the two one to one (116 squares beyond 1e-3 and 115 beyond 0.1;
+    receipts/push/pose-identity.json), so the row is another arrangement, a new packing
+    credited to aqibrazadev alone; which packing the search started from is asked of
+    the publisher. The
     packet's filtered exact replay decided every one on two routes with all six controls
     refused (receipts/push/361516058/filtered-exact-replay.json,
     devtools.beyond_horizon_replay), and every side is below Göbel's construction. The

@@ -2454,9 +2454,11 @@ def test_each_notebook_recipe_is_a_certificate_row_of_its_own() -> None:
 def test_the_push_s_identity_measurements_settle_refinement_at_378_and_405() -> None:
     """At 378 and 405 kyleluecke's row is Lavrentev's v11 packing, every square within
     5e-8: the walk records it as a refinement of it. At 364, 450 and 874 the pairing moves
-    over fifty squares beyond 0.1, so the search moved the arrangement the manifest's
-    ``previous_source`` seeded, and the walk records a new packing seeded from it, which the
-    chain rule credits after that side's finders (#795's reviews A, A1, and B, B1)."""
+    over fifty squares beyond 0.1, so the row is another arrangement, a new packing. The
+    manifest's ``previous_source`` names the record the catalogue held at the count before,
+    not a seed, so the walk states no packing it continues and the row is credited to its
+    finder alone (#795's review A, A1; M-1 of the 24 October review of T-241 and T-242,
+    which corrects #795's review B, B1)."""
     ledger = _read(NOTEBOOKS / "ledger.json")
     measured = {item["n"]: item for item in ledger["owner_decisions"]["measured_identity"]}
     assert sorted(measured) == list(replay.PUSH_IDENTITY)
@@ -2469,13 +2471,20 @@ def test_the_push_s_identity_measurements_settle_refinement_at_378_and_405() -> 
         378: f"a refinement of Vladislav Lavrentev's packing ({replay.NOTEBOOKS_FA6237E})",
         405: f"a refinement of Vladislav Lavrentev's packing ({replay.NOTEBOOKS_FA6237E})",
     }
-    seeded = f"a new packing seeded from {{}}'s fa6237e packing ({replay.NOTEBOOKS_FA6237E})"
     assert {n: item["source_says"] for n, item in measured.items() if n not in refined} == {
-        364: seeded.format("Kirill Tymchishin"),
-        450: seeded.format("Kirill Tymchishin"),
-        874: seeded.format("Francisco Couzo")
-        + ", which the index credits as a refinement of Vladislav Lavrentev's packing",
+        364: "a new packing",
+        450: "a new packing",
+        874: "a new packing",
     }
+    # No step of the walk names a packing a new one continues: no source states a seed.
+    new = {
+        count["n"]: step["packing"]
+        for count in ledger["counts"]
+        for step in count["steps"]
+        if (step.get("packing") or {}).get("kind") == "new packing"
+    }
+    assert new == dict.fromkeys((364, 450, 874), {"kind": "new packing"})
+    assert ledger["summary"]["recorded_new_continuing"] == 0
     assert {item["report"] for item in measured.values()} == {replay.NOTEBOOKS_964EE2B}
 
 

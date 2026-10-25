@@ -3665,10 +3665,15 @@ sources:
       sides that no issue reports and no earlier publication states, each below Göbel's
       construction (web/couzo-issue763-2026-10-23/receipts/claim-map.json, others): 18
       certificates, retained as factual data and recorded in report order as beyond-horizon
-      rows of the kyleluecke-inos-2026-10-23 source. The manifest states the notebook's
-      licence as 'per the notebook' and says its earlier construction credits are retained in
-      the notebook; it names the run and no version. The notebook's licence and notices are
-      followed up on think-m8f4, which holds nothing. Upper bounds only; no optimality claim.
+      rows of the kyleluecke-inos-2026-10-23 source. At 378 and 405 the rows are Vladislav
+      Lavrentev's fa6237e packings refined (every square within 5e-8), credited after him. At
+      450 and 874 the manifest's previous_source names Kirill Tymchishin's and Francisco
+      Couzo's fa6237e sides, the records its catalogue held there before, not seeds (M-1 of
+      the 24 October review of T-241 and T-242); the rows are other arrangements and credit
+      kyleluecke alone. The manifest states the notebook's licence as 'per the notebook' and
+      says its earlier construction credits are retained in the notebook; it names the run
+      and no version. The notebook's licence and notices are followed up on think-m8f4, which
+      holds nothing. Upper bounds only; no optimality claim.
   - key: '[alexchilton fault-line 2026-10-23]'
     authors: [alexchilton]
     year: 2026
@@ -3705,9 +3710,12 @@ sources:
       sides that no issue reports and no earlier publication states, each below Göbel's
       construction (web/couzo-issue763-2026-10-23/receipts/claim-map.json, others): 9
       certificates, retained as factual data and recorded in report order as beyond-horizon
-      rows of the aqibrazadev-blending-2026-10-23 source. The manifest states the notebook's
-      licence as 'per the notebook' and says its earlier construction credits are retained in
-      the notebook; it names the run and no version. The notebook's licence and notices are
+      rows of the aqibrazadev-blending-2026-10-23 source. At 364 the manifest's previous_source
+      names Kirill Tymchishin's fa6237e side, the record its catalogue held there before, not
+      a seed (M-1 of the 24 October review of T-241 and T-242); the row is another
+      arrangement and credits aqibrazadev alone. The manifest states the notebook's licence
+      as 'per the notebook' and says its earlier construction credits are retained in the
+      notebook; it names the run and no version. The notebook's licence and notices are
       followed up on think-m8f4, which holds nothing. Upper bounds only; no optimality claim.
   - key: '[Lavrentev CUDA Packing Search v11 2026-10-23]'
     authors: [Lavrentev]

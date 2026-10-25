@@ -1078,10 +1078,11 @@ reports:
       source: packing/resources/web/couzo-issue763-2026-10-23/receipts/push/pose-identity.json
     new_packing:
       source: '964ee2b''s manifest names Kirill Tymchishin''s fa6237e certificate (certificates/parents/05df9ad756b3137f4e959fa32c7868476e8ea6bf55fe29005653fd279c410e51.cert)
-        as the row''s previous_source; the measurement does not pair them one to one (116
-        squares beyond 1e-3, receipts/push/pose-identity.json): the search moved the arrangement
-        it was seeded from'
-      continues: Kirill Tymchishin's fa6237e packing (franciscouzo/square-packing@fa6237e)
+        as the row''s previous_source, the record its catalogue held at the count before,
+        not a seed (M-1 of the 24 October review of T-241 and T-242); the index credits the
+        row to the notebook run alone, and the measurement does not pair them one to one (116
+        squares beyond 1e-3, receipts/push/pose-identity.json): another arrangement, whose
+        search start no source states'
   - n: 376
     printed: '19.897064162577'
     rounding: up
@@ -1113,8 +1114,9 @@ reports:
       packing_of: Vladislav Lavrentev
       entry: franciscouzo/square-packing@fa6237e
       source: 964ee2b's manifest names Vladislav Lavrentev's fa6237e certificate (certificates/parents/374d8c421f13fefb5d0e59a9fbf63c4c2d70431f84605688b5638a6a92d6583a.cert)
-        as the row's previous_source, and the measurement pairs every square one to one within
-        1e-3 (receipts/push/pose-identity.json)
+        as the row's previous_source, the record its catalogue held at the count before, not
+        a seed (M-1 of the 24 October review of T-241 and T-242), and the measurement pairs
+        every square one to one within 1e-3 (receipts/push/pose-identity.json)
   - n: 405
     printed: '20.645753256143'
     rounding: up
@@ -1132,8 +1134,9 @@ reports:
       packing_of: Vladislav Lavrentev
       entry: franciscouzo/square-packing@fa6237e
       source: 964ee2b's manifest names Vladislav Lavrentev's fa6237e certificate (certificates/parents/36ca1b5c078413856bffc740ddfc5b4c3213ef8585ef55ccc7b8134dd2a25128.cert)
-        as the row's previous_source, and the measurement pairs every square one to one within
-        1e-3 (receipts/push/pose-identity.json)
+        as the row's previous_source, the record its catalogue held at the count before, not
+        a seed (M-1 of the 24 October review of T-241 and T-242), and the measurement pairs
+        every square one to one within 1e-3 (receipts/push/pose-identity.json)
   - n: 411
     printed: '20.795693819980'
     rounding: up
@@ -1170,10 +1173,11 @@ reports:
       source: packing/resources/web/couzo-issue763-2026-10-23/receipts/push/pose-identity.json
     new_packing:
       source: '964ee2b''s manifest names Kirill Tymchishin''s fa6237e certificate (certificates/parents/a648ee3fb963efe1750a271bf38afede6a6eb7cba15d8afea15beac41e629e65.cert)
-        as the row''s previous_source; the measurement does not pair them one to one (200
-        squares beyond 1e-3, receipts/push/pose-identity.json): the search moved the arrangement
-        it was seeded from'
-      continues: Kirill Tymchishin's fa6237e packing (franciscouzo/square-packing@fa6237e)
+        as the row''s previous_source, the record its catalogue held at the count before,
+        not a seed (M-1 of the 24 October review of T-241 and T-242); the index credits the
+        row to the notebook run alone, and the measurement does not pair them one to one (200
+        squares beyond 1e-3, receipts/push/pose-identity.json): another arrangement, whose
+        search start no source states'
   - n: 451
     printed: '21.756097565469'
     rounding: up
@@ -1436,11 +1440,11 @@ reports:
       source: packing/resources/web/couzo-issue763-2026-10-23/receipts/push/pose-identity.json
     new_packing:
       source: '964ee2b''s manifest names Francisco Couzo''s fa6237e certificate (certificates/parents/9c8c7742da9a36f7071731d4376e26b2374a7aa42e45dbd37accc5bc1357a417.cert)
-        as the row''s previous_source; the measurement does not pair them one to one (234
-        squares beyond 1e-3, receipts/push/pose-identity.json): the search moved the arrangement
-        it was seeded from'
-      continues: Francisco Couzo's fa6237e packing (franciscouzo/square-packing@fa6237e),
-        which the index credits as a refinement of Vladislav Lavrentev's packing
+        as the row''s previous_source, the record its catalogue held at the count before,
+        not a seed (M-1 of the 24 October review of T-241 and T-242); the index credits the
+        row to the notebook run alone, and the measurement does not pair them one to one (234
+        squares beyond 1e-3, receipts/push/pose-identity.json): another arrangement, whose
+        search start no source states'
   - n: 875
     printed: '29.996827869334'
     rounding: up

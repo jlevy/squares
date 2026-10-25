@@ -422,7 +422,7 @@ walk holds, below the start, and the push’s rows are recorded below them at al
 
 **Identity and credit.** At five counts the last row is within 1.1e-7 of the push’s earlier
 side, and `964ee2b`’s manifest names that earlier certificate as the row’s
-`previous_source`. `beyond_horizon_replay push-identity` measures each pair with the
+`previous_source`, the record its catalogue held there before. `beyond_horizon_replay push-identity` measures each pair with the
 packet’s pose measure (`measured_identity`, as `pose-identity` does for #732’s comment;
 `devtools.measure_identity`, think-jv2s, had not landed) and writes
 [receipts/push/pose-identity.json](receipts/push/pose-identity.json):
@@ -435,17 +435,21 @@ packet’s pose measure (`measured_identity`, as `pose-identity` does for #732�
 | 450 | kyleluecke | Tymchishin’s v3, `fa6237e` | 2.08e-9 | not one to one | 200 |
 | 874 | kyleluecke | Couzo’s, `fa6237e`, which the index says refines Lavrentev’s | 1.07e-7 | not one to one | 234 |
 
-Each row is credited by the record’s chain rule: every link the source’s files state is
-credited, and the manifest’s `previous_source` is the link at all five counts. At 378 and
-405 kyleluecke’s row is Lavrentev’s packing refined, every square within 5e-8 and every
-turn within 5e-8 degrees, so the ledger records a refinement and the row is credited to
+The manifest’s `previous_source` is no link of lineage. It names the record the source’s
+catalogue held at the count before the row, not the packing a notebook or search started
+from: at 303 at `fa6237e` it names Evan Daniel’s certificate while the entry’s own
+`seed_credit` names Lavrentev, and in all 182 entries of that manifest with a seed of
+their own it names someone else (M-1 of the
+[24 October review of T-241 and T-242](../../../../docs/project/reviews/review-2026-10-24-couzo-evand-n268-n304.md)).
+None of the five rows’ own provenance states a seed. So the measurement alone says what
+each row is, and the credit keeps only the links a source states. At 378 and 405
+kyleluecke’s row is Lavrentev’s packing refined, every square within 5e-8 and every turn
+within 5e-8 degrees, so the ledger records a refinement and the row is credited to
 kyleluecke after Vladislav Lavrentev. At 364, 450 and 874 more than fifty squares move
-beyond 0.1: the search moved the arrangement it was seeded from, which does not contradict
-the seed link. The ledger records each as a new packing seeded from the earlier side, with
-the measurement beside it, and credits it after that side’s finders: aqibrazadev after
-Kirill Tymchishin at 364, kyleluecke after Kirill Tymchishin at 450, and kyleluecke after
-Francisco Couzo and Vladislav Lavrentev at 874, where the index credits Couzo’s side as a
-refinement of Lavrentev’s packing.
+beyond 0.1 (115, 189 and 60), so each row is another arrangement. The ledger records each
+as a new packing, with the measurement beside it and no packing it continues, credited to
+its notebook’s author alone: aqibrazadev at 364 and kyleluecke at 450 and 874. Which
+packing each search started from is asked of the publisher.
 
 **Later.** Couzo’s `43f666c`, pushed at 2026-10-24T06:10:44Z, is below the notebook side at
 46 of the 99 counts. think-gn29 walks it after this import, from these rows. The questions
