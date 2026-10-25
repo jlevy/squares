@@ -2,7 +2,9 @@
 
 One dilation certificate in Evan Daniel's text format, in a gist with no licence, so kept
 as a derived exact fact and read by the `evand-cert` adapter: s(303) of #755 at
-``511f56b``. The general importer's checks run on the packet through
+``511f56b``. The author's CC0 1.0 dedication of 24 October (issuecomment-6388401978) let
+the packet retain the gist's three files at the same pin; the fact stays, since the
+receipts are bound to it, and the importer holds it to the retained certificate. The general importer's checks run on the packet through
 ``test_upper_bound_reports``; these hold what is particular to it, as the stage 4 review
 of 19 October asked of the imports before it (RV-1 of
 docs/project/reviews/review-2026-10-19-upper-bound-imports-659-664-669-674.md): the
@@ -15,6 +17,7 @@ T-230. Every test reads the packet only; none needs the network.
 from __future__ import annotations
 
 import gzip
+import hashlib
 import json
 import math
 from decimal import Decimal
@@ -63,15 +66,35 @@ def _manifest() -> dict[str, str]:
     }
 
 
-def test_the_packet_pins_the_digests_the_issue_prints_and_retains_no_upstream_byte() -> None:
+def test_the_packet_retains_the_gists_files_under_cc0_with_the_digests_the_issue_prints() -> None:
+    """Derived-only on 23 October for want of a licence; on 24 October the author
+    dedicated the three files to the public domain under CC0 1.0 and asked that they be
+    kept, so the packet was acquired again at the same pin, every digest unchanged."""
     manifest = _manifest()
     for name, digest in PRINTED_DIGESTS.items():
         assert manifest[name] == digest
     record = json.loads((_packet() / "acquisition/sources.json").read_text("utf-8"))
     (source,) = record["sources"]
-    assert source["retained_file_count"] == 0
-    assert {item["path"] for item in source["pinned_only"]} == set(manifest)
-    assert not (_packet() / "source").exists()
+    assert source["source_commit"] == "511f56bf6e6afb4eb22f12d31371c2a2fe7b4767"
+    assert source["retained_file_count"] == 3
+    assert source["pinned_only"] == []
+    assert source["license"].startswith("CC0 1.0")
+    assert "issuecomment-6388401978" in source["license"]
+    for name, digest in manifest.items():
+        raw = (_packet() / "source" / name).read_bytes()
+        assert hashlib.sha256(raw).hexdigest() == digest
+    answer = json.loads((_packet() / "acquisition/answer.json").read_text("utf-8"))
+    assert answer["html_url"].endswith("#issuecomment-6388401978")
+    assert answer["created_at"] == answer["updated_at"] == "2026-10-24T19:13:49Z"
+
+
+def test_the_derived_fact_is_the_retained_certificate() -> None:
+    """The row keeps its fact, which the receipts name; admitting it also reads the
+    retained certificate and requires the same packing at the same side."""
+    (row,) = reports.load_declaration(_packet())["certificates"]
+    raw = (_packet() / "source" / CERT).read_bytes()
+    retained = reports.parse_certificate(raw, N, row["format"], reports.row_options(row))
+    assert reports.read_facts(_packet())[N] == retained
 
 
 def test_the_derived_fact_names_the_certificates_digest_and_states_its_side() -> None:
