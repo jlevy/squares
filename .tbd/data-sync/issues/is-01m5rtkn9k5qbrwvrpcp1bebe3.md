@@ -1,18 +1,18 @@
 ---
 type: is
 id: is-01m5rtkn9k5qbrwvrpcp1bebe3
-title: "Validate: Jatloe s(12) = 4 Lean proof (#810, T-243), from-source build of 5,377 modules and axiom check (~28 CPU-h, 17-40 by the source's receipts; gated on decision)"
+title: "Validate: Jatloe s(12) = 4 Lean proof (#810, T-245), from-source build of 5,377 modules and axiom check (~28 CPU-h, 17-40 by the source's receipts; gated on decision)"
 kind: task
 status: open
 priority: 2
-version: 1
+version: 2
 labels:
   - validation
   - result-import
 dependencies: []
 parent_id: is-01m5rs2qz5f6js86hpr6qmbgta
 created_at: 2026-10-25T06:05:18.003Z
-updated_at: 2026-10-25T06:05:18.003Z
+updated_at: 2026-10-25T09:41:26.282Z
 ---
 Validation part of think-4l14 (#810, Jatloe's Lean proof that s(12) = 4, published by Manasseh Ahmed in Queuingtheorydotcom/Jatloe12SquaresFormalized). Record-changing at 12 (T-243, a new optimality entry, at V0/C0 when registered; the case's verified lanes and status).
 

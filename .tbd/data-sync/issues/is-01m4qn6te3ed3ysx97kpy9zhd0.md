@@ -5,7 +5,7 @@ title: "Import Evan Daniel: degree-7213 minimal polynomial of the s(29) record s
 kind: task
 status: in_progress
 priority: 3
-version: 9
+version: 10
 delegate: coord-n12-1025
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-12T08:55:58.146Z
-updated_at: 2026-10-25T06:51:36.447Z
+updated_at: 2026-10-25T09:39:51.732Z
 started_at: 2026-10-12T14:33:40.570Z
 ---
 Found in lane W's read of evand/square-packing for the 2026-10-12 intake (think-mq0k); nothing on GitHub asked, so the record says: a watched-repository read, not an issue.
@@ -51,3 +51,4 @@ GitHub issue: https://github.com/jlevy/squares/issues/545 (opened 2026-10-12 by 
 
 From #661's stage 4 review (A8, think-2jzy): T-009's 1e-44 Krawczyk box may be a cheaper route to deciding #622/T-195 and #574's N29 against the Kingbird print at 29. The review found S inside T-009's box, which shows the print 5.93383346267692 is a truncation (S is 0.919 of a unit above it).
 2026-10-25 w-n29-poly-1025 (delegate of coord-n12-1025), branch n29-minpoly-1025 (not pushed): REGISTERED as T-244 on the owner's instruction of 25 October ("capture the work here by Evan Daniel and link to his tweet as this is itself a result"). Commits 7fd5d06fb (stage 2: the announcement post https://x.com/evanbd/status/2110154454817448106 retained via X's syndication endpoint as packing/resources/web/evand-exact-data-2026-10-12/receipts/announcement/tweet-2110154454817448106.json, SHA-256 df5c8582a6eb52bb8f895bc099c6cd814a41f81cf6ffff59bbe8d04067e71316; the thread's follow-ups have no ids here and are quoted as transcribed; Evan Daniel's profile gains twitter evanbd) and abbc23e73 (stage 3). Shape, by the coordinator's decision of that day: a NEW KIND `exact-side` (results.schema.yaml, epistemics.md Result Kinds, check_results KINDS and STRUCTURE_KINDS, topic vocabulary), for the owner to approve, since kind upper-bound needs evidence claiming a bound and the source does not check non-overlap at sigma; evidence E-n029-evand-minpoly-7213-report, claim derived-structure, certificate the packet's acquisition/release.json. The case lanes are NOT changed: since the 17 October adoption both hold T-195's rational (degree 1) and adopt_houses writes them; n-029.md's analytic characterization paragraph now gives degree 7213 and the pinned asset, with a dated pointer at the top. Measured here: T-195's exact side agrees with N29.md's 68-place sigma and lies inside the Krawczyk enclosure S_mid +- 1.07e-48; sign of the difference not decided. Draft S3 (reasoning in the report). Unfinished: C1 review (this bead), C3 replay think-10m1 (new, ~2.5 CPU-hours, owner budget). #545's s29 result now maps to T-244; #811 entered in result-requests.yaml with answer bead think-jmb4 (new). packing-validate --records: two steps fail, both outside this branch: check_results id contiguity (T-243 lands on the coordinator's branch) and check_release_impact (the n11 explainer's registered-result count changes; a release cut or no-change records are owed at merge). Nothing replayed.
+2026-10-25 w-renumber-1025: this result is now **T-246** (was T-244); #545's s29 result and #811 map to T-246. Merge of origin/main 46e355582 (#814, which registered T-243 = Daniel at n = 182 and took explainer v0.4.28): ab33e3bd7 (merge; this branch's ids renumbered by a three-way merge of the branch with T-244 -> T-246 and T-243 -> T-245 applied first, so main's T-243 is untouched; open PR #813 holds T-244, Kim at 172/263, and no open branch goes past it), 45775072d (no-change record for the other three papers re-measured at link ab33e3bd against main 46e355582, nine inputs swapped, jatloe.md removed: 51 files byte-identical x3; explainer v0.4.29 over main's v0.4.28, counting 245), 5c28c3ba4 (DATA_REVISION -> ab33e3bd). check_release_impact passes; release_pin --check: the pin is the last data commit. Validation at 5c28c3ba4: --records 52/53 and --edit --jobs 2 --inner-jobs 1 68/69, the one failure in both being check_results' id contiguity (T-244 is #813's; it clears when #813 lands and this branch merges main); with ids made contiguous in a throwaway working tree check_results is clean and the 7 register tests that fail on the gap pass. Old ids still on GitHub: PR #812 title, body and comments 6394755774, 6394770005, 6394781451, 6395591062; bead titles think-dd3v (T-243) and think-10m1/think-vgsw (T-244), descriptions think-jmb4/think-vt31, think-ezt8 notes.

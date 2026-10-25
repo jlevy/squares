@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-23 (resumed): land #736 and #742, #719 records (204 
 kind: epic
 status: in_progress
 priority: 1
-version: 166
+version: 167
 delegate: coord-intake-1024
 labels:
   - result-import
@@ -166,7 +166,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-23T04:56:08.269Z
-updated_at: 2026-10-25T08:50:11.847Z
+updated_at: 2026-10-25T09:41:44.221Z
 started_at: 2026-10-23T04:56:10.325Z
 ---
 
@@ -190,3 +190,5 @@ Resumes coord-intake-1021b's pass of 21-23 October (no epic of its own). Lanes a
 2026-10-25 ~05:30Z coord-intake-1024: sweep of main bb756e193 (scratch sweep-0525.txt): new #806 (Daniel, s(182) <= 13.970916436215, in corpus; think-2lzo, with evand's 28 commits to d99925d), #804 (Kim, exact minimal polynomials at 88/126/172/199/263; think-9vai), #565 comment (maximusrufus T-154 rebuild; owner-held; think-z2mj), #799 V2 (2,824 rows) and preprint (think-5dc3, via think-z2mj); #806 and #804 labelled intake. Reply/close records for #763/#797/#798 ride #807 (H2); #799's entry rides #808 (W8). think-gn29 now waits on think-llit/think-kzme; think-tfdn unblocked. Three triage lanes running; reviews of #807 and #808 running; H2 merges at the 26 Oct 00:10Z check-in (trig_0178kD4FUDrHjrZmrqD5uc12).
 
 2026-10-25 08:50Z, coord-n12-1025: result ids T-244 and T-245 are reserved for PR #812 (n = 12 Lean proof, #810; s(29) minimal polynomial, #545/#811). #814 registered T-243 while #812 also used it, so #812 is being renumbered. The next free id after #812 is T-246.
+
+2026-10-25 09:35Z, coord-n12-1025: correction to the note above. #813 holds T-244 (Kim at 172 and 263), so #812 registers T-245 (n = 12) and T-246 (s(29)). Whichever of #813 and #812 merges second must re-cut the explainer, since both take the version after v0.4.28.
