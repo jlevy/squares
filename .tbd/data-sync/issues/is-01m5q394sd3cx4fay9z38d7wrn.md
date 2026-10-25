@@ -5,7 +5,7 @@ title: "PR B of #763: map T-240's stage 4 review (V3/C3), adopt and regularize a
 kind: task
 status: in_progress
 priority: 1
-version: 8
+version: 9
 delegate: c-prb-763-1024
 labels:
   - result-import
@@ -16,7 +16,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-24T13:58:21.741Z
-updated_at: 2026-10-24T20:36:01.107Z
+updated_at: 2026-10-25T00:13:52.317Z
 started_at: 2026-10-24T13:58:27.438Z
 ---
 
@@ -53,3 +53,5 @@ REVIEW A ROUND 2026-10-24 (c-prb-763-1024, #794 review A, comment 6386951475): a
 REVIEW A ROUND, continued: #792 merged during the round (3480b5fd3, 17:34Z); merged here with a merge commit 180587e48 (both sides kept; results.yaml and result-requests.yaml merged cleanly; reader table, release.py, resources README, URL registry, synopsis resolved by hand; views re-rendered). Daniel 268 renamed T-242 in T-240 notes and next_rung, packet, atlas and run READMEs and the reply (think-ptkk); think-hx0e owns T-242 validation and re-housing at 268 and 304; T-242 claim dates T-174 as house "when it was reported". Papers re-measured vs new main at 180587e4 (9 inputs, 69 files x3 identical), explainer keeps v0.4.27; re-pinned to 180587e48 (d000419bd). stamp_landed --date 2026-10-25 dry run: nothing to stamp. Local: records tier 53/53; checks pass; 1081 + 10 tests passed. Hosted at d000419bd: Packing validation 40118613910 and Certificate page 40118613915 succeeded (31 pass). At 89451b01c the cert page needed one re-run (setup-uv fetch failed). Dispositions reply: https://github.com/jlevy/squares/pull/794#issuecomment-6387765234. PR body updated. PR stays draft; the coordinator merges on or after 2026-10-25T00:00Z.
 
 2026-10-24 coord-intake-1024: #794 at d000419bd: review A addressed (dispositions https://github.com/jlevy/squares/pull/794#issuecomment-6387765234), main 3480b5fd3 (#792) merged in, hosted CI green (Packing validation 40118613910, Certificate page 40118613915). Draft until the merge on or after 2026-10-25T00:00Z (scheduled check-in at 00:10Z, trig_01DhTFUTDPGkUQQYuVtXQfPv).
+
+2026-10-25 00:15Z coord-intake-1024 (merge-day check-in trig_01DhTFUTDPGkUQQYuVtXQfPv fired 00:11Z): #794 head 36e7fd5ae (main 2ed0ea740 merged as 5adbe8088 by c-sync-794-1024, think-acuz). Hosted CI red on two merge-caused failures: test_house_adoption custody receipt (an input's bytes changed: 15688 vs 31365) and test_measure_identity's T-230 vs T-239 centred assignment (reads the 303 house, now T-240). Every lane stopped about 21:20Z on an API spend limit; all resumed at 00:14Z. The sync lane fixes both, narrows T-240's RF-2 sentence to 268/303, then stamp_landed --apply (25 Oct) and release_pin --update; the coordinator merges when green.
