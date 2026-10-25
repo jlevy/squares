@@ -9307,6 +9307,11 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "n-029.md, results.yaml and source-coverage.yaml swapped in and jatloe.md "
             "removed: twice from this tree and once swapped, 51 files each, all "
             "byte-identical across the three. "
+            "Measured an eighth time after the Resources page's Jatloe12SquaresFormalized "
+            "card was shortened to keep its section medium (site_resources.py), at link "
+            "revision d0d72d41, swapped the same way: 51 files each, all byte-identical "
+            "across the three, and identical to the seventh measurement's but for the link "
+            "revision. "
             "Retain v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
