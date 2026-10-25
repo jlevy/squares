@@ -8941,7 +8941,9 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "questions, against main 3e1349802 (#801). Rendered by render_packing_methods at "
             "link revision 8ceeb75d into empty site directories, twice from this tree and "
             "once with main's result-requests.yaml swapped in, 43 files each, all "
-            "byte-identical across the three. No register entry changes. Retain v0.2.7."
+            "byte-identical across the three; measured again after merging main 4089f9587 "
+            "(#800) at link revision 64262ade with that main's result-requests.yaml swapped "
+            "in, with the same result. No register entry changes. Retain v0.2.7."
         ),
     ),
 )
