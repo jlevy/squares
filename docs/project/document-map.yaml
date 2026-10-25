@@ -23,6 +23,7 @@ documents:
   - {path: docs/project/reviews/review-2026-10-22-mishapolk-719.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-22-couzo-670-672-675.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-24-couzo-evand-n268-n304.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-25-evand-n182.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-21-profile-coverage.md, role: review, authority: record, lifecycle: retained}
   - {path: packing/contributors/reviews/2026-10-21-pdf-credit-coverage.md, role: review, authority: record, lifecycle: retained}
   - {path: attribution.md, role: conventions, authority: definitive, lifecycle: maintained}
@@ -76,6 +77,7 @@ documents:
   - {path: packing/campaign/issue-intake/upper-bounds-couzo-43f666c-20261024/README.md, role: generated-view, authority: generated, lifecycle: generated}
   - {path: packing/campaign/issue-intake/upper-bounds-evand-20261024/README.md, role: generated-view, authority: generated, lifecycle: generated}
   - {path: packing/campaign/issue-intake/upper-bounds-issue798-20261024/README.md, role: generated-view, authority: generated, lifecycle: generated}
+  - {path: packing/campaign/issue-intake/upper-bounds-issue806-20261025/README.md, role: generated-view, authority: generated, lifecycle: generated}
   - {path: docs/project/reviews/review-2026-10-18-n108-fine-net-mathematics-max.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-18-wand125-n108-certificate-mathematics.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-16-upper-bound-imports-506-607.md, role: review, authority: record, lifecycle: retained}
@@ -213,6 +215,7 @@ documents:
   - {path: packing/cases/regularized_drawings/think-tqb5-2026-10-23/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: packing/cases/regularized_drawings/think-bk9r-2026-10-24/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: packing/cases/regularized_drawings/think-hx0e-2026-10-25/README.md, role: source-index, authority: record, lifecycle: retained}
+  - {path: packing/cases/regularized_drawings/think-2lzo-2026-10-25/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: packing/cases/regularized_drawings/think-h01y-2026-10-24/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-07-squish-second-update-mathematics.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-07-squish-second-update-semantic-binding.md, role: review, authority: record, lifecycle: retained}

@@ -1,0 +1,17 @@
+  extent E = max corner coordinate; S - E = 5.000000e-21
+  box at extent                      expected accepted SAT valid=True  (walls 0, pairs 0)  AREA valid=True  (walls 0, pairs 0)  ok
+  box 1e-30 below extent             expected refused  SAT valid=False (walls 22, pairs 0)  AREA valid=False (walls 22, pairs 0)  ok
+  translated to low walls            expected accepted SAT valid=True  (walls 0, pairs 0)  AREA valid=True  (walls 0, pairs 0)  ok
+  translated 1e-30 past low walls    expected refused  SAT valid=False (walls 16, pairs 0)  AREA valid=False (walls 16, pairs 0)  ok
+  closest pair at contact            expected accepted SAT valid=True  (walls 0, pairs 0)  AREA valid=True  (walls 0, pairs 0)  ok
+  closest pair 1e-30 past contact    expected refused  SAT valid=False (walls 0, pairs 1)  AREA valid=False (walls 0, pairs 1)  ok
+  least-room square at critical size expected accepted SAT valid=True  (walls 0, pairs 0)  AREA valid=True  (walls 0, pairs 0)  ok
+  least-room square 1e-30 past it    expected refused  SAT valid=False (walls 1, pairs 0)  AREA valid=False (walls 1, pairs 0)  ok
+  least pair-limited square at size  expected accepted SAT valid=True  (walls 0, pairs 0)  AREA valid=True  (walls 0, pairs 0)  ok
+  least pair-limited square 1e-30 past expected refused  SAT valid=False (walls 0, pairs 1)  AREA valid=False (walls 0, pairs 1)  ok
+  least-slack wall square 1e-30 past expected refused  SAT valid=False (walls 1, pairs 0)  AREA valid=False (walls 1, pairs 0)  ok
+  duplicated square                  expected refused  SAT valid=False (walls 0, pairs 1)  AREA valid=False (walls 0, pairs 1)  ok
+  rotation sense reversed            expected refused  SAT valid=False (walls 0, pairs 80)  AREA valid=False (walls 0, pairs 80)  ok
+  mirror image (x -> S - x, t -> -t) expected accepted SAT valid=True  (walls 0, pairs 0)  AREA valid=True  (walls 0, pairs 0)  ok
+  all controls as expected: True
+  total CPU 105.8 s
