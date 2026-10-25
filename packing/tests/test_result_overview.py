@@ -134,7 +134,10 @@ def test_every_register_result_has_an_overview(bodies: dict[str, str]) -> None:
 def test_the_expanded_adoption_result_fits_its_page_budget(
     overview: overview_data.Overview,
 ) -> None:
-    """T-174's adopted houses and drawings stay within the result-page payload budget."""
+    """T-174's adopted houses and drawings stay within its page's registered budget: the
+    measured exception `site_urls.PAGE_BUDGET_EXCEPTIONS` holds for `result/t-174.html`,
+    which every result on its 68 counts adds a chain step to (T-244 took it past the
+    canonical 300,000 bytes on 25 October 2026, at 300,614)."""
     result = _result(overview, "T-174")
     cases = result_overview.scope(result)
     parts = {
@@ -145,7 +148,9 @@ def test_the_expanded_adoption_result_fits_its_page_budget(
     }
     sizes = {name: len(part.encode("utf-8")) for name, part in parts.items()}
     (page,) = render_overview.iter_result_fragments(result_ids=frozenset({result.id}))
-    assert len(page.html.encode("utf-8")) <= site_urls.PAGE_BUDGETS["result"], sizes
+    row = next(row for row in site_urls.load_registry() if row.path == page.name)
+    assert site_urls.page_budget(row) == site_urls.PAGE_BUDGET_EXCEPTIONS[page.name][0]
+    assert len(page.html.encode("utf-8")) <= site_urls.page_budget(row), sizes
 
 
 @pytest.mark.parametrize("result_id", [SETTLED, EARLIER, BROAD])

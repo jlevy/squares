@@ -5947,7 +5947,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-17'
+  lastmod: '2026-10-25'
   status: live
 - path: cases/173.html
   canonical: cases/173.html
@@ -6755,7 +6755,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-17'
+  lastmod: '2026-10-25'
   status: live
 - path: cases/264.html
   canonical: cases/264.html
@@ -8816,6 +8816,14 @@ urls:
   status: live
 - path: profiles/hong-duc-bui.html
   canonical: profiles/hong-duc-bui.html
+  kind: page
+  generator: devtools.render_contributors:contributor_pages
+  producer: overview
+  first_published: '2026-10-13'
+  lastmod: '2026-10-22'
+  status: live
+- path: profiles/hyukdong-kim.html
+  canonical: profiles/hyukdong-kim.html
   kind: page
   generator: devtools.render_contributors:contributor_pages
   producer: overview
@@ -21439,6 +21447,40 @@ urls:
     - packing/devtools/upper_bound_reports.py
     - docs/project/reviews/review-2026-10-25-evand-n182.md
     - packing/resources/web/evand-n182-2026-10-25/review/review-2026-10-25/README.md
+- path: result/t-244.html
+  canonical: result/t-244.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-25'
+  lastmod: '2026-10-25'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 172
+      - 263
+    established: null
+    attribution:
+      source_keys:
+      - '[Kim exact forms 2026-10-25]'
+      published: '2026-10-25'
+    builds_on: null
+    evidence:
+    - E-hyukdongkim-804-exact-forms-report
+    artifacts:
+    - packing/resources/web/hyukdongkim-exact-forms-2026-10-25/README.md
+    - packing/resources/web/hyukdongkim-exact-forms-2026-10-25/facts/exact-forms.json
+    - packing/resources/web/hyukdongkim-exact-forms-2026-10-25/acquisition/sources.json
+    - packing/resources/web/hyukdongkim-t244-configurations-2026-10-25/README.md
+    - packing/resources/web/hyukdongkim-t244-configurations-2026-10-25/acquisition/sources.json
+    - packing/resources/web/hyukdongkim-t244-configurations-2026-10-25/facts/n172.json.gz
+    - packing/resources/web/hyukdongkim-t244-configurations-2026-10-25/facts/n263.json.gz
+    - packing/campaign/issue-intake/upper-bounds-issue804-20261025/README.md
+    - packing/campaign/issue-intake/upper-bounds-issue804-20261025/exact-sides.json
+    - packing/campaign/issue-intake/upper-bounds-issue804-20261025/atlas-poses.json
+    - packing/campaign/issue-intake/upper-bounds-issue804-20261025/review/exact_forms.py
 - path: results.html
   canonical: results.html
   kind: page

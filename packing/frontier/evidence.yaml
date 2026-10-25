@@ -45962,3 +45962,37 @@ evidence:
       optimum, local minimum, rigidity, novelty or human oversight. The source's local
       minimality statement was not replayed.
     source_reviewed: '2026-10-25'
+  - id: E-hyukdongkim-804-exact-forms-report
+    claim: upper-bound
+    scope: {n_values: [172, 263]}
+    assurance: reported
+    reported_method: numerical-multiprecision
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Kim exact forms 2026-10-25]'
+    certificate: packing/resources/web/hyukdongkim-exact-forms-2026-10-25/facts/exact-forms.json
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-25'
+    limitations: >-
+      This atom records the source author's report, in issue 804 and its attachment
+      squares-exact-forms.zip, that the side of the record packing at 172 and at 263 is a
+      stated root of an integer polynomial of degree 24 and 17, determined numerically: a
+      KKT system on the active contacts of evand/square-packing's atlas packings at
+      659ee62, solved to 1,500 and 3,000 digits, and LLL. The issue supplies no exact
+      configuration; the author's configurations, attached to a later comment the same day,
+      are retained as derived facts (hyukdongkim-t244-configurations-2026-10-25) and not
+      yet decided, so no packing at either side has been decided here, and none of the
+      source's code was run. Decided here from the derived fact: each polynomial is primitive and
+      irreducible over Q (SymPy and sqpack.field), each side is the root the source's
+      100-digit print names, and each lies below T-174's rational certificate at its count,
+      by 3.898e-89 and 2.126e-94, and below issue 639's degree-12 side there, by 1.185e-62
+      and 9.234e-63 (campaign/issue-intake/upper-bounds-issue804-20261025/exact-sides.json).
+      The atlas inputs are T-174's witnesses to binary64 at every square (atlas-poses.json
+      there). The source's KKT multipliers are not unique and their least minimum-norm
+      value is about -6e-16, so stationarity is numerical; local minimality, global
+      optimality and rigidity are not claimed or established. The source's 1,500- and
+      3,000-digit runs share one code base, one active-set extraction and one KKT
+      formulation.

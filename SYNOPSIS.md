@@ -403,6 +403,7 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 | [T-234](packing/frontier/RESULTS.md) | 21 | `V0` | `C0` | `S2` | `previously-published` | Hiroaki Hosono (wand125) reports a Lean 4 proof that s(21) = 5 with no hypothesis, a formalization of the point-only route T-055 registers, whose Lean reduction took the capture bound as an assumption. |
 | [T-235](packing/frontier/RESULTS.md) | 59 | `V0` | `C0` | `S2` | `previously-published` | Hiroaki Hosono (wand125) reports a Lean 4 kernel proof that s(59) = 8, a formalization of T-066, whose lower half this record holds on a replay of Evan Daniel’s zmx2 over the same cover. |
 | [T-238](packing/frontier/RESULTS.md) | 2, 3, 4, 5 | `V0` | `C0` | `S2` | `previously-published` | chelokot reports Lean 4 proofs that s(2) = s(3) = s(4) = 2 and s(5) = 2 + 1/√2 = 2.70710678118654752440…, and Evan Daniel Lean 4 theorems on rectangles from which those values are read at equal sides: a formalization of T-237, the classical values, and the first proof-assistant routes to them the record holds. |
+| [T-244](packing/frontier/RESULTS.md) | 172, 263 | `V0` | `C0` | `S2` | `previously-published` | Hyukdong Kim’s issue 804 reports an exact side for the best-known packing at 172 and at 263: each the packing’s side at a stationary (KKT) point of minimizing the side, and a root of an integer polynomial irreducible over Q. |
 | [T-155](packing/frontier/RESULTS.md) | 28, 29, 37, 39, 41, 50, 53, 54, 55, 69, 71, 83, 87, 101, 104, 107, 109, 122, 124, 125, 128, 145, 147, 148, 149, 151, 170, 171, 173, 174, 178, 197, 198, 200, 201, 202, 203, 204, 205, 226, 227, 229, 230, 231, 233, 234, 235, 257, 260, 262, 264, 265, 291, 293, 294, 296, 298, 299, 300 | `V3` | `C3` | `S1` | `apparently-novel` | For each of 59 counts n from 28 to 300, s(n) <= s_n, where s_n is the exact side of a rational packing that this project made from the register’s known-best witness at n with Evan Daniel’s exact solver and regularizer and decided here over Q; at 57 of the counts it is measured here as the witness’s packing, and at n = 204 and 299 that is not decided. |
 | [T-156](packing/frontier/RESULTS.md) | 290 | `V3` | `C3` | `S1` | `apparently-novel` | s(290) <= 17.53553390593273762200422181052425, which is 70142135623730950488016887242097/4000000000000000000000000000000 exactly, by monotonicity from T-155 (a packing of 291 unit squares contains a packing of 290): T-155 certifies n = 291 at exactly this side. |
 | [T-166](packing/frontier/RESULTS.md) | 153 | `V3` | `C3` | `S1` | `previously-published` | One complete rational source certificate reports a finite upper-bound improvement at the exact side it states: s(153) <= 12.870013850407034002770080892. |
@@ -446,7 +447,7 @@ hypothesis status and summarizes experiment verdicts, and the
 | Explorations | 50 | 30 linked to proposed hypotheses; 20 uncodified |
 | Hypotheses | 283 | 74 confirmed; 48 refuted; 75 blocked; 24 unresolved; 20 open; 37 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
 | Experiments | 246 | 94 accepted; 53 rejected; 63 unresolved; 12 baseline; 18 blocked; 5 abandoned; 0 in progress; 1 exhausted |
-| Frontier results | 243 | 243 registered, 211 by others |
+| Frontier results | 244 | 244 registered, 212 by others |
 
 <!-- END CURRENT-RESEARCH-STATUS -->
 
@@ -773,6 +774,7 @@ case or experiment separately.
 | [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/upper-bounds-couzo-964ee2b-notebooks-20261024/README.md) | generated status view | generated | generated | — |
 | [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/upper-bounds-couzo-43f666c-20261024/README.md) | generated status view | generated | generated | — |
 | [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/upper-bounds-evand-20261024/README.md) | generated status view | generated | generated | — |
+| [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/upper-bounds-issue804-20261025/README.md) | generated status view | generated | generated | — |
 | [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/upper-bounds-issue798-20261024/README.md) | generated status view | generated | generated | — |
 | [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/upper-bounds-issue806-20261025/README.md) | generated status view | generated | generated | — |
 | [Mathematical Review of the n = 108 Fine-Net Certificate](docs/project/reviews/review-2026-10-18-n108-fine-net-mathematics-max.md) | dated review record | record | retained | — |

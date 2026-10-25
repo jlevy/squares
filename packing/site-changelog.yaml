@@ -6,6 +6,49 @@ softschema:
   status: enforced
 repository: https://github.com/jlevy/squares
 entries:
+  - id: daniel-one-eighty-two-adopted
+    date: '2026-10-25'
+    title: Daniel’s New Arrangement Becomes the House Best Packing at 182
+    significance:
+      score: 3
+      rationale: >-
+        T-243 is an S3 finite case result: a new arrangement at 182, 3.17e-03 below the
+        packing it replaces, which no symmetry pairs one to one with it. It is cut from
+        Couzo’s 211 packing of Ostashev’s design and polished; it brings no new technique
+        and claims no optimality.
+    topics: [upper-bound]
+    categories: [records]
+    pull_requests: [814]
+    result_ids: [T-243]
+    summary: |-
+      [Evan Daniel](packing/contributors/people/evan-daniel.md)’s packing at 182, cut from
+      [Francisco Couzo](packing/contributors/people/francisco-couzo.md)’s 211 packing, an
+      arrangement of [Daniil Ostashev](packing/contributors/people/daniil-ostashev.md)’s
+      design, and polished, passes a clean-room review here. At 13.970916436215,
+      $3.17 \times 10^{-3}$ below the packing it replaces and a new arrangement relative to
+      the record, it becomes the house best packing at 182. T-243 is confirmed at V3/C3.
+    details: |-
+      - This project’s two maintained exact routes decided the certificate, and a separately
+        prompted mathematical review decided it again on a clean-room checker of its own, by
+        a Claude agent, which is the independent confirmation. No source program ran here.
+      - The case draws the regularizer’s view at the certificate’s side, which is Daniel’s
+        own regularized certificate, square for square.
+      - Upper bounds only; no optimality is claimed. Local minimality is the source’s
+        numerical report.
+    artifacts:
+      - kind: result
+        label: Daniel’s certificate at 182
+        target: https://squaremath.org/result/t-243.html
+    publication:
+      date: '2026-10-25'
+      evidence: https://github.com/jlevy/squares/actions/runs/40177916608
+    references:
+      - label: The case record at 182
+        target: packing/frontier/n-182.md
+      - label: Mathematical review of 25 October
+        target: docs/project/reviews/review-2026-10-25-evand-n182.md
+      - label: Daniel’s registration request
+        target: https://github.com/jlevy/squares/issues/806
   - id: couzo-two-sixty-eight-and-three-hundred-three-adopted
     date: '2026-10-25'
     title: Couzo’s Packings Become the House Best Packings at 268 and 303
@@ -2636,6 +2679,11 @@ entries:
       - label: Revised verification and confirmation ladder
         target: https://github.com/jlevy/squares/pull/262
 deliveries:
+- number: 814
+  title: "records: Evan Daniel's s(182) certificate of #806 as T-243, confirmed, adopted and regularized at 182"
+  merged_at: '2026-10-25T08:45:49Z'
+  base_ref: main
+  merge_commit: 46e3555822e8ef68f9e7692fb0ceb6a8f98fce97
 - number: 794
   title: 'records(#763): T-240 reviewed at V3/C3, adopted at 268 and 303 and regularized'
   merged_at: '2026-10-25T01:00:47Z'
@@ -3396,6 +3444,7 @@ stacks:
   evidence: https://github.com/jlevy/squares/pull/518
 coverage:
   pull_requests:
+  - 814
   - 794
   - 750
   - 745

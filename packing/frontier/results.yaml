@@ -34475,6 +34475,170 @@ results:
         verdict: accepted
         covers: [T-243]
 
+  - id: T-244
+    kind: upper-bound
+    registered: '2026-10-25'
+    landed: '2026-10-25'
+    headline: >-
+      Kim's exact algebraic sides at 172 and 263, as reported, of packings the record credits
+    claim: >-
+      Hyukdong Kim's issue 804 reports an exact side for the best-known packing at 172 and at
+      263: each the packing's side at a stationary (KKT) point of minimizing the side, and a
+      root of an integer polynomial irreducible over Q. At 172 it is the least of the four
+      real roots of a degree-24 polynomial, and at 263 the only real root of a degree-17
+      polynomial, so
+      s(172) <= 13.6189889568993984288635016293504898995040150521961793814779549035630128682876859236484103034563728798…
+      and
+      s(263) <= 16.7331660078993789705122814839596734462471472483871051710853314027161147491596783918785611086390994182….
+
+      These are upper bounds as reported, and not shown. The source determined each side
+      numerically: it solved the KKT system on the active contacts to 3,000 digits from the
+      binary64 packings of Evan Daniel's atlas, and found each polynomial as an LLL relation
+      at 1,500 digits. The issue supplies no exact configuration, and says the nonnegativity
+      of its multipliers is not certified.
+
+      Feasibility at either side is not shown until an exact configuration at that side is
+      decided: every centre and half-angle tangent in a
+      number field holding the side, every contact an identity there and every other pair
+      and wall separated exactly. In a later comment on the issue the same day, the author
+      attached configurations at both counts that he reports to be of this kind; they are
+      retained here and not yet decided.
+
+      Here SymPy and sqpack.field found each polynomial primitive and irreducible, and each
+      side is the root the source's 100-digit print names, decided exactly. Each lies below
+      T-174's rational certificate at its count, the case's house, by 3.898e-89 at 172 and
+      2.126e-94 at 263. It also lies below the degree-12 side of Evan Daniel's issue 639
+      there, by 1.185e-62 and 9.234e-63, which T-174 is already below. The atlas packings the
+      source read are T-174's witnesses at both counts, to binary64 at every square. The
+      ledger of 25 October for issue 804 records both in report order.
+
+      Credit Hyukdong Kim with each exact side, a refinement of the packing it solves, after
+      that packing's finders as the case records credit them: Francisco Couzo's at 172, as
+      Evan Daniel and PingYou Ltd improved it, and Nate Chaoweeraprasit's (itsnaka) at 263,
+      as Evan Daniel and PingYou Ltd improved it (T-174). The issue says Claude (Anthropic)
+      did the search for open cases, the pipeline, the computations and the verification
+      script at the author's direction, and that he reviewed the outputs.
+    scope: {n_values: [172, 263]}
+    verification: V0
+    confirmation: C0
+    significance:
+      score: 2
+      rationale: >-
+        Exact algebraic sides of packings the record already credits, 3.9e-89 and 2.1e-94
+        below the houses' rational certificates: a citable detail of each case that changes
+        no theorem, S2 as T-193's and T-120 to T-123's exact forms are. It also places the
+        reported stationary side of both packings below issue 639's sides, which the
+        record's final reply there asked about. No lower bound or optimum.
+      scored: '2026-10-25'
+      by: think-9vai triage (draft), adopted by the #804 import (c-import-804-1025)
+    novelty: previously-published
+    attribution:
+      source_keys: ['[Kim exact forms 2026-10-25]']
+      published: '2026-10-25'
+    evidence: [E-hyukdongkim-804-exact-forms-report]
+    artifacts:
+      - packing/resources/web/hyukdongkim-exact-forms-2026-10-25/README.md
+      - packing/resources/web/hyukdongkim-exact-forms-2026-10-25/facts/exact-forms.json
+      - packing/resources/web/hyukdongkim-exact-forms-2026-10-25/acquisition/sources.json
+      - packing/resources/web/hyukdongkim-t244-configurations-2026-10-25/README.md
+      - packing/resources/web/hyukdongkim-t244-configurations-2026-10-25/acquisition/sources.json
+      - packing/resources/web/hyukdongkim-t244-configurations-2026-10-25/facts/n172.json.gz
+      - packing/resources/web/hyukdongkim-t244-configurations-2026-10-25/facts/n263.json.gz
+      - packing/campaign/issue-intake/upper-bounds-issue804-20261025/README.md
+      - packing/campaign/issue-intake/upper-bounds-issue804-20261025/exact-sides.json
+      - packing/campaign/issue-intake/upper-bounds-issue804-20261025/atlas-poses.json
+      - packing/campaign/issue-intake/upper-bounds-issue804-20261025/review/exact_forms.py
+    controls: [packing/tests/test_kim_exact_forms_804.py]
+    next_rung: >-
+      The author's exact configurations at both sides, received on 25 October in the
+      minpoly.json format of Evan Daniel's verify_exact.py and retained as derived facts
+      (the hyukdongkim-t244-configurations-2026-10-25 packet), decided exactly here
+      (think-4rzl).
+
+      A small reader of the packet's facts comes first: derive-forms needs a
+      declaration and retained upstream bytes, which the packet keeps neither of, so the
+      reader feeds each fact's configuration to
+      devtools.algebraic_witness_reports.evand_minpoly_geometry. sqpack.witness.exact_verify
+      then decides each over its field, with the duplicate-square and outside-container
+      controls, and the retained verify_exact.py decides each form rebuilt from its fact, a
+      second route. That would take C to C3, and a stage 4 review of the configurations and
+      the claim would take V to V3.
+
+      The house rule would then adopt both sides, with their regularization items naming
+      T-174, measured against its witnesses. Only if the configurations fail would a builder
+      here be the route (think-4rzl's fallback). Local minimality of either packing at its
+      side is a separate claim and is not registered.
+    unfinished_confirmations:
+      - what: >-
+          The author's exact configuration at each side decided on
+          sqpack.witness.exact_verify over its number field, a positive and two controls a
+          count, and on the retained verify_exact.py, a second route.
+        rung: C3
+        link: think-4rzl
+        estimated_cost:
+          cpu_hours: 2.0
+          cpu_hours_high: 8.0
+          basis: >-
+            Scaled as field degree squared times count squared from T-193's 23 October
+            adoption, where 302 at degree 7 took 230.72 s a job, a scale that reproduces the
+            price of about 2 CPU-hours a job at 267, degree 41. It assumes the field degree
+            equals the side's, 24 and 17; the upper end allows a field of twice that degree
+            and Daniel's verify_exact.py as the second route. The author's configurations
+            are of degree 24 and 17, so the central estimate applies; under the 40
+            CPU-hour item cap. The reader of the packet's facts that comes first is tooling,
+            about half an agent-day, and adds no compute to speak of.
+          priced: '2026-10-25'
+    notes: >-
+      Source assertions only. Nothing of the source's code was executed here; the archive
+      states no licence, so the packet keeps the polynomials and printed sides as a derived
+      fact with the archive's digests. The polynomials' irreducibility and the exact order
+      against T-174 and issue 639 are decided here (exact-sides.json); that each side is the
+      side of a packing is not. The source's KKT multipliers are not unique and their least
+      minimum-norm value is about -6e-16, with no second-order check, so stationarity is
+      numerical and local minimality is not recorded. No global optimality or rigidity is
+      claimed.
+
+      The issue calls the method new; Daniel's exactsolve.py, which the record
+      vendors and whose output T-098 registers, already solves the KKT system on the
+      load-bearing contacts at high precision and searches for an integer relation, so the
+      record credits the values and not the method.
+
+      The same issue reports the sides at 88, 126 and 199, whose polynomials and roots are
+      those of issue 639's, which T-193 records at V3/C3: a second derivation of values the
+      record holds, not recorded here, as issue 639's side at 51 was not.
+
+      The author's comment of 07:22:16Z concedes 88, 126 and 199 to issue 639 and withdraws
+      the issue's paragraph claiming a gap of 1.2e-22 at 126; his comment of 09:06:23Z
+      attaches the exact configurations at 172 and 263, which no licence covers, so the
+      configurations packet keeps their content as derived facts with the attachment's
+      digests, and none of their checker, controls or scripts ran here.
+
+      Each side is stated cut at 100 places: T-174's certificate agrees with it to 88 places at
+      172 and to 93 at 263, so a shorter cut, such as the 40 places T-193 prints, would not
+      tell them apart. The case records are unchanged until adoption, so this entry reads as
+      pending adoption at both counts.
+    regularizations:
+      - n: 172
+        of: T-174
+        by: '[Kim exact forms 2026-10-25]'
+        method: >-
+          KKT closure of the packing's active contacts, solved at 1,500 and 3,000 digits, with
+          an LLL relation for the side's polynomial
+        side: solved
+        credit: Kim after Couzo, Daniel, PingYou Ltd, Levy
+        identity:
+          basis: source-claim
+      - n: 263
+        of: T-174
+        by: '[Kim exact forms 2026-10-25]'
+        method: >-
+          KKT closure of the packing's active contacts, solved at 1,500 and 3,000 digits, with
+          an LLL relation for the side's polynomial
+        side: solved
+        credit: Kim after Chaoweeraprasit, Daniel, PingYou Ltd, Levy
+        identity:
+          basis: source-claim
+
 # Generated by python -m devtools.regularized_drawings from the regularized layer's
 # index (packing/atlas/known-best/regularized/index.json); do not edit by hand.
 regularized_drawings:

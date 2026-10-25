@@ -4175,6 +4175,28 @@ sources:
       retained beside it. MIT-licensed; Claude assistance disclosed. The KKT and
       local-minimum statements are the author's numerical evidence; no global optimality
       claim. Retained in web/evand-n182-2026-10-25/.
+  - key: '[Kim exact forms 2026-10-25]'
+    authors: [Kim]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-25'
+    lineage: builds-on-project
+    credit: Kim after Couzo, Chaoweeraprasit, Daniel, PingYou Ltd, Levy
+    short_credit: Kim after Couzo et al.
+    note: >-
+      Issue 804 and its attachment squares-exact-forms.zip (SHA-256
+      c770f9c37dee6b248543f3e661318630a0f279bc6a8c7663cb2efc53e2814ee7, the issue's digest):
+      Hyukdong Kim's exact sides of the best-known packings at 88, 126, 172, 199 and 263, each a
+      stated root of an integer polynomial irreducible over Q, found by closing the active
+      contacts with the KKT conditions, solving at 1,500 and 3,000 digits from Evan Daniel's
+      atlas at 659ee62, and LLL. A numerical determination with no exact configuration. At 88,
+      126 and 199 the polynomials are those of Daniel's issue 639 sides (T-193); at 172 and 263
+      they are new, below PingYou Ltd's certificates of Francisco Couzo's and Nate
+      Chaoweeraprasit's packings (T-174), whose witnesses the atlas inputs are. No licence, so
+      derived facts and digests only, in web/hyukdongkim-exact-forms-2026-10-25/. The author's
+      exact configurations at 172 and 263, attached to a comment the same day, are kept as
+      derived facts by the same rule in web/hyukdongkim-t244-configurations-2026-10-25/.
+      Claude assistance disclosed. Upper bounds only; no optimality claim.
 credited_names:
   Benjamin Greff: Greff
   Hiroaki Hosono: Hosono
@@ -4223,3 +4245,4 @@ credited_names:
   Amund Kristiansen: Kristiansen
   Kirill Tymchishin: Tymchishin
   Vladislav Lavrentev: Lavrentev
+  Hyukdong Kim: Kim

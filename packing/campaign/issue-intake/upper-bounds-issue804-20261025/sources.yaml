@@ -1,0 +1,46 @@
+# What `python -m devtools.intake_ledger gather` reads: issue #804's exact sides at 172 and 263
+# (think-9vai); its sides at 88, 126 and 199 are T-193's (the report's note). The starts are
+# frozen at main bb756e193 (#805's merge). Each side is the root of the issue's polynomial that
+# its printed side names, cut at 120 places by review/exact_forms.py from the
+# hyukdongkim-exact-forms-2026-10-25 packet's fact (exact-sides.json). No other open report
+# states a bound at these counts below their start: PR #574's are T-174 there, and #639's
+# degree-12 sides at 172 and 263, the 16 October ledger's, lie above T-174's.
+format: intake-ledger-sources-v1
+read_at_main: bb756e1935b4d6280bb41877e8c829a8e4c0e9e3
+read_on: '2026-10-25'
+rule: If they are reported in order, then each one should be recorded as a result, as long as each one is stronger
+  than the last. If a stronger result is reported first, then the other one should not be recorded since it is weaker
+  after that, unless there is some key reason it should be recorded.
+lanes: []
+reports:
+- report: '#804'
+  issue: 804
+  holders: Hyukdong Kim (HyukdongKim)
+  bead: think-9vai
+  rounding: cut
+  note: >-
+    Walked at 172 and 263 only. At 88, 126 and 199 the issue's polynomials are those of Evan
+    Daniel's #639 sides, which T-193 registers at V3/C3 and the house rule stages as the houses
+    there, and exact-sides.json decides each side equal to T-193's exactly. T-193, the current
+    best at other counts, is no pending member of those counts' starts, and two algebraic sides
+    with one print cannot be ordered from their prints, so those three are a second derivation
+    of values the register holds and are not walked (no entry; the requests record says so).
+  claims:
+  - n: 172
+    printed: '13.618988956899398428863501629350489899504015052196179381477954903563012868287685923648410303456372879848819834299824109706'
+    rounding: cut
+    refines:
+      packing_of: Francisco Couzo
+      entry: T-174
+      source: '#804: ''This result only identifies the exact value of their sides'', the packings
+        credited as the case records credit them; the atlas input it read is T-174''s witness to
+        binary64 at every square (atlas-poses.json)'
+  - n: 263
+    printed: '16.733166007899378970512281483959673446247147248387105171085331402716114749159678391878561108639099418288337193158902364954'
+    rounding: cut
+    refines:
+      packing_of: Nate Chaoweeraprasit (itsnaka)
+      entry: T-174
+      source: '#804: ''This result only identifies the exact value of their sides'', the packings
+        credited as the case records credit them; the atlas input it read is T-174''s witness to
+        binary64 at every square (atlas-poses.json)'

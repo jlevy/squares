@@ -799,7 +799,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "b909d2b5a23350128cb154f925c998444b37f261"
+DATA_REVISION = "d5dcd2d0e66e8d6dc3da6fd789a9387545b24854"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -896,6 +896,14 @@ FIRST_PUBLISHED = PUBLICATION_HISTORY[-1].first_published
 #:                                            day is the one recorded
 #: The leading entry is proposed for the next publication; confirm its date at first deployment.
 EXPLAINER_HISTORY = (
+    PublicationHistoryEntry(
+        version="v0.4.29",
+        first_published="October 25, 2026",
+        result_scope=(
+            "Update the registered result count after the registration of Hyukdong Kim's "
+            "exact sides at 172 and 263 (T-244)."
+        ),
+    ),
     PublicationHistoryEntry(
         version="v0.4.28",
         first_published="October 25, 2026",
@@ -1481,6 +1489,16 @@ class ReleaseImpactDecision(NamedTuple):
 # New component cuts append decisions here, newest first, alongside their own histories.
 # No impact is invented retrospectively for the published baseline editions.
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
+    ReleaseImpactDecision(
+        component="paper:n11-lower-bounds-explainer",
+        previous_version="v0.4.28",
+        version="v0.4.29",
+        impact="patch",
+        reason=(
+            "Update the registered result count after the registration of Hyukdong Kim's "
+            "exact sides at 172 and 263 (T-244)."
+        ),
+    ),
     ReleaseImpactDecision(
         component="paper:n11-lower-bounds-explainer",
         previous_version="v0.4.27",
@@ -9147,6 +9165,52 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "explainer, counting 242 to 243 results, takes v0.4.28 over main's v0.4.27. No "
             "PDF was printed for these three; each prints from that HTML. Retain v0.1.11, "
             "v0.1.4 and v0.2.7."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/contributors/people/hyukdong-kim.md",
+            "packing/devtools/render_n11_lower_bounds_explainer_pdf.py",
+            "packing/devtools/site_resources.py",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The import of #804 (think-9vai): T-244 at 172 and 263, its coverage entry, "
+            "#804's requests entry and Hyukdong Kim's profile, against main bb756e193 "
+            "(#805). Rendered at link revision 7af71882 into empty site directories, twice "
+            "from this tree and once with main's results.yaml, result-requests.yaml and "
+            "source-coverage.yaml swapped in and the new profile set aside, 69 files each, "
+            "by render_n11_lower_bounds_explainer with its Chromium math pass, "
+            "render_n11_optimality_review, render_n11_threshold_bound_review and "
+            "render_packing_methods: these three papers' files are byte-identical across "
+            "the three renders. Only the explainer differs, in its count of registered "
+            "results. Measured again after merging main 886dddce6 (#808), with issue 804's "
+            "card in site_resources, T-244's headline by surname and #799's "
+            "acknowledgement recorded, at link revision 5e08f28c, with that main's four "
+            "inputs swapped in, and after merging main 46e355582 (#814, T-243), at link "
+            "revision dd5fc01d with that main's four inputs swapped in, and after #806's "
+            "final comment, #814's News and the explainer PDF's page count of 25, at link "
+            "revision 1b75d2f7 with that main's four inputs and "
+            "render_n11_lower_bounds_explainer_pdf.py swapped in, and after review A's "
+            "fixes, at link revision 6997281d, and review B's, at d5dcd2d0, each with the "
+            "same five inputs of main swapped in: the same outcome each time, the "
+            "explainer counting 244 results against main's 243, which its v0.4.29 "
+            "carries. Retain v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
 )
