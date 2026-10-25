@@ -9315,6 +9315,41 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "Retain v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/devtools/validate_schemas.py",
+            "packing/frontier/README.md",
+            "packing/src/sqpack/cli/validate.py",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The exact-side register (think-vgsw, #811): the register joins the schema "
+            "corpus (validate_schemas.py), its check joins the records tier (validate.py), "
+            "and the frontier README gains a section on it, against main 272b411b4 (#812). "
+            "Rendered at link revision 57f70c3e into empty site directories, twice from "
+            "this tree and once with main's validate_schemas.py, validate.py and frontier "
+            "README.md swapped in: render_n11_optimality_review, "
+            "render_n11_threshold_bound_review, render_packing_methods and "
+            "render_n11_lower_bounds_explainer, with its pinned Chromium math pass, write "
+            "all 69 files byte-identical across the three. No PDF was printed; each prints "
+            "from that HTML. Retain v0.4.30, v0.1.11, v0.1.4 and v0.2.7."
+        ),
+    ),
 )
 
 
