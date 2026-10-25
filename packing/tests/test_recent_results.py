@@ -113,12 +113,16 @@ def test_an_entry_that_claims_no_bound_has_no_standing(records: view.Records) ->
         # T-085, from 2026-10-02: the correction of Nagamochi's Lemma 1 cites the exact
         # recomputation of its counterexample, which claims no bound.
         "correction",
+        # T-244, from 2026-10-25: the exact side of the s(29) record configuration, which
+        # no one has decided as a packing at that side.
+        "exact-side",
     }
     # T-112, from 2026-10-06: the uniqueness of the optimal packing of eleven squares
     # cites only its derived-structure entry, which claims no bound.
     # T-124 reports local minima of source configurations, without a global bound.
     assert without["T-124"] == "restricted-optimality"
-    assert len(without) == 12
+    assert without["T-244"] == "exact-side"
+    assert len(without) == 13
 
 
 def test_standing_agrees_with_the_recent_rows(

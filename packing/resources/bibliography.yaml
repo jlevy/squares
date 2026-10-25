@@ -2555,7 +2555,8 @@ sources:
       it's a bit messier than 17, but not unexpectedly so. But rather for the side length,
       which is truly cursed."; the post is retained in the evand-exact-data-2026-10-12
       packet's receipts/announcement/, and the thread's follow-ups say the work "was all done
-      by Claude".
+      by Claude". T-244 registers the polynomial as the exact side of the record
+      configuration.
   - key: '[Summins stratification series 2026-10-12]'
     authors: [Summins]
     year: 2026

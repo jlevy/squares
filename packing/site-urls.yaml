@@ -6987,7 +6987,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-17'
+  lastmod: '2026-10-25'
   status: live
 - path: cases/290.html
   canonical: cases/290.html
@@ -21405,6 +21405,39 @@ urls:
       - packing/resources/web/evand-kaggle-descents-2026-10-24/measure/identity.json
       - packing/campaign/issue-intake/upper-bounds-evand-20261024/README.md
       - packing/devtools/upper_bound_reports.py
+- path: result/t-244.html
+  canonical: result/t-244.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-25'
+  lastmod: '2026-10-25'
+  status: live
+  identity:
+    kind: exact-side
+    scope:
+      n_values:
+      - 29
+    established: null
+    attribution:
+      source_keys:
+      - '[Daniel exact and local reports 2026-10-12]'
+      published: '2026-10-11'
+    builds_on: null
+    evidence:
+    - E-n029-evand-minpoly-7213-report
+    artifacts:
+    - packing/resources/web/evand-exact-data-2026-10-12/README.md
+    - packing/resources/web/evand-exact-data-2026-10-12/acquisition/release.json
+    - packing/resources/web/evand-exact-data-2026-10-12/acquisition/release/s29/README.md
+    - packing/resources/web/evand-exact-data-2026-10-12/acquisition/release/s29/n29_krawczyk.json
+    - packing/resources/web/evand-exact-data-2026-10-12/receipts/announcement/tweet-2110154454817448106.json
+    - packing/resources/web/evand-exact-and-local-reports-2026-10-12/source/search/exact/homotopy/N29.md
+    - packing/resources/web/evand-exact-and-local-reports-2026-10-12/source/search/exact/homotopy/irred.py
+    - packing/resources/web/evand-exact-and-local-reports-2026-10-12/source/search/exact/homotopy/krawczyk.py
+    - packing/resources/web/evand-exact-and-local-reports-2026-10-12/source/search/exact/homotopy/link.py
+    - packing/resources/web/evand-exact-and-local-reports-2026-10-12/source/search/exact/homotopy/verify_mod.py
+    - packing/resources/web/evand-exact-and-local-reports-2026-10-12/source/search/exact/homotopy/contacts_mod.py
 - path: results.html
   canonical: results.html
   kind: page

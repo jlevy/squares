@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:ResultsRegister/v1
   schema: results.schema.yaml
   status: enforced
-last_reviewed: '2026-10-24'
+last_reviewed: '2026-10-25'
 results:
   - id: T-001
     kind: lower-bound
@@ -34268,6 +34268,147 @@ results:
           moved: 0
           max_move: 4.6e-4
           max_turn_deg: 0.019
+  - id: T-244
+    kind: exact-side
+    registered: '2026-10-25'
+    landed: '2026-10-25'
+    headline: Reported degree-7213 minimal polynomial of the `s(29)` record side
+    claim: >-
+      Evan Daniel reports that the side sigma of the best known packing of 29 unit squares,
+      Thomas Schadt's packing as David Ellsworth improved it, whose exact certificates are
+      T-155 and T-195, is a root of an irreducible integer polynomial p of degree 7213, so
+      that p is its minimal polynomial: sigma = 5.93383346267692918968946061635201913843383418107…,
+      the root of p that the source's Krawczyk enclosure isolates, and p has a leading
+      coefficient of 325 digits and coefficients of up to 5,074 digits. It is the exact
+      value of that configuration's side, the s(29) record side, and it states no bound and
+      no optimality: the source does not check the packing's non-overlap at sigma, and the
+      case's upper bound is T-195's.
+
+      The source eliminates the packing's 152-row contact system to five consistency
+      polynomials in the class angles of its five tilted orientation classes and solves them
+      by polyhedral homotopy continuation: 44,448 paths give 7,209 regular roots, and the 4
+      the homotopy missed, beside the singular side 5, are recovered algebraically; p is
+      rebuilt from all 7,213.
+
+      It rates irreducibility over Q (degree patterns modulo 12 primes), the Krawczyk
+      enclosure of the unique zero t* of the five polynomials (radius 1e-50) and the link
+      sigma = S(t*) rigorous, and the identities that certify the shape-lemma
+      parametrization in Q[x]/(p) Monte Carlo, modulo random 62-bit primes. The polynomial,
+      a 27 MB file, is published in the release exact-data-2026-10-12 and retained here by
+      its digest; its degree and coefficient sizes were read from it here, and nothing else
+      was run.
+
+      Daniel after Schadt, Ellsworth and Levy,
+      [square-packing](https://github.com/evand/square-packing/blob/ad86d42d0f743076d735036702ba04a41ce24a8c/search/exact/homotopy/N29.md),
+      11 October 2026, with the data in
+      [exact-data-2026-10-12](https://github.com/evand/square-packing/releases/tag/exact-data-2026-10-12),
+      announced on X on 13 October 2026
+      ([the thread](https://x.com/evanbd/status/2110154454817448106)). The source's
+      CREDITS.md says its work was produced by Claude (Anthropic) under human direction.
+    scope:
+      n_values: [29]
+    verification: V0
+    confirmation: C0
+    significance:
+      score: 3
+      rationale: >-
+        The exact algebraic value of the side of the best known packing of 29 squares, which
+        the record held only as decimals and rational certificates: of degree 7213, an order
+        of magnitude above the largest degree the record otherwise states (672 at n = 83,
+        from the catalogue), found by a complete homotopy solve with the roots it missed
+        recovered algebraically. A substantive case result, above the S2 of T-120 to T-123,
+        whose exact forms of degree 8 to 40 come from routine elimination; it proves no
+        bound, so not S4.
+      scored: '2026-10-25'
+      by: think-6gti Evan Daniel import (draft, w-n29-poly-1025)
+    novelty: previously-published
+    attribution:
+      source_keys:
+        - '[Daniel exact and local reports 2026-10-12]'
+      published: '2026-10-11'
+    evidence:
+      - E-n029-evand-minpoly-7213-report
+    composition: >-
+      One cited entry, the source's report (E-n029-evand-minpoly-7213-report), which claims
+      the exact side as derived structure and no bound. The certificates T-155 and T-195
+      cite are not cited: they decide the same packing at rational sides and say nothing of
+      p. Nothing is replayed here, so V0; no review has read it, so C0.
+    artifacts:
+      - packing/resources/web/evand-exact-data-2026-10-12/README.md
+      - packing/resources/web/evand-exact-data-2026-10-12/acquisition/release.json
+      - packing/resources/web/evand-exact-data-2026-10-12/acquisition/release/s29/README.md
+      - packing/resources/web/evand-exact-data-2026-10-12/acquisition/release/s29/n29_krawczyk.json
+      - packing/resources/web/evand-exact-data-2026-10-12/receipts/announcement/tweet-2110154454817448106.json
+      - packing/resources/web/evand-exact-and-local-reports-2026-10-12/source/search/exact/homotopy/N29.md
+      - packing/resources/web/evand-exact-and-local-reports-2026-10-12/source/search/exact/homotopy/irred.py
+      - packing/resources/web/evand-exact-and-local-reports-2026-10-12/source/search/exact/homotopy/krawczyk.py
+      - packing/resources/web/evand-exact-and-local-reports-2026-10-12/source/search/exact/homotopy/link.py
+      - packing/resources/web/evand-exact-and-local-reports-2026-10-12/source/search/exact/homotopy/verify_mod.py
+      - packing/resources/web/evand-exact-and-local-reports-2026-10-12/source/search/exact/homotopy/contacts_mod.py
+    next_rung: >-
+      C1 needs the stage 4 mathematical review of N29.md: the elimination from the 152-row
+      contact system to the five consistency polynomials, the shape-lemma parametrization,
+      the Monte Carlo error bound and the link argument. C3 needs the source's five-step
+      replay from the pinned archive with its own scripts and a perturbed-polynomial
+      control (think-10m1): about 2.5 CPU-hours by the author's measure, a reproduction with
+      the producer's code, which waits on an owner budget.
+
+      An independent route, irreducibility and root isolation in another system and an
+      exact decision of the packing's non-overlap over the Krawczyk box, is a W7 slice of a
+      few agent-hours and similar compute; a decided non-overlap at sigma would make the
+      claim an upper bound below the case's ceiling, and the kind would change with it.
+    unfinished_confirmations:
+      - what: >-
+          the stage 4 mathematical review of N29.md, its elimination to the five consistency
+          polynomials, the shape-lemma parametrization, the Monte Carlo error bound and the
+          link argument, read from the retained packets
+        rung: C1
+        link: think-6gti
+      - what: >-
+          the source's five-step replay from s29-minpoly.tar.zst, fetched and checked against
+          its pinned digest: irred.py over 12 primes, krawczyk.py, link.py at PREC=220000,
+          verify_mod.py over 50 primes and contacts_mod.py over 21, under env.sh's
+          python-flint 0.9.0 and mpmath 1.3.0, with a perturbed-polynomial control
+        rung: C3
+        link: think-10m1
+        estimated_cost:
+          cpu_hours: 2.5
+          cpu_hours_high: 3
+          basis: >-
+            The author's measure in issue 545's comment of 12 October 2026: about 2.5
+            CPU-hours with 12, 50 and 21 primes, almost all in verify_mod.py at about 2.5
+            minutes a prime; an estimate, not a receipt
+          priced: '2026-10-25'
+    notes: >-
+      Registered on 25 October 2026 by the worker w-n29-poly-1025 for the coordinator
+      coord-n12-1025 (think-6gti), on the owner's instruction of that day, as the
+      coordinator relayed it, to capture Evan Daniel's work and link his announcement "as
+      this is itself a result"; issue 545 has tracked the import since 12 October, and
+      issue 811 tracks the record's exact side polynomials. Its kind, exact side, is new
+      with this entry: none of the register's other kinds fits a claim that gives the exact
+      value of one configuration's side and states no bound, and the owner's approval of
+      the kind is asked in the pull request that lands it.
+
+      The polynomial was published on 12 October in the release exact-data-2026-10-12, at
+      issue 545's request; the evand-exact-data-2026-10-12 packet pins the archive by
+      digest, since it is too large for the repository, and retains its README, its
+      SHA256SUMS and the Krawczyk box.
+
+      The announcement's first post is retained there; its
+      follow-ups in the same thread, as transcribed for the owner on 25 October and not
+      retained, say that the side "is, exactly, a specific root of a degree 7213 polynomial
+      with integer coefficients having up to 5074 digits", that "This work was all done by
+      Claude and I'm fairly certain the exact math is correct, but some of the checks are
+      stochastic. It's not in Lean; the computation is not tractable", and, on 15 October,
+      that proving the packing optimal "is an additional proof, which has not yet been done
+      at this size".
+
+      The case's lanes are unchanged: both hold T-195's rational certificate of the same
+      packing, of degree 1, which the house adoption of 17 October wrote, and sigma is the
+      configuration's own side. T-195's exact side agrees with sigma to the 68 places N29.md
+      prints and lies inside the Krawczyk enclosure of S; whether it is above sigma, as a
+      realization of the packing at a decided side is expected to be, is not decided here.
+      n-029.md's analytic characterization gives the degree and the pinned asset.
 
 # Generated by python -m devtools.regularized_drawings from the regularized layer's
 # index (packing/atlas/known-best/regularized/index.json); do not edit by hand.

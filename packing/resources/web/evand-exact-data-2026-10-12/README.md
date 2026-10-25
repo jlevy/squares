@@ -67,6 +67,11 @@ are stochastic. It’s not in Lean; the computation is not tractable”, and lin
 release; a reply of 15 October adds that proving the packing optimal “is an additional
 proof, which has not yet been done at this size”.
 
+**Registered.** The report is T-244, an exact side: the exact value of the record
+configuration’s side, with no bound, cited by `E-n029-evand-minpoly-7213-report`, whose
+certificate is [acquisition/release.json](acquisition/release.json).
+Its replay is `think-10m1`.
+
 ## The Grade-C Archive
 
 The archive holds 723 files, 15,787,809 bytes unpacked: `n-N.contacts.json` and
