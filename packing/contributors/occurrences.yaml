@@ -28461,14 +28461,17 @@ occurrences:
   evidence:
   - source-intake
   - bibliography
-  note: Reviewed packing/resources/bibliography.yaml [[Kristiansen issue 798 2026-10-24]] /authors/0 span 0:11. Issue 798, filed by the GitHub account amundsk, and the gist's README credit Amund Kristiansen; the certificates are his searches', made with Evan Daniel's tools.
+  note: Reviewed packing/resources/bibliography.yaml [[Kristiansen issue 798 2026-10-24]]
+    /authors/0 span 0:11. Issue 798, filed by the GitHub account amundsk, and the
+    gist's README credit Amund Kristiansen; the certificates are his searches', made
+    with Evan Daniel's tools.
   contributor_id: amund-kristiansen
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Kristiansen issue 798 2026-10-24]'
     field: /credit
   expected_text: Kristiansen after Couzo, Lavrentev, Tymchishin, alexchilton, kyleluecke,
-    Fang, Daniel
+    Fang, Daniel, Levy
   start: 0
   end: 11
   label: Kristiansen
@@ -28484,7 +28487,7 @@ occurrences:
     record_key: '[Kristiansen issue 798 2026-10-24]'
     field: /credit
   expected_text: Kristiansen after Couzo, Lavrentev, Tymchishin, alexchilton, kyleluecke,
-    Fang, Daniel
+    Fang, Daniel, Levy
   start: 18
   end: 23
   label: Couzo
@@ -28500,7 +28503,7 @@ occurrences:
     record_key: '[Kristiansen issue 798 2026-10-24]'
     field: /credit
   expected_text: Kristiansen after Couzo, Lavrentev, Tymchishin, alexchilton, kyleluecke,
-    Fang, Daniel
+    Fang, Daniel, Levy
   start: 25
   end: 34
   label: Lavrentev
@@ -28516,7 +28519,7 @@ occurrences:
     record_key: '[Kristiansen issue 798 2026-10-24]'
     field: /credit
   expected_text: Kristiansen after Couzo, Lavrentev, Tymchishin, alexchilton, kyleluecke,
-    Fang, Daniel
+    Fang, Daniel, Levy
   start: 36
   end: 46
   label: Tymchishin
@@ -28532,7 +28535,7 @@ occurrences:
     record_key: '[Kristiansen issue 798 2026-10-24]'
     field: /credit
   expected_text: Kristiansen after Couzo, Lavrentev, Tymchishin, alexchilton, kyleluecke,
-    Fang, Daniel
+    Fang, Daniel, Levy
   start: 48
   end: 59
   label: alexchilton
@@ -28548,7 +28551,7 @@ occurrences:
     record_key: '[Kristiansen issue 798 2026-10-24]'
     field: /credit
   expected_text: Kristiansen after Couzo, Lavrentev, Tymchishin, alexchilton, kyleluecke,
-    Fang, Daniel
+    Fang, Daniel, Levy
   start: 61
   end: 71
   label: kyleluecke
@@ -28564,7 +28567,7 @@ occurrences:
     record_key: '[Kristiansen issue 798 2026-10-24]'
     field: /credit
   expected_text: Kristiansen after Couzo, Lavrentev, Tymchishin, alexchilton, kyleluecke,
-    Fang, Daniel
+    Fang, Daniel, Levy
   start: 73
   end: 77
   label: Fang
@@ -28580,7 +28583,7 @@ occurrences:
     record_key: '[Kristiansen issue 798 2026-10-24]'
     field: /credit
   expected_text: Kristiansen after Couzo, Lavrentev, Tymchishin, alexchilton, kyleluecke,
-    Fang, Daniel
+    Fang, Daniel, Levy
   start: 79
   end: 85
   label: Daniel
@@ -28591,6 +28594,22 @@ occurrences:
   - bibliography
   note: Reviewed source credit matches the evidenced person and printed name; issue 798 names Evan Daniel's fq quench, basin explorer, dilate_cert.py and checkers at evand/square-packing 7982d7a as its tools, and method credit travels with the result.
   contributor_id: evan-daniel
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Kristiansen issue 798 2026-10-24]'
+    field: /credit
+  expected_text: Kristiansen after Couzo, Lavrentev, Tymchishin, alexchilton, kyleluecke,
+    Fang, Daniel, Levy
+  start: 87
+  end: 91
+  label: Levy
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - announcement-account
+  note: Reviewed packing/resources/bibliography.yaml [[Kristiansen issue 798 2026-10-24]] /credit span 87:91. The specific first-party jlevy/squares method or source is the Joshua Levy identity established by LICENSE and the retained ojoshe receipt; the link is kept from issue 763's credit chain, and project credit does not imply sole personal authorship.
+  contributor_id: joshua-levy
 inspections:
 - path: packing/resources/papers/addis-locatelli-schoen-2008-disk-packing-square.pdf
   status: pending

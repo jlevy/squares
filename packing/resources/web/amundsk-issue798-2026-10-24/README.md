@@ -226,7 +226,8 @@ Packing Search” v11 packings at 372, 416, 457, 458 and 502; Tymchishin’s not
 kyleluecke’s at 377; alexchilton’s at 338 and 504; and Couzo with Kevin Fang’s seed and
 construction at 382.
 The bibliography credit therefore reads
-`Kristiansen after Couzo, Lavrentev, Tymchishin, alexchilton, kyleluecke, Fang, Daniel`
+`Kristiansen after Couzo, Lavrentev, Tymchishin, alexchilton, kyleluecke, Fang, Daniel, Levy`,
+keeping the project link of #763’s chain
 ([attribution.md](../../../../attribution.md#credit-text-and-lineage)).
 Per-row credit beyond the horizon stays the owner’s open question from #686.
 The searches, the certificates and the report were done by Claude (Anthropic) in Claude

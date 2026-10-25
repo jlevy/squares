@@ -3349,7 +3349,7 @@ sources:
     venue: GitHub
     dated: '2026-10-24'
     lineage: builds-on-project
-    credit: Kristiansen after Couzo, Lavrentev, Tymchishin, alexchilton, kyleluecke, Fang, Daniel
+    credit: Kristiansen after Couzo, Lavrentev, Tymchishin, alexchilton, kyleluecke, Fang, Daniel, Levy
     short_credit: Kristiansen after Couzo et al.
     note: 'Fourteen exact dilation certificates in the gist amundsk/e4df936fb09c68446598d4c8309d0166 at
       c9be7b70e2220c2eccb2c5ea746094bc85dda405, beyond the case corpus at 334, 338, 343, 372, 376, 377, 379,
