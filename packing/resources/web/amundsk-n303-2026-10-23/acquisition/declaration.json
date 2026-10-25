@@ -5,33 +5,21 @@
   "source_ref": "main",
   "source_commit": "511f56bf6e6afb4eb22f12d31371c2a2fe7b4767",
   "retrieved_at_utc": "2026-10-23T16:11Z",
-  "git_scope": "Blobless clone of the gist amundsk/78f9f0e7b4669f2f509a281845081768, checked out at the revision issue #755 pins, 511f56b (committed 2026-10-23T11:12:11Z, 37 seconds before the issue), which is the gist's only revision and its head when read; the GitHub API lists no other version and no comments. The gist's three files are in the scope, each bound to its Git blob at the pin: the dilation certificate the claim rests on (s303_amund.cert), the binary64 packing it was made from (s303_amund.input.txt) and the gist's README. Under derived-only custody no file is copied, and no source program was executed.",
+  "git_scope": "Blobless clone of the gist amundsk/78f9f0e7b4669f2f509a281845081768, checked out at the revision issue #755 pins, 511f56b (committed 2026-10-23T11:12:11Z, 37 seconds before the issue), which is the gist's only revision and its head when read on 23 October and again on 24 October; the GitHub API lists no other version. The gist's three files are in the scope, each bound to its Git blob at the pin: the dilation certificate the claim rests on (s303_amund.cert), the binary64 packing it was made from (s303_amund.input.txt) and the gist's README. First acquired on 23 October under derived-only custody, with no file copied; re-acquired at the same pin at 20:56Z on 24 October, after the author's CC0 1.0 dedication, retaining all three; the retrieval time stays the first one, which the derived fact of 23 October names. No source program was executed.",
   "archived_dir": "source",
-  "license": "No licence: the gist's README and issue #755 state no reuse terms. Derived-only custody under the known-best retention policy: no upstream byte is retained, every file in the scope is bound here by SHA-256 and at the pin by its Git blob, and no redistribution permission or licence determination is asserted. The gist's README and issue #755 credit Amund Kristiansen (GitHub @amundsk), name Evan Daniel's MIT-licensed evand/square-packing at 7982d7a for the certificate format, the dilation producer search/packer/dilate_cert.py and the two checkers search/exact/verify_cert.py and verify_cert2.py, and the issue says the search started from Evan Daniel's registered packing (#728) and polished with his fq quench. The issue discloses that the search, the certificate and the report were done by Claude (Anthropic) in Claude Code at the author's direction.",
+  "license": "CC0 1.0: the author's public-domain dedication of s303_amund.cert, s303_amund.input.txt and the README in jlevy/squares#755 issuecomment-6388401978 (2026-10-24T19:13:49Z), which asks that the certificate and its input be kept; the gist and the issue state none. Until then the packet kept no upstream byte, under the derived-only form of the known-best retention policy. The gist's README and issue #755 credit Amund Kristiansen (GitHub @amundsk), name Evan Daniel's MIT-licensed evand/square-packing at 7982d7a for the certificate format, the dilation producer search/packer/dilate_cert.py and the two checkers search/exact/verify_cert.py and verify_cert2.py, and the issue says the search started from Evan Daniel's registered packing (#728) and polished with his fq quench. The issue discloses that the search, the certificate and the report were done by Claude (Anthropic) in Claude Code at the author's direction.",
   "claims": [
     "Issue #755 (opened 2026-10-23T11:12:48Z by amundsk, no comments when read) reports s(303) <= 17.909762327476, the exact rational side 223872029093440709529093216833/12500000000000000000000000000 = 17.909762327475256427... of s303_amund.cert rounded up at 12 places, 9.89e-6 below the register's 17.909772217275 (Evan Daniel, #728); it prints the SHA-256 of the certificate and of its binary64 input.",
     "The issue says the certificate is a dilation made with Evan Daniel's search/packer/dilate_cert.py (evand/square-packing at 7982d7a): the binary64 packing of s303_amund.input.txt (side 17.909762327457347) with centres and box scaled by 1 + 10^-12, coordinates rounded to rationals and each angle to a rational half-angle tangent, so every square is exactly unit; it certifies the upper bound only.",
     "The author reports that Evan Daniel's two exact checkers at 7982d7a accept it, verify_cert.py (separating axes) with least wall clearance 8.2e-13 and least pair separation 1.2e-12 over 724 close pairs, and verify_cert2.py (polygon intersection); that they share an author and the certificate format, which also made it; and that a third unpublished exact check, a local packing workbench's rational certifier on the float packing, accepts it.",
     "The issue calls it a new packing found from Evan Daniel's registered packing (#728, W-known-best-n303), not a refinement: matched one to one by an optimal assignment on centres, its largest move is 0.547, 12 squares move more than 0.1 and 31 more than 0.01, and it has 96 tilted squares against 91. The search relaxed 2,048 perturbed variants of the register packing a round in a float32 GPU batch through a box slightly below the record side, polished the best 64 in binary64 with Evan Daniel's fq quench (augmented Lagrangian and SLP), and repeated from the current best.",
-    "The issue states no exact KKT solve and no local-optimality or rigidity analysis: the float packing is a converged polish, not an exact stationary point."
+    "The issue states no exact KKT solve and no local-optimality or rigidity analysis: the float packing is a converged polish, not an exact stationary point.",
+    "The author's comment on the closed issue (issuecomment-6388401978, 2026-10-24T19:13:49Z, never edited) answers the final comment's three questions: the issue's 8.2e-13 (8.165e-13) was the least wall clearance of an earlier, slightly larger certificate from the same search, side 17.909763172478, never submitted, and verify_cert.py prints 6.020e-13 at square #3 on s303_amund.cert; the certificate was made with search/packer/dilate_cert.py at evand/square-packing 7982d7a9346e29e36cab3ce075274f3023114353 from s303_amund.input.txt, the gist's bytes, on macOS 26 arm64 with Python 3.14.6, so math.tan is Apple's libm, and only the comment line was edited afterwards, to remove a local path; and it dedicates s303_amund.cert, s303_amund.input.txt and the README to the public domain under CC0 1.0, asking that both files be kept; the same dedication covers every certificate, input packing and README in #798's gist at c9be7b7."
   ],
   "scope": [
     "README.md",
     "s303_amund.cert",
     "s303_amund.input.txt"
   ],
-  "pinned_only": [
-    {
-      "match": "s303_amund.cert",
-      "reason": "Exact dilation certificate (n S, then x y t); no licence: derived-only, read from a checkout at the pin."
-    },
-    {
-      "match": "s303_amund.input.txt",
-      "reason": "The binary64 packing the certificate was made from (n side, then x y angle_deg); no licence: pinned by digest only."
-    },
-    {
-      "match": "README.md",
-      "reason": "The gist's README; no licence: pinned by digest only."
-    }
-  ]
+  "pinned_only": []
 }

@@ -1897,8 +1897,9 @@ def test_each_row_above_goebel_s_construction_is_marked() -> None:
     so the nine rows of 8 to 13 October above it at 369, 375 and 376 are marked with it and
     hold no count. 369 has no current row; at 375 the 13 October row, below it, leads to
     Evan Daniel's, which #763's row supersedes; at 376 the notebook rows' row (think-lyf9),
-    below Göbel's, is the first to hold the count, and 43f666c's supersedes it
-    (think-gn29). A row left unmarked, or marked and not above, is named."""
+    below Göbel's, is the first to hold the count, 43f666c's supersedes it (think-gn29),
+    and #798's supersedes that in turn (think-2l0q). A row left unmarked, or marked and
+    not above, is named."""
     coverage = safe_load(replay.COVERAGE.read_text(encoding="utf-8"))
     marked = {
         (row["n"], row["source_id"]): row["construction"]
@@ -1909,7 +1910,13 @@ def test_each_row_above_goebel_s_construction_is_marked() -> None:
     assert replay.construction_problems(coverage) == []
     current = coverage_check.current_beyond_horizon(coverage)
     assert 369 not in current
-    assert current[376]["source_id"] == "couzo-43f666c-2026-10-24"
+    (first,) = (
+        row
+        for row in coverage["beyond_horizon_claims"]
+        if (row["n"], row["source_id"]) == (376, "tymchishin-22-3662-2026-10-23")
+    )
+    assert first["superseded_by"] == "couzo-43f666c-2026-10-24"
+    assert current[376]["source_id"] == "amundsk-issue798-2026-10-24"
     assert current[375]["source_id"] == SOURCE_763
     for row in coverage["beyond_horizon_claims"]:
         if (row["n"], row["source_id"]) == (376, "couzo-certificates-2026-10-13"):

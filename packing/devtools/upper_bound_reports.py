@@ -13,7 +13,10 @@ declaration ``devtools.acquire_source`` writes the packet from:
   ``fact`` instead: the certificate as an exact rational Witness/v2, which ``derive``
   writes from a checkout once ``acquire_source.acquire`` shows the checkout yields this
   packet's own acquisition record, so its bytes have the digests the packet pins. The
-  fact names those digests, and ``read_facts`` holds it to its own rebuild. A pinned file
+  fact names those digests, and ``read_facts`` holds it to its own rebuild. Where a
+  licence given later lets the packet retain the file at the same pin, as #755's author
+  gave on 24 October 2026, the row keeps its fact, which the receipts name, and
+  ``read_facts`` also holds the fact to the retained bytes (`_fact_file`). A pinned file
   the row names as stating the same packing, such as the source's own Witness/v2, is
   compared with the certificate by ``derive``, from the same checkout. Where the source
   keeps its geometry in release assets and pins them by digest in a manifest of its tree,
@@ -1194,27 +1197,46 @@ def _record(packet: Path) -> acquire_source.Record:
     return cast("acquire_source.Record", value)
 
 
+def _fact_file(packet: Path, row: CertificateRow) -> bool:
+    """Whether a fact's row names a file the packet retains rather than pins only: the file
+    came to be retained after the fact was derived, once a licence allowed it, as at #755's
+    303, so the fact stays beside it, its receipts bound to it."""
+    pinned = {item["path"] for item in _record(packet)["sources"][0]["pinned_only"]}
+    return "fact" in row and "archive" not in row and row["path"] not in pinned
+
+
 def fact_witness(
     packet: Path, declaration: Declaration, row: CertificateRow, certificate: legacy.Certificate
 ) -> dict[str, Any]:
     """A derived fact: the positive job's deciding witness, with the pinned file it is from.
 
     ``revision_sha256`` is the digest the packet's acquisition record pins for the file,
-    which is not retained; ``derive`` writes the fact only from bytes that have it. For a
-    member of a release asset it is the member's own digest, the file the manifest pinned
-    at ``revision`` binds through the asset's, and the address is the asset's, with the
-    member as its fragment.
+    which is not retained; ``derive`` writes the fact only from bytes that have it. A file
+    retained later, under a licence given after the fact was derived (`_fact_file`), keeps
+    the same digest, the manifest's, so the fact is unchanged. For a member of a release
+    asset it is the member's own digest, the file the manifest pinned at ``revision`` binds
+    through the asset's, and the address is the asset's, with the member as its fragment.
     """
     record = _record(packet)
     source = record["sources"][0]
     pinned = {item["path"]: item for item in source["pinned_only"]}
     archive = row.get("archive")
     bound = row["path"] if archive is None else archive["manifest"]
-    _require(bound in pinned, f"n={row['n']}: a fact for a file the packet does not pin")
+    # Only a file retained beside its fact reads the manifest; a pinned file's digest is
+    # the record's, so a packet's facts read as before wherever its manifest is absent.
+    retained = (
+        {}
+        if bound in pinned or archive is not None
+        else acquire_source.read_manifest(packet / acquire_source.MANIFEST)
+    )
+    _require(
+        bound in pinned or bound in retained,
+        f"n={row['n']}: a fact for a file the packet does not pin",
+    )
     witness = kernel.to_witness(certificate, **_profile(declaration))
     if archive is None:
         url = f"{source['source_url']}/blob/{source['source_commit']}/{row['path']}"
-        digest = pinned[row["path"]]["sha256"]
+        digest = pinned[bound]["sha256"] if bound in pinned else retained[bound]
     else:
         url = (
             f"https://github.com/{archive['repository']}/releases/download/{archive['tag']}/"
@@ -1303,6 +1325,12 @@ def read_facts(
             continue
         if "fact" in row:
             certificate = read_fact(packet, declaration, row)
+            if _fact_file(packet, row):
+                raw = _upstream(source, twins, row["path"])
+                _require(
+                    parse_certificate(raw, n, row["format"], row_options(row)) == certificate,
+                    f"n={n}: the derived fact is not the retained {row['path']}",
+                )
         else:
             raw = _upstream(source, twins, row["path"])
             certificate = parse_certificate(raw, n, row["format"], row_options(row))
@@ -2006,9 +2034,14 @@ def checkout_problems(packet: Path, checkout: Path) -> list[str]:
 
 
 def _checkout_bytes(packet: Path, checkout: Path, path: str) -> bytes:
-    """A file the packet pins, read from a checkout that `checkout_problems` admitted."""
+    """A file the packet pins, or retains beside its fact (`_fact_file`), read from a
+    checkout that `checkout_problems` admitted."""
     pinned = {item["path"] for item in _record(packet)["sources"][0]["pinned_only"]}
-    _require(path in pinned, f"{path}: not a file this packet pins")
+    _require(
+        path in pinned
+        or path in acquire_source.read_manifest(packet / acquire_source.MANIFEST),
+        f"{path}: not a file this packet pins",
+    )
     upstream = checkout / path
     _require(
         not upstream.is_symlink() and upstream.resolve().is_relative_to(checkout.resolve()),

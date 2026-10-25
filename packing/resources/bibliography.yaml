@@ -3361,8 +3361,26 @@ sources:
       Ostashev''s packing), which the issue names as the start, with Daniel''s fq quench, dilate_cert.py and
       checkers. Measured pose by pose in the packet (measure/identity.json), it is another arrangement of
       T-230''s packing, found from it, not a refinement of it: one to one under the identity, 12 squares
-      beyond a tenth, 96 tilted squares against 91. No licence stated: derived exact fact only, no upstream
-      byte retained. Claude assistance disclosed. No local or global optimality claim.'
+      beyond a tenth, 96 tilted squares against 91. Retained under the author''s CC0 1.0 dedication of 24
+      October 2026 (#755, issuecomment-6388401978), with the derived exact fact of 23 October beside it.
+      Claude assistance disclosed. No local or global optimality claim.'
+  - key: '[Kristiansen issue 798 2026-10-24]'
+    authors:
+    - Kristiansen
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-24'
+    lineage: builds-on-project
+    credit: Kristiansen after Couzo, Lavrentev, Tymchishin, alexchilton, kyleluecke, Fang, Daniel, Levy
+    short_credit: Kristiansen after Couzo et al.
+    note: 'Fourteen exact dilation certificates in the gist amundsk/e4df936fb09c68446598d4c8309d0166 at
+      c9be7b70e2220c2eccb2c5ea746094bc85dda405, beyond the case corpus at 334, 338, 343, 372, 376, 377, 379,
+      382, 412, 416, 457, 458, 502 and 504, each, the issue says, found from the packing at the count in
+      Francisco Couzo''s 964ee2b index (#763) and credited as that index credits it, with Evan Daniel''s fq
+      quench or basin explorer, dilate_cert.py and checkers. Twelve are beyond-horizon rows; 372 and 412, refinements
+      of 964ee2b''s packings, are above Couzo''s 43f666c and are not recorded. Retained under the author''s
+      CC0 1.0 dedication (#755, issuecomment-6388401978). Claude assistance disclosed. No local or global
+      optimality claim.'
   - key: '[Muglich issue 686 2026-10-19]'
     authors:
     - Muglich

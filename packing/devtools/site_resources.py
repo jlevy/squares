@@ -335,6 +335,15 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
             " packing found from it, replayed and reviewed here (T-239)."
         ),
     ),
+    (
+        "https://gist.github.com/amundsk/e4df936fb09c68446598d4c8309d0166",
+        "Amund Kristiansen",
+        (
+            "Exact certificates for fourteen counts from 334 to 504, each, the author says,"
+            " found from the packing at the count in Francisco Couzo's 964ee2b index (#763);"
+            " twelve are rows beyond the corpus."
+        ),
+    ),
 )
 
 #: David Ellsworth's Squares in Squares catalogue, the record's `[Kingbird]`.
