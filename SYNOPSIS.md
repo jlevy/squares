@@ -732,6 +732,7 @@ case or experiment separately.
 | [Review: Amund Kristiansen’s Certificate at 303, from Issue #755](docs/project/reviews/review-2026-10-23-amundsk-n303.md) | dated review record | record | retained | — |
 | [Review: Couzo’s s(268) and s(303) of Issue #763](docs/project/reviews/review-2026-10-24-couzo-n268-n303.md) | dated review record | record | retained | — |
 | [Kevin Fang’s Theorem A, $c^*(k) < 4\sqrt{2k} + 1$ for Every $k \ge 6$: Mathematical Review](docs/project/reviews/review-2026-10-25-fang-theorem-a.md) | dated review record | record | retained | — |
+| [Statement Audit: the Lean Formalization of Twelve-Square Optimality](docs/project/reviews/review-2026-10-25-n12-lean-formalization-statement-audit.md) | dated review record | record | retained | — |
 | [Review: Evan Daniel’s Regularized Views at 204, 227, 229 and 260 (T-225, evand/square-packing@0075967)](docs/project/reviews/review-2026-10-21-evand-regularized-views.md) | dated review record | record | retained | — |
 | [Review: Couzo’s 85 Exact Upper-Bound Certificates at 204–998 (Issue #678)](docs/project/reviews/review-2026-10-20-upper-bound-imports-678.md) | dated review record | record | retained | — |
 | [Erratum: the 21 October Review of Evan Daniel’s Import at 270](docs/project/reviews/review-2026-10-21-upper-bound-import-703-erratum.md) | dated review record | record | retained | — |
