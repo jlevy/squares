@@ -560,7 +560,7 @@ kyleluecke after Vladislav Lavrentev. At 364, 450 and 874 more than fifty square
 beyond 0.1 (115, 189 and 60), so each row is another arrangement. The ledger records each
 as a new packing, with the measurement beside it and no packing it continues, credited to
 its notebook’s author alone: aqibrazadev at 364 and kyleluecke at 450 and 874. Which
-packing each search started from is asked of the publisher in the reply of 25 October
+packing each search started from is asked of the publisher in the confirmation reply of 25 October
 (its question 7), which awaits his answer.
 
 **Later.** Couzo’s `43f666c`, pushed at 2026-10-24T06:10:44Z, is below the notebook side at

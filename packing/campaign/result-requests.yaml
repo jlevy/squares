@@ -22800,11 +22800,11 @@ issues:
       not_registered: >-
         Beyond the n <= 324 corpus: rows of source-coverage.yaml, not register entries. The
         walk records each below the standing side, by 4.85e-13 (970) to 3.52e-2 (733, 788
-        and 845), and held it from a row until a maintained construction checker existed (D2,
-        think-f2io). 43f666c's import (think-gn29) decides each exactly from its recipe and its
-        parent certificate with devtools.construction_checker, every parent replayed on both
-        routes with its controls refused and every recipe control refused
-        (receipts/recipe-decisions.json), so each is a dated row at the recipe's exact side
+        and 845); held from a row until a maintained construction checker existed (D2), each
+        is now decided exactly from its recipe and its parent certificate with
+        devtools.construction_checker, every parent replayed on both routes with its controls
+        refused and every recipe control refused (the couzo-43f666c-2026-10-24 packet's
+        receipts/recipe-decisions.json), and recorded as a dated row at the recipe's exact side
         rounded up at 12 places, dated by the first commit whose index states it (efef7d1 at
         365 and 970, 964ee2b at the rest). The rows reach main a day after the issue's
         certificate rows, so they are a source of their own, couzo-issue763-2026-10-23-recipes,
@@ -22812,9 +22812,9 @@ issues:
         43f666c's later recipe supersedes them in turn. The push of 23:38:42Z also states
         sides at these counts, best/ certificates and notebook recipes among them (#795's
         review A); the 43f666c walk reads it commit by commit after the issue, and each is
-        above or equal to the issue's recipe, so none is recorded.
+        above or equal to the issue's recipe, so none is recorded. The import reply of 25
+        October reports the rows.
       queued: false
-      bead: think-g2qy
     - key: n683
       claim: >-
         s(683) <= 26.656854249501, rounded up: 684's certificate at 964ee2b less one square.
@@ -22958,7 +22958,7 @@ issues:
       asked: https://github.com/jlevy/squares/issues/763#issuecomment-6391800383
       state: awaiting
       note: >-
-        Question 7 of the reply of 25 October 2026. The record reads both fields as the
+        Question 7 of the confirmation reply of 25 October 2026. The record reads both fields as the
         previous record (M-1 of the 24 October review of T-241 and T-242), and on that
         reading credits the packing at 304 to Kirill Tymchishin with no earlier link (T-241,
         and T-242 through it) and the notebook rows at 364, 450 and 874 to their notebooks'
@@ -22975,11 +22975,50 @@ issues:
       asked: https://github.com/jlevy/squares/issues/763#issuecomment-6391800383
       state: awaiting
       note: >-
-        Question 1 of the reply of 25 October 2026. T-240's credit at 268 follows the
+        Question 1 of the confirmation reply of 25 October 2026. T-240's credit at 268 follows the
         manifest, Couzo after Tymchishin's v4 packing; an answer that the search started from
         Lavrentev's packing, or that the cuda step is his, would add him to it. The house at
         268 moves to Evan Daniel's descent of Lavrentev's placement (T-242) in the pass's next
         pull request, credited Daniel after Lavrentev, whatever the answer.
+    - question: >-
+        At 377, 43f666c re-certifies 964ee2b's notebook packing, every square within 1.7e-11,
+        but its credit line names Kirill Tymchishin where 964ee2b's named kyleluecke. Which is
+        right?
+      changes: credit
+      asked: https://github.com/jlevy/squares/issues/763#issuecomment-6392829915
+      state: awaiting
+      note: >-
+        Question 3 of the import reply of 25 October 2026. The record credits 43f666c's row
+        at 377 by its credit line, Couzo's refinement of Tymchishin's packing, and keeps
+        kyleluecke's row of 964ee2b, which it supersedes, credited to kyleluecke. The
+        measurement shows one packing under two credits; no measurement here can say whose
+        it is.
+    - question: >-
+        At 304, is Kirill Tymchishin the finder of the packing in certificates/best/n304.cert
+        at fa6237e? Evan Daniel's notes say the finder is unknown.
+      changes: credit
+      asked: https://github.com/jlevy/squares/issues/763#issuecomment-6392829915
+      state: awaiting
+      note: >-
+        Question 5 of the import reply of 25 October 2026. T-241 credits Tymchishin's
+        packing, certified by Couzo, and T-242, the house at 304 since 25 October, Daniel
+        after Tymchishin, on the source's credit line; Daniel's source calls the finder
+        unknown and kozykappa's notebook the earliest public copy. An answer naming another
+        finder would change both credits, and no measurement here can say who found it.
+    - question: >-
+        At 304, the manifest credits a construction to Nate Chaoweeraprasit, while
+        RECORD_PROVENANCE.md (line 53) keeps Daniil Ostashev's credit. Which should the record
+        follow?
+      changes: credit
+      asked: https://github.com/jlevy/squares/issues/763#issuecomment-6392829915
+      state: awaiting
+      note: >-
+        Question 6 of the import reply of 25 October 2026. The manifest gives that credit to
+        Mykhailo Polkovskyi's 70a033f certificate, the record T-241 replaced (T-186), where
+        the record keeps Ostashev's credit, as RECORD_PROVENANCE.md does, and measures the
+        certificate as Ostashev's T-175 packing re-solved (M-3 of the 24 October review of
+        T-241 and T-242). An answer for Chaoweeraprasit would add a construction step to that
+        chain, which a measurement of the packing cannot show.
     beads:
     - think-ptkk
     - think-cnn7
@@ -23046,6 +23085,13 @@ issues:
       - result: n303
         id: E-couzo-763-review-exact-feasibility
         status: confirmed
+    - url: https://github.com/jlevy/squares/issues/763#issuecomment-6392829915
+      date: '2026-10-25'
+      by: jlevy
+      kind: import
+      reported:
+      - result: 43f666c-rows-325-1024
+      - result: recipes-325-1024
     close_when: >-
       T-240 is reviewed and adopted at 268 and 303 with both drawings regularized, the
       recipes, 683 and the rows above 1024 have rows or recorded dispositions, and the reply

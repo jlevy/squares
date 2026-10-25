@@ -240,8 +240,9 @@ equal to the digests its `outputs/program-digests.sha256` records.
 - **M-1, M-2, M-4 and N-1** are fixed above and in the register: the credit at 304, the
   print the rationale names, the key’s lineage and Levy link, and the descent’s input at
   268. S2 is confirmed at both counts. The questions D1 and D2 are below. Of Couzo’s, the
-  reply of 25 October on #763 asks C1 as its question 7 and covers C3 and C4 in its
-  questions 1 and 6; C2 is to be asked in the next #763 reply.
+  confirmation reply of 25 October on #763 asks C1 as its question 7 and covers C3 and C4
+  in its questions 1 and 6, and the import reply of that day asks C2 and the finder at 304
+  as its questions 6 and 5.
 
 ## Questions for the Author
 

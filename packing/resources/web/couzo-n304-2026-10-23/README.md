@@ -138,8 +138,9 @@ Couzo, who claims no refinement of it. No source states a link before Tymchishin
 credit carries none (M-1). The manifest’s construction credit to Nate Chaoweeraprasit
 describes the record this packing replaced and is not carried (M-3). Evan Daniel’s later
 certificate of the same packing says its finder is unknown and its earliest public copy is
-kozykappa’s notebook. Who found it is to be asked of Couzo in the next #763 reply, and a
-question to Daniel is drafted and unposted, held in think-hx0e.
+kozykappa’s notebook. Whether Tymchishin found it is asked of Couzo in the import reply
+of 25 October on #763 (its question 5), which awaits his answer, and a question to Daniel
+is drafted and unposted, held in think-hx0e.
 The source’s commits `fa6237e`, which first holds the certificate, `964ee2b` and
 `efef7d1` each end with a Co-Authored-By trailer naming Claude (M-5).
 The repository states no licence for its data or prose. The certificate is retained by
@@ -181,11 +182,13 @@ T-241 is at `V3`/`C3`. The case at 304 adopts T-242, Daniel’s descent of this 
 ## Questions for the Author
 
 For Francisco Couzo, from the stage 4 review’s C1, C2 and C4 (think-hx0e’s notes). The
-reply of 25 October on #763
+confirmation reply of 25 October on #763
 ([issuecomment-6391800383](https://github.com/jlevy/squares/issues/763#issuecomment-6391800383))
 asks question 1 as its question 7 and the notebooks’ source notices of question 3 as its
-question 6, and the record keeps question 7 as awaiting his answer. Question 2 and the
-finder in question 3 are drafted for the next #763 reply and not yet posted:
+question 6. The import reply of that day
+([issuecomment-6392829915](https://github.com/jlevy/squares/issues/763#issuecomment-6392829915))
+asks question 2 as its question 6 and the finder in question 3 as its question 5. The
+record keeps question 1, question 2 and the finder as awaiting his answer:
 
 1. In your manifest, do `previous_source` and `previous_reference.seed_credit` name the
    packing your catalogue held before at that count, or the packing a search started
