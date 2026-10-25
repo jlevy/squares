@@ -24006,6 +24006,174 @@ issues:
       The twelve rows are recorded in report order with their replay, 372 and 412 have their
       disposition with 43f666c's rows there on main (#800, think-gn29), and the reply on main says
       so; nothing the author asked for is queued.
+  - number: 799
+    title: 'Result registration: 683 new upper bounds, n in [1184, 3775] — Karimi two-strip construction'
+    author: mohsensbu-jpg
+    opened: '2026-10-24'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Mohsen Karimi (ORCID 0009-0004-1055-8267) reports 683 upper bounds for s(n) at n = 1184
+      to 3775, each below the grid side ceil(sqrt n), 85 of them at counts where the least
+      earlier numeric statement is the grid. The construction is two strips of squares
+      tilted by a small angle with rational tan(a/2): mH rows on the bottom wall and mV
+      columns on the right wall, around a (K - mV) x (K - mH) axis-parallel grid. Each
+      row states an exact side S < K = ceil(sqrt n), a decimal of at most ten places. The
+      publication is Zenodo record 10.5281/zenodo.23624433 v1.0 (2026-10-24T19:32:47Z;
+      CC BY 4.0 data, MIT code). Its karimi_two_strip_records_v1_lite.zip (13,329 bytes, SHA-256
+      0d4f89b0...78c5) holds records.csv, the 683 exact sides with their seven
+      construction parameters, together with regenerate.py and a README, and no
+      certificate. The issue's attachment of 20:08:23Z is the same file, byte for byte.
+      The same text was opened as Mishapolk/square-packing-records#1 at 19:44:35Z, five
+      minutes before this issue; that repository's main is still 7e82c64. The construction
+      is Sungjoon Ryu's L-shaped packing (his Theorem 1.3) with independent strip widths,
+      angles and phases, which the source does not cite. Triaged on 24 October 2026
+      (think-5dc3), read-only. Every side is below Göbel's construction and below every
+      earlier report the walk above 1024 reads: #715; Couzo's indexes at 5a299b4 and
+      6b7391d, 964ee2b and 43f666c; #732 at 17cc220; #763; Fang's bef5c42 and #797. The
+      margins run from 5.6e-4 (2363) to 8.8e-2, with no restatement and nothing
+      undecided. Kaggle leaderboard sides below it at 26 counts state no coordinates, so
+      they are not reports. Retained on 25 October 2026 (think-clgp) as the
+      karimi-two-strip-2026-10-24 packet: v1.0's three archive members and its
+      issue_text-1.md, with the issue. The maintained devtools.two_strip_checker decides
+      all 683 rows exactly from their parameters, each with its seven controls refused
+      (receipts/two-strip-decisions.json), and the certificates it writes out at 1184,
+      1193, 1813, 2363 and 3775 pass both maintained exact routes with all six controls of
+      each refused (receipts/replay-sample.json).
+      Three later comments, triaged on 25 October 2026 (think-z2mj), read-only. At
+      22:34:47Z the author reported version 2 of the deposit, record 23628190 (created
+      22:32:58Z, the last of three versions under concept 10.5281/zenodo.23624432; the
+      middle one, 23628081, carries version 2's title over version 1's file). Its
+      karimi_two_strip_records_v2_lite-1.zip (36,756 bytes, SHA-256 1b072b53...3108) holds
+      2,824 rows at n = 1184 to 9944, K = 35 to 100, and a regenerate.py byte-identical to
+      version 1's. At version 1's 683 counts it states the same side and parameters at
+      682, ties that stay with version 1, and at 2459 a side 4e-8 lower with the same
+      parameters, a refinement. Its 2,141 rows at 3776 to 9944 are new: each is below
+      Göbel's construction and below every earlier report, by 0.0022 (4994) to 0.097
+      (9912), with the previous-best column equal to the least earlier statement at all
+      2,141; 782 of them are at counts where that statement is the grid, 743 of those
+      already covered by an earlier theorem stating s(n) < k with no numeric side. The
+      packet also retains version 2's records.csv and README, and
+      devtools.two_strip_checker decides all 2,824 of its rows with every control refused
+      (receipts/two-strip-decisions-v2.json), recording no row. At 22:09:22Z and 04:51:33Z the author posted a preprint,
+      10.5281/zenodo.23627827 v1.0 and 10.5281/zenodo.23633300 v2.0: N(K - 1/K) >= K^2 -
+      8 sqrt K - 19 for every integer K >= 16, by the same construction with equal strips,
+      so c*(K) <= floor(8 sqrt K) + 18. Ryu's Theorem 1.4, reported on 9 October, is
+      smaller at every K and implies its s(n) < K statement; Daniel's and Fang's bounds are
+      smaller still, so it takes no row of asymptotic-waste-bounds.yaml and is noted here.
+      Its one new statement is the window: the bound holds at every side in [K - 1/K, K).
+      The packet pins both versions of the preprint by digest and retains neither. Version 2 adds a proposition
+      on thicker strips (order L^{2/3}, no new bound) and keeps a conjecture that c*(K) is
+      of order sqrt K, which the register's reported k^{2/5} and k^{3/8} bounds contradict.
+      The rows wait on think-llit's walk above 1024. Claude assistance disclosed.
+    read_through: '2026-10-25T04:51:33Z'
+    results:
+    - key: rows-1184-3775
+      claim: >-
+        683 upper bounds s(n) <= S at n = 1184 to 3775, each at the exact side records.csv
+        states in Zenodo 10.5281/zenodo.23624433 v1.0, by the two-strip construction with
+        the parameters K, mH, tH, phH, mV, tV and phV in the same row. The issue's
+        six-place prints round to nearest and are not upper bounds (2342: 48.900000
+        against 48.90000012).
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus and above 1024: rows of source-coverage.yaml once
+        think-llit's walk above 1024 records them, not register entries. By the triage of
+        24 October, every side is below Göbel's construction and every earlier report at
+        its count, so the walk would record all 683, each superseding the row recorded
+        before it. Version 2 restates 682 of them exactly; a tie stays with the earlier
+        report, so these rows keep version 1's date and pin. The source publishes
+        parameters and no certificate file. By the owner's D2 answer (think-f2io), each is
+        a row once a checker this project maintains decides it, and
+        devtools.two_strip_checker decides all 683 from their parameters (the
+        karimi-two-strip-2026-10-24 packet, receipts/two-strip-decisions.json).
+      queued: true
+      bead: think-5dc3
+      blocked_on:
+      - think-llit
+    - key: row-2459-v2
+      claim: >-
+        s(2459) <= 4998253277/100000000 = 49.98253277, version 2's side at 2459 (record
+        23628190), 4e-8 below version 1's 49.98253281 with the same seven parameters.
+      source: https://github.com/jlevy/squares/issues/799#issuecomment-6390389183
+      not_registered: >-
+        Above 1024: a row of the walk, recorded after version 1's row at 2459 and
+        superseding it, as a refinement credited to its finder (result-import.md, Several
+        Reports at One Count). The margin is far above the 12th-place print, so it is no
+        restatement. devtools.two_strip_checker decides it from the same parameters at its
+        own side (receipts/two-strip-decisions-v2.json).
+      queued: true
+      bead: think-5dc3
+      blocked_on:
+      - think-llit
+    - key: rows-3776-9944
+      claim: >-
+        2,141 upper bounds s(n) <= S at n = 3776 to 9944, each at the exact side
+        records.csv states in Zenodo 10.5281/zenodo.23628190 (version 2 of concept
+        10.5281/zenodo.23624432), by the two-strip construction with the row's seven
+        parameters; 782 at counts where the least earlier numeric statement is the grid.
+      source: https://github.com/jlevy/squares/issues/799#issuecomment-6390389183
+      not_registered: >-
+        Above 1024: rows of the walk, dated by the comment of 22:34:47Z and pinned at
+        record 23628190. By the triage of 25 October every side is below Göbel's
+        construction and every earlier report at its count (#715; Couzo 5a299b4/6b7391d,
+        964ee2b and 43f666c/1c17153; #732 at 17cc220; Mishapolk 7e82c64; #763; Fang
+        bef5c42), with no tie, restatement or undecided count, so the walk would record
+        all 2,141. Each is a row once devtools.two_strip_checker decides it, and it decides
+        all 2,141 (the karimi-two-strip-2026-10-24 packet,
+        receipts/two-strip-decisions-v2.json).
+      queued: true
+      bead: think-5dc3
+      blocked_on:
+      - think-llit
+    - key: theorem-near-integer
+      claim: >-
+        For every integer K >= 16, N(K - 1/K) >= K^2 - 8 sqrt K - 19: s(n) < K for every
+        n <= K^2 - 8 sqrt K - 19, and W(s) <= 8 sqrt K + 19 for s in [K - 1/K, K)
+        (Theorem 1 of 10.5281/zenodo.23627827 v1.0, unchanged in v2.0,
+        10.5281/zenodo.23633300). Version 2 adds Proposition 1: g-fold strips, g >= 2,
+        beat the grid for L >= ceil((2 C_g)^3) with waste of order L^{2/3}.
+      source: https://github.com/jlevy/squares/issues/799#issuecomment-6390149069
+      not_registered: >-
+        Not a count n <= 324, so not a register entry. In asymptotic-waste-bounds.yaml its
+        bound c*(K) <= floor(8 sqrt K) + 18 is larger than Ryu's Theorem 1.4 (8 ceil(sqrt(K
+        - 4)) - 1, reported 9 October) at every K >= 16, by at least 11, and larger than
+        Daniel's and Fang's Theorem A, so it is a consequence of rows already held and
+        takes no row of its own; it is noted here, with its window [K - 1/K, K), the one
+        statement no row makes. The packet pins both versions by digest
+        (zenodo/zenodo-23627827-receipt.json and zenodo/zenodo-23633300-receipt.json) and
+        retains neither PDF. Theorem 1's proof was read in triage and its steps checked by
+        hand; nothing here reviews it.
+        Proposition 1 bounds no quantity below an earlier row. Its Conjecture 1 (c*(K) of
+        order sqrt K) conflicts with the reported k^{2/5} and k^{3/8} rows.
+      queued: false
+    beads:
+    - think-5dc3
+    - think-llit
+    - think-clgp
+    - think-z2mj
+    answer_bead: think-5dc3
+    replies: []
+    close_when: >-
+      Version 1's 683 rows, version 2's 2459 refinement and its 2,141 rows at 3776 to 9944
+      are recorded in report order by the walk above 1024, each decided exactly by a
+      maintained checker of the two-strip construction, and the reply on main says so;
+      nothing the author asked for is queued.
+    notes: >-
+      Report order (think-z2mj): version 1 is dated by the issue, 19:49:24Z; version 2's
+      rows by the comment of 22:34:47Z, both pinned at their Zenodo versions (O5). No other
+      report reached this repository at these counts between the two: none of the nine
+      watched repositories read (franciscouzo/square-packing,
+      Mishapolk/square-packing-records, TheSnakeFang/squarepack-certs,
+      evand/square-packing, wand125/square-packing, itsnaka/squish-certs,
+      squarepacker/k2-minus-c-upper, BuddenPing/square-packing-certificates,
+      chelokot/square-packing-archive) pushed from 19:12:52Z to 02:02:29Z on 25 October,
+      and no issue or comment here stated a bound above 1024 in that window. The middle
+      version 23628081 holds version 1's file and no row. W8 (think-clgp) retains version
+      2's records.csv and README beside version 1's and decides its 2,824 rows with the
+      maintained checker; the triage's own re-decision with the V1 triage's prototype
+      lemma decides nothing for the record.
   - number: 810
     title: "s(12) = 4 in Lean: Jatloe12SquaresFormalized (Jatloe's proof; Gurevitch, Lewis, Ahmed): tracking
       an unreported result"

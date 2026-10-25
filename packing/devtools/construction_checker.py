@@ -28,7 +28,8 @@ Friedman's off-centre family (think-zkxy); and a composite of Kevin Fang's, what
 table states, naming the parts the table leaves unstated, since no rule here reads a
 composite (`COMPOSITE`). `controls` are the recipe's negative controls (`mutants`), each of
 which `decide` must refuse. `write_out` builds the packing the lemma states, so a test can
-decide it on both routes.
+decide it on both routes. A two-strip L-packing (#799) builds on no parent, and
+`devtools.two_strip_checker` decides it from its parameters.
 
 Exact throughout: the parent's side is its certificate's exact header side, and every
 floor is taken of a `Fraction`.

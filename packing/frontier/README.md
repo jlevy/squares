@@ -236,9 +236,12 @@ at count $k$ packs $k$ unit squares, so its side is at least $\sqrt k$. A constr
 an index or table states with no certificate file of its own (a tiling or L-border
 recipe on a certificate) is a row once the maintained construction checker,
 `devtools.construction_checker`, decides it exactly from the recipe and its parent
-certificate has been replayed on both routes (D2). A deletion bound is no such row: one
-square below the next count’s certificate is an earlier report (D6), and any other
-deletion, or one an issue claims, waits on the owner (think-kzme;
+certificate has been replayed on both routes (D2). A two-strip L-packing (#799), Ryu’s
+Theorem 1.3 shape with its two strips chosen independently, has no parent: the
+maintained `devtools.two_strip_checker` decides it exactly from its parameters.
+A deletion bound is no such row: one square below the next count’s certificate is an
+earlier report (D6), and any other deletion, or one an issue claims, waits on the owner
+(think-kzme;
 [several reports at one count](../campaign/result-import.md#several-reports-at-one-count)).
 A certificate kept as hosted data is read through its hosted-data manifest
 (`devtools.hosted_shards`), while its receipts and rows stay in Git
