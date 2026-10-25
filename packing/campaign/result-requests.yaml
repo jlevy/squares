@@ -22706,6 +22706,16 @@ issues:
       - result: n303
         id: E-amundsk-755-n303-report
         status: reviewed
+    - url: https://github.com/jlevy/squares/issues/755#issuecomment-6393163946
+      date: '2026-10-25'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n303
+        id: T-239
+        verification: V3
+        confirmation: C3
+        status: confirmed
     close_when: >-
       The result is registered, reviewed and adopted at 303 with its drawing regularized, and
       the reply on main says so; nothing the author asked for is queued.
@@ -23734,8 +23744,8 @@ issues:
         Ryu's L-shaped packing with row-filled band ends (lift 0 at one end, the whole free
         length at the other) and odd band width b with |b - sqrt(2k)| <= 1, Lemmas 2 and 3
         and the proof of Theorem A in theorem-a/note/main.tex at db1ed62 (v0.2; unchanged
-        mathematics since b1b3f6b). The issue calls the lemmas 1 and 2; the note prints
-        them as Lemmas 2 and 3 and Theorem A as Theorem 1.
+        mathematics since b1b3f6b). This record called the lemmas 1 and 2 until the stage 4
+        review (its N-2); the note prints them as Lemmas 2 and 3 and Theorem A as Theorem 1.
       source: body
       not_registered: >-
         Recorded as reported in frontier/asymptotic-waste-bounds.yaml
@@ -23757,7 +23767,9 @@ issues:
         (receipts/certificate-replay.json in the packet); the k = 300 and 600 digests are
         recorded as the author's statement. At every count n <= 324 they reach the case
         record already holds a side below k, and the counts above 324 are no rows of their
-        own.
+        own. The acknowledgement of 25 October asked whether he would publish the k = 300
+        and 600 files; a rebuild here with regenerate.sh could settle their digests, so the
+        question is informational, goes in the closing comment and holds nothing open.
       queued: false
     - key: optimized-constructions
       claim: >-
@@ -23768,7 +23780,10 @@ issues:
       source: body
       not_registered: >-
         The author does not register them and releases no certificate; stated in prose
-        only, so nothing can be replayed. The acknowledgement asks for the certificates.
+        only, so nothing can be replayed. The acknowledgement of 25 October asked whether he
+        would publish them as certificates; the answer could falsify nothing the record
+        asserts, so the question is informational, goes in the closing comment and holds
+        nothing open.
       queued: false
     asks:
     - what: >-
@@ -23778,34 +23793,6 @@ issues:
       note: >-
         Recorded as a reported row of its own, credited after Daniel's earlier row: per k
         neither integer bound is always the smaller.
-    awaiting_author:
-    - question: >-
-        Will you publish the optimized constructions of section 6 as certificates: the
-        waste of at most 4 sqrt(2k) + 1.18 for 15 <= k <= 300, the 9,946 squares below side
-        100, and the gains at k = 25, 30 and 40?
-      changes: file
-      asked: https://github.com/jlevy/squares/issues/797#issuecomment-6392638719
-      state: withdrawn
-      note: >-
-        Withdrawn when recorded, on 25 October 2026 (coord-intake-1024): informational under
-        the record's question rule. The record asserts only that the constructions are
-        stated in the note's prose without certificates and are not registered; an answer
-        would bring certificates to import, and could falsify no credit, lineage or file
-        the record names. It goes in the closing comment, where an answer is still welcome
-        and holds nothing open.
-    - question: >-
-        Would you publish the k = 300 and 600 certificates, for example on the Zenodo
-        record, so that they can be checked without rebuilding them?
-      changes: file
-      asked: https://github.com/jlevy/squares/issues/797#issuecomment-6392638719
-      state: withdrawn
-      note: >-
-        Withdrawn when recorded, on 25 October 2026 (coord-intake-1024): informational under
-        the record's question rule. The record keeps their SHA-256 in LARGE.sha256 as the
-        author's statement and asserts nothing more of them, and a measurement here, a
-        rebuild with regenerate.sh at about 1 to 2 CPU-hours, could settle the digests. It
-        goes in the closing comment, where an answer is still welcome and holds nothing
-        open.
     beads:
     - think-4tj5
     answer_bead: think-4tj5
@@ -23867,7 +23854,11 @@ issues:
         and 457), alexchilton-fault-line-2026-10-23 (338), couzo-964ee2b-2026-10-23 (379) and
         couzo-issue670-2026-10-17 (382). Both
         maintained exact routes accept all twelve, with the gross and sharp controls as
-        expected, and every side is below Göbel's construction.
+        expected, and every side is below Göbel's construction. The import reply of 25
+        October asks whether the 376 search started from 964ee2b's n376.cert, as the issue
+        says of all fourteen, since the packing lies nearer 43f666c's; the record gives each
+        row's lineage as the author's statement, so the question is informational and holds
+        nothing open.
       queued: false
       bead: think-2l0q
     - key: n372-n412
@@ -23888,7 +23879,14 @@ issues:
     beads:
     - think-2l0q
     answer_bead: think-2l0q
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/798#issuecomment-6393163824
+      date: '2026-10-25'
+      by: jlevy
+      kind: import
+      reported:
+      - result: rows-12
+      - result: n372-n412
     close_when: >-
       The twelve rows are recorded in report order with their replay, 372 and 412 have their
       disposition with 43f666c's rows there on main (#800, think-gn29), and the reply on main says
