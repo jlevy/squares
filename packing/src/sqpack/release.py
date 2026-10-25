@@ -8995,8 +8995,10 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "into empty site directories, twice from this tree and once with main's "
             "result-requests.yaml swapped in, 43 files each, all byte-identical across the "
             "three; measured again after merging main 4089f9587 (#800) at link revision "
-            "64262ade with that main's result-requests.yaml swapped in, with the same result. "
-            "No register entry changes. Retain v0.2.7."
+            "64262ade with that main's result-requests.yaml swapped in, and after merging "
+            "main 3bdff2443 (#802) and review A's fixes with the #798 and #755 replies, at "
+            "link revision eb9cd8cc with that main's result-requests.yaml swapped in: the same "
+            "result. No register entry changes. Retain v0.2.7."
         ),
     ),
 )
