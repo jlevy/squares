@@ -441,7 +441,7 @@ hypothesis status and summarizes experiment verdicts, and the
 | --- | ---: | --- |
 | Agendas | 43 | 20 active; 16 completed; 6 paused; 1 superseded |
 | Commitments | 443 | 233 complete; 65 stopped; 72 blocked; 31 ready; 22 tentative; 20 in progress |
-| Sessions | 188 | 106 completed; 82 stopped; all terminal |
+| Sessions | 188 | 105 completed; 83 stopped; all terminal |
 | Explorations | 50 | 30 linked to proposed hypotheses; 20 uncodified |
 | Hypotheses | 283 | 74 confirmed; 48 refuted; 75 blocked; 24 unresolved; 20 open; 37 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
 | Experiments | 246 | 94 accepted; 53 rejected; 63 unresolved; 12 baseline; 18 blocked; 5 abandoned; 0 in progress; 1 exhausted |
@@ -1931,17 +1931,14 @@ controller, not permission to blur contracts.
 ### Current Handoff
 
 [Session189](packing/campaign/agent-sessions/session-189-phase-timing-qualification.md)
-completed the engineering source-work checkpoint at
-`dcf948fd48a381209f762dd677c7bbca0d5a9b21`: ordinary, Pages and deferred qualification
-all passed at that actual combined source.
-Its terminal metadata delta remains provisional until the exact final checks in
-[PR809](https://github.com/jlevy/squares/pull/809) finish; the PR stays draft meanwhile.
-The refreshed live cost checkpoint ends at05:46:15UTC and excludes later finalization.
+is stopped and explicitly uncertified after the final terminal-delta decision.
+The earlier combined source `dcf948fd48a381209f762dd677c7bbca0d5a9b21` passed its actual
+complete hosted checkpoint; that success does not certify later records.
+PR809 remains draft.
 
-**Selected next entry:** `think-uhxt`, preserving Session188’s historical certification
-debt and checking final terminal-delta qualification before PR acceptance.
-The separate n17 debts and paused mathematical plans below remain owned and unresolved;
-this engineering handoff does not reopen or take over their research.
+**Selected next entry:** `think-uhxt`, retaining historical Session188 debt and the
+exact unfinished final qualification for a newly authorized window.
+Separate n17 debts and paused mathematical plans remain owned and unresolved.
 
 The prepared
 [eight-hour X-052 continuation](docs/project/specs/future/plan-2026-10-10-n17-eight-hour-proof-block.md)

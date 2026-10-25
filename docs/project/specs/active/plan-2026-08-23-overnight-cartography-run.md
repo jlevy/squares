@@ -471,14 +471,13 @@ The prototype and controls do not establish complete coverage of an external rec
 certificate.
 
 For the next supervised exact-research goal, the current engineering handoff is
-`think-uhxt`: retain Session188’s historical certification debt and verify the final
-Session189 terminal-delta qualification before PR acceptance.
-The actual preceding combined source passed its full hosted checkpoint; later metadata
-is not covered merely by ancestry.
-The separate Session184 certification debt and planned partner-pose coupling with
-matched replay profiling remain unchanged and are not reopened by this engineering
-continuation. See [Current Handoff](../../../../SYNOPSIS.md#current-handoff) for the
-exact evidence and ownership boundaries.
+`think-uhxt`: retain Session188 historical certification debt and Session189 stopped,
+uncertified terminal-delta qualification.
+The earlier M source checkpoint passed; later missing or failed qualification is
+preserved without a causal inference.
+No separate paused research is reopened.
+See [Current Handoff](../../../../SYNOPSIS.md#current-handoff) for actual evidence and
+the next bounded action under a newly authorized window.
 
 ## The numeric runner launch gate
 
