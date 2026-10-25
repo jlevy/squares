@@ -900,9 +900,7 @@ EXPLAINER_HISTORY = (
         version="v0.4.29",
         first_published="October 25, 2026",
         result_scope=(
-            "Update the registered result count after the registrations of Jatloe's "
-            "reported Lean proof that s(12) = 4 (T-245) and Evan Daniel's reported "
-            "minimal polynomial of the s(29) record side (T-246)."
+            "Update the registered result count after the registrations of T-245 and T-246."
         ),
     ),
     PublicationHistoryEntry(
