@@ -185,11 +185,14 @@ SCREEN_EXCLUDED: dict[str, tuple[str, ...]] = {
 #: moved 204 to the release's lower 204 file (T-231, think-h01y), the same packing at its
 #: solved side: 21 and 85 again, so the totals stand; and 303 again, to Amund Kristiansen's
 #: issue-755 certificate (T-239, think-tqb5): 12 separating and 37 translating squares
-#: against T-230's 10 and 27.
+#: against T-230's 10 and 27. The pass of 25 October 2026 moved 268 and 303 to Francisco
+#: Couzo's issue-763 certificates (T-240, think-bk9r): 28 separating and 100 translating
+#: squares at 268 against T-174's 10 and 22, and 57 and 92 at 303 against T-239's 12 and
+#: 37.
 SCREEN_FINDINGS: dict[str, tuple[int, int, int, int]] = {
     "n=1..100": (28, 111, 86, 577),
     "n=1..200": (67, 397, 182, 2012),
-    "n=1..324": (124, 1184, 302, 5110),
+    "n=1..324": (124, 1247, 302, 5243),
 }
 UNDETERMINED_BY_MISS = (28,)
 #: The cases the two sampled sweeps re-derive on every pull request, computed here from
