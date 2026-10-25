@@ -480,7 +480,7 @@ def test_a_closed_form_carries_its_decimal_and_the_decimal_is_the_exact_value(
     lower_12 = frontier.bound_approx_html({"value": "3.969117", "exact_form": "31360/7901"})
     assert lower_12 == '<span class="site-approx">≈ 3.96911783…</span>'
     # n = 12's terminating 7943/2000 (T-095) is its verified lower bound, and was its
-    # reported one too until T-243's reported s(12) = 4 of 25 October 2026, a whole number.
+    # reported one too until T-245's reported s(12) = 4 of 25 October 2026, a whole number.
     assert frontier.bound_approx_html(cases[12]["verified_lower_bound"]) == (
         '<span class="site-approx">= 3.9715</span>'
     )

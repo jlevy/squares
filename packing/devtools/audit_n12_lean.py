@@ -1,7 +1,7 @@
 """Count what the statement audit of the Lean proof that s(12) = 4 cites, from its closure.
 
 Queuingtheorydotcom/Jatloe12SquaresFormalized at ``d0caf45`` proves
-``N12Compact.Final.optimality : S12.packingConstant12 = 4``, ``T-243``'s claim, in the
+``N12Compact.Final.optimality : S12.packingConstant12 = 4``, ``T-245``'s claim, in the
 5,377 project modules ``devtools.lean_closure`` found under ``Compact.Assembly.Final``,
 too many to retain here. The packet ``resources/web/jatloe-n12-lean-2026-10-16`` keeps
 that closure receipt (``receipts/lean-closure.json.gz``), the 109 modules the statement's

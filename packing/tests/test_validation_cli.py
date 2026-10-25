@@ -50,7 +50,7 @@ FRONTIER_LANE_SPLIT: dict[str, tuple[int, int]] = {
 # certificate replay. 2026-10-03: Daniel's reported s(k^2 - 4) = k (T-081) closes
 # n = 96, 117, 140, 165, 192, 221, 252, 285 and 320 in this lane only. 2026-10-12:
 # Overbeck's candidate equality s(17) = L (T-153) closes n = 17 in this lane only.
-# 2026-10-25: Jatloe's reported Lean proof that s(12) = 4 (T-243) closes n = 12 in this
+# 2026-10-25: Jatloe's reported Lean proof that s(12) = 4 (T-245) closes n = 12 in this
 # lane only.
 REPORTED_LANE_SPLIT: dict[str, tuple[int, int]] = {
     "n=1..100": (48, 52),
@@ -2903,7 +2903,7 @@ def test_frontier_contract_accepts_the_declared_schema_metadata(
     ) in stdout
     # T-062 to T-064, T-066 and T-067 close fourteen cases in the reported lane; three of
     # them, n = 59, 60 and 61, are also closed in the formal lane since 2026-10-02. T-081,
-    # T-153 and T-243 close more in this lane alone, as REPORTED_LANE_SPLIT's comment says.
+    # T-153 and T-245 close more in this lane alone, as REPORTED_LANE_SPLIT's comment says.
     # Keep this expectation independent of the production count tuple.
     reported_proved, reported_open = REPORTED_LANE_SPLIT[corpus.label]
     assert f"reported lane: {reported_proved} proved, {reported_open} open" in stdout

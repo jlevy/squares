@@ -22865,6 +22865,11 @@ results:
       Kaggle notebook packing 4.45e-03 below this entry's side there, another arrangement
       (T-240). After the 24 October review of it, the case at 268 adopted it on 25 October
       2026, and this entry's certificate there stays retained as history.
+
+      Evan Daniel's issue 806 reports at 182 a new arrangement, found from an L-cut of
+      Francisco Couzo's 211 packing, 3.17e-03 below this entry's side there (T-243). After
+      the 25 October review of it, the case at 182 adopted it on 25 October 2026, and this
+      entry's certificate there stays retained as history.
     next_rung: >-
       V4 and C4 need a second accepted adversarial review by a distinct reviewer and a retained
       human oversight record; one AI review, of 14 October, is retained. The house rule of 16
@@ -34268,7 +34273,208 @@ results:
           moved: 0
           max_move: 4.6e-4
           max_turn_deg: 0.019
+
   - id: T-243
+    kind: upper-bound
+    registered: '2026-10-25'
+    landed: '2026-10-25'
+    headline: >-
+      Daniel's new arrangement at 182, 3.17e-3 below T-174
+    claim: >-
+      One complete rational source certificate reports a finite upper-bound improvement at
+      the exact side it states: s(182) <= 13.970916436214678735385725854133, 3.17e-3 below
+      T-174, the case's house best packing when it was reported, and below every report at
+      182.
+
+      The certificate and its duplicate-square and outside-container controls were decided
+      here on 25 October 2026 by both maintained exact routes. Those routes share components
+      with the producer: both read the certificate through the evand-cert adapter, whose
+      reader's line filter and corner construction are transcribed from Evan Daniel's own
+      checkers, the ones the certificate names. The 25 October review decided it again on a
+      clean-room checker of its own, by separating axes and by exact clipped areas with
+      fourteen controls, by a Claude agent, a system family the producer also used, and
+      found no blocking defect, so the bound is confirmed, independently re-implemented.
+
+      It is search/packer/candidates/s182-1024.cert in Evan Daniel's watched repository
+      (https://github.com/evand/square-packing), committed on 25 October 2026 at 04:11:15Z
+      and pushed at 04:16:05Z, 19 seconds before issue 806 reported it as 13.970916436215,
+      its side rounded up at 12 places.
+
+      Credit Evan Daniel (https://github.com/evand/square-packing), from an L-cut of
+      Francisco Couzo's 211 packing (T-188), an arrangement of Daniil Ostashev's design
+      (T-175). The issue asks that "the register's s(211) packing (Daniil Ostashev; also in
+      Francisco Couzo's repository)" be credited as the start; the register's packing at the
+      side the issue gives for it is T-188's, and where T-188 differs from Ostashev's own 211
+      packing the certificate follows T-188 (M-1 of the 25 October review).
+
+      The issue says one L-cut job removed a strip of 29 squares, a row and a column along
+      two walls, and relaxed the rest, and a local search took that to this side. Measured
+      square for square by the review, the 29 squares the 182 do not use are T-188's right
+      column and top row, and of the other 182, 17 move beyond 0.1 (largest 0.464), 156
+      beyond 1e-2 and 173 beyond 1e-3. Against T-174's packing no symmetry pairs it one to
+      one, so it is another arrangement.
+
+      Two Kaggle per-puzzle leaderboard entries the issue quotes state a side and no
+      packing, so neither is a report: Subramanya N's 13.9709164362306 of 24 October,
+      1.59e-11 above this side and listed before the source's search found the packing, by
+      the issue's account, and Prathamesh Chavan's 13.9727613470647 of 23 October. The
+      source's credits say its work was produced by Claude (Anthropic) under human
+      direction, and the commit carries a Co-Authored-By trailer naming Claude.
+    scope: {n_values: [182]}
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 3
+      rationale: >-
+        A new arrangement at 182, 3.17e-03 below the house (T-174) and every packing
+        reported there: no symmetry pairs it one to one with the house's packing by nearest
+        centres, and the optimal assignment moves 44 squares beyond a tenth and 79 beyond a
+        hundredth, as T-158's 2.95e-03 to 3.44e-03, T-164's 1.75e-03 and T-240's 4.45e-03
+        and 2.78e-03 (S3) are; well above T-188's further arrangement (S2). No lower bound
+        or optimum; the cross-count construction is the source's search method, not a
+        result here.
+      scored: '2026-10-25'
+      by: >-
+        the 25 October review (docs/project/reviews/review-2026-10-25-evand-n182.md), lane
+        c-review-806-math, confirming the draft S3 of the stage 1 triage (think-2lzo)
+    novelty: previously-published
+    attribution:
+      source_keys: ['[Daniel n182 2026-10-25]']
+      published: '2026-10-25'
+    evidence:
+      - E-evand-n182-certificate-report
+      - E-evand-n182-exact-feasibility
+      - E-evand-n182-review-exact-feasibility
+    artifacts:
+      - packing/resources/web/evand-n182-2026-10-25/README.md
+      - packing/resources/web/evand-n182-2026-10-25/acquisition/claims.json
+      - packing/resources/web/evand-n182-2026-10-25/source/search/packer/candidates/s182-1024.cert
+      - packing/resources/web/evand-n182-2026-10-25/receipts/exact-certification.json.xz
+      - packing/resources/web/evand-n182-2026-10-25/receipts/sharp-controls.json
+      - packing/resources/web/evand-n182-2026-10-25/measure/identity.json
+      - packing/campaign/issue-intake/upper-bounds-issue806-20261025/README.md
+      - packing/devtools/upper_bound_reports.py
+      - docs/project/reviews/review-2026-10-25-evand-n182.md
+      - packing/resources/web/evand-n182-2026-10-25/review/review-2026-10-25/README.md
+    controls:
+      - packing/tests/test_upper_bound_reports.py
+      - packing/tests/test_upper_bound_reports_806.py
+      - packing/resources/web/evand-n182-2026-10-25/receipts/sharp-controls.json
+      - packing/resources/web/evand-n182-2026-10-25/review/review-2026-10-25/out/check-s182-1024.json
+      - packing/resources/web/evand-n182-2026-10-25/review/review-2026-10-25/out/controls-s182-1024.json
+    notes: >-
+      A separate complete repository replay is retained for n = 182: 1 positive and 2
+      duplicate-square and outside-container controls passed their required outcomes on both
+      routes, 98826 pair decisions; summed over the 3 jobs, the receipt records 11.53 route
+      CPU seconds and 11.7 job wall seconds, the longest job 4.15 seconds. Every wall is
+      cleared by at least exactly 5e-21 and every pair by at least 9.99e-21.
+
+      Those margins are below the binary64 spacing of the coordinates, so the packet's sharp
+      controls (receipts/sharp-controls.json) lowered the side by the least far-wall
+      clearance, closed the least-gap pair by its gap and moved every square toward the
+      nearer near wall by its least clearance: both routes accepted each at exact contact,
+      margin 0, and refused each 1e-30 past it. They refused one square enlarged to its pair
+      and one to its wall at contact for its shape alone and 1e-30 past it for the overlap or
+      the wall as well, and refused a duplicated square.
+
+      The 25 October review's clean-room checker (E-evand-n182-review-exact-feasibility)
+      decided every wall and all 16,471 pairs by separating axes and again by exact clipped
+      areas. Its least wall clearance, exactly 5e-21, and least pair gap, about
+      9.999999999999992e-21 (squares 99 and 100, numbered from 0), are the replay's; the
+      register's "at least 9.99e-21" is that gap cut at three places. Its fourteen
+      controls, sharp at 1e-30 at the far and near walls, the closest pair and two enlarged
+      squares, were decided as expected by both of its methods. With every rotation
+      reversed, 80 pairs overlap, so the certificate holds under the counter-clockwise
+      reading of the half-angle tangent, which its format line implies and does not state
+      (N-1).
+
+      In the packet's frozen comparison (acquisition/claims.json, read from main on 25
+      October 2026), at n = 182 the certificate is below the case's ceiling (PingYou Ltd, of
+      Francisco Couzo's packing as Evan Daniel improved it, T-174), T-098 (#375), Couzo's
+      certificate of #476 and #593 by 3.17e-03, and below T-056 by 3.17e-03 at its print.
+      It is the smallest report at 182. The ledger of 25 October for this import
+      (campaign/issue-intake/upper-bounds-issue806-20261025) records it, a new packing,
+      dated by the issue; the push of the certificate 19 seconds before it is the same
+      author's publication of the same file, and nothing reached 182 between them.
+
+      Measured pose by pose (measure/identity.json in the packet, and again by the review; a
+      measurement, which decides nothing), no symmetry pairs it one to one with T-174's
+      packing by nearest centres; the optimal assignment, best under the identity, moves 44
+      of 182 squares beyond a tenth and 79 beyond a hundredth (largest 0.813), turns 74
+      squares, pairs 16 tilted squares with squares tilted the other way, and shares no tilt
+      angle within 1e-4 degrees. It has 68 tilted squares, all turned one way, against
+      T-174's 59. T-098's packing, T-056's and the house witness measure the same. Against
+      the source's binary64 input it is one to one under the identity, none beyond 1e-6
+      (largest 2.55e-7).
+
+      The review placed the start at T-188 rather than at Ostashev's T-175 or Couzo's T-181
+      and T-182, which differ from T-188 at the same five squares: at T-188's tilted square
+      141 the certificate lies 0.015 from T-188's pose and 0.442 from T-175's, and at square
+      9 0.024 against 0.175 (M-1). The issue's own account of the start gives T-188's side,
+      14.993549626299. "The lineage from the start is short" counts the search's steps, not
+      the squares' motion (N-4).
+
+      The source's s182-1024_regularized.cert is a display view at the same side, one to one
+      with the certificate under the identity: it moves 49 squares beyond 1e-9 (37 beyond
+      1e-3), 5 beyond a tenth
+      (largest 0.381), and the review's checker accepts it. It proves no other bound and is
+      not registered.
+
+      The source reports, from numerical checks at 80 digits that are not interval proofs, a
+      KKT point and a local minimum of the side, strict modulo 43 exact flat motions, with
+      six free squares, 68 corner-corner contacts and no corner-corner MILP descent. That is
+      the source's report: it is not verified here and bears on the packing, not on s(182)
+      (N-3). The source's S_exact, 13.97091643621467873524..., is a numerical value of that
+      KKT system's solution, which no certificate attains; the bound is the certificate's
+      side, 1.40e-19 above it (N-2). The commit's title gives the side as an equality; the
+      record states the upper bound only (M-2).
+
+      The source's own checkers were not run here. The two maintained routes, the sqpack
+      rational witness verifier and the independent rational corner checker, share
+      certificate parsing, half-angle conversion, Fraction arithmetic and the
+      separating-axis method with each other, and with the producer the evand-cert reader's
+      line filter and corner construction; the review's checker shares no code with them.
+      No human oversight or optimality is claimed.
+
+      The case at 182 adopted this certificate as its house best packing in the pass of 25
+      October 2026, from T-174, 3.17e-03 above it, which stays retained as history, with the
+      credit of Evan Daniel's packing from an L-cut of Francisco Couzo's 211 packing.
+
+      Both strong generators decided the new witness in the same pull request
+      (cases/regularized_drawings/think-2lzo-2026-10-25): grid-slack's view at 0.5, 1 and 5
+      degrees and Evan Daniel's regularizer's same-side view were both admitted at row 10,
+      and the selection draws the regularizer's, which moves 49 squares beyond 1e-9 (37
+      beyond 1e-3, the count the regularized_drawings item below gives as moved), the
+      largest by 0.381, at the witness's side. It is the source's own display view,
+      s182-1024_regularized.cert, to 1.9e-19, so the drawing proves no other bound; no view
+      is below the side.
+    next_rung: >-
+      None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
+      reviewer and a retained human oversight record; one AI review, of 25 October, is
+      retained. The review's questions for the author (the start's credit, the cut, an
+      enclosure of the KKT point and the certificate's format line) hold no rung. It is the
+      smallest validated side at 182, and the case adopted it there on 25 October 2026
+      under the house rule, with both strong generators' regularization of the new house.
+    reviews:
+      - path: docs/project/reviews/review-2026-10-25-evand-n182.md
+        kind: adversarial
+        reviewer: >-
+          AI agent (Claude, strongest tier, maximum reasoning), the stage 4 mathematical
+          review lane of issue 806 (c-review-806-math, think-meci), prompted separately from
+          the triage, records and replay lanes, with no shared context beyond its brief
+        reviewer_kind: ai
+        relation: project
+        date: '2026-10-25'
+        scope: >-
+          Finite feasibility at n = 182 of #806's certificate: decided again by a clean-room
+          exact checker by two methods with fourteen sharp controls; the side, its 12-place
+          print and the rotation sense; the identity against T-174, the house witness, T-098,
+          T-056, the source's binary64 input and its regularized view; the L-cut lineage
+          measured square for square against T-188, T-175, T-181 and T-182 at 211; the
+          source's KKT point read against the certificate; credit, and the significance.
+        verdict: accepted
+        covers: [T-243]
+  - id: T-245
     kind: optimality
     registered: '2026-10-25'
     landed: '2026-10-25'
@@ -34377,7 +34583,7 @@ results:
           pinned outside Lake), and notes N-1 to N-3; none blocks recording the
           formalization as the source's report.
         verdict: accepted
-        covers: [T-243]
+        covers: [T-245]
     artifacts:
       - packing/resources/web/jatloe-n12-lean-2026-10-16/README.md
       - packing/resources/web/jatloe-n12-lean-2026-10-16/Jatloe12SquaresFormalized/Lean/Proofs/N12-jatloe/Compact/Assembly/Final.lean
@@ -34469,7 +34675,7 @@ results:
       the tag's, is of 16 October 2026 at 05:12:49Z; the repository's first commit, of 15
       October at 16:26:13Z, held an earlier layout; Ahmed's post is of 22 October at
       02:36:07Z, and issue 810 of 25 October at 05:38:24Z.
-  - id: T-244
+  - id: T-246
     kind: exact-side
     registered: '2026-10-25'
     landed: '2026-10-25'
@@ -35162,17 +35368,19 @@ regularized_drawings:
         max_turn_deg: 0.0
       view: packing/atlas/known-best/regularized/n-181-regularized.yaml.gz
     - n: 182
-      of: T-174
+      of: T-243
       by: project
-      method: regularize_axis_components/2
+      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
+      changes: {re_angled: 5}
       identity:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 0
-        max_move: 9.207591e-95
-        max_turn_deg: 0.0
+        moved: 37
+        max_move: 0.3806931
+        max_turn_deg: 0.364276
       view: packing/atlas/known-best/regularized/n-182-regularized.yaml.gz
     - n: 183
       of: T-220

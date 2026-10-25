@@ -799,7 +799,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "bfacba5af166ae304398b96ee4ad71157ea94e3d"
+DATA_REVISION = "b909d2b5a23350128cb154f925c998444b37f261"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -897,12 +897,20 @@ FIRST_PUBLISHED = PUBLICATION_HISTORY[-1].first_published
 #: The leading entry is proposed for the next publication; confirm its date at first deployment.
 EXPLAINER_HISTORY = (
     PublicationHistoryEntry(
-        version="v0.4.28",
+        version="v0.4.29",
         first_published="October 25, 2026",
         result_scope=(
             "Update the registered result count after the registrations of Jatloe's "
-            "reported Lean proof that s(12) = 4 (T-243) and Evan Daniel's reported "
-            "minimal polynomial of the s(29) record side (T-244)."
+            "reported Lean proof that s(12) = 4 (T-245) and Evan Daniel's reported "
+            "minimal polynomial of the s(29) record side (T-246)."
+        ),
+    ),
+    PublicationHistoryEntry(
+        version="v0.4.28",
+        first_published="October 25, 2026",
+        result_scope=(
+            "Update the registered result count after the registration of Evan Daniel's "
+            "#806 certificate at 182 (T-243)."
         ),
     ),
     PublicationHistoryEntry(
@@ -1484,13 +1492,23 @@ class ReleaseImpactDecision(NamedTuple):
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
     ReleaseImpactDecision(
         component="paper:n11-lower-bounds-explainer",
+        previous_version="v0.4.28",
+        version="v0.4.29",
+        impact="patch",
+        reason=(
+            "Update the registered result count after the registrations of Jatloe's "
+            "reported Lean proof that s(12) = 4 (T-245) and Evan Daniel's reported "
+            "minimal polynomial of the s(29) record side (T-246)."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="paper:n11-lower-bounds-explainer",
         previous_version="v0.4.27",
         version="v0.4.28",
         impact="patch",
         reason=(
-            "Update the registered result count after the registrations of Jatloe's "
-            "reported Lean proof that s(12) = 4 (T-243) and Evan Daniel's reported "
-            "minimal polynomial of the s(29) record side (T-244)."
+            "Update the registered result count after the registration of Evan Daniel's "
+            "#806 certificate at 182 (T-243), adopted as the house best packing there."
         ),
     ),
     ReleaseImpactDecision(
@@ -9115,6 +9133,50 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         ),
         paths=(
             "packing/campaign/result-requests.yaml",
+            "packing/devtools/adopt_houses.py",
+            "packing/devtools/default_drawings.py",
+            "packing/devtools/upper_bound_houses.py",
+            "packing/devtools/upper_bound_reports.py",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The #806 import (think-2lzo, think-meci): T-243's registration of Evan "
+            "Daniel's certificate at 182, its coverage source, the importer's reader for "
+            "its packet and #806's requests entry; the 25 October review mapped, T-243 at "
+            "V3/C3; and its adoption at 182 in the pass of 25 October with its "
+            "regularization (upper_bound_houses, adopt_houses, SETTLED[182] removed from "
+            "default_drawings). Against main bb756e193 (#805): rendered at link revision "
+            "f8cca02c into empty site directories, twice from this tree and once from it "
+            "with main's result-requests.yaml, upper_bound_reports.py, results.yaml and "
+            "source-coverage.yaml swapped in, render_n11_optimality_review, "
+            "render_n11_threshold_bound_review and render_packing_methods write all 51 "
+            "files byte-identical across the three. After the review's mapping, the "
+            "adoption and the merge of main 886dddce6 (#808), at link revision a8184fe4 "
+            "with that main's seven candidate inputs swapped in, and after review A's "
+            "fixes (T-243's headline and notes), at link revision b909d2b5 with the same "
+            "seven inputs of main swapped in: the same outcome. The "
+            "explainer, counting 242 to 243 results, takes v0.4.28 over main's v0.4.27. No "
+            "PDF was printed for these three; each prints from that HTML. Retain v0.1.11, "
+            "v0.1.4 and v0.2.7."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
             "packing/contributors/people/ctjlewis.md",
             "packing/contributors/people/evan-daniel.md",
             "packing/contributors/people/jatloe.md",
@@ -9134,7 +9196,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "papers/square-packing-methods-survey.md",
         ),
         reason=(
-            "The think-4l14 import of #810: T-243's registration of Jatloe's Lean proof "
+            "The think-4l14 import of #810: T-245's registration of Jatloe's Lean proof "
             "that s(12) = 4 as reported, its coverage source, #810's requests entry, "
             "Jatloe's new profile and the n12 sources on Lewis's and Ahmed's, against main "
             "bb756e193 (#805): rendered at link revision bb756e19 into empty site "
@@ -9149,14 +9211,14 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "1307c2c8 with that main's five candidate inputs swapped in and jatloe.md "
             "removed: twice from this tree and once swapped, 51 files each, all "
             "byte-identical across the three. Measured a third time after the merge of "
-            "T-244's registration of Daniel's s(29) minimal polynomial as the new kind exact "
+            "T-246's registration of Daniel's s(29) minimal polynomial as the new kind exact "
             "side (results.yaml, check_results.py, evan-daniel.md, n-029.md, "
             "result-requests.yaml and source-coverage.yaml) and the overview's card for "
             "Jatloe12SquaresFormalized (site_resources.py), at link revision 9b8b004c "
             "against main 886dddce6, with that main's nine candidate inputs swapped in and "
             "jatloe.md removed: twice from this tree and once swapped, 51 files each, all "
             "byte-identical across the three. The explainer's v0.4.28 counts 244 results. "
-            "Measured a fourth time after T-243's citation of its statement audit "
+            "Measured a fourth time after T-245's citation of its statement audit "
             "(results.yaml), at link revision bfacba5a against the same main, swapped the "
             "same way: 51 files each, all byte-identical across the three. "
             "Retain v0.1.11, v0.1.4 and v0.2.7."

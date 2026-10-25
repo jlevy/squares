@@ -1,0 +1,538 @@
+{
+ "certificate": "/tmp/claude-0/-home-user-squares/d57983cc-21aa-53cd-a24f-c90463a5a3c0/scratchpad/rev806-math/src/s182-1024.cert",
+ "sha256": "9e12e0a42b05c4fcd2181c5255a4a19ab1aeb9a9f8c95f9943a20998a415fe97",
+ "controls": [
+  {
+   "control": "box at extent",
+   "mutation": "side set to E",
+   "expected": "accepted",
+   "sat": {
+    "valid": true,
+    "wall_violations": 0,
+    "pair_violations": 0,
+    "first_wall_violations": [],
+    "first_pair_violations": []
+   },
+   "area": {
+    "valid": true,
+    "wall_violations": 0,
+    "pair_violations": 0,
+    "first_wall_violations": [],
+    "first_pair_violations": []
+   },
+   "as_expected": true,
+   "cpu_seconds": 6.98,
+   "mutated_certificate_sha256": "74ecd9f3ce2e80c26efd6b3ded00d71e44b4a8ac9739f64a4810f328d306c863"
+  },
+  {
+   "control": "box 1e-30 below extent",
+   "mutation": "side set to E - 1e-30",
+   "expected": "refused",
+   "sat": {
+    "valid": false,
+    "wall_violations": 22,
+    "pair_violations": 0,
+    "first_wall_violations": [
+     15,
+     16,
+     17,
+     18,
+     19,
+     20,
+     21,
+     22
+    ],
+    "first_pair_violations": []
+   },
+   "area": {
+    "valid": false,
+    "wall_violations": 22,
+    "pair_violations": 0,
+    "first_wall_violations": [
+     15,
+     16,
+     17,
+     18,
+     19,
+     20,
+     21,
+     22
+    ],
+    "first_pair_violations": []
+   },
+   "as_expected": true,
+   "cpu_seconds": 6.86,
+   "mutated_certificate_sha256": "bc64576263dce0ede7561416ffb70cd16cc34cbe6dace4c5341d625c65ad2b85"
+  },
+  {
+   "control": "translated to low walls",
+   "mutation": "all centres moved by (-5.000e-21, -5.000e-21)",
+   "expected": "accepted",
+   "sat": {
+    "valid": true,
+    "wall_violations": 0,
+    "pair_violations": 0,
+    "first_wall_violations": [],
+    "first_pair_violations": []
+   },
+   "area": {
+    "valid": true,
+    "wall_violations": 0,
+    "pair_violations": 0,
+    "first_wall_violations": [],
+    "first_pair_violations": []
+   },
+   "as_expected": true,
+   "cpu_seconds": 6.32,
+   "mutated_certificate_sha256": "99f68f6eb5049bbbcca1073c69a984df265f0819be8e08eef7daf6d55dcca051"
+  },
+  {
+   "control": "translated 1e-30 past low walls",
+   "mutation": "the same, 1e-30 further on each axis",
+   "expected": "refused",
+   "sat": {
+    "valid": false,
+    "wall_violations": 16,
+    "pair_violations": 0,
+    "first_wall_violations": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     6,
+     13,
+     14
+    ],
+    "first_pair_violations": []
+   },
+   "area": {
+    "valid": false,
+    "wall_violations": 16,
+    "pair_violations": 0,
+    "first_wall_violations": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     6,
+     13,
+     14
+    ],
+    "first_pair_violations": []
+   },
+   "as_expected": true,
+   "cpu_seconds": 6.47,
+   "mutated_certificate_sha256": "381cc80c14027d7c64c14e6b8b4eafb41b2a0f618b772247ee86c8affc2cf857"
+  },
+  {
+   "control": "closest pair at contact",
+   "mutation": "pair (99, 100), gap 1.000000e-20; square 100 moved by exactly the gap along the separating axis",
+   "expected": "accepted",
+   "sat": {
+    "valid": true,
+    "wall_violations": 0,
+    "pair_violations": 0,
+    "first_wall_violations": [],
+    "first_pair_violations": []
+   },
+   "area": {
+    "valid": true,
+    "wall_violations": 0,
+    "pair_violations": 0,
+    "first_wall_violations": [],
+    "first_pair_violations": []
+   },
+   "as_expected": true,
+   "cpu_seconds": 6.51,
+   "mutated_certificate_sha256": "e745b1f9109d62cb905f1d27c5046e05a98cf963777fd2a73515e2eebf431bda"
+  },
+  {
+   "control": "closest pair 1e-30 past contact",
+   "mutation": "the same square moved 1e-30 further along that axis",
+   "expected": "refused",
+   "sat": {
+    "valid": false,
+    "wall_violations": 0,
+    "pair_violations": 1,
+    "first_wall_violations": [],
+    "first_pair_violations": [
+     [
+      99,
+      100,
+      -1e-30
+     ]
+    ]
+   },
+   "area": {
+    "valid": false,
+    "wall_violations": 0,
+    "pair_violations": 1,
+    "first_wall_violations": [],
+    "first_pair_violations": [
+     [
+      99,
+      100,
+      9.515082690700453e-31
+     ]
+    ]
+   },
+   "as_expected": true,
+   "cpu_seconds": 6.6,
+   "mutated_certificate_sha256": "18f402dbcbb4ec64207b24da1a31a9eaaec9d32723439e7a6a02349dcf01d979"
+  },
+  {
+   "control": "least-room square at critical size",
+   "mutation": "square 153 scaled about its centre to 1.0 (wall)",
+   "expected": "accepted",
+   "sat": {
+    "valid": true,
+    "wall_violations": 0,
+    "pair_violations": 0,
+    "first_wall_violations": [],
+    "first_pair_violations": []
+   },
+   "area": {
+    "valid": true,
+    "wall_violations": 0,
+    "pair_violations": 0,
+    "first_wall_violations": [],
+    "first_pair_violations": []
+   },
+   "as_expected": true,
+   "cpu_seconds": 6.19
+  },
+  {
+   "control": "least-room square 1e-30 past it",
+   "mutation": "square 153 scaled to the critical size + 1e-30",
+   "expected": "refused",
+   "sat": {
+    "valid": false,
+    "wall_violations": 1,
+    "pair_violations": 0,
+    "first_wall_violations": [
+     153
+    ],
+    "first_pair_violations": []
+   },
+   "area": {
+    "valid": false,
+    "wall_violations": 1,
+    "pair_violations": 0,
+    "first_wall_violations": [
+     153
+    ],
+    "first_pair_violations": []
+   },
+   "as_expected": true,
+   "cpu_seconds": 6.66
+  },
+  {
+   "control": "least pair-limited square at size",
+   "mutation": "square 138 scaled about its centre to its critical size (pair with square 85)",
+   "expected": "accepted",
+   "sat": {
+    "valid": true,
+    "wall_violations": 0,
+    "pair_violations": 0,
+    "first_wall_violations": [],
+    "first_pair_violations": []
+   },
+   "area": {
+    "valid": true,
+    "wall_violations": 0,
+    "pair_violations": 0,
+    "first_wall_violations": [],
+    "first_pair_violations": []
+   },
+   "as_expected": true,
+   "cpu_seconds": 6.47
+  },
+  {
+   "control": "least pair-limited square 1e-30 past",
+   "mutation": "square 138 scaled to that size + 1e-30",
+   "expected": "refused",
+   "sat": {
+    "valid": false,
+    "wall_violations": 0,
+    "pair_violations": 1,
+    "first_wall_violations": [],
+    "first_pair_violations": [
+     [
+      85,
+      138,
+      -6.885961619724268e-31
+     ]
+    ]
+   },
+   "area": {
+    "valid": false,
+    "wall_violations": 0,
+    "pair_violations": 1,
+    "first_wall_violations": [],
+    "first_pair_violations": [
+     [
+      85,
+      138,
+      5.2881288699865465e-61
+     ]
+    ]
+   },
+   "as_expected": true,
+   "cpu_seconds": 6.6
+  },
+  {
+   "control": "least-slack wall square 1e-30 past",
+   "mutation": "square 0 moved left by its wall slack 5.000e-21 + 1e-30",
+   "expected": "refused",
+   "sat": {
+    "valid": false,
+    "wall_violations": 1,
+    "pair_violations": 0,
+    "first_wall_violations": [
+     0
+    ],
+    "first_pair_violations": []
+   },
+   "area": {
+    "valid": false,
+    "wall_violations": 1,
+    "pair_violations": 0,
+    "first_wall_violations": [
+     0
+    ],
+    "first_pair_violations": []
+   },
+   "as_expected": true,
+   "cpu_seconds": 6.46,
+   "mutated_certificate_sha256": "3f308e0545909a3416a83a4c649b9c122db4ff3de64175d3694bcd1ae6868f45"
+  },
+  {
+   "control": "duplicated square",
+   "mutation": "square 0 appended a second time (n = 183)",
+   "expected": "refused",
+   "sat": {
+    "valid": false,
+    "wall_violations": 0,
+    "pair_violations": 1,
+    "first_wall_violations": [],
+    "first_pair_violations": [
+     [
+      0,
+      182,
+      -1.0
+     ]
+    ]
+   },
+   "area": {
+    "valid": false,
+    "wall_violations": 0,
+    "pair_violations": 1,
+    "first_wall_violations": [],
+    "first_pair_violations": [
+     [
+      0,
+      182,
+      1.0
+     ]
+    ]
+   },
+   "as_expected": true,
+   "cpu_seconds": 6.25,
+   "mutated_certificate_sha256": "a2ee2e105848dab8aed4c81b3fd326f645f729076321b6615266620b22037268"
+  },
+  {
+   "control": "rotation sense reversed",
+   "mutation": "every frame (c, s) read as (c, -s), centres unchanged",
+   "expected": "refused",
+   "sat": {
+    "valid": false,
+    "wall_violations": 0,
+    "pair_violations": 80,
+    "first_wall_violations": [],
+    "first_pair_violations": [
+     [
+      5,
+      11,
+      -0.0148251429391806
+     ],
+     [
+      11,
+      12,
+      -0.038019897137812064
+     ],
+     [
+      11,
+      119,
+      -0.2609030858533363
+     ],
+     [
+      12,
+      148,
+      -0.010359193297834697
+     ],
+     [
+      87,
+      88,
+      -0.22388004038068998
+     ],
+     [
+      87,
+      155,
+      -0.2061895776921669
+     ],
+     [
+      88,
+      152,
+      -0.2007324917338253
+     ],
+     [
+      89,
+      90,
+      -0.2198789366044405
+     ]
+    ]
+   },
+   "area": {
+    "valid": false,
+    "wall_violations": 0,
+    "pair_violations": 80,
+    "first_wall_violations": [],
+    "first_pair_violations": [
+     [
+      5,
+      11,
+      0.0003014525770200999
+     ],
+     [
+      11,
+      12,
+      0.020206386941763424
+     ],
+     [
+      11,
+      119,
+      0.08511757333368551
+     ],
+     [
+      12,
+      148,
+      0.0061444102686585315
+     ],
+     [
+      87,
+      88,
+      0.08258629706916881
+     ],
+     [
+      87,
+      155,
+      0.0804566240935629
+     ],
+     [
+      88,
+      152,
+      0.07626651803541194
+     ],
+     [
+      89,
+      90,
+      0.0817330370870801
+     ]
+    ]
+   },
+   "as_expected": true,
+   "cpu_seconds": 6.34
+  },
+  {
+   "control": "mirror image (x -> S - x, t -> -t)",
+   "mutation": "the certificate reflected in the line x = S/2",
+   "expected": "accepted",
+   "sat": {
+    "valid": true,
+    "wall_violations": 0,
+    "pair_violations": 0,
+    "first_wall_violations": [],
+    "first_pair_violations": []
+   },
+   "area": {
+    "valid": true,
+    "wall_violations": 0,
+    "pair_violations": 0,
+    "first_wall_violations": [],
+    "first_pair_violations": []
+   },
+   "as_expected": true,
+   "cpu_seconds": 5.78,
+   "mutated_certificate_sha256": "151930051191cd707c4cb2e290d73589008d7b1fcecba280784f9b4046d51189"
+  }
+ ],
+ "extent": "279418328724293574707614517082647271/20000000000000000000000000000000000",
+ "side_minus_extent": "100000000012729/20000000000000000000000000000000000",
+ "low_extent": [
+  "1/200000000000000000000",
+  "1/200000000000000000000"
+ ],
+ "closest_pairs": [
+  [
+   9.999999999999992e-21,
+   99,
+   100
+  ],
+  [
+   9.999999999999992e-21,
+   90,
+   156
+  ],
+  [
+   9.999999999999992e-21,
+   91,
+   157
+  ],
+  [
+   9.999999999999993e-21,
+   175,
+   177
+  ],
+  [
+   9.999999999999993e-21,
+   103,
+   104
+  ],
+  [
+   9.999999999999995e-21,
+   96,
+   97
+  ]
+ ],
+ "pair_control": {
+  "pair": [
+   99,
+   100
+  ],
+  "gap": "40535481772432325971055159303701777465318775450863805288509976009472244968053333751/4053548177243235982596645962962561207804176091808368669284041064235025000000000000000000000000000000000",
+  "mover": 100,
+  "axis": [
+   "60683230229453833557204250169007475000000000000000000000000000000000/162141927089729439303865838518502448312167043672334746771361642569401",
+   "150358072910270560696134161481497551687832956327665253228638357430599/162141927089729439303865838518502448312167043672334746771361642569401"
+  ]
+ },
+ "enlarge_control": {
+  "square": 153,
+  "critical_size": "699146116645933122578705747407981626669373490896268833130065508679026213975065512430442437627818854968781/699146116645933122571714286241522300930458045949608344614743682512671550000000000000000000000000000000000",
+  "critical_minus_1": 9.999999999999992e-21,
+  "limited_by": "wall"
+ },
+ "enlarge_pair_control": {
+  "square": 138,
+  "critical_size": "232718136239669575548200036894566123620291998670099559632761467731651887749384826241383894809836135531/232718136239669575544183054244480953004840258647894910830859731830193750000000000000000000000000000000",
+  "critical_minus_1": 1.726114996876822e-20,
+  "limited_by": "pair with square 85"
+ },
+ "all_as_expected": true,
+ "program": "exact_check.py",
+ "program_sha256": "242a77a9affc9d1e9ef7baba232850053c28413892857d31b956afe269b58f2d",
+ "python": "3.14.7",
+ "cpu_seconds_total": 105.8
+}

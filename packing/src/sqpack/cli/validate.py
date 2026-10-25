@@ -115,7 +115,7 @@ FRONTIER_COUNTS: dict[str, tuple[int, int, int]] = {
     # 2026-10-12: Overbeck's candidate equality s(17) = L (T-153) made n = 17
     # reported-proved, as T-060's report did n = 11 on 2026-09-29, and left its verified
     # lane open, so only the reported-open count falls, by one in every corpus.
-    # 2026-10-25: Jatloe's reported Lean proof that s(12) = 4 (T-243) made n = 12
+    # 2026-10-25: Jatloe's reported Lean proof that s(12) = 4 (T-245) made n = 12
     # reported-proved in the same way, its verified lane open, so the reported-open count
     # falls by one again in every corpus.
     "n=1..100": (55, 52, 0),
@@ -194,8 +194,8 @@ SCREEN_EXCLUDED: dict[str, tuple[str, ...]] = {
 #: 37.
 SCREEN_FINDINGS: dict[str, tuple[int, int, int, int]] = {
     "n=1..100": (28, 111, 86, 577),
-    "n=1..200": (67, 397, 182, 2012),
-    "n=1..324": (124, 1317, 302, 5326),
+    "n=1..200": (67, 402, 182, 2046),
+    "n=1..324": (124, 1322, 302, 5360),
 }
 UNDETERMINED_BY_MISS = (28,)
 #: The cases the two sampled sweeps re-derive on every pull request, computed here from

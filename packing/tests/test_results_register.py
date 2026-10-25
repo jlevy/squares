@@ -915,7 +915,7 @@ def test_not_a_bound_is_not_a_kind(
         ("T-004", "uniqueness", "a uniqueness is no bound on s(n), but its headline states"),
         ("T-003", "case-exclusion", "and no cited evidence claims `derived-structure`"),
         # An exact side's evidence claims no bound, so it is no upper bound.
-        ("T-244", "upper-bound", "and no cited evidence claims `upper-bound` or `exact-value`"),
+        ("T-246", "upper-bound", "and no cited evidence claims `upper-bound` or `exact-value`"),
         ("T-009", "exact-side", "exact side, but its headline opens with an upper bound"),
         ("T-004", "exact-side", "an exact side is no bound on s(n), but its headline states"),
         # A simplification names the result it proves again, on a case they share.
@@ -1000,7 +1000,7 @@ def test_optimality_needs_both_halves_or_an_exact_value() -> None:
 
 def test_an_exact_side_states_no_bound_and_cites_derived_structure() -> None:
     """An exact side gives the exact value of one configuration's side and claims no
-    bound (T-244): its evidence is `derived-structure`, as a polynomial identity's is
+    bound (T-246): its evidence is `derived-structure`, as a polynomial identity's is
     (E-n017-catalogue-polynomial-identity), and its headline writes no relation."""
     record = {
         "id": "T-999",

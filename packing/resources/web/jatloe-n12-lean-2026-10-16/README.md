@@ -12,7 +12,7 @@ Its Frontier key is **[Jatloe n12 Lean 2026-10-16]**. It reached the project thr
 announcement on X, not an issue: the owner opened
 [jlevy/squares#810](https://github.com/jlevy/squares/issues/810) on 25 October 2026 to
 track it, and bead `think-4l14` owns its import.
-The record registers it as `T-243` at `V0`/`C0`, as reported.
+The record registers it as `T-245` at `V0`/`C0`, as reported.
 The claim below is stated as the source states it; nothing here has built the proof, and
 no review has read it yet.
 
@@ -260,7 +260,7 @@ module 248.25 seconds.
 
 By the receipts the complete build fits the owner’s 40 CPU-hour item cap at its high
 reading, just: it waits on a machine whose memory is known to hold the largest modules,
-and on the pass’s decision to start it (`T-243`’s `unfinished_confirmations` names its
+and on the pass’s decision to start it (`T-245`’s `unfinished_confirmations` names its
 bead). This host, with 4 cores, 15 GB of memory and 20 GB of free disk on 25 October,
 would take 17 wall-hours or more and might not hold it.
 

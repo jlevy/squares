@@ -1175,19 +1175,19 @@
       "url": "https://github.com/BuddenPing/squares/blob/4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde/numerical-refinements/certificates/n181.cert.json"
     },
     {
-      "attribution": "PingYou Ltd, https://github.com/BuddenPing/squares/blob/4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde/numerical-refinements/certificates/n182.cert.json at 4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde",
+      "attribution": "Evan Daniel, https://github.com/evand/square-packing/blob/d99925d1298262c4ddb81c95abbb6f45adca8d3d/search/packer/candidates/s182-1024.cert at d99925d1298262c4ddb81c95abbb6f45adca8d3d",
       "kind": "packet-derived-facts",
-      "license_status": "no-licence-published",
+      "license_status": "MIT",
       "listed_n": [
         182
       ],
       "n": 182,
-      "path": "resources/web/pingyou-pr574-certificates-2026-10-13/facts/n-182.yaml.gz",
-      "raw_asset_retained": false,
-      "retention_policy": "Exact certificate retained as a derived fact, bound to the SHA-256 its packet pins upstream; no upstream byte is copied.",
-      "retrieved": "2026-10-14",
+      "path": "resources/web/evand-n182-2026-10-25/source/search/packer/candidates/s182-1024.cert",
+      "raw_asset_retained": true,
+      "retention_policy": "Complete source certificate retained losslessly and bound to the SHA-256 its packet pins upstream; no upstream program or prose is copied.",
+      "retrieved": "2026-10-25",
       "source_n": 182,
-      "url": "https://github.com/BuddenPing/squares/blob/4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde/numerical-refinements/certificates/n182.cert.json"
+      "url": "https://github.com/evand/square-packing/blob/d99925d1298262c4ddb81c95abbb6f45adca8d3d/search/packer/candidates/s182-1024.cert"
     },
     {
       "attribution": "Evan Daniel, https://github.com/evand/square-packing/blob/3a9948c781be668b1547cc2bf64a0d1e614f9bca/search/packer/candidates/s183_h183b.cert at 3a9948c781be668b1547cc2bf64a0d1e614f9bca",

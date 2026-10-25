@@ -1,0 +1,11 @@
+side 13970916436214678735385725854133/1000000000000000000000000000000 = 13.970916436214678735385725854133 (exact, 30 places)
+upward prints: 12 places 13.970916436215, 14 places 13.97091643621468; the 12-place print is the least 12-place decimal >= side: True
+the commit title's 13.97091643621468 is >= side: True
+  house_verified_T-174                 13.974090713122 (12 up)  minus side = 3.174277e-03
+  house_reported_T-174                 13.974090713122 (12 up)  minus side = 3.174277e-03
+  T-098                                13.974090713122 (12 up)  minus side = 3.174277e-03
+  T-056_printed                        13.974090713125 (12 up)  minus side = 3.174277e-03
+  kaggle_Prathamesh_Chavan_side_only   13.972761347065 (12 up)  minus side = 1.844911e-03
+  kaggle_Subramanya_N_side_only        13.970916436231 (12 up)  minus side = 1.592126e-11
+  source_KKT_side_S_star               13.970916436215 (12 up)  minus side = -1.397092e-19
+house verified == house reported: True

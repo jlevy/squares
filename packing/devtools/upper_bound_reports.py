@@ -1502,6 +1502,8 @@ HOUSES: dict[str, Callable[[int], Fraction]] = {
     # Evan Daniel's exact descents at 268 and 304 of public Kaggle packings, at 8a8879a,
     # which no issue reports (think-l49q).
     "[Daniel Kaggle descents 2026-10-24]": _import("evand-kaggle-descents-2026-10-24"),
+    # T-243: Evan Daniel's new arrangement at 182 of issue 806, at d99925d (think-2lzo).
+    "[Daniel n182 2026-10-25]": _import("evand-n182-2026-10-25"),
     # T-155: the side of the retained view of Evan Daniel's regularizer at each count.
     "[Daniel regularizer 2026-10-11]": regularized.view_side,
 }

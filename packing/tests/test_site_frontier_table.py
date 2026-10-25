@@ -49,7 +49,7 @@ WIDTHS = (1280, 1024, 768, 390)
 #: rational upper bound. The fraction was n = 18's until 2026-10-02, when its verified
 #: bound rose to the reported one, and then n = 19's until the same happened there later
 #: that day; n = 12's has terminated since 5 October, and is the verified cell's alone
-#: since T-243 of 25 October. The verified bound beside the reported one was n = 51's,
+#: since T-245 of 25 October. The verified bound beside the reported one was n = 51's,
 #: 37/5 and from the morning of 6 October 2977/400 (T-070), until sqverify-fast decided
 #: its own certificate (T-090) later that day, and is n = 96's since.
 CASES = (1, 5, 11, 12, 51, 70, 88, 96, 108, 230)
@@ -173,7 +173,7 @@ def test_every_cell_is_centred_on_its_row(laid: dict[int, dict[str, Any]], width
             assert cell["above"] == pytest.approx(cell["below"], abs=2), (row["id"], index)
     # A tall row whose height comes from another column: n = 70's reported lower bound,
     # a fraction with its decimal under it, while its Status holds one chip, as n = 1's
-    # does, so the chip sits well clear of the top of its cell. It was n = 12 until T-243
+    # does, so the chip sits well clear of the top of its cell. It was n = 12 until T-245
     # of 25 October 2026 made n = 12 reported-proved and verified-open, a Status of two
     # lanes that fills its row.
     tall = table["rows"][ROWS.index("n-70")]
@@ -217,7 +217,7 @@ def test_a_fraction_shows_its_decimal_and_a_name_stays_whole(
     """The best known packing of n = 230 is `15 + (28/41)`, and the cell prints its decimal
     under it: the value cut after eight places. The example was n = 12's reported lower
     bound, `31360/7901`, then its verified one, `15680000/3949423`, until T-095's
-    terminating `7943/2000` took both of n = 12's lower cells on 5 October 2026; T-243's
+    terminating `7943/2000` took both of n = 12's lower cells on 5 October 2026; T-245's
     reported `s(12) = 4` took the reported one on 25 October 2026. A credit's long
     surname, Chaoweeraprasit at n = 88, stays whole at every width."""
     rows = {row["id"]: row for row in laid[1280]["rows"]}
@@ -225,7 +225,7 @@ def test_a_fraction_shows_its_decimal_and_a_name_stays_whole(
     assert upper == ["≈ 15.68292682…"]
     exact, shown = Fraction(643, 41), Fraction(upper[0][2:-1])
     assert 0 < exact - shown < Fraction(1, 10**8)
-    # n = 12 since 25 October 2026: the reported lower cell holds T-243's whole 4 and no
+    # n = 12 since 25 October 2026: the reported lower cell holds T-245's whole 4 and no
     # decimal, the verified one T-095's 7943/2000, and the gap 57/2000 is the verified
     # lane's; both decimals terminate. From 5 October the one bound filled both lower
     # cells, and the decimal was the reported cell's.
@@ -235,7 +235,7 @@ def test_a_fraction_shows_its_decimal_and_a_name_stays_whole(
     assert [cell["approx"] for cell in rows["n-12"]["cells"]].count([]) == len(COLUMNS) - 2
     # A terminating fraction shows its exact decimal in either column: in the reported
     # one n = 88's 481/50, Hosono's mixed rectangle-density bound, and n = 12's until
-    # T-243; in the verified one n = 12's above, and a bound printed beside a different
+    # T-245; in the verified one n = 12's above, and a bound printed beside a different
     # reported one. That example was n = 18 until 2026-10-02, when T-045's replay raised
     # its verified bound to the reported 939/200 and the cell became "same", and then
     # n = 19 until T-074's did the same there later that day; then n = 51, 37/5 from

@@ -8139,7 +8139,7 @@ issues:
       of its 21 members' size and digest, its README and its Krawczyk box, and reads degree 7213
       from the polynomial; it keeps the grade-C archive as published, and gradec.py recomputed
       the n = 10 certificate byte-identical to the published one. The s(29) polynomial is
-      registered as T-244 (25 October 2026, think-6gti), an exact side: the exact value of the
+      registered as T-246 (25 October 2026, think-6gti), an exact side: the exact value of the
       record configuration's side, with no bound, V0/C0, citing the author's announcement thread
       of 13 October on X; its replay (about 2.5 CPU-hours, think-10m1) waits for an owner budget,
       and issue 811 tracks it with the record's other exact side polynomials. The grade-C review of 23 October
@@ -8157,7 +8157,7 @@ issues:
         enclosure and the root link are rated rigorous by the source.
       source: body
       register:
-      - T-244
+      - T-246
       evidence:
       - E-n029-evand-minpoly-7213-report
     - key: grade-c-local-minima
@@ -24176,6 +24176,67 @@ issues:
       2's records.csv and README beside version 1's and decides its 2,824 rows with the
       maintained checker; the triage's own re-decision with the V1 triage's prototype
       lemma decides nothing for the record.
+  - number: 806
+    title: 's(182) ≤ 13.970916436215: registration request'
+    author: evand
+    opened: '2026-10-25'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Evan Daniel reports s(182) <= 13.970916436215, the exact rational side
+      13970916436214678735385725854133/10^30 = 13.970916436214678735385725854133 of
+      search/packer/candidates/s182-1024.cert at evand/square-packing d99925d, rounded up at
+      12 places: 3.17e-3 below T-174, the house at 182 (PingYou Ltd's certificate of
+      Francisco Couzo's packing), and below every report there. The source calls it a new
+      packing, a different local minimum from the register's, found by its explore loop
+      from an L-cut of 29 squares of the register's s(211) packing and a local search, and
+      claims the upper bound, with KKT and local-minimum statements as numerical evidence.
+      That start is T-188's, Couzo's 211 packing, an arrangement of Daniil Ostashev's design
+      (T-175). The commit d99925d was pushed at
+      2026-10-25T04:16:05Z, 19 seconds before the issue. The issue quotes two Kaggle
+      per-puzzle side-only entries, Prathamesh Chavan's 13.9727613470647 (23 October) and
+      Subramanya N's 13.9709164362306 (24 October, 18:41 UTC), neither with a packing, so
+      neither is a report; the second is 1.59e-11 above the certificate's side. Triaged on 25
+      October 2026 and imported the same day (think-2lzo): the evand-n182-2026-10-25 packet
+      retains the eight files of the s182-1024 set at d99925d under the source's MIT licence,
+      the two digests the issue prints are theirs, the side is the certificate's header and
+      rounds up to the issue's print, both maintained exact routes accept it and refuse its
+      gross and sharp controls, and the ledger of 25 October for the issue
+      (upper-bounds-issue806-20261025) records it, a new packing. Registered as T-243;
+      measured pose by pose, no symmetry pairs it one to one with the house's packing (44
+      squares beyond a tenth under the best assignment), another arrangement. The stage 4
+      review of 25 October (think-meci) accepted it with no blocking or major finding, so
+      T-243 is at V3/C3, scored S3, credited to Daniel from an L-cut of Couzo's T-188 (M-1),
+      and the case at 182 adopted it as its house best packing in the pass of 25 October,
+      with both strong generators' regularization in the same pull request. Its four
+      questions for the author are informational: the issue's own start side and the
+      review's measurement settle the start. Claude assistance disclosed.
+    read_through: '2026-10-25T04:16:24Z'
+    results:
+    - key: n182
+      claim: >-
+        s(182) <= 13970916436214678735385725854133/10^30 =
+        13.970916436214678735385725854133, the side of s182-1024.cert (SHA-256
+        9e12e0a4...fe97) at d99925d, by a packing the source calls new, found from the
+        register's s(211) packing by an L-cut and local search, not a refinement of the
+        packing at 182.
+      source: body
+      bead: think-2lzo
+      register:
+      - T-243
+      evidence:
+      - E-evand-n182-certificate-report
+      - E-evand-n182-exact-feasibility
+      - E-evand-n182-review-exact-feasibility
+    beads:
+    - think-2lzo
+    - think-meci
+    answer_bead: think-2lzo
+    replies: []
+    close_when: >-
+      The result is registered, reviewed and adopted at 182 with its drawing regularized, and
+      the reply on main says so; nothing the author asked for is queued.
   - number: 810
     title: "s(12) = 4 in Lean: Jatloe12SquaresFormalized (Jatloe's proof; Gurevitch, Lewis, Ahmed): tracking
       an unreported result"
@@ -24213,7 +24274,7 @@ issues:
         axioms.
       source: body
       register:
-      - T-243
+      - T-245
       evidence:
       - E-n012-jatloe-lean-report
     beads:
@@ -24244,7 +24305,7 @@ issues:
       172, 199 and 263 (#804, think-9vai), the draft pull-request stack #403 to #435, the numeric
       sides at 29, 55 and 71 (think-je8y, think-phh8, think-1blg), n = 83's degree-672 polynomial
       (think-chsu), the reported roots at 106, 152 and 177 (#419, #420) and the algebraic house
-      writer (think-ot5c). The s(29) polynomial is registered as T-244 (think-6gti).
+      writer (think-ot5c). The s(29) polynomial is registered as T-246 (think-6gti).
     read_through: '2026-10-25T05:41:58Z'
     results:
     - key: s29-minimal-polynomial
@@ -24253,7 +24314,7 @@ issues:
         169a827 and the release exact-data-2026-10-12).
       source: body
       register:
-      - T-244
+      - T-246
       evidence:
       - E-n029-evand-minpoly-7213-report
     asks:
@@ -24274,4 +24335,4 @@ issues:
       acknowledgement is owed on it. It is marked intake, as #613 is, as the project's own issue
       tracking the intake of a reported item, Daniel's polynomial, which #545 has tracked since 12
       October; its other items are tracked where the table names them. The issue says it will be
-      updated as each item lands on main, so a follow-up is owed when T-244 reaches main.
+      updated as each item lands on main, so a follow-up is owed when T-246 reaches main.

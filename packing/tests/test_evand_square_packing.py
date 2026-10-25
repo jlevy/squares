@@ -133,7 +133,7 @@ def test_the_n12_bounds_are_daniels_points_rescaled() -> None:
     31382793/31360000 and re-weighted (T-095, since 5 October 2026). Before it the
     verified bound was this project's re-weighting at a side scaled by 3951000/3949423
     (T-079, from 3 October). The reported bound was the same lineage, T-078's whole
-    certificate times 7902/7901 and then T-095's, until T-243's reported Lean proof that
+    certificate times 7902/7901 and then T-095's, until T-245's reported Lean proof that
     s(12) = 4 took the reported lane on 25 October 2026; it is not Daniel's points."""
     (side,) = (claim[2] for claim in CLAIMS if claim[1] == 12)
     case = _case(12)

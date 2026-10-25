@@ -6035,7 +6035,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-17'
+  lastmod: '2026-10-25'
   status: live
 - path: cases/183.html
   canonical: cases/183.html
@@ -21422,6 +21422,40 @@ urls:
   lastmod: '2026-10-25'
   status: live
   identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 182
+    established: null
+    attribution:
+      source_keys:
+      - '[Daniel n182 2026-10-25]'
+      published: '2026-10-25'
+    builds_on: null
+    evidence:
+    - E-evand-n182-certificate-report
+    - E-evand-n182-exact-feasibility
+    - E-evand-n182-review-exact-feasibility
+    artifacts:
+    - packing/resources/web/evand-n182-2026-10-25/README.md
+    - packing/resources/web/evand-n182-2026-10-25/acquisition/claims.json
+    - packing/resources/web/evand-n182-2026-10-25/source/search/packer/candidates/s182-1024.cert
+    - packing/resources/web/evand-n182-2026-10-25/receipts/exact-certification.json.xz
+    - packing/resources/web/evand-n182-2026-10-25/receipts/sharp-controls.json
+    - packing/resources/web/evand-n182-2026-10-25/measure/identity.json
+    - packing/campaign/issue-intake/upper-bounds-issue806-20261025/README.md
+    - packing/devtools/upper_bound_reports.py
+    - docs/project/reviews/review-2026-10-25-evand-n182.md
+    - packing/resources/web/evand-n182-2026-10-25/review/review-2026-10-25/README.md
+- path: result/t-245.html
+  canonical: result/t-245.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-25'
+  lastmod: '2026-10-25'
+  status: live
+  identity:
     kind: optimality
     scope:
       n_values:
@@ -21449,8 +21483,8 @@ urls:
     - packing/devtools/lean_closure.py
     - packing/devtools/audit_n12_lean.py
     - docs/project/reviews/review-2026-10-25-n12-lean-formalization-statement-audit.md
-- path: result/t-244.html
-  canonical: result/t-244.html
+- path: result/t-246.html
+  canonical: result/t-246.html
   kind: result
   generator: devtools.render_overview:result_fragments
   producer: overview
