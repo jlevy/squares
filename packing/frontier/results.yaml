@@ -34217,9 +34217,11 @@ results:
       next pull request (select_houses.PENDING_ADOPTION, think-3anz). The case at 268
       adopted this certificate as its house best packing in the pass of 26 October 2026,
       from T-240, which stays retained as history, with the credit of the placement adopted,
-      Daniel after Lavrentev. Both strong generators decided the new witness in the same
-      pull request (cases/regularized_drawings/think-3anz-2026-10-25): grid-slack's view at 1
-      degree, at the witness's side, is admitted (row 10) and drawn, and Evan Daniel's
+      Daniel after Lavrentev.
+
+      Both strong generators decided the 268 witness in the same pull request
+      (cases/regularized_drawings/think-3anz-2026-10-25): grid-slack's view at 1 degree, at
+      the witness's side, is admitted (row 10) and drawn, and Evan Daniel's
       certified KKT re-solve at the witness's side goes to review at row 7; no view is below
       the side. The regularizer's view of T-240's witness at 268, which #794's runs found at
       exactly this certificate's side (think-20oj), is at the house's side now, not below it.

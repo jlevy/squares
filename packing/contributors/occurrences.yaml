@@ -23279,35 +23279,36 @@ occurrences:
     path: packing/frontier/n-268.md
     record_key: '268'
     field: /reported_upper_bound/found_by/0
-  expected_text: Kirill Tymchishin
+  expected_text: Vladislav Lavrentev
   start: 0
-  end: 17
-  label: Kirill Tymchishin
+  end: 19
+  label: Vladislav Lavrentev
   role: construction-finder
   disposition: unresolved
   evidence: []
   note: 'Reviewed packing/frontier/n-268.md [268] /reported_upper_bound/found_by/0
-    span 0:17: the case''s house since the adoption of 25 October 2026 (T-240) refines
-    the packing of Kirill Tymchishin (kirilltym), Kaggle notebook "CPU/GPU/MPS EDA+Seam
-    LP" v4, as the source''s manifest credits it and the 24 October review measured
-    it (none beyond a tenth). No person record exists yet; identity review pending
-    (a profile by name, think-ptkk).'
+    span 0:19: the case''s house since the adoption of 26 October 2026 (T-242) is Evan
+    Daniel''s exact descent of the public Kaggle packing of Vladislav Lavrentev
+    (lightningv08), as the source credits it, which the certificate is to 1.41e-4 (the
+    24 October review; credit Daniel after Lavrentev). No person record exists yet;
+    identity review pending (a profile by name, think-ptkk).'
 - origin:
     path: packing/frontier/n-268.md
     record_key: '268'
     field: /reported_upper_bound/improved_by/0
-  expected_text: Francisco Couzo
+  expected_text: Evan Daniel
   start: 0
-  end: 15
-  label: Francisco Couzo
+  end: 11
+  label: Evan Daniel
   role: construction-improver
   disposition: resolved
   evidence:
-  - primary-byline
-  contributor_id: francisco-couzo
+  - repository-license
+  - bibliography
+  contributor_id: evan-daniel
   note: 'Reviewed packing/frontier/n-268.md [268] /reported_upper_bound/improved_by/0
-    span 0:15: issue 763, filed by franciscouzo, and the source''s manifest credit
-    Francisco Couzo''s live search with the refinement (T-240).'
+    span 0:11: the house is Evan Daniel''s exact descent at evand/square-packing@8a8879a
+    (T-242), in the repository whose retained licence names him.'
 - origin:
     path: packing/frontier/n-268.md
     record_key: '268'
