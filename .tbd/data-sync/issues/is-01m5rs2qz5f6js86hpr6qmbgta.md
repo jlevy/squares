@@ -5,7 +5,7 @@ title: "Import Jatloe et al.: Lean proof s(12) = 4, Jatloe12SquaresFormalized d0
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 6
 delegate: coord-n12-1025
 labels:
   - result-import
@@ -15,14 +15,18 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-25T05:38:35.108Z
-updated_at: 2026-10-25T06:05:18.003Z
+updated_at: 2026-10-25T07:01:10.545Z
 started_at: 2026-10-25T05:38:38.919Z
 ---
 Owner report 2026-10-25 (X post https://x.com/ManassehA06/status/2113097037306569124 and its reply naming the repo); tracking issue https://github.com/jlevy/squares/issues/810. Source: Queuingtheorydotcom/Jatloe12SquaresFormalized at d0caf4532a7ead68be1389ef87387b126fc2e0ab (tag n12-verified-2026-10-16), Lean/Proofs/N12-jatloe, theorem N12Compact.Final.optimality : S12.packingConstant12 = 4. Triage 2026-10-25: closure 5377 modules, 0 missing, 0 sorry, 0 axiom decls, 2572 native_decide; source audit 3 standard + 1624 native axioms; accepting run reused cached objects. Upstream EvolvingPrograms/SquaresLean@1f60d41 not publicly reachable. Stages: packet, register as reported (S4/S5 candidate), statement audit, math review, replay priced (above cap).
 
 ## Notes
 
-Statement audit (w-n12-audit-1025, 2026-10-25): docs/project/reviews/review-2026-10-25-n12-lean-formalization-statement-audit.md, commit 40e15dbb8 on branch worktree-agent-aa8ad7d72a4de3571 (not pushed; not yet mapped in docs/project/document-map.yaml).
-Verdict: statement faithful (unrestricted rotations, open squares, closed container, contact allowed; sInf = 4 forces nonempty + bdd below, grid attains 4); final theorem premise-free; trust base = kernel + 3 standard + 1,624 native_decide axioms = exactly the calls of 1,525 S12 declarations (948 further calls in 749 decls compiled but off the path).
-Findings: none blocking. M-1 compiler trust (wording); M-2 accepting run compiled 0 modules, upstream private, no inspectable build; m-1 statement defs import S12.To117 (109-module statement closure, 723 native calls); m-2 Mathlib pinned only in verification/toolchain-lock.json (Lake manifest uses path packages); N-1 stale comments; N-2 off-path native calls; N-3 autoImplicit default.
-Records lane: encode as source's report (like E-n011-lean-formalization-report); counts beyond devtools.lean_closure came from unretained scratch programs (OR-1: make a tool before citing).
+2026-10-25 w-n12-records-1025 (stages 2 and 3, branch claude/friendly-einstein-gf9z0h, not pushed by this worker):
+- Stage 2, 4d4a1aae1: packet packing/resources/web/jatloe-n12-lean-2026-10-16/ (423 of 426 declared files retained; ci/*.py and check_compiled_checkpoint.py pinned by digest; release archives pinned by size and SHA-256, evidence zip db3447b2 checked on download), receipts/lean-closure.json.gz (5,377 modules, 0 missing, 0 sorry, 0 axiom decl, 2,572 native_decide in 42 modules) and receipts/statement-closure.json.gz (S12.PackingConstant, 109 modules), both X posts as receipts. Key [Jatloe n12 Lean 2026-10-16]. No licence: licence follow-up think-c9ec under think-gtmb.
+- Stage 3, 015f1a19c: T-243 (optimality, V0/C0, draft S5), E-n012-jatloe-lean-report, coverage jatloe-n12-lean-2026-10-16, n-012.md reported lane -> 4 and reported_status proved (verified lanes/status unchanged, as T-060/T-153; T-194 had left n-019 unchanged pending the owner), #810 requests entry (replies []), intake-watch read through d0caf45, profile people/jatloe.md (X jatloe), n12 sources on ctjlewis/manasseh-ahmed, occurrence joins (Gurevitch left unresolved: "Ben" vs profile "Benjamin" not evidenced), FRONTIER_COUNTS reported-open -1.
+- Release: b70436b08 explainer v0.4.28 (243 results) + no-change record for the other three papers (51 files byte-identical x3 at link bb756e19); 1f6a8d184 DATA_REVISION -> 015f1a19.
+- Validation bead think-dd3v: the from-source build, priced from the source's own per-module receipts (checked-modules.json in the evidence zip): 16.6 serial wall-hours, 38.5 Lean-thread-hours, all 5,377 exit 0 -> about 28 CPU-h (17-40), WITHIN the 40 CPU-h item cap at its high reading (the issue's "far above the cap" is contradicted); gated on decision (memory per module unrecorded; machine).
+- Backlog row for the pass's backlog bead (no 2026-10-25 backlog bead found; not added to think-lh7d/think-ve84): | think-dd3v | Jatloe s(12) = 4 Lean, full build of 5,377 modules + axiom check (under think-4l14; T-243) | ~28 (17-40) | gated on decision | a machine with known memory; the statement audit |
+- Found, not fixed: devtools.render_announcement.load_profiles globs packing/contributors/*.md, but profiles live in packing/contributors/people/ since a7b61b25a (2026-10-21), so no profile handle (@jatloe, @ctjlewis, ...) is ever used; only RECORD_HANDLES (Ahmed's @ManassehA06) applies. Its line also prints "Benjamin Gurevitch" from credited_names.
+- Validation at 1f6a8d184 (2026-10-25): packing-validate --records exit 0 (53 of 111 steps, the records tier); --edit --jobs 2: 68 of 69 steps pass, the type floor (basedpyright) timed out at 900 s on this 4-core 15 GB host (its earlier run at --jobs 4 hit the node heap limit); basedpyright on the two changed Python files (release.py, cli/validate.py): 0 errors; ruff clean; tests/test_contributor_occurrences.py 25 passed; tests/test_release.py 20 passed; acquire_source --check PACKET_MATCHES_ITS_CONTRACT.
