@@ -5,7 +5,7 @@ title: "Stage 4: review T-241 (Couzo's 304) and T-242 (Daniel's 268 and 304), th
 kind: task
 status: in_progress
 priority: 2
-version: 5
+version: 6
 delegate: c-map-hx0e-1024
 labels:
   - result-import
@@ -18,7 +18,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-24T14:46:47.122Z
-updated_at: 2026-10-25T01:49:02.376Z
+updated_at: 2026-10-25T01:58:57.715Z
 started_at: 2026-10-24T21:11:59.708Z
 ---
 Stage 4 of the think-l49q import (PR #792, records lane c-import-l49q-1024). T-241 registers Francisco Couzo's certificates/best/n304.cert at franciscouzo/square-packing@fa6237e (Kirill Tymchishin's Kaggle packing, 2.53e-3 below T-186) and T-242 Evan Daniel's exact descents at evand/square-packing@8a8879a (268, 4.48e-12 below T-240, another placement of #763's arrangement; 304, 3.04e-9 below T-241, T-241's packing descended), both at V0/C0, drafts S3 and S2.
@@ -65,3 +65,4 @@ STATUS 2026-10-25 c-map-hx0e-1024: PR https://github.com/jlevy/squares/pull/803 
 - 605954831 #763 reply recorded (n268/n303 dues clear; #795's three notebook keys stay due for think-lyf9) and #794's News landed (news page 366,574 B, trip 450,000, budget 600,000).
 - d0c132c35 stamp_landed (304 -> T-242, 2026-10-25); 16ca5c3fc papers' no-change record (69 files x3 identical at d0c132c3 vs main 755ef426b); c9ae6f746 DATA_REVISION -> d0c132c35.
 REMAINS: H2 think-3anz (268, on or after 2026-10-26T00:00Z); keep think-hx0e open until H2 lands (PENDING_ADOPTION[268] names it) or re-point to think-3anz after sync; C2 to Couzo; D1, D2 to Daniel; row-7 views at 304 for the owner.
+HOSTED at c9ae6f746: Packing validation 40151925943 (packing-required pass), Certificate page 40151926001 (pages-required pass), merges-into-base 40151908351 pass; no check fails. Local: records tier 53/53; 30 affected modules 1731 passed, 1 skipped. Main unmoved at 755ef426b. PR stays draft; merge on 25 October UTC (pass date), else merge main, stamp_landed --apply and release_pin --update again.
