@@ -197,7 +197,7 @@ and #789’s to its head at 3773d6025.
 
 | Site | Today, on #789 | After W7 |
 | --- | --- | --- |
-| `:484` `ISSUE_763`, `:923` `ISSUE_763: _rulings()` | a fifth walk, #763’s claims to 1024, with both rulings through 1024 | unchanged: a frozen walk |
+| `:484` `ISSUE_763`, `:923` `ISSUE_763: _rulings()` | a fifth walk, #763’s claims to 1024, with both rulings through 1024 | unchanged: a frozen walk, but for its `RECIPE` hold, which think-gn29 drops for think-g2qy (see “The hold”) |
 | `:1539`–`:1592`, `RELEASES` (from `:1374`) | 20 releases, adding #763 and `964ee2b`’s unrequested rows, each decided to 1024 | windows kept; R3 lifts both |
 | `:4211` `claim_map_walk_sources` (`:4237`, docstring `:4215`, `:4230`) | `mapped_claims(item)` read only where `n <= LIMIT` | the walk’s counts, so the walk above 1024 reads #763’s mapped claims above 1024 |
 | comments `:1541`, `:1563` |  | rewritten with the code |
@@ -324,7 +324,9 @@ routes with six controls, every recipe parent that is not already a replayed row
 lists those parents in `recipe-decisions.json`. **Price:** about 8 to 10 CPU-seconds a
 parent to 1024 (#715’s 8.2, #742’s about 10), and about 84 above 1024 (the triage’s 12
 CPU-seconds a decision, for seven decisions).
-R3 needs 850, about 10 CPU-seconds.
+R3 needs 850, about 10 CPU-seconds; that replay now exists, on both routes with its six
+controls refused, in the #763 packet’s `receipts/recipe-decisions.json`, written by
+think-gn29 for #763’s recipes at 1024 and below.
 R1’s count is known only once its walk runs.
 think-cyal counts 98 certificates under #715’s 1,112 rows, 85 of them at their own
 counts, so about 13 are parents only: about 0.3 CPU-hours.
@@ -338,7 +340,12 @@ think-llit, 24 October):
   recipe, decided into `receipts/recipe-decisions.json` (`recipe-decisions`);
 - the `RECIPE` hold class holds only the recipes the checker refuses: classical parents
   (think-zkxy) and Fang’s composites (think-tj3x);
-- the frozen walks keep their `RECIPE` holds as written;
+- the frozen walks keep their `RECIPE` holds as written, with one exception: #763’s 13
+  recipes, which the checker decides, are the one frozen `RECIPE` hold dropped, in
+  think-gn29 for think-g2qy (`_HELD_763` keeps 683 alone).
+  The walk’s ledger and verdicts are unchanged, and the 13 are rows of a source of their
+  own, `couzo-issue763-2026-10-23-recipes`, because they reach `main` a day after #763’s
+  other rows (`Split`; #800’s review A, A1 and A2);
 - `HELD_CLASSES[RECIPE]` (`beyond_horizon_replay.py:346`) keeps its text, because the
   frozen walks render it.
 

@@ -22788,7 +22788,9 @@ issues:
         (receipts/filtered-exact-replay.json). 328, 850 and 909 are below f1ceee4's rows by
         less than one unit in the 12th place at the same print, so by the owner's answer of
         23 October 2026 (think-fwa9) they restate them and are not recorded. The 13 recipes
-        and 683 are recorded and held (recipes-325-1024, n683).
+        are rows too, of a source of their own (recipes-325-1024), and 683 is recorded and
+        held (n683). Couzo's later 43f666c supersedes 65 of the 184 rows and 7 of the 13
+        recipes (43f666c-rows-325-1024).
       queued: false
     - key: recipes-325-1024
       claim: >-
@@ -22796,14 +22798,23 @@ issues:
         at 365, 444, 487, 632, 733, 734, 737, 788, 789, 845, 910, 966 and 970.
       source: body
       not_registered: >-
-        The walk records each below the standing side and holds it from a row: a construction
-        with no certificate file of its own waits on a maintained construction checker (D2,
-        think-f2io; the W7 slice). The packet retains every source certificate the recipes
-        read.
-      queued: true
+        Beyond the n <= 324 corpus: rows of source-coverage.yaml, not register entries. The
+        walk records each below the standing side, by 4.85e-13 (970) to 3.52e-2 (733, 788
+        and 845), and held it from a row until a maintained construction checker existed (D2,
+        think-f2io). 43f666c's import (think-gn29) decides each exactly from its recipe and its
+        parent certificate with devtools.construction_checker, every parent replayed on both
+        routes with its controls refused and every recipe control refused
+        (receipts/recipe-decisions.json), so each is a dated row at the recipe's exact side
+        rounded up at 12 places, dated by the first commit whose index states it (efef7d1 at
+        365 and 970, 964ee2b at the rest). The rows reach main a day after the issue's
+        certificate rows, so they are a source of their own, couzo-issue763-2026-10-23-recipes,
+        whose landing day is theirs (#800's review A, A1). They supersede the rows they beat; at 444, 487, 632, 733, 737, 788 and 845
+        43f666c's later recipe supersedes them in turn. The push of 23:38:42Z also states
+        sides at these counts, best/ certificates and notebook recipes among them (#795's
+        review A); the 43f666c walk reads it commit by commit after the issue, and each is
+        above or equal to the issue's recipe, so none is recorded.
+      queued: false
       bead: think-g2qy
-      blocked_on:
-      - think-f2io
     - key: n683
       claim: >-
         s(683) <= 26.656854249501, rounded up: 684's certificate at 964ee2b less one square.
@@ -22910,6 +22921,32 @@ issues:
         #732 row it restates, and no release of the push holds it. Both project exact routes
         accept all 86 with every control refused.
       queued: false
+    - key: 43f666c-rows-325-1024
+      claim: >-
+        126 upper bounds at n = 330 to 997 that certified_bounds.json at franciscouzo's
+        43f666c (24 October 2026, pushed with 73eac5b and 1c17153 at 06:10:44Z) lowers below
+        964ee2b's, Couzo's live records since the issue's pin: 108 certificates
+        certificates/best/nN.cert, 690 as 691's certificate less one square, and 17 square
+        tiling and L-border recipes of those certificates; and 831 recipes above 1024.
+      source: https://github.com/franciscouzo/square-packing/blob/1c1715399709bc955e9b402947ab8b52bbacdfc3/certified_bounds.json
+      not_registered: >-
+        Unrequested: a later publication of the watched repository that no issue or comment
+        reports, so an import of its own, dated by its push (think-gn29). The
+        couzo-43f666c-2026-10-24 packet pins 1c17153, and devtools.couzo_43f666c_claims
+        re-derives the claims (receipts/claim-map.json). The ledger of 24 October for 43f666c
+        (upper-bounds-couzo-43f666c-20261024), walked from starts frozen at main 2ed0ea740 after
+        this issue's claims with no row there and the push of 23:38:42Z, records 106
+        certificates and 16 recipes as current beyond-horizon rows of the
+        couzo-43f666c-2026-10-24 source, below the standing side by 8.53e-14 (459) to 1.33e-2
+        (691); they supersede 72 of this issue's rows (65 certificates and 7 recipes) and 46
+        of the push's notebook rows. 797
+        and 847 restate this issue's rows (think-fwa9); 367 is above 23aff0c's deletion from
+        Friedman's construction at 368, which the walks hold (think-zkxy); 690 has no row by
+        the owner's D6 answer (think-kzme). Both project exact routes accept the 106
+        certificates with every control refused, and the construction checker decides the 16
+        recipes. The 831 above 1024 wait on the slice above 1024 (think-llit).
+      queued: false
+      bead: think-gn29
     awaiting_author:
     - question: >-
         Do the manifest's previous_source and previous_reference.seed_credit name the record
@@ -22953,6 +22990,7 @@ issues:
     - think-lyf9
     - think-hx0e
     - think-o4m0
+    - think-gn29
     answer_bead: think-ptkk
     replies:
     - url: https://github.com/jlevy/squares/issues/763#issuecomment-6384882980

@@ -28413,6 +28413,167 @@ occurrences:
   note: Reviewed 2026-10-25 (think-f8py) /credit span 18:22, the k2-minus-c README says novelty
     was checked against jlevy's register (packing/frontier/asymptotic-waste-bounds.yaml);
     project credit, not sole personal authorship.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo 43f666c 2026-10-24]'
+    field: /authors/0
+  expected_text: Couzo
+  start: 0
+  end: 5
+  label: Couzo
+  role: source-author
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - bibliography
+  contributor_id: francisco-couzo
+  note: 'Reviewed author byline: 43f666c is a commit to franciscouzo/square-packing by its
+    owner, whose index and manifest credit Francisco Couzo at every row, and the
+    couzo-43f666c-2026-10-24 packet retains the repository at 1c17153, the source of
+    every earlier Couzo key.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo 43f666c 2026-10-24]'
+    field: /credit
+  expected_text: Couzo after Lavrentev, Tymchishin, kyleluecke, alexchilton, aqibrazadev,
+    Polkovskyi, Levy
+  start: 0
+  end: 5
+  label: Couzo
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - bibliography
+  contributor_id: francisco-couzo
+  note: 'Reviewed source credit matches the evidenced person and printed name; the index and
+    manifest at 1c17153 credit Francisco Couzo (square-packing live search) at every
+    row, and the original credit role is retained.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo 43f666c 2026-10-24]'
+    field: /credit
+  expected_text: Couzo after Lavrentev, Tymchishin, kyleluecke, alexchilton, aqibrazadev,
+    Polkovskyi, Levy
+  start: 12
+  end: 21
+  label: Lavrentev
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: 'Reviewed packing/resources/bibliography.yaml [[Couzo 43f666c 2026-10-24]] /credit span
+    12:21: the source''s certified_bounds.json and manifest credit 74 of the 122 rows
+    as refinements of the packing of Vladislav Lavrentev (lightningv08), Kaggle
+    notebook "CUDA Packing Search" v11, the run the [Lavrentev CUDA Packing Search v11
+    2026-10-23] key cites. Identity review pending, as for that key''s byline.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo 43f666c 2026-10-24]'
+    field: /credit
+  expected_text: Couzo after Lavrentev, Tymchishin, kyleluecke, alexchilton, aqibrazadev,
+    Polkovskyi, Levy
+  start: 23
+  end: 33
+  label: Tymchishin
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: 'Reviewed packing/resources/bibliography.yaml [[Couzo 43f666c 2026-10-24]] /credit span
+    23:33: the source credits 40 of the 122 rows as refinements of packings of Kirill
+    Tymchishin (kirilltym), from his Kaggle notebooks "CPU Alternating Reclosure" v3
+    (38) and "22-3662-cpu-cuda-mps-eda-union" (2), the runs the keys #795 defined
+    cite. Identity review pending, as for those keys'' bylines.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo 43f666c 2026-10-24]'
+    field: /credit
+  expected_text: Couzo after Lavrentev, Tymchishin, kyleluecke, alexchilton, aqibrazadev,
+    Polkovskyi, Levy
+  start: 35
+  end: 45
+  label: kyleluecke
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: 'Reviewed packing/resources/bibliography.yaml [[Couzo 43f666c 2026-10-24]] /credit span
+    35:45: the source credits 3 of the 122 rows as refinements of the packings of the
+    Kaggle notebook "inos-v0-6-k-mosh-squares-in-squares-22-366222" of the account
+    kyleluecke, run 361592092, credited by the handle, the only name the source gives.
+    Identity review pending, as for the [kyleluecke inos 2026-10-23] byline.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo 43f666c 2026-10-24]'
+    field: /credit
+  expected_text: Couzo after Lavrentev, Tymchishin, kyleluecke, alexchilton, aqibrazadev,
+    Polkovskyi, Levy
+  start: 47
+  end: 58
+  label: alexchilton
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: 'Reviewed packing/resources/bibliography.yaml [[Couzo 43f666c 2026-10-24]] /credit span
+    47:58: the source credits 2 of the 122 rows as refinements of the packings of the
+    Kaggle notebook "fault-line-dp-basin-hopping-lb-22-3747" of the account
+    alexchilton, run 361412241, credited by the handle, the only name the source
+    gives. Identity review pending, as for the [alexchilton fault-line 2026-10-23]
+    byline.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo 43f666c 2026-10-24]'
+    field: /credit
+  expected_text: Couzo after Lavrentev, Tymchishin, kyleluecke, alexchilton, aqibrazadev,
+    Polkovskyi, Levy
+  start: 60
+  end: 71
+  label: aqibrazadev
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: 'Reviewed packing/resources/bibliography.yaml [[Couzo 43f666c 2026-10-24]] /credit span
+    60:71: the source credits 1 of the 122 rows as a refinement of the packing of the
+    Kaggle notebook "squares-in-squares-top-lb-blending-visualization" of the account
+    aqibrazadev, run 361516058, credited by the handle, the only name the source
+    gives. Identity review pending, as for the [aqibrazadev blending 2026-10-23]
+    byline.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo 43f666c 2026-10-24]'
+    field: /credit
+  expected_text: Couzo after Lavrentev, Tymchishin, kyleluecke, alexchilton, aqibrazadev,
+    Polkovskyi, Levy
+  start: 73
+  end: 83
+  label: Polkovskyi
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: mykhailo-polkovskyi
+  note: 'Reviewed packing/resources/bibliography.yaml [[Couzo 43f666c 2026-10-24]] /credit span
+    73:83: the source credits 508 as a refinement of the packing of Mykhailo
+    Polkovskyi (Mishapolk), whose #719 and #732 certificates the record holds. A chain
+    through an intermediate author retains the link.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo 43f666c 2026-10-24]'
+    field: /credit
+  expected_text: Couzo after Lavrentev, Tymchishin, kyleluecke, alexchilton, aqibrazadev,
+    Polkovskyi, Levy
+  start: 85
+  end: 89
+  label: Levy
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - announcement-account
+  contributor_id: joshua-levy
+  note: 'Reviewed /credit span 85:89: the source''s manifest at 1c17153 names this project''s
+    sqpack/verify.py as its first checker and compares with this project''s register.
+    The first-party jlevy/squares record is the Joshua Levy identity established by LICENSE
+    and the retained ojoshe receipt; project credit does not imply sole personal authorship.'
 inspections:
 - path: packing/resources/papers/addis-locatelli-schoen-2008-disk-packing-square.pdf
   status: pending
