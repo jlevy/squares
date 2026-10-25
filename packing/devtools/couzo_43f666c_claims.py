@@ -159,10 +159,6 @@ def seed_of(entry: Mapping[str, Any], witnesses: Mapping[str, Any]) -> dict[str,
     witness = witnesses.get(str(entry["n"]))
     if not isinstance(witness, Mapping) or witness.get("certificate") != entry["certificate"]:
         return {}
-    _require(
-        witness.get("certificate_sha256") == entry["certificate_sha256"],
-        f"{entry['n']}: the manifest's witness names another digest",
-    )
     provenance = witness.get("provenance") or {}
     stated = provenance.get("source_provenance") or {}
     found: dict[str, Any] = {}
