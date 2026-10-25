@@ -2548,7 +2548,14 @@ sources:
       minimality is a new property of those packings, which does not make their finders
       antecedents. The author is read from the retained LICENSE and CREDITS.md, which say
       the work was produced by Claude (Anthropic) under human direction. MIT-licensed.
-      Neither report is a bound.
+      Neither report is a bound. Evan Daniel, who posts on X as @evanbd, announced the s(29)
+      polynomial there on 13 October 2026 at 23:43:21Z
+      (https://x.com/evanbd/status/2110154454817448106): "I wish to present my new favorite
+      square packing problem: 29 squares. Not for the (currently best known) packing itself;
+      it's a bit messier than 17, but not unexpectedly so. But rather for the side length,
+      which is truly cursed."; the post is retained in the evand-exact-data-2026-10-12
+      packet's receipts/announcement/, and the thread's follow-ups say the work "was all done
+      by Claude".
   - key: '[Summins stratification series 2026-10-12]'
     authors: [Summins]
     year: 2026
