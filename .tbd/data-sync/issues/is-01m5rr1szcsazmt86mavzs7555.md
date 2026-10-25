@@ -5,7 +5,7 @@ title: "Import #806: Evan Daniel's s(182) <= 13.970916436215 (evand d99925d), 3.
 kind: task
 status: in_progress
 priority: 1
-version: 6
+version: 7
 delegate: c-import-806-1025
 labels:
   - result-import
@@ -16,7 +16,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-25T05:20:35.819Z
-updated_at: 2026-10-25T05:40:26.481Z
+updated_at: 2026-10-25T05:41:46.432Z
 started_at: 2026-10-25T05:20:59.792Z
 ---
 New 2026-10-25 issue https://github.com/jlevy/squares/issues/806 (evand, 04:16:24Z): s(182) <= 13.970916436215, the exact side of search/packer/candidates/s182-1024.cert at evand/square-packing d99925d1 (with .exact.txt KKT point, .input.txt, .json, _regularized.cert), 3.17e-3 below the register's 13.974090713122 (Couzo). In the case corpus (n <= 324): a register entry, stage 4 review and adoption under the house rule. Side-only Kaggle entries (Subramanya N, 2026-10-24 18:41 UTC, matching to 1.6e-11) are not reports. Also owns the read of evand/square-packing's 28 commits past the last read (head d99925d12982). Stage 1 triage read-only first.
@@ -31,3 +31,5 @@ New 2026-10-25 issue https://github.com/jlevy/squares/issues/806 (evand, 04:16:2
 - 28 commits: only d99925d holds a certificate; the rest are packer code, docs, deletions and private-store experiment notes (store bests only above 324, values private). Nothing else to import.
 - Next free T: T-243 (unless #804 registers first in report order). Draft S3.
 - Drafts: scratchpad/triage-806/drafts/ (result-requests-806.yaml validated by check_requests --record; intake-watch-read.yaml validated against schema; import-plan-806.yaml; ack-806.md; upper-bounds-issue806-20261025/).
+
+2026-10-25 ~06:10Z coord-intake-1024 on c-triage-2lzo-1025's report: #806's certificate is the only report below the house at 182 (3.174e-3 below T-174), a new arrangement (44 squares beyond 0.1), accepted on both routes at triage; the 28 evand commits hold nothing else to import. Plan: records lane c-import-806-1025 (wt-806, branch claude/intake-2026-10-25-issue806-n182) registers T-243 at V0/C0; stage 4 review c-review-806-math (think-meci, wt-rev806) runs in parallel; if accepted before the records are green, the same PR maps V3/C3 and adopts at 182 (25 Oct: 182 has not moved today), else a second PR. No owner question.
