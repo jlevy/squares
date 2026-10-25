@@ -97,7 +97,9 @@ The 831 above 1024 are recipes on 14 certificates (679 and 975 to 997).
 
 Each claim keeps the credit the index states, the packing the credit says it refines, and,
 for a certificate at its own count, the manifest’s seed credit and its `previous_source`.
-The credit and the seed credit agree at every row. `previous_source` names the record the
+The credit and the seed credit agree at all 106 certificates; the manifest states no seed
+credit for a recipe, so each of the 16 recipe rows carries the credit line the index
+states for it, which is its parent certificate’s at all 16. `previous_source` names the record the
 source’s catalogue held at the count before, not the packing the search started from, so
 the record keeps it as data and credits nothing by it.
 
