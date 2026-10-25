@@ -25,7 +25,7 @@ second implementation agrees.
 
 ## The Short Version
 
-- **206** programs: **52** external and **154** first-party; **138** decide claims and **68** check premises.
+- **209** programs: **52** external and **157** first-party; **141** decide claims and **68** check premises.
 - **599** of **760** evidence entries name the programs that verified them: 283 reproduced with the producer’s code, 260 independently re-implemented, 35 re-implemented, sharing the producer’s components, 21 no relation: a proof, a derivation or a report.
 
 ## Programs
@@ -238,6 +238,9 @@ second implementation agrees.
 | [`V-review-1023-n31-capture`](#v-review-1023-n31-capture) | capture.py | Squares Project (Levy) | first-party | decides | 1 | 0 |
 | [`V-review-1023-n31-poses`](#v-review-1023-n31-poses) | source_log_points.py | Squares Project (Levy) | first-party | decides | 1 | 0 |
 | [`V-couzo-763-review-check`](#v-couzo-763-review-check) | check_certificates.py | Squares Project (Levy) | first-party | decides | 1 | 1 |
+| [`V-fang-797-review-identities`](#v-fang-797-review-identities) | fang_a_identities.py | Squares Project (Levy) | first-party | decides | 0 | 0 |
+| [`V-fang-797-review-construction`](#v-fang-797-review-construction) | fang_a_review.py | Squares Project (Levy) | first-party | decides | 0 | 0 |
+| [`V-fang-797-review-comparisons`](#v-fang-797-review-comparisons) | fang_a_comparisons.py | Squares Project (Levy) | first-party | decides | 0 | 0 |
 
 ## By Program
 
@@ -4145,6 +4148,48 @@ The 24 October review's standard-library exact checker of the two certificates T
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
 | `E-couzo-763-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 2 of 2: the two certificates T-240 cites, at n = 268 and 303, every wall and every pair on route A, and every pair within the discs on route B | T-240 |
+
+### `V-fang-797-review-identities`
+
+**fang_a_identities.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+Decides symbolically, with sympy's simplification of rational functions to zero, every identity and polynomial inequality Kevin Fang's Theorem A note (v0.2) uses for every b, k and t: the band geometry (R1)-(R3) and (E1)-(E3), the closeness conditions at t0 = 1/b with 2b(b^2+1) delta_b = (b-1)(b^2-2b-1), the floor pairing of Lemma 2 (also on an exact rational grid with its ties), Lemma 3 as the polynomial identity bL - C_lower - RHS(2) = F(bc - 2 tau), the values at t0, H(1/b) = B(k), the final 6b^4 - b^3 - 2b^2 - b > 0, and the sharpness remark's expansion; 46 checks, and four mutated identities refused.
+
+- Source: [`packing/resources/web/fang-theorem-a-2026-10-24/review/review-2026-10-25/programs/fang_a_identities.py`](../../packing/resources/web/fang-theorem-a-2026-10-24/review/review-2026-10-25/programs/fang_a_identities.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`packing/resources/web/fang-theorem-a-2026-10-24/review/review-2026-10-25/README.md`](../../packing/resources/web/fang-theorem-a-2026-10-24/review/review-2026-10-25/README.md)
+- Independence: its authors read mathematics, proof-text, earlier-review; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review lane c-review-797-math of the #797 import (think-qmqq) for the intake pass coord-intake-1024, tbd-strong-max tier, maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, The note's acknowledgement says its construction code, checkers and certificates were written and run with Claude (Anthropic), directed and reviewed by Kevin Fang. Written by a Claude agent from a prompt of its own, in a file that imports nothing from the source or this repository.
+- Note: Written and run on 25 October 2026 by the stage 4 review of Kevin Fang's Theorem A; kept in the packet's review/review-2026-10-25/ with its README and receipts, whose outputs/program-digests.sha256 records the SHA-256 that ran (4fc91df0eae975160014929bccbe318f198f2d33114c4e578dfd6ae03322e2c3, unchanged since it decided).
+
+No evidence entry names it yet.
+
+### `V-fang-797-review-construction`
+
+**fang_a_review.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+Builds Kevin Fang's Theorem A construction (Ryu's L with both band ends filled by axis-parallel rows, odd b with |b - sqrt(2k)| <= 1) from the note in exact rationals and decides, at a close rational t for each (k, b), conditions (a)-(d), S < k, identity (1), Lemma 2 at all four ends, Lemma 3 for both bands, w < H(t) and w, H(t) and B(k) below 4 sqrt(2k) + 2; the one-sided limit count as t -> 1/b+ by exact power series; Lemmas 2 and 3 and (E2) at sampled close t, lifts and lengths; every square of chosen packings by exact separating axes, with mutants refused; the ties k = 2m^2; and the sharpness remark.
+
+- Source: [`packing/resources/web/fang-theorem-a-2026-10-24/review/review-2026-10-25/programs/fang_a_review.py`](../../packing/resources/web/fang-theorem-a-2026-10-24/review/review-2026-10-25/programs/fang_a_review.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`packing/resources/web/fang-theorem-a-2026-10-24/review/review-2026-10-25/README.md`](../../packing/resources/web/fang-theorem-a-2026-10-24/review/review-2026-10-25/README.md)
+- Independence: its authors read mathematics, proof-text, earlier-review; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review lane c-review-797-math of the #797 import (think-qmqq) for the intake pass coord-intake-1024, tbd-strong-max tier, maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, The note's acknowledgement says its construction code, checkers and certificates were written and run with Claude (Anthropic), directed and reviewed by Kevin Fang. Written by a Claude agent from a prompt of its own, in a file that imports nothing from the source or this repository.
+- Note: Written and run on 25 October 2026 by the stage 4 review of Kevin Fang's Theorem A; kept in the packet's review/review-2026-10-25/ with its README and receipts. SHA-256 that ran: 6b0e079306dad85d239e46aa5bfdebcfffbbd9506800172febc71c5dc8c721bf, unchanged since it decided.
+
+No evidence entry names it yet.
+
+### `V-fang-797-review-comparisons`
+
+**fang_a_comparisons.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic, numerical-multiprecision
+
+Decides in integers, one k at a time with the tail lemmas it prints, the comparisons of Fang's Theorem A note (Section 7 and the abstract) with Evan Daniel's 4 ceil(sqrt(2k-7)) - 1, Ryu's Theorems 1.3 (at its best b), 1.4, 1.2 and 1.6 and T-163, and the register's count of k at which Theorem A is strictly the least statement in [42, 702000]. Daniel's k^{2/5} bound and Ryu's Theorem 1.2, which have real constants, are evaluated in mpmath at 50 digits, refused within 1e-30 of an integer, and exactly at perfect fifth powers.
+
+- Source: [`packing/resources/web/fang-theorem-a-2026-10-24/review/review-2026-10-25/programs/fang_a_comparisons.py`](../../packing/resources/web/fang-theorem-a-2026-10-24/review/review-2026-10-25/programs/fang_a_comparisons.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`packing/resources/web/fang-theorem-a-2026-10-24/review/review-2026-10-25/README.md`](../../packing/resources/web/fang-theorem-a-2026-10-24/review/review-2026-10-25/README.md)
+- Independence: its authors read mathematics, proof-text, earlier-review; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review lane c-review-797-math of the #797 import (think-qmqq) for the intake pass coord-intake-1024, tbd-strong-max tier, maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, The note's acknowledgement says its construction code, checkers and certificates were written and run with Claude (Anthropic). Written by a Claude agent from a prompt of its own, in a file that imports nothing from the source or this repository.
+- Note: Written and run on 25 October 2026 by the stage 4 review of Kevin Fang's Theorem A; kept in the packet's review/review-2026-10-25/. SHA-256 that ran for the retained receipt: 0e3a7d566a568f2c09d73892f877f5ea2f63b1e38b838a53a48e507a1e786031.
+
+No evidence entry names it yet.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

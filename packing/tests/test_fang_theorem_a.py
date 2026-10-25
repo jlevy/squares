@@ -13,7 +13,7 @@ import pytest
 from cases.asymptotic import fang_theorem_a as theorem
 
 
-def test_the_bound_lemma_two_and_the_limit_hold_on_a_range() -> None:
+def test_the_bound_lemma_three_and_the_limit_hold_on_a_range() -> None:
     checks = theorem.check_bound(6, 1500)
     assert all(check.holds for check in checks), [c for c in checks if not c.holds]
     assert checks[0].value.startswith("1521 (k, b) decided")

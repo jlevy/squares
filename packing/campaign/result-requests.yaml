@@ -23645,37 +23645,47 @@ issues:
       Kevin Fang reports Theorem A: for every integer k >= 6, k^2 - ceil(sqrt(32k)) - 1 unit
       squares fit in a square of side less than k, so c*(k) < 4 sqrt(2k) + 1 and
       c*(k) <= ceil(sqrt(32k)). The packing is Sungjoon Ryu's L (his Theorem 1.3) with both
-      ends of each band filled by axis-parallel rows and b the odd integer nearest
-      sqrt(2k), proved in a 5-page note. The source is theorem-a/ in
+      ends of each band filled by axis-parallel rows and an odd band width b with
+      |b - sqrt(2k)| <= 1, proved in a 5-page note. The source is theorem-a/ in
       TheSnakeFang/squarepack-certs: the issue pins b1b3f6b; the head db1ed62 holds the same
       code and certificates and note v0.2 (Zenodo 10.5281/zenodo.23624565), which credits
       Evan Daniel's earlier c*(k) <= 4 ceil(sqrt(2k - 7)) - 1 (evand/square-packing aa12b98,
       18 October, in Lean) and withdraws v0.1's claim to be the smallest explicit bound. The
       author's comment of 19:08Z says the same and offers withdrawal or a second-proof
-      record. It settles no count n <= 324 and moves no beyond-horizon row, so the result
-      register has no applicable scope. Imported on 25 October 2026: the
-      fang-theorem-a-2026-10-24 packet retains theorem-a/ at db1ed62 with both Zenodo
-      records; Theorem A is a reported row of the asymptotic register, credited after Daniel's
-      row, which the same change records; the maintained cases/asymptotic/fang_theorem_a.py,
-      written from the note, decides the bound at every k from 6 to 60,000 and the full
-      layout at k = 6 to 40 and 101; and the 36 shipped certificates were replayed on both
-      maintained exact routes with their controls. Claude assistance disclosed.
-    read_through: '2026-10-24T19:08:49Z'
+      record; his comment of 00:49Z on 25 October corrects its comparison: the two bounds
+      are within 2 of each other for k >= 89, and below that Daniel's is smaller by 3 to 5
+      at 17 values of k, as the record and the review also find. It settles no count
+      n <= 324 and moves no beyond-horizon row, so the result register has no applicable
+      scope. Imported on 25 October 2026: the fang-theorem-a-2026-10-24 packet retains
+      theorem-a/ at db1ed62 with both Zenodo records; Theorem A is a reported row of the
+      asymptotic register, credited after Daniel's row, which the same change records; the
+      maintained cases/asymptotic/fang_theorem_a.py, written from the note, decides the
+      bound at every k from 6 to 60,000 and the full layout at k = 6 to 40 and 101; and the
+      36 shipped certificates were replayed on both maintained exact routes with their
+      controls. The stage 4 review of 25 October 2026
+      (docs/project/reviews/review-2026-10-25-fang-theorem-a.md) re-derived the proof and
+      accepted it with findings, none blocking or major, and its programs, an independent
+      clean-room re-implementation from the note, decided the bound at every k from 6 to
+      250,000; the row records the review. Claude assistance disclosed.
+    read_through: '2026-10-25T00:49:19Z'
     results:
     - key: theorem-a
       claim: >-
         For every integer k >= 6, w(k) < 4 sqrt(2k) + 2, so c*(k) < 4 sqrt(2k) + 1,
         c*(k) <= ceil(sqrt(32k)), and s(n) < k for every n <= k^2 - ceil(sqrt(32k)) - 1:
         Ryu's L-shaped packing with row-filled band ends (lift 0 at one end, the whole free
-        length at the other) and odd band width b with |b - sqrt(2k)| <= 1, Lemmas 1 and 2
+        length at the other) and odd band width b with |b - sqrt(2k)| <= 1, Lemmas 2 and 3
         and the proof of Theorem A in theorem-a/note/main.tex at db1ed62 (v0.2; unchanged
-        mathematics since b1b3f6b).
+        mathematics since b1b3f6b). The issue calls the lemmas 1 and 2; the note prints
+        them as Lemmas 2 and 3 and Theorem A as Theorem 1.
       source: body
       not_registered: >-
         Recorded as reported in frontier/asymptotic-waste-bounds.yaml
         (deficiency_upper_bounds), a row of its own credited as an independent second proof
-        after Evan Daniel's earlier bound, the row before it; it settles no count n <= 324,
-        so the result register has no applicable scope.
+        after Evan Daniel's earlier bound, the row before it, and its proof re-derived in
+        the stage 4 review of 25 October 2026, which accepted it with findings, none blocking
+        or major; it settles no count n <= 324, so the result register has no applicable
+        scope.
       queued: false
     - key: certificates
       claim: >-
@@ -23710,10 +23720,46 @@ issues:
       note: >-
         Recorded as a reported row of its own, credited after Daniel's earlier row: per k
         neither integer bound is always the smaller.
+    awaiting_author:
+    - question: >-
+        Will you publish the optimized constructions of section 6 as certificates: the
+        waste of at most 4 sqrt(2k) + 1.18 for 15 <= k <= 300, the 9,946 squares below side
+        100, and the gains at k = 25, 30 and 40?
+      changes: file
+      asked: https://github.com/jlevy/squares/issues/797#issuecomment-6392638719
+      state: withdrawn
+      note: >-
+        Withdrawn when recorded, on 25 October 2026 (coord-intake-1024): informational under
+        the record's question rule. The record asserts only that the constructions are
+        stated in the note's prose without certificates and are not registered; an answer
+        would bring certificates to import, and could falsify no credit, lineage or file
+        the record names. It goes in the closing comment, where an answer is still welcome
+        and holds nothing open.
+    - question: >-
+        Would you publish the k = 300 and 600 certificates, for example on the Zenodo
+        record, so that they can be checked without rebuilding them?
+      changes: file
+      asked: https://github.com/jlevy/squares/issues/797#issuecomment-6392638719
+      state: withdrawn
+      note: >-
+        Withdrawn when recorded, on 25 October 2026 (coord-intake-1024): informational under
+        the record's question rule. The record keeps their SHA-256 in LARGE.sha256 as the
+        author's statement and asserts nothing more of them, and a measurement here, a
+        rebuild with regenerate.sh at about 1 to 2 CPU-hours, could settle the digests. It
+        goes in the closing comment, where an answer is still welcome and holds nothing
+        open.
     beads:
     - think-4tj5
     answer_bead: think-4tj5
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/797#issuecomment-6392638719
+      date: '2026-10-25'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: theorem-a
+      - result: certificates
+      - result: optimized-constructions
     close_when: >-
       The reported row and its credit to Evan Daniel's earlier bound are on main, the
       replay and review disposition are recorded, and the reply that reports them is posted.

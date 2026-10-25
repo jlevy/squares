@@ -12,17 +12,19 @@ a bound of the same strength first, c*(k) <= 4 ceil(sqrt(2k - 7)) - 1, in Lean.
 
 This module was written from the note's Sections 2 to 5, not from the source's
 ``lband.py`` or any other program of the source, which it never reads. Everything is
-exact, in integers and ``Fraction``; a square root is compared by squaring. It decides:
+exact, in integers and ``Fraction``; a square root is compared by squaring. Theorem and
+lemma numbers are the note's as printed: Theorem A is its Theorem 1, Lemma 2 fills a band
+end and Lemma 3 bounds a band (finding N-2 of the review of 25 October 2026). It decides:
 
 - **the bound** (`check_bound`): for every k of a range and every odd b with
   |b - sqrt(2k)| <= 1, a rational t = 1/b + eps that is *close* (conditions (a) to (d) of
   Section 4) and has H(t) < 4 sqrt(2k) + 2, where H(t) is b(k - S) plus the two right sides
-  of Lemma 2; then that the construction's count N gives w = k^2 - N < 4 sqrt(2k) + 2,
-  that w < H(t) (Lemma 2 with equation (1)), and that the limit B(k) of H(t) as t -> 1/b
+  of Lemma 3; then that the construction's count N gives w = k^2 - N < 4 sqrt(2k) + 2,
+  that w < H(t) (Lemma 3 with equation (1)), and that the limit B(k) of H(t) as t -> 1/b
   is below 4 sqrt(2k) + 2;
 - **the tail** (`check_identities`): what makes B(k) < 4 sqrt(2k) + 2 hold at every k, the
   identity b(b^2 + 1)^2 (kappa_b - 1/b - 1/(b^2 + 1)) = 6b^4 - b^3 - 2b^2 - b and the
-  positivity of its right side for b >= 1, Lemma 2's value at t0 = 1/b, and the strict
+  positivity of its right side for b >= 1, Lemma 3's value at t0 = 1/b, and the strict
   closeness at t0 (delta_b in (0, 1) and 2 tau_0 - b c_0 > 0 for odd b >= 3). Each identity
   is between polynomials of bounded degree in b and L, decided at more points than the
   degree; with 4kb/(b^2 + 1) < 4k/b and 4k/b + 2b = 4 sqrt(2k) + (2/b)(b - sqrt(2k))^2, they
@@ -215,8 +217,8 @@ class Band:
         count, free = self.rows(length)
         return self.b * count + sum(self.levels(Fraction(0))) + sum(self.levels(free))
 
-    def lemma_two(self, length: Fraction) -> Fraction:
-        """The right side of Lemma 2: bL(1 - c) + bch - 2b + 2 - 2(W - s - 2 tau) + 2 eta."""
+    def lemma_three(self, length: Fraction) -> Fraction:
+        """The right side of Lemma 3: bL(1 - c) + bch - 2b + 2 - 2(W - s - 2 tau) + 2 eta."""
         b, c = self.b, self.c
         return (
             b * length * (1 - c)
@@ -241,15 +243,15 @@ def limit(k: int, b: int) -> Fraction:
 
 
 def lemma_bound(k: int, b: int, t: Fraction) -> Fraction:
-    """H(t): b(k - S) plus the right sides of Lemma 2 for the bands of length S and k - b."""
+    """H(t): b(k - S) plus the right sides of Lemma 3 for the bands of length S and k - b."""
     band = Band(b, t)
     side = k - b + band.width
-    return b * (k - side) + band.lemma_two(side) + band.lemma_two(Fraction(k - b))
+    return b * (k - side) + band.lemma_three(side) + band.lemma_three(Fraction(k - b))
 
 
 @dataclass(frozen=True)
 class Construction:
-    """The packing at one (k, b, t): its side, count, waste and Lemma 2's bound H(t)."""
+    """The packing at one (k, b, t): its side, count, waste and Lemma 3's bound H(t)."""
 
     k: int
     b: int
@@ -296,7 +298,7 @@ def best(k: int) -> Construction:
 def check_bound(
     first: int, last: int, inequalities: int = NOTE_INEQUALITIES
 ) -> tuple[Check, ...]:
-    """The theorem's bound, Lemma 2 and B(k) for every k in [first, last] and every b."""
+    """The theorem's bound, Lemma 3 and B(k) for every k in [first, last] and every b."""
     bound: list[tuple[int, int, int]] = []
     lemma: list[tuple[int, int]] = []
     limits: list[tuple[int, int]] = []
@@ -336,12 +338,12 @@ def check_bound(
         ),
         Check(
             f"w < H(t) at a close t, {span}",
-            "Lemma 2 and equation (1)",
+            "Lemma 3 and equation (1)",
             not lemma,
             f"failures {lemma[:5] or 'none'}",
         ),
         Check(
-            f"B(k) = H(1/b), the value of Lemma 2's bound at t0, {span}",
+            f"B(k) = H(1/b), the value of Lemma 3's bound at t0, {span}",
             "proof of Theorem A",
             not unequal,
             f"failures {unequal[:5] or 'none'}",
@@ -377,9 +379,9 @@ def identity_sides(b: int) -> tuple[Fraction, int]:
     return left, 6 * b**4 - b**3 - 2 * b * b - b
 
 
-def lemma_two_at_t0(b: int, length: Fraction) -> tuple[Fraction, Fraction]:
-    """Lemma 2's right side at t0 = 1/b, and the closed form 2bL/(b^2+1) + b + 2 - kappa_b."""
-    return Band(b, Fraction(1, b)).lemma_two(length), (
+def lemma_three_at_t0(b: int, length: Fraction) -> tuple[Fraction, Fraction]:
+    """Lemma 3's right side at t0 = 1/b, and the closed form 2bL/(b^2+1) + b + 2 - kappa_b."""
+    return Band(b, Fraction(1, b)).lemma_three(length), (
         Fraction(2 * b, b * b + 1) * length + b + 2 - kappa(b)
     )
 
@@ -397,7 +399,7 @@ def check_identities(widths: Iterable[int] = range(3, 41, 2)) -> tuple[Check, ..
         (b, length)
         for b in chosen
         for length in (Fraction(0), Fraction(7, 3))
-        if lemma_two_at_t0(b, length)[0] != lemma_two_at_t0(b, length)[1]
+        if lemma_three_at_t0(b, length)[0] != lemma_three_at_t0(b, length)[1]
     ]
     strict: list[int] = []
     for b in chosen:
@@ -429,8 +431,8 @@ def check_identities(widths: Iterable[int] = range(3, 41, 2)) -> tuple[Check, ..
             "b^3 + 2b^2 + b <= 4b^4 for b >= 1",
         ),
         Check(
-            "Lemma 2's right side at t0 is 2bL/(b^2+1) + b + 2 - kappa_b",
-            "Lemma 2",
+            "Lemma 3's right side at t0 is 2bL/(b^2+1) + b + 2 - kappa_b",
+            "Lemma 3",
             len(chosen) >= 8 and not values,
             f"failures {values or 'none'}",
         ),

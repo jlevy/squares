@@ -7,14 +7,14 @@
   "passed": true,
   "checks": [
     {"name":"w(k) < 4 sqrt(2k) + 2 at every odd b with |b - sqrt(2k)| <= 1, 6 <= k <= 60000","pinpoint":"Theorem A","holds":true,"value":"60167 (k, b) decided, failures none; two widths at 172 k"},
-    {"name":"w < H(t) at a close t, 6 <= k <= 60000","pinpoint":"Lemma 2 and equation (1)","holds":true,"value":"failures none"},
-    {"name":"B(k) = H(1/b), the value of Lemma 2's bound at t0, 6 <= k <= 60000","pinpoint":"proof of Theorem A","holds":true,"value":"failures none"},
+    {"name":"w < H(t) at a close t, 6 <= k <= 60000","pinpoint":"Lemma 3 and equation (1)","holds":true,"value":"failures none"},
+    {"name":"B(k) = H(1/b), the value of Lemma 3's bound at t0, 6 <= k <= 60000","pinpoint":"proof of Theorem A","holds":true,"value":"failures none"},
     {"name":"B(k) < 4 sqrt(2k) + 2, 6 <= k <= 60000","pinpoint":"proof of Theorem A","holds":true,"value":"failures none"},
     {"name":"least B(k) - w for k <= 20000","pinpoint":"Section 6","holds":true,"value":"8019401/78023840599 at k = 19705"},
     {"name":"least B(k) - w, 6 <= k <= 60000","pinpoint":"Section 6","holds":true,"value":"41480557/1221920023305 at k = 59344, b = 345"},
     {"name":"b(b^2+1)^2 (kappa_b - 1/b - 1/(b^2+1)) = 6b^4 - b^3 - 2b^2 - b, at 19 odd b","pinpoint":"proof of Theorem A","holds":true,"value":"failures none"},
     {"name":"6b^4 - b^3 - 2b^2 - b > 0 for every b >= 1: it is at least 6b^4 - 4b^4","pinpoint":"proof of Theorem A","holds":true,"value":"b^3 + 2b^2 + b <= 4b^4 for b >= 1"},
-    {"name":"Lemma 2's right side at t0 is 2bL/(b^2+1) + b + 2 - kappa_b","pinpoint":"Lemma 2","holds":true,"value":"failures none"},
+    {"name":"Lemma 3's right side at t0 is 2bL/(b^2+1) + b + 2 - kappa_b","pinpoint":"Lemma 3","holds":true,"value":"failures none"},
     {"name":"(a)-(d) hold strictly at t0: delta_b in (0, 1), eta_0 = 1/(2b), 2 tau_0 - b c_0 = (b^2-1)/(b(b^2+1)), h_0 < 3","pinpoint":"Section 4","holds":true,"value":"failures none; b^3 - 3b^2 + b + 1 > 0 for b >= 3"},
     {"name":"every square inside [0, S]^2, S < k, no two interiors meeting, count = N","pinpoint":"Sections 2 and 3","holds":true,"value":"39 packings laid out exactly; failures none"},
     {"name":"three mutated packings refused","pinpoint":"controls","holds":true,"value":"75 mutants decided; accepted none"},
@@ -65,5 +65,5 @@
     {"k":600,"b":35,"waste":140,"theorem_a":139}
   ],
   "python": "3.14.7",
-  "cpu_seconds": 46.1
+  "cpu_seconds": 45.6
 }
