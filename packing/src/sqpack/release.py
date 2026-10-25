@@ -9221,6 +9221,16 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "Measured a fourth time after T-245's citation of its statement audit "
             "(results.yaml), at link revision bfacba5a against the same main, swapped the "
             "same way: 51 files each, all byte-identical across the three. "
+            "Main 46e355582 (#814) then registered T-243 at 182 and took the explainer's "
+            "v0.4.28, and #813 holds T-244, so the merge of that main renumbered this "
+            "branch's two results, registered here as T-243 and T-244 until then, T-245 "
+            "and T-246, and the explainer, counting 243 to 245 results, takes v0.4.29 over "
+            "main's v0.4.28. Measured a fifth time after that merge, at link revision "
+            "ab33e3bd against main 46e355582, with that main's result-requests.yaml, "
+            "ctjlewis.md, evan-daniel.md, manasseh-ahmed.md, check_results.py, "
+            "site_resources.py, n-029.md, results.yaml and source-coverage.yaml swapped in "
+            "and jatloe.md removed: twice from this tree and once swapped, 51 files each, "
+            "all byte-identical across the three. "
             "Retain v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
