@@ -1,0 +1,764 @@
+{
+ "format": "beyond-horizon-watched-release-v1",
+ "publication": "https://github.com/franciscouzo/square-packing/tree/43f666c23933fbc5cc418fa4e851218268fed0ed",
+ "commit": "43f666c23933fbc5cc418fa4e851218268fed0ed",
+ "committed": "2026-10-24T00:55:44Z",
+ "published": "2026-10-24T06:10:44Z",
+ "walk": "upper-bounds-couzo-43f666c-20261024",
+ "rows": [
+  {
+   "n": 330,
+   "certificate": "certificates/best/n330.cert",
+   "printed": "18.692388155429"
+  },
+  {
+   "n": 340,
+   "certificate": "certificates/best/n340.cert",
+   "printed": "18.926898900361"
+  },
+  {
+   "n": 371,
+   "certificate": "certificates/best/n371.cert",
+   "printed": "19.778174593057"
+  },
+  {
+   "n": 372,
+   "certificate": "certificates/best/n372.cert",
+   "printed": "19.806121548578"
+  },
+  {
+   "n": 376,
+   "certificate": "certificates/best/n376.cert",
+   "printed": "19.890228421694"
+  },
+  {
+   "n": 377,
+   "certificate": "certificates/best/n377.cert",
+   "printed": "19.909958295503"
+  },
+  {
+   "n": 403,
+   "certificate": "certificates/best/n403.cert",
+   "printed": "20.571428571433"
+  },
+  {
+   "n": 405,
+   "certificate": "certificates/best/n405.cert",
+   "printed": "20.645753256126"
+  },
+  {
+   "n": 411,
+   "certificate": "certificates/best/n411.cert",
+   "printed": "20.795693819960"
+  },
+  {
+   "n": 412,
+   "certificate": "certificates/best/n412.cert",
+   "printed": "20.822875655538"
+  },
+  {
+   "n": 415,
+   "certificate": "certificates/best/n415.cert",
+   "printed": "20.872029849087"
+  },
+  {
+   "n": 416,
+   "certificate": "certificates/best/n416.cert",
+   "printed": "20.889675804154"
+  },
+  {
+   "n": 417,
+   "certificate": "certificates/best/n417.cert",
+   "printed": "20.904742825318"
+  },
+  {
+   "n": 444,
+   "certificate": "certificates/best/n403.cert",
+   "printed": "21.571428571433",
+   "recipe": {
+    "kind": "square tiling and L-border",
+    "source_n": 403,
+    "tiles_per_side": 1,
+    "layers": 1,
+    "capacity": 444,
+    "bound": "103113564926157445093866607967/4780099036311000000000000000",
+    "sha256": "4320fc75c5ce1329fcca1c51b39219a065dfb44036e5b9dea655a39417c95d56"
+   }
+  },
+  {
+   "n": 447,
+   "certificate": "certificates/best/n447.cert",
+   "printed": "21.656854249500"
+  },
+  {
+   "n": 451,
+   "certificate": "certificates/best/n451.cert",
+   "printed": "21.756097560981"
+  },
+  {
+   "n": 453,
+   "certificate": "certificates/best/n453.cert",
+   "printed": "21.808663234395"
+  },
+  {
+   "n": 455,
+   "certificate": "certificates/best/n455.cert",
+   "printed": "21.825061500487"
+  },
+  {
+   "n": 456,
+   "certificate": "certificates/best/n456.cert",
+   "printed": "21.860400549171"
+  },
+  {
+   "n": 458,
+   "certificate": "certificates/best/n458.cert",
+   "printed": "21.889909897514"
+  },
+  {
+   "n": 459,
+   "certificate": "certificates/best/n459.cert",
+   "printed": "21.905182432783"
+  },
+  {
+   "n": 463,
+   "certificate": "certificates/best/n463.cert",
+   "printed": "21.970185423250"
+  },
+  {
+   "n": 487,
+   "certificate": "certificates/best/n403.cert",
+   "printed": "22.571428571433",
+   "recipe": {
+    "kind": "square tiling and L-border",
+    "source_n": 403,
+    "tiles_per_side": 1,
+    "layers": 2,
+    "capacity": 487,
+    "bound": "107893663962468445093866607967/4780099036311000000000000000",
+    "sha256": "4320fc75c5ce1329fcca1c51b39219a065dfb44036e5b9dea655a39417c95d56"
+   }
+  },
+  {
+   "n": 488,
+   "certificate": "certificates/best/n488.cert",
+   "printed": "22.591378145503"
+  },
+  {
+   "n": 501,
+   "certificate": "certificates/best/n501.cert",
+   "printed": "22.880960371562"
+  },
+  {
+   "n": 502,
+   "certificate": "certificates/best/n502.cert",
+   "printed": "22.892030646456"
+  },
+  {
+   "n": 504,
+   "certificate": "certificates/best/n504.cert",
+   "printed": "22.925114765344"
+  },
+  {
+   "n": 506,
+   "certificate": "certificates/best/n506.cert",
+   "printed": "22.952939819366"
+  },
+  {
+   "n": 508,
+   "certificate": "certificates/best/n508.cert",
+   "printed": "22.982358327677"
+  },
+  {
+   "n": 509,
+   "certificate": "certificates/best/n509.cert",
+   "printed": "22.992979579252"
+  },
+  {
+   "n": 546,
+   "certificate": "certificates/best/n546.cert",
+   "printed": "23.870013850411"
+  },
+  {
+   "n": 583,
+   "certificate": "certificates/best/n583.cert",
+   "printed": "24.656854249498"
+  },
+  {
+   "n": 592,
+   "certificate": "certificates/best/n592.cert",
+   "printed": "24.824721479650"
+  },
+  {
+   "n": 593,
+   "certificate": "certificates/best/n593.cert",
+   "printed": "24.851666731961"
+  },
+  {
+   "n": 594,
+   "certificate": "certificates/best/n594.cert",
+   "printed": "24.877824614688"
+  },
+  {
+   "n": 596,
+   "certificate": "certificates/best/n596.cert",
+   "printed": "24.888197391546"
+  },
+  {
+   "n": 604,
+   "certificate": "certificates/best/n604.cert",
+   "printed": "24.996827861695"
+  },
+  {
+   "n": 629,
+   "certificate": "certificates/best/n629.cert",
+   "printed": "25.583782191638"
+  },
+  {
+   "n": 632,
+   "certificate": "certificates/best/n583.cert",
+   "printed": "25.656854249498",
+   "recipe": {
+    "kind": "square tiling and L-border",
+    "source_n": 583,
+    "tiles_per_side": 1,
+    "layers": 1,
+    "capacity": 632,
+    "bound": "247722617348812803432181874111/9655221756333000000000000000",
+    "sha256": "dc90a6be0eb44627abbe4a2e660dd45233a45d9a43782e611e9faaed3d865296"
+   }
+  },
+  {
+   "n": 637,
+   "certificate": "certificates/best/n637.cert",
+   "printed": "25.769289510287"
+  },
+  {
+   "n": 641,
+   "certificate": "certificates/best/n641.cert",
+   "printed": "25.823330269068"
+  },
+  {
+   "n": 649,
+   "certificate": "certificates/best/n649.cert",
+   "printed": "25.939670792893"
+  },
+  {
+   "n": 650,
+   "certificate": "certificates/best/n650.cert",
+   "printed": "25.955983899813"
+  },
+  {
+   "n": 653,
+   "certificate": "certificates/best/n653.cert",
+   "printed": "25.991128755422"
+  },
+  {
+   "n": 679,
+   "certificate": "certificates/best/n679.cert",
+   "printed": "26.535533905939"
+  },
+  {
+   "n": 680,
+   "certificate": "certificates/best/n680.cert",
+   "printed": "26.571428571435"
+  },
+  {
+   "n": 683,
+   "certificate": "certificates/best/n583.cert",
+   "printed": "26.656854249498",
+   "recipe": {
+    "kind": "square tiling and L-border",
+    "source_n": 583,
+    "tiles_per_side": 1,
+    "layers": 2,
+    "capacity": 683,
+    "bound": "257377839105145803432181874111/9655221756333000000000000000",
+    "sha256": "dc90a6be0eb44627abbe4a2e660dd45233a45d9a43782e611e9faaed3d865296"
+   }
+  },
+  {
+   "n": 684,
+   "certificate": "certificates/best/n684.cert",
+   "printed": "26.656854249498"
+  },
+  {
+   "n": 689,
+   "certificate": "certificates/best/n689.cert",
+   "printed": "26.774735132395"
+  },
+  {
+   "n": 691,
+   "certificate": "certificates/best/n691.cert",
+   "printed": "26.786715806974"
+  },
+  {
+   "n": 692,
+   "certificate": "certificates/best/n692.cert",
+   "printed": "26.817577259867"
+  },
+  {
+   "n": 693,
+   "certificate": "certificates/best/n693.cert",
+   "printed": "26.824724219783"
+  },
+  {
+   "n": 696,
+   "certificate": "certificates/best/n696.cert",
+   "printed": "26.878730119727"
+  },
+  {
+   "n": 697,
+   "certificate": "certificates/best/n697.cert",
+   "printed": "26.888197389255"
+  },
+  {
+   "n": 702,
+   "certificate": "certificates/best/n702.cert",
+   "printed": "26.948221671718"
+  },
+  {
+   "n": 706,
+   "certificate": "certificates/best/n706.cert",
+   "printed": "26.995398008083"
+  },
+  {
+   "n": 732,
+   "certificate": "certificates/best/n679.cert",
+   "printed": "27.535533905939",
+   "recipe": {
+    "kind": "square tiling and L-border",
+    "source_n": 679,
+    "tiles_per_side": 1,
+    "layers": 1,
+    "capacity": 732,
+    "bound": "198350601633319353844073274581/7203441281033000000000000000",
+    "sha256": "7095162f352b6b1be00bba7b1fcb5f22c041f6be7a104181dfed3b39956ef883"
+   }
+  },
+  {
+   "n": 733,
+   "certificate": "certificates/best/n680.cert",
+   "printed": "27.571428571435",
+   "recipe": {
+    "kind": "square tiling and L-border",
+    "source_n": 680,
+    "tiles_per_side": 1,
+    "layers": 1,
+    "capacity": 733,
+    "bound": "157959819064255976474163688699/5729112608547000000000000000",
+    "sha256": "bda449b0a93cc0aa7f0458dae75288a58367e7544d205a6fb2ee73eed893e682"
+   }
+  },
+  {
+   "n": 737,
+   "certificate": "certificates/best/n684.cert",
+   "printed": "27.656854249498",
+   "recipe": {
+    "kind": "square tiling and L-border",
+    "source_n": 684,
+    "tiles_per_side": 1,
+    "layers": 1,
+    "capacity": 737,
+    "bound": "12210519090467614158179229173/441500648639000000000000000",
+    "sha256": "04c209e21ebd8c962febe0bad9662eb30635a26dd29de2f3bfdd48d8a8dff427"
+   }
+  },
+  {
+   "n": 738,
+   "certificate": "certificates/best/n738.cert",
+   "printed": "27.691283629524"
+  },
+  {
+   "n": 742,
+   "certificate": "certificates/best/n742.cert",
+   "printed": "27.764050051550"
+  },
+  {
+   "n": 744,
+   "certificate": "certificates/best/n691.cert",
+   "printed": "27.786715806974",
+   "recipe": {
+    "kind": "square tiling and L-border",
+    "source_n": 691,
+    "tiles_per_side": 1,
+    "layers": 1,
+    "capacity": 744,
+    "bound": "805842429025135122613262007/29000995822000000000000000",
+    "sha256": "3cdba4baede1d8a53f2927ab165ed65c36e22a27170cf7e60f644772140db561"
+   }
+  },
+  {
+   "n": 745,
+   "certificate": "certificates/best/n745.cert",
+   "printed": "27.793823491120"
+  },
+  {
+   "n": 746,
+   "certificate": "certificates/best/n746.cert",
+   "printed": "27.803053268083"
+  },
+  {
+   "n": 748,
+   "certificate": "certificates/best/n748.cert",
+   "printed": "27.844000201738"
+  },
+  {
+   "n": 751,
+   "certificate": "certificates/best/n751.cert",
+   "printed": "27.888197382779"
+  },
+  {
+   "n": 752,
+   "certificate": "certificates/best/n752.cert",
+   "printed": "27.898203035527"
+  },
+  {
+   "n": 754,
+   "certificate": "certificates/best/n754.cert",
+   "printed": "27.920422831462"
+  },
+  {
+   "n": 755,
+   "certificate": "certificates/best/n755.cert",
+   "printed": "27.931358508016"
+  },
+  {
+   "n": 756,
+   "certificate": "certificates/best/n756.cert",
+   "printed": "27.949602638227"
+  },
+  {
+   "n": 757,
+   "certificate": "certificates/best/n757.cert",
+   "printed": "27.956115722042"
+  },
+  {
+   "n": 759,
+   "certificate": "certificates/best/n759.cert",
+   "printed": "27.975659133684"
+  },
+  {
+   "n": 761,
+   "certificate": "certificates/best/n761.cert",
+   "printed": "27.998784458401"
+  },
+  {
+   "n": 787,
+   "certificate": "certificates/best/n679.cert",
+   "printed": "28.535533905939",
+   "recipe": {
+    "kind": "square tiling and L-border",
+    "source_n": 679,
+    "tiles_per_side": 1,
+    "layers": 2,
+    "capacity": 787,
+    "bound": "205554042914352353844073274581/7203441281033000000000000000",
+    "sha256": "7095162f352b6b1be00bba7b1fcb5f22c041f6be7a104181dfed3b39956ef883"
+   }
+  },
+  {
+   "n": 788,
+   "certificate": "certificates/best/n680.cert",
+   "printed": "28.571428571435",
+   "recipe": {
+    "kind": "square tiling and L-border",
+    "source_n": 680,
+    "tiles_per_side": 1,
+    "layers": 2,
+    "capacity": 788,
+    "bound": "163688931672802976474163688699/5729112608547000000000000000",
+    "sha256": "bda449b0a93cc0aa7f0458dae75288a58367e7544d205a6fb2ee73eed893e682"
+   }
+  },
+  {
+   "n": 792,
+   "certificate": "certificates/best/n684.cert",
+   "printed": "28.656854249498",
+   "recipe": {
+    "kind": "square tiling and L-border",
+    "source_n": 684,
+    "tiles_per_side": 1,
+    "layers": 2,
+    "capacity": 792,
+    "bound": "12652019739106614158179229173/441500648639000000000000000",
+    "sha256": "04c209e21ebd8c962febe0bad9662eb30635a26dd29de2f3bfdd48d8a8dff427"
+   }
+  },
+  {
+   "n": 798,
+   "certificate": "certificates/best/n798.cert",
+   "printed": "28.774735132394"
+  },
+  {
+   "n": 800,
+   "certificate": "certificates/best/n745.cert",
+   "printed": "28.793823491120",
+   "recipe": {
+    "kind": "square tiling and L-border",
+    "source_n": 745,
+    "tiles_per_side": 1,
+    "layers": 1,
+    "capacity": 800,
+    "bound": "125698632695170678407829406521/4365472085843000000000000000",
+    "sha256": "2590ee3d85d0af892f5a0c721c987fbcb39f8d1376962460630b466c61200ec4"
+   }
+  },
+  {
+   "n": 801,
+   "certificate": "certificates/best/n801.cert",
+   "printed": "28.802428716943"
+  },
+  {
+   "n": 806,
+   "certificate": "certificates/best/n806.cert",
+   "printed": "28.863706009321"
+  },
+  {
+   "n": 807,
+   "certificate": "certificates/best/n807.cert",
+   "printed": "28.888197393351"
+  },
+  {
+   "n": 808,
+   "certificate": "certificates/best/n808.cert",
+   "printed": "28.899222011397"
+  },
+  {
+   "n": 812,
+   "certificate": "certificates/best/n812.cert",
+   "printed": "28.948221671719"
+  },
+  {
+   "n": 813,
+   "certificate": "certificates/best/n813.cert",
+   "printed": "28.954990077044"
+  },
+  {
+   "n": 815,
+   "certificate": "certificates/best/n815.cert",
+   "printed": "28.985087410892"
+  },
+  {
+   "n": 816,
+   "certificate": "certificates/best/n816.cert",
+   "printed": "28.992261752599"
+  },
+  {
+   "n": 844,
+   "certificate": "certificates/best/n679.cert",
+   "printed": "29.535533905939",
+   "recipe": {
+    "kind": "square tiling and L-border",
+    "source_n": 679,
+    "tiles_per_side": 1,
+    "layers": 3,
+    "capacity": 844,
+    "bound": "212757484195385353844073274581/7203441281033000000000000000",
+    "sha256": "7095162f352b6b1be00bba7b1fcb5f22c041f6be7a104181dfed3b39956ef883"
+   }
+  },
+  {
+   "n": 845,
+   "certificate": "certificates/best/n680.cert",
+   "printed": "29.571428571435",
+   "recipe": {
+    "kind": "square tiling and L-border",
+    "source_n": 680,
+    "tiles_per_side": 1,
+    "layers": 3,
+    "capacity": 845,
+    "bound": "169418044281349976474163688699/5729112608547000000000000000",
+    "sha256": "bda449b0a93cc0aa7f0458dae75288a58367e7544d205a6fb2ee73eed893e682"
+   }
+  },
+  {
+   "n": 856,
+   "certificate": "certificates/best/n856.cert",
+   "printed": "29.778174593064"
+  },
+  {
+   "n": 857,
+   "certificate": "certificates/best/n857.cert",
+   "printed": "29.792820520755"
+  },
+  {
+   "n": 858,
+   "certificate": "certificates/best/n858.cert",
+   "printed": "29.796030772955"
+  },
+  {
+   "n": 864,
+   "certificate": "certificates/best/n864.cert",
+   "printed": "29.873870986621"
+  },
+  {
+   "n": 865,
+   "certificate": "certificates/best/n865.cert",
+   "printed": "29.883815809125"
+  },
+  {
+   "n": 867,
+   "certificate": "certificates/best/n867.cert",
+   "printed": "29.908036097699"
+  },
+  {
+   "n": 870,
+   "certificate": "certificates/best/n870.cert",
+   "printed": "29.938679429308"
+  },
+  {
+   "n": 871,
+   "certificate": "certificates/best/n871.cert",
+   "printed": "29.950496452438"
+  },
+  {
+   "n": 872,
+   "certificate": "certificates/best/n872.cert",
+   "printed": "29.961116417981"
+  },
+  {
+   "n": 903,
+   "certificate": "certificates/best/n679.cert",
+   "printed": "30.535533905939",
+   "recipe": {
+    "kind": "square tiling and L-border",
+    "source_n": 679,
+    "tiles_per_side": 1,
+    "layers": 4,
+    "capacity": 903,
+    "bound": "219960925476418353844073274581/7203441281033000000000000000",
+    "sha256": "7095162f352b6b1be00bba7b1fcb5f22c041f6be7a104181dfed3b39956ef883"
+   }
+  },
+  {
+   "n": 916,
+   "certificate": "certificates/best/n916.cert",
+   "printed": "30.776257218046"
+  },
+  {
+   "n": 917,
+   "certificate": "certificates/best/n917.cert",
+   "printed": "30.795318768594"
+  },
+  {
+   "n": 918,
+   "certificate": "certificates/best/n918.cert",
+   "printed": "30.796057688423"
+  },
+  {
+   "n": 919,
+   "certificate": "certificates/best/n919.cert",
+   "printed": "30.809159596925"
+  },
+  {
+   "n": 924,
+   "certificate": "certificates/best/n924.cert",
+   "printed": "30.870828693406"
+  },
+  {
+   "n": 929,
+   "certificate": "certificates/best/n929.cert",
+   "printed": "30.934039765539"
+  },
+  {
+   "n": 930,
+   "certificate": "certificates/best/n930.cert",
+   "printed": "30.940199320906"
+  },
+  {
+   "n": 931,
+   "certificate": "certificates/best/n931.cert",
+   "printed": "30.948221671729"
+  },
+  {
+   "n": 932,
+   "certificate": "certificates/best/n932.cert",
+   "printed": "30.960209722011"
+  },
+  {
+   "n": 933,
+   "certificate": "certificates/best/n933.cert",
+   "printed": "30.971709633544"
+  },
+  {
+   "n": 964,
+   "certificate": "certificates/best/n679.cert",
+   "printed": "31.535533905939",
+   "recipe": {
+    "kind": "square tiling and L-border",
+    "source_n": 679,
+    "tiles_per_side": 1,
+    "layers": 5,
+    "capacity": 964,
+    "bound": "227164366757451353844073274581/7203441281033000000000000000",
+    "sha256": "7095162f352b6b1be00bba7b1fcb5f22c041f6be7a104181dfed3b39956ef883"
+   }
+  },
+  {
+   "n": 975,
+   "certificate": "certificates/best/n975.cert",
+   "printed": "31.727922061365"
+  },
+  {
+   "n": 981,
+   "certificate": "certificates/best/n981.cert",
+   "printed": "31.807266445914"
+  },
+  {
+   "n": 984,
+   "certificate": "certificates/best/n984.cert",
+   "printed": "31.851684895342"
+  },
+  {
+   "n": 987,
+   "certificate": "certificates/best/n987.cert",
+   "printed": "31.888224555900"
+  },
+  {
+   "n": 988,
+   "certificate": "certificates/best/n988.cert",
+   "printed": "31.893149351640"
+  },
+  {
+   "n": 989,
+   "certificate": "certificates/best/n989.cert",
+   "printed": "31.909679351448"
+  },
+  {
+   "n": 991,
+   "certificate": "certificates/best/n991.cert",
+   "printed": "31.934561612655"
+  },
+  {
+   "n": 992,
+   "certificate": "certificates/best/n992.cert",
+   "printed": "31.942833975517"
+  },
+  {
+   "n": 993,
+   "certificate": "certificates/best/n993.cert",
+   "printed": "31.951849460978"
+  },
+  {
+   "n": 994,
+   "certificate": "certificates/best/n994.cert",
+   "printed": "31.960209722004"
+  },
+  {
+   "n": 995,
+   "certificate": "certificates/best/n995.cert",
+   "printed": "31.964234466738"
+  },
+  {
+   "n": 996,
+   "certificate": "certificates/best/n996.cert",
+   "printed": "31.983269063457"
+  },
+  {
+   "n": 997,
+   "certificate": "certificates/best/n997.cert",
+   "printed": "31.995178354071"
+  }
+ ]
+}

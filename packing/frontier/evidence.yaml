@@ -44731,6 +44731,39 @@ evidence:
       arithmetic. The source's own checker was not run here. Review and confirmation remain
       pending; no stage 4 review is owed for a beyond-horizon row. No arrangement identity,
       local minimum, optimum or credit statement of the source is established.
+  - id: E-couzo-763-recipe-report
+    claim: upper-bound
+    scope:
+      n_values: [365, 444, 487, 632, 733, 734, 737, 788, 789, 845, 910, 966, 970]
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Couzo issue 763 2026-10-23]'
+    certificate: packing/resources/web/couzo-issue763-2026-10-23/source/certificates/best/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-24'
+    limitations: >-
+      This atom records the source author's report, issue 763, of the 13 upper bounds beyond the n
+      <= 324 corpus at or below 1024 that certified_bounds.json at 964ee2bd states as square
+      tiling and L-border recipes of certificates at smaller counts, which the ledger of 24
+      October for issue 763 records and held until a maintained construction checker existed
+      (think-g2qy): each one L-border layer or more around one copy of its parent, recorded at its
+      exact side tS + L rounded up at 12 places. devtools.construction_checker decided each
+      exactly from its recipe and its parent certificate, its stated bound tS + L and its count
+      the construction's capacity, and refused all 117 of their controls
+      (receipts/recipe-decisions.json, written by 43f666c's import); every parent is a row of the
+      release that both routes accept with its controls refused, but for 328 and 850, which
+      restate f1ceee4's rows and were replayed on both routes for the purpose with their six
+      controls refused. Each recipe is dated by the first commit whose index states it: efef7d1 at
+      365 and 970, 964ee2b at the rest. The parents' own replay is the filtered two-route decision
+      of devtools.couzo_678_replay, receipts/filtered-exact-replay.json. The source's own checker,
+      certificate_constructions.py, was not run here. Review and confirmation remain pending; no
+      stage 4 review is owed for a beyond-horizon row. No arrangement identity, local minimum,
+      optimum or credit statement of the source is established.
   - id: E-couzo-964ee2b-beyond-horizon-report
     claim: upper-bound
     scope:
@@ -45092,6 +45125,52 @@ evidence:
       Fraction arithmetic. The source's own checker was not run here. Review and
       confirmation remain pending; no stage 4 review is owed for a beyond-horizon row. No
       arrangement identity, local minimum, optimum or credit statement of the source is
+      established.
+  - id: E-couzo-43f666c-beyond-horizon-report
+    claim: upper-bound
+    scope:
+      n_values: [330, 340, 371, 372, 376, 377, 403, 405, 411, 412, 415, 416, 417, 444, 447, 451, 453,
+        455, 456, 458, 459, 463, 487, 488, 501, 502, 504, 506, 508, 509, 546, 583, 592, 593,
+        594, 596, 604, 629, 632, 637, 641, 649, 650, 653, 679, 680, 683, 684, 689, 691, 692,
+        693, 696, 697, 702, 706, 732, 733, 737, 738, 742, 744, 745, 746, 748, 751, 752, 754,
+        755, 756, 757, 759, 761, 787, 788, 792, 798, 800, 801, 806, 807, 808, 812, 813, 815,
+        816, 844, 845, 856, 857, 858, 864, 865, 867, 870, 871, 872, 903, 916, 917, 918, 919,
+        924, 929, 930, 931, 932, 933, 964, 975, 981, 984, 987, 988, 989, 991, 992, 993, 994,
+        995, 996, 997]
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Couzo 43f666c 2026-10-24]'
+    certificate: packing/resources/web/couzo-43f666c-2026-10-24/source/certificates/best/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-24'
+    limitations: >-
+      This atom records franciscouzo/square-packing@43f666c, a watched repository's publication
+      that no issue reports, dated by the push of 2026-10-24T06:10:44Z: of the 126 upper bounds at
+      325 to 1024 its certified_bounds.json lowers below 964ee2bd's
+      (devtools.couzo_43f666c_claims, receipts/claim-map.json), the 122 the ledger of 24 October
+      for 43f666c records as rows: 106 exact rational certificates certificates/best/nN.cert at
+      1c17153, each of n squares with its exact side in its header, and 16 square tiling and
+      L-border recipes of those certificates, each recorded at its exact side rounded up at 12
+      places. A separate complete repository replay is retained (devtools.beyond_horizon_replay,
+      receipts/filtered-exact-replay.json): the filtered two-route decision of
+      devtools.couzo_678_replay, over every wall and the pairs whose centres are closer than sqrt
+      2, accepted all 106 and refused all 636 controls, in 133.3 positive CPU seconds; every
+      square clears the box by at least 1e-15, and no pair the filter decides touches, each
+      clearing by at least 1e-14 (at 629); the all-pairs kernel at 330, 691 and 997 (789,186
+      pairs, 261.5 CPU seconds) agreed exactly with it on each least gap and clearance. The
+      construction checker devtools.construction_checker decided each of the 16 recipes exactly
+      from its recipe and its parent, one of the 106 certificates, each one to five L-border
+      layers around one tile, its stated bound tS + L and its count the construction's capacity,
+      and refused all 144 of their controls (receipts/recipe-decisions.json); each is dated by
+      43f666c's index, which first states it. The two routes share certificate parsing, half-angle
+      conversion, the pair filter and Fraction arithmetic. The source's own checker was not run
+      here. Review and confirmation remain pending; no stage 4 review is owed for a beyond-horizon
+      row. No arrangement identity, local minimum, optimum or credit statement of the source is
       established.
   - id: E-couzo-n304-certificate-report
     claim: upper-bound

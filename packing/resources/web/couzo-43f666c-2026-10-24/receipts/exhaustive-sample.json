@@ -1,0 +1,14 @@
+{
+  "environment": {"implementation":"CPython","machine":"x86_64","python":"3.14.7"},
+  "format": "beyond-horizon-exhaustive-sample-v1",
+  "kernel": "devtools.evand_arrangement_reports.run_case, positive job, every pair",
+  "rows": [
+    {"cpu_seconds":{"exact_verify":7.1699737830000005,"independent":5.191666379999999},"equals_filtered_least_gap":true,"equals_filtered_least_wall":true,"exact_verify_passed":true,"independent_passed":true,"least_pair_gap":"155449475615037137409997359990296279169004591437421554909234391459533101880112396298548038827779821/731585456741828276583946265336235108019706511756851897560290523257241798027184873747805070776816531250000000000","least_wall_clearance":"1/1000000000000000","n":330,"pairs_tested":54285,"routes_agree_on_least_gap":true,"wall_seconds":14.2},
+    {"cpu_seconds":{"exact_verify":28.973033165,"independent":22.990386436999998},"equals_filtered_least_gap":true,"equals_filtered_least_wall":true,"exact_verify_passed":true,"independent_passed":true,"least_pair_gap":"445851337361589137233578603677258174666977941310746622452814210801220110840381721103506186462379920341/2058254972509765617862266316965754005547497635020303952542126606240759988222382265767748735542963786250000000000000","least_wall_clearance":"1/1000000000000000","n":691,"pairs_tested":238395,"routes_agree_on_least_gap":true,"wall_seconds":69.3},
+    {"cpu_seconds":{"exact_verify":98.823588911,"independent":98.310519565},"equals_filtered_least_gap":true,"equals_filtered_least_wall":true,"exact_verify_passed":true,"independent_passed":true,"least_pair_gap":"1410371526602037796281083185159486796926134578200377260915109814876575647863196281274879087817118893266030731737/116185223805289486958209012519366282725048642598023768789211694243930784427984540577913763533549232598600000000000000","least_wall_clearance":"1/1000000000000000","n":997,"pairs_tested":496506,"routes_agree_on_least_gap":true,"wall_seconds":233.6}
+  ],
+  "sample_cpu_seconds": 261.5,
+  "sample_pairs": 789186,
+  "started_utc": "2026-10-25T00:14:41Z",
+  "workers": 2
+}
