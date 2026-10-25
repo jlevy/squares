@@ -9316,6 +9316,22 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         ),
     ),
     ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=("packing/campaign/result-requests.yaml",),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The stage 7 replies of 25 October to #810, #545 and #811 recorded under each "
+            "issue's replies, naming T-245 and T-246 at V0/C0 and their evidence, against "
+            "main 272b411b4 (#812). Rendered by render_packing_methods at link revision "
+            "49b0b78e into empty site directories, twice from this tree and once with "
+            "main's result-requests.yaml swapped in, 43 files each, all byte-identical "
+            "across the three. No register entry changes. Retain v0.2.7."
+        ),
+    ),
+    ReleaseNoPublicChange(
         components=(
             "paper:n11-lower-bounds-explainer",
             "paper:n11-optimality-review",

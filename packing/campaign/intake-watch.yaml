@@ -1579,3 +1579,17 @@ repositories:
       its 5,462 Lean blobs are new in it) and adds the run's evidence, so no earlier tree
       holds the proof the record cites and nothing in them is to import. The release
       n12-verified-2026-10-16 adds two archives, pinned by size and SHA-256 in the packet.
+  # The intake sweep of 2026-10-25 at 15:05Z (w-triage-1025b): the five commits past the
+  # e48de24 read.
+  - url: https://github.com/wand125/square-packing
+    read_through: 29856130871824824cec4d30b82b9a2cf7f91adc
+    read_on: '2026-10-25'
+    note: >-
+      The five commits of 25 October (06:14:50Z to 08:06:16Z) past the e48de24 read, all
+      under site/. 433ea80 adds a bilingual working paper, Minimum Widths for Unit Squares in
+      Thin Rectangles (v1, with its sources and figures), and 1aaa214 its v2, a public
+      article edition with an interactive figure and unchanged mathematics. It determines the
+      least width of a rectangle of height 1851/1000 <= a < 2 holding N >= 11 unit squares:
+      rectangles are another container, and a square of side below 2 holds at most three
+      unit squares, so the result does not reach a square box. f8ad649, 7384a72 and 2985613
+      edit its metadata. Nothing to import.

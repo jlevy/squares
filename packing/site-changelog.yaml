@@ -6,6 +6,58 @@ softschema:
   status: enforced
 repository: https://github.com/jlevy/squares
 entries:
+  - id: jatloe-n12-reported-proof
+    date: '2026-10-25'
+    title: Jatloe Reports a Lean Proof for 12 Squares
+    significance:
+      score: 5
+      rationale: >-
+        This announces the S5 optimality report T-245; significance does not imply
+        independent verification of the complete claim.
+    topics: [optimality, verification]
+    categories: [records]
+    pull_requests: [812]
+    result_ids: [T-245]
+    summary: |-
+      The record now holds, as a report, a Lean 4 proof by
+      [Jatloe](packing/contributors/people/jatloe.md) that the $4 \times 3$ grid is the
+      optimal packing of 12 unit squares: $s(12) = 4$. It is the first optimality claim the
+      project’s records hold at 12, one of the five open cases below 21; if the proof holds,
+      it closes the gap of $0.0285$ between the verified lower bound, $7943/2000$, and the
+      grid’s side. T-245 remains reported at V0/C0; the Lean build has not been replayed
+      here.
+    details: |-
+      - Lean’s kernel checks the geometric arguments and the assembly, and 1,624 finite
+        facts are decided by `native_decide`, so Lean’s compiler is trusted as well. The
+        source reports that a run in a repository that is not public accepted all 5,377
+        modules of the theorem’s closure on compiled objects reused from an earlier run, and
+        says that no full rebuild has been run.
+      - A statement audit of 25 October, an AI review, read the theorem as the unrestricted
+        problem with no premise, and mapped the 1,624 facts of the source’s axiom log one to
+        one onto the code’s calls. It did not read the proof, so it moves no rung. A
+        mathematical review of the written proof and a complete build, about 28 CPU-hours by
+        the source’s own receipts, come next.
+      - Jatloe wrote the proof and a partial formalization, Ben Gurevitch aided the
+        formalization, and [Lewis](packing/contributors/people/ctjlewis.md) refactored and
+        compiled it. [Ahmed](packing/contributors/people/manasseh-ahmed.md) published it on
+        16 October and announced it on 22 October.
+      - The same change registers [Daniel](packing/contributors/people/evan-daniel.md)’s S3
+        report that the side of the best known packing of 29 squares is a root of an integer
+        polynomial of degree 7213 (T-246), also at V0/C0.
+    artifacts:
+      - kind: result
+        label: Current 12-square Lean proof report
+        target: https://squaremath.org/result/t-245.html
+    publication:
+      date: '2026-10-25'
+      evidence: https://github.com/jlevy/squares/actions/runs/40202397886
+    references:
+      - label: Statement audit of 25 October
+        target: docs/project/reviews/review-2026-10-25-n12-lean-formalization-statement-audit.md
+      - label: Retained source and verification limits
+        target: packing/resources/web/jatloe-n12-lean-2026-10-16/README.md
+      - label: The tracking issue
+        target: https://github.com/jlevy/squares/issues/810
   - id: daniel-one-eighty-two-adopted
     date: '2026-10-25'
     title: Daniel’s New Arrangement Becomes the House Best Packing at 182
@@ -2679,6 +2731,11 @@ entries:
       - label: Revised verification and confirmation ladder
         target: https://github.com/jlevy/squares/pull/262
 deliveries:
+- number: 812
+  title: "intake(think-4l14, think-6gti): T-245, Jatloe's Lean proof that s(12) = 4 (#810), and T-246, Daniel's s(29) minimal polynomial (#545, #811)"
+  merged_at: '2026-10-25T14:28:27Z'
+  base_ref: main
+  merge_commit: 272b411b40fea5274e8dafa86f87c3ee58c62d62
 - number: 814
   title: "records: Evan Daniel's s(182) certificate of #806 as T-243, confirmed, adopted and regularized at 182"
   merged_at: '2026-10-25T08:45:49Z'
@@ -3444,6 +3501,7 @@ stacks:
   evidence: https://github.com/jlevy/squares/pull/518
 coverage:
   pull_requests:
+  - 812
   - 814
   - 794
   - 750

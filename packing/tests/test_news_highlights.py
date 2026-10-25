@@ -301,14 +301,20 @@ def test_news_keeps_both_reported_proofs_and_their_complete_qualification_text(
     assert 'href="https://squaremath.org/result/t-153.html"' in overbeck
 
 
-def test_homepage_leads_with_the_s19_lean_proof_report(
+def test_homepage_leads_with_the_s12_and_s19_lean_proof_reports(
     document: render_changelog.Document,
 ) -> None:
-    # T-194's item, the S5 announcement the box lacked from 16 to 22 October (think-9wxc).
-    # The box carries hidden cards for its filter; the first it shows is T-194's.
+    # T-245's item of 25 October, the S5 announcement #812 owed, leads the box; T-194's,
+    # the S5 announcement the box lacked from 16 to 22 October (think-9wxc), follows it.
+    # The box carries hidden cards for its filter; these are the first two it shows.
     cards = _cards(news_highlights.render(document))
     shown = [key for key, card in cards.items() if not card.startswith("<section hidden ")]
-    assert shown[0] == "fitzharding-n19-reported-proof"
+    assert shown[:2] == ["jatloe-n12-reported-proof", "fitzharding-n19-reported-proof"]
+    latest = cards["jatloe-n12-reported-proof"]
+    assert 'datetime="2026-10-25"' in latest
+    assert "T-245 remains reported at V0/C0" in latest
+    assert "the Lean build has not been replayed" in latest
+    assert 'href="https://squaremath.org/result/t-245.html"' in latest
     card = cards["fitzharding-n19-reported-proof"]
     assert 'datetime="2026-10-16"' in card
     assert "V0/C1" in card
