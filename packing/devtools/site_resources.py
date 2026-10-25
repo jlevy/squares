@@ -256,10 +256,7 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
     (
         "https://github.com/Queuingtheorydotcom/Jatloe12SquaresFormalized",
         "Jatloe, Gurevitch, Lewis, Ahmed",
-        (
-            "A Lean 4 proof that the 4 \u00d7 3 grid of twelve squares is optimal, "
-            "trusting Lean's compiler for its certificates."
-        ),
+        "A Lean 4 proof of s(12) = 4, trusting Lean's compiler for its certificates.",
     ),
     (
         "https://github.com/Kleddamag/11-squares-certified-bound",
