@@ -1,0 +1,92 @@
+{
+ "format": "issue-804-atlas-poses-v1",
+ "tool": "packing/campaign/issue-intake/upper-bounds-issue804-20261025/review/exact_forms.py",
+ "note": "Each atlas packing the source read, paired square by square with the record witness at its count by an optimal assignment on centres, under the symmetry of the box that makes the largest move least. A measurement; it decides nothing.",
+ "rows": [
+  {
+   "n": 88,
+   "atlas_file": "evand/square-packing@659ee62 site/www/data/p/best-88.json",
+   "atlas_side": "9.8824510304812468193284571556918969668693702437234",
+   "witness": {
+    "id": "W-known-best-n088",
+    "path": "packing/witnesses/known-best/n-088.yaml",
+    "sha256": "d1513a915596e39eacb9a34cccfb12b912191f7e61aff2c6ddc0c377e3d7af7c"
+   },
+   "best_symmetry": 0,
+   "max_move": 0.1504,
+   "moved_beyond_1e-12": 38,
+   "moved_beyond_1e-6": 37,
+   "moved_beyond_1e-3": 35,
+   "moved_beyond_0.1": 5,
+   "max_turn_deg": 4.756
+  },
+  {
+   "n": 126,
+   "atlas_file": "evand/square-packing@659ee62 site/www/data/p/best-126.json",
+   "atlas_side": "11.742640687119285146405066172629094235709015626131",
+   "witness": {
+    "id": "W-known-best-n126",
+    "path": "packing/witnesses/known-best/n-126.yaml",
+    "sha256": "75c90c9000c2d7e021cc346c6438c61f4ae52c38256ce2650e0f8e507ede0753"
+   },
+   "best_symmetry": 5,
+   "max_move": 0.1372,
+   "moved_beyond_1e-12": 65,
+   "moved_beyond_1e-6": 65,
+   "moved_beyond_1e-3": 59,
+   "moved_beyond_0.1": 8,
+   "max_turn_deg": 28.45
+  },
+  {
+   "n": 172,
+   "atlas_file": "evand/square-packing@659ee62 site/www/data/p/best-172.json",
+   "atlas_side": "13.618988956899398428863501629350489899504015052196",
+   "witness": {
+    "id": "W-known-best-n172",
+    "path": "packing/witnesses/known-best/n-172.yaml",
+    "sha256": "8f55996b85ff77fa2262659a3d1120fbb2fc283dde778188c7d70220b5f11585"
+   },
+   "best_symmetry": 0,
+   "max_move": 0.0,
+   "moved_beyond_1e-12": 0,
+   "moved_beyond_1e-6": 0,
+   "moved_beyond_1e-3": 0,
+   "moved_beyond_0.1": 0,
+   "max_turn_deg": 7.105e-15
+  },
+  {
+   "n": 199,
+   "atlas_file": "evand/square-packing@659ee62 site/www/data/p/best-199.json",
+   "atlas_side": "14.617572173592806843555861272450032808198694673916",
+   "witness": {
+    "id": "W-known-best-n199",
+    "path": "packing/witnesses/known-best/n-199.yaml",
+    "sha256": "2bf5a1bc6e2b8487561eb55f01e8fe03ecd20b184611b2088dd228fcdb24911a"
+   },
+   "best_symmetry": 6,
+   "max_move": 0.6109,
+   "moved_beyond_1e-12": 95,
+   "moved_beyond_1e-6": 94,
+   "moved_beyond_1e-3": 91,
+   "moved_beyond_0.1": 49,
+   "max_turn_deg": 4.045
+  },
+  {
+   "n": 263,
+   "atlas_file": "evand/square-packing@659ee62 site/www/data/p/best-263.json",
+   "atlas_side": "16.733166007899378970512281483959673446247147248387",
+   "witness": {
+    "id": "W-known-best-n263",
+    "path": "packing/witnesses/known-best/n-263.yaml",
+    "sha256": "b06cedc331d0c673e06002d47954807e099cdf69d0d701d44bfd603dfc7dc9eb"
+   },
+   "best_symmetry": 0,
+   "max_move": 0.0,
+   "moved_beyond_1e-12": 0,
+   "moved_beyond_1e-6": 0,
+   "moved_beyond_1e-3": 0,
+   "moved_beyond_0.1": 0,
+   "max_turn_deg": 7.105e-15
+  }
+ ]
+}

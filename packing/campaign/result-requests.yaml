@@ -24006,3 +24006,101 @@ issues:
       The twelve rows are recorded in report order with their replay, 372 and 412 have their
       disposition with 43f666c's rows there on main (#800, think-gn29), and the reply on main says
       so; nothing the author asked for is queued.
+  - number: 804
+    title: 'Exact values of the record sides for n = 88, 126, 172, 199, 263 (minimal polynomials): registration
+      request'
+    author: HyukdongKim
+    opened: '2026-10-25'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Hyukdong Kim (ORCID 0000-0001-5787-8066) reports that the side of the best-known packing at
+      88, 126, 172, 199 and 263 is a stated root of a stated integer polynomial, irreducible over Q,
+      of degree 7, 2, 24, 16 and 17 (at 126, 4s^2 - 60s + 153, so 15/2 + 3√2). He polished
+      evand/square-packing's atlas packings at 659ee62 to a KKT point, solved at 1,500 and 3,000
+      digits, and recovered each polynomial by LLL. It is a numerical determination with no exact
+      configuration, in the issue's attachment squares-exact-forms.zip, whose SHA-256 is the one the
+      issue states. Triaged read-only on 25 October 2026 (think-9vai) and imported the same day,
+      without running the bundle's code: every polynomial is primitive and irreducible over Q, by
+      SymPy and by sqpack.field, and each stated root is the one isolated exactly here. At 88, 126
+      and 199 the polynomials are identical to Evan Daniel's #639 forms, which T-193 registers at
+      V3/C3 and stages as the houses there, so these three are a second derivation of values the
+      record holds. At 172 and 263 the sides are new: below T-174's rational certificates, the
+      houses, by 3.898e-89 and 2.126e-94, and below #639's degree-12 sides there by 1.185e-62 and
+      9.234e-63. The ledger of 25 October for the issue (upper-bounds-issue804-20261025) records
+      them, and T-244 registers them as reported, V0/C0; until an exact configuration exists at
+      each side, feasibility there is not shown. The issue's margin of 1.2e-22 at 126 is 1.174e-19.
+      Claude assistance disclosed.
+    read_through: '2026-10-25T01:57:25Z'
+    results:
+    - key: exact-sides-held
+      claim: >-
+        s(88), s(126) and s(199) are roots of the stated polynomials: the 4th of five real roots of
+        s^7 - 50s^6 + 934s^5 - 7232s^4 + 3189s^3 + 301350s^2 - 1756847s + 3164362,
+        9.8824510304812468193284571556918969668693…; the larger root of 4s^2 - 60s + 153,
+        15/2 + 3√2 = 11.7426406871192851464050661726290942357090…; and the 2nd of two real roots of
+        the degree-16 polynomial in exact_forms.json, 14.6175721735928068435558612724500328081986….
+      source: body
+      not_registered: >-
+        These are the polynomials, and so the numbers, of Evan Daniel's #639 exact sides at these
+        counts. T-193 registered them on 16 October 2026 with exact configurations decided here, at
+        V3/C3, and stages them as the houses (think-ot5c, after think-8ido).
+        campaign/issue-intake/upper-bounds-issue804-20261025/exact-sides.json decides each equal
+        exactly. This is a second derivation of values the record holds, by an independent
+        numerical route, as #639's exact-side-51 was of the side both n = 51 lanes held; it is not
+        an exact certificate, and T-193 is unchanged.
+      queued: false
+    - key: exact-sides-new
+      claim: >-
+        s(172) <= 13.6189889568993984288635016293504898995040…, the least of the four real roots of
+        the degree-24 polynomial in exact_forms.json, and s(263) <=
+        16.7331660078993789705122814839596734462471…, the only real root of the degree-17
+        polynomial there. The source says each is the side of the record packing at its KKT point,
+        determined numerically at 3,000 digits, and gives no exact configuration.
+      source: body
+      register:
+      - T-244
+      evidence:
+      - E-hyukdongkim-804-exact-forms-report
+    - key: negative-searches
+      claim: >-
+        LLL at 1,500 digits on the KKT-solved side found no relation of degree <= 80 at 55, 130 and
+        179, and none of degree <= 70 at 110, 131, 132, 155, 156, 180, 181, 182, 208 to 211, 228
+        and 235 to 241. At 105 the KKT iteration did not converge. At 154, 270 and 303 the atlas
+        lagged the register, so those counts were not run.
+      source: body
+      not_registered: >-
+        Negative searches, not results: they state no bound, and an integer-relation search that
+        finds nothing settles no degree. The packet's README notes them as stated.
+      queued: false
+    beads:
+    - think-9vai
+    - think-4rzl
+    answer_bead: think-9vai
+    replies: []
+    close_when: >-
+      The 88, 126 and 199 sides have been answered as values T-193 holds. T-244 is validated, or
+      declined with a reason, once an exact configuration at 172 and 263 is decided (think-4rzl).
+      The reply on main says so, and nothing the author asked for is queued and no question
+      awaits him.
+    notes: >-
+      The pin is the issue's attachment
+      https://github.com/user-attachments/files/33917140/squares-exact-forms.zip, 14,112 bytes,
+      with SHA-256 c770f9c37dee6b248543f3e661318630a0f279bc6a8c7663cb2efc53e2814ee7 (the issue's
+      digest), downloaded 2026-10-25T05:47Z. It holds seven files; exact_forms.json, 2,833 bytes,
+      has SHA-256 531e7077b3242aa56e959031824fb435693deaf8d73f7e33016d49c9e1709202. The bundle
+      states no licence, so the hyukdongkim-exact-forms-2026-10-25 packet keeps the polynomials
+      and printed sides as a derived fact, as #755's packet did before its author's CC0. Its inputs
+      are evand/square-packing@659ee62 site/www/data/p/best-<n>.json, last changed at 122d0ba on 10
+      October, pinned by blob and digest. At 172 and 263 they equal T-174's witnesses to binary64
+      at every square; at 88, 126 and 199 they are other poses at the same side, moved by up to
+      0.150, 0.137 and 0.611 under the box's best symmetry. The EXACT_FORMS.md the issue compares
+      against is Daniel's table of 7 October (1b7e2cb), which covers the register as of 6
+      October; search/exact/cur/ (7d1407a, #639) holds the newer forms. The acknowledgement,
+      drafted in think-9vai's notes and posted after the import merges, asks three questions. The
+      first, for exact configurations at 172 and 263, goes under awaiting_author when it is posted
+      (changes: file): only a configuration at each side shows the packing T-244 asserts, and no
+      measurement here can stand in for it, though think-4rzl may build one here after 14 days.
+      The second, a licence for the bundle, and the third, the stationary side at 297, could
+      falsify nothing the record asserts, so they are informational and hold nothing open.
