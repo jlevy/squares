@@ -9198,11 +9198,13 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "render_n11_optimality_review, render_n11_threshold_bound_review and "
             "render_packing_methods: these three papers' files are byte-identical across "
             "the three renders. Only the explainer differs, in its count of registered "
-            "results, which its v0.4.28 carries. Measured again after merging main "
-            "886dddce6 (#808), with issue 804's card in site_resources, T-244's headline "
-            "by surname and #799's acknowledgement recorded, at link revision 5e08f28c, "
-            "with that main's four inputs swapped in: the same outcome. Retain v0.1.11, "
-            "v0.1.4 and v0.2.7."
+            "results. Measured again after merging main 886dddce6 (#808), with issue 804's "
+            "card in site_resources, T-244's headline by surname and #799's "
+            "acknowledgement recorded, at link revision 5e08f28c, with that main's four "
+            "inputs swapped in, and after merging main 46e355582 (#814, T-243), at link "
+            "revision dd5fc01d with that main's four inputs swapped in: the same outcome "
+            "each time, the explainer counting 244 results against main's 243, which its "
+            "v0.4.29 carries. Retain v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
 )
