@@ -897,6 +897,14 @@ FIRST_PUBLISHED = PUBLICATION_HISTORY[-1].first_published
 #: The leading entry is proposed for the next publication; confirm its date at first deployment.
 EXPLAINER_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.4.28",
+        first_published="October 25, 2026",
+        result_scope=(
+            "Update the registered result count after the registration of Hyukdong Kim's "
+            "exact sides at 172 and 263 (T-244)."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.4.27",
         first_published="October 24, 2026",
         result_scope=(
@@ -1473,6 +1481,16 @@ class ReleaseImpactDecision(NamedTuple):
 # New component cuts append decisions here, newest first, alongside their own histories.
 # No impact is invented retrospectively for the published baseline editions.
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
+    ReleaseImpactDecision(
+        component="paper:n11-lower-bounds-explainer",
+        previous_version="v0.4.27",
+        version="v0.4.28",
+        impact="patch",
+        reason=(
+            "Update the registered result count after the registration of Hyukdong Kim's "
+            "exact sides at 172 and 263 (T-244)."
+        ),
+    ),
     ReleaseImpactDecision(
         component="paper:n11-lower-bounds-explainer",
         previous_version="v0.4.26",
@@ -9061,6 +9079,39 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "after merging main 3699ce15e (#803), at link revision 4eaa86c6 with that main's "
             "result-requests.yaml swapped in: the same result. No register entry changes. "
             "Retain v0.2.7."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/contributors/people/hyukdong-kim.md",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The import of #804 (think-9vai): T-244 at 172 and 263, its coverage entry, "
+            "#804's requests entry and Hyukdong Kim's profile, against main bb756e193 "
+            "(#805). Rendered at link revision 7af71882 into empty site directories, twice "
+            "from this tree and once with main's results.yaml, result-requests.yaml and "
+            "source-coverage.yaml swapped in and the new profile set aside, 69 files each, "
+            "by render_n11_lower_bounds_explainer with its Chromium math pass, "
+            "render_n11_optimality_review, render_n11_threshold_bound_review and "
+            "render_packing_methods: these three papers' files are byte-identical across "
+            "the three renders. Only the explainer differs, in its count of registered "
+            "results, which its v0.4.28 carries. Retain v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
 )
