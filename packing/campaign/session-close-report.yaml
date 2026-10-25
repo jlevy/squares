@@ -3297,7 +3297,7 @@ sessions:
   title: "Phase Timing Qualification Continuation"
   status: in_progress
   primary_bead: think-uhxt
-  phases: 1
+  phases: 2
   measured: true
   rollups:
   - packing/campaign/resource-usage/codex-task-tree-session189-checkpoint.yaml

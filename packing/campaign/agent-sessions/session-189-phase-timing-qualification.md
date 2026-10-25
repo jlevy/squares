@@ -20,7 +20,7 @@ session:
     clock_role: work
     objective: Finish current-main record reconciliation, run the complete edit selection and obtain
       independent review of the integrated contribution.
-    status: in_progress
+    status: completed
     entered_by: session_start
     switch_reason: null
     budget_minutes: 30
@@ -33,11 +33,45 @@ session:
       unresolved audit finding, or inability to fit verification before the protected reserve.
     fallback: Preserve the exact source and failed or incomplete receipts under think-uhxt and request
       no automatic continuation.
+    outcome: Current-main integration is committed at7880a7dbca372d969f70db8a142603cb4d9a1cba; all158
+      direct controls and all69 edit steps passed, with edit wall485.942seconds. Independent static
+      review and real commit hooks accepted unchanged source.
+    evidence:
+    - packing/campaign/agent-sessions/session-189-phase-timing-qualification.md
+    - development.md
+    - packing/tests/test_reachable_progress.py
+    - packing/tests/test_validation_timing.py
+    - packing/tests/test_validation_report.py
+    stop_reason: The declared integration and local draft-prerequisite checks completed; hosted qualification
+      is the next slice.
+    next_action: Submit an independently reviewed provisional draft, verify the served archive and
+      observe actual combined-source hosted checks.
+  - workflow: efficiency-loop
+    focus: efficiency
+    recording: contemporaneous
+    clock_role: work
+    objective: Publish the audited evidence and provisional draft, then inspect actual ordinary and
+      deferred hosted qualification and any attributable failures.
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: Current-source local draft prerequisites and independent source review are complete;
+      public custody and combined-source hosted evidence are still missing.
+    budget_minutes: 30
+    started_at: '2026-10-25T05:10:25+00:00'
+    deadline_at: '2026-10-25T05:40:25+00:00'
+    expected_output: Audited final record delta, actual served-byte replay, draft PR identity and
+      source/base-bound hosted status without premature readiness claims.
+    validation_command: packing-validate --records --jobs 1 --inner-jobs 1 --format json ; python
+      -m devtools.check_added_blobs --base origin/main --head HEAD
+    kill_condition: Stop affected publication on an audit finding, changed artifact bytes, ownership
+      conflict, unresolved merge conflict or inability to finish required checks before the protected
+      reserve.
+    fallback: Keep the PR draft and preserve exact failing or pending evidence under think-uhxt.
     outcome: null
     evidence: []
     stop_reason: null
-    next_action: Review actual edit outcomes and the frozen source before committing and submitting
-      a provisional draft.
+    next_action: Finish record-only qualification and independent review, then submit the draft and
+      evaluate its actual hosted results.
   primary_bead: think-uhxt
   status: in_progress
   budget:
@@ -97,10 +131,10 @@ session:
     outcome: Verified all22 old frozen source bodies and archive identity, current draft policy, actual
       preservation hooks and narrow publisher adaptation. Final integrated diff and edit evidence
       remain pending.
-    evidence:
+    evidence: &id001
     - packing/hosted/pytest-phase-overhead-v2-20261022.yaml
     - packing/campaign/agent-sessions/session-189-phase-timing-qualification.md
-    files: []
+    files: &id002 []
     checks:
     - Original experiment evidence remains fixture-specific; the historical failed local push is not
       waived.
@@ -110,6 +144,28 @@ session:
     elapsed_quality: unavailable
     next_action: Coordinator will dispatch final integration review once the source and edit receipts
       are frozen.
+  - task: Independently audit the17-file integration, local qualification, cost and actual hooks under
+      think-2hbd
+    operator: GPT-6.1 Sol / xhigh
+    status: completed
+    recording: retrospective
+    phase: 1
+    outcome: Accepted exact source and unchanged historical evidence, corrected record semantics,
+      all84 native cost delta fields, actual hooks and fresh direct/edit evidence. Final publication
+      record delta and hosted outcomes remain separate.
+    evidence: *id001
+    files: *id002
+    checks:
+    - All17 frozen bodies and committed patch agree; six implementation/test bodies and historical
+      Session188/evidence remain unchanged.
+    - First edit failure and corrected merge ancestry were independently inspected; no guard relaxation
+      or site release is introduced.
+    uncertainty: No final hosted qualification or terminal certification is supplied by this scoped
+      review.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Review the small publication record delta, concrete draft and actual public/hosted
+      receipts before their acceptance claims.
   outputs:
   - packing/campaign/agent-sessions/session-189-phase-timing-qualification.md
   - packing/campaign/resource-usage/codex-task-tree-session189-checkpoint.yaml
@@ -135,9 +191,23 @@ session:
   - Initial record rendering rejected an active delegation marked retrospective and missing an active
     contract. The completed initial review is now recorded as completed; later review dispatches require
     their own contemporaneous contract. The failed receipt is retained.
+  - Complete edit selection on clean integration commit7880a7dbca372d969f70db8a142603cb4d9a1cba:69
+    of69 steps passed, zero skips, 485.942seconds; source unchanged and supervision confirmed cleanup.
+    Local wall reporting remains advisory for this one-job shape under the operator authorization;
+    upstream budgets are unchanged.
+  - 'The preceding edit attempt passed68 of69 steps and failed release impact while the merge was
+    uncommitted: the guard used common ancestord660905 and attributed upstream changes. The reviewed
+    merge changed ancestry to3699ce15 without changing source bytes; the ordinary complete edit rerun
+    passed. Both receipts are retained.'
+  - Actual integration hooks passed with no changed paths. Independent review verified all17 final
+    file identities, retained evidence, native cost arithmetic and the complete hook result.
+  - A fresh PR679 review/comment snapshot found no new feedback since the October22 recovery. Main
+    subsequently advanced tobb756e193 through PR805; its only overlapping feature path is a disjoint
+    SYNOPSIS document-map addition. Local evidence covers the fixed3699-based tree; actual hosted
+    source/base will identify the combined coverage.
   stop_reason: null
-  next_action: Continue think-uhxt through reviewed current-main integration and direct qualification;
-    retain independent audit under think-2hbd and record failed, incomplete or pending outcomes accurately.
+  next_action: Finish record-only qualification and independent review, then submit the draft and
+    evaluate its actual hosted results.
   branch: codex/phase-timings-20261025
   resource_rollups:
   - packing/campaign/resource-usage/codex-task-tree-session189-checkpoint.yaml
@@ -162,9 +232,9 @@ Current main’s site-edition retirement and draft hosted-gate policy apply.
 The old HTTP assertion, incomplete reachable coverage and uncertified Session188 remain
 unchanged historical evidence.
 
-This record is active.
-It declares no completed edit check, hosted gate, public publication, final cost total,
-merge readiness or certification.
+The integrated source passed local draft prerequisites.
+This record remains active; hosted acceptance, public evidence publication and terminal
+certification are reported only after their actual receipts.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
