@@ -1,0 +1,67 @@
+{
+ "program": "kkt_consistency.py",
+ "program_sha256": "7ee1463f2683eedb89195f1eb9a1a1767aed1ffbb065ff3e014197c2c2ccc746",
+ "python": "3.14.7",
+ "mpmath_dps": 100,
+ "inputs": {
+  "cert": [
+   "/tmp/claude-0/-home-user-squares/d57983cc-21aa-53cd-a24f-c90463a5a3c0/scratchpad/rev806-math/src/s182-1024.cert",
+   "9e12e0a42b05c4fcd2181c5255a4a19ab1aeb9a9f8c95f9943a20998a415fe97"
+  ],
+  "exact": [
+   "/tmp/claude-0/-home-user-squares/d57983cc-21aa-53cd-a24f-c90463a5a3c0/scratchpad/rev806-math/src/s182-1024.exact.txt",
+   "3ed2a8a82d30612b378ec23cc205d2194222580ddade133d4c59f79d2dc76893"
+  ],
+  "input": [
+   "/tmp/claude-0/-home-user-squares/d57983cc-21aa-53cd-a24f-c90463a5a3c0/scratchpad/rev806-math/src/s182-1024.input.txt",
+   "e79897cb13a1fd29c472acec01b07a56e85f5f3c708212e889f71a362d52f45c"
+  ]
+ },
+ "certificate_vs_dilated_point": {
+  "max_centre_x_diff": "4.9702e-36",
+  "max_centre_y_diff": "4.9251e-36",
+  "max_angle_diff_deg": "4.8508e-34",
+  "worst_square": 136
+ },
+ "sides": {
+  "S_star": "13.97091643621467873524601668977021676138712819967218914391586797155867",
+  "S_cert": "13970916436214678735385725854133/1000000000000000000000000000000",
+  "S_cert_minus_S_star": "1.39709164363e-19",
+  "S_cert_minus_S_star_times_1_plus_1e-20": "6.36451260412e-31"
+ },
+ "point_as_packing": {
+  "least_wall_gap": "-3.7135e-71",
+  "least_pair_gap": "-3.5457e-69",
+  "active_walls_below_1e-60": 45,
+  "active_pairs_below_1e-60": 390,
+  "least_inactive_wall_gap": "3.4489447e-6",
+  "least_inactive_pair_gap": "1.1303812e-5",
+  "pairs_between_1e-60_and_1e-15": 0
+ },
+ "free_squares": {
+  "point_equals_input_text": [
+   121,
+   135,
+   142,
+   155,
+   163,
+   180
+  ],
+  "short_lines": [
+   121,
+   135,
+   142,
+   155,
+   163,
+   180
+  ],
+  "touching_nothing_at_1e-60": [
+   121,
+   135,
+   142,
+   155,
+   163,
+   180
+  ]
+ }
+}
