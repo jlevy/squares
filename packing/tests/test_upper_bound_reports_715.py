@@ -199,12 +199,14 @@ def test_the_recorded_rows_are_the_claims_record_and_supersede_the_rows_before_t
     before: Counter[str] = Counter()
 
     def standing(n: int, rows: dict[str, Any], expected: str) -> str:
-        """#763's row where it has one, superseding the row `expected` names, or the last row
-        of the push's chain where its rows supersede it (think-lyf9); and 43f666c's where its
-        row supersedes that one in turn (think-gn29)."""
+        """#763's row where it has one (its recipes' source at a recipe, `Split`), superseding
+        the row `expected` names, or the last row of the push's chain where its rows
+        supersede it (think-lyf9); and 43f666c's where its row supersedes that one in turn
+        (think-gn29)."""
         if n in COUNTS_763:
-            assert rows[expected]["superseded_by"] == LATER_763
-            current = LATER_763
+            later = horizon.release(763).source_at(n)
+            assert rows[expected]["superseded_by"] == later
+            current = later
         else:
             current = expected
             while rows[current].get("superseded_by") in NOTEBOOK_SOURCES:

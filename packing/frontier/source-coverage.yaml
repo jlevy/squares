@@ -10200,7 +10200,6 @@ sources:
     - 333
     - 334
     - 343
-    - 365
     - 370
     - 371
     - 372
@@ -10215,7 +10214,6 @@ sources:
     - 417
     - 420
     - 422
-    - 444
     - 447
     - 453
     - 456
@@ -10226,7 +10224,6 @@ sources:
     - 462
     - 463
     - 465
-    - 487
     - 494
     - 495
     - 496
@@ -10271,7 +10268,6 @@ sources:
     - 629
     - 630
     - 631
-    - 632
     - 638
     - 641
     - 642
@@ -10304,10 +10300,7 @@ sources:
     - 703
     - 704
     - 705
-    - 733
-    - 734
     - 736
-    - 737
     - 739
     - 742
     - 743
@@ -10321,8 +10314,6 @@ sources:
     - 757
     - 758
     - 759
-    - 788
-    - 789
     - 794
     - 797
     - 798
@@ -10340,7 +10331,6 @@ sources:
     - 813
     - 814
     - 815
-    - 845
     - 847
     - 851
     - 855
@@ -10358,7 +10348,6 @@ sources:
     - 872
     - 904
     - 905
-    - 910
     - 914
     - 915
     - 916
@@ -10374,8 +10363,6 @@ sources:
     - 932
     - 933
     - 934
-    - 966
-    - 970
     - 972
     - 976
     - 977
@@ -10406,7 +10393,6 @@ sources:
   evidence:
   - E-couzo-763-certificate-report
   - E-couzo-763-beyond-horizon-report
-  - E-couzo-763-recipe-report
   notes: >-
     Issue 763 (2026-10-23T23:35:51Z) asks to register 436 upper bounds at 268 to 9802 from
     franciscouzo/square-packing at 964ee2bd, pushed with efef7d1 and fa6237e at 23:38:42Z, after
@@ -10419,23 +10405,75 @@ sources:
     since T-240's adoption. The ledger of 24 October for issue 763
     (campaign/issue-intake/upper-bounds-issue763-20261024), every count to 1024 walked in report
     order from starts frozen at main e5c1c64e3 with Göbel's construction beside each row,
-    records 198 of the 201 claims at 325 to 1024: 184 certificates and 13 L-border recipes are
-    rows at the exact side rounded up at 12 places, and the deletion bound at 683 is held for a
-    decision (think-2z2n); 328, 850 and 909 restate f1ceee4's rows below the 12-place print
-    (think-fwa9). The walk held the 13 recipes, 365, 444, 487, 632, 733, 734, 737, 788, 789,
-    845, 910, 966 and 970, until a maintained construction checker existed; 43f666c's import
-    decides each exactly from its recipe and its replayed parent (devtools.construction_checker,
-    receipts/recipe-decisions.json; think-g2qy), dated by the first commit whose index states
-    it. The 197 supersede f1ceee4's rows (95), issue 719's (40), issue 732's 17cc220 rows (21),
-    couzo-index-2026-10-15's (16), couzo-verified-bounds-2026-10-14's (7), issue 715's (3),
-    issue 670's (3), couzo-reconcile-2026-10-20's (1), evand-compositions-2026-10-13's (1) and
-    couzo-certificates-2026-10-14's (1), and at 9 counts no row stood before them; each is below
-    the standing side by 4.85e-13 (970) to 6.78e-2 (696). 43f666c's rows supersede 72 of them
-    (couzo-43f666c-2026-10-24). The packet's filtered exact replay decided every certificate on
-    two routes with all six controls refused (receipts/filtered-exact-replay.json,
-    devtools.beyond_horizon_replay), and every side is below Göbel's construction at its count.
-    The 233 rows above 1024 are not walked here (think-llit).
+    records 198 of the 201 claims at 325 to 1024: 184 certificates are rows here at the exact
+    side rounded up at 12 places; the 13 L-border recipes, which the walk held until a
+    maintained construction checker existed, are rows of a source of their own since 43f666c's
+    import decided them a day later (couzo-issue763-2026-10-23-recipes, think-g2qy); and the
+    deletion bound at 683 is held for a decision (think-2z2n). 328, 850 and 909 restate
+    f1ceee4's rows below the 12-place print (think-fwa9). The 184 supersede f1ceee4's rows (92),
+    issue 719's (40), issue 732's 17cc220 rows (20), couzo-index-2026-10-15's (13),
+    couzo-verified-bounds-2026-10-14's (4), issue 715's (3), issue 670's (2),
+    evand-compositions-2026-10-13's (1) and couzo-certificates-2026-10-14's (1), and at 8 counts
+    no row stood before them; each is below the standing side by 2.80e-11 (803) to 6.78e-2
+    (696). 43f666c's rows supersede 65 of them (couzo-43f666c-2026-10-24). The packet's filtered
+    exact replay decided every one on two routes with all six controls refused
+    (receipts/filtered-exact-replay.json, devtools.beyond_horizon_replay), and every side is
+    below Göbel's construction at its count. The 233 rows above 1024 are not walked here
+    (think-llit).
   claims_record: resources/web/couzo-issue763-2026-10-23/acquisition/beyond-horizon-rows.json
+- id: couzo-issue763-2026-10-23-recipes
+  title: Francisco Couzo's L-border recipes of issue 763 at 964ee2bd, decided by the construction checker
+  role: source-repository
+  url: https://github.com/franciscouzo/square-packing/tree/964ee2bdf301d0c8912d956d4010f478dcbbd5ea
+  local: resources/web/couzo-issue763-2026-10-23/
+  source_key: '[Couzo issue 763 2026-10-23]'
+  scope:
+    n_values:
+    - 365
+    - 444
+    - 487
+    - 632
+    - 733
+    - 734
+    - 737
+    - 788
+    - 789
+    - 845
+    - 910
+    - 966
+    - 970
+  reviewed: '2026-10-25'
+  source_date: '2026-10-23'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/couzo-issue763-2026-10-23/README.md
+  - resources/web/couzo-issue763-2026-10-23/receipts/recipe-decisions.json
+  - resources/web/couzo-issue763-2026-10-23/acquisition/beyond-horizon-rows-recipes.json
+  evidence:
+  - E-couzo-763-recipe-report
+  notes: >-
+    The 13 upper bounds issue 763 (2026-10-23T23:35:51Z) claims at 365, 444, 487, 632, 733, 734,
+    737, 788, 789, 845, 910, 966 and 970 by square tiling and L-border recipes that
+    certified_bounds.json at 964ee2bd states on certificates at smaller counts. The ledger of 24
+    October for issue 763 (campaign/issue-intake/upper-bounds-issue763-20261024) records each
+    below the standing side, by 4.85e-13 (970) to 3.52e-2 (733, 788 and 845), and held it from a
+    row until a maintained construction checker existed (D2, think-f2io). 43f666c's import
+    (think-gn29) decides each exactly from its recipe and its parent certificate with
+    devtools.construction_checker, its bound tS + L and its count the construction's capacity,
+    every parent replayed on both routes with its six controls refused and all 117 recipe
+    controls refused (receipts/recipe-decisions.json; think-g2qy). Each row is the recipe's
+    exact side rounded up at 12 places, dated by the first commit whose index states it: efef7d1
+    at 365 and 970, 964ee2b at the rest. The rows reached main a day after the issue's 184
+    certificate rows (couzo-issue763-2026-10-23), so they are a coverage source of their own,
+    dated by the merge that adds them, with a claims record that holds exactly them
+    (devtools.beyond_horizon_replay Split; #800's review A, A1). They supersede 12 rows,
+    f1ceee4's (3), couzo-index-2026-10-15's (3), couzo-verified-bounds-2026-10-14's (3), issue
+    670's (1), couzo-reconcile-2026-10-20's (1) and issue 732's 17cc220 row (1), and at 910 no
+    row stood before them. At 444, 487, 632, 733, 737, 788 and 845, 43f666c's later recipe
+    supersedes them (couzo-43f666c-2026-10-24). Every side is below Göbel's construction at its
+    count.
+  claims_record: resources/web/couzo-issue763-2026-10-23/acquisition/beyond-horizon-rows-recipes.json
 - id: couzo-964ee2b-2026-10-23
   title: Francisco Couzo's index rows at 964ee2bd that issue 763 does not request
   role: source-repository
@@ -11308,8 +11346,9 @@ sources:
     no row there and the push of 23:38:42Z read commit by commit at its counts, records 106
     certificates and 16 recipes here at the exact side rounded up at 12 places, each below the
     side it was decided against by 8.53e-14 (459) to 1.33e-02 (691); each is the count's current
-    row. They supersede the rows of couzo-issue763-2026-10-23 (72, 7 of them the L-border
-    recipes the same import decides), of the push's notebook sources at 46 counts
+    row. They supersede the rows of couzo-issue763-2026-10-23 (65) and of
+    couzo-issue763-2026-10-23-recipes (7, the L-border recipes the same import decides), of
+    the push's notebook sources at 46 counts
     (kyleluecke-inos-2026-10-23 11, tymchishin-reclosure-v3-2026-10-23 10,
     aqibrazadev-blending-2026-10-23 8, alexchilton-fault-line-2026-10-23 6,
     tymchishin-22-3662-2026-10-23 5, lavrentev-cuda-run-361589987-2026-10-23 4 and
@@ -16002,7 +16041,7 @@ beyond_horizon_claims:
   value: '27.606601717855'
   assurance: reported
   disposition: superseded
-  superseded_by: couzo-issue763-2026-10-23
+  superseded_by: couzo-issue763-2026-10-23-recipes
   bead: think-nj7h
 - n: 734
   source_id: couzo-verified-bounds-2026-10-14
@@ -16202,7 +16241,7 @@ beyond_horizon_claims:
   value: '28.606601717871'
   assurance: reported
   disposition: superseded
-  superseded_by: couzo-issue763-2026-10-23
+  superseded_by: couzo-issue763-2026-10-23-recipes
   bead: think-nj7h
 - n: 789
   source_id: couzo-verified-bounds-2026-10-14
@@ -16402,7 +16441,7 @@ beyond_horizon_claims:
   value: '29.606601717842'
   assurance: reported
   disposition: superseded
-  superseded_by: couzo-issue763-2026-10-23
+  superseded_by: couzo-issue763-2026-10-23-recipes
   bead: think-nj7h
 - n: 846
   source_id: couzo-verified-bounds-2026-10-14
@@ -19362,7 +19401,7 @@ beyond_horizon_claims:
   value: '21.583782190152'
   assurance: reported
   disposition: superseded
-  superseded_by: couzo-issue763-2026-10-23
+  superseded_by: couzo-issue763-2026-10-23-recipes
   bead: think-f28n
 - n: 452
   source_id: couzo-issue670-2026-10-17
@@ -23049,7 +23088,7 @@ beyond_horizon_claims:
   value: '27.606601717826'
   assurance: reported
   disposition: superseded
-  superseded_by: couzo-issue763-2026-10-23
+  superseded_by: couzo-issue763-2026-10-23-recipes
   bead: think-yfoo
 - n: 735
   source_id: couzo-index-2026-10-15
@@ -23214,7 +23253,7 @@ beyond_horizon_claims:
   value: '28.606601717826'
   assurance: reported
   disposition: superseded
-  superseded_by: couzo-issue763-2026-10-23
+  superseded_by: couzo-issue763-2026-10-23-recipes
   bead: think-yfoo
 - n: 790
   source_id: couzo-index-2026-10-15
@@ -23700,7 +23739,7 @@ beyond_horizon_claims:
   value: '31.606601717826'
   assurance: reported
   disposition: superseded
-  superseded_by: couzo-issue763-2026-10-23
+  superseded_by: couzo-issue763-2026-10-23-recipes
   bead: think-yfoo
 - n: 967
   source_id: couzo-index-2026-10-15
@@ -24067,7 +24106,7 @@ beyond_horizon_claims:
   value: '22.583782190152'
   assurance: reported
   disposition: superseded
-  superseded_by: couzo-issue763-2026-10-23
+  superseded_by: couzo-issue763-2026-10-23-recipes
   bead: think-tmwt
 - n: 532
   source_id: couzo-reconcile-2026-10-20
@@ -24355,7 +24394,7 @@ beyond_horizon_claims:
   value: '25.677669529688'
   assurance: reported
   disposition: superseded
-  superseded_by: couzo-issue763-2026-10-23
+  superseded_by: couzo-issue763-2026-10-23-recipes
   bead: think-0gp6
 - n: 633
   source_id: mishapolk-issue732-2026-10-22
@@ -24842,7 +24881,7 @@ beyond_horizon_claims:
   value: '19.614368938496'
   assurance: reported
   disposition: superseded
-  superseded_by: couzo-issue763-2026-10-23
+  superseded_by: couzo-issue763-2026-10-23-recipes
   bead: think-e3im
 - n: 404
   source_id: mishapolk-issue732-f1ceee4-2026-10-23
@@ -25382,7 +25421,7 @@ beyond_horizon_claims:
   value: '27.677669529670'
   assurance: reported
   disposition: superseded
-  superseded_by: couzo-issue763-2026-10-23
+  superseded_by: couzo-issue763-2026-10-23-recipes
   bead: think-e3im
 - n: 742
   source_id: mishapolk-issue732-f1ceee4-2026-10-23
@@ -25820,7 +25859,7 @@ beyond_horizon_claims:
   value: '31.656854249500'
   assurance: reported
   disposition: superseded
-  superseded_by: couzo-issue763-2026-10-23
+  superseded_by: couzo-issue763-2026-10-23-recipes
   bead: think-e3im
 - n: 975
   source_id: mishapolk-issue732-f1ceee4-2026-10-23
@@ -28761,103 +28800,103 @@ beyond_horizon_claims:
   disposition: tracked-outside-case-corpus
   bead: think-lyf9
 - n: 365
-  source_id: couzo-issue763-2026-10-23
+  source_id: couzo-issue763-2026-10-23-recipes
   claim: upper-bound
   value: '19.614368938495'
   assurance: reported
   disposition: tracked-outside-case-corpus
-  bead: think-ptkk
+  bead: think-g2qy
 - n: 444
-  source_id: couzo-issue763-2026-10-23
+  source_id: couzo-issue763-2026-10-23-recipes
   claim: upper-bound
   value: '21.571428571434'
   assurance: reported
   disposition: superseded
   superseded_by: couzo-43f666c-2026-10-24
-  bead: think-ptkk
+  bead: think-g2qy
 - n: 487
-  source_id: couzo-issue763-2026-10-23
+  source_id: couzo-issue763-2026-10-23-recipes
   claim: upper-bound
   value: '22.571428571434'
   assurance: reported
   disposition: superseded
   superseded_by: couzo-43f666c-2026-10-24
-  bead: think-ptkk
+  bead: think-g2qy
 - n: 632
-  source_id: couzo-issue763-2026-10-23
+  source_id: couzo-issue763-2026-10-23-recipes
   claim: upper-bound
   value: '25.656854249507'
   assurance: reported
   disposition: superseded
   superseded_by: couzo-43f666c-2026-10-24
-  bead: think-ptkk
+  bead: think-g2qy
 - n: 733
-  source_id: couzo-issue763-2026-10-23
+  source_id: couzo-issue763-2026-10-23-recipes
   claim: upper-bound
   value: '27.571428571436'
   assurance: reported
   disposition: superseded
   superseded_by: couzo-43f666c-2026-10-24
-  bead: think-ptkk
+  bead: think-g2qy
 - n: 734
-  source_id: couzo-issue763-2026-10-23
+  source_id: couzo-issue763-2026-10-23-recipes
   claim: upper-bound
   value: '27.591378145504'
   assurance: reported
   disposition: tracked-outside-case-corpus
-  bead: think-ptkk
+  bead: think-g2qy
 - n: 737
-  source_id: couzo-issue763-2026-10-23
+  source_id: couzo-issue763-2026-10-23-recipes
   claim: upper-bound
   value: '27.656854249501'
   assurance: reported
   disposition: superseded
   superseded_by: couzo-43f666c-2026-10-24
-  bead: think-ptkk
+  bead: think-g2qy
 - n: 788
-  source_id: couzo-issue763-2026-10-23
+  source_id: couzo-issue763-2026-10-23-recipes
   claim: upper-bound
   value: '28.571428571436'
   assurance: reported
   disposition: superseded
   superseded_by: couzo-43f666c-2026-10-24
-  bead: think-ptkk
+  bead: think-g2qy
 - n: 789
-  source_id: couzo-issue763-2026-10-23
+  source_id: couzo-issue763-2026-10-23-recipes
   claim: upper-bound
   value: '28.591378145504'
   assurance: reported
   disposition: tracked-outside-case-corpus
-  bead: think-ptkk
+  bead: think-g2qy
 - n: 845
-  source_id: couzo-issue763-2026-10-23
+  source_id: couzo-issue763-2026-10-23-recipes
   claim: upper-bound
   value: '29.571428571436'
   assurance: reported
   disposition: superseded
   superseded_by: couzo-43f666c-2026-10-24
-  bead: think-ptkk
+  bead: think-g2qy
 - n: 910
-  source_id: couzo-issue763-2026-10-23
+  source_id: couzo-issue763-2026-10-23-recipes
   claim: upper-bound
   value: '30.691448975560'
   assurance: reported
   disposition: tracked-outside-case-corpus
-  bead: think-ptkk
+  bead: think-g2qy
 - n: 966
-  source_id: couzo-issue763-2026-10-23
+  source_id: couzo-issue763-2026-10-23-recipes
   claim: upper-bound
   value: '31.583782191753'
   assurance: reported
   disposition: tracked-outside-case-corpus
-  bead: think-ptkk
+  bead: think-g2qy
 - n: 970
-  source_id: couzo-issue763-2026-10-23
+  source_id: couzo-issue763-2026-10-23-recipes
   claim: upper-bound
   value: '31.656854249499'
   assurance: reported
   disposition: tracked-outside-case-corpus
-  bead: think-ptkk
+  bead: think-g2qy
 - n: 330
   source_id: couzo-43f666c-2026-10-24
   claim: upper-bound

@@ -950,8 +950,13 @@ _HELD_763 = (
         note="684's certificate less one square, which the issue claims",
     ),
 )
-#: #763's recipes, held until the construction checker decided them (think-g2qy).
+#: #763's recipes, held until the construction checker decided them in 43f666c's import, a
+#: day after the issue's certificates landed: rows of a coverage source of their own, dated
+#: by the merge that adds them, with the bead that decided them (`Split`; #800's review A,
+#: A1). `split_problems` holds them to the release's declared recipe rows.
 RECIPES_763 = frozenset({365, 444, 487, 632, 733, 734, 737, 788, 789, 845, 910, 966, 970})
+#: The coverage source of #763's recipe rows (`RECIPES_763`).
+COUZO_763_RECIPES_SOURCE = "couzo-issue763-2026-10-23-recipes"
 #: The publications the #763 walk records that the history walk holds, at the counts the
 #: walk records them (`HISTORY_HELD`).
 _HELD_IN_763: tuple[tuple[str, str], ...] = (
@@ -1306,6 +1311,28 @@ class SameCommitLeast:
 
 
 @dataclass(frozen=True, slots=True)
+class Split:
+    """A release's rows that reach `main` in a later merge than its others, recorded as a
+    coverage source of their own (#800's review A, A1).
+
+    A source carries one landing day, the day `main` first held any of its rows
+    (`devtools.stamp_landed`), and the home page's Recently Added lists all of a source's
+    rows under it. Rows a later merge adds to a landed release therefore go under a source
+    of their own, ``source_id``, with the bead that decided them, ``bead``, and a claims
+    record of their own in the packet, ``record``, holding exactly them, while the release's
+    record keeps the rest. ``counts`` are the rows the split holds: each must be a declared
+    row of the release that its walk records (`split_problems`). #763's 13 L-border recipes,
+    held until the construction checker decided them in 43f666c's import (think-g2qy) a day
+    after the issue's certificates landed, are the one split (`RECIPES_763`).
+    """
+
+    counts: frozenset[int]
+    source_id: str
+    bead: str
+    record: Path
+
+
+@dataclass(frozen=True, slots=True)
 class Release:
     """One report, as this module reads it from its packet.
 
@@ -1367,6 +1394,10 @@ class Release:
     ``walk``, and those above 1024 by ``walk_above``, the walk above 1024 that records them
     (`walk_of`). ``hosted`` names the hosted-data manifest of the certificates the packet
     pins and does not retain, read through `sqpack.hosted_data.require` (`hosted_bytes`).
+
+    **Rows a later merge adds.** ``split`` names the release's rows that reach `main` after
+    its others, with a coverage source, bead and claims record of their own (`Split`);
+    `source_at` and `bead_at` give each row's.
     """
 
     issue: int | None
@@ -1405,6 +1436,7 @@ class Release:
     decided_through: int | None = FROZEN_THROUGH
     walk_above: str = ""
     hosted: Path | None = None
+    split: Split | None = None
 
     def decides(self, n: int) -> bool:
         """Whether ``n`` is in the release's window (`decided_claims`)."""
@@ -1455,8 +1487,34 @@ class Release:
 
     @property
     def source(self) -> str:
-        """The coverage source whose dated rows record this report."""
+        """The coverage source whose dated rows record this report, but for the rows its
+        split holds (`source_at`)."""
         return self.source_id or self.packet
+
+    @property
+    def sources(self) -> tuple[str, ...]:
+        """Every coverage source whose rows record this report: its own, then its split's."""
+        return (self.source,) + ((self.split.source_id,) if self.split is not None else ())
+
+    def source_at(self, n: int) -> str:
+        """The coverage source whose row records this report at ``n``: the split's at a
+        count it holds (`Split`), else the release's."""
+        if self.split is not None and n in self.split.counts:
+            return self.split.source_id
+        return self.source
+
+    def bead_at(self, n: int) -> str:
+        """The bead a row at ``n`` names: the split's at a count it holds, else the
+        release's."""
+        if self.split is not None and n in self.split.counts:
+            return self.split.bead
+        return self.bead
+
+    @property
+    def records(self) -> tuple[Path, ...]:
+        """Every claims record of the release in its packet: its own, then its split's."""
+        own = self.path(RECORD)
+        return (own,) + ((self.directory / self.split.record,) if self.split else ())
 
     @property
     def issue_url(self) -> str:
@@ -2036,7 +2094,8 @@ RELEASES: dict[str, Release] = {
         # Issue #763 (2026-10-23T23:35:51Z) names 964ee2b and carries no table: its claims
         # are re-derived from the source's indexes by the README's rule (`CLAIM_MAP`), and
         # its rows are those its walk records in its window, to `FROZEN_THROUGH`
-        # (`declared_rows`).
+        # (`declared_rows`). Its 13 recipes, decided in 43f666c's import, are rows of a
+        # source of their own (`Split`, `RECIPES_763`).
         Release(
             issue=763,
             packet=COUZO_763_PACKET,
@@ -2057,6 +2116,12 @@ RELEASES: dict[str, Release] = {
             index="certified_bounds.json",
             index_key="entries",
             claim_map="claims",
+            split=Split(
+                RECIPES_763,
+                COUZO_763_RECIPES_SOURCE,
+                "think-g2qy",
+                Path("acquisition/beyond-horizon-rows-recipes.json"),
+            ),
         ),
         # The rows certified_bounds.json publishes at 964ee2b to `FROZEN_THROUGH` that the
         # issue's selection rule leaves out (`CLAIM_MAP`'s ``unrequested``): a publication
@@ -3094,7 +3159,7 @@ def beyond_horizon_rows(
         custody(chosen)
         sides = decided_sides(chosen)
     results = []
-    unrecorded = {n for n, source in unrecorded_rows() if source == chosen.source}
+    unrecorded = {n for n, source in unrecorded_rows() if source in chosen.sources}
     for row in decided_claims(chosen):
         if row.n in unrecorded:
             continue
@@ -3136,12 +3201,29 @@ def beyond_horizon_rows(
     return record
 
 
+def split_records(chosen: Release, record: Mapping[str, Any]) -> dict[Path, dict[str, Any]]:
+    """A release's beyond-horizon record as its claims records hold it, by path: the one
+    record, or, for a release with a split (`Split`), the rows the split does not hold under
+    the release's record and those it holds under the split's, each with the same header,
+    so each coverage source's claims record prints exactly its rows."""
+    if chosen.split is None:
+        return {chosen.path(RECORD): dict(record)}
+    held = chosen.split.counts
+    own, split = chosen.records
+    results = record["results"]
+    return {
+        own: {**record, "results": [row for row in results if row["n"] not in held]},
+        split: {**record, "results": [row for row in results if row["n"] in held]},
+    }
+
+
 def claims_record() -> dict[str, int]:
-    """Write each packet's beyond-horizon record and return its row counts."""
+    """Write each packet's beyond-horizon records and return each release's row count."""
     written: dict[str, int] = {}
     for chosen in RELEASES.values():
         record = beyond_horizon_rows(chosen)
-        _write(chosen.path(RECORD), record)
+        for path, part in split_records(chosen, record).items():
+            _write(path, part)
         written[chosen.key] = len(record["results"])
     return written
 
@@ -5550,7 +5632,8 @@ class ClaimMapWalk(NamedTuple):
     #: The packet whose receipts hold Polkovskyi's repository's publications.
     polkovskyi: Path
     #: An earlier issue whose claims at the walk's counts have no row among its starts,
-    #: walked as a report of its own (`earlier_issue_claims`): #763's at the 43f666c walk.
+    #: walked as a report of its own (`earlier_issue_claims`): #763's at the 43f666c walk,
+    #: the only issue the reading supports (`EARLIER_ISSUE`).
     earlier_issue: int | None = None
     #: The bead that owns the earlier issue's rows the walk records (`earlier_issue_claims`).
     earlier_bead: str = ""
@@ -5824,19 +5907,37 @@ def _other_phrase(claims: Sequence[Mapping[str, Any]]) -> list[str]:
     ]
 
 
+#: The one earlier issue a claim-map walk may read (`ClaimMapWalk.earlier_issue`). What the
+#: reading excludes (`devtools.couzo_763_claims.earlier_sides`, in `earlier_push`) and the
+#: notes it writes (`_earlier_issue_report`, `_earlier_push_reports`) are #763's and the push
+#: of 23:38:42Z's, so another issue is refused until it declares its own (#800's review A,
+#: A5).
+EARLIER_ISSUE = 763
+
+
+def _earlier_issue(walk: Walk, declared: ClaimMapWalk) -> int:
+    """The earlier issue ``walk`` names, which must be `EARLIER_ISSUE`."""
+    _require(
+        declared.earlier_issue == EARLIER_ISSUE,
+        f"{walk.name}: reads issue #{declared.earlier_issue} as an earlier issue; the "
+        f"reading's exclusions and notes are #{EARLIER_ISSUE}'s alone",
+    )
+    return EARLIER_ISSUE
+
+
 def earlier_issue_claims(walk: Walk) -> tuple[Release | None, list[dict[str, Any]]]:
-    """The claims a claim-map walk reads of the earlier issue it names
-    (`ClaimMapWalk.earlier_issue`), as a report of their own: each claim beyond the corpus
-    the walk reaches that its release's filtered receipt does not hold, so that no row of it
-    is among the walk's starts (a recipe, a deletion, or a claim its own walk does not
-    record). At the 43f666c walk these are #763's 13 recipes, which its walk held until this
-    walk's import decided them (think-g2qy), its deletion bound at 683, and 328, 850 and 909,
-    which restate f1ceee4's rows; the push of 23:38:42Z, which follows the issue, is walked
-    against them."""
+    """The claims a claim-map walk reads of #763, the earlier issue it may name
+    (`ClaimMapWalk.earlier_issue`, `EARLIER_ISSUE`), as a report of their own: each claim
+    beyond the corpus the walk reaches that its release's filtered receipt does not hold, so
+    that no row of it is among the walk's starts (a recipe, a deletion, or a claim its own
+    walk does not record). At the 43f666c walk these are #763's 13 recipes, which its walk
+    held until this walk's import decided them (think-g2qy), its deletion bound at 683, and
+    328, 850 and 909, which restate f1ceee4's rows; the push of 23:38:42Z, which follows the
+    issue, is walked against them."""
     declared = CLAIM_MAP_WALKS.get(walk.name)
     if declared is None or declared.earlier_issue is None:
         return None, []
-    chosen = release(declared.earlier_issue)
+    chosen = release(_earlier_issue(walk, declared))
     replayed = {int(row["n"]) for row in _read(chosen.path(FILTERED))["rows"]}
     return chosen, [
         claim
@@ -5854,7 +5955,8 @@ def _earlier_issue_report(
     earlier: Release,
     claims: Sequence[Mapping[str, Any]],
 ) -> dict[str, Any]:
-    """The earlier issue's claims (`earlier_issue_claims`) as a report of the walk."""
+    """#763's claims (`earlier_issue_claims`) as a report of the walk; the note names the
+    push of 23:38:42Z, so it is #763's alone (`EARLIER_ISSUE`)."""
     kinds = Counter(str(claim["kind"]) for claim in claims)
     described = _listing(
         [f"{count} {kind}{'' if count == 1 else 's'}" for kind, count in sorted(kinds.items())]
@@ -5913,8 +6015,9 @@ def walk_counts(walk: Walk) -> list[int]:
 
 
 def earlier_push(issue: int | str, clone: Path, read_on: str = "") -> dict[str, Any]:
-    """The push that made the earlier issue's pin public (`ClaimMapWalk.earlier_issue`),
-    read commit by commit at a claim-map walk's counts (`_push_statements`, #795's review
+    """The push that made #763's pin public, the earlier issue a claim-map walk may name
+    (`ClaimMapWalk.earlier_issue`, `EARLIER_ISSUE`), read commit by commit at the walk's
+    counts (`_push_statements`, #795's review
     A, A1): each commit's least new side at each count strictly below the frozen start, and
     none an earlier publication holds (`devtools.couzo_763_claims.earlier_sides`). A side
     a certificate the pin holds states names that certificate; a side only an index states,
@@ -5929,7 +6032,7 @@ def earlier_push(issue: int | str, clone: Path, read_on: str = "") -> dict[str, 
     declared = CLAIM_MAP_WALKS[walk.name]
     _require(declared.earlier_push, f"{walk.name}: reads no earlier push")
     _require(declared.earlier_issue is not None, f"{walk.name}: names no earlier issue")
-    earlier = release(int(declared.earlier_issue or 0))
+    earlier = release(_earlier_issue(walk, declared))
     push = _push_of(earlier)
     counts = walk_counts(walk)
     highs = _least_highs(_start_sides(walk, WALK_READ_AT_MAIN[walk.name], counts, read_on))
@@ -5983,8 +6086,9 @@ def write_earlier_push(issue: int | str, clone: Path, read_on: str = "") -> dict
 def _earlier_push_reports(
     walk: Walk, chosen: Release, counts: Sequence[int]
 ) -> list[dict[str, Any]]:
-    """The earlier push's claims (`earlier_push`) as reports of the walk, one a commit, each
-    dated by the push and ordered by its commit's time (`devtools.intake_ledger.walk`)."""
+    """The push of 23:38:42Z's claims (`earlier_push`) as reports of the walk, one a commit,
+    each dated by the push and ordered by its commit's time (`devtools.intake_ledger.walk`);
+    the notes are #763's alone (`EARLIER_ISSUE`)."""
     receipt = _read(chosen.directory / EARLIER_PUSH)
     _require(
         receipt["counts"] == list(counts),
@@ -6736,11 +6840,23 @@ def _awaits(walk: Walk, report: str, n: int) -> bool:
 
 def _source_of(walk: Walk, report: str, n: int) -> str:
     """The coverage source whose rows record a report the walk records at ``n``."""
-    ours = release_at(walk, report, n)
-    source = ours.source if ours is not None else walk.later.get(report)
+    source = _report_source(walk, report, n)
     _require(source is not None, f"{report}: the ledger walks a report no source records")
     assert source is not None
     return source
+
+
+def _report_source(walk: Walk, report: str, n: int) -> str | None:
+    """The coverage source of a report ``walk`` walks at ``n``: its release's there
+    (`Release.source_at`), or, for a report no release of the walk is, the source the walk
+    names for it (`Walk.later`), which is a split's at a count the split holds (`Split`);
+    None where neither is."""
+    ours = release_at(walk, report, n)
+    if ours is not None:
+        return ours.source_at(n)
+    source = walk.later.get(report)
+    owners = [item for item in RELEASES.values() if item.source == source]
+    return owners[0].source_at(n) if len(owners) == 1 else source
 
 
 def _counts(walk: Walk) -> list[dict[str, Any]]:
@@ -6789,7 +6905,9 @@ def planned_rows() -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
     for chosen in RELEASES.values():
         printed = {
-            row["n"]: row["offered_side"] for row in _read(chosen.path(RECORD))["results"]
+            row["n"]: row["offered_side"]
+            for record in chosen.records
+            for row in _read(record)["results"]
         }
         for row in decided_claims(chosen):
             walk = walk_of(chosen, row.n)
@@ -6810,7 +6928,7 @@ def planned_rows() -> list[dict[str, Any]]:
             ]
             planned: dict[str, Any] = {
                 "n": row.n,
-                "source_id": chosen.source,
+                "source_id": chosen.source_at(row.n),
                 "claim": "upper-bound",
                 "value": printed[row.n],
                 "assurance": "reported",
@@ -6818,7 +6936,7 @@ def planned_rows() -> list[dict[str, Any]]:
             }
             if later:
                 planned["superseded_by"] = _source_of(walk, later[0], row.n)
-            planned["bead"] = chosen.bead
+            planned["bead"] = chosen.bead_at(row.n)
             rows.append(planned)
     return rows
 
@@ -6833,7 +6951,7 @@ def unrecorded_rows() -> list[tuple[int, str]]:
                 step["report"] == chosen.label and step["verdict"] == NOT_RECORDED
                 for step in steps
             ):
-                found.append((row.n, chosen.source))
+                found.append((row.n, chosen.source_at(row.n)))
     return found
 
 
@@ -6872,7 +6990,7 @@ def _planned_supersessions() -> list[tuple[Walk, int, str, str]]:
             start = _start_source(count)
             ours = release_at(walk, recorded[0], count["n"]) if recorded else None
             if start is not None and ours is not None:
-                flips.append((walk, count["n"], start, ours.source))
+                flips.append((walk, count["n"], start, ours.source_at(count["n"])))
     return flips
 
 
@@ -6911,8 +7029,7 @@ def held_problems(register: Mapping[str, Any]) -> list[str]:
                         problems.append(
                             f"{where} n={n}: the walk does not record it, so it holds nothing"
                         )
-                    ours = release_at(walk, report, n)
-                    source = ours.source if ours is not None else walk.later.get(report)
+                    source = _report_source(walk, report, n)
                     if source is not None and (n, source) in rows:
                         problems.append(
                             f"{where} n={n}: held for {item.bead}, yet {source} has a row there"
@@ -7191,8 +7308,7 @@ def _reached(walk: Walk, n: int) -> set[str]:
     reached = {_start_source(count)}
     for step in count["steps"]:
         report = step["report"]
-        ours = release_at(walk, report, n)
-        reached.add(ours.source if ours is not None else walk.later.get(report))
+        reached.add(_report_source(walk, report, n))
     return {source for source in reached if source is not None}
 
 
@@ -7317,7 +7433,7 @@ def coverage_problems(coverage: Mapping[str, Any] | None = None) -> list[str]:
         safe_load(COVERAGE.read_text(encoding="utf-8")) if coverage is None else coverage
     )
     rows = {(row["n"], row["source_id"]): row for row in register["beyond_horizon_claims"]}
-    releases = {item.source: item for item in RELEASES.values()}
+    releases = {source: item for item in RELEASES.values() for source in item.sources}
     problems = []
     for row in planned_rows():
         held = rows.get((row["n"], row["source_id"]))
@@ -7432,6 +7548,34 @@ def sample_problems(
     return problems
 
 
+def split_problems(chosen: Release) -> list[str]:
+    """Where a release's split (`Split`) does not hold: it names a source, bead and claims
+    record of its own, and each count it holds is a decided row of the release that its
+    walk records, so the split's source holds exactly the rows it names."""
+    split = chosen.split
+    if split is None:
+        return []
+    where = f"{chosen.label}: the split {split.source_id}"
+    problems = [
+        f"{where} {problem}"
+        for problem, failed in (
+            ("is the release's own source", split.source_id == chosen.source),
+            ("names the release's claims record", split.record == chosen.record),
+            ("holds no count", not split.counts),
+            ("names no decision's bead", not _BEAD.fullmatch(split.bead)),
+        )
+        if failed
+    ]
+    decided = {row.n for row in decided_claims(chosen)}
+    unrecorded = {n for n, source in unrecorded_rows() if source in chosen.sources}
+    problems.extend(
+        f"{where} holds n={n}, which is not a row of the release its walk records"
+        for n in sorted(split.counts)
+        if n not in decided or n in unrecorded
+    )
+    return problems
+
+
 def release_problems(chosen: Release, *, replay: bool, workers: int) -> list[str]:
     """Problems with one packet's receipts and record; empty when they hold."""
     custody(chosen)
@@ -7458,11 +7602,14 @@ def release_problems(chosen: Release, *, replay: bool, workers: int) -> list[str
             if _stable(fresh) != _stable(kept)
         )
     problems += recipe_problems(chosen, replay=replay, workers=workers)
-    record = chosen.path(RECORD)
-    rebuilt = retained_dumps(beyond_horizon_rows(chosen, sides), sort_keys=True)
-    if not record.is_file() or record.read_text(encoding="utf-8") != rebuilt:
-        problems.append(f"{chosen.label}: the beyond-horizon record differs from its rebuild")
-    return problems + _cross_check_problems(chosen, decided, sides)
+    for record, part in split_records(chosen, beyond_horizon_rows(chosen, sides)).items():
+        rebuilt = retained_dumps(part, sort_keys=True)
+        if not record.is_file() or record.read_text(encoding="utf-8") != rebuilt:
+            which = f" {record.name}" if chosen.split is not None else ""
+            problems.append(
+                f"{chosen.label}: the beyond-horizon record{which} differs from its rebuild"
+            )
+    return problems + split_problems(chosen) + _cross_check_problems(chosen, decided, sides)
 
 
 def _cross_check_problems(
@@ -7501,7 +7648,7 @@ def _cross_check_problems(
     compared = [
         (item["n"], Fraction(item["side"]), item["relation"]) for item in comparison["detail"]
     ]
-    unrecorded = {n for n, source in unrecorded_rows() if source == chosen.source}
+    unrecorded = {n for n, source in unrecorded_rows() if source in chosen.sources}
     sides = [(row.n, decided[row.n]) for row in rows]
     if [(n, side) for n, side, _ in compared] != sides or any(
         relation != "below" for n, _, relation in compared if n not in unrecorded

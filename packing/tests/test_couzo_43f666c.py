@@ -13,7 +13,9 @@ dates.
 
 from __future__ import annotations
 
+import dataclasses
 import json
+import subprocess
 from collections import Counter
 from fractions import Fraction
 from pathlib import Path
@@ -29,6 +31,7 @@ from devtools import couzo_43f666c_claims as claims
 LABEL = "franciscouzo/square-packing@43f666c"
 SOURCE = "couzo-43f666c-2026-10-24"
 SOURCE_763 = "couzo-issue763-2026-10-23"
+RECIPES_SOURCE_763 = "couzo-issue763-2026-10-23-recipes"
 WALK = replay.ROOT / "campaign/issue-intake/upper-bounds-couzo-43f666c-20261024"
 #: #763's recipes, held on its walk until the construction checker decided them.
 RECIPES_763 = [365, 444, 487, 632, 733, 734, 737, 788, 789, 845, 910, 966, 970]
@@ -282,13 +285,103 @@ def test_an_index_entry_that_changes_the_recipe_does_not_date_it() -> None:
     assert not replay.states_recipe(None, row)
 
 
+def _git(repo: Path, *args: str) -> str:
+    """Run git in a scratch repository with no hooks, signing or user configuration."""
+    return subprocess.run(
+        [
+            "git",
+            "-c",
+            "user.email=test@example.invalid",
+            "-c",
+            "user.name=Test",
+            "-c",
+            "commit.gpgsign=false",
+            "-c",
+            "core.hooksPath=/dev/null",
+            "-C",
+            str(repo),
+            *args,
+        ],
+        capture_output=True,
+        text=True,
+        check=True,
+    ).stdout.strip()
+
+
+def _commit(repo: Path, name: str, text: str, message: str) -> str:
+    """Commit ``text`` as ``name`` in ``repo``; the commit's SHA-1."""
+    (repo / name).write_text(text, "utf-8")
+    _git(repo, "add", name)
+    _git(repo, "commit", "-q", "--no-verify", "-m", message)
+    return _git(repo, "rev-parse", "HEAD")
+
+
+def test_recipe_first_commits_reads_the_index_history_oldest_first(tmp_path: Path) -> None:
+    """#800's review A, A8: `recipe_first_commits` on a history of its own. The index first
+    lacks the recipe, then states the same construction on another parent, then states
+    the recipe itself, and a later commit keeps it while changing another entry; a commit
+    that leaves the index alone is passed over. The row is dated by the first index that
+    states it, and a row no index states is refused."""
+    (row,) = [row for row in replay.recipe_claims(replay.release(763)) if row.n == 632]
+    recipe = dict(row.recipe or {})
+    entry = {
+        "kind": "construction",
+        "construction": {
+            key: recipe[key]
+            for key in ("kind", "source_n", "tiles_per_side", "layers", "capacity")
+        },
+        "certificate_sha256": recipe["sha256"],
+        "bound": recipe["bound"],
+        "deleted_squares": 0,
+    }
+    other = {"kind": "certificate"}
+    versions = (
+        ({"631": other}, "no recipe at 632"),
+        ({"632": entry | {"certificate_sha256": "0" * 64}}, "the recipe on another parent"),
+        ({"632": entry}, "the recipe"),
+        ({"631": other, "632": entry}, "the recipe kept beside another entry"),
+    )
+    repo = tmp_path / "source"
+    repo.mkdir()
+    _git(repo, "init", "-q")
+    index = replay.release(763).index
+    commits = [
+        _commit(repo, index, json.dumps({"entries": entries}), message)
+        for entries, message in versions
+    ]
+    head = _commit(repo, "README", "unrelated", "the index unchanged")
+    chosen = dataclasses.replace(replay.release(763), retained=head)
+    assert replay.recipe_first_commits(chosen, repo, [row]) == {632: commits[2]}
+    assert replay.recipe_first_commits(chosen, repo, []) == {}
+    never = dataclasses.replace(row, n=633)
+    with pytest.raises(replay.ReplayError, match=r"states the recipe at \[633\]"):
+        replay.recipe_first_commits(chosen, repo, [never])
+
+
+def test_only_763_is_read_as_an_earlier_issue(monkeypatch: pytest.MonkeyPatch) -> None:
+    """#800's review A, A5: what the earlier-issue reading excludes and the notes it writes
+    are #763's, so a claim-map walk naming another issue is refused rather than read with
+    #763's exclusions and notes."""
+    walk = replay.WALKS[replay.COUZO_43F]
+    declared = replay.CLAIM_MAP_WALKS[replay.COUZO_43F]
+    assert declared.earlier_issue == replay.EARLIER_ISSUE == 763
+    monkeypatch.setitem(
+        replay.CLAIM_MAP_WALKS, replay.COUZO_43F, declared._replace(earlier_issue=719)
+    )
+    with pytest.raises(replay.ReplayError, match="#763's alone"):
+        replay.earlier_issue_claims(walk)
+    with pytest.raises(replay.ReplayError, match="#763's alone"):
+        replay.earlier_push(LABEL, Path("/nonexistent"))
+
+
 # --------------------------------------------------------------------------- the register
 
 
 def test_43f666c_s_rows_are_current_and_supersede_the_rows_they_beat() -> None:
     """Each of the 122 is the count's current row. The first report the walk records with a
     row beats main's start at 115 counts; at the other 7, #763's recipe row this import
-    writes comes first, and the register leads from it to 43f666c's."""
+    writes comes first, a row of the recipes' own source (`Split`), and the register leads
+    from it to 43f666c's."""
     rows = [row for row in replay.planned_rows() if row["source_id"] == SOURCE]
     assert len(rows) == 122
     assert all(row["disposition"] == "tracked-outside-case-corpus" for row in rows)
@@ -301,7 +394,7 @@ def test_43f666c_s_rows_are_current_and_supersede_the_rows_they_beat() -> None:
     after = {
         row["n"]
         for row in register["beyond_horizon_claims"]
-        if row["source_id"] == SOURCE_763 and row.get("superseded_by") == SOURCE
+        if row["source_id"] == RECIPES_SOURCE_763 and row.get("superseded_by") == SOURCE
     }
-    assert after >= {444, 487, 632, 733, 737, 788, 845}
+    assert after == {444, 487, 632, 733, 737, 788, 845}
     assert not [problem for problem in replay.coverage_problems(register) if SOURCE in problem]

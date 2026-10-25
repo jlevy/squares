@@ -15,10 +15,11 @@ below 1024 (think-ptkk):
   [ledger of 24 October for issue 763](../../../campaign/issue-intake/upper-bounds-issue763-20261024/README.md)
   records 198 of the 201 claims in report order. 184 certificates are dated
   beyond-horizon rows of the `couzo-issue763-2026-10-23` source in
-  [source-coverage.yaml](../../../frontier/source-coverage.yaml), and so, since
-  `43f666c`’s import, are the 13 L-border recipes ([The Recipes, Decided](#the-recipes-decided));
-  the deletion bound at 683 is held for a decision; 328, 850 and 909 restate the f1ceee4
-  rows the record already holds.
+  [source-coverage.yaml](../../../frontier/source-coverage.yaml). Since `43f666c`’s import
+  the 13 L-border recipes are rows too, of a source of their own,
+  `couzo-issue763-2026-10-23-recipes` ([The Recipes, Decided](#the-recipes-decided)); the
+  deletion bound at 683 is held for a decision; 328, 850 and 909 restate the f1ceee4 rows
+  the record already holds.
 - **The 233 above 1024** are retained where they are certificates and wait on think-llit,
   which applies the owner’s answer that rows above 1024 are tracked.
 - **15 further index rows** at or below 1024, which the issue’s selection rule leaves out,
@@ -251,11 +252,16 @@ landed with the code for rows above 1024 (#793), so `43f666c`’s import decides
   only its declared holds changed. `beyond_horizon_replay.WALKS` no longer holds the 13
   (`_HELD_763` keeps 683 alone), so the release declares them as rows with their recipes
   ([acquisition/declared-rows.json](acquisition/declared-rows.json), 197 rows), and
-  the walk’s `sources.yaml`, `ledger.yaml` and README say so. The claims record, the first
-  commits and the Göbel receipt gain the 13; every side is below Göbel’s construction.
-- **The rows.** Each is a row of the `couzo-issue763-2026-10-23` source at the recipe’s
-  exact side rounded up at 12 places, below the standing side by 4.85e-13 (970) to 3.52e-2
-  (733, 788 and 845). They supersede f1ceee4’s rows at 365, 737 and 970,
+  the walk’s `sources.yaml`, `ledger.yaml` and README say so. The first commits and the
+  Göbel receipt gain the 13, and every side is below Göbel’s construction. The release’s
+  claims record keeps its 184 rows as before; the 13 have a claims record of their own,
+  [acquisition/beyond-horizon-rows-recipes.json](acquisition/beyond-horizon-rows-recipes.json).
+- **The rows.** Each is a row of the `couzo-issue763-2026-10-23-recipes` source, which
+  names think-g2qy, at the recipe’s exact side rounded up at 12 places. A source carries the
+  one day `main` first held its rows, and these reach `main` a day after the 184, so they are
+  a source of their own (`beyond_horizon_replay.Split`; #800’s review A, A1). Each is below
+  the standing side by 4.85e-13 (970) to 3.52e-2 (733, 788 and 845). They supersede
+  f1ceee4’s rows at 365, 737 and 970,
   `couzo-verified-bounds-2026-10-14`’s at 733, 788 and 845, `couzo-index-2026-10-15`’s at
   734, 789 and 966, #670’s at 444, `couzo-reconcile-2026-10-20`’s at 487 and #732’s at
   632; at 910 the grid stood. At 444, 487, 632, 733, 737, 788 and 845 `43f666c`’s own
@@ -266,8 +272,12 @@ landed with the code for rows above 1024 (#793), so `43f666c`’s import decides
   reads that push commit by commit after the issue: each of its sides there is above or
   equal to the issue’s recipe, so none is recorded.
 - **The expansions.** Each recipe also has its full n-square expansion under
-  `certificates/parents/` at exactly its side, which the parents’ manifest records; the
-  record decides the recipe and does not read the expansion. The author is asked about them.
+  `certificates/parents/` at exactly its side, which the parents’ manifest records. The
+  issue claims the recipe, so the checker decides it and the expansion is not read, by the
+  runbook’s rule for a recipe the source also expands
+  ([result-import.md, D2](../../../campaign/result-import.md#several-reports-at-one-count)), as the push’s
+  notebook rows read theirs because the index credits them to a notebook (#795’s review A,
+  A2). The author is asked about them.
 
 ## The Unrequested Rows
 

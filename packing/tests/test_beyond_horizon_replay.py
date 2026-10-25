@@ -1482,10 +1482,10 @@ def test_732_declares_the_77_rows_its_walk_records_and_restates_499() -> None:
 def test_732_s_rows_are_current_and_supersede_the_rows_they_beat() -> None:
     """#732's 77 rows supersede the rows they beat, and its walk plans each current. Since
     24 October f1ceee4's rows, which a later walk records, supersede 47 of them in the
-    register, as a later import may (`_superseded_after`), #763's rows 21 more (632's
-    recipe row since 43f666c's import, think-g2qy), the push of 23:38:42Z 8, its first
-    commits' rows, Couzo's own (think-lyf9; #795's review A), and 43f666c's the last, at 683
-    (think-gn29)."""
+    register, as a later import may (`_superseded_after`), #763's rows 20 more and its
+    recipe at 632 one (a source of its own since 43f666c's import, think-g2qy), the push of
+    23:38:42Z 8, its first commits' rows, Couzo's own (think-lyf9; #795's review A), and
+    43f666c's the last, at 683 (think-gn29)."""
     rows = [row for row in replay.planned_rows() if row["bead"] == "think-0gp6"]
     assert len(rows) == 77
     assert all("superseded_by" not in row for row in rows)
@@ -1497,7 +1497,8 @@ def test_732_s_rows_are_current_and_supersede_the_rows_they_beat() -> None:
     )
     assert held == {
         F1_SOURCE: 47,
-        SOURCE_763: 21,
+        SOURCE_763: 20,
+        RECIPES_SOURCE_763: 1,
         "couzo-efef7d1-2026-10-23": 6,
         "couzo-fa6237e-2026-10-23": 2,
         "couzo-43f666c-2026-10-24": 1,
@@ -2043,24 +2044,34 @@ def test_a_claim_record_read_from_23_october_stands_on_goebel_s_construction(
 
 I763 = replay.ROOT / "campaign/issue-intake/upper-bounds-issue763-20261024"
 SOURCE_763 = "couzo-issue763-2026-10-23"
+#: The source of #763's 13 recipes, which reach `main` a day after its other rows (`Split`).
+RECIPES_SOURCE_763 = "couzo-issue763-2026-10-23-recipes"
 SOURCE_964 = "couzo-964ee2b-2026-10-23"
 PUBLICATION_964 = "franciscouzo/square-packing@964ee2b"
 #: #763's 13 recipes the walk records, held for a construction checker until 43f666c's
 #: import decided them (think-g2qy).
 RECIPES_763 = [365, 444, 487, 632, 733, 734, 737, 788, 789, 845, 910, 966, 970]
-#: The rows #763's 197 supersede, by the source that held each count; at 9 counts no row
-#: stood before them (Göbel's construction or the grid).
+#: The rows #763's 184 certificate rows supersede, by the source that held each count; at 8
+#: counts no row stood before them (Göbel's construction or the grid).
 SUPERSEDED_BY_763 = {
-    "mishapolk-issue732-f1ceee4-2026-10-23": 95,
+    "mishapolk-issue732-f1ceee4-2026-10-23": 92,
     "mishapolk-issue719-2026-10-22": 40,
-    "mishapolk-issue732-2026-10-22": 21,
-    "couzo-index-2026-10-15": 16,
-    "couzo-verified-bounds-2026-10-14": 7,
+    "mishapolk-issue732-2026-10-22": 20,
+    "couzo-index-2026-10-15": 13,
+    "couzo-verified-bounds-2026-10-14": 4,
     "couzo-issue715-2026-10-21": 3,
-    "couzo-issue670-2026-10-17": 3,
-    "couzo-reconcile-2026-10-20": 1,
+    "couzo-issue670-2026-10-17": 2,
     "evand-compositions-2026-10-13": 1,
     "couzo-certificates-2026-10-14": 1,
+}
+#: The rows #763's 13 recipe rows supersede; at 910 the grid stood.
+SUPERSEDED_BY_763_RECIPES = {
+    "mishapolk-issue732-f1ceee4-2026-10-23": 3,
+    "couzo-index-2026-10-15": 3,
+    "couzo-verified-bounds-2026-10-14": 3,
+    "mishapolk-issue732-2026-10-22": 1,
+    "couzo-issue670-2026-10-17": 1,
+    "couzo-reconcile-2026-10-20": 1,
 }
 
 
@@ -2176,7 +2187,6 @@ def test_the_763_walk_holds_683_and_names_what_rests_on_holds() -> None:
     43f666c's import (think-g2qy); it holds only the deletion bound at 683 now."""
     walk = replay.WALKS[replay.ISSUE_763]
     (deletion,) = walk.held["#763"]
-    assert sorted(replay.RECIPES_763) == RECIPES_763
     assert (deletion.kind, deletion.bead, deletion.also) == (
         replay.CONSEQUENCE,
         "think-2z2n",
@@ -2204,15 +2214,87 @@ def test_the_763_ledger_transcribes_its_sources_from_the_claim_map_and_the_scan(
 
 
 def test_763_s_rows_are_current_and_supersede_the_rows_they_beat() -> None:
-    rows = [
-        row for row in replay.planned_rows() if row["source_id"] in (SOURCE_763, SOURCE_964)
-    ]
-    assert Counter(row["source_id"] for row in rows) == {SOURCE_763: 197, SOURCE_964: 10}
+    sources = (SOURCE_763, RECIPES_SOURCE_763, SOURCE_964)
+    rows = [row for row in replay.planned_rows() if row["source_id"] in sources]
+    assert Counter(row["source_id"] for row in rows) == {
+        SOURCE_763: 184,
+        RECIPES_SOURCE_763: 13,
+        SOURCE_964: 10,
+    }
     assert all("superseded_by" not in row for row in rows)
-    beaten = Counter(
-        start for _, start, source in replay.planned_supersessions() if source == SOURCE_763
+    for source, expected in (
+        (SOURCE_763, SUPERSEDED_BY_763),
+        (RECIPES_SOURCE_763, SUPERSEDED_BY_763_RECIPES),
+    ):
+        beaten = Counter(
+            start for _, start, found in replay.planned_supersessions() if found == source
+        )
+        assert beaten == expected, source
+
+
+def test_763_s_recipes_are_a_source_of_their_own_with_their_own_record() -> None:
+    """#800's review A, A1: #763's 13 recipes reach `main` a day after its other rows, so
+    they are a coverage source of their own (`Split`), naming think-g2qy, with a claims
+    record that holds exactly them, while the release's record keeps its 184 rows. The split
+    holds exactly the release's recipe rows, the counts its recipe decisions decide
+    (`RECIPES_763`, #800's review A, A6), and each source's rows carry its own landing day."""
+    chosen = replay.release(763)
+    assert chosen.split is not None
+    recipes = [row.n for row in replay.recipe_claims(chosen)]
+    assert recipes == RECIPES_763 == sorted(chosen.split.counts)
+    assert chosen.split.counts is replay.RECIPES_763
+    decided = _read(chosen.path(replay.RECIPES))["rows"]
+    assert [item["n"] for item in decided] == RECIPES_763
+    assert replay.split_problems(chosen) == []
+    own, split = ([row["n"] for row in _read(path)["results"]] for path in chosen.records)
+    assert split == RECIPES_763
+    assert len(own) == 184
+    assert not set(own) & set(split)
+    planned = [row for row in replay.planned_rows() if row["source_id"] == RECIPES_SOURCE_763]
+    assert [row["n"] for row in sorted(planned, key=lambda row: row["n"])] == RECIPES_763
+    assert {row["bead"] for row in planned} == {"think-g2qy"}
+    coverage = safe_load(replay.COVERAGE.read_text(encoding="utf-8"))
+    held = {
+        row["n"]: row
+        for row in coverage["beyond_horizon_claims"]
+        if row["source_id"] == RECIPES_SOURCE_763
+    }
+    assert sorted(held) == RECIPES_763
+    assert not any(
+        row["source_id"] == SOURCE_763 and row["n"] in replay.RECIPES_763
+        for row in coverage["beyond_horizon_claims"]
     )
-    assert beaten == SUPERSEDED_BY_763
+    from devtools import stamp_landed  # noqa: PLC0415
+
+    landed = stamp_landed.read_landings(stamp_landed.LANDINGS.read_text(encoding="utf-8"))
+    assert landed.sources[SOURCE_763] == "2026-10-24"
+    assert landed.sources[RECIPES_SOURCE_763] == "2026-10-25"
+
+
+def test_a_split_that_is_not_the_release_s_own_rows_is_refused() -> None:
+    """A split names a source, bead and record of its own, and holds only rows of the
+    release its walk records: 683, which the walk holds, and 909, which it does not record,
+    are named, as is a split that reuses the release's source or record."""
+    chosen = replay.release(763)
+    assert chosen.split is not None
+    wrong = dataclasses.replace(
+        chosen,
+        split=dataclasses.replace(
+            chosen.split,
+            counts=chosen.split.counts | {683, 909},
+            source_id=chosen.source,
+            record=chosen.record,
+            bead="g2qy",
+        ),
+    )
+    where = f"#763: the split {chosen.source}"
+    assert replay.split_problems(wrong) == [
+        f"{where} is the release's own source",
+        f"{where} names the release's claims record",
+        f"{where} names no decision's bead",
+        f"{where} holds n=683, which is not a row of the release its walk records",
+        f"{where} holds n=909, which is not a row of the release its walk records",
+    ]
 
 
 def _flip_964ee2b_at_204(monkeypatch: pytest.MonkeyPatch) -> None:
