@@ -24285,7 +24285,8 @@ issues:
     title: 's(182) ≤ 13.970916436215: registration request'
     author: evand
     opened: '2026-10-25'
-    state: open
+    state: closed
+    closed: '2026-10-25'
     kind: result-report
     triage: done
     summary: >-
@@ -24314,8 +24315,8 @@ issues:
       review of 25 October (think-meci) accepted it with no blocking or major finding, so
       T-243 is at V3/C3, scored S3, credited to Daniel from an L-cut of Couzo's T-188 (M-1),
       and the case at 182 adopted it as its house best packing in the pass of 25 October,
-      with both strong generators' regularization in the same pull request. Its four
-      questions for the author are informational: the issue's own start side and the
+      with both strong generators' regularization in the same pull request. The five
+      questions of its final comment are informational: the issue's own start side and the
       review's measurement settle the start. Claude assistance disclosed.
     read_through: '2026-10-25T04:16:24Z'
     results:
@@ -24338,7 +24339,26 @@ issues:
     - think-2lzo
     - think-meci
     answer_bead: think-2lzo
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/806#issuecomment-6395681914
+      date: '2026-10-25'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n182
+        id: T-243
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: n182
+        id: E-evand-n182-certificate-report
+        status: reviewed
+      - result: n182
+        id: E-evand-n182-exact-feasibility
+        status: confirmed
+      - result: n182
+        id: E-evand-n182-review-exact-feasibility
+        status: confirmed
     close_when: >-
       The result is registered, reviewed and adopted at 182 with its drawing regularized, and
       the reply on main says so; nothing the author asked for is queued.
