@@ -34,6 +34,10 @@ contributor:
   - id: github-social-crosslink
     url: https://github.com/ctjlewis
     locator: 'Public GitHub profile checked 2026-10-21 directly links twitter.com/ctjlewis; the account handle matches the retained announcement receipt.'
+  - id: n12-formalization-credit
+    archive_path: packing/resources/web/jatloe-n12-lean-2026-10-16/Jatloe12SquaresFormalized/README.md
+    url: https://github.com/Queuingtheorydotcom/Jatloe12SquaresFormalized/blob/d0caf4532a7ead68be1389ef87387b126fc2e0ab/README.md
+    locator: 'Credits of the twelve-square formalization: “CTJLewis refactored and compiled the formalization.” SOURCE-PROVENANCE.json lists CTJLewis under credits as “Refactoring and compiling”. The label is this profile’s GitHub and X handle ctjlewis, matched ignoring case, and the proof sources are said to come from EvolvingPrograms/SquaresLean, the organization the public profile names as an affiliation.'
   provenance:
   - field: /display_name
     sources:

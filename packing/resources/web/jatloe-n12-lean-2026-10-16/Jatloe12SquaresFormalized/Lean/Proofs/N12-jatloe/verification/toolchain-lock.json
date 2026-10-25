@@ -1,0 +1,10 @@
+{
+  "toolchain": "leanprover/lean4:v4.35.0",
+  "lean_release": "https://github.com/leanprover/lean4/releases/tag/v4.35.0",
+  "mathlib": {
+    "tag": "v4.35.0",
+    "revision": "56a005855ea17e0b0958f73ec801ae140b0a1679",
+    "release": "https://github.com/leanprover-community/mathlib4/releases/tag/v4.35.0"
+  },
+  "resolved_at": "2026-10-16T04:18:34.473745+00:00"
+}

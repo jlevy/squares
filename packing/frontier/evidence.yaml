@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:FrontierEvidenceSet/v1
   schema: frontier-evidence.schema.yaml
   status: enforced
-last_reviewed: '2026-10-24'
+last_reviewed: '2026-10-25'
 evidence:
   - id: E-n017-kleddamag-rational-upper
     claim: upper-bound
@@ -11917,6 +11917,76 @@ evidence:
       source's controls rebuilt byte for byte. It decides no coverage and is no route to
       the bound; Daniel's verifier and the native interval run decide it.
     source_reviewed: '2026-10-05'
+
+  - id: E-n012-jatloe-lean-report
+    claim: exact-value
+    scope: {n_values: [12]}
+    assurance: reported
+    reported_method: proof-assistant-checked
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Jatloe n12 Lean 2026-10-16]'
+    certificate: packing/resources/web/jatloe-n12-lean-2026-10-16/Jatloe12SquaresFormalized/Lean/Proofs/N12-jatloe/Compact/Assembly/Final.lean
+    replay_status: not-attempted
+    verifiers: [V-audit-n12-lean]
+    axioms_receipt: packing/resources/web/jatloe-n12-lean-2026-10-16/Jatloe12SquaresFormalized/verification/run-38849916588/global-type-axiom-audit.log.gz
+    proof:
+      source: packing/resources/web/jatloe-n12-lean-2026-10-16/Jatloe12SquaresFormalized/Lean/Proofs/N12-jatloe/Compact/Assembly/Final.lean
+      theorem: >-
+        N12Compact.Final.optimality : S12.packingConstant12 = 4, with no hypothesis, where
+        packingConstant12 := sInf feasibleSides, feasibleSides := {L | 0 < L and Nonempty
+        (UnitPacking L)}, and UnitPacking L is twelve OpenSquare of side 1, each with c^2 +
+        s^2 = 1 and Inside x y the open band loU < c x + s y < loU + side, loV < -s x + c y <
+        loV + side, every point Inside one in [0, L]^2 and no point Inside two.
+      scope: >-
+        s(12) = 4 for twelve unit squares with independent translations and arbitrary
+        rotations, interiors open and pairwise disjoint, boundary contact allowed. The
+        upper half is gridPacking, the 4 x 3 grid of axis-parallel squares, so the infimum
+        is attained; the lower half normalizes any packing below side 4 and excludes it
+        through marker ownership and 117 original cases. No uniqueness of the optimal
+        packing is stated.
+      pinpoints: >-
+        Lean/Proofs/N12-jatloe/Compact/Assembly/Final.lean (optimality and its #print
+        axioms); Compact/Assembly/SourceAssembly.lean (Pending, pending_closed, optimality);
+        source/S12/PackingConstant.lean (gridPacking, feasibleSides, packingConstant12,
+        packingConstant12_eq_four_of_exclusion); source/S12/Normalization.lean (UnitPacking,
+        the normalization); source/S12/Packing.lean (NormalizedPacking, markerOwners);
+        source/S12/Diagonal.lean (OpenSquare, Inside, InBands); verification/run-38849916588/
+        (GlobalTypeAudit.lean, global-type-axiom-audit.log, github-replay.json,
+        verified-source-manifest.json); the packet's receipts/lean-closure.json.gz,
+        receipts/statement-closure.json.gz and receipts/statement-audit.json.
+      assumptions:
+        - Lean v4.35.0's kernel and Mathlib at 56a00585 are sound, and so are Lean's compiler and the evaluator the 1,624 native_decide facts are decided by
+        - The run passed as the source reports. Its upstream repository, EvolvingPrograms/SquaresLean at 1f60d41, and run 38849916588 are not public, the run reused all 5,377 compiled objects from a checkpoint that run 38847898861 saved at 437041a0 before it failed, and nothing here built or elaborated any module
+        - The proof sources at d0caf45 are the ones the run accepted, as README.md and SOURCE-PROVENANCE.json say. Each of the 5,377 modules read here at d0caf45 has the SHA-256 verified-source-manifest.json gives it (devtools.audit_n12_lean, receipts/statement-audit.json), so the bytes are the manifest's; that the run compiled those bytes rests on the source's manifest
+      audit_record: docs/project/reviews/review-2026-10-25-n12-lean-formalization-statement-audit.md
+    limitations: >-
+      Queuingtheorydotcom/Jatloe12SquaresFormalized at d0caf45 (2026-10-16T05:12:49Z, the tag
+      n12-verified-2026-10-16) reports a Lean 4 proof of s(12) = 4, credited to Jatloe for
+      the mathematical proof and a partial formalization, Ben Gurevitch for aid in
+      formalization and CTJLewis for refactoring and compiling it, and published by
+      Manasseh Ahmed, who announced it on X on 22 October 2026. Its README says the proof
+      sources are copied byte for byte from EvolvingPrograms/SquaresLean at 1f60d41, whose
+      run 38849916588 authenticated all 5,377 project modules against their cached objects
+      and receipts (0 compiled afresh) and ran a fresh final type and axiom audit: propext,
+      Classical.choice, Quot.sound and 1,624 native_decide axioms, no sorryAx. The
+      checkpoint of those objects comes from run 38847898861, which failed later, and no
+      full rebuild has been run by anyone; the source says so. The closure read here from
+      the Git objects (devtools.lean_closure) has 5,377 modules, none missing, with no sorry
+      or axiom declaration and 2,572 uses of native_decide in 42 modules. The source's
+      per-module receipts in its release's evidence archive (SHA-256 db3447b2..., checked
+      on download) sum to 16.6 serial wall-hours and 38.5 Lean-thread-hours, all exit 0,
+      so a complete build here is about 17 to 39 CPU-hours, near the owner's 40 CPU-hour
+      item cap, with its memory unrecorded (T-245's unfinished_confirmations). No source
+      build entry is added: the accepting run compiled nothing, and no audit has read its
+      receipts. The statement audit of 25 October read the statement and its definitions
+      line by line: the unrestricted problem, with no premise, checked by Lean's kernel and
+      its compiler, its 1,624 native axioms exactly the native_decide calls of 1,525
+      declarations (devtools.audit_n12_lean). The written proof and the 117 cases have not
+      been reviewed here.
+    source_reviewed: '2026-10-25'
 
   - id: E-n021-evand-5000-1001-report
     claim: lower-bound
@@ -45996,3 +46066,49 @@ evidence:
       optimality and rigidity are not claimed or established. The source's 1,500- and
       3,000-digit runs share one code base, one active-set extraction and one KKT
       formulation.
+  - id: E-n029-evand-minpoly-7213-report
+    claim: derived-structure
+    scope: {n_values: [29]}
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Daniel exact and local reports 2026-10-12]'
+    certificate: packing/resources/web/evand-exact-data-2026-10-12/acquisition/release.json
+    replay_status: not-attempted
+    verifiers: []
+    limitations: >-
+      evand/square-packing 169a827 (2026-10-11T23:01:11Z; search/exact/homotopy/N29.md,
+      retained at ad86d42 by the evand-exact-and-local-reports-2026-10-12 packet) reports
+      that the side sigma of the s(29) record configuration, Thomas Schadt's packing as David
+      Ellsworth improved it, is a root of an irreducible integer polynomial p of degree 7213,
+      so p is its minimal polynomial. Five consistency polynomials in the class angles t1 to
+      t5, eliminated from the 152-row contact system, were solved by polyhedral homotopy
+      continuation (44,448 paths, 7,209 regular roots, and 4 more near the singular S = 5
+      grid recovered algebraically from a K = 4 lattice), and p was reconstructed from all
+      7,213. The source rates three steps rigorous: irreducibility (degree patterns modulo 12
+      primes near 2^61), the Krawczyk enclosure of the unique zero t* of the five
+      polynomials (radius 1e-50), and the link sigma = S(t*). It rates two Monte Carlo: the
+      identities F_k(tau) = 0 and Sn = x Sd in Q[x]/(p), modulo 50 random 62-bit primes, and
+      the full contact system's consistency at tau, modulo 21. It does not check the
+      packing's non-overlap at sigma, so it claims no bound. The release
+      exact-data-2026-10-12 (tag commit 31523f87316bdfda00f5459dd9077928e264f133) publishes
+      p in s29-minpoly.tar.zst (87,237,962 bytes, SHA-256
+      708e1b8b45894667f90a0d18b55bb35ed6079b84d33f9656976fd5cfa6f3729c), which this
+      certificate record pins by digest with every member's size and digest; its README,
+      SHA256SUMS and n29_krawczyk.json are retained beside it. Read here on 12 October 2026
+      from n29_poly_q4.json (SHA-256
+      0cba5ea250da54d67741803e86f1e46a2010f60fbf6b85be34fe69640e28ee5e): 7,214 integer
+      coefficients, so degree 7,213, a positive leading coefficient of 325 digits and a
+      height of 5,074 digits. The Krawczyk box gives S to radius 1.07e-48, so sigma =
+      5.93383346267692918968946061635201913843383418107... T-195's exact rational side, the
+      case's house, agrees with sigma to all 68 places N29.md prints and lies inside that
+      enclosure; which is larger is not decided here. Nothing else was run here: the
+      source's five-step replay is about 2.5 CPU-hours by its author's measure (think-6gti).
+      The author announced the result on X on 13 October 2026
+      (https://x.com/evanbd/status/2110154454817448106), retained in the exact-data
+      packet's receipts/announcement/. CREDITS.md says the work was produced by Claude
+      (Anthropic) under human direction.
+    source_reviewed: '2026-10-25'

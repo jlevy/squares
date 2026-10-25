@@ -1,0 +1,53 @@
+name: Verify twelve-square proof
+
+on:
+  workflow_dispatch:
+    inputs:
+      target:
+        description: N12 verification target
+        type: choice
+        required: true
+        default: N12-jatloe
+        options:
+          - N12-jatloe
+          - '12'
+          - n12-final
+          - n12
+          - n12-selected
+      jobs:
+        description: Lean threads per module (auto uses available CPUs)
+        type: string
+        default: auto
+      runner:
+        description: GitHub runner label (larger runners must be enabled for this repository)
+        type: string
+        default: ubuntu-latest
+      fresh:
+        description: Ignore saved progress and replay every module
+        type: boolean
+        default: false
+      resume_run:
+        description: Restore the latest compatible build cache, or start without it
+        type: choice
+        default: auto
+        options:
+          - auto
+          - none
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: n12-entry-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  n12:
+    uses: ./.github/workflows/n12.yml
+    with:
+      profile: ${{ inputs.target == 'n12-selected' && 'selected' || 'final' }}
+      jobs: ${{ inputs.jobs }}
+      runner: ${{ inputs.runner }}
+      fresh: ${{ inputs.fresh }}
+      resume_run: ${{ inputs.resume_run }}

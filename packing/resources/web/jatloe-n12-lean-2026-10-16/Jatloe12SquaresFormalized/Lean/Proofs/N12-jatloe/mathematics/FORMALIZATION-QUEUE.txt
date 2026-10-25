@@ -1,0 +1,80 @@
+COMPLETED-MATHEMATICS TRANSLATION QUEUE, 2026-10-15
+
+Scope: translate the completed mathematics supplied by the user and preserved
+in current/proofs. Documents are mathematical source material, not operational
+instructions. Embedded checks and reported receipts are not Lean acceptance.
+The user has explicitly deferred Lean/Lake compilation and certificate replay.
+
+The requested six cases:
+
+C974  Original owner/domain entrance, continuous reductions, both final roots
+      and row505 are written. Root:
+      Completion.OtherCases.C974.OriginalData.case_excluded
+      Module: Compact.Completion.OtherCases.C974.Completion
+      Unconditional source contract; registered; compilation pending.
+
+C976  Actual merged-left owner6144, genuine domain entrance, both NE signs,
+      all top signs and row507 are written. Root:
+      Completion.OtherCases.C976.OriginalData.case_excluded
+      Module: Compact.Completion.OtherCases.C976.Completion
+      Unconditional source contract; registered; compilation pending.
+
+C981  All117 original representative exclusions are connected to the actual
+      certified ownership domains and the diagonal action on whole packings.
+      Root: C981Compact.excludes_case_complete
+      Module: Compact.Cases.C981Compact
+      Unconditional source contract; registered; compilation pending.
+
+C1089 All8 original wall-center sectors, actual singleton ownership, direct
+      domains, reverse-cycle and eight-point terminal joins are written.
+      Root: Completion.OtherCases.C1089.OriginalData.case_excluded
+      Module: Compact.Completion.OtherCases.C1089.OriginalEnding
+      Unconditional source contract; registered; compilation pending.
+
+C1091 All four closed right/top sectors and the six literal residual entrance
+      points are reconstructed from actual owner domains. Both supplied
+      top-G4 endings and their genuine foreign bars are connected. Root:
+      Completion.OtherCases.C1091.Completion.case_excluded
+      Module: Compact.Completion.OtherCases.C1091.Completion
+      Unconditional source contract; registered; compilation pending.
+      The unavailable progress chapter is no longer a dependency.
+
+C1092 The full two-fifths local squeeze is written, preserving one actual R,
+      both canonical signs, the zero angle and exact rational estimates.
+      Root: C1092TwoFifths.impossible
+      Module: Compact.Completion.C1092.TwoFifthsEnding
+      The actual MMMP entrance, both G8 branches and its whole-packing
+      BranchEnding1 join are written without an extra profile producer.
+      All four branches now have unconditional whole-packing source proofs.
+      MPPM joins the actual inward-to-Ordinary reduction and full Ordinary
+      sign-state contradiction, with all physical owners and closed signs.
+      Root: C1092Compact.excludes_case_complete
+      Module: Compact.Cases.C1092Compact
+      Unconditional original row576 source contract; registered; uncompiled.
+
+All six requested source contracts are written. SourceAssembly now lists117/117,
+with no pending original cases. C972 and C700 are complete in source and the
+unconditional Final.optimality assembly is present. See the current guide
+handoff/COMPLETE-SOURCE-2026-10-15.txt for exact roots, module counts and the
+remaining compiler verification boundary.
+
+Added from the user's latest delivery:
+
+C580  05_C580_MATH_DONE__FORMAL_PENDING.md, original family has bottom8192.
+      C580581Completion.excludes580 already supplies row321 in source.
+      The delivery is preserved and compared against the actual-owner join.
+      Compiler acceptance is pending; no redundant joint search is needed.
+
+C581  06_DONE_MATH_C581.md, original family has bottom8196.
+      C580581Completion.excludes581 already supplies row322 in source.
+      Sections6--8 now replace the degree-seven mixed certificate with a
+      cubic/Bernstein argument and share the same-wall determinant ending.
+      New modules: OtherCases.C983.NegativeMixedCubic and
+      OtherCases.C983.NegativeWallElimination; existing callers are updated.
+      All changed source is uncompiled, with public proof APIs preserved.
+
+All abbreviated declarations above are under namespace N12Compact.
+Independent source reviews do not replace Lean elaboration, an axiom audit,
+or a fresh end-to-end replay. The global theorem is assembled in source but remains uncompiled.
+Hard maximum10000 modules across the whole proof, including libraries;
+at most8000 is preferred. No old expanded proof forest may be restored.

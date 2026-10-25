@@ -799,7 +799,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "d5dcd2d0e66e8d6dc3da6fd789a9387545b24854"
+DATA_REVISION = "8a36268c4a0bd30e5c43374a16af13091c3fa92c"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -896,6 +896,13 @@ FIRST_PUBLISHED = PUBLICATION_HISTORY[-1].first_published
 #:                                            day is the one recorded
 #: The leading entry is proposed for the next publication; confirm its date at first deployment.
 EXPLAINER_HISTORY = (
+    PublicationHistoryEntry(
+        version="v0.4.30",
+        first_published="October 25, 2026",
+        result_scope=(
+            "Update the registered result count after the registrations of T-245 and T-246."
+        ),
+    ),
     PublicationHistoryEntry(
         version="v0.4.29",
         first_published="October 25, 2026",
@@ -1489,6 +1496,17 @@ class ReleaseImpactDecision(NamedTuple):
 # New component cuts append decisions here, newest first, alongside their own histories.
 # No impact is invented retrospectively for the published baseline editions.
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
+    ReleaseImpactDecision(
+        component="paper:n11-lower-bounds-explainer",
+        previous_version="v0.4.29",
+        version="v0.4.30",
+        impact="patch",
+        reason=(
+            "Update the registered result count after the registrations of Jatloe's "
+            "reported Lean proof that s(12) = 4 (T-245) and Evan Daniel's reported "
+            "minimal polynomial of the s(29) record side (T-246)."
+        ),
+    ),
     ReleaseImpactDecision(
         component="paper:n11-lower-bounds-explainer",
         previous_version="v0.4.28",
@@ -9211,6 +9229,90 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "same five inputs of main swapped in: the same outcome each time, the "
             "explainer counting 244 results against main's 243, which its v0.4.29 "
             "carries. Retain v0.1.11, v0.1.4 and v0.2.7."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/contributors/people/ctjlewis.md",
+            "packing/contributors/people/evan-daniel.md",
+            "packing/contributors/people/jatloe.md",
+            "packing/contributors/people/manasseh-ahmed.md",
+            "packing/devtools/check_results.py",
+            "packing/devtools/site_resources.py",
+            "packing/frontier/n-029.md",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The think-4l14 import of #810: T-245's registration of Jatloe's Lean proof "
+            "that s(12) = 4 as reported, its coverage source, #810's requests entry, "
+            "Jatloe's new profile and the n12 sources on Lewis's and Ahmed's, against main "
+            "bb756e193 (#805): rendered at link revision bb756e19 into empty site "
+            "directories, twice from this tree at 015f1a19 and once from it with main's "
+            "result-requests.yaml, ctjlewis.md, manasseh-ahmed.md, results.yaml and "
+            "source-coverage.yaml swapped in and jatloe.md removed, "
+            "render_n11_optimality_review, render_n11_threshold_bound_review and "
+            "render_packing_methods write all 51 files byte-identical across the three. "
+            "The explainer, counting 242 to 243 results, takes v0.4.28 over main's "
+            "v0.4.27. No PDF was printed for these three; each prints from that HTML. "
+            "Measured again after the merge of main 886dddce6 (#808), at link revision "
+            "1307c2c8 with that main's five candidate inputs swapped in and jatloe.md "
+            "removed: twice from this tree and once swapped, 51 files each, all "
+            "byte-identical across the three. Measured a third time after the merge of "
+            "T-246's registration of Daniel's s(29) minimal polynomial as the new kind exact "
+            "side (results.yaml, check_results.py, evan-daniel.md, n-029.md, "
+            "result-requests.yaml and source-coverage.yaml) and the overview's card for "
+            "Jatloe12SquaresFormalized (site_resources.py), at link revision 9b8b004c "
+            "against main 886dddce6, with that main's nine candidate inputs swapped in and "
+            "jatloe.md removed: twice from this tree and once swapped, 51 files each, all "
+            "byte-identical across the three. The explainer's v0.4.28 counts 244 results. "
+            "Measured a fourth time after T-245's citation of its statement audit "
+            "(results.yaml), at link revision bfacba5a against the same main, swapped the "
+            "same way: 51 files each, all byte-identical across the three. "
+            "Main 46e355582 (#814) then registered T-243 at 182 and took the explainer's "
+            "v0.4.28, and #813 holds T-244, so the merge of that main renumbered this "
+            "branch's two results, registered here as T-243 and T-244 until then, T-245 "
+            "and T-246, and the explainer, counting 243 to 245 results, takes v0.4.29 over "
+            "main's v0.4.28. Measured a fifth time after that merge, at link revision "
+            "ab33e3bd against main 46e355582, with that main's result-requests.yaml, "
+            "ctjlewis.md, evan-daniel.md, manasseh-ahmed.md, check_results.py, "
+            "site_resources.py, n-029.md, results.yaml and source-coverage.yaml swapped in "
+            "and jatloe.md removed: twice from this tree and once swapped, 51 files each, "
+            "all byte-identical across the three. "
+            "Measured a sixth time after the explainer's page count moved to 25 "
+            "(render_n11_lower_bounds_explainer_pdf.py), at link revision bbc8c864: "
+            "twice from this tree and once with main's copy of that module swapped in, "
+            "51 files each, all byte-identical across the three. "
+            "Main 01e2b5295 (#813) then registered T-244 at 172 and 263 and took the "
+            "explainer's v0.4.29 and its page count of 25, so after the merge of that main "
+            "the explainer, counting 244 to 246 results, takes v0.4.30 over main's v0.4.29, "
+            "and the page-count module, main's own again, is no longer a candidate input. "
+            "Measured a seventh time after that merge, at link revision 8a36268c against "
+            "main 01e2b5295, with that main's result-requests.yaml, ctjlewis.md, "
+            "evan-daniel.md, manasseh-ahmed.md, check_results.py, site_resources.py, "
+            "n-029.md, results.yaml and source-coverage.yaml swapped in and jatloe.md "
+            "removed: twice from this tree and once swapped, 51 files each, all "
+            "byte-identical across the three. "
+            "Measured an eighth time after the Resources page's Jatloe12SquaresFormalized "
+            "card was shortened to keep its section medium (site_resources.py), at link "
+            "revision d0d72d41, swapped the same way: 51 files each, all byte-identical "
+            "across the three, and identical to the seventh measurement's but for the link "
+            "revision. "
+            "Retain v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
 )

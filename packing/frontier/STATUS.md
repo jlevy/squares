@@ -21,7 +21,7 @@ Follow the `n` link for full provenance, numerical evidence, conflicts, and bloc
 | [`9`](n-009.md) | `3` | `3` | `3.0` | `3` | proved | upper: replayed here; lower: replayed here | — | 2026-08-24 |
 | [`10`](n-010.md) | `3 + (1/2)√2` | `3 + (1/2)√2` | `3.707106781187` | `3 + (1/2)√2` | proved | upper: replayed here; lower: external proof (not read here) | — | 2026-09-07 |
 | [`11`](n-011.md) | `3.87708359002281` | `root(P_trump11, 3.87708359002281417730789706010096)` | `3.87708359002281` | `root(P_trump11, 3.87708359002281417730789706010096)` | proved | upper: replayed here; lower: audited here | — | 2026-09-30 |
-| [`12`](n-012.md) | `4` | `4` | `7943/2000` | `7943/2000` | open | upper: replayed here; lower: replayed here, audited here | — | 2026-10-05 |
+| [`12`](n-012.md) | `4` | `4` | `4` | `7943/2000` | open | upper: replayed here; lower: replayed here, audited here | formal lower differs from report; proof audit pending | 2026-10-25 |
 | [`13`](n-013.md) | `4` | `4` | `4.0` | `4` | proved | upper: replayed here; lower: external proof (read here, defect recorded), replayed here | — | 2026-08-25 |
 | [`14`](n-014.md) | `4` | `4` | `4.0` | `4` | proved | upper: replayed here; lower: replayed here | — | 2026-09-07 |
 | [`15`](n-015.md) | `4` | `4` | `4.0` | `4` | proved | upper: replayed here; lower: external proof (read here), audited here | — | 2026-09-07 |

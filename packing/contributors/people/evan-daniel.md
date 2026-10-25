@@ -16,6 +16,9 @@ contributor:
       handle: evand
     - kind: publication
       url: https://evand.github.io/square-packing/
+    - kind: twitter
+      url: https://x.com/evanbd
+      handle: evanbd
   sources:
     - id: repository-license
       archive_path: packing/resources/web/evand-square-packing-2026-09-26/square-packing/LICENSE
@@ -35,6 +38,13 @@ contributor:
     - id: bibliography
       archive_path: packing/resources/bibliography.yaml
       locator: credited_names maps Evan Daniel to Daniel.
+    - id: s29-announcement
+      archive_path: packing/resources/web/evand-exact-data-2026-10-12/receipts/announcement/tweet-2110154454817448106.json
+      url: https://x.com/evanbd/status/2110154454817448106
+      locator: 'user.screen_name is evanbd, user.name is Evan Daniel and user.id_str is 105199592; the post of 2026-10-13T23:43:21Z opens the thread announcing the side of the best known packing of 29 squares, whose minimal polynomial the release exact-data-2026-10-12 of github.com/evand/square-packing publishes. The owner named the thread his on 25 October 2026.'
+    - id: s29-minimal-polynomial
+      archive_path: packing/resources/web/evand-exact-data-2026-10-12/README.md
+      locator: 'The s(29) Archive: the polynomial of degree 7,213, read here from n29_poly_q4.json, with a 325-digit leading coefficient and a height of 5,074 digits.'
   provenance:
     - field: /surname
       sources: [bibliography]
@@ -50,7 +60,14 @@ contributor:
       sources: [intake-credit]
     - field: /links/1
       sources: [repository-writeups]
-  bio_sources: [intake-credit, repository-writeups, repository-credits, regularized-lists]
+    - field: /links/2
+      sources: [s29-announcement]
+  bio_sources:
+    - intake-credit
+    - repository-writeups
+    - repository-credits
+    - regularized-lists
+    - s29-minimal-polynomial
 ---
 Evan Daniel proves lower bounds for packings of unit squares in a square with exact
 weighted covers, beginning with
@@ -70,6 +87,8 @@ The repository also holds the
 record packings, and in October 2026 he added
 [regularized drawings](https://github.com/evand/square-packing/tree/ea1a2f23678a13bd1d252f9f4c95ca5dd2ffd2b7/search/regularize)
 of the record packings for 1 to 324 squares, with exact rational certificates.
+His repository also reports the minimal polynomial of the side of the best known packing
+of 29 squares, of degree 7213, published with its data in October 2026.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

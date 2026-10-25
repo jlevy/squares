@@ -51,6 +51,27 @@ ceiling.
 Carlo, and the packing’s non-overlap at the exact point is checked by none of it.
 Irreducibility, the enclosure, the link and the identities were not checked here.
 
+**The announcement.** Evan Daniel announced the result on X on 13 October 2026 at
+23:43:21Z, as [@evanbd](https://x.com/evanbd/status/2110154454817448106) (display name
+“Evan Daniel”, account 105199592): “I wish to present my new favorite square packing
+problem: 29 squares. Not for the (currently best known) packing itself; it’s a bit
+messier than 17, but not unexpectedly so. But rather for the side length, which is truly
+cursed.” The post is retained as
+[`receipts/announcement/tweet-2110154454817448106.json`](receipts/announcement/tweet-2110154454817448106.json),
+as X’s syndication endpoint returned it on 25 October 2026 at about 05:55Z; it reports
+seven replies. The thread’s follow-ups are not retained. As transcribed for the owner on
+25 October, they say that the side “is, exactly, a specific root of a degree 7213
+polynomial with integer coefficients having up to 5074 digits”, that “This work was all
+done by Claude and I’m fairly certain the exact math is correct, but some of the checks
+are stochastic. It’s not in Lean; the computation is not tractable”, and link this
+release; a reply of 15 October adds that proving the packing optimal “is an additional
+proof, which has not yet been done at this size”.
+
+**Registered.** The report is T-246, an exact side: the exact value of the record
+configuration’s side, with no bound, cited by `E-n029-evand-minpoly-7213-report`, whose
+certificate is [acquisition/release.json](acquisition/release.json).
+Its replay is `think-10m1`.
+
 ## The Grade-C Archive
 
 The archive holds 723 files, 15,787,809 bytes unpacked: `n-N.contacts.json` and

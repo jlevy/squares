@@ -2194,8 +2194,42 @@ def _fine_net_lower_projection(
 #: the key no longer matches and that pass's replay reads the three as prior state. T-223's
 #: two, at 204 after T-186's pass (#701, review A6) and at 260 after T-196's of 20 October
 #: 2026 (#704), retired when T-223 was adopted at 204 on 20 October and at 260 on 21
-#: October 2026 (#706), so none is pending now.
-LATER_PENDING_REPORTS: dict[tuple[int, str], tuple[str, str, str]] = {}
+#: October 2026 (#706). A registration that states no bound is entered the same way and
+#: stays until a later pass at its count: T-246, Evan Daniel's degree-7213 minimal
+#: polynomial of the s(29) record side, an exact side, at 29 after T-195's pass.
+LATER_PENDING_REPORTS: dict[tuple[int, str], tuple[str, str, str]] = {
+    (29, "T-195"): (
+        "E-n029-evand-minpoly-7213-report",
+        "[Daniel exact and local reports 2026-10-12]",
+        "**Exact side, 25 October 2026.**",
+    ),
+}
+
+#: History a registration after an adopted count's last pass rewrote in the record's body,
+#: keyed like the two beside it: the first and last words of the committed passage and the
+#: words the pass left in its place, compared as words. T-246 replaced n = 29's "no minimal
+#: polynomial anywhere" with the polynomial it registers (25 October 2026).
+LATER_HISTORY_REWRITES: dict[tuple[int, str], tuple[str, str, str]] = {
+    (29, "T-195"): (
+        "**The minimal polynomial (T-246).**",
+        "It did not follow that nothing exact was known.",
+        (
+            "This case has no minimal polynomial anywhere — in the literature or here — which "
+            "is why `exact_form`, `algebraic_degree` and `minimal_polynomial` are all null. It "
+            "does not follow that nothing exact is known."
+        ),
+    ),
+}
+
+
+def _later_rewrite_projection(key: tuple[int, str], body: str) -> str:
+    """Check a later rewrite's passage appears once in the history, then restore it."""
+    first, last, prior = LATER_HISTORY_REWRITES[key]
+    assert body.count(first) == 1, f"n={key[0]}: one rewritten passage"
+    start = body.index(first)
+    end = body.index(last, start) + len(last)
+    return body[:start] + prior + body[end:]
+
 
 #: Evidence a change after an adopted count's last pass cites in its case record, keyed by
 #: the count and the result that pass adopted. A citation writes none of the adoption
@@ -2272,6 +2306,10 @@ def test_the_writer_rebuilds_every_adopted_record_from_its_prior_state(
         if (move.n, move.house.result) in LATER_CITATIONS:
             _later_citation_projection((move.n, move.house.result), held)
         historical_body = _body(committed)
+        if (move.n, move.house.result) in LATER_HISTORY_REWRITES:
+            historical_body = _later_rewrite_projection(
+                (move.n, move.house.result), historical_body
+            )
         if move.n == 108:
             historical_body = _n108_later_lower_projection(held, wrote, historical_body)
         elif move.n in FINE_NET_LOWER_19_OCTOBER:

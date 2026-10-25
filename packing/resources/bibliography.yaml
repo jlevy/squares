@@ -2548,7 +2548,15 @@ sources:
       minimality is a new property of those packings, which does not make their finders
       antecedents. The author is read from the retained LICENSE and CREDITS.md, which say
       the work was produced by Claude (Anthropic) under human direction. MIT-licensed.
-      Neither report is a bound.
+      Neither report is a bound. Evan Daniel, who posts on X as @evanbd, announced the s(29)
+      polynomial there on 13 October 2026 at 23:43:21Z
+      (https://x.com/evanbd/status/2110154454817448106): "I wish to present my new favorite
+      square packing problem: 29 squares. Not for the (currently best known) packing itself;
+      it's a bit messier than 17, but not unexpectedly so. But rather for the side length,
+      which is truly cursed."; the post is retained in the evand-exact-data-2026-10-12
+      packet's receipts/announcement/, and the thread's follow-ups say the work "was all done
+      by Claude". T-246 registers the polynomial as the exact side of the record
+      configuration.
   - key: '[Summins stratification series 2026-10-12]'
     authors: [Summins]
     year: 2026
@@ -4197,6 +4205,38 @@ sources:
       exact configurations at 172 and 263, attached to a comment the same day, are kept as
       derived facts by the same rule in web/hyukdongkim-t244-configurations-2026-10-25/.
       Claude assistance disclosed. Upper bounds only; no optimality claim.
+  - key: '[Jatloe n12 Lean 2026-10-16]'
+    authors: [Jatloe, Gurevitch, Lewis, Ahmed]
+    year: 2026
+    venue: GitHub
+    short_venue: Web
+    dated: '2026-10-16'
+    lineage: independent
+    credit: Jatloe, Gurevitch, Lewis, Ahmed
+    note: >-
+      A Lean 4 proof, N12Compact.Final.optimality : S12.packingConstant12 = 4, that the least
+      side of a square holding twelve open unit squares at any rotation and translation, with
+      pairwise disjoint interiors, is 4, the side of the 4 x 3 grid:
+      Queuingtheorydotcom/Jatloe12SquaresFormalized at d0caf4532a7ead68be1389ef87387b126fc2e0ab
+      (committed 2026-10-16T05:12:49Z, the tag n12-verified-2026-10-16), project
+      Lean/Proofs/N12-jatloe, Lean 4.35.0 and Mathlib 56a00585, retained in part in
+      web/jatloe-n12-lean-2026-10-16/ with the release's two archives pinned by size and
+      SHA-256. README.md: "Jatloe provided the full mathematical proof and partial Lean
+      formalization. Ben Gurevitch aided in formalization. CTJLewis refactored and compiled
+      the formalization." Every commit is by Queuingtheorydotcom, Manasseh Ahmed's account,
+      who published the formalization and its run evidence and announced it on X on 22
+      October 2026 (https://x.com/ManassehA06/status/2113097037306569124): "Thank you to
+      @jatloe for sending me a full proof of the result alongside a partial formalization,
+      and thanks to all of the square packers who helped finish the formalization"; his
+      reply (https://x.com/ManassehA06/status/2113097091580932578) links the repository, and
+      both posts are retained in the packet's receipts/announcement/. Authors as the source
+      and the announcement give them: Jatloe (X @jatloe; no other name is given), Ben
+      Gurevitch, Lewis (CTJLewis, GitHub and X ctjlewis) and Ahmed (publication), in the
+      order of the owner's tracking issue, jlevy/squares#810. The proof sources are said to be
+      copied from EvolvingPrograms/SquaresLean at 1f60d412707aae824b76fbaf11d4e708695451fa,
+      which is not public, whose run 38849916588 accepted the theorem reusing every compiled
+      object; the axioms are the three standard ones and 1,624 that native_decide generates.
+      The source credits no other work and names no AI assistance. No licence.
 credited_names:
   Benjamin Greff: Greff
   Hiroaki Hosono: Hosono

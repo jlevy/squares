@@ -1,0 +1,72 @@
+{
+  "schema_version": 2,
+  "source_repository": "EvolvingPrograms/SquaresLean",
+  "source_branch_at_verification": "main",
+  "source_commit": "1f60d412707aae824b76fbaf11d4e708695451fa",
+  "source_project": "Lean/Proofs/N12-jatloe",
+  "run_url": "https://github.com/EvolvingPrograms/SquaresLean/actions/runs/38849916588/job/116808701733",
+  "run_id": 38849916588,
+  "run_attempt": 1,
+  "job_id": 116808701733,
+  "run_conclusion": "success",
+  "theorem": "N12Compact.Final.optimality",
+  "theorem_type": "S12.packingConstant12 = 4",
+  "project_modules": 5377,
+  "external_modules": 4049,
+  "combined_modules_including_setup_and_audit": 9583,
+  "modules_reused_from_authenticated_receipts": 5377,
+  "modules_freshly_compiled_in_this_run": 0,
+  "fresh_final_type_and_axiom_audit_passed": true,
+  "local_independent_full_rebuild_performed": false,
+  "proof_lean_sources_identical_to_verified_commit": true,
+  "publication_changes": "Documentation, pinned runtime/bootstrap and public replay workflow only; proof Lean sources preserved.",
+  "toolchain": "leanprover/lean4:v4.35.0",
+  "mathlib_revision": "56a005855ea17e0b0958f73ec801ae140b0a1679",
+  "final_axioms": {
+    "standard": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "approved_native_generated": 1624,
+    "total": 1627,
+    "sorryAx": false,
+    "unexpected_custom_axioms": false
+  },
+  "inherited_native_compiler_trust": true,
+  "evidence_artifact": {
+    "id": 12024837592,
+    "name": "N12-jatloe-final-evidence-1",
+    "filename": "N12-jatloe-final-evidence-1.zip",
+    "sha256": "db3447b212544e83028fdabd73cf3acd14b796e7ff977cbb899b6e7164b5d9f8",
+    "size_bytes": 2934549,
+    "includes_compiled_objects": false
+  },
+  "receipt_index_sha256": "d70074e3eed105e24633d69bc87798fcd2a0b8f05ae53b3ae1f464a354193b52",
+  "final_audit_log_sha256": "e76041bcaffad1adec4b43489a6352a700746281f7acdf4808c5ed990fb14b15",
+  "source_manifest_sha256": "95fe302fa7a180af5b495656c08846d9c7a8bbd820df71d6608e0d66bb1409e0",
+  "compiled_objects": {
+    "publication_status": "included_in_verified_release",
+    "artifact_id": 12023379882,
+    "source_run_id": 38847898861,
+    "source_run_conclusion": "failure",
+    "source_commit": "437041a0f00f1ff9166e46b1f7fc93942a441681",
+    "filename": "N12-jatloe-compiled-checkpoint-38847898861.zip",
+    "size_bytes": 1033472991,
+    "sha256": "7a20bbdfc76a6f066dc6795e3c50b38c81641c5e99d4dff47536cc6fc1772496",
+    "authenticated_against_successful_run": 38849916588,
+    "all_5377_object_log_and_source_hashes_match": true,
+    "receipt_records_identical_to_successful_run": true,
+    "project_olean_objects": 5377,
+    "external_libraries_or_compiler_included": false,
+    "verification_report": "verification/run-38849916588/compiled-checkpoint-verification.json",
+    "scope": "An earlier run saved all compiled objects before its final run failed. Every preserved object is byte-identical to the corresponding object accepted in the later successful final theorem audit. No local recompilation was performed."
+  },
+  "credits": {
+    "Jatloe": "Full mathematical proof and partial Lean formalization",
+    "Ben Gurevitch": "Aiding in formalization",
+    "CTJLewis": "Refactoring and compiling"
+  },
+  "all_tracked_project_lean_files_preserved": 5462,
+  "release_url": "https://github.com/Queuingtheorydotcom/Jatloe12SquaresFormalized/releases/tag/n12-verified-2026-10-16"
+}

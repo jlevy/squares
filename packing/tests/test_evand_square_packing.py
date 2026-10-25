@@ -128,23 +128,32 @@ def test_frontier_records_the_certified_side(
 
 
 def test_the_n12_bounds_are_daniels_points_rescaled() -> None:
-    """Every n = 12 lower bound since T-049 keeps Daniel's points at a larger side: the
-    frontier reports and verifies squarepacker's v1.1, the points dilated by
+    """Every verified n = 12 lower bound since T-049 keeps Daniel's points at a larger
+    side: the frontier verifies squarepacker's v1.1, the points dilated by
     31382793/31360000 and re-weighted (T-095, since 5 October 2026). Before it the
     verified bound was this project's re-weighting at a side scaled by 3951000/3949423
-    (T-079, from 3 October) and the reported one T-078, the whole certificate times
-    7902/7901."""
+    (T-079, from 3 October). The reported bound was the same lineage, T-078's whole
+    certificate times 7902/7901 and then T-095's, until T-245's reported Lean proof that
+    s(12) = 4 took the reported lane on 25 October 2026; it is not Daniel's points."""
     (side,) = (claim[2] for claim in CLAIMS if claim[1] == 12)
     case = _case(12)
-    reported = case["reported_lower_bound"]
-    assert Fraction(reported["exact_form"]) == side * Fraction(31382793, 31360000)
-    assert reported["source_key"] == "[squarepacker s12 2026-10-05]"
     verified = case["verified_lower_bound"]
-    assert Fraction(verified["exact_form"]) == Fraction(reported["exact_form"])
+    assert Fraction(verified["exact_form"]) == side * Fraction(31382793, 31360000)
     assert verified["evidence"] == [
         "E-n012-squarepacker-7943-2000-source-replay",
         "E-n012-squarepacker-7943-2000-native-parent-core",
     ]
+    evidence = {
+        entry["id"]: entry
+        for entry in safe_load((FRONTIER / "evidence.yaml").read_text(encoding="utf-8"))[
+            "evidence"
+        ]
+    }
+    for key in verified["evidence"]:
+        assert evidence[key]["source_key"] == "[squarepacker s12 2026-10-05]", key
+    reported = case["reported_lower_bound"]
+    assert reported["source_key"] == "[Jatloe n12 Lean 2026-10-16]"
+    assert Fraction(reported["exact_form"]) == 4
 
 
 @pytest.mark.parametrize("n", [21, 45])

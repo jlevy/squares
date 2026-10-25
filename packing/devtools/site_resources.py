@@ -254,6 +254,11 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         "A Lean 4 formalization of that proof, trusting Lean's compiler for its certificates.",
     ),
     (
+        "https://github.com/Queuingtheorydotcom/Jatloe12SquaresFormalized",
+        "Jatloe, Gurevitch, Lewis, Ahmed",
+        "A Lean 4 proof of s(12) = 4, trusting Lean's compiler for its certificates.",
+    ),
+    (
         "https://github.com/Kleddamag/11-squares-certified-bound",
         "Marc Leonard Overbeck",
         "A certified lower bound for eleven squares.",

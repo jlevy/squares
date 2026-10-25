@@ -25,8 +25,8 @@ second implementation agrees.
 
 ## The Short Version
 
-- **211** programs: **52** external and **159** first-party; **143** decide claims and **68** check premises.
-- **605** of **771** evidence entries name the programs that verified them: 283 reproduced with the producer’s code, 263 independently re-implemented, 38 re-implemented, sharing the producer’s components, 21 no relation: a proof, a derivation or a report.
+- **212** programs: **52** external and **160** first-party; **143** decide claims and **69** check premises.
+- **606** of **773** evidence entries name the programs that verified them: 284 reproduced with the producer’s code, 263 independently re-implemented, 38 re-implemented, sharing the producer’s components, 21 no relation: a proof, a derivation or a report.
 
 ## Programs
 
@@ -156,6 +156,7 @@ second implementation agrees.
 | [`V-evand-exact-certificates`](#v-evand-exact-certificates) | devtools.evand_exact_certificates | Squares Project (Levy) | first-party | premises | 73 | 71 |
 | [`V-check-n11-final-composition`](#v-check-n11-final-composition) | devtools.check_n11_final_composition | Squares Project (Levy) | first-party | premises | 2 | 2 |
 | [`V-audit-n11-lean`](#v-audit-n11-lean) | devtools.audit_n11_lean | Squares Project (Levy) | first-party | premises | 2 | 1 |
+| [`V-audit-n12-lean`](#v-audit-n12-lean) | devtools.audit_n12_lean | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-fitzharding-n17-source-manifest`](#v-fitzharding-n17-source-manifest) | check_source_manifest.py | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-fitzharding-n17-premise-comparisons`](#v-fitzharding-n17-premise-comparisons) | compare_endpoint.py | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-audit-n17-endpoint-receipt`](#v-audit-n17-endpoint-receipt) | devtools.audit_n17_endpoint_receipt | Squares Project (Levy) | first-party | premises | 1 | 1 |
@@ -2687,6 +2688,19 @@ Stages the statement closure of the 11SquaresFormalized proof from retained byte
 | --- | --- | --- | --- | --- |
 | `E-n011-lean-formalization-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-060 |
 | `E-n011-lean-statement-closure-build` | replayed here | reproduced with the producer’s code | not recorded | - |
+
+### `V-audit-n12-lean`
+
+**devtools.audit_n12_lean** · Squares Project (Levy) · first-party · checks premises · Python · proof-assistant-checked
+
+Reads the 5,377 modules of the Jatloe12SquaresFormalized closure receipt from a checkout's Git objects at d0caf45, or the statement closure from the packet, as data: counts the kernel-escape tokens, set_option names and instance classes in their code, lists the declarations of the statement's names, matches each native_decide axiom of the source's final axiom log to the calls of its owner declaration, and holds every module to the SHA-256 of the run's manifest and the log and the manifest to the digests SOURCE-PROVENANCE.json records. It builds nothing and decides no bound.
+
+- Source: [`packing/devtools/audit_n12_lean.py`](../../packing/devtools/audit_n12_lean.py)
+- Versions run: this repository's commits, which Git holds
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n012-jatloe-lean-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-245 |
 
 ### `V-fitzharding-n17-source-manifest`
 

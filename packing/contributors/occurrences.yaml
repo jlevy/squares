@@ -16044,17 +16044,68 @@ occurrences:
     path: packing/frontier/n-012.md
     record_key: '12'
     field: /reported_lower_bound/proved_by/0
-  expected_text: Ryu Sungjoon
+  expected_text: Jatloe
   start: 0
-  end: 12
-  label: Ryu Sungjoon
+  end: 6
+  label: Jatloe
   role: lower-bound-prover
   disposition: resolved
   evidence:
-  - primary-byline
-  contributor_id: ryu-sungjoon
-  note: Reviewed packing/frontier/n-012.md [12] /reported_lower_bound/proved_by/0
-    span 0:12.
+  - formalization-credit
+  - announcement-mention
+  contributor_id: jatloe
+  note: 'Reviewed 2026-10-25 (think-4l14) /reported_lower_bound/proved_by/0 span 0:6:
+    the source''s README credits Jatloe with the full mathematical proof and partial
+    Lean formalization, and the announcement thanks @jatloe for sending that proof
+    and formalization.'
+- origin:
+    path: packing/frontier/n-012.md
+    record_key: '12'
+    field: /reported_lower_bound/proved_by/1
+  expected_text: Gurevitch
+  start: 0
+  end: 9
+  label: Gurevitch
+  role: lower-bound-prover
+  disposition: unresolved
+  evidence: []
+  note: 'Identity review pending: the source prints Ben Gurevitch, and whether he
+    is the Benjamin Gurevitch whom the same publisher''s n = 11 formalization credits
+    is not evidenced (think-4l14).'
+- origin:
+    path: packing/frontier/n-012.md
+    record_key: '12'
+    field: /reported_lower_bound/proved_by/2
+  expected_text: Lewis
+  start: 0
+  end: 5
+  label: Lewis
+  role: lower-bound-prover
+  disposition: resolved
+  evidence:
+  - n12-formalization-credit
+  - public-profile
+  contributor_id: ctjlewis
+  note: 'Reviewed 2026-10-25 (think-4l14) /reported_lower_bound/proved_by/2 span 0:5:
+    the source''s README credits CTJLewis with refactoring and compiling the formalization,
+    this profile''s handle ctjlewis ignoring case.'
+- origin:
+    path: packing/frontier/n-012.md
+    record_key: '12'
+    field: /reported_lower_bound/proved_by/3
+  expected_text: Ahmed
+  start: 0
+  end: 5
+  label: Ahmed
+  role: lower-bound-prover
+  disposition: resolved
+  evidence:
+  - owner-confirmation
+  - n12-publication
+  contributor_id: manasseh-ahmed
+  note: 'Reviewed 2026-10-25 (think-4l14) /reported_lower_bound/proved_by/3 span 0:5:
+    Queuingtheorydotcom made every commit and @ManassehA06 announced it, the accounts
+    the owner confirmed as Manasseh Ahmed''s.'
 - origin:
     path: packing/frontier/n-013.md
     record_key: '13'
@@ -28906,6 +28957,136 @@ occurrences:
     established by LICENSE and the retained ojoshe receipt; project credit does not imply
     sole personal authorship.
   contributor_id: joshua-levy
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Jatloe n12 Lean 2026-10-16]'
+    field: /authors/0
+  expected_text: Jatloe
+  start: 0
+  end: 6
+  label: Jatloe
+  role: source-author
+  disposition: resolved
+  evidence:
+  - formalization-credit
+  - announcement-mention
+  contributor_id: jatloe
+  note: 'Reviewed 2026-10-25 (think-4l14) /authors/0 span 0:6: the source''s README
+    credits Jatloe with the full mathematical proof and partial Lean formalization,
+    and the announcement thanks @jatloe for sending that proof and formalization.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Jatloe n12 Lean 2026-10-16]'
+    field: /authors/1
+  expected_text: Gurevitch
+  start: 0
+  end: 9
+  label: Gurevitch
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: 'Identity review pending: the source prints Ben Gurevitch, and whether he
+    is the Benjamin Gurevitch whom the same publisher''s n = 11 formalization credits
+    is not evidenced (think-4l14).'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Jatloe n12 Lean 2026-10-16]'
+    field: /authors/2
+  expected_text: Lewis
+  start: 0
+  end: 5
+  label: Lewis
+  role: source-author
+  disposition: resolved
+  evidence:
+  - n12-formalization-credit
+  - public-profile
+  contributor_id: ctjlewis
+  note: 'Reviewed 2026-10-25 (think-4l14) /authors/2 span 0:5: the source''s README
+    credits CTJLewis with refactoring and compiling the formalization, this profile''s
+    handle ctjlewis ignoring case.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Jatloe n12 Lean 2026-10-16]'
+    field: /authors/3
+  expected_text: Ahmed
+  start: 0
+  end: 5
+  label: Ahmed
+  role: source-author
+  disposition: resolved
+  evidence:
+  - owner-confirmation
+  - n12-publication
+  contributor_id: manasseh-ahmed
+  note: 'Reviewed 2026-10-25 (think-4l14) /authors/3 span 0:5: Queuingtheorydotcom
+    made every commit and @ManassehA06 announced it, the accounts the owner confirmed
+    as Manasseh Ahmed''s.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Jatloe n12 Lean 2026-10-16]'
+    field: /credit
+  expected_text: Jatloe, Gurevitch, Lewis, Ahmed
+  start: 0
+  end: 6
+  label: Jatloe
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+  - formalization-credit
+  - announcement-mention
+  contributor_id: jatloe
+  note: 'Reviewed 2026-10-25 (think-4l14) /credit span 0:6: the source''s README credits
+    Jatloe with the full mathematical proof and partial Lean formalization, and the
+    announcement thanks @jatloe for sending that proof and formalization.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Jatloe n12 Lean 2026-10-16]'
+    field: /credit
+  expected_text: Jatloe, Gurevitch, Lewis, Ahmed
+  start: 8
+  end: 17
+  label: Gurevitch
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: 'Identity review pending: the source prints Ben Gurevitch, and whether he
+    is the Benjamin Gurevitch whom the same publisher''s n = 11 formalization credits
+    is not evidenced (think-4l14).'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Jatloe n12 Lean 2026-10-16]'
+    field: /credit
+  expected_text: Jatloe, Gurevitch, Lewis, Ahmed
+  start: 19
+  end: 24
+  label: Lewis
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+  - n12-formalization-credit
+  - public-profile
+  contributor_id: ctjlewis
+  note: 'Reviewed 2026-10-25 (think-4l14) /credit span 19:24: the source''s README
+    credits CTJLewis with refactoring and compiling the formalization, this profile''s
+    handle ctjlewis ignoring case.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Jatloe n12 Lean 2026-10-16]'
+    field: /credit
+  expected_text: Jatloe, Gurevitch, Lewis, Ahmed
+  start: 26
+  end: 31
+  label: Ahmed
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+  - owner-confirmation
+  - n12-publication
+  contributor_id: manasseh-ahmed
+  note: 'Reviewed 2026-10-25 (think-4l14) /credit span 26:31: Queuingtheorydotcom
+    made every commit and @ManassehA06 announced it, the accounts the owner confirmed
+    as Manasseh Ahmed''s.'
 inspections:
 - path: packing/resources/papers/addis-locatelli-schoen-2008-disk-packing-square.pdf
   status: pending
