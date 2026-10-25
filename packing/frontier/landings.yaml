@@ -270,6 +270,8 @@ sources:
     landed: '2026-10-22'
   - id: couzo-issue763-2026-10-23
     landed: '2026-10-24'
+  - id: couzo-issue763-2026-10-23-recipes
+    landed: '2026-10-25'
   - id: couzo-reconcile-2026-10-20
     landed: '2026-10-23'
   - id: couzo-retained-certificates-2026-10-12
