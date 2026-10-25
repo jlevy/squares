@@ -110,8 +110,8 @@ One earlier publication states a side below the start at any of the counts: Fran
 Couzo’s
 [`franciscouzo/square-packing@43f666c`](https://github.com/franciscouzo/square-packing/tree/43f666c23933fbc5cc418fa4e851218268fed0ed),
 committed at 00:55:44Z on 24 October and made public by the push `964ee2b..1c17153` at
-06:10:44Z, more than twelve hours before the issue. Its import is think-gn29’s; the walk
-reads it as a publication at the 8 counts where its `certificates/best/nN.cert` differs
+06:10:44Z, more than twelve hours before the issue. Its import is think-gn29’s, merged as
+#800 after this walk was read; the walk reads it as a publication at the 8 counts where its `certificates/best/nN.cert` differs
 from `964ee2b`’s, each at its header side.
 Mishapolk/square-packing-records at `7e82c64` and evand/square-packing at `659ee62`, both
 unchanged since their last reads, state nothing below the start at these counts, and
@@ -121,10 +121,13 @@ unchanged since their last reads, state nothing below the start at these counts,
   certificate is below every earlier report at its count, by $1.244 \times 10^{-5}$ at 457
   to $8.750 \times 10^{-3}$ at 334, and below Göbel’s construction by
   $9.94 \times 10^{-3}$ (416) to $0.720$ (457). At 376, 377, 416, 458, 502 and 504 the
-  margin is to `43f666c`’s side rather than to the row on `main`.
+  margin is to `43f666c`’s side rather than to the row on `main` when the walk was read,
+  and the rows supersede `43f666c`’s rows there (`couzo-43f666c-2026-10-24`, #800); at
+  334, 343 and 457 they supersede #763’s, at 338 alexchilton’s, at 379
+  `couzo-964ee2b-2026-10-23`’s and at 382 #670’s.
 - **372 and 412.** `43f666c` certifies 19.806121548578 at 372, $1.91 \times 10^{-11}$
   below this certificate, and 20.822875655538 at 412, $1.25 \times 10^{-9}$ below, so by
-  the owner’s rule neither is recorded. Both certificates are retained, compared in the
+  the owner’s rule neither is recorded; `43f666c`’s rows hold both counts. Both certificates are retained, compared in the
   claim record, and not replayed.
 - **382.** The earlier report is the certificate Couzo reported in #670, which `964ee2b`
   holds byte for byte, not #763, which does not claim the count.

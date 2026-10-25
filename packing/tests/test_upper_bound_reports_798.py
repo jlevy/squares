@@ -86,9 +86,9 @@ SUPERSEDED = {
     502: "couzo-issue763-2026-10-23",
     504: "alexchilton-fault-line-2026-10-23",
 }
-#: The one report that may stand between a count's row on main and this packet's: Couzo's
-#: 43f666c, the earlier publication at 376, 377, 416, 458, 502 and 504, whose import
-#: (think-gn29) supersedes those rows in turn once it lands.
+#: The one report that may stand between a count's row on main 2ed0ea740 and this packet's:
+#: Couzo's 43f666c, the earlier publication at 376, 377, 416, 458, 502 and 504, whose import
+#: (#800, think-gn29) supersedes those rows and is superseded by this packet's in turn.
 BETWEEN = frozenset({"couzo-43f666c-2026-10-24"})
 #: The issue's lineage table: squares moved beyond 0.1 against #763's packing at the count.
 LINEAGE_BEYOND_TENTH = {

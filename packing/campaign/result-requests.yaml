@@ -23797,7 +23797,7 @@ issues:
       issue prints are the gist's, every printed side is its certificate's exact side rounded up,
       and the lineage figures against 964ee2b reproduce exactly. The ledger of 24 October for the
       issue (upper-bounds-issue798-20261024) reads Couzo's 43f666c, pushed at
-      2026-10-24T06:10:44Z and not yet imported (think-gn29), as an earlier publication: it is
+      2026-10-24T06:10:44Z and imported since by #800 (think-gn29), as an earlier publication: it is
       1.91e-11 below the issue's side at 372 and 1.25e-9 below at 412, so those two are not
       recorded, and the other twelve are recorded as beyond-horizon rows, below every earlier
       report by 1.24e-5 (457) to 8.75e-3 (334). Claude assistance disclosed.
@@ -23816,11 +23816,10 @@ issues:
         frozen at main 2ed0ea740 with Göbel's construction beside each row and Couzo's 43f666c
         as an earlier publication, records all twelve as current rows of the
         amundsk-issue798-2026-10-24 source at the exact side rounded up at 12 places. They
-        supersede the rows of couzo-issue763-2026-10-23 (334, 343, 416, 457, 458 and 502),
-        alexchilton-fault-line-2026-10-23 (338 and 504), tymchishin-22-3662-2026-10-23 (376),
-        kyleluecke-inos-2026-10-23 (377), couzo-964ee2b-2026-10-23 (379) and
-        couzo-issue670-2026-10-17 (382); at 376, 377, 416, 458, 502 and 504 they are decided
-        against 43f666c's sides, whose rows stand between once their import lands. Both
+        supersede the rows of couzo-43f666c-2026-10-24 (376, 377, 416, 458, 502 and 504), which
+        #800 (think-gn29) recorded after main's rows there, couzo-issue763-2026-10-23 (334, 343
+        and 457), alexchilton-fault-line-2026-10-23 (338), couzo-964ee2b-2026-10-23 (379) and
+        couzo-issue670-2026-10-17 (382). Both
         maintained exact routes accept all twelve, with the gross and sharp controls as
         expected, and every side is below Göbel's construction.
       queued: false
@@ -23836,8 +23835,8 @@ issues:
         packing, 1.91e-11 below this one) and 20.822875655538 at 412 (1.25e-9 below), so by the
         report-order rule neither is recorded. The packet retains both certificates and
         compares them in its claim record (acquisition/claims.json); they are not replayed.
-        think-gn29 imports 43f666c's rows at both counts; should it close without them, the
-        two counts are reopened here.
+        43f666c's rows, which #800 (think-gn29) recorded, hold both counts
+        (couzo-43f666c-2026-10-24).
       queued: false
       bead: think-gn29
     beads:
@@ -23846,5 +23845,5 @@ issues:
     replies: []
     close_when: >-
       The twelve rows are recorded in report order with their replay, 372 and 412 have their
-      disposition with 43f666c's rows there on main (think-gn29), and the reply on main says
+      disposition with 43f666c's rows there on main (#800, think-gn29), and the reply on main says
       so; nothing the author asked for is queued.

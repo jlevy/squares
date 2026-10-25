@@ -19,64 +19,64 @@ reports:
     rounding: up
     exact: 158311983486803019175166812327/7993083506961000000000000000
     exact_from: certificates/best/n372.cert at 43f666c (its header), read from GitHub at the
-      commit; not yet retained (think-gn29 imports it)
+      commit; retained since (#800, think-gn29)
     first_committed: '2026-10-24T00:55:44Z'
   - n: 376
     printed: '19.890228421694'
     rounding: up
     exact: 882409641565338851963506378056124644404662148493744077/44363977268501911606722721886023372966000000000000000
     exact_from: certificates/best/n376.cert at 43f666c (its header), read from GitHub at the
-      commit; not yet retained (think-gn29 imports it)
+      commit; retained since (#800, think-gn29)
     first_committed: '2026-10-24T00:55:44Z'
   - n: 377
     printed: '19.909958295503'
     rounding: up
     exact: 22756537622770605349944707642689904232895187360061155024169957191923/1142972641379720970306533711102042168856602315370941500000000000000
     exact_from: certificates/best/n377.cert at 43f666c (its header), read from GitHub at the
-      commit; not yet retained (think-gn29 imports it)
+      commit; retained since (#800, think-gn29)
     first_committed: '2026-10-24T00:55:44Z'
   - n: 412
     printed: '20.822875655538'
     rounding: up
     exact: 177723905909134521458804683/8535031801041015625000000
     exact_from: certificates/best/n412.cert at 43f666c (its header), read from GitHub at the
-      commit; not yet retained (think-gn29 imports it)
+      commit; retained since (#800, think-gn29)
     first_committed: '2026-10-24T00:55:44Z'
   - n: 416
     printed: '20.889675804154'
     rounding: up
     exact: 36587314157204851861506542293/1751454378719000000000000000
     exact_from: certificates/best/n416.cert at 43f666c (its header), read from GitHub at the
-      commit; not yet retained (think-gn29 imports it)
+      commit; retained since (#800, think-gn29)
     first_committed: '2026-10-24T00:55:44Z'
   - n: 458
     printed: '21.889909897514'
     rounding: up
     exact: 93702897153275161352723517265203887251674768555089562119509281137719/4280643346271509184272652992806433462715091842726529500000000000000
     exact_from: certificates/best/n458.cert at 43f666c (its header), read from GitHub at the
-      commit; not yet retained (think-gn29 imports it)
+      commit; retained since (#800, think-gn29)
     first_committed: '2026-10-24T00:55:44Z'
   - n: 502
     printed: '22.892030646456'
     rounding: up
     exact: 166138116388701103321442072171/7257465226853000000000000000
     exact_from: certificates/best/n502.cert at 43f666c (its header), read from GitHub at the
-      commit; not yet retained (think-gn29 imports it)
+      commit; retained since (#800, think-gn29)
     first_committed: '2026-10-24T00:55:44Z'
   - n: 504
     printed: '22.925114765344'
     rounding: up
     exact: 59645875298511075644593175121/2601769976248000000000000000
     exact_from: certificates/best/n504.cert at 43f666c (its header), read from GitHub at the
-      commit; not yet retained (think-gn29 imports it)
+      commit; retained since (#800, think-gn29)
     first_committed: '2026-10-24T00:55:44Z'
   note: 'A publication in a watched repository with no issue (the owner, 2026-10-14), dated
     by the push that made it public, 964ee2b..1c17153 at 2026-10-24T06:10:44Z in GitHub''s
     activity log; committed at 00:55:44Z. 1c17153 changes no certificate at these counts.
     Transcribed at the 8 of #798''s counts where certificates/best/nN.cert differs from 964ee2b''s
     and states a side below the start; at the other 6 it is 964ee2b''s file. Its import, and
-    the credit its index gives each row, are think-gn29''s; this walk reads it as an earlier
-    publication only.'
+    the credit its index gives each row, are think-gn29''s (merged as #800 after this walk
+    was read); this walk reads it as an earlier publication only.'
 - report: '#798'
   url: https://github.com/jlevy/squares/issues/798
   kind: issue

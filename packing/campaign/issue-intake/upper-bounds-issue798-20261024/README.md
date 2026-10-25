@@ -140,7 +140,7 @@ From `ledger.yaml`; a note that several claims share is one row.
 
 | Report | Counts | Note |
 | --- | --- | --- |
-| franciscouzo/square-packing@43f666c | all | A publication in a watched repository with no issue (the owner, 2026-10-14), dated by the push that made it public, 964ee2b..1c17153 at 2026-10-24T06:10:44Z in GitHub's activity log; committed at 00:55:44Z. 1c17153 changes no certificate at these counts. Transcribed at the 8 of #798's counts where certificates/best/nN.cert differs from 964ee2b's and states a side below the start; at the other 6 it is 964ee2b's file. Its import, and the credit its index gives each row, are think-gn29's; this walk reads it as an earlier publication only. |
+| franciscouzo/square-packing@43f666c | all | A publication in a watched repository with no issue (the owner, 2026-10-14), dated by the push that made it public, 964ee2b..1c17153 at 2026-10-24T06:10:44Z in GitHub's activity log; committed at 00:55:44Z. 1c17153 changes no certificate at these counts. Transcribed at the 8 of #798's counts where certificates/best/nN.cert differs from 964ee2b's and states a side below the start; at the other 6 it is 964ee2b's file. Its import, and the credit its index gives each row, are think-gn29's (merged as #800 after this walk was read); this walk reads it as an earlier publication only. |
 | #798 | all | Each claim is the exact side of s<N>_amund.cert in the gist amundsk/e4df936fb09c68446598d4c8309d0166 at c9be7b7, rounded up at 12 places as the issue prints it. The issue says each packing was found from #763's certified packing at the count (franciscouzo/square-packing@964ee2b), credited as #763 credits it. |
 
 ## Lane Cross-Check
