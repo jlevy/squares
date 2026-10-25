@@ -470,13 +470,15 @@ fast-tier certification.
 The prototype and controls do not establish complete coverage of an external rectangle
 certificate.
 
-For the next supervised exact-research goal, the current handoff is `think-7hy3`:
-discharge Session 184’s certification debt on a qualifying frozen source, preserving the
-failed full checkpoint and scoped additive checks.
-The selected mathematical continuation is complete partner-pose coupling with matched
-replay profiling; run certification beside the separately registered proof work rather
-than waiting on CI. See [Current Handoff](../../../../SYNOPSIS.md#current-handoff) for
-the accepted evidence, exact scope and allocation boundaries.
+For the next supervised exact-research goal, the current engineering handoff is
+`think-uhxt`: retain Session188’s historical certification debt and verify the final
+Session189 terminal-delta qualification before PR acceptance.
+The actual preceding combined source passed its full hosted checkpoint; later metadata
+is not covered merely by ancestry.
+The separate Session184 certification debt and planned partner-pose coupling with
+matched replay profiling remain unchanged and are not reopened by this engineering
+continuation. See [Current Handoff](../../../../SYNOPSIS.md#current-handoff) for the
+exact evidence and ownership boundaries.
 
 ## The numeric runner launch gate
 

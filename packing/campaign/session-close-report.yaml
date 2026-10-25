@@ -3295,9 +3295,9 @@ sessions:
     snapshot_incomplete: true
 - id: session-189
   title: "Phase Timing Qualification Continuation"
-  status: in_progress
+  status: completed
   primary_bead: think-uhxt
-  phases: 2
+  phases: 3
   measured: true
   rollups:
   - packing/campaign/resource-usage/codex-task-tree-session189-checkpoint.yaml
@@ -3308,8 +3308,8 @@ sessions:
   wall_hours: null
   codex_receipts:
   - path: packing/campaign/resource-usage/codex-task-tree-session189-checkpoint.yaml
-    model_responses: 182
-    agent_hours: 0.6
-    active_union_hours: 0.28
-    wall_hours: 0.28
+    model_responses: 600
+    agent_hours: 2.76
+    active_union_hours: 1.26
+    wall_hours: 1.26
     snapshot_incomplete: true
