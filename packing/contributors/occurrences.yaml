@@ -20775,28 +20775,21 @@ occurrences:
     path: packing/frontier/n-182.md
     record_key: '182'
     field: /reported_upper_bound/found_by/0
-  expected_text: Francisco Couzo
-  start: 0
-  end: 15
-  label: Francisco Couzo
-  role: construction-finder
-  disposition: resolved
-  evidence:
-  - primary-byline
-  contributor_id: francisco-couzo
-- origin:
-    path: packing/frontier/n-182.md
-    record_key: '182'
-    field: /reported_upper_bound/improved_by/0
   expected_text: Evan Daniel
   start: 0
   end: 11
   label: Evan Daniel
-  role: construction-improver
+  role: construction-finder
   disposition: resolved
   evidence:
   - repository-license
+  - bibliography
   contributor_id: evan-daniel
+  note: 'Reviewed packing/frontier/n-182.md [182] /reported_upper_bound/found_by/0 span 0:11:
+    the case''s house since the adoption of 25 October 2026 (T-243) is Evan Daniel''s packing
+    of issue 806, found by his explore loop from an L-cut of Francisco Couzo''s 211 packing
+    (T-188), at evand/square-packing@d99925d, in the repository whose retained licence names
+    him. The start''s credit is the bibliography key''s.'
 - origin:
     path: packing/frontier/n-182.md
     record_key: '182'
@@ -20814,20 +20807,6 @@ occurrences:
   note: Reviewed packing/frontier/n-182.md [182] /reported_lower_bound/proved_by/0
     span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
     metadata and owner confirmation bind wand125 to Hiroaki Hosono.
-- origin:
-    path: packing/frontier/n-182.md
-    record_key: '182'
-    field: /reported_upper_bound/improved_by/1
-  expected_text: PingYou Ltd
-  start: 0
-  end: 11
-  label: PingYou Ltd
-  role: construction-improver
-  disposition: non-person
-  evidence: []
-  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
-    Credit section records the request to credit PingYou Ltd and identifies its unreleased
-    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/frontier/n-183.md
     record_key: '183'

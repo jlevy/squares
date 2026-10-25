@@ -4819,19 +4819,12 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {
-          "degree": 1,
-          "degree_provenance": "frontier",
-          "degree_recorded_upstream": true,
-          "exact_form": "237833923949347406319344341313918385648342762542430301654765472403146098264002225697299110447592672534234872259579846496056669841395644437305106229929948216478744529314088679114449753545618507820313689859766896950510129312476038619180441987389419700474268589141152650429566346575714844794676432490829829800848595531261901843644272962748175982068113270548496420488260312318999094595359117392938331097759755961704917457466153260549084000783785017509045889320360081009416779496/17019635039725719200033994032590707268320512800859475098368213904340007770774821972775712669157491717457634571096631353107150408590579013989521902380383602817384052405528382295252799642943866310900148457185587559632916505646661845763889979722770708986111059505537068685689596996974072649006499835073825634729369470186080314125795115380160824610322474283053008014793811856179250205296316363761431986577533171776889611878418485809785946237792494137882238966754418286050484157",
-          "minimal_polynomial": null,
-          "state": "minimal-polynomial"
-        },
+        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"13970916436214678735385725854133/1000000000000000000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
         "lower": {"correction":true,"display":"s(182) ≥ 13.509611","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"13.5096118312"},
         "n": 182,
         "optimality": {"provenance":"frontier","status":"open"},
         "rigidity": {
-          "assessed_geometry": {"reported_side":"13.9740907131214390071","source_url":"https://github.com/BuddenPing/squares/blob/4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde/numerical-refinements/certificates/n182.cert.json","witness_id":"W-known-best-n182","witness_path":"packing/witnesses/known-best/n-182.yaml"},
+          "assessed_geometry": {"reported_side":"13.9709164362146788","source_url":"https://github.com/evand/square-packing/blob/d99925d1298262c4ddb81c95abbb6f45adca8d3d/search/packer/candidates/s182-1024.cert","witness_id":"W-known-best-n182","witness_path":"packing/witnesses/known-best/n-182.yaml"},
           "assessments": [
             {
               "assurance": "numerically-checked",
@@ -4848,7 +4841,7 @@
           "provenance": "absent",
           "state": "not-established"
         },
-        "side": {"display":"s(182) ≤ 13.974091","provenance":"frontier","relation":"upper-bound","value":"13.9740907131214390071"}
+        "side": {"display":"s(182) ≤ 13.970917","provenance":"frontier","relation":"upper-bound","value":"13.9709164362146788"}
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
