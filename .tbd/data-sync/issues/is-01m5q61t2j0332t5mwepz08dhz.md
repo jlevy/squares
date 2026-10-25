@@ -5,7 +5,7 @@ title: "Stage 4: review T-241 (Couzo's 304) and T-242 (Daniel's 268 and 304), th
 kind: task
 status: in_progress
 priority: 2
-version: 4
+version: 5
 delegate: c-map-hx0e-1024
 labels:
   - result-import
@@ -18,7 +18,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-24T14:46:47.122Z
-updated_at: 2026-10-25T00:39:52.269Z
+updated_at: 2026-10-25T01:49:02.376Z
 started_at: 2026-10-24T21:11:59.708Z
 ---
 Stage 4 of the think-l49q import (PR #792, records lane c-import-l49q-1024). T-241 registers Francisco Couzo's certificates/best/n304.cert at franciscouzo/square-packing@fa6237e (Kirill Tymchishin's Kaggle packing, 2.53e-3 below T-186) and T-242 Evan Daniel's exact descents at evand/square-packing@8a8879a (268, 4.48e-12 below T-240, another placement of #763's arrangement; 304, 3.04e-9 below T-241, T-241's packing descended), both at V0/C0, drafts S3 and S2.
@@ -52,3 +52,16 @@ D1. What is `s268_lightning.predescent.txt`, Tymchishin's v4 packing to 2.47e-10
 D2. Is "finder unknown" at 304 the missing finder field your `TODO.md` notes for Kaggle imports? Do you know who first published that packing, and which notebook versions and dates hold Lavrentev's 268 and kozykappa's 304?
 
 STAGING: select_houses.PENDING_ADOPTION[268] names think-hx0e (open and synced) as the bead that adopts T-242 at 268, reason "next pull request". Keep think-hx0e open until H2 (think-3anz) lands, or re-point the entry to think-3anz once it is synced; H2 takes 268 off the list.
+
+The posted #763 reply of 25 October (issuecomment-6391800383) already asks C1 as its question 7 and covers C3 and C4 in its questions 1 and 6; C2 (construction credit of Polkovskyi's 70a033f 304 vs RECORD_PROVENANCE.md) is the one still to ask.
+
+STATUS 2026-10-25 c-map-hx0e-1024: PR https://github.com/jlevy/squares/pull/803 (draft; labels intake, S3), branch claude/intake-2026-10-24-t241-t242-review, head c9ae6f746.
+- e1e9f55d5 review retained byte for byte (programs = outputs/program-digests.sha256); mapped in the document map.
+- af0f65e05 think-o4m0 (see that bead).
+- 93ef6627f, 88834a320 mapping: V-kaggle-268-304-review-check; E-couzo-n304-exact-feasibility and E-evand-kaggle-descents-exact-feasibility (shared-components, RF-4 holds); E-couzo-n304-review-exact-feasibility (1/1) and E-evand-kaggle-descents-review-exact-feasibility (2/2), independent-implementation; external_review on report atoms and replays; T-241 and T-242 V3/C3, S3 and S2 confirmed; M-1..M-5, N-1, N-2; keys: [Couzo n304] Couzo after Tymchishin, Levy; [Daniel Kaggle descents] Daniel after Lavrentev, Tymchishin, lineage independent; census spans restored; URL registry amended.
+- 1db39bbce merge of main 755ef426b (#794), both sides kept.
+- 3e3b6a8f7 adoption of T-242 at 304 in the pass of 2026-10-25 (archive row added beside #794's 268 and 303); 268 staged in select_houses.PENDING_ADOPTION under think-hx0e (next pull request); strong runs at 304: grid-slack (3 thresholds) and evand regularizer all row 7, worse on light squares than the axis view, so 304 decided no better, SETTLED[304] re-made; ~7 CPU-min.
+- 7ba219f8e, 420eb9187 feeds (custody 70/203/46, screen (124,1317,302,5326), citations, censuses, rigidity, composite, sweeps slice, tests).
+- 605954831 #763 reply recorded (n268/n303 dues clear; #795's three notebook keys stay due for think-lyf9) and #794's News landed (news page 366,574 B, trip 450,000, budget 600,000).
+- d0c132c35 stamp_landed (304 -> T-242, 2026-10-25); 16ca5c3fc papers' no-change record (69 files x3 identical at d0c132c3 vs main 755ef426b); c9ae6f746 DATA_REVISION -> d0c132c35.
+REMAINS: H2 think-3anz (268, on or after 2026-10-26T00:00Z); keep think-hx0e open until H2 lands (PENDING_ADOPTION[268] names it) or re-point to think-3anz after sync; C2 to Couzo; D1, D2 to Daniel; row-7 views at 304 for the owner.
