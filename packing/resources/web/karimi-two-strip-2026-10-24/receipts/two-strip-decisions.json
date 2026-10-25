@@ -2,7 +2,7 @@
   "certificates": "written out by write_out and serialized in the n S / x y t format; not retained, each pinned here by its SHA-256 and size",
   "checker": "packing/devtools/two_strip_checker.py",
   "controls": ["count above the capacity","side below the binding fit","H strip one row deeper","no tilt","a right angle","grid one larger","unknown kind"],
-  "cpu_seconds": 7.1,
+  "cpu_seconds": 6.8,
   "doi": "10.5281/zenodo.23624433",
   "environment": {"implementation":"CPython","machine":"x86_64","python":"3.14.7"},
   "format": "two-strip-decisions-v1",
@@ -10,7 +10,6 @@
   "lemma": "Two squares of one strip, turned by -a with t = tan(a/2), c = (1 - t^2)/(1 + t^2), s = 2t/(1 + t^2), have centres differing by dj (s, c) + N (1/c, 0), which along their axes is (N, dj + N s/c), so distinct squares are interior-disjoint; a strip of m rows of length W lies in [0, W] x [0, m c + s] when each centre is at least e = (c + s)/2 from both ends; the H strip in [0, S - wV] x [0, hH], the V strip in [S - wV, S] x [0, S] and the (K - mV) x (K - mH) grid in [0, K - mV] x [S - (K - mH), S] have disjoint interiors inside [0, S]^2 when hH <= S - (K - mH) and K - mV <= S - wV; row j holds floor((W - e - x0_j) c) + 1 squares, and deleting squares leaves a packing",
   "packet": "packing/resources/web/karimi-two-strip-2026-10-24",
   "records": "packing/resources/web/karimi-two-strip-2026-10-24/zenodo/zenodo-23624433/records.csv",
-  "records_sha256": "81f315616838e083b2db2af59220c8f52c76e537b09a6778948f723672fcfa69",
   "rows": [
     {"capacity":1184,"certificate_bytes":38272,"certificate_sha256":"bfc10201378945357c135e3b3c12250db643be316a114abf6784b896b5458ef0","controls_refused":7,"grid":588,"h_slack":"270237667/18850000000","h_strip":131,"k":35,"k_is_ceil_sqrt_n":true,"kind":"two-strip","n":1184,"side":"1745411771/50000000","side_below_k":true,"surplus":0,"v_slack":"107/850000000","v_strip":465,"verdict":"decided"},
     {"capacity":1186,"certificate_bytes":39786,"certificate_sha256":"a992736367608a0d7003bb845ca792e1353a172b24a99a182a584af58808233f","controls_refused":7,"grid":638,"h_slack":"638709/162500000","h_strip":116,"k":35,"k_is_ceil_sqrt_n":true,"kind":"two-strip","n":1186,"side":"436587593/12500000","side_below_k":true,"surplus":0,"v_slack":"241/1712500000","v_strip":432,"verdict":"decided"},
@@ -696,6 +695,6 @@
     {"capacity":3781,"certificate_bytes":125976,"certificate_sha256":"82e7659049fde6fd4d077a9f9fa2e9af908edf8b257efe876bd97a6add9d35c0","controls_refused":7,"grid":2444,"h_slack":"1000477/2650000000","h_strip":443,"k":62,"k_is_ceil_sqrt_n":true,"kind":"two-strip","n":3774,"side":"3095000009/50000000","side_below_k":true,"surplus":7,"v_slack":"1015031653/175850000000","v_strip":894,"verdict":"decided"},
     {"capacity":3781,"certificate_bytes":126002,"certificate_sha256":"b8c3ea460362e660cdbc5c00b16ffa02edb088d6b87326827606790b8ca5e5b7","controls_refused":7,"grid":2444,"h_slack":"1000477/2650000000","h_strip":443,"k":62,"k_is_ceil_sqrt_n":true,"kind":"two-strip","n":3775,"side":"3095000009/50000000","side_below_k":true,"surplus":6,"v_slack":"1015031653/175850000000","v_strip":894,"verdict":"decided"}
   ],
-  "started_utc": "2026-10-25T04:31:47Z",
+  "started_utc": "2026-10-25T04:45:55Z",
   "summary": {"controls":{"H strip one row deeper":{"first_reason":"n = 1184 is above the capacity 1182","refused":683},"a right angle":{"first_reason":"tV = 1: a strip's tan(a/2) must lie in (0, 1)","refused":683},"count above the capacity":{"first_reason":"n = 1185 is above the capacity 1184","refused":683},"grid one larger":{"first_reason":"the H strip, 6.89389920424 high, overlaps the grid by 9.857e-01: mH cH + sH > S - (K - mH)","refused":683},"no tilt":{"first_reason":"tH = 0: a strip's tan(a/2) must lie in (0, 1)","refused":683},"side below the binding fit":{"first_reason":"the V strip, 13.9082352941 wide, overlaps the grid by 1.000e-15: K - mV > S - (mV cV + sV)","refused":683},"unknown kind":{"first_reason":"kind 'three-strip': not a two-strip packing","refused":683}},"decided":683,"k_is_ceil_sqrt_n":683,"least_h_slack":"1.132260e-08","least_v_slack":"1.358106e-08","rows":683,"side_below_k":683,"squares":1749915,"surplus_most":19,"surplus_zero":403}
 }

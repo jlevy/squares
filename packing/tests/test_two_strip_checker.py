@@ -198,24 +198,52 @@ def test_the_receipts_hold_with_the_sample_s_digests() -> None:
 def test_an_altered_receipt_or_packet_is_refused(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    """A receipt row with another capacity is named, and a retained member whose bytes
-    are not the captured ones fails custody before any row is read."""
+    """A receipt row with another capacity is named; a replayed certificate that is not
+    the one the decisions receipt names is refused; a packet keeping a file the capture
+    does not name fails custody before any row is read; and a row whose decimal side is
+    not its exact side is refused."""
     receipt = json.loads(checker.DECISIONS.read_text(encoding="utf-8"))
     receipt["rows"][5]["capacity"] += 1
     altered = tmp_path / "decisions.json"
     altered.write_text(json.dumps(receipt), encoding="utf-8")
+    sample = json.loads(checker.REPLAY.read_text(encoding="utf-8"))
+    sample["rows"][2]["certificate_sha256"] = "0" * 64
+    replayed = tmp_path / "replay.json"
+    replayed.write_text(json.dumps(sample), encoding="utf-8")
     monkeypatch.setattr(checker, "DECISIONS", altered)
+    monkeypatch.setattr(checker, "REPLAY", replayed)
     problems = checker.check()
     n = receipt["rows"][5]["n"]
     assert f"n={n}: the decision differs from the receipt" in problems
-    assert "the decisions summary does not match the rows" not in problems
+    assert "n=1813: the replayed certificate is not the decided one" in problems
+    assert len(problems) == 2, problems
     copied = tmp_path / "extracted"
     shutil.copytree(checker.EXTRACTED, copied)
-    readme = copied / "README.md"
-    readme.write_bytes(readme.read_bytes() + b"\n")
+    (copied / "certificates.txt").write_text("", encoding="utf-8")
     monkeypatch.setattr(checker, "EXTRACTED", copied)
-    with pytest.raises(checker.CustodyError, match=r"README\.md: the retained bytes"):
+    with pytest.raises(checker.CustodyError, match="the packet keeps"):
         checker.records()
+    item = {
+        "n": "1184",
+        "new_side_exact": "1745411771/50000000",
+        "new_side": "34.9082354201",
+        "K": "35",
+        "mH": "7",
+        "tH": "5/27",
+        "phH": "0",
+        "mV": "14",
+        "tV": "3/29",
+        "phV": "0",
+    }
+    with pytest.raises(checker.CustodyError, match="the decimal side is not the exact side"):
+        checker.row_from_record(item)
+    item["new_side"] = "34.9082354200"
+    row = checker.row_from_record(item)
+    assert (row.n, row.side, row.tilt_v) == (
+        1184,
+        Fraction(1745411771, 50000000),
+        Fraction(3, 29),
+    )
 
 
 @pytest.mark.slow

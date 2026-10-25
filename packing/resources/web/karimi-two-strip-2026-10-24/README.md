@@ -88,8 +88,11 @@ author answers the acknowledgement’s question (think-5dc3, O4).
   size.
 
 The source is a Zenodo deposit, not a Git repository. `devtools.acquire_source`, which
-binds each file to its Git blob, therefore does not apply. `two_strip_checker.custody`
-holds the retained files to the capture instead, before any row is read.
+binds each file to its Git blob at an upstream commit, therefore does not apply. The
+capture held each download to the MD5 Zenodo states, and the digests above are the stage
+1 triage’s. From then on Git keeps the bytes (OR-16). Before any row is read,
+`two_strip_checker.custody` checks only that the packet keeps exactly the files the
+capture names.
 
 ## What the Rows Claim
 
@@ -112,7 +115,7 @@ Two receipts under [`receipts/`](receipts/), each written by
 [`devtools.two_strip_checker`](../../../devtools/two_strip_checker.py). Everything in it is
 exact, in integers and fractions.
 
-- **[`two-strip-decisions.json`](receipts/two-strip-decisions.json)**, `decide-all` (7.1
+- **[`two-strip-decisions.json`](receipts/two-strip-decisions.json)**, `decide-all` (6.8
   CPU-seconds). Every row is decided by the checker’s lemma: no two squares of a strip
   overlap, the three regions are disjoint inside $[0, S]^2$ by the two fit inequalities,
   and the count is at most the capacity. The capacity equals $n$ at 403 rows and exceeds

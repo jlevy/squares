@@ -69,8 +69,11 @@ source's ``regenerate.py``; `write_out` is this module's own builder, written fr
 README and the issue.
 
 **#799's packet.** ``karimi-two-strip-2026-10-24`` retains the record's three zip members
-and its ``issue_text-1.md``, written by ``devtools.capture_web_source zenodo``; `custody`
-holds them to the capture's digests, and `records` reads the 683 rows. The receipts are:
+and its ``issue_text-1.md``, written by ``devtools.capture_web_source zenodo``, which held
+each download to the MD5 Zenodo states. From then on Git keeps them (OR-16), so `custody`
+compares no digest: it checks that the capture is record 23624433 and that the packet
+keeps exactly the files the capture names, and `records` reads the 683 rows. The
+receipts are:
 
 - ``receipts/two-strip-decisions.json`` (``decide-all``): every row decided, every
   control refused, and the SHA-256 and size of each written-out certificate, which the
@@ -158,14 +161,10 @@ RECORD = 23624433
 DOI = "10.5281/zenodo.23624433"
 ISSUE = "https://github.com/jlevy/squares/issues/799"
 CAPTURE = PACKET / f"zenodo/zenodo-{RECORD}-receipt.json"
-MEMBERS = PACKET / f"zenodo/zenodo-{RECORD}.sha256"
 EXTRACTED = PACKET / f"zenodo/zenodo-{RECORD}"
 RECORDS = EXTRACTED / "records.csv"
-#: The deposit's one archive, and the member holding the rows, by the digests the stage 1
-#: triage read (think-5dc3) and the capture of 25 October 2026 read again.
+#: The deposit's one archive, whose members the packet keeps.
 ARCHIVE = "karimi_two_strip_records_v1_lite.zip"
-ARCHIVE_SHA256 = "0d4f89b0b9353af405139cbb249831edd4f480cece86e219431ac924546978c5"
-RECORDS_SHA256 = "81f315616838e083b2db2af59220c8f52c76e537b09a6778948f723672fcfa69"
 #: The deposit's issue text, kept beside the members (not an archive member).
 ISSUE_TEXT = "issue_text-1.md"
 ROWS = 683
@@ -391,31 +390,19 @@ def _read(path: Path) -> Any:
 
 
 def custody() -> None:
-    """Hold the packet to the capture: the archive and the issue text by the record's
-    files, each kept member by the archive's member list and the capture's digest, and
-    the rows' member by the digest the triage read."""
+    """Hold the packet to the capture by name: the capture is record 23624433, its files
+    are the archive and the issue text, and the packet keeps exactly the archive's
+    members the capture extracted, with the issue text. Git keeps the bytes (OR-16)."""
     capture = _read(CAPTURE)
     if (capture.get("record"), capture.get("doi")) != (RECORD, DOI):
         raise CustodyError(f"the capture is not record {RECORD}")
-    files = {item["key"]: item for item in capture["files"]}
-    if files.get(ARCHIVE, {}).get("sha256") != ARCHIVE_SHA256:
-        raise CustodyError(f"{ARCHIVE} is not the archive the triage pinned")
-    listed = {}
-    for line in MEMBERS.read_text(encoding="utf-8").splitlines():
-        digest, _, name = line.partition("  ")
-        listed[name.removeprefix("./")] = digest
-    kept = {item["member"]: item["sha256"] for item in capture["extracted"]}
-    if kept.get(RECORDS.name) != RECORDS_SHA256:
-        raise CustodyError(f"{RECORDS.name} is not the member the triage pinned")
-    kept[ISSUE_TEXT] = files.get(ISSUE_TEXT, {}).get("sha256", "")
-    for name, digest in kept.items():
-        if name != ISSUE_TEXT and listed.get(name) != digest:
-            raise CustodyError(f"{name}: the capture and the archive's member list differ")
-        if _sha256(read_retained_bytes(EXTRACTED / name)) != digest:
-            raise CustodyError(f"{name}: the retained bytes are not the captured ones")
+    files = sorted(item["key"] for item in capture["files"])
+    if files != sorted((ARCHIVE, ISSUE_TEXT)):
+        raise CustodyError(f"the capture's files are {files}")
+    kept = sorted([*(item["member"] for item in capture["extracted"]), ISSUE_TEXT])
     present = sorted(path.name for path in EXTRACTED.iterdir())
-    if present != sorted(kept):
-        raise CustodyError(f"the packet keeps {present}, the capture {sorted(kept)}")
+    if present != kept or RECORDS.name not in present:
+        raise CustodyError(f"the packet keeps {present}, the capture {kept}")
 
 
 def _literal(text: str, pattern: re.Pattern[str], where: str) -> str:
@@ -537,7 +524,6 @@ def decide_all() -> dict[str, Any]:
         "doi": DOI,
         "packet": PACKET.relative_to(REPO).as_posix(),
         "records": RECORDS.relative_to(REPO).as_posix(),
-        "records_sha256": RECORDS_SHA256,
         "checker": "packing/devtools/two_strip_checker.py",
         "lemma": LEMMA,
         "controls": list(CONTROLS),
@@ -627,9 +613,9 @@ def check(*, digests: bool = False, replay: bool = False) -> list[str]:
     rows = records()
     receipt = _read(DECISIONS)
     problems = []
-    if (receipt["format"], receipt["records_sha256"], receipt["lemma"]) != (
+    if (receipt["format"], receipt["records"], receipt["lemma"]) != (
         DECISIONS_FORMAT,
-        RECORDS_SHA256,
+        RECORDS.relative_to(REPO).as_posix(),
         LEMMA,
     ) or receipt["controls"] != list(CONTROLS):
         problems.append("the decisions receipt's header is not this checker's")
@@ -659,6 +645,8 @@ def check(*, digests: bool = False, replay: bool = False) -> list[str]:
             for item in kept["controls"]
         ):
             problems.append(f"n={n}: a route accepted a control")
+        # The certificate is written out and never retained, so its digest is its name
+        # (a generated artifact under OR-16): the replayed one must be the decided one.
         decided = by_n[n]
         if (kept["certificate_sha256"], kept["capacity"]) != (
             decided["certificate_sha256"],
