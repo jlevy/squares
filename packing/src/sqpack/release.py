@@ -9207,8 +9207,8 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "final comment, #814's News and the explainer PDF's page count of 25, at link "
             "revision 1b75d2f7 with that main's four inputs and "
             "render_n11_lower_bounds_explainer_pdf.py swapped in, and after review A's "
-            "fixes, at link revision 6997281d with the same five inputs of main swapped "
-            "in: the same outcome each time, the explainer counting 244 results against "
+            "fixes, at link revision 6997281d, and review B's, at d5dcd2d0, each with the "
+            "same five inputs of main swapped in: the same outcome each time, the explainer counting 244 results against "
             "main's 243, which its v0.4.29 carries. Retain v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
