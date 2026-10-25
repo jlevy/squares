@@ -3,9 +3,9 @@ type: is
 id: is-01m5q394sd3cx4fay9z38d7wrn
 title: "PR B of #763: map T-240's stage 4 review (V3/C3), adopt and regularize at 268 and 303"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 9
+version: 12
 delegate: c-prb-763-1024
 labels:
   - result-import
@@ -16,8 +16,12 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-24T13:58:21.741Z
-updated_at: 2026-10-25T00:13:52.317Z
+updated_at: 2026-10-25T01:12:53.033Z
 started_at: 2026-10-24T13:58:27.438Z
+closed_at: 2026-10-25T01:12:53.033Z
+close_reason: "#794 merged (755ef426b, 2026-10-25T01:00:47Z): T-240 V3/C3, houses at 268 and 303 adopted and regularized; deploy verified; #763 reply posted. News and the reply record ride think-hx0e's H1 PR."
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes
@@ -55,3 +59,14 @@ REVIEW A ROUND, continued: #792 merged during the round (3480b5fd3, 17:34Z); mer
 2026-10-24 coord-intake-1024: #794 at d000419bd: review A addressed (dispositions https://github.com/jlevy/squares/pull/794#issuecomment-6387765234), main 3480b5fd3 (#792) merged in, hosted CI green (Packing validation 40118613910, Certificate page 40118613915). Draft until the merge on or after 2026-10-25T00:00Z (scheduled check-in at 00:10Z, trig_01DhTFUTDPGkUQQYuVtXQfPv).
 
 2026-10-25 00:15Z coord-intake-1024 (merge-day check-in trig_01DhTFUTDPGkUQQYuVtXQfPv fired 00:11Z): #794 head 36e7fd5ae (main 2ed0ea740 merged as 5adbe8088 by c-sync-794-1024, think-acuz). Hosted CI red on two merge-caused failures: test_house_adoption custody receipt (an input's bytes changed: 15688 vs 31365) and test_measure_identity's T-230 vs T-239 centred assignment (reads the 303 house, now T-240). Every lane stopped about 21:20Z on an API spend limit; all resumed at 00:14Z. The sync lane fixes both, narrows T-240's RF-2 sentence to 268/303, then stamp_landed --apply (25 Oct) and release_pin --update; the coordinator merges when green.
+
+2026-10-25 c-sync-794-1024 (think-acuz, for coord-intake-1024): main 2ed0ea740 (#793, #796, #795) merged into #794 with a merge commit, 5adbe8088; nothing rebased or force-pushed. New head 16f136cfb (DATA_REVISION be46a31a4).
+- Conflicts, both sides kept: bibliography.yaml (this branch's RF-1 sentence on the couzo-964ee2b key, then main's seven notebook keys); the issue-763 packet README (this branch's Stage 4 Review section, then main's The Notebook Rows); release.py (main's W7 and notebook-rows no-change records, then this branch's record; tuple rebuilt as main's list plus ours); resources README (this branch's #763 row and main's notebook-rows row, by hand, as last time); occurrences.yaml (this branch's span at 303, T-240's finder Lavrentev unresolved, since main's Kristiansen join addressed replaced text; contributor_census --stale reports none and --reconcile rewrote the manifest, dropping nothing, the only change the folding of this branch's notes); INVENTORY.md and VERIFIERS.md re-rendered by render_evidence_inventory --update and render_verifiers --update, both --check pass. Other views auto-merged and pass their drift checks in the records tier; site_urls --check --history-ref origin/main: 1406 rows, 0 failures.
+- Hosted CI at 36e7fd5ae (Packing validation 40132375472) failed on two merge-caused tests, fixed: fc05198bd re-ran upper_bound_houses custody (#795 widened the 763 packet's acquisition/sources.json and upstream-subtree.sha256; 70 houses, 200 inputs, 44 mutations refused and restored, 31.18 s); 7149db79b reads T-239 for the T-240 review's T230@303 vs T239@303 reproduction from packet amundsk-n303-2026-10-23 instead of the 303 house witness (now T-240); every figure reproduces unchanged.
+- be46a31a4: T-240's notes and the packet README say previous_source is the source's prior record, the retained parent only at 268 and 303 (think-vm3m's finding, from the coordinator).
+- Release: papers' no-change record re-measured at 5adbe808 (4bf2970eb) and at be46a31a (4a48c8d68): main's nine candidate inputs swapped in, twice from the tree and once swapped, 69 files each, byte-identical across the three, both 242 results; check_release_impact passes; v0.4.27, v0.1.11, v0.1.4, v0.2.7 kept. stamp_landed --apply (25 October, no --date) wrote nothing: the branch adds no register entry and houses 268 and 303 are already landed 2026-10-25, so there is no stamp commit. Last commit is the re-pin 16f136cfb (release_pin --check: the pin is the last data commit, be46a31a428f).
+- Validation: records tier 53/53 at 36e7fd5ae and at 16f136cfb; intake_ledger check and render --check pass for upper-bounds-issue763-20261024 and upper-bounds-couzo-964ee2b-notebooks-20261024; beyond_horizon_replay check OK (1230 rows); 26 affected test modules at 36e7fd5ae: 1467 passed, 2 failed (the two above), re-run at 16f136cfb: 1469 passed, 1 skipped.
+- Hosted CI at 16f136cfb: Packing validation 40146808562 success, Certificate page 40146808543 success; packing-required and pages-required pass; 31 pass, 0 fail.
+- For review: six occurrences notes (the 268 and 303 house finder spans, and four bibliography spans already on main) still say no person record exists for Tymchishin and Lavrentev, though #795 added kirill-tymchishin and vladislav-lavrentev; the spans stay unresolved, as main left them. Nothing posted; PR stays draft.
+
+2026-10-25 coord-intake-1024: MERGED as 755ef426b at 01:00:47Z after the merge-day sync (head 16f136cfb, CI green: 40146808562, 40146808543; sync note issuecomment-6391699018). Deploy verified (Pages 40148939396). #763 reply posted (issuecomment-6391800383). News lands in H1 (think-hx0e).

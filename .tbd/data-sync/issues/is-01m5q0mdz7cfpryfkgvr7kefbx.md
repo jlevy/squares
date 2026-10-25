@@ -3,9 +3,9 @@ type: is
 id: is-01m5q0mdz7cfpryfkgvr7kefbx
 title: "Stage 4 mathematical review of T-240: Couzo's s(268) and s(303) upper bounds at franciscouzo/square-packing 964ee2b (#763)"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 5
+version: 6
 delegate: c-review-t240-math
 labels: []
 dependencies: []
@@ -13,8 +13,12 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-24T13:12:05.863Z
-updated_at: 2026-10-24T16:01:55.055Z
+updated_at: 2026-10-25T01:12:55.304Z
 started_at: 2026-10-24T13:12:11.905Z
+closed_at: 2026-10-25T01:12:55.304Z
+close_reason: "T-240's stage 4 review retained and mapped in #794 (merged 755ef426b); T-240 V3/C3."
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes

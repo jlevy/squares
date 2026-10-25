@@ -5,7 +5,7 @@ title: "Import #763 (PR A, W1): Couzo's 964ee2b at or below 1024 — packet, led
 kind: task
 status: in_progress
 priority: 1
-version: 12
+version: 13
 delegate: c-import-763-1024b
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-24T07:16:16.676Z
-updated_at: 2026-10-24T17:57:16.783Z
+updated_at: 2026-10-25T01:12:50.889Z
 started_at: 2026-10-24T07:16:25.387Z
 ---
 Plan and verdicts: think-cnn7's notes (triage of 24 Oct). After #769 (PR C) and #757, both merged. Licence: the owner's presumption of permission (think-m8f4 follows up the exact licence). PR B (review, V3/C3, adoption and regularization at 268 and 303) follows.
@@ -97,3 +97,5 @@ Notes for you, none of which changes the verdict: the certificates' comment line
 The rows above 1024 (think-llit) and the import's earlier questions stay open on this issue.
 
 2026-10-24 c-prb-763-1024, review A of #794 (A1): the reply above corrected: the 303 regularizer solve is not a certified KKT local minimum (certificate invalid at the relaxed gate; the view is accepted by the three exact routes), and only the 303 view waits to be registered; the 268 view reaches Daniel's side (T-242, on main since #792).
+
+2026-10-25 coord-intake-1024: PR B's reply posted https://github.com/jlevy/squares/issues/763#issuecomment-6391800383 after #794 merged (755ef426b, 01:00:47Z) and Pages run 40148939396 verified (live result/t-240.html V3; cases/268 and 303 at T-240's sides). Changes from the draft: the previous_source sentence (the record held before, which at 268 and 303 is the parent) and question 7 (what previous_source means; think-vm3m M-1). Recorded under #763's replies by c-map-hx0e-1024's H1 PR, with #794's S3 News.
