@@ -9035,8 +9035,10 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "and once swapped, 69 files each, all byte-identical across the three, by the "
             "same browser. After the merge of main 4089f9587 (#800) and the import reply of "
             "25 October recorded on #763, at link revision 37f9fc79 with that main's eleven "
-            "candidate inputs swapped in: the same outcome. Retain v0.4.27, v0.1.11, v0.1.4 "
-            "and v0.2.7."
+            "candidate inputs swapped in: the same outcome. After the merge of main "
+            "3bdff2443 (#802), at link revision 3287d38d with that main's eleven candidate "
+            "inputs swapped in: the same outcome. Retain v0.4.27, v0.1.11, v0.1.4 and "
+            "v0.2.7."
         ),
     ),
 )
