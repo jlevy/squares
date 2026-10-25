@@ -1,25 +1,31 @@
 ---
 type: is
 id: is-01m5rt5tsxbxfb0b3n9mrtqs01
-title: "Exact configurations at 172 and 263 in Q(S*): a KKT/number-field builder (W7-style) or the author's configurations"
+title: Decide Kim's exact configurations for T-244 at 172 and 263 on both exact routes (builder as fallback)
 kind: task
 status: open
 priority: 3
-version: 1
+version: 3
 labels:
   - result-import
 dependencies: []
 parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
-deferred_until: 2026-11-08T00:00:00.000Z
+deferred_until: null
 created_at: 2026-10-25T05:57:44.893Z
-updated_at: 2026-10-25T05:57:44.893Z
+updated_at: 2026-10-25T10:09:55.689Z
 ---
-T-244 (issue #804, Hyukdong Kim) registers s(172) <= S*_172 and s(263) <= S*_263 as reported, V0/C0: each S* the root of an irreducible polynomial of degree 24 and 17 that #804 found by KKT closure and LLL from T-174's witnesses (atlas inputs equal to binary64). Nothing exact shows a packing at either side yet. This bead gets an exact configuration at each side, every centre and half-angle tangent in Q(S*) (or a field holding S*), so that sqpack.witness.exact_verify and a second route can decide it (T-244's unfinished confirmation, about 2 CPU-hours, up to 8, on both routes).
+Decide Hyukdong Kim's exact configurations for T-244 (issue #804) at 172 and 263 on both exact routes. T-244 registers s(172) <= S*_172 and s(263) <= S*_263 as reported (V0/C0); each S* is the root of #804's irreducible polynomial of degree 24 and 17.
 
-Two routes, in order:
-1. The author's configurations. The acknowledgement on #804 (draft in think-9vai's notes, posted by the coordinator after the import PR merges) asks for them, in Daniel's n-N.minpoly.json.gz format or as the 3,000-digit KKT points with active set and sign branches. Wait 14 days from the merge for an answer (deferred to 2026-11-08).
-2. Otherwise a W7-style builder here: a KKT closure with multipliers on the house's active set (sqpack.promote.system.close adds no first-order condition; the vendored exactsolve.py solves at mpmath precision only as a generator), a Newton solve at about 2,000 to 3,000 digits, and one integer relation per coordinate in Q(S*): about 516 at 172 and 790 at 263.
+The author attached them at 2026-10-25T09:06:23Z (issuecomment-6395743853): t244-exact-configurations.zip, SHA-256 16e6ad9d04f1def897478e59260880320bc7c06ae89e41fa83837c7dc29c9a2d, 96,347 bytes, with n172.minpoly.json (9230aa7a...02db) and n263.minpoly.json (de646870...4686) in evand/square-packing's verify_exact.py minpoly.json format; K = Q[t]/f of degree 24 and 17, S in K. No licence stated, so the #813 import keeps the two configurations as derived exact facts (packing/resources/web/hyukdongkim-t244-configurations-2026-10-25/facts/) with the attachment's and members' digests, and none of the zip's bytes; its checker, controls and distance script are pinned by digest and must not be run.
 
-Price, against the 40 CPU-hour item cap: about one agent-day of tooling, plus 10 to 100 CPU-hours at 172 without python-flint (mpmath PSLQ at dimension 26 and thousands of digits), less at 263 (degree 17). The upper end is over the cap, so route 2 needs the owner's budget or python-flint in the lock (a dependency change, supply-chain review first) before it runs. A cheaper rigorous fallback, which gives no exact value, is a Krawczyk enclosure of the closed KKT system with sqpack.promote.interval_verify: s(n) <= a rational just above S*.
+The work:
+1. Read each fact with devtools.algebraic_witness_reports derive-forms (it reads Daniel's minpoly.json format) and decide it on sqpack.witness.exact_verify over K, a positive and the duplicate-square and outside-container controls a count, and on a second route: the retained verify_exact.py (evand-exact-and-local-reports-2026-10-12 packet) run unchanged on each form rebuilt from the fact, with its mutated controls, as T-193's replay did.
+2. Check that each S in K is T-244's side: the fact's S.poly and interval against #804's polynomial and exact-sides.json's interval.
+3. Measure each configuration against T-174's witness (the author reports centres within 1.8e-12 and 3.5e-13), for the regularization items' identity.
+4. Register the replay evidence on T-244, take it to C3, and owe the stage 4 review for V3.
 
-Done when: an exact configuration at each side is retained and decided (T-244 to C3 by its replay), or the route is declined with a reason recorded on T-244's next_rung.
+Price: about 2 CPU-hours for both counts on both routes, up to about 8 (field degree squared times count squared from T-193's 23 October adoption). Under the 40 CPU-hour item cap, so it runs now; no deferral.
+
+Fallback, only if the author's configurations fail: the W7-style KKT/number-field builder here (one integer relation per coordinate in Q(S*), about 516 at 172 and 790 at 263; 10 to 100 CPU-hours at 172 without python-flint, over the cap at the top), or ask the author again.
+
+Done when: both configurations are decided on both routes and recorded on T-244, or a failure is recorded with its disposition.
