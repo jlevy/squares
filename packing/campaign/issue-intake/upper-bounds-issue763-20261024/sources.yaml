@@ -1625,11 +1625,9 @@ reports:
     packet, receipts/claim-map.json), since the issue carries no table; each at the exact bound certified_bounds.json
     states, dated by the issue. first_committed is the committer time of the commit that first holds the
     certificate; the push of 23:38:42Z made efef7d1, fa6237e and 964ee2b public together, after the issue.
-    Its claims above 1024 are not walked here (think-llit). The walk holds its publications at 14 counts
+    Its claims above 1024 are not walked here (think-llit). The walk holds its publications at 1 count
     back from a row, each waiting on an owner decision (beyond_horizon_replay.WALKS[''upper-bounds-issue763-20261024''].held):
-    13 constructions with no certificate file, L-border recipes of a certificate the release retains (think-g2qy,
-    think-f2io) and 1 index deletion bound, 684''s certificate less one square, which the issue claims
-    (think-2z2n, think-kzme).'
+    1 index deletion bound, 684''s certificate less one square, which the issue claims (think-2z2n, think-kzme).'
 - report: franciscouzo/square-packing@964ee2b
   url: https://github.com/franciscouzo/square-packing/tree/964ee2bdf301d0c8912d956d4010f478dcbbd5ea
   reported_at: '2026-10-23T23:38:42Z'

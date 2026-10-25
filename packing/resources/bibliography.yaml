@@ -3781,6 +3781,32 @@ sources:
       earlier construction credits are retained in the notebook; it names the run and no
       version. The notebook's licence and notices are followed up on think-m8f4, which holds
       nothing. Upper bounds only; no optimality claim.
+  - key: '[Couzo 43f666c 2026-10-24]'
+    authors: [Couzo]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-24'
+    lineage: builds-on-project
+    credit: Couzo after Lavrentev, Tymchishin, kyleluecke, alexchilton, aqibrazadev, Polkovskyi, Levy
+    short_credit: Couzo after Lavrentev et al.
+    note: >-
+      Francisco Couzo's commit 43f666c to franciscouzo/square-packing, "Land the 24 October
+      per-puzzle board and the live records since 964ee2b", committed 2026-10-24T00:55:44Z and
+      pushed with 73eac5b and 1c17153 at 06:10:44Z; no issue reports it. Its
+      certified_bounds.json lowers 964ee2b's bound at 957 counts, 126 at 325 to 1024 and 831
+      L-border recipes above (web/couzo-43f666c-2026-10-24/receipts/claim-map.json), and its
+      message names the source of the certificates it changes: "Exact certificates for 111
+      counts from CT105's live records (coordinator, live sync and browser searches), credited
+      to Francisco Couzo". The ledger of 24 October for 43f666c records 122 of them as rows of
+      the couzo-43f666c-2026-10-24 source. The index and manifest credit Couzo at every row,
+      after the packing each refines: Vladislav Lavrentev's Kaggle notebook CUDA Packing Search
+      v11 at 74 rows, Kirill Tymchishin's CPU Alternating Reclosure v3 at 38 and
+      22-3662-cpu-cuda-mps-eda-union at 2, the notebooks of the Kaggle accounts kyleluecke (3),
+      alexchilton (2) and aqibrazadev (1), each the run whose packings the push of
+      2026-10-23T23:38:42Z published, and Mykhailo Polkovskyi at 1; 1 is his own. The
+      certificates and indexes are retained as factual data (the licence follow-up is
+      think-m8f4). The manifest names this project's sqpack/verify.py as its first checker.
+      Upper bounds only; no optimality claim.
   - key: '[de Winter issue 666 2026-10-17]'
     authors: [de Winter]
     year: 2026
