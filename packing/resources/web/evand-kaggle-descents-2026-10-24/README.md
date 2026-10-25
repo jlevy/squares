@@ -19,8 +19,12 @@ its publication (the owner, 14 October 2026), so the record takes two of the thr
   $s(303) \le 17907238274538241192624181047171/10^{30}$, 2.60e-4 above T-240’s 303, which
   #763 reported first. It is retained as credit evidence only ([303](#303)).
 
-T-242 registers 268 and 304 as reported, at `V0`/`C0`, with T-241 before it at 304. The
-cases are unchanged; adoption at 268 and 304 follows the stage 4 review.
+T-242 registers 268 and 304, with T-241 before it at 304, at `V3`/`C3` since the
+[stage 4 review of 24 October](#stage-4-review). Both are the smallest validated sides at
+their counts, so the cases adopt them under the house rule: 304 in the pull request that
+maps the review, and 268 in the next one, since the adoption of #763’s entry (T-240)
+already moves 268 in the pass of 25 October and one day’s archive holds one prior state a
+count.
 
 The source was read on 24 October 2026 from a blobless clone whose head stood at
 `659ee62e4a9d39542a1146e8b011cc3ab6407ede`, which leaves every retained file unchanged.
@@ -135,7 +139,7 @@ credit; it decides nothing.
   packing descended, which T-242 lists as a regularization of T-241. Against T-186 no
   symmetry pairs it one to one by nearest centres; the optimal assignment, best under the
   diagonal reflection, keeps 250 of 304 squares within 0.1 and moves 54 beyond it (largest
-  1.13), as for T-241, whose source names T-186’s packing as its antecedent.
+  1.13), as for T-241: another arrangement, and a resemblance that states no lineage.
 - **303.** Against T-240’s 303, one to one under the anti-diagonal reflection, 4
   squares beyond 0.1 (largest 0.238), 71 beyond 1e-3.
 
@@ -189,40 +193,76 @@ before #763, and who found the packing at 304, are the authors’ to say.
   first appears in Lavrentev’s output and is Tymchishin’s input.
 - **304:** the packing T-241 certifies. The source says its finder is unknown and its
   earliest public copy is kozykappa’s notebook. Couzo’s index credits it to Kirill
-  Tymchishin’s Kaggle notebook “CPU Alternating Reclosure” v3, and his manifest gives that
-  notebook’s previous source and seed as Mykhailo Polkovskyi’s packing, T-186’s, which
-  the record measures as Daniil Ostashev’s T-175 packing re-solved
-  ([T-241’s packet](../couzo-n304-2026-10-23/README.md)). A regularization leaves the
+  Tymchishin’s Kaggle notebook “CPU Alternating Reclosure” v3. His manifest’s
+  `previous_source` there names Mykhailo Polkovskyi’s packing, T-186’s, as the record his
+  catalogue held at 304 before, not as the notebook’s seed, so no source states a link
+  before Tymchishin (M-1 of the [stage 4 review](#stage-4-review);
+  [T-241’s packet](../couzo-n304-2026-10-23/README.md)). A regularization leaves the
   packing with its finder through the result that holds it, so the line names T-241’s
-  chain: Tymchishin after Polkovskyi, then T-186’s recorded chain (Ostashev, Couzo,
-  PingYou Ltd). Evan Daniel descended it exactly.
+  credit, Tymchishin. Evan Daniel descended it exactly.
 - **Licence and assistance:** MIT, copyright (c) 2026 Evan Daniel ([LICENSE](source/LICENSE)).
   [CREDITS.md](source/CREDITS.md) says the repository’s work was “Produced by Claude
   (Anthropic) in a single session under human direction”, and the commit carries a
   Co-Authored-By trailer naming Claude.
 
 The bibliography key is **[Daniel Kaggle descents 2026-10-24]**, credited *Daniel after
-Lavrentev, Tymchishin, Polkovskyi, Ostashev, Couzo, PingYou Ltd, Levy*. At 268 the link is
-Lavrentev alone. The rest is the 304 chain T-241 records, and Levy enters through it:
-the manifest of T-241’s source names this project’s `sqpack/verify.py` as its first
-checker, and T-186’s recorded chain ends in Levy. At 268 the source does not state that it
-builds on this project. Its `s268_lightning_prior.json` and `s304_pub_prior.json` take the
-store’s prior best from this project’s register and pending issues (#375, #476, #501,
-#575, #593, #624), which is context, a comparison, and not the basis.
+Lavrentev, Tymchishin*: Lavrentev at 268 and Tymchishin at 304, through T-241. Its lineage
+is `independent`, and it names no Levy link (M-4). The manifest that names this project’s
+`sqpack/verify.py` as a first checker is Couzo’s, which certified Couzo’s file, and
+Daniel’s descent started from the public binary64 packing instead. For these descents
+Daniel’s source names nothing of this project’s but the comparison its
+`s268_lightning_prior.json` and `s304_pub_prior.json` draw from the register and pending
+issues (#375, #476, #501, #575, #593, #624), which is context and not the basis, and its
+`CREDITS.md` lists the Squares Project as parallel work.
+
+## Stage 4 Review
+
+The [review of 24 October 2026](../../../../docs/project/reviews/review-2026-10-24-couzo-evand-n268-n304.md)
+of T-241 and T-242 accepted both of these certificates and T-241’s for finite feasibility,
+with one major finding (M-1), four minor and four notes, none blocking. Its programs and
+outputs are kept here in [review/review-2026-10-24/](review/review-2026-10-24/README.md),
+equal to the digests its `outputs/program-digests.sha256` records.
+
+- **Its own checker.** `t241_t242_exact.py` decides each certificate in `Fraction` by
+  separating axes over every pair and by the exact clipped area of every pair whose
+  centres lie within 2, with twelve controls each, sharp at $10^{-30}$, and nine
+  hand-built packings, all as expected. Its least pair gaps and least wall clearances
+  equal [sharp-controls-n268.json](receipts/sharp-controls-n268.json) and
+  [sharp-controls-n304.json](receipts/sharp-controls-n304.json) fraction for fraction.
+  Its author read neither maintained route nor any checker of Daniel’s or Couzo’s, so it
+  is a clean-room re-implementation (`E-evand-kaggle-descents-review-exact-feasibility`,
+  `V-kaggle-268-304-review-check`).
+- **The maintained replay** reads the certificates through the `evand-cert` reader, whose
+  line filter and corner construction are transcribed from Daniel’s `verify_cert.py` and
+  `verify_cert2.py`, the checkers the certificates name, as the #763 review’s RF-4 found,
+  so it is `shared-components` (`E-evand-kaggle-descents-exact-feasibility`), and T-242’s
+  independent re-implementation rests on the review’s checker.
+- **M-1, M-2, M-4 and N-1** are fixed above and in the register: the credit at 304, the
+  print the rationale names, the key’s lineage and Levy link, and the descent’s input at
+  268. S2 is confirmed at both counts. The questions D1 and D2 are below. Of Couzo’s, the
+  confirmation reply of 25 October on #763 asks C1 as its question 7 and covers C3 and C4
+  in its questions 1 and 6, and the import reply of that day asks C2 and the finder at 304
+  as its questions 6 and 5.
 
 ## Questions for the Author
 
-Drafted in think-l49q for Evan Daniel, who opened no issue:
+Drafted in think-l49q for Evan Daniel, and in think-hx0e’s notes after the stage 4 review
+(its D1 and D2). None is posted: Daniel opened no issue, so the questions are held in
+think-hx0e until the coordinator decides where they go.
 
 1. Do you claim the 268 and 304 certificates at `8a8879a` as bounds, credited “Daniel
    after Lavrentev” at 268 and as your descent of the packing Couzo credits to Tymchishin
    at 304?
-2. Which notebook versions and dates hold Lavrentev’s 268 (lightningv08), Deotte’s 303
-   and kozykappa’s 304?
+2. Is “finder unknown” at 304 the missing finder field your `TODO.md` notes for Kaggle
+   imports? Do you know who first published that packing, and which notebook versions and
+   dates hold Lavrentev’s 268 (lightningv08), Deotte’s 303 and kozykappa’s 304?
 3. `s268_lightning.predescent.txt` is #763’s Kaggle parent at 268, Tymchishin’s EDA+Seam
    LP v4 packing, to 2.47e-10 (measured here), while `s268_lightning.input.txt` is
-   Lavrentev’s placement. What is the predescent file, and which of the two did the
-   descent start from? The answer bears on the credit “Daniel after Lavrentev”.
+   Lavrentev’s placement. What is the predescent file, and did any step of the descent use
+   it? The stage 4 review answers half of this (N-1): `s268_lightning.json` gives
+   `S_input` 16.87436171586941, the side of `.input.txt`, and the certificate is that file
+   moved by at most 1.41e-4 and 2.49e-2 from the predescent file. So the descent started
+   from Lavrentev’s placement, as the credit “Daniel after Lavrentev” has it.
 
 ## Commands
 

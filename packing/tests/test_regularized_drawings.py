@@ -1109,3 +1109,25 @@ def test_witness_source_reuse_distinguishes_repository_roots(tmp_path: Path) -> 
             json.dumps({"witness": {"source": {"key": key}}}), encoding="utf-8"
         )
         assert drawings.witness_source_key(witness, root, source_keys=source_keys) == key
+
+
+def test_an_item_credit_narrows_its_key_and_never_adds_to_it() -> None:
+    """A regularization item may state the credit at its own count where its source's key
+    spans counts whose antecedents differ: T-242's key credits Daniel after Lavrentev at
+    268 and after Tymchishin at 304, and its item at 304 says so (review A, A3, of #803).
+    A line that names anyone the key does not is refused."""
+    key = "Daniel after Lavrentev, Tymchishin"
+    assert drawings.item_credit({"n": 304}, key) == key
+    assert drawings.item_credit({"n": 304, "credit": "Daniel after Tymchishin"}, key) == (
+        "Daniel after Tymchishin"
+    )
+    with pytest.raises(ValueError, match="Polkovskyi"):
+        drawings.item_credit({"n": 304, "credit": "Daniel after Polkovskyi"}, key)
+    register = safe_load((drawings.ROOT / "frontier/results.yaml").read_text(encoding="utf-8"))
+    (item,) = [
+        record
+        for result in register["results"]
+        if result["id"] == "T-242"
+        for record in result.get("regularizations") or []
+    ]
+    assert (item["n"], item["credit"]) == (304, "Daniel after Tymchishin")

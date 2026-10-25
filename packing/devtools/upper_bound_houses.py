@@ -585,6 +585,9 @@ def _sources() -> dict[str, Source]:
         # adoption of 25 October moved it on to T-240, so neither T-230 nor T-239 is a
         # source here now, as T-196 and T-199 left on 22 October.
         packet_source("T-240", "couzo-issue763-2026-10-23"),
+        # The adoption of 25 October 2026 moved 304 from T-186 to T-242, Evan Daniel's exact
+        # descent of the packing T-241 certifies; T-186 keeps its other houses.
+        packet_source("T-242", "evand-kaggle-descents-2026-10-24"),
     ]
     found = {source.result: source for source in sources}
     # Two results may read one packet (T-181 and T-182 both read issue 586's), so the
@@ -627,7 +630,8 @@ def _sources() -> dict[str, Source]:
 #: The pass of 24 October 2026 adopted Polkovskyi's lower 204 file (T-231) at 204 from
 #: T-229, and Amund Kristiansen's certificate of issue 755 (T-239) at 303 from T-230. The
 #: pass of 25 October 2026 adopted Francisco Couzo's certificates of issue 763 (T-240) at
-#: 268 from T-174 and at 303 from T-239.
+#: 268 from T-174 and at 303 from T-239, and Evan Daniel's exact descent of Kirill
+#: Tymchishin's Kaggle notebook packing (T-242) at 304 from T-186.
 ADOPTED: dict[int, str] = {
     29: "T-195",
     68: "T-174",
@@ -694,7 +698,7 @@ ADOPTED: dict[int, str] = {
     297: "T-174",
     302: "T-193",
     303: "T-240",
-    304: "T-186",
+    304: "T-242",
     305: "T-174",
     306: "T-174",
     307: "T-174",
@@ -781,6 +785,13 @@ NUMBERS = tuple(sorted(ADOPTED))
 #: and at 303 from T-239, 2.78e-03 below it, a refinement of Couzo's own Kaggle push
 #: packing and another arrangement than T-239's. It is dated by the day its pull request
 #: merges, since the pass of 24 October had already moved 303.
+#: The same pass adopted Evan Daniel's certificate at 304 (T-242) after the 24 October review
+#: of it and of T-241, at 304 from T-186, 2.53e-03 below it: his exact descent of the packing
+#: Francisco Couzo certified (T-241), which Couzo's index credits to Kirill Tymchishin's Kaggle
+#: notebook, another arrangement than T-186's. Its pull request merged after T-240's, and 304
+#: joined that day's pass, whose archive takes a row for each count. T-242's 268, below
+#: T-240's there, waits for a pass on or after 26 October (`select_houses.PENDING_ADOPTION`),
+#: since this pass moves 268 to T-240 and one day's archive holds one prior state a count.
 #: A count a pass names keeps its place in the earlier passes' sets, which their archives
 #: hold; it was adopted on the latest day that names it.
 LATER_PASSES: dict[str, frozenset[int]] = {
@@ -858,7 +869,7 @@ LATER_PASSES: dict[str, frozenset[int]] = {
     "2026-10-22": frozenset({204, 227, 229, 260}),
     "2026-10-23": frozenset({70, 102, 105, 123, 153, 204, 207, 258, 259, 295, 302, 303}),
     "2026-10-24": frozenset({204, 303}),
-    "2026-10-25": frozenset({268, 303}),
+    "2026-10-25": frozenset({268, 303, 304}),
 }
 
 

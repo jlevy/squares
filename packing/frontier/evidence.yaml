@@ -45367,11 +45367,26 @@ evidence:
       records 40.35 route CPU seconds and 40.77 job wall seconds, the longest job 13.94
       seconds. Every positive clears every wall by at least 1.00e-15 and every pair by at
       least 8.18e-11, and the packet's sharp controls meet the 1e-15 wall margin on both
-      routes. Independent review and confirmation remain pending. The source's own checkers
-      were not run here. The two maintained routes, the sqpack rational witness verifier and
-      the independent rational corner checker, share certificate parsing, half-angle
-      conversion, Fraction arithmetic and the separating-axis method. No two independent
-      methods, human oversight or optimality is claimed.
+      routes. The replay is E-couzo-n304-exact-feasibility and the 24 October review's own
+      checker E-couzo-n304-review-exact-feasibility. The source's own checkers were not run
+      here. The source's commits fa6237e, 964ee2b and efef7d1 each end with a
+      Co-Authored-By trailer naming Claude (M-5 of the 24 October review of T-241 and
+      T-242). No two independent methods, human oversight or optimality is claimed.
+    external_review:
+      state: informally-verified
+      date: '2026-10-24'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 mathematical review lane of T-241 and T-242
+        (c-review-t241-t242-math, think-vm3m), strongest sub-agent tier, maximum
+        reasoning, prompted separately from the records lane
+      note: >-
+        docs/project/reviews/review-2026-10-24-couzo-evand-n268-n304.md accepted the three
+        certificates for finite feasibility, with no blocking finding; one major finding
+        (M-1) and four minor ones are on the record's credit and assistance statements,
+        not on the bounds. Its clean-room checker's runs are
+        E-couzo-n304-review-exact-feasibility and
+        E-evand-kaggle-descents-review-exact-feasibility, and its least gaps and wall
+        clearances equal the packets' sharp-control receipts exactly.
   - id: E-evand-kaggle-descents-certificate-report
     claim: upper-bound
     scope:
@@ -45397,11 +45412,327 @@ evidence:
       records 118.9 route CPU seconds and 120.14 job wall seconds, the longest job 15.69
       seconds. Every positive clears every wall by at least 5.00e-21 and every pair by at
       least 9.99e-21, and the packet's sharp controls at 268 and 304 meet those margins on
-      both routes. Independent review and confirmation remain pending. The source's own
-      checkers were not run here. The two maintained routes, the sqpack rational witness
-      verifier and the independent rational corner checker, share certificate parsing,
-      half-angle conversion, Fraction arithmetic and the separating-axis method. No two
-      independent methods, human oversight or optimality is claimed.
+      both routes. The replay is E-evand-kaggle-descents-exact-feasibility and the 24
+      October review's own checker E-evand-kaggle-descents-review-exact-feasibility. The
+      source's own checkers were not run here. The commit carries a Co-Authored-By trailer
+      naming Claude, and the source's CREDITS.md says its work was produced by Claude
+      (Anthropic) under human direction. No two independent methods, human oversight or
+      optimality is claimed.
+    external_review:
+      state: informally-verified
+      date: '2026-10-24'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 mathematical review lane of T-241 and T-242
+        (c-review-t241-t242-math, think-vm3m), strongest sub-agent tier, maximum
+        reasoning, prompted separately from the records lane
+      note: >-
+        docs/project/reviews/review-2026-10-24-couzo-evand-n268-n304.md accepted the three
+        certificates for finite feasibility, with no blocking finding; one major finding
+        (M-1) and four minor ones are on the record's credit and assistance statements,
+        not on the bounds. Its clean-room checker's runs are
+        E-couzo-n304-review-exact-feasibility and
+        E-evand-kaggle-descents-review-exact-feasibility, and its least gaps and wall
+        clearances equal the packets' sharp-control receipts exactly.
+  - id: E-couzo-n304-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values: [304]
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: shared-components
+    shared_components:
+      - >-
+        sqpack.verify's unit-shape and separating-axis predicates (verify_packing, which
+        sqpack.witness.exact_verify calls), the jlevy/squares checker the source's manifest
+        names as its first checker, as for issue 763
+      - >-
+        the certificate parser and half-angle map of devtools.evand_exact_certificates (the
+        evand-cert adapter the packet's acquisition/report.json names), through which both
+        maintained routes read the certificate, with two expressions transcribed from Evan
+        Daniel's checkers, from whose verify_cert.py the source's verify_bound_certificate.py
+        derives
+      - CPython's fractions.Fraction arithmetic
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Couzo n304 2026-10-23]'
+    certificate: packing/resources/web/couzo-issue763-2026-10-23/source/certificates/best/n304.cert
+    replay: >-
+      From packing/ with the project interpreter (Python 3.14.7) on a shared four-core host:
+      python -m devtools.upper_bound_reports couzo-n304-2026-10-23 certify --workers 2 wrote
+      the receipt on 24 October 2026 from the certificate the issue-763 packet retains, held
+      to the SHA-256 the packet pins, and check --replay decides all 3 retained jobs, the
+      certificate and its duplicate-square and outside-container controls, again through
+      both maintained routes and holds each to its retained row; check-claims rebuilds the
+      frozen comparison. python
+      resources/web/evand-kaggle-descents-2026-10-24/receipts/sharp_controls.py --packet
+      couzo-n304-2026-10-23 --n 304 writes the packet's sharp controls, which both routes
+      accept at exact contact and refuse 1e-30 past it. The 24 October stage 4 review held
+      its own clean-room checker's least pair gap and least wall clearance to those
+      receipts, fraction for fraction (docs/project/reviews/review-2026-10-24-couzo-evand-n268-n304.md).
+    replay_status: passed
+    verifiers:
+      - V-sqpack-verify
+      - V-check-rational-witness-independent
+      - V-evand-arrangement-receipts
+      - V-upper-bound-reports
+      - V-evand-exact-certificates
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificate at n = 304 that T-241 cites, every wall and every pair decided by
+          both maintained routes; the kernel's controls are retained in the packet's receipt
+        checked: 1
+        of: 1
+    independence_record: docs/project/reviews/review-2026-10-24-couzo-evand-n268-n304.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-24'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 mathematical review lane of T-241 and T-242
+        (c-review-t241-t242-math, think-vm3m), strongest sub-agent tier, maximum
+        reasoning, prompted separately from the records lane
+      note: >-
+        docs/project/reviews/review-2026-10-24-couzo-evand-n268-n304.md accepted the three
+        certificates for finite feasibility, with no blocking finding; one major finding
+        (M-1) and four minor ones are on the record's credit and assistance statements,
+        not on the bounds. Its clean-room checker's runs are
+        E-couzo-n304-review-exact-feasibility and
+        E-evand-kaggle-descents-review-exact-feasibility, and its least gaps and wall
+        clearances equal the packets' sharp-control receipts exactly. The replay shares the
+        producer's first checker and the evand-cert reader (RF-4 of the 24 October review
+        of issue 763, which holds here), so T-241's independent re-implementation rests on
+        the review's entry.
+    limitations: >-
+      A replay of the retained certificate by two maintained exact routes that share
+      certificate parsing, half-angle conversion, Fraction arithmetic and the
+      separating-axis method, and with the producer its first checker: the sqpack route
+      decides through sqpack/verify.py, which the source's manifest names, and both routes
+      read the certificate through the evand-cert adapter, two of whose expressions are
+      transcribed from Evan Daniel's checkers, from which the source's second checker
+      derives. The receipt's 3 jobs hold 276336 pair decisions, 40.35 route CPU seconds and
+      40.77 job wall seconds, the longest job 13.94 seconds. Every wall is cleared by
+      exactly 1e-15 and every pair by at least 8.18e-11; the receipt's two controls are
+      gross, and the packet's sharp controls meet the 1e-15 margin. The source's own
+      checkers were not run here. Finite feasibility only: no lower bound, optimum, local
+      minimum, rigidity, novelty or human oversight.
+    source_reviewed: '2026-10-24'
+  - id: E-couzo-n304-review-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values: [304]
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Couzo n304 2026-10-23]'
+    certificate: packing/resources/web/couzo-issue763-2026-10-23/source/certificates/best/n304.cert
+    replay: >-
+      From packing/ with the project interpreter (Python 3.14.7): python -I
+      resources/web/evand-kaggle-descents-2026-10-24/review/review-2026-10-24/programs/t241_t242_exact.py
+      --all-pairs --out OUT, as the 24 October review ran it (53.4 CPU seconds for all three
+      certificates and their controls): accepted by both methods, the SHA-256 the pinned
+      c8433dd7...231d, the header side equal to the claim's and rounded up at 12 places to
+      17.926898903393; 1,170 pairs within 2 decided by both methods and all 46,056 by
+      separating axes; every wall cleared by at least exactly 1/10^15 (two squares at the
+      near walls, square 298 at the far), the least pair gap
+      5787427125212248315636723446790347998647301071/70716860311549861524081902603115498615233747340000000000,
+      about 8.1839e-11 (squares 67 and 68), equal to the packet's sharp-control receipt;
+      all twelve controls as expected on both methods, and nine hand-built packings.
+    replay_status: passed
+    verifiers:
+      - V-kaggle-268-304-review-check
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificate at n = 304 that T-241 cites, every wall and all 46,056 pairs by
+          separating axes, and the 1,170 pairs within 2 by clipped area as well
+        checked: 1
+        of: 1
+      read: [mathematics, certificate-format, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of T-241 and T-242
+            (c-review-t241-t242-math, think-vm3m), strongest sub-agent tier, maximum
+            reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          Couzo's commits fa6237e, 964ee2b and efef7d1 name Claude as co-author. The
+          review's checker is Claude's too, from a prompt of its own, in a file that
+          imports nothing from this repository or the source; its author read none of the
+          source's checkers, sqpack/verify.py or the maintained routes (see
+          V-kaggle-268-304-review-check).
+    independence_record: docs/project/reviews/review-2026-10-24-couzo-evand-n268-n304.md
+    limitations: >-
+      The review's own checker, with a reader of its own and no code of the packet's
+      routes or the source's checkers; it shares CPython's Fraction and the separating-axis
+      method with the maintained routes. It reads the certificate as counter-clockwise
+      t = tan(theta/2), the sense of the verify_cert.py the header names; read the other
+      way, 89 pairs overlap (t241_t242_sense.py). Finite feasibility only: no lower bound,
+      optimum, local minimum, rigidity, novelty or human oversight.
+    source_reviewed: '2026-10-24'
+  - id: E-evand-kaggle-descents-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values: [268, 304]
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: shared-components
+    shared_components:
+      - >-
+        the certificate parser and half-angle map of devtools.evand_exact_certificates (the
+        evand-cert adapter the packet's acquisition/report.json names), through which both
+        maintained routes read each certificate: its reader's line filter and the corners
+        from which the independent route decides (Pose.corners) are transcribed from Evan
+        Daniel's verify_cert.py and verify_cert2.py, the checkers the certificates name
+      - CPython's fractions.Fraction arithmetic, which both of Daniel's checkers use
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Daniel Kaggle descents 2026-10-24]'
+    certificate: packing/resources/web/evand-kaggle-descents-2026-10-24/source/search/packer/candidates/
+    replay: >-
+      From packing/ with the project interpreter (Python 3.14.7) on a shared four-core host:
+      python -m devtools.upper_bound_reports evand-kaggle-descents-2026-10-24 certify
+      --workers 2 wrote the receipt on 24 October 2026 from the packet's retained
+      certificates, and check --replay decides all 9 retained jobs, each of the three
+      certificates (268 and 304, which T-242 cites, and 303, which it does not) with its
+      duplicate-square and outside-container controls, again through both maintained routes
+      and holds each to its retained row; check-claims rebuilds the frozen comparison.
+      python resources/web/evand-kaggle-descents-2026-10-24/receipts/sharp_controls.py
+      --packet evand-kaggle-descents-2026-10-24 --n 268 and --n 304 write the packet's
+      sharp controls, which both routes accept at exact contact and refuse 1e-30 past it.
+      The 24 October stage 4 review held its own clean-room checker's least pair gaps and
+      least wall clearances to those receipts, fraction for fraction
+      (docs/project/reviews/review-2026-10-24-couzo-evand-n268-n304.md).
+    replay_status: passed
+    verifiers:
+      - V-sqpack-verify
+      - V-check-rational-witness-independent
+      - V-evand-arrangement-receipts
+      - V-upper-bound-reports
+      - V-evand-exact-certificates
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the two certificates at n = 268 and 304 that T-242 cites, every wall and every
+          pair decided by both maintained routes; the kernel's controls are retained in the
+          packet's receipt
+        checked: 2
+        of: 2
+    independence_record: docs/project/reviews/review-2026-10-24-couzo-evand-n268-n304.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-24'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 mathematical review lane of T-241 and T-242
+        (c-review-t241-t242-math, think-vm3m), strongest sub-agent tier, maximum
+        reasoning, prompted separately from the records lane
+      note: >-
+        docs/project/reviews/review-2026-10-24-couzo-evand-n268-n304.md accepted the three
+        certificates for finite feasibility, with no blocking finding; one major finding
+        (M-1) and four minor ones are on the record's credit and assistance statements,
+        not on the bounds. Its clean-room checker's runs are
+        E-couzo-n304-review-exact-feasibility and
+        E-evand-kaggle-descents-review-exact-feasibility, and its least gaps and wall
+        clearances equal the packets' sharp-control receipts exactly. The replay reads the
+        certificates through the evand-cert reader, which transcribes two expressions of
+        the producer's own checkers (RF-4 of the 24 October review of issue 763, which
+        holds here), so T-242's independent re-implementation rests on the review's entry.
+    limitations: >-
+      A replay of the two retained certificates by two maintained exact routes that share
+      certificate parsing, half-angle conversion, Fraction arithmetic and the
+      separating-axis method, and with the producer the evand-cert reader's line filter and
+      corner construction, transcribed from his verify_cert.py and verify_cert2.py. The
+      receipt's 9 jobs, with the 303 certificate's, hold 765522 pair decisions, 118.9 route
+      CPU seconds and 120.14 job wall seconds, the longest job 15.69 seconds. Every wall is
+      cleared by exactly 5e-21 and every pair by at least 9.99e-21, below the binary64
+      spacing of the coordinates; the receipt's two controls are gross, and the packet's
+      sharp controls at 268 and 304 meet those margins. The source's own checkers were not
+      run here, and no KKT, flat-motion or second-order statement of the source is checked.
+      Finite feasibility only: no lower bound, optimum, local minimum, rigidity, novelty or
+      human oversight.
+    source_reviewed: '2026-10-24'
+  - id: E-evand-kaggle-descents-review-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values: [268, 304]
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Daniel Kaggle descents 2026-10-24]'
+    certificate: packing/resources/web/evand-kaggle-descents-2026-10-24/source/search/packer/candidates/
+    replay: >-
+      From packing/ with the project interpreter (Python 3.14.7): python -I
+      resources/web/evand-kaggle-descents-2026-10-24/review/review-2026-10-24/programs/t241_t242_exact.py
+      --all-pairs --out OUT, as the 24 October review ran it (53.4 CPU seconds for all three
+      certificates and their controls): s268_lightning.cert and s304_pub.cert accepted by
+      both methods, their SHA-256 the pinned c87da316...4a49 and 5dd7436a...6f21, their
+      header sides equal to the claim's decimals and rounded up at 12 places to
+      16.874361715870 and 17.926898900357; 1,018 and 1,170 pairs within 2 decided by both
+      methods and all 35,778 and 46,056 by separating axes; every wall cleared by at least
+      exactly 1/(2*10^20) (23 and 11 squares at the near walls; the far walls by
+      250000000023039/(5*10^34) and 250000000030471/(5*10^34)); the least pair gaps about
+      9.99999999999998886e-21 (squares 239 and 241) and 9.99999999999999487e-21 (57 and
+      58), each equal to the packet's sharp-control receipt; all twelve controls per
+      certificate as expected on both methods, and nine hand-built packings.
+    replay_status: passed
+    verifiers:
+      - V-kaggle-268-304-review-check
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the two certificates T-242 cites, at n = 268 and 304, every wall and every pair by
+          separating axes, and every pair within 2 by clipped area as well
+        checked: 2
+        of: 2
+      read: [mathematics, certificate-format, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of T-241 and T-242
+            (c-review-t241-t242-math, think-vm3m), strongest sub-agent tier, maximum
+            reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          Daniel's commit 8a8879a names Claude as co-author, and his CREDITS.md says the
+          repository's work was produced by Claude (Anthropic) under human direction. The
+          review's checker is Claude's too, from a prompt of its own, in a file that
+          imports nothing from this repository or the source; its author read none of
+          Daniel's verify_cert.py or verify_cert2.py or the maintained routes (see
+          V-kaggle-268-304-review-check).
+    independence_record: docs/project/reviews/review-2026-10-24-couzo-evand-n268-n304.md
+    limitations: >-
+      The review's own checker, with a reader of its own and no code of the packet's
+      routes or Daniel's checkers; it shares CPython's Fraction and the separating-axis
+      method with the maintained routes. The margins, about 5e-21 and 1e-20, lie below the
+      binary64 spacing of the coordinates, which exact arithmetic resolves; its controls
+      1e-30 past contact are refused. Read clockwise, 99 and 92 pairs overlap. No KKT,
+      flat-motion or second-order statement of the source is checked. Finite feasibility
+      only: no lower bound, optimum, local minimum, rigidity, novelty or human oversight.
+    source_reviewed: '2026-10-24'
   - id: E-amundsk-798-beyond-horizon-report
     claim: upper-bound
     scope:

@@ -17,8 +17,9 @@ publication (the owner, 14 October 2026). Its header states
 $s(304) \le
 42654421699169959072564987841514227093543746926117736119087439/2379353056489745832681562849107891444171481219500000000000000
 = 17.92689890339264\ldots$, which the source prints rounded up as 17.926898903393,
-2.53e-3 below T-186, the case’s house best packing. T-241 registers it as reported, at
-`V0`/`C0`; the case is unchanged.
+2.53e-3 below T-186, the case’s house best packing. T-241 registers it, at `V3`/`C3`
+since the [stage 4 review of 24 October](#stage-4-review). The case at 304 adopts Evan
+Daniel’s descent of the same packing (T-242), 3.04e-9 lower, as its house best packing.
 
 ## Retained Here
 
@@ -49,19 +50,28 @@ manifest.
 - **The provenance the credit defers to.** The catalogue says “Source, construction, seed
   and certificate credits are retained in manifest.json”. That manifest’s `witnesses/304`
   entry gives the packing’s source as Tymchishin’s notebook “CPU Alternating Reclosure”
-  v3 (run 361239073, Apache-2.0, `witness_dilation` 1+1e-10). It names the notebook’s
-  `previous_source` as Mykhailo Polkovskyi’s `n304.cert` at
+  v3 (run 361239073, Apache-2.0, `witness_dilation` 1+1e-10), a public submission with no
+  `seed_credit` of its own, and its `lineage` lists the notebook’s output alone. Its
+  `previous_source` is Mykhailo Polkovskyi’s `n304.cert` at
   `Mishapolk/square-packing-records@70a033f` (#593), credited “Mykhailo Polkovskyi
   (Mishapolk)” with `construction_credit` “Nate Chaoweeraprasit (itsnaka)”, and its
-  `previous_reference.seed_credit` as “Mykhailo Polkovskyi (Mishapolk)”. That certificate’s
-  SHA-256, `72fa0c89…`, is the one the
+  `previous_reference.seed_credit` is “Mykhailo Polkovskyi (Mishapolk)”. Those two fields
+  name the record the catalogue held at the count before, not the packing a notebook
+  started from: at 303 the same manifest names Lavrentev in an entry’s own `seed_credit`
+  and Evan Daniel, the record it replaced, in both fields; of its 182 entries that carry
+  both seed fields, the two differ in all 182 and name another person in 178 (M-1 of the
+  [stage 4 review](#stage-4-review)). So the manifest states no lineage from
+  Polkovskyi’s packing. That certificate’s SHA-256, `72fa0c89…`, is the one the
   [mishapolk-kkt-refinements-2026-10-14 packet](../mishapolk-kkt-refinements-2026-10-14/README.md)
-  pins: T-186’s packing, the house at 304. This record measures that certificate as Daniil
-  Ostashev’s T-175 packing re-solved: all 304 centres lie within 9.4e-16 of #575’s
+  pins: T-186’s packing, the house at 304 when this was reported. This record measures it
+  as Daniil Ostashev’s T-175 packing re-solved: all 304 centres lie within 9.4e-16 of
+  #575’s
   ([compare_lineage-output.txt](../mishapolk-kkt-refinements-2026-10-14/review/compare_lineage-output.txt),
-  line 32). The `construction_credit` to Chaoweeraprasit is the manifest’s statement, which
-  that measurement does not support; it is quoted here and not carried into the credit.
-  The manifest’s first checker is this project’s
+  line 32), and the source’s own `RECORD_PROVENANCE.md` (line 53, the same at `fa6237e`,
+  `964ee2b` and `1c17153`) says the `70a033f` update “preserves Ostashev’s packing credit
+  at 129/175/176/204/232/264/303/304” (M-3). The `construction_credit` to
+  Chaoweeraprasit describes that earlier record, not this packing; it is quoted here and
+  not carried into the credit. The manifest’s first checker is this project’s
   `sqpack/verify.py`. The notebook’s own source notices
   (`submissions/kaggle-public-portfolio-20261022/SOURCE_NOTICES.md`) are in no commit of
   the source.
@@ -106,10 +116,9 @@ measurement for credit that decides nothing:
   nearest centres. The optimal assignment, best under the diagonal reflection
   $(x, y) \mapsto (y, x)$, keeps 250 of the 304 squares within 0.1 of the house’s and
   moves the other 54 beyond it (largest 1.13), turning squares by up to 26.0°. The 250
-  within and the 54 beyond are one assignment, read from either side. That fits the
-  lineage the manifest states, a re-closure of Polkovskyi’s packing: with 54 squares
-  beyond a tenth it is another arrangement at the record’s threshold, found from the
-  house’s, not a refinement of it.
+  within and the 54 beyond are one assignment, read from either side. With 54 squares
+  beyond a tenth it is another arrangement than the house’s; the 250 within a tenth are
+  a resemblance, which states no lineage (M-1).
 - **Against Daniel’s copy.** Evan Daniel’s binary64 copy of “the public Kaggle packing at
   17.9268989004” is this packing to 2.05e-9, of the order of the manifest’s witness
   dilation of 1+1e-10, which moves a centre by at most about 2.5e-9 in this box.
@@ -119,43 +128,82 @@ measurement for credit that decides nothing:
 A finite packing certifies an upper bound and nothing more.
 No KKT, local-minimum, rigidity or optimality statement is replayed. The manifest’s
 provenance is read here; the notebook’s own source notices, which hold any earlier
-construction credits of the notebook itself, are not published, and are not read. Whether
-the notebook started from Polkovskyi’s certificate is the manifest’s statement, which the
-measurement above fits but does not decide.
+construction credits of the notebook itself, are not published, and are not read. No
+source states whether the notebook started from any recorded packing.
 
 ## Credit and Licence
 
-Credit Kirill Tymchishin’s packing, as the source credits it, after Mykhailo Polkovskyi’s
-packing (the notebook’s previous source and seed, as the manifest states), and after that
-packing’s own chain as the record holds it for T-186: Polkovskyi after Daniil Ostashev,
-Francisco Couzo and PingYou Ltd. Certified by Francisco Couzo, who claims no refinement
-of it. The manifest’s construction credit to Nate Chaoweeraprasit is not carried, since
-the record measures Polkovskyi’s 304 as Ostashev’s packing. Evan Daniel’s later
+Credit Kirill Tymchishin’s packing, as the source credits it, certified by Francisco
+Couzo, who claims no refinement of it. No source states a link before Tymchishin, so the
+credit carries none (M-1). The manifest’s construction credit to Nate Chaoweeraprasit
+describes the record this packing replaced and is not carried (M-3). Evan Daniel’s later
 certificate of the same packing says its finder is unknown and its earliest public copy is
-kozykappa’s notebook; both authors are asked.
+kozykappa’s notebook. Whether Tymchishin found it is asked of Couzo in the import reply
+of 25 October on #763 (its question 5), which awaits his answer, and a question to Daniel
+is drafted and unposted, held in think-hx0e.
+The source’s commits `fa6237e`, which first holds the certificate, `964ee2b` and
+`efef7d1` each end with a Co-Authored-By trailer naming Claude (M-5).
 The repository states no licence for its data or prose. The certificate is retained by
 the issue-763 packet, on the presumption of permission that Couzo’s submission of that
 source carries (the owner, 24 October 2026, think-cnn7; licence follow-up think-m8f4), and
 certificates are factual data under the owner decision of 2026-10-09.
 The bibliography key is **[Couzo n304 2026-10-23]**, credited *Couzo after Tymchishin,
-Polkovskyi, Ostashev, Couzo, PingYou Ltd, Levy*: Tymchishin and Polkovskyi from the
-manifest, then T-186’s recorded chain exactly (*Polkovskyi after Ostashev, Couzo, PingYou
-Ltd, Levy*), so Couzo appears again as a link of that chain. Levy is also supported
-directly: the manifest’s first checker is this project’s `sqpack/verify.py`, as for #763.
+Levy*: Tymchishin from the catalogue’s credit, and Levy for the manifest’s first checker,
+this project’s `sqpack/verify.py`, as #763’s key has it.
+
+## Stage 4 Review
+
+The [review of 24 October 2026](../../../../docs/project/reviews/review-2026-10-24-couzo-evand-n268-n304.md)
+of T-241 and T-242 accepted this certificate for finite feasibility, with one major finding
+(M-1), four minor and four notes, none blocking. Its programs and outputs are kept in the
+evand-kaggle-descents packet’s
+[review/review-2026-10-24/](../evand-kaggle-descents-2026-10-24/review/review-2026-10-24/README.md),
+equal to the digests its `outputs/program-digests.sha256` records.
+
+- **Its own checker.** `t241_t242_exact.py` decides the certificate in `Fraction` by
+  separating axes over every pair and by the exact clipped area of every pair whose
+  centres lie within 2, with twelve controls sharp at $10^{-30}$ and nine hand-built
+  packings, all as expected. Its least pair gap and least wall clearance equal
+  [receipts/sharp-controls.json](receipts/sharp-controls.json) fraction for fraction. Its
+  author read neither maintained route nor any checker of the source’s or of Daniel’s, so
+  it is a clean-room re-implementation (`E-couzo-n304-review-exact-feasibility`,
+  `V-kaggle-268-304-review-check`).
+- **The maintained replay** shares the producer’s first checker, `sqpack/verify.py`, and
+  the `evand-cert` reader, as the #763 review’s RF-4 found for #763, so it is
+  `shared-components` (`E-couzo-n304-exact-feasibility`), and T-241’s independent
+  re-implementation rests on the review’s checker.
+- **M-1, M-3 and M-5** are fixed above: what `previous_source` names, the construction
+  credit, and the commits’ co-author trailers. S3 is confirmed: another arrangement than
+  the house’s, 54 squares beyond a tenth.
+
+T-241 is at `V3`/`C3`. The case at 304 adopts T-242, Daniel’s descent of this packing
+3.04e-9 lower, as its house best packing, since it is the smallest validated side there.
 
 ## Questions for the Author
 
-Drafted in think-l49q for Francisco Couzo, on #763 or wherever the coordinator posts:
+For Francisco Couzo, from the stage 4 review’s C1, C2 and C4 (think-hx0e’s notes). The
+confirmation reply of 25 October on #763
+([issuecomment-6391800383](https://github.com/jlevy/squares/issues/763#issuecomment-6391800383))
+asks question 1 as its question 7 and the notebooks’ source notices of question 3 as its
+question 6. The import reply of that day
+([issuecomment-6392829915](https://github.com/jlevy/squares/issues/763#issuecomment-6392829915))
+asks question 2 as its question 6 and the finder in question 3 as its question 5. The
+record keeps question 1, question 2 and the finder as awaiting his answer:
 
-1. Did Tymchishin’s notebook start from Polkovskyi’s `70a033f` packing, as your manifest’s
-   `previous_source` and `seed_credit` say? Why does the manifest give that certificate a
-   construction credit to Nate Chaoweeraprasit, when this record measures it as Daniil
-   Ostashev’s #575 packing re-solved (all 304 centres within 9.4e-16)? The manifest at
-   `fa6237e` also names ry-xu at 129 and Chaoweeraprasit at 176, 302 and 303 as the
-   construction credit of Polkovskyi’s certificates, where the Mishapolk packet’s lineage
-   table names other finders (review B of #792).
-2. Is Kirill Tymchishin the finder of the packing at 304, which Evan Daniel’s source calls
-   of unknown finder, with kozykappa’s notebook its earliest public copy?
+1. In your manifest, do `previous_source` and `previous_reference.seed_credit` name the
+   packing your catalogue held before at that count, or the packing a search started
+   from? At 303 they name Evan Daniel’s certificate while `seed_credit` names Lavrentev.
+   Did Tymchishin’s “CPU Alternating Reclosure” v3 start from Polkovskyi’s `70a033f`
+   packing at 304?
+2. Your manifest credits the construction of Polkovskyi’s `70a033f` 304 to Nate
+   Chaoweeraprasit, and your `RECORD_PROVENANCE.md` keeps Daniil Ostashev’s packing credit
+   there. Which do you intend? The manifest at `fa6237e` also names ry-xu at 129 and
+   Chaoweeraprasit at 176, 302 and 303 as the construction credit of Polkovskyi’s
+   certificates, where the Mishapolk packet’s lineage table names other finders (review B
+   of #792).
+3. Is Kirill Tymchishin the finder of the packing at 304, which Evan Daniel’s source calls
+   of unknown finder, with kozykappa’s notebook its earliest public copy? Could you publish
+   the notebooks’ `SOURCE_NOTICES.md` files your manifest names? No commit holds them.
 
 ## Commands
 

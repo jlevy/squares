@@ -1151,6 +1151,57 @@ RESULTS: dict[str, Prose] = {
         ),
         diversity="by a Claude agent, a system family the producer also used",
     ),
+    "T-242": Prose(
+        author="Evan Daniel",
+        reported=(
+            "in [his repository](https://github.com/evand/square-packing) on 24 October 2026, "
+            "with no issue"
+        ),
+        producer_route=False,
+        ai=(
+            "The source’s commit names Claude as co-author, and its credits say the "
+            "repository’s work was produced by Claude (Anthropic) under human direction."
+        ),
+        routes=(
+            "Both routes read the certificate through an adapter whose line filter and corner "
+            "construction are transcribed from Evan Daniel’s own checkers, the ones the "
+            "certificate names (RF-4 of the 24 October review of issue 763, which holds here), "
+            "so the replay shares the producer’s components. The review’s checker shares no "
+            "code with either maintained route or the source, and the independent "
+            "re-implementation rests on it."
+        ),
+        lineage_at={
+            268: (
+                "The source credits Vladislav Lavrentev’s public Kaggle packing and descends "
+                "it exactly; its report gives the descent’s input side as that of Lavrentev’s "
+                "placement, which the certificate is to $1.41 \\times 10^{-4}$. Measured by "
+                "the 24 October review, square by square, it is one arrangement with T-240’s "
+                "packing and another placement: nearest centres pair the two one to one under "
+                "a reflection of the box, none beyond a tenth and 135 beyond $10^{-3}$, so the "
+                "house’s credit follows the placement adopted."
+            ),
+            304: (
+                "The source calls the packing it descends “the public Kaggle packing at "
+                "17.9268989004 (finder unknown; earliest public copy: kozykappa’s notebook)”, "
+                "and Francisco Couzo’s earlier certificate of it (T-241) credits it to Kirill "
+                "Tymchishin’s Kaggle notebook “CPU Alternating Reclosure” v3; no source states "
+                "where that notebook started. Measured by the 24 October review, square by "
+                "square, it pairs one to one with T-241’s packing under the identity, no "
+                "square moving beyond $4.60 \\times 10^{-4}$: Daniel’s exact descent of that "
+                "packing. Against T-186’s packing, the house best packing here before this "
+                "adoption, no symmetry pairs nearest centres one to one and 54 squares lie "
+                "beyond a tenth, so it is another arrangement than T-186’s."
+            ),
+        },
+        third_route=(
+            ", and the 24 October review’s clean-room checker decided it again in rationals, "
+            "by separating axes over every pair and by the exact clipped area of every pair "
+            "within reach; its controls at $10^{-30}$ refused the least-gap pair moved past "
+            "exact contact, every square moved past its near wall and the side lowered past "
+            "the far wall"
+        ),
+        diversity="by a Claude agent, a system family the producer also used",
+    ),
 }
 
 XU = "Ryan Xu"
@@ -1757,11 +1808,15 @@ CREDITS: dict[int, Credit] = {
         "Francisco Couzo’s refinement of his own refinement of Vladislav Lavrentev’s Kaggle "
         "notebook packing",
     ),
-    # Issue 575's packing padded (T-186's regularization of T-175).
+    # T-242 (adopted on 25 October 2026), Evan Daniel's exact descent of the packing T-241
+    # certifies, which Francisco Couzo's index credits to Kirill Tymchishin's Kaggle
+    # notebook: one to one with it, no square beyond 4.60e-4 (the 24 October review), and
+    # another arrangement than T-186's. No source states where the notebook started; the
+    # manifest's previous_source names the catalogue's previous record (M-1 of that review).
     304: Credit(
-        (OSTASHEV,),
-        (POLKOVSKYI,),
-        "Mykhailo Polkovskyi’s tighter certificate of Daniil Ostashev’s n = 304 packing",
+        (TYMCHISHIN,),
+        (DANIEL,),
+        "Evan Daniel’s exact descent of Kirill Tymchishin’s Kaggle notebook packing",
     ),
     # T-174's regularization of T-152's packing, measured one to one, no square moved
     # beyond 1e-12 (the 14 October review of PR 574).

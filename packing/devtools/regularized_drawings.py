@@ -868,8 +868,10 @@ def source_regularizations(
             if witness_source_key(witness, repo, source_keys=source_keys) != by:
                 continue
             source = sources.get(by)
-            credit = getattr(source, "credit", None) or ", ".join(
-                getattr(source, "authors", ()) or (by,)
+            credit = item_credit(
+                record,
+                getattr(source, "credit", None)
+                or ", ".join(getattr(source, "authors", ()) or (by,)),
             )
             found[n] = {
                 "by": by,
@@ -882,6 +884,32 @@ def source_regularizations(
             if exact_solve(by, n):
                 found[n]["kind"] = EXACT_SOLVE
     return found
+
+
+def _credit_names(credit: str) -> set[str]:
+    """The names a credit line carries: its authors and every antecedent after "after"."""
+    return {
+        name.strip()
+        for part in credit.replace(" after ", ", ").split(",")
+        if (name := part.strip())
+    }
+
+
+def item_credit(record: Mapping[str, Any], key_credit: str) -> str:
+    """A regularization item's credit line at its count: its own `credit`, where the
+    source's key spans counts whose antecedents differ (T-242: Lavrentev at 268, Tymchishin
+    at 304; review A, A3, of #803), else the key's. An item's own line may name only names
+    the key's credit carries, so it narrows the key and never adds to it."""
+    own = record.get("credit")
+    if not own:
+        return key_credit
+    extra = _credit_names(str(own)) - _credit_names(key_credit)
+    if extra:
+        raise ValueError(
+            f"n={record['n']}: the item's credit {own!r} names {sorted(extra)}, which the "
+            f"key's credit {key_credit!r} does not"
+        )
+    return str(own)
 
 
 #: A drawn view's side relation in the register's terms (`results.schema.yaml`).

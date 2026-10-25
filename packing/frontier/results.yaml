@@ -25854,6 +25854,12 @@ results:
       At 271 the record's own rule would leave the packing with SQUISH, T-161's 271 being a
       refinement of T-151 by pose, but T-161 lists no regularizations; whether it should is
       a question for the owner, and T-161 is left as it is.
+
+      Francisco Couzo's certificate at 304 of Kirill Tymchishin's Kaggle notebook packing
+      (T-241) is 2.53e-03 below this entry's side there, another arrangement, and Evan
+      Daniel's exact descent of it (T-242) 3.04e-09 lower still. After the 24 October review
+      of both, the case at 304 adopted T-242 on 25 October 2026, and this entry's
+      certificate there stays retained as history.
     next_rung: >-
       V4 and C4 need a second accepted adversarial review by a distinct reviewer and a
       retained human oversight record; one AI review, of 16 October, is retained.
@@ -33850,8 +33856,20 @@ results:
       the exact side it states: s(304) <=
       42654421699169959072564987841514227093543746926117736119087439/2379353056489745832681562849107891444171481219500000000000000
       = 17.92689890339264…, 2.53e-3 below T-186, the case's house best packing when it was
-      reported. A complete native feasibility outcome is retained separately; the selected
-      standing case is unchanged pending independent review and record review.
+      reported.
+
+      The certificate and its duplicate-square and outside-container controls were decided
+      here on 24 October 2026 by both maintained exact routes. Those routes share components
+      with the producer: the source's manifest names this repository's sqpack/verify.py,
+      through which one route decides, as its first checker, and both routes read the
+      certificate through the evand-cert adapter, two of whose expressions are transcribed
+      from Evan Daniel's checkers, from which the source's verify_bound_certificate.py
+      derives.
+
+      The 24 October review of T-241 and T-242 decided it again on a clean-room checker of
+      its own, by separating axes and by clipped areas with twelve controls, by a Claude
+      agent, a system family the producer also used, and found no blocking defect, so the
+      bound is confirmed, independently re-implemented.
 
       It is certificates/best/n304.cert in Francisco Couzo's watched repository
       (https://github.com/franciscouzo/square-packing), committed on 23 October 2026 and
@@ -33862,7 +33880,9 @@ results:
 
       The source's certified_bounds.json records the certificate as verified, 'valid': true,
       4297 pairs tested, with 'GMP exact rationals via gmpy2 2.3.2'. Those statements are the
-      author's; no source program ran here.
+      author's; no source program ran here. The source's commit that first holds the
+      certificate and the two others of that push each end with a Co-Authored-By trailer
+      naming Claude (M-5).
 
       Credit Kirill Tymchishin's packing, as the source credits it: "Kirill Tymchishin
       (kirilltym), Kaggle "CPU Alternating Reclosure" v3; earlier construction credits in its
@@ -33870,42 +33890,54 @@ results:
       certified by Francisco Couzo (https://github.com/franciscouzo/square-packing), who
       claims no refinement of it.
 
-      The provenance that line defers to is the source's witness manifest: its 304 entry
-      gives the notebook's previous source and seed as Mykhailo Polkovskyi's #593
-      certificate, T-186's packing, which this record measures as Daniil Ostashev's T-175
-      packing re-solved. So the credit runs Tymchishin's notebook after Polkovskyi's packing
-      and then T-186's recorded chain: Polkovskyi after Ostashev, Couzo and PingYou Ltd.
+      The provenance that line defers to is the source's witness manifest. Its 304 entry
+      names no seed of the packing: its lineage is the notebook's output alone, and its
+      previous_source and previous_reference name Mykhailo Polkovskyi's #593 certificate,
+      T-186's packing, as the record its catalogue held at 304 before, as those fields do at
+      every count (the 24 October stage 4 review, M-1). So the credit is Tymchishin's
+      packing, certified by Couzo; whether the notebook started from a recorded packing is
+      asked of Couzo in the confirmation reply of 25 October on #763 (its question 7), which
+      awaits his answer.
 
-      The manifest also gives that certificate a construction credit, "Nate Chaoweeraprasit
-      (itsnaka)". That is the source's statement, and the record's measurement does not
-      support it, so the credit does not carry it; Couzo is asked why the manifest names
-      him. The notebook's own source notices are not published. Evan Daniel's later
-      certificate of the same packing (T-242) calls its finder unknown and its earliest
-      public copy kozykappa's notebook; both authors are asked.
+      The manifest also gives Polkovskyi's certificate a construction credit, "Nate
+      Chaoweeraprasit (itsnaka)", where the source's own RECORD_PROVENANCE.md keeps Daniil
+      Ostashev's packing credit for Polkovskyi's update at 304 and the record measures that
+      certificate as Ostashev's T-175 packing re-solved (M-3). It describes the record this
+      packing replaced, not this packing; which Couzo intends is asked in the import reply
+      of 25 October on #763 (its question 6), which awaits his answer.
+
+      The notebook's own source notices are not published. Evan Daniel's later certificate
+      of the same packing (T-242) calls its finder unknown and its earliest public copy
+      kozykappa's notebook; whether Tymchishin found it is asked of Couzo in that reply (its
+      question 5), which awaits his answer, and a question to Daniel is drafted and unposted
+      (think-hx0e).
     scope: {n_values: [304]}
-    verification: V0
-    confirmation: C0
+    verification: V3
+    confirmation: C3
     significance:
       score: 3
       rationale: >-
-        Draft, from the stage 1 triage (think-6r5p): a smaller finite construction side at
-        304, 2.53e-03 below the house T-186 and every report there, far above T-226's 1.88e-05
-        at the low end of S3. The source's lineage starts from the house's own packing: its
-        manifest names Polkovskyi's T-186 certificate as the notebook's previous source, and
-        under the diagonal reflection 250 of 304 squares stay within a tenth of it. The 54
-        others (the largest 1.13) are a re-closure beyond the record's refinement threshold,
-        so it is another arrangement found from the house's. The stage 4 review confirms or
-        changes the score. No lower bound or optimum.
+        A different arrangement at 304 from the house's, 2.53e-03 below T-186 and every
+        report there: no symmetry pairs it one to one with T-186's packing by nearest
+        centres, and the optimal assignment, best under the diagonal reflection, moves 54
+        of 304 squares beyond a tenth and turns squares by up to 26.0 degrees, as T-175
+        (1.38e-04 to 2.64e-03) and T-230 (1.86e-04) are (S3), far above T-226's 1.88e-05 at
+        the low end of S3. The packing is Kirill Tymchishin's and Couzo certified it; whose
+        arrangement it is changes the credit, not the score. No lower bound or optimum.
       scored: '2026-10-24'
       by: >-
-        the stage 1 triage of 24 October (c-triage-watch-1024, think-6r5p) and the records
-        lane of think-l49q
+        the 24 October stage 4 review
+        (docs/project/reviews/review-2026-10-24-couzo-evand-n268-n304.md), lane
+        c-review-t241-t242-math, confirming the draft S3 of the stage 1 triage (think-6r5p)
+        and the records lane of think-l49q
     novelty: previously-published
     attribution:
       source_keys: ['[Couzo n304 2026-10-23]']
       published: '2026-10-23'
     evidence:
       - E-couzo-n304-certificate-report
+      - E-couzo-n304-exact-feasibility
+      - E-couzo-n304-review-exact-feasibility
     artifacts:
       - packing/resources/web/couzo-n304-2026-10-23/README.md
       - packing/resources/web/couzo-n304-2026-10-23/acquisition/claims.json
@@ -33915,10 +33947,13 @@ results:
       - packing/resources/web/evand-kaggle-descents-2026-10-24/measure/identity.json
       - packing/campaign/issue-intake/upper-bounds-evand-20261024/README.md
       - packing/devtools/upper_bound_reports.py
+      - docs/project/reviews/review-2026-10-24-couzo-evand-n268-n304.md
+      - packing/resources/web/evand-kaggle-descents-2026-10-24/review/review-2026-10-24/README.md
     controls:
       - packing/tests/test_upper_bound_reports.py
       - packing/tests/test_upper_bound_reports_l49q.py
       - packing/resources/web/couzo-n304-2026-10-23/receipts/sharp-controls.json
+      - packing/resources/web/evand-kaggle-descents-2026-10-24/review/review-2026-10-24/outputs/t241_t242_exact.json
     notes: >-
       A separate complete repository replay is retained for n = 304: 1 positive and 2
       duplicate-square and outside-container controls passed their required outcomes on both
@@ -33931,6 +33966,17 @@ results:
       nearer near wall by its least clearance: both routes accepted each at exact contact,
       margin 0, and refused each 1e-30 past it.
 
+      The 24 October review's clean-room checker (E-couzo-n304-review-exact-feasibility)
+      decided every wall and all 46,056 pairs by separating axes, and the 1,170 pairs whose
+      centres lie within 2 by their exact clipped area as well. Its least pair gap, about
+      8.1839e-11 (squares 67 and 68, numbered from 1), and its least wall clearance, exactly
+      1e-15, equal the packet's sharp-control receipt fraction for fraction. Its twelve
+      controls, sharp at 1e-30 at the far wall, the least-gap pair and the near wall, and
+      nine hand-built packings were decided as expected by both of its methods. With every
+      rotation reversed, 89 pairs overlap, so the certificate holds under the
+      counter-clockwise reading of the half-angle tangent, the sense of the checker its
+      header names (N-4).
+
       In the packet's frozen comparison (acquisition/claims.json, read from main on 24
       October 2026), at n = 304 the certificate is below the case's ceiling (Daniil Ostashev,
       improved by Mishapolk, T-186), #593 and T-175 (#575) by 2.53e-03, below T-152 (#506)
@@ -33941,27 +33987,52 @@ results:
       recorded after it (T-242).
 
       Measured pose by pose (measure/identity.json in the evand-kaggle-descents-2026-10-24
-      packet; a measurement, which decides nothing): no symmetry pairs it one to one with
-      T-186's packing by nearest centres, and the optimal assignment, best under the
-      diagonal reflection, keeps 250 of the 304 squares within a tenth of T-186's and moves
-      54 beyond it, the largest 1.13, turning squares by up to 26.0 degrees. That fits the
-      lineage the source's manifest states, a re-closure of the house's packing; with 54
-      squares beyond a tenth it is another arrangement, found from the house's, not a
-      refinement of it.
+      packet, and again by the review; a measurement, which decides nothing): no symmetry
+      pairs it one to one with T-186's packing by nearest centres, and the optimal
+      assignment, best under the diagonal reflection, keeps 250 of the 304 squares within a
+      tenth of T-186's and moves 54 beyond it, the largest 1.13, turning squares by up to
+      26.0 degrees. With 54 squares beyond a tenth it is another arrangement than the
+      house's; the 250 within a tenth are a resemblance, which states no lineage (M-1).
 
-      The binary64 packing Evan Daniel's source publishes as the public Kaggle packing at 304 is this certificate's packing to 2.05e-9, of the order of the
-      manifest's witness dilation of 1 + 1e-10, which moves a centre by at most about
-      2.5e-9 in this box.
+      The binary64 packing Evan Daniel's source publishes as the public Kaggle packing at
+      304 is this certificate's packing to 2.05e-9, of the order of the manifest's witness
+      dilation of 1 + 1e-10, which moves a centre by at most about 2.5e-9 in this box.
 
       The source's own checkers were not run here. The two maintained routes, the sqpack
       rational witness verifier and the independent rational corner checker, share
-      certificate parsing, half-angle conversion, Fraction arithmetic and the separating-axis
-      method. No two independent methods, human oversight or optimality is claimed.
+      certificate parsing, half-angle conversion, Fraction arithmetic and the
+      separating-axis method with each other, and with the producer its first checker,
+      sqpack/verify.py, and the evand-cert reader; the review's checker shares no code with
+      them. No human oversight or optimality is claimed.
     next_rung: >-
-      Independently review the retained replay and the certificate (stage 4), a mapped review
-      whose acceptance would raise both rungs. The adoption at 304, with both strong
-      generators' regularization of the new house, follows that of T-242's smaller
-      certificate of the same packing, which is decided with it.
+      None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
+      reviewer and a retained human oversight record; one AI review, of 24 October, is
+      retained. The review's questions for the author (what the manifest's previous_source
+      names, the construction credit of Polkovskyi's certificate, and the notebooks' source
+      notices) hold no rung. Evan Daniel's descent of this packing (T-242), 3.04e-9 below
+      this side, is the smallest validated side at 304, and the case adopted it there on 25
+      October 2026 under the house rule.
+    reviews:
+      - path: docs/project/reviews/review-2026-10-24-couzo-evand-n268-n304.md
+        kind: adversarial
+        reviewer: >-
+          AI agent (Claude, strongest sub-agent tier, maximum reasoning), the stage 4
+          review lane c-review-t241-t242-math of the 24 October intake, prompted separately
+          from the records lane, with no shared context
+        reviewer_kind: ai
+        relation: project
+        date: '2026-10-24'
+        scope: >-
+          Finite feasibility of the three certificates T-241 and T-242 cite, at 304 (Couzo)
+          and at 268 and 304 (Daniel): decided on a clean-room checker by separating axes
+          and clipped areas, with twelve controls each (sharp at 1e-30 at a wall and a pair)
+          and nine hand-built packings, held to the packets' sharp-control receipts exactly;
+          custody against the sources' trees; the sides, their prints and the stated
+          margins; identity and lineage measured pose by pose against #763's entry at 268,
+          the houses T-174 and T-186, T-175, the manifest's parents and the sources' inputs;
+          and the credit chains against the sources' own files.
+        verdict: accepted
+        covers: [T-241, T-242]
 
   - id: T-242
     kind: upper-bound
@@ -33974,11 +34045,18 @@ results:
       Two complete rational source certificates report finite upper-bound improvements at
       the exact sides they state: s(268) <= 16.874361715869345824484822296466, 4.48e-12
       below T-240 and 4.45e-3 below T-174, the case's house best packing when it was
-      reported, and s(304) <=
-      17.92689890035674158972360842897, 3.04e-9 below T-241 and 2.53e-3 below T-186, the
-      case's house best packing. Complete native feasibility outcomes are retained
-      separately; the selected standing cases are unchanged pending independent review and
-      record review.
+      reported, and s(304) <= 17.92689890035674158972360842897, 3.04e-9 below T-241 and
+      2.53e-3 below T-186, the case's house best packing when it was reported.
+
+      Both certificates and their duplicate-square and outside-container controls were
+      decided here on 24 October 2026 by both maintained exact routes. Those routes share
+      components with the producer: both read the certificates through the evand-cert
+      adapter, whose reader's line filter and corner construction are transcribed from Evan
+      Daniel's own checkers, the ones the certificates name. The 24 October review of T-241
+      and T-242 decided both again on a clean-room checker of its own, by separating axes
+      and by clipped areas with twelve controls each, by a Claude agent, a system family the
+      producer also used, and found no blocking defect, so the bounds are confirmed,
+      independently re-implemented.
 
       They are search/packer/candidates/s268_lightning.cert and s304_pub.cert in Evan
       Daniel's watched repository (https://github.com/evand/square-packing), pushed on 24
@@ -33996,39 +34074,51 @@ results:
       Credit at 268 Vladislav Lavrentev's public Kaggle packing, as the source credits it:
       "Vladislav Lavrentev's (Kaggle lightningv08) public packing, exact descent
       (shrink-only) to 16.8743617159, the side a Kaggle per-puzzle side-only claim lists; the
-      first public packing at that side". Measured here, it is another placement of the
-      arrangement T-240 refines, not T-240's packing re-solved.
+      first public packing at that side". The source's JSON gives the descent's input side as
+      that of its input file, Lavrentev's placement, which the certificate is to 1.41e-4
+      (N-1). Measured here, it is another placement of the arrangement T-240 refines, not
+      T-240's packing re-solved.
 
       At 304 credit the packing T-241 certifies, which the source calls "the public Kaggle
       packing at 17.9268989004 (finder unknown; earliest public copy: kozykappa's notebook)"
       and Francisco Couzo's index credits to Kirill Tymchishin's Kaggle notebook "CPU
-      Alternating Reclosure" v3, after Mykhailo Polkovskyi's packing, T-186's, and T-186's
-      recorded chain (Ostashev, Couzo, PingYou Ltd), as T-241 records; measured here, the
-      source's input is that packing to 2.05e-9. Evan Daniel descended each exactly to the side stated and wrote the
-      certificate. The source's credits say its work was produced by Claude (Anthropic) under
-      human direction.
+      Alternating Reclosure" v3; measured here, the source's input is that packing to
+      2.05e-9. No source states where Tymchishin's notebook started (M-1). Evan Daniel
+      descended each exactly to the side stated and wrote the certificate. The source's
+      credits say its work was produced by Claude (Anthropic) under human direction, and the
+      commit carries a Co-Authored-By trailer naming Claude.
     scope: {n_values: [268, 304]}
-    verification: V0
-    confirmation: C0
+    verification: V3
+    confirmation: C3
     significance:
       score: 2
       rationale: >-
-        Draft, from the stage 1 triage (think-6r5p): smaller finite construction sides at 268
-        and 304, 4.48e-12 and 3.04e-09 below the reports before them. At 304 it is the exact
-        descent of the packing T-241 certifies, the solved side of a reported packing, as
-        T-225 and T-231 are (S2); at 268 another placement of the arrangement T-240 refines,
-        at a side that moves the case's 12-place print (16.874361715874 to 16.874361715870),
-        S2 as T-231 is. A citable detail that moves no theorem; no lower bound or optimum.
+        Smaller finite construction sides at 268 and 304, 4.48e-12 and 3.04e-09 below the
+        reports before them. At 304 it is the solved side of the packing T-241 certifies,
+        one to one with it and no square beyond 4.60e-4, as T-225 and T-231 are (S2); of
+        its 3.04e-09 margin, 1.45e-09 is the height of T-241's side above the binary64
+        packing Daniel started from and 1.58e-09 his descent.
+
+        At 268 it descends Vladislav Lavrentev's placement of the arrangement #763's entry
+        refines, one to one with that entry under the mirror x to S - x and none beyond a
+        tenth, and moves the 12-place print of that entry (16.874361715874), the case's
+        since 25 October, to 16.874361715870: below T-239's case (S2, 12 squares beyond a
+        tenth) and above padding alone (S1, T-174, T-186). A citable detail that moves no
+        theorem; no lower bound or optimum.
       scored: '2026-10-24'
       by: >-
-        the stage 1 triage of 24 October (c-triage-watch-1024, think-6r5p) and the records
-        lane of think-l49q
+        the 24 October stage 4 review
+        (docs/project/reviews/review-2026-10-24-couzo-evand-n268-n304.md), lane
+        c-review-t241-t242-math, confirming the draft S2 of the stage 1 triage (think-6r5p)
+        and the records lane of think-l49q
     novelty: previously-published
     attribution:
       source_keys: ['[Daniel Kaggle descents 2026-10-24]']
       published: '2026-10-24'
     evidence:
       - E-evand-kaggle-descents-certificate-report
+      - E-evand-kaggle-descents-exact-feasibility
+      - E-evand-kaggle-descents-review-exact-feasibility
     artifacts:
       - packing/resources/web/evand-kaggle-descents-2026-10-24/README.md
       - packing/resources/web/evand-kaggle-descents-2026-10-24/acquisition/claims.json
@@ -34040,11 +34130,14 @@ results:
       - packing/resources/web/evand-kaggle-descents-2026-10-24/measure/identity.json
       - packing/campaign/issue-intake/upper-bounds-evand-20261024/README.md
       - packing/devtools/upper_bound_reports.py
+      - docs/project/reviews/review-2026-10-24-couzo-evand-n268-n304.md
+      - packing/resources/web/evand-kaggle-descents-2026-10-24/review/review-2026-10-24/README.md
     controls:
       - packing/tests/test_upper_bound_reports.py
       - packing/tests/test_upper_bound_reports_l49q.py
       - packing/resources/web/evand-kaggle-descents-2026-10-24/receipts/sharp-controls-n268.json
       - packing/resources/web/evand-kaggle-descents-2026-10-24/receipts/sharp-controls-n304.json
+      - packing/resources/web/evand-kaggle-descents-2026-10-24/review/review-2026-10-24/outputs/t241_t242_exact.json
     notes: >-
       A separate complete repository replay is retained for n = 268, 303 and 304: 3 positives
       and 6 duplicate-square and outside-container controls passed their required outcomes on
@@ -34057,6 +34150,17 @@ results:
       side by the least far-wall clearance, closed the least-gap pair by its gap and moved
       every square toward the nearer near wall by its least clearance: both routes accepted
       each at exact contact, margin 0, and refused each 1e-30 past it.
+
+      The 24 October review's clean-room checker
+      (E-evand-kaggle-descents-review-exact-feasibility) decided every wall and every pair of
+      both certificates by separating axes, and the 1,018 and 1,170 pairs whose centres lie
+      within 2 by their exact clipped area as well. Its least pair gaps, about
+      9.99999999999998886e-21 at 268 and 9.99999999999999487e-21 at 304, and its least wall
+      clearances, exactly 5e-21, equal the packet's sharp-control receipts fraction for
+      fraction; the register's "at least 9.99e-21" is those gaps cut at three places. Its
+      twelve controls per certificate, sharp at 1e-30, and nine hand-built packings were
+      decided as expected by both of its methods. With every rotation reversed, 99 and 92
+      pairs overlap.
 
       In the packet's frozen comparison (acquisition/claims.json, read from main on 24
       October 2026), at n = 268 the certificate is below T-240 (#763, Francisco Couzo after
@@ -34072,36 +34176,86 @@ results:
       (campaign/issue-intake/upper-bounds-evand-20261024) records 268 and 304 in report order
       and 303 not, held by T-240.
 
-      Measured pose by pose (measure/identity.json in the packet; a measurement, which
-      decides nothing), at 268 the certificate is the source's input, Lavrentev's packing,
-      descended, no square moving beyond 1e-3 (largest 1.41e-4). Against T-240's packing it
-      is one arrangement and another placement: nearest centres pair the two one to one
-      under the mirror x to s - x, none beyond a tenth, 135 squares beyond 1e-3 and 165
-      beyond 1e-9 (largest 7.08e-2), largest turn 1.36 degrees, which the 24 October stage 4
-      review of T-240 measured alike (its RF-6).
+      Measured pose by pose (measure/identity.json in the packet, and again by the review; a
+      measurement, which decides nothing), at 268 the certificate is the source's input,
+      Lavrentev's packing, descended, no square moving beyond 1e-3 (largest 1.41e-4).
+      Against T-240's packing it is one arrangement and another placement: nearest centres
+      pair the two one to one under the mirror x to s - x, none beyond a tenth, 135 squares
+      beyond 1e-3 and 165 beyond 1e-9 (largest 7.08e-2), largest turn 1.36 degrees, which
+      the 24 October stage 4 review of T-240 measured alike (its RF-6).
 
       Against #763's Kaggle parent at 268, Kirill Tymchishin's EDA+Seam LP v4 packing, it
       pairs under the identity, none beyond a tenth (largest 2.49e-2). The source's
-      s268_lightning.predescent.txt is that parent to 2.5e-10, and its JSON reports 127
-      exact flat motions and 19 free squares at the solved side. At 304 nearest centres pair
-      it with T-241's packing under the identity, none beyond 1e-3 and 73 beyond 1e-6
-      (largest 4.60e-4), largest turn 0.019 degrees; the source's input is T-241's packing
-      to 2.05e-9.
+      s268_lightning.predescent.txt is that parent to 2.47e-10, and the certificate is
+      2.49e-2 from it; what the file is, and whether the descent used it, is a question for
+      the author (D1), drafted and unposted, held in think-hx0e (N-1). The source's JSON
+      reports 127 exact flat motions and 19 free squares at the solved side. At 304 nearest
+      centres pair it with T-241's packing under the identity, none beyond 1e-3 and 73
+      beyond 1e-6 (largest 4.60e-4), largest turn 0.019 degrees; the source's input is
+      T-241's packing to 2.05e-9.
+
+      At 268 Couzo's manifest begins the lineage of Tymchishin's packing at a "cuda" step,
+      which its 303 entry ties to Lavrentev's "CUDA Packing Search", and Daniel's own notes
+      say the packing first appears in Lavrentev's output, as Tymchishin's input: both
+      sources put Lavrentev before Tymchishin there (N-2). Whether that step is Lavrentev's
+      is asked of Couzo in the confirmation reply of 25 October on #763 (its question 1).
+
+      The case at 304 adopted this certificate as its house best packing in the pass of 25
+      October 2026, from T-186, 2.53e-03 above it, which stays retained as history, with
+      the credit of T-241's packing: Kirill Tymchishin's, descended by Evan Daniel. Both
+      strong generators decided the new witness in the same pull request
+      (cases/regularized_drawings/think-hx0e-2026-10-25): grid-slack's views at 0.5, 1 and
+      5 degrees and Evan Daniel's certified KKT re-solve at the witness's side each go to
+      review at row 7 and draw more light squares than the axis tool's view, which stays
+      drawn, so the count is decided no better; no view is below the side.
+
+      At 268 this certificate is 4.48e-12 below T-240, which the same pass adopted there,
+      and one day's archive holds one prior state a count, so 268 is staged for the pass's
+      next pull request, on or after 26 October 2026 (select_houses.PENDING_ADOPTION,
+      think-3anz), where the house's credit follows the placement adopted, Daniel after
+      Lavrentev.
 
       The source's own checkers were not run here. The two maintained routes, the sqpack
       rational witness verifier and the independent rational corner checker, share
-      certificate parsing, half-angle conversion, Fraction arithmetic and the separating-axis
-      method. No two independent methods, human oversight or optimality is claimed.
+      certificate parsing, half-angle conversion, Fraction arithmetic and the
+      separating-axis method with each other, and with the producer the evand-cert reader's
+      line filter and corner construction; the review's checker shares no code with them.
+      No human oversight or optimality is claimed.
     next_rung: >-
-      Independently review the retained replay and the two certificates (stage 4), a mapped
-      review whose acceptance would raise both rungs, then decide the adoptions at 268 and
-      304 with both strong generators' regularization of each new house in the same change.
-      At 268 T-240's packing and this one are two placements of one arrangement, so the
-      credit of the house follows the placement adopted.
+      None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
+      reviewer and a retained human oversight record; one AI review, of 24 October, is
+      retained. The review's questions for the author (what the 268 predescent file is, and
+      who first published the packing at 304) hold no rung. Both counts are the smallest
+      validated sides, so the cases adopt them under the house rule, with both strong
+      generators' regularization of each new house: 304 was adopted on 25 October 2026, and
+      268 is staged for the pass's next pull request, where the house credit follows the
+      placement adopted, Daniel after Lavrentev.
+    reviews:
+      - path: docs/project/reviews/review-2026-10-24-couzo-evand-n268-n304.md
+        kind: adversarial
+        reviewer: >-
+          AI agent (Claude, strongest sub-agent tier, maximum reasoning), the stage 4
+          review lane c-review-t241-t242-math of the 24 October intake, prompted separately
+          from the records lane, with no shared context
+        reviewer_kind: ai
+        relation: project
+        date: '2026-10-24'
+        scope: >-
+          Finite feasibility of the three certificates T-241 and T-242 cite, at 304 (Couzo)
+          and at 268 and 304 (Daniel): decided on a clean-room checker by separating axes
+          and clipped areas, with twelve controls each (sharp at 1e-30 at a wall and a pair)
+          and nine hand-built packings, held to the packets' sharp-control receipts exactly;
+          custody against the sources' trees; the sides, their prints and the stated
+          margins; identity and lineage measured pose by pose against #763's entry at 268,
+          the houses T-174 and T-186, T-175, the manifest's parents and the sources' inputs;
+          and the credit chains against the sources' own files.
+        verdict: accepted
+        covers: [T-241, T-242]
     regularizations:
       - n: 304
         of: T-241
         by: '[Daniel Kaggle descents 2026-10-24]'
+        credit: Daniel after Tymchishin
         method: >-
           the source's exact descent (shrink-only) of the public Kaggle packing its input
           holds, which is T-241's packing to 2.05e-9 as measured here, to the side of a
@@ -35194,7 +35348,7 @@ regularized_drawings:
         max_turn_deg: 0.033049
       view: packing/atlas/known-best/regularized/n-303-regularized.yaml.gz
     - n: 304
-      of: T-186
+      of: T-242
       by: project
       method: regularize_axis_components/2
       side: same
@@ -35202,9 +35356,9 @@ regularized_drawings:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 32
-        max_move: 0.05031548
-        max_turn_deg: 0.0
+        moved: 0
+        max_move: 0.0003952843
+        max_turn_deg: 0.00453227
       view: packing/atlas/known-best/regularized/n-304-regularized.yaml.gz
     - n: 305
       of: T-174
