@@ -44,13 +44,14 @@ LAYOUT = probe(PROBES, "site_frontier_table/layout")
 WIDTHS = (1280, 1024, 768, 390)
 #: The rows read: a row of whole numbers (the shortest a row can be), a radical with its
 #: credit, the proved case with a root shown as a decimal, a fraction that is a recent
-#: bound, a verified bound printed beside the reported one, a current long surname,
-#: and a three-digit case with a rational upper bound. The fraction was n = 18's until
-#: 2026-10-02, when its verified bound rose to the reported one, and then n = 19's until
-#: the same happened there later that day; n = 12's has terminated since 5 October. The
-#: verified bound beside the reported one was n = 51's, 37/5 and from the morning of 6
-#: October 2977/400 (T-070), until sqverify-fast decided its own certificate (T-090) later
-#: that day, and is n = 96's since.
+#: bound, a verified bound printed beside the reported one, a current long surname, a
+#: row made tall by a bound beside a one-chip status, and a three-digit case with a
+#: rational upper bound. The fraction was n = 18's until 2026-10-02, when its verified
+#: bound rose to the reported one, and then n = 19's until the same happened there later
+#: that day; n = 12's has terminated since 5 October, and is the verified cell's alone
+#: since T-243 of 25 October. The verified bound beside the reported one was n = 51's,
+#: 37/5 and from the morning of 6 October 2977/400 (T-070), until sqverify-fast decided
+#: its own certificate (T-090) later that day, and is n = 96's since.
 CASES = (1, 5, 11, 12, 51, 70, 88, 96, 108, 230)
 ROWS = [f"n-{n}" for n in CASES]
 #: The drawing's side before it had a column: 2.6rem.
@@ -170,13 +171,19 @@ def test_every_cell_is_centred_on_its_row(laid: dict[int, dict[str, Any]], width
         for index in plain:
             cell = row["cells"][index]
             assert cell["above"] == pytest.approx(cell["below"], abs=2), (row["id"], index)
-    # A tall row: the status chip of n = 12 sits well clear of the top of its cell.
-    tall = table["rows"][ROWS.index("n-12")]
+    # A tall row whose height comes from another column: n = 70's reported lower bound,
+    # a fraction with its decimal under it, while its Status holds one chip, as n = 1's
+    # does, so the chip sits well clear of the top of its cell. It was n = 12 until T-243
+    # of 25 October 2026 made n = 12 reported-proved and verified-open, a Status of two
+    # lanes that fills its row.
+    tall = table["rows"][ROWS.index("n-70")]
     short = table["rows"][ROWS.index("n-1")]
+    status = column("Status")
     assert tall["height"] > short["height"]
+    assert tall["cells"][status]["content_height"] == short["cells"][status]["content_height"]
     # Centred, the Status cell has more than half the row's extra height above it; set to
     # the top, it would have only its padding.
-    assert tall["cells"][column("Status")]["above"] > (tall["height"] - short["height"]) / 2
+    assert tall["cells"][status]["above"] > (tall["height"] - short["height"]) / 2
 
 
 def test_the_table_fits_its_track_at_1280_and_scrolls_in_its_wrap_below(
@@ -210,20 +217,25 @@ def test_a_fraction_shows_its_decimal_and_a_name_stays_whole(
     """The best known packing of n = 230 is `15 + (28/41)`, and the cell prints its decimal
     under it: the value cut after eight places. The example was n = 12's reported lower
     bound, `31360/7901`, then its verified one, `15680000/3949423`, until T-095's
-    terminating `7943/2000` took both of n = 12's lower cells on 5 October 2026. A
-    credit's long surname, Chaoweeraprasit at n = 88, stays whole at every width."""
+    terminating `7943/2000` took both of n = 12's lower cells on 5 October 2026; T-243's
+    reported `s(12) = 4` took the reported one on 25 October 2026. A credit's long
+    surname, Chaoweeraprasit at n = 88, stays whole at every width."""
     rows = {row["id"]: row for row in laid[1280]["rows"]}
     upper = rows["n-230"]["cells"][column("Best known packing")]["approx"]
     assert upper == ["≈ 15.68292682…"]
     exact, shown = Fraction(643, 41), Fraction(upper[0][2:-1])
     assert 0 < exact - shown < Fraction(1, 10**8)
-    # n = 12 since 5 October 2026: one lower bound in both lower cells, so the verified
-    # cell repeats no decimal, and the gap 57/2000; both decimals terminate.
-    assert rows["n-12"]["cells"][column("Reported lower")]["approx"] == ["= 3.9715"]
+    # n = 12 since 25 October 2026: the reported lower cell holds T-243's whole 4 and no
+    # decimal, the verified one T-095's 7943/2000, and the gap 57/2000 is the verified
+    # lane's; both decimals terminate. From 5 October the one bound filled both lower
+    # cells, and the decimal was the reported cell's.
+    assert rows["n-12"]["cells"][column("Reported lower")]["approx"] == []
+    assert rows["n-12"]["cells"][column("Verified lower")]["approx"] == ["= 3.9715"]
     assert rows["n-12"]["cells"][column("Gap")]["approx"] == ["= 0.0285"]
     assert [cell["approx"] for cell in rows["n-12"]["cells"]].count([]) == len(COLUMNS) - 2
-    # A terminating fraction shows its exact decimal in either column: n = 12's above in
-    # the reported one, and in the verified one a bound printed beside a different
+    # A terminating fraction shows its exact decimal in either column: in the reported
+    # one n = 88's 481/50, Hosono's mixed rectangle-density bound, and n = 12's until
+    # T-243; in the verified one n = 12's above, and a bound printed beside a different
     # reported one. That example was n = 18 until 2026-10-02, when T-045's replay raised
     # its verified bound to the reported 939/200 and the cell became "same", and then
     # n = 19 until T-074's did the same there later that day; then n = 51, 37/5 from
@@ -234,6 +246,7 @@ def test_a_fraction_shows_its_decimal_and_a_name_stays_whole(
     # mass from n = 95 (T-090) below the reported s(96) = 10 (T-081), and from later that
     # day its own certificate's 997/100 (T-082), decided here by sqverify-fast.
     assert rows["n-96"]["cells"][column("Verified lower")]["approx"] == ["= 9.97"]
+    assert rows["n-88"]["cells"][column("Reported lower")]["approx"] == ["= 9.62"]
     assert all(cell["approx"] == [] for cell in rows["n-1"]["cells"])
     assert rows["n-11"]["cells"][column("Reported lower")]["broken"] == []
     for width in WIDTHS:
