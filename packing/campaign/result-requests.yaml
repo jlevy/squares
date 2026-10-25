@@ -23672,3 +23672,86 @@ issues:
     close_when: >-
       The review its C1 needs and the builds its C3 needs have landed on main, or the record
       says why they will not, and the reply that reports the resulting rungs is posted.
+  - number: 797
+    title: 'c*(k) < 4√(2k) + 1 for every k ≥ 6: registration request'
+    author: TheSnakeFang
+    opened: '2026-10-24'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Kevin Fang reports Theorem A: for every integer k >= 6, k^2 - ceil(sqrt(32k)) - 1 unit
+      squares fit in a square of side less than k, so c*(k) < 4 sqrt(2k) + 1 and
+      c*(k) <= ceil(sqrt(32k)). The packing is Sungjoon Ryu's L (his Theorem 1.3) with both
+      ends of each band filled by axis-parallel rows and b the odd integer nearest
+      sqrt(2k), proved in a 5-page note. The source is theorem-a/ in
+      TheSnakeFang/squarepack-certs: the issue pins b1b3f6b; the head db1ed62 holds the same
+      code and certificates and note v0.2 (Zenodo 10.5281/zenodo.23624565), which credits
+      Evan Daniel's earlier c*(k) <= 4 ceil(sqrt(2k - 7)) - 1 (evand/square-packing aa12b98,
+      18 October, in Lean) and withdraws v0.1's claim to be the smallest explicit bound. The
+      author's comment of 19:08Z says the same and offers withdrawal or a second-proof
+      record. It settles no count n <= 324 and moves no beyond-horizon row, so the result
+      register has no applicable scope. Imported on 25 October 2026: the
+      fang-theorem-a-2026-10-24 packet retains theorem-a/ at db1ed62 with both Zenodo
+      records; Theorem A is a reported row of the asymptotic register, credited after Daniel's
+      row, which the same change records; the maintained cases/asymptotic/fang_theorem_a.py,
+      written from the note, decides the bound at every k from 6 to 60,000 and the full
+      layout at k = 6 to 40 and 101; and the 36 shipped certificates were replayed on both
+      maintained exact routes with their controls. Claude assistance disclosed.
+    read_through: '2026-10-24T19:08:49Z'
+    results:
+    - key: theorem-a
+      claim: >-
+        For every integer k >= 6, w(k) < 4 sqrt(2k) + 2, so c*(k) < 4 sqrt(2k) + 1,
+        c*(k) <= ceil(sqrt(32k)), and s(n) < k for every n <= k^2 - ceil(sqrt(32k)) - 1:
+        Ryu's L-shaped packing with row-filled band ends (lift 0 at one end, the whole free
+        length at the other) and odd band width b with |b - sqrt(2k)| <= 1, Lemmas 1 and 2
+        and the proof of Theorem A in theorem-a/note/main.tex at db1ed62 (v0.2; unchanged
+        mathematics since b1b3f6b).
+      source: body
+      not_registered: >-
+        Recorded as reported in frontier/asymptotic-waste-bounds.yaml
+        (deficiency_upper_bounds), a row of its own credited as an independent second proof
+        after Evan Daniel's earlier bound, the row before it; it settles no count n <= 324,
+        so the result register has no applicable scope.
+      queued: false
+    - key: certificates
+      claim: >-
+        36 strict certificates of the construction, k = 6 to 40 and 101 (theorem-a/certs/,
+        SHA256SUMS), and SHA-256 digests of the unshipped k = 300 and 600 certificates
+        (89,902 and 359,860 squares) with regenerate.sh; each packs k^2 - w(k) squares in
+        side (S + k)/2 < k.
+      source: body
+      not_registered: >-
+        Instances of theorem-a, retained and replayed here on both maintained exact routes
+        (receipts/certificate-replay.json in the packet); the k = 300 and 600 digests are
+        recorded as the author's statement. At every count n <= 324 they reach the case
+        record already holds a side below k, and the counts above 324 are no rows of their
+        own.
+      queued: false
+    - key: optimized-constructions
+      claim: >-
+        Searching over b, the number of rows and the split of the free length gives waste
+        at most 4 sqrt(2k) + 1.18 for 15 <= k <= 300, for example 9946 squares below side
+        100, and a bounded local search gains one or two squares at k = 25, 30 and 40
+        (note, section 6).
+      source: body
+      not_registered: >-
+        The author does not register them and releases no certificate; stated in prose
+        only, so nothing can be replayed. The acknowledgement asks for the certificates.
+      queued: false
+    asks:
+    - what: >-
+        Withdraw the request, or record Theorem A as a second proof of Evan Daniel's earlier
+        bound (the author's comment of 19:08Z).
+      state: done
+      note: >-
+        Recorded as a reported row of its own, credited after Daniel's earlier row: per k
+        neither integer bound is always the smaller.
+    beads:
+    - think-4tj5
+    answer_bead: think-4tj5
+    replies: []
+    close_when: >-
+      The reported row and its credit to Evan Daniel's earlier bound are on main, the
+      replay and review disposition are recorded, and the reply that reports them is posted.
