@@ -4007,6 +4007,19 @@ def _flip_regularization(context: Context) -> str:
     return output
 
 
+def _exact_side_register(context: Context) -> str:
+    # About 1.5 s of wall, serial (2026-10-25, 24 entries on a four-core host): the case
+    # records, the results register, T-193's and T-244's ledgers and the packets of T-244,
+    # T-246 and n = 83 read again, every inline polynomial decided again (irreducible by
+    # SymPy's factorization over Z, its root isolated by Descartes' rule of signs, degree 2
+    # to 41 in a quarter of a second), and the register compared entry by entry. Records
+    # tier because it holds a generated view to its inputs: a house that moves fails it
+    # until the change that moves it runs `--update` (think-vgsw).
+    output = _module(context, "devtools.exact_side_register", "--check")
+    _require_text(output, "exact-side register check passed")
+    return output
+
+
 def _vendored_evand(context: Context) -> str:
     # About 0.2s: `vendor/evand-regularize`, Evan Daniel's regularizer copied at a pin, is
     # held to its manifest -- each file's size, SHA-256 and mode at the upstream commit,
@@ -5889,6 +5902,31 @@ STEPS: tuple[Step, ...] = (
             "packing/atlas/known-best/rendering/*",
             "packing/atlas/known-best/regularized/*",
             "packing/devtools/flip_regularization.py",
+            *_RENDERER_HUB,
+        ),
+    ),
+    Step(
+        "exact-side register is current",
+        _exact_side_register,
+        fast=True,
+        records=True,
+        # The register's inputs: every case record and the results register, the two
+        # intake ledgers, the packets of T-244, T-246 and n = 83, and the Kingbird
+        # receipts that pin and measure n = 83's picture. It reads `PENDING_ADOPTION`
+        # through `select_houses`, whose import closure enters the renderer family through
+        # `check_results`, so it claims that family whole, as the step above does.
+        touches=(
+            *_CORE,
+            "packing/frontier/exact-side-register.json",
+            "packing/frontier/exact-side-register.schema.yaml",
+            "packing/frontier/n-*.md",
+            "packing/frontier/results.yaml",
+            "packing/campaign/issue-intake/upper-bounds-20261016/exact-sides.json",
+            "packing/campaign/issue-intake/upper-bounds-issue804-20261025/exact-sides.json",
+            "packing/resources/web/hyukdongkim-exact-forms-2026-10-25/facts/exact-forms.json",
+            "packing/resources/web/evand-exact-data-2026-10-12/acquisition/release.json",
+            "packing/resources/web/evand-exact-data-2026-10-12/acquisition/release/s29/*",
+            "packing/resources/web/known-best-packings/receipts/*",
             *_RENDERER_HUB,
         ),
     ),

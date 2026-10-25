@@ -799,7 +799,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "8a36268c4a0bd30e5c43374a16af13091c3fa92c"
+DATA_REVISION = "97bbb5319b6c438848d627db7a8ae199a5530864"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -9313,6 +9313,61 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "across the three, and identical to the seventh measurement's but for the link "
             "revision. "
             "Retain v0.1.11, v0.1.4 and v0.2.7."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=("packing/campaign/result-requests.yaml",),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The stage 7 replies of 25 October to #810, #545 and #811 recorded under each "
+            "issue's replies, naming T-245 and T-246 at V0/C0 and their evidence, against "
+            "main 272b411b4 (#812). Rendered by render_packing_methods at link revision "
+            "49b0b78e into empty site directories, twice from this tree and once with "
+            "main's result-requests.yaml swapped in, 43 files each, all byte-identical "
+            "across the three. No register entry changes. Retain v0.2.7."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/devtools/validate_schemas.py",
+            "packing/frontier/README.md",
+            "packing/src/sqpack/cli/validate.py",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The exact-side register (think-vgsw, #811): the register joins the schema "
+            "corpus (validate_schemas.py), its check joins the records tier (validate.py), "
+            "and the frontier README gains a section on it, against main 272b411b4 (#812). "
+            "Rendered at link revision 57f70c3e into empty site directories, twice from "
+            "this tree and once with main's validate_schemas.py, validate.py and frontier "
+            "README.md swapped in: render_n11_optimality_review, "
+            "render_n11_threshold_bound_review, render_packing_methods and "
+            "render_n11_lower_bounds_explainer, with its pinned Chromium math pass, write "
+            "all 69 files byte-identical across the three. Measured again after merging "
+            "main 0785626cc (#815), at link revision a2a5748e: twice from this tree and "
+            "once with that main's three files swapped in, all 69 files byte-identical "
+            "across the three, and identical to the first measurement apart from the link "
+            "revision in source links. No PDF was printed; each prints from that HTML. "
+            "Retain v0.4.30, v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
 )

@@ -1,0 +1,200 @@
+# The exact-side register, `exact-side-register.json`.
+#
+# One entry per exact side fact the record stands behind: its count, whether it is about
+# the house, a staged house or a named configuration, who states it, its degree, its
+# minimal polynomial inline (in `exact_sides.polynomial_text` notation) or by a pinned
+# asset with the facts measured from it, the side written as a case record writes it,
+# its interval, and its exact order against the house. Each interval's `basis`, and each
+# entry's `irreducible`, say how far the record checked the fact: `decided` by every run
+# of `devtools.exact_side_register`, `measured` once from the pinned asset with a
+# retained receipt, or `reported` by the source and not checked here.
+# `devtools.exact_side_register --update` writes it; that every entry is what its inputs
+# give, decided again, is what a JSON Schema cannot say and
+# `devtools.exact_side_register --check` holds. The plan is
+# docs/project/specs/active/plan-2026-10-25-exact-side-register.md.
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: packing.squares:ExactSideRegister/v1
+title: The exact-side register
+type: object
+additionalProperties: false
+required: [contract, generated_by, spec, totals, entries]
+properties:
+  softschema: {type: object}
+  contract: {const: packing.squares:ExactSideRegister/v1}
+  generated_by: {const: python -m devtools.exact_side_register --update}
+  spec: {const: docs/project/specs/active/plan-2026-10-25-exact-side-register.md}
+  totals:
+    type: object
+    additionalProperties: false
+    required: [entries, counts, subjects, intervals, largest_decided_degree]
+    properties:
+      entries: {type: integer, minimum: 0}
+      counts: {type: integer, minimum: 0}
+      subjects:
+        type: object
+        additionalProperties: false
+        required: [house, staged-house, configuration]
+        properties:
+          house: {type: integer, minimum: 0}
+          staged-house: {type: integer, minimum: 0}
+          configuration: {type: integer, minimum: 0}
+      intervals:
+        type: object
+        additionalProperties: false
+        required: [decided, measured, reported]
+        properties:
+          decided: {type: integer, minimum: 0}
+          measured: {type: integer, minimum: 0}
+          reported: {type: integer, minimum: 0}
+      largest_decided_degree: {type: integer, minimum: 0}
+  entries:
+    type: array
+    items: {$ref: '#/$defs/entry'}
+$defs:
+  basis: {enum: [decided, measured, reported]}
+  decimal: {type: string, pattern: '^[0-9]+\.[0-9]+$'}
+  result: {type: string, pattern: '^T-[0-9]{3}$'}
+  path: {type: string, pattern: '^packing/'}
+  digest: {type: string, pattern: '^[0-9a-f]{64}$'}
+  entry:
+    type: object
+    additionalProperties: false
+    required: [n, subject, configuration, stated_by, degree, polynomial, reference, measured,
+               form, interval, irreducible, house, staged]
+    properties:
+      n: {type: integer, minimum: 1, maximum: 324}
+      subject:
+        description: >-
+          house: the case's verified upper bound is this side. staged-house: a validated
+          side the house rule names as the house, its adoption staged. configuration: the
+          side of the named configuration that is not the house.
+        enum: [house, staged-house, configuration]
+      configuration:
+        description: For a configuration, what it is; null for a house or a staged house.
+        type: [string, 'null']
+        minLength: 1
+      stated_by:
+        type: object
+        additionalProperties: false
+        required: [results, source_key, evidence]
+        properties:
+          results:
+            type: array
+            items:
+              type: object
+              additionalProperties: false
+              required: [id, kind, rungs]
+              properties:
+                id: {$ref: '#/$defs/result'}
+                kind: {type: string, minLength: 1}
+                rungs: {type: string, pattern: '^V[0-9]/C[0-9]$'}
+          source_key: {type: [string, 'null'], minLength: 1}
+          evidence:
+            type: array
+            minItems: 1
+            items: {type: string, pattern: '^E-[a-z0-9-]+$'}
+      degree: {type: integer, minimum: 2}
+      polynomial:
+        description: >-
+          The minimal polynomial in s, highest degree first, as exact_sides.polynomial_text
+          writes it; null where the polynomial is held by `reference`.
+        type: [string, 'null']
+        pattern: '^[0-9s^{}+-]+$'
+      reference:
+        description: The pinned asset that holds a polynomial too large to write inline.
+        oneOf:
+          - type: 'null'
+          - type: object
+            additionalProperties: false
+            required: [asset, sha256, bytes, member, member_sha256, member_bytes, pinned_in]
+            properties:
+              asset: {type: string, pattern: '^https://'}
+              sha256: {$ref: '#/$defs/digest'}
+              bytes: {type: integer, minimum: 1}
+              member: {type: [string, 'null'], minLength: 1}
+              member_sha256:
+                oneOf:
+                  - type: 'null'
+                  - {$ref: '#/$defs/digest'}
+              member_bytes: {type: [integer, 'null'], minimum: 1}
+              pinned_in: {$ref: '#/$defs/path'}
+      measured:
+        description: The facts measured from the pinned asset, and the receipt that holds them.
+        oneOf:
+          - type: 'null'
+          - type: object
+            additionalProperties: false
+            required: [coefficients, leading_digits, height_digits, constant_digits,
+                       root_index, receipt]
+            properties:
+              coefficients: {type: integer, minimum: 3}
+              leading_digits: {type: integer, minimum: 1}
+              height_digits: {type: integer, minimum: 1}
+              constant_digits: {type: integer, minimum: 1}
+              root_index: {type: [integer, 'null'], minimum: 1}
+              receipt: {$ref: '#/$defs/path'}
+      form:
+        description: >-
+          The side as a case record writes it, exact_sides.form: root(p, low, high), or of
+          degree two its closed form (a+b*sqrt(d))/c; null where the polynomial is not
+          held inline.
+        type: [string, 'null']
+        minLength: 1
+      interval:
+        type: object
+        additionalProperties: false
+        required: [low, high, basis]
+        properties:
+          low: {$ref: '#/$defs/decimal'}
+          high: {$ref: '#/$defs/decimal'}
+          basis: {$ref: '#/$defs/basis'}
+      irreducible: {$ref: '#/$defs/basis'}
+      house:
+        type: object
+        additionalProperties: false
+        required: [results, relation, gap, basis]
+        properties:
+          results:
+            description: The results the case's verified upper bound rests on.
+            type: array
+            items: {$ref: '#/$defs/result'}
+          relation:
+            description: The side's exact order against the house's side.
+            enum: [is, below, above, undecided]
+          gap:
+            description: The distance to the house's side, to four figures; null for is or undecided.
+            type: [string, 'null']
+            pattern: '^[0-9]\.[0-9]{3}e[+-][0-9]+$'
+          basis: {$ref: '#/$defs/basis'}
+      staged:
+        description: For a staged house, the bead that owes its adoption and why it waits.
+        oneOf:
+          - type: 'null'
+          - type: object
+            additionalProperties: false
+            required: [bead, why]
+            properties:
+              bead: {type: string, pattern: '^think-[a-z0-9]+$'}
+              why: {type: string, minLength: 1}
+    allOf:
+      - if: {properties: {subject: {const: configuration}}}
+        then: {properties: {configuration: {type: string}}}
+        else: {properties: {configuration: {type: 'null'}}}
+      - if: {properties: {subject: {const: staged-house}}}
+        then: {properties: {staged: {type: object}}}
+        else: {properties: {staged: {type: 'null'}}}
+      - if: {properties: {subject: {const: house}}}
+        then: {properties: {house: {properties: {relation: {const: is}}}}}
+      - if: {properties: {polynomial: {type: string}}}
+        then:
+          properties:
+            reference: {type: 'null'}
+            measured: {type: 'null'}
+            form: {type: string}
+            irreducible: {const: decided}
+            interval: {properties: {basis: {const: decided}}}
+        else:
+          properties:
+            reference: {type: object}
+            measured: {type: object}
+            form: {type: 'null'}

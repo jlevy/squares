@@ -1,0 +1,15 @@
+{
+  "format": "kingbird-root-polynomial-v1",
+  "n": 83,
+  "measured_by": "python -m devtools.kingbird_root_polynomial 83 --write",
+  "measured_on": "2026-10-25",
+  "url": "https://kingbird.myphotos.cc/packing/square-83.svg",
+  "bytes": 350947,
+  "last_modified": "Thu, 24 Sep 2026 16:37:57 GMT",
+  "pinned_in": "packing/resources/web/known-best-packings/receipts/kingbird-2026-10-05-pictures.json",
+  "retained": false,
+  "polynomial": {"variable":"#1","degree":672,"coefficients":673,"nonzero_coefficients":673,"primitive":true,"leading_sign":1,"leading_digits":94,"height_digits":724,"constant_digits":710,"text_characters":343219},
+  "root": {"index":27,"printed":"9.634757648631082029260083793795313931964028324405793232204845642625384709041723075118910818414255340","places":99,"low":"9.634757648631082029260083793795313931964028324405793232204845642625384709041723075118910818414255339","high":"9.634757648631082029260083793795313931964028324405793232204845642625384709041723075118910818414255341","endpoint_signs":[1,-1],"sign_variations":1,"roots":1,"method":"Descartes' rule of signs on (1 + x)^d p((low + high x) / (1 + x)), in exact integers: one sign change, so exactly one root in (low, high)"},
+  "not_measured": "irreducibility over Q, and the count of real roots below the side that the source's Root index states (think-chsu)"
+}
+
