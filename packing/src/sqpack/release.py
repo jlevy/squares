@@ -8928,8 +8928,8 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "site_resources.py, measured again at link revision 23bd0a0f with main's five "
             "changed inputs swapped in: twice from this tree and once swapped, 69 files "
             "each, all byte-identical across the three. No register entry is added, so the "
-            "explainer's result count is unchanged. No PDF was printed; each prints from that HTML. Retain v0.4.27, "
-            "v0.1.11, v0.1.4 and v0.2.7."
+            "explainer's result count is unchanged. No PDF was printed; each prints from "
+            "that HTML. Retain v0.4.27, v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
 )
