@@ -1,0 +1,13 @@
+ok    odd_widths(6) == [3]
+ok    odd_widths(7) == [3]
+ok    odd_widths(8) == [3, 5]
+ok    odd_widths(18) == [5, 7]
+ok    odd_widths(59) == [11]
+ok    below_bound exact tie refused (k=43218, x=1178)
+ok    below_bound 1177 at k=43218
+ok    below_bound negative side
+ok    floor of negatives
+ok    remark's example: k=59, b=11, limit waste 44
+ok    k=59 at a chosen t: waste 44
+ok    even b = 10: the odd-b Lemma 2 bound fails at some lift
+ok    limit waste equals waste at delta = 1e-40 (k=1000, b=45)

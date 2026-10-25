@@ -1,0 +1,315 @@
+ok    daniel counts 495210 / 255215 / 249568
+ok    daniel: |A - D| <= 2 for 89 <= k < 10^6
+ok    daniel: 17 values below 89 with D smaller by 3 to 5
+ok    tail premise: sqrt(2k) + sqrt(2k-7) > 28 at k = 102
+ok    daniel: the last k with |A - D| > 2 is 88
+ok    daniel k25 tail derivative positive at 3e5
+ok    daniel k25: always smaller from about 7.4e5
+ok    ryu 1.4: ours smaller at 6 and every 9 <= k < 10^6
+ok    ryu 1.4: tie at 7, Ryu smaller at 8
+ok    ryu 1.4 tail premise at k = 12
+ok    ryu 1.3: ours smaller for every 14 <= k <= 400
+ok    ryu 1.3: ours not smaller at 13
+ok    ryu 1.3 tail premise: (8 - 4 sqrt 2) sqrt 47 >= 16
+ok    t163 window search equals brute force for 15 <= k <= 3000
+ok    t163: ours larger for 15 <= k <= 39
+ok    t163: tie at 40 and 41
+ok    t163: ours smaller for every 42 <= k < 10^6
+ok    t163 tail premise at k = 45: 19k - 33 > 21 sqrt(32k)
+ok    ryu 1.2 smaller at 1.6e7
+ok    ryu 1.2 derivative premise
+ok    ours at 1e5, 1e6, 1e7 = 1789, 5657, 17889
+ok    register: strictly least at 346,919 of 42..702,000, below Daniel at 346,920
+{
+ "daniel": {
+  "ours_smaller": 495210,
+  "his_smaller": 255215,
+  "tie": 249568,
+  "k_at_least_89_with_difference_above_2": [],
+  "below_89_his_smaller_by_3_or_more": [
+   [
+    7,
+    4
+   ],
+   [
+    8,
+    5
+   ],
+   [
+    10,
+    3
+   ],
+   [
+    11,
+    4
+   ],
+   [
+    14,
+    3
+   ],
+   [
+    15,
+    3
+   ],
+   [
+    16,
+    4
+   ],
+   [
+    20,
+    3
+   ],
+   [
+    21,
+    3
+   ],
+   [
+    27,
+    3
+   ],
+   [
+    28,
+    3
+   ],
+   [
+    35,
+    3
+   ],
+   [
+    43,
+    3
+   ],
+   [
+    44,
+    3
+   ],
+   [
+    53,
+    3
+   ],
+   [
+    64,
+    3
+   ],
+   [
+    88,
+    3
+   ]
+  ],
+  "longest_run_of_consecutive_k_with_ours_strictly_smaller": [
+   703,
+   996876,
+   997578
+  ],
+  "tail_lemma": "for k >= 102: A < 4 sqrt(2k) + 1 and D >= 4 sqrt(2k-7) - 1 give A - D < 2 + 28/(sqrt(2k) + sqrt(2k-7)) < 3, and D < 4 sqrt(2k-7) + 3 gives A - D > -3; so |A - D| <= 2 for every k >= 102, and k = 89..101 are decided above",
+  "last_k_with_difference_above_2": 88
+ },
+ "daniel_k25": {
+  "k_range": [
+   300000,
+   999999
+  ],
+  "count_where_not_smaller": 436305,
+  "first_k_where_smaller": 735988,
+  "last_k_where_not_smaller": 736594,
+  "first_k_from_which_always_smaller_to_10^6": 736595,
+  "at_10^6": {
+   "sqrt_32k_minus_bound": 221.58202423065626
+  },
+  "tail_lemma": "sqrt(32k) - 18.9 k^0.4 - 35.7 k^0.2 is increasing for k >= 3*10^5 (derivative 2 sqrt 2 k^-1/2 - 7.56 k^-0.6 - 7.14 k^-0.8 > 0 there), so the k^{2/5} bound stays smaller once sqrt(32k) exceeds it"
+ },
+ "ryu_1_4": {
+  "k6": [
+   14,
+   15
+  ],
+  "k7": [
+   15,
+   15
+  ],
+  "k8": [
+   16,
+   15
+  ],
+  "k9": [
+   17,
+   23
+  ],
+  "first_10": {
+   "6": [
+    14,
+    15
+   ],
+   "7": [
+    15,
+    15
+   ],
+   "8": [
+    16,
+    15
+   ],
+   "9": [
+    17,
+    23
+   ],
+   "10": [
+    18,
+    23
+   ],
+   "11": [
+    19,
+    23
+   ],
+   "12": [
+    20,
+    23
+   ],
+   "13": [
+    21,
+    23
+   ],
+   "14": [
+    22,
+    31
+   ],
+   "15": [
+    22,
+    31
+   ]
+  },
+  "tail_lemma": "for k >= 12: 8 sqrt(k-4) - sqrt(32k) >= 2 (increasing, 3.03 at k = 12), so A < sqrt(32k) + 1 <= 8 sqrt(k-4) - 1 <= Ryu 1.4"
+ },
+ "ryu_1_3": {
+  "ours_smaller_runs": [
+   [
+    14,
+    400
+   ]
+  ],
+  "tie": [
+   12,
+   13
+  ],
+  "ours_larger": [
+   6,
+   7,
+   8,
+   9,
+   10,
+   11
+  ],
+  "values_6_to_20": {
+   "6": [
+    14,
+    9
+   ],
+   "7": [
+    15,
+    13
+   ],
+   "8": [
+    16,
+    13
+   ],
+   "9": [
+    17,
+    15
+   ],
+   "10": [
+    18,
+    17
+   ],
+   "11": [
+    19,
+    17
+   ],
+   "12": [
+    20,
+    20
+   ],
+   "13": [
+    21,
+    21
+   ],
+   "14": [
+    22,
+    23
+   ],
+   "15": [
+    22,
+    25
+   ],
+   "16": [
+    23,
+    25
+   ],
+   "17": [
+    24,
+    26
+   ],
+   "18": [
+    24,
+    29
+   ],
+   "19": [
+    25,
+    29
+   ],
+   "20": [
+    26,
+    31
+   ]
+  },
+  "tail_lemma": "Ryu's Proposition 1.5: k^2 - N(k,b) > 8 sqrt(k) - 14 for all b, so Theorem 1.3 gives no less than 8 sqrt(k) - 15 + something; A < sqrt(32k) + 1 <= 8 sqrt(k) - 15 once (8 - 4 sqrt 2) sqrt(k) >= 16, i.e. k >= 47"
+ },
+ "t163": {
+  "larger_runs": [
+   [
+    15,
+    39
+   ]
+  ],
+  "tie": [
+   40,
+   41
+  ],
+  "smaller_from": 42,
+  "tail_lemma": "F(k) <= 1 + 2(k-15)/21 since p + 2q <= (2/21)(16p + 21q), so the bound is >= (19k - 12)/21 > sqrt(32k) + 1 > A once 19k - 33 > 21 sqrt(32k), i.e. k >= 45"
+ },
+ "ryu_1_2": {
+  "at_1.6e7": {
+   "ryu_real": 15738.51084215191,
+   "ryu_int": 15738,
+   "ours": 22628
+  },
+  "tail_lemma": "sqrt(32k) - 20.668 k^0.4 is increasing for k > 2.93^10 ~ 4.6*10^4 and positive at 1.6*10^7, so Theorem 1.2's integer bound is below ours at every k >= 1.6*10^7"
+ },
+ "ryu_1_6": {
+  "100000": {
+   "ryu": 1583,
+   "ours": 1789
+  },
+  "1000000": {
+   "ryu": 3972,
+   "ours": 5657
+  },
+  "10000000": {
+   "ryu": 10039,
+   "ours": 17889
+  }
+ },
+ "family_least_42_to_702000": {
+  "strictly_least": 346919,
+  "below_daniel": 346920,
+  "longest_run_of_consecutive_k_strictly_least": [
+   589,
+   700932,
+   701520
+  ],
+  "note": "Ryu 1.3 needs no check from 47 (tail above); 10^5 has Ryu's 1583"
+ },
+ "all_hold": 
+
+real	1m40.374s
+user	1m38.578s
+sys	0m0.480s

@@ -12,17 +12,19 @@ a bound of the same strength first, c*(k) <= 4 ceil(sqrt(2k - 7)) - 1, in Lean.
 
 This module was written from the note's Sections 2 to 5, not from the source's
 ``lband.py`` or any other program of the source, which it never reads. Everything is
-exact, in integers and ``Fraction``; a square root is compared by squaring. It decides:
+exact, in integers and ``Fraction``; a square root is compared by squaring. Theorem and
+lemma numbers are the note's as printed: Theorem A is its Theorem 1, Lemma 2 fills a band
+end and Lemma 3 bounds a band (finding N-2 of the review of 25 October 2026). It decides:
 
 - **the bound** (`check_bound`): for every k of a range and every odd b with
   |b - sqrt(2k)| <= 1, a rational t = 1/b + eps that is *close* (conditions (a) to (d) of
   Section 4) and has H(t) < 4 sqrt(2k) + 2, where H(t) is b(k - S) plus the two right sides
-  of Lemma 2; then that the construction's count N gives w = k^2 - N < 4 sqrt(2k) + 2,
-  that w < H(t) (Lemma 2 with equation (1)), and that the limit B(k) of H(t) as t -> 1/b
+  of Lemma 3; then that the construction's count N gives w = k^2 - N < 4 sqrt(2k) + 2,
+  that w < H(t) (Lemma 3 with equation (1)), and that the limit B(k) of H(t) as t -> 1/b
   is below 4 sqrt(2k) + 2;
 - **the tail** (`check_identities`): what makes B(k) < 4 sqrt(2k) + 2 hold at every k, the
   identity b(b^2 + 1)^2 (kappa_b - 1/b - 1/(b^2 + 1)) = 6b^4 - b^3 - 2b^2 - b and the
-  positivity of its right side for b >= 1, Lemma 2's value at t0 = 1/b, and the strict
+  positivity of its right side for b >= 1, Lemma 3's value at t0 = 1/b, and the strict
   closeness at t0 (delta_b in (0, 1) and 2 tau_0 - b c_0 > 0 for odd b >= 3). Each identity
   is between polynomials of bounded degree in b and L, decided at more points than the
   degree; with 4kb/(b^2 + 1) < 4k/b and 4k/b + 2b = 4 sqrt(2k) + (2/b)(b - sqrt(2k))^2, they
@@ -215,8 +217,8 @@ class Band:
         count, free = self.rows(length)
         return self.b * count + sum(self.levels(Fraction(0))) + sum(self.levels(free))
 
-    def lemma_two(self, length: Fraction) -> Fraction:
-        """The right side of Lemma 2: bL(1 - c) + bch - 2b + 2 - 2(W - s - 2 tau) + 2 eta."""
+    def lemma_three(self, length: Fraction) -> Fraction:
+        """The right side of Lemma 3: bL(1 - c) + bch - 2b + 2 - 2(W - s - 2 tau) + 2 eta."""
         b, c = self.b, self.c
         return (
             b * length * (1 - c)
@@ -241,15 +243,15 @@ def limit(k: int, b: int) -> Fraction:
 
 
 def lemma_bound(k: int, b: int, t: Fraction) -> Fraction:
-    """H(t): b(k - S) plus the right sides of Lemma 2 for the bands of length S and k - b."""
+    """H(t): b(k - S) plus the right sides of Lemma 3 for the bands of length S and k - b."""
     band = Band(b, t)
     side = k - b + band.width
-    return b * (k - side) + band.lemma_two(side) + band.lemma_two(Fraction(k - b))
+    return b * (k - side) + band.lemma_three(side) + band.lemma_three(Fraction(k - b))
 
 
 @dataclass(frozen=True)
 class Construction:
-    """The packing at one (k, b, t): its side, count, waste and Lemma 2's bound H(t)."""
+    """The packing at one (k, b, t): its side, count, waste and Lemma 3's bound H(t)."""
 
     k: int
     b: int
@@ -296,7 +298,7 @@ def best(k: int) -> Construction:
 def check_bound(
     first: int, last: int, inequalities: int = NOTE_INEQUALITIES
 ) -> tuple[Check, ...]:
-    """The theorem's bound, Lemma 2 and B(k) for every k in [first, last] and every b."""
+    """The theorem's bound, Lemma 3 and B(k) for every k in [first, last] and every b."""
     bound: list[tuple[int, int, int]] = []
     lemma: list[tuple[int, int]] = []
     limits: list[tuple[int, int]] = []
@@ -336,12 +338,12 @@ def check_bound(
         ),
         Check(
             f"w < H(t) at a close t, {span}",
-            "Lemma 2 and equation (1)",
+            "Lemma 3 and equation (1)",
             not lemma,
             f"failures {lemma[:5] or 'none'}",
         ),
         Check(
-            f"B(k) = H(1/b), the value of Lemma 2's bound at t0, {span}",
+            f"B(k) = H(1/b), the value of Lemma 3's bound at t0, {span}",
             "proof of Theorem A",
             not unequal,
             f"failures {unequal[:5] or 'none'}",
@@ -377,9 +379,9 @@ def identity_sides(b: int) -> tuple[Fraction, int]:
     return left, 6 * b**4 - b**3 - 2 * b * b - b
 
 
-def lemma_two_at_t0(b: int, length: Fraction) -> tuple[Fraction, Fraction]:
-    """Lemma 2's right side at t0 = 1/b, and the closed form 2bL/(b^2+1) + b + 2 - kappa_b."""
-    return Band(b, Fraction(1, b)).lemma_two(length), (
+def lemma_three_at_t0(b: int, length: Fraction) -> tuple[Fraction, Fraction]:
+    """Lemma 3's right side at t0 = 1/b, and the closed form 2bL/(b^2+1) + b + 2 - kappa_b."""
+    return Band(b, Fraction(1, b)).lemma_three(length), (
         Fraction(2 * b, b * b + 1) * length + b + 2 - kappa(b)
     )
 
@@ -397,7 +399,7 @@ def check_identities(widths: Iterable[int] = range(3, 41, 2)) -> tuple[Check, ..
         (b, length)
         for b in chosen
         for length in (Fraction(0), Fraction(7, 3))
-        if lemma_two_at_t0(b, length)[0] != lemma_two_at_t0(b, length)[1]
+        if lemma_three_at_t0(b, length)[0] != lemma_three_at_t0(b, length)[1]
     ]
     strict: list[int] = []
     for b in chosen:
@@ -429,8 +431,8 @@ def check_identities(widths: Iterable[int] = range(3, 41, 2)) -> tuple[Check, ..
             "b^3 + 2b^2 + b <= 4b^4 for b >= 1",
         ),
         Check(
-            "Lemma 2's right side at t0 is 2bL/(b^2+1) + b + 2 - kappa_b",
-            "Lemma 2",
+            "Lemma 3's right side at t0 is 2bL/(b^2+1) + b + 2 - kappa_b",
+            "Lemma 3",
             len(chosen) >= 8 and not values,
             f"failures {values or 'none'}",
         ),
@@ -772,9 +774,11 @@ def check_certificates(ks: Iterable[int] = SHIPPED) -> tuple[Check, ...]:
 
 #: The note's comparison range with Daniel's bound (Section 7), and the end of the window
 #: in which Theorem A's strictly-least count is taken: below it Daniel's unregistered
-#: k^{2/5} bound is not smaller at any sampled k (`daniel_k25_crossover`).
+#: k^{2/5} bound is not smaller at any k (`daniel_k25_crossover`, which decides each k).
 COMPARE_LIMIT = 10**6
 LEAST_WINDOW = (42, 702_000)
+#: Where Daniel's unregistered c*(k) < 18.9 k^{2/5} + 35.7 k^{1/5} + 122 starts to hold.
+DANIEL_K25_FROM = 3 * 10**5
 #: Ryu's Theorem 1.6 values the register's k^{2/5} row records, by k.
 RYU_THEOREM_1_6 = {10**5: 1583, 10**6: 3972, 10**7: 10039, 38_250_000: 16988, 10**8: 24790}
 
@@ -827,23 +831,75 @@ def _iroot_ceil(n: int, exponent: int) -> int:
     return low
 
 
-def daniel_k25_crossover(step: int = 1000) -> dict[str, int | None]:
-    """Where Daniel's unregistered c*(k) < 18.9 k^{2/5} + 35.7 k^{1/5} + 122 (k >= 3*10^5)
-    falls below ceil(sqrt(32k)), sampled every ``step`` k with exact integer roots: the last
-    sampled k where it is surely not smaller, and the first where it surely is."""
-    last_not: int | None = None
-    first_surely: int | None = None
-    for k in range(3 * 10**5, 2 * 10**6, step):
-        two, one = _iroot_ceil(k * k, 5), _iroot_ceil(k, 5)
-        upper = Fraction(189 * two + 357 * one + 1220, 10)
-        lower = Fraction(189 * (two - 1) + 357 * (one - 1) + 1220, 10)
-        if first_surely is None and upper < theorem_a(k) - 1:
-            first_surely = k
-        if lower >= theorem_a(k) + 1:
+def _fifth_root_floor(n: int) -> int:
+    """The greatest p >= 0 with p^5 <= n: a binary64 estimate, then corrected exactly."""
+    p = int(n**0.2) if n < 10**300 else _iroot_ceil(n, 5)
+    while p > 0 and p**5 > n:
+        p -= 1
+    while (p + 1) ** 5 <= n:
+        p += 1
+    return p
+
+
+def daniel_k25_at_most(k: int, value: int) -> bool:
+    """Whether D(k) = 18.9 u^2 + 35.7 u + 122, u = k^{1/5}, is at most ``value``, exactly.
+
+    With u in [p/q, (p + 1)/q), p the integer fifth root of q^5 k, the sign of
+    10 q^2 (D - value) = 189 p^2 + 357 pq + (1220 - 10 value) q^2, which increases with p,
+    decides it once the bracket's two ends agree; q doubles until they do. It always ends:
+    unless k is a fifth power, when u = p/q exactly, u has degree 5 over the rationals and
+    is no root of the quadratic D(u) = value."""
+    q = 1024
+    while True:
+        target = q**5 * k
+        p = _fifth_root_floor(target)
+        constant = (1220 - 10 * value) * q * q
+        if 189 * p * p + 357 * p * q + constant > 0:
+            return False
+        if p**5 == target:
+            return True
+        if 189 * (p + 1) ** 2 + 357 * (p + 1) * q + constant <= 0:
+            return True
+        q *= 2
+
+
+def daniel_k25_tail_holds(k: int) -> bool:
+    """Whether Daniel's k^{2/5} bound stays smaller than ceil(sqrt(32k)) at every k' >= k.
+
+    g(k) = sqrt(32k) - D(k) has g'(k) k^{4/5} = 2 sqrt 2 v^3 - 7.56 v^2 - 7.14 with
+    v = k^{1/10}. From 3*10^5, v >= 7/2 (3.5^10 < 3*10^5); with 2 sqrt 2 > 2.828, the right
+    side is positive at 7/2 and increasing beyond it, since 3 (2.828)(7/2) > 15.12. So g
+    increases from 3*10^5, and D(k) <= isqrt(32k) <= sqrt(32k) at one such k holds at every
+    larger one, where then ceil(D) - 1 < ceil(sqrt(32k))."""
+    v0, a = Fraction(7, 2), Fraction(2828, 1000)
+    rising = (
+        v0**10 <= DANIEL_K25_FROM
+        and a * a < 8
+        and a * v0**3 - Fraction(756, 100) * v0**2 - Fraction(714, 100) > 0
+        and 3 * a * v0 > Fraction(1512, 100)
+    )
+    return rising and k >= DANIEL_K25_FROM and daniel_k25_at_most(k, isqrt(32 * k))
+
+
+def daniel_k25_crossover(last: int = COMPARE_LIMIT - 1) -> dict[str, Any]:
+    """Where Daniel's unregistered c*(k) < 18.9 k^{2/5} + 35.7 k^{1/5} + 122 (k >= 3*10^5),
+    read as the integer bound ceil(D(k)) - 1, is smaller than Theorem A's ceil(sqrt(32k)):
+    exactly when D(k) <= ceil(sqrt(32k)). Decided at every k from 3*10^5 to ``last``
+    (`daniel_k25_at_most`), and beyond ``last`` by `daniel_k25_tail_holds`."""
+    first, last_not, count = None, None, 0
+    for k in range(DANIEL_K25_FROM, last + 1):
+        if daniel_k25_at_most(k, theorem_a(k)):
+            count += 1
+            first = k if first is None else first
+        else:
             last_not = k
     return {
-        "last_sampled_k_not_smaller": last_not,
-        "first_sampled_k_surely_smaller": first_surely,
+        "k_range": [DANIEL_K25_FROM, last],
+        "smaller_at": count,
+        "first_k_where_smaller": first,
+        "last_k_where_not_smaller": last_not,
+        "smaller_at_every_k_from": None if last_not is None else last_not + 1,
+        "tail_from_next_k_holds": daniel_k25_tail_holds(last + 1),
     }
 
 
@@ -939,7 +995,7 @@ def comparisons(
             str(k): {"ryu": value, "A": theorem_a(k), "daniel": daniel(k)}
             for k, value in RYU_THEOREM_1_6.items()
         },
-        "daniel_k25_crossover": daniel_k25_crossover(),
+        "daniel_k25_crossover": daniel_k25_crossover(limit - 1),
         "case_records": case_records(),
     }
 

@@ -799,7 +799,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "3287d38dc63a2ff1789faa2f1b1cb5bfc67c1a06"
+DATA_REVISION = "4eaa86c6325ff22b9af925fa7579eb102aba9068"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -9039,6 +9039,28 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "3bdff2443 (#802), at link revision 3287d38d with that main's eleven candidate "
             "inputs swapped in: the same outcome. Retain v0.4.27, v0.1.11, v0.1.4 and "
             "v0.2.7."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=("packing/campaign/result-requests.yaml",),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The mapping of the stage 4 review of Kevin Fang's Theorem A (think-vfz9): "
+            "#797's requests entry, with the acknowledgement and the review, against main "
+            "3e1349802 (#801). Rendered by render_packing_methods at link revision 8ceeb75d "
+            "into empty site directories, twice from this tree and once with main's "
+            "result-requests.yaml swapped in, 43 files each, all byte-identical across the "
+            "three; measured again after merging main 4089f9587 (#800) at link revision "
+            "64262ade with that main's result-requests.yaml swapped in, and after merging "
+            "main 3bdff2443 (#802) and review A's fixes with the #798 and #755 replies, at "
+            "link revision eb9cd8cc with that main's result-requests.yaml swapped in, and "
+            "after merging main 3699ce15e (#803), at link revision 4eaa86c6 with that main's "
+            "result-requests.yaml swapped in: the same result. No register entry changes. "
+            "Retain v0.2.7."
         ),
     ),
 )

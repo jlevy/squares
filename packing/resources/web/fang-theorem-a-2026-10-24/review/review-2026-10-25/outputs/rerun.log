@@ -1,0 +1,9 @@
+identities rc=0 wall=1.867978962
+selftest rc=0 wall=.149838219
+geometry rc=0 wall=7.219208382
+construction rc=0 wall=31.860078717
+construction-extension rc=0 wall=66.553031095
+lemmas rc=0 wall=24.232411401
+sharpness rc=0 wall=1.498334190
+ties rc=0 wall=2.007091759
+squeeze rc=0 wall=.416252106
