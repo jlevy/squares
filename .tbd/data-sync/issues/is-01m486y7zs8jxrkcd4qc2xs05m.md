@@ -3,16 +3,20 @@ type: is
 id: is-01m486y7zs8jxrkcd4qc2xs05m
 title: Carry the sqverify-fast format T route to T-046's 27 and 28 September rectangle certificates
 kind: task
-status: open
+status: in_progress
 priority: 3
-version: 1
+version: 2
+delegate: w-backlog-1025
 labels:
   - result-import
   - verifiers
 dependencies: []
 parent_id: is-01m3yrdxte02c7bnygkke34ct4
+hold: null
+hold_until: null
 created_at: 2026-10-06T08:58:00.568Z
-updated_at: 2026-10-06T08:58:00.568Z
+updated_at: 2026-10-25T16:27:10.310Z
+started_at: 2026-10-25T16:27:10.309Z
 ---
 Carry the sqverify-fast format T census route (accepted for T-068's 34 certificates by docs/project/reviews/review-2026-10-06-sqverify-fast-format-t-route.md, section 5) to T-046's 48 standing certificates of the 27 and 28 September packets, so that T-046 itself can derive V3/C3. The census verified all 50 standing certificates of the 39d8ecc revision on 3 October, but the route does not carry as things stand:
 

@@ -3,16 +3,20 @@ type: is
 id: is-01m5p4tv409bd77b7bn3gdgb90
 title: "Confirm T-046 to C3: record sqverify-fast's 3 October census of the 48 rectangle-density certificates with its control receipts and a census-route review"
 kind: task
-status: open
+status: in_progress
 priority: 3
-version: 3
+version: 4
+delegate: w-backlog-1025
 labels:
   - result-import
   - validation
 dependencies: []
 parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
+hold: null
+hold_until: null
 created_at: 2026-10-24T05:06:15.807Z
-updated_at: 2026-10-24T08:28:51.069Z
+updated_at: 2026-10-25T16:27:11.446Z
+started_at: 2026-10-25T16:27:11.446Z
 ---
 The pending review of T-046 (rectangle-density lower bounds reported for 48 counts in n = 18 to 95, wand125/square-packing-bounds, 27 and 28 September 2026), V0/C0, S3, opened on 24 October 2026 by lane c-fin-770-1024 under the owner's answer "Open all nine (Recommended)" (think-cwfi), because the result named no owner bead.
 

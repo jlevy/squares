@@ -3,15 +3,19 @@ type: is
 id: is-01m5nz4vn63pmrbpsjdp2c8v71
 title: "Validate: exact audit of Friedman's four unavoidable points for s(5) (T-237 C3)"
 kind: task
-status: open
+status: in_progress
 priority: 3
-version: 1
+version: 2
+delegate: w-backlog-1025
 labels:
   - result-import
 dependencies: []
 parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
+hold: null
+hold_until: null
 created_at: 2026-10-24T03:26:52.582Z
-updated_at: 2026-10-24T03:26:52.582Z
+updated_at: 2026-10-25T16:27:09.231Z
+started_at: 2026-10-25T16:27:09.231Z
 ---
 T-237's owed C3 (PR #750 review A4, https://github.com/jlevy/squares/pull/750#issuecomment-6379115396). T-237's next_rung names a machine check here of the lower half at n = 5: an exact audit of the four unavoidable points (1, 1), (1, 1 + 1/√2), (1 + 1/√2, 1) and (1 + 1/√2, 1 + 1/√2) of [0, 2 + 1/√2]^2 (Friedman DS7, Theorem 2), as T-004 audits Bentz's s(46) (cases/bentz46/verify_cover.py, E-bentz46-theorem8-audit).
 
