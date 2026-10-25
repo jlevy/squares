@@ -9105,7 +9105,10 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "render_n11_optimality_review, render_n11_threshold_bound_review and "
             "render_packing_methods write all 69 files byte-identical across the three. No "
             "result is registered, so the explainer's count is unchanged. No PDF was "
-            "printed; each prints from that HTML. Retain v0.4.27, v0.1.11, v0.1.4 and "
+            "printed; each prints from that HTML. Measured again after review A's fixes "
+            "(T-240's and T-242's notes on think-20oj's scope, the #763 packet's README), "
+            "at link revision db18b3bc with the same nine candidate inputs of main "
+            "bb756e193 swapped in: the same outcome. Retain v0.4.27, v0.1.11, v0.1.4 and "
             "v0.2.7."
         ),
     ),
