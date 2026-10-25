@@ -21445,7 +21445,10 @@ urls:
     - packing/resources/web/jatloe-n12-lean-2026-10-16/Jatloe12SquaresFormalized/verification/run-38849916588/github-replay.json.gz
     - packing/resources/web/jatloe-n12-lean-2026-10-16/receipts/lean-closure.json.gz
     - packing/resources/web/jatloe-n12-lean-2026-10-16/receipts/statement-closure.json.gz
+    - packing/resources/web/jatloe-n12-lean-2026-10-16/receipts/statement-audit.json
     - packing/devtools/lean_closure.py
+    - packing/devtools/audit_n12_lean.py
+    - docs/project/reviews/review-2026-10-25-n12-lean-formalization-statement-audit.md
 - path: result/t-244.html
   canonical: result/t-244.html
   kind: result

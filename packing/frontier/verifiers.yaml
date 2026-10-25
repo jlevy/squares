@@ -3099,6 +3099,24 @@ verifiers:
       - packing/devtools/audit_n11_lean.py
       - packing/resources/web/queuingtheorydotcom-n11-lean-2026-10-06/receipts/lean/AuditN11Statement.lean
 
+  - id: V-audit-n12-lean
+    program: devtools.audit_n12_lean
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [proof-assistant-checked]
+    role: premises
+    summary: >-
+      Reads the 5,377 modules of the Jatloe12SquaresFormalized closure receipt from a
+      checkout's Git objects at d0caf45, or the statement closure from the packet, as data:
+      counts the kernel-escape tokens, set_option names and instance classes in their code,
+      lists the declarations of the statement's names, matches each native_decide axiom of
+      the source's final axiom log to the calls of its owner declaration, and holds every
+      module to the SHA-256 of the run's manifest and the log and the manifest to the
+      digests SOURCE-PROVENANCE.json records. It builds nothing and decides no bound.
+    source:
+      - packing/devtools/audit_n12_lean.py
+
   - id: V-fitzharding-n17-source-manifest
     program: check_source_manifest.py, the sq17-lean packet's consistency check
     author: Squares Project (Levy)

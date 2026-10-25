@@ -11930,7 +11930,7 @@ evidence:
     source_key: '[Jatloe n12 Lean 2026-10-16]'
     certificate: packing/resources/web/jatloe-n12-lean-2026-10-16/Jatloe12SquaresFormalized/Lean/Proofs/N12-jatloe/Compact/Assembly/Final.lean
     replay_status: not-attempted
-    verifiers: []
+    verifiers: [V-audit-n12-lean]
     axioms_receipt: packing/resources/web/jatloe-n12-lean-2026-10-16/Jatloe12SquaresFormalized/verification/run-38849916588/global-type-axiom-audit.log.gz
     proof:
       source: packing/resources/web/jatloe-n12-lean-2026-10-16/Jatloe12SquaresFormalized/Lean/Proofs/N12-jatloe/Compact/Assembly/Final.lean
@@ -11955,12 +11955,13 @@ evidence:
         the normalization); source/S12/Packing.lean (NormalizedPacking, markerOwners);
         source/S12/Diagonal.lean (OpenSquare, Inside, InBands); verification/run-38849916588/
         (GlobalTypeAudit.lean, global-type-axiom-audit.log, github-replay.json,
-        verified-source-manifest.json); the packet's receipts/lean-closure.json.gz and
-        receipts/statement-closure.json.gz.
+        verified-source-manifest.json); the packet's receipts/lean-closure.json.gz,
+        receipts/statement-closure.json.gz and receipts/statement-audit.json.
       assumptions:
         - Lean v4.35.0's kernel and Mathlib at 56a00585 are sound, and so are Lean's compiler and the evaluator the 1,624 native_decide facts are decided by
-        - The run passed as the source reports. Its upstream repository, EvolvingPrograms/SquaresLean at 1f60d41, and run 38849916588 are not public, the run reused all 5,377 compiled objects from earlier runs, and nothing here built or elaborated any module
-        - The proof sources at d0caf45 are the ones the run accepted, as README.md and SOURCE-PROVENANCE.json say and verified-source-manifest.json lists; nothing here compared them
+        - The run passed as the source reports. Its upstream repository, EvolvingPrograms/SquaresLean at 1f60d41, and run 38849916588 are not public, the run reused all 5,377 compiled objects from a checkpoint that run 38847898861 saved at 437041a0 before it failed, and nothing here built or elaborated any module
+        - The proof sources at d0caf45 are the ones the run accepted, as README.md and SOURCE-PROVENANCE.json say. Each of the 5,377 modules read here at d0caf45 has the SHA-256 verified-source-manifest.json gives it (devtools.audit_n12_lean, receipts/statement-audit.json), so the bytes are the manifest's; that the run compiled those bytes rests on the source's manifest
+      audit_record: docs/project/reviews/review-2026-10-25-n12-lean-formalization-statement-audit.md
     limitations: >-
       Queuingtheorydotcom/Jatloe12SquaresFormalized at d0caf45 (2026-10-16T05:12:49Z, the tag
       n12-verified-2026-10-16) reports a Lean 4 proof of s(12) = 4, credited to Jatloe for
@@ -11980,8 +11981,11 @@ evidence:
       so a complete build here is about 17 to 39 CPU-hours, near the owner's 40 CPU-hour
       item cap, with its memory unrecorded (T-243's unfinished_confirmations). No source
       build entry is added: the accepting run compiled nothing, and no audit has read its
-      receipts. The statement, its definitions and the written proof have not been
-      reviewed here.
+      receipts. The statement audit of 25 October read the statement and its definitions
+      line by line: the unrestricted problem, with no premise, checked by Lean's kernel and
+      its compiler, its 1,624 native axioms exactly the native_decide calls of 1,525
+      declarations (devtools.audit_n12_lean). The written proof and the 117 cases have not
+      been reviewed here.
     source_reviewed: '2026-10-25'
 
   - id: E-n021-evand-5000-1001-report

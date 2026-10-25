@@ -34289,9 +34289,13 @@ results:
       decided by native_decide, so Lean's compiler is trusted as well; the final axiom
       audit lists propext, Classical.choice, Quot.sound and those 1,624 facts, and no
       sorryAx. The source reports that a run in a repository that is not public accepted
-      all 5,377 project modules of the theorem's closure on compiled objects reused from
-      earlier runs, with a fresh final type and axiom audit, and says that no full rebuild
-      has been run. Nothing here has built it, and no review has read it.
+      all 5,377 project modules of the theorem's closure on compiled objects reused from a
+      checkpoint that an earlier run saved before it failed, with a fresh final type and
+      axiom audit, and says that no full rebuild has been run.
+
+      Nothing here has built it. The statement audit of 25 October read the theorem as the
+      unrestricted problem with no premise, checked by Lean's kernel and its compiler; no
+      review has read the proof.
 
       Jatloe wrote the mathematical proof and a partial formalization, Ben Gurevitch aided
       the formalization and Lewis (CTJLewis) refactored and compiled it, as the source's
@@ -34334,15 +34338,46 @@ results:
       By epistemics.md's predicates: V3 needs proof-assistant-checked evidence with a
       certificate, a replay command and a passing replay, and no build of the proof is
       retained here, so the result stands at V0, declared with the notes; no numerical
-      method (V1) or unavailable proof (V2) fits. No review has read it, so C0; C1 needs a
-      qualifying, dated read. C3 would need a complete build with a confirming origin.
-    activity:
-      state: in-analysis
-      what: >-
-        the stage 4 statement audit of the Lean definitions against the problem, a lane of
-        the #810 import working from the retained packet
-      since: '2026-10-25'
-      link: think-4l14
+      method (V1) or unavailable proof (V2) fits. No review has read the proof, so C0; C1
+      needs a qualifying, dated read. C3 would need a complete build with a confirming
+      origin.
+
+      The statement audit of 25 October, an AI review, reads N12Compact.Final.optimality
+      line by line as s(12) = 4 over the unrestricted model, with no premise, and the grid
+      as attaining it. Its counts, made by devtools.audit_n12_lean into the packet's
+      receipts/statement-audit.json, map the 1,624 native_decide axioms of the source's log
+      one to one onto the calls of 1,525 declarations, find 948 further calls in 749
+      declarations that the final theorem does not reach, and find every one of the 5,377
+      modules as the run's manifest lists it.
+
+      Its two major findings bind the record: the theorem is checked by Lean's kernel and
+      its compiler (M-1), and the accepting run compiled no module, reusing objects from a
+      run that failed, in a repository nobody here can inspect, so the build stays the
+      source's report and qualifies for no source-build entry (M-2). A reading of the
+      statement is not a read of the proof, so it moves no rung.
+    reviews:
+      - path: docs/project/reviews/review-2026-10-25-n12-lean-formalization-statement-audit.md
+        kind: adversarial
+        reviewer: >-
+          Claude (AI), strong tier (tbd-strong, acting name w-n12-audit-1025), at the
+          reasoning setting the coordinator coord-n12-1025 launched it with, in a worktree
+          of its own, reading the source as data and running no code from it
+        reviewer_kind: ai
+        relation: project
+        date: '2026-10-25'
+        scope: >-
+          Statement audit of N12Compact.Final.optimality : S12.packingConstant12 = 4 at
+          d0caf45: its definitions against the problem line by line, that the final theorem
+          has no premise, the source's axiom receipt against the code's native_decide
+          calls, the kernel escapes of the 5,377-module closure and the 109-module statement
+          closure, the metaprograms, and the bytes against the run's manifest. Not the
+          mathematical review of the 117 cases, not a replay, and not the human expert
+          formalization review V5 needs. Findings M-1 (compiler trust) and M-2 (no build
+          anyone can inspect), m-1 (the statement imports the reduction) and m-2 (Mathlib
+          pinned outside Lake), and notes N-1 to N-3; none blocks recording the
+          formalization as the source's report.
+        verdict: accepted
+        covers: [T-243]
     artifacts:
       - packing/resources/web/jatloe-n12-lean-2026-10-16/README.md
       - packing/resources/web/jatloe-n12-lean-2026-10-16/Jatloe12SquaresFormalized/Lean/Proofs/N12-jatloe/Compact/Assembly/Final.lean
@@ -34354,14 +34389,17 @@ results:
       - packing/resources/web/jatloe-n12-lean-2026-10-16/Jatloe12SquaresFormalized/verification/run-38849916588/github-replay.json.gz
       - packing/resources/web/jatloe-n12-lean-2026-10-16/receipts/lean-closure.json.gz
       - packing/resources/web/jatloe-n12-lean-2026-10-16/receipts/statement-closure.json.gz
+      - packing/resources/web/jatloe-n12-lean-2026-10-16/receipts/statement-audit.json
       - packing/devtools/lean_closure.py
+      - packing/devtools/audit_n12_lean.py
+      - docs/project/reviews/review-2026-10-25-n12-lean-formalization-statement-audit.md
     next_rung: >-
-      C1 needs the stage 4 review: a statement audit of the Lean definitions against the
-      problem, under way, and a mathematical review of Jatloe's written proof and its
-      formalization, both from the retained packet (think-4l14). Whether the source's
-      per-module receipts and final audit qualify as a complete producer build under
-      epistemics.md's rule for reported formal proofs is for that audit to read; the
-      accepting run compiled nothing.
+      C1 needs the rest of the stage 4 review, a mathematical review of Jatloe's written
+      proof and its formalization from the retained packet (think-4l14); the statement
+      audit of 25 October is done. The source's per-module receipts and final audit do not
+      qualify as a complete producer build under epistemics.md's rule for reported formal
+      proofs: the accepting run compiled nothing, and the upstream repository and its runs
+      are not public (the audit's M-2).
 
       V3 and C3 need a complete build of the theorem's 5,377-module closure from the pin,
       here or by a third party whose build is retained here, with its axiom receipt equal
@@ -34377,8 +34415,8 @@ results:
       human expert who is not an author.
     unfinished_confirmations:
       - what: >-
-          the stage 4 statement audit of the Lean definitions and the mathematical review
-          of Jatloe's written proof and its formalization, read from the retained packet
+          the stage 4 mathematical review of Jatloe's written proof and its formalization,
+          read from the retained packet; the statement audit is done
         rung: C1
         link: think-4l14
       - what: >-
