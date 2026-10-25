@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Short of a Square · Square Packing Atlas</title>
+<meta name="description" content="Upper bounds on c*(k), the most squares one can remove from a k-by-k grid and still need side k, checked in Lean: Fang's theorem, Ryu's square-root and k^(2/5) bounds, and two new explicit bounds.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --paper:#F2F4F1; --surface:#FBFCFA; --ink:#131A1E; --muted:#5F6B70; --rule:#D6DCD7;
+  --accent:#0E7490; --accent-soft:#DCEDF1; --gold:#9C6410; --gold-soft:#F5EBDA; --green:#2A6E4F; --green-soft:#DFEDE5;
+  --shadow:0 1px 2px rgba(19,26,30,.05),0 8px 24px -12px rgba(19,26,30,.14);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0E1316; --surface:#151C20; --ink:#E4EBEA; --muted:#96A4A8; --rule:#263238;
+    --accent:#54C3D6; --accent-soft:#0F3138; --gold:#DBA745; --gold-soft:#33280F; --green:#63BE92; --green-soft:#122B20;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px -14px rgba(0,0,0,.7);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0E1316; --surface:#151C20; --ink:#E4EBEA; --muted:#96A4A8; --rule:#263238;
+  --accent:#54C3D6; --accent-soft:#0F3138; --gold:#DBA745; --gold-soft:#33280F; --green:#63BE92; --green-soft:#122B20;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px -14px rgba(0,0,0,.7);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:Spectral,Georgia,"Times New Roman",serif;font-size:17.5px;line-height:1.65;
+  -webkit-font-smoothing:antialiased}
+.wrap{max-width:760px;margin:0 auto;padding:64px 24px 96px}
+h1,h2,h3{text-wrap:balance;line-height:1.2;margin:0}
+h1{font-size:clamp(2.1rem,5.2vw,3rem);font-weight:700;letter-spacing:-.015em}
+h2{font-size:1.55rem;font-weight:600;margin-top:0}
+h3{font-size:1.1rem;font-weight:600}
+p{margin:0}
+a{color:var(--accent);text-decoration-thickness:.08em;text-underline-offset:.18em}
+.mono{font-family:"IBM Plex Mono",ui-monospace,monospace}
+.eyebrow{font-family:"IBM Plex Mono",monospace;font-size:.72rem;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted);font-weight:500}
+header{display:flex;flex-direction:column;gap:18px;padding-bottom:34px;border-bottom:1px solid var(--rule)}
+.lede{font-size:1.16rem;color:var(--muted);max-width:60ch}
+section{display:flex;flex-direction:column;gap:18px;padding:44px 0;border-bottom:1px solid var(--rule)}
+section:last-of-type{border-bottom:none}
+.sechead{display:flex;flex-direction:column;gap:6px}
+.card{background:var(--surface);border:1px solid var(--rule);border-radius:3px;padding:24px;box-shadow:var(--shadow)}
+.thm{border-left:3px solid var(--accent);display:flex;flex-direction:column;gap:14px}
+.thm .stmt{font-size:1.22rem;line-height:1.5}
+.big{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;font-weight:600;
+  font-size:clamp(1.9rem,5vw,2.5rem);color:var(--accent);letter-spacing:-.02em}
+.tag{display:inline-flex;align-items:center;gap:7px;font-family:"IBM Plex Mono",monospace;font-size:.72rem;
+  letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:999px;font-weight:500}
+.tag.ok{background:var(--green-soft);color:var(--green)}
+.tag.open{background:var(--gold-soft);color:var(--gold)}
+.tag.neutral{background:var(--accent-soft);color:var(--accent)}
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+table{border-collapse:collapse;width:100%;font-size:.95rem}
+.tablewrap{overflow-x:auto}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--rule);vertical-align:top}
+th{font-family:"IBM Plex Mono",monospace;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);font-weight:500}
+td.num{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;white-space:nowrap}
+figure{margin:0;display:flex;flex-direction:column;gap:12px}
+figcaption{font-size:.9rem;color:var(--muted)}
+.figbox{background:var(--surface);border:1px solid var(--rule);border-radius:3px;padding:18px}
+pre{background:var(--surface);border:1px solid var(--rule);border-radius:3px;padding:16px;overflow-x:auto;
+  font-family:"IBM Plex Mono",monospace;font-size:.83rem;line-height:1.6;margin:0}
+code{font-family:"IBM Plex Mono",monospace;font-size:.9em;background:var(--accent-soft);
+  padding:.1em .35em;border-radius:2px}
+pre code{background:none;padding:0;font-size:1em}
+ul{margin:0;padding-left:1.15em;display:flex;flex-direction:column;gap:9px}
+li::marker{color:var(--muted)}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.axis{width:100%;height:96px}
+.footnote{font-size:.87rem;color:var(--muted)}
+section>*{min-width:0}
+.footnote .mono,td .mono{overflow-wrap:anywhere}
+@media (max-width:520px){th,td{padding:8px 6px}td.num{white-space:normal}.wrap{padding:40px 16px 72px}}
+.topbar{display:flex;align-items:center;gap:6px 18px;padding:10px 20px;border-bottom:1px solid var(--rule);background:var(--surface);flex-wrap:wrap;font-size:16px;line-height:1.5}
+.topbar .brand{font-weight:600;letter-spacing:-.01em;white-space:nowrap}
+.topbar nav{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:.92rem}
+.topbar nav a{text-decoration:none;color:var(--muted);white-space:nowrap}
+.topbar nav a.here,.topbar nav a:hover{color:var(--accent)}
+.cv{width:100%;aspect-ratio:1/1;display:block}
+.legend{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:.85rem;color:var(--muted)}
+.stat{display:flex;flex-direction:column;gap:2px}
+.diag{width:100%;max-width:420px;display:block;margin:0 auto}
+.diag .gl{stroke:var(--rule);stroke-width:6}
+.diag .cell{fill:none;stroke:var(--muted);stroke-width:1;stroke-dasharray:4 4}
+.diag .sq{fill:var(--accent-soft);fill-opacity:.55;stroke:var(--ink);stroke-width:1.5}
+.diag .chord{stroke:var(--accent);stroke-width:7;stroke-linecap:butt}
+.diag .piv{stroke:var(--gold);stroke-width:1.2;stroke-dasharray:3 3}
+.diag .lab{font-family:"IBM Plex Mono",monospace;font-size:13px;fill:var(--muted)}
+.stat b{font-family:"IBM Plex Mono",monospace;font-size:1.25rem;color:var(--ink);font-weight:600}
+.subnav{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 14px;padding:6px 20px;border-bottom:1px solid var(--rule);font-size:15px;line-height:1.5}
+.subnav .lbl{font-family:"IBM Plex Mono",monospace;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.subnav a{text-decoration:none;color:var(--muted);white-space:nowrap}
+.subnav a.here,.subnav a:hover{color:var(--accent)}
+.fam{width:100%;max-width:560px;display:block;margin:0 auto}
+.fam .leb{fill:var(--accent-soft)}
+.fam .seg path{stroke:var(--accent);fill:none;stroke-linecap:butt}
+.fam .frame{fill:none;stroke:var(--muted);stroke-width:1.5}
+.fam .zone{fill:none;stroke:var(--gold);stroke-width:1.5;stroke-dasharray:6 5}
+.status{border-left:3px solid var(--gold);background:var(--gold-soft);padding:14px 18px;border-radius:3px;font-size:1.02rem;line-height:1.55}
+.status b{color:var(--gold)}
+.sw{display:inline-block;width:18px;height:10px;vertical-align:-1px;margin-right:6px;border-radius:1px}
+</style>
+
+<style>
+.lsh{width:100%;max-width:440px;display:block;margin:0 auto}
+.lsh .grid{fill:var(--accent-soft);stroke:var(--muted);stroke-width:1}
+.lsh .band{fill:var(--surface);stroke:var(--ink);stroke-width:1.2}
+.lsh .row{stroke:var(--accent);stroke-width:1}
+.lsh .end{fill:var(--gold-soft);stroke:var(--gold);stroke-width:1.2}
+.lsh .lab{font-family:"IBM Plex Mono",monospace;font-size:12px;fill:var(--muted)}
+.lsh .frame{fill:none;stroke:var(--muted);stroke-width:1;stroke-dasharray:5 4}
+td.new{font-weight:600;color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <span class="brand">Square Packing Atlas</span>
+  <nav><a href="../index.html">Overview</a><a href="../explore.html">Explore</a><a href="../compare.html">Compare</a><a href="../bounds.html">Bounds</a><a href="../leaderboard.html">Leaderboard</a><a href="../proofs.html" class="here">Proofs &amp; results</a><a href="../problems.html">Open problems</a><a href="../sources.html">Sources</a></nav>
+</div>
+<div class="subnav"><span class="lbl">Results</span><a href="../s12/">s(11), s(12)</a><a href="../s13/">s(13)</a><a href="../s21/">s(21)</a><a href="../s32/">s(32)</a><a href="../s45/">s(45)</a><a href="../s60/">s(60)</a><a href="../k2m3/">s(k²−3)</a><a href="../k2m4/">s(k²−4)</a><a href="./" class="here">c*(k)</a></div>
+<div class="wrap">
+<header>
+  <span class="eyebrow">Discrete geometry · formal proof</span>
+  <h1>Short of a Square</h1>
+  <p class="lede">Remove <i>c</i> unit squares from a <span class="mono">k × k</span> grid. For small <i>c</i> the rest still
+  needs a square of side <i>k</i>; for larger <i>c</i>, tilting lets them squeeze into a smaller one. Write
+  <span class="mono">c*(k)</span> for the largest <i>c</i> with <span class="mono">s(k² − c) = k</span>. Every bound on this
+  page is an explicit packing of <span class="mono">k² − c</span> squares in a square of side less than <i>k</i>, for
+  every <i>k</i> in a range, checked by the Lean kernel.</p>
+  <p class="status"><b>Status.</b> All theorems below are proved in Lean 4 with Mathlib, from the plain definition of a
+  packing, using only the standard axioms (propext, Classical.choice, Quot.sound). Two of them are, as far as we know,
+  new bounds; the others formalize results of Kevin Fang and Sungjoon Ryu, one of them on a wider range than its source.
+  Not peer reviewed; the novelty check covers the jlevy/squares register and Ryu's preprint only.</p>
+  <div class="tags">
+    <span class="tag ok">kernel-checked in Lean, no hypothesis</span>
+    <span class="tag ok">standard axioms only</span>
+    <span class="tag open">not peer reviewed</span>
+    <a class="tag neutral" href="https://github.com/evand/square-packing/tree/main/certificates/k2-minus-c">Lean bundle on GitHub →</a>
+  </div>
+</header>
+
+<section id="results">
+  <div class="sechead"><span class="eyebrow">The theorems</span><h2>Upper bounds on c*(k)</h2></div>
+  <p>Each line is a Lean theorem <span class="mono">∀ k ≥ k₀, ∃ s &lt; k, Packs (k·k − c) s</span>, which gives
+  <span class="mono">c*(k) ≤ c − 1</span>. Highlighted rows are new.</p>
+  <div class="tablewrap"><table>
+    <tr><th>bound</th><th>for</th><th>Lean theorem · mathematics</th></tr>
+    <tr><td class="num">c*(n) ≤ n − 2</td><td class="num">n ≥ 15</td><td><span class="mono" style="font-size:.85em;overflow-wrap:anywhere">FangFinal.theorem1</span><br>Kevin Fang, after Arslanov–Mustafin–Shangitbayev</td></tr>
+    <tr><td class="num">+ p + 2q more squares</td><td class="num">16p + 21q ≤ n − 15</td><td><span class="mono" style="font-size:.85em;overflow-wrap:anywhere">FangFinal.theorem2</span><br>Fang</td></tr>
+    <tr><td class="num">c*(k) ≤ 8⌈√(k − 4)⌉ − 1</td><td class="num">k ≥ 6</td><td><span class="mono" style="font-size:.85em;overflow-wrap:anywhere">RyuBound.packs_sub_8sqrt</span><br>Ryu, Theorem 1.4</td></tr>
+    <tr><td class="num new">c*(k) ≤ 4⌈√(2k − 7)⌉ − 1</td><td class="num new">k ≥ 7</td><td><span class="mono" style="font-size:.85em;overflow-wrap:anywhere">RyuLayers.packs_sub_4sqrt2_layers</span><br>here: axis-filled band ends</td></tr>
+    <tr><td class="num new">c*(k) &lt; 18.9 k<sup>2/5</sup> + 35.7 k<sup>1/5</sup> + 122</td><td class="num new">k ≥ 3·10⁵</td><td><span class="mono" style="font-size:.85em;overflow-wrap:anywhere">RyuStairBound.packs_stair_k25</span><br>here, with Ryu's staircase ends</td></tr>
+    <tr><td class="num">c*(k) &lt; 20.668 k<sup>2/5</sup> + 0.623</td><td class="num">k ≥ 8·10⁶</td><td><span class="mono" style="font-size:.85em;overflow-wrap:anywhere">RyuStairBound.packs_ryu_thm12</span><br>Ryu, Theorem 1.2 (proved there for k ≥ 1.6·10⁷)</td></tr>
+  </table></div>
+  <p>Which is smallest where: Fang's for <span class="mono">15 ≤ k ≤ 39</span>; <span class="mono">4⌈√(2k − 7)⌉ − 1</span>
+  from 40 to about 7.4·10⁵ (it is below Ryu's <span class="mono">8⌈√(k − 4)⌉ − 1</span> at every <i>k</i> ≥ 7); then the
+  two-term <span class="mono">k<sup>2/5</sup></span> bound, which is below Ryu's Theorem 1.2 bound for every
+  <span class="mono">k ≥ 6.7·10⁶</span>. At small <i>k</i> the record packings of the register are better than any of
+  these formulas, and Ryu's tuned certificates are better at the three <i>k</i> where he computed them; his
+  <span class="mono">k<sup>3/8</sup></span> bounds (not formalized here) take over for very large <i>k</i>.</p>
+  <div class="tablewrap"><table>
+    <tr><th>k</th><th>Fang</th><th>8√ (Ryu)</th><th>4⌈√(2k−7)⌉ − 1</th><th>two-term k<sup>2/5</sup></th><th>Ryu Thm 1.2</th></tr>
+    <tr><td class="num">100</td><td class="num">90</td><td class="num">79</td><td class="num new">55</td><td></td><td></td></tr>
+    <tr><td class="num">10⁴</td><td class="num">9 048</td><td class="num">799</td><td class="num new">567</td><td></td><td></td></tr>
+    <tr><td class="num">10⁵</td><td class="num">90 476</td><td class="num">2 535</td><td class="num new">1 791</td><td></td><td></td></tr>
+    <tr><td class="num">10⁶</td><td class="num">904 762</td><td class="num">7 999</td><td class="num">5 659</td><td class="num new">5 435</td><td></td></tr>
+    <tr><td class="num">10⁷</td><td></td><td class="num">25 303</td><td class="num">17 891</td><td class="num new">12 943</td><td class="num">13 041</td></tr>
+    <tr><td class="num">10⁸</td><td></td><td class="num">79 999</td><td class="num">56 571</td><td class="num new">31 497</td><td class="num">32 757</td></tr>
+  </table></div>
+  <p class="footnote">Entries are the resulting bounds on <span class="mono">c*(k)</span>. Lower bounds are far smaller:
+  <span class="mono">c*(k) ≥ 3</span> for <i>k</i> ≥ 6, and Ryu's preprint claims <span class="mono">c*(k) → ∞</span>
+  (at least logarithmically).</p>
+</section>
+
+<section id="lshape">
+  <div class="sechead"><span class="eyebrow">The construction</span><h2>An L of tilted rows</h2></div>
+  <p>All the square-root and <span class="mono">k<sup>2/5</sup></span> bounds use Ryu's L-shaped packing (after
+  Erdős and Graham): an axis-parallel grid of <span class="mono">(k − b)²</span> squares, and two bands of rows of
+  <i>b</i> squares each, tilted just enough that a row is a little narrower than <i>b</i>. The whole fits in side
+  <span class="mono">k − b + w &lt; k</span>. Each row is tilted, so successive rows are spaced slightly more than 1
+  apart, which costs about <span class="mono">2L/b</span> along a band of length <i>L</i>: about
+  <span class="mono">4k/b</span> in all. The rest of the loss is at the four band ends, the triangles under the first
+  row and over the last.</p>
+  <figure>
+    <div class="figbox">
+    <svg class="lsh" viewBox="0 0 400 400" role="img" aria-label="An axis grid in the lower left, a tilted band along the right side and one along the top, with triangular end regions at both ends of each band">
+      <rect class="frame" x="10" y="10" width="380" height="380"/>
+      <rect class="grid" x="10" y="80" width="310" height="310"/>
+      <rect class="band" x="320" y="10" width="70" height="380"/>
+      <rect class="band" x="10" y="10" width="310" height="70"/>
+      <g class="row">
+        <line x1="320" y1="372" x2="390" y2="356"/><line x1="320" y1="352" x2="390" y2="336"/>
+        <line x1="320" y1="44" x2="390" y2="28"/><line x1="320" y1="64" x2="390" y2="48"/>
+        <line x1="26" y1="80" x2="42" y2="10"/><line x1="46" y1="80" x2="62" y2="10"/>
+        <line x1="290" y1="80" x2="306" y2="10"/>
+      </g>
+      <polygon class="end" points="320,390 390,390 390,372 320,388"/>
+      <polygon class="end" points="320,10 390,10 390,12 320,28"/>
+      <polygon class="end" points="10,80 26,80 12,10 10,10"/>
+      <polygon class="end" points="306,10 320,10 320,80 304,80"/>
+      <text class="lab" x="120" y="240">grid (k − b)²</text>
+      <text class="lab" x="326" y="210">band</text>
+      <text class="lab" x="140" y="50">band</text>
+    </svg>
+    </div>
+    <figcaption>Schematic (not to scale): the grid, the two bands of tilted rows, and the four end regions (gold).
+    The ends decide the constant.</figcaption>
+  </figure>
+  <div class="grid2">
+    <div class="card"><h3>Empty ends</h3><p>Each end wastes about <i>b</i>. Total ≈ <span class="mono">4b + 4k/b</span>,
+    best at <span class="mono">b ≈ √k</span>: Ryu's <span class="mono">8√k</span>.</p></div>
+    <div class="card"><h3>Axis-filled ends (new)</h3><p>About <span class="mono">b/2</span> axis-parallel squares fit
+    under the first row and over the last. Total ≈ <span class="mono">2b + 4k/b</span>, best at
+    <span class="mono">b ≈ √(2k)</span>: <span class="mono">4√2·√k ≈ 5.66√k</span>. With
+    <span class="mono">b = ⌈√(2k − 7)⌉</span> the four ends hold exactly <span class="mono">2b</span> squares.</p></div>
+    <div class="card"><h3>Staircase ends</h3><p>Columns at one tilt, axis layers under them that follow the rising
+    ceiling, and short rows at the wall (Ryu's §6, after Bui). End cost <span class="mono">O(b<sup>2/3</sup>)</span>;
+    with <span class="mono">b ≈ k<sup>3/5</sup></span> the exponent is <span class="mono">2/5</span>.</p></div>
+  </div>
+  <p>For the axis-filled ends, a search over every <i>b</i> and every axis layering of this construction finds nothing
+  better than <span class="mono">4⌈√(2k − 7)⌉ − 1</span> for <span class="mono">7 ≤ k ≤ 3·10⁵</span>. Better
+  packings at small <i>k</i> exist but come from search (de Winter's, for example), not from a formula.</p>
+</section>
+
+<section id="lean">
+  <div class="sechead"><span class="eyebrow">The proof</span><h2>What Lean checks</h2></div>
+  <ul>
+    <li><b>The band and its ends.</b> A band lifted by <span class="mono">y₀</span>, together with <i>any</i> packings of
+    the two end regions, packs the strip (Ryu's Lemma 5.1, <span class="mono">RyuEnds.band_ends</span>); the three parts
+    are separated by the rotated coordinate.</li>
+    <li><b>The staircase.</b> Columns, layers and wedge rows pack an end region when each piece fits under the ceiling
+    and the pieces are pairwise separated by one line (<span class="mono">RyuStair.staircase</span>). Our variant takes
+    the column tilt <span class="mono">tan(α/2) = (√2 + 1/v)/v</span> with <span class="mono">b ≈ v³</span>, lets each
+    layer run to the wall when it fits, and counts squares from the floors directly, with no area argument
+    (<span class="mono">EndP.count</span>). The end cost is at most <span class="mono">4.33 v² + 11 v + 30</span>
+    (<span class="mono">end_bound</span>); the leading <span class="mono">2√2 + 3/2</span> is Ryu's limit constant.</li>
+    <li><b>The count.</b> <span class="mono">k² − N</span> is the slack of the side, plus <span class="mono">(R − 1) tan θ</span>
+    per band, plus the four end costs (Ryu's waste identity, here an algebraic identity), which gives
+    <span class="mono">c*(k) &lt; 4k/b + 4(4.33 v² + 11 v + 30)</span> (<span class="mono">packs_stair</span>), and then
+    the closed forms in <span class="mono">k<sup>2/5</sup></span>.</li>
+    <li><b>Fang's theorem</b> is an induction over a gluing lemma (Arslanov–Mustafin–Shangitbayev's decomposition) with 18
+    exact piece certificates, each checked by <span class="mono">decide</span> in the kernel.</li>
+  </ul>
+<pre><code>certificates/k2-minus-c/verify.sh          # Ryu-line theorems, a few minutes
+certificates/k2-minus-c/verify.sh --fang   # also Fang's 18 pieces, ~20 min, ≤ 8 GB per job</code></pre>
+  <p class="footnote">Files: <span class="mono">lean/Sqpack/RyuBand, RyuBound, RyuFill, RyuEnds, RyuLayers, RyuStair,
+  RyuStairCount, RyuStairEnd, RyuStairBound, FangGlue, FangTheorem, FangFinal</span>. Numerical companions in
+  <span class="mono">search/ryu/</span>.</p>
+</section>
+
+<section id="credits">
+  <div class="sechead"><span class="eyebrow">Credits</span><h2>Whose mathematics</h2></div>
+  <ul>
+    <li><b>Sungjoon Ryu</b> (squarepacker), <i>k² − c upper bounds</i>, preprint v1.1 (jlevy/squares #471, #486): the L-shaped
+    family, the explicit square-root bound, the lifted rows and the waste identity, the staircase end and the
+    <span class="mono">k<sup>2/5</sup></span> and <span class="mono">k<sup>3/8</sup></span> theorems.</li>
+    <li><b>H. D. Bui</b>: tilted columns whose lower squares are replaced by axis layers, behind the staircase.
+    <b>Erdős and Graham</b> (1975): the band construction.</li>
+    <li><b>Kevin Fang</b>, <i>Packing n² − n + 1 unit squares in a square of side less than n, for every n ≥ 15</i>
+    (draft, jlevy/squares #603, registered as T-163), after <b>Arslanov, Mustafin and Shangitbayev</b> (2021); its pieces
+    are packings by Fang, de Winter, Ellsworth, Stead and Arslanov–Mustafin–Shangitbayev.</li>
+    <li>The axis-filled ends were suggested by a literature-reading agent of this repository; the formalization and the
+    new bounds are this repository's (Evan Daniel, with Claude), October 2026.</li>
+  </ul>
+</section>
+</div>
+</body>
+</html>
