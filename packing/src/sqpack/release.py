@@ -8881,8 +8881,10 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "merge of main 2ed0ea740 (#793, #796, #795), at link revision 5adbe808 with "
             "that main's nine candidate inputs swapped in: twice from this tree and once "
             "swapped, 69 files each, all byte-identical across the three, by the same "
-            "browser; both sides count 242 results. Retain v0.4.27, v0.1.11, v0.1.4 and "
-            "v0.2.7."
+            "browser; both sides count 242 results. After T-240's notes said previous_source "
+            "is the parent only at 268 and 303 (think-vm3m), at link revision be46a31a with "
+            "the same nine files swapped in: the same outcome. Retain v0.4.27, v0.1.11, "
+            "v0.1.4 and v0.2.7."
         ),
     ),
 )
