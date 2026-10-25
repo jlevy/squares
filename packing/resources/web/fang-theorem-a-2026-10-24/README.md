@@ -126,7 +126,10 @@ in it is exact, in integers and fractions.
   $42 \le k \le 702{,}000$ (below Daniel’s at 346,920, less $k = 10^5$, where Ryu’s
   certificate gives 1583). It is smaller than Ryu’s Theorem 1.4 at $k = 6$ and from 9, than
   his Theorem 1.3 at its best $b$ from 14, and than T-163 from 42; Ryu’s Theorem 1.2 is
-  smaller at every $k \ge 1.6 \cdot 10^7$. At every $n \le 324$ the case records already
+  smaller at every $k \ge 1.6 \cdot 10^7$. Daniel’s unregistered
+  $c^*(k) < 18.9k^{2/5} + 35.7k^{1/5} + 122$ ($k \ge 3 \cdot 10^5$) is first smaller at
+  735,988 and smaller at every $k$ from 736,595, with $k^{1/5}$ bracketed between rationals
+  until the comparison is decided. At every $n \le 324$ the case records already
   hold both bounds’ implications. Each comparison is decided one $k$ at a time and beyond
   by a tail lemma the receipt names.
 

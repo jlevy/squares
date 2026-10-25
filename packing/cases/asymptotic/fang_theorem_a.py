@@ -774,9 +774,11 @@ def check_certificates(ks: Iterable[int] = SHIPPED) -> tuple[Check, ...]:
 
 #: The note's comparison range with Daniel's bound (Section 7), and the end of the window
 #: in which Theorem A's strictly-least count is taken: below it Daniel's unregistered
-#: k^{2/5} bound is not smaller at any sampled k (`daniel_k25_crossover`).
+#: k^{2/5} bound is not smaller at any k (`daniel_k25_crossover`, which decides each k).
 COMPARE_LIMIT = 10**6
 LEAST_WINDOW = (42, 702_000)
+#: Where Daniel's unregistered c*(k) < 18.9 k^{2/5} + 35.7 k^{1/5} + 122 starts to hold.
+DANIEL_K25_FROM = 3 * 10**5
 #: Ryu's Theorem 1.6 values the register's k^{2/5} row records, by k.
 RYU_THEOREM_1_6 = {10**5: 1583, 10**6: 3972, 10**7: 10039, 38_250_000: 16988, 10**8: 24790}
 
@@ -829,23 +831,75 @@ def _iroot_ceil(n: int, exponent: int) -> int:
     return low
 
 
-def daniel_k25_crossover(step: int = 1000) -> dict[str, int | None]:
-    """Where Daniel's unregistered c*(k) < 18.9 k^{2/5} + 35.7 k^{1/5} + 122 (k >= 3*10^5)
-    falls below ceil(sqrt(32k)), sampled every ``step`` k with exact integer roots: the last
-    sampled k where it is surely not smaller, and the first where it surely is."""
-    last_not: int | None = None
-    first_surely: int | None = None
-    for k in range(3 * 10**5, 2 * 10**6, step):
-        two, one = _iroot_ceil(k * k, 5), _iroot_ceil(k, 5)
-        upper = Fraction(189 * two + 357 * one + 1220, 10)
-        lower = Fraction(189 * (two - 1) + 357 * (one - 1) + 1220, 10)
-        if first_surely is None and upper < theorem_a(k) - 1:
-            first_surely = k
-        if lower >= theorem_a(k) + 1:
+def _fifth_root_floor(n: int) -> int:
+    """The greatest p >= 0 with p^5 <= n: a binary64 estimate, then corrected exactly."""
+    p = int(n**0.2) if n < 10**300 else _iroot_ceil(n, 5)
+    while p > 0 and p**5 > n:
+        p -= 1
+    while (p + 1) ** 5 <= n:
+        p += 1
+    return p
+
+
+def daniel_k25_at_most(k: int, value: int) -> bool:
+    """Whether D(k) = 18.9 u^2 + 35.7 u + 122, u = k^{1/5}, is at most ``value``, exactly.
+
+    With u in [p/q, (p + 1)/q), p the integer fifth root of q^5 k, the sign of
+    10 q^2 (D - value) = 189 p^2 + 357 pq + (1220 - 10 value) q^2, which increases with p,
+    decides it once the bracket's two ends agree; q doubles until they do. It always ends:
+    unless k is a fifth power, when u = p/q exactly, u has degree 5 over the rationals and
+    is no root of the quadratic D(u) = value."""
+    q = 1024
+    while True:
+        target = q**5 * k
+        p = _fifth_root_floor(target)
+        constant = (1220 - 10 * value) * q * q
+        if 189 * p * p + 357 * p * q + constant > 0:
+            return False
+        if p**5 == target:
+            return True
+        if 189 * (p + 1) ** 2 + 357 * (p + 1) * q + constant <= 0:
+            return True
+        q *= 2
+
+
+def daniel_k25_tail_holds(k: int) -> bool:
+    """Whether Daniel's k^{2/5} bound stays smaller than ceil(sqrt(32k)) at every k' >= k.
+
+    g(k) = sqrt(32k) - D(k) has g'(k) k^{4/5} = 2 sqrt 2 v^3 - 7.56 v^2 - 7.14 with
+    v = k^{1/10}. From 3*10^5, v >= 7/2 (3.5^10 < 3*10^5); with 2 sqrt 2 > 2.828, the right
+    side is positive at 7/2 and increasing beyond it, since 3 (2.828)(7/2) > 15.12. So g
+    increases from 3*10^5, and D(k) <= isqrt(32k) <= sqrt(32k) at one such k holds at every
+    larger one, where then ceil(D) - 1 < ceil(sqrt(32k))."""
+    v0, a = Fraction(7, 2), Fraction(2828, 1000)
+    rising = (
+        v0**10 <= DANIEL_K25_FROM
+        and a * a < 8
+        and a * v0**3 - Fraction(756, 100) * v0**2 - Fraction(714, 100) > 0
+        and 3 * a * v0 > Fraction(1512, 100)
+    )
+    return rising and k >= DANIEL_K25_FROM and daniel_k25_at_most(k, isqrt(32 * k))
+
+
+def daniel_k25_crossover(last: int = COMPARE_LIMIT - 1) -> dict[str, Any]:
+    """Where Daniel's unregistered c*(k) < 18.9 k^{2/5} + 35.7 k^{1/5} + 122 (k >= 3*10^5),
+    read as the integer bound ceil(D(k)) - 1, is smaller than Theorem A's ceil(sqrt(32k)):
+    exactly when D(k) <= ceil(sqrt(32k)). Decided at every k from 3*10^5 to ``last``
+    (`daniel_k25_at_most`), and beyond ``last`` by `daniel_k25_tail_holds`."""
+    first, last_not, count = None, None, 0
+    for k in range(DANIEL_K25_FROM, last + 1):
+        if daniel_k25_at_most(k, theorem_a(k)):
+            count += 1
+            first = k if first is None else first
+        else:
             last_not = k
     return {
-        "last_sampled_k_not_smaller": last_not,
-        "first_sampled_k_surely_smaller": first_surely,
+        "k_range": [DANIEL_K25_FROM, last],
+        "smaller_at": count,
+        "first_k_where_smaller": first,
+        "last_k_where_not_smaller": last_not,
+        "smaller_at_every_k_from": None if last_not is None else last_not + 1,
+        "tail_from_next_k_holds": daniel_k25_tail_holds(last + 1),
     }
 
 
@@ -941,7 +995,7 @@ def comparisons(
             str(k): {"ryu": value, "A": theorem_a(k), "daniel": daniel(k)}
             for k, value in RYU_THEOREM_1_6.items()
         },
-        "daniel_k25_crossover": daniel_k25_crossover(),
+        "daniel_k25_crossover": daniel_k25_crossover(limit - 1),
         "case_records": case_records(),
     }
 

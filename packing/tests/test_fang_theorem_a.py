@@ -150,6 +150,22 @@ def test_the_retained_comparisons_are_what_the_code_computes() -> None:
     assert receipt["A_strictly_least_in_window"]["strictly_least"] == 346_919
 
 
+def test_the_k25_crossover_is_decided_exactly_at_its_edges() -> None:
+    """Daniel's unregistered k^{2/5} bound against ceil(sqrt(32k)), one k at a time in
+    integers (review A3 on #805): first smaller at 735,988, last not at 736,594, and at a
+    fifth power, where k^{1/5} is rational, D(32^5) = 20618 exactly."""
+    at_most, a = theorem.daniel_k25_at_most, theorem.theorem_a
+    assert at_most(32**5, 20618)
+    assert not at_most(32**5, 20617)
+    assert not at_most(735_987, a(735_987))
+    assert at_most(735_988, a(735_988))
+    assert not at_most(736_594, a(736_594))
+    assert all(at_most(k, a(k)) for k in range(736_595, 737_595))
+    assert theorem.daniel_k25_tail_holds(10**6)
+    assert not theorem.daniel_k25_tail_holds(299_999)
+    assert not theorem.daniel_k25_tail_holds(700_000)
+
+
 def test_the_daniel_tail_starts_at_100_and_not_before() -> None:
     """sqrt(2k) + sqrt(2k - 7) >= 28 first at k = 100 (review A1 on #801): the check
     decides the inequality it names, so it fails at 99 and at 70."""

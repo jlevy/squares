@@ -586,8 +586,8 @@ deficiency_upper_bounds:
       Theorem 1.6 values at 10^5, 10^6 and 10^7, his Theorem 1.2 from 1.6*10^7 and his
       k^{3/8} rows where they apply; and Daniel's unregistered k^{2/5} bound (think-pf37),
       first smaller at k = 735,988 and smaller at every k from 736,595, decided one k at a
-      time and beyond by a tail lemma in the 25 October review's receipts
-      (review/review-2026-10-25/outputs/comparisons.json in the 24 October packet).
+      time in integers to 10^6 and beyond by a tail lemma (receipts/comparisons.json in the
+      24 October packet), as the 25 October review's programs also found.
     note: >-
       Issue #797; TheSnakeFang/squarepack-certs db1ed62, theorem-a/, with the note v0.2
       (Zenodo 10.5281/zenodo.23624565) and v0.1 (10.5281/zenodo.23624412), both retained in
