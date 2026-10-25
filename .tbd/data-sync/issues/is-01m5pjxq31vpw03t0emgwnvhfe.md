@@ -5,7 +5,7 @@ title: "Import franciscouzo: 126 upper bounds at 330-997 (106 certificate rows) 
 kind: task
 status: in_progress
 priority: 2
-version: 8
+version: 9
 spec_path: docs/project/specs/active/plan-2026-10-24-rows-above-1024.md
 delegate: c-import-gn29-1024
 labels:
@@ -17,7 +17,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-24T09:12:30.049Z
-updated_at: 2026-10-25T01:32:34.005Z
+updated_at: 2026-10-25T03:02:07.326Z
 started_at: 2026-10-24T20:35:18.503Z
 ---
 
@@ -63,3 +63,5 @@ LEFT
 - #798 re-chains at 376, 377, 416, 458, 502, 504 whichever merges second.
 
 2026-10-25 coord-intake-1024: PR https://github.com/jlevy/squares/pull/800 (draft, intake, S2) at 41dd6da7e, CI green (40150051823, 40150051819). 122 rows (106 certificates, 16 recipes), #763's 13 recipes decided and recorded, 367 not recorded (think-zkxy), 690 settled by D6 (think-kzme). Senior review A by c-rev-800-1024 (think-fqs0) running. think-g2qy closes with the merge.
+
+2026-10-25 coord-intake-1024: #800 MERGED as 4089f9587 at 03:01:36Z after review A (issuecomment-6392173409) and its dispositions (issuecomment-6392414804, head 82295bce6, CI green 40155651193/40155651191). #802 re-chains 376/377/416/458/502/504 next. The #763 follow-up for this import (author questions in gn29/author-questions.md: scope of #763, the 18 near-identical counts, 377's credit, recipe expansions, 303/268/304) is posted after the deploy, with C2 from think-hx0e.

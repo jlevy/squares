@@ -3,9 +3,9 @@ type: is
 id: is-01m5ph9rqe5bpdf29txxgz7bce
 title: "Hold #763's 13 L-border recipes at 325-1024 (365 444 487 632 733 734 737 788 789 845 910 966 970) until the D2 maintained construction checker"
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 5
+version: 6
 delegate: c-import-gn29-1024
 labels:
   - result-import
@@ -14,8 +14,12 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-24T08:44:07.790Z
-updated_at: 2026-10-25T02:23:22.620Z
+updated_at: 2026-10-25T03:02:07.765Z
 started_at: 2026-10-24T20:35:19.037Z
+closed_at: 2026-10-25T03:02:07.764Z
+close_reason: "#763's 13 recipes decided by W7's construction checker and recorded as rows of couzo-issue763-2026-10-23-recipes in #800 (merged 4089f9587)."
+resolution: null
+duplicate_of: null
 ---
 The #763 import (think-ptkk, PR A) walks Couzo's 964ee2b claims to 1024 in report order (campaign/issue-intake/upper-bounds-issue763-20261024). Thirteen of the claims the walk records are tiling and L-border recipes certified_bounds.json states with no certificate file at their own count: 365 444 487 632 733 734 737 788 789 845 910 966 970 (909, the fourteenth, restates PR C's row and is not recorded). beyond_horizon_replay still holds the recipe class (RECIPE), so the walk holds them from rows (Walk upper-bounds-issue763-20261024, Held RECIPE) until a maintained construction checker decides a recipe exactly (D2, think-f2io; the W7 slice). Then: decide each recipe from its retained source certificate (the packet couzo-issue763-2026-10-23 retains every source certificate), write their rows, and drop the hold. Done when the 13 have rows or a recorded disposition.
 
