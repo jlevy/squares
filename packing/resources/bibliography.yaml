@@ -1919,7 +1919,7 @@ sources:
     venue: Zenodo
     dated: '2026-10-24'
     lineage: credits-project
-    credit: Fang after Ryu, Daniel
+    credit: Fang after Ryu, Daniel, Levy
     note: >-
       Kevin Fang, "Packing k^2 - ceil(sqrt(32k)) - 1 unit squares in a square of side less
       than k", draft v0.2 of 24 October 2026, DOI 10.5281/zenodo.23624565 (v0.1,
@@ -3981,7 +3981,7 @@ sources:
     year: 2026
     venue: GitHub
     dated: '2026-10-18'
-    credit: Daniel after Ryu
+    credit: Daniel after Ryu, Levy
     lineage: credits-project
     note: >-
       Evan Daniel's Lean proof of c*(k) <= 4 ceil(sqrt(2k - 7)) - 1 for every k >= 7,

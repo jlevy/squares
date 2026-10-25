@@ -918,9 +918,20 @@ def comparisons(
     }
 
 
+def _print_ceiling(printed: str) -> Fraction:
+    """A case's printed upper bound plus one unit in its last place: above the value it
+    prints however it was rounded, so a side below k there is below k. An integer print
+    is the exact value, as a grid's side is."""
+    whole, point, places = printed.partition(".")
+    if not point:
+        return Fraction(int(whole))
+    return Fraction(printed) + Fraction(1, 10 ** len(places))
+
+
 def case_records(statements: Sequence[tuple[str, Any, int]] = ()) -> dict[str, Any]:
     """Whether a statement would move a case: every n <= 324 it bounds below k, against
-    the case record's reported and verified upper bounds, read as decimals.
+    the case record's reported and verified upper bounds, each read as a ceiling: its
+    printed decimal plus one unit in the last place (`_print_ceiling`), never as s(n).
 
     A statement c*(k) <= v(k) gives s(n) < k for n <= k^2 - v(k) - 1. For each count of the
     corpus the least such k is found, and the case's two upper bounds must already lie
@@ -941,7 +952,7 @@ def case_records(statements: Sequence[tuple[str, Any, int]] = ()) -> dict[str, A
                 continue
             reached += 1
             if any(
-                not Fraction(str(case[lane]["value"])) < k
+                not _print_ceiling(str(case[lane]["value"])) < k
                 for lane in ("reported_upper_bound", "verified_upper_bound")
             ):
                 moved.append(n)
