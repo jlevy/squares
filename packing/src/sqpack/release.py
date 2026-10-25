@@ -8900,14 +8900,15 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         reason=(
             "The import of Couzo's 43f666c at or below 1024 and of #763's 13 recipes "
             "(think-gn29, think-g2qy): 122 beyond-horizon rows of the new source "
-            "couzo-43f666c-2026-10-24, 13 of couzo-issue763-2026-10-23, their supersessions, "
-            "and #763's request entries for them, against main 2ed0ea740 (#795): rendered at "
-            "link revision ab7cbfb0 into empty site directories, twice from this tree and "
-            "once with main's result-requests.yaml and source-coverage.yaml swapped in, "
-            "render_packing_methods writes all 43 files byte-identical across the three; "
-            "measured again after merging main 755ef426b (#794) at link revision 61602a47, "
-            "with the same result. No register entry is added. No PDF was printed; it prints "
-            "from that HTML. Retain v0.2.7."
+            "couzo-43f666c-2026-10-24, 13 of the new source couzo-issue763-2026-10-23-recipes "
+            "(#800's review A, A1), their supersessions, and #763's request entries for them, "
+            "against main 2ed0ea740 (#795): rendered at link revision ab7cbfb0 into empty site "
+            "directories, twice from this tree and once with main's result-requests.yaml and "
+            "source-coverage.yaml swapped in, render_packing_methods writes all 43 files "
+            "byte-identical across the three; measured again after merging main 755ef426b "
+            "(#794) at link revision 61602a47, and after review A's source split at link "
+            "revision 00f19d7f, with the same result. No register entry is added. No PDF was "
+            "printed; it prints from that HTML. Retain v0.2.7."
         ),
     ),
 )
