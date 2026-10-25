@@ -1,0 +1,62 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-25T05:22Z",
+  "git_scope": "Blobless clone of evand/square-packing fetched for the 25 October intake pass, and a sparse checkout of d99925d (authored and committed 2026-10-25T04:11:15Z, 'candidates: s(182) = 13.97091643621468 (polished and certified; distinct minimum from the register's 13.974090713)'), which GitHub's activity log records pushed at 2026-10-25T04:16:05Z in the push 3c335fe..d99925d, 19 seconds before issue #806 names it; the repository's head when fetched and again when this packet was written. Retained: the licence, the credits, and the eight files the commit adds under search/packer/candidates/ for s182-1024 (the certificate, its 80-digit KKT point, the binary64 input it was solved from, the solver's JSON report, the comparison with the source store's prior best, and the regularized display view and its report). The two exact checkers the certificate's header names are pinned against the identical copies the n183 packet retains. The rest of the tree is pinned by the commit; no source program was executed.",
+  "sources": [
+    {
+      "id": "evand-n182-2026-10-25",
+      "source_url": "https://github.com/evand/square-packing",
+      "source_ref": "d99925d1298262c4ddb81c95abbb6f45adca8d3d",
+      "source_commit": "d99925d1298262c4ddb81c95abbb6f45adca8d3d",
+      "committed_utc": "2026-10-25T04:11:15Z",
+      "git_tree": "3ebf085b96007b6719eb49420fafdd5e37bb9d2c",
+      "archived_path": "packing/resources/web/evand-n182-2026-10-25/source",
+      "subtree_manifest": "packing/resources/web/evand-n182-2026-10-25/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "LICENSE",
+        "CREDITS.md",
+        "search/exact/verify_cert.py",
+        "search/exact/verify_cert2.py",
+        "search/packer/candidates/s182-1024.cert",
+        "search/packer/candidates/s182-1024.exact.txt",
+        "search/packer/candidates/s182-1024.input.txt",
+        "search/packer/candidates/s182-1024.json",
+        "search/packer/candidates/s182-1024_prior.json",
+        "search/packer/candidates/s182-1024_regularized.cert",
+        "search/packer/candidates/s182-1024_regularized.json",
+        "search/packer/candidates/s182-1024_vs_prior.json"
+      ],
+      "subtree_file_count": 12,
+      "subtree_total_bytes": 182986,
+      "retained_file_count": 10,
+      "retained_total_bytes": 176484,
+      "compressed": [
+        "source/search/packer/candidates/s182-1024_vs_prior.json.gz"
+      ],
+      "pinned_only": [
+        {
+          "path": "search/exact/verify_cert.py",
+          "bytes": 3401,
+          "sha256": "3299ca0c0f02f7c221deeea69a9a85b5a90db6bc410b20727fdff211c92bed52",
+          "reason": "The source's two standalone exact checkers, which the certificate's header names; byte-identical to the copies the n183 packet retains at 3a9948c, and never executed here.",
+          "identical_to": "packing/resources/web/evand-n183-subgrid-2026-10-19/source/search/exact/verify_cert.py"
+        },
+        {
+          "path": "search/exact/verify_cert2.py",
+          "bytes": 3101,
+          "sha256": "55140a35d95d9eaa64a14c3b044641efbcda94ebfc3b12b7dec9fa52692e31d3",
+          "reason": "The source's two standalone exact checkers, which the certificate's header names; byte-identical to the copies the n183 packet retains at 3a9948c, and never executed here.",
+          "identical_to": "packing/resources/web/evand-n183-subgrid-2026-10-19/source/search/exact/verify_cert2.py"
+        }
+      ],
+      "license": "MIT, copyright (c) 2026 Evan Daniel (LICENSE retained, blob 52cf89d, unchanged since 8a8879a). CREDITS.md (blob 1d7dcb7) says the repository's work was 'Produced by Claude (Anthropic) in a single session under human direction'; the pinned commit carries a Co-Authored-By trailer naming Claude, and issue #806 discloses Claude assistance.",
+      "claims": [
+        "search/packer/candidates/s182-1024.cert states s(182) <= 13970916436214678735385725854133/10^30 = 13.970916436214678735385725854133; issue #806 (opened 2026-10-25T04:16:24Z by evand) reports it rounded up at 12 places, 13.970916436215, 3.17e-3 below the register's 13.974090713122, and prints the SHA-256 of it and of s182-1024_regularized.cert.",
+        "Its JSON report states S_input 13.970916436217552 and S_exact 13.970916436214678735246016689770216761387128199672189143915867972, the side of a Newton-converged KKT point at 80 digits, with 885 active contacts, 68 corner-corner contacts, 176 load-bearing squares, 6 free squares (rattlers) and 43 frozen variables. The issue calls it a local minimum of the side, strict modulo 43 exact flat motions, with no corner-corner MILP descent, as numerical evidence at 80 digits, not interval proofs.",
+        "The issue calls it 'a new packing (a different local minimum from the register's 13.974090713), found by our explore loop from a start at n = 211: the register's s(211) packing (Daniil Ostashev; also in Francisco Couzo's repository)', and asks that the start be credited.",
+        "The issue says the source's two exact checkers, search/exact/verify_cert.py (separating axes) and verify_cert2.py (polygon intersection), both print VALID, and that they share an author and the certificate format. s182-1024_regularized.cert is the same packing at the same side regularized for display, by the issue's word.",
+        "The issue quotes two Kaggle per-puzzle leaderboard entries that state a side and no packing: 13.9727613470647 for Prathamesh Chavan (2026-10-23 08:32 UTC) and 13.9709164362306 for Subramanya N (2026-10-24 18:41 UTC), 'the same local minimum, very likely', listed about four hours before the source's search found it, independently as far as the author knows. Those statements are the author's; no source program ran here."
+      ]
+    }
+  ]
+}

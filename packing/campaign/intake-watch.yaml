@@ -1533,3 +1533,33 @@ repositories:
       the fang-theorem-a-2026-10-24 packet pins db1ed62, retains theorem-a/ and the four
       root text files and both Zenodo records, and the asymptotic register records Theorem A
       as a reported row after Daniel's, so this read holds nothing back.
+  # The intake pass of 2026-10-25, the import of #806 (think-2lzo, c-import-806-1025): the
+  # 28 commits past the 659ee62 read.
+  - url: https://github.com/evand/square-packing
+    read_through: d99925d1298262c4ddb81c95abbb6f45adca8d3d
+    read_on: '2026-10-25'
+    note: >-
+      The 28 commits past the 659ee62 read, 93618db to d99925d, pushed in two pushes: 93618db
+      to 3c335fe (25 commits) at 2026-10-25T02:02:29Z, and 047fb57, ae60995 and d99925d at
+      04:16:05Z. d99925d adds search/packer/candidates/s182-1024.cert,
+      s(182) <= 13970916436214678735385725854133/10^30 = 13.970916436214678735385725854133,
+      3.17e-3 below T-174, the house, with its 80-digit KKT point (.exact.txt), binary64
+      input (.input.txt), solver report (.json), the comparison with the source store's prior
+      best (_prior.json, _vs_prior.json) and a regularized display view at the same side
+      (_regularized.cert and .json); #806 reports it, opened at 04:16:24Z, 19 seconds after
+      the push. The evand-n182-2026-10-25 packet pins d99925d and retains all eight files,
+      and T-243 registers the certificate (think-2lzo).
+      The other 27 hold no certificate and no published side. 93618db adds a reading note on
+      Nakajima's soft-to-rigid paper, whose one record is for cubes in a cube, s3(12) <=
+      2.9315185, outside this record. 9828f6a, fe49220, cd851c1, d28293f, 84bf71e, 3b3c4dc,
+      b904572, 4dded61, 852f002, ea08ee1, 3c335fe, 047fb57 and ae60995 change the packer
+      (fq rounded-square pressure flags, a converge-on-entry pass, the goal-driven explore
+      loop with drop, L-cut, add and random-disk stages, its scheduler, rewards and example
+      goal file); 25728ed deletes 149 superseded experiment files (about 19,500 lines) and
+      87ce8f3 rewrites the packer docs and freezes PACKER.md to archive/; d53d430 designs the
+      loop. cd86070, 66f5b73, 10fdd39, 46146ec, 88e6774, 629a33f, 63a577c, e7ba822, 99b0510
+      and 9e853d8 record pre-registered experiments (RS1 to RS3, RQ1, P5T, the converge
+      backlog) in PACKER.md, CLAIMS.md, TODO.md and Completed.md: their store-best gains lie
+      above 324 (40 counts at 325 to 575, 96 at 325 to 1000 with none at or below 324, and 2
+      above 576), and the source keeps their values private, so none is a report. Nothing
+      else to import.

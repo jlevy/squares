@@ -1,0 +1,19 @@
+{
+  "format": "intake-ledger-verdicts-v1",
+  "read_at_main": "bb756e1935b4d6280bb41877e8c829a8e4c0e9e3",
+  "read_on": "2026-10-25",
+  "counts": [
+    {
+      "n": 182,
+      "start": [{"label":"record T-174","holders":"Francisco Couzo, improved by Evan Daniel, PingYou Ltd","side":"13.974090713122","exact":true}],
+      "steps": [{"report":"#806","kind":"issue","reported_at":"2026-10-25T04:16:24Z","side":"13.970916436215","exact":true,"verdict":"recorded","reason":"below","decided_against":["record T-174"],"difference":"below by 3.17e-03","first_committed":"2026-10-25T04:11:15Z","measured":"no symmetry pairs it one to one by nearest centres; the optimal assignment, best under the identity, moves 44 squares beyond 0.1 and 79 beyond 1e-2 (largest 0.813), turns 74 squares, reverses 16 tilts beyond a degree and shares no tilt angle within 1e-4 degrees; against the source's own binary64 input, one to one, none beyond 1e-6 (largest 2.55e-7)","packing":{"kind":"new packing","continues":"the register's s(211) packing, T-188: Daniil Ostashev's design as Francisco Couzo continued it at 487b058, by an L-cut of 29 squares, as the issue states"}}],
+      "best_now": [{"label":"#806","holders":"Evan Daniel","side":"13.970916436215","exact":true}],
+      "publication_dependent": []
+    }
+  ],
+  "summary": {"counts":1,"claims":1,"recorded_new":1,"recorded_new_continuing":1,"recorded_refinement":0,"recorded_unclassified":0,"recorded_by_exception":0,"not_recorded":0,"undecided":0},
+  "cross_check": [],
+  "reports": [{"report":"#806","url":"https://github.com/jlevy/squares/issues/806","kind":"issue","holders":"Evan Daniel","reported_at":"2026-10-25T04:16:24Z","bead":"think-2lzo","counts":[182],"recorded":[182],"recorded_new":[182],"recorded_refinement":[],"recorded_unclassified":[],"recorded_by_exception":[],"not_recorded":[],"undecided":[]}],
+  "owner_decisions": {"exact_ties":[],"first_commit_before_report":[],"undecided":[],"publication_dependent":[],"unknown_times":[],"refinement_chains":[],"key_reason_candidates":[],"measured_identity":[{"n":182,"report":"#806","verdict":"recorded","source_says":"a new packing seeded from the register's s(211) packing, T-188: Daniil Ostashev's design as Francisco Couzo continued it at 487b058, by an L-cut of 29 squares, as the issue states","against":"T-174","finding":"no symmetry pairs it one to one by nearest centres; the optimal assignment, best under the identity, moves 44 squares beyond 0.1 and 79 beyond 1e-2 (largest 0.813), turns 74 squares, reverses 16 tilts beyond a degree and shares no tilt angle within 1e-4 degrees; against the source's own binary64 input, one to one, none beyond 1e-6 (largest 2.55e-7)","source":"packing/resources/web/evand-n182-2026-10-25/measure/identity.json"}]},
+  "other_items": []
+}

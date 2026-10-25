@@ -24006,3 +24006,56 @@ issues:
       The twelve rows are recorded in report order with their replay, 372 and 412 have their
       disposition with 43f666c's rows there on main (#800, think-gn29), and the reply on main says
       so; nothing the author asked for is queued.
+  - number: 806
+    title: 's(182) ≤ 13.970916436215: registration request'
+    author: evand
+    opened: '2026-10-25'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Evan Daniel reports s(182) <= 13.970916436215, the exact rational side
+      13970916436214678735385725854133/10^30 = 13.970916436214678735385725854133 of
+      search/packer/candidates/s182-1024.cert at evand/square-packing d99925d, rounded up at
+      12 places: 3.17e-3 below T-174, the house at 182 (PingYou Ltd's certificate of
+      Francisco Couzo's packing), and below every report there. The source calls it a new
+      packing, a different local minimum from the register's, found by its explore loop
+      from an L-cut of 29 squares of the register's s(211) packing (T-188: Daniil Ostashev's
+      design as Couzo continued it) and a local search, and claims the upper bound, with KKT
+      and local-minimum statements as numerical evidence. The commit d99925d was pushed at
+      2026-10-25T04:16:05Z, 19 seconds before the issue. The issue quotes two Kaggle
+      per-puzzle side-only entries, Prathamesh Chavan's 13.9727613470647 (23 October) and
+      Subramanya N's 13.9709164362306 (24 October, 18:41 UTC), neither with a packing, so
+      neither is a report; the second is 1.59e-11 above the certificate's side. Triaged on 25
+      October 2026 and imported the same day (think-2lzo): the evand-n182-2026-10-25 packet
+      retains the eight files of the s182-1024 set at d99925d under the source's MIT licence,
+      the two digests the issue prints are theirs, the side is the certificate's header and
+      rounds up to the issue's print, both maintained exact routes accept it and refuse its
+      gross and sharp controls, and the ledger of 25 October for the issue
+      (upper-bounds-issue806-20261025) records it, a new packing. Registered as T-243 at
+      V0/C0; measured pose by pose, no symmetry pairs it one to one with the house's packing
+      (44 squares beyond a tenth under the best assignment), another arrangement. The stage 4
+      review runs in think-meci. Claude assistance disclosed.
+    read_through: '2026-10-25T04:16:24Z'
+    results:
+    - key: n182
+      claim: >-
+        s(182) <= 13970916436214678735385725854133/10^30 =
+        13.970916436214678735385725854133, the side of s182-1024.cert (SHA-256
+        9e12e0a4...fe97) at d99925d, by a packing the source calls new, found from the
+        register's s(211) packing by an L-cut and local search, not a refinement of the
+        packing at 182.
+      source: body
+      bead: think-2lzo
+      register:
+      - T-243
+      evidence:
+      - E-evand-n182-certificate-report
+    beads:
+    - think-2lzo
+    - think-meci
+    answer_bead: think-2lzo
+    replies: []
+    close_when: >-
+      The result is registered, reviewed and adopted at 182 with its drawing regularized, and
+      the reply on main says so; nothing the author asked for is queued.

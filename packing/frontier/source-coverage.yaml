@@ -11439,6 +11439,33 @@ sources:
     identity measurements support this (measure/identity-nNNN.json), except at 376, where
     the packing lies nearer 43f666c's and the author is asked. Claude assistance disclosed.
   claims_record: resources/web/amundsk-issue798-2026-10-24/acquisition/beyond-horizon-claims.json
+- id: evand-n182-2026-10-25
+  title: Evan Daniel's new packing at 182, at d99925d, issue 806
+  role: source-repository
+  url: https://github.com/evand/square-packing/tree/d99925d1298262c4ddb81c95abbb6f45adca8d3d/search/packer/candidates
+  local: resources/web/evand-n182-2026-10-25/
+  source_key: '[Daniel n182 2026-10-25]'
+  scope:
+    n_values: [182]
+  reviewed: '2026-10-25'
+  source_date: '2026-10-25'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/evand-n182-2026-10-25/acquisition/claims.json
+  evidence:
+  - E-evand-n182-certificate-report
+  notes: >-
+    The certificate at 182 that d99925d adds under search/packer/candidates/, committed on
+    25 October 2026 at 04:11:15Z and pushed at 04:16:05Z, 19 seconds before issue 806
+    reported it, retained as the source wrote it with the source's KKT point, binary64
+    input, JSON report, comparison files and regularized display view, and admitted at its
+    exact side. T-243 records it at V0/C0, pending stage 4; all 3 native jobs have full
+    outcomes, and the packet's sharp controls meet its 5e-21 margins on both routes. The
+    ledger of 25 October for this import (campaign/issue-intake/upper-bounds-issue806-20261025)
+    records it 3.17e-03 below T-174, a new packing. No selected override is created at this
+    source-only stage; the case at 182 is unchanged.
 selected_overrides:
 - n: 29
   source_id: pingyou-pr622-certificate-2026-10-15

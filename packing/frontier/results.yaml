@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:ResultsRegister/v1
   schema: results.schema.yaml
   status: enforced
-last_reviewed: '2026-10-24'
+last_reviewed: '2026-10-25'
 results:
   - id: T-001
     kind: lower-bound
@@ -34268,6 +34268,161 @@ results:
           moved: 0
           max_move: 4.6e-4
           max_turn_deg: 0.019
+
+  - id: T-243
+    kind: upper-bound
+    registered: '2026-10-25'
+    landed: '2026-10-25'
+    headline: >-
+      Daniel's new arrangement at 182, 3.17e-3 below the house
+    claim: >-
+      One complete rational source certificate reports a finite upper-bound improvement at
+      the exact side it states: s(182) <= 13.970916436214678735385725854133, 3.17e-3 below
+      T-174, the case's house best packing, and below every report at 182. Complete native
+      feasibility outcomes are retained separately; the selected standing case is unchanged
+      pending independent review and record review.
+
+      It is search/packer/candidates/s182-1024.cert in Evan Daniel's watched repository
+      (https://github.com/evand/square-packing), committed on 25 October 2026 at 04:11:15Z
+      and pushed at 04:16:05Z, 19 seconds before issue 806 reported it as 13.970916436215,
+      its side rounded up at 12 places.
+
+      The certificate's JSON report states S_input 13.970916436217552 and S_exact
+      13.97091643621467873524…, the side of a Newton-converged KKT point at 80 digits, and
+      the issue reports that the source's two exact checkers, verify_cert.py and
+      verify_cert2.py, both print VALID; the certificate's header names verify_cert.py,
+      byte-identical to the copy the n183 packet retains. The issue states a local minimum of
+      the side, strict modulo 43 exact flat motions, with 68 corner-corner contacts, 6
+      rattlers and no corner-corner MILP descent, as numerical evidence at 80 digits, not
+      interval proofs. Those statements are the author's; no source program ran here. From
+      the two sides it states, the certificate's side lies above S_exact by about 1.40e-19,
+      a relative padding of 1e-20.
+
+      Credit Evan Daniel (https://github.com/evand/square-packing), who reports a new
+      packing, "a different local minimum from the register's 13.974090713", found by his
+      explore loop from a start at 211, and asks that the start be credited: "the register's
+      s(211) packing (Daniil Ostashev; also in Francisco Couzo's repository)". That packing
+      is T-188's, Daniil Ostashev's design as Francisco Couzo continued and certified it.
+
+      The issue says one L-cut job removed a strip of 29 squares, a row and a column along
+      two walls, from it and relaxed the rest to 182 squares at 13.971254466, and a local
+      search took that to this side. That lineage is the author's statement; which copy of
+      the 211 packing the source's store held is asked of the author. Measured here, the
+      certificate is another arrangement than T-174's packing.
+
+      Two Kaggle per-puzzle leaderboard entries the issue quotes state a side and no
+      packing, so neither is a report: Subramanya N's 13.9709164362306 of 24 October, 1.59e-11
+      above this side, which the issue calls very likely the same local minimum, and
+      Prathamesh Chavan's 13.9727613470647 of 23 October. The source's credits say its work
+      was produced by Claude (Anthropic) under human direction, and the commit carries a
+      Co-Authored-By trailer naming Claude.
+    scope: {n_values: [182]}
+    verification: V0
+    confirmation: C0
+    significance:
+      score: 3
+      rationale: >-
+        Draft, from the stage 1 triage (think-2lzo): a new arrangement at 182, 3.17e-03
+        below T-174, the house, and every report there. No symmetry pairs it one to one with
+        the house's packing by nearest centres, the best assignment moves 44 squares beyond a
+        tenth and 79 beyond a hundredth, and no tilt angle is shared, as T-240's 4.45e-03 and
+        2.78e-03 (S3) and T-162's 2.02e-03 to 1.42e-02 (S3) are. T-098 and T-174 refine one
+        packing at 182, Francisco Couzo's of September (T-056); this is the first other
+        arrangement the register holds there. No lower bound or optimum.
+      scored: '2026-10-25'
+      by: >-
+        the stage 1 triage of 25 October (c-triage-2lzo-1025, think-2lzo) and the records
+        lane of think-2lzo
+    novelty: previously-published
+    attribution:
+      source_keys: ['[Daniel n182 2026-10-25]']
+      published: '2026-10-25'
+    evidence:
+      - E-evand-n182-certificate-report
+    artifacts:
+      - packing/resources/web/evand-n182-2026-10-25/README.md
+      - packing/resources/web/evand-n182-2026-10-25/acquisition/claims.json
+      - packing/resources/web/evand-n182-2026-10-25/source/search/packer/candidates/s182-1024.cert
+      - packing/resources/web/evand-n182-2026-10-25/receipts/exact-certification.json.xz
+      - packing/resources/web/evand-n182-2026-10-25/receipts/sharp-controls.json
+      - packing/resources/web/evand-n182-2026-10-25/measure/identity.json
+      - packing/campaign/issue-intake/upper-bounds-issue806-20261025/README.md
+      - packing/devtools/upper_bound_reports.py
+    controls:
+      - packing/tests/test_upper_bound_reports.py
+      - packing/tests/test_upper_bound_reports_806.py
+      - packing/resources/web/evand-n182-2026-10-25/receipts/sharp-controls.json
+    notes: >-
+      A separate complete repository replay is retained for n = 182: 1 positive and 2
+      duplicate-square and outside-container controls passed their required outcomes on both
+      routes, 98826 pair decisions; summed over the 3 jobs, the receipt records 11.53 route
+      CPU seconds and 11.7 job wall seconds, the longest job 4.15 seconds. Every wall is
+      cleared by at least exactly 5e-21 and every pair by at least 9.99e-21.
+
+      Those margins are below the binary64 spacing of the coordinates, so the packet's sharp
+      controls (receipts/sharp-controls.json) lowered the side by the least far-wall
+      clearance, closed the least-gap pair by its gap and moved every square toward the
+      nearer near wall by its least clearance: both routes accepted each at exact contact,
+      margin 0, and refused each 1e-30 past it. They refused one square enlarged to its pair
+      and one to its wall at contact for its shape alone and 1e-30 past it for the overlap or
+      the wall as well, and refused a duplicated square.
+
+      In the packet's frozen comparison (acquisition/claims.json, read from main on 25
+      October 2026), at n = 182 the certificate is below the case's ceiling (PingYou Ltd, of
+      Francisco Couzo's packing as Evan Daniel improved it, T-174), T-098 (#375), Couzo's
+      certificate of #476 and #593 by 3.17e-03, and below T-056 by 3.17e-03 at its print.
+      It is the smallest report at 182. The ledger of 25 October for this import
+      (campaign/issue-intake/upper-bounds-issue806-20261025) records it, a new packing,
+      dated by the issue; the push of the certificate 19 seconds before it is the same
+      author's publication of the same file, and nothing reached 182 between them.
+
+      Measured pose by pose (measure/identity.json in the packet; a measurement, which
+      decides nothing), no symmetry pairs it one to one with T-174's packing by nearest
+      centres; the optimal assignment, best under the identity, moves 44 of 182 squares
+      beyond a tenth and 79 beyond a hundredth (largest 0.813), turns 74 squares, pairs 16
+      tilted squares with squares tilted the other way, and shares no tilt angle within 1e-4
+      degrees. It has 68 tilted squares, all turned one way, against T-174's 59. T-098's
+      packing and the house witness measure the same. Against the source's binary64 input
+      it is one to one under the identity, none beyond 1e-6 (largest 2.55e-7).
+
+      The source's s182-1024_regularized.cert is a display view at the same side, one to one
+      with the certificate under the identity: it moves 49 squares, 5 beyond a tenth
+      (largest 0.381). It proves no other bound and is not registered; the adoption's
+      regularization may offer it to the selection as a candidate drawing.
+
+      The source's own checkers were not run here. The two maintained routes, the sqpack
+      rational witness verifier and the independent rational corner checker, share
+      certificate parsing, half-angle conversion, Fraction arithmetic and the separating-axis
+      method, and read the certificate through the evand-cert adapter, whose line filter and
+      corner construction are transcribed from Evan Daniel's checkers. No two independent
+      methods, human oversight or optimality is claimed.
+    next_rung: >-
+      Independently review the retained replay and the certificate (stage 4): a clean-room
+      exact checker, the identity against T-174 and the lineage the issue states from
+      T-188's packing at 211, a mapped review whose acceptance would raise both rungs. Then
+      adopt it at 182 under the house rule, with both strong generators' regularization of
+      the new house in the same change.
+    activity:
+      state: in-analysis
+      what: >-
+        The stage 4 mathematical review of this certificate, in a lane of its own sharing no
+        context with the records lane.
+      since: '2026-10-25'
+      link: think-meci
+    unfinished_confirmations:
+      - what: >-
+          The stage 4 review: a clean-room exact checker of the certificate with sharp
+          controls, the identity against T-174 and the lineage against T-188's packing at 211,
+          mapped as an adversarial review
+        rung: C3
+        link: think-meci
+        estimated_cost:
+          cpu_hours: 0.02
+          cpu_hours_high: 0.04
+          basis: >-
+            The stage 1 triage's price: 1 to 2 CPU-minutes of programs, as the T-241 and
+            T-242 review used about 140 CPU-seconds for three certificates at 268 to 304
+          priced: '2026-10-25'
 
 # Generated by python -m devtools.regularized_drawings from the regularized layer's
 # index (packing/atlas/known-best/regularized/index.json); do not edit by hand.
