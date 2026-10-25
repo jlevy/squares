@@ -1,0 +1,337 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/798",
+  "author": "Amund Kristiansen",
+  "source_key": "[Kristiansen issue 798 2026-10-24]",
+  "report_evidence": "E-amundsk-798-beyond-horizon-report",
+  "receipt_format": "amundsk-798-exact-replay-v1",
+  "witness_prefix": "W-amundsk-798-n",
+  "claim_limitations": "Complete c9be7b7 rational centre/half-angle dilation certificate in Evan Daniel's format, centres in [0, S]^2, read exactly from the retained source file. Finite construction feasibility only; no KKT, local minimum, rigidity, novelty, priority or global optimality claim.",
+  "read_on": "2026-10-24",
+  "read_at_main": "2ed0ea7409b0ea21c47881f8874ce92a9d2011e8",
+  "certificates": [
+    {
+      "n": 334,
+      "path": "s334_amund.cert",
+      "format": "evand-cert",
+      "offered": "18.786944251907",
+      "first_committed": "2026-10-24T19:01:54Z"
+    },
+    {
+      "n": 338,
+      "path": "s338_amund.cert",
+      "format": "evand-cert",
+      "offered": "18.887926955871",
+      "first_committed": "2026-10-24T19:01:54Z"
+    },
+    {
+      "n": 343,
+      "path": "s343_amund.cert",
+      "format": "evand-cert",
+      "offered": "18.976291436857",
+      "first_committed": "2026-10-24T19:01:54Z"
+    },
+    {
+      "n": 372,
+      "path": "s372_amund.cert",
+      "format": "evand-cert",
+      "offered": "19.806121548598",
+      "first_committed": "2026-10-24T19:01:54Z"
+    },
+    {
+      "n": 376,
+      "path": "s376_amund.cert",
+      "format": "evand-cert",
+      "offered": "19.884256884304",
+      "first_committed": "2026-10-24T19:01:54Z"
+    },
+    {
+      "n": 377,
+      "path": "s377_amund.cert",
+      "format": "evand-cert",
+      "offered": "19.906977592561",
+      "first_committed": "2026-10-24T19:01:54Z"
+    },
+    {
+      "n": 379,
+      "path": "s379_amund.cert",
+      "format": "evand-cert",
+      "offered": "19.950579117727",
+      "first_committed": "2026-10-24T19:01:54Z"
+    },
+    {
+      "n": 382,
+      "path": "s382_amund.cert",
+      "format": "evand-cert",
+      "offered": "19.987567257068",
+      "first_committed": "2026-10-24T19:01:54Z"
+    },
+    {
+      "n": 412,
+      "path": "s412_amund.cert",
+      "format": "evand-cert",
+      "offered": "20.822875656790",
+      "first_committed": "2026-10-24T19:01:54Z"
+    },
+    {
+      "n": 416,
+      "path": "s416_amund.cert",
+      "format": "evand-cert",
+      "offered": "20.889554050378",
+      "first_committed": "2026-10-24T19:01:54Z"
+    },
+    {
+      "n": 457,
+      "path": "s457_amund.cert",
+      "format": "evand-cert",
+      "offered": "21.887025665808",
+      "first_committed": "2026-10-24T19:01:54Z"
+    },
+    {
+      "n": 458,
+      "path": "s458_amund.cert",
+      "format": "evand-cert",
+      "offered": "21.888719382533",
+      "first_committed": "2026-10-24T19:01:54Z"
+    },
+    {
+      "n": 502,
+      "path": "s502_amund.cert",
+      "format": "evand-cert",
+      "offered": "22.891715605670",
+      "first_committed": "2026-10-24T19:01:54Z"
+    },
+    {
+      "n": 504,
+      "path": "s504_amund.cert",
+      "format": "evand-cert",
+      "offered": "22.921326029542",
+      "first_committed": "2026-10-24T19:01:54Z"
+    }
+  ],
+  "requested": [
+    334,
+    338,
+    343,
+    376,
+    377,
+    379,
+    382,
+    416,
+    457,
+    458,
+    502,
+    504
+  ],
+  "replayed": [
+    334,
+    338,
+    343,
+    376,
+    377,
+    379,
+    382,
+    416,
+    457,
+    458,
+    502,
+    504
+  ],
+  "houses": [],
+  "pending": [
+    {
+      "n": 334,
+      "report": "couzo-issue763-2026-10-23",
+      "url": "packing/frontier/source-coverage.yaml",
+      "holders": "Francisco Couzo, after Kirill Tymchishin",
+      "printed": "18.795693769192",
+      "rounding": "up"
+    },
+    {
+      "n": 338,
+      "report": "alexchilton-fault-line-2026-10-23",
+      "url": "packing/frontier/source-coverage.yaml",
+      "holders": "alexchilton (Kaggle notebook)",
+      "printed": "18.893658115438",
+      "rounding": "up"
+    },
+    {
+      "n": 343,
+      "report": "couzo-issue763-2026-10-23",
+      "url": "packing/frontier/source-coverage.yaml",
+      "holders": "Francisco Couzo",
+      "printed": "18.977171584758",
+      "rounding": "up"
+    },
+    {
+      "n": 372,
+      "report": "couzo-issue763-2026-10-23",
+      "url": "packing/frontier/source-coverage.yaml",
+      "holders": "Francisco Couzo, after Vladislav Lavrentev",
+      "printed": "19.806121988461",
+      "rounding": "up"
+    },
+    {
+      "n": 372,
+      "report": "franciscouzo/square-packing@43f666c",
+      "url": "https://github.com/franciscouzo/square-packing/blob/43f666c23933fbc5cc418fa4e851218268fed0ed/certificates/best/n372.cert",
+      "holders": "Francisco Couzo (pushed 2026-10-24T06:10:44Z; not yet imported, think-gn29)",
+      "printed": "19.806121548578",
+      "rounding": "up"
+    },
+    {
+      "n": 376,
+      "report": "tymchishin-22-3662-2026-10-23",
+      "url": "packing/frontier/source-coverage.yaml",
+      "holders": "Kirill Tymchishin (Kaggle notebook)",
+      "printed": "19.897064162577",
+      "rounding": "up"
+    },
+    {
+      "n": 376,
+      "report": "franciscouzo/square-packing@43f666c",
+      "url": "https://github.com/franciscouzo/square-packing/blob/43f666c23933fbc5cc418fa4e851218268fed0ed/certificates/best/n376.cert",
+      "holders": "Francisco Couzo (pushed 2026-10-24T06:10:44Z; not yet imported, think-gn29)",
+      "printed": "19.890228421694",
+      "rounding": "up"
+    },
+    {
+      "n": 377,
+      "report": "kyleluecke-inos-2026-10-23",
+      "url": "packing/frontier/source-coverage.yaml",
+      "holders": "kyleluecke (Kaggle notebook)",
+      "printed": "19.909958295508",
+      "rounding": "up"
+    },
+    {
+      "n": 377,
+      "report": "franciscouzo/square-packing@43f666c",
+      "url": "https://github.com/franciscouzo/square-packing/blob/43f666c23933fbc5cc418fa4e851218268fed0ed/certificates/best/n377.cert",
+      "holders": "Francisco Couzo (pushed 2026-10-24T06:10:44Z; not yet imported, think-gn29)",
+      "printed": "19.909958295503",
+      "rounding": "up"
+    },
+    {
+      "n": 379,
+      "report": "couzo-964ee2b-2026-10-23",
+      "url": "packing/frontier/source-coverage.yaml",
+      "holders": "Francisco Couzo",
+      "printed": "19.950889681485",
+      "rounding": "up"
+    },
+    {
+      "n": 382,
+      "report": "couzo-issue670-2026-10-17",
+      "url": "packing/frontier/source-coverage.yaml",
+      "holders": "Francisco Couzo, after Kevin Fang",
+      "printed": "19.987621153966",
+      "rounding": "up"
+    },
+    {
+      "n": 412,
+      "report": "couzo-issue763-2026-10-23",
+      "url": "packing/frontier/source-coverage.yaml",
+      "holders": "Francisco Couzo",
+      "printed": "20.822878556795",
+      "rounding": "up"
+    },
+    {
+      "n": 412,
+      "report": "franciscouzo/square-packing@43f666c",
+      "url": "https://github.com/franciscouzo/square-packing/blob/43f666c23933fbc5cc418fa4e851218268fed0ed/certificates/best/n412.cert",
+      "holders": "Francisco Couzo (pushed 2026-10-24T06:10:44Z; not yet imported, think-gn29)",
+      "printed": "20.822875655538",
+      "rounding": "up"
+    },
+    {
+      "n": 416,
+      "report": "couzo-issue763-2026-10-23",
+      "url": "packing/frontier/source-coverage.yaml",
+      "holders": "Francisco Couzo, after Vladislav Lavrentev",
+      "printed": "20.889947557884",
+      "rounding": "up"
+    },
+    {
+      "n": 416,
+      "report": "franciscouzo/square-packing@43f666c",
+      "url": "https://github.com/franciscouzo/square-packing/blob/43f666c23933fbc5cc418fa4e851218268fed0ed/certificates/best/n416.cert",
+      "holders": "Francisco Couzo (pushed 2026-10-24T06:10:44Z; not yet imported, think-gn29)",
+      "printed": "20.889675804154",
+      "rounding": "up"
+    },
+    {
+      "n": 457,
+      "report": "couzo-issue763-2026-10-23",
+      "url": "packing/frontier/source-coverage.yaml",
+      "holders": "Francisco Couzo, after Vladislav Lavrentev",
+      "printed": "21.887038105268",
+      "rounding": "up"
+    },
+    {
+      "n": 458,
+      "report": "couzo-issue763-2026-10-23",
+      "url": "packing/frontier/source-coverage.yaml",
+      "holders": "Francisco Couzo, after Vladislav Lavrentev",
+      "printed": "21.889913759628",
+      "rounding": "up"
+    },
+    {
+      "n": 458,
+      "report": "franciscouzo/square-packing@43f666c",
+      "url": "https://github.com/franciscouzo/square-packing/blob/43f666c23933fbc5cc418fa4e851218268fed0ed/certificates/best/n458.cert",
+      "holders": "Francisco Couzo (pushed 2026-10-24T06:10:44Z; not yet imported, think-gn29)",
+      "printed": "21.889909897514",
+      "rounding": "up"
+    },
+    {
+      "n": 502,
+      "report": "couzo-issue763-2026-10-23",
+      "url": "packing/frontier/source-coverage.yaml",
+      "holders": "Francisco Couzo, after Vladislav Lavrentev",
+      "printed": "22.892369983241",
+      "rounding": "up"
+    },
+    {
+      "n": 502,
+      "report": "franciscouzo/square-packing@43f666c",
+      "url": "https://github.com/franciscouzo/square-packing/blob/43f666c23933fbc5cc418fa4e851218268fed0ed/certificates/best/n502.cert",
+      "holders": "Francisco Couzo (pushed 2026-10-24T06:10:44Z; not yet imported, think-gn29)",
+      "printed": "22.892030646456",
+      "rounding": "up"
+    },
+    {
+      "n": 504,
+      "report": "alexchilton-fault-line-2026-10-23",
+      "url": "packing/frontier/source-coverage.yaml",
+      "holders": "alexchilton (Kaggle notebook)",
+      "printed": "22.925987278335",
+      "rounding": "up"
+    },
+    {
+      "n": 504,
+      "report": "franciscouzo/square-packing@43f666c",
+      "url": "https://github.com/franciscouzo/square-packing/blob/43f666c23933fbc5cc418fa4e851218268fed0ed/certificates/best/n504.cert",
+      "holders": "Francisco Couzo (pushed 2026-10-24T06:10:44Z; not yet imported, think-gn29)",
+      "printed": "22.925114765344",
+      "rounding": "up"
+    }
+  ],
+  "register": {
+    "title": "Amund Kristiansen's twelve beyond-horizon certificates at c9be7b7, issue798",
+    "headline": "Kristiansen's smaller packings at twelve counts from 334 to 504, found from Couzo's 964ee2b packings, certified exactly",
+    "significance": 2,
+    "source_checks": "The author reports that Evan Daniel's two exact rational checkers at evand/square-packing 7982d7a, verify_cert.py (separating axes) and verify_cert2.py (polygon intersection), accept every certificate, with least wall clearances of 5.986e-13 to 1.735e-12 and least pair separations of 1.199e-12 to 2.340e-12, and that a third, unpublished exact check (a local workbench's rational certifier on the float packings) accepts them too; the issue says the two public checkers share an author and the certificate format, which also made the certificates. The source states each certificate is a dilation of a binary64 packing made with Daniel's search/packer/dilate_cert.py, delta 1e-12, on macOS arm64 with Python 3.14.6; it certifies the upper bounds only and states no exact KKT solve, local-optimality or rigidity analysis. It calls each packing found from Francisco Couzo's #763 packing at the count: 372 and 412 refinements of it, the other twelve new packings. Those are the source's statements. No source program ran here.",
+    "credit": "Credit Amund Kristiansen (https://gist.github.com/amundsk/e4df936fb09c68446598d4c8309d0166), whose searches started from Francisco Couzo's certified packing at each count at franciscouzo/square-packing 964ee2b (#763), credited as #763 credits it, perturbed it in float32 batches and polished with Evan Daniel's fq quench, or ran Daniel's basin explorer above 400, as the issue says; the certificates were made with Daniel's dilate_cert.py and checked with his checkers. The searches, the certificates and the request were done by Claude (Anthropic) in Claude Code at Amund Kristiansen's direction.",
+    "next_rung": "Record the twelve counts as beyond-horizon rows that supersede the current row at each in report order; 372 and 412 are above Couzo's 43f666c, an earlier report, and are not recorded. Beyond the case corpus, so no register entry records them.",
+    "bead": "think-2l0q",
+    "bibliography": {
+      "authors": [
+        "Kristiansen"
+      ],
+      "lineage": "builds-on-project",
+      "credit": "Kristiansen after Couzo, Lavrentev, Tymchishin, alexchilton, kyleluecke, Fang, Daniel",
+      "short_credit": "Kristiansen after Couzo et al.",
+      "note": "Fourteen exact dilation certificates in the gist amundsk/e4df936fb09c68446598d4c8309d0166 at c9be7b70e2220c2eccb2c5ea746094bc85dda405, at 334, 338, 343, 372, 376, 377, 379, 382, 412, 416, 457, 458, 502 and 504, each found from Francisco Couzo's 964ee2b packing at the count (#763), which the issue names as the start, with Evan Daniel's fq quench or basin explorer, dilate_cert.py and checkers. Twelve are beyond-horizon rows; 372 and 412, refinements of 964ee2b's packings, are above Couzo's 43f666c and are not recorded. Retained under the author's CC0 1.0 dedication (jlevy/squares#755, issuecomment-6388401978). Claude assistance disclosed. No local or global optimality claim."
+    }
+  }
+}
