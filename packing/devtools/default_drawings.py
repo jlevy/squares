@@ -395,6 +395,23 @@ _README_3MRY = (
     "selection of 17 October 2026 (think-3mry), beside the runs' receipts and reports"
 )
 
+#: Both generators on the witness the adoption of 25 October 2026 wrote at 304, Evan
+#: Daniel's exact descent of the packing T-241 certifies (T-242, think-hx0e): his
+#: regularizer and grid-slack at 0.5, 1 and 5 degrees. Every view goes to review at row 7
+#: and draws more light squares than the axis tool's view of the witness, so the count is
+#: decided on that view (`SETTLED`).
+_RUNHX0E = (
+    ("evand-regularize", "evand-regularize-adopt-2026-10-25-n304-evand"),
+    ("regularize_grid_slack/1", "grid-slack-adopt-2026-10-25-n304-grid-deg05"),
+    ("regularize_grid_slack/1", "grid-slack-adopt-2026-10-25-n304-grid-deg1"),
+    ("regularize_grid_slack/1", "grid-slack-adopt-2026-10-25-n304-grid-deg5"),
+)
+_README_HX0E = (
+    "packing/cases/regularized_drawings/think-hx0e-2026-10-25/README.md and "
+    "selection-adopt-2026-10-25-n304.md, the selection of 25 October 2026 (think-hx0e), "
+    "beside the runs' receipts and reports"
+)
+
 #: Both generators on the three witnesses the adoption of 22 October 2026 moved to Evan
 #: Daniel's regularized views of 20 October (T-225, think-ql4v): his regularizer and
 #: grid-slack at 0.5, 1 and 5 degrees on 204, 229 and 260. The selection drew grid-slack's
@@ -1151,17 +1168,18 @@ SETTLED: dict[int, Settled] = {
     ),
     304: Settled(
         DECIDED,
-        "[Mishapolk KKT refinements 2026-10-14]",
-        "resources/web/mishapolk-kkt-refinements-2026-10-14/facts/n-304.yaml.gz",
-        "70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94",
-        "1792942775807517496548703186140836311278604266912137/100000000000000000000000000"
-        "000000000000000000000000",
-        _RUNZ7WN_B,
-        "every view draws more light squares than the axis tool's view of this "
-        "witness (2 or 4 to none): grid-slack's, admitted at row 10 at all three "
-        "thresholds, and Evan Daniel's solved view, held at row 4 (solved above U); "
-        "his same-side re-solve was refused (literal-too-large)",
-        _README_R3CL,
+        "[Daniel Kaggle descents 2026-10-24]",
+        "resources/web/evand-kaggle-descents-2026-10-24/source/search/packer/candidates/"
+        "s304_pub.cert",
+        "8a8879a2972c32cbd2d906049228cc9f0762b02a",
+        "1792689890035674158972360842897/100000000000000000000000000000",
+        _RUNHX0E,
+        "every view draws more light squares than the axis tool's view of this witness "
+        "(4 or 5 to 2) and goes to review at row 7, its per-square contact counts falling "
+        "while no total does: grid-slack's at all three thresholds (14 squares) and Evan "
+        "Daniel's certified KKT re-solve at the witness's side (36); each has fewer uneven "
+        "and near-axis squares, and none is a register candidate",
+        _README_HX0E,
     ),
     306: Settled(
         DECIDED,

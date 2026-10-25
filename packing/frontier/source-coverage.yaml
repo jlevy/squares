@@ -10538,16 +10538,20 @@ sources:
   - resources/web/couzo-n304-2026-10-23/acquisition/claims.json
   evidence:
   - E-couzo-n304-certificate-report
+  - E-couzo-n304-exact-feasibility
+  - E-couzo-n304-review-exact-feasibility
   notes: >-
     certificates/best/n304.cert, first committed at fa6237e and pushed on 23 October 2026 at
     23:38:42Z with the release issue 763 names, which does not claim the count. The
     issue-763 packet retains the file byte-identical at 964ee2b, and this packet pins it
     against that copy and admits it at the side the source's catalogue prints. T-241
-    records it at V0/C0, pending stage 4; all 3 native jobs have full outcomes, and the
-    packet's sharp controls meet its 1e-15 wall margin on both routes. The ledger of 24
-    October for this import (campaign/issue-intake/upper-bounds-evand-20261024) records it
-    first at 304, before Evan Daniel's certificate of the same packing (T-242). No selected
-    override is created at this source-only stage; the case at 304 is unchanged.
+    records it at V3/C3 since the stage 4 review of 24 October
+    (docs/project/reviews/review-2026-10-24-couzo-evand-n268-n304.md): all 3 native jobs
+    have full outcomes, the packet's sharp controls meet its 1e-15 wall margin on both
+    routes, and the review's clean-room checker decided it again. The ledger of 24 October
+    for this import (campaign/issue-intake/upper-bounds-evand-20261024) records it first at
+    304, before Evan Daniel's certificate of the same packing (T-242), 3.04e-9 lower, which
+    the case at 304 adopts; no selected override is created for this source.
 - id: evand-kaggle-descents-2026-10-24
   title: Evan Daniel's exact descents of public Kaggle packings at 268 and 304, at 8a8879a, no issue
   role: source-repository
@@ -10565,17 +10569,22 @@ sources:
   - resources/web/evand-kaggle-descents-2026-10-24/acquisition/claims.json
   evidence:
   - E-evand-kaggle-descents-certificate-report
+  - E-evand-kaggle-descents-exact-feasibility
+  - E-evand-kaggle-descents-review-exact-feasibility
   notes: >-
     The two certificates at 268 and 304 that 8a8879a adds under search/packer/candidates/,
     pushed on 24 October 2026 at 04:53:53Z, retained as the source wrote them with the
     source's JSON reports, binary64 inputs and comparison files, and admitted at their exact
-    sides. T-242 records both at V0/C0, pending stage 4; all 9 native jobs, the third the
-    commit's 303, have full outcomes, and the packet's sharp controls meet the 5e-21 margins
-    at 268 and 304 on both routes. The ledger of 24 October for this import
+    sides. T-242 records both at V3/C3 since the stage 4 review of 24 October
+    (docs/project/reviews/review-2026-10-24-couzo-evand-n268-n304.md): all 9 native jobs,
+    the third the commit's 303, have full outcomes, the packet's sharp controls meet the
+    5e-21 margins at 268 and 304 on both routes, and the review's clean-room checker
+    decided both again. The ledger of 24 October for this import
     (campaign/issue-intake/upper-bounds-evand-20261024) records 268 below T-240 and 304
     below T-241, and does not record 303, which is above T-240's 303; the 303 certificate is
-    retained as credit evidence. No selected override is created at this source-only stage;
-    the cases at 268 and 304 are unchanged.
+    retained as credit evidence. The case at 304 adopted the 304 certificate on 25 October
+    2026, the selected override there; 268 is staged for the pass's next pull request
+    (select_houses.PENDING_ADOPTION), since the same pass adopted T-240 there.
 
 - id: couzo-efef7d1-2026-10-23
   title: Francisco Couzo's own sides at efef7d1 at the counts of the Kaggle notebook rows
@@ -10739,9 +10748,11 @@ sources:
     couzo-efef7d1-2026-10-23 (18). The index credits 37 of them to Couzo as refinements
     of notebook packings (Vladislav Lavrentev (33) and Kirill Tymchishin (4)); those
     statements are the source's. At 874 kyleluecke's 964ee2bd row, 1.07e-07 below this
-    commit's side, names it as its previous_source; the measurement does not pair them
-    one to one (receipts/push/pose-identity.json), so it is a new packing seeded from
-    this one, credited after Couzo and Lavrentev by the record's chain rule. The
+    commit's side, names it as its previous_source, the record the source's catalogue
+    held at the count before and not a seed (M-1 of the 24 October review of T-241 and
+    T-242); the measurement does not pair them one to one
+    (receipts/push/pose-identity.json), so it is another arrangement, credited to
+    kyleluecke alone. The
     packet's filtered exact replay decided every one on two routes with all six controls
     refused (receipts/push/couzo-fa6237e/filtered-exact-replay.json,
     devtools.beyond_horizon_replay), and every side is below Göbel's construction. The
@@ -10836,9 +10847,11 @@ sources:
     keeps each recipe's full n-square expansion under certificates/parents/ at exactly
     its side, first committed at fa6237e, and the row is that certificate (#795's review
     A, A2). At 364 and 450 the 964ee2bd rows of aqibrazadev and kyleluecke, 1.35e-09 and
-    2.08e-09 below these sides, name them as their previous_source; the measurement does
-    not pair them one to one (receipts/push/pose-identity.json), so they are new
-    packings seeded from these, credited after Tymchishin by the record's chain rule.
+    2.08e-09 below these sides, name them as their previous_source, the record the
+    source's catalogue held at the count before and not a seed (M-1 of the 24 October
+    review of T-241 and T-242); the measurement does not pair them one to one
+    (receipts/push/pose-identity.json), so they are other arrangements, credited to
+    their notebooks' authors alone.
     The packet's filtered exact replay decided every one on two routes with all six
     controls refused (receipts/push/361239073/filtered-exact-replay.json,
     devtools.beyond_horizon_replay), and every side is below Göbel's construction. The
@@ -11015,17 +11028,17 @@ sources:
     commits: couzo-fa6237e-2026-10-23 (12), lavrentev-cuda-v11-2026-10-23 (5) and
     tymchishin-reclosure-v3-2026-10-23 (1). At 378 and 405 the row is Vladislav
     Lavrentev's fa6237e packing refined: every square pairs one to one within 4.5e-08
-    under the box's identity (receipts/push/pose-identity.json), and the manifest names
-    his certificate as the row's previous_source, so the ledger records a refinement and
-    the row is credited to kyleluecke after Vladislav Lavrentev. At 450 and 874 the
-    manifest names the push's earlier side as the row's previous_source, the packing
-    that seeded it: Tymchishin's v3, 2.08e-09 above, and Couzo's fa6237e side, 1.07e-07
-    above, which the index credits as a refinement of Lavrentev's packing. The
-    measurement does not pair them one to one (200 and 234 squares beyond 1e-3): the
-    search moved the arrangement, which does not contradict the seed link. By the
-    record's chain rule, every link the source's files state is credited, so the rows
-    are credited to kyleluecke after Kirill Tymchishin at 450 and after Francisco Couzo
-    and Vladislav Lavrentev at 874, new packings seeded from theirs. The packet's
+    under the box's identity (receipts/push/pose-identity.json), so the ledger records a
+    refinement and the row is credited to kyleluecke after Vladislav Lavrentev. At 450
+    and 874 the manifest names the push's earlier side as the row's previous_source:
+    Tymchishin's v3, 2.08e-09 above, and Couzo's fa6237e side, 1.07e-07 above. That
+    field names the record the source's catalogue held at the count before, not the
+    packing a notebook started from (M-1 of the 24 October review of T-241 and T-242),
+    and the row's own provenance states no seed. The measurement does not pair them one
+    to one (200 and 234 squares beyond 1e-3, 189 and 60 beyond 0.1), so they are other
+    arrangements, new packings credited to kyleluecke alone; which packing each search
+    started from is asked of the publisher in the confirmation reply of 25 October on #763 (its
+    question 7). The packet's
     filtered exact replay decided every one on two routes with all six controls refused
     (receipts/push/361592092/filtered-exact-replay.json,
     devtools.beyond_horizon_replay), and every side is below Göbel's construction. The
@@ -11132,11 +11145,13 @@ sources:
     count's current row; They supersede 9 rows of the push's earlier commits:
     couzo-fa6237e-2026-10-23 (7) and tymchishin-reclosure-v3-2026-10-23 (2). At 364 the
     row is 1.35e-09 below Tymchishin's v3 side at fa6237e, which the manifest names as
-    its previous_source, the packing that seeded it; the measurement does not pair the
-    two one to one (116 squares beyond 1e-3; receipts/push/pose-identity.json): the
-    search moved the arrangement, which does not contradict the seed link. By the
-    record's chain rule, every link the source's files state is credited, so the row is
-    credited to aqibrazadev after Kirill Tymchishin, a new packing seeded from his. The
+    its previous_source. That field names the record the source's catalogue held at the
+    count before, not the packing a notebook started from (M-1 of the 24 October review
+    of T-241 and T-242), and the row's own provenance states no seed. The measurement
+    does not pair the two one to one (116 squares beyond 1e-3 and 115 beyond 0.1;
+    receipts/push/pose-identity.json), so the row is another arrangement, a new packing
+    credited to aqibrazadev alone; which packing the search started from is asked of
+    the publisher in the confirmation reply of 25 October on #763 (its question 7). The
     packet's filtered exact replay decided every one on two routes with all six controls
     refused (receipts/push/361516058/filtered-exact-replay.json,
     devtools.beyond_horizon_replay), and every side is below Göbel's construction. The
@@ -11863,11 +11878,11 @@ selected_overrides:
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
     a replay here and an accepted review, adopted on 2026-10-25 (T-240).
 - n: 304
-  source_id: mishapolk-kkt-refinements-2026-10-14
-  value: '17.92942775807517497'
-  evidence: E-mishapolk-70a033f-certificate-report
+  source_id: evand-kaggle-descents-2026-10-24
+  value: '17.9268989003567416'
+  evidence: E-evand-kaggle-descents-certificate-report
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
-    a replay here and an accepted review, adopted on 2026-10-16 (T-186).
+    a replay here and an accepted review, adopted on 2026-10-25 (T-242).
 - n: 305
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '17.95046648213771228'
@@ -13042,14 +13057,14 @@ superseded_reports:
 - n: 304
   source_id: casson-square-packing-2026
   value: '17.94880191214547338'
-  superseded_by: mishapolk-kkt-refinements-2026-10-14
+  superseded_by: evand-kaggle-descents-2026-10-24
   reason: Larger than Francisco Couzo's side at this count; the case record states both sources' dates
     and values; since 2026-10-05 the selected report is Evan Daniel's exact optimum of that packing
     (T-098).
 - n: 304
   source_id: franciscouzo-square-packing-2026
   value: '17.934650018395903'
-  superseded_by: mishapolk-kkt-refinements-2026-10-14
+  superseded_by: evand-kaggle-descents-2026-10-24
   reason: Superseded on 2026-10-05 by Evan Daniel's exact optimum of the same packing, certified here
     (T-098).
 - n: 305
@@ -13674,9 +13689,9 @@ superseded_reports:
 - n: 304
   source_id: evand-square-packing-2026-10-05
   value: '17.934650018390681724105084929881'
-  reason: The house until 2026-10-12; its certificate stays retained and verified, and T-186's exact
+  reason: The house until 2026-10-12; its certificate stays retained and verified, and T-242's exact
     side is smaller.
-  superseded_by: mishapolk-kkt-refinements-2026-10-14
+  superseded_by: evand-kaggle-descents-2026-10-24
 - n: 270
   source_id: couzo-certificates-2026-10-10
   value: '16.9297753535413596'
@@ -13753,8 +13768,8 @@ superseded_reports:
   source_id: couzo-certificates-2026-10-11-in-corpus
   value: '17.9295659468485010'
   reason: The house from 2026-10-12 until 2026-10-15; its certificate stays retained and verified,
-    and T-186's exact side is smaller.
-  superseded_by: mishapolk-kkt-refinements-2026-10-14
+    and T-242's exact side is smaller.
+  superseded_by: evand-kaggle-descents-2026-10-24
 - n: 105
   source_id: couzo-followup-refinements-2026-10-08
   value: '10.7893037837481589'
@@ -13897,8 +13912,8 @@ superseded_reports:
   source_id: dostashev-merged-bands-2026-10-13
   value: '17.9294277580751750'
   reason: The house from 2026-10-15 until 2026-10-16; its certificate stays retained and verified,
-    and T-186's exact side is smaller.
-  superseded_by: mishapolk-kkt-refinements-2026-10-14
+    and T-242's exact side is smaller.
+  superseded_by: evand-kaggle-descents-2026-10-24
 - n: 68
   source_id: rehwaldt-n68-refinement-2026-10-07
   value: '8.79879523721828390257668096702139408352101903022787926324037'
@@ -14289,6 +14304,12 @@ superseded_reports:
   reason: The house from 2026-10-24 until 2026-10-25; its certificate stays retained and verified,
     and T-240's exact side is smaller.
   superseded_by: couzo-issue763-2026-10-23-in-corpus
+- n: 304
+  source_id: mishapolk-kkt-refinements-2026-10-14
+  value: '17.92942775807517497'
+  reason: The house from 2026-10-16 until 2026-10-25; its certificate stays retained and verified,
+    and T-242's exact side is smaller.
+  superseded_by: evand-kaggle-descents-2026-10-24
 beyond_horizon_claims:
 - n: 327
   source_id: couzo-extended-range-reports-2026-10-08

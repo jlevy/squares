@@ -5903,6 +5903,71 @@ verifiers:
       packet's review/review-2026-10-23/ with its README and outputs, whose
       program-digests.sha256 records each program's SHA-256 as it ran.
 
+  - id: V-kaggle-268-304-review-check
+    program: t241_t242_exact.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      The 24 October review's standard-library exact checker of the three certificates
+      T-241 and T-242 cite (Francisco Couzo's 304 at fa6237e, Evan Daniel's 268 and 304 at
+      8a8879a), with a reader of its own that admits only integer and p/q literals and the
+      stated row count, deciding each certificate in Fraction arithmetic by two methods:
+      separating axes (every corner against the walls, and every pair whose centres lie
+      within 2 of each other, chosen exactly, on the four edge normals; the rest disjoint
+      by their circumscribed discs) and clipped areas (Sutherland-Hodgman: each square
+      clipped to the box keeps area 1, each near pair's intersection has area 0), with a
+      third pass of separating axes over every pair. It checks each file's SHA-256 against
+      the packets' pins, its header side against the register's claim and the 12-place
+      prints, and the register's stated margins; it decides nine hand-built packings and
+      twelve controls per certificate: the side at far-wall contact (accepted), 1e-30 past
+      it and at twice the clearance; the least-gap pair at contact (accepted) and 1e-30
+      past it; a square moved 1e-3 toward its neighbour, enlarged past its pair and past
+      its wall, duplicated, and moved past its near wall; every centre drawn in by the
+      factor 1 - 1e-9; and a square turned by about 2e-9 radians.
+    source:
+      - packing/resources/web/evand-kaggle-descents-2026-10-24/review/review-2026-10-24/programs/t241_t242_exact.py
+    independence_record: docs/project/reviews/review-2026-10-24-couzo-evand-n268-n304.md
+    independence:
+      read: [mathematics, certificate-format, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of T-241 and T-242
+            (c-review-t241-t242-math, think-vm3m), strongest sub-agent tier, maximum
+            reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          Couzo's commits fa6237e, 964ee2b and efef7d1 and Daniel's 8a8879a each carry a
+          Co-Authored-By trailer naming Claude, and Daniel's CREDITS.md says the
+          repository's work was produced by Claude (Anthropic) under human direction. The
+          review's checker is Claude's too, written from a prompt of its own in a file that
+          imports nothing from this repository or the sources, from the mathematics and the
+          certificates' header lines. Its author never read Couzo's
+          verify_bound_certificate.py, sqpack/verify.py, Daniel's verify_cert.py or
+          verify_cert2.py, the maintained routes or sharp_controls.py. Before it decided,
+          its author had read the register's and the packets' summaries of the producers'
+          stated outputs (Daniel's JSON clearances, Couzo's pairs tested); it read those
+          outputs themselves, and the packets' sharp-control receipts, after it decided.
+          It shares the separating-axis method with the maintained routes and the sources'
+          checkers; its clipped area is a second method.
+    note: >-
+      Written and run on 24 October 2026 by the review (SHA-256
+      a4d32ac9d0e3b0dcca4a5886e12bf6ce8360c14470601fbb1572b35b427f5da9 as run); kept in the
+      evand-kaggle-descents-2026-10-24 packet's review/review-2026-10-24/ with its README and
+      receipt outputs/t241_t242_exact.json, whose outputs/program-digests.sha256 records each
+      program's SHA-256 as it ran. t241_t242_identity.py, t241_t242_credits.py,
+      t241_t242_receipts.py, t241_t242_sense.py and the two shell scripts, kept beside it,
+      decide nothing and are not registered.
+
   - id: V-review-1023-n31-poses
     program: source_log_points.py, with n31_brute.py and n31_exact.py
     author: Squares Project (Levy)

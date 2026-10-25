@@ -1,0 +1,6 @@
+T-241 n=304, counter-clockwise, as the headers state: valid=True methods_agree=True overlapping pairs=0 contained=True
+T-241 n=304, clockwise: valid=False methods_agree=True overlapping pairs=89 contained=True
+T-242 n=268, counter-clockwise, as the headers state: valid=True methods_agree=True overlapping pairs=0 contained=True
+T-242 n=268, clockwise: valid=False methods_agree=True overlapping pairs=99 contained=True
+T-242 n=304, counter-clockwise, as the headers state: valid=True methods_agree=True overlapping pairs=0 contained=True
+T-242 n=304, clockwise: valid=False methods_agree=True overlapping pairs=92 contained=True

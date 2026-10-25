@@ -209,11 +209,15 @@ the same packing at 377, 405, 596 and 984), and at 377 the credit names Tymchish
 
 ## Questions for the Author
 
-Drafted in think-gn29’s notes for the next reply on #763, not posted: whether #763 extends
-to these rows; whether “Couzo after” at the 18 near-identical counts means a new packing
-or a tighter certificate; the credit at 377; what `previous_source` names and which
-packing each notebook started from; whether the recipes’ expansions are meant as their
-certificates; and #763’s open questions on 303, 268 and 304.
+Asked on #763 in the import reply of 25 October
+([issuecomment-6392829915](https://github.com/jlevy/squares/issues/763#issuecomment-6392829915)):
+whether #763 extends to these rows; whether “Couzo after” at the 18 near-identical counts
+means a new packing or a tighter certificate; the credit at 377; whether the recipes’
+expansions are meant as their certificates; and the finder and the construction credit at
+304. The confirmation reply of that day asks what `previous_source` names and which
+packing each notebook started from, and the questions on 268 and 303. The record holds
+the credit at 377, the finder and the construction credit at 304 as awaiting his answer;
+the other three hold nothing open: two are informational, and the third is for a measurement here.
 
 ## Compressed Files
 

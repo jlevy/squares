@@ -2409,8 +2409,10 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     # that move leaves the number of sources as it was. The adoption of 25 October draws 268
     # and 303 from Couzo's issue 763 packet (T-240), and no longer from Kristiansen's issue
     # 755 packet, which held nothing else; PingYou Ltd's PR 574 certificates still hold
-    # other counts, so the number of sources stays.
-    assert len(expected_sources) == 27
+    # other counts, so the number of sources stays. The same pass draws 304 from Evan
+    # Daniel's Kaggle descents packet (T-242), one more source with no new name, and no
+    # longer from Mishapolk's KKT refinements there, which still hold other counts.
+    assert len(expected_sources) == 28
     assert set(json.loads(credit_block.attrib["data-credited-names"])) == expected_names
     assert set(json.loads(credit_block.attrib["data-source-keys"])) == expected_sources
     assert credit_block.find("svg:text[@data-feature='packing-credits-heading']", SVG) is None

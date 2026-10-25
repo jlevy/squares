@@ -6,6 +6,58 @@ softschema:
   status: enforced
 repository: https://github.com/jlevy/squares
 entries:
+  - id: couzo-two-sixty-eight-and-three-hundred-three-adopted
+    date: '2026-10-25'
+    title: Couzo’s Packings Become the House Best Packings at 268 and 303
+    significance:
+      score: 3
+      rationale: >-
+        T-240 is an S3 finite case result at two counts: new arrangements relative to the
+        record at 268 and 303, 4.45e-03 and 2.78e-03 below the packings they replace, one
+        to one with neither under any symmetry. Each refines a public Kaggle notebook
+        packing; it brings no new technique and claims no optimality.
+    topics: [upper-bound]
+    categories: [records]
+    pull_requests: [794]
+    result_ids: [T-240]
+    summary: |-
+      [Francisco Couzo](packing/contributors/people/francisco-couzo.md)’s certificates of
+      #763 at 268 and 303 pass a clean-room review here and become the house best packings
+      there, $4.45 \times 10^{-3}$ and $2.78 \times 10^{-3}$ below the packings they
+      replace, each regularized for display. T-240 is confirmed at V3/C3.
+    details: |-
+      - Each refines a public Kaggle notebook packing:
+        [Kirill Tymchishin](packing/contributors/people/kirill-tymchishin.md)’s at 268, and
+        at 303 Couzo’s own push packing, which his manifest credits after
+        [Vladislav Lavrentev](packing/contributors/people/vladislav-lavrentev.md)’s. Each is
+        a new arrangement relative to the record: 118 and 133 squares lie more than a tenth
+        from their places in the packings they replace.
+      - This project’s two maintained exact routes decided both certificates; they share
+        components with the source’s pipeline, whose manifest names this repository’s
+        `sqpack/verify.py` as its first checker. A separately prompted mathematical review
+        decided them again on a clean-room checker of its own, by a Claude agent, which is
+        the independent confirmation. No source program ran here.
+      - Both cases draw grid-slack’s views at the certificates’ sides.
+        [Evan Daniel](packing/contributors/people/evan-daniel.md)’s later 268,
+        $4.48 \times 10^{-12}$ lower, is another placement of the same arrangement,
+        validated separately; it re-houses 268 in a later change. Upper bounds only; no
+        optimality, rigidity or priority is claimed.
+    artifacts:
+      - kind: result
+        label: Couzo’s certificates at 268 and 303
+        target: https://squaremath.org/result/t-240.html
+    publication:
+      date: '2026-10-25'
+      evidence: https://github.com/jlevy/squares/actions/runs/40148939396
+    references:
+      - label: The case record at 268
+        target: packing/frontier/n-268.md
+      - label: The case record at 303
+        target: packing/frontier/n-303.md
+      - label: Mathematical review of 24 October
+        target: docs/project/reviews/review-2026-10-24-couzo-n268-n303.md
+      - label: Couzo’s registration request
+        target: https://github.com/jlevy/squares/issues/763
   - id: daniel-fang-theorems-lean-and-small-n-register
     date: '2026-10-24'
     title: Daniel Reports Lean Proofs of Fang’s Theorems, and the Register Takes In s(2) to s(5)
@@ -2584,6 +2636,11 @@ entries:
       - label: Revised verification and confirmation ladder
         target: https://github.com/jlevy/squares/pull/262
 deliveries:
+- number: 794
+  title: 'records(#763): T-240 reviewed at V3/C3, adopted at 268 and 303 and regularized'
+  merged_at: '2026-10-25T01:00:47Z'
+  base_ref: main
+  merge_commit: 755ef426b81cf2d5223bf26372905083fbb59552
 - number: 750
   title: 'records(intake): five Lean formalization sources retained; T-234 to T-238 registered, with the classical s(2) to s(5)'
   merged_at: '2026-10-24T05:15:20Z'
@@ -3339,6 +3396,7 @@ stacks:
   evidence: https://github.com/jlevy/squares/pull/518
 coverage:
   pull_requests:
+  - 794
   - 750
   - 745
   - 764

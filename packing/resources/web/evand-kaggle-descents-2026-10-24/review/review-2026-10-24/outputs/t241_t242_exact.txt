@@ -1,0 +1,54 @@
+T-241 n=304: valid=True agree=True near=1E-15 far=1E-15 pair=8.18394241446125726760502575632E-11 print=17.926898903393
+T-242 n=268: valid=True agree=True near=5E-21 far=5.00000000046078E-21 pair=9.99999999999998886298773257922E-21 print=16.874361715870
+T-242 n=304: valid=True agree=True near=5E-21 far=5.00000000060942E-21 pair=9.99999999999999486714074944553E-21 print=17.926898900357
+selftest two squares in edge contact: accept (expected accept) passed=True
+selftest a duplicated square: refuse (expected refuse) passed=True
+selftest a square shifted half along its neighbour's edge: refuse (expected refuse) passed=True
+selftest two squares touching corner to corner: accept (expected accept) passed=True
+selftest a turned square (c, s) = (3/5, 4/5) touching all four walls: accept (expected accept) passed=True
+selftest the same square 1e-30 past the left wall: refuse (expected refuse) passed=True
+selftest a turned square's corner touching an edge: accept (expected accept) passed=True
+selftest the same corner 1e-30 into the edge: refuse (expected refuse) passed=True
+selftest a square outside the box: refuse (expected refuse) passed=True
+T-241 n=304 control side-to-far-contact: accept (expected accept) agree=True passed=True
+T-241 n=304 control side-past-far-contact: refuse (expected refuse) agree=True passed=True
+T-241 n=304 control side-shrunk-by-twice-least-far-slack: refuse (expected refuse) agree=True passed=True
+T-241 n=304 control pair-to-contact: accept (expected either) agree=True passed=True
+T-241 n=304 control pair-past-contact: refuse (expected refuse) agree=True passed=True
+T-241 n=304 control square-perturbed: refuse (expected refuse) agree=True passed=True
+T-241 n=304 control square-enlarged-past-pair: refuse (expected refuse) agree=True passed=True
+T-241 n=304 control square-enlarged-past-wall: refuse (expected refuse) agree=True passed=True
+T-241 n=304 control square-duplicated: refuse (expected refuse) agree=True passed=True
+T-241 n=304 control square-past-near-wall: refuse (expected refuse) agree=True passed=True
+T-241 n=304 control centres-drawn-in: refuse (expected refuse) agree=True passed=True
+T-241 n=304 control square-rotated: refuse (expected either) agree=True passed=True
+T-242 n=268 control side-to-far-contact: accept (expected accept) agree=True passed=True
+T-242 n=268 control side-past-far-contact: refuse (expected refuse) agree=True passed=True
+T-242 n=268 control side-shrunk-by-twice-least-far-slack: refuse (expected refuse) agree=True passed=True
+T-242 n=268 control pair-to-contact: accept (expected either) agree=True passed=True
+T-242 n=268 control pair-past-contact: refuse (expected refuse) agree=True passed=True
+T-242 n=268 control square-perturbed: refuse (expected refuse) agree=True passed=True
+T-242 n=268 control square-enlarged-past-pair: refuse (expected refuse) agree=True passed=True
+T-242 n=268 control square-enlarged-past-wall: refuse (expected refuse) agree=True passed=True
+T-242 n=268 control square-duplicated: refuse (expected refuse) agree=True passed=True
+T-242 n=268 control square-past-near-wall: refuse (expected refuse) agree=True passed=True
+T-242 n=268 control centres-drawn-in: refuse (expected refuse) agree=True passed=True
+T-242 n=268 control square-rotated: refuse (expected either) agree=True passed=True
+T-242 n=304 control side-to-far-contact: accept (expected accept) agree=True passed=True
+T-242 n=304 control side-past-far-contact: refuse (expected refuse) agree=True passed=True
+T-242 n=304 control side-shrunk-by-twice-least-far-slack: refuse (expected refuse) agree=True passed=True
+T-242 n=304 control pair-to-contact: accept (expected either) agree=True passed=True
+T-242 n=304 control pair-past-contact: refuse (expected refuse) agree=True passed=True
+T-242 n=304 control square-perturbed: refuse (expected refuse) agree=True passed=True
+T-242 n=304 control square-enlarged-past-pair: refuse (expected refuse) agree=True passed=True
+T-242 n=304 control square-enlarged-past-wall: refuse (expected refuse) agree=True passed=True
+T-242 n=304 control square-duplicated: refuse (expected refuse) agree=True passed=True
+T-242 n=304 control square-past-near-wall: refuse (expected refuse) agree=True passed=True
+T-242 n=304 control centres-drawn-in: refuse (expected refuse) agree=True passed=True
+T-242 n=304 control square-rotated: refuse (expected either) agree=True passed=True
+margin T-242 n=268 below #763's entry at 268 (964ee2b n268.cert): 4.47965E-12 (stated 4.48e-12, matches=True)
+margin T-242 n=268 below T-174, the house at 268 (known-best witness): 0.00445311 (stated 4.45e-3, matches=True)
+margin T-241 n=304 below T-186, the house at 304 (known-best witness): 0.00252885 (stated 2.53e-3, matches=True)
+margin T-242 n=304 below T-241 n=304: 3.03590E-9 (stated 3.04e-9, matches=True)
+margin T-242 n=304 below T-186, the house at 304 (known-best witness): 0.00252886 (stated 2.53e-3, matches=True)
+cpu seconds: 53.41

@@ -5724,12 +5724,21 @@ def _claim_map_claim(chosen: Release, item: Mapping[str, Any]) -> dict[str, Any]
 def _push_identity_parts(chosen: Release, n: int) -> dict[str, Any]:
     """What a push release's claim at a count of `PUSH_IDENTITY` carries into its walk: the
     measurement against the push's earlier side there (``measured``), which the manifest of
-    ``certificates/best/`` names as the row's ``previous_source``, and the link the record's
-    chain rule credits (#795's review B, B1). Where the squares pair one to one with none
-    beyond `PUSH_SAME_PACKING`, the row refines that packing (``refines``); otherwise the
-    search moved the arrangement, and the row is a new packing seeded from it
-    (``new_packing``, ``continues``). Either way it is credited after that packing's finder,
-    and after every finder the index names for it."""
+    ``certificates/best/`` names as the row's ``previous_source``. That field names the
+    record the source's catalogue held at the count before the row, not the packing a
+    notebook or search started from: at 303 at fa6237e it names Evan Daniel's record where
+    the entry's own ``seed_credit`` names Lavrentev, and of the 182 entries of that manifest
+    that carry both seed fields, the two differ in all 182 and name another person in 178
+    (M-1 of the 24 October review of T-241 and T-242, which corrects #795's review B, B1).
+    At 964ee2b, which this walk reads, 11 of the 202 such entries differ, among them 794 and
+    910, whose own seed is Tymchishin's v3 and whose previous record is Goebel's family
+    formula; the other 191 are Couzo's refinements of his own previous records (review A,
+    A4, of #803). So the field is no lineage, and the
+    measurement alone decides what the walk says: where the squares pair one to one with
+    none beyond `PUSH_SAME_PACKING`, the row refines that packing (``refines``) and is
+    credited after its finder; otherwise it is another arrangement, a new packing
+    (``new_packing``) with no ``continues``, since no source states where its search
+    started, and it is credited to its finder alone."""
     if n not in PUSH_IDENTITY:
         return {}
     receipt = _read(chosen.directory / PUSH_IDENTITY_RECEIPT)
@@ -5752,13 +5761,9 @@ def _push_identity_parts(chosen: Release, n: int) -> dict[str, Any]:
     )
     stated = (
         f"964ee2b's manifest names {other.holders}'s {other.pin[:7]} certificate "
-        f"({nearest['certificate']}) as the row's previous_source"
-    )
-    refined = _REFINES_NAMED.search(str(nearest["credit"]))
-    after = (
-        f", which the index credits as a refinement of {refined[1].strip()}'s packing"
-        if refined
-        else ""
+        f"({nearest['certificate']}) as the row's previous_source, the record its catalogue "
+        "held at the count before, not a seed (M-1 of the 24 October review of T-241 and "
+        "T-242)"
     )
     parts: dict[str, Any] = {
         "measured": {
@@ -5779,11 +5784,13 @@ def _push_identity_parts(chosen: Release, n: int) -> dict[str, Any]:
     else:
         parts["new_packing"] = {
             "source": (
-                f"{stated}; the measurement does not pair them one to one "
+                f"{stated}; the index credits the row to the notebook run and defers earlier "
+                "credits to a provenance that states no seed of the row's own (\"earlier seed "
+                'and construction credits retained in provenance"), and the measurement does '
+                "not pair them one to one "
                 f"({nearest['beyond'][PUSH_SAME_PACKING]} squares beyond {PUSH_SAME_PACKING}"
-                f", {source}): the search moved the arrangement it was seeded from"
+                f", {source}): another arrangement, whose search start no source states"
             ),
-            "continues": (f"{other.holders}'s {other.pin[:7]} packing ({other.label}){after}"),
         }
     return parts
 
@@ -6699,8 +6706,6 @@ def write_pose_identity(issue: int | str) -> dict[int, list[str]]:
     }
 
 
-#: How the index states that a side refines another author's packing.
-_REFINES_NAMED = re.compile(r"refines the packing of ([^,;(]+)")
 #: The counts where a notebook row is within 1.1e-7 of a side an earlier commit of the same
 #: push states (#795's review A, A1): measured to settle refinement and credit.
 PUSH_IDENTITY = (364, 378, 405, 450, 874)

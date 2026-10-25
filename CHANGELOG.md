@@ -9,6 +9,44 @@ The authoritative record is [site-changelog.yaml](packing/site-changelog.yaml).
 
 ## Changelog
 
+<a id="changelog-date-2026-10-25"></a>
+
+### 2026-10-25
+
+<a id="changelog-entry-couzo-two-sixty-eight-and-three-hundred-three-adopted"></a>
+
+#### Couzo’s Packings Become the House Best Packings at 268 and 303
+
+Significance S3: T-240 is an S3 finite case result at two counts: new arrangements relative to the record at 268 and 303, 4.45e-03 and 2.78e-03 below the packings they replace, one to one with neither under any symmetry. Each refines a public Kaggle notebook packing; it brings no new technique and claims no optimality.
+
+[Francisco Couzo](packing/contributors/people/francisco-couzo.md)’s certificates of
+#763 at 268 and 303 pass a clean-room review here and become the house best packings
+there, $4.45 \times 10^{-3}$ and $2.78 \times 10^{-3}$ below the packings they
+replace, each regularized for display. T-240 is confirmed at V3/C3.
+
+- Each refines a public Kaggle notebook packing:
+  [Kirill Tymchishin](packing/contributors/people/kirill-tymchishin.md)’s at 268, and
+  at 303 Couzo’s own push packing, which his manifest credits after
+  [Vladislav Lavrentev](packing/contributors/people/vladislav-lavrentev.md)’s. Each is
+  a new arrangement relative to the record: 118 and 133 squares lie more than a tenth
+  from their places in the packings they replace.
+- This project’s two maintained exact routes decided both certificates; they share
+  components with the source’s pipeline, whose manifest names this repository’s
+  `sqpack/verify.py` as its first checker. A separately prompted mathematical review
+  decided them again on a clean-room checker of its own, by a Claude agent, which is
+  the independent confirmation. No source program ran here.
+- Both cases draw grid-slack’s views at the certificates’ sides.
+  [Evan Daniel](packing/contributors/people/evan-daniel.md)’s later 268,
+  $4.48 \times 10^{-12}$ lower, is another placement of the same arrangement,
+  validated separately; it re-houses 268 in a later change. Upper bounds only; no
+  optimality, rigidity or priority is claimed.
+
+Published artifacts: [Couzo’s certificates at 268 and 303](https://squaremath.org/result/t-240.html).
+
+First public: 2026-10-25 ([publication evidence](https://github.com/jlevy/squares/actions/runs/40148939396)).
+
+PRs and supporting records: [\#794](https://github.com/jlevy/squares/pull/794) · [The case record at 268](packing/frontier/n-268.md) · [The case record at 303](packing/frontier/n-303.md) · [Mathematical review of 24 October](docs/project/reviews/review-2026-10-24-couzo-n268-n303.md) · [Couzo’s registration request](https://github.com/jlevy/squares/issues/763).
+
 <a id="changelog-date-2026-10-24"></a>
 
 ### 2026-10-24

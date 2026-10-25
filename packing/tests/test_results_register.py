@@ -1824,7 +1824,9 @@ def test_t146_regularizes_each_credited_packing_and_the_schema_knows_the_field()
         _regularization(by="Daniel"),
         _regularization(of="146"),
         _regularization(method=None),
-        _regularization(credit="Daniel"),
+        # An item may narrow its key's credit (review A, A3, of #803), never with nothing.
+        _regularization(credit=""),
+        _regularization(credit=["Daniel"]),
         _regularization(changes={}),
         _regularization(changes={"turned": 1}),
         _regularization(identity=_identity(basis="believed")),
@@ -1833,6 +1835,8 @@ def test_t146_regularizes_each_credited_packing_and_the_schema_knows_the_field()
     ):
         t146["regularizations"] = [refused]
         assert not validator.is_valid(payload), refused
+    t146["regularizations"] = [_regularization(credit="Daniel after Xu")]
+    assert validator.is_valid(payload)
 
 
 def test_a_side_first_certified_elsewhere_names_an_earlier_result_on_its_count() -> None:
