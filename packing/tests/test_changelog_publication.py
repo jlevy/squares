@@ -157,10 +157,10 @@ def test_news_has_one_card_per_entry_and_home_shows_the_newest_at_its_opening_le
     assert re.findall(r'data-news-entry="([^"]+)"', home) == carried
     shown = re.findall(r'<section class="site-news-day" id="changelog-entry-([^"]+)"', home)
     assert shown == [entry["id"] for entry in selected]
-    # Today News holds three S5 articles, so the box opens on S5 and leads with T-194's
-    # (16 October).
+    # Today News holds four S5 articles, so the box opens on S5 and leads with T-245's
+    # (25 October).
     assert levels == (5,)
-    assert [entry["result_ids"] for entry in selected] == [["T-194"], ["T-154"], ["T-153"]]
+    assert [entry["result_ids"] for entry in selected] == [["T-245"], ["T-194"], ["T-154"]]
     for entry in selected:
         anchor = render_changelog.entry_anchor(entry["id"])
         assert f'href="news.html#{anchor}"' in home
