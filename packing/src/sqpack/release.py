@@ -901,7 +901,7 @@ EXPLAINER_HISTORY = (
         first_published="October 25, 2026",
         result_scope=(
             "Update the registered result count after the registration of Evan Daniel's "
-            "#806 certificate at 182 (T-243), adopted as the house best packing there."
+            "#806 certificate at 182 (T-243)."
         ),
     ),
     PublicationHistoryEntry(
