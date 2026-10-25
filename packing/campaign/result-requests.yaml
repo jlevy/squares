@@ -22998,8 +22998,8 @@ issues:
         Question 1 of the confirmation reply of 25 October 2026. T-240's credit at 268 follows the
         manifest, Couzo after Tymchishin's v4 packing; an answer that the search started from
         Lavrentev's packing, or that the cuda step is his, would add him to it. The house at
-        268 moves to Evan Daniel's descent of Lavrentev's placement (T-242) in the pass's next
-        pull request, credited Daniel after Lavrentev, whatever the answer.
+        268 moved to Evan Daniel's descent of Lavrentev's placement (T-242) in the pass of 26
+        October 2026, credited Daniel after Lavrentev, whatever the answer.
     - question: >-
         At 377, 43f666c re-certifies 964ee2b's notebook packing, every square within 1.7e-11,
         but its credit line names Kirill Tymchishin where 964ee2b's named kyleluecke. Which is
@@ -23112,6 +23112,14 @@ issues:
       reported:
       - result: 43f666c-rows-325-1024
       - result: recipes-325-1024
+    - url: https://github.com/jlevy/squares/issues/763#issuecomment-6393433847
+      date: '2026-10-25'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: notebook-rows-325-1024
+      - result: notebook-recipes-325-1024
+      - result: push-earlier-sides-325-1024
     close_when: >-
       T-240 is reviewed and adopted at 268 and 303 with both drawings regularized, the
       recipes, 683 and the rows above 1024 have rows or recorded dispositions, and the reply
