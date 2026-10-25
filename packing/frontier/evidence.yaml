@@ -40012,12 +40012,13 @@ evidence:
     limitations: >-
       This atom records the source author's report of 1 exact rational certificate in the
       gist amundsk/78f9f0e7b4669f2f509a281845081768 at 511f56b, a dilation by 1 + 1e-12 of a
-      binary64 packing the packet pins by digest, kept as a derived exact fact with no
-      upstream byte retained. The author reports a least wall clearance of 8.2e-13 and a
+      binary64 packing the packet pins by digest, kept as a derived exact fact and, from 24
+      October under the author's CC0 1.0 dedication, retained as well. The author reports a least wall clearance of 8.2e-13 and a
       least pair separation of 1.2e-12 from Evan Daniel's verify_cert.py; measured here on
       this file, every wall is cleared by at least about 6.020e-13 (square 3 at the top)
       and every pair by at least 1.205e-12, so the reported 8.2e-13 is not this file's
-      (RF-1 of the 23 October review). The replay is E-amundsk-755-n303-exact-feasibility
+      (RF-1 of the 23 October review); the author's answer of 24 October attributes it to
+      an earlier, unsubmitted certificate. The replay is E-amundsk-755-n303-exact-feasibility
       and the review's own checker E-amundsk-755-n303-review-exact-feasibility. The
       source's own checkers were not run here. No two independent methods, human
       oversight or optimality is claimed.
@@ -45149,6 +45150,40 @@ evidence:
       seconds. Every positive clears every wall by at least 5.00e-21 and every pair by at
       least 9.99e-21, and the packet's sharp controls at 268 and 304 meet those margins on
       both routes. Independent review and confirmation remain pending. The source's own
+      checkers were not run here. The two maintained routes, the sqpack rational witness
+      verifier and the independent rational corner checker, share certificate parsing,
+      half-angle conversion, Fraction arithmetic and the separating-axis method. No two
+      independent methods, human oversight or optimality is claimed.
+  - id: E-amundsk-798-beyond-horizon-report
+    claim: upper-bound
+    scope:
+      n_values: [334, 338, 343, 376, 377, 379, 382, 416, 457, 458, 502, 504]
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Kristiansen issue 798 2026-10-24]'
+    certificate: packing/resources/web/amundsk-issue798-2026-10-24/source/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-24'
+    limitations: >-
+      This atom records the source author's report of 12 exact rational dilation
+      certificates in the gist amundsk/e4df936fb09c68446598d4c8309d0166 at c9be7b7, the
+      counts of issue 798 that the ledger of 24 October for the issue records, retained
+      under the author's CC0 1.0 dedication; 372 and 412 are above Francisco Couzo's
+      43f666c, an earlier publication, and are not recorded. A separate complete
+      repository replay is retained for n = 334, 338, 343, 376, 377, 379, 382, 416, 457,
+      458, 502 and 504: 12 positives and 24 duplicate-square and outside-container controls
+      passed their required outcomes on both routes, 6028026 pair decisions; summed over
+      the 36 jobs, the receipt records 845.53 route CPU seconds and 1289.15 job wall
+      seconds, the longest job 60.3 seconds. Every positive clears every wall by at least
+      5.98e-13 and every pair by at least 1.19e-12, as a 1e-12 dilation gives. The kernel's
+      sharp controls at exact contact and 1e-30 past it are as expected on both routes at
+      every count (receipts/sharp-controls-nNNN.json). Independent review and confirmation
+      remain pending; no stage 4 review is owed for a beyond-horizon row. The source's own
       checkers were not run here. The two maintained routes, the sqpack rational witness
       verifier and the independent rational corner checker, share certificate parsing,
       half-angle conversion, Fraction arithmetic and the separating-axis method. No two

@@ -1,0 +1,321 @@
+# What `python -m devtools.intake_ledger gather` reads: issue #798's fourteen claims at 334 to 504
+# (think-2l0q), and the one earlier publication below the start at any of them, Francisco Couzo's
+# 43f666c, pushed at 2026-10-24T06:10:44Z and not yet imported (think-gn29). The starts are frozen at
+# main 2ed0ea740 (#795's merge), so #763's and the 964ee2b notebook rows are in them, with Göbel's
+# construction beside each. Mishapolk/square-packing-records at 7e82c64 and evand/square-packing at
+# 659ee62, both unchanged since their last reads, state nothing below the start here, and #797's
+# L-band packings lie far above it. Each exact side is the certificate's header.
+format: intake-ledger-sources-v1
+read_at_main: 2ed0ea7409b0ea21c47881f8874ce92a9d2011e8
+read_on: '2026-10-24'
+rule: If they are reported in order, then each one should be recorded as a result, as long as each one is stronger
+  than the last. If a stronger result is reported first, then the other one should not be recorded since it is weaker
+  after that, unless there is some key reason it should be recorded.
+lanes: []
+reports:
+- report: franciscouzo/square-packing@43f666c
+  url: https://github.com/franciscouzo/square-packing/tree/43f666c23933fbc5cc418fa4e851218268fed0ed
+  reported_at: '2026-10-24T06:10:44Z'
+  holders: Francisco Couzo
+  bead: think-gn29
+  claims:
+  - n: 372
+    printed: '19.806121548578'
+    rounding: up
+    exact: 158311983486803019175166812327/7993083506961000000000000000
+    exact_from: certificates/best/n372.cert at 43f666c (its header), read from GitHub at the commit; not yet retained
+      (think-gn29 imports it)
+    first_committed: '2026-10-24T00:55:44Z'
+  - n: 376
+    printed: '19.890228421694'
+    rounding: up
+    exact: 882409641565338851963506378056124644404662148493744077/44363977268501911606722721886023372966000000000000000
+    exact_from: certificates/best/n376.cert at 43f666c (its header), read from GitHub at the commit; not yet retained
+      (think-gn29 imports it)
+    first_committed: '2026-10-24T00:55:44Z'
+  - n: 377
+    printed: '19.909958295503'
+    rounding: up
+    exact: 22756537622770605349944707642689904232895187360061155024169957191923/1142972641379720970306533711102042168856602315370941500000000000000
+    exact_from: certificates/best/n377.cert at 43f666c (its header), read from GitHub at the commit; not yet retained
+      (think-gn29 imports it)
+    first_committed: '2026-10-24T00:55:44Z'
+  - n: 412
+    printed: '20.822875655538'
+    rounding: up
+    exact: 177723905909134521458804683/8535031801041015625000000
+    exact_from: certificates/best/n412.cert at 43f666c (its header), read from GitHub at the commit; not yet retained
+      (think-gn29 imports it)
+    first_committed: '2026-10-24T00:55:44Z'
+  - n: 416
+    printed: '20.889675804154'
+    rounding: up
+    exact: 36587314157204851861506542293/1751454378719000000000000000
+    exact_from: certificates/best/n416.cert at 43f666c (its header), read from GitHub at the commit; not yet retained
+      (think-gn29 imports it)
+    first_committed: '2026-10-24T00:55:44Z'
+  - n: 458
+    printed: '21.889909897514'
+    rounding: up
+    exact: 93702897153275161352723517265203887251674768555089562119509281137719/4280643346271509184272652992806433462715091842726529500000000000000
+    exact_from: certificates/best/n458.cert at 43f666c (its header), read from GitHub at the commit; not yet retained
+      (think-gn29 imports it)
+    first_committed: '2026-10-24T00:55:44Z'
+  - n: 502
+    printed: '22.892030646456'
+    rounding: up
+    exact: 166138116388701103321442072171/7257465226853000000000000000
+    exact_from: certificates/best/n502.cert at 43f666c (its header), read from GitHub at the commit; not yet retained
+      (think-gn29 imports it)
+    first_committed: '2026-10-24T00:55:44Z'
+  - n: 504
+    printed: '22.925114765344'
+    rounding: up
+    exact: 59645875298511075644593175121/2601769976248000000000000000
+    exact_from: certificates/best/n504.cert at 43f666c (its header), read from GitHub at the commit; not yet retained
+      (think-gn29 imports it)
+    first_committed: '2026-10-24T00:55:44Z'
+  note: 'A publication in a watched repository with no issue (the owner, 2026-10-14), dated by the push that made
+    it public, 964ee2b..1c17153 at 2026-10-24T06:10:44Z in GitHub''s activity log; committed at 00:55:44Z. 1c17153
+    changes no certificate at these counts. Transcribed at the 8 of #798''s counts where certificates/best/nN.cert
+    differs from 964ee2b''s and states a side below the start; at the other 6 it is 964ee2b''s file. Its import,
+    and the credit its index gives each row, are think-gn29''s; this walk reads it as an earlier publication only.'
+- report: '#798'
+  issue: 798
+  holders: Amund Kristiansen
+  bead: think-2l0q
+  claims:
+  - n: 334
+    printed: '18.786944251907'
+    rounding: up
+    exact: 18786944251906076944251887289623/1000000000000000000000000000000
+    exact_from: s334_amund.cert at c9be7b7 (its header), retained in the amundsk-issue798-2026-10-24 packet (acquisition/claims.json)
+    first_committed: '2026-10-24T19:01:54Z'
+    measured:
+      against: franciscouzo/square-packing@964ee2b certificates/best/n334.cert
+      finding: the optimal assignment under the identity moves 20 squares beyond 0.1 (largest 0.410849) and 258
+        beyond 1e-2; nearest centres pair them one to one; 93 tilted squares against 98, the issue's figures
+      source: packing/resources/web/amundsk-issue798-2026-10-24/measure/identity-n334.json
+    new_packing:
+      source: '#798''s lineage table: ''new packing found from'' #763''s packing at the count'
+      continues: 'certificates/best/n334.cert at 964ee2b, the couzo-issue763-2026-10-23 row: Francisco Couzo (square-packing
+        live search), refining Kirill Tymchishin''s Kaggle notebook packing ("22-3662-cpu-cuda-mps-eda-union", run
+        361576574)'
+  - n: 338
+    printed: '18.887926955871'
+    rounding: up
+    exact: 18887926955870337926955851449621/1000000000000000000000000000000
+    exact_from: s338_amund.cert at c9be7b7 (its header), retained in the amundsk-issue798-2026-10-24 packet (acquisition/claims.json)
+    first_committed: '2026-10-24T19:01:54Z'
+    measured:
+      against: franciscouzo/square-packing@964ee2b certificates/best/n338.cert
+      finding: the optimal assignment under the identity moves 5 squares beyond 0.1 (largest 0.259588) and 128 beyond
+        1e-2; nearest centres pair them one to one; 104 tilted squares against 106, the issue's figures
+      source: packing/resources/web/amundsk-issue798-2026-10-24/measure/identity-n338.json
+    new_packing:
+      source: '#798''s lineage table: ''new packing found from'' #763''s packing at the count'
+      continues: 'certificates/best/n338.cert at 964ee2b, the alexchilton-fault-line-2026-10-23 row: alexchilton''s
+        Kaggle notebook packing ("fault-line-dp-basin-hopping-lb-22-3747", run 361412241)'
+  - n: 343
+    printed: '18.976291436857'
+    rounding: up
+    exact: 18976291436856010291436837033619/1000000000000000000000000000000
+    exact_from: s343_amund.cert at c9be7b7 (its header), retained in the amundsk-issue798-2026-10-24 packet (acquisition/claims.json)
+    first_committed: '2026-10-24T19:01:54Z'
+    measured:
+      against: franciscouzo/square-packing@964ee2b certificates/best/n343.cert
+      finding: the optimal assignment under the identity moves 5 squares beyond 0.1 (largest 0.174306) and 97 beyond
+        1e-2; nearest centres pair them one to one; 105 tilted squares against 109, the issue's figures
+      source: packing/resources/web/amundsk-issue798-2026-10-24/measure/identity-n343.json
+    new_packing:
+      source: '#798''s lineage table: ''new packing found from'' #763''s packing at the count'
+      continues: 'certificates/best/n343.cert at 964ee2b, the couzo-issue763-2026-10-23 row: Francisco Couzo (square-packing
+        live search)'
+  - n: 372
+    printed: '19.806121548598'
+    rounding: up
+    exact: 9903060774298500560774288597301/500000000000000000000000000000
+    exact_from: s372_amund.cert at c9be7b7 (its header), retained in the amundsk-issue798-2026-10-24 packet (acquisition/claims.json)
+    first_committed: '2026-10-24T19:01:54Z'
+    measured:
+      against: franciscouzo/square-packing@964ee2b certificates/best/n372.cert
+      finding: the optimal assignment under the identity moves 0 squares beyond 0.1 (largest 0.0786788) and 97 beyond
+        1e-2; nearest centres pair them one to one; 176 tilted squares against 177, the issue's figures; against
+        43f666c's packing, best under symmetry 0, 0 beyond 0.1 (largest 0.0557794)
+      source: packing/resources/web/amundsk-issue798-2026-10-24/measure/identity-n372.json
+    refines:
+      packing_of: Francisco Couzo (square-packing live search), refining Vladislav Lavrentev's Kaggle "CUDA Packing
+        Search" v11 packing
+      entry: franciscouzo/square-packing@964ee2b (certificates/best/n372.cert at 964ee2b, the couzo-issue763-2026-10-23
+        row)
+      source: '#798''s lineage table: ''refinement (no square moves > 0.1)'' of #763''s packing at the count'
+  - n: 376
+    printed: '19.884256884304'
+    rounding: up
+    exact: 19884256884303024256884283139601/1000000000000000000000000000000
+    exact_from: s376_amund.cert at c9be7b7 (its header), retained in the amundsk-issue798-2026-10-24 packet (acquisition/claims.json)
+    first_committed: '2026-10-24T19:01:54Z'
+    measured:
+      against: franciscouzo/square-packing@964ee2b certificates/best/n376.cert
+      finding: the optimal assignment under the identity moves 19 squares beyond 0.1 (largest 0.784817) and 344
+        beyond 1e-2; nearest centres do not pair them one to one; 143 tilted squares against 146, the issue's figures;
+        against 43f666c's packing, best under symmetry 0, 11 beyond 0.1 (largest 0.238978)
+      source: packing/resources/web/amundsk-issue798-2026-10-24/measure/identity-n376.json
+    new_packing:
+      source: '#798''s lineage table: ''new packing found from'' #763''s packing at the count'
+      continues: 'certificates/best/n376.cert at 964ee2b, the tymchishin-22-3662-2026-10-23 row: Kirill Tymchishin''s
+        Kaggle notebook packing ("22-3662-cpu-cuda-mps-eda-union", run 361576574)'
+  - n: 377
+    printed: '19.906977592561'
+    rounding: up
+    exact: 99534887962803649887962704113/5000000000000000000000000000
+    exact_from: s377_amund.cert at c9be7b7 (its header), retained in the amundsk-issue798-2026-10-24 packet (acquisition/claims.json)
+    first_committed: '2026-10-24T19:01:54Z'
+    measured:
+      against: franciscouzo/square-packing@964ee2b certificates/best/n377.cert
+      finding: the optimal assignment under the identity moves 29 squares beyond 0.1 (largest 0.77821) and 169 beyond
+        1e-2; nearest centres do not pair them one to one; 143 tilted squares against 128, the issue's figures;
+        against 43f666c's packing, best under symmetry 0, 29 beyond 0.1 (largest 0.77821)
+      source: packing/resources/web/amundsk-issue798-2026-10-24/measure/identity-n377.json
+    new_packing:
+      source: '#798''s lineage table: ''new packing found from'' #763''s packing at the count'
+      continues: 'certificates/best/n377.cert at 964ee2b, the kyleluecke-inos-2026-10-23 row: kyleluecke''s Kaggle
+        notebook packing ("inos-v0-6-k-mosh-squares-in-squares-22-366222", run 361592092)'
+  - n: 379
+    printed: '19.950579117727'
+    rounding: up
+    exact: 19950579117726400579117706449599/1000000000000000000000000000000
+    exact_from: s379_amund.cert at c9be7b7 (its header), retained in the amundsk-issue798-2026-10-24 packet (acquisition/claims.json)
+    first_committed: '2026-10-24T19:01:54Z'
+    measured:
+      against: franciscouzo/square-packing@964ee2b certificates/best/n379.cert
+      finding: the optimal assignment under the identity moves 3 squares beyond 0.1 (largest 0.196647) and 96 beyond
+        1e-2; nearest centres pair them one to one; 96 tilted squares against 98, the issue's figures
+      source: packing/resources/web/amundsk-issue798-2026-10-24/measure/identity-n379.json
+    new_packing:
+      source: '#798''s lineage table: ''new packing found from'' #763''s packing at the count'
+      continues: 'certificates/best/n379.cert at 964ee2b, the couzo-964ee2b-2026-10-23 row: Francisco Couzo (square-packing
+        live search)'
+  - n: 382
+    printed: '19.987567257068'
+    rounding: up
+    exact: 9993783628533528783628523534799/500000000000000000000000000000
+    exact_from: s382_amund.cert at c9be7b7 (its header), retained in the amundsk-issue798-2026-10-24 packet (acquisition/claims.json)
+    first_committed: '2026-10-24T19:01:54Z'
+    measured:
+      against: franciscouzo/square-packing@964ee2b certificates/best/n382.cert (#670's certificate)
+      finding: the optimal assignment under the identity moves 1 squares beyond 0.1 (largest 0.198911) and 39 beyond
+        1e-2; nearest centres pair them one to one; 128 tilted squares against 130, the issue's figures
+      source: packing/resources/web/amundsk-issue798-2026-10-24/measure/identity-n382.json
+    new_packing:
+      source: '#798''s lineage table: ''new packing found from'' #763''s packing at the count'
+      continues: 'certificates/best/n382.cert at 964ee2b, byte for byte #670''s certificate, the couzo-issue670-2026-10-17
+        row: Francisco Couzo, with Kevin Fang''s seed and construction'
+  - n: 412
+    printed: '20.822875656790'
+    rounding: up
+    exact: 10411437828394813437828384401791/500000000000000000000000000000
+    exact_from: s412_amund.cert at c9be7b7 (its header), retained in the amundsk-issue798-2026-10-24 packet (acquisition/claims.json)
+    first_committed: '2026-10-24T19:01:54Z'
+    measured:
+      against: franciscouzo/square-packing@964ee2b certificates/best/n412.cert
+      finding: the optimal assignment under the identity moves 0 squares beyond 0.1 (largest 0.00745349) and 0 beyond
+        1e-2; nearest centres pair them one to one; 47 tilted squares against 47, the issue's figures; against 43f666c's
+        packing, best under symmetry 0, 2 beyond 0.1 (largest 0.118411)
+      source: packing/resources/web/amundsk-issue798-2026-10-24/measure/identity-n412.json
+    refines:
+      packing_of: Francisco Couzo (square-packing live search)
+      entry: franciscouzo/square-packing@964ee2b (certificates/best/n412.cert at 964ee2b, the couzo-issue763-2026-10-23
+        row)
+      source: '#798''s lineage table: ''refinement (no square moves > 0.1)'' of #763''s packing at the count'
+  - n: 416
+    printed: '20.889554050378'
+    rounding: up
+    exact: 1044477702518860877702517816379/50000000000000000000000000000
+    exact_from: s416_amund.cert at c9be7b7 (its header), retained in the amundsk-issue798-2026-10-24 packet (acquisition/claims.json)
+    first_committed: '2026-10-24T19:01:54Z'
+    measured:
+      against: franciscouzo/square-packing@964ee2b certificates/best/n416.cert
+      finding: the optimal assignment under the identity moves 8 squares beyond 0.1 (largest 0.321456) and 43 beyond
+        1e-2; nearest centres pair them one to one; 151 tilted squares against 147, the issue's figures; against
+        43f666c's packing, best under symmetry 7, 9 beyond 0.1 (largest 0.400507)
+      source: packing/resources/web/amundsk-issue798-2026-10-24/measure/identity-n416.json
+    new_packing:
+      source: '#798''s lineage table: ''new packing found from'' #763''s packing at the count'
+      continues: 'certificates/best/n416.cert at 964ee2b, the couzo-issue763-2026-10-23 row: Francisco Couzo (square-packing
+        live search), refining Vladislav Lavrentev''s Kaggle "CUDA Packing Search" v11 packing'
+  - n: 457
+    printed: '21.887025665808'
+    rounding: up
+    exact: 68396955205649731330205581333/3125000000000000000000000000
+    exact_from: s457_amund.cert at c9be7b7 (its header), retained in the amundsk-issue798-2026-10-24 packet (acquisition/claims.json)
+    first_committed: '2026-10-24T19:01:54Z'
+    measured:
+      against: franciscouzo/square-packing@964ee2b certificates/best/n457.cert
+      finding: the optimal assignment under the identity moves 26 squares beyond 0.1 (largest 0.45069) and 132 beyond
+        1e-2; nearest centres pair them one to one; 155 tilted squares against 155, the issue's figures
+      source: packing/resources/web/amundsk-issue798-2026-10-24/measure/identity-n457.json
+    new_packing:
+      source: '#798''s lineage table: ''new packing found from'' #763''s packing at the count'
+      continues: 'certificates/best/n457.cert at 964ee2b, the couzo-issue763-2026-10-23 row: Francisco Couzo (square-packing
+        live search), refining Vladislav Lavrentev''s Kaggle "CUDA Packing Search" v11 packing'
+  - n: 458
+    printed: '21.888719382533'
+    rounding: up
+    exact: 547217984563320717984562773489/25000000000000000000000000000
+    exact_from: s458_amund.cert at c9be7b7 (its header), retained in the amundsk-issue798-2026-10-24 packet (acquisition/claims.json)
+    first_committed: '2026-10-24T19:01:54Z'
+    measured:
+      against: franciscouzo/square-packing@964ee2b certificates/best/n458.cert
+      finding: the optimal assignment under the identity moves 11 squares beyond 0.1 (largest 0.719058) and 127
+        beyond 1e-2; nearest centres pair them one to one; 174 tilted squares against 174, the issue's figures;
+        against 43f666c's packing, best under symmetry 7, 12 beyond 0.1 (largest 0.701608)
+      source: packing/resources/web/amundsk-issue798-2026-10-24/measure/identity-n458.json
+    new_packing:
+      source: '#798''s lineage table: ''new packing found from'' #763''s packing at the count'
+      continues: 'certificates/best/n458.cert at 964ee2b, the couzo-issue763-2026-10-23 row: Francisco Couzo (square-packing
+        live search), refining Vladislav Lavrentev''s Kaggle "CUDA Packing Search" v11 packing'
+  - n: 502
+    printed: '22.891715605670'
+    rounding: up
+    exact: 1144585780283463585780282318977/50000000000000000000000000000
+    exact_from: s502_amund.cert at c9be7b7 (its header), retained in the amundsk-issue798-2026-10-24 packet (acquisition/claims.json)
+    first_committed: '2026-10-24T19:01:54Z'
+    measured:
+      against: franciscouzo/square-packing@964ee2b certificates/best/n502.cert
+      finding: the optimal assignment under the identity moves 8 squares beyond 0.1 (largest 0.253739) and 81 beyond
+        1e-2; nearest centres pair them one to one; 195 tilted squares against 200, the issue's figures; against
+        43f666c's packing, best under symmetry 5, 9 beyond 0.1 (largest 0.248698)
+      source: packing/resources/web/amundsk-issue798-2026-10-24/measure/identity-n502.json
+    new_packing:
+      source: '#798''s lineage table: ''new packing found from'' #763''s packing at the count'
+      continues: 'certificates/best/n502.cert at 964ee2b, the couzo-issue763-2026-10-23 row: Francisco Couzo (square-packing
+        live search), refining Vladislav Lavrentev''s Kaggle "CUDA Packing Search" v11 packing'
+  - n: 504
+    printed: '22.921326029542'
+    rounding: up
+    exact: 22921326029541371326029518449539/1000000000000000000000000000000
+    exact_from: s504_amund.cert at c9be7b7 (its header), retained in the amundsk-issue798-2026-10-24 packet (acquisition/claims.json)
+    first_committed: '2026-10-24T19:01:54Z'
+    measured:
+      against: franciscouzo/square-packing@964ee2b certificates/best/n504.cert
+      finding: the optimal assignment under the identity moves 29 squares beyond 0.1 (largest 0.870755) and 454
+        beyond 1e-2; nearest centres do not pair them one to one; 183 tilted squares against 177, the issue's figures;
+        against 43f666c's packing, best under symmetry 1, 27 beyond 0.1 (largest 0.669064)
+      source: packing/resources/web/amundsk-issue798-2026-10-24/measure/identity-n504.json
+    new_packing:
+      source: '#798''s lineage table: ''new packing found from'' #763''s packing at the count'
+      continues: 'certificates/best/n504.cert at 964ee2b, the alexchilton-fault-line-2026-10-23 row: alexchilton''s
+        Kaggle notebook packing ("fault-line-dp-basin-hopping-lb-22-3747", run 361412241)'
+  note: 'Each claim is the exact side of s<N>_amund.cert in the gist amundsk/e4df936fb09c68446598d4c8309d0166 at
+    c9be7b7, rounded up at 12 places as the issue prints it. The issue says each packing was found from #763''s
+    certified packing at the count (franciscouzo/square-packing@964ee2b), credited as #763 credits it.'
+exceptions: []
+other_items: []
+rulings:
+- ruling: restatement
+  decided: '2026-10-23'
+  bead: think-fwa9
+- ruling: classical-constructions
+  decided: '2026-10-23'
+  bead: think-8krd

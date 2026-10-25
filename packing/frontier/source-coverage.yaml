@@ -7699,9 +7699,10 @@ sources:
   - resources/web/amundsk-n303-2026-10-23/acquisition/claims.json
   evidence:
   - E-amundsk-755-n303-report
-  notes: The 1 complete certificate is kept as a derived exact fact, no upstream byte retained, admitted
-    only where its exact side equals, or rounds up to, the side its source prints. T-239 records the
-    in-horizon report. All 3 native jobs have full outcomes. No selected override or superseded claim
+  notes: The 1 complete certificate is kept as a derived exact fact, admitted only where its exact side
+    equals, or rounds up to, the side its source prints; from 24 October 2026 the author's CC0 1.0
+    dedication (issue 755, issuecomment-6388401978) lets the packet retain the certificate, its input and
+    the README beside the fact. T-239 records the in-horizon report. All 3 native jobs have full outcomes. No selected override or superseded claim
     is created at this source-only stage; current cases and earlier source ownership remain unchanged.
 
 - id: evand-n343-sweep-2026-10-20
@@ -11104,6 +11105,59 @@ sources:
     and every side is below Göbel's construction. The certificates are retained as factual
     data; the notebook's licence is followed up on think-m8f4.
   claims_record: resources/web/couzo-issue763-2026-10-23/acquisition/beyond-horizon-rows-push-361589987.json
+- id: amundsk-issue798-2026-10-24
+  title: Amund Kristiansen's twelve beyond-horizon certificates at c9be7b7, issue798
+  role: source-repository
+  url: https://gist.github.com/amundsk/e4df936fb09c68446598d4c8309d0166/c9be7b70e2220c2eccb2c5ea746094bc85dda405
+  local: resources/web/amundsk-issue798-2026-10-24/
+  source_key: '[Kristiansen issue 798 2026-10-24]'
+  scope:
+    n_values:
+    - 334
+    - 338
+    - 343
+    - 376
+    - 377
+    - 379
+    - 382
+    - 416
+    - 457
+    - 458
+    - 502
+    - 504
+  reviewed: '2026-10-24'
+  source_date: '2026-10-24'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/amundsk-issue798-2026-10-24/README.md
+  - resources/web/amundsk-issue798-2026-10-24/acquisition/claims.json
+  evidence:
+  - E-amundsk-798-beyond-horizon-report
+  notes: >-
+    Issue 798's fourteen dilation certificates, s<N>_amund.cert in the gist at c9be7b7, are
+    retained as the author wrote them under his CC0 1.0 dedication (issue 755,
+    issuecomment-6388401978), each admitted only where its exact side rounds up at 12 places
+    to the side the issue prints. All fourteen lie beyond the case corpus, so no register
+    entry records them. The ledger of 24 October for the issue
+    (campaign/issue-intake/upper-bounds-issue798-20261024), walked from starts frozen at main
+    2ed0ea740 with Göbel's construction beside each row, and with Francisco Couzo's 43f666c,
+    pushed at 2026-10-24T06:10:44Z and not yet imported (think-gn29), as an earlier
+    publication, records 12 as current rows at the exact side rounded up at 12 places, each
+    below every earlier report at its count by 1.24e-05 (457) to 8.75e-03 (334). They
+    supersede the rows of couzo-issue763-2026-10-23 (6), alexchilton-fault-line-2026-10-23
+    (2), tymchishin-22-3662-2026-10-23 (1), kyleluecke-inos-2026-10-23 (1),
+    couzo-964ee2b-2026-10-23 (1) and couzo-issue670-2026-10-17 (1). At 376, 377, 416, 458,
+    502 and 504 they are decided against 43f666c's sides, whose rows will stand between once
+    that import lands. 372 and 412 are above 43f666c, so not recorded; the packet keeps both
+    certificates, compared in its claim record. Both maintained routes accept all twelve and
+    refuse their duplicate-square and outside-container controls
+    (receipts/exact-certification.json.xz), the sharp controls at exact contact and
+    1e-30 past it are as expected on both (receipts/sharp-controls-nNNN.json), and every side
+    is below Göbel's construction. The issue says each packing was found from Couzo's 964ee2b
+    packing at the count and credits it as issue 763 does, which the packet's identity
+    measurements support (measure/identity-nNNN.json). Claude assistance disclosed.
+  claims_record: resources/web/amundsk-issue798-2026-10-24/acquisition/beyond-horizon-claims.json
 selected_overrides:
 - n: 29
   source_id: pingyou-pr622-certificate-2026-10-15
@@ -19065,7 +19119,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '19.987621153966'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: amundsk-issue798-2026-10-24
   bead: think-f28n
 - n: 403
   source_id: couzo-issue670-2026-10-17
@@ -25668,14 +25723,16 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '18.795693769192'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: amundsk-issue798-2026-10-24
   bead: think-ptkk
 - n: 343
   source_id: couzo-issue763-2026-10-23
   claim: upper-bound
   value: '18.977171584758'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: amundsk-issue798-2026-10-24
   bead: think-ptkk
 - n: 370
   source_id: couzo-issue763-2026-10-23
@@ -25752,7 +25809,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '20.889947557884'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: amundsk-issue798-2026-10-24
   bead: think-ptkk
 - n: 417
   source_id: couzo-issue763-2026-10-23
@@ -25801,14 +25859,16 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '21.887038105268'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: amundsk-issue798-2026-10-24
   bead: think-ptkk
 - n: 458
   source_id: couzo-issue763-2026-10-23
   claim: upper-bound
   value: '21.889913759628'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: amundsk-issue798-2026-10-24
   bead: think-ptkk
 - n: 459
   source_id: couzo-issue763-2026-10-23
@@ -25906,7 +25966,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '22.892369983241'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: amundsk-issue798-2026-10-24
   bead: think-ptkk
 - n: 503
   source_id: couzo-issue763-2026-10-23
@@ -26970,7 +27031,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '19.950889681485'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: amundsk-issue798-2026-10-24
   bead: think-ptkk
 - n: 380
   source_id: couzo-964ee2b-2026-10-23
@@ -27980,7 +28042,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '19.897064162577'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: amundsk-issue798-2026-10-24
   bead: think-lyf9
 - n: 419
   source_id: tymchishin-22-3662-2026-10-23
@@ -28085,7 +28148,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '19.909958295508'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: amundsk-issue798-2026-10-24
   bead: think-lyf9
 - n: 378
   source_id: kyleluecke-inos-2026-10-23
@@ -28211,7 +28275,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '18.893658115438'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: amundsk-issue798-2026-10-24
   bead: think-lyf9
 - n: 411
   source_id: alexchilton-fault-line-2026-10-23
@@ -28239,7 +28304,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '22.925987278335'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: amundsk-issue798-2026-10-24
   bead: think-lyf9
 - n: 508
   source_id: alexchilton-fault-line-2026-10-23
@@ -28395,4 +28461,88 @@ beyond_horizon_claims:
   assurance: reported
   disposition: tracked-outside-case-corpus
   bead: think-lyf9
+- n: 334
+  source_id: amundsk-issue798-2026-10-24
+  claim: upper-bound
+  value: '18.786944251907'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-2l0q
+- n: 338
+  source_id: amundsk-issue798-2026-10-24
+  claim: upper-bound
+  value: '18.887926955871'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-2l0q
+- n: 343
+  source_id: amundsk-issue798-2026-10-24
+  claim: upper-bound
+  value: '18.976291436857'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-2l0q
+- n: 376
+  source_id: amundsk-issue798-2026-10-24
+  claim: upper-bound
+  value: '19.884256884304'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-2l0q
+- n: 377
+  source_id: amundsk-issue798-2026-10-24
+  claim: upper-bound
+  value: '19.906977592561'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-2l0q
+- n: 379
+  source_id: amundsk-issue798-2026-10-24
+  claim: upper-bound
+  value: '19.950579117727'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-2l0q
+- n: 382
+  source_id: amundsk-issue798-2026-10-24
+  claim: upper-bound
+  value: '19.987567257068'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-2l0q
+- n: 416
+  source_id: amundsk-issue798-2026-10-24
+  claim: upper-bound
+  value: '20.889554050378'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-2l0q
+- n: 457
+  source_id: amundsk-issue798-2026-10-24
+  claim: upper-bound
+  value: '21.887025665808'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-2l0q
+- n: 458
+  source_id: amundsk-issue798-2026-10-24
+  claim: upper-bound
+  value: '21.888719382533'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-2l0q
+- n: 502
+  source_id: amundsk-issue798-2026-10-24
+  claim: upper-bound
+  value: '22.891715605670'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-2l0q
+- n: 504
+  source_id: amundsk-issue798-2026-10-24
+  claim: upper-bound
+  value: '22.921326029542'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-2l0q
 pending_catalogue_intake: []

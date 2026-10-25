@@ -28440,6 +28440,149 @@ occurrences:
   disposition: unresolved
   evidence: []
   note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Kristiansen issue 798 2026-10-24]'
+    field: /authors/0
+  expected_text: Kristiansen
+  start: 0
+  end: 11
+  label: Kristiansen
+  role: source-author
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  note: Reviewed packing/resources/bibliography.yaml [[Kristiansen issue 798 2026-10-24]] /authors/0 span 0:11. Issue 798, filed by the GitHub account amundsk, and the gist's README credit Amund Kristiansen; the certificates are his searches', made with Evan Daniel's tools.
+  contributor_id: amund-kristiansen
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Kristiansen issue 798 2026-10-24]'
+    field: /credit
+  expected_text: Kristiansen after Couzo, Lavrentev, Tymchishin, alexchilton, kyleluecke,
+    Fang, Daniel
+  start: 0
+  end: 11
+  label: Kristiansen
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  note: Reviewed packing/resources/bibliography.yaml [[Kristiansen issue 798 2026-10-24]] /credit span 0:11. Issue 798 and the gist's README credit Amund Kristiansen (GitHub @amundsk).
+  contributor_id: amund-kristiansen
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Kristiansen issue 798 2026-10-24]'
+    field: /credit
+  expected_text: Kristiansen after Couzo, Lavrentev, Tymchishin, alexchilton, kyleluecke,
+    Fang, Daniel
+  start: 18
+  end: 23
+  label: Couzo
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - bibliography
+  note: Reviewed source credit matches the evidenced person and printed name; issue 798 says each packing was found from Francisco Couzo's certified packing at the count at franciscouzo/square-packing 964ee2b (issue 763), credited as issue 763 credits it, and the original credit role is retained.
+  contributor_id: francisco-couzo
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Kristiansen issue 798 2026-10-24]'
+    field: /credit
+  expected_text: Kristiansen after Couzo, Lavrentev, Tymchishin, alexchilton, kyleluecke,
+    Fang, Daniel
+  start: 25
+  end: 34
+  label: Lavrentev
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - source-credit
+  - bibliography
+  note: Reviewed source credit matches the evidenced person and printed name; issue 798's lineage table credits the start packings at 416, 457, 458 and 502 to Couzo refining Vladislav Lavrentev's Kaggle CUDA Packing Search v11 packings, as issue 763's index does, and the chain through Couzo retains the link.
+  contributor_id: vladislav-lavrentev
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Kristiansen issue 798 2026-10-24]'
+    field: /credit
+  expected_text: Kristiansen after Couzo, Lavrentev, Tymchishin, alexchilton, kyleluecke,
+    Fang, Daniel
+  start: 36
+  end: 46
+  label: Tymchishin
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - source-credit
+  - bibliography
+  note: Reviewed source credit matches the evidenced person and printed name; issue 798's lineage table credits the start packing at 376 to Kirill Tymchishin's Kaggle notebook, and the one at 334 to Couzo refining it, as issue 763's index does.
+  contributor_id: kirill-tymchishin
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Kristiansen issue 798 2026-10-24]'
+    field: /credit
+  expected_text: Kristiansen after Couzo, Lavrentev, Tymchishin, alexchilton, kyleluecke,
+    Fang, Daniel
+  start: 48
+  end: 59
+  label: alexchilton
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - source-credit
+  - bibliography
+  note: Reviewed source credit matches the evidenced handle; issue 798's lineage table credits the start packings at 338 and 504 to the Kaggle account alexchilton's notebook, as issue 763's index does, by the handle, the only name the source gives.
+  contributor_id: alexchilton
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Kristiansen issue 798 2026-10-24]'
+    field: /credit
+  expected_text: Kristiansen after Couzo, Lavrentev, Tymchishin, alexchilton, kyleluecke,
+    Fang, Daniel
+  start: 61
+  end: 71
+  label: kyleluecke
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - source-credit
+  - bibliography
+  note: Reviewed source credit matches the evidenced handle; issue 798's lineage table credits the start packing at 377 to the Kaggle account kyleluecke's notebook, as issue 763's index does, by the handle, the only name the source gives.
+  contributor_id: kyleluecke
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Kristiansen issue 798 2026-10-24]'
+    field: /credit
+  expected_text: Kristiansen after Couzo, Lavrentev, Tymchishin, alexchilton, kyleluecke,
+    Fang, Daniel
+  start: 73
+  end: 77
+  label: Fang
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  note: Reviewed source credit matches the evidenced person and printed name; issue 798's lineage table credits the start packing at 382 to Couzo with Kevin Fang's seed and construction, as issue 763's manifest does, and the chain through Couzo retains the link.
+  contributor_id: kevin-fang
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Kristiansen issue 798 2026-10-24]'
+    field: /credit
+  expected_text: Kristiansen after Couzo, Lavrentev, Tymchishin, alexchilton, kyleluecke,
+    Fang, Daniel
+  start: 79
+  end: 85
+  label: Daniel
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - repository-license
+  - bibliography
+  note: Reviewed source credit matches the evidenced person and printed name; issue 798 names Evan Daniel's fq quench, basin explorer, dilate_cert.py and checkers at evand/square-packing 7982d7a as its tools, and method credit travels with the result.
+  contributor_id: evan-daniel
 inspections:
 - path: packing/resources/papers/addis-locatelli-schoen-2008-disk-packing-square.pdf
   status: pending
