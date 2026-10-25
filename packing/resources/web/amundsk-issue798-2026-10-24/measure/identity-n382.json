@@ -1,0 +1,112 @@
+{
+ "format": "measure-identity-v1",
+ "n": 382,
+ "inputs": {
+  "#798": {
+   "input": "packet",
+   "packet": "amundsk-issue798-2026-10-24",
+   "side": "9993783628533528783628523534799/500000000000000000000000000000"
+  },
+  "964ee2b": {
+   "input": "evand-cert",
+   "path": "packing/resources/web/couzo-issue670-2026-10-17/source/certificates/n382.cert",
+   "sha256": "9db528330c8db2b193df228e1140714f2e7babedf2dead5e7a9b5cb5af9f5ac5",
+   "side": "9993810576982755438812785108659/500000000000000000000000000000"
+  }
+ },
+ "tilts": {
+  "#798": {
+   "exactly_turned": 331,
+   "tilted_beyond_1_degree": 128,
+   "tilted_positive": 71,
+   "tilted_negative": 57,
+   "tilt_range_degrees": [
+    2.1235233400184637,
+    27.10410181313356
+   ],
+   "near_upright": 203,
+   "near_upright_beyond_1e-3_degrees": [
+    0.086205000784815
+   ]
+  },
+  "964ee2b": {
+   "exactly_turned": 132,
+   "tilted_beyond_1_degree": 130,
+   "tilted_positive": 71,
+   "tilted_negative": 59,
+   "tilt_range_degrees": [
+    1.646739921166045,
+    27.11372714923757
+   ],
+   "near_upright": 2,
+   "near_upright_beyond_1e-3_degrees": [
+    -0.1492730088473877,
+    -0.005758442233315009
+   ]
+  }
+ },
+ "pairs": [
+  {
+   "view": "#798",
+   "against": "964ee2b",
+   "side_difference": "-5.389690e-05",
+   "side_difference_exact": "-1347422461332759213078693/25000000000000000000000000000",
+   "nearest_centre": {
+    "one_to_one": true,
+    "symmetry": 0,
+    "largest_displacement": "1.989106e-1",
+    "largest_turn_degrees": "11.86",
+    "moved_beyond": {
+     "1e-9": 208,
+     "1e-6": 207,
+     "1e-3": 130,
+     "1e-2": 39,
+     "1e-1": 1
+    },
+    "turned_beyond_1e-6": 133
+   },
+   "assignment": {
+    "symmetry": 0,
+    "largest_move": "0.198911",
+    "moved_beyond": {
+     "1e-9": 208,
+     "1e-6": 207,
+     "1e-3": 130,
+     "1e-2": 39,
+     "1e-1": 1
+    },
+    "largest_turn_degrees": "11.86",
+    "turned_beyond_1e-6": 133
+   },
+   "bands": {
+    "assignment": "identity, least total squared centre displacement",
+    "tilted_paired_same_sign": 128,
+    "tilted_paired_same_sign_within_1e-1": 128,
+    "tilted_paired_opposite_sign": 0,
+    "tilted_paired_opposite_sign_beyond_1e-1": 0,
+    "tilted_paired_with_untilted": 0,
+    "tilt_angles_shared_within_1e-4_degrees": 0
+   },
+   "centred": {
+    "alignment": "box centres",
+    "symmetry": 0,
+    "total_squared": "0.0755682",
+    "runner_up_symmetry": 7,
+    "runner_up_total_squared": "25.6147",
+    "largest_move": "0.198938",
+    "rms_move": "0.0140649",
+    "bottleneck": "0.198938",
+    "moved_beyond": {
+     "1e-9": 382,
+     "1e-6": 382,
+     "1e-3": 132,
+     "1e-2": 39,
+     "1e-1": 1
+    },
+    "nearest_one_to_one": true,
+    "turned_beyond_1_degree": 7,
+    "tilts_reversed_beyond_1_degree": 0
+   }
+  }
+ ]
+}

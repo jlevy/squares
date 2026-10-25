@@ -1,0 +1,4 @@
+{
+  "format": "intake-ledger-github-v1",
+  "items": [{"report":"#798","kind":"issue","number":798,"url":"https://github.com/jlevy/squares/issues/798","author":"amundsk","created_at":"2026-10-24T19:03:14Z","state":"open","closed_at":null,"title":"Fourteen new upper bounds at n = 334–504 (334, 338, 343, 372, 376, 377, 379, 382, 412, 416, 457, 458, 502, 504): registration request"}]
+}

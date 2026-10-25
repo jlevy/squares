@@ -799,7 +799,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "5239214a2e0b9812c156c04fbdc4e6c77bb7b0f6"
+DATA_REVISION = "02a812c7f21a8fe37e7c1d3272ecee0e76c47f42"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -8926,6 +8926,59 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "revision 00f19d7f, and after merging main 3e1349802 (#801) at link revision "
             "5239214a with that main's two files swapped in, with the same result. No register "
             "entry is added. No PDF was printed; it prints from that HTML. Retain v0.2.7."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/devtools/site_resources.py",
+            "packing/devtools/upper_bound_reports.py",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The import of #798's twelve beyond-horizon rows and #755's answers "
+            "(think-2l0q, think-fc1n): a new coverage source with 12 rows superseding 12 of "
+            "main's, the #798 request entry and #755's, T-239's notes and claim, and "
+            "upper_bound_reports admitting a derived fact beside a file its packet retains, "
+            "against main 755ef426b (#794): rendered at link revision a2a4953a into empty "
+            "site directories, twice from this tree and once from it with main's "
+            "result-requests.yaml, upper_bound_reports.py, results.yaml and "
+            "source-coverage.yaml swapped in, render_n11_lower_bounds_explainer, with its "
+            "math prepared by Playwright's pinned headless shell, "
+            "render_n11_optimality_review, render_n11_threshold_bound_review and "
+            "render_packing_methods write all 69 files byte-identical across the three; "
+            "measured first against main 2ed0ea740 (#795) at link revision bda51090, with "
+            "the same result. With the other-projects card for #798's gist added to "
+            "site_resources.py, measured again at link revision 23bd0a0f with main's five "
+            "changed inputs swapped in: twice from this tree and once swapped, 69 files "
+            "each, all byte-identical across the three; and after fact_witness read the "
+            "manifest only for a retained file, at link revision 275bfa37 with the same five "
+            "files swapped in: the same outcome. After the merge of main 3e1349802 (#801) "
+            "and review A's fixes, at link revision a2e585e7 with that main's five candidate "
+            "inputs swapped in: twice from this tree and once swapped, 69 files each, all "
+            "byte-identical across the three. After the merge of main 4089f9587 (#800) and "
+            "the re-chain through 43f666c's rows, at link revision 5db7c5f6 with that main's "
+            "five candidate inputs swapped in: the same outcome, 69 files each. No register "
+            "entry is added, so the "
+            "explainer's result count is unchanged. No PDF was printed; each prints from "
+            "that HTML. Retain v0.4.27, v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
 )

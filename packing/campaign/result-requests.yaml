@@ -22662,8 +22662,9 @@ issues:
       9.89e-6 below T-230, the house at 303 (Daniel, #728). The source calls it a new packing
       found from Daniel's registered packing by a perturb-and-polish search with Daniel's fq
       quench, not a refinement, and claims the upper bound only. Triaged on 23 October 2026
-      (think-tqb5): no licence stated, so retained as a derived exact fact in
-      amundsk-n303-2026-10-23, replayed on this repository's two exact routes with the gross
+      (think-tqb5): retained in amundsk-n303-2026-10-23, at first as a derived exact fact for
+      want of a licence, and with the author's CC0 1.0 dedication of 24 October as the three
+      files themselves; replayed on this repository's two exact routes with the gross
       and sharp controls refused, and registered as T-239 at V0/C0; measured pose by pose, it
       pairs one to one with T-230's packing with 12 squares moved beyond a tenth and five more
       tilted, another arrangement of T-230's packing, not a refinement. The stage 4 review of
@@ -22672,7 +22673,7 @@ issues:
       request. Registered as T-238 on the records branch and renumbered T-239 on 24 October,
       before any reply named it, when the owner gave T-237 and T-238 to #750 (think-4o9c).
       Claude assistance disclosed.
-    read_through: '2026-10-23T11:12:48Z'
+    read_through: '2026-10-24T19:13:49Z'
     results:
     - key: n303
       claim: >-
@@ -22689,7 +22690,8 @@ issues:
     beads:
     - think-tqb5
     - think-jdz0
-    answer_bead: think-tqb5
+    - think-fc1n
+    answer_bead: think-fc1n
     replies:
     - url: https://github.com/jlevy/squares/issues/755#issuecomment-6380774849
       date: '2026-10-24'
@@ -22710,6 +22712,24 @@ issues:
     notes: >-
       The reply posted at 2026-10-24T06:13:58Z (issuecomment-6380774849) was edited at
       06:17:22Z to become the final comment, and the issue was closed with it at 06:17:24Z.
+
+
+      The author's comment of 2026-10-24T19:13:49Z (issuecomment-6388401978), posted on the
+      closed issue, answers the final comment's three questions. (1) The 8.2e-13 (8.165e-13)
+      in the issue was the least wall clearance of an earlier, slightly larger certificate
+      from the same search, side 17.909763172478, which was never submitted. On
+      s303_amund.cert at 511f56b verify_cert.py prints 6.020e-13 at square #3, as RF-1
+      measured. (2) The certificate was made with search/packer/dilate_cert.py at
+      evand/square-packing 7982d7a from s303_amund.input.txt, the gist's bytes, on macOS 26
+      arm64 with Python 3.14.6. math.tan is therefore Apple's libm, which accounts for RF-3's
+      36 tangents one unit in the last place from a Linux replay. Only the comment line was
+      edited afterwards, to remove a local path. (3) The author dedicates s303_amund.cert,
+      s303_amund.input.txt and the gist's README to the public domain under CC0 1.0, and
+      asks that both files be kept. The same dedication covers every certificate, input
+      packing and README in #798's gist at c9be7b7. The records change of think-fc1n retains
+      the three files in amundsk-n303-2026-10-23 and records the answers on T-239. The
+      bound, V3/C3, S2 and the credit are unchanged. The follow-up that says so follows that
+      change's merge and verified deploy.
   - number: 763
     title: '268–9802: registration request'
     author: franciscouzo
@@ -23755,3 +23775,75 @@ issues:
     close_when: >-
       The reported row and its credit to Evan Daniel's earlier bound are on main, the
       replay and review disposition are recorded, and the reply that reports them is posted.
+  - number: 798
+    title: 'Fourteen new upper bounds at n = 334–504 (334, 338, 343, 372, 376, 377, 379, 382, 412, 416,
+      457, 458, 502, 504): registration request'
+    author: amundsk
+    opened: '2026-10-24'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Amund Kristiansen reports fourteen upper bounds beyond the case corpus, at 334, 338, 343,
+      372, 376, 377, 379, 382, 412, 416, 457, 458, 502 and 504, each the exact rational side of a
+      dilation certificate (delta 1e-12, Evan Daniel's dilate_cert.py at 7982d7a) in the gist
+      amundsk/e4df936fb09c68446598d4c8309d0166 at c9be7b70e2220c2eccb2c5ea746094bc85dda405,
+      rounded up at 12 places, and each below the side Francisco Couzo's 964ee2b states at the
+      count. The issue calls twelve new packings found from 964ee2b's packing at the count and
+      two, 372 and 412, refinements of it. The author dedicated every certificate, input packing
+      and README in the gist to the public domain under CC0 1.0 in a comment on #755
+      (issuecomment-6388401978), so the amundsk-issue798-2026-10-24 packet retains all 29 files.
+      Triaged on 24 October 2026 (think-2l0q) and imported the same day: the 28 digests the
+      issue prints are the gist's, every printed side is its certificate's exact side rounded up,
+      and the lineage figures against 964ee2b reproduce exactly. The ledger of 24 October for the
+      issue (upper-bounds-issue798-20261024) reads Couzo's 43f666c, pushed at
+      2026-10-24T06:10:44Z and imported since by #800 (think-gn29), as an earlier publication: it is
+      1.91e-11 below the issue's side at 372 and 1.25e-9 below at 412, so those two are not
+      recorded, and the other twelve are recorded as beyond-horizon rows, below every earlier
+      report by 1.24e-5 (457) to 8.75e-3 (334). Claude assistance disclosed.
+    read_through: '2026-10-24T19:03:14Z'
+    results:
+    - key: rows-12
+      claim: >-
+        s(n) below the standing side at 334, 338, 343, 376, 377, 379, 382, 416, 457, 458, 502
+        and 504: the exact sides of s<N>_amund.cert at c9be7b7, 18.786944251907 to
+        22.921326029542 rounded up at 12 places, each a new arrangement found from the packing
+        of franciscouzo/square-packing@964ee2b at the count.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: rows of source-coverage.yaml, not register entries. The
+        ledger of 24 October for the issue (upper-bounds-issue798-20261024), walked from starts
+        frozen at main 2ed0ea740 with Göbel's construction beside each row and Couzo's 43f666c
+        as an earlier publication, records all twelve as current rows of the
+        amundsk-issue798-2026-10-24 source at the exact side rounded up at 12 places. They
+        supersede the rows of couzo-43f666c-2026-10-24 (376, 377, 416, 458, 502 and 504), which
+        #800 (think-gn29) recorded after main's rows there, couzo-issue763-2026-10-23 (334, 343
+        and 457), alexchilton-fault-line-2026-10-23 (338), couzo-964ee2b-2026-10-23 (379) and
+        couzo-issue670-2026-10-17 (382). Both
+        maintained exact routes accept all twelve, with the gross and sharp controls as
+        expected, and every side is below Göbel's construction.
+      queued: false
+      bead: think-2l0q
+    - key: n372-n412
+      claim: >-
+        s(372) <= 19.806121548598 and s(412) <= 20.822875656790, refinements of 964ee2b's
+        packings at those counts, 4.40e-7 and 2.90e-6 below them.
+      source: body
+      not_registered: >-
+        Above an earlier report: franciscouzo/square-packing@43f666c, pushed at
+        2026-10-24T06:10:44Z, certifies 19.806121548578 at 372 (another refinement of the same
+        packing, 1.91e-11 below this one) and 20.822875655538 at 412 (1.25e-9 below), so by the
+        report-order rule neither is recorded. The packet retains both certificates and
+        compares them in its claim record (acquisition/claims.json); they are not replayed.
+        43f666c's rows, which #800 (think-gn29) recorded, hold both counts
+        (couzo-43f666c-2026-10-24).
+      queued: false
+      bead: think-gn29
+    beads:
+    - think-2l0q
+    answer_bead: think-2l0q
+    replies: []
+    close_when: >-
+      The twelve rows are recorded in report order with their replay, 372 and 412 have their
+      disposition with 43f666c's rows there on main (#800, think-gn29), and the reply on main says
+      so; nothing the author asked for is queued.
