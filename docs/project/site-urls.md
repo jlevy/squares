@@ -1377,8 +1377,8 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | result/t-238.html | result/t-238.html | result | overview | 2026-10-24 | 2026-10-24 | live |
 | result/t-239.html | result/t-239.html | result | overview | 2026-10-23 | 2026-10-23 | live |
 | result/t-240.html | result/t-240.html | result | overview | 2026-10-24 | 2026-10-24 | live |
-| result/t-241.html | result/t-241.html | result | overview | 2026-10-24 | 2026-10-24 | live |
-| result/t-242.html | result/t-242.html | result | overview | 2026-10-24 | 2026-10-24 | live |
+| result/t-241.html | result/t-241.html | result | overview | 2026-10-24 | 2026-10-25 | live |
+| result/t-242.html | result/t-242.html | result | overview | 2026-10-24 | 2026-10-25 | live |
 | results.html | results.html | page | overview | 2026-09-29 | 2026-10-22 | live |
 | sitemap.xml | sitemap.xml | site-file | overview | 2026-10-07 | 2026-10-22 | live |
 | social-card.png | social-card.png | asset-file | overview | 2026-09-29 | 2026-10-22 | live |

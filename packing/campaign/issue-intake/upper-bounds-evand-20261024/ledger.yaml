@@ -29,11 +29,12 @@ reports:
       source: packing/resources/web/evand-kaggle-descents-2026-10-24/measure/identity.json
     note: 'The source''s index credits the packing to Kirill Tymchishin''s Kaggle notebook
       "CPU Alternating Reclosure" v3 and claims no refinement of it; #763 does not claim the
-      count. Its manifest (certificates/best/manifest.json, witnesses/304) gives the notebook''s
-      previous source and seed as Mykhailo Polkovskyi''s 70a033f n304.cert (#593), T-186''s
-      packing, which this record measures as Daniil Ostashev''s T-175 packing re-solved; it
-      also gives that certificate a construction credit to Nate Chaoweeraprasit, which that
-      measurement does not support.'
+      count. Its manifest (certificates/best/manifest.json, witnesses/304) names no seed of
+      the packing, and its previous_source names Mykhailo Polkovskyi''s 70a033f n304.cert
+      (#593), T-186''s packing, as the record its catalogue held at 304 before, not as a seed
+      (M-1 of the 24 October review of T-241 and T-242); its construction credit to Nate Chaoweeraprasit
+      describes that earlier record, where the source''s RECORD_PROVENANCE.md keeps Daniil
+      Ostashev''s packing credit.'
   note: A publication in a watched repository with no issue (the owner, 2026-10-14), dated
     by the push that made it public, 6b7391d..964ee2b at 2026-10-23T23:38:42Z in GitHub's
     activity log; committed at 18:59:39Z.

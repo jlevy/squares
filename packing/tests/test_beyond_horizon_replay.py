@@ -2483,7 +2483,7 @@ def test_the_push_s_identity_measurements_settle_refinement_at_378_and_405() -> 
         for step in count["steps"]
         if (step.get("packing") or {}).get("kind") == "new packing"
     }
-    assert new == dict.fromkeys((364, 450, 874), {"kind": "new packing"})
+    assert new == {n: {"kind": "new packing"} for n in (364, 450, 874)}
     assert ledger["summary"]["recorded_new_continuing"] == 0
     assert {item["report"] for item in measured.values()} == {replay.NOTEBOOKS_964EE2B}
 
