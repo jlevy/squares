@@ -183,6 +183,7 @@ test("Pack scene normalizes nonzero origins without altering numerical geometry"
       Array.from({ length: 5 }, () => colour),
     ),
     angleToleranceDegrees: 0.5,
+    angleCentres: [],
   });
   const snapshot = {
     squareSide: 0.5,
