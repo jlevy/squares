@@ -428,12 +428,16 @@ def _integer(value: object, where: str) -> int:
 
 
 def _coefficients(value: object, degree: int, where: str) -> list[Fraction]:
-    """A field element's coefficients in the power basis, low degree first."""
+    """A field element's coefficients in the power basis, low degree first.
+
+    An empty list is the field's zero, as ``verify_exact.py`` reads it (``E([])``): Hyukdong
+    Kim's forms of issue 804 state the angle parameter of every axis-parallel square so.
+    """
     _require(
-        type(value) is list and 1 <= len(cast("list[Any]", value)) <= degree,
+        type(value) is list and len(cast("list[Any]", value)) <= degree,
         f"{where}: not an element of the degree-{degree} field",
     )
-    return [_ratio(item, where) for item in cast("list[Any]", value)]
+    return [_ratio(item, where) for item in cast("list[Any]", value)] or [Fraction(0)]
 
 
 def evand_minpoly_geometry(raw: bytes, row: Witness) -> dict[str, Any]:

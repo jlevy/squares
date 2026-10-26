@@ -1,0 +1,32 @@
+{
+ "format": "minpoly-configuration-side-v1",
+ "ledger": "packing/campaign/issue-intake/upper-bounds-issue804-20261025/exact-sides.json",
+ "ledger_sha256": "8aba99e7d53351374320a081d906597288031ce65bc0a994f789799830c417cd",
+ "method": "p equal to the ledger's polynomial; p(S) = 0 in K = Q[t]/f by exact arithmetic (sqpack.field); S(t*) enclosed by sqpack.field inside the ledger's interval, where a Sturm count finds exactly one root of p",
+ "rows": [
+  {
+   "n": 172,
+   "polynomial_degree": 24,
+   "field_degree": 24,
+   "p_is_the_ledgers": true,
+   "p_of_S_is_zero_in_K": true,
+   "ledger_interval_root_count": 1,
+   "S_enclosure_within_ledger_interval": true,
+   "S_enclosure_digits": 200,
+   "fact_interval_holds_S": true,
+   "side_decimal": "13.6189889568993984288635016293504898995040150521961793814779549035630128682876859236484103034563728798488198342998241097"
+  },
+  {
+   "n": 263,
+   "polynomial_degree": 17,
+   "field_degree": 17,
+   "p_is_the_ledgers": true,
+   "p_of_S_is_zero_in_K": true,
+   "ledger_interval_root_count": 1,
+   "S_enclosure_within_ledger_interval": true,
+   "S_enclosure_digits": 200,
+   "fact_interval_holds_S": true,
+   "side_decimal": "16.7331660078993789705122814839596734462471472483871051710853314027161147491596783918785611086390994182883371931589023650"
+  }
+ ]
+}
