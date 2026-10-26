@@ -20,6 +20,7 @@ test("versioned catalogue preserves identities, palette and all four timing span
   assert.equal(pairAt(corpus, 0).n, 1);
   assert.equal(corpus.timing.correct, 0.25);
   assert.equal(corpus.colour.angleToleranceDegrees, 0.5);
+  assert.deepEqual(corpus.colour.angleCentres, [10.25, 64.7291, 65.256]);
   assert.equal(corpus.colour.shades.length, corpus.colour.palette.length);
   assert.throws(() => frameAt(corpus, 123456), /no frame/);
   assert.throws(() => pairAt(corpus, -1), /no transition/);
@@ -36,6 +37,10 @@ test("wrong versions, dimensions, phases and palette shapes fail the boundary", 
     { ...base, pairs: [] },
     { ...base, colour: { ...base.colour, shades: [] } },
     { ...base, colour: { ...base.colour, palette: ["url(unsafe)", "#000000", "#ffffff"] } },
+    { ...base, colour: { ...base.colour, angleCentres: undefined } },
+    { ...base, colour: { ...base.colour, angleCentres: [90] } },
+    { ...base, colour: { ...base.colour, angleCentres: [65.256, 64.7291] } },
+    { ...base, colour: { ...base.colour, angleCentres: [64.7291, 65.2] } },
   ]) {
     assert.throws(() => decodeCorpus(malformed));
   }

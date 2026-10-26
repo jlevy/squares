@@ -23,6 +23,12 @@ const RAMP_ENDS = [
 const GREEN_STRIDE = 29;
 const MOVING_SHADE = 2;
 const COLOUR_SCHEMES: readonly AtlasScheme[] = ["identity", "angle-stable", "angle-continuous"];
+/**
+ * A shared centre holds a tilt exactly the tolerance away, whichever way float arithmetic
+ * rounds the gap. The build draws centres from four-place angles, 0.0001 apart at the least,
+ * and holds such a tilt the same way (`_TIE` in `build_candidate.py`).
+ */
+const SHARED_TIE = 1e-9;
 
 type Lab = readonly [number, number, number];
 
@@ -31,6 +37,8 @@ export interface AngleMap {
   centres: number[];
   slots: number[];
   sizes: number[];
+  /** The index of the class a tilt belongs to, or -1 for a tilt in none of them. */
+  classOf(angleDegrees: number): number;
   slotOf(angleDegrees: number): number;
 }
 
@@ -76,6 +84,8 @@ export interface ColourSystem {
   readonly palette: readonly string[];
   readonly shades: readonly (readonly string[])[];
   readonly angleToleranceDegrees: number;
+  /** The atlas's shared angle centres, sorted (#554). */
+  readonly angleCentres: readonly number[];
   readonly greens: readonly string[];
   readonly greenStride: number;
   readonly schemes: readonly AtlasScheme[];
@@ -271,6 +281,7 @@ function paletteCopy(config: CorpusColour): {
   palette: string[];
   shades: string[][];
   angleToleranceDegrees: number;
+  angleCentres: number[];
 } {
   if (config.palette.length < 3) {
     throw new RangeError("the colour palette needs two pinned families and one free family");
@@ -289,13 +300,35 @@ function paletteCopy(config: CorpusColour): {
     }
     return family.map(checkedHex);
   });
-  return { palette, shades, angleToleranceDegrees: config.angleToleranceDegrees };
+  const angleCentres = [...config.angleCentres];
+  for (const [index, centre] of angleCentres.entries()) {
+    finite(centre, "shared angle centre");
+    if (centre < 0 || centre >= QUARTER_TURN_DEGREES) {
+      throw new RangeError("shared angle centres must be folded into a quarter turn");
+    }
+    if (
+      angleGap(centre, 0) <= config.angleToleranceDegrees ||
+      angleGap(centre, 45) <= config.angleToleranceDegrees
+    ) {
+      throw new RangeError("a shared angle centre lies in a pinned class");
+    }
+    if (
+      index > 0 &&
+      centre - itemAt(angleCentres, index - 1, "shared angle centres") <=
+        config.angleToleranceDegrees
+    ) {
+      throw new RangeError(
+        "shared angle centres must be sorted and further apart than the tolerance",
+      );
+    }
+  }
+  return { palette, shades, angleToleranceDegrees: config.angleToleranceDegrees, angleCentres };
 }
 
 /** Build immutable colour behavior from the palette emitted with the corpus. */
 export function createColourSystem(config: CorpusColour): ColourSystem {
   const copied = paletteCopy(config);
-  const { palette, shades, angleToleranceDegrees } = copied;
+  const { palette, shades, angleToleranceDegrees, angleCentres } = copied;
   const labCache = new Map<string, Lab>();
   const toLab = (hex: string): Lab => {
     const normalized = checkedHex(hex);
@@ -372,6 +405,55 @@ export function createColourSystem(config: CorpusColour): ColourSystem {
   };
   const freeSlots = palette.length - 2;
   const slotBand = QUARTER_TURN_DEGREES / freeSlots;
+  /**
+   * The shared class a tilt belongs to, as that class's centre, or null for a tilt no shared
+   * class holds. The two pinned classes are 0 and 45 degrees; any other tilt belongs to the
+   * nearest of the atlas's shared centres within the tolerance. The centres lie further apart
+   * than the tolerance and clear of the pins, so a tilt the atlas carries meets one class, and
+   * so one slot, in every frame (#554).
+   */
+  const sharedCentre = (angleDegrees: number): number | null => {
+    const angle = foldAngle(angleDegrees);
+    if (angleGap(angle, 0) <= angleToleranceDegrees) {
+      return 0;
+    }
+    if (angleGap(angle, 45) <= angleToleranceDegrees) {
+      return 45;
+    }
+    // The first centre at or above the angle; it and the one below are the only candidates.
+    // No centre is within the tolerance of the pins, so none is reached across the seam.
+    let low = 0;
+    let high = angleCentres.length;
+    while (low < high) {
+      const middle = Math.floor((low + high) / 2);
+      if (itemAt(angleCentres, middle, "shared angle centres") < angle) {
+        low = middle + 1;
+      } else {
+        high = middle;
+      }
+    }
+    let nearest: number | null = null;
+    let nearestGap = Number.POSITIVE_INFINITY;
+    for (const index of [low - 1, low]) {
+      const centre = angleCentres[index];
+      if (centre === undefined) {
+        continue;
+      }
+      const gap = angleGap(angle, centre);
+      if (gap <= angleToleranceDegrees + SHARED_TIE && gap < nearestGap) {
+        nearest = centre;
+        nearestGap = gap;
+      }
+    }
+    return nearest;
+  };
+  /**
+   * A tilt's palette slot: the pins, then the five-degree band of its shared class's centre,
+   * or of the tilt itself when no shared class holds it. Two classes less than the tolerance
+   * apart used to fall either side of a band edge when each frame clustered its own tilts:
+   * n = 29's 64.9387 and T-151's 65.2889 at n = 272 were slots 14 and 15 (#553, review C1).
+   * The band is now read off a centre every frame shares.
+   */
   const slotForAngle = (angleDegrees: number): number => {
     const angle = foldAngle(angleDegrees);
     if (angleGap(angle, 0) <= angleToleranceDegrees) {
@@ -380,26 +462,50 @@ export function createColourSystem(config: CorpusColour): ColourSystem {
     if (angleGap(angle, 45) <= angleToleranceDegrees) {
       return 1;
     }
-    const band = Math.floor(angle / slotBand);
+    const band = Math.floor((sharedCentre(angle) ?? angle) / slotBand);
     return 2 + Math.max(0, Math.min(freeSlots - 1, band));
   };
+  /**
+   * One frame's angle classes. A tilt a shared class holds joins that class, centred on the
+   * shared centre; the rest, which only a frame no atlas witness draws can carry (a Pack or
+   * Search run, an import, a square mid-turn), cluster among themselves within the tolerance
+   * around the first tilt of each, centred on their mean, as every class once did.
+   */
   const buildAngleMap = (anglesDegrees: readonly number[]): AngleMap => {
+    const shared: boolean[] = [];
     const representatives: number[] = [];
     const sums: number[] = [];
     const counts: number[] = [];
+    const sharedIndex = new Map<number, number>();
     for (const rawAngle of anglesDegrees) {
       const angle = foldAngle(rawAngle);
+      const centre = sharedCentre(angle);
+      if (centre !== null) {
+        const at = sharedIndex.get(centre);
+        if (at === undefined) {
+          sharedIndex.set(centre, representatives.length);
+          shared.push(true);
+          representatives.push(centre);
+          sums.push(0);
+          counts.push(1);
+        } else {
+          counts[at] = itemAt(counts, at, "angle counts") + 1;
+        }
+        continue;
+      }
       let match = -1;
       for (let index = 0; index < representatives.length; index += 1) {
         if (
+          !itemAt(shared, index, "shared classes") &&
           angleGap(angle, itemAt(representatives, index, "angle representatives")) <=
-          angleToleranceDegrees
+            angleToleranceDegrees
         ) {
           match = index;
           break;
         }
       }
       if (match < 0) {
+        shared.push(false);
         representatives.push(angle);
         sums.push(0);
         counts.push(1);
@@ -416,25 +522,40 @@ export function createColourSystem(config: CorpusColour): ColourSystem {
       counts[match] = itemAt(counts, match, "angle counts") + 1;
     }
     const centres = representatives.map((representative, index) =>
-      foldAngle(
-        representative + itemAt(sums, index, "angle sums") / itemAt(counts, index, "angle counts"),
-      ),
+      itemAt(shared, index, "shared classes")
+        ? representative
+        : foldAngle(
+            representative +
+              itemAt(sums, index, "angle sums") / itemAt(counts, index, "angle counts"),
+          ),
     );
     const slots = centres.map(slotForAngle);
-    const slotOf = (rawAngle: number): number => {
+    const classOf = (rawAngle: number): number => {
       const angle = foldAngle(rawAngle);
+      const centre = sharedCentre(angle);
+      if (centre !== null) {
+        return sharedIndex.get(centre) ?? -1;
+      }
       for (let index = 0; index < centres.length; index += 1) {
-        if (angleGap(angle, itemAt(centres, index, "angle centres")) <= angleToleranceDegrees) {
-          return itemAt(slots, index, "angle slots");
+        if (
+          !itemAt(shared, index, "shared classes") &&
+          angleGap(angle, itemAt(centres, index, "angle centres")) <= angleToleranceDegrees
+        ) {
+          return index;
         }
       }
-      return slotForAngle(angle);
+      return -1;
+    };
+    const slotOf = (rawAngle: number): number => {
+      const index = classOf(rawAngle);
+      return index < 0 ? slotForAngle(rawAngle) : itemAt(slots, index, "angle slots");
     };
     return {
       classes: centres.length,
       centres,
       slots,
       sizes: [...counts],
+      classOf,
       slotOf,
     };
   };
@@ -460,15 +581,8 @@ export function createColourSystem(config: CorpusColour): ColourSystem {
       slots[index] = 2 + (position % freeSlots);
     }
     const slotOf = (rawAngle: number): number => {
-      const angle = foldAngle(rawAngle);
-      for (let index = 0; index < base.centres.length; index += 1) {
-        if (
-          angleGap(angle, itemAt(base.centres, index, "angle centres")) <= angleToleranceDegrees
-        ) {
-          return itemAt(slots, index, "atlas slots");
-        }
-      }
-      return slotForAngle(angle);
+      const index = base.classOf(rawAngle);
+      return index < 0 ? slotForAngle(rawAngle) : itemAt(slots, index, "atlas slots");
     };
     return { ...base, slots, slotOf };
   };
@@ -716,6 +830,7 @@ export function createColourSystem(config: CorpusColour): ColourSystem {
     palette: Object.freeze([...palette]),
     shades: Object.freeze(shades.map((family) => Object.freeze([...family]))),
     angleToleranceDegrees,
+    angleCentres: Object.freeze([...angleCentres]),
     greens: Object.freeze(greens),
     greenStride: GREEN_STRIDE,
     schemes: COLOUR_SCHEMES,

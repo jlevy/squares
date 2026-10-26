@@ -169,7 +169,8 @@
       ["#ffffff", "#eeeeee", "#dddddd", "#cccccc", "#bbbbbb"],
       ["#ff0000", "#ee0000", "#dd0000", "#cc0000", "#bb0000"]
     ],
-    "angleToleranceDegrees": 0.5
+    "angleToleranceDegrees": 0.5,
+    "angleCentres": [10.25, 64.7291, 65.256]
   },
   "version": "v0.4.0-f5e113",
   "citations": {
