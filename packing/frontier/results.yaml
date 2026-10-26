@@ -13043,8 +13043,8 @@ results:
     unfinished_confirmations:
       - what: >-
           the exact source geometry acquired and bound, and its root identity and full
-          feasibility checked independently; not priced: it needs the minpoly/data/
-          geometry at f58a017, which the packet leaves out, and an exact root-identity check
+          feasibility checked independently; its price waits on the source's minpoly/data/
+          geometry, which the packet leaves out, and on an exact root-identity check
         rung: C3
         link: https://github.com/jlevy/squares/issues/811
     notes: Source assertions only. No upstream checker or Lean build was executed here; retained checker
@@ -13097,8 +13097,8 @@ results:
     unfinished_confirmations:
       - what: >-
           the exact source geometry acquired and bound, and its root identity and full
-          feasibility checked independently; not priced: it needs the minpoly/data/
-          geometry at f58a017, which the packet leaves out, and an exact root-identity check
+          feasibility checked independently; its price waits on the source's minpoly/data/
+          geometry, which the packet leaves out, and on an exact root-identity check
         rung: C3
         link: https://github.com/jlevy/squares/issues/811
     notes: Source assertions only. No upstream checker or Lean build was executed here; retained checker
@@ -13151,8 +13151,8 @@ results:
     unfinished_confirmations:
       - what: >-
           the exact source geometry acquired and bound, and its root identity and full
-          feasibility checked independently; not priced: it needs the minpoly/data/
-          geometry at f58a017, which the packet leaves out, and an exact root-identity check
+          feasibility checked independently; its price waits on the source's minpoly/data/
+          geometry, which the packet leaves out, and on an exact root-identity check
         rung: C3
         link: https://github.com/jlevy/squares/issues/811
     notes: Source assertions only. No upstream checker or Lean build was executed here; retained checker
@@ -13205,8 +13205,8 @@ results:
     unfinished_confirmations:
       - what: >-
           the exact source geometry acquired and bound, and its root identity and full
-          feasibility checked independently; not priced: it needs the minpoly/data/
-          geometry at f58a017, which the packet leaves out, and an exact root-identity check
+          feasibility checked independently; its price waits on the source's minpoly/data/
+          geometry, which the packet leaves out, and on an exact root-identity check
         rung: C3
         link: https://github.com/jlevy/squares/issues/811
     notes: Source assertions only. No upstream checker or Lean build was executed here; retained checker
@@ -13435,8 +13435,8 @@ results:
       - what: >-
           an audit of the retained theorem, embedded configuration and
           perturbation-definition bindings and pinned dependencies, and an independent
-          build here of the pinned Lean proof; not priced: no toolchain or build time for
-          the pinned Lean tree is on record
+          build here of the pinned Lean proof; its price waits on a toolchain and a build
+          time for the pinned Lean tree, of which none is on record
         rung: C3
         link: https://github.com/jlevy/squares/issues/420
     notes: Reported non-strict local minima under the source matched-index perturbation convention,
@@ -14247,14 +14247,11 @@ results:
       (think-ux1v, planned in jlevy/squares#497). Its commands need tooling that is only on
       the unmerged branch claude/wand125-confirmations-2026-10-11:
       on main, sqverify_fast_census.MIXED_PACKETS does not list this certificate's packet.
-    activity:
-      state: waiting
-      party: owner
-      what: >-
-        The owner's ruling on whether the three check2 candidates of T-132, T-142 and
-        T-143 are retained in Git, as the 6 October check2 packet is (jlevy/squares#543, lower-bound replays).
-      since: '2026-10-11'
-      link: think-r333
+
+      Two questions of 11 October are with the owner (jlevy/squares#543, lower-bound
+      replays): whether the three check2 candidates of T-132, T-142 and T-143 are
+      retained in Git, as the 6 October check2 packet is, and the census's axis
+      tolerance for T-142's whole-net control.
     unfinished_confirmations:
       - what: >-
           a complete sqverify-fast census at all 2,073 directions from a retained
@@ -15962,15 +15959,11 @@ results:
       (think-ux1v, planned in jlevy/squares#497). Its commands need tooling that is only on
       the unmerged branch claude/wand125-confirmations-2026-10-11:
       on main, sqverify_fast_census.MIXED_PACKETS does not list this certificate's packet.
-    activity:
-      state: waiting
-      party: owner
-      what: >-
-        The owner's ruling on whether the three check2 candidates of T-132, T-142 and
-        T-143 are retained in Git, as the 6 October check2 packet is,
-        and on the census's axis tolerance for this entry's whole-net control (jlevy/squares#543, lower-bound replays).
-      since: '2026-10-11'
-      link: think-i85v
+
+      Two questions of 11 October are with the owner (jlevy/squares#543, lower-bound
+      replays): whether the three check2 candidates of T-132, T-142 and T-143 are
+      retained in Git, as the 6 October check2 packet is, and the census's axis
+      tolerance for T-142's whole-net control.
     unfinished_confirmations:
       - what: >-
           a complete sqverify-fast census at all 2,073 directions from a retained
@@ -16082,14 +16075,11 @@ results:
       in think-i85v after the regularization of every packing (think-ux1v, planned in jlevy/squares#497). Its commands need tooling that is only on
       the unmerged branch claude/wand125-confirmations-2026-10-11:
       on main, sqverify_fast_census.MIXED_PACKETS does not list this certificate's packet.
-    activity:
-      state: waiting
-      party: owner
-      what: >-
-        The owner's ruling on whether the three check2 candidates of T-132, T-142 and
-        T-143 are retained in Git, as the 6 October check2 packet is (jlevy/squares#543, lower-bound replays).
-      since: '2026-10-11'
-      link: think-i85v
+
+      Two questions of 11 October are with the owner (jlevy/squares#543, lower-bound
+      replays): whether the three check2 candidates of T-132, T-142 and T-143 are
+      retained in Git, as the 6 October check2 packet is, and the census's axis
+      tolerance for T-142's whole-net control.
     unfinished_confirmations:
       - what: >-
           a complete sqverify-fast census at all 2,073 directions from a retained

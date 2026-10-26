@@ -86,6 +86,7 @@ from sqpack.assurance import (
     EXTERNAL_ORIGINS,
     PROOF_METHODS,
     claim_support_level,
+    conditions,
     confirming_execution,
     external_formal_build_problems,
 )
@@ -386,11 +387,18 @@ def _supported_rung(
 ) -> str:
     """Take each claim's strongest complete chain, then the whole claim's weakest part."""
     evidence_by_id = {entry["id"]: entry for entry in entries if "id" in entry}
+    readers = _premise_readers(evidence_by_id)
 
     def atom_level(entry: Mapping[str, object]) -> int:
+        # A formalization review names the entry it read; it counts beside that entry and
+        # beside every premise that entry's proof rests on, which the review read with it.
+        eid = str(entry.get("id"))
+        named = frozenset({eid, *readers.get(eid, ())})
         if not confirming:
-            return verification_level(entry, reviews)
-        return _rank(_derive_confirmation([dict(entry)], reviews, open_review=open_review))
+            return verification_level(entry, reviews, named=named)
+        return _rank(
+            _derive_confirmation([dict(entry)], reviews, open_review=open_review, named=named)
+        )
 
     def supported_level(entry: dict) -> int:
         level = claim_support_level(entry, evidence_by_id, atom_level, confirming=confirming)
@@ -409,10 +417,36 @@ def _supported_rung(
     return f"{'C' if confirming else 'V'}{level}"
 
 
+def _premise_readers(evidence_by_id: Mapping[str, Mapping[str, Any]]) -> dict[str, set[str]]:
+    """For each entry, the entries whose proof rests on it, directly or through other
+    premises (`proof.conditional_on`): a formalization review of one of those read it."""
+    premises = {
+        eid: {ref for _hypothesis, refs in conditions(entry) for ref in refs}
+        for eid, entry in evidence_by_id.items()
+    }
+    readers: dict[str, set[str]] = {}
+    for top, direct in premises.items():
+        seen: set[str] = set()
+        stack = list(direct)
+        while stack:
+            ref = stack.pop()
+            if ref in seen or ref == top:
+                continue
+            seen.add(ref)
+            readers.setdefault(ref, set()).add(top)
+            stack.extend(premises.get(ref, ()))
+    return readers
+
+
 def _derive_confirmation(
-    entries: list[dict], reviews: list[dict] | None = None, *, open_review: bool = False
+    entries: list[dict],
+    reviews: list[dict] | None = None,
+    *,
+    open_review: bool = False,
+    named: Iterable[str] | None = None,
 ) -> str:
-    """The rung supported by one complete claim pool."""
+    """The rung supported by one complete claim pool. A formalization review counts when
+    it names one of `named`, by default the pool's own rebuilt formal entries."""
     reviews = list(reviews or [])
     # A formal build run elsewhere confirms only once it is admitted: without its
     # retained receipts and read it is not even a replay of unknown method (C2).
@@ -428,7 +462,9 @@ def _derive_confirmation(
         rebuilt
         and open_review
         and formalization_reviews(
-            reviews, confirming=True, of=(str(entry.get("id")) for entry in rebuilt)
+            reviews,
+            confirming=True,
+            of=(str(entry.get("id")) for entry in rebuilt) if named is None else named,
         )
         >= FORMALIZATION_REVIEWS["C"]
     ):
@@ -1811,17 +1847,32 @@ def derive_verification(
     return _supported_rung(entries, reviews, confirming=False, record=record)
 
 
-def verification_level(entry: Mapping[str, object], reviews: list[dict] | None = None) -> int:
+def verification_level(
+    entry: Mapping[str, object],
+    reviews: list[dict] | None = None,
+    *,
+    named: Iterable[str] | None = None,
+) -> int:
     """One evidence entry's own verification rank, before its premises: the atom
     `derive_verification` takes along a conditional chain (`claim_support_level`)."""
-    return _rank(_derive_verification([dict(entry)], reviews))
+    return _rank(_derive_verification([dict(entry)], reviews, named=named))
 
 
-def _derive_verification(entries: list[dict], reviews: list[dict] | None = None) -> str:
-    """The rung supported by one complete claim pool."""
+def _derive_verification(
+    entries: list[dict],
+    reviews: list[dict] | None = None,
+    *,
+    named: Iterable[str] | None = None,
+) -> str:
+    """The rung supported by one complete claim pool. A formalization review counts when
+    it names one of `named`, by default the pool's own formal entries."""
     reviews = list(reviews or [])
     formal = [str(entry.get("id")) for entry in entries if _formal(entry)]
-    if formal and formalization_reviews(reviews, of=formal) >= FORMALIZATION_REVIEWS["V"]:
+    if (
+        formal
+        and formalization_reviews(reviews, of=formal if named is None else named)
+        >= FORMALIZATION_REVIEWS["V"]
+    ):
         return "V5"
     machine = any(_machine_proof_shaped(entry) for entry in entries)
     if machine and adversarially_reviewed(reviews) and overseen(reviews):

@@ -8208,15 +8208,25 @@ issues:
       source: body
       bead: think-npvi
     - what: >-
-        RR-6: an activity waiting on the owner on T-132, T-142 and T-143, the tooling branch
-        in all four next rungs, T-142's held control and T-144's price basis.
+        RR-6: the tooling branch in all four next rungs, T-142's held control and T-144's
+        price basis.
       state: done
       source: body
       note: >-
-        The activities are dated 2026-10-11, when the questions went to the owner, so
-        check_results refuses them once the register's last review passes 10 November,
-        unless they are answered or re-dated with what happened since.
+        The next rungs of T-132, T-142 and T-143 also name the two questions with the owner
+        on #543.
       bead: think-npvi
+    - what: >-
+        RR-6: an activity waiting on the owner on T-132, T-142 and T-143.
+      state: declined
+      source: body
+      note: >-
+        The results page draws an activity as a "waiting on owner" chip in the status
+        column, and the chip widens the results table past the budget
+        test_site_result_columns holds it to: on #832's first push the column floors read
+        1154.7 px at 1280, where at most 1125 leaves the flexible columns their 75 px. The
+        questions are stated in the three next rungs instead; recording the activity waits
+        on the table finding room for the chip.
     - what: >-
         RR-7: a link and "not priced" on T-120 to T-124's unfinished confirmations, and
         T-120's next rung.
@@ -8299,8 +8309,8 @@ issues:
       both reviews are on main since #563 merged, that RR-2 to RR-7 and LR-7 can be applied as
       they stand, and that RR-1's wording and section 8 still wait on the owner's ruling,
       tracked on #543. On 26 October think-npvi applied RR-2 to RR-7, LR-7 and section 8's
-      record items, and recorded RR-1, section 8's distinct-reviewer question and the
-      SquaresLean watch row as declined, each with its reason.
+      record items, and recorded RR-1, section 8's distinct-reviewer question, RR-6's
+      activities and the SquaresLean watch row as declined, each with its reason.
     close_when: Each item is on main or recorded as declined, and check_results and packing-validate
       --records pass.
   - number: 543

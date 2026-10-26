@@ -1291,9 +1291,10 @@ def test_a_receipt_over_the_ceiling_is_kept_by_count_and_admitted_alike(
     assert reports.evidence_bytes(whole) > kernel.MAX_BYTES
     reports.certify(packet, tmp_path / "jobs", finished=True)
     assert not (packet / reports.RECEIPT).exists()
-    assert [path.name for path in sorted((packet / "receipts").iterdir())] == [
-        f"exact-certification-n{n}.json.xz" for n in (308, 343, 344)
-    ]
+    # The third route's receipt (RR-3 of the 11 October rungs review) sits beside them.
+    assert [
+        path.name for path in sorted((packet / "receipts").glob("exact-certification*"))
+    ] == [f"exact-certification-n{n}.json.xz" for n in (308, 343, 344)]
     assert list(reports.check_certification(packet)) == [308, 343, 344]
     monkeypatch.setattr(kernel, "MAX_BYTES", ceiling)
     kernel.save_xz(packet / reports.RECEIPT, whole)
