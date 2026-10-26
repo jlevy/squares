@@ -5,8 +5,8 @@ title: Decide Kim's exact configurations for T-244 at 172 and 263 on both exact 
 kind: task
 status: in_progress
 priority: 3
-version: 8
-delegate: c-decide-4rzl-1025
+version: 9
+delegate: w-exact-804-1026
 labels:
   - result-import
 dependencies: []
@@ -15,7 +15,7 @@ deferred_until: null
 hold: null
 hold_until: null
 created_at: 2026-10-25T05:57:44.893Z
-updated_at: 2026-10-25T15:44:53.122Z
+updated_at: 2026-10-26T10:51:30.922Z
 started_at: 2026-10-25T11:43:46.219Z
 ---
 Decide Hyukdong Kim's exact configurations for T-244 (issue #804) at 172 and 263 on both exact routes. T-244 registers s(172) <= S*_172 and s(263) <= S*_263 as reported (V0/C0); each S* is the root of #804's irreducible polynomial of degree 24 and 17.
@@ -42,3 +42,5 @@ Done when: both configurations are decided on both routes and recorded on T-244,
 2026-10-25 15:25Z, coord-n12-1025 (triage w-triage-1025b, read-only): HyukdongKim's #804 comments of 12:00:41Z and 12:23:57Z put both earlier bundles under CC0, so the packets can retain the files themselves (step 1's small reader may be unnecessary), and report a new exact configuration at 297 (s297-exact-configuration.zip e08b5d0a, CC0; degree-21 side 3.36e-90 below T-174, checked here with SymPy). The 297 import is opened as think-ozx8, unclaimed, to share this bead's tooling. Not taken over; findings in coord-n12-1025's scratchpad triage-1025b.md.
 
 2026-10-25 16:05Z, coord-n12-1025: on the owner's word, think-ozx8 (297) is now claimed and worked by coord-n12-1025's worker w-n297-1025. It touches #804's requests entry (read_through, a result key for 297) and a new packet for the 297 configuration; it does not touch T-244 or the 172/263 packet. If this bead's PR also edits #804's entry, expect a mechanical merge.
+
+2026-10-26 10:55Z, takeover by w-exact-804-1026 (coordinator's brief, issue 804's queued decisions): the delegate c-decide-4rzl-1025 is a dead session (no update since 2026-10-25T15:44Z; its run was stopped by a spend limit near 18:00Z) and left no branch or open PR (origin has only claude/intake-2026-10-25-issue804-exact-sides, merged). Taking over from origin/main acc1cfc3d on branch claude/friendly-einstein-gf9z0h-exact-804 (worktree .claude/worktrees/w-exact-804-1026). Priced on a sample first: exact_verify over K at 39.6 ms a pair at 172 (300 random pairs; 0.16 CPU-h for the 14,706-pair sweep) and 23.6 ms at 263 (0.23 CPU-h for 34,453 pairs); the fact's t_interval is already tight (no refinement). Both counts on both routes are priced at about 2.5 to 3 CPU-hours, under the 5 CPU-hour item budget. Found: json.dumps(configuration) rebuilds each certificate byte for byte (its SHA-256 is the comment's stated member digest), so route 2 runs verify_exact.py on the author's exact file; 127 and 184 squares have u = [] (zero), which evand_minpoly_geometry's 1 <= len check refuses, so the reader reads an empty list as zero, as verify_exact.py does.

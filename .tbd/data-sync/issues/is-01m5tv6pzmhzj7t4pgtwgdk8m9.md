@@ -3,16 +3,20 @@ type: is
 id: is-01m5tv6pzmhzj7t4pgtwgdk8m9
 title: Decide T-247's route A configuration at 297 on exact_verify (held over the cap), then its stage 4 review and adoption
 kind: task
-status: open
+status: in_progress
 priority: 2
-version: 2
+version: 3
+delegate: w-exact-804-1026
 labels:
   - validation
   - result-import
 dependencies: []
 parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
+hold: null
+hold_until: null
 created_at: 2026-10-26T00:54:11.188Z
-updated_at: 2026-10-26T03:19:13.436Z
+updated_at: 2026-10-26T10:51:39.268Z
+started_at: 2026-10-26T10:51:39.267Z
 ---
 Decide route A's exact configuration of T-247 (issue 804's exact side at 297, Hyukdong Kim) on sqpack.witness.exact_verify, then the stage 4 review and the house adoption at 297 that the house rule takes once the review accepts. Route B (the author's attachment, s297-exact-configuration.zip, CC0, SHA-256 e08b5d0a...47a7) is a second route, recorded beside the rung when the file is reachable.
 
