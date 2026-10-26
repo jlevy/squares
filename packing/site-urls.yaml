@@ -21122,7 +21122,7 @@ urls:
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-24'
-  lastmod: '2026-10-24'
+  lastmod: '2026-10-25'
   status: live
   identity:
     kind: optimality
@@ -21141,6 +21141,7 @@ urls:
     builds_on: null
     evidence:
     - E-n005-gobel-proof
+    - E-n005-friedman-theorem2-audit
     - E-n005-gobel-upper
     - E-side2-center-lower
     - E-basic-area-lower
@@ -21150,9 +21151,46 @@ urls:
     - packing/resources/papers/friedman-ds7-packing-unit-squares-in-squares.md
     - packing/cases/gobel5/packing.py
     - packing/cases/gobel5/verify_exact.py
+    - packing/cases/friedman5/verify_cover.py
+    - packing/cases/friedman5/certificate.json
     - packing/cases/small_n/optimal_moduli.py
     - packing/campaign/series/series-000-smoke-and-calibration/results/exp-014-h-032-n3-optimal-moduli.json
     - packing/devtools/check_basic_bounds.py
+  amendments:
+  - date: '2026-10-25'
+    reason: An exact audit of Friedman's Theorem 2 here (E-n005-friedman-theorem2-audit, cases/friedman5)
+      decides every premise of the s(5) lower half's four-point proof, and the result rises to C3
+      citing it, with the audit's checker and record among its artifacts and its test among its controls.
+      The values, scope and attribution are unchanged.
+    previous:
+      kind: optimality
+      scope:
+        n_values:
+        - 2
+        - 3
+        - 4
+        - 5
+      established: null
+      attribution:
+        source_keys:
+        - '[Göbel 1979]'
+        - '[Friedman DS7]'
+        published: '1979'
+      builds_on: null
+      evidence:
+      - E-n005-gobel-proof
+      - E-n005-gobel-upper
+      - E-side2-center-lower
+      - E-basic-area-lower
+      - E-basic-grid-upper
+      artifacts:
+      - packing/resources/papers/gobel-1979-geometrical-packing-and-covering-problems.pdf
+      - packing/resources/papers/friedman-ds7-packing-unit-squares-in-squares.md
+      - packing/cases/gobel5/packing.py
+      - packing/cases/gobel5/verify_exact.py
+      - packing/cases/small_n/optimal_moduli.py
+      - packing/campaign/series/series-000-smoke-and-calibration/results/exp-014-h-032-n3-optimal-moduli.json
+      - packing/devtools/check_basic_bounds.py
 - path: result/t-238.html
   canonical: result/t-238.html
   kind: result

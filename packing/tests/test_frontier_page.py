@@ -300,12 +300,13 @@ def test_the_survey_key_explains_bounds_without_audits_or_case_history(
 
 
 #: The cases whose verified lower bound rests only on a published proof nobody here has
-#: read: Göbel's s(5), Kearney and Shiu's s(6), Stromquist's s(10) and Bentz's s(22), each
-#: transcribed with its theorem and pinpoints and never worked through here. Bentz's s(33)
-#: was one until its lane cited T-064's replays beside the proof on 2026-10-06; n = 13's
-#: proof, Bentz's of 2010, is read here, with an erratum in one lemma, and its lane cites
-#: T-006's replays since the same day.
-UNREAD_PROOF_CASES = (5, 6, 10, 22)
+#: read: Kearney and Shiu's s(6), Stromquist's s(10) and Bentz's s(22), each transcribed
+#: with its theorem and pinpoints and never worked through here. Bentz's s(33) was one
+#: until its lane cited T-064's replays beside the proof on 2026-10-06; n = 13's proof,
+#: Bentz's of 2010, is read here, with an erratum in one lemma, and its lane cites T-006's
+#: replays since the same day. Göbel's s(5) was one until its lane cited the exact audit
+#: of Friedman's Theorem 2 (E-n005-friedman-theorem2-audit) on 2026-10-25.
+UNREAD_PROOF_CASES = (6, 10, 22)
 #: The cases whose reported lower bound is a value of Green's DS7 Theorem 9, whose
 #: illustrated argument leaves a unit square empty (`devtools.check_green_ds7`), above
 #: the verified floor. Thirty on 2026-10-06; on 2026-10-14 wand125's closed form (T-180)
@@ -344,7 +345,7 @@ def test_a_verified_bound_on_an_unread_published_proof_says_so(rows, cases) -> N
             if unread:
                 marked.add((n, label))
     assert marked == {(n, "Verified lower") for n in UNREAD_PROOF_CASES}
-    row = frontier.case_row(cases[5], recent=False)
+    row = frontier.case_row(cases[6], recent=False)
     assert (
         '<span class="site-frontier-same">✓ same</span>'
         '<span class="site-frontier-note site-cell-quiet">published proof, not read here'
@@ -353,6 +354,8 @@ def test_a_verified_bound_on_an_unread_published_proof_says_so(rows, cases) -> N
     # A read proof is not marked, with or without a defect found by the read.
     assert frontier.UNREAD_PROOF not in frontier.case_row(cases[13], recent=False)
     assert frontier.UNREAD_PROOF not in frontier.case_row(cases[8], recent=False)
+    # Nor is an unread proof whose lane also cites an exact audit made here.
+    assert frontier.UNREAD_PROOF not in frontier.case_row(cases[5], recent=False)
 
 
 def test_a_reported_bound_on_a_proof_found_defective_says_so(rows, cases) -> None:
@@ -387,8 +390,12 @@ def test_status_names_each_verified_lane_and_marks_a_reported_defect(cases) -> N
     read here; until 2026-10-06 it merged the two lanes, and n = 5 read "replayed here,
     external proof" with nothing to say which half was the unread proof."""
     evidence = tables.load_evidence()
-    assert tables.verification_origins(cases[5], evidence) == (
+    assert tables.verification_origins(cases[6], evidence) == (
         "upper: replayed here; lower: external proof (not read here)"
+    )
+    # Since 2026-10-25 n = 5's lower lane also cites the exact audit of Friedman's proof.
+    assert tables.verification_origins(cases[5], evidence) == (
+        "upper: replayed here; lower: external proof (not read here), audited here"
     )
     assert tables.verification_origins(cases[106], evidence) == (
         "upper: replayed here; lower: external proof (read here), audited here"

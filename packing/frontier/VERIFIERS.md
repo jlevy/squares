@@ -26,7 +26,7 @@ second implementation agrees.
 ## The Short Version
 
 - **212** programs: **52** external and **160** first-party; **143** decide claims and **69** check premises.
-- **606** of **774** evidence entries name the programs that verified them: 284 reproduced with the producer’s code, 263 independently re-implemented, 38 re-implemented, sharing the producer’s components, 21 no relation: a proof, a derivation or a report.
+- **607** of **775** evidence entries name the programs that verified them: 284 reproduced with the producer’s code, 264 independently re-implemented, 38 re-implemented, sharing the producer’s components, 21 no relation: a proof, a derivation or a report.
 
 ## Programs
 
@@ -86,7 +86,7 @@ second implementation agrees.
 | [`V-check-karakus-strip-measure`](#v-check-karakus-strip-measure) | devtools.check_karakus_strip_measure | Squares Project (Levy) | first-party | decides | 1 | 2 |
 | [`V-upper-bound-promotion`](#v-upper-bound-promotion) | devtools.upper_bound_packets | Squares Project (Levy) | first-party | decides | 6 | 5 |
 | [`V-upper-bound-intervals`](#v-upper-bound-intervals) | devtools.upper_bound_intervals | Squares Project (Levy) | first-party | decides | 3 | 3 |
-| [`V-sqpack-cover`](#v-sqpack-cover) | sqpack.cover | Squares Project (Levy) | first-party | decides | 4 | 8 |
+| [`V-sqpack-cover`](#v-sqpack-cover) | sqpack.cover | Squares Project (Levy) | first-party | decides | 5 | 9 |
 | [`V-green17-interval-audit`](#v-green17-interval-audit) | cases.green17.interval_audit | Squares Project (Levy) | first-party | decides | 1 | 3 |
 | [`V-kingbird29-verify-svg`](#v-kingbird29-verify-svg) | cases.kingbird29.verify_svg | Squares Project (Levy) | first-party | decides | 2 | 0 |
 | [`V-screen-translation-escape`](#v-screen-translation-escape) | devtools.screen_translation_escape | Squares Project (Levy) | first-party | decides | 1 | 0 |
@@ -1501,12 +1501,13 @@ Decides a source's printed pose as printed, by outward-rounded decimal interval 
 
 Certifies a point set unavoidable for unit squares in a container, cell by cell under the lemmas of Bentz's method, exactly over the field the points need.
 
-- Source: [`packing/src/sqpack/cover.py`](../../packing/src/sqpack/cover.py), [`packing/cases/bentz46/verify_cover.py`](../../packing/cases/bentz46/verify_cover.py), [`packing/cases/bentz13/verify_cover.py`](../../packing/cases/bentz13/verify_cover.py), [`packing/cases/green17/verify_cover.py`](../../packing/cases/green17/verify_cover.py), [`packing/cases/stromquist/repaired_cover.py`](../../packing/cases/stromquist/repaired_cover.py)
+- Source: [`packing/src/sqpack/cover.py`](../../packing/src/sqpack/cover.py), [`packing/cases/bentz46/verify_cover.py`](../../packing/cases/bentz46/verify_cover.py), [`packing/cases/friedman5/verify_cover.py`](../../packing/cases/friedman5/verify_cover.py), [`packing/cases/bentz13/verify_cover.py`](../../packing/cases/bentz13/verify_cover.py), [`packing/cases/green17/verify_cover.py`](../../packing/cases/green17/verify_cover.py), [`packing/cases/stromquist/repaired_cover.py`](../../packing/cases/stromquist/repaired_cover.py)
 - Versions run: this repository's commits, which Git holds
 - Note: Bentz's and Stromquist's arguments are published proofs with no verification code.
 
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
+| `E-n005-friedman-theorem2-audit` | audited here | independently re-implemented, clean-room | full, 10 of 10: the premises of Theorem 2's proof: the ten cells of its partition of [0, 2 + 1/sqrt 2]^2 (four Lemma 1 corners, four Lemma 2 wall rectangles, two Lemma 3 triangles), each against its lemma's hypotheses, and the tiling | T-237 |
 | `E-n011-repaired-lower` | replayed here | reproduced with the producer’s code | not recorded | T-010 |
 | `E-bentz46-theorem8-audit` | audited here | independently re-implemented | not recorded | T-004, T-008 |
 | `E-bentz13-figure2-audit` | audited here | independently re-implemented | not recorded | T-005, T-006 |

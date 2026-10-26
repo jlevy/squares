@@ -23771,6 +23771,7 @@ issues:
       - T-237
       evidence:
       - E-n005-gobel-proof
+      - E-n005-friedman-theorem2-audit
       - E-n005-gobel-upper
       - E-side2-center-lower
       - E-basic-area-lower
