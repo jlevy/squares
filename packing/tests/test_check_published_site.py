@@ -52,6 +52,7 @@ from devtools.check_published_site import (
     absent_links,
     cross_paper_link_checks,
     heading_ids,
+    issue_links,
     paper_citations,
     paper_files,
     pdf_pages,
@@ -2667,3 +2668,15 @@ def test_check_fails_a_forwarder_whose_canonical_link_is_not_its_targets_address
     assert heads.startswith(
         f"forwarder {name}: head: the canonical link is '../papers/n11-optimality-review"
     )
+
+
+def test_issue_links_reads_the_served_pages_unquoted_attributes() -> None:
+    """The deploy minifies its pages, which writes `href=https://...` with no quotes; the
+    issue check of 26 October first read only quoted links and failed T-245's page."""
+    issue = "https://github.com/jlevy/squares/issues/810"
+    built = f'<dd><a href="{issue}" data-site-github-kind="issue">Issue #810</a></dd>'
+    served = f"<dd><a href={issue} data-site-github-kind=issue>Issue #810</a></dd>"
+    assert issue_links(built) == issue_links(served) == {issue}
+    assert issue_links(f"<a href={issue}1>Issue #8101</a>") == {issue + "1"}
+    assert issue_links(f'<a href="{issue}#issuecomment-1">a comment</a>') == {issue}
+    assert issue_links("<a href=https://github.com/other/repo/issues/810>x</a>") == set()
