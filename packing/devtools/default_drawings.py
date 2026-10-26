@@ -65,10 +65,9 @@ its side), the runs that decided that witness, and one state:
   view the improvement rule could judge, for want of a capability rather than by a
   judgement, so the drawing is not regularized and its regularization is owed to the
   open bead `owed` names (`SETTLED`, by the witness's source and side). The exact
-  algebraic houses are the case (review A4 of #756): grid-slack has no exact frame on a
-  number-field witness, and Evan Daniel's regularizer solves each to a rational side
-  above the algebraic `U`, which is not drawn, so the exact house is drawn until
-  think-mbdw's regularizer draws one;
+  algebraic houses were the case from 23 to 26 October 2026 (review A4 of #756), until
+  grid-slack's version 2 drew them in their own number fields (think-mbdw); no count is
+  owed now;
 - `exempt`: the count is set aside with a reason and the bead that owns it (`SETTLED`);
 - `pending`: none of these, as at a count whose strong view lapsed with its witness
   (the index's `lapsed`, which `--update-atlas` writes) or that `PENDING_ALLOWED` names,
@@ -200,7 +199,12 @@ STATES = (REGULARIZED_STATE, REGULAR_AS_PUBLISHED, DECIDED, OWED, EXEMPT, PENDIN
 #: and the grid-slack port of his placement. The axis tool is the reference and fallback
 #: (policy section 4); a drawing it alone made waits for these to decide its witness.
 STRONG_GENERATORS = frozenset(
-    {"evand-regularize", "regularize_grid_slack/0", "regularize_grid_slack/1"}
+    {
+        "evand-regularize",
+        "regularize_grid_slack/0",
+        "regularize_grid_slack/1",
+        "regularize_grid_slack/2",
+    }
 )
 #: A bead id, which every `PENDING_ALLOWED` entry, exemption and `owed` names.
 BEAD = re.compile(r"\bthink-[0-9a-z]{4}\b")
@@ -429,75 +433,12 @@ _README_QL4V = (
     "packing/cases/regularized_drawings/think-ql4v-2026-10-22/README.md, the selection of 22 "
     "October 2026 (think-ql4v), beside the runs' receipt, blocks and reports"
 )
-#: Both generators on the algebraic houses the pass of 23 October 2026 adopted once the
-#: house writer wrote an algebraic side (think-ot5c): grid-slack at 0.5, 1 and 5 degrees,
-#: which has no exact frame on a number-field witness and draws no view, and Evan Daniel's
-#: regularizer, whose solves are rational sides above the algebraic `U`, held at row 4:
-#: no rational view is `same` or `bound` at an irrational side (result-import.md, "The
-#: House Rule"). Its first run timed out at 258, 259 and 302 on a host at a load of about
-#: 25, and a second ran them at 2,400 seconds. Each count draws its exact house. At 153,
-#: 207, 259 and 302 a strong view of the earlier rational house lapsed just above the new
-#: `U`. The owner answered question 13 (think-r8cn) on 23 October 2026: the best record is
-#: always the record, and a regularized drawing may change the side only as a strict
-#: improvement. So no view above `U` is kept or drawn and `ABOVE_U` gains no entry. Each
-#: entry is `OWED`, not `DECIDED`: no view was judged no better, and the exact house drawn
-#: is not regularized (review A4 of #756). Its `owed` names think-mbdw for the
-#: regularization of the exact house, which needs a regularizer for number-field witnesses
-#: and a second exact route to admit its view. `PENDING_ALLOWED` cannot hold them:
-#: since the house rule it defers only a corrected witness (`deferral_problems`), and an
-#: adoption moved these. The runs' receipts, blocks, reports and the selection's report
-#: are in packing/cases/regularized_drawings/think-ot5c-2026-10-23/.
-_RUNOT5C = (
-    ("evand-regularize", "evand-regularize-adopt-2026-10-23-n70-302-evand"),
-    ("regularize_grid_slack/1", "grid-slack-adopt-2026-10-23-n70-302-grid-deg05"),
-    ("regularize_grid_slack/1", "grid-slack-adopt-2026-10-23-n70-302-grid-deg1"),
-    ("regularize_grid_slack/1", "grid-slack-adopt-2026-10-23-n70-302-grid-deg5"),
-)
-_RUNOT5C_B = (
-    *_RUNOT5C,
-    ("evand-regularize", "evand-regularize-adopt-2026-10-23-n258-302-evand"),
-)
-_README_OT5C = (
-    "packing/cases/regularized_drawings/think-ot5c-2026-10-23/README.md, the selection of 23 "
-    "October 2026 (think-ot5c), beside the runs' receipts, blocks and reports"
-)
-_OWED_MBDW = (
-    "think-mbdw: the regularization of the exact house, which needs a regularizer that "
-    "draws an exact view of a number-field witness at or below the record's side, and a "
-    "second exact route that admits it; until then the exact house is drawn"
-)
-_DANIEL_639 = "[Daniel exact current records 2026-10-16]"
-_DANIEL_639_REVISION = "7d1407a0b66c46e32cdbcbd5619586fe2bdd52a1"
-_PINGYOU_574 = "[PingYou PR 574 certificates 2026-10-13]"
-_PINGYOU_574_REVISION = "4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde"
-_NO_FRAME = (
-    "grid-slack has no exact frame on the number-field witness and draws no view at 0.5, 1 "
-    "and 5 degrees"
-)
-#: Why a rational view above an algebraic `U` is not drawn: the owner's answer to question
-#: 13 (think-r8cn), and row 4 of the policy's obligation 2.
-_NOT_DRAWN = (
-    "which is not drawn: a regularized drawing changes the side only as a strict "
-    "improvement, and no rational view is same or bound at an irrational side"
-)
-
-
-def _held_again(margin: str) -> str:
-    """`_held`, where the regularizer's first run timed out and its second solved it."""
-    return (
-        f"{_NO_FRAME}; Evan Daniel's regularizer timed out at 600 seconds in its first run, "
-        f"on a host at a load of about 25, and in its second solves it to a rational side "
-        f"{margin} above U, {_NOT_DRAWN}"
-    )
-
-
-def _held(margin: str) -> str:
-    """An algebraic house's outcome where Evan Daniel's regularizer solved it to a rational
-    side `margin` above `U`, which is not drawn."""
-    return (
-        f"{_NO_FRAME}, and Evan Daniel's regularizer solves it to a rational side {margin} "
-        f"above U, {_NOT_DRAWN}"
-    )
+#: The algebraic houses the pass of 23 October 2026 adopted (think-ot5c) at 102, 123, 153,
+#: 207, 258, 259 and 302 were `OWED` here, to think-mbdw, from 23 to 26 October 2026:
+#: grid-slack's version 1 had no exact frame on a number-field witness, and Evan Daniel's
+#: solves are rational sides above the algebraic `U`. Version 2 draws each in its own
+#: field, and the layer draws all seven, so no entry is left (evidence in
+#: packing/cases/regularized_drawings/think-mbdw-2026-10-26/).
 
 
 _T225 = "[Daniel regularized lists 2026-10-20]"
@@ -609,17 +550,6 @@ SETTLED: dict[int, Settled] = {
         "above U)",
         _README_3MRY,
     ),
-    102: Settled(
-        OWED,
-        _DANIEL_639,
-        "resources/web/evand-exact-cur-2026-10-16/facts/alg-n-102.yaml.gz",
-        _DANIEL_639_REVISION,
-        "['67/4', '25/4', '-105/4', '-27/4']",
-        _RUNOT5C,
-        _held("1.06e-19"),
-        _README_OT5C,
-        _OWED_MBDW,
-    ),
     108: Settled(
         DECIDED,
         "[PingYou PR 574 certificates 2026-10-13]",
@@ -666,17 +596,6 @@ SETTLED: dict[int, Settled] = {
         "the axis tool's view on light and uneven squares and both totals of shared "
         "sides",
         _README_3MRY,
-    ),
-    123: Settled(
-        OWED,
-        _DANIEL_639,
-        "resources/web/evand-exact-cur-2026-10-16/facts/alg-n-123.yaml.gz",
-        _DANIEL_639_REVISION,
-        "['33/4', '10', '-6', '23/2', '-33/4', '1/2']",
-        _RUNOT5C,
-        _held("1.16e-19"),
-        _README_OT5C,
-        _OWED_MBDW,
     ),
     127: Settled(
         DECIDED,
@@ -747,17 +666,6 @@ SETTLED: dict[int, Settled] = {
         "change), and grid-slack's views at 0.5, 1 and 5 degrees draw no change",
         _README_3MRY,
     ),
-    153: Settled(
-        OWED,
-        _PINGYOU_574,
-        "resources/web/pingyou-pr574-certificates-2026-10-13/facts/alg-n-153.yaml.gz",
-        _PINGYOU_574_REVISION,
-        "['2043/164', '155/164', '27/82', '87/82', '-243/164', '355/164', '-19/82']",
-        _RUNOT5C,
-        _held("1.29e-19"),
-        _README_OT5C,
-        _OWED_MBDW,
-    ),
     176: Settled(
         DECIDED,
         "[Mishapolk KKT refinements 2026-10-14]",
@@ -809,17 +717,6 @@ SETTLED: dict[int, Settled] = {
         "Evan Daniel's solved view is held at row 4 (solved about 1e-19 above U, no "
         "change), and grid-slack's views at 0.5, 1 and 5 degrees draw no change",
         _README_3MRY,
-    ),
-    207: Settled(
-        OWED,
-        _PINGYOU_574,
-        "resources/web/pingyou-pr574-certificates-2026-10-13/facts/alg-n-207.yaml.gz",
-        _PINGYOU_574_REVISION,
-        "['1288/89', '209/178', '-78/89', '335/178', '-12/89']",
-        _RUNOT5C,
-        _held("1.49e-19"),
-        _README_OT5C,
-        _OWED_MBDW,
     ),
     208: Settled(
         DECIDED,
@@ -956,29 +853,6 @@ SETTLED: dict[int, Settled] = {
         "change), and grid-slack finds no view at 0.5, 1 or 5 degrees (relaxed rows "
         "overlap at this side)",
         _README_3MRY,
-    ),
-    258: Settled(
-        OWED,
-        _DANIEL_639,
-        "resources/web/evand-exact-cur-2026-10-16/facts/alg-n-258.yaml.gz",
-        _DANIEL_639_REVISION,
-        "['8681/544', '2003/136', '-26795/544', '-10137/272', '163247/544', '-25131/68', "
-        "'87875/544', '-6877/272']",
-        _RUNOT5C_B,
-        _held_again("1.66e-19"),
-        _README_OT5C,
-        _OWED_MBDW,
-    ),
-    259: Settled(
-        OWED,
-        _DANIEL_639,
-        "resources/web/evand-exact-cur-2026-10-16/facts/alg-n-259.yaml.gz",
-        _DANIEL_639_REVISION,
-        "['53/4', '-10', '-6', '-23/2', '-33/4', '-1/2']",
-        _RUNOT5C_B,
-        _held_again("1.66e-19"),
-        _README_OT5C,
-        _OWED_MBDW,
     ),
     260: Settled(
         DECIDED,
@@ -1132,17 +1006,6 @@ SETTLED: dict[int, Settled] = {
         "rows overlap at this side)",
         _README_3MRY,
     ),
-    302: Settled(
-        OWED,
-        _DANIEL_639,
-        "resources/web/evand-exact-cur-2026-10-16/facts/alg-n-302.yaml.gz",
-        _DANIEL_639_REVISION,
-        "['2863/164', '155/164', '27/82', '87/82', '-243/164', '355/164', '-19/82']",
-        _RUNOT5C_B,
-        _held_again("1.79e-19"),
-        _README_OT5C,
-        _OWED_MBDW,
-    ),
     304: Settled(
         DECIDED,
         "[Daniel Kaggle descents 2026-10-24]",
@@ -1271,7 +1134,9 @@ def _routes(entry: Mapping[str, Any]) -> bool:
     )
 
 
-def _against(view: Fraction, house: Fraction | None) -> str | None:
+def _against(view: Any, house: Any) -> str | None:
+    """The view's exact side against the house's: rationals, or elements of the count's
+    number field (`exact_scalars`)."""
     if house is None:
         return None
     return "smaller" if view < house else "larger" if view > house else "same"
@@ -1296,8 +1161,16 @@ def judged(
 
     if view["drawing"]["kind"] != "regularized-view" or house["drawing"]["kind"] != "witness":
         raise ValueError(f"n={n}: the view and the house drawing were not both measured")
-    side = Fraction(str(view["side"]))
-    house_side = None if house["side"] is None else Fraction(str(house["side"]))
+    from devtools import exact_scalars as scalars  # noqa: PLC0415
+    from devtools import regularize_select as select  # noqa: PLC0415
+
+    # Over a number field both sides are elements of the count's field (think-mbdw).
+    listed = any(str(text).startswith("[") for text in (view["side"], house["side"]) if text)
+    field = select.count_field(n) if listed else None
+    side = scalars.parse_text(str(view["side"]), field)
+    house_side = (
+        None if house["side"] is None else scalars.parse_text(str(house["side"]), field)
+    )
     upper = drive.verified_bound(drive.case_facts(n))
     order = None if upper is None else upper.compare(side)
     gains, worse = improvement_rule.compare(view, house)

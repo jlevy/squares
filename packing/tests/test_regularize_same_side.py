@@ -318,6 +318,33 @@ def test_a_pose_too_long_to_write_is_refused_by_name(monkeypatch: pytest.MonkeyP
     assert (outcome.status, outcome.reason) == ("refused", "literal-too-large")
 
 
+def _half_angle(t: Fraction) -> tuple[str, str]:
+    c, s = (1 - t * t) / (1 + t * t), 2 * t / (1 + t * t)
+    return str(c), str(s)
+
+
+def test_own_matching_keeps_each_square_s_exact_rotation() -> None:
+    """Two squares at distinct exact rotations `10^-12` radians apart: by default the
+    second takes the first's, as a generator's merged class does; with `own`, as the
+    grid-slack generator matches, each keeps its own, and a pose stated as `0` is still
+    turned to the axes (think-mbdw: n = 258's house has such classes)."""
+    first, second = _half_angle(HALF), _half_angle(HALF + Fraction(1, 10**12))
+    witness = basis_witness([("1", "1", first), ("4", "4", second)], "6")
+    frame = exact_frame(witness)
+    poses = [
+        GeneratorPose("1", "1", repr(math.degrees(math.atan2(4, 3)))),
+        GeneratorPose("4", "4", repr(math.degrees(math.atan2(4, 3)))),
+    ]
+    merged = match_rotations(frame, poses)
+    assert [m.source for m in merged] == [0, 0]
+    own = match_rotations(frame, poses, own=True)
+    assert [m.source for m in own] == [0, 1]
+    assert own[1].rotation == frame.rotations[1] != frame.rotations[0]
+    turned = match_rotations(frame, [poses[0], GeneratorPose("4", "4", "0")], own=True)
+    assert turned[1].rotation == AXIS
+    assert turned[1].source is None
+
+
 def test_a_witness_over_a_number_field_has_no_exact_frame() -> None:
     witness = load_witness(KNOWN_BEST / "n-051.yaml", fallback_schema=WITNESS_SCHEMA)
     outcome = resolve(witness, [GeneratorPose("0.5", "0.5", "0")] * 51)

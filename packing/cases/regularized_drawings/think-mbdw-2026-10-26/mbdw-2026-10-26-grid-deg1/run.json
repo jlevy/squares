@@ -1,0 +1,21 @@
+{
+  "id": "grid-slack-mbdw-2026-10-26-grid-deg1",
+  "generator": "regularize_grid_slack/2",
+  "finished": "2026-10-26",
+  "parameters": {
+    "near_axis_degrees": 1.0,
+    "trust": 0.45,
+    "time_limit": 120.0,
+    "stage_margin": 0.0099
+  },
+  "counts": 7,
+  "decisions": {
+    "admit": 7
+  },
+  "cost": {
+    "cpu_seconds": 1756.13,
+    "wall_seconds": 1756.13,
+    "workers": 1,
+    "note": "per-count seconds the reports record, summed; no receipt of the run's own"
+  }
+}

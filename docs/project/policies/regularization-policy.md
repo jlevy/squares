@@ -46,7 +46,7 @@ the import runbook’s
 | Term | Meaning |
 | --- | --- |
 | Source witness | The atlas witness `packing/witnesses/known-best/n-NNN.yaml` a view is derived from |
-| $s_W$ | The source witness’s side: its exact side, or for a decimal witness the printed side of its stated rational promotion, the 36-digit pose at dilation 1 |
+| $s_W$ | The source witness’s side: its exact side, a rational or an element of the number field it is stated in, or for a decimal witness the printed side of its stated rational promotion, the 36-digit pose at dilation 1 |
 | $U$ | The case’s verified upper bound when the view is decided |
 | $s_V$ | The view’s exact certified side |
 | Generator | The code that made a view: `regularize_axis_components/2` in `packing/devtools/regularize_axis_components.py`, or Evan Daniel’s exact solver and regularizer vendored under `vendor/evand-regularize/`, driven by `packing/devtools/regularize_evand.py` and brought to the witness’s side by `packing/devtools/regularize_same_side.py`. A generator’s version is its own version, or for the vendored code the pin plus its ordered local patches. |
@@ -65,13 +65,18 @@ A view enters the drawing layer only if every obligation holds.
 They are checked in this order, and the first that fails is the refusal the index
 records.
 
-1. **Exact validity.** The retained view is decided valid over $\mathbb{Q}$ by both
-   maintained exact routes, `sqpack.witness.exact_verify` and the independent checker
-   `packing/devtools/check_rational_witness_independent.py`; a view converted from Evan
-   Daniel’s format is also decided by the third route, `check_half_angle_area.py`. His
-   own checkers may be replayed as evidence about the source and never decide.
-   A view that two routes here cannot decide, such as a pose over a number field today,
-   is not admitted. The index’s digest binds the verdict to the view’s bytes.
+1. **Exact validity.** The retained view is decided valid by both maintained exact
+   routes. Over $\mathbb{Q}$ they are `sqpack.witness.exact_verify` and the independent
+   checker `packing/devtools/check_rational_witness_independent.py`. Over a real number
+   field $\mathbb{Q}(\alpha)$, the field an algebraic house’s witness is stated in, they
+   are `sqpack.witness.exact_verify` over `sqpack.field` and the independent checker
+   `packing/devtools/check_algebraic_witness_independent.py`, which reads the view’s own
+   text and shares no arithmetic, root isolation or geometry with the first (think-mbdw,
+   26 October 2026). A view converted from Evan Daniel’s format is also decided by the
+   third route, `check_half_angle_area.py`. His own checkers may be replayed as evidence
+   about the source and never decide.
+   A view that two routes here cannot decide is not admitted.
+   The index’s digest binds the verdict to the view’s bytes.
 2. **Side relation.** $s_V$ is computed exactly and the relation recorded.
    A drawing needs `same` or `bound`, and $s_V \ge U$. A view with $s_V < U$ is
    registered as a result first and drawn after (owner, 12 October 2026: “regularize and
@@ -123,7 +128,7 @@ still measured and named, and decides nothing.
 | 2. Exact solve | The vendored exact solver, through the driver | 80 digits and a timeout per count; a count that will not certify is reported, never polished |
 | 3. Regularize | The vendored regularizer, through the driver | `conservative`, `coincide` placement, the source orientation |
 | 4. Import | The driver converts each certificate to a rational Witness/v2 view | Decided on three routes; identity and shades measured |
-| 5. Same side | `regularize_same_side.py` re-solves the view’s tight contacts over $\mathbb{Q}$ at $s_W$ | Wherever every rotation in the view is rational in the witness’s frame |
+| 5. Same side | `regularize_same_side.py` re-solves the view’s tight contacts over $\mathbb{Q}$ at $s_W$ | Wherever every rotation in the view is rational in the witness’s frame; the grid-slack generator re-solves over the witness’s own number field where its house is algebraic |
 | 6. Reference | `regularize_axis_components/2` | Unchanged: the fallback, and the reference for non-regression |
 | 7. Classify | The driver applies the table below | Index entries, the review queue, the candidate list and the receipt |
 
@@ -366,10 +371,19 @@ policy applies until there is one.
    witnesses’ printed sides, about $10^{-14}$ below bounds rounded up at fourteen
    decimals.
 
-4. **Irrational optima:** the status quo.
-   A dilated certificate is not a drawing frame (row 4), and views over a number field
-   are a follow-up, $\mathbb{Q}(\sqrt{2})$ first; $n = 11$, whose proved optimum lies in
-   a field of degree 8, stays drawn from its witness.
+4. **Irrational optima:** a dilated certificate is not a drawing frame (row 4). A
+   witness stated over a real number field is regularized in that field: since 26
+   October 2026 the grid-slack generator starts from such a witness’s own exact pose,
+   re-solves the placement’s contacts over the field at $s_W$, and writes the view in
+   the witness’s field, where the two number-field routes of obligation 1 decide it
+   (think-mbdw). The owner, 26 October 2026, on seeing algebraic houses drawn
+   unregularized on the home page: “When something lands on our main rendered lists, the
+   regularization should be done.
+   There’s no excuse not to, because it should be cheap to calculate.
+   We should do flipper regularization as well as the general regularization, and that
+   process should be well defined.”
+   $n = 11$, whose proved optimum lies in a field of degree 8, is drawn from its
+   witness, which reads regular as published.
 
 5. **Orientation:** every witness and view keeps its source’s frame; any isometry of a
    frame is recorded as `atlas_orientation` records one.
@@ -554,7 +568,8 @@ recorded where it is implemented, and reversing one is a change to that layer.
    coincidence placement, started from the witness’s exact frame (near-axis squares
    straightened under 0.5 degrees where a placement stays feasible), brought to the
    record’s side by the same exact re-solve, and credited to his method (section 7)
-   (#530).
+   (#530). Over a witness stated in a number field, the frame and the re-solve are in
+   that field (think-mbdw, 26 October 2026).
 4. **Choosing between generators:** where both yield an admissible view, Evan Daniel’s
    is drawn unless the grid-slack view is better on a measure of the drawing (light,
    uneven or near-axis squares, or a house or stage total) and worse on none (#548). The
