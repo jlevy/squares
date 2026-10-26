@@ -83,6 +83,12 @@ NEWS_FLOOR = 3
 #: The levels the News archive opens on, and what an address without `news-s` means
 #: there (`news-filters.js`).
 NEWS_LEVELS = (4, 5)
+#: Where the retained history is served: the page that owns the `changelog` bookmark and
+#: an anchor for every entry, whatever its significance
+#: (`render_overview.changelog_page`). News shows the S3+ stories and sends a reader here
+#: for the rest (the owner, 2026-10-26); before that the section lived on News itself and
+#: the only full view was `CHANGELOG.md` on GitHub.
+CHANGELOG_PAGE = "changelog.html"
 
 
 def news_rubric_meanings(text: str) -> dict[int, str]:
@@ -1230,16 +1236,28 @@ def _entry_lines(
 
 
 def render_markdown(
-    document: Document, *, destination: Destination = "github", heading_level: int = 2
+    document: Document,
+    *,
+    destination: Destination = "github",
+    heading_level: int = 2,
+    include_heading: bool = True,
 ) -> str:
-    """A shared, date-grouped section; stable anchors are independent of titles."""
+    """A shared, date-grouped section; stable anchors are independent of titles.
+
+    `include_heading` writes the section's own Changelog heading and the `changelog`
+    anchor with it. The site's Changelog page is titled by its own article, which owns
+    that anchor there, so it asks for the days and their entries alone and the days sit
+    one level under `heading_level` as they do in a section."""
     if destination not in ("github", "site") or heading_level not in (1, 2, 3, 4):
         raise ValueError("invalid changelog destination or heading depth")
     validate(document)
-    if destination == "site":
-        out = [f'<h{heading_level} id="changelog">Changelog</h{heading_level}>', ""]
-    else:
-        out = ['<a id="changelog"></a>', "", "#" * heading_level + " Changelog", ""]
+    out: list[str] = []
+    if include_heading:
+        out = (
+            [f'<h{heading_level} id="changelog">Changelog</h{heading_level}>', ""]
+            if destination == "site"
+            else ['<a id="changelog"></a>', "", "#" * heading_level + " Changelog", ""]
+        )
     last_date = ""
     for entry in ordered_entries(document):
         if entry["date"] != last_date:
@@ -1305,7 +1323,8 @@ def news_entries(document: Document) -> list[Document]:
 
 
 def archived_news_targets(document: Document) -> dict[str, str]:
-    """Retired article and day bookmarks still reach their retained changelog entries."""
+    """Retired article and day bookmarks still reach their retained changelog entries,
+    which the site now serves itself (`CHANGELOG_PAGE`)."""
     public_ids = {entry["id"] for entry in news_entries(document)}
     excluded = [entry for entry in document["entries"] if entry["id"] not in public_ids]
     anchors = [entry_anchor(entry["id"]) for entry in excluded]
@@ -1314,10 +1333,14 @@ def archived_news_targets(document: Document) -> dict[str, str]:
         f"changelog-date-{day}"
         for day in sorted({entry["date"] for entry in excluded} - public_days)
     )
-    return {
-        anchor: f"{document['repository']}/blob/main/CHANGELOG.md#{anchor}"
-        for anchor in anchors
-    }
+    return {anchor: f"{CHANGELOG_PAGE}#{anchor}" for anchor in anchors}
+
+
+def news_forward_targets(document: Document) -> dict[str, str]:
+    """Every bookmark News keeps without showing it, by anchor: the `changelog` bookmark
+    the section answered here before the history took a page of its own, then each entry
+    and day below the News floor (`archived_news_targets`)."""
+    return {"changelog": f"{CHANGELOG_PAGE}#changelog", **archived_news_targets(document)}
 
 
 def _news_forward_anchors(targets: dict[str, str]) -> str:
@@ -1578,14 +1601,19 @@ def render_news(
             )
         out.append(card)
     out.append("</div>")
-    if limit is None and (archived := archived_news_targets(document)):
-        out.append(_news_forward_anchors(archived))
-        target = html.escape(f"{document['repository']}/blob/main/CHANGELOG.md", quote=True)
+    if limit is None:
+        out.append(_news_forward_anchors(news_forward_targets(document)))
+        source = html.escape(f"{document['repository']}/blob/main/CHANGELOG.md", quote=True)
         from devtools.overview_sections import arrow_icon  # noqa: PLC0415
 
+        # The archive closes on the whole history: this site's Changelog page first, then
+        # the generated file on GitHub (the owner, 2026-10-26).
         out.append(
-            f'<p class="site-action-row"><a class="site-action" href="{target}" '
-            'aria-label="Full changelog on GitHub">Full changelog '
+            '<p class="site-action-row">'
+            f'<a class="site-action" href="{CHANGELOG_PAGE}">Changelog'
+            f"{arrow_icon('right')}</a>"
+            f'<a class="site-action" href="{source}" '
+            'aria-label="Changelog on GitHub">Changelog on GitHub'
             f"{arrow_icon('external')}</a></p>"
         )
     return "\n".join(out)
@@ -1593,12 +1621,12 @@ def render_news(
 
 def legacy_news_anchors(document: Document) -> str:
     """Keep old About bookmarks navigable without duplicating the history there."""
-    anchors = ["changelog", *(entry_anchor(entry["id"]) for entry in document["entries"])]
+    anchors = [entry_anchor(entry["id"]) for entry in document["entries"]]
     anchors.extend(
         f"changelog-date-{day}" for day in sorted({e["date"] for e in document["entries"]})
     )
     targets = {anchor: f"news.html#{anchor}" for anchor in anchors}
-    targets.update(archived_news_targets(document))
+    targets.update(news_forward_targets(document))
     return _news_forward_anchors(targets)
 
 

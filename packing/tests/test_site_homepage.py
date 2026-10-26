@@ -67,7 +67,14 @@ def payloads() -> dict[str, bytes]:
     """The real destination pages and exercised cases, with every browser dependency."""
     documents = {
         name: site_renders.html(name)
-        for name in ("index.html", "news.html", "atlas.html", "about.html", "results.html")
+        for name in (
+            "index.html",
+            "news.html",
+            "changelog.html",
+            "atlas.html",
+            "about.html",
+            "results.html",
+        )
     }
     documents.update(
         {
@@ -965,7 +972,7 @@ def test_news_cards_expand_only_on_press_and_legacy_bookmarks_forward(
         assert footer is not None
         assert footer["family"] == news["family"]
         assert footer["arrow"] == "external"
-        assert footer["label"] == "Full changelog on GitHub"
+        assert footer["label"] == "Changelog on GitHub"
         assert footer["href"] == f"{document['repository']}/blob/main/CHANGELOG.md"
         assert preview["reference_article_title"] is not None
         for surface in (preview, news):
@@ -1374,16 +1381,18 @@ def test_recently_added_reads_as_the_results_pages_days_with_and_without_scripts
 def test_excluded_news_bookmarks_reach_the_retained_changelog(
     browser: Any, payloads: dict[str, bytes]
 ) -> None:
+    """The bookmarks News keeps without showing them now land on this site's own
+    Changelog page rather than on `CHANGELOG.md` at GitHub (the owner, 2026-10-26), and
+    the `changelog` bookmark the section answered on News leads there too."""
     sync_api = site_browser.api()
     document = render_changelog.load()
-    targets = render_changelog.archived_news_targets(document)
+    targets = render_changelog.news_forward_targets(document)
     assert targets
+    assert all(
+        target.startswith(render_changelog.CHANGELOG_PAGE) for target in targets.values()
+    )
     page = browser.new_page(viewport={"width": 1280, "height": 900})
     _serve(page, payloads)
-    page.route(
-        f"{document['repository']}/blob/main/CHANGELOG.md",
-        lambda route: route.fulfill(body="<p>Retained project changelog</p>"),
-    )
     errors = []
     page.on("pageerror", lambda error: errors.append(str(error)))
     try:
@@ -1392,7 +1401,7 @@ def test_excluded_news_bookmarks_reach_the_retained_changelog(
                 encoded = f"%{ord(anchor[0]):02X}{anchor[1:]}"
                 for fragment in (anchor, encoded):
                     page.goto(f"{ORIGIN}{surface}#{fragment}", wait_until="load")
-                    sync_api.expect(page).to_have_url(target)
+                    sync_api.expect(page).to_have_url(f"{ORIGIN}{target}")
             malformed = f"{ORIGIN}{surface}#%E0%A4%A"
             page.goto(malformed, wait_until="load")
             sync_api.expect(page).to_have_url(malformed)

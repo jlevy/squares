@@ -235,8 +235,11 @@ significance meter and disclosure renderer.
 Claim qualifications remain in the shared article; the title links to its stable News
 anchor. Detailed result status stays in the linked result record.
 The archive’s “Full changelog” link uses the shared action button with an external-link
-arrow. Navigation components use explicit sans typography, including action links inside
-prose containers; inline prose citations keep their surrounding face.
+arrow. *Superseded on 26 October 2026:* the archive closes on two shared action buttons,
+“Changelog” with the right arrow for this site’s own page and “Changelog on GitHub” with
+the external-link arrow for the generated file.
+Navigation components use explicit sans typography, including action links inside prose
+containers; inline prose citations keep their surrounding face.
 Explanations combines the former Papers and Visualize navigation entries.
 Its landing page (`papers.html`) has the Explanations H1 and four sections: Tutorial,
 Papers, PDFs and Visuals.

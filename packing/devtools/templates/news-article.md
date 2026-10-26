@@ -1,4 +1,4 @@
-<h1 id="news" class="site-title">News<a id="changelog"></a></h1>
+<h1 id="news" class="site-title">News</h1>
 
 {{NEWS}}
 

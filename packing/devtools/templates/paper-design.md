@@ -1178,8 +1178,8 @@ contributor articles use their component sheets and the same text tokens.
   Its S and five bars remain one tightly paired mark.
   Homepage highlights keep the announcement’s significance and assurance qualifiers,
   with one S meter per card.
-  News includes only S3, S4 and S5; S1/S2 remain in the full GitHub changelog, with old
-  News bookmarks forwarded there.
+  News includes only S3, S4 and S5; S1/S2 remain in the Changelog page, with old News
+  bookmarks, and the `changelog` bookmark the section once answered, forwarded there.
   Archive controls offer S3/S4/S5 and default to S4/S5 and all topics, with OR within a
   facet and AND across facets.
   One unboxed Reset filters action restores the defaults, right aligned above the News
@@ -1212,7 +1212,7 @@ contributor articles use their component sheets and the same text tokens.
   URL state preserves unrelated query parameters and browser history; a low-score
   bookmark widens the filters to reveal its target.
   Without JavaScript the controls stay hidden and complete eligible articles remain
-  visible, with a link to the full changelog.
+  visible, with a link to the Changelog page.
   After the enhancement loads, about ten lines are visible.
   Clicking or tapping the card or its small shared arrow in the footer expands or
   contracts it inline; Enter and Space activate the button.
@@ -1224,7 +1224,7 @@ contributor articles use their component sheets and the same text tokens.
   Article links retain their ordinary actions; body-link focus reveals the article.
   Eligible entry and legacy date fragments reveal their corresponding card.
   Bookmarks for excluded entries, and dates with no eligible articles, forward to the
-  retained GitHub changelog.
+  Changelog page, which serves the whole retained history.
   Topic labels reuse the square-cornered chip geometry with distinct News subject
   metadata and the common neutral background.
   Their corresponding colored ink keeps News subjects distinct from the result/status
@@ -1258,8 +1258,9 @@ contributor articles use their component sheets and the same text tokens.
   Its title links to the stable News article anchor.
   Keep claim qualifications in that shared article; result records carry the detailed
   verification, confirmation and status marks.
-  The archive ends with a shared action button, “Full changelog”, using the
-  external-link arrow and linking to the complete GitHub changelog.
+  The archive ends with two shared action buttons: “Changelog”, with the right arrow,
+  opening this site’s own Changelog page, then “Changelog on GitHub”, with the
+  external-link arrow, opening the generated file.
   About keeps one short News link; its old history bookmarks forward without duplicating
   the feed.
 
@@ -3004,18 +3005,22 @@ pointer and by keyboard, and measures its label at 1280, 768 and 390 pixels.
   day holds every result that arrived, at any significance, by its `landed`
   (`added_entry`, its id linking to its row in All Results, and the day’s link opening
   All Results on that day, `?added=`); each count whose house best packing changed,
-  under the result that holds it now; and each source’s dated beyond-horizon rows, one
-  line a source with its count, its span of counts, its credit and how many are since
-  superseded, linking to the source’s packet on GitHub, since no page of the site lists
-  those rows. Houses and rows are placed by the day `main` first held them, which
+  under the result that holds it now, which the line calls the record packing, since
+  *house best* reads as a term a reader has to look up (the owner, 26 October 2026); and
+  each source’s dated beyond-horizon rows, one line a source with its count, its span of
+  counts, its credit and how many are since superseded, linking to the source’s packet
+  on GitHub, since no page of the site lists those rows.
+  Houses and rows are placed by the day `main` first held them, which
   `devtools.stamp_landed` writes into `packing/frontier/landings.yaml` at the merge step
   as it writes `landed`; nothing that renders reads Git (OR-18). One window bounds all
   three, ending on the newest of those days (`arrival_reference`), and the introduction
-  names the days shown.
-  The summary tallies the three and wraps between them.
-  The section draws with `results.css`’s rollup classes, and its introduction links All
-  Results and News. `tests/test_home_recent.py` holds it to the records and to 40,000
-  bytes.
+  names the day it opens on, the oldest day shown (`recent_since`, the owner’s shorter
+  wording of 26 October 2026). The summary tallies the three and wraps between them,
+  each count written with its number in bold and its noun in the summary’s own case
+  rather than the toggles’ caps (`tally_count`); the toggle keeps the first line of a
+  summary that wraps. The section draws with `results.css`’s rollup classes, and its
+  introduction links News alone, leaving All Results to the section below it.
+  `tests/test_home_recent.py` holds it to the records and to 40,000 bytes.
 
 - **Recent results.** The homepage’s **Recent Major Results** section sits below
   Recently Added and News.
