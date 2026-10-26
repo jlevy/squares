@@ -9422,6 +9422,47 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "and v0.2.7."
         ),
     ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/atlas/known-best/bound-citations.json",
+            "packing/atlas/known-best/composite-figure.json",
+            "packing/campaign/result-requests.yaml",
+            "packing/frontier/results.yaml",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The backlog lane of 25 and 26 October (think-vvjk, think-kf3o, think-sb7a, "
+            "PR #821): T-237 to C3 by the exact audit of Friedman's s(5) "
+            "(E-n005-friedman-theorem2-audit), with n = 5's lower bound citation and "
+            "composite record naming it; T-046's next_rung, unfinished confirmations and "
+            "notes on its census route; the #773 and #785 requests entries. No result is "
+            "registered. Measured at link revisions 1fede43c and 1f2507d4 against main "
+            "2f974835a (#818), and at 9ed88d49 after the bound citation and composite "
+            "record were regenerated; then, after merging main 5c50803d6 (#807), at link "
+            "revision 70434a43 into empty site directories, twice from this tree and once "
+            "with that main's bound-citations.json, composite-figure.json, "
+            "result-requests.yaml and results.yaml swapped in, by "
+            "render_n11_lower_bounds_explainer, render_n11_optimality_review, "
+            "render_n11_threshold_bound_review and render_packing_methods: 69 files each, "
+            "all byte-identical across the three every time. No PDF was printed. Retain "
+            "v0.4.30, v0.1.11, v0.1.4 and v0.2.7."
+        ),
+    ),
 )
 
 
