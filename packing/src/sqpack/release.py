@@ -799,7 +799,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "1724966bcbdc13da688d99b53cb2ba9513bb8685"
+DATA_REVISION = "f86fa742ee5dd87c3a2052a119c3ddff8189ff07"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -9713,6 +9713,42 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "render_packing_methods: 69 files each, all byte-identical across the three. "
             "No PDF was printed; each prints from that HTML. Every paper keeps its "
             "version: v0.4.30, v0.1.11, v0.1.4 and v0.2.7."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/frontier/results.yaml",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "Sixteen issues closed on 26 October with their final replies, four asks "
+            "#827 did marked done, and #804's follow-up recorded "
+            "(result-requests.yaml); T-247's next rung says its general and flip "
+            "regularization come at adoption, not under the closed think-mbdw "
+            "(results.yaml). No rung, bound, side or credit changes. Against main "
+            "acc1cfc3d (#825): rendered at link revision f86fa742 into empty site "
+            "directories, twice from this tree and once with that main's two changed "
+            "inputs swapped in, by render_n11_lower_bounds_explainer, "
+            "render_n11_optimality_review, render_n11_threshold_bound_review and "
+            "render_packing_methods: 69 files each, all byte-identical across the three. "
+            "No PDF was printed; each prints from that HTML. Every paper keeps its "
+            "version: v0.4.31, v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
 )
