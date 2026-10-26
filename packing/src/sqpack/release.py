@@ -2683,7 +2683,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "render_n11_threshold_bound_review and render_packing_methods. Sixty-five of "
             "the 69 files are byte-identical, every paper's Markdown among them; the four "
             "that differ are the four papers' HTML, each in one line, its "
-            "`<ul id=\"site-nav-links\">`, which gains the Project group and loses the two "
+            '`<ul id="site-nav-links">`, which gains the Project group and loses the two '
             "top-level Overview and News links. No PDF was printed; each prints from that "
             "HTML, whose body is unchanged. Retain v0.4.32, v0.1.11, v0.1.4 and v0.2.7."
         ),
