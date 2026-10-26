@@ -799,7 +799,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "01947fb71f877bcb033921cdd67fb07c7b0b97af"
+DATA_REVISION = "c7a1c45f7b38e78ebdae7db2e7f9a80b548374b7"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -9595,6 +9595,66 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "files byte-identical across the three. No PDF was printed; each prints from "
             "that HTML. Every paper keeps its version: v0.4.30, v0.1.11, v0.1.4 and "
             "v0.2.7."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=("packing/campaign/result-requests.yaml",),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The close rule of 26 October (think-3b9v): requests entries gain validation "
+            "beads, review_track, blocked and ask sources, ten asks move out, #719's "
+            "questions go to awaiting_author, #607's composites are disposed of, and #544 "
+            "and #684 close (result-requests.yaml); no register entry. Against main "
+            "9ebde24df (#823): rendered at link revision 0e25a599 into empty site "
+            "directories, twice from this tree and once with that main's "
+            "result-requests.yaml swapped in, render_packing_methods writes all 43 files "
+            "byte-identical across the three. No PDF was printed; it prints from that "
+            "HTML. The survey keeps v0.2.7."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/frontier/n-029.md",
+            "packing/frontier/n-051.md",
+            "packing/frontier/n-070.md",
+            "packing/frontier/n-086.md",
+            "packing/frontier/n-088.md",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "T-046 to V3/C3 on the sqverify-fast census route (think-buaj, think-wcex): "
+            "its review of 26 October, 46 census evidence entries cited on T-046 and on "
+            "the case records' evidence lists, T-046's headline, claim, rungs and notes, "
+            "and the 28 September coverage note; no bound moves and no result is "
+            "registered. Against main 9ebde24df (#823): rendered at link revision "
+            "0d3a5459 into empty site directories, twice from this tree and once with "
+            "that main's seven changed inputs swapped in, by "
+            "render_n11_lower_bounds_explainer, with its pinned Chromium math pass, "
+            "render_n11_optimality_review, render_n11_threshold_bound_review and "
+            "render_packing_methods: 69 files each, all byte-identical across the three. "
+            "No PDF was printed; each prints from that HTML. Every paper keeps its "
+            "version: v0.4.30, v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
 )

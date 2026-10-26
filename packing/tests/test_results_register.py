@@ -496,7 +496,7 @@ def test_a_confirmation_above_the_verification_is_refused(
     monkeypatch: pytest.MonkeyPatch,
     capsys: pytest.CaptureFixture[str],
 ) -> None:
-    promoted = _changed_result(tmp_path, "T-046", confirmation="C2")
+    promoted = _changed_result(tmp_path, "T-132", confirmation="C2")
     monkeypatch.setattr(check_results, "RESULTS", promoted)
     assert check_results.main() == 1
     assert "confirmation C2 exceeds verification V0" in capsys.readouterr().out

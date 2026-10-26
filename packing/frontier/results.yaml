@@ -4068,7 +4068,7 @@ results:
     kind: lower-bound
     registered: '2026-09-29'
     landed: '2026-09-29'
-    headline: "Rectangle-density lower bounds reported for 48 counts in `n = 18…95`"
+    headline: "Rectangle-density lower bounds verified at 48 counts in `n = 18…95`"
     claim: >-
       wand125/square-packing-bounds reports one standing rectangle-density certificate for
       each of 48 counts from n = 18 to n = 95, added or raised between 26 and 28 September
@@ -4094,10 +4094,20 @@ results:
       each was accepted there at every net direction by Tokoharu's unchanged interval checker,
       verify.cpp.
 
-      Here this repository's exact preflight checked that every checker input is the one the
-      upstream run recorded, and checked the mass, net and partition premises. The values
-      stand here as reported; those whose certificates have since been replayed in full
-      are registered again as replayed results, in T-045 and T-070.
+      Each of the 46 certificates was decided here by sqverify-fast, this repository's
+      clean-room measure verifier, at all 201 net directions of the retained candidate at
+      Tokoharu's threshold 10001/10000, 24 in the census of 3 October 2026 and 22 re-run on
+      25 October on reviewed source, and on 25 October two mutants of each scaled below that
+      threshold were refused: confirmed, independently re-implemented. The verifier shares
+      no code with the source's checker and runs the same net-and-shrink method, so it is a
+      second implementation and not a second method.
+
+      Here this repository's exact preflight also checked that every checker input is the
+      one the upstream run recorded, and checked the mass, net and partition premises. The
+      source's own checker was replayed here in full on 28 of the certificates, whose
+      counts are registered again as replayed results in T-045 and T-070; the other 18 had
+      no replay here before the census. Every count already holds a higher verified lower
+      bound from a later certificate, so no case's verified bound moves.
 
       Hiroaki Hosono after Tokoharu and Levy, square-packing-bounds as of [27
       September](https://github.com/wand125/square-packing-bounds/tree/ad43d29d96d0d9740b34643b5ac3fb960909cf9c)
@@ -4109,8 +4119,8 @@ results:
       n_values: [18, 19, 20, 26, 27, 28, 29, 30, 31, 37, 38, 39, 40, 41, 42, 43, 44, 51, 52,
         53, 54, 55, 56, 57, 58, 59, 60, 61, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77,
         78, 86, 88, 89, 90, 91, 94, 95]
-    verification: V0
-    confirmation: C0
+    verification: V3
+    confirmation: C3
     significance:
       score: 3
       rationale: >-
@@ -4119,7 +4129,7 @@ results:
         the register then held at those sizes, except at the ten counts where T-045,
         registered the same day, states the same values (n = 18 to 20, 26, 27, 30, 40, 61,
         75 and 78); later entries, from T-062 on (1 October), have passed them at all 48.
-        The score is of what the reports would establish; V0/C0 says
+        The score is of what the reports would establish; the rung says
         how far they stand, and the score gates nothing. Confirmed on 11 October:
         forty-eight counts by one certificate kind are further sizes from one generator, S3
         as T-045 and T-068 are, and not a bound family in the S4 sense of T-064 and T-081.
@@ -4132,86 +4142,186 @@ results:
     composition: >-
       One claim per count, from two source revisions: the counts whose case cites
       E-wand125-rectangle-report keep the 27 September certificate, and those citing the
-      28 September entries the raised or new one. n = 77 and n = 90 are reported-lane
-      transfers by the mass condition, which add no premise to the source claim they rest
-      on. Every part stands at V0/C0.
+      28 September entries the raised or new one. n = 77 and n = 90 are transfers by the
+      masses of the n = 76 and n = 89 certificates, whose census entries cover them.
+
+      Each count's replay is sqverify-fast at all 201 net directions of its retained candidate:
+      one interval-certified method, replayed here by an independent implementation, C3,
+      on the census route for format T that the review of 6 October set, with the mass
+      condition widened to n - 1/1000 for rect_n27_L56 by the review of 26 October. The
+      source's checker was also replayed here on 28 of the 46 certificates, a reproduction
+      with the producer's code beside the rung, recorded in the packets' receipts and under
+      T-045 and T-070; no second method stands beside it.
     produced_by:
       session: session-161
     evidence:
       - E-wand125-rectangle-report
       - E-wand125-rectangle-2026-09-28-report
       - E-wand125-rectangle-2026-09-28-monotone-report
+      - E-n018-wand125-rect-4695-sqverify-fast-replay
+      - E-n019-wand125-rect-4815-sqverify-fast-replay
+      - E-n020-wand125-rect-4895-sqverify-fast-replay
+      - E-n026-wand125-rect-553-sqverify-fast-replay
+      - E-n027-wand125-rect-56-sqverify-fast-replay
+      - E-n028-wand125-rect-572-sqverify-fast-replay
+      - E-n029-wand125-rect-579-sqverify-fast-replay
+      - E-n030-wand125-rect-5865-sqverify-fast-replay
+      - E-n031-wand125-rect-5935-sqverify-fast-replay
+      - E-n037-wand125-rect-6425-sqverify-fast-replay
+      - E-n038-wand125-rect-654-sqverify-fast-replay
+      - E-n039-wand125-rect-663-sqverify-fast-replay
+      - E-n040-wand125-rect-6695-sqverify-fast-replay
+      - E-n041-wand125-rect-6755-sqverify-fast-replay
+      - E-n042-wand125-rect-679-sqverify-fast-replay
+      - E-n043-wand125-rect-6865-sqverify-fast-replay
+      - E-n044-wand125-rect-6935-sqverify-fast-replay
+      - E-n051-wand125-rect-74425-sqverify-fast-replay
+      - E-n052-wand125-rect-7535-sqverify-fast-replay
+      - E-n053-wand125-rect-7595-sqverify-fast-replay
+      - E-n054-wand125-rect-76675-sqverify-fast-replay
+      - E-n055-wand125-rect-771-sqverify-fast-replay
+      - E-n056-wand125-rect-777-sqverify-fast-replay
+      - E-n057-wand125-rect-7835-sqverify-fast-replay
+      - E-n058-wand125-rect-789-sqverify-fast-replay
+      - E-n059-wand125-rect-792-sqverify-fast-replay
+      - E-n060-wand125-rect-794-sqverify-fast-replay
+      - E-n061-wand125-rect-796-sqverify-fast-replay
+      - E-n066-wand125-rect-8375-sqverify-fast-replay
+      - E-n067-wand125-rect-8455-sqverify-fast-replay
+      - E-n068-wand125-rect-8495-sqverify-fast-replay
+      - E-n069-wand125-rect-8575-sqverify-fast-replay
+      - E-n070-wand125-rect-862-sqverify-fast-replay
+      - E-n071-wand125-rect-8685-sqverify-fast-replay
+      - E-n072-wand125-rect-874-sqverify-fast-replay
+      - E-n073-wand125-rect-878-sqverify-fast-replay
+      - E-n074-wand125-rect-884-sqverify-fast-replay
+      - E-n075-wand125-rect-889-sqverify-fast-replay
+      - E-n076-wand125-rect-892-sqverify-fast-replay
+      - E-n078-wand125-rect-8955-sqverify-fast-replay
+      - E-n086-wand125-rect-9355-sqverify-fast-replay
+      - E-n088-wand125-rect-945-sqverify-fast-replay
+      - E-n089-wand125-rect-955-sqverify-fast-replay
+      - E-n091-wand125-rect-9645-sqverify-fast-replay
+      - E-n094-wand125-rect-9795-sqverify-fast-replay
+      - E-n095-wand125-rect-98418-sqverify-fast-replay
+    reviews:
+      - path: docs/project/reviews/review-2026-10-26-wand125-rectangle-certificates-t046.md
+        kind: adversarial
+        reviewer: Claude Opus 5.5 (claude-opus-5-5) at the tbd-strong sub-agent tier and the reasoning setting its harness sets, the stage 4 review lane w-t046-review-1026 of think-buaj, prompted separately from the lane that re-ran and controlled the census rows (think-kf3o, think-sb7a); the same lane wrote this result's records afterwards, once its verdict was fixed
+        reviewer_kind: ai
+        relation: project
+        date: '2026-10-26'
+        scope: >-
+          The mathematics of the 36 standing certificates of 28 September (39d8ecc) and of the ten of 27 September this result still cites, read in exact rationals from the retained files with the review's own exact capture evaluator; the census route's mass condition widened to n - 1/1000 for rect_n27_L56; the 46 census rows and control receipts against checks 1 to 9 of the format T route review's section 5, with six directions re-run; and the --evidence text.
+        verdict: accepted
+        covers: [T-046]
+      - path: docs/project/reviews/review-2026-10-06-sqverify-fast-format-t-route.md
+        kind: adversarial
+        reviewer: AI agent, the review lane of lane R5 of the 2026-10-06 intake (claude-opus-5-5, tbd-strong tier), prompted separately from the lane that extended the census driver, ran the controls and registers the result, before 22 of these certificates' rows were re-run and before any of their controls
+        reviewer_kind: ai
+        relation: project
+        date: '2026-10-06'
+        scope: >-
+          For T-046, the census route only: section 5's conditions for carrying it to the 27 and 28 September packets (rows re-run on reviewed source, a mapped review of the 28 September certificates' mathematics, and the mass condition at n - 1/1000), written about T-068's certificates and before these rows were re-run and controlled; not a reading of these certificates' mathematics.
+        verdict: defects-resolved
+        covers: [T-046]
     artifacts:
       - packing/resources/web/wand125-rectangle-certificates-2026-09-27/README.md
       - packing/resources/web/wand125-rectangle-certificates-2026-09-28/README.md
       - packing/resources/web/wand125-rectangle-certificates-2026-09-28/receipts/preflight/audit.json.gz
       - packing/devtools/audit_wand125_rectangles.py
       - packing/devtools/apply_wand125_rectangles.py
+      - packing/benchmarks/measure-verifier/census/census.json
+      - packing/devtools/sqverify_fast_census.py
+      - docs/project/reviews/review-2026-10-06-sqverify-fast-format-t-route.md
+      - docs/project/reviews/review-2026-10-26-wand125-rectangle-certificates-t046.md
+      - packing/resources/web/wand125-rectangle-certificates-2026-09-28/review/review-2026-10-26/README.md
+    controls:
+      - packing/benchmarks/measure-verifier/census/2026-09-27/rect_n18_L4695.control.json
+      - packing/benchmarks/measure-verifier/census/2026-09-27/rect_n19_L4815.control.json
+      - packing/benchmarks/measure-verifier/census/2026-09-27/rect_n20_L4895.control.json
+      - packing/benchmarks/measure-verifier/census/2026-09-27/rect_n26_L553.control.json
+      - packing/benchmarks/measure-verifier/census/2026-09-27/rect_n27_L56.control.json
+      - packing/benchmarks/measure-verifier/census/2026-09-28/rect_n28_L572.control.json
+      - packing/benchmarks/measure-verifier/census/2026-09-28/rect_n29_L579.control.json
+      - packing/benchmarks/measure-verifier/census/2026-09-27/rect_n30_L5865.control.json
+      - packing/benchmarks/measure-verifier/census/2026-09-28/rect_n31_L5935.control.json
+      - packing/benchmarks/measure-verifier/census/2026-09-28/rect_n37_L6425.control.json
+      - packing/benchmarks/measure-verifier/census/2026-09-28/rect_n38_L654.control.json
+      - packing/benchmarks/measure-verifier/census/2026-09-28/rect_n39_L663.control.json
+      - packing/benchmarks/measure-verifier/census/2026-09-27/rect_n40_L6695.control.json
+      - packing/benchmarks/measure-verifier/census/2026-09-28/rect_n41_L6755.control.json
+      - packing/benchmarks/measure-verifier/census/2026-09-28/rect_n42_L679.control.json
+      - packing/benchmarks/measure-verifier/census/2026-09-28/rect_n43_L6865.control.json
+      - packing/benchmarks/measure-verifier/census/2026-09-28/rect_n44_L6935.control.json
+      - packing/benchmarks/measure-verifier/census/2026-09-28/rect_n51_L74425.control.json
+      - packing/benchmarks/measure-verifier/census/2026-09-28/rect_n52_L7535.control.json
+      - packing/benchmarks/measure-verifier/census/2026-09-28/rect_n53_L7595.control.json
+      - packing/benchmarks/measure-verifier/census/2026-09-28/rect_n54_L76675.control.json
+      - packing/benchmarks/measure-verifier/census/2026-09-28/rect_n55_L771.control.json
+      - packing/benchmarks/measure-verifier/census/2026-09-28/rect_n56_L777.control.json
+      - packing/benchmarks/measure-verifier/census/2026-09-28/rect_n57_L7835.control.json
+      - packing/benchmarks/measure-verifier/census/2026-09-28/rect_n58_L789.control.json
+      - packing/benchmarks/measure-verifier/census/2026-09-28/rect_n59_L792.control.json
+      - packing/benchmarks/measure-verifier/census/2026-09-28/rect_n60_L794.control.json
+      - packing/benchmarks/measure-verifier/census/2026-09-27/rect_n61_L796.control.json
+      - packing/benchmarks/measure-verifier/census/2026-09-28/rect_n66_L8375.control.json
+      - packing/benchmarks/measure-verifier/census/2026-09-28/rect_n67_L8455.control.json
+      - packing/benchmarks/measure-verifier/census/2026-09-28/rect_n68_L8495.control.json
+      - packing/benchmarks/measure-verifier/census/2026-09-28/rect_n69_L8575.control.json
+      - packing/benchmarks/measure-verifier/census/2026-09-28/rect_n70_L862.control.json
+      - packing/benchmarks/measure-verifier/census/2026-09-28/rect_n71_L8685.control.json
+      - packing/benchmarks/measure-verifier/census/2026-09-28/rect_n72_L874.control.json
+      - packing/benchmarks/measure-verifier/census/2026-09-28/rect_n73_L878.control.json
+      - packing/benchmarks/measure-verifier/census/2026-09-28/rect_n74_L884.control.json
+      - packing/benchmarks/measure-verifier/census/2026-09-27/rect_n75_L889.control.json
+      - packing/benchmarks/measure-verifier/census/2026-09-28/rect_n76_L892.control.json
+      - packing/benchmarks/measure-verifier/census/2026-09-27/rect_n78_L8955.control.json
+      - packing/benchmarks/measure-verifier/census/2026-09-28/rect_n86_L9355.control.json
+      - packing/benchmarks/measure-verifier/census/2026-09-28/rect_n88_L945.control.json
+      - packing/benchmarks/measure-verifier/census/2026-09-28/rect_n89_L955.control.json
+      - packing/benchmarks/measure-verifier/census/2026-09-28/rect_n91_L9645.control.json
+      - packing/benchmarks/measure-verifier/census/2026-09-28/rect_n94_L9795.control.json
+      - packing/benchmarks/measure-verifier/census/2026-09-28/rect_n95_L98418.control.json
+      - packing/tests/test_sqverify_fast_census.py
     next_rung: >-
-      The complete 201-direction replay of the 18 standing certificates no replay here has
-      carried. Twenty-one passed and were entered on 2026-10-02, and each count they carry is
-      registered again as replayed while staying in this scope, as n = 27 did: n = 18, 19,
-      20, 26, 30, 40, 61, 75 and 78, with 76 and 77 by mass, in T-045, and n = 29, 38, 39,
-      41, 52, 53, 59, 67, 69, 71, 86 and 95, with 42 to 44, 54, 55, 60, 68, 70 and 72 to 74
-      by mass, in T-070. Six more passed on 3 October and were entered on 6 October: n =
-      51, 57, 72 and 73 in T-070, and n = 58 and 91, which are below the mixed
-      certificates that hold those counts.
-
-      Of the 18 left, the 1 October revision raised 16 (T-068), whose own certificates
-      carry those counts, and n = 37 and 60 are held above these certificates by replayed
-      bounds (T-069's s(37) >= 161/25 and s(60) = 8, T-062), so no replay of the source's
-      checker is planned for them.
-
-      sqverify-fast's census route would carry every count of this entry, and its receipts
-      are complete. All 46 standing certificates (48 counts, with n = 77 and 90 by mass)
-      are verified at all 201 directions by builds of reviewed source: 24 in the census of
-      3 October, and the other 22, whose rows were built from a source no review accepted
-      or recorded no build, re-run on 25 October on the source the declared-net review
-      accepted (think-kf3o). Each has a control receipt of 25 October, CONTROLS_REFUSED.
-
-      What the route still needs is a retained, accepted review, mapped here, that reads
-      the 28 September certificates' mathematics and the widening of the route's mass
-      condition to n - 1/1000 for rect_n27_L56, as section 5 of the format T route review
-      asks (review-2026-10-06-sqverify-fast-format-t-route.md); one evidence entry per
-      certificate then follows from the census's --evidence (think-buaj). C1 before that,
-      by recording the 2026-09-27 scaling review as an external_review on the report
-      entries.
-    unfinished_confirmations:
-      - what: >-
-          the 2026-09-27 checker-scaling review recorded as an external_review on the
-          report entries this result cites
-        rung: C1
-        link: think-wcex
-      - what: >-
-          a retained, accepted review of the 28 September certificates' mathematics and of
-          the census route's mass condition widened to n - 1/1000, mapped here, and then
-          sqverify-fast's census entries for the 46 standing certificates, whose rows and
-          control receipts are retained
-        rung: C3
-        link: think-buaj
-        estimated_cost:
-          cpu_hours: 0.01
-          basis: >-
-            No replay is left to run: the 46 census rows and control receipts are retained
-            (think-kf3o, 25 October 2026). What remains is the review, whose cost is
-            tokens, which CPU-hours do not price, and --evidence for each certificate,
-            which takes seconds
-          priced: '2026-10-25'
+      V4 and C4 need two adversarial AI reviews of this result by distinct reviewers and a
+      human oversight record: the 26 October review of these certificates is one, and the 6
+      October review of the format T route decided the route, not these certificates'
+      mathematics. A complete replay of the source's own checker on the 18 certificates it
+      has not run on here, at n = 28, 31, 37, 42, 43, 44, 54, 55, 56, 60, 66, 68, 70, 74, 76,
+      88, 89 and 94, would add a reproduction with the producer's code beside the rung for
+      those counts, and would move no verified bound. A second machine method would be a
+      method-distinct decision of rotated coverage.
     notes: >-
-      V0 because every cited entry is the source's public claim or a reported-lane transfer
-      from it: assurance reported, replay not attempted. The source reports each standing
-      certificate accepted by Tokoharu's unchanged verify.cpp at all 201 directions and ships
-      the accepting run's verification_summary.json and verified_angles.jsonl, which are
-      retained. C0 because no cited entry carries a qualifying external_review; the
-      2026-09-27 checker-scaling review is recorded on the 27 September replay entry only.
-      The counts T-045 and T-070 carry are in both those entries and this one, because a
-      case's reported field may still cite this entry's report evidence while its verified
-      field cites the replay.
+      Raised from V0/C0 on 26 October 2026 (think-buaj and think-wcex, w-t046-review-1026),
+      when the review of the 28 September certificates and of the census route's mass
+      condition at n - 1/1000 accepted them and one sqverify-fast census entry per standing
+      certificate was recorded.
 
-      On 25 October 2026 the think-kf3o and think-sb7a lane (w-backlog-1025) re-ran the 22
-      standing certificates whose census rows were not of reviewed source and controlled
-      all 46. The rungs do not move, and no census evidence entry is recorded, until a
-      review reads the 28 September certificates (think-buaj).
+      Of the 46 census rows, 24 are of the census of 3 October, built from the crate source
+      both reviews of 3 October accepted, and 22, whose rows of 3 October were built from a
+      source no review accepted or recorded no build, were re-run on 25 October on the
+      source the declared-net review of 6 October accepted (think-kf3o); all 46 control
+      receipts are of 25 October on that source (think-sb7a). A row took 95 to 409 CPU
+      seconds at two threads. The review was written by a lane prompted separately from the
+      one that re-ran and controlled the rows, and the same lane then wrote these records,
+      after its verdict.
+
+      The same day the 27 September checker-scaling review was recorded as the
+      external_review of E-wand125-rectangle-report, and the 26 October review as that of
+      E-wand125-rectangle-2026-09-28-report (think-wcex). On their own those reads raised no
+      rung: n = 90 rests otherwise only on the audited-here transfer
+      E-wand125-rectangle-2026-09-28-monotone-report, which no external read can carry, so
+      the result stayed at C0 until the census entries, whose rect_n89_L955 entry covers n
+      = 90.
+
+      No count's verified lower bound moves: at every count the case record already holds
+      a higher verified value, by 0.005 at n = 38 to 0.18 at n = 90. The source ships each
+      accepting run's verification_summary.json and verified_angles.jsonl, which are
+      retained. The counts T-045 and T-070 carry are in both those entries and this one,
+      because a case's reported field may still cite this entry's report evidence while its
+      verified field cites the replay.
 
   - id: T-047
     kind: lower-bound
