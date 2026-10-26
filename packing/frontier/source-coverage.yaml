@@ -11450,6 +11450,40 @@ sources:
     identity measurements support this (measure/identity-nNNN.json), except at 376, where
     the packing lies nearer 43f666c's and the author is asked. Claude assistance disclosed.
   claims_record: resources/web/amundsk-issue798-2026-10-24/acquisition/beyond-horizon-claims.json
+- id: amundsk-issue819-2026-10-25
+  title: Amund Kristiansen's beyond-horizon certificate at 344, f916f69, issue819
+  role: source-repository
+  url: https://gist.github.com/amundsk/18ada41ec384b6ff2c96f58b7ce7d1a6/f916f69f0ae570935991440712a08ad930469da3
+  local: resources/web/amundsk-issue819-2026-10-25/
+  source_key: '[Kristiansen issue 819 2026-10-25]'
+  scope:
+    n_values: [344]
+  reviewed: '2026-10-26'
+  source_date: '2026-10-25'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/amundsk-issue819-2026-10-25/README.md
+  - resources/web/amundsk-issue819-2026-10-25/acquisition/claims.json
+  evidence:
+  - E-amundsk-819-beyond-horizon-report
+  notes: >-
+    Issue 819's dilation certificate, s344_amund.cert in the gist at f916f69, is retained as
+    the author wrote it under the CC0 1.0 dedication the gist and the issue state, admitted
+    only where its exact side rounds up at 12 places to the side the issue prints. 344 lies
+    beyond the case corpus, so no register entry records it. The ledger of 26 October for
+    the issue (campaign/issue-intake/upper-bounds-issue819-20261026), walked from starts
+    frozen at main 5c50803d6 with Göbel's construction beside the row, records it as the
+    current row at the exact side rounded up at 12 places, 1.60e-04 below the row of
+    couzo-964ee2b-2026-10-23, which it supersedes, and 0.200 below Göbel's construction.
+    Both maintained routes accept it and refuse its duplicate-square and outside-container
+    controls (receipts/exact-certification.json.xz), and the sharp controls at exact contact
+    and 1e-30 past it are as expected on both (receipts/sharp-controls.json). The issue
+    calls it a new packing of another lineage than Couzo's, the register's 307 design
+    (Nate Chaoweeraprasit, with PingYou Ltd's certificate, PR #574) stretched one step; the
+    packet's identity measurement finds no symmetry pairing it with Couzo's packing by
+    nearest centres (measure/identity-n344.json). Claude assistance disclosed.
+  claims_record: resources/web/amundsk-issue819-2026-10-25/acquisition/beyond-horizon-claims.json
 - id: evand-n182-2026-10-25
   title: Evan Daniel's new packing at 182, at d99925d, issue 806
   role: source-repository
@@ -27517,7 +27551,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '18.992727809347'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: amundsk-issue819-2026-10-25
   bead: think-ptkk
 - n: 379
   source_id: couzo-964ee2b-2026-10-23
@@ -30039,4 +30074,11 @@ beyond_horizon_claims:
   assurance: reported
   disposition: tracked-outside-case-corpus
   bead: think-2l0q
+- n: 344
+  source_id: amundsk-issue819-2026-10-25
+  claim: upper-bound
+  value: '18.992567544845'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-p7cq
 pending_catalogue_intake: []

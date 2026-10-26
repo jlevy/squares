@@ -349,6 +349,14 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
             " twelve are rows beyond the corpus."
         ),
     ),
+    (
+        "https://gist.github.com/amundsk/18ada41ec384b6ff2c96f58b7ce7d1a6",
+        "Amund Kristiansen",
+        (
+            "An exact certificate at 344, beyond the corpus, of the 307 record design"
+            " stretched one step, the author says (#819); the row at the count."
+        ),
+    ),
 )
 
 #: David Ellsworth's Squares in Squares catalogue, the record's `[Kingbird]`.
