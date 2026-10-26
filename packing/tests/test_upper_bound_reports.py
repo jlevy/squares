@@ -85,8 +85,12 @@ DANIEL_702 = "evand-n343-sweep-2026-10-20"
 #: under his CC0 1.0 dedication, twelve of them rows, by the #798 import lane of 24 October
 #: (`test_upper_bound_reports_798`).
 KRISTIANSEN_798 = "amundsk-issue798-2026-10-24"
+#: Amund Kristiansen's issue #819, one dilation certificate at 344, beyond the corpus,
+#: retained under the CC0 1.0 dedication the gist states, a row, by the intake records of
+#: 26 October (`test_upper_bound_reports_819`).
+KRISTIANSEN_819 = "amundsk-issue819-2026-10-25"
 #: The packets that request nothing inside the corpus, so plan no register entry.
-BEYOND_ONLY = (EVAND_584, EVAND_596, DANIEL_702, KRISTIANSEN_798)
+BEYOND_ONLY = (EVAND_584, EVAND_596, DANIEL_702, KRISTIANSEN_798, KRISTIANSEN_819)
 #: Issue #528, Ostashev's three compositions in sqcert, and issue #529, Rio Calle's n = 102
 #: layout, whose exact certificate is derived here (`test_upper_bound_reports_528_529`).
 OSTASHEV_528 = "dostashev-records-2026-10-12"
@@ -196,6 +200,7 @@ EVERY = (
     DANIEL_KAGGLE,
     KRISTIANSEN_798,
     DANIEL_806,
+    KRISTIANSEN_819,
 )
 
 

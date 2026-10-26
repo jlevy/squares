@@ -3389,6 +3389,24 @@ sources:
       of 964ee2b''s packings, are above Couzo''s 43f666c and are not recorded. Retained under the author''s
       CC0 1.0 dedication (#755, issuecomment-6388401978). Claude assistance disclosed. No local or global
       optimality claim.'
+  - key: '[Kristiansen issue 819 2026-10-25]'
+    authors:
+    - Kristiansen
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-25'
+    lineage: builds-on-project
+    credit: Kristiansen after Chaoweeraprasit, PingYou Ltd, Daniel, Levy
+    short_credit: Kristiansen after Chaoweeraprasit et al.
+    note: >-
+      One exact dilation certificate in the gist amundsk/18ada41ec384b6ff2c96f58b7ce7d1a6 at
+      f916f69f0ae570935991440712a08ad930469da3, beyond the case corpus at 344, a packing the
+      issue says it found by stretching the register's 307 record design (Nate Chaoweeraprasit,
+      with PingYou Ltd's certificate, PR #574) one K-step and polishing it with Evan Daniel's fq
+      quench, made with Daniel's dilate_cert.py and checked with his checkers. A beyond-horizon
+      row below Francisco Couzo's 964ee2b packing at the count. Retained under the author's CC0
+      1.0 dedication in the gist and the issue. Claude assistance disclosed. No local or global
+      optimality claim.
   - key: '[Muglich issue 686 2026-10-19]'
     authors:
     - Muglich
