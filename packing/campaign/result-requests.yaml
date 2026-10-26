@@ -23022,8 +23022,8 @@ issues:
         Question 1 of the confirmation reply of 25 October 2026. T-240's credit at 268 follows the
         manifest, Couzo after Tymchishin's v4 packing; an answer that the search started from
         Lavrentev's packing, or that the cuda step is his, would add him to it. The house at
-        268 moves to Evan Daniel's descent of Lavrentev's placement (T-242) in the pass's next
-        pull request, credited Daniel after Lavrentev, whatever the answer.
+        268 moved to Evan Daniel's descent of Lavrentev's placement (T-242) in the pass of 26
+        October 2026, credited Daniel after Lavrentev, whatever the answer.
     - question: >-
         At 377, 43f666c re-certifies 964ee2b's notebook packing, every square within 1.7e-11,
         but its credit line names Kirill Tymchishin where 964ee2b's named kyleluecke. Which is
@@ -23136,6 +23136,14 @@ issues:
       reported:
       - result: 43f666c-rows-325-1024
       - result: recipes-325-1024
+    - url: https://github.com/jlevy/squares/issues/763#issuecomment-6393433847
+      date: '2026-10-25'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: notebook-rows-325-1024
+      - result: notebook-recipes-325-1024
+      - result: push-earlier-sides-325-1024
     close_when: >-
       T-240 is reviewed and adopted at 268 and 303 with both drawings regularized, the
       recipes, 683 and the rows above 1024 have rows or recorded dispositions, and the reply
@@ -23835,7 +23843,8 @@ issues:
     title: 'c*(k) < 4√(2k) + 1 for every k ≥ 6: registration request'
     author: TheSnakeFang
     opened: '2026-10-24'
-    state: open
+    state: closed
+    closed: '2026-10-25'
     kind: result-report
     triage: done
     summary: >-
@@ -23934,6 +23943,14 @@ issues:
       - result: theorem-a
       - result: certificates
       - result: optimized-constructions
+    - url: https://github.com/jlevy/squares/issues/797#issuecomment-6393580476
+      date: '2026-10-25'
+      by: jlevy
+      kind: final
+      reported:
+      - result: theorem-a
+      - result: certificates
+      - result: optimized-constructions
     close_when: >-
       The reported row and its credit to Evan Daniel's earlier bound are on main, the
       replay and review disposition are recorded, and the reply that reports them is posted.
@@ -23942,7 +23959,8 @@ issues:
       457, 458, 502, 504): registration request'
     author: amundsk
     opened: '2026-10-24'
-    state: open
+    state: closed
+    closed: '2026-10-25'
     kind: result-report
     triage: done
     summary: >-
@@ -23963,7 +23981,7 @@ issues:
       1.91e-11 below the issue's side at 372 and 1.25e-9 below at 412, so those two are not
       recorded, and the other twelve are recorded as beyond-horizon rows, below every earlier
       report by 1.24e-5 (457) to 8.75e-3 (334). Claude assistance disclosed.
-    read_through: '2026-10-24T19:03:14Z'
+    read_through: '2026-10-25T13:34:02Z'
     results:
     - key: rows-12
       claim: >-
@@ -23987,7 +24005,7 @@ issues:
         October asks whether the 376 search started from 964ee2b's n376.cert, as the issue
         says of all fourteen, since the packing lies nearer 43f666c's; the record gives each
         row's lineage as the author's statement, so the question is informational and holds
-        nothing open.
+        nothing open. The author's comment of 25 October answers that it did (notes).
       queued: false
       bead: think-2l0q
     - key: n372-n412
@@ -24016,10 +24034,27 @@ issues:
       reported:
       - result: rows-12
       - result: n372-n412
+    - url: https://github.com/jlevy/squares/issues/798#issuecomment-6393580703
+      date: '2026-10-25'
+      by: jlevy
+      kind: final
+      reported:
+      - result: rows-12
+      - result: n372-n412
     close_when: >-
       The twelve rows are recorded in report order with their replay, 372 and 412 have their
       disposition with 43f666c's rows there on main (#800, think-gn29), and the reply on main says
       so; nothing the author asked for is queued.
+    notes: >-
+      Amund Kristiansen's comment of 25 October 2026, 13:34:02Z
+      (https://github.com/jlevy/squares/issues/798#issuecomment-6398299278), answers the import
+      reply's question on 376: every search started from franciscouzo/square-packing@964ee2b,
+      with certificates/best/n376.cert converted to floating point as the start of 376, which
+      then had one strong GPU pass of 4,096 kicked variants and a 25-round GPU hill climb with
+      fq polish, each round restarting from the current best. The author never fetched 43f666c,
+      so its nearness to Couzo's later certificate is two independent searches converging on
+      nearby packings. The row's lineage, seeded from 964ee2b's n376.cert, already states this;
+      the comment reports no new result, and nothing changes in the record.
   - number: 799
     title: 'Result registration: 683 new upper bounds, n in [1184, 3775] — Karimi two-strip construction'
     author: mohsensbu-jpg
