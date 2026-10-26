@@ -305,6 +305,9 @@ def test_publication_audit_refuses_lost_archives_or_reintroduced_maintenance(
     # tooling change is a Changelog line instead (the owner, 26 October 2026). Nothing
     # touching the records, their regularization or the mathematics is on this roster.
     assert sorted(entry["id"] for entry in excluded) == [
+        # This change applies its own rule to itself: moving the log to the Changelog is
+        # a site-only change, so it is a line there rather than a News story.
+        "changelog-day-log-and-news-division",
         "contributor-profiles-and-contribution-summaries",
         "every-selected-validation-check-runs",
         "paper-typography-and-title-case",
