@@ -3,16 +3,20 @@ type: is
 id: is-01m5szcqa1r3bdx2xw9dpkf463
 title: Review the 28 September rectangle certificates (39d8ecc) and the format_t_problems widening to mass n - 1/1000 (rect_n27_L56), mapped on T-046 (#773)
 kind: task
-status: open
+status: in_progress
 priority: 3
-version: 2
+version: 3
+delegate: w-t046-review-1026
 labels:
   - validation
   - result-import
 dependencies: []
 parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
+hold: null
+hold_until: null
 created_at: 2026-10-25T16:48:08.001Z
-updated_at: 2026-10-26T02:15:06.369Z
+updated_at: 2026-10-26T04:02:52.654Z
+started_at: 2026-10-26T04:02:52.654Z
 ---
 The review T-046's census route still needs before its C3 can be recorded (#773). Opened 2026-10-25 by w-backlog-1025 at the coordinator's request, when think-kf3o and think-sb7a landed the receipts. Unclaimed: a strong-max review lane, not yet started (the owner's token budget).
 
