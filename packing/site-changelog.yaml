@@ -470,6 +470,10 @@ entries:
     topics: [project]
     categories: [site]
     pull_requests: [578]
+    news_exclusion: >-
+      A site surface, profile pages for contributors, with no new result, explanation or
+      verification; News carries the mathematical and newsworthy items and a site-only
+      change is a Changelog line (the owner, 26 October 2026).
     summary: |-
       The profile directory lists the 75 people whose work the record cites or credits, in
       a sortable table of records, results, credits, years active, resources and accounts.
@@ -839,6 +843,9 @@ entries:
     topics: [project]
     categories: [site, documentation]
     pull_requests: [621]
+    news_exclusion: >-
+      A labelling process for News and pull requests, not a mathematical result; a
+      site-only change is a Changelog line (the owner, 26 October 2026).
     summary: |-
       Every pull request now carries one significance label, S1 to S5, scored by the same
       conservative rubric that scores News items. News shows S3 to S5 with a filter by
@@ -871,6 +878,9 @@ entries:
     topics: [project, engineering]
     categories: [pipeline]
     pull_requests: [620]
+    news_exclusion: >-
+      Validation tooling, with nothing reader-facing and no mathematics; a tooling-only
+      change is a Changelog line (the owner, 26 October 2026).
     summary: |-
       Validation now executes every check it selects. Before, a verdict could be reused
       across runs, so an unauthenticated artifact name or a legacy environment variable
@@ -1510,6 +1520,9 @@ entries:
     topics:
       - project
       - engineering
+    news_exclusion: >-
+      Release-history surfaces for the site, the papers and the posters: a project record
+      rather than a result, so a Changelog line (the owner, 26 October 2026).
     summary: |-
       The public changelog links releases to papers, posters and result pages. Each paper and
       the site have separate edition histories; the poster pair shares one. Readers can
@@ -2187,6 +2200,9 @@ entries:
     topics:
       - project
       - engineering
+    news_exclusion: >-
+      The site's navigation bar, with no new result or explanation; a site-only change is
+      a Changelog line (the owner, 26 October 2026).
     summary: |-
       Shared navigation connects homepage packing previews with the Atlas, result records,
       papers and exports. Readable formulas and consistent layouts present the mathematical

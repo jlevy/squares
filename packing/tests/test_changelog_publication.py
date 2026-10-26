@@ -42,8 +42,12 @@ def views() -> tuple[dict, str, str, str, str, str]:
 def test_the_changelog_keeps_every_entry_and_news_keeps_the_public_launches(
     views: tuple[dict, str, str, str, str, str],
 ) -> None:
-    """Since 26 October 2026 the whole retained history is the Changelog page's, and News
-    shows the S3 and above stories and keeps a forwarding bookmark for the rest."""
+    """Since 26 October 2026 the whole retained history is the Changelog page's and News
+    shows the S3 and above stories, and the two surfaces divide the work rather than share
+    it: News tells the story with every link it declares, while the Changelog gives one
+    brief line an entry, its GitHub threads, and a link to the story where there is one.
+    A change News never shows has no other reader surface, so its line carries everything
+    it declares."""
     document, news, github, changelog, _about, _home = views
     cards = news[news.index(NEWS_CARDS) :]
     for entry in document["entries"]:
@@ -55,6 +59,9 @@ def test_the_changelog_keeps_every_entry_and_news_keeps_the_public_launches(
             target = render_changelog.archived_news_targets(document)[anchor]
             assert f'href="{target}" data-news-target' in news
             assert f'data-news-entry="{entry["id"]}"' not in news
+        else:
+            # The line is the summary and the story is the detail, written once.
+            assert f'href="{render_changelog.NEWS_PAGE}#{anchor}"' in changelog
         for number in entry["pull_requests"]:
             target = f"{document['repository']}/pull/{number}"
             if not excluded:
@@ -65,7 +72,8 @@ def test_the_changelog_keeps_every_entry_and_news_keeps_the_public_launches(
             if not excluded:
                 assert artifact["target"] in cards
             assert artifact["target"] in github
-            assert artifact["target"] in changelog
+            if excluded:
+                assert artifact["target"] in changelog
 
 
 def test_news_links_named_contributors_directly_to_their_profiles(
@@ -118,14 +126,24 @@ def test_publication_audit_refuses_a_missing_launch_link(
     document, news, _github, changelog, _about, _home = views
     assert all(passed for passed, _line in check_published_site.news_checks(news))
     assert all(passed for passed, _line in check_published_site.changelog_checks(changelog))
-    target = next(
+    told = {entry["id"] for entry in render_changelog.news_entries(document)}
+    # Each page is held to the artifacts it is the reader's surface for: News to every
+    # story's, the Changelog to those of a change News never shows.
+    shown = next(
         artifact["target"]
         for entry in document["entries"]
+        if entry["id"] in told
         for artifact in entry.get("artifacts", [])
     )
-    for page, check in (
-        (news, check_published_site.news_checks),
-        (changelog, check_published_site.changelog_checks),
+    retained = next(
+        artifact["target"]
+        for entry in document["entries"]
+        if entry["id"] not in told
+        for artifact in entry.get("artifacts", [])
+    )
+    for page, check, target in (
+        (news, check_published_site.news_checks, shown),
+        (changelog, check_published_site.changelog_checks, retained),
     ):
         damaged = page.replace(target, "https://example.com/missing")
         assert damaged != page
@@ -176,10 +194,17 @@ def test_publication_audit_accepts_the_renderers_encoded_artifact_destinations(
     views: tuple[dict, str, str, str, str, str], monkeypatch: pytest.MonkeyPatch
 ) -> None:
     document = copy.deepcopy(views[0])
-    artifact = next(
-        artifact for entry in document["entries"] for artifact in entry.get("artifacts", [])
-    )
-    artifact["target"] += "#proof(1)"
+    told = {entry["id"] for entry in render_changelog.news_entries(document)}
+    # One artifact on each surface: a story's, which News writes, and one belonging to a
+    # change News never shows, which only the Changelog line carries.
+    for shown in (True, False):
+        artifact = next(
+            artifact
+            for entry in document["entries"]
+            if (entry["id"] in told) is shown
+            for artifact in entry.get("artifacts", [])
+        )
+        artifact["target"] += "#proof(1)"
     render_changelog.validate(document)
     monkeypatch.setattr(render_changelog, "load", lambda: document)
     news = render_overview.news_page().html
@@ -276,14 +301,33 @@ def test_publication_audit_refuses_lost_archives_or_reintroduced_maintenance(
 ) -> None:
     document, news, _github, _changelog, _about, _home = views
     excluded = [entry for entry in document["entries"] if "news_exclusion" in entry]
-    assert [entry["id"] for entry in excluded] == ["paper-typography-and-title-case"]
-    assert excluded[0]["pull_requests"] == [492]
-    assert "documentation" in excluded[0]["categories"]
+    # News carries the mathematical and newsworthy items; a site, documentation or
+    # tooling change is a Changelog line instead (the owner, 26 October 2026). Nothing
+    # touching the records, their regularization or the mathematics is on this roster.
+    assert sorted(entry["id"] for entry in excluded) == [
+        "contributor-profiles-and-contribution-summaries",
+        "every-selected-validation-check-runs",
+        "paper-typography-and-title-case",
+        "project-changelog-and-independent-editions",
+        "significance-levels-for-news-and-pull-requests",
+        "unified-site-navigation",
+    ]
+    # Two more were excluded on 26 October 2026 and put back the same day, because the
+    # test above is the one that has to hold: `basic-and-advanced-tutorials` is a
+    # substantial public explanation of the problem and the research methods by its own
+    # rationale, and `readable-atlas-and-print-exports` launched the redesigned posters,
+    # which are published artifacts with their own editions. Neither is site-only.
+    assert all(entry["news_exclusion"].strip() for entry in excluded)
+    maintenance = next(
+        entry for entry in excluded if entry["id"] == "paper-typography-and-title-case"
+    )
+    assert maintenance["pull_requests"] == [492]
+    assert "documentation" in maintenance["categories"]
     assert all("documentation" not in entry.get("topics", []) for entry in document["entries"])
     assert all(passed for passed, _line in check_published_site.news_checks(news))
     archived = render_changelog.archived_news_targets(document)
     target = next(iter(archived.values()))
     damaged = news.replace(target, "https://example.com/missing-archive")
     assert not all(passed for passed, _line in check_published_site.news_checks(damaged))
-    damaged = news + f'<article data-news-entry="{excluded[0]["id"]}"></article>'
+    damaged = news + f'<article data-news-entry="{maintenance["id"]}"></article>'
     assert not all(passed for passed, _line in check_published_site.news_checks(damaged))

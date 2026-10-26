@@ -456,7 +456,8 @@ def test_the_homepage_sections_run_in_the_requested_order(page: str, atlas_page:
     landings = [
         "the-problem",
         "the-atlas-of-square-packings",
-        "recently-added",
+        # Recently Added moved to the Changelog page on 26 October 2026; the home page
+        # offers it beside All News instead of carrying the block.
         "news",
         "recent-results",
         "papers",
@@ -471,6 +472,8 @@ def test_the_homepage_sections_run_in_the_requested_order(page: str, atlas_page:
     # The owner dropped "View" from these action labels on 2026-10-23.
     assert 'href="atlas.html">Visual Atlas' in page
     assert 'href="news.html" data-news-carry>All News' in page
+    assert 'href="changelog.html">Changelog' in page
+    assert 'id="recently-added"' not in page
     assert 'href="papers.html">All Papers' in page
     assert ">View " not in page
     assert '<a class="site-action" href="results.html#all-results" data-all-results' in page

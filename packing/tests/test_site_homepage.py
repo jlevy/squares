@@ -722,7 +722,6 @@ def test_homepage_order_chrome_and_single_card_rows_keep_the_shared_design(
     home = seen[width]["initial"]
     assert home["headings"] == [
         "the-atlas-of-square-packings",
-        "recently-added",
         "news",
         "recent-results",
         "papers",
@@ -735,7 +734,9 @@ def test_homepage_order_chrome_and_single_card_rows_keep_the_shared_design(
         "more-resources",
         "about-the-squares-project",
     ]
-    assert len(home["section_title_styles"]) == 10
+    # Nine since 26 October 2026: Recently Added's title left with the block, which the
+    # Changelog page now carries.
+    assert len(home["section_title_styles"]) == 9
     carried = news_highlights.carried(render_changelog.load())
     assert [heading["entry"] for heading in home["news_headings"]] == [
         entry["id"] for entry in carried
@@ -1333,11 +1334,21 @@ def test_home_news_box_opens_on_its_levels_and_its_compact_filter_widens_it(
 def test_recently_added_reads_as_the_results_pages_days_with_and_without_scripts(
     browser: Any, payloads: dict[str, bytes], width: int
 ) -> None:
-    """Recently Added sits above News, opens on its newest day and keeps every line
-    inside the page at both widths, in both schemes and without scripts; its days are
-    native disclosures, so the older ones open by keyboard with or without scripts."""
+    """The log opens on its newest day and keeps every line inside the page at both
+    widths, in both schemes and without scripts; its days are native disclosures, so the
+    older ones open by keyboard with or without scripts.
+
+    It read the home page's Recently Added until 26 October 2026, when the owner moved
+    the block to the Changelog and left the home page a button to it.
+    """
     overview = site_renders.overview()
-    days = [recent.day.isoformat() for recent in overview_sections.recent_days(overview)]
+    document = render_changelog.load()
+    landed = overview_sections.recent_days(overview, days=None)
+    days = sorted(
+        {recent.day.isoformat() for recent in landed}
+        | {entry["date"] for entry in document["entries"]},
+        reverse=True,
+    )
     for scripts in (True, False):
         page = browser.new_page(
             viewport={"width": width, "height": 900},
@@ -1346,10 +1357,8 @@ def test_recently_added_reads_as_the_results_pages_days_with_and_without_scripts
         )
         _serve(page, payloads)
         try:
-            page.goto(ORIGIN, wait_until="load")
-            section = page.locator("#recently-added")
-            news = page.locator("#news")
-            assert section.bounding_box()["y"] < news.bounding_box()["y"]
+            page.goto(f"{ORIGIN}{render_changelog.CHANGELOG_PAGE}", wait_until="load")
+            section = page.locator("#changelog")
             blocks = page.locator(".site-added details[data-day]")
             assert blocks.count() == len(days)
             shown = [blocks.nth(index).get_attribute("data-day") for index in range(len(days))]

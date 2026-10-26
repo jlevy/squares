@@ -1106,9 +1106,11 @@ contributor articles use their component sheets and the same text tokens.
   the project’s name, **The Squares Project** (the owner, 2026-10-23); its opening H1
   remains **The Square Packing Problem**. Two readable introductory paragraphs define
   the problem and explain upper and lower bounds.
-  The sections continue with Visual Atlas, Recently Added (`think-rqen`), News, Results,
-  Profiles, Report a Result, Learn, Visuals, About the Squares Project, and More
-  Resources. Learning cards preview the Papers and Tutorials catalogues.
+  The sections continue with Visual Atlas, News, Results, Profiles, Report a Result,
+  Learn, Visuals, About the Squares Project, and More Resources.
+  The day log the home page carried as Recently Added moved to the Changelog on 26
+  October 2026, and the News action row offers it beside All News.
+  Learning cards preview the Papers and Tutorials catalogues.
   Visuals previews the poster and inline video, with actions to Posters, Videos and
   Workbench. About the Squares Project links directly to `about.html` without repeating
   the documentation catalogue, and retains the old `#squares-project-documentation`
@@ -1178,8 +1180,16 @@ contributor articles use their component sheets and the same text tokens.
   Its S and five bars remain one tightly paired mark.
   Homepage highlights keep the announcement’s significance and assurance qualifiers,
   with one S meter per card.
-  News includes only S3, S4 and S5; S1/S2 remain in the Changelog page, with old News
-  bookmarks, and the `changelog` bookmark the section once answered, forwarded there.
+  News includes only S3, S4 and S5, and only items whose substance is mathematical or
+  otherwise newsworthy: a site, documentation or tooling change is excluded at any score
+  by the record’s own `news_exclusion`, each with its reason, since “news items:
+  mathematical info, newsworthy updates, more info on each, fewer entries” against
+  “changelog: concise, mostly complete, linked to github issues and PRs clearly” (the
+  owner, 26 October 2026). The classification is declared on the entry rather than
+  inferred from its categories, because the older entries carry none and an inference
+  rule would misfile real results as site work.
+  S1/S2 and every excluded entry remain on the Changelog page, with old News bookmarks,
+  and the `changelog` bookmark the section once answered, forwarded there.
   Archive controls offer S3/S4/S5 and default to S4/S5 and all topics, with OR within a
   facet and AND across facets.
   One unboxed Reset filters action restores the defaults, right aligned above the News
@@ -2998,11 +3008,14 @@ pointer and by keyboard, and measures its label at 1280, 768 and 390 pixels.
   `tests/test_overview.py` holds each section’s prose to one paragraph of its own where
   this applies, the cards to their pages, and the three pages to saying each thing once.
 
-- **Recently Added.** Directly below the Atlas preview, the homepage lists what reached
-  `main`, and with it the site, on the newest arrival day and the seven before it, one
-  native disclosure a day, newest first, the newest open
-  (`overview_sections.recently_added`, the owner, 22 October 2026, `think-rqen`). Each
-  day holds every result that arrived, at any significance, by its `landed`
+- **The Changelog’s log.** The Changelog page is one native disclosure a day over the
+  whole record, newest first, the newest open (`overview_sections.changelog_rollup`, the
+  owner, 22 and 26 October 2026, `think-rqen`). It opened the home page as Recently
+  Added over a seven-day window until 26 October 2026, when the owner asked for it here
+  instead — “the Recently Added section is closer to what the changelog should look like
+  and we should move that to changelog not put it on the homepage” — and for the home
+  page to carry a button to it.
+  Each day holds every result that arrived, at any significance, by its `landed`
   (`added_entry`, its id linking to its row in All Results, and the day’s link opening
   All Results on that day, `?added=`); each count whose house best packing changed,
   under the result that holds it now, which the line calls the record packing, since
@@ -3010,20 +3023,35 @@ pointer and by keyboard, and measures its label at 1280, 768 and 390 pixels.
   each source’s dated beyond-horizon rows, one line a source with its count, its span of
   counts, its credit and how many are since superseded, linking to the source’s packet
   on GitHub, since no page of the site lists those rows.
+  A day also holds each site or project change recorded that day, one brief line each
+  (`render_changelog.changelog_entry_line`): its title, linking to its News story where
+  it has one so the detail is written once rather than on both surfaces, then its score
+  and every GitHub issue and pull request behind it.
+  A change News never shows has no other reader surface, so its line carries what it
+  declares besides the threads — its artifacts, its publication evidence, its supporting
+  records and its component editions — and `check_published_site` asks
+  `render_changelog.entry_targets` what a page owes so the audit and the renderer cannot
+  drift. Each line keeps the entry’s anchor, and each day block the
+  `changelog-date-<day>` anchor, so the bookmarks
+  `render_changelog.archived_news_targets` forwards here resolve.
   Houses and rows are placed by the day `main` first held them, which
   `devtools.stamp_landed` writes into `packing/frontier/landings.yaml` at the merge step
   as it writes `landed`; nothing that renders reads Git (OR-18). One window bounds all
   three, ending on the newest of those days (`arrival_reference`), and the introduction
-  names the day it opens on, the oldest day shown (`recent_since`, the owner’s shorter
-  wording of 26 October 2026). The summary tallies the three and wraps between them,
-  each count written with its number in bold and its noun in the summary’s own case
-  rather than the toggles’ caps (`tally_count`); the toggle keeps the first line of a
-  summary that wraps. The section draws with `results.css`’s rollup classes, and its
-  introduction links News alone, leaving All Results to the section below it.
-  `tests/test_home_recent.py` holds it to the records and to 40,000 bytes.
+  names the day it opens on, the oldest day shown over results and changes alike
+  (`changelog_since`, the owner’s shorter wording of 26 October 2026). The summary
+  tallies the three and wraps between them, each count written with its number in bold
+  and its noun in the summary’s own case rather than the toggles’ caps (`tally_count`);
+  the toggle keeps the first line of a summary that wraps; a day with changes counts
+  them as its last part.
+  The section draws with `results.css`’s rollup classes, and its introduction links
+  News. `tests/test_home_recent.py` holds it to the records and to 200,000 bytes, a
+  ceiling re-argued from measurement for a page whose job is the complete log: the home
+  page’s 40,000 was argued to stop a section of that page becoming a second results
+  table, and the log measured 147,729 bytes over 35 day blocks and 2,332 line items the
+  day it moved.
 
-- **Recent results.** The homepage’s **Recent Major Results** section sits below
-  Recently Added and News.
+- **Recent results.** The homepage’s **Recent Major Results** section sits below News.
   It contains up to twelve current results of significance S4 or higher from the last
   180 days, newest first, excluding superseded results (`think-5c8r`). The preview has
   no count/scope sentence or introductory text explaining the links.

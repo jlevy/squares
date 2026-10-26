@@ -24,22 +24,11 @@ proved that no packing can exist, such as the reported $s(29) \ge 5.81$).
 
 <p class="site-action-row site-more site-homepage-atlas-actions"><a class="site-action" href="{{ATLAS_PDF}}" download>Download PDF{{ARROW_DOWNLOAD}}</a><a class="site-action" href="atlas.html">Visual Atlas{{ARROW_RIGHT}}</a></p>
 
-<h2 id="recently-added" class="site-title">Recently Added</h2>
-
-<div class="site-navigation-copy">
-
-A log of all results recorded by the Squares Project since {{RECENT_SINCE}}. For major
-items only, see [News](news.html).
-
-</div>
-
-{{RECENTLY_ADDED}}
-
 <h2 id="news" class="site-title">News</h2>
 
 {{NEWS_PREVIEW}}
 
-<p class="site-action-row site-more"><a class="site-action" href="news.html" data-news-carry>All News{{ARROW_RIGHT}}</a></p>
+<p class="site-action-row site-more"><a class="site-action" href="news.html" data-news-carry>All News{{ARROW_RIGHT}}</a><a class="site-action" href="changelog.html">Changelog{{ARROW_RIGHT}}</a></p>
 
 <h2 id="recent-results" class="site-title">Results</h2>
 
