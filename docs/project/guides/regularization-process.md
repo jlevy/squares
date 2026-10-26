@@ -208,10 +208,13 @@ view of Evan Daniel’s regularizer or the grid-slack generator is drawn),
 `regular-as-published` (the house drawing has no uneven and no near-axis square, no
 strong view of the count has lapsed, and `PENDING_ALLOWED` does not hold it for its
 bead’s runs), `decided-no-better` (the strong generators ran on this witness and drew
-nothing the improvement rule takes), `regularization-owed` (they ran and drew no view
-the rule could judge, so the drawing is not regularized; the `SETTLED` entry’s `owed`
-names the open bead that owes the regularization, as at the exact algebraic houses from
-23 to 26 October 2026), `exempt` (set aside with the bead that owns it) or `pending`.
+nothing the improvement rule takes), `exempt` (set aside on the owner’s recorded word,
+with the bead that owns it and a review date within 14 days) or `pending`.
+`regularization-owed`, a drawing left unregularized on an open bead as the exact
+algebraic houses were from 23 to 26 October 2026, is retired: the records tier fails a
+count in it, and the import runbook’s
+[regularization step](../../../packing/campaign/result-import.md#adopt-a-house-then-regularize-it)
+says what a change that moves a house does instead.
 The axis tool’s view alone never makes a count regularized: it is the reference and
 fallback. A count is `decided-no-better` without an entry of its own where the layer
 holds a strong generator’s view of the current witness that the rule does not draw;
@@ -227,8 +230,8 @@ A run that only the layer’s index records is not enough, since the index drops
 block once no entry draws from it: `python -m devtools.default_drawings --retain-runs`
 copies the block to `settled-runs/<run id>/run.json` while the index still has it.
 A copy is deleted with the last entry that names its run, and the gate fails on one no
-entry names. Where the decision still owes runs or a recorded outcome, its `owed` names
-the open bead that owns them, and the state’s `why` says so.
+entry names. A decision that still owes runs or a recorded outcome (`owed`) is not
+settled, and the gate fails it.
 The ten decided counts of 15 October 2026 owed think-0ut1 grid-slack at 1 and 5 degrees
 or their per-count outcomes until its runs of 16 October 2026, whose outcomes the atlas
 README gives count by count; none owes anything now.
@@ -296,18 +299,21 @@ python -m devtools.release_pin --check
 drawings, checks the register, and measures every drawn view against its house drawing
 again (`default pictures improve on their house drawings`), listing the counts that keep
 the house picture and why.
-`every drawn picture is regularized, regular as published, decided, owed to an open bead or exempt`
+`every drawn picture is regularized, regular as published, decided or exempt on the owner's word`
 reads each count’s state back without measuring, holds it to the index, and fails on a
 pending count that `PENDING_ALLOWED` does not name, on a named count that is no longer
 pending, on a `SETTLED` entry made on another witness or no longer needed, and on one
 naming a run the retained evidence does not hold, under another generator, or whose
 record shows it did not run that count, and on a copy in `settled-runs/` that no entry
-names; it prints the list’s size.
-`bead tree` fails a change to `default_drawings.py` whose list, exemptions or owed runs
-name a bead that is not open.
-Run it alone with `python -m devtools.default_drawings --check-state`. `--verify-atlas`
-decides every drawn view again on both exact routes and takes several minutes at four
-workers; CI runs it in the deferred `regularized-views` job.
+names; on a `regularization-owed` count, a decision that still owes something, and an
+exemption without the owner’s recorded word or past its review date; and, against
+`--base-ref`, on a house the change moves that does not land regularized, regular as
+published, decided or exempt on the owner’s word, or whose flip pose the flip record
+does not hold. It prints the list’s size and the houses the change moves.
+`bead tree` fails a change to `default_drawings.py` whose list or exemptions name a bead
+that is not open. Run it alone with `python -m devtools.default_drawings --check-state`.
+`--verify-atlas` decides every drawn view again on both exact routes and takes several
+minutes at four workers; CI runs it in the deferred `regularized-views` job.
 `test_regularize_select.py` holds every drawn view’s side to $U$, except at the counts
 question 13 names.
 

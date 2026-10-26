@@ -3966,6 +3966,14 @@ def _default_drawings(context: Context) -> str:
     return output
 
 
+#: The regularization-state step's name, which the runbook, the guide, the policy and the
+#: atlas README quote.
+REGULARIZATION_STATE_STEP = (
+    "every drawn picture is regularized, regular as published, decided or exempt on the "
+    "owner's word"
+)
+
+
 def _regularization_state(context: Context) -> str:
     # About three seconds: every count's regularization state in `default-drawings.json`
     # read back and held to the index, and the pending counts held to
@@ -3979,7 +3987,11 @@ def _regularization_state(context: Context) -> str:
     # reviewed change allows it with its bead; the output gives the list's size. Each
     # allowed count is a corrected witness's, held to the record of the commit the change
     # is built on: `origin/main`'s merge base, or the first parent on `main` itself, as the
-    # release-impact step reads it (review C3 of #660).
+    # release-impact step reads it (review C3 of #660). Since 26 October 2026 nothing
+    # rests `regularization-owed`, an exemption stands only on the owner's recorded word
+    # and a review date, and every house the change moves since that base must be
+    # regularized and flip-posed in the same change (the owner: "When something lands on
+    # our main rendered lists, the regularization should be done").
     base = (
         "HEAD^1"
         if _git("rev-parse", "HEAD").strip() == _git("rev-parse", "origin/main").strip()
@@ -3990,7 +4002,7 @@ def _regularization_state(context: Context) -> str:
     _require_text(
         output,
         "regularization state check passed",
-        "CORRECTED is held to the record at the merge base of",
+        "moved houses and CORRECTED are held to the record at the merge base of",
     )
     return output
 
@@ -4057,8 +4069,10 @@ def _evidence_inventory(context: Context) -> str:
 def _results_register(context: Context) -> str:
     # Sub-second: re-derives every declared V and C rung from the cited evidence atoms
     # per epistemics.md and refuses unsupported or unexplained-understated declarations,
-    # then checks the generated RESULTS.md view against the register.
-    first = _module(context, "devtools.check_results")
+    # then checks the generated RESULTS.md view against the register. `--certificates`
+    # also resolves every machine-shaped certificate path (RR-2 of the 11 October rungs
+    # review); negative-control workers run it without, since they prune the packets.
+    first = _module(context, "devtools.check_results", "--certificates")
     second = _module(context, "devtools.render_results", "--check")
     return f"{first}\n{second}"
 
@@ -5866,8 +5880,7 @@ STEPS: tuple[Step, ...] = (
         ),
     ),
     Step(
-        "every drawn picture is regularized, regular as published, decided, owed to an open "
-        "bead or exempt",
+        REGULARIZATION_STATE_STEP,
         _regularization_state,
         fast=True,
         records=True,
@@ -5875,15 +5888,21 @@ STEPS: tuple[Step, ...] = (
         # claims the same closure; it reads the record, the index and the retained run
         # evidence every settlement rests on (review G1 of #644), and of the witnesses
         # only which ones the change alters against its base, with the base's record
-        # (review C3 of #660). Its message dates the rule from `select_houses`.
+        # (review C3 of #660). Its message dates the rule from `select_houses`. For each
+        # house the change moves it decides the flip pose again from the default
+        # picture's rendering and holds the flip record to it, and it reads the file
+        # that records the owner's word for each exemption.
         touches=(
             *_CORE,
             "packing/atlas/known-best/default-drawings.json",
             "packing/atlas/known-best/default-drawings.schema.yaml",
+            "packing/atlas/known-best/flip-regularization.json",
+            "packing/atlas/known-best/rendering/*",
             "packing/atlas/known-best/regularized/*",
             "packing/cases/regularized_drawings/*",
             "packing/witnesses/known-best/*",
             "packing/devtools/select_houses.py",
+            "docs/project/policies/regularization-policy.md",
             *_RENDERER_HUB,
         ),
     ),

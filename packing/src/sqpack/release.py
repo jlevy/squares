@@ -799,7 +799,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "6a6b9fa7d2c6a9ecc5d194f28e3644fcadc7c7a4"
+DATA_REVISION = "002e3a188c4708e7e593cfd5fed4b277a58dedd8"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -2679,6 +2679,44 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "register's results and takes v0.4.31. No PDF was printed; each prints from "
             "that HTML. "
             "Retain v0.1.11, v0.1.4 and v0.2.7."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/devtools/default_drawings.py",
+            "packing/src/sqpack/cli/validate.py",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The regularization gate of 26 October 2026 (think-al1a): default_drawings.py "
+            "retires the regularization-owed state, holds an exemption to the owner's "
+            "recorded word and a review date, and holds every house a change moves to its "
+            "general and flip regularization; validate.py renames the state step and widens "
+            "what it reads. None of it is a reader the papers call: they read "
+            "default-drawings.json, which does not change. Against main 4e94cc2cf (#826), "
+            "after merging it: rendered at link revision 100b90d8 into empty site "
+            "directories, twice from this tree at 100b90d8 and twice with main's "
+            "default_drawings.py and validate.py swapped in (69 files each), "
+            "render_n11_lower_bounds_explainer, with its pinned Chromium math pass, "
+            "render_n11_optimality_review, render_n11_threshold_bound_review and "
+            "render_packing_methods write every file byte-identical across all four. No PDF "
+            "was printed; each prints from that HTML. Retain v0.4.30, v0.1.11, v0.1.4 and "
+            "v0.2.7."
         ),
     ),
     ReleaseNoPublicChange(
@@ -9777,6 +9815,50 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "two differ only in counting 251 results against main's 247, so it takes "
             "v0.4.32 over main's v0.4.31. No PDF of these three was printed; each prints "
             "from that HTML. They keep v0.1.11, v0.1.4 and v0.2.7."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/devtools/check_half_angle_area.py",
+            "packing/devtools/check_results.py",
+            "packing/devtools/couzo_followup_reports.py",
+            "packing/devtools/gupta_refinement_reports.py",
+            "packing/frontier/results.yaml",
+            "packing/src/sqpack/cli/validate.py",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The record and tool changes of the 11 October rung reviews (#542, "
+            "think-npvi): next rungs, notes, controls and review entries in results.yaml "
+            "that move no rung, #542's asks in result-requests.yaml, check_results "
+            "--certificates and formalization_of, a receipt option of the third route, a "
+            "Gupta check --replay, the follow-up packet's admitted receipts, and the gate's "
+            "results step. Against main 4e94cc2cf (#826): rendered at link revision "
+            "a9278385 into empty site directories, twice from this tree and once with that "
+            "main's seven changed inputs swapped in, by render_n11_lower_bounds_explainer, "
+            "with its pinned Chromium math pass, render_n11_optimality_review, "
+            "render_n11_threshold_bound_review and render_packing_methods: 69 files each, "
+            "all byte-identical across the three. Measured again after merging main "
+            "e54ae3e97 (#829), at the same link revision with that main's seven inputs "
+            "swapped in: 69 files each, all byte-identical across the three. No PDF was "
+            "printed; each prints from that HTML. Every paper keeps its version: v0.4.32, "
+            "v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
     ReleaseNoPublicChange(

@@ -108,3 +108,56 @@ def test_linked_input_and_output_cannot_escape_private_repository(tmp_path: Path
     with pytest.raises(reports.kernel.ReportError, match="private repository"):
         reports.save_xz(reports.fact_path(), {})
     assert target.read_bytes() == original
+
+
+@pytest.mark.parametrize("selection", [[], [88, 88], [True], [87]])
+def test_replay_selection_refuses_empty_repeated_or_unknown_counts(
+    selection: list[int], monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setattr(
+        reports, "read_facts", lambda: pytest.fail("facts read before the selection")
+    )
+    with pytest.raises(reports.kernel.ReportError, match="replay selection"):
+        reports.check_certification(selection, replay=True)
+
+
+@pytest.fixture
+def receipt(packet: dict[str, Any]) -> dict[str, Any]:
+    """The packet fixture with the retained receipt beside its facts."""
+    del packet
+    original = (
+        Path(reports.__file__).resolve().parents[1]
+        / "resources/web/gupta-square-packing-refinements-2026-10-08"
+        / "receipts/exact-certification.json.xz"
+    )
+    reports.receipt_path().parent.mkdir(parents=True, exist_ok=True)
+    reports.receipt_path().write_bytes(original.read_bytes())
+    return reports.kernel.read_xz(reports.receipt_path())
+
+
+def test_a_replay_holds_fresh_jobs_to_the_retained_rows_and_writes_nothing(
+    receipt: dict[str, Any], monkeypatch: pytest.MonkeyPatch
+) -> None:
+    rows = {(row["n"], row["control"]): row for row in receipt["cases"]}
+    decided: list[tuple[int, str]] = []
+
+    def fresh(certificate: Any, control: str, **_kw: Any) -> dict[str, Any]:
+        decided.append((certificate.n, control))
+        # Measured times are not reproducible, and a replay does not compare them.
+        return {**copy.deepcopy(rows[certificate.n, control]), "wall_seconds": 0.0}
+
+    monkeypatch.setattr(reports.kernel, "run_case", fresh)
+    before = reports.receipt_path().read_bytes()
+    reports.check_certification([88, 239], replay=True)
+    assert decided == [(n, control) for n in (88, 239) for control in reports.JOBS]
+    assert reports.receipt_path().read_bytes() == before
+
+    def moved(certificate: Any, control: str, **_kw: Any) -> dict[str, Any]:
+        row = copy.deepcopy(rows[certificate.n, control])
+        row["exact_verify"]["pairs_tested"] += 1
+        return row
+
+    monkeypatch.setattr(reports.kernel, "run_case", moved)
+    with pytest.raises(reports.kernel.ReportError, match="differs from retained"):
+        reports.check_certification([88], replay=True)
+    assert reports.receipt_path().read_bytes() == before
