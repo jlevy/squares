@@ -3090,18 +3090,23 @@ COLOPHON_PART = re.compile(r'<span class="site-colophon-part">(.*?)</span>(?= ·
 
 
 def test_the_closing_credit_separates_attribution_typesetting_and_version() -> None:
-    """The shared footer keeps its version on the bottom line and retains tool links."""
+    """The shared footer keeps its version on the bottom line and retains tool links.
+
+    The attribution names the site before the repository: a credits line with room for
+    both says where to read the work first and where it is kept second (the owner,
+    2026-10-26)."""
     from devtools.paper_structure import parse  # noqa: PLC0415
     from sqpack import release  # noqa: PLC0415
 
     footer = parse(render_overview.colophon_html())
     lines = footer.find_all("span", "site-colophon-line")
     assert [line.text() for line in lines] == [
-        "The Squares Project · github.com/jlevy/squares",
+        "The Squares Project · squaremath.org · github.com/jlevy/squares",
         "Formatted and typeset with Flowmark and KPress",
         release.PUBLICATION_EDITION,
     ]
     assert [link.attrs["href"] for link in footer.find_all("a")] == [
+        render_overview.SITE_URL,
         "https://github.com/jlevy/squares",
         render_overview.FLOWMARK_URL,
         render_overview.KPRESS_URL,

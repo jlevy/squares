@@ -1123,7 +1123,10 @@ def favicon_html(*, inline: bool = False, root: str = "") -> str:
 def colophon_lines(*, edition: str = PUBLICATION_EDITION) -> str:
     """Project attribution, typesetting credit, then the optional edition on separate lines.
 
-    Papers omit the site edition because their own edition appears in their credits.
+    The attribution names the site before the repository, since a credits line with room
+    for both says where to read the work first and where it is kept second (the owner,
+    2026-10-26). Papers omit the site edition because their own edition appears in their
+    credits.
     """
 
     def part(markup: str) -> str:
@@ -1133,11 +1136,15 @@ def colophon_lines(*, edition: str = PUBLICATION_EDITION) -> str:
         shown = [part(markup) for markup in parts if markup]
         return f'<span class="site-colophon-line">{" · ".join(shown)}</span>'
 
-    repository = repo_links.REPO_URL
+    def address(url: str) -> str:
+        shown = url.removeprefix("https://").removesuffix("/")
+        return f'<a href="{url}">{html.escape(shown)}</a>'
+
     return (
         line(
             html.escape(PROJECT_NAME),
-            f'<a href="{repository}">{html.escape(repository.removeprefix("https://"))}</a>',
+            address(SITE_URL),
+            address(repo_links.REPO_URL),
         )
         + line(
             f'Formatted and typeset with <a href="{FLOWMARK_URL}">Flowmark</a> '
