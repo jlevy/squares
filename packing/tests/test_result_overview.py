@@ -1341,4 +1341,4 @@ def test_a_result_links_each_issue_that_reported_it(bodies: dict[str, str]) -> N
         assert all(target == label for target, label in pairs), result_id
         linked = sorted(int(target) for target, _ in pairs)
         assert linked == list(reporting.get(result_id, ())), result_id
-        assert ("<dt>Reported in</dt>" in body) == bool(linked), result_id
+        assert ("<dt>Issues</dt>" in body) == bool(linked), result_id

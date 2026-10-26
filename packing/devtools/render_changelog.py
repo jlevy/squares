@@ -11,7 +11,7 @@ import html
 import re
 import subprocess
 import sys
-from collections.abc import Callable, Sequence
+from collections.abc import Callable, Mapping, Sequence
 from datetime import date, datetime
 from functools import cache
 from html.parser import HTMLParser
@@ -33,7 +33,12 @@ from mdit_py_plugins.attrs import attrs_block_plugin, attrs_plugin
 from mdit_py_plugins.dollarmath import dollarmath_plugin
 from strif import atomic_output_file
 
-from devtools.github_references import cited_issues, issue_url, issues_reporting
+from devtools.github_references import (
+    cited_issues,
+    issue_opened,
+    issue_url,
+    issues_reporting,
+)
 from devtools.migrate_math import classify
 from devtools.overview_data import MATH, breakable_quotients, prose_tex
 from devtools.repo_links import path_kind, repo_url
@@ -700,11 +705,15 @@ _ENTRY_LINE = re.compile(r"^  - id: (\S+)$")
 
 
 def required_issues(
-    document: Document, entry: Document, reporting: dict[str, tuple[int, ...]] | None = None
+    document: Document,
+    entry: Document,
+    reporting: dict[str, tuple[int, ...]] | None = None,
+    opened: Mapping[int, str] | None = None,
 ) -> tuple[int, ...]:
     """The issues an entry must list in `issues`: each issue that reported one of its
-    `result_ids` (`campaign/result-requests.yaml`, `github_references.reporting_issues`),
-    and each issue of this repository its own summary, details or references link.
+    `result_ids` (`campaign/result-requests.yaml`, `github_references.reporting_issues`)
+    and was opened by the entry's date, and each issue of this repository its own
+    summary, details or references link.
 
     An entry may list more; editorial links to other issues stay the author's choice."""
     texts = [
@@ -715,22 +724,46 @@ def required_issues(
     linked = cited_issues(
         document["repository"], (url for text in texts for url in _GITHUB_URL.findall(text))
     )
-    reported = issues_reporting(entry.get("result_ids", ()), reporting)
+    reported = issues_reporting(
+        entry.get("result_ids", ()),
+        reporting,
+        on_or_before=str(entry["date"]),
+        opened=_opening_days(reporting, opened),
+    )
     return tuple(sorted({*reported, *linked}))
 
 
+def _opening_days(
+    reporting: dict[str, tuple[int, ...]] | None, opened: Mapping[int, str] | None
+) -> Mapping[int, str]:
+    """The issues' opening days: the committed record's, unless a caller passes its own
+    table, and none for a caller's own `reporting` table with no days of its own."""
+    if opened is not None:
+        return opened
+    return issue_opened() if reporting is None else {}
+
+
 def issue_findings(
-    document: Document, reporting: dict[str, tuple[int, ...]] | None = None
+    document: Document,
+    reporting: dict[str, tuple[int, ...]] | None = None,
+    opened: Mapping[int, str] | None = None,
 ) -> list[str]:
-    """Each entry whose `issues` omits an issue `required_issues` names."""
+    """Each entry whose `issues` omits an issue `required_issues` names, or lists one
+    opened after the entry's date, which it cannot have come from."""
     findings = []
+    days = _opening_days(reporting, opened)
     for entry in document["entries"]:
         listed = set(entry.get("issues", ()))
         if missing := [
-            n for n in required_issues(document, entry, reporting) if n not in listed
+            n for n in required_issues(document, entry, reporting, days) if n not in listed
         ]:
             findings.append(
                 f"{entry['id']}: issues omits {', '.join(f'#{number}' for number in missing)}"
+            )
+        if later := sorted(n for n in listed if days.get(n, "") > str(entry["date"])):
+            findings.append(
+                f"{entry['id']}: issues lists {', '.join(f'#{number}' for number in later)}, "
+                "opened after the entry's date"
             )
     return findings
 

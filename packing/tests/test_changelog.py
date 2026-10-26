@@ -1589,6 +1589,23 @@ def test_an_entry_lists_each_issue_that_reported_its_results() -> None:
     assert render_changelog.issue_findings(data, reporting) == []
 
 
+def test_an_entry_takes_no_issue_opened_after_its_date() -> None:
+    """A review-tracking issue opened later for a result did not report it: the check
+    neither asks a News entry dated before it to list it nor lets the entry list it."""
+    data = document()
+    entry = data["entries"][0]
+    reporting = {"T-001": (12, 776)}
+    opened = {12: str(entry["date"]), 776: "2999-01-01"}
+    entry["result_ids"] = ["T-001"]
+    assert render_changelog.required_issues(data, entry, reporting, opened) == (12,)
+    entry["issues"] = [12, 776]
+    assert render_changelog.issue_findings(data, reporting, opened) == [
+        f"{entry['id']}: issues lists #776, opened after the entry's date"
+    ]
+    entry["issues"] = [12]
+    assert render_changelog.issue_findings(data, reporting, opened) == []
+
+
 def test_backfill_writes_missing_issues_in_the_entrys_own_style() -> None:
     data = document()
     reporting = {"T-001": (12,), "T-002": (30,)}

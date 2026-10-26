@@ -1180,7 +1180,7 @@ def links_section(result: Result, overview: Overview, cases: Sequence[int]) -> s
         + _row("Review", [_path_link(reviewed)] if reviewed else [])
         + _row("Case file", case_files)
     )
-    # The issues that reported the result (`campaign/result-requests.yaml`), which are
+    # The issues that reported or track the result (`campaign/result-requests.yaml`), which are
     # threads on GitHub rather than files at `main`.
     reported = [
         _link(issue_url(repo_links.REPO_URL, number), f"Issue #{number}")
@@ -1190,7 +1190,7 @@ def links_section(result: Result, overview: Overview, cases: Sequence[int]) -> s
         '<section class="site-result-section site-result-links">'
         '<h3 class="site-result-heading">Links</h3>'
         f'<dl class="site-detail"><dt>On this site</dt><dd>{DOT.join(site)}</dd>'
-        f"{_row('Reported in', reported)}</dl>"
+        f"{_row('Issues', reported)}</dl>"
         '<p class="site-result-subhead">On GitHub, at <code>main</code></p>'
         f'<dl class="site-detail">{github}</dl></section>'
     )

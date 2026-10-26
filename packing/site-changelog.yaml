@@ -1072,7 +1072,6 @@ entries:
     topics: [lower-bound]
     categories: [records]
     pull_requests: [627]
-    issues: [780]
     stack_id: 632
     result_ids: [T-192]
     summary: |-
@@ -1246,7 +1245,6 @@ entries:
       - 594
       - 600
       - 603
-      - 779
     categories:
       - records
     result_ids:
@@ -2098,7 +2096,7 @@ entries:
       score: 3
       rationale: "This grouped intake announcement inherits the highest S3 significance among its newly replayed and admitted results."
     pull_requests: [487]
-    issues: [375, 446, 451, 465, 470, 476, 481, 483, 484, 485, 488, 489, 776, 777, 778]
+    issues: [375, 446, 451, 465, 470, 476, 481, 483, 484, 485, 488, 489]
     categories: [records, pipeline]
     result_ids: [T-128, T-129, T-130, T-131, T-132, T-133, T-134, T-135, T-136, T-137, T-138, T-139, T-140, T-141, T-142, T-143, T-144, T-145, T-146]
     topics: [lower-bound, upper-bound, verification]

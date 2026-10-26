@@ -42,12 +42,32 @@ def result_reporting_issues() -> dict[str, tuple[int, ...]]:
     return reporting_issues(load_yaml(REQUESTS.read_text(encoding="utf-8")))
 
 
+@cache
+def issue_opened() -> dict[int, str]:
+    """Each recorded issue's opening day (`opened`, ISO), from the committed record."""
+    requests = load_yaml(REQUESTS.read_text(encoding="utf-8"))
+    return {int(issue["number"]): str(issue["opened"]) for issue in requests["issues"]}
+
+
 def issues_reporting(
-    result_ids: Iterable[str], reporting: Mapping[str, Iterable[int]] | None = None
+    result_ids: Iterable[str],
+    reporting: Mapping[str, Iterable[int]] | None = None,
+    *,
+    on_or_before: str | None = None,
+    opened: Mapping[int, str] | None = None,
 ) -> tuple[int, ...]:
-    """The issues that reported any of `result_ids`, in ascending order."""
+    """The issues that reported any of `result_ids`, in ascending order.
+
+    With `on_or_before` (an ISO day), an issue opened after that day is left out: a
+    review-tracking issue opened later for a result (#772 to #786, of 24 October 2026)
+    did not report it, and a News entry dated before it cannot have come from it. An
+    issue with no recorded opening day is kept."""
     table = result_reporting_issues() if reporting is None else reporting
-    return tuple(sorted({number for ident in result_ids for number in table.get(ident, ())}))
+    numbers = {number for ident in result_ids for number in table.get(ident, ())}
+    if on_or_before is not None:
+        days = issue_opened() if opened is None else opened
+        numbers = {n for n in numbers if days.get(n, on_or_before) <= on_or_before}
+    return tuple(sorted(numbers))
 
 
 def issue_url(repository: str, number: int) -> str:
