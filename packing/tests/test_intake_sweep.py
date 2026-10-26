@@ -822,8 +822,10 @@ def _quiet(status: str, updated: str, delegate: str = "") -> sweep.Beads:
             "2026-10-24",
             "w-lane-1024",
             sweep.STALLED,
-            ("in_progress; claimed by w-lane-1024, whose session is gone: no update since "
-            "2026-10-24 (2 days)"),
+            (
+                "in_progress; claimed by w-lane-1024, whose session is gone: no update since "
+                "2026-10-24 (2 days)"
+            ),
         ),
         # A claim with no delegate names no session, and an open bead claims nothing.
         ("in_progress", "2026-10-24", "", sweep.OWNED, "in_progress"),

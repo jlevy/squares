@@ -1109,7 +1109,10 @@ an open bead from 23 to 26 October.
 
 **The regularization step.** Every pull request that moves a house runs it for each
 count it moves, from `packing/`; `adopt_houses` prints these commands with the counts
-and run directories filled in when it writes, and with `--dry-run` before it does:
+and run directories filled in when it writes, and with `--dry-run` before it does.
+The regularization guide’s
+[When a Witness Changes](../../docs/project/guides/regularization-process.md#when-a-witness-changes)
+gives each command’s detail.
 
 1. **Redraw.** `build_known_best_atlas --update` writes the new witness,
    `regularize_axis_components --update-atlas --n N...` draws the axis tool’s view of
@@ -1119,6 +1122,11 @@ and run directories filled in when it writes, and with `--dry-run` before it doe
    the index has named: `regularize_grid_slack` at 0.5, 1 and 5 degrees
    (`--near-axis-degrees`), and Evan Daniel’s driver, `regularize_evand run`. They cost
    5 to 25 CPU-minutes a count (below).
+   `adopt_houses` names the run directories for the adoption’s day and its lowest and
+   highest re-housed count, since the layer records a run by its directory’s name and a
+   repeated name would replace an earlier run’s record: the index holds only the runs
+   merged into the branch, so two adoptions in flight on one day would otherwise print
+   the same names.
 3. **Select and admit.** `regularize_select` over the four runs, then the `layer`
    commands it prints. A count whose view the selection admits reads `regularized`.
 4. **Settle the rest.** A count the runs drew nothing better for is settled

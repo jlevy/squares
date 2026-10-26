@@ -727,7 +727,9 @@ again from its picture, must be the one the flip record holds.
 The import runbook’s
 [Adopt a House, Then Regularize It](../../../packing/campaign/result-import.md#adopt-a-house-then-regularize-it)
 gives the step: the tools, the receipts kept, the states allowed and what a reviewer
-checks. The index’s `status: regularized` says only that the layer holds a view.
+checks.
+
+The index’s `status: regularized` says only that the layer holds a view.
 A view that lapses with its witness is recorded on the axis tool’s record (`lapsed`),
 and the count is pending until the generators decide the new witness.
 So is a count that `default_drawings.PENDING_ALLOWED` names, whatever a new house reads:
