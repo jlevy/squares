@@ -29192,6 +29192,305 @@ occurrences:
   note: 'Reviewed 2026-10-25 (think-4l14) /credit span 26:31: Queuingtheorydotcom
     made every commit and @ManassehA06 announced it, the accounts the owner confirmed
     as Manasseh Ahmed''s.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel n299 2026-10-26]'
+    field: /authors/0
+  expected_text: Daniel
+  start: 0
+  end: 6
+  label: Daniel
+  role: source-author
+  disposition: resolved
+  evidence:
+  - repository-license
+  - bibliography
+  note: Reviewed packing/resources/bibliography.yaml [[Daniel n299 2026-10-26]] /authors/0 span 0:6.
+    The evand/square-packing certificate of issue 824 is in the repository whose retained licence
+    names Evan Daniel. Keep finder, improver and solver roles distinct.
+  contributor_id: evan-daniel
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel n299 2026-10-26]'
+    field: /credit
+  expected_text: Daniel after Deotte
+  start: 0
+  end: 6
+  label: Daniel
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+  - repository-license
+  - bibliography
+  note: 'Reviewed packing/resources/bibliography.yaml [[Daniel n299 2026-10-26]] /credit span 0:6:
+    Evan Daniel''s new packing at 299, in the repository whose retained licence names him. Keep finder,
+    improver and solver roles distinct.'
+  contributor_id: evan-daniel
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel n299 2026-10-26]'
+    field: /credit
+  expected_text: Daniel after Deotte
+  start: 13
+  end: 19
+  label: Deotte
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - source-credit
+  - bibliography
+  note: 'Reviewed packing/resources/bibliography.yaml [[Daniel n299 2026-10-26]] /credit span 13:19:
+    issue 824 asks that Chris Deotte be credited for the multi-gadget fault-line method and the start,
+    his public Kaggle s(334) packing; the original credit role is retained.'
+  contributor_id: chris-deotte
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[wand125 ValidTilt9 Lean 2026-10-16]'
+    field: /authors/0
+  expected_text: Hosono
+  start: 0
+  end: 6
+  label: Hosono
+  role: source-author
+  disposition: resolved
+  evidence:
+  - commit-author
+  - owner-confirmation
+  note: Reviewed 2026-10-26, /authors/0 span 0:6. Source-keyed wand125 Lean proof, the ValidTilt9
+    kernel proof of issue 643; the commits are Hiroaki Hosono's, as the owner confirmed for wand125.
+  contributor_id: hiroaki-hosono
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[wand125 ValidTilt9 Lean 2026-10-16]'
+    field: /credit
+  expected_text: Hosono after Daniel, Burns, Massaccesi
+  start: 0
+  end: 6
+  label: Hosono
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+  - commit-author
+  - owner-confirmation
+  note: Reviewed 2026-10-26, /credit span 0:6. Source-keyed wand125 Lean proof, the ValidTilt9 kernel
+    proof of issue 643; the credit's author is Hiroaki Hosono.
+  contributor_id: hiroaki-hosono
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[wand125 ValidTilt9 Lean 2026-10-16]'
+    field: /credit
+  expected_text: Hosono after Daniel, Burns, Massaccesi
+  start: 13
+  end: 19
+  label: Daniel
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - repository-license
+  note: Reviewed 2026-10-26, /credit span 13:19. The statement, the reduction and the certificate
+    are Evan Daniel's, in evand/square-packing, whose retained licence names him; the original credit
+    role is retained.
+  contributor_id: evan-daniel
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[wand125 ValidTilt9 Lean 2026-10-16]'
+    field: /credit
+  expected_text: Hosono after Daniel, Burns, Massaccesi
+  start: 21
+  end: 26
+  label: Burns
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - bibliography
+  note: Reviewed 2026-10-26, /credit span 21:26. The weighted exact-rational covering method of Daniel's
+    families, credited to Sam Burns as Daniel's own keys for T-064 and T-081 do; the original credit
+    role is retained.
+  contributor_id: sam-burns
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[wand125 ValidTilt9 Lean 2026-10-16]'
+    field: /credit
+  expected_text: Hosono after Daniel, Burns, Massaccesi
+  start: 28
+  end: 38
+  label: Massaccesi
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - bibliography
+  note: Reviewed 2026-10-26, /credit span 28:38. The weighted exact-rational covering method of Daniel's
+    families, credited to Gustavo Massaccesi as Daniel's own keys for T-064 and T-081 do; the original
+    credit role is retained.
+  contributor_id: gustavo-massaccesi
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[wand125 Valid7 Lean 2026-10-11]'
+    field: /authors/0
+  expected_text: Hosono
+  start: 0
+  end: 6
+  label: Hosono
+  role: source-author
+  disposition: resolved
+  evidence:
+  - commit-author
+  - owner-confirmation
+  note: Reviewed 2026-10-26, /authors/0 span 0:6. Source-keyed wand125 Lean proof, the Valid7 kernel
+    proof of issue 537, merged into evand/square-packing as PR 6; the commits are Hiroaki Hosono's,
+    as the owner confirmed for wand125.
+  contributor_id: hiroaki-hosono
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[wand125 Valid7 Lean 2026-10-11]'
+    field: /credit
+  expected_text: Hosono after Daniel, Burns, Massaccesi
+  start: 0
+  end: 6
+  label: Hosono
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+  - commit-author
+  - owner-confirmation
+  note: Reviewed 2026-10-26, /credit span 0:6. Source-keyed wand125 Lean proof, the Valid7 kernel
+    proof of issue 537, merged into evand/square-packing as PR 6; the credit's author is Hiroaki Hosono.
+  contributor_id: hiroaki-hosono
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[wand125 Valid7 Lean 2026-10-11]'
+    field: /credit
+  expected_text: Hosono after Daniel, Burns, Massaccesi
+  start: 13
+  end: 19
+  label: Daniel
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - repository-license
+  note: Reviewed 2026-10-26, /credit span 13:19. The statement, the reduction and the certificate
+    are Evan Daniel's, in evand/square-packing, whose retained licence names him; the original credit
+    role is retained.
+  contributor_id: evan-daniel
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[wand125 Valid7 Lean 2026-10-11]'
+    field: /credit
+  expected_text: Hosono after Daniel, Burns, Massaccesi
+  start: 21
+  end: 26
+  label: Burns
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - bibliography
+  note: Reviewed 2026-10-26, /credit span 21:26. The weighted exact-rational covering method of Daniel's
+    families, credited to Sam Burns as Daniel's own keys for T-064 and T-081 do; the original credit
+    role is retained.
+  contributor_id: sam-burns
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[wand125 Valid7 Lean 2026-10-11]'
+    field: /credit
+  expected_text: Hosono after Daniel, Burns, Massaccesi
+  start: 28
+  end: 38
+  label: Massaccesi
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - bibliography
+  note: Reviewed 2026-10-26, /credit span 28:38. The weighted exact-rational covering method of Daniel's
+    families, credited to Gustavo Massaccesi as Daniel's own keys for T-064 and T-081 do; the original
+    credit role is retained.
+  contributor_id: gustavo-massaccesi
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[wand125 Valid7 Lean v2 2026-10-17]'
+    field: /authors/0
+  expected_text: Hosono
+  start: 0
+  end: 6
+  label: Hosono
+  role: source-author
+  disposition: resolved
+  evidence:
+  - commit-author
+  - owner-confirmation
+  note: Reviewed 2026-10-26, /authors/0 span 0:6. Source-keyed wand125 Lean proof, version 2 of the
+    Valid7 kernel proof of issue 537; the commits are Hiroaki Hosono's, as the owner confirmed for
+    wand125.
+  contributor_id: hiroaki-hosono
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[wand125 Valid7 Lean v2 2026-10-17]'
+    field: /credit
+  expected_text: Hosono after Daniel, Burns, Massaccesi
+  start: 0
+  end: 6
+  label: Hosono
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+  - commit-author
+  - owner-confirmation
+  note: Reviewed 2026-10-26, /credit span 0:6. Source-keyed wand125 Lean proof, version 2 of the Valid7
+    kernel proof of issue 537; the credit's author is Hiroaki Hosono.
+  contributor_id: hiroaki-hosono
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[wand125 Valid7 Lean v2 2026-10-17]'
+    field: /credit
+  expected_text: Hosono after Daniel, Burns, Massaccesi
+  start: 13
+  end: 19
+  label: Daniel
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - repository-license
+  note: Reviewed 2026-10-26, /credit span 13:19. The statement, the reduction and the certificate
+    are Evan Daniel's, in evand/square-packing, whose retained licence names him; the original credit
+    role is retained.
+  contributor_id: evan-daniel
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[wand125 Valid7 Lean v2 2026-10-17]'
+    field: /credit
+  expected_text: Hosono after Daniel, Burns, Massaccesi
+  start: 21
+  end: 26
+  label: Burns
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - bibliography
+  note: Reviewed 2026-10-26, /credit span 21:26. The weighted exact-rational covering method of Daniel's
+    families, credited to Sam Burns as Daniel's own keys for T-064 and T-081 do; the original credit
+    role is retained.
+  contributor_id: sam-burns
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[wand125 Valid7 Lean v2 2026-10-17]'
+    field: /credit
+  expected_text: Hosono after Daniel, Burns, Massaccesi
+  start: 28
+  end: 38
+  label: Massaccesi
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - bibliography
+  note: Reviewed 2026-10-26, /credit span 28:38. The weighted exact-rational covering method of Daniel's
+    families, credited to Gustavo Massaccesi as Daniel's own keys for T-064 and T-081 do; the original
+    credit role is retained.
+  contributor_id: gustavo-massaccesi
 inspections:
 - path: packing/resources/papers/addis-locatelli-schoen-2008-disk-packing-square.pdf
   status: pending

@@ -329,7 +329,9 @@ class Bibliography(TypedDict):
     authors: list[str]
     lineage: str
     credit: str
-    short_credit: str
+    #: Absent where the credit names one link or none, which has no shortening
+    #: (`build_bound_citations.short_credits`), as Daniel's 299 after Deotte (#824).
+    short_credit: NotRequired[str]
     note: str
 
 
@@ -1504,6 +1506,8 @@ HOUSES: dict[str, Callable[[int], Fraction]] = {
     "[Daniel Kaggle descents 2026-10-24]": _import("evand-kaggle-descents-2026-10-24"),
     # T-243: Evan Daniel's new arrangement at 182 of issue 806, at d99925d (think-2lzo).
     "[Daniel n182 2026-10-25]": _import("evand-n182-2026-10-25"),
+    # T-247: Evan Daniel's new arrangement at 299 of issue 824, at 1be69ca (think-3xn9).
+    "[Daniel n299 2026-10-26]": _import("evand-n299-2026-10-26"),
     # T-155: the side of the retained view of Evan Daniel's regularizer at each count.
     "[Daniel regularizer 2026-10-11]": regularized.view_side,
 }
@@ -2738,7 +2742,11 @@ def register_plan(packet: Path) -> dict[str, Any]:
         "dated": source["committed_utc"][:10],
         "lineage": register["bibliography"]["lineage"],
         "credit": register["bibliography"]["credit"],
-        "short_credit": register["bibliography"]["short_credit"],
+        **(
+            {"short_credit": short}
+            if (short := register["bibliography"].get("short_credit")) is not None
+            else {}
+        ),
         "note": register["bibliography"]["note"],
     }
     readme = (

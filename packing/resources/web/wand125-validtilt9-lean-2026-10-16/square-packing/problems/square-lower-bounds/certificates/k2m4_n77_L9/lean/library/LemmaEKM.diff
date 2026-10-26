@@ -1,0 +1,17 @@
+2c2
+< import Sqpack.RowMinK
+---
+> import Sqpack.RowMinN
+11c11,12
+< the number of terms.
+---
+> the number of terms.  The digits are taken on natural numbers (`KArith.rmChk`, which implies
+> `rmLoop`).
+60c61
+<     rmLoop c.K ε (N + 2) (rows.map (·.map fun r => (liftH c.B N (rzK c E I J Kx L r).h).v))
+---
+>     rmChk c.K ε (N + 2) (rows.map (·.map fun r => (liftH c.B N (rzK c E I J Kx L r).h).v))
+185c186
+<       have := rmLoop_sound (N + 2) _ _ _ hloop
+---
+>       have := rmLoop_sound (N + 2) _ _ _ (rmChk_sound hK hloop)

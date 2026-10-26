@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:ResultsRegister/v1
   schema: results.schema.yaml
   status: enforced
-last_reviewed: '2026-10-25'
+last_reviewed: '2026-10-26'
 results:
   - id: T-001
     kind: lower-bound
@@ -4486,8 +4486,11 @@ results:
       close the one unread link in the second method's route. V4 and C4 need two adversarial
       AI reviews by distinct reviewers and a human oversight record, and none is retained;
       whether a mapped same-project review of another author's result counts toward them is
-      the owner's decision. Rung 5 needs a proof-assistant formalization reviewed by human
-      experts. The exact value remains open; the conjecture is s(12) = 4.
+      the owner's decision. Rung 5 needs a proof-assistant formalization built and
+      reviewed by human experts: Daniel's own Lean kernel proof of this bound,
+      s12_ge_15680_3951 (S12HLower, 28 September 2026), is registered as T-248, a reported
+      formalization at V0/C0 whose build (about 8 CPU-hours, 31 GB) awaits the owner's word
+      (think-yzl3, #535). The exact value remains open; the conjecture is s(12) = 4.
 
   - id: T-050
     kind: lower-bound
@@ -6026,11 +6029,12 @@ results:
       method beside the rung. Rung 5 needs human formalization reviews of the Lean statement
       and a Lean proof of Valid7 itself.
 
-      The source has begun that proof: by 4 October its Lean reduces Valid7 to the tilted
-      part ValidTilt7 (bentz_of_validTilt7, with the D4 reduction and the axis face proved)
-      and kernel-checks the 689 LEB and 374 CAP leaves of the run's 32,079 with Lemmas U and
-      K, as reported and not built here; the tree that joins the leaves and the 26,829 PIECE
-      and EXACT leaves remain. think-kqi1 tracks a scope that can state an infinite family.
+      That proof is now reported complete: Hiroaki Hosono's Lean kernel proof of Valid7,
+      merged into the source on 11 October and re-checked as version 2 on 17
+      October, is registered as T-249, a reported formalization of this result at V0/C0;
+      its build (about 798 CPU-hours for version 2) or a sample of its roots is the owner's
+      decision (think-qu37, #537). think-kqi1 tracks a scope that can state an infinite
+      family.
 
       The source also reports an interval-certified checker: its zmx2 with area density
       decides Valid7 by a sweep of the whole pose space, about 400 CPU-seconds at the
@@ -8119,6 +8123,12 @@ results:
       first-party route; it plans points and segments only, and box 9 also needs a
       uniform-polygon primitive and an exact argument inside the Lebesgue block, where
       every square has mass exactly one.
+
+      Hiroaki Hosono's Lean kernel proof of ValidTilt9, with this reduction s(k^2 - 4) = k
+      for every k >= 8 (wand125/square-packing, 16 October 2026), is registered as
+      T-250, a reported formalization at V0/C0 (#643); its build, about 7,400 CPU-hours and
+      230 GB, is held above the cap (think-rw3i), and a build would be a third route to
+      ValidTilt9 beside the two checkers.
     unfinished_confirmations:
       - what: >-
           ValidTilt9 replayed in full by either checker, with the route's controls, as a
@@ -35010,6 +35020,478 @@ results:
       prints and lies inside the Krawczyk enclosure of S; whether it is above sigma, as a
       realization of the packing at a decided side is expected to be, is not decided here.
       n-029.md's analytic characterization gives the degree and the pinned asset.
+  - id: T-247
+    kind: upper-bound
+    registered: '2026-10-26'
+    landed: '2026-10-26'
+    headline: >-
+      Daniel's new arrangement at 299, 1.92e-2 below the catalogue's construction
+    claim: >-
+      One complete rational source certificate reports a finite upper-bound improvement at
+      the exact side it states: s(299) <= 17.803695435332337695435314533642, 1.92e-2 below
+      the case's house best packing, the Kingbird catalogue's 33/2 + √7/2, which is 17.8228756555…, as
+      T-101's exact ceiling verifies it, and below every report at 299. Complete native
+      feasibility outcomes are retained separately; the selected standing case is unchanged
+      pending independent review and record review.
+
+      It is search/packer/candidates/s299-1025.cert in Evan Daniel's watched repository
+      (https://github.com/evand/square-packing), committed on 26 October 2026 at 03:30:38Z,
+      21 minutes before issue 824 reported it as 17.803695435333, its side rounded up at 12
+      places.
+
+      The certificate's header calls it a dilation by dilate_cert.py, delta 1e-12, of the
+      binary64 packing s299-1025.input.txt, side 17.803695435314534, and names
+      verify_cert.py, byte-identical to the copy the n183 packet retains; the issue reports
+      that the source's two exact checkers, verify_cert.py and verify_cert2.py, both print
+      VALID. The JSON report states that the exact solver did not converge to a KKT point:
+      its 80-digit point, s299-1025.exact.txt, has the pair (235, 281) overlapping by 0.711
+      and is no packing, and the issue says local optimality is not established. Those
+      statements are the author's; no source program ran here.
+
+      Credit Evan Daniel (https://github.com/evand/square-packing), who reports a new
+      packing, "not a refinement of the register's 33/2 + √7/2 construction", built by his
+      own implementation of Chris Deotte's multi-gadget fault-line DP, and asks that Chris
+      Deotte be credited for the method and for the start: the s(334) packing, side
+      18.795715128, in Deotte's public Kaggle notebook
+      "squares-in-squares-ftmc-milp-refill-22-311" (output of 24 October 2026).
+
+      The issue says the source relaxed that packing, added an L of 39 squares to reach 373, and
+      composed corner gadgets of that 373 packing and an earlier 299 packing of its own
+      along a diagonal fault. That lineage is the author's statement; no Deotte packing is
+      retained here. Measured here, the certificate is another arrangement than the house's
+      packing.
+
+      Two Kaggle per-puzzle leaderboard entries the issue quotes state a side and no
+      packing, so neither is a report: team Amin's 17.802718854399 of 23 October and team
+      Chris Deotte's 17.798169713703 of 25 October, both below this side. The source's
+      credits say its work was produced by Claude (Anthropic) under human direction, and the
+      commit carries a Co-Authored-By trailer naming Claude.
+    scope: {n_values: [299]}
+    verification: V0
+    confirmation: C0
+    significance:
+      score: 3
+      rationale: >-
+        Draft, from the stage 1 triage (think-3xn9): a new arrangement at 299, 1.92e-02
+        below the house, the Kingbird catalogue's closed-form construction, and every report
+        there. No symmetry pairs it one to one with T-101's certificate of that packing by
+        nearest centres; the best assignment moves 124 squares beyond a tenth and turns 126,
+        and it has 83 tilted squares at two tilt signs where the house has 38 at one angle,
+        as T-243's 3.17e-03 at 182 and T-240's 4.45e-03 and 2.78e-03 (S3) are. No lower
+        bound or optimum.
+      scored: '2026-10-26'
+      by: the stage 1 triage and records lane of think-3xn9 (w-imports-1026)
+    novelty: previously-published
+    attribution:
+      source_keys: ['[Daniel n299 2026-10-26]']
+      published: '2026-10-26'
+    evidence:
+      - E-evand-n299-certificate-report
+    artifacts:
+      - packing/resources/web/evand-n299-2026-10-26/README.md
+      - packing/resources/web/evand-n299-2026-10-26/acquisition/claims.json
+      - packing/resources/web/evand-n299-2026-10-26/source/search/packer/candidates/s299-1025.cert
+      - packing/resources/web/evand-n299-2026-10-26/receipts/exact-certification.json.xz
+      - packing/resources/web/evand-n299-2026-10-26/receipts/sharp-controls.json
+      - packing/resources/web/evand-n299-2026-10-26/measure/identity.json
+      - packing/campaign/issue-intake/upper-bounds-issue824-20261026/README.md
+      - packing/devtools/upper_bound_reports.py
+    controls:
+      - packing/tests/test_upper_bound_reports.py
+      - packing/tests/test_upper_bound_reports_824.py
+      - packing/resources/web/evand-n299-2026-10-26/receipts/sharp-controls.json
+    notes: >-
+      A separate complete repository replay is retained for n = 299: 1 positive and 2
+      duplicate-square and outside-container controls passed their required outcomes on both
+      routes, 267306 pair decisions; summed over the 3 jobs, the receipt records 46.84 route
+      CPU seconds and 145.62 job wall seconds, the longest job 59.72 seconds. Every wall is
+      cleared by at least 4.99e-13 and every pair by at least 9.99e-13.
+
+      The packet's sharp controls (receipts/sharp-controls.json) lowered the side by the
+      least far-wall clearance, closed the least-gap pair by its gap and moved every square
+      toward the nearer near wall by its least clearance: both routes accepted each at exact
+      contact, margin 0, and refused each 1e-30 past it. They refused one square enlarged to
+      its pair and one to its wall at contact for its shape alone and 1e-30 past it for the
+      overlap or the wall as well, and refused a duplicated square.
+
+      In the packet's frozen comparison (acquisition/claims.json, read from main on 26
+      October 2026), at n = 299 the certificate is below the case's ceiling (the Kingbird
+      catalogue, verified by T-101's exact ceiling) by 1.92e-02, and below the reported
+      lane's closed form. It is the smallest report at 299. The ledger of 26 October for
+      this import (campaign/issue-intake/upper-bounds-issue824-20261026) records it, a new
+      packing, dated by the issue; the certificate's commit 21 minutes before it is the same
+      author's publication of the same file, and nothing reached 299 between them.
+
+      Measured pose by pose (measure/identity.json in the packet; a measurement, which
+      decides nothing), no symmetry pairs it one to one with T-101's certificate by nearest
+      centres; the optimal assignment, best under the mirror y to s - y, moves 124 of 299
+      squares beyond a tenth and 243 beyond a hundredth (largest 1.14) and turns 126 squares
+      by up to 39.1 degrees. It has 83 tilted squares, 52 turned one way and 31 the other,
+      at 25.95 to 30.24 degrees, against T-101's 38, all at 24.30 degrees. Against the
+      source's binary64 input it is one to one under the identity, none beyond 1e-9
+      (largest 2.45e-11).
+
+      The source's own checkers were not run here. The two maintained routes, the sqpack
+      rational witness verifier and the independent rational corner checker, share
+      certificate parsing, half-angle conversion, Fraction arithmetic and the separating-axis
+      method, and read the certificate through the evand-cert adapter, whose line filter and
+      corner construction are transcribed from Evan Daniel's checkers. No two independent
+      methods, human oversight or optimality is claimed.
+
+      The case's conjectured optimum at 299, 17.82287565553229, is the catalogue's side;
+      this side is below it, so the adoption withdraws it (result-import.md, The House
+      Rule).
+    next_rung: >-
+      Independently review the retained replay and the certificate (stage 4): a clean-room
+      exact checker, the identity against the house's packing and the lineage the issue
+      states, a mapped review whose acceptance would raise both rungs. Then adopt it at 299
+      under the house rule, with both strong generators' regularization and the flip of the
+      new house in the same change (think-8hjz).
+    unfinished_confirmations:
+      - what: >-
+          The stage 4 review: a clean-room exact checker of the certificate with sharp
+          controls, the identity against the house's packing and the lineage the issue
+          states, mapped as an adversarial review
+        rung: C3
+        link: think-8hjz
+        estimated_cost:
+          cpu_hours: 0.02
+          cpu_hours_high: 0.05
+          basis: >-
+            T-243's clean-room checker at 182, about a minute, scaled to 299 squares, and the
+            sharp controls' 3 CPU-minutes here; an estimate, not a receipt
+          priced: '2026-10-26'
+  - id: T-248
+    kind: formalization
+    proves_kind: lower-bound
+    registered: '2026-10-26'
+    landed: '2026-10-26'
+    headline: >-
+      Daniel reports a Lean kernel proof that `s(12) ≥ 15680/3951`, the bound T-049 holds
+    claim: >-
+      Evan Daniel reports a Lean 4 kernel proof that s(12) >= 15680/3951 = 3.9686155…, a
+      formalization of T-049, which this record holds at V3/C3 on a replay of his
+      arrangement sweep and its own interval coverage of the same certificate. Its theorem,
+      SquarePacking.s12_ge_15680_3951 : (15680/3951 : ℝ) ≤ minSide 12, says that no square
+      of side below 15680/3951 holds 12 closed unit squares, each translated and rotated,
+      with pairwise disjoint interiors.
+
+      The proof applies the generic BoxTree verifier, proved sound once, to T-049's
+      certificate, certificates/s12_lower_3.9686.txt: 1,736 D4-invariant points of total
+      weight 11.9738036 < 12, as 320 generated part files and a covering theorem, cov_root,
+      which lean/scripts/gen_data.sh S12H writes and the repository does not store. The
+      source's LADDER.md reports the axioms propext, Classical.choice and Quot.sound, no
+      sorry and no native_decide, and a build of 6 h 31 min on 2 cores, 7.3 CPU-hours, at
+      most 30.6 GB resident. Nothing here has built it.
+
+      Daniel, [square-packing](https://github.com/evand/square-packing/tree/f58a01774a733b232a88576470332185d8d11641/s12/lean),
+      first committed on 28 September 2026 and retained here in the 7 October evand packet.
+      The repository's CREDITS.md says its work was produced by Claude (Anthropic) under
+      human direction.
+    scope:
+      n_values: [12]
+    verification: V0
+    confirmation: C0
+    significance:
+      score: 2
+      rationale: >-
+        A proof-assistant route to a bound T-049 holds on two complete methods, by the same
+        certificate checked in Lean's kernel: a citable detail that changes no theorem, as
+        T-235's is.
+      scored: '2026-10-26'
+      by: think-oyd4 Evan Daniel import (draft, w-imports-1026)
+    novelty: previously-published
+    attribution:
+      source_keys:
+        - '[Daniel exact and local reports 2026]'
+      published: '2026-09-28'
+    evidence:
+      - E-n012-evand-s12h-lean-report
+    composition: >-
+      One cited entry, the source's report (E-n012-evand-s12h-lean-report), which claims
+      the lower bound in Lean. T-049's replays are not cited: they are T-049's evidence, and
+      a kernel check of the same certificate is what this entry adds. No build is retained
+      here, so V0; no review has read it, so C0.
+    artifacts:
+      - packing/resources/web/evand-exact-and-local-reports-2026-10-07/README.md
+      - packing/resources/web/evand-exact-and-local-reports-2026-10-07/source/s12/lean/Sqpack/S12HLower.lean
+      - packing/resources/web/evand-exact-and-local-reports-2026-10-07/source/s12/lean/Sqpack/BoxTree.lean
+      - packing/resources/web/evand-exact-and-local-reports-2026-10-07/source/s12/lean/LADDER.md
+      - packing/resources/web/evand-exact-and-local-reports-2026-10-07/receipts/s12h-lean-closure.json
+      - packing/devtools/lean_closure.py
+    next_rung: >-
+      C1 needs the stage 4 mathematical review of s12_ge_15680_3951, BoxTree's soundness
+      and the generator, read from the retained packet. V3 and C3 need a build here or by a
+      third party retained here, from the retained source with its generated parts and the
+      axiom receipt (think-yzl3): about 8 CPU-hours and 31 GB of memory, under the owner's
+      40 CPU-hour item cap but above this host, and #535 asks the owner to approve or
+      decline it. Rung 5 needs a human expert's review of the formalization beside it.
+    unfinished_confirmations:
+      - what: >-
+          the stage 4 mathematical review of s12_ge_15680_3951, the BoxTree verifier's
+          soundness lemma le_minSide and gen_boxtree.py, read from the retained packet
+        rung: C1
+        link: think-oyd4
+      - what: >-
+          a build of S12HLower from the retained source with the 320 parts gen_data.sh S12H
+          writes, one part at a time, with the axiom receipt, here or by a third party whose
+          build is retained here
+        rung: C3
+        link: think-yzl3
+        estimated_cost:
+          cpu_hours: 8
+          basis: >-
+            The source's LADDER.md: generation 39 minutes on one core, the build 6 h 31 min
+            wall on 2 cores, 7.3 CPU-hours, at most 30.6 GB resident; a measurement by the
+            source, not a receipt retained here
+          priced: '2026-10-26'
+    notes: >-
+      Registered on 26 October 2026 by the worker w-imports-1026 (think-oyd4), for the
+      tracking issue jlevy/squares#535, which asked for an evidence entry for T-049 and a
+      corrected next rung. A proof in a proof assistant of a result the record holds is a
+      formalization of its own (epistemics.md, Result Kinds), as T-235's precedent took it
+      for #536, so this entry is that evidence's home, and T-049's next_rung names it.
+
+      The closure of S12HLower and of the BoxTree verifier its generated parts import is
+      nine modules, Basic, BoxTree, Chord, Cover, D4, S12HLower, S32, S32Data and ZeroMargin,
+      every one retained in the evand-exact-and-local-reports-2026-10-07 packet, with no
+      kernel-escape token in any (devtools.lean_closure,
+      receipts/s12h-lean-closure.json). minSide is S32.lean's, the definition the record's
+      2026-09-30 build of s13_eq_4 used.
+  - id: T-249
+    kind: formalization
+    proves_kind: optimality
+    registered: '2026-10-26'
+    landed: '2026-10-26'
+    headline: >-
+      Hosono reports a Lean kernel proof of Daniel's Valid7, and so of `s(k² − 3) = k` for every `k ≥ 6`
+    claim: >-
+      Hiroaki Hosono (wand125) reports a Lean 4 kernel proof of Evan Daniel's finite premise
+      Valid7, and with Daniel's reduction a proof that s(k^2 - 3) = k for every integer
+      k >= 6: a formalization of T-064, which this record holds at V3/C3 on two exact
+      checkers of Valid7 and a build here of the reduction. Its theorems, in namespace
+      SquarePacking.LemmaELeaf, are valid7 : Bentz.Valid7, bentz : ∀ k : ℕ, 6 ≤ k →
+      minSide (k ^ 2 - 3) = k, and validTilt7 : Bentz.ValidTilt7.
+
+      The proof checks the pose tree of the third k2m3 run on the box cover of L4_k02_box7.txt,
+      one generated module per root cell, 9,800 of them, glued over the D4 root
+      [0, 7/2]^2 x (0, 1/2] in a generated Main.lean, with Bridge.lean identifying the cover
+      with Bentz.box7Cover.
+
+      Version 1, merged into Daniel's repository on 11 October, generates the root modules from the per-root certificates of the release
+      data/valid7-lean-certs-v1 and reports a build of roughly 10^4 CPU-hours, later put at
+      about 6,650. Version 2, in wand125/square-packing on 17 October, re-checks the
+      same theorem from the same certificates with re-certified leaves on Daniel's library
+      with a faster row-minimum check, 62,626 generated files, and a recorded run of about
+      798 CPU-hours. Both report the axioms propext, Classical.choice and Quot.sound, no
+      sorry and no native_decide. Nothing here has built either.
+
+      Here the names were audited: the 9,800 pickles of version 1's release asset and
+      version 2's 9,800 root modules are R00000 to R09799, one per root of the run's leaves
+      file, which fills the 35 x 35 x 8 grid gen_main.py asserts.
+
+      Hosono after Daniel, [square-packing](https://github.com/evand/square-packing/tree/060c1a1052029f81f30c8a97134ee03666b1bb77/lean)
+      and [square-packing](https://github.com/wand125/square-packing/tree/649a92042b4b79dda1eca1749c34029aee60990e/lean/valid7),
+      11 and 17 October 2026. Both commits name Claude as co-author.
+    scope:
+      n_values: [33, 46, 61, 78, 97, 118, 141, 166, 193, 222, 253, 286, 321]
+    verification: V0
+    confirmation: C0
+    significance:
+      score: 3
+      rationale: >-
+        A machine-checked proof, by another author, of the finite premise of a bound family
+        the record holds on two exact checkers and a Lean reduction: with it the whole
+        theorem s(k^2 - 3) = k for every k >= 6 is in Lean, unconditional. A machine audit,
+        S3, below T-064's S4 because it proves no new bound, as T-236 is scored.
+      scored: '2026-10-26'
+      by: think-0ayk wand125 import (draft, w-imports-1026)
+    novelty: previously-published
+    attribution:
+      source_keys:
+        - '[wand125 Valid7 Lean 2026-10-11]'
+        - '[wand125 Valid7 Lean v2 2026-10-17]'
+      published: '2026-10-17'
+    evidence:
+      - E-k2m3-wand125-valid7-lean-v1-report
+      - E-k2m3-wand125-valid7-lean-v2-report
+    composition: >-
+      Two cited entries, the source's reports of version 1
+      (E-k2m3-wand125-valid7-lean-v1-report) and version 2
+      (E-k2m3-wand125-valid7-lean-v2-report), each claiming the exact values in Lean, the
+      grid inside the reduction. T-064's checkers and its reduction build are not cited:
+      they are T-064's evidence. No build is retained here, so V0; no review has read it, so
+      C0.
+    artifacts:
+      - packing/resources/web/evand-valid7-lean-2026-10-11/README.md
+      - packing/resources/web/evand-valid7-lean-2026-10-11/square-packing/lean/VALID7.md
+      - packing/resources/web/evand-valid7-lean-2026-10-11/square-packing/lean/Sqpack/V7/Bridge.lean
+      - packing/resources/web/evand-valid7-lean-2026-10-11/square-packing/lean/Sqpack/ValidSplit7.lean
+      - packing/resources/web/evand-valid7-lean-2026-10-11/square-packing/lean/scripts/gen_main.py
+      - packing/resources/web/evand-valid7-lean-2026-10-11/receipts/lean-closure.json
+      - packing/resources/web/evand-valid7-lean-2026-10-11/receipts/root-names.json
+      - packing/resources/web/wand125-valid7-lean-v2-2026-10-17/README.md
+      - packing/devtools/audit_valid7_roots.py
+      - packing/devtools/lean_closure.py
+    controls:
+      - packing/tests/test_audit_valid7_roots.py
+    next_rung: >-
+      C1 needs the stage 4 mathematical review of valid7, Bridge.lean, the glue in
+      gen_main.py and the generators, read from the retained packets. V3 and C3 need a
+      complete build here or by a third party retained here, with the axiom receipt: version
+      2's is about 798 CPU-hours with 37 GB per leaf module and 51 GB for Main.lean, about 20
+      times the owner's 40 CPU-hour item cap, and a sample of roots is a component check
+      that moves no rung; which to run, if either, is the owner's decision (think-qu37,
+      #537). Rung 5 needs a human expert's review of the formalization beside it.
+    unfinished_confirmations:
+      - what: >-
+          the stage 4 mathematical review of valid7, bentz and validTilt7, Bridge.lean, the
+          glue of gen_main.py and the generators emit_v7.py and run_v7.py, read from the
+          retained packets
+        rung: C1
+        link: think-0ayk
+      - what: >-
+          a complete build of version 2 from its release's generated sources on its library
+          commit, verify.py's checks of every module, Main.lean and Axioms7.lean, with the
+          axiom receipt, here or by a third party whose build is retained here
+        rung: C3
+        link: think-qu37
+        estimated_cost:
+          cpu_hours: 798
+          basis: >-
+            Version 2's README: re-certification 19.4, sources 0.3, leaf modules 639.3, row
+            groups 127.3, root modules 11.4 CPU-hours and Main.lean and Axioms7.lean under a
+            minute each, summing to 797.7, at most 37.0 GB for a module and 50.6 GB for
+            Main.lean; the source's run, not a receipt retained here
+          priced: '2026-10-26'
+    notes: >-
+      Registered on 26 October 2026 by the worker w-imports-1026 (think-0ayk), for the
+      tracking issue jlevy/squares#537, which asked for the merged lean/ tree and its release
+      by digest, an audit of the root names, an evidence entry for T-064 and an owner
+      decision on a sample or a full rebuild. A proof in a proof assistant of a result the
+      record holds is a formalization of its own (epistemics.md, Result Kinds), so this entry
+      takes the evidence, and T-064's claim names it.
+
+      Version 1's closure, from the modules its generators import, is 55 modules
+      and the three build pins, with no kernel-escape token in any
+      (receipts/lean-closure.json); Bentz.lean and ValidSplit7.lean, which state Valid7 and
+      the reduction, are in it. The release asset v7cert.tar.zst is pinned in
+      receipts/root-names.json, which devtools.audit_valid7_roots
+      wrote; no pickle was loaded. Version 2's files are pinned by digest only, since its
+      folder states no licence. Version 2's library is not retained: it is Daniel's
+      upstream library with RowMinN.lean and a changed LemmaEKM.lean, whose file list the v2
+      packet pins.
+
+      The note of 18 October on #537 that the run's component CPU figures do not sum to its
+      total is resolved by version 2's own table, whose components sum to 797.7 CPU-hours.
+  - id: T-250
+    kind: formalization
+    proves_kind: optimality
+    registered: '2026-10-26'
+    landed: '2026-10-26'
+    headline: >-
+      Hosono reports a Lean kernel proof of Daniel's ValidTilt9, so `s(k² − 4) = k` for every `k ≥ 8`
+    claim: >-
+      Hiroaki Hosono (wand125) reports a Lean 4 kernel proof of Evan Daniel's finite premise
+      ValidTilt9, and with Daniel's reduction a proof that s(k^2 - 4) = k for every integer
+      k >= 8: a formalization of T-081 at k >= 8, which this record holds as reported, on
+      two reported runs of ValidTilt9 and a build here of the reduction. Its theorems, in
+      namespace SquarePacking.LemmaELeaf of the generated Sqpack/V9/Main.lean, are validTilt9 : Bentz4.ValidTilt9, valid9 : Bentz4.Valid9 and bentz4 :
+      ∀ k : ℕ, 8 ≤ k → minSide (k ^ 2 - 4) = k.
+
+      The proof checks Daniel's k2m4 certificate qxzm_full on the box cover K4_k008_box9.txt,
+      16,200 per-root certificates in the release validtilt9-lean-v1, as 1,275,911 generated
+      Lean files the repository lists by digest and does not store, with Bridge.lean
+      identifying the cover with Bentz4.box9Cover and Tilt.lean deriving ValidTilt9 from the
+      tree. The source's receipts report the axioms propext, Classical.choice and Quot.sound,
+      no sorry and no native_decide, about 7,390 CPU-hours of kernel checks and Main.lean's
+      assembly at 230 GB resident. Nothing here has built it.
+
+      Every definition the theorems' statements use is the record's own: the 16 modules and
+      3 build files of the closure the evand-square-packing-2026-10-03 packet retains, among
+      them S32.lean (minSide), ValidSplit9.lean and Bentz4.lean, match the digests of
+      the source's library list, the files of the record's 3 October build of the reduction.
+
+      Hosono after Daniel, [square-packing](https://github.com/wand125/square-packing/tree/319a779efcc78db2f92bffc87844446f8723b01d/problems/square-lower-bounds/certificates/k2m4_n77_L9/lean),
+      16 October 2026. The commits name Claude as co-author.
+    scope:
+      n_values: [60, 77, 96, 117, 140, 165, 192, 221, 252, 285, 320]
+    verification: V0
+    confirmation: C0
+    significance:
+      score: 3
+      rationale: >-
+        A machine-checked proof, by another author, of the finite premise of a bound family
+        the record holds only as reported: with it s(k^2 - 4) = k for every k >= 8 is in
+        Lean, unconditional, and once built it would settle the family's open cases k = 10
+        to 18. A machine audit, S3, below T-081's S4 because it proves no new bound; the 16
+        October triage drafted S4 on the open cases, which the review may take.
+      scored: '2026-10-26'
+      by: think-jh0n wand125 import (draft, w-imports-1026)
+    novelty: previously-published
+    attribution:
+      source_keys:
+        - '[wand125 ValidTilt9 Lean 2026-10-16]'
+      published: '2026-10-16'
+    evidence:
+      - E-k2m4-wand125-validtilt9-lean-report
+    composition: >-
+      One cited entry, the source's report (E-k2m4-wand125-validtilt9-lean-report), which
+      claims the exact values in Lean at k >= 8, the grid inside the reduction. T-081's runs
+      and its reduction build are not cited: they are T-081's evidence. No build is retained
+      here, so V0; no review has read it, so C0.
+    artifacts:
+      - packing/resources/web/wand125-validtilt9-lean-2026-10-16/README.md
+      - packing/resources/web/wand125-validtilt9-lean-2026-10-16/square-packing/problems/square-lower-bounds/certificates/k2m4_n77_L9/lean/README.md
+      - packing/resources/web/wand125-validtilt9-lean-2026-10-16/square-packing/problems/square-lower-bounds/certificates/k2m4_n77_L9/lean/Sqpack/V9/Main.lean
+      - packing/resources/web/wand125-validtilt9-lean-2026-10-16/square-packing/problems/square-lower-bounds/certificates/k2m4_n77_L9/lean/Sqpack/V9/Bridge.lean
+      - packing/resources/web/wand125-validtilt9-lean-2026-10-16/square-packing/problems/square-lower-bounds/certificates/k2m4_n77_L9/lean/library/library.sha256
+    next_rung: >-
+      C1 needs the stage 4 mathematical review of validTilt9, Bridge.lean, Tilt.lean, the
+      changed LemmaEKM.lean and RowMinN.lean, read from the retained packet. V3 and C3 need
+      a complete build here or by a third party retained here (think-rw3i): about 7,400
+      CPU-hours and 230 GB for Main.lean by the source's receipts, held above the owner's 40
+      CPU-hour item cap and this host. Rung 5 needs a human expert's review of the
+      formalization beside it.
+    unfinished_confirmations:
+      - what: >-
+          the stage 4 mathematical review of validTilt9, valid9 and bentz4, Bridge.lean,
+          Tilt.lean, RowMinN.lean and LemmaEKM.diff, read from the retained packet
+        rung: C1
+        link: think-jh0n
+      - what: >-
+          a complete build of the 1,275,911 generated modules from v9-certs.tar.zst, checked
+          against SOURCES.sha256, Main.lean and Axioms9.lean, with the axiom receipt, here or
+          by a third party whose build is retained here
+        rung: C3
+        link: think-rw3i
+        estimated_cost:
+          cpu_hours: 7390
+          cpu_hours_high: 7567
+          basis: >-
+            The source's receipts as the 16 October triage read them: leaf modules 2,694,
+            row groups 4,665 and roots 31 CPU-hours, plus 177 for certificate generation
+            that v9-certs.tar.zst makes skippable; 22 to 32 GB per module and 230 GB for
+            Main.lean
+          priced: '2026-10-26'
+    notes: >-
+      Registered on 26 October 2026 by the worker w-imports-1026 (think-jh0n), for
+      jlevy/squares#643, which the project opened on 16 October under the owner's rule for
+      S4 results that reach the record with no issue. A proof in a proof assistant of a
+      result the record holds is a formalization of its own (epistemics.md, Result Kinds).
+
+      Of the 59 files the source's library list names, the 16 October triage found 54
+      byte-identical to evand/square-packing's at the two commits it builds on; LemmaEKM.lean differs by exactly the
+      four hunks of LemmaEKM.diff (no statement change), and RowMinN.lean and V9/Bridge,
+      Data and Tilt are new; RowMinN.lean holds no sorry, axiom, native_decide,
+      implemented_by, extern or unsafe. Checked here against that list on 26 October,
+      the whole closure is retained: 53 of the 59 files are byte-identical to the
+      evand-valid7-lean-2026-10-11 packet's copies, ValidSplit9.lean to the 3
+      October evand packet's, and LemmaEKM.lean, RowMinN.lean and V9/Bridge, Data and Tilt
+      are the source's own, retained in this packet.
+
+      The 17 October read's lean/rectangle-k2m4/, a second Lean route to T-081's
+      lower half over the same premise, is held by its own import bead (think-d5m3).
 
 # Generated by python -m devtools.regularized_drawings from the regularized layer's
 # index (packing/atlas/known-best/regularized/index.json); do not edit by hand.

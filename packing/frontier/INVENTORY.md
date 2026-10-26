@@ -8,8 +8,8 @@ ours, which rest on someone else's argument, and how far each has been checked.
 
 ## The short version
 
-- **775** evidence records. **425** are formal; **416** of those were established here. **12** are samples, counted separately.
-- **332** rest on an argument made elsewhere, of which **8** have been read by nobody here.
+- **780** evidence records. **425** are formal; **416** of those were established here. **12** are samples, counted separately.
+- **337** rest on an argument made elsewhere, of which **8** have been read by nobody here.
 - **1** formal record proves a theorem only under a hypothesis nothing here has replayed, and is verified as that implication alone: `E-k2m4-evand-bentz4-lean-build` (ValidTilt9).
 - **43** claim to be first established here. **14** make no novelty statement at all - not assessed, which is not the same as not novel.
 
@@ -798,13 +798,18 @@ results, it is a statement about what this repository has itself examined.
 | `E-evand-n182-review-exact-feasibility` | 1 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | independent | full, 1 of 1: the certificate at n = 182: every wall and every pair, decided by two exact methods that share only the reader and the corner construction, with fourteen sharp controls decided by both | `V-evand-n182-review-check` |
 | `E-hyukdongkim-804-exact-forms-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
 | `E-n029-evand-minpoly-7213-report` | 0 | derived-structure | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-evand-n299-certificate-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-n012-evand-s12h-lean-report` | 0 | lower-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-k2m3-wand125-valid7-lean-v1-report` | 0 | exact-value | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-k2m3-wand125-valid7-lean-v2-report` | 0 | exact-value | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-k2m4-wand125-validtilt9-lean-report` | 0 | exact-value | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
 
 ## What the register rests on
 
-- **assurance**: numerically-checked 5, reported 334, verified 436
-- **method**: exact-algebraic 243, interval-certified 175, numerical-multiprecision 5, proof-assistant-checked 6, proof-audited 4, published-proof 8, reported 334
-- **novelty**: apparently-novel 43, common-knowledge 4, not assessed 14, previously-published 714
-- **relationship to the producer's code**: generator 5, independent-implementation 264, not-applicable 34, same-implementation 428, shared-components 38, unknown-historical 6
+- **assurance**: numerically-checked 5, reported 339, verified 436
+- **method**: exact-algebraic 243, interval-certified 175, numerical-multiprecision 5, proof-assistant-checked 6, proof-audited 4, published-proof 8, reported 339
+- **novelty**: apparently-novel 43, common-knowledge 4, not assessed 14, previously-published 719
+- **relationship to the producer's code**: generator 5, independent-implementation 264, not-applicable 34, same-implementation 433, shared-components 38, unknown-historical 6
 
 The `cases` column is how many frontier records cite each piece of evidence, and it is the reason to read this table rather than count records. Ranked below are the *formal* records only: a `reported` record cited across the frontier may be a shared catalogue and is labelled as such, which is the register working rather than risk. The risk is a verified claim resting on an argument nobody has examined.
 
