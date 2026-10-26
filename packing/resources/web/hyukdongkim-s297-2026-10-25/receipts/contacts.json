@@ -1,0 +1,102 @@
+{
+  "n": 297,
+  "pairs_read": 920,
+  "kinds": {
+    "edge-wall": 67,
+    "edge-edge": 490,
+    "corner-corner": 295,
+    "corner-edge": 61
+  },
+  "largest_contact_decade": -91,
+  "smallest_strict_decade": -11,
+  "axis_squares": 190,
+  "classes": [
+    {
+      "class": 0,
+      "members": 1,
+      "degrees": -44.955421250651426
+    },
+    {
+      "class": 1,
+      "members": 1,
+      "degrees": 44.98389561511704
+    },
+    {
+      "class": 2,
+      "members": 1,
+      "degrees": -44.9554212494385
+    },
+    {
+      "class": 3,
+      "members": 1,
+      "degrees": -44.955421703674006
+    },
+    {
+      "class": 4,
+      "members": 1,
+      "degrees": 44.983895339040316
+    },
+    {
+      "class": 5,
+      "members": 1,
+      "degrees": 44.983895339040316
+    },
+    {
+      "class": 6,
+      "members": 1,
+      "degrees": -44.983895339040316
+    },
+    {
+      "class": 7,
+      "members": 30,
+      "degrees": -44.74022180235067
+    },
+    {
+      "class": 8,
+      "members": 27,
+      "degrees": 44.74022180235067
+    },
+    {
+      "class": 9,
+      "members": 2,
+      "degrees": -44.955421703674006
+    },
+    {
+      "class": 10,
+      "members": 8,
+      "degrees": -44.74022180235067
+    },
+    {
+      "class": 11,
+      "members": 33,
+      "degrees": 44.74022180235067
+    }
+  ],
+  "equations": 1208,
+  "unknowns": 607,
+  "rank": 590,
+  "free": [
+    "x195",
+    "y231",
+    "x236",
+    "y236",
+    "x249",
+    "y249",
+    "x254",
+    "y254",
+    "x267",
+    "y272",
+    "y274",
+    "y285",
+    "x292",
+    "y292",
+    "t[2]",
+    "t[3]",
+    "t[4]"
+  ],
+  "singular_gap": [
+    0.015390131242356307,
+    3.5233285648010977e-16
+  ],
+  "cpu_seconds": 16.3
+}

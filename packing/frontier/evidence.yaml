@@ -52462,6 +52462,36 @@ evidence:
       optimality and rigidity are not claimed or established. The source's 1,500- and
       3,000-digit runs share one code base, one active-set extraction and one KKT
       formulation.
+  - id: E-hyukdongkim-804-s297-report
+    claim: upper-bound
+    scope: {n_values: [297]}
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Kim s297 2026-10-25]'
+    certificate: packing/resources/web/hyukdongkim-s297-2026-10-25/facts/s297-polynomial.json
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-25'
+    limitations: >-
+      This atom records the source author's report, in issue 804's comment of 12:23:57Z on 25
+      October 2026, that the stationary side of T-174's packing at 297 is the only real root
+      of a degree-21 integer polynomial irreducible over Q, which the comment prints, and that
+      an exact configuration at that side, attached as s297-exact-configuration.zip (SHA-256
+      e08b5d0a64c5c68eed827ee7e323687929048a4cfea438bb77ef390bdd4147a7, the comment's digest)
+      under CC0 1.0, passed evand/square-packing's verify_exact.py at 659ee62 and a checker of
+      the author's. The attachment could not be downloaded from the importing session, so none
+      of it is retained or was run here, and its digest is the comment's, not measured. Decided
+      here from the printed polynomial: primitive and irreducible over Q (SymPy and
+      sqpack.field), one real root, the root the comment's 100-place print names, 3.359e-90
+      below T-174's rational certificate and 6.624e-63 below issue 639's degree-12 side
+      (campaign/issue-intake/upper-bounds-issue804-297-20261025/exact-sides.json). The
+      comment of 12:00:41Z reported the same side numerically with no relation found; the
+      comment of 12:23:57Z withdraws that as an LLL acceptance error. Local minimality, global
+      optimality and rigidity are not claimed.
   - id: E-n029-evand-minpoly-7213-report
     claim: derived-structure
     scope: {n_values: [29]}

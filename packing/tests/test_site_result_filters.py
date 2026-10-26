@@ -360,12 +360,26 @@ def test_the_added_filter_shows_what_reached_the_site(
     last_day = _arrived_since(overview, 1)
     assert 0 < len(last_day) < len(overview.results)
     arrived = [result for result in overview.results if result.id.lower() in last_day]
-    # The filter reads arrival: some row of the last day shows a date before it, and some
-    # was registered before it, waiting for its pull request to merge.
+    # The filter reads arrival: some row of the last day shows a date before it, and, in
+    # the narrowest Added-within window that has one, some row was registered before the
+    # window, waiting for its pull request to merge. A day whose arrivals were all
+    # registered within it has none (T-247 arrived so on 26 October 2026), so the window
+    # is searched rather than fixed at one day.
     assert any(overview_sections.first_day(result.dated[1]) < cutoff for result in arrived)
-    assert any(
-        overview_sections.registered_day(result).isoformat() < cutoff for result in arrived
+    waited = next(
+        (
+            days
+            for days in range(1, overview_sections.ADDED_DAYS + 1)
+            if any(
+                overview_sections.registered_day(result).isoformat()
+                < overview_sections.age_cutoff(reference, days)
+                for result in overview.results
+                if result.id.lower() in _arrived_since(overview, days)
+            )
+        ),
+        None,
     )
+    assert waited is not None
     added_age = '[data-filter="added"][data-bound="age"]'
     added_since = '[data-filter="added"][data-bound="since"]'
     added_on = 'select[data-filter="added"]'
@@ -378,6 +392,12 @@ def test_the_added_filter_shows_what_reached_the_site(
         found = state(page)
         assert sorted(found["shown"]) == last_day
         assert found["count"] == count(len(last_day), overview)
+
+        page.goto(pages[name].as_uri() + f"?added-age={waited}", wait_until="load")
+        assert page.locator(added_age).input_value() == str(waited)
+        found = state(page)
+        assert sorted(found["shown"]) == _arrived_since(overview, waited)
+        assert found["count"] == count(len(_arrived_since(overview, waited)), overview)
 
         page.goto(pages[name].as_uri(), wait_until="load")
         assert not page.locator(added_since).is_visible()
