@@ -1,0 +1,55 @@
+# What `python -m devtools.intake_ledger gather` reads: issue #819's one claim at 344 (think-p7cq),
+# Amund Kristiansen's certificate s344_amund.cert in the gist amundsk/18ada41ec384b6ff2c96f58b7ce7d1a6
+# at f916f69, the gist's only revision, committed at 2026-10-25T19:04:50Z, 24 seconds before the issue,
+# so the gist and the issue are one report of one author and the issue dates it. The starts are frozen
+# at main 5c50803d6 (#807's merge): the row of couzo-964ee2b-2026-10-23 at 344, with Göbel's
+# construction beside it. Nothing reached 344 between 964ee2b's push and the issue:
+# franciscouzo/square-packing's head is still 1c17153, whose certificates/best/n344.cert is 964ee2b's
+# byte for byte; evand/square-packing at d99925d, Mishapolk/square-packing-records at 7e82c64 and
+# TheSnakeFang/squarepack-certs at db1ed62 are unchanged since their last reads; and no issue or pull
+# request from #798 to #821 states a bound at 344. The exact side is the certificate's header.
+format: intake-ledger-sources-v1
+read_at_main: 5c50803d654e17e8e3c71fad4c8e489a4c68bdc1
+read_on: '2026-10-26'
+rule: If they are reported in order, then each one should be recorded as a result, as long as each one is stronger
+  than the last. If a stronger result is reported first, then the other one should not be recorded since it is weaker
+  after that, unless there is some key reason it should be recorded.
+lanes: []
+reports:
+- report: '#819'
+  issue: 819
+  holders: Amund Kristiansen
+  bead: think-p7cq
+  claims:
+  - n: 344
+    printed: '18.992567544845'
+    rounding: up
+    exact: 9496283772422138783772412642309/500000000000000000000000000000
+    exact_from: s344_amund.cert at f916f69 (its header), retained in the amundsk-issue819-2026-10-25 packet
+      (acquisition/claims.json)
+    first_committed: '2026-10-25T19:04:50Z'
+    measured:
+      against: franciscouzo/square-packing@964ee2b certificates/best/n344.cert
+      finding: the optimal assignment, best under symmetry 5 of the box's eight, moves 82 squares beyond 0.1
+        (largest 0.992568) and 137 beyond 1e-2, against the issue's 67 and 122; nearest centres do not pair them one
+        to one under any symmetry; 114 tilted squares against 125, the issue's figures; no tilt angle shared within
+        1e-4 degrees
+      source: packing/resources/web/amundsk-issue819-2026-10-25/measure/identity-n344.json
+    new_packing:
+      source: '#819''s lineage section: ''a new packing of a different lineage from Couzo''s 344'', the register''s 307
+        record design stretched one K-step'
+      continues: 'the register''s s(307) packing, Nate Chaoweeraprasit''s design (itsnaka) with PingYou Ltd''s
+        certificate (PR #574), stretched by one upright column and row and one band square in each band row and
+        column, as the issue states'
+  note: >-
+    The issue names the gist at f916f69, committed at 2026-10-25T19:04:50Z, 24 seconds before the issue
+    (19:05:14Z); the gist's only revision and its head when read on 26 October.
+exceptions: []
+other_items: []
+rulings:
+- ruling: restatement
+  decided: '2026-10-23'
+  bead: think-fwa9
+- ruling: classical-constructions
+  decided: '2026-10-23'
+  bead: think-8krd

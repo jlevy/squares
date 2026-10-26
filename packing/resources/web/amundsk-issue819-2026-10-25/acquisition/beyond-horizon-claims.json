@@ -1,0 +1,10 @@
+{
+  "format": "upper-bound-beyond-horizon-claims-v1",
+  "issue": "https://github.com/jlevy/squares/issues/819",
+  "source": "https://gist.github.com/amundsk/18ada41ec384b6ff2c96f58b7ce7d1a6",
+  "revision": "f916f69f0ae570935991440712a08ad930469da3",
+  "horizon": 324,
+  "results": [
+    {"n": 344, "offered_side": "18.992567544845", "exact_side": "9496283772422138783772412642309/500000000000000000000000000000", "ceiling": "18.9925675448442776"}
+  ]
+}

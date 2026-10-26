@@ -28769,6 +28769,110 @@ occurrences:
   contributor_id: joshua-levy
 - origin:
     path: packing/resources/bibliography.yaml
+    record_key: '[Kristiansen issue 819 2026-10-25]'
+    field: /authors/0
+  expected_text: Kristiansen
+  start: 0
+  end: 11
+  label: Kristiansen
+  role: source-author
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  note: Reviewed packing/resources/bibliography.yaml [[Kristiansen issue 819 2026-10-25]]
+    /authors/0 span 0:11. Issue 819, filed by the GitHub account amundsk, and the gist's
+    README credit Amund Kristiansen; the certificate is his search's, made with Evan
+    Daniel's tools.
+  contributor_id: amund-kristiansen
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Kristiansen issue 819 2026-10-25]'
+    field: /credit
+  expected_text: Kristiansen after Chaoweeraprasit, PingYou Ltd, Daniel, Levy
+  start: 0
+  end: 11
+  label: Kristiansen
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  note: Reviewed packing/resources/bibliography.yaml [[Kristiansen issue 819 2026-10-25]]
+    /credit span 0:11. Issue 819 and the gist's README credit Amund Kristiansen (GitHub
+    @amundsk).
+  contributor_id: amund-kristiansen
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Kristiansen issue 819 2026-10-25]'
+    field: /credit
+  expected_text: Kristiansen after Chaoweeraprasit, PingYou Ltd, Daniel, Levy
+  start: 18
+  end: 33
+  label: Chaoweeraprasit
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: nate-chaoweeraprasit
+  note: Reviewed source credit matches the evidenced person and printed name; issue 819
+    says the packing is the register's 307 record design, Nate Chaoweeraprasit's (itsnaka),
+    stretched one K-step, and the 307 case record names him as its finder; the chain
+    through his design retains the link.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Kristiansen issue 819 2026-10-25]'
+    field: /credit
+  expected_text: Kristiansen after Chaoweeraprasit, PingYou Ltd, Daniel, Levy
+  start: 35
+  end: 46
+  label: PingYou Ltd
+  role: prerequisite
+  disposition: non-person
+  evidence: []
+  note: 'Corporate credit: issue 819 names the 307 record design as Nate Chaoweeraprasit
+    (itsnaka) / PingYou Ltd, PR #574, whose certificate of that packing the 307 case record
+    credits to PingYou Ltd as its improver; the prior reviewed corporate identity is
+    retained. No individual is inferred.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Kristiansen issue 819 2026-10-25]'
+    field: /credit
+  expected_text: Kristiansen after Chaoweeraprasit, PingYou Ltd, Daniel, Levy
+  start: 48
+  end: 54
+  label: Daniel
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - repository-license
+  - bibliography
+  note: Reviewed source credit matches the evidenced person and printed name; issue 819
+    names Evan Daniel's fq quench, dilate_cert.py and checkers at evand/square-packing
+    7982d7a as its tools, and method credit travels with the result.
+  contributor_id: evan-daniel
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Kristiansen issue 819 2026-10-25]'
+    field: /credit
+  expected_text: Kristiansen after Chaoweeraprasit, PingYou Ltd, Daniel, Levy
+  start: 56
+  end: 60
+  label: Levy
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - announcement-account
+  note: Reviewed packing/resources/bibliography.yaml [[Kristiansen issue 819 2026-10-25]]
+    /credit span 56:60. The specific first-party jlevy/squares method or source is the
+    Joshua Levy identity established by LICENSE and the retained ojoshe receipt; the
+    issue's 307 design is the register's record packing, and project credit does not
+    imply sole personal authorship.
+  contributor_id: joshua-levy
+- origin:
+    path: packing/resources/bibliography.yaml
     record_key: '[Daniel n182 2026-10-25]'
     field: /authors/0
   expected_text: Daniel
