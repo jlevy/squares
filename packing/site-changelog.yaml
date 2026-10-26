@@ -17,6 +17,7 @@ entries:
     topics: [optimality, verification]
     categories: [records]
     pull_requests: [812]
+    issues: [810]
     result_ids: [T-245]
     summary: |-
       The record now holds, as a report, a Lean 4 proof by
@@ -71,6 +72,7 @@ entries:
     topics: [upper-bound]
     categories: [records]
     pull_requests: [814]
+    issues: [806]
     result_ids: [T-243]
     summary: |-
       [Evan Daniel](packing/contributors/people/evan-daniel.md)’s packing at 182, cut from
@@ -114,6 +116,7 @@ entries:
     topics: [upper-bound]
     categories: [records]
     pull_requests: [794]
+    issues: [763]
     result_ids: [T-240]
     summary: |-
       [Francisco Couzo](packing/contributors/people/francisco-couzo.md)’s certificates of
@@ -168,6 +171,7 @@ entries:
     topics: [upper-bound, optimality, formalization]
     categories: [records]
     pull_requests: [750]
+    issues: [784, 785]
     result_ids: [T-236, T-237]
     summary: |-
       Daniel reports Lean 4 proofs of Fang’s Theorems 1 and 2 (T-163) with no hypothesis:
@@ -231,6 +235,7 @@ entries:
     topics: [lower-bound, verification]
     categories: [records]
     pull_requests: [745]
+    issues: [446, 534]
     result_ids: [T-232, T-233]
     summary: |-
       [Hiroaki Hosono](packing/contributors/people/hiroaki-hosono.md) (wand125) shows that 31 unit squares do not fit in a square of side $2391/400 = 5.9775$, by a measure certificate checked at every direction of a fine angle net. T-232 is confirmed at V3/C3 and is now the verified lower bound at 31, $1/40$ above the standing $2381/400$. Four more of his bounds, reported in issue 446, are registered as T-233 at V0/C1.
@@ -312,6 +317,7 @@ entries:
     topics: [upper-bound]
     categories: [records]
     pull_requests: [731]
+    issues: [728]
     result_ids: [T-230]
     summary: |-
       [Evan Daniel](packing/contributors/people/evan-daniel.md) packs 303 unit squares in
@@ -360,6 +366,7 @@ entries:
     topics: [upper-bound]
     categories: [records]
     pull_requests: [725]
+    issues: [670, 672, 675, 719]
     result_ids: [T-226, T-227, T-228, T-229]
     summary: |-
       [Francisco Couzo](packing/contributors/people/francisco-couzo.md)’s exact packings
@@ -457,6 +464,7 @@ entries:
     topics: [upper-bound]
     categories: [records]
     pull_requests: [708]
+    issues: [703]
     result_ids: [T-224]
     summary: |-
       [Evan Daniel](packing/contributors/people/evan-daniel.md) packs 270 unit squares in
@@ -499,6 +507,7 @@ entries:
     topics: [upper-bound]
     categories: [records]
     pull_requests: [699]
+    issues: [689, 694]
     result_ids: [T-221, T-222]
     summary: |-
       [Evan Daniel](packing/contributors/people/evan-daniel.md)’s exact packings of 308
@@ -549,6 +558,7 @@ entries:
     categories: [records]
     grouping: related
     pull_requests: [676, 692]
+    issues: [659, 664, 669, 674]
     result_ids: [T-197, T-198, T-199, T-218, T-219]
     summary: |-
       [Evan Daniel](packing/contributors/people/evan-daniel.md)’s exact packings of 155,
@@ -611,6 +621,7 @@ entries:
     categories: [records]
     grouping: related
     pull_requests: [671, 688]
+    issues: [446]
     result_ids: [T-200, T-201, T-202, T-203, T-204, T-205, T-206, T-207, T-208, T-209, T-210, T-211, T-212, T-213, T-214, T-215, T-216, T-217]
     summary: |-
       [Hiroaki Hosono](packing/contributors/people/hiroaki-hosono.md) (wand125) reports
@@ -658,6 +669,7 @@ entries:
     topics: [formalization, verification, project]
     categories: [records, pipeline]
     pull_requests: [645]
+    issues: [565]
     result_ids: [T-154]
     summary: |-
       The record now keeps two questions apart: whether a result’s own source verifies it,
@@ -697,6 +709,7 @@ entries:
     topics: [upper-bound, verification]
     categories: [records, regularization]
     pull_requests: [657]
+    issues: [506, 593, 606, 607]
     result_ids: [T-185, T-186, T-187, T-188, T-189, T-190]
     summary: |-
       Six upper-bound entries registered on 15 October, T-185 to T-190, are confirmed at
@@ -845,6 +858,7 @@ entries:
     topics: [upper-bound]
     categories: [records]
     pull_requests: [706]
+    issues: [678]
     result_ids: [T-223]
     summary: |-
       Couzo’s exact rational packings of 204 and 260 unit squares, the two in the case
@@ -892,6 +906,7 @@ entries:
     topics: [upper-bound]
     categories: [records]
     pull_requests: [704]
+    issues: [668]
     result_ids: [T-196]
     summary: |-
       De Winter’s exact rational packings of 227 and 260 unit squares, reported on 17
@@ -935,6 +950,7 @@ entries:
     topics: [upper-bound]
     categories: [records]
     pull_requests: [687]
+    issues: [680]
     result_ids: [T-220]
     summary: |-
       [Evan Daniel](packing/contributors/people/evan-daniel.md) packs 183 unit squares in a square of side
@@ -973,6 +989,7 @@ entries:
     topics: [optimality, verification]
     categories: [records]
     pull_requests: [651]
+    issues: [640]
     result_ids: [T-194]
     summary: |-
       [Oscar Fitzharding](packing/contributors/people/oscar-fitzharding.md) reports a Lean 4 proof that [Robert Wainwright](packing/contributors/people/robert-wainwright.md)’s 1979 packing of 19 unit
@@ -1019,6 +1036,7 @@ entries:
     topics: [optimality]
     categories: [records]
     pull_requests: [627]
+    issues: [610]
     stack_id: 632
     result_ids: [T-191]
     summary: |-
@@ -1086,6 +1104,23 @@ entries:
     topics: [upper-bound, verification]
     pull_requests:
       - 614
+    issues:
+      - 503
+      - 504
+      - 561
+      - 562
+      - 564
+      - 566
+      - 567
+      - 568
+      - 569
+      - 570
+      - 573
+      - 574
+      - 575
+      - 583
+      - 586
+      - 593
     categories:
       - records
     result_ids:
@@ -1189,6 +1224,27 @@ entries:
       - verification
     pull_requests:
       - 602
+    issues:
+      - 446
+      - 503
+      - 504
+      - 561
+      - 562
+      - 564
+      - 566
+      - 567
+      - 568
+      - 569
+      - 570
+      - 573
+      - 574
+      - 575
+      - 583
+      - 586
+      - 593
+      - 594
+      - 600
+      - 603
     categories:
       - records
     result_ids:
@@ -1338,6 +1394,11 @@ entries:
       rationale: "New certified bounds and packing admissions inherit the highest S3 rating among the announced results."
     pull_requests:
       - 598
+    issues:
+      - 485
+      - 528
+      - 529
+      - 552
     categories:
       - records
       - regularization
@@ -1458,6 +1519,9 @@ entries:
       rationale: "A substantive audit examines recent registrations, Lean trust boundaries and draft significance scores, including independent checks of retained certificates."
     pull_requests:
       - 563
+    issues:
+      - 238
+      - 256
     categories:
       - records
       - pipeline
@@ -1507,6 +1571,9 @@ entries:
     pull_requests:
       - 592
       - 595
+    issues:
+      - 557
+      - 565
     grouping: related
     categories:
       - records
@@ -1628,6 +1695,7 @@ entries:
       score: 5
       rationale: "This announces the S5 formalization report T-154; significance does not imply independent verification of the complete claim."
     pull_requests: [588]
+    issues: [565]
     categories: [records]
     result_ids: [T-154]
     details: |-
@@ -1725,6 +1793,7 @@ entries:
       score: 5
       rationale: "This announces the S5 candidate optimality result T-153 while retaining its reported and unverified status."
     pull_requests: [560]
+    issues: [557]
     categories: [records]
     result_ids: [T-153]
     details: |-
@@ -1773,6 +1842,9 @@ entries:
         or public capability changes.
     pull_requests:
       - 558
+    issues:
+      - 503
+      - 504
     categories:
       - records
     result_ids:
@@ -1803,6 +1875,9 @@ entries:
         S3 results.
     pull_requests:
       - 553
+    issues:
+      - 500
+      - 506
     stack_id: 517
     categories:
       - records
@@ -1848,6 +1923,7 @@ entries:
       score: 3
       rationale: "This grouped announcement inherits the highest S3 significance of the newly admitted packing results."
     pull_requests: [512, 516, 518]
+    issues: [501, 503, 504, 505]
     stack_id: 517
     categories: [records, pipeline]
     result_ids: [T-147, T-148, T-149, T-150]
@@ -1946,6 +2022,10 @@ entries:
         capability.
     pull_requests:
       - 508
+    issues:
+      - 256
+      - 296
+      - 316
     categories:
       - records
       - documentation
@@ -2016,6 +2096,7 @@ entries:
       score: 3
       rationale: "This grouped intake announcement inherits the highest S3 significance among its newly replayed and admitted results."
     pull_requests: [487]
+    issues: [375, 446, 451, 465, 470, 476, 481, 483, 484, 485, 488, 489]
     categories: [records, pipeline]
     result_ids: [T-128, T-129, T-130, T-131, T-132, T-133, T-134, T-135, T-136, T-137, T-138, T-139, T-140, T-141, T-142, T-143, T-144, T-145, T-146]
     topics: [lower-bound, upper-bound, verification]
@@ -2230,6 +2311,7 @@ entries:
       score: 3
       rationale: "The newly admitted exact certificates T-131 and T-128 each have S3 significance."
     pull_requests: [478]
+    issues: [451, 465]
     categories: [records, pipeline]
     result_ids: [T-131, T-128]
     topics: [upper-bound, verification]
@@ -2275,6 +2357,7 @@ entries:
     topics: [upper-bound]
     categories: [records]
     pull_requests: [460]
+    issues: [451, 465]
     result_ids: [T-128]
     summary: |-
       [Francisco Couzo](packing/contributors/people/francisco-couzo.md) reports exact
@@ -2320,6 +2403,7 @@ entries:
     topics: [upper-bound]
     categories: [records]
     pull_requests: [469]
+    issues: [451]
     result_ids: [T-130]
     summary: |-
       [Francisco Couzo](packing/contributors/people/francisco-couzo.md) reports exact
@@ -2355,6 +2439,7 @@ entries:
     pull_requests:
       - 439
       - 440
+    issues: [414]
     summary: |-
       [Ryu Sungjoon](packing/contributors/people/ryu-sungjoon.md) reports quarter-power and cube-root lower bounds for the deficiency of packings of
       closed, pairwise-disjoint unit squares in an integer-sided square. The project retains the
@@ -2386,6 +2471,10 @@ entries:
     title: Daniel’s Smaller Packings at 266, 270 and 272 Squares
     pull_requests:
       - 441
+    issues:
+      - 399
+      - 419
+      - 420
     summary: |-
       [Evan Daniel](packing/contributors/people/evan-daniel.md)’s three rational certificates give smaller verified packings at 266, 270 and
       272 squares. Exact replays and a separate mathematical review support the upper bounds
@@ -2422,6 +2511,8 @@ entries:
     title: 'Xu’s Verified Packings Include an Exact 51-Square Construction'
     pull_requests:
       - 442
+    issues:
+      - 432
     summary: |-
       [Ryan Xu](packing/contributors/people/ryan-xu.md)’s 25 rational packing certificates and a separate 51-square construction pass
       exact checks and independent review. Seventeen rational certificates and the radical
@@ -2455,6 +2546,8 @@ entries:
     pull_requests:
       - 448
       - 459
+    issues:
+      - 438
     summary: |-
       Gupta refines Chaoweeraprasit’s SQUISH packings with [Evan Daniel](packing/contributors/people/evan-daniel.md)’s
       optimizer, supplying 14 smaller selected upper bounds. All 17 submitted rational
@@ -2486,6 +2579,7 @@ entries:
     title: Hosono Reports Seven Stronger Lower Bounds
     pull_requests:
       - 450
+    issues: [446]
     summary: |-
       [Hiroaki Hosono](packing/contributors/people/hiroaki-hosono.md) (wand125) reports stronger lower bounds at 19, 20, 26, 27, 28, 29 and 31
       squares, using measure certificates on finer direction nets. The sources and exact
@@ -2586,6 +2680,7 @@ entries:
     title: 'Hosono’s Twelve Certificates Narrow the 17-Square Search'
     pull_requests:
       - 475
+    issues: [472]
     summary: |-
       Twelve sub-pattern certificates from [Hiroaki Hosono](packing/contributors/people/hiroaki-hosono.md) (wand125) pass complete replays and
       enter the 17-square research census. They reduce remaining symmetry classes from 4,683
@@ -2614,6 +2709,8 @@ entries:
     title: A Second Review of Overbeck’s 17-Square Candidate Proof
     pull_requests:
       - 577
+    issues:
+      - 557
     summary: |-
       A second project AI review independently re-derived the normalized 52-row gate in
       [Marc Leonard Overbeck](packing/contributors/people/marc-leonard-overbeck.md)’s candidate proof for 17 squares. It found no blocking defect in the parts
