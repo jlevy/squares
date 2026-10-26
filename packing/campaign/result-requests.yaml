@@ -927,7 +927,7 @@ issues:
       - what: Review the full preprint chain, statement conventions and numerical constants.
         state: queued
         source: body
-        bead: think-6ptr
+        bead: think-yf8j
         note: >-
           The full geometric chains and v1.2 dependency have a retained scoped review.
           The maintained checker independently decides 108 numerical predicates across
@@ -935,8 +935,17 @@ issues:
           four asymptotic floors. The consequences remain conditional on the reviewed
           geometric premises and the independently tracked per-box obligation.
           The intake itself merged in PRs #439 and #441 on 9 October; the review's
-          own verdict stays queued under think-6ptr.
-    beads: [think-6ptr]
+          own verdict was left queued under think-6ptr.
+          On 26 October 2026 (w-imports-1026) the ask moved to think-yf8j, from think-6ptr, an
+          in_progress lane bead whose delegate is gone. What is retained: both v1.0 TeX sources,
+          their programs and licences in the two 7 October packets, the 8 October review of the
+          chains (accepted at source-review scope, conditional) and of the v1.2 dependency, and
+          the interval-arithmetic constants check. What remains is a strongest-tier reading
+          under today's stage 4 rule, written before it reads the 8 October review, with Q's
+          supplementary optimization and sensitivity tables executed: about 6 to 10 agent-hours
+          and under 0.1 CPU-hours, more than this pass's reading allowed; the per-box labelling
+          stays think-k3tk's.
+    beads: [think-6ptr, think-yf8j]
     answer_bead: think-u1kq
     replies:
     - url: https://github.com/jlevy/squares/issues/414#issuecomment-6116242209
@@ -7879,11 +7888,29 @@ issues:
     asks:
     - what: An evidence entry for the Lean proof and a corrected T-049 next rung, then a kernel build
         with an axiom receipt and a read of the statement binding.
+      state: done
+      note: >-
+        The evidence entry, the read of the statement binding and the corrected next rung landed on
+        26 October 2026 (w-imports-1026, think-oyd4): a proof in a proof assistant of a result the
+        record holds is a formalization of its own (epistemics.md, Result Kinds), as #536's was, so
+        the evidence, E-n012-evand-s12h-lean-report, belongs to T-249, a reported formalization of
+        T-049 at V0/C0, and T-049's next_rung names it. The closure of S12HLower through the BoxTree
+        verifier is nine modules, all retained in the evand-exact-and-local-reports-2026-10-07
+        packet at f58a017 with no kernel-escape token (receipts/s12h-lean-closure.json), and
+        minSide is S32.lean's, the definition of the record's s13_eq_4 build. The kernel build is
+        the next ask.
+    - what: The kernel build with an axiom receipt, or the owner's decline of it.
       state: queued
       source: body
-      bead: think-oyd4
+      bead: think-yzl3
+      note: >-
+        Priced on 26 October 2026 at about 8 CPU-hours by the source's LADDER.md (39 minutes of
+        generation and 7.3 CPU-hours of build on 2 cores) at up to 30.6 GB resident: under the
+        owner's 40 CPU-hour item cap but above this host's 15 GB, and #535's close condition asks
+        the build's receipt or the owner's decline. Gated on the owner's decision (think-yzl3).
     beads:
     - think-oyd4
+    - think-yzl3
     answer_bead: think-oyd4
     replies:
     - url: https://github.com/jlevy/squares/issues/535#issuecomment-6200836834
@@ -7977,14 +8004,32 @@ issues:
     asks:
     - what: Retain the merged lean/ tree and its release, audit the root names, add an evidence entry for
         T-064, and an owner decision on a sample or a full rebuild.
+      state: done
+      note: >-
+        Done on 26 October 2026 but for the decision, the next ask (w-imports-1026, think-0ayk). The
+        evand-valid7-lean-2026-10-11 packet retains the Valid7 closure at 060c1a1 (55 modules and
+        the three build pins, no kernel-escape token), VALID7.md and the generators, and pins the
+        release asset v7cert.tar.zst by SHA-256; the wand125-valid7-lean-v2-2026-10-17 packet pins
+        version 2's twelve files at 649a920 by digest, its folder stating no licence.
+        devtools.audit_valid7_roots found the names agree: version 1's 9,800 pickles and version
+        2's 9,800 root modules are R00000 to R09799, one per root of the run's leaves file, which
+        fills the 35 x 35 x 8 grid gen_main.py asserts (receipts/root-names.json). A proof in a
+        proof assistant of a result the record holds is a formalization of its own, so the
+        evidence, E-k2m3-wand125-valid7-lean-v1-report and -v2-report, belongs to T-250, a
+        reported formalization of T-064 at V0/C0, and T-064's next_rung names it. Version 2's
+        README's step table sums to 797.7 CPU-hours, which resolves the 18 October note.
+    - what: The owner's decision on a sample rebuild, the full rebuild, or neither.
       state: queued
       source: body
-      bead: think-0ayk
-      note: ' Version 2 supersedes the old price as the latest source option; retain and audit both releases,
-        update the validation estimate from its receipt, and record the owner/machine disposition before
-        a full build.'
+      bead: think-qu37
+      note: >-
+        Priced on 26 October 2026: the full version 2 build at about 798 CPU-hours with 37 GB per
+        leaf module and 51 GB for Main.lean (about 20 times the 40 CPU-hour item cap), version 1's
+        at about 6,650; a sample of about 100 roots at about 8 CPU-hours, a component check that
+        moves no rung. Gated on the owner's decision (think-qu37).
     beads:
     - think-0ayk
+    - think-qu37
     answer_bead: think-0ayk
     replies:
     - url: https://github.com/jlevy/squares/issues/537#issuecomment-6200837751
@@ -8009,7 +8054,8 @@ issues:
     title: Workbench trajectory cost check flakes over 400 ms under CI load
     author: jlevy
     opened: '2026-10-12'
-    state: open
+    state: closed
+    closed: '2026-10-26'
     kind: other
     triage: done
     summary: >-
@@ -8031,12 +8077,14 @@ issues:
         118266427235: the dearest trajectory 223 ms at its fastest of three builds)
         (think-1bm2).
     - what: Attribute the Animate view play message to load or to a regression.
-      state: queued
+      state: done
       source: body
       note: >-
         Neither #685 nor earlier work attributed `play did not carry on from step to step: the
         stage showed n = [5, 6]`, and no third occurrence is recorded. Narrowed onto its own
         bead.
+        Closed by #827 (abdbaf95a, merged at 909ddc76e): the play check waits on the page's clock
+        and names its cause (think-8vsk).
       bead: think-8vsk
     beads:
     - think-1bm2
@@ -8053,6 +8101,11 @@ issues:
       by: jlevy
       kind: follow-up
       reported: []
+    - url: https://github.com/jlevy/squares/issues/538#issuecomment-6413623627
+      date: '2026-10-26'
+      by: jlevy
+      kind: final
+      reported: []
     close_when: >-
       The play message is attributed to load or to a regression; the timing check landed
       in #685.
@@ -8060,7 +8113,8 @@ issues:
     title: 'check_scroll_restoration: wait for the reload''s own navigation'
     author: jlevy
     opened: '2026-10-12'
-    state: open
+    state: closed
+    closed: '2026-10-26'
     kind: other
     triage: done
     summary: >-
@@ -8071,8 +8125,11 @@ issues:
     results: []
     asks:
     - what: Wait for the reload's own navigation, as the test of pull request 520 does.
-      state: queued
+      state: done
       source: body
+      note: >-
+        Landed in #827 (4454e938a, merged at 909ddc76e): check_scroll_restoration waits for the
+        reload's own load (think-tfil).
       bead: think-tfil
     beads:
     - think-tfil
@@ -8082,6 +8139,11 @@ issues:
       date: '2026-10-15'
       by: jlevy
       kind: follow-up
+      reported: []
+    - url: https://github.com/jlevy/squares/issues/539#issuecomment-6413623970
+      date: '2026-10-26'
+      by: jlevy
+      kind: final
       reported: []
     close_when: The check waits for the reload's own navigation and still passes.
   - number: 540
@@ -8397,7 +8459,8 @@ issues:
     title: "test_site_homepage: the toggle_seen fixture's theme menu choice stays hidden under CI load"
     author: jlevy
     opened: '2026-10-12'
-    state: open
+    state: closed
+    closed: '2026-10-26'
     kind: other
     triage: done
     summary: >-
@@ -8411,8 +8474,11 @@ issues:
     asks:
     - what: The fixture waits on the theme menu's own state, without a longer timeout or a skip,
         and the module passes repeatedly under load.
-      state: queued
+      state: done
       source: body
+      note: >-
+        Landed in #827 (e076a2c95, merged at 909ddc76e): the homepage fixture waits on the theme
+        menu's own state (think-mvsm).
       bead: think-mvsm
     beads:
     - think-mvsm
@@ -8422,6 +8488,11 @@ issues:
       date: '2026-10-15'
       by: jlevy
       kind: follow-up
+      reported: []
+    - url: https://github.com/jlevy/squares/issues/550#issuecomment-6413624376
+      date: '2026-10-26'
+      by: jlevy
+      kind: final
       reported: []
     close_when: The fixture waits on the menu's own state and the module passes repeatedly under
       load, as the issue's done-when says.
@@ -8434,7 +8505,8 @@ issues:
     title: 'Workbench colourer: one colour per angle class across the atlas, not fixed five-degree bands'
     author: jlevy
     opened: '2026-10-12'
-    state: open
+    state: closed
+    closed: '2026-10-26'
     kind: other
     triage: done
     summary: >-
@@ -8449,8 +8521,11 @@ issues:
     - what: The colourer derives slots from shared atlas-wide class centres, the animate-view
         contract's core check holds exact slots again, and the workbench browser behaviour step
         passes.
-      state: queued
+      state: done
       source: body
+      note: >-
+        Landed in #827 (519d879cb, merged at 909ddc76e): one colour per angle class across the atlas
+        (think-9xhw).
       bead: think-9xhw
     beads:
     - think-9xhw
@@ -8460,6 +8535,11 @@ issues:
       date: '2026-10-15'
       by: jlevy
       kind: follow-up
+      reported: []
+    - url: https://github.com/jlevy/squares/issues/554#issuecomment-6413624888
+      date: '2026-10-26'
+      by: jlevy
+      kind: final
       reported: []
     close_when: The colourer derives slots from shared centres and the animate-view contract's core
       check holds exact slots again, as the issue's done-when says.
@@ -10424,27 +10504,31 @@ issues:
     state: open
     kind: result-report
     triage: done
-    summary: The project opened this issue to track Hiroaki Hosono's (wand125's) Lean kernel proof of
+    summary: >-
+      The project opened this issue to track Hiroaki Hosono's (wand125's) Lean kernel proof of
       Evan Daniel's finite premise ValidTilt9, and with Daniel's reduction of s(k^2 - 4) = k for every k
       >= 8, which reached the project through his watched repository wand125/square-packing (2c75edc and
       e99f5e3, at the head 319a779) rather than an issue, as the owner asks for results at S4 and above.
       Triaged read-only on 16 October in think-jh0n. Every statement file the record retains from Daniel's
-      3 October release is byte-identical to the proof's, so it formalizes T-081 at k >= 8; nothing is
-      retained or registered yet. The full kernel replay, about 7,400 CPU-hours with 230 GB for the
-      assembly by the source's receipts, is above the compute cap.
+      3 October release is byte-identical to the proof's, so it formalizes T-081 at k >= 8. Imported on 26
+      October 2026 (w-imports-1026): the wand125-validtilt9-lean-2026-10-16 packet retains the lean/
+      directory at 319a779 with the release's three assets pinned by digest, every file of the proof's
+      closure is retained here, and T-251 registers it as a reported formalization of T-081 at V0/C0. The
+      full kernel replay, about 7,400 CPU-hours with 230 GB for the assembly by the source's receipts, is
+      held above the compute cap (think-rw3i).
     read_through: '2026-10-16T05:29:57Z'
     results:
     - key: validtilt9-lean
       claim: 'A Lean 4 kernel proof of Bentz4.ValidTilt9 and Bentz4.Valid9, and of bentz4 : ∀ k ≥ 8,
         minSide (k^2 - 4) = k, whose axioms are propext, Classical.choice and Quot.sound only.'
       source: body
-      not_registered: Triaged on 16 October and not yet imported. Retaining the lean/ directory at 319a779
-        with the validtilt9-lean-v1 assets by digest (stage 2) and a formalization entry naming T-081
-        (stage 3) are think-jh0n's.
-      queued: true
-      bead: think-jh0n
+      register:
+      - T-251
+      evidence:
+      - E-k2m4-wand125-validtilt9-lean-report
     beads:
     - think-jh0n
+    - think-rw3i
     answer_bead: think-jh0n
     replies:
     - url: https://github.com/jlevy/squares/issues/643#issuecomment-6333083495
@@ -10467,6 +10551,16 @@ issues:
       think-jh0n; and that the full kernel replay is above the compute cap. It does not report
       the comparison of the 40 machinery files that think-jh0n's note of 16 October records,
       which is not on main. The issue stays open.
+
+      Imported on 26 October 2026 by w-imports-1026: the packet, T-251 with
+      E-k2m4-wand125-validtilt9-lean-report, and a check of library.sha256 here (53 of its 59
+      files byte-identical to the evand-valid7-lean-2026-10-11 packet's copies at 060c1a1,
+      ValidSplit9.lean to the 3 October evand packet's, and LemmaEKM.lean, RowMinN.lean and the
+      three V9 modules the source's own, retained in this packet), which puts the 16 October
+      machinery comparison on main. The stage 4 review stays with think-jh0n and the held replay
+      with think-rw3i; the 746b0c0 rectangle theorem moved to its own import bead, think-d5m3. The
+      issue can close on the reply once T-251's review and replay are owned, as close_when says;
+      check_requests holds it open until T-251 is settled.
   - number: 606
     title: 's(146) ≤ 12.583782190152: registration request'
     author: evand
@@ -25066,3 +25160,63 @@ issues:
       verify_cert.py and verify_cert2.py at 7982d7a (least wall clearance 6.054e-13, least pair
       separation 1.215e-12, 794 close pairs); they were not run here, and the maintained
       routes find the same two clearances.
+  - number: 824
+    title: 's(299) ≤ 17.803695435333: registration request'
+    author: evand
+    opened: '2026-10-26'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Evan Daniel reports s(299) <= 17.803695435333, the exact rational side
+      8901847717666168847717657266821/(5*10^29) = 17.8036954353323376... of
+      search/packer/candidates/s299-1025.cert at evand/square-packing 1be69ca, rounded up at 12
+      places: 1.92e-2 below the house at 299, the Kingbird catalogue's 33/2 + sqrt(7)/2 that
+      T-101's exact ceiling verifies, and below every report there. The certificate is a
+      dilation, by 1e-12, of a binary64 packing; the source's exact solver did not reach a KKT
+      point, and the issue says local optimality is not established. The source calls it a new
+      packing built by its own implementation of Chris Deotte's multi-gadget fault-line DP and
+      asks that Deotte be credited for the method and for the start, his public Kaggle s(334)
+      packing. The commit 1be69ca was made at 2026-10-26T03:30:38Z, 21 minutes before the issue.
+      The issue quotes two Kaggle per-puzzle side-only entries below this side, team Amin's
+      17.802718854399 (23 October) and team Chris Deotte's 17.798169713703 (25 October), neither
+      with a packing, so neither is a report. Triaged and imported on 26 October 2026
+      (think-3xn9): the evand-n299-2026-10-26 packet retains the six files of the s299-1025 set
+      at 6067db5, the head, under the source's MIT licence; the digest the issue prints is the
+      certificate's, the side is its header and rounds up to the issue's print, both maintained
+      exact routes accept it and refuse its gross and sharp controls, and the ledger of 26
+      October for the issue (upper-bounds-issue824-20261026) records it, a new packing.
+      Registered as T-248 at V0/C0; measured pose by pose, no symmetry pairs it one to one with
+      the house's packing (124 squares beyond a tenth under the best assignment), another
+      arrangement. The stage 4 review and the adoption at 299 with both regularizations are
+      think-8hjz's; the house rule puts the adoption, the general regularization and the flip in
+      one pull request, after the review. Claude assistance disclosed.
+    read_through: '2026-10-26T03:52:18Z'
+    results:
+    - key: n299
+      claim: >-
+        s(299) <= 8901847717666168847717657266821/(5*10^29) = 17.8036954353323376..., the side
+        of s299-1025.cert (SHA-256 1ad65a49...bb71) at 1be69ca, a dilation of a binary64
+        packing the source calls new, built by a fault-line composition after Chris Deotte's
+        method, not a refinement of the catalogue's packing at 299.
+      source: body
+      bead: think-3xn9
+      register:
+      - T-248
+      evidence:
+      - E-evand-n299-certificate-report
+    beads:
+    - think-3xn9
+    - think-8hjz
+    answer_bead: think-3xn9
+    replies: []
+    close_when: >-
+      The result is registered, reviewed and adopted at 299 with its drawing regularized and
+      flipped, and the reply on main says so; nothing the author asked for is queued.
+    notes: >-
+      Read on 26 October 2026 from main 9ebde24df: no issue or pull request through #823 states
+      a bound at 299, and franciscouzo/square-packing's head is 1c17153, whose verified bound at
+      299 is the register's, as the issue says. GitHub's activity log for evand/square-packing
+      was not readable from the importing session, so the push of 1be69ca is not dated; the
+      commit precedes the issue by 21 minutes and nothing reached 299 between them. The issue
+      did not carry the intake label when read; the coordinator labels it.
