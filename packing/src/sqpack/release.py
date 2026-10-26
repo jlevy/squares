@@ -9406,9 +9406,9 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "site's pages and result pages call. Measured at link revision f2341b95: the "
             "four papers rendered into empty site directories twice from this tree and "
             "once with main's three changed modules swapped in, 69 files each, all "
-            "byte-identical across the three, and again after the opening-day rule was added "
-            "to the three modules, byte-identical again. Every paper keeps its version: v0.4.30, "
-            "v0.1.11, v0.1.4 and v0.2.7."
+            "byte-identical across the three, and again after the opening-day rule was "
+            "added to the three modules, byte-identical again. Every paper keeps its "
+            "version: v0.4.30, v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
 )
