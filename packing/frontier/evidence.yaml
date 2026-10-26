@@ -9336,6 +9336,78 @@ evidence:
     limitations: The source calls this an outline and omits routine analytic calculations; not independently audited here.
     source_reviewed: '2026-08-25'
 
+  - id: E-n005-friedman-theorem2-audit
+    claim: lower-bound
+    scope: {n_values: [5]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    novelty: previously-published
+    relationship_to_generator: independent-implementation
+    origin: audited-here
+    source_key: '[Friedman DS7]'
+    certificate: packing/cases/friedman5/certificate.json
+    replay: >-
+      From packing/: uv run --frozen python -m cases.friedman5.verify_cover --check
+      cases/friedman5/certificate.json, which rebuilds the record and exits 0 only when it
+      equals the retained one byte for byte (3.1 s wall on 25 October 2026, most of it
+      importing sympy for the field's contract)
+    replay_status: passed
+    verifiers: [V-sqpack-cover]
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the premises of Theorem 2's proof: the ten cells of its partition of
+          [0, 2 + 1/sqrt 2]^2 (four Lemma 1 corners, four Lemma 2 wall rectangles, two
+          Lemma 3 triangles), each against its lemma's hypotheses, and the tiling
+        checked: 10
+        of: 10
+      read: [mathematics, proof-text]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the think-vvjk validation lane (w-backlog-1025), a moderate-tier sub-agent,
+            from the retained survey's sections 4 and 5
+      overlaps_producer:
+        extent: none
+        separate_prompt: null
+        separate_code: true
+        note: >-
+          Friedman's survey and Göbel's tract ship no code, and their authors are people;
+          the checker reuses this repository's sqpack.cover geometry and sqpack.field
+          arithmetic, which the Bentz and Stromquist audits also run.
+    independence_record: packing/cases/friedman5/verify_cover.py
+    limitations: >-
+      Machine-audits Friedman's proof of s(5) >= 2 + 1/sqrt 2 (DS7, Theorem 2) as printed,
+      exactly in Q(sqrt 2): the four points (1, 1), (1, 1 + 1/sqrt 2), (1 + 1/sqrt 2, 1) and
+      (1 + 1/sqrt 2, 1 + 1/sqrt 2) and ten cells that tile [0, 2 + 1/sqrt 2]^2 exactly. Each
+      corner cell is the unit square at its container corner with its inner corner in the
+      set (Lemma 1). Each wall cell is a rectangle on its wall with x = 1/sqrt 2 and y = 1,
+      and 2 sqrt 2 - x - 2y = 3 sqrt 2/2 - 2 > 0 decided by exact sign, with both inner
+      corners in the set (Lemma 2). Each of the two central triangles has legs of squared
+      length 1/2 and a hypotenuse of exactly one (Lemma 3). Every point is charged, and
+      four points against five squares is the pigeonhole count. Figure 24 is not
+      extractable; the partition is the one the proof's sentence names. The lemma
+      statements, the reductions in their proofs and section 5's shrinking argument are
+      cited, not re-proved. One observation for the review of this half (think-wuo4): at x
+      = 1/sqrt 2 the lowest-corner function of Lemma 2's proof is concave in t = sin + cos,
+      so its minimum over the angle is 1 = y at theta = 0 and pi/2, where the square
+      touches the wall, and 3 sqrt 2/4 at 45 degrees is its maximum. The proof's "global
+      minimum at 45 degrees" holds only for x >= 2 sqrt 2 - 2, and the lemma's hypothesis
+      y <= 1 carries the case here; the record keeps both values. Göbel's Proposition 1
+      uses the same layout in the limit, four points 1 - epsilon/3 from the sides; this
+      entry decides Friedman's form and does not read Göbel's three-case outline. Two
+      mutated certificates whose claims are false, since Göbel's packing fits five squares
+      at 2 + 1/sqrt 2, are refused in tests/test_friedman5.py: the points 1/sqrt 2 + 1/100
+      apart (a triangle side above one, Lemma 3) and the points 1 + 1/100 from the walls
+      (no unit corner cell for Lemma 1, a wall depth above one for Lemma 2). The upper
+      half of s(5) is E-n005-gobel-upper's, not this entry's.
+    source_reviewed: '2026-10-25'
+
   - id: E-n006-kearney-shiu-proof
     claim: lower-bound
     scope: {n_values: [6]}

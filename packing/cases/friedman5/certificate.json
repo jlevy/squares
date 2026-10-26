@@ -1,0 +1,26 @@
+{
+  "cell_kinds": {"lemma1":4,"lemma2":4,"lemma3":2},
+  "cells": {
+    "corner_bl": {"corner":"bottom-left","lemma":1,"out":"p11"},
+    "corner_br": {"corner":"bottom-right","lemma":1,"out":"p21"},
+    "corner_tl": {"corner":"top-left","lemma":1,"out":"p12"},
+    "corner_tr": {"corner":"top-right","lemma":1,"out":"p22"},
+    "triangle_high": {"lemma":3,"squared_edge_lengths":{"p11-p12":"poly[1/2,0]","p11-p22":"poly[1,0]","p12-p22":"poly[1/2,0]"},"vertices":["p11","p22","p12"]},
+    "triangle_low": {"lemma":3,"squared_edge_lengths":{"p11-p21":"poly[1/2,0]","p11-p22":"poly[1,0]","p21-p22":"poly[1/2,0]"},"vertices":["p11","p21","p22"]},
+    "wall_bottom": {"lemma":2,"lowest_corner":{"f_at_t_1":"poly[1,0]","f_at_t_sqrt2":"poly[0,3/4]","minimum_at":"t = 1 (theta = 0, pi/2)","minimum_equals_depth":true,"minimum_minus_depth":"poly[0,0]"},"outs":["p11","p21"],"two_sqrt2_minus_x_minus_2y":"poly[-2,3/2]","wall":"bottom","x":"poly[0,1/2]","y":"poly[1,0]"},
+    "wall_left": {"lemma":2,"lowest_corner":{"f_at_t_1":"poly[1,0]","f_at_t_sqrt2":"poly[0,3/4]","minimum_at":"t = 1 (theta = 0, pi/2)","minimum_equals_depth":true,"minimum_minus_depth":"poly[0,0]"},"outs":["p11","p12"],"two_sqrt2_minus_x_minus_2y":"poly[-2,3/2]","wall":"left","x":"poly[0,1/2]","y":"poly[1,0]"},
+    "wall_right": {"lemma":2,"lowest_corner":{"f_at_t_1":"poly[1,0]","f_at_t_sqrt2":"poly[0,3/4]","minimum_at":"t = 1 (theta = 0, pi/2)","minimum_equals_depth":true,"minimum_minus_depth":"poly[0,0]"},"outs":["p21","p22"],"two_sqrt2_minus_x_minus_2y":"poly[-2,3/2]","wall":"right","x":"poly[0,1/2]","y":"poly[1,0]"},
+    "wall_top": {"lemma":2,"lowest_corner":{"f_at_t_1":"poly[1,0]","f_at_t_sqrt2":"poly[0,3/4]","minimum_at":"t = 1 (theta = 0, pi/2)","minimum_equals_depth":true,"minimum_minus_depth":"poly[0,0]"},"outs":["p12","p22"],"two_sqrt2_minus_x_minus_2y":"poly[-2,3/2]","wall":"top","x":"poly[0,1/2]","y":"poly[1,0]"}
+  },
+  "cited_not_reproved": ["Lemma 1 (Friedman DS7, section 4)","Lemma 2 (Friedman DS7, section 4): its reduction to both points on the boundary","Lemma 3 (Friedman DS7, section 4)","Section 5's shrinking argument, after Stromquist"],
+  "container_side": "poly[2,1/2]",
+  "container_side_decimal_for_display_only": "2.707106781186547524400844362",
+  "every_point_charged": true,
+  "field": {"all_decisions":"exact signs in Q(sqrt 2)","generator":"alpha = sqrt(2)","isolating_interval":["1","2"],"minimal_polynomial_high_to_low":[1,0,-2],"serialization":"poly[c0,c1] = c0 + c1 sqrt(2)"},
+  "kind": "friedman-ds7-theorem2-audit/v1",
+  "pigeonhole": {"claim":"every unit square in the container contains a point of P, possibly on its boundary; by section 5's shrinking argument five unit squares with disjoint interiors fit in no square of side below 2 + 1/sqrt(2)","points":4,"squares":5},
+  "points": {"p11":["poly[1,0]","poly[1,0]"],"p12":["poly[1,0]","poly[1,1/2]"],"p21":["poly[1,1/2]","poly[1,0]"],"p22":["poly[1,1/2]","poly[1,1/2]"]},
+  "source": "resources/papers/friedman-ds7-packing-unit-squares-in-squares.md",
+  "theorem": "Friedman DS7 Theorem 2: s(5) = 2 + 1/sqrt(2), its lower half",
+  "tiling": {"all_boundary_edges_lie_on_container":true,"all_internal_edges_have_two_incident_faces":true,"boundary_edge_count":12,"edge_count":25,"euler_characteristic":1,"face_count":10,"noncrossing":true,"signed_area_twice":"poly[9,4]","vertex_containment":{"all_vertices_in_closed_container":true,"container_x_interval":["0","poly[2,1/2]"],"container_y_interval":["0","poly[2,1/2]"],"vertex_count":16,"vertices":{"b1":["poly[1,0]","poly[0,0]"],"b2":["poly[1,1/2]","poly[0,0]"],"c_bl":["poly[0,0]","poly[0,0]"],"c_br":["poly[2,1/2]","poly[0,0]"],"c_tl":["poly[0,0]","poly[2,1/2]"],"c_tr":["poly[2,1/2]","poly[2,1/2]"],"l1":["poly[0,0]","poly[1,0]"],"l2":["poly[0,0]","poly[1,1/2]"],"p11":["poly[1,0]","poly[1,0]"],"p12":["poly[1,0]","poly[1,1/2]"],"p21":["poly[1,1/2]","poly[1,0]"],"p22":["poly[1,1/2]","poly[1,1/2]"],"r1":["poly[2,1/2]","poly[1,0]"],"r2":["poly[2,1/2]","poly[1,1/2]"],"t1":["poly[1,0]","poly[2,1/2]"],"t2":["poly[1,1/2]","poly[2,1/2]"]}},"vertex_count":16}
+}

@@ -112,7 +112,7 @@
       {
         "badges": [{"glyph":"O","meaning":"proved optimal","style":"solid"},{"glyph":"=","meaning":"exact value known","style":"solid"},{"glyph":"R","meaning":"known rigid","style":"solid"}],
         "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"2 + (1/2)sqrt(2)","minimal_polynomial":"2*s**2 - 8*s + 7 = 0","state":"closed-form"},
-        "lower": {"correction":false,"display":"s(5) ≥ 2.707106","evidence":["E-n005-gobel-proof"],"first_proved_here":false,"provenance":"frontier","recent_result":false,"shown":false,"value":"2.70710678118654752440084436210485"},
+        "lower": {"correction":false,"display":"s(5) ≥ 2.707106","evidence":["E-n005-friedman-theorem2-audit","E-n005-gobel-proof"],"first_proved_here":false,"provenance":"frontier","recent_result":false,"shown":false,"value":"2.70710678118654752440084436210485"},
         "n": 5,
         "optimality": {"provenance":"frontier","status":"proved"},
         "rigidity": {
