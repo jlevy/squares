@@ -968,6 +968,13 @@ issues:
       reported:
       - result: quarter-power-deficiency
       - result: cube-root-deficiency
+    - url: https://github.com/jlevy/squares/issues/414#issuecomment-6414745580
+      date: '2026-10-26'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: quarter-power-deficiency
+      - result: cube-root-deficiency
     close_when: >-
       The reported intake and pending proof review are answered from main, and the
       review request receives a supported verdict or explicit disposition.
@@ -8143,6 +8150,16 @@ issues:
       by: jlevy
       kind: follow-up
       reported: []
+    - url: https://github.com/jlevy/squares/issues/535#issuecomment-6414743703
+      date: '2026-10-26'
+      by: jlevy
+      kind: follow-up
+      reported: []
+    blocked:
+      type: owner-decision
+      reason: >-
+        kernel build ~8 CPU-h at 30.6 GB, above this host's memory: the owner decides build
+        elsewhere or decline (think-yzl3)
     close_when: The evidence entry and the corrected next rung are on main, and either the build's
       receipt is retained or the owner declines the build.
   - number: 536
@@ -8267,6 +8284,16 @@ issues:
       by: jlevy
       kind: follow-up
       reported: []
+    - url: https://github.com/jlevy/squares/issues/537#issuecomment-6414742797
+      date: '2026-10-26'
+      by: jlevy
+      kind: follow-up
+      reported: []
+    blocked:
+      type: owner-decision
+      reason: >-
+        sample rebuild (~8 CPU-h), full rebuild (~798 CPU-h) or neither: the owner's decision
+        (think-qu37)
     close_when: The packet and the evidence entry are on main, and the owner has decided on a sample or
       a full rebuild.
     notes: ' The author comment of 18 October (issuecomment-6247112302) is new evidence for T-064, held
@@ -10820,6 +10847,17 @@ issues:
       kind: acknowledgement
       reported:
       - result: validtilt9-lean
+    - url: https://github.com/jlevy/squares/issues/643#issuecomment-6414741930
+      date: '2026-10-26'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: validtilt9-lean
+        id: T-251
+        verification: V0
+        confirmation: C0
+        status: recorded
+        position: second certificate
     close_when: The import and its disposition are on main, the resulting state is posted with the entry's
       id, and the review and replay that would raise its rungs are owned by their beads.
     notes: >-
@@ -25605,7 +25643,18 @@ issues:
     - think-3xn9
     - think-8hjz
     answer_bead: think-3xn9
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/824#issuecomment-6414740829
+      date: '2026-10-26'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n299
+        id: T-248
+        verification: V0
+        confirmation: C0
+        status: recorded
+        position: pending adoption
     close_when: >-
       The result is registered, reviewed and adopted at 299 with its drawing regularized and
       flipped, and the reply on main says so; nothing the author asked for is queued.
