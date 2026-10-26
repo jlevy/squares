@@ -5501,8 +5501,9 @@ results:
       AI reviews of 3 October are retained, GPT-6 Pro's and Claude Code's paper review, both
       accepting; whether they are by reviewers distinct from Astra under epistemics.md ("no
       shared context") is the owner's ruling, which the oversight record states, since
-      GPT-6 Pro's names Astra's review of 29 September as its source R4. C5 needs that build made here at the pinned toolchain,
-      an `open_review` pointer and two such expert reviews. Engineering
+      GPT-6 Pro's names Astra's review of 29 September as its source R4.
+
+      C5 needs that build made here at the pinned toolchain, an `open_review` pointer and two such expert reviews. Engineering
       follow-up think-e2ot
       will orchestrate fresh whole-ensemble replay through reviewed state-equivalence
       bindings. Simplification was to precede the n11 explainer, tracked separately, which is
@@ -5564,7 +5565,8 @@ results:
       (since renamed SquaresLean), and run 37414883750 became visible to the owner's account,
       so the owner can read the run's logs; nothing was downloaded from it
       (docs/project/reviews/review-2026-10-11-lean-backed-rungs.md, section 2.3). The pin of
-      11SquaresFormalized, cdc746ed, is unchanged; it was still the head on 26 October 2026.
+      11SquaresFormalized is unchanged; it was still the repository's head on 26 October
+      2026.
       The reviews of 3 October by GPT-6 Pro and by Claude Code are recorded in reviews
       (section 8 of that review); V4 waits on the owner's oversight record and the ruling on
       distinct reviewers it states.
@@ -12920,8 +12922,10 @@ results:
       Exact-value integration is tracked on jlevy/squares#811, since PR #403 closed
       unmerged on 25 October 2026. The confirmation
       would move no case bound: alpha_102 lies above the case's verified ceiling, so this
-      entry is superseded at 102. Evan Daniel's Lean module Sqpack.Exact.Packs.N102, at
-      6bbae379 of evand/square-packing, proves that the selected root packs 102 squares;
+      entry is superseded at 102.
+
+      Evan Daniel's Lean module Sqpack.Exact.Packs.N102, in the evand/square-packing commits
+      read on 11 October under think-63vx, proves that the selected root packs 102 squares;
       retaining it with its closure and building it here is think-63vx's, about an hour of
       lane work and under ten minutes of build (the 11 October Lean-backed rungs review,
       LR-10). It would check the bound and the root identity, not the minimality assertion,
@@ -14131,7 +14135,7 @@ results:
       controls at about 4.3 CPU-hours. The owner set its budget on 11 October 2026, and
       the run is queued in think-r333 after the regularization of every packing
       (think-ux1v, planned in jlevy/squares#497). Its commands need tooling that is only on
-      the unmerged branch claude/wand125-confirmations-2026-10-11 (44eb6a017):
+      the unmerged branch claude/wand125-confirmations-2026-10-11:
       on main, sqverify_fast_census.MIXED_PACKETS does not list this certificate's packet.
     activity:
       state: waiting
@@ -15846,7 +15850,7 @@ results:
       controls at about 3.3 CPU-hours. The owner set its budget on 11 October 2026, and
       the run is queued in think-i85v after the regularization of every packing
       (think-ux1v, planned in jlevy/squares#497). Its commands need tooling that is only on
-      the unmerged branch claude/wand125-confirmations-2026-10-11 (44eb6a017):
+      the unmerged branch claude/wand125-confirmations-2026-10-11:
       on main, sqverify_fast_census.MIXED_PACKETS does not list this certificate's packet.
     activity:
       state: waiting
@@ -15966,7 +15970,7 @@ results:
       soundness review. The eight-direction sample prices the run and its controls at about
       4.5 CPU-hours. The owner set its budget on 11 October 2026, and the run is queued
       in think-i85v after the regularization of every packing (think-ux1v, planned in jlevy/squares#497). Its commands need tooling that is only on
-      the unmerged branch claude/wand125-confirmations-2026-10-11 (44eb6a017):
+      the unmerged branch claude/wand125-confirmations-2026-10-11:
       on main, sqverify_fast_census.MIXED_PACKETS does not list this certificate's packet.
     activity:
       state: waiting
@@ -16082,7 +16086,7 @@ results:
       control at about 11.2 CPU-hours (the author's own replay suggests up to about 23).
       The owner set its budget on 11 October 2026, and the replay is queued in
       think-nd7g after the regularization of every packing (think-ux1v, planned in jlevy/squares#497). Its commands need tooling that is only on
-      the unmerged branch claude/wand125-confirmations-2026-10-11 (44eb6a017):
+      the unmerged branch claude/wand125-confirmations-2026-10-11:
       on main, devtools.audit_wand125_linear does not register n = 122.
     unfinished_confirmations:
       - what: >-

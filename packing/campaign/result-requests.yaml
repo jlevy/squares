@@ -8073,7 +8073,9 @@ issues:
     - what: >-
         RR-8 and RR-9: the adoption's deferrals, T-125's notes and T-136's next rung.
       state: done
-      note: Overtaken by #518's adoption, as the issue and the rungs review's status note say.
+      note: >-
+        Overtaken by #518's adoption, as the issue and the rungs review's status note
+        say.
     - what: LR-7, a formalization_of field that ties a formalization review to its formalization.
       state: done
       note: >-
