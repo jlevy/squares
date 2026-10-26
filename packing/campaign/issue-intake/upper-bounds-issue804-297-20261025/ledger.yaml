@@ -1,0 +1,33 @@
+format: intake-ledger-v1
+read_at_main: 0785626cc671a010e4950d391b062a0d09fe50b3
+read_on: '2026-10-25'
+rule: If they are reported in order, then each one should be recorded as a result, as long
+  as each one is stronger than the last. If a stronger result is reported first, then the
+  other one should not be recorded since it is weaker after that, unless there is some key
+  reason it should be recorded.
+lanes: []
+reports:
+- report: '#804 at 297'
+  url: https://github.com/jlevy/squares/issues/804#issuecomment-6397593690
+  kind: comment
+  holders: Hyukdong Kim (HyukdongKim)
+  reported_at: '2026-10-25T12:23:57Z'
+  bead: think-ozx8
+  claims:
+  - n: 297
+    printed: '17.740417287543801850975801594884289593640654923446195273425233561350268049817798181605818039609627693350616955721959325237'
+    rounding: cut
+    refines:
+      packing_of: Francisco Couzo
+      entry: T-174
+      source: '#804 (comment 6397593690): ''the stationary side of T-174''s record packing
+        (#574)'', the packing credited as the case record credits it; route A here solves
+        T-174''s retained certificate at 297 to the same side (the packet''s receipts)'
+  note: 'The comment''s claim at 297: the stationary side of T-174''s packing is the only
+    real root of the degree-21 polynomial it prints, with an exact configuration attached
+    under CC0 1.0. The attachment was not readable from the importing session; the side is
+    decided exactly from the printed polynomial (exact-sides.json).'
+exceptions: []
+key_reason_candidates: []
+other_items: []
+cross_check: []

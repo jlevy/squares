@@ -4321,6 +4321,26 @@ sources:
       exact configurations at 172 and 263, attached to a comment the same day, are kept as
       derived facts by the same rule in web/hyukdongkim-t244-configurations-2026-10-25/.
       Claude assistance disclosed. Upper bounds only; no optimality claim.
+  - key: '[Kim s297 2026-10-25]'
+    authors: [Kim]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-25'
+    lineage: builds-on-project
+    credit: Kim after Couzo, Daniel, PingYou Ltd, Levy
+    short_credit: Kim after Couzo et al.
+    note: >-
+      Issue 804, comment of 12:23:57Z (issuecomment-6397593690), with the comment of 12:00:41Z
+      before it: Hyukdong Kim's exact side of the best-known packing at 297, the only real root
+      of an irreducible degree-21 integer polynomial printed in the comment, the stationary side
+      of Francisco Couzo's packing as Evan Daniel and PingYou Ltd improved it (T-174), and
+      3.36e-90 below PingYou Ltd's certificate. The comment attaches an exact configuration,
+      s297-exact-configuration.zip (SHA-256
+      e08b5d0a64c5c68eed827ee7e323687929048a4cfea438bb77ef390bdd4147a7, the comment's digest),
+      under CC0 1.0; the importing session could not download it. The comment's text, the
+      polynomial as a derived fact and this repository's own exact construction of the same
+      side from T-174's certificate are in web/hyukdongkim-s297-2026-10-25/. Claude assistance
+      disclosed. An upper bound only; no optimality claim.
   - key: '[Jatloe n12 Lean 2026-10-16]'
     authors: [Jatloe, Gurevitch, Lewis, Ahmed]
     year: 2026

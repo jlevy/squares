@@ -11679,6 +11679,35 @@ sources:
     (think-4rzl), so no packing at either side has been decided here. The author's comment of
     07:22:16Z concedes 88, 126 and 199 to issue 639. The case records are unchanged until
     adoption.
+- id: hyukdongkim-s297-2026-10-25
+  title: Hyukdong Kim's exact degree-21 side at 297 in two issue 804 comments
+  role: first-party-release
+  url: https://github.com/jlevy/squares/issues/804#issuecomment-6397593690
+  local: resources/web/hyukdongkim-s297-2026-10-25/
+  source_key: '[Kim s297 2026-10-25]'
+  scope:
+    n_values: [297]
+  reviewed: '2026-10-26'
+  source_date: '2026-10-25'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - campaign/issue-intake/upper-bounds-issue804-297-20261025/ledger.json
+  evidence:
+  - E-hyukdongkim-804-s297-report
+  notes: >-
+    The comment of 12:23:57Z prints the polynomial and the side to 100 places and attaches an
+    exact configuration under CC0 1.0, which the importing session could not download; the
+    packet keeps both comments' text, the polynomial as a derived fact and the attachment's
+    stated digests. The polynomial is irreducible over Q by SymPy and by sqpack.field, with
+    one real root, 3.359e-90 below T-174's certificate, the house, and 6.624e-63 below issue
+    639's degree-12 side (campaign/issue-intake/upper-bounds-issue804-297-20261025/exact-sides.json);
+    the ledger of that directory records it and T-247 registers it as reported. This
+    repository built its own exact configuration at the side from T-174's certificate (route
+    A), every contact an identity in the degree-21 field; its exact decision waits over the
+    CPU cap (think-vv1q), and the author's file waits until it is reachable (route B). The
+    case record is unchanged until adoption.
 - id: jatloe-n12-lean-2026-10-16
   title: Jatloe12SquaresFormalized, a Lean 4 proof that s(12) = 4
   role: source-repository

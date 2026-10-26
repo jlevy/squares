@@ -799,7 +799,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "c7a1c45f7b38e78ebdae7db2e7f9a80b548374b7"
+DATA_REVISION = "1724966bcbdc13da688d99b53cb2ba9513bb8685"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -903,6 +903,14 @@ EXPLAINER_HISTORY = (
             "Update the registered result count after the registration of Evan Daniel's "
             "packing at 299 (T-248) and three reported Lean formalizations (T-249 to "
             "T-251)."
+        ),
+    ),
+    PublicationHistoryEntry(
+        version="v0.4.31",
+        first_published="October 26, 2026",
+        result_scope=(
+            "Update the registered result count after the registration of Hyukdong Kim's "
+            "exact side at 297 (T-247)."
         ),
     ),
     PublicationHistoryEntry(
@@ -1514,6 +1522,16 @@ RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
             "Update the registered result count after the registration of Evan Daniel's "
             "packing at 299 (T-248) and three reported Lean formalizations (T-249 to "
             "T-251)."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="paper:n11-lower-bounds-explainer",
+        previous_version="v0.4.30",
+        version="v0.4.31",
+        impact="patch",
+        reason=(
+            "Update the registered result count after the registration of Hyukdong Kim's "
+            "exact side at 297 (T-247)."
         ),
     ),
     ReleaseImpactDecision(
@@ -2623,6 +2641,46 @@ class ReleaseNoPublicChange(NamedTuple):
 
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/devtools/site_resources.py",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The import of #804's side at 297 (think-ozx8): T-247, its coverage entry, "
+            "#804's requests entry and the comment's card among the other projects "
+            "(site_resources.py), against main 85a1919da (#820). Rendered at link "
+            "revision 3af720c4 into empty site directories, once from this tree and once "
+            "with main's results.yaml, result-requests.yaml and source-coverage.yaml "
+            "swapped in, 51 files each, by render_n11_optimality_review, "
+            "render_n11_threshold_bound_review and render_packing_methods: every file is "
+            "byte-identical across the two renders. Measured again after merging main "
+            "980440c99 (#821), at link revision 19a04dd7 with that main's three inputs "
+            "swapped in: the same 51 files, byte-identical. Measured again after merging "
+            "main 9ebde24df (#823) and adding the card and T-247's project credit, at "
+            "link revision 79465052 with that main's results.yaml, result-requests.yaml, "
+            "source-coverage.yaml and site_resources.py swapped in: the same 51 files, "
+            "byte-identical. The explainer counts the "
+            "register's results and takes v0.4.31. No PDF was printed; each prints from "
+            "that HTML. "
+            "Retain v0.1.11, v0.1.4 and v0.2.7."
+        ),
+    ),
     ReleaseNoPublicChange(
         components=(
             "paper:n11-lower-bounds-explainer",
