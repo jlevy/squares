@@ -766,10 +766,10 @@ def grid_selection_row(
     frame = driver.source_frame(witness)
     held: list[tuple[str, Path, Mapping[str, Any], driver.Decision]] = []
     for run, directory, report in found:
-        if report.get("generator") != grid.GENERATOR:
+        if report.get("generator") not in grid.METHODS:
             raise RegistrationError(
                 f"n={n}: {run} holds a view of {report.get('generator')}, not of "
-                f"{grid.GENERATOR}"
+                f"{' or '.join(grid.METHODS)}"
             )
         decision = grid.decided(report, witness, upper=upper)
         if decision.row == 3:
@@ -870,7 +870,7 @@ def grid_selection_row(
         "identity": identity,
         "regularization": {
             "of": PACKING_RESULT.get(n, DEFAULT_PACKING_RESULT),
-            "method": grid_written_method(grid.METHOD),
+            "method": grid_written_method(grid.METHODS[str(report.get("generator"))]),
             "side": "same",
             "changes": {},
         },
@@ -966,7 +966,11 @@ def corners_of(
 
 
 def decide_view(view: Mapping[str, Any]) -> dict[str, Any]:
-    """Both maintained exact routes on one view, with their least clearances."""
+    """Both maintained exact routes on one view, with their least clearances. Over a
+    number field the second route is `check_algebraic_witness_independent` on the view's
+    own fields, and the side is written as `exact_scalars.text` writes it."""
+    from devtools import check_algebraic_witness_independent as algebraic  # noqa: PLC0415
+    from devtools import exact_scalars as scalars  # noqa: PLC0415
     from sqpack.witness import exact_verify  # noqa: PLC0415
 
     started = time.process_time()
@@ -974,11 +978,14 @@ def decide_view(view: Mapping[str, Any]) -> dict[str, Any]:
     first_seconds = time.process_time() - started
     side, corners = corners_of(view)
     started = time.process_time()
-    second = independent.check_squares(corners, side)
+    if scalars.field_of(view) is not None:
+        second = algebraic.check_witness(view)
+    else:
+        second = independent.check_squares(corners, side)
     second_seconds = time.process_time() - started
     return {
         "n": int(view["n"]),
-        "side": literal(side),
+        "side": scalars.text(side) if scalars.is_field(side) else literal(side),
         "exact_verify": {
             "passed": bool(first["verification_passed"]),
             "pairs_tested": first["pairs_tested"],

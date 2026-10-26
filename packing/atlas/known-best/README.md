@@ -893,6 +893,29 @@ The evidence is retained in
 [`cases/regularized_drawings/think-3anz-2026-10-25/`](../../cases/regularized_drawings/think-3anz-2026-10-25/README.md).
 The index still draws 86 views.
 
+On 26 October 2026 the seven exact algebraic houses that 23 October left owed were
+regularized (think-mbdw): T-174 at 153 and 207 and T-193 at 102, 123, 258, 259 and 302.
+The grid-slack generator’s version 2 draws a witness over a number field in its own
+field: its frame is the witness’s exact pose over $\mathbb{Q}(\alpha)$, the placement
+works in binary64 as before, and the re-solve and the view are in the field, at the
+witness’s side, which is $U$ exactly.
+Each view is decided by `exact_verify` over `sqpack.field` and by
+`devtools.check_algebraic_witness_independent`, the policy’s second route over a number
+field, which shares no arithmetic with it.
+Grid-slack at 0.5, 1 and 5 degrees (`grid-slack-mbdw-2026-10-26-grid-deg05`,
+`-grid-deg1` and `-grid-deg5`, 28 CPU-minutes) draws a view at every count, and the
+selection admits the half-degree view at six and the 5-degree view at 302 (row 10), each
+better than the house drawing on some goal and worse on none: at 302 the light, uneven
+and near-axis squares go from 142, 204 and 29 to none, and the sides from 284 / 948 to
+960 / 962; at 259 from 111, 163 and 26 to 4, 20 and 0, and 264 / 678 to 777 / 787; at
+153 and 207, whose houses had no light, uneven or near-axis square, the sides rise from
+446 to 474 and from 640 to 662. `SETTLED`’s seven `regularization-owed` entries are
+removed, and no count owes a regularization.
+The evidence is retained in
+[`cases/regularized_drawings/think-mbdw-2026-10-26/`](../../cases/regularized_drawings/think-mbdw-2026-10-26/README.md).
+The index draws 93 views: 27 by the axis tool, 38 by Evan Daniel’s regularizer, 21 by
+the grid-slack generator’s version 1 and 7 by its version 2.
+
 ### The default picture
 
 On 13 October 2026 the owner made the regularized view the default picture, with the
@@ -912,7 +935,7 @@ Every default picture is drawn in its canonical pose, which
 [flip regularization](../../../docs/project/policies/regularization-policy.md#13-flip-regularization)
 chooses: turned by one of the container’s eight symmetries so that its heaviest quadrant
 is lower right and the heavier of that quadrant’s neighbours lower left, which keeps the
-published pose of 252 counts, n = 11 and the integer grids among them.
+published pose of 250 counts, n = 11 and the integer grids among them.
 The pose is kept in its own record,
 [`flip-regularization.json`](flip-regularization.json), as `rotate` and `flip`, and is
 applied to the drawn picture’s coordinates when the composites and the site draw it; the
@@ -942,8 +965,9 @@ grid-slack generator is drawn, `regular-as-published` where the house drawing ha
 uneven and no near-axis square, `decided-no-better` where the strong generators ran on
 that very witness and drew nothing better, `regularization-owed` where they ran and drew
 no view the improvement rule could judge, so the drawing is not regularized and its
-`SETTLED` entry names the bead that owes it (the exact algebraic houses, under
-think-mbdw), `exempt` with the bead that owns it, and `pending` otherwise.
+`SETTLED` entry names the bead that owes it (the exact algebraic houses were so from 23
+to 26 October 2026, under think-mbdw; none is now), `exempt` with the bead that owns it,
+and `pending` otherwise.
 The totals count each state apart.
 Each state carries the drawn picture’s measures, the witness’s id, its source’s key,
 path and revision, and its side, and the runs that decided it.

@@ -78,6 +78,17 @@ Each grid-slack run has one straightening threshold, half a degree by default; r
 thresholds into their own directories, since views from runs at 1 and 5 degrees are
 admitted on the same terms.
 
+An algebraic house, whose witness states its squares in a real number field, runs the
+same commands. Since version 2 (think-mbdw, 26 October 2026) the grid-slack generator
+starts from that witness’s own exact pose, re-solves in its field and writes the view
+there, at the witness’s side; both exact routes for a number field decide it, as the
+policy’s obligation 1 names them.
+Evan Daniel’s driver solves such a witness to a rational side just above the algebraic
+$U$, which is not drawn (row 4). The 21 runs on the seven algebraic houses of 23
+October, at three thresholds, took 28 CPU-minutes in all (43 to 499 seconds of wall a
+count on a host at a load of 10 to 20), nine tenths of it `exact_verify` over the field;
+the independent route took 1 to 12 seconds a view.
+
 ### 2. Decide Finished Runs Again After a Change
 
 When the decision table changes, or a register result moves $U$, decide a finished
@@ -199,15 +210,15 @@ strong view of the count has lapsed, and `PENDING_ALLOWED` does not hold it for 
 bead’s runs), `decided-no-better` (the strong generators ran on this witness and drew
 nothing the improvement rule takes), `regularization-owed` (they ran and drew no view
 the rule could judge, so the drawing is not regularized; the `SETTLED` entry’s `owed`
-names the open bead that owes the regularization, as at the exact algebraic houses),
-`exempt` (set aside with the bead that owns it) or `pending`. The axis tool’s view alone
-never makes a count regularized: it is the reference and fallback.
-A count is `decided-no-better` without an entry of its own where the layer holds a
-strong generator’s view of the current witness that the rule does not draw; otherwise
-the decision goes into `default_drawings.SETTLED` with the runs, the outcome, where it
-is recorded and the witness’s source key, path, revision and side it was made on, so a
-new house, a new certificate file or an upstream fix makes the count pending again.
-Every run the entry names must be held by the retained evidence under
+names the open bead that owes the regularization, as at the exact algebraic houses from
+23 to 26 October 2026), `exempt` (set aside with the bead that owns it) or `pending`.
+The axis tool’s view alone never makes a count regularized: it is the reference and
+fallback. A count is `decided-no-better` without an entry of its own where the layer
+holds a strong generator’s view of the current witness that the rule does not draw;
+otherwise the decision goes into `default_drawings.SETTLED` with the runs, the outcome,
+where it is recorded and the witness’s source key, path, revision and side it was made
+on, so a new house, a new certificate file or an upstream fix makes the count pending
+again. Every run the entry names must be held by the retained evidence under
 `packing/cases/regularized_drawings/` (`default_drawings.run_records`): a grid-slack
 run’s block at `<bead>-<date>/<run directory>/run.json`, or a driver run’s
 `receipt.json` there, each beside the run’s reports (`n-<count>/report.json.gz`), which

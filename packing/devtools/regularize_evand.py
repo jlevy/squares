@@ -228,9 +228,11 @@ import mpmath
 from strif import atomic_output_file
 
 from devtools import census_atlas_contact_shades as shades
+from devtools import check_algebraic_witness_independent as algebraic
 from devtools import check_half_angle_area as area
 from devtools import check_rational_witness_independent as independent
 from devtools import evand_exact_certificates as evand
+from devtools import exact_scalars as scalars
 from devtools import regularize_axis_components as axis
 from devtools.check_vendored_evand import apply_patch
 from devtools.retained_data import git_blob
@@ -330,7 +332,10 @@ def relative(path: Path) -> str:
 
 
 def decimal_text(value: Fraction, digits: int = INPUT_DIGITS) -> str:
-    """`value` to `digits` significant digits, rounded to nearest, in fixed notation."""
+    """`value` to `digits` significant digits, rounded to nearest, in fixed notation; a
+    number-field element (`exact_scalars`) from a rational within `10^-(digits + 20)`."""
+    if scalars.is_field(value):
+        return scalars.decimal_text(value, digits)
     with localcontext() as context:
         context.prec = digits
         context.rounding = ROUND_HALF_EVEN
@@ -343,8 +348,12 @@ def mp_text(value: Any, digits: int = INPUT_DIGITS) -> str:
     return str(mpmath.nstr(value, digits, min_fixed=-mpmath.inf, max_fixed=mpmath.inf))
 
 
-def literal(value: Fraction) -> str:
-    return evand.literal(value)
+def literal(value: scalars.Scalar) -> str:
+    """The witness format's rational literal; a number-field element as
+    `exact_scalars.text` writes it, its coefficient list."""
+    if isinstance(value, Fraction):
+        return evand.literal(value)
+    return scalars.text(value)
 
 
 def write_json(path: Path, document: Any) -> None:
@@ -628,7 +637,7 @@ class VerifiedBound:
     interval: tuple[Fraction, Fraction] | None = None
     unread: str | None = None
 
-    def compare(self, side: Fraction) -> int | None:
+    def compare(self, side: scalars.Scalar) -> int | None:
         """-1, 0 or 1 as `side` is below, at or above `U`, decided exactly; None unread."""
         if self.rational is not None:
             return (side > self.rational) - (side < self.rational)
@@ -641,18 +650,25 @@ class VerifiedBound:
             return 1
         # `U` is the polynomial's only root in (low, high), and a rational side is no
         # root of an irreducible polynomial of degree two or more: the polynomial keeps
-        # its sign at `low` up to `U` and changes it there.
-        same_sign = (_evaluate(self.polynomial, side) > 0) == (
-            _evaluate(self.polynomial, low) > 0
-        )
+        # its sign at `low` up to `U` and changes it there. A side over a number field
+        # (an algebraic house's, think-mbdw) is `U` exactly where the polynomial vanishes
+        # at it, decided in its field: it is then the one root in the interval.
+        value = _evaluate(self.polynomial, side)
+        if value == 0:
+            return 0
+        same_sign = (value > 0) == (_evaluate(self.polynomial, low) > 0)
         return -1 if same_sign else 1
 
-    def difference(self, side: Fraction) -> float:
+    def difference(self, side: scalars.Scalar) -> float:
         """`side - U` in binary64, for reports only; it decides nothing."""
         if self.rational is not None:
             return float(side - self.rational)
         if self.interval is None:
             return math.nan
+        if scalars.is_field(side) and self.compare(side) == 0:
+            # A side over a number field can be `U` exactly (an algebraic house's view,
+            # think-mbdw), where the interval's midpoint would print a few `1e-61`.
+            return 0.0
         low, high = self.interval
         return float(side - (low + high) / 2)
 
@@ -674,7 +690,8 @@ class VerifiedBound:
 BOUND_INTERVAL_WIDTH = Fraction(1, 10**60)
 
 
-def _evaluate(coefficients: Sequence[int], value: Fraction) -> Fraction:
+def _evaluate(coefficients: Sequence[int], value: Any) -> Any:
+    """The polynomial at `value`, a rational or a number-field element, exactly."""
     total = Fraction(0)
     for coefficient in coefficients:
         total = total * value + coefficient
@@ -1461,7 +1478,29 @@ def square_corners(x: Fraction, y: Fraction, c: Fraction, s: Fraction) -> Corner
 
 
 def view_geometry(witness: Mapping[str, Any]) -> tuple[Fraction, list[Placed], list[Corners]]:
-    """A rational view's side, placements and corners, read from its stated fields."""
+    """A rational view's side, placements and corners, read from its stated fields; over a
+    number field, the same as elements of the view's field (`exact_scalars.field_of`)."""
+    field_ = scalars.field_of(witness)
+    if field_ is not None:
+        exact_side = scalars.parse(witness["side"], field_)
+        field_placements: list[Placed] = []
+        field_corners: list[Corners] = []
+        for square in witness["squares"]:
+            if witness["representation"] == "corners":
+                points = [
+                    (scalars.parse(x, field_), scalars.parse(y, field_))
+                    for x, y in square["corners"]
+                ]
+                field_corners.append(points)  # pyright: ignore[reportArgumentType]
+                xs, ys = [x for x, _ in points], [y for _, y in points]
+                centre = (sum(xs[1:], xs[0]) / 4, sum(ys[1:], ys[0]) / 4)
+                field_placements.append((*centre, xs[1] - xs[0], ys[1] - ys[0]))  # pyright: ignore[reportArgumentType]
+                continue
+            x, y = (scalars.parse(value, field_) for value in square["center"])
+            c, s = (scalars.parse(value, field_) for value in square["basis"])
+            field_placements.append((x, y, c, s))  # pyright: ignore[reportArgumentType]
+            field_corners.append(square_corners(x, y, c, s))  # pyright: ignore[reportArgumentType]
+        return exact_side, field_placements, field_corners  # pyright: ignore[reportReturnType]
     side = Fraction(str(witness["side"]))
     placements: list[Placed] = []
     corners: list[Corners] = []
@@ -1476,6 +1515,33 @@ def view_geometry(witness: Mapping[str, Any]) -> tuple[Fraction, list[Placed], l
         placements.append((x, y, c, s))
         corners.append(square_corners(x, y, c, s))
     return side, placements, corners
+
+
+MEASURED_DIGITS = 55
+"""Digits of the rational approximation a number-field view is measured from."""
+
+
+def measured_geometry(witness: Mapping[str, Any]) -> tuple[Fraction, list[Placed]]:
+    """A view's side and placements for obligation 3's measurements (`identity`): exact
+    over `Q`, and over a number field rationals within `10^-55` of the field values, as
+    `source_frame` measures a number-field witness. They decide nothing exact."""
+    side, placements, _corners = view_geometry(witness)
+    if not scalars.is_field(side):
+        return side, placements
+
+    def near(value: scalars.Scalar) -> Fraction:
+        return scalars.approximate(value, MEASURED_DIGITS)
+
+    return near(side), [(near(x), near(y), near(c), near(s)) for x, y, c, s in placements]
+
+
+def second_route(witness: Mapping[str, Any], corners: Sequence[Corners], side: Any) -> bool:
+    """The second exact route's verdict on a view: the independent checker over `Q` on
+    the corners `view_geometry` read, or over a number field the algebraic checker on the
+    view's own fields, which shares no arithmetic with `sqpack.field`."""
+    if scalars.field_of(witness) is not None:
+        return bool(algebraic.check_witness(witness)["verification_passed"])
+    return bool(independent.check_squares(list(corners), side)["verification_passed"])
 
 
 def certificate_block(
@@ -1839,7 +1905,7 @@ class Measured:
     status: str = "ok"
     routes: Mapping[str, bool] = field(default_factory=dict)
     relation: Literal["same", "bound", "solved"] | None = None
-    side: Fraction | None = None
+    side: scalars.Scalar | None = None
     #: `U` where it is rational (`upper_bound`); `bound` holds it exactly in every case,
     #: and decides where it is given (`below_bound`).
     upper: Fraction | None = None
@@ -2037,13 +2103,13 @@ def _measure_view(
 
 
 def side_relation(
-    side: Fraction, printed: Fraction | None, upper: Fraction | None
+    side: scalars.Scalar, printed: scalars.Scalar | None, upper: Fraction | None
 ) -> Literal["same", "bound", "solved"]:
     """A view's side against the record: the witness's own (`same`), exactly the verified
     upper bound (`bound`, admissible since 12 October 2026), or another (`solved`)."""
-    if printed is not None and side == printed:
+    if printed is not None and scalars.equal(side, printed):
         return "same"
-    if upper is not None and side == upper:
+    if upper is not None and scalars.equal(side, upper):
         return "bound"
     return "solved"
 
@@ -3323,8 +3389,9 @@ def worse_than_drawn(
         load_yaml(text)["witness"],
     )
     gains, worse = improvement_rule.compare(view, now)
-    side = None if view["side"] is None else Fraction(view["side"])
-    drawn = None if now["side"] is None else Fraction(now["side"])
+    field_ = select.count_field(n)
+    side = None if view["side"] is None else scalars.parse_text(view["side"], field_)
+    drawn = None if now["side"] is None else scalars.parse_text(now["side"], field_)
     goals = improvement_rule.judge(
         gains,
         worse,
@@ -3421,7 +3488,7 @@ def decided_refusal(
     result, _report = exact_verify(witness)
     now = {
         "exact_verify": bool(result["verification_passed"]),
-        "independent": bool(independent.check_squares(corners, side)["verification_passed"]),
+        "independent": second_route(witness, corners, side),
     }
     if half_angle:
         now["half_angle"] = bool(area.decide_placed(side, placements).passed)

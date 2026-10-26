@@ -25,7 +25,11 @@ earns that relation. It re-solves the view's tight contacts as exact equalities 
    regularizes from; its side is that promotion's exact side, which the policy defines as
    `s_W` for a decimal witness. The promotion's feasibility is not checked here: the view
    is what is decided, not the source. A witness over a number field has no rational
-   frame and is refused, `no-exact-frame`.
+   frame and is refused, `no-exact-frame`, unless the caller asks for its own frame over
+   its field (`exact_frame(..., number_field=True)`, as `regularize_grid_slack` does for
+   the exact algebraic houses, think-mbdw): its side, centres and rotations are then
+   elements of `Q(alpha)`, every step below runs over that field exactly
+   (`devtools.exact_scalars`), and the view is written in the witness's own field.
 2. **Rotation matching.** Each view square's rotation, taken modulo 90 degrees, is mapped
    to an exact rotation: axis-aligned, `(1, 0)`, within a sine of `1e-9` of the axis
    (about `5.7e-8` degrees); otherwise the exact `(c, s)` of the lowest-index witness
@@ -56,11 +60,13 @@ earns that relation. It re-solves the view's tight contacts as exact equalities 
    `s_W - S*`, and the order above makes that row an upper-right wall. When `s_W < S*`, as
    at a decimal witness whose printed side truncates an irrational optimum, no packing
    exists at `s_W` and the verification refuses.
-5. **Exact verification.** The pose is written as a rational centre-basis Witness/v2
-   document at `s_W` and decided by both maintained exact routes,
-   `sqpack.witness.exact_verify` and `check_rational_witness_independent`, which share no
-   geometry code. Both refusing refuses the view, `overlap`; one refusing what the other
-   accepts refuses it too, `routes-disagree`; both accepting is the status `same`. A pose
+5. **Exact verification.** The pose is written as a centre-basis Witness/v2 document at
+   `s_W`, rational or in the witness's number field, and decided by both maintained exact
+   routes, `sqpack.witness.exact_verify` and the independent checker of its kind,
+   `check_rational_witness_independent` over `Q` or `check_algebraic_witness_independent`
+   over a number field, neither of which shares geometry code with the first. Both
+   refusing refuses the view, `overlap`; one refusing what the other accepts refuses it
+   too, `routes-disagree`; both accepting is the status `same`. A pose
    whose exact coordinates are too long for Python to write as text is refused,
    `literal-too-large`.
 
@@ -94,7 +100,9 @@ from typing import Any, Literal
 
 from strif import atomic_output_file
 
+from devtools import check_algebraic_witness_independent as algebraic
 from devtools import check_rational_witness_independent as independent
+from devtools import exact_scalars as scalars
 from devtools.upper_bound_packets import RATIONAL_DIGITS
 from sqpack.witness import (
     WitnessError,
@@ -174,23 +182,26 @@ class SameSideError(Exception):
 # --------------------------------------------------------------------------------------
 
 
-def literal(value: Fraction) -> str:
-    """The witness format's rational literal."""
-    if value.denominator == 1:
-        return str(value.numerator)
-    return f"{value.numerator}/{value.denominator}"
+def literal(value: scalars.Scalar) -> str:
+    """The witness format's rational literal; a field element as `exact_scalars.text`."""
+    if isinstance(value, Fraction):
+        if value.denominator == 1:
+            return str(value.numerator)
+        return f"{value.numerator}/{value.denominator}"
+    return scalars.text(value)
 
 
-def decimal_text(value: Fraction, digits: int = 40) -> str:
+def decimal_text(value: scalars.Scalar, digits: int = 40) -> str:
     """`value` to `digits` significant digits, rounded to nearest."""
+    rational = scalars.approximate(value, digits + 20)
     with localcontext() as context:
         context.prec = digits
-        return str(Decimal(value.numerator) / Decimal(value.denominator))
+        return str(Decimal(rational.numerator) / Decimal(rational.denominator))
 
 
-def plain_decimal(value: Fraction, places: int) -> str:
+def plain_decimal(value: scalars.Scalar, places: int) -> str:
     """`value` as a plain decimal with `places` places, never in exponent form."""
-    scaled = round(value * 10**places)
+    scaled = round(scalars.approximate(value, places + 5) * 10**places)
     sign = "-" if scaled < 0 else ""
     digits = str(abs(scaled)).rjust(places + 1, "0")
     return f"{sign}{digits[:-places]}.{digits[-places:]}" if places else f"{sign}{digits}"
@@ -208,10 +219,11 @@ def turn(rotation: Rotation, quarter_turns: int) -> Rotation:
 
 
 def support(rotation: Rotation, normal: Rotation) -> Fraction:
-    """Half-width of a unit square of this rotation along the unit direction `normal`."""
+    """Half-width of a unit square of this rotation along the unit direction `normal`: a
+    `Fraction`, or over a number-field frame an element of its field."""
     c, s = rotation
     nx, ny = normal
-    return (abs(nx * c + ny * s) + abs(-nx * s + ny * c)) / 2
+    return (scalars.absolute(nx * c + ny * s) + scalars.absolute(-nx * s + ny * c)) / 2  # pyright: ignore[reportReturnType]
 
 
 def support_f(rotation: tuple[float, float], normal: tuple[float, float]) -> float:
@@ -262,15 +274,17 @@ class Frame:
     """The source witness's exact rational frame: `s_W` and one rotation per square."""
 
     kind: str
-    """`rational` or `decimal`, the witness's scalar kind."""
+    """`rational`, `decimal` or `algebraic-number-field`, the witness's scalar kind."""
     side: Fraction
-    """`s_W`."""
+    """`s_W`: a `Fraction`, or over a number field its `FieldElement`."""
     reported_side: Fraction
-    """The side the witness prints; equal to `side` for a rational witness."""
+    """The side the witness prints; equal to `side` for an exact witness."""
     centers: list[Point]
     rotations: list[Rotation]
     ids: list[Any]
     derivation: str
+    scalar: dict[str, Any] | None = None
+    """The witness's `scalar` block over a number field, which its views state too."""
 
 
 def witness_kind(witness: Mapping[str, Any]) -> str:
@@ -297,11 +311,39 @@ def _center_of(corners: Sequence[Point]) -> Point:
     ) / 4
 
 
-def exact_frame(witness: Mapping[str, Any]) -> Frame:
-    """The frame the policy defines: the witness's own, or its 36-digit promotion."""
+def field_frame(witness: Mapping[str, Any]) -> Frame:
+    """A number-field witness's own exact pose over its field, one field object per
+    `scalar` block (`exact_scalars.field_of`), so the frame's elements combine with a
+    view's that states the same block."""
+    field = scalars.field_of(witness)
+    if field is None:  # Defensive: the caller has read the kind.
+        raise SameSideError("no-exact-frame", "the witness states no number field")
+    expanded, side = materialize_exact_witness(witness)
+    squares = [
+        [(scalars.in_field(x, field), scalars.in_field(y, field)) for x, y in square]
+        for square in expanded
+    ]
+    exact_side = scalars.in_field(side, field)
+    return Frame(
+        kind=scalars.NUMBER_FIELD,
+        side=exact_side,  # pyright: ignore[reportArgumentType]
+        reported_side=exact_side,  # pyright: ignore[reportArgumentType]
+        centers=[_center_of(square) for square in squares],  # pyright: ignore[reportArgumentType]
+        rotations=[_rotation_of(square) for square in squares],  # pyright: ignore[reportArgumentType]
+        ids=[square["id"] for square in witness["squares"]],
+        derivation="the witness's own exact pose over its number field Q(alpha)",
+        scalar=dict(witness["scalar"]),
+    )
+
+
+def exact_frame(witness: Mapping[str, Any], *, number_field: bool = False) -> Frame:
+    """The frame the policy defines: the witness's own, or its 36-digit promotion; with
+    `number_field`, a number-field witness's own pose over its field (`field_frame`)."""
     kind = str(witness["scalar"]["kind"])
     if witness.get("square_size") != "1":
         raise SameSideError("no-exact-frame", "the frame is for unit squares only")
+    if kind == scalars.NUMBER_FIELD and number_field:
+        return field_frame(witness)
     reported_side = Fraction(str(witness["side"])) if isinstance(witness["side"], str) else None
     if kind == "rational" and reported_side is not None:
         expanded, side = materialize_exact_witness(witness)
@@ -373,12 +415,30 @@ def match_rotations(
     view: Sequence[GeneratorPose],
     *,
     tolerance: float = ROTATION_TOLERANCE_DEGREES,
+    own: bool = False,
 ) -> list[Matched]:
-    """Each view square's exact rotation from the frame, or `unmatched-rotation`."""
+    """Each view square's exact rotation from the frame, or `unmatched-rotation`.
+
+    With `own`, for a generator whose view square `i` is the witness's square `i`
+    (`regularize_grid_slack`), a tilted square whose stated rotation is its own within the
+    tolerance keeps its own exact rotation rather than its class representative's, and
+    only a rotation stated as exactly `0` is turned to the axes. Two classes a few `1e-14`
+    degrees apart are distinct exact rotations (n = 258's house, over a field of degree
+    8), and merging them moves the witness's exact contacts by `1e-31`, which no
+    re-solve closes."""
     classes = [degrees_of(rotation) for rotation in frame.rotations]
     matched: list[Matched] = []
     for index, pose in enumerate(view):
         degrees = float(pose.degrees)
+        if own and degrees != 0.0 and index < len(classes):
+            c, s = frame.rotations[index]
+            if c != 0 and s != 0 and class_distance(degrees, classes[index]) <= tolerance:
+                quarter = min(
+                    range(4),
+                    key=lambda k: circular_distance(degrees, classes[index] + 90.0 * k),
+                )
+                matched.append(Matched(turn(frame.rotations[index], quarter), index, quarter))
+                continue
         if class_distance(degrees, 0.0) <= tolerance:
             matched.append(Matched(AXIS, None, 0))
             continue
@@ -652,6 +712,16 @@ def settle(
 # --------------------------------------------------------------------------------------
 
 
+FIELD_LIMITATIONS = (
+    "A regularized view brought to the source witness's side exactly over its number field "
+    "Q(alpha): every rotation is the witness's own exact rotation in that field or "
+    "axis-aligned, the contacts closed at the generator's pose are re-solved as exact "
+    "equalities at the witness's side over the field, and the pose is decided by two exact "
+    "routes. A drawing frame at the record's side, not a new bound; whether it is the same "
+    "packing as the source is measured elsewhere."
+)
+
+
 def same_side_witness(
     source: Mapping[str, Any],
     frame: Frame,
@@ -660,13 +730,42 @@ def same_side_witness(
     *,
     view_id: str,
 ) -> dict[str, Any]:
-    """The re-solved view as a rational centre-basis Witness/v2 record at `s_W`."""
+    """The re-solved view as a centre-basis Witness/v2 record at `s_W`: rational, or over
+    a number-field frame in the witness's own field, its `scalar` block copied."""
     retained = source.get("source") or {}
     origin = {"path": str(retained.get("path") or "unrecorded")}
     for key in ("key", "url", "retrieved"):
         value = retained.get(key)
         if isinstance(value, str) and value:
             origin[key] = value
+    if frame.scalar is not None:
+        return {
+            "id": view_id,
+            "n": len(centers),
+            "side": scalars.scalar(frame.side),
+            "square_size": "1",
+            "representation": "center-basis",
+            "scalar": dict(frame.scalar),
+            "coordinates": {
+                "origin": "lower-left",
+                "axes": "x-right-y-up",
+                "angle_unit": "not-applicable",
+            },
+            "squares": [
+                {
+                    "id": frame.ids[index] if index < len(frame.ids) else index + 1,
+                    "center": [scalars.scalar(x), scalars.scalar(y)],
+                    "basis": [scalars.scalar(m.rotation[0]), scalars.scalar(m.rotation[1])],
+                }
+                for index, ((x, y), m) in enumerate(zip(centers, matched, strict=True))
+            ],
+            "claim": {
+                "coordinate_provenance": "reported",
+                "method": "exact-algebraic",
+                "limitations": FIELD_LIMITATIONS,
+            },
+            "source": origin,
+        }
     return {
         "id": view_id,
         "n": len(centers),
@@ -709,15 +808,20 @@ def verify_both(
     matched: Sequence[Matched],
     side: Fraction,
 ) -> dict[str, Any]:
-    """Both exact decisions of the pose, each on its own geometry."""
+    """Both exact decisions of the pose, each on its own geometry: over `Q` the
+    independent checker decides corners this module expands itself, and over a number
+    field the algebraic checker reads the written view and expands it on its own."""
     started = time.perf_counter()
     result, report = exact_verify(witness)
     first_seconds = time.perf_counter() - started
     started = time.perf_counter()
-    corners = [
-        corners_of(center, m.rotation) for center, m in zip(centers, matched, strict=True)
-    ]
-    second = independent.check_squares(corners, side)
+    if witness["scalar"]["kind"] == scalars.NUMBER_FIELD:
+        second = algebraic.check_witness(witness)
+    else:
+        corners = [
+            corners_of(center, m.rotation) for center, m in zip(centers, matched, strict=True)
+        ]
+        second = independent.check_squares(corners, side)
     second_seconds = time.perf_counter() - started
     return {
         "exact_verify": {
