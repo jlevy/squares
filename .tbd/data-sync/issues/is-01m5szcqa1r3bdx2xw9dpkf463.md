@@ -5,14 +5,14 @@ title: Review the 28 September rectangle certificates (39d8ecc) and the format_t
 kind: task
 status: open
 priority: 3
-version: 1
+version: 2
 labels:
   - validation
   - result-import
 dependencies: []
 parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 created_at: 2026-10-25T16:48:08.001Z
-updated_at: 2026-10-25T16:48:08.001Z
+updated_at: 2026-10-26T02:15:06.369Z
 ---
 The review T-046's census route still needs before its C3 can be recorded (#773). Opened 2026-10-25 by w-backlog-1025 at the coordinator's request, when think-kf3o and think-sb7a landed the receipts. Unclaimed: a strong-max review lane, not yet started (the owner's token budget).
 
@@ -32,3 +32,7 @@ The receipts it reads are retained on branch claude/friendly-einstein-gf9z0h-bac
 - Depends on: think-kf3o's PR merged (the receipts); think-wcex for C1 is separate and not a prerequisite.
 - Done when: the review is retained and mapped, T-046 cites one census evidence entry per standing certificate, tests/test_sqverify_fast_census.py passes with them, and devtools.check_results derives V3/C3 for T-046; #773 gets the stage 7 reply.
 - Machine note: none beyond the project interpreter; the sqverify-fast binary is needed only for --evidence's build facts.
+
+## Notes
+
+2026-10-26 w-backlog-1025: the receipts are in PR https://github.com/jlevy/squares/pull/821 (commit dcde87d28), branch claude/friendly-einstein-gf9z0h-backlog-1.
