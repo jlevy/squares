@@ -411,47 +411,39 @@ def test_a_decision_names_what_it_still_owes_and_the_bead_that_owns_it() -> None
 
 
 #: The exact algebraic houses adopted on 23 October 2026 (think-ot5c), each drawn
-#: unregularized while its regularization is owed to think-mbdw (review A4 of #756).
-EXACT_HOUSES_OWED = (102, 123, 153, 207, 258, 259, 302)
+#: unregularized while its regularization was owed to think-mbdw (review A4 of #756), and
+#: drawn by grid-slack's version 2 in its own number field since 26 October 2026.
+EXACT_HOUSES = (102, 123, 153, 207, 258, 259, 302)
+
+
+def test_the_exact_algebraic_houses_are_regularized_and_nothing_is_owed() -> None:
+    # In the owner's words of 23 October 2026, a drawing is regularized or it is not. The
+    # seven exact houses were `regularization-owed` until grid-slack's version 2 drew each
+    # in its own number field (think-mbdw): now each is regularized, drawn from that view,
+    # with no `SETTLED` entry, and no count owes a regularization.
+    record = _record()
+    rows = {row["n"]: row for row in record["states"]}
+    assert [n for n, row in rows.items() if row["state"] == defaults.OWED] == []
+    for n in EXACT_HOUSES:
+        assert rows[n]["state"] == defaults.REGULARIZED_STATE, n
+        assert rows[n]["drawn"] == defaults.VIEW, n
+        assert rows[n]["generator"] == "regularize_grid_slack/2", n
+        assert n not in defaults.SETTLED, n
+    totals = record["totals"]["states"]
+    assert totals[defaults.OWED] == 0
+    _found, listed = defaults.state_problems()
+    assert "0 regularization owed" in listed[-1]
+    assert "think-mbdw" not in dict(defaults.deferrals()).values()
 
 
 def test_a_regularization_owed_is_its_own_state_and_names_its_bead() -> None:
-    # In the owner's words of 23 October 2026, a drawing is regularized or it is not. At
-    # the seven exact houses the strong generators ran and drew no view the improvement
-    # rule could judge (grid-slack has no exact frame on a number-field witness, and Evan
-    # Daniel's solves are rational sides above the algebraic U), so nothing was judged no
-    # better: each is `regularization-owed`, counted apart from the decided counts, and
-    # its entry names the bead that owes the regularization, which the bead-tree gate
-    # holds open through `deferrals`. One that names no bead fails the gate.
-    record = _record()
-    rows = {row["n"]: row for row in record["states"]}
-    owed = sorted(n for n, row in rows.items() if row["state"] == defaults.OWED)
-    assert owed == list(EXACT_HOUSES_OWED)
-    for n in owed:
-        held = defaults.SETTLED[n]
-        assert held.state == defaults.OWED, n
-        assert held.owed is not None, n
-        assert held.owed.startswith("think-mbdw: "), n
-        assert rows[n]["drawn"] == defaults.HOUSE, n
-        assert rows[n]["why"].endswith(f"; still owed: {held.owed}"), n
-    totals = record["totals"]["states"]
-    assert totals[defaults.OWED] == len(EXACT_HOUSES_OWED)
-    assert totals[defaults.DECIDED] == sum(
-        1 for row in rows.values() if row["state"] == defaults.DECIDED
-    )
-    _found, listed = defaults.state_problems()
-    summary = listed[-1]
-    assert summary.startswith("regularization states: 324 counts: ")
-    assert f"{len(EXACT_HOUSES_OWED)} regularization owed" in summary
-    assert f"{totals[defaults.DECIDED]} decided no better" in summary
-    named = dict(defaults.deferrals())
-    for n in owed:
-        assert named[f"default_drawings.py SETTLED n={n} owed"] == "think-mbdw", n
-
-    n = EXACT_HOUSES_OWED[0]
-    unowned = {**defaults.SETTLED, n: defaults.SETTLED[n]._replace(owed=None)}
+    # The state stays for a capability a later count may want: an entry `OWED` must name
+    # the bead that owes it, and one that names none, or a state the gate does not know,
+    # fails the gate.
+    n = min(n for n, held in defaults.SETTLED.items() if held.state == defaults.DECIDED)
+    unowned = {**defaults.SETTLED, n: defaults.SETTLED[n]._replace(state=defaults.OWED)}
     found, _listed = defaults.state_problems(settled=unowned)
-    assert found == [f"n={n}: a regularization owed names the bead that owes it in `owed`"]
+    assert f"n={n}: a regularization owed names the bead that owes it in `owed`" in found
     unknown = {**defaults.SETTLED, n: defaults.SETTLED[n]._replace(state="owed")}
     found, _listed = defaults.state_problems(settled=unknown)
     assert f"n={n}: SETTLED gives state 'owed'" in found

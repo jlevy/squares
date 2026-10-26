@@ -82,6 +82,7 @@ from strif import atomic_output_file
 
 from devtools import census_drawing_regularity as census
 from devtools import default_drawings as defaults
+from devtools import exact_scalars as scalars
 from devtools import improvement_rule
 from devtools import regularize_evand as driver
 from devtools import regularize_grid_slack as grid
@@ -206,7 +207,7 @@ def decided_view(
         },
         "side": exact["side"],
         "upper": stated_bound(n),
-        "s_W": _literal(driver.source_frame(witness).side),
+        "s_W": _literal(grid.own_side(witness)),
         "row": decision.row,
         "decision": decision.decision,
         "reason": decision.reason,
@@ -374,9 +375,12 @@ def measured(n: int, drawing: census.Drawing, body: Mapping[str, Any]) -> dict[s
     provenance = (body.get("claim") or {}).get("coordinate_provenance")
     verified = drawing.kind == "regularized-view" or provenance == "verified"
     try:
-        side = driver.literal(Fraction(str(body["side"]))) if verified else None
+        # A number-field side is held exactly in the drawing's own field (think-mbdw), as
+        # `exact_scalars.text` writes it; `judge` reads it back in the count's field.
+        exact = scalars.parse(body["side"], scalars.field_of(body))
+        side = driver.literal(exact) if verified else None  # pyright: ignore[reportArgumentType]
     except TypeError, ValueError:
-        side = None  # an exact side over a number field, which no rational view meets
+        side = None
     return {
         "n": n,
         "drawing": {"kind": drawing.kind, "path": drawing.path, "generator": drawing.generator},
@@ -447,8 +451,15 @@ def _difference(a: Fraction, b: Fraction | None) -> float | None:
     return None if b is None else float(a - b)
 
 
-def _fraction(text: str | None) -> Fraction | None:
-    return None if text is None else Fraction(text)
+def _fraction(text: str | None, field: Any = None) -> Fraction | None:
+    """A side as a row states it, exactly: a rational, or over a number field an element
+    of the count's field (`exact_scalars.parse_text`)."""
+    return None if text is None else scalars.parse_text(text, field)  # pyright: ignore[reportReturnType]
+
+
+def count_field(n: int) -> Any:
+    """The number field of count `n`'s house witness, which its views state; None over Q."""
+    return scalars.field_of(grid.load_source(n))
 
 
 def judge(row: Mapping[str, Any], now: Mapping[str, Any]) -> dict[str, Any]:
@@ -457,14 +468,18 @@ def judge(row: Mapping[str, Any], now: Mapping[str, Any]) -> dict[str, Any]:
     if not judged["view"]:
         judged.update(gains=[], worse=[], notes=[])
     else:
-        side = Fraction(judged["side"])
-        drawn = _fraction(now.get("side"))
+        stated = (judged["side"], now.get("side"), judged.get("s_W"))
+        listed = any(str(text).startswith("[") for text in stated if text is not None)
+        field = count_field(int(judged["n"])) if listed else None
+        side = _fraction(judged["side"], field)
+        assert side is not None
+        drawn = _fraction(now.get("side"), field)
         # `U` held exactly: a closed form is compared with the side, not read as unknown.
         bound = held_bound(judged["upper"])
         order = None if bound is None else bound.compare(side)
         judged.update(
             minus_U=None if bound is None or order is None else bound.difference(side),
-            minus_s_W=_difference(side, _fraction(judged["s_W"])),
+            minus_s_W=_difference(side, _fraction(judged["s_W"], field)),
             minus_drawn=_difference(side, drawn),
             at_most_U=order is not None and order <= 0,
             below_U=order is not None and order < 0,
