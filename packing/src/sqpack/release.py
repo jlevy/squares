@@ -9403,8 +9403,11 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "`github_references` only through `overview_sections`' "
             "`parse_github_reference`, unchanged, and no paper builder calls "
             "`links_section`, `result_popover_html` or the News renderers, which only the "
-            "site's pages and result pages call. No render was taken, and every paper "
-            "keeps its version: v0.4.30, v0.1.11, v0.1.4 and v0.2.7."
+            "site's pages and result pages call. Measured at link revision f2341b95: the "
+            "four papers rendered into empty site directories twice from this tree and "
+            "once with main's three changed modules swapped in, 69 files each, all "
+            "byte-identical across the three. Every paper keeps its version: v0.4.30, "
+            "v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
 )

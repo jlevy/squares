@@ -2441,6 +2441,7 @@ entries:
     pull_requests:
       - 439
       - 440
+    issues: [414]
     summary: |-
       [Ryu Sungjoon](packing/contributors/people/ryu-sungjoon.md) reports quarter-power and cube-root lower bounds for the deficiency of packings of
       closed, pairwise-disjoint unit squares in an integer-sided square. The project retains the
@@ -2580,6 +2581,7 @@ entries:
     title: Hosono Reports Seven Stronger Lower Bounds
     pull_requests:
       - 450
+    issues: [446]
     summary: |-
       [Hiroaki Hosono](packing/contributors/people/hiroaki-hosono.md) (wand125) reports stronger lower bounds at 19, 20, 26, 27, 28, 29 and 31
       squares, using measure certificates on finer direction nets. The sources and exact
@@ -2680,6 +2682,7 @@ entries:
     title: 'Hosono’s Twelve Certificates Narrow the 17-Square Search'
     pull_requests:
       - 475
+    issues: [472]
     summary: |-
       Twelve sub-pattern certificates from [Hiroaki Hosono](packing/contributors/people/hiroaki-hosono.md) (wand125) pass complete replays and
       enter the 17-square research census. They reduce remaining symmetry classes from 4,683

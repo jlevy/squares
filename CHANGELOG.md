@@ -1616,7 +1616,7 @@ input-premise checks are retained; complete local geometric replays remain pendi
 - Standing bounds and assurance ratings are unchanged. Later reports at 28 and 29
   squares have their own entries and review history.
 
-PRs and supporting records: [PR \#450](https://github.com/jlevy/squares/pull/450) · [Seven reports and the 27-square follow-up](packing/resources/web/wand125-fine-net-lower-bounds-2026-10-08/README.md).
+Issues, PRs and supporting records: [Issue \#446](https://github.com/jlevy/squares/issues/446) · [PR \#450](https://github.com/jlevy/squares/pull/450) · [Seven reports and the 27-square follow-up](packing/resources/web/wand125-fine-net-lower-bounds-2026-10-08/README.md).
 
 <a id="changelog-entry-n17-twelve-kernel-certificates"></a>
 
@@ -1636,7 +1636,7 @@ to 3,636, leaving 28,528 states to consider.
 - The certificates reduce this finite search; they neither close the global proof nor
   improve the numerical lower bound.
 
-PRs and supporting records: [PR \#475](https://github.com/jlevy/squares/pull/475) · [Experiment 317 and its acceptance evidence](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-317-h341-n17-issue-472-kernel-admission.md) · [Hosted certificate manifest](packing/hosted/n17-issue-472-kernel-certificates.yaml).
+Issues, PRs and supporting records: [Issue \#472](https://github.com/jlevy/squares/issues/472) · [PR \#475](https://github.com/jlevy/squares/pull/475) · [Experiment 317 and its acceptance evidence](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-317-h341-n17-issue-472-kernel-admission.md) · [Hosted certificate manifest](packing/hosted/n17-issue-472-kernel-certificates.yaml).
 
 <a id="changelog-entry-packing-methods-survey-first-publication"></a>
 
@@ -1671,7 +1671,7 @@ papers and a review of their geometric arguments and numerical constants.
 - The papers disclose extensive Claude assistance and no human peer review. Their claims
   remain reported and change no bound in the 1–324 case corpus.
 
-PRs and supporting records: [PR \#439](https://github.com/jlevy/squares/pull/439) · [PR \#440](https://github.com/jlevy/squares/pull/440) · [Asymptotic bound statements](packing/frontier/asymptotic-waste-bounds.yaml) · [Review of the quarter-power and cube-root arguments](docs/project/reviews/review-2026-10-08-quarter-cube-proof-chains.md).
+Issues, PRs and supporting records: [Issue \#414](https://github.com/jlevy/squares/issues/414) · [PR \#439](https://github.com/jlevy/squares/pull/439) · [PR \#440](https://github.com/jlevy/squares/pull/440) · [Asymptotic bound statements](packing/frontier/asymptotic-waste-bounds.yaml) · [Review of the quarter-power and cube-root arguments](docs/project/reviews/review-2026-10-08-quarter-cube-proof-chains.md).
 
 <a id="changelog-entry-xu-rational-and-radical-packings"></a>
 
