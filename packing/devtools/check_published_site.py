@@ -33,6 +33,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import html
 import http.client
 import os
 import posixpath
@@ -624,6 +625,21 @@ def news_checks(text: str) -> list[tuple[bool, str]]:
     return [(not problems, line)]
 
 
+def _entry_line(text: str, anchor: str) -> str:
+    """The Changelog line an entry owns, from its own `li` to that element's end.
+
+    `changelog_entry_line` writes one list item an entry, carrying the entry's anchor, so
+    the line is where its links have to be. An empty string where the anchor is absent
+    lets the caller report the missing link rather than raise.
+    """
+    opening = f'<li id="{html.escape(anchor, quote=True)}">'
+    start = text.find(opening)
+    if start < 0:
+        return ""
+    end = text.find("</li>", start)
+    return text[start:end] if end > start else text[start:]
+
+
 def changelog_checks(text: str) -> list[tuple[bool, str]]:
     """Hold the Changelog page to the whole retained history, not only its stories."""
     page = render_changelog.CHANGELOG_PAGE
@@ -642,13 +658,15 @@ def changelog_checks(text: str) -> list[tuple[bool, str]]:
             document, entries, markup, supporting=lambda entry: entry["id"] not in told
         )
     )
-    links = {element.attrs.get("href") for element in markup.find(tag="a")}
+    # Each story link is read inside the line that owes it, not against the page's own
+    # set of links: the same address written under another entry would satisfy a
+    # page-wide check while leaving this entry with no route to its story.
     problems.extend(
         f"story not linked for {entry['id']}"
         for entry in entries
         if entry["id"] in told
         and f"{render_changelog.NEWS_PAGE}#{render_changelog.entry_anchor(entry['id'])}"
-        not in links
+        not in _entry_line(text, render_changelog.entry_anchor(entry["id"]))
     )
     problems.extend(
         f"missing or repeated day {day}"

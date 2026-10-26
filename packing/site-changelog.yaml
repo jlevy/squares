@@ -1229,10 +1229,6 @@ entries:
     categories:
       - site
       - documentation
-    news_exclusion: >-
-      Where the tutorials sit in the site's navigation; the explanations themselves are
-      unchanged, so this is a site-only change and a Changelog line (the owner, 26
-      October 2026).
     summary: |-
       The Explanations page pairs a short introduction to square packing with an advanced
       tutorial. Beginners can start with bounds and small examples; the companion develops
@@ -2333,9 +2329,6 @@ entries:
     topics:
       - project
       - engineering
-    news_exclusion: >-
-      How the atlas reads on screen and in print: a presentation change rather than a new
-      packing or bound, so a Changelog line (the owner, 26 October 2026).
     summary: |-
       The web Atlas and redesigned 100- and 324-packing posters share legends and complete
       named credits. Triangle and Grid layouts and Fixed, Row and Global scales provide

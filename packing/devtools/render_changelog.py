@@ -123,8 +123,12 @@ def news_significance_tooltip(score: int) -> str:
     return f"{news_significance_meanings()[score]}."
 
 
-def entry_significance(entry: Document) -> Significance:
-    """The typed significance view of a structurally validated entry."""
+def entry_significance(entry: Mapping[str, Any]) -> Significance:
+    """The typed significance view of a structurally validated entry.
+
+    Any mapping, since it only reads: a `Document` satisfies it, and so does an entry a
+    publication audit holds as a read-only mapping.
+    """
     return {
         "score": entry["significance"]["score"],
         "rationale": entry["significance"]["rationale"],
@@ -1347,7 +1351,7 @@ def news_forward_targets(document: Document) -> dict[str, str]:
 
 
 def entry_targets(
-    document: Document, entry: Document, *, supporting: bool
+    document: Mapping[str, Any], entry: Mapping[str, Any], *, supporting: bool
 ) -> list[tuple[str, str]]:
     """An entry's GitHub threads as `(label, target)`, issues then pull requests, and
     with `supporting` its artifacts, publication evidence and supporting records too.
@@ -1389,7 +1393,9 @@ def _changelog_link(label: str, target: str) -> str:
     return f'<a href="{html.escape(url, quote=True)}"{away}>{html.escape(label)}</a>'
 
 
-def changelog_entry_line(document: Document, entry: Document, *, in_news: bool) -> str:
+def changelog_entry_line(
+    document: Mapping[str, Any], entry: Mapping[str, Any], *, in_news: bool
+) -> str:
     """One site or project change in its day's block on the Changelog page: its title,
     then on the quieter line its score and every GitHub thread behind it.
 

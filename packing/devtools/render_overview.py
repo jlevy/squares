@@ -1495,7 +1495,8 @@ def overview_page() -> Page:
         description=OVERVIEW_DESCRIPTION,
         toc=False,
         rewrite_body=_case_links,
-        # `results.css`'s rollup classes draw Recently Added.
+        # `results.css` draws the Recent Major Results table; the rollup it also styles
+        # moved to the Changelog on 26 October 2026.
         page_styles=(HOMEPAGE_CSS, RESULTS_CSS),
         page_scripts=(
             NEWS_CARDS_SCRIPT,
@@ -1603,6 +1604,9 @@ def changelog_page() -> Page:
         ),
         toc=False,
         rewrite_body=_case_links,
+        # The log draws with the rollup classes `results.css` defines, which the home
+        # page loaded while it carried the block.
+        page_styles=(RESULTS_CSS,),
         page_scripts=(POPOVER_SCRIPT,),
     )
 

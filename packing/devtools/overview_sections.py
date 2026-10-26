@@ -23,7 +23,7 @@ from datetime import date, timedelta
 from functools import cache
 from html.parser import HTMLParser
 from pathlib import Path
-from typing import Any, Literal, NamedTuple, get_args
+from typing import TYPE_CHECKING, Any, Literal, NamedTuple, get_args
 from urllib.parse import urlsplit
 from xml.etree import ElementTree as ET
 
@@ -32,6 +32,9 @@ from devtools.artifact_dates import long_date, written_date
 from devtools.check_results import KINDS
 from devtools.contributor_credit import occurrence_registry
 from devtools.github_references import parse_github_reference
+
+if TYPE_CHECKING:  # `render_changelog` imports this module, so only the type.
+    from devtools.render_changelog import Document as ChangelogDocument
 from devtools.overview_data import (
     APOSTROPHE,
     BIBLIOGRAPHY,
@@ -1689,11 +1692,12 @@ def beyond_entry(found: BeyondRows, sources: Mapping[str, Mapping[str, Any]]) ->
     )
 
 
-def changelog_rollup(overview: Overview, document: Mapping[str, Any]) -> str:
+def changelog_rollup(overview: Overview, document: ChangelogDocument) -> str:
     """The Changelog page's whole log: one disclosure a day over the entire record,
     newest first, holding that day's results, its new record packings and its rows
-    beyond the corpus, as `recently_added` writes them, and then its site and project
-    changes as one brief line each (`render_changelog.changelog_entry_line`).
+    beyond the corpus, as `added_entry`, `house_entry` and `beyond_entry` write them, and
+    then its site and project changes as one brief line each
+    (`render_changelog.changelog_entry_line`).
 
     This is the section that used to open the home page as Recently Added. It moved here
     on 26 October 2026, when the owner asked for the Changelog to be "concise, mostly
@@ -1741,7 +1745,7 @@ def changelog_rollup(overview: Overview, document: Mapping[str, Any]) -> str:
     return f'<div class="site-rollup site-added">{"".join(blocks)}</div>'
 
 
-def changelog_since(overview: Overview, document: Mapping[str, Any]) -> str:
+def changelog_since(overview: Overview, document: ChangelogDocument) -> str:
     """The day the Changelog opens on: the oldest day it shows, over results and changes
     alike, as its introduction names it."""
     days = [recent.day for recent in recent_days(overview, days=None)]

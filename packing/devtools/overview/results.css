@@ -1,8 +1,9 @@
 /* The results page's overview above its table, two stacks of KPress's own disclosure:
    the last seven days' registrations, one a day (overview_sections.recent_added), then
    the weekly rollup before them, one a week (recent_rollup). Two blocks of a stack share
-   one rule. The home page's Recently Added is the first stack again, with its new record
-   packings and dated rows (recently_added). */
+   one rule. The Changelog page's log is the first stack again, over the whole record,
+   with its new record packings, dated rows and site changes
+   (overview_sections.changelog_rollup); it drew on the home page until 26 October 2026. */
 .kpress .site-rollup {
   margin-block: 1rem var(--site-table-space);
 }

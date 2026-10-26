@@ -305,15 +305,18 @@ def test_publication_audit_refuses_lost_archives_or_reintroduced_maintenance(
     # tooling change is a Changelog line instead (the owner, 26 October 2026). Nothing
     # touching the records, their regularization or the mathematics is on this roster.
     assert sorted(entry["id"] for entry in excluded) == [
-        "basic-and-advanced-tutorials",
         "contributor-profiles-and-contribution-summaries",
         "every-selected-validation-check-runs",
         "paper-typography-and-title-case",
         "project-changelog-and-independent-editions",
-        "readable-atlas-and-print-exports",
         "significance-levels-for-news-and-pull-requests",
         "unified-site-navigation",
     ]
+    # Two more were excluded on 26 October 2026 and put back the same day, because the
+    # test above is the one that has to hold: `basic-and-advanced-tutorials` is a
+    # substantial public explanation of the problem and the research methods by its own
+    # rationale, and `readable-atlas-and-print-exports` launched the redesigned posters,
+    # which are published artifacts with their own editions. Neither is site-only.
     assert all(entry["news_exclusion"].strip() for entry in excluded)
     maintenance = next(
         entry for entry in excluded if entry["id"] == "paper-typography-and-title-case"

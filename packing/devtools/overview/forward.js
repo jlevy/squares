@@ -160,6 +160,13 @@
       forward("about.html");
       return;
     }
+    // Recently Added moved to the Changelog on 26 October 2026. A bookmark to the old
+    // section lands on the log itself rather than carrying a fragment this page no
+    // longer has and the Changelog never had.
+    if (id === "recently-added" && !document.getElementById(id)) {
+      window.location.replace("changelog.html#changelog");
+      return;
+    }
   }
   const query = new URLSearchParams(window.location.search);
   if (
