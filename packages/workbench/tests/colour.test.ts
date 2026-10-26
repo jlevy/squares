@@ -16,23 +16,77 @@ function fixtureColour(): CorpusColour {
       Array.from({ length: 5 }, (_unused, shade) => hex(100 + family * 5 + shade)),
     ),
     angleToleranceDegrees: 0.5,
+    angleCentres: [],
   };
 }
 
 test("angle classes are seam-safe and stable slots depend only on their angle", () => {
   const colours = createColourSystem(fixtureColour());
   const map = colours.buildAngleMap([89.8, 0.2, 44.4, 44.6, 65.1299]);
-  assert.equal(map.classes, 3);
-  assert.deepEqual(map.sizes, [2, 2, 1]);
-  assert(Math.min(map.centres[0] ?? 90, 90 - (map.centres[0] ?? 0)) < 1e-12);
+  // The pins are classes of their own: 44.6 joins 45 and 44.4, outside it, stays apart, so
+  // in a frame each takes the slot it takes alone.
+  assert.equal(map.classes, 4);
+  assert.deepEqual(map.sizes, [2, 1, 1, 1]);
+  assert.equal(map.centres[0], 0);
+  assert.ok(Math.abs((map.centres[1] ?? 0) - 44.4) < 1e-9);
+  assert.equal(map.centres[2], 45);
+  assert.deepEqual(map.slots.slice(0, 3), [0, 10, 1]);
   assert.deepEqual(
     [0, 0.4, 0.6, 44.4, 44.6, 45].map((angle) => colours.slotForAngle(angle)),
     [0, 0, 2, 10, 1, 1],
+  );
+  assert.deepEqual(
+    [89.8, 0.2, 44.4, 44.6, 65.1299].map((angle) => map.slotOf(angle)),
+    [0, 0, 10, 1, 15],
   );
 
   const sameAngleAlone = colours.angleFills([65.1299], [0])[0];
   const sameAngleTogether = colours.angleFills([10, 65.1299, 30], [0, 0, 0])[1];
   assert.equal(sameAngleAlone, sameAngleTogether);
+});
+
+test("a tilt the atlas shares keeps its class and slot in every frame (#554)", () => {
+  // Two shared centres either side of the 65-degree band edge, as the atlas's are.
+  const centres = [64.7291, 65.256];
+  const shared = createColourSystem({ ...fixtureColour(), angleCentres: centres });
+  const alone = createColourSystem(fixtureColour());
+  // n = 29 carries 64.7413 and 65.0374; T-151's n = 272 carries 64.5234, 65.1017 and 65.3157.
+  const n29 = [64.7413, 65.0374];
+  const n272 = [65.1017, 65.3157, 64.5234];
+  // Clustered frame by frame, n = 29's two tilts made one class at 64.9387 in slot 14 and
+  // n = 272's first two one at 65.2087 in slot 15: 65.0374 and 65.1017 drew in two colours.
+  assert.deepEqual(alone.buildAngleMap(n29).slots, [14]);
+  assert.deepEqual(alone.buildAngleMap(n272).slots, [15, 14]);
+  assert.notEqual(
+    alone.buildAngleMap(n29).slotOf(65.0374),
+    alone.buildAngleMap(n272).slotOf(65.1017),
+  );
+  // From shared centres, each frame's classes are the shared ones and every tilt takes the
+  // slot of its class's centre, whichever frame it is in and whatever else is in it.
+  const first = shared.buildAngleMap(n29);
+  const second = shared.buildAngleMap(n272);
+  assert.deepEqual(first.centres, centres);
+  assert.deepEqual(first.slots, [14, 15]);
+  assert.deepEqual(second.centres, [65.256, 64.7291]);
+  assert.deepEqual(second.slots, [15, 14]);
+  assert.deepEqual(second.sizes, [2, 1]);
+  for (const angle of [...n29, ...n272]) {
+    assert.equal(first.slotOf(angle), second.slotOf(angle));
+    assert.equal(first.slotOf(angle), shared.slotForAngle(angle));
+  }
+  assert.equal(first.classOf(65.0374), 1);
+  assert.equal(second.classOf(65.0374), 0);
+  // A tilt no shared class holds clusters with its frame's others, as every tilt once did.
+  const loose = shared.buildAngleMap([20.1, 20.4, 64.7]);
+  assert.equal(loose.classes, 2);
+  assert.ok(Math.abs((loose.centres[0] ?? 0) - 20.25) < 1e-9);
+  assert.equal(loose.classOf(20.3), 0);
+  assert.equal(loose.classOf(64.9), 1);
+  assert.equal(loose.classOf(30), -1);
+  // Centres that are unsorted, too close together or inside a pinned class are refused.
+  for (const angleCentres of [[65.256, 64.7291], [64.7291, 65.2], [0.3], [44.8], [90]]) {
+    assert.throws(() => createColourSystem({ ...fixtureColour(), angleCentres }), /centre/);
+  }
 });
 
 test("atlas slots rank unpinned classes by size with a stable identity tie break", () => {
@@ -75,6 +129,7 @@ test("colour transformation endpoints are exact and invalid palette shapes fail 
         palette: ["#000000", "#ffffff"],
         shades: [Array(5).fill("#000000"), Array(5).fill("#ffffff")],
         angleToleranceDegrees: 0.5,
+        angleCentres: [],
       }),
     /palette/,
   );
