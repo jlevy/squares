@@ -9401,8 +9401,10 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "and once with main's results.yaml and result-requests.yaml swapped in, by "
             "render_n11_lower_bounds_explainer, render_n11_optimality_review, "
             "render_n11_threshold_bound_review and render_packing_methods: 69 files "
-            "each, all byte-identical across the three. No PDF was printed. Retain "
-            "v0.4.30, v0.1.11, v0.1.4 and v0.2.7."
+            "each, all byte-identical across the three. Measured again after the gate "
+            "fixes to T-046's next_rung, at link revision 1f2507d4, swapped the same way: "
+            "69 files each, all byte-identical across the three. No PDF was printed. "
+            "Retain v0.4.30, v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
 )
