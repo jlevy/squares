@@ -34,7 +34,8 @@ issues:
     title: 'Lean proofs that 178 best-known packings are local minima (n ≤ 324): registration request'
     author: evand
     opened: '2026-10-07'
-    state: open
+    state: closed
+    closed: '2026-10-26'
     kind: result-report
     triage: done
     summary: Pinned source metadata and Lean code imported as attributed reports, with source configurations
@@ -61,6 +62,18 @@ issues:
         id: T-124
         verification: V0
         confirmation: C0
+    - url: https://github.com/jlevy/squares/issues/420#issuecomment-6412984168
+      date: '2026-10-26'
+      by: jlevy
+      kind: final
+      reported:
+      - result: local-minima-178
+        id: T-124
+        verification: V0
+        confirmation: C0
+        status: recorded
+      beads:
+      - think-juuq
     close_when: The reported import and its disposition are on main and the owner has posted the resulting
       state; unresolved proof replays remain explicitly owned.
   - number: 419
@@ -3474,7 +3487,8 @@ issues:
     title: 'n=68 exact certificate refinement below the retrieved rational ceiling: registration request'
     author: lollipoll
     opened: '2026-10-07'
-    state: open
+    state: closed
+    closed: '2026-10-26'
     kind: result-report
     triage: done
     summary: The original rational refinement is T-118 at V3/C3. The separate v1.2 exact-root feasibility
@@ -3523,6 +3537,25 @@ issues:
       - result: v12-restricted-attainment
         id: E-rehwaldt-n68-restricted-attainment-v12-report
         status: recorded
+    - url: https://github.com/jlevy/squares/issues/428#issuecomment-6412986397
+      date: '2026-10-26'
+      by: jlevy
+      kind: final
+      reported:
+      - result: finite-rational-refinement
+        id: T-118
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: superseded
+      - result: v12-root-feasibility
+        id: E-rehwaldt-n68-root-feasibility-v12-report
+        status: recorded
+      - result: v12-restricted-attainment
+        id: E-rehwaldt-n68-restricted-attainment-v12-report
+        status: recorded
+      beads:
+      - think-nv5o
     close_when: Accurate imported and reviewed states have reached main and remaining proof/replay obligations
       and any owner response have explicit dispositions. Source-only publication does not close this
       request.
@@ -3538,7 +3571,8 @@ issues:
       T-102 to T-111)'
     author: wand125
     opened: '2026-10-08'
-    state: open
+    state: closed
+    closed: '2026-10-26'
     kind: result-report
     triage: done
     summary: All seven fine-net lower-bound statements are recorded as attributed reports with complete
@@ -4205,6 +4239,197 @@ issues:
       by: jlevy
       kind: follow-up
       reported: []
+    - url: https://github.com/jlevy/squares/issues/446#issuecomment-6413029082
+      date: '2026-10-26'
+      by: jlevy
+      kind: final
+      reported:
+      - result: fine-net-n19
+        id: T-233
+        verification: V0
+        confirmation: C1
+        status: reviewed
+        position: pending adoption
+      - result: fine-net-n20
+        id: T-233
+        verification: V0
+        confirmation: C1
+        status: reviewed
+        position: pending adoption
+      - result: fine-net-n26
+        id: T-233
+        verification: V0
+        confirmation: C1
+        status: reviewed
+        position: pending adoption
+      - result: fine-net-n27
+        id: E-wand125-fine-net-lower-bounds-446-report
+        status: recorded
+      - result: fine-net-n28
+        id: E-wand125-fine-net-lower-bounds-446-report
+        status: recorded
+      - result: fine-net-n29
+        id: E-wand125-fine-net-lower-bounds-446-report
+        status: recorded
+      - result: fine-net-n31
+        id: E-wand125-fine-net-lower-bounds-446-report
+        status: recorded
+      - result: fine-net-n27-5655-followup
+        id: T-233
+        verification: V0
+        confirmation: C1
+        status: reviewed
+        position: pending adoption
+      - result: fine-net-n29-582-followup
+        id: T-132
+        verification: V0
+        confirmation: C0
+        status: recorded
+        position: pending adoption
+      - result: fine-net-n37-n39-n44-1016
+        id: T-176
+        verification: V0
+        confirmation: C1
+        status: reviewed
+        position: pending adoption
+      - result: fine-net-n37-n39-n44-1016
+        id: T-177
+        verification: V0
+        confirmation: C1
+        status: reviewed
+        position: pending adoption
+      - result: fine-net-n37-n39-n44-1016
+        id: T-178
+        verification: V0
+        confirmation: C1
+        status: reviewed
+        position: pending adoption
+      - result: fine-net-18-1016
+        id: T-200
+        verification: V0
+        confirmation: C0
+        status: recorded
+        position: pending adoption
+      - result: fine-net-18-1016
+        id: T-201
+        verification: V0
+        confirmation: C0
+        status: recorded
+        position: pending adoption
+      - result: fine-net-18-1016
+        id: T-202
+        verification: V0
+        confirmation: C0
+        status: recorded
+        position: pending adoption
+      - result: fine-net-18-1016
+        id: T-203
+        verification: V0
+        confirmation: C0
+        status: recorded
+        position: pending adoption
+      - result: fine-net-18-1016
+        id: T-204
+        verification: V0
+        confirmation: C0
+        status: recorded
+        position: pending adoption
+      - result: fine-net-18-1016
+        id: T-205
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: fine-net-18-1016
+        id: T-206
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: fine-net-18-1016
+        id: T-207
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: fine-net-18-1016
+        id: T-208
+        verification: V0
+        confirmation: C0
+        status: recorded
+        position: pending adoption
+      - result: fine-net-18-1016
+        id: T-209
+        verification: V0
+        confirmation: C0
+        status: recorded
+        position: pending adoption
+      - result: fine-net-18-1016
+        id: T-210
+        verification: V0
+        confirmation: C0
+        status: recorded
+        position: pending adoption
+      - result: fine-net-18-1016
+        id: T-211
+        verification: V0
+        confirmation: C0
+        status: recorded
+        position: pending adoption
+      - result: fine-net-18-1016
+        id: T-212
+        verification: V0
+        confirmation: C0
+        status: recorded
+        position: pending adoption
+      - result: fine-net-18-1016
+        id: T-213
+        verification: V0
+        confirmation: C0
+        status: recorded
+        position: pending adoption
+      - result: fine-net-18-1016
+        id: T-214
+        verification: V0
+        confirmation: C0
+        status: recorded
+        position: pending adoption
+      - result: fine-net-18-1016
+        id: T-215
+        verification: V0
+        confirmation: C0
+        status: recorded
+        position: pending adoption
+      - result: fine-net-18-1016
+        id: T-216
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: fine-net-18-1016
+        id: T-217
+        verification: V0
+        confirmation: C0
+        status: recorded
+        position: pending adoption
+      - result: fine-net-18-1016
+        id: E-wand125-fine-net-n108-1062-sqverify-fast-replay
+        status: confirmed
+      - result: fine-net-18-1016
+        id: E-wand125-fine-net-n68-853-sqverify-fast-replay
+        status: confirmed
+      - result: fine-net-18-1016
+        id: E-wand125-fine-net-n84-94225-sqverify-fast-replay
+        status: confirmed
+      - result: fine-net-18-1016
+        id: E-wand125-fine-net-n85-9475-sqverify-fast-replay
+        status: confirmed
+      beads:
+      - think-ndvg
+      - think-tcsl
+      - think-r333
+      - think-u0av
+      - think-f40c
     close_when: Accurate source-only disposition reaches main and the remaining independent native/review
       obligations have explicit dispositions. Source-byte custody alone does not close this request.
     notes: >-
@@ -8009,7 +8234,8 @@ issues:
     title: Workbench trajectory cost check flakes over 400 ms under CI load
     author: jlevy
     opened: '2026-10-12'
-    state: open
+    state: closed
+    closed: '2026-10-26'
     kind: other
     triage: done
     summary: >-
@@ -8031,12 +8257,17 @@ issues:
         118266427235: the dearest trajectory 223 ms at its fastest of three builds)
         (think-1bm2).
     - what: Attribute the Animate view play message to load or to a regression.
-      state: queued
+      state: done
       source: body
       note: >-
-        Neither #685 nor earlier work attributed `play did not carry on from step to step: the
-        stage showed n = [5, 6]`, and no third occurrence is recorded. Narrowed onto its own
-        bead.
+        Landed in #827 (abdbaf95a, merged at 909ddc76e): attributed to load. The page's clock
+        advances at most 0.1 s a frame, so a host drawing fewer than ten frames a second
+        showed only n = 5 and 6 in the old 3.5 s real-time window while play carried on;
+        Chromium's CPU throttling at 6x reproduces that exact message with play still
+        running. The play check now waits on the page's clock, up to three n shown, a stop or
+        a 30 s bound, and reports frames, slowest frame and clock, so a stop (the 2026-09-21
+        regression) is told from load; check_animate_view gains --section and --cpu-throttle
+        to reproduce a loaded host.
       bead: think-8vsk
     beads:
     - think-1bm2
@@ -8053,6 +8284,11 @@ issues:
       by: jlevy
       kind: follow-up
       reported: []
+    - url: https://github.com/jlevy/squares/issues/538#issuecomment-6413623627
+      date: '2026-10-26'
+      by: jlevy
+      kind: final
+      reported: []
     close_when: >-
       The play message is attributed to load or to a regression; the timing check landed
       in #685.
@@ -8060,7 +8296,8 @@ issues:
     title: 'check_scroll_restoration: wait for the reload''s own navigation'
     author: jlevy
     opened: '2026-10-12'
-    state: open
+    state: closed
+    closed: '2026-10-26'
     kind: other
     triage: done
     summary: >-
@@ -8071,9 +8308,13 @@ issues:
     results: []
     asks:
     - what: Wait for the reload's own navigation, as the test of pull request 520 does.
-      state: queued
+      state: done
       source: body
       bead: think-tfil
+      note: >-
+        Landed in #827 (4454e938a, merged at 909ddc76e): check_scroll_restoration waits on
+        the main frame's load event, which a same-document navigation such as KPress's
+        scroll-stamp replaceState never fires, instead of the first navigation of any kind.
     beads:
     - think-tfil
     answer_bead: think-tfil
@@ -8083,12 +8324,18 @@ issues:
       by: jlevy
       kind: follow-up
       reported: []
+    - url: https://github.com/jlevy/squares/issues/539#issuecomment-6413623970
+      date: '2026-10-26'
+      by: jlevy
+      kind: final
+      reported: []
     close_when: The check waits for the reload's own navigation and still passes.
   - number: 540
     title: 'check_requests: mark a reply due on adoption, supersession and newly read comments'
     author: jlevy
     opened: '2026-10-12'
-    state: open
+    state: closed
+    closed: '2026-10-26'
     kind: other
     triage: done
     summary: >-
@@ -8118,13 +8365,19 @@ issues:
       by: jlevy
       kind: follow-up
       reported: []
+    - url: https://github.com/jlevy/squares/issues/540#issuecomment-6412986747
+      date: '2026-10-26'
+      by: jlevy
+      kind: final
+      reported: []
     close_when: replies_due reports all three cases with tests, a reply's reported items can state
       the position, and step 2 of After the Merge drops the by-hand sentence.
   - number: 541
     title: 'check_requests --github: check that a recorded reply states the ids it is recorded with'
     author: jlevy
     opened: '2026-10-12'
-    state: open
+    state: closed
+    closed: '2026-10-26'
     kind: other
     triage: done
     summary: >-
@@ -8151,6 +8404,11 @@ issues:
       date: '2026-10-15'
       by: jlevy
       kind: follow-up
+      reported: []
+    - url: https://github.com/jlevy/squares/issues/541#issuecomment-6412987082
+      date: '2026-10-26'
+      by: jlevy
+      kind: final
       reported: []
     close_when: >-
       --github fails a recorded reply whose ids are missing from the posted text, with a
@@ -8397,7 +8655,8 @@ issues:
     title: "test_site_homepage: the toggle_seen fixture's theme menu choice stays hidden under CI load"
     author: jlevy
     opened: '2026-10-12'
-    state: open
+    state: closed
+    closed: '2026-10-26'
     kind: other
     triage: done
     summary: >-
@@ -8411,9 +8670,14 @@ issues:
     asks:
     - what: The fixture waits on the theme menu's own state, without a longer timeout or a skip,
         and the module passes repeatedly under load.
-      state: queued
+      state: done
       source: body
       bead: think-mvsm
+      note: >-
+        Landed in #827 (e076a2c95, merged at 909ddc76e): the fixture's _choose_theme requires
+        the gear closed before a press and open after, the toggle handler's focus on the
+        checked choice before a choice is pressed, and the gear closed and the root's mode
+        set after. No timeout is lengthened and nothing is skipped.
     beads:
     - think-mvsm
     answer_bead: think-mvsm
@@ -8422,6 +8686,11 @@ issues:
       date: '2026-10-15'
       by: jlevy
       kind: follow-up
+      reported: []
+    - url: https://github.com/jlevy/squares/issues/550#issuecomment-6413624376
+      date: '2026-10-26'
+      by: jlevy
+      kind: final
       reported: []
     close_when: The fixture waits on the menu's own state and the module passes repeatedly under
       load, as the issue's done-when says.
@@ -8434,7 +8703,8 @@ issues:
     title: 'Workbench colourer: one colour per angle class across the atlas, not fixed five-degree bands'
     author: jlevy
     opened: '2026-10-12'
-    state: open
+    state: closed
+    closed: '2026-10-26'
     kind: other
     triage: done
     summary: >-
@@ -8449,9 +8719,16 @@ issues:
     - what: The colourer derives slots from shared atlas-wide class centres, the animate-view
         contract's core check holds exact slots again, and the workbench browser behaviour step
         passes.
-      state: queued
+      state: done
       source: body
       bead: think-9xhw
+      note: >-
+        Landed in #827 (519d879cb, merged at 909ddc76e): the build draws 105 shared angle
+        centres once from all 324 witnesses and ships them in the corpus colour contract, and
+        a tilt a shared class holds takes that class and its centre's band in every frame. The
+        animate-view contract drops split_across_band_edge and requires every angle the core
+        and wide frames share in one slot; #827's hosted checks, frontend among them, passed
+        on its head 1ed7981c2.
     beads:
     - think-9xhw
     answer_bead: think-9xhw
@@ -8460,6 +8737,11 @@ issues:
       date: '2026-10-15'
       by: jlevy
       kind: follow-up
+      reported: []
+    - url: https://github.com/jlevy/squares/issues/554#issuecomment-6413624888
+      date: '2026-10-26'
+      by: jlevy
+      kind: final
       reported: []
     close_when: The colourer derives slots from shared centres and the animate-view contract's core
       check holds exact slots again, as the issue's done-when says.
@@ -10013,7 +10295,8 @@ issues:
     title: 'Exact value s(76) = 9 (k = 9 of the k² − 5 series): registration request (external certificate)'
     author: bengreff
     opened: '2026-10-14'
-    state: open
+    state: closed
+    closed: '2026-10-26'
     kind: result-report
     triage: done
     summary: Benjamin Greff reports s(76) = 9 by a mixed cover of points and grid-line segments, checked
@@ -10087,6 +10370,20 @@ issues:
         id: E-bengreff-594-cover-report
         status: reviewed
       - result: second-route
+    - url: https://github.com/jlevy/squares/issues/594#issuecomment-6412988864
+      date: '2026-10-26'
+      by: jlevy
+      kind: final
+      reported:
+      - result: s76-equals-9
+        id: T-184
+        verification: V3
+        confirmation: C1
+        status: reviewed
+        position: pending adoption
+      - result: second-route
+      beads:
+      - think-osvq
     close_when: The import and its disposition are on main, the owner has posted the resulting state with
       each recorded count's id, and the review and replay that would confirm each V0 entry are owned by
       its bead; optimality is outside this request.
@@ -10156,7 +10453,8 @@ issues:
       in 104–319: registration request'
     author: wand125
     opened: '2026-10-14'
-    state: open
+    state: closed
+    closed: '2026-10-26'
     kind: result-report
     triage: done
     summary: wand125 reports the closed form s(N) >= a(N) for every non-square N >= 49, which the intake
@@ -10244,6 +10542,26 @@ issues:
         status: recorded
       corrects:
       - https://github.com/jlevy/squares/issues/600#issuecomment-6179773241
+    - url: https://github.com/jlevy/squares/issues/600#issuecomment-6412996327
+      date: '2026-10-26'
+      by: jlevy
+      kind: final
+      reported:
+      - result: closed-form
+        id: T-180
+        verification: V0
+        confirmation: C1
+        status: reviewed
+        position: current
+      - result: closed-form
+        id: E-wand125-closed-form-cfcheck-sample
+        status: recorded
+      - result: closed-form
+        id: E-wand125-closed-form-replay4d-sample
+        status: recorded
+      beads:
+      - think-wu73
+      - think-o4kf
     close_when: The import and its disposition are on main, the owner has posted the resulting state with
       each recorded count's id, and the review and replay that would confirm each V0 entry are owned by
       its bead; optimality is outside this request.
@@ -10537,7 +10855,8 @@ issues:
     title: '237-1024: registration request'
     author: franciscouzo
     opened: '2026-10-14'
-    state: open
+    state: closed
+    closed: '2026-10-26'
     kind: result-report
     triage: done
     summary: 'Francisco Couzo reports 23 exact certificates at franciscouzo/square-packing 43ac7d2, first
@@ -10624,6 +10943,19 @@ issues:
       kind: follow-up
       reported:
       - result: fifteen-beyond-horizon
+    - url: https://github.com/jlevy/squares/issues/607#issuecomment-6412997972
+      date: '2026-10-26'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n237
+        id: T-189
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: superseded
+      - result: fifteen-beyond-horizon
+      - result: fang-composites
     close_when: The import and its disposition are on main, the owner has posted the resulting state with
       each recorded count's id, the composites are with Fang's import, and the review and replay that would
       confirm the V0 entry are owned by its bead; optimality is outside this request.
@@ -10640,7 +10972,8 @@ issues:
     title: 'Exact value s(95) = 10 (k = 10 of the k² − 5 series): registration request (external certificate)'
     author: bengreff
     opened: '2026-10-15'
-    state: open
+    state: closed
+    closed: '2026-10-26'
     kind: result-report
     triage: done
     summary: Benjamin Greff reports s(95) = 10 by a mixed cover of points and grid-line segments, checked
@@ -10690,6 +11023,20 @@ issues:
       - result: s95-equals-10
         id: E-bengreff-610-cover-report
         status: reviewed
+    - url: https://github.com/jlevy/squares/issues/610#issuecomment-6412999681
+      date: '2026-10-26'
+      by: jlevy
+      kind: final
+      reported:
+      - result: s95-equals-10
+        id: T-191
+        verification: V3
+        confirmation: C1
+        status: reviewed
+        position: pending adoption
+      beads:
+      - think-ribz
+      - think-eucc
     close_when: The import and its disposition are on main, the owner has posted the resulting state with
       each recorded count's id, and the review and replay that would confirm the V0 entry are owned by its
       bead; optimality is outside this request.
@@ -11010,7 +11357,8 @@ issues:
     title: 'Complete Lean proof of s(19) optimality: registration request'
     author: ofitzharding
     opened: '2026-10-16'
-    state: open
+    state: closed
+    closed: '2026-10-26'
     kind: result-report
     triage: done
     summary: >-
@@ -11098,6 +11446,37 @@ issues:
       - result: n19-optimality-lean
         id: E-n019-fitzharding-archives-review
         status: confirmed
+    - url: https://github.com/jlevy/squares/issues/640#issuecomment-6413002437
+      date: '2026-10-26'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n19-optimality-lean
+        id: T-194
+        verification: V0
+        confirmation: C1
+        status: reviewed
+        position: pending adoption
+      - result: n19-optimality-lean
+        id: E-n019-fitzharding-endpoint-review
+        status: confirmed
+      - result: n19-optimality-lean
+        id: E-n019-fitzharding-cover-census-review
+        status: confirmed
+      - result: n19-optimality-lean
+        id: E-n019-fitzharding-region-review
+        status: confirmed
+      - result: n19-optimality-lean
+        id: E-n019-fitzharding-capture-link-review
+        status: confirmed
+      - result: n19-optimality-lean
+        id: E-n019-fitzharding-endgame-review
+        status: confirmed
+      - result: n19-optimality-lean
+        id: E-n019-fitzharding-archives-review
+        status: confirmed
+      beads:
+      - think-nqnl
     close_when: >-
       The result is registered on main and linked from the n = 19 case page, the author has been told
       what was registered and has the mathematical review, and the full build has either passed, here or
@@ -23471,7 +23850,8 @@ issues:
     title: 'T-046: Rectangle-density lower bounds reported for 48 counts in `n = 18…95` — review tracking'
     author: jlevy
     opened: '2026-10-24'
-    state: open
+    state: closed
+    closed: '2026-10-26'
     kind: result-report
     triage: done
     summary: >-
@@ -23521,6 +23901,23 @@ issues:
       - result: rectangle-density-48
         id: E-wand125-rectangle-2026-09-28-monotone-report
         status: recorded
+    - url: https://github.com/jlevy/squares/issues/773#issuecomment-6413137331
+      date: '2026-10-26'
+      by: jlevy
+      kind: final
+      reported:
+      - result: rectangle-density-48
+        id: T-046
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: superseded
+      - result: rectangle-density-48
+        id: E-wand125-rectangle-report
+        status: reviewed
+      - result: rectangle-density-48
+        id: E-wand125-rectangle-2026-09-28-report
+        status: reviewed
     review_track: true
     close_when: >-
       The confirmations its C1 and C3 need have landed on main, or the record says why they
@@ -24845,7 +25242,8 @@ issues:
       an unreported result"
     author: jlevy
     opened: '2026-10-25'
-    state: open
+    state: closed
+    closed: '2026-10-26'
     kind: result-report
     triage: done
     summary: >-
@@ -24899,6 +25297,20 @@ issues:
         confirmation: C0
       - result: n12-lean
         id: E-n012-jatloe-lean-report
+    - url: https://github.com/jlevy/squares/issues/810#issuecomment-6413004789
+      date: '2026-10-26'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n12-lean
+        id: T-245
+        verification: V0
+        confirmation: C0
+        status: recorded
+        position: current
+      beads:
+      - think-4l14
+      - think-dd3v
     close_when: >-
       The import is on main and the resulting state is posted with the entry's id and rungs,
       and the statement audit, the mathematical review and the build that would raise its
