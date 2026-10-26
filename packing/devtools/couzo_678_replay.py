@@ -44,6 +44,11 @@ rows beyond the case corpus (``n > 324``) that ``check_source_coverage`` reads t
 exact side and that side rounded up at 16 places, rebuilt from the issue and the
 retained certificates, which ``check`` holds it to.
 
+``goebel`` writes ``receipts/goebel-comparison.json``, every claimed side against Göbel's
+classical constructions, computed by the 15 October packet's retained program, and
+``check`` holds the committed receipt byte for byte to its rebuild (think-llit, #793's
+review A, A13).
+
 ``exhaustive`` runs the maintained two-route kernel of ``devtools.evand_arrangement_reports``
 (every pair, no filter) on chosen counts, as a cross-check of the filtered decision and a
 price for the complete all-pairs replay. ``house-jobs`` runs that kernel's three jobs, a
@@ -64,6 +69,7 @@ From ``packing/``, with the project interpreter::
     python -m devtools.couzo_678_replay house-jobs --jobs-dir SCRATCH [--workers 2]
     python -m devtools.couzo_678_replay source-checker --scratch DIR
     python -m devtools.couzo_678_replay claims-record
+    python -m devtools.couzo_678_replay goebel
     python -m devtools.couzo_678_replay check [--replay]
 
 ``--pinned`` names a checkout of the source at the pin; the source's ``manifest.json``,
@@ -94,7 +100,7 @@ from typing import Any
 
 from strif import atomic_output_file
 
-from devtools import acquire_source
+from devtools import acquire_source, goebel_construction
 from devtools import check_rational_witness_independent as independent
 from devtools import evand_arrangement_reports as kernel
 from devtools import evand_exact_certificates as legacy
@@ -930,27 +936,44 @@ def _goebel_program() -> Any:
     return module
 
 
-def goebel() -> dict[str, Any]:
-    """Every claimed exact side against Göbel's classical constructions, exactly.
+def goebel_comparison() -> dict[str, Any]:
+    """Every claimed exact side against Göbel's classical constructions, exactly: the
+    Göbel receipt as `goebel` writes it and ``check`` rebuilds it.
 
     The families, their deletion to smaller counts and the exact sign test are those of
     ``couzo-verified-bounds-2026-10-14/review/goebel_beyond_horizon.py``, which this reads
-    from its retained path and does not change.
+    from its retained path and does not change. The families sentence is the one every
+    frozen comparison receipt states (`devtools.goebel_construction.FAMILIES`).
     """
     custody()
     program = _goebel_program()
     forms = program.families(program.LIMIT)
     digests = manifest()
     rows = [(row.n, certificate(row, digests).side, row.path) for row in claims()]
-    result = program.compare("issue #678 at 7b6c87e", rows, forms)
-    receipt = {
+    return {
         "format": GOEBEL_FORMAT,
         "program": GOEBEL_PROGRAM.relative_to(REPO).as_posix(),
-        "families": "Göbel squares, Göbel strips and corner-touching strips, with deletion",
-        "comparison": result,
+        "families": goebel_construction.FAMILIES,
+        "comparison": program.compare("issue #678 at 7b6c87e", rows, forms),
     }
+
+
+def goebel() -> dict[str, Any]:
+    """Write the Göbel receipt (`goebel_comparison`) and return its tally."""
+    receipt = goebel_comparison()
     _write(GOEBEL, receipt)
+    result = receipt["comparison"]
     return {"rows": result["rows"], "tally": result["tally"], "above": result["above"]}
+
+
+def goebel_problems() -> list[str]:
+    """Whether the committed Göbel receipt is its rebuild, byte for byte: the receipt
+    differed from its writer by one word of its families sentence until think-llit rebuilt
+    it, and nothing compared them (#793's review A, A13)."""
+    rebuilt = retained_dumps(goebel_comparison(), sort_keys=True)
+    if not GOEBEL.is_file() or GOEBEL.read_text(encoding="utf-8") != rebuilt:
+        return ["the Göbel receipt differs from its rebuild"]
+    return []
 
 
 # --------------------------------------------------------------------------- claims record
@@ -1060,7 +1083,7 @@ def check(*, replay: bool) -> list[str]:
         beyond_horizon_claims()
     ):
         problems.append("the beyond-horizon claims record differs from its rebuild")
-    return problems + _cross_check_problems(rows)
+    return problems + goebel_problems() + _cross_check_problems(rows)
 
 
 def _cross_check_problems(rows: Sequence[Claim]) -> list[str]:
