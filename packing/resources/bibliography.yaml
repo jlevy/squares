@@ -4255,6 +4255,27 @@ sources:
       retained beside it. MIT-licensed; Claude assistance disclosed. The KKT and
       local-minimum statements are the author's numerical evidence; no global optimality
       claim. Retained in web/evand-n182-2026-10-25/.
+  - key: '[Daniel S12H Lean 2026-09-28]'
+    authors: [Daniel]
+    year: 2026
+    venue: GitHub
+    dated: '2026-09-28'
+    credit: Daniel after Burns, Massaccesi
+    short_credit: Daniel after Burns et al.
+    lineage: independent
+    ai_assistance:
+      sentence: 'The source’s `CREDITS.md` says the work was produced by Claude (Anthropic) in a single session under human direction.'
+      marker: 'Claude (Anthropic)'
+      anchor: 'Evan Daniel'
+    note: >-
+      Evan Daniel's Lean kernel proof SquarePacking.s12_ge_15680_3951 : (15680/3951 : ℝ) ≤
+      minSide 12 (S12HLower.lean), first committed at evand/square-packing 513bb66 on 28
+      September 2026 under s12/lean/, from T-049's weighted point certificate through the
+      generic BoxTree verifier; the 320 part files are generated and not stored. Retained in
+      web/evand-exact-and-local-reports-2026-10-07/ at f58a017, with its nine-module closure
+      receipt. Its LICENSE names Evan Daniel and its CREDITS.md credits the weighted
+      exact-rational covering method to Sam Burns and Gustavo Massaccesi, as the keys of
+      T-049 do. Not built here.
   - key: '[Daniel n299 2026-10-26]'
     authors: [Daniel]
     year: 2026

@@ -46256,7 +46256,7 @@ evidence:
     relationship_to_generator: same-implementation
     origin: external
     novelty: previously-published
-    source_key: '[Daniel exact and local reports 2026]'
+    source_key: '[Daniel S12H Lean 2026-09-28]'
     certificate: packing/resources/web/evand-exact-and-local-reports-2026-10-07/source/s12/lean/Sqpack/S12HLower.lean
     replay_status: not-attempted
     verifiers: []

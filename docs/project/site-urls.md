@@ -1063,6 +1063,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | profiles/benjamin-gurevitch.html | profiles/benjamin-gurevitch.html | page | overview | 2026-10-13 | 2026-10-22 | live |
 | profiles/bojan-basic.html | profiles/bojan-basic.html | page | overview | 2026-10-13 | 2026-10-22 | live |
 | profiles/can-li.html | profiles/can-li.html | page | overview | 2026-10-13 | 2026-10-22 | live |
+| profiles/chris-deotte.html | profiles/chris-deotte.html | page | overview | 2026-10-13 | 2026-10-22 | live |
 | profiles/ctjlewis.html | profiles/ctjlewis.html | page | overview | 2026-10-13 | 2026-10-22 | live |
 | profiles/daniil-ostashev.html | profiles/daniil-ostashev.html | page | overview | 2026-10-13 | 2026-10-22 | live |
 | profiles/darius-muglich.html | profiles/darius-muglich.html | page | overview | 2026-10-13 | 2026-10-22 | live |

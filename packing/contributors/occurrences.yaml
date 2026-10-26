@@ -29491,6 +29491,73 @@ occurrences:
     families, credited to Gustavo Massaccesi as Daniel's own keys for T-064 and T-081 do; the original
     credit role is retained.
   contributor_id: gustavo-massaccesi
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel S12H Lean 2026-09-28]'
+    field: /authors/0
+  expected_text: Daniel
+  start: 0
+  end: 6
+  label: Daniel
+  role: source-author
+  disposition: resolved
+  evidence:
+  - repository-license
+  - bibliography
+  note: Reviewed packing/resources/bibliography.yaml [[Daniel S12H Lean 2026-09-28]] /authors/0 span
+    0:6. The evand/square-packing Lean proof of issue 535, in the repository whose retained licence
+    names Evan Daniel.
+  contributor_id: evan-daniel
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel S12H Lean 2026-09-28]'
+    field: /credit
+  expected_text: Daniel after Burns, Massaccesi
+  start: 0
+  end: 6
+  label: Daniel
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+  - repository-license
+  - bibliography
+  note: 'Reviewed packing/resources/bibliography.yaml [[Daniel S12H Lean 2026-09-28]] /credit span
+    0:6: Evan Daniel''s S12HLower, in the repository whose retained licence names him.'
+  contributor_id: evan-daniel
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel S12H Lean 2026-09-28]'
+    field: /credit
+  expected_text: Daniel after Burns, Massaccesi
+  start: 13
+  end: 18
+  label: Burns
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - bibliography
+  note: 'Reviewed packing/resources/bibliography.yaml [[Daniel S12H Lean 2026-09-28]] /credit span
+    13:18: the source''s CREDITS.md credits the weighted exact-rational covering method to Sam Burns,
+    as T-049''s keys do; the original credit role is retained.'
+  contributor_id: sam-burns
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel S12H Lean 2026-09-28]'
+    field: /credit
+  expected_text: Daniel after Burns, Massaccesi
+  start: 20
+  end: 30
+  label: Massaccesi
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - bibliography
+  note: 'Reviewed packing/resources/bibliography.yaml [[Daniel S12H Lean 2026-09-28]] /credit span
+    20:30: the source''s CREDITS.md credits the weighted exact-rational covering method to Gustavo
+    Massaccesi, as T-049''s keys do; the original credit role is retained.'
+  contributor_id: gustavo-massaccesi
 inspections:
 - path: packing/resources/papers/addis-locatelli-schoen-2008-disk-packing-square.pdf
   status: pending
