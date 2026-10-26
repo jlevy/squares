@@ -451,6 +451,11 @@ DECLARED_CONSUMERS = {
         "moves the reported and verified ceilings together to an adopted exact feasible "
         "side and keeps the earlier ceiling as history; it never reads either as s(n)"
     ),
+    "packing/devtools/exact_side_register.py": (
+        "reads each case's verified ceiling as the house's side, to list an algebraic "
+        "house's exact form and to order a staged house or a configuration's side against "
+        "it exactly; the side of a house is a ceiling, never s(n)"
+    ),
     "packing/tests/test_exact_sides.py": (
         "reads a closed-form ceiling through regularize_evand.verified_bound, as "
         "select_houses does, to hold it exactly beside the sides a house is chosen from; "
