@@ -78,9 +78,17 @@ $defs:
     required: [path, kind, reviewer, reviewer_kind, date, scope, verdict]
     # Who reviewed, what they examined and what they concluded, as the document itself
     # says (epistemics.md, Review Records). A human reviewer states a relation to the
-    # project; a formalization review states that the reviewer is not the author.
-    if: {properties: {reviewer_kind: {const: human}}}
-    then: {required: [relation]}
+    # project; a formalization review states that the reviewer is not the author, and
+    # names in `formalization_of` the proof-assistant-checked evidence entry it read,
+    # which `devtools.check_results` holds to an entry the result cites (LR-7 of
+    # docs/project/reviews/review-2026-10-11-lean-backed-rungs.md). No other review
+    # names one.
+    allOf:
+      - if: {properties: {reviewer_kind: {const: human}}}
+        then: {required: [relation]}
+      - if: {properties: {kind: {const: formalization}}, required: [kind]}
+        then: {required: [formalization_of]}
+        else: {not: {required: [formalization_of]}}
     properties:
       path: {type: string, minLength: 1}
       kind: {enum: [adversarial, confirming, oversight, formalization]}
@@ -97,6 +105,7 @@ $defs:
         items:
           enum: [trust-boundary, certificate-meaning, ai-findings, statement-fidelity, definitions, axioms, build]
       independent_of_author: {type: boolean}
+      formalization_of: {type: string, pattern: '^E-[A-Za-z0-9._-]+$'}
       covers:
         type: array
         minItems: 1

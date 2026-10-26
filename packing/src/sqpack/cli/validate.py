@@ -4069,8 +4069,10 @@ def _evidence_inventory(context: Context) -> str:
 def _results_register(context: Context) -> str:
     # Sub-second: re-derives every declared V and C rung from the cited evidence atoms
     # per epistemics.md and refuses unsupported or unexplained-understated declarations,
-    # then checks the generated RESULTS.md view against the register.
-    first = _module(context, "devtools.check_results")
+    # then checks the generated RESULTS.md view against the register. `--certificates`
+    # also resolves every machine-shaped certificate path (RR-2 of the 11 October rungs
+    # review); negative-control workers run it without, since they prune the packets.
+    first = _module(context, "devtools.check_results", "--certificates")
     second = _module(context, "devtools.render_results", "--check")
     return f"{first}\n{second}"
 

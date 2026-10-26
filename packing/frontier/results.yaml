@@ -5165,8 +5165,10 @@ results:
       - packing/resources/web/wand125-point-and-mixed-2026-09-28/receipts/controls/n21_control_move-point.log
     next_rung: >-
       V4 and C4 need two adversarial AI reviews by distinct reviewers and a human oversight
-      record; one adversarial review is retained. A build of the Lean overlay with its axiom
-      receipt, and the runner's lemmas formalised (review F10), would be the road to rung 5.
+      record; one adversarial review is retained. The source's hypothesis-free Lean proof,
+      n21pts_eq_5 : minSide 21 = 5, is retained as T-234, a formalization of this route,
+      whose build here is priced at about 6 to 12 CPU-hours (think-tpbd). The conditional
+      overlay cannot carry rung 5 on its own, since its hypothesis is the checker's run.
       The controls end at the first root box that holds a pose, so neither exercises the
       sieve or frontier stages; a control refused deeper in the tree would test more of the
       runner.
@@ -5557,6 +5559,30 @@ results:
         scope: >-
           Eleven-Square Optimality: Census and Capture Ancestry Contract; the document the register cited as its review before 2026-09-30.
         verdict: accepted
+      - path: docs/project/reviews/review-2026-10-03-n11-optimality-adversarial-gpt6-pro-unified.md
+        kind: adversarial
+        reviewer: GPT-6 Pro, reconciling two of its own reviews, received from the owner
+        reviewer_kind: ai
+        relation: project
+        date: '2026-10-03'
+        scope: >-
+          The tentative optimality proof for eleven squares and the paper draft v0.1.0 of
+          1 October that explains it, with the proof materials it cites; recorded on T-112 for
+          the uniqueness deduction. It names Astra's review of 29 September as its source R4.
+        verdict: accepted
+        covers: [T-060, T-112]
+      - path: docs/project/reviews/review-2026-10-03-n11-optimality-paper-adversarial.md
+        kind: adversarial
+        reviewer: Claude Code, one lead session with six parallel sub-reviews
+        reviewer_kind: ai
+        relation: project
+        date: '2026-10-03'
+        scope: >-
+          The published paper and the proof it explains, each component recomputed another
+          way; "no mathematical error was found in the paper or in the proof it explains",
+          and three wording defects in the paper, each with a one-sentence fix.
+        verdict: accepted
+        covers: [T-060]
     controls:
       - packing/tests/test_n11_composition_joins.py
       - packing/tests/test_n11_completion_inventory.py
@@ -5584,9 +5610,13 @@ results:
       `native_decide` axioms the theorem trusts to Lean's compiler among them) and that
       build.
 
-      V4 and C4 need the owner's oversight record and a second adversarial AI review by a
-      reviewer distinct from Astra. C5 needs that build made here at the pinned toolchain,
-      an `open_review` pointer and two such expert reviews. Engineering
+      V4 and C4 need the owner's oversight record. Beside Astra's review, two adversarial
+      AI reviews of 3 October are retained, GPT-6 Pro's and Claude Code's paper review, both
+      accepting; whether they are by reviewers distinct from Astra under epistemics.md ("no
+      shared context") is the owner's ruling, which the oversight record states, since
+      GPT-6 Pro's names Astra's review of 29 September as its source R4.
+
+      C5 needs that build made here at the pinned toolchain, an `open_review` pointer and two such expert reviews. Engineering
       follow-up think-e2ot
       will orchestrate fresh whole-ensemble replay through reviewed state-equivalence
       bindings. Simplification was to precede the n11 explainer, tracked separately, which is
@@ -5643,6 +5673,16 @@ results:
       upper half were (E-n011-lean-statement-closure-build). Nothing about it raises C: the
       owner asked that C stay where the confirming evidence puts it until everything is
       imported.
+
+      2026-10-11: the private source repository of the run, EvolvingPrograms/11SquaresEvolving
+      (since renamed SquaresLean), and run 37414883750 became visible to the owner's account,
+      so the owner can read the run's logs; nothing was downloaded from it
+      (docs/project/reviews/review-2026-10-11-lean-backed-rungs.md, section 2.3). The pin of
+      11SquaresFormalized is unchanged; it was still the repository's head on 26 October
+      2026.
+      The reviews of 3 October by GPT-6 Pro and by Claude Code are recorded in reviews
+      (section 8 of that review); V4 waits on the owner's oversight record and the ruling on
+      distinct reviewers it states.
 
   - id: T-061
     kind: lower-bound
@@ -12996,13 +13036,27 @@ results:
     - packing/resources/web/evand-exact-and-local-reports-2026-10-07/reported-catalogue.json
     - packing/resources/web/evand-exact-and-local-reports-2026-10-07/source/s12/search/exact/EXACT_FORMS.md
     - packing/devtools/evand_report_catalogue.py
-    next_rung: Acquire and bind the exact source geometry, check root identity and full feasibility
-      independently, and review any minimality claim separately. PR403 owns canonical exact-value integration.
+    next_rung: >-
+      Acquire and bind the exact source geometry, check root identity and full feasibility
+      independently, and review any minimality claim separately.
+      Exact-value integration is tracked on jlevy/squares#811, since PR #403 closed
+      unmerged on 25 October 2026. The confirmation
+      would move no case bound: alpha_102 lies above the case's verified ceiling, so this
+      entry is superseded at 102.
+
+      Evan Daniel's Lean module Sqpack.Exact.Packs.N102, in the evand/square-packing commits
+      read on 11 October under think-63vx, proves that the selected root packs 102 squares;
+      retaining it with its closure and building it here is think-63vx's, about an hour of
+      lane work and under ten minutes of build (the 11 October Lean-backed rungs review,
+      LR-10). It would check the bound and the root identity, not the minimality assertion,
+      which the module does not prove.
     unfinished_confirmations:
       - what: >-
           the exact source geometry acquired and bound, and its root identity and full
-          feasibility checked independently
+          feasibility checked independently; its price waits on the source's minpoly/data/
+          geometry, which the packet leaves out, and on an exact root-identity check
         rung: C3
+        link: https://github.com/jlevy/squares/issues/811
     notes: Source assertions only. No upstream checker or Lean build was executed here; retained checker
       flags are not local verdicts. Polynomial irreducibility, minimality, published-expression equality
       and exact geometry remain unverified. No global optimality or rigidity established. Source packings
@@ -13045,13 +13099,18 @@ results:
     - packing/resources/web/evand-exact-and-local-reports-2026-10-07/reported-catalogue.json
     - packing/resources/web/evand-exact-and-local-reports-2026-10-07/source/s12/search/exact/EXACT_FORMS.md
     - packing/devtools/evand_report_catalogue.py
-    next_rung: Acquire and bind the exact source geometry, check root identity and full feasibility
-      independently, and review any minimality claim separately. PR403 owns canonical exact-value integration.
+    next_rung: >-
+      Acquire and bind the exact source geometry, check root identity and full feasibility
+      independently, and review any minimality claim separately.
+      Exact-value integration is tracked on jlevy/squares#811, since PR #403 closed
+      unmerged on 25 October 2026.
     unfinished_confirmations:
       - what: >-
           the exact source geometry acquired and bound, and its root identity and full
-          feasibility checked independently
+          feasibility checked independently; its price waits on the source's minpoly/data/
+          geometry, which the packet leaves out, and on an exact root-identity check
         rung: C3
+        link: https://github.com/jlevy/squares/issues/811
     notes: Source assertions only. No upstream checker or Lean build was executed here; retained checker
       flags are not local verdicts. Polynomial irreducibility, minimality, published-expression equality
       and exact geometry remain unverified. No global optimality or rigidity established. Source packings
@@ -13094,13 +13153,18 @@ results:
     - packing/resources/web/evand-exact-and-local-reports-2026-10-07/reported-catalogue.json
     - packing/resources/web/evand-exact-and-local-reports-2026-10-07/source/s12/search/exact/EXACT_FORMS.md
     - packing/devtools/evand_report_catalogue.py
-    next_rung: Acquire and bind the exact source geometry, check root identity and full feasibility
-      independently, and review any minimality claim separately. PR403 owns canonical exact-value integration.
+    next_rung: >-
+      Acquire and bind the exact source geometry, check root identity and full feasibility
+      independently, and review any minimality claim separately.
+      Exact-value integration is tracked on jlevy/squares#811, since PR #403 closed
+      unmerged on 25 October 2026.
     unfinished_confirmations:
       - what: >-
           the exact source geometry acquired and bound, and its root identity and full
-          feasibility checked independently
+          feasibility checked independently; its price waits on the source's minpoly/data/
+          geometry, which the packet leaves out, and on an exact root-identity check
         rung: C3
+        link: https://github.com/jlevy/squares/issues/811
     notes: Source assertions only. No upstream checker or Lean build was executed here; retained checker
       flags are not local verdicts. Polynomial irreducibility, minimality, published-expression equality
       and exact geometry remain unverified. No global optimality or rigidity established. Source packings
@@ -13143,13 +13207,18 @@ results:
     - packing/resources/web/evand-exact-and-local-reports-2026-10-07/reported-catalogue.json
     - packing/resources/web/evand-exact-and-local-reports-2026-10-07/source/s12/search/exact/EXACT_FORMS.md
     - packing/devtools/evand_report_catalogue.py
-    next_rung: Acquire and bind the exact source geometry, check root identity and full feasibility
-      independently, and review any minimality claim separately. PR403 owns canonical exact-value integration.
+    next_rung: >-
+      Acquire and bind the exact source geometry, check root identity and full feasibility
+      independently, and review any minimality claim separately.
+      Exact-value integration is tracked on jlevy/squares#811, since PR #403 closed
+      unmerged on 25 October 2026.
     unfinished_confirmations:
       - what: >-
           the exact source geometry acquired and bound, and its root identity and full
-          feasibility checked independently
+          feasibility checked independently; its price waits on the source's minpoly/data/
+          geometry, which the packet leaves out, and on an exact root-identity check
         rung: C3
+        link: https://github.com/jlevy/squares/issues/811
     notes: Source assertions only. No upstream checker or Lean build was executed here; retained checker
       flags are not local verdicts. Polynomial irreducibility, minimality, published-expression equality
       and exact geometry remain unverified. No global optimality or rigidity established. Source packings
@@ -13376,8 +13445,10 @@ results:
       - what: >-
           an audit of the retained theorem, embedded configuration and
           perturbation-definition bindings and pinned dependencies, and an independent
-          build here of the pinned Lean proof
+          build here of the pinned Lean proof; its price waits on a toolchain and a build
+          time for the pinned Lean tree, of which none is on record
         rung: C3
+        link: https://github.com/jlevy/squares/issues/420
     notes: Reported non-strict local minima under the source matched-index perturbation convention,
       with angles modulo 90 degrees and plateaux permitted. The actual roster has176 integer-band configurations
       plus n11 and n28; it is not every count in the shorthand bands. Full source Lean code is retained;
@@ -13695,6 +13766,10 @@ results:
     - packing/tests/test_couzo_custody.py
     - packing/tests/test_negative_controls.py
     - packing/tests/test_check_half_angle_area.py
+    - packing/resources/web/couzo-exact-refinements-2026-10-08/receipts/exact-certification.json.xz
+    - packing/resources/web/couzo-exact-refinements-2026-10-08/receipts/third-route-2026-10-26.json.xz
+    - packing/resources/web/evand-record-hunt-2026-10-09/receipts/exact-certification.json.xz
+    - packing/resources/web/evand-record-hunt-2026-10-09/receipts/third-route-2026-10-26.json.xz
     notes: >-
       All sixteen complete original factual files and all 24 native jobs are retained. The
       first two-worker attempt was incomplete after 181.19 seconds; the fresh serial attempt
@@ -13891,6 +13966,8 @@ results:
     controls:
     - packing/tests/test_couzo_followup_reports.py
     - packing/tests/test_check_half_angle_area.py
+    - packing/resources/web/couzo-followup-refinements-2026-10-08/receipts/exact-certification.json.xz
+    - packing/resources/web/couzo-followup-refinements-2026-10-08/receipts/third-route-2026-10-26.json.xz
     notes: >-
       All five complete certificates are kept as derived exact facts that rebuild each
       pinned blob; no upstream byte is retained. A separate complete repository replay is
@@ -14025,6 +14102,8 @@ results:
     controls:
     - packing/tests/test_evand_hunt_reports.py
     - packing/tests/test_check_half_angle_area.py
+    - packing/resources/web/evand-record-hunt-2026-10-09/receipts/exact-certification.json.xz
+    - packing/resources/web/evand-record-hunt-2026-10-09/receipts/third-route-2026-10-26.json.xz
     notes: >-
       The certificate, its 80-digit KKT point, binary64 input and solver report are retained
       unchanged under the source's MIT licence. A separate complete repository replay is
@@ -14175,7 +14254,14 @@ results:
       declared-net soundness review. The eight-direction sample prices the run and its
       controls at about 4.3 CPU-hours. The owner set its budget on 11 October 2026, and
       the run is queued in think-r333 after the regularization of every packing
-      (think-ux1v, planned in jlevy/squares#497).
+      (think-ux1v, planned in jlevy/squares#497). Its commands need tooling that is only on
+      the unmerged branch claude/wand125-confirmations-2026-10-11:
+      on main, sqverify_fast_census.MIXED_PACKETS does not list this certificate's packet.
+
+      Two questions of 11 October are with the owner (jlevy/squares#543, lower-bound
+      replays): whether the three check2 candidates of T-132, T-142 and T-143 are
+      retained in Git, as the 6 October check2 packet is, and the census's axis
+      tolerance for T-142's whole-net control.
     unfinished_confirmations:
       - what: >-
           a complete sqverify-fast census at all 2,073 directions from a retained
@@ -14262,8 +14348,8 @@ results:
     significance:
       score: 3
       rationale: >-
-        The strongest lower bound on record at n = 40, 0.00854 above T-068 on T-068's own
-        certificate. The transfer, a continuous-angle argument from a finer net with a
+        The strongest lower bound on record at n = 40 when registered, until T-145 the same
+        day, 0.00854 above T-068 on T-068's own certificate. The transfer, a continuous-angle argument from a finer net with a
         clipped-corner loss bound and the density's peak, is new to this record and applies
         with a finer net to any format T certificate it holds, but it is one count and not
         yet a bound family. S3 by the precedent of T-099, a finer net on a certificate kind
@@ -14347,13 +14433,10 @@ results:
     next_rung: >-
       V4 and C4 need a human oversight record: the two adversarial AI reviews by distinct
       reviewers are retained, the 10 October review and the 11 October final review
-      (docs/project/reviews/review-2026-10-11-final-lower-bounds.md), both accepting. A method-distinct
-      decision of the nodal statement would stand beside the rung: Tokoharu's verify.cpp
-      at all 401 directions, about twice its 201-direction cost on this density (6,521 s of
-      wall time upstream), once an input generator for a finer net exists, a W7 slice and a
-      budget the owner sets. The census route, a census row at all 401 directions with its
-      whole-net control receipt, is open now that the census driver reads a format T
-      metadata net; no census case holds the derived input yet.
+      (docs/project/reviews/review-2026-10-11-final-lower-bounds.md), both accepting. T-145
+      supersedes this entry at n = 40, so a method-distinct decision of its nodal statement
+      (Tokoharu's verify.cpp at all 401 directions) or a census row would move no case
+      bound, and none is planned.
     notes: >-
       Registered on 10 October 2026 by the records lane of the issue 485 import
       (think-3oi5), after the complete 401-direction replay and the finite audit, whose
@@ -14449,6 +14532,8 @@ results:
     controls:
       - packing/tests/test_upper_bound_reports.py
       - packing/tests/test_check_half_angle_area.py
+      - packing/resources/web/couzo-exact-certificates-2026-10-09/receipts/exact-certification.json.xz
+      - packing/resources/web/couzo-exact-certificates-2026-10-09/receipts/third-route-2026-10-26.json.xz
     notes: >-
       A separate complete repository replay is retained for n = 68, 84, 86, 102, 103, 105,
       106, 108, 110, 127, 131, 132, 237, 263, 267, 270 and 303: 17 positives and 34
@@ -14614,6 +14699,8 @@ results:
     controls:
       - packing/tests/test_upper_bound_reports.py
       - packing/tests/test_check_half_angle_area.py
+      - packing/resources/web/fang-two-wedge-certificates-2026-10-10/receipts/exact-certification.json.xz
+      - packing/resources/web/fang-two-wedge-certificates-2026-10-10/receipts/third-route-2026-10-26.json.xz
     notes: >-
       A separate complete repository replay is retained for n = 308, 343 and 344: 3
       positives and 6 duplicate-square and outside-container controls passed their required
@@ -14844,6 +14931,24 @@ results:
     controls:
       - packing/tests/test_upper_bound_reports.py
       - packing/tests/test_check_half_angle_area.py
+      - packing/resources/web/squish-481-third-request-2026-10-09/receipts/exact-certification-n131.json.xz
+      - packing/resources/web/squish-481-third-request-2026-10-09/receipts/exact-certification-n153.json.xz
+      - packing/resources/web/squish-481-third-request-2026-10-09/receipts/exact-certification-n154.json.xz
+      - packing/resources/web/squish-481-third-request-2026-10-09/receipts/exact-certification-n207.json.xz
+      - packing/resources/web/squish-481-third-request-2026-10-09/receipts/exact-certification-n209.json.xz
+      - packing/resources/web/squish-481-third-request-2026-10-09/receipts/exact-certification-n232.json.xz
+      - packing/resources/web/squish-481-third-request-2026-10-09/receipts/exact-certification-n236.json.xz
+      - packing/resources/web/squish-481-third-request-2026-10-09/receipts/exact-certification-n237.json.xz
+      - packing/resources/web/squish-481-third-request-2026-10-09/receipts/exact-certification-n259.json.xz
+      - packing/resources/web/squish-481-third-request-2026-10-09/receipts/exact-certification-n263.json.xz
+      - packing/resources/web/squish-481-third-request-2026-10-09/receipts/exact-certification-n269.json.xz
+      - packing/resources/web/squish-481-third-request-2026-10-09/receipts/exact-certification-n270.json.xz
+      - packing/resources/web/squish-481-third-request-2026-10-09/receipts/exact-certification-n292.json.xz
+      - packing/resources/web/squish-481-third-request-2026-10-09/receipts/exact-certification-n302.json.xz
+      - packing/resources/web/squish-481-third-request-2026-10-09/receipts/exact-certification-n303.json.xz
+      - packing/resources/web/squish-481-third-request-2026-10-09/receipts/exact-certification-n305.json.xz
+      - packing/resources/web/squish-481-third-request-2026-10-09/receipts/exact-certification-n307.json.xz
+      - packing/resources/web/squish-481-third-request-2026-10-09/receipts/third-route-2026-10-26.json.xz
     notes: >-
       A separate complete repository replay is retained for n = 131, 153, 154, 207, 209,
       232, 236, 237, 259, 263, 269, 270, 292, 302, 303, 305 and 307: 17 positives and 34
@@ -15024,6 +15129,8 @@ results:
     controls:
       - packing/tests/test_upper_bound_reports.py
       - packing/tests/test_check_half_angle_area.py
+      - packing/resources/web/ebdeleeuw-n70-refinement-2026-10-10/receipts/exact-certification.json.xz
+      - packing/resources/web/ebdeleeuw-n70-refinement-2026-10-10/receipts/third-route-2026-10-26.json.xz
     notes: >-
       A separate complete repository replay is retained for n = 70: 1 positive and 2
       duplicate-square and outside-container controls passed their required outcomes on
@@ -15219,6 +15326,8 @@ results:
       - packing/tests/test_upper_bound_reports.py
       - packing/tests/test_decimal_pose_margins.py
       - packing/tests/test_check_half_angle_area.py
+      - packing/resources/web/mishapolk-decimal-poses-2026-10-09/receipts/exact-certification.json.xz
+      - packing/resources/web/mishapolk-decimal-poses-2026-10-09/receipts/third-route-2026-10-26.json.xz
     notes: >-
       A separate complete repository replay is retained for all 30 in-horizon witnesses: 30
       positives and 60 duplicate-square and outside-container controls passed their required
@@ -15370,6 +15479,8 @@ results:
     controls:
       - packing/tests/test_upper_bound_reports.py
       - packing/tests/test_check_half_angle_area.py
+      - packing/resources/web/evand-trio126-2026-10-09/receipts/exact-certification.json.xz
+      - packing/resources/web/evand-trio126-2026-10-09/receipts/third-route-2026-10-26.json.xz
     notes: >-
       A separate complete repository replay is retained for n = 126: 1 positive and 2
       duplicate-square and outside-container controls passed their required outcomes on both
@@ -15523,6 +15634,8 @@ results:
       - packing/tests/test_upper_bound_reports.py
       - packing/tests/test_upper_bound_reports_488_489.py
       - packing/tests/test_check_half_angle_area.py
+      - packing/resources/web/couzo-certificates-2026-10-10/receipts/exact-certification.json.xz
+      - packing/resources/web/couzo-certificates-2026-10-10/receipts/third-route-2026-10-26.json.xz
     notes: >-
       A separate complete repository replay is retained for n = 132, 175, 209, 237, 270,
       303, 305, 338 and 340: 9 positives and 18 duplicate-square and outside-container
@@ -15689,6 +15802,8 @@ results:
       - packing/tests/test_upper_bound_reports.py
       - packing/tests/test_upper_bound_reports_488_489.py
       - packing/tests/test_check_half_angle_area.py
+      - packing/resources/web/evand-record-hunt3-2026-10-10/receipts/exact-certification.json.xz
+      - packing/resources/web/evand-record-hunt3-2026-10-10/receipts/third-route-2026-10-26.json.xz
     notes: >-
       A separate complete repository replay is retained for n = 132, 305, 308, 343 and 344:
       5 positives and 10 duplicate-square and outside-container controls passed their
@@ -15851,13 +15966,24 @@ results:
       declared-net soundness review. The eight-direction sample prices the run and its
       controls at about 3.3 CPU-hours. The owner set its budget on 11 October 2026, and
       the run is queued in think-i85v after the regularization of every packing
-      (think-ux1v, planned in jlevy/squares#497).
+      (think-ux1v, planned in jlevy/squares#497). Its commands need tooling that is only on
+      the unmerged branch claude/wand125-confirmations-2026-10-11:
+      on main, sqverify_fast_census.MIXED_PACKETS does not list this certificate's packet.
+
+      Two questions of 11 October are with the owner (jlevy/squares#543, lower-bound
+      replays): whether the three check2 candidates of T-132, T-142 and T-143 are
+      retained in Git, as the 6 October check2 packet is, and the census's axis
+      tolerance for T-142's whole-net control.
     unfinished_confirmations:
       - what: >-
           a complete sqverify-fast census at all 2,073 directions from a retained
           candidate, with its whole-net control receipt (the 99/100 mutant at every
           direction, FC-1) and a review that reads this certificate, by the checklist of the 6 October
-          declared-net soundness review
+          declared-net soundness review. The whole-net control is held on the owner's
+          axis-tolerance decision (jlevy/squares#543): the 99/100 mutant's exact capture at
+          the axis direction sits 2.15e-9 above the vertex sweep's certified bound, beyond
+          AXIS_ROUNDING (1e-9), so the control would write CONTROL_FAILED after 1.6 to 2.2
+          CPU-hours although the refusal is sound
         rung: C3
         link: think-i85v
         estimated_cost:
@@ -15956,7 +16082,14 @@ results:
       mutant at every direction, FC-1) and a review that reads this certificate, by the checklist of the 6 October declared-net
       soundness review. The eight-direction sample prices the run and its controls at about
       4.5 CPU-hours. The owner set its budget on 11 October 2026, and the run is queued
-      in think-i85v after the regularization of every packing (think-ux1v, planned in jlevy/squares#497).
+      in think-i85v after the regularization of every packing (think-ux1v, planned in jlevy/squares#497). Its commands need tooling that is only on
+      the unmerged branch claude/wand125-confirmations-2026-10-11:
+      on main, sqverify_fast_census.MIXED_PACKETS does not list this certificate's packet.
+
+      Two questions of 11 October are with the owner (jlevy/squares#543, lower-bound
+      replays): whether the three check2 candidates of T-132, T-142 and T-143 are
+      retained in Git, as the 6 October check2 packet is, and the census's axis
+      tolerance for T-142's whole-net control.
     unfinished_confirmations:
       - what: >-
           a complete sqverify-fast census at all 2,073 directions from a retained
@@ -16062,7 +16195,9 @@ results:
       as the 2 October review read T-080's. The two-angle sample prices the replay and
       control at about 11.2 CPU-hours (the author's own replay suggests up to about 23).
       The owner set its budget on 11 October 2026, and the replay is queued in
-      think-nd7g after the regularization of every packing (think-ux1v, planned in jlevy/squares#497).
+      think-nd7g after the regularization of every packing (think-ux1v, planned in jlevy/squares#497). Its commands need tooling that is only on
+      the unmerged branch claude/wand125-confirmations-2026-10-11:
+      on main, devtools.audit_wand125_linear does not register n = 122.
     unfinished_confirmations:
       - what: >-
           a complete replay of all 201 angles by the T-080 route, with the certificate
@@ -16082,7 +16217,8 @@ results:
             (packing/resources/web/wand125-linear-n122-2026-10-10/README.md and
             receipts/linear-sample-diagnostic.json). The upper end is the author's own
             replay, 7 hours 41 minutes of wall at three workers, converted at full use of
-            the three.
+            the three. The preparation lane's smoke run of 11 October (think-nd7g) put the
+            price at about 14.6 CPU-hours; its receipts are not retained.
           priced: '2026-10-10'
     notes: >-
       V0 because the cited entry is the source's public claim: assurance reported, replay
@@ -16602,6 +16738,8 @@ results:
       - packing/tests/test_upper_bound_reports.py
       - packing/tests/test_upper_bound_reports_regularized.py
       - packing/tests/test_check_half_angle_area.py
+      - packing/resources/web/evand-regularized-2026-10-10/receipts/exact-certification.json.xz
+      - packing/resources/web/evand-regularized-2026-10-10/receipts/third-route-2026-10-26.json.xz
     notes: >-
       A separate complete repository replay is retained for n = 70, 102, 103, 123, 129, 146,
       153, 236, 258, 263, 269, 292, 295, 302 and 303: 15 positives and 30 duplicate-square

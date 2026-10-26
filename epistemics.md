@@ -355,7 +355,10 @@ family of results names every result it `covers`.
   `independent_of_author: true`). `V5` needs one and `C5` needs two, each by a named
   person who states their competence in the proof assistant and the mathematics and is
   not the formalization’s author; its `checked` list includes `statement-fidelity`,
-  `definitions`, `axioms` and `build`.
+  `definitions`, `axioms` and `build`. Its `formalization_of` names the
+  proof-assistant-checked evidence entry it read, which the result must cite, and it
+  counts toward rung 5 only beside that entry, so a result that cites two formalizations
+  cannot pair the build of one with a review of the other.
 - **Open review** (`open_review` on the result).
   `C5` needs the proof, its formalization and everything needed to replay it to be
   openly available, so that any other expert can review and replay it: the record points
