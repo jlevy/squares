@@ -42,8 +42,9 @@ The sources, one section of the report each:
   the reply, not the import), triage and replies owed, the questions awaiting an author
   that hold an issue open (the answer bead owns them; one awaited longer than
   `AWAITED_DAYS` is listed for a decision), every closeable issue still open, each issue
-  held for the owner (listed for the owner: no pass posts on it or closes it), and the
-  validation backlog.
+  held for the owner (listed for the owner: no pass posts on it or closes it), each
+  closed issue that owes a follow-up (owned by a bead that owns what remains of its
+  results' validation, else its answer bead), and the validation backlog.
 - **Regularization owed**: from `atlas/known-best/default-drawings.json`, each count
   whose drawing is `pending` regularization, with the bead its
   `default_drawings.PENDING_ALLOWED` entry names; each decision that still owes runs or
@@ -63,14 +64,15 @@ The sources, one section of the report each:
 
 An item **needs action** when the record is behind a source and no open bead owns the
 difference, when the bead a deferral names is no longer open, when a wait's blocker
-has resolved, or when an open issue is closeable: settled, with nothing its author asked
-for queued and no question awaiting the author's answer, so its final comment and close
-are owed (`campaign/result-import.md`, stage 7). The owner's instruction of 23 October
-2026 put that last one here, after twelve closeable issues were found open with nothing
-listing them; where GitHub already shows such an issue closed, the step is to record the
-close, not to post it again. The command then exits 1. Items an open bead owns, an issue
-held for the owner, a question awaited for a decision, the backlog and the bead queue are
-listed and do not fail it. A source this run could not read is listed under
+has resolved, or when an open issue is closeable: answered, with nothing queued for
+import, every result settled or its remaining validation owned by named beads, nothing
+its author asked for queued and no question awaiting the author's answer, so its final
+comment and close are owed (`campaign/result-import.md`, stage 7). The owner's instruction
+of 23 October 2026 put that last one here, after twelve closeable issues were found open
+with nothing listing them; where GitHub already shows such an issue closed, the step is
+to record the close, not to post it again. The command then exits 1. Items an open bead
+owns, an issue held for the owner, a question awaited for a decision, the backlog and
+the bead queue are listed and do not fail it. A source this run could not read is listed under
 **Not Checked**, so a quiet report is not mistaken for a clean one.
 
 Usage, from `packing/`, or `make intake` at the root, which captures the catalogue first::
@@ -101,6 +103,7 @@ from concurrent.futures import ThreadPoolExecutor
 from dataclasses import asdict, dataclass, field, replace
 from datetime import UTC, date, datetime
 from decimal import Decimal
+from functools import partial
 from pathlib import Path
 from typing import Any
 
@@ -446,7 +449,27 @@ def _github_step(difference: str) -> str:
             "record the close: the final comment under replies as final, and the entry's "
             "state and closed; post nothing"
         )
-    return "reconcile result-requests.yaml with the issue"
+    return _record_step(difference) or "reconcile result-requests.yaml with the issue"
+
+
+def _record_step(difference: str) -> str:
+    """The step for a difference in what the record says of a block, a reply or an ask
+    (rules P1 and P2 and #541, 26 October 2026), or nothing for any other."""
+    if check_requests.BLOCKED_LABEL in difference:
+        number = difference.split(" ", 1)[0].removeprefix("#")
+        return (
+            "make the issue's blocked: label the one its record's blocked names, under the "
+            f"github-workflows grant (gh issue edit {number} --add-label or --remove-label); "
+            "without the grant, list the issue for the owner"
+        )
+    if "is recorded as stating" in difference:
+        return (
+            "correct the reply's reported items and beads to what its text names (as for a "
+            "renumbered id); a reply due then follows from what no reply has named"
+        )
+    if "cites" in difference and "the ask" in difference:
+        return "cite where the author asked it, or remove an ask the author did not make"
+    return ""
 
 
 #: How `check_requests.compare_github` says an issue open in the record is closed there.
@@ -987,6 +1010,7 @@ def queues_section(
     repository = str(record.get("repository", ""))
     for issue in record["issues"]:
         if issue["state"] != "open":
+            section.items.extend(_closed_follow_up(issue, register, beads))
             continue
         number = issue["number"]
         for result in issue.get("results") or ():
@@ -1040,6 +1064,34 @@ def queues_section(
         if state.closeable:
             section.items.append(_closeable(issue, beads, closed_there=number in closed_there))
     return section
+
+
+def _closed_follow_up(
+    issue: Mapped, register: check_requests.Register, beads: Beads | None
+) -> list[Item]:
+    """A closed issue that owes a follow-up: an answer is kept true after the close
+    (epistemics.md, Import, Integration, and Reply), and since rule P1 of 26 October
+    2026 an issue closes while its results' validation is still owned by beads, whose
+    moves its replies must report. The first bead that owns what remains owns the
+    follow-up, else the answer bead; a closed one leaves it needing an owner."""
+    state = check_requests.issue_state(issue, register)
+    if not state.replies_due:
+        return []
+    owners = check_requests.remaining_owners(state.results)
+    return [
+        owned(
+            f"#{issue['number']} (closed) owes a follow-up: {state.replies_due[0]}"
+            + (
+                f" (and {len(state.replies_due) - 1} more)"
+                if len(state.replies_due) > 1
+                else ""
+            ),
+            owners[0] if owners else str(issue["answer_bead"]),
+            beads,
+            since=str(issue.get("closed") or issue["opened"]),
+            step="draft the follow-up with check_requests --draft N, post it, and record it",
+        )
+    ]
 
 
 def _asked_on(issue: Mapped, url: str) -> str:
@@ -1107,8 +1159,9 @@ def _held(
 def _closeable(issue: Mapped, beads: Beads | None, *, closed_there: bool = False) -> Item:
     """An open issue that is closeable, owed its final comment and close (stage 7).
 
-    It needs action whoever owns it: every result is settled, nothing its author asked for
-    is queued and no question awaits the author, so nothing but the close is left. Where
+    It needs action whoever owns it: the issue is answered (every result settled or its
+    remaining validation owned by named beads, nothing its author asked for queued and no
+    question awaiting the author), so nothing but the close is left. Where
     GitHub already shows the issue closed (`closed_there`), the close was posted and the
     record lacks it, so the step is to record it, not to post a second final comment.
     """
@@ -1448,9 +1501,13 @@ def sweep(
     coverage = safe_load(COVERAGE.read_text(encoding="utf-8"))
     watch = safe_load(WATCH.read_text(encoding="utf-8"))
     record = check_requests.load_record()
-    register = check_requests.load_register()
+    # With positions, a reply owed for an adoption or a supersession is listed (#540).
+    register = check_requests.load_register(positions=True)
     blockers = Blockers(beads, None if offline else fetch)
     repository = str(record["repository"])
+    if compare_github is check_requests.compare_github:
+        # The register says which report entries a reply states in words (#541).
+        compare_github = partial(check_requests.compare_github, register=register)
     github = github_section(record, offline=offline, compare_github=compare_github)
     return [
         github,
