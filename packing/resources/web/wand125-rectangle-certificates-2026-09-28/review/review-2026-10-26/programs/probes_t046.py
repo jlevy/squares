@@ -160,7 +160,8 @@ def probe(job: tuple[str, str, str]) -> dict:
         "uniform_min": [uniform_min[1], float(uniform_min[0])],
         "search_min": [search_min[1], float(search_min[0])],
         "sampled_min": float(sampled_min),
-        "evaluations": 3 + 200 + 2 * DIRECTIONS + 2 * SEARCH_STEPS + len(witnesses),
+        "evaluations": 2 + len(witnesses) + len(scan) + 2 * DIRECTIONS + 2 * SEARCH_STEPS,
+        "receipt_captures_compared": 2 + len(witnesses),
         "cpu_seconds": round(time.process_time() - started, 2),
         "failed": failed,
     }
@@ -196,6 +197,7 @@ def main() -> int:
         "seed": SEED,
         "rows": results,
         "evaluations": sum(row["evaluations"] for row in results),
+        "receipt_captures_compared": sum(row["receipt_captures_compared"] for row in results),
         "cpu_seconds": round(sum(row["cpu_seconds"] for row in results), 1),
         "sampled_min": min((row["sampled_min"], row["certificate"]) for row in results),
         "failed": sum(len(row["failed"]) for row in results),
