@@ -17,6 +17,7 @@ from urllib.parse import urljoin
 import pytest
 
 from devtools import (
+    github_references,
     overview_data,
     overview_sections,
     register_prose,
@@ -1322,3 +1323,22 @@ def test_the_head_lists_the_counts_the_atlas_draws_its_packing_regularized(
     assert f"<dt>Regularized drawings</dt><dd>{value}</dd>" in head
     assert not _result(overview, "T-101").drawings
     assert "<dt>Regularized drawings</dt>" not in bodies["T-101"]
+
+
+def test_a_result_links_each_issue_that_reported_it(bodies: dict[str, str]) -> None:
+    """A result page names the issues whose reported results map to it in
+    `campaign/result-requests.yaml`, as legible "Issue #N" links; a result no issue
+    reported names none."""
+    requests = safe_load(github_references.REQUESTS.read_text(encoding="utf-8"))
+    reporting = github_references.reporting_issues(requests)
+    assert reporting["T-245"] == (810,)
+    assert 446 in reporting["T-233"]
+    issue_link = re.compile(
+        r'<a href="' + re.escape(REPO_URL) + r'/issues/(\d+)">Issue #(\d+)</a>'
+    )
+    for result_id, body in bodies.items():
+        pairs = issue_link.findall(body)
+        assert all(target == label for target, label in pairs), result_id
+        linked = sorted(int(target) for target, _ in pairs)
+        assert linked == list(reporting.get(result_id, ())), result_id
+        assert ("<dt>Issues</dt>" in body) == bool(linked), result_id

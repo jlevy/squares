@@ -195,7 +195,7 @@ SCREEN_EXCLUDED: dict[str, tuple[str, ...]] = {
 SCREEN_FINDINGS: dict[str, tuple[int, int, int, int]] = {
     "n=1..100": (28, 111, 86, 577),
     "n=1..200": (67, 402, 182, 2046),
-    "n=1..324": (124, 1322, 302, 5360),
+    "n=1..324": (124, 1326, 302, 5356),
 }
 UNDETERMINED_BY_MISS = (28,)
 #: The cases the two sampled sweeps re-derive on every pull request, computed here from

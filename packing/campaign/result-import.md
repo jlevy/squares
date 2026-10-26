@@ -1247,10 +1247,13 @@ concise News entry before merge, or record an editorial omission when the PR is 
 intermediate research checkpoint without a distinct reader-facing development.
 Name what changed, why it matters, the source PR and relevant `result_ids`, direct
 public artifact links where available, and the actual verification or publication
-limits.
-Use surnames throughout News titles, summaries, details and display labels unless
-two distinct people share one; retain handles, organization names and literal cited
-titles. Canonical attribution keeps full identities.
+limits. List in `issues` each issue that reported one of those results, as
+`campaign/result-requests.yaml` maps it, and each issue the entry links; News links them
+beside the PRs, and `python -m devtools.render_changelog --backfill-issues` writes any
+that are missing, which the records tier otherwise fails on.
+Use surnames throughout News titles, summaries, details and display labels unless two
+distinct people share one; retain handles, organization names and literal cited titles.
+Canonical attribution keeps full identities.
 Use the real event date once known.
 The merged delivery date and the independently verified publication date are separate
 facts. A merged PR alone does not establish a live website, released artifact or
@@ -1341,9 +1344,9 @@ After merge:
    [Label the PR and Prepare News](#label-the-pr-and-prepare-news).
    For an S4 or S5 result that change is required, and stage 7’s
    [Announce a Significant Result](#announce-a-significant-result) says who opens it.
-   Retain the actual merge date, source PR, `result_ids`, artifact links and limits.
-   After that change deploys, check the live News entry and its public artifact links
-   against the merged record, and retain the deployment receipt.
+   Retain the actual merge date, source PR, `result_ids`, reporting `issues`, artifact
+   links and limits. After that change deploys, check the live News entry and its public
+   artifact links against the merged record, and retain the deployment receipt.
    Claim publication only after this check.
 
 ## Stage 6: Explain

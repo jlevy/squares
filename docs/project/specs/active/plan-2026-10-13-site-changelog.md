@@ -147,6 +147,7 @@ They demonstrate the record shape, not a completed production backfill.
 | `date` | UTC merge date; for a grouped delivery, the latest merge date of the included PRs |
 | `title` | Short plain-text contribution title |
 | `pull_requests` | Nonempty, unique PR numbers represented by this entry |
+| `issues` | Optional unique issue numbers linked beside the PRs; it must include each issue that reported one of its `result_ids` in `packing/campaign/result-requests.yaml` and each issue its prose or references link (`render_changelog --backfill-issues` writes them) |
 | `summary` | Markdown description, normally one sentence to a few lines |
 | `details` | Optional Markdown, usually a short nested bullet list for a substantial effort |
 | `stack_id` | Optional verified formal-stack identity; repeated across later deliveries |

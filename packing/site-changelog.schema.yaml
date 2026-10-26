@@ -102,6 +102,15 @@ $defs:
         allOf:
           - {$ref: '#/$defs/prs'}
           - {minItems: 1}
+      issues:
+        type: array
+        minItems: 1
+        uniqueItems: true
+        items: {type: integer, minimum: 1}
+        description: >-
+          Issues of the repository the entry came from, linked beside its PRs: every issue
+          that reported one of its result_ids (campaign/result-requests.yaml) and every issue
+          its prose or references link, which render_changelog requires.
       significance:
         type: object
         additionalProperties: false

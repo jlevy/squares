@@ -33805,15 +33805,17 @@ results:
       certified KKT local minimum at exactly the side of Daniel's later certificate, 4.48e-12
       below, and at 303, on its first-pass rung, a solve whose KKT certificate fails at the
       relaxed gate, giving a view 3.63e-12 below that all three exact routes here accept.
-      Their registration is think-20oj's, the 268 view with Daniel's later certificate
-      (T-242) as the one that first states its side.
+      think-20oj registers the 303 view; the 268 view, at the house's side since 268 moved to
+      T-242 on 26 October 2026, is no register candidate.
 
-      At 268 Daniel's later certificate, a sibling placement, is registered as reported as
-      T-242 (V0/C0). The house rule adopts the smallest validated packing in the pass that
-      validates it, and no staging reason covers waiting for a later report not yet
-      validated, so 268 moved now; T-242's validation and its re-housing of 268 (and of 304)
-      are think-hx0e's, under the same rule, and the credit there follows the placement it
-      holds.
+      At 268 Daniel's later certificate, a sibling placement, was registered as reported as
+      T-242 when this pass adopted T-240 there. The house rule adopts the smallest validated
+      packing in the pass that validates it, and no staging reason covers waiting for a
+      later report not yet validated, so 268 moved then. T-242 reached V3/C3 after the 24
+      October review of it (think-hx0e), and one day's archive holds one prior state a count,
+      so the pass of 26 October 2026 moved 268 on from this certificate to T-242's, 4.48e-12
+      below it, credited Daniel after Lavrentev, the placement it holds (think-3anz). This
+      certificate stays retained and verified at 268 as history, and holds the house at 303.
 
       The source's own checkers were not run here. The two maintained routes, the sqpack
       rational witness verifier and the independent rational corner checker, share
@@ -33827,8 +33829,8 @@ results:
       retained. The review's six questions for the author (the credit at 268, whether #763
       claims both counts, the 303 lineage and its unpublished steps, and the notebooks'
       source notices) hold no rung. At 268 Evan Daniel's later certificate, 4.48e-12 below
-      this side, is registered as reported as T-242; its validation and its re-housing of
-      268 under the house rule are think-hx0e's.
+      this side (T-242), replaced it as the house on 26 October 2026; it remains the house
+      at 303.
     reviews:
       - path: docs/project/reviews/review-2026-10-24-couzo-n268-n303.md
         kind: adversarial
@@ -34215,10 +34217,19 @@ results:
       drawn, so the count is decided no better; no view is below the side.
 
       At 268 this certificate is 4.48e-12 below T-240, which the same pass adopted there,
-      and one day's archive holds one prior state a count, so 268 is staged for the pass's
-      next pull request, on or after 26 October 2026 (select_houses.PENDING_ADOPTION,
-      think-3anz), where the house's credit follows the placement adopted, Daniel after
-      Lavrentev.
+      and one day's archive holds one prior state a count, so 268 was staged for the pass's
+      next pull request (select_houses.PENDING_ADOPTION, think-3anz). The case at 268
+      adopted this certificate as its house best packing in the pass of 26 October 2026,
+      from T-240, which stays retained as history, with the credit of the placement adopted,
+      Daniel after Lavrentev.
+
+      Both strong generators decided the 268 witness in the same pull request
+      (cases/regularized_drawings/think-3anz-2026-10-25): grid-slack's view at 1 degree, at
+      the witness's side, is admitted (row 10) and drawn, and Evan Daniel's
+      certified KKT re-solve at the witness's side goes to review at row 7; no view is below
+      the side. The regularizer's view of T-240's witness at 268, which #794's runs found at
+      exactly this certificate's side, is at the house's side now, not below it, so it is no
+      register candidate; think-20oj keeps the 303 view.
 
       The source's own checkers were not run here. The two maintained routes, the sqpack
       rational witness verifier and the independent rational corner checker, share
@@ -34233,8 +34244,8 @@ results:
       who first published the packing at 304) hold no rung. Both counts are the smallest
       validated sides, so the cases adopt them under the house rule, with both strong
       generators' regularization of each new house: 304 was adopted on 25 October 2026, and
-      268 is staged for the pass's next pull request, where the house credit follows the
-      placement adopted, Daniel after Lavrentev.
+      268 on 26 October 2026, where the house credit follows the placement adopted, Daniel
+      after Lavrentev.
     reviews:
       - path: docs/project/reviews/review-2026-10-24-couzo-evand-n268-n304.md
         kind: adversarial
@@ -36026,7 +36037,7 @@ regularized_drawings:
         max_turn_deg: 0.584252
       view: packing/atlas/known-best/regularized/n-267-regularized.yaml.gz
     - n: 268
-      of: T-240
+      of: T-242
       by: project
       method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
       modifications: ["port of his coincidence placement (regularize_grid_slack/1) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
@@ -36035,9 +36046,9 @@ regularized_drawings:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 95
-        max_move: 0.4003225
-        max_turn_deg: 0.26227
+        moved: 49
+        max_move: 0.3837877
+        max_turn_deg: 0.81555
       view: packing/atlas/known-best/regularized/n-268-regularized.yaml.gz
     - n: 269
       of: T-174

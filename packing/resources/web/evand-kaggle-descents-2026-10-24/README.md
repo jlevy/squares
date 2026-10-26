@@ -21,10 +21,10 @@ its publication (the owner, 14 October 2026), so the record takes two of the thr
 
 T-242 registers 268 and 304, with T-241 before it at 304, at `V3`/`C3` since the
 [stage 4 review of 24 October](#stage-4-review). Both are the smallest validated sides at
-their counts, so the cases adopt them under the house rule: 304 in the pull request that
-maps the review, and 268 in the next one, since the adoption of #763’s entry (T-240)
-already moves 268 in the pass of 25 October and one day’s archive holds one prior state a
-count.
+their counts, so the cases adopted them under the house rule: 304 in the pull request
+that maps the review, in the pass of 25 October, and 268 in the next one, in the pass of
+26 October, since the adoption of #763’s entry (T-240) had already moved 268 in the pass
+of 25 October and one day’s archive holds one prior state a count.
 
 The source was read on 24 October 2026 from a blobless clone whose head stood at
 `659ee62e4a9d39542a1146e8b011cc3ab6407ede`, which leaves every retained file unchanged.
