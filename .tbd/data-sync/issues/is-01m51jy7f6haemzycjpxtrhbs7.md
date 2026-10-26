@@ -5,16 +5,18 @@ title: "Import wand125: the Lean kernel proof of ValidTilt9, s(k^2 - 4) = k for 
 kind: task
 status: open
 priority: 1
-version: 8
+version: 9
 delegate: null
 labels:
   - result-import
 dependencies: []
 parent_id: is-01m51hyxstsa9ptekd2ss26ksn
+child_order_hints:
+  - is-01m5vbhr9d1rxpjb3fah1588s9
 hold: null
 hold_until: null
 created_at: 2026-10-16T05:28:43.750Z
-updated_at: 2026-10-23T06:16:55.743Z
+updated_at: 2026-10-26T05:39:50.188Z
 started_at: 2026-10-16T05:28:49.870Z
 ---
 Found in the 2026-10-16 intake sweep's read of wand125/square-packing (lane A of think-hg5s, bead think-mu5v, acting name user-eb-intake-residue); nothing on GitHub asked (no jlevy/squares issue names ValidTilt9 as of 05:40Z). Stage 1 triage only, read-only, from a blobless clone in the lane's scratch; nothing retained, registered or run yet.
