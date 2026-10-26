@@ -35273,6 +35273,11 @@ results:
       SquarePacking.LemmaELeaf, are valid7 : Bentz.Valid7, bentz : ∀ k : ℕ, 6 ≤ k →
       minSide (k ^ 2 - 3) = k, and validTilt7 : Bentz.ValidTilt7.
 
+      This entry's scope is that theorem's projection onto the cases this record holds,
+      k = 6 to 18, as T-064's is: s(33) = 6, s(46) = 7, s(61) = 8, s(78) = 9, s(97) = 10,
+      s(118) = 11, s(141) = 12, s(166) = 13, s(193) = 14, s(222) = 15, s(253) = 16,
+      s(286) = 17 and s(321) = 18.
+
       The proof checks the pose tree of the third k2m3 run on the box cover of L4_k02_box7.txt,
       one generated module per root cell, 9,800 of them, glued over the D4 root
       [0, 7/2]^2 x (0, 1/2] in a generated Main.lean, with Bridge.lean identifying the cover
@@ -35398,6 +35403,10 @@ results:
       two reported runs of ValidTilt9 and a build here of the reduction. Its theorems, in
       namespace SquarePacking.LemmaELeaf of the generated Sqpack/V9/Main.lean, are validTilt9 : Bentz4.ValidTilt9, valid9 : Bentz4.Valid9 and bentz4 :
       ∀ k : ℕ, 8 ≤ k → minSide (k ^ 2 - 4) = k.
+
+      This entry's scope is that theorem's projection onto the cases this record holds,
+      k = 8 to 18: s(60) = 8, s(77) = 9, s(96) = 10, s(117) = 11, s(140) = 12, s(165) = 13,
+      s(192) = 14, s(221) = 15, s(252) = 16, s(285) = 17 and s(320) = 18.
 
       The proof checks Daniel's k2m4 certificate qxzm_full on the box cover K4_k008_box9.txt,
       16,200 per-root certificates in the release validtilt9-lean-v1, as 1,275,911 generated

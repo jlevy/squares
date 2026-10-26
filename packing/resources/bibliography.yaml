@@ -4032,8 +4032,8 @@ sources:
     year: 2026
     venue: GitHub
     dated: '2026-10-16'
-    credit: Hosono after Daniel, Burns, Massaccesi
-    short_credit: Hosono after Daniel et al.
+    credit: Hosono after Daniel, Levy, Burns, Massaccesi
+    short_credit: Hosono after Daniel, Levy et al.
     lineage: credits-project
     note: >-
       Hiroaki Hosono's Lean kernel proof of Evan Daniel's ValidTilt9, and with Daniel's
@@ -4045,8 +4045,9 @@ sources:
       (evand/square-packing 060c1a1..44a105e) with a faster row-minimum check, over 1,275,911
       generated files the source lists by digest in the release validtilt9-lean-v1. The
       source's receipts give about 7,390 CPU-hours. The lineage is the same repository's,
-      credits-project, and the credit carries the method's antecedents, as Daniel's own keys
-      for T-081 do; the commits name Claude as co-author. Not built here.
+      credits-project, so the credit names this project as [wand125 n59 Lean kernel
+      2026-10-11] does, and carries the method's antecedents, as Daniel's own keys for T-081
+      do; the commits name Claude as co-author. Not built here.
   - key: '[wand125 Valid7 Lean 2026-10-11]'
     authors: [Hosono]
     year: 2026
@@ -4070,8 +4071,8 @@ sources:
     year: 2026
     venue: GitHub
     dated: '2026-10-17'
-    credit: Hosono after Daniel, Burns, Massaccesi
-    short_credit: Hosono after Daniel et al.
+    credit: Hosono after Daniel, Levy, Burns, Massaccesi
+    short_credit: Hosono after Daniel, Levy et al.
     lineage: credits-project
     note: >-
       Version 2 of Hiroaki Hosono's Lean kernel proof of Evan Daniel's Valid7, in
@@ -4080,7 +4081,9 @@ sources:
       re-certified leaves on Daniel's library at wand125 c5c7f00, 62,626 generated files in
       the release valid7-lean-v2, a recorded run of about 798 CPU-hours. The folder states no
       licence; web/wand125-valid7-lean-v2-2026-10-17/ pins its files by digest and retains
-      none. The commit names Claude as co-author. Not built here.
+      none. The lineage is that repository's, credits-project, so the credit names this
+      project, as for [wand125 ValidTilt9 Lean 2026-10-16]. The commit names Claude as
+      co-author. Not built here.
   - key: '[Daniel Fang and Ryu Lean 2026-10-18]'
     authors: [Daniel]
     year: 2026

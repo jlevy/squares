@@ -29263,7 +29263,7 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 ValidTilt9 Lean 2026-10-16]'
     field: /credit
-  expected_text: Hosono after Daniel, Burns, Massaccesi
+  expected_text: Hosono after Daniel, Levy, Burns, Massaccesi
   start: 0
   end: 6
   label: Hosono
@@ -29279,7 +29279,7 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 ValidTilt9 Lean 2026-10-16]'
     field: /credit
-  expected_text: Hosono after Daniel, Burns, Massaccesi
+  expected_text: Hosono after Daniel, Levy, Burns, Massaccesi
   start: 13
   end: 19
   label: Daniel
@@ -29295,16 +29295,33 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 ValidTilt9 Lean 2026-10-16]'
     field: /credit
-  expected_text: Hosono after Daniel, Burns, Massaccesi
+  expected_text: Hosono after Daniel, Levy, Burns, Massaccesi
   start: 21
-  end: 26
+  end: 25
+  label: Levy
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - announcement-account
+  contributor_id: joshua-levy
+  note: Reviewed 2026-10-26, /credit span 21:25. The first-party jlevy/squares record,
+    credited second-hand as for the same source's earlier keys; project credit does
+    not imply sole personal authorship.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[wand125 ValidTilt9 Lean 2026-10-16]'
+    field: /credit
+  expected_text: Hosono after Daniel, Levy, Burns, Massaccesi
+  start: 27
+  end: 32
   label: Burns
   role: prerequisite
   disposition: resolved
   evidence:
   - primary-byline
   - bibliography
-  note: Reviewed 2026-10-26, /credit span 21:26. The weighted exact-rational covering method of Daniel's
+  note: Reviewed 2026-10-26, /credit span 27:32. The weighted exact-rational covering method of Daniel's
     families, credited to Sam Burns as Daniel's own keys for T-064 and T-081 do; the original credit
     role is retained.
   contributor_id: sam-burns
@@ -29312,16 +29329,16 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 ValidTilt9 Lean 2026-10-16]'
     field: /credit
-  expected_text: Hosono after Daniel, Burns, Massaccesi
-  start: 28
-  end: 38
+  expected_text: Hosono after Daniel, Levy, Burns, Massaccesi
+  start: 34
+  end: 44
   label: Massaccesi
   role: prerequisite
   disposition: resolved
   evidence:
   - primary-byline
   - bibliography
-  note: Reviewed 2026-10-26, /credit span 28:38. The weighted exact-rational covering method of Daniel's
+  note: Reviewed 2026-10-26, /credit span 34:44. The weighted exact-rational covering method of Daniel's
     families, credited to Gustavo Massaccesi as Daniel's own keys for T-064 and T-081 do; the original
     credit role is retained.
   contributor_id: gustavo-massaccesi
@@ -29429,7 +29446,7 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 Valid7 Lean v2 2026-10-17]'
     field: /credit
-  expected_text: Hosono after Daniel, Burns, Massaccesi
+  expected_text: Hosono after Daniel, Levy, Burns, Massaccesi
   start: 0
   end: 6
   label: Hosono
@@ -29445,7 +29462,7 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 Valid7 Lean v2 2026-10-17]'
     field: /credit
-  expected_text: Hosono after Daniel, Burns, Massaccesi
+  expected_text: Hosono after Daniel, Levy, Burns, Massaccesi
   start: 13
   end: 19
   label: Daniel
@@ -29461,16 +29478,33 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 Valid7 Lean v2 2026-10-17]'
     field: /credit
-  expected_text: Hosono after Daniel, Burns, Massaccesi
+  expected_text: Hosono after Daniel, Levy, Burns, Massaccesi
   start: 21
-  end: 26
+  end: 25
+  label: Levy
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - announcement-account
+  contributor_id: joshua-levy
+  note: Reviewed 2026-10-26, /credit span 21:25. The first-party jlevy/squares record,
+    credited second-hand as for the same source's earlier keys; project credit does
+    not imply sole personal authorship.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[wand125 Valid7 Lean v2 2026-10-17]'
+    field: /credit
+  expected_text: Hosono after Daniel, Levy, Burns, Massaccesi
+  start: 27
+  end: 32
   label: Burns
   role: prerequisite
   disposition: resolved
   evidence:
   - primary-byline
   - bibliography
-  note: Reviewed 2026-10-26, /credit span 21:26. The weighted exact-rational covering method of Daniel's
+  note: Reviewed 2026-10-26, /credit span 27:32. The weighted exact-rational covering method of Daniel's
     families, credited to Sam Burns as Daniel's own keys for T-064 and T-081 do; the original credit
     role is retained.
   contributor_id: sam-burns
@@ -29478,16 +29512,16 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[wand125 Valid7 Lean v2 2026-10-17]'
     field: /credit
-  expected_text: Hosono after Daniel, Burns, Massaccesi
-  start: 28
-  end: 38
+  expected_text: Hosono after Daniel, Levy, Burns, Massaccesi
+  start: 34
+  end: 44
   label: Massaccesi
   role: prerequisite
   disposition: resolved
   evidence:
   - primary-byline
   - bibliography
-  note: Reviewed 2026-10-26, /credit span 28:38. The weighted exact-rational covering method of Daniel's
+  note: Reviewed 2026-10-26, /credit span 34:44. The weighted exact-rational covering method of Daniel's
     families, credited to Gustavo Massaccesi as Daniel's own keys for T-064 and T-081 do; the original
     credit role is retained.
   contributor_id: gustavo-massaccesi
