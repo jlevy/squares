@@ -2652,6 +2652,49 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "packing/devtools/overview_sections.py",
             "packing/devtools/render_changelog.py",
             "packing/devtools/render_overview.py",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The Changelog's day log and the News division of 26 October 2026 "
+            "(think-u1eh): the Changelog page becomes the rollup the home page carried "
+            "as Recently Added, over the whole record, with a brief line for each site "
+            "or project change; the home page loses the block and offers a Changelog "
+            "action beside All News; five site, documentation and tooling changes leave "
+            "News by the record's own news_exclusion; and the publication audit asks "
+            "render_changelog.entry_targets what links a page owes. These three shared "
+            "builders are candidate inputs because the papers take their navigation bar "
+            "and colophon from them, and this change touches neither: the Project group "
+            "and the credits line were #837's and are already on main. "
+            "Measured rather than assumed, by rendering all four papers from this branch "
+            "and from origin/main (dccc027ee) into empty trees with "
+            "render_n11_optimality_review, render_n11_threshold_bound_review, "
+            "render_n11_lower_bounds_explainer and render_packing_methods, then comparing "
+            "all 69 files: 63 are byte-identical and the 6 that differ do so only in the "
+            "40-character Git revision each renderer stamps into its source links, which "
+            "is the commit rendered from rather than any content. Normalising that stamp "
+            "leaves all 69 identical. No paper's content, chrome or links change here."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/devtools/overview_sections.py",
+            "packing/devtools/render_changelog.py",
+            "packing/devtools/render_overview.py",
             "packing/devtools/site_documents.py",
             "packing/devtools/site_navigation.py",
             "packing/devtools/site_resources.py",
