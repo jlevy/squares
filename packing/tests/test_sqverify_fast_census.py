@@ -57,6 +57,13 @@ VERIFIER = "V-sqverify-fast"
 #: on the reviewed route stays: eight coinciding images of its densest row at most 2^32.
 #: The retained ones are near 2^19, so none is near the cap.
 DENSITY_CEILING = 2**32
+#: How far below its count a format T certificate's mass lies on the reviewed route:
+#: n - 1/100, which the 6 October review of the route read for T-068's certificates, and
+#: n - 1/1000, which the 26 October review of T-046's certificates read for rect_n27_L56
+#: (review-2026-10-26-wand125-rectangle-certificates-t046.md, section 3). The theorem
+#: needs only M < n, which admission recomputes; a mass at another distance from n waits
+#: for a review that names it.
+FORMAT_T_MASS_GAPS = frozenset({Fraction(1, 100), Fraction(1, 1000)})
 #: The receipt whose exact capture is recomputed here from the candidate.
 RECOMPUTED = "mixed_n67_L848"
 #: The retained format M certificate on a declared net (step 1/1001, 416 directions).
@@ -401,9 +408,10 @@ def format_t_problems(name: str) -> list[str]:
 
     The certificates the 6 October review of the format T route read: Tokoharu's format
     with no point or segment, the standard net and core (201 half-angles of step 83/40000
-    at core side 9977/10000), Tokoharu's centre domain, a mass of n - 1/100, densities far
-    below lemma F3's caps, decided at Tokoharu's threshold 10001/10000 by a build of
-    reviewed source with no fault injected, and controlled by a build of reviewed source.
+    at core side 9977/10000), Tokoharu's centre domain, a mass of n - 1/100 (or n - 1/1000,
+    `FORMAT_T_MASS_GAPS`), densities far below lemma F3's caps, decided at Tokoharu's
+    threshold 10001/10000 by a build of reviewed source with no fault injected, and
+    controlled by a build of reviewed source.
     """
     entry = rectangle_entries()[name]
     case = rectangle_cases()[name]
@@ -434,7 +442,9 @@ def format_t_problems(name: str) -> list[str]:
         "Tokoharu's centre domain": premises["centre_domain"] == "tokoharu",
         "the standard net and core": (premises["angle_count"], premises["D"], premises["B"])
         == (census.STANDARD_DIRECTIONS, "83/40000", "9977/10000"),
-        "mass n - 1/100": Fraction(premises["mass_exact"]) == n - Fraction(1, 100),
+        "mass n - 1/100 or n - 1/1000": (
+            n - Fraction(premises["mass_exact"]) in FORMAT_T_MASS_GAPS
+        ),
         "densities far below lemma F3's caps": densest <= DENSITY_CEILING,
         "Tokoharu's threshold": entry["threshold"] == TOKOHARU_THRESHOLD,
         "no refused direction": entry["refused_directions"] == [],

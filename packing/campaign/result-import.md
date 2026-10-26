@@ -95,7 +95,7 @@ W1 phase on one branch:
    counts, each result issue also gets a
    [report-order verdict comment](#report-order-verdict-comments).
    Once the deploy is verified, run `check_requests --report` and close each closeable
-   issue with its final comment ([Close a Settled Issue](#close-a-settled-issue)).
+   issue with its final comment ([Close an Answered Issue](#close-an-answered-issue)).
 8. **Sweep again** with `make intake`, after the branch’s changes to the records and
    again after the merge.
    The sweep, like `check_requests --report`, is what finds the replies due: it lists
@@ -215,7 +215,7 @@ claude/intake-YYYY-MM-DD, with today's date.
    decided the pass's counts, draft each result issue's verdict comment with
    devtools.intake_comments (stage 7, "Report-Order Verdict Comments"). Once the
    deploy is verified, run `check_requests --report` and close each closeable issue
-   with its final comment (stage 7, "Close a Settled Issue"). A question to the
+   with its final comment (stage 7, "Close an Answered Issue"). A question to the
    author goes under the issue's awaiting_author and holds it open only when the
    record asserts something the answer could falsify and no measurement here can
    settle it; any other goes in the closing comment. Post nothing on, and close
@@ -1501,31 +1501,70 @@ What lets an agent post is the `github-workflows` grant, which covers issues.
   Two follow-ups it cannot see are the pass’s to post by hand: the one a comparison owes
   once settled, since it leaves the view as it settles (#603 for T-163), and those owed
   where an issue names a result only in an ask, not in its `results` (#532 for T-142 to
-  T-144).
-- **A settled issue is closed with its final comment**, after the verified deploy, once
-  nothing the author asked for is queued and no question to the author would change the
-  record: [Close a Settled Issue](#close-a-settled-issue).
+  T-144). A reporter’s issue goes on tracking its result’s review after it closes: it
+  closes once answered, its follow-ups continue on the closed issue, and the view counts
+  it. A **review track** is different: an issue the project opened for a pending review
+  of a result no author reported to it (#772 to #786, `review_track: true` in the
+  record). It has no author to answer, so it closes only when the review it tracks is
+  done and its result stands confirmed or refuted.
+- **An answered issue is closed with its final comment**, after the verified deploy:
+  [Close an Answered Issue](#close-an-answered-issue).
+  A result still below `V3/C3` does not hold it open once the beads that own the rest of
+  its validation are named.
+  An import still queued, a queued ask of the author’s, an awaited question or the
+  owner’s hold does hold it open.
 - **Every S4 or S5 result gets a News item** in the first change after the merge that
   registered or raised it:
   [Announce a Significant Result](#announce-a-significant-result).
 
-### Close a Settled Issue
+### Close an Answered Issue
 
-The owner’s instruction of 23 October 2026: “if we have actually imported something,
-it’s already on the website, and we validated that, we should close the issues.
+An issue closes once it is **answered**, not once its results are confirmed.
+Answered means four things:
+
+- Its import and its disposition are on `main`: every reported result is registered,
+  recorded as evidence, or recorded as not registered with the reason, and nothing is
+  still queued for import.
+- The final comment reports them: each id at its rungs as they stand, what remains, and
+  the beads that own it.
+- Nothing the author asked for is still queued, and no question to the author awaits an
+  answer that could falsify the record.
+- The owner does not hold the issue.
+
+A result below `V3/C3` does not hold its issue open once its `validation` names the open
+beads that own the rest of its review and replay.
+Those beads, not the issue, carry the unfinished work.
+`check_bead_tree` holds them open after the issue closes, and the closing comment names
+them.
+Every later move of an id, a rung, a status or a position the comment stated gets a
+follow-up on the closed issue
+([epistemics.md](../../epistemics.md#import-integration-and-reply): an answer is kept
+true). A **review track** (`review_track: true`) is the exception: it exists to track a
+review, has no author to answer, and closes only when its result is confirmed or
+refuted.
+
+The owner’s instruction of 23 October 2026 made the close the standard step: “if we have
+actually imported something, it’s already on the website, and we validated that, we
+should close the issues.
 That should be our standard process.”
-What is unresolved, or needs the reporter’s answer, stays open.
 That morning twelve issues were closeable and open: nothing ran the closing step, the
 sweep did not list them, and lanes had kept issues open for questions to their authors
 that the record did not track and whose answers would change nothing in it.
+The owner’s direction of 26 October 2026 moved the line from confirmed to answered:
+“making sure that all closable things are closed and the process is clear about that (so
+we don’t have a backlog of so many open issues where it’s partly imported or already
+imported, but the issue is left open)”. That day nine issues were imported and answered,
+each held open only by validation the project owned (#420, #428, #446, #594, #600, #607,
+#610, #640, #810).
 
 1. **After the verified deploy**
    ([Verify the Published Result](#verify-the-published-result)), run
    `check_requests --report` from `main` and take each issue it marks closeable that is
    still open on GitHub.
-   An issue held for the owner (`held` in the record) is never closeable: no pass posts
-   on it or closes it, `check_requests --draft` and `intake_comments --out` refuse it,
-   and the sweep lists it for the owner with what would otherwise be owed.
+   It marks an issue closeable only once every id it maps to is on `main`. An issue held
+   for the owner (`held` in the record) is never closeable: no pass posts on it or
+   closes it, `check_requests --draft` and `intake_comments --out` refuse it, and the
+   sweep lists it for the owner with what would otherwise be owed.
    A hold is set on the owner’s recorded instruction (`basis: owner-instruction`), or on
    a reservation for the owner that beads record (`basis: recorded-reservation`, pending
    the owner’s confirmation), with those beads in `beads` and a note saying what each
@@ -1533,9 +1572,15 @@ that the record did not track and whose answers would change nothing in it.
    An issue GitHub already shows closed is not posted on again: record its final comment
    and its close (step 4).
 2. **Check that `main` and the deployed site say what the final comment will say**,
-   render the comment with `check_requests --draft N`, and edit it to the house style:
-   what is settled and where, linked into `main` and the site, then that nothing the
+   render the comment with `check_requests --draft N`, and edit it to the house style.
+   It states each id at its rungs, linked into `main` and the site, and that nothing the
    author asked for is queued, so the comment closes the issue.
+   Where a result is still below `V3/C3`, the draft lists what remains with the beads
+   that own it, and says that closing confirms nothing still open.
+   Keep both: the rungs are stated as they stand and never rounded up.
+   A result with no named owner keeps the issue open: name the open bead that owns its
+   review and replay (with its `## Validation` block) under the result’s `validation`
+   first, or leave the issue open.
 3. **Put an informational question in the closing comment**, saying that an answer is
    still welcome and holds nothing open.
    A question holds the issue open only when the record asserts something the answer
@@ -1556,13 +1601,21 @@ that the record did not track and whose answers would change nothing in it.
 4. **Post the comment and close the issue** under the `github-workflows` grant, then
    record the comment under the issue’s `replies` as `final` and set the entry’s `state`
    and `closed` in the next change.
+   Record each id, rung, status and position it stated under `reported`, and the beads
+   it named under `beads`; a closed issue owes a reply until some reply names each bead
+   its results’ `validation` names.
    Close the answer bead once the record no longer names it on an open issue, which
    `check_bead_tree` checks.
+   A `validation` bead stays open until the review or replay it owns has landed; then
+   drop the field (the result is confirmed or refuted) or name the bead that takes over,
+   and post the follow-up the moved rung owes.
 
 Each six-hourly check-in of a running pass does the same.
 Until an issue is closed, `make intake` lists it under **Needs Action** and exits 1;
 once GitHub shows it closed and the record does not, the item says to record the close
 and post nothing. An issue held for the owner is listed for the owner and fails nothing.
+A closed issue that owes a follow-up is listed too, owned by the first bead that owns
+what remains of its results’ validation, else its answer bead.
 
 ### Announce a Significant Result
 
@@ -1690,16 +1743,62 @@ A reply that mentions the result without naming the entry, or names the entry wi
 stating a field, leaves the earlier statement standing.
 Each reason quotes the one reply it holds a field to, by its date, and by its kind or
 its address where the issue has another reply that day.
-An issue is **closeable** when triage is done, every result is confirmed or refuted (a
-reported defect: recorded against the entry it names), no `ask` is queued, and no
-question under `awaiting_author` awaits the author’s answer, and the owner does not hold
-it (`held`). `awaiting_author` holds only the questions whose answers could falsify what
-the record asserts and that no measurement here can settle: `changes` says whether the
+A **reply is also due** when a position a reply stated has moved: the entry is adopted
+on its case (`pending adoption` to `current`) or superseded.
+It is due too when a comment was read into the record (`read_through`) on a later day
+than the last reply, and, on a closed issue, until some reply names each bead its
+results’ `validation` names.
+`--report`, `--draft`, `--pending` and the sweep read positions from the case records.
+The gate’s one-line summary does not, so it leaves out a moved position.
+A reply recorded before 26 October 2026 states no position, so the first reply that
+states one is the baseline.
+
+An issue is **closeable** once it is answered
+([Close an Answered Issue](#close-an-answered-issue)):
+
+- triage is done, and nothing is queued for import;
+- every result is confirmed or refuted (a reported defect: recorded against the entry it
+  names), or its `validation` names the open beads that own what remains of its review
+  and replay;
+- no `ask` is queued, and no question under `awaiting_author` awaits the author’s
+  answer;
+- the owner does not hold it (`held`).
+
+`--report` adds one more: every id the issue maps to is on `main`. A **review track**
+(`review_track: true`), which the project opened to track a pending review of a result
+no author reported, has no author to answer: it closes only when every result it tracks
+is confirmed or refuted, `validation` or not.
+`close_when` is descriptive.
+It says what closing would take as the entry was written; where it says more or less,
+the rule above governs.
+The texts were not rewritten when rule P1 came in on 26 October 2026 (think-3b9v): at
+least ten already said an issue closes once its validation is owned while the code
+waited for `V3/C3`, and others name conditions the rule does not.
+
+An **ask** records only what the issue’s author asked of the project: a change to the
+record, a credit, a decision, a piece of research.
+On an open issue a queued ask names its `source`, `body` or the author’s own comment,
+which `--github` checks.
+The project’s own review or replay of a result is that result’s `validation`, never an
+ask: the gate refuses a queued ask whose bead a result’s `validation` names.
+A question the project puts to the author goes under `awaiting_author` or in the closing
+comment. `awaiting_author` holds only the questions whose answers could falsify what the
+record asserts and that no measurement here can settle: `changes` says whether the
 credit, the lineage, or which file or commit a claim names, and `asked` is the recorded
 reply that asked it.
 `held` holds an issue for the owner, on the owner’s recorded instruction or on a
 reservation for the owner that beads record, with its `basis`, the day it was recorded
 here, the beads and a note: while it stands no pass posts on the issue or closes it.
+A held issue carries `blocked` of type `owner-reply` or `owner-decision`.
+
+`blocked` marks an open issue that someone other than the pass must move.
+Its `type` is the GitHub label `blocked:<type>`
+([development.md](../../development.md#issue-and-pull-request-labels)), and its `reason`
+says in one line what it waits on.
+`--github` lists an open issue whose live `blocked:` labels differ from its record.
+Work that is the project’s own and that nobody holds is not blocked, whatever it costs
+below the pass’s cap.
+Remove `blocked` once the block lifts; a closed issue carries none.
 
 A confirmation is described from the confirming evidence’s `relationship_to_generator`:
 *reproduced with the author’s own checker* for `same-implementation`, *re-verified by an
@@ -1714,11 +1813,11 @@ Run each command from `packing/` as
 | Option | What it does |
 | --- | --- |
 | none | The gate step: the schema holds and every id resolves; one line per issue |
-| `--report` | A table per issue: each result’s entries, rungs, state, how it was confirmed and whether its id is on `main`; the replies due; whether it is closeable |
+| `--report` | A table per issue: each result’s entries, rungs, state, how it was confirmed and whether its id is on `main`; the replies due; the beads that own what remains; its block; whether it is closeable, which needs its ids on `main` |
 | `--backlog` | Every register entry below `V3` or `C3`, with its `next_rung`, its `activity`, the beads it names and the issues it serves |
 | `--pending` | Every pending review (stage 7): the backlog’s entries, any entry naming an unfinished confirmation or activity, and the record index’s unassessed comparisons, each with its beads, its tracking issues and whether one states its present state; then the count with no tracking issue, the stale, those held for the owner and those tracked only on closed issues. It does not see the follow-up a settled comparison owes, nor a result an issue names only in an ask |
-| `--draft N` | The status comment for issue N, ending in the Claude Code footer; it refuses unless `HEAD` is on `origin/main` |
-| `--github` | Read-only: the issues the record lacks, the replies missing from it, the comments created or edited after an entry’s `read_through`, and the `result-report` entries and entries marked `intake: true` whose issues lack the `intake` label |
+| `--draft N` | The status comment for issue N, ending in the Claude Code footer: each entry’s rungs and position, and on a closeable issue what remains with the beads that own it; it refuses unless `HEAD` is on `origin/main` |
+| `--github` | Read-only: the issues the record lacks, the replies missing from it, the comments created or edited after an entry’s `read_through`, and the `result-report` entries and entries marked `intake: true` whose issues lack the `intake` label; a recorded reply whose text does not name an id or bead the record says it stated; an open issue whose `blocked:` labels differ from its `blocked`; an ask whose `source` comment is not its author’s |
 
 A reply due is reported and never fails the gate: it is owed after the merge, not a
 broken record.
@@ -1730,16 +1829,19 @@ broken record.
 2. For each issue that `--report` marks reply due, and each other issue the merged
    change touched, render `--draft N`, check that `main` and the deployed site say what
    it says, and post it; an agent does as part of the pass, or the owner does.
-   `--report` marks what the register shows: no reply yet, a new or renumbered id, a
-   moved rung or status, an `outdated` statement.
-   A change it does not show, such as a case adopting the result, a supersession or a
-   comment read into the record, is followed up by the pass that makes it.
+   `--report` marks no reply yet, a new or renumbered id, a moved rung, status or
+   position (an adoption or a supersession), an `outdated` statement, a comment read
+   into the record since the last reply, and on a closed issue a bead that owns what
+   remains and that no reply has named.
+   Closed issues are included: an answer is kept true after the close.
 3. Record the reply under the issue’s `replies` in the next change: its URL, date and
-   kind, and in `reported` the id, rungs and status it stated for each result.
+   kind, in `reported` the id, rungs, status and position it stated for each result, and
+   in `beads` the beads it named as owning what remains.
    Name in `corrects` any earlier reply whose `outdated` statements it corrects.
+   `--github` then checks that the posted text names every id and bead recorded.
 4. When `--report` says an issue is closeable, close it with the final comment and set
-   the entry’s `state` and `closed`, as [Close a Settled Issue](#close-a-settled-issue)
-   says.
+   the entry’s `state` and `closed`, as
+   [Close an Answered Issue](#close-an-answered-issue) says.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
