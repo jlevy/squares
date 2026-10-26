@@ -1229,6 +1229,25 @@ evidence:
     certificate: resources/web/wand125-rectangle-certificates-2026-09-27/wand125-rectangles/certificates
     replay_status: not-attempted
     verifiers: [V-tokoharu-verify-cpp]
+    external_review:
+      state: informally-verified
+      date: '2026-09-27'
+      reviewed_by: >-
+        Session 160 checker-scaling review (Fable, max thinking),
+        docs/project/reviews/review-2026-09-27-wand125-rectangle-scaling.md; recorded on
+        this report entry on 2026-10-26 (think-wcex), where it had been recorded on the
+        replay entry only.
+      note: >-
+        Read the claims of this packet's 44 standing certificates: verify.cpp and
+        run_verify.py re-read for side-, count- and size-dependent types, constants and
+        limits, none found; the metadata, summaries and per-angle rows of all 44 read,
+        every candidate's own n, L, B and rhs checked exactly against the pinned table and
+        every mass below its count by the exact preflight; n78 replayed bit for bit at r =
+        1, 100 and 200 and the n27, n31 and n32 replays compared row for row with upstream;
+        both monotone transfers checked exactly. Two low findings, WSC-1 (the preflight did
+        not compare the candidate's n to the pin, since fixed) and WSC-2 (r = 0 runs as one
+        process), affect no registration. Not checked by that read: complete coverage of
+        the other 41 certificates, which it left to their replays.
     limitations: >-
       Source ad43d29d96d0d9740b34643b5ac3fb960909cf9c, pushed 2026-09-26 and
       2026-09-27, reports one standing rectangle-density certificate in Tokoharu's
@@ -1349,6 +1368,24 @@ evidence:
     certificate: resources/web/wand125-rectangle-certificates-2026-09-28/wand125-rectangles/certificates
     replay_status: not-attempted
     verifiers: [V-tokoharu-verify-cpp]
+    external_review:
+      state: informally-verified
+      date: '2026-10-26'
+      reviewed_by: >-
+        Claude Opus 5.5 (claude-opus-5-5), the stage 4 review lane w-t046-review-1026
+        (think-buaj), docs/project/reviews/review-2026-10-26-wand125-rectangle-certificates-t046.md
+      note: >-
+        Read the 38 certificates this packet retains, the 36 T-046 cites and n21 and n77:
+        every premise but coverage recomputed in exact rationals from the retained files
+        (n, L, B, rhs and threshold; nonnegative weights and contained, nondegenerate
+        rectangles; mass n - 1/100, n - 1/1000 at n21; each scaling factor equal to its
+        recorded quotient; the standard net, core and margins), and every accepting run's
+        summary and 201 per-angle rows found consistent with the preflight receipt. The
+        review's own exact evaluator, written apart from the crate and from
+        sqpack.rectangle_density, reproduced the census and control receipts' captures as
+        rationals and found no sampled pose below 10001/10000. No defect. Not decided by
+        this read: coverage at the 201 directions, which the source's checker decided
+        upstream and sqverify-fast's census rows decide here.
     limitations: >-
       Source 39d8ecc74d651b54ec977c331c8f2015b442a6c4, pushed between 2026-09-27 and
       2026-09-28 (UTC), reports one standing rectangle-density certificate in Tokoharu's
