@@ -6866,7 +6866,7 @@ issues:
       proposed; the source's clean build was not repeated here, and the verified bounds are
       unchanged. T-154 was registered as a simplification on 13 October, and the owner moved
       it to the new kind formalization, decided 13 October, recorded 14 October (think-8e0p).
-    read_through: '2026-10-12T22:23:37Z'
+    read_through: '2026-10-25T00:25:01Z'
     results:
     - key: n17-optimality-lean
       claim: >-
@@ -6955,6 +6955,26 @@ issues:
       review (think-32rl, docs/project/reviews/review-2026-10-13-fitzharding-n17-mathematical-correctness.md),
       its findings MR-1 to MR-6 and its six questions. The full build (think-r109) waits on an
       owner budget: the source publishes no CPU time, and the intake's host is too small.
+      maximusrufus's comment of 25 October 2026, 00:25:01Z
+      (https://github.com/jlevy/squares/issues/565#issuecomment-6391388887), read on 26
+      October (think-p7cq), offers a rebuild of T-154 on a second machine as the complete
+      build beyond the producer's that C3 asks for: sq17-lean at 0a7167e (v1.0.0) with the
+      three release certificate archives, on WSL Ubuntu with 12 cores, Lean v4.34.1 and the
+      pinned Mathlib cache (d13f23b7), unpack.py then reproduce.py build, exit 0 after
+      22,277 s over 4,951 module logs, ending REPRODUCTION_ACCEPTED. It reports the final
+      axiom log's SHA-256 (5e74c4af...c241) equal to the source receipt's final_log_sha256,
+      the two README controls' logs equal to clean-build-receipt.json's, every log
+      byte-identical to the producer's, no sorry, admit, axiom, unsafe, implemented_by or
+      extern in the source, and the side's exact rational enclosure in
+      [4.675530093603, 4.675530093606]. It shares the producer's source, toolchain, Mathlib
+      cache and certificates and the native_decide trust boundary, and does not check the
+      certificates separately; all credit for the proof is Oscar Fitzharding's. Its receipts
+      are maximusrufus/openai-math-replays at c01398b, sq17-rebuild/ (BUILD.txt, the three
+      logs, a module-log count and SHA256SUMS, whose digests match the comment's; the
+      repository is dual-licensed, MIT for code), and are not retained here, so no evidence
+      entry records the rebuild and T-154 stays at V3/C1. Whether a retained third-party
+      rebuild with byte-identical logs is the complete execution beyond the producer that C3
+      asks for is for the owner, who holds this issue's reply; the hold is unchanged.
   - number: 521
     title: 'Independent replay of T-037 (Kleddamag s(11) > 31/8, v1.0.2): confirmation record'
     author: Esummins
@@ -23236,7 +23256,8 @@ issues:
     beads:
     - think-sb7a
     - think-wcex
-    answer_bead: think-sb7a
+    - think-buaj
+    answer_bead: think-buaj
     replies:
     - url: https://github.com/jlevy/squares/issues/773#issuecomment-6381477713
       date: '2026-10-24'
@@ -24065,7 +24086,7 @@ issues:
     summary: >-
       Mohsen Karimi (ORCID 0009-0004-1055-8267) reports 683 upper bounds for s(n) at n = 1184
       to 3775, each below the grid side ceil(sqrt n), 85 of them at counts where the least
-      earlier numeric statement is the grid. The construction is two strips of squares
+      numeric bound was the grid. The construction is two strips of squares
       tilted by a small angle with rational tan(a/2): mH rows on the bottom wall and mV
       columns on the right wall, around a (K - mV) x (K - mH) axis-parallel grid. Each
       row states an exact side S < K = ceil(sqrt n), a decimal of at most ten places. The
@@ -24116,7 +24137,7 @@ issues:
       on thicker strips (order L^{2/3}, no new bound) and keeps a conjecture that c*(K) is
       of order sqrt K, which the register's reported k^{2/5} and k^{3/8} bounds contradict.
       The rows wait on think-llit's walk above 1024. Claude assistance disclosed.
-    read_through: '2026-10-25T04:51:33Z'
+    read_through: '2026-10-25T08:17:50Z'
     results:
     - key: rows-1184-3775
       claim: >-
@@ -24197,6 +24218,15 @@ issues:
         Proposition 1 bounds no quantity below an earlier row. Its Conjecture 1 (c*(K) of
         order sqrt K) conflicts with the reported k^{2/5} and k^{3/8} rows.
       queued: false
+    asks:
+    - what: >-
+        Describe the counts whose previous best was the grid as "where the least numeric bound
+        was the grid" (issuecomment-6395250201, point 3, answering the acknowledgement's third
+        question).
+      state: done
+      note: >-
+        The summary uses the phrase from 26 October 2026, as the acknowledgement's third
+        question proposed it.
     beads:
     - think-5dc3
     - think-llit
@@ -24232,6 +24262,31 @@ issues:
       2's records.csv and README beside version 1's and decides its 2,824 rows with the
       maintained checker; the triage's own re-decision with the V1 triage's prototype
       lemma decides nothing for the record.
+      The author's comments of 25 October, 08:11:12Z
+      (https://github.com/jlevy/squares/issues/799#issuecomment-6395250201) and 08:17:50Z
+      (issuecomment-6395311685), read on 26 October 2026 (think-p7cq), answer the four
+      questions of the acknowledgement of 06:44Z. (1) He found the construction
+      independently on 24 October, without knowing Ryu's preprint (10.5281/zenodo.23278927),
+      Daniel's Lean bounds or Fang's #797, and agrees that his rows and Theorem 1 are
+      instances of Ryu's L-shaped packing with independent widths, angles and phases for the
+      two bands; the next versions of the note and paper will cite Ryu's Theorems 1.1 to 1.4,
+      Daniel's Lean bounds and Fang's Theorem A, and say that Ryu's Theorem 1.4 already gives
+      the s(n) < K half of Theorem 1, whose addition is the window [K - 1/K, K). That is the
+      description the summary and theorem-near-integer give, so nothing changes. (2) He
+      attaches certificates_sha256.zip, the SHA-256 of all 2,824 certificates, which
+      regenerate.py (version 2, unchanged in version 4) writes byte for byte from
+      records.csv; the certificates he checked with verify_bound_certificate.py
+      (Mishapolk/square-packing-records 7e82c64) differ from them only in the comment line,
+      which writes the phase as 0 rather than 0/1. He says his search and verification code
+      is now public as version 4, 10.5281/zenodo.23634833. Neither the zip (the session's
+      proxy refused the attachment, HTTP 403) nor version 4 was retrieved or run here; the
+      record rebuilds every row from its parameters, so the digests would add a
+      square-by-square identity check and change no row. (3) He asks the record to use
+      "where the least numeric bound was the grid", and will use it himself (asks). (4) He
+      did not know the k^{2/5} and k^{3/8} reports, agrees that if either holds Conjecture 1
+      fails for large K, and will withdraw it in the next version; his data show only that
+      this construction reaches the records at order sqrt K for K <= 100. No answer changes a
+      row, a credit or a lineage the record states.
   - number: 804
     title: 'Exact values of the record sides for n = 88, 126, 172, 199, 263 (minimal polynomials): registration
       request'
@@ -24339,7 +24394,18 @@ issues:
     - think-9vai
     - think-4rzl
     answer_bead: think-9vai
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/804#issuecomment-6397201800
+      date: '2026-10-25'
+      by: jlevy
+      kind: import
+      reported:
+      - result: exact-sides-held
+      - result: exact-sides-new
+        id: T-244
+        verification: V0
+        confirmation: C0
+      - result: configurations-172-263
     close_when: >-
       The 88, 126 and 199 sides have been answered as values T-193 holds. The author's
       configurations at 172 and 263 are decided exactly (think-4rzl), and T-244 is validated, or
@@ -24571,3 +24637,70 @@ issues:
       tracking the intake of a reported item, Daniel's polynomial, which #545 has tracked since 12
       October; its other items are tracked where the table names them. The issue says it will be
       updated as each item lands on main, so a follow-up is owed when T-246 reaches main.
+  - number: 819
+    title: 's(344) ≤ 18.992567544845: registration request'
+    author: amundsk
+    opened: '2026-10-25'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Amund Kristiansen reports one upper bound beyond the case corpus, s(344) <=
+      18.992567544845, the exact rational side
+      9496283772422138783772412642309/500000000000000000000000000000 of a dilation certificate (delta 1e-12, Evan Daniel's dilate_cert.py at 7982d7a) in the gist
+      amundsk/18ada41ec384b6ff2c96f58b7ce7d1a6 at f916f69f0ae570935991440712a08ad930469da3,
+      rounded up at 12 places, 1.60e-4 below Francisco Couzo's certificates/best/n344.cert at
+      1c17153, which is 964ee2b's (#763) byte for byte. The issue calls it a new packing of
+      another lineage: the register's 307 record design (Nate Chaoweeraprasit, with PingYou
+      Ltd's certificate, PR #574) stretched one K-step and polished with Daniel's fq quench.
+      The gist and the issue dedicate the certificate, its binary64 input and the README to
+      the public domain under CC0 1.0, so the amundsk-issue819-2026-10-25 packet retains all
+      three files. Triaged and imported on 26 October 2026 (think-p7cq): both digests the
+      issue prints are the gist's, its only revision, committed 24 seconds before the issue,
+      and the printed side is the certificate's exact side rounded up. The ledger of 26
+      October for the issue (upper-bounds-issue819-20261026) records it as the current row,
+      1.60e-4 below the row of couzo-964ee2b-2026-10-23 and 0.200 below Göbel's construction.
+      Both maintained exact routes accept it, with the gross and sharp controls as expected.
+      Claude assistance disclosed.
+    read_through: '2026-10-25T19:05:14Z'
+    results:
+    - key: n344
+      claim: >-
+        s(344) <= 18.992567544845, the exact side of s344_amund.cert at f916f69 rounded up at
+        12 places, a new packing, the issue says, of the register's 307 record design
+        stretched one K-step.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus: a row of source-coverage.yaml, not a register entry. The
+        ledger of 26 October for the issue (upper-bounds-issue819-20261026), walked from starts
+        frozen at main 5c50803d6 with Göbel's construction beside the row, records it as the
+        current row of the amundsk-issue819-2026-10-25 source at the exact side rounded up at
+        12 places, 1.60e-4 below the row of couzo-964ee2b-2026-10-23, which it supersedes;
+        nothing reached 344 between 964ee2b's push and the issue. Both maintained exact routes
+        accept it, with the gross and sharp controls as expected
+        (receipts/exact-certification.json.xz, receipts/sharp-controls.json). The packet's
+        identity measurement against 964ee2b's packing (measure/identity-n344.json) finds no
+        symmetry pairing them by nearest centres and, under the optimal assignment, best under
+        symmetry 5, 82 squares moved beyond 0.1 (largest 0.993) and 137 beyond 1e-2 where the
+        issue counts 67 and 122, with the tilted counts, 114 against 125, as the issue states;
+        either way it is another arrangement, as the issue says, and the measurement decides
+        nothing.
+      queued: false
+      bead: think-p7cq
+    beads:
+    - think-p7cq
+    answer_bead: think-p7cq
+    replies: []
+    close_when: >-
+      The row at 344 is recorded in report order with its replay, and the reply on main says
+      so; nothing the author asked for is queued.
+    notes: >-
+      Report order: the gist's only revision, f916f69, was committed at 2026-10-25T19:04:50Z,
+      24 seconds before the issue (19:05:14Z), so the issue dates the claim. Read on 26 October
+      2026: franciscouzo/square-packing's head is still 1c17153, evand/square-packing's
+      d99925d, Mishapolk/square-packing-records' 7e82c64 and TheSnakeFang/squarepack-certs'
+      db1ed62, each unchanged since its last read, and no issue or pull request from #798 to
+      #821 states a bound at 344. The issue says the author's checks used Daniel's
+      verify_cert.py and verify_cert2.py at 7982d7a (least wall clearance 6.054e-13, least pair
+      separation 1.215e-12, 794 close pairs); they were not run here, and the maintained
+      routes find the same two clearances.
