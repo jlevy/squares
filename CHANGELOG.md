@@ -13,6 +13,32 @@ The authoritative record is [site-changelog.yaml](packing/site-changelog.yaml).
 
 ### 2026-10-26
 
+<a id="changelog-entry-changelog-day-log-and-news-division"></a>
+
+#### A Concise Changelog, and News for the Stories
+
+Significance S2: Two reader surfaces divide work they had been sharing. The Changelog becomes the day log the home page carried, over the whole record, one brief line an item; News keeps the mathematical and newsworthy items with the detail on each and stops carrying site-only changes. No result, explanation, verification, policy or tool is new, and no paper&\#x27;s content changes.
+
+The Changelog page is now the day log the home page carried as Recently Added,
+covering the whole record rather than seven days: one disclosure a day, newest
+first, its summary the date and its tally, its body one brief line an item. News
+keeps the stories.
+
+- A site or project change is one line in its day, carrying its score, its GitHub
+  issues and pull requests, and a link to its News story where it has one, so the
+  detail is written once instead of on both surfaces. Where News never shows the
+  change, the line also carries its artifacts, its publication evidence, its
+  supporting records and its component editions, since it is then the only reader
+  surface for them.
+- Seven site, documentation and tooling changes left News, each with its recorded
+  reason, taking it from 55 entries to 48. Nothing touching the records, their
+  regularization or the mathematics is among them.
+- The home page offers the log beside All News rather than carrying it, and the
+  page it opens weighs 178,634 bytes against the 309,359 the story-per-entry
+  version weighed.
+
+PRs and supporting records: [PR \#840](https://github.com/jlevy/squares/pull/840).
+
 <a id="changelog-entry-changelog-page-and-project-menu"></a>
 
 #### The Project Changelog Gets a Page, Under a Project Menu
