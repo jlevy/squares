@@ -8,7 +8,7 @@ ours, which rest on someone else's argument, and how far each has been checked.
 
 ## The short version
 
-- **774** evidence records. **424** are formal; **415** of those were established here. **12** are samples, counted separately.
+- **775** evidence records. **425** are formal; **416** of those were established here. **12** are samples, counted separately.
 - **332** rest on an argument made elsewhere, of which **8** have been read by nobody here.
 - **1** formal record proves a theorem only under a hypothesis nothing here has replayed, and is verified as that implication alone: `E-k2m4-evand-bentz4-lean-build` (ValidTilt9).
 - **43** claim to be first established here. **14** make no novelty statement at all - not assessed, which is not the same as not novel.
@@ -169,6 +169,7 @@ results, it is a statement about what this repository has itself examined.
 | `E-side2-center-lower` | 2 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | common-knowledge | producer’s code | not recorded | `V-optimal-moduli` |
 | `E-n005-gobel-upper` | 1 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | not recorded | `V-sqpack-verify` |
 | `E-n005-gobel-proof` | 1 | lower-bound | verified | whatever its theorem states | elsewhere | not-reviewed | previously-published | no code | not recorded | - |
+| `E-n005-friedman-theorem2-audit` | 1 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | full, 10 of 10: the premises of Theorem 2's proof: the ten cells of its partition of [0, 2 + 1/sqrt 2]^2 (four Lemma 1 corners, four Lemma 2 wall rectangles, two Lemma 3 triangles), each against its lemma's hypotheses, and the tiling | `V-sqpack-cover` |
 | `E-n006-kearney-shiu-proof` | 1 | lower-bound | verified | whatever its theorem states | elsewhere | not-reviewed | previously-published | no code | not recorded | - |
 | `E-n010-gobel-upper` | 1 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | not recorded | `V-sqpack-verify` |
 | `E-n040-gobel-upper` | 1 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | not recorded | `V-sqpack-verify` |
@@ -800,10 +801,10 @@ results, it is a statement about what this repository has itself examined.
 
 ## What the register rests on
 
-- **assurance**: numerically-checked 5, reported 334, verified 435
-- **method**: exact-algebraic 242, interval-certified 175, numerical-multiprecision 5, proof-assistant-checked 6, proof-audited 4, published-proof 8, reported 334
-- **novelty**: apparently-novel 43, common-knowledge 4, not assessed 14, previously-published 713
-- **relationship to the producer's code**: generator 5, independent-implementation 263, not-applicable 34, same-implementation 428, shared-components 38, unknown-historical 6
+- **assurance**: numerically-checked 5, reported 334, verified 436
+- **method**: exact-algebraic 243, interval-certified 175, numerical-multiprecision 5, proof-assistant-checked 6, proof-audited 4, published-proof 8, reported 334
+- **novelty**: apparently-novel 43, common-knowledge 4, not assessed 14, previously-published 714
+- **relationship to the producer's code**: generator 5, independent-implementation 264, not-applicable 34, same-implementation 428, shared-components 38, unknown-historical 6
 
 The `cases` column is how many frontier records cite each piece of evidence, and it is the reason to read this table rather than count records. Ranked below are the *formal* records only: a `reported` record cited across the frontier may be a shared catalogue and is labelled as such, which is the register working rather than risk. The risk is a verified claim resting on an argument nobody has examined.
 
