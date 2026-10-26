@@ -14,7 +14,7 @@ Follow the `n` link for full provenance, numerical evidence, conflicts, and bloc
 | [`2`](n-002.md) | `2` | `2` | `2.0` | `2` | proved | upper: replayed here; lower: replayed here | — | 2026-08-25 |
 | [`3`](n-003.md) | `2` | `2` | `2.0` | `2` | proved | upper: replayed here; lower: replayed here | — | 2026-08-25 |
 | [`4`](n-004.md) | `2` | `2` | `2.0` | `2` | proved | upper: replayed here; lower: replayed here | — | 2026-08-24 |
-| [`5`](n-005.md) | `2 + (1/2)√2` | `2 + (1/2)√2` | `2.707106781187` | `2 + (1/2)√2` | proved | upper: replayed here; lower: external proof (not read here) | — | 2026-08-25 |
+| [`5`](n-005.md) | `2 + (1/2)√2` | `2 + (1/2)√2` | `2.707106781187` | `2 + (1/2)√2` | proved | upper: replayed here; lower: external proof (not read here), audited here | — | 2026-08-25 |
 | [`6`](n-006.md) | `3` | `3` | `3.0` | `3` | proved | upper: replayed here; lower: external proof (not read here) | — | 2026-09-07 |
 | [`7`](n-007.md) | `3` | `3` | `3.0` | `3` | proved | upper: replayed here; lower: replayed here | — | 2026-09-07 |
 | [`8`](n-008.md) | `3` | `3` | `3.0` | `3` | proved | upper: replayed here; lower: external proof (read here), audited here | — | 2026-09-07 |

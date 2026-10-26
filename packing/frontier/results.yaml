@@ -4160,10 +4160,20 @@ results:
       Of the 18 left, the 1 October revision raised 16 (T-068), whose own certificates
       carry those counts, and n = 37 and 60 are held above these certificates by replayed
       bounds (T-069's s(37) >= 161/25 and s(60) = 8, T-062), so no replay of the source's
-      checker is planned for them. sqverify-fast's census of 3 October verified all 48
-      standing certificates at all 201 directions; with control receipts and a review of
-      the census route that reads them, it would carry every count of this entry. C1 before
-      that, by recording the 2026-09-27 scaling review as an external_review on the report
+      checker is planned for them.
+
+      sqverify-fast's census route would carry every count of this entry, and its receipts
+      are complete. All 46 standing certificates (48 counts, with n = 77 and 90 by mass)
+      are verified at all 201 directions by builds of reviewed source: 24 in the census of
+      3 October, and the other 22, whose rows were built from unreviewed source bc2a6201
+      or recorded no build, re-run on 25 October on d97758bb (think-kf3o). Each has a
+      control receipt of 25 October, CONTROLS_REFUSED. What the route still needs is a
+      retained, accepted review, mapped here, that reads the 28 September certificates'
+      mathematics and the widening of the route's mass condition to n - 1/1000 for
+      rect_n27_L56, as section 5 of the format T route review asks
+      (review-2026-10-06-sqverify-fast-format-t-route.md); one evidence entry per
+      certificate then follows from the census's --evidence (think-buaj). C1 before that,
+      by recording the 2026-09-27 scaling review as an external_review on the report
       entries.
     unfinished_confirmations:
       - what: >-
@@ -4172,11 +4182,20 @@ results:
         rung: C1
         link: think-wcex
       - what: >-
-          sqverify-fast's census of 3 October, which verified all 48 standing certificates
-          at all 201 directions, recorded with its control receipts and a review of the
-          census route that reads them
+          a retained, accepted review of the 28 September certificates' mathematics and of
+          the census route's mass condition widened to n - 1/1000, mapped here, and then
+          sqverify-fast's census entries for the 46 standing certificates, whose rows and
+          control receipts are retained
         rung: C3
-        link: think-sb7a
+        link: think-buaj
+        estimated_cost:
+          cpu_hours: 0.01
+          basis: >-
+            No replay is left to run: the 46 census rows and control receipts are retained
+            (think-kf3o, 25 October 2026). What remains is the review, whose cost is
+            tokens, which CPU-hours do not price, and --evidence for each certificate,
+            which takes seconds
+          priced: '2026-10-25'
     notes: >-
       V0 because every cited entry is the source's public claim or a reported-lane transfer
       from it: assurance reported, replay not attempted. The source reports each standing
@@ -4187,6 +4206,11 @@ results:
       The counts T-045 and T-070 carry are in both those entries and this one, because a
       case's reported field may still cite this entry's report evidence while its verified
       field cites the replay.
+
+      On 25 October 2026 the think-kf3o and think-sb7a lane (w-backlog-1025) re-ran the 22
+      standing certificates whose census rows were not of reviewed source and controlled
+      all 46. The rungs do not move, and no census evidence entry is recorded, until a
+      review reads the 28 September certificates (think-buaj).
 
   - id: T-047
     kind: lower-bound
@@ -33192,7 +33216,8 @@ results:
     claim: >-
       s(2) = s(3) = s(4) = 2 and s(5) = 2 + 1/√2 = 2.70710678118654752440…, the exact values
       at the first four counts above one square, which the case records n-002 to n-005 hold
-      on the published proofs and exact replays their verified bounds cite.
+      on the published proofs, the exact audit and the exact replays their verified bounds
+      cite.
 
       Göbel's 1979 survey of geometrical packing and covering problems, the first
       publication on the problem by Friedman's account, gives the exact value as known for
@@ -33209,7 +33234,7 @@ results:
       which also packs two and three squares at side 2. The survey's Theorem 2 proves s(5)
       again, by the four unavoidable points (1, 1), (1, 1 + 1/√2), (1 + 1/√2, 1) and
       (1 + 1/√2, 1 + 1/√2) of [0, 2 + 1/√2]^2, the argument chelokot's Lean proof formalizes
-      (T-238).
+      (T-238) and this repository audits exactly (E-n005-friedman-theorem2-audit).
 
       Göbel, Geometrical Packing and Covering Problems, Math. Centre Tracts 106, 1979;
       Friedman,
@@ -33218,7 +33243,7 @@ results:
     scope:
       n_values: [2, 3, 4, 5]
     verification: V3
-    confirmation: C0
+    confirmation: C3
     significance:
       score: 3
       rationale: >-
@@ -33239,59 +33264,45 @@ results:
       published: '1979'
     evidence:
       - E-n005-gobel-proof
+      - E-n005-friedman-theorem2-audit
       - E-n005-gobel-upper
       - E-side2-center-lower
       - E-basic-area-lower
       - E-basic-grid-upper
     composition: >-
       Compound, by count and half. At n = 5 the lower half is Göbel's published proof
-      (E-n005-gobel-proof), an outline no review here has read, and the upper half is his
-      packing, checked in exact arithmetic here (E-n005-gobel-upper). At n = 2 and 3 the
-      lower half is the side-2 bound Friedman's Theorem 1 states, replayed exactly here
-      (E-side2-center-lower); at n = 4 it is the area bound, and at n = 2 to 4 the upper
-      half is the grid, both replayed exactly by the basic-bounds checker (E-basic-area-lower,
+      (E-n005-gobel-proof), an outline no review here has read yet, and Friedman's form of
+      it, Theorem 2, audited here exactly over Q(sqrt 2) by an independent implementation
+      (E-n005-friedman-theorem2-audit); the upper half is Göbel's packing, checked in exact
+      arithmetic here (E-n005-gobel-upper). At n = 2 and 3 the lower half is the side-2
+      bound Friedman's Theorem 1 states, replayed exactly here (E-side2-center-lower); at
+      n = 4 it is the area bound, and at n = 2 to 4 the upper half is the grid, both
+      replayed exactly by the basic-bounds checker (E-basic-area-lower,
       E-basic-grid-upper). These are the evidence entries the four case records' verified
       bounds cite.
 
-      The entry stands at C0, the minimum over its parts, which is the lower half at n = 5: the
-      checker's claim pools also count the area bound there, and at n = 2 and 3, where it
-      falls short of the value, and so derive more than that half holds. The Lean proofs
-      are T-238's and are not cited here.
+      Every count and half now has an exact machine check here, so the entry stands at C3,
+      the minimum over its parts. The Lean proofs are T-238's and are not cited here.
+    controls:
+      - packing/tests/test_friedman5.py
     artifacts:
       - packing/resources/papers/gobel-1979-geometrical-packing-and-covering-problems.pdf
       - packing/resources/papers/friedman-ds7-packing-unit-squares-in-squares.md
       - packing/cases/gobel5/packing.py
       - packing/cases/gobel5/verify_exact.py
+      - packing/cases/friedman5/verify_cover.py
+      - packing/cases/friedman5/certificate.json
       - packing/cases/small_n/optimal_moduli.py
       - packing/campaign/series/series-000-smoke-and-calibration/results/exp-014-h-032-n3-optimal-moduli.json
       - packing/devtools/check_basic_bounds.py
     next_rung: >-
-      C1 needs a review here of the lower half at n = 5, Göbel's Proposition 1 or
-      Friedman's Theorem 2, read from the retained papers. C3 needs a machine check of that
-      half here, an exact audit of the four unavoidable points as T-004 is of Bentz's s(46),
-      cited here. A build of T-238's Lean proofs would be that formalization's evidence and
-      not this entry's. V4 and C4 need two adversarial AI reviews by distinct reviewers and
-      a human oversight record.
-    unfinished_confirmations:
-      - what: >-
-          a stage 4 review of the lower half at n = 5, Göbel's Proposition 1 or Friedman's
-          Theorem 2, read from the retained papers, recorded on E-n005-gobel-proof
-        rung: C1
-        link: think-wuo4
-      - what: >-
-          an exact audit here of Friedman's four unavoidable points (1, 1), (1, 1 + 1/√2),
-          (1 + 1/√2, 1) and (1 + 1/√2, 1 + 1/√2) of [0, 2 + 1/√2]^2, with a negative control,
-          as T-004 audits Bentz's s(46)
-        rung: C3
-        link: think-vvjk
-        estimated_cost:
-          cpu_hours: 0.01
-          cpu_hours_high: 0.1
-          basis: >-
-            T-004's exact audit of Bentz's 45 points, cases/bentz46/verify_cover.py, ran in
-            6.6 s wall here on 24 October 2026, and four points need less; the checker is not
-            yet written, and writing it is the cost, which CPU-hours do not price
-          priced: '2026-10-24'
+      V4 and C4 need two adversarial AI reviews by distinct reviewers and a human oversight
+      record. The stage 4 review of the lower half at n = 5, Göbel's Proposition 1 or
+      Friedman's Theorem 2 read from the retained papers and recorded on
+      E-n005-gobel-proof (think-wuo4), is still owed beside the audit: it moves no rung
+      now, and it should take up the audit's observation that at x = 1/√2 Lemma 2's
+      lowest-corner function has its minimum at 0 and 90 degrees, not at 45. A build of
+      T-238's Lean proofs would be that formalization's evidence and not this entry's.
     notes: >-
       Registered on 24 October 2026 by the landing lane c-land-750-1024 (think-ehx5), by
       the owner's decision of 24 October on think-4o9c: the classical proofs of s(2) to
@@ -33301,6 +33312,13 @@ results:
       evidence it cites is what the case records already cite, and the case records are
       unchanged. [Friedman DS7] entered the bibliography with this entry, from the
       retained survey.
+
+      On 25 October 2026 the think-vvjk lane (w-backlog-1025) audited Friedman's Theorem 2
+      exactly, as T-004 audits Bentz's s(46): cases/friedman5/verify_cover.py decides every
+      premise of the proof's ten-cell partition over Q(sqrt 2), and tests/test_friedman5.py
+      holds two refused mutants (E-n005-friedman-theorem2-audit). It took the entry to C3
+      and moved no bound, since n-005's verified lower bound already stood at 2 + 1/√2;
+      the replay costs about 3 s.
   - id: T-238
     kind: formalization
     proves_kind: optimality

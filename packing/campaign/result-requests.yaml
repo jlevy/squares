@@ -23228,7 +23228,8 @@ issues:
     beads:
     - think-sb7a
     - think-wcex
-    answer_bead: think-sb7a
+    - think-buaj
+    answer_bead: think-buaj
     replies:
     - url: https://github.com/jlevy/squares/issues/773#issuecomment-6381477713
       date: '2026-10-24'
@@ -23742,6 +23743,7 @@ issues:
       - T-237
       evidence:
       - E-n005-gobel-proof
+      - E-n005-friedman-theorem2-audit
       - E-n005-gobel-upper
       - E-side2-center-lower
       - E-basic-area-lower

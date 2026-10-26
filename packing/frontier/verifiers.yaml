@@ -1163,6 +1163,7 @@ verifiers:
     source:
       - packing/src/sqpack/cover.py
       - packing/cases/bentz46/verify_cover.py
+      - packing/cases/friedman5/verify_cover.py
       - packing/cases/bentz13/verify_cover.py
       - packing/cases/green17/verify_cover.py
       - packing/cases/stromquist/repaired_cover.py
