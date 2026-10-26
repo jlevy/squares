@@ -1,0 +1,12 @@
+5dbc1f8b773b0a66c3d8b4ebf034a8cd795df418652ce8bf2020cb21b1597960  ./LICENSE.md
+8faee6c95353cc695602a115945f6af17e10a4857398a461c975119d1b12650f  ./lean/valid7/Axioms7.lean
+ff030a9c73c455e6a00eb9caa545501c235f8ffd69b1c4332284318bbcee85c1  ./lean/valid7/README.md
+810e40fa9ca064c9aeb4ae7dd15984e60feff845a072f7133d9f59c7bbc99863  ./lean/valid7/expected/axioms.txt
+4b917bac4bb673f29aec0e1bd2052da59585ad537c5a1fb7839f7b8566eb3cc6  ./lean/valid7/expected/statement.txt
+0095e5770d3d153c4163bf21b922faad8ca6a5e45110561d345fec590fac2cf1  ./lean/valid7/fetch.sh
+dce7a93466373e0acc6d91729d8aa3ab39fc27b15a97b3233c39c3a97fe746b0  ./lean/valid7/generated-sources.sha256
+e00d7adb6e005536a77e73f123320bd55ccf780fc6162d150f63da4389864a43  ./lean/valid7/library.sha256
+9644362e1116c3b301d69b4bc52b17d21fc8a71409b6e2be8b18713ac6011786  ./lean/valid7/receipts/axioms.log
+771ce63214b433e397521dcab515aa23c7acfb1a7f827d891bc143a1aabb10c4  ./lean/valid7/receipts/main.log
+8d4585941e4a354805302822a84c162c3fce95af492a9c373cdb3cb0b09a7a78  ./lean/valid7/release-assets.sha256
+726a72251727bb040bb84cf2e66387e5c0f1a3d8ada210fbb15d654821c90762  ./lean/valid7/verify.py

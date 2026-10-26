@@ -1,0 +1,14 @@
+39f42605c45e3c084f5de66e900c2b3e862356bee756db5d730ef5e3dc0904f9  Sqpack/V9/Main.lean
+9bfeda3634d91245b417a1fdc6f6c5f7d03b4c70d6b5bf2b1c27456863faae0d  Axioms9.lean
+Lean (version 4.33.1, aarch64-unknown-linux-gnu, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)
+MAIN_START 2026-10-15T20:55:52Z
+Sqpack/V9/Main.lean:1:0: error: failed to read file '~/v9/lean/.lake/build/lib/lean/Sqpack/V9/R12076/r12076l42.olean'
+Command exited with non-zero status 1
+TIME 128.03 83799376
+MAIN_EXIT 1
+AX_START 2026-10-15T20:58:00Z
+Axioms9.lean:1:0: error: object file '~/v9/lean/.lake/build/lib/lean/Sqpack/V9/Main.olean' of module Sqpack.V9.Main does not exist
+Command exited with non-zero status 1
+TIME 0.10 164048
+AX_EXIT 1
+END 2026-10-15T20:58:00Z

@@ -799,7 +799,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "1724966bcbdc13da688d99b53cb2ba9513bb8685"
+DATA_REVISION = "6a6b9fa7d2c6a9ecc5d194f28e3644fcadc7c7a4"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -896,6 +896,15 @@ FIRST_PUBLISHED = PUBLICATION_HISTORY[-1].first_published
 #:                                            day is the one recorded
 #: The leading entry is proposed for the next publication; confirm its date at first deployment.
 EXPLAINER_HISTORY = (
+    PublicationHistoryEntry(
+        version="v0.4.32",
+        first_published="October 26, 2026",
+        result_scope=(
+            "Update the registered result count after the registration of Evan Daniel's "
+            "packing at 299 (T-248) and three reported Lean formalizations (T-249 to "
+            "T-251)."
+        ),
+    ),
     PublicationHistoryEntry(
         version="v0.4.31",
         first_published="October 26, 2026",
@@ -1504,6 +1513,17 @@ class ReleaseImpactDecision(NamedTuple):
 # New component cuts append decisions here, newest first, alongside their own histories.
 # No impact is invented retrospectively for the published baseline editions.
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
+    ReleaseImpactDecision(
+        component="paper:n11-lower-bounds-explainer",
+        previous_version="v0.4.31",
+        version="v0.4.32",
+        impact="patch",
+        reason=(
+            "Update the registered result count after the registration of Evan Daniel's "
+            "packing at 299 (T-248) and three reported Lean formalizations (T-249 to "
+            "T-251)."
+        ),
+    ),
     ReleaseImpactDecision(
         component="paper:n11-lower-bounds-explainer",
         previous_version="v0.4.30",
@@ -9751,6 +9771,50 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "render_packing_methods: 69 files each, all byte-identical across the three. "
             "No PDF was printed; each prints from that HTML. Every paper keeps its "
             "version: v0.4.30, v0.1.11, v0.1.4 and v0.2.7."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/contributors/people/chris-deotte.md",
+            "packing/devtools/site_urls.py",
+            "packing/devtools/upper_bound_reports.py",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The imports of 26 October (w-imports-1026): T-248, Evan Daniel's packing at "
+            "299 (#824), and T-249 to T-251, three reported Lean formalizations (#535, "
+            "#537, #643), with their evidence, coverage and requests entries, the "
+            "importer's optional short credit, Chris Deotte's contributor profile and "
+            "the results page's byte ceiling raised to 1,500,000 for 250 results. "
+            "Against main 9ebde24df (#823): rendered at link revision 24bb2581 into empty "
+            "site directories, from this tree and with that main's five files swapped in "
+            "and the profile removed, render_n11_optimality_review, "
+            "render_n11_threshold_bound_review and render_packing_methods write their 67 "
+            "files byte-identical across the two, measured again after the ceiling and "
+            "the T-250 and T-251 claim edits. The explainer's two files differ in "
+            "the registered result count, 250 against 246, so it takes v0.4.31. "
+            "Renumbered T-248 to T-251 when main acc1cfc3d (#825) registered T-247 and "
+            "took the explainer's v0.4.31, and measured again after merging it, at link "
+            "revision c9cfbdb3 with that main's five files swapped in and the profile "
+            "removed: the three write their 67 files byte-identical, and the explainer's "
+            "two differ only in counting 251 results against main's 247, so it takes "
+            "v0.4.32 over main's v0.4.31. No PDF of these three was printed; each prints "
+            "from that HTML. They keep v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
 )
