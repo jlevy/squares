@@ -799,7 +799,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "70434a4323053ef04f6139282651da4af04047aa"
+DATA_REVISION = "c6546a5df20765e6068200b5f2ce72992b94a9e2"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -9420,6 +9420,47 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "revision 6273902f with that main's nine candidate inputs swapped in: all 69 "
             "files byte-identical across the three again. Retain v0.4.30, v0.1.11, v0.1.4 "
             "and v0.2.7."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/devtools/github_references.py",
+            "packing/devtools/render_changelog.py",
+            "packing/devtools/result_overview.py",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "News and result pages link their GitHub issues (think-i8ks): "
+            "`github_references` gains `reporting_issues`, `issues_reporting`, "
+            "`issue_url` and `cited_issues`, and no existing function changes; "
+            "`render_changelog` gains the `issues` check and backfill and renders an "
+            "entry's issues beside its PRs in `_entry_lines`; `result_overview."
+            "links_section` adds an Issues row. The papers reach `render_changelog` "
+            "only through `site_documents`, which calls `entry_anchor`, unchanged, reach "
+            "`github_references` only through `overview_sections`' "
+            "`parse_github_reference`, unchanged, and no paper builder calls "
+            "`links_section`, `result_popover_html` or the News renderers, which only the "
+            "site's pages and result pages call. Measured at link revision f2341b95: the "
+            "four papers rendered into empty site directories twice from this tree and "
+            "once with main's three changed modules swapped in, 69 files each, all "
+            "byte-identical across the three, and again after the opening-day rule was "
+            "added to the three modules, byte-identical again. Every paper keeps its "
+            "version: v0.4.30, v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
     ReleaseNoPublicChange(
