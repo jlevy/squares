@@ -4165,13 +4165,14 @@ results:
       sqverify-fast's census route would carry every count of this entry, and its receipts
       are complete. All 46 standing certificates (48 counts, with n = 77 and 90 by mass)
       are verified at all 201 directions by builds of reviewed source: 24 in the census of
-      3 October, and the other 22, whose rows were built from unreviewed source bc2a6201
-      or recorded no build, re-run on 25 October on d97758bb (think-kf3o). Each has a
-      control receipt of 25 October, CONTROLS_REFUSED. What the route still needs is a
-      retained, accepted review, mapped here, that reads the 28 September certificates'
-      mathematics and the widening of the route's mass condition to n - 1/1000 for
-      rect_n27_L56, as section 5 of the format T route review asks
-      (review-2026-10-06-sqverify-fast-format-t-route.md); one evidence entry per
+      3 October, and the other 22, whose rows were built from a source no review accepted
+      or recorded no build, re-run on 25 October on the source the declared-net review
+      accepted (think-kf3o). Each has a control receipt of 25 October, CONTROLS_REFUSED.
+
+      What the route still needs is a retained, accepted review, mapped here, that reads
+      the 28 September certificates' mathematics and the widening of the route's mass
+      condition to n - 1/1000 for rect_n27_L56, as section 5 of the format T route review
+      asks (review-2026-10-06-sqverify-fast-format-t-route.md); one evidence entry per
       certificate then follows from the census's --evidence (think-buaj). C1 before that,
       by recording the 2026-09-27 scaling review as an external_review on the report
       entries.

@@ -380,7 +380,7 @@
         "chelokot_lean": {"claims":[{"applies":"direct","reported_at":["packing/resources/web/chelokot-nagamochi-counterexample-2026-09-05/upstream/docs/nagamochi-score-counterexample.md:135","packing/resources/web/chelokot-nagamochi-counterexample-2026-09-05/README.md:114","packing/resources/web/evand-square-packing-2026-09-26/square-packing/s12/notes/literature-s32.md:35","packing/resources/web/evand-square-packing-2026-09-26/square-packing/s12/notes/literature-s32.md:94","packing/resources/web/evand-square-packing-2026-10-01/source/site/www/sources.html:136"],"statement":"s(n^2 - 2) = n for every n >= 2, by a Lean compensation proof","value":2,"verified":true}],"kind":"Lean theorem, replayed here with its axiom receipt","verified":true},
         "karakus_explicit_bound": null,
         "karakus_k2_minus_1": null,
-        "other_registered_results_at_n": [{"confirmation":"C0","id":"T-237","kind":"optimality","verification":"V3"},{"confirmation":"C0","id":"T-238","kind":"formalization","verification":"V0"}],
+        "other_registered_results_at_n": [{"confirmation":"C3","id":"T-237","kind":"optimality","verification":"V3"},{"confirmation":"C0","id":"T-238","kind":"formalization","verification":"V0"}],
         "registered_reported": {"basis":"display-decimal-as-printed","decimal":"2.000000000000","exact":"2","reaches_nagamochi":null,"sources":[{"evidence":["E-side2-center-lower"],"n":2,"results":["T-237"],"via":"direct"}]},
         "registered_verified": {"basis":"exact-form","decimal":"2.000000000000","exact":"2","reaches_nagamochi":null,"sources":[{"evidence":["E-side2-center-lower"],"n":2,"results":["T-237"],"via":"direct"}]}
       },
@@ -407,7 +407,7 @@
         "chelokot_lean": {"claims":[{"applies":"monotonicity from s(k^2 - 2)","reported_at":["packing/resources/web/chelokot-nagamochi-counterexample-2026-09-05/upstream/docs/nagamochi-score-counterexample.md:135","packing/resources/web/chelokot-nagamochi-counterexample-2026-09-05/README.md:114","packing/resources/web/evand-square-packing-2026-09-26/square-packing/s12/notes/literature-s32.md:35","packing/resources/web/evand-square-packing-2026-09-26/square-packing/s12/notes/literature-s32.md:94","packing/resources/web/evand-square-packing-2026-10-01/source/site/www/sources.html:136"],"statement":"s(n^2 - 2) = n for every n >= 2, by a Lean compensation proof","value":2,"verified":true}],"kind":"Lean theorem, replayed here with its axiom receipt","verified":true},
         "karakus_explicit_bound": null,
         "karakus_k2_minus_1": {"statement":"s(3) = 2","value":2},
-        "other_registered_results_at_n": [{"confirmation":"C0","id":"T-237","kind":"optimality","verification":"V3"},{"confirmation":"C0","id":"T-238","kind":"formalization","verification":"V0"}],
+        "other_registered_results_at_n": [{"confirmation":"C3","id":"T-237","kind":"optimality","verification":"V3"},{"confirmation":"C0","id":"T-238","kind":"formalization","verification":"V0"}],
         "registered_reported": {"basis":"display-decimal-as-printed","decimal":"2.000000000000","exact":"2","reaches_nagamochi":null,"sources":[{"evidence":["E-side2-center-lower"],"n":2,"results":["T-237"],"via":"monotonicity"}]},
         "registered_verified": {"basis":"exact-form","decimal":"2.000000000000","exact":"2","reaches_nagamochi":null,"sources":[{"evidence":["E-side2-center-lower"],"n":2,"results":["T-237"],"via":"monotonicity"}]}
       },
@@ -434,7 +434,7 @@
         "chelokot_lean": null,
         "karakus_explicit_bound": null,
         "karakus_k2_minus_1": null,
-        "other_registered_results_at_n": [{"confirmation":"C0","id":"T-237","kind":"optimality","verification":"V3"},{"confirmation":"C0","id":"T-238","kind":"formalization","verification":"V0"}],
+        "other_registered_results_at_n": [{"confirmation":"C3","id":"T-237","kind":"optimality","verification":"V3"},{"confirmation":"C0","id":"T-238","kind":"formalization","verification":"V0"}],
         "registered_reported": {"basis":"display-decimal-as-printed","decimal":"2.000000000000","exact":"2","reaches_nagamochi":true,"shortfall_below_nagamochi":"0.000000000000","sources":[{"evidence":["E-side2-center-lower"],"n":2,"results":["T-237"],"via":"monotonicity"},{"evidence":["E-basic-area-lower"],"n":4,"results":["T-237"],"via":"direct"}]},
         "registered_verified": {"basis":"exact-form","decimal":"2.000000000000","exact":"2","reaches_nagamochi":true,"shortfall_below_nagamochi":"0.000000000000","sources":[{"evidence":["E-side2-center-lower"],"n":2,"results":["T-237"],"via":"monotonicity"},{"evidence":["E-basic-area-lower"],"n":4,"results":["T-237"],"via":"direct"}]}
       },
@@ -451,7 +451,7 @@
       "family": null,
       "n": 5,
       "nagamochi": {"basis":"nagamochi-theorem-2","decimal":"2.414213562373","exact":"1 + sqrt(2)","exact_case":false},
-      "operative_lower_bound": {"cites_t007":false,"evidence":["E-n005-gobel-proof"],"exact_form":"2 + (1/2)sqrt(2)","results":["T-237"],"t007_scope_covers_n":true,"value":"2.70710678118654752440084436210485"},
+      "operative_lower_bound": {"cites_t007":false,"evidence":["E-n005-gobel-proof","E-n005-friedman-theorem2-audit"],"exact_form":"2 + (1/2)sqrt(2)","results":["T-237"],"t007_scope_covers_n":true,"value":"2.70710678118654752440084436210485"},
       "reported_lower_bound": {"cites_t007":false,"evidence":["E-n005-gobel-proof"],"value":"2.707106781187"},
       "reported_status": "proved",
       "status": "proved",
@@ -461,9 +461,9 @@
         "chelokot_lean": null,
         "karakus_explicit_bound": null,
         "karakus_k2_minus_1": null,
-        "other_registered_results_at_n": [{"confirmation":"C0","id":"T-237","kind":"optimality","verification":"V3"},{"confirmation":"C0","id":"T-238","kind":"formalization","verification":"V0"}],
+        "other_registered_results_at_n": [{"confirmation":"C3","id":"T-237","kind":"optimality","verification":"V3"},{"confirmation":"C0","id":"T-238","kind":"formalization","verification":"V0"}],
         "registered_reported": {"basis":"display-decimal-as-printed","decimal":"2.707106781187","exact":"2707106781187/1000000000000","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.292893218814","sources":[{"evidence":["E-n005-gobel-proof"],"n":5,"proved_by":["Frits Göbel"],"results":["T-237"],"via":"direct"}]},
-        "registered_verified": {"basis":"exact-form","decimal":"2.707106781186","exact":"2 + (1/2)*sqrt(2)","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.292893218814","sources":[{"evidence":["E-n005-gobel-proof"],"n":5,"results":["T-237"],"via":"direct"}]}
+        "registered_verified": {"basis":"exact-form","decimal":"2.707106781186","exact":"2 + (1/2)*sqrt(2)","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.292893218814","sources":[{"evidence":["E-n005-gobel-proof","E-n005-friedman-theorem2-audit"],"n":5,"results":["T-237"],"via":"direct"}]}
       },
       "weakened_to": null,
       "weakened_to_without_karakus": null
