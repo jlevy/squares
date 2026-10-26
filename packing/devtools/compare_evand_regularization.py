@@ -98,14 +98,16 @@ class KnownTilt(NamedTuple):
 #: (review A6 of #756).
 KNOWN_TILTS: dict[tuple[int, int], KnownTilt] = {
     # n = 259's house since 23 October 2026 is issue 639's exact form (T-193,
-    # think-ot5c), an exact solve of T-174's packing that is not regularized: square 229
-    # lies 5.21e-7 degrees off the axis, one of its 26 near-axis squares. Its
-    # regularization is owed to think-mbdw, which would straighten it.
+    # think-ot5c), an exact solve of T-174's packing: square 229 lies 5.21e-7 degrees off
+    # the axis, one of its 26 near-axis squares. The axis tool still refuses the
+    # number-field witness, so this tally reads it. Its regularization (think-mbdw,
+    # grid-slack's version 2, 26 October 2026) draws square 229 straightened; the witness
+    # keeps the tilt.
     (259, 229): KnownTilt(
         0,
         "5.21e-7",
-        "think-mbdw: the regularization of n = 259's exact house, owed since its "
-        "adoption on 23 October 2026",
+        "think-mbdw: the regularization of n = 259's exact house, drawn since 26 October "
+        "2026 with square 229 straightened; the witness keeps the tilt",
     ),
 }
 

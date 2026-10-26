@@ -369,10 +369,12 @@ def test_an_exact_solve_of_the_house_is_called_one_and_an_owed_regularization_is
     record calls the house an exact solve, not a regularization, and marks the item
     `kind: exact-solve`, which the case page labels. Where the count's regularization is
     owed (`default_drawings.owed_beads`), the note ends by saying so, with the bead
-    (review A5 of #756). The committed records hold both at the six T-193 houses: owed at
-    102, 123, 258, 259 and 302, and nothing owed at 295, which reads regular as
+    (review A5 of #756). The committed records called the six T-193 houses exact solves,
+    and owed the regularization at 102, 123, 258, 259 and 302 until grid-slack's version 2
+    drew them on 26 October 2026 (think-mbdw): now each note credits that view first and
+    calls the house an exact solve after it, and nothing is owed; 295 reads regular as
     published. PR 574's algebraic certificates at 153 and 207 (T-174) attain PingYou's
-    own packings exactly and are exact solves too, owed alike (review B1 of #756); its
+    own packings exactly and are exact solves too, drawn alike (review B1 of #756); its
     other houses keep the register's word until think-xqpq decides their vocabulary, so
     70's algebraic house, which reads regular as published, keeps the word."""
     source = {
@@ -394,27 +396,32 @@ def test_an_exact_solve_of_the_house_is_called_one_and_an_owed_regularization_is
 
     from devtools import default_drawings  # noqa: PLC0415
 
-    owed = default_drawings.owed_beads()
-    assert owed == dict.fromkeys((102, 123, 153, 207, 258, 259, 302), "think-mbdw")
+    assert default_drawings.owed_beads() == {}
     fields = drawings.case_fields(drawings.index_document())
+    drawn = (102, 123, 153, 207, 258, 259, 302)
     for n in (102, 123, 258, 259, 295, 302):
-        (item,) = fields[n]["items"]
+        (item,) = (found for found in fields[n]["items"] if found["by"] != "project")
         assert item["by"] in drawings.EXACT_SOLVES, n
         assert item["kind"] == drawings.EXACT_SOLVE, n
-        assert fields[n]["note"].startswith("The house is its source's exact solve of "), n
+        assert "The house is its source's exact solve of " in fields[n]["note"], n
         assert "is not a regularization" in fields[n]["note"], n
-        assert fields[n]["note"].endswith("owed (think-mbdw).") == (n in owed), n
+        assert "owed" not in fields[n]["note"], n
+    for n in drawn:
+        (own,) = (found for found in fields[n]["items"] if found["by"] == "project")
+        assert own["generator"] == "regularize_grid_slack/2", n
+        assert own["side"] == "same", n
+        assert fields[n]["note"].startswith("Regularized by the Squares Project"), n
     for n, of in ((153, "T-148"), (207, "T-147")):
-        (item,) = fields[n]["items"]
+        (item,) = (found for found in fields[n]["items"] if found["by"] != "project")
         assert item["by"] == "[PingYou PR 574 certificates 2026-10-13]", n
         assert item["registered_in"] == "T-174", n
         assert item["kind"] == drawings.EXACT_SOLVE, n
-        assert fields[n]["note"].startswith(
+        assert (
             f"The house is its source's exact solve of {of}'s packing (PingYou Ltd after "
+            in fields[n]["note"]
         ), n
         assert "regularization of" not in fields[n]["note"], n
         assert "is not a regularization" in fields[n]["note"], n
-        assert fields[n]["note"].endswith("its regularization is owed (think-mbdw)."), n
     # PR 574's other houses keep the register's word: the exact solves are named by
     # count, not by source.
     (item,) = (found for found in fields[70]["items"] if found["by"] != "project")

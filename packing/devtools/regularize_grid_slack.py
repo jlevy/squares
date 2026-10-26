@@ -16,13 +16,18 @@ axes. This tool asks which of those the packing can close at the record's own si
 closes them, in five steps:
 
 1. **The exact frame.** `regularize_same_side.exact_frame`: a rational witness's own
-   geometry, or a decimal witness's 36-digit rational promotion at centre dilation 1;
-   its side is `s_W`. Where no view exists at `s_W` and the record's verified upper bound
-   `U` is rational and above it, the same squares are tried again in a box of side `U`,
-   the policy's `bound` frame (a decimal witness whose printed side truncates its
-   optimum, n = 171 and 198). Where `U` is rational and below `s_W`, the box of side `U`
-   is tried first: a view at `s_W` would draw the packing above the best known side
-   (owner, 13 October 2026). Every rotation stays the witness's own exact one, except:
+   geometry, a decimal witness's 36-digit rational promotion at centre dilation 1, or a
+   number-field witness's own pose over its field (an algebraic house, think-mbdw); its
+   side is `s_W`. Over a field the placement below works in binary64 as ever, and the
+   re-solve, the view and both exact routes are in the field: the view is written in
+   the witness's own field and decided by `exact_verify` over `sqpack.field` and by
+   `check_algebraic_witness_independent`. Where no view exists at `s_W` and the record's
+   verified upper bound `U` is rational and above it, the same squares are tried again in
+   a box of side `U`, the policy's `bound` frame (a decimal witness whose printed side
+   truncates its optimum, n = 171 and 198). Where `U` is rational and below `s_W`, the box
+   of side `U` is tried first: a view at `s_W` would draw the packing above the best known
+   side (owner, 13 October 2026). Every rotation stays the witness's own exact one,
+   except:
 2. **Straightening.** Each square tilted by less than `--near-axis-degrees` (default half a
    degree, the workbench's colour tolerance; any nonzero tilt, including those under the
    house's `1e-6` radians) is turned to the axes about its centre, when the placement
@@ -59,9 +64,10 @@ closes them, in five steps:
    A chosen set the MIP tolerance let through but no exact placement meets is thinned by
    an elastic LP (`replace_flush`).
 5. **The exact re-solve.** `regularize_same_side`'s parts in its order -- rotations matched
-   exactly (axis-aligned, or the witness's own rational rotation), the contacts tight at
-   the float pose as rows over `Q`, elimination in relax mode -- then both maintained
-   exact routes, `sqpack.witness.exact_verify` and the independent checker. Only a pose
+   exactly (axis-aligned, or each square's own exact rotation, `own=True`), the contacts
+   tight at the float pose as rows over `Q` or the witness's field, elimination in relax
+   mode -- then both maintained exact routes, `sqpack.witness.exact_verify` and the
+   independent checker of the view's kind. Only a pose
    both routes accept is a view. Two ways of choosing the rows are tried, as
    `exact_view` describes: the witness's own contacts among unchanged squares (n = 105
    has near contacts `1e-12` apart along nearly parallel faces, which closing would pin
@@ -112,6 +118,7 @@ from strif import atomic_output_file
 
 from devtools import census_atlas_contact_shades as shades
 from devtools import census_drawing_regularity as regularity
+from devtools import exact_scalars as scalars
 from devtools import regularize_axis_components as layer
 from devtools import regularize_evand as driver
 from devtools import regularize_same_side as same
@@ -128,14 +135,30 @@ REPO = ROOT.parent
 KNOWN_BEST = ROOT / "witnesses/known-best"
 WITNESS_SCHEMA = ROOT / "witnesses/witness.schema.yaml"
 FORBIDDEN_OUTPUT_ROOTS = (ROOT / "witnesses", ROOT / "atlas")
-GENERATOR = "regularize_grid_slack/1"
-"""A prototype's version: changed by hand with any change that changes a view."""
+GENERATOR = "regularize_grid_slack/2"
+"""A prototype's version: changed by hand with any change that changes a view. Version 2
+(think-mbdw, 26 October 2026) draws a witness over a number field in its own field, where
+version 1 found no exact frame; tries a number-field witness's own contacts first, as a
+rational witness's; and keeps each unchanged tilted square's own exact rotation rather
+than its class representative's (`regularize_same_side.match_rotations(..., own=True)`).
+Version 1's views stay in the layer under their own name."""
 
 METHOD = (
-    "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing "
+    "regularize_grid_slack/2: Evan Daniel's coincidence placement (evand/square-packing "
     "search/regularize reg.coincidences and reg.place, MIT), ported to start from the "
-    "witness's exact frame and to keep its contacts, then the same-side exact re-solve"
+    "witness's exact frame, over its number field where it has one, and to keep its "
+    "contacts, then the same-side exact re-solve"
 )
+METHODS = {
+    "regularize_grid_slack/1": (
+        "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing "
+        "search/regularize reg.coincidences and reg.place, MIT), ported to start from the "
+        "witness's exact frame and to keep its contacts, then the same-side exact re-solve"
+    ),
+    GENERATOR: METHOD,
+}
+"""Each version's credit, by the version a run's report names: a result registered from a
+version-1 run (`T-156`'s at n = 290) is reproduced with the method it was written with."""
 """The credit a view carries: the policy's section 7 credits a port of his method."""
 NEAR_AXIS_DEGREES = 0.5
 TRUST = 0.45
@@ -263,7 +286,7 @@ def view_poses(frame: same.Frame, snapped: Sequence[int]) -> list[same.Generator
 
 def geometry(frame: same.Frame, snapped: Sequence[int], *, freeze: bool = False) -> Geometry:
     """The start of the placement, rotations matched exactly as the re-solve will."""
-    matched = same.match_rotations(frame, view_poses(frame, snapped))
+    matched = same.match_rotations(frame, view_poses(frame, snapped), own=True)
     return Geometry(
         side=float(frame.side),
         x0=np.array([float(x) for x, _ in frame.centers]),
@@ -901,7 +924,7 @@ def frame_for(witness: Mapping[str, Any], relation: str) -> same.Frame | None:
     a box the view may still fit; below it, the best known side, which the owner asked a
     view to reach (13 October 2026). A box of a closed form's 60-digit value would be a
     side above `U`, labelled `bound`, so none is tried (review B of #530, B1)."""
-    frame = same.exact_frame(witness)
+    frame = same.exact_frame(witness, number_field=True)
     if relation == "same":
         return frame
     upper = rational_bound(int(witness["n"]))
@@ -919,11 +942,11 @@ def attempts_for(witness: Mapping[str, Any]) -> tuple[tuple[str, bool], ...]:
     view at `s_W` would draw the packing above the best known side (owner, 13 October
     2026), so it is tried only after no view at the bound could be found."""
     try:
-        side = same.exact_frame(witness).side
+        side = same.exact_frame(witness, number_field=True).side
     except same.SameSideError:
         return ATTEMPTS
     upper = rational_bound(int(witness["n"]))
-    return BOUND_FIRST if upper is not None and upper < side else ATTEMPTS
+    return BOUND_FIRST if upper is not None and scalars.compare(upper, side) < 0 else ATTEMPTS
 
 
 @dataclass
@@ -1199,7 +1222,8 @@ def exact_view(
     `bound` view. Two ways of closing are tried, the first that passes the cheap checks
     is verified: `closable`'s rule (the witness's own contacts among squares the
     placement left alone) and the resolver's (every row tight at the placement). A
-    rational witness's contacts are exact, so its rule comes first; a decimal witness's
+    rational witness's contacts are exact, and so are a number-field witness's, so its rule
+    comes first for both; a decimal witness's
     promotion carries near contacts of up to its `1e-8` tolerance, which only the
     resolver's closes consistently, so it comes first there. A relaxed row left
     penetrated (the side too small), a re-solved centre more than `BLOWUP` from the
@@ -1211,7 +1235,7 @@ def exact_view(
     """
     started = time.perf_counter()
     view_id = regularized_id(witness)
-    matched = same.match_rotations(frame, poses)
+    matched = same.match_rotations(frame, poses, own=True)
     tight = same.tight_rows(frame, poses, matched)
     keys = {row.priority for row in tight}
     watched = [
@@ -1221,7 +1245,7 @@ def exact_view(
     ]
     order = (
         ("witness-contacts", "all-tight", *ANCHORED)
-        if frame.kind == "rational"
+        if frame.kind in ("rational", scalars.NUMBER_FIELD)
         else ("all-tight", "witness-contacts", *ANCHORED)
     )
     report: dict[str, Any] = {
@@ -1433,7 +1457,7 @@ def measure(
     """Identity, contact histograms against the witness and the current view, and the
     house renderer's evenness of the drawing."""
     frame = driver.source_frame(witness)
-    side, placements, _corners = driver.view_geometry(view)
+    side, placements = driver.measured_geometry(view)
     reference = frame.side if frame.side is not None else Fraction(frame.side_text)
     named = [index - 1 for index in straightened]
     ident = driver.identity((side, placements), (reference, frame.placements), named, "witness")
@@ -1506,7 +1530,7 @@ def source_record(n: int, data: bytes, witness: Mapping[str, Any]) -> dict[str, 
     both exact routes as its file is then (`view_decided`).
     """
     try:
-        side: str | None = same.literal(same.exact_frame(witness).side)
+        side: str | None = same.literal(same.exact_frame(witness, number_field=True).side)
     except same.SameSideError:
         side = None
     return {
@@ -1560,6 +1584,14 @@ def run_one(n: int, run_dir: Path, settings: Settings) -> dict[str, Any]:
 # --------------------------------------------------------------------------------------
 
 
+def own_side(witness: Mapping[str, Any]) -> Any:
+    """`s_W` held exactly: the driver's source frame's over `Q` or a decimal promotion,
+    and over a number field the witness's own side in its field (think-mbdw)."""
+    if scalars.field_of(witness) is not None:
+        return same.exact_frame(witness, number_field=True).side
+    return driver.source_frame(witness).side
+
+
 def decided(
     report: Mapping[str, Any],
     witness: Mapping[str, Any],
@@ -1586,9 +1618,10 @@ def decided(
     ident = measured["identity"]
     shaded = measured["shades"]
     verdicts = report["attempts"][-1]["exact"]["verdicts"]
-    side = Fraction(str(report["attempts"][-1]["exact"]["side"]))
-    frame = driver.source_frame(witness)
-    printed = frame.side if frame.side is not None else None
+    side = scalars.parse_text(
+        str(report["attempts"][-1]["exact"]["side"]), scalars.field_of(witness)
+    )
+    printed = own_side(witness)
     # `U` held exactly (`verified_bound`): a closed form is compared with the side as the
     # root it is, not read as unknown; `upper` is `U` only where it is rational. A given
     # `upper` is a rational `U`, held so.
@@ -1664,8 +1697,9 @@ def admitted(directory: Path, run_id: str) -> driver.Admitted:
                 f"n={n}: no {view_path.name} beside the report that decided it"
             )
         if ran_side is not None:
-            own = same.exact_frame(witness).side
-            if Fraction(str(ran_side)) != own:
+            own = same.exact_frame(witness, number_field=True).side
+            ran = scalars.parse_text(str(ran_side), scalars.field_of(witness))
+            if not scalars.equal(ran, own):
                 raise GridSlackError(
                     f"n={n}: the run read a witness at s_W = {ran_side}, and this checkout's "
                     f"is at {same.literal(own)}: run the count again on this witness"
@@ -1683,8 +1717,8 @@ def admitted(directory: Path, run_id: str) -> driver.Admitted:
     measured = report["measured"]
     ident = measured["identity"]
     shaded = measured["shades"]
-    side = Fraction(str(view["side"]))
-    printed = driver.source_frame(witness).side
+    side = scalars.parse(view["side"], scalars.field_of(view))
+    printed = own_side(witness)
     facts = driver.case_facts(n)
     bound = driver.verified_bound(facts)
     relation = driver.side_relation(side, printed, driver.upper_bound(facts))
