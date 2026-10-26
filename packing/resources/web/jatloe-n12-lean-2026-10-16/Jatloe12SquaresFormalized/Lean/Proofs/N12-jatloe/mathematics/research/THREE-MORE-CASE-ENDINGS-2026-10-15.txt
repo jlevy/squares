@@ -1,0 +1,79 @@
+THREE SIMPLIFIED ORIGINAL-CASE ENDINGS
+
+These are new deductions from the supplied mathematics and the existing local
+geometry. They are written in Lean source and independently source-reviewed;
+they are not compiler receipts. Coordinates are exact rationals, square
+ownership is strict, and disjointness permits boundary contact.
+
+C896: force two actual centers
+
+Keep the actual lower merged768 as one square M. Its two original central
+markers are(1.65,1.65),(2.35,1.65); the upper-left N2048 has F5/G3.
+The label768 is G-exempt, so a G minimum cannot force its inward G6.
+
+Suppose M omitted(2.26,2). In chart(x,y)=(2-y_original,x_original-2), its two
+markers are(.35,-.35),(.35,.35). True foreign points give the four omissions
+(0,-.26),(0,.26),(1,-.26),(1,.26). The entire segment from the real bottom
+mark(2,.914) to its G5(2.26,1) is excluded by disjointness from that same bottom
+square B8192. TwoChordHull gives actual M points
+  (2,.98),(2.02,.98),(2.11,1.04).
+
+The genuine right G8 and actual B high point(2.8,1) advance the paired SE
+corner12 to(3,.78), by ShortCornerAdvance. For the same physical B use chart
+(x,y)=(1-y_original,x_original-2). Its marker, G5 and high point, its genuine
+container wall and its omissions of the three M hull points and the corner
+advance are exactly the ShorterCornerWall premises. Contradiction forces
+M(2.26,2) without any auxiliary count assumption.
+
+Transpose M. In its nonnegative canonical sector the original markers and
+forced inward point give its center directly in all four strict bands. In
+the negative sector the actual bottom B, the singleton1 seed, B's G5 and the
+right G8 satisfy MergedLeftNegative. Thus M contains(2,2).
+
+Reflect N2048 horizontally. Its actual F5/G3 and marker become the standard
+northeast elbow of CentralWallCenter. The neighboring actual L4096 and T32768
+give the two whole walls; omissions use singleton2's true F0 and singleton16's
+true G7. The theorem gives N(2,2), contradicting disjointness from M. No NE
+corner pair, upper-right wall bar or owner for absent marker32 is used.
+
+C975: keep the merged top and remove positive NE
+
+The real top square T34816 owns its northwest and top markers. Positive T
+already contains(2,3). In the negative sector, omitting that origin would omit
+(2,2.5), and the existing actual left/corner/singleton terminal excludes it.
+Hence T owns its origin in every canonical sector.
+
+The true singleton1 corner is forced by the stronger missing-corner seeds and
+the shared C974 local ending; the other singleton has the complementary strong
+seeds. The transposed local ending implies T omits(1.5,3).
+
+The actual NE retains its entire original alternative: top-only F7/G7, or mixed
+F5/G7. If its canonical sign were nonnegative, each alternative forces T to
+advance left to that forbidden halfpoint. Therefore NE is strictly negative.
+The actual T right reach, true top origin and omitted left seed put T in the
+negative/shallow top theorem. The C849Negative argument now forces T(2,2.5).
+
+In the top-only alternative NE owns(2,2.62), strictly on T's real segment from
+(2,2.5) to(2,3). In the mixed alternative its missing T point yields lowerU at
+least.5s, while the genuine upper bound is c+.44s: side<=c-.06s<1. Both
+contradictions preserve the same T34816 throughout, including zero endpoints.
+
+C983: use both sharp alternatives through one actual SE profile
+
+The old F5 branch already has an ending. In the remaining F4 branch the merged
+square2304 has its genuine center. The completed C974 local argument forces
+the singleton1 corner. Its complementary singleton0 therefore has the strong
+points(1.82,1),(1.96,.76).
+
+Both genuine NE alternatives supply the same extension(2.5,3) and actual right
+origin; they give, respectively, sharp point(2.525,2.125) or(2.42,2.16). Each
+sharp point produces the same necessary negative/shallow physical SE frame
+with half-angle below3/20. This one profile feeds the existing actual midpoint
+arguments: the real bottom omits(2,1.5), and the SE strictly owns(3,1.5).
+The genuine bottom origin and these same actual owners then supply every
+C974LocalEnding premise, contradicting singleton0's missing corner root.
+
+Thus no proof that the NE omits(2,2.5) and(1.96,2.73) is needed, and no assumed
+eight-point profile closes this branch. Both sharp alternatives and all signs
+remain in the source join. All three original row adapters preserve the exact
+retained families and public ExcludesCase statements.

@@ -1202,6 +1202,44 @@ RESULTS: dict[str, Prose] = {
         ),
         diversity="by a Claude agent, a system family the producer also used",
     ),
+    "T-243": Prose(
+        author="Evan Daniel",
+        reported="on [jlevy/squares#806](https://github.com/jlevy/squares/issues/806)",
+        producer_route=False,
+        ai=(
+            "The source’s commit names Claude as co-author, and its credits say the "
+            "repository’s work was produced by Claude (Anthropic) under human direction."
+        ),
+        routes=(
+            "Both routes read the certificate through an adapter whose line filter and corner "
+            "construction are transcribed from Evan Daniel’s own checkers, the ones the "
+            "certificate names, so the replay shares the producer’s components. The review’s "
+            "checker shares no code with either maintained route or the source, and the "
+            "independent re-implementation rests on it."
+        ),
+        lineage=(
+            "The issue says the packing came from one L-cut job of a search across counts: a "
+            "strip of 29 squares, a row and a column along two walls, removed from the "
+            "register’s s(211) packing and the rest relaxed, then a local search. Measured by "
+            "the 25 October review, square by square, the 29 squares the 182 do not use are "
+            "the right column and top row of Francisco Couzo’s 211 packing (T-188), an "
+            "arrangement of Daniil Ostashev’s design (T-175), which the certificate follows "
+            "where the two differ; of the other 182, 17 move beyond a tenth, at most 0.464. "
+            "Against T-174’s packing, this case’s house best packing before this adoption, "
+            "no symmetry pairs nearest centres one to one and 44 squares lie beyond a tenth, "
+            "so it is another arrangement than T-174’s. The issue claims the upper bound, and "
+            "reports a local minimum of the side from numerical checks that are not interval "
+            "proofs."
+        ),
+        third_route=(
+            ", and the 25 October review’s clean-room checker decided it again in rationals, "
+            "by separating axes and by the exact clipped area of every pair; its controls at "
+            "$10^{-30}$ refused the side lowered past the far walls, the packing moved past "
+            "the near walls, the closest pair moved past contact and a square enlarged past a "
+            "wall and past its neighbour"
+        ),
+        diversity="by a Claude agent, a system family the producer also used",
+    ),
 }
 
 XU = "Ryan Xu"
@@ -1497,12 +1535,15 @@ CREDITS: dict[int, Credit] = {
         "PingYou Ltd’s exact re-solve of Nate Chaoweeraprasit’s SQUISH packing composed "
         "from two of SQUISH’s own n = 154 packings",
     ),
-    # T-174's regularization of T-098's packing, 27 squares moved beyond 1e-3, one to one;
-    # that it is that packing is the source's statement (the 14 October review of PR 574).
+    # T-243 (adopted on 25 October 2026), Evan Daniel's packing of issue 806 from an L-cut of
+    # Francisco Couzo's n = 211 packing (T-188), an arrangement of Daniil Ostashev's design
+    # (T-175), which the 25 October review measured square for square (M-1); another
+    # arrangement than T-174's, which held 182 before.
     182: Credit(
-        (COUZO,),
-        (DANIEL, PINGYOU),
-        "PingYou Ltd’s refinement of Evan Daniel’s exact optimum of Francisco Couzo’s packing",
+        (DANIEL,),
+        (),
+        "Evan Daniel’s packing from an L-cut of Francisco Couzo’s n = 211 packing, an "
+        "arrangement of Daniil Ostashev’s design",
     ),
     # Evan Daniel's packing from his basin explorer, which started from Francisco Couzo's
     # n = 182 packing as this register's witness held it; the crossover mates were not

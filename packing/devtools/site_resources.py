@@ -254,6 +254,11 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         "A Lean 4 formalization of that proof, trusting Lean's compiler for its certificates.",
     ),
     (
+        "https://github.com/Queuingtheorydotcom/Jatloe12SquaresFormalized",
+        "Jatloe, Gurevitch, Lewis, Ahmed",
+        "A Lean 4 proof of s(12) = 4, trusting Lean's compiler for its certificates.",
+    ),
+    (
         "https://github.com/Kleddamag/11-squares-certified-bound",
         "Marc Leonard Overbeck",
         "A certified lower bound for eleven squares.",
@@ -419,6 +424,15 @@ OTHER_SITES: tuple[tuple[str, str, str, str], ...] = (
         (
             "Exact rational upper-bound certificates for n = 328 to 998, in an archive"
             " attached to the issue."
+        ),
+    ),
+    (
+        "https://github.com/jlevy/squares/issues/804",
+        "Exact Sides of Five Record Packings",
+        "Hyukdong Kim",
+        (
+            "Minimal polynomials of the record sides at n = 88, 126, 172, 199 and 263,"
+            " found numerically, in an archive attached to the issue."
         ),
     ),
     (

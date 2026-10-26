@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:ResultsRegister/v1
   schema: results.schema.yaml
   status: enforced
-last_reviewed: '2026-10-24'
+last_reviewed: '2026-10-25'
 results:
   - id: T-001
     kind: lower-bound
@@ -22865,6 +22865,11 @@ results:
       Kaggle notebook packing 4.45e-03 below this entry's side there, another arrangement
       (T-240). After the 24 October review of it, the case at 268 adopted it on 25 October
       2026, and this entry's certificate there stays retained as history.
+
+      Evan Daniel's issue 806 reports at 182 a new arrangement, found from an L-cut of
+      Francisco Couzo's 211 packing, 3.17e-03 below this entry's side there (T-243). After
+      the 25 October review of it, the case at 182 adopted it on 25 October 2026, and this
+      entry's certificate there stays retained as history.
     next_rung: >-
       V4 and C4 need a second accepted adversarial review by a distinct reviewer and a retained
       human oversight record; one AI review, of 14 October, is retained. The house rule of 16
@@ -34280,6 +34285,713 @@ results:
           max_move: 4.6e-4
           max_turn_deg: 0.019
 
+  - id: T-243
+    kind: upper-bound
+    registered: '2026-10-25'
+    landed: '2026-10-25'
+    headline: >-
+      Daniel's new arrangement at 182, 3.17e-3 below T-174
+    claim: >-
+      One complete rational source certificate reports a finite upper-bound improvement at
+      the exact side it states: s(182) <= 13.970916436214678735385725854133, 3.17e-3 below
+      T-174, the case's house best packing when it was reported, and below every report at
+      182.
+
+      The certificate and its duplicate-square and outside-container controls were decided
+      here on 25 October 2026 by both maintained exact routes. Those routes share components
+      with the producer: both read the certificate through the evand-cert adapter, whose
+      reader's line filter and corner construction are transcribed from Evan Daniel's own
+      checkers, the ones the certificate names. The 25 October review decided it again on a
+      clean-room checker of its own, by separating axes and by exact clipped areas with
+      fourteen controls, by a Claude agent, a system family the producer also used, and
+      found no blocking defect, so the bound is confirmed, independently re-implemented.
+
+      It is search/packer/candidates/s182-1024.cert in Evan Daniel's watched repository
+      (https://github.com/evand/square-packing), committed on 25 October 2026 at 04:11:15Z
+      and pushed at 04:16:05Z, 19 seconds before issue 806 reported it as 13.970916436215,
+      its side rounded up at 12 places.
+
+      Credit Evan Daniel (https://github.com/evand/square-packing), from an L-cut of
+      Francisco Couzo's 211 packing (T-188), an arrangement of Daniil Ostashev's design
+      (T-175). The issue asks that "the register's s(211) packing (Daniil Ostashev; also in
+      Francisco Couzo's repository)" be credited as the start; the register's packing at the
+      side the issue gives for it is T-188's, and where T-188 differs from Ostashev's own 211
+      packing the certificate follows T-188 (M-1 of the 25 October review).
+
+      The issue says one L-cut job removed a strip of 29 squares, a row and a column along
+      two walls, and relaxed the rest, and a local search took that to this side. Measured
+      square for square by the review, the 29 squares the 182 do not use are T-188's right
+      column and top row, and of the other 182, 17 move beyond 0.1 (largest 0.464), 156
+      beyond 1e-2 and 173 beyond 1e-3. Against T-174's packing no symmetry pairs it one to
+      one, so it is another arrangement.
+
+      Two Kaggle per-puzzle leaderboard entries the issue quotes state a side and no
+      packing, so neither is a report: Subramanya N's 13.9709164362306 of 24 October,
+      1.59e-11 above this side and listed before the source's search found the packing, by
+      the issue's account, and Prathamesh Chavan's 13.9727613470647 of 23 October. The
+      source's credits say its work was produced by Claude (Anthropic) under human
+      direction, and the commit carries a Co-Authored-By trailer naming Claude.
+    scope: {n_values: [182]}
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 3
+      rationale: >-
+        A new arrangement at 182, 3.17e-03 below the house (T-174) and every packing
+        reported there: no symmetry pairs it one to one with the house's packing by nearest
+        centres, and the optimal assignment moves 44 squares beyond a tenth and 79 beyond a
+        hundredth, as T-158's 2.95e-03 to 3.44e-03, T-164's 1.75e-03 and T-240's 4.45e-03
+        and 2.78e-03 (S3) are; well above T-188's further arrangement (S2). No lower bound
+        or optimum; the cross-count construction is the source's search method, not a
+        result here.
+      scored: '2026-10-25'
+      by: >-
+        the 25 October review (docs/project/reviews/review-2026-10-25-evand-n182.md), lane
+        c-review-806-math, confirming the draft S3 of the stage 1 triage (think-2lzo)
+    novelty: previously-published
+    attribution:
+      source_keys: ['[Daniel n182 2026-10-25]']
+      published: '2026-10-25'
+    evidence:
+      - E-evand-n182-certificate-report
+      - E-evand-n182-exact-feasibility
+      - E-evand-n182-review-exact-feasibility
+    artifacts:
+      - packing/resources/web/evand-n182-2026-10-25/README.md
+      - packing/resources/web/evand-n182-2026-10-25/acquisition/claims.json
+      - packing/resources/web/evand-n182-2026-10-25/source/search/packer/candidates/s182-1024.cert
+      - packing/resources/web/evand-n182-2026-10-25/receipts/exact-certification.json.xz
+      - packing/resources/web/evand-n182-2026-10-25/receipts/sharp-controls.json
+      - packing/resources/web/evand-n182-2026-10-25/measure/identity.json
+      - packing/campaign/issue-intake/upper-bounds-issue806-20261025/README.md
+      - packing/devtools/upper_bound_reports.py
+      - docs/project/reviews/review-2026-10-25-evand-n182.md
+      - packing/resources/web/evand-n182-2026-10-25/review/review-2026-10-25/README.md
+    controls:
+      - packing/tests/test_upper_bound_reports.py
+      - packing/tests/test_upper_bound_reports_806.py
+      - packing/resources/web/evand-n182-2026-10-25/receipts/sharp-controls.json
+      - packing/resources/web/evand-n182-2026-10-25/review/review-2026-10-25/out/check-s182-1024.json
+      - packing/resources/web/evand-n182-2026-10-25/review/review-2026-10-25/out/controls-s182-1024.json
+    notes: >-
+      A separate complete repository replay is retained for n = 182: 1 positive and 2
+      duplicate-square and outside-container controls passed their required outcomes on both
+      routes, 98826 pair decisions; summed over the 3 jobs, the receipt records 11.53 route
+      CPU seconds and 11.7 job wall seconds, the longest job 4.15 seconds. Every wall is
+      cleared by at least exactly 5e-21 and every pair by at least 9.99e-21.
+
+      Those margins are below the binary64 spacing of the coordinates, so the packet's sharp
+      controls (receipts/sharp-controls.json) lowered the side by the least far-wall
+      clearance, closed the least-gap pair by its gap and moved every square toward the
+      nearer near wall by its least clearance: both routes accepted each at exact contact,
+      margin 0, and refused each 1e-30 past it. They refused one square enlarged to its pair
+      and one to its wall at contact for its shape alone and 1e-30 past it for the overlap or
+      the wall as well, and refused a duplicated square.
+
+      The 25 October review's clean-room checker (E-evand-n182-review-exact-feasibility)
+      decided every wall and all 16,471 pairs by separating axes and again by exact clipped
+      areas. Its least wall clearance, exactly 5e-21, and least pair gap, about
+      9.999999999999992e-21 (squares 99 and 100, numbered from 0), are the replay's; the
+      register's "at least 9.99e-21" is that gap cut at three places. Its fourteen
+      controls, sharp at 1e-30 at the far and near walls, the closest pair and two enlarged
+      squares, were decided as expected by both of its methods. With every rotation
+      reversed, 80 pairs overlap, so the certificate holds under the counter-clockwise
+      reading of the half-angle tangent, which its format line implies and does not state
+      (N-1).
+
+      In the packet's frozen comparison (acquisition/claims.json, read from main on 25
+      October 2026), at n = 182 the certificate is below the case's ceiling (PingYou Ltd, of
+      Francisco Couzo's packing as Evan Daniel improved it, T-174), T-098 (#375), Couzo's
+      certificate of #476 and #593 by 3.17e-03, and below T-056 by 3.17e-03 at its print.
+      It is the smallest report at 182. The ledger of 25 October for this import
+      (campaign/issue-intake/upper-bounds-issue806-20261025) records it, a new packing,
+      dated by the issue; the push of the certificate 19 seconds before it is the same
+      author's publication of the same file, and nothing reached 182 between them.
+
+      Measured pose by pose (measure/identity.json in the packet, and again by the review; a
+      measurement, which decides nothing), no symmetry pairs it one to one with T-174's
+      packing by nearest centres; the optimal assignment, best under the identity, moves 44
+      of 182 squares beyond a tenth and 79 beyond a hundredth (largest 0.813), turns 74
+      squares, pairs 16 tilted squares with squares tilted the other way, and shares no tilt
+      angle within 1e-4 degrees. It has 68 tilted squares, all turned one way, against
+      T-174's 59. T-098's packing, T-056's and the house witness measure the same. Against
+      the source's binary64 input it is one to one under the identity, none beyond 1e-6
+      (largest 2.55e-7).
+
+      The review placed the start at T-188 rather than at Ostashev's T-175 or Couzo's T-181
+      and T-182, which differ from T-188 at the same five squares: at T-188's tilted square
+      141 the certificate lies 0.015 from T-188's pose and 0.442 from T-175's, and at square
+      9 0.024 against 0.175 (M-1). The issue's own account of the start gives T-188's side,
+      14.993549626299. "The lineage from the start is short" counts the search's steps, not
+      the squares' motion (N-4).
+
+      The source's s182-1024_regularized.cert is a display view at the same side, one to one
+      with the certificate under the identity: it moves 49 squares beyond 1e-9 (37 beyond
+      1e-3), 5 beyond a tenth
+      (largest 0.381), and the review's checker accepts it. It proves no other bound and is
+      not registered.
+
+      The source reports, from numerical checks at 80 digits that are not interval proofs, a
+      KKT point and a local minimum of the side, strict modulo 43 exact flat motions, with
+      six free squares, 68 corner-corner contacts and no corner-corner MILP descent. That is
+      the source's report: it is not verified here and bears on the packing, not on s(182)
+      (N-3). The source's S_exact, 13.97091643621467873524..., is a numerical value of that
+      KKT system's solution, which no certificate attains; the bound is the certificate's
+      side, 1.40e-19 above it (N-2). The commit's title gives the side as an equality; the
+      record states the upper bound only (M-2).
+
+      The source's own checkers were not run here. The two maintained routes, the sqpack
+      rational witness verifier and the independent rational corner checker, share
+      certificate parsing, half-angle conversion, Fraction arithmetic and the
+      separating-axis method with each other, and with the producer the evand-cert reader's
+      line filter and corner construction; the review's checker shares no code with them.
+      No human oversight or optimality is claimed.
+
+      The case at 182 adopted this certificate as its house best packing in the pass of 25
+      October 2026, from T-174, 3.17e-03 above it, which stays retained as history, with the
+      credit of Evan Daniel's packing from an L-cut of Francisco Couzo's 211 packing.
+
+      Both strong generators decided the new witness in the same pull request
+      (cases/regularized_drawings/think-2lzo-2026-10-25): grid-slack's view at 0.5, 1 and 5
+      degrees and Evan Daniel's regularizer's same-side view were both admitted at row 10,
+      and the selection draws the regularizer's, which moves 49 squares beyond 1e-9 (37
+      beyond 1e-3, the count the regularized_drawings item below gives as moved), the
+      largest by 0.381, at the witness's side. It is the source's own display view,
+      s182-1024_regularized.cert, to 1.9e-19, so the drawing proves no other bound; no view
+      is below the side.
+    next_rung: >-
+      None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
+      reviewer and a retained human oversight record; one AI review, of 25 October, is
+      retained. The review's questions for the author (the start's credit, the cut, an
+      enclosure of the KKT point and the certificate's format line) hold no rung. It is the
+      smallest validated side at 182, and the case adopted it there on 25 October 2026
+      under the house rule, with both strong generators' regularization of the new house.
+    reviews:
+      - path: docs/project/reviews/review-2026-10-25-evand-n182.md
+        kind: adversarial
+        reviewer: >-
+          AI agent (Claude, strongest tier, maximum reasoning), the stage 4 mathematical
+          review lane of issue 806 (c-review-806-math, think-meci), prompted separately from
+          the triage, records and replay lanes, with no shared context beyond its brief
+        reviewer_kind: ai
+        relation: project
+        date: '2026-10-25'
+        scope: >-
+          Finite feasibility at n = 182 of #806's certificate: decided again by a clean-room
+          exact checker by two methods with fourteen sharp controls; the side, its 12-place
+          print and the rotation sense; the identity against T-174, the house witness, T-098,
+          T-056, the source's binary64 input and its regularized view; the L-cut lineage
+          measured square for square against T-188, T-175, T-181 and T-182 at 211; the
+          source's KKT point read against the certificate; credit, and the significance.
+        verdict: accepted
+        covers: [T-243]
+
+  - id: T-244
+    kind: upper-bound
+    registered: '2026-10-25'
+    landed: '2026-10-25'
+    headline: >-
+      Kim's exact algebraic sides at 172 and 263, as reported, of packings the record credits
+    claim: >-
+      Hyukdong Kim's issue 804 reports an exact side for the best-known packing at 172 and at
+      263: each the packing's side at a stationary (KKT) point of minimizing the side, and a
+      root of an integer polynomial irreducible over Q. At 172 it is the least of the four
+      real roots of a degree-24 polynomial, and at 263 the only real root of a degree-17
+      polynomial, so
+      s(172) <= 13.6189889568993984288635016293504898995040150521961793814779549035630128682876859236484103034563728798…
+      and
+      s(263) <= 16.7331660078993789705122814839596734462471472483871051710853314027161147491596783918785611086390994182….
+
+      These are upper bounds as reported, and not shown. The source determined each side
+      numerically: it solved the KKT system on the active contacts to 3,000 digits from the
+      binary64 packings of Evan Daniel's atlas, and found each polynomial as an LLL relation
+      at 1,500 digits. The issue supplies no exact configuration, and says the nonnegativity
+      of its multipliers is not certified.
+
+      Feasibility at either side is not shown until an exact configuration at that side is
+      decided: every centre and half-angle tangent in a
+      number field holding the side, every contact an identity there and every other pair
+      and wall separated exactly. In a later comment on the issue the same day, the author
+      attached configurations at both counts that he reports to be of this kind; they are
+      retained here and not yet decided.
+
+      Here SymPy and sqpack.field found each polynomial primitive and irreducible, and each
+      side is the root the source's 100-digit print names, decided exactly. Each lies below
+      T-174's rational certificate at its count, the case's house, by 3.898e-89 at 172 and
+      2.126e-94 at 263. It also lies below the degree-12 side of Evan Daniel's issue 639
+      there, by 1.185e-62 and 9.234e-63, which T-174 is already below. The atlas packings the
+      source read are T-174's witnesses at both counts, to binary64 at every square. The
+      ledger of 25 October for issue 804 records both in report order.
+
+      Credit Hyukdong Kim with each exact side, a refinement of the packing it solves, after
+      that packing's finders as the case records credit them: Francisco Couzo's at 172, as
+      Evan Daniel and PingYou Ltd improved it, and Nate Chaoweeraprasit's (itsnaka) at 263,
+      as Evan Daniel and PingYou Ltd improved it (T-174). The issue says Claude (Anthropic)
+      did the search for open cases, the pipeline, the computations and the verification
+      script at the author's direction, and that he reviewed the outputs.
+    scope: {n_values: [172, 263]}
+    verification: V0
+    confirmation: C0
+    significance:
+      score: 2
+      rationale: >-
+        Exact algebraic sides of packings the record already credits, 3.9e-89 and 2.1e-94
+        below the houses' rational certificates: a citable detail of each case that changes
+        no theorem, S2 as T-193's and T-120 to T-123's exact forms are. It also places the
+        reported stationary side of both packings below issue 639's sides, which the
+        record's final reply there asked about. No lower bound or optimum.
+      scored: '2026-10-25'
+      by: think-9vai triage (draft), adopted by the #804 import (c-import-804-1025)
+    novelty: previously-published
+    attribution:
+      source_keys: ['[Kim exact forms 2026-10-25]']
+      published: '2026-10-25'
+    evidence: [E-hyukdongkim-804-exact-forms-report]
+    artifacts:
+      - packing/resources/web/hyukdongkim-exact-forms-2026-10-25/README.md
+      - packing/resources/web/hyukdongkim-exact-forms-2026-10-25/facts/exact-forms.json
+      - packing/resources/web/hyukdongkim-exact-forms-2026-10-25/acquisition/sources.json
+      - packing/resources/web/hyukdongkim-t244-configurations-2026-10-25/README.md
+      - packing/resources/web/hyukdongkim-t244-configurations-2026-10-25/acquisition/sources.json
+      - packing/resources/web/hyukdongkim-t244-configurations-2026-10-25/facts/n172.json.gz
+      - packing/resources/web/hyukdongkim-t244-configurations-2026-10-25/facts/n263.json.gz
+      - packing/campaign/issue-intake/upper-bounds-issue804-20261025/README.md
+      - packing/campaign/issue-intake/upper-bounds-issue804-20261025/exact-sides.json
+      - packing/campaign/issue-intake/upper-bounds-issue804-20261025/atlas-poses.json
+      - packing/campaign/issue-intake/upper-bounds-issue804-20261025/review/exact_forms.py
+    controls: [packing/tests/test_kim_exact_forms_804.py]
+    next_rung: >-
+      The author's exact configurations at both sides, received on 25 October in the
+      minpoly.json format of Evan Daniel's verify_exact.py and retained as derived facts
+      (the hyukdongkim-t244-configurations-2026-10-25 packet), decided exactly here
+      (think-4rzl).
+
+      A small reader of the packet's facts comes first: derive-forms needs a
+      declaration and retained upstream bytes, which the packet keeps neither of, so the
+      reader feeds each fact's configuration to
+      devtools.algebraic_witness_reports.evand_minpoly_geometry. sqpack.witness.exact_verify
+      then decides each over its field, with the duplicate-square and outside-container
+      controls, and the retained verify_exact.py decides each form rebuilt from its fact, a
+      second route. That would take C to C3, and a stage 4 review of the configurations and
+      the claim would take V to V3.
+
+      The house rule would then adopt both sides, with their regularization items naming
+      T-174, measured against its witnesses. Only if the configurations fail would a builder
+      here be the route (think-4rzl's fallback). Local minimality of either packing at its
+      side is a separate claim and is not registered.
+    unfinished_confirmations:
+      - what: >-
+          The author's exact configuration at each side decided on
+          sqpack.witness.exact_verify over its number field, a positive and two controls a
+          count, and on the retained verify_exact.py, a second route.
+        rung: C3
+        link: think-4rzl
+        estimated_cost:
+          cpu_hours: 2.0
+          cpu_hours_high: 8.0
+          basis: >-
+            Scaled as field degree squared times count squared from T-193's 23 October
+            adoption, where 302 at degree 7 took 230.72 s a job, a scale that reproduces the
+            price of about 2 CPU-hours a job at 267, degree 41. It assumes the field degree
+            equals the side's, 24 and 17; the upper end allows a field of twice that degree
+            and Daniel's verify_exact.py as the second route. The author's configurations
+            are of degree 24 and 17, so the central estimate applies; under the 40
+            CPU-hour item cap. The reader of the packet's facts that comes first is tooling,
+            about half an agent-day, and adds no compute to speak of.
+          priced: '2026-10-25'
+    notes: >-
+      Source assertions only. Nothing of the source's code was executed here; the archive
+      states no licence, so the packet keeps the polynomials and printed sides as a derived
+      fact with the archive's digests. The polynomials' irreducibility and the exact order
+      against T-174 and issue 639 are decided here (exact-sides.json); that each side is the
+      side of a packing is not. The source's KKT multipliers are not unique and their least
+      minimum-norm value is about -6e-16, with no second-order check, so stationarity is
+      numerical and local minimality is not recorded. No global optimality or rigidity is
+      claimed.
+
+      The issue calls the method new; Daniel's exactsolve.py, which the record
+      vendors and whose output T-098 registers, already solves the KKT system on the
+      load-bearing contacts at high precision and searches for an integer relation, so the
+      record credits the values and not the method.
+
+      The same issue reports the sides at 88, 126 and 199, whose polynomials and roots are
+      those of issue 639's, which T-193 records at V3/C3: a second derivation of values the
+      record holds, not recorded here, as issue 639's side at 51 was not.
+
+      The author's comment of 07:22:16Z concedes 88, 126 and 199 to issue 639 and withdraws
+      the issue's paragraph claiming a gap of 1.2e-22 at 126; his comment of 09:06:23Z
+      attaches the exact configurations at 172 and 263, which no licence covers, so the
+      configurations packet keeps their content as derived facts with the attachment's
+      digests, and none of their checker, controls or scripts ran here.
+
+      Each side is stated cut at 100 places: T-174's certificate agrees with it to 88 places at
+      172 and to 93 at 263, so a shorter cut, such as the 40 places T-193 prints, would not
+      tell them apart. The case records are unchanged until adoption, so this entry reads as
+      pending adoption at both counts.
+    regularizations:
+      - n: 172
+        of: T-174
+        by: '[Kim exact forms 2026-10-25]'
+        method: >-
+          KKT closure of the packing's active contacts, solved at 1,500 and 3,000 digits, with
+          an LLL relation for the side's polynomial
+        side: solved
+        credit: Kim after Couzo, Daniel, PingYou Ltd, Levy
+        identity:
+          basis: source-claim
+      - n: 263
+        of: T-174
+        by: '[Kim exact forms 2026-10-25]'
+        method: >-
+          KKT closure of the packing's active contacts, solved at 1,500 and 3,000 digits, with
+          an LLL relation for the side's polynomial
+        side: solved
+        credit: Kim after Chaoweeraprasit, Daniel, PingYou Ltd, Levy
+        identity:
+          basis: source-claim
+  - id: T-245
+    kind: optimality
+    registered: '2026-10-25'
+    landed: '2026-10-25'
+    headline: "Jatloe reports a Lean proof that the 4 × 3 grid is optimal, `s(12) = 4`"
+    claim: >-
+      Jatloe reports a Lean 4 proof that twelve unit squares need a square of side 4, so
+      that the 4 x 3 grid is optimal: s(12) = 4. Its theorem,
+      N12Compact.Final.optimality : S12.packingConstant12 = 4, takes packingConstant12 as
+      the infimum of the sides L > 0 at which twelve open unit squares, each at its own
+      rotation and translation, lie in [0, L]^2 with pairwise disjoint interiors; the grid,
+      gridPacking, attains 4, the case's exact upper bound. The lower half normalizes a
+      packing below side 4 and excludes it through marker ownership and a classification
+      into 117 original cases, each closed by a proof term, after a written proof of about
+      250 chapters.
+
+      Its trust boundary, as the source states it: Lean's kernel checks the geometric
+      arguments, the checkers' soundness and the assembly, and 1,624 finite facts are
+      decided by native_decide, so Lean's compiler is trusted as well; the final axiom
+      audit lists propext, Classical.choice, Quot.sound and those 1,624 facts, and no
+      sorryAx. The source reports that a run in a repository that is not public accepted
+      all 5,377 project modules of the theorem's closure on compiled objects reused from a
+      checkpoint that an earlier run saved before it failed, with a fresh final type and
+      axiom audit, and says that no full rebuild has been run.
+
+      Nothing here has built it. The statement audit of 25 October read the theorem as the
+      unrestricted problem with no premise, checked by Lean's kernel and its compiler; no
+      review has read the proof.
+
+      Jatloe wrote the mathematical proof and a partial formalization, Ben Gurevitch aided
+      the formalization and Lewis (CTJLewis) refactored and compiled it, as the source's
+      README credits them; Manasseh Ahmed published it,
+      [Jatloe12SquaresFormalized](https://github.com/Queuingtheorydotcom/Jatloe12SquaresFormalized/tree/d0caf4532a7ead68be1389ef87387b126fc2e0ab),
+      16 October 2026, and announced it on X on 22 October. The source makes no statement
+      of AI assistance; its AGENTS.md sets rules for agents working on the project.
+    scope: {n_values: [12]}
+    verification: V0
+    confirmation: C0
+    significance:
+      score: 5
+      rationale: >-
+        Scored as a claim, as T-060, T-153 and T-194 were while unverified, by the rubric's
+        anchor, a new result establishing an important previously open case: n = 12 is one
+        of the five open cases below n = 21 (12, 17, 18, 19 and 20), and the claim settles it
+        at the grid's side 4, closing the gap of 57/2000 = 0.0285 between the verified floor
+        7943/2000 (T-095) and the ceiling, in a proof assistant with a stated trust boundary.
+        The case record calls n = 12 the most plausible place for a new proved value of
+        s(n), and it is the first optimality claim the record holds at 12. Significance is
+        separate from whether the proof is correct. Proposed for the owner's confirmation,
+        and for the stage 4 review to confirm or change.
+      scored: '2026-10-25'
+      by: think-4l14 Jatloe import (draft, w-n12-records-1025)
+    novelty: previously-published
+    attribution:
+      source_keys: ['[Jatloe n12 Lean 2026-10-16]']
+      published: '2026-10-16'
+    evidence: [E-n012-jatloe-lean-report]
+    composition: >-
+      One cited entry, the source's report (E-n012-jatloe-lean-report), which claims the
+      exact value; it sets both rungs. The upper half, a packing at side 4, is gridPacking
+      in the Lean, which uses no native_decide; it is the grid E-basic-grid-upper holds,
+      V3/C3 here and independent of the source. That entry is not cited, since citing it
+      would make this result hold the case's verified upper bound in its place. The lower
+      half rests on the Lean build and its 1,624 native_decide facts, and the only record of
+      that build is the source's own, from a repository that is not public, on objects the
+      accepting run reused.
+
+      By epistemics.md's predicates: V3 needs proof-assistant-checked evidence with a
+      certificate, a replay command and a passing replay, and no build of the proof is
+      retained here, so the result stands at V0, declared with the notes; no numerical
+      method (V1) or unavailable proof (V2) fits. No review has read the proof, so C0; C1
+      needs a qualifying, dated read. C3 would need a complete build with a confirming
+      origin.
+
+      The statement audit of 25 October, an AI review, reads N12Compact.Final.optimality
+      line by line as s(12) = 4 over the unrestricted model, with no premise, and the grid
+      as attaining it. Its counts, made by devtools.audit_n12_lean into the packet's
+      receipts/statement-audit.json, map the 1,624 native_decide axioms of the source's log
+      one to one onto the calls of 1,525 declarations, find 948 further calls in 749
+      declarations that the final theorem does not reach, and find every one of the 5,377
+      modules as the run's manifest lists it.
+
+      Its two major findings bind the record: the theorem is checked by Lean's kernel and
+      its compiler (M-1), and the accepting run compiled no module, reusing objects from a
+      run that failed, in a repository nobody here can inspect, so the build stays the
+      source's report and qualifies for no source-build entry (M-2). A reading of the
+      statement is not a read of the proof, so it moves no rung.
+    reviews:
+      - path: docs/project/reviews/review-2026-10-25-n12-lean-formalization-statement-audit.md
+        kind: adversarial
+        reviewer: >-
+          Claude (AI), strong tier (tbd-strong, acting name w-n12-audit-1025), at the
+          reasoning setting the coordinator coord-n12-1025 launched it with, in a worktree
+          of its own, reading the source as data and running no code from it
+        reviewer_kind: ai
+        relation: project
+        date: '2026-10-25'
+        scope: >-
+          Statement audit of N12Compact.Final.optimality : S12.packingConstant12 = 4 at
+          d0caf45: its definitions against the problem line by line, that the final theorem
+          has no premise, the source's axiom receipt against the code's native_decide
+          calls, the kernel escapes of the 5,377-module closure and the 109-module statement
+          closure, the metaprograms, and the bytes against the run's manifest. Not the
+          mathematical review of the 117 cases, not a replay, and not the human expert
+          formalization review V5 needs. Findings M-1 (compiler trust) and M-2 (no build
+          anyone can inspect), m-1 (the statement imports the reduction) and m-2 (Mathlib
+          pinned outside Lake), and notes N-1 to N-3; none blocks recording the
+          formalization as the source's report.
+        verdict: accepted
+        covers: [T-245]
+    artifacts:
+      - packing/resources/web/jatloe-n12-lean-2026-10-16/README.md
+      - packing/resources/web/jatloe-n12-lean-2026-10-16/Jatloe12SquaresFormalized/Lean/Proofs/N12-jatloe/Compact/Assembly/Final.lean
+      - packing/resources/web/jatloe-n12-lean-2026-10-16/Jatloe12SquaresFormalized/Lean/Proofs/N12-jatloe/Compact/Assembly/SourceAssembly.lean
+      - packing/resources/web/jatloe-n12-lean-2026-10-16/Jatloe12SquaresFormalized/Lean/Proofs/N12-jatloe/source/S12/PackingConstant.lean
+      - packing/resources/web/jatloe-n12-lean-2026-10-16/Jatloe12SquaresFormalized/Lean/Proofs/N12-jatloe/source/S12/Normalization.lean
+      - packing/resources/web/jatloe-n12-lean-2026-10-16/Jatloe12SquaresFormalized/Lean/Proofs/N12-jatloe/source/S12/Diagonal.lean
+      - packing/resources/web/jatloe-n12-lean-2026-10-16/Jatloe12SquaresFormalized/verification/run-38849916588/global-type-axiom-audit.log.gz
+      - packing/resources/web/jatloe-n12-lean-2026-10-16/Jatloe12SquaresFormalized/verification/run-38849916588/github-replay.json.gz
+      - packing/resources/web/jatloe-n12-lean-2026-10-16/receipts/lean-closure.json.gz
+      - packing/resources/web/jatloe-n12-lean-2026-10-16/receipts/statement-closure.json.gz
+      - packing/resources/web/jatloe-n12-lean-2026-10-16/receipts/statement-audit.json
+      - packing/devtools/lean_closure.py
+      - packing/devtools/audit_n12_lean.py
+      - docs/project/reviews/review-2026-10-25-n12-lean-formalization-statement-audit.md
+    next_rung: >-
+      C1 needs the rest of the stage 4 review, a mathematical review of Jatloe's written
+      proof and its formalization from the retained packet (think-4l14); the statement
+      audit of 25 October is done. The source's per-module receipts and final audit do not
+      qualify as a complete producer build under epistemics.md's rule for reported formal
+      proofs: the accepting run compiled nothing, and the upstream repository and its runs
+      are not public (the audit's M-2).
+
+      V3 and C3 need a complete build of the theorem's 5,377-module closure from the pin,
+      here or by a third party whose build is retained here, with its axiom receipt equal
+      to the source's (think-dd3v): about 28 CPU-hours, 17 to 40, by the source's
+      per-module receipts, within the owner's 40 CPU-hour item cap at its high reading and
+      gated on a machine whose memory is known to hold the largest modules. That would be
+      reproduction with the producer's code. A build of the 109-module statement closure
+      decides the statement and the grid in Lean and moves no rung.
+
+      V4 and C4 need, on top of V3 and C3, two accepting adversarial AI reviews by
+      distinct reviewers and the owner's oversight record naming trust-boundary,
+      certificate-meaning and ai-findings. V5 needs a formalization review by a named
+      human expert who is not an author.
+    unfinished_confirmations:
+      - what: >-
+          the stage 4 mathematical review of Jatloe's written proof and its formalization,
+          read from the retained packet; the statement audit is done
+        rung: C1
+        link: think-4l14
+      - what: >-
+          a complete build of Compact.Assembly.Final's 5,377-module closure from the pin,
+          at Lean 4.35.0 with Mathlib 56a00585, accepted only with the axiom list of the
+          source's global-type-axiom-audit.log, here or by a third party whose build is
+          retained here
+        rung: C3
+        link: think-dd3v
+        estimated_cost:
+          cpu_hours: 28
+          cpu_hours_high: 40
+          basis: >-
+            The source's own per-module receipts, checked-modules.json in its release's
+            evidence archive (SHA-256 db3447b2..., checked on download): all 5,377 modules
+            exit 0, 59,586.74 wall-seconds of serial module builds (16.6 hours) at 2 to 4
+            Lean threads each, 138,504.10 thread-seconds (38.5 hours) if every thread was
+            busy, the longest module 248 seconds, on the producer's 88-CPU runner; setup and
+            the final audit add minutes. The central figure is the midpoint, and peak memory
+            is not recorded; the receipts' times, not a run here
+          priced: '2026-10-25'
+    notes: >-
+      Registered on 25 October 2026 by the records lane w-n12-records-1025 (think-4l14) from
+      issue 810, which the owner opened that day to track the result, and from Ahmed's two
+      posts on X of 22 October, the announcement and the reply that links the repository,
+      which the owner asked the record to use; both are retained in the packet. V0 is
+      declared, with this note as the ladder asks: the only entry is the source's report of
+      its own run, and no build of the proof is retained here.
+
+      Kind: optimality. The record held no value of s(12), so a proof-assistant proof of it
+      is not a formalization but takes the value's kind (epistemics.md, Result Kinds, the
+      first rule), as T-194 did at 19.
+
+      The case record: n-012's reported lower lane takes this claim and its reported status
+      reads proved, as n-011's took T-060's on 29 September and n-017's took T-153's on the
+      owner's confirmation of 13 October; its verified lanes stay at 7943/2000 and 4, and its
+      status open. At 19 the registration of T-194 left the reported lanes unchanged and put
+      that choice to the owner.
+
+      Credit, from the source's README and SOURCE-PROVENANCE.json: Jatloe for the full
+      mathematical proof and the partial formalization, Ben Gurevitch for aid in
+      formalization, CTJLewis, whom the record holds as Lewis, for refactoring and
+      compiling; and Ahmed, whose account made every commit and the announcement, as the
+      publisher, as the owner's issue names him. Jatloe posts on X as @jatloe; the source
+      gives no other name. Whether Ben Gurevitch is the Benjamin Gurevitch the n = 11
+      formalization credits is not recorded.
+
+      Priority, stated: of the reports this record holds, this is the first claim of s(12)
+      optimality. By GitHub's and X's times, the commit that first holds the pinned proof,
+      the tag's, is of 16 October 2026 at 05:12:49Z; the repository's first commit, of 15
+      October at 16:26:13Z, held an earlier layout; Ahmed's post is of 22 October at
+      02:36:07Z, and issue 810 of 25 October at 05:38:24Z.
+  - id: T-246
+    kind: exact-side
+    registered: '2026-10-25'
+    landed: '2026-10-25'
+    headline: Reported degree-7213 minimal polynomial of the `s(29)` record side
+    claim: >-
+      Evan Daniel reports that the side sigma of the best known packing of 29 unit squares,
+      Thomas Schadt's packing as David Ellsworth improved it, whose exact certificates are
+      T-155 and T-195, is a root of an irreducible integer polynomial p of degree 7213, so
+      that p is its minimal polynomial: sigma = 5.93383346267692918968946061635201913843383418107…,
+      the root of p that the source's Krawczyk enclosure isolates, and p has a leading
+      coefficient of 325 digits and coefficients of up to 5,074 digits. It is the exact
+      value of that configuration's side, the s(29) record side, and it states no bound and
+      no optimality: the source does not check the packing's non-overlap at sigma, and the
+      case's upper bound is T-195's.
+
+      The source eliminates the packing's 152-row contact system to five consistency
+      polynomials in the class angles of its five tilted orientation classes and solves them
+      by polyhedral homotopy continuation: 44,448 paths give 7,209 regular roots, and the 4
+      the homotopy missed, beside the singular side 5, are recovered algebraically; p is
+      rebuilt from all 7,213.
+
+      It rates irreducibility over Q (degree patterns modulo 12 primes), the Krawczyk
+      enclosure of the unique zero t* of the five polynomials (radius 1e-50) and the link
+      sigma = S(t*) rigorous, and the identities that certify the shape-lemma
+      parametrization in Q[x]/(p) Monte Carlo, modulo random 62-bit primes. The polynomial,
+      a 27 MB file, is published in the release exact-data-2026-10-12 and retained here by
+      its digest; its degree and coefficient sizes were read from it here, and nothing else
+      was run.
+
+      Daniel after Schadt, Ellsworth and Levy,
+      [square-packing](https://github.com/evand/square-packing/blob/ad86d42d0f743076d735036702ba04a41ce24a8c/search/exact/homotopy/N29.md),
+      11 October 2026, with the data in
+      [exact-data-2026-10-12](https://github.com/evand/square-packing/releases/tag/exact-data-2026-10-12),
+      announced on X on 13 October 2026
+      ([the thread](https://x.com/evanbd/status/2110154454817448106)). The source's
+      CREDITS.md says its work was produced by Claude (Anthropic) under human direction.
+    scope:
+      n_values: [29]
+    verification: V0
+    confirmation: C0
+    significance:
+      score: 3
+      rationale: >-
+        The exact algebraic value of the side of the best known packing of 29 squares, which
+        the record held only as decimals and rational certificates: of degree 7213, an order
+        of magnitude above the largest degree the record otherwise states (672 at n = 83,
+        from the catalogue), found by a complete homotopy solve with the roots it missed
+        recovered algebraically. A substantive case result, above the S2 of T-120 to T-123,
+        whose exact forms of degree 8 to 40 come from routine elimination; it proves no
+        bound, so not S4.
+      scored: '2026-10-25'
+      by: think-6gti Evan Daniel import (draft, w-n29-poly-1025)
+    novelty: previously-published
+    attribution:
+      source_keys:
+        - '[Daniel exact and local reports 2026-10-12]'
+      published: '2026-10-11'
+    evidence:
+      - E-n029-evand-minpoly-7213-report
+    composition: >-
+      One cited entry, the source's report (E-n029-evand-minpoly-7213-report), which claims
+      the exact side as derived structure and no bound. The certificates T-155 and T-195
+      cite are not cited: they decide the same packing at rational sides and say nothing of
+      p. Nothing is replayed here, so V0; no review has read it, so C0.
+    artifacts:
+      - packing/resources/web/evand-exact-data-2026-10-12/README.md
+      - packing/resources/web/evand-exact-data-2026-10-12/acquisition/release.json
+      - packing/resources/web/evand-exact-data-2026-10-12/acquisition/release/s29/README.md
+      - packing/resources/web/evand-exact-data-2026-10-12/acquisition/release/s29/n29_krawczyk.json
+      - packing/resources/web/evand-exact-data-2026-10-12/receipts/announcement/tweet-2110154454817448106.json
+      - packing/resources/web/evand-exact-and-local-reports-2026-10-12/source/search/exact/homotopy/N29.md
+      - packing/resources/web/evand-exact-and-local-reports-2026-10-12/source/search/exact/homotopy/irred.py
+      - packing/resources/web/evand-exact-and-local-reports-2026-10-12/source/search/exact/homotopy/krawczyk.py
+      - packing/resources/web/evand-exact-and-local-reports-2026-10-12/source/search/exact/homotopy/link.py
+      - packing/resources/web/evand-exact-and-local-reports-2026-10-12/source/search/exact/homotopy/verify_mod.py
+      - packing/resources/web/evand-exact-and-local-reports-2026-10-12/source/search/exact/homotopy/contacts_mod.py
+    next_rung: >-
+      C1 needs the stage 4 mathematical review of N29.md: the elimination from the 152-row
+      contact system to the five consistency polynomials, the shape-lemma parametrization,
+      the Monte Carlo error bound and the link argument. C3 needs the source's five-step
+      replay from the pinned archive with its own scripts and a perturbed-polynomial
+      control (think-10m1): about 2.5 CPU-hours by the author's measure, a reproduction with
+      the producer's code, which waits on an owner budget.
+
+      An independent route, irreducibility and root isolation in another system and an
+      exact decision of the packing's non-overlap over the Krawczyk box, is a W7 slice of a
+      few agent-hours and similar compute; a decided non-overlap at sigma would make the
+      claim an upper bound below the case's ceiling, and the kind would change with it.
+    unfinished_confirmations:
+      - what: >-
+          the stage 4 mathematical review of N29.md, its elimination to the five consistency
+          polynomials, the shape-lemma parametrization, the Monte Carlo error bound and the
+          link argument, read from the retained packets
+        rung: C1
+        link: think-6gti
+      - what: >-
+          the source's five-step replay from s29-minpoly.tar.zst, fetched and checked against
+          its pinned digest: irred.py over 12 primes, krawczyk.py, link.py at PREC=220000,
+          verify_mod.py over 50 primes and contacts_mod.py over 21, under env.sh's
+          python-flint 0.9.0 and mpmath 1.3.0, with a perturbed-polynomial control
+        rung: C3
+        link: think-10m1
+        estimated_cost:
+          cpu_hours: 2.5
+          cpu_hours_high: 3
+          basis: >-
+            The author's measure in issue 545's comment of 12 October 2026: about 2.5
+            CPU-hours with 12, 50 and 21 primes, almost all in verify_mod.py at about 2.5
+            minutes a prime; an estimate, not a receipt
+          priced: '2026-10-25'
+    notes: >-
+      Registered on 25 October 2026 by the worker w-n29-poly-1025 for the coordinator
+      coord-n12-1025 (think-6gti), on the owner's instruction of that day, as the
+      coordinator relayed it, to capture Evan Daniel's work and link his announcement "as
+      this is itself a result"; issue 545 has tracked the import since 12 October, and
+      issue 811 tracks the record's exact side polynomials. Its kind, exact side, is new
+      with this entry: none of the register's other kinds fits a claim that gives the exact
+      value of one configuration's side and states no bound, and the owner's approval of
+      the kind is asked in the pull request that lands it.
+
+      The polynomial was published on 12 October in the release exact-data-2026-10-12, at
+      issue 545's request; the evand-exact-data-2026-10-12 packet pins the archive by
+      digest, since it is too large for the repository, and retains its README, its
+      SHA256SUMS and the Krawczyk box.
+
+      The announcement's first post is retained there; its
+      follow-ups in the same thread, as transcribed for the owner on 25 October and not
+      retained, say that the side "is, exactly, a specific root of a degree 7213 polynomial
+      with integer coefficients having up to 5074 digits", that "This work was all done by
+      Claude and I'm fairly certain the exact math is correct, but some of the checks are
+      stochastic. It's not in Lean; the computation is not tractable", and, on 15 October,
+      that proving the packing optimal "is an additional proof, which has not yet been done
+      at this size".
+
+      The case's lanes are unchanged: both hold T-195's rational certificate of the same
+      packing, of degree 1, which the house adoption of 17 October wrote, and sigma is the
+      configuration's own side. T-195's exact side agrees with sigma to the 68 places N29.md
+      prints and lies inside the Krawczyk enclosure of S; whether it is above sigma, as a
+      realization of the packing at a decided side is expected to be, is not decided here.
+      n-029.md's analytic characterization gives the degree and the pinned asset.
+
 # Generated by python -m devtools.regularized_drawings from the regularized layer's
 # index (packing/atlas/known-best/regularized/index.json); do not edit by hand.
 regularized_drawings:
@@ -34831,17 +35543,19 @@ regularized_drawings:
         max_turn_deg: 0.0
       view: packing/atlas/known-best/regularized/n-181-regularized.yaml.gz
     - n: 182
-      of: T-174
+      of: T-243
       by: project
-      method: regularize_axis_components/2
+      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
+      changes: {re_angled: 5}
       identity:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 0
-        max_move: 9.207591e-95
-        max_turn_deg: 0.0
+        moved: 37
+        max_move: 0.3806931
+        max_turn_deg: 0.364276
       view: packing/atlas/known-best/regularized/n-182-regularized.yaml.gz
     - n: 183
       of: T-220

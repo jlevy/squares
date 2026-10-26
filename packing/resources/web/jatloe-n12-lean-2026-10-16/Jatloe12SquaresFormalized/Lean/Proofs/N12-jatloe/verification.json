@@ -1,0 +1,7 @@
+{
+  "version": 1,
+  "label": "N12 Jatloe — optimality",
+  "source_directory": "source",
+  "adapter": "source-replay",
+  "profile": "final"
+}

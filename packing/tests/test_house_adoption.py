@@ -245,9 +245,10 @@ def test_the_records_of_the_lifted_hold_keep_their_next_candidates_until_adopted
     # 40 since the same pass moved 102, 123, 258, 259 and 295 to issue 639's exact forms
     # (T-193), below T-174's sides there, once the writer wrote an algebraic side; 39
     # since the adoption of 25 October 2026 moved 268 to Francisco Couzo's issue-763
-    # certificate (T-240), below T-174's side there, which that of 26 October 2026 moved on
-    # to Evan Daniel's descent of Vladislav Lavrentev's packing (T-242).
-    assert len(held_counts) == 39
+    # certificate (T-240), below T-174's side there; 38 since the same pass moved 182 to
+    # Evan Daniel's issue-806 certificate (T-243), below T-174's side there. The adoption of
+    # 26 October 2026 moved 268 on to his descent of Vladislav Lavrentev's packing (T-242).
+    assert len(held_counts) == 38
     previous_t174 = {n for n in previous if houses.ADOPTED[n] == "T-174"}
     # T-193's adopted counts below T-174's held sides left the hold with their adoption.
     t193 = {n for n, house in ALGEBRAIC_ADOPTED.items() if house == "T-193"}
@@ -261,6 +262,7 @@ def test_the_records_of_the_lifted_hold_keep_their_next_candidates_until_adopted
         29: "T-195",
         105: "T-229",
         155: "T-197",
+        182: "T-243",
         268: "T-242",
         270: "T-224",
         308: "T-221",
@@ -1612,7 +1614,9 @@ def test_the_staged_adoptions_name_their_beads_and_reasons() -> None:
     assert adopted == {
         n for n in houses.LATER_PASSES["2026-10-17"] if houses.ADOPTED[n] == "T-174"
     }
-    assert len(adopted) == 32
+    # 31 since the adoption of 25 October 2026 moved 182 to Evan Daniel's issue-806
+    # certificate (T-243).
+    assert len(adopted) == 31
     assert not adopted & set(select.PENDING_ADOPTION)
     # The pass of 23 October 2026 took the writer's twelve off once it wrote an algebraic
     # side, at the nine counts a derived number-field fact holds (think-ot5c).
@@ -1681,13 +1685,14 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
     # (`ALGEBRAIC_ADOPTED`, think-ot5c), and the adoption of 24 October 2026 moved 204 to
     # the release's lower 204 file (T-231) and 303 again, to Amund Kristiansen's issue-755
     # certificate (T-239), and the adoption of 25 October 2026 moved 268 and 303 to
-    # Francisco Couzo's issue-763 certificates (T-240), and 304 to Evan Daniel's exact descent
-    # of the packing T-241 certifies (T-242), and the adoption of 26 October 2026 moved 268
-    # again, to his exact descent of Vladislav Lavrentev's packing (T-242), after this
-    # receipt was retained.
+    # Francisco Couzo's issue-763 certificates (T-240), 304 to Evan Daniel's exact descent
+    # of the packing T-241 certifies (T-242) and 182 to his issue-806 certificate (T-243),
+    # and the adoption of 26 October 2026 moved 268 again, to his exact descent of Vladislav
+    # Lavrentev's packing (T-242), after this receipt was retained.
     later = {
         **ALGEBRAIC_ADOPTED,
         105: "T-229",
+        182: "T-243",
         268: "T-242",
         303: "T-240",
         304: "T-242",
@@ -1708,6 +1713,7 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
         105: "T-174",
         154: "T-186",
         155: "T-174",
+        182: "T-174",
         204: "T-186",
         236: "T-146",
         268: "T-174",
@@ -1733,7 +1739,7 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
     assert {n: houses.ADOPTED[n] for n in later} == later
     assert historical["houses"] == {str(n): result for n, result in before.items() if n != 29}
     assert {int(n) for n, result in historical["houses"].items() if result == "T-174"} == (
-        set(houses.numbers_of("T-174")) - {70, 153, 207} | {105, 155, 268, 270, 308}
+        set(houses.numbers_of("T-174")) - {70, 153, 207} | {105, 155, 182, 268, 270, 308}
     )
 
 
@@ -2187,8 +2193,42 @@ def _fine_net_lower_projection(
 #: the key no longer matches and that pass's replay reads the three as prior state. T-223's
 #: two, at 204 after T-186's pass (#701, review A6) and at 260 after T-196's of 20 October
 #: 2026 (#704), retired when T-223 was adopted at 204 on 20 October and at 260 on 21
-#: October 2026 (#706), so none is pending now.
-LATER_PENDING_REPORTS: dict[tuple[int, str], tuple[str, str, str]] = {}
+#: October 2026 (#706). A registration that states no bound is entered the same way and
+#: stays until a later pass at its count: T-246, Evan Daniel's degree-7213 minimal
+#: polynomial of the s(29) record side, an exact side, at 29 after T-195's pass.
+LATER_PENDING_REPORTS: dict[tuple[int, str], tuple[str, str, str]] = {
+    (29, "T-195"): (
+        "E-n029-evand-minpoly-7213-report",
+        "[Daniel exact and local reports 2026-10-12]",
+        "**Exact side, 25 October 2026.**",
+    ),
+}
+
+#: History a registration after an adopted count's last pass rewrote in the record's body,
+#: keyed like the two beside it: the first and last words of the committed passage and the
+#: words the pass left in its place, compared as words. T-246 replaced n = 29's "no minimal
+#: polynomial anywhere" with the polynomial it registers (25 October 2026).
+LATER_HISTORY_REWRITES: dict[tuple[int, str], tuple[str, str, str]] = {
+    (29, "T-195"): (
+        "**The minimal polynomial (T-246).**",
+        "It did not follow that nothing exact was known.",
+        (
+            "This case has no minimal polynomial anywhere — in the literature or here — which "
+            "is why `exact_form`, `algebraic_degree` and `minimal_polynomial` are all null. It "
+            "does not follow that nothing exact is known."
+        ),
+    ),
+}
+
+
+def _later_rewrite_projection(key: tuple[int, str], body: str) -> str:
+    """Check a later rewrite's passage appears once in the history, then restore it."""
+    first, last, prior = LATER_HISTORY_REWRITES[key]
+    assert body.count(first) == 1, f"n={key[0]}: one rewritten passage"
+    start = body.index(first)
+    end = body.index(last, start) + len(last)
+    return body[:start] + prior + body[end:]
+
 
 #: Evidence a change after an adopted count's last pass cites in its case record, keyed by
 #: the count and the result that pass adopted. A citation writes none of the adoption
@@ -2265,6 +2305,10 @@ def test_the_writer_rebuilds_every_adopted_record_from_its_prior_state(
         if (move.n, move.house.result) in LATER_CITATIONS:
             _later_citation_projection((move.n, move.house.result), held)
         historical_body = _body(committed)
+        if (move.n, move.house.result) in LATER_HISTORY_REWRITES:
+            historical_body = _later_rewrite_projection(
+                (move.n, move.house.result), historical_body
+            )
         if move.n == 108:
             historical_body = _n108_later_lower_projection(held, wrote, historical_body)
         elif move.n in FINE_NET_LOWER_19_OCTOBER:

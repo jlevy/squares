@@ -143,6 +143,9 @@ KRISTIANSEN_755 = "amundsk-n303-2026-10-23"
 #: October (`test_upper_bound_reports_l49q`).
 COUZO_N304 = "couzo-n304-2026-10-23"
 DANIEL_KAGGLE = "evand-kaggle-descents-2026-10-24"
+#: Evan Daniel's issue #806 at d99925d, retained under MIT by the #806 import lane of 25
+#: October (`test_upper_bound_reports_806`).
+DANIEL_806 = "evand-n182-2026-10-25"
 #: How a declaration cites a beyond-horizon row of the source register.
 COVERAGE_URL = "packing/frontier/source-coverage.yaml"
 EVERY = (
@@ -192,6 +195,7 @@ EVERY = (
     COUZO_N304,
     DANIEL_KAGGLE,
     KRISTIANSEN_798,
+    DANIEL_806,
 )
 
 
@@ -1511,6 +1515,7 @@ def test_the_register_plan_states_each_bound_as_check_standing_reads_it(name: st
         KRISTIANSEN_755: "2026-10-23",
         COUZO_N304: "2026-10-23",
         DANIEL_KAGGLE: "2026-10-24",
+        DANIEL_806: "2026-10-25",
     }
     assert result["attribution"]["published"] == published.get(name, "2026-10-10")
     evidence = plan["evidence.yaml"]

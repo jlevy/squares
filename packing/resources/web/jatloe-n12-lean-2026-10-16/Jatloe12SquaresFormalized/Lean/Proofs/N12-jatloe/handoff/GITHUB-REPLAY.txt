@@ -1,0 +1,78 @@
+MANUAL N12 GITHUB REPLAY — PUBLIC REPOSITORY
+
+Open Actions -> Verify twelve-square proof -> Run workflow:
+  repository: Queuingtheorydotcom/Jatloe12SquaresFormalized
+  branch: main
+  target: N12-jatloe
+  jobs: auto
+  runner: ubuntu-latest (or a larger runner enabled for this repository)
+  fresh: unchecked
+  resume_run: auto
+
+Equivalent command:
+  gh workflow run verify.yml --repo Queuingtheorydotcom/Jatloe12SquaresFormalized \
+    --ref main -f target=N12-jatloe -f jobs=auto -f resume_run=auto
+
+Repeat to resume completed work. Pushes do not automatically start compilation.
+N12-jatloe, 12, n12 and n12-final all select the full final theorem. The
+n12-selected scope verifies only selected components and cannot claim the
+unconditional optimum. There are no N11 targets in this public repository.
+
+PINNED ENVIRONMENT
+Project: Lean/Proofs/N12-jatloe
+Lean: leanprover/lean4:v4.35.0
+Mathlib: 56a005855ea17e0b0958f73ec801ae140b0a1679
+Lock: verification/toolchain-lock.json (relative to the project)
+The bootstrap validates the lock and checked-in lean-toolchain. It does not
+silently follow newer Lean/Mathlib releases. Package sources and matching
+external caches are restored remotely.
+
+FIVE-HOUR PROGRESS SAVE
+The absolute deadline starts before checkout. Setup, restoration and replay
+count toward five hours; the six-hour job limit leaves time to stop and upload.
+Automatic CPU/memory sizing respects the available machine resources. Module
+replay remains serial, with available Lean threads within each module. Local
+build defaults remain conservative. During module verification, console output
+is only module k/total; detailed compiler messages are retained in artifacts.
+
+At the deadline, completed objects and receipts are saved to this repository's
+Actions cache. Each run also uploads n12-final-build-ATTEMPT and
+n12-final-evidence-ATTEMPT artifacts, retained for 30 days. Build upload includes
+the whole compiler output directory, including Lean 4.35 sidecars. A hard manual
+cancellation or runner loss can prevent saving; let the scheduled stop happen.
+
+RESUME AND TRUST
+resume_run=auto restores the latest compatible full build cache. none skips
+cache restoration. fresh=true forces every project module to be checked again.
+Numeric run IDs and old .olean-only checkpoint restoration are disabled here,
+because they cannot restore all possible Lean 4.35 sidecars. Downloadable old
+checkpoints still preserve the historical compiled objects and their receipts.
+Upstream's private cache is not automatically available in this repository.
+
+Every reused module is checked against source/dependency/compiler fingerprints,
+object hashes, log hashes and admission-free successful receipts. A cache hit
+alone does not establish the theorem. Changed sources and their dependents are
+rechecked. Interrupted modules restart from the beginning. Global-success reports
+are reset before cache restoration and never accepted from an older run.
+
+A scheduled stop can be a successful job that saved only partial progress.
+Read its summary and github-replay.json. Full acceptance requires final profile,
+all 5,377 project modules, exact type S12.packingConstant12 = 4, and final axiom
+audit. The recorded inventory is 9,583 modules including libraries/setup/audit,
+under the hard 10,000 cap. The native classification retains compiler trust.
+
+ACCEPTED HISTORICAL RUN
+The source matches EvolvingPrograms/SquaresLean main commit
+1f60d412707aae824b76fbaf11d4e708695451fa. Run38849916588/job116808701733
+accepted all 5,377 cached modules and freshly checked the final theorem and
+axioms on Lean4.35.0. It did not freshly compile all modules. The root README,
+SOURCE-PROVENANCE.json and verification/run-38849916588 hold the current evidence.
+Older handoffs and status files describe historical source-writing stages.
+
+LOCAL CHECKS WITHOUT LEAN COMPILATION
+From Lean/Proofs/N12-jatloe:
+  python3 scripts/github_replay.py --plan --profile final
+  python3 -m unittest discover -s scripts -p 'test_*.py'
+Runner tests use only small Python subprocesses. No local full Lean build is
+needed for these checks. Public workflow/bootstrap changes have offline test
+coverage; a new public end-to-end replay has not been dispatched by publication.

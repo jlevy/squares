@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:FrontierEvidenceSet/v1
   schema: frontier-evidence.schema.yaml
   status: enforced
-last_reviewed: '2026-10-24'
+last_reviewed: '2026-10-25'
 evidence:
   - id: E-n017-kleddamag-rational-upper
     claim: upper-bound
@@ -11917,6 +11917,76 @@ evidence:
       source's controls rebuilt byte for byte. It decides no coverage and is no route to
       the bound; Daniel's verifier and the native interval run decide it.
     source_reviewed: '2026-10-05'
+
+  - id: E-n012-jatloe-lean-report
+    claim: exact-value
+    scope: {n_values: [12]}
+    assurance: reported
+    reported_method: proof-assistant-checked
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Jatloe n12 Lean 2026-10-16]'
+    certificate: packing/resources/web/jatloe-n12-lean-2026-10-16/Jatloe12SquaresFormalized/Lean/Proofs/N12-jatloe/Compact/Assembly/Final.lean
+    replay_status: not-attempted
+    verifiers: [V-audit-n12-lean]
+    axioms_receipt: packing/resources/web/jatloe-n12-lean-2026-10-16/Jatloe12SquaresFormalized/verification/run-38849916588/global-type-axiom-audit.log.gz
+    proof:
+      source: packing/resources/web/jatloe-n12-lean-2026-10-16/Jatloe12SquaresFormalized/Lean/Proofs/N12-jatloe/Compact/Assembly/Final.lean
+      theorem: >-
+        N12Compact.Final.optimality : S12.packingConstant12 = 4, with no hypothesis, where
+        packingConstant12 := sInf feasibleSides, feasibleSides := {L | 0 < L and Nonempty
+        (UnitPacking L)}, and UnitPacking L is twelve OpenSquare of side 1, each with c^2 +
+        s^2 = 1 and Inside x y the open band loU < c x + s y < loU + side, loV < -s x + c y <
+        loV + side, every point Inside one in [0, L]^2 and no point Inside two.
+      scope: >-
+        s(12) = 4 for twelve unit squares with independent translations and arbitrary
+        rotations, interiors open and pairwise disjoint, boundary contact allowed. The
+        upper half is gridPacking, the 4 x 3 grid of axis-parallel squares, so the infimum
+        is attained; the lower half normalizes any packing below side 4 and excludes it
+        through marker ownership and 117 original cases. No uniqueness of the optimal
+        packing is stated.
+      pinpoints: >-
+        Lean/Proofs/N12-jatloe/Compact/Assembly/Final.lean (optimality and its #print
+        axioms); Compact/Assembly/SourceAssembly.lean (Pending, pending_closed, optimality);
+        source/S12/PackingConstant.lean (gridPacking, feasibleSides, packingConstant12,
+        packingConstant12_eq_four_of_exclusion); source/S12/Normalization.lean (UnitPacking,
+        the normalization); source/S12/Packing.lean (NormalizedPacking, markerOwners);
+        source/S12/Diagonal.lean (OpenSquare, Inside, InBands); verification/run-38849916588/
+        (GlobalTypeAudit.lean, global-type-axiom-audit.log, github-replay.json,
+        verified-source-manifest.json); the packet's receipts/lean-closure.json.gz,
+        receipts/statement-closure.json.gz and receipts/statement-audit.json.
+      assumptions:
+        - Lean v4.35.0's kernel and Mathlib at 56a00585 are sound, and so are Lean's compiler and the evaluator the 1,624 native_decide facts are decided by
+        - The run passed as the source reports. Its upstream repository, EvolvingPrograms/SquaresLean at 1f60d41, and run 38849916588 are not public, the run reused all 5,377 compiled objects from a checkpoint that run 38847898861 saved at 437041a0 before it failed, and nothing here built or elaborated any module
+        - The proof sources at d0caf45 are the ones the run accepted, as README.md and SOURCE-PROVENANCE.json say. Each of the 5,377 modules read here at d0caf45 has the SHA-256 verified-source-manifest.json gives it (devtools.audit_n12_lean, receipts/statement-audit.json), so the bytes are the manifest's; that the run compiled those bytes rests on the source's manifest
+      audit_record: docs/project/reviews/review-2026-10-25-n12-lean-formalization-statement-audit.md
+    limitations: >-
+      Queuingtheorydotcom/Jatloe12SquaresFormalized at d0caf45 (2026-10-16T05:12:49Z, the tag
+      n12-verified-2026-10-16) reports a Lean 4 proof of s(12) = 4, credited to Jatloe for
+      the mathematical proof and a partial formalization, Ben Gurevitch for aid in
+      formalization and CTJLewis for refactoring and compiling it, and published by
+      Manasseh Ahmed, who announced it on X on 22 October 2026. Its README says the proof
+      sources are copied byte for byte from EvolvingPrograms/SquaresLean at 1f60d41, whose
+      run 38849916588 authenticated all 5,377 project modules against their cached objects
+      and receipts (0 compiled afresh) and ran a fresh final type and axiom audit: propext,
+      Classical.choice, Quot.sound and 1,624 native_decide axioms, no sorryAx. The
+      checkpoint of those objects comes from run 38847898861, which failed later, and no
+      full rebuild has been run by anyone; the source says so. The closure read here from
+      the Git objects (devtools.lean_closure) has 5,377 modules, none missing, with no sorry
+      or axiom declaration and 2,572 uses of native_decide in 42 modules. The source's
+      per-module receipts in its release's evidence archive (SHA-256 db3447b2..., checked
+      on download) sum to 16.6 serial wall-hours and 38.5 Lean-thread-hours, all exit 0,
+      so a complete build here is about 17 to 39 CPU-hours, near the owner's 40 CPU-hour
+      item cap, with its memory unrecorded (T-245's unfinished_confirmations). No source
+      build entry is added: the accepting run compiled nothing, and no audit has read its
+      receipts. The statement audit of 25 October read the statement and its definitions
+      line by line: the unrestricted problem, with no premise, checked by Lean's kernel and
+      its compiler, its 1,624 native axioms exactly the native_decide calls of 1,525
+      declarations (devtools.audit_n12_lean). The written proof and the 117 cases have not
+      been reviewed here.
+    source_reviewed: '2026-10-25'
 
   - id: E-n021-evand-5000-1001-report
     claim: lower-bound
@@ -45767,3 +45837,278 @@ evidence:
       verifier and the independent rational corner checker, share certificate parsing,
       half-angle conversion, Fraction arithmetic and the separating-axis method. No two
       independent methods, human oversight or optimality is claimed.
+  - id: E-evand-n182-certificate-report
+    claim: upper-bound
+    scope:
+      n_values: [182]
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Daniel n182 2026-10-25]'
+    certificate: packing/resources/web/evand-n182-2026-10-25/source/search/packer/candidates/s182-1024.cert
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-25'
+    limitations: >-
+      This atom records the source author's report, on issue 806, of 1 exact rational
+      certificate at d99925d, search/packer/candidates/s182-1024.cert, which the
+      evand-n182-2026-10-25 packet retains. A separate complete repository replay is
+      retained for n = 182: 1 positive and 2 duplicate-square and outside-container controls
+      passed their required outcomes on both routes, 98826 pair decisions; summed over the 3
+      jobs, the receipt records 11.53 route CPU seconds and 11.7 job wall seconds, the
+      longest job 4.15 seconds. Every positive clears every wall by at least 5.00e-21 and
+      every pair by at least 9.99e-21, and the packet's sharp controls meet those margins on
+      both routes. The replay is E-evand-n182-exact-feasibility and the 25 October review's
+      own checker E-evand-n182-review-exact-feasibility. The source's own checkers were not
+      run here. The source's local-minimality statement is its numerical report at 80
+      digits, with no interval enclosure, and was not replayed. The commit carries a
+      Co-Authored-By trailer naming Claude, and the source's CREDITS.md says its work was
+      produced by Claude (Anthropic) under human direction. No two independent methods,
+      human oversight or optimality is claimed.
+    external_review:
+      state: informally-verified
+      date: '2026-10-25'
+      reviewed_by: >-
+        AI agent (Claude, strongest tier, maximum reasoning), the stage 4 mathematical
+        review lane of issue 806 (c-review-806-math, think-meci), prompted separately from
+        the triage, records and replay lanes
+      note: >-
+        docs/project/reviews/review-2026-10-25-evand-n182.md accepted the certificate for
+        finite feasibility only, with no blocking or major finding; its two minor findings
+        (M-1, the start's credit; M-2, the commit title's equality) are on the record's
+        credit and wording, not on the bound. Its clean-room run is
+        E-evand-n182-review-exact-feasibility. The source's local-minimality statement
+        (80-digit numerical, no interval enclosure) was not replayed and states no bound.
+  - id: E-evand-n182-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values: [182]
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: shared-components
+    shared_components:
+      - >-
+        the certificate parser and half-angle map of devtools.evand_exact_certificates (the
+        evand-cert adapter the packet's acquisition/report.json names), through which both
+        maintained routes read the certificate: its reader's line filter and the corners
+        from which the independent route decides (Pose.corners) are transcribed from Evan
+        Daniel's verify_cert.py and verify_cert2.py, the checkers the certificate names
+      - CPython's fractions.Fraction arithmetic, which both of Daniel's checkers use
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Daniel n182 2026-10-25]'
+    certificate: packing/resources/web/evand-n182-2026-10-25/source/search/packer/candidates/s182-1024.cert
+    replay: >-
+      From packing/ with the project interpreter (Python 3.14.7) on a shared four-core
+      host: python -m devtools.upper_bound_reports evand-n182-2026-10-25 certify --workers
+      2 wrote the receipt on 25 October 2026 from the packet's retained certificate, and
+      check --replay decides all 3 retained jobs, the certificate with its duplicate-square
+      and outside-container controls, again through both maintained routes and holds each to
+      its retained row; check-claims rebuilds the frozen comparison. python -m
+      devtools.upper_bound_reports evand-n182-2026-10-25 sharp-controls wrote the packet's
+      sharp controls (receipts/sharp-controls.json), all eleven as expected on both routes:
+      contact accepted at margin 0 and refused 1e-30 past it. The 25 October stage 4 review
+      decided the certificate again on its own checker, with the same least wall clearance,
+      exactly 5e-21, and least pair gap, about 9.999999999999992e-21
+      (docs/project/reviews/review-2026-10-25-evand-n182.md).
+    replay_status: passed
+    verifiers:
+      - V-sqpack-verify
+      - V-check-rational-witness-independent
+      - V-evand-arrangement-receipts
+      - V-upper-bound-reports
+      - V-evand-exact-certificates
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificate at n = 182 that T-243 cites, every wall and every pair decided by
+          both maintained routes; the kernel's controls are retained in the packet's receipt
+        checked: 1
+        of: 1
+    independence_record: docs/project/reviews/review-2026-10-25-evand-n182.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-25'
+      reviewed_by: >-
+        AI agent (Claude, strongest tier, maximum reasoning), the stage 4 mathematical
+        review lane of issue 806 (c-review-806-math, think-meci), prompted separately from
+        the triage, records and replay lanes
+      note: >-
+        docs/project/reviews/review-2026-10-25-evand-n182.md accepted the certificate for
+        finite feasibility, with no blocking or major finding. Its clean-room checker's run
+        is E-evand-n182-review-exact-feasibility. The replay reads the certificate through
+        the evand-cert reader, which transcribes two expressions of the producer's own
+        checkers, so T-243's independent re-implementation rests on the review's entry.
+    limitations: >-
+      A replay of the one retained certificate by two maintained exact routes that share
+      certificate parsing, half-angle conversion, Fraction arithmetic and the separating-axis
+      method, and with the producer the evand-cert reader's line filter and corner
+      construction, transcribed from his verify_cert.py and verify_cert2.py. The receipt's 3
+      jobs hold 98826 pair decisions, 11.53 route CPU seconds and 11.7 job wall seconds, the
+      longest job 4.15 seconds. Every wall is cleared by exactly 5e-21 and every pair by at
+      least 9.99e-21, below the binary64 spacing of the coordinates; the receipt's two
+      controls are gross, and the packet's sharp controls meet those margins. The source's
+      own checkers were not run here, and no KKT, flat-motion or second-order statement of
+      the source is checked. Finite feasibility only: no lower bound, optimum, local
+      minimum, rigidity, novelty or human oversight.
+    source_reviewed: '2026-10-25'
+  - id: E-evand-n182-review-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values: [182]
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Daniel n182 2026-10-25]'
+    certificate: packing/resources/web/evand-n182-2026-10-25/source/search/packer/candidates/s182-1024.cert
+    replay: >-
+      With the project interpreter (Python 3.14.7), niced, on a shared four-core host, 25
+      October 2026: review/review-2026-10-25/programs/run_review.sh SRC REPO, with SRC the
+      review lane's scratch copies of the blobs at d99925d (custody in out/custody.txt; the
+      packet's source/search/packer/candidates holds the same bytes and reproduces the
+      outputs) and REPO the worktree at main bb756e193, ran exact_check.py check on
+      s182-1024.cert (SHA-256 9e12e0a4...fe97, 30,648 bytes, blob a1c01bdf), deciding all
+      182 walls and 16,471 pairs over Q by separating axes and again by exact clipped areas
+      (both valid, 3.3 and 3.4 CPU seconds; out/check-s182-1024.json), then exact_check.py
+      controls, which decided fourteen mutations by both methods with every outcome as
+      expected (out/controls-s182-1024.json, 105.8 CPU seconds), and the same check on the
+      source's regularized certificate (valid).
+    replay_status: passed
+    verifiers:
+      - V-evand-n182-review-check
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificate at n = 182: every wall and every pair, decided by two exact methods
+          that share only the reader and the corner construction, with fourteen sharp
+          controls decided by both
+        checked: 1
+        of: 1
+      read: [mathematics, certificate-format, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of issue 806 (c-review-806-math,
+            think-meci), strongest tier, maximum reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The source's commit names Claude as co-author. The checker shares no code with the
+          source's checkers or with this repository's maintained routes, none of which its
+          author read.
+    independence_record: packing/resources/web/evand-n182-2026-10-25/review/review-2026-10-25/README.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-25'
+      reviewed_by: >-
+        AI agent (Claude, strongest tier, maximum reasoning), the stage 4 mathematical review
+        lane of issue 806 (c-review-806-math, think-meci), prompted separately from the
+        triage, records and replay lanes
+      note: >-
+        docs/project/reviews/review-2026-10-25-evand-n182.md accepted the certificate for
+        finite feasibility only, with no blocking or major finding, two minor findings (M-1,
+        M-2) and eight notes (N-1 to N-8).
+    limitations: >-
+      A clean-room decision of the one retained certificate by two exact methods in one
+      program, which share its token reader and its corner construction
+      (x, y) + u (c, s) + v (-s, c), the counterclockwise reading of t = tan(theta/2) that
+      the certificate's format line implies and does not state. Under the reversed sense, 80
+      pairs overlap. The least slacks are 5e-21 at the walls and 9.999999999999992e-21
+      between squares 99 and 100 (0-based). Finite feasibility only: no lower bound,
+      optimum, local minimum, rigidity, novelty or human oversight. The source's local
+      minimality statement was not replayed.
+    source_reviewed: '2026-10-25'
+  - id: E-hyukdongkim-804-exact-forms-report
+    claim: upper-bound
+    scope: {n_values: [172, 263]}
+    assurance: reported
+    reported_method: numerical-multiprecision
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Kim exact forms 2026-10-25]'
+    certificate: packing/resources/web/hyukdongkim-exact-forms-2026-10-25/facts/exact-forms.json
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-25'
+    limitations: >-
+      This atom records the source author's report, in issue 804 and its attachment
+      squares-exact-forms.zip, that the side of the record packing at 172 and at 263 is a
+      stated root of an integer polynomial of degree 24 and 17, determined numerically: a
+      KKT system on the active contacts of evand/square-packing's atlas packings at
+      659ee62, solved to 1,500 and 3,000 digits, and LLL. The issue supplies no exact
+      configuration; the author's configurations, attached to a later comment the same day,
+      are retained as derived facts (hyukdongkim-t244-configurations-2026-10-25) and not
+      yet decided, so no packing at either side has been decided here, and none of the
+      source's code was run. Decided here from the derived fact: each polynomial is primitive and
+      irreducible over Q (SymPy and sqpack.field), each side is the root the source's
+      100-digit print names, and each lies below T-174's rational certificate at its count,
+      by 3.898e-89 and 2.126e-94, and below issue 639's degree-12 side there, by 1.185e-62
+      and 9.234e-63 (campaign/issue-intake/upper-bounds-issue804-20261025/exact-sides.json).
+      The atlas inputs are T-174's witnesses to binary64 at every square (atlas-poses.json
+      there). The source's KKT multipliers are not unique and their least minimum-norm
+      value is about -6e-16, so stationarity is numerical; local minimality, global
+      optimality and rigidity are not claimed or established. The source's 1,500- and
+      3,000-digit runs share one code base, one active-set extraction and one KKT
+      formulation.
+  - id: E-n029-evand-minpoly-7213-report
+    claim: derived-structure
+    scope: {n_values: [29]}
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Daniel exact and local reports 2026-10-12]'
+    certificate: packing/resources/web/evand-exact-data-2026-10-12/acquisition/release.json
+    replay_status: not-attempted
+    verifiers: []
+    limitations: >-
+      evand/square-packing 169a827 (2026-10-11T23:01:11Z; search/exact/homotopy/N29.md,
+      retained at ad86d42 by the evand-exact-and-local-reports-2026-10-12 packet) reports
+      that the side sigma of the s(29) record configuration, Thomas Schadt's packing as David
+      Ellsworth improved it, is a root of an irreducible integer polynomial p of degree 7213,
+      so p is its minimal polynomial. Five consistency polynomials in the class angles t1 to
+      t5, eliminated from the 152-row contact system, were solved by polyhedral homotopy
+      continuation (44,448 paths, 7,209 regular roots, and 4 more near the singular S = 5
+      grid recovered algebraically from a K = 4 lattice), and p was reconstructed from all
+      7,213. The source rates three steps rigorous: irreducibility (degree patterns modulo 12
+      primes near 2^61), the Krawczyk enclosure of the unique zero t* of the five
+      polynomials (radius 1e-50), and the link sigma = S(t*). It rates two Monte Carlo: the
+      identities F_k(tau) = 0 and Sn = x Sd in Q[x]/(p), modulo 50 random 62-bit primes, and
+      the full contact system's consistency at tau, modulo 21. It does not check the
+      packing's non-overlap at sigma, so it claims no bound. The release
+      exact-data-2026-10-12 (tag commit 31523f87316bdfda00f5459dd9077928e264f133) publishes
+      p in s29-minpoly.tar.zst (87,237,962 bytes, SHA-256
+      708e1b8b45894667f90a0d18b55bb35ed6079b84d33f9656976fd5cfa6f3729c), which this
+      certificate record pins by digest with every member's size and digest; its README,
+      SHA256SUMS and n29_krawczyk.json are retained beside it. Read here on 12 October 2026
+      from n29_poly_q4.json (SHA-256
+      0cba5ea250da54d67741803e86f1e46a2010f60fbf6b85be34fe69640e28ee5e): 7,214 integer
+      coefficients, so degree 7,213, a positive leading coefficient of 325 digits and a
+      height of 5,074 digits. The Krawczyk box gives S to radius 1.07e-48, so sigma =
+      5.93383346267692918968946061635201913843383418107... T-195's exact rational side, the
+      case's house, agrees with sigma to all 68 places N29.md prints and lies inside that
+      enclosure; which is larger is not decided here. Nothing else was run here: the
+      source's five-step replay is about 2.5 CPU-hours by its author's measure (think-6gti).
+      The author announced the result on X on 13 October 2026
+      (https://x.com/evanbd/status/2110154454817448106), retained in the exact-data
+      packet's receipts/announcement/. CREDITS.md says the work was produced by Claude
+      (Anthropic) under human direction.
+    source_reviewed: '2026-10-25'

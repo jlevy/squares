@@ -1603,6 +1603,17 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
         "test_trump_isolation_radius.py": {
             "test_gap_and_symmetry_certificates_hold",  # 2.5s
         },
+        # 86.6s of call time across 3 on 2026-10-25 (think-clgp, W8, after review A of
+        # #808), locally under `nice` on a shared four-core host: 1184's written-out
+        # certificate decided on both maintained exact routes with its six controls
+        # (9.14s), and every certificate of #799's version 1 (683, 7.79s) and version 2
+        # (2,824, 69.62s) written out again to the digests its receipt names. Every
+        # control, refusal and each deposit's sample digests stay on the pull-request
+        # surface.
+        "test_two_strip_checker.py": {
+            "test_a_sample_count_replays_as_its_receipt_states",
+            "test_every_written_out_certificate_has_the_digest_its_receipt_states",
+        },
         # Full run 38756833833, head 15548357, measured only these complete reads.
         # The plan's #593/#70a cases cost 23.91s/14.92s; its other parameters stay quick.
         # #593's full comparison cost 12.76s. Fresh local #593 plan CALL was 18.18s.

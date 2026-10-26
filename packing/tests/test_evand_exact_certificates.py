@@ -376,12 +376,13 @@ def test_each_ceiling_is_the_certified_side_rounded_up_at_the_printed_precision(
     """The verified value is at least the certificate's side, one unit of the printed last
     place above the printed side, and agrees with the report exactly where the catalogue
     prints no closed form."""
+    # The coverage register is read once: it is the same for every count.
+    later = superseded_counts(
+        safe_load(apply_exact_ceilings.COVERAGE.read_text()),
+        {apply_exact_ceilings.COVERAGE_ID},
+    )
     for n, row in apply_exact_ceilings.committed().items():
         case = certificates.case_record(n)
-        later = superseded_counts(
-            safe_load(apply_exact_ceilings.COVERAGE.read_text()),
-            {apply_exact_ceilings.COVERAGE_ID},
-        )
         if n in later:
             # The frozen certificate still proves its own upper bound. A later
             # packing may now own either lane; that never changes the audited side.

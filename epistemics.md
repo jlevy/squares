@@ -595,12 +595,13 @@ matters; the kind says what sort of claim it is.
 | rigidity | Says whether one named packing can move at fixed side: its flexes, its rigidity at first or second order, the isolation of its pose |
 | case exclusion | Shows that one named class of configurations, such as a branch, a corner class or a region of pose space, holds no packing at a stated side, and moves no bound by itself |
 | restricted optimality | Finds the best packing within a declared family, such as fixed orientation classes near one pose, and says nothing about $s(n)$ outside it |
+| exact side | States the exact algebraic value of the side of one stated configuration, such as the root of its minimal polynomial, with no bound and no optimality claimed |
 | method limit | Says how far one proof method or construction can reach: a ceiling on what a point set or a certificate format can certify |
 | correction | Shows that a published statement is false as printed, and gives the corrected statement that holds |
 | audit | Checks an existing proof or certificate independently and finds it correct as published |
 
 The register stores a kind in lowercase with hyphens, `lower-bound` or `case-exclusion`.
-A result has exactly one, chosen by five rules.
+A result has exactly one, chosen by six rules.
 
 - The kind is what the claim concludes.
   Where a claim ends in a bound or a value of $s(n)$, the kind is that bound, however it
@@ -620,6 +621,9 @@ A result has exactly one, chosen by five rules.
   more elementary route, either kind fits, and the owner chooses at registration.
   A proof-assistant proof of a value the record does not yet hold is no formalization:
   by the first rule it takes that value’s kind, optimality or a bound.
+- The exact value of one stated configuration’s side, where no one has decided the
+  packing at that side, is an exact side: it states no bound and no optimality.
+  Once the packing is decided there, the first rule makes the result an upper bound.
 
 The kind is declared, and the checker holds it to what the record already says.
 A headline that opens with a relation on $s(n)$ states its kind: `≥` or `>` is a lower
@@ -638,9 +642,9 @@ value. Evidence that the result it proves again cites is not its own, though a s
 proof may cite it for a half the two share: a proof assistant’s check of that result is
 no check of the second proof.
 A simplification may cite such evidence too, where the owner chose that kind for a proof
-that fits both. Uniqueness, rigidity, case exclusion and restricted optimality cite
-`derived-structure` evidence and state no relation on $s(n)$ in their headline.
-Method limit, correction and audit are told apart by review alone.
+that fits both. Uniqueness, rigidity, case exclusion, restricted optimality and exact
+side cite `derived-structure` evidence and state no relation on $s(n)$ in their
+headline. Method limit, correction and audit are told apart by review alone.
 
 A result’s standing, whether a case bound rests on it now, is about bounds.
 A result whose evidence claims no bound has no standing, and no later bound supersedes

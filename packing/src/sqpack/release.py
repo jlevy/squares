@@ -799,7 +799,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "db18b3bcb17d57f4a7b7769bc891eebdefda3092"
+DATA_REVISION = "97bbb5319b6c438848d627db7a8ae199a5530864"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -896,6 +896,29 @@ FIRST_PUBLISHED = PUBLICATION_HISTORY[-1].first_published
 #:                                            day is the one recorded
 #: The leading entry is proposed for the next publication; confirm its date at first deployment.
 EXPLAINER_HISTORY = (
+    PublicationHistoryEntry(
+        version="v0.4.30",
+        first_published="October 25, 2026",
+        result_scope=(
+            "Update the registered result count after the registrations of T-245 and T-246."
+        ),
+    ),
+    PublicationHistoryEntry(
+        version="v0.4.29",
+        first_published="October 25, 2026",
+        result_scope=(
+            "Update the registered result count after the registration of Hyukdong Kim's "
+            "exact sides at 172 and 263 (T-244)."
+        ),
+    ),
+    PublicationHistoryEntry(
+        version="v0.4.28",
+        first_published="October 25, 2026",
+        result_scope=(
+            "Update the registered result count after the registration of Evan Daniel's "
+            "#806 certificate at 182 (T-243)."
+        ),
+    ),
     PublicationHistoryEntry(
         version="v0.4.27",
         first_published="October 24, 2026",
@@ -1473,6 +1496,37 @@ class ReleaseImpactDecision(NamedTuple):
 # New component cuts append decisions here, newest first, alongside their own histories.
 # No impact is invented retrospectively for the published baseline editions.
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
+    ReleaseImpactDecision(
+        component="paper:n11-lower-bounds-explainer",
+        previous_version="v0.4.29",
+        version="v0.4.30",
+        impact="patch",
+        reason=(
+            "Update the registered result count after the registrations of Jatloe's "
+            "reported Lean proof that s(12) = 4 (T-245) and Evan Daniel's reported "
+            "minimal polynomial of the s(29) record side (T-246)."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="paper:n11-lower-bounds-explainer",
+        previous_version="v0.4.28",
+        version="v0.4.29",
+        impact="patch",
+        reason=(
+            "Update the registered result count after the registration of Hyukdong Kim's "
+            "exact sides at 172 and 263 (T-244)."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="paper:n11-lower-bounds-explainer",
+        previous_version="v0.4.27",
+        version="v0.4.28",
+        impact="patch",
+        reason=(
+            "Update the registered result count after the registration of Evan Daniel's "
+            "#806 certificate at 182 (T-243), adopted as the house best packing there."
+        ),
+    ),
     ReleaseImpactDecision(
         component="paper:n11-lower-bounds-explainer",
         previous_version="v0.4.26",
@@ -9061,6 +9115,259 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "after merging main 3699ce15e (#803), at link revision 4eaa86c6 with that main's "
             "result-requests.yaml swapped in: the same result. No register entry changes. "
             "Retain v0.2.7."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/frontier/README.md",
+        ),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "W8 of think-clgp: #799's requests entry with triage pending, and a sentence "
+            "beside D2's recipe rule in the frontier README naming the two-strip checker, "
+            "against main bb756e193 (#805). Rendered by render_packing_methods at link "
+            "revision 52c7b2ce into empty site directories, twice from this tree and once "
+            "with main's result-requests.yaml and frontier README swapped in, 43 files each, "
+            "all byte-identical across the three. Measured again after review A of #808 set "
+            "the entry's triage to done and reworded its summary, at link revision ff752564 "
+            "with the same two inputs of main swapped in: the same outcome. After the second "
+            "triage of #799 (think-z2mj) rebuilt the entry with version 2's results and "
+            "the preprint, at link revision 6bc19ea4 with the same two inputs of main "
+            "swapped in: the same outcome. No register entry changes. Retain v0.2.7."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/devtools/adopt_houses.py",
+            "packing/devtools/default_drawings.py",
+            "packing/devtools/upper_bound_houses.py",
+            "packing/devtools/upper_bound_reports.py",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The #806 import (think-2lzo, think-meci): T-243's registration of Evan "
+            "Daniel's certificate at 182, its coverage source, the importer's reader for "
+            "its packet and #806's requests entry; the 25 October review mapped, T-243 at "
+            "V3/C3; and its adoption at 182 in the pass of 25 October with its "
+            "regularization (upper_bound_houses, adopt_houses, SETTLED[182] removed from "
+            "default_drawings). Against main bb756e193 (#805): rendered at link revision "
+            "f8cca02c into empty site directories, twice from this tree and once from it "
+            "with main's result-requests.yaml, upper_bound_reports.py, results.yaml and "
+            "source-coverage.yaml swapped in, render_n11_optimality_review, "
+            "render_n11_threshold_bound_review and render_packing_methods write all 51 "
+            "files byte-identical across the three. After the review's mapping, the "
+            "adoption and the merge of main 886dddce6 (#808), at link revision a8184fe4 "
+            "with that main's seven candidate inputs swapped in, and after review A's "
+            "fixes (T-243's headline and notes), at link revision b909d2b5 with the same "
+            "seven inputs of main swapped in: the same outcome. The "
+            "explainer, counting 242 to 243 results, takes v0.4.28 over main's v0.4.27. No "
+            "PDF was printed for these three; each prints from that HTML. Retain v0.1.11, "
+            "v0.1.4 and v0.2.7."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/contributors/people/hyukdong-kim.md",
+            "packing/devtools/render_n11_lower_bounds_explainer_pdf.py",
+            "packing/devtools/site_resources.py",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The import of #804 (think-9vai): T-244 at 172 and 263, its coverage entry, "
+            "#804's requests entry and Hyukdong Kim's profile, against main bb756e193 "
+            "(#805). Rendered at link revision 7af71882 into empty site directories, twice "
+            "from this tree and once with main's results.yaml, result-requests.yaml and "
+            "source-coverage.yaml swapped in and the new profile set aside, 69 files each, "
+            "by render_n11_lower_bounds_explainer with its Chromium math pass, "
+            "render_n11_optimality_review, render_n11_threshold_bound_review and "
+            "render_packing_methods: these three papers' files are byte-identical across "
+            "the three renders. Only the explainer differs, in its count of registered "
+            "results. Measured again after merging main 886dddce6 (#808), with issue 804's "
+            "card in site_resources, T-244's headline by surname and #799's "
+            "acknowledgement recorded, at link revision 5e08f28c, with that main's four "
+            "inputs swapped in, and after merging main 46e355582 (#814, T-243), at link "
+            "revision dd5fc01d with that main's four inputs swapped in, and after #806's "
+            "final comment, #814's News and the explainer PDF's page count of 25, at link "
+            "revision 1b75d2f7 with that main's four inputs and "
+            "render_n11_lower_bounds_explainer_pdf.py swapped in, and after review A's "
+            "fixes, at link revision 6997281d, and review B's, at d5dcd2d0, each with the "
+            "same five inputs of main swapped in: the same outcome each time, the "
+            "explainer counting 244 results against main's 243, which its v0.4.29 "
+            "carries. Retain v0.1.11, v0.1.4 and v0.2.7."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/contributors/people/ctjlewis.md",
+            "packing/contributors/people/evan-daniel.md",
+            "packing/contributors/people/jatloe.md",
+            "packing/contributors/people/manasseh-ahmed.md",
+            "packing/devtools/check_results.py",
+            "packing/devtools/site_resources.py",
+            "packing/frontier/n-029.md",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The think-4l14 import of #810: T-245's registration of Jatloe's Lean proof "
+            "that s(12) = 4 as reported, its coverage source, #810's requests entry, "
+            "Jatloe's new profile and the n12 sources on Lewis's and Ahmed's, against main "
+            "bb756e193 (#805): rendered at link revision bb756e19 into empty site "
+            "directories, twice from this tree at 015f1a19 and once from it with main's "
+            "result-requests.yaml, ctjlewis.md, manasseh-ahmed.md, results.yaml and "
+            "source-coverage.yaml swapped in and jatloe.md removed, "
+            "render_n11_optimality_review, render_n11_threshold_bound_review and "
+            "render_packing_methods write all 51 files byte-identical across the three. "
+            "The explainer, counting 242 to 243 results, takes v0.4.28 over main's "
+            "v0.4.27. No PDF was printed for these three; each prints from that HTML. "
+            "Measured again after the merge of main 886dddce6 (#808), at link revision "
+            "1307c2c8 with that main's five candidate inputs swapped in and jatloe.md "
+            "removed: twice from this tree and once swapped, 51 files each, all "
+            "byte-identical across the three. Measured a third time after the merge of "
+            "T-246's registration of Daniel's s(29) minimal polynomial as the new kind exact "
+            "side (results.yaml, check_results.py, evan-daniel.md, n-029.md, "
+            "result-requests.yaml and source-coverage.yaml) and the overview's card for "
+            "Jatloe12SquaresFormalized (site_resources.py), at link revision 9b8b004c "
+            "against main 886dddce6, with that main's nine candidate inputs swapped in and "
+            "jatloe.md removed: twice from this tree and once swapped, 51 files each, all "
+            "byte-identical across the three. The explainer's v0.4.28 counts 244 results. "
+            "Measured a fourth time after T-245's citation of its statement audit "
+            "(results.yaml), at link revision bfacba5a against the same main, swapped the "
+            "same way: 51 files each, all byte-identical across the three. "
+            "Main 46e355582 (#814) then registered T-243 at 182 and took the explainer's "
+            "v0.4.28, and #813 holds T-244, so the merge of that main renumbered this "
+            "branch's two results, registered here as T-243 and T-244 until then, T-245 "
+            "and T-246, and the explainer, counting 243 to 245 results, takes v0.4.29 over "
+            "main's v0.4.28. Measured a fifth time after that merge, at link revision "
+            "ab33e3bd against main 46e355582, with that main's result-requests.yaml, "
+            "ctjlewis.md, evan-daniel.md, manasseh-ahmed.md, check_results.py, "
+            "site_resources.py, n-029.md, results.yaml and source-coverage.yaml swapped in "
+            "and jatloe.md removed: twice from this tree and once swapped, 51 files each, "
+            "all byte-identical across the three. "
+            "Measured a sixth time after the explainer's page count moved to 25 "
+            "(render_n11_lower_bounds_explainer_pdf.py), at link revision bbc8c864: "
+            "twice from this tree and once with main's copy of that module swapped in, "
+            "51 files each, all byte-identical across the three. "
+            "Main 01e2b5295 (#813) then registered T-244 at 172 and 263 and took the "
+            "explainer's v0.4.29 and its page count of 25, so after the merge of that main "
+            "the explainer, counting 244 to 246 results, takes v0.4.30 over main's v0.4.29, "
+            "and the page-count module, main's own again, is no longer a candidate input. "
+            "Measured a seventh time after that merge, at link revision 8a36268c against "
+            "main 01e2b5295, with that main's result-requests.yaml, ctjlewis.md, "
+            "evan-daniel.md, manasseh-ahmed.md, check_results.py, site_resources.py, "
+            "n-029.md, results.yaml and source-coverage.yaml swapped in and jatloe.md "
+            "removed: twice from this tree and once swapped, 51 files each, all "
+            "byte-identical across the three. "
+            "Measured an eighth time after the Resources page's Jatloe12SquaresFormalized "
+            "card was shortened to keep its section medium (site_resources.py), at link "
+            "revision d0d72d41, swapped the same way: 51 files each, all byte-identical "
+            "across the three, and identical to the seventh measurement's but for the link "
+            "revision. "
+            "Retain v0.1.11, v0.1.4 and v0.2.7."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=("packing/campaign/result-requests.yaml",),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The stage 7 replies of 25 October to #810, #545 and #811 recorded under each "
+            "issue's replies, naming T-245 and T-246 at V0/C0 and their evidence, against "
+            "main 272b411b4 (#812). Rendered by render_packing_methods at link revision "
+            "49b0b78e into empty site directories, twice from this tree and once with "
+            "main's result-requests.yaml swapped in, 43 files each, all byte-identical "
+            "across the three. No register entry changes. Retain v0.2.7."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/devtools/validate_schemas.py",
+            "packing/frontier/README.md",
+            "packing/src/sqpack/cli/validate.py",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The exact-side register (think-vgsw, #811): the register joins the schema "
+            "corpus (validate_schemas.py), its check joins the records tier (validate.py), "
+            "and the frontier README gains a section on it, against main 272b411b4 (#812). "
+            "Rendered at link revision 57f70c3e into empty site directories, twice from "
+            "this tree and once with main's validate_schemas.py, validate.py and frontier "
+            "README.md swapped in: render_n11_optimality_review, "
+            "render_n11_threshold_bound_review, render_packing_methods and "
+            "render_n11_lower_bounds_explainer, with its pinned Chromium math pass, write "
+            "all 69 files byte-identical across the three. Measured again after merging "
+            "main 0785626cc (#815), at link revision a2a5748e: twice from this tree and "
+            "once with that main's three files swapped in, all 69 files byte-identical "
+            "across the three, and identical to the first measurement apart from the link "
+            "revision in source links. No PDF was printed; each prints from that HTML. "
+            "Retain v0.4.30, v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
     ReleaseNoPublicChange(

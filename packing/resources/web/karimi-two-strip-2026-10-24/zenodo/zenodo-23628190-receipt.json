@@ -1,0 +1,15 @@
+{
+  "format": "zenodo-capture-v1",
+  "record": 23628190,
+  "doi": "10.5281/zenodo.23628190",
+  "conceptdoi": "10.5281/zenodo.23624432",
+  "title": "Two-strip square packings: improved upper bounds for s(n), n = 1184–9944",
+  "version": null,
+  "publication_date": "2026-10-24",
+  "created": "2026-10-24T22:32:58.970634+00:00",
+  "updated": "2026-10-24T22:32:59.253325+00:00",
+  "api": "https://zenodo.org/api/records/23628190",
+  "retrieved_utc": "2026-10-25T04:31:17Z",
+  "files": [{"key":"karimi_two_strip_records_v2_lite-1.zip","bytes":36756,"checksum_stated":"md5:cba95c0c8a7cdb98719c88dbff63389b","md5":"cba95c0c8a7cdb98719c88dbff63389b","sha256":"1b072b5398fc1add55a07fba8292b7aa9a053e8b083dd4485e2cb78bfff53108","top_directory":null,"members":3,"member_bytes":218580,"member_manifest":"zenodo-23628190.sha256"}],
+  "extracted": [{"member":"README.md","path":"zenodo-23628190/README.md","bytes":2897,"sha256":"2641cdbf2dde604e85323621a1dd0f0295cc1b7c6ae18ff508bba977498e0b1a"},{"member":"records.csv","path":"zenodo-23628190/records.csv","bytes":212304,"sha256":"cc9480c56099296d3c128f64831f2f6da3d1fb0db8d2f0ba77ac7dbae8075cfd"}]
+}

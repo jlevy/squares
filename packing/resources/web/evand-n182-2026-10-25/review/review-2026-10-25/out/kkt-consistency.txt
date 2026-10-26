@@ -1,0 +1,4 @@
+1. certificate vs point dilated by 1 + 1e-20: max |dx| 4.9702e-36, max |dy| 4.9251e-36, max angle diff 4.8508e-34 deg
+2. S_cert - S* = 1.39709164363e-19; S_cert - S*(1 + 1e-20) = 6.36451260412e-31
+3. point at S*: least wall gap -3.7135e-71, least pair gap -3.5457e-69; active (|gap| < 1e-60): 45 walls + 390 pairs = 435; least inactive gaps: wall 3.4489447e-6, pair 1.1303812e-5
+4. squares whose point centre is the input's text: [121, 135, 142, 155, 163, 180]; short lines: [121, 135, 142, 155, 163, 180]; touching nothing: [121, 135, 142, 155, 163, 180]

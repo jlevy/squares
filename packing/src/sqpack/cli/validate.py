@@ -115,9 +115,12 @@ FRONTIER_COUNTS: dict[str, tuple[int, int, int]] = {
     # 2026-10-12: Overbeck's candidate equality s(17) = L (T-153) made n = 17
     # reported-proved, as T-060's report did n = 11 on 2026-09-29, and left its verified
     # lane open, so only the reported-open count falls, by one in every corpus.
-    "n=1..100": (55, 53, 0),
-    "n=1..200": (139, 133, 0),
-    "n=1..324": (247, 237, 0),
+    # 2026-10-25: Jatloe's reported Lean proof that s(12) = 4 (T-245) made n = 12
+    # reported-proved in the same way, its verified lane open, so the reported-open count
+    # falls by one again in every corpus.
+    "n=1..100": (55, 52, 0),
+    "n=1..200": (139, 132, 0),
+    "n=1..324": (247, 236, 0),
 }
 #: n = 68, 103, 105, 110 and 131 left the exclusions on 2026-09-29, when their records
 #: moved from UnitSquare renderings to Francisco Couzo's packings (T-056), and n = 69, the
@@ -191,8 +194,8 @@ SCREEN_EXCLUDED: dict[str, tuple[str, ...]] = {
 #: 37.
 SCREEN_FINDINGS: dict[str, tuple[int, int, int, int]] = {
     "n=1..100": (28, 111, 86, 577),
-    "n=1..200": (67, 397, 182, 2012),
-    "n=1..324": (124, 1321, 302, 5322),
+    "n=1..200": (67, 402, 182, 2046),
+    "n=1..324": (124, 1326, 302, 5356),
 }
 UNDETERMINED_BY_MISS = (28,)
 #: The cases the two sampled sweeps re-derive on every pull request, computed here from
@@ -4004,6 +4007,19 @@ def _flip_regularization(context: Context) -> str:
     return output
 
 
+def _exact_side_register(context: Context) -> str:
+    # About 1.5 s of wall, serial (2026-10-25, 24 entries on a four-core host): the case
+    # records, the results register, T-193's and T-244's ledgers and the packets of T-244,
+    # T-246 and n = 83 read again, every inline polynomial decided again (irreducible by
+    # SymPy's factorization over Z, its root isolated by Descartes' rule of signs, degree 2
+    # to 41 in a quarter of a second), and the register compared entry by entry. Records
+    # tier because it holds a generated view to its inputs: a house that moves fails it
+    # until the change that moves it runs `--update` (think-vgsw).
+    output = _module(context, "devtools.exact_side_register", "--check")
+    _require_text(output, "exact-side register check passed")
+    return output
+
+
 def _vendored_evand(context: Context) -> str:
     # About 0.2s: `vendor/evand-regularize`, Evan Daniel's regularizer copied at a pin, is
     # held to its manifest -- each file's size, SHA-256 and mode at the upstream commit,
@@ -5886,6 +5902,31 @@ STEPS: tuple[Step, ...] = (
             "packing/atlas/known-best/rendering/*",
             "packing/atlas/known-best/regularized/*",
             "packing/devtools/flip_regularization.py",
+            *_RENDERER_HUB,
+        ),
+    ),
+    Step(
+        "exact-side register is current",
+        _exact_side_register,
+        fast=True,
+        records=True,
+        # The register's inputs: every case record and the results register, the two
+        # intake ledgers, the packets of T-244, T-246 and n = 83, and the Kingbird
+        # receipts that pin and measure n = 83's picture. It reads `PENDING_ADOPTION`
+        # through `select_houses`, whose import closure enters the renderer family through
+        # `check_results`, so it claims that family whole, as the step above does.
+        touches=(
+            *_CORE,
+            "packing/frontier/exact-side-register.json",
+            "packing/frontier/exact-side-register.schema.yaml",
+            "packing/frontier/n-*.md",
+            "packing/frontier/results.yaml",
+            "packing/campaign/issue-intake/upper-bounds-20261016/exact-sides.json",
+            "packing/campaign/issue-intake/upper-bounds-issue804-20261025/exact-sides.json",
+            "packing/resources/web/hyukdongkim-exact-forms-2026-10-25/facts/exact-forms.json",
+            "packing/resources/web/evand-exact-data-2026-10-12/acquisition/release.json",
+            "packing/resources/web/evand-exact-data-2026-10-12/acquisition/release/s29/*",
+            "packing/resources/web/known-best-packings/receipts/*",
             *_RENDERER_HUB,
         ),
     ),

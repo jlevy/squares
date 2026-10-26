@@ -1,0 +1,53 @@
+C972: WHAT THE LOCAL SE/WALL DATA CAN AND CANNOT FORCE
+
+This is a hand-derived exact local diagnostic, not a counterexample to C972
+or a Lean acceptance receipt. The omitted full NW/NE/SW squares remain essential.
+
+Use common coordinates(x,y)=(X-2,Y-2). Let a=1001/1000 and take S with
+  c=12/13, s=5/13, loU=-2/25, loV=-41/50,
+  loU<c*x+s*y<loU+a, loV<-s*x+c*y<loV+a.
+Its normal is exactly unit. S strictly owns the genuine displayed points
+  marker(.35,-.35), G6(.26,0), east(.5,0), F8(1,-.26), G8(1,-.4).
+It omits the two genuine SW points(0,-.26),(0,-.5), the right origin(1,0),
+right marker(1.086,0), paired SE corner(1,-1), its marker(1.086,-1), and
+all three other central markers. The desired SE halfpoint(1,-.5) is absent:
+its V value is-11/13, below loV=-41/50.
+
+These data also retain complete actual boundary squares of the same side:
+  B: 1.998<X<2.999, 0<Y<1.001;
+  R: 2.999<X<4, 1.999<Y<3.
+B owns its true marker(2,.914), F6/G5 and the entire bar[2.26,2.8]x{1}.
+R owns its true marker(3.086,2), origin(3,2), F9/G9 and reach(3,2.56).
+All S vertices lie in[0,4]^2. S is strictly above B by2747/13000 in Y.
+S is strictly before R along its U normal by1/1300. The whole B bar is
+below S's lower V face. B and R are disjoint. Thus this full three-square
+relaxation does not imply the SE halfpoint, even retaining exact central
+marker omissions and both actual wall geometries. No claim about the other
+nine squares is made. Exact rational checks of these displayed values are
+recorded in evidence/c972-local-halfpoint-boundary-2026-10-15.json; no parameter
+search, certificate generation or compiler was used.
+
+There is a short true negative-SE implication
+
+For a canonical nonpositive SE frame(c,-t), retain only side a>1, G6,F8,G8
+and the three actual omissions: right origin, SW F4, SW lower halfpoint.
+Suppose its SE halfpoint were absent. The right origin can exit only the
+upper V face, giving upperV<=t. The missing desired point can exit only
+the upper U face, giving upperU<=c+t/2.
+
+The SW lower halfpoint has both upper faces inside. Its lower U exit would
+give a<=c<=1; hence lowerV>=-c/2. The SW F4 likewise has both upper faces
+inside. Its lower V exit would give a<=t+.26c<=.9, using canonical normal
+sum c+t<=10/7 and t<=c. Hence lowerU>=.26t.
+
+Consequently a<=t+c/2 and a<=c+.24t. Weighted38 and25, these give
+  63a <=44(c+t) <=440/7 <63,
+contradicting a>1. Zero and diagonal endpoints are retained. This compact
+ordinary Lean source is C972SoutheastNegativeHalfpoint.negative_point and
+negative_point_original, under N12Compact.FiniteCases.C972Local. It was
+independently source-reviewed but not compiled.
+
+The actual C972 no-halfpoint branch therefore has strictly positive SE
+canonical sine, through C972SoutheastPositive. Its further conclusion must
+retain the genuine upper-central and southwest squares; the local positive
+SE shortcut above is false.

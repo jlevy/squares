@@ -1,0 +1,73 @@
+Identity: the certificate against packings at 182 (optimal assignment over the 8 symmetries)
+  input        side=13.970916436217552 corner g=0 >0.1:  0 >1e-3:  0 >1e-9: 49 max=2.5472e-07 tilt-max=2.918e-05 deg nearest-1:1=True | centred g=0 >0.1:  0 >1e-3:  0 max=2.5472e-07
+  kkt          side=13.970916436214679 corner g=0 >0.1:  0 >1e-3:  0 >1e-9:  0 max=0.0000e+00 tilt-max=1.421e-14 deg nearest-1:1=True | centred g=0 >0.1:  0 >1e-3:  0 max=4.4409e-16
+  regularized  side=13.970916436214679 corner g=0 >0.1:  5 >1e-3: 37 >1e-9: 49 max=3.8069e-01 tilt-max=3.643e-01 deg nearest-1:1=True | centred g=0 >0.1:  5 >1e-3: 37 max=3.8069e-01
+  t174         side=13.974090713121440 corner g=0 >0.1: 44 >1e-3:166 >1e-9:167 max=8.1274e-01 tilt-max=4.172e+01 deg nearest-1:1=False | centred g=0 >0.1: 44 >1e-3:182 max=8.1440e-01
+  house        side=13.974090713121440 corner g=0 >0.1: 44 >1e-3:166 >1e-9:167 max=8.1274e-01 tilt-max=4.172e+01 deg nearest-1:1=False | centred g=0 >0.1: 44 >1e-3:182 max=8.1440e-01
+  t098         side=13.974090713121440 corner g=0 >0.1: 44 >1e-3:166 >1e-9:168 max=8.1274e-01 tilt-max=4.172e+01 deg nearest-1:1=False | centred g=0 >0.1: 44 >1e-3:182 max=8.1440e-01
+  t056         side=13.974090713124822 corner g=0 >0.1: 44 >1e-3:166 >1e-9:168 max=8.1274e-01 tilt-max=4.172e+01 deg nearest-1:1=False | centred g=0 >0.1: 44 >1e-3:182 max=8.1440e-01
+L-cut: the certificate inside 211 packings with an L of 29 cut away
+  t188 side=14.993549626299: symmetry 0, anchored lower-left (cut at the opposite corner); runners-up [{'symmetry': 0, 'anchor': 'lower-right', 'total': 22.8763, 'within_1e-3': 1, 'within_0.1': 134}, {'symmetry': 0, 'anchor': 'upper-left', 'total': 23.3375, 'within_1e-3': 3, 'within_0.1': 122}, {'symmetry': 4, 'anchor': 'lower-right', 'total': 29.35, 'within_1e-3': 1, 'within_0.1': 103}]
+    moved >0.1: 17, >1e-2: 156, >1e-3: 173, >1e-9: 175; largest 0.4644 (182 square 160 to 211 square 108)
+    coincidences, all squares: {'within_1e-09': 7, 'within_1e-06': 7, 'within_0.0001': 7, 'within_0.001': 9, 'within_0.01': 26, 'within_0.1': 165}
+    coincidences, the 68 tilted squares: {'within_1e-09': 0, 'within_1e-06': 0, 'within_0.0001': 0, 'within_0.001': 0, 'within_0.01': 11, 'within_0.1': 59}
+    211 squares near the two cut walls, and how many the assignment leaves out: {'w=1.0': {'near_cut_walls': 27, 'of_which_removed': 27}, 'w=1.5': {'near_cut_walls': 29, 'of_which_removed': 29}, 'w=2.0': {'near_cut_walls': 53, 'of_which_removed': 29}}
+    left out, centre 1.5 or more from the cut walls: []
+    move map of the 182 packing (top row first; '.' < 1e-3, 'o' < 0.1, 'X' beyond; ':', '%', '#' two centres):
+      |oX Xoooooooooo|
+      |XXXXoooooooooo|
+      |o Xooooooooooo|
+      |ooo oooooooooo|
+      | ooooooooooooo|
+      |oooooooooooooo|
+      |oo ooooooooooo|
+      |oXoooooooooooo|
+      |oooo ooooooooo|
+      |o oooooo ooXXo|
+      |oX. ooooooo XX|
+      |oooXo ooooooX |
+      |o....oooo oooX|
+      |oo....oooooo X|
+  t175 side=14.993694186583: symmetry 0, anchored lower-left (cut at the opposite corner); runners-up [{'symmetry': 0, 'anchor': 'lower-right', 'total': 22.2659, 'within_1e-3': 1, 'within_0.1': 134}, {'symmetry': 0, 'anchor': 'upper-left', 'total': 22.9707, 'within_1e-3': 3, 'within_0.1': 123}, {'symmetry': 4, 'anchor': 'lower-right', 'total': 28.7041, 'within_1e-3': 1, 'within_0.1': 105}]
+    moved >0.1: 17, >1e-2: 150, >1e-3: 166, >1e-9: 167; largest 0.4638 (182 square 160 to 211 square 85)
+    coincidences, all squares: {'within_1e-09': 15, 'within_1e-06': 15, 'within_0.0001': 16, 'within_0.001': 16, 'within_0.01': 32, 'within_0.1': 165}
+    coincidences, the 68 tilted squares: {'within_1e-09': 0, 'within_1e-06': 0, 'within_0.0001': 0, 'within_0.001': 0, 'within_0.01': 14, 'within_0.1': 60}
+    211 squares near the two cut walls, and how many the assignment leaves out: {'w=1.0': {'near_cut_walls': 27, 'of_which_removed': 27}, 'w=1.5': {'near_cut_walls': 29, 'of_which_removed': 29}, 'w=2.0': {'near_cut_walls': 54, 'of_which_removed': 29}}
+    left out, centre 1.5 or more from the cut walls: []
+  t182 side=14.993558913974: symmetry 1, anchored lower-left (cut at the opposite corner); runners-up [{'symmetry': 1, 'anchor': 'lower-right', 'total': 22.1883, 'within_1e-3': 1, 'within_0.1': 135}, {'symmetry': 1, 'anchor': 'upper-left', 'total': 23.0758, 'within_1e-3': 3, 'within_0.1': 122}, {'symmetry': 6, 'anchor': 'lower-right', 'total': 28.9129, 'within_1e-3': 1, 'within_0.1': 105}]
+    moved >0.1: 18, >1e-2: 156, >1e-3: 173, >1e-9: 174; largest 0.4641 (182 square 160 to 211 square 85)
+    coincidences, all squares: {'within_1e-09': 8, 'within_1e-06': 8, 'within_0.0001': 8, 'within_0.001': 9, 'within_0.01': 26, 'within_0.1': 164}
+    coincidences, the 68 tilted squares: {'within_1e-09': 0, 'within_1e-06': 0, 'within_0.0001': 0, 'within_0.001': 0, 'within_0.01': 11, 'within_0.1': 59}
+    211 squares near the two cut walls, and how many the assignment leaves out: {'w=1.0': {'near_cut_walls': 27, 'of_which_removed': 27}, 'w=1.5': {'near_cut_walls': 29, 'of_which_removed': 29}, 'w=2.0': {'near_cut_walls': 53, 'of_which_removed': 29}}
+    left out, centre 1.5 or more from the cut walls: []
+  t181 side=14.993558914123: symmetry 1, anchored lower-left (cut at the opposite corner); runners-up [{'symmetry': 1, 'anchor': 'lower-right', 'total': 22.1883, 'within_1e-3': 1, 'within_0.1': 135}, {'symmetry': 1, 'anchor': 'upper-left', 'total': 23.0758, 'within_1e-3': 3, 'within_0.1': 122}, {'symmetry': 6, 'anchor': 'lower-right', 'total': 28.9129, 'within_1e-3': 1, 'within_0.1': 105}]
+    moved >0.1: 18, >1e-2: 156, >1e-3: 173, >1e-9: 174; largest 0.4641 (182 square 160 to 211 square 85)
+    coincidences, all squares: {'within_1e-09': 8, 'within_1e-06': 8, 'within_0.0001': 8, 'within_0.001': 9, 'within_0.01': 26, 'within_0.1': 164}
+    coincidences, the 68 tilted squares: {'within_1e-09': 0, 'within_1e-06': 0, 'within_0.0001': 0, 'within_0.001': 0, 'within_0.01': 11, 'within_0.1': 59}
+    211 squares near the two cut walls, and how many the assignment leaves out: {'w=1.0': {'near_cut_walls': 27, 'of_which_removed': 27}, 'w=1.5': {'near_cut_walls': 29, 'of_which_removed': 29}, 'w=2.0': {'near_cut_walls': 53, 'of_which_removed': 29}}
+    left out, centre 1.5 or more from the cut walls: []
+The 211 packings of one design against T-188, and what the 182 follows where they differ
+  T-188 against t175: symmetry 0, moved >0.1: 5, >1e-3: 99, largest 0.4454; T-188 squares beyond 0.1: [9, 10, 12, 14, 141]
+    {'t188_square': 9, 't175_square': 200, 't188_pose': [1.5, 2.651165, 0.0], 't175_pose': [1.5, 2.5, 0.0], '182_square': 9, '182_pose': [1.5, 2.67468, 0.0], 'distance_to_t188': 0.023515, 'distance_to_t175': 0.17468, 'tilt_change_to_t188_deg': 0.0, 'tilt_change_to_t175_deg': 0.0}
+    {'t188_square': 10, 't175_square': 203, 't188_pose': [1.5, 3.655827, 0.0], 't175_pose': [1.5, 3.5001, 0.0], '182_square': 10, '182_pose': [1.5, 3.763392, 0.0], 'distance_to_t188': 0.107565, 'distance_to_t175': 0.263292, 'tilt_change_to_t188_deg': 0.0, 'tilt_change_to_t175_deg': 0.0}
+    {'t188_square': 12, 't175_square': 209, 't188_pose': [1.996263, 6.036666, 66.013453], 't175_pose': [1.659972, 6.186909, 66.0383], '182_square': 12, '182_pose': [1.70533, 6.138701, 66.595086], 'distance_to_t188': 0.308306, 'distance_to_t175': 0.066193, 'tilt_change_to_t188_deg': 0.5816, 'tilt_change_to_t175_deg': 0.5568}
+    {'t188_square': 14, 't175_square': 40, 't188_pose': [14.224338, 0.5, 0.0], 't175_pose': [14.493594, 0.5, 0.0], '182_square': None}
+    {'t188_square': 141, 't175_square': 208, 't188_pose': [2.9768, 5.591105, 66.013453], 't175_pose': [2.573789, 5.780783, 66.0383], '182_square': 120, '182_pose': [2.967527, 5.578946, 66.595086], 'distance_to_t188': 0.015292, 'distance_to_t175': 0.442457, 'tilt_change_to_t188_deg': 0.5816, 'tilt_change_to_t175_deg': 0.5568}
+    182 squares within 1e-9 of t175 and not of T-188: 8 0@(0.500,0.500,0.00deg; T-188 1.8e-03), 1@(0.500,1.500,0.00deg; T-188 6.0e-03), 2@(0.500,2.500,0.00deg; T-188 9.8e-03), 3@(0.500,3.500,0.00deg; T-188 1.3e-02), 4@(0.500,4.500,0.00deg; T-188 1.7e-02), 6@(0.500,6.500,0.00deg; T-188 2.3e-02), 144@(4.500,1.500,0.00deg; T-188 4.8e-04), 169@(6.500,0.500,0.00deg; T-188 1.4e-03)
+    182 squares within 1e-9 of T-188 and not of t175: 0 
+  T-188 against t182: symmetry 1, moved >0.1: 5, >1e-3: 72, largest 0.3535; T-188 squares beyond 0.1: [9, 10, 12, 14, 141]
+    {'t188_square': 9, 't182_square': 200, 't188_pose': [1.5, 2.651165, 0.0], 't182_pose': [1.5, 2.507464, 0.0], '182_square': 9, '182_pose': [1.5, 2.67468, 0.0], 'distance_to_t188': 0.023515, 'distance_to_t182': 0.167216, 'tilt_change_to_t188_deg': 0.0, 'tilt_change_to_t182_deg': 0.0}
+    {'t188_square': 10, 't182_square': 203, 't188_pose': [1.5, 3.655827, 0.0], 't182_pose': [1.5, 3.510736, 0.0], '182_square': 10, '182_pose': [1.5, 3.763392, 0.0], 'distance_to_t188': 0.107565, 'distance_to_t182': 0.252656, 'tilt_change_to_t188_deg': 0.0, 'tilt_change_to_t182_deg': 0.0}
+    {'t188_square': 12, 't182_square': 209, 't188_pose': [1.996263, 6.036666, 66.013453], 't182_pose': [1.738785, 6.149408, 66.230337], '182_square': 12, '182_pose': [1.70533, 6.138701, 66.595086], 'distance_to_t188': 0.308306, 'distance_to_t182': 0.035126, 'tilt_change_to_t188_deg': 0.5816, 'tilt_change_to_t182_deg': 0.3647}
+    {'t188_square': 14, 't182_square': 40, 't188_pose': [14.224338, 0.5, 0.0], 't182_pose': [14.089526, 0.5, 0.0], '182_square': None}
+    {'t188_square': 141, 't182_square': 208, 't188_pose': [2.9768, 5.591105, 66.013453], 't182_pose': [2.658333, 5.74442, 66.230337], '182_square': 120, '182_pose': [2.967527, 5.578946, 66.595086], 'distance_to_t188': 0.015292, 'distance_to_t182': 0.350688, 'tilt_change_to_t188_deg': 0.5816, 'tilt_change_to_t182_deg': 0.3647}
+    182 squares within 1e-9 of t182 and not of T-188: 1 144@(4.500,1.500,0.00deg; T-188 4.8e-04)
+    182 squares within 1e-9 of T-188 and not of t182: 0 
+  T-188 against t181: symmetry 1, moved >0.1: 5, >1e-3: 72, largest 0.3535; T-188 squares beyond 0.1: [9, 10, 12, 14, 141]
+    {'t188_square': 9, 't181_square': 200, 't188_pose': [1.5, 2.651165, 0.0], 't181_pose': [1.5, 2.507464, 0.0], '182_square': 9, '182_pose': [1.5, 2.67468, 0.0], 'distance_to_t188': 0.023515, 'distance_to_t181': 0.167216, 'tilt_change_to_t188_deg': 0.0, 'tilt_change_to_t181_deg': 0.0}
+    {'t188_square': 10, 't181_square': 203, 't188_pose': [1.5, 3.655827, 0.0], 't181_pose': [1.5, 3.510736, 0.0], '182_square': 10, '182_pose': [1.5, 3.763392, 0.0], 'distance_to_t188': 0.107565, 'distance_to_t181': 0.252656, 'tilt_change_to_t188_deg': 0.0, 'tilt_change_to_t181_deg': 0.0}
+    {'t188_square': 12, 't181_square': 209, 't188_pose': [1.996263, 6.036666, 66.013453], 't181_pose': [1.738785, 6.149408, 66.230337], '182_square': 12, '182_pose': [1.70533, 6.138701, 66.595086], 'distance_to_t188': 0.308306, 'distance_to_t181': 0.035126, 'tilt_change_to_t188_deg': 0.5816, 'tilt_change_to_t181_deg': 0.3647}
+    {'t188_square': 14, 't181_square': 40, 't188_pose': [14.224338, 0.5, 0.0], 't181_pose': [14.089526, 0.5, 0.0], '182_square': None}
+    {'t188_square': 141, 't181_square': 208, 't188_pose': [2.9768, 5.591105, 66.013453], 't181_pose': [2.658333, 5.74442, 66.230337], '182_square': 120, '182_pose': [2.967527, 5.578946, 66.595086], 'distance_to_t188': 0.015292, 'distance_to_t181': 0.350688, 'tilt_change_to_t188_deg': 0.5816, 'tilt_change_to_t181_deg': 0.3647}
+    182 squares within 1e-9 of t181 and not of T-188: 1 144@(4.500,1.500,0.00deg; T-188 4.8e-04)
+    182 squares within 1e-9 of T-188 and not of t181: 0 

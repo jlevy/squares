@@ -914,6 +914,10 @@ def test_not_a_bound_is_not_a_kind(
         ("T-112", "optimality", "an optimality result states an exact value, s(n) = v"),
         ("T-004", "uniqueness", "a uniqueness is no bound on s(n), but its headline states"),
         ("T-003", "case-exclusion", "and no cited evidence claims `derived-structure`"),
+        # An exact side's evidence claims no bound, so it is no upper bound.
+        ("T-246", "upper-bound", "and no cited evidence claims `upper-bound` or `exact-value`"),
+        ("T-009", "exact-side", "exact side, but its headline opens with an upper bound"),
+        ("T-004", "exact-side", "an exact side is no bound on s(n), but its headline states"),
         # A simplification names the result it proves again, on a case they share.
         ("T-001", "simplification", "a simplification's claim names the registered result"),
         # So does a formalization, and it cites evidence a proof assistant checked.
@@ -991,6 +995,30 @@ def test_optimality_needs_both_halves_or_an_exact_value() -> None:
             "T-999: kind is optimality, and no cited evidence claims `exact-value`, or both "
             "`lower-bound` and `upper-bound`"
         )
+    ]
+
+
+def test_an_exact_side_states_no_bound_and_cites_derived_structure() -> None:
+    """An exact side gives the exact value of one configuration's side and claims no
+    bound (T-246): its evidence is `derived-structure`, as a polynomial identity's is
+    (E-n017-catalogue-polynomial-identity), and its headline writes no relation."""
+    record = {
+        "id": "T-999",
+        "kind": "exact-side",
+        "headline": "Reported degree-7213 minimal polynomial of the `s(29)` record side",
+        "claim": "The side of the record configuration is a root of an irreducible p.",
+    }
+    scopes = {"T-999": {29}}
+    structure, upper = ({"claim": c} for c in ("derived-structure", "upper-bound"))
+    assert "exact-side" in check_results.STRUCTURE_KINDS
+    assert "exact-side" not in check_results.BOUND_KINDS
+    assert check_results.kind_problems(record, [structure], scopes) == []
+    assert check_results.kind_problems(record, [upper], scopes) == [
+        "T-999: kind is exact side, and no cited evidence claims `derived-structure`"
+    ]
+    bound = {**record, "headline": "The record side, so `s(29) ≤ 5.9338…`"}
+    assert check_results.kind_problems(bound, [structure], scopes) == [
+        "T-999: an exact side is no bound on s(n), but its headline states s(n) ≤"
     ]
 
 

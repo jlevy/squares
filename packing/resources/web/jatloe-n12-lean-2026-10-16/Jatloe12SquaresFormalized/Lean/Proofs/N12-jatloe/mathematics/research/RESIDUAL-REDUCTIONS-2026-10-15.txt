@@ -1,0 +1,60 @@
+REVIEWED MATHEMATICAL REDUCTIONS, 2026-10-15
+
+These are newly derived continuous arguments accompanying31 Lean source
+modules. They are source-reviewed, uncompiled, and do not finish an additional
+whole original case. The supplied manuscripts remain unchanged.
+
+C868 and merged-upper transfer
+
+The nonnegative merged-upper orientation is excluded through four exact support
+margins over the entire canonical angle interval. For every southeast inward
+orientation, five genuine foreign points force the merged upper to contain both
+near lower points and the center. Its lower-left point is already in the actual
+SW square. This argument has no canonical-sign premise and transfers literally
+to C683/C867 with their true owners.
+
+Write negative H as(c,-s) and outward southeast B as(d,-t), with both positive
+canonical normal pairs. In the lower-U top-marker exit, the actual B sharp
+point forces1000<525c+961s. The full actual bottom bar supplies the B faces
+  U_B>=.26d, V_B>=.8t-d,
+  U_B+a<=d+t, V_B+a<=1.086t,
+  1<d+.286t, 1<.74d+t.
+The first span gives t<T=143000/270449, with D=229551/270449. Genuine full
+supports exclude three separating-axis families; only the H longitudinal face
+could remain. Its gap is bounded below by
+  M+U_H+1.086s,
+  M=1-c-2.086s+(c+s)d+(s-c)t-.2t(sd-ct).
+Writing delta=d-D and gap=T-t gives exact finite difference
+  M(d,t)-M(D,T)=delta*K+gap*L,
+  K=c+s-st/5>=.8, L>=-.32T, 2delta>=T*gap.
+Thus the endpoint is a lower bound. It is at least-.006 for every canonical
+H normal. The actual singleton16 G7 omission gives U_H>=.26c-s or
+V_H+a<=c+.26s. The first improves the longitudinal gap past zero. The second,
+with the real SW near-point floor V_H>=-.05(c+s), forces1<1.05c+.31s;
+then s<48/73 and M>=.004. That alternative also has a strict gap. Consequently
+the lower-U top-marker exit is impossible. The upper-V exit remains for the
+whole C868 ending. No sampled angle or virtual wall appears in this argument.
+
+C972
+
+The actual NW upper anchor, genuine left bar and NE upper anchor force NW F5.
+A second all-angle NW argument gives either the NW outer halfpoint or two
+vertical anchors. The missing NE origin conflicts with singleton0/1 in the
+first branch, and duplicates a strict NE point in the second. Thus NE owns its
+origin and NW owns its outer halfpoint. These force L's origin and singleton1's
+corner, so singleton0 omits that corner. SE cannot own its lower halfpoint.
+
+For SE with nonpositive sine, the true R origin and two separate SW points
+force projection widths a<=t+c/2 and a<=c+.24t. Their positive combination
+would give63a<=44(c+t)<=440/7<63. Hence the actual SE canonical sine is
+strictly positive. Existing complete support comparisons then exclude a SW
+center in either canonical sign. The negative-SW actual two-singleton center
+argument forces the remaining SW strictly positive too.
+
+Both remaining squares have simultaneous faces in their original physical
+frames. Actual NW and SE mixed points sharpen SW's two upper faces; the true
+L origin sharpens the transverse one further. SE's omitted lower halfpoint
+forces its lower-V face, and hence its upper-V is positive. A final contradiction
+still has to use the genuine singleton0 bottom bar and actual SW/SE supports.
+The broader local positive-SE halfpoint claim is false, as recorded in the
+separate exact local diagnostic. It cannot be used to skip the final comparison.

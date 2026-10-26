@@ -113,6 +113,28 @@ to the pure-YAML datasets, so `status: enforced` reflects an executed check.
 Negative controls reject wrong fields, invalid enumerations, inconsistent counts,
 known-invalid exponents, and case statuses outside `{proved, open}`.
 
+## The Exact-Side Register
+
+[`exact-side-register.json`](exact-side-register.json) is a generated view, not a
+source. Each entry is one exact side fact the record stands behind:
+
+- its degree;
+- its minimal polynomial, inline in `exact_sides.polynomial_text` notation or held by a
+  digest-pinned asset with the facts measured from it;
+- its interval;
+- who states it;
+- whether it is about the house, a staged house or a named configuration, such as
+  T-246’s s(29).
+
+`devtools.exact_side_register` derives it from the case records, `select_houses`, the
+intake ledgers and the retained packets.
+On every run it decides each inline polynomial irreducible and its root isolated.
+`--check`, the records-tier step `exact-side register is current`, fails when the
+register differs from its inputs, so a change that moves a house runs `--update`. Case
+records keep what `adopt_houses` writes; the register writes nothing on them.
+The plan and its later slices are in
+[plan-2026-10-25-exact-side-register.md](../../docs/project/specs/active/plan-2026-10-25-exact-side-register.md).
+
 ## What Is in a Case
 
 The payload fields are documented in the schema.
@@ -236,9 +258,12 @@ at count $k$ packs $k$ unit squares, so its side is at least $\sqrt k$. A constr
 an index or table states with no certificate file of its own (a tiling or L-border
 recipe on a certificate) is a row once the maintained construction checker,
 `devtools.construction_checker`, decides it exactly from the recipe and its parent
-certificate has been replayed on both routes (D2). A deletion bound is no such row: one
-square below the next count’s certificate is an earlier report (D6), and any other
-deletion, or one an issue claims, waits on the owner (think-kzme;
+certificate has been replayed on both routes (D2). A two-strip L-packing (#799), Ryu’s
+Theorem 1.3 shape with its two strips chosen independently, has no parent: the
+maintained `devtools.two_strip_checker` decides it exactly from its parameters.
+A deletion bound is no such row: one square below the next count’s certificate is an
+earlier report (D6), and any other deletion, or one an issue claims, waits on the owner
+(think-kzme;
 [several reports at one count](../campaign/result-import.md#several-reports-at-one-count)).
 A certificate kept as hosted data is read through its hosted-data manifest
 (`devtools.hosted_shards`), while its receipts and rows stay in Git

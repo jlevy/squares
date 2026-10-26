@@ -71,6 +71,15 @@ allowlist:
       `decide` holds the parent the filtered replay decided, by the digest of the bytes
       it read, to that stated digest, so a recipe row is bound to the certificate the
       downloaded index names. One control alters the digest to show the refusal.
+  - path: packing/devtools/two_strip_checker.py
+    kind: generated-artifact
+    boundary: >-
+      The 683 certificates `write_out` builds from #799's parameters are derived and not
+      retained (OR-18), so no Git revision names them: the decisions receipt names each
+      by its SHA-256 and size, and `check` holds the certificate the replay receipt
+      decided on both routes to the one the decisions receipt names, so the cross-check
+      is of the packing the lemma decided. The retained packet files are read from Git
+      and compared with nothing.
   - path: packing/devtools/hosted_shards.py
     kind: download
     boundary: >-
@@ -108,6 +117,31 @@ allowlist:
       (OR-18), fetched from evand/square-packing at 7d1407a into a scratch directory;
       each is held to the packet manifest's digest before it is parsed. The 19 retained
       forms are read from Git and compared with nothing.
+  - path: packing/campaign/issue-intake/upper-bounds-issue804-20261025/review/exact_forms.py
+    kind: download
+    boundary: >-
+      Issue 804's attachment squares-exact-forms.zip, which the
+      hyukdongkim-exact-forms-2026-10-25 packet keeps none of (no licence), downloaded
+      into a scratch directory, is held to the SHA-256 the issue states and the size
+      triage measured before `derive` reads a member; and each atlas file the source
+      read, evand/square-packing site/www/data/p/best-<n>.json at 659ee62, fetched into a
+      scratch directory, is held to its pinned Git blob, size and SHA-256 before `poses`
+      reads it; and the author's later t244-exact-configurations.zip, which the
+      hyukdongkim-t244-configurations-2026-10-25 packet keeps none of either, is held to
+      the SHA-256 his comment states and the measured size, and each of its two
+      certificates to its stated digest, before `configurations` parses one. The derived
+      facts and the receipts are this repository's files, read from Git and compared with
+      nothing.
+  - path: packing/devtools/kingbird_root_polynomial.py
+    kind: download
+    boundary: >-
+      A Kingbird catalogue picture, square-83.svg for n = 83, fetched into memory or
+      read from a copy the operator names, which the Kingbird retention policy keeps no
+      byte of: `held` holds it to the size and SHA-256 the pictures receipt of
+      5 October 2026 pinned at review before the `Root` polynomial is read from it. A
+      changed picture is refused as a new reading. The receipt it writes is this
+      repository's file, read from Git by the exact-side register and compared with
+      nothing.
   - path: packing/devtools/couzo_refinement_reports.py
     kind: download
     boundary: >-
@@ -390,6 +424,14 @@ allowlist:
   - path: packing/devtools/audit_n11_lean.py
     kind: download
     boundary: 11SquaresFormalized's final audit, downloaded from the source, against the digest the packet's manifest pinned at retention and the uncompressed digest the source's summary.json states.
+  - path: packing/devtools/audit_n12_lean.py
+    kind: external-checkout
+    boundary: >-
+      Jatloe12SquaresFormalized's closure modules, read from a checkout of another
+      repository at d0caf45 by the Git blobs the closure receipt names, against the
+      SHA-256 the source's own run manifest (verified-source-manifest.json) states for
+      the bytes its private run compiled; the receipt reports each mismatch, and the
+      repository's own bytes are identified by Git blob, not by digest.
   - path: packing/devtools/capture_web_source.py
     kind: download
     boundary: Zenodo deposits and deployed web pages against the MD5 and digests the record or a retained manifest states.

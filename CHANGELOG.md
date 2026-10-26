@@ -47,6 +47,71 @@ First public: 2026-10-25 ([publication evidence](https://github.com/jlevy/square
 
 PRs and supporting records: [\#794](https://github.com/jlevy/squares/pull/794) · [The case record at 268](packing/frontier/n-268.md) · [The case record at 303](packing/frontier/n-303.md) · [Mathematical review of 24 October](docs/project/reviews/review-2026-10-24-couzo-n268-n303.md) · [Couzo’s registration request](https://github.com/jlevy/squares/issues/763).
 
+<a id="changelog-entry-daniel-one-eighty-two-adopted"></a>
+
+#### Daniel’s New Arrangement Becomes the House Best Packing at 182
+
+Significance S3: T-243 is an S3 finite case result: a new arrangement at 182, 3.17e-03 below the packing it replaces, which no symmetry pairs one to one with it. It is cut from Couzo’s 211 packing of Ostashev’s design and polished; it brings no new technique and claims no optimality.
+
+[Evan Daniel](packing/contributors/people/evan-daniel.md)’s packing at 182, cut from
+[Francisco Couzo](packing/contributors/people/francisco-couzo.md)’s 211 packing, an
+arrangement of [Daniil Ostashev](packing/contributors/people/daniil-ostashev.md)’s
+design, and polished, passes a clean-room review here. At 13.970916436215,
+$3.17 \times 10^{-3}$ below the packing it replaces and a new arrangement relative to
+the record, it becomes the house best packing at 182. T-243 is confirmed at V3/C3.
+
+- This project’s two maintained exact routes decided the certificate, and a separately
+  prompted mathematical review decided it again on a clean-room checker of its own, by
+  a Claude agent, which is the independent confirmation. No source program ran here.
+- The case draws the regularizer’s view at the certificate’s side, which is Daniel’s
+  own regularized certificate, square for square.
+- Upper bounds only; no optimality is claimed. Local minimality is the source’s
+  numerical report.
+
+Published artifacts: [Daniel’s certificate at 182](https://squaremath.org/result/t-243.html).
+
+First public: 2026-10-25 ([publication evidence](https://github.com/jlevy/squares/actions/runs/40177916608)).
+
+PRs and supporting records: [\#814](https://github.com/jlevy/squares/pull/814) · [The case record at 182](packing/frontier/n-182.md) · [Mathematical review of 25 October](docs/project/reviews/review-2026-10-25-evand-n182.md) · [Daniel’s registration request](https://github.com/jlevy/squares/issues/806).
+
+<a id="changelog-entry-jatloe-n12-reported-proof"></a>
+
+#### Jatloe Reports a Lean Proof for 12 Squares
+
+Significance S5: This announces the S5 optimality report T-245; significance does not imply independent verification of the complete claim.
+
+The record now holds, as a report, a Lean 4 proof by
+[Jatloe](packing/contributors/people/jatloe.md) that the $4 \times 3$ grid is the
+optimal packing of 12 unit squares: $s(12) = 4$. It is the first optimality claim the
+project’s records hold at 12, one of the five open cases below 21; if the proof holds,
+it closes the gap of $0.0285$ between the verified lower bound, $7943/2000$, and the
+grid’s side. T-245 remains reported at V0/C0; the Lean build has not been replayed
+here.
+
+- Lean’s kernel checks the geometric arguments and the assembly, and 1,624 finite
+  facts are decided by `native_decide`, so Lean’s compiler is trusted as well. The
+  source reports that a run in a repository that is not public accepted all 5,377
+  modules of the theorem’s closure on compiled objects reused from an earlier run, and
+  says that no full rebuild has been run.
+- A statement audit of 25 October, an AI review, read the theorem as the unrestricted
+  problem with no premise, and mapped the 1,624 facts of the source’s axiom log one to
+  one onto the code’s calls. It did not read the proof, so it moves no rung. A
+  mathematical review of the written proof and a complete build, about 28 CPU-hours by
+  the source’s own receipts, come next.
+- Jatloe wrote the proof and a partial formalization, Ben Gurevitch aided the
+  formalization, and [Lewis](packing/contributors/people/ctjlewis.md) refactored and
+  compiled it. [Ahmed](packing/contributors/people/manasseh-ahmed.md) published it on
+  16 October and announced it on 22 October.
+- The same change registers [Daniel](packing/contributors/people/evan-daniel.md)’s S3
+  report that the side of the best known packing of 29 squares is a root of an integer
+  polynomial of degree 7213 (T-246), also at V0/C0.
+
+Published artifacts: [Current 12-square Lean proof report](https://squaremath.org/result/t-245.html).
+
+First public: 2026-10-25 ([publication evidence](https://github.com/jlevy/squares/actions/runs/40202397886)).
+
+PRs and supporting records: [\#812](https://github.com/jlevy/squares/pull/812) · [Statement audit of 25 October](docs/project/reviews/review-2026-10-25-n12-lean-formalization-statement-audit.md) · [Retained source and verification limits](packing/resources/web/jatloe-n12-lean-2026-10-16/README.md) · [The tracking issue](https://github.com/jlevy/squares/issues/810).
+
 <a id="changelog-date-2026-10-24"></a>
 
 ### 2026-10-24

@@ -183,6 +183,7 @@ $defs:
           - rigidity
           - case-exclusion
           - restricted-optimality
+          - exact-side
           - method-limit
           - correction
           - audit
@@ -193,7 +194,9 @@ $defs:
           second and simpler proof of a result the record holds; a formalization, a
           proof-assistant proof of a result the record holds; the rigidity of one
           packing; the exclusion of one class of configurations; the
-          best packing within a restricted family; the limit of a method; a correction
+          best packing within a restricted family; the exact algebraic value of the side
+          of one stated configuration, with no bound and no optimality claimed; the
+          limit of a method; a correction
           to a published statement; or an audit of an existing proof or certificate.
           One kind per result, written right after `id`. Declared, and cross-checked by
           `devtools.check_results` against the headline's and the claim's relations and

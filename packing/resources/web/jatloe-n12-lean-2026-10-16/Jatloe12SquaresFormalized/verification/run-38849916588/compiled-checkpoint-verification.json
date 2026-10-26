@@ -1,0 +1,76 @@
+{
+  "archive_contents": {
+    "archive_receipt_index_sha256": "5917c35857109e9ef80484fd805a1c2c96183ba789ae59813bdb6ad304435557",
+    "compiler_executable_files": 0,
+    "compiler_log_bytes": 4851408,
+    "compiler_log_files": 5377,
+    "external_library_files": 0,
+    "metadata_files": 1,
+    "object_bytes": 3043639848,
+    "object_files": 5377,
+    "payload_bytes": 3052071036,
+    "receipt_index_files": 1,
+    "sidecar_files": 0,
+    "tar_bytes": 3072215040,
+    "tar_regular_files": 10756,
+    "zip_members": [
+      "checkpoint.tar"
+    ]
+  },
+  "artifact": {
+    "artifact_id": 12023379882,
+    "commit": "437041a0f00f1ff9166e46b1f7fc93942a441681",
+    "name": "n12-jatloe-final-checkpoint-1",
+    "repository": "EvolvingPrograms/SquaresLean",
+    "run_attempt": 1,
+    "run_id": "38847898861",
+    "zip_bytes": 1033472991,
+    "zip_sha256": "7a20bbdfc76a6f066dc6795e3c50b38c81641c5e99d4dff47536cc6fc1772496"
+  },
+  "authenticated_against_successful_run": {
+    "job_id": "116808701733",
+    "receipt_index_sha256": "d70074e3eed105e24633d69bc87798fcd2a0b8f05ae53b3ae1f464a354193b52",
+    "run_attempt": 1,
+    "run_id": "38849916588",
+    "source_commit": "1f60d412707aae824b76fbaf11d4e708695451fa",
+    "success_report_sha256": "483e85130a7b4b31f22241c9d7725fbfc018809c158f23ea250f3c1546458798",
+    "theorem": "N12Compact.Final.optimality",
+    "type": "S12.packingConstant12 = 4"
+  },
+  "checked_at_utc": "2026-10-16T05:10:33.261830+00:00",
+  "checkpoint_configuration_hashes": {
+    "lake-manifest.json": "594817c24406ad88074249c3676c4d569b089e39399d11a2156fa869322cc82b",
+    "lakefile.toml": "7de601eeebeee2330874ee7df820ee981a186f3f3aca8e1fa0fec5d0e377b109",
+    "lean-toolchain": "55fd3a6a977cf9896df7a6aef25a2abeaceaa7dd7b85ec74340ecaecaf9e9415"
+  },
+  "checkpoint_platform": {
+    "machine": "x86_64",
+    "runner_arch": "X64",
+    "runner_os": "Linux",
+    "system": "Linux"
+  },
+  "checks": {
+    "all_5377_log_hashes_match_successful_run": true,
+    "all_5377_object_hashes_match_successful_run": true,
+    "all_5377_source_hashes_match_successful_run": true,
+    "all_payload_member_sizes_and_sha256": true,
+    "archive_receipts_equal_successful_run_receipts": true,
+    "artifact_zip_sha256": true,
+    "nested_zip_crc": true,
+    "unexpected_or_missing_files": []
+  },
+  "compiled_during_this_check": false,
+  "extracted_during_this_check": false,
+  "schema_version": 1,
+  "scope": "The earlier checkpoint objects are byte-identical to all 5377 objects authenticated by the later successful final theorem audit. This check validates preservation and correspondence, not a new Lean replay. The checkpoint contains main .olean files, accepted compiler logs, and receipts; Lean 4.35.0 sidecars, external libraries, and compiler binaries are not included. Inherited native_decide compiler trust remains.",
+  "verified_compiler_provenance": {
+    "lean_release": "https://github.com/leanprover/lean4/releases/tag/v4.35.0",
+    "mathlib": {
+      "release": "https://github.com/leanprover-community/mathlib4/releases/tag/v4.35.0",
+      "revision": "56a005855ea17e0b0958f73ec801ae140b0a1679",
+      "tag": "v4.35.0"
+    },
+    "resolved_at": "2026-10-16T04:18:34.473745+00:00",
+    "toolchain": "leanprover/lean4:v4.35.0"
+  }
+}

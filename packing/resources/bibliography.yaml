@@ -2548,7 +2548,15 @@ sources:
       minimality is a new property of those packings, which does not make their finders
       antecedents. The author is read from the retained LICENSE and CREDITS.md, which say
       the work was produced by Claude (Anthropic) under human direction. MIT-licensed.
-      Neither report is a bound.
+      Neither report is a bound. Evan Daniel, who posts on X as @evanbd, announced the s(29)
+      polynomial there on 13 October 2026 at 23:43:21Z
+      (https://x.com/evanbd/status/2110154454817448106): "I wish to present my new favorite
+      square packing problem: 29 squares. Not for the (currently best known) packing itself;
+      it's a bit messier than 17, but not unexpectedly so. But rather for the side length,
+      which is truly cursed."; the post is retained in the evand-exact-data-2026-10-12
+      packet's receipts/announcement/, and the thread's follow-ups say the work "was all done
+      by Claude". T-246 registers the polynomial as the exact side of the record
+      configuration.
   - key: '[Summins stratification series 2026-10-12]'
     authors: [Summins]
     year: 2026
@@ -4152,6 +4160,83 @@ sources:
       credit evidence only. MIT-licensed; Claude assistance disclosed. The KKT statements
       are the author's; no local or global optimality claim. Retained in
       web/evand-kaggle-descents-2026-10-24/.
+  - key: '[Daniel n182 2026-10-25]'
+    authors: [Daniel]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-25'
+    lineage: builds-on-project
+    credit: Daniel after Couzo, Ostashev, Levy
+    short_credit: Daniel after Couzo et al.
+    note: >-
+      One complete exact certificate at evand/square-packing@d99925d1298262c4ddb81c95abbb6f45adca8d3d,
+      reported on issue 806: s(182) <= 13970916436214678735385725854133/10^30, a new packing
+      the source calls a different local minimum from the register's, found by its explore
+      loop from an L-cut of 29 squares of the register's s(211) packing, which the issue
+      names as the start, and a local search: Francisco Couzo's 211 packing (T-188), an
+      arrangement of Daniil Ostashev's design (T-175), which the certificate follows where
+      the two differ (M-1 of the 25 October review). The source names this project's
+      register as where the start came from, so the key builds on the project and credits
+      the Levy link, as the 22 October key of Daniel's 303 does. The binary64 packing it was
+      solved from, its 80-digit KKT point, the solver's report, the comparison with the
+      source store's prior best and a regularized display view at the same side are
+      retained beside it. MIT-licensed; Claude assistance disclosed. The KKT and
+      local-minimum statements are the author's numerical evidence; no global optimality
+      claim. Retained in web/evand-n182-2026-10-25/.
+  - key: '[Kim exact forms 2026-10-25]'
+    authors: [Kim]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-25'
+    lineage: builds-on-project
+    credit: Kim after Couzo, Chaoweeraprasit, Daniel, PingYou Ltd, Levy
+    short_credit: Kim after Couzo et al.
+    note: >-
+      Issue 804 and its attachment squares-exact-forms.zip (SHA-256
+      c770f9c37dee6b248543f3e661318630a0f279bc6a8c7663cb2efc53e2814ee7, the issue's digest):
+      Hyukdong Kim's exact sides of the best-known packings at 88, 126, 172, 199 and 263, each a
+      stated root of an integer polynomial irreducible over Q, found by closing the active
+      contacts with the KKT conditions, solving at 1,500 and 3,000 digits from Evan Daniel's
+      atlas at 659ee62, and LLL. A numerical determination with no exact configuration. At 88,
+      126 and 199 the polynomials are those of Daniel's issue 639 sides (T-193); at 172 and 263
+      they are new, below PingYou Ltd's certificates of Francisco Couzo's and Nate
+      Chaoweeraprasit's packings (T-174), whose witnesses the atlas inputs are. No licence, so
+      derived facts and digests only, in web/hyukdongkim-exact-forms-2026-10-25/. The author's
+      exact configurations at 172 and 263, attached to a comment the same day, are kept as
+      derived facts by the same rule in web/hyukdongkim-t244-configurations-2026-10-25/.
+      Claude assistance disclosed. Upper bounds only; no optimality claim.
+  - key: '[Jatloe n12 Lean 2026-10-16]'
+    authors: [Jatloe, Gurevitch, Lewis, Ahmed]
+    year: 2026
+    venue: GitHub
+    short_venue: Web
+    dated: '2026-10-16'
+    lineage: independent
+    credit: Jatloe, Gurevitch, Lewis, Ahmed
+    note: >-
+      A Lean 4 proof, N12Compact.Final.optimality : S12.packingConstant12 = 4, that the least
+      side of a square holding twelve open unit squares at any rotation and translation, with
+      pairwise disjoint interiors, is 4, the side of the 4 x 3 grid:
+      Queuingtheorydotcom/Jatloe12SquaresFormalized at d0caf4532a7ead68be1389ef87387b126fc2e0ab
+      (committed 2026-10-16T05:12:49Z, the tag n12-verified-2026-10-16), project
+      Lean/Proofs/N12-jatloe, Lean 4.35.0 and Mathlib 56a00585, retained in part in
+      web/jatloe-n12-lean-2026-10-16/ with the release's two archives pinned by size and
+      SHA-256. README.md: "Jatloe provided the full mathematical proof and partial Lean
+      formalization. Ben Gurevitch aided in formalization. CTJLewis refactored and compiled
+      the formalization." Every commit is by Queuingtheorydotcom, Manasseh Ahmed's account,
+      who published the formalization and its run evidence and announced it on X on 22
+      October 2026 (https://x.com/ManassehA06/status/2113097037306569124): "Thank you to
+      @jatloe for sending me a full proof of the result alongside a partial formalization,
+      and thanks to all of the square packers who helped finish the formalization"; his
+      reply (https://x.com/ManassehA06/status/2113097091580932578) links the repository, and
+      both posts are retained in the packet's receipts/announcement/. Authors as the source
+      and the announcement give them: Jatloe (X @jatloe; no other name is given), Ben
+      Gurevitch, Lewis (CTJLewis, GitHub and X ctjlewis) and Ahmed (publication), in the
+      order of the owner's tracking issue, jlevy/squares#810. The proof sources are said to be
+      copied from EvolvingPrograms/SquaresLean at 1f60d412707aae824b76fbaf11d4e708695451fa,
+      which is not public, whose run 38849916588 accepted the theorem reusing every compiled
+      object; the axioms are the three standard ones and 1,624 that native_decide generates.
+      The source credits no other work and names no AI assistance. No licence.
 credited_names:
   Benjamin Greff: Greff
   Hiroaki Hosono: Hosono
@@ -4200,3 +4285,4 @@ credited_names:
   Amund Kristiansen: Kristiansen
   Kirill Tymchishin: Tymchishin
   Vladislav Lavrentev: Lavrentev
+  Hyukdong Kim: Kim

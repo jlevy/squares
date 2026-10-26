@@ -1,0 +1,14 @@
+certificate /tmp/claude-0/-home-user-squares/d57983cc-21aa-53cd-a24f-c90463a5a3c0/scratchpad/rev806-math/src/s182-1024.cert
+  sha256 9e12e0a42b05c4fcd2181c5255a4a19ab1aeb9a9f8c95f9943a20998a415fe97  30648 bytes  n = 182
+  side S = 13970916436214678735385725854133/1000000000000000000000000000000
+       = 13.9709164362146787353857258541330000000000... (decimal, truncated at 40 places)
+  12-place upward print 13.970916436215; S <= print: True; print - 1e-12 < S: True
+  tilted squares (t != 0): 68
+  method sat: valid=True wall_violations=0 pair_violations=0 cpu=3.31s
+  method area: valid=True wall_violations=0 pair_violations=0 cpu=3.43s
+  least low-wall slack  5.000000e-21 (square 0)
+  least high-wall slack 5.000000e-21 (square 15)
+  least pair gap        1.000000e-20 (pair 99, 100)
+  pairs with gap < 1e-15: 390; square-wall incidences with slack < 1e-15: 45
+  rotation sense reversed (s -> -s, same centres): SAT valid=False pair_violations=80 wall_violations=0
+  total CPU 10.1 s

@@ -1,0 +1,32 @@
+Retained original C983 entrance. The common sixteen marker coordinates and
+twenty auxiliary coordinates are also reproduced in C1092-ORIGINAL-ENTRANCE.txt;
+C983 has the distinct owner groups and exact component families below.
+Only the compact original entrance is reproduced; no vector table is needed
+by the continuous proofs.
+
+C983: COMPLETE OWNERSHIP ENTRANCE AND VECTOR CATALOGUE
+
+All coordinates, fractions and decimals in this package are exact.
+The twelve actual open squares have common side 1<a<=1001/1000,
+disjoint interiors, arbitrary orientations, and closures in [0,4]^2.
+The only case premise is the following exact original-marker grouping.
+Marker indices, seed hulls K(g), and twenty-point labels are defined
+in the marker-ownership chapter. In particular, absent markers are excluded.
+
+Owner 0: group (0); M_0={4100}.
+Owner 1: group (1); M_1={1025}.
+Owner 2: group (2, 3); M_2={0, 262144, 262400}.
+Owner 3: group (4, 5); M_3={0, 524288, 128, 131200, 524416, 524800, 524928}.
+Owner 4: group (6, 7); M_4={0, 8, 16392}.
+Owner 5: group (9); M_5={65552, 262160, 327696, 65584, 327728, 65792, 262400, 327936, 65808, 262416, 327952, 65824, 327968, 65840, 327984, 66064, 66096, 66304, 328448, 590592, 66320, 328464, 66336, 328480}.
+Owner 6: group (10); M_6={65568, 81952, 131104, 147488, 196640, 524320, 589856, 655392, 147496, 65584, 81968, 196656, 589872, 65664, 131200, 196736, 524416, 589952, 655488, 65696, 131232, 147616, 196768, 524448, 589984, 655520, 147624, 65712, 196784, 590000, 65824, 82208, 196896, 65840, 82224, 196912, 65952, 197024, 66048, 131584, 197120, 524800, 590336, 655872, 66064, 197136, 590352, 66080, 82464, 131616, 148000, 197152, 524832, 590368, 655904, 66096, 82480, 197168, 590384, 66176, 131712, 197248, 524928, 590464, 656000, 66192, 197264, 590480, 66208, 131744, 148128, 197280, 524960, 590496, 656032, 66304, 197376, 328448, 590592, 66320, 197392, 590608, 66336, 82720, 197408, 590624, 66432, 197504, 590720}.
+Owner 7: group (8, 11); M_7={8192, 24576, 73728, 8200, 24584, 8208, 24592, 73744, 8216, 24600, 8224, 24608, 73760, 139296, 8232, 24616, 73768, 8240, 24624, 73776, 139312}.
+Owner 8: group (12); M_8={2050, 2058}.
+Owner 9: group (13); M_9={32832, 294976, 32848}.
+Owner 10: group (14); M_10={262400, 327936, 524800, 590336, 524928, 262912, 328448, 525056, 590592, 787200, 525184, 787328}.
+Owner 11: group (15); M_11={16392, 147464, 16424, 147496, 131200, 147584, 655488, 147592, 131232, 147616, 147624}.
+
+These are the output families of the finite local rule (E8) and the
+combined consistency deletion in that chapter. The complete universe
+V consists of the tuples m_i in M_i whose twelve subsets are pairwise
+disjoint. This definition includes every actual ownership tuple.

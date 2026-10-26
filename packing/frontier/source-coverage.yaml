@@ -224,7 +224,9 @@ sources:
     and258 Lean flags as source assertions. Canonical algebraic registry integration belongs to PR403;
     no source geometry, minimality or full Lean replay was admitted here.
 - id: evand-exact-and-local-reports-2026-10-12
-  title: Grade-C local minima of 233 source configurations of field degree at most 4 (Theorem C)
+  title: >-
+    Grade-C local minima of 233 source configurations of field degree at most 4 (Theorem C), and
+    the degree-7213 minimal polynomial of the s(29) record side
   role: source-repository
   url: https://github.com/evand/square-packing/tree/ad86d42d0f743076d735036702ba04a41ce24a8c
   local: resources/web/evand-exact-and-local-reports-2026-10-12/
@@ -256,6 +258,7 @@ sources:
     - 25
     - 26
     - 27
+    - 29
     - 30
     - 31
     - 32
@@ -464,21 +467,28 @@ sources:
     - 322
     - 323
     - 324
-  reviewed: '2026-10-23'
+  reviewed: '2026-10-25'
   source_date: '2026-10-12'
   disposition: current-report
   replay_disposition: case-specific
   represented_by:
   - resources/web/evand-exact-and-local-reports-2026-10-12/README.md
   - resources/web/evand-exact-data-2026-10-12/README.md
+  - frontier/results.yaml
+  - frontier/n-029.md
   evidence:
   - E-evand-gradec-local-minima-233-report
+  - E-n029-evand-minpoly-7213-report
   notes: E-evand-gradec-local-minima-233-report records gradec.py's grade-C report for the 233
     configurations, reported and not replayed, with the 23 October review as its external_review;
     no register entry holds it yet (think-7scz), and its C3 replay is think-mtah. The release
     exact-data-2026-10-12 that issue 545 asked for retains the certificates and the 233 exact forms
-    (resources/web/evand-exact-data-2026-10-12/). The same packet's s(29) minimal-polynomial report,
-    at n = 29 and outside this scope, has no evidence entry yet (think-6gti).
+    (resources/web/evand-exact-data-2026-10-12/). E-n029-evand-minpoly-7213-report records the
+    s(29) minimal-polynomial report of 169a827, whose polynomial the same release publishes and the
+    exact-data packet pins by digest, reported and not replayed; T-246 registers it as the exact
+    side of the record configuration, with no bound, and n-029.md cites it. Its C3 replay is
+    think-10m1, and the first post of the author's announcement thread of 13 October is retained in
+    the exact-data packet's receipts/announcement/.
 - id: queuingtheory-n11-optimality-2026
   title: Proposed global optimality proof for eleven squares
   role: source-repository
@@ -11440,6 +11450,99 @@ sources:
     identity measurements support this (measure/identity-nNNN.json), except at 376, where
     the packing lies nearer 43f666c's and the author is asked. Claude assistance disclosed.
   claims_record: resources/web/amundsk-issue798-2026-10-24/acquisition/beyond-horizon-claims.json
+- id: evand-n182-2026-10-25
+  title: Evan Daniel's new packing at 182, at d99925d, issue 806
+  role: source-repository
+  url: https://github.com/evand/square-packing/tree/d99925d1298262c4ddb81c95abbb6f45adca8d3d/search/packer/candidates
+  local: resources/web/evand-n182-2026-10-25/
+  source_key: '[Daniel n182 2026-10-25]'
+  scope:
+    n_values: [182]
+  reviewed: '2026-10-25'
+  source_date: '2026-10-25'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/evand-n182-2026-10-25/acquisition/claims.json
+  evidence:
+  - E-evand-n182-certificate-report
+  - E-evand-n182-exact-feasibility
+  - E-evand-n182-review-exact-feasibility
+  notes: >-
+    The certificate at 182 that d99925d adds under search/packer/candidates/, committed on
+    25 October 2026 at 04:11:15Z and pushed at 04:16:05Z, 19 seconds before issue 806
+    reported it, retained as the source wrote it with the source's KKT point, binary64
+    input, JSON report, comparison files and regularized display view, and admitted at its
+    exact side. All 3 native jobs have full outcomes, and the packet's sharp controls meet
+    its 5e-21 margins on both routes. The ledger of 25 October for this import
+    (campaign/issue-intake/upper-bounds-issue806-20261025) records it 3.17e-03 below T-174,
+    a new packing. T-243 records it at V3/C3 since the 25 October review
+    (E-evand-n182-exact-feasibility, E-evand-n182-review-exact-feasibility), and the case
+    at 182 adopted it as its house best packing in the pass of 25 October 2026.
+- id: hyukdongkim-exact-forms-2026-10-25
+  title: Hyukdong Kim's exact sides at 88, 126, 172, 199 and 263 in the issue 804 attachment
+  role: first-party-release
+  url: https://github.com/jlevy/squares/issues/804
+  local: resources/web/hyukdongkim-exact-forms-2026-10-25/
+  source_key: '[Kim exact forms 2026-10-25]'
+  scope:
+    n_values: [88, 126, 172, 199, 263]
+  reviewed: '2026-10-25'
+  source_date: '2026-10-25'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - campaign/issue-intake/upper-bounds-issue804-20261025/ledger.json
+  evidence:
+  - E-hyukdongkim-804-exact-forms-report
+  notes: >-
+    The attachment's exact_forms.json gives five polynomials and the side each names to 100
+    digits; the archive states no licence, so the packet keeps them as a derived exact fact
+    with the archive's address, size, SHA-256 and member digests, and no byte of it. Each
+    polynomial is irreducible over Q by SymPy and by sqpack.field, and each side is the root
+    its print names (campaign/issue-intake/upper-bounds-issue804-20261025/exact-sides.json).
+    At 88, 126 and 199 the polynomials and roots are those of Evan Daniel's issue 639 sides,
+    which T-193 records, so they are a second derivation and are not recorded. At 172 and 263
+    the sides are new, 3.898e-89 and 2.126e-94 below T-174's certificates, the houses, and
+    1.185e-62 and 9.234e-63 below issue 639's degree-12 sides; the ledger of 25 October for
+    issue 804 records them and T-244 registers them as reported. The issue supplied no exact
+    configuration; the author's configurations at both sides, attached to a comment of
+    2026-10-25T09:06:23Z, are kept as derived facts in
+    resources/web/hyukdongkim-t244-configurations-2026-10-25/ and not yet decided
+    (think-4rzl), so no packing at either side has been decided here. The author's comment of
+    07:22:16Z concedes 88, 126 and 199 to issue 639. The case records are unchanged until
+    adoption.
+- id: jatloe-n12-lean-2026-10-16
+  title: Jatloe12SquaresFormalized, a Lean 4 proof that s(12) = 4
+  role: source-repository
+  url: https://github.com/Queuingtheorydotcom/Jatloe12SquaresFormalized/tree/d0caf4532a7ead68be1389ef87387b126fc2e0ab
+  local: resources/web/jatloe-n12-lean-2026-10-16/
+  source_key: '[Jatloe n12 Lean 2026-10-16]'
+  scope:
+    n_values: [12]
+  reviewed: '2026-10-25'
+  source_date: '2026-10-16'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/n-012.md
+  - frontier/results.yaml
+  evidence:
+  - E-n012-jatloe-lean-report
+  notes: >-
+    Queuingtheorydotcom/Jatloe12SquaresFormalized at d0caf4532a7ead68be1389ef87387b126fc2e0ab,
+    the tag n12-verified-2026-10-16 of 16 October 2026, tracked by the owner's issue 810:
+    Jatloe's Lean 4 proof N12Compact.Final.optimality : S12.packingConstant12 = 4, with Ben
+    Gurevitch and Lewis (CTJLewis), published by Manasseh Ahmed and announced on X on 22
+    October (both posts retained). No licence; retained on the owner's 9 October decision
+    (think-gtmb, follow-up think-c9ec): the statement closure, Compact/Assembly/, the run's
+    evidence and the written mathematics, the release's two archives pinned by size and
+    SHA-256. The source trusts Lean's compiler for 1,624 native_decide facts and reports a
+    private run that accepted all 5,377 modules on reused compiled objects; nothing here
+    has built it. T-245 records the claim; n-012's reported lower lane and reported status
+    take it, and its verified lanes and status are unchanged.
 selected_overrides:
 - n: 29
   source_id: pingyou-pr622-certificate-2026-10-15
@@ -11639,11 +11742,11 @@ selected_overrides:
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
     a replay here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 182
-  source_id: pingyou-pr574-certificates-2026-10-13
-  value: '13.9740907131214390071'
-  evidence: E-pingyou-574-certificate-report
+  source_id: evand-n182-2026-10-25
+  value: '13.9709164362146788'
+  evidence: E-evand-n182-certificate-report
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
-    a replay here and an accepted review, adopted on 2026-10-17 (T-174).
+    a replay here and an accepted review, adopted on 2026-10-25 (T-243).
 - n: 183
   source_id: evand-n183-subgrid-2026-10-19
   value: '13.9995801787362526'
@@ -12465,14 +12568,14 @@ superseded_reports:
 - n: 182
   source_id: casson-square-packing-2026
   value: '13.97409071444282525'
-  superseded_by: pingyou-pr574-certificates-2026-10-13
+  superseded_by: evand-n182-2026-10-25
   reason: Larger than Francisco Couzo's side at this count; the case record states both sources' dates
     and values; since 2026-10-05 the selected report is Evan Daniel's exact optimum of that packing
     (T-098).
 - n: 182
   source_id: franciscouzo-square-packing-2026
   value: '13.974090713124822'
-  superseded_by: pingyou-pr574-certificates-2026-10-13
+  superseded_by: evand-n182-2026-10-25
   reason: Superseded on 2026-10-05 by Evan Daniel's exact optimum of the same packing, certified here
     (T-098).
 - n: 197
@@ -14014,9 +14117,9 @@ superseded_reports:
 - n: 182
   source_id: evand-square-packing-2026-10-05
   value: '13.974090713121439007150130032772'
-  reason: The house until 2026-10-17; its certificate stays retained and verified, and T-174's exact
+  reason: The house until 2026-10-17; its certificate stays retained and verified, and T-243's exact
     side is smaller.
-  superseded_by: pingyou-pr574-certificates-2026-10-13
+  superseded_by: evand-n182-2026-10-25
 - n: 206
   source_id: evand-square-packing-2026-10-05
   value: '14.860158663391903236840250629824'
@@ -14311,6 +14414,12 @@ superseded_reports:
   reason: The house from 2026-10-16 until 2026-10-25; its certificate stays retained and verified,
     and T-242's exact side is smaller.
   superseded_by: evand-kaggle-descents-2026-10-24
+- n: 182
+  source_id: pingyou-pr574-certificates-2026-10-13
+  value: '13.9740907131214390071'
+  reason: The house from 2026-10-17 until 2026-10-25; its certificate stays retained and verified,
+    and T-243's exact side is smaller.
+  superseded_by: evand-n182-2026-10-25
 - n: 268
   source_id: couzo-issue763-2026-10-23-in-corpus
   value: '16.8743617158738255'

@@ -5483,7 +5483,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-07'
+  lastmod: '2026-10-25'
   status: live
 - path: cases/120.html
   canonical: cases/120.html
@@ -5947,7 +5947,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-17'
+  lastmod: '2026-10-25'
   status: live
 - path: cases/173.html
   canonical: cases/173.html
@@ -6035,7 +6035,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-17'
+  lastmod: '2026-10-25'
   status: live
 - path: cases/183.html
   canonical: cases/183.html
@@ -6755,7 +6755,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-17'
+  lastmod: '2026-10-25'
   status: live
 - path: cases/264.html
   canonical: cases/264.html
@@ -6987,7 +6987,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-17'
+  lastmod: '2026-10-25'
   status: live
 - path: cases/290.html
   canonical: cases/290.html
@@ -8822,8 +8822,24 @@ urls:
   first_published: '2026-10-13'
   lastmod: '2026-10-22'
   status: live
+- path: profiles/hyukdong-kim.html
+  canonical: profiles/hyukdong-kim.html
+  kind: page
+  generator: devtools.render_contributors:contributor_pages
+  producer: overview
+  first_published: '2026-10-13'
+  lastmod: '2026-10-22'
+  status: live
 - path: profiles/index.html
   canonical: profiles/
+  kind: page
+  generator: devtools.render_contributors:contributor_pages
+  producer: overview
+  first_published: '2026-10-13'
+  lastmod: '2026-10-22'
+  status: live
+- path: profiles/jatloe.html
+  canonical: profiles/jatloe.html
   kind: page
   generator: devtools.render_contributors:contributor_pages
   producer: overview
@@ -21405,6 +21421,143 @@ urls:
       - packing/resources/web/evand-kaggle-descents-2026-10-24/measure/identity.json
       - packing/campaign/issue-intake/upper-bounds-evand-20261024/README.md
       - packing/devtools/upper_bound_reports.py
+- path: result/t-243.html
+  canonical: result/t-243.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-25'
+  lastmod: '2026-10-25'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 182
+    established: null
+    attribution:
+      source_keys:
+      - '[Daniel n182 2026-10-25]'
+      published: '2026-10-25'
+    builds_on: null
+    evidence:
+    - E-evand-n182-certificate-report
+    - E-evand-n182-exact-feasibility
+    - E-evand-n182-review-exact-feasibility
+    artifacts:
+    - packing/resources/web/evand-n182-2026-10-25/README.md
+    - packing/resources/web/evand-n182-2026-10-25/acquisition/claims.json
+    - packing/resources/web/evand-n182-2026-10-25/source/search/packer/candidates/s182-1024.cert
+    - packing/resources/web/evand-n182-2026-10-25/receipts/exact-certification.json.xz
+    - packing/resources/web/evand-n182-2026-10-25/receipts/sharp-controls.json
+    - packing/resources/web/evand-n182-2026-10-25/measure/identity.json
+    - packing/campaign/issue-intake/upper-bounds-issue806-20261025/README.md
+    - packing/devtools/upper_bound_reports.py
+    - docs/project/reviews/review-2026-10-25-evand-n182.md
+    - packing/resources/web/evand-n182-2026-10-25/review/review-2026-10-25/README.md
+- path: result/t-244.html
+  canonical: result/t-244.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-25'
+  lastmod: '2026-10-25'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 172
+      - 263
+    established: null
+    attribution:
+      source_keys:
+      - '[Kim exact forms 2026-10-25]'
+      published: '2026-10-25'
+    builds_on: null
+    evidence:
+    - E-hyukdongkim-804-exact-forms-report
+    artifacts:
+    - packing/resources/web/hyukdongkim-exact-forms-2026-10-25/README.md
+    - packing/resources/web/hyukdongkim-exact-forms-2026-10-25/facts/exact-forms.json
+    - packing/resources/web/hyukdongkim-exact-forms-2026-10-25/acquisition/sources.json
+    - packing/resources/web/hyukdongkim-t244-configurations-2026-10-25/README.md
+    - packing/resources/web/hyukdongkim-t244-configurations-2026-10-25/acquisition/sources.json
+    - packing/resources/web/hyukdongkim-t244-configurations-2026-10-25/facts/n172.json.gz
+    - packing/resources/web/hyukdongkim-t244-configurations-2026-10-25/facts/n263.json.gz
+    - packing/campaign/issue-intake/upper-bounds-issue804-20261025/README.md
+    - packing/campaign/issue-intake/upper-bounds-issue804-20261025/exact-sides.json
+    - packing/campaign/issue-intake/upper-bounds-issue804-20261025/atlas-poses.json
+    - packing/campaign/issue-intake/upper-bounds-issue804-20261025/review/exact_forms.py
+- path: result/t-245.html
+  canonical: result/t-245.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-25'
+  lastmod: '2026-10-25'
+  status: live
+  identity:
+    kind: optimality
+    scope:
+      n_values:
+      - 12
+    established: null
+    attribution:
+      source_keys:
+      - '[Jatloe n12 Lean 2026-10-16]'
+      published: '2026-10-16'
+    builds_on: null
+    evidence:
+    - E-n012-jatloe-lean-report
+    artifacts:
+    - packing/resources/web/jatloe-n12-lean-2026-10-16/README.md
+    - packing/resources/web/jatloe-n12-lean-2026-10-16/Jatloe12SquaresFormalized/Lean/Proofs/N12-jatloe/Compact/Assembly/Final.lean
+    - packing/resources/web/jatloe-n12-lean-2026-10-16/Jatloe12SquaresFormalized/Lean/Proofs/N12-jatloe/Compact/Assembly/SourceAssembly.lean
+    - packing/resources/web/jatloe-n12-lean-2026-10-16/Jatloe12SquaresFormalized/Lean/Proofs/N12-jatloe/source/S12/PackingConstant.lean
+    - packing/resources/web/jatloe-n12-lean-2026-10-16/Jatloe12SquaresFormalized/Lean/Proofs/N12-jatloe/source/S12/Normalization.lean
+    - packing/resources/web/jatloe-n12-lean-2026-10-16/Jatloe12SquaresFormalized/Lean/Proofs/N12-jatloe/source/S12/Diagonal.lean
+    - packing/resources/web/jatloe-n12-lean-2026-10-16/Jatloe12SquaresFormalized/verification/run-38849916588/global-type-axiom-audit.log.gz
+    - packing/resources/web/jatloe-n12-lean-2026-10-16/Jatloe12SquaresFormalized/verification/run-38849916588/github-replay.json.gz
+    - packing/resources/web/jatloe-n12-lean-2026-10-16/receipts/lean-closure.json.gz
+    - packing/resources/web/jatloe-n12-lean-2026-10-16/receipts/statement-closure.json.gz
+    - packing/resources/web/jatloe-n12-lean-2026-10-16/receipts/statement-audit.json
+    - packing/devtools/lean_closure.py
+    - packing/devtools/audit_n12_lean.py
+    - docs/project/reviews/review-2026-10-25-n12-lean-formalization-statement-audit.md
+- path: result/t-246.html
+  canonical: result/t-246.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-25'
+  lastmod: '2026-10-25'
+  status: live
+  identity:
+    kind: exact-side
+    scope:
+      n_values:
+      - 29
+    established: null
+    attribution:
+      source_keys:
+      - '[Daniel exact and local reports 2026-10-12]'
+      published: '2026-10-11'
+    builds_on: null
+    evidence:
+    - E-n029-evand-minpoly-7213-report
+    artifacts:
+    - packing/resources/web/evand-exact-data-2026-10-12/README.md
+    - packing/resources/web/evand-exact-data-2026-10-12/acquisition/release.json
+    - packing/resources/web/evand-exact-data-2026-10-12/acquisition/release/s29/README.md
+    - packing/resources/web/evand-exact-data-2026-10-12/acquisition/release/s29/n29_krawczyk.json
+    - packing/resources/web/evand-exact-data-2026-10-12/receipts/announcement/tweet-2110154454817448106.json
+    - packing/resources/web/evand-exact-and-local-reports-2026-10-12/source/search/exact/homotopy/N29.md
+    - packing/resources/web/evand-exact-and-local-reports-2026-10-12/source/search/exact/homotopy/irred.py
+    - packing/resources/web/evand-exact-and-local-reports-2026-10-12/source/search/exact/homotopy/krawczyk.py
+    - packing/resources/web/evand-exact-and-local-reports-2026-10-12/source/search/exact/homotopy/link.py
+    - packing/resources/web/evand-exact-and-local-reports-2026-10-12/source/search/exact/homotopy/verify_mod.py
+    - packing/resources/web/evand-exact-and-local-reports-2026-10-12/source/search/exact/homotopy/contacts_mod.py
 - path: results.html
   canonical: results.html
   kind: page
