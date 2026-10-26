@@ -23981,7 +23981,7 @@ issues:
       1.91e-11 below the issue's side at 372 and 1.25e-9 below at 412, so those two are not
       recorded, and the other twelve are recorded as beyond-horizon rows, below every earlier
       report by 1.24e-5 (457) to 8.75e-3 (334). Claude assistance disclosed.
-    read_through: '2026-10-24T19:03:14Z'
+    read_through: '2026-10-25T13:34:02Z'
     results:
     - key: rows-12
       claim: >-
@@ -24005,7 +24005,7 @@ issues:
         October asks whether the 376 search started from 964ee2b's n376.cert, as the issue
         says of all fourteen, since the packing lies nearer 43f666c's; the record gives each
         row's lineage as the author's statement, so the question is informational and holds
-        nothing open.
+        nothing open. The author's comment of 25 October answers that it did (notes).
       queued: false
       bead: think-2l0q
     - key: n372-n412
@@ -24045,6 +24045,16 @@ issues:
       The twelve rows are recorded in report order with their replay, 372 and 412 have their
       disposition with 43f666c's rows there on main (#800, think-gn29), and the reply on main says
       so; nothing the author asked for is queued.
+    notes: >-
+      Amund Kristiansen's comment of 25 October 2026, 13:34:02Z
+      (https://github.com/jlevy/squares/issues/798#issuecomment-6398299278), answers the import
+      reply's question on 376: every search started from franciscouzo/square-packing@964ee2b,
+      with certificates/best/n376.cert converted to floating point as the start of 376, which
+      then had one strong GPU pass of 4,096 kicked variants and a 25-round GPU hill climb with
+      fq polish, each round restarting from the current best. The author never fetched 43f666c,
+      so its nearness to Couzo's later certificate is two independent searches converging on
+      nearby packings. The row's lineage, seeded from 964ee2b's n376.cert, already states this;
+      the comment reports no new result, and nothing changes in the record.
   - number: 799
     title: 'Result registration: 683 new upper bounds, n in [1184, 3775] — Karimi two-strip construction'
     author: mohsensbu-jpg
