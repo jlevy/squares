@@ -1678,7 +1678,8 @@ def rectangle_evidence_entry(
     """The replay evidence entry for one verified, controlled format T certificate.
 
     The mixed family's entry, with format T's premises: Tokoharu's centre domain, the
-    threshold 10001/10000 the census passes, and a mass of n - 1/100. Its source key is
+    threshold 10001/10000 the census passes, and a mass of n - 1/100 (n - 1/1000 for
+    rect_n27_L56). Its source key is
     the packet's reported entry's, its scope the certificate's own count; a records lane
     widens it where the bound carries by mass and a result claims the larger count.
     """
