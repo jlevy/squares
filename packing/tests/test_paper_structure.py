@@ -182,7 +182,7 @@ def test_the_shared_form_is_the_one_the_design_names(rows: list[dict[str, object
     assert found["figures: captions"] == "Figure N. lead, numbered from 1"
     assert found["footnotes"] == "a footnotes section"
     assert found["closing: colophon"].startswith(
-        "The Squares Project · github.com/jlevy/squares /"
+        "The Squares Project · squaremath.org · github.com/jlevy/squares /"
     )
 
 
