@@ -2668,24 +2668,27 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "papers/square-packing-methods-survey.md",
         ),
         reason=(
-            "The Changelog page and the Project menu of 26 October 2026 (think-edhc): "
-            "changelog.html and its article, the bar's Project group over Overview, News "
-            "and Changelog, the bookmarks News keeps for the history, Recently Added's "
-            "shorter introduction, its tally markup and the record-packing wording, and "
-            "the registration of the new address. None of it is a paper's content: of the "
-            "seven shared builders, only site_navigation.py reaches a paper page at all, "
-            "and it reaches the shared bar, which `development.md` (Maintaining the "
-            "project changelog) holds to keep a paper's content edition. Against main "
-            "9e1ce9be8 (#832): rendered at link revision 736d164df into empty site "
-            "directories, once from this tree at 736d164df and once with main's seven "
+            "The Changelog page, the Project menu and the credits line of 26 October 2026 "
+            "(think-edhc, think-1zuf): changelog.html and its article, the bar's Project "
+            "group over Overview, News and Changelog, the bookmarks News keeps for the "
+            "history, Recently Added's shorter introduction, its tally markup and the "
+            "record-packing wording, the registration of the new address, and the shared "
+            "colophon, which now names squaremath.org before the repository. None of it "
+            "is a paper's content: of the seven shared builders, two reach a paper page, "
+            "site_navigation.py through the shared bar and render_overview.py through the "
+            "shared colophon, and `development.md` (Maintaining the project changelog) "
+            "holds a site navigation or footer update to keep a paper's content edition. "
+            "Against main 9e1ce9be8 (#832): rendered at link revision 5505894e4 into empty "
+            "site directories, once from this tree at 5505894e4 and once with main's seven "
             "files swapped in (69 files each), by render_n11_lower_bounds_explainer, with "
             "its pinned Chromium math pass, render_n11_optimality_review, "
             "render_n11_threshold_bound_review and render_packing_methods. Sixty-five of "
             "the 69 files are byte-identical, every paper's Markdown among them; the four "
-            "that differ are the four papers' HTML, each in one line, its "
-            '`<ul id="site-nav-links">`, which gains the Project group and loses the two '
-            "top-level Overview and News links. No PDF was printed; each prints from that "
-            "HTML, whose body is unchanged. Retain v0.4.32, v0.1.11, v0.1.4 and v0.2.7."
+            "that differ are the four papers' HTML, each in exactly two lines, its "
+            '`<ul id="site-nav-links">` and its `<p class="col colophon centred">`. '
+            "Measured once before the colophon moved, at 736d164df, when the bar alone "
+            "differed. No PDF was printed; each prints from that HTML, whose body is "
+            "unchanged. Retain v0.4.32, v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
     ReleaseNoPublicChange(
