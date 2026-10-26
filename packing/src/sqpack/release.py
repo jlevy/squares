@@ -2653,7 +2653,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "980440c99 (#821), at link revision 19a04dd7 with that main's three inputs "
             "swapped in: the same 51 files, byte-identical. Measured again after merging "
             "main 9ebde24df (#823) and adding the card and T-247's project credit, at "
-            "link revision bcde38fb with that main's results.yaml, result-requests.yaml, "
+            "link revision 79465052 with that main's results.yaml, result-requests.yaml, "
             "source-coverage.yaml and site_resources.py swapped in: the same 51 files, "
             "byte-identical. The explainer counts the "
             "register's results and takes v0.4.31. No PDF was printed; each prints from "
