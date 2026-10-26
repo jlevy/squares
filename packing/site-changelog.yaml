@@ -6,6 +6,45 @@ softschema:
   status: enforced
 repository: https://github.com/jlevy/squares
 entries:
+  - id: changelog-page-and-project-menu
+    date: '2026-10-26'
+    title: The Project Changelog Gets a Page, Under a Project Menu
+    significance:
+      score: 2
+      rationale: >-
+        A reader surface and the bar's structure. The retained history takes a page of
+        the site, Overview, News and Changelog move under a Project menu, Recently Added
+        takes a shorter introduction, a tally leaves the toggles' small caps and the
+        credits line names the site. The history itself was already public in
+        CHANGELOG.md and already linked from News, so no result, explanation,
+        verification, policy or tool is new here. It adds no mathematical result and
+        changes no paper's content.
+    pull_requests:
+      - 837
+    categories:
+      - site
+    topics:
+      - project
+    summary: >-
+      The whole retained history is now a page of this site: every entry at every
+      significance, day by day, each with the GitHub issues and pull requests behind it.
+      News keeps the stories rated S3 and above and closes on a button to it. Overview,
+      News and Changelog sit together under Project in the navigation bar, and the
+      homepage keeps its own address and its own name.
+    details: |-
+      - A tally of results is out of the toggles' small caps everywhere it appears, its
+        count set in bold and its noun in the summary's own case, and a disclosure's
+        toggle keeps the first line of a summary that wraps.
+      - Recently Added's introduction names the day its window opens rather than the
+        span of days it shows.
+      - The lines that said a result "is now the house best packing" say "is now the
+        record packing"; the project term itself is unchanged where `conventions.md`
+        and `SYNOPSIS.md` own it.
+      - The credits line on every page, and in the four papers' PDFs, names
+        squaremath.org before the repository.
+    references:
+      - label: The site design record
+        target: packing/devtools/templates/paper-design.md
   - id: jatloe-n12-reported-proof
     date: '2026-10-25'
     title: Jatloe Reports a Lean Proof for 12 Squares
@@ -2828,6 +2867,11 @@ entries:
       - label: Revised verification and confirmation ladder
         target: https://github.com/jlevy/squares/pull/262
 deliveries:
+- number: 837
+  title: "feat: a Changelog page under a Project menu, and the site's address in the credits line"
+  merged_at: '2026-10-26T20:23:35Z'
+  base_ref: main
+  merge_commit: eb37c8076f4aa370d387de35bdb8ca56c61e025f
 - number: 812
   title: "intake(think-4l14, think-6gti): T-245, Jatloe's Lean proof that s(12) = 4 (#810), and T-246, Daniel's s(29) minimal polynomial (#545, #811)"
   merged_at: '2026-10-25T14:28:27Z'
@@ -3598,6 +3642,7 @@ stacks:
   evidence: https://github.com/jlevy/squares/pull/518
 coverage:
   pull_requests:
+  - 837
   - 812
   - 814
   - 794
