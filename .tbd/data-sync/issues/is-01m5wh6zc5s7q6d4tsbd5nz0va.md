@@ -5,14 +5,14 @@ title: Decide whether house best packing keeps its name across the record
 kind: task
 status: in_progress
 priority: 3
-version: 3
-delegate: claude-session-01mfvb
+version: 4
+delegate: null
 labels: []
 dependencies: []
-hold: null
+hold: paused
 hold_until: null
 created_at: 2026-10-26T16:38:02.885Z
-updated_at: 2026-10-26T21:54:59.724Z
+updated_at: 2026-10-26T22:04:47.439Z
 started_at: 2026-10-26T21:54:39.931Z
 ---
 Raised by the owner on 26 October 2026, while the site's generated reader strings were

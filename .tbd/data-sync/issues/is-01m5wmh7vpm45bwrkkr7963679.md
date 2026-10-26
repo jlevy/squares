@@ -5,15 +5,15 @@ title: Redraw the assets and move their records with them
 kind: task
 status: in_progress
 priority: 2
-version: 4
-delegate: claude-session-01mfvb
+version: 5
+delegate: null
 labels: []
 dependencies: []
 parent_id: is-01m5wmghkt8vpnawbxzpbkm19e
-hold: null
+hold: paused
 hold_until: null
 created_at: 2026-10-26T17:36:04.982Z
-updated_at: 2026-10-26T21:57:28.315Z
+updated_at: 2026-10-26T22:04:47.889Z
 started_at: 2026-10-26T21:57:17.909Z
 ---
 Apply the rule, redraw and re-measure.
