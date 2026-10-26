@@ -615,6 +615,15 @@ def check_source(source: dict[str, Any]) -> dict[str, Any]:
     return leaves
 
 
+#: The receipts the packet may hold beside its derived files: the kernel's replay, and the
+#: third route's decision with its six sharp controls per certificate
+#: (`check_half_angle_area decide --receipts`; RR-3 of
+#: docs/project/reviews/review-2026-10-11-recent-register-rungs.md).
+RECEIPTS = frozenset(
+    {"receipts/exact-certification.json.xz", "receipts/third-route-2026-10-26.json.xz"}
+)
+
+
 def check_files(destination: Path) -> None:
     expected = {
         "README.md",
@@ -627,7 +636,7 @@ def check_files(destination: Path) -> None:
             raise ReportError("derived packet files cannot be symlinks")
         if path.is_file():
             files.add(path.relative_to(destination).as_posix())
-    if files - {"receipts/exact-certification.json.xz"} != expected:
+    if files - RECEIPTS != expected:
         raise ReportError("unexpected or missing derived packet file")
 
 

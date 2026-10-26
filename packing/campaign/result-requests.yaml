@@ -8021,9 +8021,98 @@ issues:
     read_through: '2026-10-14T10:47:20Z'
     results: []
     asks:
-    - what: Each record and tool change the two reviews propose, on main or recorded as declined.
-      state: queued
+    - what: >-
+        RR-2: check_results resolves each machine-shaped evidence entry's certificate path.
+      state: done
+      note: >-
+        `devtools.check_results --certificates`, which the gate's results step runs, resolves
+        every one from the repository root or packing/ and names the four prose certificates
+        as exceptions; the plain run that negative-control workers make skips it, since they
+        prune the packets. Making the 264 packing-relative paths repository-relative is left
+        to think-viqd, which owns the paths' other readers.
       bead: think-npvi
+    - what: >-
+        RR-3: each upper-bound packet's third-route output retained as a receipt, and it and
+        the kernel's receipt listed among the controls of T-128, T-130, T-131, T-134 to T-141
+        and T-146.
+      state: done
+      note: >-
+        `check_half_angle_area decide --receipts` is new; `decide` and `decide-imports` wrote
+        receipts/third-route-2026-10-26.json.xz in the twelve packets on 26 October, with no
+        disagreement and every sharp control at its required outcome. The receipts keep
+        their timing fields, as the 14 October third-route receipts do.
+      bead: think-npvi
+    - what: >-
+        RR-4: a check --replay in gupta_refinement_reports that holds fresh jobs to T-127's
+        retained receipt, and T-127's replay rewritten to use it.
+      state: done
+      note: >-
+        Run here on 26 October: 51 jobs at 17 counts equal to the retained rows, in 6 min 33 s
+        of wall, the receipt's bytes unchanged.
+      bead: think-npvi
+    - what: RR-5, T-133's significance rationale and next rung.
+      state: done
+      bead: think-npvi
+    - what: >-
+        RR-6: an activity waiting on the owner on T-132, T-142 and T-143, the tooling branch
+        in all four next rungs, T-142's held control and T-144's price basis.
+      state: done
+      note: >-
+        The activities are dated 2026-10-11, when the questions went to the owner, so
+        check_results refuses them once the register's last review passes 10 November,
+        unless they are answered or re-dated with what happened since.
+      bead: think-npvi
+    - what: >-
+        RR-7: a link and "not priced" on T-120 to T-124's unfinished confirmations, and
+        T-120's next rung.
+      state: done
+      note: >-
+        T-120 to T-123 link jlevy/squares#811, which superseded PR #403 when it closed unmerged
+        on 25 October; T-124 links #420.
+      bead: think-npvi
+    - what: >-
+        RR-8 and RR-9: the adoption's deferrals, T-125's notes and T-136's next rung.
+      state: done
+      note: Overtaken by #518's adoption, as the issue and the rungs review's status note say.
+    - what: LR-7, a formalization_of field that ties a formalization review to its formalization.
+      state: done
+      note: >-
+        In the review schema, required on a formalization review and refused on any other;
+        check_results holds it to a proof-assistant-checked entry the result cites, and
+        counts a formalization review toward rung 5 only beside the entry it names.
+      bead: think-npvi
+    - what: >-
+        Section 8 of the Lean review: T-060's review entries, a dated notes line and its next
+        rung; the statement-closure build's limitations; the next rungs of T-055 and T-120.
+      state: done
+      note: >-
+        GPT-6 Pro's and Claude Code's reviews of 3 October are in T-060's reviews; neither
+        moves a rung without the oversight record. T-055's next rung names T-234, which has
+        retained the hypothesis-free proof since the 23 October intake.
+      bead: think-npvi
+    - what: >-
+        Section 8, item 4: an intake-watch.yaml row for EvolvingPrograms/SquaresLean.
+      state: declined
+      note: >-
+        A watch row is only for a repository the record cites, and intake_sweep asks for an
+        uncited one to be removed. No record cites SquaresLean, which is private, so the
+        sweep could not read its head either. The n = 12 work reached the record through the
+        public Jatloe12SquaresFormalized packet of 16 October. Item 4's other row, the
+        6bbae379 Lean binding, is already read under think-63vx.
+    - what: >-
+        RR-1: the fourteen next rungs' statement that the two AI reviews are by distinct
+        reviewers.
+      state: declined
+      note: >-
+        Declined pending the owner's ruling, tracked on #543. Its wording is the owner's to
+        choose, and no rung moves without the human oversight record that would state it.
+    - what: >-
+        Section 8's distinct-reviewer question: whether GPT-6 Pro's review of 3 October, which
+        names Astra's as its source R4, counts as a distinct reviewer for T-060.
+      state: declined
+      note: >-
+        Declined pending the owner's ruling, tracked on #543 (D2). T-060's next rung says the
+        oversight record states it.
     beads:
     - think-npvi
     - think-18b8
@@ -8045,7 +8134,9 @@ issues:
       (RR-9 done, RR-1's date at T-146, section 8's distinct-reviewer question); the second says
       both reviews are on main since #563 merged, that RR-2 to RR-7 and LR-7 can be applied as
       they stand, and that RR-1's wording and section 8 still wait on the owner's ruling,
-      tracked on #543.
+      tracked on #543. On 26 October think-npvi applied RR-2 to RR-7, LR-7 and section 8's
+      record items, and recorded RR-1, section 8's distinct-reviewer question and the
+      SquaresLean watch row as declined, each with its reason.
     close_when: Each item is on main or recorded as declined, and check_results and packing-validate
       --records pass.
   - number: 543

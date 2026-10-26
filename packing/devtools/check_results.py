@@ -45,17 +45,27 @@ scope, each once, to a registered result (`of`, and `first_certified_in` where n
 dated no later whose scope holds the count, to a regularizer among the entry's own
 sources (or `project`, on a result of this project), and to measurements that are
 numbers no lower than zero, one at least where the identity was decided here
-(`regularizations_problems`). Human review owns evidence relevance, claim
+(`regularizations_problems`). It ties each formalization review to the formal
+evidence it read (`formalization_of`), and with `--certificates` resolves the
+`certificate` of every machine-shaped evidence entry (`certificate_path_problems`).
+Human review owns evidence relevance, claim
 coverage, composition, significance, novelty, whether a headline says what its
 claim says, and the choice between kinds the record cannot tell apart.
 
 Usage, from `packing/`:
     uv run --frozen --all-extras --group dev python -m devtools.check_results
+    uv run --frozen --all-extras --group dev python -m devtools.check_results --certificates
+
+The gate runs it with `--certificates`. Without the flag the certificate paths are not
+resolved, because a negative-control worker prunes the packets most of them live in and
+`test_unmutated_results_checker_is_green_inside_a_worker` holds the plain run green there.
 """
 
 from __future__ import annotations
 
+import argparse
 import re
+import sys
 from collections.abc import Iterable, Mapping, Sequence
 from datetime import date
 from pathlib import Path, PurePosixPath
@@ -129,6 +139,18 @@ OVERSIGHT_CHECKS = frozenset({"trust-boundary", "certificate-meaning", "ai-findi
 #: What a human formalization review must say it checked.
 FORMALIZATION_CHECKS = frozenset({"statement-fidelity", "definitions", "axioms", "build"})
 ACCEPTING_VERDICTS = frozenset({"accepted", "defects-resolved"})
+#: Machine-shaped evidence whose `certificate` names record fields, a lemma or an
+#: off-record tree in prose rather than a retained file, as RR-2 of
+#: `docs/project/reviews/review-2026-10-11-recent-register-rungs.md` lists them. Every
+#: other machine-shaped entry's certificate must resolve (`certificate_path_problems`).
+PROSE_CERTIFICATES = frozenset(
+    {
+        "E-basic-grid-upper",
+        "E-basic-area-lower",
+        "E-n012-monotonicity-lower",
+        "E-n011-h236-rung0-reduction",
+    }
+)
 #: A review the result's own source performed counts toward V and never toward C.
 SOURCE_RELATION = "source"
 REVIEW_KINDS = frozenset({"adversarial", "confirming", "oversight", "formalization"})
@@ -223,6 +245,42 @@ def _machine_proof_shaped(entry: dict) -> bool:
     )
 
 
+def certificate_path_problems(evidence: Iterable[Mapping[str, Any]]) -> list[str]:
+    """Each machine-shaped entry's `certificate` names a retained file or directory.
+
+    `_machine_proof_shaped` holds the field to be a non-empty string, so a mistyped path
+    would leave a V3 or C3 standing (RR-2 of
+    `docs/project/reviews/review-2026-10-11-recent-register-rungs.md`). A path resolves
+    from the repository root or, while the record still carries them, from `packing/`,
+    and must stay inside the repository. The entries of `PROSE_CERTIFICATES` name prose;
+    one that stops being machine-shaped is reported, so the list cannot outlive its reason.
+    """
+    problems: list[str] = []
+    for entry in evidence:
+        eid = str(entry.get("id"))
+        shaped = _machine_proof_shaped(dict(entry))
+        if eid in PROSE_CERTIFICATES:
+            if not shaped:
+                problems.append(
+                    f"{eid}: listed among the prose certificates but not machine-shaped"
+                )
+            continue
+        if not shaped:
+            continue
+        raw = str(entry["certificate"])
+        pure = PurePosixPath(raw)
+        inside = not pure.is_absolute() and ".." not in pure.parts
+        if not inside or not any(
+            (base / pure).exists() and (base / pure).resolve().is_relative_to(REPO.resolve())
+            for base in (REPO, ROOT)
+        ):
+            problems.append(
+                f"{eid}: certificate names no retained file or directory, from the "
+                f"repository root or from packing/: {raw}"
+            )
+    return problems
+
+
 def _formal(entry: dict) -> bool:
     """Rung 5's machine evidence: a formal build with its axiom receipt retained.
 
@@ -281,14 +339,24 @@ def overseen(reviews: list[dict], *, confirming: bool = False) -> bool:
     return bool(_human_records(pool, "oversight", OVERSIGHT_CHECKS))
 
 
-def formalization_reviews(reviews: list[dict], *, confirming: bool = False) -> int:
+def formalization_reviews(
+    reviews: list[dict], *, confirming: bool = False, of: Iterable[str] = ()
+) -> int:
     """How many distinct human experts, none the formalization's author, reviewed the
-    formal statement, definitions, axioms and build and accepted them."""
+    formal statement, definitions, axioms and build of one of the formal entries `of`
+    and accepted them.
+
+    A review counts only for the formal evidence its `formalization_of` names, so a
+    result that cites two formalizations cannot pair a build of one with a review of
+    the other (LR-7 of `docs/project/reviews/review-2026-10-11-lean-backed-rungs.md`).
+    """
+    formal = frozenset(of)
     pool = [review for review in reviews if not confirming or _confirming_side(review)]
     experts = [
         review
         for review in _human_records(pool, "formalization", FORMALIZATION_CHECKS)
         if review.get("independent_of_author") is True
+        and review.get("formalization_of") in formal
     ]
     return _distinct_reviewers(experts)
 
@@ -359,7 +427,10 @@ def _derive_confirmation(
     if (
         rebuilt
         and open_review
-        and formalization_reviews(reviews, confirming=True) >= FORMALIZATION_REVIEWS["C"]
+        and formalization_reviews(
+            reviews, confirming=True, of=(str(entry.get("id")) for entry in rebuilt)
+        )
+        >= FORMALIZATION_REVIEWS["C"]
     ):
         return "C5"
     machine = [entry for entry in ours if _machine_proof_shaped(entry)]
@@ -518,14 +589,21 @@ def confirmation_prose_problems(record: Mapping[str, Any]) -> list[str]:
     ]
 
 
-def review_problems(record: dict, document_map: dict) -> list[str]:
+def review_problems(
+    record: dict,
+    document_map: dict,
+    evidence_index: Mapping[str, Mapping[str, Any]] | None = None,
+) -> list[str]:
     """What is wrong with a result's `reviews` and `open_review`, structurally: each
     review exists, is mapped as a non-superseded review, names its reviewer and date,
     covers this result when it names what it covers; a human reviewer states a
-    relation; the open-review pointer's retained copy exists."""
+    relation; a formalization review names, in `formalization_of`, a proof-assistant-
+    checked entry this result cites, and no other review names one; the open-review
+    pointer's retained copy exists."""
     rid = record["id"]
     problems: list[str] = []
     for review in record.get("reviews") or []:
+        problems.extend(formalization_of_problems(record, review, evidence_index))
         path = str(review.get("path", ""))
         if problem := repository_file_problem(path):
             problems.append(f"{rid}: review path {problem}: {path}")
@@ -553,6 +631,37 @@ def review_problems(record: dict, document_map: dict) -> list[str]:
                 f"{rid}: open_review.retained does not name a retained path: {retained}"
             )
     return problems
+
+
+def formalization_of_problems(
+    record: Mapping[str, Any],
+    review: Mapping[str, Any],
+    evidence_index: Mapping[str, Mapping[str, Any]] | None,
+) -> list[str]:
+    """A formalization review is tied to the formal evidence it read (LR-7 of
+    `docs/project/reviews/review-2026-10-11-lean-backed-rungs.md`): its
+    `formalization_of` is an entry the result cites whose method is proof-assistant
+    checked. Without the evidence register only presence and citation are checked."""
+    rid = record["id"]
+    path = review.get("path")
+    named = review.get("formalization_of")
+    if review.get("kind") != "formalization":
+        if named is not None:
+            return [f"{rid}: review {path} is no formalization review but names one"]
+        return []
+    if not named:
+        return [f"{rid}: formalization review {path} names no formalization_of"]
+    if named not in (record.get("evidence") or []):
+        return [f"{rid}: formalization review {path} reads {named}, which it does not cite"]
+    entry = (evidence_index or {}).get(str(named))
+    if evidence_index is not None and (entry is None or entry.get("method") != FORMAL_METHOD):
+        return [
+            (
+                f"{rid}: formalization review {path} reads {named}, which is not "
+                f"{FORMAL_METHOD} evidence"
+            )
+        ]
+    return []
 
 
 def _qualifying_read(review: dict) -> bool:
@@ -1711,9 +1820,8 @@ def verification_level(entry: Mapping[str, object], reviews: list[dict] | None =
 def _derive_verification(entries: list[dict], reviews: list[dict] | None = None) -> str:
     """The rung supported by one complete claim pool."""
     reviews = list(reviews or [])
-    if any(_formal(entry) for entry in entries) and (
-        formalization_reviews(reviews) >= FORMALIZATION_REVIEWS["V"]
-    ):
+    formal = [str(entry.get("id")) for entry in entries if _formal(entry)]
+    if formal and formalization_reviews(reviews, of=formal) >= FORMALIZATION_REVIEWS["V"]:
         return "V5"
     machine = any(_machine_proof_shaped(entry) for entry in entries)
     if machine and adversarially_reviewed(reviews) and overseen(reviews):
@@ -1808,7 +1916,14 @@ def reader_tier_text(path: Path, links: Iterable[str]) -> str:
     return text
 
 
-def main() -> int:
+def main(argv: Sequence[str] = ()) -> int:
+    parser = argparse.ArgumentParser(description="Validate the results register's rungs.")
+    parser.add_argument(
+        "--certificates",
+        action="store_true",
+        help="also resolve every machine-shaped evidence entry's certificate path",
+    )
+    args = parser.parse_args(list(argv))
     problems: list[str] = []
     register = safe_load(RESULTS.read_text(encoding="utf-8"))
     document_map = safe_load(DOCUMENT_MAP.read_text(encoding="utf-8"))
@@ -1816,6 +1931,8 @@ def main() -> int:
         entry["id"]: entry
         for entry in safe_load(EVIDENCE.read_text(encoding="utf-8"))["evidence"]
     }
+    if args.certificates:
+        problems.extend(certificate_path_problems(evidence_index.values()))
     results = register["results"]
     known_ids = campaign_ids()
     sources = {
@@ -1896,7 +2013,7 @@ def main() -> int:
 
         declared_c = record["confirmation"]
         declared_v = record["verification"]
-        review_faults = review_problems(record, document_map)
+        review_faults = review_problems(record, document_map, evidence_index)
         problems.extend(review_faults)
         # A review with a structural fault earns nothing until it is fixed.
         reviews = [] if review_faults else list(record.get("reviews") or [])
@@ -2006,11 +2123,13 @@ def main() -> int:
         "a registered packing no later on the count it regularizes, by a source of its "
         "own, every scope is covered by its evidence, every recent case bound is covered, "
         "every verified bound on a recent result by others has a mapped review, "
-        "every reader-tier mention exists; "
-        "by status, " + ", ".join(f"{held.count(name)} {name}" for name in STATUSES)
+        "every reader-tier mention exists"
+        + (", every machine-shaped certificate resolves" if args.certificates else "")
+        + "; by status, "
+        + ", ".join(f"{held.count(name)} {name}" for name in STATUSES)
     )
     return 0
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    raise SystemExit(main(sys.argv[1:]))

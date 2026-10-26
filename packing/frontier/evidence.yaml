@@ -876,6 +876,14 @@ evidence:
       proof of the lower half was not built here, and this entry is no replay of it. The
       upper half it checks is T-011's, decided there by exact separating axes; this is a
       second, kernel-checked route to it, in the formalization's own definitions.
+
+      Built again on 11 October 2026 by the Lean-backed rungs review on the same pins
+      (docs/project/reviews/review-2026-10-11-lean-backed-rungs.md, section 5): staged from
+      the packet's retained bytes, one module at a time at nice -n 10 and LEAN_NUM_THREADS=2
+      on a loaded host, from 20:56:37 to 21:15:44 UTC (19 min 7 s of wall, 9 min 22 s of
+      CPU); all 18 modules exited 0, the probe elaborated, and the same six theorems printed
+      [propext, Classical.choice, Quot.sound]. The receipt is
+      receipts/lean/build-statement-closure-2026-10-11.log in the packet.
     source_reviewed: '2026-10-06'
 
   - id: E-n011-optimum-uniqueness
@@ -29136,9 +29144,14 @@ evidence:
     novelty: previously-published
     source_key: '[Gupta rational refinements 2026-10-08]'
     certificate: packing/resources/web/gupta-square-packing-refinements-2026-10-08/facts/complete-certificates-and-comparators.json.xz
-    replay: 'From packing with project Python 3.14 and external TMPDIR: python -m devtools.gupta_refinement_reports
-      certify --jobs-dir "$TMPDIR/gupta-native-jobs" --workers 2. This executes all 51 complete jobs
-      through both native routes; check admits the retained full outcomes without repeating geometry.'
+    replay: >-
+      From packing with project Python 3.14: python -m devtools.gupta_refinement_reports check
+      --replay, which admits the retained receipt, decides all 51 complete jobs again through
+      both native routes and holds each to its retained row, without writing the receipt
+      (RR-4 of docs/project/reviews/review-2026-10-11-recent-register-rungs.md; 6 min 33 s of
+      wall and 5 min 41 s of CPU here on 26 October 2026, one process, all equal). certify
+      --jobs-dir "$TMPDIR/gupta-native-jobs" --workers 2 is what wrote the receipt; it
+      overwrites it, so it is no replay.
     replay_status: passed
     verifiers:
     - V-sqpack-verify
