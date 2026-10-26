@@ -1,0 +1,37 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "evand-n299-2026-10-26",
+  "source_url": "https://github.com/evand/square-packing",
+  "source_ref": "6067db5bf4d41dab7f0e1475e9fa845c0c6d2133",
+  "source_commit": "6067db5bf4d41dab7f0e1475e9fa845c0c6d2133",
+  "retrieved_at_utc": "2026-10-26T05:02Z",
+  "git_scope": "Blobless clone of evand/square-packing fetched for the import of issue #824 on 26 October 2026, and a sparse checkout of 6067db5 (committed 2026-10-26T03:47:41Z), the repository's head when fetched. The certificate is first committed in 1be69ca (2026-10-26T03:30:38Z, 'candidates: s(299) <= 17.803695435333 (dilation certificate, both checkers VALID'), the commit issue #824 names, 21 minutes 40 seconds before the issue was opened; its bytes are unchanged at the head, where f01779b (03:32:21Z) adds the source store's prior facts at 299. GitHub's activity log was not readable from this session, so no push time is recorded. Retained: the licence, the credits, and the six files under search/packer/candidates/ for s299-1025 (the dilation certificate, the binary64 packing it dilates, the pre-descent packing, the exact solver's failed 80-digit point and its JSON report, and the prior facts). The two exact checkers the certificate's header names are pinned against the identical copies the n183 packet retains. The rest of the tree is pinned by the commit; no source program was executed.",
+  "archived_dir": "source",
+  "license": "MIT, copyright (c) 2026 Evan Daniel (LICENSE retained, blob 52cf89d, unchanged since 8a8879a). CREDITS.md (blob 1d7dcb7) says the repository's work was 'Produced by Claude (Anthropic) in a single session under human direction'; the certificate's commit carries a Co-Authored-By trailer naming Claude.",
+  "claims": [
+    "search/packer/candidates/s299-1025.cert states s(299) <= 8901847717666168847717657266821/(5*10^29) = 17.803695435332337694...; issue #824 (opened 2026-10-26T03:52:18Z by evand) reports it rounded up at 12 places, 17.803695435333, 1.92e-2 below the register's 33/2 + sqrt(7)/2 = 17.822875655533 (the Kingbird catalogue), and prints its SHA-256.",
+    "The certificate's header calls it a dilation (dilate_cert.py, delta 1e-12) of the binary64 packing s299-1025.input.txt, side 17.803695435314534. Its JSON report states that the exact solver did not certify a KKT point: cert_valid false, a pair (235, 281) overlapping by 0.711 at the 80-digit point s299-1025.exact.txt, which is therefore no packing. The issue says local optimality is not established and that a corner-corner MILP linearization suggests a descent the source did not realise.",
+    "The issue calls it 'a new packing (not a refinement of the register's 33/2 + sqrt(7)/2 construction), built by a fault-line composition: our independent implementation of Chris Deotte's multi-gadget fault DP, described in his Kaggle notebooks', and asks that Chris Deotte be credited for the method and for the start, the s(334) packing (side 18.795715128) in his public Kaggle notebook 'squares-in-squares-ftmc-milp-refill-22-311'.",
+    "The issue says the source's two exact checkers, search/exact/verify_cert.py (separating axes) and verify_cert2.py (polygon intersection), both print VALID, and that they share an author and the certificate format.",
+    "The issue quotes two Kaggle per-puzzle leaderboard entries that state a side and no packing: 17.802718854399 for team Amin (2026-10-23 00:15 UTC, also in Francisco Couzo's upper_bounds.json as a reported bound) and 17.798169713703 for team Chris Deotte (2026-10-25 02:30 UTC), both below this certificate's side. Those statements are the author's; no source program ran here."
+  ],
+  "scope": [
+    "LICENSE",
+    "CREDITS.md",
+    "search/exact/verify_cert.py",
+    "search/exact/verify_cert2.py",
+    "search/packer/candidates/s299-1025.cert",
+    "search/packer/candidates/s299-1025.exact.txt",
+    "search/packer/candidates/s299-1025.input.txt",
+    "search/packer/candidates/s299-1025.json",
+    "search/packer/candidates/s299-1025.predescent.txt",
+    "search/packer/candidates/s299-1025_prior.json"
+  ],
+  "pinned_only": [
+    {
+      "match": "search/exact/verify_cert*.py",
+      "reason": "The source's two standalone exact checkers, which the certificate's header names; byte-identical to the copies the n183 packet retains at 3a9948c, and never executed here.",
+      "identical_to": "packing/resources/web/evand-n183-subgrid-2026-10-19/source/search/exact"
+    }
+  ]
+}
