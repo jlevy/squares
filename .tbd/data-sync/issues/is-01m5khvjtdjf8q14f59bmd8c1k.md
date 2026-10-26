@@ -5,8 +5,8 @@ title: "Intake pass 2026-10-23 (resumed): land #736 and #742, #719 records (204 
 kind: epic
 status: in_progress
 priority: 1
-version: 170
-delegate: coord-intake-1024
+version: 171
+delegate: coord-n12-1025
 labels:
   - result-import
 dependencies: []
@@ -167,7 +167,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-23T04:56:08.269Z
-updated_at: 2026-10-25T16:48:08.001Z
+updated_at: 2026-10-26T00:42:13.125Z
 started_at: 2026-10-23T04:56:10.325Z
 ---
 
@@ -197,3 +197,4 @@ Resumes coord-intake-1021b's pass of 21-23 October (no epic of its own). Lanes a
 2026-10-25 ~11:50Z coord-intake-1024 checkpoint. MERGED since 04:40Z: #805 (Fang review mapped), #808 (W8 two-strip checker, #799 packet V1+V2), #814 (T-243, Daniel's s(182), V3/C3, house at 182 on 25 Oct), #813 (T-244, Kim's exact sides at 172/263, reported; configurations received). CLOSED: #797, #798, #806 (finals posted and recorded). POSTED: #799 ack, #804 ack, #806 final, #763 notebook-rows note. OPEN: #807 (H2, T-242 at 268) merges at the 26 Oct 00:10Z check-in (trig_0178kD4FUDrHjrZmrqD5uc12; needs main merged, stamp without --date, re-pin, CI); think-4rzl lane (c-decide-4rzl-1025, wt-4rzl) decides T-244's configurations and records #804's ack and #799's 08:11Z/08:17Z answers. OWNER QUESTIONS: #565 rebuild of T-154 (Form A C1->C3 or Form B, with think-6t6q); #799 O1 (theorem-wide k^2-c statements as earlier reports beyond 324); R1 waits on the owner publishing data/couzo-715-certificates-v1 (and R2 on #732 shards); the earlier list (think-lsam, think-kzme, think-zkxy, think-nq5g, D5/N1/N5, #789 A7). NEXT: R1-R5 above 1024 once hosted data exists; think-hx0e done; think-20oj (303 view); think-x565, think-yeol, think-tfdn, think-0tdd, think-fqp6, think-pf37, think-f8py (Daniel's row review).
 
 2026-10-25 16:05Z, coord-n12-1025: T-247 is reserved for think-ozx8 (Hyukdong Kim's exact side at 297, #804's comments of 12:00Z and 12:23Z), taken on the owner's word of 25 October. The next free id after it is T-248.
+2026-10-26 ~00:50Z, coord-n12-1025: ownership transferred to coord-n12-1025 on the owner's instruction of 26 October ("keep following up on all remaining issues that are filed and have not been dealt with ... closing items that fully have intake completed"). Evidence the outgoing owner is not live: its session "squares: Ongoing intake" (session_014ZKp7R) is archived with status failed on the account's monthly spend limit; its scheduled check-in trig_01DhTFUTDPGkUQQYuVtXQfPv no longer exists; #807 was last updated 25 Oct 05:38Z and its planned 26 Oct 00:10Z merge did not happen. Remaining work taken over: #807 (think-3anz, T-242 at 268, pass of 26 October: merge main, re-stamp, re-pin, fold amundsk's #798 comment of 13:34Z, think-2l0q), the #797/#798 close records, #763's reply record and its author's credit answers, #799 mohsensbu answers of 08:11Z/08:17Z (c-decide-4rzl-1025), #804 exact-sides-held reply (think-9vai, think-4rzl), the stale lane delegates on #686/#715/#719, and the new #819 (amundsk, s(344)). Owner-reserved replies (#557, #565, #570, #574) stay reserved.
