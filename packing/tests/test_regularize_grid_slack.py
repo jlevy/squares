@@ -632,6 +632,39 @@ def test_a_view_is_decided_against_a_closed_form_bound_exactly() -> None:
     assert "above the verified upper bound" in above.reason
 
 
+def test_a_number_field_house_is_drawn_at_its_own_side_in_its_own_field() -> None:
+    """think-mbdw: an algebraic house has its own frame over its number field. n = 51's
+    house, in `Q(sqrt 2)`, is regular as published, so the view changes no square; it is
+    written in the witness's field at exactly `s_W`, decided on both exact routes (the
+    second the number-field checker), and held to the closed-form `U` exactly: `same`, row
+    10 or no change, never row 3 or 4."""
+    witness = slack.load_source(51)
+    frame = slack.same.exact_frame(witness, number_field=True)
+    assert frame.kind == "algebraic-number-field"
+    assert slack.scalars.text(frame.side) == "['16/3', '5/3']"
+    with pytest.raises(slack.same.SameSideError, match="no rational frame"):
+        slack.same.exact_frame(witness)
+    view, report = slack.regularize(witness, slack.Settings(0.5, slack.TRUST, slack.TIME_LIMIT))
+    assert view is not None, report.get("refusal")
+    assert report["relation"] == "same"
+    assert view["scalar"] == witness["scalar"]
+    assert view["side"] == ["16/3", "5/3"]
+    exact = report["attempts"][-1]["exact"]
+    assert {name: exact["verdicts"][name]["passed"] for name in VERDICTS} == dict.fromkeys(
+        VERDICTS, True
+    )
+    assert exact["verdicts"]["independent"]["pairs_tested"] > 0
+    side, _placements, _corners = view_geometry(view)
+    bound = driver.verified_bound(driver.case_facts(51))
+    assert bound is not None
+    assert bound.compare(side) == 0
+    report["n"] = 51
+    report["measured"] = slack.measure(51, witness, view, [])
+    decision = slack.decided(report, witness)
+    assert decision.row in (5, 10)
+    assert decision.decision in ("no-change", "admit")
+
+
 def test_a_grid_run_is_dated_by_its_reports_and_not_by_its_files_time(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
