@@ -9812,6 +9812,10 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "inputs swapped in, by render_n11_lower_bounds_explainer, "
             "render_n11_optimality_review, render_n11_threshold_bound_review and "
             "render_packing_methods: 69 files each, all byte-identical across the three. "
+            "After the replies gained the report entries their drafts state in words, "
+            "render_packing_methods, the one reader of result-requests.yaml among them, "
+            "again at link revision fe048570, twice from this tree and once with that "
+            "main's file swapped in: 43 files each, byte-identical across the three. "
             "No PDF was printed; each prints from that HTML. Every paper keeps its "
             "version: v0.4.32, v0.1.11, v0.1.4 and v0.2.7."
         ),
