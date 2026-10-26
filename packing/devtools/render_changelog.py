@@ -1405,14 +1405,22 @@ def changelog_entry_line(document: Document, entry: Document, *, in_news: bool) 
     anchor = entry_anchor(entry["id"])
     title = inline_html(entry["title"], allow_links=False)
     head = f'<a href="{NEWS_PAGE}#{anchor}">{title}</a>' if in_news else title
-    links = " · ".join(
+    parts = [
         _changelog_link(label, target)
         for label, target in entry_targets(document, entry, supporting=not in_news)
-    )
+    ]
+    # A release News never announces is named here, since this line is then the only
+    # reader surface that could carry its component editions.
+    if not in_news and entry.get("releases"):
+        editions = "; ".join(
+            f"{html.escape(_component_label(item['component']))} {html.escape(item['version'])}"
+            for item in entry["releases"]
+        )
+        parts.append(editions)
     score = entry_significance(entry)["score"]
     return (
         f'<li id="{html.escape(anchor, quote=True)}">{head}'
-        f"<small>S{score} · {links}</small></li>"
+        f"<small>S{score} · {' · '.join(parts)}</small></li>"
     )
 
 
