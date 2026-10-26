@@ -9769,9 +9769,14 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "render_n11_threshold_bound_review and render_packing_methods write their 67 "
             "files byte-identical across the two, measured again after the ceiling and "
             "the T-250 and T-251 claim edits. The explainer's two files differ in "
-            "the registered result count, 250 against 246, so it takes v0.4.31. No PDF of "
-            "these three was printed; each prints from that HTML. They keep v0.1.11, "
-            "v0.1.4 and v0.2.7."
+            "the registered result count, 250 against 246, so it takes v0.4.31. "
+            "Renumbered T-248 to T-251 when main acc1cfc3d (#825) registered T-247 and "
+            "took the explainer's v0.4.31, and measured again after merging it, at link "
+            "revision c9cfbdb3 with that main's five files swapped in and the profile "
+            "removed: the three write their 67 files byte-identical, and the explainer's "
+            "two differ only in counting 251 results against main's 247, so it takes "
+            "v0.4.32 over main's v0.4.31. No PDF of these three was printed; each prints "
+            "from that HTML. They keep v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
 )
