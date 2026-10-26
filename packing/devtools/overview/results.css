@@ -54,6 +54,24 @@
   font-weight: var(--site-font-weight-sans-bold);
 }
 
+/* A day's toggle sits on the first line of its summary, not centred against a summary
+   that wrapped (the owner, 26 October 2026). KPress centres the glyph in the summary's
+   flex box, which reads right on the one-line summaries it was drawn for and leaves the
+   glyph stranded in the middle of a tallied day on a narrow screen. The offset centres
+   it on the first line: KPress's own line box for a summary, less its own glyph, halved.
+   Both rules stay on the rollup, because that geometry is what holds here and is what
+   was measured here: a result's or a case's disclosure sets its own line height and
+   draws its glyph inline rather than as a flex item (`site-result.css`, and
+   `.site-case details` in `site.css`), and the same offset would push those down their
+   line instead of centring them. */
+.kpress .site-rollup summary {
+  align-items: flex-start;
+}
+
+.kpress .site-rollup summary::before {
+  margin-block-start: calc((var(--kpress-caps-heading-line-height, 1.2) * 1em - 0.85em) / 2);
+}
+
 .kpress .site-rollup .site-rollup-who {
   color: var(--kpress-doc-text);
   font-weight: var(--site-font-weight-sans-medium);

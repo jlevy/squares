@@ -551,17 +551,29 @@ def _entry_link_problems(
     entries: Sequence[Mapping[str, Any]],
     markup: _RecordMarkup,
 ) -> list[str]:
-    """Each entry's own anchor, once, and every launch, issue and pull-request link it
-    declares, shared by the two pages that serve the retained history."""
+    """Each entry's own anchor, once, and every link it declares, shared by the two pages
+    that serve the retained history: its issues and pull requests, its published
+    artifacts, its publication evidence where it claims one, and the supporting records
+    it references. A reference that names a listed issue is that issue's link, which
+    `_entry_lines` writes once, so it is not expected twice."""
     links = {element.attrs.get("href") for element in markup.find(tag="a")}
     problems: list[str] = []
     for entry in entries:
         if markup.ids.get(render_changelog.entry_anchor(entry["id"])) != 1:
             problems.append(f"missing or repeated entry {entry['id']}")
+        issues = {
+            issue_url(document["repository"], number) for number in entry.get("issues", [])
+        }
         targets = [
-            *(issue_url(document["repository"], number) for number in entry.get("issues", [])),
+            *issues,
             *(f"{document['repository']}/pull/{number}" for number in entry["pull_requests"]),
             *(artifact["target"] for artifact in entry.get("artifacts", [])),
+            *([entry["publication"]["evidence"]] if entry.get("publication") else []),
+            *(
+                item["target"]
+                for item in entry.get("references", [])
+                if item["target"].rstrip("/") not in issues
+            ),
         ]
         if missing := [
             target

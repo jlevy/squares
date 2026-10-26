@@ -132,6 +132,46 @@ def test_publication_audit_refuses_a_missing_launch_link(
         assert not all(passed for passed, _line in check(damaged))
 
 
+def test_the_changelog_audit_holds_every_declared_link_of_a_below_floor_entry(
+    views: tuple[dict, str, str, str, str, str],
+) -> None:
+    """An entry News never shows still has to arrive whole on the Changelog page: its
+    publication evidence and its supporting references as well as its issues, pull
+    requests and artifacts. The audit read only the last three until 26 October 2026, so
+    a lost evidence or reference link left its anchors intact and passed."""
+    document, _news, _github, changelog, _about, _home = views
+    public = {entry["id"] for entry in render_changelog.news_entries(document)}
+    below = [entry for entry in document["entries"] if entry["id"] not in public]
+    assert below
+    issues = {
+        entry["id"]: {
+            render_changelog.serialized_target(
+                f"{document['repository']}/issues/{number}", destination="site"
+            )
+            for number in entry.get("issues", [])
+        }
+        for entry in below
+    }
+    checked = 0
+    for entry in below:
+        targets = [
+            *([entry["publication"]["evidence"]] if entry.get("publication") else []),
+            *(item["target"] for item in entry.get("references", [])),
+        ]
+        for target in targets:
+            served = render_changelog.serialized_target(target, destination="site")
+            # A reference naming a listed issue is that issue's own link, written once.
+            if served in issues[entry["id"]] or served not in changelog:
+                continue
+            damaged = changelog.replace(served, "https://example.com/missing")
+            assert damaged != changelog
+            assert not all(
+                passed for passed, _line in check_published_site.changelog_checks(damaged)
+            ), (entry["id"], target)
+            checked += 1
+    assert checked
+
+
 def test_publication_audit_accepts_the_renderers_encoded_artifact_destinations(
     views: tuple[dict, str, str, str, str, str], monkeypatch: pytest.MonkeyPatch
 ) -> None:

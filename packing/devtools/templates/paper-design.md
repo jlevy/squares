@@ -1178,8 +1178,8 @@ contributor articles use their component sheets and the same text tokens.
   Its S and five bars remain one tightly paired mark.
   Homepage highlights keep the announcement’s significance and assurance qualifiers,
   with one S meter per card.
-  News includes only S3, S4 and S5; S1/S2 remain in the full GitHub changelog, with old
-  News bookmarks forwarded there.
+  News includes only S3, S4 and S5; S1/S2 remain in the Changelog page, with old News
+  bookmarks, and the `changelog` bookmark the section once answered, forwarded there.
   Archive controls offer S3/S4/S5 and default to S4/S5 and all topics, with OR within a
   facet and AND across facets.
   One unboxed Reset filters action restores the defaults, right aligned above the News
@@ -1212,7 +1212,7 @@ contributor articles use their component sheets and the same text tokens.
   URL state preserves unrelated query parameters and browser history; a low-score
   bookmark widens the filters to reveal its target.
   Without JavaScript the controls stay hidden and complete eligible articles remain
-  visible, with a link to the full changelog.
+  visible, with a link to the Changelog page.
   After the enhancement loads, about ten lines are visible.
   Clicking or tapping the card or its small shared arrow in the footer expands or
   contracts it inline; Enter and Space activate the button.
@@ -1224,7 +1224,7 @@ contributor articles use their component sheets and the same text tokens.
   Article links retain their ordinary actions; body-link focus reveals the article.
   Eligible entry and legacy date fragments reveal their corresponding card.
   Bookmarks for excluded entries, and dates with no eligible articles, forward to the
-  retained GitHub changelog.
+  Changelog page, which serves the whole retained history.
   Topic labels reuse the square-cornered chip geometry with distinct News subject
   metadata and the common neutral background.
   Their corresponding colored ink keeps News subjects distinct from the result/status
@@ -1258,8 +1258,9 @@ contributor articles use their component sheets and the same text tokens.
   Its title links to the stable News article anchor.
   Keep claim qualifications in that shared article; result records carry the detailed
   verification, confirmation and status marks.
-  The archive ends with a shared action button, “Full changelog”, using the
-  external-link arrow and linking to the complete GitHub changelog.
+  The archive ends with two shared action buttons: “Changelog”, with the right arrow,
+  opening this site’s own Changelog page, then “Changelog on GitHub”, with the
+  external-link arrow, opening the generated file.
   About keeps one short News link; its old history bookmarks forward without duplicating
   the feed.
 

@@ -1558,7 +1558,7 @@ def news_page() -> Page:
         title="News",
         description=(
             "Project news: newly launched results, papers, downloads and site features, "
-            "with the retained contribution history."
+            "rated S3 and above. The whole retained history is the Changelog."
         ),
         toc=False,
         page_scripts=(
