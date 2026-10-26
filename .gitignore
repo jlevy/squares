@@ -79,3 +79,6 @@ packages/workbench/node_modules
 # 2.6 and 4.5 MB, are hosted outside Git (OR-18) and listed in
 # packing/hosted/squarepacker-k2-minus-c-upper-certificates.yaml; its fetch puts them here.
 /packing/cases/asymptotic/hosted/squarepacker-k2-minus-c-upper/*.json.gz
+
+# Retained phase-timing measurement data (OR-18).
+/packing/benchmarks/data/phase-overhead-v2-20261022/

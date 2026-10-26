@@ -450,7 +450,7 @@ hypothesis status and summarizes experiment verdicts, and the
 | --- | ---: | --- |
 | Agendas | 43 | 20 active; 16 completed; 6 paused; 1 superseded |
 | Commitments | 443 | 233 complete; 65 stopped; 72 blocked; 31 ready; 22 tentative; 20 in progress |
-| Sessions | 186 | 105 completed; 81 stopped; all terminal |
+| Sessions | 188 | 105 completed; 83 stopped; all terminal |
 | Explorations | 50 | 30 linked to proposed hypotheses; 20 uncodified |
 | Hypotheses | 283 | 74 confirmed; 48 refuted; 75 blocked; 24 unresolved; 20 open; 37 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
 | Experiments | 246 | 94 accepted; 53 rejected; 63 unresolved; 12 baseline; 18 blocked; 5 abandoned; 0 in progress; 1 exhausted |
@@ -1951,6 +1951,16 @@ controller, not permission to blur contracts.
 
 ### Current Handoff
 
+[Session189](packing/campaign/agent-sessions/session-189-phase-timing-qualification.md)
+is stopped and explicitly uncertified after the final terminal-delta decision.
+The earlier combined source `dcf948fd48a381209f762dd677c7bbca0d5a9b21` passed its actual
+complete hosted checkpoint; that success does not certify later records.
+PR809 remains draft.
+
+**Selected next entry:** `think-uhxt`, retaining historical Session188 debt and the
+exact unfinished final qualification for a newly authorized window.
+Separate n17 debts and paused mathematical plans remain owned and unresolved.
+
 The prepared
 [eight-hour X-052 continuation](docs/project/specs/future/plan-2026-10-10-n17-eight-hour-proof-block.md)
 is owned by BC-455 / `think-wnbr` under BC-418. Its
@@ -2005,7 +2015,7 @@ The next slice prepares a current-source full17 endpoint control and an actual
 admitted-tail test while Astra develops a structural contact-chain cone.
 n11 first-round readiness is a separate known-case control.
 
-Session183 remains the most recent completed session:
+Session183 was the most recent completed session at the following n17 handoff:
 
 [Session 183](packing/campaign/agent-sessions/session-183-n17-draw-31.md) ran the one
 state of BC-428’s draw that exp-257 never reached, draw 31, under BC-429 and exp-258,
@@ -2093,10 +2103,10 @@ follows.
 The reviewed first-eight shared-centre pilot and PR410 ordinary-container parity
 pilot are future work, with separate endpoint and native-adoption controls.
 
-**Selected next entry:** `think-7hy3`, the owed full current-source checkpoint
-certification.
-Preserve the failed101-step predecessor and61-step push runs, their skips,
-the separately passing repairs and all source scopes; no full current-source PASS is
+**Selected next entry at the preceding n17 cutoff:** `think-7hy3`, the owed full
+current-source checkpoint certification.
+Preserve the failed101-step predecessor and61-step push runs, their skips, the
+separately passing repairs and all source scopes; no full current-source PASS is
 claimed. The coordinator and n17 program remain open while this debt remains.
 The reviewed W3 mathematical handoffs stay planned: complete partner-pose coupling
 against exp288 and measured same-object exact-replay profiling, with endpoint-family
@@ -6642,6 +6652,8 @@ in separate tables: their units differ, and the same work can appear in both.
 | `codex-task-tree-session184-through-20261007T165726Z.yaml` | session-184 | 6,609 | 39.2 h | 9.81 h | 9.81 h | yes |
 | `codex-task-tree-session185-final-checkpoint.yaml` | session-185 | 2,405 | 14.34 h | 3.78 h | 3.78 h | yes |
 | `codex-task-tree-session186-final-checkpoint.yaml` | session-186 | 4,425 | 21.42 h | 5.83 h | 5.83 h | yes |
+| `codex-task-tree-session188-checkpoint.yaml` | session-188 | 683 | 3.44 h | 1.65 h | 1.65 h | yes |
+| `codex-task-tree-session189-checkpoint.yaml` | session-189 | 600 | 2.76 h | 1.26 h | 1.26 h | yes |
 | `session-142-stack-correctness.yaml` | session-142 | 1,186 | 5.01 h | 2.29 h | 2.3 h | yes |
 | `session-162-codex-task-tree.yaml` | session-162 | 434 | 1.57 h | 0.64 h | 0.64 h | yes |
 | `session-163-codex-task-tree.yaml` | session-163 | 763 | 4.27 h | 2.53 h | 2.63 h | yes |
@@ -6659,9 +6671,9 @@ in separate tables: their units differ, and the same work can appear in both.
 
 | Coverage | sessions |
 | --- | ---: |
-| measured | 130 |
+| measured | 132 |
 | unmeasured | 56 |
-| **total** | **186** |
+| **total** | **188** |
 
 <!-- END GENERATED: session-close-report -->
 

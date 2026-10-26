@@ -2898,11 +2898,22 @@ days. It contains checkout provenance, subprocess start/end receipts and streame
 completed step results, pytest JUnit, and incremental mutation-control timings.
 JUnit records every selected case with its aggregate duration and outcome.
 Slow and exhaustive logs also retain every setup, call, and teardown duration.
-The quick lane preserves its 12-second console filter, so subthreshold phases are not
-individually retained there.
-Complete incremental per-phase records, including phases completed before termination,
-remain a follow-up under `think-uhxt`; aggregate JUnit timing is not full phase
-attribution. Upload runs after success or failure.
+The quick lane preserves its 12-second console filter.
+The progress writer can also record completed setup, call, and teardown phases as
+`phase_finish` JSONL rows with pytest’s `report.duration`, outcome, and run, command,
+worker, source, and test-node identities.
+Native pytest commands that already carry progress metadata set
+`PACKING_REACHABLE_TEST_PHASES=1` when capturing artifacts.
+Other callers can enable it in their environment; without it, the writer keeps its
+start, failure, and completion events without quantitative phase rows.
+Each worker writes and flushes its own `<stem>.progress-<worker>.jsonl`. Use an absolute
+journal stem and keep its output outside the source tree.
+The standalone phase-timing CLI enforces both requirements; the generic progress writer
+checks only that the stem is absolute.
+Completed rows remain useful after process termination; an unfinished phase has no
+measured duration, and a missing session completion leaves the run incomplete.
+Flushing does not guarantee survival of a host or storage failure.
+Upload runs after success or failure.
 Pytest writes JUnit at exit, so a hard kill can leave only partial logs and an unmatched
 start; loss of the runner can also prevent upload.
 Neither case is a completed timing observation.
@@ -2936,6 +2947,52 @@ controlled optimization comparisons separately from checkpoint evidence.
 Its maintained instrument retains raw output and receipts; its generated report
 validates the selected tests, outcomes, and comparison regime before calculating an
 exploratory result.
+
+From `packing/`, add `--phase-timings` to record phases with the standalone instrument:
+
+```bash
+uv run --frozen --all-extras --group dev python -m benchmarks.validation_timing \
+  --root . --label phase-diagnostic --output-dir /tmp/packing-phase-samples \
+  --phase-timings --repeats 1 --workers 2 --timeout 60 \
+  tests/test_validation_timing.py
+```
+
+This option is off by default and requires an absolute output directory outside the
+checkout.
+It loads the maintained progress plugin, checks its active capability and path,
+and records journal stems in the start/end receipts.
+A timeout or failed observation ends a phase-enabled repeat sequence.
+A hard kill of the recorder can leave a start receipt without an end receipt; retain
+that partial evidence and confirm descendant cleanup before another run.
+JUnit may be absent, so do not infer complete coverage from a surviving journal alone.
+
+Use the fixed `phase-overhead-v2` comparison to measure the recorder’s cost on clean
+current source, with a new output directory outside the checkout.
+The recorded process-visible CPU count must be exactly two; the reader refuses other
+counts. Provision the declared 4 GiB hard memory limit, no swap and one owned workload,
+and run the capture through an external supervisor with a 300-second budget.
+These limits are run preconditions; the timing CLI does not install them.
+After that supervision is in place, run from `packing/`:
+
+```bash
+uv run --frozen --all-extras --group dev python -m benchmarks.validation_timing \
+  phase-overhead --root . --output-dir /tmp/packing-phase-overhead
+uv run --frozen --all-extras --group dev python -m benchmarks.validation_report \
+  phase-overhead --root /tmp/packing-phase-overhead
+```
+
+The comparison runs six observations in `off,on,on,off,off,on` order, with 1,000 cases,
+two pytest workers, one inner worker and one native thread per observation.
+It measures the whole timing CLI, including startup and output capture.
+The reader requires identical successful case selections and, for each enabled
+observation, all 3,000 completed phases with totals matching that observation’s JUnit.
+It reports all six times, ranges, medians, the median ratio and added median seconds;
+`accepted` requires a ratio at most 1.05 and an increase at most 3 seconds.
+Keep a failed or interrupted comparison and stop without replacing samples.
+Interpret this decision only for the recorded fixture and execution regime.
+The reader can replay a relocated complete evidence directory without the original
+checkout or interpreter.
+Raw receipts include local paths and commands; review them before public retention.
 
 ### The gate’s standing cost, which a W5 block reads rather than re-measures
 
