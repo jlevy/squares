@@ -2,7 +2,6 @@
   "format": "valid7-root-names-v1",
   "leaves": {
     "path": "packing/resources/web/evand-square-packing-2026-10-01/source/s12/certificates/k2m3/qx2_zm/runV3_6294052a_leaves.jsonl.gz",
-    "sha256": "1091788b98572470c5fe5c438194e4516de581483644d847ef412dba4b34efd2",
     "roots": 9800,
     "grid": [
       35,
@@ -12,7 +11,6 @@
   },
   "xroots": {
     "path": "packing/resources/web/evand-valid7-lean-2026-10-11/square-packing/lean/scripts/v7_xroots.txt",
-    "sha256": "447072bf8ec3779e29fff2121a069920afec3d501feea1719a84d8b0606ffbfc",
     "roots": 2612
   },
   "version_1": {

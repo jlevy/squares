@@ -26,9 +26,10 @@ names agree, and writes ``receipts/root-names.json`` in the #537 packet:
 
 It decides nothing about the proof: a name that agrees says which module a root's
 certificate becomes, not that the module checks. ``scan`` reads the release archive and
-the version 2 list from local copies held to the SHA-256 the packets pin, and writes the
-receipt; ``check`` re-derives the leaves and X-mode parts from the retained files and
-compares them, and the digests, with the receipt.
+the version 2 list, which the repository does not retain, from local copies held to the
+SHA-256 pinned at review (the archive's here, the list's in the v2 packet's manifest),
+and writes the receipt; ``check`` re-derives the leaves and X-mode parts from the
+retained files, which Git identifies, and compares them with the receipt.
 
 From ``packing/``::
 
@@ -103,7 +104,6 @@ def leaves() -> dict[str, Any]:
     _require(cuts[0] * cuts[1] * cuts[2] == len(roots), "the roots do not fill the grid")
     return {
         "path": LEAVES.relative_to(ROOT.parent).as_posix(),
-        "sha256": _sha256(LEAVES),
         "roots": len(roots),
         "grid": cuts,
     }
@@ -116,7 +116,6 @@ def xroots(count: int) -> dict[str, Any]:
     _require(all(0 <= i < count for i in names), "v7_xroots.txt names a root out of range")
     return {
         "path": XROOTS.relative_to(ROOT.parent).as_posix(),
-        "sha256": hashlib.sha256(raw).hexdigest(),
         "roots": len(names),
     }
 
@@ -124,7 +123,7 @@ def xroots(count: int) -> dict[str, Any]:
 def certificates(path: Path, count: int) -> dict[str, Any]:
     """Version 1's archive: one pickle per root, each matching its line in the list."""
     _require(_sha256(path) == CERTS_SHA256, f"{path}: not the pinned v7cert.tar.zst")
-    digests: dict[int, str] = {}
+    by_root: dict[int, str] = {}
     listed: dict[str, str] = {}
     others: list[str] = []
     with tarfile.open(path, "r:zst") as archive:
@@ -146,20 +145,20 @@ def certificates(path: Path, count: int) -> dict[str, Any]:
             _require(match is not None, f"{member.name}: not a root's pickle")
             assert match is not None
             index = int(match.group(1))
-            _require(index not in digests, f"{member.name}: twice")
-            digests[index] = hashlib.sha256(data).hexdigest()
-    _require(sorted(digests) == list(range(count)), "the pickles are not one per root")
+            _require(index not in by_root, f"{member.name}: twice")
+            by_root[index] = hashlib.sha256(data).hexdigest()
+    _require(sorted(by_root) == list(range(count)), "the pickles are not one per root")
     by_name = {Path(name).name: digest for name, digest in listed.items()}
     _require(
-        by_name == {f"R{i:05d}.pkl": digest for i, digest in digests.items()},
+        by_name == {f"R{i:05d}.pkl": value for i, value in by_root.items()},
         "v7cert.sha256 does not list each pickle once with its digest",
     )
     return {
         "asset": "v7cert.tar.zst",
         "sha256": CERTS_SHA256,
         "bytes": path.stat().st_size,
-        "pickles": len(digests),
-        "names": _span(sorted(digests)),
+        "pickles": len(by_root),
+        "names": _span(sorted(by_root)),
         "listed": len(listed),
         "every_pickle_matches_its_line": True,
         "directories": others,
@@ -236,10 +235,6 @@ def check() -> list[str]:
         problems.append("the leaves part does not re-derive")
     if record.get("xroots") != xroots(grid["roots"]):
         problems.append("the X-mode part does not re-derive")
-    if record.get("version_1", {}).get("sha256") != CERTS_SHA256:
-        problems.append("the version 1 archive is not the pinned one")
-    if record.get("version_2", {}).get("sha256") != _pinned_generated():
-        problems.append("the version 2 list is not the one the v2 packet pins")
     for part in ("version_1", "version_2"):
         names = record.get(part, {}).get("names")
         if names != _span(range(grid["roots"])):

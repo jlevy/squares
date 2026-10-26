@@ -9572,6 +9572,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         paths=(
             "packing/campaign/result-requests.yaml",
             "packing/contributors/people/chris-deotte.md",
+            "packing/devtools/site_urls.py",
             "packing/devtools/upper_bound_reports.py",
             "packing/frontier/results.yaml",
             "packing/frontier/source-coverage.yaml",
@@ -9588,12 +9589,14 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "The imports of 26 October (w-imports-1026): T-247, Evan Daniel's packing at "
             "299 (#824), and T-248 to T-250, three reported Lean formalizations (#535, "
             "#537, #643), with their evidence, coverage and requests entries, the "
-            "importer's optional short credit and Chris Deotte's contributor profile. "
+            "importer's optional short credit, Chris Deotte's contributor profile and "
+            "the results page's byte ceiling raised to 1,500,000 for 250 results. "
             "Against main 9ebde24df (#823): rendered at link revision 24bb2581 into empty "
-            "site directories, twice from this tree and once with that main's four files "
-            "swapped in and the profile removed, render_n11_optimality_review, "
+            "site directories, from this tree and with that main's five files swapped in "
+            "and the profile removed, render_n11_optimality_review, "
             "render_n11_threshold_bound_review and render_packing_methods write their 67 "
-            "files byte-identical across the three. The explainer's two files differ in "
+            "files byte-identical across the two, measured again after the ceiling and "
+            "the T-249 and T-250 claim edits. The explainer's two files differ in "
             "the registered result count, 250 against 246, so it takes v0.4.31. No PDF of "
             "these three was printed; each prints from that HTML. They keep v0.1.11, "
             "v0.1.4 and v0.2.7."
