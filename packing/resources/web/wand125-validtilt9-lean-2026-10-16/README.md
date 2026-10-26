@@ -13,7 +13,7 @@ theorem bentz4 : ∀ k : ℕ, 8 ≤ k → minSide (k ^ 2 - 4) = k := Bentz4.bent
 
 `ValidTilt9` is Evan Daniel’s finite premise for $s(k^2 - 4) = k$, which the record holds
 as `T-081`, reported, on two reported runs of it and a build here of Daniel’s reduction.
-The record registers this proof as `T-250`, a formalization of `T-081` at $k \ge 8$, at
+The record registers this proof as `T-251`, a formalization of `T-081` at $k \ge 8$, at
 `V0`/`C0`, with the bibliography key **[wand125 ValidTilt9 Lean 2026-10-16]**. Issue
 [#643](https://github.com/jlevy/squares/issues/643), which the project opened, tracks it,
 and bead `think-jh0n` owns its import. The claims below are the source’s; nothing here

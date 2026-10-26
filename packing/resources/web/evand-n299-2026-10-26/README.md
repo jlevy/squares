@@ -6,14 +6,14 @@ adds at `1be69ca8a088035ccced0e279e40abea81e1d9f3` (authored and committed
 2026-10-26T03:30:38Z). Issue [#824](https://github.com/jlevy/squares/issues/824), opened
 21 minutes 40 seconds later at 03:52:18Z, reports it:
 
-- **299, recorded as T-247:** `s299-1025.cert`,
+- **299, recorded as T-248:** `s299-1025.cert`,
   $s(299) \le 8901847717666168847717657266821/(5 \cdot 10^{29}) =
   17.803695435332337694\ldots$, which the issue prints rounded up at 12 places as
   17.803695435333: 1.92e-2 below the case’s house, the Kingbird catalogue’s
   $33/2 + \sqrt{7}/2 = 17.8228756555\ldots$ that T-101’s exact ceiling verifies, and below
   every report at 299.
 
-T-247 registers it at `V0`/`C0`. The stage 4 review and the adoption at 299, with both
+T-248 registers it at `V0`/`C0`. The stage 4 review and the adoption at 299, with both
 strong generators’ regularization and the flip of the new house in the same pull request,
 are think-8hjz’s.
 

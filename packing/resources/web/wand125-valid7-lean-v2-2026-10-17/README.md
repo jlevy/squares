@@ -7,7 +7,7 @@ Daniel’s `Valid7`, at
 [#537](https://github.com/jlevy/squares/issues/537) on 18 October 2026. It re-checks
 version 1’s theorem, which the [Valid7 packet](../evand-valid7-lean-2026-10-11/README.md)
 retains as merged at evand/square-packing `060c1a1`, from the same 9,800 per-root
-certificates. The record registers both as `T-249`, a formalization of `T-064`, at
+certificates. The record registers both as `T-250`, a formalization of `T-064`, at
 `V0`/`C0`; this version’s bibliography key is **[wand125 Valid7 Lean v2 2026-10-17]**.
 
 ## Source and Pin

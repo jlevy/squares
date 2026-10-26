@@ -160,9 +160,9 @@ def test_the_checkbox_starts_at_its_pages_default_and_the_table_with_it(
     # adoption stays too: nothing has replaced it (think-h0d1). T-236, Evan Daniel's Lean
     # proof of Fang's theorems (T-163), is a formalization, so no bound mark, and its
     # evidence's bounds at 211 to 307, s < n, trail the cases as T-163's do: it stays,
-    # superseded in standing, since 23 October 2026. T-248, Daniel's Lean proof of the
+    # superseded in standing, since 23 October 2026. T-249, Daniel's Lean proof of the
     # n = 12 bound T-049 states, is one too: a later n = 12 bound superseded T-049's, so
-    # it stays, superseded in standing, since 26 October 2026. T-249 and T-250, Lean
+    # it stays, superseded in standing, since 26 October 2026. T-250 and T-251, Lean
     # proofs of the values T-064 and T-081 hold, state each value and are second
     # certificates, as T-235 is.
     kept = [result for result in overview.results if result.id.lower() in current]
@@ -178,7 +178,7 @@ def test_the_checkbox_starts_at_its_pages_default_and_the_table_with_it(
     assert [result.id for result in kept if result.standing == "superseded"] == [
         "T-003",
         "T-236",
-        "T-248",
+        "T-249",
     ]
     pending = render_recent_results.PENDING_ADOPTION
     # T-128 holds its cases since the house adoption of 11 October 2026 (think-fvz4);

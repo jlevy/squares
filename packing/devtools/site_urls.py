@@ -134,7 +134,7 @@ PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
         1_500_000,
         (
             "On 26 October 2026 the 250-result page measures 1,418,298 bytes, past the "
-            "1,400,000 ceiling with T-247 to T-250, at a 90th-percentile row of 4,674 "
+            "1,400,000 ceiling with T-248 to T-251, at a 90th-percentile row of 4,674 "
             "bytes; recent arrivals live on their own page and cost the archive nothing. "
             "The ceiling moves to 1,500,000 as a measured choice, which leaves 81,702 bytes, "
             "about 17 rows, so the room runs through 267 results; its timing was not "

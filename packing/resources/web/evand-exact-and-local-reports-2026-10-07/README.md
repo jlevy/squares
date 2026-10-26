@@ -54,7 +54,7 @@ The n = 28 memory and wall figures are source reports, not measurements of this 
 
 On 26 October 2026 the retained `s12/lean/Sqpack/S12HLower.lean`, Daniel’s kernel proof of
 $s(12) \ge 15680/3951$ (first committed at `513bb66` on 28 September), became the evidence
-of `T-248`, a reported formalization of `T-049`, for issue
+of `T-249`, a reported formalization of `T-049`, for issue
 [#535](https://github.com/jlevy/squares/issues/535). Its closure through the `BoxTree`
 verifier its generated parts import is nine modules, Basic, BoxTree, Chord, Cover, D4,
 S12HLower, S32, S32Data and ZeroMargin, all retained here, with no kernel-escape token in

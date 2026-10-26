@@ -4488,7 +4488,7 @@ results:
       whether a mapped same-project review of another author's result counts toward them is
       the owner's decision. Rung 5 needs a proof-assistant formalization built and
       reviewed by human experts: Daniel's own Lean kernel proof of this bound,
-      s12_ge_15680_3951 (S12HLower, 28 September 2026), is registered as T-248, a reported
+      s12_ge_15680_3951 (S12HLower, 28 September 2026), is registered as T-249, a reported
       formalization at V0/C0 whose build (about 8 CPU-hours, 31 GB) awaits the owner's word
       (think-yzl3, #535). The exact value remains open; the conjecture is s(12) = 4.
 
@@ -6031,7 +6031,7 @@ results:
 
       That proof is now reported complete: Hiroaki Hosono's Lean kernel proof of Valid7,
       merged into the source on 11 October and re-checked as version 2 on 17
-      October, is registered as T-249, a reported formalization of this result at V0/C0;
+      October, is registered as T-250, a reported formalization of this result at V0/C0;
       its build (about 798 CPU-hours for version 2) or a sample of its roots is the owner's
       decision (think-qu37, #537). think-kqi1 tracks a scope that can state an infinite
       family.
@@ -8126,7 +8126,7 @@ results:
 
       Hiroaki Hosono's Lean kernel proof of ValidTilt9, with this reduction s(k^2 - 4) = k
       for every k >= 8 (wand125/square-packing, 16 October 2026), is registered as
-      T-250, a reported formalization at V0/C0 (#643); its build, about 7,400 CPU-hours and
+      T-251, a reported formalization at V0/C0 (#643); its build, about 7,400 CPU-hours and
       230 GB, is held above the cap (think-rw3i), and a build would be a third route to
       ValidTilt9 beside the two checkers.
     unfinished_confirmations:
@@ -35020,7 +35020,7 @@ results:
       prints and lies inside the Krawczyk enclosure of S; whether it is above sigma, as a
       realization of the packing at a decided side is expected to be, is not decided here.
       n-029.md's analytic characterization gives the degree and the pinned asset.
-  - id: T-247
+  - id: T-248
     kind: upper-bound
     registered: '2026-10-26'
     landed: '2026-10-26'
@@ -35161,7 +35161,7 @@ results:
             T-243's clean-room checker at 182, about a minute, scaled to 299 squares, and the
             sharp controls' 3 CPU-minutes here; an estimate, not a receipt
           priced: '2026-10-26'
-  - id: T-248
+  - id: T-249
     kind: formalization
     proves_kind: lower-bound
     registered: '2026-10-26'
@@ -35258,7 +35258,7 @@ results:
       kernel-escape token in any (devtools.lean_closure,
       receipts/s12h-lean-closure.json). minSide is S32.lean's, the definition the record's
       2026-09-30 build of s13_eq_4 used.
-  - id: T-249
+  - id: T-250
     kind: formalization
     proves_kind: optimality
     registered: '2026-10-26'
@@ -35389,7 +35389,7 @@ results:
 
       The note of 18 October on #537 that the run's component CPU figures do not sum to its
       total is resolved by version 2's own table, whose components sum to 797.7 CPU-hours.
-  - id: T-250
+  - id: T-251
     kind: formalization
     proves_kind: optimality
     registered: '2026-10-26'

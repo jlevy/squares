@@ -15,7 +15,7 @@ theorem validTilt7 : Bentz.ValidTilt7
 with axioms `[propext, Classical.choice, Quot.sound]` and no `sorry` or `native_decide`.
 The record holds $s(k^2 - 3) = k$ for every $k \ge 6$ as `T-064`, confirmed on two exact
 checkers of `Valid7` and a build here of Daniel’s reduction. It registers this proof,
-with [version 2](../wand125-valid7-lean-v2-2026-10-17/README.md), as `T-249`, a
+with [version 2](../wand125-valid7-lean-v2-2026-10-17/README.md), as `T-250`, a
 formalization of `T-064`, at `V0`/`C0`, with the bibliography key
 **[wand125 Valid7 Lean 2026-10-11]**. Issue
 [#537](https://github.com/jlevy/squares/issues/537) tracks it, and bead `think-0ayk` owns

@@ -7757,7 +7757,7 @@ issues:
         The evidence entry, the read of the statement binding and the corrected next rung landed on
         26 October 2026 (w-imports-1026, think-oyd4): a proof in a proof assistant of a result the
         record holds is a formalization of its own (epistemics.md, Result Kinds), as #536's was, so
-        the evidence, E-n012-evand-s12h-lean-report, belongs to T-248, a reported formalization of
+        the evidence, E-n012-evand-s12h-lean-report, belongs to T-249, a reported formalization of
         T-049 at V0/C0, and T-049's next_rung names it. The closure of S12HLower through the BoxTree
         verifier is nine modules, all retained in the evand-exact-and-local-reports-2026-10-07
         packet at f58a017 with no kernel-escape token (receipts/s12h-lean-closure.json), and
@@ -7878,7 +7878,7 @@ issues:
         2's 9,800 root modules are R00000 to R09799, one per root of the run's leaves file, which
         fills the 35 x 35 x 8 grid gen_main.py asserts (receipts/root-names.json). A proof in a
         proof assistant of a result the record holds is a formalization of its own, so the
-        evidence, E-k2m3-wand125-valid7-lean-v1-report and -v2-report, belongs to T-249, a
+        evidence, E-k2m3-wand125-valid7-lean-v1-report and -v2-report, belongs to T-250, a
         reported formalization of T-064 at V0/C0, and T-064's next_rung names it. Version 2's
         README's step table sums to 797.7 CPU-hours, which resolves the 18 October note.
     - what: The owner's decision on a sample rebuild, the full rebuild, or neither.
@@ -10280,7 +10280,7 @@ issues:
       3 October release is byte-identical to the proof's, so it formalizes T-081 at k >= 8. Imported on 26
       October 2026 (w-imports-1026): the wand125-validtilt9-lean-2026-10-16 packet retains the lean/
       directory at 319a779 with the release's three assets pinned by digest, every file of the proof's
-      closure is retained here, and T-250 registers it as a reported formalization of T-081 at V0/C0. The
+      closure is retained here, and T-251 registers it as a reported formalization of T-081 at V0/C0. The
       full kernel replay, about 7,400 CPU-hours with 230 GB for the assembly by the source's receipts, is
       held above the compute cap (think-rw3i).
     read_through: '2026-10-16T05:29:57Z'
@@ -10290,7 +10290,7 @@ issues:
         minSide (k^2 - 4) = k, whose axioms are propext, Classical.choice and Quot.sound only.'
       source: body
       register:
-      - T-250
+      - T-251
       evidence:
       - E-k2m4-wand125-validtilt9-lean-report
     beads:
@@ -10319,15 +10319,15 @@ issues:
       the comparison of the 40 machinery files that think-jh0n's note of 16 October records,
       which is not on main. The issue stays open.
 
-      Imported on 26 October 2026 by w-imports-1026: the packet, T-250 with
+      Imported on 26 October 2026 by w-imports-1026: the packet, T-251 with
       E-k2m4-wand125-validtilt9-lean-report, and a check of library.sha256 here (53 of its 59
       files byte-identical to the evand-valid7-lean-2026-10-11 packet's copies at 060c1a1,
       ValidSplit9.lean to the 3 October evand packet's, and LemmaEKM.lean, RowMinN.lean and the
       three V9 modules the source's own, retained in this packet), which puts the 16 October
       machinery comparison on main. The stage 4 review stays with think-jh0n and the held replay
       with think-rw3i; the 746b0c0 rectangle theorem moved to its own import bead, think-d5m3. The
-      issue can close on the reply once T-250's review and replay are owned, as close_when says;
-      check_requests holds it open until T-250 is settled.
+      issue can close on the reply once T-251's review and replay are owned, as close_when says;
+      check_requests holds it open until T-251 is settled.
   - number: 606
     title: 's(146) ≤ 12.583782190152: registration request'
     author: evand
@@ -24816,7 +24816,7 @@ issues:
       certificate's, the side is its header and rounds up to the issue's print, both maintained
       exact routes accept it and refuse its gross and sharp controls, and the ledger of 26
       October for the issue (upper-bounds-issue824-20261026) records it, a new packing.
-      Registered as T-247 at V0/C0; measured pose by pose, no symmetry pairs it one to one with
+      Registered as T-248 at V0/C0; measured pose by pose, no symmetry pairs it one to one with
       the house's packing (124 squares beyond a tenth under the best assignment), another
       arrangement. The stage 4 review and the adoption at 299 with both regularizations are
       think-8hjz's; the house rule puts the adoption, the general regularization and the flip in
@@ -24832,7 +24832,7 @@ issues:
       source: body
       bead: think-3xn9
       register:
-      - T-247
+      - T-248
       evidence:
       - E-evand-n299-certificate-report
     beads:

@@ -897,12 +897,12 @@ FIRST_PUBLISHED = PUBLICATION_HISTORY[-1].first_published
 #: The leading entry is proposed for the next publication; confirm its date at first deployment.
 EXPLAINER_HISTORY = (
     PublicationHistoryEntry(
-        version="v0.4.31",
+        version="v0.4.32",
         first_published="October 26, 2026",
         result_scope=(
             "Update the registered result count after the registration of Evan Daniel's "
-            "packing at 299 (T-247) and three reported Lean formalizations (T-248 to "
-            "T-250)."
+            "packing at 299 (T-248) and three reported Lean formalizations (T-249 to "
+            "T-251)."
         ),
     ),
     PublicationHistoryEntry(
@@ -1507,13 +1507,13 @@ class ReleaseImpactDecision(NamedTuple):
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
     ReleaseImpactDecision(
         component="paper:n11-lower-bounds-explainer",
-        previous_version="v0.4.30",
-        version="v0.4.31",
+        previous_version="v0.4.31",
+        version="v0.4.32",
         impact="patch",
         reason=(
             "Update the registered result count after the registration of Evan Daniel's "
-            "packing at 299 (T-247) and three reported Lean formalizations (T-248 to "
-            "T-250)."
+            "packing at 299 (T-248) and three reported Lean formalizations (T-249 to "
+            "T-251)."
         ),
     ),
     ReleaseImpactDecision(
@@ -9640,8 +9640,8 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "papers/square-packing-methods-survey.md",
         ),
         reason=(
-            "The imports of 26 October (w-imports-1026): T-247, Evan Daniel's packing at "
-            "299 (#824), and T-248 to T-250, three reported Lean formalizations (#535, "
+            "The imports of 26 October (w-imports-1026): T-248, Evan Daniel's packing at "
+            "299 (#824), and T-249 to T-251, three reported Lean formalizations (#535, "
             "#537, #643), with their evidence, coverage and requests entries, the "
             "importer's optional short credit, Chris Deotte's contributor profile and "
             "the results page's byte ceiling raised to 1,500,000 for 250 results. "
@@ -9650,7 +9650,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "and the profile removed, render_n11_optimality_review, "
             "render_n11_threshold_bound_review and render_packing_methods write their 67 "
             "files byte-identical across the two, measured again after the ceiling and "
-            "the T-249 and T-250 claim edits. The explainer's two files differ in "
+            "the T-250 and T-251 claim edits. The explainer's two files differ in "
             "the registered result count, 250 against 246, so it takes v0.4.31. No PDF of "
             "these three was printed; each prints from that HTML. They keep v0.1.11, "
             "v0.1.4 and v0.2.7."
