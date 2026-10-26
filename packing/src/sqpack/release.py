@@ -9415,8 +9415,11 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "printed; each prints from that HTML. Measured again after review A's fixes "
             "(T-240's and T-242's notes on think-20oj's scope, the #763 packet's README), "
             "at link revision db18b3bc with the same nine candidate inputs of main "
-            "bb756e193 swapped in: the same outcome. Retain v0.4.27, v0.1.11, v0.1.4 and "
-            "v0.2.7."
+            "bb756e193 swapped in: the same outcome. Measured again after merging main "
+            "2f974835a (#818) and recording #798's comment of 25 October, at link "
+            "revision 6273902f with that main's nine candidate inputs swapped in: all 69 "
+            "files byte-identical across the three again. Retain v0.4.30, v0.1.11, v0.1.4 "
+            "and v0.2.7."
         ),
     ),
 )
