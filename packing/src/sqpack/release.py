@@ -897,6 +897,14 @@ FIRST_PUBLISHED = PUBLICATION_HISTORY[-1].first_published
 #: The leading entry is proposed for the next publication; confirm its date at first deployment.
 EXPLAINER_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.4.31",
+        first_published="October 26, 2026",
+        result_scope=(
+            "Update the registered result count after the registration of Hyukdong Kim's "
+            "exact side at 297 (T-247)."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.4.30",
         first_published="October 25, 2026",
         result_scope=(
@@ -1496,6 +1504,16 @@ class ReleaseImpactDecision(NamedTuple):
 # New component cuts append decisions here, newest first, alongside their own histories.
 # No impact is invented retrospectively for the published baseline editions.
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
+    ReleaseImpactDecision(
+        component="paper:n11-lower-bounds-explainer",
+        previous_version="v0.4.30",
+        version="v0.4.31",
+        impact="patch",
+        reason=(
+            "Update the registered result count after the registration of Hyukdong Kim's "
+            "exact side at 297 (T-247)."
+        ),
+    ),
     ReleaseImpactDecision(
         component="paper:n11-lower-bounds-explainer",
         previous_version="v0.4.29",
@@ -2603,6 +2621,37 @@ class ReleaseNoPublicChange(NamedTuple):
 
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The import of #804's side at 297 (think-ozx8): T-247, its coverage entry and "
+            "#804's requests entry, against main 85a1919da (#820). Rendered at link "
+            "revision 3af720c4 into empty site directories, once from this tree and once "
+            "with main's results.yaml, result-requests.yaml and source-coverage.yaml "
+            "swapped in, 51 files each, by render_n11_optimality_review, "
+            "render_n11_threshold_bound_review and render_packing_methods: every file is "
+            "byte-identical across the two renders. The explainer counts the register's "
+            "results and takes v0.4.31. No PDF was printed; each prints from that HTML. "
+            "Retain v0.1.11, v0.1.4 and v0.2.7."
+        ),
+    ),
     ReleaseNoPublicChange(
         components=(
             "paper:n11-lower-bounds-explainer",
