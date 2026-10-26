@@ -219,10 +219,15 @@ sources:
   - E-evand-exact-form-n152-report
   - E-evand-exact-form-n177-report
   - E-evand-local-minima-178-report
-  notes: T120–T123 retain the four new exact-form feasible-side claims as V0/C0; T124 retains the
+  notes: >-
+    T120–T123 retain the four new exact-form feasible-side claims as V0/C0; T124 retains the
     actual178 non-strict local-minimum roster as V0/C0. Catalogue metadata accounts for all269 exact
     and258 Lean flags as source assertions. Canonical algebraic registry integration belongs to PR403;
-    no source geometry, minimality or full Lean replay was admitted here.
+    no source geometry, minimality or full Lean replay was admitted here. Since 26 October 2026 the
+    retained s12/lean/Sqpack/S12HLower.lean, Daniel's kernel proof of s(12) >= 15680/3951, is T-249's
+    evidence (E-n012-evand-s12h-lean-report, issue 535), a formalization of T-049, with its closure
+    in the packet's receipts/s12h-lean-closure.json, under its own coverage entry and key,
+    evand-s12h-lean-2026-09-28 and [Daniel S12H Lean 2026-09-28]; not built here (think-yzl3).
 - id: evand-exact-and-local-reports-2026-10-12
   title: >-
     Grade-C local minima of 233 source configurations of field degree at most 4 (Theorem C), and
@@ -9916,6 +9921,78 @@ sources:
     19 closure modules are retained byte for byte in the 7 October evand packet. T-235 records
     it as a formalization of T-066. Not built here (think-cs9x, held); the case record is
     unchanged.
+- id: wand125-validtilt9-lean-2026-10-16
+  title: Hosono's Lean kernel proof of Daniel's ValidTilt9, s(k^2 - 4) = k for every k >= 8
+  role: source-repository
+  url: https://github.com/wand125/square-packing/tree/319a779efcc78db2f92bffc87844446f8723b01d/problems/square-lower-bounds/certificates/k2m4_n77_L9/lean
+  local: resources/web/wand125-validtilt9-lean-2026-10-16/
+  source_key: '[wand125 ValidTilt9 Lean 2026-10-16]'
+  scope:
+    n_values: [60, 77, 96, 117, 140, 165, 192, 221, 252, 285, 320]
+  reviewed: '2026-10-26'
+  source_date: '2026-10-16'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  evidence:
+  - E-k2m4-wand125-validtilt9-lean-report
+  notes: >-
+    wand125/square-packing at 319a779, 16 October 2026: validTilt9, valid9 and bentz4 : ∀ k ≥ 8,
+    minSide (k^2 - 4) = k, on Evan Daniel's k2m4 certificate and library, over 1,275,911
+    generated files the source lists by digest and does not store. MIT. The packet retains
+    the lean/ directory (Main.lean as built, the V9 data, bridge and tilt modules, the two
+    changed library files, the generators, the environment and the receipts) and pins the
+    release validtilt9-lean-v1's assets by digest; every file of the closure is retained
+    here. T-251 records it as a formalization of T-081 at k >= 8. Not built here
+    (think-rw3i, held); the case records are unchanged.
+- id: evand-valid7-lean-2026-10-11
+  title: Hosono's Lean kernel proof of Daniel's Valid7 as merged at evand/square-packing 060c1a1
+  role: source-repository
+  url: https://github.com/evand/square-packing/tree/060c1a1052029f81f30c8a97134ee03666b1bb77/lean
+  local: resources/web/evand-valid7-lean-2026-10-11/
+  source_key: '[wand125 Valid7 Lean 2026-10-11]'
+  scope:
+    n_values: [33, 46, 61, 78, 97, 118, 141, 166, 193, 222, 253, 286, 321]
+  reviewed: '2026-10-26'
+  source_date: '2026-10-11'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  evidence:
+  - E-k2m3-wand125-valid7-lean-v1-report
+  notes: >-
+    evand/square-packing at 060c1a1, 11 October 2026: the merge of wand125's PR #6, Valid7 in
+    the Lean kernel and with Daniel's reduction s(k^2 - 3) = k for every k >= 6, the 9,800
+    root modules and Main.lean generated from the release data/valid7-lean-certs-v1. MIT.
+    The packet retains the Valid7 closure (55 modules and the three build pins), VALID7.md
+    and the generators, and pins the release asset v7cert.tar.zst by SHA-256 in its
+    root-name audit. T-250 records it as a formalization of T-064, with version 2. Not built
+    here (think-qu37, an owner decision); the case records are unchanged.
+- id: wand125-valid7-lean-v2-2026-10-17
+  title: Hosono's Lean kernel proof of Daniel's Valid7, version 2
+  role: source-repository
+  url: https://github.com/wand125/square-packing/tree/649a92042b4b79dda1eca1749c34029aee60990e/lean/valid7
+  local: resources/web/wand125-valid7-lean-v2-2026-10-17/
+  source_key: '[wand125 Valid7 Lean v2 2026-10-17]'
+  scope:
+    n_values: [33, 46, 61, 78, 97, 118, 141, 166, 193, 222, 253, 286, 321]
+  reviewed: '2026-10-26'
+  source_date: '2026-10-17'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  evidence:
+  - E-k2m3-wand125-valid7-lean-v2-report
+  notes: >-
+    wand125/square-packing at 649a920, 17 October 2026: version 2 of the Valid7 kernel proof,
+    the same theorem from the same certificates with re-certified leaves, 62,626 generated
+    files in the release valid7-lean-v2, and a recorded run of about 798 CPU-hours. The
+    folder states no licence, so the packet pins its twelve files by digest and retains
+    none. T-250 records it with version 1. Not built here (think-qu37); the case records are
+    unchanged.
 - id: evand-fang-ryu-lean-2026-10-18
   title: Daniel's Lean proofs of Fang's Theorems 1 and 2 and of Ryu's Theorem 1.4
   role: source-repository
@@ -11516,6 +11593,58 @@ sources:
     a new packing. T-243 records it at V3/C3 since the 25 October review
     (E-evand-n182-exact-feasibility, E-evand-n182-review-exact-feasibility), and the case
     at 182 adopted it as its house best packing in the pass of 25 October 2026.
+- id: evand-s12h-lean-2026-09-28
+  title: Daniel's Lean kernel proof of s(12) >= 15680/3951 (S12HLower)
+  role: source-repository
+  url: https://github.com/evand/square-packing/tree/f58a01774a733b232a88576470332185d8d11641/s12/lean
+  local: resources/web/evand-exact-and-local-reports-2026-10-07/
+  source_key: '[Daniel S12H Lean 2026-09-28]'
+  scope:
+    n_values: [12]
+  reviewed: '2026-10-26'
+  source_date: '2026-09-28'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  evidence:
+  - E-n012-evand-s12h-lean-report
+  notes: >-
+    evand/square-packing's S12HLower.lean, first committed on 28 September 2026 and retained in
+    the 7 October evand packet: s12_ge_15680_3951 from T-049's certificate through the BoxTree
+    verifier, the 320 part files generated by gen_data.sh S12H and not stored. MIT. Its
+    nine-module closure is retained in the packet (receipts/s12h-lean-closure.json). T-249
+    records it as a formalization of T-049. Not built here (think-yzl3, an owner decision);
+    the case record is unchanged.
+- id: evand-n299-2026-10-26
+  title: Evan Daniel's new packing at 299, at 1be69ca, issue 824
+  role: source-repository
+  url: https://github.com/evand/square-packing/tree/6067db5bf4d41dab7f0e1475e9fa845c0c6d2133/search/packer/candidates
+  local: resources/web/evand-n299-2026-10-26/
+  source_key: '[Daniel n299 2026-10-26]'
+  scope:
+    n_values: [299]
+  reviewed: '2026-10-26'
+  source_date: '2026-10-26'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/evand-n299-2026-10-26/acquisition/claims.json
+  evidence:
+  - E-evand-n299-certificate-report
+  notes: >-
+    The certificate at 299 that 1be69ca adds under search/packer/candidates/, committed on
+    26 October 2026 at 03:30:38Z, 21 minutes before issue 824 reported it, and unchanged at
+    6067db5, the pin; retained as the source wrote it with the binary64 packing it dilates,
+    the pre-descent packing, the exact solver's failed 80-digit point and report, and the
+    source store's prior facts, and admitted at its exact side. All 3 native jobs have full
+    outcomes, and the packet's sharp controls meet its margins on both routes. The ledger
+    of 26 October for this import (campaign/issue-intake/upper-bounds-issue824-20261026)
+    records it 1.92e-02 below the case's ceiling, a new packing. T-248 records it at V0/C0;
+    the stage 4 review and the adoption at 299 with both regularizations are think-8hjz's.
+    No selected override or superseded claim is created at this source-only stage; the
+    case is unchanged.
 - id: hyukdongkim-exact-forms-2026-10-25
   title: Hyukdong Kim's exact sides at 88, 126, 172, 199 and 263 in the issue 804 attachment
   role: first-party-release

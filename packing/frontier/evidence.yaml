@@ -52551,3 +52551,178 @@ evidence:
       packet's receipts/announcement/. CREDITS.md says the work was produced by Claude
       (Anthropic) under human direction.
     source_reviewed: '2026-10-25'
+  - id: E-evand-n299-certificate-report
+    claim: upper-bound
+    scope:
+      n_values: [299]
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Daniel n299 2026-10-26]'
+    certificate: packing/resources/web/evand-n299-2026-10-26/source/search/packer/candidates/s299-1025.cert
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-26'
+    limitations: >-
+      This atom records the source author's report, on issue 824, of 1 exact rational
+      certificate first committed at 1be69ca and unchanged at 6067db5,
+      search/packer/candidates/s299-1025.cert, which the evand-n299-2026-10-26 packet
+      retains. A separate complete repository replay is retained for n = 299: 1 positive and
+      2 duplicate-square and outside-container controls passed their required outcomes on
+      both routes, 267306 pair decisions; summed over the 3 jobs, the receipt records 46.84
+      route CPU seconds and 145.62 job wall seconds, the longest job 59.72 seconds. Every
+      positive clears every wall by at least 4.99e-13 and every pair by at least 9.99e-13,
+      and the packet's sharp controls meet those margins on both routes. Independent review
+      and confirmation remain pending (think-8hjz). The source's own checkers were not run
+      here. The certificate is a dilation of a binary64 packing; the source's exact solver
+      did not converge to a KKT point, and the issue says local optimality is not
+      established. The commit carries a Co-Authored-By trailer naming Claude, and the
+      source's CREDITS.md says its work was produced by Claude (Anthropic) under human
+      direction. No two independent methods, human oversight or optimality is claimed.
+  - id: E-n012-evand-s12h-lean-report
+    claim: lower-bound
+    scope: {n_values: [12]}
+    assurance: reported
+    reported_method: proof-assistant-checked
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Daniel S12H Lean 2026-09-28]'
+    certificate: packing/resources/web/evand-exact-and-local-reports-2026-10-07/source/s12/lean/Sqpack/S12HLower.lean
+    replay_status: not-attempted
+    verifiers: []
+    proof:
+      source: packing/resources/web/evand-exact-and-local-reports-2026-10-07/source/s12/lean/Sqpack/S12HLower.lean
+      theorem: 'SquarePacking.s12_ge_15680_3951 : (15680 / 3951 : ℝ) ≤ minSide 12, with no hypothesis. minSide
+        is S32.lean''s sInf {s | Packs n s}: n closed unit squares, translated and rotated, in [0, s]^2 with pairwise
+        disjoint interiors.'
+      scope: s(12) >= 15680/3951 for closed unit squares with arbitrary rotations, boundary contact allowed.
+      pinpoints: 's12/lean/Sqpack/S12HLower.lean (le_minSide on the certificate''s points with pts_nodup, pts_d4
+        and cov_root); Sqpack/BoxTree.lean (the generic verifier and le_minSide); scripts/gen_boxtree.py and gen_data.sh
+        (the generated S12H data); LADDER.md (the build and the axioms); the closure in the packet''s receipts/s12h-lean-closure.json.'
+      assumptions:
+      - Lean v4.33.1's kernel and Mathlib are sound
+      - The 320 part files and Cov.lean, which the source does not store, are those gen_data.sh S12H writes from
+        certificates/s12_lower_3.9686.txt; the kernel checks whatever it writes
+      - The build and its axiom set are as the source reports; nothing here built any module
+    limitations: 'evand/square-packing at 513bb66 (2026-09-28T18:25:16-06:00), retained at f58a017 in the 7
+      October packet, reports a Lean kernel proof of s(12) >= 15680/3951 from T-049''s certificate (1,736 points,
+      total weight 11.9738036) through the generic BoxTree verifier, proved sound once. LADDER.md reports the
+      axioms propext, Classical.choice and Quot.sound, no sorry and no native_decide, generation in 39 minutes
+      on one core and a build of 6 h 31 min on 2 cores, 7.3 CPU-hours, at most 30.6 GB resident; no build log
+      is published. The closure is nine modules, all retained in the packet. Nothing here has built it (think-yzl3):
+      under the 40 CPU-hour item cap but above this host''s memory.'
+    source_reviewed: '2026-10-26'
+  - id: E-k2m3-wand125-valid7-lean-v1-report
+    claim: exact-value
+    scope: {n_values: [33, 46, 61, 78, 97, 118, 141, 166, 193, 222, 253, 286, 321]}
+    assurance: reported
+    reported_method: proof-assistant-checked
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[wand125 Valid7 Lean 2026-10-11]'
+    certificate: packing/resources/web/evand-valid7-lean-2026-10-11/square-packing/lean/Sqpack/V7/Bridge.lean
+    replay_status: not-attempted
+    verifiers: []
+    proof:
+      source: packing/resources/web/evand-valid7-lean-2026-10-11/square-packing/lean/VALID7.md
+      theorem: 'SquarePacking.LemmaELeaf.valid7 : Bentz.Valid7, bentz : ∀ k : ℕ, 6 ≤ k → minSide (k ^ 2 - 3)
+        = k (Bentz.bentz_of_valid7 valid7) and validTilt7 : Bentz.ValidTilt7, in the generated Sqpack/V7/Main.lean;
+        minSide and Packs are S32.lean''s.'
+      scope: s(k^2 - 3) = k for every integer k >= 6, closed unit squares with arbitrary rotations; the cases
+        this record holds are k = 6 to 18.
+      pinpoints: 'lean/Sqpack/V7/Bridge.lean (box7Cover_eq_mcoverP); V7/Data.lean; ValidSplit7.lean and Bentz.lean
+        (Valid7, ValidTilt7, bentz_of_valid7); scripts/gen_main.py (the glue of the 9,800 roots and the three theorems),
+        emit_v7.py and run_v7.py (the root modules); VALID7.md; the closure in the packet''s receipts/lean-closure.json
+        and the root-name audit in receipts/root-names.json.'
+      assumptions:
+      - Lean v4.33.1's kernel and Mathlib at 0df444a3 are sound
+      - The 9,800 root modules and Main.lean, which the repository does not store, are those the generators write
+        from the release asset v7cert.tar.zst; the kernel checks whatever they write
+      - The build and its axiom set are as the source reports; nothing here built any module
+    limitations: 'evand/square-packing at 060c1a1 (2026-10-11T02:36:49Z) merges wand125''s PR #6, whose message
+      says the root modules and Main are generated from the release data/valid7-lean-certs-v1 and that the
+      merge was reviewed statically and not rebuilt. VALID7.md reports all 9,800 roots passing on 64-core,
+      512 GB machines, roughly 10^4 CPU-hours (later measured at about 6,650), and the axioms propext, Classical.choice
+      and Quot.sound; no build log is published. The release asset v7cert.tar.zst is pinned by SHA-256 here
+      and its 9,800 pickles carry the names of the run''s 9,800 roots (devtools.audit_valid7_roots); none was
+      loaded. Nothing here has built it (think-qu37).'
+    source_reviewed: '2026-10-26'
+  - id: E-k2m3-wand125-valid7-lean-v2-report
+    claim: exact-value
+    scope: {n_values: [33, 46, 61, 78, 97, 118, 141, 166, 193, 222, 253, 286, 321]}
+    assurance: reported
+    reported_method: proof-assistant-checked
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[wand125 Valid7 Lean v2 2026-10-17]'
+    certificate: packing/resources/web/wand125-valid7-lean-v2-2026-10-17/acquisition/upstream-subtree.sha256
+    replay_status: not-attempted
+    verifiers: []
+    proof:
+      source: packing/resources/web/wand125-valid7-lean-v2-2026-10-17/README.md
+      theorem: 'SquarePacking.LemmaELeaf.valid7 : Bentz.Valid7, bentz (k : ℕ) : 6 ≤ k → minSide (k ^ 2 - 3) =
+        ↑k and validTilt7 : Bentz.ValidTilt7, as expected/statement.txt states them, in the generated Sqpack/V7/Main.lean.'
+      scope: s(k^2 - 3) = k for every integer k >= 6, closed unit squares with arbitrary rotations; the cases
+        this record holds are k = 6 to 18.
+      pinpoints: 'wand125/square-packing 649a920 lean/valid7/: README.md, verify.py, fetch.sh, Axioms7.lean, expected/,
+        receipts/main.log and axioms.log, library.sha256, generated-sources.sha256 and release-assets.sha256, each
+        pinned by SHA-256 in the packet''s acquisition/upstream-subtree.sha256.'
+      assumptions:
+      - Lean v4.33.1's kernel and Mathlib are sound
+      - The 62,626 generated files are those generated-sources.sha256 lists and the release v7-sources.tar.zst
+        holds; the kernel checks whatever they are
+      - The build and its axiom set are as the source reports; nothing here built any module
+    limitations: 'wand125/square-packing at 649a920 (2026-10-17T23:45:52Z) re-checks version 1''s theorem from
+      the same 9,800 certificates, re-certified at the leaves, on Evan Daniel''s library at wand125 c5c7f00 with
+      RowMinN.lean and a changed LemmaEKM.lean. Its README reports one 48-vCPU machine for 29.4 hours, 82,233
+      tasks returning 0, 797.7 CPU-hours over its table''s steps, peaks of 37.0 GB for a leaf module and 50.6
+      GB for Main.lean, and the axioms propext, Classical.choice and Quot.sound. The folder states no licence,
+      so the packet pins its files by digest and retains none. generated-sources.sha256 names one root module
+      per root of the run (devtools.audit_valid7_roots). Nothing here has built it (think-qu37).'
+    source_reviewed: '2026-10-26'
+  - id: E-k2m4-wand125-validtilt9-lean-report
+    claim: exact-value
+    scope: {n_values: [60, 77, 96, 117, 140, 165, 192, 221, 252, 285, 320]}
+    assurance: reported
+    reported_method: proof-assistant-checked
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[wand125 ValidTilt9 Lean 2026-10-16]'
+    certificate: packing/resources/web/wand125-validtilt9-lean-2026-10-16/square-packing/problems/square-lower-bounds/certificates/k2m4_n77_L9/lean/Sqpack/V9/Main.lean
+    replay_status: not-attempted
+    verifiers: []
+    proof:
+      source: packing/resources/web/wand125-validtilt9-lean-2026-10-16/square-packing/problems/square-lower-bounds/certificates/k2m4_n77_L9/lean/Sqpack/V9/Main.lean
+      theorem: 'SquarePacking.LemmaELeaf.validTilt9 : Bentz4.ValidTilt9, valid9 : Bentz4.Valid9 := Bentz4.valid9_of_tilt
+        validTilt9 and bentz4 : ∀ k : ℕ, 8 ≤ k → minSide (k ^ 2 - 4) = k := Bentz4.bentz4_of_validTilt9 validTilt9;
+        minSide and Packs are S32.lean''s.'
+      scope: s(k^2 - 4) = k for every integer k >= 8, closed unit squares with arbitrary rotations; the cases
+        this record holds are k = 8 to 18.
+      pinpoints: 'k2m4_n77_L9/lean/Sqpack/V9/Main.lean (the three theorems over the generated roots); V9/Bridge.lean
+        (box9Cover_eq_mcoverP); V9/Tilt.lean (validTilt_of_tree); V9/Data.lean; library/Sqpack/RowMinN.lean and LemmaEKM.lean
+        with LemmaEKM.diff; library/library.sha256; Axioms9.lean and receipts/main.log (the axioms); README.md and
+        ENVIRONMENT.md (the run).'
+      assumptions:
+      - Lean v4.33.1's kernel and Mathlib are sound
+      - The 1,275,911 generated files, which the source does not store, are those SOURCES.sha256 lists and the
+        generators write from v9-certs.tar.zst; the kernel checks whatever they are
+      - The build and its axiom set are as the source reports; nothing here built any module
+    limitations: 'wand125/square-packing at 319a779 (2c75edc and e99f5e3, 16 October 2026) reports a Lean kernel
+      proof of Evan Daniel''s ValidTilt9 on his k2m4 certificate qxzm_full and the box cover K4_k008_box9.txt,
+      with his reduction to s(k^2 - 4) = k for every k >= 8. receipts/main.log reports Main.lean built in 584 s
+      at 230,597,216 kB resident and the axioms propext, Classical.choice and Quot.sound; the source''s receipts
+      put the kernel checks at about 7,390 CPU-hours. Every file of library.sha256''s closure is retained here,
+      byte for byte where it is Daniel''s. Nothing here has built it (think-rw3i): about 185 times the owner''s
+      40 CPU-hour item cap.'
+    source_reviewed: '2026-10-26'
