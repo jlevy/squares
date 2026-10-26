@@ -412,8 +412,10 @@ links. The directory has the breadcrumb Learn → Resources, with no competing f
 directory on About.
 
 **News.** Keep dated announcements and the full changelog together.
-The result register is separate from News; News entries can cover papers, downloads, and
-site changes as well as mathematical results.
+*Superseded on 26 October 2026:* the retained history took a page of its own,
+`changelog.html`, and News keeps the stories rated S3 and above and closes on a button
+to it. The result register is separate from News; News entries can cover papers,
+downloads, and site changes as well as mathematical results.
 Topics/Tags uses the shared dropdown multiselect.
 Significance remains the inline segmented S-buttons, using the same component as the
 Atlas Grid/Triangle controls; the default selection remains S4/S5. Preserve

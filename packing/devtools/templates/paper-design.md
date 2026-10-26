@@ -3014,11 +3014,13 @@ pointer and by keyboard, and measures its label at 1280, 768 and 390 pixels.
   `devtools.stamp_landed` writes into `packing/frontier/landings.yaml` at the merge step
   as it writes `landed`; nothing that renders reads Git (OR-18). One window bounds all
   three, ending on the newest of those days (`arrival_reference`), and the introduction
-  names the days shown.
-  The summary tallies the three and wraps between them.
-  The section draws with `results.css`’s rollup classes, and its introduction links All
-  Results and News. `tests/test_home_recent.py` holds it to the records and to 40,000
-  bytes.
+  names the day it opens on, the oldest day shown (`recent_since`, the owner’s shorter
+  wording of 26 October 2026). The summary tallies the three and wraps between them,
+  each count written with its number in bold and its noun in the summary’s own case
+  rather than the toggles’ caps (`tally_count`); the toggle keeps the first line of a
+  summary that wraps. The section draws with `results.css`’s rollup classes, and its
+  introduction links News alone, leaving All Results to the section below it.
+  `tests/test_home_recent.py` holds it to the records and to 40,000 bytes.
 
 - **Recent results.** The homepage’s **Recent Major Results** section sits below
   Recently Added and News.
