@@ -9715,6 +9715,24 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "version: v0.4.30, v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=("packing/campaign/result-requests.yaml",),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "#613's ask is done (think-8krd): D-522 records the defect the owner's answer "
+            "of 23 October left owed, and the requests entry names it "
+            "(result-requests.yaml); no register entry, side, bound or credit changes. "
+            "Against main acc1cfc3d (#825): rendered at link revision acc1cfc3 into "
+            "empty site directories, twice from this tree and once with that main's "
+            "result-requests.yaml swapped in, render_packing_methods writes all 43 files "
+            "byte-identical across the three. No PDF was printed; it prints from that "
+            "HTML. The survey keeps v0.2.7."
+        ),
+    ),
 )
 
 

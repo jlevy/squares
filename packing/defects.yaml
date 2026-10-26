@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 521
+count: 522
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -17557,3 +17557,62 @@ defects:
     full-precision exact reading that think-8ucp runs.
   regression: none
   recorded_in: docs/project/reviews/review-2026-10-13-verification-gaps.md
+- id: D-522
+  title: Beyond the corpus the record compared reports only with the grid and earlier reports, so two current rows stood above Göbel's classical constructions
+  date: '2026-10-15'
+  layer: record
+  class: bookkeeping
+  direction: conservative
+  detected_by: inspection
+  latent_for: >-
+    Six days at 369 and one at 376: from 6068a049b (2026-10-09 UTC), which recorded
+    Couzo's report of 8 October beyond the corpus, and 8f2e0dd7d (2026-10-14), which
+    recorded his certificate of 13 October at 376, to the check of the 15 October intake
+    that opened jlevy/squares#613. Both rows stayed current until #754 merged on
+    2026-10-24.
+  severity: medium
+  status: fixed
+  bead: think-8krd
+  what: >-
+    Beyond n = 324 the coverage register and the import tools compared each report only
+    with the grid and with earlier reports. The record held none of Göbel's classical
+    constructions there, though the Kingbird pages it archived on 2026-09-07 state their
+    three closed-form families, so a reported side above a 1979 construction became the
+    count's current row. Two did: 369 (couzo-extended-range-reports-2026-10-08,
+    19.740417287556077) is 3.33e-2 above the Göbel strip 19 + sqrt(2)/2, and 376
+    (couzo-certificates-2026-10-13, 19.904068025747) is 4.57e-3 above the Göbel square
+    10 + 7 sqrt(2).
+  consequence: >-
+    The record showed, at two counts, a side that a 1979 construction beats as the least
+    known, and credited Couzo's reports with it. Conservative: both rows are valid upper
+    bounds, so no bound was false; the claim that they were the best sides was. Had it
+    survived, the intake would have recorded 89 more reported rows above Göbel's sides
+    (42 of Couzo's 487b058, 47 of his 4e4c8ce index), and every count above 1024 that the
+    owner's D1 answer opened would have been decided against the grid alone.
+  fix: >-
+    The owner answered #613 on 23 October 2026 (think-8krd): Göbel's constructions are
+    earlier reports beyond 324, and a rational row above Göbel's exact side is not
+    recorded. #754 (merged 2026-10-24) makes the answer a ruling of the report-order walks
+    (devtools.intake_ledger, classical-constructions), so Göbel's construction joins each
+    walk's start. It marks the nine rows of 8 to 13 October above the construction, at
+    369, 375 and 376, above-classical-construction with the construction, which
+    check_source_coverage holds above it exactly and never current, so 369 and 376 lost
+    their current rows. And from 23 October (intake_ledger.GOEBEL_FROM) it puts Göbel's
+    construction into the standing side of the claims importer, of the replay and of a
+    freshly frozen start. #793 (merged the same day) replaced the retained program, whose
+    largest member is at 1073, with devtools.goebel_construction, which proves Göbel's
+    side final at every count to 10,345 and further on demand, so
+    beyond_horizon_replay.construction_problems holds every row beyond 324 to it.
+  regression: >-
+    tests/test_beyond_horizon_replay.py::test_each_row_above_goebel_s_construction_is_marked
+    holds the nine marked rows and requires construction_problems to name a row above
+    Göbel's construction left unmarked and a marked row that is not above it;
+    tests/test_source_coverage.py::test_a_row_above_a_classical_construction_is_kept_and_holds_no_count
+    holds the register rule;
+    tests/test_intake_ledger.py::test_goebel_s_construction_is_an_earlier_report_beyond_the_horizon
+    and
+    tests/test_upper_bound_reports.py::test_a_declaration_read_from_23_october_stands_beyond_324_on_goebel_s_construction
+    hold the walks' ruling and the importer's standing side; and
+    tests/test_goebel_construction.py holds the module to the retained program at every
+    count to 1073 and proves every side to 10,000 final.
+  recorded_in: packing/resources/web/couzo-verified-bounds-2026-10-14/review/goebel-beyond-horizon.md

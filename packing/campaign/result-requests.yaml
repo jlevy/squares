@@ -10714,8 +10714,7 @@ issues:
     asks:
     - what: The owner decides whether Göbel's constructions are earlier reports and the baseline beyond
         324; if so, a records PR adds them as the baseline, corrects 369 and 376 and records a defect.
-        The owner answered yes on 23 October 2026; the record still owes the defect.
-      state: queued
+      state: done
       source: body
       note: >-
         Answered by the owner on 23 October 2026 (think-8krd): yes, Göbel's classical constructions
@@ -10730,9 +10729,10 @@ issues:
         measures the excess over what the record holds (think-a75a). And it corrects 369 and 376:
         nine rows of 8 to 13 October above Göbel's construction, at 369 (1), 375 (4) and 376 (4),
         stay listed as printed and are marked above-classical-construction, so 369 and 376 have
-        no current row. Still owed: a defect entry recording the cause, that beyond 324 the record
-        compared reports only with the grid and earlier reports, so two current rows stood above
-        Göbel's sides.
+        no current row. #793 carries Göbel's construction past the retained program's reach of
+        1073 to every count (devtools.goebel_construction), so the baseline holds above 1024 too.
+        The defect is D-522 (26 October 2026): beyond 324 the record compared reports only with
+        the grid and earlier reports, so two current rows stood above Göbel's sides.
       bead: think-8krd
     beads:
     - think-8krd
@@ -10759,8 +10759,9 @@ issues:
       beyond 324. The owner-answers records change applies it: the walks hold no publication above
       Göbel's construction, the nine rows above it at 369, 375 and 376 are marked
       above-classical-construction, and 369 and 376 keep no current row. Whether Friedman's
-      off-centre constructions count the same way was not asked; think-zkxy asks it. The ask stays
-      queued, and the issue open, until the defect is recorded.
+      off-centre constructions count the same way was not asked; think-zkxy asks it. The ask stayed
+      queued, and the issue open, until the defect was recorded; D-522 records it (26 October 2026),
+      so nothing is queued and the issue closes with its final comment once that change merges.
   - number: 622
     title: 'data: submit a tighter exact N29 packing certificate'
     author: BuddenPing
