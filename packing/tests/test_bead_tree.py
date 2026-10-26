@@ -143,6 +143,36 @@ def test_every_deferral_a_record_declares_is_collected_with_its_bead(tmp_path: P
     assert deferrals(tmp_path / "absent", tmp_path / "absent", tmp_path / "absent") == []
 
 
+def test_a_results_validation_beads_are_held_open_on_an_open_or_a_closed_issue(
+    tmp_path: Path,
+) -> None:
+    """Rule P1 of 26 October 2026: an issue closes once answered while a result's
+    validation is still owned by beads, so those beads are held open after the close,
+    and closing one fails until the record names its successor or drops the field."""
+    requests = _write(
+        tmp_path / "requests.yaml",
+        "issues:\n"
+        "  - number: 420\n"
+        "    state: closed\n"
+        "    answer_bead: think-cccc\n"
+        "    results: [{key: lean, validation: [think-hhhh, think-iiii]}]\n"
+        "  - number: 446\n"
+        "    state: open\n"
+        "    answer_bead: think-jjjj\n"
+        "    results: [{key: census, validation: [think-kkkk]}]\n",
+    )
+    named = deferrals(tmp_path / "absent", requests, tmp_path / "absent")
+    assert named == [
+        ("result-requests.yaml #420 lean validation", "think-hhhh"),
+        ("result-requests.yaml #420 lean validation", "think-iiii"),
+        ("result-requests.yaml #446 census validation", "think-kkkk"),
+        ("result-requests.yaml open issue #446", "think-jjjj"),
+    ]
+    beads = [_bead("is-01hhhh", "closed", "a finished replay"), _bead("is-01iiii", "open", "x")]
+    problems = deferral_problems(beads, {"hhhh": "01hhhh", "iiii": "01iiii"}, named[:2])
+    assert [p["status"] for p in problems] == ["closed"]
+
+
 def test_a_queued_item_that_names_no_bead_is_collected_as_unowned_and_fails(
     tmp_path: Path,
 ) -> None:
