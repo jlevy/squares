@@ -846,10 +846,12 @@ RECORDED: dict[int, tuple[tuple[str, str, str] | None, tuple[str, str, str] | No
     # Center counting below, the grid above.
     2: (None, None),
     # Göbel's packing, checked exactly here, is T-237's upper half since 2026-10-24, so the
-    # catalogue's line names it; the lower line, Göbel's published proof, is unread here.
+    # catalogue's line names it. The lower line, Göbel's published proof, is unread here,
+    # but since 2026-10-25 its lane also cites the exact audit of Friedman's form of the
+    # proof, which takes T-237 to C3, so it names T-237 too.
     5: (
         ("Göbel 1979, Squares in Squares (confirmed T-237)", "external", "verified"),
-        ("Göbel 1979, Math. Centre Tracts 106", "external", "verified"),
+        ("Göbel 1979, Math. Centre Tracts 106 (confirmed T-237)", "external", "verified"),
     ),
     # The grid ceiling is derived whoever the catalogue credits (think-dlof).
     6: (None, ("Kearney & Shiu 2002, Electron. J. Combin. 9, #R14", "external", "verified")),
