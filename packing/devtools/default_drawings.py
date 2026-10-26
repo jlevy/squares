@@ -68,12 +68,12 @@ its side), the runs that decided that witness, and one state:
   name stays in the record's totals, at 0, so the record keeps its shape, and
   `--check-state` fails a count in it, a `SETTLED` entry that gives it, and a decision
   that still owes runs or an outcome (`owed`);
-- `exempt`: the count is set aside on the owner's word alone (`SETTLED`): his words, the
-  day he said them and the repository file that records them, which must hold them
+- `exempt`: the count is set aside on the owner's word alone (`SETTLED`): the owner's
+  words, the day given and the repository file that records them, which must hold them
   (`OwnerWord`), with the reason, the bead that owns it and a review date at most
-  `EXEMPTION_REVIEW_DAYS` after his word. `--check-state` fails an exemption without his
-  word or past its review date. The four decimal Kingbird witnesses an agent set aside on
-  15 October 2026 are the one exception, until `UNRATIFIED_UNTIL` (`UNRATIFIED`);
+  `EXEMPTION_REVIEW_DAYS` after that word. `--check-state` fails an exemption without the
+  owner's word or past its review date. The four decimal Kingbird witnesses an agent set
+  aside on 15 October 2026 are the one exception, until `UNRATIFIED_UNTIL` (`UNRATIFIED`);
 - `pending`: none of these, as at a count whose strong view lapsed with its witness
   (the index's `lapsed`, which `--update-atlas` writes) or that `PENDING_ALLOWED` names,
   even where the new house reads regular, or that only the axis tool's view, the
@@ -225,7 +225,7 @@ STATES = (REGULARIZED_STATE, REGULAR_AS_PUBLISHED, DECIDED, OWED, EXEMPT, PENDIN
 RESTING = (REGULARIZED_STATE, REGULAR_AS_PUBLISHED, DECIDED)
 #: The states nothing may rest in.
 RETIRED = frozenset({OWED})
-#: How long after the owner's word an exemption stands before he reviews it (review E4 of
+#: How long after the owner's word an exemption stands before the owner reviews it (review E4 of
 #: the intake review of 26 October 2026).
 EXEMPTION_REVIEW_DAYS = 14
 #: The generators whose drawn view makes a count `regularized`: Evan Daniel's regularizer
@@ -244,8 +244,8 @@ BEAD = re.compile(r"\bthink-[0-9a-z]{4}\b")
 
 
 class OwnerWord(NamedTuple):
-    """The owner's word that exempts a count: his words exactly as he gave them, the day
-    he gave them (`YYYY-MM-DD`), and the repository-relative file that records them,
+    """The owner's word that exempts a count: the owner's words exactly as given, the day
+    given (`YYYY-MM-DD`), and the repository-relative file that records them,
     optionally with a `#fragment`. The gate finds the words in that file, so an exemption
     rests on what the record shows the owner said, not on an agent's summary of it."""
 
@@ -262,7 +262,7 @@ class Settled(NamedTuple):
     found; and where the record says so, or for an exemption, the bead that owns it.
 
     An exemption carries the owner's word (`owner_word`) and the day it is to be reviewed
-    by (`review_by`, `YYYY-MM-DD`), at most `EXEMPTION_REVIEW_DAYS` after his word. `owed`
+    by (`review_by`, `YYYY-MM-DD`), at most `EXEMPTION_REVIEW_DAYS` after that word. `owed`
     is retired with `OWED`: a decision that still owes runs or a recorded outcome is not a
     decision, and the gate fails one that names it."""
 
@@ -1105,7 +1105,7 @@ SETTLED: dict[int, Settled] = {
 #: it until `UNRATIFIED_UNTIL` and fail the gate after it. An agent set the four decimal
 #: Kingbird witnesses aside on 15 October 2026 (think-y1x3's audit; think-yk2h), on the
 #: axis tool's refusal alone: no strong generator was run on them, and the owner never
-#: gave his word (section E of the intake review of 26 October 2026). Each leaves by
+#: gave their word (section E of the intake review of 26 October 2026). Each leaves by
 #: being regularized or decided, which takes its `SETTLED` entry off, or by the owner's
 #: word in its entry; the gate fails a count named here that is not such an exemption, so
 #: the set only shrinks. The intake sweep lists each one for the owner, needing action.
@@ -1819,8 +1819,8 @@ def _exemption_problems(
     n: int, held: Settled, unratified: frozenset[int], today: date
 ) -> list[str]:
     """What fails one `SETTLED` entry as an exemption: an exemption is the owner's alone,
-    on his recorded word, reviewed within `EXEMPTION_REVIEW_DAYS` of it; and only an
-    exemption carries his word or a review date."""
+    on the owner's recorded word, reviewed within `EXEMPTION_REVIEW_DAYS` of it; and only an
+    exemption carries the owner's word or a review date."""
     if held.state != EXEMPT:
         if held.owner_word is not None or held.review_by is not None:
             return [f"n={n}: only an exemption carries the owner's word and a review date"]
@@ -1832,7 +1832,7 @@ def _exemption_problems(
         return [
             (
                 f"n={n} is exempt without the owner's word{until}: an exemption is the "
-                "owner's alone. Record his words, their day and the file that holds them "
+                "owner's alone. Record the owner's words, the day and the file that holds them "
                 f"(OwnerWord), and a review date within {EXEMPTION_REVIEW_DAYS} days of "
                 "them, or regularize the count"
             )
@@ -1852,7 +1852,7 @@ def _exemption_problems(
     elif review < today:
         problems.append(
             f"n={n}: the exemption's review date, {review}, has passed: review it with the "
-            "owner and record his word again, or regularize the count"
+            "owner and record the owner's word again, or regularize the count"
         )
     return problems
 

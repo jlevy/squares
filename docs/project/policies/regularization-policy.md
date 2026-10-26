@@ -709,14 +709,14 @@ So no count rests owed on `main`. The state’s name stays in the record’s tot
 and the records tier fails a count in it and a `SETTLED` decision that still owes runs
 or an outcome. A count whose witness no strong generator can draw waits for that
 capability in the change that moves its house, or carries the owner’s exemption.
-An exemption is the owner’s alone: its entry carries his words exactly, the day he gave
-them and the repository file that records them, which must hold them, with the reason,
-the bead that will settle the count, and a review date at most 14 days after his word.
-The records tier fails an exemption without his word or past its review date, and the
-intake sweep lists each one for him.
+An exemption is the owner’s alone: its entry carries the owner’s words exactly, the day
+they were given and the repository file that records them, which must hold them, with
+the reason, the bead that will settle the count, and a review date at most 14 days after
+that word. The records tier fails an exemption without the owner’s word or past its
+review date, and the intake sweep lists each one for the owner.
 The four decimal Kingbird witnesses at 39, 55, 290 and 291, set aside by an agent on 15
-October 2026 without a strong run, stand without his word until 9 November 2026 and fail
-after it.
+October 2026 without a strong run, stand without the owner’s word until 9 November 2026
+and fail after it.
 
 A change that moves a house regularizes it in the same change, generally and by flip
 ([section 13](#13-flip-regularization)): against the record of the commit it is built

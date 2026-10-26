@@ -13,6 +13,7 @@ from __future__ import annotations
 import json
 import re
 import shutil
+from collections.abc import Sequence
 from datetime import date, timedelta
 from pathlib import Path
 
@@ -477,9 +478,10 @@ def test_a_synthetic_owed_state_fails_the_gate_bead_or_none(tmp_path: Path) -> N
 
 # --------------------------------------------------------------------------------------
 # An exemption is the owner's alone (section E of the intake review of 26 October 2026):
-# his words, their day and the file that holds them, and a review date within fourteen
-# days of them. The quote below is the owner's of 23 October 2026, which the policy's
-# section 13 records; a test lends it to an exemption, since none carries his word yet.
+# the owner's words, the day given and the file that holds them, and a review date within
+# fourteen days of them. The quote below is the owner's of 23 October 2026, which the
+# policy's section 13 records; a test lends it to an exemption, since none carries the
+# owner's word yet.
 # --------------------------------------------------------------------------------------
 
 WORD = defaults.OwnerWord(
@@ -507,12 +509,12 @@ def test_a_recorded_owner_exemption_passes_and_an_unworded_one_fails() -> None:
     )
     assert found == []
     assert not any(line.startswith(f"n={n} is exempt") for line in listed)
-    # Without his word, and with no grace for it, the exemption fails.
+    # Without the owner's word, and with no grace for it, the exemption fails.
     found, _listed = defaults.state_problems(unratified=unratified, today=DAY)
     assert found == [
         (
             f"n={n} is exempt without the owner's word: an exemption is the owner's alone. "
-            "Record his words, their day and the file that holds them (OwnerWord), and a "
+            "Record the owner's words, the day and the file that holds them (OwnerWord), and a "
             f"review date within {defaults.EXEMPTION_REVIEW_DAYS} days of them, or regularize "
             "the count"
         )
@@ -555,7 +557,7 @@ def test_a_recorded_owner_exemption_passes_and_an_unworded_one_fails() -> None:
             {"review_by": "2026-10-25"},
             (
                 "{n}: the exemption's review date, 2026-10-25, has passed: review it with the "
-                "owner and record his word again, or regularize the count"
+                "owner and record the owner's word again, or regularize the count"
             ),
         ),
     ],
@@ -583,7 +585,7 @@ def test_only_an_exemption_carries_the_owner_word() -> None:
 
 def test_the_four_unratified_exemptions_wait_for_the_owner_until_their_day() -> None:
     """The four decimal Kingbird witnesses were set aside by an agent, and an exemption
-    is the owner's alone: they stand until `UNRATIFIED_UNTIL`, listed for him, and fail
+    is the owner's alone: they stand until `UNRATIFIED_UNTIL`, listed for the owner, and fail
     after it. The set only shrinks: a count it names that is not such an exemption fails,
     and it names no other count."""
     assert frozenset({39, 55, 290, 291}) >= defaults.UNRATIFIED
@@ -604,9 +606,10 @@ def test_the_four_unratified_exemptions_wait_for_the_owner_until_their_day() -> 
     assert found == [
         (
             f"n={n} is exempt without the owner's word (UNRATIFIED held it until "
-            f"{defaults.UNRATIFIED_UNTIL}): an exemption is the owner's alone. Record his "
-            "words, their day and the file that holds them (OwnerWord), and a review date "
-            f"within {defaults.EXEMPTION_REVIEW_DAYS} days of them, or regularize the count"
+            f"{defaults.UNRATIFIED_UNTIL}): an exemption is the owner's alone. Record the "
+            "owner's words, the day and the file that holds them (OwnerWord), and a review "
+            f"date within {defaults.EXEMPTION_REVIEW_DAYS} days of them, or regularize the "
+            "count"
         )
         for n in sorted(defaults.UNRATIFIED)
     ]
@@ -1911,7 +1914,7 @@ def test_a_house_change_without_its_regularizations_fails(tmp_path: Path) -> Non
     # Its general regularization is done, and its flip pose is not the record's.
     k = _first_state(_record(), defaults.REGULARIZED_STATE)["n"]
 
-    def turned(counts: list[int]) -> dict[int, dict]:
+    def turned(counts: Sequence[int]) -> dict[int, dict[str, object]]:
         return {count: {"n": count, "rotate": 90} for count in counts}
 
     found, _listed = defaults.state_problems(base=_base(rows, frozenset({k})), poses=turned)

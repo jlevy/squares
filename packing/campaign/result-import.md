@@ -253,7 +253,7 @@ Every input reaches the record through one of these sources, and the sweep reads
 | Other catalogues and releases | Read by hand: the register’s other `current-catalogue` and `first-party-release` sources, UnitSquare’s release today. The sweep prints when each was last reviewed | A later release: an import. Nothing new: the source’s `reviewed` date moves |
 | Watched repositories | Every repository the source register, a packet’s acquisition record, or the site’s list of other projects names. `git ls-remote` reads each head, and a fetch of commits and trees finds the commits past every pin and every read, and the commits a pin contains whose changed paths no packet at or after them retains | A new result: an import bead, then a packet at the head. New evidence for a registered entry: an evidence update. Nothing to import: a read in [`intake-watch.yaml`](intake-watch.yaml) |
 | The record’s own queues | Counts pending catalogue intake, deferred conflicts, results and asks queued on open issues, triage and replies owed, the validation backlog | Nothing new: each names an open bead, and one whose bead has closed gets a new owner |
-| The regularized layer | `atlas/known-best/default-drawings.json`’s `states` against `default_drawings.PENDING_ALLOWED`, `SETTLED` and `UNRATIFIED`: each count pending regularization, each exemption, and whatever the regularization-state gate fails on | Nothing, or exemptions on the owner’s word, listed for him. Anything else needs action: a pending count gets its runs, and an exemption without his word gets his word or its runs |
+| The regularized layer | `atlas/known-best/default-drawings.json`’s `states` against `default_drawings.PENDING_ALLOWED`, `SETTLED` and `UNRATIFIED`: each count pending regularization, each exemption, and whatever the regularization-state gate fails on | Nothing, or exemptions on the owner’s word, listed for the owner. Anything else needs action: a pending count gets its runs, and an exemption without the owner’s word gets that word or its runs |
 | Blocked imports | A queued result’s or ask’s `blocked_on`, and what an open `result-import` bead says it waits on or depends on, read through `gh` and the bead store | A blocker that merged or closed: the wait resumes, or the bead says what it waits on now |
 
 The capture is the network half of the dated research survey that refreshes the retained
@@ -1103,9 +1103,9 @@ regularization should be done.
 There’s no excuse not to, because it should be cheap to calculate.
 We should do flipper regularization as well as the general regularization, and that
 process should be well defined.”
-He called n = 259 and 302 drawn unregularized on the home page a serious process failure
-that must never recur: the seven exact algebraic houses rested `regularization-owed` on
-an open bead from 23 to 26 October.
+The owner called n = 259 and 302 drawn unregularized on the home page a serious process
+failure that must never recur: the seven exact algebraic houses rested
+`regularization-owed` on an open bead from 23 to 26 October.
 
 **The regularization step.** Every pull request that moves a house runs it for each
 count it moves, from `packing/`; `adopt_houses` prints these commands with the counts
@@ -1169,19 +1169,20 @@ exemption quotes the owner, and that the state step,
 `every drawn picture is regularized, regular as published, decided or exempt on the owner's word`,
 printed `this change moves N houses` with the counts expected.
 
-**An exemption is the owner’s alone.** An `exempt` entry in `SETTLED` carries his words
-exactly, the day he gave them and the repository file that records them
+**An exemption is the owner’s alone.** An `exempt` entry in `SETTLED` carries the
+owner’s words exactly, the day they were given and the repository file that records them
 (`default_drawings.OwnerWord`), the reason, the bead that will settle the count, and a
-review date at most 14 days after his word.
-The gate finds his words in that file, and fails an exemption without them or past its
-review date. The intake sweep lists each exemption for him.
+review date at most 14 days after that word.
+The gate finds those words in that file, and fails an exemption without them or past its
+review date. The intake sweep lists each exemption for the owner.
 The four decimal Kingbird witnesses at 39, 55, 290 and 291, which an agent set aside on
-15 October 2026 with no strong run (think-yk2h), stand without his word until 9 November
-2026 (`default_drawings.UNRATIFIED`), and the gate fails each one still unworded after
-that day. It names the run directories for the adoption’s day and its lowest and highest
-re-housed count, since the layer records a run by its directory’s name and a repeated
-name would replace an earlier run’s record: the index holds only the runs merged into
-the branch, so two adoptions in flight on one day would otherwise print the same names.
+15 October 2026 with no strong run (think-yk2h), stand without the owner’s word until 9
+November 2026 (`default_drawings.UNRATIFIED`), and the gate fails each one still
+unworded after that day.
+It names the run directories for the adoption’s day and its lowest and highest re-housed
+count, since the layer records a run by its directory’s name and a repeated name would
+replace an earlier run’s record: the index holds only the runs merged into the branch,
+so two adoptions in flight on one day would otherwise print the same names.
 
 The strong runs cost 5 to 25 CPU-minutes a count, from the layer’s run receipts:
 

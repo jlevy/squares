@@ -46,8 +46,8 @@ The sources, one section of the report each:
   closed issue that owes a follow-up (owned by a bead that owns what remains of its
   results' validation, else its answer bead), and the validation backlog.
 - **Regularization owed**: from `atlas/known-best/default-drawings.json`, empty but for
-  the exemptions on the owner's word, each listed for him with his words and its review
-  date. Everything else here needs action: each count whose drawing is `pending`
+  the exemptions on the owner's word, each listed for the owner with the quoted words and
+  its review date. Everything else here needs action: each count whose drawing is `pending`
   regularization, with the bead its `default_drawings.PENDING_ALLOWED` entry names, each
   exemption without the owner's word, and whatever else the records tier's
   regularization-state gate fails on, a `regularization-owed` count or a decision that
@@ -1314,8 +1314,8 @@ def regularization_section(
 
     The owner, 26 October 2026: "When something lands on our main rendered lists, the
     regularization should be done." So the section shows nothing that does not need
-    action but the exemptions on the owner's word, listed for him with his words and the
-    day each is to be reviewed by. Every other item needs action: a `pending` count,
+    action but the exemptions on the owner's word, listed for the owner with the quoted words
+    and the day each is to be reviewed by. Every other item needs action: a `pending` count,
     needing an owner where `PENDING_ALLOWED` does not name it or its bead is no longer
     open, and owed on main where it does; an exemption without the owner's word
     (`default_drawings.UNRATIFIED`); and whatever else the regularization-state gate
@@ -1375,14 +1375,14 @@ def _read_record(record: Path) -> Mapping[str, Any]:
 
 #: What an exemption without the owner's word needs before the gate fails it.
 _RATIFY_STEP = (
-    "ask the owner: record his words, their day and the file that holds them "
+    "ask the owner: record the owner's words, the day and the file that holds them "
     "(default_drawings.OwnerWord) with a review date, or run both strong generators on its "
     "witness and settle it, before {until}, when the gate fails it"
 )
 
 
 def _exemption_item(n: int, held: default_drawings.Settled, beads: Beads | None) -> Item:
-    """An exemption, listed for the owner with his words where it has them, and needing
+    """An exemption, listed for the owner with the quoted words where it has them, and needing
     action where it has none."""
     found = default_drawings.BEAD.search(held.evidence)
     bead = found[0] if found else ""

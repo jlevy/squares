@@ -1286,8 +1286,8 @@ def test_the_section_shows_only_exemptions_on_the_owner_word_without_action() ->
     """Section E of the intake review of 26 October 2026: the section listed seven owed
     counts and four exemptions as owned by their open beads, so nothing reached the owner.
     Now it holds nothing that does not need action but an exemption on the owner's word,
-    listed for him with his words and its review date; an exemption without his word
-    needs action, with the bead it names and the day the gate fails it."""
+    listed for the owner with the quoted words and its review date; an exemption without
+    that word needs action, with the bead it names and the day the gate fails it."""
     from devtools import default_drawings as defaults  # noqa: PLC0415
 
     exempt = sorted(n for n, held in defaults.SETTLED.items() if held.state == defaults.EXEMPT)
@@ -1305,12 +1305,12 @@ def test_the_section_shows_only_exemptions_on_the_owner_word_without_action() ->
         bead = defaults.BEAD.search(held.evidence)
         assert bead is not None
         assert (item.bead, item.bead_state) == (bead[0], "in_progress")
-        assert item.step.startswith("ask the owner: record his words")
+        assert item.step.startswith("ask the owner: record the owner's words")
         assert item.step.endswith(f"before {defaults.UNRATIFIED_UNTIL}, when the gate fails it")
     assert "0 exemptions on the owner's word" in section.notes[0]
     assert f"{len(exempt)} exemptions without it" in section.notes[0]
 
-    # The owner's word turns the first into a listing for him, which needs no action.
+    # The owner's word turns the first into a listing for the owner, which needs no action.
     n = exempt[0]
     word = defaults.OwnerWord(
         "so they look a little chaotic",
