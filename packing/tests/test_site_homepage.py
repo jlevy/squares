@@ -734,7 +734,9 @@ def test_homepage_order_chrome_and_single_card_rows_keep_the_shared_design(
         "more-resources",
         "about-the-squares-project",
     ]
-    assert len(home["section_title_styles"]) == 10
+    # Nine since 26 October 2026: Recently Added's title left with the block, which the
+    # Changelog page now carries.
+    assert len(home["section_title_styles"]) == 9
     carried = news_highlights.carried(render_changelog.load())
     assert [heading["entry"] for heading in home["news_headings"]] == [
         entry["id"] for entry in carried
