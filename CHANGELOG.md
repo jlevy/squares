@@ -9,6 +9,31 @@ The authoritative record is [site-changelog.yaml](packing/site-changelog.yaml).
 
 ## Changelog
 
+<a id="changelog-date-2026-10-26"></a>
+
+### 2026-10-26
+
+<a id="changelog-entry-changelog-page-and-project-menu"></a>
+
+#### The Project Changelog Gets a Page, Under a Project Menu
+
+Significance S2: A reader surface and the bar&\#x27;s structure. The retained history takes a page of the site, Overview, News and Changelog move under a Project menu, Recently Added takes a shorter introduction, a tally leaves the toggles&\#x27; small caps and the credits line names the site. The history itself was already public in CHANGELOG.md and already linked from News, so no result, explanation, verification, policy or tool is new here. It adds no mathematical result and changes no paper&\#x27;s content.
+
+The whole retained history is now a page of this site: every entry at every significance, day by day, each with the GitHub issues and pull requests behind it. News keeps the stories rated S3 and above and closes on a button to it. Overview, News and Changelog sit together under Project in the navigation bar, and the homepage keeps its own address and its own name.
+
+- A tally of results is out of the toggles' small caps everywhere it appears, its
+  count set in bold and its noun in the summary's own case, and a disclosure's
+  toggle keeps the first line of a summary that wraps.
+- Recently Added's introduction names the day its window opens rather than the
+  span of days it shows.
+- The lines that said a result "is now the house best packing" say "is now the
+  record packing"; the project term itself is unchanged where `conventions.md`
+  and `SYNOPSIS.md` own it.
+- The credits line on every page, and in the four papers' PDFs, names
+  squaremath.org before the repository.
+
+PRs and supporting records: [PR \#837](https://github.com/jlevy/squares/pull/837) · [The site design record](packing/devtools/templates/paper-design.md).
+
 <a id="changelog-date-2026-10-25"></a>
 
 ### 2026-10-25
