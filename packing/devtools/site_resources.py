@@ -449,7 +449,7 @@ OTHER_SITES: tuple[tuple[str, str, str, str], ...] = (
         "Hyukdong Kim",
         (
             "The degree-21 minimal polynomial of the record side at n = 297, with an exact"
-            " configuration in an archive attached to the comment."
+            " configuration attached."
         ),
     ),
     (
