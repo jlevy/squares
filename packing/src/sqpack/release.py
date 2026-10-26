@@ -9370,6 +9370,43 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "Retain v0.4.30, v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/devtools/github_references.py",
+            "packing/devtools/render_changelog.py",
+            "packing/devtools/result_overview.py",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "News and result pages link their GitHub issues (think-i8ks): "
+            "`github_references` gains `reporting_issues`, `issues_reporting`, "
+            "`issue_url` and `cited_issues`, and no existing function changes; "
+            "`render_changelog` gains the `issues` check and backfill and renders an "
+            "entry's issues beside its PRs in `_entry_lines`; `result_overview."
+            "links_section` adds a Reported in row. The papers reach `render_changelog` "
+            "only through `site_documents`, which calls `entry_anchor`, unchanged, reach "
+            "`github_references` only through `overview_sections`' "
+            "`parse_github_reference`, unchanged, and no paper builder calls "
+            "`links_section`, `result_popover_html` or the News renderers, which only the "
+            "site's pages and result pages call. No render was taken, and every paper "
+            "keeps its version: v0.4.30, v0.1.11, v0.1.4 and v0.2.7."
+        ),
+    ),
 )
 
 

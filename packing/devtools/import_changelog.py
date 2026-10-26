@@ -22,6 +22,7 @@ import yaml
 from strif import atomic_output_file
 
 from devtools import render_changelog
+from devtools.github_references import issues_reporting
 from sqpack.yamlio import load_yaml
 
 Document = dict[str, Any]
@@ -224,6 +225,9 @@ def draft(
         cited = sorted(set(re.findall(r"\bT-\d{3,}\b", row.get("body") or "")) & known_results)
         if cited:
             entry["result_ids"] = cited
+            # The issues that reported those results, which the changelog check requires.
+            if issues := issues_reporting(cited):
+                entry["issues"] = list(issues)
             entry["references"] = [
                 {
                     "label": "Referenced result records",

@@ -33,6 +33,7 @@ from mdit_py_plugins.attrs import attrs_block_plugin, attrs_plugin
 from mdit_py_plugins.dollarmath import dollarmath_plugin
 from strif import atomic_output_file
 
+from devtools.github_references import cited_issues, issue_url, issues_reporting
 from devtools.migrate_math import classify
 from devtools.overview_data import MATH, breakable_quotients, prose_tex
 from devtools.repo_links import path_kind, repo_url
@@ -692,6 +693,104 @@ def validate(document: Document, *, schema: Document | None = None) -> None:
         )
 
 
+#: A GitHub address written in an entry's prose, up to the Markdown that closes it.
+_GITHUB_URL = re.compile(r"https://github\.com/[^\s)\]<>\"']+")
+#: An entry's first line in the YAML as written.
+_ENTRY_LINE = re.compile(r"^  - id: (\S+)$")
+
+
+def required_issues(
+    document: Document, entry: Document, reporting: dict[str, tuple[int, ...]] | None = None
+) -> tuple[int, ...]:
+    """The issues an entry must list in `issues`: each issue that reported one of its
+    `result_ids` (`campaign/result-requests.yaml`, `github_references.reporting_issues`),
+    and each issue of this repository its own summary, details or references link.
+
+    An entry may list more; editorial links to other issues stay the author's choice."""
+    texts = [
+        entry["summary"],
+        entry.get("details", ""),
+        *(item["target"] for item in entry.get("references", [])),
+    ]
+    linked = cited_issues(
+        document["repository"], (url for text in texts for url in _GITHUB_URL.findall(text))
+    )
+    reported = issues_reporting(entry.get("result_ids", ()), reporting)
+    return tuple(sorted({*reported, *linked}))
+
+
+def issue_findings(
+    document: Document, reporting: dict[str, tuple[int, ...]] | None = None
+) -> list[str]:
+    """Each entry whose `issues` omits an issue `required_issues` names."""
+    findings = []
+    for entry in document["entries"]:
+        listed = set(entry.get("issues", ()))
+        if missing := [
+            n for n in required_issues(document, entry, reporting) if n not in listed
+        ]:
+            findings.append(
+                f"{entry['id']}: issues omits {', '.join(f'#{number}' for number in missing)}"
+            )
+    return findings
+
+
+def backfill_issues(
+    text: str, document: Document, reporting: dict[str, tuple[int, ...]] | None = None
+) -> str:
+    """The changelog's YAML with each entry's `issues` widened to `required_issues`.
+
+    The edit is textual so the hand-written layout survives: an existing `issues` field is
+    rewritten in place and a missing one goes directly under `pull_requests`, in the same
+    flow or block style. Entries already complete, and `frozen_entries`, are untouched."""
+    entries = {entry["id"]: entry for entry in document["entries"]}
+    lines = text.splitlines(keepends=True)
+    start = next(index for index, line in enumerate(lines) if line.rstrip("\n") == "entries:")
+    end = next(
+        (
+            index
+            for index in range(start + 1, len(lines))
+            if re.match(r"^[a-z_]+:", lines[index])
+        ),
+        len(lines),
+    )
+    heads = [
+        index for index in range(start + 1, end) if _ENTRY_LINE.match(lines[index].rstrip("\n"))
+    ]
+
+    def field(first: int, last: int, key: str) -> tuple[int, int] | None:
+        """The lines a top-level field of an entry spans: its key and any block items."""
+        for index in range(first, last):
+            if lines[index].startswith(f"    {key}:"):
+                stop = index + 1
+                while stop < last and lines[stop].startswith("      "):
+                    stop += 1
+                return index, stop
+        return None
+
+    edits: list[tuple[int, int, list[str]]] = []
+    for head, tail in zip(heads, [*heads[1:], end], strict=True):
+        match = _ENTRY_LINE.match(lines[head].rstrip("\n"))
+        assert match is not None
+        entry = entries[match[1]]
+        listed = set(entry.get("issues", ()))
+        wanted = sorted(listed | set(required_issues(document, entry, reporting)))
+        if wanted == sorted(listed):
+            continue
+        pulls = field(head, tail, "pull_requests")
+        if pulls is None:
+            raise ValueError(f"{entry['id']}: no pull_requests to place issues under")
+        if "[" in lines[pulls[0]]:
+            rendered = [f"    issues: [{', '.join(map(str, wanted))}]\n"]
+        else:
+            rendered = ["    issues:\n", *(f"      - {number}\n" for number in wanted)]
+        span = field(head, tail, "issues") or (pulls[1], pulls[1])
+        edits.append((*span, rendered))
+    for first, last, replacement in sorted(edits, reverse=True):
+        lines[first:last] = replacement
+    return "".join(lines)
+
+
 def load(path: Path = SRC) -> Document:
     """Read one enforced changelog; no network or GitHub metadata discovery."""
     document = load_yaml(path.read_text(encoding="utf-8"))
@@ -1070,25 +1169,30 @@ def _entry_lines(
             )
         else:
             out.extend([evidence + ending, ""])
+    issues = sorted(entry.get("issues", []))
+    issue_targets = {issue_url(document["repository"], number) for number in issues}
     links = [
         _markdown_link(
-            f"#{number}", f"{document['repository']}/pull/{number}", destination=destination
+            f"Issue #{number}",
+            issue_url(document["repository"], number),
+            destination=destination,
+        )
+        for number in issues
+    ]
+    links.extend(
+        _markdown_link(
+            f"PR #{number}", f"{document['repository']}/pull/{number}", destination=destination
         )
         for number in sorted(entry["pull_requests"])
-    ]
+    )
+    # A reference to a listed issue's thread is that issue's link, already given.
     links.extend(
         _markdown_link(item["label"], item["target"], destination=destination)
         for item in entry.get("references", [])
+        if item["target"].rstrip("/") not in issue_targets
     )
-    out.extend(
-        [
-            "PRs and supporting records:"
-            + label_separator
-            + link_separator.join(links)
-            + ending,
-            "",
-        ]
-    )
+    heading = "Issues, PRs and supporting records:" if issues else "PRs and supporting records:"
+    out.extend([heading + label_separator + link_separator.join(links) + ending, ""])
     return out
 
 
@@ -1519,9 +1623,31 @@ def main(argv: Sequence[str] | None = None) -> int:
         "raised since HEAD's merge base with REF are owed after the merge, not failed, "
         f"and with {MAIN_DELIVERY_BASE}, main's own delivery, owed results only warn",
     )
+    parser.add_argument(
+        "--backfill-issues",
+        action="store_true",
+        help="Write into the source each issue an entry must list and does not "
+        "(`required_issues`), then continue",
+    )
     options = parser.parse_args(argv)
     try:
         document = load(options.source)
+        if options.backfill_issues:
+            text = options.source.read_text(encoding="utf-8")
+            if (filled := backfill_issues(text, document)) != text:
+                with atomic_output_file(options.source) as output:
+                    output.write_text(filled, encoding="utf-8")
+                print(f"wrote missing issues into {options.source}")
+            document = load(options.source)
+        if findings := issue_findings(document):
+            for finding in findings:
+                print(f"changelog: {finding}", file=sys.stderr)
+            print(
+                "changelog: an entry lists each issue that reported its results or that it "
+                "links; run python -m devtools.render_changelog --backfill-issues",
+                file=sys.stderr,
+            )
+            return 1
         if options.baseline:
             validate_frozen(document, load(options.baseline))
         if options.baseline_ref:

@@ -45,7 +45,7 @@ Published artifacts: [Couzo’s certificates at 268 and 303](https://squaremath.
 
 First public: 2026-10-25 ([publication evidence](https://github.com/jlevy/squares/actions/runs/40148939396)).
 
-PRs and supporting records: [\#794](https://github.com/jlevy/squares/pull/794) · [The case record at 268](packing/frontier/n-268.md) · [The case record at 303](packing/frontier/n-303.md) · [Mathematical review of 24 October](docs/project/reviews/review-2026-10-24-couzo-n268-n303.md) · [Couzo’s registration request](https://github.com/jlevy/squares/issues/763).
+Issues, PRs and supporting records: [Issue \#763](https://github.com/jlevy/squares/issues/763) · [PR \#794](https://github.com/jlevy/squares/pull/794) · [The case record at 268](packing/frontier/n-268.md) · [The case record at 303](packing/frontier/n-303.md) · [Mathematical review of 24 October](docs/project/reviews/review-2026-10-24-couzo-n268-n303.md).
 
 <a id="changelog-entry-daniel-one-eighty-two-adopted"></a>
 
@@ -72,7 +72,7 @@ Published artifacts: [Daniel’s certificate at 182](https://squaremath.org/resu
 
 First public: 2026-10-25 ([publication evidence](https://github.com/jlevy/squares/actions/runs/40177916608)).
 
-PRs and supporting records: [\#814](https://github.com/jlevy/squares/pull/814) · [The case record at 182](packing/frontier/n-182.md) · [Mathematical review of 25 October](docs/project/reviews/review-2026-10-25-evand-n182.md) · [Daniel’s registration request](https://github.com/jlevy/squares/issues/806).
+Issues, PRs and supporting records: [Issue \#806](https://github.com/jlevy/squares/issues/806) · [PR \#814](https://github.com/jlevy/squares/pull/814) · [The case record at 182](packing/frontier/n-182.md) · [Mathematical review of 25 October](docs/project/reviews/review-2026-10-25-evand-n182.md).
 
 <a id="changelog-entry-jatloe-n12-reported-proof"></a>
 
@@ -110,7 +110,7 @@ Published artifacts: [Current 12-square Lean proof report](https://squaremath.or
 
 First public: 2026-10-25 ([publication evidence](https://github.com/jlevy/squares/actions/runs/40202397886)).
 
-PRs and supporting records: [\#812](https://github.com/jlevy/squares/pull/812) · [Statement audit of 25 October](docs/project/reviews/review-2026-10-25-n12-lean-formalization-statement-audit.md) · [Retained source and verification limits](packing/resources/web/jatloe-n12-lean-2026-10-16/README.md) · [The tracking issue](https://github.com/jlevy/squares/issues/810).
+Issues, PRs and supporting records: [Issue \#810](https://github.com/jlevy/squares/issues/810) · [PR \#812](https://github.com/jlevy/squares/pull/812) · [Statement audit of 25 October](docs/project/reviews/review-2026-10-25-n12-lean-formalization-statement-audit.md) · [Retained source and verification limits](packing/resources/web/jatloe-n12-lean-2026-10-16/README.md).
 
 <a id="changelog-date-2026-10-24"></a>
 
@@ -157,7 +157,7 @@ Published artifacts: [Daniel’s Lean proof report for Fang’s theorems](https:
 
 First public: 2026-10-24 ([publication evidence](https://github.com/jlevy/squares/actions/runs/40065536417/job/120790587248)).
 
-PRs and supporting records: [\#750](https://github.com/jlevy/squares/pull/750) · [Retained source, build plan and verification limits](packing/resources/web/evand-fang-ryu-lean-2026-10-18/README.md) · [Fang’s theorems as the record holds them](https://squaremath.org/result/t-163.html) · [chelokot’s Lean proofs of s(2) to s(5), retained](packing/resources/web/chelokot-small-n-lean-2026-09-05/README.md).
+Issues, PRs and supporting records: [Issue \#784](https://github.com/jlevy/squares/issues/784) · [Issue \#785](https://github.com/jlevy/squares/issues/785) · [PR \#750](https://github.com/jlevy/squares/pull/750) · [Retained source, build plan and verification limits](packing/resources/web/evand-fang-ryu-lean-2026-10-18/README.md) · [Fang’s theorems as the record holds them](https://squaremath.org/result/t-163.html) · [chelokot’s Lean proofs of s(2) to s(5), retained](packing/resources/web/chelokot-small-n-lean-2026-09-05/README.md).
 
 <a id="changelog-entry-hosono-thirty-one-fine-net-lower-bound"></a>
 
@@ -186,7 +186,7 @@ Significance S3: T-232 is an S3 result at one count: the strongest lower bound o
   this project’s control, which failed closed at 26 on the control, not on the
   certificate. Until then the four standing bounds are unchanged.
 
-PRs and supporting records: [\#745](https://github.com/jlevy/squares/pull/745) · [The case record at 31](packing/frontier/n-031.md) · [Hosono’s certificate at 31](https://github.com/wand125/square-packing/tree/23e31862345c532d17ad2c896677a3a8d8821aa4/problems/square-lower-bounds/certificates/mixed_n31_L59775) · [Retained report and verification limits at 31](packing/resources/web/wand125-fine-net-n31-2026-10-11/README.md) · [Mathematical review of the bound at 31](docs/project/reviews/review-2026-10-23-wand125-n31-fine-net.md) · [Mathematical review of the four bounds of issue 446](docs/project/reviews/review-2026-10-23-wand125-446-fine-net.md) · [Hosono’s report of the four bounds](https://github.com/jlevy/squares/issues/446).
+Issues, PRs and supporting records: [Issue \#446](https://github.com/jlevy/squares/issues/446) · [Issue \#534](https://github.com/jlevy/squares/issues/534) · [PR \#745](https://github.com/jlevy/squares/pull/745) · [The case record at 31](packing/frontier/n-031.md) · [Hosono’s certificate at 31](https://github.com/wand125/square-packing/tree/23e31862345c532d17ad2c896677a3a8d8821aa4/problems/square-lower-bounds/certificates/mixed_n31_L59775) · [Retained report and verification limits at 31](packing/resources/web/wand125-fine-net-n31-2026-10-11/README.md) · [Mathematical review of the bound at 31](docs/project/reviews/review-2026-10-23-wand125-n31-fine-net.md) · [Mathematical review of the four bounds of issue 446](docs/project/reviews/review-2026-10-23-wand125-446-fine-net.md).
 
 <a id="changelog-date-2026-10-23"></a>
 
@@ -238,7 +238,7 @@ their counts.
 - That second 204 file, the same packing at its solved side, was registered as T-231
   and has been the house at 204 since 24 October; 204 draws grid-slack’s view of it.
 
-PRs and supporting records: [\#725](https://github.com/jlevy/squares/pull/725) · [The case record at 105](packing/frontier/n-105.md) · [The case record at 204](packing/frontier/n-204.md) · [Mathematical review of Couzo’s three reports](docs/project/reviews/review-2026-10-22-couzo-670-672-675.md) · [Mathematical review of Polkovskyi’s re-solves](docs/project/reviews/review-2026-10-22-mishapolk-719.md) · [Polkovskyi’s registration request](https://github.com/jlevy/squares/issues/719).
+Issues, PRs and supporting records: [Issue \#670](https://github.com/jlevy/squares/issues/670) · [Issue \#672](https://github.com/jlevy/squares/issues/672) · [Issue \#675](https://github.com/jlevy/squares/issues/675) · [Issue \#719](https://github.com/jlevy/squares/issues/719) · [PR \#725](https://github.com/jlevy/squares/pull/725) · [The case record at 105](packing/frontier/n-105.md) · [The case record at 204](packing/frontier/n-204.md) · [Mathematical review of Couzo’s three reports](docs/project/reviews/review-2026-10-22-couzo-670-672-675.md) · [Mathematical review of Polkovskyi’s re-solves](docs/project/reviews/review-2026-10-22-mishapolk-719.md).
 
 <a id="changelog-entry-daniel-three-hundred-three-adopted"></a>
 
@@ -271,7 +271,7 @@ house at 303.
   optimality open and predicts a further descent of about $4.8 \times 10^{-7}$. No
   optimality, rigidity or priority is claimed.
 
-PRs and supporting records: [\#731](https://github.com/jlevy/squares/pull/731) · [The case record at 303](packing/frontier/n-303.md) · [Retained certificate and verification limits](packing/resources/web/evand-n303-2026-10-22/README.md) · [Mathematical review of 22 October](docs/project/reviews/review-2026-10-22-daniel-728.md) · [Daniel’s registration request](https://github.com/jlevy/squares/issues/728).
+Issues, PRs and supporting records: [Issue \#728](https://github.com/jlevy/squares/issues/728) · [PR \#731](https://github.com/jlevy/squares/pull/731) · [The case record at 303](packing/frontier/n-303.md) · [Retained certificate and verification limits](packing/resources/web/evand-n303-2026-10-22/README.md) · [Mathematical review of 22 October](docs/project/reviews/review-2026-10-22-daniel-728.md).
 
 <a id="changelog-entry-visual-atlas-follows-the-scroll"></a>
 
@@ -294,7 +294,7 @@ the shared small choosers are smaller.
   readers to the project’s group chat; the profiles directory opens with an
   introduction; and every tally is spaced the same way.
 
-PRs and supporting records: [\#746](https://github.com/jlevy/squares/pull/746) · [The site design record](packing/devtools/templates/paper-design.md).
+PRs and supporting records: [PR \#746](https://github.com/jlevy/squares/pull/746) · [The site design record](packing/devtools/templates/paper-design.md).
 
 <a id="changelog-date-2026-10-22"></a>
 
@@ -321,7 +321,7 @@ without being assigned to a person.
 - Archive attribution is not complete; the rest of the population is tracked as
   follow-up work.
 
-PRs and supporting records: [\#578](https://github.com/jlevy/squares/pull/578) · [Contributor records](packing/contributors/README.md) · [Attribution rules](attribution.md).
+PRs and supporting records: [PR \#578](https://github.com/jlevy/squares/pull/578) · [Contributor records](packing/contributors/README.md) · [Attribution rules](attribution.md).
 
 <a id="changelog-date-2026-10-21"></a>
 
@@ -355,7 +355,7 @@ rows of the source.
   both packings lie a little lower still and are registered separately (T-225),
   pending review. No optimality, rigidity or priority is claimed.
 
-PRs and supporting records: [\#706](https://github.com/jlevy/squares/pull/706) · [The case record at 204](packing/frontier/n-204.md) · [The case record at 260](packing/frontier/n-260.md) · [Retained certificates and verification limits](packing/resources/web/couzo-issue678-2026-10-18/README.md) · [Mathematical review of 20 October](docs/project/reviews/review-2026-10-20-upper-bound-imports-678.md) · [Couzo’s registration request](https://github.com/jlevy/squares/issues/678).
+Issues, PRs and supporting records: [Issue \#678](https://github.com/jlevy/squares/issues/678) · [PR \#706](https://github.com/jlevy/squares/pull/706) · [The case record at 204](packing/frontier/n-204.md) · [The case record at 260](packing/frontier/n-260.md) · [Retained certificates and verification limits](packing/resources/web/couzo-issue678-2026-10-18/README.md) · [Mathematical review of 20 October](docs/project/reviews/review-2026-10-20-upper-bound-imports-678.md).
 
 <a id="changelog-entry-daniel-two-hundred-seventy-adopted"></a>
 
@@ -382,7 +382,7 @@ now the house at 270.
   statements are its numerical evidence, not proofs.
 - No optimality, rigidity or priority is claimed.
 
-PRs and supporting records: [\#708](https://github.com/jlevy/squares/pull/708) · [The case record at 270](packing/frontier/n-270.md) · [Retained certificate and verification limits](packing/resources/web/evand-n270-sweep-2026-10-20/README.md) · [Mathematical review of 21 October](docs/project/reviews/review-2026-10-21-upper-bound-import-703.md) · [Daniel’s registration request](https://github.com/jlevy/squares/issues/703).
+Issues, PRs and supporting records: [Issue \#703](https://github.com/jlevy/squares/issues/703) · [PR \#708](https://github.com/jlevy/squares/pull/708) · [The case record at 270](packing/frontier/n-270.md) · [Retained certificate and verification limits](packing/resources/web/evand-n270-sweep-2026-10-20/README.md) · [Mathematical review of 21 October](docs/project/reviews/review-2026-10-21-upper-bound-import-703.md).
 
 <a id="changelog-entry-de-winter-two-twenty-seven-and-two-sixty-adopted"></a>
 
@@ -409,7 +409,7 @@ stays the house there.
   (T-223) at 260; each replaces de Winter’s packing there once it is validated. No
   optimality, rigidity or priority is claimed.
 
-PRs and supporting records: [\#704](https://github.com/jlevy/squares/pull/704) · [The case record at 227](packing/frontier/n-227.md) · [The case record at 260](packing/frontier/n-260.md) · [Retained certificates and verification limits](packing/resources/web/de-winter-upper-bounds-227-229-260-2026-10-17/README.md) · [Mathematical review of 20 October](docs/project/reviews/review-2026-10-20-de-winter-668-upper-bounds.md) · [De Winter’s registration request](https://github.com/jlevy/squares/issues/668).
+Issues, PRs and supporting records: [Issue \#668](https://github.com/jlevy/squares/issues/668) · [PR \#704](https://github.com/jlevy/squares/pull/704) · [The case record at 227](packing/frontier/n-227.md) · [The case record at 260](packing/frontier/n-260.md) · [Retained certificates and verification limits](packing/resources/web/de-winter-upper-bounds-227-229-260-2026-10-17/README.md) · [Mathematical review of 20 October](docs/project/reviews/review-2026-10-20-de-winter-668-upper-bounds.md).
 
 <a id="changelog-date-2026-10-20"></a>
 
@@ -454,7 +454,7 @@ and those at 236 and 271 with this confirmation.
 - At 229, Daniel’s regularized view of his own packing (T-225) has been the house
   since 22 October.
 
-PRs and supporting records: [\#676](https://github.com/jlevy/squares/pull/676) · [\#692](https://github.com/jlevy/squares/pull/692) · [The case record at 155](packing/frontier/n-155.md) · [The case record at 229](packing/frontier/n-229.md) · [The case record at 236](packing/frontier/n-236.md) · [The case record at 271](packing/frontier/n-271.md) · [Mathematical review of 19 October](docs/project/reviews/review-2026-10-19-upper-bound-imports-659-664-669-674.md) · [The 18 October intake audit](docs/project/reviews/review-2026-10-18-intake-audit.md) · [De Winter’s adoption at 227 and 260 (\#704)](https://squaremath.org/news.html#changelog-entry-de-winter-two-twenty-seven-and-two-sixty-adopted).
+Issues, PRs and supporting records: [Issue \#659](https://github.com/jlevy/squares/issues/659) · [Issue \#664](https://github.com/jlevy/squares/issues/664) · [Issue \#669](https://github.com/jlevy/squares/issues/669) · [Issue \#674](https://github.com/jlevy/squares/issues/674) · [PR \#676](https://github.com/jlevy/squares/pull/676) · [PR \#692](https://github.com/jlevy/squares/pull/692) · [The case record at 155](packing/frontier/n-155.md) · [The case record at 229](packing/frontier/n-229.md) · [The case record at 236](packing/frontier/n-236.md) · [The case record at 271](packing/frontier/n-271.md) · [Mathematical review of 19 October](docs/project/reviews/review-2026-10-19-upper-bound-imports-659-664-669-674.md) · [The 18 October intake audit](docs/project/reviews/review-2026-10-18-intake-audit.md) · [De Winter’s adoption at 227 and 260 (\#704)](https://squaremath.org/news.html#changelog-entry-de-winter-two-twenty-seven-and-two-sixty-adopted).
 
 <a id="changelog-entry-daniel-one-eighty-three-below-the-grid"></a>
 
@@ -479,7 +479,7 @@ in this register. T-220 is confirmed at V3/C3 and is now the house at 183.
   and local-minimum statements are numerical evidence that was not checked here, and
   no optimality, rigidity or priority is claimed.
 
-PRs and supporting records: [\#687](https://github.com/jlevy/squares/pull/687) · [The case record at 183](packing/frontier/n-183.md) · [Retained certificate and verification limits](packing/resources/web/evand-n183-subgrid-2026-10-19/README.md) · [Mathematical review of 19 October](docs/project/reviews/review-2026-10-19-evand-n183-subgrid.md) · [Daniel’s registration request](https://github.com/jlevy/squares/issues/680).
+Issues, PRs and supporting records: [Issue \#680](https://github.com/jlevy/squares/issues/680) · [PR \#687](https://github.com/jlevy/squares/pull/687) · [The case record at 183](packing/frontier/n-183.md) · [Retained certificate and verification limits](packing/resources/web/evand-n183-subgrid-2026-10-19/README.md) · [Mathematical review of 19 October](docs/project/reviews/review-2026-10-19-evand-n183-subgrid.md).
 
 <a id="changelog-entry-daniel-one-fifty-four-and-three-hundred-eight-adopted"></a>
 
@@ -509,7 +509,7 @@ and are now the house packings at both counts.
   numerical evidence; at 154 its local-minimum test is inconclusive. No optimality,
   rigidity or priority is claimed.
 
-PRs and supporting records: [\#699](https://github.com/jlevy/squares/pull/699) · [The case record at 308](packing/frontier/n-308.md) · [The case record at 154](packing/frontier/n-154.md) · [Mathematical review of 20 October](docs/project/reviews/review-2026-10-20-upper-bound-imports-689-694.md) · [Daniel’s registration request at 308](https://github.com/jlevy/squares/issues/689) · [Daniel’s registration request at 154](https://github.com/jlevy/squares/issues/694).
+Issues, PRs and supporting records: [Issue \#689](https://github.com/jlevy/squares/issues/689) · [Issue \#694](https://github.com/jlevy/squares/issues/694) · [PR \#699](https://github.com/jlevy/squares/pull/699) · [The case record at 308](packing/frontier/n-308.md) · [The case record at 154](packing/frontier/n-154.md) · [Mathematical review of 20 October](docs/project/reviews/review-2026-10-20-upper-bound-imports-689-694.md).
 
 <a id="changelog-entry-hosono-fine-net-lower-bounds"></a>
 
@@ -539,7 +539,7 @@ other 14 are recorded as reported, at V0/C0.
   October. The other 14 await their captures and reviews. No optimality or upper
   bound is claimed.
 
-PRs and supporting records: [\#671](https://github.com/jlevy/squares/pull/671) · [\#688](https://github.com/jlevy/squares/pull/688) · [Retained certificates and verification limits](packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md) · [Mathematical review at 108](docs/project/reviews/review-2026-10-18-wand125-n108-certificate-mathematics.md) · [Mathematical review at 68](docs/project/reviews/review-2026-10-19-n68-fine-net-mathematics.md) · [Mathematical review at 84 and 85](docs/project/reviews/review-2026-10-19-n84-n85-fine-net-mathematics.md) · [Hosono’s registration request](https://github.com/jlevy/squares/issues/446).
+Issues, PRs and supporting records: [Issue \#446](https://github.com/jlevy/squares/issues/446) · [PR \#671](https://github.com/jlevy/squares/pull/671) · [PR \#688](https://github.com/jlevy/squares/pull/688) · [Retained certificates and verification limits](packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md) · [Mathematical review at 108](docs/project/reviews/review-2026-10-18-wand125-n108-certificate-mathematics.md) · [Mathematical review at 68](docs/project/reviews/review-2026-10-19-n68-fine-net-mathematics.md) · [Mathematical review at 84 and 85](docs/project/reviews/review-2026-10-19-n84-n85-fine-net-mathematics.md).
 
 <a id="changelog-date-2026-10-19"></a>
 
@@ -568,7 +568,7 @@ confirmation stays at C1: nothing here has rebuilt the proof.
 - C3 for T-154 needs a complete build beyond the producer’s, and V4 needs the
   owner’s oversight record.
 
-PRs and supporting records: [\#645](https://github.com/jlevy/squares/pull/645) · [Admission review of the source build](docs/project/reviews/review-2026-10-15-fitzharding-n17-source-build-admission.md) · [The verification and confirmation ladder](epistemics.md) · [The case record at 17](packing/frontier/n-017.md).
+Issues, PRs and supporting records: [Issue \#565](https://github.com/jlevy/squares/issues/565) · [PR \#645](https://github.com/jlevy/squares/pull/645) · [Admission review of the source build](docs/project/reviews/review-2026-10-15-fitzharding-n17-source-build-admission.md) · [The verification and confirmation ladder](epistemics.md) · [The case record at 17](packing/frontier/n-017.md).
 
 <a id="changelog-date-2026-10-17"></a>
 
@@ -612,7 +612,7 @@ or kept the axis tool’s view where no regularized view improved on it.
   T-230) and 204 (from 20 October; T-231 since 24 October) have been re-housed and
   redrawn.
 
-PRs and supporting records: [\#657](https://github.com/jlevy/squares/pull/657) · [Mathematical review of 16 October](docs/project/reviews/review-2026-10-16-upper-bound-imports-506-607.md) · [The case record at 237](packing/frontier/n-237.md) · [Regularization selection at 211 to 304](packing/cases/regularized_drawings/think-z7wn-2026-10-16/selection-r3cl.md).
+Issues, PRs and supporting records: [Issue \#506](https://github.com/jlevy/squares/issues/506) · [Issue \#593](https://github.com/jlevy/squares/issues/593) · [Issue \#606](https://github.com/jlevy/squares/issues/606) · [Issue \#607](https://github.com/jlevy/squares/issues/607) · [PR \#657](https://github.com/jlevy/squares/pull/657) · [Mathematical review of 16 October](docs/project/reviews/review-2026-10-16-upper-bound-imports-506-607.md) · [The case record at 237](packing/frontier/n-237.md) · [Regularization selection at 211 to 304](packing/cases/regularized_drawings/think-z7wn-2026-10-16/selection-r3cl.md).
 
 <a id="changelog-date-2026-10-16"></a>
 
@@ -648,7 +648,7 @@ Published artifacts: [Current 19-square Lean proof report](https://squaremath.or
 
 First public: 2026-10-16 ([publication evidence](https://github.com/jlevy/squares/actions/runs/38942623017/job/117129620456)).
 
-PRs and supporting records: [\#651](https://github.com/jlevy/squares/pull/651) · [Source and premise review](docs/project/reviews/review-2026-10-16-fitzharding-n19-lean.md) · [Retained source and verification limits](packing/resources/web/fitzharding-n19-lean-2026-10-16/README.md) · [Fitzharding’s registration request](https://github.com/jlevy/squares/issues/640).
+Issues, PRs and supporting records: [Issue \#640](https://github.com/jlevy/squares/issues/640) · [PR \#651](https://github.com/jlevy/squares/pull/651) · [Source and premise review](docs/project/reviews/review-2026-10-16-fitzharding-n19-lean.md) · [Retained source and verification limits](packing/resources/web/fitzharding-n19-lean-2026-10-16/README.md).
 
 <a id="changelog-entry-greff-ninety-five-optimality-report"></a>
 
@@ -670,7 +670,7 @@ independent review and adoption.
   here, and the reported result does not yet establish a completely checked Lean
   proof.
 
-PRs and supporting records: [\#627](https://github.com/jlevy/squares/pull/627) · [Greff’s certificate and source checks](https://github.com/bengreff/s95-certificate/tree/dd7297d06adc664268c65005369b895e4ded7547) · [Retained report and verification limits](packing/resources/web/bengreff-s95-certificate-2026-10-15/README.md) · [Greff’s registration request](https://github.com/jlevy/squares/issues/610).
+Issues, PRs and supporting records: [Issue \#610](https://github.com/jlevy/squares/issues/610) · [PR \#627](https://github.com/jlevy/squares/pull/627) · [Greff’s certificate and source checks](https://github.com/bengreff/s95-certificate/tree/dd7297d06adc664268c65005369b895e4ded7547) · [Retained report and verification limits](packing/resources/web/bengreff-s95-certificate-2026-10-15/README.md).
 
 <a id="changelog-entry-hosono-twenty-eight-continuous-bound-report"></a>
 
@@ -692,7 +692,7 @@ pending.
   method. The project checked exact premises and a diagnostic sample; those
   checks do not replace a complete replay or establish an independent method.
 
-PRs and supporting records: [\#627](https://github.com/jlevy/squares/pull/627) · [Hosono’s certificate and source checks](https://github.com/wand125/square-packing/tree/8530bafb03d48444f30f241fbc1f29f01cd7c96c/problems/square-lower-bounds/certificates/continuous_n28_L5745) · [Retained report and verification limits](packing/resources/web/wand125-continuous-n28-2026-10-15/README.md) · [Registered lower-bound reports](packing/frontier/RESULTS.md).
+Issues, PRs and supporting records: [Issue \#780](https://github.com/jlevy/squares/issues/780) · [PR \#627](https://github.com/jlevy/squares/pull/627) · [Hosono’s certificate and source checks](https://github.com/wand125/square-packing/tree/8530bafb03d48444f30f241fbc1f29f01cd7c96c/problems/square-lower-bounds/certificates/continuous_n28_L5745) · [Retained report and verification limits](packing/resources/web/wand125-continuous-n28-2026-10-15/README.md) · [Registered lower-bound reports](packing/frontier/RESULTS.md).
 
 <a id="changelog-entry-regularized-drawings-for-six-re-housed-counts"></a>
 
@@ -719,7 +719,7 @@ drew a better view, and the drawings stayed.
   #657 re-housed 204 and 303, 272 was re-housed on 17 October (T-174), and each now
   draws a view of a later house.
 
-PRs and supporting records: [\#644](https://github.com/jlevy/squares/pull/644) · [Regularization selection at 105, 129 and 146](packing/cases/regularized_drawings/think-la7h-2026-10-16/selection-3a.md) · [Regularization selection at 156, 176 and 271](packing/cases/regularized_drawings/think-la7h-2026-10-16/selection-3a-d1.md) · [Regularization process](docs/project/guides/regularization-process.md).
+PRs and supporting records: [PR \#644](https://github.com/jlevy/squares/pull/644) · [Regularization selection at 105, 129 and 146](packing/cases/regularized_drawings/think-la7h-2026-10-16/selection-3a.md) · [Regularization selection at 156, 176 and 271](packing/cases/regularized_drawings/think-la7h-2026-10-16/selection-3a-d1.md) · [Regularization process](docs/project/guides/regularization-process.md).
 
 <a id="changelog-date-2026-10-15"></a>
 
@@ -749,7 +749,7 @@ Component editions: Site v0.7.7; Infographics v0.6.1; New Lower Bounds for Squar
 
 First public: 2026-10-15 ([publication evidence](https://github.com/jlevy/squares/actions/runs/38739226771/job/116439283652)).
 
-PRs and supporting records: [\#619](https://github.com/jlevy/squares/pull/619) · [Atlas and downloadable editions](packing/atlas/known-best/README.md) · [Published release and verification](https://github.com/jlevy/squares/actions/runs/38739226771/job/116439283652).
+PRs and supporting records: [PR \#619](https://github.com/jlevy/squares/pull/619) · [Atlas and downloadable editions](packing/atlas/known-best/README.md) · [Published release and verification](https://github.com/jlevy/squares/actions/runs/38739226771/job/116439283652).
 
 <a id="changelog-entry-every-selected-validation-check-runs"></a>
 
@@ -767,7 +767,7 @@ checks exactly, while the schema and synopsis checks stay unconditional.
 - No scientific assertion, admission rule or mathematical tolerance is weakened.
   This is a correctness and stability change, not a speed-up.
 
-PRs and supporting records: [\#620](https://github.com/jlevy/squares/pull/620) · [Validation tiers](development.md#validation-tiers).
+PRs and supporting records: [PR \#620](https://github.com/jlevy/squares/pull/620) · [Validation tiers](development.md#validation-tiers).
 
 <a id="changelog-entry-october-fourteen-reviewed-packing-adoptions"></a>
 
@@ -789,7 +789,7 @@ the certificates; each case retains credit for earlier designs and refinements.
   algebraic certificates for 70, 153 and 207 squares also await a separate owner
   decision.
 
-PRs and supporting records: [\#614](https://github.com/jlevy/squares/pull/614) · [Case records](packing/frontier/README.md) · [Reviewed result register](packing/frontier/RESULTS.md) · [Review of the 14 October upper-bound reports](docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md) · [Review of PingYou Ltd’s PR 574 certificates](docs/project/reviews/review-2026-10-14-upper-bound-imports-574.md).
+Issues, PRs and supporting records: [Issue \#503](https://github.com/jlevy/squares/issues/503) · [Issue \#504](https://github.com/jlevy/squares/issues/504) · [Issue \#561](https://github.com/jlevy/squares/issues/561) · [Issue \#562](https://github.com/jlevy/squares/issues/562) · [Issue \#564](https://github.com/jlevy/squares/issues/564) · [Issue \#566](https://github.com/jlevy/squares/issues/566) · [Issue \#567](https://github.com/jlevy/squares/issues/567) · [Issue \#568](https://github.com/jlevy/squares/issues/568) · [Issue \#569](https://github.com/jlevy/squares/issues/569) · [Issue \#570](https://github.com/jlevy/squares/issues/570) · [Issue \#573](https://github.com/jlevy/squares/issues/573) · [Issue \#574](https://github.com/jlevy/squares/issues/574) · [Issue \#575](https://github.com/jlevy/squares/issues/575) · [Issue \#583](https://github.com/jlevy/squares/issues/583) · [Issue \#586](https://github.com/jlevy/squares/issues/586) · [Issue \#593](https://github.com/jlevy/squares/issues/593) · [PR \#614](https://github.com/jlevy/squares/pull/614) · [Case records](packing/frontier/README.md) · [Reviewed result register](packing/frontier/RESULTS.md) · [Review of the 14 October upper-bound reports](docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md) · [Review of PingYou Ltd’s PR 574 certificates](docs/project/reviews/review-2026-10-14-upper-bound-imports-574.md).
 
 <a id="changelog-entry-significance-levels-for-news-and-pull-requests"></a>
 
@@ -811,7 +811,7 @@ noteworthy ones it lacked.
 - The changelog importer takes its score from the single S label and refuses
   conflicting or multiple labels.
 
-PRs and supporting records: [\#621](https://github.com/jlevy/squares/pull/621) · [The significance rubric](packing/campaign/result-import.md#label-the-pr-and-prepare-news) · [Maintaining the project changelog](development.md#maintaining-the-project-changelog).
+PRs and supporting records: [PR \#621](https://github.com/jlevy/squares/pull/621) · [The significance rubric](packing/campaign/result-import.md#label-the-pr-and-prepare-news) · [Maintaining the project changelog](development.md#maintaining-the-project-changelog).
 
 <a id="changelog-date-2026-10-14"></a>
 
@@ -840,7 +840,7 @@ Component editions: Site v0.7.0.
 
 First public: 2026-10-14 ([publication evidence](https://github.com/jlevy/squares/actions/runs/38636016372/job/116103959611)).
 
-PRs and supporting records: [\#604](https://github.com/jlevy/squares/pull/604) · [Tutorial preservation and editorial review](docs/project/reviews/review-2026-10-14-tutorial-split-editorial.md).
+PRs and supporting records: [PR \#604](https://github.com/jlevy/squares/pull/604) · [Tutorial preservation and editorial review](docs/project/reviews/review-2026-10-14-tutorial-split-editorial.md).
 
 <a id="changelog-entry-n17-proof-reports-and-verification-policy"></a>
 
@@ -865,7 +865,7 @@ Published artifacts: [Current Overbeck proof report](https://squaremath.org/resu
 
 First public: 2026-10-14 ([publication evidence](https://github.com/jlevy/squares/actions/runs/38536230832/job/115761676874)).
 
-PRs and supporting records: [\#592](https://github.com/jlevy/squares/pull/592) · [\#595](https://github.com/jlevy/squares/pull/595) · [Fitzharding mathematical review](docs/project/reviews/review-2026-10-13-fitzharding-n17-mathematical-correctness.md) · [Overbeck mathematical review](docs/project/reviews/review-2026-10-13-overbeck-n17-mathematical-correctness.md) · [Evidence and independence rules](epistemics.md).
+Issues, PRs and supporting records: [Issue \#557](https://github.com/jlevy/squares/issues/557) · [Issue \#565](https://github.com/jlevy/squares/issues/565) · [PR \#592](https://github.com/jlevy/squares/pull/592) · [PR \#595](https://github.com/jlevy/squares/pull/595) · [Fitzharding mathematical review](docs/project/reviews/review-2026-10-13-fitzharding-n17-mathematical-correctness.md) · [Overbeck mathematical review](docs/project/reviews/review-2026-10-13-overbeck-n17-mathematical-correctness.md) · [Evidence and independence rules](epistemics.md).
 
 <a id="changelog-entry-october-fourteen-intake-ledger"></a>
 
@@ -883,7 +883,7 @@ only when its side is decisively smaller.
   the fine-net, linear and closed-form lower bounds reported by [Hiroaki Hosono](packing/contributors/people/hiroaki-hosono.md) (wand125).
 - Each open result issue has a per-count verdict.
 
-PRs and supporting records: [\#601](https://github.com/jlevy/squares/pull/601) · [The intake ledger](packing/campaign/issue-intake/upper-bounds-20261014/README.md) · [Ledger review](docs/project/reviews/review-2026-10-14-intake-ledger.md) · [Fang theorem and direct-certificate review](docs/project/reviews/review-2026-10-14-fang-excess-theorem-and-direct-certificates.md) · [wand125 closed-form review](docs/project/reviews/review-2026-10-14-wand125-closed-form-lower-bound.md).
+PRs and supporting records: [PR \#601](https://github.com/jlevy/squares/pull/601) · [The intake ledger](packing/campaign/issue-intake/upper-bounds-20261014/README.md) · [Ledger review](docs/project/reviews/review-2026-10-14-intake-ledger.md) · [Fang theorem and direct-certificate review](docs/project/reviews/review-2026-10-14-fang-excess-theorem-and-direct-certificates.md) · [wand125 closed-form review](docs/project/reviews/review-2026-10-14-wand125-closed-form-lower-bound.md).
 
 <a id="changelog-entry-october-fourteen-intake-records"></a>
 
@@ -914,7 +914,7 @@ Component editions: Site v0.7.1.
 
 First public: 2026-10-14 ([publication evidence](https://github.com/jlevy/squares/actions/runs/38644709027/job/116130903550)).
 
-PRs and supporting records: [\#602](https://github.com/jlevy/squares/pull/602) · [Current result register](packing/frontier/RESULTS.md) · [The intake ledger](packing/campaign/issue-intake/upper-bounds-20261014/README.md).
+Issues, PRs and supporting records: [Issue \#446](https://github.com/jlevy/squares/issues/446) · [Issue \#503](https://github.com/jlevy/squares/issues/503) · [Issue \#504](https://github.com/jlevy/squares/issues/504) · [Issue \#561](https://github.com/jlevy/squares/issues/561) · [Issue \#562](https://github.com/jlevy/squares/issues/562) · [Issue \#564](https://github.com/jlevy/squares/issues/564) · [Issue \#566](https://github.com/jlevy/squares/issues/566) · [Issue \#567](https://github.com/jlevy/squares/issues/567) · [Issue \#568](https://github.com/jlevy/squares/issues/568) · [Issue \#569](https://github.com/jlevy/squares/issues/569) · [Issue \#570](https://github.com/jlevy/squares/issues/570) · [Issue \#573](https://github.com/jlevy/squares/issues/573) · [Issue \#574](https://github.com/jlevy/squares/issues/574) · [Issue \#575](https://github.com/jlevy/squares/issues/575) · [Issue \#583](https://github.com/jlevy/squares/issues/583) · [Issue \#586](https://github.com/jlevy/squares/issues/586) · [Issue \#593](https://github.com/jlevy/squares/issues/593) · [Issue \#594](https://github.com/jlevy/squares/issues/594) · [Issue \#600](https://github.com/jlevy/squares/issues/600) · [Issue \#603](https://github.com/jlevy/squares/issues/603) · [Issue \#779](https://github.com/jlevy/squares/issues/779) · [PR \#602](https://github.com/jlevy/squares/pull/602) · [Current result register](packing/frontier/RESULTS.md) · [The intake ledger](packing/campaign/issue-intake/upper-bounds-20261014/README.md).
 
 <a id="changelog-entry-october-twelve-intake-and-house-admissions"></a>
 
@@ -943,7 +943,7 @@ Component editions: Site v0.6.1; How Record Square Packings Are Found v0.2.2.
 
 First public: 2026-10-14 ([publication evidence](https://github.com/jlevy/squares/actions/runs/38558844519/job/115838577096)).
 
-PRs and supporting records: [\#598](https://github.com/jlevy/squares/pull/598) · [Current result register](packing/frontier/RESULTS.md) · [Certificate adoption workflow](packing/campaign/result-import.md).
+Issues, PRs and supporting records: [Issue \#485](https://github.com/jlevy/squares/issues/485) · [Issue \#528](https://github.com/jlevy/squares/issues/528) · [Issue \#529](https://github.com/jlevy/squares/issues/529) · [Issue \#552](https://github.com/jlevy/squares/issues/552) · [PR \#598](https://github.com/jlevy/squares/pull/598) · [Current result register](packing/frontier/RESULTS.md) · [Certificate adoption workflow](packing/campaign/result-import.md).
 
 <a id="changelog-entry-project-changelog-and-independent-editions"></a>
 
@@ -969,7 +969,7 @@ Component editions: Site v0.6.0; Infographics v0.6.0; New Lower Bounds for Squar
 
 First public: 2026-10-14 ([publication evidence](https://github.com/jlevy/squares/actions/runs/38552030866/job/115817992138)).
 
-PRs and supporting records: [\#590](https://github.com/jlevy/squares/pull/590) · [GitHub changelog](CHANGELOG.md) · [Component release rules](development.md).
+PRs and supporting records: [PR \#590](https://github.com/jlevy/squares/pull/590) · [GitHub changelog](CHANGELOG.md) · [Component release rules](development.md).
 
 <a id="changelog-entry-regularized-drawings-and-exact-side-admissions"></a>
 
@@ -997,7 +997,7 @@ Published artifacts: [Current atlas with Regularized / Original comparison](http
 
 First public: 2026-10-14 ([publication evidence](https://github.com/jlevy/squares/actions/runs/38527537367/job/115733950233)).
 
-PRs and supporting records: [\#511](https://github.com/jlevy/squares/pull/511) · [\#530](https://github.com/jlevy/squares/pull/530) · [\#548](https://github.com/jlevy/squares/pull/548) · [\#549](https://github.com/jlevy/squares/pull/549) · [\#559](https://github.com/jlevy/squares/pull/559) · [\#580](https://github.com/jlevy/squares/pull/580) · [\#585](https://github.com/jlevy/squares/pull/585) · [\#587](https://github.com/jlevy/squares/pull/587) · [\#591](https://github.com/jlevy/squares/pull/591) · [Regularization policy](docs/project/policies/regularization-policy.md) · [Regularization process](docs/project/guides/regularization-process.md).
+PRs and supporting records: [PR \#511](https://github.com/jlevy/squares/pull/511) · [PR \#530](https://github.com/jlevy/squares/pull/530) · [PR \#548](https://github.com/jlevy/squares/pull/548) · [PR \#549](https://github.com/jlevy/squares/pull/549) · [PR \#559](https://github.com/jlevy/squares/pull/559) · [PR \#580](https://github.com/jlevy/squares/pull/580) · [PR \#585](https://github.com/jlevy/squares/pull/585) · [PR \#587](https://github.com/jlevy/squares/pull/587) · [PR \#591](https://github.com/jlevy/squares/pull/591) · [Regularization policy](docs/project/policies/regularization-policy.md) · [Regularization process](docs/project/guides/regularization-process.md).
 
 <a id="changelog-entry-reusable-intake-process-and-decided-comparisons"></a>
 
@@ -1025,7 +1025,7 @@ Component editions: Site v0.6.3.
 
 First public: 2026-10-14 ([publication evidence](https://github.com/jlevy/squares/actions/runs/38632014131/job/116088520863)).
 
-PRs and supporting records: [\#605](https://github.com/jlevy/squares/pull/605) · [The intake runbook](packing/campaign/result-import.md) · [The decided comparisons](packing/campaign/issue-intake/upper-bounds-20261014/undecided-resolved.json).
+PRs and supporting records: [PR \#605](https://github.com/jlevy/squares/pull/605) · [The intake runbook](packing/campaign/result-import.md) · [The decided comparisons](packing/campaign/issue-intake/upper-bounds-20261014/undecided-resolved.json).
 
 <a id="changelog-entry-verification-significance-and-announcement-audit"></a>
 
@@ -1051,7 +1051,7 @@ Published artifacts: [Current results, including the corrected significance scor
 
 First public: 2026-10-14 ([publication evidence](https://github.com/jlevy/squares/actions/runs/38551948126/job/115813924621)).
 
-PRs and supporting records: [\#563](https://github.com/jlevy/squares/pull/563) · [Lean-backed rung review](docs/project/reviews/review-2026-10-11-lean-backed-rungs.md) · [Recent-result rung review](docs/project/reviews/review-2026-10-11-recent-register-rungs.md) · [Significance review](docs/project/reviews/review-2026-10-11-significance-scores.md) · [Announcement drafts and reply rules](packing/campaign/result-import.md).
+Issues, PRs and supporting records: [Issue \#238](https://github.com/jlevy/squares/issues/238) · [Issue \#256](https://github.com/jlevy/squares/issues/256) · [PR \#563](https://github.com/jlevy/squares/pull/563) · [Lean-backed rung review](docs/project/reviews/review-2026-10-11-lean-backed-rungs.md) · [Recent-result rung review](docs/project/reviews/review-2026-10-11-recent-register-rungs.md) · [Significance review](docs/project/reviews/review-2026-10-11-significance-scores.md) · [Announcement drafts and reply rules](packing/campaign/result-import.md).
 
 <a id="changelog-date-2026-10-13"></a>
 
@@ -1076,7 +1076,7 @@ bound.
 The proposed requirement and missing certificates remain follow-up work; the documented
 gaps are still open.
 
-PRs and supporting records: [\#581](https://github.com/jlevy/squares/pull/581) · [Verification-gap review](docs/project/reviews/review-2026-10-13-verification-gaps.md).
+PRs and supporting records: [PR \#581](https://github.com/jlevy/squares/pull/581) · [Verification-gap review](docs/project/reviews/review-2026-10-13-verification-gaps.md).
 
 <a id="changelog-entry-fitzharding-n17-reported-proof"></a>
 
@@ -1098,7 +1098,7 @@ Published artifacts: [Current 17-square Lean proof report](https://squaremath.or
 
 First public: 2026-10-13 ([publication evidence](https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702)).
 
-PRs and supporting records: [\#588](https://github.com/jlevy/squares/pull/588) · [Source and premise review](docs/project/reviews/review-2026-10-13-fitzharding-n17-lean.md).
+Issues, PRs and supporting records: [Issue \#565](https://github.com/jlevy/squares/issues/565) · [PR \#588](https://github.com/jlevy/squares/pull/588) · [Source and premise review](docs/project/reviews/review-2026-10-13-fitzharding-n17-lean.md).
 
 <a id="changelog-entry-overbeck-n17-candidate-proof"></a>
 
@@ -1120,7 +1120,7 @@ Published artifacts: [Current 17-square candidate-proof record](https://squarema
 
 [Publication evidence](https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702).
 
-PRs and supporting records: [\#560](https://github.com/jlevy/squares/pull/560) · [Candidate-proof review](docs/project/reviews/review-2026-10-12-kleddamag-n17-candidate.md).
+Issues, PRs and supporting records: [Issue \#557](https://github.com/jlevy/squares/issues/557) · [PR \#560](https://github.com/jlevy/squares/pull/560) · [Candidate-proof review](docs/project/reviews/review-2026-10-12-kleddamag-n17-candidate.md).
 
 <a id="changelog-entry-overbeck-n17-second-review"></a>
 
@@ -1141,7 +1141,7 @@ V0/C1.
 - A separately prompted project AI agent conducted the review, blind to the first review
   until its findings were written. It is not a human oversight record.
 
-PRs and supporting records: [\#577](https://github.com/jlevy/squares/pull/577) · [Second adversarial review and its dated corrections](docs/project/reviews/review-2026-10-13-overbeck-n17-candidate-second.md) · [Candidate proof record](https://squaremath.org/result/t-153.html).
+Issues, PRs and supporting records: [Issue \#557](https://github.com/jlevy/squares/issues/557) · [PR \#577](https://github.com/jlevy/squares/pull/577) · [Second adversarial review and its dated corrections](docs/project/reviews/review-2026-10-13-overbeck-n17-candidate-second.md) · [Candidate proof record](https://squaremath.org/result/t-153.html).
 
 <a id="changelog-entry-regularization-foundations"></a>
 
@@ -1162,7 +1162,7 @@ The policy and supporting tools are in place. The driver, exact re-solving, grid
 cleanup, gallery and admission tools remain unfinished at this date. No drawing or bound
 changes in this release.
 
-PRs and supporting records: [\#497](https://github.com/jlevy/squares/pull/497) · [\#509](https://github.com/jlevy/squares/pull/509) · [Regularization policy](docs/project/policies/regularization-policy.md) · [Assessment](docs/project/research/research-2026-10-11-evand-regularization-assessment.md) · [Retained regularizer](vendor/evand-regularize/README.md).
+PRs and supporting records: [PR \#497](https://github.com/jlevy/squares/pull/497) · [PR \#509](https://github.com/jlevy/squares/pull/509) · [Regularization policy](docs/project/policies/regularization-policy.md) · [Assessment](docs/project/research/research-2026-10-11-evand-regularization-assessment.md) · [Retained regularizer](vendor/evand-regularize/README.md).
 
 <a id="changelog-date-2026-10-12"></a>
 
@@ -1178,7 +1178,7 @@ The next intake pass flags source comments edited after they were read. Comparin
 times with recorded read-through times keeps corrections visible even after a report has
 been processed.
 
-PRs and supporting records: [\#531](https://github.com/jlevy/squares/pull/531) · [Intake workflow](packing/campaign/result-import.md).
+PRs and supporting records: [PR \#531](https://github.com/jlevy/squares/pull/531) · [Intake workflow](packing/campaign/result-import.md).
 
 <a id="changelog-entry-october-eleven-intake-and-adoption"></a>
 
@@ -1204,7 +1204,7 @@ Published artifacts: [Current PingYou 207-square admission](https://squaremath.o
 
 [Publication evidence](https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702).
 
-PRs and supporting records: [\#512](https://github.com/jlevy/squares/pull/512) · [\#516](https://github.com/jlevy/squares/pull/516) · [\#518](https://github.com/jlevy/squares/pull/518) · [PingYou certificate review](docs/project/reviews/review-2026-10-11-upper-bound-imports-503-504.md) · [Barnett and Ostashev certificate review](docs/project/reviews/review-2026-10-11-upper-bound-imports-505-501.md).
+Issues, PRs and supporting records: [Issue \#501](https://github.com/jlevy/squares/issues/501) · [Issue \#503](https://github.com/jlevy/squares/issues/503) · [Issue \#504](https://github.com/jlevy/squares/issues/504) · [Issue \#505](https://github.com/jlevy/squares/issues/505) · [PR \#512](https://github.com/jlevy/squares/pull/512) · [PR \#516](https://github.com/jlevy/squares/pull/516) · [PR \#518](https://github.com/jlevy/squares/pull/518) · [PingYou certificate review](docs/project/reviews/review-2026-10-11-upper-bound-imports-503-504.md) · [Barnett and Ostashev certificate review](docs/project/reviews/review-2026-10-11-upper-bound-imports-505-501.md).
 
 <a id="changelog-entry-pingyou-ai-assistance-disclosure"></a>
 
@@ -1221,7 +1221,7 @@ Published artifacts: [Current 207-square PingYou record](https://squaremath.org/
 
 [Publication evidence](https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702).
 
-PRs and supporting records: [\#558](https://github.com/jlevy/squares/pull/558).
+Issues, PRs and supporting records: [Issue \#503](https://github.com/jlevy/squares/issues/503) · [Issue \#504](https://github.com/jlevy/squares/issues/504) · [PR \#558](https://github.com/jlevy/squares/pull/558).
 
 <a id="changelog-entry-publication-audit-and-import-scoping-repairs"></a>
 
@@ -1234,7 +1234,7 @@ closing a gap in selective validation. Live publication audits have a 25-minute
 deadline within the 30-minute job limit. They retain partial results and retry
 stalled or truncated responses.
 
-PRs and supporting records: [\#507](https://github.com/jlevy/squares/pull/507) · [Publication and validation workflow](development.md).
+PRs and supporting records: [PR \#507](https://github.com/jlevy/squares/pull/507) · [Publication and validation workflow](development.md).
 
 <a id="changelog-entry-replayed-upper-bound-admissions"></a>
 
@@ -1260,7 +1260,7 @@ Published artifacts: [Current SQUISH admission record](https://squaremath.org/re
 
 [Publication evidence](https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702).
 
-PRs and supporting records: [\#553](https://github.com/jlevy/squares/pull/553) · [SQUISH certificate review](docs/project/reviews/review-2026-10-11-upper-bound-imports-500.md) · [Couzo certificate review](docs/project/reviews/review-2026-10-11-upper-bound-imports-506.md).
+Issues, PRs and supporting records: [Issue \#500](https://github.com/jlevy/squares/issues/500) · [Issue \#506](https://github.com/jlevy/squares/issues/506) · [PR \#553](https://github.com/jlevy/squares/pull/553) · [SQUISH certificate review](docs/project/reviews/review-2026-10-11-upper-bound-imports-500.md) · [Couzo certificate review](docs/project/reviews/review-2026-10-11-upper-bound-imports-506.md).
 
 <a id="changelog-date-2026-10-11"></a>
 
@@ -1277,7 +1277,7 @@ checking the live site. Shared HTTP transport and local checks selected by the
 changed files reduce repeated work within the existing validation requirements.
 The measurements do not establish an overall development speedup.
 
-PRs and supporting records: [\#496](https://github.com/jlevy/squares/pull/496) · [Publication and validation workflow](development.md).
+PRs and supporting records: [PR \#496](https://github.com/jlevy/squares/pull/496) · [Publication and validation workflow](development.md).
 
 <a id="changelog-entry-evan-daniel-attribution-corrections"></a>
 
@@ -1293,7 +1293,7 @@ Published artifacts: [Current contributor and result overview](https://squaremat
 
 [Publication evidence](https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702).
 
-PRs and supporting records: [\#508](https://github.com/jlevy/squares/pull/508).
+Issues, PRs and supporting records: [Issue \#256](https://github.com/jlevy/squares/issues/256) · [Issue \#296](https://github.com/jlevy/squares/issues/296) · [Issue \#316](https://github.com/jlevy/squares/issues/316) · [PR \#508](https://github.com/jlevy/squares/pull/508).
 
 <a id="changelog-entry-october-ten-intake-replays"></a>
 
@@ -1320,7 +1320,7 @@ Published artifacts: [Current 40-square continuous-pose admission](https://squar
 
 [Publication evidence](https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702).
 
-PRs and supporting records: [\#487](https://github.com/jlevy/squares/pull/487) · [Final lower-bound review](docs/project/reviews/review-2026-10-11-final-lower-bounds.md) · [Final upper-bound review](docs/project/reviews/review-2026-10-11-final-upper-bounds.md) · [Final asymptotic and grading review](docs/project/reviews/review-2026-10-11-final-asymptotic-and-grading.md).
+Issues, PRs and supporting records: [Issue \#375](https://github.com/jlevy/squares/issues/375) · [Issue \#446](https://github.com/jlevy/squares/issues/446) · [Issue \#451](https://github.com/jlevy/squares/issues/451) · [Issue \#465](https://github.com/jlevy/squares/issues/465) · [Issue \#470](https://github.com/jlevy/squares/issues/470) · [Issue \#476](https://github.com/jlevy/squares/issues/476) · [Issue \#481](https://github.com/jlevy/squares/issues/481) · [Issue \#483](https://github.com/jlevy/squares/issues/483) · [Issue \#484](https://github.com/jlevy/squares/issues/484) · [Issue \#485](https://github.com/jlevy/squares/issues/485) · [Issue \#488](https://github.com/jlevy/squares/issues/488) · [Issue \#489](https://github.com/jlevy/squares/issues/489) · [Issue \#776](https://github.com/jlevy/squares/issues/776) · [Issue \#777](https://github.com/jlevy/squares/issues/777) · [Issue \#778](https://github.com/jlevy/squares/issues/778) · [PR \#487](https://github.com/jlevy/squares/pull/487) · [Final lower-bound review](docs/project/reviews/review-2026-10-11-final-lower-bounds.md) · [Final upper-bound review](docs/project/reviews/review-2026-10-11-final-upper-bounds.md) · [Final asymptotic and grading review](docs/project/reviews/review-2026-10-11-final-asymptotic-and-grading.md).
 
 <a id="changelog-entry-public-site-prose-and-reading-width"></a>
 
@@ -1336,7 +1336,7 @@ Published artifacts: [Current project overview](https://squaremath.org/) · [Cur
 
 [Publication evidence](https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702).
 
-PRs and supporting records: [\#513](https://github.com/jlevy/squares/pull/513) · [Front-door prose review](docs/project/reviews/review-2026-10-11-front-door-prose.md) · [Reader-document prose review](docs/project/reviews/review-2026-10-11-top-level-prose.md).
+PRs and supporting records: [PR \#513](https://github.com/jlevy/squares/pull/513) · [Front-door prose review](docs/project/reviews/review-2026-10-11-front-door-prose.md) · [Reader-document prose review](docs/project/reviews/review-2026-10-11-top-level-prose.md).
 
 <a id="changelog-entry-unified-site-navigation"></a>
 
@@ -1357,7 +1357,7 @@ Published artifacts: [Overview](https://squaremath.org/) · [Atlas](https://squa
 
 [Publication evidence](https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702).
 
-PRs and supporting records: [\#462](https://github.com/jlevy/squares/pull/462).
+PRs and supporting records: [PR \#462](https://github.com/jlevy/squares/pull/462).
 
 <a id="changelog-entry-website-front-door-and-result-reports"></a>
 
@@ -1373,7 +1373,7 @@ Published artifacts: [Project homepage](https://squaremath.org/) · [Reporting r
 
 [Publication evidence](https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702).
 
-PRs and supporting records: [\#502](https://github.com/jlevy/squares/pull/502).
+PRs and supporting records: [PR \#502](https://github.com/jlevy/squares/pull/502).
 
 <a id="changelog-date-2026-10-10"></a>
 
@@ -1394,7 +1394,7 @@ Published artifacts: [Current 132-square record-hunt record](https://squaremath.
 
 [Publication evidence](https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702).
 
-PRs and supporting records: [\#478](https://github.com/jlevy/squares/pull/478) · [Retained record-hunt source packet](packing/resources/web/evand-record-hunt-2026-10-09/README.md).
+Issues, PRs and supporting records: [Issue \#451](https://github.com/jlevy/squares/issues/451) · [Issue \#465](https://github.com/jlevy/squares/issues/465) · [PR \#478](https://github.com/jlevy/squares/pull/478) · [Retained record-hunt source packet](packing/resources/web/evand-record-hunt-2026-10-09/README.md).
 
 <a id="changelog-entry-dated-beyond-horizon-reports"></a>
 
@@ -1406,7 +1406,7 @@ Significance S3: New external packing reports and their source history are notab
 preserved as dated history. These printed-value comparisons lie beyond the 1–324 case
 corpus. The reports remain unreplayed and change no selected bound.
 
-PRs and supporting records: [\#479](https://github.com/jlevy/squares/pull/479) · [Beyond-horizon source coverage](packing/frontier/source-coverage.yaml).
+PRs and supporting records: [PR \#479](https://github.com/jlevy/squares/pull/479) · [Beyond-horizon source coverage](packing/frontier/source-coverage.yaml).
 
 <a id="changelog-entry-illustrated-packing-methods-tutorial"></a>
 
@@ -1430,7 +1430,7 @@ Component editions: How Record Square Packings Are Found v0.2.0.
 
 [Publication evidence](https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702).
 
-PRs and supporting records: [\#477](https://github.com/jlevy/squares/pull/477).
+PRs and supporting records: [PR \#477](https://github.com/jlevy/squares/pull/477).
 
 <a id="changelog-entry-paper-typography-and-title-case"></a>
 
@@ -1448,7 +1448,7 @@ Component editions: New Lower Bounds for Square Packing for n = 11 v0.4.5; How R
 
 [Publication evidence](https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702).
 
-PRs and supporting records: [\#492](https://github.com/jlevy/squares/pull/492).
+PRs and supporting records: [PR \#492](https://github.com/jlevy/squares/pull/492).
 
 <a id="changelog-entry-readable-atlas-and-print-exports"></a>
 
@@ -1472,7 +1472,7 @@ Published artifacts: [Current interactive atlas](https://squaremath.org/atlas.ht
 
 [Publication evidence](https://github.com/jlevy/squares/actions/runs/38475195836/job/115566109702).
 
-PRs and supporting records: [\#474](https://github.com/jlevy/squares/pull/474).
+PRs and supporting records: [PR \#474](https://github.com/jlevy/squares/pull/474).
 
 <a id="changelog-date-2026-10-09"></a>
 
@@ -1509,7 +1509,7 @@ V0/C0 pending adoption.
   October the case records adopted five of them as the house, at 108, 127, 180,
   228 and 306.
 
-PRs and supporting records: [\#460](https://github.com/jlevy/squares/pull/460) · [The later replay and confirmation (\#487)](https://squaremath.org/news.html#changelog-entry-october-ten-intake-replays) · [Retained certificates and verification limits](packing/resources/web/couzo-exact-refinements-2026-10-08/README.md) · [Couzo’s report](https://github.com/jlevy/squares/issues/451).
+Issues, PRs and supporting records: [Issue \#451](https://github.com/jlevy/squares/issues/451) · [Issue \#465](https://github.com/jlevy/squares/issues/465) · [PR \#460](https://github.com/jlevy/squares/pull/460) · [The later replay and confirmation (\#487)](https://squaremath.org/news.html#changelog-entry-october-ten-intake-replays) · [Retained certificates and verification limits](packing/resources/web/couzo-exact-refinements-2026-10-08/README.md).
 
 <a id="changelog-entry-couzo-five-follow-up-refinements-reported"></a>
 
@@ -1538,7 +1538,7 @@ adoption.
   announced in Exact Certificates and a Stronger 40-Square Bound, and on 11
   October the case records adopted three of them as the house, at 84, 86 and 105.
 
-PRs and supporting records: [\#469](https://github.com/jlevy/squares/pull/469) · [The later replay and confirmation (\#487)](https://squaremath.org/news.html#changelog-entry-october-ten-intake-replays) · [Retained certificates and verification limits](packing/resources/web/couzo-followup-refinements-2026-10-08/README.md) · [Couzo’s report, a comment on](https://github.com/jlevy/squares/pull/460#issuecomment-6070798890).
+Issues, PRs and supporting records: [Issue \#451](https://github.com/jlevy/squares/issues/451) · [PR \#469](https://github.com/jlevy/squares/pull/469) · [The later replay and confirmation (\#487)](https://squaremath.org/news.html#changelog-entry-october-ten-intake-replays) · [Retained certificates and verification limits](packing/resources/web/couzo-followup-refinements-2026-10-08/README.md) · [Couzo’s report, a comment on](https://github.com/jlevy/squares/pull/460#issuecomment-6070798890).
 
 <a id="changelog-entry-couzo-twenty-beyond-corpus-reports"></a>
 
@@ -1557,7 +1557,7 @@ references for later checking.
 - Couzo’s subsequent smaller reports at 375 and 378 are recorded in the next update,
   with these earlier values preserved.
 
-PRs and supporting records: [\#466](https://github.com/jlevy/squares/pull/466) · [Twenty reports and their source scope](packing/resources/web/couzo-extended-reports-2026-10-08/README.md) · [Beyond-horizon source coverage](packing/frontier/source-coverage.yaml).
+PRs and supporting records: [PR \#466](https://github.com/jlevy/squares/pull/466) · [Twenty reports and their source scope](packing/resources/web/couzo-extended-reports-2026-10-08/README.md) · [Beyond-horizon source coverage](packing/frontier/source-coverage.yaml).
 
 <a id="changelog-entry-daniel-three-exact-packing-improvements"></a>
 
@@ -1577,7 +1577,7 @@ recorded as T-119.
   retained separately as T-120–T-124. The feasibility checks do not confirm those
   stronger assertions.
 
-PRs and supporting records: [\#441](https://github.com/jlevy/squares/pull/441) · [Certificates, source credit and replay scope](packing/resources/web/evand-new-arrangements-2026-10-07/README.md) · [Independent mathematical review](docs/project/reviews/review-2026-10-08-evand-new-arrangements.md).
+Issues, PRs and supporting records: [Issue \#399](https://github.com/jlevy/squares/issues/399) · [Issue \#419](https://github.com/jlevy/squares/issues/419) · [Issue \#420](https://github.com/jlevy/squares/issues/420) · [PR \#441](https://github.com/jlevy/squares/pull/441) · [Certificates, source credit and replay scope](packing/resources/web/evand-new-arrangements-2026-10-07/README.md) · [Independent mathematical review](docs/project/reviews/review-2026-10-08-evand-new-arrangements.md).
 
 <a id="changelog-entry-gupta-fourteen-verified-refinements"></a>
 
@@ -1596,7 +1596,7 @@ certificates pass exact verification, recorded as T-127 at V3/C3.
 - The checks establish finite feasibility, without establishing local or global
   optimality.
 
-PRs and supporting records: [\#448](https://github.com/jlevy/squares/pull/448) · [\#459](https://github.com/jlevy/squares/pull/459) · [Refinement certificates and complete credit](packing/resources/web/gupta-square-packing-refinements-2026-10-08/README.md) · [Review of the 17 source cases](docs/project/reviews/review-2026-10-08-gupta-exact-refinements.md).
+Issues, PRs and supporting records: [Issue \#438](https://github.com/jlevy/squares/issues/438) · [PR \#448](https://github.com/jlevy/squares/pull/448) · [PR \#459](https://github.com/jlevy/squares/pull/459) · [Refinement certificates and complete credit](packing/resources/web/gupta-square-packing-refinements-2026-10-08/README.md) · [Review of the 17 source cases](docs/project/reviews/review-2026-10-08-gupta-exact-refinements.md).
 
 <a id="changelog-entry-hosono-seven-fine-net-reports"></a>
 
@@ -1616,7 +1616,7 @@ input-premise checks are retained; complete local geometric replays remain pendi
 - Standing bounds and assurance ratings are unchanged. Later reports at 28 and 29
   squares have their own entries and review history.
 
-PRs and supporting records: [\#450](https://github.com/jlevy/squares/pull/450) · [Seven reports and the 27-square follow-up](packing/resources/web/wand125-fine-net-lower-bounds-2026-10-08/README.md).
+PRs and supporting records: [PR \#450](https://github.com/jlevy/squares/pull/450) · [Seven reports and the 27-square follow-up](packing/resources/web/wand125-fine-net-lower-bounds-2026-10-08/README.md).
 
 <a id="changelog-entry-n17-twelve-kernel-certificates"></a>
 
@@ -1636,7 +1636,7 @@ to 3,636, leaving 28,528 states to consider.
 - The certificates reduce this finite search; they neither close the global proof nor
   improve the numerical lower bound.
 
-PRs and supporting records: [\#475](https://github.com/jlevy/squares/pull/475) · [Experiment 317 and its acceptance evidence](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-317-h341-n17-issue-472-kernel-admission.md) · [Hosted certificate manifest](packing/hosted/n17-issue-472-kernel-certificates.yaml).
+PRs and supporting records: [PR \#475](https://github.com/jlevy/squares/pull/475) · [Experiment 317 and its acceptance evidence](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-317-h341-n17-issue-472-kernel-admission.md) · [Hosted certificate manifest](packing/hosted/n17-issue-472-kernel-certificates.yaml).
 
 <a id="changelog-entry-packing-methods-survey-first-publication"></a>
 
@@ -1650,7 +1650,7 @@ The first edition of the square-packing methods survey explains how geometric se
 - The survey distinguishes a reported search method from a certificate that proves a packing fits, and both from a proof of optimality.
 - Version 0.1.0 has an 8 October evidence cutoff, covering retained releases through 7 October. The later illustrated edition is recorded separately.
 
-PRs and supporting records: [\#458](https://github.com/jlevy/squares/pull/458) · [Methods survey](https://squaremath.org/papers/square-packing-methods-survey.html) · [Initial publication](https://github.com/jlevy/squares/pull/458).
+PRs and supporting records: [PR \#458](https://github.com/jlevy/squares/pull/458) · [Methods survey](https://squaremath.org/papers/square-packing-methods-survey.html) · [Initial publication](https://github.com/jlevy/squares/pull/458).
 
 <a id="changelog-entry-ryu-polynomial-deficiency-reports"></a>
 
@@ -1671,7 +1671,7 @@ papers and a review of their geometric arguments and numerical constants.
 - The papers disclose extensive Claude assistance and no human peer review. Their claims
   remain reported and change no bound in the 1–324 case corpus.
 
-PRs and supporting records: [\#439](https://github.com/jlevy/squares/pull/439) · [\#440](https://github.com/jlevy/squares/pull/440) · [Asymptotic bound statements](packing/frontier/asymptotic-waste-bounds.yaml) · [Review of the quarter-power and cube-root arguments](docs/project/reviews/review-2026-10-08-quarter-cube-proof-chains.md).
+PRs and supporting records: [PR \#439](https://github.com/jlevy/squares/pull/439) · [PR \#440](https://github.com/jlevy/squares/pull/440) · [Asymptotic bound statements](packing/frontier/asymptotic-waste-bounds.yaml) · [Review of the quarter-power and cube-root arguments](docs/project/reviews/review-2026-10-08-quarter-cube-proof-chains.md).
 
 <a id="changelog-entry-xu-rational-and-radical-packings"></a>
 
@@ -1691,7 +1691,7 @@ construction replace selected bounds at 18 counts.
 - Xu describes an LLM-assisted workflow. The checks establish that the submitted
   packings fit, without proving optimality or reconstructing the search.
 
-PRs and supporting records: [\#442](https://github.com/jlevy/squares/pull/442) · [Rational and radical certificates](packing/resources/web/ry-xu-new-packings-2026-10-08/README.md) · [Independent review](docs/project/reviews/review-2026-10-08-ryxu-rational-radical-packets.md).
+Issues, PRs and supporting records: [Issue \#432](https://github.com/jlevy/squares/issues/432) · [PR \#442](https://github.com/jlevy/squares/pull/442) · [Rational and radical certificates](packing/resources/web/ry-xu-new-packings-2026-10-08/README.md) · [Independent review](docs/project/reviews/review-2026-10-08-ryxu-rational-radical-packets.md).
 
 <a id="changelog-date-2026-10-08"></a>
 
@@ -1710,7 +1710,7 @@ and repository sources.
 Formulas preserve the reader’s text font while using a mathematical font for operators
 and structures.
 
-PRs and supporting records: [\#456](https://github.com/jlevy/squares/pull/456) · [Frontier table](https://squaremath.org/frontier.html) · [Static rendering and deployment work](https://github.com/jlevy/squares/pull/456).
+PRs and supporting records: [PR \#456](https://github.com/jlevy/squares/pull/456) · [Frontier table](https://squaremath.org/frontier.html) · [Static rendering and deployment work](https://github.com/jlevy/squares/pull/456).
 
 <a id="changelog-date-2026-09-30"></a>
 
@@ -1738,7 +1738,7 @@ unit square to rotate independently and permitting boundary contact.
   V3/C3. A second adversarial AI review and documented human oversight are still
   needed for V4/C4.
 
-PRs and supporting records: [\#246](https://github.com/jlevy/squares/pull/246) · [Current eleven-square result](https://squaremath.org/result/t-060.html) · [Current eleven-square optimality explainer](https://squaremath.org/papers/n11-optimality-review.html) · [Ahmed’s original proof](https://github.com/Queuingtheorydotcom/11SquaresOptimal/tree/f9e0de713a0949d1bc6a0fa6b59d96edf6c3d65c) · [Retained verification and reproduction limits](packing/resources/web/n11-optimality-2026-09-29/README.md) · [Mathematical audit and final acceptance](docs/project/reviews/review-2026-09-29-n11-optimality-census-contract.md) · [Revised verification and confirmation ladder](https://github.com/jlevy/squares/pull/262).
+PRs and supporting records: [PR \#246](https://github.com/jlevy/squares/pull/246) · [Current eleven-square result](https://squaremath.org/result/t-060.html) · [Current eleven-square optimality explainer](https://squaremath.org/papers/n11-optimality-review.html) · [Ahmed’s original proof](https://github.com/Queuingtheorydotcom/11SquaresOptimal/tree/f9e0de713a0949d1bc6a0fa6b59d96edf6c3d65c) · [Retained verification and reproduction limits](packing/resources/web/n11-optimality-2026-09-29/README.md) · [Mathematical audit and final acceptance](docs/project/reviews/review-2026-09-29-n11-optimality-census-contract.md) · [Revised verification and confirmation ladder](https://github.com/jlevy/squares/pull/262).
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

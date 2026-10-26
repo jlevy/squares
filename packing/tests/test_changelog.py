@@ -1535,3 +1535,134 @@ def test_news_metadata_puts_each_link_on_its_own_line(limit: int | None) -> None
     assert "(" not in visible
     assert ")" not in visible
     assert not re.search(r"[.](?:\s|$)", visible)
+
+
+def test_issues_render_as_issue_links_beside_the_prs() -> None:
+    """An entry's issues are "Issue #N" links ahead of its "PR #N" links, in News and on
+    GitHub; a reference to a listed issue's thread is not repeated."""
+    data = document()
+    entry = data["entries"][0]
+    entry["issues"] = [763, 7]
+    issue = "https://github.com/jlevy/squares/issues/763"
+    entry["references"].append({"label": "Couzo's request", "target": issue})
+    entry["references"].append({"label": "One comment", "target": issue + "#issuecomment-1"})
+    github = render_changelog.render_markdown(data)
+    line = next(row for row in github.splitlines() if row.startswith("Issues, PRs"))
+    assert line.startswith(
+        "Issues, PRs and supporting records: "
+        "[Issue \\#7](https://github.com/jlevy/squares/issues/7) · "
+        f"[Issue \\#763]({issue}) · "
+        "[PR \\#553](https://github.com/jlevy/squares/pull/553) · "
+    )
+    assert "Couzo's request" not in line
+    assert "#issuecomment-1" in line
+    assert "PRs and supporting records: [PR \\#" in github
+    news = render_changelog.render_news(data)
+    article = news.split('data-news-entry="admission">', 1)[1].split("</article>", 1)[0]
+    records = article.split('<div class="site-news-records sans-text">', 1)[1]
+    visible = html.unescape(re.sub(r"<[^>]+>", "", records))
+    assert "Issues, PRs and supporting records:" in visible
+    assert visible.index("Issue #7") < visible.index("Issue #763") < visible.index("PR #553")
+    assert f'href="{issue}"' in records
+    assert records.count(f'href="{issue}"') == 1
+
+
+def test_an_entry_lists_each_issue_that_reported_its_results() -> None:
+    """The check fails an entry whose `issues` omits an issue that reported one of its
+    results, or an issue its prose or references link, and the backfill writes them."""
+    data = document()
+    reporting = {"T-001": (12,), "T-002": (12, 30)}
+    data["entries"][0]["result_ids"] = ["T-002"]
+    data["entries"][1]["summary"] += (
+        " See [the report](https://github.com/jlevy/squares/issues/9)."
+    )
+    data["entries"][2]["references"] = [
+        {"label": "Elsewhere", "target": "https://github.com/other/repo/issues/4"},
+        {"label": "A PR", "target": "https://github.com/jlevy/squares/pull/5"},
+    ]
+    assert render_changelog.issue_findings(data, reporting) == [
+        "admission: issues omits #12, #30",
+        "foundations: issues omits #9",
+    ]
+    data["entries"][0]["issues"] = [30, 12, 99]
+    data["entries"][1]["issues"] = [9]
+    assert render_changelog.issue_findings(data, reporting) == []
+
+
+def test_backfill_writes_missing_issues_in_the_entrys_own_style() -> None:
+    data = document()
+    reporting = {"T-001": (12,), "T-002": (30,)}
+    data["entries"][0]["result_ids"] = ["T-001"]
+    data["entries"][1]["result_ids"] = ["T-002"]
+    data["entries"][1]["issues"] = [4]
+    data["entries"][2]["result_ids"] = ["T-002"]
+    text = (
+        "entries:\n"
+        "  - id: admission\n"
+        "    pull_requests: [553]\n"
+        "    result_ids: [T-001]\n"
+        "  - id: foundations\n"
+        "    pull_requests: [497, 509]\n"
+        "    issues: [4]\n"
+        "  - id: later-delivery\n"
+        "    pull_requests:\n"
+        "      - 549\n"
+        "    summary: Added.\n"
+        "frozen_entries:\n"
+        "  - id: foundations\n"
+        "    pull_requests: [497, 509]\n"
+    )
+    filled = render_changelog.backfill_issues(text, data, reporting)
+    assert filled == (
+        "entries:\n"
+        "  - id: admission\n"
+        "    pull_requests: [553]\n"
+        "    issues: [12]\n"
+        "    result_ids: [T-001]\n"
+        "  - id: foundations\n"
+        "    pull_requests: [497, 509]\n"
+        "    issues: [4, 30]\n"
+        "  - id: later-delivery\n"
+        "    pull_requests:\n"
+        "      - 549\n"
+        "    issues:\n"
+        "      - 30\n"
+        "    summary: Added.\n"
+        "frozen_entries:\n"
+        "  - id: foundations\n"
+        "    pull_requests: [497, 509]\n"
+    )
+    data["entries"][0]["issues"] = [12]
+    data["entries"][1]["issues"] = [4, 30]
+    data["entries"][2]["issues"] = [30]
+    assert render_changelog.backfill_issues(filled, data, reporting) == filled
+
+
+def test_the_committed_changelog_lists_every_reporting_issue() -> None:
+    """The record itself passes the check, and its entries with results name their
+    reporting issues: 38 entries at the backfill of 26 October."""
+    data = render_changelog.load()
+    assert render_changelog.issue_findings(data) == []
+    listed = [entry for entry in data["entries"] if entry.get("issues")]
+    assert len(listed) >= 38
+    hosono = next(
+        entry for entry in data["entries"] if entry["id"] == "hosono-fine-net-lower-bounds"
+    )
+    assert 446 in hosono["issues"]
+
+
+def test_import_draft_lists_the_issues_that_reported_its_results() -> None:
+    row = {
+        "number": 9001,
+        "title": "Register T-245",
+        "body": "Registers T-245.",
+        "mergedAt": "2026-10-25T12:00:00Z",
+        "baseRefName": "main",
+        "mergeCommit": {"oid": "b" * 40},
+        "state": "MERGED",
+        "labels": [{"name": "S3"}],
+    }
+    drafted = import_changelog.draft([row], significance_rationale="A focused result.")
+    (entry,) = drafted["entries"]
+    assert entry["result_ids"] == ["T-245"]
+    assert entry["issues"] == [810]
