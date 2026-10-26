@@ -2,9 +2,9 @@
 
 <div class="site-navigation-copy">
 
-A log of every change retained in the project record, newest first, with the GitHub
-issues and pull requests behind each one.
-For major items only, see [News](news.html).
+A log of everything recorded by the Squares Project since {{CHANGELOG_SINCE}}, newest
+first, with the GitHub issues and pull requests behind each one.
+For the stories, see [News](news.html).
 
 </div>
 

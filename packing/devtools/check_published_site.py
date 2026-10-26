@@ -61,7 +61,6 @@ from devtools import (
     site_urls,
     social_card,
 )
-from devtools.github_references import issue_url
 from devtools.overview_sections import LOWER_BOUNDS_PAPER, OPTIMALITY_PAPER, result_fragment
 from devtools.render_n11_lower_bounds_explainer import (
     COMPOSITE_ASSETS,
@@ -550,30 +549,29 @@ def _entry_link_problems(
     document: Mapping[str, Any],
     entries: Sequence[Mapping[str, Any]],
     markup: _RecordMarkup,
+    *,
+    supporting: Callable[[Mapping[str, Any]], bool] = lambda _entry: True,
 ) -> list[str]:
-    """Each entry's own anchor, once, and every link it declares, shared by the two pages
-    that serve the retained history: its issues and pull requests, its published
-    artifacts, its publication evidence where it claims one, and the supporting records
-    it references. A reference that names a listed issue is that issue's link, which
-    `_entry_lines` writes once, so it is not expected twice."""
+    """Each entry's own anchor, once, and every link the page is expected to carry for
+    it, which `render_changelog.entry_targets` defines so the audit and the renderer
+    cannot drift apart.
+
+    `supporting` says whether this page owes the entry its artifacts, publication
+    evidence and supporting records as well as its GitHub threads. News owes them for
+    every story it shows. The Changelog owes them for a change News never shows, which
+    makes its line that change's only reader surface; for a change News does tell, the
+    line gives the threads and links to the story, which carries the rest.
+    """
     links = {element.attrs.get("href") for element in markup.find(tag="a")}
     problems: list[str] = []
     for entry in entries:
         if markup.ids.get(render_changelog.entry_anchor(entry["id"])) != 1:
             problems.append(f"missing or repeated entry {entry['id']}")
-        issues = {
-            issue_url(document["repository"], number) for number in entry.get("issues", [])
-        }
         targets = [
-            *issues,
-            *(f"{document['repository']}/pull/{number}" for number in entry["pull_requests"]),
-            *(artifact["target"] for artifact in entry.get("artifacts", [])),
-            *([entry["publication"]["evidence"]] if entry.get("publication") else []),
-            *(
-                item["target"]
-                for item in entry.get("references", [])
-                if item["target"].rstrip("/") not in issues
-            ),
+            target
+            for _label, target in render_changelog.entry_targets(
+                document, entry, supporting=supporting(entry)
+            )
         ]
         if missing := [
             target
@@ -638,7 +636,20 @@ def changelog_checks(text: str) -> list[tuple[bool, str]]:
     if markup.ids.get("changelog") != 1:
         problems.append("requires one changelog section")
     entries = document["entries"]
-    problems.extend(_entry_link_problems(document, entries, markup))
+    told = {entry["id"] for entry in render_changelog.news_entries(document)}
+    problems.extend(
+        _entry_link_problems(
+            document, entries, markup, supporting=lambda entry: entry["id"] not in told
+        )
+    )
+    links = {element.attrs.get("href") for element in markup.find(tag="a")}
+    problems.extend(
+        f"story not linked for {entry['id']}"
+        for entry in entries
+        if entry["id"] in told
+        and f"{render_changelog.NEWS_PAGE}#{render_changelog.entry_anchor(entry['id'])}"
+        not in links
+    )
     problems.extend(
         f"missing or repeated day {day}"
         for day in sorted({entry["date"] for entry in entries})

@@ -89,6 +89,9 @@ NEWS_LEVELS = (4, 5)
 #: for the rest (the owner, 2026-10-26); before that the section lived on News itself and
 #: the only full view was `CHANGELOG.md` on GitHub.
 CHANGELOG_PAGE = "changelog.html"
+#: Where the stories are served. A change the Changelog lists and News tells links to
+#: the story rather than repeating it (`changelog_entry_line`).
+NEWS_PAGE = "news.html"
 
 
 def news_rubric_meanings(text: str) -> dict[int, str]:
@@ -1341,6 +1344,76 @@ def news_forward_targets(document: Document) -> dict[str, str]:
     the section answered here before the history took a page of its own, then each entry
     and day below the News floor (`archived_news_targets`)."""
     return {"changelog": f"{CHANGELOG_PAGE}#changelog", **archived_news_targets(document)}
+
+
+def entry_targets(
+    document: Document, entry: Document, *, supporting: bool
+) -> list[tuple[str, str]]:
+    """An entry's GitHub threads as `(label, target)`, issues then pull requests, and
+    with `supporting` its artifacts, publication evidence and supporting records too.
+
+    A change News tells carries the second group in its story, so its Changelog line
+    asks for `supporting=False` and gives the threads alone. A change News never shows
+    has no other reader surface, so its line carries everything it declares and
+    `check_published_site.changelog_checks` holds it to that.
+    """
+    issues = sorted(entry.get("issues", []))
+    issue_targets = {issue_url(document["repository"], number) for number in issues}
+    pairs = [
+        (f"Issue #{number}", issue_url(document["repository"], number)) for number in issues
+    ]
+    pairs.extend(
+        (f"PR #{number}", f"{document['repository']}/pull/{number}")
+        for number in sorted(entry["pull_requests"])
+    )
+    if not supporting:
+        return pairs
+    pairs.extend((item["label"], item["target"]) for item in entry.get("artifacts", []))
+    publication = entry.get("publication", {})
+    if publication:
+        pairs.append(("Publication evidence", publication["evidence"]))
+    # A reference naming a listed issue is that issue's own link, already given.
+    pairs.extend(
+        (item["label"], item["target"])
+        for item in entry.get("references", [])
+        if item["target"].rstrip("/") not in issue_targets
+    )
+    return pairs
+
+
+def _changelog_link(label: str, target: str) -> str:
+    """One link on a Changelog line. A place off the site opens in a new tab, as every
+    other off-site link on the site does (`overview_sections.external_link`)."""
+    url = serialized_target(target)
+    away = ' target="_blank" rel="noopener noreferrer"' if url.startswith("http") else ""
+    return f'<a href="{html.escape(url, quote=True)}"{away}>{html.escape(label)}</a>'
+
+
+def changelog_entry_line(document: Document, entry: Document, *, in_news: bool) -> str:
+    """One site or project change in its day's block on the Changelog page: its title,
+    then on the quieter line its score and every GitHub thread behind it.
+
+    The title links to the change's own News story where it has one, so the detail is one
+    click away and is written once. Where News never shows the change this line is its
+    only reader surface, so it carries the supporting records as well
+    (`entry_targets`). The line holds the entry's anchor, which keeps the retired
+    article and day bookmarks that `archived_news_targets` forwards here resolving.
+
+    The Changelog is "concise, mostly complete, linked to github issues and PRs clearly",
+    and a story belongs to News rather than to both surfaces (the owner, 26 October 2026).
+    """
+    anchor = entry_anchor(entry["id"])
+    title = inline_html(entry["title"], allow_links=False)
+    head = f'<a href="{NEWS_PAGE}#{anchor}">{title}</a>' if in_news else title
+    links = " · ".join(
+        _changelog_link(label, target)
+        for label, target in entry_targets(document, entry, supporting=not in_news)
+    )
+    score = entry_significance(entry)["score"]
+    return (
+        f'<li id="{html.escape(anchor, quote=True)}">{head}'
+        f"<small>S{score} · {links}</small></li>"
+    )
 
 
 def _news_forward_anchors(targets: dict[str, str]) -> str:

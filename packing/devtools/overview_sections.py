@@ -1577,11 +1577,14 @@ def beyond_rows(since: date, until: date) -> list[BeyondRows]:
     )
 
 
-def recent_days(overview: Overview, *, days: int = ADDED_DAYS) -> list[RecentDay]:
+def recent_days(overview: Overview, *, days: int | None = ADDED_DAYS) -> list[RecentDay]:
     """Every day from `days` before the newest arrival (`arrival_reference`) to it on
-    which a result, a house best packing or rows reached `main`, newest first."""
+    which a result, a house best packing or rows reached `main`, newest first.
+
+    `days=None` is the whole record, which is what the Changelog page shows.
+    """
     until = arrival_reference(overview)
-    since = until - timedelta(days=days)
+    since = date.min if days is None else until - timedelta(days=days)
     results = {added.day: added.results for added in added_days(overview.results, since)}
     houses: dict[date, list[HouseMove]] = {}
     for move in house_moves(since, until):
@@ -1595,13 +1598,6 @@ def recent_days(overview: Overview, *, days: int = ADDED_DAYS) -> list[RecentDay
         )
         for day in sorted({*results, *houses, *rows}, reverse=True)
     ]
-
-
-def recent_since(overview: Overview, *, days: int = ADDED_DAYS) -> str:
-    """The day Recently Added opens on, as its introduction names it: the oldest day it
-    shows, so no block sits before it (the owner's shorter wording, 26 October 2026)."""
-    shown = [recent.day for recent in recent_days(overview, days=days)]
-    return day_label(min(shown) if shown else arrival_reference(overview))
 
 
 def corpus_end() -> int:
@@ -1693,31 +1689,64 @@ def beyond_entry(found: BeyondRows, sources: Mapping[str, Mapping[str, Any]]) ->
     )
 
 
-def recently_added(overview: Overview, *, days: int = ADDED_DAYS) -> str:
-    """The home page's Recently Added (`recent_days`): one disclosure a day, newest
-    first, the `RECENT_OPEN` newest open, its summary the date and its tally
-    (`recent_tally`), its body the day's results (`added_entry`, each linked to its row
-    in All Results), then its house moves (`house_entry`) and its sources' rows
-    (`beyond_entry`), and, for a day with results, the link that opens All Results on
-    that day (`added_day_link`). It draws with `results.css`'s rollup classes."""
+def changelog_rollup(overview: Overview, document: Mapping[str, Any]) -> str:
+    """The Changelog page's whole log: one disclosure a day over the entire record,
+    newest first, holding that day's results, its new record packings and its rows
+    beyond the corpus, as `recently_added` writes them, and then its site and project
+    changes as one brief line each (`render_changelog.changelog_entry_line`).
+
+    This is the section that used to open the home page as Recently Added. It moved here
+    on 26 October 2026, when the owner asked for the Changelog to be "concise, mostly
+    complete, linked to github issues and PRs clearly" rather than a story an entry, and
+    for the home page to carry a button here instead of the block itself.
+
+    Every day block keeps `changelog-date-<day>`, so the day bookmarks that
+    `render_changelog.archived_news_targets` forwards to this page resolve.
+    """
+    from devtools import render_changelog  # noqa: PLC0415
     from devtools.render_results import load_sources  # noqa: PLC0415
 
     sources = load_sources()
+    public = {entry["id"] for entry in render_changelog.news_entries(document)}
+    changes: dict[date, list[Mapping[str, Any]]] = {}
+    for entry in render_changelog.ordered_entries(document):
+        changes.setdefault(date.fromisoformat(entry["date"]), []).append(entry)
+    recents = {recent.day: recent for recent in recent_days(overview, days=None)}
     blocks = []
-    for index, recent in enumerate(recent_days(overview, days=days)):
+    for index, day in enumerate(sorted({*recents, *changes}, reverse=True)):
+        recent = recents.get(day)
+        today = changes.get(day, [])
+        entries: list[str] = []
+        if recent is not None:
+            entries.extend(added_entry(result) for result in recent.results)
+            entries.extend(house_entry(move) for move in recent.houses)
+            entries.extend(beyond_entry(found, sources) for found in recent.rows)
+        entries.extend(
+            render_changelog.changelog_entry_line(
+                document, entry, in_news=entry["id"] in public
+            )
+            for entry in today
+        )
+        tally = [*(recent_tally(recent) if recent else ())]
+        if today:
+            tally.append(tally_count(len(today), f"change{'' if len(today) == 1 else 's'}"))
+        shown = added_day_link(day, len(recent.results)) if recent and recent.results else ""
         state = " open" if index < RECENT_OPEN else ""
-        entries = [
-            *(added_entry(result) for result in recent.results),
-            *(house_entry(move) for move in recent.houses),
-            *(beyond_entry(found, sources) for found in recent.rows),
-        ]
-        shown = added_day_link(recent.day, len(recent.results)) if recent.results else ""
         blocks.append(
-            f'<details data-day="{recent.day.isoformat()}"{state}>'
-            f"{tallied_summary(day_label(recent.day), recent_tally(recent))}"
+            f'<details data-day="{day.isoformat()}" '
+            f'id="changelog-date-{day.isoformat()}"{state}>'
+            f"{tallied_summary(day_label(day), tally)}"
             f"<ul>{''.join(entries)}</ul>{shown}</details>"
         )
     return f'<div class="site-rollup site-added">{"".join(blocks)}</div>'
+
+
+def changelog_since(overview: Overview, document: Mapping[str, Any]) -> str:
+    """The day the Changelog opens on: the oldest day it shows, over results and changes
+    alike, as its introduction names it."""
+    days = [recent.day for recent in recent_days(overview, days=None)]
+    days.extend(date.fromisoformat(entry["date"]) for entry in document["entries"])
+    return day_label(min(days) if days else arrival_reference(overview))
 
 
 #: The rubric's three scored dimensions, in the site's order, significance first: the

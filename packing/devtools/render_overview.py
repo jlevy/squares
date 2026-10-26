@@ -1476,10 +1476,6 @@ def overview_page() -> Page:
     values = {
         "HERO": overview_sections.hero(),
         "NEWS_PREVIEW": news_highlights.render(render_changelog.load()),
-        # What reached the site over the seven days to its newest arrival, from the records
-        # (the owner, 22 October 2026): results, new record packings, dated rows.
-        "RECENTLY_ADDED": overview_sections.recently_added(overview),
-        "RECENT_SINCE": overview_sections.recent_since(overview),
         "ATLAS_GRID": overview_sections.atlas_preview(),
         "PAPER_CARDS": overview_sections.homepage_paper_cards(),
         "PDF_CARDS": overview_sections.homepage_pdf_card(),
@@ -1572,24 +1568,26 @@ def news_page() -> Page:
 
 
 def changelog_page() -> Page:
-    """The retained project history, every entry at every significance, day by day.
+    """The whole record as one concise log: a disclosure a day, newest first, holding
+    that day's results, new record packings and rows beyond the corpus, then its site and
+    project changes as one line each (`overview_sections.changelog_rollup`).
 
-    News shows the S3 and above stories as cards; this page is the whole log, the view
-    `CHANGELOG.md` holds on GitHub, with each entry's issues and pull requests linked
-    there (the owner, 2026-10-26). The article owns the `changelog` bookmark, so the
-    shared renderer writes the days and entries alone.
+    News and this page divide the work rather than share it. News carries the
+    mathematical and newsworthy items, fewer of them and with the detail on each; this
+    page is concise and close to complete, and links each change to its GitHub issues and
+    pull requests, and to its News story where it has one. The section was the home
+    page's Recently Added until 26 October 2026, when the owner moved it here and asked
+    the home page for a button instead.
     """
-    from devtools import overview_sections, render_changelog  # noqa: PLC0415
+    from devtools import overview_data, overview_sections, render_changelog  # noqa: PLC0415
 
+    overview = overview_data.load()
+    document = render_changelog.load()
     markdown = _template_markdown(
         CHANGELOG_ARTICLE,
         {
-            "CHANGELOG": render_changelog.render_markdown(
-                render_changelog.load(),
-                destination="site",
-                heading_level=1,
-                include_heading=False,
-            ),
+            "CHANGELOG": overview_sections.changelog_rollup(overview, document),
+            "CHANGELOG_SINCE": overview_sections.changelog_since(overview, document),
             "CHANGELOG_FILE": repo_url(repo_links.CHANGELOG),
             "ARROW_EXTERNAL": overview_sections.arrow_icon("external"),
         },
