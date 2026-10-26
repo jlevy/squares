@@ -23748,7 +23748,7 @@ issues:
       tracking'
     author: jlevy
     opened: '2026-10-24'
-    state: open
+    state: closed
     kind: result-report
     triage: done
     summary: >-
@@ -23794,6 +23794,31 @@ issues:
       - result: classical-s2-to-s5
         id: E-n005-gobel-proof
         status: recorded
+      - result: classical-s2-to-s5
+        id: E-n005-gobel-upper
+        status: confirmed
+      - result: classical-s2-to-s5
+        id: E-side2-center-lower
+        status: confirmed
+      - result: classical-s2-to-s5
+        id: E-basic-area-lower
+        status: confirmed
+      - result: classical-s2-to-s5
+        id: E-basic-grid-upper
+        status: confirmed
+    - url: https://github.com/jlevy/squares/issues/785#issuecomment-6407934895
+      date: '2026-10-26'
+      by: jlevy
+      kind: final
+      reported:
+      - result: classical-s2-to-s5
+        id: T-237
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: classical-s2-to-s5
+        id: E-n005-friedman-theorem2-audit
+        status: confirmed
       - result: classical-s2-to-s5
         id: E-n005-gobel-upper
         status: confirmed
