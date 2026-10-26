@@ -119,8 +119,11 @@ def _rendering_entry(directory: Path) -> dict[str, Any]:
 #: margins 6.0e-13 and 1.2e-12 again. The adoption of 25 October 2026 (think-bk9r) moved
 #: 268 and 303 to Francisco Couzo's issue-763 certificates (T-240): 268 joined and 303
 #: stayed, each certificate's least margins 1e-15 against every wall and 2.1e-13 between
-#: pairs, below the screen's tightest tolerance of 1e-12. Re-screening the adopted counts
-#: with the screen's own `--update --n` rebuilds the retained screen byte for byte.
+#: pairs, below the screen's tightest tolerance of 1e-12. The adoption of 26 October 2026
+#: (think-3anz) moved 268 again, to Evan Daniel's descent of Vladislav Lavrentev's packing
+#: (T-242): 268 stayed, its least margins 5e-21 against every wall and 1e-20 between pairs.
+#: Re-screening the adopted counts with the screen's own `--update --n` rebuilds the
+#: retained screen byte for byte.
 GOLDEN_UNSTABLE = {
     "n=1..100": [
         68,

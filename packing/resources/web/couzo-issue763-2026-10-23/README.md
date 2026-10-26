@@ -391,6 +391,9 @@ pass that validates it, and an adoption waits only when it is staged in
 `select_houses.PENDING_ADOPTION` for one of `select_houses.STAGING_REASONS`, none of which
 is a later report not yet validated. Daniel’s 268 is not validated yet, so its re-housing
 of 268 follows its own validation (think-hx0e).
+On 26 October 2026: T-242 reached V3/C3 after the 24 October review (think-hx0e, #803),
+and the pass of 26 October 2026 moved 268 to it (think-3anz, #807); this certificate stays
+retained and verified at 268 as history, and remains the house at 303.
 
 ## The Notebook Rows
 
