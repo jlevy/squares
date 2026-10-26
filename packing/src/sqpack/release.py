@@ -9500,8 +9500,10 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "result-requests.yaml and results.yaml swapped in, by "
             "render_n11_lower_bounds_explainer, render_n11_optimality_review, "
             "render_n11_threshold_bound_review and render_packing_methods: 69 files each, "
-            "all byte-identical across the three every time. No PDF was printed. Retain "
-            "v0.4.30, v0.1.11, v0.1.4 and v0.2.7."
+            "all byte-identical across the three every time. Measured again after merging "
+            "main 85a1919da (#820), at link revision e29cf5f4 with that main's same four "
+            "files swapped in: 69 files each, all byte-identical across the three. No PDF "
+            "was printed. Retain v0.4.30, v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
 )
