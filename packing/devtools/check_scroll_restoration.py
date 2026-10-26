@@ -127,7 +127,16 @@ def check_reload(
             if javascript:
                 page.evaluate(SETTLE)
             before: Position = page.evaluate(POSITION)
-            with page.expect_navigation(wait_until="load"):
+            # Wait for the reload's own document, not for any navigation. A bare
+            # `expect_navigation` takes the first navigation of any kind, and Chromium
+            # reports a same-document `history.replaceState` as one: KPress's history
+            # behaviour stamps the scroll offset that way 200 ms after a scroll, so on a
+            # busy host the stamp could satisfy the wait before the reload commits, and
+            # the position would be read from the old document. The reload keeps the
+            # same address, so the address cannot tell the two apart as it does in
+            # `tests/test_site_result_filters.py`; the main frame's `load` event can,
+            # since a same-document navigation never fires it (#539).
+            with page.expect_event("load"):
                 page.evaluate(_RELOAD)
             if javascript:
                 page.evaluate(SETTLE)
