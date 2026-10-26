@@ -1554,8 +1554,7 @@ def news_page() -> Page:
         title="News",
         description=(
             "Project news: newly launched results, papers and downloads, rated S3 and "
-            "above, with the detail on each. Site and tooling work, and every change at "
-            "any significance, is listed on the Changelog."
+            "above, with the detail on each. The Changelog lists every change."
         ),
         toc=False,
         page_scripts=(
