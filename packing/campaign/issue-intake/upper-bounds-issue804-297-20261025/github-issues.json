@@ -1,0 +1,4 @@
+{
+  "format": "intake-ledger-github-v1",
+  "items": [{"report":"#804 at 297","kind":"comment","number":804,"comment_id":6397593690,"url":"https://github.com/jlevy/squares/issues/804#issuecomment-6397593690","author":"HyukdongKim","created_at":"2026-10-25T12:23:57Z","issue_state":"open","issue_closed_at":null,"issue_title":"Exact values of the record sides for n = 88, 126, 172, 199, 263 (minimal polynomials): registration request"}]
+}

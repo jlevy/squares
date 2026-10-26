@@ -7051,7 +7051,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-17'
+  lastmod: '2026-10-26'
   status: live
 - path: cases/298.html
   canonical: cases/298.html
@@ -21558,6 +21558,38 @@ urls:
     - packing/resources/web/evand-exact-and-local-reports-2026-10-12/source/search/exact/homotopy/link.py
     - packing/resources/web/evand-exact-and-local-reports-2026-10-12/source/search/exact/homotopy/verify_mod.py
     - packing/resources/web/evand-exact-and-local-reports-2026-10-12/source/search/exact/homotopy/contacts_mod.py
+- path: result/t-247.html
+  canonical: result/t-247.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-26'
+  lastmod: '2026-10-26'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 297
+    established: null
+    attribution:
+      source_keys:
+      - '[Kim s297 2026-10-25]'
+      published: '2026-10-25'
+    builds_on: null
+    evidence:
+    - E-hyukdongkim-804-s297-report
+    artifacts:
+    - packing/resources/web/hyukdongkim-s297-2026-10-25/README.md
+    - packing/resources/web/hyukdongkim-s297-2026-10-25/acquisition/comments-804.json
+    - packing/resources/web/hyukdongkim-s297-2026-10-25/acquisition/sources.json
+    - packing/resources/web/hyukdongkim-s297-2026-10-25/facts/s297-polynomial.json
+    - packing/resources/web/hyukdongkim-s297-2026-10-25/facts/route-a-n297.json.gz
+    - packing/resources/web/hyukdongkim-s297-2026-10-25/receipts/build.json
+    - packing/campaign/issue-intake/upper-bounds-issue804-297-20261025/README.md
+    - packing/campaign/issue-intake/upper-bounds-issue804-297-20261025/exact-sides.json
+    - packing/campaign/issue-intake/upper-bounds-issue804-297-20261025/review/side_297.py
+    - packing/devtools/build_field_configuration.py
 - path: results.html
   canonical: results.html
   kind: page

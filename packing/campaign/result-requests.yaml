@@ -24227,7 +24227,7 @@ issues:
       hyukdongkim-t244-configurations-2026-10-25 packet keeps as derived facts; deciding them
       exactly is queued (think-4rzl), and until then feasibility at either side is not shown.
       Claude assistance disclosed.
-    read_through: '2026-10-25T09:06:23Z'
+    read_through: '2026-10-25T12:23:57Z'
     results:
     - key: exact-sides-held
       claim: >-
@@ -24289,6 +24289,20 @@ issues:
         about 2 CPU-hours for both counts, up to about 8. That would take T-244 to C3.
       queued: true
       bead: think-4rzl
+    - key: side-297
+      claim: >-
+        s(297) <= S*, the only real root of the degree-21 integer polynomial the comment
+        prints, 17.7404172875438018509758015948842895936406549234461952734252335613502680498177981816058180396096276933…,
+        cut at 100 places: the stationary side of T-174's packing at 297, with an exact
+        configuration in a field of degree 21, attached as s297-exact-configuration.zip
+        (SHA-256 e08b5d0a64c5c68eed827ee7e323687929048a4cfea438bb77ef390bdd4147a7, the
+        comment's digest) under CC0 1.0, which the comment reports VALID on verify_exact.py at
+        659ee62 and on a checker of the author's.
+      source: https://github.com/jlevy/squares/issues/804#issuecomment-6397593690
+      register:
+      - T-247
+      evidence:
+      - E-hyukdongkim-804-s297-report
     - key: negative-searches
       claim: >-
         LLL at 1,500 digits on the KKT-solved side found no relation of degree <= 80 at 55, 130 and
@@ -24303,6 +24317,7 @@ issues:
     beads:
     - think-9vai
     - think-4rzl
+    - think-ozx8
     answer_bead: think-9vai
     replies: []
     close_when: >-
@@ -24333,7 +24348,18 @@ issues:
       him for both comments and asks two questions: a licence for the two bundles, and the
       stationary side at 297. Neither could falsify anything the record asserts, so both are
       informational and hold nothing open. The question the first draft asked for
-      configurations is dropped, since the comment of 09:06:23Z answers it.
+      configurations is dropped, since the comment of 09:06:23Z answers it. Two comments of
+      the author followed, read on 25 October at 15:46Z and kept in the
+      hyukdongkim-s297-2026-10-25 packet. At 12:00:41Z (issuecomment-6397363927) he answers the
+      acknowledgement: CC0 1.0 for both earlier bundles, the files themselves to be kept (their
+      packets' custody is think-4rzl's and think-9vai's), the method credit agreed, an
+      uncertified second-order note at 172 and 263, and a numerical side at 297 with no
+      relation found. At 12:23:57Z (issuecomment-6397593690) he withdraws that last part and
+      reports the 297 side as the root of a degree-21 polynomial, with an exact configuration
+      under CC0 (the side-297 result, T-247, think-ozx8). The attachment was not downloadable
+      from the importing session (user-attachments 403), so the import built an exact
+      configuration at the side from T-174's certificate with its own tools (route A), whose
+      exact decision waits over the CPU cap (think-vv1q), and the author's file waits (route B).
   - number: 806
     title: 's(182) ≤ 13.970916436215: registration request'
     author: evand

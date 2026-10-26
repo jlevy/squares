@@ -1,0 +1,37 @@
+# What `python -m devtools.intake_ledger gather` reads: issue #804's side at 297, stated in
+# Hyukdong Kim's comment of 12:23:57Z (think-ozx8). The starts are frozen at main 0785626cc
+# (#815's merge). The side is the only real root of the comment's degree-21 polynomial, cut at
+# 120 places by review/side_297.py from the hyukdongkim-s297-2026-10-25 packet's fact
+# (exact-sides.json). No other open report states a bound at 297 below its start: PR #574's is
+# T-174 there, and #639's degree-12 side at 297, the 16 October ledger's, lies above T-174's.
+# The comment of 12:00:41Z stated the same side numerically and said no relation was found; the
+# comment of 12:23:57Z withdraws that and makes the claim, so it is the report.
+format: intake-ledger-sources-v1
+read_at_main: 0785626cc671a010e4950d391b062a0d09fe50b3
+read_on: '2026-10-25'
+rule: If they are reported in order, then each one should be recorded as a result, as long as each one is stronger
+  than the last. If a stronger result is reported first, then the other one should not be recorded since it is weaker
+  after that, unless there is some key reason it should be recorded.
+lanes: []
+reports:
+- report: '#804 at 297'
+  issue: 804
+  comment: 6397593690
+  holders: Hyukdong Kim (HyukdongKim)
+  bead: think-ozx8
+  rounding: cut
+  note: >-
+    The comment's claim at 297: the stationary side of T-174's packing is the only real root of
+    the degree-21 polynomial it prints, with an exact configuration attached under CC0 1.0. The
+    attachment was not readable from the importing session; the side is decided exactly from
+    the printed polynomial (exact-sides.json).
+  claims:
+  - n: 297
+    printed: '17.740417287543801850975801594884289593640654923446195273425233561350268049817798181605818039609627693350616955721959325237'
+    rounding: cut
+    refines:
+      packing_of: Francisco Couzo
+      entry: T-174
+      source: '#804 (comment 6397593690): ''the stationary side of T-174''s record packing (#574)'', the
+        packing credited as the case record credits it; route A here solves T-174''s retained
+        certificate at 297 to the same side (the packet''s receipts)'

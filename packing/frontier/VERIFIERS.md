@@ -25,8 +25,8 @@ second implementation agrees.
 
 ## The Short Version
 
-- **212** programs: **52** external and **160** first-party; **143** decide claims and **69** check premises.
-- **606** of **773** evidence entries name the programs that verified them: 284 reproduced with the producer’s code, 263 independently re-implemented, 38 re-implemented, sharing the producer’s components, 21 no relation: a proof, a derivation or a report.
+- **213** programs: **52** external and **161** first-party; **143** decide claims and **70** check premises.
+- **606** of **774** evidence entries name the programs that verified them: 284 reproduced with the producer’s code, 263 independently re-implemented, 38 re-implemented, sharing the producer’s components, 21 no relation: a proof, a derivation or a report.
 
 ## Programs
 
@@ -183,6 +183,7 @@ second implementation agrees.
 | [`V-squish-second-update-confirmation`](#v-squish-second-update-confirmation) | devtools.squish_second_update_confirmation | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-evand-arrangement-receipts`](#v-evand-arrangement-receipts) | devtools.evand_arrangement_reports | Squares Project (Levy) | first-party | premises | 70 | 70 |
 | [`V-algebraic-witness-reports`](#v-algebraic-witness-reports) | devtools.algebraic_witness_reports | Squares Project (Levy) | first-party | premises | 1 | 1 |
+| [`V-build-field-configuration`](#v-build-field-configuration) | devtools.build_field_configuration | Squares Project (Levy) | first-party | premises | 0 | 0 |
 | [`V-upper-bound-reports`](#v-upper-bound-reports) | devtools.upper_bound_reports | Squares Project (Levy) | first-party | premises | 65 | 65 |
 | [`V-rehwaldt-n68-verify`](#v-rehwaldt-n68-verify) | verify.py | Seth Rehwaldt | external | decides | 1 | 1 |
 | [`V-rehwaldt-n68-independent-support-check`](#v-rehwaldt-n68-independent-support-check) | independent_support_check.py | Seth Rehwaldt | external | decides | 1 | 1 |
@@ -3276,6 +3277,18 @@ Imports a packet's algebraic-number-field witnesses from its declaration: derive
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
 | `E-pingyou-574-algebraic-feasibility` | replayed here | independently re-implemented | full, 4 of 4: the four algebraic certificates at n = 70, 153, 207 and 302, every unit-square identity, wall and pair decided over the witness's field on the one route, with its two controls each | T-174 |
+
+### `V-build-field-configuration`
+
+**devtools.build_field_configuration** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
+
+Builds an exact number-field configuration from a tight rational centre-basis certificate: types its contact graph and refuses an undecided margin, solves the contacts with the side's stationarity (the KKT system) at high precision by mixed-precision Gauss-Newton, pins the directions the side is constant along to small rationals, finds the field's generator and every class tangent in it by integer relation under a full-precision residual test, and solves the centres and the side exactly in the field, refusing unless every contact is an identity there. It decides no feasibility: sqpack's exact witness verifier does, through devtools.algebraic_witness_reports' jobs and controls.
+
+- Source: [`packing/devtools/build_field_configuration.py`](../../packing/devtools/build_field_configuration.py), [`packing/tests/test_build_field_configuration.py`](../../packing/tests/test_build_field_configuration.py)
+- Versions run: this repository's commits, which Git holds
+- Note: Written by the think-ozx8 import lane on 25 October 2026 to decide issue 804's side at 297 without the author's attachment, from T-174's retained certificate. Its authors read the issue's comments as text (the printed polynomial, the side and the description of the author's field) and none of the author's code; the polynomial is used only as a final comparison, after the side is found in the field (resources/web/hyukdongkim-s297-2026-10-25/README.md, Route A).
+
+No evidence entry names it yet.
 
 ### `V-upper-bound-reports`
 
