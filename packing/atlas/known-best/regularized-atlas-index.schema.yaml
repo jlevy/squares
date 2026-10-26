@@ -49,6 +49,7 @@ properties:
       evand-regularize: {$ref: '#/$defs/generator'}
       regularize_grid_slack/0: {$ref: '#/$defs/generator'}
       regularize_grid_slack/1: {$ref: '#/$defs/generator'}
+      regularize_grid_slack/2: {$ref: '#/$defs/generator'}
   runs:
     description: >-
       The generator runs whose views the layer draws, or whose reports supplied a drawn
@@ -64,7 +65,7 @@ properties:
 $defs:
   generator_id:
     enum: [regularize_axis_components/2, evand-regularize, regularize_grid_slack/0,
-           regularize_grid_slack/1]
+           regularize_grid_slack/1, regularize_grid_slack/2]
   axis_generator:
     type: object
     additionalProperties: false
@@ -291,7 +292,9 @@ $defs:
     properties:
       n: {type: integer, minimum: 1}
       status: {const: regularized}
-      generator: {enum: [evand-regularize, regularize_grid_slack/0, regularize_grid_slack/1]}
+      generator:
+        enum: [evand-regularize, regularize_grid_slack/0, regularize_grid_slack/1,
+               regularize_grid_slack/2]
       run:
         type: object
         additionalProperties: false
@@ -320,7 +323,13 @@ $defs:
         required: [reported, view, relation, view_minus_reported, view_minus_verified_upper_bound]
         properties:
           reported: {type: string, minLength: 1}
-          view: {type: string, pattern: '^[0-9]+(/[0-9]+)?$'}
+          view:
+            type: string
+            description: >-
+              The view's exact side: a rational, or over a number field the coefficients
+              of its power-basis polynomial in the field's generator, written as a list
+              (`devtools.exact_scalars.text`, think-mbdw).
+            pattern: "^([0-9]+(/[0-9]+)?|\\['-?[0-9]+(/[0-9]+)?'(, '-?[0-9]+(/[0-9]+)?')*\\])$"
           relation: {enum: [same, bound]}
           view_minus_reported: {type: string, minLength: 1}
           view_minus_verified_upper_bound: {type: [string, 'null']}

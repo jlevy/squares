@@ -799,7 +799,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "faf1e183f37062f1a5c4f440f6695f99a86a2b61"
+DATA_REVISION = "01947fb71f877bcb033921cdd67fb07c7b0b97af"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -9599,6 +9599,60 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "render_packing_methods write all 69 files byte-identical across the three. "
             "No PDF was printed; each prints from that HTML. Every paper keeps its "
             "version: v0.4.30, v0.1.11, v0.1.4 and v0.2.7."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/devtools/check_algebraic_witness_independent.py",
+            "packing/devtools/default_drawings.py",
+            "packing/devtools/exact_scalars.py",
+            "packing/devtools/register_regularized_bounds.py",
+            "packing/devtools/regularize_axis_components.py",
+            "packing/devtools/regularize_evand.py",
+            "packing/devtools/regularize_grid_slack.py",
+            "packing/devtools/regularize_same_side.py",
+            "packing/devtools/regularize_select.py",
+            "packing/devtools/regularized_drawings.py",
+            "packing/devtools/render_regularized_atlas.py",
+            "packing/frontier/n-102.md",
+            "packing/frontier/n-123.md",
+            "packing/frontier/n-153.md",
+            "packing/frontier/n-207.md",
+            "packing/frontier/results.yaml",
+            "packing/frontier/square-packing-case.schema.yaml",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The regularization of the seven exact algebraic houses (think-mbdw): "
+            "regularize_grid_slack/2 draws a number-field witness in its own field, "
+            "check_algebraic_witness_independent is the second exact route over a "
+            "number field, the regularization tools read a field side exactly "
+            "(exact_scalars), and the layer draws grid-slack's views at 102, 123, 153, "
+            "207, 258, 259 and 302, whose case records and results.yaml items name them; "
+            "no register entry, side, bound or credit changes. Against main 9ebde24df "
+            "(#823): rendered at link revision 4c834f4f into empty site directories, "
+            "twice from this tree and once from main's tree with this branch's "
+            "DATA_REVISION pin, whose code and data are main's, "
+            "render_n11_lower_bounds_explainer, render_n11_optimality_review, "
+            "render_n11_threshold_bound_review and render_packing_methods write all 69 "
+            "files byte-identical across the three. No PDF was printed; each prints from "
+            "that HTML. Every paper keeps its version: v0.4.30, v0.1.11, v0.1.4 and "
+            "v0.2.7."
         ),
     ),
 )

@@ -67,6 +67,7 @@ from devtools.regularize_axis_components import (
     EVAND_GENERATOR,
     GRID_GENERATOR,
     GRID_GENERATOR_V1,
+    GRID_GENERATOR_V2,
 )
 from sqpack.render import render_packing_svg
 from sqpack.render.model import PackingFrame, RenderSpec
@@ -94,7 +95,7 @@ MADE_BY = {
         "record's side"
     ),
     **dict.fromkeys(
-        (GRID_GENERATOR, GRID_GENERATOR_V1),
+        (GRID_GENERATOR, GRID_GENERATOR_V1, GRID_GENERATOR_V2),
         "its exact frame with the free grid slack closed and the near-axis squares "
         "straightened at the record's side",
     ),
