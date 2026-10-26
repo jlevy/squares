@@ -1485,7 +1485,9 @@ sources:
     certificates that revision ad43d29 pinned and added six counts from n = 86 to 95, in
     Tokoharu's format and accepted by his unchanged checker; the packet retains what is new at
     39d8ecc and reads the rest from the 27 September packet. T-046 registers the reported
-    values, and T-070 the 25 counts whose complete replay passed here
+    values, which sqverify-fast's census decided here for all 46 standing certificates of
+    both packets (26 October 2026, review-2026-10-26-wand125-rectangle-certificates-t046.md),
+    and T-070 the 25 counts whose complete replay passed here
     (E-wand125-rectangle-2026-09-28-source-replay); n = 77 and 90 take the n = 76 and 89
     certificates, whose masses lie below them (E-wand125-rectangle-2026-09-28-monotone-report).
     The point-only and mixed bundles of the same revision are

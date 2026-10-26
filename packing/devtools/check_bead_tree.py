@@ -269,7 +269,8 @@ def deferrals(
     This check asks whether what is named still owns the work; whether one is named is
     the records' own business. Their schemas require a bead of a pending intake, a
     deferred conflict, an issue's `answer_bead` and, since think-du1e, each queued
-    result and ask. A queued item that names none anyway is collected with `NO_BEAD`,
+    result and ask; each bead a result's `validation` names is one too, on any issue,
+    open or closed. A queued item that names none anyway is collected with `NO_BEAD`,
     so a record the schema check did not see still fails here; a read in
     `intake-watch.yaml` without a bead found nothing to import, so it defers nothing.
     """
@@ -289,6 +290,16 @@ def deferrals(
         if entry.get("disposition") == "deferred-conflict" and entry.get("bead")
     )
     for issue in _records(requests).get("issues") or ():
+        # A result's validation beads own what remains after its issue closes (P1 of
+        # 26 October 2026), so they are held open on a closed issue too.
+        named.extend(
+            (
+                f"result-requests.yaml #{issue.get('number')} {result.get('key')} validation",
+                str(bead),
+            )
+            for result in issue.get("results") or ()
+            for bead in result.get("validation") or ()
+        )
         if issue.get("state") != "open":
             continue
         where = f"result-requests.yaml open issue #{issue.get('number')}"

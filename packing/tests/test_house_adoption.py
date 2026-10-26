@@ -2236,8 +2236,14 @@ def _later_rewrite_projection(key: tuple[int, str], body: str) -> str:
 #: adopts at the count the key no longer matches and that replay reads it as prior state.
 #: Review A of pull request 781 (think-ist2) cites the replay of Kevin Fang's 18 pieces
 #: (E-fang-excess-pieces-exact-replay) at 241 and 273, beside the sibling replay of his
-#: inventory that those records already cite, so that a case record cites it.
+#: inventory that those records already cite, so that a case record cites it. T-046's
+#: census entries of 26 October (think-buaj) are cited at each count they cover, four of
+#: them adopted houses.
 LATER_CITATIONS: dict[tuple[int, str], tuple[str, ...]] = {
+    (29, "T-195"): ("E-n029-wand125-rect-579-sqverify-fast-replay",),
+    (68, "T-174"): ("E-n068-wand125-rect-8495-sqverify-fast-replay",),
+    (70, "T-174"): ("E-n070-wand125-rect-862-sqverify-fast-replay",),
+    (86, "T-174"): ("E-n086-wand125-rect-9355-sqverify-fast-replay",),
     (241, "T-182"): ("E-fang-excess-pieces-exact-replay",),
     (273, "T-174"): ("E-fang-excess-pieces-exact-replay",),
 }

@@ -238,6 +238,36 @@ def _pointer_cases(page: Any, cases: tuple[int, ...]) -> list[dict[str, Any]]:
     return readings
 
 
+def _choose_theme(page: Any, mode: str) -> None:
+    """Choose `mode` from the theme menu, waiting on the menu's own state at each step.
+
+    The menu is a native popover that the gear toggles. `theme.js` marks the gear
+    `aria-expanded` as the popover changes state, and its `toggle` handler, a queued task,
+    then places the menu under the gear and focuses the checked choice. The fixture used to
+    press the gear and then a choice and wait on neither: a choice was pressed while the
+    handler could still move the menu, and nothing checked that a press had closed it. The
+    staged rounds checked nothing after a press, and a System round's resolved-theme check
+    passes without the press when the OS scheme already resolves to it. A press the menu
+    did not take left it open, the next press on the gear closed it, and the next choice
+    stayed hidden for the whole 30 s click timeout: the shape of #550's failure, whose
+    trigger has not been reproduced. So the gear must read closed before it is pressed and
+    open after, the checked choice must have the handler's focus before a choice is
+    pressed, and the gear must read closed and the root carry the mode after: a press that
+    does not take fails at that press, with the menu's state in the message.
+    """
+    sync_api = site_browser.api()
+    button = page.locator(".site-theme-button")
+    menu = page.locator("#site-theme-menu")
+    sync_api.expect(button).to_have_attribute("aria-expanded", "false")
+    button.click()
+    sync_api.expect(button).to_have_attribute("aria-expanded", "true")
+    sync_api.expect(menu.locator('[aria-checked="true"]')).to_be_focused()
+    menu.locator(f'[data-theme-choice="{mode}"]').click()
+    sync_api.expect(button).to_have_attribute("aria-expanded", "false")
+    sync_api.expect(menu).to_be_hidden()
+    sync_api.expect(page.locator("html")).to_have_attribute("data-kpress-theme", mode)
+
+
 def _themes(page: Any) -> list[dict[str, Any]]:
     """Switch the actual theme controls and OS scheme in each view of every case."""
     sync_api = site_browser.api()
@@ -254,8 +284,7 @@ def _themes(page: Any) -> list[dict[str, Any]]:
         ):
             page.emulate_media(color_scheme=scheme)
             page.evaluate(THEME, {"scroll_top": True})
-            page.locator(".site-theme-button").click()
-            page.locator(f'[data-theme-choice="{mode}"]').click()
+            _choose_theme(page, mode)
             resolved = scheme if mode == "system" else mode
             sync_api.expect(page.locator("html")).to_have_attribute(
                 "data-kpress-resolved-theme", resolved
@@ -585,8 +614,7 @@ def atlas_seen(browser: Any, request: pytest.FixtureRequest) -> dict[int, dict[s
                 page.evaluate(TRANSITION, {"install": False, "settle": True})
                 page.emulate_media(color_scheme=scheme)
                 page.evaluate(THEME, {"scroll_top": True})
-                page.locator(".site-theme-button").click()
-                page.locator(f'[data-theme-choice="{mode}"]').click()
+                _choose_theme(page, mode)
                 report["staged_themes"].append(
                     {
                         **page.evaluate(THEME, {"scroll_top": False}),

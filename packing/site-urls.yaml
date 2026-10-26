@@ -10628,7 +10628,7 @@ urls:
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-09-29'
-  lastmod: '2026-09-29'
+  lastmod: '2026-10-26'
   status: live
   identity:
     kind: lower-bound
@@ -10693,12 +10693,139 @@ urls:
     - E-wand125-rectangle-report
     - E-wand125-rectangle-2026-09-28-report
     - E-wand125-rectangle-2026-09-28-monotone-report
+    - E-n018-wand125-rect-4695-sqverify-fast-replay
+    - E-n019-wand125-rect-4815-sqverify-fast-replay
+    - E-n020-wand125-rect-4895-sqverify-fast-replay
+    - E-n026-wand125-rect-553-sqverify-fast-replay
+    - E-n027-wand125-rect-56-sqverify-fast-replay
+    - E-n028-wand125-rect-572-sqverify-fast-replay
+    - E-n029-wand125-rect-579-sqverify-fast-replay
+    - E-n030-wand125-rect-5865-sqverify-fast-replay
+    - E-n031-wand125-rect-5935-sqverify-fast-replay
+    - E-n037-wand125-rect-6425-sqverify-fast-replay
+    - E-n038-wand125-rect-654-sqverify-fast-replay
+    - E-n039-wand125-rect-663-sqverify-fast-replay
+    - E-n040-wand125-rect-6695-sqverify-fast-replay
+    - E-n041-wand125-rect-6755-sqverify-fast-replay
+    - E-n042-wand125-rect-679-sqverify-fast-replay
+    - E-n043-wand125-rect-6865-sqverify-fast-replay
+    - E-n044-wand125-rect-6935-sqverify-fast-replay
+    - E-n051-wand125-rect-74425-sqverify-fast-replay
+    - E-n052-wand125-rect-7535-sqverify-fast-replay
+    - E-n053-wand125-rect-7595-sqverify-fast-replay
+    - E-n054-wand125-rect-76675-sqverify-fast-replay
+    - E-n055-wand125-rect-771-sqverify-fast-replay
+    - E-n056-wand125-rect-777-sqverify-fast-replay
+    - E-n057-wand125-rect-7835-sqverify-fast-replay
+    - E-n058-wand125-rect-789-sqverify-fast-replay
+    - E-n059-wand125-rect-792-sqverify-fast-replay
+    - E-n060-wand125-rect-794-sqverify-fast-replay
+    - E-n061-wand125-rect-796-sqverify-fast-replay
+    - E-n066-wand125-rect-8375-sqverify-fast-replay
+    - E-n067-wand125-rect-8455-sqverify-fast-replay
+    - E-n068-wand125-rect-8495-sqverify-fast-replay
+    - E-n069-wand125-rect-8575-sqverify-fast-replay
+    - E-n070-wand125-rect-862-sqverify-fast-replay
+    - E-n071-wand125-rect-8685-sqverify-fast-replay
+    - E-n072-wand125-rect-874-sqverify-fast-replay
+    - E-n073-wand125-rect-878-sqverify-fast-replay
+    - E-n074-wand125-rect-884-sqverify-fast-replay
+    - E-n075-wand125-rect-889-sqverify-fast-replay
+    - E-n076-wand125-rect-892-sqverify-fast-replay
+    - E-n078-wand125-rect-8955-sqverify-fast-replay
+    - E-n086-wand125-rect-9355-sqverify-fast-replay
+    - E-n088-wand125-rect-945-sqverify-fast-replay
+    - E-n089-wand125-rect-955-sqverify-fast-replay
+    - E-n091-wand125-rect-9645-sqverify-fast-replay
+    - E-n094-wand125-rect-9795-sqverify-fast-replay
+    - E-n095-wand125-rect-98418-sqverify-fast-replay
     artifacts:
     - packing/resources/web/wand125-rectangle-certificates-2026-09-27/README.md
     - packing/resources/web/wand125-rectangle-certificates-2026-09-28/README.md
     - packing/resources/web/wand125-rectangle-certificates-2026-09-28/receipts/preflight/audit.json.gz
     - packing/devtools/audit_wand125_rectangles.py
     - packing/devtools/apply_wand125_rectangles.py
+    - packing/benchmarks/measure-verifier/census/census.json
+    - packing/devtools/sqverify_fast_census.py
+    - docs/project/reviews/review-2026-10-06-sqverify-fast-format-t-route.md
+    - docs/project/reviews/review-2026-10-26-wand125-rectangle-certificates-t046.md
+    - packing/resources/web/wand125-rectangle-certificates-2026-09-28/review/review-2026-10-26/README.md
+  amendments:
+  - date: '2026-10-26'
+    reason: sqverify-fast's census decides all 46 standing certificates here, one replay evidence
+      entry each, after the review of 26 October read the 28 September certificates and the census
+      route's mass condition at n - 1/1000 (think-buaj); the result rises to V3/C3 citing them, with
+      the census, its driver and both reviews among its artifacts. The values, scope and attribution
+      are unchanged.
+    previous:
+      kind: lower-bound
+      scope:
+        n_values:
+        - 18
+        - 19
+        - 20
+        - 26
+        - 27
+        - 28
+        - 29
+        - 30
+        - 31
+        - 37
+        - 38
+        - 39
+        - 40
+        - 41
+        - 42
+        - 43
+        - 44
+        - 51
+        - 52
+        - 53
+        - 54
+        - 55
+        - 56
+        - 57
+        - 58
+        - 59
+        - 60
+        - 61
+        - 66
+        - 67
+        - 68
+        - 69
+        - 70
+        - 71
+        - 72
+        - 73
+        - 74
+        - 75
+        - 76
+        - 77
+        - 78
+        - 86
+        - 88
+        - 89
+        - 90
+        - 91
+        - 94
+        - 95
+      established: null
+      attribution:
+        source_keys:
+        - '[wand125 rectangle bounds 2026]'
+        - '[wand125 rectangle bounds 2026-09-28]'
+        published: '2026-09-27'
+      builds_on: null
+      evidence:
+      - E-wand125-rectangle-report
+      - E-wand125-rectangle-2026-09-28-report
+      - E-wand125-rectangle-2026-09-28-monotone-report
+      artifacts:
+      - packing/resources/web/wand125-rectangle-certificates-2026-09-27/README.md
+      - packing/resources/web/wand125-rectangle-certificates-2026-09-28/README.md
+      - packing/resources/web/wand125-rectangle-certificates-2026-09-28/receipts/preflight/audit.json.gz
+      - packing/devtools/audit_wand125_rectangles.py
+      - packing/devtools/apply_wand125_rectangles.py
 - path: result/t-047.html
   canonical: result/t-047.html
   kind: result

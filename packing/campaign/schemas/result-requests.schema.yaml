@@ -107,15 +107,19 @@ $defs:
       asks:
         type: array
         description: >-
-          What the author asked for beyond registering the results above: a change to
-          the record's text, an evidence update, a decision. An issue is closeable only
-          when none is queued.
+          What the issue's author asked of the project beyond registering the results
+          above: a change to the record's text, an evidence update, a decision, a piece of
+          research. Only the author's asks: the project's own validation of a result is
+          that result's `validation`, and a question the project puts to the author goes
+          under `awaiting_author` or in the closing comment (P2, the owner's direction of
+          26 October 2026). An issue is closeable only when none is queued.
         items:
           type: object
           additionalProperties: false
           required: [what, state]
           # A queued ask is work, and the answer bead owns only the reply, so the ask
-          # names the bead that does it (think-du1e).
+          # names the bead that does it (think-du1e); on an open issue, where the author
+          # asked it too (the issue's `allOf`).
           if:
             properties: {state: {const: queued}}
             required: [state]
@@ -124,6 +128,14 @@ $defs:
           properties:
             what: {type: string, minLength: 1}
             state: {enum: [queued, done, declined]}
+            source:
+              description: >-
+                Where the author asked it: `body`, or a comment of theirs on this issue.
+                Required while it is queued on an open issue; `check_requests --github`
+                fails a comment that is not the author's own.
+              oneOf:
+                - const: body
+                - $ref: '#/$defs/comment_url'
             note: {type: string, minLength: 1}
             bead:
               $ref: '#/$defs/bead'
@@ -194,10 +206,47 @@ $defs:
       answer_bead:
         $ref: '#/$defs/bead'
         description: The bead that owns the replies due and the close.
+      review_track:
+        const: true
+        description: >-
+          The project opened the issue to track the pending review of a result that no
+          author reported to it (campaign/result-import.md, stage 7), as #772 to #786 track
+          results of this project's own research. With no author to answer, it closes only
+          when every result it tracks is confirmed or refuted, which `check_requests`
+          requires of it; any other issue closes once answered.
+      blocked:
+        type: object
+        additionalProperties: false
+        required: [type, reason]
+        description: >-
+          What someone other than the pass must do before the open issue can move: the
+          type is the GitHub label `blocked:<type>` the issue carries (development.md,
+          Issue and Pull-Request Labels), and `check_requests --github` holds the live
+          labels to it. Work that is the project's own and that nobody holds is not
+          blocked. Removed once the block lifts; a closed issue carries none.
+        properties:
+          type:
+            enum: [owner-decision, owner-reply, standing-hold, author, dependency, compute]
+            description: >-
+              `owner-decision`: a ruling, credit choice, policy question or a budget above
+              the owner's 40 CPU-hour item cap. `owner-reply`: held for the owner (`held`),
+              who posts or lifts the hold. `standing-hold`: under a decided suspension,
+              such as the n = 17 intake's. `author`: an answer or data only the author can
+              give. `dependency`: another lane's issue, pull request, bead or code must
+              land first. `compute`: priced above a pass's cap but within the owner's item
+              cap, or needing a host a pass lacks; a compute lane runs it.
+          reason: {type: string, minLength: 1, description: What it waits on, in one line.}
       replies:
         type: array
         items: {$ref: '#/$defs/reply'}
-      close_when: {type: string, minLength: 1}
+      close_when:
+        type: string
+        minLength: 1
+        description: >-
+          What closing the issue would take, as the entry was written. Descriptive only:
+          `check_requests.closeable` and the rule in campaign/result-import.md (The
+          Requests Record) decide when an issue closes, and where this text says more or
+          less, the rule governs.
       notes: {type: string, minLength: 1}
     allOf:
       - if:
@@ -212,6 +261,20 @@ $defs:
           required: [kind]
         then:
           not: {required: [intake]}
+      # P2 of 26 October 2026: an ask queued on an open issue says where its author
+      # asked it, so the project's own work cannot be filed as one unremarked.
+      - if:
+          properties: {state: {const: open}}
+          required: [state]
+        then:
+          properties:
+            asks:
+              items:
+                if:
+                  properties: {state: {const: queued}}
+                  required: [state]
+                then:
+                  required: [source]
   question:
     type: object
     additionalProperties: false
@@ -298,6 +361,18 @@ $defs:
           The open bead that imports a queued result, required while it is queued. The
           issue's `beads` may name several and its answer bead owns only the reply, and
           `check_bead_tree` fails a queued result whose bead has closed.
+      validation:
+        type: array
+        minItems: 1
+        uniqueItems: true
+        items: {$ref: '#/$defs/bead'}
+        description: >-
+          The open beads that own what remains of a registered result's validation, the
+          review and replay that would take it to V3/C3. Naming them lets its issue close
+          once answered while the result stands below V3/C3, and the closing reply names
+          them too. `check_bead_tree` fails one that has closed, on an open issue or a
+          closed one: drop the field once the result is confirmed or refuted, or name the
+          bead that takes over.
       blocked_on: {$ref: '#/$defs/blocked_on'}
     # A queued result is work, so it names the bead that imports it (think-du1e).
     if:
@@ -319,6 +394,7 @@ $defs:
             - required: [register]
             - required: [evidence]
             - required: [defect]
+            - required: [validation]
   reply:
     type: object
     additionalProperties: false
@@ -349,6 +425,11 @@ $defs:
             verification: {type: string, pattern: "^V[0-5]$"}
             confirmation: {type: string, pattern: "^C[0-5]$"}
             status: {enum: [recorded, reviewed, confirmed, incomplete, refuted]}
+            position:
+              enum: [current, pending adoption, second certificate, superseded, superseded in part]
+              description: >-
+                The entry's position on the frontier as the reply stated it, so that an
+                adoption on its case or a supersession since then is a reply due (#540).
       outdated:
         type: array
         description: >-
@@ -356,6 +437,15 @@ $defs:
           register cannot show, such as a link into a branch that has gone. Each is a
           reply due until a later reply names this one in `corrects`.
         items: {type: string, minLength: 1}
+      beads:
+        type: array
+        minItems: 1
+        uniqueItems: true
+        items: {$ref: '#/$defs/bead'}
+        description: >-
+          The beads the reply named as owning what remains, as a closing reply names each
+          result's `validation`. On a closed issue a reply is due until some reply names
+          each, and `check_requests --github` fails a reply whose text does not.
       corrects:
         type: array
         uniqueItems: true

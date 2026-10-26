@@ -73,6 +73,12 @@ export interface CorpusColour {
   shades: string[][];
   /** Workbench angle clustering, separate from exact rendering's angle tolerance. */
   angleToleranceDegrees: number;
+  /**
+   * The angle classes the whole atlas shares, one folded centre each, sorted and further apart
+   * than the tolerance. The build draws them from every witness, whichever pairs a payload
+   * embeds, and a tilt within the tolerance of one takes that class's slot in every frame (#554).
+   */
+  angleCentres: number[];
 }
 /** Which of an n's two bounds a citation names, as the bound line distinguishes them. */
 export type CitationBound = "lower" | "upper";
@@ -337,7 +343,22 @@ function colour(value: unknown): CorpusColour {
   if ([...palette, ...shades.flat()].some((fill) => !/^#[0-9a-f]{6}$/i.test(fill))) {
     throw new RangeError("corpus palette must contain hexadecimal RGB fills");
   }
-  return { palette, shades, angleToleranceDegrees: positive(row.angleToleranceDegrees) };
+  const angleToleranceDegrees = positive(row.angleToleranceDegrees);
+  const angleCentres = array(row.angleCentres, numeric);
+  if (angleCentres.some((centre) => centre < 0 || centre >= 90)) {
+    throw new RangeError("corpus angle centres must be folded into a quarter turn");
+  }
+  if (
+    angleCentres.some(
+      (centre, index) =>
+        index > 0 && centre - (angleCentres[index - 1] ?? 0) <= angleToleranceDegrees,
+    )
+  ) {
+    throw new RangeError(
+      "corpus angle centres must be sorted and further apart than the tolerance",
+    );
+  }
+  return { palette, shades, angleToleranceDegrees, angleCentres };
 }
 /**
  * The edition's semver core and the last data commit, as `sqpack.release.data_version` writes

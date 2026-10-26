@@ -1185,7 +1185,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | result/t-043.html | result/t-043.html | result | overview | 2026-09-29 | 2026-09-29 | live |
 | result/t-044.html | result/t-044.html | result | overview | 2026-09-29 | 2026-09-29 | live |
 | result/t-045.html | result/t-045.html | result | overview | 2026-09-29 | 2026-09-29 | live |
-| result/t-046.html | result/t-046.html | result | overview | 2026-09-29 | 2026-09-29 | live |
+| result/t-046.html | result/t-046.html | result | overview | 2026-09-29 | 2026-10-26 | live |
 | result/t-047.html | result/t-047.html | result | overview | 2026-09-29 | 2026-09-29 | live |
 | result/t-048.html | result/t-048.html | result | overview | 2026-09-29 | 2026-09-29 | live |
 | result/t-049.html | result/t-049.html | result | overview | 2026-09-29 | 2026-09-29 | live |
