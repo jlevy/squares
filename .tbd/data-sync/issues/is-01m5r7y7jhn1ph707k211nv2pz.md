@@ -3,9 +3,9 @@ type: is
 id: is-01m5r7y7jhn1ph707k211nv2pz
 title: Adopt T-242 at 268 (H2 of think-hx0e), on or after 2026-10-26T00:00Z, and regularize it
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 7
+version: 8
 delegate: w-pr807-1026
 labels:
   - result-import
@@ -19,8 +19,12 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-25T00:39:01.456Z
-updated_at: 2026-10-26T02:29:54.174Z
+updated_at: 2026-10-26T02:59:26.162Z
 started_at: 2026-10-25T04:15:45.960Z
+closed_at: 2026-10-26T02:59:26.162Z
+close_reason: "Merged in #807 (5c50803d); T-242 is the house best packing at 268 from the pass of 26 October. Deployed by Pages run 40259367161 (success); check_published_site --commit 5c50803d passed 5942/5942. #798's last comment is recorded; #797/#798 were already closed on GitHub."
+resolution: null
+duplicate_of: null
 ---
 H2 of think-hx0e: adopt T-242 (Evan Daniel's s268_lightning.cert at evand/square-packing@8a8879a, 16.874361715869345824484822296466, 4.48e-12 below T-240) at 268 as the house, under the house rule, and regularize the new house with both strong generators in the same pull request.
 
