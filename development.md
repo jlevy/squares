@@ -1417,7 +1417,7 @@ reason, and `check_requests --github` lists every open issue whose live `blocked
 differs from the record
 ([The Requests Record](packing/campaign/result-import.md#the-requests-record)). The
 labels are coloured `B60205` (`owner-decision`), `D93F0B` (`owner-reply`), `5319E7`
-(`standing-hold`), `FBCA04` (`author`), `0052CC` (`dependency`) and `006B75`
+(`standing-hold`), `FBCA04` (`author`), `0052CC` (`dependency`) and `C5DEF5`
 (`compute`), and the pass that changes a `blocked` entry changes the label after its
 merge.
 
