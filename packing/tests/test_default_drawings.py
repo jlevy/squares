@@ -13,6 +13,8 @@ from __future__ import annotations
 import json
 import re
 import shutil
+from collections.abc import Sequence
+from datetime import date, timedelta
 from pathlib import Path
 
 import pytest
@@ -404,10 +406,18 @@ def test_a_decision_names_what_it_still_owes_and_the_bead_that_owns_it() -> None
     )
     assert state["state"] == defaults.DECIDED
     assert state["why"].endswith("; still owed: think-aaaa: a run")
-    n = min(defaults.SETTLED)
-    unowned = {**defaults.SETTLED, n: defaults.SETTLED[n]._replace(owed="later")}
-    found, _listed = defaults.state_problems(settled=unowned)
-    assert found == [f"n={n}: SETTLED's owed names no bead first: 'later'"]
+    # Since 26 October 2026 a decision that still owes something is not settled, and
+    # owed work does not rest on main, whether or not it names a bead.
+    for owed in ("think-aaaa: a run", "later"):
+        unowned = {**defaults.SETTLED, n: defaults.SETTLED[n]._replace(owed=owed)}
+        found, _listed = defaults.state_problems(settled=unowned)
+        assert found == [
+            (
+                f"n={n}: SETTLED still owes {owed!r}: a decision that owes runs or an outcome "
+                "is not settled, and owed work does not rest on main. Run or record it, then "
+                "drop `owed`"
+            )
+        ]
 
 
 #: The exact algebraic houses adopted on 23 October 2026 (think-ot5c), each drawn
@@ -436,17 +446,190 @@ def test_the_exact_algebraic_houses_are_regularized_and_nothing_is_owed() -> Non
     assert "think-mbdw" not in dict(defaults.deferrals()).values()
 
 
-def test_a_regularization_owed_is_its_own_state_and_names_its_bead() -> None:
-    # The state stays for a capability a later count may want: an entry `OWED` must name
-    # the bead that owes it, and one that names none, or a state the gate does not know,
-    # fails the gate.
+def test_a_synthetic_owed_state_fails_the_gate_bead_or_none(tmp_path: Path) -> None:
+    # The owner, 26 October 2026: "When something lands on our main rendered lists, the
+    # regularization should be done." `regularization-owed` is retired: an entry giving
+    # it fails, even naming an open bead that owes the work, and so does a record's row
+    # that reads it, as does a state the gate does not know.
     n = min(n for n, held in defaults.SETTLED.items() if held.state == defaults.DECIDED)
-    unowned = {**defaults.SETTLED, n: defaults.SETTLED[n]._replace(state=defaults.OWED)}
-    found, _listed = defaults.state_problems(settled=unowned)
-    assert f"n={n}: a regularization owed names the bead that owes it in `owed`" in found
+    owed = defaults.SETTLED[n]._replace(state=defaults.OWED, owed="think-aaaa: the runs")
+    found, _listed = defaults.state_problems(settled={**defaults.SETTLED, n: owed})
+    assert (
+        f"n={n}: SETTLED gives state 'regularization-owed', which is retired: settle the "
+        "count decided no better on its runs, or exempt it on the owner's word"
+    ) in found
+    assert any(problem.startswith(f"n={n}: SETTLED still owes ") for problem in found)
     unknown = {**defaults.SETTLED, n: defaults.SETTLED[n]._replace(state="owed")}
     found, _listed = defaults.state_problems(settled=unknown)
     assert f"n={n}: SETTLED gives state 'owed'" in found
+
+    record = _record()
+    row = _first_state(record, defaults.REGULAR_AS_PUBLISHED)
+    row["state"] = defaults.OWED
+    found, _listed = defaults.state_problems(_write(tmp_path, record))
+    assert found == [
+        (
+            f"n={row['n']} is regularization-owed, which is retired: nothing on main rests "
+            "unregularized behind an open bead. Regularize it or decide it on its witness, or "
+            "record the owner's exemption"
+        )
+    ]
+
+
+# --------------------------------------------------------------------------------------
+# An exemption is the owner's alone (section E of the intake review of 26 October 2026):
+# the owner's words, the day given and the file that holds them, and a review date within
+# fourteen days of them. The quote below is the owner's of 23 October 2026, which the
+# policy's section 13 records; a test lends it to an exemption, since none carries the
+# owner's word yet.
+# --------------------------------------------------------------------------------------
+
+WORD = defaults.OwnerWord(
+    "so they look a little chaotic",
+    "2026-10-23",
+    "docs/project/policies/regularization-policy.md#13-flip-regularization",
+)
+DAY = date(2026, 10, 26)
+
+
+def _exempt(n: int, **change: object) -> dict[int, defaults.Settled]:
+    """`SETTLED` with count `n`'s exemption given the owner's word and a review date."""
+    held = defaults.SETTLED[n]._replace(owner_word=WORD, review_by="2026-11-06")
+    return {**defaults.SETTLED, n: held._replace(**change)}
+
+
+def test_a_recorded_owner_exemption_passes_and_an_unworded_one_fails() -> None:
+    exempt = sorted(n for n, held in defaults.SETTLED.items() if held.state == defaults.EXEMPT)
+    if not exempt:
+        pytest.skip("the data holds no exemption")
+    n = exempt[0]
+    unratified = frozenset(exempt) - {n}
+    found, listed = defaults.state_problems(
+        settled=_exempt(n), unratified=unratified, today=DAY
+    )
+    assert found == []
+    assert not any(line.startswith(f"n={n} is exempt") for line in listed)
+    # Without the owner's word, and with no grace for it, the exemption fails.
+    found, _listed = defaults.state_problems(unratified=unratified, today=DAY)
+    assert found == [
+        (
+            f"n={n} is exempt without the owner's word: an exemption is the owner's alone. "
+            "Record the owner's words, the day and the file that holds them (OwnerWord), and a "
+            f"review date within {defaults.EXEMPTION_REVIEW_DAYS} days of them, or regularize "
+            "the count"
+        )
+    ]
+
+
+@pytest.mark.parametrize(
+    ("change", "problem"),
+    [
+        (
+            {"owner_word": WORD._replace(quote="exempt it, it is fine")},
+            (
+                "{n}: docs/project/policies/regularization-policy.md does not hold the owner's "
+                "words the exemption quotes: 'exempt it, it is fine'"
+            ),
+        ),
+        (
+            {"owner_word": WORD._replace(recorded_in="an agent's summary")},
+            (
+                "{n}: the owner's word is recorded in \"an agent's summary\", which names no "
+                "file in the repository"
+            ),
+        ),
+        (
+            {"owner_word": WORD._replace(said_on="last week")},
+            "{n}: the owner's word gives no day (YYYY-MM-DD): 'last week'",
+        ),
+        (
+            {"review_by": None},
+            "{n}: an exemption names the day it is reviewed by (YYYY-MM-DD): None",
+        ),
+        (
+            {"review_by": "2026-11-07"},
+            (
+                "{n}: the exemption's review date, 2026-11-07, is more than 14 days after the "
+                "owner's word of 2026-10-23"
+            ),
+        ),
+        (
+            {"review_by": "2026-10-25"},
+            (
+                "{n}: the exemption's review date, 2026-10-25, has passed: review it with the "
+                "owner and record the owner's word again, or regularize the count"
+            ),
+        ),
+    ],
+)
+def test_an_exemption_fails_without_the_owner_recorded_word_or_a_current_review(
+    change: dict[str, object], problem: str
+) -> None:
+    exempt = sorted(n for n, held in defaults.SETTLED.items() if held.state == defaults.EXEMPT)
+    if not exempt:
+        pytest.skip("the data holds no exemption")
+    n = exempt[0]
+    unratified = frozenset(exempt) - {n}
+    found, _listed = defaults.state_problems(
+        settled=_exempt(n, **change), unratified=unratified, today=DAY
+    )
+    assert found == [f"n={problem.format(n=n)}"]
+
+
+def test_only_an_exemption_carries_the_owner_word() -> None:
+    n = min(n for n, held in defaults.SETTLED.items() if held.state == defaults.DECIDED)
+    settled = {**defaults.SETTLED, n: defaults.SETTLED[n]._replace(owner_word=WORD)}
+    found, _listed = defaults.state_problems(settled=settled, today=DAY)
+    assert found == [f"n={n}: only an exemption carries the owner's word and a review date"]
+
+
+def test_the_four_unratified_exemptions_wait_for_the_owner_until_their_day() -> None:
+    """The four decimal Kingbird witnesses were set aside by an agent, and an exemption
+    is the owner's alone: they stand until `UNRATIFIED_UNTIL`, listed for the owner, and fail
+    after it. The set only shrinks: a count it names that is not such an exemption fails,
+    and it names no other count."""
+    assert frozenset({39, 55, 290, 291}) >= defaults.UNRATIFIED
+    record = _record()
+    rows = {row["n"]: row for row in record["states"]}
+    assert defaults.unratified_exemptions(
+        rows, defaults.SETTLED, defaults.UNRATIFIED
+    ) == sorted(defaults.UNRATIFIED)
+    until = date.fromisoformat(defaults.UNRATIFIED_UNTIL)
+    assert until - date(2026, 10, 26) == timedelta(days=defaults.EXEMPTION_REVIEW_DAYS)
+    found, listed = defaults.state_problems(today=until)
+    assert found == []
+    waiting = [line for line in listed if defaults.AWAITING_WORD in line]
+    assert [line.split()[0] for line in waiting] == [
+        f"n={n}" for n in sorted(defaults.UNRATIFIED)
+    ]
+    found, listed = defaults.state_problems(today=until + timedelta(days=1))
+    assert found == [
+        (
+            f"n={n} is exempt without the owner's word (UNRATIFIED held it until "
+            f"{defaults.UNRATIFIED_UNTIL}): an exemption is the owner's alone. Record the "
+            "owner's words, the day and the file that holds them (OwnerWord), and a review "
+            f"date within {defaults.EXEMPTION_REVIEW_DAYS} days of them, or regularize the "
+            "count"
+        )
+        for n in sorted(defaults.UNRATIFIED)
+    ]
+    if defaults.UNRATIFIED:
+        n = min(defaults.UNRATIFIED)
+        found, _listed = defaults.state_problems(settled=_exempt(n), today=DAY)
+        assert found == [
+            (
+                f"n={n}: UNRATIFIED names it, but it is not an exemption without the owner's "
+                "word on its witness; take it off"
+            )
+        ]
+    m = min(n for n, held in defaults.SETTLED.items() if held.state == defaults.DECIDED)
+    found, _listed = defaults.state_problems(unratified=defaults.UNRATIFIED | {m}, today=DAY)
+    assert found == [
+        (
+            f"n={m}: UNRATIFIED names it, but it is not an exemption without the owner's word "
+            "on its witness; take it off"
+        )
+    ]
 
 
 def test_a_settled_entry_the_layer_decides_unaided_fails_the_gate(tmp_path: Path) -> None:
@@ -1639,16 +1822,19 @@ def test_the_records_tier_passes_the_base_and_requires_it_held(
     step(context)
     assert observed[-1][-1] == "HEAD^1"
     output = "regularization state check passed: ...\nCORRECTED is checked as declared"
-    with pytest.raises(validate.StepFailureError, match="CORRECTED is held to the record"):
+    with pytest.raises(
+        validate.StepFailureError, match="moved houses and CORRECTED are held to the record"
+    ):
         step(context)
 
 
-def test_the_base_is_read_only_where_a_count_is_deferred(
+def test_the_base_is_read_whatever_is_deferred(
     monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
 ) -> None:
-    """Review D5 of #660: the gate read the base before anything else, so a clone without
-    the merge base failed with nothing deferred. Now it reads the base only where the list
-    names a count, and says so either way."""
+    """Review D5 of #660 read the base only where the list named a count, so a clone
+    without the merge base passed while nothing was deferred. Every house a change moves
+    is held to the base now, so `--base-ref` reads it whatever is deferred, and a shallow
+    clone fails naming the remedy (`UNSHALLOW`); without `--base-ref` nothing is read."""
 
     def unread(ref: str) -> defaults.Base:
         raise AssertionError(f"read {ref}")
@@ -1656,13 +1842,88 @@ def test_the_base_is_read_only_where_a_count_is_deferred(
     monkeypatch.setattr(defaults, "base_record", unread)
     monkeypatch.setattr(defaults, "PENDING_ALLOWED", {})
     monkeypatch.setattr(defaults, "CORRECTED", {})
-    assert defaults.check_state("origin/main") == 0
-    assert (
-        f"{defaults.HELD_TO_BASE} origin/main; nothing is deferred" in capsys.readouterr().out
-    )
-    monkeypatch.setattr(defaults, "PENDING_ALLOWED", {68: "think-aaaa: a correction"})
     with pytest.raises(AssertionError, match="read origin/main"):
         defaults.check_state("origin/main")
+    assert defaults.check_state(None) == 0
+    assert "moved houses and CORRECTED are checked as declared" in capsys.readouterr().out
+
+
+def test_todays_main_passes_the_gate(capsys: pytest.CaptureFixture[str]) -> None:
+    """The committed record, held to its own commit, passes: nothing rests owed, every
+    exemption has the owner's word or waits for it within `UNRATIFIED_UNTIL`, and no house
+    has moved without its regularizations."""
+    assert defaults.check_state("HEAD") == 0
+    out = capsys.readouterr().out
+    assert f"{defaults.HELD_TO_BASE} HEAD: this change moves" in out
+    assert "0 regularization owed" in out
+
+
+def _moved(rows: dict, n: int, **change: str) -> dict:
+    """The base's rows, with count `n`'s witness as it identified itself before a change
+    that moves its house."""
+    return {**rows, n: {**rows[n], "witness": {**rows[n]["witness"], **change}}}
+
+
+def test_a_house_change_with_both_regularizations_passes() -> None:
+    """A change that moves a house and regularizes it, generally and by flip, in the same
+    change passes: the count rests on its new witness and its flip pose, decided again
+    from its picture, is the one the flip record holds."""
+    record = _record()
+    rows = {row["n"]: row for row in record["states"]}
+    n = _first_state(record, defaults.REGULARIZED_STATE)["n"]
+    base = _base(_moved(rows, n, revision="an-earlier-revision"))
+    found, listed = defaults.state_problems(base=base)
+    assert found == []
+    assert f"{defaults.HELD_TO_BASE} origin/main: this change moves 1 house ({n})" in listed
+
+
+def test_a_house_change_without_its_regularizations_fails(tmp_path: Path) -> None:
+    """The owner, 26 October 2026: "When something lands on our main rendered lists, the
+    regularization should be done." A change that moves a house and leaves it pending, or
+    exempt without the owner's word, or its flip pose unrecorded, fails."""
+    record = _record()
+    rows = {row["n"]: dict(row) for row in record["states"]}
+    rule = (
+        "this change moves its house since origin/main's record, and a change that moves "
+        "a house regularizes it, generally and by flip, in the same change"
+    )
+
+    # Its witness moved, and the strong generators have not decided the new one.
+    pending = _first_state(record, defaults.REGULAR_AS_PUBLISHED)
+    n = pending["n"]
+    pending["state"] = defaults.PENDING
+    found, _listed = defaults.state_problems(
+        _write(tmp_path, record), base=_base(_moved(rows, n, revision="an-earlier-revision"))
+    )
+    assert [problem.split(". Run")[0] for problem in found] == [
+        f"n={n} is pending: {pending['why']}"
+    ]
+
+    # Its witness file changed under an exemption no owner has worded.
+    if defaults.UNRATIFIED:
+        m = min(defaults.UNRATIFIED)
+        found, _listed = defaults.state_problems(base=_base(rows, frozenset({m})), today=DAY)
+        assert found == [
+            (
+                f"n={m} reads exempt: {rule}. Run both strong generators on the new witness "
+                "and select, or settle it decided no better, before it lands "
+                '(result-import.md, "Adopt a House, Then Regularize It")'
+            )
+        ]
+
+    # Its general regularization is done, and its flip pose is not the record's.
+    k = _first_state(_record(), defaults.REGULARIZED_STATE)["n"]
+
+    def turned(counts: Sequence[int]) -> dict[int, dict[str, object]]:
+        return {count: {"n": count, "rotate": 90} for count in counts}
+
+    found, _listed = defaults.state_problems(base=_base(rows, frozenset({k})), poses=turned)
+    assert found == [
+        (
+            f"n={k}: {rule}; the flip record's pose is not the one its picture takes now. Run "
+            "`python -m devtools.flip_regularization --update`"
+        )
+    ]
 
 
 def _repository(root: Path) -> None:

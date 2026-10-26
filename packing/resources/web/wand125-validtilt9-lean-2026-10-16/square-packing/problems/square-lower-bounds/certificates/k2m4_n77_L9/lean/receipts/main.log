@@ -1,0 +1,13 @@
+39f42605c45e3c084f5de66e900c2b3e862356bee756db5d730ef5e3dc0904f9  Sqpack/V9/Main.lean
+9bfeda3634d91245b417a1fdc6f6c5f7d03b4c70d6b5bf2b1c27456863faae0d  Axioms9.lean
+Lean (version 4.33.1, aarch64-unknown-linux-gnu, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)
+MAIN_START 2026-10-15T20:59:11Z
+TIME 584.27 230597216
+MAIN_EXIT 0
+AX_START 2026-10-15T21:08:56Z
+'SquarePacking.LemmaELeaf.validTilt9' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SquarePacking.LemmaELeaf.valid9' depends on axioms: [propext, Classical.choice, Quot.sound]
+'SquarePacking.LemmaELeaf.bentz4' depends on axioms: [propext, Classical.choice, Quot.sound]
+TIME 222.44 230750148
+AX_EXIT 0
+END 2026-10-15T21:12:38Z

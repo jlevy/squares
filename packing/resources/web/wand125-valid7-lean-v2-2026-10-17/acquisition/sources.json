@@ -1,0 +1,107 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-26T05:25Z",
+  "git_scope": "A blobless clone of the single public branch fetched for #537 on 26 October 2026 (head 7a47ab9), with a sparse checkout of 649a920 (2026-10-17T23:45:52Z), 'lean/valid7: Valid7 in the Lean kernel, version 2', which the author's comment on #537 of 18 October names; lean/valid7/ is unchanged from it to the head. The scope is lean/valid7/ and the root LICENSE.md. lean/valid7/ has no LICENSE of its own and is not one of the folders the root LICENSE.md says carry MIT from wand125's earlier repositories, so nothing is retained: every file is pinned by its SHA-256 here, and read in the packet's README. The release valid7-lean-v2's three assets are pinned by the digests lean/valid7/release-assets.sha256 states, and none is downloaded. Nothing in the tree was executed.",
+  "sources": [
+    {
+      "id": "wand125-square-packing",
+      "source_url": "https://github.com/wand125/square-packing",
+      "source_ref": "649a92042b4b79dda1eca1749c34029aee60990e",
+      "source_commit": "649a92042b4b79dda1eca1749c34029aee60990e",
+      "committed_utc": "2026-10-17T23:45:52Z",
+      "git_tree": "1683b111904dabb304abda0cf94ad116e78425ff",
+      "archived_path": "packing/resources/web/wand125-valid7-lean-v2-2026-10-17/square-packing",
+      "subtree_manifest": "packing/resources/web/wand125-valid7-lean-v2-2026-10-17/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "LICENSE.md",
+        "lean/valid7"
+      ],
+      "subtree_file_count": 12,
+      "subtree_total_bytes": 6108213,
+      "retained_file_count": 0,
+      "retained_total_bytes": 0,
+      "compressed": [],
+      "pinned_only": [
+        {
+          "path": "LICENSE.md",
+          "bytes": 603,
+          "sha256": "5dbc1f8b773b0a66c3d8b4ebf034a8cd795df418652ce8bf2020cb21b1597960",
+          "reason": "Retained byte-identical by the 14 October closed-form packet",
+          "identical_to": "packing/resources/web/wand125-closed-form-2026-10-14/square-packing/LICENSE.md"
+        },
+        {
+          "path": "lean/valid7/Axioms7.lean",
+          "bytes": 283,
+          "sha256": "8faee6c95353cc695602a115945f6af17e10a4857398a461c975119d1b12650f",
+          "reason": "No licence is stated for the folder; pinned by digest and read in the README. generated-sources.sha256 (6,084,786 bytes) is read by devtools.audit_valid7_roots from a checkout held to this digest."
+        },
+        {
+          "path": "lean/valid7/README.md",
+          "bytes": 8899,
+          "sha256": "ff030a9c73c455e6a00eb9caa545501c235f8ffd69b1c4332284318bbcee85c1",
+          "reason": "No licence is stated for the folder; pinned by digest and read in the README. generated-sources.sha256 (6,084,786 bytes) is read by devtools.audit_valid7_roots from a checkout held to this digest."
+        },
+        {
+          "path": "lean/valid7/expected/axioms.txt",
+          "bytes": 282,
+          "sha256": "810e40fa9ca064c9aeb4ae7dd15984e60feff845a072f7133d9f59c7bbc99863",
+          "reason": "No licence is stated for the folder; pinned by digest and read in the README. generated-sources.sha256 (6,084,786 bytes) is read by devtools.audit_valid7_roots from a checkout held to this digest."
+        },
+        {
+          "path": "lean/valid7/expected/statement.txt",
+          "bytes": 226,
+          "sha256": "4b917bac4bb673f29aec0e1bd2052da59585ad537c5a1fb7839f7b8566eb3cc6",
+          "reason": "No licence is stated for the folder; pinned by digest and read in the README. generated-sources.sha256 (6,084,786 bytes) is read by devtools.audit_valid7_roots from a checkout held to this digest."
+        },
+        {
+          "path": "lean/valid7/fetch.sh",
+          "bytes": 1071,
+          "sha256": "0095e5770d3d153c4163bf21b922faad8ca6a5e45110561d345fec590fac2cf1",
+          "reason": "No licence is stated for the folder; pinned by digest and read in the README. generated-sources.sha256 (6,084,786 bytes) is read by devtools.audit_valid7_roots from a checkout held to this digest."
+        },
+        {
+          "path": "lean/valid7/generated-sources.sha256",
+          "bytes": 6084786,
+          "sha256": "dce7a93466373e0acc6d91729d8aa3ab39fc27b15a97b3233c39c3a97fe746b0",
+          "reason": "No licence is stated for the folder; pinned by digest and read in the README. generated-sources.sha256 (6,084,786 bytes) is read by devtools.audit_valid7_roots from a checkout held to this digest."
+        },
+        {
+          "path": "lean/valid7/library.sha256",
+          "bytes": 5271,
+          "sha256": "e00d7adb6e005536a77e73f123320bd55ccf780fc6162d150f63da4389864a43",
+          "reason": "No licence is stated for the folder; pinned by digest and read in the README. generated-sources.sha256 (6,084,786 bytes) is read by devtools.audit_valid7_roots from a checkout held to this digest."
+        },
+        {
+          "path": "lean/valid7/receipts/axioms.log",
+          "bytes": 1267,
+          "sha256": "9644362e1116c3b301d69b4bc52b17d21fc8a71409b6e2be8b18713ac6011786",
+          "reason": "No licence is stated for the folder; pinned by digest and read in the README. generated-sources.sha256 (6,084,786 bytes) is read by devtools.audit_valid7_roots from a checkout held to this digest."
+        },
+        {
+          "path": "lean/valid7/receipts/main.log",
+          "bytes": 822,
+          "sha256": "771ce63214b433e397521dcab515aa23c7acfb1a7f827d891bc143a1aabb10c4",
+          "reason": "No licence is stated for the folder; pinned by digest and read in the README. generated-sources.sha256 (6,084,786 bytes) is read by devtools.audit_valid7_roots from a checkout held to this digest."
+        },
+        {
+          "path": "lean/valid7/release-assets.sha256",
+          "bytes": 252,
+          "sha256": "8d4585941e4a354805302822a84c162c3fce95af492a9c373cdb3cb0b09a7a78",
+          "reason": "No licence is stated for the folder; pinned by digest and read in the README. generated-sources.sha256 (6,084,786 bytes) is read by devtools.audit_valid7_roots from a checkout held to this digest."
+        },
+        {
+          "path": "lean/valid7/verify.py",
+          "bytes": 4451,
+          "sha256": "726a72251727bb040bb84cf2e66387e5c0f1a3d8ada210fbb15d654821c90762",
+          "reason": "No licence is stated for the folder; pinned by digest and read in the README. generated-sources.sha256 (6,084,786 bytes) is read by devtools.audit_valid7_roots from a checkout held to this digest."
+        }
+      ],
+      "license": "No licence is stated for lean/valid7/: the root LICENSE.md says each top-level project folder keeps the licence it was published under and that a folder with no LICENSE takes the nearest enclosing folder's, and neither lean/ nor the root carries one. The library and the statement it proves are Evan Daniel's, MIT. The commit names Claude as co-author. Nothing is retained, so the packet rests on no licence.",
+      "claims": [
+        "lean/valid7/README.md says the generated Sqpack/V7/Main.lean proves theorem valid7 : Bentz.Valid7, theorem bentz : \u2200 k : \u2115, 6 \u2264 k \u2192 minSide (k ^ 2 - 3) = k and theorem validTilt7 : Bentz.ValidTilt7 in namespace SquarePacking.LemmaELeaf, each depending on axioms [propext, Classical.choice, Quot.sound] (receipts/axioms.log, expected/axioms.txt), with no sorry and no native_decide, every generated module a decide +kernel check, re-checking version 1's theorem from the same 9,800 per-root certificates (every file matched its v7cert.sha256 line) on Evan Daniel's library at wand125/square-packing c5c7f00 (branch validtilt9-kernel, evand/square-packing PR #8), with RowMinN.lean and a changed LemmaEKM.lean for kernel speed.",
+        "generated-sources.sha256 lists the SHA-256 of the 62,626 generated files: Main.lean, the 9,800 root modules Sqpack/V7/RNNNNN.lean and 52,825 leaf and row-group modules under their roots; library.sha256 the 58 library files of the closure and the three build pins; release-assets.sha256 the release valid7-lean-v2's v7-sources.tar.zst, v7r-certs.tar.zst and v7r-logs.tar.zst.",
+        "The README reports one c4a-highmem-48 Spot VM (48 Arm vCPUs, 376 GB) running 29.4 hours, 82,233 tasks returning 0, about 798 CPU-hours: re-certification 19.4, writing sources 0.3, leaf modules 639.3 (peak 37.0 GB), row groups 127.3 (35.3 GB), root modules 11.4 (7.8 GB), Main.lean 38 s and Axioms7.lean 30 s at 50.6 GB; and version 1's root checks at about 6,650 CPU-hours."
+      ]
+    }
+  ]
+}

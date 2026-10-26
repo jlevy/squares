@@ -1,0 +1,4 @@
+{
+  "format": "intake-ledger-github-v1",
+  "items": [{"report":"#824","kind":"issue","number":824,"url":"https://github.com/jlevy/squares/issues/824","author":"evand","created_at":"2026-10-26T03:52:18Z","state":"open","closed_at":null,"title":"s(299) ≤ 17.803695435333: registration request"}]
+}

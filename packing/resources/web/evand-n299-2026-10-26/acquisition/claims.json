@@ -1,0 +1,12 @@
+{
+  "format": "upper-bound-report-claims-v1",
+  "issue": "https://github.com/jlevy/squares/issues/824",
+  "source": "https://github.com/evand/square-packing",
+  "revision": "6067db5bf4d41dab7f0e1475e9fa845c0c6d2133",
+  "read_on": "2026-10-26",
+  "read_at_main": "9ebde24df54be5bca31984d1b0eec4d774374e82",
+  "horizon": 324,
+  "results": [
+    {"n": 299, "certificate": "search/packer/candidates/s299-1025.cert", "format": "evand-cert", "requested": true, "replayed": true, "offered_side": "17.803695435333", "printed_in": "https://github.com/jlevy/squares/issues/824", "exact_side": "8901847717666168847717657266821/500000000000000000000000000000", "ceiling": "17.8036954353323377", "first_committed": "2026-10-26T03:30:38Z", "grid_side": "18", "case": {"source_key": "[Kingbird]", "holders": "the Kingbird catalogue, verified by T-101's exact ceiling", "result": "T-101", "reported_value": "17.82287565553229", "verified_value": "17.82287565553230", "evidence": ["E-evand-exact-ceilings-2026-10-05-exact-replay", "E-evand-exact-ceilings-2026-10-05-source-replay", "E-regularized-bounds-2026-10-12-exact-decision"], "reported_rounding": "unstated", "exact_side": "142583005244258362363432293067/8000000000000000000000000000", "relation": "below", "difference": "19180220199957599993722099733/1000000000000000000000000000000", "reported_relation": "below"}, "pending": [], "smallest": "this certificate"}
+  ]
+}

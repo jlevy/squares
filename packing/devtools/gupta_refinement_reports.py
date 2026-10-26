@@ -202,7 +202,24 @@ def validate_job(row: Any, certificate: legacy.Certificate, control: str) -> Non
     )
 
 
-def check_certification() -> dict[int, Any]:
+def check_certification(
+    numbers: list[int] | None = None, *, replay: bool = False
+) -> dict[int, Any]:
+    """Admit the retained receipt; with ``replay``, decide the selected counts again.
+
+    A replay holds each fresh job to its retained row with the kernel's
+    ``replay_receipt`` and never writes the receipt, so following the evidence's replay
+    command reproduces the evidence instead of replacing it (RR-4 of
+    ``review-2026-10-11-recent-register-rungs.md``). ``certify`` is what writes it.
+    """
+    selected = list(NUMBERS) if numbers is None else numbers
+    if (
+        not selected
+        or any(type(n) is not int for n in selected)
+        or len(set(selected)) != len(selected)
+        or set(selected) - set(NUMBERS)
+    ):
+        raise kernel.ReportError("empty, repeated or unknown replay selection")
     facts = read_facts()
     path = receipt_path()
     ensure_private(path)
@@ -223,6 +240,14 @@ def check_certification() -> dict[int, Any]:
         validate_job(row, facts[n], control)
         if control == "positive":
             positives[n] = row
+    if replay:
+        kernel.replay_receipt(
+            value,
+            facts,
+            selected,
+            witness_prefix=WITNESS_PREFIX,
+            claim_limitations=CLAIM_LIMITATIONS,
+        )
     return positives
 
 
@@ -304,7 +329,13 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest="command", required=True)
     commands.add_parser("import-facts")
-    commands.add_parser("check")
+    check = commands.add_parser("check")
+    check.add_argument(
+        "--replay",
+        action="store_true",
+        help="decide the selected counts' jobs again and hold them to the retained rows",
+    )
+    check.add_argument("--n", type=int, nargs="+", help="the counts to replay (default: all)")
     replay = commands.add_parser("certify")
     replay.add_argument("--jobs-dir", type=Path, required=True)
     replay.add_argument("--workers", type=int, default=2)
@@ -319,8 +350,15 @@ def main() -> int:
     elif args.command == "certify":
         certify(args.jobs_dir, workers=args.workers, timeout=args.timeout)
     elif args.command == "check":
-        check_certification()
+        check_certification(args.n, replay=args.replay)
         print("#438: seventeen positives and thirty-four complete native controls admitted")
+        if args.replay:
+            counts = len(args.n) if args.n else len(NUMBERS)
+            print(
+                f"#438: {counts * len(JOBS)} jobs at {counts} "
+                f"{'count' if counts == 1 else 'counts'} decided again and equal to the "
+                "retained rows"
+            )
     else:
         certificate = read_fact(args.n)
         row = kernel.run_case(

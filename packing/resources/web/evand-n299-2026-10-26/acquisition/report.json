@@ -1,0 +1,63 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/824",
+  "author": "Evan Daniel",
+  "source_key": "[Daniel n299 2026-10-26]",
+  "report_evidence": "E-evand-n299-certificate-report",
+  "receipt_format": "evand-n299-exact-replay-v1",
+  "witness_prefix": "W-evand-n299-n",
+  "claim_limitations": "Complete 1be69ca rational centre/half-angle certificate, unchanged at 6067db5, read exactly from the retained source file. Finite construction feasibility only; no KKT, local minimum, same-packing, rigidity, novelty, priority or global optimality claim.",
+  "read_on": "2026-10-26",
+  "read_at_main": "9ebde24df54be5bca31984d1b0eec4d774374e82",
+  "certificates": [
+    {
+      "n": 299,
+      "path": "search/packer/candidates/s299-1025.cert",
+      "format": "evand-cert",
+      "offered": "17.803695435333",
+      "printed_in": "https://github.com/jlevy/squares/issues/824",
+      "first_committed": "2026-10-26T03:30:38Z"
+    }
+  ],
+  "requested": [
+    299
+  ],
+  "replayed": [
+    299
+  ],
+  "houses": [
+    {
+      "n": 299,
+      "reader": "[evand exact optima 2026-10-05]",
+      "source_key": "[Kingbird]",
+      "holders": "the Kingbird catalogue, verified by T-101's exact ceiling",
+      "result": "T-101",
+      "reported_value": "17.82287565553229",
+      "verified_value": "17.82287565553230",
+      "evidence": [
+        "E-evand-exact-ceilings-2026-10-05-exact-replay",
+        "E-evand-exact-ceilings-2026-10-05-source-replay",
+        "E-regularized-bounds-2026-10-12-exact-decision"
+      ],
+      "reported_rounding": "unstated"
+    }
+  ],
+  "pending": [],
+  "register": {
+    "title": "Evan Daniel's new packing at 299, at 1be69ca, issue 824",
+    "headline": "Daniel's new arrangement at 299, 1.92e-2 below the catalogue's construction",
+    "significance": 3,
+    "source_checks": "The certificate's header calls it a dilation by dilate_cert.py, delta 1e-12, of the binary64 packing s299-1025.input.txt, side 17.803695435314534, and names verify_cert.py, byte-identical to the copy the n183 packet retains; the issue reports that the source's two exact checkers, verify_cert.py and verify_cert2.py, both print VALID. The JSON report states that the exact solver did not converge to a KKT point: its 80-digit point, s299-1025.exact.txt, has the pair (235, 281) overlapping by 0.711 and is no packing, and the issue says local optimality is not established. Those statements are the author's; no source program ran here.",
+    "credit": "Credit Evan Daniel (https://github.com/evand/square-packing), who reports a new packing, 'not a refinement of the register's 33/2 + sqrt(7)/2 construction', built by his own implementation of Chris Deotte's multi-gadget fault-line DP, and asks that Chris Deotte be credited for the method and for the start: the s(334) packing, side 18.795715128, in Deotte's public Kaggle notebook 'squares-in-squares-ftmc-milp-refill-22-311' (output of 24 October 2026). The issue says the source relaxed that packing, added an L of 39 squares to reach 373, and composed corner gadgets of that 373 packing and an earlier 299 packing of its own along a diagonal fault. That lineage is the author's statement; no Deotte packing is retained here. Two Kaggle per-puzzle leaderboard entries the issue quotes state a side and no packing, so neither is a report: team Amin's 17.802718854399 of 23 October and team Chris Deotte's 17.798169713703 of 25 October, both below this side. The source's credits say its work was produced by Claude (Anthropic) under human direction, and the commit carries a Co-Authored-By trailer naming Claude.",
+    "next_rung": "Independently review the retained replay and the certificate (stage 4), a mapped review whose acceptance would raise both rungs, then adopt it at 299 under the house rule, with both strong generators' regularization and the flip of the new house in the same change.",
+    "bead": "think-3xn9",
+    "bibliography": {
+      "authors": [
+        "Daniel"
+      ],
+      "lineage": "independent",
+      "credit": "Daniel after Deotte",
+      "note": "One complete exact certificate at evand/square-packing@1be69ca8a088035ccced0e279e40abea81e1d9f3, unchanged at the head 6067db5bf4d41dab7f0e1475e9fa845c0c6d2133 that the packet pins, reported on issue 824: s(299) <= 8901847717666168847717657266821/(5*10^29), a dilation of a binary64 packing the source calls new, built by its implementation of Chris Deotte's multi-gadget fault-line DP from a start the issue credits to Deotte's public Kaggle s(334) packing. The binary64 packing it dilates, the pre-descent packing, the exact solver's failed 80-digit point and its report, and the source store's prior facts at 299 are retained beside it. For this certificate the source names nothing of this project's beyond the comparison its _prior.json draws from the register, so the key is independent, as the 24 October key of its Kaggle descents is. MIT-licensed; Claude assistance disclosed. Local optimality is not established, by the issue's word; no global optimality claim. Retained in web/evand-n299-2026-10-26/."
+    }
+  }
+}

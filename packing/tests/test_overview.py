@@ -6347,7 +6347,9 @@ def test_result_preview_keeps_claim_scope_and_links_with_full_context_in_fragmen
 #: page to 1,324,108 bytes (+75,893 over main). The measured 1,400,000 ceiling leaves
 #: 75,892 bytes, about 15 rows at the current P90 row plus recent entry (4,917 bytes).
 #: think-xgqg records browser measurements; the upstream 238-result runway below is retained.
-PAGE_CEILINGS = {"index.html": 1_300_000, render_overview.RESULTS_PAGE: 1_400_000}
+#: On 26 October the 250-result page measures 1,418,298 bytes, past 1,400,000, at a P90 row
+#: of 4,674 bytes; the ceiling moves to 1,500,000, room for about 17 more rows (think-v1qe).
+PAGE_CEILINGS = {"index.html": 1_300_000, render_overview.RESULTS_PAGE: 1_500_000}
 #: How many results the results page's ceiling was set to hold, each result past the
 #: register's count at what the table's 90th-percentile row costs now and an average
 #: entry of the seven days: 160 on 14 October and 40 more, then, at 1,250,000 bytes, 217
@@ -6356,8 +6358,9 @@ PAGE_CEILINGS = {"index.html": 1_300_000, render_overview.RESULTS_PAGE: 1_400_00
 #: each, in the 48,385 bytes left). A fixed count, so the room does not slide up with
 #: every registration (#514's review B, finding B1). The intake that passes the count
 #: re-measures the page, its timing included, and either lightens the table or moves
-#: the ceiling as a measured choice (`think-v1qe`).
-RESULTS_ROOM_THROUGH = 238
+#: the ceiling as a measured choice (`think-v1qe`): at 1,500,000 bytes, 250 on 26 October
+#: and 17 more (4,674 bytes each, in the 81,702 bytes left), timing not re-measured.
+RESULTS_ROOM_THROUGH = 267
 
 
 def test_no_page_carries_a_result_overview(

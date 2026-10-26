@@ -734,8 +734,55 @@ def compare(row: dict[str, Any], maintained: dict[str, Any], claimed: Fraction) 
     return problems
 
 
-def run_decide(workers: int, output: Path | None) -> int:
+def write_decide_receipts(
+    name: str, report: dict[str, Any], *, web: Path | None = None
+) -> list[Path]:
+    """Write each packet's part of a ``decide`` report to ``receipts/NAME`` in the packet.
+
+    The packets of T-128, T-130 and T-131 keep this route's six sharp controls per
+    certificate here, beside the kernel's two gross ones in their
+    ``exact-certification.json.xz`` (RR-3 of
+    ``review-2026-10-11-recent-register-rungs.md``), as ``write_receipts`` keeps them for
+    the imports: the poses are left out, which the packet's facts or retained source
+    state, and each row names the SHA-256 of its poses as this route printed them.
+    """
+    if "/" in name or not name.endswith(".json.xz"):
+        raise AreaRouteError("a receipt name is one file name ending in .json.xz")
+    root = WEB if web is None else web
+    written: list[Path] = []
+    for packet in dict.fromkeys(row["packet"] for row in report["rows"]):
+        rows = []
+        for row in report["rows"]:
+            if row["packet"] != packet:
+                continue
+            poses = json.dumps(row["poses"], separators=(",", ":")).encode()
+            rows.append(
+                {
+                    **{field: value for field, value in row.items() if field != "poses"},
+                    "poses_sha256": hashlib.sha256(poses).hexdigest(),
+                }
+            )
+        part = {
+            "format": "half-angle-area-route-receipt-v1",
+            "program": "devtools.check_half_angle_area decide",
+            "packet": packet,
+            "command": report["command"],
+            "started_utc": report["started_utc"],
+            "finished_utc": report["finished_utc"],
+            "wall_seconds": report["wall_seconds"],
+            "rows": rows,
+            "receipts": {packet: report["receipts"].get(packet)},
+            "problems": [p for p in report["problems"] if f"({packet})" in p],
+        }
+        path = root / packet / "receipts" / name
+        path.write_bytes(lzma.compress(_receipt_text(part).encode("utf-8"), preset=6))
+        written.append(path)
+    return written
+
+
+def run_decide(workers: int, output: Path | None, *, receipts: str | None = None) -> int:
     started = time.monotonic()
+    started_utc = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
     found = cases()
     with ProcessPoolExecutor(max_workers=workers) as pool:
         rows = list(pool.map(decide_case, found))
@@ -760,9 +807,17 @@ def run_decide(workers: int, output: Path | None) -> int:
         print(f"retained receipt {packet}: {json.dumps(total)}")
     wall = round(time.monotonic() - started, 2)
     print(f"{len(rows)} certificates, {sum(r['pairs'] for r in rows)} pairs, {wall}s wall")
+    report = {"rows": rows, "receipts": totals, "problems": problems, "wall_seconds": wall}
     if output is not None:
-        report = {"rows": rows, "receipts": totals, "problems": problems, "wall_seconds": wall}
         output.write_text(json.dumps(report, indent=1) + "\n", encoding="utf-8")
+    if receipts is not None:
+        report |= {
+            "command": f"python -m devtools.check_half_angle_area decide --workers {workers}",
+            "started_utc": started_utc,
+            "finished_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+        }
+        for path in write_decide_receipts(receipts, report):
+            print(f"receipt {path.relative_to(REPO).as_posix()}")
     for problem in problems:
         print(f"DISAGREEMENT: {problem}")
     return 1 if problems else 0
@@ -2927,6 +2982,7 @@ def main(argv: list[str] | None = None) -> int:
     deciding = sub.add_parser("decide")
     deciding.add_argument("--workers", type=int, choices=(1, 2), default=2)
     deciding.add_argument("--json", type=Path)
+    deciding.add_argument("--receipts", metavar="NAME")
     imports = sub.add_parser("decide-imports")
     imports.add_argument("--workers", type=int, choices=(1, 2), default=2)
     imports.add_argument("--json", type=Path)
@@ -2941,7 +2997,7 @@ def main(argv: list[str] | None = None) -> int:
     replay.add_argument("--workers", type=int, choices=(1, 2), default=2)
     args = parser.parse_args(argv)
     if args.action == "decide":
-        return run_decide(args.workers, args.json)
+        return run_decide(args.workers, args.json, receipts=args.receipts)
     if args.action == "decide-imports":
         command = " ".join(
             [

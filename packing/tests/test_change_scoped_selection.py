@@ -739,8 +739,8 @@ def test_the_retained_regularization_evidence_selects_the_state_step() -> None:
         assert not selection.is_whole_gate, path
         names = {step.name for step in selection.steps}
         assert (
-            "every drawn picture is regularized, regular as published, decided, owed to an "
-            "open bead or exempt" in names
+            "every drawn picture is regularized, regular as published, decided or exempt on "
+            "the owner's word" in names
         ), path
 
 

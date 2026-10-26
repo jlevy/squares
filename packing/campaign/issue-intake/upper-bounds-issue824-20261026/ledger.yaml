@@ -1,0 +1,43 @@
+format: intake-ledger-v1
+read_at_main: 9ebde24df54be5bca31984d1b0eec4d774374e82
+read_on: '2026-10-26'
+rule: If they are reported in order, then each one should be recorded as a result, as long
+  as each one is stronger than the last. If a stronger result is reported first, then the
+  other one should not be recorded since it is weaker after that, unless there is some key
+  reason it should be recorded.
+lanes: []
+reports:
+- report: '#824'
+  url: https://github.com/jlevy/squares/issues/824
+  kind: issue
+  holders: Evan Daniel
+  reported_at: '2026-10-26T03:52:18Z'
+  bead: think-3xn9
+  claims:
+  - n: 299
+    printed: '17.803695435333'
+    rounding: up
+    exact: 8901847717666168847717657266821/500000000000000000000000000000
+    exact_from: search/packer/candidates/s299-1025.cert at 1be69ca, unchanged at 6067db5 (its
+      header), retained in the evand-n299-2026-10-26 packet (acquisition/claims.json)
+    first_committed: '2026-10-26T03:30:38Z'
+    measured:
+      against: T-101
+      finding: no symmetry pairs it one to one by nearest centres; the optimal assignment,
+        best under the mirror y to s - y, moves 124 squares beyond 0.1 and 243 beyond 1e-2
+        (largest 1.14) and turns 126 squares by up to 39.1 degrees; it has 83 tilted squares,
+        52 turned one way and 31 the other, where T-101 has 38, all at 24.3 degrees; against
+        the source's own binary64 input, one to one, none beyond 1e-9 (largest 2.45e-11)
+      source: packing/resources/web/evand-n299-2026-10-26/measure/identity.json
+    new_packing:
+      source: '#824''s credit section: ''A new packing (not a refinement of the register''s
+        33/2 + sqrt(7)/2 construction), built by a fault-line composition'''
+      continues: Chris Deotte's public Kaggle s(334) packing, by an L-step to 373 and a fault-line
+        composition of corner gadgets with an earlier s(299) of the source's own, as the issue
+        states
+  note: The issue names 1be69ca8, committed at 2026-10-26T03:30:38Z, 21 minutes 40 seconds
+    before the issue (03:52:18Z); the push time was not read.
+exceptions: []
+key_reason_candidates: []
+other_items: []
+cross_check: []

@@ -1,0 +1,10 @@
+root	options	note
+2270	V7_MIXED_CH=1	existing option, trial try2270/E
+4262	V7_SUBM=1 V7_MIXED_CH=1 V7_MAXDEPTH=12	existing options, trial try4262/C
+11715	V7_SUBM=1 V7_MIXED_CH=1 V7_MAXDEPTH=14 V7_SPLIT=6	existing options, trial tryb/11715A
+11827	V7_MAXDEPTH=16 V7_SPLIT=8 (with SUBM, MIXED_CH)	existing options, trial tryb/11827D
+11397	V7_MAXDEPTH=18 V7_SPLIT=10 V7_RSHIFT=3 (with SUBM, MIXED_CH)	existing options, trial tryb/11397E
+12100	V7_TOUCH=1e-9	new option, scripts_manual/
+11424	V7_SGK=8 V7_SPLIT=10	new option, scripts_manual/
+11768	V7_SGK=8 V7_SPLIT=18	new option, scripts_manual/
+8917	V7_SGK=8 V7_SPLIT=18	new option, scripts_manual/

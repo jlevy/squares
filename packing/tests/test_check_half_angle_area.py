@@ -132,6 +132,47 @@ def test_a_control_that_cannot_refuse_is_reported() -> None:
         controls(Fraction(5), lone, decision)
 
 
+def test_a_decide_receipt_keeps_each_packets_rows_and_controls_without_poses(
+    tmp_path: Path,
+) -> None:
+    decision = decide(Fraction(2), GRID, measure=True)
+    sharp = controls(Fraction(2), GRID, decision)
+    poses = [[str(value) for value in pose] for pose in GRID]
+    rows = [
+        {"entry": entry, "packet": packet, "n": 4, "poses": poses, "controls": sharp}
+        for entry, packet in (("T-128", "p-one"), ("T-131", "p-two"), ("T-128", "p-two"))
+    ]
+    report = {
+        "rows": rows,
+        "receipts": {"p-one": {"jobs": 3}, "p-two": {"jobs": 6}},
+        "problems": ["T-131 n=4 (p-two): a pose differs from the maintained routes' input"],
+        "wall_seconds": 1.0,
+        "command": "python -m devtools.check_half_angle_area decide --workers 1",
+        "started_utc": "2026-10-26T00:00:00Z",
+        "finished_utc": "2026-10-26T00:00:01Z",
+    }
+    for packet in ("p-one", "p-two"):
+        (tmp_path / packet / "receipts").mkdir(parents=True)
+    written = route.write_decide_receipts("third.json.xz", report, web=tmp_path)
+    assert [path.parent.parent.name for path in written] == ["p-one", "p-two"]
+    parts = [json.loads(route.lzma.decompress(path.read_bytes())) for path in written]
+    assert [len(part["rows"]) for part in parts] == [1, 2]
+    assert [part["head"]["receipts"] for part in parts] == [
+        {"p-one": {"jobs": 3}},
+        {"p-two": {"jobs": 6}},
+    ]
+    assert parts[0]["head"]["problems"] == []
+    assert parts[1]["head"]["problems"] == report["problems"]
+    digest = hashlib.sha256(json.dumps(poses, separators=(",", ":")).encode()).hexdigest()
+    for part in parts:
+        for row in part["rows"]:
+            assert "poses" not in row
+            assert row["poses_sha256"] == digest
+            assert row["controls"] == sharp
+    with pytest.raises(AreaRouteError, match="one file name"):
+        route.write_decide_receipts("nested/third.json.xz", report, web=tmp_path)
+
+
 def test_all_fifteen_certificates_are_admitted_from_their_packets() -> None:
     found = [(case.entry, case.n) for case in route.cases()]
     assert found == [

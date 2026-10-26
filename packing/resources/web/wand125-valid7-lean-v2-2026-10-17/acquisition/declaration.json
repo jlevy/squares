@@ -1,0 +1,31 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "wand125-square-packing",
+  "source_url": "https://github.com/wand125/square-packing",
+  "source_ref": "649a92042b4b79dda1eca1749c34029aee60990e",
+  "source_commit": "649a92042b4b79dda1eca1749c34029aee60990e",
+  "retrieved_at_utc": "2026-10-26T05:25Z",
+  "git_scope": "A blobless clone of the single public branch fetched for #537 on 26 October 2026 (head 7a47ab9), with a sparse checkout of 649a920 (2026-10-17T23:45:52Z), 'lean/valid7: Valid7 in the Lean kernel, version 2', which the author's comment on #537 of 18 October names; lean/valid7/ is unchanged from it to the head. The scope is lean/valid7/ and the root LICENSE.md. lean/valid7/ has no LICENSE of its own and is not one of the folders the root LICENSE.md says carry MIT from wand125's earlier repositories, so nothing is retained: every file is pinned by its SHA-256 here, and read in the packet's README. The release valid7-lean-v2's three assets are pinned by the digests lean/valid7/release-assets.sha256 states, and none is downloaded. Nothing in the tree was executed.",
+  "archived_dir": "square-packing",
+  "license": "No licence is stated for lean/valid7/: the root LICENSE.md says each top-level project folder keeps the licence it was published under and that a folder with no LICENSE takes the nearest enclosing folder's, and neither lean/ nor the root carries one. The library and the statement it proves are Evan Daniel's, MIT. The commit names Claude as co-author. Nothing is retained, so the packet rests on no licence.",
+  "claims": [
+    "lean/valid7/README.md says the generated Sqpack/V7/Main.lean proves theorem valid7 : Bentz.Valid7, theorem bentz : ∀ k : ℕ, 6 ≤ k → minSide (k ^ 2 - 3) = k and theorem validTilt7 : Bentz.ValidTilt7 in namespace SquarePacking.LemmaELeaf, each depending on axioms [propext, Classical.choice, Quot.sound] (receipts/axioms.log, expected/axioms.txt), with no sorry and no native_decide, every generated module a decide +kernel check, re-checking version 1's theorem from the same 9,800 per-root certificates (every file matched its v7cert.sha256 line) on Evan Daniel's library at wand125/square-packing c5c7f00 (branch validtilt9-kernel, evand/square-packing PR #8), with RowMinN.lean and a changed LemmaEKM.lean for kernel speed.",
+    "generated-sources.sha256 lists the SHA-256 of the 62,626 generated files: Main.lean, the 9,800 root modules Sqpack/V7/RNNNNN.lean and 52,825 leaf and row-group modules under their roots; library.sha256 the 58 library files of the closure and the three build pins; release-assets.sha256 the release valid7-lean-v2's v7-sources.tar.zst, v7r-certs.tar.zst and v7r-logs.tar.zst.",
+    "The README reports one c4a-highmem-48 Spot VM (48 Arm vCPUs, 376 GB) running 29.4 hours, 82,233 tasks returning 0, about 798 CPU-hours: re-certification 19.4, writing sources 0.3, leaf modules 639.3 (peak 37.0 GB), row groups 127.3 (35.3 GB), root modules 11.4 (7.8 GB), Main.lean 38 s and Axioms7.lean 30 s at 50.6 GB; and version 1's root checks at about 6,650 CPU-hours."
+  ],
+  "scope": [
+    "LICENSE.md",
+    "lean/valid7"
+  ],
+  "pinned_only": [
+    {
+      "match": "LICENSE.md",
+      "reason": "Retained byte-identical by the 14 October closed-form packet",
+      "identical_to": "packing/resources/web/wand125-closed-form-2026-10-14/square-packing/LICENSE.md"
+    },
+    {
+      "match": "lean/valid7/**",
+      "reason": "No licence is stated for the folder; pinned by digest and read in the README. generated-sources.sha256 (6,084,786 bytes) is read by devtools.audit_valid7_roots from a checkout held to this digest."
+    }
+  ]
+}

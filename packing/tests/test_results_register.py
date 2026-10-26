@@ -183,6 +183,7 @@ RUNG_4_REVIEWS: list[dict[str, object]] = [
 
 FORMAL_ENTRY: dict[str, object] = {
     **MACHINE_ENTRY,
+    "id": "E-formal",
     "method": "proof-assistant-checked",
     "origin": "replayed-here",
     "performed_by": "repository",
@@ -201,8 +202,85 @@ def _expert(name: str, **changes: object) -> dict[str, object]:
         "verdict": "accepted",
         "checked": ["statement-fidelity", "definitions", "axioms", "build"],
         "independent_of_author": True,
+        "formalization_of": "E-formal",
         **changes,
     }
+
+
+def test_a_formalization_review_counts_only_beside_the_formalization_it_read() -> None:
+    other = dict(FORMAL_ENTRY, id="E-other-formal")
+    experts = [_expert("Expert One"), _expert("Expert Two")]
+    # The review read E-formal, so a build of another formalization earns no rung 5.
+    assert derive_verification([other], experts[:1]) == "V3"
+    assert derive_confirmation([other], experts, open_review=True) == "C3"
+    assert derive_verification([other, FORMAL_ENTRY], experts[:1]) == "V5"
+    # Two experts on two different formalizations are not two reviews of either.
+    split = [experts[0], _expert("Expert Two", formalization_of="E-other-formal")]
+    assert derive_confirmation([FORMAL_ENTRY, other], split, open_review=True) == "C3"
+    # A formalization review that names nothing counts for nothing.
+    unnamed = {k: v for k, v in experts[0].items() if k != "formalization_of"}
+    assert derive_verification([FORMAL_ENTRY], [unnamed]) == "V3"
+
+
+def test_a_formalization_review_names_formal_evidence_the_result_cites() -> None:
+    evidence = {
+        "E-formal": FORMAL_ENTRY,
+        "E-machine": dict(MACHINE_ENTRY, id="E-machine"),
+    }
+    record: dict[str, Any] = {"id": "T-999", "evidence": ["E-formal", "E-machine"]}
+
+    def faults(review: dict[str, object]) -> list[str]:
+        return check_results.formalization_of_problems(record, review, evidence)
+
+    assert faults(_expert("Expert One")) == []
+    assert faults(_expert("Expert One", formalization_of="E-elsewhere")) == [
+        "T-999: formalization review Expert One.md reads E-elsewhere, which it does not cite"
+    ]
+    assert faults(_expert("Expert One", formalization_of="E-machine")) == [
+        (
+            "T-999: formalization review Expert One.md reads E-machine, which is not "
+            "proof-assistant-checked evidence"
+        )
+    ]
+    unnamed = {k: v for k, v in _expert("Expert One").items() if k != "formalization_of"}
+    assert faults(unnamed) == [
+        "T-999: formalization review Expert One.md names no formalization_of"
+    ]
+    adversarial = dict(RUNG_4_REVIEWS[0], formalization_of="E-formal")
+    assert faults(adversarial) == [
+        "T-999: review a.md is no formalization review but names one"
+    ]
+
+
+def test_every_machine_shaped_certificate_resolves_or_is_named_prose(tmp_path: Path) -> None:
+    live = safe_load((check_results.EVIDENCE).read_text(encoding="utf-8"))["evidence"]
+    # The live register passes, so every listed prose certificate is still machine-shaped.
+    assert check_results.certificate_path_problems(live) == []
+    assert {entry["id"] for entry in live} >= check_results.PROSE_CERTIFICATES
+    # A repository-relative and a packing-relative path both resolve while the record
+    # carries both; a mistyped one, an escape and an absolute path do not.
+    held = [
+        dict(MACHINE_ENTRY, id="E-root", certificate="epistemics.md"),
+        dict(MACHINE_ENTRY, id="E-packing", certificate="frontier/results.yaml"),
+        dict(MACHINE_ENTRY, id="E-dir", certificate="packing/frontier/"),
+    ]
+    assert check_results.certificate_path_problems(held) == []
+    for certificate in ("frontier/results.yml", "../outside.md", str(tmp_path)):
+        (problem,) = check_results.certificate_path_problems(
+            [dict(MACHINE_ENTRY, id="E-typo", certificate=certificate)]
+        )
+        assert problem.startswith("E-typo: certificate names no retained file")
+    # An entry that is not machine-shaped is not held, and a listed prose certificate
+    # that stops being machine-shaped is reported.
+    assert (
+        check_results.certificate_path_problems(
+            [dict(MACHINE_ENTRY, id="E-typo", certificate="nowhere", replay_status="failed")]
+        )
+        == []
+    )
+    assert check_results.certificate_path_problems(
+        [{"id": "E-basic-grid-upper", "method": "exact-algebraic"}]
+    ) == ["E-basic-grid-upper: listed among the prose certificates but not machine-shaped"]
 
 
 def test_rung_4_needs_two_distinct_adversarial_reviews_and_human_oversight() -> None:

@@ -1,0 +1,1490 @@
+{
+  "kind": "lean-import-closure/v1",
+  "source_url": "https://github.com/evand/square-packing",
+  "commit": "060c1a1052029f81f30c8a97134ee03666b1bb77",
+  "tree": "0a0d35c1d5b2330f216e3e39163f0e3f84fbfa22",
+  "root": "lean",
+  "targets": [
+    "Sqpack.V7.Bridge",
+    "Sqpack.V7.Data",
+    "Sqpack.LemmaEDec",
+    "Sqpack.LemmaESplit",
+    "Sqpack.CapK",
+    "Sqpack.ExTreeX",
+    "Sqpack.LemmaESplitX",
+    "Sqpack.LemmaZ",
+    "Sqpack.ValidSplit7"
+  ],
+  "toolchain": "leanprover/lean4:v4.33.1",
+  "packages": [
+    {
+      "name": "mathlib",
+      "rev": "0df444a360eaa60ab8c11dca51a86af692955474",
+      "input_rev": "v4.33.1"
+    },
+    {
+      "name": "plausible",
+      "rev": "b7eb3304aeae834b12dda98993a37f6a41f6f0bb",
+      "input_rev": "main"
+    },
+    {
+      "name": "LeanSearchClient",
+      "rev": "5f4d51b81cbd3f6b32b156bfad9056621a040404",
+      "input_rev": "main"
+    },
+    {
+      "name": "importGraph",
+      "rev": "16f02aa7642864af59f1ff0e384a015994db9118",
+      "input_rev": "main"
+    },
+    {
+      "name": "proofwidgets",
+      "rev": "4be2e3d5087eeb272cf5a8853b8f9dd025ef5957",
+      "input_rev": "main"
+    },
+    {
+      "name": "aesop",
+      "rev": "3448c0bcc5ce01b2d1546e483ec3620e32df3d0e",
+      "input_rev": "master"
+    },
+    {
+      "name": "Qq",
+      "rev": "92c15be17b7caf78c2ad767ec40f89052d908d81",
+      "input_rev": "master"
+    },
+    {
+      "name": "batteries",
+      "rev": "4488d40d070b9700d4d5a6aa342f0d40c31b2a2d",
+      "input_rev": "main"
+    },
+    {
+      "name": "Cli",
+      "rev": "6130a47896ce867c6a4a55373441e59e565bad0f",
+      "input_rev": "v4.33.0"
+    }
+  ],
+  "libraries": [
+    "Sqpack"
+  ],
+  "modules": [
+    {
+      "module": "Sqpack.Basic",
+      "path": "lean/Sqpack/Basic.lean",
+      "blob": "cbfe567fe20c6b81899bd1ed6eb8cbd8611c090b",
+      "bytes": 28915,
+      "lines": 453,
+      "imports": [
+        "Mathlib"
+      ],
+      "escapes": {
+        "\\bsorry\\b": 0,
+        "^\\s*axiom\\b": 0,
+        "\\bnative_decide\\b": 0,
+        "\\bofReduceBool\\b": 0,
+        "\\bimplemented_by\\b": 0,
+        "@\\[extern": 0,
+        "debug\\.skipKernelTC": 0,
+        "\\bunsafe\\b": 0,
+        "\\+native\\b": 0,
+        "\\bnative\\s*:=\\s*true\\b": 0,
+        "\\breduce(?:Bool|Nat)\\b": 0,
+        "\\btrustCompiler\\b": 0
+      }
+    },
+    {
+      "module": "Sqpack.Bentz",
+      "path": "lean/Sqpack/Bentz.lean",
+      "blob": "fe5cd3b7cc6fc55eaa5c2a3436925db90fef215f",
+      "bytes": 36739,
+      "lines": 728,
+      "imports": [
+        "Sqpack.MixedMeasure",
+        "Sqpack.BentzData"
+      ],
+      "escapes": {
+        "\\bsorry\\b": 0,
+        "^\\s*axiom\\b": 0,
+        "\\bnative_decide\\b": 0,
+        "\\bofReduceBool\\b": 0,
+        "\\bimplemented_by\\b": 0,
+        "@\\[extern": 0,
+        "debug\\.skipKernelTC": 0,
+        "\\bunsafe\\b": 0,
+        "\\+native\\b": 0,
+        "\\bnative\\s*:=\\s*true\\b": 0,
+        "\\breduce(?:Bool|Nat)\\b": 0,
+        "\\btrustCompiler\\b": 0
+      }
+    },
+    {
+      "module": "Sqpack.Bentz4",
+      "path": "lean/Sqpack/Bentz4.lean",
+      "blob": "f28d6180b778e687b0739edbbffa5259818f2197",
+      "bytes": 5731,
+      "lines": 130,
+      "imports": [
+        "Sqpack.BentzFam",
+        "Sqpack.Bentz4Data"
+      ],
+      "escapes": {
+        "\\bsorry\\b": 0,
+        "^\\s*axiom\\b": 0,
+        "\\bnative_decide\\b": 0,
+        "\\bofReduceBool\\b": 0,
+        "\\bimplemented_by\\b": 0,
+        "@\\[extern": 0,
+        "debug\\.skipKernelTC": 0,
+        "\\bunsafe\\b": 0,
+        "\\+native\\b": 0,
+        "\\bnative\\s*:=\\s*true\\b": 0,
+        "\\breduce(?:Bool|Nat)\\b": 0,
+        "\\btrustCompiler\\b": 0
+      }
+    },
+    {
+      "module": "Sqpack.Bentz4Data",
+      "path": "lean/Sqpack/Bentz4Data.lean",
+      "blob": "195987d3f28715d1217716afb9ca78972331e8a9",
+      "bytes": 111168,
+      "lines": 2503,
+      "imports": [],
+      "escapes": {
+        "\\bsorry\\b": 0,
+        "^\\s*axiom\\b": 0,
+        "\\bnative_decide\\b": 0,
+        "\\bofReduceBool\\b": 0,
+        "\\bimplemented_by\\b": 0,
+        "@\\[extern": 0,
+        "debug\\.skipKernelTC": 0,
+        "\\bunsafe\\b": 0,
+        "\\+native\\b": 0,
+        "\\bnative\\s*:=\\s*true\\b": 0,
+        "\\breduce(?:Bool|Nat)\\b": 0,
+        "\\btrustCompiler\\b": 0
+      }
+    },
+    {
+      "module": "Sqpack.BentzData",
+      "path": "lean/Sqpack/BentzData.lean",
+      "blob": "74cf901dc4e8bbb321511e7a647229cdcae33210",
+      "bytes": 27858,
+      "lines": 841,
+      "imports": [],
+      "escapes": {
+        "\\bsorry\\b": 0,
+        "^\\s*axiom\\b": 0,
+        "\\bnative_decide\\b": 0,
+        "\\bofReduceBool\\b": 0,
+        "\\bimplemented_by\\b": 0,
+        "@\\[extern": 0,
+        "debug\\.skipKernelTC": 0,
+        "\\bunsafe\\b": 0,
+        "\\+native\\b": 0,
+        "\\bnative\\s*:=\\s*true\\b": 0,
+        "\\breduce(?:Bool|Nat)\\b": 0,
+        "\\btrustCompiler\\b": 0
+      }
+    },
+    {
+      "module": "Sqpack.BentzFam",
+      "path": "lean/Sqpack/BentzFam.lean",
+      "blob": "629486a294f95f229b9a6a828dd1031572c28a3c",
+      "bytes": 42613,
+      "lines": 821,
+      "imports": [
+        "Sqpack.Bentz"
+      ],
+      "escapes": {
+        "\\bsorry\\b": 0,
+        "^\\s*axiom\\b": 0,
+        "\\bnative_decide\\b": 0,
+        "\\bofReduceBool\\b": 0,
+        "\\bimplemented_by\\b": 0,
+        "@\\[extern": 0,
+        "debug\\.skipKernelTC": 0,
+        "\\bunsafe\\b": 0,
+        "\\+native\\b": 0,
+        "\\bnative\\s*:=\\s*true\\b": 0,
+        "\\breduce(?:Bool|Nat)\\b": 0,
+        "\\btrustCompiler\\b": 0
+      }
+    },
+    {
+      "module": "Sqpack.BernsteinZ",
+      "path": "lean/Sqpack/BernsteinZ.lean",
+      "blob": "e5bfa5b33792475478cc4568bce5a76c8d18c0eb",
+      "bytes": 13104,
+      "lines": 292,
+      "imports": [
+        "Mathlib"
+      ],
+      "escapes": {
+        "\\bsorry\\b": 0,
+        "^\\s*axiom\\b": 0,
+        "\\bnative_decide\\b": 0,
+        "\\bofReduceBool\\b": 0,
+        "\\bimplemented_by\\b": 0,
+        "@\\[extern": 0,
+        "debug\\.skipKernelTC": 0,
+        "\\bunsafe\\b": 0,
+        "\\+native\\b": 0,
+        "\\bnative\\s*:=\\s*true\\b": 0,
+        "\\breduce(?:Bool|Nat)\\b": 0,
+        "\\btrustCompiler\\b": 0
+      }
+    },
+    {
+      "module": "Sqpack.BoxTree",
+      "path": "lean/Sqpack/BoxTree.lean",
+      "blob": "0499d1f0041294521623e8b09a8801820579db3a",
+      "bytes": 36298,
+      "lines": 705,
+      "imports": [
+        "Sqpack.S32"
+      ],
+      "escapes": {
+        "\\bsorry\\b": 0,
+        "^\\s*axiom\\b": 0,
+        "\\bnative_decide\\b": 0,
+        "\\bofReduceBool\\b": 0,
+        "\\bimplemented_by\\b": 0,
+        "@\\[extern": 0,
+        "debug\\.skipKernelTC": 0,
+        "\\bunsafe\\b": 0,
+        "\\+native\\b": 0,
+        "\\bnative\\s*:=\\s*true\\b": 0,
+        "\\breduce(?:Bool|Nat)\\b": 0,
+        "\\btrustCompiler\\b": 0
+      }
+    },
+    {
+      "module": "Sqpack.CapK",
+      "path": "lean/Sqpack/CapK.lean",
+      "blob": "82e0495cf95ede0e7f5a922fb9fcc2dc5fc78ff0",
+      "bytes": 35465,
+      "lines": 690,
+      "imports": [
+        "Sqpack.SquareArea",
+        "Sqpack.CovMP",
+        "Sqpack.D4",
+        "Sqpack.LemmaEPoly"
+      ],
+      "escapes": {
+        "\\bsorry\\b": 0,
+        "^\\s*axiom\\b": 0,
+        "\\bnative_decide\\b": 0,
+        "\\bofReduceBool\\b": 0,
+        "\\bimplemented_by\\b": 0,
+        "@\\[extern": 0,
+        "debug\\.skipKernelTC": 0,
+        "\\bunsafe\\b": 0,
+        "\\+native\\b": 0,
+        "\\bnative\\s*:=\\s*true\\b": 0,
+        "\\breduce(?:Bool|Nat)\\b": 0,
+        "\\btrustCompiler\\b": 0
+      }
+    },
+    {
+      "module": "Sqpack.Chord",
+      "path": "lean/Sqpack/Chord.lean",
+      "blob": "913bd7dfd7d8804315ba6adf132f95dddd768cc6",
+      "bytes": 15537,
+      "lines": 283,
+      "imports": [
+        "Sqpack.Basic"
+      ],
+      "escapes": {
+        "\\bsorry\\b": 0,
+        "^\\s*axiom\\b": 0,
+        "\\bnative_decide\\b": 0,
+        "\\bofReduceBool\\b": 0,
+        "\\bimplemented_by\\b": 0,
+        "@\\[extern": 0,
+        "debug\\.skipKernelTC": 0,
+        "\\bunsafe\\b": 0,
+        "\\+native\\b": 0,
+        "\\bnative\\s*:=\\s*true\\b": 0,
+        "\\breduce(?:Bool|Nat)\\b": 0,
+        "\\btrustCompiler\\b": 0
+      }
+    },
+    {
+      "module": "Sqpack.ChordE",
+      "path": "lean/Sqpack/ChordE.lean",
+      "blob": "06596a3abf14588808169e9bd17fd7b4976c0eb4",
+      "bytes": 14971,
+      "lines": 289,
+      "imports": [
+        "Sqpack.SquareArea",
+        "Sqpack.SegParts"
+      ],
+      "escapes": {
+        "\\bsorry\\b": 0,
+        "^\\s*axiom\\b": 0,
+        "\\bnative_decide\\b": 0,
+        "\\bofReduceBool\\b": 0,
+        "\\bimplemented_by\\b": 0,
+        "@\\[extern": 0,
+        "debug\\.skipKernelTC": 0,
+        "\\bunsafe\\b": 0,
+        "\\+native\\b": 0,
+        "\\bnative\\s*:=\\s*true\\b": 0,
+        "\\breduce(?:Bool|Nat)\\b": 0,
+        "\\btrustCompiler\\b": 0
+      }
+    },
+    {
+      "module": "Sqpack.CovM",
+      "path": "lean/Sqpack/CovM.lean",
+      "blob": "0217c709b54932b0fae8b7b625d891ab3ae0eb55",
+      "bytes": 16079,
+      "lines": 318,
+      "imports": [
+        "Sqpack.ZMTree",
+        "Sqpack.MixedMeasure",
+        "Sqpack.SegTree"
+      ],
+      "escapes": {
+        "\\bsorry\\b": 0,
+        "^\\s*axiom\\b": 0,
+        "\\bnative_decide\\b": 0,
+        "\\bofReduceBool\\b": 0,
+        "\\bimplemented_by\\b": 0,
+        "@\\[extern": 0,
+        "debug\\.skipKernelTC": 0,
+        "\\bunsafe\\b": 0,
+        "\\+native\\b": 0,
+        "\\bnative\\s*:=\\s*true\\b": 0,
+        "\\breduce(?:Bool|Nat)\\b": 0,
+        "\\btrustCompiler\\b": 0
+      }
+    },
+    {
+      "module": "Sqpack.CovMP",
+      "path": "lean/Sqpack/CovMP.lean",
+      "blob": "7869098230349229af966d7b0afdabe5debc5f1d",
+      "bytes": 27509,
+      "lines": 530,
+      "imports": [
+        "Sqpack.CovM",
+        "Sqpack.SquareArea"
+      ],
+      "escapes": {
+        "\\bsorry\\b": 0,
+        "^\\s*axiom\\b": 0,
+        "\\bnative_decide\\b": 0,
+        "\\bofReduceBool\\b": 0,
+        "\\bimplemented_by\\b": 0,
+        "@\\[extern": 0,
+        "debug\\.skipKernelTC": 0,
+        "\\bunsafe\\b": 0,
+        "\\+native\\b": 0,
+        "\\bnative\\s*:=\\s*true\\b": 0,
+        "\\breduce(?:Bool|Nat)\\b": 0,
+        "\\btrustCompiler\\b": 0
+      }
+    },
+    {
+      "module": "Sqpack.Cover",
+      "path": "lean/Sqpack/Cover.lean",
+      "blob": "4fd6f59fc9c5943f5f884598e04820fe2ad67395",
+      "bytes": 9039,
+      "lines": 222,
+      "imports": [
+        "Sqpack.D4"
+      ],
+      "escapes": {
+        "\\bsorry\\b": 0,
+        "^\\s*axiom\\b": 0,
+        "\\bnative_decide\\b": 0,
+        "\\bofReduceBool\\b": 0,
+        "\\bimplemented_by\\b": 0,
+        "@\\[extern": 0,
+        "debug\\.skipKernelTC": 0,
+        "\\bunsafe\\b": 0,
+        "\\+native\\b": 0,
+        "\\bnative\\s*:=\\s*true\\b": 0,
+        "\\breduce(?:Bool|Nat)\\b": 0,
+        "\\btrustCompiler\\b": 0
+      }
+    },
+    {
+      "module": "Sqpack.D4",
+      "path": "lean/Sqpack/D4.lean",
+      "blob": "d599b89dba509df9ab33adf2273249a2bc7fa00e",
+      "bytes": 15203,
+      "lines": 298,
+      "imports": [
+        "Sqpack.ZeroMargin"
+      ],
+      "escapes": {
+        "\\bsorry\\b": 0,
+        "^\\s*axiom\\b": 0,
+        "\\bnative_decide\\b": 0,
+        "\\bofReduceBool\\b": 0,
+        "\\bimplemented_by\\b": 0,
+        "@\\[extern": 0,
+        "debug\\.skipKernelTC": 0,
+        "\\bunsafe\\b": 0,
+        "\\+native\\b": 0,
+        "\\bnative\\s*:=\\s*true\\b": 0,
+        "\\breduce(?:Bool|Nat)\\b": 0,
+        "\\btrustCompiler\\b": 0
+      }
+    },
+    {
+      "module": "Sqpack.ExTree",
+      "path": "lean/Sqpack/ExTree.lean",
+      "blob": "7ed985da2e94e25d5e26051e4ffebc13acd369d9",
+      "bytes": 31472,
+      "lines": 623,
+      "imports": [
+        "Sqpack.LemmaELeaf",
+        "Sqpack.CapK",
+        "Sqpack.ZMTreeX"
+      ],
+      "escapes": {
+        "\\bsorry\\b": 0,
+        "^\\s*axiom\\b": 0,
+        "\\bnative_decide\\b": 0,
+        "\\bofReduceBool\\b": 0,
+        "\\bimplemented_by\\b": 0,
+        "@\\[extern": 0,
+        "debug\\.skipKernelTC": 0,
+        "\\bunsafe\\b": 0,
+        "\\+native\\b": 0,
+        "\\bnative\\s*:=\\s*true\\b": 0,
+        "\\breduce(?:Bool|Nat)\\b": 0,
+        "\\btrustCompiler\\b": 0
+      }
+    },
+    {
+      "module": "Sqpack.ExTreeX",
+      "path": "lean/Sqpack/ExTreeX.lean",
+      "blob": "916f6412e0b7f32ae690cb878687e6f8094b369c",
+      "bytes": 737,
+      "lines": 27,
+      "imports": [
+        "Sqpack.ExTree",
+        "Sqpack.LemmaELeafX"
+      ],
+      "escapes": {
+        "\\bsorry\\b": 0,
+        "^\\s*axiom\\b": 0,
+        "\\bnative_decide\\b": 0,
+        "\\bofReduceBool\\b": 0,
+        "\\bimplemented_by\\b": 0,
+        "@\\[extern": 0,
+        "debug\\.skipKernelTC": 0,
+        "\\bunsafe\\b": 0,
+        "\\+native\\b": 0,
+        "\\bnative\\s*:=\\s*true\\b": 0,
+        "\\breduce(?:Bool|Nat)\\b": 0,
+        "\\btrustCompiler\\b": 0
+      }
+    },
+    {
+      "module": "Sqpack.KArith",
+      "path": "lean/Sqpack/KArith.lean",
+      "blob": "ba98b90636b5ab18d9cbcac5df84207eba205e49",
+      "bytes": 8506,
+      "lines": 214,
+      "imports": [
+        "Sqpack.RatU"
+      ],
+      "escapes": {
+        "\\bsorry\\b": 0,
+        "^\\s*axiom\\b": 0,
+        "\\bnative_decide\\b": 0,
+        "\\bofReduceBool\\b": 0,
+        "\\bimplemented_by\\b": 0,
+        "@\\[extern": 0,
+        "debug\\.skipKernelTC": 0,
+        "\\bunsafe\\b": 0,
+        "\\+native\\b": 0,
+        "\\bnative\\s*:=\\s*true\\b": 0,
+        "\\breduce(?:Bool|Nat)\\b": 0,
+        "\\btrustCompiler\\b": 0
+      }
+    },
+    {
+      "module": "Sqpack.KBern",
+      "path": "lean/Sqpack/KBern.lean",
+      "blob": "e04f0e43d4794fd90c162661d2b1040416ff60d4",
+      "bytes": 17416,
+      "lines": 404,
+      "imports": [
+        "Sqpack.KArith"
+      ],
+      "escapes": {
+        "\\bsorry\\b": 0,
+        "^\\s*axiom\\b": 0,
+        "\\bnative_decide\\b": 0,
+        "\\bofReduceBool\\b": 0,
+        "\\bimplemented_by\\b": 0,
+        "@\\[extern": 0,
+        "debug\\.skipKernelTC": 0,
+        "\\bunsafe\\b": 0,
+        "\\+native\\b": 0,
+        "\\bnative\\s*:=\\s*true\\b": 0,
+        "\\breduce(?:Bool|Nat)\\b": 0,
+        "\\btrustCompiler\\b": 0
+      }
+    },
+    {
+      "module": "Sqpack.LBlock",
+      "path": "lean/Sqpack/LBlock.lean",
+      "blob": "fc550a31eea6ebf0f1e4ab47be56416bb43236a2",
+      "bytes": 12130,
+      "lines": 234,
+      "imports": [
+        "Sqpack.LemmaL"
+      ],
+      "escapes": {
+        "\\bsorry\\b": 0,
+        "^\\s*axiom\\b": 0,
+        "\\bnative_decide\\b": 0,
+        "\\bofReduceBool\\b": 0,
+        "\\bimplemented_by\\b": 0,
+        "@\\[extern": 0,
+        "debug\\.skipKernelTC": 0,
+        "\\bunsafe\\b": 0,
+        "\\+native\\b": 0,
+        "\\bnative\\s*:=\\s*true\\b": 0,
+        "\\breduce(?:Bool|Nat)\\b": 0,
+        "\\btrustCompiler\\b": 0
+      }
+    },
+    {
+      "module": "Sqpack.LBlockSound",
+      "path": "lean/Sqpack/LBlockSound.lean",
+      "blob": "12b21a4fae348e74fa8af8a782d46d62a77710a3",
+      "bytes": 76096,
+      "lines": 1455,
+      "imports": [
+        "Sqpack.LBlock"
+      ],
+      "escapes": {
+        "\\bsorry\\b": 0,
+        "^\\s*axiom\\b": 0,
+        "\\bnative_decide\\b": 0,
+        "\\bofReduceBool\\b": 0,
+        "\\bimplemented_by\\b": 0,
+        "@\\[extern": 0,
+        "debug\\.skipKernelTC": 0,
+        "\\bunsafe\\b": 0,
+        "\\+native\\b": 0,
+        "\\bnative\\s*:=\\s*true\\b": 0,
+        "\\breduce(?:Bool|Nat)\\b": 0,
+        "\\btrustCompiler\\b": 0
+      }
+    },
+    {
+      "module": "Sqpack.LebCorner",
+      "path": "lean/Sqpack/LebCorner.lean",
+      "blob": "63b21d739e50cb65f9e5fb4a865ae5fb489b611e",
+      "bytes": 20290,
+      "lines": 367,
+      "imports": [
+        "Sqpack.LebTan"
+      ],
+      "escapes": {
+        "\\bsorry\\b": 0,
+        "^\\s*axiom\\b": 0,
+        "\\bnative_decide\\b": 0,
+        "\\bofReduceBool\\b": 0,
+        "\\bimplemented_by\\b": 0,
+        "@\\[extern": 0,
+        "debug\\.skipKernelTC": 0,
+        "\\bunsafe\\b": 0,
+        "\\+native\\b": 0,
+        "\\bnative\\s*:=\\s*true\\b": 0,
+        "\\breduce(?:Bool|Nat)\\b": 0,
+        "\\btrustCompiler\\b": 0
+      }
+    },
+    {
+      "module": "Sqpack.LebCredit",
+      "path": "lean/Sqpack/LebCredit.lean",
+      "blob": "1f6299641ca0df084c05bf5c46ac9c01ab8cc35f",
+      "bytes": 15281,
+      "lines": 304,
+      "imports": [
+        "Sqpack.CovMP",
+        "Sqpack.LemmaEPoly"
+      ],
+      "escapes": {
+        "\\bsorry\\b": 0,
+        "^\\s*axiom\\b": 0,
+        "\\bnative_decide\\b": 0,
+        "\\bofReduceBool\\b": 0,
+        "\\bimplemented_by\\b": 0,
+        "@\\[extern": 0,
+        "debug\\.skipKernelTC": 0,
+        "\\bunsafe\\b": 0,
+        "\\+native\\b": 0,
+        "\\bnative\\s*:=\\s*true\\b": 0,
+        "\\breduce(?:Bool|Nat)\\b": 0,
+        "\\btrustCompiler\\b": 0
+      }
+    },
+    {
+      "module": "Sqpack.LebE",
+      "path": "lean/Sqpack/LebE.lean",
+      "blob": "22e767a59f70d3fc3d07ce8c6661dd79656438f0",
+      "bytes": 4590,
+      "lines": 95,
+      "imports": [
+        "Sqpack.SquareArea",
+        "Sqpack.MixedMeasure"
+      ],
+      "escapes": {
+        "\\bsorry\\b": 0,
+        "^\\s*axiom\\b": 0,
+        "\\bnative_decide\\b": 0,
+        "\\bofReduceBool\\b": 0,
+        "\\bimplemented_by\\b": 0,
+        "@\\[extern": 0,
+        "debug\\.skipKernelTC": 0,
+        "\\bunsafe\\b": 0,
+        "\\+native\\b": 0,
+        "\\bnative\\s*:=\\s*true\\b": 0,
+        "\\breduce(?:Bool|Nat)\\b": 0,
+        "\\btrustCompiler\\b": 0
+      }
+    },
+    {
+      "module": "Sqpack.LebTan",
+      "path": "lean/Sqpack/LebTan.lean",
+      "blob": "26807df4fcf9f114e74088b5f42e2ea2dc76c416",
+      "bytes": 11753,
+      "lines": 222,
+      "imports": [
+        "Sqpack.LebE"
+      ],
+      "escapes": {
+        "\\bsorry\\b": 0,
+        "^\\s*axiom\\b": 0,
+        "\\bnative_decide\\b": 0,
+        "\\bofReduceBool\\b": 0,
+        "\\bimplemented_by\\b": 0,
+        "@\\[extern": 0,
+        "debug\\.skipKernelTC": 0,
+        "\\bunsafe\\b": 0,
+        "\\+native\\b": 0,
+        "\\bnative\\s*:=\\s*true\\b": 0,
+        "\\breduce(?:Bool|Nat)\\b": 0,
+        "\\btrustCompiler\\b": 0
+      }
+    },
+    {
+      "module": "Sqpack.LemmaE",
+      "path": "lean/Sqpack/LemmaE.lean",
+      "blob": "99e4aeda2b94547e6c49aba4acf134aaa3c6e6f4",
+      "bytes": 31920,
+      "lines": 593,
+      "imports": [
+        "Sqpack.ChordE",
+        "Sqpack.LebCorner",
+        "Sqpack.PolyMin",
+        "Sqpack.CovMP"
+      ],
+      "escapes": {
+        "\\bsorry\\b": 0,
+        "^\\s*axiom\\b": 0,
+        "\\bnative_decide\\b": 0,
+        "\\bofReduceBool\\b": 0,
+        "\\bimplemented_by\\b": 0,
+        "@\\[extern": 0,
+        "debug\\.skipKernelTC": 0,
+        "\\bunsafe\\b": 0,
+        "\\+native\\b": 0,
+        "\\bnative\\s*:=\\s*true\\b": 0,
+        "\\breduce(?:Bool|Nat)\\b": 0,
+        "\\btrustCompiler\\b": 0
+      }
+    },
+    {
+      "module": "Sqpack.LemmaEDec",
+      "path": "lean/Sqpack/LemmaEDec.lean",
+      "blob": "40ae7484b5c1a2784455712e1937bef9bf3af746",
+      "bytes": 4976,
+      "lines": 154,
+      "imports": [
+        "Sqpack.LemmaELeaf"
+      ],
+      "escapes": {
+        "\\bsorry\\b": 0,
+        "^\\s*axiom\\b": 0,
+        "\\bnative_decide\\b": 0,
+        "\\bofReduceBool\\b": 0,
+        "\\bimplemented_by\\b": 0,
+        "@\\[extern": 0,
+        "debug\\.skipKernelTC": 0,
+        "\\bunsafe\\b": 0,
+        "\\+native\\b": 0,
+        "\\bnative\\s*:=\\s*true\\b": 0,
+        "\\breduce(?:Bool|Nat)\\b": 0,
+        "\\btrustCompiler\\b": 0
+      }
+    },
+    {
+      "module": "Sqpack.LemmaEK",
+      "path": "lean/Sqpack/LemmaEK.lean",
+      "blob": "ac8935a416dc130418153586db099e36364c6e6b",
+      "bytes": 26265,
+      "lines": 585,
+      "imports": [
+        "Sqpack.LemmaEVert",
+        "Sqpack.KBern"
+      ],
+      "escapes": {
+        "\\bsorry\\b": 0,
+        "^\\s*axiom\\b": 0,
+        "\\bnative_decide\\b": 0,
+        "\\bofReduceBool\\b": 0,
+        "\\bimplemented_by\\b": 0,
+        "@\\[extern": 0,
+        "debug\\.skipKernelTC": 0,
+        "\\bunsafe\\b": 0,
+        "\\+native\\b": 0,
+        "\\bnative\\s*:=\\s*true\\b": 0,
+        "\\breduce(?:Bool|Nat)\\b": 0,
+        "\\btrustCompiler\\b": 0
+      }
+    },
+    {
+      "module": "Sqpack.LemmaEKM",
+      "path": "lean/Sqpack/LemmaEKM.lean",
+      "blob": "421af8b4b01751226f33a3bb97bb8a6218fa0ac0",
+      "bytes": 18751,
+      "lines": 366,
+      "imports": [
+        "Sqpack.LemmaEK",
+        "Sqpack.RowMinK"
+      ],
+      "escapes": {
+        "\\bsorry\\b": 0,
+        "^\\s*axiom\\b": 0,
+        "\\bnative_decide\\b": 0,
+        "\\bofReduceBool\\b": 0,
+        "\\bimplemented_by\\b": 0,
+        "@\\[extern": 0,
+        "debug\\.skipKernelTC": 0,
+        "\\bunsafe\\b": 0,
+        "\\+native\\b": 0,
+        "\\bnative\\s*:=\\s*true\\b": 0,
+        "\\breduce(?:Bool|Nat)\\b": 0,
+        "\\btrustCompiler\\b": 0
+      }
+    },
+    {
+      "module": "Sqpack.LemmaELeaf",
+      "path": "lean/Sqpack/LemmaELeaf.lean",
+      "blob": "e6604a8b8ae291107e358933e75976234b2941cf",
+      "bytes": 58902,
+      "lines": 1065,
+      "imports": [
+        "Sqpack.LemmaEK",
+        "Sqpack.LebCredit"
+      ],
+      "escapes": {
+        "\\bsorry\\b": 0,
+        "^\\s*axiom\\b": 0,
+        "\\bnative_decide\\b": 0,
+        "\\bofReduceBool\\b": 0,
+        "\\bimplemented_by\\b": 0,
+        "@\\[extern": 0,
+        "debug\\.skipKernelTC": 0,
+        "\\bunsafe\\b": 0,
+        "\\+native\\b": 0,
+        "\\bnative\\s*:=\\s*true\\b": 0,
+        "\\breduce(?:Bool|Nat)\\b": 0,
+        "\\btrustCompiler\\b": 0
+      }
+    },
+    {
+      "module": "Sqpack.LemmaELeafX",
+      "path": "lean/Sqpack/LemmaELeafX.lean",
+      "blob": "859f6227c8ae4476cf8b825d361d4f35c77791e9",
+      "bytes": 25171,
+      "lines": 453,
+      "imports": [
+        "Sqpack.LemmaEKM",
+        "Sqpack.LemmaELeaf"
+      ],
+      "escapes": {
+        "\\bsorry\\b": 0,
+        "^\\s*axiom\\b": 0,
+        "\\bnative_decide\\b": 0,
+        "\\bofReduceBool\\b": 0,
+        "\\bimplemented_by\\b": 0,
+        "@\\[extern": 0,
+        "debug\\.skipKernelTC": 0,
+        "\\bunsafe\\b": 0,
+        "\\+native\\b": 0,
+        "\\bnative\\s*:=\\s*true\\b": 0,
+        "\\breduce(?:Bool|Nat)\\b": 0,
+        "\\btrustCompiler\\b": 0
+      }
+    },
+    {
+      "module": "Sqpack.LemmaEPoly",
+      "path": "lean/Sqpack/LemmaEPoly.lean",
+      "blob": "2aada27c0153788936b66ed1eb3d02b7bbb750ea",
+      "bytes": 15759,
+      "lines": 360,
+      "imports": [
+        "Sqpack.LemmaE",
+        "Sqpack.RatU"
+      ],
+      "escapes": {
+        "\\bsorry\\b": 0,
+        "^\\s*axiom\\b": 0,
+        "\\bnative_decide\\b": 0,
+        "\\bofReduceBool\\b": 0,
+        "\\bimplemented_by\\b": 0,
+        "@\\[extern": 0,
+        "debug\\.skipKernelTC": 0,
+        "\\bunsafe\\b": 0,
+        "\\+native\\b": 0,
+        "\\bnative\\s*:=\\s*true\\b": 0,
+        "\\breduce(?:Bool|Nat)\\b": 0,
+        "\\btrustCompiler\\b": 0
+      }
+    },
+    {
+      "module": "Sqpack.LemmaESplit",
+      "path": "lean/Sqpack/LemmaESplit.lean",
+      "blob": "a51d70c46919861bad67b83975cd861a4ad55717",
+      "bytes": 7072,
+      "lines": 153,
+      "imports": [
+        "Sqpack.LemmaEDec"
+      ],
+      "escapes": {
+        "\\bsorry\\b": 0,
+        "^\\s*axiom\\b": 0,
+        "\\bnative_decide\\b": 0,
+        "\\bofReduceBool\\b": 0,
+        "\\bimplemented_by\\b": 0,
+        "@\\[extern": 0,
+        "debug\\.skipKernelTC": 0,
+        "\\bunsafe\\b": 0,
+        "\\+native\\b": 0,
+        "\\bnative\\s*:=\\s*true\\b": 0,
+        "\\breduce(?:Bool|Nat)\\b": 0,
+        "\\btrustCompiler\\b": 0
+      }
+    },
+    {
+      "module": "Sqpack.LemmaESplitX",
+      "path": "lean/Sqpack/LemmaESplitX.lean",
+      "blob": "daab4668109cca01ebf0a6146ab57d1d135d8816",
+      "bytes": 1902,
+      "lines": 44,
+      "imports": [
+        "Sqpack.LemmaESplit",
+        "Sqpack.LemmaELeafX"
+      ],
+      "escapes": {
+        "\\bsorry\\b": 0,
+        "^\\s*axiom\\b": 0,
+        "\\bnative_decide\\b": 0,
+        "\\bofReduceBool\\b": 0,
+        "\\bimplemented_by\\b": 0,
+        "@\\[extern": 0,
+        "debug\\.skipKernelTC": 0,
+        "\\bunsafe\\b": 0,
+        "\\+native\\b": 0,
+        "\\bnative\\s*:=\\s*true\\b": 0,
+        "\\breduce(?:Bool|Nat)\\b": 0,
+        "\\btrustCompiler\\b": 0
+      }
+    },
+    {
+      "module": "Sqpack.LemmaEVert",
+      "path": "lean/Sqpack/LemmaEVert.lean",
+      "blob": "1ff1d07226180b07bbf6b791de55eed7683e4bc5",
+      "bytes": 87376,
+      "lines": 1627,
+      "imports": [
+        "Sqpack.LemmaEPoly"
+      ],
+      "escapes": {
+        "\\bsorry\\b": 0,
+        "^\\s*axiom\\b": 0,
+        "\\bnative_decide\\b": 0,
+        "\\bofReduceBool\\b": 0,
+        "\\bimplemented_by\\b": 0,
+        "@\\[extern": 0,
+        "debug\\.skipKernelTC": 0,
+        "\\bunsafe\\b": 0,
+        "\\+native\\b": 0,
+        "\\bnative\\s*:=\\s*true\\b": 0,
+        "\\breduce(?:Bool|Nat)\\b": 0,
+        "\\btrustCompiler\\b": 0
+      }
+    },
+    {
+      "module": "Sqpack.LemmaL",
+      "path": "lean/Sqpack/LemmaL.lean",
+      "blob": "03e4aea4a0fe0220f44ed1bfb277bdde83fb1319",
+      "bytes": 7847,
+      "lines": 161,
+      "imports": [
+        "Sqpack.ZMTreeM"
+      ],
+      "escapes": {
+        "\\bsorry\\b": 0,
+        "^\\s*axiom\\b": 0,
+        "\\bnative_decide\\b": 0,
+        "\\bofReduceBool\\b": 0,
+        "\\bimplemented_by\\b": 0,
+        "@\\[extern": 0,
+        "debug\\.skipKernelTC": 0,
+        "\\bunsafe\\b": 0,
+        "\\+native\\b": 0,
+        "\\bnative\\s*:=\\s*true\\b": 0,
+        "\\breduce(?:Bool|Nat)\\b": 0,
+        "\\btrustCompiler\\b": 0
+      }
+    },
+    {
+      "module": "Sqpack.LemmaZ",
+      "path": "lean/Sqpack/LemmaZ.lean",
+      "blob": "5cf525780a1d8e7d109cd72896689a085ff17af5",
+      "bytes": 33760,
+      "lines": 610,
+      "imports": [
+        "Sqpack.CovMP",
+        "Sqpack.SegParts"
+      ],
+      "escapes": {
+        "\\bsorry\\b": 0,
+        "^\\s*axiom\\b": 0,
+        "\\bnative_decide\\b": 0,
+        "\\bofReduceBool\\b": 0,
+        "\\bimplemented_by\\b": 0,
+        "@\\[extern": 0,
+        "debug\\.skipKernelTC": 0,
+        "\\bunsafe\\b": 0,
+        "\\+native\\b": 0,
+        "\\bnative\\s*:=\\s*true\\b": 0,
+        "\\breduce(?:Bool|Nat)\\b": 0,
+        "\\btrustCompiler\\b": 0
+      }
+    },
+    {
+      "module": "Sqpack.MixedMeasure",
+      "path": "lean/Sqpack/MixedMeasure.lean",
+      "blob": "196d723865ed62532795cbe229f3eaf2af525079",
+      "bytes": 26334,
+      "lines": 494,
+      "imports": [
+        "Sqpack.S32"
+      ],
+      "escapes": {
+        "\\bsorry\\b": 0,
+        "^\\s*axiom\\b": 0,
+        "\\bnative_decide\\b": 0,
+        "\\bofReduceBool\\b": 0,
+        "\\bimplemented_by\\b": 0,
+        "@\\[extern": 0,
+        "debug\\.skipKernelTC": 0,
+        "\\bunsafe\\b": 0,
+        "\\+native\\b": 0,
+        "\\bnative\\s*:=\\s*true\\b": 0,
+        "\\breduce(?:Bool|Nat)\\b": 0,
+        "\\btrustCompiler\\b": 0
+      }
+    },
+    {
+      "module": "Sqpack.PolyMin",
+      "path": "lean/Sqpack/PolyMin.lean",
+      "blob": "e3baa8232e07f07db29d67811bdfbb67b19fa04b",
+      "bytes": 9506,
+      "lines": 191,
+      "imports": [
+        "Mathlib"
+      ],
+      "escapes": {
+        "\\bsorry\\b": 0,
+        "^\\s*axiom\\b": 0,
+        "\\bnative_decide\\b": 0,
+        "\\bofReduceBool\\b": 0,
+        "\\bimplemented_by\\b": 0,
+        "@\\[extern": 0,
+        "debug\\.skipKernelTC": 0,
+        "\\bunsafe\\b": 0,
+        "\\+native\\b": 0,
+        "\\bnative\\s*:=\\s*true\\b": 0,
+        "\\breduce(?:Bool|Nat)\\b": 0,
+        "\\btrustCompiler\\b": 0
+      }
+    },
+    {
+      "module": "Sqpack.RatU",
+      "path": "lean/Sqpack/RatU.lean",
+      "blob": "39647aa570e2145794a13c7ffad1e9c0a5b2d446",
+      "bytes": 9067,
+      "lines": 195,
+      "imports": [
+        "Sqpack.BernsteinZ"
+      ],
+      "escapes": {
+        "\\bsorry\\b": 0,
+        "^\\s*axiom\\b": 0,
+        "\\bnative_decide\\b": 0,
+        "\\bofReduceBool\\b": 0,
+        "\\bimplemented_by\\b": 0,
+        "@\\[extern": 0,
+        "debug\\.skipKernelTC": 0,
+        "\\bunsafe\\b": 0,
+        "\\+native\\b": 0,
+        "\\bnative\\s*:=\\s*true\\b": 0,
+        "\\breduce(?:Bool|Nat)\\b": 0,
+        "\\btrustCompiler\\b": 0
+      }
+    },
+    {
+      "module": "Sqpack.RowMinK",
+      "path": "lean/Sqpack/RowMinK.lean",
+      "blob": "e408af3de9b29c502977c2d0dc198f06fef0bba8",
+      "bytes": 12846,
+      "lines": 273,
+      "imports": [
+        "Sqpack.KBern"
+      ],
+      "escapes": {
+        "\\bsorry\\b": 0,
+        "^\\s*axiom\\b": 0,
+        "\\bnative_decide\\b": 0,
+        "\\bofReduceBool\\b": 0,
+        "\\bimplemented_by\\b": 0,
+        "@\\[extern": 0,
+        "debug\\.skipKernelTC": 0,
+        "\\bunsafe\\b": 0,
+        "\\+native\\b": 0,
+        "\\bnative\\s*:=\\s*true\\b": 0,
+        "\\breduce(?:Bool|Nat)\\b": 0,
+        "\\btrustCompiler\\b": 0
+      }
+    },
+    {
+      "module": "Sqpack.S32",
+      "path": "lean/Sqpack/S32.lean",
+      "blob": "065a2c43515c363fbfce38bb7efc2e85d4d47578",
+      "bytes": 14497,
+      "lines": 319,
+      "imports": [
+        "Sqpack.S32Data"
+      ],
+      "escapes": {
+        "\\bsorry\\b": 0,
+        "^\\s*axiom\\b": 0,
+        "\\bnative_decide\\b": 0,
+        "\\bofReduceBool\\b": 0,
+        "\\bimplemented_by\\b": 0,
+        "@\\[extern": 0,
+        "debug\\.skipKernelTC": 0,
+        "\\bunsafe\\b": 0,
+        "\\+native\\b": 0,
+        "\\bnative\\s*:=\\s*true\\b": 0,
+        "\\breduce(?:Bool|Nat)\\b": 0,
+        "\\btrustCompiler\\b": 0
+      }
+    },
+    {
+      "module": "Sqpack.S32Data",
+      "path": "lean/Sqpack/S32Data.lean",
+      "blob": "b8ea5d9487edc11cb7c801af7f4c1c4724f79be0",
+      "bytes": 439352,
+      "lines": 214,
+      "imports": [
+        "Sqpack.Cover"
+      ],
+      "escapes": {
+        "\\bsorry\\b": 0,
+        "^\\s*axiom\\b": 0,
+        "\\bnative_decide\\b": 0,
+        "\\bofReduceBool\\b": 0,
+        "\\bimplemented_by\\b": 0,
+        "@\\[extern": 0,
+        "debug\\.skipKernelTC": 0,
+        "\\bunsafe\\b": 0,
+        "\\+native\\b": 0,
+        "\\bnative\\s*:=\\s*true\\b": 0,
+        "\\breduce(?:Bool|Nat)\\b": 0,
+        "\\btrustCompiler\\b": 0
+      }
+    },
+    {
+      "module": "Sqpack.SegParts",
+      "path": "lean/Sqpack/SegParts.lean",
+      "blob": "a67cac8ec0d1737bec39f4b77de778fa2c878ce8",
+      "bytes": 17591,
+      "lines": 343,
+      "imports": [
+        "Sqpack.CovM"
+      ],
+      "escapes": {
+        "\\bsorry\\b": 0,
+        "^\\s*axiom\\b": 0,
+        "\\bnative_decide\\b": 0,
+        "\\bofReduceBool\\b": 0,
+        "\\bimplemented_by\\b": 0,
+        "@\\[extern": 0,
+        "debug\\.skipKernelTC": 0,
+        "\\bunsafe\\b": 0,
+        "\\+native\\b": 0,
+        "\\bnative\\s*:=\\s*true\\b": 0,
+        "\\breduce(?:Bool|Nat)\\b": 0,
+        "\\btrustCompiler\\b": 0
+      }
+    },
+    {
+      "module": "Sqpack.SegTree",
+      "path": "lean/Sqpack/SegTree.lean",
+      "blob": "23c1a4742863552af9a5c917fa1fc0de5b274e9d",
+      "bytes": 5362,
+      "lines": 144,
+      "imports": [
+        "Sqpack.Cover"
+      ],
+      "escapes": {
+        "\\bsorry\\b": 0,
+        "^\\s*axiom\\b": 0,
+        "\\bnative_decide\\b": 0,
+        "\\bofReduceBool\\b": 0,
+        "\\bimplemented_by\\b": 0,
+        "@\\[extern": 0,
+        "debug\\.skipKernelTC": 0,
+        "\\bunsafe\\b": 0,
+        "\\+native\\b": 0,
+        "\\bnative\\s*:=\\s*true\\b": 0,
+        "\\breduce(?:Bool|Nat)\\b": 0,
+        "\\btrustCompiler\\b": 0
+      }
+    },
+    {
+      "module": "Sqpack.SquareArea",
+      "path": "lean/Sqpack/SquareArea.lean",
+      "blob": "219aa7fdceade8c7d42e9ae3ef17835d318da1b6",
+      "bytes": 21766,
+      "lines": 428,
+      "imports": [
+        "Sqpack.Basic"
+      ],
+      "escapes": {
+        "\\bsorry\\b": 0,
+        "^\\s*axiom\\b": 0,
+        "\\bnative_decide\\b": 0,
+        "\\bofReduceBool\\b": 0,
+        "\\bimplemented_by\\b": 0,
+        "@\\[extern": 0,
+        "debug\\.skipKernelTC": 0,
+        "\\bunsafe\\b": 0,
+        "\\+native\\b": 0,
+        "\\bnative\\s*:=\\s*true\\b": 0,
+        "\\breduce(?:Bool|Nat)\\b": 0,
+        "\\btrustCompiler\\b": 0
+      }
+    },
+    {
+      "module": "Sqpack.V7.Bridge",
+      "path": "lean/Sqpack/V7/Bridge.lean",
+      "blob": "a7d495c36984e563916563516b4123795a3bade3",
+      "bytes": 4314,
+      "lines": 97,
+      "imports": [
+        "Sqpack.V7.Data",
+        "Sqpack.Bentz"
+      ],
+      "escapes": {
+        "\\bsorry\\b": 0,
+        "^\\s*axiom\\b": 0,
+        "\\bnative_decide\\b": 0,
+        "\\bofReduceBool\\b": 0,
+        "\\bimplemented_by\\b": 0,
+        "@\\[extern": 0,
+        "debug\\.skipKernelTC": 0,
+        "\\bunsafe\\b": 0,
+        "\\+native\\b": 0,
+        "\\bnative\\s*:=\\s*true\\b": 0,
+        "\\breduce(?:Bool|Nat)\\b": 0,
+        "\\btrustCompiler\\b": 0
+      }
+    },
+    {
+      "module": "Sqpack.V7.Data",
+      "path": "lean/Sqpack/V7/Data.lean",
+      "blob": "dfbfe89a843b4d5ab4559fcb012958b309b9105a",
+      "bytes": 66176,
+      "lines": 11,
+      "imports": [
+        "Sqpack.ExTree"
+      ],
+      "escapes": {
+        "\\bsorry\\b": 0,
+        "^\\s*axiom\\b": 0,
+        "\\bnative_decide\\b": 0,
+        "\\bofReduceBool\\b": 0,
+        "\\bimplemented_by\\b": 0,
+        "@\\[extern": 0,
+        "debug\\.skipKernelTC": 0,
+        "\\bunsafe\\b": 0,
+        "\\+native\\b": 0,
+        "\\bnative\\s*:=\\s*true\\b": 0,
+        "\\breduce(?:Bool|Nat)\\b": 0,
+        "\\btrustCompiler\\b": 0
+      }
+    },
+    {
+      "module": "Sqpack.ValidSplit",
+      "path": "lean/Sqpack/ValidSplit.lean",
+      "blob": "dbff982340cc6f63c2d70fe31ce0322ffc058930",
+      "bytes": 45879,
+      "lines": 846,
+      "imports": [
+        "Sqpack.Bentz4"
+      ],
+      "escapes": {
+        "\\bsorry\\b": 0,
+        "^\\s*axiom\\b": 0,
+        "\\bnative_decide\\b": 0,
+        "\\bofReduceBool\\b": 0,
+        "\\bimplemented_by\\b": 0,
+        "@\\[extern": 0,
+        "debug\\.skipKernelTC": 0,
+        "\\bunsafe\\b": 0,
+        "\\+native\\b": 0,
+        "\\bnative\\s*:=\\s*true\\b": 0,
+        "\\breduce(?:Bool|Nat)\\b": 0,
+        "\\btrustCompiler\\b": 0
+      }
+    },
+    {
+      "module": "Sqpack.ValidSplit7",
+      "path": "lean/Sqpack/ValidSplit7.lean",
+      "blob": "70b796a8b0c07e111c65da27772593fb4df2a31e",
+      "bytes": 3787,
+      "lines": 94,
+      "imports": [
+        "Sqpack.ValidSplit",
+        "Sqpack.ValidSplitData"
+      ],
+      "escapes": {
+        "\\bsorry\\b": 0,
+        "^\\s*axiom\\b": 0,
+        "\\bnative_decide\\b": 0,
+        "\\bofReduceBool\\b": 0,
+        "\\bimplemented_by\\b": 0,
+        "@\\[extern": 0,
+        "debug\\.skipKernelTC": 0,
+        "\\bunsafe\\b": 0,
+        "\\+native\\b": 0,
+        "\\bnative\\s*:=\\s*true\\b": 0,
+        "\\breduce(?:Bool|Nat)\\b": 0,
+        "\\btrustCompiler\\b": 0
+      }
+    },
+    {
+      "module": "Sqpack.ValidSplitData",
+      "path": "lean/Sqpack/ValidSplitData.lean",
+      "blob": "394cef7eca478fb8504324c807867e92d4813dce",
+      "bytes": 95575,
+      "lines": 22,
+      "imports": [],
+      "escapes": {
+        "\\bsorry\\b": 0,
+        "^\\s*axiom\\b": 0,
+        "\\bnative_decide\\b": 0,
+        "\\bofReduceBool\\b": 0,
+        "\\bimplemented_by\\b": 0,
+        "@\\[extern": 0,
+        "debug\\.skipKernelTC": 0,
+        "\\bunsafe\\b": 0,
+        "\\+native\\b": 0,
+        "\\bnative\\s*:=\\s*true\\b": 0,
+        "\\breduce(?:Bool|Nat)\\b": 0,
+        "\\btrustCompiler\\b": 0
+      }
+    },
+    {
+      "module": "Sqpack.ZMTree",
+      "path": "lean/Sqpack/ZMTree.lean",
+      "blob": "fb64e3049d6a9017e55867a4ddf96fecb9efa5f0",
+      "bytes": 77236,
+      "lines": 1489,
+      "imports": [
+        "Sqpack.BoxTree"
+      ],
+      "escapes": {
+        "\\bsorry\\b": 0,
+        "^\\s*axiom\\b": 0,
+        "\\bnative_decide\\b": 0,
+        "\\bofReduceBool\\b": 0,
+        "\\bimplemented_by\\b": 0,
+        "@\\[extern": 0,
+        "debug\\.skipKernelTC": 0,
+        "\\bunsafe\\b": 0,
+        "\\+native\\b": 0,
+        "\\bnative\\s*:=\\s*true\\b": 0,
+        "\\breduce(?:Bool|Nat)\\b": 0,
+        "\\btrustCompiler\\b": 0
+      }
+    },
+    {
+      "module": "Sqpack.ZMTreeM",
+      "path": "lean/Sqpack/ZMTreeM.lean",
+      "blob": "04623079a91adf765f0e9423569656d1bc270798",
+      "bytes": 50770,
+      "lines": 959,
+      "imports": [
+        "Sqpack.SegParts"
+      ],
+      "escapes": {
+        "\\bsorry\\b": 0,
+        "^\\s*axiom\\b": 0,
+        "\\bnative_decide\\b": 0,
+        "\\bofReduceBool\\b": 0,
+        "\\bimplemented_by\\b": 0,
+        "@\\[extern": 0,
+        "debug\\.skipKernelTC": 0,
+        "\\bunsafe\\b": 0,
+        "\\+native\\b": 0,
+        "\\bnative\\s*:=\\s*true\\b": 0,
+        "\\breduce(?:Bool|Nat)\\b": 0,
+        "\\btrustCompiler\\b": 0
+      }
+    },
+    {
+      "module": "Sqpack.ZMTreeX",
+      "path": "lean/Sqpack/ZMTreeX.lean",
+      "blob": "7d6945fbfb279f132f1edeb9888cd17ebc846447",
+      "bytes": 23078,
+      "lines": 501,
+      "imports": [
+        "Sqpack.LBlockSound"
+      ],
+      "escapes": {
+        "\\bsorry\\b": 0,
+        "^\\s*axiom\\b": 0,
+        "\\bnative_decide\\b": 0,
+        "\\bofReduceBool\\b": 0,
+        "\\bimplemented_by\\b": 0,
+        "@\\[extern": 0,
+        "debug\\.skipKernelTC": 0,
+        "\\bunsafe\\b": 0,
+        "\\+native\\b": 0,
+        "\\bnative\\s*:=\\s*true\\b": 0,
+        "\\breduce(?:Bool|Nat)\\b": 0,
+        "\\btrustCompiler\\b": 0
+      }
+    },
+    {
+      "module": "Sqpack.ZeroMargin",
+      "path": "lean/Sqpack/ZeroMargin.lean",
+      "blob": "7d40021f619994ac900178c9a7e94f8cb4dcc27f",
+      "bytes": 54609,
+      "lines": 970,
+      "imports": [
+        "Sqpack.Basic",
+        "Sqpack.Chord"
+      ],
+      "escapes": {
+        "\\bsorry\\b": 0,
+        "^\\s*axiom\\b": 0,
+        "\\bnative_decide\\b": 0,
+        "\\bofReduceBool\\b": 0,
+        "\\bimplemented_by\\b": 0,
+        "@\\[extern": 0,
+        "debug\\.skipKernelTC": 0,
+        "\\bunsafe\\b": 0,
+        "\\+native\\b": 0,
+        "\\bnative\\s*:=\\s*true\\b": 0,
+        "\\breduce(?:Bool|Nat)\\b": 0,
+        "\\btrustCompiler\\b": 0
+      }
+    }
+  ],
+  "missing": [],
+  "external": {
+    "Mathlib": 3
+  },
+  "escapes": {
+    "\\bsorry\\b": 0,
+    "^\\s*axiom\\b": 0,
+    "\\bnative_decide\\b": 0,
+    "\\bofReduceBool\\b": 0,
+    "\\bimplemented_by\\b": 0,
+    "@\\[extern": 0,
+    "debug\\.skipKernelTC": 0,
+    "\\bunsafe\\b": 0,
+    "\\+native\\b": 0,
+    "\\bnative\\s*:=\\s*true\\b": 0,
+    "\\breduce(?:Bool|Nat)\\b": 0,
+    "\\btrustCompiler\\b": 0
+  },
+  "scope": [
+    "lean/Sqpack/Basic.lean",
+    "lean/Sqpack/Bentz.lean",
+    "lean/Sqpack/Bentz4.lean",
+    "lean/Sqpack/Bentz4Data.lean",
+    "lean/Sqpack/BentzData.lean",
+    "lean/Sqpack/BentzFam.lean",
+    "lean/Sqpack/BernsteinZ.lean",
+    "lean/Sqpack/BoxTree.lean",
+    "lean/Sqpack/CapK.lean",
+    "lean/Sqpack/Chord.lean",
+    "lean/Sqpack/ChordE.lean",
+    "lean/Sqpack/CovM.lean",
+    "lean/Sqpack/CovMP.lean",
+    "lean/Sqpack/Cover.lean",
+    "lean/Sqpack/D4.lean",
+    "lean/Sqpack/ExTree.lean",
+    "lean/Sqpack/ExTreeX.lean",
+    "lean/Sqpack/KArith.lean",
+    "lean/Sqpack/KBern.lean",
+    "lean/Sqpack/LBlock.lean",
+    "lean/Sqpack/LBlockSound.lean",
+    "lean/Sqpack/LebCorner.lean",
+    "lean/Sqpack/LebCredit.lean",
+    "lean/Sqpack/LebE.lean",
+    "lean/Sqpack/LebTan.lean",
+    "lean/Sqpack/LemmaE.lean",
+    "lean/Sqpack/LemmaEDec.lean",
+    "lean/Sqpack/LemmaEK.lean",
+    "lean/Sqpack/LemmaEKM.lean",
+    "lean/Sqpack/LemmaELeaf.lean",
+    "lean/Sqpack/LemmaELeafX.lean",
+    "lean/Sqpack/LemmaEPoly.lean",
+    "lean/Sqpack/LemmaESplit.lean",
+    "lean/Sqpack/LemmaESplitX.lean",
+    "lean/Sqpack/LemmaEVert.lean",
+    "lean/Sqpack/LemmaL.lean",
+    "lean/Sqpack/LemmaZ.lean",
+    "lean/Sqpack/MixedMeasure.lean",
+    "lean/Sqpack/PolyMin.lean",
+    "lean/Sqpack/RatU.lean",
+    "lean/Sqpack/RowMinK.lean",
+    "lean/Sqpack/S32.lean",
+    "lean/Sqpack/S32Data.lean",
+    "lean/Sqpack/SegParts.lean",
+    "lean/Sqpack/SegTree.lean",
+    "lean/Sqpack/SquareArea.lean",
+    "lean/Sqpack/V7/Bridge.lean",
+    "lean/Sqpack/V7/Data.lean",
+    "lean/Sqpack/ValidSplit.lean",
+    "lean/Sqpack/ValidSplit7.lean",
+    "lean/Sqpack/ValidSplitData.lean",
+    "lean/Sqpack/ZMTree.lean",
+    "lean/Sqpack/ZMTreeM.lean",
+    "lean/Sqpack/ZMTreeX.lean",
+    "lean/Sqpack/ZeroMargin.lean",
+    "lean/lake-manifest.json",
+    "lean/lakefile.toml",
+    "lean/lean-toolchain"
+  ]
+}

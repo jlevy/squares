@@ -498,7 +498,6 @@ repositories:
   - url: https://github.com/evand/square-packing
     read_through: 675a5eaa8712542daac8b4515b0f69ad7044df44
     read_on: '2026-10-11'
-    bead: think-0ayk
     note: >-
       The nine commits of 11 October (UTC) from 060c1a1 to 675a5ea past the 6bbae37 read, and the
       two branch commits 060c1a1 merges. 060c1a1 merges wand125's PR #6 (5b69ce0, 45d8c39):
@@ -515,6 +514,8 @@ repositories:
       Mondrian composer (search/packer/mondrian.py, MONDRIAN.md, a Kingbird catalogue sync and an
       s(126) reading as s(85b) + s(5)), with no certificate; the rest is site data. Open PR #509
       (think-csds) vendors search/regularize and search/exact at this head. Nothing else to import.
+      Since 26 October 2026 the evand-valid7-lean-2026-10-11 packet pins 060c1a1 and T-250
+      registers its Valid7 kernel proof (#537), so this read holds nothing back.
   - url: https://github.com/wand125/square-packing
     read_through: 23e31862345c532d17ad2c896677a3a8d8821aa4
     read_on: '2026-10-11'
@@ -898,7 +899,6 @@ repositories:
   - url: https://github.com/evand/square-packing
     read_through: 44a105ef95ac1925d83aab087d7ddab7f672b747
     read_on: '2026-10-16'
-    bead: think-0ayk
     note: >-
       The merge of wand125's PR #7 (16 October, 02:34Z) past the 1038892 read, and its one branch
       commit, 4eb59c4 of 11 October. lean/Sqpack/ExTreeTilt.lean proves validTilt_of_tree, so
@@ -906,8 +906,12 @@ repositories:
       V7/Face.lean and scripts/gen_face.py are gone, the root modules unchanged; LebMassBridge.lean
       bridges ExTree.CovT and LebMass.CovT for mcoverP and no root module imports it; VALID7.md,
       Valid7Checker.lean and Axioms.lean put the rebuild at about 6,650 CPU-hours, measured. New
-      evidence for the Valid7 kernel route to T-064's finite premise, which think-0ayk owns (#537)
-      until a packet pins it. Nothing else to import.
+      evidence for the Valid7 kernel route to T-064's finite premise, which think-0ayk owned (#537)
+      until a packet pinned it. Nothing else to import. On 26 October 2026 T-250 registered the
+      route from the evand-valid7-lean-2026-10-11 packet at 060c1a1, version 1 as built, and the
+      wand125-valid7-lean-v2-2026-10-17 packet, version 2, whose library c5c7f00 is upstream
+      3f004b7, after this merge, so it carries PR #7's changes; T-250 records the 6,650 CPU-hour
+      figure, and this merge, which rebuilt no root, holds nothing back.
   - url: https://github.com/evand/square-packing
     read_through: 7d1407a0b66c46e32cdbcbd5619586fe2bdd52a1
     read_on: '2026-10-16'
@@ -928,7 +932,6 @@ repositories:
   - url: https://github.com/wand125/square-packing
     read_through: 319a779efcc78db2f92bffc87844446f8723b01d
     read_on: '2026-10-16'
-    bead: think-jh0n
     note: >-
       The six commits of 16 October (03:25Z to 04:47Z) past the 0eb3fe5 read. 2c75edc and e99f5e3
       add problems/square-lower-bounds/certificates/k2m4_n77_L9/lean/, a Lean kernel proof of
@@ -939,6 +942,8 @@ repositories:
       (#643). 0aa00f7 lists it in the source's index and site. 4c926da proves s(46) = 10 +
       2/sqrt(3) for unit squares in an equilateral triangle, another container, outside this
       record; 574d27c and 319a779 add it to the source's triangle paper. Nothing else to import.
+      Since 26 October 2026 the wand125-validtilt9-lean-2026-10-16 packet pins 319a779 and T-251
+      registers the ValidTilt9 kernel proof, so this read holds nothing back.
   # The intake pass of 2026-10-17 (think-e2sz), lane W: what the sweep of 06:41Z to 06:42Z listed.
   - url: https://github.com/evand/square-packing
     read_through: 5ad00693899ef50ccf6502f0346187cc422cc914
@@ -991,7 +996,7 @@ repositories:
   - url: https://github.com/wand125/square-packing
     read_through: 746b0c06cdb1ef7988381153cebfba1b5e720b04
     read_on: '2026-10-17'
-    bead: think-jh0n
+    bead: think-d5m3
     note: >-
       The fourteen commits of 16 October (08:08Z to 11:39Z) past the 718887c read. 0a2ef54, 37db469,
       0dd6ec9 and b55a61f are the source's site: certificate data for the eighteen bounds, and the
@@ -1003,8 +1008,9 @@ repositories:
       axioms) from Evan Daniel's k2m4 family and the kernel proof of ValidTilt9. Rectangles are another
       container, but at A = B = k the theorem is s(k^2 - 4) >= k for k >= 8, the lower half of T-081,
       by a second Lean route over the same finite premise as #643's: new evidence for T-081's
-      formalization, which think-jh0n holds until a packet pins this commit or its import declines it.
-      Nothing else to import.
+      formalization, which think-jh0n held until a packet pins this commit or its import declines it.
+      Nothing else to import. On 26 October 2026, when T-251 registered #643's proof, the hold
+      moved to an import bead of its own, think-d5m3.
   - url: https://github.com/wand125/square-packing
     read_through: fbc5fc4ca042843481ec6cd3686153cfc7cd72a2
     read_on: '2026-10-17'
@@ -1043,12 +1049,14 @@ repositories:
   - url: https://github.com/wand125/square-packing
     read_through: d7afe3e525299d70de298af72cf17c581a86c0b1
     read_on: '2026-10-18'
-    bead: think-0ayk
+    bead: think-kjd7
     note: 'Read all eight commits past fbc5fc4. Valid7 kernel v2 at 649a920 (valid7-lean-v2) and its revised
       paper wording are new evidence for T-064/#537, held by think-0ayk: author reports 798 CPU-hours, same
       theorem and standard axioms, peak51GB; no build here. d7afe3e adds s42 >=2749/400 over2073 directions,
       held by think-kjd7. Other commits are site/index wording, paper links and higher-dimensional cube
-      results outside this record. New claim/replay cost and proof review remain owned, not completed.'
+      results outside this record. New claim/replay cost and proof review remain owned, not completed.
+      On 26 October 2026 the wand125-valid7-lean-v2-2026-10-17 packet pinned 649a920 and T-250 registered
+      version 2 with version 1 (#537), so this read holds only the s(42) bound, for think-kjd7.'
   - url: https://github.com/wand125/square-packing
     read_through: 6d93afc1e5336aa498c0a7657c0869dc648a7b92
     read_on: '2026-10-18'
@@ -1593,3 +1601,29 @@ repositories:
       rectangles are another container, and a square of side below 2 holds at most three
       unit squares, so the result does not reach a square box. f8ad649, 7384a72 and 2985613
       edit its metadata. Nothing to import.
+  # The import of #824 (think-3xn9, w-imports-1026, 26 October): the 30 commits past the
+  # d99925d read.
+  - url: https://github.com/evand/square-packing
+    read_through: 6067db5bf4d41dab7f0e1475e9fa845c0c6d2133
+    read_on: '2026-10-26'
+    note: >-
+      The 30 commits past the d99925d read, 31fefb9 to 6067db5 (2026-10-25T04:22Z to
+      2026-10-26T03:47:41Z); GitHub's activity log was not readable from the importing session,
+      so no push is dated. 1be69ca adds search/packer/candidates/s299-1025.cert,
+      s(299) <= 8901847717666168847717657266821/(5*10^29) = 17.8036954353323376..., 1.92e-2
+      below the house, with the binary64 packing it dilates (.input.txt), the pre-descent
+      packing, the exact solver's failed 80-digit point and its report; f01779b adds the
+      source store's prior facts at 299 (s299-1025_prior.json). #824 reports it, opened at
+      03:52:18Z, 21 minutes after the commit. The evand-n299-2026-10-26 packet pins 6067db5
+      and retains all six files, and T-248 registers the certificate (think-3xn9).
+      The other 28 hold no certificate of a square in a square and no published side at a
+      count. 4f46650 to cebac2c, 4537f89, a0b752b, 3874a11 and 09742a4 prove and retire
+      bounds for unit squares in a strip of height H (lean/Sqpack/StripBandPairs.lean,
+      StripPotWalk.lean, search/rectfront/r5strip/), and d1838a1 and 03171fe compare the
+      source's rectangle frontier with wand125's minimum widths: rectangles are another
+      container. 09742a4 reproves rect5_iff from the strip theorem and moves the generated
+      Rect5 modules to an attic; Rect.lean, RectChain.lean, Rect3.lean, Rect4Core.lean,
+      Rect4.lean, Rect5Pts.lean and Rect5Pack.lean, the square-case closure the
+      evand-rect-small-n-lean-2026-10-22 packet retains at 7051f4e for T-238, are unchanged.
+      The rest change the packer (goal-driven search, lineage credit, relax caps,
+      polish reuse, repository import), its docs and TODO.md. Nothing else to import.

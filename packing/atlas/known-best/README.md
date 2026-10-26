@@ -963,12 +963,13 @@ The same file’s `states` says, for every count n = 1..324, whether the picture
 is regularized: `regularized` where a view of Evan Daniel’s regularizer or the
 grid-slack generator is drawn, `regular-as-published` where the house drawing has no
 uneven and no near-axis square, `decided-no-better` where the strong generators ran on
-that very witness and drew nothing better, `regularization-owed` where they ran and drew
-no view the improvement rule could judge, so the drawing is not regularized and its
-`SETTLED` entry names the bead that owes it (the exact algebraic houses were so from 23
-to 26 October 2026, under think-mbdw; none is now), `exempt` with the bead that owns it,
-and `pending` otherwise.
-The totals count each state apart.
+that very witness and drew nothing better, `exempt` on the owner’s word with the bead
+that owns it, and `pending` otherwise.
+`regularization-owed`, where the runs drew no view the improvement rule could judge and
+the drawing waited on an open bead, is retired: the exact algebraic houses were so from
+23 to 26 October 2026, under think-mbdw, and since then the records tier fails a count
+in it (the owner, 26 October 2026: “When something lands on our main rendered lists, the
+regularization should be done.”). The totals count each state apart.
 Each state carries the drawn picture’s measures, the witness’s id, its source’s key,
 path and revision, and its side, and the runs that decided it.
 The index’s `status: regularized` means only that the layer holds a view: at n = 176 it
@@ -976,10 +977,12 @@ held the axis tool’s view while the raw house was drawn.
 A view that lapses with its witness is now recorded on the axis tool’s record (`lapsed`)
 rather than only printed.
 The records-tier step
-`every drawn picture is regularized, regular as published, decided, owed to an open bead or exempt`
+`every drawn picture is regularized, regular as published, decided or exempt on the owner's word`
 fails on a pending count that `devtools.default_drawings.PENDING_ALLOWED` does not name
-with its bead, and on a named count that is no longer pending; `bead tree` holds each
-bead the list names open.
+with its bead, and on a named count that is no longer pending; on an exemption without
+the owner’s recorded word or past its review date; and on a house the change moves
+without regularizing and flip-posing it.
+`bead tree` holds each bead the list names open.
 
 `--check-atlas` runs in the records tier on every pull request: it holds the index to
 the manifest, the witnesses and the views by digest, and reads each other generator’s
