@@ -61,6 +61,7 @@ from devtools import (
     site_urls,
     social_card,
 )
+from devtools.github_references import issue_url
 from devtools.overview_sections import LOWER_BOUNDS_PAPER, OPTIMALITY_PAPER, result_fragment
 from devtools.render_n11_lower_bounds_explainer import (
     COMPOSITE_ASSETS,
@@ -186,8 +187,9 @@ WORKBENCH_HOME = re.compile(r'<a\s+href="([^"]+)">the overview</a>')
 #: `packing/resources` and of `packing/campaign`, the two trees the Pages jobs' partial
 #: checkouts leave out (`rendered_record_links` refuses a sample that stops doing so):
 #: T-060's source packet, certificate and proof; T-043's, for another case and source; and
-#: T-023, a result of this project whose proofs and receipts are in the campaign.
-RECORD_LINK_SAMPLE = ("T-060", "T-043", "T-023")
+#: T-023, a result of this project whose proofs and receipts are in the campaign. T-245
+#: was reported in an issue, which its overview links (`result_overview.links_section`).
+RECORD_LINK_SAMPLE = ("T-060", "T-043", "T-023", "T-245")
 #: The trees a partial checkout omits the directories of, as `pages.yml` writes them.
 OMITTED_TREES = ("packing/resources/", "packing/campaign/")
 #: The pages with a table of results, whose rows' popovers each carry their result's
@@ -566,6 +568,7 @@ def changelog_checks(text: str) -> list[tuple[bool, str]]:
         if markup.ids.get(render_changelog.entry_anchor(entry["id"])) != 1:
             problems.append(f"missing or repeated entry {entry['id']}")
         targets = [
+            *(issue_url(document["repository"], number) for number in entry.get("issues", [])),
             *(f"{document['repository']}/pull/{number}" for number in entry["pull_requests"]),
             *(artifact["target"] for artifact in entry.get("artifacts", [])),
         ]
@@ -574,7 +577,7 @@ def changelog_checks(text: str) -> list[tuple[bool, str]]:
             for target in targets
             if render_changelog.serialized_target(target, destination="site") not in links
         ]:
-            problems.append(f"{entry['id']}: missing launch/PR links {missing}")
+            problems.append(f"{entry['id']}: missing launch/issue/PR links {missing}")
     archived = render_changelog.archived_news_targets(document)
     for anchor, target in archived.items():
         matches = [element for element in anchors if element.attrs.get("id") == anchor]
@@ -1270,15 +1273,26 @@ def record_link_checks(
             )
             continue
         absent = absent_links(rendered, overviews[address])
+        # The issues that reported the result are threads, not paths at `main`.
+        issues = issue_links(rendered)
+        unlinked = sorted(issues - issue_links(overviews[address]))
         line = (
             f"result overview {address}: lacks {len(absent)} of the {count} repository links "
             f"the renderer writes for it: {absent[:5]}{rendered_at}"
             if absent
-            else f"result overview {address}: carries the {count} repository links the "
-            "renderer writes for it"
+            else f"result overview {address}: lacks the reporting issue links "
+            f"{unlinked[:5]}{rendered_at}"
+            if unlinked
+            else f"result overview {address}: carries the {count} repository links and "
+            f"{len(issues)} reporting issue links the renderer writes for it"
         )
-        results.append((not absent, line))
+        results.append((not absent and not unlinked, line))
     return results
+
+
+def issue_links(text: str) -> set[str]:
+    """Every issue of the repository `text` links, as its address."""
+    return set(re.findall(r'href="(' + re.escape(REPO_URL) + r'/issues/[1-9][0-9]*)"', text))
 
 
 def repository_links(text: str) -> set[tuple[str, str, str]]:
