@@ -16,6 +16,7 @@ const colours = createColourSystem({
     ),
   ),
   angleToleranceDegrees: 0.5,
+  angleCentres: [],
 });
 const input: unknown = JSON.parse(
   await readFile(new URL("fixtures/packing-animation-v1.json", import.meta.url), "utf8"),

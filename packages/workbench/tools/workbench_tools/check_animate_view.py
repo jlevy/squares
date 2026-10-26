@@ -42,6 +42,12 @@ from workbench_tools.build_candidate import CITATIONS, stage_spelling
 from workbench_tools.build_site import build
 from workbench_tools.probes import probe
 
+#: The most the page's clock advances in one frame (`tick` in `src/application.js`).
+PLAY_CLOCK_CAP_SECONDS = 0.1
+#: How long `plays_across_steps` lets a run go whose clock is starved: the three steps it
+#: waits on take under 3.5 s on an idle host.
+PLAY_BOUND_SECONDS = 30
+
 
 @dataclass
 class Session:
@@ -232,19 +238,39 @@ def plays_across_steps(session: Session) -> str:
 
     Every other section seeks, and a seek draws one instant: none of them could see play stop
     at the end of a step, which is how a regression that halted playback after the first step
-    reached the owner (2026-09-21). This plays from the grid fill into 6 for 3.5 s and requires
-    the stage to have shown at least three n in turn: 5, 6 and 7 on the page as it stands.
+    reached the owner (2026-09-21). This plays from the grid fill into 6 and requires the stage
+    to show three n in turn, 5, 6 and 7 on the page as it stands, while it is still playing.
+
+    It waits on the page's clock, not on the wall's. The clock advances at most 0.1 s a frame,
+    so a host drawing fewer than ten frames a second plays slower than real time, and the 3.5 s
+    of real time this once allowed showed only n = 5 and 6 on a host at load 13 to 18 over four
+    cpus (#546; #538), the stopped regression's signature. A stop is still told apart: play
+    halts with two n shown, or the clock does not move while frames are drawn. The 30 s bound
+    only ends a run whose clock is starved; its message says which of the three it saw.
     """
-    played = session.look("animate/plays-on", **{"from": 6, "to": 10, "seconds": 3.5})
+    played = session.look(
+        "animate/plays-on", **{"from": 6, "to": 10, "steps": 3, "seconds": PLAY_BOUND_SECONDS}
+    )
     session.require(not played["errors"], f"a frame threw while playing: {played['errors']}")
     # Stopped after its first step, the stage shows that step's n and n + 1 and nothing more.
     # Carrying on, it shows at least one n past that, each in turn.
     seen = played["seen"]
+    clock = (
+        f"{played['clock']:.2f} s of the page's clock in {played['frames']} frames over "
+        f"{played['seconds']:.2f} s, the slowest {1000 * played['slowest']:.0f} ms"
+    )
+    if not played["playing"]:
+        why = "play stopped"
+    elif played["slowest"] > PLAY_CLOCK_CAP_SECONDS:
+        why = "the host drew frames slower than the clock's 0.1 s cap"
+    else:
+        why = "the clock did not keep up with frames drawn in time"
     session.require(
         len(seen) >= 3 and seen == list(range(seen[0], seen[0] + len(seen))),
-        f"play did not carry on from step to step: the stage showed n = {seen}",
+        f"play did not carry on from step to step: the stage showed n = {seen}; {why} "
+        f"({clock})",
     )
-    return f"play carried the stage through n = {played['seen'][0]} to {played['seen'][-1]}"
+    return f"play carried the stage through n = {seen[0]} to {seen[-1]} ({clock})"
 
 
 def drag_ends(session: Session) -> str:
@@ -1066,17 +1092,32 @@ SECTIONS: tuple[Callable[[Session], str], ...] = (
 )
 
 
-def check(page_path: Path, citations: Path = CITATIONS) -> str:
+def check(
+    page_path: Path,
+    citations: Path = CITATIONS,
+    *,
+    only: tuple[str, ...] = (),
+    cpu_throttle: float = 1,
+) -> str:
     """Run every section against one page; raise with every failure if any section failed.
 
     `citations` is the file the page was built from, which the citation sections hold what it
-    draws to.
+    draws to. `only` names the sections to run, every one when empty, and `cpu_throttle` slows
+    the page's CPU by that factor through Chromium's own emulation, which is how a loaded host
+    is reproduced on an idle one (#538).
     """
+    unknown = sorted(set(only) - {section.__name__ for section in SECTIONS})
+    if unknown:
+        raise ValueError(f"no such section: {', '.join(unknown)}")
+    sections = [section for section in SECTIONS if not only or section.__name__ in only]
     with sync_playwright() as playwright:
         browser = playwright.chromium.launch(
             headless=True, executable_path=os.environ.get("SQUARES_BROWSER_EXECUTABLE")
         )
         page = browser.new_page(viewport={"width": 1920, "height": 1080})
+        if cpu_throttle != 1:
+            cdp = page.context.new_cdp_session(page)
+            cdp.send("Emulation.setCPUThrottlingRate", {"rate": cpu_throttle})
         session = Session(page, citations=citations)
         page.on("pageerror", lambda error: session.failures.append(f"pageerror: {error}"))
         page.on(
@@ -1090,7 +1131,7 @@ def check(page_path: Path, citations: Path = CITATIONS) -> str:
         open_page(page, page_path)
         page.wait_for_timeout(500)
         done = []
-        for section in SECTIONS:
+        for section in sections:
             if section is not keyboard_ownership and session.api(("mode",)) != "animate":
                 session.enter_animate()
             try:
@@ -1112,14 +1153,31 @@ def main() -> int:
         default=CITATIONS,
         help="the citation file the page is built from",
     )
+    parser.add_argument(
+        "--section",
+        action="append",
+        default=[],
+        help="run only this section (repeatable), such as plays_across_steps",
+    )
+    parser.add_argument(
+        "--cpu-throttle",
+        type=float,
+        default=1,
+        help="slow the page's CPU by this factor, to reproduce a loaded host (#538)",
+    )
     options = parser.parse_args()
+    only = tuple(options.section)
     if options.page is None:
         with tempfile.TemporaryDirectory(prefix="squares-animate-view-") as directory:
             page = Path(directory) / "index.html"
             build(page.parent, citations=options.citations)
-            result = check(page, options.citations)
+            result = check(
+                page, options.citations, only=only, cpu_throttle=options.cpu_throttle
+            )
     else:
-        result = check(options.page, options.citations)
+        result = check(
+            options.page, options.citations, only=only, cpu_throttle=options.cpu_throttle
+        )
     print(f"OK: {result}")
     return 0
 

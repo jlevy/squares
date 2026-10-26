@@ -39,6 +39,7 @@ import sys
 import tempfile
 import time
 import unicodedata
+from collections import Counter
 from contextlib import contextmanager
 from fractions import Fraction
 from pathlib import Path
@@ -1707,8 +1708,67 @@ def compact_frame(witness: dict, rendering: list[dict], identities: list[int]) -
     return {"side": round(witness["side"], 9), "squares": squares, "ident": identities}
 
 
-def colour_contract() -> dict:
-    """The workbench colour inputs, derived from the shared renderer once per payload."""
+def _fold_quarter_turn(angle: float) -> float:
+    """An angle folded into [0, 90), with the arithmetic `foldAngle` in `colour.ts` uses."""
+    return math.fmod(math.fmod(angle, 90.0) + 90.0, 90.0)
+
+
+#: Under the 0.0001 step between four-place angles, over float noise (`atlas_angle_centres`).
+_TIE = 1e-9
+
+
+def _quarter_turn_gap(left: float, right: float) -> float:
+    distance = abs(_fold_quarter_turn(left) - _fold_quarter_turn(right))
+    return min(distance, 90.0 - distance)
+
+
+def atlas_angle_centres(
+    witnesses: dict[int, dict], tolerance: float = COLOUR_ANGLE_TOLERANCE_DEGREES
+) -> list[float]:
+    """The angle classes every frame shares, as one centre each, sorted.
+
+    The colourer used to cluster each frame's tilts on their own and cut the folded quarter
+    turn into fixed five-degree bands, so two frames' classes less than the tolerance apart
+    could fall either side of a band edge and draw in two colours: n = 29's 64.9387 and
+    T-151's 65.2889 at n = 272 did, in slots 14 and 15 (#553, review C1; #554). These centres
+    are drawn once from every witness of the atlas, whichever pairs a payload embeds, so a
+    class means the same thing in every frame and the colourer takes a class's slot from its
+    shared centre.
+
+    Each angle is taken as the page receives it (rounded to four places, as `compact_frame`
+    writes it) and folded. Angles within the tolerance of 0 or 45 degrees are the two pinned
+    classes and are left out. The rest are visited most frequent first, ties by angle, and an
+    angle further than the tolerance from every centre so far becomes a centre. So every
+    atlas angle lies within the tolerance of a centre, and the page puts it in the nearest;
+    and no two centres are within the tolerance of each other, so no two classes of any two
+    frames are, which is what lets the contract hold every shared angle to one slot. A tilt
+    can still sit a little either side of the line between two neighbouring classes, but that
+    line is the atlas's, the same in every frame. Single linkage would leave no such line, but
+    it chains the atlas's 1,009 distinct tilts into one class from 45.6 to 73.8 degrees.
+
+    Four-place angles lie a multiple of 0.0001 apart, so `_TIE` only decides the one case
+    float arithmetic could tip either way: an angle exactly the tolerance from a centre is
+    held by it, here and on the page (`SHARED_TIE` in `colour.ts`), and never a centre itself.
+    """
+    counts: Counter[float] = Counter()
+    for witness in witnesses.values():
+        for _x, _y, angle in witness["squares"]:
+            folded = round(_fold_quarter_turn(round(angle, 4)), 4)
+            if (
+                _quarter_turn_gap(folded, 0.0) > tolerance
+                and _quarter_turn_gap(folded, 45.0) > tolerance
+            ):
+                counts[folded] += 1
+    centres: list[float] = []
+    for angle, _count in sorted(counts.items(), key=lambda item: (-item[1], item[0])):
+        if all(_quarter_turn_gap(angle, centre) > tolerance + _TIE for centre in centres):
+            centres.append(angle)
+    return sorted(centres)
+
+
+def colour_contract(witnesses: dict[int, dict]) -> dict:
+    """The workbench colour inputs, derived from the shared renderer once per payload, and
+    the angle classes shared across the whole atlas."""
     from sqpack.render.color import square_fill_palette  # noqa: PLC0415
     from sqpack.render.style import SQUARE_HUE_PALETTE  # noqa: PLC0415
 
@@ -1720,6 +1780,7 @@ def colour_contract() -> dict:
         "palette": SQUARE_HUE_PALETTE,
         "shades": shades,
         "angleToleranceDegrees": COLOUR_ANGLE_TOLERANCE_DEGREES,
+        "angleCentres": atlas_angle_centres(witnesses),
     }
 
 
@@ -2183,12 +2244,14 @@ def main(argv: list[str] | None = None) -> int:
     template = (ASSETS / "template.html").read_text()
     metrics = type_metrics()
 
+    colour = colour_contract(witnesses)
+
     def payload_for(pair_ns: list[int]) -> dict:
         frame_ns = sorted({n for p in pair_ns for n in (p, p + 1)})
         return {
             "schema": "squares.workbench.corpus/v1",
             "version": version,
-            "colour": colour_contract(),
+            "colour": colour,
             "frames": {
                 str(n): compact_frame(witnesses[n], renderings[n], identities[n])
                 for n in frame_ns
