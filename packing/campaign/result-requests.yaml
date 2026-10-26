@@ -24969,7 +24969,8 @@ issues:
     title: 's(344) ≤ 18.992567544845: registration request'
     author: amundsk
     opened: '2026-10-25'
-    state: open
+    state: closed
+    closed: '2026-10-26'
     kind: result-report
     triage: done
     summary: >-
@@ -25018,7 +25019,13 @@ issues:
     beads:
     - think-p7cq
     answer_bead: think-p7cq
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/819#issuecomment-6412249047
+      date: '2026-10-26'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n344
     close_when: >-
       The row at 344 is recorded in report order with its replay, and the reply on main says
       so; nothing the author asked for is queued.
