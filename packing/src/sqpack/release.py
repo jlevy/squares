@@ -9463,6 +9463,43 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "version: v0.4.30, v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/devtools/site_resources.py",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The intake records of 26 October (think-p7cq): #819's beyond-horizon row at "
+            "344 and its source amundsk-issue819-2026-10-25, superseding the 964ee2b row "
+            "there (source-coverage.yaml), the gist's card among the other projects "
+            "(site_resources.py), and the requests entries of #819, #799, #565, #804 and "
+            "#773 (result-requests.yaml); no register entry. Against main 85a1919da "
+            "(#820): rendered at link revision b51aaf17 into empty site directories, twice "
+            "from this tree and once with that main's three files swapped in, "
+            "render_n11_lower_bounds_explainer, with its pinned Chromium math pass, "
+            "render_n11_optimality_review, render_n11_threshold_bound_review and "
+            "render_packing_methods write all 69 files byte-identical across the three. "
+            "No PDF was printed; each prints from that HTML. Every paper keeps its "
+            "version: v0.4.30, v0.1.11, v0.1.4 and v0.2.7."
+        ),
+    ),
 )
 
 
