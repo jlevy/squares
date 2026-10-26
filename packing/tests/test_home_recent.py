@@ -50,9 +50,10 @@ ENTRY = re.compile(
     r'<li(?: class="site-rollup-superseded")?><a href="results\.html#(t-\d{3})"'
     r'(?: title="Superseded")?>(T-\d{3})</a> .*?<small>[^<]* · (V\d) (C\d) (?:<b>)?(S\d)'
 )
-#: One house move: the result and the rest of the line, its counts' case links.
+#: One house move: the result and the rest of the line, its counts' case links. The line
+#: calls it the record packing (`house_entry`, the owner, 26 October 2026).
 HOUSE = re.compile(
-    r'<li><a href="results\.html#(t-\d{3})">(T-\d{3})</a> is now the house best packing at '
+    r'<li><a href="results\.html#(t-\d{3})">(T-\d{3})</a> is now the record packing at '
     r"(.*?)</li>"
 )
 #: One source's rows: the packet's address, the claims, the counts' span and the credit.
@@ -61,7 +62,7 @@ ROWS = re.compile(
     rf"beyond n = (\d+)<small>n = ([0-9{EN_DASH}]+) · (.*?)</small></li>"
 )
 #: The most bytes the section may weigh. On 22 October 2026, over 15-22 October, it
-#: measured 23,651 bytes: 45 results, 61 counts' house best packings on seven days and 11
+#: measured 23,651 bytes: 45 results, 61 counts' record packings on seven days and 11
 #: sources' 876 rows. The results page's seven days, retired with #737, had held 71
 #: results, about 22,000 bytes alone. Past this the section is becoming a second results
 #: table; the remedy is a shorter entry, not a higher number.
@@ -248,7 +249,7 @@ def test_a_stale_house_landing_is_left_out_and_the_render_carries_on(
     """A landing that names a result the count's verified upper bound no longer rests on,
     as `main` would hold after a pull request moved the house without stamping it, is
     left out as an unstamped one is: the page never says a superseded result "is now the
-    house best packing" (#736's review B, finding B2)."""
+    record packing" (#736's review B, finding B2)."""
     since, until = _window(overview)
     moves = house_moves(since, until)
     assert moves
@@ -270,7 +271,7 @@ def test_a_stale_house_landing_is_left_out_and_the_render_carries_on(
     assert stale not in {move.result for move in house_moves(since, until)}
     rendered = overview_sections.recently_added(overview)
     assert rendered.startswith('<div class="site-rollup site-added">')
-    assert f">{stale}</a> is now the house best packing" not in rendered
+    assert f">{stale}</a> is now the record packing" not in rendered
 
 
 def test_one_window_bounds_every_kind_and_the_introduction_names_what_is_shown(
@@ -278,17 +279,15 @@ def test_one_window_bounds_every_kind_and_the_introduction_names_what_is_shown(
 ) -> None:
     """Results, houses and rows share one window, from seven days before the newest
     arrival of any kind to it, read from the record and never the clock; the
-    introduction's span runs from the oldest day shown to the newest, so no block sits
-    outside it (#736's review A, finding A3)."""
+    introduction opens on the oldest day shown, so no block sits before it (#736's
+    review A, finding A3, under the owner's shorter wording of 26 October 2026)."""
     since, until = _window(overview)
     shown = sorted(date.fromisoformat(day) for day in days)
     assert shown
     assert since <= shown[0]
     assert shown[-1] == until
-    assert f"over {overview_sections.span_label(shown[0], shown[-1])}," in section
-    assert overview_sections.recent_span(overview) == overview_sections.span_label(
-        shown[0], shown[-1]
-    )
+    assert overview_sections.recent_since(overview) == overview_sections.day_label(shown[0])
+    assert f"since {overview_sections.recent_since(overview)}." in section
     # Bounded at both ends: a move or a source outside the window is left out.
     early = until - timedelta(days=1)
     assert all(move.day <= early for move in house_moves(since, early))
@@ -311,18 +310,24 @@ def test_the_newest_day_starts_open_and_each_day_tallies_what_it_holds(
         assert f"{counts}</span></summary>" in body
 
 
-def test_a_tally_counts_results_house_best_packings_and_rows_where_a_day_has_them() -> None:
+def test_a_tally_counts_results_record_packings_and_rows_where_a_day_has_them() -> None:
+    """Each part carries its count in bold and its noun in the summary's own case
+    (`tally_count`, the owner's 26 October 2026 wording), and a count of record packings
+    says *new records* rather than naming the house."""
     day = date(2026, 10, 22)
     move = HouseMove(day, "T-225", (204, 227, 229, 260))
     rows = BeyondRows(day, {"id": "s"}, tuple({"n": 330 + i} for i in range(111)))
     corpus = overview_sections.corpus_end()
     assert recent_tally(RecentDay(day, (), (move,), (rows,))) == (
-        "4 house best packings",
-        f"111 bounds beyond {corpus}",
+        "<b>4</b> new records",
+        f"<b>111</b> bounds beyond {corpus}",
     )
     assert recent_tally(RecentDay(day, (), (HouseMove(day, "T-1", (5,)),), ())) == (
-        "1 house best packing",
+        "<b>1</b> new record",
     )
+    assert overview_sections.counted(17) == "<b>17</b> results"
+    assert overview_sections.counted(1) == "<b>1</b> result"
+    assert overview_sections.counted(0) == "no results"
 
 
 def test_house_moves_list_each_count_once_under_its_house() -> None:
@@ -338,10 +343,10 @@ def test_house_moves_list_each_count_once_under_its_house() -> None:
 def test_the_section_links_all_results_and_news(
     section: str, days: dict[str, tuple[bool, str]]
 ) -> None:
-    """The introduction links All Results and News, never the results page's seven days,
-    which #737 retired; each day with results opens All Results on that day alone, a day
-    its Added on preset offers."""
-    assert 'href="results.html#all-results"' in section
+    """The introduction links News, never the results page's seven days, which #737
+    retired; each day with results opens All Results on that day alone, a day its Added
+    on preset offers. The owner's shorter introduction of 26 October 2026 names News
+    alone and leaves All Results to the section below it."""
     assert 'href="news.html"' in section
     assert "added-in-the-last-seven-days" not in section
     results = site_renders.html("results.html")

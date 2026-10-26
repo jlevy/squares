@@ -1,7 +1,7 @@
 /* The results page's overview above its table, two stacks of KPress's own disclosure:
    the last seven days' registrations, one a day (overview_sections.recent_added), then
    the weekly rollup before them, one a week (recent_rollup). Two blocks of a stack share
-   one rule. The home page's Recently Added is the first stack again, with its house best
+   one rule. The home page's Recently Added is the first stack again, with its new record
    packings and dated rows (recently_added). */
 .kpress .site-rollup {
   margin-block: 1rem var(--site-table-space);
@@ -35,9 +35,23 @@
   content: none;
 }
 
-/* A summary that wraps breaks before its count, never inside it. */
+/* A tally is a count, not a toggle's label. KPress sets a summary in the shared
+   section-label treatment -- real uppercase, tracked out, at the canonical label size --
+   and a count carries none of it: `17 results` reads at the note size in its own case,
+   with the number in the sans bold weight, and reads the same wherever a tally appears
+   (the owner, 26 October 2026). The same four declarations set a case record's own
+   disclosures apart from their labels (`site.css`, `.site-case details > summary`).
+   A summary that wraps breaks before its count, never inside it. */
 .kpress .site-rollup-count {
+  font-size: var(--site-font-size-note);
+  font-variant-caps: normal;
+  letter-spacing: normal;
+  text-transform: none;
   white-space: nowrap;
+}
+
+.kpress .site-rollup-count b {
+  font-weight: var(--site-font-weight-sans-bold);
 }
 
 .kpress .site-rollup .site-rollup-who {

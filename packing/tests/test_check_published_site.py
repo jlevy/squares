@@ -18,6 +18,7 @@ from types import SimpleNamespace
 from typing import NoReturn, Self, cast
 
 import pytest
+from kpress.format.markdown import parse_markdown
 from playwright.sync_api import Browser, BrowserContext
 from playwright.sync_api import Error as PlaywrightError
 
@@ -95,14 +96,26 @@ REPOSITORY_LINKS = (
 
 COMMIT = "0123456789abcdef0123456789abcdef01234567"
 
-#: News carries the current retained history, including the merged launch groups.
-#: Parse only this small section; the fixture does not rebuild the site or prepare math.
-CHANGELOG_BODY = '<h1 id="changelog">News</h1>' + render_changelog.render_news(
+#: News carries the current launch stories, the merged launch groups included, and sends
+#: a reader to the Changelog for the rest. Parse only this small section; the fixture does
+#: not rebuild the site or prepare math.
+CHANGELOG_BODY = '<h1 id="news">News</h1>' + render_changelog.render_news(
     render_changelog.load()
 )
 
+#: The Changelog page carries the whole retained history, every entry at every
+#: significance, as its article's one `changelog` section (`render_overview`
+#: `changelog_page`). The shared renderer writes Markdown with its own headings, so the
+#: fixture reads it through kpress as the page does, and nothing else of the page.
+HISTORY_BODY = parse_markdown(
+    render_changelog.render_markdown(
+        render_changelog.load(), destination="site", heading_level=1
+    ),
+    title="Changelog",
+).html
+
 #: The tree `main` holds at the deploy: every path a fixture page links on `main`.
-CHANGELOG_LINKS = branch_paths(CHANGELOG_BODY)
+CHANGELOG_LINKS = branch_paths(CHANGELOG_BODY + HISTORY_BODY)
 TREE = RepositoryTree(
     files=frozenset(
         {
@@ -194,6 +207,7 @@ def page(
         f"{head(path)}{bar}"
         f'<p>({stamp})</p><a href="{REPO_URL}/blob/{ref}/{link}">Repository</a>{index}'
         + (CHANGELOG_BODY if path == "news.html" else "")
+        + (HISTORY_BODY if path == render_changelog.CHANGELOG_PAGE else "")
     ).encode()
 
 

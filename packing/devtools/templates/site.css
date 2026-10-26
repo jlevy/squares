@@ -4164,6 +4164,19 @@ html[data-site-atlas-view="triangle"] .site-atlas-grid:where([data-atlas-grid]) 
   font-family: var(--kpress-font-sans);
   font-weight: var(--site-font-weight-sans-light);
 }
+
+/* A disclosure's toggle sits on the first line of its summary, not centred against a
+   summary that wrapped (the owner, 26 October 2026). KPress centres the glyph, which
+   reads right on the one-line summaries it was drawn for and leaves the glyph stranded
+   in the middle of a tallied day on a narrow screen. The offset centres it on the first
+   line: the line box less the glyph, halved, both from KPress's own values. */
+.kpress summary {
+  align-items: flex-start;
+}
+
+.kpress summary::before {
+  margin-block-start: calc((var(--kpress-caps-heading-line-height, 1.2) * 1em - 0.85em) / 2);
+}
 .kpress :is(h2, h3, h4).site-navigation-heading {
   font-family: var(--kpress-font-sans);
   font-style: normal;

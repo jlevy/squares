@@ -1321,29 +1321,23 @@ def added_days(results: Iterable[Result], since: date) -> list[AddedDay]:
     ]
 
 
-def span_label(first: date, last: date) -> str:
-    """A run of days as a summary names it, joined by an en dash, closed up within a
-    month and spaced across two: `5-11 October 2026`, `28 September - 4 October 2026`
-    (each `-` an en dash on the page), across a new year both years, and one day alone,
-    `5 October 2026`."""
-    if first == last:
-        return day_label(first)
-    if first.year != last.year:
-        return f"{first.day} {first:%B %Y} {EN_DASH} {last.day} {last:%B %Y}"
-    if first.month != last.month:
-        return f"{first.day} {first:%B} {EN_DASH} {last.day} {last:%B %Y}"
-    return f"{first.day}{EN_DASH}{last.day} {last:%B %Y}"
-
-
 def counted(count: int) -> str:
-    """A block's count as its summary ends: `1 result`, `14 results`, `no results`."""
-    return f"{count} result{'' if count == 1 else 's'}" if count else "no results"
+    """A block's count as its summary ends: `1 result`, `14 results`, `no results`. The
+    number is the part a reader scans, so it carries the weight (`tally_count`)."""
+    return tally_count(count, f"result{'' if count == 1 else 's'}") if count else "no results"
+
+
+def tally_count(count: int, noun: str) -> str:
+    """One part of a tally: the number in bold, then its noun in the summary's own case.
+    Every tally is written this way, so one reads like the next (the owner,
+    26 October 2026)."""
+    return f"<b>{count}</b> {_esc(noun)}"
 
 
 def tallied_summary(label: str, tally: Sequence[str]) -> str:
     """A day's summary with its tally (`recent_tally`), each part a count of its own
-    (`.site-rollup-count`): a summary that wraps breaks between parts, never inside
-    one."""
+    (`.site-rollup-count`, markup from `tally_count`): a summary that wraps breaks
+    between parts, never inside one, and its toggle keeps the first line."""
     counts = " ".join(f'<span class="site-rollup-count">· {part}</span>' for part in tally)
     return f"<summary><span>{_esc(label)} {counts}</span></summary>"
 
@@ -1603,13 +1597,11 @@ def recent_days(overview: Overview, *, days: int = ADDED_DAYS) -> list[RecentDay
     ]
 
 
-def recent_span(overview: Overview, *, days: int = ADDED_DAYS) -> str:
-    """The days Recently Added shows, as its introduction names them: its oldest shown day
-    to its newest (`span_label`), so no block can sit outside the span."""
+def recent_since(overview: Overview, *, days: int = ADDED_DAYS) -> str:
+    """The day Recently Added opens on, as its introduction names it: the oldest day it
+    shows, so no block sits before it (the owner's shorter wording, 26 October 2026)."""
     shown = [recent.day for recent in recent_days(overview, days=days)]
-    if not shown:
-        return day_label(arrival_reference(overview))
-    return span_label(min(shown), max(shown))
+    return day_label(min(shown) if shown else arrival_reference(overview))
 
 
 def corpus_end() -> int:
@@ -1618,29 +1610,36 @@ def corpus_end() -> int:
 
 
 def recent_tally(recent: RecentDay) -> tuple[str, ...]:
-    """A day's summary counts: its results, its counts with a new house best packing and
-    its rows beyond the corpus, each where it has any: `5 results`, `4 house best
-    packings`, `425 bounds beyond 324`. A summary is set in capitals, so no count names
-    a variable."""
+    """A day's summary counts: its results, its counts with a new record packing
+    (`house_entry`) and its rows beyond the corpus, each where it has any: `5 results`,
+    `4 new records`, `425 bounds beyond 324`, each written by `tally_count`. A count
+    never names a variable, since a summary's own label is set in capitals."""
     moved = sum(len(move.counts) for move in recent.houses)
     rows = sum(len(found.rows) for found in recent.rows)
     parts = (
         counted(len(recent.results)) if recent.results else "",
-        f"{moved} house best packing{'' if moved == 1 else 's'}" if moved else "",
-        f"{rows} bound{'' if rows == 1 else 's'} beyond {corpus_end()}" if rows else "",
+        tally_count(moved, f"new record{'' if moved == 1 else 's'}") if moved else "",
+        tally_count(rows, f"bound{'' if rows == 1 else 's'} beyond {corpus_end()}")
+        if rows
+        else "",
     )
     return tuple(part for part in parts if part)
 
 
 def house_entry(move: HouseMove) -> str:
     """A day's house move: the result, linking to its row on the results page, and the
-    counts whose house best packing it now is, each linking to its case."""
+    counts whose house best packing it now is, each linking to its case.
+
+    The line says *record packing*, not *house best packing*: by the import runbook's
+    house rule the house best is the smallest packing this record holds for a count, so
+    it is the record here, and *house best* reads as a term a reader has to look up (the
+    owner, 26 October 2026)."""
     from devtools.render_case_pages import case_link  # noqa: PLC0415
 
     counts = listed([case_link(n, str(n)) for n in move.counts])
     return (
         f'<li><a href="{_esc(result_url(move.result))}">{_esc(move.result)}</a> '
-        f"is now the house best packing at {counts}</li>"
+        f"is now the record packing at {counts}</li>"
     )
 
 

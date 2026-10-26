@@ -28,10 +28,8 @@ proved that no packing can exist, such as the reported $s(29) \ge 5.81$).
 
 <div class="site-navigation-copy">
 
-Everything that reached this site over {{RECENT_SPAN}}, newest first: each result at any
-significance, each count whose house best packing moved, and the dated bounds recorded
-beyond $n = {{CORPUS_END}}$. [All Results](results.html#all-results) lists every result;
-[News](news.html) has the stories rated S3 and above.
+A log of all results recorded by the Squares Project since {{RECENT_SINCE}}. For major
+items only, see [News](news.html).
 
 </div>
 

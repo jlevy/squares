@@ -42,8 +42,9 @@ def test_navigation_marks_ancestors_without_claiming_the_parent_page() -> None:
         for tag, link in tags
         if tag in {"a", "button"}
         and link.get("class") != "site-nav-fallback"
-        and link.get("data-page") in {"overview", "news", "results", "learn", "about"}
-    ] == ["overview", "news", "results", "learn", "about"]
+        and link.get("data-page")
+        in {"project", "overview", "news", "changelog", "results", "learn", "about"}
+    ] == ["project", "overview", "news", "changelog", "results", "learn", "about"]
     assert any(
         link.get("data-page") == "results" and link.get("aria-current") == "true"
         for _, link in tags
@@ -53,7 +54,7 @@ def test_navigation_marks_ancestors_without_claiming_the_parent_page() -> None:
         for link in links
     )
     assert not any(link.get("aria-current") == "page" for link in links)
-    assert sum(attrs.get("class") == "site-nav-disclosure" for _, attrs in tags) == 3
+    assert sum(attrs.get("class") == "site-nav-disclosure" for _, attrs in tags) == 4
     assert not any(
         attrs.get("role") == "menu" and attrs.get("class") == "site-nav-submenu"
         for _, attrs in tags
@@ -76,6 +77,8 @@ def test_visible_and_structured_ancestry_share_paths_and_escape_titles() -> None
         "papers/proof.html": ["Learn", "Papers", "Current <title>"],
         "tutorial.html": ["Learn", "Tutorials", "Current <title>"],
         "tutorial-advanced.html": ["Learn", "Tutorials", "Current <title>"],
+        "news.html": ["Project", "Current <title>"],
+        "changelog.html": ["Project", "Current <title>"],
         "papers.html": ["Learn", "Current <title>"],
         "tutorials.html": ["Learn", "Current <title>"],
         "posters.html": ["Learn", "Current <title>"],
@@ -101,13 +104,15 @@ def test_visible_and_structured_ancestry_share_paths_and_escape_titles() -> None
         assert [item["name"] for item in items] == expected
         canonical = path.removesuffix("index.html") if path.endswith("/index.html") else path
         assert items[-1]["item"] == f"https://squaremath.org/{canonical}"
-        if expected[0] in {"Learn", "Results", "About"}:
+        if expected[0] in {"Project", "Learn", "Results", "About"}:
             assert "item" not in items[0]
             assert f"<li><span>{expected[0]}</span></li>" in trail
             if expected[0] == "Learn" and len(expected) > 2:
                 catalogue = "papers.html" if expected[1] == "Papers" else "tutorials.html"
                 assert f'href="../{catalogue}"' in trail
-    for path in ("index.html", "./", "news.html"):
+    # The homepage alone keeps no trail: it is the root a trail would start from, and
+    # its name is the project's rather than its Overview menu label.
+    for path in ("index.html", "./"):
         assert not breadcrumbs_html(path, "Standalone page")
         assert breadcrumb_data(path, "Standalone page", "https://squaremath.org/") is None
 
@@ -451,12 +456,14 @@ def test_group_controls_include_label_and_chevron_and_start_with_substantive_con
     nav = navigation_links("tutorials.html")
     controls = re.findall(r'<button[^>]+class="site-nav-disclosure"[^>]*>(.*?)</button>', nav)
     assert [html.unescape(re.sub(r"<[^>]+>", "", content)) for content in controls] == [
+        "Project",
         "Results",
         "Learn",
         "About",
     ]
     assert all(any(tag == "svg" for tag, _ in Tags(content).tags) for content in controls)
     for group, target in {
+        "project": "./",
         "results": "atlas.html",
         "learn": "tutorials.html",
         "about": "about.html",
@@ -643,7 +650,7 @@ def test_disclosure_and_chevron_motion_share_timing_and_respect_reduced_motion()
                 page.set_content(_browser_document())
                 if width < 768:
                     page.get_by_role("button", name="Menu", exact=True).click()
-                for label in ("Results", "Learn", "About"):
+                for label in ("Project", "Results", "Learn", "About"):
                     trigger = page.get_by_role("button", name=label, exact=True)
                     trigger.click()
                     state = page.evaluate(motion)
@@ -707,7 +714,9 @@ def test_menu_destinations_supply_canonical_titles_and_categories_have_no_urls()
                 assert navigation_title(item.path, "Stale page title") == item.label
             trail = breadcrumbs_html(item.path, "Stale page title")
             data = breadcrumb_data(item.path, "Stale page title", "https://squaremath.org/")
-            if not group.children:
+            if not group.children or item.path == "./":
+                # A destination outside a group keeps no trail, and neither does the
+                # homepage inside one: it is where a trail would start.
                 assert not trail
                 assert data is None
                 continue
@@ -894,7 +903,8 @@ def test_actual_page_families_share_the_prose_measure_and_card_outer_edges(
                     assert abs(frame["left"] - column["left"]) < 0.5, (name, width, frame)
                     assert abs(frame["width"] - column["width"]) < 0.5, (name, width, frame)
                 trail, brand = found["firstTrail"], found["brand"]
-                if name in {"index.html", "news.html"}:
+                # The homepage is where a trail would start, so it alone carries none.
+                if name == "index.html":
                     assert trail is None, name
                 else:
                     assert trail is not None, (name, width, found)
@@ -953,6 +963,8 @@ def test_theme_control_uses_the_shared_contrast_icon_size_and_keeps_its_name() -
 def test_current_category_keeps_the_shared_underline_on_descendant_pages() -> None:
     from tests import site_browser  # noqa: PLC0415
 
+    # Every destination of the bar now sits in a category, the homepage included, so the
+    # underline is always on a category's own control (the owner, 26 October 2026).
     destinations = {
         "result/t-037.html": "Results",
         "profiles/joshua-levy.html": "About",
@@ -960,8 +972,9 @@ def test_current_category_keeps_the_shared_underline_on_descendant_pages() -> No
         "tutorial.html": "Learn",
         "results.html": "Results",
         "about.html": "About",
-        "index.html": "Overview",
-        "news.html": "News",
+        "index.html": "Project",
+        "news.html": "Project",
+        "changelog.html": "Project",
     }
     with site_browser.api().sync_playwright() as driver:
         browser = site_browser.launch(driver)
@@ -971,15 +984,14 @@ def test_current_category_keeps_the_shared_underline_on_descendant_pages() -> No
                 navigation_links("cases/11.html"), navigation_links(path)
             )
             page.set_content(document)
-            role = "button" if label in {"Results", "Learn", "About"} else "link"
-            active = page.get_by_role(role, name=label, exact=True)
+            active = page.get_by_role("button", name=label, exact=True)
             site_browser.api().expect(active).to_have_css("text-decoration-line", "underline")
             site_browser.api().expect(active).to_have_css("text-decoration-thickness", "2px")
             active.hover()
             site_browser.api().expect(active).to_have_css("text-decoration-line", "underline")
             active.focus()
             site_browser.api().expect(active).not_to_have_css("outline-style", "none")
-            for other in ("Results", "Learn", "About"):
+            for other in ("Project", "Results", "Learn", "About"):
                 if other != label:
                     site_browser.api().expect(
                         page.get_by_role("button", name=other, exact=True)

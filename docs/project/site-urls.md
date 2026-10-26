@@ -993,6 +993,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | cases/98.html | cases/98.html | record | overview | 2026-10-03 | 2026-10-14 | live |
 | cases/99.html | cases/99.html | record | overview | 2026-10-03 | 2026-10-14 | live |
 | cases/index.html | atlas.html | forwarder | overview | 2026-09-29 | 2026-10-22 | forwarded → atlas.html |
+| changelog.html | changelog.html | page | overview | 2026-10-26 | 2026-10-26 | live |
 | contributors/erich-friedman.html | profiles/erich-friedman.html | forwarder | overview | 2026-10-10 | 2026-10-22 | forwarded → profiles/erich-friedman.html |
 | contributors/evan-daniel.html | profiles/evan-daniel.html | forwarder | overview | 2026-10-10 | 2026-10-22 | forwarded → profiles/evan-daniel.html |
 | contributors/f-gobel.html | profiles/f-gobel.html | forwarder | overview | 2026-10-10 | 2026-10-22 | forwarded → profiles/f-gobel.html |
