@@ -2689,6 +2689,44 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "paper:square-packing-methods-survey",
         ),
         paths=(
+            "packing/devtools/default_drawings.py",
+            "packing/src/sqpack/cli/validate.py",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The regularization gate of 26 October 2026 (think-al1a): default_drawings.py "
+            "retires the regularization-owed state, holds an exemption to the owner's "
+            "recorded word and a review date, and holds every house a change moves to its "
+            "general and flip regularization; validate.py renames the state step and widens "
+            "what it reads. None of it is a reader the papers call: they read "
+            "default-drawings.json, which does not change. Against main 4e94cc2cf (#826), "
+            "after merging it: rendered at link revision 100b90d8 into empty site "
+            "directories, twice from this tree at 100b90d8 and twice with main's "
+            "default_drawings.py and validate.py swapped in (69 files each), "
+            "render_n11_lower_bounds_explainer, with its pinned Chromium math pass, "
+            "render_n11_optimality_review, render_n11_threshold_bound_review and "
+            "render_packing_methods write every file byte-identical across all four. No PDF "
+            "was printed; each prints from that HTML. Retain v0.4.30, v0.1.11, v0.1.4 and "
+            "v0.2.7."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
             "packing/devtools/upper_bound_reports.py",
             "packing/devtools/upper_bound_sharp_controls.py",
         ),
