@@ -5,8 +5,8 @@ title: Adopt T-242 at 268 (H2 of think-hx0e), on or after 2026-10-26T00:00Z, and
 kind: task
 status: in_progress
 priority: 2
-version: 5
-delegate: c-h2-268-1025
+version: 6
+delegate: w-pr807-1026
 labels:
   - result-import
   - validation
@@ -19,7 +19,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-25T00:39:01.456Z
-updated_at: 2026-10-25T05:38:56.517Z
+updated_at: 2026-10-26T00:42:30.080Z
 started_at: 2026-10-25T04:15:45.960Z
 ---
 H2 of think-hx0e: adopt T-242 (Evan Daniel's s268_lightning.cert at evand/square-packing@8a8879a, 16.874361715869345824484822296466, 4.48e-12 below T-240) at 268 as the house, under the house rule, and regularize the new house with both strong generators in the same pull request.
