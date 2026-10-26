@@ -5,14 +5,16 @@ title: "Decide: does a D6 deletion bound get a row (all 36, or where an issue cl
 kind: task
 status: open
 priority: 2
-version: 8
+version: 9
 labels:
   - decision
   - result-import
-dependencies: []
+dependencies:
+  - type: blocks
+    target: is-01m5pjxq31vpw03t0emgwnvhfe
 parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 created_at: 2026-10-23T15:28:13.698Z
-updated_at: 2026-10-24T08:28:43.831Z
+updated_at: 2026-10-26T03:02:59.850Z
 ---
 **The question.** The owner answered D6 on 23 October (think-f2io) by selecting the option labelled "Yes, an earlier report (Recommended)". The rest is the question the coordinator asked, not the owner's words: as coord-intake-1023 relayed it, the question was "a side obtained by deleting a square from a neighbour's certificate (e.g. Couzo's 985 from his 986)", and the selected option's description read "A published deletion bound counts like any stated bound; a later equal or higher side is not recorded". The owner-answers branch (PR #754) applies that: each such bound is recorded in the walk, and a later equal or higher side is not recorded (#732's 985). It gives the bound no row of its own, which is think-f2io's recommendation ("no rows, except where an issue claims the count"), not the owner's word. Three questions follow:
 1. Does a one-square deletion bound get a row of its own, as a stated bound with a certificate has? The selected option's description, the coordinator's words, said it "counts like any stated bound".

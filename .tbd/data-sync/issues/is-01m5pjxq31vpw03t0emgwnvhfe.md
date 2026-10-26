@@ -5,9 +5,9 @@ title: "Import franciscouzo: 126 upper bounds at 330-997 (106 certificate rows) 
 kind: task
 status: in_progress
 priority: 2
-version: 11
+version: 12
 spec_path: docs/project/specs/active/plan-2026-10-24-rows-above-1024.md
-delegate: c-import-gn29-1024
+delegate: coord-n12-1025
 labels:
   - result-import
 dependencies: []
@@ -17,7 +17,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-24T09:12:30.049Z
-updated_at: 2026-10-25T05:20:48.024Z
+updated_at: 2026-10-26T03:03:00.891Z
 started_at: 2026-10-24T20:35:18.503Z
 ---
 
