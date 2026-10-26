@@ -33,9 +33,10 @@ W1 phase on one branch:
    [`devtools.intake_sweep`](../devtools/intake_sweep.py), which reads every source in
    [the table below](#intake-sources) and prints each item the record has not taken in,
    and under **Regularization owed** each count whose drawing still waits for the strong
-   generators, with the bead that owns its runs.
-   It exits nonzero while any item lacks an open bead to own it, or waits on something
-   that has already happened.
+   generators, with the bead that owns its runs, and each exemption for the owner.
+   It exits nonzero while any item lacks an open bead to own it, its bead has gone quiet
+   (no update in 7 days, or a claim whose session is gone), a regularization is owed on
+   main, or it waits on something that has already happened.
    Read **Needs Action** first, then **Not Checked**: a source the sweep could not read
    is not a clean source.
 2. **Own each item** as [stage 0](#stage-0-sweep) says: a bead for each new result, a
@@ -102,9 +103,9 @@ W1 phase on one branch:
    closeable issue still open under **Needs Action** until it is closed.
    Each new item it finds is triaged read-only, with a proposed disposition, before any
    of it is worked ([stage 1](#stage-1-triage)). The pass is done when nothing needs
-   action, every count it re-housed is regularized or owned by an open bead under
-   **Regularization owed**, and every reply it owes is posted and recorded, or when the
-   pull request says why each remaining item waits.
+   action, every count it re-housed is regularized, regular as published or decided no
+   better, or exempt on the owner’s word, and every reply it owes is posted and
+   recorded, or when the pull request says why each remaining item waits.
 
 The pass needs network access to `github.com`, for Git and for the API through `gh`;
 `kingbird.myphotos.cc`, for the catalogue capture; `evand.github.io`, for imports from
@@ -252,7 +253,7 @@ Every input reaches the record through one of these sources, and the sweep reads
 | Other catalogues and releases | Read by hand: the register’s other `current-catalogue` and `first-party-release` sources, UnitSquare’s release today. The sweep prints when each was last reviewed | A later release: an import. Nothing new: the source’s `reviewed` date moves |
 | Watched repositories | Every repository the source register, a packet’s acquisition record, or the site’s list of other projects names. `git ls-remote` reads each head, and a fetch of commits and trees finds the commits past every pin and every read, and the commits a pin contains whose changed paths no packet at or after them retains | A new result: an import bead, then a packet at the head. New evidence for a registered entry: an evidence update. Nothing to import: a read in [`intake-watch.yaml`](intake-watch.yaml) |
 | The record’s own queues | Counts pending catalogue intake, deferred conflicts, results and asks queued on open issues, triage and replies owed, the validation backlog | Nothing new: each names an open bead, and one whose bead has closed gets a new owner |
-| The regularized layer | `atlas/known-best/default-drawings.json`’s `states` against `default_drawings.PENDING_ALLOWED` and `SETTLED`: each count pending regularization, each decision that still owes runs or an outcome, each exemption, and whatever the regularization-state gate fails on | Nothing new: each names an open bead. A pending count the list does not name, or whose bead has closed, gets its runs or an owner |
+| The regularized layer | `atlas/known-best/default-drawings.json`’s `states` against `default_drawings.PENDING_ALLOWED`, `SETTLED` and `UNRATIFIED`: each count pending regularization, each exemption, and whatever the regularization-state gate fails on | Nothing, or exemptions on the owner’s word, listed for him. Anything else needs action: a pending count gets its runs, and an exemption without his word gets his word or its runs |
 | Blocked imports | A queued result’s or ask’s `blocked_on`, and what an open `result-import` bead says it waits on or depends on, read through `gh` and the bead store | A blocker that merged or closed: the wait resumes, or the bead says what it waits on now |
 
 The capture is the network half of the dated research survey that refreshes the retained
@@ -367,16 +368,17 @@ happened:
   decide it, whichever import made the house: an adoption, a Kingbird catalogue intake
   or an exact re-solve.
   The sweep’s **Regularization owed** lists each pending count with the bead its
-  `default_drawings.PENDING_ALLOWED` entry names, each decision whose `owed` names a
-  bead, and each exemption.
-  A pending count that the list does not name, or whose bead is no longer open, needs
-  action: its runs in this pass, or an open bead that owns them, labelled
-  `regularization` (and `validation`, with stage 4’s block and a backlog row, where the
-  runs are held above the cap) and named in the count’s `PENDING_ALLOWED` entry
-  ([stage 5](#adopt-a-house-then-regularize-it)). The entry is made by the pull request
-  that corrects the witness, never by one that re-houses the count, whose runs are owed
-  in that pull request ([the house rule](#the-house-rule)); for a count re-housed
-  earlier whose bead has since closed, this pass’s pull request names the new bead.
+  `default_drawings.PENDING_ALLOWED` entry names, and each exemption; only an exemption
+  on the owner’s word stands there without needing action.
+  A pending count needs action: one the list names is owed on main, and one it does not
+  name, or whose bead is no longer open or has gone quiet, needs its runs in this pass,
+  or an open bead that owns them, labelled `regularization` (and `validation`, with
+  stage 4’s block and a backlog row, where the runs are held above the cap) and named in
+  the count’s `PENDING_ALLOWED` entry ([stage 5](#adopt-a-house-then-regularize-it)).
+  The entry is made by the pull request that corrects the witness, never by one that
+  re-houses the count, whose runs are owed in that pull request
+  ([the house rule](#the-house-rule)); for a count re-housed earlier whose bead has
+  since closed, this pass’s pull request names the new bead.
   The owner, 16 October 2026: “we should make sure all of the intake process covers the
   regularization and we update that for any other new packings we have.
   That should be part of our standard process to do the regularization.”
@@ -1096,19 +1098,82 @@ changes it, whichever import made the new packing a house:
 
 None of them defers its runs but a witness corrected or re-solved with its house’s side
 unchanged, as below.
-The steps are the regularization guide’s
-[When a Witness Changes](../../docs/project/guides/regularization-process.md#when-a-witness-changes):
-`build_known_best_atlas --update` writes the new witness, the axis tool’s
-`--update-atlas` redraws its view, `default_drawings --update` records each count’s
-state, and `--check-state` names each count left `pending`. Then both strong generators
-run on each pending count, and the selection admits what improves on the drawing.
-Where neither draws better, the count is settled as the guide says.
-`adopt_houses` prints the re-housed counts and these commands when it writes, and with
-`--dry-run` before it does.
-It names the run directories for the adoption’s day and its lowest and highest re-housed
-count, since the layer records a run by its directory’s name and a repeated name would
-replace an earlier run’s record: the index holds only the runs merged into the branch,
-so two adoptions in flight on one day would otherwise print the same names.
+The owner, 26 October 2026: “When something lands on our main rendered lists, the
+regularization should be done.
+There’s no excuse not to, because it should be cheap to calculate.
+We should do flipper regularization as well as the general regularization, and that
+process should be well defined.”
+He called n = 259 and 302 drawn unregularized on the home page a serious process failure
+that must never recur: the seven exact algebraic houses rested `regularization-owed` on
+an open bead from 23 to 26 October.
+
+**The regularization step.** Every pull request that moves a house runs it for each
+count it moves, from `packing/`; `adopt_houses` prints these commands with the counts
+and run directories filled in when it writes, and with `--dry-run` before it does:
+
+1. **Redraw.** `build_known_best_atlas --update` writes the new witness,
+   `regularize_axis_components --update-atlas --n N...` draws the axis tool’s view of
+   it, and `default_drawings --update` records each count’s state.
+   `default_drawings --check-state` names each count left `pending`.
+2. **Run both strong generators** on each pending count, into run directories no run in
+   the index has named: `regularize_grid_slack` at 0.5, 1 and 5 degrees
+   (`--near-axis-degrees`), and Evan Daniel’s driver, `regularize_evand run`. They cost
+   5 to 25 CPU-minutes a count (below).
+3. **Select and admit.** `regularize_select` over the four runs, then the `layer`
+   commands it prints. A count whose view the selection admits reads `regularized`.
+4. **Settle the rest.** A count the runs drew nothing better for is settled
+   `decided-no-better` in `default_drawings.SETTLED`, with its runs and the new
+   witness’s source key, path, revision and side.
+   Keep the receipts: each run’s `run.json` or `receipt.json` with its per-count reports
+   under `packing/cases/regularized_drawings/<bead>-<date>/<run directory>/`, and, for a
+   run only the index records, its block, copied by `default_drawings --retain-runs`.
+   Where no strong generator can draw the witness at all, as the number-field houses
+   were before grid-slack’s version 2, stop: land the capability first, or record the
+   owner’s exemption (below).
+   There is no owed state.
+5. **Render and record**, which flip-regularizes every default picture:
+   `render_regularized_atlas --update`, `default_drawings --update`,
+   `flip_regularization --update`, `regularized_drawings` and `render_results --update`
+   (the guide’s
+   [step 5](../../docs/project/guides/regularization-process.md#5-render-and-record)).
+6. **Check.** `default_drawings --check`, `default_drawings --check-state --base-ref
+   origin/main` and `flip_regularization --check`, all three in the records and fast
+   tiers.
+
+**The states a moved count may land in.** `--check-state --base-ref` reads the record of
+the commit the change is built on and takes every count whose witness file differs from
+it, or whose witness identifies itself otherwise, as one the change moves.
+Each lands `regularized`, `regular-as-published` or `decided-no-better` on the new
+witness, or `exempt` on the owner’s word, or `pending` only as a corrected witness
+`PENDING_ALLOWED` names (below).
+Its flip pose is decided again from its picture and must be the one
+`flip-regularization.json` records.
+`regularization-owed` is retired: the gate fails a count in it, and a `SETTLED` decision
+that still owes runs or an outcome.
+
+**What a reviewer checks.** The pull request lists each moved count’s drawing before and
+after with `default_drawings --compare` (below), and its flip pose with
+`flip_regularization --n N`; it names the run directories and the selection’s table, and
+links the retained receipts.
+The reviewer confirms that each moved count’s state is one of those above on the new
+witness, that each settlement’s runs are retained and cover the count, that each
+exemption quotes the owner, and that the state step,
+`every drawn picture is regularized, regular as published, decided or exempt on the owner's word`,
+printed `this change moves N houses` with the counts expected.
+
+**An exemption is the owner’s alone.** An `exempt` entry in `SETTLED` carries his words
+exactly, the day he gave them and the repository file that records them
+(`default_drawings.OwnerWord`), the reason, the bead that will settle the count, and a
+review date at most 14 days after his word.
+The gate finds his words in that file, and fails an exemption without them or past its
+review date. The intake sweep lists each exemption for him.
+The four decimal Kingbird witnesses at 39, 55, 290 and 291, which an agent set aside on
+15 October 2026 with no strong run (think-yk2h), stand without his word until 9 November
+2026 (`default_drawings.UNRATIFIED`), and the gate fails each one still unworded after
+that day. It names the run directories for the adoption’s day and its lowest and highest
+re-housed count, since the layer records a run by its directory’s name and a repeated
+name would replace an earlier run’s record: the index holds only the runs merged into
+the branch, so two adoptions in flight on one day would otherwise print the same names.
 
 The strong runs cost 5 to 25 CPU-minutes a count, from the layer’s run receipts:
 
@@ -1168,9 +1233,10 @@ and holds this one to the base record ([The House Rule](#the-house-rule)). It ru
 reason, then the guide’s render step, and lists the drawings as above.
 
 The records tier’s
-`every drawn picture is regularized, regular as published, decided, owed to an open bead or exempt`
+`every drawn picture is regularized, regular as published, decided or exempt on the owner's word`
 (`default_drawings --check-state`) fails on a pending count that the list does not name,
-so an adoption cannot pass until its runs have decided every count it re-houses.
+so an adoption cannot pass until its runs have decided every count it re-houses, and on
+a count the change moves whose flip pose the flip record does not hold.
 It also fails on a listed count that is no longer pending and on a `SETTLED` entry
 decided on the earlier witness.
 So the adoption’s pull request takes each count its runs decided off the list, and
@@ -1188,8 +1254,8 @@ gate was added (think-sfas).
 Fourteen of the twenty lost a strong view before the index recorded lapses, and their
 entries in the list are the record of it.
 The sweep’s **Regularization owed** lists every count still pending, with the bead that
-owns its runs, so each pass sees what its own houses and earlier ones still owe
-([stage 0](#stage-0-sweep)).
+owns its runs, as needing action, and each exemption for the owner, so each pass sees
+what its own houses and earlier ones still owe ([stage 0](#stage-0-sweep)).
 
 ### Label the PR and Prepare News
 

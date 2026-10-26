@@ -782,6 +782,96 @@ def test_a_pending_intake_is_owned_while_its_bead_is_open() -> None:
     assert bare.state == sweep.NEEDS_OWNER
 
 
+# -- A bead gone quiet owns nothing ----------------------------------------------------
+# Section E of the intake review of 26 October 2026: `owned` read any open bead as an
+# owner, so think-mbdw, claimed by a session gone since 16 October, held seven owed
+# counts out of every report for eight days.
+
+
+def _quiet(status: str, updated: str, delegate: str = "") -> sweep.Beads:
+    return sweep.Beads(
+        {"think-aaaa": status},
+        (),
+        {"think-aaaa": f"{updated}T09:00:00.000Z"},
+        {"think-aaaa": delegate},
+        date(2026, 10, 26),
+    )
+
+
+@pytest.mark.parametrize(
+    ("status", "updated", "delegate", "state", "bead_state"),
+    [
+        ("open", "2026-10-20", "", sweep.OWNED, "open"),
+        (
+            "open",
+            "2026-10-19",
+            "",
+            sweep.STALLED,
+            "open; no update since 2026-10-19 (7 days)",
+        ),
+        (
+            "blocked",
+            "2026-10-12",
+            "",
+            sweep.STALLED,
+            "blocked; no update since 2026-10-12 (14 days)",
+        ),
+        ("in_progress", "2026-10-25", "w-lane-1025", sweep.OWNED, "in_progress"),
+        (
+            "in_progress",
+            "2026-10-24",
+            "w-lane-1024",
+            sweep.STALLED,
+            ("in_progress; claimed by w-lane-1024, whose session is gone: no update since "
+            "2026-10-24 (2 days)"),
+        ),
+        # A claim with no delegate names no session, and an open bead claims nothing.
+        ("in_progress", "2026-10-24", "", sweep.OWNED, "in_progress"),
+        ("open", "2026-10-22", "w-lane-1022", sweep.OWNED, "open"),
+        ("closed", "2026-10-25", "", sweep.NEEDS_OWNER, "closed"),
+    ],
+)
+def test_a_bead_gone_quiet_owns_nothing(
+    status: str, updated: str, delegate: str, state: str, bead_state: str
+) -> None:
+    item = sweep.owned("an item", "think-aaaa", _quiet(status, updated, delegate))
+    assert (item.state, item.bead, item.bead_state) == (state, "think-aaaa", bead_state)
+    assert (item.state in sweep.ACTION) is (state != sweep.OWNED)
+
+
+def test_without_the_sweep_day_or_an_update_no_bead_is_quiet() -> None:
+    """A store read without the sweep's day, as the tests' `_beads` builds one, or a bead
+    with no `updated_at`, judges no staleness: the bead's state alone decides."""
+    assert sweep.owned("x", "think-aaaa", _beads(**{"think-aaaa": "open"})).state == sweep.OWNED
+    bare = sweep.Beads({"think-aaaa": "open"}, (), {}, {}, date(2026, 10, 26))
+    assert sweep.owned("x", "think-aaaa", bare).state == sweep.OWNED
+
+
+def test_the_store_carries_each_bead_update_and_delegate(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    from devtools import check_bead_tree  # noqa: PLC0415
+
+    found = [
+        {
+            "id": "is-01aaaa",
+            "status": "in_progress",
+            "title": "a claim",
+            "updated_at": "2026-10-16T08:00:00.000Z",
+            "delegate": "c-lane-1016",
+        },
+        {"id": "is-01bbbb", "status": "open", "title": "a bead", "updated_at": None},
+    ]
+    aliases = {"aaaa": "01aaaa", "bbbb": "01bbbb"}
+    monkeypatch.setattr(check_bead_tree, "load", lambda: (found, "", aliases))
+    beads = sweep.Beads.load(date(2026, 10, 26))
+    assert beads is not None
+    assert beads.updated == {"think-aaaa": "2026-10-16T08:00:00.000Z", "think-bbbb": ""}
+    assert beads.delegates == {"think-aaaa": "c-lane-1016", "think-bbbb": ""}
+    assert beads.stalled("think-aaaa") == "no update since 2026-10-16 (10 days)"
+    assert beads.stalled("think-bbbb") == ""
+
+
 def test_offline_reads_no_network_and_reports_what_it_skipped() -> None:
     def network(*_: object) -> Any:
         pytest.fail("--offline made a network call")
@@ -813,13 +903,16 @@ def test_the_report_leads_with_what_needs_action() -> None:
                 sweep.Item("stalled", sweep.RESOLVED, step="resume it"),
                 sweep.Item("settled", sweep.CLOSEABLE, step="close it"),
                 sweep.Item("held", sweep.OWNED, bead="think-aaaa", bead_state="open"),
+                sweep.Item("quiet", sweep.STALLED, bead="think-bbbb", bead_state="open"),
+                sweep.Item("n = 1 pending on main", sweep.OWED_ON_MAIN, bead="think-cccc"),
             ],
             unchecked=["a source: skipped"],
         )
     ]
     report = sweep.markdown(sections, TODAY)
     assert (
-        "1 item without an open bead to own it, 1 item whose blocker has resolved, "
+        "1 item without an open bead to own it, 1 item whose bead has gone quiet, "
+        "1 regularization owed on main, 1 item whose blocker has resolved, "
         "1 closeable issue still open, 1 item owned by an open bead, and 1 source not "
         "checked." in report
     )
@@ -828,7 +921,9 @@ def test_the_report_leads_with_what_needs_action() -> None:
     assert "| Source | orphan | needs an owner |  | open a bead |" in report
     assert "| Source | settled | closeable, still open |  | close it |" in report
     assert "| held | owned | think-aaaa (open) |  |" in report
-    assert sweep.needing_action(sections) == sections[0].items[:3]
+    assert "| Source | quiet | owned by a stalled bead |  |  |" in report
+    items = sections[0].items
+    assert sweep.needing_action(sections) == [*items[:3], *items[4:]]
 
 
 def _settled(**extra: Any) -> dict[str, Any]:
@@ -1121,6 +1216,12 @@ def _corrected(monkeypatch: pytest.MonkeyPatch, n: int) -> None:
     monkeypatch.setitem(defaults.CORRECTED, n, fix)
 
 
+def _beyond_exemptions(items: list[sweep.Item]) -> list[sweep.Item]:
+    """The items that are not exemptions, which the live record's four unratified ones
+    would otherwise join in every test of another item."""
+    return [item for item in items if " is exempt " not in item.what]
+
+
 def _first(state: str) -> int:
     from devtools import default_drawings as defaults  # noqa: PLC0415
 
@@ -1131,14 +1232,15 @@ def _first(state: str) -> int:
     return int(found)
 
 
-def test_every_pending_count_is_owned_by_the_bead_its_allowlist_entry_names(
+def test_every_allowed_pending_count_is_owed_on_main_with_its_bead(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    """think-9qm5: the owner made regularizing every new house part of the standard
-    intake, so the sweep lists each count whose drawing is pending regularization with the
-    bead that owns its runs, a corrected witness's count a test allowed among them, and
-    each decision that still owes runs and each exemption with theirs. While those beads
-    are open nothing needs action; a bead that closes leaves its counts needing an owner."""
+    """think-9qm5 made regularizing every new house part of the standard intake, and the
+    owner, 26 October 2026: "When something lands on our main rendered lists, the
+    regularization should be done." A corrected witness's count the list defers is allowed
+    on main by the gate, but its regularization is not done, so the sweep lists it as owed
+    on main, needing action, with the bead that owns its runs; a bead that closes leaves
+    it needing an owner."""
     from devtools import default_drawings as defaults  # noqa: PLC0415
 
     n = _first(defaults.REGULAR_AS_PUBLISHED)
@@ -1148,12 +1250,12 @@ def test_every_pending_count_is_owned_by_the_bead_its_allowlist_entry_names(
     states = {**_deferral_beads(), "think-aaaa": "open"}
     section = sweep.regularization_section(_beads(**states), record=record, allowed=allowed)
     assert section.title == "Regularization owed"
-    assert all(item.state == sweep.OWNED for item in section.items)
-    pending = [item for item in section.items if " pending: " in item.what]
+    pending = _beyond_exemptions(section.items)
+    assert all(item.state == sweep.OWED_ON_MAIN for item in pending)
     assert sorted(int(item.what.split()[2]) for item in pending) == sorted(allowed)
     added = next(item for item in pending if item.what.startswith(f"n = {n} "))
     assert (added.what, added.bead, added.bead_state) == (
-        f"n = {n} pending: re-housed by a test adoption",
+        f"n = {n} pending on main: re-housed by a test adoption",
         "think-aaaa",
         "open",
     )
@@ -1161,96 +1263,78 @@ def test_every_pending_count_is_owned_by_the_bead_its_allowlist_entry_names(
     for count, entry in defaults.PENDING_ALLOWED.items():
         (item,) = [found for found in pending if found.what.startswith(f"n = {count} ")]
         assert entry.startswith(f"{item.bead}: "), count
-    owing = {count for count, held in defaults.SETTLED.items() if held.owed}
-    decided = [item for item in section.items if " decided no better " in item.what]
-    assert len(decided) <= len(owing)
-    assert all(item.bead == "think-0ut1" for item in decided if "#518" in item.what)
+    assert set(sweep.needing_action([section])) >= set(pending)
     assert section.notes[0].startswith("Regularization states of 324 counts: ")
-    # One count is pending once the live list is empty, as it is from #654 up.
     counts = "pending count" if len(allowed) == 1 else "pending counts"
     assert (
-        f"Owed: {len(allowed)} {counts}, {len(allowed)} of them in PENDING_ALLOWED"
-        in (section.notes[0])
+        f"On main: {len(allowed)} {counts}, {len(allowed)} of them in PENDING_ALLOWED"
+        in section.notes[0]
     )
 
     closed = sweep.regularization_section(
         _beads(**{**states, "think-aaaa": "closed"}), record=record, allowed=allowed
     )
-    orphaned = [item for item in closed.items if item.state == sweep.NEEDS_OWNER]
-    assert [(item.what, item.bead, item.bead_state) for item in orphaned] == [
-        (added.what, "think-aaaa", "closed")
+    orphaned = _beyond_exemptions(sweep.needing_action([closed]))
+    assert [(item.what, item.state, item.bead, item.bead_state) for item in orphaned] == [
+        (added.what, sweep.NEEDS_OWNER, "think-aaaa", "closed")
     ]
-    assert sweep.needing_action([closed]) == orphaned
 
 
-def test_each_decision_and_exemption_is_owned_by_the_bead_it_names() -> None:
-    """Review A2 of #650: the sweep exists to catch a bead that closes while it still owns
-    a count. Each decision whose `SETTLED` entry still owes runs or an outcome, each count
-    whose regularization is owed (review A4 of #756), and each exemption, is listed once
-    with the bead its entry names (`owed` first, the exemption's evidence anywhere, as
-    `default_drawings.deferrals` reads them), owned while that bead is open; closing those
-    beads leaves exactly their items needing an owner."""
+def test_the_section_shows_only_exemptions_on_the_owner_word_without_action() -> None:
+    """Section E of the intake review of 26 October 2026: the section listed seven owed
+    counts and four exemptions as owned by their open beads, so nothing reached the owner.
+    Now it holds nothing that does not need action but an exemption on the owner's word,
+    listed for him with his words and its review date; an exemption without his word
+    needs action, with the bead it names and the day the gate fails it."""
     from devtools import default_drawings as defaults  # noqa: PLC0415
 
-    rows = {
-        row["n"]: row
-        for row in json.loads(defaults.RECORD.read_text(encoding="utf-8"))["states"]
-    }
-    owes: dict[int, str] = {}
-    unregularized: dict[int, str] = {}
-    exempt: dict[int, str] = {}
-    what: dict[int, str] = {}
-    for n, held in defaults.SETTLED.items():
-        if held.owed and rows[n]["state"] in (defaults.DECIDED, defaults.OWED):
-            bead = defaults.BEAD.match(held.owed)
-            assert bead is not None, n
-            owed = held.owed[bead.end() :].lstrip(":; ").strip()
-            if rows[n]["state"] == defaults.DECIDED:
-                owes[n] = bead[0]
-                what[n] = f"n = {n} decided no better on its witness, still owed: {owed}"
-            else:
-                unregularized[n] = bead[0]
-                what[n] = f"n = {n} not regularized on its witness, regularization owed: {owed}"
-        if held.state == defaults.EXEMPT and rows[n]["state"] == defaults.EXEMPT:
-            bead = defaults.BEAD.search(held.evidence)
-            assert bead is not None, n
-            exempt[n] = bead[0]
-            what[n] = f"n = {n} exempt: {held.outcome}"
-    if not owes or not unregularized or not exempt:
-        pytest.skip("the data holds no decision that owes runs, no owed one, or no exemption")
+    exempt = sorted(n for n, held in defaults.SETTLED.items() if held.state == defaults.EXEMPT)
+    if not exempt:
+        pytest.skip("the data holds no exemption")
     states = _deferral_beads()
+    section = sweep.regularization_section(_beads(**states), today=TODAY)
+    assert [item.state for item in section.items] == [sweep.NEEDS_OWNER] * len(exempt)
+    for n, item in zip(exempt, section.items, strict=True):
+        held = defaults.SETTLED[n]
+        assert item.what == (
+            f"n = {n} is exempt {defaults.AWAITING_WORD} {defaults.UNRATIFIED_UNTIL}: "
+            f"{held.outcome}"
+        )
+        bead = defaults.BEAD.search(held.evidence)
+        assert bead is not None
+        assert (item.bead, item.bead_state) == (bead[0], "in_progress")
+        assert item.step.startswith("ask the owner: record his words")
+        assert item.step.endswith(f"before {defaults.UNRATIFIED_UNTIL}, when the gate fails it")
+    assert "0 exemptions on the owner's word" in section.notes[0]
+    assert f"{len(exempt)} exemptions without it" in section.notes[0]
 
-    def listed(section: sweep.Section, words: str) -> dict[int, sweep.Item]:
-        found = [item for item in section.items if words in item.what]
-        by_n = {int(item.what.split()[2]): item for item in found}
-        assert len(by_n) == len(found), words
-        return by_n
-
-    section = sweep.regularization_section(_beads(**states))
-    decided = listed(section, " decided no better on its witness, still owed: ")
-    owing = listed(section, " not regularized on its witness, regularization owed: ")
-    exempted = listed(section, " exempt: ")
-    assert {n: item.bead for n, item in decided.items()} == owes
-    assert {n: item.bead for n, item in owing.items()} == unregularized
-    assert {n: item.bead for n, item in exempted.items()} == exempt
-    for n, item in [*decided.items(), *owing.items(), *exempted.items()]:
-        assert (item.what, item.state, item.bead_state) == (what[n], sweep.OWNED, "in_progress")
-    assert sweep.needing_action([section]) == []
-
-    closing = {*owes.values(), *unregularized.values(), *exempt.values()}
-    assert not closing & {
-        found[0]
-        for entry in defaults.PENDING_ALLOWED.values()
-        if (found := defaults.BEAD.match(entry))
-    }
-    closed = sweep.regularization_section(
-        _beads(**{**states, **dict.fromkeys(closing, "closed")})
+    # The owner's word turns the first into a listing for him, which needs no action.
+    n = exempt[0]
+    word = defaults.OwnerWord(
+        "so they look a little chaotic",
+        "2026-10-23",
+        "docs/project/policies/regularization-policy.md#13-flip-regularization",
     )
-    orphaned = sweep.needing_action([closed])
-    assert sorted(item.what for item in orphaned) == sorted(
-        item.what for item in [*decided.values(), *owing.values(), *exempted.values()]
+    worded = defaults.SETTLED[n]._replace(owner_word=word, review_by="2026-11-06")
+    section = sweep.regularization_section(
+        _beads(**states),
+        settled={**defaults.SETTLED, n: worded},
+        unratified=frozenset(exempt) - {n},
+        today=date(2026, 10, 26),
     )
-    assert {item.bead_state for item in orphaned} == {"closed"}
+    shown = [item for item in section.items if item.state not in sweep.ACTION]
+    assert [(item.what, item.state, item.since) for item in shown] == [
+        (
+            (
+                f"n = {n} is exempt on the owner's word of 2026-10-23 ({word.recorded_in}): "
+                f"\u201cso they look a little chaotic\u201d; {worded.outcome}"
+            ),
+            sweep.LISTED,
+            "2026-10-23",
+        )
+    ]
+    assert shown[0].step == "review it with the owner by 2026-11-06, or regularize the count"
+    assert "1 exemption on the owner's word" in section.notes[0]
 
 
 def test_an_allowlist_entry_naming_a_bead_the_store_lacks_needs_an_owner(
@@ -1272,10 +1356,10 @@ def test_an_allowlist_entry_naming_a_bead_the_store_lacks_needs_an_owner(
     states = _deferral_beads()
     assert "think-zzzz" not in states
     section = sweep.regularization_section(_beads(**states), record=record, allowed=allowed)
-    action = sweep.needing_action([section])
+    action = _beyond_exemptions(sweep.needing_action([section]))
     assert [(item.what, item.state, item.bead, item.bead_state) for item in action] == [
         (
-            f"n = {n} pending: a corrected witness in a test",
+            f"n = {n} pending on main: a corrected witness in a test",
             sweep.NEEDS_OWNER,
             "think-zzzz",
             "no such bead",
@@ -1341,7 +1425,7 @@ def test_a_pending_count_no_list_names_needs_action_once(tmp_path: Path) -> None
     n = _first(defaults.REGULAR_AS_PUBLISHED)
     record = _drawings(tmp_path, n, defaults.PENDING)
     section = sweep.regularization_section(_beads(**_deferral_beads()), record=record)
-    action = sweep.needing_action([section])
+    action = _beyond_exemptions(sweep.needing_action([section]))
     assert [item.what.split(":")[0] for item in action] == [
         f"n = {n} is pending and PENDING_ALLOWED does not name it"
     ]
@@ -1367,7 +1451,7 @@ def test_anything_else_the_state_gate_fails_on_needs_action(
         record=defaults.RECORD,
         allowed=allowed,
     )
-    assert [item.what for item in sweep.needing_action([section])] == [
+    assert [item.what for item in _beyond_exemptions(sweep.needing_action([section]))] == [
         (
             "the regularization-state gate fails: "
             f"n={n}: PENDING_ALLOWED names it, but it is regularized; take it off the list"
@@ -1395,12 +1479,14 @@ def test_a_record_of_another_contract_needs_action_and_does_not_stop_the_sweep(
             "default-drawings.json is not a packing.squares:DefaultDrawings/v2 record"
         )
     ]
-    assert section.notes[0].startswith("Regularization states of 0 counts. Owed: 0 pending")
+    assert section.notes[0].startswith(
+        "Regularization states of 0 counts. On main: 0 pending counts"
+    )
 
 
 def test_the_sweep_reports_regularization_with_the_record_side_queues() -> None:
     """The section is part of every sweep, `--offline` and `--json` included, beside the
-    queues it follows; with no bead store its items are owned but unconfirmed."""
+    queues it follows; with no bead store the beads its items name are unconfirmed."""
 
     def network(*_: object) -> Any:
         pytest.fail("--offline made a network call")

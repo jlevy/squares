@@ -61,18 +61,27 @@ its side), the runs that decided that witness, and one state:
 - `decided-no-better`: the strong generators ran on this very witness and drew nothing
   the improvement rule takes: the layer holds a strong generator's view of it and does
   not draw it, or `SETTLED` says so, by the witness's source and side;
-- `regularization-owed`: the strong generators ran on this very witness and none drew a
-  view the improvement rule could judge, for want of a capability rather than by a
-  judgement, so the drawing is not regularized and its regularization is owed to the
-  open bead `owed` names (`SETTLED`, by the witness's source and side). The exact
-  algebraic houses were the case from 23 to 26 October 2026 (review A4 of #756), until
-  grid-slack's version 2 drew them in their own number fields (think-mbdw); no count is
-  owed now;
-- `exempt`: the count is set aside with a reason and the bead that owns it (`SETTLED`);
+- `regularization-owed`: retired. The exact algebraic houses rested here from 23 to 26
+  October 2026, owed to an open bead, until grid-slack's version 2 drew them in their own
+  number fields (review A4 of #756, think-mbdw). The owner, 26 October 2026: "When
+  something lands on our main rendered lists, the regularization should be done." The
+  name stays in the record's totals, at 0, so the record keeps its shape, and
+  `--check-state` fails a count in it, a `SETTLED` entry that gives it, and a decision
+  that still owes runs or an outcome (`owed`);
+- `exempt`: the count is set aside on the owner's word alone (`SETTLED`): his words, the
+  day he said them and the repository file that records them, which must hold them
+  (`OwnerWord`), with the reason, the bead that owns it and a review date at most
+  `EXEMPTION_REVIEW_DAYS` after his word. `--check-state` fails an exemption without his
+  word or past its review date. The four decimal Kingbird witnesses an agent set aside on
+  15 October 2026 are the one exception, until `UNRATIFIED_UNTIL` (`UNRATIFIED`);
 - `pending`: none of these, as at a count whose strong view lapsed with its witness
   (the index's `lapsed`, which `--update-atlas` writes) or that `PENDING_ALLOWED` names,
   even where the new house reads regular, or that only the axis tool's view, the
   reference and fallback, has drawn.
+
+So a count on `main` rests in one of the first three states (`RESTING`), or is exempt on
+the owner's word, or is pending only as a corrected witness `PENDING_ALLOWED` names with
+an open bead.
 
 `--check-state` is the gate, reading the record and the index, measuring nothing. The
 pending counts must be exactly `PENDING_ALLOWED`: it fails on a pending count the list
@@ -97,19 +106,30 @@ copies the block into the evidence (`SETTLED_RUNS`) while the index still has it
 the record lists the counts the run covered, a receipt's counts or the reports beside a
 block, the settled count must be one of them. A copy there that no `SETTLED` entry
 names fails too, since the directory holds the blocks settlements rest on (review G2 of
-#644). Each bead the list, an exemption, or a decided or regularization-owed count's
-`owed` names must be open, which `devtools.check_bead_tree` holds through `deferrals`, and
-a regularization-owed entry must name one. Since the house rule, each entry is
+#644). Each bead the list or an exemption names must be open, which
+`devtools.check_bead_tree` holds through `deferrals`. Since the house rule, each entry is
 a corrected witness's (`CORRECTED`), which names the witness it replaced; with
 `--base-ref REF` the gate reads the record of the commit the change is built on, the merge
 base of `REF` and `HEAD`, and holds each entry to it (`deferral_problems`), so a house moved
 by any import, a Kingbird catalogue intake or a re-solve as much as an adoption, cannot be
 deferred as a correction (review C3 of #660). The records tier passes `origin/main`, or the
-first parent on `main` itself. A record older than a
-witness is `--check`'s to catch, by deciding every count again. A witness is identified by what
-it says of itself -- its source's key, path and revision, and its side -- never by a
-digest of its bytes (OR-16); its id is the count's (`W-known-best-nNNN`) and names no
-house, so the gate's comparison of it only holds each row to its count.
+first parent on `main` itself.
+
+**A change that moves a house** carries both its regularizations (`moved_problems`). With
+`--base-ref`, every count whose witness file differs from the base or whose witness
+identifies itself otherwise is one the change moves: an adoption, a Kingbird intake, a
+re-solve or a correction. Each must rest on the new witness, regularized, regular as
+published or decided no better, or carry the owner's exemption, or be pending only as a
+correction `PENDING_ALLOWED` names; and its flip pose (`flip_regularization`, policy
+section 13) is decided again from its picture and must be the one the flip record holds.
+So adoption, general regularization and flip regularization land in one change, and the
+base is read whatever is deferred: a shallow clone fails, naming the remedy.
+
+A record older than a witness is `--check`'s to catch, by deciding every count again. A
+witness is identified by what it says of itself -- its source's key, path and revision,
+and its side -- never by a digest of its bytes (OR-16); its id is the count's
+(`W-known-best-nNNN`) and names no house, so the gate's comparison of it only holds each
+row to its count.
 
 `--compare EARLIER` reads two records, measuring nothing, and lists each count whose
 state, drawn picture or witness differs, with both pictures' uneven and near-axis squares
@@ -138,8 +158,9 @@ import argparse
 import gzip
 import json
 import re
-from collections.abc import Mapping, Sequence
+from collections.abc import Callable, Mapping, Sequence
 from concurrent.futures import ProcessPoolExecutor
+from datetime import UTC, date, datetime, timedelta
 from fractions import Fraction
 from functools import cache
 from pathlib import Path
@@ -188,13 +209,25 @@ ABOVE_BOUND = "above U, not in the exceptions"
 REGULARIZED_STATE = "regularized"
 REGULAR_AS_PUBLISHED = "regular-as-published"
 DECIDED = "decided-no-better"
-#: Not regularized, with the runs done and no view the improvement rule could judge; its
-#: regularization is owed to the bead its `SETTLED` entry's `owed` names (review A4 of
-#: #756). Counted apart from `DECIDED`, since nothing judged a view no better.
+#: Retired on 26 October 2026: not regularized, with its regularization owed to an open
+#: bead, as the exact algebraic houses were from 23 to 26 October (review A4 of #756). An
+#: open bead let them rest on `main` unregularized, which the owner called a serious
+#: process failure. The name stays in `STATES`, so the record's totals keep their shape
+#: and count it at 0, and `--check-state` fails a count in it (`RETIRED`).
 OWED = "regularization-owed"
 EXEMPT = "exempt"
 PENDING = "pending"
 STATES = (REGULARIZED_STATE, REGULAR_AS_PUBLISHED, DECIDED, OWED, EXEMPT, PENDING)
+#: The states a count rests in on `main` by its own record: regularized, regular as
+#: published, or decided no better by the strong generators' runs on its witness. An
+#: exemption rests only on the owner's word (`OwnerWord`), and a pending count only as a
+#: corrected witness `PENDING_ALLOWED` names.
+RESTING = (REGULARIZED_STATE, REGULAR_AS_PUBLISHED, DECIDED)
+#: The states nothing may rest in.
+RETIRED = frozenset({OWED})
+#: How long after the owner's word an exemption stands before he reviews it (review E4 of
+#: the intake review of 26 October 2026).
+EXEMPTION_REVIEW_DAYS = 14
 #: The generators whose drawn view makes a count `regularized`: Evan Daniel's regularizer
 #: and the grid-slack port of his placement. The axis tool is the reference and fallback
 #: (policy section 4); a drawing it alone made waits for these to decide its witness.
@@ -206,17 +239,32 @@ STRONG_GENERATORS = frozenset(
         "regularize_grid_slack/2",
     }
 )
-#: A bead id, which every `PENDING_ALLOWED` entry, exemption and `owed` names.
+#: A bead id, which every `PENDING_ALLOWED` entry and exemption names.
 BEAD = re.compile(r"\bthink-[0-9a-z]{4}\b")
+
+
+class OwnerWord(NamedTuple):
+    """The owner's word that exempts a count: his words exactly as he gave them, the day
+    he gave them (`YYYY-MM-DD`), and the repository-relative file that records them,
+    optionally with a `#fragment`. The gate finds the words in that file, so an exemption
+    rests on what the record shows the owner said, not on an agent's summary of it."""
+
+    quote: str
+    said_on: str
+    recorded_in: str
 
 
 class Settled(NamedTuple):
     """A count the strong generators decided, or that is set aside, on one witness: its
-    state (`DECIDED`, `OWED` or `EXEMPT`); that witness as it identifies itself, exactly as it
+    state (`DECIDED` or `EXEMPT`); that witness as it identifies itself, exactly as it
     writes them -- its source's key, path and revision (`None` where the source pins
     none) and its side; the runs that decided it as (generator, run id); what they
-    found; where the record says so; and, where a decision still owes runs or a recorded
-    outcome, the open bead that owns them and what it owes (`owed`)."""
+    found; and where the record says so, or for an exemption, the bead that owns it.
+
+    An exemption carries the owner's word (`owner_word`) and the day it is to be reviewed
+    by (`review_by`, `YYYY-MM-DD`), at most `EXEMPTION_REVIEW_DAYS` after his word. `owed`
+    is retired with `OWED`: a decision that still owes runs or a recorded outcome is not a
+    decision, and the gate fails one that names it."""
 
     state: str
     source: str
@@ -227,6 +275,8 @@ class Settled(NamedTuple):
     outcome: str
     evidence: str
     owed: str | None = None
+    owner_word: OwnerWord | None = None
+    review_by: str | None = None
 
 
 #: Both generators ran again on 16 October 2026 at the ten counts decided on 15 October
@@ -1051,6 +1101,20 @@ SETTLED: dict[int, Settled] = {
     ),
 }
 
+#: The exemptions made before an exemption needed the owner's word, which stand without
+#: it until `UNRATIFIED_UNTIL` and fail the gate after it. An agent set the four decimal
+#: Kingbird witnesses aside on 15 October 2026 (think-y1x3's audit; think-yk2h), on the
+#: axis tool's refusal alone: no strong generator was run on them, and the owner never
+#: gave his word (section E of the intake review of 26 October 2026). Each leaves by
+#: being regularized or decided, which takes its `SETTLED` entry off, or by the owner's
+#: word in its entry; the gate fails a count named here that is not such an exemption, so
+#: the set only shrinks. The intake sweep lists each one for the owner, needing action.
+UNRATIFIED: frozenset[int] = frozenset({39, 55, 290, 291})
+#: Fourteen days from the gate's first day, as an exemption's review date would be.
+UNRATIFIED_UNTIL = "2026-11-09"
+#: How the gate and the sweep say that an exemption waits for the owner's word.
+AWAITING_WORD = "without the owner's word until"
+
 
 #: The counts allowed to stay `pending`, each naming the bead whose runs will decide it.
 #: The list must equal the pending set, since `--check-state` fails on a pending count not
@@ -1604,14 +1668,20 @@ def state_problems(
     evidence: Path = EVIDENCE,
     corrected: Mapping[int, Correction] | None = None,
     base: Base | None = None,
+    unratified: frozenset[int] | None = None,
+    today: date | None = None,
+    poses: Callable[[Sequence[int]], Mapping[int, Mapping[str, Any]]] | None = None,
 ) -> tuple[list[str], list[str]]:
-    """What fails the regularization-state gate, and the pending counts it lists: the
-    retained record against the index, `SETTLED` and `PENDING_ALLOWED`, and each deferral
-    against the witness it defers, held to `base` where one is given
-    (`deferral_problems`), nothing measured and no witness read (`--check` holds the
-    record to the data by deciding it again)."""
+    """What fails the regularization-state gate, and the pending counts and unratified
+    exemptions it lists: the retained record against the index, `SETTLED`,
+    `PENDING_ALLOWED` and `UNRATIFIED` on `today`, and each deferral against the witness it
+    defers, held to `base` where one is given (`deferral_problems`), as is each count the
+    change moves (`moved_problems`, its flip poses from `poses`). Nothing is measured and
+    no witness read (`--check` holds the record to the data by deciding it again)."""
     settled = SETTLED if settled is None else settled
     allowed = PENDING_ALLOWED if allowed is None else allowed
+    unratified = UNRATIFIED if unratified is None else unratified
+    today = datetime.now(UTC).date() if today is None else today
     found = json.loads(record.read_text(encoding="utf-8"))
     if found.get("contract") != CONTRACT:
         return [f"{RECORD_PATH} is not a {CONTRACT} record"], []
@@ -1637,6 +1707,12 @@ def state_problems(
             )
         if row["state"] not in STATES:
             problems.append(f"n={n}: state {row['state']!r}")
+        elif row["state"] in RETIRED:
+            problems.append(
+                f"n={n} is {row['state']}, which is retired: nothing on main rests "
+                "unregularized behind an open bead. Regularize it or decide it on its "
+                "witness, or record the owner's exemption"
+            )
         if row["drawn"] == VIEW and row["generator"] != entry.get("generator"):
             problems.append(
                 f"n={n}: the record draws another view than the index holds; {stale}"
@@ -1644,6 +1720,7 @@ def state_problems(
         held = settled.get(n)
         if held is not None:
             problems.extend(_settled_problems(n, held, row, entry, recorded))
+            problems.extend(_exemption_problems(n, held, unratified, today))
     problems.extend(
         f"{EVIDENCE_PATH}{SETTLED_RUNS}/{run}/run.json is not the copy of a run a "
         "SETTLED entry names; delete it with the settlement it was retained for"
@@ -1651,12 +1728,209 @@ def state_problems(
     )
     problems.extend(_list_problems(rows, allowed))
     problems.extend(deferral_problems(rows, allowed, corrected=corrected, base=base))
+    waiting = unratified_exemptions(rows, settled, unratified)
+    problems.extend(
+        f"n={n}: UNRATIFIED names it, but it is not an exemption without the owner's word "
+        "on its witness; take it off"
+        for n in sorted(unratified - set(waiting))
+    )
     pending = {n for n, row in rows.items() if row["state"] == PENDING}
     listed = [
         f"n={n} is pending, allowed: {allowed[n]}" for n in sorted(pending & set(allowed))
     ]
+    if base is not None:
+        problems.extend(moved_problems(rows, base, settled=settled, poses=poses))
+        moved = moved_counts(rows, base)
+        listed.append(
+            f"{HELD_TO_BASE} {base.ref}: this change moves "
+            f"{len(moved)} house{'' if len(moved) == 1 else 's'}"
+            + (f" ({', '.join(map(str, moved))})" if moved else "")
+        )
+    listed.extend(
+        f"n={n} is exempt {AWAITING_WORD} {UNRATIFIED_UNTIL}, and the gate fails it "
+        f"after: {settled[n].outcome} ({settled[n].evidence})"
+        for n in waiting
+        if today.isoformat() <= UNRATIFIED_UNTIL
+    )
     summary = f"regularization states: {_states_summary(list(rows.values()))}"
     return problems, [*listed, f"PENDING_ALLOWED: {len(allowed)} counts", summary]
+
+
+def unratified_exemptions(
+    rows: Mapping[int, Mapping[str, Any]],
+    settled: Mapping[int, Settled],
+    unratified: frozenset[int],
+) -> list[int]:
+    """The counts `UNRATIFIED` names that are what it is for: exempt on their witness by a
+    `SETTLED` entry that carries no owner's word."""
+    return [
+        n
+        for n in sorted(unratified)
+        if (held := settled.get(n)) is not None
+        and held.state == EXEMPT
+        and held.owner_word is None
+        and (rows.get(n) or {}).get("state") == EXEMPT
+    ]
+
+
+def _iso_day(text: object) -> date | None:
+    try:
+        return date.fromisoformat(str(text))
+    except ValueError:
+        return None
+
+
+#: Typography a formatter may change in a recorded quote: curly quotes and apostrophes.
+_TYPOGRAPHY = str.maketrans({"\u2018": "'", "\u2019": "'", "\u201c": '"', "\u201d": '"'})
+
+
+def _plain(text: str) -> str:
+    """Text as a quote is matched: straight quotes, and whitespace collapsed, since Flowmark
+    reflows and retypes the Markdown that records the owner's words."""
+    return " ".join(text.translate(_TYPOGRAPHY).split())
+
+
+def owner_word_problems(n: int, word: OwnerWord, repo: Path = REPO) -> list[str]:
+    """What is wrong with the owner's word an exemption carries: no words, no day, or a
+    record that does not hold them."""
+    problems: list[str] = []
+    if not word.quote.strip():
+        problems.append(f"n={n}: the owner's word quotes nothing")
+    if _iso_day(word.said_on) is None:
+        problems.append(f"n={n}: the owner's word gives no day (YYYY-MM-DD): {word.said_on!r}")
+    path = word.recorded_in.partition("#")[0]
+    source = repo / path
+    if not path or path.startswith("/") or ".." in Path(path).parts or not source.is_file():
+        problems.append(
+            f"n={n}: the owner's word is recorded in {word.recorded_in!r}, which names no "
+            "file in the repository"
+        )
+    elif word.quote.strip() and _plain(word.quote) not in _plain(
+        source.read_text(encoding="utf-8")
+    ):
+        problems.append(
+            f"n={n}: {path} does not hold the owner's words the exemption quotes: "
+            f"{word.quote[:80]!r}"
+        )
+    return problems
+
+
+def _exemption_problems(
+    n: int, held: Settled, unratified: frozenset[int], today: date
+) -> list[str]:
+    """What fails one `SETTLED` entry as an exemption: an exemption is the owner's alone,
+    on his recorded word, reviewed within `EXEMPTION_REVIEW_DAYS` of it; and only an
+    exemption carries his word or a review date."""
+    if held.state != EXEMPT:
+        if held.owner_word is not None or held.review_by is not None:
+            return [f"n={n}: only an exemption carries the owner's word and a review date"]
+        return []
+    if held.owner_word is None:
+        if n in unratified and today.isoformat() <= UNRATIFIED_UNTIL:
+            return []
+        until = f" (UNRATIFIED held it until {UNRATIFIED_UNTIL})" if n in unratified else ""
+        return [
+            (
+                f"n={n} is exempt without the owner's word{until}: an exemption is the "
+                "owner's alone. Record his words, their day and the file that holds them "
+                f"(OwnerWord), and a review date within {EXEMPTION_REVIEW_DAYS} days of "
+                "them, or regularize the count"
+            )
+        ]
+    problems = owner_word_problems(n, held.owner_word)
+    said, review = _iso_day(held.owner_word.said_on), _iso_day(held.review_by)
+    if review is None:
+        problems.append(
+            f"n={n}: an exemption names the day it is reviewed by (YYYY-MM-DD): "
+            f"{held.review_by!r}"
+        )
+    elif said is not None and review > said + timedelta(days=EXEMPTION_REVIEW_DAYS):
+        problems.append(
+            f"n={n}: the exemption's review date, {review}, is more than "
+            f"{EXEMPTION_REVIEW_DAYS} days after the owner's word of {said}"
+        )
+    elif review < today:
+        problems.append(
+            f"n={n}: the exemption's review date, {review}, has passed: review it with the "
+            "owner and record his word again, or regularize the count"
+        )
+    return problems
+
+
+def moved_counts(rows: Mapping[int, Mapping[str, Any]], base: Base) -> list[int]:
+    """The counts whose house a change moves: its witness file differs from the base's
+    (`base.changed`), which is how a correction shows at a source that pins no revision,
+    or its witness identifies itself otherwise than the base record's row (`IDENTITY`)."""
+    return sorted(
+        n
+        for n, row in rows.items()
+        if n in base.changed
+        or _identity((base.rows.get(n) or {}).get("witness") or {})
+        != _identity(row.get("witness") or {})
+    )
+
+
+def moved_problems(
+    rows: Mapping[int, Mapping[str, Any]],
+    base: Base,
+    *,
+    settled: Mapping[int, Settled],
+    poses: Callable[[Sequence[int]], Mapping[int, Mapping[str, Any]]] | None = None,
+) -> list[str]:
+    """Where a change moves a house (`moved_counts`) without both its regularizations.
+
+    Its general regularization is its state on the new witness: one of `RESTING`, or an
+    exemption on the owner's word, which `_exemption_problems` holds; a pending count is
+    `_list_problems`'s and `deferral_problems`'s to judge, since only a correction
+    `PENDING_ALLOWED` names may be pending. Its flip regularization is the pose
+    `flip_regularization` decides from its picture now, which must be the flip record's
+    row, so that the change that moves a house also poses it (`poses`, by default
+    `flip_poses`; the record by `recorded_poses`)."""
+    moved = moved_counts(rows, base)
+    if not moved:
+        return []
+    problems: list[str] = []
+    rule = (
+        f"this change moves its house since {base.ref}'s record, and a change that moves a "
+        "house regularizes it, generally and by flip, in the same change"
+    )
+    for n in moved:
+        state, held = rows[n]["state"], settled.get(n)
+        worded = state == EXEMPT and held is not None and held.owner_word is not None
+        if state not in (*RESTING, PENDING) and not worded:
+            problems.append(
+                f"n={n} reads {state}: {rule}. Run both strong generators on the new "
+                "witness and select, or settle it decided no better, before it lands "
+                '(result-import.md, "Adopt a House, Then Regularize It")'
+            )
+    try:
+        decided = (flip_poses if poses is None else poses)(moved)
+        recorded = recorded_poses()
+    except (OSError, ValueError, KeyError, TypeError) as error:
+        return [*problems, f"the flip poses of {moved} could not be decided: {error}"]
+    problems.extend(
+        f"n={n}: {rule}; the flip record's pose is not the one its picture takes now. Run "
+        "`python -m devtools.flip_regularization --update`"
+        for n in moved
+        if recorded.get(n) != decided.get(n)
+    )
+    return problems
+
+
+def flip_poses(counts: Sequence[int]) -> dict[int, dict[str, Any]]:
+    """Each count's flip regularization row, decided again from its default picture's
+    retained rendering (`flip_regularization.decide_counts`): milliseconds a count."""
+    from devtools import flip_regularization  # noqa: PLC0415
+
+    return {int(row["n"]): row for row in flip_regularization.decide_counts(counts)}
+
+
+def recorded_poses() -> dict[int, dict[str, Any]]:
+    """The flip record's rows, by count."""
+    from devtools import flip_regularization  # noqa: PLC0415
+
+    found = json.loads(flip_regularization.RECORD.read_text(encoding="utf-8"))
+    return {int(row["n"]): row for row in found.get("entries") or []}
 
 
 class RunRecord(NamedTuple):
@@ -1822,14 +2096,21 @@ def _settled_problems(
             f"n={n}: SETTLED names it, but the layer holds the {entry['generator']} view of "
             "this witness, which decides it unaided; take it off"
         )
-    if held.state not in (DECIDED, OWED, EXEMPT):
+    if held.state in RETIRED:
+        problems.append(
+            f"n={n}: SETTLED gives state {held.state!r}, which is retired: settle the count "
+            "decided no better on its runs, or exempt it on the owner's word"
+        )
+    elif held.state not in (DECIDED, EXEMPT):
         problems.append(f"n={n}: SETTLED gives state {held.state!r}")
     if held.state == EXEMPT and not BEAD.search(held.evidence):
         problems.append(f"n={n}: an exemption names the bead that owns it")
-    if held.state == OWED and held.owed is None:
-        problems.append(f"n={n}: a regularization owed names the bead that owes it in `owed`")
-    if held.owed is not None and not BEAD.match(held.owed):
-        problems.append(f"n={n}: SETTLED's owed names no bead first: {held.owed!r}")
+    if held.owed is not None:
+        problems.append(
+            f"n={n}: SETTLED still owes {held.owed!r}: a decision that owes runs or an "
+            "outcome is not settled, and owed work does not rest on main. Run or record "
+            "it, then drop `owed`"
+        )
     return problems
 
 
@@ -2116,32 +2397,37 @@ def deferrals(
 
 #: The words `--check-state --base-ref` prints, which the records tier's step requires,
 #: so a step that stops passing the base fails (review D4 of #660).
-HELD_TO_BASE = "CORRECTED is held to the record at the merge base of"
+HELD_TO_BASE = "moved houses and CORRECTED are held to the record at the merge base of"
 
 
 def check_state(base_ref: str | None = None) -> int:
-    # The base is read only where a count is deferred, so a clone without the merge base
-    # passes while nothing is (review D5 of #660).
-    deferring = bool(PENDING_ALLOWED or CORRECTED)
-    base = base_record(base_ref) if base_ref is not None and deferring else None
+    # The base is read whatever is deferred, since every house the change moves is held
+    # to it (`moved_problems`). That reverses review D5 of #660, which read it only where
+    # a count was deferred: a shallow clone now fails, naming `git fetch --unshallow`.
+    base = base_record(base_ref) if base_ref is not None else None
     found, listed = state_problems(base=base)
-    if base_ref is None:
-        listed.append("CORRECTED is checked as declared: no --base-ref to hold it to")
-    elif base is None:
-        listed.append(f"{HELD_TO_BASE} {base_ref}; nothing is deferred, so none was read")
-    else:
-        listed.append(f"{HELD_TO_BASE} {base_ref}")
+    if base is None:
+        listed.append(
+            "moved houses and CORRECTED are checked as declared: no --base-ref to hold them to"
+        )
     for line in listed:
         print(line)
     if found:
         for problem in found:
             print(f"regularization state: {problem}")
         return 1
+    waiting = sum(1 for line in listed if AWAITING_WORD in line)
+    unratified = (
+        f" ({waiting} exemptions {AWAITING_WORD} {UNRATIFIED_UNTIL}, UNRATIFIED)"
+        if waiting
+        else ""
+    )
     print(
         "regularization state check passed: every count is regularized, regular as "
-        "published, decided, owed to an open bead or exempt, or pending and named in "
-        "PENDING_ALLOWED, which equals the pending set and grows only by a reviewed change "
-        "naming its bead"
+        f"published or decided no better, or exempt on the owner's word{unratified}, or "
+        "pending and named in PENDING_ALLOWED as a corrected witness; nothing is "
+        "regularization-owed; and every house this change moves is regularized and "
+        "flip-posed in it"
     )
     return 0
 
@@ -2316,8 +2602,9 @@ def parser() -> argparse.ArgumentParser:
         "--base-ref",
         metavar="REF",
         help=(
-            "with --check-state: hold each CORRECTED entry to the record at the merge base "
-            "of REF and HEAD, which the records tier passes as origin/main"
+            "with --check-state: hold each house the change moves, and each CORRECTED "
+            "entry, to the record at the merge base of REF and HEAD, which the records "
+            "tier passes as origin/main"
         ),
     )
     mode.add_argument(
