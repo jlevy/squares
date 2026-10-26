@@ -3,9 +3,9 @@ type: is
 id: is-01m5wd7qndm2e499j35zevtkfz
 title: Reader text says record rather than house best packing
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 3
+version: 4
 delegate: claude-code@vm
 labels: []
 dependencies:
@@ -15,8 +15,12 @@ parent_id: is-01m5wd6833v6wx316fc361515a
 hold: null
 hold_until: null
 created_at: 2026-10-26T15:28:33.452Z
-updated_at: 2026-10-26T15:28:59.763Z
+updated_at: 2026-10-26T17:11:54.742Z
 started_at: 2026-10-26T15:28:59.763Z
+closed_at: 2026-10-26T17:11:54.742Z
+close_reason: null
+resolution: null
+duplicate_of: null
 ---
 The owner, 26 October 2026: "house best" is confusing; the point is whether the packing
 is a new record.

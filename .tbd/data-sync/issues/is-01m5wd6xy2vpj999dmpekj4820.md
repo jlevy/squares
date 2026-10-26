@@ -3,9 +3,9 @@ type: is
 id: is-01m5wd6xy2vpj999dmpekj4820
 title: News closes with a button to the Changelog
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 3
+version: 4
 delegate: claude-code@vm
 labels: []
 dependencies:
@@ -15,8 +15,12 @@ parent_id: is-01m5wd6833v6wx316fc361515a
 hold: null
 hold_until: null
 created_at: 2026-10-26T15:28:07.105Z
-updated_at: 2026-10-26T15:28:58.245Z
+updated_at: 2026-10-26T17:11:54.735Z
 started_at: 2026-10-26T15:28:58.245Z
+closed_at: 2026-10-26T17:11:54.735Z
+close_reason: null
+resolution: null
+duplicate_of: null
 ---
 The News archive's closing action row has one button, Full changelog, which leaves for
 `CHANGELOG.md` on GitHub (`render_changelog.render_news`, the `limit is None` branch).

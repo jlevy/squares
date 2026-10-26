@@ -3,9 +3,9 @@ type: is
 id: is-01m5wd6wjc69grgr1c0sqnkep4
 title: "Site navigation: a Project menu over Overview, News and Changelog"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 4
+version: 5
 delegate: claude-code@vm
 labels: []
 dependencies:
@@ -17,8 +17,12 @@ parent_id: is-01m5wd6833v6wx316fc361515a
 hold: null
 hold_until: null
 created_at: 2026-10-26T15:28:05.708Z
-updated_at: 2026-10-26T15:28:57.215Z
+updated_at: 2026-10-26T17:11:54.723Z
 started_at: 2026-10-26T15:28:57.215Z
+closed_at: 2026-10-26T17:11:54.722Z
+close_reason: null
+resolution: null
+duplicate_of: null
 ---
 `devtools/site_navigation.py` grows a `project` group, first in `NAVIGATION`, with no
 path of its own (a group with children never has one, which

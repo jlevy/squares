@@ -3,9 +3,9 @@ type: is
 id: is-01m5wd6x8apd2yfvdpcp652dvd
 title: A Changelog page on this site
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 4
+version: 5
 delegate: claude-code@vm
 labels: []
 dependencies:
@@ -17,8 +17,12 @@ parent_id: is-01m5wd6833v6wx316fc361515a
 hold: null
 hold_until: null
 created_at: 2026-10-26T15:28:06.410Z
-updated_at: 2026-10-26T15:28:57.675Z
+updated_at: 2026-10-26T17:11:54.730Z
 started_at: 2026-10-26T15:28:57.674Z
+closed_at: 2026-10-26T17:11:54.730Z
+close_reason: null
+resolution: null
+duplicate_of: null
 ---
 `changelog.html`: the retained project history, every entry rather than the S3+ stories
 News shows, with the GitHub issue and pull-request links each entry already carries.

@@ -3,9 +3,9 @@ type: is
 id: is-01m5wd7q03bj0307peragpzdke
 title: A tally is never in the toggles' small caps, and the toggle holds the first line
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 3
+version: 4
 delegate: claude-code@vm
 labels: []
 dependencies:
@@ -15,8 +15,12 @@ parent_id: is-01m5wd6833v6wx316fc361515a
 hold: null
 hold_until: null
 created_at: 2026-10-26T15:28:32.771Z
-updated_at: 2026-10-26T15:28:59.311Z
+updated_at: 2026-10-26T17:11:54.740Z
 started_at: 2026-10-26T15:28:59.311Z
+closed_at: 2026-10-26T17:11:54.740Z
+close_reason: null
+resolution: null
+duplicate_of: null
 ---
 The owner, 26 October 2026: a tally of results is not set in small caps the way a
 toggle's label is, one style everywhere, the count bold and its noun lowercase

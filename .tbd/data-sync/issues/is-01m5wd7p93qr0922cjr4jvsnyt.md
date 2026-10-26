@@ -3,9 +3,9 @@ type: is
 id: is-01m5wd7p93qr0922cjr4jvsnyt
 title: "Recently Added: the owner's shorter introduction"
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 3
+version: 4
 delegate: claude-code@vm
 labels: []
 dependencies:
@@ -15,8 +15,12 @@ parent_id: is-01m5wd6833v6wx316fc361515a
 hold: null
 hold_until: null
 created_at: 2026-10-26T15:28:32.034Z
-updated_at: 2026-10-26T15:28:58.805Z
+updated_at: 2026-10-26T17:11:54.738Z
 started_at: 2026-10-26T15:28:58.805Z
+closed_at: 2026-10-26T17:11:54.738Z
+close_reason: null
+resolution: null
+duplicate_of: null
 ---
 `devtools/templates/overview-article.md`, the paragraph under Recently Added, reads:
 
