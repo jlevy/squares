@@ -2629,6 +2629,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         ),
         paths=(
             "packing/campaign/result-requests.yaml",
+            "packing/devtools/site_resources.py",
             "packing/frontier/results.yaml",
             "packing/frontier/source-coverage.yaml",
         ),
@@ -2641,15 +2642,20 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "papers/square-packing-methods-survey.md",
         ),
         reason=(
-            "The import of #804's side at 297 (think-ozx8): T-247, its coverage entry and "
-            "#804's requests entry, against main 85a1919da (#820). Rendered at link "
+            "The import of #804's side at 297 (think-ozx8): T-247, its coverage entry, "
+            "#804's requests entry and the comment's card among the other projects "
+            "(site_resources.py), against main 85a1919da (#820). Rendered at link "
             "revision 3af720c4 into empty site directories, once from this tree and once "
             "with main's results.yaml, result-requests.yaml and source-coverage.yaml "
             "swapped in, 51 files each, by render_n11_optimality_review, "
             "render_n11_threshold_bound_review and render_packing_methods: every file is "
             "byte-identical across the two renders. Measured again after merging main "
             "980440c99 (#821), at link revision 19a04dd7 with that main's three inputs "
-            "swapped in: the same 51 files, byte-identical. The explainer counts the "
+            "swapped in: the same 51 files, byte-identical. Measured again after merging "
+            "main 9ebde24df (#823) and adding the card and T-247's project credit, at "
+            "link revision bcde38fb with that main's results.yaml, result-requests.yaml, "
+            "source-coverage.yaml and site_resources.py swapped in: the same 51 files, "
+            "byte-identical. The explainer counts the "
             "register's results and takes v0.4.31. No PDF was printed; each prints from "
             "that HTML. "
             "Retain v0.1.11, v0.1.4 and v0.2.7."
