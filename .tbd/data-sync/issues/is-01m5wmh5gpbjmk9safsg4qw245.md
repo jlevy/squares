@@ -3,16 +3,20 @@ type: is
 id: is-01m5wmh5gpbjmk9safsg4qw245
 title: Survey every asset's printed address
 kind: task
-status: open
+status: in_progress
 priority: 2
-version: 2
+version: 3
+delegate: claude-code@vm
 labels: []
 dependencies:
   - type: blocks
     target: is-01m5wmh6kad28vx7hxdmj224q0
 parent_id: is-01m5wmghkt8vpnawbxzpbkm19e
+hold: null
+hold_until: null
 created_at: 2026-10-26T17:36:02.582Z
-updated_at: 2026-10-26T17:36:13.523Z
+updated_at: 2026-10-26T17:36:26.494Z
+started_at: 2026-10-26T17:36:26.494Z
 ---
 One pass over every asset a reader can hold or download, naming the line it carries and
 whether that line has room for one address or two. The answer is a table, and the next

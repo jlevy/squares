@@ -3,17 +3,21 @@ type: is
 id: is-01m5wmghkt8vpnawbxzpbkm19e
 title: Assets and PDFs carry squaremath.org, with the repository beside it in a credits line
 kind: epic
-status: open
+status: in_progress
 priority: 2
-version: 4
+version: 5
+delegate: claude-code@vm
 labels: []
 dependencies: []
 child_order_hints:
   - is-01m5wmh5gpbjmk9safsg4qw245
   - is-01m5wmh6kad28vx7hxdmj224q0
   - is-01m5wmh7vpm45bwrkkr7963679
+hold: null
+hold_until: null
 created_at: 2026-10-26T17:35:42.202Z
-updated_at: 2026-10-26T17:36:04.982Z
+updated_at: 2026-10-26T17:36:26.475Z
+started_at: 2026-10-26T17:36:26.475Z
 ---
 The owner, 26 October 2026: update every asset, the PDFs included, to link to
 squaremath.org where there is room for one URL, and to squaremath.org and
