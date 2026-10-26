@@ -3,9 +3,9 @@ type: is
 id: is-01m5wd7re80yjz5wacnp5fqzy5
 title: "Closeout: validation tiers, pull request, changelog entry"
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 2
+version: 3
 delegate: claude-code@vm
 labels: []
 dependencies: []
@@ -13,8 +13,12 @@ parent_id: is-01m5wd6833v6wx316fc361515a
 hold: null
 hold_until: null
 created_at: 2026-10-26T15:28:34.248Z
-updated_at: 2026-10-26T15:29:00.316Z
+updated_at: 2026-10-26T19:43:20.096Z
 started_at: 2026-10-26T15:29:00.316Z
+closed_at: 2026-10-26T19:43:20.093Z
+close_reason: null
+resolution: null
+duplicate_of: null
 ---
 The standard release process for a site change.
 
