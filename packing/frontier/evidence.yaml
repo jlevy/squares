@@ -52718,11 +52718,39 @@ evidence:
       - The 1,275,911 generated files, which the source does not store, are those SOURCES.sha256 lists and the
         generators write from v9-certs.tar.zst; the kernel checks whatever they are
       - The build and its axiom set are as the source reports; nothing here built any module
+    external_review:
+      state: informally-verified
+      date: '2026-10-26'
+      reviewed_by: >-
+        Claude (AI), strong tier (tbd-strong, acting name w-643-1026), the stage 4 review
+        lane of the #643 import (bead think-90po), at the reasoning setting the coordinator
+        launched it with, reading the source as data and running no code from it
+      note: >-
+        docs/project/reviews/review-2026-10-26-wand125-validtilt9-lean.md read the packet at
+        319a779. bentz4 states this record's s(k^2 - 4) = k for every k >= 8 with no
+        hypothesis: closed unit squares with independent rotations, disjoint interiors,
+        boundary contact allowed, minSide the infimum and attained by the grid. Every
+        constant of the three statements lies in the 16-module closure of ValidSplit9.lean,
+        byte-identical to the record's 3 October build, whose receipt prints them by full
+        name. Main.lean uses each of the 16,200 roots once under 16,199 splits on the 45 x
+        45 x 8 grid; Tilt.lean's validTilt_of_tree, Bridge.lean's box9Cover_eq_mcoverP (the
+        16 doubled pieces carry distinct weights, so the finset keeps both) and RowMinN.lean's
+        rmChk_sound were re-derived, and the four LemmaEKM.lean hunks change a check that
+        appears only as a hypothesis. No kernel escape in the 56-module closure, Main.lean,
+        Axioms9.lean, the generators' templates or the driver's lean -o line; the axiom
+        printout lists propext, Classical.choice and Quot.sound. Verdict accepted, no
+        mathematical defect; findings M-1 (the module checks' execution record, a release
+        asset, not read here), m-1 to m-3 and N-1 to N-5, none blocking. Not read: the leaf
+        checkers' soundness proofs, the release assets and the 1,275,911 generated modules,
+        which are not stored. Nothing was built or run from the source.
     limitations: 'wand125/square-packing at 319a779 (2c75edc and e99f5e3, 16 October 2026) reports a Lean kernel
-      proof of Evan Daniel''s ValidTilt9 on his k2m4 certificate qxzm_full and the box cover K4_k008_box9.txt,
-      with his reduction to s(k^2 - 4) = k for every k >= 8. receipts/main.log reports Main.lean built in 584 s
-      at 230,597,216 kB resident and the axioms propext, Classical.choice and Quot.sound; the source''s receipts
-      put the kernel checks at about 7,390 CPU-hours. Every file of library.sha256''s closure is retained here,
-      byte for byte where it is Daniel''s. Nothing here has built it (think-rw3i): about 185 times the owner''s
-      40 CPU-hour item cap.'
+      proof of Evan Daniel''s ValidTilt9 over the pose trees of his k2m4 run qxzm_full, rebuilt and refined with
+      exact leaf certificates by Hosono''s generator, on the box cover K4_k008_box9.txt, with Daniel''s reduction
+      to s(k^2 - 4) = k for every k >= 8. receipts/main.log reports Main.lean built in 584 s at 230,597,216 kB
+      resident and the axioms propext, Classical.choice and Quot.sound; the source''s receipts put the kernel
+      checks at about 7,390 CPU-hours. Every file of library.sha256''s closure is retained here, byte for byte
+      where it is Daniel''s. Nothing here has built it (think-rw3i): about 185 times the owner''s 40 CPU-hour
+      item cap. The per-module execution record, tasks.jsonl in the release asset v9-logs.tar.zst, is pinned by
+      digest and not retained, so this entry is reported and counts toward no rung above C1, which its
+      external_review sets (think-ahfg owns the audit that could admit the source build).'
     source_reviewed: '2026-10-26'

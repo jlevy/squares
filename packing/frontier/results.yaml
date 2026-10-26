@@ -8276,9 +8276,11 @@ results:
 
       Hiroaki Hosono's Lean kernel proof of ValidTilt9, with this reduction s(k^2 - 4) = k
       for every k >= 8 (wand125/square-packing, 16 October 2026), is registered as
-      T-251, a reported formalization at V0/C0 (#643); its build, about 7,400 CPU-hours and
-      230 GB, is held above the cap (think-rw3i), and a build would be a third route to
-      ValidTilt9 beside the two checkers.
+      T-251, a reported formalization at V0/C1 since its stage 4 review of 26 October (#643);
+      its build, about 7,400 CPU-hours and 230 GB, is held above the cap (think-rw3i), and a
+      build would be a third route to ValidTilt9 beside the two checkers. An admitted
+      source-build record of it (think-ahfg) could discharge this reduction's premise for V
+      without discharging it for C (epistemics.md, Reported Formal Proofs and Source Builds).
     unfinished_confirmations:
       - what: >-
           ValidTilt9 replayed in full by either checker, with the route's controls, as a
@@ -35773,35 +35775,46 @@ results:
       k = 8 to 18: s(60) = 8, s(77) = 9, s(96) = 10, s(117) = 11, s(140) = 12, s(165) = 13,
       s(192) = 14, s(221) = 15, s(252) = 16, s(285) = 17 and s(320) = 18.
 
-      The proof checks Daniel's k2m4 certificate qxzm_full on the box cover K4_k008_box9.txt,
-      16,200 per-root certificates in the release validtilt9-lean-v1, as 1,275,911 generated
-      Lean files the repository lists by digest and does not store, with Bridge.lean
-      identifying the cover with Bentz4.box9Cover and Tilt.lean deriving ValidTilt9 from the
-      tree. The source's receipts report the axioms propext, Classical.choice and Quot.sound,
-      no sorry and no native_decide, about 7,390 CPU-hours of kernel checks and Main.lean's
-      assembly at 230 GB resident. Nothing here has built it.
+      The proof checks in the kernel, root by root over the D4 root [0, 9/2]^2 x (0, 1/2],
+      the pose trees of Daniel's k2m4 run qxzm_full on the box cover K4_k008_box9.txt,
+      rebuilt from that run's leaf record and refined where needed, with exact leaf
+      certificates that Hosono's generator wrote: 16,200 per-root certificates in the release
+      validtilt9-lean-v1, as 1,275,911 generated Lean files the repository lists by digest
+      and does not store, with Bridge.lean identifying the cover with Bentz4.box9Cover and
+      Tilt.lean deriving ValidTilt9 from the tree. The source's receipts report the axioms
+      propext, Classical.choice and Quot.sound, no sorry and no native_decide, about 7,390
+      CPU-hours of kernel checks and Main.lean's assembly at 230 GB resident. Nothing here
+      has built it.
 
       Every definition the theorems' statements use is the record's own: the 16 modules and
       3 build files of the closure the evand-square-packing-2026-10-03 packet retains, among
       them S32.lean (minSide), ValidSplit9.lean and Bentz4.lean, match the digests of
       the source's library list, the files of the record's 3 October build of the reduction.
 
+      The stage 4 review of 26 October reads bentz4 as this record's s(k^2 - 4) = k for
+      every k >= 8, with no hypothesis, and finds Tilt.lean, Bridge.lean, RowMinN.lean and
+      the change to LemmaEKM.lean correct, with no kernel escape in the closure, Main.lean
+      or the generators' templates. Accepted with no mathematical defect; its major finding
+      is that the generated modules' execution record has not been read here.
+
       Hosono after Daniel, [square-packing](https://github.com/wand125/square-packing/tree/319a779efcc78db2f92bffc87844446f8723b01d/problems/square-lower-bounds/certificates/k2m4_n77_L9/lean),
       16 October 2026. The commits name Claude as co-author.
     scope:
       n_values: [60, 77, 96, 117, 140, 165, 192, 221, 252, 285, 320]
     verification: V0
-    confirmation: C0
+    confirmation: C1
     significance:
-      score: 3
+      score: 4
       rationale: >-
         A machine-checked proof, by another author, of the finite premise of a bound family
         the record holds only as reported: with it s(k^2 - 4) = k for every k >= 8 is in
         Lean, unconditional, and once built it would settle the family's open cases k = 10
-        to 18. A machine audit, S3, below T-081's S4 because it proves no new bound; the 16
-        October triage drafted S4 on the open cases, which the review may take.
+        to 18. Scored as its claim, by T-081's anchor, a bound family. The draft's S3 followed
+        T-236 and T-250, whose targets the record holds on a published proof or on replayed
+        checks; this formalizes a value the record holds only as a report, as T-154
+        formalizes T-153's candidate and takes its score.
       scored: '2026-10-26'
-      by: think-jh0n wand125 import (draft, w-imports-1026)
+      by: docs/project/reviews/review-2026-10-26-wand125-validtilt9-lean.md (stage 4 review, think-90po), changing the draft S3 of the think-jh0n import (w-imports-1026)
     novelty: previously-published
     attribution:
       source_keys:
@@ -35813,7 +35826,32 @@ results:
       One cited entry, the source's report (E-k2m4-wand125-validtilt9-lean-report), which
       claims the exact values in Lean at k >= 8, the grid inside the reduction. T-081's runs
       and its reduction build are not cited: they are T-081's evidence. No build is retained
-      here, so V0; no review has read it, so C0.
+      here and no source-build record is admitted, so V0; the stage 4 review's read,
+      recorded as that entry's external_review, sets C1.
+    reviews:
+      - path: docs/project/reviews/review-2026-10-26-wand125-validtilt9-lean.md
+        kind: adversarial
+        reviewer: >-
+          Claude (AI), strong tier (tbd-strong, acting name w-643-1026), the stage 4 review
+          lane of the #643 import (bead think-90po), at the reasoning setting the coordinator
+          launched it with, in a worktree of its own, reading the source as data and running
+          no code from it
+        reviewer_kind: ai
+        relation: project
+        date: '2026-10-26'
+        scope: >-
+          Statement fidelity of validTilt9, valid9 and bentz4 at 319a779 against this
+          record's s(k^2 - 4) = k and T-081; the statement closure against the 3 October
+          build; Main.lean's root composition; Tilt.lean, Bridge.lean, RowMinN.lean and the
+          LemmaEKM.lean hunks, re-derived; the leaf lemmas' statements; the axiom receipt; a
+          kernel-escape scan of the 56-module closure, Main.lean and the generators'
+          templates; trust in the unstored generated modules; and what the held replay
+          leaves open. Not read: the leaf checkers' soundness proofs, the release assets and
+          the generated modules. Findings M-1 (no execution record of the module checks read
+          here), m-1 (no statement receipt by full name), m-2 (pickled certificates), m-3
+          (claim wording, fixed) and notes N-1 to N-5; none blocking.
+        verdict: accepted
+        covers: [T-251]
     artifacts:
       - packing/resources/web/wand125-validtilt9-lean-2026-10-16/README.md
       - packing/resources/web/wand125-validtilt9-lean-2026-10-16/square-packing/problems/square-lower-bounds/certificates/k2m4_n77_L9/lean/README.md
@@ -35821,18 +35859,21 @@ results:
       - packing/resources/web/wand125-validtilt9-lean-2026-10-16/square-packing/problems/square-lower-bounds/certificates/k2m4_n77_L9/lean/Sqpack/V9/Bridge.lean
       - packing/resources/web/wand125-validtilt9-lean-2026-10-16/square-packing/problems/square-lower-bounds/certificates/k2m4_n77_L9/lean/library/library.sha256
     next_rung: >-
-      C1 needs the stage 4 mathematical review of validTilt9, Bridge.lean, Tilt.lean, the
-      changed LemmaEKM.lean and RowMinN.lean, read from the retained packet. V3 and C3 need
-      a complete build here or by a third party retained here (think-rw3i): about 7,400
-      CPU-hours and 230 GB for Main.lean by the source's receipts, held above the owner's 40
-      CPU-hour item cap and this host. Rung 5 needs a human expert's review of the
-      formalization beside it.
+      C3 needs a complete build here or by a third party retained here (think-rw3i): about
+      7,400 CPU-hours and 230 GB for Main.lean by the source's receipts, held above the
+      owner's 40 CPU-hour item cap and this host. The replay should print the three
+      statements by their full names beside the axioms (the review's m-1) and unpickle the
+      certificates only in isolation (m-2).
+
+      V3 needs that build, or a source-build entry admitted under epistemics.md's rule for
+      reported formal proofs, which would need the release's logs and its list of generated
+      sources retained and audited for an exit-0 kernel check of every generated module
+      (the review's M-1): minutes of CPU and no Lean build (think-ahfg).
+
+      V4 and C4 need, beyond V3 and C3, a second accepting adversarial AI review by a
+      distinct reviewer and a human oversight record; rung 5 needs a human expert's review
+      of the formalization beside the build.
     unfinished_confirmations:
-      - what: >-
-          the stage 4 mathematical review of validTilt9, valid9 and bentz4, Bridge.lean,
-          Tilt.lean, RowMinN.lean and LemmaEKM.diff, read from the retained packet
-        rung: C1
-        link: think-jh0n
       - what: >-
           a complete build of the 1,275,911 generated modules from v9-certs.tar.zst, checked
           against SOURCES.sha256, Main.lean and Axioms9.lean, with the axiom receipt, here or
@@ -35866,6 +35907,20 @@ results:
 
       The 17 October read's lean/rectangle-k2m4/, a second Lean route to T-081's
       lower half over the same premise, is held by its own import bead (think-d5m3).
+
+      Reviewed on 26 October 2026 (think-90po, worker w-643-1026,
+      docs/project/reviews/review-2026-10-26-wand125-validtilt9-lean.md), accepted with no
+      mathematical defect, moving C0 to C1 and the draft significance S3 to S4. The review
+      re-derived Tilt.lean's validTilt_of_tree, Bridge.lean's box9Cover_eq_mcoverP and
+      RowMinN.lean's rmChk_sound, and read Main.lean's composition: each of the 16,200 roots
+      once under 16,199 splits on the 45 x 45 x 8 grid.
+
+      Its findings: the module checks'
+      execution record is a release asset not read here, so the kernel check of the leaves
+      stays the source's report (M-1, think-ahfg); the axiom printout names no constant in
+      full (m-1); the certificates are pickles, which execute code when loaded (m-2); and
+      this claim's account of what the kernel checks, now corrected (m-3). V stays V0: no
+      build is retained and no source-build record is admitted.
 
 # Generated by python -m devtools.regularized_drawings from the regularized layer's
 # index (packing/atlas/known-best/regularized/index.json); do not edit by hand.

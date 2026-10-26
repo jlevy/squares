@@ -14,10 +14,12 @@ theorem bentz4 : ∀ k : ℕ, 8 ≤ k → minSide (k ^ 2 - 4) = k := Bentz4.bent
 `ValidTilt9` is Evan Daniel’s finite premise for $s(k^2 - 4) = k$, which the record holds
 as `T-081`, reported, on two reported runs of it and a build here of Daniel’s reduction.
 The record registers this proof as `T-251`, a formalization of `T-081` at $k \ge 8$, at
-`V0`/`C0`, with the bibliography key **[wand125 ValidTilt9 Lean 2026-10-16]**. Issue
+`V0`/`C1`, with the bibliography key **[wand125 ValidTilt9 Lean 2026-10-16]**. Issue
 [#643](https://github.com/jlevy/squares/issues/643), which the project opened, tracks it,
 and bead `think-jh0n` owns its import. The claims below are the source’s; nothing here
-has built the proof, and no review has read it yet.
+has built the proof. Its stage 4 review,
+[`review-2026-10-26-wand125-validtilt9-lean.md`](../../../../docs/project/reviews/review-2026-10-26-wand125-validtilt9-lean.md),
+read it and accepted it with no mathematical defect.
 
 ## Source and Pin
 
@@ -76,14 +78,18 @@ with `sha256sum --check` against the retained copies, every one is in the record
   statement change.
 
 So every definition the three theorems’ statements use is the one the record’s own build
-of the reduction used. That `Bridge.lean` and `Tilt.lean` say what the statement needs is
-the stage 4 review’s to read.
+of the reduction used. The stage 4 review of 26 October (`think-90po`) re-derived
+`Bridge.lean`, `Tilt.lean` and `RowMinN.lean`, read `Main.lean`’s composition of the
+16,200 roots, and scanned the closure and the generators’ templates for kernel escapes,
+finding none.
 
 ## What Is Not Established
 
 - **No build here.** The replay is held above the owner’s 40 CPU-hour item cap and far
   beyond this host (`think-rw3i`).
-- **No review yet.** The stage 4 mathematical review stays with `think-jh0n`.
+- **No execution record read.** The per-module kernel checks are recorded in the release
+  asset `v9-logs.tar.zst`, which is pinned and not retained; an audit of it could admit
+  the source’s build for `V3` without a Lean build (`think-ahfg`).
 - **The rectangle theorem** at `746b0c0`, `lean/rectangle-k2m4/`, a second Lean route to
   `T-081`’s lower half over the same premise, is its own import, `think-d5m3`.
 

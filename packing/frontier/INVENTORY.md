@@ -849,7 +849,7 @@ results, it is a statement about what this repository has itself examined.
 | `E-n012-evand-s12h-lean-report` | 0 | lower-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
 | `E-k2m3-wand125-valid7-lean-v1-report` | 0 | exact-value | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
 | `E-k2m3-wand125-valid7-lean-v2-report` | 0 | exact-value | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
-| `E-k2m4-wand125-validtilt9-lean-report` | 0 | exact-value | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-k2m4-wand125-validtilt9-lean-report` | 0 | exact-value | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | *none held* |
 
 ## What the register rests on
 

@@ -10627,12 +10627,17 @@ issues:
       3 October release is byte-identical to the proof's, so it formalizes T-081 at k >= 8. Imported on 26
       October 2026 (w-imports-1026): the wand125-validtilt9-lean-2026-10-16 packet retains the lean/
       directory at 319a779 with the release's three assets pinned by digest, every file of the proof's
-      closure is retained here, and T-251 registers it as a reported formalization of T-081 at V0/C0. The
-      full kernel replay, about 7,400 CPU-hours with 230 GB for the assembly by the source's receipts, is
-      held above the compute cap (think-rw3i).
+      closure is retained here, and T-251 registers it as a reported formalization of T-081 at V0/C0. Its
+      stage 4 review of 26 October (think-90po) accepted it with no mathematical defect, moving T-251 to
+      V0/C1 and S4. The full kernel replay, about 7,400 CPU-hours with 230 GB for the assembly by the
+      source's receipts, is held above the compute cap (think-rw3i); an audit of the source's build logs
+      that could admit its build for V3 without a Lean build is think-ahfg.
     read_through: '2026-10-16T05:29:57Z'
     results:
     - key: validtilt9-lean
+      validation:
+      - think-rw3i
+      - think-ahfg
       claim: 'A Lean 4 kernel proof of Bentz4.ValidTilt9 and Bentz4.Valid9, and of bentz4 : ∀ k ≥ 8,
         minSide (k^2 - 4) = k, whose axioms are propext, Classical.choice and Quot.sound only.'
       source: body
@@ -10643,6 +10648,8 @@ issues:
     beads:
     - think-jh0n
     - think-rw3i
+    - think-90po
+    - think-ahfg
     answer_bead: think-jh0n
     replies:
     - url: https://github.com/jlevy/squares/issues/643#issuecomment-6333083495
@@ -10675,6 +10682,17 @@ issues:
       with think-rw3i; the 746b0c0 rectangle theorem moved to its own import bead, think-d5m3. The
       issue can close on the reply once T-251's review and replay are owned, as close_when says;
       check_requests holds it open until T-251 is settled.
+
+      Reviewed on 26 October 2026 by w-643-1026 (think-90po):
+      docs/project/reviews/review-2026-10-26-wand125-validtilt9-lean.md accepts the formalization
+      with no mathematical defect. bentz4 states the record's s(k^2 - 4) = k for every k >= 8 with
+      no hypothesis, every statement constant is in the closure the record built on 3 October, and
+      Tilt.lean, Bridge.lean, RowMinN.lean and the LemmaEKM.lean hunks are correct. T-251 moves to
+      V0/C1 (the read, as the report's external_review) and S4. What remains of its validation is
+      owned: the held build (think-rw3i, C3) and an audit of the release's logs for a source-build
+      admission (think-ahfg, V3), listed as the result's validation. The review's questions for
+      the author, a statement check by full name and a coverage summary of tasks.jsonl, and the
+      Mathlib provenance of the run, go in the next reply, which the coordinator posts.
   - number: 606
     title: 's(146) ≤ 12.583782190152: registration request'
     author: evand
