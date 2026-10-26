@@ -9597,6 +9597,25 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "v0.2.7."
         ),
     ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=("packing/campaign/result-requests.yaml",),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The close rule of 26 October (think-3b9v): requests entries gain validation "
+            "beads, review_track, blocked and ask sources, ten asks move out, #719's "
+            "questions go to awaiting_author, #607's composites are disposed of, and #544 "
+            "and #684 close (result-requests.yaml); no register entry. Against main "
+            "9ebde24df (#823): rendered at link revision 0e25a599 into empty site "
+            "directories, twice from this tree and once with that main's "
+            "result-requests.yaml swapped in, render_packing_methods writes all 43 files "
+            "byte-identical across the three. No PDF was printed; it prints from that "
+            "HTML. The survey keeps v0.2.7."
+        ),
+    ),
 )
 
 
