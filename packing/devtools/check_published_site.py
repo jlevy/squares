@@ -1291,8 +1291,13 @@ def record_link_checks(
 
 
 def issue_links(text: str) -> set[str]:
-    """Every issue of the repository `text` links, as its address."""
-    return set(re.findall(r'href="(' + re.escape(REPO_URL) + r'/issues/[1-9][0-9]*)"', text))
+    """Every issue of the repository `text` links, as its address.
+
+    The served pages are minified, which drops the quotes around an attribute that needs
+    none, so a link reads `href=https://…/issues/810` there and `href="…"` in the build;
+    both are read, and the number must end where the address does."""
+    pattern = r"""href=["']?(""" + re.escape(REPO_URL) + r"""/issues/[1-9][0-9]*)(?=["'\s>#])"""
+    return set(re.findall(pattern, text))
 
 
 def repository_links(text: str) -> set[tuple[str, str, str]]:
