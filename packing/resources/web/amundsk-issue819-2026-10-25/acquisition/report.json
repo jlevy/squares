@@ -1,0 +1,50 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/819",
+  "author": "Amund Kristiansen",
+  "source_key": "[Kristiansen issue 819 2026-10-25]",
+  "report_evidence": "E-amundsk-819-beyond-horizon-report",
+  "receipt_format": "amundsk-819-exact-replay-v1",
+  "witness_prefix": "W-amundsk-819-n",
+  "claim_limitations": "Complete f916f69 rational centre/half-angle dilation certificate in Evan Daniel's format, centres in [0, S]^2, read exactly from the retained source file. Finite construction feasibility only; no KKT, local minimum, rigidity, novelty, priority or global optimality claim.",
+  "read_on": "2026-10-26",
+  "read_at_main": "5c50803d654e17e8e3c71fad4c8e489a4c68bdc1",
+  "certificates": [
+    {
+      "n": 344,
+      "path": "s344_amund.cert",
+      "format": "evand-cert",
+      "offered": "18.992567544845",
+      "first_committed": "2026-10-25T19:04:50Z"
+    }
+  ],
+  "requested": [344],
+  "replayed": [344],
+  "houses": [],
+  "pending": [
+    {
+      "n": 344,
+      "report": "couzo-964ee2b-2026-10-23",
+      "url": "packing/frontier/source-coverage.yaml",
+      "holders": "Francisco Couzo",
+      "printed": "18.992727809347",
+      "rounding": "up"
+    }
+  ],
+  "register": {
+    "title": "Amund Kristiansen's beyond-horizon certificate at 344, f916f69, issue819",
+    "headline": "Kristiansen's packing at 344, the 307 record design stretched one step, certified exactly below Couzo's",
+    "significance": 2,
+    "source_checks": "The author reports that Evan Daniel's two exact rational checkers at evand/square-packing 7982d7a, verify_cert.py (separating axes) and verify_cert2.py (polygon intersection), accept the certificate, with least wall clearance 6.054e-13, least pair separation 1.215e-12 and 794 close pairs, re-checked on the file downloaded from the gist; the issue says the two checkers share an author and the certificate format, which also made the certificate. The source states the certificate is a dilation of a binary64 packing made with Daniel's search/packer/dilate_cert.py, delta 1e-12, on macOS arm64 with Python 3.14.6; it certifies the upper bound only and states no exact KKT solve, local-optimality or rigidity analysis. It calls the packing a new packing of another lineage than Francisco Couzo's at 344: the register's 307 record design (Nate Chaoweeraprasit / PingYou Ltd, PR #574) stretched one K-step and polished. Those are the source's statements. No source program ran here.",
+    "credit": "Credit Amund Kristiansen (https://gist.github.com/amundsk/18ada41ec384b6ff2c96f58b7ce7d1a6), whose search stretched the register's 307 record design (Nate Chaoweeraprasit (itsnaka), with PingYou Ltd's certificate, PR #574) by one K-step, started from 307 minima of that design and polished in float32 GPU batches with Evan Daniel's fq quench, as the issue says; the certificate was made with Daniel's dilate_cert.py and checked with his checkers. The search, the certificate and the request were done by Claude (Anthropic) in Claude Code at Amund Kristiansen's direction.",
+    "next_rung": "Record 344 as a beyond-horizon row that supersedes couzo-964ee2b-2026-10-23's there, in report order: no report at 344 reached this repository between 964ee2b's push and #819, and this side is below 964ee2b's. Beyond the case corpus, so no register entry records it.",
+    "bead": "think-p7cq",
+    "bibliography": {
+      "authors": ["Kristiansen"],
+      "lineage": "builds-on-project",
+      "credit": "Kristiansen after Chaoweeraprasit, PingYou Ltd, Daniel, Levy",
+      "short_credit": "Kristiansen after Chaoweeraprasit et al.",
+      "note": "One exact dilation certificate in the gist amundsk/18ada41ec384b6ff2c96f58b7ce7d1a6 at f916f69f0ae570935991440712a08ad930469da3, beyond the case corpus at 344, a packing the issue says it found by stretching the register's 307 record design (Nate Chaoweeraprasit, with PingYou Ltd's certificate, PR #574) one K-step and polishing it with Evan Daniel's fq quench, made with Daniel's dilate_cert.py and checked with his checkers. A beyond-horizon row below Francisco Couzo's 964ee2b packing at the count. Retained under the author's CC0 1.0 dedication in the gist and the issue. Claude assistance disclosed. No local or global optimality claim."
+    }
+  }
+}

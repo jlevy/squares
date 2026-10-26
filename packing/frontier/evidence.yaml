@@ -45946,6 +45946,38 @@ evidence:
       verifier and the independent rational corner checker, share certificate parsing,
       half-angle conversion, Fraction arithmetic and the separating-axis method. No two
       independent methods, human oversight or optimality is claimed.
+  - id: E-amundsk-819-beyond-horizon-report
+    claim: upper-bound
+    scope:
+      n_values: [344]
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Kristiansen issue 819 2026-10-25]'
+    certificate: packing/resources/web/amundsk-issue819-2026-10-25/source/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-26'
+    limitations: >-
+      This atom records the source author's report of 1 exact rational dilation certificate
+      in the gist amundsk/18ada41ec384b6ff2c96f58b7ce7d1a6 at f916f69, the count of issue 819
+      that the ledger of 26 October for the issue records, retained under the author's CC0
+      1.0 dedication. A separate complete repository replay is retained for n = 344: 1
+      positive and 2 duplicate-square and outside-container controls passed their required
+      outcomes on both routes, 353976 pair decisions; summed over the 3 jobs, the receipt
+      records 102.72 route CPU seconds and 107.71 job wall seconds, the longest job 36.9
+      seconds. The positive clears every wall by at least 6.05e-13 and every pair by at
+      least 1.21e-12, as a 1e-12 dilation gives. The kernel's sharp controls at exact
+      contact and 1e-30 past it are as expected on both routes
+      (receipts/sharp-controls.json). Independent review and confirmation remain pending;
+      no stage 4 review is owed for a beyond-horizon row. The source's own checkers were
+      not run here. The two maintained routes, the sqpack rational witness verifier and the
+      independent rational corner checker, share certificate parsing, half-angle
+      conversion, Fraction arithmetic and the separating-axis method. No two independent
+      methods, human oversight or optimality is claimed.
   - id: E-evand-n182-certificate-report
     claim: upper-bound
     scope:
