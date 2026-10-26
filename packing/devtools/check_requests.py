@@ -16,17 +16,30 @@ register together and stores none of it:
 - each result's state: `confirmed` (every mapped entry at `V3` and `C3` or above),
   `refuted`, `defect recorded`, `open` while validation runs, or `queued` for import;
 - **reply due**, entry by entry and field by field, when the derived state has moved past
-  the last reply that stated that rung or status of the entry, or past the last reply
-  that named it, or no reply has named it: a new id, a moved rung, a renumbered id, a
-  defect, or a statement the record marks out of date;
-- **closeable**, when every result is confirmed or refuted (a reported defect: recorded),
-  nothing the author asked for is queued, no question put to the author awaits an answer
-  that could falsify what the record asserts and that no measurement here can settle
-  (`awaiting_author`: credit, lineage, or which file), and the issue is not held for the
-  owner (`held`).
+  the last reply that stated that rung, status or position of the entry, or past the last
+  reply that named it, or no reply has named it: a new id, a moved rung, a renumbered id,
+  a defect, an adoption or a supersession, or a statement the record marks out of date;
+  and when a comment was read into the record after the last reply (#540);
+- **closeable**, once the issue is answered: triage is done, nothing is queued for
+  import, every result is confirmed or refuted (a reported defect: recorded) or names
+  the beads that own what remains of its validation (`validation`), nothing the author
+  asked for is queued, no question put to the author awaits an answer that could falsify
+  what the record asserts and that no measurement here can settle (`awaiting_author`:
+  credit, lineage, or which file), and the issue is not held for the owner (`held`). A
+  review track (`review_track`), which the project opened to track a pending review and
+  which has no author to answer, closes only when its result is confirmed or refuted.
 
 A closeable issue still open is owed its final comment and its close, at stage 7 after
-the verified deploy. The owner's instruction of 23 October 2026 made that the standard
+the verified deploy. The final comment is the answer: drafted with ``--draft`` from
+`main`, it states each id at its rungs, what remains and the beads that own it, and that
+closing confirms nothing still open. The owner's direction of 26 October 2026 is why a
+result below `V3/C3` no longer holds its issue open: "making sure that all closable
+things are closed ... so we don't have a backlog of so many open issues where it's partly
+imported or already imported, but the issue is left open". A follow-up still goes on the
+closed issue whenever an id, rung, status or position it stated moves
+(epistemics.md, Import, Integration, and Reply: an answer is kept true).
+
+The owner's instruction of 23 October 2026 made the close the standard
 step, after twelve closeable issues were found open: nothing ran the close, and lanes held
 issues open for questions to the author that the record did not track and whose answers
 would change nothing in it. A question is recorded under `awaiting_author`, and holds
@@ -37,6 +50,13 @@ recorded instruction or on a reservation for the owner that beads record, pendin
 owner's confirmation: no pass posts on it or closes it, so it is never closeable and
 ``--draft`` refuses it. Review A1 of #747 added the hold, when the reservation of #557,
 #565, #570 and #574 lived only in beads and the closing step listed #570 for closing.
+
+An ask (`asks`) records only what the issue's author asked of the project, with its
+`source`; the project's own validation of a result is that result's `validation`, so a
+queued ask under a bead a result names there is refused. An issue someone other than the
+pass must unblock carries `blocked`, its type the GitHub label `blocked:<type>`
+(development.md, Issue and Pull-Request Labels), which ``--github`` holds the live labels
+to. `close_when` is descriptive: the rule above decides when an issue closes.
 
 Modes, from ``packing/`` with the project interpreter::
 
@@ -53,7 +73,9 @@ an unquoted `` #`` cuts short (`comment_cut_scalars`) can fail it: a reply that 
 owed after the merge, not a broken record. ``--draft`` refuses an issue held for the
 owner, and refuses unless ``HEAD`` is on ``origin/main``, because a `T-NNN` is provisional until
 it merges and a reply links only to `main`. ``--github`` reads the live issues through
-``gh api`` and writes nothing anywhere.
+``gh api`` and writes nothing anywhere. A position is derived from the case records, so
+only ``--report``, ``--draft`` and ``--pending`` read them and compare it; the gate's
+one-line summary does not.
 """
 
 from __future__ import annotations
@@ -65,7 +87,7 @@ import re
 import subprocess
 import sys
 from collections.abc import Callable, Iterable, Iterator, Mapping, Sequence
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from pathlib import Path
 from typing import Any
 
@@ -134,6 +156,44 @@ CHANGES = {
     "file": "which file or commit the record names",
 }
 
+#: A register entry's position on the frontier, as a reply's `reported` item states it
+#: (#540): whether a case bound rests on it now, whether it is better than its case
+#: records and not yet taken in, a second certificate of a value they hold, or
+#: superseded, wholly or in part. `frontier_positions` derives it from the case records
+#: through `render_recent_results`, whose standings these name in a reply's words.
+CURRENT = "current"
+PENDING_ADOPTION = "pending adoption"
+SECOND_CERTIFICATE = "second certificate"
+SUPERSEDED = "superseded"
+SUPERSEDED_IN_PART = "superseded in part"
+#: Each position in the words a draft gives an author.
+POSITION_WORDS = {
+    CURRENT: "current: a bound of its case records, verified or reported, rests on it now",
+    PENDING_ADOPTION: (
+        "pending adoption: better than its case records hold, and not yet taken into them"
+    ),
+    SECOND_CERTIFICATE: "a second certificate of a value its case records already hold",
+    SUPERSEDED: "superseded by a later result",
+    SUPERSEDED_IN_PART: "superseded in part by a later result",
+}
+
+#: What blocks an open issue that someone other than the pass must unblock, as its
+#: `blocked` entry types it; each is the GitHub label `blocked:<type>` (development.md,
+#: Issue and Pull-Request Labels). The owner asked for the taxonomy on 26 October 2026:
+#: "If issues are definitely clearly blocked on me ... add a tag or something to indicate
+#: the nature of the block".
+BLOCK_TYPES = (
+    "owner-decision",
+    "owner-reply",
+    "standing-hold",
+    "author",
+    "dependency",
+    "compute",
+)
+BLOCKED_LABEL = "blocked:"
+#: The block types an issue held for the owner carries: only the owner's word lifts both.
+HELD_BLOCKS = frozenset({"owner-decision", "owner-reply"})
+
 BEAD = re.compile(r"\bthink-[a-z0-9]{4}\b")
 _ID_ON_MAIN = re.compile(r"\bid: (T-\d{3}|E-[A-Za-z0-9.-]+)")
 _REPLY_URL = re.compile(
@@ -154,6 +214,9 @@ class Register:
     results: dict[str, Mapped]
     evidence: dict[str, Mapped]
     verifiers: dict[str, str] = field(default_factory=dict)
+    #: Each register entry's position, where it has one (`frontier_positions`); empty
+    #: unless loaded, and then no position is compared or stated.
+    positions: dict[str, str] = field(default_factory=dict)
 
 
 @dataclass(frozen=True, slots=True)
@@ -166,6 +229,7 @@ class Entry:
     status: str
     why: str
     how: str
+    position: str = ""
 
 
 @dataclass(frozen=True, slots=True)
@@ -178,6 +242,8 @@ class ResultState:
     state: str
     settled: bool
     reason: str
+    #: The beads its `validation` names: they own what remains of its validation.
+    validation: tuple[str, ...] = ()
 
 
 @dataclass(frozen=True, slots=True)
@@ -192,15 +258,52 @@ class IssueState:
 
 
 def load_register(
-    results: Path = RESULTS, evidence: Path = EVIDENCE, verifiers: Path | None = None
+    results: Path = RESULTS,
+    evidence: Path = EVIDENCE,
+    verifiers: Path | None = None,
+    *,
+    positions: bool = False,
 ) -> Register:
+    """The register, and with `positions` each entry's position, which reads every case
+    record and takes seconds, so only the modes that judge replies in full ask for it."""
     register = safe_load(results.read_text(encoding="utf-8"))
     entries = safe_load(evidence.read_text(encoding="utf-8"))
     return Register(
         results={str(item["id"]): item for item in register["results"]},
         evidence={str(item["id"]): item for item in entries["evidence"]},
         verifiers=load_verifiers(VERIFIERS if verifiers is None else verifiers),
+        positions=frontier_positions() if positions else {},
     )
+
+
+def frontier_positions() -> dict[str, str]:
+    """Each register entry's position on the frontier, where it has one.
+
+    `render_recent_results` derives the standing from the case records, and marks a
+    bound superseded where they hold one at least as good, or a result of another kind
+    where its entry declares what implies it (`superseded_by`). A method's limit or an
+    audit, whose evidence claims no bound and which nothing declares, has no position.
+    """
+    # The case records are read only here; `render_recent_results` reads this module's
+    # neighbours, so it is imported where it is used.
+    from devtools import render_recent_results as recent  # noqa: PLC0415
+
+    records = recent.load_records()
+    found: dict[str, str] = {}
+    for ident, record in records.results.items():
+        standing = recent.standing(record, records)
+        marks = {mark.mark for mark in recent.supersessions(record, standing, records)}
+        if recent.SUPERSEDED in marks:
+            found[ident] = SUPERSEDED
+        elif recent.SUPERSEDED_IN_PART in marks:
+            found[ident] = SUPERSEDED_IN_PART
+        elif standing in {recent.HOLDS, recent.HOLDS_REPORTED}:
+            found[ident] = CURRENT
+        elif standing == recent.PENDING_ADOPTION:
+            found[ident] = PENDING_ADOPTION
+        elif standing in {recent.SECOND_CERTIFICATE, recent.SECOND_CERTIFICATE_REPORTED}:
+            found[ident] = SECOND_CERTIFICATE
+    return found
 
 
 def comment_cut_scalars(text: str) -> list[str]:
@@ -381,12 +484,13 @@ def _register_entry(ident: str, register: Register) -> Entry:
     record = register.results[ident]
     rungs = f"{record['verification']}/{record['confirmation']}"
     status = result_status.status(record, register.evidence)
+    position = register.positions.get(ident, "")
     reviews = list(record.get("reviews") or [])
     latest = result_status.latest_review(reviews)
     if latest and latest.get("verdict") == "refuted":
-        return Entry(ident, rungs, REFUTED, status, str(latest.get("path")), "")
+        return Entry(ident, rungs, REFUTED, status, str(latest.get("path")), "", position)
     if issues := result_status.open_issues(record, register.evidence):
-        return Entry(ident, rungs, DEFECT, status, "; ".join(issues), "")
+        return Entry(ident, rungs, DEFECT, status, "; ".join(issues), "", position)
     how = ""
     if _rank(record["confirmation"]) >= result_status.CONFIRMED_FROM:
         how = confirmation_phrase(record["evidence"], register, str(record.get("kind", "")))
@@ -394,7 +498,7 @@ def _register_entry(ident: str, register: Register) -> Entry:
         _rank(record["verification"]) >= CONFIRMED_RANK
         and _rank(record["confirmation"]) >= CONFIRMED_RANK
     )
-    return Entry(ident, rungs, CONFIRMED if confirmed else OPEN, status, "", how)
+    return Entry(ident, rungs, CONFIRMED if confirmed else OPEN, status, "", how, position)
 
 
 def _evidence_entry(ident: str, register: Register) -> Entry:
@@ -459,17 +563,22 @@ def result_state(result: Mapped, register: Register) -> ResultState:
     A defect or refutation on any mapped entry decides it. A reported defect
     (`defect: true`) is settled when the record holds the defect against one of the entries
     it names. A result not registered is settled unless it is queued.
+
+    Its `validation` beads own what remains of an unsettled result's validation; they
+    let its issue close (`closeable`) and change neither its state nor whether it is
+    settled.
     """
     key, claim = str(result["key"]), str(result["claim"])
     if "not_registered" in result:
         queued = bool(result["queued"])
         state = QUEUED if queued else NOT_REGISTERED
         return ResultState(key, claim, (), state, not queued, str(result["not_registered"]))
+    owners = tuple(str(bead) for bead in result.get("validation") or ())
     entries = tuple(entry_state(ident, register) for ident in mapped_ids(result))
     states = {entry.state for entry in entries}
     if result.get("defect"):
         state = DEFECT if states & {DEFECT, REFUTED} else OPEN
-        return ResultState(key, claim, entries, state, state == DEFECT, "")
+        return ResultState(key, claim, entries, state, state == DEFECT, "", owners)
     deciding = [entry.state for entry in entries if entry.id.startswith("T-")]
     if REFUTED in states:
         state = REFUTED
@@ -479,7 +588,7 @@ def result_state(result: Mapped, register: Register) -> ResultState:
         state = CONFIRMED
     else:
         state = OPEN
-    return ResultState(key, claim, entries, state, state in {CONFIRMED, REFUTED}, "")
+    return ResultState(key, claim, entries, state, state in {CONFIRMED, REFUTED}, "", owners)
 
 
 def _current(entry: Entry) -> dict[str, str]:
@@ -487,6 +596,8 @@ def _current(entry: Entry) -> dict[str, str]:
     held = {"status": REFUTED if entry.state == REFUTED else entry.status}
     if entry.id.startswith("T-"):
         held["verification"], held["confirmation"] = entry.rungs.split("/")
+    if entry.position:
+        held["position"] = entry.position
     return held
 
 
@@ -494,12 +605,15 @@ def _stated(fields: Mapping[str, object]) -> str:
     rungs = "/".join(
         str(fields[key]) for key in ("verification", "confirmation") if key in fields
     )
-    return ", ".join(part for part in (rungs, str(fields.get("status") or "")) if part)
+    parts = (rungs, str(fields.get("status") or ""), str(fields.get("position") or ""))
+    return ", ".join(part for part in parts if part)
 
 
 #: The fields a reply's `reported` item can state of an entry. Each is held on its own to
-#: the last reply that stated it.
-STATED_FIELDS: tuple[str, ...] = ("verification", "confirmation", "status")
+#: the last reply that stated it, so a position a reply stated makes an adoption or a
+#: supersession since then a reply due, as a moved rung is (#540). A position is compared
+#: only where the register was loaded with positions (`load_register`).
+STATED_FIELDS: tuple[str, ...] = ("verification", "confirmation", "status", "position")
 
 
 def _moved(
@@ -659,6 +773,14 @@ def replies_due(issue: Mapped, states: Sequence[ResultState]) -> list[str]:
     status has moved since the last reply that stated it. A later reply that speaks of the
     result without naming the entry, or names it without stating a field, owes nothing
     for it and leaves the earlier statement standing.
+
+    Three more changes of state are due (#540): a position a reply stated that has moved,
+    as an adoption on its case or a supersession moves it, read field by field as a rung
+    is; a comment read into the record (`read_through`) on a later day than the last
+    reply; and, on a closed issue, a bead owning what remains of a result's validation
+    that no reply has named (`beads`), since the reply that closed it must say who owns
+    the rest (`campaign/result-import.md`, Close an Answered Issue). Reply dates are days,
+    so a comment read on the day of the last reply is taken as answered by it.
     """
     replies = list(issue.get("replies", ()))
     if issue["triage"] == "pending":
@@ -666,10 +788,28 @@ def replies_due(issue: Mapped, states: Sequence[ResultState]) -> list[str]:
     due: list[str] = []
     if not replies:
         due.append("an acknowledgement: nothing has been posted on this issue")
+    else:
+        last = max(str(reply["date"]) for reply in replies)
+        read = str(issue.get("read_through") or "")[:10]
+        if read > last:
+            due.append(
+                f"a follow-up: a comment of {read} was read into the record after the "
+                f"last reply ({last})"
+            )
     due.extend(
         f"a follow-up: the reply of {date} said {statement}"
         for date, statement in _uncorrected(replies)
     )
+    if issue["state"] == "closed":
+        named = {str(bead) for reply in replies for bead in reply.get("beads", ())}
+        for state in states:
+            unnamed = [bead for bead in state.validation if bead not in named]
+            if unnamed and not state.settled:
+                owns = "owns" if len(unnamed) == 1 else "own"
+                due.append(
+                    f"{state.key}: no reply has named {' and '.join(unnamed)}, which "
+                    f"{owns} what remains of its validation"
+                )
     for state in states:
         if not _mentioned(replies, state.key):
             if state.entries:
@@ -727,15 +867,44 @@ def hold_text(hold: Mapped) -> str:
     return f"held for the owner since {hold['since']}{pending}"
 
 
+def _unanswered(state: ResultState, *, review_track: bool) -> str:
+    """Why an unsettled result holds its issue open, or nothing where it does not.
+
+    A result queued for import holds any issue open: its disposition is not on `main`.
+    An open result, or one with a defect recorded, holds a review track open until it is
+    confirmed or refuted, and any other issue until its `validation` names the beads that
+    own what remains (the owner's direction of 26 October 2026, rule P1)."""
+    if state.settled:
+        return ""
+    if state.state == QUEUED:
+        return f"{state.key} is {state.state}"
+    if review_track:
+        return f"{state.key} is {state.state}, and the review this issue tracks is not done"
+    if not state.validation:
+        return (
+            f"{state.key} is {state.state}, and no bead is named for what remains of its "
+            "validation"
+        )
+    return ""
+
+
 def closeable(issue: Mapped, states: Sequence[ResultState]) -> tuple[bool, list[str]]:
-    """Whether the issue can be closed with a final comment, and what stops it."""
+    """Whether the issue can be closed with a final comment, and what stops it.
+
+    An issue is closeable once it is answered (P1): what it reports is imported and
+    disposed of, and the final comment reports it. A result below `V3/C3` does not hold
+    it open once its `validation` names the beads that own the rest; a review track
+    (`review_track`) waits for its result to be confirmed or refuted."""
     blockers: list[str] = []
     hold = held(issue)
     if hold is not None:
         blockers.append(hold_text(hold))
     if issue["triage"] == "pending":
         blockers.append("triage is pending")
-    blockers.extend(f"{state.key} is {state.state}" for state in states if not state.settled)
+    review_track = bool(issue.get("review_track"))
+    blockers.extend(
+        reason for state in states if (reason := _unanswered(state, review_track=review_track))
+    )
     blockers.extend(
         f"asked: {ask['what']}" for ask in issue.get("asks", ()) if ask["state"] == "queued"
     )
@@ -744,6 +913,15 @@ def closeable(issue: Mapped, states: Sequence[ResultState]) -> tuple[bool, list[
         for question in awaited(issue)
     )
     return not blockers, blockers
+
+
+def remaining_owners(states: Sequence[ResultState]) -> list[str]:
+    """The beads that own what remains of the unsettled results' validation, in order."""
+    return list(
+        dict.fromkeys(
+            bead for state in states if not state.settled for bead in state.validation
+        )
+    )
 
 
 def issue_state(issue: Mapped, register: Register) -> IssueState:
@@ -824,6 +1002,50 @@ def _question_problems(issue: Mapped, repository: str) -> list[str]:
     return problems
 
 
+def _block_problems(issue: Mapped) -> list[str]:
+    """A closed issue carries no block, and an issue held for the owner is blocked on
+    the owner: by a decision or by the reply the owner reserved (`HELD_BLOCKS`)."""
+    number = issue["number"]
+    block = issue.get("blocked")
+    problems: list[str] = []
+    if block and issue["state"] == "closed":
+        problems.append(f"#{number}: closed while blocked; remove `blocked`")
+    if held(issue) is not None and (not block or block["type"] not in HELD_BLOCKS):
+        problems.append(
+            f"#{number}: held for the owner, so `blocked` must name "
+            f"{' or '.join(sorted(HELD_BLOCKS))}"
+        )
+    return problems
+
+
+def _ask_problems(issue: Mapped, repository: str) -> list[str]:
+    """An ask is the author's (P2): a comment it cites as its `source` is on this issue,
+    and a queued ask is not work a result's `validation` bead already owns, which is the
+    project's validation restated as an ask (#428's v1.2 replay, #446's census asks)."""
+    number = issue["number"]
+    owners = {
+        str(bead): str(result["key"])
+        for result in issue.get("results", ())
+        for bead in result.get("validation") or ()
+    }
+    problems: list[str] = []
+    for ask in issue.get("asks", ()):
+        source = str(ask.get("source") or "")
+        match = _REPLY_URL.match(source)
+        if match and (match.group(1) != repository or int(match.group(2)) != number):
+            problems.append(
+                f"#{number}: the ask {ask['what']!r} cites {source}, not this issue"
+            )
+        bead = str(ask.get("bead") or "")
+        if ask["state"] == "queued" and bead in owners:
+            problems.append(
+                f"#{number}: the queued ask {ask['what']!r} is work {bead} owns as "
+                f"{owners[bead]}'s validation; asks record what the author asked, so "
+                "remove it or mark it done"
+            )
+    return problems
+
+
 def problems(record: Mapped, register: Register) -> list[str]:
     """What is wrong with the record: its schema, and every id it names.
 
@@ -861,6 +1083,8 @@ def problems(record: Mapped, register: Register) -> list[str]:
             )
         found.extend(_reply_problems(issue, repository, ids))
         found.extend(_question_problems(issue, repository))
+        found.extend(_block_problems(issue))
+        found.extend(_ask_problems(issue, repository))
     return found
 
 
@@ -912,12 +1136,31 @@ def summary_lines(record: Mapped, register: Register) -> list[str]:
             "closeable" if state.closeable and issue["state"] == "open" else "",
             "awaiting the author" if awaited(issue) else "",
             "held for the owner" if held(issue) is not None else "",
+            f"blocked:{issue['blocked']['type']}" if issue.get("blocked") else "",
         ]
         lines.append(
             f"  #{issue['number']:<4} {issue['state']:<7}{progress:<16}"
             f"{', '.join(mark for mark in marks if mark)}"
         )
     return lines
+
+
+def not_on_main(state: IssueState, on_main: set[str] | None) -> list[str]:
+    """The ids an issue's results map to that `origin/main` does not hold yet, or none
+    where it cannot be read: an issue is answered only once its import is on `main`."""
+    if on_main is None:
+        return []
+    ids = (entry.id for result in state.results for entry in result.entries)
+    return [ident for ident in dict.fromkeys(ids) if ident not in on_main]
+
+
+def _with_main(state: IssueState, on_main: set[str] | None) -> IssueState:
+    """The issue's state with an import not yet on `main` among what stops its close."""
+    missing = not_on_main(state, on_main)
+    if not missing or not state.closeable:
+        return state
+    blocker = f"{', '.join(missing)} {'is' if len(missing) == 1 else 'are'} not on main yet"
+    return replace(state, closeable=False, blockers=(*state.blockers, blocker))
 
 
 def report(record: Mapped, register: Register, on_main: set[str] | None) -> list[str]:
@@ -928,7 +1171,10 @@ def report(record: Mapped, register: Register, on_main: set[str] | None) -> list
         "| issue | state | results settled | reply due | closeable |",
         "| --- | --- | --- | --- | --- |",
     ]
-    derived = {issue["number"]: issue_state(issue, register) for issue in record["issues"]}
+    derived = {
+        issue["number"]: _with_main(issue_state(issue, register), on_main)
+        for issue in record["issues"]
+    }
     for issue in record["issues"]:
         state = derived[issue["number"]]
         settled = sum(result.settled for result in state.results)
@@ -1024,13 +1270,31 @@ def _issue_section(issue: Mapped, state: IssueState, on_main: set[str] | None) -
             ),
             "",
         ]
+    block = issue.get("blocked")
+    if block:
+        lines += [
+            f"Blocked, `{BLOCKED_LABEL}{block['type']}`: {_cell(str(block['reason']))}",
+            "",
+        ]
+    owners = [
+        f"{result.key}: {', '.join(result.validation)}"
+        for result in state.results
+        if result.validation and not result.settled
+    ]
+    if owners:
+        lines += [f"What remains of the validation is owned by: {'; '.join(owners)}.", ""]
+    if issue.get("review_track"):
+        lines += [
+            "A review track: it closes when the result it tracks is confirmed or refuted.",
+            "",
+        ]
     if issue["state"] == "closed":
         lines.append("Closeable: the issue is closed.")
     elif state.closeable:
         lines.append("Closeable: yes, with a final comment.")
     else:
         lines.append(f"Closeable: no; {'; '.join(state.blockers)}.")
-    lines += ["", f"Close when: {issue['close_when']}"]
+    lines += ["", f"Close when (descriptive; the rule decides): {issue['close_when']}"]
     return lines
 
 
@@ -1442,6 +1706,15 @@ def _plain_evidence(entry: Entry) -> str:
 
 
 def _plain(entry: Entry, record: Mapped | None, register: Register) -> str:
+    """An entry's state in words an author can read without the ladder beside them, and
+    its position on the frontier where it has one, which a reply records (#540)."""
+    sentence = _plain_state(entry, record, register)
+    if entry.position:
+        sentence += f". On the frontier it is {POSITION_WORDS[entry.position]}"
+    return sentence
+
+
+def _plain_state(entry: Entry, record: Mapped | None, register: Register) -> str:
     """An entry's state in words an author can read without the ladder beside them."""
     if entry.state == CONFIRMED:
         where = f"at {entry.rungs}" if entry.id.startswith("T-") else "here"
@@ -1535,7 +1808,14 @@ def draft(issue: Mapped, register: Register, repository: str) -> str:
         lines += [f"- {_lead(result.claim)}: {result.reason}" for result in pending]
         lines.append("")
     queued = _still_queued(issue, state, register)
-    if queued:
+    owners = remaining_owners(state.results)
+    closing = issue["state"] == "open" and state.closeable
+    if queued and closing:
+        # Nothing is queued for the author: each line is validation a named bead owns.
+        lines += ["**What remains, and which beads own it.**", ""]
+        lines += [f"- {line}" for line in queued]
+        lines.append("")
+    elif queued:
         lines += ["**What is still queued, and how it will be completed.**", ""]
         lines += [f"- {line}" for line in queued]
         lines.append("")
@@ -1553,6 +1833,17 @@ def draft(issue: Mapped, register: Register, repository: str) -> str:
         lines += ["**On `main`.** " + ", ".join(links) + ".", ""]
     if issue["state"] == "closed":
         lines += ["The issue stays closed; this brings what the record says up to date.", ""]
+    elif closing and owners:
+        lines += [
+            (
+                "Nothing you asked for is queued, so this issue is closed with this comment. "
+                "Closing it confirms nothing above that is still open: each entry stands at "
+                f"the rungs given, what remains of its validation is owned by "
+                f"{_and(f'`{bead}`' for bead in owners)}, and a follow-up will be posted on "
+                "this issue whenever an id, a rung, a status or a position above changes."
+            ),
+            "",
+        ]
     elif state.closeable:
         lines += [
             "Nothing you asked for is queued, so this issue is closed with this comment.",
@@ -1578,11 +1869,23 @@ def draft(issue: Mapped, register: Register, repository: str) -> str:
     return "\n".join(lines)
 
 
+def _and(items: Iterable[str]) -> str:
+    """Items joined as a sentence lists them: `a`, `a and b`, `a, b and c`."""
+    listed = list(items)
+    return ", ".join(listed[:-1]) + (" and " if len(listed) > 1 else "") + listed[-1]
+
+
 def _still_queued(issue: Mapped, state: IssueState, register: Register) -> list[str]:
     """Each open register entry an unsettled result maps to, with its next rung, once
-    however many results map to it; then each ask still queued."""
+    however many results map to it, and on a closeable issue the beads that own it; then
+    each ask still queued.
+
+    A bead id is this project's bookkeeping, and `_for_author` takes it out of register
+    prose; the closing reply names the owning beads anyway, as the rule of 26 October
+    2026 asks, so that what remains after the close has an owner the author can cite."""
     queued: list[str] = []
     named: set[str] = set()
+    closing = issue["state"] == "open" and state.closeable
     for result in state.results:
         if result.settled:
             continue
@@ -1591,7 +1894,27 @@ def _still_queued(issue: Mapped, state: IssueState, register: Register) -> list[
             if record is None or entry.state != OPEN or entry.id in named:
                 continue
             named.add(entry.id)
-            queued.append(f"{entry.id}: {_for_author(str(record.get('next_rung', '')))}")
+            line = f"{entry.id}: {_for_author(str(record.get('next_rung', '')))}"
+            if closing and result.validation:
+                line += f" Owned by {_and(f'`{bead}`' for bead in result.validation)}."
+            queued.append(line)
+    if closing:
+        # An open evidence entry a result maps to without a register entry (#428's v1.2
+        # obligations) has no next rung; its line says who owns it.
+        for result in state.results:
+            if result.settled or not result.validation:
+                continue
+            if any(entry.id.startswith("T-") for entry in result.entries):
+                continue
+            ids = [entry.id for entry in result.entries if entry.state == OPEN]
+            ids = [ident for ident in ids if ident not in named]
+            named.update(ids)
+            if ids:
+                owned = _and(f"`{bead}`" for bead in result.validation)
+                queued.append(
+                    f"{', '.join(ids)}: recorded as evidence, not yet confirmed here. "
+                    f"Owned by {owned}."
+                )
     queued.extend(
         str(ask["what"]) + (f" ({ask['note']})" if ask.get("note") else "")
         for ask in issue.get("asks", ())
@@ -1670,6 +1993,103 @@ def reports_for_intake(issue: Mapped) -> bool:
     return issue["kind"] == RESULT_REPORT or bool(issue.get("intake"))
 
 
+#: A run of register ids as a reply writes it: `T-102 to T-111`, or the two ends joined
+#: by an en dash, an em dash or a hyphen.
+_ID_RUN = re.compile(r"(?<![\w-])T-(\d{3})\s*(?:to|\u2013|\u2014|-)\s*T-(\d{3})(?![\w-])")
+
+
+def _says(text: str, token: str) -> bool:
+    """Whether `text` names `token` whole, or for a register id within a run of them:
+    `T-124` is not in `T-1245`, nor `E-a` in `E-a-b`, since an id's own characters may
+    not continue it on either side, and `T-121` is in `T-120 to T-123`."""
+    if re.search(rf"(?<![\w-]){re.escape(token)}(?![\w-])", text):
+        return True
+    number = re.fullmatch(r"T-(\d{3})", token)
+    return bool(number) and any(
+        int(first) <= int(number[1]) <= int(last) for first, last in _ID_RUN.findall(text)
+    )
+
+
+def worded(issue: Mapped, register: Register) -> frozenset[str]:
+    """The evidence ids a draft states only through their register entry: a report entry
+    beside the register entry it reports, which `_shown` leaves out of the text because
+    the register entry's word says it better. A reply that states such an entry states it
+    in words, so its id need not appear. An id the register lacks is held as any other."""
+    found: set[str] = set()
+    for result in issue.get("results", ()):
+        try:
+            state = result_state(result, register)
+        except KeyError:
+            continue
+        shown = {entry.id for entry in _shown(state, result)}
+        found.update(entry.id for entry in state.entries if entry.id not in shown)
+    return frozenset(found)
+
+
+def unstated(
+    reply: Mapped, body: str, said_in_words: frozenset[str] = frozenset()
+) -> list[str]:
+    """The ids and beads the record says a reply stated that its posted text does not
+    name (#541): each `reported` item's id, as the reply wrote it (`as` where the entry
+    has since been renumbered), and each bead in `beads`. Review A5 of #519 found the
+    record could claim a reply stated an id it never did, which no check read. A run of
+    register ids names each id in it, and an evidence id in `said_in_words` (`worded`)
+    is stated by its register entry's word."""
+    tokens = [
+        str(item.get("as") or item["id"])
+        for item in reply.get("reported", ())
+        if "id" in item and item["id"] not in said_in_words
+    ]
+    tokens += [str(bead) for bead in reply.get("beads", ())]
+    return [token for token in dict.fromkeys(tokens) if not _says(body, token)]
+
+
+def block_labels(issue: Mapped, item: Mapped) -> list[str]:
+    """Where an issue's live `blocked:` labels differ from its record: an open issue's
+    `blocked` names the one label it carries, and any other, or any on a closed issue, is
+    not the record's. The coordinator applies the labels the record names."""
+    number = issue["number"]
+    block = issue.get("blocked")
+    wanted = (
+        {f"{BLOCKED_LABEL}{block['type']}"} if block and issue["state"] == "open" else set()
+    )
+    live = {name for name in label_names(item) if name.startswith(BLOCKED_LABEL)}
+    return [
+        *(
+            f"#{number} lacks the `{name}` label its `blocked` names"
+            for name in sorted(wanted - live)
+        ),
+        *(
+            f"#{number} carries `{name}`, which its record does not name"
+            for name in sorted(live - wanted)
+        ),
+    ]
+
+
+def _ask_sources(issue: Mapped, comments: Sequence[Mapped]) -> list[str]:
+    """Each ask that cites a comment as its `source` cites one the issue's author wrote,
+    not a reply posted for this project (P2: an ask is the author's)."""
+    number = issue["number"]
+    by_url = {_issue_url(str(comment["html_url"])): comment for comment in comments}
+    found: list[str] = []
+    for ask in issue.get("asks", ()):
+        source = str(ask.get("source") or "")
+        if not source.startswith("https://"):
+            continue
+        comment = by_url.get(source)
+        if comment is None:
+            found.append(f"#{number}: the ask {ask['what']!r} cites {source}, not on the issue")
+            continue
+        login = str((comment.get("user") or {}).get("login", ""))
+        signed = str(comment.get("body") or "").rstrip().endswith(FOOTER_LINE)
+        if login != str(issue["author"]) or signed:
+            found.append(
+                f"#{number}: the ask {ask['what']!r} cites {source}, which is not the "
+                f"author's own comment ({login}{', a reply' if signed else ''})"
+            )
+    return found
+
+
 def _issue_url(url: str) -> str:
     """A comment's address in the form the record writes: GitHub gives a pull request's
     comments as `/pull/N#issuecomment-…`, and the record as `/issues/N#…`, which GitHub
@@ -1677,7 +2097,9 @@ def _issue_url(url: str) -> str:
     return re.sub(r"/pull/(\d+)#issuecomment-", r"/issues/\1#issuecomment-", url)
 
 
-def compare_github(record: Mapped, fetch: Fetch = gh_fetch) -> list[str]:
+def compare_github(
+    record: Mapped, fetch: Fetch = gh_fetch, register: Register | None = None
+) -> list[str]:
     """Where the live issues differ from the record: issues, states, replies, comments.
 
     A pull request is compared only where the record holds it, as it holds PR #574, which
@@ -1691,6 +2113,13 @@ def compare_github(record: Mapped, fetch: Fetch = gh_fetch) -> list[str]:
     creation time, so an edit to a comment it covers is content the record has not read.
     Hosono's #485 review linked a new verifier mode that way on 12 October, nine hours
     after posting and after the record had read the comment.
+
+    A recorded reply's text must name every id and bead the record says it stated
+    (`unstated`, #541), but for a report entry a draft states in its register entry's
+    words, which `register` decides and without it is held too (`worded`); an open
+    issue's live `blocked:` labels must be the one its
+    `blocked` names (`block_labels`); and an ask that cites a comment must cite one its
+    author wrote (`_ask_sources`).
     """
     repository, owner = str(record["repository"]), str(record["owner"])
     differences: list[str] = []
@@ -1717,8 +2146,11 @@ def compare_github(record: Mapped, fetch: Fetch = gh_fetch) -> list[str]:
             differences.append(
                 f"#{number} reports an item for intake without the `{INTAKE_LABEL}` label"
             )
+        differences.extend(block_labels(issue, item))
         comments = fetch(f"repos/{repository}/issues/{number}/comments?per_page=100")
-        urls = {str(reply["url"]) for reply in issue.get("replies", ())}
+        recorded_replies = {str(reply["url"]): reply for reply in issue.get("replies", ())}
+        in_words = worded(issue, register) if register is not None else frozenset()
+        urls = set(recorded_replies)
         author = str(issue["author"])
         live_replies = set()
         read_through = str(issue["read_through"])
@@ -1733,6 +2165,14 @@ def compare_github(record: Mapped, fetch: Fetch = gh_fetch) -> list[str]:
                         f"#{number}: reply missing from the record: {url} "
                         f"({comment['user']['login']}, {created[:10]})"
                     )
+                    continue
+                body = str(comment.get("body") or "")
+                missing = unstated(recorded_replies[url], body, in_words)
+                if missing:
+                    differences.append(
+                        f"#{number}: reply {url} is recorded as stating {', '.join(missing)}, "
+                        "which its text does not name"
+                    )
             elif created > read_through:
                 differences.append(
                     f"#{number}: unread comment {url} ({comment['user']['login']}, {created})"
@@ -1746,6 +2186,7 @@ def compare_github(record: Mapped, fetch: Fetch = gh_fetch) -> list[str]:
             f"#{number}: recorded reply not on the issue: {url}"
             for url in sorted(urls - live_replies)
         )
+        differences.extend(_ask_sources(issue, comments))
     return differences
 
 
@@ -1758,7 +2199,7 @@ def _draft_mode(record: Mapped, register: Register, number: int) -> int:
     if hold is not None:
         print(
             f"refusing to draft: #{number} is {hold_text(hold)}, so no pass posts on it "
-            "or closes it (campaign/result-import.md, Close a Settled Issue). "
+            "or closes it (campaign/result-import.md, Close an Answered Issue). "
             f"{hold['note']}",
             file=sys.stderr,
         )
@@ -1775,8 +2216,8 @@ def _draft_mode(record: Mapped, register: Register, number: int) -> int:
     return 0
 
 
-def _github_mode(record: Mapped) -> int:
-    differences = compare_github(record)
+def _github_mode(record: Mapped, register: Register) -> int:
+    differences = compare_github(record, register=register)
     for difference in differences:
         print(difference)
     print(f"{len(differences)} difference(s) between the record and {record['repository']}")
@@ -1806,7 +2247,10 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--record", type=Path, default=RECORD, help=argparse.SUPPRESS)
     options = parser.parse_args(argv)
     record = load_record(options.record)
-    register = load_register()
+    # The modes that judge or draft replies in full compare positions, which read the
+    # case records; the gate, the backlog and --github need none.
+    full = options.report or options.pending or options.draft is not None
+    register = load_register(positions=full)
     found = comment_cut_scalars(options.record.read_text(encoding="utf-8")) or problems(
         record, register
     )
@@ -1833,7 +2277,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     elif options.draft is not None:
         return _draft_mode(record, register, options.draft)
     elif options.github:
-        return _github_mode(record)
+        return _github_mode(record, register)
     else:
         return _gate_mode(record, register)
     return 0
