@@ -35124,7 +35124,7 @@ results:
           KKT closure of the packing's active contacts, solved at 1,500 and 3,000 digits, with
           an LLL relation for the side's polynomial and an exact configuration in its field
         side: solved
-        credit: Kim after Couzo, Daniel, PingYou Ltd
+        credit: Kim after Couzo, Daniel, PingYou Ltd, Levy
         identity:
           basis: source-claim
 

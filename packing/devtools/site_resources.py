@@ -444,6 +444,15 @@ OTHER_SITES: tuple[tuple[str, str, str, str], ...] = (
         ),
     ),
     (
+        "https://github.com/jlevy/squares/issues/804#issuecomment-6397593690",
+        "Exact Side of the Record Packing at 297",
+        "Hyukdong Kim",
+        (
+            "The degree-21 minimal polynomial of the record side at n = 297, with an exact"
+            " configuration in an archive attached to the comment."
+        ),
+    ),
+    (
         "https://sam-burns.com/posts/proposing-better-lower-bound-for-n17-square-packing/",
         "Proposing a Better Lower Bound for n = 17 Square Packing",
         "Sam Burns",
