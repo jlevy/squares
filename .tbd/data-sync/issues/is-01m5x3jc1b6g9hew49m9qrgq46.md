@@ -5,11 +5,11 @@ title: Twelve site browser contracts run only after merge, so a site change can 
 kind: bug
 status: open
 priority: 1
-version: 1
+version: 2
 labels: []
 dependencies: []
 created_at: 2026-10-26T21:58:50.667Z
-updated_at: 2026-10-26T21:58:50.667Z
+updated_at: 2026-10-26T22:06:36.462Z
 ---
 Twelve site browser contracts never run on a pull request, so a site change can go green
 on its PR and red on main. That happened twice on 26 October 2026: #837 merged green and
@@ -62,3 +62,46 @@ rather than their sum. Either way the decision is a measurement, per `OR-14`.
 
 Worth checking while here: whether any file *in* `SITE_LAYOUT_TESTS` is slow enough that
 the list is already at its ceiling, since that changes which of the two options is open.
+
+## Notes
+
+## Priced from run 40407444945, pull request #839, 26 October 2026
+
+The two options in the description can now be compared, so this is a decision rather
+than a question. Job walls from that run:
+
+| Job | Wall | Of which setup | Of which tests |
+| --- | --- | --- | --- |
+| `frontend` | 873 s | 76 s | 795 s |
+| `suite-b` | 625 s | — | — |
+| `suite-a` | 552 s | — | — |
+| `suite-c` | 550 s | — | — |
+| `suite-d` | 350 s | — | — |
+| `validate` | 308 s | — | — |
+
+`frontend` is the pull request's critical path at 873 s, and `suite-b` behind it leaves
+a 248 s margin.
+
+**Option A, add the twelve to `SITE_LAYOUT_TESTS`.** The twelve measure 270 s at
+`-n 4 --dist=loadfile`, so `frontend` becomes about 1065 s of tests on the same 76 s of
+setup, a 1141 s job. The pull request's wall rises 873 s to about 1141 s, up 31 %. That
+is the `OR-17` ceiling question the description anticipated, and the answer is that it
+costs real cycle time.
+
+**Option B, a second concurrent browser job.** The same Chromium setup is 76 s, so a job
+running only the twelve is about 346 s. That is 527 s *below* `frontend`, so the pull
+request's wall does not move at all — the surface still waits on `frontend`. The cost is
+one additional runner for about six minutes, which `OR-13` is explicit about preferring:
+the check is fast, so it belongs on the surface, and `OR-14` says the cycle is not made
+artificially slow to put it there.
+
+**Recommendation: Option B.** It is the only one of the two that adds the coverage
+without charging the cycle for it, and its 527 s of headroom means the twelve can grow a
+long way before the job becomes the critical path. The mechanics are small: a job shaped
+like `frontend`'s first nine steps, then the twelve paths; the shard jobs keep ignoring
+them only if the paths are also added to `SITE_LAYOUT_TESTS`, so either the new job reads
+a second list or the `--ignore` set and the `frontend` list are separated.
+
+One thing to confirm when implementing: `frontend`'s 795 s is a single step, so whether
+`SITE_LAYOUT_TESTS` is itself near a declared ceiling is worth reading off
+`gate_budgets` rather than inferred from this run.
