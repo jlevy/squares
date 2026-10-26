@@ -2647,8 +2647,11 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "with main's results.yaml, result-requests.yaml and source-coverage.yaml "
             "swapped in, 51 files each, by render_n11_optimality_review, "
             "render_n11_threshold_bound_review and render_packing_methods: every file is "
-            "byte-identical across the two renders. The explainer counts the register's "
-            "results and takes v0.4.31. No PDF was printed; each prints from that HTML. "
+            "byte-identical across the two renders. Measured again after merging main "
+            "980440c99 (#821), at link revision 19a04dd7 with that main's three inputs "
+            "swapped in: the same 51 files, byte-identical. The explainer counts the "
+            "register's results and takes v0.4.31. No PDF was printed; each prints from "
+            "that HTML. "
             "Retain v0.1.11, v0.1.4 and v0.2.7."
         ),
     ),
