@@ -688,6 +688,11 @@ evidence:
       payloads were subsequently acquired and independently checked; the completed
       exact execution ensemble is E-n011-global-optimality-independent below.
       These reproducibility defects do not refute the geometric theorem.
+      The source's commits of 8 October 2026 through 4262f07 (packet
+      n11-optimality-paper-2026-10-09) add a revised geometric manuscript and a
+      verification supplement whose portable full replay the author reports not yet
+      run; they change none of the payloads this entry and its independent ensemble
+      cite, and nothing here ran them.
     blocker:
       kind: checker
       detail: The publisher's B4-B7 audit bindings need correction before its advertised fresh replay can pass unchanged.
@@ -42998,6 +43003,10 @@ evidence:
       equal to the source's records, with two mutations refused (packet receipts/); that
       reproduction with the producer's code is E-bengreff-594-cover-replay. The Lean wrapper
       is unbuilt and takes the covering statement as a hypothesis.
+      The author's second route at 06993982 (14 October 2026; packet
+      bengreff-s76-second-route-2026-10-14), zm_mixed.py alone over all 129,600 root
+      cells at depth 24 and the one root it leaves at depth 34, with per-root records and
+      their checker, is reported; nothing here ran it or audited its records.
     external_review:
       state: informally-verified
       date: '2026-10-16'
@@ -44711,6 +44720,11 @@ evidence:
       The review of 16 October (external_review) read the proof without a build; it makes
       the entry reviewed, which is C1, and nothing in it replaces the build that V3 and C3
       need.
+      The author's clean rebuild of v1.0.0 on 16 October 2026, committed at c86a991 (packet
+      fitzharding-n19-clean-build-2026-10-16), reports that rebuild from source:
+      VERIFIED, the same statement and axioms, a kernel replay of 13,143 modules with 0
+      failures. It is the author's receipt, not yet admitted as a source build, and
+      nothing here repeated it.
     source_reviewed: '2026-10-16'
 
   - id: E-n019-fitzharding-endpoint-review

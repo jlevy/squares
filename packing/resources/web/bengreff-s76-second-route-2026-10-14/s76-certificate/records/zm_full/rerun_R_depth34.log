@@ -1,0 +1,16 @@
+zeromargin.py sha256 640fe453c1a32f4aa580ca2b1261c6406923a4d7c131f65604a432c7fc2086ab (= pinned)
+sha256 ee3e2915349b8795128417bca6414b205d526db9f01f88cd4cd32c32e8d760ac  zm_mixed.py
+sha256 bb89de15ecf5821dd7e1a36ebab8a50d792a406b7fb0f5cb38059f99ef74aae5  mixed_cover.py
+sha256 640fe453c1a32f4aa580ca2b1261c6406923a4d7c131f65604a432c7fc2086ab  zeromargin.py
+sha256 b6a1214b99f00e5dd136d74c8d87bccd178df38a1063b2c7be90517eb2b862b2  input (/home/greff/s76/s76_cover_v5.txt)
+argv: zm_mixed.py cert /home/greff/s76/s76_cover_v5.txt --d4 --cert-mode --disj --chain-from 0 --pitch 1/20 --ubins 16 --depth 34 --nproc 1 --cx-lo 27/20 --cx-hi 7/5 --cy-lo 13/10 --cy-hi 27/20 --u-lo 1/4 --u-hi 9/32 --resume /home/greff/s76/zmm_R34.jsonl
+settings: {"cert_mode": true, "chain": true, "chain_from": 0, "clip": true, "depth": 34, "lemma_L": true, "lemma_T": true, "mode": "D4", "pitch": "1/20", "reach": "442/625", "region": {"cx_hi": "7/5", "cx_lo": "27/20", "cy_hi": "27/20", "cy_lo": "13/10", "u_hi": "9/32", "u_lo": "1/4"}, "split": true, "split_maxchain": 400, "theta_bias": 4, "tprime": false, "ubins": 16}
+CERT MODE: Corollary T' and polygon code disabled (0 points on segment lines are treated as ordinary points)
+container [0,9]^2, 41633 points, 9744 segments on 20 lines, 0 polygons; total 3788361049/50000000 = 75.767220980
+D4: measure invariant under x -> m-x and x <-> y; roots [0,m/2]^2 x u in [0,1/2]
+PARTIAL SWEEP: cx [27/20, 7/5], cy [13/10, 27/20], u [1/4, 9/32] -- not a verification of the whole container
+1 root boxes x 1 cover(s), depth limit 34, pitch 1/20, u-bins 16, CHAIN on, Lemma T on, Lemma L on
+done in 2733s: boxes 13767, max depth 26, CPU 2661 s
+  leaves: PIECE 0  ADM 4207  P1 0  MIX 0  CHAIN 426  SPLIT 2251  EMPTY 0  UNCERTIFIED 0   (leaves where Lemma T / Lemma L raised the piece bound: 2025 / 4859; closed by Lemma T with line points: 0)
+VERIFIED-D4 (PARTIAL)
+EXIT 0

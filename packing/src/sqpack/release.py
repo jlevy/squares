@@ -799,7 +799,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "ae6dd77c1558cef45d72f2cf1f8322a347803ce2"
+DATA_REVISION = "be4b6eb3cca1860c7eef3945482456dde64474cf"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -10103,6 +10103,28 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "files byte-identical across the three. First measured the same way against "
             "main 37ede3936 (#848), before and after review A1's notes on the two entries. "
             "No PDF was printed; it prints from that HTML. The survey keeps v0.2.7."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=("packing/frontier/source-coverage.yaml",),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The intake pass of 31 October 2026 (think-3guf, lane L5): three source-coverage "
+            "entries for the packets that retain the stalled watched-repository heads "
+            "bengreff/s76-certificate 0699398, ofitzharding/sq19 c86a991 and "
+            "Queuingtheorydotcom/11SquaresOptimal 4262f07. Against main 3978a7f61 (#841): "
+            "rendered at link revision c51d06d3 into empty site directories, twice from "
+            "this tree and once with main's source-coverage.yaml swapped in: "
+            "render_packing_methods writes all 43 files byte-identical across the three. "
+            "Measured again after merging main 32ef0861b (#835), at link revision bb8d5cca "
+            "with that main's source-coverage.yaml swapped in, and after merging main "
+            "37ede3936 (#848), at link revision 9520cb50, and after merging main c94df7cef "
+            "(#853), at link revision be4b6eb3: 43 files, byte-identical across the three "
+            "each time. No PDF was printed; it prints from that HTML. Retain v0.2.7."
         ),
     ),
 )
