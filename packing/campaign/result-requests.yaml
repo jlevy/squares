@@ -9054,6 +9054,31 @@ issues:
       - result: s29-minimal-polynomial
         id: E-n029-evand-minpoly-7213-report
       - result: grade-c-local-minima
+    - url: https://github.com/jlevy/squares/issues/545#issuecomment-6547240858
+      date: '2026-10-31'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: s29-minimal-polynomial
+        id: T-246
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: grade-c-local-minima
+        id: T-261
+        verification: V3
+        confirmation: C1
+        status: incomplete
+      - result: grade-c-local-minima
+        id: E-evand-gradec-local-minima-233-report
+        status: incomplete
+      - result: grade-c-local-minima
+        id: E-evand-gradec-local-minima-233-review-check
+        status: confirmed
+      - result: grade-c-local-minima
+        id: E-evand-gradec-n10-recompute
+        status: confirmed
+      beads: [think-mtah, think-xyek, think-10m1]
     close_when: Both reports are recorded on main, and the replay and review are either run or
       priced with an owner decision.
   - number: 550
@@ -25840,6 +25865,36 @@ issues:
       corrects:
       - https://github.com/jlevy/squares/issues/804#issuecomment-6413810519
       beads: [think-4rzl, think-ozx8, think-vv1q]
+    - url: https://github.com/jlevy/squares/issues/804#issuecomment-6547236771
+      date: '2026-10-31'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: exact-sides-new
+        id: T-244
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: pending adoption
+      - result: configurations-172-263
+        id: T-244
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: pending adoption
+      - result: configurations-172-263
+        id: E-hyukdongkim-804-configurations-exact-feasibility
+        status: confirmed
+      - result: configurations-172-263
+        id: E-hyukdongkim-804-configurations-verify-exact
+        status: confirmed
+      - result: side-297
+        id: T-247
+        verification: V0
+        confirmation: C0
+        status: recorded
+        position: pending adoption
+      beads: [think-4rzl, think-3trq, think-ot5c, think-ikku, think-9vai, think-ozx8, think-vv1q]
     close_when: >-
       The 88, 126 and 199 sides have been answered as values T-193 holds. The author's
       configurations at 172 and 263 are decided exactly (think-4rzl), and T-244 is validated, or
