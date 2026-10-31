@@ -2759,6 +2759,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         ),
         paths=(
             "packing/campaign/result-requests.yaml",
+            "packing/devtools/site_urls.py",
             "packing/frontier/n-130.md",
             "packing/frontier/results.yaml",
             "packing/pyproject.toml",
@@ -2774,10 +2775,11 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         reason=(
             "Lane L8 of the intake pass of 31 October (think-3guf, #861): T-261 to T-264, "
             "T-244's decided configurations, #545's and #804's requests entries, the 130 "
-            "case record's generated regularization sentence and a lint exclusion. Rendered "
-            "at one link revision into empty site directories from this tree and with "
-            "main d7a815e86's versions of the four paths swapped in, the three papers "
-            "write their 51 files byte-identical across the two."
+            "case record's generated regularization sentence, a lint exclusion and two "
+            "result pages' measured byte budgets. Rendered at one link revision into empty "
+            "site directories from this tree and with main 94e36b675's versions of the five "
+            "paths swapped in, the three papers write their 51 files byte-identical across "
+            "the two."
         ),
     ),
     ReleaseNoPublicChange(
