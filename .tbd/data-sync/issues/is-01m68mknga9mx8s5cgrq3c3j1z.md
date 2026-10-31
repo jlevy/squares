@@ -5,12 +5,12 @@ title: "CI: main's slow lane killed at its 1800 s budget (schedule run 411842904
 kind: bug
 status: open
 priority: 2
-version: 1
+version: 2
 labels: []
 dependencies: []
 parent_id: is-01m684vnbc5mmkjn950c3edw3w
 created_at: 2026-10-31T09:28:17.673Z
-updated_at: 2026-10-31T09:28:17.673Z
+updated_at: 2026-10-31T09:38:17.952Z
 ---
 The scheduled Packing validation run 41184290497 (main at c94df7cef, 31 October 2026) failed only in `slow-lane` (job 124487895179) and in `post-merge-required`, which depends on it. No test failed. 297 tests had passed when `packing-validate` killed the step at its 1800 s hard budget: `FAST_SUITE_BUDGET_SECONDS`, the `budget_seconds` of the "slow behavioral tests" Step in `packing/src/sqpack/cli/validate.py`. The step printed "command timed out after 1800 seconds", and the 298th test was still running. Twenty minutes later the push run of the same tree (41184251410, job 124492073199) reported 298 passed in 1696.48 s.
 
@@ -25,3 +25,7 @@ The scheduled Packing validation run 41184290497 (main at c94df7cef, 31 October 
 1. Split the slow lane across two runners, as `exhaustive-1` to `exhaustive-3` are split. This changes scheduling, not coverage, and `test_the_post_merge_jobs_partition_the_gate` still has to hold.
 2. Re-argue the budget from these 54 readings. The Step's own comment says a suite that reaches its ceiling should be re-argued rather than re-padded.
 3. Order xdist so that the 200 s and longer census cases start first.
+
+## Notes
+
+Draft PR #855 (https://github.com/jlevy/squares/pull/855, branch claude/bold-ritchie-xo28us-cifix at c00186711) deletes the floor-failing marker and its registry entry. The 1800 s kill itself is open for the owner's choice among the three options above.
